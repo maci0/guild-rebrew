@@ -1,3 +1,13 @@
+// GLOBAL: GOLDTL 0x7f4caa
+extern char g_7f4caa[];
+// GLOBAL: GOLD 0x770b8a
+extern char g_7f4caa[];
+// GLOBAL: GOLDTL 0x7f4cc0
+extern char g_7f4cc0[];
+// GLOBAL: GOLD 0x770ba0
+extern char g_7f4cc0[];
+// FUNCTION: GOLD 0x004fd7e0
+// SIZE: 64
 // FUNCTION: GOLDTL 0x4fffb0
 // SIZE: 60
 
@@ -8,7 +18,7 @@ int __cdecl fcn_004fffb0(int a1)
 	int v;
 
 	i = (unsigned int) a1 & 0xffff;
-	w = *(unsigned short*) (0x7f4caa + i * 540);
+	w = *(unsigned short*) (g_7f4caa + i * 540);
 	v = w;
-	return v < *(float*) (0x7f4cc0 + i * 540);
+	return v < *(float*) (g_7f4cc0 + i * 540);
 }

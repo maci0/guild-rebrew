@@ -1,6 +1,8 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+// FUNCTION: GOLD 0x004eff50
+// SIZE: 560
 // FUNCTION: GOLDTL 0x4f2060
 // SIZE: 560
 

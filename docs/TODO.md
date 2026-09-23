@@ -36920,3 +36920,41 @@ GOLD **247 → 265** byte-matched (96 EXACT, 169 RELOC); GOLDTL unchanged at 671
 (4 more rows EXACT → RELOC — the literals becoming relocatable references —
 byte-matched unchanged); server unchanged at 264.  Lint 1141 files / 0
 warnings.  ~70 candidates left in `.scratch/ci_gold.json`.
+
+### Round 1415 — twin harvest, third pass: GOLD +16 byte-matched (281)
+
+`scripts/twin_marker.py 20` then the shape-B pass:
+
+| shape | count | VAs |
+|-------|-------|-----|
+| A — marker missing | 7 | 0x4c5410 0x4c4b70 0x4d6f60 0x4eff50 0x500140 0x5ba800 0x401040 |
+| B — hardcoded GOLDTL address | 9 | 0x4ffc40 0x4fd7e0 0x50d460 0x53d860 0x580d10 0x4c3f90 0x52f370 0x40cba0 0x420780 |
+
+The marker block has to go **above** any inline `// CFLAGS:` line, not between it
+and the `// FUNCTION:` it belongs to — inserting it in between makes lint W019
+fire on the deprecated inline CFLAGS.  `GOLDTL.spiel2.c` carried such a line;
+the fix was to delete it (the value was the target default) rather than reshuffle.
+
+**Reverted, not shipped:**
+
+* `fcn_00413160` (GOLD 0x411bb0) — GOLD's loop runs `0xfd7f75…
+  0xfe7775` (delta `0xf800`) with stride `0x3e0`, the source says
+  `0x1043695…0x1052d95` (delta `0xf700`) with `0x3dc`: a real divergence.
+* `fcn_004e8af0` (GOLD 0x4e6f30) — **open tooling question.**  The GOLD
+  addresses are known (base `0x925120`, bound `0x925510`, both confirmed from
+  the target's `mov eax, imm32` / `cmp eax, imm32`), and both
+  `// GLOBAL: GOLD` markers were added with the right sections.  The compile
+  still emits `mov eax, 0` and a restructured loop, i.e. the *address-of* form
+  `a = g_9a9220;` is not resolving for the destination target, while every
+  memory-operand use of a paired global does.  Before the substitution the same
+  file scored NEAR_MATCHING 62/68 with **only** the six address bytes differing.
+  A later round should reproduce this in a two-line probe and fix it upstream
+  (or spell the base as a parenthesised array so the compiler keeps it an
+  operand).
+
+`twin_marker.py` now carries a `SKIP` set of the four proven-unshippable VAs so
+later runs walk forward.
+
+GOLD **265 → 281** byte-matched (96 EXACT, 185 RELOC); GOLDTL unchanged at 671
+(6 more rows EXACT → RELOC — literals becoming relocatable references);
+server unchanged at 264.  Lint 1140 files / 0 warnings.

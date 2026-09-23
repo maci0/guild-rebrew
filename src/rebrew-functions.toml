@@ -2340,9 +2340,9 @@ updated_at = "2026-09-21T04:25:44+00:00"
 
 ["GOLDTL.0x005027d0"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-20T16:09:16+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:36:20+00:00"
 size = 80
 
 ["GOLDTL.0x00503e80"]
@@ -3990,6 +3990,9 @@ updated_at = "2026-09-21T06:23:20+00:00"
 
 ["GOLD.0x0050d460"]
 size = 37
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:24+00:00"
 
 ["GOLD.0x00511840"]
 size = 37
@@ -5946,9 +5949,9 @@ updated_at = "2026-09-22T19:53:57+00:00"
 
 ["GOLDTL.0x00510900"]
 size = 37
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T19:53:59+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:36:20+00:00"
 
 ["GOLDTL.0x00476c70"]
 size = 36
@@ -7296,9 +7299,9 @@ updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x00545580"]
 size = 48
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T21:24:15+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:36:20+00:00"
 
 ["GOLDTL.0x004c4dc0"]
 size = 37
@@ -7451,9 +7454,9 @@ updated_at = "2026-09-22T21:35:49+00:00"
 
 ["GOLDTL.0x0041bd80"]
 size = 64
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T21:35:50+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:36:20+00:00"
 
 ["GOLDTL.0x00438a80"]
 size = 52
@@ -7583,9 +7586,9 @@ updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x004fffb0"]
 size = 60
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T21:56:57+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:36:20+00:00"
 
 ["GOLDTL.0x00507ed0"]
 size = 57
@@ -7667,9 +7670,9 @@ updated_at = "2026-09-22T22:07:04+00:00"
 
 ["GOLDTL.0x00589390"]
 size = 57
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T22:07:05+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:36:20+00:00"
 
 ["GOLDTL.0x005c61e0"]
 size = 58
@@ -8217,6 +8220,10 @@ updated_by = "verify"
 updated_at = "2026-09-23T09:12:19+00:00"
 
 ["GOLD.0x004c3f90"]
+size = 50
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:28+00:00"
 
 ["GOLD.0x004c6a20"]
 status = "EXACT"
@@ -8262,8 +8269,16 @@ updated_by = "verify"
 updated_at = "2026-09-23T09:14:16+00:00"
 
 ["GOLD.0x004ffc40"]
+size = 80
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:23+00:00"
 
 ["GOLD.0x00500140"]
+size = 80
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:17+00:00"
 
 ["GOLD.0x005012b0"]
 size = 48
@@ -8408,3 +8423,75 @@ updated_at = "2026-09-23T09:30:20+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-23T09:30:20+00:00"
+
+["GOLD.0x004c5410"]
+size = 70
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:09+00:00"
+
+["GOLD.0x004c4b70"]
+size = 74
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:11+00:00"
+
+["GOLD.0x004d6f60"]
+size = 47
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:12+00:00"
+
+["GOLD.0x004eff50"]
+size = 560
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:13+00:00"
+
+["GOLD.0x005ba800"]
+size = 80
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:18+00:00"
+
+["GOLD.0x00401040"]
+size = 67
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:19+00:00"
+
+["GOLD.0x0053d860"]
+size = 48
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:25+00:00"
+
+["GOLD.0x00580d10"]
+size = 57
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:26+00:00"
+
+["GOLD.0x004fd7e0"]
+size = 64
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:29+00:00"
+
+["GOLD.0x0052f370"]
+size = 30
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:31+00:00"
+
+["GOLD.0x0040cba0"]
+size = 64
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:32+00:00"
+
+["GOLD.0x00420780"]
+size = 64
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:35:33+00:00"

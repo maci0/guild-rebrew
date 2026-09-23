@@ -121,7 +121,12 @@ extern float g_const_neg_1_0;
  * pointer or NULL. The imported body had leaked the server VA
  * 0x1009b770 — the reference folds 0x85ab90 into the lea chain. */
 
-// CFLAGS: /O2 /Gd
+// GLOBAL: GOLDTL 0x85ab90
+extern char g_85ab90[];
+// GLOBAL: GOLD 0x7d6a70
+extern char g_85ab90[];
+// FUNCTION: GOLD 0x004ffc40
+// SIZE: 80
 // FUNCTION: GOLDTL 0x5027d0
 // SIZE: 80
 // gm_FindSlotById
@@ -132,8 +137,8 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 	int i;
 
 	for (i = 0; i < 0x55; i++) {
-		if (*(unsigned short*) (0x85ab90 + arg1 * 0x2a90 + i * 0x80) == arg2) {
-			return (char*) (0x85ab90 + arg1 * 0x2a90 + i * 0x80);
+		if (*(unsigned short*) (g_85ab90 + arg1 * 0x2a90 + i * 0x80) == arg2) {
+			return (char*) (g_85ab90 + arg1 * 0x2a90 + i * 0x80);
 		}
 	}
 	return 0;

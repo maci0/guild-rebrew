@@ -33,7 +33,15 @@ def ndiff(r):
     m = re.search(r'(\d+) byte diffs', r.get('message') or '')
     return int(m.group(1)) if m else 999
 rows.sort(key=ndiff)
-done = {'0x00401000', '0x00497620', '0x0042c1c0', '0x004284a0'}
+# VAs proven NOT to be shippable twins — divergent source or an unresolved
+# symbol — so later runs do not re-add markers that must then be reverted.
+SKIP = {
+    '0x0045d950',  # fcn_00459940: symbol form swaps two FPU instructions
+    '0x00468850',  # fcn_00465920: GOLD stride 0x2ec/count 0x2ff vs 0x2f4/0x3ff
+    '0x00411bb0',  # fcn_00413160: GOLD stride 0x3e0 and a different bound
+    '0x004e6f30',  # fcn_004e8af0: address-of global resolves to 0 for GOLD
+}
+done = {'0x00401000', '0x00497620', '0x0042c1c0', '0x004284a0', *SKIP}
 limit = int(sys.argv[1]) if len(sys.argv) > 1 else 10
 out = []
 n = 0

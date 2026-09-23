@@ -1,3 +1,9 @@
+// GLOBAL: GOLDTL 0x77dda0
+extern char g_77dda0[];
+// GLOBAL: GOLD 0x6f9f60
+extern char g_77dda0[];
+// FUNCTION: GOLD 0x00580d10
+// SIZE: 57
 // FUNCTION: GOLDTL 0x589390
 // SIZE: 57
 
@@ -22,7 +28,7 @@ void __cdecl fcn_00589390(void)
 	int i;
 	int j;
 
-	base = (fcn_00589390_rec*) 0x77dda0;
+	base = (fcn_00589390_rec*) g_77dda0;
 	for (i = 0; i < 3; i++) {
 		base[i].head0 = -1;
 		for (j = 0; j < 3; j++) {
