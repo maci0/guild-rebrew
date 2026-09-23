@@ -38352,3 +38352,11 @@ immediate.  Same wall as `cm_ChkCutsceneReady`.  Reverted.
 So the NEAR_MATCHING twin band is fixable only when the differing address sits in a
 *memory operand* (`[g]`, `mov eax, [g]`) — an immediate/bound literal cannot be made
 target-dependent without changing the encoding.
+
+Round 166: the next NEAR candidate, GOLD 0x4242c0 (GOLDTL `fcn_00420650`, 49B),
+differs in three absolute addresses, two of them plain immediates:
+`a = 0x6b72b4` (→ GOLD `0x6326d4`, read off `mov eax,0x6326d4`), the loop bound
+`0x6b7e44` (differs only in its low byte, GOLD `0x6b7e64`) and the return
+`0x6b71b0 + i * 296`.  The init is a `mov eax, imm32`, so the symbol form encodes
+identically and should fix bytes 3-5; the bound/return need their GOLD values read
+from the target's `cmp`/`lea` operands.  Not attempted — context budget.
