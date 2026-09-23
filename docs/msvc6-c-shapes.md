@@ -7854,3 +7854,41 @@ the file then promotes from SIZE_MISMATCH to RELOC with no code change.
 0x4ce210 have the right instructions and the right operands but the reference
 hoists the call's `push` later than msvc6 does for any statement order tried
 (struct param, `#pragma pack(1)` param, field-wise stores, named value local).
+
+## 175. `fld dword ptr [g]` + `call <helper>` with no stack store is a float→int cast
+
+Measured on GOLDTL `fcn_004c54c0` (0x4c54c0, 97B), which fills a message and
+then stores two globals:
+
+```asm
+mov   ecx, dword ptr [0x67db54]
+...
+fld   dword ptr [0x67db50]      ; NO fstp, NO push
+call  0x64d228                  ; returns the int in eax
+mov   dword ptr [esp + 0x24], eax
+```
+
+A bare `fld` before a `call`, with no stack argument and no `add esp` after,
+means the callee takes its argument in `st(0)` and returns in `eax` — the
+`__ftol` convention (see the `__ftol` entry above).  The C is therefore
+
+```c
+*(int*) (buf + 0x24) = (int) g_67db50;   /* float global -> int */
+```
+
+Spelling it as a call to the helper (`fcn_0064d228(g_67db50)`) does **not**
+reproduce it: msvc6 pushes the float as a dword and adds 4 to `esp` afterwards
+(`mov eax,[g] / push eax / call / add esp,4`).  The cast is the source.
+
+## 176. `push imm32` of a data address is `push offset g`, not `push [g]`
+
+GOLDTL `fcn_004c5700` (0x4c5700, 98B) opens with `push 0x7f4c00` — the
+*address* of a data object, as an immediate.  Declaring the global as a scalar
+and pushing it (`fcn(a1, g_7f4c00)`) makes msvc6 hoist `mov eax,[0x7f4c00]` to
+the top of the function and `push eax` later: same object size, 29 structural
+differences, every instruction shifted by one.  Declare it as an array
+(`extern char g_7f4c00[];`) and pass the name — the compiler then emits
+`push offset g_7f4c00`, which matches.
+
+The same function is another inventory-padding case: the entry says 112 bytes,
+the body is 98.

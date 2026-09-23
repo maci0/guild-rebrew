@@ -36742,3 +36742,35 @@ can be retried with a flag sweep.
 
 GOLDTL 658 byte-matched (251 EXACT, 407 RELOC), 52 failed, lint 1139 files /
 0 warnings, no demotions.
+
+### Round 1410 — the message-builder vein: +9 byte-matched (667)
+
+Continued the round-1409 shape (`sub esp,0x9c` + tag byte + `call fcn_004c4330`)
+and closed nine more, all RELOC:
+
+| VA | shape |
+|----|-------|
+| 0x4ce380 | `memset` + `memcpy` 0x57 (twin of 0x4ce320, field = 4) |
+| 0x4c5ba0 | 3 ints + `strcpy(buf+0x1c, a4)` (inlined copy loop) |
+| 0x4c67c0 | `*(int*)(buf+0x40) = g_772f40 ? *g_772f40 : -1` + `memcpy` 0x2c |
+| 0x4c6820 | twin of 0x4c67c0, tag 0x51 |
+| 0x4c5aa0 | six scalar params into a packed layout at `buf+0x14` |
+| 0x4c54c0 | 4 ints + `g_67db54` + `(int) g_67db50` |
+| 0x4c51f0 | six scalar params, packed layout at `buf+0x10` |
+| 0x4c5cb0 | two optional 3-dword structs at `buf+0x14` / `buf+0x24` |
+| 0x4c5700 | `push offset` data address, then 3 ints + short |
+
+Two new codegen rules recorded in `docs/msvc6-c-shapes.md`:
+
+* **§175** — `fld dword ptr [g]` + `call` with no stack store is a float→int
+  cast `(int) g` (the `__ftol` convention), not a helper call with a float arg.
+* **§176** — a `push imm32` of a data address needs the global declared as an
+  array so the compiler emits `push offset g`; a scalar global gets its load
+  hoisted to the top of the function and shifts every instruction.
+
+Inventory padding again on 0x4c5700 (entry 112, body 98).  New globals:
+`GOLDTL 0x67db50` (float, .data), `0x67db54` (int, .data), `0x772f40`
+(int*, .data), `0x7f4c00` (.rdata).
+
+GOLDTL 667 byte-matched (251 EXACT, 416 RELOC), 52 failed, lint 1148 files /
+0 warnings, no demotions.
