@@ -38341,3 +38341,14 @@ The *useful* rows are the NEAR_MATCHING ones with 3-byte runs (`[58] e0/20`,
 `[59] 96/0c`, `[60] 46/4d`), i.e. one absolute address off, which is what
 `scripts/twin_fix.py` automates; this run reported `promoted 0, failed 0`, so its
 own candidate filter needs checking against the restored `ci_gold.json` shape.
+
+Round 165: took the smallest NEAR candidate from the restored list, GOLD 0x4027b0
+(GOLDTL `fcn_00402ff0`, 66B, loop bound `0x14d0c20` → GOLD `0x14696e0`).  The paired
+`// GLOBAL:` + `(int) g_14d0c20` rewrite **did** clear the three-byte address run,
+but the object grew to 69 bytes with mismatches from offset 53: the symbol-offset
+form of `cmp esi, <bound>` compiles to a different sequence than the literal
+immediate.  Same wall as `cm_ChkCutsceneReady`.  Reverted.
+
+So the NEAR_MATCHING twin band is fixable only when the differing address sits in a
+*memory operand* (`[g]`, `mov eax, [g]`) — an immediate/bound literal cannot be made
+target-dependent without changing the encoding.
