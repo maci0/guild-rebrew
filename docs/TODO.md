@@ -38793,3 +38793,13 @@ relocation slots (masked by RELOC), while these bodies carry absolute addresses
 that are compared verbatim.  A useful next filter is *byte* comparison with the
 `e8`/`e9` displacement fields masked: only pairs whose differences all fall in
 4-byte call/push-immediate fields can be shared by adding a marker.
+
+Round 189: `fcn_004b6bf0` (0x4b6bf0, 238B), RELOC 238/238 first test — the last
+easy member of the 0x4b6xxx family.  Same body as `fcn_004b6fe0` except the first
+random argument is `4` (not 3) and the 4-argument log call gained a fourth
+value: `fcn_0051af00(buf, *(u16*)((char*)a1+4) + 0x12e7,
+(fcn_0042e410(6) & 0xffff) + 3, r)` — i.e. the extra `push esi` before `push 6`
+is the *pending* `r` argument for the same call, which is what made the
+normalised diff look like a separate call arm.
+
+GOLDTL 806 → 807, GOLD unchanged at 329; server unchanged at 264.
