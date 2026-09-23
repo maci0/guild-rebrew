@@ -87,6 +87,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew lib-match --stock-lib LIBCMT.LIB` | Byte-level check that no reversed function duplicates a linked library |
 | `rebrew extract list --json` | Extract and disassemble functions (list/show/batch) |
 | `rebrew asm 0x<VA> --size 128 --json` | Quick offline disassembly |
+| `rebrew cross-import --from <src> --target <dst> --dry-run --candidates-only --json` | Is this function already reversed in another target? Reports dst/src VA, score, `src_file`/`src_status` (see `docs/general-knowledge.md`) |
 | `rebrew sync --push` | Push annotations to Ghidra |
 | `rebrew sync --summary --json` | Preview what would be synced |
 
