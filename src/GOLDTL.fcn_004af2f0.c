@@ -13,14 +13,14 @@ int __cdecl fcn_0064eeec(char*);
 int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl fcn_0051af00(void*, int, ...);
 
-/* Reproduction of the module's fcn_004ae130 (GOLDTL 0x4ae130), which the
- * original translation unit held in the same file as this function.  msvc6's
- * same-TU callee analysis is what keeps `w` in edx across the call site below;
- * without the body in view the allocator spills `w` to a callee-saved register
- * (object 267 bytes instead of 264).  The body is byte-identical to the real
- * function; only its name differs, so this file defines no duplicate symbol
- * (src/GOLDTL.fcn_004ae130.c owns the 0x4ae130 annotation). */
-int __cdecl fcn_004ae130_tu(unsigned short a1)
+// FUNCTION: GOLDTL 0x4ae130
+// SIZE: 60
+
+/* The original translation unit held this callee in the same file as
+ * fcn_004af2f0, and msvc6's same-TU callee analysis is what keeps `w` in edx
+ * across the call site below; without the body in view the allocator spills
+ * `w` to a callee-saved register (object 267 bytes instead of 264). */
+int __cdecl fcn_004ae130(unsigned short a1)
 {
 	int o;
 
@@ -59,7 +59,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 		return 0;
 	}
 	w = *(unsigned short*) e;
-	if (fcn_004ae130_tu(w) == 0) {
+	if (fcn_004ae130(w) == 0) {
 		return 0;
 	}
 	r = fcn_0050dac0(w);
