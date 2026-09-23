@@ -38693,3 +38693,23 @@ already-mapped `g_773d75` (0x773d75/0x6f1bc5).  **GOLDTL 0x4b6f00 and GOLD
 
 GOLDTL 803 → 804, GOLD 325 → 326; server unchanged at 264.  Lint 1274 files /
 0 warnings.
+
+Round 184: the 0x4b6xxx family continues to pay.  `fcn_004b6fe0` (0x4b6fe0, 216B)
+is byte-identical to round 183's `fcn_004b6f00` except for the first FP constant
+(`fadd qword [0x6629c8]` → `[0x662a48]`), so it was written from the same body and
+is **RELOC 216/216** — GOLDTL only.
+
+Its positional GOLD twin 0x4b6e10 (the −0x1d0 family delta) is **not** the same
+function: the GOLD build passes `2` to the random helper (`push 2` vs `push 3`)
+and calls a different conversion helper (0x50a640 vs 0x50dac0), and its second
+constant is 0x5edbb8 where the shared `g_6640e8` maps to 0x5ece60.  So the GOLD
+build's copy of this call site genuinely differs; the file stays GOLDTL-only.
+Useful check for this family: compare the *arguments* to the random/convert
+helpers before assuming a positional twin.
+
+Also note the nearby `fcn_004b6a00` (same body shape) keeps its first result in
+`esi` where the reference keeps it in `edi` — the register-colouring wall again,
+so it was left alone.
+
+GOLDTL 804 → 805, GOLD unchanged at 326; server unchanged at 264.  Lint 1275
+files / 0 warnings.

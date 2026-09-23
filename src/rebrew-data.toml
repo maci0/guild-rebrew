@@ -4303,3 +4303,6 @@ section = ".rdata"
 
 ["GOLD.0x005ece60"]
 section = ".text"
+
+["GOLDTL.0x00662a48"]
+section = ".rdata"
