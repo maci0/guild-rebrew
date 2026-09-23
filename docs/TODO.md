@@ -37616,3 +37616,29 @@ parameters.
 
 GOLDTL **739 → 745** byte-matched (230 EXACT, 515 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1214 files / 0 warnings.
+
+## Round 135 — GOLDTL caller family of `fcn_0051af00` (+12 byte-matched = 757)
+
+Members closed this round, all RELOC, all found by `scripts/callers.py 0x51af00`:
+
+| VA | size | shape |
+|----|------|-------|
+| 0x5b2310 | 64 | `t = a1[2]; if (t==6\|\|t==7) { log(0x20be); ui(...,0x5fb) }` |
+| 0x5b2280 | 74 | same family, tag pair |
+| 0x5b2740 | 74 | `log(0x20c6, *(u16*)a1)` + line 0x5fa |
+| 0x5b2220 | 84 | same family |
+| 0x5b32d0 | 88 | `log(0x407b, a2+0x30, a2+0x40)`, `ui9(...,*(int*)(a3+1))` |
+| 0x5b2d50 | 94 | six-argument log call; the 3rd/4th args are the same parameter, so the target pushes it twice and the ternary is built from the *reloaded* stack slot |
+| 0x525f60 | 75 | `if (a1->[0x194] < a2 && a2) { log(buf,0x74,a2); ui(buf,0); }` — 0x80 frame, both calls take the same buffer |
+| 0x5b30c0 | 83 | two word fields + `[a2+0x16c]`, tag pair 0x40af/0x40a3 |
+| 0x5b3270 | 91 | 0x5b32d0 with a fifth argument and tag 0x407a |
+| 0x5b26e0 | 95 | `if (*(u16*)a1 != *(u16*)0x774970)`, table `0x7f4ca4 + 540*idx` |
+| 0x525fb0 | 89 | `p = sub_0050dc90(a1); if (p && (p->[0x1b4] & 1)) …` |
+| 0x526010 | 91 | `if (sub_0050b7c0(a1->[0x178], a3) < a2 && a2)` |
+
+Codegen notes:
+- Inventory sizes 96 for `0x525fb0`/`0x526010` are 7 resp. 5 bytes larger than the
+  real function (0x100/0x40 frame); `rebrew test` matches at the true size, so
+  persist the object size and correct the inline `// SIZE:`.
+- W021 fires when a `// GLOBAL:` annotation is repeated in a second file: keep the
+  bare `extern` in the follower (as the earlier round's files already do).

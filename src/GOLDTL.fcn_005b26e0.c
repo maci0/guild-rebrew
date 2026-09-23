@@ -1,0 +1,16 @@
+extern char g_774a80[];
+extern char g_6b5c60[];
+// FUNCTION: GOLDTL 0x5b26e0
+// SIZE: 95
+
+void __cdecl fcn_0051af00(void*, int, int, int);
+void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+
+void __cdecl fcn_005b26e0(void* a1, int a2)
+{
+	if (*(unsigned short*) a1 != *(unsigned short*) 0x774970) {
+		fcn_0051af00(g_774a80, 0x20c5, *(unsigned short*) a1, a2);
+		fcn_00545d40(*(int*) (0x7f4ca4 + 540 * *(unsigned short*) 0x774970),
+		    -1, g_774a80, 0, 0x605, g_6b5c60);
+	}
+}
