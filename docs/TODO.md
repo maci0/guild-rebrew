@@ -38474,3 +38474,28 @@ Written up as `docs/msvc6-c-shapes.md` section 184.
 
 GOLDTL 798 → 799, GOLD 321 → 322; server unchanged at 264.  Lint 1269 files /
 0 warnings.
+
+Round 177: `fcn_004f5110` (0x4f5110, 188B) + GOLD twin 0x4f2fe0, shared file, both
+RELOC 188/188.  Shape: `r = 1;` as a C89 initialised declaration at the block top,
+`if (!fcn_004f4830(a2, local)) return 0;` on a 0x24-byte struct copy, then
+`v = local[0] * 5 + 0x13fd` and a 4-way `switch (local[1])` whose cases all call
+`fcn_0051af00(a1, v + 1, v, *(int*)(local+0x18) + K)` with K = 0/0x13dd/0x13e6/
+0x13ec; `default: r = 0;` and one `return r;`.
+
+The initialised declaration is the whole trick, and it is round 173's rule again:
+with `return 1` per case the object is 184 bytes and lacks the `push esi` +
+hoisted `mov esi,1`, because the constant has no live range across the
+`fcn_004f4830` call.  `int r = 1;` at the top of a C89 declaration block puts the
+assignment before that call, forces `esi` (callee-saved, hence `push esi`), and
+makes all three epilogues read `mov eax,esi`; the `default` path then comes out as
+`xor esi,esi; mov eax,esi`, exactly as the reference.  Because case 0 is the first
+case and the switch is `break`-terminated, the compiler duplicates the epilogue
+once for case 0 and once for the merged cases 1-3.
+
+The twin differs only in addresses; a bare `// FUNCTION: GOLD 0x4f2fe0` marker was
+enough (call targets and the `jmp [ecx*4+abs]` table are relocation slots — the
+latter is masked even though it is an absolute address, unlike the `mov r,[abs]`
+case in section 183).
+
+GOLDTL 799 → 800, GOLD 322 → 323; server unchanged at 264.  Lint 1270 files /
+0 warnings.
