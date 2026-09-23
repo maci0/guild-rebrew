@@ -36774,3 +36774,28 @@ Inventory padding again on 0x4c5700 (entry 112, body 98).  New globals:
 
 GOLDTL 667 byte-matched (251 EXACT, 416 RELOC), 52 failed, lint 1148 files /
 0 warnings, no demotions.
+
+### Round 1411 — +4 byte-matched (671)
+
+Four more of the message-builder family, all RELOC:
+
+| VA | shape |
+|----|-------|
+| 0x4c5420 | five int params, contiguous at `buf+0x10`..`buf+0x20` |
+| 0x4c63a0 | packed `{int,int,int,short,char}` (15B) copied from `*a1` |
+| 0x4c64b0 | seven params into a **gapped** destination — offsets spelled out |
+| 0x4c5c00 | `strlen(a4) < 0x20` guard, `strcpy(buf+0x1c, a4)` / assert helper |
+
+Two attempts were deleted rather than parked: **0x4c4f30** (the `movzx ax,al`
+zero-extend vs `xor dx,dx / mov dl,al` register choice, plus a branch-layout
+difference; 129/133 bytes) and **0x4c6680** (both branches call the sender and
+the reference folds `add esp,4 / add esp,0x9c` into one `add esp,0xa0`;
+122/122 bytes, 9 structural diffs).  Both are written up in section 177 and in
+the round-1409/1410 notes; either is a flag-sweep candidate.
+
+New codegen rule: shapes **§177** — a struct copy whose only difference is a
+constant displacement is not a struct at all; spell the store offsets.
+New global: `GOLDTL 0x68ae64` (.data, the assert string).
+
+GOLDTL 671 byte-matched (251 EXACT, 420 RELOC), 52 failed, lint 1152 files /
+0 warnings, no demotions.

@@ -7892,3 +7892,18 @@ differences, every instruction shifted by one.  Declare it as an array
 
 The same function is another inventory-padding case: the entry says 112 bytes,
 the body is 98.
+
+## 177. A destination struct with internal gaps: spell the offsets, not the struct
+
+GOLDTL `fcn_004c64b0` (0x4c64b0, 117B) writes a 7-parameter message into
+`buf+0x14`: a byte, an int at **+3**, an int at **+7**, three bytes at +0xb,
++0xc, +0xd, then `strcpy` into +0x12.  A `#pragma pack(1)` typedef
+`{ char a; int b; int c; char d; char e; char f; char g[]; }` puts `b` at +1
+(and every later field 2 bytes early) — NEAR_MATCHING, 6 structural diffs, all
+of them displacements.
+
+The destination is not one struct: the gaps at +1..+2 and +0xe..+0x11 belong
+to something the function does not touch.  Spelling each store as
+`*(int*) (buf + 0x17) = a2;` (etc.) reproduces the reference exactly.  When a
+struct copy's *only* difference is a constant displacement, stop adjusting the
+typedef and write the offsets.
