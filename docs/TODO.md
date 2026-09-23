@@ -36481,3 +36481,29 @@ constant return, not a C shape — leave it.
 
 GOLDTL: 625 byte-matched (251 exact, 374 reloc), failed 52, lint 1107/1107 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1400 — GOLDTL 625 -> 626 (filtered-list walk)
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x503e50 | `entry = fcn_00503fe0(1,0,0x47); do { if (*(int*)(entry+0x65)==a1) return entry; entry = fcn_00503e80(); } while (entry); return 0;` | RELOC 41 |
+
+The two exits sharing the tail (`entry == 0` and `entry == a1`) come out of the
+do/while with the post-loop `return 0`; the loop's `mov esi,[esp+8]` hoist places
+the argument load after the first call, which the shape produces for free.
+
+Parked with measured reasons (all three probed twice, sizes recorded):
+
+- `0x469110` (40B): `*(int*)(0x1015ea0 + a1*0x2f4 + 0x18) = a2;` then
+  `fcn_00469090(a1);` — our object is 33 bytes, so the reference materialises the
+  record base in `esi` and computes the index with a `shl/sub/lea` chain that our
+  fold collapses; needs the operand form that keeps that chain.
+- `0x424790` (42B) / `0x424840` (39B): identical shape (guard on a1, load
+  `*(void**)(a1 + 0x104 / 0x3c)`, call `fcn_0064d530(a2, sub, a3)`, return sub or
+  0).  Best spelling (`sub = 0;` + one trailing `return sub;`) lands at 44/41 —
+  2 bytes over; `return sub` inside the inner if and nested early returns are
+  45/42 and 46/43.  The reference reuses `eax = a1` for the null-return path, so
+  it never materialises a zero; every C spelling that does costs the 2 bytes.
+
+GOLDTL: 626 byte-matched (251 exact, 375 reloc), failed 52, lint 1108/1108 zero
+warnings.  SERVER/GOLD untouched.
