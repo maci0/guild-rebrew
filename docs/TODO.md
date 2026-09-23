@@ -38020,3 +38020,20 @@ the arms the other way round; (4) the last 17 bytes stay blocked: the reference
 zero-extends the byte through `xor ecx,ecx; mov cl,[eax+0x6d]; mov eax,ecx`, ours
 peepholes it to `mov al,[eax+0x6d]` (11 bytes) — no spelling (`unsigned char b`,
 `int n`, direct) avoided the peephole.  Candidate deleted.
+
+## Round 150 — twin hunt tooling, and 0x4b8550
+
+Added `.scratch/twinhunt2.py` (gitignored scratch): it dumps the first 32 target
+bytes of every free `fcn_0051af00` caller and of every matched `GOLDTL.fcn_*` file
+within ±0x500, and reports byte-similar prologues.  Useful for spotting true twins,
+but the family prologue (`push esi; esi=[esp+0xc]; al=[esi+2]; cmp al,6/7`) makes
+most pairs false positives — the pair worth following was found by eye anyway.
+
+`fcn_004b8550` (0x4b8550, 282B) is `fcn_004b7d70` **plus** the
+`fcn_005c6270(p,0x290)` guard, with `fcn_004a55c0(p,1,&d2,0.0f,100.0f,&w1)`,
+`fcn_0042e410(8)` and `n = -(2*x + 4)`.  Reached 178/292: the remaining gaps are
+all scheduling — the reference computes `&buf` and the tag before the last argument
+(`lea ecx,[esp+0x28]` first, then `mov ax,[esi]`/`mov ax,[ebx+4]; add 0x12e7`),
+reuses `eax` for the tag where ours uses `ecx`, and emits `and eax,0xffff;
+lea eax,[eax+eax+4]; neg eax` where ours strength-reduces the negation to
+`mov ecx,-2; sub ecx,eax; add ecx,ecx`.  Candidate deleted.
