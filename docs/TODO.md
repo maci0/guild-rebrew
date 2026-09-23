@@ -36507,3 +36507,20 @@ Parked with measured reasons (all three probed twice, sizes recorded):
 
 GOLDTL: 626 byte-matched (251 exact, 375 reloc), failed 52, lint 1108/1108 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1401 — GOLDTL 626 -> 628 (query sum + first-pass tag)
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x50b810 | `total = 0; entry = fcn_00502cd0(a1,1,4,9); while (entry) { total += *(int*)(entry+0xe); entry = fcn_00502850(); } return total;` | RELOC 42 |
+| 0x57f3b0 | `if (a1 == 1) { entry = fcn_00503fe0(1,5,0xa); if (entry) fcn_00526920(entry,-1,0x6b5c60); }` | RELOC 42 |
+
+Parked: `0x4bcab0` (42B) — `value = fcn_0044c310(a1, a1); index =
+*(int*)0x7728f4; table[index] = value; index++; return table[index];`.  The
+reference stores the index back with a plain `mov [mem],ecx` (it read the index
+once into ecx) and reloads the table slot for the return; our best spelling is
+43 bytes and `(*(int*)0x7728f4)++` gives 46.  Needs the form that keeps the
+index in one register across the store and the reload.
+
+GOLDTL: 628 byte-matched (251 exact, 377 reloc), failed 52, lint 1110/1110 zero
+warnings.  SERVER/GOLD untouched.
