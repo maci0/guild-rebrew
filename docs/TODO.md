@@ -38814,5 +38814,11 @@ pushes at `[esp+0x830]`.  Then, only when `*(char*)(a1+2) == 6`:
 `fcn_004c6330(*(int*)(a1+4))`, `fcn_0051af00(buf, 0xfe8,
 *(u16*)(*(int*)a2) * 2 + 0xd71, v + 0x16b7)` and `fcn_005dbe90(buf + ?)`;
 the epilogue is `pop esi; pop ebp; mov eax,1; pop ebx; add esp,0x814; ret`.
-Missing only the 8 bytes at 0x5dd57a-0x5dd581 (`add esp,?` + `pop edi`) — dump
-those first next time.
+Tail resolved (round 193): the `call 0x5dbe90` at 0x5dd579 is followed by
+`add esp,0x18` (0x5dd57e), `pop edi`, `pop esi`, `pop ebp`, `mov eax,1`, `pop ebx`,
+`add esp,0x814`, `ret` — so the function is 177 bytes with all six argument
+pushes cleaned in one `add esp,0x18`.  Two details to nail when writing it: the
+loop reads its slots from `buf + 8 + i*4` (fcn_00508cf0 is given `buf` itself,
+`lea ecx,[esp]` = E-0x814, while the element loads use `[esp+esi*4+0x10]` with
+esp = E-0x82c), and the second arm re-reads a1 as `[esp+0x830]` and logs into
+`[esp+0x2c]` = buf+0x10, not buf.
