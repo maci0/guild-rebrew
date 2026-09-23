@@ -36524,3 +36524,27 @@ index in one register across the store and the reload.
 
 GOLDTL: 628 byte-matched (251 exact, 377 reloc), failed 52, lint 1110/1110 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1402 — GOLDTL 628 -> 630 (release pair + selected-entry drain)
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x4bfc70 | `fcn_0046b2b0(table[a1*8]); table[a1*8] = -1; table2[a1*8] = 0;` with the record base reused from `esi` | RELOC 45 |
+| 0x546ce0 | `entry = fcn_005463a0(1, 2, *a1); while (entry) { fcn_00546be0(entry); entry = fcn_005462a0(); }` | RELOC 45 |
+
+Parked:
+
+- `0x577e40` (45B): the reference **exits the whole loop** when the type byte
+  is not 0x18 but continues when the field mismatches (`jne <return 0>` on the
+  type, loop-back only from the field path).  The nested-if spelling gives
+  NEAR_MATCHING at the right size; writing the type check as an early
+  `return 0` inside `for (;;)` overshoots to 50 bytes.  The reference's CFG has
+  two exits from the loop — needs a shape that produces that without
+  duplicating the tail.
+- `0x5016c0` (46B): table walk with `i++` alongside a `+0x2f4` pointer stride,
+  guard on the record's first byte, call `fcn_005020e0(i, 0x7f4c00)`.
+  NEAR_MATCHING at the right size with the int-cast loop bound; the index and
+  pointer must stay in edi/esi together.
+
+GOLDTL: 630 byte-matched (251 exact, 379 reloc), failed 52, lint 1112/1112 zero
+warnings.  SERVER/GOLD untouched.
