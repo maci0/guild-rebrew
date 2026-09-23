@@ -9342,3 +9342,4 @@ size = 68
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-23T12:52:58+00:00"
+blocker = "int3 sites are __asm { int 3 } -- the only VC6 spelling that emits a bare 0xCC; the body is otherwise real C and byte-identical"
