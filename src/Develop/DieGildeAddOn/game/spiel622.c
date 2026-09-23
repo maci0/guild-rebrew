@@ -37,6 +37,8 @@ int __cdecl ahm_LookupEntityInTable(int);
 
 // DATA: SERVER 0x10031628
 char s_gm_KannObjektHergestellt___pCObj_10031628[] = "gm_eval_SlotVoll(): Lager ist in keinem Geb\344ude";
+// FUNCTION: GOLD 0x00508660
+// SIZE: 77
 // FUNCTION: GOLDTL 0x50b7c0
 // SIZE: 77
 // FUNCTION: SERVER 0x100196c0

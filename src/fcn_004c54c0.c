@@ -2,6 +2,8 @@
 extern float g_67db50;
 // GLOBAL: GOLDTL 0x67db54
 extern int g_67db54;
+// FUNCTION: GOLD 0x004c4b00
+// SIZE: 97
 // FUNCTION: GOLDTL 0x4c54c0
 // SIZE: 97
 

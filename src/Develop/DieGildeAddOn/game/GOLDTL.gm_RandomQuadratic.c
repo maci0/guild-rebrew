@@ -5,6 +5,8 @@ extern float g_const_1_0;
 extern float g_const_0_0;
 extern float g_const_neg_1_0;
 
+// FUNCTION: GOLD 0x0042ec40
+// SIZE: 48
 // FUNCTION: GOLDTL 0x42e470
 // SIZE: 48
 // gm_RandomQuadratic

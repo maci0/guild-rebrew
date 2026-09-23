@@ -3,6 +3,8 @@
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
+// FUNCTION: GOLD 0x004c9450
+// SIZE: 208
 // FUNCTION: GOLDTL 0x4c9ff0
 // SIZE: 208
 // FUNCTION: SERVER 0x1000f0d0

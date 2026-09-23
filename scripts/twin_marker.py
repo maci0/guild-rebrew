@@ -72,6 +72,10 @@ for r in rows:
     line = next((l for l in txt.splitlines()
                  if l.startswith(('RELOC', 'EXACT', 'NEAR', 'SIZE_MISMATCH', 'STUB', 'error'))), '')
     diffs = [l.strip() for l in txt.splitlines() if l.strip().startswith('[')]
+    if not line.startswith(('RELOC', 'EXACT')):
+        # An unverified marker must not survive: revert the probe's insertion.
+        subprocess.run(['git', 'checkout', '--', str(path)], timeout=120)
+        line += '  (reverted)'
     out.append((r['dst_va'], r['filepath'], line, diffs[:4]))
     n += 1
 for o in out:

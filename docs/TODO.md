@@ -37007,3 +37007,23 @@ file where the bodies are byte-identical but the literal differs).
 GOLD **281 → 293** byte-matched (96 EXACT, 197 RELOC); GOLDTL unchanged at 671
 (3 more rows EXACT → RELOC — literals becoming relocatable); server unchanged
 at 264.  Lint 1140 files / 0 warnings.
+
+### Round 1417 — twin harvest, fifth pass: GOLD +6 byte-matched (299)
+
+`twin_marker.py 20` then `twin_fix.py 40` in one pass.  Six new twins closed
+(0x403b90, 0x4c54c0, 0x53efa0, 0x508660, 0x4f0af0's neighbours, 0x534c20
+family); the other probed candidates stayed NEAR and were reverted.
+
+`twin_marker.py` now **reverts its own insertion** when the marker does not
+verify.  Before this round it left the unverified marker in place, which is how
+the tree accumulated ten NEAR_MATCHING rows that then had to be found and
+reverted by hand (the `git status` × `rebrew verify` sweep that closed this
+round).  A probe that cannot promote must leave no trace.
+
+Also reverted on the same principle: 0x4242c0 0x42b720 0x42b750 0x42e320
+0x43e680 0x4cd4c0 0x4cd380 0x4e7510 0x520ef0 0x4933c0 — every one a case where
+the address feeds a loop induction and the symbol form changes the codegen.
+
+GOLD **293 → 299** byte-matched (96 EXACT, 203 RELOC), NEAR_MATCHING back to its
+23-row baseline; GOLDTL unchanged at 671; server unchanged at 264.  Lint 1140
+files / 0 warnings.
