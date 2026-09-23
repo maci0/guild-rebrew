@@ -36326,3 +36326,28 @@ separate decision from this round's structural lock-in.
 Remaining for server.dll is unchanged and is entirely the 19 carriers'
 11,735 bytes; the deliverable passes every structural criterion (round 1391)
 and the gate now checks that fact (round 1392).
+
+### Round 1394 — the client's near-misses are the same wall class as the server's
+
+Worked GOLDTL's closest remaining carrier, `ahm_CheckFlag` (0x4ec850, 80 bytes,
+11 differing bytes, 4 structural).  The diff is two instructions in the tail:
+the reference orders `mov cl,[esi+eax*4] / xor eax,eax / cmp cl,0x1e / pop esi
+/ jne`, ours `... / pop esi / cmp / jne / mov ecx,[edx+0x65] / xor eax,eax`.
+Both orders are correct; it is a scheduler tie-break on a folded constant (the
+`xor` has no definition site to move — shapes 85).
+
+Probe: single-exit restructure (`int match = 0; ... match = ...; return match;`)
+so the zeroing has a source site.  **Worse**: object 70 -> 69 bytes, still
+NEAR_MATCHING.  Reverted.
+
+Sibling carrier `0x4f2ee0` (176 bytes) is the register-role rotation class:
+reference `push edi / mov edi,[0x868050] / add edi,ecx / ... / mov
+cl,[edi+eax*4]` against ours `push ebx / ... / mov bl,[ecx+eax]` — the
+allocator (docs/msvc6-allocator.md), not a C shape.
+
+So the two targets' remaining carriers are the same two wall classes
+(allocator rotation, scheduler tie-break), and the client offers no new lever:
+`gm_GetFieldByType` ported server->GOLDTL was re-tested this round and again
+came back `skipped-unverified` (SIZE_MISMATCH 130 vs 125).  GOLDTL remains at
+613 byte-matched of 665 annotated; its 52 unmatched rows are all in these two
+classes by first divergence.
