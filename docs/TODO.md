@@ -37470,3 +37470,35 @@ produces that zero-extend.
 
 GOLDTL **720 → 725** byte-matched (230 EXACT, 495 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1194 files / 0 warnings.
+
+### Round 1433 — branched prospecting, seventh pass: GOLDTL +3 (729)
+
+| VA | shape |
+|----|-------|
+| 0x414c30 | `if (a2) f(a1, 0x80, 0x80, 0x80); else f(a1, 0, 0, 0);` — two calls, two epilogues |
+| 0x423ce0 | `r = 0; p = f(a1); if (p) r = p[0xd] + g(a1) * 12; return r;` |
+| 0x429fe0 | `p = f(a3); if (p) { h(p); v = p[0x100]; g = v; return v; } g = -1; return -1;` |
+
+**Rules:**
+
+* **an initialised result local is not the same as an else-return.**  `0x423ce0`
+  needs `int r = 0; … if (p) r = …; return r;` for the reference's `push ebx /
+  xor ebx,ebx / mov eax,ebx`; writing `if (p == 0) return 0;` leaves eax at the
+  test's flags and drops the register (24/52 -> 52/52);
+* **put the main path first.**  `0x429fe0`'s reference is `test esi,esi / je
+  <end>` with the failure block last; the inverted spelling
+  (`if (p == 0) { …; return -1; } main`) emits `jne` over a leading failure
+  block (32/52 -> 52/52);
+* argument slot again: `0x429fe0`'s `[esp+0xc]` is the **third** argument, and a
+  two-parameter spelling loaded `[esp+8]`.
+
+**Tool limitation found:** `0x41f5f0`'s inventory entry is 64 bytes but the body
+is 46 + `nop;nop;ret`; the matched extent is 49 and `rebrew test` reports "all
+common bytes match" while refusing to promote — `--fix-sizes` persists the
+*registry* 64, so the inline `// SIZE: 49` and the metadata can never agree.
+The file was dropped rather than left failing.  Same for `0x40e110`/`0x40df00`
+(the `xor edx,edx / mov dl,[..] / shr / and` zero-extend resists every spelling
+tried, byte local included).
+
+GOLDTL **726 → 729** byte-matched (230 EXACT, 499 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1198 files / 0 warnings.
