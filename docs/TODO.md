@@ -36202,3 +36202,52 @@ lever is therefore in the split/label-resolution step
 game sources and not in `emit_thunks.py`: the reference has only 11 `ff 25`
 thunks, so its members' import calls must already be rewritten to those VAs (or
 to `ff 15 [IAT]`) before the link.
+
+### Round 1390 — authoritative deliverable checklist, and two gaps nobody had measured
+
+Produced the deliverable (`postlink_residual.py --built build/split_poc.dll
+--write build/server.dll`) and ran the project's own independent checker
+(`scripts/verify_objective.py`, no project tooling):
+
+```
+[PASS] .rdata VirtualSize 0x2e81      [PASS] import DLL list identical (4)
+[PASS] .reloc VirtualSize 0x10374     [PASS] imported SYMBOL count == 100
+[PASS] export names + VAs (Exit, Init)
+[PASS] PE entry point not in the residue (0x10023846)
+[PASS] export Exit / Init bodies identical (0x40 bytes each)
+[FAIL] file size equals reference                     290816 vs 286720 (+4096)
+[FAIL] .text VirtualSize == 0x22846                  0x22ad8
+[FAIL] .data VirtualSize equals reference            0x1740398 vs 0x174059c
+[FAIL] all differing bytes inside .text / non-.text bytes identical
+VERDICT: STRUCTURAL CRITERIA FAILED (22852 residual bytes)
+```
+
+Bucketing every differing byte by section gives the real worklist:
+
+| region | differing bytes |
+|--------|-----------------|
+| `.text` | 11,735 (the 19 carriers) |
+| `.reloc` | **11,103** |
+| beyond the reference file size | 4,096 |
+| headers | 14 |
+| `.text` raw padding past VirtualSize | **0** |
+
+Two things this settles:
+
+1. **The overshoot bytes already match.** Postlink's `text_overshoot_zeroed`
+   fixer (686 bytes) zeroes the stub/thunk tail, and the reference's own
+   `.text` bytes past VirtualSize are zeros (verified round 1389) — so the tail
+   is byte-exact and only the section *header* still carries our larger
+   VirtualSize.  The stub-removal work of rounds 1385-1386 bought real bytes but
+   was never the reason that field differed.
+2. **`.reloc` is a second, unmeasured gap: 11,103 differing bytes** with both
+   VirtualSize and raw size already equal.  Nothing in the current pipeline
+   compares relocation entries — `postlink_residual` diffs `.text`, and
+   `verify_objective` only checks the section header and the in-`.text` count.
+   Whatever makes `.text` match must also make the fixup list match, but 11,103
+   bytes is far more than the 19 carriers' call sites, so this needs its own
+   investigation before "byte-identical" is reachable.
+
+Next: (a) write the reference's section VirtualSizes from the layout package
+(`.text` 0x22846, `.data` 0x174059c) in postlink, (b) find the +0x1000 raw tail
+that makes our file 4,096 bytes longer, (c) start the `.reloc` diff analysis.
