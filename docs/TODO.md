@@ -39097,3 +39097,43 @@ loop helper is `fcn_004ae130(unsigned short)` and the score helper
 (0x4adf40, 0x5df7d1, 0x505df0, 0x4adff0, 0x50a640, 0x4adfb0, 0x517700).  The
 385-byte source that reached 160/385 is parked in `.scratch/t12_best.c` (not
 committed).
+
+Round 210 wall (task-15): 0x4ae3c0 (GOLDTL, inventory 288, body 0x116 = 278B) — fully
+decoded, best **SIZE_MISMATCH 166/278** (our object 270 bytes against 278).  The whole
+8-byte shortfall is the **same folded-`return 0` epilogue as round 208's 0x4ae2a0**, the
+adjacent VA in the same family: the reference keeps three byte-identical
+`pop edi; xor eax,eax; pop esi; mov esp,ebp; pop ebp; ret` epilogues (0x4ae3fc, 0x4ae431,
+0x4ae45e) and reaches the last one by fall-through (`jne 0x4ae466` skips it); our object
+folds it into the first (`je 0x3c`), so the tail starts 8 bytes early.  Everything before
+that point is byte-identical.  Round 208 already recorded ~25 inert spellings for this
+class; the time-box in the task stopped the probe here.  The GOLD twin is 0x4ae280
+(delta -0x140, same 278 bytes).
+
+Decoded body — `int __cdecl fcn_004ae3c0(int a1, int a2, int a3, char* a4, int a5)`,
+frame from `#pragma optimize("y", off)`:
+
+* `a1 == 1`: `e = fcn_00508e40(*(int*) ((char*) a2 + a3 * 8 + 4))` and one short-circuit
+  guard `if (e == 0 || *(char*) ((char*) e + 8) == 0 ||
+  *(char*) ((char*) e + 0x166) != 0x15) return 0;` (the equal case falls through to the
+  shared tail).
+* else: `i = 0; p = g_7f4ca0 + 0x166;` then
+  `for (;;) { if (fcn_004ae130(i) != 0 && *p == 0x1a) break; if (*p == 0x15) break;
+  p += 0x21c; i++; if ((int) p >= (int) (g_7f4ca0 + 0x65566)) return 0; }` — 0x300
+  entries, signed `jl` back edge (section 173), start and bound spelled as
+  `symbol + constant` (section 184); then `e = (void*) (g_7f4ca0 + i * 540)` and, only
+  when `a1 == 0`, `*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) e + 4);`.
+* tail: `a2 = (int) buf; a3 = 0x200;` (the scratch pointer and length live in the dead
+  argument homes), the 24-byte hand-written block-fill `__asm` prelude, then
+  `fcn_004ae080(a4, buf, &a2, &a3); n = *(unsigned short*) e; fcn_0051af00(a5, buf, n);
+  return 1;` with a single `add esp,0x1c`.
+
+**Load-bearing, and worth copying: the callee body must be defined *above* the caller in
+the file.**  `fcn_004ae130` touches only eax/ecx, and only with its definition in view does
+msvc6 keep the scan pointer in `edx` across the call (the reference's
+`mov edx,0x7f4e06`); with the definition below the caller (or absent) the whole function
+recolours — a1 moves from `edi` to `ebx`, the prologue gains `push ebx`, and the object
+comes out 272/336 bytes.  **The `// FUNCTION:` markers must also sit immediately above the
+marked function**: with them at the top of the file `rebrew test` associates the first
+marker with the first C definition (the callee) and reports `Output (60B)` for a 278-byte
+target.  The working 270-byte source is parked in `.scratch/t15_fcn_004ae3c0.c` (not
+committed).
