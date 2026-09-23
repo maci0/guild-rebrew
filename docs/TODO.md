@@ -37207,3 +37207,46 @@ Also re-confirmed: a `--flag-sweep-only` run over a 112-byte near-miss takes
 (`fcn_004050c0`, 98/110).
 
 GOLDTL stays at 681, GOLD at 300, server at 264.  Lint 1149 files / 0 warnings.
+
+### Round 1423 — prospecting by shape: GOLDTL +6 (687)
+
+New tool, `scripts/straight_line.py`: it scans the GOLDTL inventory for
+unreversed functions **with no conditional branch** (`0x70-0x7f` /
+`0x0f 0x8x`), 1–4 calls, and no tail jump.  Those are pure argument
+sequences — a straight C transcription, no shape search.
+
+```
+$ python3 scripts/straight_line.py 120
+(33, '0x4b3d80', 2) … (118, '0x4c4fc0', 1)
+24 candidates
+```
+
+Six closed from it this round, all first try:
+
+| VA | shape |
+|----|-------|
+| 0x465820 | `g(a2 * a3)` — the first parameter is unused |
+| 0x5062d0 | `g(a1 + 0x5d, a2) == -2 ? -3 : 0` (branchless `neg/sbb/and/add`) |
+| 0x469110 | `*(int*)(g_1015ea0 + a1*0x2f4 + 0x18) = a2; f(a1);` |
+| 0x57dd40 | `g(*(int*)(a1+4), (rand16(4) & 0xffff) + 3)` |
+| 0x4e75a0 | six-arg message builder over `g_14a5c6c[byte[a1+0x166..0x169]]` |
+| 0x47cb60 | seven-arg wrapper with a `1.0f` third argument |
+
+**The tracked set must come from the annotations, not the file names.**  The
+first pass used `src/fcn_<va>.c` to decide what was already reversed, and ten
+of its fourteen "new" functions turned out to be VAs already claimed by a file
+named after a *different* address — `mlock.c` owns 0x45ee00,
+`GOLDTL.ls_ReadVfsDataChecked.c` owns 0x5218f0,
+`GOLDTL.gm_*.c` owns 0x42e450, and so on.  Those files hit E013
+(`Duplicate VA`) and added nothing to the scoreboard; they were deleted and the
+count stayed.  `straight_line.py` now builds the claimed set from every
+`// FUNCTION: GOLDTL 0x…` marker in the tree.
+
+Two more shapes learned on the way: a wrapper that forwards a **signed**
+comparison of an unsigned result needs the callee declared `unsigned` for
+`> 0` to come out `cmp ecx,eax / sbb / neg` instead of `setg`
+(0x5218f0); and a 16-bit flag result uses `neg ax / sbb eax,eax / neg eax`
+where a 32-bit one uses the same with `neg eax` (0x4937d0 vs 0x5079f0).
+
+GOLDTL **681 → 687** byte-matched (230 EXACT, 457 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1156 files / 0 warnings.
