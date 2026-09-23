@@ -37587,3 +37587,32 @@ but keyed on the call target instead of the prologue.
 
 GOLDTL **736 → 739** byte-matched (230 EXACT, 509 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1208 files / 0 warnings.
+
+### Round 1437 — caller families by callee: GOLDTL +6 (745)
+
+New script `scripts/callers.py <VA>…`: resolves every `e8` in the raw bytes of
+each unreversed inventory function and lists the ones that land on a given
+address.  The message sender `fcn_004c4330` had 21 callers, `fcn_0051af00`
+**252**, `fcn_00502cd0` **182** — the families are much bigger than the
+prologue-shape scan (`straight_line.py`) can see, because their members branch
+and loop.
+
+Six closed this round, all callers of `fcn_0051af00` and `fcn_00545d40`:
+
+| VA | tag | extra |
+|----|-----|-------|
+| 0x5b22d0 | 0x20bd | `if (byte[a1+2] == 6 \|\| == 7)` |
+| 0x5b2c60 | 0x4154 | same guard, third argument into the format call |
+| 0x5b2f60 | 0x40a8 | `(rand16(3) & 0xffff) + 0x40a9` |
+| 0x5b2fb0 | 0x40ac | same, different message string |
+| 0x5b3410 | 0x4070 | four-argument format call, nine-argument `fcn_00545e80` |
+| 0x5b21d0 | 0x20ba | `*(unsigned short*) a1` as the format argument |
+
+**Rule:** the argument *roles* are not the argument *order*.  `0x5b21d0`'s tag
+source is the **second** parameter and its word source the **first**
+(`mov esi,[esp+0xc]` / `mov edx,[esp+8]`); with the obvious pairing the two
+loads swap (77/79).  Read which slot each register comes from before naming the
+parameters.
+
+GOLDTL **739 → 745** byte-matched (230 EXACT, 515 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1214 files / 0 warnings.
