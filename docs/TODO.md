@@ -38740,3 +38740,28 @@ lookup in `esi` where the reference uses `edi` (register colouring), and
 
 GOLDTL 805 → 806, GOLD 326 → 328; server unchanged at 264.  Lint 1275 files /
 0 warnings.
+
+Round 186: re-ran `scripts/twin_marker.py` over the refreshed
+`.scratch/ci_gold.json` (`cross-import --min-score 99`, 4272 rows).  One of the
+first twelve was a genuine twin: **GOLD 0x4cb210 = GOLDTL 0x4cbda0**
+(`src/GOLDTL.fcn_004cbda0.c`, 59B) — RELOC 59/59, promoted.  The other eleven all
+came back NEAR_MATCHING with 2-4 differing bytes per address and were reverted by
+the script, i.e. the score-100 rows are `mov`/`push` absolute *immediates* rather
+than memory operands, which is the documented "not fixable without a per-target
+symbol" case:
+
+| dst GOLD | src GOLDTL | bytes | first diffs |
+|----------|-----------|-------|-------------|
+| 0x402720 | fcn_00402c00 | 136 | [35] 4c/4f, [40] 1a/1d, [43..44] |
+| 0x4027b0 | fcn_00402ff0 | 66 | [58..60] e0 96 46 / 20 0c 4d (symbolic loop bound wall) |
+| 0x4220b0 | InitializeLogAndErrorHandler | 404 | 47 diffs — many hardcoded addresses |
+| 0x4242c0 | fcn_00420650 | 49 | [3..5] + bound |
+| 0x42b720 / 0x42b750 | fcn_0042a080 / 0042a0b0 | 48 | [1..3] b0 33 63 / 90 7f 6b |
+| 0x42e320 | fcn_42d670 | 60 | [34..36] |
+| 0x43e680 | fcn_00401380 | 37 | [21..23] |
+| 0x458900 | fcn_00455240 | 63 | [22], [28] |
+| 0x4933c0 | fcn_00492990 | 79 | [38..40] |
+| 0x4b7430 | fcn_004b76e0 | 282 | [139..141] |
+
+GOLDTL unchanged at 806, GOLD 328 → 329; server unchanged at 264.  Lint 1275
+files / 0 warnings.
