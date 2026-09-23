@@ -36622,3 +36622,25 @@ guard both give STUB at the right size.
 
 GOLDTL: 638 byte-matched (251 exact, 387 reloc), failed 52, lint 1119/1119 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1406 — GOLDTL 638 -> 642 (float slot family + two 9-argument dispatchers)
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x44d310 | slot **0xd8** of the float family from round 1405 | RELOC 51 |
+| 0x44d350 | slot **0xdc** of the same family | RELOC 51 |
+| 0x464a90 | `fcn_00464ad0(a1, a2, 0, a3, a4, a5, a6, a7, a8)` | RELOC 51 |
+| 0x476620 | `fcn_004763e0(a1, a2, a3, a4, a5, a6, a7, a8, 0)` | RELOC 51 |
+
+Both dispatchers are the 9-argument re-read pattern: the reference loads
+`[esp+0x20/0x1c/0x18]` first and then keeps re-reading `[esp+0x18]` — the
+argument reads shift with every push, which is exactly what the plain
+`f(a1, ..., a8)` call spelling produces when the compiler evaluates
+right-to-left.  The only difference between the two is where the constant 0
+sits in the argument list.
+
+The float-slot family (0x44d290/0x44d2d0/0x44d310/0x44d350) is one shape with
+four displacements 0xd0/0xd4/0xd8/0xdc — worth looking for more members of it.
+
+GOLDTL: 642 byte-matched (251 exact, 391 reloc), failed 52, lint 1123/1123 zero
+warnings.  SERVER/GOLD untouched.
