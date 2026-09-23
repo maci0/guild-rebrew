@@ -36026,3 +36026,36 @@ shapes 91 (gm_FindNextFilteredEntity: "two early jcc 12 vs 4 = -8, extra3 arm
 
 Everything else about the objective is unchanged: 264/283 byte-matched, residue
 11735, all of it inside the 19 carriers (round 1382 ledger).
+
+### Round 1384 — the .text overshoot comes from stub definitions past the reference end
+
+The composed `.text` (split_poc.dll) is 0x22af8 against the reference's
+0x22846 (+690).  Parsing `build/split_poc.map` localizes the tail: the last
+eight `.text` symbols sit at or past the reference end 0x10023846 —
+
+```
+0x10023846 _DllMain@12            def_dllmain.obj_s0.obj
+0x10023850 _thread_proc@4         link_stubs.c.obj
+0x10023860 _RecvGameSavegame      link_stubs.c.obj
+0x10023870 _fcn_1001af30          link_stubs.c.obj
+0x10023880 _fcn_10020ff8          link_stubs.c.obj
+0x10023890 _putc                  link_stubs.c.obj
+0x100238a0 _crt_toupper           link_stubs.c.obj
+0x100238c0 __crt_locked_call4a    link_stubs.c.obj
+```
+
+`_putc` is the documented displacement pattern (`LNK4006`: the command-line
+stub beats `LIBCMT.lib(fputc.obj)`), and `link_stubs.c`'s own comment (line
+337) names the real bodies at 0x1001add6 / 0x1001a931.  So the composition
+carries both the real member bodies and duplicate stubs appended at the end.
+
+First fix attempt: `/Gy` on the stub TU so unreferenced stub COMDATs are
+discarded.  **Inert** — the flag never reached the compile line, so the source
+property did not attach (the file is added to the target under a different
+spelling than the `${LINK_STUBS}` property key).  Reverted; next attempt should
+set the flag at the point the file is added (`target_sources`) or via a
+`COMPILE_OPTIONS` source-file expression, then confirm `/Gy` in
+`.scratch/gate-build.log` before measuring.
+
+Also confirmed this round: the 7 trailing stubs are not the whole +690 (they are
+~0x90 bytes); the rest is per-object alignment in the game-object set.
