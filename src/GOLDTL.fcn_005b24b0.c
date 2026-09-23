@@ -1,10 +1,12 @@
-// GLOBAL: GOLDTL 0x774a80
+extern char g_774a80[];
 // GLOBAL: GOLD 0x6f26c8
 extern char g_774a80[];
 // GLOBAL: GOLDTL 0x773d75
+extern unsigned char g_773d75;
 // GLOBAL: GOLD 0x6f1bc5
 extern unsigned char g_773d75;
 // GLOBAL: GOLDTL 0x868060
+extern unsigned int g_868060[];
 // GLOBAL: GOLD 0x7e3f40
 extern unsigned int g_868060[];
 // FUNCTION: GOLDTL 0x5b24b0

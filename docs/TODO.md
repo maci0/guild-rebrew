@@ -38433,3 +38433,25 @@ is why the tool, not a hand edit, has to do it).
 
 GOLDTL 796 → 797, GOLD 319 → 320; server unchanged at 264.  Lint 1267 files /
 0 warnings.
+
+Round 175: two more free `fcn_0051af00` callers, both closed on the first test
+and both shared across targets:
+
+| GOLDTL | GOLD | size | shape |
+|--------|------|------|-------|
+| 0x4ec660 | 0x4ea8e0 | 174 | `if (byte[a1+0xd] < 2) return; n = fcn_004e8d10(a1,6,items); if (!n) return; memset(buf,0,0x800); log(buf,0x13ac); for (i<n) log(buf+strlen(buf), fmt, items[i*0xc].f0+0x253); fcn_00545d40(*(int*)(a1+4),-1,buf,1,0x5ec,0)` |
+| 0x5b24b0 | 0x5a9030 | 162 | round 174: 7-argument log arm, two-constant ternary message id (section 182) |
+
+`0x4ec660` is the first round-175 find and its twin was located by scanning the
+GOLD image for the prologue signature `81ec48080000` + `807d0d02` — worth reusing
+for the rest of the `0x4exxxx` family (`0x4ea560`, `0x4e1ea0`, `0x4e27b0` are
+open callers).  The frame is `char items[0x48]; char buf[0x800];` in declaration
+order, which is also the address order (`items` at `[esp+8]`, `buf` at
+`[esp+0x54]` after the pushes).
+
+The dual-target mechanics learned here (call targets are relocation-masked, data
+addresses are not, marker-placement and duplicate-marker rules) are written up as
+`docs/msvc6-c-shapes.md` section 183.
+
+GOLDTL 797 → 798, GOLD 320 → 321; server unchanged at 264.  Lint 1268 files /
+0 warnings after `rebrew lint --fix --all-targets` backfilled two SECTIONs.

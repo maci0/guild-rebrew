@@ -8071,3 +8071,34 @@ MSVC lowers a constant-pair ternary whose difference is a small mask as
 a displacement — so the outer sum stays `add eax,ecx`.  Rule: when a reference
 has `and reg,N; add reg,K; add acc,reg` for a condition-dependent constant, the
 source wrote the two full constants in a ternary, not `K + (c ? N : 0)`.
+
+## 183. One source for two targets: only data addresses need per-target markers
+
+Measured while sharing `fcn_004ec660` (GOLDTL 0x4ec660) with its GOLD twin
+0x4ea8e0.  The two bodies differ in four addresses only — three call targets
+(0x4e8d10/0x4e7150, 0x51af00/0x517700, 0x545d40/0x53e000) and one `push imm32`
+string (0x68deb8/0x60f188) — and the **call targets do not matter**: an `e8`
+target is a relocation slot, masked in the RELOC comparison, so the shared file
+may keep calling the GOLDTL names and the GOLD object still scores 174/174.
+The absolute data address does matter (no fixup), so it gets a marker pair:
+
+```c
+// GLOBAL: GOLDTL 0x68deb8
+extern char g_68deb8[];
+// GLOBAL: GOLD 0x60f188
+extern char g_68deb8[];
+```
+
+Three practical rules, all hit this round:
+
+* each marker must be **immediately** followed by a declaration of the symbol it
+  names, otherwise the reloc scanner warns "has no declaration on the following
+  line" (a marker stacked on another marker does not count);
+* if the symbol is already annotated for that target in an owning file, do not
+  repeat its marker — declare a bare `extern` there and keep only the *other*
+  target's marker in the shared file (`g_774a80` is owned by
+  `GOLDTL.fcn_005b2a00.c`; repeating `// GLOBAL: GOLDTL 0x774a80` raises the
+  "also annotated in" warning);
+* new GLOBAL markers need their SECTION metadata or they add W016 warnings;
+  `rebrew lint --fix --all-targets` backfills it into the read-only
+  `src/rebrew-data.toml` (never hand-edit that file — it is mode 444).
