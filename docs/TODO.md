@@ -37838,3 +37838,38 @@ parameters into callee-saved registers in the prologue (`push ebx; push esi;
 mov esi,[esp+0x14]; mov ebx,[esp+0xc]; push edi; mov edi,[esp+0x14]`) while every
 source shape we tried keeps `a2` in `esi` and rematerialises `a1`/`a3` inside the
 branch — the same allocator divergence as 0x4fa530/0x4ea4b0.
+
+## Round 143 — GOLDTL 0x4b7xxx family: entity lookup + float ratio (+4 = 787)
+
+Four members closed, all the same skeleton (shared with `fcn_004bbab0`):
+
+```c
+p = fcn_00508e40(*(int*) a1);            /* entity lookup, EXACT */
+if (p == 0) return 1;
+... optional guards ...
+v = fcn_0042e410(k);                     /* unsigned short */
+d = (double) v + *(double*) 0x6629c8;    /* fild / fadd / fstp qword */
+n = (int) (((double) fcn_0050dac0(*(unsigned short*) p) * d) * *(double*) 0x6640e8);
+fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, n);
+fcn_004c51a0(..., *(char*) 0x773d75, n);
+fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
+    (unsigned) strlen(buf) > 0x100, 0x603, 0);
+return 0;
+```
+
+| VA | size | what differs |
+|----|------|--------------|
+| 0x4b70c0 | 216 | `k = 2`, `d` addend 0x6629c8, multiply 0x664e50, `fcn_004c51a0(*(int*)a1, -1, c, n)` |
+| 0x4b71a0 | 216 | `k = 3`, addend 0x662a48, multiply 0x664e58 — otherwise identical |
+| 0x4b7280 | 280 | extra `p->[0x166] == 0xe → return 0x400`; `if (fcn_005c6270(p,0x290)) { fcn_004b73a0(p); return 0x400; }`; `k = 3`, addend 0x6629c8, multiply 0x6640e8; `fcn_004c51a0(-1, *(int*)a1, c, n)` |
+| 0x4b73b0 | 248 | as 0x4b7280 but no `p->[0x166]` guard, no `fcn_004b73a0` call, addend 0x662a48 |
+
+**Codegen rule (same class as the 0x5b2560 ternary): parenthesise the FP product.**
+`x * d * g` is reassociated by MSVC 6 into `x * g * d` (`fmul [g]` before
+`fmul [d]`); `((x * d) * g)` emits the reference's `fmul [d]` then `fmul [g]`.
+Explicit parentheses, not a temporary, are what pin it.
+
+`fcn_004b74b0` (272B, 250/265) was dropped: the reference loads `p->[4]` into
+`edx` for the trailing UI call while our CL reuses the dead `esi`, and the
+`strlen` length flag lands in a different register — allocator divergence again,
+no source shape moved it.
