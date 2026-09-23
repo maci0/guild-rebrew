@@ -35991,3 +35991,33 @@ was not part of either.  Store-order is 1-for-13 as a blind method, so measure
 it — the statement block is `source_owner_entity = 0;` … through
 `source_static_entity = 0;` at
 `src/Develop/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`.
+
+### Round 1383 — the cm_ExSellObjekt store-order probe is negative, and the size plan splits
+
+Ran the probe named in round 1382: reordered the eight `= 0` local stores at
+`cm_ExSellObjekt` (0x1000d930) from the emitted order
+0x24,0x30,0x14,0x1c,0x28,0x2c,0x18,0x20 into the reference's
+0x14,0x2c,0x18,0x20,0x28,0x30,0x1c,0x24, on the hypothesis that the emitted
+store order follows the statement order.
+
+**It does not follow it here, and the permutation is worse:** structural diffs
+375 -> 379, object size unchanged (2056 vs the reference's 2057), and the
+reordering also swapped the `xor ebp,ebp` / `xor ebx,ebx` preamble (a register
+allocation side effect).  Reverted; the file is back to the baseline.  So the
+store run is not statement-ordered at this site — the remaining lever for it is
+whatever orders the *slot* writes (an allocator/peephole decision), not the
+source.  Recorded as spent.
+
+The size-error plan from round 1382 splits, per the documented arithmetic in
+shapes 91 (gm_FindNextFilteredEntity: "two early jcc 12 vs 4 = -8, extra3 arm
+2 vs 6 = +4", reconciling the whole -4):
+
+- **Size is a consequence, not a body defect** (do not chase): cm_ExSellObjekt
+  -1, ls_LoadBuildingEntityState -3, gm_FindNextFilteredEntity -4,
+  cm_ExCopyEntityData -7 — each opens on a `jcc` whose rel8/rel32 width is
+  forced by the stub's position.
+- **Real body deltas** (worth working): vfs_OpenStream +34 (object 701 against
+  667) and gm_AllocGebaeude -10 (1078 against 1088).
+
+Everything else about the objective is unchanged: 264/283 byte-matched, residue
+11735, all of it inside the 19 carriers (round 1382 ledger).
