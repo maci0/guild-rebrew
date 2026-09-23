@@ -38229,3 +38229,33 @@ the reference's `jne` + fall-through.
 
 GOLDTL verify: 795 byte-matched.  No GOLD twin (0x58b9c0 is absent from the GOLD
 inventory).
+
+## Round 159 — 0x4fa230 decoded, needs one more pass
+
+`fcn_004fa230` (0x4fa230, 176B) is the next free caller and is fully decoded; the
+write-up is left here so the next round can go straight to C:
+
+```c
+int __cdecl fcn_004fa230(void* a1, void* a2)      /* a2 = arg2, a1 = arg1 */
+{
+	int r;
+
+	r = 0;
+	if (*(int*) a2 != 3 && *(int*) a2 != 1) return 1;
+	*(char*) ((char*) a2 + 0x14) = 0;             /* mov [ecx],bl right after the cmp */
+	if (*(int*) ((char*) a1 + 0x1c8) & 0x100) return 1;      /* test ah,1  */
+	if ((*(int*) ((char*) a1 + 0x1cc) & 0x200) == 0) return 1; /* test ah,2  */
+	if (*(char*) ((char*) a1 + 2) == 6)
+		fcn_0051af00((char*) a2 + 0x14, 0x679060, 0x1e15);
+	if (*(int*) ((char*) a1 + 0x1c8) & 0x200) return 9;
+	if (*(int*) ((char*) a1 + 0x1c8) & 0x40000) return 1;
+	if (*(int*) a2 == 3) r = fcn_005db460(a1, a2);
+	return r | 2;                                 /* or al,2 */
+}
+```
+
+Register notes from the target: `ebx` = `r` (zeroed at the top, reused for the
+call result), `esi` = `a2`, `edi` = `a1`, and the `and`-masks are spelled
+`test ah,1` / `test ah,2` / `test eax,0x40000`, i.e. the source compares whole
+`int` fields against `0x100`/`0x200`/`0x40000`.  Not attempted this round (context
+budget); the shape is otherwise the familiar `v ∈ {1,3}` family.
