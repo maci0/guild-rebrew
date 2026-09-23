@@ -38281,3 +38281,29 @@ above it, `f4=0x400 / f10=6 / f8=g_666018 / fc=g_66601c`, `f1(buf,0x18ec)`,
 byte for byte; the stores split differently around the two pushes (66/107 with
 `f4,f10,f8,fc`, 71/107 with `f8,fc,f4,f10`).  Same store-scheduling wall as
 0x5c1090 — deleted.
+
+## Session checkpoint (verified 2026-09-23)
+
+| target | byte-matched | exact | reloc | open |
+|--------|--------------|-------|-------|------|
+| server.dll | 264 / 281 passed | 31 | 233 | 1 NEAR, 1 STUB, 0 compile errors |
+| Europa1400Gold_TL.exe | 795 | 231 | 564 | 45 SIZE_MISMATCH, 5 NEAR, 2 STUB |
+| Europa1400Gold.exe | 316 | 97 | 219 | 69 SIZE_MISMATCH, 22 NEAR, 10 STUB, 3 compile errors (foreign uncommitted files) |
+
+Session start was server 264 / GOLDTL 745 / GOLD 300, so this stretch added
+**+50 GOLDTL** and **+16 GOLD** functions, plus the docs in this file and
+`msvc6-c-shapes.md` §179.
+
+Two questions block the next stretch and are not source-level:
+
+1. **Allocator/block-order divergence.**  ~15–20 % of the remaining functions are
+   byte-identical except for register choice, block order or stack-cleanup points
+   (0x5dd050, 0x4fa530, 0x4ea4b0, 0x5b23e0, 0x4b74b0, 0x526070, 0x4013b0,
+   0x5c1090/0x5a7190, 0x404560 …).  Every VC6 service pack, the Processor Pack,
+   `/TP`, and every flag combination tried (`rebrew match --flag-sweep-only`,
+   `/G3`–`/G6`, `/Oy`, `/Op`, `/Os`, `/Ob0`) produce our form, so the reference
+   build differs in the compiler image or in a source construct we have not
+   guessed.  Resolve this before spending more rounds one function at a time.
+2. **Cross-import candidate list.**  The command line that produced
+   `.scratch/ci_gold.json` (34 usable rows, 8 GOLD matches harvested from it) now
+   emits only `action = "skipped"`, so the twin vein cannot be refilled.
