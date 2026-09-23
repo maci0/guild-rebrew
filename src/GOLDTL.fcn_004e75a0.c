@@ -2,6 +2,8 @@
 extern int g_14a5c6c[];
 // GLOBAL: GOLDTL 0x68d934
 extern char g_68d934[];
+// FUNCTION: GOLD 0x004e5a90
+// SIZE: 87
 // FUNCTION: GOLDTL 0x4e75a0
 // SIZE: 87
 

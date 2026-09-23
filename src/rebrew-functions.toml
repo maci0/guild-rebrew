@@ -3362,12 +3362,14 @@ size = 32
 
 ["GOLD.0x004c3b10"]
 size = 32
-status = "NEAR_MATCHING"
-updated_by = "test"
-updated_at = "2026-09-21T05:25:51+00:00"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-23T13:14:59+00:00"
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src"
 
 ["GOLD.0x0042ec00"]
 size = 32
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src"
 
 ["GOLD.0x004035f0"]
 size = 36
@@ -3410,9 +3412,10 @@ size = 46
 
 ["GOLD.0x004feb30"]
 size = 46
-status = "NEAR_MATCHING"
-updated_by = "test"
-updated_at = "2026-09-21T05:30:55+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-23T13:15:58+00:00"
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src"
 
 ["GOLD.0x00438780"]
 size = 44
@@ -3536,6 +3539,10 @@ updated_at = "2026-09-21T05:41:25+00:00"
 
 ["GOLD.0x00411bb0"]
 size = 38
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-23T13:14:53+00:00"
 
 ["GOLD.0x00479ed0"]
 size = 38
@@ -3574,6 +3581,7 @@ size = 34
 status = "NEAR_MATCHING"
 updated_by = "test"
 updated_at = "2026-09-21T05:43:35+00:00"
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src"
 
 ["GOLD.0x0046bdc0"]
 size = 34
@@ -9441,3 +9449,15 @@ size = 90
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T13:17:18+00:00"
+
+["GOLD.0x004e5a40"]
+size = 68
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:31:06+00:00"
+
+["GOLD.0x004e5a90"]
+size = 87
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:31:08+00:00"

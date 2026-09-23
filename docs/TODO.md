@@ -38327,3 +38327,8 @@ Caveat measured with a 20-candidate batch: the 80-score band is mostly *structur
 siblings, not byte twins — all 20 rows came back SIZE_MISMATCH/NEAR_MATCHING and
 were reverted.  The next pass should sweep the band (e.g. `--min-score 90`, 94) and
 run the marker script per band, promoting only RELOC/EXACT rows.
+
+Same round: the killed 200-candidate run had left three `// FUNCTION: GOLD …`
+markers in `GOLDTL.fcn_004e7550.c` / `fcn_004e75a0.c` / `fcn_004fa690.c`.
+`0x4e5a40` (68B) and `0x4e5a90` (87B) both matched and are promoted (GOLD 316 →
+318); `0x4f82a0` differs at offset 78 and its marker was reverted.
