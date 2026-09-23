@@ -7402,9 +7402,9 @@ updated_at = "2026-09-22T21:29:22+00:00"
 
 ["GOLDTL.0x00508e40"]
 size = 64
-status = "EXACT"
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-22T21:29:23+00:00"
+updated_at = "2026-09-23T14:08:03+00:00"
 
 ["GOLDTL.0x00531c00"]
 size = 51
@@ -9532,10 +9532,19 @@ updated_by = "test"
 updated_at = "2026-09-23T14:03:51+00:00"
 
 ["GOLD.0x004f30a0"]
-size = 160
+size = 292
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T14:09:43+00:00"
 
 ["GOLDTL.0x004f51d0"]
 size = 292
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T14:06:19+00:00"
+
+["GOLD.0x00505df0"]
+size = 64
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T14:08:04+00:00"

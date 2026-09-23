@@ -1,4 +1,10 @@
+// GLOBAL: GOLDTL 0x69037c
+extern char g_69037c[];
+// GLOBAL: GOLD 0x61164c
+extern char g_69037c[];
 // FUNCTION: GOLDTL 0x4f51d0
+// SIZE: 292
+// FUNCTION: GOLD 0x4f30a0
 // SIZE: 292
 
 #include <string.h>
@@ -45,7 +51,7 @@ int __cdecl fcn_004f51d0(void* a1, req_2d_b s, int b)
 		fcn_0051af00(a1, v + 0x1428, (char*) &s + 4);
 		break;
 	default:
-		memcpy(a1, (void*) 0x69037c, 0x20);
+		memcpy(a1, g_69037c, 0x20);
 		r = 0;
 		break;
 	}

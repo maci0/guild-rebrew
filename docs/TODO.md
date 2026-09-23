@@ -38583,3 +38583,31 @@ Reversing GOLD 0x505df0 (or annotating it) unblocks the share.
 
 GOLDTL 802 → 803, GOLD unchanged at 323; server unchanged at 264.  Lint 1273
 files / 0 warnings.
+
+Round 180 (cont.): the GOLD 0x4f30a0 share was then unblocked in two steps.
+
+1. `fcn_00508e40` (GOLDTL 0x508e40) now carries both markers and uses the shared
+   symbol `g_7f4ca4` (owned by `GOLDTL.fcn_00549330.c`) with the bound spelled
+   `g_7f4ca4 + 0x65400` and the return base `g_7f4ca4 - 4`: **GOLDTL 0x508e40 and
+   GOLD 0x505df0 both RELOC 56/56**.  That registers `fcn_00508e40` as the GOLD
+   symbol for 0x505df0, which is what the 0x4f51d0 call needed.
+2. `src/GOLDTL.fcn_004f51d0.c` gained `// FUNCTION: GOLD 0x4f30a0` plus a
+   `g_69037c` pair (GOLDTL 0x69037c / GOLD 0x61164c) for the default-branch
+   `memcpy` source: **both targets RELOC 292/292**.
+
+Two tool gotchas worth remembering:
+
+* `rebrew test` resolves the size for a *secondary* annotation from
+  metadata only (`parse_source_metadata` is first-block-only, and the
+  `--va`-selected sibling deliberately does not borrow the first block's span).
+  If a stale size was persisted earlier — round 179's wrong-VA probe had written
+  `GOLD.0x4f30a0 size = 160` — the marker's own `// SIZE:` is ignored and the
+  compare reads only 160 bytes.  `--fix-sizes` cannot repair it either, because
+  its evidence check compares the object tail against the *next* function.
+  The fix is an explicit `rebrew test <file> --target <T> --size <N>`, which
+  persists the size.
+* the jump-table entry and the `call` displacements show up as "Diffs
+  (non-reloc)" in `rebrew test` until the callee resolves for that target; an
+  unresolved call is compared raw (`e800000000`).
+
+GOLDTL 803, GOLD 324, server unchanged at 264.  Lint 1273 files / 0 warnings.
