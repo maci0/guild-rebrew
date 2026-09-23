@@ -37642,3 +37642,23 @@ Codegen notes:
   persist the object size and correct the inline `// SIZE:`.
 - W021 fires when a `// GLOBAL:` annotation is repeated in a second file: keep the
   bare `extern` in the follower (as the earlier round's files already do).
+
+## Round 136 — GOLDTL caller family, second batch (+9 byte-matched = 766)
+
+| VA | size | shape |
+|----|------|-------|
+| 0x5b33a0 | 100 | `f1(g, 0x407f, a2+0x30, a2+0x40, 2*a4+0x9a8)`, `f2(…, *(int*)(a3+1), …)` — the post-call reload is **a3**, not a2 |
+| 0x5b3120 | 108 | same family, tag 0x4074, fifth arg `a4+0x4172`, `*(int*)(*(int*)(a2+0x16c)+1)` |
+| 0x5b3190 | 110 | 0x5b3120 with tag 0x4075 and `2*a4+0x9a8` |
+| 0x5b3200 | 110 | ditto, tag 0x4077 |
+| 0x5b3330 | 112 | six-argument `f1`, keeps a1/a3/a4 in ebx/edi/esi, `2*(u16)a4+0x9a8` |
+| 0x4f7580 | 104 | `v = *a2; if (v != 3 && v != 1) return 1;` then `[a1+0x1c8] & 0x100` |
+| 0x4f76d0 | 102 | `v = *a2`, `*(u8*)(a1+0xd) < 3`, call `fcn_005d63e0(a1, a2)` |
+| 0x4f7740 | 107 | two params, single `return 1` tail: `if (v==3||v==1) { if ([a1+0xd] >= 3 && ([a1+0x1c8] & 0x400) == 0) { … return 2; } } return 1;` |
+| 0x5b2810 | 112 | one parameter; `int id = fcn_0042e410(2)` from an `unsigned short` callee, `sprintf`-like `fcn_0064d41a(buf, g_6ab430, id+3)` |
+
+Docs: `msvc6-c-shapes.md` section 179 records the `[esp+N]` argument-offset
+arithmetic that cost most of this round — pending argument pushes must be
+counted, and two of these nine were wrong-parameter bugs, not codegen bugs.
+Lint: drop a `// GLOBAL:` marker for a VA that has no data section (W016); the
+0x6ab5xx family is string data, not globals.

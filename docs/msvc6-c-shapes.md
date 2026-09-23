@@ -7936,3 +7936,38 @@ passes only the first, write them into an array (or struct) and pass that.
 
 The frame also settles: `float v[4]` gives the reference's `sub esp,0x10`
 (three floats plus padding) where `float v[3]` gives `sub esp,0xc`.
+
+## 179. `[esp + N]` argument reads: count every push that is still on the stack
+
+The single most expensive misread in a `--no-ebp` function is a parameter
+offset, because a wrong parameter index silently changes a *role* while the
+instruction stream still looks plausible.  Three measured cases from the
+GOLDTL `fcn_0051af00` caller family (round 136):
+
+* `fcn_005b2810` (0x5b2810, 112B): `sub esp,0x40; push esi; push edi; push 2;
+  call f; mov edi,[esp+0x50]`.  The `push 2` is **not yet popped** — its
+  `add esp,4` comes four instructions later — so at that point `esp` is
+  `E-0x4c` and `[esp+0x50]` is `E+4`, the **first** parameter.  The function
+  takes one pointer, not two; declaring `(void* a1, void* a2)` moves every
+  later offset by four bytes and the object comes out a copy away from the
+  reference.  The same reading also identifies the untouched id value:
+  `mov si,ax; and esi,0xffff` is an `int` local assigned from a callee
+  declared `unsigned short` (a `unsigned short` local defers the mask into the
+  branch instead).
+* `fcn_005b33a0` (0x5b33a0, 100B): after the five pushes of the first call,
+  `[esp+0x24]` is `E+0xc` — the **third** parameter, not the second.  Reading
+  it as the second passes the wrong pointer to the second call and the
+  register allocator then caches a value the reference reloads (`esi` for the
+  wrong argument), so only 44/100 bytes match.
+* `fcn_004f7740` (0x4f7740, 107B): the prologue is `mov edx,[esp+8]; push ebx`
+  — the load happens **before** the push, so `edx` is the second parameter
+  while the later `mov ecx,[esp+8]` (after the push) is the first.  Two
+  parameters, both live, and `test bh,4` on `[ecx+0x1c8]` is `0x400`.
+
+Procedure: write the running `esp` value under every instruction, count the
+argument pushes that have not been undone (cleanup is often lumped at the
+function end, see `fcn_005b2810`'s single `add esp,0x2c` for three calls), and
+only then convert `[esp+N]` to a parameter index.  A mismatch in *which*
+parameter is used shows up as a register-allocation difference (wrong
+callee-saved register, an extra reload), which is much harder to read back from
+the diff than the offset itself.
