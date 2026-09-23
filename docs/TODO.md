@@ -39033,3 +39033,67 @@ only in those three data immediates (0x770ce6 / 0x7d60e6 / 0x770b80 against GOLD
 0x7f4e06 / 0x85a206 / 0x7f4ca0) and in relocation-slot call targets (0x517700, 0x4adf40,
 0x505df0, 0x4adff0), so a shared file needs one symbol pair for the array.  The working
 265-byte source is parked in `.scratch/t9_fcn_004ae2a0.c` (not committed).
+
+Round 209 wall (task-12): 0x4af050 (GOLDTL, inventory 384, body 384 = the GOLD twin
+0x4aef10's size too) — fully decoded but **SIZE_MISMATCH 160/385**, our object 385
+bytes against 384.  Two independent residuals, both compiler-side:
+
+1. **Two stack-slot pairs come out inverted.**  The reference frame is
+   `sub esp,0x210`, buffer at `[ebp-0x210]`, and the four locals at `v1=[ebp-0xc]`,
+   `v2=[ebp-0x10]`, `p=[ebp-8]`, `n=[ebp-4]`; ours land `v1=-0x10`, `v2=-0xc`,
+   `n=-8`, `p=-4`.  The mapping proved **totally invariant** to ~20 probes —
+   declaration order (five different orders), statement order of the four
+   assignments, initialised declarations at the top vs plain assignments, variable
+   names (short/long/renamed), `int`/`unsigned`/pointer/`char*` types, locals
+   before vs after the buffer, and the `__asm` operand order — every one still
+   emitted `0xff676980` at `-0x10`, `0` at `-0xc`, `0x200` at `-8` and the buffer
+   address at `-4`.  It is therefore not a C-shape lever; do not re-probe it.  It
+   is also what makes the positional score collapse (every `[ebp-N]` operand
+   follows the first divergence).
+2. **One callee-saved colour swap.**  The reference copies `a4` into `esi` before
+   the `fcn_004ae080` call (`mov esi,[ebp+0x14]`), materialises the constant 1 in
+   `edi` (`mov edi,1`), then reuses `esi` as the shared zero register
+   (`xor esi,esi` / `cmp eax,esi` / `[ebp+0x14] = esi` for `e = 0`) and finally as
+   the loop counter.  Ours puts `a4` in `edi` and 1 in `esi` (or, with `int i = 0;`
+   at the top, 1 as an immediate and the zero in `ebx`), which leaves no free
+   callee-saved register for the loop pointer: `p` is spilled and the loop is
+   `mov eax,[ebp-4] / add eax,0x21c / cmp eax,<bound>` instead of `add edi,0x21c /
+   cmp edi,0x85a0a4`, and a second zero register appears (`xor ebx,ebx` next to
+   `xor esi,esi`).
+
+Decoded body — `int __cdecl fcn_004af050(int a1, int a2, int a3, char* a4, int a5)`,
+frame from `#pragma optimize("y", off)`:
+
+* `v1 = 0xff676980; v2 = 0; n = 0x200; p = buf;` then the 24-byte hand-written
+  block-fill `__asm` prelude (`mov edi,p; mov ebx,n; xor eax,eax; lea ecx,[edi+edi*2]
+  / and ecx,3 / sub ebx,ecx / jle / rep stosb / mov ecx,ebx / and ebx,3 / shr ecx,2 /
+  rep stosd / add ecx,ebx / rep stosb`).
+* `fcn_004ae080(a4, buf, &p, &len)` with `len` a **block-local declared in its own
+  block after the fill**, packed into the dead `a4` argument home `[ebp+0x14]` (the
+  same lever the round-183 note records for 0x4af400).  `if (len != 1) return 0;`
+  then `r = fcn_0064eeec(a4 + (int) p)` — `a4` is the pre-call value, cached in a
+  callee-saved register because `&len`, not `&a4`, escapes.
+* `if (r < 0 || r > 2) return 0;`; `n = 1; if (r == 0) { n = 0; } else { v2 = (r != 1); }`.
+* `if (a1 == 2) return 0;` then the found handle (a `char*`) is held in the reused
+  `[ebp+0x14]` home: `e = 0;` before the branch.
+* `a1 == 1`: `e = fcn_00508e40(*(int*) ((char*) a2 + a3 * 8 + 4))` and fail
+  (`e == 0 || *(unsigned char*) (e + 8) == 0`) returns 0.
+* else: `i = 0; p = g_7f4ca4; while ((int) p < (int) (g_7f4ca4 + 0x65400))` — 0x300
+  entries of stride 0x21c, signed `jl` back edge (section 173), bound spelled as
+  `symbol + constant` so it stays one immediate (section 184) — with
+  `if (fcn_004ae130(i) != 0) { if (n == 0 || *(unsigned char*) (p + 5) == v2) {
+  w = fcn_0050dac0(i); if (w > v1 && fcn_004ae0f0(*(int*) p) != 0) { v1 = w;
+  e = p - 4; } } } p += 0x21c; i++;`.
+* `if (e == 0) return 0;`; `if (a1 == 0) *(int*) ((char*) a2 + a3 * 8 + 4) =
+  *(int*) ((char*) e + 4);`; `n = *(unsigned short*) e; fcn_0051af00(a5, buf, n);
+  return 1;` (the `xor eax,eax / mov ax,[..]` pair is the varargs promotion).
+
+The callee prototypes must be narrow where the reference's call sites are: the
+loop helper is `fcn_004ae130(unsigned short)` and the score helper
+`fcn_0050dac0(unsigned short)`.  `g_7f4ca4` is already owned for both targets by
+`src/GOLDTL.fcn_00549330.c`; only a bare `extern` is needed.  The GOLD twin is
+0x4aef10 (delta -0x140): its loop start is 0x770b84 and its bound 0x7d5f84
+(= start + 0x65400), everything else differs only in relocation-slot call targets
+(0x4adf40, 0x5df7d1, 0x505df0, 0x4adff0, 0x50a640, 0x4adfb0, 0x517700).  The
+385-byte source that reached 160/385 is parked in `.scratch/t12_best.c` (not
+committed).
