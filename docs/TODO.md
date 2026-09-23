@@ -37897,3 +37897,26 @@ Two more codegen rules:
 Still in this family and unmatched: 0x4b7800 (352B) and 0x4b7d70/0x4b7e70 (256B,
 which call `fcn_004a55c0` with two float constants 100.0f/33.0f and a 0x600c00
 store).
+
+## Round 145 — GOLDTL 0x4b7xxx family, third batch (+2 = 793)
+
+* `fcn_004b7d70` / `fcn_004b7e70` (0x4b7d70, 0x4b7e70, 253B, twins): entity lookup,
+  then a **two-out-parameter** chain before the usual float ratio —
+
+```c
+d2 = 0x600c00;                                   /* 0x600c01 in the twin */
+if (fcn_004a55c0(p, 1, &d2, 33.0f, 100.0f, &w1) == 0) return 0x400;
+e = (void*) (0x7f4ca0 + 540 * w1);               /* w1 = unsigned short out */
+n = 2 * fcn_0042e410(5) + 6;                     /* 7 in the twin */
+fcn_004c54c0(*(int*) ((char*) p + 4), *(int*) ((char*) e + 4), n, 1);
+fcn_0051af00(buf, tag, *(unsigned short*) e, *(unsigned short*) e);
+```
+
+  Frame: `char buf[0x400]; int d2; unsigned short w1;` → `sub esp,0x408`, with
+  `w1` at the base and `d2` four bytes above it (first-declared = highest still
+  holds).
+* `fcn_004b7800` (352B) dropped: the reference materialises the `fcn_004a5e60`
+  third argument as `mov eax,0x400000; push eax` (and the two zeros in `ecx`),
+  while our CL pushes `0x400000` as an immediate and swaps the `&out1` register.
+  Same constant-in-a-register divergence as 0x4fa530; the rest of the function
+  (two out-parameter guards, the float ratio block, the tail) is exact.
