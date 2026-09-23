@@ -1,0 +1,41 @@
+// FUNCTION: GOLDTL 0x4f5300
+// SIZE: 160
+
+#include <string.h>
+
+/* The caller (0x4f56b0) copies 0x2d bytes onto the stack: 11 dwords + 1 byte. */
+// SIZE 0x2d
+typedef struct tag_req_2d {
+	char raw[0x2d];
+} req_2d;
+
+unsigned char* __cdecl fcn_00508e40(int);
+void __cdecl fcn_0051af00(void*, int, ...);
+
+int __cdecl fcn_004f5300(void* a1, req_2d s, int b)
+{
+	unsigned short w;
+	unsigned char* p;
+	int r = 1;
+	int v = (b <= r);
+
+	p = fcn_00508e40(*(int*) ((char*) &s + 0x12));
+	if (p != 0) {
+		w = *(unsigned short*) p;
+	} else {
+		w = 0xfffe;
+	}
+	switch (*(int*) ((char*) &s + 0x1c) & 0xff) {
+	case 0xe:
+		fcn_0051af00(a1, v + 0x1446, (char*) &s + 4, w);
+		break;
+	case 0x10:
+		fcn_0051af00(a1, v + 0x1450, w, (char*) &s + 4);
+		break;
+	default:
+		memcpy(a1, (void*) 0x69037c, 0x20);
+		r = 0;
+		break;
+	}
+	return r;
+}

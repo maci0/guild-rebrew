@@ -9524,3 +9524,12 @@ size = 244
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T14:00:23+00:00"
+
+["GOLDTL.0x004f5300"]
+size = 160
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T14:03:51+00:00"
+
+["GOLD.0x004f30a0"]
+size = 160

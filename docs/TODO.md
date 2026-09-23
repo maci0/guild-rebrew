@@ -38520,3 +38520,35 @@ stride are GOLDTL-only data, which is a cheap first check before hunting a twin.
 
 GOLDTL 800 → 801, GOLD unchanged at 323; server unchanged at 264.  Lint 1271
 files / 0 warnings.
+
+Round 179: `fcn_004f5300` (0x4f5300, 160B), RELOC 160/160.  Hard function to read
+because its second parameter is a **0x2d-byte struct passed by value**: the sole
+caller 0x4f56b0 does `sub esp,0x30` + `rep movsd` 11 dwords + `movsb`, so the
+callee reads the struct at `[E+8]` (fields at +0x12 and +0x1c) and its third
+parameter at `[E+0x38]`.  Declaring `typedef struct { char raw[0x2d]; } req_2d;`
+(in the 4-byte-rounded argument slot) reproduces every `[esp+N]`.  The struct
+typedef needs a `// SIZE 0x2d` comment or lint warns.
+
+Two source facts that had to be measured, both regressions from the obvious
+spelling:
+
+* `int r = 1; int v = (b <= r);` (C89 initialised declarations, in that order)
+  followed by a `switch` whose cases `break` and set `r = 0` in `default`, with
+  one `return r` at the end.  The obvious `return 1`/`return 0` per branch puts
+  the constant 1 into no register at all (`cmp ecx,1` + two `mov eax,1`, 184
+  bytes); the variable makes MSVC CSE the literal 1 with `r` into `esi`
+  (`cmp ecx,esi`, `mov eax,esi`) and `v` into `edi`, which is the reference's
+  `push esi; mov esi,1; ...; push edi; ...; mov edi,eax`.
+* the two case bodies pass the *last two* arguments in opposite order:
+  case 0xe is `fcn_0051af00(a1, v+0x1446, (char*)&s+4, w)` and case 0x10 is
+  `fcn_0051af00(a1, v+0x1450, w, (char*)&s+4)` — visible only as the swapped
+  `push eax`/`lea ecx` order in the two bodies.
+
+No shared file: GOLD 0x4f30a0 is the same *shape* but a different build of the
+function — its switch discriminator is shifted (`lea ecx,[edx-2]; cmp ecx,6`) and
+its message bases are 0x140a, not 0x1446/0x1450 — and its callee 0x505df0 has no
+GOLD symbol mapping, so an unresolved `call` is compared unrelocated.  Left
+GOLDTL-only.
+
+GOLDTL 801 → 802, GOLD unchanged at 323; server unchanged at 264.  Lint 1272
+files / 0 warnings.
