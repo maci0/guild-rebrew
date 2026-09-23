@@ -38991,3 +38991,45 @@ Round 206 wall (task-4): 0x4f7bf0 best NEAR 215/216, one byte at offset 67 — t
 reference keeps a tautological `B != 0x12 || B <= 0x15` guard that every MSVC6
 service pack and the Processor Pack fold (4.2 keeps it, wrong allocation).  See
 commit `d9dc25fe` for the full decode.
+
+Round 208 wall (task-9): 0x4ae2a0 (GOLDTL, inventory 288, body 0x111 = 273B) — fully
+decoded, best **SIZE_MISMATCH 161/273** (our object 265 bytes against the reference's
+273).  The whole 8-byte shortfall is one `return 0` epilogue: the reference keeps four
+`ret` sites and msvc6 (sp5-pp) folds the last one into the first — our bytes are
+`test esi,esi` / `je 0x3c` where the reference has `test esi,esi` / `jne tail` plus an
+inline `pop edi; xor eax,eax; pop esi; mov esp,ebp; pop ebp; ret`.  `docs/msvc6-c-shapes.md`
+section 74 and `docs/codegen-walls.md` §2 already record this wall ("msvc6 folds
+byte-identical early-return epilogues ... the reference folds none"); roughly 25 spellings
+were compiled here and all still fold — if/else-if/while/for(;;)/do-while(0)/switch,
+`goto` plus a named label, splitting the three-way guard, `void*` vs `char*` vs `int` vs
+`unsigned int` for `e`, `!e`, an extra dead `return 0`, `return r` with `int r = 0`, and
+`#pragma optimize` with `g`/`s`/`t`/`a`/`w` alongside the needed `y`.  Body, for the next
+round:
+
+* `int __cdecl fcn_004ae2a0(int a1, int a2, int a3, char* a4, int a5)`; frame comes from
+  `#pragma optimize("y", off)` (`push ebp; mov ebp,esp; sub esp,0x200; push esi; push edi`).
+* `if (a1 == 1)`: `e = fcn_00508e40(*(int*) ((char*) a2 + a3 * 8 + 4))`, and one
+  short-circuit guard `if (e == 0 || *(char*) ((char*) e + 8) == 0 ||
+  *(char*) ((char*) e + 0x166) != 0xf) return 0;`.
+* else: `i = 0; p = g_7f4ca0 + 0x166;` then
+  `for (;;) { if (fcn_004ae130(i) != 0 && *p == 0xf) break; p += 0x21c; i++;
+  if ((int) p >= (int) (g_7f4ca0 + 0x65566)) return 0; }` — 0x300 entries, signed `jl`
+  back edge (section 173); then `e = (void*) (g_7f4ca0 + i * 540)` and, only when
+  `a1 == 0`, `*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) e + 4);`.
+* tail: `a2 = (int) buf; a3 = 0x200;` (the scratch pointer and its length live in the dead
+  argument homes `[ebp+0xc]`/`[ebp+0x10]`), the 24-byte hand-written block-fill `__asm`
+  prelude, then `fcn_004ae080(a4, buf, &a2, &a3); n = *(unsigned short*) e;
+  fcn_0051af00(a5, buf, n); return 1;` with a single `add esp,0x1c` for all four pushes of
+  the first call plus the three of the second (the `xor eax,eax; mov ax,[esi]` pair is the
+  varargs promotion of the `unsigned short` load).
+
+Load-bearing levers: the callee `fcn_004ae130` body must sit in the same TU — it touches
+only eax/ecx, which is what lets msvc6 keep the loop counter in edx across the call; with
+the callee out of view the loop recolours and the object comes out 267 bytes.  `g_7f4ca0`
+is already owned for both targets by `src/GOLDTL.fcn_004cef70.c`, and the scan start and
+bound must be spelled `g_7f4ca0 + 0x166` / `g_7f4ca0 + 0x65566` so each stays a single
+immediate fixup (section 184).  The GOLD twin is **0x4ae160** (delta -0x140); it differs
+only in those three data immediates (0x770ce6 / 0x7d60e6 / 0x770b80 against GOLDTL's
+0x7f4e06 / 0x85a206 / 0x7f4ca0) and in relocation-slot call targets (0x517700, 0x4adf40,
+0x505df0, 0x4adff0), so a shared file needs one symbol pair for the array.  The working
+265-byte source is parked in `.scratch/t9_fcn_004ae2a0.c` (not committed).
