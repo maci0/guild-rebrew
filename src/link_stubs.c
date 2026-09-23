@@ -142,10 +142,8 @@ char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";
 /* Special forwarding stubs */
 extern int __stdcall ServerMainThread(void*);
 
-int __stdcall thread_proc(void* param)
-{
-	return ServerMainThread(param);
-}
+/* removed round 1386: unreferenced in the tree, and its body was emitted at
+   0x10023850 -- past the reference .text end.  Re-add only with a caller. */
 
 /* The compiler emits an undefined __fltused reference from any TU that uses
  * floating point.  In the original binary that reference pulled LIBCMT's

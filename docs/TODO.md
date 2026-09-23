@@ -36088,3 +36088,28 @@ Also measured and reverted: `/Gy` on the stub TU is **inert** here — the flag
 does reach the compiler (the object gains six extra `.text` COMDATs) but the
 linker keeps every stub, so `.text` VirtualSize did not move.  Do not re-add it
 without a reason to think COMDAT discard applies.
+
+### Round 1386 — second `.text` reduction: the `thread_proc` stub
+
+`thread_proc` (which only forwarded to `ServerMainThread`) is referenced nowhere
+in the tree, and its body was emitted at 0x10023850.  Removed:
+
+```
+.text VirtualSize  0x22ae8 -> 0x22ad8   (reference 0x22846; -32 since round 1385)
+map tail           last symbol 0x100238b0 -> 0x100238a0, 6 symbols past the end
+residue            11735 -> 11735  (unchanged)
+link errors        none
+```
+
+A reference scan over `link_stubs.c`'s definitions (`grep -rl` over src/, db/,
+layout/, CMakeLists.txt) leaves only `thread_proc` unreferenced; the remaining
+tail symbols have real callers — `_crt_locked_call4a` by `vfs2.c` (the earlier
+scan missed it because the name carries one leading underscore, not two),
+`_RecvGameSavegame` by `ServerMainThread.c`, `_fcn_1001af30` / `_fcn_10020ff8`
+by `crt_heap.c`, `_crt_toupper` by `vfs_OpenStream.c`.  Those stay until the
+callers resolve to the real library bodies at their reference VAs
+(0x1001af30, 0x10020ff8, 0x1001add6, 0x1001a931).
+
+Remaining overshoot after both removals: 0x292 (658) bytes.  The tail is now
+`_DllMain@12` (def_dllmain.obj_s0.obj) plus five referenced stubs, so the rest
+of the slack is per-object alignment in the game-object set, not stubs.
