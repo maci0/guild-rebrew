@@ -550,8 +550,14 @@ generator-insensitive.  `cm_ExSetAttribute` 0x1000e8d0 has three such sites
 *after* its end and stays byte-identical under pp — the earlier inventory
 attribution had folded them into it.
 
-So `msvc-6.0-sp5-pp` is a legal **per-file** toolchain for the server (the
-build already pins three near-miss files to it in `CMakeLists.txt`) but not a
-legal target profile: setting `[targets."server.dll"].compiler.profile` to it
-demotes every FP-comparing function.  That is exactly what
-`rebrew toolchain detect` + `scripts/gate.sh` refuse.
+Conclusion (round 1379f): the server build is **single-toolchain** — one plain
+VC6 profile for every TU.  The three `msvc-6.0-sp5-pp` pins that used to sit in
+`CMakeLists.txt` are gone.  They were bought with partial-match scores on
+functions nobody has matched yet (171/346 vs 162/346, 834 vs 828, 824 vs 820),
+i.e. a wrong-compiler coincidence, and they contradict the binary's own
+fingerprint.  Removing them costs nothing measurable: with all three objects
+force-rebuilt under sp6, `rebrew verify --full` is 281 passed / 264
+byte-matched, gate residue 11735, raw-link `.data` 22749 and imports 100 —
+identical to the pinned build.  `scripts/gate.sh` now fails if a pin of the
+other generator family appears, and `rebrew toolchain detect` refuses the pack
+profile for the server target.

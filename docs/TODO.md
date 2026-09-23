@@ -35861,3 +35861,31 @@ has three such sites past its end and stays byte-identical under pp.  So pp is
 a per-file toolchain for the server (three CMake pins for near-miss gains) but
 not a target profile - which is what the new gate check refuses.  Recorded in
 docs/general-knowledge.md; no source change.
+
+### Round 1379f — converge the server on ONE toolchain
+
+Removed the three `msvc-6.0-sp5-pp` per-file pins from `CMakeLists.txt`.  They
+were adopted for partial-match scores on unmatched functions (171/346 vs
+162/346, 834 vs 828, 824 vs 820), which contradicts the server's own
+fingerprint (zero Processor-Pack x87 compares anywhere in its .text, ten plain
+ones in game code) and makes the build two-toolchain for no deliverable gain.
+
+Measured with the three objects force-rebuilt under the single sp6 profile:
+`rebrew verify --full` 281 passed / 264 byte-matched, gate residue 11735,
+raw-link .data 22749, imports 100 — all IDENTICAL to the pinned build, so the
+pins bought nothing the metrics can see (the historical "residue 8,652 ->
+8,641" from the round that added the first pin is not reproducible at today's
+residue level; recorded at the removal site).  The `-pp` object is still 4
+bytes longer for `gm_FindNextFilteredEntity` (346 vs 342, reference 346) and it
+still scores higher on `match_count`; that is a wrong-compiler coincidence to
+fix in the C, not a reason to keep a second toolchain.
+
+Also measured for the record: sp5 and sp6 produce byte-identical output for all
+10 sampled matched server functions (same STATUS and obj_size), so the choice
+between plain service packs is free; sp6 stays the pinned profile.
+
+Gate: new `== per-file toolchain pins` check fails when a source file is pinned
+to a generator family the target's binary does not use, and the toolchain
+alignment check now reports `code generator=plain aligned=True` for the server.
+Pre-existing red items are unchanged (residue 11735 > 8628 baseline, raw-link
+.data 22749 > 21481, wine load err=193, 1 GOLDTL D3DX8 lib-match finding).

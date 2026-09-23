@@ -310,28 +310,22 @@ if(REBREW_BUILD_SERVER)
 
   target_sources(server_dll PRIVATE "${PROJECT_SOURCE_DIR}/src/server.def")
 
-  # Per-file compiler pin.  msvc-6.0-sp5-pp reproduces gm_FindNextFilteredEntity
-  # (0x10016f80) at the reference's exact object size where sp6 runs four bytes
-  # short (171/346 at obj 346, against 162/346 at obj 342), and its three
-  # file-mates stay RELOC-perfect under it, so the whole translation unit is
-  # safe to switch.  Measured at the link: .text residue 8,652 -> 8,641.
-  #
-  # The flag is consumed by rebrew-cmake-cl and stripped before the real
-  # command line is built (rebrew commit 821d5bb).  It must be added WITHOUT
-  # disturbing the /O2 /Gd this build appends per file: round 224 pinned the
-  # toolchain via a COMPILE_FLAGS value that replaced them, compiled the file
-  # unoptimised and cost 39% residue.  See docs/msvc6-c-shapes.md section 142.
-  set_source_files_properties(
-    "${PROJECT_SOURCE_DIR}/src/DieGildeAddOn/game/spiel_dumpD.c"
-    PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
-
-  # Second sp5-pp pin, same rule (section 142): ahm_ExAllocAlchemist scores
-  # 834/1002 under sp5-pp against 828/1002 under sp6 at an identical object
-  # size, and the file holds exactly one function, so there are no file-mates
-  # to regress.
-  set_source_files_properties(
-    "${PROJECT_SOURCE_DIR}/src/DieGildeAddOn/game/alchemistry_logic_c/ahm_ExAllocAlchemist.c"
-    PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
+  # NO per-file toolchain pins (round 1379f).  The server's own bytes say it was
+  # built by ONE plain VC6 code generator: zero Processor-Pack x87 compares
+  # (`fnstsw ax; test ah,0x44/0x05`) anywhere in its .text, ten plain ones
+  # (`test ah,0x01`) in game code, and every matched function that carries a
+  # comparison reproduces under sp5/sp6 and BREAKS under msvc-6.0-sp5-pp
+  # (docs/general-knowledge.md rounds 1379/1379e).  Three files used to be pinned
+  # to sp5-pp because that scored a few more matching bytes on functions nobody
+  # has matched yet (gm_FindNextFilteredEntity 171/346 vs 162/346,
+  # ahm_ExAllocAlchemist 834 vs 828, ls_LoadBuildingEntityState 824 vs 820) - a
+  # wrong-compiler coincidence, not the original build.  scripts/gate.sh fails if
+  # a pin of the other generator family comes back.  Measured with all three
+  # objects force-rebuilt under sp6: verify 281 passed / 264 byte-matched, gate
+  # residue 11735, raw-link .data 22749 and imports 100 are IDENTICAL to the
+  # pinned build, so the pins bought nothing the deliverable can see (the
+  # historical "residue 8,652 -> 8,641" belongs to the round that added the first
+  # pin and is not reproducible at today's residue level).
 
   # Round 941: /Ow on gv_ExAllocGraveyardWorker, measured 8,633 -> 8,628 (-5).
   # The other six carriers that lack /Ow were swept as a group and the sweep
@@ -342,13 +336,6 @@ if(REBREW_BUILD_SERVER)
   set_source_files_properties(
     "${PROJECT_SOURCE_DIR}/src/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c"
     PROPERTIES COMPILE_OPTIONS "/Ow")
-
-  # Third sp5-pp pin, same rule (section 142): ls_LoadBuildingEntityState
-  # scores 824/1463 under sp5-pp against 820/1463 under sp6 at an identical
-  # object size of 1460, and the file holds exactly one function.
-  set_source_files_properties(
-    "${PROJECT_SOURCE_DIR}/src/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c"
-    PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
 
   if(MSVC)
     foreach(_zsrc IN LISTS ZLIB_SOURCES)

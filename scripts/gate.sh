@@ -399,5 +399,36 @@ print("%s|%s|%s" % (d.get("codegen") or "-", d.get("aligned"), (d.get("explanati
     fi
 done
 
+# Single-toolchain convergence: no source file may be pinned to a compiler of a
+# DIFFERENT code-generator family than the target it is built into.  The server
+# is a plain-VC6 binary, so an msvc-6.0-sp5-pp pin there would be a
+# wrong-compiler coincidence, not the original build (round 1379f removed
+# three such pins).  Pins of the same family (e.g. sp5 on an sp6 target) are
+# fine: their output is byte-identical here.
+echo "== per-file toolchain pins"
+pins=$(grep -oE '/REBREW_TOOLCHAIN:[A-Za-z0-9._-]+' CMakeLists.txt | sort -u || true)
+if [ -z "$pins" ]; then
+    echo "no per-file toolchain pins"
+else
+    srv_codegen=$(rebrew toolchain detect original/Server/server.dll --target server.dll --json 2>/dev/null |
+        python3 -c 'import json,sys
+try: print(json.load(sys.stdin).get("codegen") or "")
+except Exception: print("")')
+    while read -r pin; do
+        [ -z "$pin" ] && continue
+        prof="${pin#/REBREW_TOOLCHAIN:}"
+        case "$prof" in
+            *-pp) pin_family="processor-pack" ;;
+            *)    pin_family="plain" ;;
+        esac
+        if [ "$srv_codegen" = "plain" ] && [ "$pin_family" = "processor-pack" ]; then
+            echo "REGRESSION: $prof pin on the server target, whose code generator is plain"
+            rc=1
+        else
+            echo "$prof pin: family=$pin_family, server codegen=$srv_codegen -- ok"
+        fi
+    done <<< "$pins"
+fi
+
 [ "$rc" -eq 0 ] && echo "GATE: pass" || echo "GATE: FAIL"
 exit "$rc"
