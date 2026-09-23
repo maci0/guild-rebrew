@@ -37751,3 +37751,47 @@ callee-saved register (`edi`), and it keeps the byte in `bl`.  Same class as
 * `fcn_004f74e0` (0x4f74e0, 153B): `fcn_005463a0(1, 0, 0x2c)` then
   `while (p) { if (p->[0xac] == a1->[4]) return 1; p = fcn_005462a0(); }`,
   then the `v == 3` / `v == 1 && t == 6` pair from the 0x4f73e0 family.
+
+## Round 141 — 0x5c1090 / 0x59d9b0 pattern: layout solved, schedule not
+
+Spent this round on the "zero a 0x50 struct, fill four fields, log, call" shape that
+0x5c1090 and 0x59d9b0 share.  What the reference does (0x5c1090, 122B):
+
+```c
+char buf[0x40];
+S s;                       /* S = 0x50, fields at +0,+4,+8,+0xc,+0x10 */
+
+void fcn_005c1090(void* a1)
+{
+	if (a1 == 0) return;
+	memset(&s, 0, sizeof(s));       /* mov ecx,0x14; xor eax,eax; lea edi,[s]; rep stosd */
+	s.f4 = 0x400;
+	s.f10 = 6;
+	s.f8 = *(int*) 0x666018;
+	s.fc = *(int*) 0x66601c;
+	fcn_0051af00(buf, 0x190d);
+	fcn_005cd440(&s, buf, 0, fcn_005c0d90);
+	fcn_00532ef0();                 /* NO arguments */
+}
+```
+
+Two findings worth keeping:
+
+* **The last call takes no arguments.**  `fcn_00532ef0` (0x532ef0) reads a global,
+  never `[esp+4]`; declaring it `void f(...)` and calling `f()` is what makes MSVC
+  emit `jmp fcn_00532ef0` after the frame restore.  Called as `f(a1)` the compiler
+  keeps `a1` in a callee-saved register and emits `push reg / call / add esp,4 / ret`
+  — 34 bytes' worth of difference, and it also adds a `push esi` to the prologue.
+  A zero-argument call in tail position is the reachable tail-call shape.
+* The frame then reproduces **exactly** (sub esp,0x90; the 0x14-dword `rep stosd`
+  at `[esp+4]` after `push edi`; `buf` at `[esp+0x54]` after the push); the struct
+  sits at the frame base, `char buf[0x40]` above it, and `memset(&s,0,sizeof(s))`
+  (not a struct initializer — `S s = {…}` zeroes only the pad, `mov ecx,0xf`).
+
+What still differs is the instruction **schedule** inside the block: the reference
+loads both globals, computes `&buf`, pushes both arguments, then emits the four
+field stores (`f4`, `f10`, then the two register stores) before the call.  Every
+source order tried — `f4,f10,f8,fc`, `f8,fc,f4,f10`, explicit `int a,b` temporaries,
+`/Os`, `/Ot` — puts the stores on the wrong side of the pushes (84–90 of 122 bytes).
+Candidate deleted, not parked.  Next attempt should probe the scheduler with the
+frame already fixed rather than re-deriving the layout.
