@@ -8783,3 +8783,20 @@ size = 69
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T10:52:15+00:00"
+
+["GOLDTL.0x0047abd0"]
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T10:54:40+00:00"
+
+["GOLDTL.0x005986f0"]
+size = 79
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T10:54:41+00:00"
+
+["GOLDTL.0x0053a3a0"]
+size = 86
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T10:54:42+00:00"

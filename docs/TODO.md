@@ -37299,3 +37299,27 @@ call where the reference reloads it from the stack (8/85).
 
 GOLDTL **692 → 696** byte-matched (230 EXACT, 466 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1165 files / 0 warnings.
+
+### Round 1426 — straight-line prospecting, fourth pass: GOLDTL +3 (699)
+
+| VA | shape |
+|----|-------|
+| 0x47abd0 | 0x38-byte record: alloc, two sub-allocations sized `a1*4` and `a2*12`, three tag strings |
+| 0x5986f0 | lock/body/unlock: `f(0,1)`, clear 3 ints, `g(a2, v, a1)`, `f(saved,1)` |
+| 0x53a3a0 | `f(0x20, a1*0x2b + 0xa, 0xbf, a2, a3)`, set a table slot, `fcn_00469110(r, 0x12c)` |
+
+**Rule (0x5986f0):** when the reference frees a callee-saved register at the
+top (`push esi` then `mov esi,[global]`) and uses that global again after
+several calls, the source must **read the global into a local before the first
+call** — writing the global at the use site instead leaves the register
+unused, drops the `push esi`, and shifts the whole frame (25/79 -> 79/79).
+Same for the local array: `int v[3]` gave `sub esp,0xc`, `int v[4]` gives the
+reference's `sub esp,0x10`.
+
+One near-miss deleted: `fcn_0040e800` (0x40e800) — the reference zeroes three
+slots with three `mov dword [esp+N],0` immediates where this compiler emits
+`xor eax,eax` once and stores the register; no statement order tried (including
+the exact interleave `v[0],v[1],v[3],v[4],v[2],v[5]`) changes it.
+
+GOLDTL **696 → 699** byte-matched (230 EXACT, 469 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1168 files / 0 warnings.
