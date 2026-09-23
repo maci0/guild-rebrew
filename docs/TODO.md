@@ -38273,3 +38273,11 @@ that `esi` as the first argument of the leading `fcn_004011f0(a1, &a1)` call, wh
 our CL passes it in `ecx` with no save.  A `int v = a1;` copy did not move it (the
 front end folds the copy), and both functions otherwise match.  Reverted the probe;
 they need the same callee-saved-register allocation the reference build picked.
+
+Round 162: `fcn_005a7190` (0x5a7190, 103B) is the no-guard sibling of the 0x5c1090
+shape — `sub esp,0x90`, memset of a 0x50 struct at the frame base, a 0x40 buffer
+above it, `f4=0x400 / f10=6 / f8=g_666018 / fc=g_66601c`, `f1(buf,0x18ec)`,
+`f2(&s,buf,0,fp)`, zero-arg tail `jmp fcn_00532ef0`.  Prologue and frame match
+byte for byte; the stores split differently around the two pushes (66/107 with
+`f4,f10,f8,fc`, 71/107 with `f8,fc,f4,f10`).  Same store-scheduling wall as
+0x5c1090 — deleted.
