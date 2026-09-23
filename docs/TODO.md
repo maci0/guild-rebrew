@@ -39605,3 +39605,24 @@ For the next attempt (all measured, no re-derivation needed): GOLD twin is
 `81 ec 00 02 00 00 53 8b 9c 24 0c 02 00 00 56 83 fb 02`; the one per-target
 address is GOLDTL `0x6a80a4` / GOLD `0x629054`, which needs a
 `// GLOBAL:` pair in the source (no file owns it yet).
+
+## Verified state at round 254 (rebrew verify, all three targets)
+
+| target | rows | byte-matched | breakdown |
+|--------|------|--------------|-----------|
+| server.dll | 283 | **264** | 31 EXACT + 233 RELOC (+17 PROVEN, not byte-matched) |
+| Europa1400Gold_TL.exe (GOLDTL) | 881 | **829** | 230 EXACT + 599 RELOC |
+| Europa1400Gold.exe (GOLD) | 454 | **350** | 97 EXACT + 253 RELOC |
+
+Remaining non-matching in GOLDTL: 45 SIZE_MISMATCH, 5 NEAR_MATCHING, 2 STUB;
+GOLD: 69 SIZE_MISMATCH, 22 NEAR_MATCHING, 10 STUB, 3 COMPILE_ERROR (the last are
+the co-running session's `src/GOLD.fcn_*` edits, not this session's).  `rebrew
+lint` is 0 warnings / 0 errors over 1280+ files and the tree is clean apart from
+those five co-session files and `AGENTS.md`.
+
+No target is byte-identical end to end, so the objective is **not** met.  The
+remaining residue is dominated by the optimizer-choice wall classes listed
+above (folded epilogue, conservative/shared callee-saved saves, slot inversion,
+loop-bound strength reduction, constant materialisation) plus unwritten
+functions; the delegation loop in the Handover section is the fastest known way
+to keep converting the fresh ones.
