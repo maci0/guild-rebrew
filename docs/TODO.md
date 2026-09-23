@@ -38265,3 +38265,11 @@ the whole prologue differs because our CL assigns **a2→edi / a1→esi** while 
 reference has **a2→esi / a1→edi** (both load `*(int*)a2` first).  Same
 allocator-swap class as 0x526070/0x5b23e0/0x4ea4b0; candidate deleted, the decoded C
 stays in this file for a future pass.
+
+Round 161: the two 60-byte NEAR_MATCHING files `GOLDTL.fcn_004013b0.c` /
+`fcn_004013f0.c` (`_fcn_004013b0`, `_fcn_004013f0`) are both 58-byte objects against
+a 60-byte target: the reference opens with `push esi; mov esi,[esp+8]` and passes
+that `esi` as the first argument of the leading `fcn_004011f0(a1, &a1)` call, while
+our CL passes it in `ecx` with no save.  A `int v = a1;` copy did not move it (the
+front end folds the copy), and both functions otherwise match.  Reverted the probe;
+they need the same callee-saved-register allocation the reference build picked.
