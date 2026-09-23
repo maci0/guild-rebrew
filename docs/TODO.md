@@ -39558,3 +39558,13 @@ are all live from the prologue**, i.e. straight-line functions or ones where the
 first early return comes after every saved register's first use - the committed
 wins (0x4baf60, 0x4b8550, 0x4b6f00, 0x4b6dc0, 0x4b74b0's neighbour 0x4b6fe0)
 are all of that kind.
+
+Round 253 (task-34) lever refinement: **every** per-target address needs a symbol,
+not just pushed message ids.  A 16-bit global load written as the literal
+`*(unsigned short*) 0x774970` compiled fine for GOLDTL but left the GOLD twin at
+250/253 — the address is an immediate the tool does not mask.  `extern char
+g_774970[]; *(unsigned short*) g_774970` fixes it, because bare externs resolve
+per target from the owner files' `// GLOBAL:` markers (here g_774a80, g_6b5c60
+are reused bare).  Also: map the GOLD twin by scanning the GOLD image for the
+prologue bytes, not by a VA delta — in the 0x4fa1xx-0x4fa4xx run and again at
+0x5b2900 the GOLD ordering differs from the GOLDTL one.
