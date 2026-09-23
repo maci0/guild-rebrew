@@ -37323,3 +37323,34 @@ the exact interleave `v[0],v[1],v[3],v[4],v[2],v[5]`) changes it.
 
 GOLDTL **696 → 699** byte-matched (230 EXACT, 469 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1168 files / 0 warnings.
+
+### Round 1427 — branched prospecting: GOLDTL +3 (702)
+
+`straight_line.py` grew a second argument: the maximum number of **forward**
+conditional branches (a backward one is a loop and is rejected).  With
+`straight_line.py 160 2` the pool jumps from 11 to **166** candidates — 1–2
+branches is a simple if/else, still far cheaper than a loop shape.
+
+| VA | shape |
+|----|-------|
+| 0x44db40 | `f(a1, &a1)`; two byte stores into a 0xe0-stride record at +0xc4/+0xc7 |
+| 0x450a00 | reentrancy guard: `g_6b86d4++`, call if `g_6b8300`, `g_6b86d4--` |
+| 0x41b7f0 | `HRESULT`-returning vtable call, `return hr == 0;` |
+
+**Rules:**
+
+* a vtable method whose caller does **not** clean the pushed arguments is
+  `__stdcall` (0x41b7f0: as `__cdecl` the candidate emits `add esp,8` and comes
+  out 1 byte short of the reference);
+* a `char`-returning function that returns a **comparison** must be written
+  `return hr == 0;`, not `return (char) (hr == 0);` — the cast makes msvc emit
+  `sete al` where the reference has `xor ecx,ecx / sete cl / mov al,cl`;
+* `jl` after a call is a *signed* `if (r >= 0)` (0x4f5c40 — that one still
+  differs by the lea-chain register and was deleted).
+
+Two near-misses deleted: `fcn_005b1e20` (keeps `a1` in `edx` across a call
+where every spelling here reloads it), `fcn_004f5c40` (35/39, eax vs ecx in the
+`lea` chain), `fcn_00424790` (early-return register layout).
+
+GOLDTL **699 → 702** byte-matched (230 EXACT, 472 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1171 files / 0 warnings.

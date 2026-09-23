@@ -8,7 +8,11 @@ claimed by a file named after a DIFFERENT address, so the tracked set here is
 built from every `// FUNCTION: GOLDTL 0x...` marker in the tree, not from the
 file names.
 
-Usage: python3 scripts/straight_line.py [max-size]
+Usage: python3 scripts/straight_line.py [max-size] [max-conditional-branches]
+
+The optional second argument widens the net to functions with up to that many
+*forward* conditional branches (a backward one is a loop and is rejected):
+1-2 branches is a simple if/else, still much cheaper than a loop shape.
 """
 from __future__ import annotations
 
@@ -26,6 +30,7 @@ REV = 'src'
 
 def main() -> int:
     maxsize = int(sys.argv[1]) if len(sys.argv) > 1 else 180
+    maxbranches = int(sys.argv[2]) if len(sys.argv) > 2 else 0
     pe = pefile.PE(f'original/{TARGET}', fast_load=True)
     base = pe.OPTIONAL_HEADER.ImageBase
     data = open(f'original/{TARGET}', 'rb').read()
@@ -66,6 +71,9 @@ def main() -> int:
             op = b[i]
             if 0x70 <= op <= 0x7f:
                 cond += 1
+                if i + 1 < len(b) and b[i + 1] >= 0x80:   # rel8 < 0 -> backward -> loop
+                    ok = False
+                    break
                 i += 2
             elif op == 0x0f and i + 1 < len(b) and 0x80 <= b[i + 1] <= 0x8f:
                 cond += 1
@@ -78,12 +86,12 @@ def main() -> int:
                 break
             else:
                 i += 1
-        if ok and cond == 0 and 1 <= calls <= 4:
+        if ok and cond <= maxbranches and 1 <= calls <= 4:
             out.append((size, hex(va), calls))
     out.sort()
     for row in out:
         print(row)
-    print(f'{len(out)} candidates (max size {maxsize})')
+    print(f'{len(out)} candidates (max size {maxsize}, max branches {maxbranches})')
     return 0
 
 
