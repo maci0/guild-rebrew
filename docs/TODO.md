@@ -36548,3 +36548,28 @@ Parked:
 
 GOLDTL: 630 byte-matched (251 exact, 379 reloc), failed 52, lint 1112/1112 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1403 — GOLDTL 630 -> 633 (tail-call wrappers + stream restart)
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x4d85c0 | guard `a1[1] != 0`, `a1[0] != -1`, lookup, then tail-call `fcn_00406120(*(int*)(rec+0x184))` | RELOC 47 |
+| 0x515f30 | `if (fcn_0064f170(a1,0x6a1f7c,4) != 0) return;` + null check, the tail-call `fcn_00418f90(*(int*)(a1+0x210))` | RELOC 47 |
+| 0x5803f0 | `fcn_004727a0(*(int*)(*(int*)0x665f08+0x24),0); fcn_00519190(0x6811b0); fcn_00471af0(*(int*)(*(int*)0x665f08+0x24),0);` | RELOC 47 |
+
+The two guard-then-tail-call wrappers land from the plain early-`return;` shape:
+the compiler turns the final call of a `void` function into a `jmp`, and the
+reference's `pop esi` before the `jmp` is what proves the frame is torn down
+early.
+
+Parked:
+
+- `0x4d36b0` (47B): guard-then-append.  `char` return gives obj 54, `int` return
+  57; the reference's `mov al,1` needs the return value's upper bytes already
+  settled, which points at a different declaration than either.
+- `0x423de0` (48B): has a **second exit returning -1** (`or eax,0xffffffff`)
+  beyond the dumped tail; `result = 0` + early `return -1` gives 45 bytes, three
+  short of the reference's shared `pop esi`/`ret` tails.
+
+GOLDTL: 633 byte-matched (251 exact, 382 reloc), failed 52, lint 1115/1115 zero
+warnings.  SERVER/GOLD untouched.
