@@ -36455,3 +36455,29 @@ Parked with measured reasons:
 
 GOLDTL: 624 byte-matched (251 exact, 373 reloc), failed 52, lint 1106/1106 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1399 — GOLDTL 624 -> 625 (NaN-safe `<` guard)
+
+Re-probed the round-1398 parked `0x4514d0` with the recorded hint and landed it:
+
+```c
+value = fcn_00451380(a1, a2);
+if (value < *(float*) 0x6628f8) {
+    value = value + *(float*) 0x6628c8;
+}
+return value;
+```
+
+RELOC 38.  The reference's `fcom / fnstsw ax / test ah,5 / jp` is the
+**less-than** NaN-safe shape: `jp` on `test ah,5` fires when `C0|C2` has even
+parity, so the add runs for `st(0) < mem` **or** unordered.  `!=` and `<=` both
+give `test ah,0x41 / jnp` at the same size.  Recorded as a shapes section.
+
+`0x459cd0` parked again: reference zeroes `eax` before the null test and reads
+the flag byte into `cl`; nested positive guards, early-return guards, a `char`
+local and a `result` local all allocate `al` for the byte and sink the `xor`
+(STUB at 39 bytes both ways).  It is the allocator choosing the register for a
+constant return, not a C shape — leave it.
+
+GOLDTL: 625 byte-matched (251 exact, 374 reloc), failed 52, lint 1107/1107 zero
+warnings.  SERVER/GOLD untouched.

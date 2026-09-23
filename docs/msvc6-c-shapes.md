@@ -7778,3 +7778,22 @@ object size (the `72 e6` / `7c e6` opcode pair is the whole difference).  The
 same rule applies wherever the target shows a signed conditional on a loop
 bound that the source naturally spells as a pointer: cast the comparison, not
 the loop variable.
+
+## NaN-safe `fcom` vs `fcomp`: `test ah,5 / jp` is a `<`, not a `<=`
+
+Measured on GOLDTL `fcn_004514d0` (0x4514d0, 38B):
+
+```asm
+fcom   dword ptr [0x6628f8]   ; st(0) vs the constant
+fnstsw ax
+test   ah, 5                  ; C0 | C2
+jp     <ret>                  ; taken when st(0) >= mem, or unordered-with-C2-clear
+fadd   dword ptr [0x6628c8]
+ret
+```
+
+Decoding the taken path (`test ah,5` sets PF from `C0|C2`; `jp` takes it when
+their parity is even): the add runs when `st(0) < mem` **or** the comparison is
+unordered — i.e. the C is `if (value < c) value += k;`.  Both `!=` and `<=`
+produce `test ah,0x41 / jnp` instead (same size, NEAR_MATCHING).  Write the
+**less-than** direction, not the complement.
