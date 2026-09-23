@@ -39521,3 +39521,40 @@ strength reduction (0x4ba2e0), constant materialisation into registers before
 split).  Before spending runs on a new VA, skim these notes: several are
 systemic to the whole compiler-image, so the cheap path is to keep harvesting
 fresh families and leave the colour/strength-reduction VAs documented.
+
+Round 247 (task-29): **WALL (near miss x3)** — three `fcn_0051af00` callers the
+task invited me to pick from, all blocked by the same class: **our CL makes
+lazy/shrink-wrapped callee-saved register choices where the reference's code is
+conservative**.  Each is the reference's exact instruction sequence with the
+save/restore of one callee-saved register in a different place; each resisted
+~15-25 source spellings, 12-25 cflag combinations and 6 toolchains
+(sp1/sp4/sp5/sp5-pp/sp6 + plain), all measured with the free `.scratch/fdiff.py`
+path.  Sources deleted, no metadata written.
+
+* `0x5dd050` (112B, the VA I picked from `scripts/callers.py`): our object
+  hoists the single `pop esi` out of the two return blocks (it is the two
+  blocks' common dominator); the reference emits `pop esi; add esp,0x100; ret`
+  in *each*.  One instruction, otherwise byte-identical.  Same for the clone
+  siblings 0x5dd0c0 / 0x5dd130.
+* `0x4b74b0` (272B, same family as the committed 0x4b6fe0 / my 0x4b6dc0 win):
+  reference `push ebx; mov ebx,[esp+0x114]; push esi; push edi; mov eax,[ebx]`
+  and `pop edi` in both early-return blocks; ours defers `push edi` to the hot
+  path and never restores it on the early exits (2 instructions *shorter*).
+  Call shape: `fcn_005c6270(p,0x290)` guard, `fcn_0042e410(2)`, the
+  `(double)n + g_6629c8` / `fcn_0050dac0(*(short*)p)` / `* g_6640e8` chain, then
+  `if (r <= fcn_0050dac0(*(short*) p))` around the message - note
+  `fcn_004c51a0(-1, *(int*) a1, g_773d75, r)` here (the reverse of 0x4b6dc0's
+  argument order).
+* `0x4fa530` (128B, the `0x4f7460`-family dispatch shape): reference saves ebx
+  and keeps the char in `bl` (`mov bl,[edx+0x166]`, `mov bl,6`), ours uses
+  `cl`/`dl` and immediate compares and never claims ebx; ours also folds the
+  second `*(int*) a2 == 1` test once the first has established `== 3`, which the
+  reference keeps.  That fold is the clue for the whole class: the reference's
+  sources reload `*(int*) a2` per test (as the committed `fcn_004f74e0` does)
+  instead of caching it in a local.
+
+Practical rule until this is cracked: **prefer VAs whose callee-saved registers
+are all live from the prologue**, i.e. straight-line functions or ones where the
+first early return comes after every saved register's first use - the committed
+wins (0x4baf60, 0x4b8550, 0x4b6f00, 0x4b6dc0, 0x4b74b0's neighbour 0x4b6fe0)
+are all of that kind.
