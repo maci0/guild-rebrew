@@ -38552,3 +38552,34 @@ GOLDTL-only.
 
 GOLDTL 801 → 802, GOLD unchanged at 323; server unchanged at 264.  Lint 1272
 files / 0 warnings.
+
+Round 180: `fcn_004f51d0` (0x4f51d0, 292B), RELOC 292/292 — the larger sibling of
+round 179's `fcn_004f5300`, called by the same 0x4f56b0 with the same 0x2d-byte
+by-value struct and the same `int r = 1; int v = (b <= r);` prologue.  Body: one
+`fcn_00508e40(*(int*)((char*)&s+0x12))` lookup (0xfffe fallback) then
+`switch (*(int*)((char*)&s+0x1c) & 0xff)` over cases 2, 3, 4, 8 with the default
+`memcpy(a1, (void*) 0x69037c, 0x20); r = 0;`:
+
+| case | call |
+|------|------|
+| 2 | `fcn_0051af00(a1, v+0x140a, &s+4, *(int*)((char*)&s+0x1d) + (0x13f9 or 0x13fb))` |
+| 3 | `fcn_0051af00(a1, v+0x140f, &s+4)` |
+| 4 | `fcn_0051af00(a1, v+0x1414, &s+4, w)` |
+| 8 | `fcn_0051af00(a1, v+0x1428, &s+4)` |
+
+The cases-2 conditional must be written **negated** (`if (*(int*)((char*)&s+4) <
+0x75) { 0x13f9 } else { 0x13fb }`): the positive spelling puts the then-branch on
+the fall-through and emits `jl`, the reference wants `jge` to the 0x13fb body.
+The jump table has 7 entries (2,3,4, then the default three times for 5,6,7,
+then 8), i.e. the reference's sparse `switch` was filled with the default.
+
+**Correction to round 179:** GOLD 0x4f30a0 is *not* a different build of
+0x4f5300 — it is the twin of **0x4f51d0** (same 7-entry table
+0x4f30ec/0x4f3133/0x4f3151/0x4f3193×3/0x4f3175).  It could not be shared because
+its `fcn_00508e40` counterpart 0x505df0 has no GOLD symbol mapping, so the call
+relocation is not masked and the GOLD compare reads `e800000000` (`rebrew test
+--target Europa1400Gold.exe` reports `Diffs (non-reloc)` from the call site on).
+Reversing GOLD 0x505df0 (or annotating it) unblocks the share.
+
+GOLDTL 802 → 803, GOLD unchanged at 323; server unchanged at 264.  Lint 1273
+files / 0 warnings.
