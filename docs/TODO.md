@@ -37967,3 +37967,29 @@ different parameter type that changes the value's live range.
 Same for `fcn_00405080` (0x405080, 64B): the loop body and the `base + 404*(i-1)`
 return are exact, but the reference puts the base in `edx` and the field value in
 `esi`, ours swaps them (`esi`/`edx`) — no spelling moved it.
+
+## Round 148 — 0x526070: structure exact, buffer register rotates
+
+`fcn_00526070` (0x526070, 161B — note the **four** parameters: `(void* a1, int a2, int a3, int a4)`,
+with `a2`/`a4` going to `fcn_0050b7c0` and `a4` to the log) reached **153/161** with the
+whole structure exact:
+
+```c
+	if (fcn_0050b7c0(a2, a4) < a3 && a3 != 0) {      /* single shared return-1 tail */
+		if (a1 == 0)              fcn_0051af00(buf, 0x75, (unsigned char) a4);
+		else if (*(u16*) a1 == 0x142) fcn_0051af00(buf, 0x76, (unsigned char) a4);
+		else if (*(u16*) a1 == 0x115) fcn_0051af00(buf, 0x77, (unsigned char) a4);
+		else                      fcn_0051af00(buf, 0x75, (unsigned char) a4);
+		fcn_00526120(buf, 4);
+		return 0;
+	}
+	return 1;
+```
+
+The 8 remaining bytes are the `buf` register in the four branches: reference
+`ecx, edx, eax` (0x142 / 0x115 / 0x75), ours `edx, eax, ecx` — the same rotation,
+started one register later.  Swapping the two cases in the source (149/161), a
+`switch` (60/161) and a nested `else` block all move it the wrong way, and the
+`if (a1 == 0)` first form is already the reference's block order.  Candidate
+deleted; this is the same allocator-rotation family as the other blocked
+functions.
