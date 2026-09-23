@@ -3050,6 +3050,9 @@ updated_at = "2026-09-21T05:03:00+00:00"
 
 ["GOLD.0x0042c1c0"]
 size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:22:31+00:00"
 
 ["GOLD.0x0044f7a0"]
 size = 23
@@ -3449,6 +3452,9 @@ size = 42
 
 ["GOLD.0x004ffc90"]
 size = 43
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:54+00:00"
 
 ["GOLD.0x0040b240"]
 size = 40
@@ -3634,6 +3640,9 @@ updated_at = "2026-09-23T09:11:19+00:00"
 
 ["GOLD.0x00401000"]
 size = 52
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:21:32+00:00"
 
 ["GOLD.0x0040dd50"]
 size = 52
@@ -3673,6 +3682,9 @@ updated_at = "2026-09-21T05:50:38+00:00"
 
 ["GOLD.0x00501000"]
 size = 41
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:54+00:00"
 
 ["GOLD.0x005e995b"]
 size = 41
@@ -3813,9 +3825,9 @@ updated_at = "2026-09-21T06:06:58+00:00"
 
 ["GOLD.0x004ec2d0"]
 size = 32
-status = "NEAR_MATCHING"
-updated_by = "test"
-updated_at = "2026-09-21T06:07:00+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:54+00:00"
 
 ["GOLD.0x00495f90"]
 size = 32
@@ -5890,9 +5902,9 @@ updated_by = "verify"
 updated_at = "2026-09-22T19:46:48+00:00"
 
 ["GOLDTL.0x004ee060"]
-status = "EXACT"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T19:46:48+00:00"
+updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x005b1960"]
 status = "RELOC"
@@ -6531,9 +6543,9 @@ updated_at = "2026-09-22T20:43:49+00:00"
 
 ["GOLDTL.0x004c27f0"]
 size = 34
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T20:43:50+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x004bcc50"]
 size = 44
@@ -7179,9 +7191,9 @@ updated_at = "2026-09-22T21:16:30+00:00"
 
 ["GOLDTL.0x00549330"]
 size = 47
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T21:16:31+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x0044d150"]
 size = 53
@@ -7263,9 +7275,9 @@ updated_at = "2026-09-22T21:21:30+00:00"
 
 ["GOLDTL.0x0050f950"]
 size = 48
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T21:24:14+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x00545580"]
 size = 48
@@ -7412,9 +7424,9 @@ updated_at = "2026-09-22T21:35:42+00:00"
 
 ["GOLDTL.0x00426cc0"]
 size = 63
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T21:35:46+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x00420650"]
 size = 49
@@ -7532,9 +7544,9 @@ updated_at = "2026-09-22T21:53:24+00:00"
 
 ["GOLDTL.0x004f4830"]
 size = 43
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T21:55:11+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x004eb220"]
 size = 56
@@ -7550,9 +7562,9 @@ updated_at = "2026-09-22T21:56:55+00:00"
 
 ["GOLDTL.0x004fa5b0"]
 size = 58
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T21:56:56+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x004fffb0"]
 size = 60
@@ -7568,9 +7580,9 @@ updated_at = "2026-09-22T21:58:45+00:00"
 
 ["GOLDTL.0x00502820"]
 size = 43
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T21:58:46+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-23T09:25:22+00:00"
 
 ["GOLDTL.0x00549b50"]
 size = 45
@@ -8214,6 +8226,10 @@ updated_by = "verify"
 updated_at = "2026-09-23T09:13:36+00:00"
 
 ["GOLD.0x004ef3c0"]
+size = 128
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:24:49+00:00"
 
 ["GOLD.0x004ef4f0"]
 status = "EXACT"
@@ -8235,6 +8251,10 @@ updated_at = "2026-09-23T09:14:16+00:00"
 ["GOLD.0x00500140"]
 
 ["GOLD.0x005012b0"]
+size = 48
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:24:52+00:00"
 
 ["GOLD.0x00501ce0"]
 
@@ -8246,3 +8266,57 @@ updated_by = "verify"
 updated_at = "2026-09-23T09:14:47+00:00"
 
 ["GOLD.0x0051db30"]
+
+["GOLD.0x00497620"]
+size = 48
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:22:30+00:00"
+
+["GOLD.0x004284a0"]
+size = 64
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:22:42+00:00"
+
+["GOLD.0x00424370"]
+size = 81
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:24:48+00:00"
+
+["GOLD.0x004fffc0"]
+size = 37
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:24:50+00:00"
+
+["GOLD.0x004c1f90"]
+size = 34
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:24:56+00:00"
+
+["GOLD.0x004f2720"]
+size = 48
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:24:58+00:00"
+
+["GOLD.0x0050c520"]
+size = 48
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:25:01+00:00"
+
+["GOLD.0x005414b0"]
+size = 48
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:25:02+00:00"
+
+["GOLD.0x004f81c0"]
+size = 64
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:25:03+00:00"

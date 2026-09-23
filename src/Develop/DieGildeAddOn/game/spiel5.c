@@ -45,6 +45,8 @@ extern float g_gv_const_57c8;
 extern double g_const_half; 
 extern unsigned char g_current_season;
 
+// FUNCTION: GOLD 0x005012b0
+// SIZE: 48
 // FUNCTION: GOLDTL 0x504100
 // SIZE: 48
 // FUNCTION: SERVER 0x10017210

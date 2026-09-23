@@ -1,3 +1,9 @@
+// GLOBAL: GOLDTL 0x690478
+extern char g_690478[];
+// GLOBAL: GOLD 0x611748
+extern char g_690478[];
+// FUNCTION: GOLD 0x004f81c0
+// SIZE: 64
 // FUNCTION: GOLDTL 0x4fa5b0
 // SIZE: 58
 
@@ -14,5 +20,5 @@ int __cdecl fcn_004fa5b0(int a1, char* a2, int a3)
 	if (*(unsigned char*) (a2 + 2) >= 0xa) {
 		return 1;
 	}
-	return (*(fcn_004fa5b0_fn*) (0x690478 + a1 * 4))(a2, a3);
+	return (*(fcn_004fa5b0_fn*) (g_690478 + a1 * 4))(a2, a3);
 }

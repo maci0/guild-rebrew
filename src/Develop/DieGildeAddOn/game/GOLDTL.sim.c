@@ -7,6 +7,8 @@ void __cdecl plt_TableLookup(unsigned int a, unsigned short* b);
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes[1];
 
+// FUNCTION: GOLD 0x00424370
+// SIZE: 81
 // FUNCTION: GOLDTL 0x420700
 // SIZE: 81
 // sim_PriorityUpdate

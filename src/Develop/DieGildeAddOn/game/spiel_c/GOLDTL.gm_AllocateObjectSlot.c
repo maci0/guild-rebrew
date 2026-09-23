@@ -2,6 +2,8 @@
  * first slot whose active flag is 0; return its address, or NULL once the
  * pool is exhausted (limit 0x5008 slots). */
 
+// FUNCTION: GOLD 0x004fffc0
+// SIZE: 37
 // FUNCTION: GOLDTL 0x502e00
 // SIZE: 37
 

@@ -36836,3 +36836,46 @@ SIZE_MISMATCH — GOLD `0x00449d80` claimed 23 bytes while the body is 25.  The
 import now never claims less than the matched source body
 (`cross_import.import_size`, four new unit tests); rebrew suite 8070 passed,
 4 pre-existing/order-dependent failures.
+
+### Round 1413 — the skipped twins are mostly free: GOLD +16 byte-matched (247)
+
+Round 1412's 99 `skipped-unverified` candidates turned out to be two cheap
+shapes, not real divergences.  Both start from the same observation: the
+structural score was **100** while the overlay verify said "N byte diffs".
+
+**Shape A — the marker was simply missing.**  cross-import tests the stack by
+verifying an `Annotation` it builds itself; when the destination VA has no
+marker at all the row can still be skipped unverified.  Inserting
+`// FUNCTION: GOLD 0x<dst>` + `// SIZE:` (GOLD inventory size) above the GOLDTL
+marker and re-running `rebrew test --target GOLD --va <dst>` matched outright
+for five functions (0x424370, 0x4ef3c0, 0x4fffc0, 0x501000, 0x5012b0).
+
+**Shape B — one hardcoded GOLDTL absolute address.**  Three differing bytes at
+consecutive offsets are a 4-byte little-endian address inside an instruction:
+the target bytes there are the GOLD address, the candidate's are the GOLDTL
+one.  Add the paired marker and use the symbol instead of the literal:
+
+```c
+// GLOBAL: GOLDTL 0x688118
+extern char g_688118[];
+// GLOBAL: GOLD 0x6094b0
+extern char g_688118[];
+```
+
+`p = (char*) 0x688118;` becomes `p = g_688118;` and the reference turns
+relocatable.  Eleven functions closed this way (0x401000, 0x497620, 0x42c1c0,
+0x4284a0, 0x4c1f90, 0x4ec2d0, 0x4f2720, 0x4f81c0, 0x4ffc90, 0x50c520,
+0x5414b0).
+
+`scripts/twin_marker.py` does shape A in bulk (insert marker, test,
+`--no-promote`, print the first diff offsets) so a round only has to do shape
+B by hand.  Five GOLD stubs became duplicates and were deleted (E013): the
+shared file now owns the VA.
+
+GOLD **231 → 247** byte-matched (96 EXACT, 151 RELOC); GOLDTL unchanged at 671
+(8 rows moved EXACT → RELOC because the hardcoded literals became relocatable
+references — byte-matched is unchanged); server unchanged at 264.  Lint 1145
+files / 0 warnings.
+
+**~80 candidates remain** and the recipe is mechanical; the next rounds should
+work down the list from `scripts/twin_marker.py 20`.
