@@ -35912,45 +35912,40 @@ Assessed the clients as a reference for those carriers (docs/general-knowledge.m
 - Closest carrier measured precisely: `gm_CalculateProductionValue` is 2
   structural diffs in 396 bytes (fxch/cmp scheduler order).
 
-### Round 1381 — server `.text` shortfall localized
+### Round 1381 — server `.text` length: two compositions, measured
 
-Two compositions, measured this round and NOT the same thing (this distinction
-was previously implicit):
+Two artifacts, previously conflated, measured this round:
 
 | composition | .text | vs reference 0x22846 |
 |-------------|-------|----------------------|
 | CMake link (`build/server.dll`, pre-postlink) | 0x22226 | **-1568** |
-| split set (`split_poc/rsp*.rsp`, the deliverable path) | 0x22af8 | **+690** |
+| split set (`build/split_poc/`, the deliverable path) | 0x22af8 | **+690** |
 
-`python3 scripts/link_drift.py` gives per-function placement drift: every game
-function up to `gm_GetMsgField` (0x10019cd0) sits at drift +0, and the whole
-CRT/LIBCMT band from `__CRT_INIT` (0x1001b8fb) drifts -12,797 with local
-excursions (`__CRT_INIT` +8332, `DllMain` -6189, `_mlock` -11696).  So the
-shortfall is entirely in the library band, not in the game code.
+`python3 scripts/link_drift.py`: every game function up to `gm_GetMsgField`
+(0x10019cd0) sits at drift +0; the whole CRT/LIBCMT band from `__CRT_INIT`
+(0x1001b8fb) drifts -12,797 (`DllMain` -6189, `_mlock` -11696).  That is the
+*CMake* path behaving as expected — MSVC LINK appends archive members after
+every command-line object, so the real LIBCMT lands at the end.  The
+deliverable does not use that composition: `split_link.sh` composes the
+per-function split objects instead.
 
-`python3 scripts/map_libcmt.py --json` maps the reference's LIBCMT region to
-archive members: **244 reference functions, 228 matched, 36,527 bytes**.  Of
-those 228, seven (947 bytes) have no split object at their mapped VA:
+Covering the CRT region (0x1001b8fb..0x10022846, 28,491 B) with the split
+objects: 208 objects, 28,889 B of `.text` — **+398 bytes of padding slack**,
+with only 91 bytes in 12 small uncovered alignment runs (largest 15 B).  So
+nothing is missing there.  `map_libcmt.py` independently maps 244 reference
+functions in the region to 228 LIBCMT members (36,527 B); the seven whose
+mapped VA has no split object at *that exact VA* (`strcat`, `seh_filter`,
+`local_unwind2`, `ValidateEH3RN`, `EH3_save_context`, `seh_local_unwind_thunk`,
+exsup3 body) all have an object 8-16 B earlier whose `.text` is 14-16 B larger,
+i.e. they are present with padding.
 
-```
-0x1001f8e0 strcat                 224  mbscat.obj
-0x1001e7dc (exsup3 body)           216  exsup3.obj
-0x1001e704 seh_filter              206  exsup.obj
-0x1001e726 local_unwind2           172  exsup.obj
-0x1001e78e ValidateEH3RN            68  exsup.obj
-0x1001e7ba EH3_save_context         34  exsup.obj
-0x1001e899 seh_local_unwind_thunk   27  exsup3.obj
-```
+So the `.text` length gap is **composition padding/slack**, not missing code.
+Next step for byte identity is the residue (11,735 differing bytes), not the
+length.
 
-The split set does have objects at neighbouring VAs (e.g. `1001e7d4_.text.obj`
-for the map's 0x1001e7dc), so the next step is to check whether those bodies
-are present under the offset name or genuinely absent — the map itself
-(`.scratch/libcmt_map_u.json`, 233 entries) contains all seven VAs, so the loss
-is in `split_coff.py`'s member selection, not in the map.
-
-Game-code inventory coverage is complete: of 543 inventory functions, 275 are
-untracked, 255 of them library-marked (54,966 B) and 20 not (1,721 B) — and
-those 20 are rizin switch-case fragments (`case.0x1000ad61.*`, 18 x 32 B) plus
-`fcn.10022ff1`/`fcn.1001e7dc`/`fcn.1002350a`, i.e. a discoverer artifact, not
-missing work.  Inter-function gaps in `.text` total 1,028 B in 96 runs
-(alignment padding).
+Game-code inventory coverage is complete: of 543 inventory functions 275 are
+untracked — 255 library-marked (54,966 B) and 20 not (1,721 B), the latter
+being rizin switch-case fragments (`case.0x1000ad61.*`, 18 x 32 B) plus
+`fcn.10022ff1` / `fcn.1001e7dc` / `fcn.1002350a`, i.e. a discoverer artifact
+rather than missing work.  Inter-function gaps inside `.text` total 1,028 B in
+96 runs (alignment padding).
