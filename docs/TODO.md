@@ -38086,3 +38086,26 @@ this unlocks the pattern rather than a batch.  `fcn_00405540` (0x405540, 94B, th
 `fcn_004355d0`/`fcn_00435630` pair behind a flag) reached 58/108 with the whole
 prologue exact; the branches differ (ours recomputes the `[a1+0x34]->[0x1ec]` chain
 instead of keeping the base in `edx` and re-adding 0xf4), candidate deleted.
+
+## Round 153 — GOLDTL→GOLD twin harvest: +6 GOLD byte-matches (306)
+
+`scripts/twin_marker.py` (the cross-import half, reading `.scratch/ci_gold.json`)
+inserted `// FUNCTION: GOLD 0x…` markers for the twin candidates and tested each
+for GOLD.  Six came back **RELOC-NORMALIZED MATCH** and are now promoted:
+
+| GOLD VA | file | bytes |
+|---------|------|-------|
+| 0x501ce0 | Develop/DieGildeAddOn/game/spiel6.c | 145 |
+| 0x4e6360 | Develop/DieGildeAddOn/game/GOLDTL.aemter.c | 205 |
+| 0x51d400 | Develop/DieGildeAddOn/loadsave/GOLDTL.loadsave2.c | 282 |
+| 0x4efc10 | Develop/DieGildeAddOn/game/friedhof_logic_c/gv_AllocGraveyardField.c | 832 |
+| 0x4226a0 | Develop/Units/m_alloc/GOLDTL.m_alloc.c | 162 |
+| 0x4214a0 | Develop/Units/Error/GOLDTL.Error.c | 284 |
+
+GOLD verify: 306 byte-matched (was 300), exact 96.  Four further candidates are
+one absolute address off (`[71] target=80 got=a0 / [72] 0b/4c / [73] 77/7f` — a
+GOLDTL pointer where GOLD has another); `scripts/twin_fix.py` automates that
+paired-GLOBAL rewrite but its first pick
+(`GOLDTL.cm_GetBuildingStatCount.c`) was classified MANUAL and reverted, so that
+vein needs a look next round.  The marker script stopped after 24 of the ~99
+candidates for reasons not yet investigated.

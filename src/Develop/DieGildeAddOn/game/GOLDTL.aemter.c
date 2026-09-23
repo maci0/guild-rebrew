@@ -17,6 +17,8 @@ extern char g_office_slots[];
 
 unsigned char *__cdecl fcn_00508e40(int id);
 
+// FUNCTION: GOLD 0x004e6360
+// SIZE: 208
 // FUNCTION: GOLDTL 0x4e7f20
 // SIZE: 208
 

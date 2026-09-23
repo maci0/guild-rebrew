@@ -11,6 +11,8 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 extern int g_file_version; /* 0x1002d4ec */
 /* Round-535: ascending REF VA decl order (R521/R531/R532/R534 mid-pocket lever). */
 
+// FUNCTION: GOLD 0x0051d400
+// SIZE: 288
 // FUNCTION: GOLDTL 0x522390
 // SIZE: 288
 // ls_LoadExistingEntities

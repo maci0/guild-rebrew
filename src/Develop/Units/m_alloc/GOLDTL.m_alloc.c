@@ -18,6 +18,8 @@ extern int g_alloc_root_size_max;
 extern int g_alloc_root_field_20;
 extern int g_list_head;
 
+// FUNCTION: GOLD 0x004226a0
+// SIZE: 162
 // FUNCTION: GOLDTL 0x41de50
 // SIZE: 162
 // m_init

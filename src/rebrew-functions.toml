@@ -8305,6 +8305,10 @@ updated_by = "test"
 updated_at = "2026-09-23T09:24:52+00:00"
 
 ["GOLD.0x00501ce0"]
+size = 160
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:02:26+00:00"
 
 ["GOLD.0x00508660"]
 size = 77
@@ -9343,3 +9347,33 @@ status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-23T12:52:58+00:00"
 blocker = "int3 sites are __asm { int 3 } -- the only VC6 spelling that emits a bare 0xCC; the body is otherwise real C and byte-identical"
+
+["GOLD.0x004e6360"]
+size = 208
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:02:27+00:00"
+
+["GOLD.0x0051d400"]
+size = 288
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:02:29+00:00"
+
+["GOLD.0x004efc10"]
+size = 832
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:02:30+00:00"
+
+["GOLD.0x004226a0"]
+size = 162
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:02:31+00:00"
+
+["GOLD.0x004214a0"]
+size = 284
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:02:32+00:00"

@@ -36,6 +36,8 @@ extern double g_const_half;
 extern unsigned char g_current_season;
 char* __cdecl gm_FindEntityByOwner(int); 
 
+// FUNCTION: GOLD 0x00501ce0
+// SIZE: 160
 // FUNCTION: GOLDTL 0x504b30
 // SIZE: 160
 // FUNCTION: SERVER 0x10017910
