@@ -1,5 +1,5 @@
 #!/bin/bash
-# gate.sh — the three checks a change must pass before it is committed.
+# gate.sh — the checks a change must pass before it is committed.
 #
 #   rebrew lint           annotation and corpus consistency
 #   cmake --build         compiles every TU (the POST_BUILD postlink step is
@@ -10,8 +10,12 @@
 #   deliverable link       split_link + postlink actually run, so the residue
 #                         reported each round is measured, not inherited
 #
+#   toolchain alignment   each target's configured compiler profile matches the
+#                         code generator actually in its binary (Processor Pack
+#                         vs plain, read from game-code x87 compares)
+#
 # Usage: scripts/gate.sh
-# Exit status: 0 when all four pass, 1 otherwise.
+# Exit status: 0 when all pass, 1 otherwise.
 
 set -uo pipefail
 cd "$(cd "$(dirname "$0")/.." && pwd)"
@@ -351,6 +355,49 @@ except Exception: print("ERR")' 2>/dev/null)
 else
     echo "d3dx8 lib not vendored -- skipped"
 fi
+
+# Code-generator lock (round 1379): the three binaries share cl 12.00.8804 but
+# not the code generator -- both clients are Processor-Pack builds, the server
+# is a plain one -- and the difference is invisible to a compiler-version check
+# because every VC6 profile carries the same cl version.  Configure the wrong
+# family and every FP-comparing function silently stops matching; this check
+# reads the x87 compare idiom from GAME code (library bands excluded) and
+# refuses the mismatch.  Measured evidence: docs/general-knowledge.md.
+echo "== toolchain alignment (code generator)"
+for spec in "server.dll:original/Server/server.dll" \
+            "Europa1400Gold_TL.exe:original/Europa1400Gold_TL.exe" \
+            "Europa1400Gold.exe:original/Europa1400Gold.exe"; do
+    tgt="${spec%%:*}"; bin="${spec#*:}"
+    if [ ! -f "$bin" ]; then
+        echo "$tgt: binary missing -- skipped"
+        continue
+    fi
+    det=$(rebrew toolchain detect "$bin" --target "$tgt" --json 2>&1)
+    line=$(echo "$det" | python3 -c '
+import json, sys
+try:
+    d = json.load(sys.stdin)
+except Exception:
+    print("ERR"); raise SystemExit
+print("%s|%s|%s" % (d.get("codegen") or "-", d.get("aligned"), (d.get("explanation") or "")[:120]))
+' 2>/dev/null)
+    if [ "$line" = "ERR" ] || [ -z "$line" ]; then
+        echo "REGRESSION: toolchain detect failed for $tgt"
+        echo "$det" | head -20
+        rc=1
+        continue
+    fi
+    codegen="${line%%|*}"; rest="${line#*|}"; aligned="${rest%%|*}"; why="${rest#*|}"
+    echo "$tgt: code generator=$codegen aligned=$aligned"
+    if [ "$codegen" = "mixed" ]; then
+        echo "REGRESSION: $tgt shows BOTH x87 code generators in game code;"
+        echo "  the profile cannot be locked -- see docs/general-knowledge.md"
+        rc=1
+    elif [ "$aligned" != "True" ]; then
+        echo "REGRESSION: $tgt profile does not match its code generator -- $why"
+        rc=1
+    fi
+done
 
 [ "$rc" -eq 0 ] && echo "GATE: pass" || echo "GATE: FAIL"
 exit "$rc"

@@ -14,6 +14,14 @@ default_target = "server.dll"
 shared_dir = "src"
 
 [targets."server.dll"]
+# Code generator lock (round 1379): the server's x87 compares are the PLAIN
+# VC6 idiom (`fnstsw ax; test ah,0x40/0x01`, 10 sites in game code, 0
+# Processor-Pack sites binary-wide).  `rebrew toolchain detect --target
+# server.dll` verifies this and refuses a `-pp` profile; scripts/gate.sh runs
+# it.  Plain SP5 and SP6 output is byte-identical for every function measured,
+# so sp6 is kept as the pinned profile (the discriminator is pack vs plain,
+# not the service pack).
+compiler = { profile = "msvc-6.0-sp6" }
 ghidra_program_path = "/server.dll"
 # Shared BinSync state dir: `functions/*.toml`, `global_vars.toml`,
 # `structs/*.toml`, write-locked 0444.  Configured here so `rebrew sync` and
@@ -48,14 +56,14 @@ MSVCRT = ""
 LIBCMT = "LIBCMT.lib"
 
 [targets."Europa1400Gold_TL.exe"]
-# Same compiler VERSION as the server (cl 12.00.8804), different CODE
-# GENERATOR: both clients carry the Processor Pack's `@comp.id` record
-# (0x00302354 = c2 13.00.9044) in their Rich headers, and their .text emits
-# `test ah,0x44`/`test ah,0x05` (1011 sites in GOLDTL) which no plain VC6
-# generator emits under any flag set. Server.dll has zero of those sites and
-# carries no Rich header; its FP-compare functions reproduce byte-exactly only
-# under the plain generators. Definitive measurements and the 3-way matrix:
-# docs/general-knowledge.md, "one compiler version, two code generators".
+# Code generator lock (round 1379): same compiler VERSION as the server
+# (cl 12.00.8804), different CODE GENERATOR.  Game code only (the D3DX8 band is
+# excluded via external_ranges below): 832 Processor-Pack x87 compares
+# (`fnstsw ax; test ah,0x44/0x05`) against 0 plain ones, and the functions that
+# do carry a compare reproduce byte-exactly only under this profile.
+# `rebrew toolchain detect --target Europa1400Gold_TL.exe` enforces it;
+# scripts/gate.sh runs it.  Measurements: docs/general-knowledge.md,
+# "one compiler version, two code generators".
 compiler = { profile = "msvc-6.0-sp5-pp" }
 # The T&L client statically links d3dx8.lib: 0x5e0000-0x64ffff holds ~907
 # linker-supplied D3DX8 bodies (~273 KB), not game source.  Declared so

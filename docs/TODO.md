@@ -35823,3 +35823,29 @@ in the D3DX8 band).  The swept 14 VAs carry no LIBRARY row, so the 11/3/0
 sweep is game code too.  Also noted: the Rich-header `comp.id` count is
 build-level (game + library objects), so the game-code claim rests on the
 reproduction matrix and the game-code census, not on the Rich header.
+
+### Round 1379d — toolchain locked down
+
+The code-generator difference is now enforced instead of documented:
+
+- Upstream rebrew: `toolchain detect` reads the x87 compare idiom from GAME
+  code only (the project's `external_ranges` library bands are excluded),
+  records `info.codegen` (`processor-pack` | `plain` | `mixed`), prints it, and
+  `profile_matches_detection` refuses a plain profile on a pack binary and the
+  pack profile on a plain binary — a version-exact check cannot see this
+  because every VC6 service pack ships cl 12.00.8804.  Also fixed:
+  `msvc-6.0-sp5-pp` was missing from the msvc family compatibility table, so a
+  correctly configured pack project was reported misaligned.  Observed after
+  the fix: server `plain` aligned, GOLDTL `processor-pack` aligned (832 pack
+  compares vs 0 plain in game code), GOLD `processor-pack` aligned.
+- `rebrew-project.toml`: `[targets."server.dll"]` now pins
+  `compiler = { profile = "msvc-6.0-sp6" }` explicitly (same value as the
+  global default, so no compile changes: server verify stays 281 passed / 264
+  byte-matched, lint 1095/1095); both client comments state the game-code
+  evidence and the lock.
+- `scripts/gate.sh` gains a fifth check: `rebrew toolchain detect` per target,
+  failing on `aligned=False` or on `codegen=mixed` (both generators visible in
+  game code).  Green for all three targets.
+- Upstream commit: "feat(toolchain): detect VC6 code generator from
+  game-code float compares" (rebrew `c29b4f10`), tests
+  `test_toolchain_detect_codegen.py` / `test_toolchain_detect_version.py`.
