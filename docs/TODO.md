@@ -37055,3 +37055,45 @@ can drive it without a real import first.
 
 GOLD **299 → 300** byte-matched (96 EXACT, 204 RELOC); GOLDTL unchanged at 671;
 server unchanged at 264.  Lint 1140 files / 0 warnings.
+
+### Round 1419 — server re-probe (negative) + GOLDTL +3 (674)
+
+**Server: the small deltas are documented walls.**  Took the four smallest
+PROVEN deltas and found every one already carries a "do not re-probe" note in
+its source:
+
+| VA | symbol | delta | note |
+|----|--------|-------|------|
+| 0x10019720 | `gm_CalculateProductionValue` | 5 | `spiel622.c`: the `fxch st(1)` slot and the folded `cmp byte [esi],0x17` are mutually exclusive across all eight 6.0 toolchains |
+| 0x1000aac0 | `cm_ProcessCommandQueue` | 15 | closed by proof (round 963) |
+| 0x1000e140 | `cm_ExProdObjekt` | 17 | `8b15` global-load placement vs eax/ebx spend, not version-sensitive |
+| 0x10008a90 | `vfs_ReadCompressed` | 24 | same allocator class |
+| 0x10015f70 | `gm_ObjectsAvailble` | 28 | "the slot_cursor/slot wall … exhaustive" |
+
+So the server's remaining residue is an allocator/toolchain wall, not
+unexplored source.  Also found that `g_item_def_table` (SERVER 0x101de450)
+resolves to `[0]` on the object level through *every* spelling tried — bare
+`extern`, a defined `char* g_item_def_table = 0;`, annotation at the top of the
+file, annotation inside the SERVER block, with and without a trailing comment.
+`rebrew data --gen-header` emits only externs, so the address must come from
+elsewhere; that is an open tooling question for a round with the server as its
+focus.
+
+**GOLDTL: three new functions, first try each.**
+
+| VA | shape |
+|----|-------|
+| 0x401430 | 4-arg dispatcher: `f(a1,a3); f(a1,a2); return g(a4,a2,a3,a1);` |
+| 0x403270 | allocate 0x244, `memset`, claim a table slot, `*(int*)p = index` |
+| 0x402ff0 | walk `g_14d0020[0..0x300]`, call through a matched element |
+
+**Codegen rule found on 0x402ff0:** the reference's `mov esi,<base>` plus
+`cmp esi,<end>` lets msvc *prove* the first iteration executes and rotate the
+loop to a bottom test; keeping the base in an `extern` symbol hides the value,
+msvc keeps the pre-test, and 20 of 66 bytes differ.  Spelling the loop as
+`do { … } while ((int) p < end);` restores the reference's shape while keeping
+the annotated symbol.
+
+GOLDTL **671 → 674** byte-matched (230 EXACT, 444 RELOC); GOLD unchanged at 300
+(one candidate reverted); server unchanged at 264.  Lint 1143 files / 0
+warnings.
