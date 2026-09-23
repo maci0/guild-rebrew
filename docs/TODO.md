@@ -39235,3 +39235,21 @@ A double temporary compiles like the float one but adds qword forms, so use the
 float.  This is the FP analogue of the two-constant-ternary rule (§182): when the
 memory operand of an x87 op is on the wrong side, split the expression rather
 than reordering it.
+
+Round 237 (task-22): `fcn_004b8550` (GOLDTL 0x4b8550) **RELOC 284/284** + GOLD twin
+0x4b81a0 **RELOC 284/284** (commit `d332e372`), verified by the Lead on both
+targets; lint 0 warnings.  Inventory 288 = 284 body + 4B pad; near-clone of the
+committed neighbour `src/GOLDTL.fcn_004b7d70.c` (extra
+`fcn_005c6270(p, 0x290) != 0 -> return 0x400` early return, `0.0f` instead of
+`33.0f`, arg `8` instead of `5`).
+
+New lever: **unary minus is folded into a distributed form**.  Writing
+`-(2 * m + 4)` makes MSVC6 emit `mov eax,-2; sub eax,ecx; add eax,eax`, not the
+reference's `lea eax,[eax+eax+4]; neg eax`.  Computing the positive value into a
+local and negating only at the call site (`n = 2 * fcn_0042e410(8) + 4; … -n`)
+reproduces the reference.  Rule: negate at the use site, never inside the
+expression.
+
+Also: the Round-211 wall note for 0x4baf60 above is stale — that function is
+RELOC 282/282 as of round 235 (see the closure note).  The wall classes are
+closing one by one; retry a documented wall before treating it as permanent.
