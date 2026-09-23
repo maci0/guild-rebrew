@@ -38332,3 +38332,12 @@ Same round: the killed 200-candidate run had left three `// FUNCTION: GOLD …`
 markers in `GOLDTL.fcn_004e7550.c` / `fcn_004e75a0.c` / `fcn_004fa690.c`.
 `0x4e5a40` (68B) and `0x4e5a90` (87B) both matched and are promoted (GOLD 316 →
 318); `0x4f82a0` differs at offset 78 and its marker was reverted.
+
+Round 164: with the flag solved, `--min-score 94` gives 69 `would-import-shared`
+rows, of which the score-100 ones are mostly `would supersede` duplicates of files
+already in the tree (e.g. 0x411bb0 ↔ GOLD.fcn_00411bb0.c, one of the co-session's
+files) — the marker script reverted all 15 top-score candidates as NEAR_MATCHING.
+The *useful* rows are the NEAR_MATCHING ones with 3-byte runs (`[58] e0/20`,
+`[59] 96/0c`, `[60] 46/4d`), i.e. one absolute address off, which is what
+`scripts/twin_fix.py` automates; this run reported `promoted 0, failed 0`, so its
+own candidate filter needs checking against the restored `ci_gold.json` shape.
