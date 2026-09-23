@@ -37873,3 +37873,27 @@ Explicit parentheses, not a temporary, are what pin it.
 `edx` for the trailing UI call while our CL reuses the dead `esi`, and the
 `strlen` length flag lands in a different register — allocator divergence again,
 no source shape moved it.
+
+## Round 144 — GOLDTL 0x4b7xxx family, second batch (+4 = 791)
+
+| VA | size | guards and constants |
+|----|------|----------------------|
+| 0x4b75c0 | 283 | `fcn_005c6270(p,0x290) → 0x400`; `fcn_00507b00(*(u8*)(p+0x164)) == 7 → 0x400`; `k = 4`, addend 0x6629c8, multiply 0x6640e8 |
+| 0x4b76e0 | 282 | `*(char*)(p+0x166) == 0 && *(char*)(p+0x169) == 0 → 0x400`; then the `fcn_005c6270` guard; `k = 4`, same constants |
+| 0x4b7960 | 248 | 0x400 buffer, `fcn_005c6270` guard only; `k = 2`, addend 0x6629c8, multiply 0x6640e8 |
+| 0x4b7a60 | 248 | byte-identical twin of 0x4b7960 (call displacements only) |
+
+Two more codegen rules:
+
+* **A narrow callee parameter suppresses the zero-extension at the call site.**
+  Declaring `fcn_00507b00(unsigned char)` emits a bare `mov cl,[p+0x164]`; the
+  reference has `xor ecx,ecx; mov cl,...`, i.e. the parameter is `int` and the
+  argument is `*(unsigned char*)` (promoted, so MSVC emits the movzx idiom).
+* **Guard chains read in source order.** `if (A == 0 && B == 0) return 0x400;`
+  keeps the two byte loads in order with `jne` to the continuation; splitting it
+  into two `if`s with the return first moves the block and changes every
+  subsequent displacement.
+
+Still in this family and unmatched: 0x4b7800 (352B) and 0x4b7d70/0x4b7e70 (256B,
+which call `fcn_004a55c0` with two float constants 100.0f/33.0f and a 0x600c00
+store).
