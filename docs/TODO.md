@@ -38845,3 +38845,50 @@ is this note — 0x4e04f0 remains open and its call sequence is *not* recorded.
 Lesson for delegation: state a hard iteration budget (e.g. "at most 6 test runs")
 and require a status line after each, otherwise a teammate can spin without
 producing either a match or a usable decode.
+
+## Round 201 wall: 0x4e04f0
+
+Correcting the round-197/200 note above: 0x4e04f0 *was* fully decoded, and the
+call sequence is recorded here.  GOLDTL 0x4e04f0 (294B) is
+`void __cdecl fcn_004e04f0(void* a1)`:
+
+1. `esi = fcn_00508e40(*(int*) ((char*) a1 + 0x34));` then
+   `edi = fcn_00508e40(*(int*) ((char*) a1 + 0x38));` and an early `return` if
+   either is null.
+2. `f = fcn_00507f10((int) esi, 3);` then
+   `if (!(fcn_00507f10((int) edi, 3) < f)) { edi = esi; }`.  The reference's
+   `fcomp / fnstsw ax / test ah,5 / jnp` pair is the `!(a < b)` spelling — `>=`
+   compiles to `and eax,0x100 / jne` instead and does not match (shapes §173).
+3. `if (*(char*) ((char*) edi + 0x166) == 0) return;`
+   then `if (fcn_004e7b70(edi, s2, s1) == 0) return;` where `s1`/`s2` are two
+   0x18-byte out-structs.
+4. `if (*(int*) ((char*) a1 + 0xc) != *(int*) (g_7f4ca4 + 540 *
+   *(unsigned short*) g_774970)) return;` (table stride 0x21c), then
+   `fcn_004e8240(*(int*) s1, 0, 0, 4, 0xff);`.
+5. `p = (char*) 0x7f4ca2; do { ... } while ((int) p < (int) (0x7f4ca2 + 0x65400));`
+   with `p += 0x21c` (signed `jl`, shapes §173).  Inside, when
+   `*p == 6 || *p == 7`:
+   `fcn_0051af00(buf, 0x10c7, *(unsigned short*) edi,
+   (char*) (*(char*) ((char*) edi + 9) ? 0x10c9 : 0x10c8));` then
+   `fcn_00545d40(*(int*) (p + 2), -1, buf, 0, 0x5fe, g_6b5c60);`.
+
+The frame is exact (`sub esp,0x434`: `float` at E-0x434, `s1` at E-0x430, `s2`
+at E-0x418, `char buf[0x400]` at E-0x400) and the instruction stream is exact
+instruction-for-instruction.  Best score **210/295** (object 295B); the residue
+is a pure callee-saved role exchange: ours homes A (the a1+0x34 result) and the
+loop pointer in `edi` with the entity in `esi`, the reference has the mirror.
+~40 spellings are inert — declaration order/type/scope, `register`, combined vs
+split null checks, `!x` vs `x == 0`, named temps for the loop byte / entity byte
+/ id, `for`/`while`/`do` loop forms, initialised declarations, unused locals, a
+20-combo `/O2`-family flag sweep, `#pragma optimize`, and `rebrew qual-sweep`.
+
+Two measured facts worth keeping.  (a) `volatile char* p` **does** flip the
+roles (214/295) because the two aliasing-barrier reads become separate values —
+but it also forces the loop head to `cmp byte ptr [esi],6` (80 3E) where the
+reference has `mov al,[esi]; cmp al,6`, and the `add ecx,0x10c8` (81 C1, 6B)
+against the reference's `add eax,0x10c8` (05, 5B) survives.  The flip needs two
+volatile reads; a single volatile read or a named `t = *p` is inert.  (b) With
+the roles flipped the remaining difference is a rotation of the caller-saved
+trio: ours {string, buf2} = `ecx`, id = `edx`, buf1 = `eax`; the reference has
+`eax`, `ecx`, `edx` respectively — the same exchange class as allocator Findings
+53/62, and `rebrew match` GA found no exact solution in a 25-minute run.
