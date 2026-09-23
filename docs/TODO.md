@@ -36879,3 +36879,44 @@ files / 0 warnings.
 
 **~80 candidates remain** and the recipe is mechanical; the next rounds should
 work down the list from `scripts/twin_marker.py 20`.
+
+### Round 1414 — twin harvest, second pass: GOLD +18 byte-matched (265)
+
+Twenty more candidates through `scripts/twin_marker.py 20`:
+
+| shape | count | VAs |
+|-------|-------|-----|
+| A — marker missing, body already identical | 10 | 0x422c30 0x455a10 0x4a8bf0 0x4bd9e0 0x4c4db0 0x4c5150 0x4c5690 0x4c59f0 0x401090 0x4b4d90 |
+| B — one hardcoded GOLDTL address | 8 | 0x46c5f0 0x427390 0x42b010 0x4c3f20 0x4c3f50 0x493380 0x4b3b40 0x4ce170 |
+
+Shape B detail: the paired markers always follow
+
+```c
+// GLOBAL: GOLDTL 0x<src>
+extern char g_<src>[];
+// GLOBAL: GOLD 0x<dst>
+extern char g_<src>[];
+```
+
+`scripts/twin_marker.py` now skips files that already carry the GOLD marker
+instead of spending the budget on them, so `twin_marker.py 20` is always twenty
+*new* candidates.
+
+**Two twins are genuinely divergent and were left alone** (reverted, GOLDTL
+only):
+
+* `fcn_00465920` (GOLD 0x468850 / GOLDTL 0x465920) — the GOLD function walks
+  the same table with stride **0x2ec** and stops at **0x2ff** where GOLDTL uses
+  **0x2f4** and **0x3ff**.  Same C shape, different constants: a real
+  client-only change, not a tooling artifact.
+* `fcn_00459940` (GOLD 0x45d950 / GOLDTL 0x459940) — with the GOLDTL literal
+  the compiler emits `fld a3 / fmul [const]`; with the address as a symbol (as
+  an array *or* as a float, either operand order) it emits `fld [const] /
+  fmul a3`.  Identical semantics, two swapped instructions, 2 structural diffs.
+
+Four more GOLD stubs deleted as duplicate VAs (E013).
+
+GOLD **247 → 265** byte-matched (96 EXACT, 169 RELOC); GOLDTL unchanged at 671
+(4 more rows EXACT → RELOC — the literals becoming relocatable references —
+byte-matched unchanged); server unchanged at 264.  Lint 1141 files / 0
+warnings.  ~70 candidates left in `.scratch/ci_gold.json`.

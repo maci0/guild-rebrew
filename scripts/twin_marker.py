@@ -49,9 +49,7 @@ for r in rows:
         continue
     t = path.read_text()
     if re.search(r'^// FUNCTION: GOLD ', t, re.M):
-        out.append((r['dst_va'], r['filepath'], 'ALREADY'))
-        n += 1
-        continue
+        continue  # already paired; not part of the budget
     m = re.search(r'^// FUNCTION: GOLDTL 0x[0-9a-f]+$', t, re.M)
     if not m:
         out.append((r['dst_va'], r['filepath'], 'NO_GOLDTL_MARKER'))

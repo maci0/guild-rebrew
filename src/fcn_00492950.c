@@ -1,3 +1,9 @@
+// GLOBAL: GOLDTL 0x6641a4
+extern char g_6641a4[];
+// GLOBAL: GOLD 0x5ecf1c
+extern char g_6641a4[];
+// FUNCTION: GOLD 0x00493380
+// SIZE: 64
 // FUNCTION: GOLDTL 0x492950
 // SIZE: 63
 
@@ -13,7 +19,7 @@ int __cdecl fcn_00492950(char* p, int a2, int a3)
 	} else {
 		return 0;
 	}
-	for (e = 0x6641a4; e < 0x6641ec; e += 8) {
+	for (e = (int) g_6641a4; e < (int) g_6641a4 + 0x48; e += 8) {
 		if (*(int*) (e - 4) == v && *(int*) e == a3) {
 			return 1;
 		}
