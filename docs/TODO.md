@@ -38374,3 +38374,34 @@ Round 170: automated band run (`--min-score 90`, top 12 by score) — 9 candidat
 tested, all NEAR_MATCHING, none promotable.  The high-score end of the
 `would-import-shared` band is now exhausted; remaining rows are address-diff NEARs
 (fixable only per the memory-operand rule) or `would supersede` duplicates.
+
+Round 173: `scripts/callers.py 0x51af00` next free caller, `fcn_00403200`
+(0x403200, 110B) — pool allocator: `alloc(0x244, name)` + `memset` + free-slot
+scan of the 0x300-entry table at 0x14d0020, storing the slot index into the
+object and jumping to `free(p)` + error log when the table is full.
+
+Two shapes had to be read off the reference, and both are now written up as
+`docs/msvc6-c-shapes.md` sections 180-181:
+
+* the counter lands in `esi` (with `push esi`/`pop esi`) **only** when `i` is a
+  C89 initialised declaration at the top of the block — `int i = 0;` before the
+  allocation call.  `int i;` + a `for (i = 0; …)` header dead-store-eliminates
+  the early store, drops the counter to `eax` and the object to 95 bytes.
+* all twelve ordinary spellings (`for` + `break`, top-tested `while`,
+  `while (i < 0x300 && g[i]) i++;`, `do/while`) emit the unrotated
+  `[esi*4+base]` body; the reference's peeled compare plus rotated one-slot-ahead
+  body (`[esi*4+base+4]`) is reachable **only** from
+  `while (i < 0x300 && g[++i] != 0) {}` behind an `if (g[i] != 0)` guard, with
+  the store block written first after the loop.
+
+GOLDTL 0x403200 → RELOC 110/110.  The GOLD twin is byte-identical modulo
+addresses (0x4029c0, table 0x1468ae0, strings 0x5f12f4/0x5f12d4, alloc/free/log
+0x4223c0/0x422620/0x4222b0) and was written up directly as
+`src/GOLD.fcn_004029c0.c` → RELOC 110/110 on the first test.  No server twin:
+`push 0x244` occurs exactly once in `server.dll` (0x100145f6) and it is a
+`LogMessageInternal` line number, not this allocator — the server allocates
+player slots through `_gm_AllocSpieler`.
+
+GOLDTL 795 → 796, GOLD 318 → 319 byte-matched; server unchanged at 264.
+Lint 1265 files / 0 warnings.  `rebrew test` touched only these two entries in
+`src/rebrew-functions.toml`, so both are committed with their sources.

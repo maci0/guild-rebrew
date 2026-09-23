@@ -7971,3 +7971,71 @@ only then convert `[esp+N]` to a parameter index.  A mismatch in *which*
 parameter is used shows up as a register-allocation difference (wrong
 callee-saved register, an extra reload), which is much harder to read back from
 the diff than the offset itself.
+
+## 180. An early `int i = 0;` puts the loop counter in `esi`; `for (i = 0; …)` drops it to `eax`
+
+Measured on the GOLDTL pool allocator `fcn_00403200` (0x403200, 110B) and its
+GOLD twin `fcn_004029c0` (0x4029c0, 110B).  The reference prologue is
+
+```
+push esi / push edi / push <name> / push 0x244 / xor esi,esi / call <alloc>
+```
+
+— `xor esi,esi` sits **above** the allocation call, and the loop counter never
+leaves `esi`.  With `int i;` declared at the top and assigned after the
+`memset`, MSVC gives `i` to `eax` (the accumulator is free once `rep stosd` has
+zeroed it) and the function loses the `push esi`/`pop esi` pair: 95 bytes
+instead of 110.  Spelling the declaration as a C89 **initialised** declaration
+
+```c
+	int i = 0;
+	int v;
+	void* p;
+
+	p = (void*) fcn_0041db70(0x244, g_67536c);
+	memset(p, 0, 0x244);
+```
+
+moves the initialization ahead of the call in source order, so `i`'s live range
+crosses the call and the allocator must give it a callee-saved register — `esi`,
+exactly as the reference.  A later `for (i = 0; …)` re-initialization dead-store
+eliminates the early store and puts the counter back in `eax`; keep the loop's
+init out of the `for` header.  Cost of the discovery: three probe batches.
+
+## 181. A look-ahead `g[++i]` scan is the only spelling that rotates the free-slot loop
+
+Same function.  After the counter colouring is fixed, twelve loop spellings were
+compiled with the client toolchain.  All of the obvious ones —
+`for (i = 0; i < 0x300; i++) if (g[i] == 0) break;`, the same as a top-tested
+`while`, `while (i < 0x300 && g[i] != 0) i++;`, and `do { … } while (…)` — emit
+the same *unrotated* body:
+
+```
+mov ecx,[esi*4+base] / test / je store / inc esi / cmp esi,0x300 / jl top
+```
+
+The reference instead has the first compare peeled to an absolute load plus a
+rotated body that reads **one slot ahead**:
+
+```
+mov eax,[base] / test / je store
+top: cmp esi,0x300 / jge fail
+     mov eax,[esi*4+base+4] / inc esi / test / jne top
+     cmp esi,0x300 / jge fail
+```
+
+Only the look-ahead spelling reproduces it byte for byte:
+
+```c
+	if (g_14d0020[i] != 0) {
+		while (i < 0x300 && g_14d0020[++i] != 0) {
+		}
+	}
+```
+
+Two further points, both measured: the guard must read `g[i]` (index 0, so the
+address folds to the absolute `mov eax,[base]`), and the **store-first** source
+order after the loop (`if (i < 0x300) { store; return p; } fail;`) is what keeps
+the found path inline and the failure epilogue out of line — the mirrored
+`if (i >= 0x300) { fail } store;` order inverts only that last compare's
+polarity (`jl` against `jge`) and no longer matches.
