@@ -38179,3 +38179,22 @@ by hand: **five matched** and are promoted, one reverted.
 was restored from its backup and the harvest list is not regenerable with that
 command line.  Next time, capture the exact `cross-import` invocation that
 produced the working candidates.
+
+## Round 157 — harvest list not regenerable; foreign edits in the tree
+
+No new matches this round.  `rebrew cross-import --from Europa1400Gold_TL.exe
+--target Europa1400Gold.exe --dry-run --shared --json` now returns 4288 rows all
+with `action = "skipped"` (the harvest script filters on
+`skipped-unverified`/`would-import-shared`, of which the working
+`.scratch/ci_gold.json` has 34) — so the candidate list is no longer regenerable
+from that command line, and `--candidates-only` exits 2 with "no FUNCTION/
+LIBRARY/STUB marker found in source".  `.scratch/ci_gold.json` was restored from
+`.scratch/ci_gold.json.bak`; the vein stays usable but cannot be refreshed.
+
+**Working tree note.**  Uncommitted edits by the co-running session are present in
+`src/GOLD.fcn_00411bb0.c`, `0042ec00.c`, `00468850.c`, `004c3b10.c`, `004feb30.c`
+and `src/rebrew-functions.toml` (GOLD sources rewritten with server-image
+addresses, one status flipped to `COMPILE_ERROR`).  They are not mine and were
+left untouched; with them in place GOLD verify reports 316 byte-matched (steady)
+but `compile_error = 3` and `matching` 23 → 22.  Whoever owns them needs to
+finish or revert before the gate is meaningful.
