@@ -38822,3 +38822,15 @@ loop reads its slots from `buf + 8 + i*4` (fcn_00508cf0 is given `buf` itself,
 `lea ecx,[esp]` = E-0x814, while the element loads use `[esp+esi*4+0x10]` with
 esp = E-0x82c), and the second arm re-reads a1 as `[esp+0x830]` and logs into
 `[esp+0x2c]` = buf+0x10, not buf.
+
+Round 194: wrote 0x5dd4e0 from the recorded decode into
+`src/GOLDTL.fcn_005dd4e0.c` (reverted afterwards — NEAR only).  Progress along the
+way: 119/177 with `v = 0;` as a statement, **137/177** once `v` became a C89
+initialised declaration (`int v = 0;` at the top, before the
+`*(int*) ((char*) a2 + 0x10) = 1;` store) — the reference's `xor ebx,ebx` sits
+*before* the store, exactly the round-173/177 rule.  Next divergence is
+register colouring: the reference loads a1 with `mov edi,[esp+0x830]` (0xbc
+ModRM) where our object has 0xb4 (`esi`), and the second arm then diverges from
+offset 46.  So the function's remaining gap is the same colouring wall as
+0x4e27b0, not a shape problem — do not spend another round on spellings unless a
+way to pin `edi` is found.
