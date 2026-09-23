@@ -36351,3 +36351,27 @@ So the two targets' remaining carriers are the same two wall classes
 came back `skipped-unverified` (SIZE_MISMATCH 130 vs 125).  GOLDTL remains at
 613 byte-matched of 665 annotated; its 52 unmatched rows are all in these two
 classes by first divergence.
+
+### Round 1395 — GOLDTL 613 -> 615 (call-bearing pool, two small wrappers)
+
+Both targets' remaining *tracked* carriers are walled (round 1394), so this
+round added new functions from the untracked pool instead: untracked GOLDTL
+inventory functions in the game region whose `e8` targets are all inside the
+inventory (225 of them, <=64 bytes).  Two of three attempts landed first try:
+
+| VA | C | result |
+|----|---|--------|
+| 0x4e6c80 | 64-byte buffer + `fcn_0064d41a(buf, (char*)0x68d6bc, *(char**)0x9b0820)`, re-reads the global for the return | **RELOC 33/33** |
+| 0x4f0930 | 8-byte tagged pair (`0x6454436e`, arg) passed to `fcn_004c6db0` | **RELOC 33/33** |
+
+Parked: `0x4b3d80` (33B) — a two-call wrapper.  The reference emits
+`call inner / mov edx,[esp+0xc] / add esp,4 / push eax / push edx / call outer
+/ add esp,0xc`, i.e. it drops ONE of the inner call's two pushed arguments and
+carries the other as a stale dword under the outer call; both the explicit-local
+and the nested-call spellings compile to the clean form (`add esp,0x10` at the
+end, 30 bytes).  Needs the argument-evaluation idiom, not a different callee
+declaration — do not re-add the file until that shape is understood.
+
+GOLDTL: 613 -> **615** byte-matched (251 exact, 364 reloc), failed 52 (the
+non-matching file deleted before verify), lint 1097/1097 zero warnings.
+SERVER/GOLD untouched (the files carry GOLDTL markers only).
