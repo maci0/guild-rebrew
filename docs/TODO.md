@@ -38109,3 +38109,19 @@ paired-GLOBAL rewrite but its first pick
 (`GOLDTL.cm_GetBuildingStatCount.c`) was classified MANUAL and reverted, so that
 vein needs a look next round.  The marker script stopped after 24 of the ~99
 candidates for reasons not yet investigated.
+
+## Round 154 — twin harvest, second pass (+2 GOLD = 308)
+
+`scripts/twin_marker.py 100` (the earlier run's default limit was the 10 that the
+first log's 24 rows hid) tested the rest of the `.scratch/ci_gold.json`
+candidates; two more RELOC matches, both promoted:
+
+| GOLD VA | file | bytes |
+|---------|------|-------|
+| 0x4ffcc0 | Develop/DieGildeAddOn/game/spiel_c/GOLDTL.gm_NextEntityQueryMatch.c | 451 |
+| 0x51db30 | Develop/DieGildeAddOn/loadsave/loadsave_c/ls_LoadDynamicEntities.c | 870 |
+
+The candidate list itself is only ~24 rows, so the vein is now exhausted except
+for the NEAR_MATCHING rows that are one absolute address off (`[71] 80/a0,
+[72] 0b/4c, [73] 77/7f`) — `scripts/twin_fix.py` classified its first pick
+MANUAL and reverted, so those four need the paired-GLOBAL rewrite by hand.

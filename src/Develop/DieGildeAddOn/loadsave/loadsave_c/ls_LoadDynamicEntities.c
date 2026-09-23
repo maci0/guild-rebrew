@@ -1,5 +1,7 @@
 // GLOBAL: SERVER 0x1009aca2
 extern char g_dynamic_entities[]; /* 0x1009aca2 */
+// FUNCTION: GOLD 0x0051db30
+// SIZE: 880
 // FUNCTION: GOLDTL 0x522ac0
 // SIZE: 880
 // FUNCTION: SERVER 0x10012eb0

@@ -8322,6 +8322,10 @@ updated_by = "verify"
 updated_at = "2026-09-23T09:14:47+00:00"
 
 ["GOLD.0x0051db30"]
+size = 880
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:08:23+00:00"
 
 ["GOLD.0x00497620"]
 size = 48
@@ -9377,3 +9381,9 @@ size = 284
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T13:02:32+00:00"
+
+["GOLD.0x004ffcc0"]
+size = 464
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:08:22+00:00"
