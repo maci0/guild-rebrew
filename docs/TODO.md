@@ -38499,3 +38499,24 @@ case in section 183).
 
 GOLDTL 799 → 800, GOLD 322 → 323; server unchanged at 264.  Lint 1270 files /
 0 warnings.
+
+Round 178: `fcn_004f5ab0` (0x4f5ab0, 244B), RELOC 244/244 on the first test.
+Shape: 0x200 log buffer; a first pass over the 0x2d-stride table
+`0x9a3816..0x9a9216` that resolves `*(int*)(i-0x16) == a1` through
+`fcn_00508e40(*(int*)i)` and logs the hit (`fcn_0051af00(buf, 0x1747, *(u16*)p)`);
+then, when a hit exists, a walk of the 0x21c-stride entity table
+(`0x7f4ca4 + 0x65400`, spelled as symbol + constant per round 176) that skips
+`*e == a2` and `(*(int*)(e+0x1e4) & a3) != 0`, scans the 0x800-entry pair table
+`0x99f800/0x99f804` (stride 8) for a matching (id, a1) and, on a hit, logs
+(`fcn_00545d40(*e, -1, buf, 0, 0x5ec, g_6b5c60)`) and clears bits
+(`*(int*)(0x7f4e88 + i*540) &= a3`).
+
+No GOLD twin: the GOLD image contains neither the inner-loop encoding
+(`39 04 f5` / `39 0c f5`) nor the `and [eax*4+disp32],edi` form, and
+`rebrew cross-import --min-score 80` returns only 80-88 % structural siblings for
+it (0x4010b0, 0x43f990, 0x4c65b0, 0x4e3650), so the file stays GOLDTL-only.
+Worth remembering: the `0x9a3816` / `0x99f800` / `0x7f4e88` tables and the 0x2d
+stride are GOLDTL-only data, which is a cheap first check before hunting a twin.
+
+GOLDTL 800 → 801, GOLD unchanged at 323; server unchanged at 264.  Lint 1271
+files / 0 warnings.
