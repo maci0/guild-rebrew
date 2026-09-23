@@ -37502,3 +37502,27 @@ tried, byte local included).
 
 GOLDTL **726 → 729** byte-matched (230 EXACT, 499 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1198 files / 0 warnings.
+
+### Round 1434 — branched prospecting, eighth pass: GOLDTL +4 (733)
+
+| VA | shape |
+|----|-------|
+| 0x42f690 | `r = f(a1, a2, &a2); if (r) { g(r, a2, a3, a4); return a4; } return 0;` |
+| 0x433780 | field 0x1d0: free `[p+0x40]`, clear it, free the field again, clear the field |
+| 0x45f060 | `if (a1 < 0) return 0;` then `sprintf(buf, fmt, a1)` and `return g(buf, a2, a1);` |
+| 0x46f280 | `p = g_10161d0 + a1*0x3cc; if (*(int*)p) { h(*(int*)(g_10161bc + a1*0x3cc)); return 1; } return 0;` |
+
+**Rules:**
+
+* the "main path first" rule from last round paid off twice more: 0x42f690's
+  `if (r) { … return a4; } return 0;` gives the reference's `je` into a trailing
+  failure block; the inverted spelling emits `jne` over an inline one;
+* **do not cache a field in a local when the reference reloads it.**
+  `0x433780` needs the full `*(int*)((char*)a1+0x1d0)` expression written out at
+  every use — a `void* p = …` local made the compiler keep it in `edi`, add a
+  second prologue push and drop to 14/64; the expression form matches 64/64;
+* a tail call that leaves its result in `eax` must be written
+  `return g(…)`, not `g(…); return 0;` (0x45f060, 59/59).
+
+GOLDTL **729 → 733** byte-matched (230 EXACT, 503 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1202 files / 0 warnings.
