@@ -122,7 +122,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		one = 1;
 		*(volatile unsigned short*) grave = (unsigned short) chosen;
 	}
-	*(volatile unsigned char*) (grave + 2) = 0x14;
+	*(unsigned char*) (grave + 2) = 0x14;
 	*(int*) (grave + 0x1f0) = 0;
 	*(int*) (grave + 0x210) = -1;
 	*(unsigned char*) (grave + 0x215) = 0;
