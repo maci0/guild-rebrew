@@ -217,6 +217,25 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * local through a volatile-qualified pointer to its own address yields
  * the same value and only forbids enregistration.
  *
+ * 2026-09-25: five instruction-shape fixes, each read off an aligned
+ * listing of the object against the reference, linked 5404 -> 5382 (-22)
+ * as a set.  Measured alone, the first one is +403: it lengthens the body
+ * by 2 bytes and everything after it moves off the reference offsets that
+ * postlink patches, so these only pay together.
+ *  - gm_QueryEntitySum is called through an `(int, unsigned char)` pointer
+ *    cast: the reference passes the byte with a bare `mov al` / `mov cl`
+ *    and no zero-extending `xor` (the section-121 byte).  The shared
+ *    header declares `(int, int)`.
+ *  - the source-object count is stored, then re-read into `amount`: the
+ *    reference emits `sub ecx,edx; mov eax,ecx; mov [ebx+0xe],ecx`.
+ *  - the post-join dest_dynamic_entity reload goes through a temp, so
+ *    one load feeds both the test and `*p` (was two loads).
+ *  - the reload of source_dynamic_ref after the weight check is volatile
+ *    and on the success path: the reference re-reads `[esp+0x18]` there,
+ *    and that one extra slot reference moves source_dynamic_entity to
+ *    the reference's slot 0x18.
+ *  - the `= 0` initialisers follow the reference's store order.
+ *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29.
  * The round-173 move preserves that: `dest_object` is read only inside
  * the same `cmd+0x10` guard, so the assignment cannot be observed
@@ -260,19 +279,20 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	 * buffer base exactly. */
 	struct SLogBuffer log_buffer;
 	short entity_type;
+	short* dest_dyn_reload;
 	char obj_category;
 
 	source_owner_entity = (short*)0;
 	*(int*)(cmd + 0x1a) = g_next_object_id;
 	dest_owner_entity = (short*)0;
-	source_dynamic_entity = (short*)0;
-	dest_game_object = (ushort*)0;
 	resolved_dynamic = (short*)0;
+	dest_game_object = (ushort*)0;
+	source_dynamic_entity = (short*)0;
 	dest_object = (ushort*)0;
-	dest_existing_entity = (char*)0;
+	dest_dynamic_entity = (short*)0;
 	source_container_ptr = (char**)0;
 	source_existing_entity = (void*)0;
-	dest_dynamic_entity = (short*)0;
+	dest_existing_entity = (char*)0;
 	source_static_entity = (short*)0;
 	if (*(int*)(cmd + 0x14) != -1) {
 		resolve_result = gm_GetFieldByType(cmd, *(int*)(cmd + 0x14));
@@ -357,7 +377,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			 * Fixing both QueryEntitySum call sites makes cm_ExSellObjekt's
 			 * obj_size exactly 2057 (was 2055) and moves the split
 			 * pipeline's masked differing bytes 6,515 -> 6,495. */
-			gm_QueryEntitySum(*(int*)(source_owner_entity + 0xbc), (unsigned char) cmd[0x1e]);
+			((int (__cdecl*)(int, unsigned char))gm_QueryEntitySum)(*(int*)(source_owner_entity + 0xbc), cmd[0x1e]);
 		}
 	}
 	if (*(int*)(cmd + 0x10) != -1) {
@@ -411,7 +431,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			dest_game_object = (ushort*)gm_ff_Objekt(*linked_list_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
 		}
 		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
-			resolve_result = gm_QueryEntitySum(*(int*)(dest_owner_entity + 0xbc), (unsigned char) cmd[0x1e]);
+			resolve_result = ((int (__cdecl*)(int, unsigned char))gm_QueryEntitySum)(*(int*)(dest_owner_entity + 0xbc), cmd[0x1e]);
 			if (resolve_result < *(int*)(cmd + 0x1f) * *(int*)(cmd + 0x23)) {
 				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d4f, "cm_ExSellObjekt() Not enough Credits at destination", 8);
 				return 1;
@@ -426,11 +446,11 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				resolve_result = compute_size((char*)source_dynamic_ref, (int)*(ushort*)dest_object);
 				*(volatile uint*)&log_buffer.weight_fraction = (uint)(resolve_result * *(int*)(dest_object + 0xe)) >> 2;
 				amount = gm_GetMsgField((int)source_dynamic_ref, (int)dest_object);
-				source_dynamic_ref = source_dynamic_entity;
 				if ((uint)amount - *(volatile uint*)&log_buffer.weight_fraction < (uint)*(int*)(cmd + 0x1f)) {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d79, g_error_msg_sell_no_source, 8);
 					return 1;
 				}
+				source_dynamic_ref = *(short* volatile*)&source_dynamic_entity;
 			}
 			goto finalize_transfer;
 		}
@@ -467,9 +487,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		}
 	}
 	if (*(int*)(cmd + 0x14) != -1) {
-		resolve_result = *(int*)(cmd + 0x1f);
-		amount = *(int*)(dest_object + 7) - resolve_result;
-		*(int*)(dest_object + 7) = amount;
+		*(int*)(dest_object + 7) = *(int*)(dest_object + 7) - *(int*)(cmd + 0x1f);
+		amount = *(int*)(dest_object + 7);
 		if (amount <= 0) {
 			obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 			if (obj_category == '\x06' || obj_category == '\x02') {
@@ -571,13 +590,14 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			 * it reloads from [esp+0x2c] at 0x1000df97 and falls
 			 * straight through into 0x1000df2a.  Forcing that one
 			 * reload restores the reference's block order. */
-			if (*(short* volatile*)&dest_dynamic_entity != (short*)0) {
-				if (*dest_dynamic_entity == 0x1db) {
+			dest_dyn_reload = *(short* volatile*)&dest_dynamic_entity;
+			if (dest_dyn_reload != (short*)0) {
+				if (*dest_dyn_reload == 0x1db) {
 					*(int*)(dest_owner_entity + 0xd0) =
 						*(int*)(dest_owner_entity + 0xd0) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
 					goto LAB_1000e0e7;
 				}
-				if (*dest_dynamic_entity == 0x1dc) {
+				if (*dest_dyn_reload == 0x1dc) {
 					*(int*)(dest_owner_entity + 0xd2) =
 						*(int*)(dest_owner_entity + 0xd2) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
 					goto LAB_1000e0e7;
