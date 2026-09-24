@@ -263,6 +263,55 @@ on the anchor address *and* on the enclosing function's span before probing
 either. "No documented probe" is not proof of novelty — still check the file
 header — but a hit means the round is already written.
 
+## Adhoc scripts: status vs rebrew upstream
+
+`scripts/` holds project tooling; several entries predate rebrew commands that
+now cover them. Check this table before trusting — or extending — a script.
+Re-verified against this checkout's `rebrew` CLI (round 256):
+
+**Deleted — fully superseded, no project-side caller left:**
+
+| Script | Replaced by |
+|--------|-------------|
+| `scripts/drift_windows.py` | `rebrew drift` |
+| `scripts/gaptrace.py` | `rebrew gap-trace` |
+| `scripts/qualsweep.py` | `rebrew qual-sweep` |
+| `scripts/flagsweep.py` | `rebrew match --flag-sweep-only` |
+| `scripts/hillclimb.py` | `rebrew climb` |
+
+**The replacement exists, but something still calls the script — retire the
+pair together:**
+
+| Script | Rebrew command | What still blocks deletion |
+|--------|----------------|----------------------------|
+| `scripts/linktest.sh` | `rebrew test --linked` | replaces the LINK-level judge; nothing project-side calls the script any more, but the per-function residue table has not been parity-checked |
+| `scripts/probe_function.py` | `rebrew probe` | `scripts/reallen2.py` shells out to it |
+| `scripts/postlink_residual.py`, `scripts/residue_diff.py` | `rebrew residue` | `scripts/gate.sh` runs `postlink_residual.py` |
+| `scripts/callers.py` | `rebrew xrefs <va> <binary>` | `xrefs` returns raw refs (1216 for 0x51af00) where `callers.py` groups them per caller function (191); the delegated decomp loop consumes the grouped form |
+
+**Not upstreamed yet — keep using the script:**
+
+| Script | Planned as |
+|--------|------------|
+| `scripts/whathas.py` | `rebrew history <VA>` — command does not exist yet |
+| `scripts/zlibcheck.py` | `rebrew verify --library` — only `--nolib` exists |
+| `scripts/straight_line.py` | a `rebrew todo` lane — none exists |
+| `scripts/map_libcmt.py` + `library_code_allowlist.txt` | the split-set experiment (`split_coff.py`, `split_audit.py`, `split_link.sh`, `locate_sections.py`) imports it |
+| `scripts/rename_locals.py`, `scripts/rename_locals_comments.py` | `rebrew rename` does not touch locals |
+| `scripts/cfg_compare.py` | `rebrew near-diag --cfg` — option does not exist |
+| `scripts/msvc6_probe.py`, `scripts/wine_load_check.sh`, `scripts/preprobe.sh` | `rebrew doctor` has no probe suite yet |
+
+The diff family — `instr_diff`, `ndiff`, `seqdiff`, `cdiff`, `text_match`,
+`sizediff`, `align_match`, `first_divergence`, `opcode/branch/operand_census`
+— still needs an overlap audit against `rebrew diff`/`rebrew near-diag` output
+before porting: port only the lenses those commands lack.
+
+**Keep project-side:** `scripts/gate.sh` (the commit gate above), the
+GOLDTL↔GOLD twin pair (`twin_fix.py`/`twin_marker.py`), the split-set
+experiment (`split_coff.py`, `emit_*`, `split_blob`, `split_link.sh`,
+`make_split_rsp`, `resolve_static_labels`, `split_audit`, `object_span_check`,
+`link_drift`, `locate_sections`), and `verify_objective.py` + `goal.md`.
+
 ## Agent Skills
 
 Detailed workflow instructions are in `.agents/skills/`:
@@ -276,3 +325,15 @@ Detailed workflow instructions are in `.agents/skills/`:
 | `rebrew-ghidra-sync` | Ghidra push/pull sync via ReVa MCP |
 
 Read the `SKILL.md` in each directory for step-by-step instructions.
+
+The skills are rendered copies of the canonical tree in the rebrew checkout
+(`src/rebrew/agent-skills/`). To refresh them after a rebrew update — the
+render must substitute this project's target (`server.dll`), never ship the
+`<target>` placeholder:
+
+```
+rm -rf .agents/skills   # was a symlink to the rebrew template — a render needs a real copy
+cp -r <rebrew>/src/rebrew/agent-skills .agents/skills
+find .agents/skills -name '*.md' -exec sed -i 's/<target>/server.dll/g' {} +
+uv run python <rebrew>/tools/validate_skill_commands.py   # flags still exist
+```
