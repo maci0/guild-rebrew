@@ -623,14 +623,15 @@ int __cdecl srv_LoadBuf(void)
 					else if (*(unsigned char*) (conn + 6) == 9) {
 						unsigned int rec;
 						unsigned int buf;
-						/* Both addends read through volatile locals, received
-						 * first: that order issues the two loads ahead of the
-						 * source lea and picks the original's `lea edi,[ecx+eax]`
-						 * over `add edi,ecx`. Pinning only one of the two, or
-						 * loading the buffer first, loses it. This depends on the
-						 * store order above. */
-						rec = *(volatile unsigned int*) &g_download_received;
-						buf = *(volatile unsigned int*) &g_download_buffer;
+						/* Both addends in plain locals, received first: the two
+						 * loads are scratch picks (eax, ecx) ahead of the source
+						 * lea, giving `lea edi,[ecx+eax]`, and they advance the
+						 * pick cursor twice, which puts every later scratch
+						 * register in the reference's order. Volatile locals made
+						 * them non-advancing copies; inline reads load into edi
+						 * and emit `add edi,ecx`. */
+						rec = g_download_received;
+						buf = g_download_buffer;
 						memcpy((void*) (buf + rec), conn + 10, 0x80);
 						g_download_received = g_download_received + 0x80;
 					}
