@@ -57,8 +57,10 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  *  - The source object count is stored and then re-read into `amount`
  *    (reference: `sub ecx,edx; mov eax,ecx; mov [ebx+0xe],ecx`).
  *  - The `= 0` initialisers follow the reference's store order.
- *  - `dest_object = dest_game_object` sits inside the `cmd+0x10` guard;
- *    written above it, it stays live across source-finalize.
+ *  - dest-finalize works on dest_game_object itself, never copied into
+ *    source_object: the reference loads it
+ *    into ebx before the `cmd+0x10` test because the final `result+6`
+ *    store reads it on both paths.
  *  - The gm_AllocRaum null check is success-first, which lays the three
  *    dest error tails out in the reference's order.
  *  - After the dest join, dest_dynamic_entity and dest_owner_entity are
@@ -68,7 +70,7 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  *
  * Remaining differences (linked): the 0x1dd arm layout at 0x1000dc16,
  * ecx/edx swapped in the source-finalize category load at 0x1000de2b,
- * three load placements (0x1000df0a, 0x1000df90, 0x1000e0f5) and the
+ * two load placements (0x1000df90, 0x1000e0f5) and the
  * dest `+0xe` increment at 0x1000e04a (reference folds the table address
  * and reuses edi; we keep edi and use ebp, one byte shorter).
  *
@@ -83,7 +85,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	int resolve_result;
 	char* capacity_check;
 	short* parent_check;
-	ushort* dest_object;
+	ushort* source_object;
 	short* source_owner_entity;
 	int* linked_list_ptr;
 	short* dest_owner_entity;
@@ -107,7 +109,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	resolved_dynamic = (short*)0;
 	dest_game_object = (ushort*)0;
 	source_dynamic_entity = (short*)0;
-	dest_object = (ushort*)0;
+	source_object = (ushort*)0;
 	dest_dynamic_entity = (short*)0;
 	source_container_ptr = (char**)0;
 	source_existing_entity = (void*)0;
@@ -151,8 +153,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			source_owner_entity = source_static_entity;
 			source_container_ptr = (char**)(source_static_entity + 0xbc);
 		}
-		dest_object = (ushort*)gm_ff_Objekt((int)*source_container_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
-		if (dest_object == (ushort*)0) {
+		source_object = (ushort*)gm_ff_Objekt((int)*source_container_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
+		if (source_object == (ushort*)0) {
 			sprintf(
 				log_buffer,
 				"cm_ExSellObjekt(): Object not found: ObjProt:%i Menge:%i CmdCnt:",
@@ -165,7 +167,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		}
 		if (source_dynamic_entity != (short*)0) {
 			resolve_result = *(int*)(cmd + 0x1f);
-			amount = gm_GetMsgField((int)source_dynamic_entity, (int)dest_object);
+			amount = gm_GetMsgField((int)source_dynamic_entity, (int)source_object);
 			if (amount < resolve_result) {
 				sprintf(
 					log_buffer,
@@ -178,7 +180,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				return 1;
 			}
 		}
-		if (*(int*)(dest_object + 7) < *(int*)(cmd + 0x1f)) {
+		if (*(int*)(source_object + 7) < *(int*)(cmd + 0x1f)) {
 			sprintf(
 				log_buffer,
 				"cm_ExSellObjekt() Not enough Objekts at source: ObjProt:%i Menge:%i CmdCnt:%i",
@@ -253,10 +255,10 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	}
 	if (source_dynamic_entity != (short*)0) {
 		if (dest_owner_entity != (short*)0) {
-			parent_check = gm_ResolveParentEntity((short*)dest_object);
-			if (parent_check != dest_owner_entity && *(int*)(dest_object + 0xe) != 0) {
-				if ((uint)gm_GetMsgField((int)source_dynamic_entity, (int)dest_object) -
-					((uint)(compute_size((char*)source_dynamic_entity, (int)*(ushort*)dest_object) * *(int*)(dest_object + 0xe)) >> 2) <
+			parent_check = gm_ResolveParentEntity((short*)source_object);
+			if (parent_check != dest_owner_entity && *(int*)(source_object + 0xe) != 0) {
+				if ((uint)gm_GetMsgField((int)source_dynamic_entity, (int)source_object) -
+					((uint)(compute_size((char*)source_dynamic_entity, (int)*(ushort*)source_object) * *(int*)(source_object + 0xe)) >> 2) <
 					(uint)*(int*)(cmd + 0x1f)) {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d79, g_error_msg_sell_no_source, 8);
 					return 1;
@@ -297,8 +299,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		}
 	}
 	if (*(int*)(cmd + 0x14) != -1) {
-		*(int*)(dest_object + 7) = *(int*)(dest_object + 7) - *(int*)(cmd + 0x1f);
-		amount = *(int*)(dest_object + 7);
+		*(int*)(source_object + 7) = *(int*)(source_object + 7) - *(int*)(cmd + 0x1f);
+		amount = *(int*)(source_object + 7);
 		if (amount <= 0) {
 			obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
@@ -336,15 +338,14 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		}
 	}
 	if (*(int*)(cmd + 0x10) != -1) {
-		dest_object = dest_game_object;
 		if (dest_game_object != (ushort*)0) {
 			*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + *(int*)(cmd + 0x1f);
 		} else {
 			obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
 				if (dest_existing_entity != (char*)0) {
-					dest_object = (ushort*)gm_AllocRaum(dest_existing_entity, (uint)*(ushort*)(cmd + 0x18));
-					if (dest_object == (ushort*)0) {
+					dest_game_object = (ushort*)gm_AllocRaum(dest_existing_entity, (uint)*(ushort*)(cmd + 0x18));
+					if (dest_game_object == (ushort*)0) {
 						LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e39, "cm_ExSellObjekt(): gm_AllocRaum failed", 8);
 						return 1;
 					}
@@ -353,24 +354,24 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 					return 1;
 				}
 			} else {
-				dest_object = (ushort*)gm_AllocObjekt(*(int*)(cmd + 0x10), (uint)*(ushort*)(cmd + 0x18), *(int*)(cmd + 0x1f));
-				if (dest_object == (ushort*)0) {
+				dest_game_object = (ushort*)gm_AllocObjekt(*(int*)(cmd + 0x10), (uint)*(ushort*)(cmd + 0x18), *(int*)(cmd + 0x1f));
+				if (dest_game_object == (ushort*)0) {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e5d, "cm_ExSellObjekt(): gm_AllocObjekt failed", 8);
 					return 1;
 				}
 				if (dest_dynamic_entity != (short*)0) {
-					*(int*)(dest_object + 7) = *(int*)(dest_object + 7) + 1;
+					*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + 1;
 					obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 					if ((obj_category == '\x17' || obj_category == '%') &&
 						(*dest_dynamic_entity == 0x2a || *dest_dynamic_entity == 0x116) &&
 						(owner_reload = *(short* volatile*)&dest_owner_entity) != (short*)0 &&
 						((char)owner_reload[1] == '\x06' || (char)owner_reload[1] == '\a')) {
-						*(int*)(dest_object + 0xe) = 4;
+						*(int*)(dest_game_object + 0xe) = 4;
 					}
 				}
 			}
 		}
-		*(int*)(((PlayerSlot*)g_connections)[(unsigned char)cmd[3]].data + 0x264200) = *(int*)(dest_object + 1);
+		*(int*)(((PlayerSlot*)g_connections)[(unsigned char)cmd[3]].data + 0x264200) = *(int*)(dest_game_object + 1);
 		if (*(int*)(cmd + 0x23) != 0 && *(short* volatile*)&dest_owner_entity != (short*)0) {
 			gm_SubObjekt(
 				*(void**)(dest_owner_entity + 2),
@@ -399,7 +400,7 @@ LAB_1000e0e7:
 		*result = 1;
 		if (*(int*)(cmd + 0x10) != -1) {
 			result[1] = 3;
-			*(ushort**)(result + 6) = dest_object;
+			*(ushort**)(result + 6) = dest_game_object;
 		}
 	}
 	return 0;
