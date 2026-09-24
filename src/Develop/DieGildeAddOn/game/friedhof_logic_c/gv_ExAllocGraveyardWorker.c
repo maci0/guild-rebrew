@@ -111,20 +111,16 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	 * through the raw address it is `add edx,0x100358fc`. */
 	for (j = 0; j < 8; j++)
 		*(int*) (g_slot_table + 0x5c + off + j * 4) = neg;
-	/* Both counters are read before the entity stores and written back after,
-	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
-	 * Bumping them in place emits a load-inc-store round trip each. */
+	/* The citizen bump ahead of the object-id bump is what hoists its load
+	 * into edi above the entity stores (0x10011dd2); after it, or through a
+	 * local copy, msvc6 sinks the load to a load-inc-store beside the store. */
 	{
-		int live = g_citizen_count + 1;
-		int seq;
 		*(int*) (grave + 0x170) = (int) entity;
 		*(int*) (grave + 0x16c) = (int) entity;
-		seq = g_next_object_id;
-		*(int*) (grave + 4) = seq;
-		g_next_object_id = seq + 1;
+		g_citizen_count++;
+		*(int*) (grave + 4) = g_next_object_id++;
 		one = 1;
 		*(volatile unsigned short*) grave = (unsigned short) chosen;
-		g_citizen_count = live;
 	}
 	*(volatile unsigned char*) (grave + 2) = 0x14;
 	*(int*) (grave + 0x1f0) = 0;
