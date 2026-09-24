@@ -32,8 +32,6 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	int count;
 	int job_id;
 	unsigned char field_id;
-	int one;
-	int neg;
 	int off;
 
 	if (*(int*) ((char*) req + 0x15) != 0x1b && *(int*) ((char*) req + 0x15) != 0x1c)
@@ -90,47 +88,43 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		}
 		if (chosen == 0x300) {
 			LogMessageInternal((char*) 0x1002d48c, 0x6ef, (char*) 0x1002d4bc, 1);
-fail_ffff:
 			return 0xffff;
 		}
 	}
 	if (*(unsigned char*) ((char*) 0x100358a2 + chosen * 0x21c) == 0xf)
 		g_citizen_count--;
 	off = chosen * 0x21c;
-	grave = (char*) 0x100358a0 + off;
+	grave = (char*) g_slot_table + off;
 	memset(grave, 0, 0x21c);
 	/* volatile: the slot-index store below writes the same halfword, so
 	 * without the qualifier msvc6 drops this write and the object loses the
 	 * reference's `mov word ptr [ebp],0xffff` at 0x10011db3. */
-	neg = -1;
+	*(volatile unsigned short*) grave = 0xffff;
+	*(int*) ((char*) 0x100358a4 + off) = -1;
+	/* A loop, not memset: msvc6 turns it into the same rep stosd, but the
+	 * destination stays its own register (`lea edx,[edx+...]; mov edi,edx`
+	 * at 0x10011dbf) where memset computes it straight into edi, 5 bytes
+	 * short (shapes 197).  Through the g_slot_table symbol it is a `lea`;
+	 * through the raw address it is `add edx,0x100358fc`. */
+	for (j = 0; j < 8; j++)
+		*(int*) (g_slot_table + 0x5c + off + j * 4) = -1;
+	/* The citizen bump ahead of the object-id bump is what hoists its load
+	 * into edi above the entity stores (0x10011dd2); after it, or through a
+	 * local copy, msvc6 sinks the load to a load-inc-store beside the store. */
 	{
-		char* m2 = grave + 0x5c;
-		*(int*) ((char*) 0x100358a4 + off) = neg;
-		memset(m2, neg, 32);
-		*(volatile unsigned short*) grave = 0xffff;
-	}
-	/* Both counters are read before the entity stores and written back after,
-	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
-	 * Bumping them in place emits a load-inc-store round trip each. */
-	{
-		int live = g_citizen_count + 1;
-		int seq;
 		*(int*) (grave + 0x170) = (int) entity;
 		*(int*) (grave + 0x16c) = (int) entity;
-		seq = g_next_object_id;
-		*(int*) (grave + 4) = seq;
-		g_next_object_id = seq + 1;
-		one = 1;
+		g_citizen_count++;
+		*(int*) (grave + 4) = g_next_object_id++;
 		*(volatile unsigned short*) grave = (unsigned short) chosen;
-		g_citizen_count = live;
 	}
-	*(volatile unsigned char*) (grave + 2) = 0x14;
+	*(unsigned char*) (grave + 2) = 0x14;
 	*(int*) (grave + 0x1f0) = 0;
 	*(int*) (grave + 0x210) = -1;
 	*(unsigned char*) (grave + 0x215) = 0;
 	*(unsigned char*) (grave + 0x216) = 0;
 	*(unsigned char*) (grave + 0x217) = 0;
-	*(unsigned char*) (grave + 0x218) = (unsigned char) one;
+	*(unsigned char*) (grave + 0x218) = 1;
 	*(int*) (grave + 0x1e4) = 0x3f800000; /* 1.0f */
 	*(unsigned char*) (grave + 8) = 0x64;
 	*(unsigned short*) (grave + 0xa) = 0x10;
@@ -140,7 +134,7 @@ fail_ffff:
 	*(unsigned char*) (grave + 0x1f4) = 0;
 	*(int*) (grave + 0x190) = 4;
 	*(int*) (grave + 0x194) = 0;
-	*(unsigned char*) (grave + 0xd) = (unsigned char) one;
+	*(unsigned char*) (grave + 0xd) = 1;
 	*(int*) (grave + 0x18c) = -1;
 	*(int*) (grave + 0x20c) = -1;
 	*(unsigned short*) (grave + 0x50) = 0x7fff;
@@ -150,38 +144,32 @@ fail_ffff:
 			*(unsigned char*) (grave + 0x80 + n) = *(unsigned char*) ((char*) entry + 0x24 + n) >> 1;
 	}
 	*(unsigned char*) (grave + 9) = *(unsigned char*) ((char*) entry + 0x38);
-	*(volatile int*) (grave + 0x10) = 0;
 	strcpy((char*) grave + 0x30, (char*) entry + 4);
-	strcpy((char*) grave + 0x40, (char*) *(void* volatile*) &entry + 0x14);
+	strcpy((char*) grave + 0x40, (char*) entry + 0x14);
+	/* After both copies, as at 0x10011eed; volatile keeps it there. */
+	*(volatile int*) (grave + 0x10) = 0;
 	{
 		int n;
-		volatile int iv;
-		iv = 0;
-		*(float*) (grave + 0x14) =
-		    *(float*) 0x10025680 / (gm_RandomFloat01() * *(float*) 0x100257c8 + *(float*) 0x100257c4);
+		float f;
+		/* The product before the zero stores and the rest after lets the
+		 * scheduler fill the x87 latency with those stores (0x10011ef5). */
+		f = gm_RandomFloat01() * *(float*) 0x100257c8;
 		*(int*) (grave + 0x18) = 0;
 		*(int*) (grave + 0x1c) = 0x447a0000; /* 1000.0f */
 		*(int*) (grave + 0x20) = 0;
 		*(int*) (grave + 0x24) = 0;
 		*(unsigned short*) (grave + 0x28) = 0;
 		*(int*) (grave + 0x2c) = 0;
-		for (n = 0; n < 0x90000; n += 0x300) {
-			int a = n + *(volatile unsigned short*) grave;
-			int byte_offset;
-			int random_value;
-			int col;
-			random_value = gm_RandomMod(0x40);
-			g_relationship_matrix_secondary[a] = 0;
-			g_relationship_matrix_primary[a] = (unsigned char) random_value - 0x20;
-			col = iv;
-			byte_offset = *(volatile unsigned short*) grave * 0x300 + col;
-			/* The counter bump sits between the call and its stores to
-			 * match the reference's `add esi,0x300` / `inc edx` at
-			 * 0x10011f68, ahead of the store pair at 0x10011f75. */
-			random_value = gm_RandomMod(0x40);
-			iv = iv + 1;
-			g_relationship_matrix_primary[byte_offset] = (unsigned char) random_value - 0x20;
-			g_relationship_matrix_secondary[byte_offset] = 0;
+		*(float*) (grave + 0x14) = *(float*) 0x10025680 / (f + *(float*) 0x100257c4);
+		/* Index expressions inline, each call inside its store: the index
+		 * temporaries then rank below the strength-reduced n*0x300 (esi),
+		 * n itself stays on the stack and the zeros come from ebx, as at
+		 * 0x10011f27.  Named index locals take esi first. */
+		for (n = 0; n < 0x300; n++) {
+			g_relationship_matrix_primary[n * 0x300 + *(unsigned short*) grave] = (unsigned char) gm_RandomMod(0x40) - 0x20;
+			g_relationship_matrix_secondary[n * 0x300 + *(unsigned short*) grave] = 0;
+			g_relationship_matrix_primary[*(unsigned short*) grave * 0x300 + n] = (unsigned char) gm_RandomMod(0x40) - 0x20;
+			g_relationship_matrix_secondary[*(unsigned short*) grave * 0x300 + n] = 0;
 		}
 	}
 	if (*(int*) entry == *(int*) ((char*) slot + 4)) {
@@ -203,7 +191,14 @@ fail_ffff:
 	}
 clear_entry:
 	memset(entry, 0, 0x44);
-	*(int*) entry = -1;
-	return (short) *(volatile unsigned short*) grave;
+	/* A plain zero-extending read lets msvc6 skip the `xor eax,eax`, since
+	 * eax is still 0 from the memset: `mov ax,[ebp]` as at 0x10011fe2.  The
+	 * volatile store keeps that read after the -1 store. */
+	*(volatile int*) entry = -1;
+	return *(unsigned short*) grave;
+	/* With this label inside the log block, msvc6 routes the three
+	 * entry-search exits to the `!slot` epilogue at 0x10011cdb; placed here
+	 * they reach the log path's epilogue at 0x10011d77, as in the reference. */
+fail_ffff:
+	return 0xffff;
 }
-
