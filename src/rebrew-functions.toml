@@ -219,9 +219,9 @@ updated_at = "2026-09-22T11:01:58+00:00"
 ["SERVER.0x10008a90"]
 size = 492
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-24T19:58:34+00:00"
 
 ["SERVER.0x10008c80"]
 size = 129
@@ -641,9 +641,9 @@ updated_at = "2026-09-24T19:48:28+00:00"
 
 ["SERVER.0x1000e140"]
 size = 993
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-24T19:58:39+00:00"
 
 ["SERVER.0x1000e530"]
 size = 352
@@ -1231,12 +1231,10 @@ updated_at = "2026-09-22T05:50:31+00:00"
 ["SERVER.0x10015f70"]
 size = 714
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "NEAR_MATCHING"
+status = "RELOC"
 analysis = "Refreshes market availability table (85 entries of 0x80 bytes each). Scans all buildings for producible items, marks ingredients as available, then auto-allocates missing market objects. Also counts special resource types (0x92-0x97, 0x2db) in the town market."
-blocker = "ONE allocator tie-break, fully traced: which of {ebx,edi} the query result gets at birth. Target frees {ebx,esi} so row=ebx; we free {edi,esi} so row=esi -- and esi also holds slot_base, so the base=slot_base copy must be emitted before 'mov esi,0x55' clobbers it. That true data dependency pulls the base copy early, consumes edx, displaces the item-def table into edi and reorders the shl/add chain. The match block is therefore the rename's SHADOW, not a second fault -- do not re-attack it (a1-a6, f1-f6, n1-n6, x1-x6 all inert). 25 faulting bytes + 3 collateral (0x168-0x16a is byte-identical, only displaced); 18 diffs = 15 register-only + 3 structural. Shapes 85 kills the lever: row=0x55 and inner=4 are constants with no definition site"
-blocker_delta = 28
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+updated_by = "test"
+updated_at = "2026-09-24T19:58:31+00:00"
 
 ["SERVER.0x10016240"]
 size = 72
@@ -1588,12 +1586,10 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10019ed0"]
 size = 395
-status = "NEAR_MATCHING"
+status = "RELOC"
 ghidra = "gm_KannObjektHergestellt"
-blocker = "one spilled entity byte drives all 11 hunks; second hunk is constant remat (shapes 85, unreachable); plateau 298/395"
-blocker_delta = 125
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+updated_by = "test"
+updated_at = "2026-09-24T19:58:27+00:00"
 
 ["SERVER.0x1001a060"]
 size = 97
