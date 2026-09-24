@@ -119,13 +119,15 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	 * the slot-index store come first, then the object-id read, both dynamic
 	 * stores, slot[2] and the object-id writeback.  Both counters are read
 	 * into a local ahead of their stores and written back after, which is what
-	 * emits the reference's ecx traffic instead of a load-inc-store pair. */
+	 * emits the reference's ecx traffic instead of a load-inc-store pair.
+	 * The slot-index store is plain: volatile, it is emitted ahead of the
+	 * citizen-count load rather than after the `inc` (0x1000bf0c). */
 	{
 		int live = g_citizen_count + 1;
 		int seq;
 		one = 1;
 		g_citizen_count = live;
-		*(volatile unsigned short*) (g_slot_table + slot_index * 0x21c) =
+		*(unsigned short*) (g_slot_table + slot_index * 0x21c) =
 		    (unsigned short) slot_index;
 		*(int*) (slot + 0x170) = (int) dynamic;
 		*(int*) (slot + 0x16c) = (int) dynamic;
