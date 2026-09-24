@@ -68,16 +68,22 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  *    after it: the reference materialises the address (`add eax,edi`) and
  *    reuses edi for the increment.  Read inline, the address folds into
  *    `[eax+edi]`, edi stays live and the increment takes ebp, 1 byte short.
+ *  - The dest SlotVoll check is gated on `dest_dynamic_entity != 0 ||
+ *    entity_type == 0x1dd` after the store, not on a label shared with
+ *    the store arm: dest_dynamic_entity is still 0 from its initialiser
+ *    there, so msvc6 folds the test and emits the reference's layout
+ *    (store falls through, `jmp` to the check, 0x1dd test falls into it).
  *
  * No local is volatile: the volatile reloads earlier rounds used to keep
  * dest_dynamic_entity and dest_owner_entity out of registers across the
  * dest join are byte-neutral or worse once the shapes above are in place.
  *
- * Remaining differences (object, /O2 /Gd /Ow): the 0x1dd arm layout at
- * 0x1000dc16, ecx/edx swapped in the source-finalize category load at
- * 0x1000de2b, and two loads the scheduler hoists above a store
- * (0x1000e053, 0x1000e0f5).  Compiled without /Ow only the first remains
- * (linked -16 more, measured 2026-09-25 with the flag dropped by hand).
+ * Remaining differences (object, /O2 /Gd /Ow): ecx/edx swapped in the
+ * source-finalize category load at 0x1000de2b, and two loads the
+ * scheduler hoists above a store (0x1000e053, 0x1000e0f5).  All three are
+ * /Ow: compiled with /O2 /Gd the object matches the reference 2057/2057
+ * with relocations masked.  The reference keeps both loads below their
+ * stores, which is the alias-assuming default.
  *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29; not
  * re-proven after the 2026-09-25 reshaping, whose edits keep every call,
@@ -224,7 +230,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			if (entity_type == 0x2a || entity_type == 0x1db ||
 				entity_type == 0x1dc || entity_type == 0x116) {
 				dest_dynamic_entity = resolved_dynamic;
-			check_producible:
+			}
+			if (dest_dynamic_entity != (short*)0 || entity_type == 0x1dd) {
 				resolve_result = gm_eval_SlotVoll(
 					(char*)resolved_dynamic,
 					(uint)*(ushort*)(cmd + 0x18),
@@ -234,8 +241,6 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d1b, "cm_ExSellObjekt() Lager voll", 8);
 					return 1;
 				}
-			} else if (entity_type == 0x1dd) {
-				goto check_producible;
 			}
 			linked_list_ptr = (int*)(resolved_dynamic + 10);
 			dest_owner_entity = gm_ResolveParentEntity(resolved_dynamic);
