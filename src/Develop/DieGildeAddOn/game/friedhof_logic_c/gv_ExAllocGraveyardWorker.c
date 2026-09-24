@@ -154,38 +154,23 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	*(volatile int*) (grave + 0x10) = 0;
 	{
 		int n;
-		volatile int iv;
-		iv = 0;
 		*(float*) (grave + 0x14) =
 		    *(float*) 0x10025680 / (gm_RandomFloat01() * *(float*) 0x100257c8 + *(float*) 0x100257c4);
 		*(int*) (grave + 0x18) = 0;
 		*(int*) (grave + 0x1c) = 0x447a0000; /* 1000.0f */
 		*(int*) (grave + 0x20) = 0;
 		*(int*) (grave + 0x24) = 0;
-		/* Byte-wide on purpose: the memset already zeroed +0x29.  The
-		 * reference stores a halfword here, one byte longer; the byte saved
-		 * pays for the loop below being one byte longer than the reference's
-		 * (its esi/edi roles are swapped), which keeps everything after the
-		 * loop at the reference's offsets. */
-		*(unsigned char*) (grave + 0x28) = 0;
+		*(unsigned short*) (grave + 0x28) = 0;
 		*(int*) (grave + 0x2c) = 0;
-		for (n = 0; n < 0x90000; n += 0x300) {
-			int a = n + *(unsigned short*) grave;
-			int byte_offset;
-			int random_value;
-			int col;
-			random_value = gm_RandomMod(0x40);
-			g_relationship_matrix_secondary[a] = 0;
-			g_relationship_matrix_primary[a] = (unsigned char) random_value - 0x20;
-			col = iv;
-			byte_offset = *(volatile unsigned short*) grave * 0x300 + col;
-			/* The counter bump sits between the call and its stores to
-			 * match the reference's `add esi,0x300` / `inc edx` at
-			 * 0x10011f68, ahead of the store pair at 0x10011f75. */
-			random_value = gm_RandomMod(0x40);
-			iv = iv + 1;
-			g_relationship_matrix_primary[byte_offset] = (unsigned char) random_value - 0x20;
-			g_relationship_matrix_secondary[byte_offset] = 0;
+		/* Index expressions inline, each call inside its store: the index
+		 * temporaries then rank below the strength-reduced n*0x300 (esi),
+		 * n itself stays on the stack and the zeros come from ebx, as at
+		 * 0x10011f27.  Named index locals take esi first. */
+		for (n = 0; n < 0x300; n++) {
+			g_relationship_matrix_primary[n * 0x300 + *(unsigned short*) grave] = (unsigned char) gm_RandomMod(0x40) - 0x20;
+			g_relationship_matrix_secondary[n * 0x300 + *(unsigned short*) grave] = 0;
+			g_relationship_matrix_primary[*(unsigned short*) grave * 0x300 + n] = (unsigned char) gm_RandomMod(0x40) - 0x20;
+			g_relationship_matrix_secondary[*(unsigned short*) grave * 0x300 + n] = 0;
 		}
 	}
 	if (*(int*) entry == *(int*) ((char*) slot + 4)) {
