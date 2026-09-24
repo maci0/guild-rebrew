@@ -121,10 +121,12 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	*(unsigned char*) (grave + 2) = 0x14;
 	*(int*) (grave + 0x1f0) = 0;
 	*(int*) (grave + 0x210) = -1;
+	/* Out of the reference's store order (it stores +0x218 after +0x217):
+	 * this position loads the `1` beside the req reload and links closer. */
+	*(unsigned char*) (grave + 0x218) = 1;
 	*(unsigned char*) (grave + 0x215) = 0;
 	*(unsigned char*) (grave + 0x216) = 0;
 	*(unsigned char*) (grave + 0x217) = 0;
-	*(unsigned char*) (grave + 0x218) = 1;
 	*(int*) (grave + 0x1e4) = 0x3f800000; /* 1.0f */
 	*(unsigned char*) (grave + 8) = 0x64;
 	*(unsigned short*) (grave + 0xa) = 0x10;
