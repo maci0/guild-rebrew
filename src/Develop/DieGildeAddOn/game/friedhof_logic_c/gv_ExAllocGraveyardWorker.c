@@ -110,15 +110,12 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		*(int*) (g_slot_table + 0x5c + off + j * 4) = -1;
 	/* The citizen bump ahead of the object-id bump is what hoists its load
 	 * into edi above the entity stores (0x10011dd2); after it, or through a
-	 * local copy, msvc6 sinks the load to a load-inc-store beside the store.
-	 * The +0x165 copy from req belongs here, ahead of the slot-id store: its
-	 * req load then takes ecx in the scratch rotation (0x10011df5). */
+	 * local copy, msvc6 sinks the load to a load-inc-store beside the store. */
 	{
 		*(int*) (grave + 0x170) = (int) entity;
 		*(int*) (grave + 0x16c) = (int) entity;
 		g_citizen_count++;
 		*(int*) (grave + 4) = g_next_object_id++;
-		*(unsigned char*) (grave + 0x165) = *(unsigned char*) ((char*) req + 0x15);
 		*(volatile unsigned short*) grave = (unsigned short) chosen;
 	}
 	*(unsigned char*) (grave + 2) = 0x14;
@@ -133,6 +130,9 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	*(unsigned short*) (grave + 0xa) = 0x10;
 	*(unsigned char*) (grave + 0x164) = 0;
 	*(unsigned char*) (grave + 0x166) = 0;
+	/* Under /Ow the plain read hoists to the top of the stores; volatile
+	 * keeps `mov cl,[ecx+0x15]` beside its store as at 0x10011e4d. */
+	*(unsigned char*) (grave + 0x165) = *(volatile unsigned char*) ((char*) req + 0x15);
 	*(unsigned char*) (grave + 0x1f4) = 0;
 	*(int*) (grave + 0x190) = 4;
 	*(int*) (grave + 0x194) = 0;
