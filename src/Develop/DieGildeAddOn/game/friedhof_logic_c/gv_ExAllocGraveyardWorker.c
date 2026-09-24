@@ -98,16 +98,18 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	off = chosen * 0x21c;
 	grave = (char*) 0x100358a0 + off;
 	memset(grave, 0, 0x21c);
+	neg = -1;
 	/* volatile: the slot-index store below writes the same halfword, so
 	 * without the qualifier msvc6 drops this write and the object loses the
 	 * reference's `mov word ptr [ebp],0xffff` at 0x10011db3. */
-	neg = -1;
-	{
-		char* m2 = grave + 0x5c;
-		*(int*) ((char*) 0x100358a4 + off) = neg;
-		memset(m2, neg, 32);
-		*(volatile unsigned short*) grave = 0xffff;
-	}
+	*(volatile unsigned short*) grave = 0xffff;
+	*(int*) ((char*) 0x100358a4 + off) = neg;
+	/* A loop, not memset: msvc6 turns it into the same rep stosd, but the
+	 * destination stays its own register (`add edx,...; mov edi,edx`, the
+	 * reference's length at 0x10011dbf) where memset computes it straight
+	 * into edi, 5 bytes short (shapes 197). */
+	for (j = 0; j < 8; j++)
+		*(int*) ((char*) 0x100358fc + off + j * 4) = neg;
 	/* Both counters are read before the entity stores and written back after,
 	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
 	 * Bumping them in place emits a load-inc-store round trip each. */
@@ -162,10 +164,15 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		*(int*) (grave + 0x1c) = 0x447a0000; /* 1000.0f */
 		*(int*) (grave + 0x20) = 0;
 		*(int*) (grave + 0x24) = 0;
-		*(unsigned short*) (grave + 0x28) = 0;
+		/* Byte-wide on purpose: the memset already zeroed +0x29.  The
+		 * reference stores a halfword here, one byte longer; the byte saved
+		 * pays for the loop below being one byte longer than the reference's
+		 * (its esi/edi roles are swapped), which keeps everything after the
+		 * loop at the reference's offsets. */
+		*(unsigned char*) (grave + 0x28) = 0;
 		*(int*) (grave + 0x2c) = 0;
 		for (n = 0; n < 0x90000; n += 0x300) {
-			int a = n + *(volatile unsigned short*) grave;
+			int a = n + *(unsigned short*) grave;
 			int byte_offset;
 			int random_value;
 			int col;
