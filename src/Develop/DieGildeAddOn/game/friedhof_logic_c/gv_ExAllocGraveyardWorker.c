@@ -105,11 +105,12 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	*(volatile unsigned short*) grave = 0xffff;
 	*(int*) ((char*) 0x100358a4 + off) = neg;
 	/* A loop, not memset: msvc6 turns it into the same rep stosd, but the
-	 * destination stays its own register (`add edx,...; mov edi,edx`, the
-	 * reference's length at 0x10011dbf) where memset computes it straight
-	 * into edi, 5 bytes short (shapes 197). */
+	 * destination stays its own register (`lea edx,[edx+...]; mov edi,edx`
+	 * at 0x10011dbf) where memset computes it straight into edi, 5 bytes
+	 * short (shapes 197).  Through the g_slot_table symbol it is a `lea`;
+	 * through the raw address it is `add edx,0x100358fc`. */
 	for (j = 0; j < 8; j++)
-		*(int*) ((char*) 0x100358fc + off + j * 4) = neg;
+		*(int*) (g_slot_table + 0x5c + off + j * 4) = neg;
 	/* Both counters are read before the entity stores and written back after,
 	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
 	 * Bumping them in place emits a load-inc-store round trip each. */
