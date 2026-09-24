@@ -178,7 +178,7 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * 2026-09-13 (round 121): source-block category guard tests '\x06'
  * first (`'\x06' || '\x02'`; dest-side twin keeps '\x02'-first) —
  * object +1/+1 both rulers, linked 1346 -> 1345 (-1, confirmed after
- * full rebuild).  Kept for the byte.
+ * full rebuild).  Kept for the byte.  REVERTED 2026-09-25 (see below).
  *
  * 2026-09-14 (round 173): `dest_object = dest_game_object` moved from
  * top level INTO the `cmd+0x10` dest-finalize block, as its first
@@ -235,6 +235,13 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  *    and that one extra slot reference moves source_dynamic_entity to
  *    the reference's slot 0x18.
  *  - the `= 0` initialisers follow the reference's store order.
+ * Then 5382 -> 5370 (-12): dest_owner_entity is read through volatile at
+ * the post-join `cmd+0x23` test and once, into `owner_reload`, in the
+ * category arm.  The reference holds no register for it across the join:
+ * it tests `[esp+0x10]` in ecx and loads edi only for the gm_SubObjekt
+ * body.  Dropping the post-join volatile alone loses 3 object bytes.  The
+ * source-side category guard is back to `'\x02'` first, the reference's
+ * compare order (linked-neutral on its own).
  *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29.
  * The round-173 move preserves that: `dest_object` is read only inside
@@ -280,6 +287,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	struct SLogBuffer log_buffer;
 	short entity_type;
 	short* dest_dyn_reload;
+	short* owner_reload;
 	char obj_category;
 
 	source_owner_entity = (short*)0;
@@ -491,7 +499,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		amount = *(int*)(dest_object + 7);
 		if (amount <= 0) {
 			obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
-			if (obj_category == '\x06' || obj_category == '\x02') {
+			if (obj_category == '\x02' || obj_category == '\x06') {
 				if (source_existing_entity != (void*)0) {
 					gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(cmd + 0x18));
 				} else {
@@ -565,15 +573,15 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 					obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 					if ((obj_category == '\x17' || obj_category == '%') &&
 						(*dest_dynamic_entity == 0x2a || *dest_dynamic_entity == 0x116) &&
-						dest_owner_entity != (short*)0 &&
-						((char)dest_owner_entity[1] == '\x06' || (char)dest_owner_entity[1] == '\a')) {
+						(owner_reload = *(short* volatile*)&dest_owner_entity) != (short*)0 &&
+						((char)owner_reload[1] == '\x06' || (char)owner_reload[1] == '\a')) {
 						*(int*)(dest_object + 0xe) = 4;
 					}
 				}
 			}
 		}
 		*(int*)(((PlayerSlot*)g_connections)[(unsigned char)cmd[3]].data + 0x264200) = *(int*)(dest_object + 1);
-		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
+		if (*(int*)(cmd + 0x23) != 0 && *(short* volatile*)&dest_owner_entity != (short*)0) {
 			gm_SubObjekt(
 				*(void**)(dest_owner_entity + 2),
 				(uint) (unsigned short) g_entity_slot_table[(unsigned char) cmd[0x1e] * 189],
