@@ -5,8 +5,14 @@
 // LIBRARY: D3DX8 0x0045fa70
 // _gzeof
 
+// LIBRARY: D3DX8 0x004609c0
+// _inflate_blocks_free
+
 // LIBRARY: D3DX8 0x00460a40
 // ?inflate_blocks_sync_point@D3DX@@YAHPAUinflate_blocks_state@1@@Z
+
+// LIBRARY: D3DX8 0x00460a50
+// _inflate_codes_new
 
 // LIBRARY: D3DX8 0x005eac1c
 // ?WithinEpsilon@@YAHMM@Z
