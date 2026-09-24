@@ -328,16 +328,6 @@ if(REBREW_BUILD_SERVER)
   # historical "residue 8,652 -> 8,641" belongs to the round that added the first
   # pin and is not reproducible at today's residue level).
 
-  # Round 941: /Ow on gv_ExAllocGraveyardWorker, measured 8,633 -> 8,628 (-5).
-  # The other six carriers that lack /Ow were swept as a group and the sweep
-  # COLLAPSED the composition (".text 0x22f18, 18 objects too long"), so /Ow is
-  # not a free win on them -- it grows objects past their spans.  Do not add
-  # them without measuring one at a time.  CrashDump and ls_LoadBuildingEntityState
-  # were already known inert from rounds 919-920.
-  set_source_files_properties(
-    "${PROJECT_SOURCE_DIR}/src/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c"
-    PROPERTIES COMPILE_OPTIONS "/Ow")
-
   if(MSVC)
     foreach(_zsrc IN LISTS ZLIB_SOURCES)
       set_source_files_properties("${_zsrc}" PROPERTIES COMPILE_FLAGS "/O2")

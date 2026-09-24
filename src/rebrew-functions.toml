@@ -157,7 +157,6 @@ status = "EXACT"
 
 ["SERVER.0x10006580"]
 size = 658
-cflags = "/O2 /Gd /G6 /Oy-"
 toolchain = "msvc-6.0-sp6"
 status = "NEAR_MATCHING"
 analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
@@ -237,7 +236,6 @@ updated_at = "2026-09-22T11:01:58+00:00"
 
 ["SERVER.0x10008e40"]
 size = 472
-cflags = "/O2 /Gd /Oy-"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T11:10:15+00:00"
@@ -338,10 +336,10 @@ updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x1000a860"]
 size = 131
-cflags = "/O2 /Gd /Ow"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T05:50:31+00:00"
+cflags = "/O2 /Gd /Ow"
 
 ["SERVER.0x1000a8f0"]
 size = 170
@@ -640,13 +638,12 @@ size = 2057
 status = "SIZE_MISMATCH"
 blocker = "register/slot permutation + intra-block scheduling; frame matches (both sides sub esp,0x228, re-verified round 186); residual is 71% displaced bytes with no dominant cause -- see .c header"
 blocker_delta = 1066
-cflags = "/O2 /Gd /Ow"
 updated_by = "verify"
 updated_at = "2026-09-24T18:07:38+00:00"
+cflags = "/O2 /Gd /Ow"
 
 ["SERVER.0x1000e140"]
 size = 993
-cflags = "/Ox /Gd"
 status = "NEAR_MATCHING"
 updated_by = "verify"
 updated_at = "2026-09-24T18:07:38+00:00"
@@ -969,7 +966,7 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10011bf0"]
 size = 1040
-cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /Ow"
 status = "STUB"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
