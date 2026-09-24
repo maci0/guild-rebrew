@@ -10,6 +10,7 @@ extern int g_aux_entity_buffer; /* 0x101de55c */
 #include "../../game/entity.h"
 
 #include <stdlib.h>
+#include <string.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
@@ -26,43 +27,20 @@ unsigned int ls_LoadBuildingEntityState(unsigned int);
  * production slots, worker assignments, and field states
  * for graveyard buildings.
  *
- * NOTE (round 143): the "constant-caching blocker" is beaten by making the
- * read loop's argument reads VOLATILE, and only that way.  The reference
- * caches the -1 sentinel in ebp (`or ebp,-1` once + `mov [..],ebp` at three
- * sites); under /O2 msvc6 rematerializes `mov dword [..],0xffffffff` instead,
- * the missing saved register shifts every frame slot, and the whole function
- * desyncs.  Writing the eight `ls_ReadVfsDataChecked` field reads as
- * `*(volatile int*) (esi + 0x71)` (the store stays plain) makes /O2 emit the
- * cached form *and* keep the reference's per-call reloads: fixed-offset masked
- * match 347 -> 856 of 1463, object 1464 -> 1472 against the reference's 1463
- * (2026-09-13 probe: 645 matched / 879 reloc; figures above predate later
- * work, retained as the fix's record),
- * failing postlink entries 114 -> 59, .text residual 1404 -> 775 bytes, and
- * whole-binary coverage 88.6% -> 89.3%.
- *
- * 2026-09-13 (round 130): `current_index = 0;` hoisted ABOVE the
- * aux-count read (was after realloc) — matches reference order
- * (xor-zero, count read, realloc, re-read, test/jle): object 645/879
- * -> 690/918, rebrew 774 -> 820, linked 728 -> 675 (-53, confirmed
- * after full rebuild).  Kept.
- *
- * The switch is fragile and global — swept, all reverted: volatile at any ONE
- * of the ten field sites leaves the constant rematerialized, the store's own
- * read volatile kills it again, and so do `4 + load_result + ...`, the
- * field-first order, `char*` arithmetic, add-then-constant, a `volatile` store
- * (alone or on top), `unsigned int load_result` (identical) and
- * `load_result = load_result + 0x18` (identical).  This contradicts the note in
- * docs/TODO.md round 24 that a volatile read "regresses to 117/1471".
- *
- * Residual (25 aligned hunks): the read loop's induction form (`mov ebx,8;
- * lea ebp,[ebx-8]` where the reference keeps a plain `xor ebx,ebx` and
- * `lea [ebx+edx+N]`), the store block (`state_ptr[0] |= 1` folds to one store
- * where the reference reloads — forcing that read volatile costs 16 bytes), a
- * `lea esi,[edx+ecx]` / `[ecx+edx]` operand order, and the g_aux_entity_buffer
- * block.  `rebrew prove` reports an EAX=1 vs 0 mismatch on some (3 x 7)
- * explored state pairs — consistent with the read-hook symbolics under the
- * divergent block layout, not confirmed as a real behavioural difference
- * (mnemonics align 100%). */
+ * Shape notes (whole-image linked residue 5404 -> 4741 over the byte-offset form):
+ * - The 0x1e arm and the aux loop are counted index loops (`i < 0x40`,
+ *   `base + i * 0x18 + N`; `buf + i * 0x60 + N`).  Strength reduction then
+ *   gives the reference's `xor ebx,ebx` / `lea [ebx+edx+N]` induction, its
+ *   `mov ecx,ebx; add ecx,edx` first site, and `xor esi,esi` inside the aux
+ *   guard.  Byte-offset loops (`i += 0x18`) put the load on the left of every
+ *   address sum and lose 2 bytes at the first site.
+ * - The state block is `memset` + `|= 1` (docs/msvc6-c-shapes.md section 71).
+ *   Its extra candidates are what give the -1 sentinel `ebp` (`or ebp,-1` once,
+ *   three `mov [..],ebp`), so the field reads need no `volatile` any more; with
+ *   the plain loads the scheduler also hoists each load above the pushes, as
+ *   the reference does.
+ * - Remaining: the outer loop's `lea esi,[edx+ecx]` operand order, and
+ *   `add esp,8` before `mov [ebx],eax` in the 0x4b-0x4d arm. */
 
 
 unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
@@ -173,12 +151,12 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 
 			if (esi[0] == 0x1e) {
 				*(int*) (esi + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x1002d510);
-				for (load_result = 0; load_result < 0x600; load_result += 0x18) {
-					if (!ls_ReadVfsDataChecked((void*) (load_result + *(volatile int*) (esi + 0x71)), 4, 1, (void*) stream_ctx)) {
+				for (load_result = 0; load_result < 0x40; load_result++) {
+					if (!ls_ReadVfsDataChecked((void*) (*(int*) (esi + 0x71) + load_result * 0x18), 4, 1, (void*) stream_ctx)) {
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (*(volatile int*) (esi + 0x71) + load_result + 4),
+							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 4),
 							4,
 							1,
 							(void*) stream_ctx
@@ -186,7 +164,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (*(volatile int*) (esi + 0x71) + load_result + 8),
+							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 8),
 							1,
 							1,
 							(void*) stream_ctx
@@ -194,7 +172,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (*(volatile int*) (esi + 0x71) + load_result + 9),
+							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 9),
 							1,
 							1,
 							(void*) stream_ctx
@@ -202,7 +180,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (*(volatile int*) (esi + 0x71) + load_result + 0xa),
+							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 0xa),
 							2,
 							1,
 							(void*) stream_ctx
@@ -210,7 +188,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (*(volatile int*) (esi + 0x71) + load_result + 0x10),
+							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 0x10),
 							4,
 							1,
 							(void*) stream_ctx
@@ -218,7 +196,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 0xc + *(volatile int*) (esi + 0x71)),
+							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 0xc),
 							1,
 							1,
 							(void*) stream_ctx
@@ -226,14 +204,14 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 0xd + *(volatile int*) (esi + 0x71)),
+							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 0xd),
 							1,
 							1,
 							(void*) stream_ctx
 						)) {
 						return 0;
 					}
-					*(int*) (load_result + 0x14 + *(int*) (esi + 0x71)) = 0;
+					*(int*) (*(int*) (esi + 0x71) + load_result * 0x18 + 0x14) = 0;
 				}
 			}
 			else if (esi[0] == 0x48 || esi[0] == 0x49 || esi[0] == 0x4a) {
@@ -283,12 +261,9 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 			}
 			else {
 				int* state_ptr = (int*) (esi + 0x99);
-				state_ptr[0] = 0;
-				state_ptr[1] = 0;
-				state_ptr[2] = 0;
-				state_ptr[3] = 0;
+				memset((void*) state_ptr, 0, 0x10);
 				state_ptr[0] |= 1;
-				state_ptr[3] = neg1;
+				*(int*) (esi + 0xa5) = neg1;
 			}
 
 			*(int*) (esi + 0x30) = 0x1388;
@@ -305,16 +280,15 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 
 	g_aux_entity_buffer = (int) realloc((void*) g_aux_entity_buffer, g_aux_entity_count * 0x60);
 	for (load_result = 0; load_result < g_aux_entity_count; load_result++) {
-		if (!ls_ReadVfsDataChecked((void*) (current_index + g_aux_entity_buffer), 0x40, 1, (void*) stream_ctx)) {
+		if (!ls_ReadVfsDataChecked((void*) (g_aux_entity_buffer + load_result * 0x60), 0x40, 1, (void*) stream_ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked((void*) (current_index + 0x40 + g_aux_entity_buffer), 0x10, 1, (void*) stream_ctx)) {
+		if (!ls_ReadVfsDataChecked((void*) (g_aux_entity_buffer + load_result * 0x60 + 0x40), 0x10, 1, (void*) stream_ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked((void*) (current_index + 0x50 + g_aux_entity_buffer), 0x10, 1, (void*) stream_ctx)) {
+		if (!ls_ReadVfsDataChecked((void*) (g_aux_entity_buffer + load_result * 0x60 + 0x50), 0x10, 1, (void*) stream_ctx)) {
 			return 0;
 		}
-		current_index += 0x60;
 	}
 
 	return 1;
