@@ -18,6 +18,55 @@ int __cdecl vfs_FlushAndClose(int);
 /* Reads a single byte from a VFS stream. Advances the read
  * position and returns the byte value, or error on EOF. */
 
+
+/* Destroys a VFS entity (file/directory node). Frees the
+ * entity's name string and the entity struct itself. */
+
+// FUNCTION: SERVER 0x10003b90
+// vfs_FlushStream
+
+unsigned int __cdecl vfs_FlushStream(int stream, int dest)
+{
+	int done;
+	int write_result;
+	int remaining;
+
+	done = 0;
+	if (stream == 0 || *(char*) (stream + 0x5c) != 'w') {
+		return 0xFFFFFFFE;
+	}
+	*(int*) (stream + 4) = 0;
+	do {
+		remaining = 0x4000 - *(int*) (stream + 0x10);
+		if (remaining != 0) {
+			write_result = _crt_locked_call4a(*(void**) (stream + 0x48), 1, remaining, *(void**) (stream + 0x40));
+			if (write_result != remaining) {
+				*(int*) (stream + 0x38) = -1;
+				return (unsigned int) -1;
+			}
+			*(int*) (stream + 0x10) = 0x4000;
+			*(int*) (stream + 0x0c) = *(int*) (stream + 0x48);
+		}
+		if (done) {
+			break;
+		}
+		write_result = deflate((void*) stream, (int) dest);
+		*(int*) (stream + 0x38) = write_result;
+		if (remaining == 0 && write_result == -5) {
+			*(int*) (stream + 0x38) = 0;
+		}
+		if (*(int*) (stream + 0x10) == 0 && *(int*) (stream + 0x38) != 1) {
+			done = 0;
+		}
+		else {
+			done = 1;
+		}
+	} while (*(int*) (stream + 0x38) == 0 || *(int*) (stream + 0x38) == 1);
+	if (*(unsigned int*) (stream + 0x38) != 1) {
+		return *(unsigned int*) (stream + 0x38);
+	}
+	return 0;
+}
 // FUNCTION: SERVER 0x10003C50
 // vfs_ReadUint32BE
 
@@ -75,55 +124,6 @@ void __cdecl vfs_WriteUint32LE(int stream, unsigned int value)
 		i = i - 1;
 	} while (i != 0);
 	return;
-}
-
-/* Destroys a VFS entity (file/directory node). Frees the
- * entity's name string and the entity struct itself. */
-
-// FUNCTION: SERVER 0x10003b90
-// vfs_FlushStream
-
-unsigned int __cdecl vfs_FlushStream(int stream, int dest)
-{
-	int done;
-	int write_result;
-	int remaining;
-
-	done = 0;
-	if (stream == 0 || *(char*) (stream + 0x5c) != 'w') {
-		return 0xFFFFFFFE;
-	}
-	*(int*) (stream + 4) = 0;
-	do {
-		remaining = 0x4000 - *(int*) (stream + 0x10);
-		if (remaining != 0) {
-			write_result = _crt_locked_call4a(*(void**) (stream + 0x48), 1, remaining, *(void**) (stream + 0x40));
-			if (write_result != remaining) {
-				*(int*) (stream + 0x38) = -1;
-				return (unsigned int) -1;
-			}
-			*(int*) (stream + 0x10) = 0x4000;
-			*(int*) (stream + 0x0c) = *(int*) (stream + 0x48);
-		}
-		if (done) {
-			break;
-		}
-		write_result = deflate((void*) stream, (int) dest);
-		*(int*) (stream + 0x38) = write_result;
-		if (remaining == 0 && write_result == -5) {
-			*(int*) (stream + 0x38) = 0;
-		}
-		if (*(int*) (stream + 0x10) == 0 && *(int*) (stream + 0x38) != 1) {
-			done = 0;
-		}
-		else {
-			done = 1;
-		}
-	} while (*(int*) (stream + 0x38) == 0 || *(int*) (stream + 0x38) == 1);
-	if (*(unsigned int*) (stream + 0x38) != 1) {
-		return *(unsigned int*) (stream + 0x38);
-	}
-	return 0;
 }
 
 /* Reads a 32-bit big-endian integer from the VFS stream and

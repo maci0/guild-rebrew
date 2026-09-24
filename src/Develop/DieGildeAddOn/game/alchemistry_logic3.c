@@ -20,46 +20,6 @@ dispatch_fn g_chain_handler_table[106] = {
  * out its operational fields via memset. */
 // FUNCTION: GOLDTL 0x499a50
 // SIZE: 128
-// FUNCTION: SERVER 0x1000CA90
-// gm_GetFieldByType
-
-int __cdecl gm_GetFieldByType(char* p, int type)
-{
-	unsigned int byte_value;
-	unsigned int i;
-
-	if (type == -2) {
-		byte_value = (unsigned char) p[3];
-		i = byte_value << 4;
-		i += byte_value;
-		i <<= 8;
-		i += byte_value;
-		i <<= 4;
-		i += byte_value;
-		return ((int*) 0x10442d00)[i * 9];
-	}
-	if (type == -3) {
-		byte_value = (unsigned char) p[3];
-		i = byte_value << 4;
-		i += byte_value;
-		i <<= 8;
-		i += byte_value;
-		i <<= 4;
-		i += byte_value;
-		return ((int*) 0x10442d04)[i * 9];
-	}
-	if (type == -4) {
-		byte_value = (unsigned char) p[3];
-		i = byte_value << 4;
-		i += byte_value;
-		i <<= 8;
-		i += byte_value;
-		i <<= 4;
-		i += byte_value;
-		return ((int*) 0x10442d08)[i * 9];
-	}
-	return type;
-}
 
 // FUNCTION: SERVER 0x1000ca00
 
@@ -114,6 +74,46 @@ error:
 	}
 	n->cmd = 2;
 	return 1;
+}
+// FUNCTION: SERVER 0x1000CA90
+// gm_GetFieldByType
+
+int __cdecl gm_GetFieldByType(char* p, int type)
+{
+	unsigned int byte_value;
+	unsigned int i;
+
+	if (type == -2) {
+		byte_value = (unsigned char) p[3];
+		i = byte_value << 4;
+		i += byte_value;
+		i <<= 8;
+		i += byte_value;
+		i <<= 4;
+		i += byte_value;
+		return ((int*) 0x10442d00)[i * 9];
+	}
+	if (type == -3) {
+		byte_value = (unsigned char) p[3];
+		i = byte_value << 4;
+		i += byte_value;
+		i <<= 8;
+		i += byte_value;
+		i <<= 4;
+		i += byte_value;
+		return ((int*) 0x10442d04)[i * 9];
+	}
+	if (type == -4) {
+		byte_value = (unsigned char) p[3];
+		i = byte_value << 4;
+		i += byte_value;
+		i <<= 8;
+		i += byte_value;
+		i <<= 4;
+		i += byte_value;
+		return ((int*) 0x10442d08)[i * 9];
+	}
+	return type;
 }
 
 /* Resolves a field value by type from a command packet.

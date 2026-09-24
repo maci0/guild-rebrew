@@ -71,40 +71,6 @@ void __cdecl gm_ResetAllEntities(void)
 	}
 }
 
-/* Cleans up object entities. Frees inventory objects and
- * linked item chains from all active entities. */
-
-// FUNCTION: SERVER 0x10015E00
-// gm_CleanupAllEntities
-
-void __cdecl gm_CleanupAllEntities(void)
-{
-	int ent;
-	ent = (int) gm_StartFilteredEntitySearch(1, 6);
-	if (ent) {
-		do {
-			((void(__cdecl*)(unsigned char*)) gm_CleanupBuildingEntity)((unsigned char*) ent);
-			ent = (int) gm_FindNextFilteredEntity();
-		} while (ent);
-	}
-	if (g_entity_type_table) {
-		m_FreeTracked(g_entity_type_table);
-		g_entity_type_table = 0;
-	}
-	if (g_entity_ptr) {
-		m_FreeTracked(g_entity_ptr);
-		g_entity_ptr = 0;
-	}
-	if (g_item_def_table) {
-		m_FreeTracked(g_item_def_table);
-		g_item_def_table = 0;
-	}
-	if (g_query_base) {
-		m_FreeTracked(g_query_base);
-		g_query_base = 0;
-	}
-}
-
 /* Resolves an entity by ID to up to three pointers:
  * primary entity, object entity, and dynamic entity.
  * Returns non-zero on success. Core entity resolution API. */
@@ -173,6 +139,40 @@ Record* __cdecl gm_FindRecordById(int id)
 		entity_cursor = (Record*) ((char*) entity_cursor + 0x43);
 	}
 	return (Record*) 0;
+}
+
+/* Cleans up object entities. Frees inventory objects and
+ * linked item chains from all active entities. */
+
+// FUNCTION: SERVER 0x10015E00
+// gm_CleanupAllEntities
+
+void __cdecl gm_CleanupAllEntities(void)
+{
+	int ent;
+	ent = (int) gm_StartFilteredEntitySearch(1, 6);
+	if (ent) {
+		do {
+			((void(__cdecl*)(unsigned char*)) gm_CleanupBuildingEntity)((unsigned char*) ent);
+			ent = (int) gm_FindNextFilteredEntity();
+		} while (ent);
+	}
+	if (g_entity_type_table) {
+		m_FreeTracked(g_entity_type_table);
+		g_entity_type_table = 0;
+	}
+	if (g_entity_ptr) {
+		m_FreeTracked(g_entity_ptr);
+		g_entity_ptr = 0;
+	}
+	if (g_item_def_table) {
+		m_FreeTracked(g_item_def_table);
+		g_item_def_table = 0;
+	}
+	if (g_query_base) {
+		m_FreeTracked(g_query_base);
+		g_query_base = 0;
+	}
 }
 
 /* Cleans up all entities. Complete teardown of all game

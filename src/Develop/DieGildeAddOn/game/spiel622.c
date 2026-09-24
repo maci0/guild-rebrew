@@ -608,54 +608,6 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 	return sum;
 }
 
-/* Runs an entity query and sums a field across all results.
- * Combines query iteration with field accumulation. */
-
-// FUNCTION: SERVER 0x10019BE0
-// gm_WalkEntityChain
-
-int __cdecl gm_WalkEntityChain(int raw_idx)
-{
-	unsigned short idx;
-	int slot;
-	int ent;
-	int total;
-	idx = (unsigned short) raw_idx;
-	if (idx >= 0x300) {
-		return -1;
-	}
-	slot = (unsigned int) idx * 0x21c + 0x100358a0;
-	if (*(unsigned short*) slot == 0xFFFF) {
-		return -1;
-	}
-	total = gm_AccumulateTyped2((char*) slot);
-	ent = (int) gm_StartFilteredEntitySearch(1, 3, (int) idx);
-	if (ent) {
-		do {
-			total += gm_SumBuildingProductionValues((char*) ent, (int) *(signed char*) (ent + 0x5c));
-			total += gm_EntityQuerySum(ent);
-			ent = (int) gm_FindNextFilteredEntity();
-		} while (ent);
-	}
-	return total;
-}
-
-/* Finds an entity by its owner. Searches for an entity
- * whose owner field matches the given ID. */
-
-// FUNCTION: SERVER 0x10019CD0
-// gm_GetMsgField
-int __cdecl gm_GetMsgField(char* msg, char* pkt)
-{
-	unsigned short type;
-
-	type = *(unsigned short*) msg;
-	if (type == 0x2a || type == 0x116 || type == 0x1db || type == 0x1dc) {
-		return *(int*) (pkt + 0xe) - 1;
-	}
-	return *(int*) (pkt + 0xe);
-}
-
 // FUNCTION: SERVER 0x10019a70
 // gm_EntityQuerySum
 
@@ -752,6 +704,38 @@ int __cdecl gm_EntityAccumulate(void* entity)
 	return 0;
 }
 
+/* Runs an entity query and sums a field across all results.
+ * Combines query iteration with field accumulation. */
+
+// FUNCTION: SERVER 0x10019BE0
+// gm_WalkEntityChain
+
+int __cdecl gm_WalkEntityChain(int raw_idx)
+{
+	unsigned short idx;
+	int slot;
+	int ent;
+	int total;
+	idx = (unsigned short) raw_idx;
+	if (idx >= 0x300) {
+		return -1;
+	}
+	slot = (unsigned int) idx * 0x21c + 0x100358a0;
+	if (*(unsigned short*) slot == 0xFFFF) {
+		return -1;
+	}
+	total = gm_AccumulateTyped2((char*) slot);
+	ent = (int) gm_StartFilteredEntitySearch(1, 3, (int) idx);
+	if (ent) {
+		do {
+			total += gm_SumBuildingProductionValues((char*) ent, (int) *(signed char*) (ent + 0x5c));
+			total += gm_EntityQuerySum(ent);
+			ent = (int) gm_FindNextFilteredEntity();
+		} while (ent);
+	}
+	return total;
+}
+
 /* Accumulates values along an entity chain. Walks linked
  * entities and sums a specified field. */
 
@@ -787,6 +771,22 @@ char* __cdecl gm_FindEntityByOwner(int arg1)
 		i++;
 	}
 	return record;
+}
+
+/* Finds an entity by its owner. Searches for an entity
+ * whose owner field matches the given ID. */
+
+// FUNCTION: SERVER 0x10019CD0
+// gm_GetMsgField
+int __cdecl gm_GetMsgField(char* msg, char* pkt)
+{
+	unsigned short type;
+
+	type = *(unsigned short*) msg;
+	if (type == 0x2a || type == 0x116 || type == 0x1db || type == 0x1dc) {
+		return *(int*) (pkt + 0xe) - 1;
+	}
+	return *(int*) (pkt + 0xe);
 }
 
 /* Gets a message field from a command packet. Reads a
