@@ -25,6 +25,18 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x410) and
  * addresses the 0x410 scratch buffer off ebp; section 13 of
  * docs/msvc6-c-shapes.md. */
+/* The 14 bytes from g_current_year (0x10035880) onward, copied whole
+ * into the building at +0x69: the reference emits a struct copy
+ * (`lea edx,[esi+0x69]`, stores through edx) from absolute operands. */
+#pragma pack(push, 1)
+struct blk14 {
+	int a;
+	int b;
+	int c;
+	short d;
+};
+#pragma pack(pop)
+
 #pragma optimize("y", off)
 char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 {
@@ -59,10 +71,10 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		sprintf(s.msg, (char*) 0x10031438, nid, s.type_id);
 	}
 	LogMessageInternal((char*) 0x10031004, 0x10d8, s.msg, 8);
+	*(int*) (geb + 1) = *(int*) 0x10030b6c;
+	*(int*) 0x10030b6c = *(int*) 0x10030b6c + 1;
 	*(unsigned short*) (geb + 0x25) = (unsigned short) owner;
 	*(unsigned short*) (geb + 0x27) = (unsigned short) owner;
-	*(int*) (geb + 1) = *(volatile int*) 0x10030b6c;
-	*(volatile int*) 0x10030b6c = *(volatile int*) 0x10030b6c + 1;
 	*(int*) (geb + 0x3d) = 0x64;
 	*(int*) (geb + 0x45) = 0x64;
 	geb[0x5c] = 0x64;
@@ -125,12 +137,17 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 				continue;
 			}
 			comp_rec = (char*) g_item_def_table + (comp & 0x7fff) * 0x41;
-			comp_type = comp_rec[0];
+			/* A volatile read is not folded into `[eax+ebx]`: the reference
+			 * materialises the address (`mov ecx,eax; add ecx,ebx; mov cl,[ecx]`,
+			 * 0x1001765d), and those 3 bytes push the loop's `je` to rel32. */
+			comp_type = *(volatile unsigned char*) comp_rec;
 			if (comp_type == 2 || comp_type == 6) {
 				s.flag = 1;
 			}
 			if (comp & 0x8000) {
 				if (comp_type == 2 || comp_type == 6) {
+					/* the reference repeats the store here (0x1001769f) */
+					s.flag = 1;
 					gm_AllocRaum(geb, comp & 0x7fff);
 				} else if (s.flag == 0) {
 					gm_AllocObjekt(*(int*) (geb + 1), comp & 0x7fff, 1);
@@ -138,19 +155,22 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 			}
 		}
 	}
-	s.record = (char*) gm_ff_Objekt(*(int*) (geb + 0x5d), 1, 4, 2);
-	if (s.record != NULL) {
-		while (*(unsigned short*) s.record == 0xfd) {
-			s.record = (char*) gm_NextEntityQueryMatch();
-			if (s.record == NULL)
+	{
+		/* A register local: the reference never stores the query pointer. */
+		unsigned short* q;
+
+		q = gm_ff_Objekt(*(int*) (geb + 0x5d), 1, 4, 2);
+		while (q != NULL) {
+			if (*q != 0xfd) {
+				*(unsigned short*) (geb + 0x29) = *q;
 				break;
+			}
+			q = (unsigned short*) gm_NextEntityQueryMatch();
 		}
-		if (s.record != NULL)
-			*(unsigned short*) (geb + 0x29) = *(unsigned short*) s.record;
+		q = gm_SetupEntityQuery((unsigned char*) geb);
+		if (q != NULL)
+			*(unsigned short*) (geb + 0x29) = *q;
 	}
-	s.record = (char*) gm_SetupEntityQuery((unsigned char*) geb);
-	if (s.record != NULL)
-		*(unsigned short*) (geb + 0x29) = *(unsigned short*) s.record;
 	if (gm_CheckEntityType((unsigned char*) geb) != 0)
 		*(int*) (geb + 0x30) = 0x1388;
 	/* building-type switch (jump table 0x10017890 / byte map 0x100178bc). */
@@ -159,12 +179,9 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	case 5:
 	case 6:
 	case 7:
-		*(int*) (geb + 0x69) = *(int*) 0x10035880;
-		*(int*) (geb + 0x6d) = *(int*) 0x10035884;
-		*(int*) (geb + 0x71) = *(int*) 0x10035888;
-		*(unsigned short*) (geb + 0x75) = *(unsigned short*) 0x1003588c;
+		*(struct blk14*) (geb + 0x69) = *(struct blk14*) &g_current_year;
 		if ((unsigned short) owner != 0xffff)
-			*(int*) s.dest =
+			*(int*) (geb + 0x65) =
 			    *(int*) ((char*) 0x100358a4 + (unsigned short) owner * 0x21c);
 		else
 			*(int*) (geb + 0x65) = -1;
@@ -199,11 +216,11 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		 * alias the field.  Keeping a second copy in `s.record` was an extra
 		 * store plus three extra reloads. */
 		*(int*) (geb + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x10031428);
-		geb_type = 0;
-		while (geb_type < 0x600) {
-			geb_type += 0x18;
-			*((char*) *(int*) (geb + 0x71) + (geb_type - 0xb)) = (char) 0xff;
-			*(int*) ((char*) *(int*) (geb + 0x71) + (geb_type - 4)) = 0;
+		/* 0x40 entries of 0x18 bytes, indexed: c2 strength-reduces the index
+		 * and emits the reference's `[eax+edx-0xb]` operand order. */
+		for (geb_type = 0; geb_type < 0x40; geb_type++) {
+			*((char*) *(int*) (geb + 0x71) + geb_type * 0x18 + 0xd) = (char) 0xff;
+			*(int*) ((char*) *(int*) (geb + 0x71) + geb_type * 0x18 + 0x14) = 0;
 		}
 		/* fall through into 0x1f/0x20 stores */
 	case 0x1f:
