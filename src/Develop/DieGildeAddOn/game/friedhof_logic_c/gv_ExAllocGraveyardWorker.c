@@ -32,8 +32,6 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	int count;
 	int job_id;
 	unsigned char field_id;
-	int one;
-	int neg;
 	int off;
 
 	if (*(int*) ((char*) req + 0x15) != 0x1b && *(int*) ((char*) req + 0x15) != 0x1c)
@@ -98,19 +96,18 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	off = chosen * 0x21c;
 	grave = (char*) g_slot_table + off;
 	memset(grave, 0, 0x21c);
-	neg = -1;
 	/* volatile: the slot-index store below writes the same halfword, so
 	 * without the qualifier msvc6 drops this write and the object loses the
 	 * reference's `mov word ptr [ebp],0xffff` at 0x10011db3. */
 	*(volatile unsigned short*) grave = 0xffff;
-	*(int*) ((char*) 0x100358a4 + off) = neg;
+	*(int*) ((char*) 0x100358a4 + off) = -1;
 	/* A loop, not memset: msvc6 turns it into the same rep stosd, but the
 	 * destination stays its own register (`lea edx,[edx+...]; mov edi,edx`
 	 * at 0x10011dbf) where memset computes it straight into edi, 5 bytes
 	 * short (shapes 197).  Through the g_slot_table symbol it is a `lea`;
 	 * through the raw address it is `add edx,0x100358fc`. */
 	for (j = 0; j < 8; j++)
-		*(int*) (g_slot_table + 0x5c + off + j * 4) = neg;
+		*(int*) (g_slot_table + 0x5c + off + j * 4) = -1;
 	/* The citizen bump ahead of the object-id bump is what hoists its load
 	 * into edi above the entity stores (0x10011dd2); after it, or through a
 	 * local copy, msvc6 sinks the load to a load-inc-store beside the store. */
@@ -119,7 +116,6 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		*(int*) (grave + 0x16c) = (int) entity;
 		g_citizen_count++;
 		*(int*) (grave + 4) = g_next_object_id++;
-		one = 1;
 		*(volatile unsigned short*) grave = (unsigned short) chosen;
 	}
 	*(unsigned char*) (grave + 2) = 0x14;
@@ -128,7 +124,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	*(unsigned char*) (grave + 0x215) = 0;
 	*(unsigned char*) (grave + 0x216) = 0;
 	*(unsigned char*) (grave + 0x217) = 0;
-	*(unsigned char*) (grave + 0x218) = (unsigned char) one;
+	*(unsigned char*) (grave + 0x218) = 1;
 	*(int*) (grave + 0x1e4) = 0x3f800000; /* 1.0f */
 	*(unsigned char*) (grave + 8) = 0x64;
 	*(unsigned short*) (grave + 0xa) = 0x10;
@@ -138,7 +134,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	*(unsigned char*) (grave + 0x1f4) = 0;
 	*(int*) (grave + 0x190) = 4;
 	*(int*) (grave + 0x194) = 0;
-	*(unsigned char*) (grave + 0xd) = (unsigned char) one;
+	*(unsigned char*) (grave + 0xd) = 1;
 	*(int*) (grave + 0x18c) = -1;
 	*(int*) (grave + 0x20c) = -1;
 	*(unsigned short*) (grave + 0x50) = 0x7fff;
