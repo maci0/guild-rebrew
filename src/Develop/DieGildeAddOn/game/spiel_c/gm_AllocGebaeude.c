@@ -21,6 +21,7 @@ void __cdecl gv_SpawnEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
+extern int g_next_object_id; /* 0x10030b6c */
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x410) and
  * addresses the 0x410 scratch buffer off ebp; section 13 of
@@ -66,13 +67,21 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		rec = g_entity_type_table + (unsigned char) geb_type * 0x24d;
 		geb[0] = (char) geb_type;
 		s.type_id = (unsigned char) geb_type;
-		nid = *(int*) 0x10030b6c;
+		/* The named global, not `*(int*) 0x10030b6c`: a literal address may
+		 * alias the address-taken `s`, which pins the load behind the
+		 * `s.type_id` store and makes `nid` a coloured candidate.  Through the
+		 * symbol the load is forwarded into the call as a scratch temporary,
+		 * scheduled first, and every later scratch register (the two
+		 * `lea r,[ebp-0x410]`, the counter loads) lands on the reference's.
+		 * The `geb + 1` store keeps the literal: the symbol there swaps the
+		 * base/index operands of the 0x600 table fill. */
+		nid = g_next_object_id;
 		s.record = rec;
 		sprintf(s.msg, (char*) 0x10031438, nid, s.type_id);
 	}
 	LogMessageInternal((char*) 0x10031004, 0x10d8, s.msg, 8);
 	*(int*) (geb + 1) = *(int*) 0x10030b6c;
-	*(int*) 0x10030b6c = *(int*) 0x10030b6c + 1;
+	g_next_object_id = g_next_object_id + 1;
 	*(unsigned short*) (geb + 0x25) = (unsigned short) owner;
 	*(unsigned short*) (geb + 0x27) = (unsigned short) owner;
 	*(int*) (geb + 0x3d) = 0x64;
