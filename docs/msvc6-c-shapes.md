@@ -8530,6 +8530,15 @@ each measured with `scripts/linktest.sh`:
 - **A dead initialiser orders frame slots.** `query = 0;` at the top put `query` and `slots` on the
   reference's `[esp+0x10]`/`[esp+0x14]` (gm_ObjectsAvailble).
 
+- **A literal-address global read next to an address-taken local is pinned behind that local's
+  stores**, because c2 must assume the literal may alias it; the named `extern` lets c2 fold the load
+  into a scratch temporary and schedule it first, which put gm_AllocGebaeude's whole scratch rotation
+  in the reference's order (-19, byte-exact). Only the sites that need it change: symbolising all
+  four uses swapped the base/index operands of a later table fill.
+- **An `int` shadow of a pointer local changes which copy feeds a store.** m_AllocTracked's `nodev`
+  shadow made c2 store `count_max` from the compare's eax; with `node` used directly it stores from a
+  second copy of `count_total` (`mov ecx,edi`) as the reference does (-15, byte-exact).
+
 Flags follow the source: after these rewrites cm_ExSellObjekt and ls_LoadBuildingEntityState match
 only without their `/Ow`, and the `vfs_OpenStream` size is its 701-byte COMDAT extent (jump table
 included), not the 667-byte body.

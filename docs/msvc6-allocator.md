@@ -1839,6 +1839,20 @@ allowed only `esi`. That piece is what sends the 14-trait loop's pointer to `edi
 node, break at `0x1071f895` (neighbour in `ebp`, bitset pointer at `[ebp+0x20]`) or read
 `*(0x1079d88c + id*4)` at each entry to select.
 
+**Scratch picker, traced (round 1145, c2 12.00.9782 loaded at 0x10700000).** Temporaries outside
+the colourer get their register from `fcn.10721c0f`, called by the local assignment pass
+`fcn.10720798`, which walks the function's items in order (`10720c1f` release, `10720cba` assign).
+The cursor is the global `0x1079d710` into the list `0x107adff4` (eax, ecx, edx, esi, edi, ebx, ebp),
+reset once per FUNCTION at `0x10720802`, not per block. With `[0x107ac0b4]` set it scans only eax,
+ecx, edx from the cursor, wrapping; it skips a register whose contents slot (`0x1079d6ec + reg*4`)
+is non-zero or that `fcn.107032e3` reports as conflicting; on a hit it advances the cursor past the
+chosen register and assigns through `fcn.10721f07`. A preferred register (tuple +0x2c, set when the
+value is copied into a register) and the fallbacks (`0x10721daa`, `fcn.10757806`, `fcn.10757a63`,
+`fcn.10757e50`) bypass the scan and leave the cursor. Coloured candidates never go through it: a
+named local becomes a rotation temporary only when c2 folds it away. A second picker, `fcn.10721995`
+(from `fcn.10720890`, cursor `0x107ac2dc` reset per block at `0x1072090e`, never re-picks its last
+register), has no established role yet. Tracers: `.scratch/c2trace-scratchpick/` (gitignored).
+
 **Scratch temporaries rotate.** Short-lived temporaries outside the colourer take `eax`,
 `ecx`, `edx` in turn rather than the first free one: `ga = gb; gc = gd; ge = gf; gg = gh;`
 compiles to loads into `eax`, `ecx`, `edx`, `eax`. One extra or missing temporary therefore
