@@ -920,145 +920,24 @@ limited:
 
 // FUNCTION: SERVER 0x10019ed0
 // gm_CheckInventoryCapacity
-//   NEAR_MATCHING 298/395, obj 395 == target size (was SIZE_MISMATCH 134/395;
-//   291 at the time of writing; 2026-09-13 test says 298).
-//   Everything from offset 0x8f to the end is byte-identical; the only
-//   remaining differences are the seven relocation slots and the 0x1a-0x8e
-//   block described at the bottom.
-//
-//   Two statement-level fixes took 278 -> 291, each measured on its own:
-//     - `in_list = 0;` before `cap = 0;` instead of after. The zero-fill of
-//       list[7] then comes from ebp as the target has it (`mov [esp+0x2c],ebp`
-//       at 0x10019f2c) rather than esi, and the first 26 bytes match rather
-//       than the first 20. 278 -> 279.
-//     - seeding the scan through an escaped pointer (`list_cursor = list; ppl = &list_cursor;
-//       elem = **ppl;`) instead of `elem = list[0]`. Taking list_cursor's address stops
-//       msvc6 constant-propagating list[0] == 8, so it no longer peels the
-//       first compare into `cmp edx,8` with the loop entered at &list[1];
-//       the target holds 8 in a register (`mov eax,8` at 0x10019f40), enters
-//       at &list[0] via `lea ecx,[esp+0x10]` and tests at the loop top.
-//       279 -> 291, still at exactly 395 bytes.
-//
-//   The previous body had two paths that disagreed with the binary. Both were
-//   read directly out of original/server.exe, not inferred from a score:
-//
-//     - `count >= 6` returned 3. The target's 0x1001a02d `jge` jumps PAST the
-//       `mov ebp,3` at 0x1001a033 (raw bytes at 0x1001a02a:
-//       83 fe 06 7d 10 8b 44 24 3c bd 03 00 00 00), so that path reaches the
-//       epilogue with ebp still 0 from the prologue's `xor ebp,ebp` and
-//       returns 0. An older note here flagged this as an unresolved question
-//       for the prover; the raw encoding settles it.
-//
-//     - the clamp was applied on some shared paths and not others. The target
-//       has exactly one clamp epilogue at 0x1001a03f
-//       (33 c0 5f 85 ed 0f 9c c0 48 5e 23 c5), reached by the query path, the
-//       used+requested path and the count path alike. Only the `type_byte==9`
-//       return (0x10019f32) and the three early exits (0x1001a051, which
-//       returns a literal 0) bypass it. Routing the shared paths through one
-//       `return ((cap < 0) - 1) & cap;` is what the binary does. An older note
-//       rejected this shape as "WRONG"; that note was comparing against the
-//       then-current C body rather than against the binary.
-//
-//   Structure that had to change with it, each measured:
-//     - the used+requested branch spelled as if/else assigning `cap` and
-//       falling into the shared clamp, not as an early clamped return (the
-//       early-return form compiles 394 bytes and scores 220 raw).
-//     - the count<6 branch spelled `if (requested > 3) cap = 3; else cap =
-//       requested;` rather than `cap = 3; if (requested <= 3) cap = requested;`.
-//       The `cap=3`-first form emits `cmp eax,ebp` where the target has
-//       `cmp eax,3` and costs a byte: 209 raw against 250 raw.
-//
-//   Residual, the 0x13-0x8e block. The target computes the entity address into
-//   eax (`mov eax,edi; add eax,ecx`) and reads `mov al,[eax]`, keeping the byte
-//   in al across the list stores; we emit the SIB form `mov al,[edi+ecx]` and
-//   then spill it with `mov [esp+0x38],al`, reloading it as `mov edx,[esp+0x38]`
-//   at the scan. That spill also makes the scan compare against an immediate
-//   (`cmp edx,8`) where the target holds 8 in eax (`mov eax,8; cmp eax,edx`),
-//   and puts our zero-fill of list[7] in esi where the target uses ebp.
-//
-//   2026-09-08 (291 -> 293): the list is written as eight element stores with
-//   the entity-byte read placed between list[2] and list[3] instead of before
-//   the whole block. The target interleaves the read into the stores
-//   (`mov [esp+0x14],0xc` / `mov al,[eax]` / `mov [esp+0x18],0x12` at
-//   0x10019ef8-0x10019f02), and that position is the only one that reproduces
-//   its `xor ebp,ebp` placement ahead of the stores. Read position measured at
-//   every one of the nine slots: slot 3 gives 293, slot 4 gives 292, the
-//   initialized-array form and slots 0/1/2/5/6/7/8 all give 291 or less.
-//   Everything from 0x8f to the end stays byte-identical.
-//
-//   2026-09-08 grid results, all inert at 293 (measured, none kept): twelve
-//   address spellings (`entity_index * 0x41` as one multiply, `<<6`, an int
-//   address local, base+index split into two statements, indexing base by
-//   entity_index, an escaped `char**`); ten 9-test and mask spellings; eight
-//   scan spellings (while-rotation, sentinel held in a variable, sentinel
-//   compared against `cap`, type on the left, pre-increment, the walk done
-//   through `*ppl`); ten declaration orders. Five type widths for the byte
-//   local crossed with three read positions: only `unsigned char` and `char`
-//   hold 395 bytes, `int`/`unsigned int`/`unsigned short` all compile 388-390
-//   and collapse to about 55 raw. The spill survives all of them, so it is not
-//   reachable by reordering or retyping at this statement granularity.
-//
-//   2026-09-06 pass (no score change, kept 291): the mov/add form IS reachable
-//   (split list stores + adjacent `type_byte = entity[0]; raw = entity[0];`
-//   CSEs to one `mov al,[eax]` with `mov eax,edi; add eax,ecx`, no spill), but
-//   it trades against two invariants that grid search proved mutually exclusive:
-//   in_list=0 at stmt1 gives the target's xor-ebp-first order and list[7]=ebp
-//   yet flips idx/in_list to esi/edi; in_list=0 post-guard keeps edi roles yet
-//   emits xor-esi-first with list[7]=esi. 27 combos of in_list/cap positions,
-//   declaration order, base removal, cap-late, in_list=cap all measured, none
-//   gives ebp-first + edi + ebp-list7 together.
-//   The scan entry `mov eax,8; cmp eax,edx` was never reproduced: an `elem = 8`
-//   loop entry folds to `cmp $0x8` under every spelling tried (for/while/
-//   do-while/goto/index/deref/load-entry/int-pun/`(raw & 0xff)` compare,
-//   /O1 /Ot /Og- /Od /Ox, `#pragma optimize("g"/"t", off)`), including a
-//   20-line minimal scan that still peels. An if/else `type = 9 / raw & 0xff`
-//   yields the `mov edx,eax` copy yet still folds elem. Probes in
-//   .scratchwork/pv_{M1,R1,H1,E2,E5,K1,K2,L1,M1,N0-N4,Q1-Q2,TS1-TS2}.c,
-//   pv_BL{...}.c, mini2/mini_B*/mini_scan/pun.c, flag_{G5,G6,g_off,...}.c.
-//
-//   Measured this pass against the 250-raw body, none kept: a volatile read of
-//   the entity byte (25 raw, 398 bytes); splitting the address into two
-//   statements or into base+index locals (250, inert); `entity_index * 0x41`
-//   as one multiply (250); `elem = 8` as a literal instead of `list[0]` (250);
-//   a `while (elem != 0)` loop rotation (31 raw, 397 bytes - it does emit the
-//   target's `mov eax,8` / `lea ecx,[esp+0x10]` / `cmp eax,edx` scan head
-//   exactly, but loses the prologue); reading `*list_cursor` instead of `list_cursor[1]` (41 raw,
-//   396); the sentinel compared against `in_list` or `cap` to share a zero
-//   register (250, inert); the list written as eight element stores with
-//   list[7] sourced from `cap` (250); moving `cap = 0` after `in_list = 0`
-//   (251 raw, 1 byte better on the zero-fill register but no status change);
-//   re-reading `entity[0]` for the mask (111 raw, 389 bytes); the 9-test
-//   spelled on a plain `int` (50 raw, 389); an `(type & ~0xff) | type_byte`
-//   merge (84 raw, 398).
-//
-//   2026-09-06 pass 2 (no score change, kept 291): a `do/while (elem != type)`
-//   scan with the sentinel as a top break, the bump as `list_cursor++; elem = *list_cursor;`
-//   and a post-loop hit test scores 292 at the same size, but every
-//   post-loop spelling tried (`if (elem == type)`, `if (elem != 0)`, entry
-//   `if/else` guard, hit-break-inside, compound bottom conditions) either
-//   skips the list[0] entry compare or misclassifies the zero sentinel, so
-//   none is semantics-preserving and all were reverted. The bottom-compare
-//   form is structurally closer (one byte), but the entry compare is
-//   load-bearing for correctness. Probes in .scratch/pv19{q2,r2,u2,v2,w2,
-//   x2,y2,z2,a3,b3,c3,m2,n2,p2,a4b,b4,c4,d4,e4,f4,g4,h4,i4,j4,k4,l4,m4,n4,
-//   o4,w3,x3,y3,z3,a2,b,c2,d2,e2,f2,g3,h3,i3,j3,k3,l3,m3,n3,o3,p3,q3,r3,
-//   s3,t3,u3}.c plus .scratch/cmp.py (positional compare against
-//   original/Server/server.dll at file offset 0x19ed0, no reloc masking).
-//
-//   The scan-above-the-early-return hoist from the previous pass is NOT kept:
-//   with the corrected exits msvc6 saves all four callee-saves in the prologue
-//   on its own, so the hoist is no longer needed to avoid the shrink-wrapped
-//   `push ebx`, and the target reads the byte and tests it before the scan.
+/* Byte-exact.  The scan is a plain index loop over the zero-terminated
+ * list: msvc6 folds the first `list[i] != 0` test (list[0] is the
+ * constant 8), keeps 8 in eax as the loop-carried element and walks a
+ * pointer from &list[0], which is the reference's `mov eax,8` /
+ * `lea ecx,[esp+0x10]` head.  The entity byte is read twice through one
+ * `entity` pointer (the 9 test and the scan compare); msvc6 CSEs both
+ * into one `mov al,[eax]` kept in eax across the list stores.  Naming the
+ * byte in a local instead spills it to [esp+0x38] (97 linked bytes).
+ *
+ * Two paths were read out of the binary rather than inferred: `count >= 6`
+ * returns 0 (the `jge` at 0x1001a02d skips `mov ebp,3`), and the query,
+ * used+requested and count paths share one clamp epilogue at 0x1001a03f,
+ * so they all fall into `return ((cap < 0) - 1) & cap;`. */
 int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested)
 {
 	int list[8];
-	char* base;
 	char* entity;
-	unsigned char type_byte;
-	int type;
-	int* list_cursor;
-	int** ppl;
-	int elem;
+	int i;
 	int in_list;
 	int used;
 	void* query_result;
@@ -1066,33 +945,22 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 	int cap;
 
 	in_list = 0;
-	base = (char*) g_item_def_table + entity_index * 0x40;
-	list[2] = 0x12;
-	entity = base + entity_index;
+	cap = 0;
 	list[0] = 8;
 	list[1] = 0xc;
-	type_byte = entity[0];
+	list[2] = 0x12;
 	list[3] = 0x19;
-	list[5] = 0x20;
 	list[4] = 0x22;
+	list[5] = 0x20;
 	list[6] = 0x27;
 	list[7] = 0;
-	cap = 0;
-	if (type_byte == 9) {
+	entity = (char*) g_item_def_table + entity_index * 0x41;
+	if (*entity == 9) {
 		return requested;
 	}
-	type = type_byte & 0xff;
-	list_cursor = list;
-	ppl = &list_cursor;
-	elem = **ppl;
-	for (;;) {
-		if (elem == type) {
+	for (i = 0; list[i] != 0; i++) {
+		if (list[i] == (unsigned char) *entity) {
 			in_list = 1;
-			break;
-		}
-		elem = list_cursor[1];
-		list_cursor++;
-		if (elem == 0) {
 			break;
 		}
 	}

@@ -369,19 +369,12 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			if (node == 0) {
 				node = (struct GroupNode*) malloc(0x28);
 				strcpy(node->name, buf);
-				/* Round 183: the reference emits these six stores in
-				 * the order 0x14,0x10,0x1c,0x18,0x20,0x24 (verified
-				 * at 0x100066bc-0x100066cb), which is the exact
-				 * REVERSE of this natural order, and msvc6 emits
-				 * them in source order -- stores through a pointer
-				 * into freshly malloc'd memory cannot be reordered
-				 * by the compiler, so unlike a stack buffer (shapes
-				 * section 20) their order IS a lever here.
-				 * Reversing them makes the block byte-identical to
-				 * the reference and lifts aligned 225 -> 230/249,
-				 * span-neutral at 672 -- but costs +1 linked, so the
-				 * alignment gain is noise.  Left in the natural
-				 * order deliberately; do not "fix" it.
+				/* The reference emits these six stores in the order
+				 * 0x14,0x10,0x1c,0x18,0x20,0x24 (0x100066bc-0x100066cb)
+				 * and msvc6 emits them in source order, so the source
+				 * lists them that way.  Under the old /G6 /Oy- pin this
+				 * order cost +1 linked; under plain /O2 /Gd it is -6
+				 * linked and the block is byte-identical.
 				 *
 				 * Round 184 corrected the span arithmetic that had
 				 * been misdirecting this function's lanes.  The
@@ -403,13 +396,18 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 				 * *(volatile int*)&count_total` DOES hold span 672
 				 * at aligned 233 -- the arithmetic works -- but the
 				 * volatile costs +40 linked, so the combination
-				 * still loses.  Measured; do not re-derive. */
-				node->next = 0;
-				node->count = 0;
-				node->size_max = 0;
-				node->count_max = 0;
-				node->size_total = 0;
+				 * still loses.  Re-measured under /O2 /Gd with the
+				 * store order below: plain guard +35 linked, volatile
+				 * store read +30.  Object-inert (same 603/658 or the
+				 * 656-byte body): a named temp for either read, `++`
+				 * in the compare, `count_max < count_total`, int casts,
+				 * `return mem` inside the branch. */
 				node->count_total = 0;
+				node->size_total = 0;
+				node->count_max = 0;
+				node->size_max = 0;
+				node->count = 0;
+				node->next = 0;
 				prev->next = node;
 			}
 		}
@@ -466,9 +464,12 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	 * 0x10006755), which is section 8b's lever: a volatile read on the
 	 * operand that must stay in a register.  obj_size 649 -> 654 against the
 	 * reference's 658 and the split pipeline's masked differing bytes
-	 * 6,528 -> 6,515. */
+	 * 6,528 -> 6,515.
+	 * With the volatile read in place, `g_stat2 < slots` emits the
+	 * reference's `cmp eax,edi; jge`; the earlier `g_stat2 - slots < 0`
+	 * spelling emitted `sub eax,edi; jns` (-2 linked under /O2 /Gd). */
 	slots = *(volatile int*) &g_array_count;
-	if (g_stat2 - slots < 0) {
+	if (g_stat2 < slots) {
 		node = (struct GroupNode*) nodev;
 		slot = (char*) g_array_ptr;
 		i = 0;
