@@ -80,7 +80,7 @@
  *     is ready the next cycle and the push lands after the second fmul;
  *   - the no-parent trait loop stores dst[0..2] and steps both pointers
  *     at the end of the body.
- * Object: 8 differing bytes.  Constructs the reference pins down beyond
+ * Linked: byte-exact.  Constructs the reference pins down beyond
  * the list above (each measured against the positional probe):
  *   - the header -1 fill, the no-parent -1 fill and the parent path's five
  *     -1 ref slots are store loops, not memset or separate stores
@@ -102,10 +102,16 @@
  *   - no-parent trait loop: dst[2] is the gm_RandomMod(0xa) value and
  *     dst[1] = dst[0] * 0.x, as in the parent loop (0x90 / 0x8c); the
  *     earlier source had them swapped.
- * Open: the two edge reload blocks at 0x10018c28/0x10018c38 load
- * type/arg6 in the opposite order (the order fits ascending c2 node id,
- * appended on one edge and prepended on the other; our arg6 piece gets
- * the lower id).  The instructions are identical on both sides.
+ *   - `location` is dead after the building-type block and doubles as the
+ *     scratch int for the class check, the range check and the no-parent
+ *     dynasty counter.  Each reuse is a separate web of the parameter, and
+ *     c2 numbers a parameter's webs from the free list the constant
+ *     candidates were just released to, so three extra webs move `type`
+ *     from id 61 to 30 and `arg6` stays at 49.  That reverses which of the
+ *     two is split first, and with it the reload order in the two edge
+ *     blocks at 0x10018c28/0x10018c38 (esi/ebx against ebx/esi).  One or
+ *     two reuses, in any of the dead parameters, leave the order as it
+ *     was; the local `n` in those three places gives our old order.
  * The per-trait fimul needs the father byte in memory; the trait_home
  * alias gives it, a plain int local is enregistered and gets fild/fmulp.
  *
@@ -553,14 +559,14 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 	}
 	if (type < 4 || type == 0xb) {
 		if (arg7 != 0) {
-			n = gm_EntityClassCheck(arg7);
-			if (n != 2) {
-				slot[9] = (char) n;
+			location = gm_EntityClassCheck(arg7);
+			if (location != 2) {
+				slot[9] = (char) location;
 			}
 		} else if (arg6 != 0) {
-			n = gm_IsInRange(arg6);
-			if (n != 2) {
-				slot[9] = (char) n;
+			location = gm_IsInRange(arg6);
+			if (location != 2) {
+				slot[9] = (char) location;
 			}
 		}
 	}
@@ -687,9 +693,9 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 			*(unsigned short*) (slot + 0x50) = 0x7fff;
 		} else {
 			/* Same single-load shape on the other counter (0x100194d8). */
-			n = g_dynasty_field_2c;
-			*(unsigned short*) (slot + 0x50) = (unsigned short) n;
-			g_dynasty_field_2c = n + 1;
+			location = g_dynasty_field_2c;
+			*(unsigned short*) (slot + 0x50) = (unsigned short) location;
+			g_dynasty_field_2c = location + 1;
 		}
 		*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 		*(float*) (slot + 0x14) =
