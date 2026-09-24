@@ -1,17 +1,15 @@
-// FUNCTION: GOLD 0x00468850
+// FUNCTION: GOLD 0x468850
 // SIZE: 34
-// fcn_00468850 — first i with [p+4] nonzero (p from [0xf8f080], +0x2ec).
 
-int __cdecl fcn_00468850(void)
+int __cdecl fcn_00465920(void)
 {
 	int i;
 	char* p;
-	p = *(char**) 0xf8f080;
-	for (i = 0; i < 0x300; i++) {
-		if (*(int*) (p + 4) != 0) {
+
+	for (i = 0, p = (char*) (*(int*) 0x1015ea0 + 4); i < 0x3ff; i++, p += 0x2f4) {
+		if (*(int*) p == 0) {
 			return i;
 		}
-		p += 0x2ec;
 	}
 	return -1;
 }
