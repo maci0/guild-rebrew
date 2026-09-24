@@ -125,12 +125,17 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 				continue;
 			}
 			comp_rec = (char*) g_item_def_table + (comp & 0x7fff) * 0x41;
-			comp_type = comp_rec[0];
+			/* A volatile read is not folded into `[eax+ebx]`: the reference
+			 * materialises the address (`mov ecx,eax; add ecx,ebx; mov cl,[ecx]`,
+			 * 0x1001765d), and those 3 bytes push the loop's `je` to rel32. */
+			comp_type = *(volatile unsigned char*) comp_rec;
 			if (comp_type == 2 || comp_type == 6) {
 				s.flag = 1;
 			}
 			if (comp & 0x8000) {
 				if (comp_type == 2 || comp_type == 6) {
+					/* the reference repeats the store here (0x1001769f) */
+					s.flag = 1;
 					gm_AllocRaum(geb, comp & 0x7fff);
 				} else if (s.flag == 0) {
 					gm_AllocObjekt(*(int*) (geb + 1), comp & 0x7fff, 1);
@@ -138,19 +143,22 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 			}
 		}
 	}
-	s.record = (char*) gm_ff_Objekt(*(int*) (geb + 0x5d), 1, 4, 2);
-	if (s.record != NULL) {
-		while (*(unsigned short*) s.record == 0xfd) {
-			s.record = (char*) gm_NextEntityQueryMatch();
-			if (s.record == NULL)
+	{
+		/* A register local: the reference never stores the query pointer. */
+		unsigned short* q;
+
+		q = gm_ff_Objekt(*(int*) (geb + 0x5d), 1, 4, 2);
+		while (q != NULL) {
+			if (*q != 0xfd) {
+				*(unsigned short*) (geb + 0x29) = *q;
 				break;
+			}
+			q = (unsigned short*) gm_NextEntityQueryMatch();
 		}
-		if (s.record != NULL)
-			*(unsigned short*) (geb + 0x29) = *(unsigned short*) s.record;
+		q = gm_SetupEntityQuery((unsigned char*) geb);
+		if (q != NULL)
+			*(unsigned short*) (geb + 0x29) = *q;
 	}
-	s.record = (char*) gm_SetupEntityQuery((unsigned char*) geb);
-	if (s.record != NULL)
-		*(unsigned short*) (geb + 0x29) = *(unsigned short*) s.record;
 	if (gm_CheckEntityType((unsigned char*) geb) != 0)
 		*(int*) (geb + 0x30) = 0x1388;
 	/* building-type switch (jump table 0x10017890 / byte map 0x100178bc). */
