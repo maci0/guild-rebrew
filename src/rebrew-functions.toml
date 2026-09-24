@@ -689,11 +689,9 @@ status = "RELOC"
 
 ["SERVER.0x1000ec00"]
 size = 912
-status = "SIZE_MISMATCH"
-blocker = "clamp-arm layout + cross-jumped epilogues; 12 of 16 top-level blocks already ordered; ebp-pinned 0xffff constant is unreachable per shapes 85"
-blocker_delta = 481
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-24T19:15:19+00:00"
 
 ["SERVER.0x1000ec00".prove_constraints.arg0]
 type = "pointer"
