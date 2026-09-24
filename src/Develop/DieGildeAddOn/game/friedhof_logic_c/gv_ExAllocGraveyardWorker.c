@@ -96,7 +96,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	if (*(unsigned char*) ((char*) 0x100358a2 + chosen * 0x21c) == 0xf)
 		g_citizen_count--;
 	off = chosen * 0x21c;
-	grave = (char*) 0x100358a0 + off;
+	grave = (char*) g_slot_table + off;
 	memset(grave, 0, 0x21c);
 	neg = -1;
 	/* volatile: the slot-index store below writes the same halfword, so
