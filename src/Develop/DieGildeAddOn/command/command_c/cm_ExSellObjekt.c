@@ -67,12 +67,17 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  *    read through volatile (one load each into a temp where the reference
  *    loads once): the reference holds neither in a register across the
  *    join.  Plain reads keep them in ebp/edi and move the join block.
+ *  - In the gm_AllocObjekt arm the category address is taken into
+ *    capacity_check before the `+0xe` increment and dereferenced twice
+ *    after it: the reference materialises the address (`add eax,edi`) and
+ *    reuses edi for the increment.  Read inline, the address folds into
+ *    `[eax+edi]`, edi stays live and the increment takes ebp, 1 byte short.
  *
- * Remaining differences (linked): the 0x1dd arm layout at 0x1000dc16,
- * ecx/edx swapped in the source-finalize category load at 0x1000de2b,
- * two load placements (0x1000df90, 0x1000e0f5) and the
- * dest `+0xe` increment at 0x1000e04a (reference folds the table address
- * and reuses edi; we keep edi and use ebp, one byte shorter).
+ * Remaining differences (object, /O2 /Gd /Ow): the 0x1dd arm layout at
+ * 0x1000dc16, ecx/edx swapped in the source-finalize category load at
+ * 0x1000de2b, and three loads the scheduler hoists above a store or an
+ * `add esp` (0x1000df90, 0x1000e053, 0x1000e0f5).  Compiled without /Ow,
+ * only the first and 0x1000df90 remain.
  *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29; not
  * re-proven after the 2026-09-25 reshaping, whose edits keep every call,
@@ -360,9 +365,9 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 					return 1;
 				}
 				if (dest_dynamic_entity != (short*)0) {
+					capacity_check = g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41;
 					*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + 1;
-					obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
-					if ((obj_category == '\x17' || obj_category == '%') &&
+					if ((*capacity_check == '\x17' || *capacity_check == '%') &&
 						(*dest_dynamic_entity == 0x2a || *dest_dynamic_entity == 0x116) &&
 						(owner_reload = *(short* volatile*)&dest_owner_entity) != (short*)0 &&
 						((char)owner_reload[1] == '\x06' || (char)owner_reload[1] == '\a')) {
