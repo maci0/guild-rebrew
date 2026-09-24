@@ -59,10 +59,10 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		sprintf(s.msg, (char*) 0x10031438, nid, s.type_id);
 	}
 	LogMessageInternal((char*) 0x10031004, 0x10d8, s.msg, 8);
+	*(int*) (geb + 1) = *(int*) 0x10030b6c;
+	*(int*) 0x10030b6c = *(int*) 0x10030b6c + 1;
 	*(unsigned short*) (geb + 0x25) = (unsigned short) owner;
 	*(unsigned short*) (geb + 0x27) = (unsigned short) owner;
-	*(int*) (geb + 1) = *(volatile int*) 0x10030b6c;
-	*(volatile int*) 0x10030b6c = *(volatile int*) 0x10030b6c + 1;
 	*(int*) (geb + 0x3d) = 0x64;
 	*(int*) (geb + 0x45) = 0x64;
 	geb[0x5c] = 0x64;
