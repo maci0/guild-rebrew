@@ -91,15 +91,19 @@ int g_crash_callback = 0;
  * two tails need two targets: the B cases `break` to the frame fill, which
  * case 0xc00000fd falls into, and the A cases jump to group_a_done, which
  * case 0xc000008e falls into.  group_a_done repeats the frame fill's first
- * two statements, the hCrashLog and pStack stores, and jumps past the frame
- * fill's copies.  Both use no scratch register (hCrashLog is ebp, espVal is
- * ebx), so the copies compile alike: c2 cross-jumps them into the frame fill
- * and then tail A's newline call into tail B's, as in the reference.  An
+ * statement, the hCrashLog store, and jumps past the frame fill's copy.  It
+ * uses no scratch register (hCrashLog is ebp), so the copies compile alike:
+ * c2 cross-jumps them into the frame fill and then tail A's newline call
+ * into tail B's, as in the reference.  An
  * empty label there collapses into the switch end and the A arms stop
  * merging; a copy that loads into a scratch register (frameInfo[0]) differs
- * between the two sites and stays in tail A.
+ * between the two sites and stays in tail A.  pStack is stored after the
+ * frameInfo zero stores, as in the reference; stored in the join copies it
+ * lands before them, and hDbgFile and pDbgBuf (three references each) come
+ * out in each other's stack slots.
  *
- * Still open: the hDbgFile/pDbgBuf slots are swapped. */
+ * Still open: the scheduling of the separator copies after GetCurrentProcess
+ * and of the frame fill's first two loads. */
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
@@ -270,7 +274,6 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 group_a_done:
 								frameInfo[1] = (int) hCrashLog;
-								pStack = (unsigned int*) (espVal - 4);
 								goto frame_fill;
 							case 0xc000008f:
 								WriteFile(hCrashLog, (const char*) 0x10027208, 0x12, &nBytesWritten, 0);
@@ -316,7 +319,6 @@ unknown_exc:
 
 							/* Stack walk */
 							frameInfo[1] = (int) hCrashLog;
-							pStack = (unsigned int*) (espVal - 4);
 frame_fill:
 							frameInfo[0] = (int) pDbgBuf;
 							frameInfo[2] = (int) pCtx->Eip;
@@ -324,6 +326,7 @@ frame_fill:
 							frameInfo[4] = 0;
 							frameInfo[5] = 0;
 							frameInfo[6] = 0;
+							pStack = (unsigned int*) (espVal - 4);
 
 							for (;;) {
 								VirtualQuery((const void*) frameInfo[2], &mbi, 0x1c);
@@ -338,9 +341,9 @@ frame_fill:
 								/* Scan back up to 7 bytes for a readable call instruction; when
 								 * nothing is readable nInstr ends at 0, as in the reference.  The
 								 * reference's `seta al; and al,1; test al,al` needs the `& 1` and
-								 * the constant in an else arm.  Without the mask c2 folds the flag
-								 * into the compare; with `instrType = 1` ahead of the `if`, the
-								 * masked flag is no register candidate and gets a stack slot. */
+								 * the constant in an else arm: with `instrType = 1` ahead of the
+								 * `if` (or no mask) c2 folds the flag into the compare, and a masked
+								 * flag that is not a register candidate gets a stack slot. */
 								if (frameInfo[2] != (int) pCtx->Eip) {
 									int nInstr = 7;
 									char* pInstr = szDateBuf;
