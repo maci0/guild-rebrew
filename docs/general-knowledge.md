@@ -1,4 +1,4 @@
-# General knowledge — facts about the original game, build, project
+# General knowledge: facts about the original game, build, project
 
 Grows with findings. One fact, one bullet, evidence pointer. Anything that
 is not C spelling, allocator, wall, trap, or session history lives here:
@@ -54,11 +54,11 @@ this file holds the rest.
   (0x10058a0 / 0xf812a0) and `g_10069a0` (0x10069a0 / 0xf82320) in round 1294.
 - **Library code sits wherever the linker put it.** The T&L client's statically linked d3dx8.lib
   occupies `0x5e0000-0x64ffff` (~907 bodies) and is declared in `rebrew-project.toml` as
-  `external_ranges`; the other static libs (CTLFW32, LUA50, MSS32, LIBCMT) have no contiguous band —
+  `external_ranges`; the other static libs (CTLFW32, LUA50, MSS32, LIBCMT) have no contiguous band:
   their VAs are the `// LIBRARY:` rows in `src/library_*.h` (CTLFW32 253, LUA50 59, MSS32 2, D3DX8 910
   markers). Tools that enumerate "work left" must skip both. Evidence: round 1293.
 - **The client duplicates functions; one name can sit at two VAs.** `gv_Free3Fields` exists at
-  `0x45b790` (frees `[slot+0x24]`/`[slot+0x28]`) and `0x4f2290` (frees `[slot+0x1c]`/`[slot+0x20]`) —
+  `0x45b790` (frees `[slot+0x24]`/`[slot+0x28]`) and `0x4f2290` (frees `[slot+0x1c]`/`[slot+0x20]`):
   different bodies, and both are called. `0x45e520` (an 832-byte function the shared allocator source
   does not match) has **no callers at all**; `gm_LookupEntityRecordById` sits at `0x4cef30` while
   `cm_ChkEntityLookup` calls the untracked `0x4f48e0`.
@@ -87,7 +87,7 @@ this file holds the rest.
   Evidence: run it; the output contradicts the `confidence` field.
 - Detector evidence it does report, all reproducible: 142 `rep movs/stos`,
   94 `push ebp; mov ebp,esp` prologues, 30 `int3` pad runs, 16 `mov edi,edi`
-  2-byte nops, both wrapper styles (4 push-`[mem]`, 3 load-first) —
+  2-byte nops, both wrapper styles (4 push-`[mem]`, 3 load-first),
   which is the machine-readable form of the project-wide "per-file flags
   vary" finding. Evidence: `rebrew toolchain detect original/Server/server.dll --json`.
 - **`-sp5-pp` is a per-file pin, not a project setting, and it is worth 4
@@ -123,16 +123,16 @@ size". Twelve are `command_c/*.c` with `binary_size > annotation_size`. Rounds 1
 coverage gap and reported 51, then 10, "missing sibling functions" hidden inside over-wide discovery
 symbols. **That conclusion was wrong**, and this entry replaces it.
 
-**Every function inside those spans is already implemented, annotated, and byte-identical.** Measured — for
+**Every function inside those spans is already implemented, annotated, and byte-identical.** Measured: for
 each of the 12 spans, every annotated VA inside it, with its length to the next annotated VA and its
 residue in the shipped file:
 
 | annotated functions inside the 12 spans | 25 |
 |---|---|
 | byte-identical (residue 0) | **24** |
-| with residue | 1 — `cm_ExSellObjekt` (`0x1000d930`, 966 bytes) |
+| with residue | 1: `cm_ExSellObjekt` (`0x1000d930`, 966 bytes) |
 
-Total residue inside all twelve spans: **966 bytes**, all of it `cm_ExSellObjekt` — a carrier already in the
+Total residue inside all twelve spans: **966 bytes**, all of it `cm_ExSellObjekt`: a carrier already in the
 residue table. Nothing is missing.
 
 **The ten VAs rounds 1022-1024 named as "missing" are all present in the tree:**
@@ -148,7 +148,7 @@ residue table. Nothing is missing.
 | `0x1000e9c0`, `0x1000f590`, `0x1000fad0`, `0x10010140` | also annotated |
 
 **The real artefact is that `function_structure.json` is stale, not that code is missing.** It holds 543
-entries against 283 annotated functions — a *coarser* partition than the annotations. `0x1000d8a0` is one
+entries against 283 annotated functions: a *coarser* partition than the annotations. `0x1000d8a0` is one
 2008-byte entry in the inventory, while the tree annotates **two** functions inside it:
 `cm_ExTransferCurrencyNoKill` at `0x1000d8a0` (144 bytes, byte-identical) and `cm_ExSellObjekt` at
 `0x1000d930`. The inventory entry's size is the gap to the *next inventory entry*, so it overlaps functions
@@ -157,7 +157,7 @@ the annotations already separate.
 **Consequence for the earlier rounds.** `rebrew verify`'s denominator (283) counts annotations, which is the
 right population. Nothing was ever unreachable via `rebrew skeleton`; the ten VAs simply had annotations
 already. The "694 raw-link capability bytes" of round 1022 are real as a *measurement* (those bytes differ in
-the raw link) but they are **not** un-implemented code, and closing them is not a coverage task — it is the
+the raw link) but they are **not** un-implemented code, and closing them is not a coverage task: it is the
 same codegen work as any other carrier, and `cm_ExSellObjekt`'s 966 bytes are already the subject of a
 documented wall.
 
@@ -182,7 +182,7 @@ Residue after the clean rebuild: **8628** (`0x21b4`), unchanged.
 POST_BUILD step with:
 
 ```
-error: postlink failed: built .text is not position-aligned with the reference —
+error: postlink failed: built .text is not position-aligned with the reference;
 only 4847/7463 layout-map entries validate (64.9%, minimum 90%).
 .text VirtualSize built 0x221f6 vs reference 0x22846.
 ```
@@ -190,7 +190,7 @@ only 4847/7463 layout-map entries validate (64.9%, minimum 90%).
 That message describes the **plain CMake link** (`0x221f6`), which is not the deliverable. The deliverable is
 `--target final`, which runs `scripts/split_link.sh` (per-reference-offset composition, LIBCMT placed as
 stock objects) and then `postlink_residual.py`. `rebrew postlink` in the POST_BUILD step refuses a
-non-position-aligned `.text`, and the plain CMake link is exactly that — by design.
+non-position-aligned `.text`, and the plain CMake link is exactly that: by design.
 
 **Why this is worth recording.** Two properties follow, and both matter for trusting every number this
 project reports:
@@ -243,7 +243,7 @@ this session has characterised from six independent angles (per-carrier class ma
 displacement profiles, operand completeness, work-queue emptiness, per-function independence) and which no
 lever found in rounds 1025-1042 moves.
 
-## Faking the original `D:\` build path through wine is possible — and unnecessary (round 1054)
+## Faking the original `D:\` build path through wine is possible, and unnecessary (round 1054)
 
 **The question.** The game was built from `D:\Develop\...`, the reconstruction lives in a Linux checkout, and
 `__FILE__` under wine expands to a POSIX path mapped as `Z:\home\...`. Can the original path be faked?
@@ -262,10 +262,10 @@ D:\Develop\DieGildeAddOnServer\server.c
 `rebrew/cmake_tc.py`: the wineprefix is a host directory mounted into the container
 (`-v {prefix}:{prefix}`), and wine reads its drives from `{prefix}/dosdevices/`. A fresh prefix has only
 `c:` and `z:`; adding a `d:` symlink there creates the drive. The target must live **inside a directory the
-container already mounts** — the project root or the wineprefix — because `_docker_run` mounts only those
+container already mounts** (the project root or the wineprefix) because `_docker_run` mounts only those
 two; a `d:` pointing at `/tmp` fails with `C1083` even though the symlink is correct.
 
-**But it is unnecessary, and here is the measurement.** `__FILE__` is used **nowhere** in this tree —
+**But it is unnecessary, and here is the measurement.** `__FILE__` is used **nowhere** in this tree:
 `grep -rn "__FILE__" src/server.dll` finds exactly one hit, and it is in a comment. Every `D:\Develop\...`
 string is a **hand-written literal** passed to `LogMessageInternal`, escaped in the source:
 
@@ -273,16 +273,16 @@ string is a **hand-written literal** passed to `LogMessageInternal`, escaped in 
 LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x5df, "LOBBY mode", 1);
 ```
 
-All **14** `D:\Develop\...`-shaped strings in the reference are **already present in the shipped file** —
-verified by scanning both images — and all 11 distinct literals are written out in the sources.
+All **14** `D:\Develop\...`-shaped strings in the reference are **already present in the shipped file**:
+verified by scanning both images, and all 11 distinct literals are written out in the sources.
 
 **So the path axis is already closed by construction, not by luck.** The reconstruction reproduces these
 strings by typing them, which is what the original source did too (the original called
-`LogMessageInternal("D:\\Develop\\...", ...)` with a literal, not `__FILE__` — if it had used `__FILE__`, the
+`LogMessageInternal("D:\\Develop\\...", ...)` with a literal, not `__FILE__`; if it had used `__FILE__`, the
 strings would carry the SDK's own layout, and `/FC` would have been required).
 
-**When this WOULD matter.** If a round ever converts one of these literals to `__FILE__` — for instance while
-tidying, or because a decompiler emitted `__FILE__` for a path argument — the build would silently start
+**When this WOULD matter.** If a round ever converts one of these literals to `__FILE__` (for instance while
+tidying, or because a decompiler emitted `__FILE__` for a path argument) the build would silently start
 emitting `Z:\home\maci\...` instead of `D:\Develop\...`, breaking strings that currently match, and the
 failure would appear only in `.rdata`. The `d:` mapping above is the fix if that ever happens. Recorded so
 the technique is available and the reason it is currently unused is explicit.
@@ -309,13 +309,13 @@ Two consequences that are easy to get wrong:
 - **There is no `.idata` section**, despite 84 metadata entries claiming `section = ".idata"`. The import
   address table lives at the head of `.rdata` (`DataDirectory[12]` = RVA `0x24000`, size `416`).
 - **`.data`'s virtual tail begins at VA `0x10035000`** (`vaddr + rawsize`). Everything from there to
-  `0x1176759c` — `.bss` in ordinary terms — has no file bytes in either image and is zero-filled by the
+  `0x1176759c` (`.bss` in ordinary terms) has no file bytes in either image and is zero-filled by the
   loader. `section_symbol_bytes` skips it deliberately (`# zero-fill tail (BSS): no file bytes to read`), so
   `rebrew verify --data` cannot compare those symbols and never marks them VERIFIED.
 
 **Data state: 329 metadata symbols, 0 differences from the reference.** 122 are `VERIFIED` by
 `verify --data`; the other 207 are `UNCHECKED` and un-clearable, but were checked independently by direct
-byte comparison — 84 import slots (all dwords identical), 111 in the zero-fill tail, 5 with file bytes
+byte comparison: 84 import slots (all dwords identical), 111 in the zero-fill tail, 5 with file bytes
 (identical), 7 sizeless. The 18 `__imp__` items and the 123 `start-data` items that `rebrew todo` used to
 list were artefacts of that gap; both lanes are now empty and only the 2 known `.text` carriers remain.
 
@@ -326,7 +326,7 @@ that fix the coverage figure was absent entirely and had to be reconstructed by 
 `section_symbol_bytes` on both images and counting `ref_sizes`; see `docs/measure-traps.md` §51 for why a
 zero in a diff-shaped result is never a statement about the whole tree.
 
-## Section-by-section parity: the shipped file is byte-identical outside `.text` — BY COPYING, NOT BY COMPILING (round 1089, corrected round 1092)
+## Section-by-section parity: the shipped file is byte-identical outside `.text`, BY COPYING, NOT BY COMPILING (round 1089, corrected round 1092)
 
 **Read the raw-link column before drawing any conclusion from this.** The zeros below are produced by
 `rebrew postlink` writing those sections from the layout package (`layout/server.dll/*.hex`), which holds the
@@ -340,9 +340,9 @@ recorded this correctly; the round-1089 version of this entry did not, and is co
 | `.data` | differing 0 | differing **21,481** |
 | `.reloc` | differing 0 | differing **7,103** |
 
-"A zero here is a tautology, not a match" — and `rebrew verify --data` says so itself, in its own output:
+"A zero here is a tautology, not a match", and `rebrew verify --data` says so itself, in its own output:
 *"server.dll's .data is byte-identical to the reference. If the build postlinks by copying that section, these
-results are tautological — point --built at the raw link instead."*
+results are tautological: point --built at the raw link instead."*
 
 The measurements below are still true **of the shipped artifact**, and that is the artifact the objective
 names. They simply cannot be evidence about codegen. For the shipped deliverable:
@@ -355,14 +355,14 @@ names. They simply cannot be evidence about codegen. For the shipped deliverable
 | `.reloc` | `0x11000` | **0** | `d8cf33e18c1a…` |
 
 File size is 286,720 bytes in both, and all four section headers are byte-identical. The whole-file SHA-256
-still differs, and the difference is **exactly** the `.text` residue — nothing else in the image contributes.
+still differs, and the difference is **exactly** the `.text` residue: nothing else in the image contributes.
 
 **`rebrew verify --data`'s 37% coverage is the maximum, not a shortfall.** Its report reads
 "122 of 329 symbols compared". The 207 it does not compare decompose as: **73** symbols declared `.data` that
 sit past `rawsize` `0xe000` in the virtual tail (`0x10035000`+), **84** import slots, **50** `.bss`. Measured
 directly: **none of the 73 is inside the file-backed region** `0x10027000`..`0x10035000`. The 122 compared are
 85 `.data` + 37 `.rdata`, which is every symbol that has file bytes in either image to compare against. There
-is no additional coverage to be had — the remainder is symbols the file format does not carry.
+is no additional coverage to be had: the remainder is symbols the file format does not carry.
 
 **What this means for the done-criteria.** "Every data byte matching" is satisfied and independently verified.
 "`.text` VirtualSize exactly `0x22846`" is satisfied (`0x22846` in both). "Import table exactly 100" is
@@ -418,8 +418,8 @@ you to use `--shared` (round 1378 fix).
 
 Earlier notes said "clients sp5-pp, server sp6".  Measured properly, the
 distinction is **not a compiler version** and not a service pack: all three
-binaries were built with the same compiler product and version —
-**MSVC 6.0, cl.exe 12.00.8804** — and differ only in the **code generator**
+binaries were built with the same compiler product and version
+(**MSVC 6.0, cl.exe 12.00.8804**) and differ only in the **code generator**
 (c2.dll):
 
 | binary | compiler version | code generator | `Rich` record | pp-only `test ah,X` sites |
@@ -432,7 +432,7 @@ Three independent measurements, all agreeing:
 
 1. **Compiler fingerprint (`@comp.id`).** The Processor Pack image
    (`rebrew/msvc:6.0-sp5-pp-win32`) stamps every object with
-   `@comp.id = 3154772 = 0x00302354` — product `0x0030`, build `2354` = 9044,
+   `@comp.id = 3154772 = 0x00302354`: product `0x0030`, build `2354` = 9044,
    i.e. c2.dll 13.00.9044.0.  Nine VC6 code generators are registered
    (`6.0`, `sp1`-`sp6`, `win9x`, `sp5-pp`) and each stamps a different
    `@comp.id`; only `sp5-pp` uses product `0x0030`.  Both clients' Rich headers
@@ -447,9 +447,9 @@ Three independent measurements, all agreeing:
    with `/Od`, `/O1`, `/O2`, `/Ox`, `/Os`, `/O2 /Op`, `/O2 /Oa`, `/O2 /Ot`,
    `/O2 /Oy-`:
    - `sp5-pp` emits `test ah,0x44` (+ `jp`) and `test ah,0x05`, and **never**
-     `test ah,0x40` — under all nine flag sets.
+     `test ah,0x40`, under all nine flag sets.
    - All eight plain VC6 code generators emit `test ah,0x40` + `test ah,0x01`
-     + `test ah,0x41`, and **never** `0x44`/`0x05` — under all nine flag sets.
+     + `test ah,0x41`, and **never** `0x44`/`0x05`, under all nine flag sets.
    The idiom is therefore a code-generator signature, not a flag artefact.
    **The `test ah,X` only counts as a compare idiom when `fnstsw ax` precedes
    it** (`df e0 f6 c4 XX`): a bare `f6 c4 40` is usually the integer
@@ -506,7 +506,7 @@ ah,0x40` occurs **nowhere** in either client, and all 22 of GOLDTL's
 `fnstsw+0x01` sites lie inside the D3DX8 band.  The server's pp count is zero
 across its whole `.text`, game code included.
 
-The sweep of 14 matched GOLDTL functions (all game code — none carries a
+The sweep of 14 matched GOLDTL functions (all game code, none carries a
 `LIBRARY:` row) is the same story: 11 reproduce under all three generators,
 3 reproduce only under the Processor Pack (`0x459940`, `0x4fffb0`, `0x492990`),
 0 only under the plain ones.
@@ -521,18 +521,18 @@ Consequences:
 - The SERVER↔client body overlap cannot be byte-identical wherever the changed
   generator touches the code (x87 compare idiom and the scheduling it drags
   along). `rebrew cross-import --from server.dll` therefore reverts even at
-  score 100 — that is the tool being honest, not a match-quality bug.
+  score 100: that is the tool being honest, not a match-quality bug.
 - GOLD and GOLDTL share the generator, so GOLDTL→GOLD marker moves do verify
   (round 1378: GOLD `0x421ed0` from GOLDTL `0x41d4d0`, EXACT).
 - Plain VC6 SP5 and SP6 output is byte-identical for the functions measured
-  here, so the server cannot be pinned to a specific service pack — only to
+  here, so the server cannot be pinned to a specific service pack: only to
   "a plain, non-Processor-Pack VC6 code generator".  The three per-file
   `sp5-pp` pins in `CMakeLists.txt` are marginal partial-match wins (834 vs
   828 bytes, 824 vs 820), not evidence of a pp-built server.
 
 ### Does the Processor Pack work for the SERVER target? (round 1379e)
 
-Partly — per file, never as the target profile.
+Partly: per file, never as the target profile.
 
 Same file, same flags, only `--toolchain` varies, 12 matched server functions
 (the 5 that carry a plain x87 compare plus 7 ordinary ones):
@@ -541,23 +541,23 @@ Same file, same flags, only `--toolchain` varies, 12 matched server functions
 |--------|-------|-----------|
 | byte-identical under sp5-pp AND sp6 | 9 | `cm_ExSetAttribute`, `cm_ExModifyHealth`, `cm_DispatchProduction`, `cm_ChkEntityLookup`, `InitializeLogAndErrorHandler`, `cm_ExSetWohnsitz`, `cm_ExCreateGeb`, `cm_ChainAssignId`, `cm_ChkSellObjekt` |
 | pp **breaks** it | 3 | `ahm_ClampFloatValue` 0x1000c3c0, `cm_ExModifyStat` 0x100100a0, `sim_FindAndMatchParents` 0x100151e0 |
-| pp-only (pp matches, plain does not) | 0 | — |
+| pp-only (pp matches, plain does not) | 0 | - |
 
 The rule is exact: the three that break each contain the plain idiom
-(`fnstsw ax; test ah,0x01` — 2, 3 and 2 sites) **inside the compared
+(`fnstsw ax; test ah,0x01`: 2, 3 and 2 sites) **inside the compared
 function's own span**, and every function whose span contains none is
 generator-insensitive.  `cm_ExSetAttribute` 0x1000e8d0 has three such sites
-*after* its end and stays byte-identical under pp — the earlier inventory
+*after* its end and stays byte-identical under pp: the earlier inventory
 attribution had folded them into it.
 
-Conclusion (round 1379f): the server build is **single-toolchain** — one plain
+Conclusion (round 1379f): the server build is **single-toolchain**: one plain
 VC6 profile for every TU.  The three `msvc-6.0-sp5-pp` pins that used to sit in
 `CMakeLists.txt` are gone.  They were bought with partial-match scores on
 functions nobody has matched yet (171/346 vs 162/346, 834 vs 828, 824 vs 820),
 i.e. a wrong-compiler coincidence, and they contradict the binary's own
 fingerprint.  Removing them costs nothing measurable: with all three objects
 force-rebuilt under sp6, `rebrew verify --full` is 281 passed / 264
-byte-matched, gate residue 11735, raw-link `.data` 22749 and imports 100 —
+byte-matched, gate residue 11735, raw-link `.data` 22749 and imports 100:
 identical to the pinned build.  `scripts/gate.sh` now fails if a pin of the
 other generator family appears, and `rebrew toolchain detect` refuses the pack
 profile for the server target.
@@ -608,7 +608,7 @@ What the clients can and cannot give:
 
    The closest carrier, `gm_CalculateProductionValue` (0x10019720), is down to
    **2 structural diffs** in 396 bytes: the reference orders `fxch st(1)`
-   before an independent `cmp byte ptr [esi], 0x17`, our build after it — a
+   before an independent `cmp byte ptr [esi], 0x17`, our build after it: a
    scheduler tie-break on already-correct C, and the file records six
    reassociations that were tried and are worse.
 

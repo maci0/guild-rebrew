@@ -1,4 +1,4 @@
-# Workflow traps — agents, concurrency, tooling, past mistakes
+# Workflow traps: agents, concurrency, tooling, past mistakes
 
 Process failures and the errors made along the way. Codegen walls live in
 `codegen-walls.md`, measurement traps in `measure-traps.md` (start at §1:
@@ -18,7 +18,7 @@ rule is walls §6b.
   measurement held). The glob now excludes a leading `_`.
 - **`git add -A` swept an unmeasured agent edit into a commit** once. Commit named paths only.
 - **The instruments lived in gitignored `.scratch/`** while being the tools every agent was
-  told to use — they would not survive a clean checkout. `ndiff`, `cdiff`, `gaptrace` and
+  told to use: they would not survive a clean checkout. `ndiff`, `cdiff`, `gaptrace` and
   `reallen2` were promoted to `scripts/`, with the two that assumed the repo root as cwd fixed.
 - **Read the doc before writing the brief.** A mission brief inverted a documented mechanism
   (told an agent to *add* `volatile` to get the reference's `xor`/`mov` form; shapes §52 says
@@ -27,7 +27,7 @@ rule is walls §6b.
   differing because several writers were active; the mechanism was misdiagnosed twice as
   compiler flags and a response-file difference before the real cause was found.
 - **Agents cannot link-test** (link measurement is serialized), so they rank candidates on the
-  object metrics that mispredict. Every delivery needs a coordinator link test — the bottleneck
+  object metrics that mispredict. Every delivery needs a coordinator link test: the bottleneck
   is measurement, not agent count.
 
 ## 2. Scope constraints that closed options
@@ -35,7 +35,7 @@ rule is walls §6b.
 - **C only, no `__asm`** except where the original had hand-written assembly. Directly forbade
   the largest measured lever (codegen-walls §6). One pre-existing `__asm` block-fill is
   admissible because the original contains a 24-byte hand-written fill prelude there.
-- **Do not reverse zlib or LIBCMT** — they are linked in. (`rebrew lib-match` is the check;
+- **Do not reverse zlib or LIBCMT**: they are linked in. (`rebrew lib-match` is the check;
   FLIRT finds only 9 of the 68 functions that turned out to be stock LIBCMT.)
 - **Library code and the CRT region are out of scope**, so the crt-region objects' "LONG"
   reports and the split-symbol drift are not the objective.
@@ -43,7 +43,7 @@ rule is walls §6b.
   `CrashDump`, which made the callee dereference `nInstr - 5`) was fixed at a **deliberate cost
   of 1 linked byte**, because byte-identity bought with semantically wrong C is a false match.
   Conversely a `volatile` byte-fitting change was accepted despite a pass recommending against
-  it, because `volatile` changes no observable behaviour — the line is semantics, not style.
+  it, because `volatile` changes no observable behaviour: the line is semantics, not style.
 
 ## 3. Errors made during this work, kept on the record
 
@@ -54,14 +54,14 @@ Each cost real budget and each is the kind of mistake the next attempt would rep
   §7). Correcting it retracted recorded rejections.
 - **A cascade framing was inferred from a ratio and was wrong.** High residue was read as "one
   early encoding shifts the tail", sent to two agents as a mission brief, and both refuted it
-  with measurements — `CrashDump`'s first differing byte is a frame *value*, and
+  with measurements: `CrashDump`'s first differing byte is a frame *value*, and
   `gm_AllocSpieler`'s gap returns to 0 repeatedly across 168 hunks. Two agent budgets were spent
   at a cliff that was not there.
 - **A tool was blamed for what was my own invocation.** A `gaptrace` run with the metadata size
   produced "37 bytes too long, 20 extra instructions", reported as a finding before being
   recognised as an artefact of the truncated window.
 - **The same refactor was attempted three times before its real blocker was identified
-  (rounds 909-911).** The goal was to lift duplicated `extern` declarations into a shared header —
+  (rounds 909-911).** The goal was to lift duplicated `extern` declarations into a shared header,
   plainly right by the mandate, and **byte-neutral when probed on one TU (`linktest.sh` +0)**. It
   failed at 27 symbols, then at one symbol, and the failures were blamed first on the pinned
   toolchains and then on include plumbing. **The actual cause surfaced only on the third attempt:
@@ -70,45 +70,45 @@ Each cost real budget and each is the kind of mistake the next attempt would rep
   `C2371: redefinition; different basic types`. Nothing had ever compared them, because no TU that
   defines the function includes the header.
   **Two lessons.** (1) Before widening a header's use, grep its declared names against the tree and
-  check they agree with every definition that will newly see it — one command, and it would have
+  check they agree with every definition that will newly see it: one command, and it would have
   replaced three rounds. (2) A `+0` probe on a single TU certifies only the axis it measured: an
   `extern` line cannot move `.text`, so the probe said nothing about whether the header *compiles*
   against the TUs it was entering.
   The blocker is now stated precisely rather than worked around: make the header agree with every
   TU first, per declaration, then widen its use.
-  **Resolved in round 912.** The check — every `extern` function declaration in every header against
-  every definition tree-wide — returned **0 disagreements**, and with that the lift landed: 9 symbols,
+  **Resolved in round 912.** The check (every `extern` function declaration in every header against
+  every definition tree-wide) returned **0 disagreements**, and with that the lift landed: 9 symbols,
   20 files, 84 declarations removed, **byte-neutral at the gate**. So the sequence is: *check the
   header against the tree first, then move declarations in measured batches.* The check is one grep
   and would have replaced three rounds.
-- **Do not re-derive the CMake configure command — read `scripts/build-win.sh` (round 917).**
+- **Do not re-derive the CMake configure command: read `scripts/build-win.sh` (round 917).**
   Recovering from a failed experiment I ran
   `rm -rf build && cmake -S . -B build -DREBREW_DEBUG_INFO=OFF`, **omitting `--toolchain
   cmake/toolchain-msvc-6.0-sp6-docker.cmake`**. CMake silently configured for the *host* compiler and
-  the whole tree failed with `windows.h: No such file or directory` — 27 build errors that look like
+  the whole tree failed with `windows.h: No such file or directory`: 27 build errors that look like
   a source catastrophe and are nothing of the sort. The correct invocation is in `build-win.sh`
   lines 59-62. **`build/` is a derived directory with non-obvious required flags; delete it only via
   that script.** Recovery cost three gate runs on top of the mistake, because a fresh configure also
-  surfaces the known `C1001` — `C1083` transients before a serial rebuild clears them.
+  surfaces the known `C1001`, `C1083` transients before a serial rebuild clears them.
 - **Before lifting a duplicated `extern`, find its *defining* TU, and stop if that TU is the
-  BSS-commons block (round 917).** Lifting `g_current_season` — declared in 16 TUs, so a perfect
-  candidate by every other test — took residue from **8,634 to 91,327** and demoted a function. Its
+  BSS-commons block (round 917).** Lifting `g_current_season` (declared in 16 TUs, so a perfect
+  candidate by every other test) took residue from **8,634 to 91,327** and demoted a function. Its
   definition lives in `gm_NextEntityQueryMatch.c:185`, inside the block commented *"Round-558:
   same-size majority types that still emit BSS commons. Incomplete `[]` does not emit; sized arrays
   broke .text layout."* That TU **cannot include a header** without changing what it emits, so moving
   the declaration left the definition unattached. **The check is one grep:**
-  `grep -rn '^[a-z].* g_<name>;' src/server.dll/`. Neither the `LONG` label (round 916) nor
-  "zero slack" predicts this — only the definition's location does.
+  `grep -rn '^[a-z].* g_<name>;' src/`. Neither the `LONG` label (round 916) nor
+  "zero slack" predicts this; only the definition's location does.
 - **Three pre-checks for a declaration lift, and where each came from.** All three are needed; the
   first two cost a reverted batch apiece to learn:
-  1. **one identical spelling** across every declaring TU — otherwise the TUs disagree and it is a
+  1. **one identical spelling** across every declaring TU; otherwise the TUs disagree and it is a
      type-conflict question, not a lift;
   2. **the defining TU is not the BSS-commons block** (`gm_NextEntityQueryMatch.c`, the "Round-558"
-     comment) — moving the declaration leaves the definition unattached and the link reshuffles
+     comment): moving the declaration leaves the definition unattached and the link reshuffles
      (round 917: residue 8,634 → 91,327);
   3. **the header agrees with every TU that will newly see it** (round 911: `C2371`).
   **And a warning about the filter itself:** the candidate scan that applies these has been wrong
-  twice — a regex missed `int x = 0;` and reported 17 symbols as undefined, then placed a definition
+  twice: a regex missed `int x = 0;` and reported 17 symbols as undefined, then placed a definition
   in the wrong TU. **Use it to order candidates, not to decide.** The decision is lift → build →
   gate.
 - **Check the *size* of a work-vein before spending rounds in it (round 918).** Five rounds
@@ -116,18 +116,18 @@ Each cost real budget and each is the kind of mistake the next attempt would rep
   candidate symbols, **6 are blocked, 31 have a single declaration site** (not a dedup), leaving ~7.
   Fifteen symbols were lifted at zero byte cost. **One `rebrew data --json` query would have shown
   the vein was nearly empty before the third failed batch.** When a vein's payoff is "provably
-  byte-neutral", that is a signal it is not on the critical path — measure the population first.
+  byte-neutral", that is a signal it is not on the critical path. Measure the population first.
 
 ## 3b. A declaration is not a definition: sweep for undefined `extern` operands (round 924)
 
 Two `gate.sh` checks and `rebrew lint` can all be green while a translation unit references a symbol
 that **does not exist anywhere**. `extern char name[];` at the top of a file, never defined in the
-tree and never named in `src/rebrew-data.toml` — and then *used* — decays to an operand the compiler
+tree and never named in `src/rebrew-data.toml` (and then *used*) decays to an operand the compiler
 cannot relocate. The emitted bytes are wrong, and nothing reports it:
 
 - `rebrew lint` passes: the identity header and marker contract are about the function, not its operands.
 - the compile passes: at worst a warning, and `C4013` for a missing *function*.
-- **the object size is unchanged** — measured on `cm_ExSellObjekt`, `.text` was `0x810` both with the
+- **the object size is unchanged**: measured on `cm_ExSellObjekt`, `.text` was `0x810` both with the
   broken operand and with the fix. So every size-based ruler is blind to it.
 - only the `.text` residue moves (and, when the operand was a string, the raw-link `.data` too).
 
@@ -151,7 +151,7 @@ for p in glob.glob('src/**/*.c'):
 PY
 ```
 
-Measured round 924: **37 live uses in the `server.dll` tree** (plus 4 data globals — a separate
+Measured round 924: **37 live uses in the `server.dll` tree** (plus 4 data globals, a separate
 sub-class worth checking the same way). Strip comments first, or every symbol merely *named in a
 docstring* counts as a use and the list is four times too long.
 
@@ -184,14 +184,14 @@ The cheap discriminator is the reference bytes at each symbol's VA plus a grep f
 definition is used in its own file.
 
 **A C89 trap this hit:** `unsigned char g_slot_table[];` at file scope is an *incomplete* tentative
-definition and emits **no symbol at all** — 11 `LNK2001`s, not a warning. A defining TU needs an
+definition and emits **no symbol at all**: 11 `LNK2001`s, not a warning. A defining TU needs an
 explicit size even when every declaring TU uses the unsized form.
 
 
 ## 4. An objective criterion with no check will silently stay unverified (round 934)
 
 `gate.sh` had six checks and none of them loaded the DLL. The 100% objective's own done-criteria list
-ends with **"Wine load + exports (Init, Exit) resolve"** — and for the whole of this session nothing
+ends with **"Wine load + exports (Init, Exit) resolve"**, and for the whole of this session nothing
 verified it. Every round could report "gate pass" while that criterion was untested, which is the
 distinction between *green* and *verified*.
 
@@ -205,7 +205,7 @@ Two traps met while writing the missing check, both already documented separatel
   loader under an unwritable `WINEPREFIX`, so Wine produced no output at all; `grep -q MISSING` found
   nothing and the script printed OK. **Test the exit code and require non-empty output.**
 - **A harness limitation looks exactly like a finding.** The same v1 reported
-  `LOAD FAILED err=193` (BAD_EXE_FORMAT) for our DLL — and for **the reference DLL too**. When a check
+  `LOAD FAILED err=193` (BAD_EXE_FORMAT) for our DLL, and for **the reference DLL too**. When a check
   fails, re-run it against the known-good artefact before believing it: that control cost one command
   and prevented a round being spent "fixing" a non-defect. Here the real cause was Wine's `Z:` path
   handling; copying to a short temp path loads all three DLLs correctly.
@@ -218,7 +218,7 @@ Two traps met while writing the missing check, both already documented separatel
 
 Run bare, the check reports **20 reversed functions whose bytes come from LIBCMT** and prints
 "These do not need reversing: the linker supplies them. Delete the source...". That reads like a serious
-scope violation — the exact anti-pattern AGENTS.md opens with. **It is not.** Every one of the 20 is
+scope violation: the exact anti-pattern AGENTS.md opens with. **It is not.** Every one of the 20 is
 already recorded in `scripts/library_code_allowlist.txt` with a link-side reason (the `sbh_pool.c` /
 `mlock.c` / `crt_heap.c` group, kept because the stock objects drag in imports the reference does not
 have).
@@ -229,7 +229,7 @@ The allowlist is consumed by `.pre-commit-config.yaml`, which invokes the tool *
 rebrew lib-match --stock-lib LIBCMT.LIB --allow scripts/library_code_allowlist.txt
 ```
 
-Run that way the answer is `No reversed function matches a linked library.` — clean.
+Run that way the answer is `No reversed function matches a linked library.` Clean.
 
 **So always run the check the way the hook runs it.** A bare invocation is not "the check failing"; it
 is a different question being asked. Cross-check coverage directly when in doubt: extract the reported
@@ -254,18 +254,18 @@ object rather than trusting the note:
 | 955-956 | `ServerMainThread.c`, `srv_LoadBuf.c` | describe the target's `lea` "against our `add`" | `ServerMainThread`: the direction was **backwards** (target has the `lea`); `srv_LoadBuf`: we emit **no `add` at all**, both sides have the identical `lea` |
 | 957 | `ahm_ExAllocAlchemist.c` | "our baseline emits `d905b8560210 fld [0x100256b8]`" | that byte sequence **does not occur anywhere in the build**; both sides now emit the reference's order |
 
-**The class.** Headers here are meticulous about *what was measured* — compile counts, scores, byte
-sequences — and that is exactly why a stale one is dangerous: it reads as evidence. But an entry is a
+**The class.** Headers here are meticulous about *what was measured* (compile counts, scores, byte
+sequences), and that is exactly why a stale one is dangerous: it reads as evidence. But an entry is a
 snapshot of one compilation, and the source moves underneath it. Round 952's own file states the
 principle for rejections ("a rejection is only valid for the compilation it was measured on"); the same
 applies to **every** claim, including direction, baseline bytes, and which of two spellings is shipped.
 
 **The guard, and it is cheap:**
 
-1. Grep the carrier for verifiable claims — hex byte runs, `where we emit` / `against our`, `rejected`,
+1. Grep the carrier for verifiable claims: hex byte runs, `where we emit` / `against our`, `rejected`,
    `not adopted`.
 2. **Decode each image from its own entry point** (decoding the reference at our VA yields garbage and
-   coincidental matches — this produced a false `lea`/`add` "match" in round 955).
+   coincidental matches; this produced a false `lea`/`add` "match" in round 955).
 3. Compare against the current object. Where they disagree, **the binary wins**, and the note gets an
    inline STALE marker with the address and the measurement.
 
@@ -277,12 +277,12 @@ part that moved; keep the part that did not.
 ## 7. A sweep that rewrites a tracked file must be killable and self-restoring (round 966)
 
 The permutation sweep from round 964 works by **rewriting `cm_ExSellObjekt.c` once per candidate** and
-compiling it. That is a reasonable design — 0.85 s per point instead of minutes — but it has two hazards
+compiling it. That is a reasonable design (0.85 s per point instead of minutes) but it has two hazards
 that both materialised in round 966:
 
 - **The file is dirty for the whole run.** `git status` shows the carrier modified, and anything reading
   the tree during the sweep (or a crash) sees a candidate, not the shipped source. The harness restores
-  the original in a `finally:`/trailing write — keep that, and verify with `git status` afterwards.
+  the original in a `finally:`/trailing write: keep that, and verify with `git status` afterwards.
 - **Killing the job can orphan a compiler.** Cancelling the background job did not stop the running
   `rebrew-cmake-cl`; a follow-up `pkill -9 -f rebrew-cmake-cl` then **matched the killing shell itself**
   (the pattern appears in its own command line) and SIGKILLed the tool call. Use a pid file, or match on
@@ -292,29 +292,29 @@ that both materialised in round 966:
 over 9 items is 36 candidates per sweep, ~28 accepted moves, so **~15 minutes per restart**. Budget the
 search, not just the compile.
 
-**Always end a mutating sweep by restoring the source and re-running the gate** — a sweep that leaves a
+**Always end a mutating sweep by restoring the source and re-running the gate**: a sweep that leaves a
 candidate in the tree, or a stale object in `build/`, produces a residue reading that has nothing to do
 with what is committed.
 
 ## 8. Probe history lives in TWO places; `whathas.py` indexes only one (round 978)
 
-`scripts/whathas.py` searches the four codegen docs, `naming_conventions.md` and `TODO.md` — all under
+`scripts/whathas.py` searches the four codegen docs, `naming_conventions.md` and `TODO.md`, all under
 `docs/`. But a carrier's probe history is also, and often *only*, in the **header comment of its own `.c`
 file**: the instruction pair, the probe variants, and the score each one produced. `whathas.py` cannot see
 any of that, and neither can a `grep` of `docs/`.
 
 **Measured on `ahm_ExAllocAlchemist`.** `whathas.py 0x1000bebc --window 48` reports *"no documented probe
 in 6 docs"*, which reads as an untouched carrier. The divergence is in fact fully documented in the file
-header, `src/server.dll/DieGildeAddOn/game/alchemy_logic_c/ahm_ExAllocAlchemist.c:63-70`, including the
+header, `src/Develop/DieGildeAddOn/game/alchemistry_logic_c/ahm_ExAllocAlchemist.c:63-70`, including the
 exact instruction pair (`lea edx,[eax+eax*8]` against `lea eax,[eax+eax*8]`) and the exact probe that
 tests it, measured at **109** against a shipped **452**.
 
-**Two carriers' whole histories are like this**, and both are small — which is why they were missed: a
+**Two carriers' whole histories are like this**, and both are small, which is why they were missed: a
 small function's probe history fits in its header comment, so it never earned a `docs/` entry.
 `cm_ProcessCommandQueue` (18 rounds of history, `cm_ProcessCommandQueue.c:100-320`) and `srv_LoadBuf`
 (round 956) are the same shape.
 
-**The cost is concrete.** Round 976 opened by probing two carriers that were already closed in-source —
+**The cost is concrete.** Round 976 opened by probing two carriers that were already closed in-source:
 `srv_LoadBuf`'s `header[0xb]`/`header[0xc]` order (documented in its own header) and `m_AllocTracked`'s
 guard order (bisected in its header, allocator Finding 51). Both probes ran, both were reverted, and
 neither could have landed: **+574** and **+539**.
@@ -322,18 +322,18 @@ neither could have landed: **+574** and **+539**.
 **The rule.** Before probing a carrier, read both stores:
 
 ```bash
-python3 scripts/whathas.py 0x<va> --window 48    # docs/ only — necessary, not sufficient
+python3 scripts/whathas.py 0x<va> --window 48    # docs/ only: necessary, not sufficient
 sed -n '1,120p' ""<carrier>.c                    # the per-file header, always
 ```
 
 Treat "no documented probe" from `whathas.py` as *"no `docs/` entry"*, never as *"unworked"*. The round
-brief's own wording — read the file header before probing, since "no documented probe" is not proof of
-novelty — already says this; round 976 is what happens when only the tool is consulted.
+brief's own wording (read the file header before probing, since "no documented probe" is not proof of
+novelty) already says this; round 976 is what happens when only the tool is consulted.
 
 ## 9. The round-978 rule was written and then broken in the same session (round 979)
 
 Round 978 established: *"no documented probe" from `whathas.py` means "no `docs/` entry", never
-"unworked" — read the carrier's `.c` header too* (workflow-traps §8). Round 979 read the tool, skipped the
+"unworked": read the carrier's `.c` header too* (workflow-traps §8). Round 979 read the tool, skipped the
 header, and spent its budget re-deriving three already-recorded results.
 
 **What happened.** Working `ServerMainThread` (classified source-bound by the sp5-pp oracle, §91), the
@@ -343,7 +343,7 @@ block by 3. Three probes followed, all reverted:
 
 | probe | link delta |
 |---|---|
-| named `unsigned char* qbuf` alias for `cmd_buffer_primary` across the stores | **+0** (byte-identical — msvc6 folds the alias) |
+| named `unsigned char* qbuf` alias for `cmd_buffer_primary` across the stores | **+0** (byte-identical; msvc6 folds the alias) |
 | the same alias assigned *before* the `total_size` load | **+0** (byte-identical) |
 | `total_size` load moved below the first four stores | **+861** |
 
@@ -357,13 +357,13 @@ propagates the compared constant into the cmd+4 store … Moving the comparison 
 propagation but also hoists the cmd+0x10 store ahead of the argument pushes, so neither spelling matches
 yet."*
 
-`whathas.py 0x100097f4` **does** return a hit — shapes §126. The tool was not at fault this time; it was
+`whathas.py 0x100097f4` **does** return a hit: shapes §126. The tool was not at fault this time; it was
 consulted on `0x10009767` (the branch-displacement symptom) rather than on `0x100097f4` (the fault), and
 the symptom's four `TODO.md` hits read as "known, unprobed".
 
 **The refined rule.** On this tree the *first differing byte* is usually a **symptom**, and a symptom whose
-target is displaced will not be documented. Find the fault — the lowest byte where the two **instruction
-streams** stop agreeing, not where the first byte differs — and look *that* address up before probing:
+target is displaced will not be documented. Find the fault (the lowest byte where the two **instruction
+streams** stop agreeing, not where the first byte differs), and look *that* address up before probing:
 
 ```bash
 python3 scripts/first_divergence.py <symbol>        # symptom: lowest differing byte
@@ -387,18 +387,18 @@ Rounds 976-981 each spent their budget probing a carrier or axis whose result wa
 | 979 | `ServerMainThread` packet block (three spellings) | +0, +0, +861 | `ServerMainThread.c:122-129`, shapes §126 |
 | 981 | `/Os` on `gm_AllocSpieler` | **+0xbfae** | shapes §3639-3640, §1966, codegen-walls §77 |
 
-Every result was in `docs/` **or** in the carrier's own `.c` header. Both rules existed before the failures —
+Every result was in `docs/` **or** in the carrier's own `.c` header. Both rules existed before the failures:
 workflow-traps §8 ("read the file header too") and §9 ("look up the fault address, not the symptom"). They
 were written and then not followed, four times.
 
 **So the defect is procedural, not informational.** Writing a fifth rule changes nothing; what was missing is
 a step in the round's *opening* that cannot be skipped. `scripts/preprobe.sh <carrier.c> [fault-addr]` is that
-step — it runs the `docs/` lookup, then greps the carrier's own header for the words that mark a closed lane
+step: it runs the `docs/` lookup, then greps the carrier's own header for the words that mark a closed lane
 (`revert`, `inert`, `worse`, `measured`, `closed`, `do not`, `dead end`, `section N`), and prints the
 fault-vs-symptom reminder:
 
 ```
-$ bash scripts/preprobe.sh src/server.dll/.../gm_AllocSpieler.c
+$ bash scripts/preprobe.sh src/Develop/.../gm_AllocSpieler.c
 == 1. docs/ lookup (whathas.py)
 0x10018850: 30 documented mention(s) (window 48)
   [49. A CFLAGS sweep on one function: inert, negative, and one near miss]
@@ -413,7 +413,7 @@ cost most of four rounds. A round that has not run it has not established that i
 
 **A generalisation worth keeping.** This tree has accumulated enough probe history that *most plausible moves
 are already measured*. The expected value of a probe now depends far more on checking the record than on the
-probe's design — the opposite of the position in the early rounds, where the record was thin and probing was
+probe's design, the opposite of the position in the early rounds, where the record was thin and probing was
 cheap. Rounds should budget for that shift explicitly rather than treating the lookup as an optional courtesy.
 
 ## 11. A stale in-source note can describe a state the source no longer has (round 982)
@@ -427,12 +427,12 @@ cheap. Rounds should budget for that shift explicitly rather than treating the l
 ```
 
 **The source does not contain that hoist.** The assignment sits *below* the count read, and it appears
-**twice** (lines 80 and 82, separated by a blank line) — a stray duplicate left behind when the hoist was
+**twice** (lines 80 and 82, separated by a blank line): a stray duplicate left behind when the hoist was
 reverted. Both were measured this round:
 
 | probe | link delta |
 |---|---|
-| delete the duplicate assignment (keep one, below the read) | **+0** (byte-identical — msvc6 folds it) |
+| delete the duplicate assignment (keep one, below the read) | **+0** (byte-identical; msvc6 folds it) |
 | apply round 130's documented hoist (one assignment, above the read) | **+505** |
 
 So the note's `-53` describes a configuration the file no longer has, and re-applying it is a large
@@ -449,7 +449,7 @@ round and 505 bytes.
 1. **Never apply a recorded fix from a note without re-measuring it.** The note records what was true when
    written, against the baseline of that round. Numbers in headers are history, not instructions.
 2. **A duplicated statement is a revert artifact, not an optimisation.** `current_index = 0;` twice in a row
-   is dead source that should be cleaned — it is byte-neutral here (measured **+0**), so cleaning it is free,
+   is dead source that should be cleaned: it is byte-neutral here (measured **+0**), so cleaning it is free,
    but it must never be mistaken for a deliberate shape. Grep for adjacent duplicate assignments when reading
    a header that mentions an ordering change.
 
@@ -477,11 +477,11 @@ that produces a wrong operand:
 **All seven are inert today, and the reason is worth recording:** the operand a wrong-type stub produces is
 an *address*, and address operands are exactly what the postlink fixer rewrites. Measured on
 `g_log_message_buffer`: five `.text` dwords hold `0x117640e0`, and every enclosing function is **RELOC**
-(byte-matched) — the stub's address is a relocation slot, not a byte the comparison sees. Only a stub that
+(byte-matched): the stub's address is a relocation slot, not a byte the comparison sees. Only a stub that
 changes the *shape* (a size, an instruction form, a displacement) would be visible, and these do not.
 
 So the class is a **latent hazard, not an active defect**: it becomes a real bug the moment such a symbol is
-used where the type changes codegen — a `sizeof`, a pointer arithmetic stride, an array index scaling. Two
+used where the type changes codegen: a `sizeof`, a pointer arithmetic stride, an array index scaling. Two
 of the seven are already in that position textually (`g_office_role_templates` indexes with a 24-byte
 stride; `g_field_worker_count_wt0` scales by 20), and they are inert only because the enclosing functions
 happen to compile correctly anyway.
@@ -490,7 +490,7 @@ happen to compile correctly anyway.
 
 ```bash
 # declarations with no definition and a scalar stub -- the round-924 shape
-grep -rn 'extern char \w*\[\]' src/server.dll --include=*.c
+grep -rn 'extern char \w*\[\]' src --include=*.c
 grep -nE '^\s*(int|char|short)\s+\w+\s*=\s*0;' src/link_stubs.c
 ```
 
@@ -501,7 +501,7 @@ may be part of why.
 **Also recorded: a `cm_ExSellObjekt` false alarm, self-caught.** Two dangling `extern char[]` at
 `cm_ExSellObjekt.c:431,479` looked like extra `LogMessageInternal` calls the reference does not have. Both
 sides emit **exactly three** `LogMessageInternal` calls and **exactly six** line-number pushes
-(`0x2c05, 0x2c2f, 0x2c53, 0x2c75, 0x2c97, 0x2cdd`) — identical. The sites are dead branches in both. The
+(`0x2c05, 0x2c2f, 0x2c53, 0x2c75, 0x2c97, 0x2cdd`), identical. The sites are dead branches in both. The
 initial "our build has 2, reference has 3" reading was a **truncated disassembly window**, the same
 off-by-one class as measure-traps §18.
 
@@ -553,7 +553,7 @@ it at the link:
 
 | metric | claimed by the header | measured (round 986) |
 |---|---|---|
-| object span | — | **3696, still exactly at span** |
+| object span | - | **3696, still exactly at span** |
 | `.text` residue delta | "costs 11 bytes", i.e. expected ≈ +11 | **+343** |
 
 So the edit is **31x worse than recorded**, and the "recover 11 bytes elsewhere" plan it invites would not
@@ -569,22 +569,22 @@ lands differently.
 | 985 | `gm_AllocSpieler` +16 fix | "bankable" | span still overflowed |
 | 986 | `gm_AllocSpieler` 11-byte fix | 11 bytes | **+343** |
 
-**The rule, stated so it stops being relearned:** in this tree, *any* number in a header comment — including
-one that describes the cost of a fix rather than the fix itself — is a historical measurement against a
+**The rule, stated so it stops being relearned:** in this tree, *any* number in a header comment (including
+one that describes the cost of a fix rather than the fix itself) is a historical measurement against a
 baseline that no longer exists. Treat every recorded delta as a **hypothesis to re-measure**, never as a
 budget to plan against. A round that budgets work from a header's byte figure is planning on noise.
 
 `scripts/linktest.sh` makes the re-measurement cost one command; there is no excuse for planning on the
 number instead.
 
-## 15. `rebrew test --json` PERSISTS state — including a per-function toolchain pin (round 997)
+## 15. `rebrew test --json` PERSISTS state: including a per-function toolchain pin (round 997)
 
 `rebrew test <file>` reads like a measurement command. It is not: it writes back to
 `src/rebrew-functions.toml`. Round 997 ran it with an explicit `--toolchain msvc-6.0-sp5-pp` to test whether a
 different backend avoids the epilogue merge (§2), and the tool **persisted the pin into the metadata**:
 
 ```
-$ rebrew test src/server.dll/.../cm_ExCopyEntityData.c --toolchain msvc-6.0-sp5-pp --json
+$ rebrew test src/Develop/.../cm_ExCopyEntityData.c --toolchain msvc-6.0-sp5-pp --json
 SIZE persisted → 912
 TOOLCHAIN persisted → msvc-6.0-sp5-pp
 ```
@@ -604,7 +604,7 @@ leaving a new line in the tool-owned file:
 project's rule that the toolchain is chosen per *translation unit* (`CMakeLists.txt` pins whole files via
 `COMPILE_OPTIONS`, and §142 requires every function in the file to survive the switch). `rebrew cmake-flags`
 **fails the configure** when one TU's functions resolve to different flags, so committing this line would
-have broken the build for a reason with no connection to the change that caused it — and the diff is one line
+have broken the build for a reason with no connection to the change that caused it, and the diff is one line
 in a 3,000-line generated file, which is exactly the kind of thing that rides along in a `git add -A`.
 
 Caught by reading the tool's banner output rather than only the JSON, and reverted with
@@ -618,15 +618,15 @@ git status --short src/rebrew-functions.toml src/rebrew-data.toml   # must be cl
 git diff src/rebrew-functions.toml src/rebrew-data.toml            # must be UNCHANGED after
 ```
 
-The second check is the one that matters, and it is not covered by `gate.sh` — the gate runs `lint` and
+The second check is the one that matters, and it is not covered by `gate.sh`: the gate runs `lint` and
 `verify`, neither of which flags a syntactically valid extra metadata key. A probe batch that leaves the
 metadata dirty is a probe batch whose measurements may also have been taken under a different backend than
 the one the build uses.
 
-**Related:** this is why `rebrew verify --full` is safe to run freely and `rebrew test --toolchain` is not —
+**Related:** this is why `rebrew verify --full` is safe to run freely and `rebrew test --toolchain` is not:
 `verify` reads, `test` writes.
 
-## 16. A header's "unused slack" figure was CORRECT — the check that "disproved" it was tautological (rounds 998, 1017, 1018)
+## 16. A header's "unused slack" figure was CORRECT: the check that "disproved" it was tautological (rounds 998, 1017, 1018)
 
 Workflow-traps §14 established that a header's recorded **delta** is a historical measurement, not a budget.
 Round 998 extended that to a recorded **headroom** figure and concluded `cm_ExProdObjekt.c:341-343`'s
@@ -637,7 +637,7 @@ span with trailing `nop`s, so `object .text raw == span` holds **by construction
 its own COMDAT. The comparison cannot distinguish "our code fills the span" from "our code is short and
 msvc6 padded it".
 
-Round 1017 repeated the same check on two decoders and confirmed "slack 0" a second time — still
+Round 1017 repeated the same check on two decoders and confirmed "slack 0" a second time: still
 tautological. Round 1018 measured the right quantity, the end of the last non-`nop` instruction:
 
 | carrier | reference code | our code | span | real headroom |
@@ -663,7 +663,7 @@ size-neutral variant the header records and it link-tested at **+13**. Having ro
 profitable edit exists. (Round 1020 then closed the aliasing lever on the same row at **+658**.)
 
 
-## 17. A stale inventory is not a coverage gap — check the annotations before claiming missing functions (rounds 1021-1024, corrected round 1037)
+## 17. A stale inventory is not a coverage gap: check the annotations before claiming missing functions (rounds 1021-1024, corrected round 1037)
 
 `rebrew verify --full` reports 13 functions whose annotation SIZE differs from the binary-derived size.
 Twelve are `command_c/*.c`. Rounds 1021-1024 read this as **missing functions**: first 51, then 10, "hidden
@@ -671,14 +671,14 @@ inside over-wide discovery symbols", and built a root-cause story on it (`discov
 threshold) plus a proposed tool fix.
 
 **There are no missing functions.** Every annotated VA inside those twelve spans is implemented and
-**byte-identical** — 25 annotated functions, 24 with zero residue, and the only residue is
+**byte-identical**: 25 annotated functions, 24 with zero residue, and the only residue is
 `cm_ExSellObjekt`'s 966 bytes, a carrier already in the residue table. The ten VAs the earlier rounds named
 (`0x1000d340`, `0x1000d730`, `0x1000d930`, `0x1000e750`, `0x1000e9c0`, `0x1000f480`, `0x1000f590`,
-`0x1000fad0`, `0x10010080`, `0x10010140`) all have annotations — `cm_RejectCommand`, `cm_ExFree`,
+`0x1000fad0`, `0x10010080`, `0x10010140`) all have annotations: `cm_RejectCommand`, `cm_ExFree`,
 `cm_ExSellObjekt`, `cm_ExAllocObjekt`, `cm_ExSetWohnsitz`, `cm_ExSimCommand` and four more.
 
-**What the size divergence actually is.** `src/server.dll/function_structure.json` holds **543 entries**
-against **283 annotated functions** — it is a *coarser* partition, and its entries' sizes are the gap to the
+**What the size divergence actually is.** `db/inventory-server.dll.json` holds **543 entries**
+against **283 annotated functions**: it is a *coarser* partition, and its entries' sizes are the gap to the
 next *inventory* entry, not to the next function. `0x1000d8a0` is one 2008-byte inventory entry while the
 tree annotates two functions inside it (`cm_ExTransferCurrencyNoKill` 144 bytes, byte-identical, and
 `cm_ExSellObjekt`). So `binary_size > annotation_size` is expected whenever the discoverer merged functions
@@ -689,26 +689,26 @@ annotations; it is not the list of what exists in the reconstruction. Before con
 missing, grep the annotations:
 
 ```bash
-grep -rn "FUNCTION: SERVER 0x<VA>" src/server.dll     # does it exist?
-python3 -c "import json;d=json.load(open('src/server.dll/function_structure.json'));print(len(d))"
+grep -rn "FUNCTION: SERVER 0x<VA>" src                 # does it exist?
+python3 -c "import json;d=json.load(open('db/inventory-server.dll.json'));print(len(d))"
 ```
 
-If the VA has an annotation, it is implemented and `rebrew verify` is already scoring it — the size
+If the VA has an annotation, it is implemented and `rebrew verify` is already scoring it: the size
 divergence is an inventory-coarseness fact, and it is not work. **This trap cost four rounds** (1021-1024),
 including a proposed upstream tool fix for a defect that does not exist.
 
 **Second-order lesson.** Both rounds that "found" missing functions measured their evidence without ever
-asking `rebrew verify`'s own population — the annotation list — for the same VAs. A claim of the form "X is
+asking `rebrew verify`'s own population (the annotation list) for the same VAs. A claim of the form "X is
 missing" needs a check against the authoritative list of X, not against a proxy that is known to be coarser.
 
-## 19. `rebrew todo`'s 20 items are 2 real carriers and 18 false positives — verified again (rounds 955, 1038)
+## 19. `rebrew todo`'s 20 items are 2 real carriers and 18 false positives: verified again (rounds 955, 1038)
 
 `rebrew todo --json` returns 20 `improve-match` / `start-data` items. Round 955 recorded that 18 of them
 are `__imp__*` IAT slots and false positives. Round 1038 re-verified that against the binary rather than
 trusting the note:
 
 **The 18 `start-data` items are IAT slots at `0x10024000..0x10024044`, and all 18 are already
-byte-identical in the shipped file** — read directly, 18 of 18 matching. They appear as "UNCHECKED" because
+byte-identical in the shipped file**: read directly, 18 of 18 matching. They appear as "UNCHECKED" because
 the dispatcher rewrite installs the reference's IAT, not because anything is undone.
 
 **The two real items are both documented walls, with quantified blockers:**
@@ -718,7 +718,7 @@ the dispatcher rewrite installs the reference's IAT, not because anything is und
 | `0x10018850` | `_gm_AllocSpieler` | STUB | 27.2% | "132 distributed schedule steps, no cliff; in-hunk clusters are parent-wins 344B, refs-scan 220B, no-parent trait 181B, record-header 140B; ndiff 731/1056 in 171 hunks, cdiff 808/1056 in 156" |
 | `0x100093a0` | `_ServerMainThread@4` | NEAR_MATCHING | 85.3% | "already in reference order (16/16 log landmarks byte-identical, zero block reorderings); residual is 3 intra-block scheduling sites + register pairs; ndiff 592/627 in 25 hunks, cdiff 614/627 in 15" |
 
-**The rule.** `rebrew todo`'s ROI ordering carries no signal on this tree — its top-scoring items are IAT
+**The rule.** `rebrew todo`'s ROI ordering carries no signal on this tree: its top-scoring items are IAT
 slots that are already correct. Filter to the annotated carriers before reading the list as work, and
 re-check the IAT claim against the binary rather than inheriting it: **the 18 are byte-identical, measured,
 not assumed.** With that filter the queue is empty except for the two carriers whose walls are recorded
@@ -729,8 +729,8 @@ This is workflow-traps §10's "no opening step forced the lookup" in its tooling
 
 ## 20. `build/` is gitignored, so a hand-edited `build.make` is invisible to every check (round 1051)
 
-**The trap.** `scripts/linktest.sh` recompiles with the exact command `build.make` records — that is what
-makes its deltas comparable to the real build — and `scripts/split_link.sh` consumes the objects that
+**The trap.** `scripts/linktest.sh` recompiles with the exact command `build.make` records: that is what
+makes its deltas comparable to the real build, and `scripts/split_link.sh` consumes the objects that
 command produced. Both treat `build.make` as **ground truth**. But `build.make` lives in `build/`, which is
 gitignored:
 
@@ -760,18 +760,18 @@ flags against the compile line `build.make` carries:
   not list was hand-added.
 
 It is wired into **`gate.sh`** (`== build-tree integrity`, whole tree, fails the gate) and into
-**`linktest.sh`** (refuses to measure, exit 4). Verified both directions: silent on the clean tree —
-**198 objects compared** — and firing on a single injected `/Ob1` in one object's rule.
+**`linktest.sh`** (refuses to measure, exit 4). Verified both directions: silent on the clean tree,
+**198 objects compared**, and firing on a single injected `/Ob1` in one object's rule.
 
 **A second bug found while writing the checker, worth recording because it produced a silent pass.**
 `parse_recorded` used `re.compile(r"...$")` with **no `re.M` flag**. Without multiline, `$` anchors to
-end-of-*string*, so on a `flags.make` containing **202** `Custom` comments it matched **zero** objects — and
+end-of-*string*, so on a `flags.make` containing **202** `Custom` comments it matched **zero** objects, and
 the checker then printed "agrees" while comparing nothing. A guard that silently checks nothing is worse than
 no guard. The tell was the summary line reading `0 object(s) with recorded flags`; the summary now reports
 the count it actually compared, so a zero is visible.
 
 **Also worth keeping:** the composition guard in `linktest.sh` (rounds 232/1051) caught the collapse and
-said so, and `cmake --build` failing at POST_BUILD postlink is by design (measure-traps §17) — neither is
+said so, and `cmake --build` failing at POST_BUILD postlink is by design (measure-traps §17): neither is
 the problem. The problem is that no check looked at the *inputs* to those steps.
 
 ## 21. A misleading error message is a defect: postlink's `.rdata` prefix check named one cause and hid the measurement (round 1053)
@@ -780,12 +780,12 @@ the problem. The problem is that no check looked at the *inputs* to those steps.
 against the layout package's recorded prefix length. When the lengths disagree it raised:
 
 ```
-built .rdata prefix size does not match the reference — check the debug directory:
+built .rdata prefix size does not match the reference; check the debug directory:
 builds with /debug carry an extra 0x1c-byte directory that shifts everything
 ```
 
 **It reports a hypothesis and withholds the numbers.** In guild-rebrew's tree this round the actual
-discrepancy was **+64 bytes**, and `DataDirectory[6]` was **0 in both the reference and the built image** —
+discrepancy was **+64 bytes**, and `DataDirectory[6]` was **0 in both the reference and the built image**:
 there was no debug directory at all. The message sent the reader after `/debug` while the real fault was a
 different `.rdata` length.
 
@@ -804,7 +804,7 @@ the reference has 9320.
 ```
 
 **The general point.** A guard's error text is part of its interface. One that names a single hypothesis
-and omits the measurement converts a five-minute diagnosis into a wrong lead — and this one is reached by
+and omits the measurement converts a five-minute diagnosis into a wrong lead, and this one is reached by
 every round that touches the composition, so the cost recurs. Prefer: *what was measured*, *what was
 expected*, and *the distinguishing test between the candidate causes*.
 
@@ -812,7 +812,7 @@ expected*, and *the distinguishing test between the candidate causes*.
 error message that is 100% one hypothesis. Both are cases where the tooling's *reporting* costs more than
 its *computation*.
 
-## 22. Inserting a `for ... else` mid-body dedents the rest of the loop — and no other check sees it (round 1055)
+## 22. Inserting a `for ... else` mid-body dedents the rest of the loop, and no other check sees it (round 1055)
 
 **What happened.** Round 1053 added a convergence guard to `scripts/emit_defs.py`, whose definition cascade
 loops to a fixed point:
@@ -831,13 +831,13 @@ for _round in range(6):
 ```
 
 The guard was written as `for ... else`, which must follow the **whole** loop. Inserted right after the
-`break`, it terminated the loop body there — the emit code below was silently **dedented out of the loop**.
+`break`, it terminated the loop body there: the emit code below was silently **dedented out of the loop**.
 Python accepts this: no syntax error, no lint warning, no test failure.
 
 **The symptom was two steps removed from the cause.** Definitions were emitted from a single pass instead of
 iterating, which grew `.rdata` by `0x40`. `postlink` then refused the build with the `/debug` message
-(workflow-traps §21). Round 1054 spent a full round diagnosing that as a "pre-existing composition failure"
-— it was this, and it was self-inflicted.
+(workflow-traps §21). Round 1054 spent a full round diagnosing that as a "pre-existing composition failure":
+it was this, and it was self-inflicted.
 
 **Why nothing caught it.** The `.rdata` overshoot is only visible at the *end* of the link pipeline, and the
 guard that would have reported "did not converge" was the very clause that broke the loop.
@@ -849,19 +849,19 @@ guard that would have reported "did not converge" was the very clause that broke
   `pass N:` lines, because the cascade genuinely needs iteration (73 missing, then 0). One pass means the
   emit code fell out of the loop. Verified by simulating a pass-less log.
 
-**The rule.** A `for ... else` clause is part of the loop's *structure*, not its body — adding one, or
+**The rule.** A `for ... else` clause is part of the loop's *structure*, not its body: adding one, or
 converting `break`/`else` logic near the end of a loop, is a **control-flow edit to everything after the
 insertion point**, not a local addition. When a fixed-point or accumulator loop is edited, check what else
-was in the body, and add a check that the loop still *iterates* — not just that it terminates.
+was in the body, and add a check that the loop still *iterates*, not just that it terminates.
 
 **And the honest part:** two rounds were spent reporting this as pre-existing and diagnosing the wrong
 layer. A self-inflicted regression is the first hypothesis to test when the tree breaks immediately after
-your own tooling edit, and the evidence was available from the start — stashing the edit restored `.rdata`.
+your own tooling edit, and the evidence was available from the start: stashing the edit restored `.rdata`.
 
-## 23. A read-only metadata file is rebrew's WRITE-LOCK, not a bug — the CLI is meant to write it (round 1060, corrected round 1061)
+## 23. A read-only metadata file is rebrew's WRITE-LOCK, not a bug: the CLI is meant to write it (round 1060, corrected round 1061)
 
 `src/rebrew-functions.toml` and `src/rebrew-data.toml` are mode `0444` in this checkout, and
-`rebrew test <file> --cflags "<set>"` writes one of them anyway. Round 1060 recorded that as a bug — a
+`rebrew test <file> --cflags "<set>"` writes one of them anyway. Round 1060 recorded that as a bug: a
 read-only guard being bypassed. **That was wrong.** It is the designed write-lock discipline
 (metadata-review F1), implemented in `rebrew.utils.atomic_write_locked`:
 
@@ -872,10 +872,10 @@ try:
 except BaseException:
     os.chmod(filepath, 0o444)              # re-lock on failure
     raise
-os.chmod(filepath, 0o444)     # re-lock — direct edits now fail
+os.chmod(filepath, 0o444)     # re-lock: direct edits now fail
 ```
 
-- **A hand edit fails** (`Permission denied`) — the mode stops editors and shell redirects, which is the point.
+- **A hand edit fails** (`Permission denied`): the mode stops editors and shell redirects, which is the point.
 - **The CLI succeeds by design**: it unlocks, writes, re-locks. The chmod-before is *also* required on Windows,
   where `os.replace` over a read-only target fails, so it is load-bearing for atomicity and not just a policy.
 - `os.replace` needing only *directory* write permission (which round 1060 verified directly) is exactly why
@@ -885,12 +885,12 @@ os.chmod(filepath, 0o444)     # re-lock — direct edits now fail
 
 **What remains true and useful from round 1060:** `rebrew test --cflags` **persists** a per-function flag pin
 as a side effect of measuring (workflow-traps §15), and that pin silently changes the flags the whole tree
-resolves for that function — so every later `linktest.sh`/`gate.sh` measurement inherits it. Snapshot
+resolves for that function, so every later `linktest.sh`/`gate.sh` measurement inherits it. Snapshot
 `src/rebrew-functions.toml` before any `--cflags` probe and diff afterwards. The mode is not what protects
 you here; the discipline is.
 
 **Re-locking after a manual fix.** If a round needs to undo something in the metadata by hand, it must
-`chmod u+w`, edit, then `chmod u-w` to restore `0444` — round 1060 did exactly that and the file's
+`chmod u+w`, edit, then `chmod u-w` to restore `0444`: round 1060 did exactly that and the file's
 `git diff` is empty.
 
 ## 24. Some source experiments need a full object rebuild to recover from, and `linktest.sh` cannot tell you (round 1064)
@@ -902,7 +902,7 @@ you here; the discipline is.
 ```
 
 Its header repeatedly calls this "the memset call", and §109's mechanism turns on hoisting that call past a
-block fill. No round had tried the opposite pragma — forcing a real out-of-line call:
+block fill. No round had tried the opposite pragma, forcing a real out-of-line call:
 
 ```c
 #pragma function(memset)
@@ -913,7 +913,7 @@ block fill. No round had tried the opposite pragma — forcing a real out-of-lin
 - With `#pragma function(memset)`: `linktest.sh` reports **`COMPOSITION COLLAPSED: only 0 symbols landed at
   their reference VA`** (the round-232 guard, working).
 - **Reverting the source is not enough.** With the file restored and `git diff` clean, the composition still
-  collapsed — repeatedly, across a fresh `rm -rf build/split_poc && split_link.sh`. The cause is the **stale
+  collapsed, repeatedly, across a fresh `rm -rf build/split_poc && split_link.sh`. The cause is the **stale
   object**: `build/CMakeFiles/.../gm_AllocSpieler.c.obj` still contained the version-compiled under the other
   pragma, and `split_link.sh` links those objects, not the source.
 - **Recovery is a full `cmake --build build`** (objects recompiled), then `rm -rf build/split_poc && bash
@@ -921,12 +921,12 @@ block fill. No round had tried the opposite pragma — forcing a real out-of-lin
 
 **Why `linktest.sh` cannot warn you.** Its stale-object guard compares source mtime against object mtime and
 warns when the *source is newer*. Here the source and object timestamps end up consistent after a revert
-(`git checkout` rewrites the source, then a later build updates the object), so no warning fires — the
+(`git checkout` rewrites the source, then a later build updates the object), so no warning fires: the
 object holds the experiment's code while every signal says the tree is clean.
 
 **The rule.** After any experiment that changes a **pragma, an inline/intrinsic choice, or a codegen flag**,
 treat the object as poisoned: revert the source **and** run `cmake --build build` before measuring anything
-else. A collapsed composition that survives a clean `split_link.sh` is the tell — and the fix is the full
+else. A collapsed composition that survives a clean `split_link.sh` is the tell, and the fix is the full
 build, not another `split_link.sh`.
 
 **The guard now says so (round 1065).** `scripts/linktest.sh`'s collapse message previously gave only the
@@ -947,18 +947,18 @@ COMPOSITION COLLAPSED: only N symbols landed at their reference VA.
 ```
 
 Verified by simulating a collapse in the link log: the guard parses `placed=0` and fires. There is no way to
-detect the stale object directly — a pragma leaves **no trace** in the `.obj` to grep for (checked), and the
-mtime comparison passes once `git checkout` and a build have both run — so the collapse *is* the signal, and
+detect the stale object directly: a pragma leaves **no trace** in the `.obj` to grep for (checked), and the
+mtime comparison passes once `git checkout` and a build have both run, so the collapse *is* the signal, and
 the message has to name both fixes.
 
-**Measured outcome:** `#pragma function(memset)` on `gm_AllocSpieler` is not a lead — it cannot be measured
+**Measured outcome:** `#pragma function(memset)` on `gm_AllocSpieler` is not a lead: it cannot be measured
 at all on this tree, because the out-of-line call breaks the composition before any residue number exists.
 That is a stronger statement than "it measured worse".
 
 ## 25. `rebrew rename` leaves the CMake tree stale, and both guards miss it (round 1080)
 
 `rebrew rename` renames the `.c` file and rewrites every cross-reference. It does **not** touch `build/`,
-which is gitignored — and `build/` is what `split_link.sh`, `linktest.sh` and `postlink` all read. Rename a
+which is gitignored, and `build/` is what `split_link.sh`, `linktest.sh` and `postlink` all read. Rename a
 file and the build system keeps pointing at an object that no longer compiles.
 
 **How it presents, and why that is the expensive part.** `scripts/split_link.sh` died with exit **157** and
@@ -968,14 +968,14 @@ its last log line read:
 0 object(s) padded, 28 too long -> build/split_poc/rsp_pad.rsp
 ```
 
-That message comes from `pad_short_functions.py`, which *succeeded* — it is simply the last step that prints
+That message comes from `pad_short_functions.py`, which *succeeded*: it is simply the last step that prints
 before the link. The eye goes to the pad step, which is innocent. Exit 157 is `128+29`, a signal from the
 subshell running the link inside `( cd build && eval "$cmd" >/dev/null 2>&1 )`, whose output is discarded, so
 the real error is unreadable.
 
 **Both existing guards pass anyway**, which is the finding:
 
-- `scripts/gate.sh` ran `cmake --build` and the **residue was unchanged** (8628 — the rename is byte-neutral),
+- `scripts/gate.sh` ran `cmake --build` and the **residue was unchanged** (8628, the rename is byte-neutral),
   so nothing looked wrong.
 - `rebrew build-check` reported clean. It compares flag tokens in `build.make` against CMake's `Custom`
   comments, and a renamed source changes the **object set**, not any object's flags. An object that should
@@ -987,7 +987,7 @@ building with no configure step: CMake printed `-- GLOB mismatch!` and regenerat
 `CONFIGURE_DEPENDS` a glob expands once at configure time and never notices a new, renamed or deleted source.
 
 **The transferable lesson: a guard that compares the contents of a list cannot detect a wrong list.** The
-`sections`-style checks in this project — residue per carrier, flags per object, extents per symbol — are all
+`sections`-style checks in this project (residue per carrier, flags per object, extents per symbol) are all
 content comparisons. Round 1078 found `verify --data` measuring 37% of the metadata and calling it a pass;
 this round found `build-check` inspecting the objects present and never the objects missing. Both are the same
 shape of bug: the population is assumed, the contents are verified. When adding a check, ask what happens to
@@ -1006,7 +1006,7 @@ to fix. The target carried a single `|| true` for this.
 
 **That is not enough, and it fails in the worst possible way.** The nested build runs `-j` parallel; when
 postlink fails, make aborts *mid-way through the object list*, leaving objects unbuilt. `|| true` then swallows
-the failure, `final` proceeds, and `split_link.sh` composes from an **incomplete object set** — reporting
+the failure, `final` proceeds, and `split_link.sh` composes from an **incomplete object set**: reporting
 residue **86,676** (`0x15294`) against the 8,628 baseline, with the deliverable at the wrong `md5`.
 
 Measured: after `rm -rf build` + configure, a single `--target final` produced md5 `66cc6980…` and residue
@@ -1021,16 +1021,16 @@ COMMAND bash -c "${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dl
                  ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll || true"
 ```
 
-Verified by the full recipe from scratch — `rm -rf build`, configure, `--target final` alone — which now yields
+Verified by the full recipe from scratch (`rm -rf build`, configure, `--target final` alone), which now yields
 the correct md5 and residue. Each retry is cheap once the objects are current.
 
 **Why this matters beyond convenience.** The failure is silent and the number looks like a real regression: a
 residue an order of magnitude above baseline. Anyone reading it would think the code had broken, not the
-target. It is the same shape as measure-traps §55 (a stale composition reporting 81,229) and §47/§51/§52/§53/§54
-— **the artifact was wrong, and the ruler did not say so.** The invariant that catches it in both cases: 100% of
+target. It is the same shape as measure-traps §55 (a stale composition reporting 81,229) and §47/§51/§52/§53/§54:
+**the artifact was wrong, and the ruler did not say so.** The invariant that catches it in both cases: 100% of
 residue must lie inside the 19 carriers, and any total far above 8,628 means re-compose before believing it.
 
-## 27. The GOLDTL client statically links D3DX8 — run `lib-match` against `d3dx8.lib`, not just LIBCMT (round 1143)
+## 27. The GOLDTL client statically links D3DX8: run `lib-match` against `d3dx8.lib`, not just LIBCMT (round 1143)
 
 The pre-commit `no-library-code` hook and `rebrew lib-match --stock-lib LIBCMT.LIB` only check the *default*
 target (`server.dll`) against LIBCMT. **The client targets link other static libraries** that LIBCMT never
@@ -1038,7 +1038,7 @@ covers, and one of them silently supplies a large chunk of `.text`.
 
 `Europa1400Gold_TL.exe` (GOLDTL) was built against the **DX8.1 SDK**: it statically links `d3dx8.lib` (the
 SDK's mesh/PNG/JPEG/zlib/effect helpers), shader assembler `"Version 0.91"`. Its bodies sit in `.text`
-indistinguishable from game code. **907 functions, ~273 KB total** — 905 of them in the `.text` band
+indistinguishable from game code. **907 functions, ~273 KB total**: 905 of them in the `.text` band
 `0x5e0000–0x64ffff`, plus two zlib stubs D3DX8 embeds (`_gzeof` at `0x45fa70`,
 `inflate_blocks_sync_point` at `0x460a40`). Each byte-matches a `d3dx8.lib` object (reloc-masked, ≥50% fixed
 bytes, whole body then 32-byte prefix retry, the same method `lib_match` uses for LIBCMT). Upstream library
@@ -1046,7 +1046,7 @@ pollution, exactly the shape AGENTS.md warns
 about: reversing those bytes is wasted work because the linker supplies them.
 
 The cost was measured, not hypothetical. A GOLDTL function was being reversed at `0x63e931` under the name
-`m_AllocTracked` — a week of `near-diag`/flag sweeps / `rebrew prove` against a body that **never byte-matched**
+`m_AllocTracked`: a week of `near-diag`/flag sweeps / `rebrew prove` against a body that **never byte-matched**
 and never would: it is D3DX8 `_jpeg_calc_output_dimensions` (495 bytes, byte-identical to `d3dx8.lib`), not
 the game's allocator (which is shared-tree `m_AllocTracked` at server `0x10006580`). The reversal wasted effort
 on linker-supplied code.
@@ -1062,11 +1062,11 @@ on linker-supplied code.
   VAs. `lib_match` skips LIBRARY-marked functions, so it now returns nothing on GOLDTL.
 - Deleted the mislabeled `m_AllocTracked.c` (its VA is now LIBRARY-marked; the real allocator is shared-tree).
 - Added a `lib-match d3dx8 (GOLDTL)` step to `scripts/gate.sh` that fails on any new GOLDTL function whose
-  bytes collide with a `d3dx8.lib` body — same role the LIBCMT hook plays for server.
+  bytes collide with a `d3dx8.lib` body: same role the LIBCMT hook plays for server.
 
 **The lesson:** when a target statically links libraries beyond the CRT, the LIBCMT-only hook cannot see them.
 Ask *what libraries this binary actually linked*, not "is it LIBCMT?". TL's required answer is
 `rebrew lib-match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe`; GOLD's is "no static
 DX, skip". The import table (pefile) shows which DLLs are imported, but static-link library code is invisible
-to imports — you must look for it in `.text` by its strings (here the `D3DXERR_*` / `D3DX8 shader assembler`
+to imports: you must look for it in `.text` by its strings (here the `D3DXERR_*` / `D3DX8 shader assembler`
 strings in `.text` at `0x4b5xxx`) and byte-match the bodies.

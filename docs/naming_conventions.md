@@ -71,7 +71,7 @@ functions appear in both) but is built from `DieGildeAddOnVc\` instead of
 
 ### Attested original source paths (round 937)
 
-The `__FILE__` strings the compiler embedded give the original tree directly — **14 paths**, extracted
+The `__FILE__` strings the compiler embedded give the original tree directly: **14 paths**, extracted
 with:
 
 ```sh
@@ -103,7 +103,7 @@ with it.
 
 **The `_c` directory suffixes in this repository's working tree are NOT attested.** Our files live
 under `game/spiel_c/`, `command/command_c/`, `loadsave/loadsave_c/` and so on, but no `__FILE__` string
-contains `_c\` — the originals were `spiel.c`, `command.c`, `loadsave.c` in the plain directories shown
+contains `_c\`: the originals were `spiel.c`, `command.c`, `loadsave.c` in the plain directories shown
 above. The suffixes are a decompiler-era artefact of splitting one original translation unit into many
 files, kept because moving ~140 files would churn every path in the metadata for no gain. They should
 not be read as evidence about the original layout, and a future round that reorganises the tree should
@@ -167,7 +167,7 @@ D:\Develop\
 source files, compiled with different project settings. The server build
 (`DieGildeAddOn\`) produces `server.dll`. The client T&L build
 (`DieGildeAddOnVc\`) produces `Europa1400Gold_TL.exe`. The base client
-(`Europa1400Gold.exe`) links only the engine `Units\` — game logic may be
+(`Europa1400Gold.exe`) links only the engine `Units\`: game logic may be
 compiled directly into it or loaded from a separate DLL not captured here.
 
 ### File Naming Patterns
@@ -277,7 +277,7 @@ onto C symbols.
 ### Standard Library Functions
 
 Standard CRT functions (`fopen`, `fread`, `putc`, `srand`, `rand`, etc.)
-are used directly with proper `#include` headers — no `extern` declarations
+are used directly with proper `#include` headers: no `extern` declarations
 needed.
 
 The compiler intrinsic `__ftol` (float-to-long) is statically linked and
@@ -350,7 +350,7 @@ order below is the table order, not an inference from the C source:
 
 The call sites carry the symbol names directly (`call 0x100146c0  ; lb_SendLobbyConfig`), so this table is
 attested rather than reconstructed. Two consequences worth keeping: `lb_` and `cm_` are **one dispatch
-chain**, not independent modules — case 6 crosses into `cm_`, so a `cm_` rename can reach lobby code. And
+chain**, not independent modules: case 6 crosses into `cm_`, so a `cm_` rename can reach lobby code. And
 `lb_SendLobbyConfig` has no `.c` of its own; it shares `lb_ExPlayerlist.c`. The dispatcher's own log string
 (`0x1002d858`, `"lb_ExLobbyServerCommand: %i"`) confirms the name it prints is the real symbol, which is why
 that row in the attested table reads "already correct".
@@ -394,7 +394,7 @@ so the callback contract is `filter(arg, entry)`, non-zero meaning *accept*. Thr
 there (`gv_SpawnEntities.c:41`, `gv_HireProductionWorker.c:55`, `gv_MoveSlotEntry.c:121`).
 
 **This is a naming trap worth knowing.** `grep` for `call` finds none of them, the catalogue carries no name
-for them (`fcn.10010700`), and a header comment can end up asserting "It has no caller" — which is what
+for them (`fcn.10010700`), and a header comment can end up asserting "It has no caller": which is what
 happened here and stood for many rounds. Before concluding a tiny unnamed function is dead code, grep for its
 **address** in the tree, not just for a call. Give it the `_eval_` predicate name and record the callee's
 callback signature in the header.
@@ -530,7 +530,7 @@ rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
 | `0x1000f3b0` | `cm_ExSetGebBesitzer` | already correct (round 1108) |
 | `0x1000f590` | `cm_ExSetGebUpgrade` | already correct (round 1108) |
 | `0x1000f730` | `cm_ExEmployWorker` | already correct (round 1108) |
-| `0x1000f980` | `cm_ExAllocCharacter` (log prefix only) | kept as `cm_ExCreateCitizen`; the body logs `"cm_ExAllocCharacter():gm_AllocSpieler() failed"` (`0x1002d364`) — log-prefix-only attestation, same standing as `gm_AllocGebaeude` at `0x10017330` |
+| `0x1000f980` | `cm_ExAllocCharacter` (log prefix only) | kept as `cm_ExCreateCitizen`; the body logs `"cm_ExAllocCharacter():gm_AllocSpieler() failed"` (`0x1002d364`): log-prefix-only attestation, same standing as `gm_AllocGebaeude` at `0x10017330` |
 | `0x1000fad0` | `cm_ExKillTransporter` | already correct (round 1108) |
 | `0x1000fb30` | `cm_ExCreateGeb` | already correct |
 | `0x10010700` | `gv_eval_SlotFrei` | renamed from `fcn_10010700`; a `FindSlotEntryFiltered` filter callback (address taken by 3 callers, so no `call` reaches it); true when the entry's owner id at +4 is -1 |
@@ -563,7 +563,7 @@ rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
 | `0x10028b04` | `s_Memory_Shutdown_Anomaly_10028b04` | renamed from `g_str_10028b04`; literal `"[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i"` read from the reference. Convention is `s_<content>_<addr>` for strings, not `g_str_` |
 | `0x10028aec` | `s_Pointer_not_freed_10028aec` | renamed from `g_str_10028aec`; literal `"-> Pointer not freed:%s"` read from the reference |
 | `0x100354c4` | `__argc` | renamed from `g_100354c4`; CRT name was in the metadata note. Present in LIBCMT but displaced by the `_CRT_REGION_KEEP` local definition, same as `__error_mode` |
-| `0x100354c8` | `__argv` | renamed from `g_100354c8`; also fixed a latent **type** error — was declared `int`, MSVC6 requires `char**`. Renaming is what exposed it |
+| `0x100354c8` | `__argv` | renamed from `g_100354c8`; also fixed a latent **type** error: was declared `int`, MSVC6 requires `char**`. Renaming is what exposed it |
 | `0x100354d0` | `__envp` | renamed from `g_100354d0`; `char**`, same fix |
 | `0x100354e0` | `_pgmptr` | renamed from `g_100354e0`; `char*`, same fix |
 | `0x10031b6c` | `__tlsindex` | renamed from `g_10031b6c`; CRT TLS index |
@@ -581,14 +581,14 @@ parent's log prefix.
 The `Units/m_alloc` unit does not use the `m_VerbNoun` CamelCase of the game
 modules. Its recovered names are lower snake case:
 
-- `m_alloc` — the tracked allocator, called from every unit. In the original
+- `m_alloc`: the tracked allocator, called from every unit. In the original
   this is a macro: the tracked implementation receives an extra
   `__FILE__ ":" __LINE__` argument, so our `m_AllocTracked` stays as the
   implementation name and only the macro was `m_alloc`.
-- `m_init` — sets the slot count and allocates the slot table;
+- `m_init`: sets the slot count and allocates the slot table;
   `m_alloc` refuses to run before it.
-- `m_pool_free` — pool release.
-- `m_alloc_debug` — not a function: a block group name written by `sprintf`,
+- `m_pool_free`: pool release.
+- `m_alloc_debug`: not a function: a block group name written by `sprintf`,
   so it must not be turned into a symbol.
 
 ### Original spellings to preserve

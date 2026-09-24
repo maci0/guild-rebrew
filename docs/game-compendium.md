@@ -1,4 +1,4 @@
-# Europa 1400: The Guild — Knowledge Compendium
+# Europa 1400: The Guild, Knowledge Compendium
 
 Canonical game facts, binary inventory, and community ecosystem. Binary-derived
 claims cite VA / string / doc. Community and press claims cite URLs. Speculative
@@ -13,7 +13,7 @@ all URLs 200 except the private MCP repo (404 for non-members) and the wiki
   ([de](https://de.wikipedia.org/wiki/Die_Gilde)).
 - Cities: German-base set per de wiki (Augsburg, Berlin, Dresden, Hannover,
   Köln); international set per C.O.R.E. guide (London/Berlin/Madrid/Nuremberg/
-  Paris/Milan). Binaries carry no city list — GOLD.exe holds only `Augsburg`
+  Paris/Milan). Binaries carry no city list: GOLD.exe holds only `Augsburg`
   (config default `STADT=`) and `_STADTWAPPEN_BERLIN` (crest asset); city data
   ships in game data files, not the exes.
 - Developer: 4HEAD Studios, Hannover (later Cranberry Production lineage per
@@ -30,31 +30,31 @@ all URLs 200 except the private MCP repo (404 for non-members) and the wiki
 - Ratings/media: USK 0, PEGI 3+, ESRB Teen (cs wiki). Languages: German +
   English (Steam full audio; database lists en/de/ru editions). Media:
   CD-ROM/DVD-ROM/download. Controls: keyboard + mouse. Entry at MobyGames
-  (bot-walled, 403 on fetch — search "Europa 1400: The Guild" there).
+  (bot-walled, 403 on fetch: search "Europa 1400: The Guild" there).
   Official sites (archived): [diegilde.de](https://web.archive.org/web/20161018162253/http://www.diegilde.de/),
   [theguildgame.com](https://web.archive.org/web/20240229175511/https://theguildgame.com/de/).
   Per [de wiki](https://de.wikipedia.org/wiki/Die_Gilde).
 - Design: Lars Martensen. Code: Tobias Severin. Art: Thomas Bömelt.
 - Music: Gerhard Ottmer, Christoph Isermann, Lars Martensen (~2h09m, 46 tracks).
 - Release: UK 2002-10-18, US 2002-10-30, Windows (pl wiki: EU 18 Oct 2002).
-  Genre: life simulation (en wiki) / economic sim (de wiki) / strategy+RPG (pl wiki)
-  — sources differ, all cited.
+  Genre: life simulation (en wiki) / economic sim (de wiki) / strategy+RPG (pl wiki);
+  sources differ, all cited.
 - Expansion (2003): Trade, Greediness and Intrigue (de: Gaukler, Gruften und
-  Geschütze) — adds Nuremberg + tailor/jester/gravedigger professions + imperial
+  Geschütze): adds Nuremberg + tailor/jester/gravedigger professions + imperial
   politics level. Gold Edition (2005-11): base + expansion.
 - Sequels: The Guild 2 (2006-09) + Pirates of the European Seas (2007) + Venice
   (2008) + Renaissance (2010, ex-fan-mod); Gilde 1400 browser (Gameforge,
   2009–2012); Die Gilde DS (2009-04, turn-based not realtime); The Guild 3
   (2022-06-14, GolemLabs→Purple Lamp). Reboot: Die Gilde – Europa 1410
-  (Ashborne Games) — official site [theguild.thqnordic.com](https://theguild.thqnordic.com)
+  (Ashborne Games): official site [theguild.thqnordic.com](https://theguild.thqnordic.com)
   live, Early Access on Steam, Discord active. Per [de wiki](https://de.wikipedia.org/wiki/Die_Gilde)
   + site fetch round 33.
 - Multiplayer at release "unreif": bugs blocked internet play, JoWooD dropped
-  support months after the addon (de wiki) — matches the netcode findings in §7.
+  support months after the addon (de wiki): matches the netcode findings in §7.
   [Gamer.no](https://www.gamer.no/artikler/europa-1400-the-guild/2243/3) (Feb 2003):
   LAN-only in practice; their test network got it working only with NetBEUI
   transport (binaries themselves are pure TCP/IP: AF_INET/SOCK_STREAM, zero
-  NetBEUI/IPX/DirectPlay strings — the NetBEUI bit was their LAN setup, not
+  NetBEUI/IPX/DirectPlay strings: the NetBEUI bit was their LAN setup, not
   the game's protocol); music "satisfying" but synthetic orchestra,
   profession-specific melodies; verdict 4/5 ("fire tomler opp").
 - Reception: GameRankings 78.83%, Metacritic 82% ("generally favorable",
@@ -63,7 +63,7 @@ all URLs 200 except the private MCP repo (404 for non-members) and the wiki
   Electric Playground 7.5, PC Gamer UK 73%, PC Action 85% (Gold Award),
   the-laser B+, Eurogamer 5/10, Jeuxvideo.com 15/20. Gamespot 2nd-best PC game Jan 2003.
   Electric Playground 2002 Best Sim nominee (lost to MechWarrior 4:
-  Mercenaries). 100,000 copies shipped (not sold) first week — Reuters reported
+  Mercenaries). 100,000 copies shipped (not sold) first week: Reuters reported
   sell-through, JoWooD corrected to trade shipments ([GamesMarket](https://www.gamesmarket.global/klein-aber-fein-die-gilde-100000-mal-vershippt-nicht-verkauft-d8be45b9fc84163790313e714229e4fa/),
   Mar 2002).
 - Sources: [Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
@@ -76,7 +76,7 @@ all URLs 200 except the private MCP repo (404 for non-members) and the wiki
 - Self-created protagonist, 12 professions / career paths per en wiki
   (fr wiki lists 12 by name; cs wiki counts 8 base + 3 addon = 11 playable,
   C.O.R.E. guide notes 11 creatable of 15 with 4 exclusive via career change;
-  server.dll has no profession list — zero hits for smith/tailor/mason/priest/
+  server.dll has no profession list: zero hits for smith/tailor/mason/priest/
   tavern/thief; only `alchemistry_logic`/`ahm_ExAllocAlchemist` strings),
   missions or open-ended sim.
 - Dynasty to power/wealth in historic European cities. Multiplayer up to 8 players
@@ -90,14 +90,14 @@ all URLs 200 except the private MCP repo (404 for non-members) and the wiki
   vagrancy), rogues/niche (necromancy, thievery, robbery, law service).
   French wiki names 12 explicitly ([fr](https://fr.wikipedia.org/wiki/Europa_1400_:_Les_Marchands_du_Moyen_%C3%82ge)):
   blacksmith, carpenter, mason, alchemist, perfumer, tavern-keeper, thief, cleric,
-  usurer, merchant, brigand, guard — 6 mastery levels each, 3 enterprise tiers
+  usurer, merchant, brigand, guard: 6 mastery levels each, 3 enterprise tiers
   (e.g. church→abbey→cathedral).
 - Noble ranks: serf → citizen → patrician → noble → baron → count (fr wiki).
   Offices (treasurer, judge…) pay monthly wage + perks (bodyguard, tax breaks).
 - French city order by difficulty: London, Berlin, Paris, Milan, Madrid (fr wiki
-  omits Nuremberg — pre-addon list).
+  omits Nuremberg, pre-addon list).
 - Launch state: "tout simplement injouable" for 10–20 min sessions until patches
-  weeks later; latest known = beta-3 patch, never final (fr wiki) — consistent
+  weeks later; latest known = beta-3 patch, never final (fr wiki): consistent
   with de wiki's multiplayer verdict and §7 netcode.
 - Attributes (0–6 stars): Negotiation, Handicraft, Stealth/Guile, Combat,
   Rhetoric. Heir takes over at death (age 12+); childless death = game over.
@@ -139,7 +139,7 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
   (609 reviews round 71: 452+/157-; was 555/73% round 32). Community hub: 249 discussion topics, active (graphics
   mods, T&L fix, multiplayer stability threads). Guides: 12 total incl.
   multiplayer netfix guides, window-mode (`game.ini Bildmodus=DIRECTWINDOW`,
-  `show_intro=0` — both keys verified present in GOLD.exe strings round 60),
+  `show_intro=0`: both keys verified present in GOLD.exe strings round 60),
   thief/smith occupation guides, RU fix collection.
   GOG: [Gold Edition](https://www.gog.com/en/game/the_guild_gold_edition)
   (sku 1207658720, listed 2014-12-19, 4.2/5 over 793 ratings, re-verified
@@ -168,7 +168,7 @@ no `.idata` (IAT at `.rdata` head). `.text` VirtualSize 0x22846.
 Round-10 independent PE re-parse confirms: 4 sections (.text/.rdata/.data/.reloc),
 100 imports, base, both exports. CRT static LIBCMT, zlib 1.1.3 vendored
 (community origins:
-[zlib_functions.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/zlib_functions.md) —
+[zlib_functions.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/zlib_functions.md):
 never reverse, links as stock). Compiler MSVC6 (`/O2 /Gd` project-wide;
 SP6 confirmed, three per-file `-sp5-pp` pins; nine local images collapse to
 three real stops: base group, `-sp5-pp`, `-sp6`).
@@ -178,7 +178,7 @@ Evidence: `docs/general-knowledge.md`, `rebrew-project.toml`.
 
 Root `D:\Develop\` (case varies). 14 `__FILE__` paths embedded in server.dll
 are authority (`docs/naming_conventions.md` round 937; re-verified by regex
-scan round 52 — exactly 14 distinct hits). The attested-name table
+scan round 52: exactly 14 distinct hits). The attested-name table
 there holds 52 entries (VA + standing: renamed vs already-correct; recount
 round 53), each verified
 by confirmed literal push, not RevEng attribution alone:
@@ -212,10 +212,10 @@ unattested working names, not original layout.
   process commands, send queued, timeouts, sim tick; `Exit` flags shutdown.
   (Community
   [server.dll.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/server.dll.md)
-  uses different names — `srv_GameLoop`, `srv_InitServer` — unverified here;
+  uses different names (`srv_GameLoop`, `srv_InitServer`) unverified here;
   tree names above are what `src/Develop` annotates.)
 - Two-phase commands: `cm_Chk*` validate, `cm_Ex*` execute; handlers return int
-  (0 OK, 1 reject/fail), typically `(cmd, result)` pointer pairs — exact
+  (0 OK, 1 reject/fail), typically `(cmd, result)` pointer pairs: exact
   parameter spellings vary per TU in the tree. 69 `cm_` handlers annotated in
   `command_c/`: lifecycle (AllocSpieler/Free/KillSpieler/KillTransporter/
   CreateCitizen/AllocCharacter), property (AllocObjekt/MoveObjekt/SellObjekt/
@@ -247,7 +247,7 @@ unattested working names, not original layout.
   `PlayerSlot` (0x264264: flags + id + data), `LinkedNode` (0x43 packed:
   type + entity_id + children + next), `OFFICE_SLOT` (0x18),
   `OFFICE_ROLE_TEMPLATE` (0x18), `EntityQueryRecord` (0xa9 packed, 0x100-entry
-  table at `g_entity_ptr`) — distinct from `EntityStruct` (0x21c stride at
+  table at `g_entity_ptr`): distinct from `EntityStruct` (0x21c stride at
   `g_slot_table`). Key globals: `g_current_year` (0x10035880) + clock words,
   `g_file_version` (0x1002D4EC, savegame gate), `g_office_slots` (0x101DE5A0),
   `g_max_players` (0x11764084), `g_tick_rate`, player slots at 0x101DEB00
@@ -264,12 +264,12 @@ unattested working names, not original layout.
 - Naming: verbs English, game nouns German (Spieler, Objekt, Gebaeude/Geb, Raum,
   Lagerslot, Wohnsitz, Aemter, Friedhof). Preserve misspellings
   (`gm_ObjectsAvailble`, `gm_SubObjectNoKill` vs `gm_SubObjekt`).
-- Seasons `GM_*`, events `HE_SIM_*`, objects `ob_*`, commands `cmdt_*` —
+- Seasons `GM_*`, events `HE_SIM_*`, objects `ob_*`, commands `cmdt_*`:
   speculative working names from `docs/naming_conventions.md`; only `ob_` /
   `cmdt_` / `pef_` have string hits in server.dll (`ob_MARKTSTAND`,
   `cmdt_ALLOC`, `pef_GELIEBTE`); `GM_WINTER`, `HE_SIM`, `EINWANDERUNG` have
   zero hits. Errors via `LogMessageInternal(__FILE__, line,
-  "<func>(): msg", severity)` — log prefix is strongest name evidence.
+  "<func>(): msg", severity)`: log prefix is strongest name evidence.
 
 ## 7. Network
 
@@ -282,7 +282,7 @@ unattested working names, not original layout.
   `Sleep(0x1e)` loop pump + `Sleep(2000)` pre-start (all in `ServerMainThread.c`;
   netfix clamps the 30 ms pump to 1 ms).
   Host = slot with flag 0x400 (`host_slot_found` scan in `ServerMainThread.c`),
-  not "first connected" — community `server.dll.md` says first-connected,
+  not "first connected": community `server.dll.md` says first-connected,
   unverified here.
 - Player slots: base 0x101DEB00, stride 0x264264 (== `sizeof(PlayerSlot)`),
   bound 0x114FFE20 (admin record); flags 0x400 host, 0x1000 disconnect,
@@ -334,7 +334,7 @@ unattested working names, not original layout.
   `CrashDumpUnhandledExceptionFilter`, `EmitCrashModuleLine`,
   `GetDebugRecordByIndex`, `AnalyzeInstruction`, `check_memory_protection`.
 - Every game function logs via `LogMessageInternal(__FILE__, line,
-  "<func>(): msg", severity)` — the log prefix is the strongest name evidence
+  "<func>(): msg", severity)`: the log prefix is the strongest name evidence
   (see §6). Crash dumps walk the stack with the Analyzer helpers.
 
 ## 10. Memory (m_alloc)
@@ -364,9 +364,9 @@ unattested working names, not original layout.
   `Maps/`, `Gilde_add_on_german.gfx`), `Resources/` (`animations.bin`,
   `groups.bin`, `objects.bin`, `scenes.bin`, `scripts.bin`,
   `textbin_german.bin`), `Movie/`, `msx/`.
-- Renderer: Direct3D 8 (GOLD links d3dx8 statically — 910 `LIBRARY: D3DX8`
+- Renderer: Direct3D 8 (GOLD links d3dx8 statically: 910 `LIBRARY: D3DX8`
   markers in `library_d3dx8.h` round 80 (was 907 round 39; header untracked,
-  parallel churn); DX8.1 SDK). Note: `AGENTS.md` + `docs/TODO.md` still say 907 —
+  parallel churn); DX8.1 SDK). Note: `AGENTS.md` + `docs/TODO.md` still say 907:
   session logs are history (not rewritten); AGENTS correction left to tree owners.
   Import census round 40: GOLD.exe 212 imports / 10 DLLs (adds ADVAPI32, DDRAW,
   DINPUT, GDI32, ole32 to server's 4); TL.exe 275 imports / 11 DLLs (DINPUT→
@@ -383,8 +383,8 @@ All 14 `europa1400-community` org repos covered below (round 83 audit; incl.
 
 | Repo | What |
 |---|---|
-| [europa1400-database](https://github.com/europa1400-community/europa1400-database) | Editions/versions/patches/executables YAML + mkdocs sources (site URL 404 on fetch round 36 — see repo); Discord `discord.gg/jB9HYY8DpT` |
-| [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation) | server.dll outline, function table (243 VAs), network.md (confidence-scored, partly renamed); full `server.dll.c` pseudo-C dump (~1 MB). VA reconciliation round 21–22: 127/243 overlap our tree; 59 named-zlib (stock, correctly absent here); ~8 loadsave sub-VAs (0x10012d00–0x100145c0 `handleLoad*Data`) sit inside our wider annotated spans (same inventory artefact as `docs/general-knowledge.md` `command_c` entry); remainder are CRT/IAT-side VAs — candidate import list, names unverified |
+| [europa1400-database](https://github.com/europa1400-community/europa1400-database) | Editions/versions/patches/executables YAML + mkdocs sources (site URL 404 on fetch round 36: see repo); Discord `discord.gg/jB9HYY8DpT` |
+| [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation) | server.dll outline, function table (243 VAs), network.md (confidence-scored, partly renamed); full `server.dll.c` pseudo-C dump (~1 MB). VA reconciliation round 21–22: 127/243 overlap our tree; 59 named-zlib (stock, correctly absent here); ~8 loadsave sub-VAs (0x10012d00–0x100145c0 `handleLoad*Data`) sit inside our wider annotated spans (same inventory artefact as `docs/general-knowledge.md` `command_c` entry); remainder are CRT/IAT-side VAs: candidate import list, names unverified |
 | [fuse_file_access_monitor](https://github.com/europa1400-community/fuse_file_access_monitor) | FUSE file-access monitor prototype (fusers+iced), supports asset research |
 | [Europa1400.Tools](https://github.com/europa1400-community/Europa1400.Tools) | .NET asset tools (latest commits Mar 2025: async+progress pipeline); asset classes Ageb/Aobj/Baf/BafIni/Bgf/Gfx/Sbf/Texture/Txs; structs cover Ageb (buildings/coords), Bgf (faces/polygons/skeleton/models), Gfx (graphics/shapebanks), Sbf (soundbanks), Aobj, Vector3 |
 | [europa1400-tools](https://github.com/europa1400-community/europa1400-tools) | Python asset decode/convert/export: formats ageb aobj baf bgf ed3 gfx ogr sbf txs; converters incl. bgf→gltf/wavefront |
@@ -394,7 +394,7 @@ All 14 `europa1400-community` org repos covered below (round 83 audit; incl.
 | [europa1400-docker](https://github.com/europa1400-community/europa1400-docker) | Docker run env (empty repo) |
 | [europa1400-network-bridge](https://github.com/europa1400-community/europa1400-network-bridge) | Asyncio TCP proxy bridge (server/client port-forward roles, GUI+config) |
 | [europa1400-memory-editor](https://github.com/europa1400-community/europa1400-memory-editor) | Memory editor (x86 C++ DLL injected via LordPE/Cheat Engine) |
-| [europa1400-ghidra-mcp](https://github.com/europa1400-community/europa1400-ghidra-mcp) | Ghidra MCP (private — link 404s for non-members) |
+| [europa1400-ghidra-mcp](https://github.com/europa1400-community/europa1400-ghidra-mcp) | Ghidra MCP (private: link 404s for non-members) |
 | [die-gulde](https://github.com/europa1400-community/die-gulde) | Unity (6000.0.43f1) remake homage, early development, not yet playable; Discord `discord.gg/CPPAKarms2` (both invites 200 round 85) |
 | [networkfix](https://github.com/maci0/europa1400-networkfix) | Supported netfix .asi, 15 game-years VPN-stable; headless harness (2 Wine containers, xdotool-driven, A/B baseline via `NETWORKFIX_DISABLE=1`); docs: architecture, problem-analysis, server-dll-versions, configuration |
 | [europa1400-lua](https://github.com/maci0/europa1400-lua) | In-process LuaJIT RE console: 51 modules (memory/code/PE/domain/workflow); catalog candidates all `status="candidate"`, none with verified address; console is OEM code page (German needles = Latin-1 escapes); docs: API, USAGE, EXAMPLES, TROUBLESHOOTING |
@@ -403,7 +403,7 @@ All 14 `europa1400-community` org repos covered below (round 83 audit; incl.
 | [recoverage](https://github.com/maci0/recoverage) | Coverage dashboard for binary-matching decomp (per-byte .text/.data/.bss grid) |
 | [resembl](https://github.com/maci0/resembl) | Assembly similarity search |
 | [ghidra-cli](https://github.com/maci0/ghidra-cli) | Headless Ghidra automation (functions/symbols/strings/xrefs) for RE agents |
-| [openmiles](https://github.com/maci0/openmiles) | Drop-in mss32.dll replacement (Zig, v3–v9 export parity) — directly relevant: GOLD.exe imports 31 `_AIL_*` (sample + stream + `waveOutClose`); no mss32 ships in `original/`, version string unconfirmed |
+| [openmiles](https://github.com/maci0/openmiles) | Drop-in mss32.dll replacement (Zig, v3–v9 export parity), directly relevant: GOLD.exe imports 31 `_AIL_*` (sample + stream + `waveOutClose`); no mss32 ships in `original/`, version string unconfirmed |
 - Negative sweep round 82 (owned repos checked, not relevant): `openholiday`
   (different game), `ct-recomp` (Chrono Trigger), `splat` (fork, N64-only),
   `ai-decomp` (general RE method wiki), `decompedia` (stub), `ghidra-65816`
@@ -420,7 +420,7 @@ All 14 `europa1400-community` org repos covered below (round 83 audit; incl.
   `docs/TODO.md` session log. `goal.md` durable objective.
 - Community tables use own names/confidence; do not import names without
   confirmed-push string check (`rebrew asm` + literal push).
-- Maintenance: annotated counts drift with reversing churn — re-verify with
+- Maintenance: annotated counts drift with reversing churn: re-verify with
   `grep -r "FUNCTION: <MARKER> " src --include="*.c" | wc -l` (trailing space;
   bare `GOLD` also matches `GOLDTL`) before citing. Link health swept round 19,
   re-swept round 57 (press/store/reboot green, wiki 502).

@@ -13,7 +13,7 @@ Live numbers are `scripts/gate.sh` defaults. A residue, verify count, or `.text`
 | imports | 100 | reference PE |
 | reference `.text` VirtualSize | `0x22846` | `original/Server/server.dll` |
 
-**Start here:** the latest `**Round-N:**` heading under Continuation notes (Round-975 as of this dashboard). The 254–431 session map below is archive. Object scores (`match_count`, `aligned`) are not the ship ruler — `scripts/linktest.sh`. Do not "fix" `gm_AllocSpieler` slot[9]; see `docs/msvc6-c-shapes.md` §110 and that file's header.
+**Start here:** the newest `**Round-N:**` note under Continuation notes (newest first). The 254–431 session map below is archive. Object scores (`match_count`, `aligned`) are not the ship ruler; use `scripts/linktest.sh`. Do not "fix" `gm_AllocSpieler` slot[9]; see `docs/msvc6-c-shapes.md` §110 and that file's header.
 
 ### Archive: session map, rounds 254–431 (2026-09-14; residue 9,209 → 8,666)
 
@@ -5560,7 +5560,7 @@ RESIDUE **8634** (+0) / DATA 21,838 → **21,837** (−1).**
 
 **Round-547 (data pass): parked discovery — `g_data_restore_gap` displaced +0x250c.**
 
-- **Fact:** `src/server.dll/crt_region/data_restore.c` emits `g_data_restore_gap[0x9a00]`
+- **Fact:** `src/crt_region/data_restore.c` emits `g_data_restore_gap[0x9a00]`
   intended at **DATA 0x1002b600** (REF `.data` raw `[0x4600:0xe000]`). BLD places it at
   **0x1002db0c** (Δ**+0x250c**). Blob bytes == REF[intended]; `blob[filter−intended]`
   matches REF filter scalars at `0x10030b84…` exactly — but BLD@filter is wrong because
@@ -20838,7 +20838,7 @@ objects `1001b200_.text.obj` and `1001eab0_.text.obj`, whose internal symbol
 offsets differ by up to 0x31c while the objects themselves end in the right
 place.
 
-Landed: `src/server.dll/DieGildeAddOnServer/server_c/srv_SeedRandom.c`, an
+Landed: `src/Develop/DieGildeAddOnServer/server_c/srv_SeedRandom.c`, an
 `extern` in `command_internal.h`, and the six call sites redirected from
 `srand` to `srv_SeedRandom`.
 
@@ -20875,7 +20875,7 @@ All but the last five are public in the toolchain's own `LIBCMT.lib`.  The
 reference also has `mlock.obj`, `sbheap.obj`, `cprintf.obj`, `wincrt0.obj`,
 `wwincrt0.obj`, `fpinit.obj`, `crtmbox.obj`, `popen.obj`, `wpopen.obj`,
 `fgetchar.obj`, `fgetwchr.obj` and `cwprintf.obj` whose symbols our link *does*
-define, from `src/server.dll/crt_region/*.c`.  Our link has three members the
+define, from `src/Develop/crt_region/*.c`.  Our link has three members the
 reference does not: `strcat.obj`, `strdup.obj`, `winxfltr.obj`.
 
 **Forcing them in fixes the size and nothing else.**  `/INCLUDE:` is already the
@@ -21687,7 +21687,7 @@ candidate's real code length is `obj_size`, which trims the COMDAT's trailing
 alignment nops.  `m_AllocTracked` is the worked example: the object has 11
 trailing nops, so the section is 656 bytes but the code is **645**, against the
 reference's 658 -- **13 bytes short**, not "exact".  Several notes in this file
-and in `src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c` say "obj 658 /
+and in `src/Develop/Units/m_alloc/m_alloc_c/m_AllocTracked.c` say "obj 658 /
 exact size" and are wrong for that reason; they have been corrected in the
 source file.
 
@@ -32269,11 +32269,11 @@ instruction in the wrong place" question.
 - EXTRACT fixed: `m_AllocTracked` / `gm_ObjectsAvailble` — markers re-homed off FUNCTION TUs.
 - Name sync via `set_data_field` (300/300 marked named). Sized void*/strings; stamp VERIFIED via `rebrew verify --data`.
 - Sell/prod `DAT_*` named+sized in toml only (no `.c` marks — banned TUs). Unified 2 string `char[]` conflicts back to filter-only 5.
-- Dropped dead `local OF((...))` forward decls in [`check_header.c`](src/server.dll/Units/vfs/vfs_c/check_header.c) — inventory parse noise (`gzFile`/`int`/`void` false locals).
+- Dropped dead `local OF((...))` forward decls in [`check_header.c`](src/Develop/Units/vfs/vfs_c/check_header.c) — inventory parse noise (`gzFile`/`int`/`void` false locals).
 - CRT map VAs marked: `g_rdata_fold_refs@0x1002aa84`, `__locktable@0x1002b374`, `__old_small_block_heap@0x1002b440`, `__old_sbh_threshold@0x1002d464`, `__sbh_threshold@0x100366a8`, `__sbh_initialized@0x100366b8` (last two zero-tail → stay UNCHECKED).
-- Safe-TU overlay marks on [`alchemistry_logic2.c`](src/server.dll/DieGildeAddOn/game/alchemistry_logic2.c): 6 dbl-const + 19 VA-suffix strings (banned-TU inventory only; defs already in `link_stubs.c` / toml). Dropped dup `0x10031004` (`spiel.c` owns it as `s_D__Develop_...`).
+- Safe-TU overlay marks on [`alchemistry_logic2.c`](src/Develop/DieGildeAddOn/game/alchemistry_logic2.c): 6 dbl-const + 19 VA-suffix strings (banned-TU inventory only; defs already in `link_stubs.c` / toml). Dropped dup `0x10031004` (`spiel.c` owns it as `s_D__Develop_...`).
 
-- Filter scalars marked GLOBAL on [`spiel_dumpD.c`](src/server.dll/DieGildeAddOn/game/spiel_dumpD.c) (toml already VERIFIED; conflicts stay intentional).
+- Filter scalars marked GLOBAL on [`spiel_dumpD.c`](src/Develop/DieGildeAddOn/game/spiel_dumpD.c) (toml already VERIFIED; conflicts stay intentional).
 
 - Unified `s_file_spiel_c_10031004` in AllocSpieler to extern `s_D__Develop_...@0x10031004` (spiel.c owns DATA mark). Inventory 341→340.
 

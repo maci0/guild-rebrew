@@ -38,7 +38,8 @@ VA_DOCS = [
     "docs/TODO.md",
 ]
 
-VA_RE = re.compile(r"0x(100[0-9a-f]{5})", re.IGNORECASE)
+# Server VAs are 0x100xxxxx, client VAs 0x4xxxxx to 0x6xxxxx.
+VA_RE = re.compile(r"\b0x([0-9a-f]{6,8})\b", re.IGNORECASE)
 
 
 def parse_va(text: str) -> int:

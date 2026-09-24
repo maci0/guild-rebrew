@@ -1,8 +1,8 @@
 # MSVC 6.0 LINK / PE layout: what decides the bytes outside `.text`
 
-`rebrew test` and `docs/msvc6-c-shapes.md` own `.text`. Everything else —
-section geometry, the import layer, `.data`/`.rdata` content, and what
-`rebrew postlink` is allowed to overwrite — is decided by the linker and by
+`rebrew test` and `docs/msvc6-c-shapes.md` own `.text`. Everything else
+(section geometry, the import layer, `.data`/`.rdata` content, and what
+`rebrew postlink` is allowed to overwrite) is decided by the linker and by
 the layout package, and it is what this file records.
 
 Every number here is measured, not inferred. The two binaries are
@@ -33,7 +33,7 @@ The rules the linker follows, each verified against both binaries:
    content end that lies in `(0xd000, 0xe000]`.
 2. **`RVA(n+1) = align_up(RVA(n) + VirtualSize(n), SectionAlignment)`.**
    `.rdata` ends at `0x24000 + 0x2e81 = 0x26e81`, so `.data` starts at
-   `0x27000` — a whole `0x1000` early of where a raw-sized accounting would
+   `0x27000`: a whole `0x1000` early of where a raw-sized accounting would
    put it.
 3. **`file_offset(n+1) = file_offset(n) + raw(n)`.** This is the rule that
    makes a surplus section fatal rather than cosmetic: one extra `0x1000` of
@@ -67,7 +67,7 @@ whose bytes are a copy of the reference's `.data` raw. It is linked **first**
 
 **Only `B` matters.** `rebrew postlink`'s data fixer overwrites the built
 `.data` wholesale with the layout package's `data.hex` (the reference's raw
-bytes) and rewrites the header's raw size to `len(meta.data)` — the blob's
+bytes) and rewrites the header's raw size to `len(meta.data)`: the blob's
 *content* never reaches the output. Its whole job is to make the section's
 content end land in the band that rounds to the reference's raw size:
 
@@ -107,7 +107,7 @@ could not place.
 ### The prefix cannot be dodged by reordering: sections merge by name
 
 The sub-sections of image section 2 are merged in **section-name order**, not
-object order — the map always reads
+object order: the map always reads
 
 ```
 0002:00000000 .idata$5   (IAT)
@@ -128,17 +128,17 @@ built import directory instead of trying to move it.
 
 ### Why `.data` is where the literals are
 
-Under `/O2 /Gd /MT` (and unchanged by `/Gf`, `/Gy`, `/GA` — measured), msvc6
+Under `/O2 /Gd /MT` (and unchanged by `/Gf`, `/Gy`, `/GA`, measured), msvc6
 emits a **referenced string literal into `.data`**, as a `??_C@...` COMDAT,
 not into `.rdata`.  A literal that nothing references is **not emitted at
-all** — there is no unreferenced-literal section to restore.  Both facts show
+all**: there is no unreferenced-literal section to restore.  Both facts show
 up in the map: the game's `??_C@...` symbols all have section `0003`, and the
 `runtime error` strings that a round-113 plan wanted to "re-emit from a TU"
 were already inside `rdata_restore.c`'s blob precisely because no TU of ours
 references them.
 
 The consequence for planning: a missing `.rdata` string cannot be fixed by
-writing the literal in a new C file — it will land in `.data` and shift every
+writing the literal in a new C file: it will land in `.data` and shift every
 literal after it.  Literal content belongs in the blob that covers the
 reference's own bytes.
 
@@ -166,7 +166,7 @@ if prefix_hi - prefix_lo != len(meta.prefix): raise ValueError(...)
 if built[prefix_lo:prefix_hi] != meta.prefix:  raise ValueError(...)
 ```
 
-`layout/server.dll/prefix.hex` is `0x2468` bytes — the reference's
+`layout/server.dll/prefix.hex` is `0x2468` bytes: the reference's
 `.rdata[0x1a0:0x2608)`, i.e. the whole `.rdata` proper up to the import
 directory. Measured in the current build:
 
@@ -195,7 +195,7 @@ its range:
 Two consequences worth keeping straight:
 
 * The block is a **duplicate**, not extra data: the reference has the same
-  bytes inside `[0x12e8, 0x2608)` — `"1#QNAN"` at `0x24a8`, `"(null)"` at
+  bytes inside `[0x12e8, 0x2608)`: `"1#QNAN"` at `0x24a8`, `"(null)"` at
   `0x2074`, `"TZ"` at `0x2458`, `"Monday"` at `0x25c0` all match at the same
   offsets on both sides.
 * Because the offset error is one contiguous block, every later sub-section
@@ -208,7 +208,7 @@ Two consequences worth keeping straight:
 Shrinking the blob by `0x1c8` instead of removing the objects does **not**
 work: the block that would move up into `[0x2440, 0x2608)` is our own COMDAT
 order (testfdiv reals first), which matches only 53 of 456 bytes of the
-reference's window — and the prefix check compares bytes, not just length.
+reference's window, and the prefix check compares bytes, not just length.
 
 ### Discarding the duplicates instead: COMDAT folding by symbol name
 
@@ -220,7 +220,7 @@ defines *the same COMDAT names*, and whatever the library emits for them is
 discarded.
 
 `crt_region/rdata_fold.c` does exactly that for the six objects' strings and
-carries no `.text` at all — the literals go to `.data` (referenced literals do
+carries no `.text` at all: the literals go to `.data` (referenced literals do
 not go to `.rdata`; see the section above), which costs nothing because
 postlink overwrites `.data` wholesale.  Measured on the CMake build:
 
@@ -231,7 +231,7 @@ with rdata_fold.c        0x2ff1       0x3000  0 (all folded)
 ```
 
 `0x3000` is the reference's raw size, and it moves `.data` to file offset
-`0x27000` and `.reloc` to `0x35000` — the reference's.  Two notes for extending
+`0x27000` and `.reloc` to `0x35000`: the reference's.  Two notes for extending
 it to the rest of the block:
 
 * A COMDAT folds against a definition of the same **name**, whatever the
@@ -240,13 +240,13 @@ it to the rest of the block:
   not have to be ours, because the reference's are already inside the blob and
   postlink rewrites the `.text` operands that point at them.
 * A `.bss` (uninitialized) definition defines the symbol but does **not** fold
-  the library's read-only COMDAT — measured, the library's copy stays in the
+  the library's read-only COMDAT: measured, the library's copy stays in the
   map.  The definition has to be an initialized constant to be a COMDAT.
 * **Not everything in the library is COMDAT.**  The string literals are
   (`??_C@…`, 11 of them folded here, worth `0x70` of `.rdata` VirtualSize), but
   `___lookuptable`, `___dnames` and `___mnames` are plain `.rdata` sections in
-  LIBCMT: a definition of ours — even `__declspec(selectany)`, which does make
-  it COMDAT — leaves *both* sections in the image, so the surplus grows by
+  LIBCMT: a definition of ours (even `__declspec(selectany)`, which does make
+  it COMDAT) leaves *both* sections in the image, so the surplus grows by
   whatever we define.  Those `0x9c` bytes can only be removed by not linking
   the objects that carry them.  `__real@8@…` FP constants are COMDAT, but the
   compiler emits them only from an expression, and adding a `.text` function to
@@ -259,7 +259,7 @@ it to the rest of the block:
   `import sets differ — refusing to copy bookkeeping` otherwise.
 * The IAT slot order is hash-driven and not forceable with `/include`, so
   postlink copies `iat.hex` (`0x1a0` bytes) and `bookkeeping.hex` (`0x828`
-  bytes — descriptors, OFT arrays, hint/name records, DLL names) over the
+  bytes: descriptors, OFT arrays, hint/name records, DLL names) over the
   built ones, and remaps `FF 15/25` operands in `.text` to the reference's
   slots.
 * The hint/name table's **size depends on that order**, because records are
@@ -277,7 +277,7 @@ it to the rest of the block:
 | `/OPT:NOREF` (current) | keeps every COMDAT of every linked object. Needed: our reversed `.text` is not all referenced, and `/OPT:REF` gutted it (`0x22256 -> 0x100c6`). |
 | `/OPT:REF` | drops unreferenced COMDATs: `.rdata 0x3041 -> 0x2f81` (raw `0x4000 -> 0x3000`!), `.data 0x1743498 -> 0x1742614`, and `.text` down to `0x100c6`. Not usable as-is, but it proves the surplus is unreferenced COMDATs. |
 | `/FORCE:MULTIPLE` | silences `LNK4006`; the warning is a finding (see AGENTS.md), not noise. |
-| `/INCLUDE:<sym>` | forces a LIBCMT object in for its *code* — `__ms_p5_mp_test_fdiv` is one of the eight here — and the object's `.data`/`.rdata` COMDATs come with it. |
+| `/INCLUDE:<sym>` | forces a LIBCMT object in for its *code* (`__ms_p5_mp_test_fdiv` is one of the eight here), and the object's `.data`/`.rdata` COMDATs come with it. |
 | `/debug` | adds a `0x1c`-byte debug directory that shifts `.rdata`; `REBREW_DEBUG_INFO` must stay OFF. |
 
 ## 6. What postlink is allowed to overwrite (and what it is not)
@@ -285,14 +285,14 @@ it to the rest of the block:
 | region | postlink behaviour |
 |--------|--------------------|
 | `.text` | trims to the reference's raw size, sets raw/VirtualSize, rewrites absolute data operands and E8/E9 targets from the sparse maps. Content is largely ours. |
-| `.rdata` | **only** the IAT and import bookkeeping are copied. The rest must already match byte-for-byte — hence the prefix gate. |
+| `.rdata` | **only** the IAT and import bookkeeping are copied. The rest must already match byte-for-byte: hence the prefix gate. |
 | `.data` | overwritten wholesale with `data.hex` (`0xe000`), raw size set to the reference's. |
 | `.reloc` | replaced with the reference's (grows to raw `0x11000`) at the **built** file's `.reloc` offset. |
 | PE metadata | DOS stub, `e_lfanew`, TimeDateStamp, CheckSum, `.data` VirtualSize, `.reloc` VA, SizeOfImage. |
 
 The practical reading: `.data`, `.reloc` and the import layer are already
 solved *at the content level*; `.rdata`'s body and `.text`'s bytes are not.
-Which is why the remaining raw-size work is worth doing — with `.rdata` raw at
+Which is why the remaining raw-size work is worth doing: with `.rdata` raw at
 `0x3000` and `.data` raw at `0xe000`, the built `.reloc` lands at file offset
 `0x35000`, exactly the reference's, and the post-postlink file is `0x46000`
 bytes, exactly the reference's size:
@@ -331,7 +331,7 @@ PY
 ```
 
 For a map (per-symbol objects, and the `.bss` content-end line), relink the
-same objects with `/MAP` — the response file is already written for you:
+same objects with `/MAP`; the response file is already written for you:
 
 ```sh
 cd build

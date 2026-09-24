@@ -1,4 +1,4 @@
-# ☕ Guild Rebrew — Europa 1400 Decompilation
+# ☕ Guild Rebrew: Europa 1400 Decompilation
 
 Byte-identical C89 source reconstruction of **Europa 1400: The Guild** (`server.dll`).
 
@@ -26,18 +26,18 @@ rebrew skeleton 0x10003DA0
 
 # 3. Write C89 source (see AGENTS.md for rules)
 #    - Declare ALL variables at block top
-#    - No for(int i=...) — declare int i; separately
+#    - No for(int i=...): declare int i; separately
 #    - No // comments (use /* */)
 
 # 4. Test your implementation (auto-updates STATUS)
-rebrew test src/server.dll/my_func.c
+rebrew test src/Develop/<path>/my_func.c
 
 # 5. If near-miss, check the diff and try the GA
-rebrew diff src/server.dll/my_func.c -m   # structural diffs only
-rebrew match src/server.dll/my_func.c --generations 200 --pop-size 64 -j 16  # GA search
+rebrew diff src/Develop/<path>/my_func.c -m   # structural diffs only
+rebrew match src/Develop/<path>/my_func.c --generations 200 --pop-size 64 -j 16  # GA search
 
 # 6. Single-file flag sweep
-rebrew match src/server.dll/my_func.c --flag-sweep-only
+rebrew match src/Develop/<path>/my_func.c --flag-sweep-only
 ```
 
 ## Compiler Flags by Origin
@@ -52,11 +52,12 @@ rebrew match src/server.dll/my_func.c --flag-sweep-only
 
 ```
 guild-rebrew/
-├── src/server.dll/       # Reversed C source files (283 annotated functions)
+├── src/Develop/          # Reversed C, mirrors the original D:\Develop tree (all targets)
+├── src/GOLD*.fcn_*.c     # Client-only functions with no shared source yet
 ├── original/             # Target binaries (gitignored)
 ├── references/zlib/      # Reference source (zlib 1.1.3, submodule)
-├── db/                   # Coverage data (gitignored)
-├── docs/                 # Codegen notes, naming conventions, TODO
+├── db/                   # Function inventories (tracked), coverage data (ignored)
+├── docs/                 # Codegen notes, traps, naming, TODO (map: docs/README.md)
 ├── layout/server.dll/    # Link layout package
 ├── rebrew-project.toml   # Project configuration
 ├── reccmp-project.yml    # reccmp configuration
@@ -64,15 +65,21 @@ guild-rebrew/
 ```
 
 The MSVC6 compiler is not vendored: every CL.EXE/LINK.EXE call runs through
-the `rebrew/msvc:6.0-sp6-win32` docker image (see `cmake/toolchain-msvc-6.0-sp6-docker.cmake`).
+a docker image: `rebrew/msvc:6.0-sp6-win32` for the server, `rebrew/msvc:6.0-sp5-pp-win32`
+for both clients (see `cmake/toolchain-msvc-6.0-sp6-docker.cmake`).
 
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
 | [AGENTS.md](AGENTS.md) | Full project reference for AI agents and contributors |
-| [docs/msvc6-c-shapes.md](docs/msvc6-c-shapes.md) | C spellings that compile to the target's exact bytes |
+| [docs/README.md](docs/README.md) | Which doc answers which question |
+| [docs/msvc6-c-shapes.md](docs/msvc6-c-shapes.md) | C spellings that compile to the target's exact bytes, indexed by diff symptom |
 | [docs/msvc6-allocator.md](docs/msvc6-allocator.md) | Register allocation notes |
+| [docs/codegen-walls.md](docs/codegen-walls.md) | Encodings no C spelling reaches |
+| [docs/measure-traps.md](docs/measure-traps.md) | Rulers and tools that gave wrong readings |
+| [docs/msvc6-link-layout.md](docs/msvc6-link-layout.md) | Linker and PE layout outside `.text` |
+| [docs/general-knowledge.md](docs/general-knowledge.md) | Facts about the original build and toolchain |
 | [docs/naming_conventions.md](docs/naming_conventions.md) | Original developer naming conventions |
 | [docs/TODO.md](docs/TODO.md) | Open work and the .text link shortfall |
 
@@ -80,11 +87,11 @@ the `rebrew/msvc:6.0-sp6-win32` docker image (see `cmake/toolchain-msvc-6.0-sp6-
 
 | Target | Binary | Status |
 |--------|--------|--------|
-| `server.dll` | `original/Server/server.dll` | Active: 283 annotated functions, 188 .c files |
-| `Europa1400Gold_TL.exe` | `original/Europa1400Gold_TL.exe` | Active focus: 6335 discovered, 181 annotated |
-| `Europa1400Gold.exe` | `original/Europa1400Gold.exe` | Validation: 4638 discovered, 324 annotated |
+| `server.dll` | `original/Server/server.dll` | Active: 543 discovered, 283 annotated |
+| `Europa1400Gold_TL.exe` | `original/Europa1400Gold_TL.exe` | Active focus: 6335 discovered, 883 annotated |
+| `Europa1400Gold.exe` | `original/Europa1400Gold.exe` | Validation: 4638 discovered, 456 annotated |
 
-Game knowledge: [docs/game-compendium.md](docs/game-compendium.md) — canonical
+Game knowledge: [docs/game-compendium.md](docs/game-compendium.md): canonical
 compendium (game, binaries, tree, network, community ecosystem).
 
 ## License
