@@ -1,14 +1,17 @@
-// FUNCTION: GOLD 0x0042ec00
+// FUNCTION: GOLD 0x42ec00
 // SIZE: 32
-// fcn_0042ec00 — if(!si) return 0; return fcn_005de784() % (si & 0xffff).
+
+// fcn_00404e40 — eax=0; if(si) eax = fcn_005de784() % (si&0xffff); return eax.
 
 int __cdecl fcn_005de784(void);
 
-int __cdecl fcn_0042ec00(int u1, int si, int u2)
+int __cdecl fcn_00404e40(unsigned short si)
 {
-	(void) u1; (void) u2;
-	if (si == 0) {
-		return 0;
+	int r;
+	r = 0;
+	if (si != 0) {
+		r = fcn_005de784() % (si & 0xffff);
 	}
-	return fcn_005de784() % (si & 0xffff);
+	return r;
 }
+
