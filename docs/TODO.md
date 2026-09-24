@@ -7,7 +7,7 @@ Live numbers are `scripts/gate.sh` defaults. A residue, verify count, or `.text`
 | Quantity | Value | Source |
 |---|---|---|
 | verify `passed`, byte-matched (EXACT+RELOC) | 265 | `BASELINE` |
-| `.text` residue | 5,408 | `RESIDUE_BASELINE` |
+| `.text` residue | 5,404 | `RESIDUE_BASELINE` |
 | raw-link `.data` divergence | 21,481 | `DATA_BASELINE` |
 | imports | 100 | reference PE |
 | reference `.text` VirtualSize | `0x22846` | `original/Server/server.dll` |
@@ -62,6 +62,25 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1144 (server): residue 11,735 -> 5,404, all from composition and flags, no wall moved.**
+
+- **VA order:** the linker lays out a TU's functions in source order. Seven files (spiel622.c,
+  m_alloc2.c, alchemistry_logic2/3.c, spiel.c, plant.c, vfs2.c) defined functions above lower-VA
+  ones after the `src/Develop` reshuffle, displacing everything between: -2,945, and -137 more once
+  m_alloc2.c's `#pragma optimize("y", off)` pair was kept around `m_PoolAlloc` (moving
+  `m_pool_free` inside it gave it a frame pointer). rebrew lint W030 now flags this.
+- **Flag pins re-measured at the link:** `gm_AllocSpieler` `/Oa /Ow` -> `/O2 /Gd` (-2,804; section
+  198's 17-byte result was never measured under the shipped flags); `m_AllocTracked` `/G6 /Oy-`
+  dropped (-69); `/Oy-` on 0x10008e40 and `/Ox` on cm_ExProdObjekt byte-neutral, dropped;
+  `gv_ExAllocGraveyardWorker`'s `/Ow` had silently stopped applying (CMake path from before the
+  reshuffle) and now lives in metadata (-5); `/Ow` on ls_LoadBuildingEntityState (-4). `/Ow` on
+  cm_ExSellObjekt (+6 without) and ProcessSendData (+9 without) stays. An object-level screen of
+  `/Ow /Oa /Oy- /Op /G6 /G4 /G3` over the ten largest carriers found nothing else.
+- **ServerMainThread** is RELOC (section 196 source, salvaged from an abandoned worktree).
+- **PROVEN** is no longer a matched status in rebrew (verify, status, todo): the 17 former PROVEN
+  rows now carry their byte status, and `scripts/gate.sh` guards one baseline, 265 byte-matched.
+- **Measured:** gate verify 265/283, residue 5,404, lint 0/0. Remaining FAILs are pre-existing:
+  raw-link `.data` above 21,481, and three GOLDTL zlib bodies flagged by the d3dx8 lib-match.
 **Round-1143 (GOLDTL): vfs_GetByte duplicate-VA resolved the shared-tree way. TL holds.**
 
 - **Tried:** TL `vfs_GetByte` (0x0045f2c0): my new `vfs_GetByte_TL.c` duplicated the
