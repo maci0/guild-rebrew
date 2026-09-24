@@ -242,13 +242,11 @@ updated_at = "2026-09-22T11:10:15+00:00"
 blocker = "inline-asm 24-byte alignment prelude — Finding 19: no msvc6 C memcpy spelling emits it; RELOC byte-match"
 
 ["SERVER.0x10009020"]
-size = 667
-status = "SIZE_MISMATCH"
+size = 701
+status = "RELOC"
 analysis = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
-blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 254
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+updated_by = "test"
+updated_at = "2026-09-24T19:41:33+00:00"
 
 ["SERVER.0x10009310"]
 size = 8
@@ -1332,11 +1330,9 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10016f80"]
 size = 346
-status = "SIZE_MISMATCH"
-blocker = "dl-vs-cl register wall; body 342 vs ref 346; prologue-fidelity lever spent (shapes 75)"
-blocker_delta = 258
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-24T19:41:04+00:00"
 
 ["SERVER.0x100170e0"]
 size = 304
