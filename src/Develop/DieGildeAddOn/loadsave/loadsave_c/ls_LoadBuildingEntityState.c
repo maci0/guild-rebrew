@@ -40,7 +40,12 @@ unsigned int ls_LoadBuildingEntityState(unsigned int);
  *   three `mov [..],ebp`), so the field reads need no `volatile` any more; with
  *   the plain loads the scheduler also hoists each load above the pushes, as
  *   the reference does.
- * - Remaining: `add esp,8` before `mov [ebx],eax` in the 0x4b-0x4d arm. */
+ * - The state block addresses `esi + 0x99` directly (no `state_ptr` local).
+ *   That lets c2 prove `[eax]` and `[esi+0xa5]` disjoint without /Ow, which
+ *   is what places the 0xa5 store inside the `|= 1` read-modify-write.
+ * - Byte-exact at the link under the default `/O2 /Gd` (measured, whole-image
+ *   .text 4740 -> 4735).  Under `/O2 /Gd /Ow` the 0x4b-0x4d arm emits
+ *   `add esp,8` before `mov [ebx],eax` (the stores stop aliasing), 5 bytes. */
 
 
 unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
@@ -258,9 +263,8 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 				}
 			}
 			else {
-				int* state_ptr = (int*) (esi + 0x99);
-				memset((void*) state_ptr, 0, 0x10);
-				state_ptr[0] |= 1;
+				memset(esi + 0x99, 0, 0x10);
+				*(int*) (esi + 0x99) |= 1;
 				*(int*) (esi + 0xa5) = neg1;
 			}
 
