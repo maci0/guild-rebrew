@@ -569,20 +569,19 @@ int __cdecl srv_LoadBuf(void)
 				if (status & 2) {
 					unsigned char* pkt;
 					unsigned int* header;
-					/* Deriving header from pkt, and storing through the call's
-					 * first argument, keeps conn[1] and both stores on ebp
-					 * instead of rebasing them through the packet lea. This
-					 * only reaches the target size together with the per-arm
-					 * slot store below; on its own it runs three bytes long. */
+					/* Stores through conn, the 0x400 flag read and the call
+					 * through header (pkt - 0x18): c2 keeps conn[1], both stores
+					 * and the read on ebp, and cannot prove the read independent
+					 * of the [ebp+0x2c] store, so it stays after it without
+					 * `volatile`. A volatile read also orders the pushes behind
+					 * it, which kept `push eax` out of cycle 0. */
 					pkt = (unsigned char*) conn + 0x18;
 					if (*pkt == 3) {
 						status = conn[1];
 						header = (unsigned int*) (pkt - 0x18);
-						if (cm_QueuePlayerCommand(
-							(header[0xb] = status,
-							 header[0xc] = (*(volatile unsigned int*) header & 0x400) ? 1 : 2,
-							 header),
-							pkt) == -1) {
+						conn[0xb] = status;
+						conn[0xc] = (*header & 0x400) ? 1 : 2;
+						if (cm_QueuePlayerCommand(header, pkt) == -1) {
 							return -1;
 						}
 					}
