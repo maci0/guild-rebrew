@@ -118,19 +118,23 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		*(int*) (grave + 4) = g_next_object_id++;
 		*(volatile unsigned short*) grave = (unsigned short) chosen;
 	}
-	*(unsigned char*) (grave + 2) = 0x14;
 	*(int*) (grave + 0x1f0) = 0;
+	*(unsigned char*) (grave + 2) = 0x14;
 	*(int*) (grave + 0x210) = -1;
-	*(unsigned char*) (grave + 0x215) = 0;
+	/* Out of the reference's store order (it stores +0x218 after +0x217):
+	 * this position loads the `1` beside the req reload and links closer. */
+	*(unsigned char*) (grave + 0x218) = 1;
 	*(unsigned char*) (grave + 0x216) = 0;
 	*(unsigned char*) (grave + 0x217) = 0;
-	*(unsigned char*) (grave + 0x218) = 1;
+	*(unsigned char*) (grave + 0x215) = 0;
 	*(int*) (grave + 0x1e4) = 0x3f800000; /* 1.0f */
 	*(unsigned char*) (grave + 8) = 0x64;
 	*(unsigned short*) (grave + 0xa) = 0x10;
 	*(unsigned char*) (grave + 0x164) = 0;
 	*(unsigned char*) (grave + 0x166) = 0;
-	*(unsigned char*) (grave + 0x165) = *(unsigned char*) ((char*) req + 0x15);
+	/* Under /Ow the plain read hoists to the top of the stores; volatile
+	 * keeps `mov cl,[ecx+0x15]` beside its store as at 0x10011e4d. */
+	*(unsigned char*) (grave + 0x165) = *(volatile unsigned char*) ((char*) req + 0x15);
 	*(unsigned char*) (grave + 0x1f4) = 0;
 	*(int*) (grave + 0x190) = 4;
 	*(int*) (grave + 0x194) = 0;
@@ -151,16 +155,23 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	{
 		int n;
 		float f;
+		double g;
 		/* The product before the zero stores and the rest after lets the
-		 * scheduler fill the x87 latency with those stores (0x10011ef5). */
+		 * scheduler fill the x87 latency with those stores (0x10011ef5).
+		 * The literal constant may alias the slot, so `fadd [0x100257c4]`
+		 * stays behind the stores written before it: the sum goes between
+		 * the +0x24 and +0x28 stores (0x10011f0b).  Dividing by `(float) g`
+		 * rather than `g` gives `fdivr [mem]`; a plain variable divisor
+		 * gives `fld; fdiv st,st(1)` plus a trailing `fstp st(0)`. */
 		f = gm_RandomFloat01() * *(float*) 0x100257c8;
 		*(int*) (grave + 0x18) = 0;
 		*(int*) (grave + 0x1c) = 0x447a0000; /* 1000.0f */
 		*(int*) (grave + 0x20) = 0;
 		*(int*) (grave + 0x24) = 0;
+		g = f + *(float*) 0x100257c4;
 		*(unsigned short*) (grave + 0x28) = 0;
 		*(int*) (grave + 0x2c) = 0;
-		*(float*) (grave + 0x14) = *(float*) 0x10025680 / (f + *(float*) 0x100257c4);
+		*(float*) (grave + 0x14) = *(float*) 0x10025680 / (float) g;
 		/* Index expressions inline, each call inside its store: the index
 		 * temporaries then rank below the strength-reduced n*0x300 (esi),
 		 * n itself stays on the stack and the zeros come from ebx, as at

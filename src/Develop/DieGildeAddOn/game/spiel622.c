@@ -70,7 +70,8 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 
 // FUNCTION: SERVER 0x10019720
 // gm_CalculateProductionValue
-//   NEAR_MATCHING 386/396 matched, 4 differing instructions out of 123.
+//   Byte-exact at the link.  The last residue, `fxch st(1)` / `cmp byte
+//   ptr [esi],0x17` at 0x10019804, is explained at the merge statement.
 //   Compiled size is 396 bytes, equal to the target's 396 bytes of code; the
 //   `size = 400` in the metadata is the padded slot, not a code-size shortfall.
 //
@@ -129,9 +130,6 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //     `param2` homed through a PLAIN `int*` alias and widened in a separate
 //     statement. A volatile alias there is ordered against the +0x38 store and
 //     schedules the `and` before the ftol call, which the target does not do.
-//   - `acc = quot; acc = acc * mod_value; value = (float)(acc * g_const_half)`
-//     yields `fxch st(1)` / `fmulp st(1)` and drops the dead `fstp st(0)`,
-//     disproving the earlier note that no source form pops there.
 //
 //   Resolved 2026-09-08 (378 -> 386): `#pragma optimize("a", on)` around the
 //   function. Three of the seven residual instructions were the epilogue
@@ -148,195 +146,9 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //   /G3 /G4 /G5 /Ox /Gy /Oi- /Ob0 all score identically, /G6 /Op /O1 /Ot
 //   collapse.
 //
-//   Residual 4 instructions (386/396, two transpositions):
-//   - [67..68] the target emits `fxch st(1)` BEFORE `cmp byte ptr [esi],0x17`;
-//     the candidate emits the compare first. Same instructions, same bytes.
-//   - [115..116] the target emits `pop ebp` before `fmul [esp+0x14]`; the
-//     candidate emits `fmul [esp+0x18]` before `pop ebp`. The displacement
-//     difference is the pending `pop`, not a frame-size difference.
-//
-//   Residual at 391/396: ONE adjacent transposition, offsets 228..232.
-//   Target `d9c9 803e17` (fxch; cmp byte ptr [esi],0x17) against the
-//   candidate's `803e17 d9c9`. Every other instruction matches.
-//
-//   The fxch slot and the folded compare are mutually exclusive across every
-//   shape measured (2026-09-08, ~330 compiles, scripts in .scratch/pv-x87/):
-//   - Scaling by g_const_half through a FLOAT local (`mod_value` or `value`)
-//     folds the compare to `cmp byte ptr [esi],0x17` but schedules it one slot
-//     ahead of the fxch. This is the 391 shape.
-//   - Scaling through a DOUBLE local (`p2_wide`, `acc`, a block-scoped temp)
-//     puts the [esi] access after the fxch, matching the target's order, but
-//     msvc6 then splits it into `mov al,[esi]` plus a later `cmp al,0x17`,
-//     which is one byte longer: obj 397, SIZE_MISMATCH at 255.
-//     CORRECTED round 196: rejecting the 397 shape "on size" was the wrong
-//     reason, though the conclusion holds.  Per shapes 88 the real body is 396
-//     and the COMDAT span is 400 (4 pad bytes), so the ceiling runs
-//     396/397/398/400 -> 400 and only 401 -> 416: there is **+4 bytes of
-//     upward slack** and 397 is SPAN-NEUTRAL.  It is affordable and still
-//     loses, because unfolding the compare shifts every byte after 230 and
-//     takes the structural diffs from 2 to 53.  Re-measured: 255 at obj 397,
-//     aligned 118/123 against the baseline's 122/123.
-//     A volatile `value` store lands the fxch correctly too but sinks the
-//     compare two slots, past `fmulp`/`fstp` (387/396, 3 structural diffs).
-//   ROUND 196 -- CLOSED, with the mechanism named.  The five residual bytes
-//   are an ADJACENT PAIR SWAP with zero length delta: our object contains all
-//   five reference bytes, in the wrong order.  The reference emits
-//   0x10019804 `d9c9 fxch st(1)` and THEN 0x10019806 `803e17 cmp byte ptr
-//   [esi],0x17`; we emit them reversed.  `rebrew diff`'s "2 structural diffs"
-//   is the same swap counted twice by a positional ruler.
-//   The mechanism is ONE COUPLED ALLOCATOR DECISION: msvc6's x87-stack
-//   allocator picks the `fxch` fixup position from the TYPE of the scaled
-//   operand, and that same type choice decides whether the [esi] byte compare
-//   folds into `cmp byte ptr [esi],0x17` (3 bytes) or unfolds into
-//   `mov al,[esi]` + `cmp al,0x17` (4 bytes).  The four reachable classes:
-//     float-scaled  -> folded compare, fxch one slot LATE   (391, shipped)
-//     double-scaled -> fxch placed, compare UNFOLDED        (255 at obj 397)
-//     volatile      -> fxch placed, compare sunk past fmulp (387)
-//     commuted mul  -> byte-identical to baseline (391) -- msvc6 canonicalises
-//                      operand order, so it is not a source-reachable axis
-//   The target's combination -- a FOLDED compare AFTER the fxch -- is in none
-//   of them.  No C89 handle exists, so this is allocator-level and the row is
-//   retired at its 5-byte floor.
-//   Also closed: sp5-pp was never swept on this shape.  At region level it
-//   diverges from offset 76 and does NOT produce `fxch; cmp`, confirming the
-//   shapes-91 SOURCE-BOUND classification by region rather than by score.
-//   And the round-183 prototype question cannot matter here: the reference
-//   uses arg1 FULL-WIDTH and unmasked (`mov eax,[ecx*4+0x101dd8e0]`), so
-//   `(int, int)` is correct, param2's byte-ness is an in-body `and eax,0xff`,
-//   and BOTH residual instructions reference neither parameter.
-//   Ruled out against the 391 base, each holding 391 or worse:
-//   - CFLAGS: /G3 /G4 /G5 /GB /Ox /Ot /Oa /Ow /Gy /Oi- /Ob1 /QIfdiv- emit
-//     BYTE-IDENTICAL objects (compared hex, not just the score), so no flag
-//     reaches this scheduling decision. /G6 /Op /Oy- /O1 /Od collapse.
-//   - `#pragma optimize`: 20 combinations. "a" plus any of g/t/w/y hold 391;
-//     "s" on, "t" off, "y" off, "g" off, "record_cursor" on each collapse the body.
-//   - All four msvc6 service-pack images (sp1..sp4) produce the identical
-//     391/396 object, verified on an isolated probe (.scratch/pv-x87/probe.c)
-//     that reproduces this function without windows.h.
-//   - Local declaration order: 14 permutations, all inert.
-//   - Compare spelling: unsigned/signed char, `entity[0]`, `0x17 ==` reversed,
-//     `!(x != 0x17)`, `(int)` cast, via a `divisor_ptr`/`ingredient_cursor`/`slot_p` alias, via a
-//     hoisted int local placed before, between or after the FP statements.
-//     `- 0x17 == 0`, `^ 0x17 == 0` and `& 1` add bytes.
-//   - Branch shape: switch, goto, if/else, duplicated arms, nested block,
-//     `do {} while (0)`, block-scoped temp, empty statement separator.
-//   - Reaching definitions of `mod_value` (doc section 42): preset before the
-//     if, inverted polarity, while-loop form, 57d0 duplicated into both arms.
-//     All regress (319..391).
-//   - Loop body reassociation and the else-arm constant form: inert.
-//   - Filler integer work in the pre-fxch slot (param2 reload, mask, min_val,
-//     the +0x38 read, the ingredient_cursor lea) placed before or between the FP statements:
-//     inert. A volatile param2 read there collapses the whole function.
-//   - 312 generated tail permutations (.scratch/pv-x87/gen2.py, gen3.py) over
-//     scaled-local x numerator-local x product form x compare form x return
-//     form x filler: none exceeds 391.
-//
-//   Second pass, 2026-09-08 (.scratch/spiel622-x87/), 700+ further compiles,
-//   still 391. What it adds to the picture:
-//   - The `fxch` is a removable stack fixup, not a fixed instruction. Making
-//     the scaled double the destination of the merge multiply
-//     (`acc = (double) mod_value * g_const_half; mod_value = (float)(acc * quot)`)
-//     drops it entirely for a 394-byte object, and `value = (float)(acc * quot)`
-//     replaces `fmulp st(1)` with the non-popping `fmul st,st(1)` at 385/396.
-//     So the question is not how to move the fxch but why msvc6 ranks the
-//     folded compare ahead of it, and no measured shape reverses that ranking.
-//   - The compare and the fxch trade places together, never separately: every
-//     variant lands in one of four classes, `cmp; fxch` (391), `fxch; mov al`
-//     (obj 397), `fxch; fmulp` with the compare sunk past `fstp` (387), or no
-//     fxch at all (394/385). The target's `fxch; cmp` is in none of them.
-//   - `#pragma optimize("a")` does not decide the slot: dropping it holds the
-//     same `cmp; fxch` order at 383, so the epilogue lever and this one are
-//     independent.
-//   - Additionally ruled out here: `/GX /GR /Gs /GF /Gf /Zp1 /Ob2 /Oi /Og /Gi`
-//     (byte-identical objects, mismatch sets compared by hash, not score);
-//     duplicating the 57d0 multiply into both arms (msvc6 duplicates the
-//     `fmul` rather than cross-jumping, so the merge block boundary does not
-//     move); a double accumulator in the arms (241 or worse, the float
-//     round-trip is load-bearing); eight nested association trees with no
-//     temp; the compare's pointer provenance via `ingredient_cursor`/`divisor_ptr`/`slot_p` and via a
-//     late-defined pointer; reading the 0x17 byte at the top of the function
-//     into a char/uchar/int local; the loop's own eager-fxch accumulate shape
-//     mirrored onto the merge; 630 further generated permutations over
-//     scale x numerator x product x compare x return x filler x filler
-//     position (.scratch/spiel622-x87/gen.py, gen2.py).
-//   - Toolchain re-check on this exact shape: sp1 and sp4 give the identical
-//     391 object, sp2 gives 380. No service pack reorders the pair.
-//   The obstacle is msvc6's FP-stack allocator deciding the fxch position from
-//   the scaled operand's type, and the same type choice decides whether the
-//   compare folds. No C89 spelling separates the two.
-//
-//   2026-09-10: search closed. `rebrew match` ran 100 generations without
-//   beating the residual and `rebrew prove` established the two forms
-//   equivalent (EAX, 1 original state vs 1 compiled state), so the function is
-//   recorded PROVEN rather than byte-identical. The 5-byte delta stays in the
-//   linked artifact.
-//
-//   Notes below predate the pragma; scores quoted in them are against 378.
-//   Re-measured against the 386 base, all still inert or worse: the return
-//   expression reassociated five ways (357..386), `value` copied to a separate
-//   float for the tail multiply (358), `p2_wide` read through a volatile alias
-//   (374), a volatile `[esi+0x38]` store (372), a volatile home store (378),
-//   the mask before the store (369), the `divisor_ptr` alias for the store (89), the
-//   compare widened/unsigned/via a hoisted local (inert), the loop as a `for`
-//   (382), and every reassociation of the g_const_half multiply (380..386,
-//   the 372-shape now reaches 380 but reintroduces a dead `fstp st(0)`).
-//   Hoisting integer work (`i = 0`, the `p2_home` alias, a dead `weight`
-//   assignment) above the compare to give the scheduler something to place
-//   there is inert.
-//
-//   Superseded residual notes (7 instructions, 378/396):
-//   - [67..70] 378 shape: mod_value scaled by g_const_half as a float store,
-//     then acc = quot; value = (float)(acc * mod_value). Emits qword fmul
-//     before fxch/fmulp and keeps fstp/jne. Leftover: cmp [esi],0x17 one
-//     instruction early (fmul qword; cmp; fxch; fmulp). kind=*entity after
-//     the multiply is inert; hoisting ingredient_cursor=entity+0x2e there is 91. Reading the
-//     byte into an int local ahead of the multiply is 255 at SIZE_MISMATCH;
-//     `unsigned char` instead of `char` at the compare is inert.
-//   - [111..116] the epilogue emits the same instructions in a different
-//     order: candidate `mov [esi+0x38]` / `mov [esp+0x20],ebp` / `pop edi` /
-//     `fmul [esp+0x18]` / `pop ebp` against the target's `pop edi` /
-//     `mov [esp+0x1c],ebp` / `mov [esi+0x38]` / `pop ebp` / `fmul [esp+0x14]`.
-//
-//     The frame sizes are EQUAL, contrary to an earlier note here. Both
-//     versions address the same two bytes; the displacements differ only
-//     because the target has already popped edi when it forms them.
-//     Homed ebp: candidate [esp+0x20] pre-pop == target [esp+0x1c] post-pop.
-//     Value slot: candidate [esp+0x18] pre-pop == target [esp+0x14] post-pop.
-//     The `fild [esp+0x1c]` in the middle of the block is byte-identical in
-//     both, which pins the alignment. There is no extra local to remove, so
-//     do not chase frame size here: the delta is purely the scheduler
-//     interleaving the two pops with the two stores.
-//
-//     Measured this pass against 378, none kept: `[esi+0x38]` stored from an
-//     int temp after the mask (369); the mask before the `[esi+0x38]` store
-//     (369, hoists `and ebp` ahead of the ftol call); a volatile `[esi+0x38]`
-//     store after the mask (374, 8 structural diffs against 7); `value` used
-//     directly instead of the `mod_value` float temp (373); splitting the
-//     mask into `param2 &= 0xff` plus the home store (inert); an `int*` alias
-//     for the +0x38 store (inert); moving the `p2_home = &param2` alias
-//     declaration (inert); a dead `ingredient_cursor` store to shorten edi's live range
-//     (inert, eliminated). Reusing `divisor` as the loop slot scores 364.
-//
 //   The `unsigned char` second parameter in the forward declaration above is
 //   load-bearing for gm_SumBuildingProductionValues (0x100198b0, 218/355) and
 //   gm_EntityQuerySum (0x10019a70, RELOC); widening it to `int` regresses both.
-//
-//   Residual re-audit 2026-09-09 (391/396, one transposition at 228-232:
-//   target `fxch st(1); cmp byte ptr [esi],0x17`, candidate the reverse).
-//   22 new probes across five categories, all 391 or worse; the order is a
-//   pure msvc6 scheduler choice with no C89 spelling:
-//   - per-statement #pragma is impossible inside a function (C2156); the only
-//     scope is the whole function, and dropping "a" regresses the epilogue
-//     (383) while leaving the transposition intact.
-//   - every statement/sequence split around the merge is inert at 391.
-//   - scaling through the p2_wide double moves the [esi] access into the
-//     target slot but splits it into mov al/cmp al (obj 397, 255).
-//   - a volatile value store (387) puts the fxch first but sinks the folded
-//     cmp past fmulp+fstp: plain store lets the load hoist fully to slot 1,
-//     volatile blocks it entirely, the target needs the partial hoist.
-//   - duplicating the 57d0 scale into both arms grows obj to 403.
-//   Cross-binary: only 5 fxch in the whole .text; no other function shows the
-//   folded-cmp-after-fxch order, so there is no C precedent to copy.
 #pragma optimize("a", on)
 double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 {
@@ -345,6 +157,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	float value;
 	double quot;
 	float mod_value;
+	float quot_f;
 	int i;
 	int min_val;
 	int divisor;
@@ -392,6 +205,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	divisor = (*(unsigned short*) (entity + 0x36) == 0) + *(unsigned short*) (entity + 0x36);
 	divisor_ptr = &divisor;
 	quot = quot / *divisor_ptr;
+	quot_f = (float) quot;
 	min_val = *(int*) (entity_index * 4 + 0x101dd8e0);
 	record = g_entity_type_table + min_val * 0x24d;
 	if (min_val != 0) {
@@ -403,38 +217,19 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	} else {
 		mod_value = g_gv_const_57c8;
 	}
-	/* Copying quot into a separate accumulator makes that accumulator the
-	   destination of the multiply, so msvc6 emits `fxch st(1)` / `fmulp st(1)`
-	   and consumes quot. Written as one expression it keeps quot live and
-	   emits the non-popping `fmul st,st(1)` plus a trailing `fstp st(0)`.
-	   The g_const_half multiply has to stay last: applying it before the
-	   exchange makes msvc6 unfold the 0x17 compare below into
-	   `mov al,[esi]` / `cmp al,0x17`, which is 3 bytes longer.
-	   Re-tested 2026-09-04 against the target's [67..70] order (the qword
-	   multiply BEFORE the fxch).  Four formulations, all worse than the 374
-	   below, so reassociating this site is a dead end:
-	     acc = mod_value * g_const_half; value = (float)(acc * quot);    372
-	     acc = mod_value; acc = acc * g_const_half; ...                  254
-	     acc = quot; value = (float)(mod_value * g_const_half * acc);    254
-	     acc = mod_value * g_const_half; acc = acc * quot;               372
-	     acc = 57d0*mod_value; kind=*entity; acc*=quot; if(kind==0x17)  372
-	     (qword fmul matches, cmp [esi],0x17 too early, fmulp becomes
-	     fmul st(1)/fstp).  acc *= 57d0 then *mod_value: 248 SIZE 398.
-	     fused acc*57d0*mod_value: 255 SIZE 397.
-	     372 muls + volatile entity[0] compare: 258 SIZE 397 (unfolds to mov al).
-	     acc=quot; acc*=(mod_value*57d0); value=(float)acc: 259 SIZE 397
-	     (qword fmul/fxch/fmulp match, unfolds 0x17 to mov al).
-	     same with delayed fstp after the if: 273 SIZE 392 (cmp/fmulp
-	     match, fstp vs jne, CFG 88.4).  volatile fstp before cmp
-	     restores 374 but moves fstp before cmp.
-	   The 372 pair reaches the target's operand order but loses two matches
-	   in the epilogue, so the multiply order and the epilogue instruction
-	   order are coupled; they cannot be fixed independently.
-	   Folding the two assignments into `value = (float)(acc * mod_value)`
-	   holds 378 with the same 7 structural diffs and one less live local. */
-	acc = quot;
-	mod_value = (float) ((double) mod_value * g_const_half);
-	value = (float) (acc * mod_value);
+	/* The quotient is scaled in place as a float register variable that
+	   is its own destination, as the composite loop does with `mod_value`:
+	   msvc6 fetches the old value (`fxch st(1)`, c2 opcode 95, paired with
+	   the qword `fmul`) straight into the `fmulp`, with no copy node after
+	   the fetch.  The scheduler's hold after a fetch (c2 0x10727d01) delays
+	   integer work only while an x87 node is ready within one cycle; here
+	   none is until the `fmul` latency ends, so the 0x17 byte load and
+	   compare issue between the `fxch` and the `fmulp`, as at 0x10019804.
+	   A double copy (`acc = quot`) adds a copy node the hold waits on and
+	   puts the compare after the `fstp`; scaling `mod_value` instead leaves
+	   the fetch behind the compare.  The float rounding emits no code. */
+	quot_f = (float) (quot_f * ((double) mod_value * g_const_half));
+	value = quot_f;
 	if (*(char*) entity == 0x17) {
 		mod_value = value;
 		return (float) ((double) mod_value * g_const_2_2);
