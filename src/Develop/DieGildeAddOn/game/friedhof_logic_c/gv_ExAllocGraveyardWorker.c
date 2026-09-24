@@ -154,14 +154,17 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	*(volatile int*) (grave + 0x10) = 0;
 	{
 		int n;
-		*(float*) (grave + 0x14) =
-		    *(float*) 0x10025680 / (gm_RandomFloat01() * *(float*) 0x100257c8 + *(float*) 0x100257c4);
+		float f;
+		/* The product before the zero stores and the rest after lets the
+		 * scheduler fill the x87 latency with those stores (0x10011ef5). */
+		f = gm_RandomFloat01() * *(float*) 0x100257c8;
 		*(int*) (grave + 0x18) = 0;
 		*(int*) (grave + 0x1c) = 0x447a0000; /* 1000.0f */
 		*(int*) (grave + 0x20) = 0;
 		*(int*) (grave + 0x24) = 0;
 		*(unsigned short*) (grave + 0x28) = 0;
 		*(int*) (grave + 0x2c) = 0;
+		*(float*) (grave + 0x14) = *(float*) 0x10025680 / (f + *(float*) 0x100257c4);
 		/* Index expressions inline, each call inside its store: the index
 		 * temporaries then rank below the strength-reduced n*0x300 (esi),
 		 * n itself stays on the stack and the zeros come from ebx, as at
