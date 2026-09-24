@@ -27,20 +27,20 @@ unsigned int ls_LoadBuildingEntityState(unsigned int);
  * production slots, worker assignments, and field states
  * for graveyard buildings.
  *
- * Shape notes (whole-image linked residue 5404 -> 4741 over the byte-offset form):
- * - The 0x1e arm and the aux loop are counted index loops (`i < 0x40`,
- *   `base + i * 0x18 + N`; `buf + i * 0x60 + N`).  Strength reduction then
- *   gives the reference's `xor ebx,ebx` / `lea [ebx+edx+N]` induction, its
- *   `mov ecx,ebx; add ecx,edx` first site, and `xor esi,esi` inside the aux
- *   guard.  Byte-offset loops (`i += 0x18`) put the load on the left of every
- *   address sum and lose 2 bytes at the first site.
+ * Shape notes (whole-image linked residue 5404 -> 4740 over the byte-offset form):
+ * - The outer loop, the 0x1e arm and the aux loop are counted index loops
+ *   (`ptr + i * 0xa9`; `base + i * 0x18 + N` with `i < 0x40`;
+ *   `buf + i * 0x60 + N`).  Strength reduction then gives the reference's
+ *   `xor ebx,ebx` / `lea [ebx+edx+N]` induction, its `mov ecx,ebx;
+ *   add ecx,edx` first site, `lea esi,[edx+ecx]`, and `xor esi,esi` inside
+ *   the aux guard.  Byte-offset loops (`i += 0x18`) put the load on the left
+ *   of every address sum and lose 2 bytes at the first site.
  * - The state block is `memset` + `|= 1` (docs/msvc6-c-shapes.md section 71).
  *   Its extra candidates are what give the -1 sentinel `ebp` (`or ebp,-1` once,
  *   three `mov [..],ebp`), so the field reads need no `volatile` any more; with
  *   the plain loads the scheduler also hoists each load above the pushes, as
  *   the reference does.
- * - Remaining: the outer loop's `lea esi,[edx+ecx]` operand order, and
- *   `add esp,8` before `mov [ebx],eax` in the 0x4b-0x4d arm. */
+ * - Remaining: `add esp,8` before `mov [ebx],eax` in the 0x4b-0x4d arm. */
 
 
 unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
@@ -50,7 +50,6 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 	char* esi;
 	int load_result;
 	int* ebx;
-	unsigned int offset;
 	int dummy;
 	register int neg1;
 
@@ -64,10 +63,9 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 
 	current_index = 0;
 	if (0 < entity_count) {
-		offset = 0;
 		neg1 = -1;
 		while (current_index < entity_count) {
-			esi = (char*) (offset + g_entity_ptr);
+			esi = (char*) (g_entity_ptr + current_index * 0xa9);
 
 			if (!ls_ReadVfsDataChecked(esi, 1, 1, (void*) stream_ctx)) {
 				return 0;
@@ -269,7 +267,6 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 			*(int*) (esi + 0x30) = 0x1388;
 			*(int*) (esi + 0x95) = neg1;
 			current_index++;
-			offset += 0xa9;
 		}
 	}
 
