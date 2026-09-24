@@ -585,8 +585,12 @@ int __cdecl srv_LoadBuf(void)
 							return -1;
 						}
 					}
-					status = *conn & 0xffffff7d | 0x200;
-					goto set_status;
+					/* Stored here rather than through `status`: the load is then
+					 * a scratch pick (c2 fcn.10721c0f) instead of a copy into
+					 * status's register, which advances the pick cursor once and
+					 * gives the lobby sprintfs the reference's ecx/edx. */
+					*conn = *conn & 0xffffff7d | 0x200;
+					goto done_inner;
 				}
 				if (status & 0x200) {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x5df, "LOBBY mode", 1);
