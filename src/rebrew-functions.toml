@@ -158,12 +158,11 @@ status = "EXACT"
 ["SERVER.0x10006580"]
 size = 658
 toolchain = "msvc-6.0-sp6"
-status = "NEAR_MATCHING"
+status = "RELOC"
 analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
-blocker = "§11 memset prelude — pure C cannot emit — parked"
-blocker_delta = 444
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+updated_by = "test"
+updated_at = "2026-09-24T21:06:48+00:00"
+blocker = "inline-asm align-up fill prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["SERVER.0x10006820"]
 size = 188
@@ -1365,12 +1364,11 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x100174d0"]
 size = 1088
-status = "NEAR_MATCHING"
+status = "RELOC"
 ghidra = "gm_AllocGebaeude"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 435
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+updated_by = "test"
+updated_at = "2026-09-24T21:06:45+00:00"
+blocker = "inline-asm align-up fill prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["SERVER.0x10017910"]
 size = 145
