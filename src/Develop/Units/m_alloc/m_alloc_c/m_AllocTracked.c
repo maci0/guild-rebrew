@@ -19,6 +19,11 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
  * tracking: records the source location string, updates group
  * counters, and maintains the allocation list. */
 
+// 2026-09-25: byte-exact at the link.  The `nodev` int shadow of `node` is
+// gone and the count_max guard is the plain `count_total > count_max`; the
+// history below that credits `nodev` with the node reload or the zero
+// register was measured against earlier bodies and no longer applies.
+
 // FIXED 2026-09-13 (round 104): the group-list sentinel is an EXTERNAL symbol,
 // not a literal, and that is what the whole "unfolded null test" wall was.
 // The reference loads the root node's ADDRESS and then tests it:
@@ -335,7 +340,6 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	char* slot;
 	char* p;
 	unsigned int sz;
-	int nodev;
 	int slots;
 	void* cur;
 
@@ -374,34 +378,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 				 * and msvc6 emits them in source order, so the source
 				 * lists them that way.  Under the old /G6 /Oy- pin this
 				 * order cost +1 linked; under plain /O2 /Gd it is -6
-				 * linked and the block is byte-identical.
-				 *
-				 * Round 184 corrected the span arithmetic that had
-				 * been misdirecting this function's lanes.  The
-				 * plain `count_total > count_max` guard (which does
-				 * emit the reference's `cmp eax,ecx` and reaches
-				 * aligned 233/249, the best on this function) was
-				 * recorded as "-16 span".  It is really **-2 bytes
-				 * of CODE**: the reference body is 658 and pads to a
-				 * 672 COMDAT span with 14 nops, while 656 is already
-				 * 16-aligned and pads to itself.  At align 0x10,
-				 * 656 -> 656 but 657 -> 672, so the recoverable
-				 * quantity was +1 byte, never +16.
-				 * The whole 2-byte deficit is ONE instruction: the
-				 * reference copies count_total twice
-				 * (0x100067d8 `mov eax,edi`, then 0x100067e1
-				 * `mov ecx,edi`) and stores count_max from the
-				 * SECOND copy; we store from the first.
-				 * Supplying it with `count_max =
-				 * *(volatile int*)&count_total` DOES hold span 672
-				 * at aligned 233 -- the arithmetic works -- but the
-				 * volatile costs +40 linked, so the combination
-				 * still loses.  Re-measured under /O2 /Gd with the
-				 * store order below: plain guard +35 linked, volatile
-				 * store read +30.  Object-inert (same 603/658 or the
-				 * 656-byte body): a named temp for either read, `++`
-				 * in the compare, `count_max < count_total`, int casts,
-				 * `return mem` inside the branch. */
+				 * linked and the block is byte-identical. */
 				node->count_total = 0;
 				node->size_total = 0;
 				node->count_max = 0;
@@ -412,7 +389,6 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			}
 		}
 	}
-	nodev = (int) node;
 	/* The reference computes this in a register and writes it back
 	 * (`mov eax,[esi+0x20]; inc eax; mov [esi+0x20],eax`, 7 bytes at
 	 * 0x100066d7); a plain `node->count++` is dead and folds to
@@ -470,7 +446,6 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	 * spelling emitted `sub eax,edi; jns` (-2 linked under /O2 /Gd). */
 	slots = *(volatile int*) &g_array_count;
 	if (g_stat2 < slots) {
-		node = (struct GroupNode*) nodev;
 		slot = (char*) g_array_ptr;
 		i = 0;
 		while (i < slots) {
@@ -498,8 +473,13 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 		if (g_stat2 > g_stat4) {
 			g_stat4 = g_stat2;
 		}
+		/* The reference stores count_max from a second copy of count_total
+		 * (0x100067e1 `mov ecx,edi`), not from the compare's `eax`.  That
+		 * copy appears only once `node` is used directly: the old
+		 * `nodev = (int) node` shadow, reloaded into `node` at the top of
+		 * this block, let c2 reuse the compare's copy for the store. */
 		node->count_total++;
-		if (node->count_total - node->count_max > 0) {
+		if (node->count_total > node->count_max) {
 			node->count_max = node->count_total;
 		}
 	} else {
