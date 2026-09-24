@@ -3682,6 +3682,8 @@ Probe recipe as Finding 64, plus: to see a spill, grep the loop body for the sam
 
 ## Finding 66: `CrashDump`'s 2-register frame difference is FOUR deferred restores, not a prologue shape (round 992)
 
+> **Superseded (round 1145):** the deferred save is reproducible from C: early exits that `return` instead of jumping to shared exit code (see `msvc6-c-shapes.md` section 200).
+
 Round 927 recorded the sharpest prior statement of this carrier's first divergence: *"the frame difference is
 2 extra callee-saved registers, not merely 4 stack bytes"*: the reference is
 `sub esp,0x280; push ebp; push esi`, ours is `sub esp,0x284; push ebx; push ebp; push esi; push edi`.
@@ -3731,6 +3733,8 @@ liveness window rather than from the frame number.
 **Measured this round:** no source edit; residue 8,628 unchanged.
 
 ## Finding 67: `CrashDump`'s deferred save is a REGISTER-ROLE assignment, and the header's −2 is stale (round 993)
+
+> **Superseded (round 1145):** the deferred save is reproducible from C: early exits that `return` instead of jumping to shared exit code (see `msvc6-c-shapes.md` section 200).
 
 Finding 66 established that the reference saves `ebx`/`edi` at `0x1000282c` rather than in the prologue.
 Round 993 located the cause, and it is not a save placement.

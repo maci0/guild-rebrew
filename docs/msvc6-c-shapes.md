@@ -8539,6 +8539,15 @@ each measured with `scripts/linktest.sh`:
   shadow made c2 store `count_max` from the compare's eax; with `node` used directly it stores from a
   second copy of `count_total` (`mov ecx,edi`) as the reference does (-15, byte-exact).
 
+- **Cross-jumping only merges into the block that falls through to the jump target.** Two jumps to
+  one label with identical tails never merge; the group needs its own join block whose statement
+  compiles identically at every site and needs no scratch register (CrashDump's group-A switch arms
+  join on the `hCrashLog` and `pStack` stores; an empty label collapses). Arms with three scratch
+  temporaries keep a group on one starting register (the picker rotates eax, ecx, edx per function).
+- **Deferred callee-saved saves need the skipping paths to return, not rejoin.** An early `return`
+  lets c2 save ebx/edi late (CrashDump at 0x1000282c, as in the reference); a `goto` into shared exit
+  code saves them in the prologue. Values used in the early region pin their registers early.
+
 Flags follow the source: after these rewrites cm_ExSellObjekt and ls_LoadBuildingEntityState match
 only without their `/Ow`, and the `vfs_OpenStream` size is its 701-byte COMDAT extent (jump table
 included), not the 667-byte body.
