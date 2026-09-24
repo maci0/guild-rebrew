@@ -1012,6 +1012,7 @@ blocker = "induction/operand layer + state_ptr store fold; dispatch arms already
 blocker_delta = 806
 updated_by = "verify"
 updated_at = "2026-09-24T18:07:38+00:00"
+cflags = "/O2 /Gd /Ow"
 
 ["SERVER.0x10012eb0"]
 size = 884
