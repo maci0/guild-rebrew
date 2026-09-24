@@ -73,9 +73,14 @@
  *     evaluates acc - decay first and needs fld st(0) / fstp st(1);
  *   - the 14-trait blend weight is a float local and the mother term has
  *     no (double) cast (fld st(0); fsubr; fxch; fmul mem);
+ *   - the father term is `(float) (K - w) * father`: with the float
+ *     rounding the first fmul consumes the op-0x162 node that c2 puts
+ *     after fsubr (scheduler latency 3), so `push 0xa` issues right after
+ *     fsubr.  With a double product the fmul takes fsubr's result directly,
+ *     is ready the next cycle and the push lands after the second fmul;
  *   - the no-parent trait loop stores dst[0..2] and steps both pointers
  *     at the end of the body.
- * Linked: 17 differing bytes.  Constructs the reference pins down beyond
+ * Object: 8 differing bytes.  Constructs the reference pins down beyond
  * the list above (each measured against the positional probe):
  *   - the header -1 fill, the no-parent -1 fill and the parent path's five
  *     -1 ref slots are store loops, not memset or separate stores
@@ -97,12 +102,10 @@
  *   - no-parent trait loop: dst[2] is the gm_RandomMod(0xa) value and
  *     dst[1] = dst[0] * 0.x, as in the parent loop (0x90 / 0x8c); the
  *     earlier source had them swapped.
- * Open: (1) the two edge reload blocks at 0x10018c28/0x10018c38 load
+ * Open: the two edge reload blocks at 0x10018c28/0x10018c38 load
  * type/arg6 in the opposite order (the order fits ascending c2 node id,
  * appended on one edge and prepended on the other; our arg6 piece gets
- * the lower id); (2) `push 0xa` in the parent 14-trait blend is scheduled
- * after the second fmul, the reference places it after fsubr.  Both are
- * ordering decisions with identical instructions on both sides.
+ * the lower id).  The instructions are identical on both sides.
  * The per-trait fimul needs the father byte in memory; the trait_home
  * alias gives it, a plain int local is enregistered and gets fild/fmulp.
  *
@@ -754,8 +757,8 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 
 		rnd01 = gm_RandomFloat01();
 		*(float*) (slot + 0x88 + i * 0xc) =
-		    (float) ((g_dbl_const_7d8 - rnd01) *
-		                 (double) *(float*) (father + 0x88 + i * 0xc) +
+		    (float) ((float) (g_dbl_const_7d8 - rnd01) *
+		                 *(float*) (father + 0x88 + i * 0xc) +
 		             rnd01 * *(float*) (mother + 0x88 + i * 0xc));
 		*(float*) (slot + 0x90 + i * 0xc) =
 		    (float) ((double) (gm_RandomMod(0xa) & 0xffff) +
