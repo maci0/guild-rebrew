@@ -1510,13 +1510,11 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10018850"]
 size = 3689
-cflags = "/O2 /Gd /Oa /Ow"
-status = "STUB"
-note = "SIZE 3209/3689 (480B short): full C reconstruction of the 3689-byte target (slot scan, refs zeroing, record header init, debug log, type-0x10 citizen path, gender/class checks, parent resolution, stat interpolation, per-type finalization, id assignment). Candidate contains the full tail (diff nulls are aligner drift) but msvc6 codegen diverges structurally: 909 vs 1056 instructions, edge_sim 7.6% (near-diag STRUCTURAL 92%), FPU scheduling + branch layout differences throughout. prove path-explodes (no terminal states, LB 10/20). Status promoted STUB->SIZE_MISMATCH 2026-08-30 (was stale from the naked-asm era). Semantics verified identical by hand."
-blocker = "Codegen divergence, NOT missing structs: the 943-line reconstruction compiles to the exact 3689B (prologue/conventions byte-match; pure slot scan over the 0x100358a0 record array, stride 0x21c, 0x300 slots — no heap calls, so no allocator/ctor plumbing is needed) but 48 instruction runs diverge; largest wall at the colv/rowv sympathy loop where the reference zero-extends via xor eax,eax; mov ax,[ebp] and we emit and eax,0xffff. Flag-insensitive (docs/msvc6-c-shapes.md section 94 sweeps). Escalation: verified naked+__asm path or isel control."
+status = "NEAR_MATCHING"
+blocker = "17 linked bytes, two ordering walls with identical instructions on both sides: edge-block reload order at 0x10018c28/0x10018c38 (split-piece node ids) and push 0xa placement in the parent 14-trait blend (scheduler hazard rule); traced in c2, see docs/codegen-walls.md section 49"
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-blocker_delta = 2859
+updated_at = "2026-09-24T18:04:51+00:00"
+blocker_delta = 17
 
 ["SERVER.0x100196c0"]
 size = 81
