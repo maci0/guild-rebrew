@@ -215,7 +215,6 @@ int g_office_role_templates = 0;
 /* inflate_blocks / inflate_blocks_free are provided by the vendored
  * references/zlib-1.1.3/infblock.c; stubs here would shadow the real ones. */
 int g_chain_handler_table[1] = {0};
-int __cdecl RecvGameSavegame(void) { return 0; }
 char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[1] = "";
 char s_cm_ChkMoveCredits____Not_enough_m_1002c774[1] = "";
 char s_cm_ExAllocThemaPredigt____Execut_1002d184[1] = "";
@@ -270,6 +269,10 @@ unsigned int g_crc_table_241a0[256] = {0};
 unsigned char g_dynamic_entities[1] = {0};
 char* g_entity_type_table = 0;
 unsigned short* g_query_base = 0;
+int g_players_synced;
+unsigned int g_next_tick_time;
+unsigned char g_host_flags;
+char g_module_path[1];
 
 /* removed round 1385: this stub displaced LIBCMT.lib(fputc.obj) at
    0x10023890; the reference's _putc is the library body. */

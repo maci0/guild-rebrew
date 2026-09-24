@@ -271,12 +271,10 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x100093a0"]
 size = 2434
-status = "NEAR_MATCHING"
+status = "RELOC"
 analysis = "Core orchestration loop. Phase 1 (Lobby): Loops accepting connections until connected_players == g_max_players and every connected player has the 0x800 ready flag. Then transitions into Phase 2 (Transfer). | PHASE 0: Read game.ini config — server port (default 7531), game path, max players | Initialize server: thread priority, logging, packet pool, game data, listen socket | PHASE 1 — LOBBY: Wait for all players to connect and set ready flag (0x800). Broadcasts server info every 3 seconds. Processes network I/O. Handles disconnect requests (0x1000) and host disconnect (0x400 = terminate). | PHASE 3 — DATA RECEIVE: Wait for host to send savegame data (flag 0x08 cleared when done). Then call RecvGameSavegame to deserialize game state. | PHASE 5 — PLAYER ALLOCATION: Wait for each player to allocate their character entity (flag 0x10 set, cleared when cmd received). | PHASE 6 — GAME LOOP: Main simulation tick. Checks sync flags (0x40=sync data, 0x20=sync ready). Advances game clock, broadcasts sync packets (cmd 0x1E). Processes commands via ProcessAndBroadcastAllCommands. Speed controlled by g_game_speed_value. | PHASE 4 — DATA SEND: Stream savegame to all non-host clients in 128-byte chunks (cmd type 0x09). First sends total size (cmd type 0x08). Clears flag 0x04 when transfer complete per player."
-blocker = "GA_CEILING (measured): 2073/2434 at /O2 /Gd (optimal across sweeps; /Oa /Ow /Ox /Oy- /O1 /Od all worse). First hunk root cause proven: msvc6 branch-edge constant substitution rewrites the store after a cmp reg,const branch — every spelling that emits cmp reg,const substitutes the constant into the store (== 0xffffffff, (int)==-1, const-first, copy-var), every substitution-killer (!~x, x+1==0) changes the compare isel; the reference's cmp eax,-1 + mov [x],eax pair is unreachable from C89 on this cl build. Residual hunks are isel/scheduling fixed points: lea vs add at 0x1000984b, test al,4 schedule at +0x58f, je/jne loop-tail swap, +0x803 and +0x904 global read order, +0xac register pairs. Object size exact (2434)."
-updated_by = "verify"
-updated_at = "2026-09-20T18:12:11+00:00"
-blocker_delta = 359
+updated_by = "test"
+updated_at = "2026-09-24T11:53:28+00:00"
 
 ["SERVER.0x10009d30"]
 size = 296
