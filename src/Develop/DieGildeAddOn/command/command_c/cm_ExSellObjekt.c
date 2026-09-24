@@ -58,26 +58,26 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  *    (reference: `sub ecx,edx; mov eax,ecx; mov [ebx+0xe],ecx`).
  *  - The `= 0` initialisers follow the reference's store order.
  *  - dest-finalize works on dest_game_object itself, never copied into
- *    source_object: the reference loads it
- *    into ebx before the `cmd+0x10` test because the final `result+6`
- *    store reads it on both paths.
+ *    source_object: the reference loads it into ebx before the
+ *    `cmd+0x10` test because the final `result+6` store reads it on
+ *    both paths.
  *  - The gm_AllocRaum null check is success-first, which lays the three
  *    dest error tails out in the reference's order.
- *  - After the dest join, dest_dynamic_entity and dest_owner_entity are
- *    read through volatile (one load each into a temp where the reference
- *    loads once): the reference holds neither in a register across the
- *    join.  Plain reads keep them in ebp/edi and move the join block.
  *  - In the gm_AllocObjekt arm the category address is taken into
  *    capacity_check before the `+0xe` increment and dereferenced twice
  *    after it: the reference materialises the address (`add eax,edi`) and
  *    reuses edi for the increment.  Read inline, the address folds into
  *    `[eax+edi]`, edi stays live and the increment takes ebp, 1 byte short.
  *
+ * No local is volatile: the volatile reloads earlier rounds used to keep
+ * dest_dynamic_entity and dest_owner_entity out of registers across the
+ * dest join are byte-neutral or worse once the shapes above are in place.
+ *
  * Remaining differences (object, /O2 /Gd /Ow): the 0x1dd arm layout at
  * 0x1000dc16, ecx/edx swapped in the source-finalize category load at
- * 0x1000de2b, and three loads the scheduler hoists above a store or an
- * `add esp` (0x1000df90, 0x1000e053, 0x1000e0f5).  Compiled without /Ow,
- * only the first and 0x1000df90 remain.
+ * 0x1000de2b, and two loads the scheduler hoists above a store
+ * (0x1000e053, 0x1000e0f5).  Compiled without /Ow only the first remains
+ * (linked -16 more, measured 2026-09-25 with the flag dropped by hand).
  *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29; not
  * re-proven after the 2026-09-25 reshaping, whose edits keep every call,
@@ -104,8 +104,6 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	void* source_existing_entity;
 	char log_buffer[512];
 	short entity_type;
-	short* dest_dyn_reload;
-	short* owner_reload;
 	char obj_category;
 
 	source_owner_entity = (short*)0;
@@ -369,28 +367,27 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 					*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + 1;
 					if ((*capacity_check == '\x17' || *capacity_check == '%') &&
 						(*dest_dynamic_entity == 0x2a || *dest_dynamic_entity == 0x116) &&
-						(owner_reload = *(short* volatile*)&dest_owner_entity) != (short*)0 &&
-						((char)owner_reload[1] == '\x06' || (char)owner_reload[1] == '\a')) {
+						dest_owner_entity != (short*)0 &&
+						((char)dest_owner_entity[1] == '\x06' || (char)dest_owner_entity[1] == '\a')) {
 						*(int*)(dest_game_object + 0xe) = 4;
 					}
 				}
 			}
 		}
 		*(int*)(((PlayerSlot*)g_connections)[(unsigned char)cmd[3]].data + 0x264200) = *(int*)(dest_game_object + 1);
-		if (*(int*)(cmd + 0x23) != 0 && *(short* volatile*)&dest_owner_entity != (short*)0) {
+		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			gm_SubObjekt(
 				*(void**)(dest_owner_entity + 2),
 				(uint) (unsigned short) g_entity_slot_table[(unsigned char) cmd[0x1e] * 189],
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
 			);
-			dest_dyn_reload = *(short* volatile*)&dest_dynamic_entity;
-			if (dest_dyn_reload != (short*)0) {
-				if (*dest_dyn_reload == 0x1db) {
+			if (dest_dynamic_entity != (short*)0) {
+				if (*dest_dynamic_entity == 0x1db) {
 					*(int*)(dest_owner_entity + 0xd0) =
 						*(int*)(dest_owner_entity + 0xd0) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
 					goto LAB_1000e0e7;
 				}
-				if (*dest_dyn_reload == 0x1dc) {
+				if (*dest_dynamic_entity == 0x1dc) {
 					*(int*)(dest_owner_entity + 0xd2) =
 						*(int*)(dest_owner_entity + 0xd2) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
 					goto LAB_1000e0e7;
