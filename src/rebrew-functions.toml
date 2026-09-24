@@ -324,12 +324,10 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x1000a570"]
 size = 750
-status = "NEAR_MATCHING"
+status = "RELOC"
 analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
-blocker = "msvc6 scheduling/register naming at exact 750 size, 3 clusters: cmd-3 push eax after the two stores; lobby sprintf eax/ecx/edx rotation plus the coupled second-sprintf buffer lea; unexpected-request push ebp / mov [ebp],ecx swap"
-blocker_delta = 54
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+updated_by = "test"
+updated_at = "2026-09-24T21:30:48+00:00"
 
 ["SERVER.0x1000a860"]
 size = 131
@@ -362,12 +360,10 @@ updated_at = "2026-09-22T05:50:31+00:00"
 ["SERVER.0x1000aac0"]
 size = 639
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "NEAR_MATCHING"
+status = "RELOC"
 analysis = "Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ahm_ProcessEntityChain."
-blocker = "PROVEN-UNREACHABLE (round 192), not a search-depth wall: all 15 bytes are one fault, the join block 'test ebx,ebx; je unlink; jmp advance' at 0x3f that the reference keeps and msvc6 deletes -- because the test is provably-true dead code. Both predecessors enter with ebx nonzero (arm5 falls through from the while guard; arm6 is reached only because the test was nonzero, and its backward jne fires before the xor ebx,ebx at 0x6a), so 'je' can never be taken and msvc6 constant-folds it away. C cannot request a test whose operand the compiler proves nonzero. Byte-neutral (14 vs 14), so size is not the obstacle. sp5-pp mismatches the identical 15 offsets, confirming dataflow rather than sp6 scheduling. Block order is already reference-exact; the older 'arm order' framing was wrong. Reopens only on evidence of an unoptimised region or inline asm"
-blocker_delta = 15
-updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+updated_by = "test"
+updated_at = "2026-09-24T21:30:54+00:00"
 
 ["SERVER.0x1000ad40"]
 size = 768

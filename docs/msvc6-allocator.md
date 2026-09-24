@@ -1908,6 +1908,21 @@ first and gets the higher piece ids. Traced in `gm_AllocSpieler`:
 The second pass pops a free list that is not monotonic, so a lower first-pass id for
 `type` does not guarantee the flip.
 
+**Block layout, traced (round 1145).** Three passes decide block order and jump shape:
+- **Layout** is the reverse postorder of a depth-first walk that visits a conditional block's TAKEN
+  target before its fallthrough: `0x10703558` builds the postorder (chained through block
+  +0x10/+0x14), `0x107351b7` relinks the blocks in reverse; the pass runs from `0x10705166`, called
+  by the driver at `0x107603b2`.
+- **Jump inversion** (`0x10705507`, from `0x107053c9` in the jump optimiser `0x10705193`) turns
+  `jcc L1; jmp L2; L1:` into `jncc L2` only when the jmp block holds nothing but the jmp
+  (`0x10703ed5`). A dead store in that block (cm_ProcessCommandQueue's `ok = 0`) keeps it non-empty
+  and so keeps the reference's `jcc; jmp` pair.
+- **Late block move** is loop 1 of `0x10724a49`: a block nothing falls into, up to its first
+  unconditional jmp or ret, moves behind the forward jmp that targets it. Loop 2 of the same
+  function duplicates jump targets of 20 bytes or less.
+Scheduler candidate/issue points: `0x107279c2` and `0x10727a51` (node +0x1c tuple, +0x2c priority,
++0x36 sequence, +0x30 earliest cycle). Tracers: `.scratch/c2trace-layout/` (gitignored).
+
 **The instruction scheduler** is the cycle loop at `0x10727977`: per cycle and pipe it walks
 a ready list ordered by priority (`+0x2c`, descending, ties by sequence `+0x36`), checks
 pairing (`[0x10799214]`), two hazard routines (`0x10727ca9`, `0x10727d01`) and the earliest
