@@ -42,9 +42,8 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[];
  *   - +0xcb: the 0x21c stride chain is `lea eax,[eax+eax*8]; lea
  *     edx,[eax+eax*4]` where the reference keeps it in edx.
  *   - +0xf6: the reference emits `or eax,-1` before the 0xffff store.
- *   - +0x119..+0x17d: the reference loads `mov dl,1` in the citizen-count
- *     slack and reloads cmd_payload right after the object-id writeback;
- *     ours loads `dl` after the dynamic load and the reload after `[esi+8]`.
+ *   - +0x119: `mov dl,1` and the slot-index store are swapped.
+ *   - +0x148: the cmd_payload reload and the `[esi+8]` store are swapped.
  *   - +0x23c: the slot+0x18 copy is stored after the second product; the
  *     reference stores it after the first. */
 
@@ -135,6 +134,10 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		*(char*) (slot + 2) = 0;
 		*(int*) (slot + 4) = seq;
 		g_next_object_id = seq + 1;
+		/* Written after slot+0x1e4, msvc6 emits the cmd_payload reload after
+		 * the whole slot+0x1f0..+8 run; here it follows the object-id
+		 * writeback as at 0x1000bf38. */
+		*(char*) (slot + 8) = 0x64;
 	}
 
 	*(int*) (slot + 0x1f0) = 0;
@@ -144,7 +147,6 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	*(char*) (slot + 0x217) = 0;
 	*(char*) (slot + 0x218) = (char) one;
 	*(int*) (slot + 0x1e4) = 0x3f800000;
-	*(char*) (slot + 8) = 0x64;
 	/* The volatile read forces the reference's separate `mov ecx,[esp+0x1c]`
 	 * at 0x1000bf48 instead of reusing a register that already holds the
 	 * pointer.  It belongs here at the use site, not in the counter block:
