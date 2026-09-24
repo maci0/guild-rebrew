@@ -8488,3 +8488,48 @@ c2 creates register candidates for both arms and for `A - B` even where they are
 emitted, so these spellings also move node ids (`msvc6-allocator.md`, "Node ids are
 recycled"). Constant spellings c1 folds leave the IL unchanged: `0xffu`, `(char) 0x7f`,
 `'>'` for `0x3e`, `0x17fff` or `-0x8001` stored to an `unsigned short`, `*&param`.
+
+## 200. Carrier wave, round 1145: the documented walls that were source shapes
+
+Nine carriers closed to 0 linked bytes in one round (cm_ExCopyEntityData, ls_LoadBuildingEntityState,
+vfs_OpenStream, gm_FindNextFilteredEntity, cm_ExSellObjekt, gm_CheckInventoryCapacity,
+gm_ObjectsAvailble, vfs_ReadCompressed, cm_ExProdObjekt), and gm_AllocGebaeude went 328 -> 19. Every
+change is in the function's own `.c` file and its header records the load-bearing shape. The shapes,
+each measured with `scripts/linktest.sh`:
+
+- **A pointer-compare scan is a counted index loop.** `cmp ptr, base+n*stride; jb/jl` comes from
+  `for (i = 0; i < N; i++)` over `base + i*stride`: c2 strength-reduces the index to the pointer test,
+  and a constant `0 < N` start folds the entry test. Hand-written pointer loops gave rotated scans,
+  lost `mov ebp,0xffff` guard constants and merged epilogues (cm_ExCopyEntityData -463,
+  ls_LoadBuildingEntityState, gm_ObjectsAvailble, gm_CheckInventoryCapacity, cm_ExProdObjekt).
+- **A `return` inside a loop merges every return into one far block.** Without it, each entry guard
+  keeps its own inline `xor eax,eax; pop esi; ret` (gm_FindNextFilteredEntity -226). This retires
+  codegen-walls 2 and 39-43 as walls.
+- **Duplicated source arms become the reference's out-of-line block.** `else { x = 0; goto done; }`
+  written per case is merged by msvc6 into one block placed out of line; a single `else` or an
+  `&&`/`||` chain places it inline (vfs_OpenStream, gm_FindNextFilteredEntity).
+- **Clamps assign a separate variable in every arm**, `clamped = val` in the in-range arm too. That
+  gives the reference's empty in-range `jmp store` and register arms; clamping in place gives byte
+  immediates and out-of-line cold arms (cm_ExCopyEntityData).
+- **One expression holding two calls keeps the first result in a compiler temporary** across the
+  second. cm_ExSellObjekt's unexplained 4-byte frame hole was that temporary; writing the weight check
+  as one expression matched every frame slot (-662).
+- **A `volatile` load is the C form of the scheduling barrier.** c2 does not fold it into `[eax+ebx]`,
+  so `mov ecx,eax; add ecx,ebx; mov cl,[ecx]` comes out (gm_AllocGebaeude; supersedes the "asm only"
+  conclusion of section 69 and codegen-walls 4 and 6). Conversely, `volatile` reads added to pin a
+  register were often the cause of the residue: removing them paid in cm_ExCopyEntityData,
+  cm_ExSellObjekt, ls_LoadBuildingEntityState, vfs_ReadCompressed and cm_ExProdObjekt.
+- **Byte flags through a bitfield struct** give `and al,0xf6; xor al,cl; or al,bl` and the matching
+  register roles (vfs_OpenStream). The same rewrite exposed a real bug: `sprintf` was passed mode18
+  twice where the reference passes mode14 then mode18.
+- **A float blend as `v += a; v -= b;` on one local** gives `faddp`/`fsubp` with no trailing
+  `fstp st(0)` (ahm_ExAllocAlchemist; the header had called `faddp` unreachable).
+- **A state block written as `memset` plus `|= 1`** adds allocation candidates that give the -1
+  sentinel `ebp` (ls_LoadBuildingEntityState). A 14-byte struct copy from a named global gives
+  absolute operands where a literal-address cast puts the address in a register (gm_AllocGebaeude).
+- **A dead initialiser orders frame slots.** `query = 0;` at the top put `query` and `slots` on the
+  reference's `[esp+0x10]`/`[esp+0x14]` (gm_ObjectsAvailble).
+
+Flags follow the source: after these rewrites cm_ExSellObjekt and ls_LoadBuildingEntityState match
+only without their `/Ow`, and the `vfs_OpenStream` size is its 701-byte COMDAT extent (jump table
+included), not the 667-byte body.

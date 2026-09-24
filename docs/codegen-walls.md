@@ -70,6 +70,9 @@ either did nothing or moved a different decision instead. `msvc6-c-shapes.md` §
 
 ### 2. `msvc6` merges byte-identical early-return epilogues unconditionally
 
+> **Superseded (round 1145):** the merge follows a `return` inside a loop; without one each guard keeps its own epilogue. See `msvc6-c-shapes.md` section 200.
+
+
 The reference **does not merge**. On `gm_FindNextFilteredEntity` (0x10016f80) it keeps **five
 `ret` sites**: three byte-identical short epilogues (`xor eax,eax; pop esi; ret` at `+0x17`,
 `+0x27`, `+0x75`) and two byte-identical long ones (`+0x141`, `+0x155`). Each short one is
@@ -129,6 +132,9 @@ oscillates ±48 and returns to 0, and all four reference `xor`s are present: the
 
 ### 4. Address folding and strength reduction
 
+> **Superseded (round 1145):** a `volatile` load defeats the `[reg+reg]` fold, and counted index loops reproduce the reference's strength reduction. See `msvc6-c-shapes.md` section 200.
+
+
 - **`base + idx` always folds to one `[reg+reg]` operand.** Nineteen spellings on
   `gm_AllocGebaeude`: pointer cast, array subscript, two-step pointer, `idx << 6`, `(unsigned)`
   cast, `int*`-scaled, `&arr[..]`, named intermediates, split across two statements, all emit
@@ -160,6 +166,9 @@ it also leaves the composition band, so it fails on layout as well as score.
 no win (`/G6` crashes to 135 at object 1056).
 
 ### 6. The largest measured win was forbidden by the constraints
+
+> **Superseded (round 1145):** the barrier's effect is reachable from C with a `volatile` load (gm_AllocGebaeude 328 -> 19). See `msvc6-c-shapes.md` section 200.
+
 
 On `gm_AllocGebaeude`, `__asm { nop nop nop }` used as a scheduling barrier measured
 **matched 683 -> 830** and `matched-reloc` 823 -> 970 at an unchanged object size, because it
@@ -2452,6 +2461,9 @@ is why every per-carrier probe this project has run (hundreds of them, documente
 carrier by a few bytes at most or cost more than it recovered.
 
 ### 47. The four backend mechanisms, named and separated (round 1105)
+
+> **Amended (round 1145):** block placement and tail merging are reachable from source (loop form, in-loop returns, duplicated arms); nine carriers closed that way. See `msvc6-c-shapes.md` section 200.
+
 
 Earlier rounds used "the scheduler" as a catch-all. It hides four distinct passes, and they differ in whether
 source can reach them. Naming them separately is what makes the attribution table in §46 readable.
