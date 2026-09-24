@@ -1502,11 +1502,9 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10018850"]
 size = 3689
-status = "NEAR_MATCHING"
-blocker = "17 linked bytes, two ordering walls with identical instructions on both sides: edge-block reload order at 0x10018c28/0x10018c38 (split-piece node ids) and push 0xa placement in the parent 14-trait blend (scheduler hazard rule); traced in c2, see docs/codegen-walls.md section 49"
-updated_by = "verify"
-updated_at = "2026-09-24T18:04:51+00:00"
-blocker_delta = 17
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-24T21:22:51+00:00"
 
 ["SERVER.0x100196c0"]
 size = 81

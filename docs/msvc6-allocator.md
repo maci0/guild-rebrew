@@ -1874,7 +1874,7 @@ candidates, giving `ent` 16 + 12 * 18 = 232 and colouring it before the parent l
 folding the `n` and `draw` locals into their expressions brought it to 10 and the parent
 loops to the reference's registers.
 
-**Node ids are recycled.** New nodes (`fcn.107119e1`) pop a LIFO free list at `0x107ae038`
+**Node ids are recycled.** (Round 1145: the reload order below was flipped from source by giving the dead parameter `location` three more webs; see codegen-walls section 49.) New nodes (`fcn.107119e1`) pop a LIFO free list at `0x107ae038`
 and keep the popped node's old id; only an empty list takes the counter at `0x1079d74c`.
 Split pieces therefore get ids from whatever was freed last. The reload order in
 `gm_AllocSpieler`'s two edge blocks (0x10018c28/0x10018c38) fits ascending piece id,

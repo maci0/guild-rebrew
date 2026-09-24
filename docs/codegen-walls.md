@@ -2517,6 +2517,13 @@ instruction displacement the way the literal does. The attested name remains in
 
 ### 49. `gm_AllocSpieler`: two ordering differences with identical instructions (17 linked bytes)
 
+> **Resolved (round 1145), both sites, byte-exact.** `push 0xa`: rounding the father term to float
+> (`(float) (g_dbl_const_7d8 - rnd01) * father_value`) makes the first `fmul` wait on the node c2
+> inserts after `fsubr` (op 0x162, latency 3), so it is ready at cycle 6 and the push issues at cycle 4
+> after `fsubr`. Edge reloads: reusing the dead parameter `location` in place of `n` at three sites
+> gives it three more webs; parameter webs take ids from the free list, which moves `type` from
+> first-pass id 61 to 30 and flips the split order. A parameter's web count sets its webs' ids.
+
 After `msvc6-c-shapes.md` sections 197 and 198 the function differs in 17 linked bytes, in
 two places where both sides emit the same instructions in a different order. Both
 mechanisms were traced in c2 12.00.9782 (`msvc6-allocator.md`).
