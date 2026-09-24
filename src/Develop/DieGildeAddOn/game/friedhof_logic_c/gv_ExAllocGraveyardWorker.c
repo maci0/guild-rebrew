@@ -148,9 +148,10 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 			*(unsigned char*) (grave + 0x80 + n) = *(unsigned char*) ((char*) entry + 0x24 + n) >> 1;
 	}
 	*(unsigned char*) (grave + 9) = *(unsigned char*) ((char*) entry + 0x38);
-	*(volatile int*) (grave + 0x10) = 0;
 	strcpy((char*) grave + 0x30, (char*) entry + 4);
-	strcpy((char*) grave + 0x40, (char*) *(void* volatile*) &entry + 0x14);
+	strcpy((char*) grave + 0x40, (char*) entry + 0x14);
+	/* After both copies, as at 0x10011eed; volatile keeps it there. */
+	*(volatile int*) (grave + 0x10) = 0;
 	{
 		int n;
 		volatile int iv;
