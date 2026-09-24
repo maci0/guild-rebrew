@@ -216,11 +216,11 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		 * alias the field.  Keeping a second copy in `s.record` was an extra
 		 * store plus three extra reloads. */
 		*(int*) (geb + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x10031428);
-		geb_type = 0;
-		while (geb_type < 0x600) {
-			geb_type += 0x18;
-			*((char*) *(int*) (geb + 0x71) + (geb_type - 0xb)) = (char) 0xff;
-			*(int*) ((char*) *(int*) (geb + 0x71) + (geb_type - 4)) = 0;
+		/* 0x40 entries of 0x18 bytes, indexed: c2 strength-reduces the index
+		 * and emits the reference's `[eax+edx-0xb]` operand order. */
+		for (geb_type = 0; geb_type < 0x40; geb_type++) {
+			*((char*) *(int*) (geb + 0x71) + geb_type * 0x18 + 0xd) = (char) 0xff;
+			*(int*) ((char*) *(int*) (geb + 0x71) + geb_type * 0x18 + 0x14) = 0;
 		}
 		/* fall through into 0x1f/0x20 stores */
 	case 0x1f:
