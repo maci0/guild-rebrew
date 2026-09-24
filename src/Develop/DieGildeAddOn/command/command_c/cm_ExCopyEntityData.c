@@ -9,7 +9,7 @@
  * primary matrix by level-dependent thresholds; the other types resolve a
  * destination (and source) slot by id and adjust one cell.
  *
- * Two source shapes decide most of this function's layout (round 1500):
+ * Two source shapes decide this function's layout:
  *
  *   - Every loop is an index loop, `for (i = 0; i < 0x300; i++)`.  msvc6
  *     replaces the index test with a compare on the strength-reduced
@@ -24,16 +24,16 @@
  *     guards share `mov ebp,0xffff` (shapes 62/85).  The matrix loop in
  *     index form also gives the reference's `[edx+ecx]` SIB order.
  *   - Every clamp assigns a SEPARATE variable in all three arms, including
- *     the in-range arm (`clamped = val`).  The copy keeps the in-range arm a
- *     real block until coalescing empties it, which leaves the reference's
- *     `jmp store` and materialises the constants in eax (`mov eax,0x7f`)
- *     instead of folding them into byte-immediate stores.
+ *     the in-range arm (`clamped = val`).  That emits the reference's empty
+ *     in-range `jmp store` and materialises the constants in eax
+ *     (`mov eax,0x7f`); clamping the input variable in place folds them
+ *     into byte-immediate stores and moves the cold arms out of line.
  *
- * Remaining difference: the type-1 arm scales src_slot in edx where the
- * reference uses eax (`lea eax,[eax+eax*2]; shl eax,8; add ecx,eax`).  Not
- * moved by the statement order of the 0x18 read, a volatile first read,
- * dropping `temp`, the add's operand order, or swapping the clamp
- * variables' roles. */
+ * No `volatile` reads and no `#pragma optimize`: without /Oa the byte
+ * stores may alias `cmd_ptr`, so each `cmd_ptr + 0x18` read is re-issued
+ * where the reference re-reads it.  A volatile read in the type-2 arm was
+ * byte-neutral there but moved the type-1 arm's src_slot scale from eax to
+ * edx (3 linked bytes). */
 
 int __cdecl cm_ExCopyEntityData(char* cmd_ptr, char* response)
 {
@@ -193,7 +193,7 @@ level_done:
 				dst_slot = dst_slot + src_slot * 0x300;
 				temp = (int) (signed char) g_relationship_matrix_primary[dst_slot];
 				g_relationship_matrix_secondary[dst_slot] = 0;
-				rel_value = *(volatile int*) (cmd_ptr + 0x18) + temp;
+				rel_value = *(int*) (cmd_ptr + 0x18) + temp;
 				if (rel_value >= -0x7f && rel_value < 0x7f) {
 					clamped = rel_value;
 				}
@@ -219,7 +219,7 @@ level_done:
 					clamped = 0x7f;
 				}
 				g_relationship_matrix_primary[dst_slot] = (char) clamped;
-				if (*(volatile int*) (cmd_ptr + 0x18) >= 0) {
+				if (*(int*) (cmd_ptr + 0x18) >= 0) {
 					clamped = clamped / 2;
 				}
 				clamped = clamped + (int) (signed char) g_relationship_matrix_secondary[dst_slot];
