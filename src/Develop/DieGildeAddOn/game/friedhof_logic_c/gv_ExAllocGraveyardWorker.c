@@ -202,8 +202,11 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	}
 clear_entry:
 	memset(entry, 0, 0x44);
-	*(int*) entry = -1;
-	return (short) *(volatile unsigned short*) grave;
+	/* A plain zero-extending read lets msvc6 skip the `xor eax,eax`, since
+	 * eax is still 0 from the memset: `mov ax,[ebp]` as at 0x10011fe2.  The
+	 * volatile store keeps that read after the -1 store. */
+	*(volatile int*) entry = -1;
+	return *(unsigned short*) grave;
 	/* With this label inside the log block, msvc6 routes the three
 	 * entry-search exits to the `!slot` epilogue at 0x10011cdb; placed here
 	 * they reach the log path's epilogue at 0x10011d77, as in the reference. */
