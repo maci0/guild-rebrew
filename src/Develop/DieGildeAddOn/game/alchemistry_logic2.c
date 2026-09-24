@@ -167,53 +167,6 @@ extern char s_arr_overflow_10031604[];
 extern unsigned char g_connections[];
 // FUNCTION: GOLDTL 0x4193f0
 // SIZE: 144
-// FUNCTION: SERVER 0x1000C310
-// ahm_SlotClearMatch
-
-int __cdecl ahm_SlotClearMatch(char* data, char* target, char* src)
-{
-	int i;
-	char* slot_ptr;
-	int key;
-	int ent;
-	key = *(int*) (data + 8);
-	i = 0;
-	slot_ptr = target + 0xc;
-	while (i < 6) {
-		if (*(int*) slot_ptr == key) {
-			goto found;
-		}
-		i++;
-		slot_ptr += 8;
-	}
-	return 0;
-found:
-	ent = (int) gm_ff_Objekt(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
-	if (ent) {
-		gm_RemoveObjectByType((void**) (ent + 0x14), *(unsigned int*) (data + 8));
-	}
-	*(int*) (target + i * 8 + 0xc) = 0;
-	*(int*) (target + i * 8 + 0x10) = 0;
-	return 1;
-}
-
-/* Searches for a value and sets it in the target. Used for
- * alchemy recipe ingredient matching and assignment. */
-
-// FUNCTION: SERVER 0x1000C380
-// ahm_SearchAndSet
-
-int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
-{
-	int i;
-	for (i = 0; i < 6; i++) {
-		if (tgt->entries[i].key == src->key) {
-			tgt->entries[i].val = src->val;
-			return 1;
-		}
-	}
-	return 0;
-}
 
 /* Clamps a floating-point alchemy value to valid bounds.
  * Prevents stat overflow/underflow during recipe processing.
@@ -289,6 +242,53 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 			if (query != 0)
 				gm_AddObjekt(*(int*) ((char*) query + 2), *(int*) (obj + 8), 2);
 			gm_ObjectsAvailble(g_current_season);
+			return 1;
+		}
+	}
+	return 0;
+}
+// FUNCTION: SERVER 0x1000C310
+// ahm_SlotClearMatch
+
+int __cdecl ahm_SlotClearMatch(char* data, char* target, char* src)
+{
+	int i;
+	char* slot_ptr;
+	int key;
+	int ent;
+	key = *(int*) (data + 8);
+	i = 0;
+	slot_ptr = target + 0xc;
+	while (i < 6) {
+		if (*(int*) slot_ptr == key) {
+			goto found;
+		}
+		i++;
+		slot_ptr += 8;
+	}
+	return 0;
+found:
+	ent = (int) gm_ff_Objekt(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
+	if (ent) {
+		gm_RemoveObjectByType((void**) (ent + 0x14), *(unsigned int*) (data + 8));
+	}
+	*(int*) (target + i * 8 + 0xc) = 0;
+	*(int*) (target + i * 8 + 0x10) = 0;
+	return 1;
+}
+
+/* Searches for a value and sets it in the target. Used for
+ * alchemy recipe ingredient matching and assignment. */
+
+// FUNCTION: SERVER 0x1000C380
+// ahm_SearchAndSet
+
+int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
+{
+	int i;
+	for (i = 0; i < 6; i++) {
+		if (tgt->entries[i].key == src->key) {
+			tgt->entries[i].val = src->val;
 			return 1;
 		}
 	}

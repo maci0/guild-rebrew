@@ -21,38 +21,6 @@ extern int g_dynamic_count;
  * Returns pointer to matching record or NULL. */
 // FUNCTION: GOLDTL 0x4bcb80
 // SIZE: 80
-// FUNCTION: SERVER 0x10014F80
-// find_zone_record
-int __cdecl find_zone_record(char* base, int x, int y)
-{
-	int i;
-	char* rec;
-	int center;
-	i = 0;
-	rec = base + 8;
-	while (i < 64) {
-		if (*(rec + 5) == (char) 0xff) {
-			goto next;
-		}
-		center = (signed char) *(rec + 4) / 2;
-		if (x < (int) (unsigned char) *rec - center) {
-			goto next;
-		}
-		if (x > (int) (unsigned char) *rec + center) {
-			goto next;
-		}
-		if (y < (int) (unsigned char) *(rec + 1) - center) {
-			goto next;
-		}
-		if (y <= (int) (unsigned char) *(rec + 1) + center) {
-			return (int) (base + i * 24);
-		}
-	next:
-		i++;
-		rec += 24;
-	}
-	return 0;
-}
 
 /* Checks if a zone is available for planting. Validates
  * the zone record, checks plant capacity, and verifies
@@ -96,6 +64,38 @@ char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 		record_cursor += 0x18;
 	}
 	return (char*) 0;
+}
+// FUNCTION: SERVER 0x10014F80
+// find_zone_record
+int __cdecl find_zone_record(char* base, int x, int y)
+{
+	int i;
+	char* rec;
+	int center;
+	i = 0;
+	rec = base + 8;
+	while (i < 64) {
+		if (*(rec + 5) == (char) 0xff) {
+			goto next;
+		}
+		center = (signed char) *(rec + 4) / 2;
+		if (x < (int) (unsigned char) *rec - center) {
+			goto next;
+		}
+		if (x > (int) (unsigned char) *rec + center) {
+			goto next;
+		}
+		if (y < (int) (unsigned char) *(rec + 1) - center) {
+			goto next;
+		}
+		if (y <= (int) (unsigned char) *(rec + 1) + center) {
+			return (int) (base + i * 24);
+		}
+	next:
+		i++;
+		rec += 24;
+	}
+	return 0;
 }
 
 /* Finds a zone record by x/y coordinates. Searches linked

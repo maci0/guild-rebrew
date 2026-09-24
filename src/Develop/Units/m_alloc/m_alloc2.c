@@ -28,42 +28,6 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
  * tracking: records source location string, updates group
  * counters, and maintains the allocation list. */
 
-// FUNCTION: SERVER 0x10006E30
-// m_pool_free
-
-void __cdecl m_pool_free(int* pool, int* block)
-{
-	int* slot;
-	int* blk;
-	int* prev;
-
-	slot = (int*) ((char*) block - 4);
-	if (slot == 0 || *slot == 0) {
-		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid pool-entry (or overwritten void*)!");
-		return;
-	}
-	blk = (int*) *slot;
-	if ((unsigned int) (char*) block < (unsigned int) ((char*) blk + 0x10) ||
-	    (unsigned int) (char*) block >= (unsigned int) ((char*) blk + 0x10 + blk[2] * blk[1])) {
-		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid pool-entry (or overwritten void*)!");
-		return;
-	}
-	*slot = 0;
-	blk[0]--;
-	if (blk[0] == 0) {
-		if (blk == (int*) *pool) {
-			*pool = blk[3];
-			m_FreeTracked(blk);
-			return;
-		}
-		prev = (int*) *pool;
-		while (prev[3] != (int) blk) {
-			prev = (int*) prev[3];
-		}
-		prev[3] = blk[3];
-		m_FreeTracked(blk);
-	}
-}
 
 /* Five truncated stub arrays used to live here -- g_str_10028888,
  * s_Pointer_not_freed_10028aec, s_Memory_Shutdown_Anomaly_10028b04, s_m_pool_alloc_tp_m_pool_10028b60 and
@@ -274,6 +238,43 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 	return 0;
 }
 #pragma optimize("", on)
+
+// FUNCTION: SERVER 0x10006E30
+// m_pool_free
+
+void __cdecl m_pool_free(int* pool, int* block)
+{
+	int* slot;
+	int* blk;
+	int* prev;
+
+	slot = (int*) ((char*) block - 4);
+	if (slot == 0 || *slot == 0) {
+		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid pool-entry (or overwritten void*)!");
+		return;
+	}
+	blk = (int*) *slot;
+	if ((unsigned int) (char*) block < (unsigned int) ((char*) blk + 0x10) ||
+	    (unsigned int) (char*) block >= (unsigned int) ((char*) blk + 0x10 + blk[2] * blk[1])) {
+		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid pool-entry (or overwritten void*)!");
+		return;
+	}
+	*slot = 0;
+	blk[0]--;
+	if (blk[0] == 0) {
+		if (blk == (int*) *pool) {
+			*pool = blk[3];
+			m_FreeTracked(blk);
+			return;
+		}
+		prev = (int*) *pool;
+		while (prev[3] != (int) blk) {
+			prev = (int*) prev[3];
+		}
+		prev[3] = blk[3];
+		m_FreeTracked(blk);
+	}
+}
 
 /* Returns a block to the packet pool free list. Adds the block
  * back to the free chain for reuse. */
