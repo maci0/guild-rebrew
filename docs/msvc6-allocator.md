@@ -3896,3 +3896,31 @@ is 8, so every [esp+...] displacement is off by 4 from index 0"*. **Ours is `esp
 note predates the `int mode14` fix recorded later in the same header ("gives the target's `sub esp,0xc`
 frame with the same 0x13/0x14/0x18 slots"), so the header contradicts itself and the newer entry is correct.
 A future round reading the older paragraph would chase a frame mismatch that no longer exists.
+
+## Finding 71: CrashDump's register roles hinge on one priority comparison; stack slots follow references per byte (round 1145, traced in c2)
+
+Traced under `winedbg --gdb` with a private wineprefix (a compile takes about 2 s instead of 28 s on
+the shared docker lock; tracer scripts kept under `.scratch/c2trace-crashdump/`, gitignored).
+
+- **Register roles.** In the current source the `WriteFile` import node has priority 102 and `nInstr`
+  148. Once `WriteFile` ranks higher, c2 reproduces 10 of the 11 tracked reference roles (CreateFileA
+  esi, ReadFile edi, hDbgFile ebp, pDbgBuf ebx, WriteFile esi, nInstr edi, pInstr ebx,
+  pExceptionPointers edi, and no cached constant 0 in edi, so `push 0` appears). The odd one is
+  CloseHandle, called from memory in the reference. Each newline `WriteFile` written inside a switch
+  case adds about 10 to its priority (14 in the access-violation case). Loop weight follows the
+  control flow: a `goto`-built loop traces identically to a `while`.
+- **Stack layout** (c2 `0x107405b6`): locals go into bins sorted by size, then by reference count;
+  final offsets run in order of references per byte, highest nearest the frame bottom, and single
+  chars fill alignment holes. The reference's bytes 8-9 are alignment padding. Our 0x284 frame (0x280
+  in the reference) is one extra bin shared by the `volatile` `fail_line`, `excCode` and `szDateLen`.
+- **Switch tails.** The reference's two tails are cross-jumped per-case `WriteFile(msg);
+  WriteFile(nl); break;` arms, grouped by the scratch register each arm starts on. Our compile groups
+  the same cases, but group A's arms start on two registers (the access-violation arm uses a different
+  number of temporaries, counted modulo 3), so only group B merges and the per-case source is 2272
+  bytes against a 2128 span.
+- **Best candidate** (per-case newlines in three cases plus four non-volatile locals) measured +28
+  linked: it still pushes all four callee-saved registers at entry and keeps `fCanContinue`/`szLine`
+  in the wrong order. Next step: make group A's arms start on one scratch register.
+- **Measurement trap:** a candidate that overflows the 2128 span collapses the composition and leaves
+  a bad `build/split_poc.map`, so every later linktest collapses too. Recover with
+  `rm -rf build/split_poc build/split_poc.map` and two `scripts/split_link.sh` runs.
