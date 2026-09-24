@@ -65,8 +65,6 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 	}
 
 	current_index = 0;
-
-	current_index = 0;
 	if (0 < entity_count) {
 		neg1 = -1;
 		while (current_index < entity_count) {
@@ -274,7 +272,6 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 		}
 	}
 
-	current_index = 0;
 	if (!ls_ReadVfsDataChecked(&g_aux_entity_count, 4, 1, (void*) stream_ctx)) {
 		return 0;
 	}
