@@ -41,22 +41,11 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[];
  * compare against 0x1000bdf0):
  *   - +0xcb: the 0x21c stride chain is `lea eax,[eax+eax*8]; lea
  *     edx,[eax+eax*4]` where the reference keeps it in edx.
- *   - +0xf6..+0x17d: the slot-init block is one instruction out of phase.
- *     The reference emits `or eax,-1` before the 0xffff store, builds the
- *     second memset destination as `lea edx,[edx+..]; mov edi,edx` (ours:
- *     one `lea edi`, 2 bytes shorter), loads `mov dl,1` in the
- *     citizen-count slack and reloads cmd_payload right after the object-id
- *     writeback.  A pointer local, a reordered sum, `&g_slot_table[...]` and
- *     a 0xff fill value for that memset all give the same object.
- *   - +0x1c5: the 5-byte fill is a while(1) loop with a `cmp/jge/jmp` head.
- *     A `for` loop gives the reference's bottom-tested loop but is 2 bytes
- *     shorter, which shifts everything after it: +439 linked on its own, and
- *     still 2 bytes short with the float and grid fixes, until the memset
- *     destination above supplies the 2 bytes.
- *   - +0x232/+0x246: the two slot+0x1c products load the constant first
- *     (`fld [const]; fmul [esi+0x1c]`); the reference loads the field first.
- *     With the `for` fill loop the order comes out right, so this is coupled
- *     to the fill loop's register state, not to the expression. */
+ *   - +0xf6: the reference emits `or eax,-1` before the 0xffff store.
+ *   - +0x119: `mov dl,1` and the slot-index store are swapped.
+ *   - +0x148: the cmd_payload reload and the `[esi+8]` store are swapped.
+ *   - +0x23c: the slot+0x18 copy is stored after the second product; the
+ *     reference stores it after the first. */
 
 unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 {
@@ -114,11 +103,14 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	 * write below (the reference keeps them: slot[0]=0xffff, then
 	 * slot[4]=-1 with the -1 in eax reused by the second memset). The
 	 * reference order is slot[0]=0xffff before slot[4]=-1; both must be
-	 * volatile or MSVC6 dead-store-eliminates slot[0]=0xffff. */
+	 * volatile or MSVC6 dead-store-eliminates slot[0]=0xffff.  The +0x5c
+	 * fill is a loop, not memset: the destination stays its own register,
+	 * `lea edx,[edx+..]; mov edi,edx` as at 0x1000bef4 (shapes 197). */
 	minus_one = -1;
 	*(volatile unsigned short*) (g_slot_table + slot_index * 0x21c) = 0xffff;
 	*(volatile int*) (g_slot_table + slot_index * 0x21c + 4) = minus_one;
-	memset((void*) (g_slot_table + slot_index * 0x21c + 0x5c), minus_one, 0x20);
+	for (i = 0; i < 8; i++)
+		((int*) (g_slot_table + slot_index * 0x21c + 0x5c))[i] = minus_one;
 
 	slot = (char*) (g_slot_table + slot_index * 0x21c);
 
@@ -126,22 +118,26 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	 * the slot-index store come first, then the object-id read, both dynamic
 	 * stores, slot[2] and the object-id writeback.  Both counters are read
 	 * into a local ahead of their stores and written back after, which is what
-	 * emits the reference's ecx traffic instead of a load-inc-store pair.  The
-	 * object-id read is volatile so it lands above the dynamic stores rather
-	 * than being sunk to its use. */
+	 * emits the reference's ecx traffic instead of a load-inc-store pair.
+	 * The slot-index store is plain: volatile, it is emitted ahead of the
+	 * citizen-count load rather than after the `inc` (0x1000bf0c). */
 	{
 		int live = g_citizen_count + 1;
 		int seq;
 		one = 1;
 		g_citizen_count = live;
-		*(volatile unsigned short*) (g_slot_table + slot_index * 0x21c) =
+		*(unsigned short*) (g_slot_table + slot_index * 0x21c) =
 		    (unsigned short) slot_index;
 		*(int*) (slot + 0x170) = (int) dynamic;
 		*(int*) (slot + 0x16c) = (int) dynamic;
-		seq = *(volatile int*) &g_next_object_id;
+		seq = g_next_object_id;
 		*(char*) (slot + 2) = 0;
 		*(int*) (slot + 4) = seq;
 		g_next_object_id = seq + 1;
+		/* Written after slot+0x1e4, msvc6 emits the cmd_payload reload after
+		 * the whole slot+0x1f0..+8 run; here it follows the object-id
+		 * writeback as at 0x1000bf38. */
+		*(char*) (slot + 8) = 0x64;
 	}
 
 	*(int*) (slot + 0x1f0) = 0;
@@ -151,7 +147,6 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	*(char*) (slot + 0x217) = 0;
 	*(char*) (slot + 0x218) = (char) one;
 	*(int*) (slot + 0x1e4) = 0x3f800000;
-	*(char*) (slot + 8) = 0x64;
 	/* The volatile read forces the reference's separate `mov ecx,[esp+0x1c]`
 	 * at 0x1000bf48 instead of reusing a register that already holds the
 	 * pointer.  It belongs here at the use site, not in the counter block:
@@ -169,16 +164,9 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	*(int*) (slot + 0x20c) = -1;
 	*(unsigned short*) (slot + 0x50) = 0x7fff;
 
-	/* While-form of the 5-iteration fill: the top-tested loop shape
-	 * (rather than a for or do-while) is what keeps the reference's
-	 * register allocation downstream (the reference's fill is
-	 * bottom-tested, but a do-while here cascades: 998 obj / 285 match). */
-	i = 0;
-	while (1) {
-		if (!(i < 5)) break;
+	/* A `for` gives the reference's bottom-tested loop at 0x1000bfb5. */
+	for (i = 0; i < 5; i++)
 		*(char*) (slot + 0x80 + i) = (char) (gm_RandomMod(0x40) + 0x54);
-		i += 1;
-	}
 	*(char*) (slot + 9) = 0;
 
 	*(int*) (slot + 0x1c) = 0x447a0000;
@@ -203,11 +191,14 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	/* Compound updates of one float local: `v +=` then `v -=` emit the
 	 * reference's popping `faddp`/`fsubp` after a separate `fild`.  A
 	 * single expression uses `fiadd`, or a non-popping `fadd` plus a trailing
-	 * `fstp st(0)` when the conversion is a named local. */
+	 * `fstp st(0)` when the conversion is a named local.  Reading slot+0x1c
+	 * through the `fp` local loads the field first (`fld [esi+0x1c]; fmul
+	 * [const]`); spelled inline, msvc6 loads the constant first. */
 	{
 		float v = (float) rand_value;
-		v += *(float*) (slot + 0x1c) * *(float*) 0x100256b8;
-		v -= *(float*) (slot + 0x1c) * *(float*) 0x100256b4;
+		float* fp = (float*) (slot + 0x1c);
+		v += *fp * *(float*) 0x100256b8;
+		v -= *fp * *(float*) 0x100256b4;
 		*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
 		*(float*) (slot + 0x10) = v;
 	}
