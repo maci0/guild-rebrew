@@ -21,13 +21,9 @@ set -uo pipefail
 cd "$(cd "$(dirname "$0")/.." && pwd)"
 mkdir -p .scratch
 
-BASELINE=${BASELINE:-281}
-# `passed` counts EXACT + RELOC + PROVEN, but AGENTS.md is explicit that PROVEN
-# is NOT a byte match and ranks below RELOC.  Today that is 264 byte matches
-# plus 17 PROVEN, so a RELOC -> PROVEN regression would leave `passed` at 281
-# and this gate green while the deliverable lost bytes.  Guard the byte-match
-# count separately (round 193).
-BYTE_BASELINE=${BYTE_BASELINE:-264}
+# `rebrew verify` counts EXACT + RELOC as passed; PROVEN is not a byte match
+# and fails like any other difference.
+BASELINE=${BASELINE:-265}
 # .text residue baseline: 8636 (0x21bc) as of round 516.  Guarded below --
 # lower it when a change improves the number, never raise it.
 #
@@ -155,19 +151,6 @@ elif [ "$passed" -lt "$BASELINE" ]; then
     rc=1
 else
     echo "baseline $BASELINE held"
-fi
-
-# Byte-match guard: EXACT + RELOC only, never PROVEN.
-bytes_now=$(rebrew verify --full --json 2>/dev/null \
-    | python3 -c 'import json,sys; rs=json.load(sys.stdin)["results"]; print(sum(1 for r in rs if r.get("status") in ("EXACT","RELOC")))' 2>/dev/null)
-if [ -z "$bytes_now" ]; then
-    echo "could not count byte-matched functions"
-    rc=1
-elif [ "$bytes_now" -lt "$BYTE_BASELINE" ]; then
-    echo "REGRESSION: $bytes_now byte-matched (EXACT+RELOC), baseline is $BYTE_BASELINE"
-    rc=1
-else
-    echo "byte-matched $bytes_now (EXACT+RELOC), baseline $BYTE_BASELINE held"
 fi
 
 echo "== deliverable link + residue"

@@ -17,10 +17,12 @@ updated_at = "2026-09-22T10:50:21+00:00"
 
 ["SERVER.0x10002770"]
 size = 2115
-status = "PROVEN"
+status = "STUB"
 analysis = "Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride)."
 blocker = "frame 0x284 vs ref 0x280 (the older 0x28c figure is wrong); every 0x280 route measured costs ~50 bytes (6 confirmations, shapes 81); body length-exact, tables byte-identical"
 blocker_delta = 1638
+updated_by = "verify"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x10002fc0"]
 size = 376
@@ -157,12 +159,12 @@ status = "EXACT"
 size = 658
 cflags = "/O2 /Gd /G6 /Oy-"
 toolchain = "msvc-6.0-sp6"
-status = "PROVEN"
+status = "NEAR_MATCHING"
 analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
 blocker = "§11 memset prelude — pure C cannot emit — parked"
 blocker_delta = 444
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x10006820"]
 size = 188
@@ -218,9 +220,9 @@ updated_at = "2026-09-22T11:01:58+00:00"
 ["SERVER.0x10008a90"]
 size = 492
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "PROVEN"
-updated_by = "prove"
-updated_at = "2026-09-10T16:24:29+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x10008c80"]
 size = 129
@@ -243,10 +245,12 @@ blocker = "inline-asm 24-byte alignment prelude — Finding 19: no msvc6 C memcp
 
 ["SERVER.0x10009020"]
 size = 667
-status = "PROVEN"
+status = "SIZE_MISMATCH"
 analysis = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
 blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 blocker_delta = 254
+updated_by = "verify"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x10009310"]
 size = 8
@@ -325,12 +329,12 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x1000a570"]
 size = 750
-status = "PROVEN"
+status = "NEAR_MATCHING"
 analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
 blocker = "msvc6 scheduling/register naming at exact 750 size, 3 clusters: cmd-3 push eax after the two stores; lobby sprintf eax/ecx/edx rotation plus the coupled second-sprintf buffer lea; unexpected-request push ebp / mov [ebp],ecx swap"
 blocker_delta = 54
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x1000a860"]
 size = 131
@@ -363,12 +367,12 @@ updated_at = "2026-09-22T05:50:31+00:00"
 ["SERVER.0x1000aac0"]
 size = 639
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "PROVEN"
+status = "NEAR_MATCHING"
 analysis = "Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ahm_ProcessEntityChain."
 blocker = "PROVEN-UNREACHABLE (round 192), not a search-depth wall: all 15 bytes are one fault, the join block 'test ebx,ebx; je unlink; jmp advance' at 0x3f that the reference keeps and msvc6 deletes -- because the test is provably-true dead code. Both predecessors enter with ebx nonzero (arm5 falls through from the while guard; arm6 is reached only because the test was nonzero, and its backward jne fires before the xor ebx,ebx at 0x6a), so 'je' can never be taken and msvc6 constant-folds it away. C cannot request a test whose operand the compiler proves nonzero. Byte-neutral (14 vs 14), so size is not the obstacle. sp5-pp mismatches the identical 15 offsets, confirming dataflow rather than sp6 scheduling. Block order is already reference-exact; the older 'arm order' framing was wrong. Reopens only on evidence of an unoptimised region or inline asm"
 blocker_delta = 15
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x1000ad40"]
 size = 768
@@ -468,12 +472,12 @@ updated_at = "2026-09-22T05:50:31+00:00"
 ["SERVER.0x1000bdf0"]
 size = 1002
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "PROVEN"
+status = "NEAR_MATCHING"
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
 blocker = "4 faults: field-init phase shift (48%, shapes 86b-excluded), 5-iteration fill loop form (15%, lever real but both signs negative so shapes 41 blocks composition), float tail fstp st(0) vs the reference faddp (29%, OPEN -- see .c header), stride lea chain (1%, strength reducer). Body 1002 pads to 1008 with the reference's own 6 nops, so shapes 88 gives +6 bytes of genuine upward slack -- unlike its Graveyard sibling"
 blocker_delta = 177
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x1000c1e0"]
 size = 160
@@ -633,17 +637,19 @@ updated_at = "2026-09-22T00:16:48+00:00"
 
 ["SERVER.0x1000d930"]
 size = 2057
-status = "PROVEN"
+status = "SIZE_MISMATCH"
 blocker = "register/slot permutation + intra-block scheduling; frame matches (both sides sub esp,0x228, re-verified round 186); residual is 71% displaced bytes with no dominant cause -- see .c header"
 blocker_delta = 1066
 cflags = "/O2 /Gd /Ow"
+updated_by = "verify"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x1000e140"]
 size = 993
 cflags = "/Ox /Gd"
-status = "PROVEN"
-updated_by = "test"
-updated_at = "2026-09-22T00:16:50+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x1000e530"]
 size = 352
@@ -686,9 +692,11 @@ status = "RELOC"
 
 ["SERVER.0x1000ec00"]
 size = 912
-status = "PROVEN"
+status = "SIZE_MISMATCH"
 blocker = "clamp-arm layout + cross-jumped epilogues; 12 of 16 top-level blocks already ordered; ebp-pinned 0xffff constant is unreachable per shapes 85"
 blocker_delta = 481
+updated_by = "verify"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x1000ec00".prove_constraints.arg0]
 type = "pointer"
@@ -962,13 +970,13 @@ updated_at = "2026-09-22T05:50:31+00:00"
 ["SERVER.0x10011bf0"]
 size = 1040
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "PROVEN"
+status = "STUB"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
 blocker = "3 faults, all length-neutral: fail-epilogue merge (8B; no C89 construct sets a block's predecessor count), slot-init phase shift (shapes 86b excludes it -- source store order already matches, the delta is scheduler + a memset-destination fold), and neighbour-loop esi/edi roles + 16-bit zero-extend (95% of residue, shapes 85 wall). Body 1040 = ref exactly and 1040 is 16-aligned, so shapes 88 gives ZERO upward slack: nothing to buy, and +1 byte costs 16 of span"
 blocker_delta = 426
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x10012000"]
 size = 728
@@ -1000,13 +1008,13 @@ updated_at = "2026-09-22T05:50:31+00:00"
 ["SERVER.0x100128f0"]
 size = 1463
 toolchain = "msvc-6.0"
-status = "PROVEN"
+status = "SIZE_MISMATCH"
 analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 globals = "SERVER 0x100a8c34"
 blocker = "induction/operand layer + state_ptr store fold; dispatch arms already match; volatile reads load-bearing (round-143 recipe) -- see .c header"
 blocker_delta = 806
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x10012eb0"]
 size = 884
@@ -1233,12 +1241,12 @@ updated_at = "2026-09-22T05:50:31+00:00"
 ["SERVER.0x10015f70"]
 size = 714
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "PROVEN"
+status = "NEAR_MATCHING"
 analysis = "Refreshes market availability table (85 entries of 0x80 bytes each). Scans all buildings for producible items, marks ingredients as available, then auto-allocates missing market objects. Also counts special resource types (0x92-0x97, 0x2db) in the town market."
 blocker = "ONE allocator tie-break, fully traced: which of {ebx,edi} the query result gets at birth. Target frees {ebx,esi} so row=ebx; we free {edi,esi} so row=esi -- and esi also holds slot_base, so the base=slot_base copy must be emitted before 'mov esi,0x55' clobbers it. That true data dependency pulls the base copy early, consumes edx, displaces the item-def table into edi and reorders the shl/add chain. The match block is therefore the rename's SHADOW, not a second fault -- do not re-attack it (a1-a6, f1-f6, n1-n6, x1-x6 all inert). 25 faulting bytes + 3 collateral (0x168-0x16a is byte-identical, only displaced); 18 diffs = 15 register-only + 3 structural. Shapes 85 kills the lever: row=0x55 and inner=4 are constants with no definition site"
 blocker_delta = 28
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x10016240"]
 size = 72
@@ -1331,11 +1339,11 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10016f80"]
 size = 346
-status = "PROVEN"
+status = "SIZE_MISMATCH"
 blocker = "dl-vs-cl register wall; body 342 vs ref 346; prologue-fidelity lever spent (shapes 75)"
 blocker_delta = 258
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x100170e0"]
 size = 304
@@ -1371,12 +1379,12 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x100174d0"]
 size = 1088
-status = "PROVEN"
+status = "NEAR_MATCHING"
 ghidra = "gm_AllocGebaeude"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 blocker_delta = 435
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x10017910"]
 size = 145
@@ -1525,9 +1533,9 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10019720"]
 size = 396
-status = "PROVEN"
+status = "NEAR_MATCHING"
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x100198b0"]
 size = 355
@@ -1592,12 +1600,12 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10019ed0"]
 size = 395
-status = "PROVEN"
+status = "NEAR_MATCHING"
 ghidra = "gm_KannObjektHergestellt"
 blocker = "one spilled entity byte drives all 11 hunks; second hunk is constant remat (shapes 85, unreachable); plateau 298/395"
 blocker_delta = 125
 updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
+updated_at = "2026-09-24T18:07:38+00:00"
 
 ["SERVER.0x1001a060"]
 size = 97
