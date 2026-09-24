@@ -172,7 +172,7 @@ Build with `cmake -S . -B build -DREBREW_DEBUG_INFO=OFF && cmake --build build`.
 **Run `scripts/gate.sh` before committing.** It is the checks that must pass:
 `rebrew lint`, the compile (the POST_BUILD postlink step is expected to fail
 until the tree is position-aligned, so only `error C####`/`error LNK####`
-count), `rebrew verify --full` against a baseline of 273 passed (EXACT+RELOC), the linked
+count), `rebrew verify --full` against a baseline of 278 passed (EXACT+RELOC), the linked
 `.text` residue against `RESIDUE_BASELINE`, and the per-target toolchain
 alignment check (`rebrew toolchain detect`: code-generator family vs
 configured profile). A drop below either
