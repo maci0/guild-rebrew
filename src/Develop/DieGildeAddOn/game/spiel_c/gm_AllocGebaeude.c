@@ -25,6 +25,18 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x410) and
  * addresses the 0x410 scratch buffer off ebp; section 13 of
  * docs/msvc6-c-shapes.md. */
+/* The 14 bytes from g_current_year (0x10035880) onward, copied whole
+ * into the building at +0x69: the reference emits a struct copy
+ * (`lea edx,[esi+0x69]`, stores through edx) from absolute operands. */
+#pragma pack(push, 1)
+struct blk14 {
+	int a;
+	int b;
+	int c;
+	short d;
+};
+#pragma pack(pop)
+
 #pragma optimize("y", off)
 char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 {
@@ -167,12 +179,9 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	case 5:
 	case 6:
 	case 7:
-		*(int*) (geb + 0x69) = *(int*) 0x10035880;
-		*(int*) (geb + 0x6d) = *(int*) 0x10035884;
-		*(int*) (geb + 0x71) = *(int*) 0x10035888;
-		*(unsigned short*) (geb + 0x75) = *(unsigned short*) 0x1003588c;
+		*(struct blk14*) (geb + 0x69) = *(struct blk14*) &g_current_year;
 		if ((unsigned short) owner != 0xffff)
-			*(int*) s.dest =
+			*(int*) (geb + 0x65) =
 			    *(int*) ((char*) 0x100358a4 + (unsigned short) owner * 0x21c);
 		else
 			*(int*) (geb + 0x65) = -1;
