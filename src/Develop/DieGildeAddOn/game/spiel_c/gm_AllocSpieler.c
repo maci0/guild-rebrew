@@ -1,42 +1,110 @@
 /* gm_AllocSpieler: allocate and initialize an entity from a
  * father/mother pair with random trait generation.
  *
- * KNOWN REAL BUG (2026-09-13, semantic review): the slot[9] else-branch
- * (`arg8 != 2`) stores slot[0x166] (=0), but the reference stores
- * (char)arg8 — at 0x10018cd4 the reference loads arg8 into eax, the
- * 0x10018cde jne skips the gm_RandomMod call, and 0x10018cec stores al.
- * Observable whenever arg8 is neither 2 nor 0. Correct fix
- * (`slot[9] = (char)arg8`) compiles 10 bytes shorter (obj 3689 -> 3679)
- * and costs +393 linked via tail desync — reverted per the link rule.
- * Revisit only with a length-neutral spelling or a resynced tail.
- *
- * RE-MEASURED round 952 on the current tree, with the reference's own shape
- * spelled out in full (`n = arg8; if (arg8 == 2) n = call(); slot[9] =
- * (char) n;` — one store AFTER the join, which is what the reference does at
- * 0x10018cd4-0x10018cec: `mov eax,[esp+0x44c]; cmp eax,2; jne <skip the
- * call>; mov [ebp+9],al`).  The sign is unchanged and the swing is worse than
- * the archived figure: **residue 8,628 -> 8,812 (+184)**, object 10 bytes
- * short as recorded.  The +393 in this note is stale history; do not re-probe
- * without a NEW shape, because this one has now been measured twice.
- *
- * The disassembly also settles what the residual difference IS, which the
- * prose here had not: we emit the compare FOLDED into memory
- * (`cmp [esp+0x44c],2`) and then TWO stores in separate arms, where the
- * reference loads into eax, folds nothing, and uses ONE store placed after
- * the join.  So the bug and the shape are the same defect, and fixing the
- * value by itself will always move the tail.
- *
- * ROUND 953 separated the two, and the SHAPE is what costs.  Keeping the
- * value exactly as shipped (`n = slot[0x166]; if (arg8 == 2) n = call();
- * slot[9] = (char) n;`) -- i.e. the reference's single-store structure with
- * our existing stored value, no semantic change at all -- measures
- * **8,628 -> 8,809 (+181)**, against the full fix's +184.  So ~98% of the
- * loss is the one-store restructure, not the `arg8` value.  Conclusion: the
- * reference's `mov eax,[esp+0x44c]` load is NOT reproducible from this
- * source, and the two-store form, though not the reference's, is the one
- * that scores.  Do not re-probe either direction.
- * (Second finding from the same review — tail log/sprintf order — is the
- * already-recorded +53 lead below.)
+ * Semantic fixes (2026-09-24), each read off the reference disassembly:
+ *   1. the 14-iteration trait loop stores dst[-2] inside the body
+ *      (0x1001930d-0x10019316, before the back-edge);
+ *   2. the arg8 != 2 arm stores (char) arg8, not slot[0x166]
+ *      (0x10018cd4-0x10018cec, eax = arg8 on the skip path);
+ *   3. the tail formats the PlayerID line before the 0x2888 log
+ *      (0x10019636-0x1001967c);
+ *   4. the citizen gm_RandomMod(8) roll goes into idx and all three
+ *      slot[0x217] tests read it (0x10018a3b, 0x10018b5b..0x10018b9e);
+ *   5. the blend weight is drawn once per trait (back edge 0x10018f75 ->
+ *      the gm_RandomFloat01 call at 0x10018f01);
+ *   6. the father's best trait is tested first, so a tie takes the father's
+ *      value (0x10018f0e);
+ *   7. slot[0x58] = 1 is the default BEFORE `if (father != 0)`
+ *      (0x1001946b); after the if/else chain it overwrote father[0x58] + 1.
+ *   8. father_id goes to slot+0x64 AFTER the 0xff fill of +0x5c..+0x7b
+ *      (0x10019462); before it, the fill overwrote it with -1.
+ *   9. the stat modifiers, 0xd/0x5c/0x64/0x58 fields, father ref hook,
+ *      counters and 1000.0f block run on the no-parent path only; the
+ *      two-parent path jumps from its mutual block to the second
+ *      gm_RandomMod(0x10) (0x100191e9 jmp 0x10019572).  Falling into
+ *      them re-ran gm_RandomQuadratic and bumped a counter twice.
+ *  10. the father is looked up by parameter 2, father_id (0x10018d35
+ *      reads [esp+0x43c] with the mother's id still pushed), the same
+ *      value both paths store at slot+0x64 beside mother_id at +0x60;
+ *      it had been looked up by arg4, the value stored at slot+0xa.
+ * Flags: this file compiles with plain /O2 /Gd (the project default).  The
+ * /Oa /Ow metadata setting needed volatile reads to reproduce the reference's
+ * load/store pairing; without /Ow msvc6 assumes aliasing and pairs them
+ * itself (linked 12,182 -> 12,062 on the same source).
+ * Addressing: the record array, both relationship tables and the entity-type
+ * table go through their symbols (g_slot_table, g_relationship_matrix_*,
+ * g_entity_type_table), not raw integer addresses.  msvc6 treats memory
+ * reached from a raw integer address as unchanged by calls once a branch
+ * has made the load a global CSE candidate, so it kept the entity id in a
+ * register across the mutual block's four gm_RandomMod calls; through the
+ * symbol it reloads, as the reference does (docs/msvc6-c-shapes.md 187).
+ * The same change let the sympathy loops drop their volatile reads and
+ * emit the reference's xor/mov zero-extend.  Linked 12,044 -> 11,917.
+ * Shape facts established from the reference and kept:
+ *   - work is char[0x400]: the frame is 0x41c with the same seven small
+ *     slots as ours, and nothing addresses the top dword (slots2.py);
+ *   - the per-trait selection keeps separate per-arm stores (the counter
+ *     stays in a register: cmp esi,5 / [esi+ebp+0x80]) and reads the
+ *     father byte of the blend through an int with a memory home, which is
+ *     what makes msvc6 emit the reference's fimul (shapes 82);
+ *   - the best-trait scan runs for (i = 1; i < 5; i++) (cmp ecx,5);
+ *   - the byte-field selects are ternaries (an arithmetic select stored to a
+ *     byte narrows to add r8; a ternary keeps add r32); the 0x217 target is
+ *     unsigned char (and eax,0x86 imm32 at 0x10018bad);
+ *   - the header init's stores sit on the reference's side of the sprintf
+ *     and LogMessageInternal calls (stores cannot cross a call);
+ *   - both aging blocks convert the age to float once and keep acc on the
+ *     FPU stack.
+ *   - the citizen block follows the reference's statement order around its
+ *     calls (roll, +0x1f0, 0x164, 9, 0xc; +0x1d0 before the counter; +0x20
+ *     after gm_RandomQuadratic; +0x18 after gm_RandomMod), reads the
+ *     0x1003542c counter once, and copies the five trait bytes as a struct;
+ *   - the mutual-sympathy stores compute their value before indexing (the
+ *     reference calls gm_RandomMod first, then loads both ids).
+ * Spellings the reference's code pins down:
+ *   - the float constants are symbols (g_float_const_*): through raw
+ *     addresses the per-trait arm 2 and the 14-trait blend load the
+ *     constant first and lose the shared tail fmul;
+ *   - the three +0x10 draws go through an unsigned short local (one
+ *     `and eax,0xffff`, then fild) and read slot+0x1c as
+ *     `(double) *(float*) (slot + 0x1c)`, which loads it before the
+ *     constant as the reference does;
+ *   - in the aging loops decay is assigned before acc; the other order
+ *     evaluates acc - decay first and needs fld st(0) / fstp st(1);
+ *   - the 14-trait blend weight is a float local and the mother term has
+ *     no (double) cast (fld st(0); fsubr; fxch; fmul mem);
+ *   - the no-parent trait loop stores dst[0..2] and steps both pointers
+ *     at the end of the body.
+ * Linked: 17 differing bytes.  Constructs the reference pins down beyond
+ * the list above (each measured against the positional probe):
+ *   - the header -1 fill, the no-parent -1 fill and the parent path's five
+ *     -1 ref slots are store loops, not memset or separate stores
+ *     (shapes 197); the 0x1b4 clear is a real memset;
+ *   - the citizen path's +0x10 draw is written inline in the blend, and
+ *     its quadratic term goes through the double `blend`; the 0x124/0x128
+ *     pair goes through a second double, `scale` (a re-read of +0x124
+ *     keeps msvc6 from moving the best_* stores above the fst);
+ *   - on the no-parent and parent paths +0x18 = +0x1c is written after the
+ *     +0x10 blend (msvc6 hands out eax/ecx/edx in rotation, so the copy's
+ *     order decides every later scratch register);
+ *   - the mutual-sympathy values are computed inside each store (no char
+ *     local), the no-parent hook loop indexes father+0x5c directly, and
+ *     g_citizen_count++ comes before slot[0x216];
+ *   - the per-trait blend weight is its own block-local float; the tail's
+ *     aging loop keeps its decay in `acc` (the per-trait slot 0x10) and its
+ *     running value in `decay`, while the citizen path's aging has its own
+ *     `decay_citizen` and shares `age` (both ages sit at 0x24);
+ *   - no-parent trait loop: dst[2] is the gm_RandomMod(0xa) value and
+ *     dst[1] = dst[0] * 0.x, as in the parent loop (0x90 / 0x8c); the
+ *     earlier source had them swapped.
+ * Open: (1) the two edge reload blocks at 0x10018c28/0x10018c38 load
+ * type/arg6 in the opposite order (the order fits ascending c2 node id,
+ * appended on one edge and prepended on the other; our arg6 piece gets
+ * the lower id); (2) `push 0xa` in the parent 14-trait blend is scheduled
+ * after the second fmul, the reference places it after fsubr.  Both are
+ * ordering decisions with identical instructions on both sides.
+ * The per-trait fimul needs the father byte in memory; the trait_home
+ * alias gives it, a plain int local is enregistered and gets fild/fmulp.
  *
  * Real name in the original sources: gm_AllocSpieler from spiel.c.  This is
  * a full C reconstruction of the 3689-byte target: slot scan, slot/refs
@@ -156,23 +224,6 @@
  *     matched-reloc 1277 -> 1310, aligned 646 -> 654 of 1056, object 3696 and
  *     real body 3689 unchanged (size-neutral on both).
  *
- * Next, and the largest single-file delta found but NOT applied here because
- * it is not size-neutral: the target calls
- * LogMessageInternal(file, 0x2888, work, 8) *after* the final
- * sprintf(work, s_fmt_playerid_10031570, ...), not before it -- see the
- * 0x286c / 0x2888 / sprintf sequence at 0x1001962c..0x10019690, where the
- * `jne` from `cmp idx,0xffff` jumps over the 0x286c log straight into the
- * sprintf.  Moving only that call (and leaving the 0x286c guard ahead of the
- * sprintf) measures aligned 646 -> 652 and real body 3689 -> 3687, and
- * combined with the header transcription above aligned 658.  It also changes
- * which string the 0x2888 record contains, so it is a behaviour change
- * *towards* the reference: the current source logs the SpID buffer, the
- * target logs the PlayerID buffer.  Closed 2026-09-13: the reference order
- * is confirmed (0x10019636 `jne` skips the 0x286c log, `sprintf` at
- * 0x10019666, then the 0x2888 log at 0x1001967c), and applying it measures
- * obj 3689 -> 3687, match 973 -> 915, linked +53 (2861 -> 2914).  Reverted:
- * the local alignment gain trades against the link, so this lead is spent.
- *
  * Measured dead ends, all reverted (score from the 859 base unless noted):
  *   - moving `work[0x3fc]` in the declaration list, to chase the scratch area
  *     sitting at esp+0x40 here against the target's esp+0x3c: msvc6 assigns
@@ -273,39 +324,71 @@ static char s_family_overflow_100315ac[] =
 /* Same bytes as spiel.c s_D__Develop_...@0x10031004 — share that def. */
 extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[];
 
-unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int arg4, int location, int arg6, int arg7, int arg8)
+/* The five trait bytes at record +0x80 (ahm entity +0x24). */
+// SIZE 0x5
+struct traits5 {
+	unsigned char b[5];
+};
+
+extern unsigned char g_slot_table[2]; /* 0x100358a0: 0x300 records of 0x21c */
+
+extern char g_relationship_matrix_primary[];
+extern char g_relationship_matrix_secondary[];
+
+extern float g_float_const_a0;  /* 0x100256a0: 1.0 */
+extern float g_float_const_b0;  /* 0x100256b0: 0.5 */
+extern float g_float_const_b4;  /* 0x100256b4: 0.1 */
+extern float g_float_const_b8;  /* 0x100256b8: 0.33 */
+extern float g_float_const_c4;  /* 0x100256c4: 30.0 */
+extern float g_float_const_c8;  /* 0x100256c8: 7.0 */
+extern float g_float_const_714; /* 0x10025714: 0.25 */
+
+extern unsigned char g_stat_table_30ba0[]; /* 0x10030ba0: 6-byte records, 5 stats + slot[0xd] default */
+extern unsigned char g_stat_table_30dda[]; /* 0x10030dda: 6-byte stat records by arg7 class */
+
+extern int g_dynasty_field_2c; /* 0x1003542c */
+extern int gm_CurrentHumanFamilyCount; /* 0x10035430 */
+
+unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, int arg4, int location, int arg6, int arg7, int arg8)
 {
 	char* slot;
 	char* mother;
 	char* father;
-	char work[0x3fc];
+	char work[0x400];
 	int idx;
 	int j;
 	int i;
 	int rnd;
 	int n;
+	double blend;
+	double scale;
+	int trait_byte;
+	int* trait_home;
 	int best_father;
 	int best_mother;
 	float acc;
+	float age;
+	float decay;
 	float* src;
 	float* dst;
-	int colv;
-	int rowv;
+	char* stat;
+	char cv;
+	float decay_citizen;
 
 	/* find a free slot: first by id word == 0xffff, then by state byte == 0xf */
 	for (idx = 0; idx < 0x300; idx++) {
-		if (*(unsigned short*) (0x100358a0 + idx * 0x21c) == 0xffff) {
+		if (*(unsigned short*) (g_slot_table + idx * 0x21c) == 0xffff) {
 			break;
 		}
 	}
 	if (idx == 0x300) {
 		for (idx = 0; idx < 0x300; idx++) {
-			if (*(unsigned char*) (0x100358a2 + idx * 0x21c) == 0xf) {
+			if (*(unsigned char*) (g_slot_table + 0x2 + idx * 0x21c) == 0xf) {
 				break;
 			}
 		}
 	}
-	if (*(unsigned char*) (0x100358a2 + idx * 0x21c) == 0xf) {
+	if (*(unsigned char*) (g_slot_table + 0x2 + idx * 0x21c) == 0xf) {
 		g_citizen_count--;
 	}
 	if (idx == 0x300) {
@@ -313,12 +396,12 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		                   s_arr_overflow_10031604, 1);
 		return 0xffff;
 	}
-	slot = (char*) 0x100358a0 + idx * 0x21c;
+	slot = (char*) g_slot_table + idx * 0x21c;
 	memset(slot, 0, 0x21c);
 	/* The reference stores 0xffff here before the -1 fills.  msvc6
 	 * dead-store-eliminates it against the id store further down unless the
 	 * id store is addressed so the two are not provably the same location:
-	 * with `*(unsigned short*) (0x100358a0 + idx * 0x21c) = idx` below, both
+	 * with `*(unsigned short*) (g_slot_table + idx * 0x21c) = idx` below, both
 	 * stores survive (spelling that store through `slot` removes this one).
 	 * The reference's own disassembly keeps both, so the scaled-index form is
 	 * the reconstruction, not a trick.
@@ -334,47 +417,38 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	 * The -1 fills are addressed off the scaled index, not off slot: the
 	 * reference keeps idx * 0x21c live in edx and reuses it as the base for
 	 * both. */
-	*(unsigned short*) slot = 0xffff;
-	*(int*) (0x100358a4 + idx * 0x21c) = -1;
-	/* record header init + debug sprintf/log.
-	 *
-	 * ROUND 212 -- the FIRST divergence is here, and it is NOT a missing or
-	 * extra statement.  Our object is byte-identical to the reference through
-	 * +0xa9; at +0xaa the reference has `8d92fc580310 lea edx,[edx+0x100358fc]`
-	 * while we emit `66895d00 mov word ptr [ebp],bx` + `33db xor ebx,ebx`
-	 * FIRST and then `8dbafc580310 lea edi,...`.  The reference emits that
-	 * same store/zero pair at 0x10018918 -- AFTER the rep stosd -- so the two
-	 * streams contain the same instructions in a different order, and the
-	 * reference keeps the scaled index in edx while we move it to edi.
-	 *
-	 * Reordering the C to match does NOT reproduce it.  Moving the memset
-	 * ahead of the idx store (both with and without also moving the two
-	 * zeroing stores) gives SIZE_MISMATCH 633/3694, obj 3694 -- 371 matched
-	 * bytes WORSE and 5 bytes longer, because hoisting the memset call forces
-	 * the scaled index to be rematerialised across it.  The ordering is a
-	 * SCHEDULER decision downstream of register pressure, not a statement
-	 * order we can dictate: msvc6 is sinking the 16-bit store past the block
-	 * fill on its own.  Baseline 1004/3689 restored.  See shapes 109. */
-	*(unsigned short*) (0x100358a0 + idx * 0x21c) = (unsigned short) idx;
+	*(unsigned short*) (g_slot_table + idx * 0x21c) = 0xffff;
+	*(int*) (g_slot_table + 0x4 + idx * 0x21c) = -1;
+	/* The -1 fills here, on the no-parent path and on the parent path, and
+	 * the 0x1b4 clear near the end are loops in the source: msvc6 turns
+	 * each into rep stosd or a run of stores, but the destination stays its
+	 * own register candidate, which is what the reference shows
+	 * (`lea edx,[edx+0x100358fc]; ...; mov edi,edx` at 0x100188fa, `lea
+	 * edi` before `mov ecx,8` at 0x10019455).  The same fills written as
+	 * memset() compile the destination straight into edi and shift the
+	 * allocation of the whole function (shapes 197). */
+	for (i = 0; i < 8; i++) {
+		*(int*) (g_slot_table + 0x5c + idx * 0x21c + i * 4) = -1;
+	}
+	*(unsigned short*) slot = (unsigned short) idx;
+	slot[2] = (char) type;
 	*(int*) (slot + 0x170) = 0;
 	*(int*) (slot + 0x16c) = 0;
-	memset((void*) (0x100358fc + idx * 0x21c), 0xff, 0x20);
-	slot[2] = (char) type;
 	*(int*) (slot + 0x1f0) = 0;
-	g_citizen_count++;
 	*(int*) (slot + 0x210) = -1;
 	slot[0x215] = 0;
-	sprintf(work, s_fmt_spid_100315e4, g_next_object_id, type);
+	g_citizen_count++;
 	slot[0x216] = 0;
 	slot[0x217] = 0;
+	slot[0x218] = 1;
+	sprintf(work, s_fmt_spid_100315e4, g_next_object_id, type);
+	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2637, work, 8);
 	*(int*) (slot + 4) = g_next_object_id;
 	g_next_object_id++;
 	*(int*) (slot + 0x1e4) = 0x3f800000; /* 1.0f */
 	slot[0x164] = (char) arg6;
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2637, work, 8);
-	slot[0x218] = 1;
 	slot[8] = 0x64;
-	*(int*) (slot + 0x20c) = -1;
+	*(unsigned short*) (slot + 0xa) = (unsigned short) arg4;
 	slot[0x166] = 0;
 	slot[0x165] = (char) arg7;
 	slot[0x1f4] = 0;
@@ -382,7 +456,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	*(int*) (slot + 0x194) = 0;
 	slot[0xd] = 1;
 	*(int*) (slot + 0x18c) = -1;
-	*(unsigned short*) (slot + 0xa) = (unsigned short) arg4;
+	*(int*) (slot + 0x20c) = -1;
 	if (slot[2] == 3 || slot[2] == 0x10 || slot[2] == 0x13) {
 		*(int*) (slot + 0x1e8) = 1;
 		slot[0xd] = 2;
@@ -394,75 +468,47 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		ent = ahm_InitRandomEntity();
 		slot[2] = 3;
 		if (ent != (char*) 0) {
+			idx = gm_RandomMod(8) & 0xffff;
 			*(int*) (slot + 0x1f0) = *(int*) ent;
-			rnd = gm_RandomMod(8) & 0xffff;
-			slot[9] = ent[0xd5];
 			slot[0x164] = ent[0xd4];
+			slot[9] = ent[0xd5];
 			slot[0xc] = ent[0xd6];
 			strcpy(slot + 0x30, ent + 4);
 			strcpy(slot + 0x40, ent + 0x14);
 			strcpy(slot + 0x1f4, ent + 0xd7);
-			*(int*) (slot + 0x80) = *(int*) (ent + 0x24);
-			*(char*) (slot + 0x84) = ent[0x28];
+			*(struct traits5*) (slot + 0x80) = *(struct traits5*) (ent + 0x24);
 			memcpy(slot + 0x88, ent + 0x2c, 0xa8);
-			/* The double read here is deliberate (round 179).  The
-			 * reference loads 0x1003542c ONCE at 0x10018afe and
-			 * reuses eax for both the 16-bit store and the inc:
-			 *   a12c540310 / 66894550 / 40 / a32c540310
-			 * Reading it once into `n` (mirroring the proven twin
-			 * fix on 0x10035430 below) reproduces those four
-			 * opcodes VERBATIM -- the second load does collapse.
-			 * But it costs 11 bytes (real body 3689 -> 3678), which
-			 * desyncs the whole tail: matched 766 -> 485, aligned
-			 * 662 -> 637, rebrew test 1004 -> 648, status STUB ->
-			 * SIZE_MISMATCH.  Bankable only once those 11 bytes are
-			 * recovered elsewhere in the citizen path.  The edit is
-			 *   n = *(int*) 0x1003542c;
-			 *   *(unsigned short*) (slot + 0x50) = (unsigned short) n;
-			 *   *(int*) 0x1003542c = n + 1;
-			 * (`n` already exists; a dedicated local measures the
-			 * same).  The reference also interleaves the [0x1c]
-			 * store and the fadd into this chain; forcing that from
-			 * source gets rescheduled back. */
-			*(unsigned short*) (slot + 0x50) =
-			    (unsigned short) (*(int*) 0x1003542c);
-			(*(int*) 0x1003542c)++;
-			*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 			*(float*) (slot + 0x1d0) =
-			    (float) (gm_RandomFloat01() * *(float*) 0x100256b0) +
-			    *(float*) 0x10025714;
-			*(float*) (slot + 0x14) =
-			    (float) (gm_RandomQuadratic() *
-			             *(float*) 0x100256c8) +
-			    *(float*) 0x100256c4;
+			    (float) (gm_RandomFloat01() * g_float_const_b0) +
+			    g_float_const_714;
+			n = g_dynasty_field_2c;
+			*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
+			*(unsigned short*) (slot + 0x50) = (unsigned short) n;
+			g_dynasty_field_2c = n + 1;
+			blend = gm_RandomQuadratic() * g_float_const_c8;
 			*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
-			n = (int) (*(float*) (slot + 0x1c) *
-			           g_dbl_const_810);
-			rnd = gm_RandomMod((unsigned short) n) & 0xffff;
-			*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
+			*(float*) (slot + 0x14) = (float) blend + g_float_const_c4;
 			*(float*) (slot + 0x10) =
-			    (float) (*(float*) (slot + 0x1c) *
-			                 *(float*) 0x100256b8 +
-			             (double) (unsigned short) rnd -
-			             *(float*) (slot + 0x1c) *
-			                 *(float*) 0x100256b4);
-			if (arg4 < 2) {
+			    (float) ((double) *(float*) (slot + 0x1c) * g_float_const_b8 +
+			             (double) (unsigned short) gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
+			                                            g_dbl_const_810)) -
+			             (double) *(float*) (slot + 0x1c) * g_float_const_b4);
+			*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
+			if (idx < 2) {
 				slot[0x217] = 0x58;
 			} else if (idx < 4) {
 				slot[0x217] = 0x5c;
 			}
-			slot[0x217] = (char) (0x3c + (idx < 6 ? 0x86 : 0));
-			if ((double) *(unsigned short*) (slot + 0xa) >
-			    *(float*) (slot + 0x20)) {
+			*(unsigned char*) (slot + 0x217) = idx < 6 ? 0xc2 : 0x3c;
+			age = (float) *(unsigned short*) (slot + 0xa);
+			if (age > *(float*) (slot + 0x20)) {
+				decay_citizen = *(float*) (slot + 0x14);
 				acc = *(float*) (slot + 0x1c);
-				for (n = (int) ((double) *(unsigned short*) (slot + 0xa) -
-				               *(float*) (slot + 0x20));
-				     n > 0; n--) {
-					acc = acc - *(float*) (slot + 0x14) +
-					      *(float*) (slot + 0x14) / acc;
+				for (n = (int) (age - *(float*) (slot + 0x20)); n > 0; n--) {
+					acc = acc - decay_citizen + decay_citizen / acc;
 				}
-				if (acc <= *(float*) 0x100256a0) {
-					acc = *(float*) 0x100256a0;
+				if (acc <= g_float_const_a0) {
+					acc = g_float_const_a0;
 				}
 				*(float*) (slot + 0x1c) = acc;
 				return *(unsigned short*) slot;
@@ -477,37 +523,30 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		return *(unsigned short*) slot;
 	}
 
-	/* building-type location field */
+	/* building-type location field.  The entry is a pointer local, as in
+	 * gm_CheckEntityType (spiel6.c, RELOC): the reference forms its address
+	 * with lea and loads the byte separately (0x10018c7b), where a byte
+	 * local folds the address into the load. */
 	if (location != 0) {
-		unsigned char type_byte;
-		unsigned char type_entry;
+		unsigned char* type_entry;
 
-		type_byte = *(unsigned char*) location;
-		type_entry = *(*(unsigned char**) 0x100a8c30 + type_byte * 0x24d);
-		if (type_entry != 1) {
-			if (type_entry > 3 && type_entry < 0x17 && type_entry != 0xa && type_entry != 0xf && type_entry != 0x11) {
+		type_entry = (unsigned char*) g_entity_type_table + (unsigned int) *(unsigned char*) location * 0x24d;
+		if (*type_entry != 1) {
+			if (*type_entry > 3 && *type_entry < 0x17 && *type_entry != 0xa && *type_entry != 0xf && *type_entry != 0x11) {
 				*(int*) (slot + 0x16c) = location;
 			}
 		} else {
 			*(int*) (slot + 0x170) = location;
 		}
 	}
-	slot[0xd] = (char) ((slot[0x166] != 0) + 1);
+	slot[0xd] = slot[0x166] != 0 ? 2 : 1;
 	if (type != 6 && type != 7 && type < 0xa) {
 		slot[0x1b0] = (char) gm_RandomMod(8);
 	}
 	if (arg8 == 2) {
 		slot[9] = (char) gm_RandomMod((unsigned short) arg8);
 	} else {
-		/* KNOWN BUG, kept deliberately -- see docs/msvc6-c-shapes.md 110.
-		 * The reference stores arg8 here (0x10018cec `mov [ebp+9],al` with
-		 * eax still holding arg8 on the jne-skip path); this stores 0.
-		 * Correct spellings (`(char) arg8`, or the reference's single-store
-		 * `n = arg8; if (arg8==2) n = call(); slot[9] = (char) n;`) BOTH
-		 * measure 565/3689 at obj 3679 -- 10 bytes SHORT -- and an earlier
-		 * attempt cost +393 linked via tail desync.  Needs a correct
-		 * spelling that is 10 bytes longer, or a resynced tail. */
-		slot[9] = slot[0x166];
+		slot[9] = (char) arg8;
 	}
 	if (type < 4 || type == 0xb) {
 		if (arg7 != 0) {
@@ -523,7 +562,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		}
 	}
 	mother = (char*) gm_LookupEntityRecordById(mother_id);
-	father = (char*) gm_LookupEntityRecordById(arg4);
+	father = (char*) gm_LookupEntityRecordById(father_id);
 	if (mother == (char*) 0 || father == (char*) 0) {
 		/* no usable parent pair: generate the traits from the type tables */
 		slot[0x164] = (char) arg6;
@@ -539,12 +578,12 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		 * compiles to setl / and ~V instead. */
 		if (slot[2] != 3) {
 			if (n == 0xb || n == 0xc) {
-				slot[0x217] = (char) (0x56 + (rnd < 4 ? 0xf8 : 0));
+				*(unsigned char*) (slot + 0x217) = rnd < 4 ? 0x4e : 0x56;
 			} else {
 				if (rnd < 3) {
 					slot[0x217] = 0x3e;
 				} else {
-					slot[0x217] = (char) (0x4e + (rnd < 6 ? 8 : 0));
+					*(unsigned char*) (slot + 0x217) = rnd < 6 ? 0x56 : 0x4e;
 				}
 			}
 		} else {
@@ -552,14 +591,13 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 				if (rnd < 3) {
 					slot[0x217] = 0x58;
 				} else {
-					slot[0x217] =
-					    (char) (0xc2 + (rnd < 6 ? -0x66 : 0));
+					*(unsigned char*) (slot + 0x217) = rnd < 6 ? 0x5c : 0xc2;
 				}
 			} else {
 				if (rnd < 3) {
 					slot[0x217] = 0x3c;
 				} else {
-					slot[0x217] = (char) (0x58 + (rnd < 6 ? 4 : 0));
+					*(unsigned char*) (slot + 0x217) = rnd < 6 ? 0x5c : 0x58;
 				}
 			}
 		}
@@ -569,59 +607,102 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		for (i = 0xe; i != 0; i--) {
 			dst[0] = (float) (gm_RandomFloat01() * (double) (src[1] - src[0]) +
 			                  src[0]);
+			dst[2] = (float) ((double) (gm_RandomMod(0xa) & 0xffff) +
+			                  g_dbl_const_f98);
+			dst[1] = (float) ((double) dst[0] * g_dbl_const_6d0);
 			src += 2;
 			dst += 3;
-			dst[-1] = (float) ((double) (gm_RandomMod(0xa) & 0xffff) +
-			                   g_dbl_const_f98);
 		}
 		*(float*) (slot + 0x124) =
 		    (float) ((gm_RandomFloat01() + g_dbl_const_688) *
 		             g_dbl_const_f90);
-			/* KNOWN BUG, deliberately left in place (round 178).
-			 * This line belongs INSIDE the loop above: the reference
-			 * emits fld [esi-0xc] / fmul [0x100256d0] / fstp [esi-8]
-			 * at 0x1001930d-0x10019316, before the back-edge jne at
-			 * 0x10019319.  It is indented as if it were in the body
-			 * but closes outside it (introduced malformed in
-			 * 63fe71e5), so it runs once instead of fourteen times.
-			 * Moving it inside is CORRECT and makes the instruction
-			 * count exact (1054 -> 1056 against the reference's
-			 * 1056) while SHORTENING the real body by 14 bytes
-			 * (3689 -> 3675) -- note the two signs differ, and it
-			 * is the BYTE sign that matters for composition: a
-			 * round-184 lane read "adds instructions" as "adds
-			 * bytes" and tried to pair this with the -11 double-load
-			 * fix under shapes section 41.  Both are negative, they
-			 * overlap by 16 bytes (-11 and -14 compose to -9, not
-			 * -25), and together they regress the instruction count
-			 * back to 1054 because both rewrite the same FP
-			 * scheduling region.  Do not pair them.
-			 * It costs +420 linked bytes (8871 -> 9291),
-			 * because our surrounding schedule then diverges.
-			 * Third instance of correctness and byte-matching
-			 * pulling apart; see the slot[9] note above and
-			 * docs/behavioral-verdicts.md.  Fix it when the
-			 * function's schedule is close enough to absorb it. */
-			dst[-2] = (float) ((double) dst[-3] * g_dbl_const_6d0);
 		*(float*) (slot + 0x128) =
 		    (float) ((double) *(float*) (slot + 0x124) *
 		             g_dbl_const_6d0);
 		/* symmetric sympathy-matrix init: both [j][id] and [id][j] */
 		for (j = 0; j < 0x300; j++) {
-			colv = *(volatile unsigned short*) slot + j * 0x300;
-			*(char*) (0x1014d8e0 + colv) = 0;
-			*(char*) (0x100a9820 + colv) =
+			*(char*) (g_relationship_matrix_primary + *(unsigned short*) slot + j * 0x300) =
 			    (char) (gm_RandomMod(0x40) - 0x20);
-			rowv = ((*(volatile unsigned short*) slot * 3) << 8) + j;
-			*(char*) (0x100a9820 + rowv) =
+			*(char*) (g_relationship_matrix_secondary + *(unsigned short*) slot + j * 0x300) = 0;
+			*(char*) (g_relationship_matrix_primary + ((*(unsigned short*) slot * 3) << 8) + j) =
 			    (char) (gm_RandomMod(0x40) - 0x20);
-			*(char*) (0x1014d8e0 + rowv) = 0;
+			*(char*) (g_relationship_matrix_secondary + ((*(unsigned short*) slot * 3) << 8) + j) = 0;
 		}
 		slot[0xc] = (char) gm_RandomMod(2);
 		*(float*) (slot + 0x1d0) =
-		    (float) (gm_RandomFloat01() * *(float*) 0x100256b0) +
-		    *(float*) 0x10025714;
-		goto stat_modifiers;
+		    (float) (gm_RandomFloat01() * g_float_const_b0) +
+		    g_float_const_714;
+		/* Stat modifiers through the second draw belong to this path only:
+		 * the two-parent path's mutual block jumps past them to the shared
+		 * draw (reference jmp 0x10019572 at 0x100191e9), having set its own
+		 * counters, parent ids and 1000.0f fields already. */
+		if (arg7 != 0 && arg6 == 0) {
+			for (i = 0; i < 5; i++) {
+				slot[0x80 + i] = (char) gm_RandomStatModifier(
+				    g_stat_table_30dda[*(unsigned char*) (slot + 0x165) * 6 + i]);
+			}
+		} else {
+			for (i = 0; i < 5; i++) {
+				slot[0x80 + i] = (char) gm_RandomStatModifier(
+				    g_stat_table_30ba0[*(unsigned char*) (slot + 0x164) * 6 + i]);
+			}
+		}
+
+		if (type != 6 && type != 7) {
+			slot[0xd] = g_stat_table_30ba0[*(unsigned char*) (slot + 0x164) * 6 + 5];
+		}
+		for (i = 0; i < 8; i++) {
+			*(int*) (slot + 0x5c + i * 4) = -1;
+		}
+		*(int*) (slot + 0x64) = father_id;
+		slot[0x58] = 1;
+		if (father != (char*) 0) {
+			slot[0x58] = (char) (father[0x58] + 1);
+			for (i = 3; i < 8; i++) {
+				if (*(int*) (father + i * 4 + 0x5c) == -1) {
+					*(int*) (father + i * 4 + 0x5c) = *(int*) (slot + 4);
+					break;
+				}
+			}
+		}
+		if (type == 6 || type == 7 || type == 5) {
+			/* The reference loads the family counter once and reuses it for the
+			 * bound test and the update: `mov eax,[0x10035430]; cmp eax,0x10;
+			 * jl ...; mov edx,eax; or dh,0x80; inc eax; mov [ebp+0x50],dx;
+			 * mov [0x10035430],eax` at 0x100194c5.  Reading the global twice
+			 * emitted a 16-bit load for the store and a second 32-bit load for
+			 * the increment. */
+			n = gm_CurrentHumanFamilyCount;
+			if (n >= 0x10) {
+				LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x27f0,
+				                   s_family_overflow_100315ac, 1);
+				return 0xffff;
+			}
+			*(unsigned short*) (slot + 0x50) = (unsigned short) (n | 0x8000);
+			gm_CurrentHumanFamilyCount = n + 1;
+		} else if (type >= 0xa) {
+			*(unsigned short*) (slot + 0x50) = 0x7fff;
+		} else {
+			/* Same single-load shape on the other counter (0x100194d8). */
+			n = g_dynasty_field_2c;
+			*(unsigned short*) (slot + 0x50) = (unsigned short) n;
+			g_dynasty_field_2c = n + 1;
+		}
+		*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
+		*(float*) (slot + 0x14) =
+		    (float) (gm_RandomQuadratic() * g_float_const_c8) +
+		    g_float_const_c4;
+		*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
+		*(float*) (slot + 0x10) =
+		    (float) ((double) *(float*) (slot + 0x1c) * g_float_const_b8 +
+		             (double) (unsigned short) gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
+		                                            g_dbl_const_810)) -
+		             (double) *(float*) (slot + 0x1c) * g_float_const_b4);
+		*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
+		/* first of two discarded gm_RandomMod(0x10) draws (0x1001956a); the
+		 * second, at draw_tail, is the one both paths reach */
+		gm_RandomMod(0x10);
+		goto draw_tail;
 	}
 	/* Round 194: the parent-wins chain is ONE fault, not the five the
 	 * round-429 census implied, and not 344 bytes -- the chain proper is
@@ -669,13 +750,13 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	/* 14-iteration parent trait interpolation; the 0x88/0x84/0x80 triple is
 	 * float, not byte: the reference stores them with fstp dword */
 	for (i = 0; i < 0xe; i++) {
-		double rnd01;
+		float rnd01;
 
 		rnd01 = gm_RandomFloat01();
 		*(float*) (slot + 0x88 + i * 0xc) =
 		    (float) ((g_dbl_const_7d8 - rnd01) *
 		                 (double) *(float*) (father + 0x88 + i * 0xc) +
-		             rnd01 * (double) *(float*) (mother + 0x88 + i * 0xc));
+		             rnd01 * *(float*) (mother + 0x88 + i * 0xc));
 		*(float*) (slot + 0x90 + i * 0xc) =
 		    (float) ((double) (gm_RandomMod(0xa) & 0xffff) +
 		             g_dbl_const_f98);
@@ -687,43 +768,47 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	 * trait loop -- the no-parent twin at 0x1001931b already sits after
 	 * its own loop, and that asymmetry is what exposed the difference.
 	 * Defined above the loop, [0x124] pins its schedule across it. */
-	*(float*) (slot + 0x124) =
-	    (float) ((gm_RandomFloat01() + g_dbl_const_688) *
-	             g_dbl_const_f90);
-	*(float*) (slot + 0x128) =
-	    (float) ((double) *(float*) (slot + 0x124) *
-	             g_dbl_const_6d0);
+	scale = (gm_RandomFloat01() + g_dbl_const_688) * g_dbl_const_f90;
+	*(float*) (slot + 0x124) = (float) scale;
+	*(float*) (slot + 0x128) = (float) (scale * g_dbl_const_6d0);
 	/* find the best trait index of each parent (quirky +1 indexing) */
 	best_mother = 0;
 	best_father = 0;
-	for (i = 0; i < 4; i++) {
-		if (*(unsigned char*) (father + 0x81 + i) >
-		    *(unsigned char*) (father + 0x80 + best_father)) {
-			best_father = i + 1;
-		}
-		if (*(unsigned char*) (mother + 0x81 + i) >
+	/* mother first: the reference compares through the mother pointer and
+	 * keeps the father byte pointer as the induction (0x10018eb9) */
+	for (i = 1; i < 5; i++) {
+		if (*(unsigned char*) (mother + 0x80 + i) >
 		    *(unsigned char*) (mother + 0x80 + best_mother)) {
-			best_mother = i + 1;
+			best_mother = i;
+		}
+		if (*(unsigned char*) (father + 0x80 + i) >
+		    *(unsigned char*) (father + 0x80 + best_father)) {
+			best_father = i;
 		}
 	}
 	/* per-trait selection: father best / mother best / interpolation */
-	acc = (float) gm_RandomFloat01();
+	trait_home = &trait_byte;
 	for (i = 0; i < 5; i++) {
-		if (i == best_mother) {
-			slot[0x80 + i] = (char) (
-			    (double) *(unsigned char*) (mother + 0x80 + i) *
-			    *(float*) 0x100256b0);
-		} else if (i == best_father) {
+		float weight;
+
+		weight = (float) gm_RandomFloat01();
+		if (i == best_father) {
 			slot[0x80 + i] = (char) (
 			    (double) *(unsigned char*) (father + 0x80 + i) *
-			    *(float*) 0x100256b0);
-		} else {
+			    g_float_const_b0);
+		} else if (i == best_mother) {
 			slot[0x80 + i] = (char) (
-			    ((g_dbl_const_7d8 - (double) acc) *
-			         (double) *(unsigned char*) (father + 0x80 + i) +
-			     (double) acc *
-			         (double) *(unsigned char*) (mother + 0x80 + i)) *
-			    *(float*) 0x100256b0);
+			    (double) *(unsigned char*) (mother + 0x80 + i) *
+			    g_float_const_b0);
+		} else {
+			/* The father byte goes through an int with a memory home, which
+			 * is what makes msvc6 emit fimul (shapes 82); without the
+			 * (double) casts the mother term compiles to fild + fmul [weight]
+			 * and all three arms share the reference's tail fmul (0x10018f5e). */
+			*trait_home = *(unsigned char*) (father + 0x80 + i);
+			slot[0x80 + i] = (char) (((g_dbl_const_7d8 - weight) * trait_byte +
+			                          *(unsigned char*) (mother + 0x80 + i) * weight) *
+			                         g_float_const_b0);
 		}
 	}
 	/* no gm_RandomMod(2) / gm_RandomFloat01 pair here: on the two-parent
@@ -731,25 +816,10 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	 * checks above (reference 0x10018d96..0x10018df9).  The randomized pair
 	 * belongs only to the no-parent path at 0x1001939a. */
 	/* record both parents and hook the child into their ref arrays */
-	*(int*) (slot + 0x64) = gender;
 	*(int*) (slot + 0x60) = mother_id;
-	*(int*) (slot + 0x68) = -1;
-	*(int*) (slot + 0x6c) = -1;
-	*(int*) (slot + 0x70) = -1;
-	*(int*) (slot + 0x74) = -1;
-	*(int*) (slot + 0x78) = -1;
+	*(int*) (slot + 0x64) = father_id;
 	for (i = 3; i < 8; i++) {
-		int ref;
-
-		ref = *(int*) (father + i * 4 + 0x5c);
-		if (ref == -1) {
-			*(int*) (father + i * 4 + 0x5c) = *(int*) (slot + 4);
-			break;
-		}
-		if (((char*) gm_LookupEntityRecordById(ref))[2] == 0xf) {
-			*(int*) (father + i * 4 + 0x5c) = *(int*) (slot + 4);
-			break;
-		}
+		*(int*) (slot + 0x5c + i * 4) = -1;
 	}
 	for (i = 3; i < 8; i++) {
 		int ref;
@@ -764,180 +834,101 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 			break;
 		}
 	}
+	for (i = 3; i < 8; i++) {
+		int ref;
+
+		ref = *(int*) (father + i * 4 + 0x5c);
+		if (ref == -1) {
+			*(int*) (father + i * 4 + 0x5c) = *(int*) (slot + 4);
+			break;
+		}
+		if (((char*) gm_LookupEntityRecordById(ref))[2] == 0xf) {
+			*(int*) (father + i * 4 + 0x5c) = *(int*) (slot + 4);
+			break;
+		}
+	}
 	*(int*) (slot + 0x7c) = 0;
-	if (mother[2] == 6 || mother[2] == 7 || mother[2] == 5) {
-		*(unsigned short*) (slot + 0x50) = *(unsigned short*) (mother + 0x50);
-		slot[0x58] = (char) (mother[0x58] + 1);
-		*(int*) (slot + 0x54) = *(int*) (mother + 0x54);
-	} else {
+	if (father[2] == 6 || father[2] == 7 || father[2] == 5) {
 		*(unsigned short*) (slot + 0x50) = *(unsigned short*) (father + 0x50);
 		slot[0x58] = (char) (father[0x58] + 1);
 		*(int*) (slot + 0x54) = *(int*) (father + 0x54);
+	} else {
+		*(unsigned short*) (slot + 0x50) = *(unsigned short*) (mother + 0x50);
+		slot[0x58] = (char) (mother[0x58] + 1);
+		*(int*) (slot + 0x54) = *(int*) (mother + 0x54);
 	}
 	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 	*(float*) (slot + 0x14) =
-	    (float) ((gm_RandomQuadratic() * *(float*) 0x100256c8 +
-	              *(float*) 0x100256c4) *
+	    (float) ((gm_RandomQuadratic() * g_float_const_c8 +
+	              g_float_const_c4) *
 	                 g_dbl_const_f88 +
 	             (*(float*) (father + 0x14) + *(float*) (mother + 0x14)) *
 	                 g_dbl_const_810);
-	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
-	                                           g_dbl_const_810)) &
-	      0xffff;
 	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
-	*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
 	*(float*) (slot + 0x10) =
-	    (float) (*(float*) (slot + 0x1c) * *(float*) 0x100256b8 +
-	             (double) (unsigned short) rnd - *(float*) (slot + 0x1c) *
-	                                *(float*) 0x100256b4);
-	/* Symmetric sympathy-matrix init: both [j][id] and [id][j].  Each pair of
-	 * stores shares one index local, which is what makes msvc6 emit the
-	 * reference's single-base "mov byte ptr [edi + <table>]" form instead of
-	 * recomputing the address for every store.  Both reads must stay
-	 * volatile; the reference reloads `*(unsigned short*) slot` once per
-	 * iteration (two `xor eax,eax; mov ax,[ebp]` pairs at 0x10019342) and
-	 * only a volatile read prevents msvc6 from keeping it in a register.
-	 * The sibling loop in the no-parent path above takes the same shape: the
-	 * reference reloads there too (0x10018f12..0x10018f41), which an earlier
-	 * note here denied.  Its four writes were inline, so they had to be given
-	 * the two index locals first. */
+	    (float) ((double) *(float*) (slot + 0x1c) * g_float_const_b8 +
+	             (double) (unsigned short) gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
+	                                            g_dbl_const_810)) -
+	             (double) *(float*) (slot + 0x1c) * g_float_const_b4);
+	*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
+	/* Symmetric sympathy-matrix init: both [j][id] and [id][j].  The index
+	 * is written into each store rather than held in a local: msvc6 then
+	 * shares the sum as its own CSE, loads the id into a scratch register and
+	 * forms the index with lea into a callee-saved one, as the reference does
+	 * (0x100190fc).  A named index local takes the id load directly and adds,
+	 * 2 bytes shorter per loop. */
 	for (j = 0; j < 0x300; j++) {
-		colv = *(volatile unsigned short*) slot + j * 0x300;
-		*(char*) (0x1014d8e0 + colv) = 0;
-		*(char*) (0x100a9820 + colv) =
+		*(char*) (g_relationship_matrix_primary + *(unsigned short*) slot + j * 0x300) =
 		    (char) (gm_RandomMod(0x40) - 0x20);
-		rowv = ((*(volatile unsigned short*) slot * 3) << 8) + j;
-		*(char*) (0x100a9820 + rowv) =
+		*(char*) (g_relationship_matrix_secondary + *(unsigned short*) slot + j * 0x300) = 0;
+		*(char*) (g_relationship_matrix_primary + ((*(unsigned short*) slot * 3) << 8) + j) =
 		    (char) (gm_RandomMod(0x40) - 0x20);
-		*(char*) (0x1014d8e0 + rowv) = 0;
+		*(char*) (g_relationship_matrix_secondary + ((*(unsigned short*) slot * 3) << 8) + j) = 0;
 	}
-	/* mutual sympathy between the new entity and each parent.  Unlike the two
-	 * loops above, these reads are plain: the unit compiles with /Oa, and
-	 * under a no-alias assumption the volatile only cost msvc6 the reloads
-	 * the reference actually takes. */
-	*(char*) (0x100a9820 + ((*(unsigned short*) slot * 3) << 8) +
+	/* mutual sympathy between the new entity and each parent.  The value is a
+	 * char: the reference computes it with `mov cl,0x7f; sub cl,al` and
+	 * stores cl, where an int temporary adds a movsx per store. */
+	*(char*) (g_relationship_matrix_primary + ((*(unsigned short*) slot * 3) << 8) +
 	          *(unsigned short*) mother) =
 	    (char) (0x7f - gm_RandomMod(0x20));
-	*(char*) (0x100a9820 + ((*(unsigned short*) mother * 3) << 8) +
+	*(char*) (g_relationship_matrix_primary + ((*(unsigned short*) mother * 3) << 8) +
 	          *(unsigned short*) slot) =
 	    (char) (0x7f - gm_RandomMod(0x20));
-	*(char*) (0x100a9820 + ((*(unsigned short*) slot * 3) << 8) +
+	*(char*) (g_relationship_matrix_primary + ((*(unsigned short*) slot * 3) << 8) +
 	          *(unsigned short*) father) =
 	    (char) (0x7f - gm_RandomMod(0x20));
-	*(char*) (0x100a9820 + ((*(unsigned short*) father * 3) << 8) +
+	*(char*) (g_relationship_matrix_primary + ((*(unsigned short*) father * 3) << 8) +
 	          *(unsigned short*) slot) =
 	    (char) (0x7f - gm_RandomMod(0x20));
-	/* stat modifier loop from the type tables; shared with the no-parent
-	 * path, which reaches it via the goto above */
-stat_modifiers:
-	if (arg7 != 0 && arg6 == 0) {
-		for (i = 0; i < 5; i++) {
-			slot[0x80 + i] = (char) gm_RandomStatModifier(
-			    *(unsigned char*) (0x10030dda +
-			                       *(unsigned char*) (slot + 0x165) * 6 +
-			                       i));
-		}
-	} else {
-		for (i = 0; i < 5; i++) {
-			slot[0x80 + i] = (char) gm_RandomStatModifier(
-			    *(unsigned char*) (0x10030ba0 +
-			                       *(unsigned char*) (slot + 0x164) * 6 +
-			                       i));
-		}
-	}
-
-	*(int*) (slot + 0x64) = gender;
-	if (type != 6 && type != 7) {
-		slot[0xd] = *(char*) (0x10030ba5 +
-		                      *(unsigned char*) (slot + 0x164) * 6);
-	}
-	memset(slot + 0x5c, 0xff, 0x20);
-	if (father != (char*) 0) {
-		int* ref;
-
-		ref = (int*) (father + 0x68);
-
-		slot[0x58] = (char) (father[0x58] + 1);
-		for (i = 3; i < 8; i++) {
-			if (*ref == -1) {
-				*(int*) (father + i * 4 + 0x5c) = *(int*) (slot + 4);
-				break;
-			}
-			ref++;
-		}
-	}
-	if (type == 6 || type == 7 || type == 5) {
-		/* The reference loads the family counter once and reuses it for the
-		 * bound test and the update: `mov eax,[0x10035430]; cmp eax,0x10;
-		 * jl ...; mov edx,eax; or dh,0x80; inc eax; mov [ebp+0x50],dx;
-		 * mov [0x10035430],eax` at 0x100194c5.  Reading the global twice
-		 * emitted a 16-bit load for the store and a second 32-bit load for
-		 * the increment. */
-		n = *(int*) 0x10035430;
-		if (n >= 0x10) {
-			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x27f0,
-			                   s_family_overflow_100315ac, 1);
-			return 0xffff;
-		}
-		*(unsigned short*) (slot + 0x50) = (unsigned short) (n | 0x8000);
-		*(int*) 0x10035430 = n + 1;
-	} else if (type >= 0xa) {
-		*(unsigned short*) (slot + 0x50) = 0x7fff;
-	} else {
-		/* Same single-load shape on the other counter (0x100194d8). */
-		n = *(int*) 0x1003542c;
-		*(unsigned short*) (slot + 0x50) = (unsigned short) n;
-		*(int*) 0x1003542c = n + 1;
-	}
-	slot[0x58] = 1;
-	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
-	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
-	*(int*) (slot + 0x18) = *(int*) (slot + 0x1c);
-	*(float*) (slot + 0x14) =
-	    (float) (gm_RandomQuadratic() * *(float*) 0x100256c8) +
-	    *(float*) 0x100256c4;
-	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
-	                                           g_dbl_const_810)) &
-	      0xffff;
-	*(float*) (slot + 0x10) =
-	    (float) (*(float*) (slot + 0x1c) * *(float*) 0x100256b8 +
-	             (double) (unsigned short) rnd - *(float*) (slot + 0x1c) *
-	                                *(float*) 0x100256b4);
-	/* The reference draws gm_RandomMod(0x10) twice here, back to back and
-	 * both ahead of the stat guard (0x1001956a and 0x10019574).  Neither
-	 * result is read: the call at 0x10019574 has no `and eax,0xffff` after
-	 * it, so its value is discarded, and reading the two globals in two
-	 * expressions for one draw put one after the guard instead. */
+draw_tail:
 	gm_RandomMod(0x10);
-	gm_RandomMod(0x10);
-	if ((float) *(unsigned short*) (slot + 0xa) > *(float*) (slot + 0x20)) {
-		acc = *(float*) (slot + 0x1c);
-		for (n = (int) ((float) *(unsigned short*) (slot + 0xa) -
-		               *(float*) (slot + 0x20));
-		     n > 0; n--) {
-			acc = acc - *(float*) (slot + 0x14) +
-			      *(float*) (slot + 0x14) / acc;
+	age = (float) *(unsigned short*) (slot + 0xa);
+	if (age > *(float*) (slot + 0x20)) {
+		acc = *(float*) (slot + 0x14);
+		decay = *(float*) (slot + 0x1c);
+		for (n = (int) (age - *(float*) (slot + 0x20)); n > 0; n--) {
+			decay = decay - acc + acc / decay;
 		}
-		if (acc <= *(float*) 0x100256a0) {
-			acc = *(float*) 0x100256a0;
+		if (decay <= g_float_const_a0) {
+			decay = g_float_const_a0;
 		}
-		*(float*) (slot + 0x1c) = acc;
+		*(float*) (slot + 0x1c) = decay;
 	}
 	memset(slot + 0x1b4, 0, 0x10);
 	ahm_ResetEntityState(slot);
 	if (slot[2] == 3 || slot[2] == 4 || slot[2] == 2 || slot[2] == 0x13) {
 		rnd = gm_RandomMod(3) & 0xffff;
-		/* volatile read to stop msvc6 folding load and store into a
-		 * single "add byte ptr [..],0x2a"; the reference keeps the
-		 * separate mov/add/mov (0x10019627..0x10019634) */
-		slot[0x82 + rnd] =
-		    (char) (*(volatile char*) (slot + 0x82 + rnd) + 0x2a);
+		/* through a pointer local: the reference loads, forms the address
+		 * with lea and stores separately (0x10019619..0x1001962a); an
+		 * indexed `+= 0x2a` folds into one add byte ptr, 10 bytes shorter */
+		stat = slot + 0x82 + rnd;
+		*stat = (char) (*stat + 0x2a);
 	}
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2888, work, 8);
 	if (idx == 0xffff) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x286c, s_bug_10031594,
 		                   1);
 	}
 	sprintf(work, s_fmt_playerid_10031570, g_next_object_id, slot + 0x30);
+	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2888, work, 8);
 	return idx;
 }

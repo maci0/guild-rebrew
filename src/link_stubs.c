@@ -294,6 +294,15 @@ void* g_thread_handle = 0;
  * they land in .data, whose contents postlink replaces from the reference.
  *
  * `f88` is a dword fmul (float) in the target, unlike its qword neighbours. */
+unsigned char g_stat_table_30ba0[1];
+unsigned char g_stat_table_30dda[1];
+float g_float_const_a0 = 1.0f;
+float g_float_const_b0 = 0.5f;
+float g_float_const_b4 = 0.1f;
+float g_float_const_b8 = 0.33f;
+float g_float_const_c4 = 30.0f;
+float g_float_const_c8 = 7.0f;
+float g_float_const_714 = 0.25f;
 double g_dbl_const_688 = 2.0;
 double g_dbl_const_6d0 = 0.001;
 double g_const_half = 0.5;
