@@ -69,10 +69,19 @@ int g_crash_callback = 0;
 /* Crash handler: rewrites the module path to <name>.dbg, loads and decrypts
  * it, appends a dated record to __crashdump.log (exception name, then one
  * line per stack frame via EmitCrashModuleLine) and chains to
- * UnhandledExceptionFilter.  The GetModuleFileNameA failure and the
- * missing-.dbg path return early (see there); the deeper checks nest as
- * `if (success) { body } else { error }` because the front end creates
- * else-blocks innermost-first, which is the reference's cold-block order.
+ * UnhandledExceptionFilter.  The checks nest as `if (success) { body }
+ * else { error }` because the front end creates else-blocks innermost-first,
+ * which is the reference's cold-block order.  Every path, the two failures
+ * before the hDbgFile region included, reaches the one exit at the end.
+ *
+ * Cleanup (0x10002d63..0x10002e9b, instruction-exact).  The region's paths
+ * share one VirtualFree(pDbgBuf) (success, 0x20f, 0x213) and one
+ * CloseHandle(hDbgFile) (all five), as the nesting gives them.  With that
+ * join, c2 saves ebx/edi at the region entry (0x1000282c) and pops them
+ * after the shared CloseHandle, and a late pass copies the two short blocks
+ * into each path, leaving the reference's per-path `pop edi; pop ebx; jmp`.
+ * With each path closing its own handles the region has no join before the
+ * exit, and all four registers are saved in the prologue.
  *
  * Exception switch (0x10002a02..0x10002c54, instruction-exact).  Every case
  * writes its message and the newline itself: that gives each arm three
@@ -82,27 +91,23 @@ int g_crash_callback = 0;
  * two tails need two targets: the B cases `break` to the frame fill, which
  * case 0xc00000fd falls into, and the A cases jump to group_a_done, which
  * case 0xc000008e falls into.  group_a_done repeats the frame fill's first
- * two statements, the hCrashLog and pStack stores, and jumps past the frame
- * fill's copies.  Both use no scratch register (hCrashLog is ebp, espVal is
- * ebx), so the copies compile alike: c2 cross-jumps them into the frame fill
- * and then tail A's newline call into tail B's, as in the reference.  An
+ * statement, the hCrashLog store, and jumps past the frame fill's copy.  It
+ * uses no scratch register (hCrashLog is ebp), so the copies compile alike:
+ * c2 cross-jumps them into the frame fill and then tail A's newline call
+ * into tail B's, as in the reference.  An
  * empty label there collapses into the switch end and the A arms stop
  * merging; a copy that loads into a scratch register (frameInfo[0]) differs
- * between the two sites and stays in tail A.
+ * between the two sites and stays in tail A.  pStack is stored after the
+ * frameInfo zero stores, as in the reference; stored in the join copies it
+ * lands before them, and hDbgFile and pDbgBuf (three references each) come
+ * out in each other's stack slots.
  *
- * Still open: the pCtx store sits after the GetModuleFileNameA check (see
- * there); the hDbgFile/pDbgBuf slots are swapped; the call-site scan flag
- * lacks the reference's `and al,1`.  In the cleanup tail the reference
- * reloads pDbgBuf/hDbgFile into ebx/ebp, calls CloseHandle through memory and
- * pops edi/ebx on each exit before one shared exit block; ours caches
- * CloseHandle in esi and pops at the start of the region's own exit copy, so
- * the function ends 1 byte late and the jump tables sit 4 bytes late. */
+ * Still open: the scheduling of the separator copies after GetCurrentProcess
+ * and of the frame fill's first two loads. */
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
 	char szLine[4];
-	char* fail_msg;
-	unsigned int fail_line;
 	char fCanContinue;
 	char space;
 	unsigned int dwDbgFileSize;
@@ -127,35 +132,17 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	char szDateBuf[0x100];
 	char szModulePath[0x100];
 
+	pCtx = pExceptionPointers->ContextRecord;
 	fCanContinue = 0;
 
 	/* Disable crash handler to avoid recursion */
 	SetUnhandledExceptionFilter(0);
 
-	/* Get module filename to build .dbg path.  This failure and the
-	 * missing-.dbg path return through their own copy of the exit code
-	 * (c2 cross-jumps it into the final one), so no path that skips the
-	 * hDbgFile region rejoins it: only then does c2 save ebx/edi at the
-	 * region's entry (0x1000282c) and restore them on each of its exits,
-	 * as the reference does.  Deeper checks are written as `if (success)
-	 * { body } else { error }`: the front end creates the else-blocks
-	 * innermost-first, which is the reference's cold-block order. */
-	if (!GetModuleFileNameA(0, szModulePath, 0x100)) {
-early_exit:
-		if (g_crash_callback && !fCanContinue) {
-			((void (__cdecl*)(int)) g_crash_callback)(-1);
-		}
-		UnhandledExceptionFilter(pExceptionPointers);
-		return 1;
-	}
-	{
+	/* Get module filename to build .dbg path */
+	if (GetModuleFileNameA(0, szModulePath, 0x100)) {
 		char* path_cursor;
 		char* pStart;
 
-		/* The reference stores pCtx before SetUnhandledExceptionFilter;
-		 * computed there, pExceptionPointers becomes a register candidate
-		 * across the early exit and pins edi in the prologue. */
-		pCtx = pExceptionPointers->ContextRecord;
 		/* Find last char */
 		path_cursor = szModulePath;
 		if (*path_cursor != '\0') {
@@ -287,7 +274,6 @@ early_exit:
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 group_a_done:
 								frameInfo[1] = (int) hCrashLog;
-								pStack = (unsigned int*) (espVal - 4);
 								goto frame_fill;
 							case 0xc000008f:
 								WriteFile(hCrashLog, (const char*) 0x10027208, 0x12, &nBytesWritten, 0);
@@ -333,7 +319,6 @@ unknown_exc:
 
 							/* Stack walk */
 							frameInfo[1] = (int) hCrashLog;
-							pStack = (unsigned int*) (espVal - 4);
 frame_fill:
 							frameInfo[0] = (int) pDbgBuf;
 							frameInfo[2] = (int) pCtx->Eip;
@@ -341,6 +326,7 @@ frame_fill:
 							frameInfo[4] = 0;
 							frameInfo[5] = 0;
 							frameInfo[6] = 0;
+							pStack = (unsigned int*) (espVal - 4);
 
 							for (;;) {
 								VirtualQuery((const void*) frameInfo[2], &mbi, 0x1c);
@@ -354,9 +340,10 @@ frame_fill:
 								}
 								/* Scan back up to 7 bytes for a readable call instruction; when
 								 * nothing is readable nInstr ends at 0, as in the reference.  The
-								 * flag is tested at the join, where the reference also masks it
-								 * with `and al,1` (2 bytes no spelling here reproduces). */
-								instrType = 1;
+								 * reference's `seta al; and al,1; test al,al` needs the `& 1` and
+								 * the constant in an else arm: with `instrType = 1` ahead of the
+								 * `if` (or no mask) c2 folds the flag into the compare, and a masked
+								 * flag that is not a register candidate gets a stack slot. */
 								if (frameInfo[2] != (int) pCtx->Eip) {
 									int nInstr = 7;
 									char* pInstr = szDateBuf;
@@ -365,7 +352,10 @@ frame_fill:
 											break;
 										}
 									}
-									instrType = (unsigned char) AnalyzeInstruction((int) &szDateBuf[7], nInstr, frameInfo[2], &frameInfo[3]) > 0;
+									instrType = ((unsigned char) AnalyzeInstruction((int) &szDateBuf[7], nInstr, frameInfo[2], &frameInfo[3]) > 0) & 1;
+								}
+								else {
+									instrType = 1;
 								}
 								if (instrType) {
 									if (EmitCrashModuleLine(frameInfo)) {
@@ -390,52 +380,30 @@ done_walk:
 							}
 							WriteFile(hCrashLog, &szLine[2], 1, &nBytesWritten, 0);
 							CloseHandle(hCrashLog);
-							VirtualFree(pDbgBuf, 0, 0x8000);
-							CloseHandle(hDbgFile);
 						}
 						else {
-							/* Crash log could not be opened. */
 							LogMessageInternal((char*) 0x10027144, 0x20f, (char*) 0x10027164, 1);
-							VirtualFree(pDbgBuf, 0, 0x8000);
-							CloseHandle(hDbgFile);
 						}
 					}
 					else {
-						/* Short read of the dbg payload. */
 						LogMessageInternal((char*) 0x10027144, 0x213, (char*) 0x1002712c, 1);
-						VirtualFree(pDbgBuf, 0, 0x8000);
-						CloseHandle(hDbgFile);
 					}
+					VirtualFree(pDbgBuf, 0, 0x8000);
 				}
 				else {
-					fail_msg = (char*) 0x10027120;
-					fail_line = 0x218;
-					goto log_close;
+					LogMessageInternal((char*) 0x10027144, 0x218, (char*) 0x10027120, 1);
 				}
 			}
 			else {
-				fail_msg = (char*) 0x10027110;
-				fail_line = 0x21b;
-				goto log_close;
+				LogMessageInternal((char*) 0x10027144, 0x21b, (char*) 0x10027110, 1);
 			}
+			CloseHandle(hDbgFile);
 		}
 		else {
-			/* The .dbg file could not be opened. */
 			LogMessageInternal((char*) 0x10027144, 0x220, (char*) 0x10027104, 1);
-			goto early_exit;
 		}
 	}
 
-	goto no_dbg;
-
-/* Shared by the 0x218 and 0x21b failures, as the reference shares one
- * LogMessageInternal call between them.  It must stay at the end: placed
- * after the `if (!pDbgBuf)` block it makes the rest unreachable. */
-log_close:
-	LogMessageInternal((char*) 0x10027144, fail_line, fail_msg, 1);
-	CloseHandle(hDbgFile);
-
-no_dbg:
 	if (g_crash_callback && !fCanContinue) {
 		((void (__cdecl*)(int)) g_crash_callback)(-1);
 	}
