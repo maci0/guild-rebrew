@@ -279,6 +279,16 @@ Ordered by what the evidence says is most likely to pay.
 
 ## 8. The measured floor of this constraint set
 
+> **Correction (2026-09-25): 8,634 was not a floor.** The linked residue fell from 11,735 to
+> 5,404 without touching a single codegen wall. Three causes, none a C-spelling issue: seven files
+> defined functions out of VA order after the `src/Develop` reshuffle, and the linker places a
+> translation unit's functions in source order (-2,945, plus -137 for m_alloc2.c's
+> `#pragma optimize` pair); stale per-function flag pins (`gm_AllocSpieler` compiled `/Oa /Ow` while
+> tuned at `/O2 /Gd`, -2,804; `m_AllocTracked` `/G6 /Oy-`, -69); and a CMake `COMPILE_OPTIONS`
+> pin whose path the reshuffle broke, so `gv_ExAllocGraveyardWorker` silently lost its `/Ow` (-5).
+> Every remaining byte is inside a carrier's own body. The section below is kept as the record of
+> what rounds 833-843 measured; read its conclusions as "under the composition of that time".
+
 Established 2026-09-17 after rounds 833-843, by exhaustion with the population stated at each
 step rather than by assertion. **Under C89, MSVC6 SP6, `/O2 /Gd`, no asm, no naked, no `_emit`:
 the whole-tree `.text` residue floor for this binary is 8,634 bytes**, all inside 18 functions.
