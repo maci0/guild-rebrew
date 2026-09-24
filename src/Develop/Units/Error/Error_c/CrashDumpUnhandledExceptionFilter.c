@@ -99,10 +99,7 @@ int g_crash_callback = 0;
  * merging; a copy that loads into a scratch register (frameInfo[0]) differs
  * between the two sites and stays in tail A.
  *
- * Still open: the hDbgFile/pDbgBuf slots are swapped; the call-site scan flag
- * lacks the reference's `and al,1`, so everything after it sits 2 bytes early
- * (the function ends at 0x10002e9a against 0x10002e9c; the jump tables stay
- * in place because of the alignment pad). */
+ * Still open: the hDbgFile/pDbgBuf slots are swapped. */
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
@@ -340,9 +337,10 @@ frame_fill:
 								}
 								/* Scan back up to 7 bytes for a readable call instruction; when
 								 * nothing is readable nInstr ends at 0, as in the reference.  The
-								 * flag is tested at the join, where the reference also masks it
-								 * with `and al,1` (2 bytes no spelling here reproduces). */
-								instrType = 1;
+								 * reference's `seta al; and al,1; test al,al` needs the `& 1` and
+								 * the constant in an else arm.  Without the mask c2 folds the flag
+								 * into the compare; with `instrType = 1` ahead of the `if`, the
+								 * masked flag is no register candidate and gets a stack slot. */
 								if (frameInfo[2] != (int) pCtx->Eip) {
 									int nInstr = 7;
 									char* pInstr = szDateBuf;
@@ -351,7 +349,10 @@ frame_fill:
 											break;
 										}
 									}
-									instrType = (unsigned char) AnalyzeInstruction((int) &szDateBuf[7], nInstr, frameInfo[2], &frameInfo[3]) > 0;
+									instrType = ((unsigned char) AnalyzeInstruction((int) &szDateBuf[7], nInstr, frameInfo[2], &frameInfo[3]) > 0) & 1;
+								}
+								else {
+									instrType = 1;
 								}
 								if (instrType) {
 									if (EmitCrashModuleLine(frameInfo)) {
