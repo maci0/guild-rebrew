@@ -90,7 +90,6 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		}
 		if (chosen == 0x300) {
 			LogMessageInternal((char*) 0x1002d48c, 0x6ef, (char*) 0x1002d4bc, 1);
-fail_ffff:
 			return 0xffff;
 		}
 	}
@@ -205,5 +204,9 @@ clear_entry:
 	memset(entry, 0, 0x44);
 	*(int*) entry = -1;
 	return (short) *(volatile unsigned short*) grave;
+	/* With this label inside the log block, msvc6 routes the three
+	 * entry-search exits to the `!slot` epilogue at 0x10011cdb; placed here
+	 * they reach the log path's epilogue at 0x10011d77, as in the reference. */
+fail_ffff:
+	return 0xffff;
 }
-
