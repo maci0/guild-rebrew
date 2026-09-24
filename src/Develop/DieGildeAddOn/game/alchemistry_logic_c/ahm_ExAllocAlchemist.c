@@ -45,8 +45,8 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[];
  *   - +0x119..+0x17d: the reference loads `mov dl,1` in the citizen-count
  *     slack and reloads cmd_payload right after the object-id writeback;
  *     ours loads `dl` after the dynamic load and the reload after `[esi+8]`.
- *   - +0x232/+0x246: the two slot+0x1c products load the constant first
- *     (`fld [const]; fmul [esi+0x1c]`); the reference loads the field first. */
+ *   - +0x23c: the slot+0x18 copy is stored after the second product; the
+ *     reference stores it after the first. */
 
 unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 {
@@ -187,11 +187,14 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	/* Compound updates of one float local: `v +=` then `v -=` emit the
 	 * reference's popping `faddp`/`fsubp` after a separate `fild`.  A
 	 * single expression uses `fiadd`, or a non-popping `fadd` plus a trailing
-	 * `fstp st(0)` when the conversion is a named local. */
+	 * `fstp st(0)` when the conversion is a named local.  Reading slot+0x1c
+	 * through the `fp` local loads the field first (`fld [esi+0x1c]; fmul
+	 * [const]`); spelled inline, msvc6 loads the constant first. */
 	{
 		float v = (float) rand_value;
-		v += *(float*) (slot + 0x1c) * *(float*) 0x100256b8;
-		v -= *(float*) (slot + 0x1c) * *(float*) 0x100256b4;
+		float* fp = (float*) (slot + 0x1c);
+		v += *fp * *(float*) 0x100256b8;
+		v -= *fp * *(float*) 0x100256b4;
 		*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
 		*(float*) (slot + 0x10) = v;
 	}
