@@ -1,4 +1,4 @@
-# Behavioral verdicts — residue functions
+# Behavioral verdicts: residue functions
 
 Every function carrying linked `.text` residue has an explicit behavioral
 verdict as of rounds 288–297. Method: independent instruction-level review
@@ -14,7 +14,7 @@ below cover what the prover pattern-misses (store values, struct fields).
 
 | Function | VA | Residue | Verdict | Round |
 |---|---|---|---|---|
-| gm_AllocSpieler | 0x10018850 | 2861 | **2 live bugs.** slot[9] else-branch stores slot[0x166] (=0), reference stores (char)arg8 — correct fix unlandable (+393 linked). Tail log/sprintf order swapped (+53 lead). | 288 |
+| gm_AllocSpieler | 0x10018850 | 2861 | **2 live bugs.** slot[9] else-branch stores slot[0x166] (=0), reference stores (char)arg8: correct fix unlandable (+393 linked). Tail log/sprintf order swapped (+53 lead). | 288 |
 | CrashDumpUnhandledExceptionFilter | 0x10002770 | 1597 | **1 bug fixed at +0**: walk gate tested mbi.RegionSize, reference tests mbi.State. Bug 1 (arg swap) verified fixed; bug 2 (dead block) fixed long ago. Rest clean. | 290 |
 | cm_ExSellObjekt | 0x1000d930 | 1404 | Clean. Dest out-param reuse confirmed correct; 31/31 calls verified. | 289 |
 | ls_LoadBuildingEntityState | 0x100128f0 | 728 | Clean. Offsets, gates, paths, state block verified. | 292 |
@@ -34,6 +34,6 @@ below cover what the prover pattern-misses (store values, struct fields).
 | cm_ProcessCommandQueue | 0x1000aac0 | 15 | Clean. Join fold taken-edge-identical. | 296 |
 | (outside functions) | 0x100092bc | 7 | OpenVfsStream +1-shifted jump table (net effect). | 287 |
 
-Score: clean-or-documented 19/19. Live-semantics work remaining: none —
+Score: clean-or-documented 19/19. Live-semantics work remaining: none;
 the two Spieler bugs are recorded with revisit conditions; everything else
 is codegen-shaped residue under documented walls.

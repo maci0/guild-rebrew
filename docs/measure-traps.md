@@ -1,4 +1,4 @@
-# Measure traps — the method's own failure modes
+# Measure traps: the method's own failure modes
 
 These cost as much as the codegen walls, and most of them were learned by being burned.
 For what the compiler itself blocks, see `codegen-walls.md`. Live residue /
@@ -12,12 +12,12 @@ Companion reading: `msvc6-c-shapes.md` (front-end shapes), `msvc6-allocator.md`
 
 ## 1. Only the linked residue decides
 
-Object metrics are proxies and have pointed the wrong way repeatedly — at least six
+Object metrics are proxies and have pointed the wrong way repeatedly: at least six
 recorded instances, including one where the *positional* metric (`aligned`) picked the
 losing candidate by 3 linked bytes, and one where `matched` rose by 6 while the link fell
 by 1. But they are not useless: on `CrashDump`'s V2 the object metric was much worse *and
-so was the link* (+131), because the mechanism — a 59-byte shortfall displacing the
-function's own jump tables — was understood. **The rule that survives: neither accept nor
+so was the link* (+131), because the mechanism (a 59-byte shortfall displacing the
+function's own jump tables) was understood. **The rule that survives: neither accept nor
 reject on a metric alone.**
 
 ## 2. One candidate, one full rebuild, one number
@@ -43,9 +43,9 @@ Concrete ceilings, computed per window from the reference's HIGHLOW count:
 On the last two, `matched-reloc` **already equals the ceiling**: their entire remaining
 `matched` shortfall is accounting, and **zero** of it is codegen work. A function can be
 finished as far as any code edit can take it while its `matched` still looks far from its size.
-`gm_AllocSpieler`'s ceiling is ~3115 of 3689 — the distance from 736 was never reachable.
+`gm_AllocSpieler`'s ceiling is ~3115 of 3689: the distance from 736 was never reachable.
 
-A recognition that some residue is unreachable by any code edit — the one-sided
+A recognition that some residue is unreachable by any code edit: the one-sided
 relocation bytes (`cm_ExProdObjekt` 92, `cm_ProcessCommandQueue` 40, `gm_AllocSpieler`
 ~574). Byte-identity in the *linked image* is what the objective measures, and those bytes
 already match there; the metric simply cannot see them.
@@ -56,12 +56,12 @@ It is the distance from the first divergence to the end of the function. `gm_All
 is 2,861 differing bytes over a 3,689-byte function *with a two-instruction deficit*; one
 early encoding of a different length shifts everything after it. But the ratio does not tell
 you *which* of three causes you have: a length cascade, a frame **value** difference (which
-changes every `esp`-relative operand and no length at all — `sub esp,0x28c` vs `0x280` are
+changes every `esp`-relative operand and no length at all: `sub esp,0x28c` vs `0x280` are
 both 6 bytes), or genuinely distributed differences. `scripts/gaptrace.py`'s **curve shape**
 discriminates; the ratio does not.
 
 A high residue was once read as "one early encoding shifts the tail", sent to two agents as
-a mission brief, and both refuted it with measurements — `CrashDump`'s first differing byte
+a mission brief, and both refuted it with measurements: `CrashDump`'s first differing byte
 is a frame *value*, and `gm_AllocSpieler`'s gap returns to 0 repeatedly across 168 hunks. Two
 agent budgets were spent at a cliff that was not there.
 
@@ -69,14 +69,14 @@ agent budgets were spent at a cliff that was not there.
 contiguous differing runs between built and reference `.text` and look at their lengths.
 Measured on the current tree: **610 runs over 8,634 bytes, median 5, mean 14.2, longest
 189, and 254 of them exactly one byte.** That shape rules *out* a single early length
-cascade — a cascade produces one long run from its start to the next realignment, not 254
-scattered singletons — and rules *out* "one frame value per function", because a frame
+cascade (a cascade produces one long run from its start to the next realignment, not 254
+scattered singletons) and rules *out* "one frame value per function", because a frame
 value changes every `esp`-relative operand in that function at once.
 
 **Do not infer the cause from the most common short-run context.** The top of that list is
 dominated by `mov eax,[esp+0x20]` vs `[esp+0x18]`, which reads as a frame-offset cascade.
 Measured directly, the bytes attributable to an `[esp+disp8]` slot offset are **54 of
-8,634** (0.6%). The frequent pattern was the most *visible* one, not the bulk — the same
+8,634** (0.6%). The frequent pattern was the most *visible* one, not the bulk; the same
 mistake §4 records, one level down. Classify by counting, never by the top of a frequency
 list.
 
@@ -95,7 +95,7 @@ the 8,634 as one cascade.
   build tree object after a rebuild). One round nearly wrote up "the V2
   frame does not reproduce" from the stale file; the fresh object showed
   `sub esp,0x280`. (Also: `objdump -d file | head -6` truncates before the
-  first instruction — the header lines eat the budget; use `head -12`.)
+  first instruction: the header lines eat the budget; use `head -12`.)
 - `gaptrace`'s `size` argument must be the reference's *real body*, not the metadata size.
   `vfs_OpenStream` is 667 bytes of code inside a 701-byte real body inside a 704-byte window;
   the three choices read as "37 B long, 20 extra insns" / "3 B long" / aligned. The first
@@ -108,8 +108,8 @@ the 8,634 as one cascade.
   honours it (visible in `build/CMakeFiles/server_dll.dir/build.make`), but `test`/`verify`
   compile with the project default sp6. Measured on `gm_FindNextFilteredEntity`
   (`spiel_dumpD.c`, pinned): verify reports `obj 342`, SIZE_MISMATCH, `delta 186`; the
-  shipped DLL measures **215/346** at that VA, and compiling with the pin gives `obj 346` —
-  the reference's exact size — at `match` 171/346. The whole-tree residue is safe because
+  shipped DLL measures **215/346** at that VA, and compiling with the pin gives `obj 346` (
+  the reference's exact size) at `match` 171/346. The whole-tree residue is safe because
   it is measured on the shipped bytes; **per-function claims about the three pinned files
   are not.** Check `CMakeLists.txt` before quoting a `verify` number for
   `spiel_dumpD.c`, `ahm_ExAllocAlchemist.c` or `ls_LoadBuildingEntityState.c`.
@@ -123,22 +123,22 @@ the 8,634 as one cascade.
 ## 6. Three audit shapes that generate only false positives
 
 - **A check that only prints its result is not a check (round 907).** `gate.sh`'s lint step ran
-  `rebrew lint 2>&1 | tail -1` and echoed the line, with **no `rc=1` anywhere near it** — so it could
+  `rebrew lint 2>&1 | tail -1` and echoed the line, with **no `rc=1` anywhere near it**, so it could
   never fail the gate, on an objective whose stated rule is "zero warnings is the only acceptable
   state". Two further traps in the same spot:
   - **`rebrew lint` exits 0 even when it reports warnings**, so testing `$?` would not have fixed it.
     The `N passed, E errors, W warnings` summary must be parsed.
   - **A failing lint can look like a different failure.** Injecting a broken `FUNCTION:` VA did make
-    the gate fail — with `REGRESSION: 263 byte-matched`, because the bogus VA also demoted a function.
+    the gate fail, with `REGRESSION: 263 byte-matched`, because the bogus VA also demoted a function.
     The gate went red for the wrong reason, and a warning that perturbed nothing would have passed
     silently. **When a guard fires, confirm it fired for the reason you intended.**
   **Rule: falsify every guard against a state where it must fire, and check the attribution, not just
   the exit code.**
-- **A probe that fails to fire is not evidence the guard is broken — check the probe first
+- **A probe that fails to fire is not evidence the guard is broken: check the probe first
   (round 908).** Three successive attempts to falsify one new check all "passed", and all three were
   the *probe's* fault: the entry was still inside the section, the TOML had a duplicate key so it
   never loaded, and a `str.replace` matched a different entry than intended. The guard was correct
-  every time. **Before concluding a check is dead, confirm the input actually reaches it** — print
+  every time. **Before concluding a check is dead, confirm the input actually reaches it**: print
   the parsed row, not just the exit code. This is the mirror of round 907's finding (a real dead
   guard, where the *gate* was wrong); the two look identical from the outside and are separated only
   by inspecting the input.
@@ -147,13 +147,13 @@ the 8,634 as one cascade.
   `end = cur["va"] + cur["size"]        if end <= nxt["va"]:`. `ast.parse` caught it in one command;
   without that check it would have failed at runtime in the gate, where the symptom (`could not read`
   / non-zero exit) points at the tree rather than the tool.
-- **A metadata size that crosses the next tracked symbol is wrong by construction — and the check is
+- **A metadata size that crosses the next tracked symbol is wrong by construction, and the check is
   one command (round 905).** Sorting the sized `.data`/`.rdata` entries by VA and asking whether
   `va + size > next_va` found **exactly two** defects in the whole tree, both real, both invisible to
   three rounds of *type-conflict* analysis (902-904) because an entry can be internally wrong while
   agreeing with every other TU:  - `g_dynasty_field_48` typed `int`/size 4 at `0x10035448`, overlapping `g_dynasty_field_49` at
     `0x10035449`. The reference does `mov dl, byte ptr [0x10035448]` (`0x1001700f`) and
-    `mov byte ptr [0x10035448], dl` (`0x10017130`) — **one byte**.
+    `mov byte ptr [0x10035448], dl` (`0x10017130`): **one byte**.
   - `g_entity_type_bytes` size 4 at `0x10035a04`, overlapping `g_stat_b_array` at `0x10035a05`, and
     typed empty. Reference: `mov byte ptr [ecx + 0x10035a04], dl` (`0x10015542`).
   **A declared extent that runs past the next known symbol cannot be right**, and unlike a byte diff
@@ -166,9 +166,9 @@ the 8,634 as one cascade.
   `g_crashdump_data_10027104` (`+568`) contains `g_crash_newline`, which is a `#define` offset. Both
   are views inside a blob that is *supposed* to cover those bytes. The two blind alleys, both caught
   only by running the check against the **pre-fix** tree:
-  - treating a *fully contained* symbol as benign — misses both round-905 defects, because a 4-byte
+  - treating a *fully contained* symbol as benign: misses both round-905 defects, because a 4-byte
     `int` size swallowing a 1-byte neighbour is geometrically identical to a blob swallowing a view;
-  - treating `extern` as evidence of a view — misses `g_entity_type_bytes`, because
+  - treating `extern` as evidence of a view: misses `g_entity_type_bytes`, because
     `g_stat_b_array` is `extern unsigned char g_stat_b_array[]`, a *separate object* that merely sits
     next door. **An `extern` declaration is not evidence of anything about ownership.**
   The working rule requires **positive** evidence of a view (a `#define` naming an offset) plus a
@@ -176,8 +176,8 @@ the 8,634 as one cascade.
   should fire.** This one was written twice while the tree was already fixed, and both early versions
   would have shipped silently passing.
 - **Metadata-only width corrections are byte-neutral; composition-budget changes are not
-  (rounds 904-905).** Four such fixes have now landed — `locktable` 256→192, `g_dynasty_field_48`
-  4→1, `g_entity_type_bytes` 4→1, plus round 900's type corrections — every one with residue and
+  (rounds 904-905).** Four such fixes have now landed: `locktable` 256→192, `g_dynasty_field_48`
+  4→1, `g_entity_type_bytes` 4→1, plus round 900's type corrections, every one with residue and
   raw-link `.data` **unchanged**. Contrast round 902, where changing objects the composition budget
   relies on cost **+236 `.data`** and **14 `LNK2001`**. The distinguishing question is not "is the
   metadata wrong" but **"does any code or layout decision depend on the value being wrong"**.
@@ -195,7 +195,7 @@ the 8,634 as one cascade.
   actually ends at `0x10031b6c`. Reading the first exit as the bound gives **68 entries**; the true
   array is **48** (`0xC0` bytes). **Read the `add`/`cmp`/`jl` tail, not the first `cmp` you meet.**
 - **Confirm a size claim by a second, structurally different method before editing anything
-  (round 904).** The same array's extent was needed twice — once misread by disassembly (above), and
+  (round 904).** The same array's extent was needed twice: once misread by disassembly (above), and
   again a round later to justify a metadata fix. The second time it was cross-checked by scanning
   `.text` for immediates of the form `base + 0x10k`, which needs no control-flow reasoning at all:
   only `+0x0`, `+0x0c0` (the bound) and `+0x0d0` (the next object) appear, and **no `+0x100`**, which
@@ -212,16 +212,16 @@ the 8,634 as one cascade.
 - **`rebrew data`'s type-conflict count is a signal, not a work queue (round 902).** Eleven entries
   looked like eleven mismatches to fix. Chasing them found at least three different situations, and
   the "fix" was wrong in two of the three:
-  - **a real layout impossibility** — `loadsave3.c` *defined* five filter globals as arrays summing
+  - **a real layout impossibility**: `loadsave3.c` *defined* five filter globals as arrays summing
     to 53 bytes inside a 16-byte span. Correcting them to scalars cleared 5 conflicts and was
     byte-neutral through `linktest.sh` (**+0**), but cost **+236 `.data`** at the gate. The array
     forms are load-bearing for the raw `.data` size, and only the gate's raw-link number sees it.
-  - **a deliberate defining-TU choice** — `gm_NextEntityQueryMatch.c` "mismatched" 13 TUs on three
+  - **a deliberate defining-TU choice**: `gm_NextEntityQueryMatch.c` "mismatched" 13 TUs on three
     globals because it is the file that *defines* them, and its own comment says the scalar types
     were chosen so the TU **emits BSS commons** ("Incomplete `[]` does not emit; sized arrays broke
     .text layout"). Correcting the types produced **14 `LNK2001` unresolved externals**. The comment
     predicted the failure exactly; it had to be read before probing, not after.
-  - **genuine mismatches** — the remainder, which are actually wrong.
+  - **genuine mismatches**: the remainder, which are actually wrong.
   **Rule:** open the defining TU and read its comment before touching a conflicted global. The
   report cannot distinguish "wrong type" from "the only definition, deliberately typed".
 - **A placeholder name hides a type error the compiler would otherwise catch (round 900).**
@@ -234,44 +234,44 @@ the 8,634 as one cascade.
   ```
   MSVC6 type-checks a declaration against its *own* CRT header only when the identifier matches, so
   the placeholder name made the conflict invisible. Both slots are 4 bytes on x86-32, so the layout
-  was always right and no byte ever differed — but the declared type was wrong, and no code could
+  was always right and no byte ever differed, but the declared type was wrong, and no code could
   have used it as a real pointer. **Consequence:** a `g_<hex>` name is not merely cosmetic debt; it
   suppresses the compiler's ability to check the declaration at all. Expect renames of
   CRT-named globals to surface C2040s, and fix the type rather than the name.
   **But the hazard is not universal (round 901).** Restoring `__pioinfo`, `_nfile` and `__nstream`
   on three more CRT globals compiled **clean on the first try**. It bites only where MSVC6 also
   declares the same identifier itself (`__argv`, `_pgmptr`); for names it does not,
-  the rename is safe and the risk is ordinary. Do not assume every placeholder hides a type error —
+  the rename is safe and the risk is ordinary. Do not assume every placeholder hides a type error:
   test, and check the build log rather than reasoning about which is which.
 - **A header edit can push a TU over its composition span, and the symptom is an unrelated
   `LNK2001` (round 914).** Adding an include to `gv_MoveSlotEntry.c` grew its object **688 → 1008
   bytes (+320)**, past the padded span the split-link can place, and the build failed with
-  `LNK2001: unresolved external symbol _gv_MoveSlotEntry` — a symbol whose declaration was perfectly
+  `LNK2001: unresolved external symbol _gv_MoveSlotEntry`, a symbol whose declaration was perfectly
   fine. §6d's composition-budget mechanism normally arrives from a *code* edit; it applies just as
   well to headers, and it is invisible until the link because the TU compiles cleanly.
   **Three symptoms now point at the same underlying budget:** `LNK2001` for a symbol you did not
   touch, a `LONG <file>.c.obj` line in the pad report, and a `split_link FAILED` with no `error C*`.
-  **Check `grep '<file>.c.obj' .scratch/gate-link.log` *before* lifting into a file, not after** —
+  **Check `grep '<file>.c.obj' .scratch/gate-link.log` *before* lifting into a file, not after**,
   and note the report only shows files that are *already* over, so a file 300 bytes under its span
   can still be tipped over by a header.
 - **A `LNK2001` naming a symbol you did not edit is a declaration mismatch, not a missing definition
   (round 914).** Round 913 saw thirteen of them for `_s_ahm_AllocAhmInfo_1002a0f8`,
   `_ahm_QueryEntityBuildingType` and `_ahm_AllocateEntitySlot`, and recorded the cause as unknown.
-  Each was a **return-type disagreement** between a caller's `extern` line and the defining TU —
-  `int*` against `int`, `void` against `int` — and each was decidable from the reference rather than
+  Each was a **return-type disagreement** between a caller's `extern` line and the defining TU:
+  `int*` against `int`, `void` against `int`, and each was decidable from the reference rather than
   by preference (`0x1000c6a0` returns `ahm_LookupEntityInTable`'s `eax`, a pointer). **The diagnostic
   is cheap:** for each unresolved name, `grep` every declaration and the definition, and compare
   return types. This is round 911's `gm_ResetAllEntities` class, and it recurs wherever two TUs
-  declare the same function independently — which is the norm in this tree, since the original kept
+  declare the same function independently, which is the norm in this tree, since the original kept
   declarations local.
 - **A metadata note can be confidently wrong, so identify a symbol from its use sites (round 901).**
   `0x11766564` was noted as "tracked-block (stream) table ptr" and is in fact `__pioinfo`, the CRT
-  per-handle file table — established from `mov eax,[__pioinfo]; mov eax,[eax + esi*4];
+  per-handle file table: established from `mov eax,[__pioinfo]; mov eax,[eax + esi*4];
   test byte [eax+0xc],0x83` at `0x1001ad4b`, not from the note. `0x11766560` was noted as "current
   stream count" and is a handle **bound** (`cmp esi,[_nfile]; jae`, init `0x20`). Two of three notes
   were wrong about what the symbol *is*, while both were right that something was there.
   Disassemble the use site before naming; a note is a lead, not evidence.
-- **A hand-rolled struct-size calculator reports garbage on this tree — use the compiler instead
+- **A hand-rolled struct-size calculator reports garbage on this tree: use the compiler instead
   (round 895).** Two successive versions of a Python `sizeof` estimator flagged **18 then 7**
   structs whose `// SIZE` comment disagreed with their declared extent. **All 25 were the
   instrument.** Three separate failure modes, each invisible in the output:
@@ -288,7 +288,7 @@ the 8,634 as one cascade.
   `SbhRegion` 0x41c4, `SbhGroup` 0x204, `TGT` 0x3c and `gz_stream` 0x64. A regex over C is a
   hypothesis about C; `sizeof` is a fact about it.
 - **A `C1083: cannot open include file` inside a size probe looks exactly like a size failure.**
-  `gz_stream`'s check failed until `-I references/zlib` was added — the assertion never compiled,
+  `gz_stream`'s check failed until `-I references/zlib` was added: the assertion never compiled,
   so "NOT 0x64" meant "did not build". Always separate *compile status* from *assertion result*
   before reporting a type as wrong.
 - Naive same-mnemonic immediate comparison across a diff finds aligner
@@ -306,15 +306,15 @@ the 8,634 as one cascade.
   relocated function (round 860).** That file is the *pre-postlink* link output, so its
   absolute `mov`/`call` operands hold the linker's own values, not the reference's. Comparing
   bytes directly made **241 of the 264 `RELOC`/`EXACT` entries look stale**, and tuning the
-  "is this a relocation?" heuristic only moved the count around (241 → 158 → 121 unexplained) —
+  "is this a relocation?" heuristic only moved the count around (241 → 158 → 121 unexplained):
   the clearest sign the *instrument* was wrong rather than the data. Checked with the tool:
   `rebrew verify` reports **0 entries with a nonzero delta**, and `rebrew test` on one of the
   "suspects" returns `match_count 179/179, mismatches []` with `reloc_count 12`. The metadata
   is consistent; the raw diff was not.
 - **A field-offset histogram cannot type a struct, and merging two histograms invents a layout.**
   Round 893 collected every `slot + 0xNN` offset in the tree (98 distinct, `0x170` alone in 12
-  files) and merged it with the field map written in `spiel62.c`'s header. The merge *collided* —
-  `parent_index` (2 bytes at `0x27`) ran into `season_born` at `0x28` — and the tempting reading
+  files) and merged it with the field map written in `spiel62.c`'s header. The merge *collided*:
+  `parent_index` (2 bytes at `0x27`) ran into `season_born` at `0x28`, and the tempting reading
   was "one of the two sources is wrong." **Neither is: they describe different records.**
   Disassembly settles it, and a histogram cannot. At `0x1000fe86`:
   ```
@@ -328,23 +328,23 @@ the 8,634 as one cascade.
   `+0x28` (`0x1000fc9c  mov [eax+0x28], ecx` after `dec ecx`, the season store). A word at `0x27`
   and a dword at `0x28` cannot coexist in one struct, so two types are in play.
   **Rules this yields:** (1) `offsetof`-style sweeps tell you which offsets are *used*, never
-  which struct they belong to — same-base offsets from different functions may not share a base;
+  which struct they belong to: same-base offsets from different functions may not share a base;
   (2) when two field maps collide, disassemble the *producer* of the pointer (here, the call that
   fills `eax`) before deciding which map is wrong; (3) a half-remembered regex is not a negative
-  result — `mov [r+0x28],r32` appeared absent because the pattern only matched the `disp8`
+  result: `mov [r+0x28],r32` appeared absent because the pattern only matched the `disp8`
   encoding, and the store exists.
 - **A type defined in a header is not a type in use.** `EntityStruct` (`game/entity.h`) is declared
-  with `// SIZE 0x21c` and referenced **three times tree-wide — its own definition and two
+  with `// SIZE 0x21c` and referenced **three times tree-wide: its own definition and two
   comments**. `entity.h` is included by 9+ TUs, but only for its `extern` globals. Do not count a
   header type as "the layout is defined"; grep for *instantiations and member accesses*, which is
   zero here. The same check applied to `PlayerSlot` gives 13 references and is real.
   **Use the tool's own masked comparison.** `rebrew test`/`verify` already implement "equal
-  after masking relocations" — do not re-derive it by hand from a prelayout copy. If a raw
+  after masking relocations"; do not re-derive it by hand from a prelayout copy. If a raw
   comparison against `build/server.dll` is wanted instead, that file is the *post*-postlink
   output and its bytes are comparable; the prelayout copy is not.
   **The whole-`.text` total is also wrong from the prelayout copy: it reads 50,296 against the
   shipped file's 8,634** (round 863), because every unresolved relocation counts. So the
-  prelayout copy is not an oracle for a per-function residue *or* for the tree total — only
+  prelayout copy is not an oracle for a per-function residue *or* for the tree total, only
   `build/server.dll` (and `rebrew verify`) are.
   This is the second round this session (with 852) where a raw byte reading produced a
   confident false finding that the tool's own number refuted.
@@ -365,35 +365,35 @@ inventory only for *finding* functions the toml does not list.
 This is why `rebrew test --symbol <name>` can report a size the metadata never had:
 `gm_CalculateProductionValue` came back as `ref 81` there while both inventories and
 `rebrew verify` say 396/400. When a size looks wrong, check it against **the next tracked VA**
-(`0x10019720 + 400 == 0x100198b0`) — that is the ground truth, not either inventory.
+(`0x10019720 + 400 == 0x100198b0`): that is the ground truth, not either inventory.
 
 ## 6c. Object size can move toward the target while the link moves away (round 868)
 
 `gm_FindNextFilteredEntity` (`0x10016f80`) is 4 bytes short of the reference: object **342**
-against target **346**, and the deficit is a *missing block* — 8 instructions the reference has
+against target **346**, and the deficit is a *missing block*: 8 instructions the reference has
 and we do not (`jne` + a full epilogue: `xor eax,eax` / store / four pops / `ret`). The reference
 reaches **one shared epilogue via a `cl`-flag jump**; we emit a private return at each early exit.
 
 Routing the offending early `return 0;` through the shared tail (`match = 0; goto done;`) moves the
-object **342 -> 347** — past the target by one, i.e. the size gap closes. At the link it is
+object **342 -> 347**, past the target by one, i.e. the size gap closes. At the link it is
 **+114 worse** (`gm_FindNextFilteredEntity` 215 -> 329, `.text` 8,634 -> 8,748).
 
 So "the object size now matches" is not evidence of progress, and on this function it is
 positively misleading: the same edit that fixes the size adds 114 residue bytes, because the new
 `goto` re-lays the block graph and the shared tail stops being reachable the way the reference
-reaches it. **Measure at the link or do not claim a direction** — this is the concrete case behind
+reaches it. **Measure at the link or do not claim a direction**: this is the concrete case behind
 the AGENTS.md warning that the two object rulers disagree with each other and with the link.
 
 ## 6d. 28 objects are over the composition budget, and that is what makes source edits collapse (round 870)
 
 > **CORRECTION (round 916): the `LONG` label does not mean "over the budget".** Measured against the
 > objects' *actual reference spans* (next tracked VA minus this file's first VA), **zero of the 25
-> checkable `LONG` objects are over** — 23 sit *exactly* at their span and two (`vfs2.c` −288,
+> checkable `LONG` objects are over**: 23 sit *exactly* at their span and two (`vfs2.c` −288,
 > `vfs_OpenStream.c` −48) are **under** it, i.e. have room to spare. The pad report's `want` is the
 > raw sum of metadata sizes, while the object is the **per-function-16-byte-padded** sum; for
 > `spiel62.c` those are 1328 and 1408, so the report printed `+80 over` for a file that is exactly
 > at its span. Verified on all 25: `per-func-pad == objtext` for every one. **Do not treat a `LONG`
-> line as "this file cannot absorb a change"** — compute the span. See the new section below for the
+> line as "this file cannot absorb a change"**: compute the span. See the new section below for the
 > corrected test. The historical text is kept because the *mechanism* it describes is real; only the
 > count and the inference are wrong.
 
@@ -406,7 +406,7 @@ ErrorModule2.c.obj: 528 > 496 (+32 over the padded span; want 494) -- not padded
 trees.c.obj: 6464 > 1088 (+5376 over the padded span; want 1083) -- not padded
 ```
 
-**But the total is 816 bytes, not 6,671 — three of the 28 lines are a reporting artifact
+**But the total is 816 bytes, not 6,671: three of the 28 lines are a reporting artifact
 (round 871).** `want` is summed from the metadata's per-function sizes, and **zlib's sources carry
 no `// FUNCTION:` markers at all** (0 markers in all 18 files under `references/zlib-1.1.3/`), so
 for `trees.c`, `infblock.c` and `infcodes.c` the padding target collapses to whatever little the
@@ -418,14 +418,14 @@ metadata ... and then `want` understates the reference span").
 Split correctly: **25 game files, 816 bytes of genuine overage**, against **3 zlib files, 5,680
 bytes of phantom overage**. Read the game lines; ignore the zlib ones.
 
-**Only SHORT objects can be padded** — `pad_short_functions.py`'s own docstring says a longer one
+**Only SHORT objects can be padded**: `pad_short_functions.py`'s own docstring says a longer one
 "cannot be cut without losing code". So for these 28 files the composition has *no slack*: any
 edit that grows the object, and on a file already over budget even an edit that keeps its size,
 moves the symbols after it.
 
 That is the mechanism behind three rounds of failures. Round 869's `gm_FindNextFilteredEntity`
 change took `spiel_dumpD.c.obj` from 1015 to 1024 bytes and the link reported "COMPOSITION
-COLLAPSED: only 0 symbols landed at their reference VA" — because that file was **already 16 bytes
+COLLAPSED: only 0 symbols landed at their reference VA", because that file was **already 16 bytes
 over**, so the composition had nothing left to absorb. The same applies to `LONG` file-mates in
 `ErrorModule2.c`, `vfs.c`, `vfs2.c`, `infblock.c` and 23 others.
 
@@ -435,7 +435,7 @@ cannot absorb a size change at all and the only adoptable edits are ones that *s
 least the stated overage. A file with no line either is within budget or was padded.
 
 > **This inference is superseded by the round-916 correction above.** A `LONG` line does *not* mean
-> the file is over budget — 23 of the 25 checkable `LONG` objects are exactly at their reference span
+> the file is over budget: 23 of the 25 checkable `LONG` objects are exactly at their reference span
 > and two are under it. The reliable test is the span comparison, which is what the round-916 section
 > describes. Rounds 909-915 excluded files on the `LONG` label; that exclusion was unjustified, and
 > **the real reason those lifts failed was a different check entirely** (a header declaration that
@@ -453,7 +453,7 @@ spiel622              by 112        cm_ExCopyEntityData, ServerMainThread, gm_Al
                                     cm_ProcessCommandQueue          (15 total)
 ```
 
-Rounds 868-870 were spent on `gm_FindNextFilteredEntity`, which is in `spiel_dumpD` — one of the
+Rounds 868-870 were spent on `gm_FindNextFilteredEntity`, which is in `spiel_dumpD`, one of the
 **three blocked** files. The right move was to work an unblocked carrier, and the check that would
 have shown that costs one command. **Run it before choosing a function, not after a failed probe.**
 
@@ -465,29 +465,29 @@ not generalise to them.** Lifting 27 duplicated globals into `entity.h` and dele
 usual standard. Scaled up it failed the gate: **`C1001: INTERNAL COMPILER ERROR`** as soon as
 `ahm_ExAllocAlchemist.c` gained the include (the round-877 mechanism, on a *different* pinned file),
 and **`LNK4006` duplicate definitions plus `LNK2001: unresolved _ls_LoadBuildingEntityState`** once
-`ls_LoadBuildingEntityState.c` — the third pin — had its include graph widened. Restoring the two
+`ls_LoadBuildingEntityState.c` (the third pin) had its include graph widened. Restoring the two
 pinned files individually did not help, because the damage is to *which objects define which
 symbols*, not to either file alone.
 
 **Rule:** the three sp5-pp-pinned files (`spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`,
 `ls_LoadBuildingEntityState.c`) should be excluded from any change that alters what a TU includes.
 And note the shape of the mistake: `linktest.sh` measures `.text` residue, which an `extern` line
-cannot move — so a passing probe says nothing about a build-graph change. **A +0 probe certifies the
+cannot move, so a passing probe says nothing about a build-graph change. **A +0 probe certifies the
 axis it measured and no other.** See round 909 in `TODO.md`.
 
 **Correction (round 878): the flags in this entry were misread.** `ls_LoadBuildingEntityState`
-(`0x100128f0`) compiles with **`/O2 /Gd /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`** — the sp5-pp toolchain
+(`0x100128f0`) compiles with **`/O2 /Gd /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`**: the sp5-pp toolchain
 pin only, **no `/Oa /Ow`**. Round 877 read a neighbouring file's flag tail. The mechanism this
 section describes still holds (a CMake pin the metadata does not carry, and a `--cflags` write that
 breaks the compile), but the specific flag pair does not belong to this file.
 
 `os_LoadBuildingEntityState` (`0x100128f0`) compiles in the real build with
-`/O2 /Gd /Oa /Ow /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`, set by `CMakeLists.txt` — it is one of the
+`/O2 /Gd /Oa /Ow /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`, set by `CMakeLists.txt`: it is one of the
 three sp5-pp-pinned files. Its metadata carried **no `cflags` field**, and the docs record
 `CMakeLists.txt` as the place where per-file flags live for exactly these files.
 
-Persisting the same flags into the metadata with `rebrew test --cflags "/O2 /Gd /Oa /Ow"` — the
-tool writes the field itself — makes `scripts/gate.sh` go **FAIL** with
+Persisting the same flags into the metadata with `rebrew test --cflags "/O2 /Gd /Oa /Ow"` (the
+tool writes the field itself) makes `scripts/gate.sh` go **FAIL** with
 **`fatal error C1001: INTERNAL COMPILER ERROR`** and a C1083. The identical flags appended to the
 identical defaults work through the CMake path, so `/Oa /Ow` is not the problem: **the metadata
 path and the CMake path do not construct the same command line, and only the CMake one compiles
@@ -495,22 +495,22 @@ this file.**
 
 **Check `grep '<file>.c.obj:' -A40 build/CMakeFiles/server_dll.dir/build.make` before adding any
 `cflags`**, and do not add a field that merely restates a CMake pin. Note also that
-`rebrew-functions.toml` is mode 444 — reverting needs `chmod u+w` first.
+`rebrew-functions.toml` is mode 444: reverting needs `chmod u+w` first.
 
 **`rebrew test <file> --cflags <flags>` is a WRITE, not a measurement (round 919).** It persists the
 flags into the tool-owned `src/rebrew-functions.toml` instead of testing in memory. Two sweeps left
 the file dirty against `HEAD`, and because the CMake build consumes a separately generated table
-(`build/rebrew-cflags.cmake`), the result *looked* like a real metadata/build divergence — `rebrew
+(`build/rebrew-cflags.cmake`), the result *looked* like a real metadata/build divergence: `rebrew
 data` reported `/Ox /Gd` for `gm_AllocSpieler` while the compile line carried `/O2 /Gd /Oa /Ow`. It
 was my own probe. **After any `--cflags` sweep, `git diff src/rebrew-functions.toml` before drawing
 any conclusion from a flag value**, and restore with `chmod u+w` first.
 
 **`--cflags` also DROPS a per-file toolchain pin, so it cannot be used on the three sp5-pp files
-(round 920).** On `ls_LoadBuildingEntityState.c` — whose CMake `COMPILE_OPTIONS` is
-`/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp` — the command printed `TOOLCHAIN persisted → msvc-6.0` and
+(round 920).** On `ls_LoadBuildingEntityState.c` (whose CMake `COMPILE_OPTIONS` is
+`/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`) the command printed `TOOLCHAIN persisted → msvc-6.0` and
 proceeded to measure **a different compiler's output**. Every number from such a run is void, and
 nothing in the output marks it as invalid. **The sound route for a pinned file is CMake:** append the
-flag to that file's `COMPILE_OPTIONS` (`;`-separated — §6f), reconfigure, **grep the emitted
+flag to that file's `COMPILE_OPTIONS` (`;`-separated, §6f), reconfigure, **grep the emitted
 `build.make` line to confirm both the pin and the new flag survived**, then build and gate. That is
 how `/Ow` was measured as inert on this carrier (residue 8,634 unchanged); the three `--cflags`
 attempts that preceded it were measuring `msvc-6.0` and were discarded.
@@ -518,7 +518,7 @@ attempts that preceded it were measuring `msvc-6.0` and were discarded.
 **A flag finding is per-carrier until measured otherwise (round 919).** `codegen-walls.md` §8 lists
 `flags | flat | 12 axes, ~120 compilations`, and shapes §94 says `/Ow` is load-bearing on
 `gm_AllocSpieler` while `/Oa` is inert. Both are true and neither generalises: re-measured,
-`/O2 /Gd /Ow` and `/O2 /Gd /Oa /Ow` both score 1004/3689 while `/O2 /Gd` gives 493 — and the same
+`/O2 /Gd /Ow` and `/O2 /Gd /Oa /Ow` both score 1004/3689 while `/O2 /Gd` gives 493, and the same
 `/Ow` on `CrashDumpUnhandledExceptionFilter` scores **643/2115 either way, byte-identical**. So
 "flags are flat" is a statement about *aggregate sweep results*, not a licence to skip a per-file
 test.
@@ -527,13 +527,13 @@ test.
 `C1001: INTERNAL COMPILER ERROR` appeared right after `ahm_ExAllocAlchemist.c` (a pinned file) gained
 an include, and was recorded here as the pin interacting with header changes. It was not the pin.
 Round 913 lifted `g_next_object_id` into that same file's include graph and built **clean, 0 errors**
-— and round 911 then showed the real cause was a *wrong declaration* in `entity.h`
+, and round 911 then showed the real cause was a *wrong declaration* in `entity.h`
 (`gm_ResetAllEntities` as `int` against a `void` definition). **The pin constrains the flags a file
 compiles under; it says nothing about what it may include.** Do not exclude pinned files from
 header work; fix the header instead.
 
 ## 6f. A dropped per-file flag produces a normal-looking measurement (rounds 879-880)
-`set_source_files_properties(... COMPILE_OPTIONS "/A" "/B")` **silently drops `/B`** — CMake wants a
+`set_source_files_properties(... COMPILE_OPTIONS "/A" "/B")` **silently drops `/B`**: CMake wants a
 `;`-separated list. Configure succeeds, the build succeeds, `build.make` simply lacks the flag, and
 any measurement taken is of a *different compile than the one intended*, with no error anywhere.
 Round 45 nearly concluded "`/Oa` is inert" from exactly such a run.
@@ -543,15 +543,15 @@ Round 45 nearly concluded "`/Oa` is inert" from exactly such a run.
 
 The plumbing was audited afterwards and is otherwise sound: all three `COMPILE_OPTIONS` pins and
 the zlib `COMPILE_FLAGS` reach their command lines, and of 57 files carrying metadata `cflags`, **0
-real flags are missing** — the 48 apparent misses are all `/DREBREW_ALLOW_NAKED`, which
+real flags are missing**: the 48 apparent misses are all `/DREBREW_ALLOW_NAKED`, which
 `C_DEFINES` supplies globally as `-DREBREW_ALLOW_NAKED=1`.
 
-## 6f-bis. `COMPILE_OPTIONS` REPLACES a source's option list — adding a flag can silently drop a pin (round 942)
+## 6f-bis. `COMPILE_OPTIONS` REPLACES a source's option list: adding a flag can silently drop a pin (round 942)
 
 `set_source_files_properties(<src> PROPERTIES COMPILE_OPTIONS "/Ow")` **replaces** whatever
 `COMPILE_OPTIONS` that source already had. It does not append. Three files in this tree carry a
 per-file toolchain pin as `COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp"`, so adding a second
-`set_source_files_properties` call for one of them **silently removes the pin** — the build succeeds,
+`set_source_files_properties` call for one of them **silently removes the pin**: the build succeeds,
 the file compiles, and every measurement taken is of the wrong toolchain. Round 941's `/Ow` sweep did
 exactly this to `spiel_dumpD.c` and `ahm_ExAllocAlchemist.c`, which is why part of that sweep's collapse
 was not `/Ow` at all.
@@ -560,7 +560,7 @@ was not `/Ow` at all.
 
 ```cmake
 set_source_files_properties(
-  "${PROJECT_SOURCE_DIR}/src/server.dll/.../file.c"
+  "${PROJECT_SOURCE_DIR}/src/Develop/.../file.c"
   PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp;/Ow")
 ```
 
@@ -572,15 +572,15 @@ awk '/<file>.c.obj: \/home/{f=1} f&&/rebrew-cmake-cl/{print; exit}' \
 ```
 
 That must show **both** the old flag and the new one. A missing `/REBREW_TOOLCHAIN` is invisible to the
-compiler — nothing warns, because the flag is consumed by `rebrew-cmake-cl` and stripped before the real
+compiler: nothing warns, because the flag is consumed by `rebrew-cmake-cl` and stripped before the real
 compile. Note also that `set_source_files_properties(PROPERTIES ...)` **with no source argument** is a
 silent no-op; that is the shape that results if the source line is deleted from an existing pin while
 trying to remove a duplicate.
 
-## 6f-ter. `/Oy` is a prefix of `/Oy-` — a flag grep with plain substring matching reads the opposite (round 944)
+## 6f-ter. `/Oy` is a prefix of `/Oy-`: a flag grep with plain substring matching reads the opposite (round 944)
 
 Auditing per-file flags with `grep -oE '/Oy'` against the emitted command line reported `/Oy` for
-`m_AllocTracked`, whose actual flags are `/O2 /Gd /G6 /Oy-` — the flag **disabled**. The substring
+`m_AllocTracked`, whose actual flags are `/O2 /Gd /G6 /Oy-`: the flag **disabled**. The substring
 matches inside `/Oy-`. The same trap applies to every negated MSVC flag that is spelled as a suffix:
 `/Og-`, `/Ot-`, `/Ob0`, and any `X` / `X-` pair.
 
@@ -595,11 +595,11 @@ grep -oE '/Oy([^A-Za-z0-9]|$)'
 ```
 
 Consequence when it bit: a table of per-file flags came out with one row reading "carries `/Oy`" when
-the file carries `/Oy-`. Nothing downstream failed — it was caught only by printing the **whole**
+the file carries `/Oy-`. Nothing downstream failed; it was caught only by printing the **whole**
 command line next to the extracted flags. **Print the raw line when auditing, and use the extracted
 list as a summary, never as the evidence.**
 
-## 6f-quater. A real definition beats a COFF COMMON silently — the `LNK4006` rule cannot see it (round 945)
+## 6f-quater. A real definition beats a COFF COMMON silently: the `LNK4006` rule cannot see it (round 945)
 
 Two translation units defined `locktable`: one as a 192-byte
 `CRITICAL_SECTION* locktable[0x30]`, one as `CRITICALSECTION** locktable = __locktable;` where the
@@ -611,7 +611,7 @@ data_globals.c.obj: _locktable  sec 0  val 0xc0    <- a COFF COMMON (tentative d
 ```
 
 **A real definition beats a COMMON**, so the unwanted 4-byte pointer silently won, the 192-byte table
-was discarded, and **no `LNK4006` was emitted** — because resolving a COMMON against a definition is
+was discarded, and **no `LNK4006` was emitted**, because resolving a COMMON against a definition is
 legal, not a duplicate. AGENTS.md's rule ("a duplicate-symbol warning is a finding") is correct but
 **cannot fire on this shape**. The tree links green, `verify` passes, and the symbol resolves to the
 wrong storage.
@@ -643,23 +643,23 @@ Every cross-TU function call in the program has this shape. A function declared 
 one real symbol and N COMMONs; the linker picks the real one, which is exactly right. Narrowing to data
 objects still reported ~200 rows, because `link_stubs.c` deliberately defines ~176 placeholder globals
 in one shared `.bss`, and the "size" column for those is the *remaining section length* (values like
-24,314,872), not the object's size — so a size-based filter does not separate them either.
+24,314,872), not the object's size, so a size-based filter does not separate them either.
 
 **The discriminator that worked in §6f-quater is not "does a COMMON clash exist" but "does the COMMON
 have the CORRECT layout while a real definition has a different one".** That is a per-symbol question
 requiring the metadata's recorded size and type, and there were exactly **one** such case in the tree
 (`locktable`). A second sweep attempt with a "referenced nowhere else" filter produced 39 candidates and
-**the first one checked was wrong** (`_g_stat_min_d` is referenced by `cm_ExChangeDesire.c` — the
+**the first one checked was wrong** (`_g_stat_min_d` is referenced by `cm_ExChangeDesire.c`, the
 detector had stripped comments after collecting rather than before).
 
-**So: do not sweep for this class tree-wide.** Check the specific shape — a symbol whose metadata layout
-disagrees with the definition that wins the link — and prefer the tooling's own view of the winner
+**So: do not sweep for this class tree-wide.** Check the specific shape: a symbol whose metadata layout
+disagrees with the definition that wins the link, and prefer the tooling's own view of the winner
 (`build/split_poc.map`) over any grep-derived population.
 
 ## 6f-sexies. `object_span_check.py`'s one "OVER" result is an artifact of untracked functions (round 949)
 
 `scripts/object_span_check.py` reports, out of 174 objects: 167 exactly at span, 6 under, and
-**one over — `mlock.c.obj`, span 118, text 212, +94**. That reads as a real budget violation and is the
+**one over: `mlock.c.obj`, span 118, text 212, +94**. That reads as a real budget violation and is the
 only one in the tree. It is not.
 
 `mlock.c` defines **three** functions but marks only **two** with `// FUNCTION: SERVER`:
@@ -685,7 +685,7 @@ cannot distinguish the two, because it sums every `.text` section in the object.
 
 ## 6g. Two ways a whole-image instruction census lies, and both look like a finding (round 923)
 
-A mnemonic census over both images is a good instrument — it converts "residue is 6% of `.text`"
+A mnemonic census over both images is a good instrument: it converts "residue is 6% of `.text`"
 into a countable claim. It produced three large fake signals before it produced a real one.
 
 - **Do not decode the linked image at the reference's VA.** The build is position-aligned at
@@ -699,7 +699,7 @@ into a countable claim. It produced three large fake signals before it produced 
   padding, and both disassemble into plausible opcodes: the reference's `0x09` fill reads as
   `or dword ptr [ecx], ecx` (50 consecutive after `CrashDumpUnhandledExceptionFilter`'s tables),
   and `gm_AllocGebaeude`'s tail reads as `adc ch, dh` / `adc byte ptr [edx-0x3aeffe89], cl`. These
-  produced the image-wide figures **`or` -51**, **`adc` -43** and **`add` +108** — all filler, none
+  produced the image-wide figures **`or` -51**, **`adc` -43** and **`add` +108**, all filler, none
   of it real. Requiring the span to decode end to end does **not** catch it, because garbage
   decodes end to end too. Cut every body at its **last `ret`**.
 
@@ -722,14 +722,14 @@ looked like the same bug 20 more times was mostly `link_stubs.c` placeholders. S
 any real body at or below `16*ceil(size/16)` is composition-neutral, with **no lower bound**.
 If the object *does* carry a jump table or case map after its code, the **real** length binds
 and padding cannot protect it (`vfs_OpenStream`'s 8-byte shortfall was worth −36 linked). An
-earlier rule — "the real body must equal the reference's" — was strictly stronger than the
+earlier rule ("the real body must equal the reference's") was strictly stronger than the
 composition requires and had been silently discarding admissible candidates.
 
 ## 8. probe-span vs test-real: two rulers, one truth
 
 `probe_function` reports the padded COMDAT span as obj size (ExProdObjekt 1008, PCQ
 640); `rebrew test` reports the real body (993, 639). Their match
-counts differ accordingly (888 vs 976, 584 vs 624) — and test's
+counts differ accordingly (888 vs 976, 584 vs 624), and test's
 match_count equals probe's matched-reloc bucket. Same object,
 different rulers. Always state which ruler a number comes from
 before comparing two figures.
@@ -742,15 +742,15 @@ before comparing two figures.
   emits **six `LNK4006` warnings over three symbols** (`_putc`, `__amsg_exit`, `___app_type`, all
   `LIBCMT.lib(...)` against a local object), and they appear only after
   `cmake --build build --clean-first`. Grepping an incremental log for warnings therefore returns
-  "zero" on a tree that has six — and that log is exactly what the gate's compile check reads.
+  "zero" on a tree that has six, and that log is exactly what the gate's compile check reads.
   **Rule: to count warnings, force a clean rebuild first; otherwise you are reading a cache.**
-  Same family as the transient `C1083` below — a build log mistaken for a measurement.
+  Same family as the transient `C1083` below: a build log mistaken for a measurement.
 - **A lone `C1083: Cannot open compiler intermediate file '<garbage>.tmp'` with no source location
   is the build harness, not the source (round 894).** It appeared in a `gate.sh` run immediately
   after a header change and read exactly like a compile-error regression introduced by that change.
   It is a **transient parallel-build temp-file collision**: re-running the build produced **0**
-  errors and the gate then passed with all baselines held. The tell is the filename — `a00032gl`,
-  not a path, and not a `.c` file — and the absence of any line/column. Before treating a C1083 as
+  errors and the gate then passed with all baselines held. The tell is the filename: `a00032gl`,
+  not a path, and not a `.c` file, and the absence of any line/column. Before treating a C1083 as
   a finding, check whether any `error C####` line names a *source* file; if none does, rebuild
   before touching the code. Setting `TMPDIR` or dropping to `-j4` avoids it.
 - **`cmake --build build` fails by design at the post-link layout step** with no
@@ -772,12 +772,12 @@ before comparing two figures.
 - **`cmake --build build -j8` on its own leaves the tree in a state that reports garbage residue.**
   The post-link layout step fails by design and `make` then **deletes `build/server.dll`**, while
   `build/split_poc/` keeps the object set from the previous run. Residue read from that state is
-  meaningless — round 889 measured **58,614** and then **116,814** from two such states, when the
+  meaningless: round 889 measured **58,614** and then **116,814** from two such states, when the
   true value was 8,634. Worse, it is *sticky*: `git checkout` of the sources restores `verify`
   (281/283) but not the residue, so the tree looks reverted and still reports a false number. The
   recovery is to delete the split state and take a full gate pass:
   `rm -rf build/split_poc build/server.dll && bash scripts/gate.sh`.
-  **The tell is `split_link.sh` printing `exactly at their reference VA: 0`** — the same
+  **The tell is `split_link.sh` printing `exactly at their reference VA: 0`**: the same
   composition-collapse signal `linktest.sh` refuses to measure through
   (`msvc6-c-shapes.md` §124). Treat any residue number taken without a fresh `postlink_residual.py`
   run after a source change as unmeasured, not as a regression.
@@ -786,7 +786,7 @@ before comparing two figures.
   before reading residue; never carry a number across a bare build.
 - **`rebrew verify --data` prints a `UserWarning` per `DATA` marker whose VA has no `name` in
   `src/rebrew-data.toml`, and the marker is then dropped from the inventory as `unknown`.** The
-  warning text — "has no declaration on the following line and no name in the data metadata" —
+  warning text ("has no declaration on the following line and no name in the data metadata")
   reads like a *source* defect, but the marker can sit over a perfectly good definition; the
   missing field is the metadata. Round 882: `vfs4.c` `0x1002944c` (`s_rb_1002944c` and four
   siblings) and `vfs_OpenStream.c` `0x100294a4` (`s_0x_08X_length_100294a4`) both warned while
@@ -805,7 +805,7 @@ before comparing two figures.
   with no `size` it falls back to `estimate_type_size(type)`, and skips again if that fails. So
   `matched` is a count of *attributable* symbols, not of `.data` symbols, and the number is not
   comparable between rounds where naming changed. Round 883: 20 `.data` entries had `section`
-  only, were skipped unconditionally, and all 20 turned out to be byte-identical — `matched` went
+  only, were skipped unconditionally, and all 20 turned out to be byte-identical: `matched` went
   **85 → 105** with no output change whatsoever. Read `matched` as coverage, never as correctness;
   a `mismatched`/`missing` list is the only verdict here.
 - **`rebrew todo`'s `start-data` lane and `verify --data` are not the same set, and the lane can
@@ -819,13 +819,13 @@ before comparing two figures.
   nothing.** `.data` carries `rawsize 0xe000` over a `vsize 0x174059c`, so only
   `0x10027000..0x10035000` has file bytes; every `.data` symbol above that is zero-fill.
   `rebrew verify --data` compares via `pefile`-style section reads, and on a zero-fill VA it
-  compares zero against zero — a guaranteed match. Round 884 sized 57 `.data` symbols and
+  compares zero against zero: a guaranteed match. Round 884 sized 57 `.data` symbols and
   `matched` rose 105 → 108, but **54 of the 57 are above `0x10035000`**: the rise is accounting,
   not verification. Before treating a data `matched` increase as evidence, check the symbol's VA
   against the section's raw extent. `.bss` and `.idata` entries are in the same category.
 - **The built binary's `.text` / `.rdata` / `.reloc` VirtualSize already equal the reference's**
   (`0x22846` / `0x2e81` / `0x10374`). A size-mismatch hunt on this target is a dead end; the
-  deliverable's remaining gap is *content* — 8,634 residue bytes inside `.text` — so measure with
+  deliverable's remaining gap is *content* (8,634 residue bytes inside `.text`), so measure with
   residue, not with section sizes.
 
 ---
@@ -837,12 +837,12 @@ before comparing two figures.
   `scripts/postlink_residual.py --write build/server.dll`.
 - Frames, slot maps, prologues: disassemble `original/Server/server.dll` at the VA and compare
   with the built image (`instr_diff.py <va> --built build/server.dll`).
-- Gap curves: `scripts/gaptrace.py <va> <source> _<symbol>` — **no size argument**.
+- Gap curves: `scripts/gaptrace.py <va> <source> _<symbol>`: **no size argument**.
 - Slot maps: the sentinel-initial probe (`msvc6-allocator.md` Finding 60).
 - Gate: `bash scripts/gate.sh` (lint + compile errors only + `verify --full` against a 281
   baseline). Expect the build's post-link step to fail; only `error C####`/`LNK####` count.
 
-## 6h. An "undefined symbol" in this tree usually is not one — check `link_stubs.c` first (round 924)
+## 6h. An "undefined symbol" in this tree usually is not one: check `link_stubs.c` first (round 924)
 
 Round 924 found a real bug with a tempting generalisation attached, and the generalisation was
 wrong. Recording both halves.
@@ -860,12 +860,12 @@ the operand came out as a bare immediate (`push 0x11766604`) where the reference
 raw-link `.data` differing **21,836 -> 21,481**.
 
 **The wrong generalisation.** Every COFF object in the build reports **587 distinct undefined
-externals**, among them a large `_s_..._1002xxxx` string family — e.g.
+externals**, among them a large `_s_..._1002xxxx` string family: e.g.
 `_s_D__Develop_DieGildeAddOn_command_1002c748` is undefined in 12 places, and
 `_s_amt_fio_LoadAemter____Can_t_load_10029f78` in one. That *looks* like the same bug repeated 20
 times. It is not:
 
-- **Those symbols are defined — in `src/link_stubs.c`, as 1-byte empty strings.**
+- **Those symbols are defined: in `src/link_stubs.c`, as 1-byte empty strings.**
   `char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";` and 10 more like it. They are
   deliberate placeholders whose only job is to give the linker a symbol; their *content* is
   irrelevant because the shipped `.data` is blitted wholesale from the layout package.
@@ -887,7 +887,7 @@ times. It is not:
 
 The last one is the tell: when a detector reports 160 "missing" symbols in a tree whose link is green
 and whose import table matches the reference exactly, **the detector is wrong, not the tree**. The
-authoritative answer was available the whole time and cost nothing — the link succeeds, `gate.sh`
+authoritative answer was available the whole time and cost nothing: the link succeeds, `gate.sh`
 passes, and `link_stubs.c` documents its placeholder scheme in its own header. Prefer the toolchain's
 verdict over any grep.
 
@@ -901,22 +901,22 @@ the linker allocates them. A detector built on "undefined in the object symbol t
 distinguish a tentative definition from a missing one; the linker can, which is why the link is green.
 
 **So the test is not "is this symbol undefined" but "does it have a definition *anywhere*".**
-`grep -rn '<symbol>' src/` and look for a non-`extern` line — `link_stubs.c` is where they live. A
+`grep -rn '<symbol>' src/` and look for a non-`extern` line: `link_stubs.c` is where they live. A
 symbol defined there as `[1] = ""` is finished work, not a defect; a symbol with *no* definition
 anywhere is the bug. Distinguishing those two took most of this round, and the count difference is
 the difference between a 1-item fix (done) and a 20-item vein (does not exist).
 
 **One genuine residue remains in the neighbourhood:** `gm_Open.c` used the shared symbol at 11 sites,
-and the reference does push one shared address (`0x10031004`) at every one of them — so the shape was
+and the reference does push one shared address (`0x10031004`) at every one of them, so the shape was
 right and only the definition was missing. Rewritten to the `(char*) 0x10031004` cast the rest of the
 tree uses for that string: **byte-neutral**, 11 undefined operands removed.
 
 
-## 11. A stale operand can be a *consequence*, not a cause — read the fixer before chasing it (round 932)
+## 11. A stale operand can be a *consequence*, not a cause: read the fixer before chasing it (round 932)
 
 Round 931 found an operand that read `[0x11766664]` (the stub region) where the reference reads
 `[0x101de450]`, fixed the symbol name, and round 932 removed the duplicate definition that was
-displacing it — and the operand **still** did not move. Disassembling `scripts/postlink_residual.py`
+displacing it, and the operand **still** did not move. Disassembling `scripts/postlink_residual.py`
 explains it and saves the next round from the same chase:
 
 ```python
@@ -935,12 +935,12 @@ downstream of the function's divergence; fixing the symbol changes nothing about
 
 Measured on `cm_ExSellObjekt`: aligning the two instruction streams by mnemonic+operand shows **674
 instructions on each side** with the first differences being stack-slot offsets
-(`mov [esp+0x14],edi` vs `mov [esp+0x24],edi`). No missing code, no wrong instruction — different slot
+(`mov [esp+0x14],edi` vs `mov [esp+0x24],edi`). No missing code, no wrong instruction: different slot
 numbers, which is allocator Finding 63's class.
 
 **So: before treating a mismatched operand as the target, check whether the fixer would even accept a
 rewrite there.** If the surrounding bytes differ, the operand is a readout of the divergence, not a
-lever on it. The cheap test is the locality window itself — compare 12 bytes before and 16 after the
+lever on it. The cheap test is the locality window itself: compare 12 bytes before and 16 after the
 slot on both sides.
 
 
@@ -950,7 +950,7 @@ slot on both sides.
 sufficient after a per-file flag change**. The objects themselves were compiled with the old flag, and
 deleting only the split workspace leaves them in place. Measured: after reducing a `/Ow` sweep from seven
 files back to one and deleting `build/split_poc`, the link still reported
-`exactly at their reference VA: 0` and **"22 objects too long"** — because six objects still carried
+`exactly at their reference VA: 0` and **"22 objects too long"**, because six objects still carried
 `/Ow` from the previous build. Touching the sources did not help either; CMake rebuilt them, but other
 objects from the swept set were untouched.
 
@@ -963,7 +963,7 @@ cmake -B build --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake \
 rm -rf build/split_poc && bash scripts/split_link.sh
 ```
 
-**The tell is the same as always** — `exactly at their reference VA: 0` and a residue above ~50% — and
+**The tell is the same as always** (`exactly at their reference VA: 0` and a residue above ~50%), and
 the danger is that this state is *indistinguishable from a genuine composition failure*. If a flag
 change appears to blow the budget, clean-rebuild before concluding anything about the flag.
 
@@ -974,20 +974,20 @@ cleared on `-j1` / serial `TMPDIR=/tmp` rebuilds with no source change. Neither 
 
 ## 13. A positional comparator cannot classify a divergence (rounds 927, 955, 963)
 
-Three times this session a script was written to *label* a divergence — "slot vs form", "first differing
-instruction kind" — by comparing the two instruction streams element by element. All three produced
+Three times this session a script was written to *label* a divergence ("slot vs form", "first differing
+instruction kind") by comparing the two instruction streams element by element. All three produced
 garbage, and for the same reason: **the streams desynchronise at the first divergence**, so every index
 after it pairs unrelated instructions.
 
 Measured round 963: classifying all 19 residue carriers' first divergence as `SLOT` (same mnemonic,
-operand differs only in a hex literal) or `form` labelled **every carrier `form`** — including ones whose
+operand differs only in a hex literal) or `form` labelled **every carrier `form`**, including ones whose
 actual difference is a single rotated stack slot. Typical false pair:
 `push ebp` against `push ebx`, or `test ebx,ebx` against a bare jump target.
 
 **A label is a claim about aligned correspondence, so it needs alignment first.** The working methods in
 this project all align on something that survives drift:
 
-- **decode each image from its own function entry** (never the reference at our VA — that produced a
+- **decode each image from its own function entry** (never the reference at our VA, that produced a
   coincidental `lea`/`add` "match" in round 955);
 - **compare by source address** via `build/split_poc.map`, not by stream index;
 - **or compare counts** over a whole function (round 961's slot-use histogram: reference `[esp+0x20]` 7 /
@@ -998,7 +998,7 @@ this project all align on something that survives drift:
 ## 14. An apparent missing instruction can be a compiler-proved-dead block (round 963)
 
 `cm_ProcessCommandQueue` shows the reference emitting `test ebx,ebx; je <unlink>` before a `jmp`, where we
-jump straight through — which reads as five bytes of missing code. It is not.
+jump straight through, which reads as five bytes of missing code. It is not.
 
 The header proves the target's join test is **provably-true dead code**: both predecessors enter with
 `ebx != 0`, msvc6 constant-folds that, and deletes the block. **C cannot request a test whose operand the
@@ -1012,14 +1012,14 @@ a thing to spell.
 
 ## 15. `[esp+N]` is not comparable between two images without normalising esp depth (round 969)
 
-A per-slot frequency table over a function — "how many instructions touch `[esp+0x34]` here versus there"
-— is a tempting way to find an extra or missing stack slot. Measured on `cm_ExSellObjekt`, it reports
+A per-slot frequency table over a function ("how many instructions touch `[esp+0x34]` here versus there")
+is a tempting way to find an extra or missing stack slot. Measured on `cm_ExSellObjekt`, it reports
 `0x34` and `0x3c` used **only by our build** and `0x40` **only by the reference**, which reads as a frame
 difference.
 
 **It is an artefact: `esp` moves, so the same physical slot appears as different displacements on the two
-sides.** The carrier's own header had already recorded this for the same two sites — *"tracking esp depth
-through the pushes, the reference's `[esp+0x44]` and our `[esp+0x3c]` are both frame+0x468"* — and round
+sides.** The carrier's own header had already recorded this for the same two sites: *"tracking esp depth
+through the pushes, the reference's `[esp+0x44]` and our `[esp+0x3c]` are both frame+0x468"*, and round
 969 rediscovered it the expensive way.
 
 **Every site that sits on a different push depth will show a phantom difference**, which is most of them:
@@ -1032,7 +1032,7 @@ depth.** A raw displacement table is not evidence about frame layout.
 
 ## 16. Compare branch TARGETS, not instructions, when a loop diverges (rounds 970-971)
 
-A stream comparison of two images compares `jle` against `jle` and reports a match — so a divergence that
+A stream comparison of two images compares `jle` against `jle` and reports a match, so a divergence that
 consists **only of where the branches go** is invisible to it, and invisible to `rebrew diff` too. Both
 rulers agree the instructions are identical and the score stays high while the bytes differ.
 
@@ -1057,8 +1057,8 @@ for x, y in zip(ref_insns, bld_insns):
         ...   # same branch, different destination
 ```
 
-Round 971 ran it across all 19 residue carriers. **Eight have zero** — their residue is not branch-related
-at all — while `gm_AllocSpieler` (21) and `ServerMainThread` (14) hold most of the branch-related
+Round 971 ran it across all 19 residue carriers. **Eight have zero**: their residue is not branch-related
+at all, while `gm_AllocSpieler` (21) and `ServerMainThread` (14) hold most of the branch-related
 divergence. That partition is worth having before choosing a target: a carrier with many target-differing
 branches is a block-placement story, one with none is an instruction-form story.
 
@@ -1067,7 +1067,7 @@ branches is a block-placement story, one with none is an instruction-form story.
 A clean `rm -rf build` + configure + `cmake --build build` fails:
 
 ```
-error: postlink failed: built .text is not position-aligned with the reference — only
+error: postlink failed: built .text is not position-aligned with the reference: only
 4847/7463 layout-map entries validate (64.9%, minimum 90%). .text VirtualSize built
 0x221f6 vs reference 0x22846.
 ```
@@ -1077,7 +1077,7 @@ linker deletes `server.dll`, `build/server.dll` does not exist, and the coverage
 spent its opening on this and nearly bisected the source tree looking for the commit that broke it.
 
 **Nothing is broken.** `CMakeLists.txt:442-468` attaches `rebrew postlink --layout` as a POST_BUILD step of
-the `server_dll` target, and that step is expected to fail until the tree is position-aligned — the
+the `server_dll` target, and that step is expected to fail until the tree is position-aligned: the
 coverage gate exists precisely so a wrong-offset patch cannot be written silently. The plain CMake link
 lays `.text` out in compile order, which is not the reference's order, so it can never pass.
 
@@ -1101,7 +1101,7 @@ Two tells that the failure is the designed one, not a real break:
 hunting a source change that never happened. Confirm the *designed* failure first by checking for a compile
 error and by diffing the tree, then build `--target final` and read the residue table.
 
-## 18. A raw dword scan and a disassembler op_str scan disagree — neither alone is proof of absence (round 977)
+## 18. A raw dword scan and a disassembler op_str scan disagree: neither alone is proof of absence (round 977)
 
 Chasing whether `g_query_limit`'s recorded VA (`0x10035450`, `src/rebrew-data.toml:606`) was real, two scans
 of the *same* reference gave opposite answers:
@@ -1120,7 +1120,7 @@ The capstone result was taken as evidence that the toml carried a wrong address 
    addresses it printed came from `tva`; every per-hit offset needed `tva + h`, not `h`. Hits were real but
    the printed addresses were shifted by the section VA, so they never matched the pattern being searched.
 2. Independently, `mov eax, dword ptr [0x10035450]` **is** rendered by this capstone build as an absolute
-   operand, so a correct scan *would* have found it — the failure was purely the indexing error above.
+   operand, so a correct scan *would* have found it: the failure was purely the indexing error above.
 
 Decoding the raw hits directly settled it: `0x10035450` is a real `.bss` counter, and the reference touches
 it 15 times (`mov eax,[0x10035450]` at `0x10014239` and `0x10015f2e`, `inc`/`dec` forms at `0x10015d82`
@@ -1135,7 +1135,7 @@ python3 -c "d=open('original/Server/server.dll','rb').read(); \
   print(sum(1 for i in range(len(d)) if d[i:i+4]==(0x10035450).to_bytes(4,'little')))"
 ```
 
-An "address is never referenced" result from a single disassembler scan is not evidence of absence — it is
+An "address is never referenced" result from a single disassembler scan is not evidence of absence: it is
 evidence about that scan. This is the fourth self-inflicted measurement error recorded in this document,
 and like the others it produced a plausible, confident, wrong finding (a claimed `rebrew` bug) that only a
 second independent check dissolved.
@@ -1150,12 +1150,12 @@ items scores exactly `10.0`.
 start-data roi_score histogram: {10.0: 207}
 ```
 
-The top-20 page therefore reads as a ranked list while being an arbitrary sample — and this round's brief
+The top-20 page therefore reads as a ranked list while being an arbitrary sample, and this round's brief
 pointed at it ("`rebrew todo` shows 246 start-data items and 34 data-drift"). Worked in that order, a round
 starts on `__imp__GetLocalTime@4`, an **IAT slot at the head of `.rdata`** (`0x10024000`+) that the linker
 supplies and no C source can affect. 84 of the 207 are `__imp_*` of this kind.
 
-`improve-match` is not flat — `gm_AllocSpieler` scores 39.1 and `ServerMainThread` 15.9, both real. The
+`improve-match` is not flat: `gm_AllocSpieler` scores 39.1 and `ServerMainThread` 15.9, both real. The
 flatness is specific to `start-data`.
 
 **The check.** Histogram the ROI column before trusting the order:
@@ -1170,14 +1170,14 @@ A single-valued histogram means the ranking is not a ranking. Rank by measured r
 (`scripts/linktest.sh` / `scripts/first_divergence.py`), which is what the objective's own "judge candidates
 at the link, not with object scores" rule already says.
 
-## 20. Raw-link `.data` is a size-only filler and cannot reach zero — the ceiling is the right check (round 980)
+## 20. Raw-link `.data` is a size-only filler and cannot reach zero: the ceiling is the right check (round 980)
 
 Round 977 reported "all 8628 differing bytes are in `.text`" and concluded the `.data` axis was closed. That
 is true of the **shipped** file but was stated without the mechanism, and the mechanism matters because it
 says the *raw-link* number is not a target at all.
 
-`scripts/split_link.sh:196-221` generates `data_restore_split.c` — a blob whose bytes are copied from the
-reference's `.data` **tail** — and appends it to the link:
+`scripts/split_link.sh:196-221` generates `data_restore_split.c`: a blob whose bytes are copied from the
+reference's `.data` **tail**, and appends it to the link:
 
 ```
 # The pad is a LENGTH-only filler (its bytes are the reference .data tail and
@@ -1193,13 +1193,13 @@ reproduce its bytes. Attributing the raw-link `.data` diff by owning object make
 |---|---|---|
 | `data_restore_split.obj` | 6,207 | the length-only filler above |
 | `fold_literals.obj` | 833 | `gen_fold_literals.py` shim |
-| `deflate.c.obj` (stock zlib) | — | `ZLIB_VERSION "1.1.3"` COMDAT |
+| `deflate.c.obj` (stock zlib) | - | `ZLIB_VERSION "1.1.3"` COMDAT |
 
 The 21,481 the gate enforces as `DATA_BASELINE` is therefore **mostly the filler's own bytes plus game
 `.data` that the link places by COMDAT hash order** (`CMakeLists.txt:443-448`). It cannot be driven to zero
 while a filler is present, and the filler is present because the raw size must be `0xe000`.
 
-**The gate already models this correctly** — `scripts/gate.sh:160` fails on `-gt` and passes on `-le`, i.e. a
+**The gate already models this correctly**: `scripts/gate.sh:160` fails on `-gt` and passes on `-le`, i.e. a
 *ceiling*, not an equality. Reading it as a progress target is the error.
 
 **One in-scope defect found and correctly left alone.** The first `.data` divergence is at `0x1002706c`, and
@@ -1217,14 +1217,14 @@ the `zlib_version` pointer emitted by **`references/zlib-1.1.3/deflate.c`** (`zl
 as a stock library. **In scope it is not**, and it is the one place in the section that could have been
 mistaken for game-source work.
 
-**Method point.** Sections 148-158 of `msvc6-c-shapes.md` are a full `.data` pass — eleven rounds that fixed
+**Method point.** Sections 148-158 of `msvc6-c-shapes.md` are a full `.data` pass: eleven rounds that fixed
 three `rebrew` tool defects, produced `int g_log_level_table[3]` (a 36-byte surplus costing 231), the
 `g_log_format_table[96]` fix, and took raw-link `.data` from 27,953 downward. Round 977 declared the `.data`
 vein "mined out" after reading only the shipped file's byte deltas and never reading that pass. **Check for
-an existing section series on the round's assigned topic before declaring it exhausted** — the brief's
+an existing section series on the round's assigned topic before declaring it exhausted**: the brief's
 ".data / types / structs" direction had a dedicated eleven-round history the round-977 work did not consult.
 
-## 21. Disassembling `.text` from its start gives wrong instruction boundaries — every statistic built on it is junk (round 988)
+## 21. Disassembling `.text` from its start gives wrong instruction boundaries: every statistic built on it is junk (round 988)
 
 `msvc6` pads between functions, and `.text` begins with bytes that are not a valid instruction stream at
 offset 0. A linear sweep from section start therefore desynchronises within the first few hundred bytes and
@@ -1238,7 +1238,7 @@ Measured this round. Attributing each of the 8,628 differing bytes to the instru
 | each carrier's **own function entry** | 8,498 (98.5%) | 130 (1.5%) |
 
 The first figure is not a finding about the residue; it is a finding about the sweep. It reads as a dramatic
-result — "70% of the residue is not code at all" — and it is false. Decoding from the known entry points
+result ("70% of the residue is not code at all"), and it is false. Decoding from the known entry points
 shows the truth: **98.5% of the differing bytes are inside real instructions**, and the remaining 130 are
 inter-function padding.
 
@@ -1277,7 +1277,7 @@ branch and x87 instructions is what the documented scheduler/register-role class
 
 The span filter is applied *before* probing, and it is the check that stops a size-increasing edit from
 collapsing the composition. Round 989 ran it on a live probe and it reported the carrier **exactly at its
-span** — so the probe looked free, and the span filter passed it. The link then collapsed the composition,
+span**, so the probe looked free, and the span filter passed it. The link then collapsed the composition,
 and the carrier was in fact **+16 over span**, identical to the unprobed §159 measurement.
 
 **Why.** `scripts/linktest.sh` recompiles the named file with the command `build.make` records, but writes
@@ -1307,7 +1307,7 @@ you about the last CMake build, not about your working tree.**
 
 **Cost this round:** a probe that looked span-neutral was actually +16; catching it required a full rebuild
 and a composition collapse to notice. The `linktest.sh` collapse message ("only 0 symbols landed at their
-reference VA") is what surfaced it — that guard earned its place.
+reference VA") is what surfaced it: that guard earned its place.
 
 **Also confirmed:** the §159 probing result reproduces exactly. Caching **only** `slot+0x14` (rather than
 both `slot+0x20` and `slot+0x14`) still measures **+16 obj / span overflow**, so the +16 is caused by the
@@ -1323,7 +1323,7 @@ our object is larger than the reference. Decoding both images from `0x10018850` 
 REF insns 1056 (bytes 3689)   BLD insns 1014 (bytes 3577)
 ```
 
-which reads as "our object is 112 bytes *shorter*, with 119 bytes of padding" — and that is wrong. Both
+which reads as "our object is 112 bytes *shorter*, with 119 bytes of padding", and that is wrong. Both
 numbers describe the **shipped** `build/server.dll`, which postlink has already rewritten; they are not the
 object the linker lays out.
 
@@ -1334,7 +1334,7 @@ object the linker lays out.
 trailing nop padding: 7 bytes (90909090909090), matching the reference span
 ```
 
-**1061 instructions filling all 3696 bytes — zero headroom**, exactly as `object_span_check.py` says. The
+**1061 instructions filling all 3696 bytes: zero headroom**, exactly as `object_span_check.py` says. The
 "1014 instructions / 119 bytes of padding" figure was an artifact of the decode window: disassembling 3696
 bytes from `0x10018850` in the *shipped* image stops early because postlink has rewritten bytes the stream
 crosses.
@@ -1347,20 +1347,20 @@ crosses.
 | our **object** `.text`, decoded from its start | **1061** | truth for ours |
 | our **shipped image**, same window | 1014 | postlink-rewritten; **not** a measure of code size |
 
-Net difference: **2 instructions** — which agrees with §141's "15 net instructions across the eight heaviest
+Net difference: **2 instructions**, which agrees with §141's "15 net instructions across the eight heaviest
 rows" in spirit, while §141's per-row `1054 vs 1056` figures came from the same shipped-image decode and
 carry the same caveat.
 
 **Two lessons.** (1) `build/server.dll` is postlink output; never count instructions in it and call the
 number the object's. Read `build/CMakeFiles/server_dll.dir/<...>.c.obj` instead. (2) A disassembly window
-that "ends early" is a signal that the stream desynchronised, not evidence about how much code exists —
+that "ends early" is a signal that the stream desynchronised, not evidence about how much code exists:
 §21 is the same failure one level up.
 
 **Outcome for the round's actual goal:** the 16 bytes cannot be found by shrinking, because the object is
 already exactly at its span and its code fills it. Any editing fix must be **size-neutral**, not merely
-"small enough" — which is why both caching probes measured +16 and the composition collapsed.
+"small enough", which is why both caching probes measured +16 and the composition collapsed.
 
-## 24. Instruction counts across two images are not comparable — the decoder's stop rule decides the answer (round 991)
+## 24. Instruction counts across two images are not comparable: the decoder's stop rule decides the answer (round 991)
 
 Chasing whether any carrier is *missing code* rather than *reordered code*, round 991 compared instruction
 counts between the reference and our build for all 19 carriers. **The answer changed with every truncation
@@ -1371,10 +1371,10 @@ rule**, which is the tell that the measurement is about the method, not the targ
 | full span, no truncation | 1063 / 1014 (−49) | −121 |
 | truncate at last `ret`, drop trailing `nop` | 1056 / 1014 (−42) | −121 |
 | truncate at last `ret` before padding | 1056 / 917 (−139) | −216 |
-| `scripts/first_divergence.py` (decodes over the span) | 1063 / 1014 | — |
+| `scripts/first_divergence.py` (decodes over the span) | 1063 / 1014 | - |
 
 A −42 or a −139 for the same function is not a measurement; it is three different bugs. Every rule decodes
-past the function's true end and then reports the garbage as code — in the reference that produced a bogus
+past the function's true end and then reports the garbage as code: in the reference that produced a bogus
 `popal` at `0x10002e9c`, in ours a bogus `push 0xfe811004`.
 
 **The desync-free measurement is the object's `.text` raw size**, read from the COFF, against the reference
@@ -1386,14 +1386,14 @@ CrashDump         span 2128   our object .text raw 2128   +0
 cm_ExSellObjekt   span 2064   our object .text raw 2064   +0
 ```
 
-Every carrier is **exactly at its span**. That is unambiguous — no decoding, no stop rule — and it confirms
+Every carrier is **exactly at its span**. That is unambiguous (no decoding, no stop rule) and it confirms
 §23 and round 990.
 
 **The rule.** Do not compare instruction *counts* between two images. A count depends on where you stop, and
 where you stop requires knowing the function's end, which is exactly what is in doubt. Compare **byte
 lengths from the object**, which are declared, or compare instruction *streams* with an alignment-aware
 tool. The mnemonics-multiset comparison used this round returned "differs by 87" for `gm_AllocSpieler`,
-including 7 `nop`s and 2 extra `ret`s — all of them decoder garbage past the `ret` at `0x100196b8`.
+including 7 `nop`s and 2 extra `ret`s: all of them decoder garbage past the `ret` at `0x100196b8`.
 
 **Third instance of this class** (§21 decoding from section start, §23 counting in postlink output, §24
 counting across images). The common cause is that a disassembler always produces *something*; desynchronised
@@ -1402,7 +1402,7 @@ output is syntactically valid and reads like a finding.
 ## 25. `instr_diff.py`'s default `--built` reads the postlink composition, not the object (round 1000)
 
 `scripts/instr_diff.py` defaults to `BUILT = build/split_poc.dll`. That is the per-reference-offset **composition**
-— postlink's output — not the object the linker lays out. Round 990 found the same distinction for instruction
+(postlink's output), not the object the linker lays out. Round 990 found the same distinction for instruction
 *counts* (measure-traps §23); this is the same trap one tool over, and this tool's default path is the wrong one.
 
 Measured on four carriers, image vs `--obj`:
@@ -1418,23 +1418,23 @@ The object consistently holds **more** built instructions than the image (369 vs
 and aligns **better** against the reference (up to +2 points). The composition has already been rewritten by
 postlink, and bytes the object's decoder crosses are not the bytes postlink emits.
 
-**Which is right depends on the question.** For "what does the compiler emit" — the reversing question — the
+**Which is right depends on the question.** For "what does the compiler emit" (the reversing question), the
 **object** is correct. For "what does the shipped DLL contain", the image is. Every ranking or alignment figure
 in this project's docs that came from `instr_diff.py` without `--obj` is therefore the *shipped* view.
 
 **What this does and does not change.** The round-999 ranking (which carriers have the fewest hunks) is
 **stable** across both paths, and the key signal identities survive: `CrashDump`'s `ref-only x33: push ADDR` is
 the same on both paths, and `cm_ExProdObjekt`'s three-instruction ordering hunk appears either way. So the
-round-999 conclusions hold. What changes is the *magnitude* — a 49.2% alignment is really 51.2%, and a
+round-999 conclusions hold. What changes is the *magnitude*: a 49.2% alignment is really 51.2%, and a
 "354 built instructions" is really 369.
 
 **The rule.** Use `--obj build/CMakeFiles/server_dll.dir/<path>.c.obj` when the question is about codegen, and
-remember to `cmake --build build` first (measure-traps §22 — a stale object measures the previous edit).
+remember to `cmake --build build` first (measure-traps §22, a stale object measures the previous edit).
 
-## 26. `spiel622.c` holds 16 functions in one object — a per-function span reader must pick the right COMDAT (round 1001)
+## 26. `spiel622.c` holds 16 functions in one object: a per-function span reader must pick the right COMDAT (round 1001)
 
 Round 1001 verified `gm_CalculateProductionValue`'s recorded **"+4 bytes of upward slack"** and found the
-figure stale — but reaching that conclusion required noticing that the naive reader is wrong on this file,
+figure stale, but reaching that conclusion required noticing that the naive reader is wrong on this file,
 which is worth recording separately because two of this project's scripts read objects that way.
 
 `spiel622.c` contains **16 functions**, each its own COMDAT `.text` section in one object:
@@ -1445,7 +1445,7 @@ COMDAT .text[2] raw=96   [4] raw=400   [6] raw=368   [8] raw=80   [10] raw=112
 [22] raw=48   [24] raw=48   [26] raw=416   [28] raw=400   [30] raw=112   [32] raw=32
 ```
 
-A reader that sums or takes the **first** `.text` section gets 96 — and a reader that loops without breaking
+A reader that sums or takes the **first** `.text` section gets 96, and a reader that loops without breaking
 reports the last one. Both give a number unrelated to the function being asked about. The correct read is the
 COMDAT whose size matches the function's placement:
 
@@ -1461,13 +1461,13 @@ gm_CalculateProductionValue  0x10019720 .. 0x100198b0  = 400 bytes  ->  COMDAT .
  * **+4 bytes of upward slack** and 397 is SPAN-NEUTRAL.
 ```
 
-The COMDAT is already **400** — it fills the span exactly, and the 4 trailing `nop`s are *inside* it, not spare
+The COMDAT is already **400**: it fills the span exactly, and the 4 trailing `nop`s are *inside* it, not spare
 capacity. A 397-byte variant would fit in the 400-byte COMDAT only if it were padded back to 400; a 401-byte
 one would push the COMDAT to 416 and displace every later function in the file. So the "upward slack" reading
 inverts the geometry: there is no room to grow, and the recorded reason for the 397 variant being affordable
 does not hold.
 
-**The practical consequence on that carrier is nil** — the 397 shape was already recorded as losing on
+**The practical consequence on that carrier is nil**: the 397 shape was already recorded as losing on
 *structure*, not size: *"unfolding the compare shifts every byte after 230 and takes the structural diffs from
 2 to 53"*, re-measured at **255** aligned against the baseline's **122/123**. The row is retired at its 5-byte
 floor for reasons that do not depend on the slack figure. But the figure itself is the **sixth stale header
@@ -1478,17 +1478,17 @@ quantity** found this session, and the first in a multi-function object, where i
 ```bash
 python3 -c "
 import struct,json
-fs=json.load(open('src/server.dll/function_structure.json'))
+fs=json.load(open('db/inventory-server.dll.json'))
 vas=sorted(f['va'] for f in fs); V=0x<VA>
 span=next(v for v in vas if v>V)-V
-d=open('build/CMakeFiles/server_dll.dir/src/server.dll/<path>.c.obj','rb').read()
+d=open('build/CMakeFiles/server_dll.dir/src/Develop/<path>.c.obj','rb').read()
 n=struct.unpack_from('<H',d,2)[0]; off=20+struct.unpack_from('<H',d,16)[0]
 m=[struct.unpack_from('<I',d,off+i*40+12)[0] for i in range(n)
    if d[off+i*40:off+i*40+8].rstrip(b'\0')==b'.text']
 print('span',span,'comdats',m,'matching',[x for x in m if x==span])"
 ```
 
-If no COMDAT matches the span, the object is stale (measure-traps §22) or the metadata size is wrong — do not
+If no COMDAT matches the span, the object is stale (measure-traps §22) or the metadata size is wrong: do not
 read a slack figure from it.
 
 ## 27. `branch_census.py`'s "targetdiff" counts polarity swaps and ±1 drift as structural difference (round 1005)
@@ -1499,7 +1499,7 @@ measured this round on `ServerMainThread` (106 branches, 14 reported target-diff
 
 **1. The deltas are mostly ±1..3, not different blocks.** The set of target deltas is
 `{-1 x5, -2 x5, -3 x3, +340 x1}`. Nine of the fourteen are a one-to-three-byte displacement drift from a
-locally shorter or longer block — the branch reaches the *same* block, one or three bytes off.
+locally shorter or longer block: the branch reaches the *same* block, one or three bytes off.
 
 **2. The `+340` outlier is a PAIRING artifact, not a different target.** Aligning by index pairs the wrong
 instructions once the streams desynchronise by one:
@@ -1513,12 +1513,12 @@ ours       0x100098e5  jne 0x1000991a     (esi != 0 -> exit)
 
 The index-aligned pairs are `je`/`jne` and `jmp`/`jmp`, which subtracts a taken-branch target from a
 fallthrough target and yields 340. **Decoded properly, the control flow is identical**: both images send
-`esi == 0` to `0x100097c5` and the other edge to the exit block — the reference via `je` + fallthrough, ours
+`esi == 0` to `0x100097c5` and the other edge to the exit block: the reference via `je` + fallthrough, ours
 via `jne` + fallthrough. That is §50's documented branch-polarity class, and the two exit targets differ by
 exactly **1 byte** (`0x10009919` vs `0x1000991a`) because our block is one byte shorter locally.
 
 **So `branch_census.py`'s count is an upper bound on structural difference, not a measurement of it.** The
-round-971 table built from it — `gm_AllocSpieler` 21, `ServerMainThread` 14, `cm_ExSellObjekt` 7, … — should be
+round-971 table built from it (`gm_AllocSpieler` 21, `ServerMainThread` 14, `cm_ExSellObjekt` 7, …) should be
 read as "branches whose *encoding* differs", which includes polarity and drift. The classifier's four classes
 survive because the carriers with **zero** target-differing branches are genuinely zero
 (`vfs_OpenStream`, `ahm_ExAllocAlchemist`, `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`,
@@ -1535,7 +1535,7 @@ survive because the carriers with **zero** target-differing branches are genuine
 A pair that differs by a few bytes reaches the same block. A pair where the *mnemonic polarity swapped* is
 §50. Only a pair whose destinations resolve to different basic blocks is a placement finding.
 
-## 28. How NOT to compare two control-flow graphs — five rejected formulations (round 1006)
+## 28. How NOT to compare two control-flow graphs: five rejected formulations (round 1006)
 
 `branch_census.py` counts branches whose encoding differs, which overstates structural difference (§27).
 Replacing it needs a real CFG comparison, and getting there took **six attempts**, five of which were wrong in
@@ -1545,13 +1545,13 @@ ways that each looked plausible:
 |---|---|---|---|
 | 1 | compare branch targets **by index** | polarity swaps, ±1..3 drift, and pairing artifacts all read as differences | hand-decoded ServerMainThread `0x100098e3` |
 | 2 | compare successor **directions** (`fwd`/`back`) | direction FLIPS with polarity, so a polarity swap still differs | same case: reference `je`+back vs our `jne`+forward is one two-way branch |
-| 3 | compare block **bodies** | a body differs for non-CFG reasons (register name, one extra insn) — `gm_CalculateProductionValue` reported 6 different edges when its flow is identical | its known-good status |
+| 3 | compare block **bodies** | a body differs for non-CFG reasons (register name, one extra insn): `gm_CalculateProductionValue` reported 6 different edges when its flow is identical | its known-good status |
 | 4 | group **`jcc`+`jmp`** as one two-way branch | a `jmp` after a `jcc` often belongs to a *different* case; grouping corrupted alignment and regressed `ServerMainThread` from SAME to DIFFERS | re-measurement after the change |
 | 5 | **BFS canonical labelling** + edge sets | **not canonical**: visiting a node's two successors in the other order changed 452 of the edge set on the SAME reference graph | explicit order-swap experiment |
-| 6 | **order-independent signature** (block-kind multiset + degree profile + edge-kind multiset) | — | holds; see below |
+| 6 | **order-independent signature** (block-kind multiset + degree profile + edge-kind multiset) | - | holds; see below |
 
 **The generalisable trap is #5, because it is invisible without an explicit test.** A BFS labelling *looks*
-canonical — it is deterministic, it is the standard recipe, and it gives identical output for identical input.
+canonical: it is deterministic, it is the standard recipe, and it gives identical output for identical input.
 It only fails when two graphs differ slightly, and then it over-reports massively: `gm_AllocSpieler` showed
 187-214 "differing edges" against a block-kind histogram that matched within 2 nodes.
 
@@ -1575,7 +1575,7 @@ canonical form changes.
 **The working formulation** (order-independent, no traversal): for each block, its **kind**
 (`branch2` for any conditional, `jmp`, `ret`, `falloff`) and its **(in-degree, out-degree)**; then the sorted
 multiset of (kind, indeg, outdeg) over blocks, plus the sorted multiset of (kind, kind) across edges. Condition
-*polarity* is deliberately not part of the kind — `je` and `jne` to the same two successors are one shape.
+*polarity* is deliberately not part of the kind: `je` and `jne` to the same two successors are one shape.
 
 **Results, with the two guards in place** (`nodeR`/`nodeB` are block counts):
 
@@ -1584,7 +1584,7 @@ multiset of (kind, indeg, outdeg) over blocks, plus the sorted multiset of (kind
 | `ServerMainThread` | **SAME** | matches the hand decode; the tool's index-based predecessor called this 14 different |
 | `m_AllocTracked` | **SAME** | kinds identical: `jcc 33, ret 6, jmp 3` both sides |
 | `srv_LoadBuf`, `gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue` | **SAME** | all five known-near-exact carriers |
-| `gm_CheckInventoryCapacity` | DIFFERS | hand-verified: reference `jcc 19, ret 5, jmp 1` vs ours `jcc 20, ret 5` — one `jmp` became a `jcc` |
+| `gm_CheckInventoryCapacity` | DIFFERS | hand-verified: reference `jcc 19, ret 5, jmp 1` vs ours `jcc 20, ret 5`: one `jmp` became a `jcc` |
 | 11 others | DIFFERS | profile delta 1-2 blocks |
 
 **12 of 19 carriers have a differing control-flow shape; 7 are identical.** That is a much larger structural
@@ -1625,8 +1625,8 @@ ServerMainThread  block kinds  ref == bld (131/18/4), aggregate degrees identica
                   4-round refined colouring BOTH separate the graphs
 ```
 
-`ServerMainThread` is the instructive one: every aggregate profile matches — kinds, out-degree histogram,
-in-degree histogram, entry in-degree — and the graphs are still not isomorphic. **No summary statistic over
+`ServerMainThread` is the instructive one: every aggregate profile matches (kinds, out-degree histogram,
+in-degree histogram, entry in-degree), and the graphs are still not isomorphic. **No summary statistic over
 blocks is a substitute for a graph comparison.** Round 1005's hand-verification of a single branch
 (`0x100098e3`) was correct for that branch and did not generalise to the function.
 
@@ -1634,7 +1634,7 @@ blocks is a substitute for a graph comparison.** Round 1005's hand-verification 
 with two shipped guards:
 
 * `--self-test` asserts a graph is isomorphic to **itself** and that a redirected branch is detected. The
-  earlier version asserted the unmutated build was isomorphic to the reference — which assumes the answer
+  earlier version asserted the unmutated build was isomorphic to the reference, which assumes the answer
   being tested for, and failed for a carrier where the tool's DIFFERS is the finding, not a bug.
 * the reflexive check catches the cross-graph colour-ID bug directly.
 
@@ -1645,7 +1645,7 @@ with two shipped guards:
 | **SAME** (6) | `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue` |
 | **DIFFERS** (13) | the rest |
 
-So the honest `place`-class number is **6 identical, 13 differing**, not 7/12 — and unlike round 1006's, this
+So the honest `place`-class number is **6 identical, 13 differing**, not 7/12, and unlike round 1006's, this
 one survives an exhaustive small-graph correctness check plus a reflexive self-test.
 
 ## 30. Validating a CFG against the linear decode before trusting its verdicts (round 1008)
@@ -1658,8 +1658,8 @@ wrong verdicts, so this round validated the construction three ways before accep
 **0 zero-instruction blocks**, and **0 block entries off the linear-decode instruction boundaries**.
 
 **2. Block count reconciles with the branch count.** The linear decode finds 1,063 instructions and 122
-branches; the recursive descent finds 170 blocks. An independent count — entry, plus every branch target, plus
-every fallthrough after a branch or terminator — gives **171**.
+branches; the recursive descent finds 170 blocks. An independent count (entry, plus every branch target, plus
+every fallthrough after a branch or terminator) gives **171**.
 
 **3. The one-block difference is correct and symmetric.** The extra start is `0x100196b9`, a `nop` in the
 trailing padding after the function's final `ret`. `build_cfg` never queues a fallthrough after a `ret`
@@ -1687,11 +1687,11 @@ opposite. Both are silent without this check.
 **Also confirmed:** `--self-test` passes both guards (reflexive isomorphism, redirected-branch detection) and
 the 13-differ / 6-same split is reproducible run to run.
 
-## 31. Exact isomorphism over ADDRESSES answers the wrong question — establish correspondence first (round 1012)
+## 31. Exact isomorphism over ADDRESSES answers the wrong question: establish correspondence first (round 1012)
 
 `cfg_compare.py` compared two CFGs by exact isomorphism over block **addresses**. That is not the question the
-tool exists to answer. Two builds whose blocks sit at different addresses — because intervening code differs in
-length — produce a non-isomorphic verdict for a purely encoding-level reason.
+tool exists to answer. Two builds whose blocks sit at different addresses (because intervening code differs in
+length) produce a non-isomorphic verdict for a purely encoding-level reason.
 
 **Measured on `ServerMainThread`.** Under an exact address-based isomorphism the graphs are not isomorphic, and
 round 1011 read that as a "merge-point" difference from the neighbourhood profiles. Comparing instead under a
@@ -1710,15 +1710,15 @@ reference  0x100098e3  je  0x100097c5   then  0x100098e9  jmp 0x10009919
 ours       0x100098e5  jne 0x1000991a   then  0x100098e7  jmp 0x100097c5
 ```
 
-Same two destinations, swapped polarity. So `ServerMainThread` is **polarity-only on 2 of 280 edges** — exactly
-round 1005's conclusion — and rounds 1010/1011's "arity"/"merge" readings were both artifacts of comparing
+Same two destinations, swapped polarity. So `ServerMainThread` is **polarity-only on 2 of 280 edges**: exactly
+round 1005's conclusion, and rounds 1010/1011's "arity"/"merge" readings were both artifacts of comparing
 addresses.
 
 **The rule.** An isomorphism test must run on a **correspondence**, not on raw identities. Before comparing any
 two compiled artifacts: establish which node corresponds to which (by ordinal, by canonical role, by matched
 canonical form), *then* compare the induced edges. Comparing addresses compares layout, not structure.
 
-**The tool now reports a graded verdict** — `mismatches / edges-checked` under ordinal correspondence — which is
+**The tool now reports a graded verdict** (`mismatches / edges-checked` under ordinal correspondence) which is
 far more informative than SAME/DIFFERS:
 
 | carrier | differing edges by ordinal |
@@ -1728,7 +1728,7 @@ far more informative than SAME/DIFFERS:
 | `vfs_OpenStream` | 7 / 27 |
 | `gm_CheckInventoryCapacity` | 9 / 10 |
 | `gm_AllocSpieler` | 75 / 132 |
-| (6 carriers) | **0 — control flow identical** |
+| (6 carriers) | **0: control flow identical** |
 
 `ServerMainThread` is now visibly a near-miss, not a structural outlier, which is the opposite of what the
 address-based verdict said.
@@ -1785,7 +1785,7 @@ indicative, not decisive.
 
 Round 980 attributed the raw-link `.data` divergence by owning object and found 28.9% of it in
 `data_restore_split.obj` (the length-only filler). Round 1015 re-measured with the current tooling and found a
-**game TU** contributing 643 bytes — `cm_ExSellObjekt.c.obj` — which looks like real missing content:
+**game TU** contributing 643 bytes (`cm_ExSellObjekt.c.obj`) which looks like real missing content:
 
 ```
 0x10029d9c  ref: 0500000005000000c409000000000000  <- integers 5, 5, 2500
@@ -1808,7 +1808,7 @@ and over the whole section, **shipped `.data` differs by 0 of 57,344 bytes.** Th
 section from the layout package, so raw-link divergence says nothing about whether content is missing.
 
 **The rule.** Attributing a raw-link `.data` difference to a game object does **not** make it a content defect.
-The check that separates the two is one command — compare the **shipped** file at the same address:
+The check that separates the two is one command: compare the **shipped** file at the same address:
 
 ```bash
 cmp <(dd if=build/server.dll bs=1 skip=$((0x27000+OFF)) count=N) \
@@ -1836,7 +1836,7 @@ built      1061 instructions, sizes summing to 3696   (span 3696)
 ```
 
 Both consume the span with **zero remainder**, so there is no padding and no slack. Our stream has **two fewer
-instructions** than the reference, offset by larger encodings — that difference, not a size deficit, is what the
+instructions** than the reference, offset by larger encodings: that difference, not a size deficit, is what the
 2,823-byte residue consists of.
 
 **Both tails are byte-identical**, which is the check that makes the count meaningful:
@@ -1865,7 +1865,7 @@ The number that matters is **our code up to and including the final `ret`**, and
 | `srv_LoadBuf` | 750 | 750 | 752 | 2 |
 
 Every carrier is padded with 2-15 trailing `nop`s. So **`cm_ExProdObjekt`'s header claim of "15 bytes of unused
-slack" was correct**, and round 1016's dismissal of it as stale was wrong — the same mistake in the opposite
+slack" was correct**, and round 1016's dismissal of it as stale was wrong: the same mistake in the opposite
 direction from round 990, which over-counted slack from a truncated decode.
 
 Three answers from three methods, only the third sound:
@@ -1876,7 +1876,7 @@ Three answers from three methods, only the third sound:
 | COMDAT raw vs span (rounds 1001, 1017) | 0 | **self-fulfilling**, measures the pad |
 | last non-`nop` instruction's end vs span (round 1018) | 2-15 bytes | **correct** |
 
-**The rule.** A size budget must come from an artefact, never from arithmetic over a disassembly — but the
+**The rule.** A size budget must come from an artefact, never from arithmetic over a disassembly, but the
 artefact must be the *code extent*, not the container's padded size. The container's raw size is what msvc6
 pads **to**; `raw == span` is therefore a tautology and cannot be evidence about our code. The code's extent is
 the end of the last non-`nop` instruction.
@@ -1884,8 +1884,8 @@ the end of the last non-`nop` instruction.
 | claim | method | valid? |
 |---|---|---|
 | "119 bytes of slack" (round 990) | `span - sum(sizes)`, decoder stopped early | **no** |
-| "slack 0" (rounds 1001, 1017) | COMDAT raw == span | **no** — tautological, measures the pad |
-| "sum of sizes == span on both sides" (round 1017) | decode arithmetic | **no** — same tautology, and §24 shows the sum moves with the decoder's stop rule |
+| "slack 0" (rounds 1001, 1017) | COMDAT raw == span | **no**: tautological, measures the pad |
+| "sum of sizes == span on both sides" (round 1017) | decode arithmetic | **no**: same tautology, and §24 shows the sum moves with the decoder's stop rule |
 | "last non-`nop` end vs span" (round 1018) | object bytes | **yes** |
 
 **Note on the earlier text above.** The round-1017 section still says the zero-remainder decode "proves there
@@ -1940,17 +1940,17 @@ Verify with:
 # ".text differing" line at the top is the deliverable number
 ```
 
-## 36. A carrier's VA is not guessable from its neighbours — resolve it from the annotation (round 1025)
+## 36. A carrier's VA is not guessable from its neighbours: resolve it from the annotation (round 1025)
 
 Round 1025 set out to re-verify `codegen-walls.md` §13's recorded first-divergence offsets against the
 current build, since the log is many rounds old and the code has moved. The first attempt reported
-**13 of 13 mismatched** — every carrier wrong. All 13 mismatches were the check's own fault.
+**13 of 13 mismatched**: every carrier wrong. All 13 mismatches were the check's own fault.
 
 **Two independent errors, either of which alone produces a full table of false alarms:**
 
 1. **The VAs were assumed, not resolved.** I took each carrier's start from memory and by rounding
    (`0x10011c00` for `gv_ExAllocGraveyardWorker`, `0x1000d8a0` for `cm_ExSellObjekt`, `0x10019e80` for
-   `gm_CheckInventoryCapacity`). The real values are `0x10011bf0`, `0x1000d930`, `0x10019e60` — off by
+   `gm_CheckInventoryCapacity`). The real values are `0x10011bf0`, `0x1000d930`, `0x10019e60`: off by
    `0x10` to `0x100`. Every derived offset was then wrong by exactly that amount, and offsets are
    *relative*, so the error is invisible in the output: it looks like a stale table, not a bad baseline.
 2. **The wrong artifact.** Two carriers (`m_AllocTracked`, `cm_ExCopyEntityData`) showed *no differing byte
@@ -1958,30 +1958,30 @@ current build, since the log is many rounds old and the code has moved. The firs
    have been the tell; it is measure-traps §35's deliverable-vs-capability confusion arriving before §35
    was written.
 
-**The correct method** — let the artefacts supply both endpoints:
+**The correct method**: let the artefacts supply both endpoints:
 
 ```bash
 # fault address, attributed per carrier, from the tool that computes the residue
 .venv/bin/python scripts/postlink_residual.py --write build/server.dll | tail -22
 # function start, from the annotation that lint already validates
-grep -m1 'FUNCTION: SERVER' src/server.dll/<path>/<carrier>.c
+grep -m1 'FUNCTION: SERVER' src/Develop/<path>/<carrier>.c
 # offset = fault - start
 ```
 
-With both resolved properly, **all 11 recorded §13 offsets reproduce exactly** — `0xaa`, `0x2`, `0x2c`,
+With both resolved properly, **all 11 recorded §13 offsets reproduce exactly**: `0xaa`, `0x2`, `0x2c`,
 `0x3c`, `0x30`, `0x107`, `0x3c7`, `0x60`, `0x36`, `0xcc`, `0x11`. Zero mismatches. The table is accurate
 and current.
 
 **The rule.** A fault address is a *VA*; an offset is a *difference*; a wrong start corrupts the second
-while leaving the first plausible. Never carry a carrier VA in your head across rounds — resolve it from
+while leaving the first plausible. Never carry a carrier VA in your head across rounds: resolve it from
 the source annotation, which `rebrew lint` already keeps honest, and take the fault address from the tool
-rather than from a `grep` of the docs (which are keyed by the fault, not the start — workflow-traps §8's
+rather than from a `grep` of the docs (which are keyed by the fault, not the start, workflow-traps §8's
 two-store problem).
 
 This is also why the round's negative result was worth obtaining: the log's offsets being independently
 reproducible is what earns the trust the next round will place in the class map built on top of them.
 
-## 37. The graded residue and the raw-link residue form a clean partition — 8628 + 5081, zero overlap (round 1026)
+## 37. The graded residue and the raw-link residue form a clean partition: 8628 + 5081, zero overlap (round 1026)
 
 Measure-traps §35 established that the shipped `.text` and the raw link answer different questions
 (8,628 vs 14,347 differing). Round 1026 decomposed the two byte-for-byte over `.text`'s 0x22846 bytes,
@@ -2004,7 +2004,7 @@ Two facts worth having:
   magnitude. A round may therefore use the raw link to study a carrier's divergence and the shipped file
   to score it, and the two will not contradict each other.
 
-**Worked example — the 5,081 class, at `0x10015f80` (inside `gm_ObjectsAvailble`).** `gm_FindNextFilteredEntity` (annotation VA
+**Worked example: the 5,081 class, at `0x10015f80` (inside `gm_ObjectsAvailble`).** `gm_FindNextFilteredEntity` (annotation VA
 `0x10016f80`; the real entry is `0x10015f80`, see below) opens:
 
 ```
@@ -2015,18 +2015,18 @@ RAW      a1 e8 6a 76 11   mov eax, [0x11766ae8]
 
 `0x1014d8c0` is `g_entity_ptr` per `rebrew-data.toml` and `rebrew_globals.h:63`. Our raw link binds it to
 the local stub `link_stubs.c:198` (`unsigned char* g_entity_ptr = 0;`), which the linker places at
-`0x11766ae8` — inside `.data`'s BSS tail but 21 MB from the reference's address. Postlink's layout package
+`0x11766ae8`: inside `.data`'s BSS tail but 21 MB from the reference's address. Postlink's layout package
 rewrites the operand back to the reference value, so the **shipped file is already correct here** and this
 byte is not residue.
 
 **The trap this exposes.** A round studying that offset on the raw link would see a wrong global operand and
-reasonably chase it as a live bug — the address is plausible, the symbol is real, and the raw link is the
+reasonably chase it as a live bug: the address is plausible, the symbol is real, and the raw link is the
 "capability" ruler §35 recommends. It is postlink-supplied and unfixable by editing the definition.
 **Check the shipped image before treating any raw-link operand difference as work.**
 
 **A note on `0x10016f80`.** `gm_FindNextFilteredEntity`'s annotation VA is `0x10016f80` and the
 inventory agrees (`fcn.10016f80`, 352 bytes). The bytes at its entry are `c4 08 5e c3` followed by ten `90`s,
-**identical in both images** — a shared epilogue tail left by the preceding function's layout — and the
+**identical in both images** (a shared epilogue tail left by the preceding function's layout) and the
 function's own prologue begins at `0x10016f8a`. `fault_address.py` walks the streams from `0x10016f80` and
 reports the first disagreement at `0x10016f86`; that is correct, and a first attempt to call this row
 "the wrong span" was wrong. Decode the streams, do not read the bytes at the entry.
@@ -2047,7 +2047,7 @@ therefore worth measuring rather than inheriting.
 24-byte context. The distance at which it is found is the local displacement. A single cliff yields one or
 two distinct values in one or two runs; many independent shifts yield many of both.
 
-**Result — the profile differs sharply by carrier, and most are a single cliff:**
+**Result: the profile differs sharply by carrier, and most are a single cliff:**
 
 | carrier | sampled | matched | distinct values | runs |
 |---|---|---|---|---|
@@ -2060,15 +2060,15 @@ two distinct values in one or two runs; many independent shifts yield many of bo
 | **`gm_AllocGebaeude`** | 263 | 223 | **1** | **1** |
 | **`vfs_OpenStream`** | 170 | 102 | **1** | **1** |
 | **`gm_FindNextFilteredEntity`** | 82 | 75 | **1** | **1** |
-| `gv_ExAllocGraveyardWorker` | 114 | 4 | 1 | 1 (only 4 matched — unresolved) |
+| `gv_ExAllocGraveyardWorker` | 114 | 4 | 1 | 1 (only 4 matched, unresolved) |
 
 **Six carriers show exactly one displacement value across the whole function.** For those, the residue
-really is one local difference plus its wake — §109's framing is correct *for them*, and the single cliff
+really is one local difference plus its wake: §109's framing is correct *for them*, and the single cliff
 is the thing to attack. `gm_AllocSpieler` is **not** one of them (4 values, 7 runs), so §109's own carrier
 is where the framing is weakest.
 
 **A global-shift test fails outright on `gm_AllocSpieler`:** our bytes after the first divergence match the
-reference at a constant offset in at best **310 of 3,519** cases (delta +5) — chance level. So there is no
+reference at a constant offset in at best **310 of 3,519** cases (delta +5): chance level. So there is no
 rigid displacement to find there either.
 
 **A correction to this section's first draft.** It reported `gm_AllocSpieler` as 12 runs / 10 distinct
@@ -2076,7 +2076,7 @@ values. That came from slicing the image with the wrong origin. The numbers abov
 verified against a known function's bytes. **The first draft's headline reversed the conclusion**: it
 claimed the wake framing does not reproduce, when in fact it reproduces for six carriers and fails only on
 the largest. Recorded because the corrected version is more useful: the profile table is now a *triage
-tool* — a carrier with one run is a §109-style single decision, a carrier with many runs is not.
+tool*: a carrier with one run is a §109-style single decision, a carrier with many runs is not.
 
 **READ §39 BEFORE USING THIS TABLE.** The profile is only interpretable alongside its match rate: a
 carrier whose code is genuinely different rather than shifted produces few matched samples, and a low
@@ -2086,18 +2086,18 @@ single-run carrier, is 12.8% context-matched and has no profile to read.
 **The rule.** "It is all downstream of fault X" is an attribution claim and needs the measurement any
 other claim does. Sample the interior: one or two displacement values means a genuine single-cause wake;
 many values means the fault explains the first run and nothing after it. And check your image origin
-before believing a surprising table — the wrong slice produced a confident, wrong headline in this very
+before believing a surprising table: the wrong slice produced a confident, wrong headline in this very
 section.
 
-## 39. "One displacement run" does not mean "one shifted byte" — check context presence too (round 1032)
+## 39. "One displacement run" does not mean "one shifted byte": check context presence too (round 1032)
 
 Measure-traps §38 introduced a displacement profile as a triage tool: sample our image, find the same
 24-byte context in the reference nearby, and count the distinct distances. One value in one run was read as
 "a single cliff, therefore a single local difference to attack".
 
 **That reading is wrong for at least one carrier, and the reason is that a displacement match is only
-possible where our bytes exist in the reference at all.** A carrier whose code is genuinely *different* —
-not shifted — has few searchable contexts, and a small number of samples can easily land in one run purely
+possible where our bytes exist in the reference at all.** A carrier whose code is genuinely *different*
+(not shifted) has few searchable contexts, and a small number of samples can easily land in one run purely
 because so little matched.
 
 **Second measurement: how much of our stream appears anywhere in the reference `.text`.** Sample every 4th
@@ -2105,7 +2105,7 @@ offset, take an 8-byte context, and search the whole reference:
 
 | carrier | 8-byte contexts found in the reference | reading |
 |---|---|---|
-| `vfs_OpenStream` | **102/134 (76.1%)** | mostly displaced — §38's reading is right |
+| `vfs_OpenStream` | **102/134 (76.1%)** | mostly displaced: §38's reading is right |
 | `gm_AllocGebaeude` | 176/270 (65.2%) | mostly displaced |
 | `ls_LoadBuildingEntityState` | 218/366 (59.6%) | mostly displaced |
 | `gm_AllocSpieler` | 313/918 (34.1%) | mixed |
@@ -2113,16 +2113,16 @@ offset, take an 8-byte context, and search the whole reference:
 | **`gm_FindNextFilteredEntity`** | **11/86 (12.8%)** | **mostly different code** |
 
 `gm_FindNextFilteredEntity` reported a single displacement run in §38 only because **only 4 of its 82
-samples matched anything at all** — a sample count far too small to distinguish "one run" from "almost
+samples matched anything at all**: a sample count far too small to distinguish "one run" from "almost
 nothing to measure". At 8-byte context it is 11/86, and a 24-byte context finds **nothing** in the entire
 reference. Its 245 differing bytes are substantially new code, and the entry-order probe it motivated
 (`codegen-walls` §21) returned +6 with the reorder genuinely applied.
 
 **The rule.** A displacement profile is only interpretable alongside its **match rate**. Report both:
 
-- **Match rate** — does our code exist in the reference at all? Low means the carrier needs *code* work, and
+- **Match rate**: does our code exist in the reference at all? Low means the carrier needs *code* work, and
   no displacement profile describes it.
-- **Distinct displacements and runs**, among the samples that *did* match — only this measures how many
+- **Distinct displacements and runs**, among the samples that *did* match: only this measures how many
   independent local shifts there are.
 
 A carrier with a high match rate and one run is §38's clean case (`vfs_OpenStream`: 76.1%, one run, one
@@ -2132,10 +2132,10 @@ not were `cm_ExSellObjekt` and `ServerMainThread`, both of which had 2-5 runs an
 correction.**
 
 This is the same failure mode as measure-traps §24 ("instruction counts across two images are not
-comparable — the decoder's stop rule decides the answer") arriving in a matching metric rather than a
+comparable: the decoder's stop rule decides the answer") arriving in a matching metric rather than a
 counting one: **the denominator was doing the work, and it was not reported.**
 
-## 40. A carrier has TWO first divergences — the raw link's and the shipped file's (round 1033)
+## 40. A carrier has TWO first divergences: the raw link's and the shipped file's (round 1033)
 
 Measure-traps §35 established that the raw link and the shipped file answer different questions, and §37
 that the graded residue is a proper subset of the raw link's divergence. Neither says what happens to the
@@ -2159,19 +2159,19 @@ carrier's entry and record the first differing offset on each.
 | `gm_ObjectsAvailble` | `+0x53` | `+0x10d` | 21 |
 | `cm_ExProdObjekt` | `+0x4` | `+0xcd` | 21 |
 | `gm_CalculateProductionValue` | `+0x6` | `+0xe4` | 23 |
-| `CrashDump`, `ls_LoadBuildingEntityState`, `cm_ExCopyEntityData`, `vfs_OpenStream`, `srv_LoadBuf`, `vfs_ReadCompressed`, `cm_ProcessCommandQueue` | — | — | **agree** |
+| `CrashDump`, `ls_LoadBuildingEntityState`, `cm_ExCopyEntityData`, `vfs_OpenStream`, `srv_LoadBuf`, `vfs_ReadCompressed`, `cm_ProcessCommandQueue` | - | - | **agree** |
 
 **Eleven of nineteen carriers disagree**, and in every case the raw link's divergence is *earlier* and is
 a 2-23 byte window of data operands postlink restores.
 
 **Worked example, `gm_AllocSpieler`.** At `+0x6d` the raw link has `e4 65 76 11` (`0x117665e4`, our
 stub placement) where the reference has `34 54 03 10` (`0x10035434`). The shipped file has the reference's
-`34 54 03 10` — and the two streams are byte-identical through `+0x90` across that whole window. So the
+`34 54 03 10`, and the two streams are byte-identical through `+0x90` across that whole window. So the
 raw link reports a divergence at `+0x6d` that **the carrier does not have in the deliverable**.
 
-**The rule.** `fault_address.py` measures the shipped file (correct — it is the deliverable), and every
-carrier's header is keyed by the shipped file's fault. A round that studies a carrier on the raw link —
-which §35 recommends, and which is the only way to see what the *build* produces — will land on a
+**The rule.** `fault_address.py` measures the shipped file (correct, it is the deliverable), and every
+carrier's header is keyed by the shipped file's fault. A round that studies a carrier on the raw link (
+which §35 recommends, and which is the only way to see what the *build* produces) will land on a
 **different, earlier, postlink-supplied address** and read it as the carrier's problem. Check which ruler
 produced any fault address before looking it up.
 
@@ -2183,14 +2183,14 @@ This is measure-traps §35 and §36 in their address-level form: §35 said the t
 *magnitude*, §36 said a carrier's VA must not be assumed, and this says they differ in *the address itself*
 for 11 of 19 carriers.
 
-## 41. A call-target multiset comparison inherits every desync — and a shifted stream invents wrong callees (round 1035)
+## 41. A call-target multiset comparison inherits every desync, and a shifted stream invents wrong callees (round 1035)
 
 Comparing the multiset of `call` targets between the reference and a built image looks like a cheap
 "is any callee missing or wrong" check. **It is not:** after any size difference the streams desync, and
-every instruction after the fault is decoded from the wrong offset — so the comparison reports phantom
+every instruction after the fault is decoded from the wrong offset, so the comparison reports phantom
 missing calls and phantom wrong callees. Two measured examples, one for each direction.
 
-**Direction 1 — phantom *missing* calls (`gm_AllocSpieler`).** The multiset says the shipped file is missing
+**Direction 1: phantom *missing* calls (`gm_AllocSpieler`).** The multiset says the shipped file is missing
 three calls (`0x1001a299`, `0x10003640`, `0x100122e0`) that the raw link has:
 
 ```
@@ -2199,12 +2199,12 @@ raw link 1054 instructions, 55 calls
 shipped  1014 instructions, 52 calls
 ```
 
-The raw link has 55 calls and the shipped file 52 — but **the shipped stream decodes to 42 fewer
+The raw link has 55 calls and the shipped file 52, but **the shipped stream decodes to 42 fewer
 instructions**, so it is desynced and its multiset is not comparable. There is no missing call. This is
 measure-traps §24 ("instruction counts across two images are not comparable") applied to call targets.
 
-**Direction 2 — phantom *wrong* callee (`vfs_OpenStream`).** Its multiset shows the reference calling
-`0x1001b0c0` (`crt_toupper`, real code) where we call `0x1002387d` (`.rdata`, zeros) — which reads as a
+**Direction 2: phantom *wrong* callee (`vfs_OpenStream`).** Its multiset shows the reference calling
+`0x1001b0c0` (`crt_toupper`, real code) where we call `0x1002387d` (`.rdata`, zeros), which reads as a
 wrong symbol and would send a round hunting the C. It is the +1 displacement from §38's single-byte cliff:
 
 ```
@@ -2227,7 +2227,7 @@ never compare a whole-function multiset across a known divergence. Both directio
 
 Round 1030 asked whether postlink's `.text` operand rewrite is complete and answered **0 mismatched of
 4,398**. Round 1036 re-asked the same question a looser way and got **707** (or **9,855**), which looked like
-a contradiction. It is not — the three numbers come from three different populations, and only one of them
+a contradiction. It is not: the three numbers come from three different populations, and only one of them
 is a set of operands.
 
 **Method.** For every byte offset `i` in `.text`, read the little-endian dword at `i` in the reference and in
@@ -2235,13 +2235,13 @@ the shipped file, classify each as a data-range address (`0x10024000..0x11768000
 
 | population | rule | size | mismatched |
 |---|---|---|---|
-| **A — the operand set** | dword is a data address in **both** images | 4,398 | **0** |
-| B — either image | dword is a data address in the reference **or** the shipped file | 5,105 | 707 |
-| C — no filter | every offset where the two dwords differ | — | 9,855 |
+| **A: the operand set** | dword is a data address in **both** images | 4,398 | **0** |
+| B: either image | dword is a data address in the reference **or** the shipped file | 5,105 | 707 |
+| C: no filter | every offset where the two dwords differ | - | 9,855 |
 
 **Population A is the only one that is a set of operands, and it is the one round 1030 used.** At a
 genuinely operand-aligned offset the two images hold the same immediate, so both classify it as a data
-address and it enters A. **Zero mismatches** — postlink's rewrite is complete, confirmed a second time.
+address and it enters A. **Zero mismatches**: postlink's rewrite is complete, confirmed a second time.
 
 **Populations B and C are dominated by dwords that straddle instruction boundaries.** A dword read at an
 arbitrary offset is usually two halves of adjacent instructions; if the surrounding bytes differ (which they
@@ -2250,21 +2250,21 @@ coincidence. Those entries are not operands and their "mismatch" is the residue 
 misaligned window.
 
 **The rule.** A byte-offset sweep is not an instruction sweep. Before counting anything from raw offsets,
-say which offsets can be operands — either decode the instructions and test the operand fields, or use the
+say which offsets can be operands: either decode the instructions and test the operand fields, or use the
 both-images classification as a cheap proxy, which works precisely *because* a real operand agrees in both
 images. **When a looser re-measurement contradicts an earlier tight one, check whether the two are counting
 the same population before believing either.**
 
-This is measure-traps §21 ("disassembling `.text` from its start gives wrong instruction boundaries — every
+This is measure-traps §21 ("disassembling `.text` from its start gives wrong instruction boundaries: every
 statistic built on it is junk") applied to operand extraction rather than disassembly, and it is the second
 time this session that a fixed instrument has been re-derived at a different threshold (§26's per-function
 span reader is the first).
 
 **Also verified this round:** postlink's `locality` pass reports **4 stale operands recovered** on every
-run, deterministically — `.text+0xae64`, `+0xae85`, `+0x11378`, `+0x12209`, all 4-byte data addresses
+run, deterministically: `.text+0xae64`, `+0xae85`, `+0x11378`, `+0x12209`, all 4-byte data addresses
 inside `cmp reg,imm32`. Every one lands correctly in the shipped file (`0x1009aca0`, `0x1009aca2`,
-`0x10139820`, `0x1009b762`). Note `0x1009aca2` is **odd-aligned** — a byte-level comparison against a
-struct's second byte — which is why the generic 4-aligned sweep needs a second, locality-driven pass to
+`0x10139820`, `0x1009b762`). Note `0x1009aca2` is **odd-aligned**: a byte-level comparison against a
+struct's second byte, which is why the generic 4-aligned sweep needs a second, locality-driven pass to
 catch it. The pass is working as designed; the four are not defects.
 
 ## 43. A header records *history*, so a claim-extraction regex finds rejected variants, not current state (round 1042)
@@ -2276,11 +2276,11 @@ hits, and both were the same mistake.**
 
 | file | regex found | binary | verdict |
 |---|---|---|---|
-| `cm_ExCopyEntityData.c:73` | `sub esp,0x10` | `0xc` | **not stale** — the line reads "one frame dword (`sub esp,0x10` -> `0xc`)", i.e. it *documents the change* |
-| `cm_ExProdObjek.c:221` | `sub esp,0x14` | `0x10` | **not stale** — the line reads "the object at 993 but widens the frame to `sub esp,0x14` and moves every esp displacement, scoring 815", a *rejected probe* |
+| `cm_ExCopyEntityData.c:73` | `sub esp,0x10` | `0xc` | **not stale**: the line reads "one frame dword (`sub esp,0x10` -> `0xc`)", i.e. it *documents the change* |
+| `cm_ExProdObjek.c:221` | `sub esp,0x14` | `0x10` | **not stale**: the line reads "the object at 993 but widens the frame to `sub esp,0x14` and moves every esp displacement, scoring 815", a *rejected probe* |
 
 A carrier's header is a **probe history**: it records spells that were tried, values that were fixed, and
-variants that lost. Quoting a number from it does not assert that number is current — often the opposite,
+variants that lost. Quoting a number from it does not assert that number is current: often the opposite,
 because the entry exists precisely to say it was wrong or rejected.
 
 **The rule.** A header's numbers are **evidence about the past**, and an audit that extracts them must also
@@ -2290,7 +2290,7 @@ needs to carry the polarity or it will report every documented change and every 
 claim.
 
 **Companion to workflow-traps §16 and §14.** Those say a header's headroom and delta figures are historical
-measurements. This says the *reason* a number appears in a header is usually that it is historical — so the
+measurements. This says the *reason* a number appears in a header is usually that it is historical, so the
 default expectation for any extracted figure should be "not current" until the sentence says otherwise,
 rather than "current until proven stale".
 
@@ -2303,8 +2303,8 @@ Measure-traps §38 introduced a byte-level "local-context displacement profile" 
 added the match rate as its denominator. Both remain useful, but round 1047 found their **limit**, by
 comparing the two granularities on the same clusters of `gm_AllocSpieler`.
 
-**Byte-level result:** the two largest clusters peak at 17.0% and 13.9% match under their best rigid offset —
-chance level — which reads as "not displaced code, genuinely different code".
+**Byte-level result:** the two largest clusters peak at 17.0% and 13.9% match under their best rigid offset
+(chance level), which reads as "not displaced code, genuinely different code".
 
 **Instruction-level result on the same clusters**, comparing mnemonic + operand with every `0x...` normalised
 to `A`:
@@ -2327,17 +2327,17 @@ regions that are most aligned.
   is the only version that survives differing embedded displacements, and it is what tells you whether a
   region is displacement or new code.
 - **"How much of our byte stream exists in the reference?"** → the byte-level context search of §38. Keep it
-  for that literal question and **do not** read its match rate as "N% of this function is different code" —
+  for that literal question and **do not** read its match rate as "N% of this function is different code":
   §39's correction said the rate needed reporting; this says what it must not be used to conclude.
 
 **A second, arithmetic trap found in the same measurement.** One 192-byte cluster reported **1 reference
 instruction against our 52**, which looks like a 51-instruction surplus and a strong probe candidate. It is a
 **decoder desync**: the reference's first two bytes there are `24 83` (`and al,0x83`), after which capstone
 stops emitting valid instructions and returns a single item. The raw bytes are ordinary code. **A cluster
-whose instruction count is near zero is a desync, not a surplus** — check that the first few bytes decode
+whose instruction count is near zero is a desync, not a surplus**: check that the first few bytes decode
 plausibly before reading any count from a narrow window.
 
-Both traps share a shape with §24 ("instruction counts across two images are not comparable — the decoder's
+Both traps share a shape with §24 ("instruction counts across two images are not comparable: the decoder's
 stop rule decides the answer") and §42 ("check whether a looser measurement counts the same population").
 
 ## 45. `difflib.SequenceMatcher` reports 100% equal on streams that differ at instruction 21 (round 1048)
@@ -2356,15 +2356,15 @@ direct prefix walk          : first modulo-address difference at index 21
 
 SequenceMatcher achieved 342/342 with **two** matching blocks and one delete, i.e. it found a long matching
 block *after* the divergence, matched everything on both sides of a gap, and never reported the gap as a
-difference at that granularity. The streams differ at instruction 21 — the reference has
+difference at that granularity. The streams differ at instruction 21: the reference has
 `test ebx,ebx; je 0x1000ab38` there (the shared `recheck` guard of shapes §61) and we go straight to
 `jmp 0x1000ad08`.
 
 **The sound instrument has two parts, and the second is the one that matters:**
 
-1. **Direct prefix walk** — advance `k` while `norm(ref[k]) == norm(our[k])`. This cannot skip a divergence
+1. **Direct prefix walk**: advance `k` while `norm(ref[k]) == norm(our[k])`. This cannot skip a divergence
    and gives the true first difference. It carries no alignment assumption at all.
-2. **Resync scan after `k`** — for each instruction offset in a bounded window, count how much of the tail
+2. **Resync scan after `k`**: for each instruction offset in a bounded window, count how much of the tail
    matches. This is what says *how much* of the rest is displaced, and at which offset.
 
 Applied to `cm_ProcessCommandQueue`, part 2 finds **319/319 exact tail match at offset +2**: after the
@@ -2373,16 +2373,16 @@ carrier's *entire* residue is those two instructions, and everything after is di
 sharper statement than the SequenceMatcher table's "100%".
 
 **The rule.** Never read a `SequenceMatcher` ratio as an alignment result. A matching-blocks ratio is
-**monotone in similarity, not in alignment** — it skips gaps by construction, which is exactly the quantity
+**monotone in similarity, not in alignment**: it skips gaps by construction, which is exactly the quantity
 being measured. Use a direct walk for "where do the streams first differ" and an explicit offset scan for
 "how much of the tail is displaced". Block-matching libraries are for diff display, not for measuring
 displacement.
 
-This is measure-traps §31 ("exact isomorphism over ADDRESSES answers the wrong question — establish
+This is measure-traps §31 ("exact isomorphism over ADDRESSES answers the wrong question: establish
 correspondence first") in a new form: here the correspondence method itself silently suppressed the
 difference it was meant to find.
 
-## 46. The residue is 100.00% instruction-aligned — every differing byte lies inside a reference instruction (round 1072)
+## 46. The residue is 100.00% instruction-aligned: every differing byte lies inside a reference instruction (round 1072)
 
 A property the project has never stated or checked: **is every residue byte covered by a reference
 instruction?** If any differing byte sat in *padding* or in the gap between functions, the residue would
@@ -2416,12 +2416,12 @@ offsets covered by its instructions, then intersecting with the residue:
 | **total** | | **8628** | **8628** | **100.00%** |
 
 **Zero bytes in padding, zero in an inter-function gap, zero outside a function.** Every residue byte is a
-difference *within* an instruction the reference actually emits — consistent with §13's attribution
+difference *within* an instruction the reference actually emits: consistent with §13's attribution
 (0x21b4 of 0x21b4 inside the 19 carriers) and now confirmed at instruction granularity rather than function
 granularity.
 
 **Why this closes a class of doubt.** If even a few bytes had landed off-instruction, the reading would be
-"some residue is not codegen" — a different problem with a different fix. It is not. The residue is 8,628
+"some residue is not codegen": a different problem with a different fix. It is not. The residue is 8,628
 bytes of *instruction content*, which is exactly what the per-carrier sections describe.
 
 **A method error caught while measuring, recorded because it nearly produced a false result.** The first run
@@ -2432,7 +2432,7 @@ The give-away was the total: **7,874 instead of 8,628**. The correct span comes 
 off-instruction count is exactly 0. **Check that a per-carrier sum reproduces the known total before trusting
 any per-carrier ratio.**
 
-## 47. The residue table silently hid every carrier under 9 bytes — 18 rows summing to 8623 against a 8628 total (round 1073)
+## 47. The residue table silently hid every carrier under 9 bytes: 18 rows summing to 8623 against a 8628 total (round 1073)
 
 `scripts/postlink_residual.py` is the per-carrier ruler this project quotes in every round. Its default table
 filtered rows:
@@ -2442,8 +2442,8 @@ if args.verbose or count > 8 or name.startswith("<"):
     print(...)          # else: silently dropped
 ```
 
-**So any carrier with 8 or fewer residue bytes was omitted.** Exactly one qualifies —
-`gm_CalculateProductionValue` (5 bytes) — and the consequences were:
+**So any carrier with 8 or fewer residue bytes was omitted.** Exactly one qualifies
+(`gm_CalculateProductionValue`, 5 bytes), and the consequences were:
 
 ```
 table rows printed : 18
@@ -2452,12 +2452,12 @@ summary line below : "0x21b4 of 0x21b4 differing bytes are inside the 19 functio
 0x21b4             : 8628
 ```
 
-**The table could not be reconciled with its own summary.** Nothing was wrong with the *measurement* — the
-summary is computed over the full set — but a reader who summed the printed rows would find a 5-byte gap and
+**The table could not be reconciled with its own summary.** Nothing was wrong with the *measurement*: the
+summary is computed over the full set, but a reader who summed the printed rows would find a 5-byte gap and
 no explanation for it. This project has used that table as a primary ruler for many rounds, and the carrier it
 hid is one of the 19 named in §33.
 
-**How it surfaced.** Round 1072's rule — *check that a per-carrier sum reproduces the known total* — was
+**How it surfaced.** Round 1072's rule (*check that a per-carrier sum reproduces the known total*) was
 applied to the tool's own output rather than to a hand-built table, and the sum came out 8623.
 
 **Fixed:** the default view now prints the suppressed count and their byte total, and a `total` row:
@@ -2476,10 +2476,10 @@ This is the same failure shape as workflow-traps §22 (a check that cannot fail)
 tooling's *reporting* costing more than its computation.
 
 Found by applying round 1072's own arithmetic cross-check to the tool rather than to a script written in the
-same round — which is the first time this session that discipline caught a defect in shared tooling instead of
+same round, which is the first time this session that discipline caught a defect in shared tooling instead of
 in my own ad-hoc code.
 
-## 48. Audited every table and counter the project quotes against its own arithmetic — all reconcile (round 1074)
+## 48. Audited every table and counter the project quotes against its own arithmetic: all reconcile (round 1074)
 
 Round 1073 found the residue table hiding a carrier and failing to sum. This applies the same check to
 **every other number the project treats as a ruler**, on the principle that one unreconcilable table implies
@@ -2487,28 +2487,28 @@ the possibility of others.
 
 | source | figures | check | verdict |
 |---|---|---|---|
-| `postlink_residual.py` table | 18 rows / 8623 vs summary 8628 | sum vs reported total | **failed** — fixed round 1073 (`total` row + hidden-count line) |
+| `postlink_residual.py` table | 18 rows / 8623 vs summary 8628 | sum vs reported total | **failed**: fixed round 1073 (`total` row + hidden-count line) |
 | `rebrew verify --json` summary | `exact` 31, `reloc` 233, `proven` 17, `passed` 281, `total` 283, `byte_matched` 264 | 31+233 = 264 = `byte_matched`; 264+17 = 281 = `passed`; 281+2 = 283 = `total` | **exact** |
 | `rebrew verify --full` warning | "13 function(s) have annotation SIZE differing" | `size_divergences` list length | **13 = 13** |
 | `gate.sh` residue line | `residue 8628, baseline 8628 held` | `RESIDUE_BASELINE` | **held** |
 | `gate.sh` byte-match line | `byte-matched 264 (EXACT+RELOC), baseline 264 held` | `BYTE_BASELINE`, and 31+233 | **held** |
 | `gate.sh` raw-link `.data` | `21481, baseline 21481 held` | `DATA_BASELINE` | **held** |
 | `gate.sh` imports | `(100)` | reference import count | **matches** |
-| `gate.sh` data extents | `195 sized .data/.rdata entries` | — | reported, no independent total to check against |
+| `gate.sh` data extents | `195 sized .data/.rdata entries` | - | reported, no independent total to check against |
 | `build-check` | `198 object(s) checked` | objects with a `Custom` comment in `flags.make` | **198** |
 | `fault_address.py` | 19 carrier rows | `codegen-walls` §33 table | **19, identical** |
 
 **Only one failed, and it is fixed.** Everything else is internally consistent *and* reconciles against an
-independent figure — the carrier tables agree between two tools, `verify`'s summary partitions exactly, and
+independent figure: the carrier tables agree between two tools, `verify`'s summary partitions exactly, and
 each gate baseline is a named constant the report echoes.
 
 **Why the audit was worth a round.** The residue table is the number every round quotes, so a subset silently
-presented as a total is the highest-consequence display defect available here — and it had been there for many
+presented as a total is the highest-consequence display defect available here, and it had been there for many
 rounds, invisible because nobody sums a table they trust. The other nine checks being clean is the useful
 complement: it bounds the defect to the one place it was found.
 
 **The rule.** A reported figure should either be checkable against another reported figure, or say what it is a
-subset of. Apply the check to the tooling's output, not only to hand-built tables — that is how round 1073
+subset of. Apply the check to the tooling's output, not only to hand-built tables: that is how round 1073
 found this one.
 
 ## 49. Auditing docs for "missing evidence" by regex measures word choice, not evidence (round 1075)
@@ -2521,7 +2521,7 @@ run over three docs. It flagged eight sections as lacking evidence.
 
 | section | why the regex missed it | what is actually there |
 |---|---|---|
-| `codegen-walls` §4 | "**Nineteen** spellings" — a word, not a digit | nineteen spellings enumerated, two named sites, per-site byte counts |
+| `codegen-walls` §4 | "**Nineteen** spellings": a word, not a digit | nineteen spellings enumerated, two named sites, per-site byte counts |
 | `codegen-walls` §5 | scores written `714 -> 480`, `888 -> 279` | specific functions, scores, object sizes, and the composition-band consequence |
 | `codegen-walls` §6 | title contains "measured" but body cites a constraint | a named constraint and the win it forbade |
 | `measure-traps` §2 | the figure is a **re-measurement** (`"−58" re-measured at +56`) | the defect and its correction |
@@ -2533,7 +2533,7 @@ run over three docs. It flagged eight sections as lacking evidence.
 `measure-traps` (60) and `workflow-traps` (25) carries a numeric, address-based, or round-based
 justification.** The documentation's evidence discipline holds across 125 sections.
 
-**The method lesson — the fourth instance this session.** A regex over prose measures the *words used to
+**The method lesson: the fourth instance this session.** A regex over prose measures the *words used to
 describe* evidence, not the presence of evidence. This is §§43 (header history), 44 (byte vs instruction
 granularity), 46 (span windows) and now 49: **every attempt to automate "is this documented?" by keyword has
 produced false positives, and in each case the correct instrument was reading the section.** The audit that
@@ -2554,21 +2554,21 @@ comparison would be against a moving target.
 | build | deliverable | per-carrier table |
 |---|---|---|
 | baseline | `md5 3febd2c4ca080a3749c12d4bf7452fbe` | reference table |
-| full relink (`rm -rf build/split_poc` + `split_link.sh` + postlink) | — | **identical** (`diff` clean) |
+| full relink (`rm -rf build/split_poc` + `split_link.sh` + postlink) | - | **identical** (`diff` clean) |
 | full **object** rebuild (`cmake --build build`) + relink + postlink | `md5 3febd2c4ca080a3749c12d4bf7452fbe` | **identical** (`diff` clean) |
 
-So the 19 per-carrier figures — 2823, 1583, 966, 671, 462, 451, 367, 327, 238, 215, 198, 97, 92, 49, 25, 23,
-21, 15, 5 — are **reproducible**, not a snapshot of one build's state. That is what makes
+So the 19 per-carrier figures (2823, 1583, 966, 671, 462, 451, 367, 327, 238, 215, 198, 97, 92, 49, 25, 23,
+21, 15, 5) are **reproducible**, not a snapshot of one build's state. That is what makes
 `RESIDUE_BASELINE` a meaningful floor: any per-round delta measured by `linktest.sh` is attributable to the
 source edit, not to build noise.
 
 **Why this is worth recording rather than assumed.** Round 1055 was a case where a source revert left a stale
 object in the tree, and every downstream number described a build no clean checkout would produce. The
 verification there was ad hoc. This is the systematic version: **compare the per-carrier table, not only the
-file hash** — the table is what the rounds quote, and it is a strictly stronger check than the hash because it
+file hash**: the table is what the rounds quote, and it is a strictly stronger check than the hash because it
 localises any difference to a carrier.
 
-**Method.** `postlink_residual.py`'s table after each of the three builds, diffed with `diff` (not summed —
+**Method.** `postlink_residual.py`'s table after each of the three builds, diffed with `diff` (not summed,
 the sum check is §47's job, and these two checks catch different failures).
 
 **This closes the reproducibility question at the granularity the project measures at.**
@@ -2588,7 +2588,7 @@ output distinguished "every symbol verified" from "a third of them, chosen by a 
 **The rule is in `data_verify.section_symbol_bytes`, and it is deliberate.** It skips a symbol when
 
 - its `section` is not in `(".data", ".rdata")`, or
-- its extent runs past the section's `raw_size` — the zero-fill tail, which has no file bytes:
+- its extent runs past the section's `raw_size`: the zero-fill tail, which has no file bytes:
 
 ```python
 if offset + size > sec.raw_size:
@@ -2597,7 +2597,7 @@ if offset + size > sec.raw_size:
 
 A skipped VA never enters `ref_sizes`. `verify.py`'s write-back builds `matched_names` by iterating
 `ref_sizes`, so a skipped symbol is never a candidate for `DATA_STATUS_VERIFIED` and stays `UNCHECKED`
-**permanently** — no run of any command can move it. Those permanently-UNCHECKED entries are exactly what
+**permanently**: no run of any command can move it. Those permanently-UNCHECKED entries are exactly what
 `rebrew todo`'s `start-data` lane is built from, which is why that lane could never empty.
 
 **Measured, guild-rebrew: 329 metadata symbols → 207 UNCHECKED → all 207 un-clearable.**
@@ -2606,7 +2606,7 @@ A skipped VA never enters `ref_sizes`. `verify.py`'s write-back builds `matched_
 |---|---|---|---|
 | import slots (`__imp__…`, `section = ".idata"`) | 84 | linker output; the image has no `.idata` section | all 84 IAT dwords byte-identical |
 | zero-fill tail (`0x10035000`+, incl. `section = ".bss"`) | 111 | past `.data`'s `raw_size = 0xE000`; no file bytes | zero-filled in both images by construction |
-| sized with real file bytes | 5 | — (these *are* comparable) | byte-identical |
+| sized with real file bytes | 5 | - (these *are* comparable) | byte-identical |
 | no size and no usable type | 7 | nothing to compare | n/a |
 
 Zero differences anywhere. **The data lane for this binary is complete**, and the 123 `todo` items that
@@ -2617,7 +2617,7 @@ claimed otherwise were an artefact of the ruler, not work.
 
 ```
 data: 122 matched, 0 mismatched, 0 missing (122 of 329 symbols compared, 37%)
-  207 symbol(s) not comparable: no file bytes (zero-fill tail) or outside .data/.rdata —
+  207 symbol(s) not comparable: no file bytes (zero-fill tail) or outside .data/.rdata:
   a zero above bounds only what was compared
 ```
 
@@ -2626,20 +2626,20 @@ the fix makes *this* denominator visible, not every future one.
 
 **The transferable trap: a zero in a diff-shaped result is not a zero in coverage.** "0 mismatched" bounds
 only the population the tool chose to look at. Before treating such a number as "this axis is done", find the
-denominator — here it was absent from the output entirely and had to be reconstructed by calling
+denominator: here it was absent from the output entirely and had to be reconstructed by calling
 `section_symbol_bytes` directly on both images and counting `ref_sizes`. A cheap version of that check:
 compare the result count against the metadata entry count; 122 against 329 is the tell.
 
 **The trap bit for the whole project, not one round.** The lane's "123 start-data items" was quoted as
 pending work in round briefs, and `start-data` was the largest category in `rebrew todo` for hundreds of
 rounds. Every item in it was un-clearable. Round 1076's "the table is stable across rebuilds" is the correct
-kind of check; this is its data-side counterpart — verify the *denominator*, not just the difference.
+kind of check; this is its data-side counterpart: verify the *denominator*, not just the difference.
 
 ## 52. Decoding a function by its INVENTORY SPAN swallows inter-function padding and fabricates instructions (round 1084)
 
 Disassembling a function by taking `function_structure.json`'s `(va, size)` and running a linear sweep over
 that window is a measurement trap, because **the inventory span can extend past the function's real end into
-`0x09` padding.** `09 09` decodes as `or dword ptr [ecx], ecx`, so the padding is not skipped — it becomes
+`0x09` padding.** `09 09` decodes as `or dword ptr [ecx], ecx`, so the padding is not skipped: it becomes
 instructions, and every derived count is wrong.
 
 Measured on `CrashDumpUnhandledExceptionFilter` (`0x10002770`, inventory size 2128, so the span ends at
@@ -2652,9 +2652,9 @@ Measured on `CrashDumpUnhandledExceptionFilter` (`0x10002770`, inventory size 21
 | instructions counted over the full span | **724** |
 | instructions counted to the real end | **673** |
 
-**The fabricated instructions are not random noise — they cluster into a specific mnemonic.** Sweeping the
+**The fabricated instructions are not random noise: they cluster into a specific mnemonic.** Sweeping the
 whole span made it appear that the reference contains **52 `or` instructions and only 1 `call`, against our
-43 `call`s** — which reads as a completely different calling convention and sent this round chasing a
+43 `call`s**, which reads as a completely different calling convention and sent this round chasing a
 "register-argument-passing" hypothesis for a while. **All 50 of the surplus `or`s were the padding**: they
 appear as one contiguous run at `0x10002f4e` upward, each with the identical text `or dword ptr [ecx], ecx`.
 A quick test for exactly this:
@@ -2667,7 +2667,7 @@ Any long run of those is `0x09` padding, not code. The tell in the byte dump is 
 of `09` bytes.
 
 **Corrected, the function is far less interesting than the artifact suggested.** 673 vs 656 instructions is an
-18-instruction shortfall, and the largest divergence run is 131 instructions — the same *shape* §34/§35 found
+18-instruction shortfall, and the largest divergence run is 131 instructions: the same *shape* §34/§35 found
 in `gm_AllocSpieler`, not a calling-convention difference. The `sprintf`/`WriteFile` order at `0x10002aaf` is
 the divergence, matching the "tail log/sprintf order" class already recorded for `gm_AllocSpieler`.
 
@@ -2676,10 +2676,10 @@ not give you.** Round 1040-1046 established that the inventory is *coarser* than
 against 283). This round adds the other direction: an inventory entry can also be **wider** than the function,
 because sizes are gaps to the next entry. Before trusting any per-function instruction count, find the
 padding: scan for runs of `0x09` (or `0xcc`) and stop there. Two other spellings of the same mistake were
-already on record — `docs/measure-traps.md` §47 (residue ≠ error size) and §51 (a zero over an unstated
+already on record: `docs/measure-traps.md` §47 (residue ≠ error size) and §51 (a zero over an unstated
 denominator). This is the third: **a count over an unstated boundary.**
 
-**Corollary: measure the boundary before counting (round 1085).** Round 1084's correction is only useful if applied. Analysing the second carrier with the real extent (2012 bytes, stopping at the `0x09` padding) gives **673 reference instructions against our 656**, with the largest divergence run 131 instructions at `0x10002aaf` — the same shape §34/§35 found in `gm_AllocSpieler`. Counting over the padded inventory span instead gave 724 and made the run look like an 18-instruction shortfall plus a calling-convention difference. The corrected reading is: a `sprintf` argument-ordering difference, one instruction deep, cascading through the call's argument setup:
+**Corollary: measure the boundary before counting (round 1085).** Round 1084's correction is only useful if applied. Analysing the second carrier with the real extent (2012 bytes, stopping at the `0x09` padding) gives **673 reference instructions against our 656**, with the largest divergence run 131 instructions at `0x10002aaf`: the same shape §34/§35 found in `gm_AllocSpieler`. Counting over the padded inventory span instead gave 724 and made the run look like an 18-instruction shortfall plus a calling-convention difference. The corrected reading is: a `sprintf` argument-ordering difference, one instruction deep, cascading through the call's argument setup:
 
 ```
 ref                                   ours
@@ -2694,13 +2694,13 @@ The reference pushes the format string first and loads the third argument after;
 
 ## 53. The raw link is the wrong artifact for a `.data`-addressed operand comparison (round 1086)
 
-The alignment technique of §34/§35 and the two rounds after it disassembles `build/split_poc.dll` — the raw
+The alignment technique of §34/§35 and the two rounds after it disassembles `build/split_poc.dll`: the raw
 link, before postlink. That is correct **for `.text`**, which is what those rounds compare, because postlink
 does not rewrite code. It is wrong the moment the comparison touches an operand that resolves into `.data`.
 
 Measured, `cm_ExSellObjekt` (`0x1000d930`): the `LogMessageInternal` call site pushes the message pointer. In
 the raw link and the reference that pointer is **the same immediate**, because it is an absolute VA baked into
-the instruction — but the *string it points at* is at a different place:
+the instruction, but the *string it points at* is at a different place:
 
 | file | bytes at `0x1002cdac` | bytes at `0x10029e24` |
 |---|---|---|
@@ -2713,21 +2713,21 @@ string material lands elsewhere before `rebrew postlink` rewrites the `.data` op
 verified in an earlier round).
 
 **Why this nearly became a false finding.** Reading the raw link's disassembly alongside the reference's, the
-two call sites appear to pass *different string literals* — the reference pushes `0x1002cdac`, ours pushes
-`0x10029e24` — which reads as a wrong literal in the source and sent this round to the source line. The source
+two call sites appear to pass *different string literals*: the reference pushes `0x1002cdac`, ours pushes
+`0x10029e24`, which reads as a wrong literal in the source and sent this round to the source line. The source
 was already correct (`cm_ExSellObjekt.c:396`), and so is the build.
 
 **The rule.** `.text` residue must be measured on the raw link, because that is the only artifact where the
-code has not had operands rewritten. Anything that dereferences a pointer into `.data` — string addresses,
-table bases, global pointers — must be measured on the **deliverable**, after postlink. The two artifacts
+code has not had operands rewritten. Anything that dereferences a pointer into `.data` (string addresses,
+table bases, global pointers) must be measured on the **deliverable**, after postlink. The two artifacts
 answer different questions and this round asked the wrong one of the wrong file. Cross-check before reporting:
 `docs/measure-traps.md` §20 already establishes that the whole raw-link `.data` divergence is
 postlink-supplied, so a `.data`-addressed difference in the raw link is expected and carries no information.
 
 ## 54. A whole-section idiom census cannot use the raw link's `.text`, and cannot compare rates at all (round 1088)
 
-§33's "census trick" — count an idiom image-wide on both sides to turn a byte residue into a small
-instruction-level claim — is recorded as reusable. Reusing it on the **whole `.text`** does not work, and the
+§33's "census trick" (count an idiom image-wide on both sides to turn a byte residue into a small
+instruction-level claim) is recorded as reusable. Reusing it on the **whole `.text`** does not work, and the
 failure is silent.
 
 **The raw link's `.text` is mostly not yet code.** A linear sweep of `.text` over its raw extent gives:
@@ -2737,15 +2737,15 @@ failure is silent.
 | reference | `0x22846` | `0x23000` | **16,472** |
 | raw link (`build/split_poc.dll`) | `0x22ac8` | `0x23000` | **2,916** |
 
-The built image's region is largely unpopulated at the point the sweep passes through it — the composition
-places objects at reference VAs, so the gaps are zeros — and decoding zeros yields long runs of `add [eax], al`
+The built image's region is largely unpopulated at the point the sweep passes through it: the composition
+places objects at reference VAs, so the gaps are zeros, and decoding zeros yields long runs of `add [eax], al`
 rather than nothing. The result is a 5.6x difference in "instruction count" that is entirely an artefact.
 
 **Why that makes rate comparison meaningless, not merely noisy.** The obvious next step is to normalise
 (`idiom occurrences / total instructions`) and compare the ratio, since absolute counts track the 10% of
 `.text` that already differs. But the denominator is wrong by 5.6x on one side, so every ratio is wrong by a
 factor that has nothing to do with the idiom. Measured, that produced a table reading "`and` ratio 1.50,
-`xor` ratio 1.49, `push` ratio 1.25" — which looks like four findings and is one artefact. The `call` and `cmp`
+`xor` ratio 1.49, `push` ratio 1.25", which looks like four findings and is one artefact. The `call` and `cmp`
 rows came out at 1.01 and 1.00, and `fs:`/`gs:` at 0.00/0.00, which is the tell: a real difference does not
 produce three ratios of exactly 1.00.
 
@@ -2755,15 +2755,15 @@ were per-idiom counts over the whole *image* on matched functions (round 921's `
 denominators are within a few percent; a large gap means the population includes undecoded padding, and the
 trap is that it reads as a finding rather than as a broken measurement.
 
-**This is the fifth instance of one family in this project** — the population is assumed while only the values
+**This is the fifth instance of one family in this project**: the population is assumed while only the values
 are checked: §47 (residue ≠ error size), §51 (a zero over an unstated denominator), §52 (a count over an
 unstated boundary), §53 (the right number from the wrong artifact), §54 (a rate over a fabricated
 denominator).
 
 ## 55. `postlink_residual.py` measures the raw link, so a stale composition reports a fake residue of 81,229 (round 1101)
 
-`scripts/postlink_residual.py` defaults to `--built build/split_poc.dll` — the **raw link**, not the deliverable
-— because that is the artifact where `.text` is unrewritten. That is correct for its purpose and it is also a
+`scripts/postlink_residual.py` defaults to `--built build/split_poc.dll` (the **raw link**, not the deliverable)
+because that is the artifact where `.text` is unrewritten. That is correct for its purpose and it is also a
 trap: `build/split_poc.dll` is regenerated only by `scripts/split_link.sh`, so after any object rebuild the file
 on disk is whatever the last composition produced.
 
@@ -2776,19 +2776,19 @@ composition then failed to place (0 of 319 symbols at reference VA, `.text` `0x2
 | check | reading |
 |---|---|
 | `build/server.dll` `.data` vs reference | **0 differing** → the deliverable *is* correctly postlinked |
-| `.text` VirtualSize, imports, file size | `0x22846`, 100, 286,720 — all correct |
+| `.text` VirtualSize, imports, file size | `0x22846`, 100, 286,720: all correct |
 | `rebrew build-check` | clean |
 
 So the 81,229 was entirely about a collapsed intermediate, not about the deliverable.
 
-**The tell.** A residue total that is *an order of magnitude* above the baseline — 81,229 against 8,628 — and a
+**The tell.** A residue total that is *an order of magnitude* above the baseline (81,229 against 8,628), and a
 "differing bytes outside the 19 carriers" count that is large (`0x9401` against a baseline of `0x0`). The
 baseline invariant is that **100% of residue lies inside the 19 carriers**; when that ratio breaks, the
 intermediate is stale, not the code.
 
 **Recovery, in order:** `rm -rf build/split_poc && bash scripts/split_link.sh`, which prints
-`exactly at their reference VA: 246`. That count is the composition's own health check — **246/319 means good,
-0/319 means collapsed** — and it appears before the residue number, so read it first.
+`exactly at their reference VA: 246`. That count is the composition's own health check: **246/319 means good,
+0/319 means collapsed**, and it appears before the residue number, so read it first.
 
 **The distinct failure that caused it.** `linktest.sh`'s and the gate's stale-object guard both fired, and every
 `rm -f <obj>` plus `cmake --build` is what eventually recovered it. This is the fourth round in this session
@@ -2798,7 +2798,7 @@ number.
 
 ## 56. `verify --data --built <raw link>` rewrites VERIFIED statuses to DRIFT in the tool-owned toml (round 1102)
 
-Pointing `--built` at `build/split_poc.dll` to get a non-tautological `.data` check is tempting — but the
+Pointing `--built` at `build/split_poc.dll` to get a non-tautological `.data` check is tempting, but the
 comparison is the §20/§53 displacement artifact, and the tool **writes back**: every displaced symbol's
 `status` in `src/rebrew-data.toml` moves `VERIFIED` → `DRIFT` (measured: `g_next_object_id`,
 `g_producer_id_table`, `g_file_version`, the filter group, 30 in total against the round-698 steady state of
@@ -2809,25 +2809,37 @@ raw-link `.data` divergence is postlink-supplied by §20's own proof; running th
 produces statuses that are wrong and persistent. Recovery: `git checkout src/rebrew-data.toml`, or re-run
 `rebrew verify --data` (deliverable) which writes `VERIFIED` back to all displaceable symbols.
 
-**All 30 mismatches were triaged to the displacement class** — spot-checked `g_file_version`'s bytes
+**All 30 mismatches were triaged to the displacement class**: spot-checked `g_file_version`'s bytes
 (`5a 00 01 00 53 61 76 65 67 61 6d 65`): reference holds them at `0x2d4f0`, raw link holds them identical at
 `0x2db30`; same content, different VA. `g_dispatch_table` is zeros in the raw link because `data_restore`/
 postlink supplies it. Nothing was content-drift.
 
-## 57. A relative include deeper than the tool's staging depth compiles unpacked — silently (round 1103)
+## 57. A relative include deeper than the tool's staging depth compiles unpacked, silently (round 1103)
 
 `#include "../../../game_structs.h"` from `spiel_c/` is correct in the plain CMake build (`flags.make`
 bind-mounts the tree at the same path, so the depth resolves exactly as on the host). Under `rebrew
 test`/`rebrew diff`, the source is staged flat in a temp workdir; the depth-3 quoted include no longer
-reaches the tree and the same bare-name include does — but the depth-3 spelling compiled anyway, because
+reaches the tree and the same bare-name include does, but the depth-3 spelling compiled anyway, because
 the runner adds `src_parent` and the include dir as `/I` paths, and one of those resolutions (measured:
-`target 0x3f got 0x41`, `8b7641` vs `8b763f`) returned a DIFFERENT body — pointer slots shifted +2 as if
-`#pragma pack(1)` was absent — with `0 structural diffs` nowhere, a RELOC → NEAR_MATCHING demotion, and no
+`target 0x3f got 0x41`, `8b7641` vs `8b763f`) returned a DIFFERENT body: pointer slots shifted +2 as if
+`#pragma pack(1)` was absent, with `0 structural diffs` nowhere, a RELOC → NEAR_MATCHING demotion, and no
 `error C####` anywhere in the log.
 
 **The rule.** Project headers included from deep source files must be spelled as bare quoted names
-(`#include "game_structs.h"`), resolved via `-I src/server.dll` — the one spelling that is correct in the
+(`#include "game_structs.h"`), resolved via `-I src/Develop`: the one spelling that is correct in the
 CMake build, the flat workdir, and the remote recompile service. A depth-2 `../../include` spelling in
 files at `game/` depth works today only because the staging depth happens to match; do not copy it deeper.
 **Cross-check after any include-spelling change to a reversed TU:** `rebrew diff` must read `0 structural,
 0 register`; a `target<R got got<R+2` pointer-slot pattern is the unpacked tell.
+
+## 58. A lower byte count from a spelling that changes a stored value
+
+A search over constant spellings in `gm_AllocSpieler` scored `*(unsigned short*) (slot + 0x50)
+= 0x7fffffff;` at 10 differing bytes against the source's 17, with the edge-reload order at
+0x10018c28 flipped to the reference's. The low 16 bits of `0x7fffffff` are `0xffff`: the
+object stores `0xffff` where the reference stores `0x7fff`, one byte in the diff, and the
+flip came from the `0x7fff` candidate disappearing. `rebrew match` output has the same
+failure mode: its best for this function (score 21000) swaps the `type` and `location`
+parameters and adds padding locals. **The rule.** Read every differing byte of a candidate
+(`rebrew diff <file> --json`) and check its semantics before keeping it; a smaller
+count is not evidence of the same program.
