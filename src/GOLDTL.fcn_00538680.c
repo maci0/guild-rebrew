@@ -1,17 +1,19 @@
+// FUNCTION: GOLD 0x00531bb0
+// SIZE: 48
 // FUNCTION: GOLDTL 0x538680
 // SIZE: 48
 
-typedef void* (__stdcall* fcn_00538680_a)(int, int, char*);
-typedef unsigned long (__stdcall* fcn_00538680_b)(void);
+__declspec(dllimport) void* __stdcall CreateMutexA(void*, int, const char*);
+__declspec(dllimport) unsigned long __stdcall GetLastError(void);
 
 int __cdecl fcn_00538680(void** a1)
 {
 	void* h;
 
-	h = (*(fcn_00538680_a*) 0x6620a8)(0, 1, (char*) 0x6a37fc);
+	h = CreateMutexA(0, 1, "Die Gilde");
 	if (h != 0) {
 		*a1 = h;
-		return (*(fcn_00538680_b*) 0x6620f0)() == 0xb7;
+		return GetLastError() == 0xb7;
 	}
 	return -1;
 }

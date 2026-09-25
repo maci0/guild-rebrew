@@ -1,12 +1,16 @@
+// FUNCTION: GOLD 0x00577710
+// SIZE: 61
 // FUNCTION: GOLDTL 0x57fce0
 // SIZE: 61
+
+extern int* g_665f08;
 
 int __cdecl fcn_0057fce0(int* msg)
 {
 	int* g;
 	int r;
 
-	g = *(int**) 0x665f08;
+	g = g_665f08;
 	if (g[14] >= 0 && *msg == 0x26 && msg[3] == 0x1d0) {
 		r = 1;
 		g[14] = r;
