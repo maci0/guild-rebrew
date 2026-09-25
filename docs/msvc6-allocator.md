@@ -4053,6 +4053,51 @@ close every other join, each traced on this function:
 | `frameInfo` at function scope, 192 join/order permutations (inner and outer scope) | best 2111 | tie or worse |
 | `memset` for the zero stores | 1706-1829 | zero in edx, stores chained |
 
-Remaining lever, untested: a join the cross-jump accepts that names no 4-byte local and needs no
-scratch register. The reference's frame fill has only `fi[1]` (ebp) and `pStack` (ebx) of that kind.
-Tracer kit: `.scratch/ck/` in the `fix/srv-crashdump` worktree (gitignored).
+Traced since (`exp/crash-c` worktree, kit in `.scratch/rr/` and `.scratch/k/`, gitignored):
+
+- **Plain `break` in every arm cannot merge the group-A arms.** Sweep 3 cross-jumps each A arm
+  two items (`push ebp; call esi`) into tail B, so all seven jump to 0x10002c51 separately
+  (object 1149). The pairwise tail merge for jumps to one label, `fcn.1073f41d` (driven per label
+  by `fcn.10729090`, second cleanup call only, `0x107ac348 == 0`), needs the common region to
+  exceed 20 bytes (`0x107ac0b4` set; 2 when clear). It sums encoded sizes forward from the first
+  matched item and stops at 20: `push ebp` 1, `call esi` 2, `push 0` 2, `lea` 6 (frame operands
+  encode as an `[ebp+disp32]` placeholder), `push` 1, `push 2` 2, `lea` 6 is exactly 20, so it
+  never merges. A mismatch item that is an unconditional jump or kind 0xf skips the size test, but
+  that needs a whole arm to match.
+- **So the reference needs a label after the 0xc000008e arm, and its body must vanish late.** The
+  early threader `fcn.10713d80` (driver 0x107604b8) and the cleanup label path (0x107234f3 to
+  0x10723553) move a label's references when its next item with flag `+9` bit 0 is an
+  unconditional jump. Labels and op-444 markers lack that bit, so an empty or marker-only join is
+  threaded (1149); an unreferenced user label becomes a marker, not a barrier. The body has to stay
+  real through the first cleanup call (0x10760689, which repeats until nothing changes) and be gone
+  when sweep 3 reaches the join's jump. The only pass in that window, the peephole
+  `fcn.10723779` (0x1076069c), deletes every op-414 marker, self-moves `mov r, r` and copies it can
+  fold. Op 414 comes only from return values, table dispatch, helper-call results and flag-reusing
+  compares; none can stand alone in a join.
+- **The IL optimizer (passes 0x107603e8 to 0x10760434) empties every no-op join tried:**
+  self-assignments, `+ 0`, `* 1`, `| 0`, `& 0xffffffff`, `~~x`, casts, `__assume`, struct self-copy,
+  block-local copies, a copy variable defined in every arm or before the switch (`void*`, `int`,
+  `char*`, `register`). It also removes a repeated condition by value number, including `x & x`,
+  alias spellings (`*(unsigned*)(char*)&x`, `((unsigned*)&mbi)[4]`) and globals. `if (c) break;`
+  before the join's jump dies in the first cleanup call: `fcn.10728ba7` drops a jcc aimed where
+  the following jump goes and the compare goes with it (`fcn.1074f5ba`, `fcn.1072d0f5`).
+- **`fcn.10728ecb` (second call only) drops a repeated compare after a jcc**, and the second jcc
+  only when the condition codes match. `if (x > 0) ...; if (x != 0) ...` (unsigned) survives the
+  IL and shares `test ebx, ebx`, but compiles to `ja` and `jne`, so the second jcc stays (1548).
+  No IL-distinct pair with one compare and one condition code was found (263 conditional joins,
+  best 1620).
+- **A join that carries frame-fill items cannot match the main copy.** Scratch registers rotate
+  eax, ecx, edx through cursor 0x1079d710 (`fcn.10721c0f`); the busy map 0x1079d6ec stayed empty in
+  this function. A join is laid out after its fall-through or last jumping predecessor (placed
+  after the 0xfd arm or reached with the 0xc000008e arm breaking: 1525, 1494), so its cursor is
+  eax where the frame fill's is edx, and every shared scratch item differs. Scratch-free items are
+  `fi[1]` (tie), `add ebx` (flags) and the `pStack` store (needs the add first).
+- **Case bodies are laid out in source order**, each dispatch block inserted before the first case
+  of its range; the frame fill follows the last case.
+
+| Join or frame-fill change | Object | Fails on |
+|---------------------------|--------|----------|
+| `break` in every arm, no join | 1149 | pairwise size exactly 20 |
+| `nFrames = 0x800;` or `fCanContinue = 0;` as the join | 1527, 1547 | arms merge, the store stays |
+| newline written once after the switch, default skips it | 914 | one tail; WriteFile priority drops, roles change |
+| `/O1`, `/Os`, `/O2 /Os` | 325-337 | whole function changes |
