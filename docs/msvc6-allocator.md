@@ -4112,3 +4112,24 @@ tie), `add ebx` and the `pStack` store, all measured above. Remaining inputs: an
 between the `fi[0]` and `fi[1]` stores within one object, or a vanishing join body.
 Tracer kits (item dump, priority dump, pairwise-merge and peephole traces, the 1 s compile
 harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored).
+
+- **The IL optimizer (passes 0x107603e8 to 0x10760434) empties every no-op join tried:**
+  self-assignments, `+ 0`, `* 1`, `| 0`, `& 0xffffffff`, `~~x`, casts, `__assume`, struct self-copy,
+  block-local copies, a copy variable defined in every arm or before the switch (`void*`, `int`,
+  `char*`, `register`). It also removes a repeated condition by value number, including `x & x`,
+  alias spellings (`*(unsigned*)(char*)&x`, `((unsigned*)&mbi)[4]`) and globals. `if (c) break;`
+  before the join's jump dies in the first cleanup call: `fcn.10728ba7` drops a jcc aimed where
+  the following jump goes and the compare goes with it (`fcn.1074f5ba`, `fcn.1072d0f5`).
+- **`fcn.10728ecb` (second call only) drops a repeated compare after a jcc**, and the second jcc
+  only when the condition codes match. `if (x > 0) ...; if (x != 0) ...` (unsigned) survives the
+  IL and shares `test ebx, ebx`, but compiles to `ja` and `jne`, so the second jcc stays (1548).
+  No IL-distinct pair with one compare and one condition code was found (263 conditional joins,
+  best 1620).
+- **Case bodies are laid out in source order**, each dispatch block inserted before the first case
+  of its range; the frame fill follows the last case.
+
+| Join or frame-fill change | Object | Fails on |
+|---------------------------|--------|----------|
+| `nFrames = 0x800;` or `fCanContinue = 0;` as the join | 1527, 1547 | arms merge, the store stays |
+| newline written once after the switch, default skips it | 914 | one tail; WriteFile priority drops, roles change |
+| `/O1`, `/Os`, `/O2 /Os` | 325-337 | whole function changes |
