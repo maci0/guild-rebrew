@@ -5,6 +5,8 @@ void __cdecl fcn_004fd400(short* a, int* b);
 int __cdecl gm_AccumulateTyped2(unsigned short* e);
 int __cdecl fcn_0050dac0(unsigned short id);
 
+// FUNCTION: GOLD 0x004ac200
+// SIZE: 230
 // FUNCTION: GOLDTL 0x4ac320
 // SIZE: 230
 int __cdecl fcn_004ac320(unsigned short* e)

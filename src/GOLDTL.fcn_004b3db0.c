@@ -10,6 +10,8 @@ extern fcn_004b3db0_entry g_680bd0[48];
 int __cdecl fcn_004b3cb0(int);
 int __cdecl fcn_004b3b80(int);
 
+// FUNCTION: GOLD 0x004b3c40
+// SIZE: 85
 // FUNCTION: GOLDTL 0x4b3db0
 // SIZE: 85
 

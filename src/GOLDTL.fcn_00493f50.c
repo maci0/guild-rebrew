@@ -8,6 +8,8 @@ typedef struct {
 
 extern fcn_00493f50_entry g_664260[7];
 
+// FUNCTION: GOLD 0x004948b0
+// SIZE: 39
 // FUNCTION: GOLDTL 0x493f50
 // SIZE: 39
 
