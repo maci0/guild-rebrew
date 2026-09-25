@@ -963,3 +963,6 @@
 // SIZE: 199
 
 #endif
+
+// LIBRARY: SERVER 0x1001A643
+// __cinit (crt0dat.obj .text, static: absent from the archive symbol index; mapped by scripts/map_libcmt.py)

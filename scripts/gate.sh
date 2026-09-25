@@ -24,7 +24,7 @@ mkdir -p .scratch
 # `rebrew verify` counts game EXACT + RELOC as passed (library-attributed rows are
 # reported separately); PROVEN is not a byte match
 # and fails like any other difference.
-BASELINE=${BASELINE:-259}
+BASELINE=${BASELINE:-258}
 # .text residue baseline: 8636 (0x21bc) as of round 516.  Guarded below --
 # lower it when a change improves the number, never raise it.
 #

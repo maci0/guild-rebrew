@@ -139,15 +139,12 @@ if(REBREW_BUILD_SERVER)
   # static (COFF storage class 3) in the CRT, so they are absent from the
   # archive symbol index; a scan that only walks external symbols misses them.
   #
-  # The files kept below are NOT kept because their bodies are ours. Each one
-  # exists to displace a specific LIBCMT object whose side effects the
-  # reference does not have:
-  #   sbh_globals/sbh_pool/sbh_aliases  displace sbheap.obj, which reaches
-  #       IsBadWritePtr through __imp__IsBadWritePtr@8. A local IsBadWritePtr
-  #       does not help: the function name is never referenced, only the
-  #       indirect slot, which still resolves from KERNEL32.lib. crt_heap.c
-  #       comes along because sbh_aliases.c calls its __sbh_heap_init body.
-  #   mlock.c                            displaces mlock.obj (FatalAppExitA).
+  # The deliverable link (scripts/split_link.sh) takes each LIBCMT function
+  # from the stock archive at its own reference VA, so no whole library object
+  # (and none of its extra imports) enters it. The reversed CRT bodies that
+  # once displaced sbheap.obj (IsBadWritePtr) and mlock.obj (FatalAppExitA)
+  # are gone: without them the split link keeps residue, imports (100) and
+  # .rdata unchanged. What stays here is layout data plus one displacement:
   #   amsg_exit.c                        keeps crt0msg.obj out. That object
   #       contributes the runtime-error message strings, which rdata_restore.c
   #       also supplies, so linking both overshoots .rdata by 0x320.
@@ -158,21 +155,14 @@ if(REBREW_BUILD_SERVER)
   #       unduplicated, but .rdata is 0x40 long and postlink still refuses it.
   #       Only the blob reproduces the original's tighter packing, so the blob
   #       keeps the strings and crt0msg.obj stays out of the link.
-  # Dropping any of these was tried and measured; each one regresses either the
-  # import set or the .rdata size.
+  # Dropping amsg_exit.c was tried and measured; it regresses the
+  # .rdata size.
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt_region/")
   set(_CRT_REGION_KEEP
     "${PROJECT_SOURCE_DIR}/src/crt_region/crt_imports.c"
     "${PROJECT_SOURCE_DIR}/src/crt_region/data_restore.c"
     "${PROJECT_SOURCE_DIR}/src/crt_region/data_globals.c"
     "${PROJECT_SOURCE_DIR}/src/crt_region/rdata_restore.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/dllmain.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/initterm.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/mlock.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/sbh_globals.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/sbh_pool.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/sbh_aliases.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/crt_heap.c"
     "${PROJECT_SOURCE_DIR}/src/crt_region/amsg_exit.c"
     # rdata_fold.c references the string literals six LIBCMT objects emit as
     # .rdata COMDATs a second time after rdata_restore.c's blob.  Same content
@@ -281,16 +271,16 @@ if(REBREW_BUILD_SERVER)
   #
   # It must stay stock. The build previously used a hand-stripped copy under
   # .scratch/ with 22 objects removed, which was both gitignored (so the build
-  # was unreproducible on a fresh clone) and unnecessary. The objects that
-  # actually have to lose the link are sbheap.obj, validate.obj and mlock.obj,
-  # because they import IsBadWritePtr / FatalAppExitA and the original
-  # server.dll has neither import. The crt_region files sbh_aliases.c,
-  # sbh_pool.c and mlock.c define those symbols locally, so the linker never
-  # pulls the LIBCMT versions and the import set matches the reference.
+  # was unreproducible on a fresh clone) and unnecessary. This CMake link
+  # pulls sbheap.obj, validate.obj and mlock.obj whole, and with them
+  # IsBadWritePtr / FatalAppExitA, imports the original server.dll does not
+  # have. The deliverable is the split link (scripts/split_link.sh), which
+  # takes each library function at its own reference VA, so its import set
+  # matches the reference (100).
   #
   # Never patch a library to make the link work. Displace the offending object
-  # with a local definition, as above, or change what references it. A doctored
-  # .lib cannot be reproduced from a clean checkout and hides the very
+  # with a local definition, as amsg_exit.c does, or change what references
+  # it. A doctored .lib cannot be reproduced from a clean checkout and hides the very
   # duplication `rebrew lib-match` exists to catch; that check refuses to run
   # if the extracted copy differs from the toolchain image's.
   # External archives come from REBREW_EXTERNAL_LIBS in the generated source
@@ -458,8 +448,8 @@ if (MSVC_FOR_DECOMP)
   set(CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL "/incremental:no")
 
   if(TARGET server_dll)
-    # /FORCE:MULTIPLE is still required for exactly two symbols. dllmain.c
-    # calls _CRT_INIT, which the linker resolves from LIBCMT dllcrt0.obj, and
+    # /FORCE:MULTIPLE is still required for exactly two symbols. The link
+    # resolves _CRT_INIT from LIBCMT dllcrt0.obj, and
     # that object also defines ___app_type and __amsg_exit. The game overrides
     # both (amsg_exit.c is the reversed 0x1001ba71), so they collide. Dropping
     # the flag fails with LNK2005 on those two until dllcrt0.obj is replaced.

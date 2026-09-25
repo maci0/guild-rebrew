@@ -6,7 +6,7 @@ Live numbers are `scripts/gate.sh` defaults. A residue, verify count, or `.text`
 
 | Quantity | Value | Source |
 |---|---|---|
-| verify `passed`, game functions byte-matched (EXACT+RELOC) | 259 | `BASELINE` |
+| verify `passed`, game functions byte-matched (EXACT+RELOC) | 258 | `BASELINE` |
 | `.text` residue | 38 | `RESIDUE_BASELINE` |
 | raw-link `.data` divergence | 21,481 | `DATA_BASELINE` |
 | imports | 100 | reference PE |

@@ -13,12 +13,12 @@ updated_at = "2026-09-22T10:50:21+00:00"
 
 ["SERVER.0x10002770"]
 size = 2115
-status = "STUB"
+status = "NEAR_MATCHING"
 analysis = "Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride)."
 blocker = "frame 0x284 vs ref 0x280 (the older 0x28c figure is wrong); every 0x280 route measured costs ~50 bytes (6 confirmations, shapes 81); body length-exact, tables byte-identical"
 blocker_delta = 1638
 updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+updated_at = "2026-09-25T10:25:38+00:00"
 
 ["SERVER.0x10002fc0"]
 size = 376
@@ -1576,137 +1576,6 @@ size = 14
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T11:10:15+00:00"
-
-["SERVER.0x1001a643"]
-size = 45
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001a758"]
-size = 26
-cflags = "/O1 /Gd"
-status = "EXACT"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001b9d4"]
-size = 157
-cflags = "/O1 /Oy- /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001d036"]
-size = 97
-cflags = "/O1 /Oy- /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T11:10:15+00:00"
-
-["SERVER.0x1001d097"]
-size = 21
-cflags = "/O1 /Oy- /Gd"
-status = "RELOC"
-
-["SERVER.0x1001d515"]
-size = 43
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001d540"]
-size = 809
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T11:10:15+00:00"
-
-["SERVER.0x1001d869"]
-size = 777
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001db72"]
-size = 177
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001dc23"]
-size = 251
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001dd1e"]
-size = 758
-cflags = "/O1 /Gd"
-status = "EXACT"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001e014"]
-size = 324
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T11:10:15+00:00"
-
-["SERVER.0x1001e158"]
-size = 86
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001e1ae"]
-size = 194
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001e270"]
-size = 87
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001e2c7"]
-size = 69
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001e30c"]
-size = 520
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T11:10:15+00:00"
-
-["SERVER.0x1001e514"]
-size = 292
-cflags = "/O1 /Gd"
-status = "EXACT"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001e638"]
-size = 169
-cflags = "/O1 /Gd"
-status = "EXACT"
-updated_by = "verify"
-updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10019d00"]
 size = 48
