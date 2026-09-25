@@ -64,3 +64,26 @@ int __cdecl fcn_004d4790(char* e)
 	}
 	return 0;
 }
+
+extern unsigned short* g_772e9c;
+
+char __cdecl fcn_00442d50(int, unsigned char);
+
+// FUNCTION: GOLDTL 0x004d4ee0
+// SIZE: 65
+
+void __cdecl fcn_004d4ee0(char* e)
+{
+	char* q;
+	char* o;
+	char* r;
+
+	q = *(char**) (e + 0x180);
+	o = *(char**) (e + 0x17c);
+	r = (char*) fcn_004cf9f0(q);
+	if (r != 0) {
+		*(int*) (r + 0xa) = *g_772e9c;
+		*(char**) (o + 0x1ac) = q;
+	}
+	fcn_00442d50((int) q, 0);
+}
