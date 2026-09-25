@@ -1,8 +1,8 @@
-// SIZE 0x24
 typedef struct {
 	unsigned char id;
 	char pad[0x23];
 } Rec24;
+// SIZE 0x24
 
 int __cdecl fcn_004f4980(char*, int, Rec24*);
 int __cdecl fcn_004f5110(void*, int);
