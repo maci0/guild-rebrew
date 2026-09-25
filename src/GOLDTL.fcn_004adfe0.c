@@ -1,0 +1,29 @@
+typedef struct {
+	int key;
+	char pad4[0x28];
+} fcn_004adfe0_entry;
+// SIZE 0x2c
+
+extern int g_67fba8;
+extern fcn_004adfe0_entry* g_67fbb0;
+extern int g_7728c4;
+extern int g_7728c0;
+
+// FUNCTION: GOLDTL 0x4adfe0
+// SIZE: 86
+
+void __cdecl fcn_004adfe0(void)
+{
+	int i;
+
+	for (i = 0; i < g_67fba8; i++) {
+		if (g_67fbb0[i].key == g_7728c4) {
+			g_7728c0 = g_7728c4;
+			if (i < g_67fba8 - 1)
+				g_7728c4 = g_67fbb0[i + 1].key;
+			else
+				g_7728c4 = -1;
+			return;
+		}
+	}
+}

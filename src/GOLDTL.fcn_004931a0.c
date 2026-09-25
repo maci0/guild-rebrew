@@ -1,0 +1,18 @@
+double __cdecl fcn_00507f10(int, int);
+/* declared float here: the float return is what gives fcomp m32 against p */
+float __cdecl gm_RandomFloat01(void);
+
+// FUNCTION: GOLDTL 0x4931a0
+// SIZE: 87
+
+int __cdecl fcn_004931a0(int a, int b)
+{
+	double da;
+	float p;
+
+	da = fcn_00507f10(a, 3);
+	p = (float) (da - fcn_00507f10(b, 3) * 0.5 + 0.1f);
+	if (gm_RandomFloat01() > p)
+		return 0;
+	return 1;
+}
