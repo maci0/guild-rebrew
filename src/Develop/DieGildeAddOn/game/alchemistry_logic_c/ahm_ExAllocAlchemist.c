@@ -42,9 +42,7 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[];
  *   - +0xcb: the 0x21c stride chain is `lea eax,[eax+eax*8]; lea
  *     edx,[eax+eax*4]` where the reference keeps it in edx.
  *   - +0x119: `mov dl,1` and the slot-index store are swapped.
- *   - +0x148: the cmd_payload reload and the `[esi+8]` store are swapped.
- *   - +0x23c: the slot+0x18 copy is stored after the second product; the
- *     reference stores it after the first. */
+ *   - +0x148: the cmd_payload reload and the `[esi+8]` store are swapped. */
 
 unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 {
@@ -193,13 +191,17 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	 * single expression uses `fiadd`, or a non-popping `fadd` plus a trailing
 	 * `fstp st(0)` when the conversion is a named local.  Reading slot+0x1c
 	 * through the `fp` local loads the field first (`fld [esi+0x1c]; fmul
-	 * [const]`); spelled inline, msvc6 loads the constant first. */
+	 * [const]`); spelled inline, msvc6 loads the constant first.  The
+	 * slot+0x18 copy sits between the two updates, where the reference
+	 * stores it (0x1000c02b); there a float product in `v -=` gives
+	 * `fsubr st,st(1)` plus a trailing `fstp st(0)`, and the `(double)`
+	 * factor gives the reference's `fsubp`. */
 	{
 		float v = (float) rand_value;
 		float* fp = (float*) (slot + 0x1c);
 		v += *fp * *(float*) 0x100256b8;
-		v -= *fp * *(float*) 0x100256b4;
 		*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
+		v -= (double) *fp * *(float*) 0x100256b4;
 		*(float*) (slot + 0x10) = v;
 	}
 
