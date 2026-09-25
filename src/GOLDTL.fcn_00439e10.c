@@ -9,6 +9,7 @@ typedef struct Ent7c {
 	unsigned char b1 : 1;
 	char pad71[0xb];
 } Ent7c;
+// SIZE 0x7c
 
 // FUNCTION: GOLDTL 0x439e10
 // SIZE: 88

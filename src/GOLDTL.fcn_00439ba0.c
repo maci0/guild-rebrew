@@ -7,6 +7,7 @@ typedef struct Node {
 	char pad204[0x10];
 	unsigned char root : 1;
 } Node;
+// SIZE 0x218
 
 // FUNCTION: GOLDTL 0x439ba0
 // SIZE: 87

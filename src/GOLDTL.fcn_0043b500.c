@@ -2,6 +2,7 @@ typedef struct Named24 {
 	char name[0x20];
 	int value;
 } Named24;
+// SIZE 0x24
 
 extern Named24 g_67a470[8];
 

@@ -7,6 +7,7 @@ typedef struct Node {
 	char pad204[0x10];
 	unsigned char root : 1;
 } Node;
+// SIZE 0x218
 
 void __cdecl fcn_00439ba0(Node* a, Node* b);
 void __cdecl fcn_00439aa0(Node* b);
