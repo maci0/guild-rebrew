@@ -1,0 +1,15 @@
+extern char g_1015f40[];
+
+int __cdecl fcn_00469140(int x, int y, int a3, int a4, int a5);
+void __cdecl fcn_00465eb0(int r, int i);
+
+// FUNCTION: GOLDTL 0x4692c0
+// SIZE: 81
+int __cdecl fcn_004692c0(int a1, int a2, int a3, int a4, int a5, int i)
+{
+	int r;
+
+	r = fcn_00469140(*(int*) (g_1015f40 + i * 0x3cc + 4) + a1, *(int*) (g_1015f40 + i * 0x3cc + 8) + a2, a3, a4, a5);
+	fcn_00465eb0(r, i);
+	return r;
+}
