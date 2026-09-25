@@ -4001,5 +4001,58 @@ volatile `cmd_payload` reload, `_slot_ptr`) holds `ecx` across it. Its dl/cl rol
 which ecx candidates overlap its source range, not its position. In the graveyard worker under /Ow,
 stores through `grave` form one chain in source order; `g_citizen_count`/`g_next_object_id` symbol
 stores are outside it, so the citizen store sinks to the end of the block where the reference has it
-inside the chain. Remaining: ahm 10 bytes (cmd_payload reload, stride `lea` register), graveyard 24.
+inside the chain. Both are closed: the graveyard worker under plain `/O2`, where no chain forms and
+a named local holds ecx over the 1 (shapes 201); ahm as below.
 Traces and variant generators: `.scratch/c2trace-counters/` (gitignored).
+
+ahm closed (RELOC) by giving the 1 an ecx neighbour that is not a barrier: a `kind` local kept as a
+candidate by a dead may-alias store (shapes section 200). Traced at select entry (`0x1071f7b3`,
+allowed set at `[cand+0x20]`): with the load folded the 1's allowed set is {ecx, edx} and it takes
+ecx; with `kind` coloured first it is {edx}. The range walk from `[cand+0x28]` to `[cand+0x30]` is
+per basic block (sets at block `+0x40/+0x44/+0x48`), so the 1 and the counter locals share a block
+without interfering: interference inside a block is tuple-level.
+
+## Finding 73: CrashDump's frame-fill tie (0x10002c5c) against the cross-jump, picker and DAG rules (traced in c2)
+
+Still 4 linked bytes. The decision is the ready-list order at `0x107278ae`: priority (`+0x2c`)
+descending, then sequence (`+0x36`) ascending. Sequence is the block-local creation order
+(`0x10726361`, counter `0x1079f16c` reset at `0x1072631f`), so the group-A join `fi[1]`, the first
+item of the merged frame-fill block, always issues before `fi[0]` at equal height. The rules that
+close every other join, each traced on this function:
+
+- **Pass order** (driver `0x107601e5`): scratch picks (`0x10720798`), frame-slot weights
+  (`0x10722246`) and packing (`0x107400e7`), cross-jump, scheduler (`0x107258b7`). A join's operands
+  therefore count once more in the slot weights, and its scratch registers are fixed before merging.
+- **Cross-jump** is `fcn.107295a5`, called per jump item from the flow cleanup `fcn.10723474` at
+  `0x10723701`, in the second cleanup pass only (driver `0x107606cc`). It walks back from the jump and
+  from the target label, skipping labels (kind 0x1a) and op-444 items on both sides, compares items
+  with `fcn.107291dc` (op, type, operands, registers included), moves the jumper to the first matched
+  item and hands labels it crossed to `fcn.1073bf54`. Among marker items only op 444 compares equal
+  (table `0x10786ef0`). A join block holding only labels and a `jmp` is threaded by the earlier jump
+  passes (label merge `fcn.1070f864`), so the group-A arms then stop merging into 0xc000008e.
+- **Scratch picks follow layout, not source.** The join is laid out after the 0xc000008e arm whatever
+  its textual position (moved after the 0xc000001d arm: still after 0xc000008e), so its cursor is eax;
+  the frame fill follows 0xc00000fd, cursor edx.
+- **DAG edges.** Memory refs are matched through list `0x1079f144` with `fcn.1070438b` (same symbol:
+  offset ranges); `fi[0]` and `fi[1]` are symmetric in every memory and register rule, and nothing in
+  the reference block writes edx, the only register `fi[0]` alone reads. Barrier nodes
+  (`fcn.10726d9b`): item kinds 0xf, 0x13, 0x14, 0x16 other than op 444, 0x19 and real labels
+  (0x1a), ops 0x166/0x9c/0xb2 and volatile operands. A barrier links every current sink to itself
+  and itself to every later node at latency 0, and flushes the memory and register lists, so a
+  consumer of a volatile load gets a latency-0 edge and can issue in the same cycle.
+
+| Join or frame-fill change | Object (now 2111/2115) | Fails on |
+|---------------------------|------------------------|----------|
+| `fi[0] = pDbgBuf` | 1525 | pick eax vs edx; `pDbgBuf` weight +1 moves its slot |
+| `pStack = espVal - 4` | 2083 | `add ebx` ahead of `xor` (flags); `pStack` store early; slot swap |
+| `hLog = hCrashLog`, `ctx = pCtx` (also `register`, `+ 0` casts), `espVal += 0`, a second `fi[1]` store | 1149 | copy propagation or dead-store removal empties the join |
+| `default:` label as the join | 1149 | threaded before the cross-jump |
+| group-A arms write only the message, join writes the newline | 1328 | arm picks rotate eax, ecx, edx |
+| `ctx = *(CONTEXT* volatile*) &pCtx` | 1821 | merges exactly (arms and 0xc000008e tail as the reference), but `pCtx` weight 4 to 5 reorders the 4-byte slots and the latency-0 barrier edge issues the Eip load in cycle 0 into eax |
+| `CONTEXT* volatile pCtx` | 1780 | same, plus slot changes at every `pCtx` use |
+| `frameInfo` at function scope, 192 join/order permutations (inner and outer scope) | best 2111 | tie or worse |
+| `memset` for the zero stores | 1706-1829 | zero in edx, stores chained |
+
+Remaining lever, untested: a join the cross-jump accepts that names no 4-byte local and needs no
+scratch register. The reference's frame fill has only `fi[1]` (ebp) and `pStack` (ebx) of that kind.
+Tracer kit: `.scratch/ck/` in the `fix/srv-crashdump` worktree (gitignored).

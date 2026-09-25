@@ -6004,6 +6004,9 @@ explanation.
 
 ## 131. The Graveyard zero-extend is closed: four spellings, none reaches `xor`+`mov r16`
 
+Superseded for this function by section 201: under plain `/O2` the reference zero-extend comes out
+unchanged.
+
 Section 130 narrowed these divergences from "allocator cascade" to "local instruction-selection
 choice made from the same register state", which implies a source-level lever must exist.
 Round 239 tested that implication on the sharpest case: `gv_ExAllocGraveyardWorker`'s 16-bit
@@ -6047,6 +6050,8 @@ expression.** Stop rewriting it and look at what surrounds it. Sections 122, 126
 ended the same way, and naming the pattern is cheaper than rediscovering it a fifth time.
 
 ## 132. What surrounds the Graveyard read: an addressing-mode choice, also not source-selectable
+
+Superseded by section 201: the addressing matches under plain `/O2`.
 
 Section 131 closed the read itself and pointed at the surrounding code, since that is what decides
 which register is free. Round 240 looked, and found the answer: it is the **addressing mode of
@@ -8568,6 +8573,55 @@ each measured with `scripts/linktest.sh`:
   `live = *(int*) 0x10035434 + 1;` let the slot-index store go through `slot`, -6). The same read
   can delete a symbol read-modify-write it cannot see as a reader, which changes behaviour.
 
+- **A relocation to the wrong symbol is an object mismatch the link hides.** cm_ExSellObjekt
+  (0x1000d930) sat at NEAR_MATCHING with 8 differing bytes, the `push imm32` operands at
+  0x1000dd46 and 0x1000dec7: the source passed `g_error_msg_sell_no_source` / `_no_dest` where the
+  reference pushes 0x1002cd48 (`g_error_msg_sell_failed`) / 0x1002cd14 (`_no_source`). The postlink
+  data fixer rewrites `.data` operands, so the linked residue was already 0 and only `rebrew test`
+  saw it. Resolve each differing `push` operand in the reference (`rizin -c 'pr 60 @ <addr>'`) and
+  match the symbol in `src/rebrew-data.toml`: the fix changes the logged message to the original's.
+
+- **A dead may-alias store keeps a single-use local a colouring candidate** (ahm_ExAllocAlchemist,
+  closed to RELOC, -10 linked). `kind = cmd[0x10]; slot[0xa] = 0; slot[0xa] = kind;`: c2 does not
+  forward a load past a store that may alias its source, so `kind` survives as a candidate, and
+  only later deletes the dead store. Coloured before the constant 1, `kind` takes ecx and leaves the
+  1 `dl` (allocator Finding 72); the post-register-allocation scheduler then hoists the
+  `mov ecx,[esp+0x1c]` pointer load to 0x1000bf38, right after ecx's last counter use. Without the
+  dead store `kind` is forwarded, the pointer load becomes a scratch pick (the 1 takes `cl`, every
+  later scratch register rotates by one). The `volatile` read it replaces held the load behind the
+  +0x1f0..+0x1e4 stores, and while it was in the source the 0x21c stride chain at 0x1000bebb used
+  eax where the reference uses edx; every variant without it gives edx. Measured on the object: every spelling that copies `cmd_payload` into a local
+  (plain, `register`, `*(int*)&x` and cast forms, a second use of the copy, `(void)&cmd_payload`) is
+  forwarded or propagated away.
+
 Flags follow the source: after these rewrites cm_ExSellObjekt and ls_LoadBuildingEntityState match
 only without their `/Ow`, and the `vfs_OpenStream` size is its 701-byte COMDAT extent (jump table
 included), not the 667-byte body.
+
+## 201. `gv_ExAllocGraveyardWorker` (0x10011bf0) closes under plain `/O2`: the `/Ow` flag was the wall
+
+The function matches (RELOC, 0 linked bytes) with `/O2 /Gd`, the flags of every other function in
+`friedhof_logic_c`, and the slot-init stores written in the reference's order (+2, +0x1f0, +0x210,
++0x215..+0x218, ...). Under `/Ow` the best of the same sweep is 43 object bytes. What decides it,
+traced in c2 (post-allocation list scheduler `0x10727977`, colouring select `0x1071f7b3`):
+
+- **`/Ow` chains every store through `grave`** in source order, so symbol stores (the citizen
+  count) have no edge into the chain and sink or float by register edges alone. Plain `/O2` adds no
+  such chain: stores of equal height issue in source (sequence) order.
+- **The citizen store's position comes from its one memory successor.** It may alias the later
+  `req+0x15` read, so its height equals the grave stores' before that read: it ties with the +2
+  store and, being earlier in sequence, issues right after the slot-index store (0x10011dff). The
+  slot-index store goes through `g_slot_table`, may alias every later grave store and so outranks
+  them; through `grave` it kills the 0xffff store as dead.
+- **The `req` byte copy is a named local** (`type = *(volatile unsigned char*) (req + 0x15);`). As
+  a colouring candidate it is coloured before the constant 1 and takes ecx over the 1's range, so
+  the 1 takes dl (Finding 72) and the `req` reload lands at 0x10011df5 behind the object-id store
+  (ecx write-after-read edge). Inline, the 1 takes cl and the reload edx (+68 object bytes);
+  a plain local read hoists the reload above the counter stores (+68); `volatile` on the pointer
+  instead (`*(char* volatile*) &req`) puts the citizen store ahead of the read (+15).
+- `g_citizen_count++` stays between the entity stores and the object-id bump: that position gives
+  the citizen temporary edi, and the load hoists to 0x10011dd2.
+
+This supersedes sections 131 and 132 for this function: the `xor ecx,ecx; mov cx,[ebp]` zero-extend
+and the `lea edi,[ecx+esi]` addressing both come out unchanged once the flags are right.
+Measure a function's flags against its file siblings before treating a residue as a wall.

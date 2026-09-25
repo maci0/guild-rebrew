@@ -120,7 +120,11 @@ int g_crash_callback = 0;
  *
  * Still open: the frame fill's frameInfo[0] and [1] stores issue in the
  * reverse order (both have priority 2; IL order decides, and the [1] store
- * is the group-A join). */
+ * is the group-A join).  Every other join is ruled out in msvc6-allocator.md
+ * Finding 73: scratch loads pick eax here and edx at the frame fill, the
+ * pStack store orders the add ahead of the xor, register copies fold away,
+ * and a volatile pCtx load merges but shifts pCtx's slot and its barrier
+ * lets the Eip load issue first. */
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
