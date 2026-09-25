@@ -37,8 +37,8 @@ diff shows, then read it; many sections belong to more than one row.
 | `volatile` as a scheduling or form lever, and symbols instead of it | 22, 24, 27, 30, 39, 51, 52, 60, 76, 94, 187 |
 | Statement order, hoisting a definition | 33, 84, 85, 116, 118, 163 |
 | `eax`/`ecx`/`edx` or callee-saved register choice (also `msvc6-allocator.md`) | 9, 25, 36, 40, 41, 62, 72, 72b, 126, 130, 135, 180 |
-| Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179 |
-| Constants rematerialised or CSE'd, shared clamp values, ternary constant forms | 23, 26, 28, 62, 63, 126, 199 |
+| Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179, 202 |
+| Constants rematerialised or CSE'd, shared clamp values, ternary constant forms | 23, 26, 28, 62, 63, 126, 199, 202 |
 | Inline `memset`, struct copy, `rep movsd`, inlining, fill loops | 11, 71, 104, 174, 197 |
 | A store or call present in one side only, call order and call counts, wrong argument | 16, 66, 67, 68, 111, 113, 188 |
 | Aliasing and `#pragma optimize` | 44, 61a |
@@ -8625,3 +8625,30 @@ traced in c2 (post-allocation list scheduler `0x10727977`, colouring select `0x1
 This supersedes sections 131 and 132 for this function: the `xor ecx,ecx; mov cx,[ebp]` zero-extend
 and the `lea edi,[ecx+esi]` addressing both come out unchanged once the flags are right.
 Measure a function's flags against its file siblings before treating a residue as a wall.
+
+## 202. Client (GOLDTL) near misses closed by source shape
+
+Measured with `rebrew test --target Europa1400Gold_TL.exe` (Processor Pack code generator); each
+function's own file carries the shape.
+
+- **0x4f45b0, 0x4ee6d0: clamps are min/max macro expansions.** `#define MAXV(a, b) (((a) > (b)) ?
+  (a) : (b))` and `MINV` likewise. `MAXV(MINV(100000.0, x), 10000.0)` gives the reference's repeated
+  `100000.0` compare and shared `fld` arm; `MINV(MAXV(v, 0.0f), 1.0f)` puts the 0.0f and 1.0f cold
+  arms in the reference's order. Hand-written `if`/`else`, `else if` chains and nested ternaries
+  reach the same tests but not the layout; of the eight argument orders only these match.
+- **0x402090: block scope shares frame slots.** Address-taken locals (`&w`, `&h`) and the locals of
+  the inline-asm fill (`len`, `d`) declared in inner blocks give up their slots when the block ends:
+  `pix` then lands in `w`'s slot (the dead parameter slot `[ebp+8]`), `len` in `h`'s, and the
+  qword conversion temporary over `d`'s. Declared at function scope they keep their own slots
+  (frame 0x728 against 0x720).
+- **0x5b4f70: a 0/0xff call argument is two calls.** `f(..., type == 13 ? 0xff : 0)` gives `setne;
+  dec; and`; `if (type != 13) f(..., 0); else f(..., 0xff);` gives the reference's `push 0; jmp` /
+  `push 0xff` arms into one shared call. The clamp before it needs a separate variable in both arms
+  (section 200) for the reference's register roles.
+- **0x43a3f0: a local pointer for an element load.** `h = *(int**) (b + 0x31c); x = f(h[i], 1);`
+  gives `mov eax, [eax + edi*4]`; the inline `(*(int**) (b + 0x31c))[i]` loads into a new register.
+  In the same function the bitfield clear `v->f0 = 0` written before `v->r = 0xff` puts the flag
+  byte in `bl` and the bitfield byte in `dl`, as in the reference.
+- **0x5c80f0: statement order decides colour.** Taking `me_h = &g_7f4ca0[g_774970]` before
+  `district = sel + 0x59a` and reading `me_h->handle` gives the reference's ecx/edx/eax roles for
+  the district block and folds the `* 4` into `[edx*4 + disp]`.

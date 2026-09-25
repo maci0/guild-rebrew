@@ -4176,3 +4176,55 @@ harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored
 | second name for the fill's register value (`void* hL` for `hCrashLog`, `unsigned e2` for `espVal`): copied after the definition or taking the call/load directly with the old name copied from it; join `new = old;` or `old = new;`; fill reads either name; join ends in `break;` or `goto frame_fill;` (32 variants) | 1149 | copy folded, join threaded |
 | `static __inline` identity function in the join (`hCrashLog = crash_id(hCrashLog);`, `espVal`, `hProcess`, `pCtx`, bare call) | 1142, 1145 | inlined and folded, join threaded |
 | scan-loop `nInstr`/`pInstr` moved to function scope, join copies `espVal`/`hCrashLog`/0 into them | 1149 | dead (reinitialised before the scan loop), removed |
+
+## Finding 74: the Processor Pack c2.dll (client builds), traced routines and three open colour decisions
+
+The clients compile with `rebrew/msvc:6.0-sp5-pp-win32`, whose `c2.dll` (also loaded at 0x10700000)
+has different addresses from the server's SP6 image. Matched by instruction shape and traced under
+`winedbg --gdb` (about 20 s per compile, private wineprefix):
+
+| Role | SP6 | PP |
+|------|-----|----|
+| colouring select (cand in ecx, class in edx) | `0x1071f7b3` | `0x10709937`, result reg in edi at `0x10709a8e` |
+| select caller (candidate list `[0x107ac5b4]`) | | `fcn.1073122d`, call at `0x10731552` |
+| sorted insert into the candidate list | | `0x10708a6e` |
+| priority walk | `0x1071d925` | `0x10707a0b` |
+| scratch picker / assign | `0x10721c0f` | `0x1070c32b` / `0x1070c669`, cursor `[0x107b1418]` |
+| scheduler ready-list insert | `0x107278ae` | `0x107159a9` (+0x2c priority, +0x36 sequence) |
+
+- **Candidate record:** +0xc priority, +0x20 allowed-register bitset (first chunk word +8, bit n =
+  register n), +0x38 preference list, +0x40 weight, +0x44 node id. Symbol at +0: +4 kind (0x20804
+  local, 0xa0805/0x20805 parameter, 3 temporary, 0x4000003 address or constant), +0x1c symbol index.
+- **Register numbers** are 1 eax, 2 ecx, 3 edx, 4 ebx, 6 ebp, 7 esi, 8 edi; the class-0 try order
+  (`[0x107b690c]` -> `0x107b6888`) is eax, ecx, edx, esi, edi, ebx, ebp. Costs (`0x107ac480`) are 0
+  unless a preference or a one-register neighbour applies, so the first allowed register in that
+  order wins.
+- **Colouring order** is priority descending; on equal priority the higher node id goes first.
+- **Priority** accumulates per block (`0x10708374`/`0x10708393` add `pending * N`, `0x107083bd`
+  subtracts `N` for a candidate live through the block), with `N` = candidates referenced in the
+  block times `1 << loop depth` (`0x10707b6e`).
+- Few temporaries reach the scratch picker: `fcn_005c80f0` makes 16 picks; the district, index and
+  handle values are colouring candidates (kind 3).
+
+Open cases, each decided by one comparison:
+
+- **0x50be50** (83/102): the table walker (kind 0x4000003, id 0x2d) and the parameter `s` (id 0x11)
+  tie at priority 21, so the walker is coloured first and takes esi; the reference has `s` in esi.
+  Per-block terms: the call block gives `s` +28 and the walker -14, the head and increment blocks
+  give the walker +12 and +16 against -6 and -8. Loop form, `return` in the loop, `continue`, no `w`
+  local and dead constant stores all keep the tie.
+- **0x5ce800** (497/513, after a `bit` local for the flag bits put `d` in ebx): `out` (priority
+  184 = 8x14 + 6x12) is coloured before `flags` (172 = 2x14 + 12x12) and takes esi. A tie would
+  go to `flags` (higher id).
+- **0x5db8e0** (630/637): the `-1` candidate (kind 0x4000003, priority 190) interferes with the
+  first-loop values, among them `x0` (esi, priority 202), so it gets edi and `result` (priority 33)
+  gets esi. With a 0-based first loop (no `n - 1`) the interference is gone, but the table walker
+  is no longer strength-reduced.
+- **0x414830** (289/296): the loop's last `fstp` is a float-class store (type 0x4004), whose
+  +65536 priority term issues it ahead of the pointer and counter updates; the reference issues it
+  after them.
+- **0x4c6090** (174/188): the `m.kind` store issues before the `r + 0x170` load, which the reference
+  loads first. Loading it into a local first gives that order, but the local tells c2 that ecx is 0
+  in the else arm, and the `xor ecx, ecx` before `mov cx, [eax]` is dropped (-2 bytes).
+
+Tracer scripts: `.scratch/pp/` in the worktree that ran them (gitignored).
