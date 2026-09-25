@@ -1,0 +1,47 @@
+#include <string.h>
+
+extern char* g_6b7ebc;
+extern char* g_6b7e98;
+extern int g_6791c8;
+
+void __cdecl fcn_0040cfb0();
+char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
+void __cdecl fcn_00425bf0(char*, int, const char*);
+
+// FUNCTION: GOLDTL 0x40d410
+// SIZE: 306
+
+/* TakeObjectScript(): queues a take-object animation task that runs a
+ * script; the calling script waits for it when it blocks. */
+int __cdecl fcn_0040d410(char** ch, char** ani, int* kind, char** dummy, unsigned char* level, char** func)
+{
+	char* task;
+
+	if (g_6b7ebc != 0 && *(int (__cdecl**)()) (g_6b7ebc + 0x44) == (int (__cdecl*)()) fcn_0040d410) {
+		if (*(int*) (*ch + 0x128) != 0) {
+			*(int (__cdecl**)()) (g_6b7e98 + 0xc60) = (int (__cdecl*)()) fcn_0040d410;
+		}
+		return 0;
+	}
+	if (*ch == 0) {
+		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "TakeObjectScript(): Invalid character");
+		return 1;
+	}
+	if (*dummy == 0) {
+		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "TakeObjectScript(): Invalid dummy");
+		return 1;
+	}
+	task = fcn_0040c230(*ch, fcn_0040cfb0, *level, 0x31, *kind);
+	if (task != 0) {
+		strcpy(task + 0xf0, *ani);
+		if (*dummy != 0 && *(char**) (*dummy + 0x1ec) != 0 && *(char**) (*(char**) (*dummy + 0x1ec) + 0x40c) != 0) {
+			strcpy(task + 0x130, *(char**) (*(char**) (*dummy + 0x1ec) + 0x40c));
+		}
+		strcpy(task + 0x90, *func);
+		*(int*) (task + 0x17c) = g_6791c8;
+	}
+	if (*(int*) (g_6b7e98 + 0xc84) == 1) {
+		*(int (__cdecl**)()) (g_6b7e98 + 0xc60) = (int (__cdecl*)()) fcn_0040d410;
+	}
+	return 0;
+}

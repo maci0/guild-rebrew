@@ -1,0 +1,99 @@
+// FUNCTION: GOLDTL 0x588000
+// SIZE: 512
+
+// SIZE 0x10
+struct offer {
+	int id;
+	int pad4;
+	int kind;
+	float val;
+};
+
+// SIZE 0x38
+struct deal {
+	int state;
+	int pad4;
+	struct offer e[3];
+};
+
+// SIZE 0x21c
+struct house {
+	unsigned short id;
+	unsigned char type;
+	char pad3;
+	int owner;
+	char pad8[0x214];
+};
+
+extern struct house g_7f4ca0[];
+extern struct deal g_77dda0[3];
+extern struct house* g_773da8;
+extern int g_774a1c;
+extern volatile unsigned int g_6b7fac;
+
+void __cdecl fcn_004727a0(int, int);
+void __cdecl fcn_00471af0(int, int);
+void __cdecl fcn_005015e0(char**, int, int, int);
+int __cdecl fcn_00519190(int, ...);
+
+void __cdecl fcn_00588000(char* w)
+{
+	int i;
+	int cnt;
+	char* o;
+	int j;
+	int msg;
+
+	cnt = 0;
+	if (*(unsigned int*) (w + 0x70) + 0x15e > g_6b7fac) {
+		return;
+	}
+	*(unsigned int*) (w + 0x70) = g_6b7fac;
+	fcn_004727a0(*(int*) (w + 0x74), 0);
+	for (i = 0; i < 3; i++) {
+		if (g_77dda0[i].state != i) {
+			continue;
+		}
+		g_774a1c = 1;
+		for (j = 0; j < 3; j++) {
+			fcn_005015e0(&o, 0, 0, g_77dda0[i].e[j].id);
+			if (o == 0) {
+				break;
+			}
+			msg = 0x4071;
+			if (g_77dda0[i].e[j].kind == 1) {
+				msg = 0x4073;
+				if (!(g_77dda0[i].e[j].val > 25.0f)) {
+					msg = 0x4072;
+				}
+			}
+			if (j != 0) {
+				fcn_00519190((int) "$A");
+			} else {
+				fcn_00519190((int) "$C");
+			}
+			if (*(unsigned short*) (o + 0x27) != 0xffff && &g_7f4ca0[*(unsigned short*) (o + 0x27)] != g_773da8) {
+				fcn_00519190(0x406d, *(unsigned short*) (o + 0x27), o, msg);
+			} else {
+				fcn_00519190(0x406c, o, msg);
+			}
+			cnt++;
+		}
+		if (cnt != 0) {
+			g_774a1c = 0;
+			g_77dda0[i].state = -1;
+			fcn_00471af0(*(int*) (w + 0x74), 1);
+			return;
+		}
+		if (g_774a1c != 0) {
+			g_774a1c = 0;
+			g_77dda0[i].state = -1;
+			fcn_00519190((int) "$C");
+			fcn_00519190(0x406e);
+			fcn_00471af0(*(int*) (w + 0x74), 1);
+			return;
+		}
+	}
+	fcn_00471af0(*(int*) (w + 0x74), 0);
+	g_774a1c = 0;
+}

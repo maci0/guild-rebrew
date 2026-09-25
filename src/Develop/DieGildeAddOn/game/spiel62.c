@@ -388,6 +388,8 @@ int __cdecl gm_MapEntityStatRange(int stat_id)
  * E.g., maps strength to weakness, charisma to shyness.
  * Used for character stat balancing. */
 
+// FUNCTION: GOLDTL 0x00507d10
+// SIZE: 288
 // FUNCTION: SERVER 0x10018330
 // gm_GetOppositeStatIndex
 

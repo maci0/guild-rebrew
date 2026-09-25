@@ -725,6 +725,8 @@ limited:
 	return size < requested ? size : requested;
 }
 
+// FUNCTION: GOLDTL 0x0050e1f0
+// SIZE: 400
 // FUNCTION: SERVER 0x10019ed0
 // gm_CheckInventoryCapacity
 /* Byte-exact.  The scan is a plain index loop over the zero-terminated

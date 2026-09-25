@@ -824,3 +824,195 @@
 // LIBRARY: GOLDTL 0x006609ba
 // __getdcwd_lk
 
+// LIBRARY: GOLDTL 0x0064d530
+// _strncpy
+
+// LIBRARY: GOLDTL 0x0064da75
+// _qsort
+
+// LIBRARY: GOLDTL 0x0064de9d
+// ___RTCastToVoid
+
+// LIBRARY: GOLDTL 0x0064e32e
+// __ftell_lk
+
+// LIBRARY: GOLDTL 0x0064ed57
+// __fwrite_lk
+
+// LIBRARY: GOLDTL 0x0064f1b0
+// _strncat
+
+// LIBRARY: GOLDTL 0x006501e7
+// _WinMainCRTStartup
+
+// LIBRARY: GOLDTL 0x006511fb
+// _isalnum
+
+// LIBRARY: GOLDTL 0x00651367
+// _setlocale
+
+// LIBRARY: GOLDTL 0x006515ad
+// __setlocale_set_cat
+
+// LIBRARY: GOLDTL 0x00651781
+// __expandlocale
+
+// LIBRARY: GOLDTL 0x00652c98
+// __getptd
+
+// LIBRARY: GOLDTL 0x00652dab
+// __flsbuf
+
+// LIBRARY: GOLDTL 0x006531a7
+// __trandisp1
+
+// LIBRARY: GOLDTL 0x00653b16
+// __fprem_common
+
+// LIBRARY: GOLDTL 0x00653dce
+// __fprem_common
+
+// LIBRARY: GOLDTL 0x0065504c
+// __powhlp
+
+// LIBRARY: GOLDTL 0x00655253
+// ___heap_select
+
+// LIBRARY: GOLDTL 0x0065539b
+// __heap_init
+
+// LIBRARY: GOLDTL 0x00655d20
+// ___sbh_alloc_new_group
+
+// LIBRARY: GOLDTL 0x00656533
+// ___old_sbh_new_region
+
+// LIBRARY: GOLDTL 0x0065682b
+// ___old_sbh_alloc_block
+
+// LIBRARY: GOLDTL 0x00656a33
+// ___old_sbh_alloc_block_from_page
+
+// LIBRARY: GOLDTL 0x00656c00
+// ___old_sbh_heap_check
+
+// LIBRARY: GOLDTL 0x00656f4b
+// __openfile
+
+// LIBRARY: GOLDTL 0x0065734d
+// _localtime
+
+// LIBRARY: GOLDTL 0x00657635
+// _signal
+
+// LIBRARY: GOLDTL 0x00657819
+// _raise
+
+// LIBRARY: GOLDTL 0x00657e51
+// __read_lk
+
+// LIBRARY: GOLDTL 0x006583ca
+// __write_lk
+
+// LIBRARY: GOLDTL 0x00658555
+// ___RTCastToVoid
+
+// LIBRARY: GOLDTL 0x0065869e
+// (static, no archive symbol)
+
+// LIBRARY: GOLDTL 0x00658980
+// __alloc_osfhnd
+
+// LIBRARY: GOLDTL 0x006591ac
+// __handle_exc
+
+// LIBRARY: GOLDTL 0x00659715
+// __XcptFilter
+
+// LIBRARY: GOLDTL 0x00659a37
+// _parse_cmdline
+
+// LIBRARY: GOLDTL 0x00659beb
+// ___crtGetEnvironmentStringsA
+
+// LIBRARY: GOLDTL 0x00659d56
+// __NMSG_WRITE
+
+// LIBRARY: GOLDTL 0x00659fc8
+// _ldexp
+
+// LIBRARY: GOLDTL 0x0065a318
+// (static, no archive symbol)
+
+// LIBRARY: GOLDTL 0x0065a846
+// ___FrameUnwindToState
+
+// LIBRARY: GOLDTL 0x0065b230
+// _fix_grouping
+
+// LIBRARY: GOLDTL 0x0065b332
+// __get_lc_lconv
+
+// LIBRARY: GOLDTL 0x0065b4d9
+// ___init_ctype
+
+// LIBRARY: GOLDTL 0x0065b83a
+// ___get_qualified_locale
+
+// LIBRARY: GOLDTL 0x0065ba96
+// _LangCountryEnumProc@4
+
+// LIBRARY: GOLDTL 0x0065c340
+// __ld12cvt
+
+// LIBRARY: GOLDTL 0x0065d15d
+// _strtoxl
+
+// LIBRARY: GOLDTL 0x0065d94b
+// __isindst_lk
+
+// LIBRARY: GOLDTL 0x0065daf7
+// _cvtdate
+
+// LIBRARY: GOLDTL 0x0065dc37
+// _gmtime
+
+// LIBRARY: GOLDTL 0x0065de52
+// __setmbcp
+
+// LIBRARY: GOLDTL 0x0065e0a5
+// _setSBUpLow
+
+// LIBRARY: GOLDTL 0x0065e42e
+// __Gettnames
+
+// LIBRARY: GOLDTL 0x0065e67b
+// __Strftime
+
+// LIBRARY: GOLDTL 0x0065ef12
+// ___getlocaleinfo
+
+// LIBRARY: GOLDTL 0x0065f050
+// (static, no archive symbol)
+
+// LIBRARY: GOLDTL 0x0065f2f0
+// __strnicmp
+
+// LIBRARY: GOLDTL 0x0065f825
+// ___ld12mul
+
+// LIBRARY: GOLDTL 0x0065fb1a
+// __chsize_lk
+
+// LIBRARY: GOLDTL 0x0065fcdd
+// ___crtGetLocaleInfoA
+
+// LIBRARY: GOLDTL 0x0065fdf0
+// ___crtGetLocaleInfoA
+
+// LIBRARY: GOLDTL 0x0066031d
+// ___crtsetenv
+
+// LIBRARY: GOLDTL 0x0066080a
+// __strlwr
+
