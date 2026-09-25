@@ -1,5 +1,7 @@
 /* ls_ReadVfsDataChecked — wrapper around vfs_ReadData, nonzero on success. */
 
+// FUNCTION: GOLD 0x0051c950
+// SIZE: 37
 // FUNCTION: GOLDTL 0x5218f0
 // SIZE: 37
 

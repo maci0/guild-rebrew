@@ -17,6 +17,8 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004fac80(int, struct cap_4cb6f0*);
 
+// FUNCTION: GOLD 0x004cab40
+// SIZE: 242
 // FUNCTION: GOLDTL 0x4cb6f0
 // SIZE: 242
 

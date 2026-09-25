@@ -13,6 +13,8 @@ struct pos14 {
 
 extern struct pos14 g_7f4c00;
 
+// FUNCTION: GOLD 0x005743e0
+// SIZE: 175
 // FUNCTION: GOLDTL 0x57c920
 // SIZE: 175
 

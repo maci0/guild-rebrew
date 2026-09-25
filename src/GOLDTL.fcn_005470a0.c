@@ -34,6 +34,8 @@ struct s_7f4ca0 {
 
 extern struct s_7f4ca0 g_7f4ca0[];
 
+// FUNCTION: GOLD 0x0053f2d0
+// SIZE: 142
 // FUNCTION: GOLDTL 0x5470a0
 // SIZE: 142
 

@@ -21,6 +21,8 @@ struct slot_5595e0 {
 	int pad;
 };
 
+// FUNCTION: GOLD 0x00551510
+// SIZE: 126
 // FUNCTION: GOLDTL 0x5595e0
 // SIZE: 126
 

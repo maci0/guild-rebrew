@@ -106,6 +106,8 @@ cleanup:
  * to HeapAlloc if the pool is exhausted. Thread-safe via
  * critical section. */
 
+// FUNCTION: GOLD 0x00422a20
+// SIZE: 272
 // FUNCTION: GOLDTL 0x41e1d0
 // SIZE: 272
 // FUNCTION: SERVER 0x10006d20

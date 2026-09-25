@@ -1,5 +1,7 @@
 // GLOBAL: GOLDTL 0x772f40
 extern int* g_772f40;
+// FUNCTION: GOLD 0x004c5c40
+// SIZE: 89
 // FUNCTION: GOLDTL 0x4c67c0
 // SIZE: 89
 

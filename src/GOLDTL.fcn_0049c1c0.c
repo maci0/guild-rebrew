@@ -6,6 +6,8 @@ int __cdecl gm_GetMsgField(char* g, char* s);
 int __cdecl fcn_0050d320(int a, unsigned char k);
 float __cdecl fcn_0050bb50(int id, unsigned char k);
 
+// FUNCTION: GOLD 0x0049c780
+// SIZE: 233
 // FUNCTION: GOLDTL 0x49c1c0
 // SIZE: 233
 int __cdecl fcn_0049c1c0(int a1, int a2, int k, char* it, char* out)

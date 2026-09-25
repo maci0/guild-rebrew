@@ -9,6 +9,8 @@ void __cdecl free(void*);
 int __cdecl vfs_CleanupObject(char*);
 int __cdecl vfs_DestroyEntity(char*);
 
+// FUNCTION: GOLD 0x00467c10
+// SIZE: 64
 // FUNCTION: GOLDTL 0x464a30
 // SIZE: 64
 // FUNCTION: SERVER 0x10008A50

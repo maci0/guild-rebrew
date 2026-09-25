@@ -1,4 +1,6 @@
 extern int g_6b8014;
+// FUNCTION: GOLD 0x00404d80
+// SIZE: 66
 // FUNCTION: GOLDTL 0x4056a0
 // SIZE: 66
 

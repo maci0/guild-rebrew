@@ -19,6 +19,8 @@ typedef struct F8 {
 
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
+// FUNCTION: GOLD 0x0048edb0
+// SIZE: 333
 // FUNCTION: GOLDTL 0x48e360
 // SIZE: 333
 int __cdecl fcn_0048e360(char* a1, char* a2, char* a3)

@@ -13,6 +13,8 @@ char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0057c9d0(unsigned char*);
 unsigned short __cdecl fcn_0042e410(unsigned short);
 
+// FUNCTION: GOLD 0x004abac0
+// SIZE: 416
 // FUNCTION: GOLDTL 0x4abbe0
 // SIZE: 416
 

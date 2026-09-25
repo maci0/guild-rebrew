@@ -401,6 +401,8 @@ void __cdecl srv_LogWinsockError(int err_code)
  * rep-stosd iteration — the memset alone is 252 iterations. */
 
 extern char g_office_slots[];
+// FUNCTION: GOLD 0x004e5cd0
+// SIZE: 372
 // FUNCTION: GOLDTL 0x4e7810
 // SIZE: 372
 // FUNCTION: SERVER 0x1000b040

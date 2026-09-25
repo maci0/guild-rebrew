@@ -3,6 +3,8 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004be340(char*);
 unsigned int __cdecl fcn_00430910(void*, int, int, void*);
 
+// FUNCTION: GOLD 0x004bff40
+// SIZE: 241
 // FUNCTION: GOLDTL 0x4c0740
 // SIZE: 241
 

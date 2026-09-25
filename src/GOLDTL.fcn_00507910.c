@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x005048e0
+// SIZE: 213
 // FUNCTION: GOLDTL 0x00507910
 // SIZE: 213
 
@@ -48,6 +50,8 @@ extern Ent* g_868050;
 
 float __cdecl fcn_0050b8d0(unsigned char* p, int k, int a, int b);
 
+// FUNCTION: GOLD 0x0050cd40
+// SIZE: 116
 // FUNCTION: GOLDTL 0x005101e0
 // SIZE: 116
 

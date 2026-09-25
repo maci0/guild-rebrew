@@ -8,6 +8,8 @@ struct stat_4b4dc0 {
 };
 // SIZE 0xc
 
+// FUNCTION: GOLD 0x004b4c50
+// SIZE: 241
 // FUNCTION: GOLDTL 0x4b4dc0
 // SIZE: 241
 

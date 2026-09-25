@@ -8,6 +8,8 @@
  * clears the link list head, marks the terminal link as -1 and bumps the
  * link counter. */
 
+// FUNCTION: GOLD 0x0047e930
+// SIZE: 66
 // FUNCTION: GOLDTL 0x47ddf0
 // SIZE: 66
 // FUNCTION: SERVER 0x1000BD50

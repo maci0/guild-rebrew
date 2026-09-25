@@ -71,6 +71,8 @@ extern unsigned short* g_772e9c;
 
 char __cdecl fcn_00442d50(int, unsigned char);
 
+// FUNCTION: GOLD 0x004d3ae0
+// SIZE: 65
 // FUNCTION: GOLDTL 0x004d4ee0
 // SIZE: 65
 

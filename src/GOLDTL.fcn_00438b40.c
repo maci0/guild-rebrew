@@ -6,6 +6,8 @@ void __cdecl fcn_00438ac0(char* p, int a);
 void __cdecl fcn_00437ac0(int list, char* p, int mask, void(__cdecl* fn)(void));
 void __cdecl fcn_00456df0(void);
 
+// FUNCTION: GOLD 0x0043b790
+// SIZE: 83
 // FUNCTION: GOLDTL 0x438b40
 // SIZE: 83
 void __cdecl fcn_00438b40(char* p, int* v)

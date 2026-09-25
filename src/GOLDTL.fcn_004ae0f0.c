@@ -11,6 +11,8 @@ typedef struct {
 
 extern fcn_004ae0f0_group g_1007bc0[4];
 
+// FUNCTION: GOLD 0x004adfb0
+// SIZE: 49
 // FUNCTION: GOLDTL 0x4ae0f0
 // SIZE: 49
 

@@ -19,6 +19,8 @@ extern int g_dynamic_count;
 /* Finds a record in a linked table by matching type fields.
  * Iterates from base pointer, comparing type1/type2 bytes.
  * Returns pointer to matching record or NULL. */
+// FUNCTION: GOLD 0x004bc5a0
+// SIZE: 80
 // FUNCTION: GOLDTL 0x4bcb80
 // SIZE: 80
 

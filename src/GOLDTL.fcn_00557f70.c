@@ -12,6 +12,8 @@ struct rgba_00557f70 {
 void __cdecl fcn_00417180(int, char*, int, struct rgba_00557f70, float*, int, int, float, float,
                           float, float, float);
 
+// FUNCTION: GOLD 0x0054fec0
+// SIZE: 108
 // FUNCTION: GOLDTL 0x557f70
 // SIZE: 108
 

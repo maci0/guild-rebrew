@@ -15,6 +15,8 @@ int __cdecl sprintf(char* buf, const char* fmt, ...);
 int __cdecl atoi(const char* s);
 void __cdecl fcn_004b2020(int n);
 
+// FUNCTION: GOLD 0x004b2380
+// SIZE: 421
 // FUNCTION: GOLDTL 0x004b24c0
 // SIZE: 421
 Slot* __cdecl fcn_004b24c0(int id)

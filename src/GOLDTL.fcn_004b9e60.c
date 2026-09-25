@@ -11,6 +11,8 @@ unsigned short __cdecl fcn_0042e410(unsigned short);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
+// FUNCTION: GOLD 0x004b9aa0
+// SIZE: 539
 // FUNCTION: GOLDTL 0x4b9e60
 // SIZE: 539
 

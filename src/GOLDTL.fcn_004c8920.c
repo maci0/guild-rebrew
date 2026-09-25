@@ -3,6 +3,8 @@ int __cdecl fcn_005015e0(void*, void*, void*, int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_00502e30(char*, int);
 
+// FUNCTION: GOLD 0x004c7d80
+// SIZE: 160
 // FUNCTION: GOLDTL 0x4c8920
 // SIZE: 160
 

@@ -32,6 +32,8 @@ void fcn_0045e370(deflate_state* s);
 uInt fcn_0045e860(deflate_state* s, IPos cur_match);
 void fcn_0045dea0(z_streamp strm);
 
+// FUNCTION: GOLD 0x00462360
+// SIZE: 832
 // FUNCTION: GOLDTL 0x0045e520
 // SIZE: 832
 

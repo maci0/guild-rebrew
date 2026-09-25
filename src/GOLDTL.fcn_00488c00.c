@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x00489650
+// SIZE: 522
 // FUNCTION: GOLDTL 0x488c00
 // SIZE: 522
 // The second scan indexes g_7f4ca0[i] directly and decrements cnt inside each

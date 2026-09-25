@@ -14,6 +14,8 @@ typedef struct
 extern Rec18 g_68da68[];
 extern Rec18 g_9a9220[];
 
+// FUNCTION: GOLD 0x004e6030
+// SIZE: 121
 // FUNCTION: GOLDTL 0x004e7b70
 // SIZE: 121
 int __cdecl fcn_004e7b70(char* e, Rec18* kind, Rec18* slot)

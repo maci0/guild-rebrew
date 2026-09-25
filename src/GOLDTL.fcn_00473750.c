@@ -7,6 +7,8 @@ typedef struct Tag {
 
 extern Tag g_1011980[6];
 
+// FUNCTION: GOLD 0x00476bf0
+// SIZE: 104
 // FUNCTION: GOLDTL 0x473750
 // SIZE: 104
 void __cdecl fcn_00473750(int id, int val)

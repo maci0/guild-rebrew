@@ -24,6 +24,8 @@ void __cdecl fcn_004fe470(int, int, int, int, int);
 char* __cdecl fcn_00502fe0(int, int, int);
 void __cdecl fcn_004ce9e0(struct rec_4cc590*);
 
+// FUNCTION: GOLD 0x004cba10
+// SIZE: 375
 // FUNCTION: GOLDTL 0x4cc590
 // SIZE: 375
 

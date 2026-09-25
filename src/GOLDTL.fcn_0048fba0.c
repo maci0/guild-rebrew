@@ -7,6 +7,8 @@ extern short g_7f4c0c;
 
 void __cdecl fcn_004c5530(char* msg);
 
+// FUNCTION: GOLD 0x004905f0
+// SIZE: 143
 // FUNCTION: GOLDTL 0x48fba0
 // SIZE: 143
 int __cdecl fcn_0048fba0(char* a1, char* a2, int a3, char* p)

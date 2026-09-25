@@ -2,6 +2,8 @@ float __cdecl fcn_00507f10(char*, int);
 int* __cdecl fcn_004ce610(char*);
 float __cdecl fcn_004ff040(char*);
 
+// FUNCTION: GOLD 0x004cdcf0
+// SIZE: 303
 // FUNCTION: GOLDTL 0x004ce8b0
 // SIZE: 303
 

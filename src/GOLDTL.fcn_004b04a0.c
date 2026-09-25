@@ -5,6 +5,8 @@ int __cdecl fcn_0064eeec(char*);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl fcn_004c51a0(int, int, int, int);
 
+// FUNCTION: GOLD 0x004b0360
+// SIZE: 320
 // FUNCTION: GOLDTL 0x4b04a0
 // SIZE: 320
 
