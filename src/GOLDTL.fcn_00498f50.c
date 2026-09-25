@@ -2,6 +2,8 @@
 
 int __cdecl fcn_004fa5b0(int a1, char* a2, int a3);
 
+// FUNCTION: GOLD 0x499510
+// SIZE: 88
 // FUNCTION: GOLDTL 0x498f50
 // SIZE: 88
 

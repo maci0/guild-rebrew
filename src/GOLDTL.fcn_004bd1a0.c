@@ -8,6 +8,8 @@ typedef struct {
 
 void __cdecl fcn_00442d50(void*, int);
 
+// FUNCTION: GOLD 0x004bcbe0
+// SIZE: 50
 // FUNCTION: GOLDTL 0x4bd1a0
 // SIZE: 50
 

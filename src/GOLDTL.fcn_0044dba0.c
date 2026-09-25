@@ -17,6 +17,8 @@ typedef struct
 
 void __cdecl fcn_00401180(void* stream, void* dst);
 
+// FUNCTION: GOLD 0x0044f270
+// SIZE: 38
 // FUNCTION: GOLDTL 0x44dba0
 // SIZE: 38
 void __cdecl fcn_0044dba0(void* stream, fcn_0044dba0_Ctx* c)

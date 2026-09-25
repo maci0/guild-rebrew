@@ -23,6 +23,8 @@ struct script_427b40 {
 	int result;
 };
 
+// FUNCTION: GOLD 0x004292b0
+// SIZE: 249
 // FUNCTION: GOLDTL 0x427b40
 // SIZE: 249
 

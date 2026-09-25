@@ -10,6 +10,8 @@ extern int g_7e4308;
 extern int g_7e430c;
 extern int g_7e4310;
 
+// FUNCTION: GOLD 0x52ee80
+// SIZE: 124
 // FUNCTION: GOLDTL 0x534520
 // SIZE: 124
 

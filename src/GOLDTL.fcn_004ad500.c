@@ -3,6 +3,8 @@ int __cdecl fcn_004e99c0(int);
 int __cdecl fcn_004e6f10(int);
 float __cdecl fcn_004ec340(unsigned char*, int);
 
+// FUNCTION: GOLD 0x4ad3e0
+// SIZE: 298
 // FUNCTION: GOLDTL 0x4ad500
 // SIZE: 298
 

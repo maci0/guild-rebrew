@@ -18,6 +18,8 @@ struct cell_421350 {
 unsigned short __cdecl fcn_00421890(char*, int, int, int, int, int);
 unsigned short __cdecl fcn_004214c0(char*, int, int, int, int, int);
 
+// FUNCTION: GOLD 0x424f30
+// SIZE: 353
 // FUNCTION: GOLDTL 0x421350
 // SIZE: 353
 

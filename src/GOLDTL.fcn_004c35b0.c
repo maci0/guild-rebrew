@@ -9,6 +9,8 @@ extern fcn_004c35b0_slot g_7f4ca0[768];
 
 void __cdecl fcn_004c3540(fcn_004c35b0_slot*);
 
+// FUNCTION: GOLD 0x004c2ce0
+// SIZE: 50
 // FUNCTION: GOLDTL 0x4c35b0
 // SIZE: 50
 

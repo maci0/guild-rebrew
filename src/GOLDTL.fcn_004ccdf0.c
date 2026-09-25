@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x4cc270
+// SIZE: 192
 // FUNCTION: GOLDTL 0x4ccdf0
 // SIZE: 181
 

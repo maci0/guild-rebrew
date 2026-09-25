@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x584e30
+// SIZE: 512
 // FUNCTION: GOLDTL 0x0058d3f0
 // SIZE: 512
 
@@ -18,6 +20,7 @@ extern int g_67d370;
 extern int g_774654;
 extern char s_6a9748[];
 extern char s_6a9714[];
+extern char s_6a96d8[];
 
 int __cdecl fcn_004f3e60(int, int*);
 void __cdecl fcn_0051af00(void*, int, ...);
@@ -61,7 +64,7 @@ int __cdecl fcn_0058d3f0(int a1, Req* a2)
 		}
 		return 0;
 	}
-	dlg = fcn_00470820(0, 0, 0x6a96d8);
+	dlg = fcn_00470820(0, 0, (int) s_6a96d8);
 	fcn_00473a90(0, 0);
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 0);

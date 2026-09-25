@@ -1,5 +1,7 @@
 // FUNCTION: GOLDTL 0x526070
 // SIZE: 161
+// FUNCTION: GOLD 0x005210d0
+// SIZE: 176
 
 int __cdecl gm_QueryEntitySum(int, int);
 void __cdecl fcn_0051af00(char*, int, int);

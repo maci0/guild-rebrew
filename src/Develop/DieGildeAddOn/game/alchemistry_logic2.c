@@ -193,6 +193,8 @@ extern unsigned char g_connections[];
  * destination or the local, goto chains for block layout, and a
  * /G3../G6 /Ox /Gy /Gf /Op /Za flag sweep. None beat 64/83. */
 
+// FUNCTION: GOLD 0x004eca00
+// SIZE: 160
 // FUNCTION: GOLDTL 0x004ee790
 // SIZE: 160
 // FUNCTION: SERVER 0x1000c1e0

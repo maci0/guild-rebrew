@@ -12,6 +12,8 @@ extern int g_14cbca0;
 extern unsigned int g_14cbcb4;
 extern unsigned char g_6a375c;
 
+// FUNCTION: GOLD 0x47e830
+// SIZE: 112
 // FUNCTION: GOLDTL 0x47dcf0
 // SIZE: 106
 int __cdecl fcn_0047dcf0(char* e)

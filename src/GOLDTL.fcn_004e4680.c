@@ -25,6 +25,8 @@ static __inline int any_pending(void)
 	return 0;
 }
 
+// FUNCTION: GOLD 0x004e2e00
+// SIZE: 82
 // FUNCTION: GOLDTL 0x4e4680
 // SIZE: 82
 

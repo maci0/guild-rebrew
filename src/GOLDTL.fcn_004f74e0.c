@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x4f50f0
+// SIZE: 160
 // FUNCTION: GOLDTL 0x4f74e0
 // SIZE: 153
 
@@ -5,6 +7,7 @@ void* __cdecl fcn_005463a0(int, int, int);
 void* __cdecl fcn_005462a0(void);
 void  __cdecl fcn_005da250(void*, void*);
 void  __cdecl fcn_0051af00(void*, int, int);
+extern char g_679060[];
 
 int __cdecl fcn_004f74e0(void* a1, void* a2)
 {
@@ -28,7 +31,7 @@ int __cdecl fcn_004f74e0(void* a1, void* a2)
 		return 2;
 	}
 	if (*(int*) a2 == 1 && *(char*) ((char*) a1 + 2) == 6) {
-		fcn_0051af00((char*) a2 + 0x14, 0x679060, 0x1d44);
+		fcn_0051af00((char*) a2 + 0x14, (int) g_679060, 0x1d44);
 	}
 	return 2;
 }

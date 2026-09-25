@@ -4,6 +4,8 @@ extern int g_772620;
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
 
+// FUNCTION: GOLD 0x0047dd20
+// SIZE: 58
 // FUNCTION: GOLDTL 0x47d1e0
 // SIZE: 58
 

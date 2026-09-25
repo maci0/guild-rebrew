@@ -20,6 +20,8 @@ struct range_4b0c90 {
 
 // FUNCTION: GOLDTL 0x4b0c90
 // SIZE: 496
+// FUNCTION: GOLD 0x004b0b50
+// SIZE: 496
 
 int __cdecl fcn_004b0c90(int a1, int a2, char* a3)
 {
