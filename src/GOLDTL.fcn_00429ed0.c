@@ -15,6 +15,8 @@ extern struct cmd_429ed0* g_6b7e9c;
 void __cdecl fcn_0041d9e0(const char*);
 int __cdecl fcn_00429e60(const char*);
 
+// FUNCTION: GOLD 0x42b5b0
+// SIZE: 257
 // FUNCTION: GOLDTL 0x429ed0
 // SIZE: 257
 

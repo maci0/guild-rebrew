@@ -15,6 +15,8 @@ struct host_57eba0 {
 
 extern struct host_57eba0* g_665f08;
 
+// FUNCTION: GOLD 0x576600
+// SIZE: 125
 // FUNCTION: GOLDTL 0x57eba0
 // SIZE: 125
 
