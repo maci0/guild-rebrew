@@ -19,6 +19,8 @@ int __cdecl fcn_00507b00(int job);
 #define MAXF(a, b) (((a) > (b)) ? (a) : (b))
 #define MINF(a, b) (((a) < (b)) ? (a) : (b))
 
+// FUNCTION: GOLD 0x00491be0
+// SIZE: 184
 // FUNCTION: GOLDTL 0x4911b0
 // SIZE: 184
 int __cdecl fcn_004911b0(Ent* e, int a2, int* out)

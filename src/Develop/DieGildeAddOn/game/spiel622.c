@@ -478,6 +478,8 @@ unsigned short __cdecl gm_GetEntityType(short* entity)
 /* Walks an entity chain, calling a callback for each node.
  * Traverses linked entity lists for processing. */
 
+// FUNCTION: GOLD 0x0050a0f0
+// SIZE: 83
 // FUNCTION: GOLDTL 0x0050d570
 // SIZE: 83
 // FUNCTION: SERVER 0x10019b80

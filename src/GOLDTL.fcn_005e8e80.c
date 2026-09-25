@@ -40,6 +40,8 @@ extern int g_6b7fac;
 
 V4* __cdecl fcn_005e8850(void);
 
+// FUNCTION: GOLD 0x005dc2f0
+// SIZE: 99
 // FUNCTION: GOLDTL 0x005e8de0
 // SIZE: 99
 
