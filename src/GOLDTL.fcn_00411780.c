@@ -1,3 +1,7 @@
+// GLOBAL: GOLD 0x5f3244
+extern char g_6772c8[];
+// FUNCTION: GOLD 0x004106d0
+// SIZE: 64
 // FUNCTION: GOLDTL 0x411780
 // SIZE: 64
 
@@ -12,5 +16,5 @@ void __cdecl fcn_00411780(int a1, int a2, char* fmt, ...)
 	va_start(va, fmt);
 	s = buf;
 	s += wsprintfA(s, fmt, va);
-	wsprintfA(s, (char*) 0x6772c8, a2);
+	wsprintfA(s, g_6772c8, a2);
 }

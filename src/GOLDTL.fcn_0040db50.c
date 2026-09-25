@@ -1,3 +1,7 @@
+// GLOBAL: GOLD 0x5f216c
+extern char g_6761ec[];
+// FUNCTION: GOLD 0x0040cc20
+// SIZE: 85
 // FUNCTION: GOLDTL 0x40db50
 // SIZE: 85
 
@@ -13,7 +17,7 @@ int __cdecl fcn_0040db50(char** a1)
 
 	p = *a1;
 	if (p == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), (char*) 0x6761ec);
+		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), g_6761ec);
 	} else {
 		q = *(char**) (p + 0x128);
 		if (q != 0) {

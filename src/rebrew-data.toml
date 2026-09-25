@@ -4402,3 +4402,87 @@ section = ".data"
 
 ["GOLD.0x005ebb74"]
 section = ".rdata"
+
+["GOLD.0x005f10f8"]
+section = ".data"
+
+["GOLD.0x014eaae0"]
+section = ".data"
+
+["GOLD.0x005f14c4"]
+section = ".data"
+
+["GOLD.0x005f1b3c"]
+section = ".data"
+
+["GOLD.0x005f1b68"]
+section = ".data"
+
+["GOLD.0x005f1f00"]
+section = ".data"
+
+["GOLD.0x005f20fc"]
+section = ".data"
+
+["GOLD.0x005f216c"]
+section = ".data"
+
+["GOLD.0x005f1230"]
+section = ".data"
+
+["GOLD.0x005f2614"]
+section = ".data"
+
+["GOLD.0x005f26a4"]
+section = ".data"
+
+["GOLD.0x005f28a4"]
+section = ".data"
+
+["GOLD.0x005f3244"]
+section = ".data"
+
+["GOLD.0x006310ec"]
+section = ".data"
+
+["GOLD.0x005f38a0"]
+section = ".data"
+
+["GOLD.0x00631130"]
+section = ".data"
+
+["GOLD.0x01460ae0"]
+section = ".data"
+
+["GOLD.0x01460af0"]
+section = ".data"
+
+["GOLD.0x00633160"]
+section = ".data"
+
+["GOLD.0x006332a8"]
+section = ".data"
+
+["GOLD.0x00633198"]
+section = ".data"
+
+["GOLD.0x01460a20"]
+section = ".data"
+
+["GOLD.0x006332ac"]
+section = ".data"
+
+["GOLD.0x014607c0"]
+section = ".data"
+
+["GOLD.0x005eb010"]
+section = ".rdata"
+
+["GOLD.0x005eb2c8"]
+section = ".rdata"
+
+["GOLD.0x005eb2b0"]
+section = ".rdata"
+
+["GOLD.0x005eb2b8"]
+section = ".rdata"
