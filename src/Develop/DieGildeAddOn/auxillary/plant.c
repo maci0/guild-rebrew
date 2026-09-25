@@ -67,6 +67,8 @@ char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 	}
 	return (char*) 0;
 }
+// FUNCTION: GOLDTL 0x4bcc80
+// SIZE: 103
 // FUNCTION: SERVER 0x10014F80
 // find_zone_record
 int __cdecl find_zone_record(char* base, int x, int y)
@@ -104,6 +106,8 @@ int __cdecl find_zone_record(char* base, int x, int y)
  * records for a matching grid position. Returns record index
  * or -1 if not found. */
 
+// FUNCTION: GOLDTL 0x4bccf0
+// SIZE: 163
 // FUNCTION: SERVER 0x10014ff0
 // plt_CheckZoneAvailability
 int __cdecl plt_CheckZoneAvailability(int zone_table, unsigned int x, unsigned int y, int zone_type)
