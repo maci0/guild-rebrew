@@ -1,6 +1,7 @@
 #include "zutil.h"
 #include "inftrees.h"
 
+// SIZE 0x4
 struct internal_state {int dummy;};
 
 #define exop word.what.Exop
