@@ -1,0 +1,61 @@
+// FUNCTION: GOLDTL 0x00412830
+// SIZE: 208
+
+extern int g_6b5c94;
+extern int g_14ce8c0[];
+extern int g_14cf900[];
+
+void __cdecl fcn_00412830(unsigned char mask)
+{
+	if (g_6b5c94 != 0) {
+		if (mask & 0x1) {
+			g_14ce8c0[11] = 0;
+			g_14cf900[11] = 0;
+		}
+		if (mask & 0x2) {
+			g_14ce8c0[8] = 0;
+			g_14cf900[8] = 0;
+		}
+		if (mask & 0x4) {
+			g_14ce8c0[9] = 0;
+			g_14cf900[9] = 0;
+		}
+		if (mask & 0x8) {
+			g_14ce8c0[6] = 0;
+			g_14cf900[6] = 0;
+		}
+		if (mask & 0x10) {
+			g_14ce8c0[3] = 0;
+			g_14cf900[3] = 0;
+		}
+		if (mask & 0x20) {
+			g_14ce8c0[4] = 0;
+			g_14cf900[4] = 0;
+		}
+	} else {
+		if (mask & 0x1) {
+			g_14ce8c0[6] = 0;
+			g_14cf900[6] = 0;
+		}
+		if (mask & 0x2) {
+			g_14ce8c0[3] = 0;
+			g_14cf900[3] = 0;
+		}
+		if (mask & 0x4) {
+			g_14ce8c0[4] = 0;
+			g_14cf900[4] = 0;
+		}
+		if (mask & 0x8) {
+			g_14ce8c0[11] = 0;
+			g_14cf900[11] = 0;
+		}
+		if (mask & 0x10) {
+			g_14ce8c0[8] = 0;
+			g_14cf900[8] = 0;
+		}
+		if (mask & 0x20) {
+			g_14ce8c0[9] = 0;
+			g_14cf900[9] = 0;
+		}
+	}
+}

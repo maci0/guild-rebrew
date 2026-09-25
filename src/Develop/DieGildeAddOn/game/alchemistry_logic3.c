@@ -21,6 +21,8 @@ dispatch_fn g_chain_handler_table[106] = {
 // FUNCTION: GOLDTL 0x499a50
 // SIZE: 128
 
+// FUNCTION: GOLDTL 0x4c4d30
+// SIZE: 130
 // FUNCTION: SERVER 0x1000ca00
 
 // ahm_ProcessEntityChain

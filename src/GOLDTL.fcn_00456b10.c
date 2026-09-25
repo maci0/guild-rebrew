@@ -1,0 +1,45 @@
+// FUNCTION: GOLDTL 0x456b10
+// SIZE: 112
+
+typedef struct IUnk IUnk;
+// SIZE 0xc
+typedef struct IUnkVtbl {
+	long (__stdcall* QueryInterface)(IUnk*, void*, void**);
+	unsigned long (__stdcall* AddRef)(IUnk*);
+	unsigned long (__stdcall* Release)(IUnk*);
+} IUnkVtbl;
+// SIZE 0x4
+struct IUnk {
+	IUnkVtbl* v;
+};
+
+extern unsigned long g_14ce728;
+
+void __cdecl fcn_0045bfb0(int);
+
+void __cdecl fcn_00456b10(char* s)
+{
+	int* p;
+
+	if (*(int*) s != 0) {
+		p = *(int**) (s + 0xc);
+		if (p != 0) {
+			p[1] = 0;
+			p[0] = 0;
+			p[3] = 0;
+		}
+		fcn_0045bfb0(*(int*) s);
+		*(int*) s = 0;
+		*(int**) (s + 0xc) = 0;
+	}
+	if (*(IUnk**) (s + 0x80) != 0) {
+		g_14ce728 = (*(IUnk**) (s + 0x80))->v->Release(*(IUnk**) (s + 0x80));
+		*(IUnk**) (s + 0x80) = 0;
+	}
+	if (*(IUnk**) (s + 0x84) != 0) {
+		g_14ce728 = (*(IUnk**) (s + 0x84))->v->Release(*(IUnk**) (s + 0x84));
+		*(IUnk**) (s + 0x84) = 0;
+	}
+	*(int*) (s + 0x8c) = 0;
+	*(int*) (s + 0x88) = 0;
+}
