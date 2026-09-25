@@ -42,6 +42,8 @@ int __cdecl fcn_004b4ec0(char* t, Spec* s);
 int __cdecl fcn_004b4f00(char* t, Spec* s);
 int __cdecl fcn_004b5020(char* t, Spec* s);
 
+// FUNCTION: GOLD 0x4b4f00
+// SIZE: 608
 // FUNCTION: GOLDTL 0x004b5070
 // SIZE: 605
 int __cdecl fcn_004b5070(Cmd* c)

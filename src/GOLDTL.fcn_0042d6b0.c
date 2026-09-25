@@ -23,6 +23,8 @@ void __cdecl fcn_00430580(int f);
 int* __cdecl fcn_0041db70(int size, const char* tag);
 void __cdecl fcn_0041ddd0(void* p);
 
+// FUNCTION: GOLD 0x42e360
+// SIZE: 464
 // FUNCTION: GOLDTL 0x42d6b0
 // SIZE: 454
 

@@ -28,6 +28,8 @@ struct blend_4357b0 {
 	char pad6e[2];
 };
 
+// FUNCTION: GOLD 0x459190
+// SIZE: 352
 // FUNCTION: GOLDTL 0x4357b0
 // SIZE: 342
 void __cdecl fcn_004357b0(struct blend_4357b0* b, float* w0, float* w1)

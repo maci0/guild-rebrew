@@ -583,6 +583,8 @@ char* __cdecl gm_FindEntityByOwner(int arg1)
 /* Finds an entity by its owner. Searches for an entity
  * whose owner field matches the given ID. */
 
+// FUNCTION: GOLD 0x50aaf0
+// SIZE: 48
 // FUNCTION: GOLDTL 0x0050df70
 // SIZE: 48
 // FUNCTION: SERVER 0x10019CD0

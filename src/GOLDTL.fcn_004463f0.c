@@ -23,6 +23,8 @@ extern float g_67a964;
 
 void __cdecl fcn_00438920(float, float, Col);
 
+// FUNCTION: GOLD 0x44a170
+// SIZE: 336
 // FUNCTION: GOLDTL 0x004463f0
 // SIZE: 336
 

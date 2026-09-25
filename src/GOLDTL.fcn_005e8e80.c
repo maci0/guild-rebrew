@@ -61,6 +61,8 @@ int __cdecl fcn_005e8de0(float a, float b, float* out)
 	return 1;
 }
 
+// FUNCTION: GOLD 0x5dc390
+// SIZE: 341
 // FUNCTION: GOLDTL 0x005e8e80
 // SIZE: 341
 

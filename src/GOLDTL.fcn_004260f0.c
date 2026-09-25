@@ -10,6 +10,8 @@ extern char* g_6b7eb8;
 extern struct sym_4260f0* g_14cb8e0;
 extern int g_14cb8e4;
 
+// FUNCTION: GOLD 0x4278d0
+// SIZE: 336
 // FUNCTION: GOLDTL 0x4260f0
 // SIZE: 328
 void* __cdecl fcn_004260f0(char* ctx, char* name)

@@ -152,6 +152,8 @@ Record* __cdecl gm_FindRecordById(int id)
 /* Cleans up object entities. Frees inventory objects and
  * linked item chains from all active entities. */
 
+// FUNCTION: GOLD 0x4fe9c0
+// SIZE: 135
 // FUNCTION: GOLDTL 0x00501550
 // SIZE: 135
 // FUNCTION: SERVER 0x10015E00

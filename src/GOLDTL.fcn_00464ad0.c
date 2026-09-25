@@ -127,6 +127,8 @@ int fcn_004647e0(FILE* fin, uLong* pX);
 int fcn_00464870(FILE* fin, uLong* pX);
 void fcn_00464e10(uLong ulDosDate, tm_unz* ptm);
 
+// FUNCTION: GOLD 0x467c90
+// SIZE: 832
 // FUNCTION: GOLDTL 0x00464ad0
 // SIZE: 832
 

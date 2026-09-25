@@ -28,6 +28,8 @@ char* __cdecl fcn_0041db70(int, const char*);
 void __cdecl fcn_00406210(int, void*, int, const char*, int);
 int __cdecl fcn_00408220(float);
 
+// FUNCTION: GOLD 0x40afb0
+// SIZE: 496
 // FUNCTION: GOLDTL 0x40bde0
 // SIZE: 484
 

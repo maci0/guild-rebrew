@@ -22,6 +22,8 @@ Ent* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl fcn_0042e410(int n);
 
+// FUNCTION: GOLD 0x4a0410
+// SIZE: 464
 // FUNCTION: GOLDTL 0x0049fe50
 // SIZE: 455
 int __cdecl fcn_0049fe50(Ent* e)

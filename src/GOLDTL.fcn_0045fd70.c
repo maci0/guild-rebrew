@@ -62,6 +62,8 @@ extern const uInt g_67d0b0[];
  */
 
 
+// FUNCTION: GOLD 0x463860
+// SIZE: 3152
 // FUNCTION: GOLDTL 0x0045fd70
 // SIZE: 3152
 
