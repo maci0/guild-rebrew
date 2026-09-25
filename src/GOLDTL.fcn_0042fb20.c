@@ -10,6 +10,8 @@ void __cdecl fcn_0042ed00(char*, void*, void*, unsigned long, unsigned long, int
 int __cdecl fcn_00464eb0(void*);
 void __cdecl fcn_00464a30(void*);
 
+// FUNCTION: GOLD 0x00430130
+// SIZE: 294
 // FUNCTION: GOLDTL 0x42fb20
 // SIZE: 294
 

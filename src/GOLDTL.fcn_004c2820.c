@@ -5,6 +5,8 @@ typedef struct {
 
 extern fcn_004c2820_group g_688118[];
 
+// FUNCTION: GOLD 0x004c1fc0
+// SIZE: 64
 // FUNCTION: GOLDTL 0x4c2820
 // SIZE: 64
 

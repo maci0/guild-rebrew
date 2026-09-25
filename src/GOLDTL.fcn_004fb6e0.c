@@ -4,6 +4,8 @@ void __cdecl fcn_004c6a00(void* msg);
 
 extern int g_7f4c00;
 
+// FUNCTION: GOLD 0x004f9190
+// SIZE: 132
 // FUNCTION: GOLDTL 0x004fb650
 // SIZE: 132
 void __cdecl fcn_004fb650(int a1, int a2, int a3, int a4)

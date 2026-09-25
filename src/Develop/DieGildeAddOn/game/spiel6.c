@@ -121,6 +121,8 @@ int __cdecl gm_GetBuildingTypeCategory(int arg1)
 /* Searches a specific entity table (type 0x67) for a matching
  * entry. Used for specialized entity lookups. */
 
+// FUNCTION: GOLD 0x00502020
+// SIZE: 64
 // FUNCTION: GOLDTL 0x00504e70
 // SIZE: 64
 // FUNCTION: SERVER 0x10017A70

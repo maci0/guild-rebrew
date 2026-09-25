@@ -33,6 +33,8 @@ void __cdecl fcn_005b1e20(char* p)
 float __cdecl fcn_005b1910(char* o);
 extern float g_662cf8;
 
+// FUNCTION: GOLD 0x005a89c0
+// SIZE: 111
 // FUNCTION: GOLDTL 0x005b1e40
 // SIZE: 111
 

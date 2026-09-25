@@ -2,6 +2,8 @@
 
 char* __cdecl fcn_0064f026(char* s, const char* delim);
 
+// FUNCTION: GOLD 0x0044ee20
+// SIZE: 75
 // FUNCTION: GOLDTL 0x44d700
 // SIZE: 75
 void __cdecl fcn_0044d700(int unused, char* out)

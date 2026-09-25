@@ -11,6 +11,8 @@ float __cdecl fcn_00451380(float*, float*);
 void __cdecl fcn_00438cb0(void*, float*);
 void __cdecl fcn_00438b40(void*, float*);
 
+// FUNCTION: GOLD 0x0040ba90
+// SIZE: 277
 // FUNCTION: GOLDTL 0x40c9b0
 // SIZE: 277
 

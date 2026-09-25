@@ -8,6 +8,8 @@ typedef struct Card {
 
 extern Card g_1007ce0[24];
 
+// FUNCTION: GOLD 0x004a76d0
+// SIZE: 141
 // FUNCTION: GOLDTL 0x4a77f0
 // SIZE: 141
 int __cdecl fcn_004a77f0(int* h, int a2)

@@ -18,6 +18,8 @@ struct msg_4ab3e0 {
 };
 // SIZE 0x14
 
+// FUNCTION: GOLD 0x004ab2c0
+// SIZE: 288
 // FUNCTION: GOLDTL 0x4ab3e0
 // SIZE: 288
 

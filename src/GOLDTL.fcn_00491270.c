@@ -18,6 +18,8 @@ extern int g_7f4c00;
 
 unsigned short __cdecl fcn_0042e410(int n);
 
+// FUNCTION: GOLD 0x00491ca0
+// SIZE: 202
 // FUNCTION: GOLDTL 0x491270
 // SIZE: 202
 int __cdecl fcn_00491270(Ent* e, int a2, int* out)

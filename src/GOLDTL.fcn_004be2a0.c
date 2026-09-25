@@ -15,6 +15,8 @@ struct fcn_004be2a0_node {
 
 fcn_004be2a0_node* __cdecl fcn_004be1f0(fcn_004be2a0_node*);
 
+// FUNCTION: GOLD 0x004bda00
+// SIZE: 81
 // FUNCTION: GOLDTL 0x4be2a0
 // SIZE: 81
 

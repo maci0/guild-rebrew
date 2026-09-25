@@ -67,6 +67,8 @@ int __cdecl fcn_00464870(FILE* fin, uLong* pX);
 int __cdecl fcn_004647e0(FILE* fin, uLong* pX);
 int __cdecl fcn_00464e60(unzFile file);
 
+// FUNCTION: GOLD 0x00467830
+// SIZE: 398
 // FUNCTION: GOLDTL 0x464650
 // SIZE: 398
 unzFile __cdecl fcn_00464650(const char* path)

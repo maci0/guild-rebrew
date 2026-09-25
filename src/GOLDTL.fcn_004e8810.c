@@ -12,6 +12,8 @@ extern struct job_4e8810 g_9a9220[30];
 char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_005b2900(char*, char*, char*);
 
+// FUNCTION: GOLD 0x004e6c50
+// SIZE: 294
 // FUNCTION: GOLDTL 0x4e8810
 // SIZE: 294
 

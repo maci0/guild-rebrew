@@ -251,6 +251,8 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 	}
 	return 0;
 }
+// FUNCTION: GOLD 0x004ecbc0
+// SIZE: 112
 // FUNCTION: GOLDTL 0x004ee9c0
 // SIZE: 112
 // FUNCTION: SERVER 0x1000C310
@@ -377,6 +379,8 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 /* Allocates and initializes the alchemy info structure for
  * a building. Sets up recipe slots and ingredient storage. */
 
+// FUNCTION: GOLD 0x004ed040
+// SIZE: 304
 // FUNCTION: GOLDTL 0x004eee40
 // SIZE: 304
 // FUNCTION: SERVER 0x1000c4d0

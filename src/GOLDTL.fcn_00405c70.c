@@ -5,6 +5,8 @@ unsigned short __cdecl fcn_0042e410(int);
 char __cdecl fcn_00407e30(char*, float*, float*, int, int, int*, int*, int, int);
 void __cdecl fcn_0045b920(char*, int, int, int);
 
+// FUNCTION: GOLD 0x00405160
+// SIZE: 247
 // FUNCTION: GOLDTL 0x405c70
 // SIZE: 247
 

@@ -35,6 +35,8 @@ __declspec(dllimport) void __stdcall Sleep(unsigned long);
 
 char* __cdecl fcn_0041f9b0(int);
 
+// FUNCTION: GOLD 0x00423390
+// SIZE: 270
 // FUNCTION: GOLDTL 0x41f350
 // SIZE: 270
 

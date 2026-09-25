@@ -18,6 +18,8 @@ extern fcn_004a8810_game* g_1007cd4;
 
 unsigned short __cdecl fcn_0042e410(short);
 
+// FUNCTION: GOLD 0x004a86f0
+// SIZE: 98
 // FUNCTION: GOLDTL 0x4a8810
 // SIZE: 98
 

@@ -1,4 +1,6 @@
 extern unsigned int g_7e46ac;
+// FUNCTION: GOLD 0x0052bba0
+// SIZE: 70
 // FUNCTION: GOLDTL 0x005312d0
 // SIZE: 70
 

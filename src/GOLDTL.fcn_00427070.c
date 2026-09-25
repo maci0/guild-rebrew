@@ -38,6 +38,8 @@ void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 #define FRAME_427070 (*(struct frame_427070**) (g_6b7e98 + 0xc28))
 #define LEX_427070 (*(int*) (g_6b7e98 + 0x118))
 
+// FUNCTION: GOLD 0x004287e0
+// SIZE: 513
 // FUNCTION: GOLDTL 0x427070
 // SIZE: 513
 

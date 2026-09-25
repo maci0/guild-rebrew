@@ -10,6 +10,8 @@ extern unsigned char g_773d75;
 int __cdecl fcn_0050dac0(unsigned short id);
 int __cdecl fcn_0050b810(int a, unsigned char b);
 
+// FUNCTION: GOLD 0x0048e9e0
+// SIZE: 188
 // FUNCTION: GOLDTL 0x48df90
 // SIZE: 188
 int __cdecl fcn_0048df90(Ent* e, char* a2, char* a3)

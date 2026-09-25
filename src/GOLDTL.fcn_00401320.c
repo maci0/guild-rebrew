@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x004012e0
+// SIZE: 55
 // FUNCTION: GOLDTL 0x401320
 // SIZE: 55
 // Client twin of GOLD's fcn_00401320 (0x401320, 23 B): the client calls

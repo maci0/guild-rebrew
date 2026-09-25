@@ -21,6 +21,8 @@ __declspec(dllimport) unsigned long __stdcall GetLastError(void);
 __declspec(dllimport) unsigned long __stdcall FormatMessageA(unsigned long, const void*, unsigned long, unsigned long, char*, unsigned long, void*);
 __declspec(dllimport) void* __stdcall LocalFree(void*);
 
+// FUNCTION: GOLD 0x00401d50
+// SIZE: 254
 // FUNCTION: GOLDTL 0x402220
 // SIZE: 254
 

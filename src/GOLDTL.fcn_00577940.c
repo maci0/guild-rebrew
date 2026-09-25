@@ -11,6 +11,8 @@ struct info_577940 {
 	char pad3[8];
 };
 
+// FUNCTION: GOLD 0x0056f4f0
+// SIZE: 124
 // FUNCTION: GOLDTL 0x577940
 // SIZE: 124
 

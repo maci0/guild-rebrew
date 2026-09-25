@@ -2,6 +2,8 @@ int __cdecl fcn_00508eb0(unsigned short id, int a2);
 float __cdecl fcn_0050f980(int a, int b, int c);
 float __cdecl gm_RandomFloat01(void);
 
+// FUNCTION: GOLD 0x00494a20
+// SIZE: 139
 // FUNCTION: GOLDTL 0x4943e0
 // SIZE: 139
 int __cdecl fcn_004943e0(unsigned short* a, unsigned short* b)

@@ -14,6 +14,8 @@ struct s_1041d80 {
 
 extern struct s_1041d80 g_1041d80[7];
 
+// FUNCTION: GOLD 0x00525980
+// SIZE: 182
 // FUNCTION: GOLDTL 0x52a7d0
 // SIZE: 182
 

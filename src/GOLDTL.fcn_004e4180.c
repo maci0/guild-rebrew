@@ -8,6 +8,8 @@ void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4910(void);
 void __cdecl fcn_004e4eb0(void);
 
+// FUNCTION: GOLD 0x004e2860
+// SIZE: 165
 // FUNCTION: GOLDTL 0x004e4180
 // SIZE: 165
 

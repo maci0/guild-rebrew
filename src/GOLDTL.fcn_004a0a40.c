@@ -16,6 +16,8 @@ int __cdecl fcn_0047d220(char* e);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e, int a5, int a6, int a7);
 
+// FUNCTION: GOLD 0x004a1000
+// SIZE: 356
 // FUNCTION: GOLDTL 0x004a0a40
 // SIZE: 356
 int __cdecl fcn_004a0a40(float* s1, float* s2, int idx, char* e, int flag, int a6, int a7)

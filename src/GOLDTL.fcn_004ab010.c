@@ -12,6 +12,8 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 int __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
 
+// FUNCTION: GOLD 0x004aaef0
+// SIZE: 192
 // FUNCTION: GOLDTL 0x4ab010
 // SIZE: 192
 int __cdecl fcn_004ab010(unsigned short* e, char* o1, char* o2)

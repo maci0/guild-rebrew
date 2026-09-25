@@ -11,6 +11,8 @@ extern char* g_6b7e98;
 extern int g_6b7eb0;
 extern struct log_425bf0* g_14cb8f0;
 
+// FUNCTION: GOLD 0x004273d0
+// SIZE: 416
 // FUNCTION: GOLDTL 0x425bf0
 // SIZE: 416
 

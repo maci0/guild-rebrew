@@ -38,6 +38,8 @@
 
 void __cdecl fcn_00464350(deflate_state* s);
 
+// FUNCTION: GOLD 0x00465f70
+// SIZE: 517
 // FUNCTION: GOLDTL 0x462b90
 // SIZE: 517
 void __cdecl fcn_00462b90(deflate_state* s)

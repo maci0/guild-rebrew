@@ -147,6 +147,8 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 /* Initializes entity slots to default/empty values. Zeros
  * link fields and sets capacity counters. */
 
+// FUNCTION: GOLD 0x00503e80
+// SIZE: 81
 // FUNCTION: GOLDTL 0x00506cd0
 // SIZE: 81
 // FUNCTION: SERVER 0x100180D0

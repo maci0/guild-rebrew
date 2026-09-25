@@ -2,6 +2,8 @@
 
 int __cdecl fcn_00461560(void* z);
 
+// FUNCTION: GOLD 0x00468630
+// SIZE: 129
 // FUNCTION: GOLDTL 0x465630
 // SIZE: 129
 int __cdecl fcn_00465630(char* s)

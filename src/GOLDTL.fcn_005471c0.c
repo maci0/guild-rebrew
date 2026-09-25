@@ -29,6 +29,8 @@ struct msg {
 	char pad5[0x9b];
 };
 
+// FUNCTION: GOLD 0x0053f3f0
+// SIZE: 211
 // FUNCTION: GOLDTL 0x5471c0
 // SIZE: 211
 

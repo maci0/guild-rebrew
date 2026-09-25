@@ -405,6 +405,8 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 	return sum;
 }
 
+// FUNCTION: GOLD 0x00509f80
+// SIZE: 102
 // FUNCTION: GOLDTL 0x0050d3c0
 // SIZE: 102
 // FUNCTION: SERVER 0x10019a70
@@ -433,6 +435,8 @@ int __cdecl gm_EntityQuerySum(int arg1)
 /* Resolves a parent entity reference. Follows entity chain
  * links to find the parent. Returns parent pointer. */
 
+// FUNCTION: GOLD 0x0050a050
+// SIZE: 96
 // FUNCTION: GOLDTL 0x0050d490
 // SIZE: 96
 // FUNCTION: SERVER 0x10019ae0
@@ -456,6 +460,8 @@ short* __cdecl gm_ResolveParentEntity(short* entity)
 /* Gets the type (class) of an entity as an unsigned short.
  * Reads from the entity's type field. */
 
+// FUNCTION: GOLD 0x0050a0b0
+// SIZE: 64
 // FUNCTION: GOLDTL 0x0050d530
 // SIZE: 64
 // FUNCTION: SERVER 0x10019b40
@@ -729,6 +735,8 @@ limited:
 	return size < requested ? size : requested;
 }
 
+// FUNCTION: GOLD 0x0050ad70
+// SIZE: 400
 // FUNCTION: GOLDTL 0x0050e1f0
 // SIZE: 400
 // FUNCTION: SERVER 0x10019ed0

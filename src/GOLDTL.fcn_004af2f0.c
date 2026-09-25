@@ -98,6 +98,8 @@ int __cdecl fcn_004ae210(int a1)
 	return 0;
 }
 
+// FUNCTION: GOLD 0x004ae160
+// SIZE: 273
 // FUNCTION: GOLDTL 0x4ae2a0
 // SIZE: 273
 
@@ -157,6 +159,8 @@ int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
 }
 #pragma optimize("", on)
 
+// FUNCTION: GOLD 0x004ae280
+// SIZE: 278
 // FUNCTION: GOLDTL 0x4ae3c0
 // SIZE: 278
 
@@ -322,6 +326,8 @@ send:
 }
 #pragma optimize("", on)
 
+// FUNCTION: GOLD 0x004ae600
+// SIZE: 761
 // FUNCTION: GOLDTL 0x4ae740
 // SIZE: 761
 
@@ -438,6 +444,8 @@ send:
 }
 #pragma optimize("", on)
 
+// FUNCTION: GOLD 0x004ae900
+// SIZE: 764
 // FUNCTION: GOLDTL 0x4aea40
 // SIZE: 764
 
@@ -554,6 +562,8 @@ send:
 }
 #pragma optimize("", on)
 
+// FUNCTION: GOLD 0x004aec00
+// SIZE: 772
 // FUNCTION: GOLDTL 0x4aed40
 // SIZE: 772
 
@@ -849,6 +859,8 @@ send:
 }
 #pragma optimize("", on)
 
+// FUNCTION: GOLD 0x004afc30
+// SIZE: 405
 // FUNCTION: GOLDTL 0x4afd70
 // SIZE: 405
 
