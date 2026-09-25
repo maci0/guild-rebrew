@@ -193,6 +193,8 @@ extern unsigned char g_connections[];
  * destination or the local, goto chains for block layout, and a
  * /G3../G6 /Ox /Gy /Gf /Op /Za flag sweep. None beat 64/83. */
 
+// FUNCTION: GOLDTL 0x004ee790
+// SIZE: 160
 // FUNCTION: SERVER 0x1000c1e0
 // ahm_ApplyColorComponent
 
@@ -247,6 +249,8 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 	}
 	return 0;
 }
+// FUNCTION: GOLDTL 0x004ee9c0
+// SIZE: 112
 // FUNCTION: SERVER 0x1000C310
 // ahm_SlotClearMatch
 

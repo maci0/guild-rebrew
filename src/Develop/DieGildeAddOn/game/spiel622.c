@@ -405,6 +405,8 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 	return sum;
 }
 
+// FUNCTION: GOLDTL 0x0050d3c0
+// SIZE: 102
 // FUNCTION: SERVER 0x10019a70
 // gm_EntityQuerySum
 
