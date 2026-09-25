@@ -98,12 +98,9 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	memset(grave, 0, 0x21c);
 	/* The 0xffff store goes through `grave` and the +4 store through the
 	 * symbol: c2 cannot prove the two disjoint, so the +4 store depends on
-	 * this one, which lifts its scheduling priority to 41, between the
-	 * `or eax,-1` (42) and everything else, giving the reference's
-	 * `or eax,-1; mov word ptr [ebp],0xffff` at 0x10011db0.  `volatile` here
-	 * makes the store a barrier that holds the `or` behind it.  The later
-	 * slot-index store goes through the symbol, not `grave`, or msvc6 drops
-	 * this store as dead. */
+	 * this one, giving the reference's `or eax,-1; mov word ptr [ebp],0xffff`
+	 * at 0x10011db0.  The later slot-index store goes through the symbol,
+	 * not `grave`, or msvc6 drops this store as dead. */
 	*(unsigned short*) grave = 0xffff;
 	*(int*) ((char*) g_slot_table + 4 + off) = -1;
 	/* A loop, not memset: msvc6 turns it into the same rep stosd, but the
@@ -113,40 +110,46 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	 * through the raw address it is `add edx,0x100358fc`. */
 	for (j = 0; j < 8; j++)
 		*(int*) (g_slot_table + 0x5c + off + j * 4) = -1;
-	/* The citizen bump ahead of the object-id bump is what hoists its load
-	 * into edi above the entity stores (0x10011dd2); after it, or through a
-	 * local copy, msvc6 sinks the load to a load-inc-store beside the store. */
+	/* Stores in the reference's order, compiled without /Ow.  Plain /O2
+	 * chains no stores, so equal-priority stores issue in source order.
+	 * The slot-index store through the symbol may alias every later `grave`
+	 * store and lifts it above them.  The citizen store's only successor is
+	 * the `req` read, which may alias it, so it ties with the +2 store and
+	 * issues right after the slot index (0x10011dff).  The byte copy is a
+	 * named local: as a colouring candidate it takes ecx over the range of
+	 * the constant 1, which moves the 1 to dl and hoists the `req` reload
+	 * to 0x10011df5 (shapes 201).  Inline, the 1 takes cl and the reload
+	 * edx; a plain read hoists above the counter stores. */
 	{
+		unsigned char type;
+
 		*(int*) (grave + 0x170) = (int) entity;
 		*(int*) (grave + 0x16c) = (int) entity;
 		g_citizen_count++;
 		*(int*) (grave + 4) = g_next_object_id++;
-		*(volatile unsigned short*) ((char*) g_slot_table + off) = (unsigned short) chosen;
+		*(unsigned short*) ((char*) g_slot_table + off) = (unsigned short) chosen;
+		*(unsigned char*) (grave + 2) = 0x14;
+		*(int*) (grave + 0x1f0) = 0;
+		*(int*) (grave + 0x210) = -1;
+		*(unsigned char*) (grave + 0x215) = 0;
+		*(unsigned char*) (grave + 0x216) = 0;
+		*(unsigned char*) (grave + 0x217) = 0;
+		*(unsigned char*) (grave + 0x218) = 1;
+		*(int*) (grave + 0x1e4) = 0x3f800000; /* 1.0f */
+		*(unsigned char*) (grave + 8) = 0x64;
+		*(unsigned short*) (grave + 0xa) = 0x10;
+		*(unsigned char*) (grave + 0x164) = 0;
+		*(unsigned char*) (grave + 0x166) = 0;
+		type = *(volatile unsigned char*) ((char*) req + 0x15);
+		*(unsigned char*) (grave + 0x165) = type;
+		*(unsigned char*) (grave + 0x1f4) = 0;
+		*(int*) (grave + 0x190) = 4;
+		*(int*) (grave + 0x194) = 0;
+		*(unsigned char*) (grave + 0xd) = 1;
+		*(int*) (grave + 0x18c) = -1;
+		*(int*) (grave + 0x20c) = -1;
+		*(unsigned short*) (grave + 0x50) = 0x7fff;
 	}
-	*(int*) (grave + 0x1f0) = 0;
-	*(unsigned char*) (grave + 2) = 0x14;
-	*(int*) (grave + 0x210) = -1;
-	/* Out of the reference's store order (it stores +0x218 after +0x217):
-	 * this position loads the `1` beside the req reload and links closer. */
-	*(unsigned char*) (grave + 0x218) = 1;
-	*(unsigned char*) (grave + 0x216) = 0;
-	*(unsigned char*) (grave + 0x217) = 0;
-	*(unsigned char*) (grave + 0x215) = 0;
-	*(int*) (grave + 0x1e4) = 0x3f800000; /* 1.0f */
-	*(unsigned char*) (grave + 8) = 0x64;
-	*(unsigned short*) (grave + 0xa) = 0x10;
-	*(unsigned char*) (grave + 0x164) = 0;
-	*(unsigned char*) (grave + 0x166) = 0;
-	/* Under /Ow the plain read hoists to the top of the stores; volatile
-	 * keeps `mov cl,[ecx+0x15]` beside its store as at 0x10011e4d. */
-	*(unsigned char*) (grave + 0x165) = *(volatile unsigned char*) ((char*) req + 0x15);
-	*(unsigned char*) (grave + 0x1f4) = 0;
-	*(int*) (grave + 0x190) = 4;
-	*(int*) (grave + 0x194) = 0;
-	*(unsigned char*) (grave + 0xd) = 1;
-	*(int*) (grave + 0x18c) = -1;
-	*(int*) (grave + 0x20c) = -1;
-	*(unsigned short*) (grave + 0x50) = 0x7fff;
 	{
 		int n;
 		for (n = 0; n < 5; n++)

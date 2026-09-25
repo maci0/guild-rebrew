@@ -919,14 +919,12 @@ updated_at = "2026-09-22T05:50:31+00:00"
 
 ["SERVER.0x10011bf0"]
 size = 1040
-cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /Ow"
-status = "NEAR_MATCHING"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "RELOC"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
-blocker = "3 faults, all length-neutral: fail-epilogue merge (8B; no C89 construct sets a block's predecessor count), slot-init phase shift (shapes 86b excludes it -- source store order already matches, the delta is scheduler + a memset-destination fold), and neighbour-loop esi/edi roles + 16-bit zero-extend (95% of residue, shapes 85 wall). Body 1040 = ref exactly and 1040 is 16-aligned, so shapes 88 gives ZERO upward slack: nothing to buy, and +1 byte costs 16 of span"
-blocker_delta = 426
-updated_by = "verify"
-updated_at = "2026-09-24T23:34:50+00:00"
+updated_by = "test"
+updated_at = "2026-09-25T15:31:45+00:00"
 
 ["SERVER.0x10012000"]
 size = 728
