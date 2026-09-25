@@ -64,7 +64,6 @@ void __cdecl fcn_00566950(char* e)
 	if (r != 0) {
 		n = 0;
 		memset(list, 0, sizeof(list));
-
 		for (c = fcn_00502cd0(*(int*) (r + 0x14), 1, 5); c != 0; c = gm_NextEntityQueryMatch()) {
 			list[n++] = c;
 		}
