@@ -20,7 +20,9 @@ typedef struct {
 	int key;
 	unsigned char active;
 	unsigned char side;
-	char pad1[0x15c];
+	char pad1[0x15a];
+	unsigned char cls;
+	char pad1b;
 	unsigned char kind;
 	char pad2[2];
 	unsigned char grade;
@@ -728,3 +730,198 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	    g_773d75);
 	return 1;
 }
+
+// FUNCTION: GOLDTL 0x4af530
+// SIZE: 710
+
+#pragma optimize("y", off)
+int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
+{
+	char buf[0x200];
+	Rec21c* r;
+	Rec21c* found;
+	int sel;
+	int j;
+	int left;
+	int next;
+	int n;
+	int p;
+
+	n = 0x200;
+	p = (int) buf;
+	__asm {
+		mov edi, p
+		mov ebx, n
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
+	}
+	{
+		int rest;
+
+		fcn_004ae080(text, buf, &p, &rest);
+		if (rest != 1 || (sel = fcn_0064eeec(text + p)) < 0 || sel > 2) {
+			sel = 1;
+		}
+	}
+	if (mode == 1) {
+		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		if (r == 0 || r->active <= 0) {
+			return 0;
+		}
+		goto send;
+	}
+	if (sel == 0) {
+		r = 0;
+		j = fcn_0042e410(0x300);
+		left = 0x300;
+		do {
+			if (fcn_004ae130((unsigned short) j) != 0
+			    && g_7f4ca0[j].cls >= 0xd && g_7f4ca0[j].cls <= 0x12 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
+				r = &g_7f4ca0[j];
+				break;
+			}
+			next = (j + 1) % 0x300;
+			left--;
+			j = next;
+		} while (left != 0);
+	} else if (sel == 1) {
+		r = 0;
+		j = fcn_0042e410(0x300);
+		left = 0x300;
+		do {
+			if (fcn_004ae1c0(j) != 0
+			    && g_7f4ca0[j].cls >= 0xd && g_7f4ca0[j].cls <= 0x12 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
+				r = &g_7f4ca0[j];
+				break;
+			}
+			next = (j + 1) % 0x300;
+			left--;
+			j = next;
+		} while (left != 0);
+	} else {
+		found = 0;
+		r = 0;
+		j = fcn_0042e410(0x300);
+		left = 0x300;
+		do {
+			if (found == 0 && fcn_004ae1c0(j) != 0
+			    && g_7f4ca0[j].cls >= 0xd && g_7f4ca0[j].cls <= 0x12) {
+				if (fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
+					found = &g_7f4ca0[j];
+				}
+			} else if (fcn_004ae210(j) != 0
+			    && g_7f4ca0[j].cls >= 0xd && g_7f4ca0[j].cls <= 0x12 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
+				r = &g_7f4ca0[j];
+				break;
+			}
+			next = (j + 1) % 0x300;
+			left--;
+			j = next;
+		} while (left != 0);
+		if (r == 0) {
+			r = found;
+		}
+	}
+	if (r == 0) {
+		return 0;
+	}
+	if (mode == 0) {
+		pairs[idx * 2 + 1] = r->key;
+	}
+send:
+	fcn_0051af00(out, (int) buf, r->id);
+	return 1;
+}
+#pragma optimize("", on)
+
+// FUNCTION: GOLDTL 0x4afd70
+// SIZE: 405
+
+#pragma optimize("y", off)
+int __cdecl fcn_004afd70(int mode, int* pairs, int idx, char* text, void* out)
+{
+	char buf[0x200];
+	int steps[4];
+	Rec21c* r;
+	int n;
+	int p;
+	int i;
+	int step;
+	int left;
+	int next;
+
+	r = 0;
+	if (mode == 2) {
+		return 0;
+	}
+	n = 0x200;
+	p = (int) buf;
+	__asm {
+		mov edi, p
+		mov ebx, n
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
+	}
+	{
+		int rest;
+
+		fcn_004ae080(text, buf, &p, &rest);
+	}
+	if (mode == 1) {
+		r = (Rec21c*) fcn_00508e40(pairs[idx * 2 + 1]);
+		if (r == 0 || r->active <= 0) {
+			return 0;
+		}
+		goto send;
+	}
+	for (i = 0; i < 0x300; i++) {
+		steps[0] = 3;
+		steps[1] = 5;
+		steps[2] = 7;
+		steps[3] = 11;
+		step = steps[fcn_0042e410(4)];
+		i = fcn_0042e410(0x300);
+		left = 0x300;
+		do {
+			if (fcn_004ae210(i) != 0 && fcn_004ae0f0(g_7f4ca0[i].key) != 0) {
+				r = &g_7f4ca0[i];
+				break;
+			}
+			next = (i + step) % 0x300;
+			left--;
+			i = next;
+		} while (left != 0);
+	}
+	if (r == 0) {
+		return 0;
+	}
+	if (mode == 0) {
+		pairs[idx * 2 + 1] = r->key;
+	}
+send:
+	fcn_0051af00(out, (int) buf, r->id);
+	return 1;
+}
+#pragma optimize("", on)
