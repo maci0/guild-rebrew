@@ -9,9 +9,6 @@ int* __cdecl _errno(void);
 void __cdecl free(void*);
 unsigned int __cdecl vfs_GetByte(int*);
 int __cdecl vfs_CloseStream(void*);
-
-// FUNCTION: GOLDTL 0x45f2c0
-// SIZE: 192
 // FUNCTION: SERVER 0x10003820
 // vfs_GetByte
 
@@ -47,6 +44,8 @@ unsigned int __cdecl vfs_GetByte(int* stream)
 
 /* Closes a VFS stream and releases associated resources.
  * Frees internal buffers and removes from open stream list. */
+// FUNCTION: GOLDTL 0x45f2c0
+// SIZE: 192
 // FUNCTION: SERVER 0x100038a0
 
 // vfs_CloseStream

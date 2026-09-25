@@ -61,8 +61,6 @@ extern char g_log_message_buffer[];
 // GLOBAL: SERVER 0x117660e0
 extern int g_owner_window;
 extern void (*g_panic_callback)(void);
-// FUNCTION: GOLDTL 0x41d8b0
-// SIZE: 160
 // FUNCTION: SERVER 0x100034c0
 // ShutdownLogAndErrorHandler
 void __cdecl ShutdownLogAndErrorHandler(void)
@@ -85,6 +83,8 @@ void __cdecl ShutdownLogAndErrorHandler(void)
 /* Reports a fatal error with a message, then terminates the
  * process via _exit(). Does not return. */
 
+// FUNCTION: GOLDTL 0x41d8b0
+// SIZE: 160
 // FUNCTION: SERVER 0x10003520
 
 // ReportFatalError
