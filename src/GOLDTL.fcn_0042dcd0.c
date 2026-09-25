@@ -1,3 +1,5 @@
+extern int g_6b7fbc;
+
 // SIZE 0xc
 struct tick_42dcd0 {
 	void (__cdecl* fn)(void);
@@ -5,7 +7,6 @@ struct tick_42dcd0 {
 	int paused;
 };
 
-extern int g_6b7fbc;
 extern volatile int g_6b7fb8;
 extern volatile int g_6b7fc0;
 extern struct tick_42dcd0 g_1052c60[32];
@@ -19,7 +20,9 @@ extern unsigned int g_1052c48;
 extern unsigned int g_1052c50;
 extern unsigned int g_6b7fa8;
 
-__declspec(dllimport) unsigned int __stdcall timeSetEvent(unsigned int, unsigned int, void (__stdcall*)(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long), unsigned long, unsigned int);
+typedef void (__stdcall* timecb_42dcd0)(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
+
+__declspec(dllimport) unsigned int __stdcall timeSetEvent(unsigned int, unsigned int, timecb_42dcd0, unsigned long, unsigned int);
 
 // FUNCTION: GOLDTL 0x42dcd0
 // SIZE: 262
