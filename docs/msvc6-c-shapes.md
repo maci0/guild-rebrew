@@ -8568,6 +8568,14 @@ each measured with `scripts/linktest.sh`:
   `live = *(int*) 0x10035434 + 1;` let the slot-index store go through `slot`, -6). The same read
   can delete a symbol read-modify-write it cannot see as a reader, which changes behaviour.
 
+- **A relocation to the wrong symbol is an object mismatch the link hides.** cm_ExSellObjekt
+  (0x1000d930) sat at NEAR_MATCHING with 8 differing bytes, the `push imm32` operands at
+  0x1000dd46 and 0x1000dec7: the source passed `g_error_msg_sell_no_source` / `_no_dest` where the
+  reference pushes 0x1002cd48 (`g_error_msg_sell_failed`) / 0x1002cd14 (`_no_source`). The postlink
+  data fixer rewrites `.data` operands, so the linked residue was already 0 and only `rebrew test`
+  saw it. Resolve each differing `push` operand in the reference (`rizin -c 'pr 60 @ <addr>'`) and
+  match the symbol in `src/rebrew-data.toml`: the fix changes the logged message to the original's.
+
 Flags follow the source: after these rewrites cm_ExSellObjekt and ls_LoadBuildingEntityState match
 only without their `/Ow`, and the `vfs_OpenStream` size is its 701-byte COMDAT extent (jump table
 included), not the 667-byte body.

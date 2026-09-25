@@ -9,7 +9,6 @@ extern unsigned char g_current_season;
 extern unsigned char g_connections[]; /* 0x101deb00 */
 
 extern char g_error_msg_sell_no_source[];
-extern char g_error_msg_sell_no_dest[];
 extern char g_error_msg_sell_failed[];
 
 short* __cdecl gm_ResolveParentEntity(short*);
@@ -78,12 +77,13 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * dest_dynamic_entity and dest_owner_entity out of registers across the
  * dest join are byte-neutral or worse once the shapes above are in place.
  *
- * Remaining differences (object, /O2 /Gd /Ow): ecx/edx swapped in the
- * source-finalize category load at 0x1000de2b, and two loads the
- * scheduler hoists above a store (0x1000e053, 0x1000e0f5).  All three are
- * /Ow: compiled with /O2 /Gd the object matches the reference 2057/2057
- * with relocations masked.  The reference keeps both loads below their
- * stores, which is the alias-assuming default.
+ * RELOC with /O2 /Gd (no /Ow).  Under /Ow the scheduler hoists two loads
+ * above a store (0x1000e053, 0x1000e0f5) and swaps ecx/edx at 0x1000de2b.
+ *
+ * The two global message strings are the reference's: 0x2d79 logs
+ * g_error_msg_sell_failed (0x1002cd48, "Verkaufslimit ueberschritten") and
+ * 0x2def logs g_error_msg_sell_no_source (0x1002cd14).  0x2e45 is a
+ * literal (the reference's 0x1002cc8c pooled string, codegen-walls 10).
  *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29; not
  * re-proven after the 2026-09-25 reshaping, whose edits keep every call,
@@ -268,7 +268,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				if ((uint)gm_GetMsgField((int)source_dynamic_entity, (int)source_object) -
 					((uint)(compute_size((char*)source_dynamic_entity, (int)*(ushort*)source_object) * *(int*)(source_object + 0xe)) >> 2) <
 					(uint)*(int*)(cmd + 0x1f)) {
-					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d79, g_error_msg_sell_no_source, 8);
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d79, g_error_msg_sell_failed, 8);
 					return 1;
 				}
 			}
@@ -315,7 +315,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				if (source_existing_entity != (void*)0) {
 					gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(cmd + 0x18));
 				} else {
-					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2def, g_error_msg_sell_no_dest, 8);
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2def, g_error_msg_sell_no_source, 8);
 					return 1;
 				}
 			} else {
