@@ -1,3 +1,5 @@
+void __cdecl fcn_00411fe0(void);
+
 // SIZE 0x4c
 struct cam_412610 {
 	int v[0x13];
@@ -6,7 +8,6 @@ struct cam_412610 {
 extern struct cam_412610 g_14ce8c0;
 extern struct cam_412610 g_14cf900;
 
-void __cdecl fcn_00411fe0(void);
 void __cdecl fcn_004124b0(void);
 
 // FUNCTION: GOLDTL 0x412610
