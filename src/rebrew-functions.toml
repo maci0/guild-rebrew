@@ -20350,3 +20350,8 @@ updated_by = "verify"
 updated_at = "2026-09-25T08:28:15+00:00"
 
 ["GOLD.0x005e04ae"]
+
+["GOLD.0x0047c600"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-25T08:30:04+00:00"
