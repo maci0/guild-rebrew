@@ -24,21 +24,25 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+// FUNCTION: GOLD 0x0042aef0
+// SIZE: 59
 // FUNCTION: GOLDTL 0x4297c0
 // SIZE: 59
 // gm_ResetAllEntities
+extern unsigned char* g_6b7e94;
+extern unsigned char* g_6b7e98;
 extern void __cdecl fcn_00429670(unsigned char*);
 void __cdecl gm_ResetAllEntities(void)
 {
 	int i;
 	unsigned char* e;
 	for (i = 0; i < 0x64c00; i += 0xc98) {
-		e = (unsigned char*) *(unsigned int*) 0x6b7e94 + i;
+		e = g_6b7e94 + i;
 		if (e[0x124] & 1) {
-			*(unsigned char**) 0x6b7e98 = e;
+			g_6b7e98 = e;
 			fcn_00429670(e);
 		}
 	}
-	*(unsigned char**) 0x6b7e98 = 0;
+	g_6b7e98 = 0;
 }
 

@@ -1,14 +1,19 @@
+// FUNCTION: GOLD 0x00576720
+// SIZE: 40
 // FUNCTION: GOLDTL 0x57ecc0
 // SIZE: 40
+
+extern int* g_665f08;
+extern char g_774a14[];
 
 int __cdecl fcn_0057ecc0(void)
 {
 	int* p;
 
-	if (*(int*) 0x774a14 == 0) {
+	if (*(int*) g_774a14 == 0) {
 		return 1;
 	}
-	p = *(int**) 0x665f08;
+	p = g_665f08;
 	if (*(int*) ((char*) p + 0x3c) == 2 || *p == 5) {
 		return 0;
 	}

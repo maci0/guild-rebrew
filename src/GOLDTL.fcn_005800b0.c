@@ -1,5 +1,9 @@
+// FUNCTION: GOLD 0x00577ae0
+// SIZE: 43
 // FUNCTION: GOLDTL 0x5800b0
 // SIZE: 43
+
+extern int* g_665f08;
 
 void __cdecl fcn_00545780(void*);
 
@@ -7,7 +11,7 @@ int __cdecl fcn_005800b0(void)
 {
 	char* p;
 
-	p = *(char**) (*(int*) 0x665f08 + 0x1c);
+	p = *(char**) ((int) g_665f08 + 0x1c);
 	if (p == 0) {
 		return -4;
 	}

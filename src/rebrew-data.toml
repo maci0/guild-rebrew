@@ -4402,3 +4402,480 @@ section = ".data"
 
 ["GOLD.0x005ebb74"]
 section = ".rdata"
+
+["GOLD.0x005f10f8"]
+section = ".data"
+
+["GOLD.0x014eaae0"]
+section = ".data"
+
+["GOLD.0x005f14c4"]
+section = ".data"
+
+["GOLD.0x005f1b3c"]
+section = ".data"
+
+["GOLD.0x005f1b68"]
+section = ".data"
+
+["GOLD.0x005f1f00"]
+section = ".data"
+
+["GOLD.0x005f20fc"]
+section = ".data"
+
+["GOLD.0x005f216c"]
+section = ".data"
+
+["GOLD.0x005f1230"]
+section = ".data"
+
+["GOLD.0x005f2614"]
+section = ".data"
+
+["GOLD.0x005f26a4"]
+section = ".data"
+
+["GOLD.0x005f28a4"]
+section = ".data"
+
+["GOLD.0x005f3244"]
+section = ".data"
+
+["GOLD.0x006310ec"]
+section = ".data"
+
+["GOLD.0x005f38a0"]
+section = ".data"
+
+["GOLD.0x00631130"]
+section = ".data"
+
+["GOLD.0x01460ae0"]
+section = ".data"
+
+["GOLD.0x01460af0"]
+section = ".data"
+
+["GOLD.0x00633160"]
+section = ".data"
+
+["GOLD.0x006332a8"]
+section = ".data"
+
+["GOLD.0x00633198"]
+section = ".data"
+
+["GOLD.0x01460a20"]
+section = ".data"
+
+["GOLD.0x006332ac"]
+section = ".data"
+
+["GOLD.0x014607c0"]
+section = ".data"
+
+["GOLD.0x005eb010"]
+section = ".rdata"
+
+["GOLD.0x005eb2c8"]
+section = ".rdata"
+
+["GOLD.0x005eb2b0"]
+section = ".rdata"
+
+["GOLD.0x005eb2b8"]
+section = ".rdata"
+
+["GOLD.0x005f2b7c"]
+section = ".data"
+
+["GOLD.0x005f2ba4"]
+section = ".data"
+
+["GOLD.0x005f2c78"]
+section = ".data"
+
+
+["GOLD.0x006332e0"]
+section = ".data"
+
+["GOLDTL.0x006b7ec0"]
+section = ".data"
+
+["GOLDTL.0x006623b0"]
+section = ".rdata"
+
+["GOLDTL.0x006b7f90"]
+section = ".data"
+
+["GOLDTL.0x006b7ed0"]
+section = ".data"
+
+["GOLDTL.0x00662454"]
+section = ".rdata"
+
+["GOLDTL.0x006b7f94"]
+section = ".data"
+
+["GOLDTL.0x0066244c"]
+section = ".rdata"
+
+["GOLDTL.0x00662398"]
+section = ".rdata"
+
+["GOLDTL.0x006b7f10"]
+section = ".data"
+
+["GOLDTL.0x006623bc"]
+section = ".rdata"
+
+["GOLDTL.0x00662450"]
+section = ".rdata"
+
+["GOLDTL.0x006b7f50"]
+section = ".data"
+
+["GOLDTL.0x00662408"]
+section = ".rdata"
+
+["GOLDTL.0x00662428"]
+section = ".rdata"
+
+["GOLD.0x005eb320"]
+section = ".rdata"
+
+["GOLD.0x006333b0"]
+section = ".data"
+
+["GOLD.0x006332f0"]
+section = ".data"
+
+["GOLD.0x005eb310"]
+section = ".rdata"
+
+["GOLD.0x006333b4"]
+section = ".data"
+
+["GOLD.0x005eb308"]
+section = ".rdata"
+
+["GOLD.0x005eb360"]
+section = ".rdata"
+
+["GOLD.0x00633330"]
+section = ".data"
+
+["GOLD.0x005eb35c"]
+section = ".rdata"
+
+["GOLD.0x005eb34c"]
+section = ".rdata"
+
+["GOLD.0x00633370"]
+section = ".data"
+
+["GOLD.0x005eb348"]
+section = ".rdata"
+
+["GOLD.0x005eb2ec"]
+section = ".rdata"
+
+["GOLDTL.0x0149d188"]
+section = ".data"
+
+["GOLDTL.0x01052c48"]
+section = ".data"
+
+["GOLDTL.0x01052c50"]
+section = ".data"
+
+["GOLDTL.0x006b7fc4"]
+section = ".data"
+
+["GOLDTL.0x006b7fa8"]
+section = ".data"
+
+["GOLDTL.0x00662324"]
+section = ".rdata"
+
+["GOLDTL.0x00662320"]
+section = ".rdata"
+
+["GOLDTL.0x0066231c"]
+section = ".rdata"
+
+["GOLDTL.0x00662318"]
+section = ".rdata"
+
+["GOLDTL.0x01052c60"]
+section = ".data"
+
+["GOLDTL.0x006b7fe8"]
+section = ".data"
+
+["GOLDTL.0x0067a470"]
+section = ".data"
+
+["GOLD.0x01432028"]
+section = ".data"
+
+["GOLD.0x00fe7a80"]
+section = ".data"
+
+["GOLD.0x00fe7a88"]
+section = ".data"
+
+["GOLD.0x006333e4"]
+section = ".data"
+
+["GOLD.0x006333c8"]
+section = ".data"
+
+["GOLD.0x005eb278"]
+section = ".rdata"
+
+["GOLD.0x005eb27c"]
+section = ".rdata"
+
+["GOLD.0x005eb280"]
+section = ".rdata"
+
+["GOLD.0x005eb284"]
+section = ".rdata"
+
+["GOLD.0x00fe7aa0"]
+section = ".data"
+
+["GOLD.0x00633408"]
+section = ".data"
+
+["GOLD.0x005fb800"]
+section = ".data"
+
+["GOLDTL.0x00662d18"]
+section = ".rdata"
+
+["GOLDTL.0x0067b608"]
+section = ".data"
+
+["GOLDTL.0x0067b624"]
+section = ".data"
+
+["GOLDTL.0x0067b63c"]
+section = ".data"
+
+["GOLD.0x005ebb58"]
+section = ".rdata"
+
+["GOLD.0x005fc698"]
+section = ".data"
+
+["GOLD.0x005fc6b4"]
+section = ".data"
+
+["GOLD.0x005fc6cc"]
+section = ".data"
+
+["GOLDTL.0x01011980"]
+section = ".data"
+
+["GOLDTL.0x01008524"]
+section = ".data"
+
+["GOLDTL.0x0100af80"]
+section = ".data"
+
+["GOLD.0x00f8ab80"]
+section = ".data"
+
+["GOLD.0x00f83ea4"]
+section = ".data"
+
+["GOLD.0x00f86900"]
+section = ".data"
+
+["GOLD.0x00633dfc"]
+section = ".data"
+
+["GOLD.0x00633dd8"]
+section = ".data"
+
+["GOLD.0x005fcfa0"]
+section = ".data"
+
+["GOLD.0x00f8f0a0"]
+section = ".data"
+
+["GOLD.0x006333d8"]
+section = ".data"
+
+["GOLD.0x005feb8c"]
+section = ".data"
+
+
+["GOLDTL.0x00680bd0"]
+section = ".data"
+
+["GOLDTL.0x0068b400"]
+section = ".data"
+
+["GOLDTL.0x0068d6bc"]
+section = ".data"
+
+["GOLDTL.0x00696178"]
+section = ".data"
+
+["GOLDTL.0x00699368"]
+section = ".data"
+
+["GOLDTL.0x00772ea8"]
+section = ".data"
+
+["GOLDTL.0x00772eac"]
+section = ".data"
+
+["GOLDTL.0x009a9660"]
+section = ".data"
+
+["GOLDTL.0x009b0820"]
+section = ".data"
+
+["GOLDTL.0x009b0840"]
+section = ".data"
+
+["GOLDTL.0x009b0e20"]
+section = ".data"
+
+["GOLDTL.0x00aed220"]
+section = ".data"
+
+["GOLDTL.0x00aed2a0"]
+section = ".data"
+
+["GOLD.0x00601f68"]
+section = ".data"
+
+["GOLD.0x0060c7a0"]
+section = ".data"
+
+["GOLD.0x0060ea00"]
+section = ".data"
+
+["GOLD.0x00617448"]
+section = ".data"
+
+["GOLD.0x0061a638"]
+section = ".data"
+
+["GOLD.0x006f0cf8"]
+section = ".data"
+
+["GOLD.0x006f0cfc"]
+section = ".data"
+
+["GOLD.0x00925520"]
+section = ".data"
+
+["GOLD.0x0092c4e0"]
+section = ".data"
+
+["GOLD.0x0092c500"]
+section = ".data"
+
+["GOLD.0x0092cae0"]
+section = ".data"
+
+["GOLD.0x00a68c20"]
+section = ".data"
+
+["GOLD.0x00a68ca0"]
+section = ".data"
+
+["GOLD.0x00761fc8"]
+section = ".data"
+
+["GOLD.0x0144a638"]
+section = ".data"
+
+["GOLD.0x014681ea"]
+section = ".data"
+
+["GOLD.0x01468410"]
+section = ".data"
+
+["GOLD.0x00602548"]
+section = ".data"
+
+["GOLD.0x0062aa88"]
+section = ".data"
+
+["GOLD.0x006333e0"]
+section = ".data"
+
+["GOLD.0x006ed938"]
+section = ".data"
+
+["GOLD.0x006f22e4"]
+section = ".data"
+
+["GOLD.0x006f2310"]
+section = ".data"
+
+["GOLD.0x006f25ac"]
+section = ".data"
+
+["GOLD.0x006f3880"]
+section = ".data"
+
+["GOLD.0x006f5ec0"]
+section = ".data"
+
+["GOLD.0x0075e8c0"]
+section = ".data"
+
+["GOLD.0x005eecd0"]
+section = ".rdata"
+
+["GOLDTL.0x014b5798"]
+section = ".data"
+
+["GOLDTL.0x014cf72a"]
+section = ".data"
+
+["GOLDTL.0x006811b0"]
+section = ".data"
+
+["GOLDTL.0x006a9b9c"]
+section = ".data"
+
+["GOLDTL.0x006b7fc0"]
+section = ".data"
+
+["GOLDTL.0x007746a0"]
+section = ".data"
+
+["GOLDTL.0x007746cc"]
+section = ".data"
+
+["GOLDTL.0x00774964"]
+section = ".data"
+
+["GOLDTL.0x007774a0"]
+section = ".data"
+
+["GOLDTL.0x00779d00"]
+section = ".data"
+
+["GOLDTL.0x007e2700"]
+section = ".data"
+
+["GOLDTL.0x007e6068"]
+section = ".data"
+
+["GOLDTL.0x00662d40"]
+section = ".rdata"
+
+["GOLDTL.0x00665f78"]
+section = ".rdata"
+

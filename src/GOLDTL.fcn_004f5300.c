@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x004f31d0
+// SIZE: 160
 // FUNCTION: GOLDTL 0x4f5300
 // SIZE: 160
 
@@ -9,6 +11,7 @@ typedef struct tag_req_2d {
 	char raw[0x2d];
 } req_2d;
 
+extern char g_69037c[];
 unsigned char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_0051af00(void*, int, ...);
 
@@ -33,7 +36,7 @@ int __cdecl fcn_004f5300(void* a1, req_2d s, int b)
 		fcn_0051af00(a1, v + 0x1450, w, (char*) &s + 4);
 		break;
 	default:
-		memcpy(a1, (void*) 0x69037c, 0x20);
+		memcpy(a1, g_69037c, 0x20);
 		r = 0;
 		break;
 	}

@@ -1,3 +1,7 @@
+// GLOBAL: GOLD 0x5f1230
+extern char g_6752a8[];
+// FUNCTION: GOLD 0x0040d060
+// SIZE: 27
 // FUNCTION: GOLDTL 0x40df90
 // SIZE: 27
 
@@ -5,6 +9,6 @@
 
 int __cdecl fcn_0040df90(char** p)
 {
-	strcpy((char*) 0x6752a8, *p);
+	strcpy(g_6752a8, *p);
 	return 1;
 }

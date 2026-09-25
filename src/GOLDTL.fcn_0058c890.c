@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x005842d0
+// SIZE: 587
 // FUNCTION: GOLDTL 0x0058c890
 // SIZE: 587
 
@@ -41,7 +43,7 @@ int __cdecl fcn_0058c890(char* a1, int a2, unsigned char a3, int a4)
 
 	r = 0;
 	cost = *(unsigned short*) (a1 + 0x27) != g_774970 ? 16000 : 0;
-	dlg = fcn_00470820(0, 0, 0x6a96d8);
+	dlg = fcn_00470820(0, 0, (int) "Locations\\Friedhof\\Friedhof");
 	fcn_00473a90(0, 0);
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 0);

@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x00407200
+// SIZE: 146
 // FUNCTION: GOLDTL 0x00407d90
 // SIZE: 146
 
@@ -31,6 +33,6 @@ int __cdecl fcn_00407d90(char* self, char** out)
 			}
 		}
 		p++;
-	} while ((int) p < 0x14d0c20);
+	} while ((int) p < (int) (g_14d0020 + 0x300));
 	return count;
 }

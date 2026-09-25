@@ -1,5 +1,9 @@
+// FUNCTION: GOLD 0x004b6e10
+// SIZE: 216
 // FUNCTION: GOLDTL 0x4b70c0
 // SIZE: 216
+
+extern char g_773d75;
 
 void* __cdecl fcn_00508e40(int);
 unsigned short __cdecl fcn_0042e410(int);
@@ -21,11 +25,11 @@ int __cdecl fcn_004b70c0(void* a1)
 		return 1;
 	}
 	v = fcn_0042e410(2);
-	d = (double) v + *(double*) 0x6629c8;
+	d = (double) v + 1.0;
 	n = (int) (((double) fcn_0050dac0(*(unsigned short*) p) * d) *
-	    *(double*) 0x664e50);
+	    0.0125);
 	fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, n);
-	fcn_004c51a0(*(int*) a1, -1, *(char*) 0x773d75, n);
+	fcn_004c51a0(*(int*) a1, -1, g_773d75, n);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;
