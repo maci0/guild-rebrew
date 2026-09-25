@@ -6,6 +6,7 @@ typedef struct Flags215 {
 	unsigned char lit : 1;
 	unsigned char mirror : 1;
 } Flags215;
+// SIZE 0x216
 
 typedef struct Node {
 	char pad0[0x34];
@@ -13,11 +14,13 @@ typedef struct Node {
 	char pad38[0x88 - 0x38];
 	void* owner;
 } Node;
+// SIZE 0x8c
 
 typedef struct Pair {
 	int a;
 	int b;
 } Pair;
+// SIZE 0x8
 
 extern unsigned char g_776664;
 extern unsigned char g_776665;
