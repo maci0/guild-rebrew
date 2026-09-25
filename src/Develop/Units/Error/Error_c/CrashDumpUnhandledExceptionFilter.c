@@ -147,31 +147,30 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	/* Get module filename to build .dbg path */
 	if (GetModuleFileNameA(0, szModulePath, 0x100)) {
 		char* path_cursor;
-		char* pStart;
 
-		/* Find last char */
+		/* Find the terminator.  Unguarded, as in the reference: for an
+		 * empty path c2 threads the loop's entry test straight into the
+		 * backward search body (the cursor is known to be the start).  The
+		 * path is never empty here: GetModuleFileNameA returned its length. */
 		path_cursor = szModulePath;
-		if (*path_cursor != '\0') {
-			while (*path_cursor != '\0') {
-				path_cursor++;
-			}
-			/* Search backwards for '.' */
-			pStart = szModulePath;
-			while (path_cursor >= pStart) {
-				if (*path_cursor == '.') {
-					break;
-				}
-				path_cursor--;
-			}
+		while (*path_cursor != '\0') {
+			path_cursor++;
+		}
+		/* Search backwards for '.' */
+		while (path_cursor >= szModulePath) {
 			if (*path_cursor == '.') {
-				path_cursor++;
-				*path_cursor = 'd';
-				path_cursor++;
-				*path_cursor = 'b';
-				path_cursor++;
-				*path_cursor = 'g';
-				*(path_cursor + 1) = '\0';
+				break;
 			}
+			path_cursor--;
+		}
+		if (*path_cursor == '.') {
+			path_cursor++;
+			*path_cursor = 'd';
+			path_cursor++;
+			*path_cursor = 'b';
+			path_cursor++;
+			*path_cursor = 'g';
+			*(path_cursor + 1) = '\0';
 		}
 
 		/* Open the .dbg file */
