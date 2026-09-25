@@ -76,6 +76,8 @@ char __cdecl check_memory_protection(unsigned int protect)
  * its length and type. Used by the crash dump handler to decode
  * the faulting instruction context. */
 
+// FUNCTION: GOLDTL 0x41d5f0
+// SIZE: 192
 // FUNCTION: SERVER 0x10003260
 // AnalyzeInstruction
 char __cdecl AnalyzeInstruction(int arg1, int arg2, int arg3, int* arg4)
