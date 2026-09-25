@@ -1923,6 +1923,16 @@ The second pass pops a free list that is not monotonic, so a lower first-pass id
 Scheduler candidate/issue points: `0x107279c2` and `0x10727a51` (node +0x1c tuple, +0x2c priority,
 +0x36 sequence, +0x30 earliest cycle). Tracers: `.scratch/c2trace-layout/` (gitignored).
 
+**Scheduler hold and priority, traced (round 1145).** The hold at `0x10727d01` fires when the previous
+issue is opcode 95 (the x87 fetch that becomes `fxch`), or opcode 354 (a copy) whose source is a 95,
+AND the pipe mode is P5 (`[0x10799218]==2`), AND the candidate is an integer instruction, AND an x87
+node in the ready list has earliest cycle <= current+1. Priority (+0x2c) is set in `0x10726e85` as
+the node height (+0x34) plus weighted terms from the table at `[0x10799204]`; at the issue point
+`0x10727a51`, +0x34 packs the sequence number (high word) and priority (low word). Source lever: a
+float-rounded temporary (`quot_f = (float) quot; quot_f = (float) (quot_f * ...)`) removes the copy
+node after the fetch, so integer work issues between `fxch` and `fmulp` (gm_CalculateProductionValue,
+byte-exact).
+
 **The instruction scheduler** is the cycle loop at `0x10727977`: per cycle and pipe it walks
 a ready list ordered by priority (`+0x2c`, descending, ties by sequence `+0x36`), checks
 pairing (`[0x10799214]`), two hazard routines (`0x10727ca9`, `0x10727d01`) and the earliest
