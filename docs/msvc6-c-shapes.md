@@ -8555,6 +8555,14 @@ each measured with `scripts/linktest.sh`:
   the mask c2 folds it into the compare (CrashDump, -387 linked once the 2 bytes realigned the
   jump tables).
 
+- **A may-alias store edge raises a store's scheduling priority.** The slot header's `or eax,-1`
+  before `mov word [ebp],0xffff` (ahm_ExAllocAlchemist, gv_ExAllocGraveyardWorker) needs the word
+  store's priority between 37 and 41: write it through the slot pointer and the following +4 store
+  through the `g_slot_table` symbol, so c2 cannot prove them disjoint and adds an edge (priority 40
+  -> 41). A `volatile` store is a barrier (edges to every later root); a plain store with no such
+  edge ranks lowest and issues last. The later slot-index store must go through the symbol too, or
+  the 0xffff store dies as dead.
+
 Flags follow the source: after these rewrites cm_ExSellObjekt and ls_LoadBuildingEntityState match
 only without their `/Ow`, and the `vfs_OpenStream` size is its 701-byte COMDAT extent (jump table
 included), not the 667-byte body.
