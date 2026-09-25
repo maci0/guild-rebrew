@@ -1,0 +1,17 @@
+// FUNCTION: GOLDTL 0x00550560
+// SIZE: 71
+
+typedef struct {
+	short w[7];
+} Rec14;
+// SIZE 0xe
+
+int __cdecl fcn_0042e410(int);
+
+void __cdecl fcn_00550560(char* e)
+{
+	*(int*) (e + 0xb0) = -1;
+	*(Rec14*) (e + 0x52) = *(Rec14*) (e + 0x44);
+	*(short*) (e + 0x56) += fcn_0042e410(4) + 2;
+	*(int*) (e + 0x70) = 0;
+}
