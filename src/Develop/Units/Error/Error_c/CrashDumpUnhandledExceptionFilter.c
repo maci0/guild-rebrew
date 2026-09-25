@@ -102,14 +102,29 @@ int g_crash_callback = 0;
  * lands before them, and hDbgFile and pDbgBuf (three references each) come
  * out in each other's stack slots.
  *
- * Still open: the scheduling of the separator copies after GetCurrentProcess
- * and of the frame fill's first two loads. */
+ * Frame fill (0x10002c54).  frameInfo is a local of the inner block: then
+ * c2 does not order its stores against the pCtx->Eip load, pDbgBuf's load
+ * drops below pCtx's and pCtx loads first, as in the reference.  The default
+ * arm breaks rather than jumping to a label ahead of the join: each label
+ * leaves a scheduler node in the block that takes a cycle.
+ *
+ * Separator copies (0x100028fb..0x1000294c, instruction-exact).  szLine,
+ * space and szSep are initialised locals of an inner block opened after the
+ * Esp read.  c2 orders a load through pCtx behind (or ahead of) stores to the
+ * outer address-taken locals, which a memcpy or assignment gives, but not
+ * behind an initialiser's stores; with no such edge the Esp load drops to its
+ * own height and issues after the rep movs, as in the reference.  The Esp
+ * read has to stay ahead of the copies: that puts the pCtx load's scratch
+ * pick before the szLine pair's, giving eax, ecx, edx.  The two literals
+ * duplicate the bytes at 0x10027314 and 0x100272f8.
+ *
+ * Still open: the frame fill's frameInfo[0] and [1] stores issue in the
+ * reverse order (both have priority 2; IL order decides, and the [1] store
+ * is the group-A join). */
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
-	char szLine[4];
 	char fCanContinue;
-	char space;
 	unsigned int dwDbgFileSize;
 	unsigned int dwBytesRead;
 	unsigned int* pStack;
@@ -126,9 +141,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	char instrType;
 	unsigned int szDateLen;
 	unsigned int szTimeLen;
-	int frameInfo[7];
 	MEMORY_BASIC_INFORMATION mbi;
-	char szSep[0x1b];
 	char szDateBuf[0x100];
 	char szModulePath[0x100];
 
@@ -141,31 +154,30 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	/* Get module filename to build .dbg path */
 	if (GetModuleFileNameA(0, szModulePath, 0x100)) {
 		char* path_cursor;
-		char* pStart;
 
-		/* Find last char */
+		/* Find the terminator.  Unguarded, as in the reference: for an
+		 * empty path c2 threads the loop's entry test straight into the
+		 * backward search body (the cursor is known to be the start).  The
+		 * path is never empty here: GetModuleFileNameA returned its length. */
 		path_cursor = szModulePath;
-		if (*path_cursor != '\0') {
-			while (*path_cursor != '\0') {
-				path_cursor++;
-			}
-			/* Search backwards for '.' */
-			pStart = szModulePath;
-			while (path_cursor >= pStart) {
-				if (*path_cursor == '.') {
-					break;
-				}
-				path_cursor--;
-			}
+		while (*path_cursor != '\0') {
+			path_cursor++;
+		}
+		/* Search backwards for '.' */
+		while (path_cursor >= szModulePath) {
 			if (*path_cursor == '.') {
-				path_cursor++;
-				*path_cursor = 'd';
-				path_cursor++;
-				*path_cursor = 'b';
-				path_cursor++;
-				*path_cursor = 'g';
-				*(path_cursor + 1) = '\0';
+				break;
 			}
+			path_cursor--;
+		}
+		if (*path_cursor == '.') {
+			path_cursor++;
+			*path_cursor = 'd';
+			path_cursor++;
+			*path_cursor = 'b';
+			path_cursor++;
+			*path_cursor = 'g';
+			*(path_cursor + 1) = '\0';
 		}
 
 		/* Open the .dbg file */
@@ -200,9 +212,11 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 							hProcess = GetCurrentProcess();
 							espVal = pCtx->Esp;
 							nFrames = 0x800;
-							memcpy(szLine, g_crashdump_data_10027104 + 528, 3); /* REF 0x10027314 */
-							space = ' ';
-							memcpy(szSep, g_crashdump_data_10027104 + 500, 0x1b); /* REF 0x100272f8 */
+							{
+							char szLine[] = "\r\n";
+							char space = ' ';
+							char szSep[] = "------------------------\r\n";
+							int frameInfo[7];
 							SetFilePointer(hCrashLog, -1, 0, 2);
 							WriteFile(hCrashLog, szSep, 0x1a, &nBytesWritten, 0);
 
@@ -312,10 +326,8 @@ group_a_done:
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							default:
-								goto unknown_exc;
+								break;
 							}
-
-unknown_exc:
 
 							/* Stack walk */
 							frameInfo[1] = (int) hCrashLog;
@@ -380,6 +392,7 @@ done_walk:
 							}
 							WriteFile(hCrashLog, &szLine[2], 1, &nBytesWritten, 0);
 							CloseHandle(hCrashLog);
+							}
 						}
 						else {
 							LogMessageInternal((char*) 0x10027144, 0x20f, (char*) 0x10027164, 1);
