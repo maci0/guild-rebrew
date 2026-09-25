@@ -4,11 +4,13 @@ typedef struct Cmd {
 	char pad8[0x14];
 	int level;
 } Cmd;
+// SIZE 0x20
 
 typedef struct Spec {
 	char pad0[0x14];
 	int need;
 } Spec;
+// SIZE 0x18
 
 extern char g_774964;
 extern int g_7728d8;
