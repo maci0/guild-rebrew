@@ -148,6 +148,8 @@ void* __cdecl gm_SearchTable67(int id)
 /* Checks if an entity's type matches the expected class.
  * Returns non-zero if the entity type field matches. */
 
+// FUNCTION: GOLD 0x502520
+// SIZE: 80
 // FUNCTION: GOLDTL 0x00505370
 // SIZE: 80
 // FUNCTION: SERVER 0x10017AB0
