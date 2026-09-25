@@ -4101,15 +4101,53 @@ by falling into a join block after 0xc000008e.
 **Join lifetime, traced.** An empty join is threaded by the third jump pass `fcn.107050de` (driver
 `0x10760574`), otherwise by cleanup 1 at `0x10723553` (`fcn.10703052` skips items without flag
 bit 0, which includes labels and op 444). Between cleanup 1 and 2 only the peephole `fcn.10723779`
-deletes items: register self-moves (`0x10723d07`), stack stores whose loads it forwarded (the
-`szDateLen` and `szTimeLen` stores) and op-0x19e uses (created for switch dispatch at `0x10711276`,
-the return value at `0x1071774d` and compare-with-0 elimination at `0x1071b184`). After cleanup 2
-only jumps and labels are deleted. A join body that vanishes needs a copy that global copy
-propagation keeps (seen only for call results and loop-carried variables) or one of those uses;
-no statement tried qualifies. Otherwise the join is the fill's IL prefix and must be pick-free
-(join cursor eax after 0xc000008e, fill cursor edx after 0xc00000fd), which leaves `fi[1]` (seq
-tie), `add ebx` and the `pStack` store, all measured above. Remaining inputs: an alias asymmetry
-between the `fi[0]` and `fi[1]` stores within one object, or a vanishing join body.
+deletes items: register self-moves (`0x10723d07`, deleted at `0x10723d1d`; the `szDateLen` and
+`szTimeLen` call-result copies are `mov eax, eax` self-moves, not stack stores) and op-0x19e uses
+(created for switch dispatch at `0x10711276`, the return value at `0x1071774d` and compare-with-0
+elimination at `0x1071b184`). After cleanup 2 only jumps and labels are deleted. A join body that
+vanishes needs a copy that global copy propagation keeps (seen only for call results and
+loop-carried variables) or one of those uses; no statement tried qualifies. Otherwise the join is
+the fill's IL prefix and must be pick-free (join cursor eax after 0xc000008e, fill cursor edx after
+0xc00000fd), which leaves `fi[1]` (seq tie), `add ebx` and the `pStack` store, all measured above.
+The alias asymmetry is ruled out (below); the remaining input is a vanishing join body.
+
+**Alias asymmetry, traced and ruled out.** Each `frameInfo[i]` operand is a field symbol (kind 4,
+`+0x8` parent `frameInfo`, `+0x20` size 4, `+0x24` offset). The DAG query (`0x10726c99`,
+`fcn.1070438b`) decides a store against a later indirect load (kind 6, points-to tag at operand
+`+0x1c`) at `0x10704a6d`: `fcn.10704bac` tests the *parent* symbol against the tag's set
+(`[0x1079d6b0][tag]`, abstract objects whose `+0x30` list holds the member symbols), and after
+layout (`0x10704b70`) also every symbol sharing the parent's frame region (`fcn.1073abb5`, regions
+at `[0x107ae23c]`). Two stores to one parent compare field offset ranges (`0x107047f9`); different
+parents compare frame offsets (`0x1070481b`). `fi[0]` and `fi[1]` share their parent, so every
+query answers alike for both; only a different object or a later same-block access overlapping
+bytes 0..3 (the reference has none) separates them. Traced at the fill: `pCtx`'s tag 4 holds the
+function-scope address-taken locals (`szModulePath`, `szDateBuf`, `mbi`, three 4-byte locals) and
+the literal initialisers; the inner-block `frameInfo`, `szLine` and `space` are not members, so
+both queries return 0. Pointer spellings of the `fi[0]` store all fold to the plain store (2111):
+an index local (initialised or assigned), `*(int*)((char*) frameInfo + k0)`, `frameInfo[fCanContinue]`,
+`frameInfo[nFrames - 0x800]`, a pointer local initialised or assigned from `frameInfo`.
+
+**A vanishing join closes the function (measured under gdb).** Deleting the join item at the
+peephole entry (`0x10723779`, calling c2's unlink `fcn.107026f1` on it) with the fill in source
+order and the join ending in `break;`: a register copy join (`hCrashLog = (void*) espVal;`, item
+`r4 <- r6`) gives 2115/2115; `nFrames = 0x800;` gives 2103 (fill exact, but its operand counted in
+the slot weights and swapped four 4-byte slots). The A arms cross-jump into the empty join in the
+two cleanup calls after the peephole (`fcn.10723474` runs four times, cross-jumps only in the last
+two), and the fill then schedules as the reference; an unreferenced label in the join is not
+needed, because the `break` target stays referenced by the default dispatch. A `goto frame_fill`
+join instead leaves the dead `frame_fill` label's op-444 node at the head of the fill, where it
+takes cycle 1 and pushes both stores behind the `xor` and `add`. The missing piece is therefore a
+join statement that is a copy between two variables coloured to one register (ebx or ebp), which
+the IL keeps and the register allocator turns into a self-move.
+
+**Why no such copy has been found.** In the reference build the peephole deletes four self-moves
+and four op-0x19e uses (`0x10723d22`, `0x1072459e`; no other delete site fires): the `key` update
+in the decrypt loop (loop-carried) and the `szDateLen`/`szTimeLen` call results. Each self-move is a
+copy from an expression or call-result temporary, not a variable-to-variable copy. The IL removes
+a variable copy `v = w` when `v` already holds `w`'s value number on that path, or when every use of
+`v` can take `w`. A behaviour-preserving join copy needs `v == w` at run time on every path into the
+fill, so the IL keeps it only if that equality is hidden from value numbering. The hiding sources
+are a memory load, a call, or a loop phi. The first two emit code, and no loop encloses the switch.
 Tracer kits (item dump, priority dump, pairwise-merge and peephole traces, the 1 s compile
 harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored).
 
@@ -4133,3 +4171,8 @@ harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored
 | `nFrames = 0x800;` or `fCanContinue = 0;` as the join | 1527, 1547 | arms merge, the store stays |
 | newline written once after the switch, default skips it | 914 | one tail; WriteFile priority drops, roles change |
 | `/O1`, `/Os`, `/O2 /Os` | 325-337 | whole function changes |
+| 360 one-statement joins (`x = x;`, `if (x) { }`, `(void) x;`, `x = (T) y;` over 18 locals), each before and after an unreferenced label, fill in source order | 1149 or at most 1548 | none reaches the peephole as a self-move: folded by the IL (346) or emits code |
+| nested `switch` join (`switch (excCode) { }`, `{ default: break; }`, `{ case 0: break; }`, on `espVal`, `hCrashLog`, `nFrames`, `pStack`) | 1149 | folded before code generation; no dispatch op-0x19e is created (`0x10711276` fires only for the main switch) |
+| second name for the fill's register value (`void* hL` for `hCrashLog`, `unsigned e2` for `espVal`): copied after the definition or taking the call/load directly with the old name copied from it; join `new = old;` or `old = new;`; fill reads either name; join ends in `break;` or `goto frame_fill;` (32 variants) | 1149 | copy folded, join threaded |
+| `static __inline` identity function in the join (`hCrashLog = crash_id(hCrashLog);`, `espVal`, `hProcess`, `pCtx`, bare call) | 1142, 1145 | inlined and folded, join threaded |
+| scan-loop `nInstr`/`pInstr` moved to function scope, join copies `espVal`/`hCrashLog`/0 into them | 1149 | dead (reinitialised before the scan loop), removed |
