@@ -2,6 +2,8 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+// FUNCTION: GOLDTL 0x004f13d0
+// SIZE: 128
 // FUNCTION: SERVER 0x100104a0
 
 int __cdecl cm_GetBuildingStatCount(uchar* cmd)

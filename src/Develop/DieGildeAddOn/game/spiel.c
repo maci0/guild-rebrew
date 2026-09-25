@@ -77,6 +77,8 @@ void __cdecl gm_ResetAllEntities(void)
  * primary entity, object entity, and dynamic entity.
  * Returns non-zero on success. Core entity resolution API. */
 
+// FUNCTION: GOLDTL 0x005012f0
+// SIZE: 194
 // FUNCTION: SERVER 0x10015cf0
 // gm_CleanupObjectEntities
 //   Loop counts records (i < 0x5008, i++) and scales by the 0x43 stride at each
@@ -148,6 +150,8 @@ Record* __cdecl gm_FindRecordById(int id)
 /* Cleans up object entities. Frees inventory objects and
  * linked item chains from all active entities. */
 
+// FUNCTION: GOLDTL 0x00501550
+// SIZE: 135
 // FUNCTION: SERVER 0x10015E00
 // gm_CleanupAllEntities
 
