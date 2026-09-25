@@ -2,6 +2,8 @@ extern int g_7f4c00;
 
 unsigned short __cdecl fcn_0042e410(int);
 
+// FUNCTION: GOLD 0x004a9150
+// SIZE: 66
 // FUNCTION: GOLDTL 0x4a9270
 // SIZE: 66
 
