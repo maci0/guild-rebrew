@@ -1,7 +1,8 @@
+typedef int (__stdcall* g_662398_f)(int, int, int, int, int);
 // GLOBAL: GOLDTL 0x662398
-extern int (__stdcall* g_662398)(int, int, int, int, int);
+extern g_662398_f g_662398;
 // GLOBAL: GOLD 0x5eb360
-extern int (__stdcall* g_662398)(int, int, int, int, int);
+extern g_662398_f g_662398;
 // FUNCTION: GOLD 0x0042bbf0
 // SIZE: 68
 // FUNCTION: GOLDTL 0x42a5d0

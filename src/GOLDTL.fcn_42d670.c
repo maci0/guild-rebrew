@@ -1,3 +1,9 @@
+// GLOBAL: GOLDTL 0x149d188
+extern int g_149d188[];
+// GLOBAL: GOLD 0x1432028
+extern int g_149d188[];
+// FUNCTION: GOLD 0x0042e320
+// SIZE: 60
 // FUNCTION: GOLDTL 0x42d670
 // SIZE: 60
 
@@ -12,7 +18,7 @@ void __cdecl fcn_0042d670(int a)
 	if (i == -1) {
 		return;
 	}
-	x = *(int*) (0x149d188 + i * 29 * 4);
+	x = g_149d188[i * 29];
 	fcn_0041ddd0(x);
-	*(int*) (0x149d188 + i * 29 * 4) = 0;
+	g_149d188[i * 29] = 0;
 }

@@ -1,11 +1,12 @@
+typedef void (__stdcall* g_6623bc_f)(int);
 // GLOBAL: GOLDTL 0x6b7f10
 extern int* g_6b7f10[16];
 // GLOBAL: GOLD 0x633330
 extern int* g_6b7f10[16];
 // GLOBAL: GOLDTL 0x6623bc
-extern void (__stdcall* g_6623bc)(int);
+extern g_6623bc_f g_6623bc;
 // GLOBAL: GOLD 0x5eb35c
-extern void (__stdcall* g_6623bc)(int);
+extern g_6623bc_f g_6623bc;
 // FUNCTION: GOLD 0x0042bc40
 // SIZE: 95
 // FUNCTION: GOLDTL 0x42a6a0
