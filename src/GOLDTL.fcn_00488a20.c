@@ -36,7 +36,8 @@ int __cdecl fcn_00488a20(Ent* e)
 	e->state |= 4;
 	found = 0;
 	for (i = 0; !found && i < 768; i++) {
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].owner == e->owner && g_7f4ca0[i].alive != 0 && (g_7f4ca0[i].job == 0 || *g_7f4ca0[i].job == 4 || *g_7f4ca0[i].job == 0x8c) && (g_7f4ca0[i].state & 4) == 0) {
+		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].owner == e->owner && g_7f4ca0[i].alive != 0
+		    && (g_7f4ca0[i].job == 0 || *g_7f4ca0[i].job == 4 || *g_7f4ca0[i].job == 0x8c) && (g_7f4ca0[i].state & 4) == 0) {
 			if (g_7f4ca0[i].b81 < 168.0f || g_7f4ca0[i].b82 < 168.0f || g_7f4ca0[i].b84 < 168.0f) {
 				found = 1;
 			}
@@ -49,7 +50,8 @@ int __cdecl fcn_00488a20(Ent* e)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].owner == e->owner && g_7f4ca0[i].alive != 0 && (g_7f4ca0[i].job == 0 || *g_7f4ca0[i].job == 4 || *g_7f4ca0[i].job == 0x8c) && (g_7f4ca0[i].state & 4) == 0) {
+		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].owner == e->owner && g_7f4ca0[i].alive != 0
+		    && (g_7f4ca0[i].job == 0 || *g_7f4ca0[i].job == 4 || *g_7f4ca0[i].job == 0x8c) && (g_7f4ca0[i].state & 4) == 0) {
 			g_7f4ca0[i].flags |= 0x10;
 		}
 	}
