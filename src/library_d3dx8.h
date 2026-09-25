@@ -2,8 +2,32 @@
 // Auto-generated (see .scratch/gen_d3dx8_library.py) -- the linker supplies
 // these bytes, so they are not worth reversing.
 
+// LIBRARY: D3DX8 0x0045d3f0
+// _adler32
+
+// LIBRARY: D3DX8 0x0045d770
+// _deflateInit2_
+
+// LIBRARY: D3DX8 0x0045da70
+// _deflateReset
+
+// LIBRARY: D3DX8 0x0045df20
+// _deflateEnd
+
+// LIBRARY: D3DX8 0x0045e370
+// _fill_window
+
+// LIBRARY: D3DX8 0x0045e4a0
+// _read_buf
+
 // LIBRARY: D3DX8 0x0045fa70
 // _gzeof
+
+// LIBRARY: D3DX8 0x0045fc50
+// _inflate_blocks_reset
+
+// LIBRARY: D3DX8 0x0045fcd0
+// _inflate_blocks_new
 
 // LIBRARY: D3DX8 0x004609c0
 // _inflate_blocks_free
@@ -13,6 +37,48 @@
 
 // LIBRARY: D3DX8 0x00460a50
 // _inflate_codes_new
+
+// LIBRARY: D3DX8 0x00461510
+// _inflateReset
+
+// LIBRARY: D3DX8 0x00461560
+// _inflateEnd
+
+// LIBRARY: D3DX8 0x004615b0
+// _inflateInit2_
+
+// LIBRARY: D3DX8 0x00461ca0
+// _inflate_trees_bits
+
+// LIBRARY: D3DX8 0x00462200
+// _inflate_trees_dynamic
+
+// LIBRARY: D3DX8 0x00462390
+// _inflate_trees_fixed
+
+// LIBRARY: D3DX8 0x004623c0
+// _inflate_flush
+
+// LIBRARY: D3DX8 0x00462a80
+// _init_block
+
+// LIBRARY: D3DX8 0x00462da0
+// __tr_flush_block
+
+// LIBRARY: D3DX8 0x004631b0
+// _pqdownheap
+
+// LIBRARY: D3DX8 0x00463520
+// _build_bl_tree
+
+// LIBRARY: D3DX8 0x00463590
+// _scan_tree
+
+// LIBRARY: D3DX8 0x004642b0
+// _set_data_type
+
+// LIBRARY: D3DX8 0x00464460
+// _copy_block
 
 // LIBRARY: D3DX8 0x005eac1c
 // ?WithinEpsilon@@YAHMM@Z
