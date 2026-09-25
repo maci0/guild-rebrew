@@ -4,7 +4,7 @@
 int __cdecl fcn_0042d630(int);
 int __cdecl fcn_0041ddd0(int);
 
-void __cdecl fcn_0040c1d0(int a)
+void __cdecl fcn_0042d670(int a)
 {
 	int i;
 	int x;
