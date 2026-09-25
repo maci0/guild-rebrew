@@ -1,0 +1,61 @@
+extern char* g_14d0020[0x300];
+extern int g_67a370;
+extern int g_6b8010;
+
+void __cdecl fcn_00405130(char*);
+void __cdecl fcn_00404560(char*);
+int __cdecl fcn_00413190(int);
+void __cdecl fcn_004432d0(int, int);
+void __cdecl fcn_00442be0(void*);
+void __cdecl fcn_00403df0(char*);
+void __cdecl fcn_0041ddd0(char*);
+
+// FUNCTION: GOLDTL 0x4030e0
+// SIZE: 284
+
+/* Removes an object from the live-object table and releases its scene
+ * nodes. */
+int __cdecl fcn_004030e0(char* obj)
+{
+	int i = 0;
+	int saved;
+
+	if (obj != 0) {
+		while (g_14d0020[i] != obj && i < 0x300) {
+			i++;
+		}
+		if (i < 0x300) {
+			g_14d0020[i] = 0;
+			*(int*) obj = -1;
+			fcn_00405130(obj);
+			if (*(int*) (obj + 0x34) != 0) {
+				saved = -1;
+				fcn_00404560(obj);
+				if (g_67a370 != *(int*) (obj + 0x88)) {
+					saved = g_6b8010;
+					fcn_004432d0(fcn_00413190(*(int*) (obj + 0x88)), 1);
+				}
+				if (*(void (__cdecl**)(char*)) (obj + 0x228) != 0) {
+					(*(void (__cdecl**)(char*)) (obj + 0x228))(obj);
+				}
+				fcn_00442be0(*(void**) (obj + 0x34));
+				*(int*) (obj + 0x34) = 0;
+				if (*(void***) (obj + 0x124) != 0 && **(void***) (obj + 0x124) != 0) {
+					fcn_00442be0(**(void***) (obj + 0x124));
+				}
+				if (*(void**) (obj + 0x22c) != 0) {
+					fcn_00442be0(*(void**) (obj + 0x22c));
+				}
+				if (saved != -1) {
+					fcn_004432d0(saved, 1);
+				}
+			}
+			if (*(int*) (obj + 0x124) != 0) {
+				fcn_00403df0(obj);
+			}
+			fcn_0041ddd0(obj);
+			return 1;
+		}
+	}
+	return 0;
+}
