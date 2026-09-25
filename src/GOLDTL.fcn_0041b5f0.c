@@ -1,3 +1,5 @@
+extern int g_6777ac;
+
 // SIZE 0x14
 struct vertex_41b5f0 {
 	float x;
@@ -7,7 +9,6 @@ struct vertex_41b5f0 {
 	int color;
 };
 
-extern int g_6777ac;
 extern struct vertex_41b5f0* g_6b5df0;
 
 void __cdecl fcn_0041d9e0(const char* msg);
