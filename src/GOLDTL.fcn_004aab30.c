@@ -8,6 +8,8 @@ void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c6ae0(int id, int k);
 void __cdecl fcn_004c4ef0(char* s);
 
+// FUNCTION: GOLD 0x4aaa10
+// SIZE: 208
 // FUNCTION: GOLDTL 0x4aab30
 // SIZE: 202
 int __cdecl fcn_004aab30(char* a1, int a2, char* x)
