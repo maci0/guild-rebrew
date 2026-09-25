@@ -1,4 +1,6 @@
-// SIZE 0x8037
+extern int g_6b8010;
+
+// SIZE 0x8038
 struct s_6b8300 {
 	int kind;
 	char pad[0x8032];
@@ -7,7 +9,6 @@ struct s_6b8300 {
 };
 
 extern struct s_6b8300* g_6b8300;
-extern int g_6b8010;
 extern int g_1043370;
 extern char g_699b08;
 extern int g_67a370;
