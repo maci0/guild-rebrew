@@ -37,3 +37,29 @@ int __cdecl fcn_00507910(int k)
 	}
 	return 0;
 }
+
+// SIZE 0x24d
+typedef struct {
+	unsigned char type;
+	char pad1[0x24c];
+} Ent;
+
+extern Ent* g_868050;
+
+float __cdecl fcn_0050b8d0(unsigned char* p, int k, int a, int b);
+
+// FUNCTION: GOLDTL 0x005101e0
+// SIZE: 116
+
+/* Lives in this file because it must see fcn_00507910 above it: msvc6 then
+ * knows the callee leaves edx alone and keeps k there across the call. */
+float __cdecl fcn_005101e0(unsigned char* p, int k, int a, int b)
+{
+	int c;
+
+	c = fcn_00507910(g_868050[k].type);
+	if (c != 10 && c != 11 && c != 12) {
+		return fcn_0050b8d0(p, k, a, b) * 3.0f;
+	}
+	return fcn_0050b8d0(p, k, a, b) * 9.0f;
+}
