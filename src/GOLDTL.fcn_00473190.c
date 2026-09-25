@@ -20,7 +20,7 @@ void __cdecl fcn_0047c9c0(int, int, int, int, int, float);
 void __cdecl fcn_00473150(Fade*);
 
 // FUNCTION: GOLDTL 0x00473190
-// SIZE: 304
+// SIZE: 289
 
 void __cdecl fcn_00473190(Fade* t)
 {

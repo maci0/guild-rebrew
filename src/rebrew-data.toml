@@ -4494,6 +4494,7 @@ section = ".data"
 section = ".data"
 
 ["GOLD.0x005f2c78"]
+section = ".data"
 
 
 ["GOLD.0x006332e0"]
@@ -4710,6 +4711,7 @@ section = ".data"
 section = ".data"
 
 ["GOLD.0x005feb8c"]
+section = ".data"
 
 
 ["GOLDTL.0x00680bd0"]
