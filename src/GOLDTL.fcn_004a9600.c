@@ -17,6 +17,8 @@ float __cdecl gm_RandomFloat01(void);
 
 // FUNCTION: GOLDTL 0x4a9600
 // SIZE: 230
+// FUNCTION: GOLD 0x004a94e0
+// SIZE: 240
 int __cdecl fcn_004a9600(int a1, char* e, int a3, int a4, char* out)
 {
 	int lim;
