@@ -11,6 +11,8 @@ void __cdecl fcn_004fca70(unsigned short id, int* out, int c);
 void __cdecl fcn_004fc800(unsigned short id, int* out, int c);
 void __cdecl fcn_004fc940(unsigned short id, int* out, int c);
 
+// FUNCTION: GOLD 0x4fa4b0
+// SIZE: 208
 // FUNCTION: GOLDTL 0x004fcb50
 // SIZE: 197
 int __cdecl fcn_004fcb50(unsigned short id, int* out, int c)

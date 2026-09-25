@@ -120,6 +120,8 @@ void __cdecl fcn_004fb740(void)
 	fcn_004c6a00(buf);
 }
 
+// FUNCTION: GOLD 0x4f9710
+// SIZE: 144
 // FUNCTION: GOLDTL 0x004fbc90
 // SIZE: 143
 int __cdecl fcn_004fbc90(unsigned int* msg)

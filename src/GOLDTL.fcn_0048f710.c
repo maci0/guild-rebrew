@@ -11,6 +11,8 @@ int __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
 unsigned short __cdecl fcn_0042e410(int n);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
+// FUNCTION: GOLD 0x490160
+// SIZE: 320
 // FUNCTION: GOLDTL 0x48f710
 // SIZE: 306
 int __cdecl fcn_0048f710(char* a1, char* e, char* r, char* out)

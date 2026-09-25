@@ -110,6 +110,8 @@ int __cdecl find_zone_record(char* base, int x, int y)
  * records for a matching grid position. Returns record index
  * or -1 if not found. */
 
+// FUNCTION: GOLD 0x4bc710
+// SIZE: 176
 // FUNCTION: GOLDTL 0x4bccf0
 // SIZE: 163
 // FUNCTION: SERVER 0x10014ff0

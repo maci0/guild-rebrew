@@ -83,6 +83,8 @@ float __cdecl fcn_004feff0(Bar24* a1)
 
 extern float g_6628a8;
 
+// FUNCTION: GOLD 0x4fc8e0
+// SIZE: 64
 // FUNCTION: GOLDTL 0x004ff040
 // SIZE: 56
 
