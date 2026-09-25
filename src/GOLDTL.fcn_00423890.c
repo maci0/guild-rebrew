@@ -1,3 +1,6 @@
+extern int g_6b7d7c;
+// FUNCTION: GOLD 0x00427330
+// SIZE: 54
 // FUNCTION: GOLDTL 0x423890
 // SIZE: 54
 
@@ -7,7 +10,7 @@ int __cdecl fcn_00423890(int* a1, int a2)
 {
 	int r;
 
-	r = *(int*) 0x6b7d7c;
+	r = g_6b7d7c;
 	if (r != 0) {
 		if (a1 != 0) {
 			if (a2 >= 0 && a2 <= 0x7f) {

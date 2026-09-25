@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x00402af0
+// SIZE: 176
 // FUNCTION: GOLDTL 0x00403330
 // SIZE: 176
 
@@ -35,7 +37,7 @@ void __cdecl fcn_00403330(unsigned char mode)
 			}
 		}
 		p++;
-	} while ((int) p < 0x14d0c20);
+	} while ((int) p < (int) (g_14d0020 + 0x300));
 	g_6b5c34 = 2 - mode;
 	fcn_004432d0(saved, 1);
 }
