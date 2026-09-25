@@ -2,10 +2,12 @@
 // SIZE: 234
 
 typedef struct IDev IDev;
+// SIZE 0xcc
 typedef struct IDevVtbl {
 	void* slots[50];
 	long (__stdcall* SetRenderState)(IDev*, int, float);
 } IDevVtbl;
+// SIZE 0x4
 struct IDev {
 	IDevVtbl* v;
 };
