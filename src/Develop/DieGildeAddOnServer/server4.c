@@ -29,9 +29,6 @@ extern char s_WSAEINVAL_10028e3c[];
 extern char s_WSAECONNABORTED_10028da0[];
 extern char s_WSAETIMEDOUT_10028d24[];
 extern char s_WSAECONNRESET_10028bf8[];
-
-// FUNCTION: GOLDTL 0x4e7810
-// SIZE: 372
 // FUNCTION: SERVER 0x1000ad40
 // srv_LogWinsockError
 
@@ -404,6 +401,8 @@ void __cdecl srv_LogWinsockError(int err_code)
  * rep-stosd iteration — the memset alone is 252 iterations. */
 
 extern char g_office_slots[];
+// FUNCTION: GOLDTL 0x4e7810
+// SIZE: 372
 // FUNCTION: SERVER 0x1000b040
 
 // srv_InitBuildingTypeTable
