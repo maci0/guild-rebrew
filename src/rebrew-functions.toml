@@ -1875,13 +1875,6 @@ updated_by = "test"
 updated_at = "2026-09-22T18:42:36+00:00"
 size = 37
 
-["GOLDTL.0x0063e931"]
-status = "SIZE_MISMATCH"
-updated_by = "test"
-updated_at = "2026-09-12T14:56:23+00:00"
-size = 495
-cflags = "/O2 /Gd /G6 /Oy-"
-
 ["GOLDTL.0x004ec850"]
 size = 80
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
@@ -2026,9 +2019,6 @@ status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-20T15:41:23+00:00"
 
-["GOLD.0x005df7d1"]
-size = 11
-
 ["GOLD.0x00410430"]
 size = 12
 status = "EXACT"
@@ -2071,9 +2061,6 @@ status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-20T15:45:40+00:00"
 
-["GOLD.0x005e7cf1"]
-size = 12
-
 ["GOLD.0x0040b5a0"]
 size = 13
 status = "RELOC"
@@ -2097,9 +2084,6 @@ size = 13
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-20T15:46:59+00:00"
-
-["GOLD.0x005e19ef"]
-size = 13
 
 ["GOLD.0x004273c0"]
 size = 14
@@ -2125,12 +2109,6 @@ status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-20T15:49:50+00:00"
 
-["GOLD.0x005e1a0c"]
-size = 14
-
-["GOLD.0x005e6fde"]
-size = 14
-
 ["GOLD.0x00410610"]
 size = 15
 status = "RELOC"
@@ -2142,9 +2120,6 @@ size = 15
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-20T15:50:18+00:00"
-
-["GOLD.0x005e6fec"]
-size = 15
 
 ["GOLD.0x00428ce0"]
 size = 16
@@ -3827,13 +3802,6 @@ updated_by = "verify"
 updated_at = "2026-09-21T06:47:44+00:00"
 size = 8
 
-["GOLDTL.0x0045fa70"]
-cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
-size = 32
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-21T11:13:19+00:00"
-
 ["GOLDTL.0x00469610"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
 status = "EXACT"
@@ -4181,10 +4149,6 @@ updated_by = "test"
 updated_at = "2026-09-21T10:43:53+00:00"
 size = 30
 
-["GOLDTL.0x005eb0d9"]
-cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
-size = 47
-
 ["GOLDTL.0x0064e63d"]
 cflags = "/O1 /Gd"
 status = "RELOC"
@@ -4309,16 +4273,6 @@ updated_by = "test"
 updated_at = "2026-09-21T11:41:36+00:00"
 size = 66
 
-["GOLDTL.0x0045d600"]
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
-
-["GOLDTL.0x0045dea0"]
-status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
-
 ["GOLDTL.0x0045e520"]
 status = "SIZE_MISMATCH"
 updated_by = "verify"
@@ -4336,12 +4290,6 @@ status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T17:40:26+00:00"
 
-["GOLDTL.0x00460a40"]
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-21T11:21:55+00:00"
-size = 13
-
 ["GOLDTL.0x00464a30"]
 status = "RELOC"
 updated_by = "verify"
@@ -4353,12 +4301,6 @@ size = 64
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-21T12:02:18+00:00"
-
-["GOLDTL.0x00465840"]
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-21T10:44:52+00:00"
-size = 12
 
 ["GOLDTL.0x00466330"]
 status = "SIZE_MISMATCH"
@@ -4520,8 +4462,6 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 ["GOLDTL.0x005974e0"]
 
 ["GOLDTL.0x005d6030"]
-
-["GOLDTL.0x0062e6bb"]
 
 ["GOLDTL.0x0064e761"]
 cflags = "/O1 /Gd"
@@ -4969,17 +4909,6 @@ updated_at = "2026-09-22T19:20:17+00:00"
 status = "EXACT"
 updated_by = "verify"
 updated_at = "2026-09-22T19:20:17+00:00"
-
-["GOLDTL.0x00461190"]
-status = "EXACT"
-updated_by = "verify"
-updated_at = "2026-09-22T19:20:17+00:00"
-
-["GOLDTL.0x00465820"]
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T19:20:17+00:00"
-size = 19
 
 ["GOLDTL.0x004ae060"]
 status = "RELOC"
@@ -5970,12 +5899,6 @@ size = 45
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-22T20:29:46+00:00"
-
-["GOLDTL.0x0045de70"]
-size = 47
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T20:29:47+00:00"
 
 ["GOLDTL.0x0045fb30"]
 size = 43
@@ -7392,12 +7315,6 @@ status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T22:56:00+00:00"
 
-["GOLDTL.0x00460a50"]
-size = 57
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T22:59:22+00:00"
-
 ["GOLDTL.0x005809f0"]
 size = 14
 status = "EXACT"
@@ -8471,12 +8388,6 @@ updated_at = "2026-09-23T11:02:05+00:00"
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T11:03:20+00:00"
-
-["GOLDTL.0x004609c0"]
-size = 57
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-23T11:03:21+00:00"
 
 ["GOLDTL.0x004da4d0"]
 status = "RELOC"

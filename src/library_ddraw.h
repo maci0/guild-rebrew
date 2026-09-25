@@ -1,6 +1,6 @@
-// LIBRARY: DDRAW 0x005de5d6
+// LIBRARY: GOLD 0x005de5d6
 // DirectDrawCreate
 
-// LIBRARY: DDRAW 0x005de5dc
+// LIBRARY: GOLD 0x005de5dc
 // DirectDrawEnumerateExA
 

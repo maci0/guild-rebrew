@@ -1,3 +1,3 @@
-// LIBRARY: USER32 0x00422cb5
+// LIBRARY: GOLD 0x00422cb5
 // DefWindowProcA
 
