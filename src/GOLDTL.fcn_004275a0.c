@@ -1,5 +1,9 @@
+// FUNCTION: GOLD 0x00428d10
+// SIZE: 94
 // FUNCTION: GOLDTL 0x4275a0
 // SIZE: 94
+
+extern char* g_6b7e98;
 
 void __cdecl fcn_00426680(int, int*);
 void __cdecl fcn_004263b0(int);
@@ -11,7 +15,7 @@ int __cdecl fcn_004275a0(void)
 	char* g;
 	char* x;
 
-	g = *(char**) 0x6b7e98;
+	g = g_6b7e98;
 	x = *(char**) (g + 0xc28);
 	if (*(int*) (x + *(int*) (x + 8) * 16 + 0x44) != 0) {
 		fcn_00426680(*(int*) (g + 0x118), buf);

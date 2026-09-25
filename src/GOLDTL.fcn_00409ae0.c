@@ -27,6 +27,8 @@ struct anim_409ae0* __cdecl fcn_00404dc0(char*, const char*, int);
 void __cdecl fcn_0041ddd0(void*);
 void __cdecl fcn_004050c0(char*);
 
+// FUNCTION: GOLD 0x00408cb0
+// SIZE: 419
 // FUNCTION: GOLDTL 0x409ae0
 // SIZE: 419
 
