@@ -57,6 +57,8 @@ static __inline void send_hit(int id)
 	fcn_004c5530(&s);
 }
 
+// FUNCTION: GOLD 0x5d2870
+// SIZE: 573
 // FUNCTION: GOLDTL 0x005deda0
 // SIZE: 573
 

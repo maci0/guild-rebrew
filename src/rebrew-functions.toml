@@ -25575,3 +25575,135 @@ status = "EXACT"
 updated_by = "verify"
 updated_at = "2026-09-25T17:40:48+00:00"
 
+["GOLD.0x00538040"]
+size = 337
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:16+00:00"
+
+["GOLD.0x0053cc10"]
+size = 390
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:19+00:00"
+
+["GOLD.0x005458c0"]
+size = 462
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:22+00:00"
+
+["GOLD.0x005510f0"]
+size = 62
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:25+00:00"
+
+["GOLD.0x00558720"]
+size = 126
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:28+00:00"
+
+["GOLD.0x005590c0"]
+size = 160
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:30+00:00"
+
+["GOLD.0x0055b970"]
+size = 271
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:33+00:00"
+
+["GOLD.0x00562b80"]
+size = 62
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:35+00:00"
+
+["GOLD.0x00579100"]
+size = 1839
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:38+00:00"
+
+["GOLD.0x0057ad40"]
+size = 1072
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:40+00:00"
+
+["GOLD.0x00582670"]
+size = 429
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T17:49:43+00:00"
+
+["GOLD.0x0052e700"]
+size = 386
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:22+00:00"
+
+["GOLD.0x0052e890"]
+size = 461
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:24+00:00"
+
+["GOLD.0x0052f740"]
+size = 727
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:27+00:00"
+
+["GOLD.0x005321c0"]
+size = 913
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:29+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
+
+["GOLD.0x00532960"]
+size = 370
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:32+00:00"
+
+["GOLD.0x0053dd50"]
+size = 438
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:34+00:00"
+
+["GOLD.0x00588f30"]
+size = 1111
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:36+00:00"
+
+["GOLD.0x00589390"]
+size = 823
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:39+00:00"
+
+["GOLD.0x0058f880"]
+size = 369
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:41+00:00"
+
+["GOLD.0x0058fb00"]
+size = 310
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:44+00:00"
+
+["GOLD.0x005d2870"]
+size = 573
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-25T18:05:46+00:00"
