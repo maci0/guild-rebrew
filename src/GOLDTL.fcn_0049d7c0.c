@@ -16,7 +16,7 @@ typedef struct F8 {
 	int mask;
 	int b;
 } F8;
-// SIZE 8
+// SIZE 0x8
 
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl fcn_005015e0(char**, char**, char**, int);

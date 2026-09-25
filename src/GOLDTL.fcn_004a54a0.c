@@ -20,7 +20,7 @@ typedef struct Cand {
 	unsigned short* obj;
 	float val;
 } Cand;
-// SIZE 8
+// SIZE 0x8
 
 extern unsigned short* g_77261c;
 extern int g_7728bc;

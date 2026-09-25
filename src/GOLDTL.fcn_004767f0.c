@@ -13,7 +13,7 @@ typedef struct ComVtbl {
 struct Com {
 	ComVtbl* v;
 };
-// SIZE 4
+// SIZE 0x4
 
 typedef struct Target {
 	char pad0[0x20];
