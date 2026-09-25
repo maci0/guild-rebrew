@@ -478,6 +478,8 @@ int __cdecl gm_GetOppositeStatIndex(int stat_id)
  * delta value for stat variation during entity creation
  * or level-up events. */
 
+// FUNCTION: GOLD 0x505da0
+// SIZE: 80
 // FUNCTION: GOLDTL 0x00508df0
 // SIZE: 80
 // FUNCTION: SERVER 0x10018450
