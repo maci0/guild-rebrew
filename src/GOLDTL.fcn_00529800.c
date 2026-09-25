@@ -1,3 +1,5 @@
+int* __cdecl fcn_004ce610(char*);
+
 // SIZE 0x20
 struct s_7e2ac0 {
 	int key;
@@ -11,7 +13,6 @@ extern struct s_7e2ac0 g_7e2ac0[48];
 // FUNCTION: GOLDTL 0x529800
 // SIZE: 141
 
-int* __cdecl fcn_004ce610(char*);
 
 int __cdecl fcn_00529800(char* a, int* out)
 {
