@@ -14,6 +14,8 @@ extern unsigned int g_7728bc;
 extern fcn_004a34d0_ring* g_664448;
 extern fcn_004a34d0_entry g_10082a0[];
 
+// FUNCTION: GOLD 0x4a3a90
+// SIZE: 96
 // FUNCTION: GOLDTL 0x4a34d0
 // SIZE: 83
 
