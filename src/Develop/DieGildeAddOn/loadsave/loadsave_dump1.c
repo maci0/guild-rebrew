@@ -1,5 +1,5 @@
-// FUNCTION: GOLDTL 0x4f3900
-// SIZE: 688
+// FUNCTION: GOLDTL 0x4f3bb0
+// SIZE: 682
 // FUNCTION: SERVER 0x10012000
 
 #include <string.h>
