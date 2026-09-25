@@ -4208,6 +4208,9 @@ Rules measured with it:
 - **0x414960 (open, 325/332):** the last `mx->z` store's `fstp` is in the latch block with
   `add ecx,0x50; dec edx`; its float-store bonus gives it 81920 against 32768 and 24576, so it
   issues first. The reference issues it last, which this formula gives only without the bonus.
+- **Block-scoped locals drop may-alias edges.** A message struct declared in the branch that
+  sends it gets no edge from its stores to a later load through a pointer (0x5d63e0: store height
+  8 against 11 at function scope; shapes 202).
 - **0x4ce210 (open, 68/74):** the rotation picks `g_9badd0` eax, `arg` ecx and the `&m` push temp
   edx. The reference's `&m` in eax is what one more rotation pick before it would give; no
   source shape producing that pick has been found (phantom stores, named copies, literal-address

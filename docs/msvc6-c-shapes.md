@@ -8655,3 +8655,13 @@ load-bearing line. Traces used the Processor Pack c2 routines of `msvc6-allocato
   dst = base + off;` with `unsigned int off`. Defining `dst` by the zero-extending load gave it six
   counted uses per loop block and priority 318 against the stream pointer's 316; with the offset in its
   own temporary the pointer is coloured first and takes eax.
+- **0x5d63e0 (message header stores issued before the argument push).** The message struct is
+  declared in the block that fills and sends it. At function scope the header stores written
+  before the `e + 4` load get a may-alias edge to it (height 11 against the push's 9) and issue
+  ahead of the push; block-scoped, the same stores have height 8 and issue after it, as in the
+  reference. Measured on the scheduler trace, same statement order in both.
+- **0x5dc990 (two arms that send the same message).** `result` assigned on every path (`1` after
+  each arm's send, `0` in each null branch) and one `return result;` keep the arms' call-and-return
+  tails apart; with `return 1;` in the arms the second arm's call was cross-jumped into the first.
+  Each arm declares its own message struct, which lets arm 2 store the type byte before the
+  `e + 4` load (as in 0x5d63e0) while arm 1 stores `f8` first.
