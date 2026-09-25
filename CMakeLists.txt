@@ -128,10 +128,6 @@ if(REBREW_BUILD_SERVER)
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/_[^/]*\\.c$")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt/")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/zlib/")
-  # unknown/crc32.c is the reversed copy of zlib's crc32 (0x100011f0). It stays
-  # in the tree for `rebrew test`, but linking it beside references/zlib-1.1.3/
-  # crc32.c defines _crc32 twice.
-  list(FILTER SERVER_SOURCES EXCLUDE REGEX "/unknown/crc32\\.c$")
   # Pure CRT bodies live in LIBCMT. Keep only game/layout files under crt_region.
   #
   # All 68 annotated functions under crt_region/ were measured to be
@@ -162,9 +158,6 @@ if(REBREW_BUILD_SERVER)
   #       unduplicated, but .rdata is 0x40 long and postlink still refuses it.
   #       Only the blob reproduces the original's tighter packing, so the blob
   #       keeps the strings and crt0msg.obj stays out of the link.
-  #   crt_init.c                         NOT in this list and not compiled:
-  #       LIBCMT's dllcrt0.obj already supplies __CRT_INIT, which dllmain.c
-  #       calls. The reversed body stays in the tree for reference only.
   # Dropping any of these was tried and measured; each one regresses either the
   # import set or the .rdata size.
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt_region/")

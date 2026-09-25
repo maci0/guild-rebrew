@@ -3,10 +3,6 @@
 // These functions come from LIBCMT.lib (static CRT, /MT)
 // Not compiled - annotation-only markers for reccmp matching
 
-// LIBRARY: SERVER 0x1001A140
-// srv_SeedRandomWithTime
-// SIZE: 14
-
 // LIBRARY: SERVER 0x1001A18A
 // _fclose
 
@@ -115,9 +111,6 @@
 // LIBRARY: SERVER 0x1001B12F
 // _toupper
 // SIZE: 204
-
-// LIBRARY: SERVER 0x1001A150
-// _srand
 
 // LIBRARY: SERVER 0x1001B535
 // _srand_impl

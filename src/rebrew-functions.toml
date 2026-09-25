@@ -4,10 +4,6 @@ status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-20T17:59:28+00:00"
 
-["SERVER.0x100011f0"]
-size = 309
-status = "RELOC"
-
 ["SERVER.0x10002640"]
 size = 290
 status = "RELOC"
@@ -127,34 +123,6 @@ status = "RELOC"
 size = 43
 status = "RELOC"
 
-["SERVER.0x10003e40"]
-size = 3328
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "EXACT"
-
-["SERVER.0x10004b40"]
-size = 57
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "EXACT"
-
-["SERVER.0x10004b80"]
-size = 57
-status = "EXACT"
-
-["SERVER.0x10004bc0"]
-size = 1968
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "EXACT"
-
-["SERVER.0x10005370"]
-size = 20
-status = "EXACT"
-
-["SERVER.0x10005390"]
-size = 911
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "EXACT"
-
 ["SERVER.0x10006580"]
 size = 658
 toolchain = "msvc-6.0-sp6"
@@ -202,11 +170,6 @@ size = 137
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x100083c0"]
-size = 1083
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "EXACT"
 
 ["SERVER.0x10008a50"]
 size = 53
@@ -1614,40 +1577,12 @@ status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T11:10:15+00:00"
 
-["SERVER.0x1001a18a"]
-size = 49
-status = "EXACT"
-
-["SERVER.0x1001a1bb"]
-size = 76
-status = "EXACT"
-
-["SERVER.0x1001a2eb"]
-status = "MISSING_SIZE"
-
-["SERVER.0x1001a30d"]
-status = "MISSING_SIZE"
-
-["SERVER.0x1001a527"]
-size = 25
-status = "EXACT"
-
 ["SERVER.0x1001a643"]
 size = 45
 cflags = "/O1 /Gd"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001a670"]
-size = 17
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001a692"]
-size = 15
-cflags = "/O1 /Gd"
-status = "RELOC"
 
 ["SERVER.0x1001a758"]
 size = 26
@@ -1656,178 +1591,12 @@ status = "EXACT"
 updated_by = "verify"
 updated_at = "2026-09-22T05:50:31+00:00"
 
-["SERVER.0x1001a7e5"]
-size = 9
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001a7ee"]
-size = 9
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001a7f7"]
-size = 18
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001a809"]
-size = 44
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001a835"]
-source = "DBGHEAP.C:126"
-size = 252
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001a931"]
-size = 47
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001a960"]
-size = 266
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001aa6a"]
-size = 47
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001aa99"]
-size = 232
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001ab81"]
-source = "DBGHEAP.C:952"
-status = "RELOC"
-size = 233
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001ac9f"]
-size = 46
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001accd"]
-size = 92
-status = "EXACT"
-
-["SERVER.0x1001ad29"]
-size = 9
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001ad32"]
-size = 164
-cflags = "/O1 /Gd"
-toolchain = "msvc-6.0-sp6"
-status = "RELOC"
-
-["SERVER.0x1001ae20"]
-size = 272
-cflags = "/O1 /Gd"
-status = "PROVEN"
-blocker = "CRT amsg_exit hand-written / near-zero match — parked pending CRT path"
-blocker_delta = 260
-
-["SERVER.0x1001b12f"]
-size = 204
-status = "EXACT"
-
-["SERVER.0x1001b564"]
-size = 39
-status = "EXACT"
-
-["SERVER.0x1001b58b"]
-size = 65
-status = "EXACT"
-
-["SERVER.0x1001b5cc"]
-source = "DBGHEAP.C:763"
-status = "SIZE_MISMATCH"
-size = 815
-note = "prove: Z3 found a satisfying assignment where EAX differs (checked 4 x 5 state pairs); EAX=4294901759 vs 65536"
-
-["SERVER.0x1001b8fb"]
-size = 217
-cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T11:10:15+00:00"
-
 ["SERVER.0x1001b9d4"]
 size = 157
 cflags = "/O1 /Oy- /Gd"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001ba71"]
-size = 51
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001baa4"]
-size = 235
-
-["SERVER.0x1001bb60"]
-size = 47
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001bb8f"]
-size = 35
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001bbb2"]
-size = 47
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001bbe1"]
-size = 35
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001bc04"]
-size = 93
-status = "EXACT"
-
-["SERVER.0x1001bc61"]
-size = 174
-
-["SERVER.0x1001bce4"]
-status = "MISSING_SIZE"
-
-["SERVER.0x1001bdd0"]
-size = 123
-cflags = "/O1 /Gd"
-status = "PROVEN"
-blocker = "hand-written CRT; 9 unreachable alignment filler bytes — parked"
-blocker_delta = 116
-
-["SERVER.0x1001c9a5"]
-cflags = "/O1 /Gd"
-size = 444
-status = "PROVEN"
-blocker = "CRT _ioinit — parked pending CRT path"
-blocker_delta = 405
-
-["SERVER.0x1001cfa1"]
-size = 41
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001cfca"]
-size = 108
-cflags = "/O1 /Gd"
-status = "RELOC"
 
 ["SERVER.0x1001d036"]
 size = 97
@@ -1839,56 +1608,6 @@ updated_at = "2026-09-22T11:10:15+00:00"
 ["SERVER.0x1001d097"]
 size = 21
 cflags = "/O1 /Oy- /Gd"
-status = "RELOC"
-
-["SERVER.0x1001d0ac"]
-size = 84
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001d100"]
-size = 30
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d11e"]
-size = 19
-cflags = "/O1 /Gd"
-status = "EXACT"
-
-["SERVER.0x1001d198"]
-size = 160
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d238"]
-size = 27
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001d253"]
-size = 45
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001d280"]
-size = 328
-cflags = "/O1 /Gd"
-status = "SIZE_MISMATCH"
-
-["SERVER.0x1001d3c8"]
-size = 93
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001d425"]
-size = 168
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d4cd"]
-size = 72
-cflags = "/O1 /Gd"
 status = "RELOC"
 
 ["SERVER.0x1001d515"]
@@ -1988,115 +1707,6 @@ cflags = "/O1 /Gd"
 status = "EXACT"
 updated_by = "verify"
 updated_at = "2026-09-22T05:50:31+00:00"
-
-["SERVER.0x1001f0ff"]
-size = 147
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001f855"]
-size = 117
-status = "EXACT"
-
-["SERVER.0x1001f8d0"]
-size = 16
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001f8e0"]
-size = 224
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001f9c0"]
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001fb12"]
-size = 436
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001fdf8"]
-size = 57
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001fe31"]
-size = 339
-cflags = "/O1 /Gd"
-status = "SIZE_MISMATCH"
-
-["SERVER.0x1001ff84"]
-source = "DBGHEAP.C:452"
-size = 317
-
-["SERVER.0x100200c1"]
-size = 129
-status = "EXACT"
-
-["SERVER.0x10020943"]
-source = "TZSET.C:96"
-
-["SERVER.0x10020d97"]
-source = "TZSET.C:374"
-
-["SERVER.0x10020fe1"]
-size = 23
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x10021200"]
-size = 56
-cflags = "/O1 /Gd"
-blocker = "hand-written MASM: 56 target bytes byte-identical to _strncmp in MSVC 6.0 LIBCMT.LIB (object .file record = intel\\strncmp.asm); jecxz + repne scasb + repe cmpsb is not an msvc6 codegen shape, so EXACT is unreachable in pure C - parked"
-blocker_delta = 53
-
-["SERVER.0x10021298"]
-size = 53
-status = "EXACT"
-
-["SERVER.0x100212cd"]
-status = "MISSING_SIZE"
-
-["SERVER.0x100212e3"]
-status = "MISSING_SIZE"
-
-["SERVER.0x10021375"]
-status = "MISSING_SIZE"
-
-["SERVER.0x1002146d"]
-size = 203
-status = "EXACT"
-
-["SERVER.0x10021aad"]
-size = 9
-status = "EXACT"
-
-["SERVER.0x100220eb"]
-size = 28
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x10022107"]
-size = 137
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x100222b5"]
-size = 139
-status = "EXACT"
-
-["SERVER.0x10022340"]
-size = 158
-
-["SERVER.0x10022f44"]
-status = "MISSING_SIZE"
-
-["SERVER.0x10022f83"]
-status = "MISSING_SIZE"
-
-["SERVER.0x1001cb61"]
-size = 84
-cflags = "/O1 /Gd"
-status = "RELOC"
 
 ["SERVER.0x10019d00"]
 size = 48
@@ -2265,13 +1875,6 @@ updated_by = "test"
 updated_at = "2026-09-22T18:42:36+00:00"
 size = 37
 
-["GOLDTL.0x0063e931"]
-status = "SIZE_MISMATCH"
-updated_by = "test"
-updated_at = "2026-09-12T14:56:23+00:00"
-size = 495
-cflags = "/O2 /Gd /G6 /Oy-"
-
 ["GOLDTL.0x004ec850"]
 size = 80
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
@@ -2416,9 +2019,6 @@ status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-20T15:41:23+00:00"
 
-["GOLD.0x005df7d1"]
-size = 11
-
 ["GOLD.0x00410430"]
 size = 12
 status = "EXACT"
@@ -2461,9 +2061,6 @@ status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-20T15:45:40+00:00"
 
-["GOLD.0x005e7cf1"]
-size = 12
-
 ["GOLD.0x0040b5a0"]
 size = 13
 status = "RELOC"
@@ -2487,9 +2084,6 @@ size = 13
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-20T15:46:59+00:00"
-
-["GOLD.0x005e19ef"]
-size = 13
 
 ["GOLD.0x004273c0"]
 size = 14
@@ -2515,12 +2109,6 @@ status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-20T15:49:50+00:00"
 
-["GOLD.0x005e1a0c"]
-size = 14
-
-["GOLD.0x005e6fde"]
-size = 14
-
 ["GOLD.0x00410610"]
 size = 15
 status = "RELOC"
@@ -2532,9 +2120,6 @@ size = 15
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-20T15:50:18+00:00"
-
-["GOLD.0x005e6fec"]
-size = 15
 
 ["GOLD.0x00428ce0"]
 size = 16
@@ -4217,13 +3802,6 @@ updated_by = "verify"
 updated_at = "2026-09-21T06:47:44+00:00"
 size = 8
 
-["GOLDTL.0x0045fa70"]
-cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
-size = 32
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-21T11:13:19+00:00"
-
 ["GOLDTL.0x00469610"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
 status = "EXACT"
@@ -4571,10 +4149,6 @@ updated_by = "test"
 updated_at = "2026-09-21T10:43:53+00:00"
 size = 30
 
-["GOLDTL.0x005eb0d9"]
-cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
-size = 47
-
 ["GOLDTL.0x0064e63d"]
 cflags = "/O1 /Gd"
 status = "RELOC"
@@ -4699,16 +4273,6 @@ updated_by = "test"
 updated_at = "2026-09-21T11:41:36+00:00"
 size = 66
 
-["GOLDTL.0x0045d600"]
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
-
-["GOLDTL.0x0045dea0"]
-status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
-
 ["GOLDTL.0x0045e520"]
 status = "SIZE_MISMATCH"
 updated_by = "verify"
@@ -4726,12 +4290,6 @@ status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T17:40:26+00:00"
 
-["GOLDTL.0x00460a40"]
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-21T11:21:55+00:00"
-size = 13
-
 ["GOLDTL.0x00464a30"]
 status = "RELOC"
 updated_by = "verify"
@@ -4743,12 +4301,6 @@ size = 64
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-21T12:02:18+00:00"
-
-["GOLDTL.0x00465840"]
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-21T10:44:52+00:00"
-size = 12
 
 ["GOLDTL.0x00466330"]
 status = "SIZE_MISMATCH"
@@ -4910,8 +4462,6 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 ["GOLDTL.0x005974e0"]
 
 ["GOLDTL.0x005d6030"]
-
-["GOLDTL.0x0062e6bb"]
 
 ["GOLDTL.0x0064e761"]
 cflags = "/O1 /Gd"
@@ -5359,17 +4909,6 @@ updated_at = "2026-09-22T19:20:17+00:00"
 status = "EXACT"
 updated_by = "verify"
 updated_at = "2026-09-22T19:20:17+00:00"
-
-["GOLDTL.0x00461190"]
-status = "EXACT"
-updated_by = "verify"
-updated_at = "2026-09-22T19:20:17+00:00"
-
-["GOLDTL.0x00465820"]
-status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-22T19:20:17+00:00"
-size = 19
 
 ["GOLDTL.0x004ae060"]
 status = "RELOC"
@@ -6360,12 +5899,6 @@ size = 45
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-22T20:29:46+00:00"
-
-["GOLDTL.0x0045de70"]
-size = 47
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T20:29:47+00:00"
 
 ["GOLDTL.0x0045fb30"]
 size = 43
@@ -7782,12 +7315,6 @@ status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T22:56:00+00:00"
 
-["GOLDTL.0x00460a50"]
-size = 57
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-22T22:59:22+00:00"
-
 ["GOLDTL.0x005809f0"]
 size = 14
 status = "EXACT"
@@ -8861,12 +8388,6 @@ updated_at = "2026-09-23T11:02:05+00:00"
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T11:03:20+00:00"
-
-["GOLDTL.0x004609c0"]
-size = 57
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-23T11:03:21+00:00"
 
 ["GOLDTL.0x004da4d0"]
 status = "RELOC"
