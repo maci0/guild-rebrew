@@ -77,6 +77,8 @@ void __cdecl gm_ResetAllEntities(void)
  * primary entity, object entity, and dynamic entity.
  * Returns non-zero on success. Core entity resolution API. */
 
+// FUNCTION: GOLD 0x4fe830
+// SIZE: 194
 // FUNCTION: GOLDTL 0x005012f0
 // SIZE: 194
 // FUNCTION: SERVER 0x10015cf0

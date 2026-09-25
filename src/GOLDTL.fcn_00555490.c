@@ -7,6 +7,8 @@ struct ent_555490 {
 	int b;
 };
 
+// FUNCTION: GOLD 0x54d430
+// SIZE: 128
 // FUNCTION: GOLDTL 0x555490
 // SIZE: 115
 

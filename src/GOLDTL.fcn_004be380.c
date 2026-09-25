@@ -9,6 +9,8 @@ extern int g_6816d8;
 int __cdecl fcn_004693b0(int, int);
 void __cdecl fcn_00469470(int, int);
 
+// FUNCTION: GOLD 0x4bdae0
+// SIZE: 65
 // FUNCTION: GOLDTL 0x4be380
 // SIZE: 65
 

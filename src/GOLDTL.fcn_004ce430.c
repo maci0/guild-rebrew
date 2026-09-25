@@ -29,6 +29,8 @@ int* __cdecl fcn_004cdf00(int);
 struct s87_4ce430* __cdecl fcn_004cded0(void);
 void __cdecl fcn_004cdf40(int, int, char*);
 
+// FUNCTION: GOLD 0x4cd870
+// SIZE: 352
 // FUNCTION: GOLDTL 0x4ce430
 // SIZE: 348
 
