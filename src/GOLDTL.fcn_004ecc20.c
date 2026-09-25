@@ -7,6 +7,7 @@ typedef struct
 	int b;
 	int c;
 } V12;
+// SIZE 0xc
 
 extern int g_772fe0;
 extern V12* g_772fe4;

@@ -12,6 +12,7 @@ typedef struct
 	int x10;
 	int x14;
 } Msg18;
+// SIZE 0x18
 
 int __cdecl ahm_CheckFlag(char* p);
 int __cdecl fcn_004ec950(char* p, int id);

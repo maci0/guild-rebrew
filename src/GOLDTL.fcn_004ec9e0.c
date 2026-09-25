@@ -7,6 +7,7 @@ typedef struct
 	int b;
 	int c;
 } V12;
+// SIZE 0xc
 
 typedef struct
 {
@@ -15,6 +16,7 @@ typedef struct
 	int y;
 	int x;
 } Slot18;
+// SIZE 0x18
 
 extern int g_772f78;
 extern int g_772f7c;

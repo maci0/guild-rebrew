@@ -7,6 +7,7 @@ typedef struct
 	int id;
 	char pad[0x10];
 } Rec18;
+// SIZE 0x18
 
 int __cdecl fcn_004e8b80(int kind, int max, Rec18* out);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);

@@ -7,6 +7,7 @@ typedef struct
 	int b;
 	int c;
 } V12;
+// SIZE 0xc
 
 typedef struct
 {
@@ -18,6 +19,7 @@ typedef struct
 	int x1c;
 	int x20;
 } Msg24;
+// SIZE 0x24
 
 int __cdecl fcn_004ecbe0(int id);
 int __cdecl fcn_004c6cf0(Msg24* m);

@@ -7,6 +7,7 @@ typedef struct
 	int id;
 	char pad[0x10];
 } Rec18;
+// SIZE 0x18
 
 extern float g_662910;
 extern float g_6628a8;

@@ -7,6 +7,7 @@ typedef struct
 	unsigned char kind;
 	char pad[0x13];
 } Rec18;
+// SIZE 0x18
 
 typedef struct
 {
@@ -14,6 +15,7 @@ typedef struct
 	int x8;
 	char pad2[0xc];
 } Tab18;
+// SIZE 0x18
 
 extern Rec18 g_9a9224[42];
 extern Tab18 g_68da6c[];
