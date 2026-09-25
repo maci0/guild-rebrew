@@ -34,7 +34,7 @@ char* __cdecl fcn_0050e4a0(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 void __cdecl fcn_004c51a0(int a, int b, int c, int d);
 
-int __cdecl fcn_004fc600(unsigned short id, Slots* s, unsigned char flags)
+int __cdecl fcn_004fc700(unsigned short id, Slots* s, unsigned char flags)
 {
 	Offer offer;
 	int i;
