@@ -1,13 +1,13 @@
 // FUNCTION: GOLD 0x411bb0
 // SIZE: 38
 
-int __cdecl fcn_00413160(void)
+int __cdecl fcn_00411bb0(void)
 {
 	int i;
 	int a;
 
 	i = 0;
-	for (a = 0x1043695; a < 0x1052d95; a += 0x3dc, i++) {
+	for (a = 0xfd7f75; a < 0xfe7775; a += 0x3e0, i++) {
 		if (*(char*) (a - 1) == 0 && *(char*) a == 0) {
 			return i;
 		}

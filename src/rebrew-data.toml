@@ -4381,3 +4381,24 @@ section = ".rdata"
 
 ["GOLD.0x005ebb40"]
 section = ".text"
+
+["GOLD.0x00fd7ba0"]
+section = ".data"
+
+["GOLD.0x006332dc"]
+section = ".data"
+
+["GOLD.0x005f8430"]
+section = ".data"
+
+["GOLD.0x005ebba4"]
+section = ".rdata"
+
+["GOLD.0x005f122c"]
+section = ".data"
+
+["GOLD.0x005fb5b0"]
+section = ".data"
+
+["GOLD.0x005ebb74"]
+section = ".rdata"
