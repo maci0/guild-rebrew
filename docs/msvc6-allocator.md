@@ -1933,6 +1933,18 @@ float-rounded temporary (`quot_f = (float) quot; quot_f = (float) (quot_f * ...)
 node after the fetch, so integer work issues between `fxch` and `fmulp` (gm_CalculateProductionValue,
 byte-exact).
 
+**Scheduler priority and edges, traced (round 1145, CrashDump).** The weight table at
+`[0x10799204]` is `-1 13 -5 -1 -2 16 16` and `0x10727781` computes `x << w`, so priority is in
+effect height x 8192, plus 65536 when the node reads memory (+0x3a bit 0); the other terms shift to
+zero. Height is 1 + the maximum over successors of (successor height + edge latency); ties go to the
+lower sequence number, i.e. IL order. Registers are chosen before scheduling, so register reuse
+(an eax freed by one store and loaded by the next instruction) is a scheduling edge. Calls do not
+split scheduling blocks; `rep movs` has a 13-cycle latency with nothing issued under it. A load
+through a pointer gets memory edges to stores into address-taken locals of an enclosing scope (a
+`memcpy` or an assignment) but none to initialiser stores of block-local arrays: declaring
+`szLine`/`szSep` as initialised locals of an inner block removed those edges and closed a 45-byte
+block. Each label left after tail merging leaves an op-444 node (priority 2) that takes a cycle.
+
 **The instruction scheduler** is the cycle loop at `0x10727977`: per cycle and pipe it walks
 a ready list ordered by priority (`+0x2c`, descending, ties by sequence `+0x36`), checks
 pairing (`[0x10799214]`), two hazard routines (`0x10727ca9`, `0x10727d01`) and the earliest
