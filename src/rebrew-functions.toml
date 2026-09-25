@@ -426,12 +426,10 @@ updated_at = "2026-09-22T05:50:31+00:00"
 ["SERVER.0x1000bdf0"]
 size = 1002
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "NEAR_MATCHING"
+status = "RELOC"
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
-blocker = "4 faults: field-init phase shift (48%, shapes 86b-excluded), 5-iteration fill loop form (15%, lever real but both signs negative so shapes 41 blocks composition), float tail fstp st(0) vs the reference faddp (29%, OPEN -- see .c header), stride lea chain (1%, strength reducer). Body 1002 pads to 1008 with the reference's own 6 nops, so shapes 88 gives +6 bytes of genuine upward slack -- unlike its Graveyard sibling"
-blocker_delta = 177
 updated_by = "verify"
-updated_at = "2026-09-24T18:07:38+00:00"
+updated_at = "2026-09-25T15:16:22+00:00"
 
 ["SERVER.0x1000c1e0"]
 size = 160
