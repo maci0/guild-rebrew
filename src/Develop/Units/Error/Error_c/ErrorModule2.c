@@ -61,30 +61,9 @@ extern char g_log_message_buffer[];
 // GLOBAL: SERVER 0x117660e0
 extern int g_owner_window;
 extern void (*g_panic_callback)(void);
+
 // FUNCTION: GOLDTL 0x41d8b0
 // SIZE: 160
-// FUNCTION: SERVER 0x100034c0
-// ShutdownLogAndErrorHandler
-void __cdecl ShutdownLogAndErrorHandler(void)
-{
-	int i;
-
-	for (i = 0; i < 3; i++) {
-		DispatchLogOutput(s_Error_Handler_closed__100273ac, g_log_mode_flags, g_log_level_table[i]);
-	}
-	if (g_log_mode_flags & 8) {
-		FreeConsole();
-		g_log_file_handle = 0;
-	}
-	g_panic_callback = 0;
-	g_owner_window = 0;
-	g_log_mode_flags = 0;
-}
-
-
-/* Reports a fatal error with a message, then terminates the
- * process via _exit(). Does not return. */
-
 // FUNCTION: SERVER 0x10003520
 
 // ReportFatalError

@@ -1671,9 +1671,9 @@ updated_at = "2026-09-22T16:54:03+00:00"
 size = 14
 
 ["GOLDTL.0x00465350"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-21T06:56:24+00:00"
+updated_at = "2026-09-25T11:36:25+00:00"
 size = 496
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
@@ -1769,9 +1769,9 @@ blocker = "STUB C body untested against TL binary; test and promote or rewrite"
 
 ["GOLDTL.0x0045f2c0"]
 size = 192
-status = "SIZE_MISMATCH"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-25T11:36:24+00:00"
 
 ["GOLDTL.0x004c4b00"]
 status = "SIZE_MISMATCH"
@@ -4083,9 +4083,9 @@ updated_by = "verify"
 updated_at = "2026-09-21T06:55:42+00:00"
 
 ["GOLDTL.0x0041d8b0"]
-status = "SIZE_MISMATCH"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-25T11:36:18+00:00"
 size = 160
 
 ["GOLDTL.0x0041de50"]
@@ -4097,6 +4097,9 @@ blocker = "inline-asm block-fill prelude — Finding 19: no msvc6 C spelling emi
 
 ["GOLDTL.0x0041e1d0"]
 blocker = "asm-dump placeholder: rewrite as C"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-25T11:36:20+00:00"
 
 ["GOLDTL.0x0041fa00"]
 status = "EXACT"
@@ -4234,9 +4237,9 @@ updated_by = "verify"
 updated_at = "2026-09-21T10:32:44+00:00"
 
 ["GOLDTL.0x004e7810"]
-status = "SIZE_MISMATCH"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-25T11:36:27+00:00"
 
 ["GOLDTL.0x004e7f20"]
 status = "RELOC"
@@ -24435,3 +24438,5 @@ updated_at = "2026-09-25T11:35:32+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T11:35:34+00:00"
+
+["GOLDTL.0x005b1e20"]
