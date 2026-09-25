@@ -4052,7 +4052,38 @@ close every other join, each traced on this function:
 | `CONTEXT* volatile pCtx` | 1780 | same, plus slot changes at every `pCtx` use |
 | `frameInfo` at function scope, 192 join/order permutations (inner and outer scope) | best 2111 | tie or worse |
 | `memset` for the zero stores | 1706-1829 | zero in edx, stores chained |
+| no join: group-A arms `break` like the B arms, frame fill in source order | 1149 | frame fill exact; A arms unmerged (pairwise merge sees 20 bytes, below) |
+| join body: unreferenced label, `(void) 0`, `do { } while (0)`, a `goto` chain, `if (v) goto frame_fill;` | 1149 | threaded |
+| 730 one-statement joins over every local: `v = v`, `v = (T) w`, temporary round trips, `if (v) { }`, `(void) v` | 1149 or at most 1548 | folded before the third jump pass, or emits |
+| `hLogW = hCrashLog = CreateFileA(...)` with join `hCrashLog = hLogW` (and reversed) | 1149 | copy folded |
+| `hLog = hCrashLog` in the join, every B arm and `default`, `fi[1] = hLog` | 1149 | copy propagation (same source on every path) |
+| `espVal -= 4` as the join | 2098 | `sub ebx, 4`, height 3, issues in cycle 1 |
+| the four zero stores as the join | 621 | the 0 candidate spans join and fill, colours to ebx |
+| `memcpy(&frameInfo[0], &pDbgBuf, 4)` | 2111 | folds to the plain store |
+| `fi[0]` as a separate function-scope `int` (stack-layout dependent, not a fix) | 2089 | `fi[0]` issues first (memory edge to the Eip load), but the packer puts the int at `[esp+0x54]`, above the array |
 
-Remaining lever, untested: a join the cross-jump accepts that names no 4-byte local and needs no
-scratch register. The reference's frame fill has only `fi[1]` (ebp) and `pStack` (ebx) of that kind.
-Tracer kit: `.scratch/ck/` in the `fix/srv-crashdump` worktree (gitignored).
+**Pairwise tail merge, traced (cleanup 2 only).** Per label, `fcn.10729090` (called at `0x1072351f`
+when `[0x107ac348]` is 0) zeroes each unconditional jumper's `+0x12` and passes every pair to
+`fcn.1073f41d`, which walks back like the cross-jump (labels and op 444 skipped, `fcn.107291dc`
+compares). It merges only if the encoded sizes of the matched items (`fcn.1072afd4`, encoder
+`fcn.10729e5b`; a stack `lea` counts 6), summed front to back until the sum reaches 20, plus the
+larger `+0x12` exceed 20 (`jg` at `0x1073f646`; 20 while `[0x107ac0b4]`, bit 23 of the option word,
+is set), or if the match contains an unconditional jump. The survivor's `+0x12` becomes at least 20,
+so after one merge every other jumper follows. The group-A arms share `push ebp`, `call esi` (message)
+and `push 0`, `lea`, `push`, `push 2`, `lea` (newline): 1+2+2+6+1+2+6 = 20, for any argument order,
+since the last push before `hCrashLog` is always a 1-byte `push reg`. The A arms therefore merge only
+by falling into a join block after 0xc000008e.
+
+**Join lifetime, traced.** An empty join is threaded by the third jump pass `fcn.107050de` (driver
+`0x10760574`), otherwise by cleanup 1 at `0x10723553` (`fcn.10703052` skips items without flag
+bit 0, which includes labels and op 444). Between cleanup 1 and 2 only the peephole `fcn.10723779`
+deletes items: register self-moves (`0x10723d07`), stack stores whose loads it forwarded (the
+`szDateLen` and `szTimeLen` stores) and op-0x19e uses (created for switch dispatch at `0x10711276`,
+the return value at `0x1071774d` and compare-with-0 elimination at `0x1071b184`). After cleanup 2
+only jumps and labels are deleted. A join body that vanishes needs a copy that global copy
+propagation keeps (seen only for call results and loop-carried variables) or one of those uses;
+no statement tried qualifies. Otherwise the join is the fill's IL prefix and must be pick-free
+(join cursor eax after 0xc000008e, fill cursor edx after 0xc00000fd), which leaves `fi[1]` (seq
+tie), `add ebx` and the `pStack` store, all measured above. Remaining inputs: an alias asymmetry
+between the `fi[0]` and `fi[1]` stores within one object, or a vanishing join body.
+Tracer kits: `.scratch/k/`, `.scratch/rr/` in the `exp/crash-a` worktree (gitignored).
