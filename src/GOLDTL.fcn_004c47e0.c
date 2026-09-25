@@ -1,3 +1,9 @@
+// GLOBAL: GOLDTL 0xaed2a0
+extern char g_aed2a0[];
+// GLOBAL: GOLD 0xa68ca0
+extern char g_aed2a0[];
+// FUNCTION: GOLD 0x004c3e70
+// SIZE: 55
 // FUNCTION: GOLDTL 0x4c47e0
 // SIZE: 55
 
@@ -10,9 +16,9 @@ void __cdecl fcn_004c47e0(int* p)
 	int v;
 
 	v = p[1];
-	*(char*) 0xaed2a4 = 0;
-	*(int*) 0xaed2a0 = v;
-	memset((void*) 0xaed2a5, 0, 119);
-	*(int*) 0xaed320 = 0;
-	*(int*) 0xaed334 = (int) p;
+	*(char*) (g_aed2a0 + 4) = 0;
+	*(int*) g_aed2a0 = v;
+	memset(g_aed2a0 + 5, 0, 119);
+	*(int*) (g_aed2a0 + 0x80) = 0;
+	*(int*) (g_aed2a0 + 0x94) = (int) p;
 }

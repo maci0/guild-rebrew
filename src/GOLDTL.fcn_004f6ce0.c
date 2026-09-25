@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x004f48f0
+// SIZE: 113
 // FUNCTION: GOLDTL 0x4f6ce0
 // SIZE: 113
 
@@ -10,7 +12,7 @@ void __cdecl fcn_004f6ce0(void* a1, int a2, void* a3)
 	int n;
 
 	v = fcn_0050dac0(*(unsigned short*) a1);
-	n = (int) ((float) v * *(float*) 0x6652c8);
+	n = (int) ((float) v * 0.03f);
 	switch (a2) {
 	case 1:
 		fcn_0051af00(a3, 0x1538, n);

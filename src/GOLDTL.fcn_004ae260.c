@@ -1,14 +1,18 @@
+// FUNCTION: GOLD 0x004ae120
+// SIZE: 61
 // FUNCTION: GOLDTL 0x4ae260
 // SIZE: 61
+
+extern char g_7f4ca0[];
 
 int __cdecl fcn_004ae260(int a1)
 {
 	int o;
 
 	o = (a1 & 0xffff) * 540;
-	if (*(unsigned short*) (0x7f4ca0 + o) != 0xffff
-	    && *(unsigned char*) (0x7f4ca8 + o) > 0
-	    && *(unsigned char*) (0x7f4ca2 + o) == 0) {
+	if (*(unsigned short*) ((int) g_7f4ca0 + o) != 0xffff
+	    && *(unsigned char*) ((int) g_7f4ca0 + 8 + o) > 0
+	    && *(unsigned char*) ((int) g_7f4ca0 + 2 + o) == 0) {
 		return 1;
 	}
 	return 0;
