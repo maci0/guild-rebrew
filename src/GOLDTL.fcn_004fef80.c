@@ -98,3 +98,27 @@ float __cdecl fcn_004ff040(Bar24* a1)
 	}
 	return fcn_004fef80((Obj28*) a1) / fcn_004feff0(a1);
 }
+
+extern char g_7f4ca0[];
+
+// FUNCTION: GOLDTL 0x004ff080
+// SIZE: 99
+
+/* Named float addends: the two rounding stores die late and leave the
+ * reference's fxch; fxch before faddp. */
+float __cdecl fcn_004ff080(unsigned short id)
+{
+	Bar24* p;
+	float v;
+	float a;
+	float b;
+
+	p = (Bar24*) (g_7f4ca0 + id * 0x21c);
+	if (p->active == 1 || p->active == 0) {
+		return g_6628a8;
+	}
+	v = fcn_004feff0(p);
+	a = fcn_004fef80((Obj28*) p) / v * 0.8;
+	b = v * 0.001f * 0.2;
+	return a + b;
+}
