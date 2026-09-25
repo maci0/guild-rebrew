@@ -1,3 +1,9 @@
+// GLOBAL: GOLDTL 0x9a9220
+extern char g_9a9220[];
+// GLOBAL: GOLD 0x925120
+extern char g_9a9220[];
+// FUNCTION: GOLD 0x004e6f30
+// SIZE: 80
 // FUNCTION: GOLDTL 0x4e8af0
 // SIZE: 80
 
@@ -11,9 +17,9 @@ int __cdecl fcn_004e8af0(unsigned char key, void* dst)
 	int a;
 
 	i = 0;
-	a = 0x9a9220;
+	a = (int) g_9a9220;
 	for (;;) {
-		if (a >= 0x9a9610) {
+		if (a >= (int) g_9a9220 + 0x3f0) {
 			return 0;
 		}
 		if (*(unsigned char*) a == key) {
@@ -25,6 +31,6 @@ int __cdecl fcn_004e8af0(unsigned char key, void* dst)
 	if (i >= 0x2a) {
 		return 0;
 	}
-	memcpy(dst, (void*) (0x9a9220 + i * 24), 24);
+	memcpy(dst, (void*) ((int) g_9a9220 + i * 24), 24);
 	return 1;
 }
