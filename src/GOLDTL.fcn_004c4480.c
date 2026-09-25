@@ -1,5 +1,7 @@
 extern unsigned char g_fb5760[][10];
 
+// FUNCTION: GOLD 0x4c3b10
+// SIZE: 32
 // FUNCTION: GOLDTL 0x4c4480
 // SIZE: 29
 

@@ -19,6 +19,8 @@ extern short g_7f4c04;
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_005904a0(Ent* e, int a2);
 
+// FUNCTION: GOLD 0x483ed0
+// SIZE: 224
 // FUNCTION: GOLDTL 0x4833a0
 // SIZE: 212
 void __cdecl fcn_004833a0(Ent* e)
