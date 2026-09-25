@@ -35,6 +35,8 @@ extern cell10 g_fb5760[0x8000];
 unsigned short __cdecl fcn_004c3a50(pkt99*);
 int __cdecl fcn_004c4090(void);
 
+// FUNCTION: GOLD 0x4c39c0
+// SIZE: 280
 // FUNCTION: GOLDTL 0x4c4330
 // SIZE: 280
 

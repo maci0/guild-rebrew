@@ -11,6 +11,8 @@ typedef struct {
 
 extern fcn_004b2020_group g_1007bc0[4];
 
+// FUNCTION: GOLD 0x4b1ee0
+// SIZE: 73
 // FUNCTION: GOLDTL 0x4b2020
 // SIZE: 73
 

@@ -183,6 +183,8 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 /* Sets worker limits for a building based on its type and
  * upgrade level. Reads from the building type table. */
 
+// FUNCTION: GOLD 0x5014b0
+// SIZE: 202
 // FUNCTION: GOLDTL 0x00504300
 // SIZE: 202
 // FUNCTION: SERVER 0x10017400
