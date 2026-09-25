@@ -3992,3 +3992,14 @@ empties the join (object 1149); `espVal -= 4` writes flags and is ordered ahead 
 exact result needs a join that survives the first cross-jump but emits nothing, or a switch shape
 that merges the group-A arms without one. Traces: `.scratch/c2trace-crashdump5/` (gitignored).
 
+## Finding 72: a multi-use constant is a colouring candidate; its register follows range overlap (round 1145)
+
+The constant `1` in the ahm/graveyard counter blocks is a colouring candidate (graveyard id 18). The
+select cost routine (`0x1071f7b3`) counts only preference lists and pins, so with every cost 0 it takes
+the first register no coloured neighbour holds over its range: `dl` only while another candidate (the
+volatile `cmd_payload` reload, `_slot_ptr`) holds `ecx` across it. Its dl/cl role therefore follows
+which ecx candidates overlap its source range, not its position. In the graveyard worker under /Ow,
+stores through `grave` form one chain in source order; `g_citizen_count`/`g_next_object_id` symbol
+stores are outside it, so the citizen store sinks to the end of the block where the reference has it
+inside the chain. Remaining: ahm 10 bytes (cmd_payload reload, stride `lea` register), graveyard 24.
+Traces and variant generators: `.scratch/c2trace-counters/` (gitignored).

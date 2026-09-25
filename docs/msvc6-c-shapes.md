@@ -8563,6 +8563,11 @@ each measured with `scripts/linktest.sh`:
   edge ranks lowest and issues last. The later slot-index store must go through the symbol too, or
   the 0xffff store dies as dead.
 
+- **A literal-address read keeps an earlier same-address store alive** when a later store goes
+  through a pointer: c2 must assume the read may see the pointer's target (ahm_ExAllocAlchemist:
+  `live = *(int*) 0x10035434 + 1;` let the slot-index store go through `slot`, -6). The same read
+  can delete a symbol read-modify-write it cannot see as a reader, which changes behaviour.
+
 Flags follow the source: after these rewrites cm_ExSellObjekt and ls_LoadBuildingEntityState match
 only without their `/Ow`, and the `vfs_OpenStream` size is its 701-byte COMDAT extent (jump table
 included), not the 667-byte body.
