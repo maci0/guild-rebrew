@@ -102,6 +102,12 @@ int g_crash_callback = 0;
  * lands before them, and hDbgFile and pDbgBuf (three references each) come
  * out in each other's stack slots.
  *
+ * Frame fill (0x10002c54).  frameInfo is a local of the inner block: then
+ * c2 does not order its stores against the pCtx->Eip load, pDbgBuf's load
+ * drops below pCtx's and pCtx loads first, as in the reference.  The default
+ * arm breaks rather than jumping to a label ahead of the join: each label
+ * leaves a scheduler node in the block that takes a cycle.
+ *
  * Separator copies (0x100028fb..0x1000294c, instruction-exact).  szLine,
  * space and szSep are initialised locals of an inner block opened after the
  * Esp read.  c2 orders a load through pCtx behind (or ahead of) stores to the
@@ -112,7 +118,9 @@ int g_crash_callback = 0;
  * pick before the szLine pair's, giving eax, ecx, edx.  The two literals
  * duplicate the bytes at 0x10027314 and 0x100272f8.
  *
- * Still open: the scheduling of the frame fill's first two loads. */
+ * Still open: the frame fill's frameInfo[0] and [1] stores issue in the
+ * reverse order (both have priority 2; IL order decides, and the [1] store
+ * is the group-A join). */
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
@@ -133,7 +141,6 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	char instrType;
 	unsigned int szDateLen;
 	unsigned int szTimeLen;
-	int frameInfo[7];
 	MEMORY_BASIC_INFORMATION mbi;
 	char szDateBuf[0x100];
 	char szModulePath[0x100];
@@ -209,6 +216,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 							char szLine[] = "\r\n";
 							char space = ' ';
 							char szSep[] = "------------------------\r\n";
+							int frameInfo[7];
 							SetFilePointer(hCrashLog, -1, 0, 2);
 							WriteFile(hCrashLog, szSep, 0x1a, &nBytesWritten, 0);
 
@@ -318,10 +326,8 @@ group_a_done:
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							default:
-								goto unknown_exc;
+								break;
 							}
-
-unknown_exc:
 
 							/* Stack walk */
 							frameInfo[1] = (int) hCrashLog;
