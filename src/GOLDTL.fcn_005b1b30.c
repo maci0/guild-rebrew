@@ -28,6 +28,8 @@ char* __cdecl fcn_005b1b10(int a1)
 	return 0;
 }
 
+// FUNCTION: GOLD 0x005a86b0
+// SIZE: 338
 // FUNCTION: GOLDTL 0x005b1b30
 // SIZE: 338
 /* Both zero-fills are the original's hand-written block-fill prelude; no
