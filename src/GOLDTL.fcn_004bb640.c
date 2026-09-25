@@ -20,6 +20,8 @@ struct date_4bb640 {
 };
 // SIZE 0xc
 
+// FUNCTION: GOLD 0x4bb250
+// SIZE: 222
 // FUNCTION: GOLDTL 0x4bb640
 // SIZE: 222
 
