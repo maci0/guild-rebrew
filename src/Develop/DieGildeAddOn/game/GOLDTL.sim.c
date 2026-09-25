@@ -11,10 +11,9 @@ extern unsigned char g_entity_type_bytes[1];
 // SIZE: 81
 // FUNCTION: GOLDTL 0x420700
 // SIZE: 81
-// sim_PriorityUpdate
 void __cdecl fcn_0042b040(int, void*);
 
-void __cdecl sim_PriorityUpdate(char* entity, char* data)
+void __cdecl fcn_00420700(char* entity, char* data)
 {
 	if (entity == 0) {
 		return;

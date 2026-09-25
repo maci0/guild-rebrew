@@ -25,6 +25,8 @@ void __cdecl fcn_004ce9e0(char*);
 int __cdecl sim_PriorityUpdate(char*, char*);
 int __cdecl ahm_ResetEntityState(char*);
 
+// FUNCTION: GOLD 0x4cb250
+// SIZE: 580
 // FUNCTION: GOLDTL 0x004cbde0
 // SIZE: 580
 

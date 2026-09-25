@@ -7,11 +7,17 @@
 // LIBRARY: GOLD 0x005de8c0
 // _strncpy
 
+// LIBRARY: GOLD 0x005deaf3
+// __initterm
+
 // LIBRARY: GOLD 0x005deb10
 // __alloca_probe
 
 // LIBRARY: GOLD 0x005df1c0
 // __alldiv
+
+// LIBRARY: GOLD 0x005df7d1
+// _atoi
 
 // LIBRARY: GOLD 0x005df860
 // _memcpy
@@ -22,8 +28,17 @@
 // LIBRARY: GOLD 0x005dfcd0
 // _strncat
 
+// LIBRARY: GOLD 0x005e04ae
+// __flushall
+
 // LIBRARY: GOLD 0x005e10d0
 // __cfltcvt
+
+// LIBRARY: GOLD 0x005e19ef
+// _get_int_arg
+
+// LIBRARY: GOLD 0x005e1a0c
+// _get_short_arg
 
 // LIBRARY: GOLD 0x005e1d40
 // __cintrindisp2
@@ -36,6 +51,9 @@
 
 // LIBRARY: GOLD 0x005e2f80
 // _strlen
+
+// LIBRARY: GOLD 0x005e3a71
+// __un_inc
 
 // LIBRARY: GOLD 0x005e3ab0
 // _memset
@@ -70,11 +88,20 @@
 // LIBRARY: GOLD 0x005e6e10
 // __set_errno
 
+// LIBRARY: GOLD 0x005e6fde
+// __statfp
+
+// LIBRARY: GOLD 0x005e6fec
+// __clrfp
+
 // LIBRARY: GOLD 0x005e7250
 // __setenvp
 
 // LIBRARY: GOLD 0x005e7780
 // __except_handler3
+
+// LIBRARY: GOLD 0x005e7cf1
+// __FillZeroMan
 
 // LIBRARY: GOLD 0x005e81c0
 // __aulldiv
@@ -93,25 +120,3 @@
 
 // LIBRARY: GOLD 0x005eac10
 // __strnicmp
-
-// LIBCMT static bodies (lib-match against libcmt_stock.LIB) — linker supplies:
-// LIBRARY: GOLD 0x005e6fde
-// __statfp
-
-// LIBRARY: GOLD 0x005e6fec
-// __clrfp
-
-// LIBRARY: GOLD 0x005e7cf1
-// __FillZeroMan
-
-// LIBRARY: GOLD 0x005e19ef
-// _get_int_arg
-
-// LIBRARY: GOLD 0x005e1a0c
-// _get_short_arg
-
-// LIBRARY: GOLD 0x005df7d1
-// _atoi
-
-// LIBRARY: GOLD 0x005dfc90
-// _strncmp

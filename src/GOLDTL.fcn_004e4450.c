@@ -2,6 +2,8 @@ extern int g_772f3c;
 
 void __cdecl fcn_00471af0(int k, int flag);
 
+// FUNCTION: GOLD 0x004e2bd0
+// SIZE: 22
 // FUNCTION: GOLDTL 0x004e4450
 // SIZE: 22
 void __cdecl fcn_004e4450(int k, int flag)
