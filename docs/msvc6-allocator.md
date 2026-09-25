@@ -4139,6 +4139,15 @@ join instead leaves the dead `frame_fill` label's op-444 node at the head of the
 takes cycle 1 and pushes both stores behind the `xor` and `add`. The missing piece is therefore a
 join statement that is a copy between two variables coloured to one register (ebx or ebp), which
 the IL keeps and the register allocator turns into a self-move.
+
+**Why no such copy has been found.** In the reference build the peephole deletes four self-moves
+and four op-0x19e uses (`0x10723d22`, `0x1072459e`; no other delete site fires): the `key` update
+in the decrypt loop (loop-carried) and the `szDateLen`/`szTimeLen` call results. Each self-move is a
+copy from an expression or call-result temporary, not a variable-to-variable copy. The IL removes
+a variable copy `v = w` when `v` already holds `w`'s value number on that path, or when every use of
+`v` can take `w`. A behaviour-preserving join copy needs `v == w` at run time on every path into the
+fill, so the IL keeps it only if that equality is hidden from value numbering. The hiding sources
+are a memory load, a call, or a loop phi. The first two emit code, and no loop encloses the switch.
 Tracer kits (item dump, priority dump, pairwise-merge and peephole traces, the 1 s compile
 harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored).
 
@@ -4164,3 +4173,6 @@ harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored
 | `/O1`, `/Os`, `/O2 /Os` | 325-337 | whole function changes |
 | 360 one-statement joins (`x = x;`, `if (x) { }`, `(void) x;`, `x = (T) y;` over 18 locals), each before and after an unreferenced label, fill in source order | 1149 or at most 1548 | none reaches the peephole as a self-move: folded by the IL (346) or emits code |
 | nested `switch` join (`switch (excCode) { }`, `{ default: break; }`, `{ case 0: break; }`, on `espVal`, `hCrashLog`, `nFrames`, `pStack`) | 1149 | folded before code generation; no dispatch op-0x19e is created (`0x10711276` fires only for the main switch) |
+| second name for the fill's register value (`void* hL` for `hCrashLog`, `unsigned e2` for `espVal`): copied after the definition or taking the call/load directly with the old name copied from it; join `new = old;` or `old = new;`; fill reads either name; join ends in `break;` or `goto frame_fill;` (32 variants) | 1149 | copy folded, join threaded |
+| `static __inline` identity function in the join (`hCrashLog = crash_id(hCrashLog);`, `espVal`, `hProcess`, `pCtx`, bare call) | 1142, 1145 | inlined and folded, join threaded |
+| scan-loop `nInstr`/`pInstr` moved to function scope, join copies `espVal`/`hCrashLog`/0 into them | 1149 | dead (reinitialised before the scan loop), removed |
