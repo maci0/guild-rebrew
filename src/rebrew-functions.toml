@@ -25554,3 +25554,24 @@ updated_at = "2026-09-25T17:35:38+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T17:35:42+00:00"
+
+["GOLD.0x004af3f0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-25T17:40:04+00:00"
+
+["GOLD.0x004f39e0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-25T17:40:39+00:00"
+
+["GOLD.0x004ff950"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-25T17:40:44+00:00"
+
+["GOLD.0x00504ce0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T17:40:48+00:00"
+
