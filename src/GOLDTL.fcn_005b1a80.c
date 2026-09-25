@@ -14,3 +14,18 @@ char* __cdecl fcn_005b1a80(int key)
 	}
 	return 0;
 }
+
+void __cdecl fcn_005b1980(int a, char* o);
+
+// FUNCTION: GOLDTL 0x005b1e20
+// SIZE: 31
+
+void __cdecl fcn_005b1e20(char* p)
+{
+	char* o;
+
+	o = fcn_005b1a80(*(int*) (p + 1));
+	if (o != 0) {
+		fcn_005b1980((int) p, o);
+	}
+}
