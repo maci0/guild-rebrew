@@ -9,6 +9,8 @@ struct inflate_codes_state {
 	int dummy;
 };
 
+// FUNCTION: GOLD 0x465cb0
+// SIZE: 306
 // FUNCTION: GOLDTL 0x4623c0
 // SIZE: 306
 int __cdecl fcn_004623c0(inflate_blocks_statef* s, z_streamp z, int r)

@@ -12,6 +12,8 @@ struct unk_41f7f0 {
 	struct unkvtbl_41f7f0* vtbl;
 };
 
+// FUNCTION: GOLD 0x423560
+// SIZE: 253
 // FUNCTION: GOLDTL 0x41f7f0
 // SIZE: 253
 

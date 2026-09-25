@@ -20205,3 +20205,148 @@ updated_at = "2026-09-25T08:00:59+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T08:00:59+00:00"
+
+["GOLD.0x00421ff0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:05:04+00:00"
+
+["GOLD.0x00423560"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:05:13+00:00"
+
+["GOLD.0x00427dd0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:05:48+00:00"
+
+["GOLD.0x00427e00"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:05:50+00:00"
+
+["GOLD.0x0042c430"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:06:09+00:00"
+
+["GOLD.0x0042fbf0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:06:17+00:00"
+
+["GOLD.0x00434a80"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:06:24+00:00"
+
+["GOLD.0x00441270"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:06:44+00:00"
+
+["GOLD.0x004495f0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:06:56+00:00"
+
+["GOLD.0x00453e70"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:07:21+00:00"
+
+["GOLD.0x004545b0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:07:25+00:00"
+
+["GOLD.0x004616c0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:07:51+00:00"
+
+["GOLD.0x00463100"]
+
+["GOLD.0x00465cb0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:08:11+00:00"
+
+["GOLD.0x00466670"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:08:13+00:00"
+
+["GOLD.0x00466970"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:08:16+00:00"
+
+["GOLD.0x004675e0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:08:18+00:00"
+
+["GOLD.0x00467fd0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:08:23+00:00"
+
+["GOLD.0x00475be0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:08:54+00:00"
+
+["GOLD.0x004adf40"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:11:01+00:00"
+
+["GOLD.0x004bc4b0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:11:58+00:00"
+
+["GOLD.0x004bc5f0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:12:00+00:00"
+
+["GOLD.0x004cdf00"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:13:30+00:00"
+
+["GOLD.0x004f4390"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:16:48+00:00"
+
+["GOLD.0x004f4420"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:16:52+00:00"
+
+["GOLD.0x004fe210"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:17:31+00:00"
+
+["GOLD.0x005014b0"]
+
+["GOLD.0x00502520"]
+
+["GOLD.0x00504350"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:18:25+00:00"
+
+["GOLD.0x0050a0f0"]
+
+["GOLD.0x005bd1b0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-25T08:28:15+00:00"
+
+["GOLD.0x005e04ae"]

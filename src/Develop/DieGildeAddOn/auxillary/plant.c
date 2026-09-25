@@ -45,6 +45,8 @@ char* __cdecl lb_SearchRecordTable(int key)
 }
 
 
+// FUNCTION: GOLD 0x4bc5f0
+// SIZE: 80
 // FUNCTION: GOLDTL 0x4bcbd0
 // SIZE: 80
 // FUNCTION: SERVER 0x10014f30

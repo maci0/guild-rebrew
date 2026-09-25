@@ -1,5 +1,7 @@
 #include <string.h>
 
+// FUNCTION: GOLD 0x42c430
+// SIZE: 80
 // FUNCTION: GOLDTL 0x42b790
 // SIZE: 72
 char* __cdecl fcn_0042b790(char* s)
