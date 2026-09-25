@@ -1,6 +1,7 @@
 // FUNCTION: GOLDTL 0x004e9580
 // SIZE: 432
 
+// SIZE 0x1c
 typedef struct {
 	short lo;
 	short hi;
@@ -12,6 +13,7 @@ typedef struct {
 	int d;
 } TierInfo;
 
+// SIZE 0x18
 typedef struct {
 	int f0;
 	int f4;

@@ -1,6 +1,7 @@
 // FUNCTION: GOLDTL 0x00533f40
 // SIZE: 424
 
+// SIZE 0x3cc
 typedef struct {
 	char pad0[0x258];
 	int f258;
@@ -13,6 +14,7 @@ typedef struct {
 	char pad3c4[0x3cc - 0x3c4];
 } Slot;
 
+// SIZE 0x2f4
 typedef struct {
 	char pad0[0x18];
 	int f18;
