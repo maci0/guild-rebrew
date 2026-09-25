@@ -1,3 +1,8 @@
+extern int g_6a24e8;
+extern float g_6a24e4;
+
+// FUNCTION: GOLD 0x00520ef0
+// SIZE: 23
 // FUNCTION: GOLDTL 0x525e90
 // SIZE: 23
 
@@ -5,7 +10,7 @@ void __cdecl fcn_00525e90(void)
 {
 	float f;
 
-	f = (float) *(int*) 0x6a24e8;
-	*(int*) 0x6a24e8 = 0;
-	*(float*) 0x6a24e4 = f;
+	f = (float) g_6a24e8;
+	g_6a24e8 = 0;
+	g_6a24e4 = f;
 }
