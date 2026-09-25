@@ -41,7 +41,6 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[];
  * compare against 0x1000bdf0):
  *   - +0xcb: the 0x21c stride chain is `lea eax,[eax+eax*8]; lea
  *     edx,[eax+eax*4]` where the reference keeps it in edx.
- *   - +0x119: `mov dl,1` and the slot-index store are swapped.
  *   - +0x148: the cmd_payload reload and the `[esi+8]` store are swapped. */
 
 unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
@@ -101,10 +100,9 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	 * this one and lifts its scheduling priority just below the `or eax,-1`,
 	 * giving the reference's `or eax,-1; mov word ptr [esi],0xffff` at
 	 * 0x1000bee6.  `volatile` makes the store a barrier that
-	 * holds the `or` behind it.  The slot-index store below goes through the
-	 * symbol, not `slot`, or msvc6 drops this store as dead.  The +0x5c
-	 * fill is a loop, not memset: the destination stays its own register,
-	 * `lea edx,[edx+..]; mov edi,edx` as at 0x1000bef4 (shapes 197). */
+	 * holds the `or` behind it.  The +0x5c fill is a loop, not memset: the
+	 * destination stays its own register, `lea edx,[edx+..]; mov edi,edx`
+	 * as at 0x1000bef4 (shapes 197). */
 	slot = (char*) (g_slot_table + slot_index * 0x21c);
 	minus_one = -1;
 	*(unsigned short*) slot = 0xffff;
@@ -112,20 +110,20 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	for (i = 0; i < 8; i++)
 		((int*) (g_slot_table + slot_index * 0x21c + 0x5c))[i] = minus_one;
 
-	/* Order follows the target from 0x1000bf03: the citizen-count bump and
-	 * the slot-index store come first, then the object-id read, both dynamic
-	 * stores, slot[2] and the object-id writeback.  Both counters are read
-	 * into a local ahead of their stores and written back after, which is what
-	 * emits the reference's ecx traffic instead of a load-inc-store pair.
-	 * The slot-index store is plain: volatile, it is emitted ahead of the
-	 * citizen-count load rather than after the `inc` (0x1000bf0c). */
+	/* Both counters are read into a local ahead of their stores and written
+	 * back after, which emits the reference's ecx traffic instead of a
+	 * load-inc-store pair.  The citizen count is read through its literal
+	 * address: c2 must assume that read may alias `slot`, so the 0xffff
+	 * store above stays live although the slot-index store now goes through
+	 * `slot`.  Through `slot` that store has no may-alias edges to the later
+	 * slot stores, so its priority drops below the `mov dl,1`, as at
+	 * 0x1000bf09.  Through the symbol it outranks the `1` and issues first. */
 	{
-		int live = g_citizen_count + 1;
+		int live = *(int*) 0x10035434 + 1;
 		int seq;
 		one = 1;
+		*(unsigned short*) slot = (unsigned short) slot_index;
 		g_citizen_count = live;
-		*(unsigned short*) (g_slot_table + slot_index * 0x21c) =
-		    (unsigned short) slot_index;
 		*(int*) (slot + 0x170) = (int) dynamic;
 		*(int*) (slot + 0x16c) = (int) dynamic;
 		seq = g_next_object_id;
