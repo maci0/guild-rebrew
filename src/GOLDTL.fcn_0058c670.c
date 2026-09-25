@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x005840a0
+// SIZE: 272
 // FUNCTION: GOLDTL 0x0058c670
 // SIZE: 272
 
@@ -27,7 +29,7 @@ int __cdecl fcn_0058c670(int a1, int a2, unsigned char a3)
 	int r;
 
 	r = 0;
-	dlg = fcn_00470820(0, 0, 0x6a96d8);
+	dlg = fcn_00470820(0, 0, (int) "Locations\\Friedhof\\Friedhof");
 	fcn_00473a90(0, 0);
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 0);

@@ -1,3 +1,21 @@
+// GLOBAL: GOLDTL 0x779d00
+extern char g_779d00[];
+// GLOBAL: GOLD 0x6f5ec0
+extern char g_779d00[];
+// GLOBAL: GOLDTL 0x7e2700
+extern char g_7e2700[];
+// GLOBAL: GOLD 0x75e8c0
+extern char g_7e2700[];
+// GLOBAL: GOLDTL 0x14cf72a
+extern char g_14cf72a[];
+// GLOBAL: GOLD 0x14681ea
+extern char g_14cf72a[];
+// GLOBAL: GOLDTL 0x14cf950
+extern char g_14cf950[];
+// GLOBAL: GOLD 0x1468410
+extern char g_14cf950[];
+// FUNCTION: GOLD 0x00589f60
+// SIZE: 86
 // FUNCTION: GOLDTL 0x592470
 // SIZE: 86
 
@@ -11,15 +29,15 @@ void __cdecl fcn_00592470(void)
 	int i;
 	char* e;
 
-	c = *(char*) 0x14cf950;
-	if (c != 0 && *(int*) 0x7e2700 != 1) {
+	c = *(char*) g_14cf950;
+	if (c != 0 && *(int*) g_7e2700 != 1) {
 		if (c == 0x58) {
 			fcn_00591ea0();
 		}
 		fcn_00591d00();
 		i = 0;
-		for (e = (char*) 0x779d00; (int) e < 0x779d84; e += 12) {
-			if (*e == *(char*) 0x14cf950 && *(char*) 0x14cf72a != 0) {
+		for (e = g_779d00; (int) e < (int) g_779d00 + 0x84; e += 12) {
+			if (*e == *(char*) g_14cf950 && *(char*) g_14cf72a != 0) {
 				fcn_00591da0(i);
 			}
 			i++;

@@ -1,5 +1,13 @@
+// GLOBAL: GOLDTL 0x7746cc
+extern unsigned short* g_7746cc;
+// GLOBAL: GOLD 0x6f2310
+extern unsigned short* g_7746cc;
+// FUNCTION: GOLD 0x00577590
+// SIZE: 67
 // FUNCTION: GOLDTL 0x57fb60
 // SIZE: 67
+
+extern int* g_665f08;
 
 int __cdecl fcn_0057fb60(void)
 {
@@ -7,12 +15,12 @@ int __cdecl fcn_0057fb60(void)
 	unsigned short k;
 	int v;
 
-	p = *(unsigned short**) 0x7746cc;
+	p = g_7746cc;
 	if (p != 0) {
 		k = *p;
 		v = k;
 		if (v >= 0x92 && (v <= 0x97 || v == 0x2db) &&
-		    *(int*) (*(int*) 0x665f08 + 0x38) == 0) {
+		    *(int*) ((int) g_665f08 + 0x38) == 0) {
 			return k != 0x92;
 		}
 	}
