@@ -45,6 +45,8 @@ char* __cdecl lb_SearchRecordTable(int key)
 }
 
 
+// FUNCTION: GOLDTL 0x4bcbd0
+// SIZE: 80
 // FUNCTION: SERVER 0x10014f30
 // plt_FindRecord
 char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
