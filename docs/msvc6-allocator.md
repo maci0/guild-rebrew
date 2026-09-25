@@ -4001,7 +4001,8 @@ volatile `cmd_payload` reload, `_slot_ptr`) holds `ecx` across it. Its dl/cl rol
 which ecx candidates overlap its source range, not its position. In the graveyard worker under /Ow,
 stores through `grave` form one chain in source order; `g_citizen_count`/`g_next_object_id` symbol
 stores are outside it, so the citizen store sinks to the end of the block where the reference has it
-inside the chain. Remaining: graveyard 24.
+inside the chain. Both are closed: the graveyard worker under plain `/O2`, where no chain forms and
+a named local holds ecx over the 1 (shapes 201); ahm as below.
 Traces and variant generators: `.scratch/c2trace-counters/` (gitignored).
 
 ahm closed (RELOC) by giving the 1 an ecx neighbour that is not a barrier: a `kind` local kept as a
