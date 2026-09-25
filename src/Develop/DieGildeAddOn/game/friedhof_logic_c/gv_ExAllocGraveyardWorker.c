@@ -96,11 +96,16 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	off = chosen * 0x21c;
 	grave = (char*) g_slot_table + off;
 	memset(grave, 0, 0x21c);
-	/* volatile: the slot-index store below writes the same halfword, so
-	 * without the qualifier msvc6 drops this write and the object loses the
-	 * reference's `mov word ptr [ebp],0xffff` at 0x10011db3. */
-	*(volatile unsigned short*) grave = 0xffff;
-	*(int*) ((char*) 0x100358a4 + off) = -1;
+	/* The 0xffff store goes through `grave` and the +4 store through the
+	 * symbol: c2 cannot prove the two disjoint, so the +4 store depends on
+	 * this one, which lifts its scheduling priority to 41, between the
+	 * `or eax,-1` (42) and everything else, giving the reference's
+	 * `or eax,-1; mov word ptr [ebp],0xffff` at 0x10011db0.  `volatile` here
+	 * makes the store a barrier that holds the `or` behind it.  The later
+	 * slot-index store goes through the symbol, not `grave`, or msvc6 drops
+	 * this store as dead. */
+	*(unsigned short*) grave = 0xffff;
+	*(int*) ((char*) g_slot_table + 4 + off) = -1;
 	/* A loop, not memset: msvc6 turns it into the same rep stosd, but the
 	 * destination stays its own register (`lea edx,[edx+...]; mov edi,edx`
 	 * at 0x10011dbf) where memset computes it straight into edi, 5 bytes
@@ -116,7 +121,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		*(int*) (grave + 0x16c) = (int) entity;
 		g_citizen_count++;
 		*(int*) (grave + 4) = g_next_object_id++;
-		*(volatile unsigned short*) grave = (unsigned short) chosen;
+		*(volatile unsigned short*) ((char*) g_slot_table + off) = (unsigned short) chosen;
 	}
 	*(int*) (grave + 0x1f0) = 0;
 	*(unsigned char*) (grave + 2) = 0x14;
