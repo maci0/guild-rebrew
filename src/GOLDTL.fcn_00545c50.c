@@ -11,6 +11,8 @@ struct ev_545c50 {
 
 extern struct ev_545c50* g_7749e4;
 
+// FUNCTION: GOLD 0x53df10
+// SIZE: 233
 // FUNCTION: GOLDTL 0x545c50
 // SIZE: 233
 
