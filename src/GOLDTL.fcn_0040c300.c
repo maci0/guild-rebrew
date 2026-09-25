@@ -1,0 +1,26 @@
+// FUNCTION: GOLDTL 0x40c300
+// SIZE: 83
+
+// SIZE 0x194
+typedef struct {
+	int a;
+	int b;
+	char pad[1];
+	char on;
+	char pad2[0xa];
+	char* owner;
+	char pad3[0x17c];
+} T40c300;
+
+extern T40c300* g_6b5c20;
+
+void __cdecl fcn_0040c300(int key)
+{
+	int i;
+
+	for (i = 0; i < 2000; i++) {
+		if (g_6b5c20[i].on != 0 && g_6b5c20[i].a != 0 && g_6b5c20[i].owner != 0 && *(int*) (g_6b5c20[i].owner + 0x88) == key && g_6b5c20[i].b != 0) {
+			g_6b5c20[i].b = 0;
+		}
+	}
+}
