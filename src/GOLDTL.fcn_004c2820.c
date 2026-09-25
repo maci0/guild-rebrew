@@ -1,0 +1,24 @@
+typedef struct {
+	int ids[0x45];
+} fcn_004c2820_group;
+// SIZE 0x114
+
+extern fcn_004c2820_group g_688118[];
+
+// FUNCTION: GOLDTL 0x4c2820
+// SIZE: 64
+
+int __cdecl fcn_004c2820(int key)
+{
+	int i;
+	int j;
+
+	i = 0;
+	do {
+		for (j = 0; g_688118[i].ids[j] != 0; j++) {
+			if (g_688118[i].ids[j] == key)
+				return i;
+		}
+	} while (g_688118[i++].ids[0] != 0);
+	return -1;
+}
