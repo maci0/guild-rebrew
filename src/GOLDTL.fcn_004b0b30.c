@@ -16,6 +16,8 @@ struct range_4b0b30 {
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
+// FUNCTION: GOLD 0x004b09f0
+// SIZE: 352
 // FUNCTION: GOLDTL 0x4b0b30
 // SIZE: 352
 
