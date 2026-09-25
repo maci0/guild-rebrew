@@ -1,0 +1,59 @@
+// FUNCTION: GOLDTL 0x00420780
+// SIZE: 192
+
+#include <string.h>
+#include <windows.h>
+
+// SIZE 0x128
+typedef struct {
+	char name[0x100];
+	int handle;
+	unsigned char active;
+	unsigned char b105;
+	unsigned char b106;
+	unsigned char b107;
+	int f108;
+	int f10c;
+	char pad110[0x128 - 0x110];
+} Chan;
+
+extern int g_6b71a8;
+extern Chan g_14cc460;
+extern CRITICAL_SECTION g_14cc5a0;
+Chan* __cdecl fcn_004205e0(const char* name);
+Chan* __cdecl fcn_00420690(void);
+int __cdecl fcn_0041fe10(Chan* c, int a);
+void __cdecl fcn_0042ac40(int h);
+void __cdecl fcn_0041fc10(Chan* c, int a);
+
+Chan* __cdecl fcn_00420780(const char* name, int a)
+{
+	Chan* c;
+
+	if (g_6b71a8 == 0) {
+		return &g_14cc460;
+	}
+	EnterCriticalSection(&g_14cc5a0);
+	c = fcn_004205e0(name);
+	if (c == 0) {
+		c = fcn_00420690();
+		if (c != 0) {
+			memset(c, 0, sizeof(Chan));
+			strcpy(c->name, name);
+		}
+	}
+	if (c != 0) {
+		c->b106 = 1;
+		if (c->handle != 0) {
+			fcn_0042ac40(c->handle);
+			c->handle = 0;
+		}
+		if (fcn_0041fe10(c, 1) == 0) {
+			fcn_0041fc10(c, a);
+			LeaveCriticalSection(&g_14cc5a0);
+			return c;
+		}
+	}
+	LeaveCriticalSection(&g_14cc5a0);
+	return 0;
+}
