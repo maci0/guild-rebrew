@@ -31,7 +31,7 @@ notes (the `## <function> (0x<VA>)` sections between "Open questions" and
 | Callee-saved push/pop placement, prologue scheduling | 5, 41, 48, 66, 67 |
 | Parameters: address-taken, slot reuse, reload against preserve, argument order | 7, 18, 25, 26, 28, 33, 44 |
 | Shared tails, multi-branch dispatch, block splits | 6, 8, 8b, 8c, 8d, 8e, 23, 45, 46 |
-| `eax`/`ecx` choice from a named local against a CSE'd load, allocator internals from `c2.dll` | 12 |
+| `eax`/`ecx` choice from a named local against a CSE'd load, allocator internals from `c2.dll` | 12, 74 |
 | Byte operations and zero-extension (see also the and-idiom deep-dive) | 14, 17, 18 |
 | Frame and stack-slot maps, the sentinel instrument | 19, 55, 60, 61 |
 | x87 return and clamp blocks | 24, 35, 40 |
@@ -4176,3 +4176,33 @@ harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored
 | second name for the fill's register value (`void* hL` for `hCrashLog`, `unsigned e2` for `espVal`): copied after the definition or taking the call/load directly with the old name copied from it; join `new = old;` or `old = new;`; fill reads either name; join ends in `break;` or `goto frame_fill;` (32 variants) | 1149 | copy folded, join threaded |
 | `static __inline` identity function in the join (`hCrashLog = crash_id(hCrashLog);`, `espVal`, `hProcess`, `pCtx`, bare call) | 1142, 1145 | inlined and folded, join threaded |
 | scan-loop `nInstr`/`pInstr` moved to function scope, join copies `espVal`/`hCrashLog`/0 into them | 1149 | dead (reinitialised before the scan loop), removed |
+
+## Finding 74: the Processor Pack c2.dll (client builds): scheduler, DAG and alias addresses
+
+The client targets compile with `rebrew/msvc:6.0-sp5-pp-win32`, whose `c2.dll` is a different
+build from the SP6 one above: none of Findings 71-73's addresses carry over, but the IL node layout
+and the priority weights do. Located by code shape and traced under `winedbg --gdb` (catch
+`c2\.dll`, then continue until the code is mapped before setting breakpoints):
+
+| Routine | PP address | Notes |
+|---|---|---|
+| node creation | `0x1070f234` | sequence `+0x36` from counter `0x107ad5fc`; flag byte `+0x3c` bit 2 = memory source (kind 2/6 operand, `0x1070f273`), bit 3 = memory destination (`0x1070f289`) |
+| edge add | `0x1070f6b1` | `ecx` from, `edx` to, `[esp+4]` kind: 0x20 memory read-after-write (`0x1070f91d`), 0x40 memory write-after-read (`0x1070f96f`), 0x80000 to the block terminator |
+| priority | `0x10714f6a` | height word `+0x34`, successors `+0x22`; writes `+0x28` at `0x10715094`, `+0x2c` at `0x107150b4`; weights at `[0x107b1a00]` are SP6's (-1, 13, -5, -1, -2, 16, 16); the x87-store bonus (`0x10715107`) needs bit 3 and tuple type `& 0xf000 == 0x4000` |
+| ready list insert | `0x107159a9` | priority `+0x2c` descending, then sequence ascending |
+| issue | `0x10715bc0` | `esi` node, `ebx` cycle |
+| memory alias query | `0x107044e9` | symbol (kind 2) against indirect (kind 6) goes to `0x10704511` |
+| escape mark | `0x1073a2c4` | parent `+5 \|= 4` when an address operand (op 0x24c) sits under a call-argument tuple (op 0x25c/0x26b), walker `0x1073cf92` |
+| scratch picker cursor | `[0x107b1418]` | into the register list `0x107c49d4` (1, 2, 3, 7, 8, 4, 6); reset `0x1070a2e4`, read `0x1070c645`, write `0x1070c662` |
+
+**Symbol against indirect access (`0x10704511`).** Tag 1 aliases everything. For a local (parent
+class 4/5) the parent needs flag `+5` bit 0x02 (set on the address-taken `dlg` of 0x58ee70); with bit 0x04 (set by the escape mark)
+the tag's set `[0x107ae3cc][tag]` is walked (abstract objects, class 0xc, members at `+0x30`);
+without bit 0x04 a tag below `[0x107ae398]` (5) never aliases. Observed tags: 3 on an access through a
+parameter (set: globals only), 4 on an access through a call's returned pointer (set: globals
+and every escaped local). The set is flow-insensitive: a local whose address is passed to a call
+anywhere in the function aliases every tag-4 access, before the call too.
+
+Used on 0x5c8400 (shapes 202, closed) and 0x58ee70 (open: the reference issues both `*slot` loads
+ahead of the `dlg` field stores; with `dlg` escaped and `slot` a tag-4 call result, c2 orders a
+`*slot` load after any earlier `dlg` store, so the source must read `*slot` before the store).

@@ -33,11 +33,11 @@ diff shows, then read it; many sections belong to more than one row.
 | Branch polarity, fall-through site, loop form, cold-block placement | 7, 8, 17, 47, 54, 57, 59, 61, 64, 76, 86, 180, 181, 196 |
 | `switch` and jump tables | 53, 65, 114 |
 | Epilogues merged or duplicated, shared exits and cleanup arms | 56, 74, 112, 117 |
-| Two loads or stores in the wrong order, a load sunk or hoisted, RMW idiom choice | 8b, 8c, 10, 20, 42, 45, 48, 60, 77, 78, 80, 86b, 109, 163, 164, 185, 191 |
+| Two loads or stores in the wrong order, a load sunk or hoisted, RMW idiom choice | 8b, 8c, 10, 20, 42, 45, 48, 60, 77, 78, 80, 86b, 109, 163, 164, 185, 191, 202 |
 | `volatile` as a scheduling or form lever, and symbols instead of it | 22, 24, 27, 30, 39, 51, 52, 60, 76, 94, 187 |
 | Statement order, hoisting a definition | 33, 84, 85, 116, 118, 163 |
 | `eax`/`ecx`/`edx` or callee-saved register choice (also `msvc6-allocator.md`) | 9, 25, 36, 40, 41, 62, 72, 72b, 126, 130, 135, 180 |
-| Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179 |
+| Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179, 202 |
 | Constants rematerialised or CSE'd, shared clamp values, ternary constant forms | 23, 26, 28, 62, 63, 126, 199 |
 | Inline `memset`, struct copy, `rep movsd`, inlining, fill loops | 11, 71, 104, 174, 197 |
 | A store or call present in one side only, call order and call counts, wrong argument | 16, 66, 67, 68, 111, 113, 188 |
@@ -8625,3 +8625,24 @@ traced in c2 (post-allocation list scheduler `0x10727977`, colouring select `0x1
 This supersedes sections 131 and 132 for this function: the `xor ecx,ecx; mov cx,[ebp]` zero-extend
 and the `lea edi,[ecx+esi]` addressing both come out unchanged once the flags are right.
 Measure a function's flags against its file siblings before treating a residue as a wall.
+
+## 202. Client (GOLDTL) near misses closed by a source shape
+
+The client uses the Processor Pack code generator; its c2 addresses are in `msvc6-allocator.md`
+Finding 74.
+
+- **0x41c190: a spilled local homed in a dead parameter slot.** The heap sift-down spills the
+  midpoint `count >> 1` to the incoming slot of its first parameter (`[esp+0x20]`) and `idx` to the
+  frame. With a separate `half` local c2 gave `idx` the parameter slot and `half` the frame slot.
+  Declaring the parameter as the midpoint and copying it to the index first (`i = half; half =
+  g_6b6f38 >> 1;`) gives the reference's slots, RELOC. A plain assignment is enough; section 14's
+  `volatile` read is not needed when the value only has to live in memory.
+- **0x5c8400: two stores through one symbol chain each other and raise an earlier store.** The
+  loop stores `lines[i].bar` from `eax` and then indexes `list[i]`; the reference issues the store
+  before the `i` reload. Traced: the store's height was 22 and the `i` reload 15 plus the
+  memory-read bonus (8), so the load won by one. The two table stores `g_1016198[bar*0x3cc+0x34]`
+  and `g_1015f40[bar*0x3cc+0x18]` are fields of one 0x3cc-byte array (0x1016198 = 0x1015f40 +
+  0x258); written through the same symbol (`g_1015f40 + bar*0x3cc + 0x28c`), c2 cannot prove them
+  disjoint and adds a store-store edge, the chain gets one longer, the `bar` store reaches height 23,
+  ties the reload and wins on sequence. RELOC. Same family as section 200's "may-alias store edges
+  raise store priority", here through a shared base symbol instead of a pointer.
