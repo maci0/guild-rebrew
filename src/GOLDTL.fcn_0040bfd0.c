@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x0040b1a0
+// SIZE: 155
 // FUNCTION: GOLDTL 0x0040bfd0
 // SIZE: 155
 
@@ -12,7 +14,7 @@ typedef struct {
 
 extern void* g_6b5c5c;
 extern Slot* g_6b5c20;
-extern char* g_14d0020[];
+extern char* g_14d0020[0x300];
 void __cdecl fcn_00408240(void* p);
 void __cdecl fcn_0041ddd0(void* p);
 void __cdecl fcn_004030e0(char* e);
@@ -41,7 +43,7 @@ void __cdecl fcn_0040bfd0(void)
 			fcn_004030e0(*p);
 		}
 		p++;
-	} while ((int) p < 0x14d0c20);
+	} while ((int) p < (int) &g_14d0020[0x300]);
 	if (g_6b5c20 != 0) {
 		fcn_0041ddd0(g_6b5c20);
 		g_6b5c20 = 0;
