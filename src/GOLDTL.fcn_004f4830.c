@@ -53,6 +53,8 @@ int __cdecl fcn_004f48e0(char* s)
 
 extern char g_9a3825[];
 
+// FUNCTION: GOLD 0x4f39e0
+// SIZE: 70
 // FUNCTION: GOLDTL 0x004f5dd0
 // SIZE: 70
 

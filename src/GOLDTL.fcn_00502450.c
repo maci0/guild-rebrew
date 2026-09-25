@@ -64,6 +64,8 @@ extern double g_662908;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_AddObjekt(void);
 
+// FUNCTION: GOLD 0x4ff950
+// SIZE: 192
 // FUNCTION: GOLDTL 0x005024e0
 // SIZE: 187
 int __cdecl fcn_005024e0(int a, int b)

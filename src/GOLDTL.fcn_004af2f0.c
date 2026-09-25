@@ -733,6 +733,8 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	return 1;
 }
 
+// FUNCTION: GOLD 0x4af3f0
+// SIZE: 720
 // FUNCTION: GOLDTL 0x4af530
 // SIZE: 710
 
