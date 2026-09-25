@@ -3979,3 +3979,16 @@ the shared docker lock; tracer scripts kept under `.scratch/c2trace-crashdump/`,
 - **Measurement trap:** a candidate that overflows the 2128 span collapses the composition and leaves
   a bad `build/split_poc.map`, so every later linktest collapses too. Recover with
   `rm -rf build/split_poc build/split_poc.map` and two `scripts/split_link.sh` runs.
+
+**Round 1145 end state: 4 bytes, the frame-fill tie.** At 0x10002c5c `frameInfo[0]` and
+`frameInfo[1]` issue in reverse order. Both stores are ready in cycle 1 at priority 2, so the lower
+IL sequence wins, and `fi[1] = hCrashLog` is the group-A join (the only statement identical at both
+join sites that needs no scratch register), so it is always first in the block. Priority terms, from
+the weight table: height x 8192, +65536 for a memory read, +65536 for a float-class (0x4xxx) store
+to memory, + (successor count >> 5); only height can move, and `fi[0]` has no successor `fi[1]`
+lacks. Every other join candidate fails: loads and zeros need a scratch register (the picker gives
+eax on side A, edx on side B, by layout order, so copies never merge); a named local folds and
+empties the join (object 1149); `espVal -= 4` writes flags and is ordered ahead of the `xor`. An
+exact result needs a join that survives the first cross-jump but emits nothing, or a switch shape
+that merges the group-A arms without one. Traces: `.scratch/c2trace-crashdump5/` (gitignored).
+
