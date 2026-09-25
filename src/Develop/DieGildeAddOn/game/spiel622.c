@@ -382,6 +382,8 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 	return (int) ((param2 * g_const_0_01) * total);
 }
 
+// FUNCTION: GOLDTL 0x0050d2a0
+// SIZE: 74
 // FUNCTION: SERVER 0x10019A20
 // gm_AccumulateTyped2
 
@@ -429,6 +431,8 @@ int __cdecl gm_EntityQuerySum(int arg1)
 /* Resolves a parent entity reference. Follows entity chain
  * links to find the parent. Returns parent pointer. */
 
+// FUNCTION: GOLDTL 0x0050d490
+// SIZE: 96
 // FUNCTION: SERVER 0x10019ae0
 // gm_ResolveParentEntity
 
@@ -450,6 +454,8 @@ short* __cdecl gm_ResolveParentEntity(short* entity)
 /* Gets the type (class) of an entity as an unsigned short.
  * Reads from the entity's type field. */
 
+// FUNCTION: GOLDTL 0x0050d530
+// SIZE: 64
 // FUNCTION: SERVER 0x10019b40
 // gm_GetEntityType
 
@@ -470,6 +476,8 @@ unsigned short __cdecl gm_GetEntityType(short* entity)
 /* Walks an entity chain, calling a callback for each node.
  * Traverses linked entity lists for processing. */
 
+// FUNCTION: GOLDTL 0x0050d570
+// SIZE: 83
 // FUNCTION: SERVER 0x10019b80
 // gm_EntityAccumulate
 
@@ -571,6 +579,8 @@ char* __cdecl gm_FindEntityByOwner(int arg1)
 /* Finds an entity by its owner. Searches for an entity
  * whose owner field matches the given ID. */
 
+// FUNCTION: GOLDTL 0x0050df70
+// SIZE: 48
 // FUNCTION: SERVER 0x10019CD0
 // gm_GetMsgField
 int __cdecl gm_GetMsgField(char* msg, char* pkt)

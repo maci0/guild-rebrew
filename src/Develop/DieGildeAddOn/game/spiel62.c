@@ -147,6 +147,8 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 /* Initializes entity slots to default/empty values. Zeros
  * link fields and sets capacity counters. */
 
+// FUNCTION: GOLDTL 0x00506cd0
+// SIZE: 81
 // FUNCTION: SERVER 0x100180D0
 // gm_InitEntitySlots
 
@@ -190,6 +192,8 @@ int __cdecl gm_IsInRange(int x)
 /* Checks if an entity type is of a specific class. Returns
  * non-zero if the type matches the expected entity class. */
 
+// FUNCTION: GOLDTL 0x00506e20
+// SIZE: 80
 // FUNCTION: SERVER 0x10018150
 // gm_EntityClassCheck
 int __cdecl gm_EntityClassCheck(int type)
@@ -231,6 +235,8 @@ int __cdecl gm_EntityClassCheck(int type)
 /* Checks if an entity's stat is at or above a threshold.
  * Used for skill/ability requirement checks. */
 
+// FUNCTION: GOLDTL 0x005074e0
+// SIZE: 96
 // FUNCTION: SERVER 0x100181a0
 // gm_CheckStatLevel
 
@@ -464,6 +470,8 @@ int __cdecl gm_GetOppositeStatIndex(int stat_id)
  * delta value for stat variation during entity creation
  * or level-up events. */
 
+// FUNCTION: GOLDTL 0x00508df0
+// SIZE: 80
 // FUNCTION: SERVER 0x10018450
 // gm_RandomStatModifier
 //   PROVEN (msvc6: float-cast compare with fcomp [const], shared ternary call)
