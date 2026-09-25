@@ -24,7 +24,7 @@ mkdir -p .scratch
 # `rebrew verify` counts game EXACT + RELOC as passed (library-attributed rows are
 # reported separately); PROVEN is not a byte match
 # and fails like any other difference.
-BASELINE=${BASELINE:-258}
+BASELINE=${BASELINE:-261}
 # .text residue baseline: 8636 (0x21bc) as of round 516.  Guarded below --
 # lower it when a change improves the number, never raise it.
 #
@@ -76,7 +76,7 @@ BASELINE=${BASELINE:-258}
 # broadcast.c named dword 0xffffffff + path/msg arrays -- anonymous COMDATs
 # omitted the leading dword and shifted every later .data symbol by -4.
 # .data 23,470 -> 22,541 (-929).  See section 158.
-RESIDUE_BASELINE=${RESIDUE_BASELINE:-38}
+RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
 # Raw-link .data divergence baseline (22,266 as of round 519).  The goal is a build that is
 # byte-identical WITHOUT postlink, but postlink blits .data wholesale from the
 # layout package, so the shipped file shows `.data differing 0x0` no matter what
