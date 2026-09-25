@@ -1,3 +1,5 @@
+char* __cdecl gm_NextEntityQueryMatch(void);
+
 // SIZE 0x21c
 struct s_7f4ca0 {
 	unsigned short id;
@@ -15,7 +17,6 @@ extern struct s_7f4ca0 g_7f4ca0[768];
 // SIZE: 115
 
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-char* __cdecl gm_NextEntityQueryMatch(void);
 
 void __cdecl fcn_00531b80(void)
 {

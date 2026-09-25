@@ -1,3 +1,5 @@
+void __cdecl fcn_00402a00(char*, int);
+
 // SIZE 0x21c
 struct s_7f4ca0 {
 	char pad[0x184];
@@ -13,7 +15,6 @@ extern struct s_7f4ca0* g_7e4260[32];
 
 #include <string.h>
 
-void __cdecl fcn_00402a00(char*, int);
 
 void __cdecl fcn_00530a00(char* b)
 {
