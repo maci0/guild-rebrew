@@ -31,7 +31,7 @@ notes (the `## <function> (0x<VA>)` sections between "Open questions" and
 | Callee-saved push/pop placement, prologue scheduling | 5, 41, 48, 66, 67 |
 | Parameters: address-taken, slot reuse, reload against preserve, argument order | 7, 18, 25, 26, 28, 33, 44 |
 | Shared tails, multi-branch dispatch, block splits | 6, 8, 8b, 8c, 8d, 8e, 23, 45, 46 |
-| `eax`/`ecx` choice from a named local against a CSE'd load, allocator internals from `c2.dll` | 12 |
+| `eax`/`ecx` choice from a named local against a CSE'd load, allocator internals from `c2.dll` | 12, 74 |
 | Byte operations and zero-extension (see also the and-idiom deep-dive) | 14, 17, 18 |
 | Frame and stack-slot maps, the sentinel instrument | 19, 55, 60, 61 |
 | x87 return and clamp blocks | 24, 35, 40 |
@@ -4176,3 +4176,39 @@ harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored
 | second name for the fill's register value (`void* hL` for `hCrashLog`, `unsigned e2` for `espVal`): copied after the definition or taking the call/load directly with the old name copied from it; join `new = old;` or `old = new;`; fill reads either name; join ends in `break;` or `goto frame_fill;` (32 variants) | 1149 | copy folded, join threaded |
 | `static __inline` identity function in the join (`hCrashLog = crash_id(hCrashLog);`, `espVal`, `hProcess`, `pCtx`, bare call) | 1142, 1145 | inlined and folded, join threaded |
 | scan-loop `nInstr`/`pInstr` moved to function scope, join copies `espVal`/`hCrashLog`/0 into them | 1149 | dead (reinitialised before the scan loop), removed |
+
+## Finding 74: Processor Pack c2 (client targets): routine map and the rules measured on it
+
+The two clients build with the `rebrew/msvc:6.0-sp5-pp-win32` image, whose `c2.dll` (loaded at
+0x10700000) differs from the SP6 one in layout and in node offsets. Addresses found by code shape
+from the SP6 routines above and confirmed under `winedbg --gdb` (tracer kit: a private-prefix
+`dbgrun.sh`/`run.sh` and gdb scripts, kept in a worktree's gitignored `.scratch/pp/`):
+
+| Routine | PP address | Notes |
+|---|---|---|
+| Scheduler priority | `fcn.10714f6a` | final priority stored to node `+0x2c` at `0x107150b4` (`ecx`) |
+| Weight table pointer | `[0x107b1a00]` | rows at `0x107b6978 + cpu*16`; default (and `/G3`-`/G5`) row `0x107b6998`, `/G6` row `0x107b69a8` |
+| Weight helper | `fcn.1071585c` | `term << w` (negative `w` shifts right) |
+| Cycle loop | `fcn.10715a7c` | `ecx` = cycle; ready list `[0x107b1b8c]`, next at `+0x10` |
+| Issue point | `0x10715bc0` | `esi` = node: `+0x1c` tuple (op at `+4`), `+0x2c` priority, `+0x30` earliest cycle, `+0x36` sequence |
+| Colouring select | `fcn.10709937` | writes node `+0x10` at `0x10709a99`, `edi` = register (1 eax .. 8 edi) |
+| Colouring list | `[0x107ac5b4]` | next at `+0x14`, complete at `0x10731413`; node `+0xc` priority, `+0x1c` id, `+0x24` uses |
+| Priority accumulation | `0x10708393`..`0x107083c0` | per region: referenced, `+= count * weight`; live and unreferenced, `-= weight` |
+| Rotation picker | assign `0x1070c669` (`ecx` = register) | cursor `[0x107b1418]` into `0x107c49d4` (eax, ecx, edx, esi, edi, ebx, ebp), reset per function at `0x1070a2e4` |
+
+Rules measured with it:
+
+- **Priority terms (default row):** height `<< 13`, a memory source `<< 16` (node flag `+0x3c`
+  bit 2), a float-class (`0x4xxx`) tuple with a memory destination `<< 16` (bit 3; both bits set
+  at `0x1070f273..0x1070f297`), successor count `>> 5`. Ties go to the lower sequence number.
+- **Candidate ids follow first appearance in the IL, not declaration order** (0x4fc3a0: `int i =
+  0x11;` as the first statement gave `i` id 1, the same `i` initialised at the loop id 4). On equal
+  priority the colouring list is not in id order (0x4fc3a0 with `k`: id 6 before id 5); the list
+  builder is not traced.
+- **0x414960 (open, 325/332):** the last `mx->z` store's `fstp` is in the latch block with
+  `add ecx,0x50; dec edx`; its float-store bonus gives it 81920 against 32768 and 24576, so it
+  issues first. The reference issues it last, which this formula gives only without the bonus.
+- **0x4ce210 (open, 68/74):** the rotation picks `g_9badd0` eax, `arg` ecx and the `&m` push temp
+  edx. The reference's `&m` in eax is what one more rotation pick before it would give; no
+  source shape producing that pick has been found (phantom stores, named copies, literal-address
+  reads).

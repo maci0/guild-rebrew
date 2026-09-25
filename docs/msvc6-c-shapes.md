@@ -28,7 +28,7 @@ diff shows, then read it; many sections belong to more than one row.
 | Wrong index scale, `mov` against `lea` of a global, wrong operand width, uninitialised locals, a wrong symbol under `~~` | 1, 2, 3, 4, 6, 34, 121, 162, 176, 177, 183, 184, 194 |
 | Base/index roles swapped, displacement not folded, `lea` fusion, strength reduction | 5, 21, 29, 30, 31, 35, 70, 73, 132, 133, 161, 182, 191, 193 |
 | Byte loads and zero-extension (`movzx`, `and eax,0xff`, `xor`+`mov r16`) | 27, 43, 52, 131, 134, 192, 193 |
-| x87: `fimul`/`fidiv` forms, `fxch`, `_ftol`, float compares, operand and evaluation order | 8a, 15, 46, 82, 159, 165, 175, 189, 190, 195 |
+| x87: `fimul`/`fidiv` forms, `fxch`, `_ftol`, float compares, operand and evaluation order | 8a, 15, 46, 82, 159, 165, 175, 189, 190, 195, 202 |
 | Signed against unsigned conditional jumps | 55, 173 |
 | Branch polarity, fall-through site, loop form, cold-block placement | 7, 8, 17, 47, 54, 57, 59, 61, 64, 76, 86, 180, 181, 196 |
 | `switch` and jump tables | 53, 65, 114 |
@@ -36,8 +36,8 @@ diff shows, then read it; many sections belong to more than one row.
 | Two loads or stores in the wrong order, a load sunk or hoisted, RMW idiom choice | 8b, 8c, 10, 20, 42, 45, 48, 60, 77, 78, 80, 86b, 109, 163, 164, 185, 191 |
 | `volatile` as a scheduling or form lever, and symbols instead of it | 22, 24, 27, 30, 39, 51, 52, 60, 76, 94, 187 |
 | Statement order, hoisting a definition | 33, 84, 85, 116, 118, 163 |
-| `eax`/`ecx`/`edx` or callee-saved register choice (also `msvc6-allocator.md`) | 9, 25, 36, 40, 41, 62, 72, 72b, 126, 130, 135, 180 |
-| Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179 |
+| `eax`/`ecx`/`edx` or callee-saved register choice (also `msvc6-allocator.md`) | 9, 25, 36, 40, 41, 62, 72, 72b, 126, 130, 135, 180, 202 |
+| Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179, 202 |
 | Constants rematerialised or CSE'd, shared clamp values, ternary constant forms | 23, 26, 28, 62, 63, 126, 199 |
 | Inline `memset`, struct copy, `rep movsd`, inlining, fill loops | 11, 71, 104, 174, 197 |
 | A store or call present in one side only, call order and call counts, wrong argument | 16, 66, 67, 68, 111, 113, 188 |
@@ -8625,3 +8625,33 @@ traced in c2 (post-allocation list scheduler `0x10727977`, colouring select `0x1
 This supersedes sections 131 and 132 for this function: the `xor ecx,ecx; mov cx,[ebp]` zero-extend
 and the `lea edi,[ecx+esi]` addressing both come out unchanged once the flags are right.
 Measure a function's flags against its file siblings before treating a residue as a wall.
+
+## 202. GOLDTL near misses closed by source shape (Processor Pack client)
+
+Each entry is keyed by the client address; the file header of each function carries the
+load-bearing line. Traces used the Processor Pack c2 routines of `msvc6-allocator.md` Finding 74.
+
+- **0x4afb60 (frame slot order in a prelude function).** The fill pointer of the block-fill
+  prelude (codegen-walls 6b) and the parse offset passed as `&p` are two locals in two disjoint
+  block scopes. One shared `p` collects both sets of references, and slots run by references per
+  byte (allocator Finding 71), so it landed above `found` and `ids`; two locals share one slot at
+  the reference's `[ebp-0x14]`.
+- **0x4f0cc0 (`fcom` issued before the first `fst`).** `v = *f - x; *f = v; if (!(v > 0.0f)) v =
+  0.0f; *f = v;` with the literal: an `extern float` holding 0.0 may alias the store through `f`,
+  so the compare's load gets an edge behind the store. The compiler still emits the literal as `fld dword
+  [const]`, not `fldz`, so the literal matches the reference's 0x6628a8 load (RELOC).
+- **0x4fc280, 0x4fc2e0 (two-sided clamp).** `return MIN(1.0f, MAX(-1.0f, (a - b) / b));` with
+  `MIN(a, b) ((a) < (b) ? (a) : (b))` and `MAX(a, b) ((a) > (b) ? (a) : (b))`, the quotient written
+  inline. The macro repeats the inner `MAX`; literal bounds let the compiler fold `1 < -1`, which gives
+  the reference's jump from the first compare straight to the repeated `MAX`. Extern bounds compile
+  to 95 bytes; a named quotient local is spilled to `[esp]`.
+- **0x4fc3a0 (counter and array pointer in swapped callee-saved registers).** Indexing `w` and
+  `out` with a second counter `k` beside the call argument `i` gives the weight pointer esi and
+  `i` edi. With `w[i - 0x11]` the user counter and the compiler's pointer tie at colouring
+  priority 64 and the counter is listed first; with `k` both are compiler induction temporaries
+  and the pointer is listed first. The product goes through a float local (`f = buf[6] * w[k];` before
+  `out[k] = buf[6];`), so `fild` issues before the int store that may alias `buf`.
+- **0x4c8a30 (stream pointer and destination in eax/ecx swapped).** `off = *(unsigned short*) p;
+  dst = base + off;` with `unsigned int off`. Defining `dst` by the zero-extending load gave it six
+  counted uses per loop block and priority 318 against the stream pointer's 316; with the offset in its
+  own temporary the pointer is coloured first and takes eax.
