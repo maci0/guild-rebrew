@@ -1978,6 +1978,16 @@ Not verified: that the densest group lands nearest `esp`. It fits `gm_AllocSpiel
 many instructions reference it relative to the others, so a slot permutation is usually
 a symptom of code that still differs, not a lever of its own.
 
+**Processor Pack c2 and `__asm` (GOLDTL 0x4af800).** The client c2.dll has the same insert at
+`0x10713312` (list head `0x107b15fc`, size `+0x20`, weight `+0x34`), called from the operand walk at
+`0x1070de4c`; to trace, break there and print `$ecx` (the symbol), `*(int*)($ecx+0x20)` and the
+return address. The `__asm` tuple adds operand lists that name the locals it references and every
+address-taken local: for the prelude `mov edi, p; mov ebx, n` the fill pointer `p` (also passed as
+`&p`) counts three times, `buf` twice and `n` once, so `p` reaches 6 references against 4 in the
+code and outweighs the 10-byte `ids` array with 11. In the 0x22c frame the groups sort by density
+and the densest takes the top slot (`[ebp-0xc]`, `ids` in the reference).
+The source fix is in `msvc6-c-shapes.md` section 202.
+
 **Practical consequence:** when two memory-derived values have equal
 weighted priority (the common 3-use case), the register they receive is
 decided by their relative creation order in the value table: which the C
