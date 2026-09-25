@@ -1,3 +1,5 @@
+extern int g_10405c4;
+
 // SIZE 0x70
 typedef struct {
 	char name[0x40];
@@ -19,7 +21,6 @@ typedef struct {
 
 extern Tex* g_104049c;
 extern unsigned int g_10404a0;
-extern int g_10405c4;
 extern int g_10405c0;
 
 Tex* __cdecl fcn_0045c290(int, int);

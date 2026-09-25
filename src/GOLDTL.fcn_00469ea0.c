@@ -1,3 +1,5 @@
+extern int g_772504;
+
 // SIZE 0x54
 typedef struct {
 	char p0[0x30];
@@ -13,7 +15,6 @@ typedef struct {
 } Rec;
 
 extern Rec* g_772500;
-extern int g_772504;
 extern signed char g_772510;
 
 int __cdecl fcn_00466190(int);

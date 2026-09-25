@@ -1,3 +1,5 @@
+extern float g_67bbec;
+
 // SIZE 0x44
 typedef struct {
 	float diffuse[4];
@@ -18,7 +20,6 @@ struct Device {
 	DeviceVtbl* vtbl;
 };
 
-extern float g_67bbec;
 extern float g_67bbf0;
 extern float g_67bbf4;
 extern Device* g_6b5de0;
