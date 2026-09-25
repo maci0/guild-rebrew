@@ -1,3 +1,4 @@
+// SIZE 0x20
 typedef struct Plan {
 	int x0;
 	float level;
@@ -7,6 +8,7 @@ typedef struct Plan {
 	int b;
 } Plan;
 
+// SIZE 0x110
 typedef struct Unit {
 	unsigned short id;
 	char pad2[0x1a];

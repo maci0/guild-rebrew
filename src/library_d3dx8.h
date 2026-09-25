@@ -20,6 +20,9 @@
 // LIBRARY: D3DX8 0x0045e4a0
 // _read_buf
 
+// LIBRARY: D3DX8 0x0045e860
+// _longest_match
+
 // LIBRARY: D3DX8 0x0045fa70
 // _gzeof
 
@@ -37,6 +40,12 @@
 
 // LIBRARY: D3DX8 0x00460a50
 // _inflate_codes_new
+
+// LIBRARY: D3DX8 0x00460a90
+// _inflate_codes
+
+// LIBRARY: D3DX8 0x004611b0
+// _inflate_fast
 
 // LIBRARY: D3DX8 0x00461510
 // _inflateReset
