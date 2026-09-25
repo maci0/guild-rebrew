@@ -28,16 +28,16 @@ diff shows, then read it; many sections belong to more than one row.
 | Wrong index scale, `mov` against `lea` of a global, wrong operand width, uninitialised locals, a wrong symbol under `~~` | 1, 2, 3, 4, 6, 34, 121, 162, 176, 177, 183, 184, 194 |
 | Base/index roles swapped, displacement not folded, `lea` fusion, strength reduction | 5, 21, 29, 30, 31, 35, 70, 73, 132, 133, 161, 182, 191, 193 |
 | Byte loads and zero-extension (`movzx`, `and eax,0xff`, `xor`+`mov r16`) | 27, 43, 52, 131, 134, 192, 193 |
-| x87: `fimul`/`fidiv` forms, `fxch`, `_ftol`, float compares, operand and evaluation order | 8a, 15, 46, 82, 159, 165, 175, 189, 190, 195 |
+| x87: `fimul`/`fidiv` forms, `fxch`, `_ftol`, float compares, operand and evaluation order | 8a, 15, 46, 82, 159, 165, 175, 189, 190, 195, 202 |
 | Signed against unsigned conditional jumps | 55, 173 |
-| Branch polarity, fall-through site, loop form, cold-block placement | 7, 8, 17, 47, 54, 57, 59, 61, 64, 76, 86, 180, 181, 196 |
+| Branch polarity, fall-through site, loop form, cold-block placement | 7, 8, 17, 47, 54, 57, 59, 61, 64, 76, 86, 180, 181, 196, 202 |
 | `switch` and jump tables | 53, 65, 114 |
-| Epilogues merged or duplicated, shared exits and cleanup arms | 56, 74, 112, 117 |
+| Epilogues merged or duplicated, shared exits and cleanup arms | 56, 74, 112, 117, 202 |
 | Two loads or stores in the wrong order, a load sunk or hoisted, RMW idiom choice | 8b, 8c, 10, 20, 42, 45, 48, 60, 77, 78, 80, 86b, 109, 163, 164, 185, 191 |
 | `volatile` as a scheduling or form lever, and symbols instead of it | 22, 24, 27, 30, 39, 51, 52, 60, 76, 94, 187 |
 | Statement order, hoisting a definition | 33, 84, 85, 116, 118, 163 |
-| `eax`/`ecx`/`edx` or callee-saved register choice (also `msvc6-allocator.md`) | 9, 25, 36, 40, 41, 62, 72, 72b, 126, 130, 135, 180 |
-| Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179 |
+| `eax`/`ecx`/`edx` or callee-saved register choice (also `msvc6-allocator.md`) | 9, 25, 36, 40, 41, 62, 72, 72b, 126, 130, 135, 180, 202 |
+| Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179, 202 |
 | Constants rematerialised or CSE'd, shared clamp values, ternary constant forms | 23, 26, 28, 62, 63, 126, 199 |
 | Inline `memset`, struct copy, `rep movsd`, inlining, fill loops | 11, 71, 104, 174, 197 |
 | A store or call present in one side only, call order and call counts, wrong argument | 16, 66, 67, 68, 111, 113, 188 |
@@ -8625,3 +8625,33 @@ traced in c2 (post-allocation list scheduler `0x10727977`, colouring select `0x1
 This supersedes sections 131 and 132 for this function: the `xor ecx,ecx; mov cx,[ebp]` zero-extend
 and the `lea edi,[ecx+esi]` addressing both come out unchanged once the flags are right.
 Measure a function's flags against its file siblings before treating a residue as a wall.
+
+## 202. Client (GOLDTL) near misses closed by source shape
+
+Processor Pack code generator; each entry is keyed by the function address and verified RELOC with
+`rebrew test --target Europa1400Gold_TL.exe`.
+
+- **0x41f8f0, test the global, then load it.** `if (g_6b6f84 != 0) { p = g_6b6f84; while (p->prev
+  != 0) ... }` gives the walk pointer ecx and the CSE'd link eax, as in the reference. Testing a
+  local copy (`p = g_6b6f84; if (p != 0)`) colours the pointer eax; the `q = p->prev; p = q` form is
+  copy-propagated to `[eax+4]`.
+- **0x4f58b0, a goto loop tested at the top.** `loop: if (i >= 0x800) goto end; ... i++; goto loop;`
+  lays out the `-1` exit with its own epilogue ahead of `mov eax,-2`, which falls into the epilogue
+  shared with `return res`. `for` and `while` emit the same instructions but let the `-1` exit fall
+  into the shared epilogue and give `-2` the duplicated one. Found by `rebrew match` (GA).
+- **0x4dc5f0, the common tail written in each arm.** The result store and the trailing `sprintf`
+  repeated in both `if`/`else if` arms are cross-jumped into one tail whose `add esp,0x18` pops the
+  arm call's 0x10 argument bytes with sprintf's 8; written once after the arms, c2 pops the 0x10 at
+  the join. The same change moved the two pointer parameters onto the reference's esi/edi.
+- **0x4ff080, `fxch st(1); fxch st(1)` before `faddp`.** Two named `float` locals for the addends
+  (`a = x / v * 0.8; b = v * 0.001f * 0.2; return a + b;`): their rounding stores are dropped after
+  the x87 stack is laid out and leave the exchange pair. Casting both terms to `float` leaves one
+  `fxch`; `double` locals or a single expression leave none. The function must sit in the
+  `fcn_004fef80` file (callees earlier in the unit keep edx/ecx live across the calls).
+- **0x4af800, 0x4af050, 0x4afb60, frame slot order in block-fill prelude functions.** Traced in the
+  Processor Pack c2.dll (frame weight insert `0x10713312`, called from the operand walk at
+  `0x1070de4c`; SP6 `fcn.1073a9c4`, `msvc6-allocator.md` "Frame slots"): the `__asm` tuple carries
+  operand lists that name every address-taken local, so a fill pointer that is also the `&p` parse
+  position gets 6 references for 4 in the code and its slot sorts above `ids`. Declaring the fill
+  pointer in one block and the position with `rest` in the next block lets the two share one slot,
+  which is the reference's frame (0x22c for 0x4af800). At function scope the two never share a slot.
