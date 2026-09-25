@@ -4001,5 +4001,12 @@ volatile `cmd_payload` reload, `_slot_ptr`) holds `ecx` across it. Its dl/cl rol
 which ecx candidates overlap its source range, not its position. In the graveyard worker under /Ow,
 stores through `grave` form one chain in source order; `g_citizen_count`/`g_next_object_id` symbol
 stores are outside it, so the citizen store sinks to the end of the block where the reference has it
-inside the chain. Remaining: ahm 10 bytes (cmd_payload reload, stride `lea` register), graveyard 24.
+inside the chain. Remaining: graveyard 24.
 Traces and variant generators: `.scratch/c2trace-counters/` (gitignored).
+
+ahm closed (RELOC) by giving the 1 an ecx neighbour that is not a barrier: a `kind` local kept as a
+candidate by a dead may-alias store (shapes section 200). Traced at select entry (`0x1071f7b3`,
+allowed set at `[cand+0x20]`): with the load folded the 1's allowed set is {ecx, edx} and it takes
+ecx; with `kind` coloured first it is {edx}. The range walk from `[cand+0x28]` to `[cand+0x30]` is
+per basic block (sets at block `+0x40/+0x44/+0x48`), so the 1 and the counter locals share a block
+without interfering: interference inside a block is tuple-level.

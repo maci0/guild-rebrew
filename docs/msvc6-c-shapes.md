@@ -8576,6 +8576,19 @@ each measured with `scripts/linktest.sh`:
   saw it. Resolve each differing `push` operand in the reference (`rizin -c 'pr 60 @ <addr>'`) and
   match the symbol in `src/rebrew-data.toml`: the fix changes the logged message to the original's.
 
+- **A dead may-alias store keeps a single-use local a colouring candidate** (ahm_ExAllocAlchemist,
+  closed to RELOC, -10 linked). `kind = cmd[0x10]; slot[0xa] = 0; slot[0xa] = kind;`: c2 does not
+  forward a load past a store that may alias its source, so `kind` survives as a candidate, and
+  only later deletes the dead store. Coloured before the constant 1, `kind` takes ecx and leaves the
+  1 `dl` (allocator Finding 72); the post-register-allocation scheduler then hoists the
+  `mov ecx,[esp+0x1c]` pointer load to 0x1000bf38, right after ecx's last counter use. Without the
+  dead store `kind` is forwarded, the pointer load becomes a scratch pick (the 1 takes `cl`, every
+  later scratch register rotates by one). The `volatile` read it replaces held the load behind the
+  +0x1f0..+0x1e4 stores, and while it was in the source the 0x21c stride chain at 0x1000bebb used
+  eax where the reference uses edx; every variant without it gives edx. Measured on the object: every spelling that copies `cmd_payload` into a local
+  (plain, `register`, `*(int*)&x` and cast forms, a second use of the copy, `(void)&cmd_payload`) is
+  forwarded or propagated away.
+
 Flags follow the source: after these rewrites cm_ExSellObjekt and ls_LoadBuildingEntityState match
 only without their `/Ow`, and the `vfs_OpenStream` size is its 701-byte COMDAT extent (jump table
 included), not the 667-byte body.

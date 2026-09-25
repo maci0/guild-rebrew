@@ -35,13 +35,8 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[];
  * building's alchemy data block (record->0x65). Returns the slot index or
  * 0xffff on failure.
  *
- * The object is 1002 bytes, the reference's size.  The float block and the
- * grid loop match the reference; the inline comments at each block say which
- * spelling is load-bearing.  What still differs (relocation-masked object
- * compare against 0x1000bdf0):
- *   - +0xcb: the 0x21c stride chain is `lea eax,[eax+eax*8]; lea
- *     edx,[eax+eax*4]` where the reference keeps it in edx.
- *   - +0x148: the cmd_payload reload and the `[esi+8]` store are swapped. */
+ * Matches the reference (1002 bytes).  The inline comments at each block say
+ * which spelling is load-bearing. */
 
 unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 {
@@ -59,7 +54,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	int one;
 	int minus_one;
 	int i;
-	int slot_ptr;
+	unsigned short kind;
 
 	building_id = *(int*) (cmd_payload + 8);
 	gm_ResolveEntityById(&dynamic, 0, 0, building_id);
@@ -130,10 +125,6 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		*(char*) (slot + 2) = 0;
 		*(int*) (slot + 4) = seq;
 		g_next_object_id = seq + 1;
-		/* Written after slot+0x1e4, msvc6 emits the cmd_payload reload after
-		 * the whole slot+0x1f0..+8 run; here it follows the object-id
-		 * writeback as at 0x1000bf38. */
-		*(char*) (slot + 8) = 0x64;
 	}
 
 	*(int*) (slot + 0x1f0) = 0;
@@ -143,12 +134,19 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	*(char*) (slot + 0x217) = 0;
 	*(char*) (slot + 0x218) = (char) one;
 	*(int*) (slot + 0x1e4) = 0x3f800000;
-	/* The volatile read forces the reference's separate `mov ecx,[esp+0x1c]`
-	 * at 0x1000bf48 instead of reusing a register that already holds the
-	 * pointer.  It belongs here at the use site, not in the counter block:
-	 * the reference reloads after the object-id writeback, not before. */
-	slot_ptr = *(volatile int*) &cmd_payload;
-	*(unsigned short*) (slot + 0xa) = *(unsigned char*) (slot_ptr + 0x10);
+	/* The +8 store goes before the cmd_payload read: that read may alias the
+	 * slot stores, so it stays after them (`movzx cx` at 0x1000bf6e).  The
+	 * store of 0 between `kind` and its use is dead and c2 deletes it, but it
+	 * is a may-alias store, so `kind` is not forwarded into the use and stays
+	 * a colouring candidate.  It is coloured before the constant 1 and takes
+	 * ecx, which leaves the 1 `dl` (allocator Finding 72), and the pointer
+	 * load then issues right after the object-id writeback, as at 0x1000bf38.
+	 * Forwarded, the pointer load is a scratch pick: the 1 takes `cl` and
+	 * every later scratch register rotates by one. */
+	*(char*) (slot + 8) = 0x64;
+	kind = *(unsigned char*) (cmd_payload + 0x10);
+	*(unsigned short*) (slot + 0xa) = 0;
+	*(unsigned short*) (slot + 0xa) = kind;
 	*(char*) (slot + 0x164) = 0x52;
 	*(char*) (slot + 0x166) = 0;
 	*(char*) (slot + 0x165) = 0;
