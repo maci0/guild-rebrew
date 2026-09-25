@@ -4187,41 +4187,100 @@ harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored
 | `static __inline` identity function in the join (`hCrashLog = crash_id(hCrashLog);`, `espVal`, `hProcess`, `pCtx`, bare call) | 1142, 1145 | inlined and folded, join threaded |
 | scan-loop `nInstr`/`pInstr` moved to function scope, join copies `espVal`/`hCrashLog`/0 into them | 1149 | dead (reinitialised before the scan loop), removed |
 
-## Finding 74: Processor Pack c2 (client targets): routine map and the rules measured on it
+## Finding 74: Processor Pack c2 (client targets): routine map, rules and open cases
 
 The two clients build with the `rebrew/msvc:6.0-sp5-pp-win32` image, whose `c2.dll` (loaded at
-0x10700000) differs from the SP6 one in layout and in node offsets. Addresses found by code shape
-from the SP6 routines above and confirmed under `winedbg --gdb` (tracer kit: a private-prefix
-`dbgrun.sh`/`run.sh` and gdb scripts, kept in a worktree's gitignored `.scratch/pp/`):
+0x10700000, like SP6's) is a different build: none of Findings 71-73's addresses carry over, but the
+IL node layout and the scheduler weights do. Addresses found by code shape from the SP6 routines and
+confirmed under `winedbg --gdb` with a private wineprefix (about 20 s per compile; catch `c2\.dll`
+and continue until the code is mapped before setting breakpoints). Tracer kit (`dbgrun.sh`,
+`run.sh`, gdb scripts): gitignored `.scratch/pp/` of the worktree that ran it.
 
-| Routine | PP address | Notes |
-|---|---|---|
-| Scheduler priority | `fcn.10714f6a` | final priority stored to node `+0x2c` at `0x107150b4` (`ecx`) |
-| Weight table pointer | `[0x107b1a00]` | rows at `0x107b6978 + cpu*16`; default (and `/G3`-`/G5`) row `0x107b6998`, `/G6` row `0x107b69a8` |
-| Weight helper | `fcn.1071585c` | `term << w` (negative `w` shifts right) |
-| Cycle loop | `fcn.10715a7c` | `ecx` = cycle; ready list `[0x107b1b8c]`, next at `+0x10` |
-| Issue point | `0x10715bc0` | `esi` = node: `+0x1c` tuple (op at `+4`), `+0x2c` priority, `+0x30` earliest cycle, `+0x36` sequence |
-| Colouring select | `fcn.10709937` | writes node `+0x10` at `0x10709a99`, `edi` = register (1 eax .. 8 edi) |
-| Colouring list | `[0x107ac5b4]` | next at `+0x14`, complete at `0x10731413`; node `+0xc` priority, `+0x1c` id, `+0x24` uses |
-| Priority accumulation | `0x10708393`..`0x107083c0` | per region: referenced, `+= count * weight`; live and unreferenced, `-= weight` |
-| Rotation picker | assign `0x1070c669` (`ecx` = register) | cursor `[0x107b1418]` into `0x107c49d4` (eax, ecx, edx, esi, edi, ebx, ebp), reset per function at `0x1070a2e4` |
+| Routine | SP6 | PP | Notes |
+|---|---|---|---|
+| Scheduler node creation | | `0x1070f234` | sequence `+0x36` from counter `0x107ad5fc`; flag byte `+0x3c`: bit 2 memory source (kind 2/6 operand, set at `0x1070f273`), bit 3 memory destination (`0x1070f289`) |
+| DAG edge add | | `0x1070f6b1` | `ecx` from, `edx` to, `[esp+4]` kind: 0x20 memory read-after-write (`0x1070f91d`), 0x40 memory write-after-read (`0x1070f96f`), 0x80000 to the block terminator |
+| Scheduler priority | | `fcn.10714f6a` | height word `+0x34`, successors `+0x22`; writes `+0x28` at `0x10715094`, final priority `+0x2c` at `0x107150b4` (`ecx`); x87-store bonus at `0x10715107` |
+| Weight table | | `[0x107b1a00]` | rows at `0x107b6978 + cpu*16`; default (and `/G3`-`/G5`) row `0x107b6998`, `/G6` row `0x107b69a8`; SP6's weights (-1, 13, -5, -1, -2, 16, 16) |
+| Weight helper | | `fcn.1071585c` | `term << w` (negative `w` shifts right) |
+| Ready-list insert | `0x107278ae` | `0x107159a9` | priority `+0x2c` descending, then sequence `+0x36` ascending |
+| Cycle loop | | `fcn.10715a7c` | `ecx` = cycle; ready list `[0x107b1b8c]`, next at `+0x10` |
+| Issue point | | `0x10715bc0` | `esi` = node (`+0x1c` tuple with op at `+4`, `+0x2c` priority, `+0x30` earliest cycle, `+0x36` sequence), `ebx` = cycle |
+| Memory alias query | | `0x107044e9` | symbol (kind 2) against indirect (kind 6) goes to `0x10704511` |
+| Escape mark | | `0x1073a2c4` | parent `+5 \|= 4` when an address operand (op 0x24c) sits under a call-argument tuple (op 0x25c/0x26b); walker `0x1073cf92` |
+| Frame weight insert | `fcn.1073a9c4` | `0x10713312` | list head `0x107b15fc`, symbol size `+0x20`, weight `+0x34`; called from the operand walk at `0x1070de4c` ("Frame slots" above) |
+| Priority walk | `0x1071d925` | `0x10707a0b` | loop weight `1 << depth` at `0x10707b6e` |
+| Priority accumulation | | `0x10708374`..`0x107083c0` | per block: add at `0x10708374`/`0x10708393`, subtract at `0x107083bd` |
+| Candidate list | | `[0x107ac5b4]` | sorted insert `0x10708a6e`; next at `+0x14`; complete at `0x10731413` |
+| Colouring select | `0x1071f7b3` | `fcn.10709937` | `ecx` = candidate, `edx` = class; register in `edi` from `0x10709a8e`, stored to candidate `+0x10` at `0x10709a99`; caller `fcn.1073122d`, call at `0x10731552` |
+| Scratch picker / assign | `0x10721c0f` | `0x1070c32b` / `0x1070c669` | `ecx` = register at assign; cursor `[0x107b1418]` (read `0x1070c645`, write `0x1070c662`) into the list `0x107c49d4` (eax, ecx, edx, esi, edi, ebx, ebp), reset per function at `0x1070a2e4` |
 
-Rules measured with it:
+Records:
 
-- **Priority terms (default row):** height `<< 13`, a memory source `<< 16` (node flag `+0x3c`
-  bit 2), a float-class (`0x4xxx`) tuple with a memory destination `<< 16` (bit 3; both bits set
-  at `0x1070f273..0x1070f297`), successor count `>> 5`. Ties go to the lower sequence number.
-- **Candidate ids follow first appearance in the IL, not declaration order** (0x4fc3a0: `int i =
-  0x11;` as the first statement gave `i` id 1, the same `i` initialised at the loop id 4). On equal
-  priority the colouring list is not in id order (0x4fc3a0 with `k`: id 6 before id 5); the list
-  builder is not traced.
-- **0x414960 (open, 325/332):** the last `mx->z` store's `fstp` is in the latch block with
-  `add ecx,0x50; dec edx`; its float-store bonus gives it 81920 against 32768 and 24576, so it
-  issues first. The reference issues it last, which this formula gives only without the bonus.
-- **Block-scoped locals drop may-alias edges.** A message struct declared in the branch that
-  sends it gets no edge from its stores to a later load through a pointer (0x5d63e0: store height
-  8 against 11 at function scope; shapes 202).
-- **0x4ce210 (open, 68/74):** the rotation picks `g_9badd0` eax, `arg` ecx and the `&m` push temp
-  edx. The reference's `&m` in eax is what one more rotation pick before it would give; no
-  source shape producing that pick has been found (phantom stores, named copies, literal-address
-  reads).
+- **Colouring candidate:** `+0` symbol, `+0xc` priority, `+0x10` assigned register, `+0x14` next,
+  `+0x1c` id, `+0x20` allowed-register bitset (first chunk word `+8`, bit n = register n), `+0x24`
+  uses, `+0x38` preference list, `+0x40` weight, `+0x44` node id. Symbol: `+4` kind (0x20804
+  local, 0xa0805/0x20805 parameter, 3 temporary, 0x4000003 address or constant), `+0x1c` symbol
+  index.
+- **Register numbers:** 1 eax, 2 ecx, 3 edx, 4 ebx, 6 ebp, 7 esi, 8 edi. The class-0 try order
+  (`[0x107b690c]` -> `0x107b6888`) is eax, ecx, edx, esi, edi, ebx, ebp. Costs (`0x107ac480`) are 0
+  unless a preference or a one-register neighbour applies, so the first allowed register in that
+  order wins.
+
+Rules:
+
+- **Scheduler priority terms (default row):** height `<< 13`, a memory source `<< 16` (bit 2), a
+  float-class tuple (type `& 0xf000 == 0x4000`) with a memory destination `<< 16` (bit 3; both bits
+  set at `0x1070f273..0x1070f297`), successor count `>> 5`. Ties go to the lower sequence number.
+- **Colouring order:** priority descending; on equal priority the higher node id (`+0x44`) goes
+  first (the insert at `0x10708a6e` compares `+0xc`, then `+0x44`).
+- **Candidate ids (`+0x1c`) follow first appearance in the IL, not declaration order** (0x4fc3a0:
+  `int i = 0x11;` as the first statement gave `i` id 1, the same `i` initialised at the loop id 4).
+  They do not decide ties: 0x4fc3a0 with `k` lists id 6 before id 5, as the `+0x44` order gives.
+- **Colouring priority** accumulates per block: a candidate referenced in the block gains `pending *
+  N`, one live through the block unreferenced loses `N`, with `N` = candidates referenced in the
+  block times `1 << loop depth`.
+- **Few temporaries reach the scratch picker:** `fcn_005c80f0` makes 16 picks; the district, index
+  and handle values are colouring candidates (kind 3).
+- **Block-scoped locals drop may-alias edges.** A message struct declared in the branch that sends
+  it gets no edge from its stores to a later load through a pointer (0x5d63e0: store height 8
+  against 11 at function scope; shapes 202). Block scope also lets locals share frame slots (0x402090,
+  0x4af800; shapes 202).
+- **Symbol against indirect access (`0x10704511`).** Tag 1 aliases everything. For a local (parent
+  class 4/5) the parent needs flag `+5` bit 0x02 (set on the address-taken `dlg` of 0x58ee70); with
+  bit 0x04 (set by the escape mark) the tag's set `[0x107ae3cc][tag]` is walked (abstract objects,
+  class 0xc, members at `+0x30`); without bit 0x04 a tag below `[0x107ae398]` (5) never aliases.
+  Observed tags: 3 on an access through a parameter (set: globals only), 4 on an access through a
+  call's returned pointer (set: globals and every escaped local). The set is flow-insensitive: a
+  local whose address is passed to a call anywhere in the function aliases every tag-4 access,
+  before the call too. Used on 0x5c8400 (shapes 202, closed).
+
+Open cases, each traced to one decision:
+
+- **0x414830 (289/296):** the loop's last `fstp` is a float-class store (type 0x4004), whose
+  +65536 term issues it ahead of the pointer and counter updates; the reference issues it after
+  them.
+- **0x414960 (325/332):** the last `mx->z` store's `fstp` is in the latch block with `add
+  ecx,0x50; dec edx`; its float-store bonus gives it 81920 against 32768 and 24576, so it issues
+  first. The reference issues it last, which this formula gives only without the bonus.
+- **0x4c6090 (174/188):** the `m.kind` store issues before the `r + 0x170` load, which the reference
+  loads first. Loading it into a local first gives that order, but the local tells c2 that ecx is 0
+  in the else arm, and the `xor ecx, ecx` before `mov cx, [eax]` is dropped (-2 bytes).
+- **0x4ce210 (68/74):** the rotation picks `g_9badd0` eax, `arg` ecx and the `&m` push temp edx.
+  The reference's `&m` in eax is what one more rotation pick before it would give; no source shape
+  producing that pick has been found (phantom stores, named copies, literal-address reads).
+- **0x50be50 (83/102):** the table walker (kind 0x4000003, id 0x2d) and the parameter `s` (id
+  0x11) tie at priority 21, so the walker is coloured first and takes esi; the reference has `s` in
+  esi. Per-block terms: the call block gives `s` +28 and the walker -14, the head and increment
+  blocks give the walker +12 and +16 against -6 and -8. Loop form, `return` in the loop,
+  `continue`, no `w` local and dead constant stores all keep the tie.
+- **0x58ee70:** the reference issues both `*slot` loads ahead of the `dlg` field stores; with `dlg`
+  escaped and `slot` a tag-4 call result, c2 orders a `*slot` load after any earlier `dlg` store,
+  so the source must read `*slot` before the store.
+- **0x5ce800 (497/513, after a `bit` local for the flag bits put `d` in ebx):** `out` (priority 184
+  = 8x14 + 6x12) is coloured before `flags` (172 = 2x14 + 12x12) and takes esi. A tie would go to
+  `flags` (higher id).
+- **0x5db8e0 (630/637):** the `-1` candidate (kind 0x4000003, priority 190) interferes with the
+  first-loop values, among them `x0` (esi, priority 202), so it gets edi and `result` (priority 33)
+  gets esi. With a 0-based first loop (no `n - 1`) the interference is gone, but the table walker is
+  no longer strength-reduced.

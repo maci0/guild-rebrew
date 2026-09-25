@@ -30,15 +30,15 @@ diff shows, then read it; many sections belong to more than one row.
 | Byte loads and zero-extension (`movzx`, `and eax,0xff`, `xor`+`mov r16`) | 27, 43, 52, 131, 134, 192, 193 |
 | x87: `fimul`/`fidiv` forms, `fxch`, `_ftol`, float compares, operand and evaluation order | 8a, 15, 46, 82, 159, 165, 175, 189, 190, 195, 202 |
 | Signed against unsigned conditional jumps | 55, 173 |
-| Branch polarity, fall-through site, loop form, cold-block placement | 7, 8, 17, 47, 54, 57, 59, 61, 64, 76, 86, 180, 181, 196 |
+| Branch polarity, fall-through site, loop form, cold-block placement | 7, 8, 17, 47, 54, 57, 59, 61, 64, 76, 86, 180, 181, 196, 202 |
 | `switch` and jump tables | 53, 65, 114 |
-| Epilogues merged or duplicated, shared exits and cleanup arms | 56, 74, 112, 117 |
-| Two loads or stores in the wrong order, a load sunk or hoisted, RMW idiom choice | 8b, 8c, 10, 20, 42, 45, 48, 60, 77, 78, 80, 86b, 109, 163, 164, 185, 191 |
+| Epilogues merged or duplicated, shared exits and cleanup arms | 56, 74, 112, 117, 202 |
+| Two loads or stores in the wrong order, a load sunk or hoisted, RMW idiom choice | 8b, 8c, 10, 20, 42, 45, 48, 60, 77, 78, 80, 86b, 109, 163, 164, 185, 191, 202 |
 | `volatile` as a scheduling or form lever, and symbols instead of it | 22, 24, 27, 30, 39, 51, 52, 60, 76, 94, 187 |
 | Statement order, hoisting a definition | 33, 84, 85, 116, 118, 163 |
 | `eax`/`ecx`/`edx` or callee-saved register choice (also `msvc6-allocator.md`) | 9, 25, 36, 40, 41, 62, 72, 72b, 126, 130, 135, 180, 202 |
 | Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179, 202 |
-| Constants rematerialised or CSE'd, shared clamp values, ternary constant forms | 23, 26, 28, 62, 63, 126, 199 |
+| Constants rematerialised or CSE'd, shared clamp values, ternary constant forms | 23, 26, 28, 62, 63, 126, 199, 202 |
 | Inline `memset`, struct copy, `rep movsd`, inlining, fill loops | 11, 71, 104, 174, 197 |
 | A store or call present in one side only, call order and call counts, wrong argument | 16, 66, 67, 68, 111, 113, 188 |
 | Aliasing and `#pragma optimize` | 44, 61a |
@@ -8628,40 +8628,100 @@ Measure a function's flags against its file siblings before treating a residue a
 
 ## 202. GOLDTL near misses closed by source shape (Processor Pack client)
 
-Each entry is keyed by the client address; the file header of each function carries the
-load-bearing line. Traces used the Processor Pack c2 routines of `msvc6-allocator.md` Finding 74.
+Measured with `rebrew test --target Europa1400Gold_TL.exe` (Processor Pack code generator). Each
+entry is keyed by the client address; the function's file header carries the load-bearing line.
+The c2 routines used in the traces, and the client cases still open, are in `msvc6-allocator.md`
+Finding 74.
 
-- **0x4afb60 (frame slot order in a prelude function).** The fill pointer of the block-fill
-  prelude (codegen-walls 6b) and the parse offset passed as `&p` are two locals in two disjoint
-  block scopes. One shared `p` collects both sets of references, and slots run by references per
-  byte (allocator Finding 71), so it landed above `found` and `ids`; two locals share one slot at
-  the reference's `[ebp-0x14]`.
-- **0x4f0cc0 (`fcom` issued before the first `fst`).** `v = *f - x; *f = v; if (!(v > 0.0f)) v =
-  0.0f; *f = v;` with the literal: an `extern float` holding 0.0 may alias the store through `f`,
-  so the compare's load gets an edge behind the store. The compiler still emits the literal as `fld dword
-  [const]`, not `fldz`, so the literal matches the reference's 0x6628a8 load (RELOC).
-- **0x4fc280, 0x4fc2e0 (two-sided clamp).** `return MIN(1.0f, MAX(-1.0f, (a - b) / b));` with
-  `MIN(a, b) ((a) < (b) ? (a) : (b))` and `MAX(a, b) ((a) > (b) ? (a) : (b))`, the quotient written
-  inline. The macro repeats the inner `MAX`; literal bounds let the compiler fold `1 < -1`, which gives
-  the reference's jump from the first compare straight to the repeated `MAX`. Extern bounds compile
-  to 95 bytes; a named quotient local is spilled to `[esp]`.
-- **0x4fc3a0 (counter and array pointer in swapped callee-saved registers).** Indexing `w` and
-  `out` with a second counter `k` beside the call argument `i` gives the weight pointer esi and
-  `i` edi. With `w[i - 0x11]` the user counter and the compiler's pointer tie at colouring
-  priority 64 and the counter is listed first; with `k` both are compiler induction temporaries
-  and the pointer is listed first. The product goes through a float local (`f = buf[6] * w[k];` before
-  `out[k] = buf[6];`), so `fild` issues before the int store that may alias `buf`.
-- **0x4c8a30 (stream pointer and destination in eax/ecx swapped).** `off = *(unsigned short*) p;
+- **0x402090: block scope shares frame slots.** Address-taken locals (`&w`, `&h`) and the locals of
+  the inline-asm fill (`len`, `d`) declared in inner blocks give up their slots when the block ends:
+  `pix` then lands in `w`'s slot (the dead parameter slot `[ebp+8]`), `len` in `h`'s, and the qword
+  conversion temporary over `d`'s. Declared at function scope they keep their own slots (frame
+  0x728 against 0x720).
+- **0x41c190: a spilled local homed in a dead parameter slot.** The heap sift-down spills the
+  midpoint `count >> 1` to the incoming slot of its first parameter (`[esp+0x20]`) and `idx` to the
+  frame. With a separate `half` local c2 gave `idx` the parameter slot and `half` the frame slot.
+  Declaring the parameter as the midpoint and copying it to the index first (`i = half; half =
+  g_6b6f38 >> 1;`) gives the reference's slots, RELOC. A plain assignment is enough; section 14's
+  `volatile` read is not needed when the value only has to live in memory.
+- **0x41f8f0: test the global, then load it.** `if (g_6b6f84 != 0) { p = g_6b6f84; while (p->prev
+  != 0) ... }` gives the walk pointer ecx and the CSE'd link eax, as in the reference. Testing a
+  local copy (`p = g_6b6f84; if (p != 0)`) colours the pointer eax; the `q = p->prev; p = q` form is
+  copy-propagated to `[eax+4]`.
+- **0x43a3f0: a local pointer for an element load.** `h = *(int**) (b + 0x31c); x = f(h[i], 1);`
+  gives `mov eax, [eax + edi*4]`; the inline `(*(int**) (b + 0x31c))[i]` loads into a new register.
+  In the same function the bitfield clear `v->f0 = 0` written before `v->r = 0xff` puts the flag
+  byte in `bl` and the bitfield byte in `dl`, as in the reference.
+- **0x4af050, 0x4af800, 0x4afb60: frame slot order in block-fill prelude functions.** The fill
+  pointer of the prelude (codegen-walls 6b) and the parse position passed as `&p` must be two
+  locals in disjoint block scopes: the fill pointer in one block, the position with `rest` in the
+  next. One shared `p` collects both sets of references plus the `__asm` tuple's operand lists
+  (which name every address-taken local), so it reaches 6 references for 4 in the code, and since
+  slots run by references per byte (allocator Finding 71) it sorts above `found` and `ids`. The
+  two block-scoped locals share one slot, which is the reference's frame (`[ebp-0x14]` in
+  0x4afb60, frame 0x22c in 0x4af800); at function scope they never share a slot. Frame weight
+  trace: allocator "Frame slots", Processor Pack paragraph (GOLDTL 0x4af800).
+- **0x4c8a30: stream pointer and destination in eax/ecx swapped.** `off = *(unsigned short*) p;
   dst = base + off;` with `unsigned int off`. Defining `dst` by the zero-extending load gave it six
-  counted uses per loop block and priority 318 against the stream pointer's 316; with the offset in its
-  own temporary the pointer is coloured first and takes eax.
-- **0x5d63e0 (message header stores issued before the argument push).** The message struct is
-  declared in the block that fills and sends it. At function scope the header stores written
-  before the `e + 4` load get a may-alias edge to it (height 11 against the push's 9) and issue
-  ahead of the push; block-scoped, the same stores have height 8 and issue after it, as in the
-  reference. Measured on the scheduler trace, same statement order in both.
-- **0x5dc990 (two arms that send the same message).** `result` assigned on every path (`1` after
+  counted uses per loop block and priority 318 against the stream pointer's 316; with the offset in
+  its own temporary the pointer is coloured first and takes eax.
+- **0x4dc5f0: the common tail written in each arm.** The result store and the trailing `sprintf`
+  repeated in both `if`/`else if` arms are cross-jumped into one tail whose `add esp,0x18` pops the
+  arm call's 0x10 argument bytes with sprintf's 8; written once after the arms, c2 pops the 0x10 at
+  the join. The same change moved the two pointer parameters onto the reference's esi/edi.
+- **0x4ee6d0, 0x4f45b0: clamps are min/max macro expansions.** `#define MAXV(a, b) (((a) > (b)) ?
+  (a) : (b))` and `MINV` likewise. `MAXV(MINV(100000.0, x), 10000.0)` gives the reference's repeated
+  `100000.0` compare and shared `fld` arm; `MINV(MAXV(v, 0.0f), 1.0f)` puts the 0.0f and 1.0f cold
+  arms in the reference's order. Hand-written `if`/`else`, `else if` chains and nested ternaries
+  reach the same tests but not the layout; of the eight argument orders only these match. Same
+  family as 0x4fc280.
+- **0x4f0cc0: `fcom` issued before the first `fst`.** `v = *f - x; *f = v; if (!(v > 0.0f)) v =
+  0.0f; *f = v;` with the literal: an `extern float` holding 0.0 may alias the store through `f`,
+  so the compare's load gets an edge behind the store. The literal still compiles to `fld dword
+  [const]`, not `fldz`, and matches the reference's 0x6628a8 load (RELOC).
+- **0x4f58b0: a goto loop tested at the top.** `loop: if (i >= 0x800) goto end; ... i++; goto
+  loop;` lays out the `-1` exit with its own epilogue ahead of `mov eax,-2`, which falls into the
+  epilogue shared with `return res`. `for` and `while` emit the same instructions but let the `-1`
+  exit fall into the shared epilogue and give `-2` the duplicated one. Found by `rebrew match` (GA).
+- **0x4fc280, 0x4fc2e0: two-sided clamp.** `return MIN(1.0f, MAX(-1.0f, (a - b) / b));` with
+  `MIN(a, b) ((a) < (b) ? (a) : (b))` and `MAX(a, b) ((a) > (b) ? (a) : (b))`, the quotient written
+  inline. The macro repeats the inner `MAX`; literal bounds let the compiler fold `1 < -1`, which
+  gives the reference's jump from the first compare straight to the repeated `MAX`. Extern bounds
+  compile to 95 bytes; a named quotient local is spilled to `[esp]`.
+- **0x4fc3a0: counter and array pointer in swapped callee-saved registers.** Indexing `w` and `out`
+  with a second counter `k` beside the call argument `i` gives the weight pointer esi and `i` edi.
+  With `w[i - 0x11]` the user counter and the compiler's pointer tie at colouring priority 64 and
+  the counter is listed first; with `k` both are compiler induction temporaries and the pointer is
+  listed first. The product goes through a float local (`f = buf[6] * w[k];` before `out[k] =
+  buf[6];`), so `fild` issues before the int store that may alias `buf`.
+- **0x4ff080: `fxch st(1); fxch st(1)` before `faddp`.** Two named `float` locals for the addends
+  (`a = x / v * 0.8; b = v * 0.001f * 0.2; return a + b;`): their rounding stores are dropped after
+  the x87 stack is laid out and leave the exchange pair. Casting both terms to `float` leaves one
+  `fxch`; `double` locals or a single expression leave none. The function must sit in the
+  `fcn_004fef80` file (callees earlier in the unit keep edx/ecx live across the calls).
+- **0x5b4f70: a 0/0xff call argument is two calls.** `f(..., type == 13 ? 0xff : 0)` gives `setne;
+  dec; and`; `if (type != 13) f(..., 0); else f(..., 0xff);` gives the reference's `push 0; jmp` /
+  `push 0xff` arms into one shared call. The clamp before it needs a separate variable in both arms
+  (section 200) for the reference's register roles.
+- **0x5c80f0: statement order decides colour.** Taking `me_h = &g_7f4ca0[g_774970]` before
+  `district = sel + 0x59a` and reading `me_h->handle` gives the reference's ecx/edx/eax roles for
+  the district block and folds the `* 4` into `[edx*4 + disp]`.
+- **0x5c8400: two stores through one symbol chain each other and raise an earlier store.** The loop
+  stores `lines[i].bar` from `eax` and then indexes `list[i]`; the reference issues the store before
+  the `i` reload. Traced: the store's height was 22 and the `i` reload 15 plus the memory-read bonus
+  (8), so the load won by one. The table stores `g_1016198[bar*0x3cc+0x34]` and
+  `g_1015f40[bar*0x3cc+0x18]` are fields of one 0x3cc-byte array (0x1016198 = 0x1015f40 + 0x258);
+  written through the same symbol (`g_1015f40 + bar*0x3cc + 0x28c`), c2 cannot prove them disjoint
+  and adds a store-store edge, the chain gets one longer, the `bar` store reaches height 23, ties the
+  reload and wins on sequence. RELOC. Same family as section 200's "may-alias store edges raise
+  store priority", here through a shared base symbol instead of a pointer.
+- **0x5d63e0: message header stores issued before the argument push.** The message struct is
+  declared in the block that fills and sends it. At function scope the header stores written before
+  the `e + 4` load get a may-alias edge to it (height 11 against the push's 9) and issue ahead of the
+  push; block-scoped, the same stores have height 8 and issue after it, as in the reference.
+  Measured on the scheduler trace, same statement order in both.
+- **0x5dc990: two arms that send the same message.** `result` assigned on every path (`1` after
   each arm's send, `0` in each null branch) and one `return result;` keep the arms' call-and-return
   tails apart; with `return 1;` in the arms the second arm's call was cross-jumped into the first.
-  Each arm declares its own message struct, which lets arm 2 store the type byte before the
-  `e + 4` load (as in 0x5d63e0) while arm 1 stores `f8` first.
+  Each arm declares its own message struct, which lets arm 2 store the type byte before the `e + 4`
+  load (as in 0x5d63e0) while arm 1 stores `f8` first.
