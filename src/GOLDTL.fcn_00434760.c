@@ -6,6 +6,8 @@ unsigned int __cdecl fcn_004346f0(char*);
 char __cdecl fcn_004348f0(unsigned int, unsigned int);
 void __cdecl fcn_0041ddd0(void*);
 
+// FUNCTION: GOLD 0x00434b70
+// SIZE: 390
 // FUNCTION: GOLDTL 0x434760
 // SIZE: 390
 

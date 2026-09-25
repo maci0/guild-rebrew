@@ -12,6 +12,8 @@ struct info_4aae50 {
 };
 // SIZE 0x18
 
+// FUNCTION: GOLD 0x004aad30
+// SIZE: 448
 // FUNCTION: GOLDTL 0x4aae50
 // SIZE: 448
 

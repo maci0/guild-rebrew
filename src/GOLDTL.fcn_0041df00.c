@@ -28,6 +28,8 @@ extern int g_6b6f74;
 extern struct block_41df00* g_6b6f80;
 extern struct pool_41df00 g_14cc5c0;
 
+// FUNCTION: GOLD 0x00422750
+// SIZE: 440
 // FUNCTION: GOLDTL 0x41df00
 // SIZE: 440
 

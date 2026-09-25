@@ -1,13 +1,9 @@
 /* Initializes the log/error handler: stores the module/severity
  * settings, installs the crash-dump filter, resolves the log file
- * directory, and installs per-level log file handles.
- * TL import carried server VAs throughout; re-derived from TL disasm
- * (round 1140): filter 0x41cbc0, IAT slots 0x6622d4/0x6620c0/0x662088/
- * 0x66205c, tables 0x677948->0x677ac8 and 0x677918->0x677948, fmts
- * 0x677cc8/0x677adc/0x677ca8/0x677ad8. NEAR 397/404: the >0x10000 reopen
- * branch differs structurally (TL: fclose+sprintf+f(0x677ca8,count)+fclose;
- * server twin: fclose+fopen+fputs) — rare path, parked. */
+ * directory, and installs per-level log file handles. */
 
+// FUNCTION: GOLD 0x004220b0
+// SIZE: 404
 // FUNCTION: GOLDTL 0x41d6b0
 // SIZE: 404
 // InitializeLogAndErrorHandler
@@ -31,6 +27,15 @@ extern long __cdecl ftell(void* file);
 extern int __cdecl fclose(void* file);
 extern int __cdecl fputs(const char* s, void* file);
 extern char* __cdecl strrchr(const char* s, int c);
+extern char g_14cc600[];
+extern char g_14ce620[];
+extern char g_677918[];
+extern char g_677948[];
+extern char g_677ac8[];
+extern char g_677adc[];
+extern char g_677ca8[];
+extern char g_677cc8[];
+LONG __stdcall fcn_0041cbc0(struct _EXCEPTION_POINTERS* info);
 
 void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned int d)
 {
@@ -45,36 +50,36 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	g_crash_callback = b;
 	g_owner_window = c;
 	g_crash_dump_all_frames = (d >> 4) & 1;
-	SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER) 0x0041cbc0);
+	SetUnhandledExceptionFilter(fcn_0041cbc0);
 	now = time(0);
 	GetWindowTextA((HWND) c, path, 0x100);
-	((void (__stdcall*)(int, const char*, int)) *(void**) 0x006620c0)(0, (const char*) 0x14ce620, 0x104);
-	*strrchr((char*) 0x14ce620, 0x5c) = 0;
-	sprintf((char*) 0x14cc600, (char*) 0x677cc8, path, ctime((long*) &now));
+	GetModuleFileNameA(0, g_14ce620, 0x104);
+	*strrchr(g_14ce620, 0x5c) = 0;
+	sprintf(g_14cc600, g_677cc8, path, ctime((long*) &now));
 	if (g_log_mode_flags & 1) {
-		string_cursor = (char*) 0x677948;
+		string_cursor = g_677948;
 		do {
-			sprintf(buf, (char*) 0x677adc, (char*) 0x14ce620, string_cursor);
+			sprintf(buf, g_677adc, g_14ce620, string_cursor);
 			file = fopen(buf, "at");
 			if (file != 0) {
 				fseek(file, 0, 2);
 				if (ftell(file) > 0x10000) {
 					fclose(file);
 					file = fopen(buf, "wt");
-					fputs((char*) 0x677ca8, file);
+					fputs(g_677ca8, file);
 				}
 				fclose(file);
 			}
 			string_cursor += 0x20;
-		} while ((int) string_cursor < 0x677ac8);
+		} while ((int) string_cursor < (int) g_677ac8);
 	}
 	if (g_log_mode_flags & 8) {
-		((void (__stdcall*)(void)) *(void**) 0x0066208c)();
-		g_log_file_handle = ((int (__stdcall*)(int)) *(void**) 0x0066205c)(-0xb);
+		AllocConsole();
+		g_log_file_handle = (int) GetStdHandle(STD_OUTPUT_HANDLE);
 	}
-	string_cursor = (char*) 0x677918;
+	string_cursor = g_677918;
 	do {
-		DispatchLogOutput((char*) 0x14cc600, g_log_mode_flags, *(int*) string_cursor);
+		DispatchLogOutput(g_14cc600, g_log_mode_flags, *(int*) string_cursor);
 		string_cursor += 4;
-	} while ((int) string_cursor < 0x677948);
+	} while ((int) string_cursor < (int) g_677948);
 }

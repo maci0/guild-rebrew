@@ -15,7 +15,13 @@
 
 int __cdecl fcn_00508e40(int);
 int __cdecl fcn_004f5810(int);
+extern char g_7f4ca0[];
+extern int g_99f804[];
+extern int g_9a3804[];
+extern char g_9a3816[];
 
+// FUNCTION: GOLD 0x004f4130
+// SIZE: 128
 // FUNCTION: GOLDTL 0x4f6520
 // SIZE: 128
 // cm_ChkCutsceneReady (real body: table-scan counter)
@@ -32,21 +38,23 @@ int __cdecl cm_ChkCutsceneReady(int arg0, int arg2)
 	if (fcn_00508e40(arg0) == 0) {
 		return 0;
 	}
-	base = (int*) (0x7f4ca0 + (arg2 & 0xffff) * 540);
+	base = (int*) (g_7f4ca0 + (arg2 & 0xffff) * 540);
 	if (base == 0) {
 		return 0;
 	}
 	key = *(int*) (base + 1);
-	for (row = (int*) 0x99f804; (int) row < 0x9a3804; row += 2) {
+	row = g_99f804;
+	do {
 		if (*(int*) (row - 1) == key) {
 			r = fcn_004f5810(*row);
-			if (r != -1 && *(int*) ((char*) 0x9a3816 + r * 0x2d) == arg0) {
+			if (r != -1 && *(int*) (g_9a3816 + r * 0x2d) == arg0) {
 				count++;
 				if (count > 0x20) {
 					break;
 				}
 			}
 		}
-	}
+		row += 2;
+	} while ((int) row < (int) g_9a3804);
 	return count;
 }
