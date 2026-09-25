@@ -27,7 +27,10 @@ typedef struct {
 } MsgF8;
 #pragma pack(pop)
 
-extern Stamp0e g_7f4c00;
+extern int g_7f4c00;
+extern int g_7f4c04;
+extern int g_7f4c08;
+extern short g_7f4c0c;
 
 void __cdecl fcn_004c5530(MsgF8* m);
 void __cdecl fcn_005100f0(int id, int v);
@@ -62,7 +65,10 @@ int __cdecl fcn_004ab0d0(char* a1, char* a2, char* a3)
 	m.mode = 2;
 	m.from = *(int*) (a1 + 4);
 	m.to = *(int*) (a2 + 4);
-	m.stamp = g_7f4c00;
+	m.stamp.a = g_7f4c00;
+	m.stamp.b = g_7f4c04;
+	m.stamp.c = g_7f4c08;
+	m.stamp.d = g_7f4c0c;
 	m.to2 = *(int*) (a2 + 4);
 	m.with = *(int*) (a3 + 4);
 	fcn_004c5530(&m);
