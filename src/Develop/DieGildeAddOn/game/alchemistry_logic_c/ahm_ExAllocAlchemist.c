@@ -41,7 +41,6 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[];
  * compare against 0x1000bdf0):
  *   - +0xcb: the 0x21c stride chain is `lea eax,[eax+eax*8]; lea
  *     edx,[eax+eax*4]` where the reference keeps it in edx.
- *   - +0xf6: the reference emits `or eax,-1` before the 0xffff store.
  *   - +0x119: `mov dl,1` and the slot-index store are swapped.
  *   - +0x148: the cmd_payload reload and the `[esi+8]` store are swapped.
  *   - +0x23c: the slot+0x18 copy is stored after the second product; the
@@ -99,20 +98,21 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 
 	memset((void*) (g_slot_table + slot_index * 0x21c), 0, 0x21c);
-	/* volatile: keeps both stores alive past the slot[0] = slot_index
-	 * write below (the reference keeps them: slot[0]=0xffff, then
-	 * slot[4]=-1 with the -1 in eax reused by the second memset). The
-	 * reference order is slot[0]=0xffff before slot[4]=-1; both must be
-	 * volatile or MSVC6 dead-store-eliminates slot[0]=0xffff.  The +0x5c
+	/* The 0xffff store goes through `slot` and the +4 store through the
+	 * symbol: c2 cannot prove the two disjoint, so the +4 store depends on
+	 * this one and lifts its scheduling priority just below the `or eax,-1`,
+	 * giving the reference's `or eax,-1; mov word ptr [esi],0xffff` at
+	 * 0x1000bee6.  `volatile` makes the store a barrier that
+	 * holds the `or` behind it.  The slot-index store below goes through the
+	 * symbol, not `slot`, or msvc6 drops this store as dead.  The +0x5c
 	 * fill is a loop, not memset: the destination stays its own register,
 	 * `lea edx,[edx+..]; mov edi,edx` as at 0x1000bef4 (shapes 197). */
+	slot = (char*) (g_slot_table + slot_index * 0x21c);
 	minus_one = -1;
-	*(volatile unsigned short*) (g_slot_table + slot_index * 0x21c) = 0xffff;
-	*(volatile int*) (g_slot_table + slot_index * 0x21c + 4) = minus_one;
+	*(unsigned short*) slot = 0xffff;
+	*(int*) (g_slot_table + slot_index * 0x21c + 4) = minus_one;
 	for (i = 0; i < 8; i++)
 		((int*) (g_slot_table + slot_index * 0x21c + 0x5c))[i] = minus_one;
-
-	slot = (char*) (g_slot_table + slot_index * 0x21c);
 
 	/* Order follows the target from 0x1000bf03: the citizen-count bump and
 	 * the slot-index store come first, then the object-id read, both dynamic
