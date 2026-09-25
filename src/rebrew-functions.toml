@@ -591,11 +591,9 @@ updated_at = "2026-09-22T00:16:48+00:00"
 
 ["SERVER.0x1000d930"]
 size = 2057
-status = "NEAR_MATCHING"
-blocker = "register/slot permutation + intra-block scheduling; frame matches (both sides sub esp,0x228, re-verified round 186); residual is 71% displaced bytes with no dominant cause -- see .c header"
-blocker_delta = 1066
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-24T19:48:28+00:00"
+updated_at = "2026-09-25T15:03:57+00:00"
 
 ["SERVER.0x1000e140"]
 size = 993
