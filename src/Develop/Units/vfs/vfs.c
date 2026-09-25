@@ -12,6 +12,41 @@ int __cdecl vfs_CloseStream(void*);
 
 // FUNCTION: GOLDTL 0x45f2c0
 // SIZE: 192
+// FUNCTION: SERVER 0x10003820
+// vfs_GetByte
+
+unsigned int __cdecl vfs_GetByte(int* stream)
+{
+	int* errno_ptr;
+	int bytes_read;
+
+	if (stream[0xf] != 0) {
+		return (unsigned int) -1;
+	}
+	if (stream[1] == 0) {
+		errno_ptr = _errno();
+		*errno_ptr = 0;
+		bytes_read = (int) fread((void*) stream[0x11], 1, 0x4000, (FILE*) stream[0x10]);
+		stream[1] = bytes_read;
+		if (bytes_read == 0) {
+			stream[0xf] = 1;
+			if ((*(unsigned char*) (stream[0x10] + 0xc) & 0x20) != 0) {
+				stream[0xe] = -1;
+			}
+			return (unsigned int) -1;
+		}
+		stream[0] = stream[0x11];
+	}
+	/* The read cursor is post-incremented in place through a pointer alias
+	 * of stream[0]. Copying it into a local first makes MSVC6 hold the
+	 * cursor in ecx and zero-extend the byte into eax, which loses the
+	 * target's reuse of eax for both the count temp and the cursor. */
+	stream[1] = stream[1] - 1;
+	return *(*(unsigned char**) &stream[0])++;
+}
+
+/* Closes a VFS stream and releases associated resources.
+ * Frees internal buffers and removes from open stream list. */
 // FUNCTION: SERVER 0x100038a0
 
 // vfs_CloseStream

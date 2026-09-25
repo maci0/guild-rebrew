@@ -23,8 +23,6 @@
  * The previous body kept both accumulators volatile at declaration or at
  * every site and sat at 23 linked bytes over three documented "walls";
  * all three are gone in this body. */
-// FUNCTION: GOLDTL 0x465350
-// SIZE: 496
 // FUNCTION: SERVER 0x10008A90
 // vfs_ReadCompressed
 
