@@ -4768,9 +4768,9 @@ updated_by = "verify"
 updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x004bcb80"]
-status = "SIZE_MISMATCH"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-25T00:19:36+00:00"
 
 ["GOLDTL.0x004c35f0"]
 cflags = "/Ox /Gd"
