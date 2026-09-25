@@ -4053,6 +4053,30 @@ close every other join, each traced on this function:
 | `frameInfo` at function scope, 192 join/order permutations (inner and outer scope) | best 2111 | tie or worse |
 | `memset` for the zero stores | 1706-1829 | zero in edx, stores chained |
 
+**The tie has no priority input.** Priority is written at `0x1072700d`/`0x10727042` from the weight
+words at `[0x10799204]` (this target: -1, 13, -5, -1, -2, 16, 16), each applied as a shift
+(`0x10727781`): `height << 13` + `(successor count, +0x22) >> 5` + `(memory source operand, +0x3a
+bit 0) << 16` + `(x87-class store: item type & 0xf000 == 0x4000, +0x3a bit 1) << 16`. The
+critical-path flag (+0x39 bit 6) and +0x39 bit 7 are 0/1 values shifted right by 1, so they add 0.
+The memory-source bit is set when the item's source operand list holds a kind 2 or 6 operand
+(`0x10726408`); the store bit from the destination list (`0x1072642b`). Traced at the frame fill:
+`fi[1]` (seq 1) and `fi[0]` (seq 4) are both exactly 0x4000 (height 2, one successor, the loop-head
+label node op 430, lat 0; no memory source; type 0x1004). Raising `fi[0]` needs a successor, i.e. a
+later access overlapping frameInfo bytes 0..3 or a later writer of edx; the reference block has
+neither. The per-cycle issue loop (`0x10727977`) does not separate them either: both pass the slot
+check `[0x10799214]` in slot 0 and slot 1, and the dead-label marker (op 444, seq 2) is slot-0 only.
+Inputs traced and ruled out:
+
+| Input | Object | c2 result |
+|-------|--------|-----------|
+| `*(float*) &frameInfo[0] = *(float*) &pDbgBuf` | 2111 | float copies lower to type 0x1004 `mov`; type 0x4004 appears only on x87 items (`fild`/`fstp`) |
+| unreferenced user label in the join (`group_a_done: dead_a: goto frame_fill;`, or `break`), fill in source order | 2231 (size) | op 444 is the marker `0x107028f1` leaves for a deleted user label (symbol +0x30 == 0); the arms are still threaded past it and stop merging |
+| join `espVal -= 4`, `pStack = espVal` | 2098 | merges, but emits `sub ebx, 4` (reference `add ebx, -4`), and as IL item 1 its flags edge puts it ahead of the `xor` |
+
+With the fill in source order and no `fi[1]` join (the dead-label row), the frame fill schedules as
+the reference: `fi[0]` gets seq 2 and `fi[1]` seq 3, both issue in cycle 1 in that order. A join that
+leaves `fi[1]` out of the merged block's head therefore needs no frame-fill change.
+
 Remaining lever, untested: a join the cross-jump accepts that names no 4-byte local and needs no
 scratch register. The reference's frame fill has only `fi[1]` (ebp) and `pStack` (ebx) of that kind.
 Tracer kit: `.scratch/ck/` in the `fix/srv-crashdump` worktree (gitignored).
