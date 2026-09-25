@@ -1,6 +1,8 @@
 extern void* g_14d0020[];
 // GLOBAL: GOLDTL 0x67a370
 extern int g_67a370;
+// FUNCTION: GOLD 0x4027b0
+// SIZE: 66
 // FUNCTION: GOLDTL 0x402ff0
 // SIZE: 66
 
@@ -19,5 +21,5 @@ void __cdecl fcn_00402ff0(void)
 			fcn_00438c40(*(int*) ((char*) e + 0x34), (char*) e + 0x54);
 		}
 		p++;
-	} while ((int) p < 0x14d0c20);
+	} while ((int) p < (int) (g_14d0020 + 0x300));
 }
