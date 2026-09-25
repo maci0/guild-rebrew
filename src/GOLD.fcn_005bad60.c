@@ -10,19 +10,19 @@ typedef struct
 
 typedef struct
 {
-	char pad0[0x39c];
+	char pad0[0x398];
+	int x398;
 	int x39c;
 	int x3a0;
 	int x3a4;
-	int x3a8;
-	char pad3ac[0x3c4 - 0x3ac];
+	char pad3a8[0x3c4 - 0x3a8];
 } Win;
 // SIZE 0x3c4
 
 extern int g_6abb00;
 extern short g_fb9070;
 extern short g_fb9072;
-extern Win g_f8f11c[];
+extern Win g_f8f120[];
 extern int g_772514;
 extern unsigned short g_774970;
 extern Btn g_776c60[6];
@@ -66,10 +66,10 @@ void __cdecl fcn_005bad60(void)
 	fcn_0057e880(0x14, 0, 0, 0);
 	dlg = fcn_00470820(g_fb9072 - 0x158, g_fb9070 - 0x108, s_6ac77c);
 	fcn_004727a0(dlg, 0);
-	g_f8f11c[g_772514].x39c = 0x18;
-	g_f8f11c[g_772514].x3a0 = 0x18;
-	g_f8f11c[g_772514].x3a4 = 0x18;
-	g_f8f11c[g_772514].x3a8 = 0x18;
+	g_f8f120[g_772514].x398 = 0x18;
+	g_f8f120[g_772514].x39c = 0x18;
+	g_f8f120[g_772514].x3a0 = 0x18;
+	g_f8f120[g_772514].x3a4 = 0x18;
 	fcn_004727a0(dlg, 0);
 	fcn_00473a90(0, 0);
 	fcn_005c5da0(g_772514, 0, 0, g_774970, 0x1f3b);
