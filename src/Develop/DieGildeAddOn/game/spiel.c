@@ -48,6 +48,8 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 // GLOBAL: SERVER 0x10030b6c
 int g_next_object_id = 1;
 int g_current_year;
+// FUNCTION: GOLDTL 0x5012b0
+// SIZE: 57
 // FUNCTION: SERVER 0x10015CB0
 // gm_ResetAllEntities
 
@@ -121,6 +123,8 @@ void __cdecl gm_CleanupObjectEntities(void)
  * global entity records for a matching entity ID. Returns
  * pointer or NULL. */
 
+// FUNCTION: GOLDTL 0x501510
+// SIZE: 55
 // FUNCTION: SERVER 0x10015dc0
 // gm_FindRecordById
 

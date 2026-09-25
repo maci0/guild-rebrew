@@ -122,6 +122,8 @@ done2:
 /* Updates entity priority/scheduling. Called during simulation
  * tick to adjust entity processing order based on game state. */
 
+// FUNCTION: GOLDTL 0x5001e0
+// SIZE: 83
 // FUNCTION: SERVER 0x10015400
 // sim_PriorityUpdate
 
