@@ -3,6 +3,7 @@
 
 #include <string.h>
 
+// SIZE 0x11c
 typedef struct Node {
 	char name[0x100];
 	int count;
@@ -10,6 +11,8 @@ typedef struct Node {
 	struct Node* next;
 	struct Node* child;
 	struct Node* parent;
+	int pad114;
+	char flag;
 } Node;
 
 char* __cdecl fcn_0042f420(Node* n, Node* stop, char* out)

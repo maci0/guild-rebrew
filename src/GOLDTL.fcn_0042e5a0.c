@@ -3,6 +3,7 @@
 
 #include <string.h>
 
+// SIZE 0x11c
 typedef struct Node {
 	char name[0x100];
 	int count;
