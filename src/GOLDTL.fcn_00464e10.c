@@ -8,6 +8,8 @@ typedef struct TmUnz {
 } TmUnz;
 // SIZE 0x18
 
+// FUNCTION: GOLD 0x467fd0
+// SIZE: 79
 // FUNCTION: GOLDTL 0x464e10
 // SIZE: 79
 void __cdecl fcn_00464e10(unsigned long ulDosDate, TmUnz* ptm)

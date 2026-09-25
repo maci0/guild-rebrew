@@ -21,6 +21,8 @@
 	DO8(buf, 0); \
 	DO8(buf, 8);
 
+// FUNCTION: GOLD 0x4616c0
+// SIZE: 304
 // FUNCTION: GOLDTL 0x45d3f0
 // SIZE: 302
 uLong __cdecl fcn_0045d3f0(uLong adler, const Bytef* buf, uInt len)

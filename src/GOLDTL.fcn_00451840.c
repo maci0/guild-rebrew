@@ -1,5 +1,7 @@
 #include <math.h>
 
+// FUNCTION: GOLD 0x453e70
+// SIZE: 96
 // FUNCTION: GOLDTL 0x451840
 // SIZE: 84
 int __cdecl fcn_00451840(float* a, float* b, float eps)
