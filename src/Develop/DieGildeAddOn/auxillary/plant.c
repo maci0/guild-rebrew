@@ -69,6 +69,8 @@ char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 	}
 	return (char*) 0;
 }
+// FUNCTION: GOLD 0x4bc6a0
+// SIZE: 112
 // FUNCTION: GOLDTL 0x4bcc80
 // SIZE: 103
 // FUNCTION: SERVER 0x10014F80

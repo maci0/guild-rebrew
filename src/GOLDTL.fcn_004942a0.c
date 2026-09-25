@@ -18,6 +18,8 @@ int __cdecl fcn_0050dac0(unsigned short id);
 float __cdecl fcn_00502820(int x0, int y0, int x1, int y1);
 unsigned short __cdecl fcn_0042e410(int n);
 
+// FUNCTION: GOLD 0x4948e0
+// SIZE: 305
 // FUNCTION: GOLDTL 0x004942a0
 // SIZE: 305
 void __cdecl fcn_004942a0(unsigned short* e, Share* out)

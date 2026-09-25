@@ -5,6 +5,8 @@ extern float g_10404c4[15];
 extern float g_1040584[15];
 extern float g_1040504[15];
 
+// FUNCTION: GOLD 0x460ca0
+// SIZE: 291
 // FUNCTION: GOLDTL 0x0045ccf0
 // SIZE: 291
 

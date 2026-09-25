@@ -192,6 +192,8 @@ int __cdecl gm_IsInRange(int x)
 /* Checks if an entity type is of a specific class. Returns
  * non-zero if the type matches the expected entity class. */
 
+// FUNCTION: GOLD 0x503f50
+// SIZE: 80
 // FUNCTION: GOLDTL 0x00506e20
 // SIZE: 80
 // FUNCTION: SERVER 0x10018150

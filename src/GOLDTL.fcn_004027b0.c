@@ -34,6 +34,8 @@ extern int g_6b5c24;
 void __cdecl fcn_0043a3f0(char* node, char* m, Key4_4027b0 k);
 void __cdecl fcn_00402a00(char* obj, int shown);
 
+// FUNCTION: GOLD 0x4022e0
+// SIZE: 404
 // FUNCTION: GOLDTL 0x4027b0
 // SIZE: 404
 

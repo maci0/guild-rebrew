@@ -1,5 +1,7 @@
 int __cdecl fcn_00464ad0(char* file, void* info, void* internal, char* name, unsigned long nsize, void* extra, unsigned long esize, char* comment, unsigned long csize);
 
+// FUNCTION: GOLD 0x468070
+// SIZE: 128
 // FUNCTION: GOLDTL 0x464eb0
 // SIZE: 115
 int __cdecl fcn_00464eb0(char* s)

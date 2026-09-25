@@ -9,6 +9,8 @@ void __cdecl fcn_0041ddd0(void* p);
 void __cdecl fcn_0041d9e0(const char* msg);
 int __cdecl fcn_0045f890(void* gz, int off, int whence);
 
+// FUNCTION: GOLD 0x430fa0
+// SIZE: 464
 // FUNCTION: GOLDTL 0x430a80
 // SIZE: 449
 

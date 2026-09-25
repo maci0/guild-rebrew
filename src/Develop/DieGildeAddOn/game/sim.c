@@ -148,6 +148,8 @@ void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
  * Dispatches entity iteration across buildings, citizens, or
  * other entity categories based on the type selector. */
 
+// FUNCTION: GOLD 0x4fdc10
+// SIZE: 160
 // FUNCTION: GOLDTL 0x005003e0
 // SIZE: 160
 // FUNCTION: SERVER 0x10015460

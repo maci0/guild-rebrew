@@ -38,6 +38,8 @@ struct internal_state {
 #define NEEDBYTE {if(z->avail_in==0)return r;r=f;}
 #define NEXTBYTE (z->avail_in--,z->total_in++,*z->next_in++)
 
+// FUNCTION: GOLD 0x465160
+// SIZE: 1072
 // FUNCTION: GOLDTL 0x004616e0
 // SIZE: 1072
 
