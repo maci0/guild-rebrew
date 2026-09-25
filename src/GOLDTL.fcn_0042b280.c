@@ -1,0 +1,21 @@
+extern int* g_6b7ed0[];
+extern int* g_6b7f50[];
+// FUNCTION: GOLDTL 0x42b280
+// SIZE: 59
+
+int __cdecl fcn_0042b280(int id)
+{
+	int i;
+	int j;
+
+	for (i = 0; i < 16; i++) {
+		if (g_6b7ed0[i] != 0) {
+			for (j = 0; j < g_6b7ed0[i][6]; j++) {
+				if (g_6b7f50[i][j] == id) {
+					return i;
+				}
+			}
+		}
+	}
+	return -1;
+}
