@@ -1,0 +1,36 @@
+extern char g_77e020[];
+
+#pragma pack(2)
+// SIZE 0xe
+struct pos14 {
+	int a;
+	int b;
+	int c;
+	short d;
+};
+#pragma pack()
+
+
+extern struct pos14 g_7f4c00;
+
+// FUNCTION: GOLDTL 0x5701d0
+// SIZE: 120
+
+char* __cdecl fcn_005463a0(int, int, int, ...);
+void __cdecl fcn_00508cf0(int, char*);
+
+void __cdecl fcn_005701d0(char* o)
+{
+	struct pos14* p;
+
+	p = (struct pos14*) (o + 0x52);
+	*p = g_7f4c00;
+	if (fcn_005463a0(1, 0, 0x83) != 0) {
+		p->a = g_7f4c00.a + 4;
+	} else {
+		p->a = g_7f4c00.a;
+	}
+	*(short*) (o + 0x56) = 8;
+	*(int*) (o + 0x58) = 0;
+	fcn_00508cf0(0x1a, g_77e020);
+}
