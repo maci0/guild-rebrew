@@ -1,3 +1,5 @@
+void __cdecl fcn_0041d9e0(char*);
+
 // SIZE 0x50
 struct s_7dcae0 {
 	char b0;
@@ -15,7 +17,6 @@ extern struct s_7dcae0 g_7dcae0[256];
 
 #include <string.h>
 
-void __cdecl fcn_0041d9e0(char*);
 
 struct s_7dcae0* __cdecl fcn_00546ef0(int a, char* name, int b, int c)
 {
