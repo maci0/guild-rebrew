@@ -375,6 +375,8 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 /* Allocates and initializes the alchemy info structure for
  * a building. Sets up recipe slots and ingredient storage. */
 
+// FUNCTION: GOLDTL 0x004eee40
+// SIZE: 304
 // FUNCTION: SERVER 0x1000c4d0
 // SIZE: 295
 
