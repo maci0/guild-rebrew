@@ -20,6 +20,8 @@ typedef struct {
 
 extern Ent591c g_779d00[11];
 
+// FUNCTION: GOLD 0x5896e0
+// SIZE: 63
 // FUNCTION: GOLDTL 0x00591c40
 // SIZE: 63
 

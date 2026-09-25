@@ -216,6 +216,8 @@ int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
 }
 #pragma optimize("", on)
 
+// FUNCTION: GOLD 0x4ae3a0
+// SIZE: 608
 // FUNCTION: GOLDTL 0x4ae4e0
 // SIZE: 608
 

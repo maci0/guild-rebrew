@@ -237,6 +237,8 @@ int __cdecl gm_EntityClassCheck(int type)
 /* Checks if an entity's stat is at or above a threshold.
  * Used for skill/ability requirement checks. */
 
+// FUNCTION: GOLD 0x5044b0
+// SIZE: 96
 // FUNCTION: GOLDTL 0x005074e0
 // SIZE: 96
 // FUNCTION: SERVER 0x100181a0

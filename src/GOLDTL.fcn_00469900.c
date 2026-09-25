@@ -1,3 +1,5 @@
+// FUNCTION: GOLD 0x46ca50
+// SIZE: 92
 // FUNCTION: GOLDTL 0x469900
 // SIZE: 92
 // The volatile read of g_6b7fac orders it after the reload of g_772500, as

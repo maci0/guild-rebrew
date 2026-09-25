@@ -38,6 +38,8 @@ extern double g_665b80;
 extern double g_662908;
 extern double g_665b78;
 
+// FUNCTION: GOLD 0x4ff8c0
+// SIZE: 131
 // FUNCTION: GOLDTL 0x00502450
 // SIZE: 131
 int __cdecl fcn_00502450(int a, int b)

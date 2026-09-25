@@ -42,6 +42,8 @@ int __cdecl fcn_0050bec0(unsigned char* s, int* out)
 	return n;
 }
 
+// FUNCTION: GOLD 0x508cf0
+// SIZE: 176
 // FUNCTION: GOLDTL 0x0050bf30
 // SIZE: 174
 int __cdecl fcn_0050bf30(unsigned char* s, unsigned short* key, int* out)

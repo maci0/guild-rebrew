@@ -16,6 +16,8 @@ unsigned char __cdecl fcn_0044e570(int a)
 	return n == 1;
 }
 
+// FUNCTION: GOLD 0x44e5a0
+// SIZE: 336
 // FUNCTION: GOLDTL 0x44cbd0
 // SIZE: 336
 // Lives in fcn_0044e570's file on purpose: with the callee defined in the same
