@@ -9,37 +9,6 @@
 # below are compiled only so the linker prefers them over the library object,
 # because those objects drag in side effects the reference does not have.
 
-# --- displace sbheap.obj -------------------------------------------------
-# sbheap.obj reaches IsBadWritePtr through __imp__IsBadWritePtr@8. The
-# original server.dll has no such import, and a local IsBadWritePtr does not
-# help: only the indirect slot is referenced and it resolves from KERNEL32.lib.
-0x1001d4cd  # __sbh_heap_init          crt_heap.c
-0x1001d515  # __sbh_find_block         sbh_pool.c
-0x1001d540  # __sbh_free_block         sbh_pool.c
-0x1001d869  # __sbh_alloc_block        sbh_pool.c
-0x1001db72  # __sbh_alloc_new_region   sbh_pool.c
-0x1001dc23  # __sbh_alloc_new_group    sbh_pool.c
-0x1001dd1e  # __sbh_resize_block       sbh_pool.c
-0x1001e014  # __old_sbh_new_region     sbh_pool.c
-0x1001e158  # __old_sbh_release_region sbh_pool.c
-0x1001e1ae  # __old_sbh_decommit_pages sbh_pool.c
-0x1001e270  # __old_sbh_find_block     sbh_pool.c
-0x1001e2c7  # __old_sbh_free_block     sbh_pool.c
-0x1001e30c  # __old_sbh_alloc_block    sbh_pool.c
-0x1001e514  # __old_sbh_alloc_block_from_page sbh_pool.c
-0x1001e638  # __old_sbh_resize_block   sbh_pool.c
-0x1001d253  # heap helper              crt_heap.c
-0x1001d280  # heap helper              crt_heap.c
-0x1001d3c8  # __heap_init              crt_heap.c
-0x1001d425  # __heap_term              crt_heap.c
-0x10020fe1  # heap helper              crt_heap.c
-0x10021200  # heap helper              crt_heap.c
-
-# --- displace mlock.obj --------------------------------------------------
-# mlock.obj imports FatalAppExitA, which the reference does not have.
-0x1001d036  # __lock                   mlock.c
-0x1001d097  # __unlock                 mlock.c
-
 # --- keep crt0msg.obj out ------------------------------------------------
 # Its runtime-error strings are also in rdata_restore.c. Letting the library
 # supply them instead was tried: content is then correct and unduplicated, but
@@ -52,9 +21,3 @@
 0x1001ae20  # _strncpy                 amsg_exit.c
 0x1001f8e0  # amsg_exit helper         amsg_exit.c
 0x10022107  # amsg_exit helper         amsg_exit.c
-
-# --- entry point / init --------------------------------------------------
-# dllmain.c is the DLL entry (/ENTRY:DllMain@12) and calls _CRT_INIT.
-0x1001a643  # __cinit                  initterm.c
-0x1001a758  # _initterm                initterm.c
-0x1001b9d4  # __DllMainCRTStartup@12   dllmain.c (the /ENTRY symbol itself)

@@ -172,7 +172,7 @@ Build with `cmake -S . -B build -DREBREW_DEBUG_INFO=OFF && cmake --build build`.
 **Run `scripts/gate.sh` before committing.** It is the checks that must pass:
 `rebrew lint`, the compile (the POST_BUILD postlink step is expected to fail
 until the tree is position-aligned, so only `error C####`/`error LNK####`
-count), `rebrew verify --full` against a baseline of 259 passed (game EXACT+RELOC), the linked
+count), `rebrew verify --full` against a baseline of 258 passed (game EXACT+RELOC), the linked
 `.text` residue against `RESIDUE_BASELINE`, and the per-target toolchain
 alignment check (`rebrew toolchain detect`: code-generator family vs
 configured profile). A drop below either
@@ -220,7 +220,7 @@ link and find out; do not reason about which one deserves trust
   symbols, all library displacement rather than game-TU duplication**:
   `_putc` (`LIBCMT.lib(fputc.obj)` against `link_stubs.c.obj`), `__amsg_exit`
   and `___app_type` (both `LIBCMT.lib(dllcrt0.obj)` against `amsg_exit.c.obj`
-  and `link_stubs.c.obj`): `dllmain.c` calls `_CRT_INIT`, which pulls
+  and `link_stubs.c.obj`): the link resolves `_CRT_INIT` from LIBCMT, which pulls
   `dllcrt0.obj`. Earlier notes here said "two cases"; the real count is three
   symbols, and note that an *incremental* build prints none of them, so the
   count is only visible after `--clean-first`. When triaging a new warning,
