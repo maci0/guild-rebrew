@@ -6772,6 +6772,7 @@ size = 31
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004c75b0"]
 size = 42
@@ -20122,131 +20123,157 @@ updated_at = "2026-09-25T08:30:04+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x0043f6b0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x00442e30"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x00443030"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x00445e40"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x00449ba0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x0045d1e0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x00469140"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x0048f110"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004901d0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004a1130"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004abff0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004b1b60"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004b1e60"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004b24c0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004b3490"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004b3810"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004e8d10"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004e8ee0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x00514b50"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x00526db0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x00538d00"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x0054b940"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x0059f6c0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x005b1b30"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x005b1ff0"]
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T10:57:47+00:00"
+blocker = "inline-asm align-up fill/copy prelude kept by decision (docs/codegen-walls.md section 6b): no msvc6 C memset/memcpy form emits the lea ecx,[edi+edi*2] prelude"
 
 ["GOLDTL.0x004027b0"]
 status = "RELOC"
