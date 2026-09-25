@@ -1,0 +1,20 @@
+// FUNCTION: GOLDTL 0x40d250
+// SIZE: 87
+
+int __cdecl fcn_004032b0(int);
+int __cdecl fcn_0064d41a(char*, char*, ...);
+extern char* g_6b7e98;
+void __cdecl fcn_00425bf0(void*, int, char*);
+
+int __cdecl fcn_0040d250(int* a1)
+{
+	char buf[0x80];
+	int r;
+
+	r = fcn_004032b0(*a1);
+	if (r == 0) {
+		fcn_0064d41a(buf, (char*) 0x675f80, *a1);
+		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), buf);
+	}
+	return r;
+}
