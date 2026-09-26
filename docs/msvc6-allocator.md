@@ -4252,6 +4252,11 @@ adds the `fs:[0]` frame the reference lacks; `_alloca`, `__assume`, `__noop`, `_
 (driver `0x10760541`), stores register parameters to their homes only when the convention bits
 (`[0x107ac378]+0x14 & 0x1c`) are 4; this function has 0x10.
 
+**Flags do not break the tie** (measured on the 2111/2115 source, `rebrew test --cflags`, object
+bytes): `/O2 /Gd` 2111; `/G5`, `/GB`, `/Op` 2111 (same default weight row); `/Ow` 2074; `/G6` (the
+other weight row) 652; `/Oa` 1136; `/G6 /Ow` 649. A sampled `rebrew match --flag-sweep-only
+--tier full` (95,280 of 6,193,152 combinations) found no exact result.
+
 ## Finding 74: Processor Pack c2 (client targets): routine map, rules and open cases
 
 The two clients build with the `rebrew/msvc:6.0-sp5-pp-win32` image, whose `c2.dll` (loaded at
