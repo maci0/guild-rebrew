@@ -61,7 +61,7 @@ void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int f
  *     as a do/while the back-edge and exit branches swap. */
 
 
-extern unsigned char g_connections[]; /* 0x101deb00: 8 slots of 0x264264 */
+extern unsigned char g_connections[0x264264]; /* 0x101deb00: 8 slots of 0x264264 */
 extern unsigned int g_download_slots[8]; /* 0x101deac8 */
 extern char g_module_path[0x104]; /* 0x101de9a0 */
 extern int g_current_year; /* 0x10035880 */

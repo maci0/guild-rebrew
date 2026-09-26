@@ -6,7 +6,7 @@
 
 extern char* g_item_def_table; /* 0x101de450, attested in rebrew-data.toml */
 extern unsigned char g_current_season;
-extern unsigned char g_connections[]; /* 0x101deb00 */
+extern unsigned char g_connections[0x264264]; /* 0x101deb00 */
 
 short* __cdecl gm_ResolveParentEntity(short*);
 int __cdecl compute_size(char*, int);

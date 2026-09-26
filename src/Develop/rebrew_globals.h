@@ -77,7 +77,7 @@ extern unsigned int g_download_received; /* 0x101DEAC4 */
 extern unsigned int g_download_slots[8]; /* 0x101DEAC8 */
 extern unsigned int g_download_buffer; /* 0x101DEAE8 */
 extern int g_net_socket; /* 0x101DEAEC, listen socket */
-extern unsigned char g_connections[]; /* 0x101DEB00, first player slot (stride 0x264264 bytes) */
+extern unsigned char g_connections[0x264264]; /* 0x101DEB00, first player slot (stride 0x264264 bytes) */
 extern unsigned int g_player_slot_field; /* 0x101DEB14 */
 extern unsigned int g_player_slot_overflow; /* 0x114FFE20, overflow slot */
 // GLOBAL: SERVER 0x11764088

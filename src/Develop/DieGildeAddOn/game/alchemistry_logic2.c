@@ -599,7 +599,7 @@ typedef struct {
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
 // GLOBAL: SERVER 0x101deb00
-extern unsigned char g_connections[];
+extern unsigned char g_connections[0x264264];
 // FUNCTION: GOLDTL 0x4193f0
 // SIZE: 144
 

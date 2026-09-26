@@ -85,7 +85,7 @@ float g_const_0_0 = 0;
 float g_gv_const_5680 = 0;
 float g_gv_const_57c4 = 0;
 float g_gv_const_57c8 = 0;
-char g_log_message_buffer = 0;
+char g_log_message_buffer[] = {0};
 int g_mem_pool_overflow_flag = 0;
 char g_msg_buf[1] = {0};
 int g_net_socket = 0;
@@ -112,9 +112,10 @@ int vfs_WriteBufferLocked = 0;
  * struct offset) out of the postlink rewrite range and breaking byte
  * identity.  Real sparse layout (8 slots at 0x101deb00) is the data-restore
  * TU's job; sizes here just need to fit the .data VS and stay in range.) */
-char g_connections[0x264264] = {0};
+unsigned char g_connections[0x264264] = {0};
 unsigned int g_player_slot_field = 0;
-char g_player_slot_overflow[0x264264] = {0};
+unsigned int g_player_slot_overflow = 0;
+char g_player_slot_overflow_pad[0x264260] = {0};
 
 /* BSS tail pad: grows .data VS to the original's 0x174059c (zero-init -> .bss).
  * Sized so the section ends exactly there: the layout-map coverage rule
@@ -187,8 +188,8 @@ int g_log_file_handle = 0;
 /* g_player_slots_base removed: ExSell uses g_connections@0x101deb00 */
 int g_query_count = 0;
 int g_query_match_count = 0;
-int g_relationship_matrix_primary = 0;
-int g_relationship_matrix_secondary = 0;
+char g_relationship_matrix_primary[] = {0};
+char g_relationship_matrix_secondary[] = {0};
 int g_sim_ents = 0;
 /* g_unknown_1de450 removed round 932: it was a SECOND definition of the same
    address as `char* g_item_def_table` above (line 78), and wrongly typed `int`
