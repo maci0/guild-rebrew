@@ -40,7 +40,7 @@ extern unsigned short g_774970;
 extern int g_67a370;
 extern int g_6b8014;
 extern char g_1052be0[];
-extern Mat4 g_1052c00;
+extern float g_1052c00[16];
 
 int __cdecl fcn_004cef70(int who, char* obj);
 void __cdecl fcn_00438100(char* obj, int cam, int flag);
@@ -117,7 +117,7 @@ void __cdecl fcn_005348a0(void)
 		v.y = s.y;
 		v.z = s.z;
 		if (v.z >= 0.0f) {
-			fcn_005eb2e4(&v, &v, g_1052be0, &g_1052c00, &m, &m);
+			fcn_005eb2e4(&v, &v, g_1052be0, (Mat4*) g_1052c00, &m, &m);
 			if (v.z >= 0.0f && v.z <= 1.0f && x0 <= v.x && x1 >= v.x && y0 <= v.y && y1 >= v.y) {
 				obj[0x188] = 1;
 			}

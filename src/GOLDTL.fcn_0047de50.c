@@ -52,7 +52,7 @@ extern Master47de* g_100e748;
 extern char g_7f4ca0[];
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;
-extern char g_100dc20[];
+extern LightState g_100dc20;
 extern Master47de* g_100dc28;
 extern Ent47de* g_100dc2c;
 extern int g_100dc30;
@@ -95,7 +95,7 @@ void __cdecl fcn_0047de50(Master47de* m)
 		m->budget = gm_AccumulateTyped2(m);
 	}
 	if (m->bld == ((Bld47de*)g_7746c4) || m->bld == ((Bld47de*)g_7746c8)) {
-		(*(Bld47de**)g_100dc20) = m->bld;
+		g_100dc20.owner = (char*) m->bld;
 		g_100dc28 = m;
 		g_100dc2c = &((Ent47de*)g_7f4ca0)[m->bld->owner];
 		g_100dc30 = m->budget;

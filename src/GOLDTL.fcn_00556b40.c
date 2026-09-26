@@ -1,14 +1,6 @@
-#pragma pack(push, 1)
-// SIZE 0xe
-typedef struct Pos_556b40 {
-	int a;
-	int b;
-	int c;
-	short d;
-} Pos_556b40;
-#pragma pack(pop)
+#include "client_types.h"
 
-extern Pos_556b40 g_7f4c00;
+extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_00546190(char*);
@@ -82,7 +74,7 @@ void __cdecl fcn_00556b40(char* e)
 			return;
 		}
 		if (*(int*) (e + 0x70) == 3) {
-			*(Pos_556b40*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
 			fcn_004c5620(0, e);
 			return;
 		}

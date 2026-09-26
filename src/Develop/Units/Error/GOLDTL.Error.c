@@ -22,7 +22,7 @@
 
 /* rebrew_globals.h declares the SERVER-sized tables, so this twin declares
  * only what it needs itself. */
-extern char g_log_buffer[];
+extern int g_log_buffer;
 extern int g_log_file_handle;
 
 void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
@@ -94,14 +94,14 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 		goto fallback;
 
 	found:
-		sprintf(buf, "%s\\%s", g_log_buffer, g_log_format_table + idx * 32);
+		sprintf(buf, "%s\\%s", (char*)&g_log_buffer, g_log_format_table + idx * 32);
 		stream = (FILE*) fopen(buf, "at");
 		if (stream != 0) {
 			goto do_write;
 		}
 
 	fallback:
-		sprintf(buf, "%s\\%s", g_log_buffer, g_log_default_name);
+		sprintf(buf, "%s\\%s", (char*)&g_log_buffer, g_log_default_name);
 		stream = (FILE*) fopen(buf, "at");
 		if (stream == 0) {
 			goto skip;

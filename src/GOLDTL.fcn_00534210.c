@@ -15,7 +15,7 @@ typedef struct BarImg {
 } BarImg;
 // SIZE 0x54
 
-extern BarImg* g_772500;
+extern char* g_772500;
 extern int g_772514;
 
 int __cdecl fcn_00507e30(char* p, int idx);
@@ -33,7 +33,7 @@ void __cdecl fcn_00534210(int x, int y, char* p, int idx, int bar)
 	int half;
 	int i;
 
-	w = g_772500[bar].w + 2;
+	w = ((BarImg*) g_772500)[bar].w + 2;
 	cur = fcn_00507e30(p, idx);
 	max = (unsigned char) p[idx + 0x80];
 	if (cur > max) {

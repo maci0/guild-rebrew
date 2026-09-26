@@ -21,7 +21,9 @@ struct s_1015f4c {
 	char pad[0x3c4];
 };
 
-extern struct s_1015f4c g_1015f4c[];
+#include "client_types.h"
+
+extern s_1015f4c g_1015f4c[];
 extern int g_772514;
 extern unsigned short g_774970;
 extern int g_100f1dc;
@@ -105,7 +107,7 @@ int __cdecl fcn_005da250(char* e, char* a2)
 			rows[i].x = 0x32;
 			rows[i].y = i * 0x69 + 10;
 			fcn_005ca740(0x32, i * 0x69 + 10, g_772514, 0x56, &rows[i], 1);
-			fcn_005c9160(text, g_1015f4c[g_772514].x - 0xf, i * 0x69 + 10 + 0x2d, 0xc8, 0x55);
+			fcn_005c9160(text, ((struct s_1015f4c*) g_1015f4c)[g_772514].x - 0xf, i * 0x69 + 10 + 0x2d, 0xc8, 0x55);
 		}
 	} else {
 		fcn_00519190(0x1741, g_774970);

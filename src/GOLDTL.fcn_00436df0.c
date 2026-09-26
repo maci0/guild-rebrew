@@ -24,7 +24,7 @@ struct viewport_436df0 {
 };
 
 extern void* g_6b5de0;
-extern struct viewport_436df0 g_1052be0;
+extern char g_1052be0[];
 extern float g_1052c00[16];
 extern float g_67a28c;
 extern float g_67a290;
@@ -51,13 +51,13 @@ void __cdecl fcn_00436df0(float fov, float aspect, float width, float height, fl
 		return;
 	}
 	if (width != g_67a28c || height != g_67a290 || x != g_67a294 || y != g_67a298) {
-		g_1052be0.width = (unsigned long) width;
-		g_1052be0.height = (unsigned long) height;
-		g_1052be0.min_z = 0.0f;
-		g_1052be0.max_z = 1.0f;
-		g_1052be0.x = (unsigned long) x;
-		g_1052be0.y = (unsigned long) y;
-		dev->vtbl->SetViewport(dev, &g_1052be0);
+		((struct viewport_436df0*) g_1052be0)->width = (unsigned long) width;
+		((struct viewport_436df0*) g_1052be0)->height = (unsigned long) height;
+		((struct viewport_436df0*) g_1052be0)->min_z = 0.0f;
+		((struct viewport_436df0*) g_1052be0)->max_z = 1.0f;
+		((struct viewport_436df0*) g_1052be0)->x = (unsigned long) x;
+		((struct viewport_436df0*) g_1052be0)->y = (unsigned long) y;
+		dev->vtbl->SetViewport(dev, g_1052be0);
 		g_67a28c = width;
 		g_67a290 = height;
 		g_67a294 = x;

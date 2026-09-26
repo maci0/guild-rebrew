@@ -37,11 +37,11 @@ typedef struct {
 } Name;
 // SIZE 0x8
 
-extern Ent* g_1015ea0;
-extern Screen* g_77255c;
+extern char* g_1015ea0;
+extern char* g_77255c;
 extern int g_772514;
 extern char g_6b5c60[];
-extern Name g_14a79c0[];
+extern int g_14a79c0[];
 extern char g_6aac70[];
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
@@ -89,15 +89,15 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 					r = &rows[j];
 					r->key = key;
 					fcn_004727a0(a3, a4);
-					r->icon = fcn_00466ee0((g_77255c->w - 0x30) >> 1, j * 76, r->key + 0xdf, 0x82, g_772514);
-					g_1015ea0[r->icon].f54 = 1;
-					r->label = fcn_0046fac0((g_77255c->w - 0xbe) >> 1, j * 76 + 0x2e, g_6b5c60, g_772514);
+					r->icon = fcn_00466ee0((((Screen*)g_77255c)->w - 0x30) >> 1, j * 76, r->key + 0xdf, 0x82, g_772514);
+					((Ent*)g_1015ea0)[r->icon].f54 = 1;
+					r->label = fcn_0046fac0((((Screen*)g_77255c)->w - 0xbe) >> 1, j * 76 + 0x2e, g_6b5c60, g_772514);
 					fcn_00472900(r->icon, 0x54);
 					fcn_00472900(r->label, 0x54);
-					g_1015ea0[r->label].f6c = 1;
-					g_1015ea0[r->label].f18 = 0xbe;
+					((Ent*)g_1015ea0)[r->label].f6c = 1;
+					((Ent*)g_1015ea0)[r->label].f18 = 0xbe;
 					if (sel) {
-						g_1015ea0[r->icon].f4c = 1;
+						((Ent*)g_1015ea0)[r->icon].f4c = 1;
 					}
 					break;
 				}
@@ -124,9 +124,9 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 		if (q != 0 && fcn_00508640(*(int*) (q + 0xe), r->key) != 0) {
 			v = fcn_00508640(*(int*) (q + 0xe), r->key);
 			fcn_00472380(r->icon, 0, v, ent);
-			fcn_0051af00(buf, (int) g_6aac70, v, g_14a79c0[r->key].name);
+			fcn_0051af00(buf, (int) g_6aac70, v, g_14a79c0[r->key * 2]);
 			fcn_0046f940(r->label, buf);
-			g_1015ea0[r->label].f18 = 0xbe;
+			((Ent*)g_1015ea0)[r->label].f18 = 0xbe;
 			r->count = v;
 		} else {
 			fcn_0046b2b0(r->label);

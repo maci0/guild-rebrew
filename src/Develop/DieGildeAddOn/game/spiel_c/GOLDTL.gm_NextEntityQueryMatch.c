@@ -1,8 +1,8 @@
 #include <windows.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-extern int g_dispatch_table_a[];
-extern int g_dispatch_table_b[];
+extern int g_dispatch_table_a[1];
+extern int g_dispatch_table_b[1];
 extern unsigned short g_query_filter_type;
 extern int g_query_limit;
 extern int g_query_filter_max_id;

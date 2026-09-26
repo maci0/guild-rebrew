@@ -6,13 +6,7 @@
 
 #define MAXV(a, b) ((a) > (b) ? (a) : (b))
 
-// SIZE 0x10
-typedef struct {
-	int rank;
-	int suit;
-	int c;
-	int d;
-} Card;
+#include "client_types.h"
 
 // SIZE 0x21c
 typedef struct {
@@ -49,8 +43,8 @@ typedef struct {
 	char fba[6];
 } Game;
 
-extern Game* g_1007cd4;
-extern Card g_1007ce0[24];
+extern char* g_1007cd4;
+extern Card_1007ce0 g_1007ce0[24];
 extern Player g_1007e60[2];
 extern unsigned char g_773d75;
 extern char* g_14a62d8[];
@@ -77,15 +71,15 @@ int __cdecl fcn_004a6bb0(char* owner, Game* game)
 		return 0;
 	}
 	memset(g_1007e60, 0, sizeof(g_1007e60));
-	g_1007cd4 = game;
+	g_1007cd4 = (char*) game;
 	memset(game, 0, sizeof(Game));
-	g_1007cd4->owner = owner;
+	((Game*) g_1007cd4)->owner = owner;
 	money = fcn_0050b710(fcn_0050b810(*(int*) (owner + 0x178), g_773d75), g_773d75);
 	d = MAXV(10000.0, money);
-	g_1007cd4->pot = fcn_0050b750((int) (d / (log10(d) + 1.0) * 0.1f), g_773d75);
-	g_1007cd4->limit = g_1007cd4->pot / (fcn_0042e410(3) + 7);
-	g_1007cd4->stake = g_1007cd4->limit;
-	g_1007cd4->fb8 = 4;
+	((Game*) g_1007cd4)->pot = fcn_0050b750((int) (d / (log10(d) + 1.0) * 0.1f), g_773d75);
+	((Game*) g_1007cd4)->limit = ((Game*) g_1007cd4)->pot / (fcn_0042e410(3) + 7);
+	((Game*) g_1007cd4)->stake = ((Game*) g_1007cd4)->limit;
+	((Game*) g_1007cd4)->fb8 = 4;
 	for (i = 0; i < 6; i++) {
 		for (j = 0; j < 4; j++) {
 			g_1007ce0[i * 4 + j].rank = i;
@@ -105,37 +99,37 @@ int __cdecl fcn_004a6bb0(char* owner, Game* game)
 			strncpy(p->name, g_14a5dbc[fcn_0042e410(0xbf)], 0xf);
 			switch (fcn_0042e410(4)) {
 			case 0:
-				g_1007cd4->seats[i].portrait = fcn_004fdec0("buerger_MANN") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buerger_MANN") + 0x639;
 				break;
 			case 1:
-				g_1007cd4->seats[i].portrait = fcn_004fdec0("Handwerker_MANN") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("Handwerker_MANN") + 0x639;
 				break;
 			case 2:
-				g_1007cd4->seats[i].portrait = fcn_004fdec0("buerger3_DICKER") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buerger3_DICKER") + 0x639;
 				break;
 			case 3:
-				g_1007cd4->seats[i].portrait = fcn_004fdec0("schneider1_MANN") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("schneider1_MANN") + 0x639;
 				break;
 			}
 		} else {
 			strncpy(p->name, g_14a60d0[fcn_0042e410(0x70)], 0xf);
 			switch (fcn_0042e410(4)) {
 			case 0:
-				g_1007cd4->seats[i].portrait = fcn_004fdec0("buergerin_frau") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buergerin_frau") + 0x639;
 				break;
 			case 1:
-				g_1007cd4->seats[i].portrait = fcn_004fdec0("buergerin2_frau") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buergerin2_frau") + 0x639;
 				break;
 			case 2:
-				g_1007cd4->seats[i].portrait = fcn_004fdec0("minerin_frau") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("minerin_frau") + 0x639;
 				break;
 			case 3:
-				g_1007cd4->seats[i].portrait = fcn_004fdec0("arbeiterin_frau") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("arbeiterin_frau") + 0x639;
 				break;
 			}
 		}
 		p->state = 10;
-		g_1007cd4->seats[i].player = p;
+		((Game*) g_1007cd4)->seats[i].player = p;
 	}
 	return fcn_004a6ea0(game);
 }

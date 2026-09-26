@@ -4,15 +4,7 @@
 /* Client counterpart of srv_RecvGame: waits until the downloaded savegame
  * (g_fb5740, g_aed328 bytes) is complete, then loads it from memory. */
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
+#include "client_types.h"
 
 // SIZE 0x21c
 struct house {
@@ -28,17 +20,17 @@ extern int g_6a23ac;
 extern int g_699364;
 extern int g_699368;
 extern int g_7749d0;
-extern struct pos14 g_7f4c00;
-extern struct pos14 g_7e1f70;
+extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 g_7e1f70;
 extern unsigned char g_773d75;
-extern int g_773da8;
+extern char* g_773da8;
 extern int g_773d68;
 extern int g_773d6c;
 extern int g_773d70;
 extern int g_773d7c;
 extern int g_773d38;
-extern char g_100dc00[0x18];
-extern struct house g_7f4ca0[768];
+extern int g_100dc00;
+extern char g_7f4ca0[];
 
 void __cdecl fcn_005356e0(void);
 void __cdecl fcn_00535960(void);
@@ -95,7 +87,7 @@ int __cdecl fcn_00525b40(void)
 	}
 	g_7e1f70 = g_7f4c00;
 	ls_ReadVfsDataChecked(&g_773d7c, 4, 1, f);
-	ls_ReadVfsDataChecked(g_100dc00, 0x18, 1, f);
+	ls_ReadVfsDataChecked(&g_100dc00, 0x18, 1, f);
 	if (g_6a23ac >= 0x10030) {
 		ls_ReadVfsDataChecked(&g_699368, 4, 1, f);
 	}
@@ -129,8 +121,8 @@ int __cdecl fcn_00525b40(void)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].state == 6) {
-			g_7f4ca0[i].state = 5;
+		if (((struct house*)g_7f4ca0)[i].id != 0xffff && ((struct house*)g_7f4ca0)[i].state == 6) {
+			((struct house*)g_7f4ca0)[i].state = 5;
 		}
 	}
 	if (fcn_00524040(f) == 0) {

@@ -5,8 +5,8 @@
  * computed from its entry pointer instead of reading an index into a pointer. */
 
 int __cdecl fcn_00430e30(void* buf, int elementSize, int elementCount, void* streamCtx);
-extern int g_field_worker_count[];
-extern int g_field_entry_count[];
+extern int g_field_worker_count[4];
+extern int g_field_entry_count[4];
 
 // SIZE 0x24
 typedef struct {

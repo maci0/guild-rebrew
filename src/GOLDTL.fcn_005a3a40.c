@@ -4,7 +4,7 @@
 // SIZE: 226
 
 extern char* g_7e2aa0;
-extern int g_7746c0;
+extern char* g_7746c0;
 extern int g_7746d4;
 extern int g_6a25b8;
 extern char* g_773d78;

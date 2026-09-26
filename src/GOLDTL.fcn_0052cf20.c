@@ -44,22 +44,18 @@ typedef struct House {
 } House;
 // SIZE 0x21c
 
-extern View* g_6b8014;
-extern Vec3 g_662d40;
+extern int g_6b8014;
+extern float g_662d40[3];
 extern float g_774690;
 extern float g_6a2558;
 extern float g_6a2560;
 extern int g_6b5cbc;
 extern int g_6b5cc0;
-extern float g_7e3a40;
-extern float g_7e3a44;
-extern float g_7e3a48;
-extern float g_7e3a50;
-extern float g_7e3a54;
-extern float g_7e3a58;
+extern float g_7e3a40[3];
+extern float g_7e3a50[3];
 extern unsigned short g_774970;
-extern House g_7f4ca0[];
-extern Ent* g_7e2aa0;
+extern char g_7f4ca0[];
+extern char* g_7e2aa0;
 extern char* g_7746c0;
 
 int __cdecl fcn_004133e0(char* e, float* lo, float* hi);
@@ -92,10 +88,10 @@ void __cdecl fcn_0052cf20(Ent* e)
 
 	obj = e->obj;
 	fcn_004133e0(obj, &lo, &hi);
-	fcn_005ebbb9(m, g_6b8014->mat);
-	a = g_662d40.x * -600.0f;
-	b = g_662d40.y * -600.0f;
-	c = g_662d40.z * -600.0f;
+	fcn_005ebbb9(m, ((View*)g_6b8014)->mat);
+	a = g_662d40[0] * -600.0f;
+	b = g_662d40[1] * -600.0f;
+	c = g_662d40[2] * -600.0f;
 	off.x = a * m[0] + b * m[4] + c * m[8];
 	off.y = a * m[1] + b * m[5] + c * m[9];
 	off.z = a * m[2] + b * m[6] + c * m[10];
@@ -110,23 +106,23 @@ void __cdecl fcn_0052cf20(Ent* e)
 	r = off.y / ((hi - lo) * 0.5f + d.y);
 	q.x = q.x - (r * off.x - off.x * 1.8);
 	q.z = q.z - (r * off.z - off.z * 1.8);
-	*(int*) &rot.x = *(int*) &g_6b8014->rot.x;
-	*(int*) &rot.y = *(int*) &g_6b8014->rot.y;
-	*(int*) &rot.z = *(int*) &g_6b8014->rot.z;
-	fcn_00433780(g_6b8014);
+	*(int*) &rot.x = *(int*) &((View*)g_6b8014)->rot.x;
+	*(int*) &rot.y = *(int*) &((View*)g_6b8014)->rot.y;
+	*(int*) &rot.z = *(int*) &((View*)g_6b8014)->rot.z;
+	fcn_00433780((View*)g_6b8014);
 	g_6b5cc0 = 0;
 	g_6b5cbc = 0;
 	h2 = fcn_00413d10((Vec3*) &q);
 	q.y = ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558) + h2;
-	g_7e3a50 = rot.x;
-	g_7e3a54 = rot.y;
-	g_7e3a58 = rot.z;
-	g_7e3a40 = q.x;
-	g_7e3a44 = q.y;
-	g_7e3a48 = q.z;
-	fcn_00438b40(g_6b8014, (Vec3*) &q);
-	fcn_00438cb0(g_6b8014, &rot);
-	s = fcn_00509570(&g_7f4ca0[g_774970]);
+	g_7e3a50[0] = rot.x;
+	g_7e3a50[1] = rot.y;
+	g_7e3a50[2] = rot.z;
+	g_7e3a40[0] = q.x;
+	g_7e3a40[1] = q.y;
+	g_7e3a40[2] = q.z;
+	fcn_00438b40((View*)g_6b8014, (Vec3*) &q);
+	fcn_00438cb0((View*)g_6b8014, &rot);
+	s = fcn_00509570(&((House*)g_7f4ca0)[g_774970]);
 	if (s != 0) {
 		*(int*) &s->pos.x = *(int*) &q.x;
 		*(int*) &s->pos.y = *(int*) &q.y;
@@ -135,6 +131,6 @@ void __cdecl fcn_0052cf20(Ent* e)
 		*(int*) &s->rot.y = *(int*) &rot.y;
 		*(int*) &s->rot.z = *(int*) &rot.z;
 	}
-	g_7e2aa0 = e;
+	g_7e2aa0 = (char*) e;
 	g_7746c0 = e->obj;
 }

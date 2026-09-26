@@ -27,8 +27,10 @@ typedef struct {
 } Player;
 // SIZE 0x21c
 
-extern Clock g_7f4c00;
-extern Player g_7f4ca0[];
+#include "client_types.h"
+
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 
 void __cdecl fcn_00546190(char* s);
 void __cdecl fcn_0051af00(char* buf, char* fmt, ...);
@@ -58,8 +60,8 @@ void __cdecl fcn_00554820(char* s)
 		fcn_00546190(s);
 		return;
 	}
-	fcn_0051af00(buf, "-------> RunSimUnfall: calculating at <Day = %i Time = %i.2:%i.2>", g_7f4c00.day,
-		g_7f4c00.hour, g_7f4c00.minute);
+	fcn_0051af00(buf, "-------> RunSimUnfall: calculating at <Day = %i Time = %i.2:%i.2>", ((Clock*) &g_7f4c00)->day,
+		((Clock*) &g_7f4c00)->hour, ((Clock*) &g_7f4c00)->minute);
 	if (*(int*) (s + 0xb0) == 0) {
 		steps[0] = 1;
 		steps[1] = 3;
@@ -86,15 +88,15 @@ void __cdecl fcn_00554820(char* s)
 	idx = *(int*) (s + 0xac);
 	count = 12;
 	do {
-		p = &g_7f4ca0[idx];
-		if (fcn_005547c0(p) != 0 && g_7f4ca0[idx].home->x27 != 0xffff) {
+		p = &((Player*) g_7f4ca0)[idx];
+		if (fcn_005547c0(p) != 0 && ((Player*) g_7f4ca0)[idx].home->x27 != 0xffff) {
 			f = gm_RandomFloat01() * 100.0f;
-			r = fcn_0050c710(g_7f4ca0[idx].home, 2, 1);
+			r = fcn_0050c710(((Player*) g_7f4ca0)[idx].home, 2, 1);
 			x = r * 0.0125f;
 			if (25.0f - 20.0f * x > f) {
 				y = MINV(MAXV(2.0f - x, 0.0f), 2.0f);
 				f = fcn_004ff210(idx, -50 - fcn_0042e410((int) (y * 255.0f + 1.0f)));
-				fcn_00549580(s, p, &g_7f4ca0[g_7f4ca0[idx].home->x27], g_7f4ca0[idx].home, f, 0);
+				fcn_00549580(s, p, &((Player*) g_7f4ca0)[((Player*) g_7f4ca0)[idx].home->x27], ((Player*) g_7f4ca0)[idx].home, f, 0);
 			}
 		}
 		idx = (*(int*) (s + 0xb0) + idx) % 0x300;

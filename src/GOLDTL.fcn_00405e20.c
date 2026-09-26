@@ -1,17 +1,17 @@
 // FUNCTION: GOLDTL 0x00405e20
 // SIZE: 753
 
-extern char* g_14d0020[0x300];
-extern char* g_67a370;
+extern void* g_14d0020[];
+extern int g_67a370;
 extern int g_6b8010;
-extern unsigned int g_6b7fac;
-extern unsigned int g_6b5c24;
+extern int g_6b7fac;
+extern int g_6b5c24;
 extern unsigned int g_67529c;
 extern int g_6b5c30;
 extern int g_67531c;
 extern char* g_6b5c54;
 extern char* g_6b5c58;
-extern char* g_1043370;
+extern char g_1043370[];
 extern char g_6756a0[];
 extern char g_67540c[];
 extern char g_67567c[];
@@ -48,17 +48,17 @@ int __cdecl fcn_00405e20(void)
 	if (g_67531c == 0) {
 		return 0;
 	}
-	if (g_6b5c54 != g_67a370 || g_6b5c58 != g_67a370) {
-		if (g_1043370 != 0 && g_6b5c54 != g_67a370) {
-			fcn_004058f0(g_1043370);
-			g_6b5c54 = g_67a370;
+	if (g_6b5c54 != (char*) g_67a370 || g_6b5c58 != (char*) g_67a370) {
+		if (*(char**) g_1043370 != 0 && g_6b5c54 != (char*) g_67a370) {
+			fcn_004058f0(*(char**) g_1043370);
+			g_6b5c54 = (char*) g_67a370;
 		}
-		if (g_67a370 != 0 && g_6b8010 != 0 && *(char**) (g_67a370 + 0xb0) != 0 && g_6b5c58 != g_67a370) {
-			fcn_004058f0(*(char**) (g_67a370 + 0xb0));
-			g_6b5c58 = g_67a370;
+		if (g_67a370 != 0 && g_6b8010 != 0 && *(char**) ((char*) g_67a370 + 0xb0) != 0 && g_6b5c58 != (char*) g_67a370) {
+			fcn_004058f0(*(char**) ((char*) g_67a370 + 0xb0));
+			g_6b5c58 = (char*) g_67a370;
 		}
 	}
-	for (p = g_14d0020; (int) p < (int) (g_14d0020 + 0x300); p++) {
+	for (p = (char**) g_14d0020; (int) p < (int) (g_14d0020 + 0x300); p++) {
 		if (*p == 0 || (*(*p + 0x8c) & 4) != 0) {
 			continue;
 		}
@@ -71,7 +71,7 @@ int __cdecl fcn_00405e20(void)
 				*(*p + 0x8d) &= 0xdf;
 			}
 			fcn_004054b0(*p);
-		} else if (*(char**) (*p + 0x88) == g_67a370 && (f = *(unsigned short*) (*p + 0x8c), (f & 0x32) == 0) &&
+		} else if (*(char**) (*p + 0x88) == (char*) g_67a370 && (f = *(unsigned short*) (*p + 0x8c), (f & 0x32) == 0) &&
 			   (f & 0x8000) == 0 && *(int*) (*p + 0x124) == 0) {
 			if (fcn_00405d70(*p, list, 20.0f) != 0) {
 				map = fcn_00402610(*p);
@@ -89,7 +89,7 @@ int __cdecl fcn_00405e20(void)
 		if (*(int*) (*p + 0x22c) != 0) {
 			fcn_004033e0(*p);
 		}
-		if (t == 0 && g_67a370 == *(char**) (*p + 0x88) && g_6b8010 != 0 && *(int*) (*p + 0x70) == 0) {
+		if (t == 0 && (char*) g_67a370 == *(char**) (*p + 0x88) && g_6b8010 != 0 && *(int*) (*p + 0x70) == 0) {
 			f = *(unsigned short*) (*p + 0x8c);
 			if ((f & 0x1000) != 0 && (f & 2) == 0 &&
 			    (*(*(char**) (*(char**) (*p + 0x34) + 0x1ec) + 0x163d) & 0x40) == 0) {

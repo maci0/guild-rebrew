@@ -19,7 +19,7 @@ struct Com {
 	ComVtbl* vtbl;
 };
 
-extern int g_14ce89c;
+extern HWND g_14ce89c;
 extern Com* g_14ce90c;
 extern Com* g_14ce8a0;
 extern Com* g_14cf954;

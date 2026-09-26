@@ -29,8 +29,8 @@ typedef struct Chat {
 	char text[0x60];
 } Chat;
 
-extern House g_7f4ca0[768];
-extern Ctl* g_1015ea0;
+extern char g_7f4ca0[];
+extern char* g_1015ea0;
 extern unsigned char g_6a2c14[8];
 extern int g_6a2c1c;
 extern int g_772514;
@@ -84,10 +84,10 @@ void __cdecl fcn_00536810(void)
 	fcn_004727a0(dlg, 3);
 	n = 0;
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].kind == 7) {
-			ids[n] = fcn_0046f740(n * 0x30 + 0x64, 4, g_7f4ca0[i].f54, g_772514);
-			g_1015ea0[ids[n]].f58 = 1;
-			g_1015ea0[ids[n]].house = &g_7f4ca0[i];
+		if (((House*) g_7f4ca0)[i].kind == 7) {
+			ids[n] = fcn_0046f740(n * 0x30 + 0x64, 4, ((House*) g_7f4ca0)[i].f54, g_772514);
+			((Ctl*) g_1015ea0)[ids[n]].f58 = 1;
+			((Ctl*) g_1015ea0)[ids[n]].house = &((House*) g_7f4ca0)[i];
 			fcn_00472380(ids[n], g_6a2c14[n]);
 			n++;
 		}
@@ -108,10 +108,10 @@ void __cdecl fcn_00536810(void)
 		if ((g_100f1dc != -1 || g_14cf950 == 0x1c) && (g_67d370 == win || g_14cf950 == 0x1c)) {
 			for (i = 0; i < 8; i++) {
 				if (ids[i] != -1 && fcn_00471f80(ids[i]) != 0) {
-					chat.names[i] = g_1015ea0[ids[i]].house->f4;
+					chat.names[i] = ((Ctl*) g_1015ea0)[ids[i]].house->f4;
 				}
 			}
-			sprintf(chat.text, "$%iFF ", g_7f4ca0[g_774970].f54 - 0x59a);
+			sprintf(chat.text, "$%iFF ", ((House*) g_7f4ca0)[g_774970].f54 - 0x59a);
 			strcat(chat.text, fcn_00471f80(edit));
 			strcat(chat.text, "$A");
 			fcn_00472380(edit, g_6b5c60);

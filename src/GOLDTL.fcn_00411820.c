@@ -43,7 +43,7 @@ extern int g_6b5c88;
 extern Com* g_14cf954;
 extern Com* g_14ce8a0;
 extern Com* g_14ce90c;
-extern short g_14ce920;
+extern int g_14ce920[];
 extern short g_14ce922;
 extern short g_14ce924;
 extern char g_66cdb0[];
@@ -138,7 +138,7 @@ int __cdecl fcn_00411820(HWND hwnd, HINSTANCE hinst, int flags)
 		return 0;
 	}
 	fcn_004117c0(1);
-	g_14ce920 = 200;
+	*(short*) g_14ce920 = 200;
 	g_14ce922 = 200;
 	g_14ce924 = 0;
 	hr = g_14cf954->vtbl->CreateDevice(g_14cf954, g_66cc40, &g_14ce90c, 0);

@@ -6,7 +6,7 @@
 #include <string.h>
 
 extern char* g_fb5740;
-extern int g_1005820;
+extern unsigned int g_1005820;
 
 int __cdecl fcn_004c7670(char* a1, char* a2)
 {

@@ -1,8 +1,4 @@
-// SIZE 0x8
-typedef struct Slot_4bf8e0 {
-	int id;
-	int f4;
-} Slot_4bf8e0;
+#include "g_10058a0.h"
 
 // SIZE 0x40
 typedef struct Node_4bf8e0 {
@@ -26,7 +22,7 @@ extern int g_100f1dc;
 extern int g_67d370;
 extern int g_774654;
 extern Node_4bf8e0* g_772908;
-extern Slot_4bf8e0 g_10058a0[8];
+extern IdSlot10058a0 g_10058a0[8];
 extern int g_772900;
 extern int g_6816d8;
 extern char* g_aed32c;

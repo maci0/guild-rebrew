@@ -17,7 +17,7 @@ extern void* g_6b5de0;
 #include "client_types.h"
 extern Vec3_67bbdc g_67bbdc;
 extern float g_1052bd8;
-extern float g_1052bdc;
+extern int g_1052bdc;
 extern char g_1052c40;
 extern char g_6b7ff9;
 extern char g_6b7ffa;
@@ -34,7 +34,7 @@ void __cdecl fcn_00437160(unsigned char fog, int color, char light)
 	((IDev*)g_6b5de0)->v->mf4(((IDev*)g_6b5de0), 0, 0);
 	fcn_00450b20(1.0f, &(*(char*)&g_67bbdc), 0, 0);
 	g_1052bd8 = 1.0f;
-	g_1052bdc = 0.0f;
+	g_1052bdc = 0;
 	g_1052c40 = 0;
 	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x1c, fog);
 	if (fog) {

@@ -1,4 +1,4 @@
-extern char g_7766bb;
+extern unsigned char g_7766bb;
 // FUNCTION: GOLD 0x0053ee00
 // SIZE: 53
 // FUNCTION: GOLDTL 0x00546b40

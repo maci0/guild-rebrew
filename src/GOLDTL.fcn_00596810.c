@@ -26,9 +26,11 @@ typedef struct {
 } Ent;
 // SIZE 0x2f4
 
+#include "client_types.h"
+
 extern Lane g_778d4c[4];
-extern Watch g_778da0[16];
-extern Ent* g_1015ea0;
+extern Slot_778da0 g_778da0[16];
+extern char* g_1015ea0;
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -120,38 +122,38 @@ int __cdecl fcn_00596810(char* msg, char* src)
 	p = fcn_00502cd0(*(int*) (src + 0x14), 1, 5);
 	while (p != 0) {
 		for (i = 0, key = *p; i < 16; i++) {
-			if (g_778da0[i].id == key) {
+			if (((Watch*) g_778da0)[i].id == key) {
 				break;
 			}
 		}
 		if (i >= 16) {
 			for (i = 0; i < 16; i++) {
-				if (g_778da0[i].id == 0) {
+				if (((Watch*) g_778da0)[i].id == 0) {
 					break;
 				}
 			}
 			if (i < 16) {
-				g_778da0[i].id = key;
-				g_778da0[i].f2c = 0;
-				g_778da0[i].field = 0;
-				g_778da0[i].value = 0;
+				((Watch*) g_778da0)[i].id = key;
+				((Watch*) g_778da0)[i].f2c = 0;
+				((Watch*) g_778da0)[i].field = 0;
+				((Watch*) g_778da0)[i].value = 0;
 			}
 		} else {
-			g_778da0[i].field = 0;
+			((Watch*) g_778da0)[i].field = 0;
 		}
 		p = gm_NextEntityQueryMatch();
 	}
 	for (i = 0; i < 16; i++) {
-		q = fcn_00502cd0(*(int*) (msg + 0x14), 1, 0, g_778da0[i].id);
+		q = fcn_00502cd0(*(int*) (msg + 0x14), 1, 0, ((Watch*) g_778da0)[i].id);
 		if (q != 0) {
-			g_778da0[i].field = gm_GetMsgField(msg, q);
-			g_778da0[i].value = fcn_0050dfd0(msg, *q);
+			((Watch*) g_778da0)[i].field = gm_GetMsgField(msg, q);
+			((Watch*) g_778da0)[i].value = fcn_0050dfd0(msg, *q);
 		}
 	}
 	result = 0;
 	for (i = 0; result == 0 && i < 16; i++) {
-		id = g_778da0[i].ent;
-		if (id != -1 && g_1015ea0[id].type == 0x41 && fcn_00471f80(id) != 0) {
+		id = ((Watch*) g_778da0)[i].ent;
+		if (id != -1 && ((Ent*) g_1015ea0)[id].type == 0x41 && fcn_00471f80(id) != 0) {
 			result = 1;
 		}
 	}

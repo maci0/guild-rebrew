@@ -33,15 +33,17 @@ typedef struct {
 } Pick;
 // SIZE 0x20
 
+#include "client_types.h"
+
 extern int g_14ce8e0;
 extern int g_774654;
 extern int g_772514;
 extern int g_14a566c;
-extern volatile unsigned int g_6b7fac;
-extern Slot g_1015f40[];
-extern Dlg g_1038140[];
-extern City* g_1015ea0;
-extern char g_868060[][0x2f4];
+extern int g_6b7fac;
+extern Win_1015f40 g_1015f40[0x60];
+extern Obj_1038140 g_1038140[];
+extern char* g_1015ea0;
+extern char g_868060[];
 extern int g_100f1dc;
 extern int g_67d370;
 
@@ -100,11 +102,11 @@ void __cdecl fcn_0059e090(char* b)
 			fcn_00471b60(h);
 			fcn_004727a0(h, 0);
 			fcn_00533dc0(g_772514, 0x70b, 0x73f);
-			slot = &g_1015f40[g_1038140[h].slot];
+			slot = (Slot*) &g_1015f40[((Dlg*)g_1038140)[h].slot];
 			fcn_0064d41a(buf, "ief_Wappen%li", *(int*) (b + 0x65));
 			fcn_0046e7a0(buf, slot->x0);
 			slot->x3a4 = 0.0f;
-			t0 = g_6b7fac;
+			t0 = *(volatile unsigned int*)&g_6b7fac;
 			fcn_004727a0(h, 4);
 			fcn_00533a60(g_772514, 0, &pick, 3, g_14a566c, "Import", "Export");
 			fcn_00472170(pick.x0, 0);
@@ -116,7 +118,7 @@ void __cdecl fcn_0059e090(char* b)
 					return;
 				}
 				fcn_004727a0(h, 3);
-				fcn_00519190(0x1c47, g_868060[*(int*) (b + 0x65)]);
+				fcn_00519190(0x1c47, g_868060 + *(int*) (b + 0x65) * 0x2f4);
 			}
 			else {
 				grp = fcn_00502cd0(*(int*) (b + 0x5d), 2, 0, 0x1dc, 6);
@@ -124,16 +126,16 @@ void __cdecl fcn_0059e090(char* b)
 					return;
 				}
 				fcn_004727a0(h, 3);
-				fcn_00519190(0x1c48, g_868060[*(int*) (b + 0x65)]);
+				fcn_00519190(0x1c48, g_868060 + *(int*) (b + 0x65) * 0x2f4);
 			}
-			g_1015ea0[a].x4c = sel;
-			g_1015ea0[a].x60 = sel;
-			g_1015ea0[c].x4c = sel == 0;
-			g_1015ea0[c].x60 = sel == 0;
+			((City*)g_1015ea0)[a].x4c = sel;
+			((City*)g_1015ea0)[a].x60 = sel;
+			((City*)g_1015ea0)[c].x4c = sel == 0;
+			((City*)g_1015ea0)[c].x60 = sel == 0;
 			fcn_00594340();
 			shown = sel;
 		}
-		d = (g_6b7fac - t0) * 0.0013333333333333333;
+		d = (*(volatile unsigned int*)&g_6b7fac - t0) * 0.0013333333333333333;
 		if (!(d < 0.25)) {
 			d = 0.25;
 		}

@@ -1,14 +1,5 @@
 #include <string.h>
 
-// SIZE 0x114
-typedef struct Grp_4c2100 {
-	int ids[4];
-	char name[0x100];
-	short score;
-	char active;
-	char pad113;
-} Grp_4c2100;
-
 // SIZE 0x24c
 typedef struct Tpl_4c2100 {
 	int kind;
@@ -17,13 +8,16 @@ typedef struct Tpl_4c2100 {
 	char names[6][0x60];
 } Tpl_4c2100;
 
-extern unsigned char* g_7746c4;
+#include "client_types.h"
+#include "g_688118.h"
+
+extern char* g_7746c4;
 extern unsigned char* g_7746c8;
-extern unsigned short* g_7746cc;
+extern char* g_7746cc;
 extern unsigned char* g_868050;
-extern int g_7f4c00;
+extern pos14_7f4c00 g_7f4c00;
 extern unsigned short g_774970;
-extern Grp_4c2100 g_688118[];
+extern IdGroup g_688118[];
 extern Tpl_4c2100 g_6819b8[];
 extern char g_772c10[];
 extern char s_68a14c[];
@@ -56,7 +50,7 @@ void __cdecl fcn_004c2100(void)
 	int k;
 	int x;
 
-	e = g_7746c4;
+	e = (unsigned char*) g_7746c4;
 	if (e == 0) {
 		e = g_7746c8;
 		if (e == 0) {
@@ -65,7 +59,7 @@ void __cdecl fcn_004c2100(void)
 	}
 	j = 0;
 	kind = g_868050[*e * 0x24d];
-	cls = fcn_00500e20(&g_7f4c00);
+	cls = fcn_00500e20((int*) &g_7f4c00);
 	i = fcn_004c27f0();
 	if (i >= 0) {
 		g_688118[i].active = j;
@@ -110,7 +104,7 @@ void __cdecl fcn_004c2100(void)
 	}
 	for (k = 0; g_6819b8[k].kind != 0; k++) {
 		p = &g_6819b8[k];
-		if (p->kind == kind && (p->owner == 0 || p->owner == *g_7746cc) && (cls == p->cls || p->cls == -1)) {
+		if (p->kind == kind && (p->owner == 0 || p->owner == *(unsigned short*) g_7746cc) && (cls == p->cls || p->cls == -1)) {
 			for (c = 0; c < 6; c++) {
 				if (p->names[c][0] == 0) {
 					break;

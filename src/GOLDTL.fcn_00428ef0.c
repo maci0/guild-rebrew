@@ -26,7 +26,7 @@ typedef struct Vm {
 } Vm;
 // SIZE 0xc88
 
-extern Vm* g_6b7e98;
+extern char* g_6b7e98;
 extern int g_6b7eb4;
 extern char g_14cb440[];
 extern int g_14cb8ec;
@@ -52,7 +52,7 @@ int __cdecl fcn_00428ef0(Cmd* c)
 	int k;
 	char ch;
 
-	g_6b7e98->line++;
+	((Vm*) g_6b7e98)->line++;
 	result = -99;
 	for (i = 0; i < c->argc; i++) {
 		v = fcn_00428800(0);
@@ -70,12 +70,12 @@ int __cdecl fcn_00428ef0(Cmd* c)
 		}
 	}
 	if (c->argc != 0 && g_6b7eb4 != 0xd) {
-		fcn_00425bf0(g_6b7e98, g_6b7e98->line, "Expecting ')'...possible wrong parameter-count");
-		fcn_00428720(g_6b7e98);
+		fcn_00425bf0((Vm*) g_6b7e98, ((Vm*) g_6b7e98)->line, "Expecting ')'...possible wrong parameter-count");
+		fcn_00428720((Vm*) g_6b7e98);
 		return 0;
 	}
 	if (c->argc == 0) {
-		g_6b7e98->line++;
+		((Vm*) g_6b7e98)->line++;
 	}
 	switch (c->argc) {
 	case 0:
@@ -106,20 +106,20 @@ int __cdecl fcn_00428ef0(Cmd* c)
 	if (c->ret == 7) {
 		result = g_14cb8ec;
 	}
-	if ((g_6b7e98->waiting == 1 && g_6b7e98->wait != 0) || g_6b7e98->wait == fcn_0040c630) {
+	if ((((Vm*) g_6b7e98)->waiting == 1 && ((Vm*) g_6b7e98)->wait != 0) || ((Vm*) g_6b7e98)->wait == fcn_0040c630) {
 		for (i = 0; i < c->argc; i++) {
-			g_6b7e98->args[i] = args[i];
+			((Vm*) g_6b7e98)->args[i] = args[i];
 			if (c->types[i] == 6) {
-				g_6b7e98->args[i] = (int) malloc(0x60);
+				((Vm*) g_6b7e98)->args[i] = (int) malloc(0x60);
 				s = strs[i];
-				d = (char*) g_6b7e98->args[i];
+				d = (char*) ((Vm*) g_6b7e98)->args[i];
 				do {
 					ch = *s++;
 					*d++ = ch;
 				} while (ch != 0);
 			}
 		}
-		g_6b7e98->cmd = c;
+		((Vm*) g_6b7e98)->cmd = c;
 	}
 	return result;
 }

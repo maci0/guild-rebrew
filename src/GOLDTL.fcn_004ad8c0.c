@@ -14,7 +14,7 @@ typedef struct {
 } Player;
 // SIZE 0x21c
 
-extern Player g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern int g_664e1c[3];
 extern int g_664e28[3];
 extern int g_6653bc;
@@ -80,7 +80,7 @@ void __cdecl fcn_004ad8c0(void)
 	kinds[1] = 21;
 	kinds[2] = 27;
 	for (i = 0; i < 768; i++) {
-		p = &g_7f4ca0[i];
+		p = &((Player*) g_7f4ca0)[i];
 		if (p->rank >= 7 &&
 		    (p->type == 6 || p->type == 7 || p->type == 5 || p->type == 4 ||
 			p->type == 3 || p->type == 2)) {

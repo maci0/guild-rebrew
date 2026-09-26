@@ -21,7 +21,7 @@ extern int g_6a3438;
 extern int g_6a3434;
 extern int g_6a3430;
 extern int g_772620;
-extern char g_100dc20[];
+extern LightState g_100dc20;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_00500cb0(stamp14*, stamp14*);
@@ -49,7 +49,7 @@ int __cdecl fcn_004c9440(char* x, char* out)
 		}
 		if (g_6a3430 != 0)
 			fcn_0047cf30();
-		memset(g_100dc20, 0, 0xb00);
+		memset(&g_100dc20, 0, 0xb00);
 		if (g_6a3430 != 0) {
 			g_772620 = 0;
 			for (i = 0; i < 0x300; i++) {

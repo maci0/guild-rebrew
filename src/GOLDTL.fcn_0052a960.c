@@ -18,6 +18,8 @@ typedef struct {
 } Slot_52a960;
 // SIZE 0x3dc
 
+#include "client_types.h"
+
 extern int g_6a2902;
 extern int g_6a290c;
 extern int g_6a2916;
@@ -26,10 +28,10 @@ extern int g_6a292a;
 extern int g_6a2934;
 extern unsigned char* g_7e4548;
 extern int g_6b8010;
-extern Slot_52a960 g_1043340[];
+extern Slot_1043340 g_1043340[64];
 extern int g_7e4468;
 extern int g_7e446c;
-extern unsigned int g_6b7fac;
+extern int g_6b7fac;
 extern int g_77472c;
 extern float g_7e42e0;
 extern int g_7e4380;
@@ -83,7 +85,7 @@ void __cdecl fcn_0052a960(Stamp* now)
 	if (g_7e4548 != 0) {
 		light = g_7e4548[0x2a] * 0.003921569f;
 	}
-	if (g_1043340[g_6b8010].f2c != 0 && g_6b7fac < (unsigned int) (g_7e4468 + g_7e446c)) {
+	if (((Slot_52a960*)g_1043340)[g_6b8010].f2c != 0 && (unsigned int) g_6b7fac < (unsigned int) (g_7e4468 + g_7e446c)) {
 		fcn_004463f0(0, 2, 1.0f);
 		g_77472c = 1;
 		return;
@@ -107,7 +109,7 @@ void __cdecl fcn_0052a960(Stamp* now)
 	x = v * 0.01;
 	v = (int) x;
 	idx = v % 7;
-	if (g_6a2bd8 != idx && g_1043340[g_6b8010].f2c != 0) {
+	if (g_6a2bd8 != idx && ((Slot_52a960*)g_1043340)[g_6b8010].f2c != 0) {
 		if (idx >= 0 && g_7746fc == 0) {
 			fcn_004379a0(g_67a370, 0, 6, fcn_0052a910, 0);
 			g_7746fc++;

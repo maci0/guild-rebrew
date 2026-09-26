@@ -27,34 +27,22 @@ typedef struct {
 } Level;
 #pragma pack(pop)
 
-// SIZE 0x40
-typedef struct {
-	int v[16];
-} Light;
+#include "client_types.h"
 
-extern int g_7f4c04;
-extern Slot *g_868054;
-extern Kind *g_99ec10;
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short *g_868054;
+extern char *g_99ec10;
 extern int g_100e74c;
 extern char *g_100dbc0[16];
-extern Level *g_868050;
+extern unsigned char *g_868050;
 extern int g_100b0a8;
 extern int g_100b0ac;
 extern int g_100b0f4;
 extern float g_100b0e0;
 extern int g_100d10c;
 extern float g_100d0f4;
-
-typedef struct {
-	char *owner;
-	char pad4[0x14];
-	int count;
-	char pad1c[0x2e4];
-	Light lights[4];
-} LightState;
-
 extern LightState g_100dc20;
-extern Light g_100b0c0[];
+extern Seg g_100b0c0[];
 
 char *__cdecl fcn_00502cd0(int, int, int, int, int, ...);
 void __cdecl fcn_00487970(char *, char *, int);
@@ -79,7 +67,7 @@ void __cdecl fcn_00482f20(char *a)
 	int i;
 	unsigned char lvl;
 
-	if ((*(unsigned int *) (a + 4) + (unsigned short) g_7f4c04) % 3 == 0) {
+	if ((*(unsigned int *) (a + 4) + (unsigned short) g_7f4c00.b) % 3 == 0) {
 		if (*(int *) (a + 0x1b4) & 0x20) {
 			return;
 		}
@@ -90,9 +78,9 @@ void __cdecl fcn_00482f20(char *a)
 		fcn_00487970(t, a, 0x14);
 		fcn_00487c00(t, a, 0x32);
 		flag = 1;
-		s = g_868054;
+		s = (Slot*) g_868054;
 		for (i = 0; flag && i < 0x5008; s++, i++) {
-			if (s->id != 0 && g_99ec10[s->id].kind == 0x1d && s->owner == *(int *) (*(char **) (a + 0x16c) + 1) &&
+			if (s->id != 0 && ((Kind*) g_99ec10)[s->id].kind == 0x1d && s->owner == *(int *) (*(char **) (a + 0x16c) + 1) &&
 			    s->id == 0x136) {
 				flag = 0;
 			}
@@ -120,7 +108,7 @@ void __cdecl fcn_00482f20(char *a)
 		*(int *) (a + 0x1b4) |= 0x20;
 		fcn_00485970(a, t, flag);
 		h = *(char **) (a + 0x16c);
-		lvl = g_868050[*(unsigned char *) h].level;
+		lvl = ((Level*) g_868050)[*(unsigned char *) h].level;
 		if (lvl == 1) {
 			f = *(int *) (h + 0x39) * 1.5625e-05f;
 		} else if (lvl == 2) {

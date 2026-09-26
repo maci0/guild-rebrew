@@ -12,7 +12,9 @@ typedef struct Blk24 {
 } Blk24;
 // SIZE 0x18
 
-extern int g_7f4c00;
+#include "client_types.h"
+
+extern pos14_7f4c00 g_7f4c00;
 extern unsigned char g_773d75;
 extern unsigned char* g_90e094;
 extern unsigned char* g_868050;
@@ -41,7 +43,7 @@ int __cdecl fcn_0049e1e0(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	fr[1] = 0;
 	n[0] = 0;
 	n[1] = 0;
-	if (g_7f4c00 < 4 || a3 != 0 || e[0x166] != 0xa || a1 != 0) {
+	if (g_7f4c00.a < 4 || a3 != 0 || e[0x166] != 0xa || a1 != 0) {
 		return 0;
 	}
 	q = fcn_0050e4a0(1);

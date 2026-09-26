@@ -43,7 +43,7 @@ extern unsigned short g_774970;
 extern int g_67a370;
 extern int g_6b8014;
 extern char g_1052be0[];
-extern Mat4 g_1052c00;
+extern float g_1052c00[16];
 
 int __cdecl fcn_00506380(int, int, int, char*);
 void __cdecl fcn_00438100(char*, int, int);
@@ -115,7 +115,7 @@ void __cdecl fcn_005345b0(void)
 			v.y = c.y;
 			v.z = c.z;
 			if (v.z >= 0.0f) {
-				fcn_005eb2e4(&v, &v, g_1052be0, &g_1052c00, &m, &m);
+				fcn_005eb2e4(&v, &v, g_1052be0, (Mat4*) g_1052c00, &m, &m);
 				if (v.z >= 0.0f && v.z <= 1.0f && x0 <= v.x && x1 >= v.x && y0 <= v.y && y1 >= v.y) {
 					e[0x188] = 1;
 				}

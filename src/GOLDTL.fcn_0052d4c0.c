@@ -6,7 +6,7 @@
 #define MAXV(a, b) ((a) > (b) ? (a) : (b))
 #define MINV(a, b) ((b) < (a) ? (b) : (a))
 
-extern char* g_6b8014;
+extern int g_6b8014;
 extern float g_662d40[3];
 extern float g_6a2558;
 extern float g_6a2560;
@@ -44,7 +44,7 @@ void __cdecl fcn_0052d4c0(char* e)
 	char* cam;
 
 	fcn_004133e0(e, &lo, &hi);
-	fcn_005ebbb9(m, (float*) (g_6b8014 + 0x18c));
+	fcn_005ebbb9(m, (float*) ((char*) g_6b8014 + 0x18c));
 	v0 = g_662d40[0] * -600.0f;
 	v1 = g_662d40[1] * -600.0f;
 	v2 = g_662d40[2] * -600.0f;
@@ -62,7 +62,7 @@ void __cdecl fcn_0052d4c0(char* e)
 	n = r[1] / ((hi - lo) * 0.5f + dir[1]);
 	w[0] = w[0] - (n * r[0] - r[0] * 1.8);
 	w[2] = w[2] - (n * r[2] - r[2] * 1.8);
-	cam = g_6b8014;
+	cam = (char*) g_6b8014;
 	t[0] = *(float*) (cam + 0x84);
 	t[1] = *(float*) (cam + 0x88);
 	t[2] = *(float*) (cam + 0x8c);
@@ -71,7 +71,7 @@ void __cdecl fcn_0052d4c0(char* e)
 	g_6b5cbc = 0;
 	h = fcn_00413d10(w);
 	w[1] = h + ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558);
-	cam = g_6b8014;
+	cam = (char*) g_6b8014;
 	dx = w[0] - *(float*) (cam + 0x4c);
 	dy = w[1] - *(float*) (cam + 0x50);
 	dz = w[2] - *(float*) (cam + 0x54);

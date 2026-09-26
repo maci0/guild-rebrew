@@ -34,7 +34,7 @@ typedef struct Income {
 } Income;
 // SIZE 0x10
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern float g_665264[];
 extern int g_773d48;
 
@@ -59,30 +59,30 @@ int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
 	int amount;
 
 	r = 0;
-	out->a = g_7f4ca0[id].x166;
-	out->b = g_7f4ca0[id].x169;
-	if (g_7f4ca0[id].flags & 0x1000) {
+	out->a = ((Ent*) g_7f4ca0)[id].x166;
+	out->b = ((Ent*) g_7f4ca0)[id].x169;
+	if (((Ent*) g_7f4ca0)[id].flags & 0x1000) {
 		c = 0x26;
-	} else if (g_7f4ca0[id].flags & 0x2000) {
+	} else if (((Ent*) g_7f4ca0)[id].flags & 0x2000) {
 		c = 0x27;
-	} else if (g_7f4ca0[id].flags & 0x800) {
+	} else if (((Ent*) g_7f4ca0)[id].flags & 0x800) {
 		c = 0x25;
-	} else if (g_7f4ca0[id].flags & 0x400) {
+	} else if (((Ent*) g_7f4ca0)[id].flags & 0x400) {
 		c = 0x24;
 	} else {
-		c = (g_7f4ca0[id].flags & 0x200) ? 0x23 : 0;
+		c = (((Ent*) g_7f4ca0)[id].flags & 0x200) ? 0x23 : 0;
 	}
 	out->c = c;
 	out->va = 0;
 	out->vb = 0;
 	out->vc = 0;
-	if (g_7f4ca0[id].id != 0xffff && g_7f4ca0[id].type < 0xa && g_7f4ca0[id].alive > 0
-	    && (g_7f4ca0[id].x166 != 0 || g_7f4ca0[id].x169 != 0 || (g_7f4ca0[id].flags & 0xe00) != 0)) {
+	if (((Ent*) g_7f4ca0)[id].id != 0xffff && ((Ent*) g_7f4ca0)[id].type < 0xa && ((Ent*) g_7f4ca0)[id].alive > 0
+	    && (((Ent*) g_7f4ca0)[id].x166 != 0 || ((Ent*) g_7f4ca0)[id].x169 != 0 || (((Ent*) g_7f4ca0)[id].flags & 0xe00) != 0)) {
 		fcn_004f4830(0xf, info);
 		mult = g_665264[info[6]];
-		fcn_004e8b40(g_7f4ca0[id].x169, &q);
+		fcn_004e8b40(((Ent*) g_7f4ca0)[id].x169, &q);
 		out->vb = (int) ((q.xc << 5) * mult);
-		fcn_004e8b40(g_7f4ca0[id].x166, &q);
+		fcn_004e8b40(((Ent*) g_7f4ca0)[id].x166, &q);
 		out->va = (int) ((q.xc << 5) * mult);
 		fcn_004e8b40(out->c, &q);
 		out->vc = (int) ((q.xc << 5) * mult);
@@ -96,21 +96,21 @@ int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
 				return 0;
 			}
 			if (out->va != 0) {
-				fcn_004c51a0(g_7f4ca0[id].owner, -1, 0, out->va);
+				fcn_004c51a0(((Ent*) g_7f4ca0)[id].owner, -1, 0, out->va);
 				g_773d48++;
 			}
 			if (out->vb != 0) {
-				fcn_004c51a0(g_7f4ca0[id].owner, -1, 0, out->vb);
+				fcn_004c51a0(((Ent*) g_7f4ca0)[id].owner, -1, 0, out->vb);
 				g_773d48++;
 			}
 			if (out->vc != 0) {
-				fcn_004c51a0(g_7f4ca0[id].owner, -1, 0, out->vc);
+				fcn_004c51a0(((Ent*) g_7f4ca0)[id].owner, -1, 0, out->vc);
 				g_773d48++;
 			}
-			if (g_7f4ca0[id].type == 3) {
+			if (((Ent*) g_7f4ca0)[id].type == 3) {
 				amount = (fcn_0042e410((unsigned short) (q.x8 + 2)) + q.x8) * 6400;
-				fcn_004c51a0(g_7f4ca0[id].owner, -1, 0, amount);
-				fcn_004c6ae0(g_7f4ca0[id].owner, q.x8);
+				fcn_004c51a0(((Ent*) g_7f4ca0)[id].owner, -1, 0, amount);
+				fcn_004c6ae0(((Ent*) g_7f4ca0)[id].owner, q.x8);
 				g_773d48 += 2;
 			}
 		}
