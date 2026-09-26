@@ -14,7 +14,6 @@ typedef struct
 typedef Tex_102d278 fcn_00466ee0_Tex;
 // SIZE 0x160
 
-#include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern Tex_102d278 g_102d278[];

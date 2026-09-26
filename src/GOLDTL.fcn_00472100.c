@@ -39,7 +39,6 @@ typedef Obj_1038140 Obj;
 // SIZE 0x2bc
 
 extern char* g_1015ea0;
-#include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern Obj_1038140 g_1038140[];
 extern int g_772534;

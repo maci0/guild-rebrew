@@ -16,7 +16,6 @@ typedef struct Win {
 typedef Obj_1038140 Obj;
 // SIZE 0x2bc
 
-#include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern Obj_1038140 g_1038140[];
 

@@ -3,7 +3,6 @@
 typedef Vec3_67bbdc Vec3;
 
 // SIZE 0xc
-#include "client_types.h"
 typedef Pal_1041d20 Pal;
 
 // SIZE 0x60

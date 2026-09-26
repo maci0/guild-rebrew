@@ -16,7 +16,6 @@ typedef struct
 typedef Page_1038144 fcn_00472510_Page;
 // SIZE 0x2bc
 
-#include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern Page_1038144 g_1038144[];

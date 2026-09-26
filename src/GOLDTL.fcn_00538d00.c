@@ -24,7 +24,6 @@ extern int g_7725c8;
 extern char g_6a3550[];
 #include "client_types.h"
 extern Page_1038144 g_1038144[];
-#include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_1040490;
 extern int g_1040494;

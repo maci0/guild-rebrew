@@ -15,7 +15,6 @@ extern unsigned char* g_868050;
 extern unsigned char g_773d75;
 #include "client_types.h"
 extern Slot_778da0 g_7796e0[16];
-#include "client_types.h"
 extern Slot_778da0 g_778da0[16];
 extern double g_664ef8;
 extern int g_774698;

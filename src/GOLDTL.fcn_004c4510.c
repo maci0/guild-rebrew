@@ -14,7 +14,7 @@ typedef struct
 // SIZE 0x7c
 
 extern unsigned int g_aed208;
-extern Buf220 g_aed220;
+extern char g_aed220[];
 extern char* g_aed32c;
 
 int __cdecl fcn_005015e0(int*, int*, int*, int);
@@ -24,9 +24,9 @@ void __cdecl fcn_004c4510(int a1, int a2)
 	int l0;
 	int l1;
 
-	g_aed220.id = a2;
-	g_aed220.count = 0;
-	memset(g_aed220.data, 0, sizeof(g_aed220.data));
+	(*(Buf220*)g_aed220).id = a2;
+	(*(Buf220*)g_aed220).count = 0;
+	memset((*(Buf220*)g_aed220).data, 0, sizeof((*(Buf220*)g_aed220).data));
 	(*(int*)&g_aed208) = 0;
 	if (fcn_005015e0(&l1, &l0, &a2, a2) != 0) {
 		(*(int*)&g_aed32c) = a1;

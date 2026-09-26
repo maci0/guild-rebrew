@@ -19,7 +19,6 @@ typedef struct
 // SIZE 0x8
 
 extern Rec2d_9a3800 g_9a3800[512];
-#include "client_types.h"
 extern Pair_99f800 g_99f800[0x800];
 extern char g_7f4ca0[];
 

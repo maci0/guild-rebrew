@@ -25,7 +25,6 @@ typedef struct {
 
 #include "client_types.h"
 extern Rec18_68da68 g_9a9220[42];
-#include "client_types.h"
 extern Rec18_68da68 g_68da68[];
 
 int __cdecl fcn_004e8b80(int kind, int max, rec18* out)

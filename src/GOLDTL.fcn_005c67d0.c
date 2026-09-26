@@ -19,7 +19,6 @@ typedef struct
 extern int g_6abb00;
 extern int g_1040490;
 extern int g_1040494;
-#include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
 extern unsigned short g_774970;

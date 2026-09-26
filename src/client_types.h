@@ -343,6 +343,12 @@ typedef struct {
 	char pad4[0x18 - 4];
 } Cell_99ef80;
 
+/* g_99f5a0 */
+typedef struct {
+	int head;
+	int rest[8];
+} Rec24_99f5a0;
+
 /* g_99f800 */
 typedef struct {
 	int owner;

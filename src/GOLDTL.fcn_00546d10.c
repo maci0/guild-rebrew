@@ -12,7 +12,6 @@ struct s_77e980 {
 	char pad2[0xd3];
 };
 
-#include "client_types.h"
 extern unit_77e980 g_77e980[1024];
 
 // FUNCTION: GOLD 0x53efd0

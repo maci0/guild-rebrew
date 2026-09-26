@@ -18,7 +18,6 @@ typedef struct
 
 extern int g_773d38;
 extern Rec2d_9a3800 g_9a3800[512];
-#include "client_types.h"
 extern Pair_99f800 g_99f800[0x800];
 
 void __cdecl fcn_004f6740(void)

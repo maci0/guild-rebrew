@@ -22,7 +22,6 @@ typedef struct {
 typedef Pair_99f800 Pair;
 
 // SIZE 0x24
-#include "client_types.h"
 typedef Slot_68ff80 Slot;
 
 extern Slot_68ff80 g_68ff80[29];

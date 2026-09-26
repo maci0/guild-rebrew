@@ -1,8 +1,8 @@
-extern char g_99f5a0[];
+#include "client_types.h"
+extern Rec24_99f5a0 g_99f5a0;
 
 void __cdecl fcn_004c6a00(void* msg);
 
-#include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x004f9190
@@ -133,10 +133,10 @@ int __cdecl fcn_004fbc90(unsigned int* msg)
 
 	switch (msg[9]) {
 	case 0x656e626c:
-		*(int*) g_99f5a0 = 1;
+		g_99f5a0.head = 1;
 		break;
 	case 0x6473626c:
-		*(int*) g_99f5a0 = 0;
+		g_99f5a0.head = 0;
 		break;
 	case 0x696e6974:
 	case 0x73657420:

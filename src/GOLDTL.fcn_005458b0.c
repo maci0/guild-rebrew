@@ -10,7 +10,6 @@ extern s_77e8c0 g_77e8c0[16];
 
 // SIZE 0x3cc
 
-#include "client_types.h"
 extern s_1015f4c g_1015f4c[];
 
 // FUNCTION: GOLDTL 0x5458b0

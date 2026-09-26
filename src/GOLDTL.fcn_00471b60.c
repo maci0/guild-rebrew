@@ -34,7 +34,6 @@ typedef struct Slot {
 
 #include "client_types.h"
 extern Obj_1038140 g_1038140[];
-#include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern int g_1015ea8;
