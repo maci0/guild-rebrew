@@ -11,6 +11,18 @@
 
 int __stdcall ServerMainThread(void* lpThreadParameter);
 
+/* This TU's initialised data leads the server block; nothing names these
+ * symbols (ServerMainThread and srv_Init address the game path buffer by
+ * its raw address), but they must occupy this exact span. */
+// DATA: SERVER 0x1002956c
+char s_This_is_Gilde_talking__can_you_h_1002956c[] = "This is Gilde talking, can you hear me?";
+// DATA: SERVER 0x10029594
+char g_game_path_10029594[0x104] = "\\project\\DieGilde\\game\\";
+// DATA: SERVER 0x10029698
+char g_game_path_default_10029698[0x104] = "\\project\\DieGilde\\game\\";
+// GLOBAL: SERVER 0x1002979c
+int g_server_flag_1002979c = 1;
+
 // GLOBAL: SERVER 0x10034680
 int g_handler_started = 0;
 /* Console control handler for graceful shutdown.

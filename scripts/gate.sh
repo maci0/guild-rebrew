@@ -84,7 +84,8 @@ RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
 # the link produced -- and this gate, guarding .text alone, could not see .data
 # move at all.  Three rounds of data work were invisible to it.  Guard the raw
 # link's own .data so progress there is measured and regressions there caught.
-DATA_BASELINE=${DATA_BASELINE:-16415}
+# 15,787: server.c block 0x1002956c..0x10029ac0 defined in reference order.
+DATA_BASELINE=${DATA_BASELINE:-15787}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:

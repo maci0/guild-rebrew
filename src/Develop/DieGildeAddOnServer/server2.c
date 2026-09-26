@@ -29,15 +29,6 @@ int __cdecl srv_CreateListenSocket(int port);
 void __cdecl m_init(int);
 int __cdecl srv_SendPlayerData(unsigned int*);
 
-// DATA: SERVER 0x100298b0
-char s_D__Develop_DieGildeAddOnServer_s_100298b0[] = "D:\\Develop\\DieGildeAddOnServer\\server.c";
-
-// DATA: SERVER 0x100299a0
-char s_New_Connection_from__li__li__li__100299a0[] = "New Connection from %li.%li.%li.%li\n";
-
-// DATA: SERVER 0x100299c8
-char s_No_more_Slots_for_new_Connection_100299c8[] = "No more Slots for new Connections!\n";
-
 // DATA: SERVER 0x1003467c
 // DATA: SERVER 0x101deb14
 // DATA: SERVER 0x114ffe20
@@ -57,7 +48,7 @@ int __cdecl srv_Init(void)
 	((int (__cdecl*)(void*, int, int, int)) InitializeLogAndErrorHandler)((void*) srv_CleanupSockets, 0, 0, 3);
 	m_init(0x7fa6);
 	strcpy(path, (char*) 0x10029594);
-	strcat(path, (char*) 0x10029998);
+	strcat(path, "data\\");
 	if (gm_Open(path) < 0) {
 		sprintf(msg, "Could not open gamefiles path:%s", path);
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x3cd, msg, 1);
@@ -263,7 +254,7 @@ int __cdecl srv_AcceptConnections(void)
 		goto do_accept;
 
 no_slots:
-	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x495, s_No_more_Slots_for_new_Connection_100299c8, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x495, "No more Slots for new Connections!\n", 1);
 	if (*(int*) 0x114ffe20 != 0)
 		goto ret_neg1;
 	slot = (unsigned char*) 0x101deb00 + 8 * 0x264264;
@@ -322,7 +313,7 @@ do_accept:
 	*(unsigned int*) (slot + 0x2641fc) = (unsigned int) (slot + 0x132154);
 	*(unsigned int*) (slot + 0x2641f0) = 0;
 	*(unsigned int*) (slot + 0x2641f4) = 0;
-	sprintf(msg, s_New_Connection_from__li__li__li__100299a0,
+	sprintf(msg, "New Connection from %li.%li.%li.%li\n",
 		((unsigned char*) &addr)[4], ((unsigned char*) &addr)[5],
 		((unsigned char*) &addr)[6], ((unsigned char*) &addr)[7]);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x4e1, msg, 1);
@@ -381,7 +372,7 @@ int __cdecl srv_ReceivePacketHeader(unsigned int* conn)
 		if (n == 0) {
 			if (*(unsigned int*) ((char*) conn + 0x150) >= GetTickCount())
 				return 0;
-			LogMessageInternal((char*) 0x100298b0, 0x52a, (char*) 0x10029a04, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x52a, "Connection timed out.\n", 1);
 			cm_ClosePlayerConnection(conn);
 			return -1;
 		}
@@ -407,7 +398,7 @@ int __cdecl srv_ReceivePacketHeader(unsigned int* conn)
 	if (n == 0) {
 		if (*(unsigned int*) ((char*) conn + 0x150) >= GetTickCount())
 			return 0;
-		LogMessageInternal((char*) 0x100298b0, 0x552, (char*) 0x10029a04, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x552, "Connection timed out.\n", 1);
 		cm_ClosePlayerConnection(conn);
 		return -1;
 	}
@@ -459,7 +450,7 @@ int __cdecl srv_SendPlayerData(unsigned int* conn)
 	if (result == 0) {
 		tick = GetTickCount();
 		if (conn[84] < tick) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x58f, "Connection timed out.", 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x58f, "Connection timed out.\n", 1);
 			cm_ClosePlayerConnection(conn);
 			return -1;
 		}

@@ -30,7 +30,7 @@ int __cdecl srv_QueueCommandForProcessing(unsigned int* player_slot, unsigned ch
 
 	buf = *(char**) ((int) player_slot + 0x2641f8);
 	if (buf == 0) {
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x671, "Commandbuffer full!", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x671, "Commandbuffer full!\n", 1);
 		return -1;
 	}
 	*(int*) ((int) player_slot + 0x2641f8) = *(int*) (buf + 0x95);
@@ -64,7 +64,7 @@ int __cdecl cm_QueuePlayerCommand(unsigned int* player_slot, unsigned char* cmd_
 
 	buf = *(char**) ((int) player_slot + 0x2641fc);
 	if (buf == 0) {
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x6b0, "Commandbuffer full!", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x6b0, "Commandbuffer full!\n", 1);
 		return -1;
 	}
 	*(int*) ((int) player_slot + 0x2641fc) = *(int*) (buf + 0x95);

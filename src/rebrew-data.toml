@@ -2557,27 +2557,6 @@ status = "VERIFIED"
 type = "char[]"
 size = 39
 
-["SERVER.0x100299c8"]
-section = ".data"
-name = "s_No_more_Slots_for_new_Connection_100299c8"
-status = "VERIFIED"
-type = "char[]"
-size = 36
-
-["SERVER.0x100298b0"]
-section = ".data"
-name = "s_D__Develop_DieGildeAddOnServer_s_100298b0"
-status = "VERIFIED"
-type = "char[]"
-size = 40
-
-["SERVER.0x100299a0"]
-section = ".data"
-name = "s_New_Connection_from__li__li__li__100299a0"
-status = "VERIFIED"
-type = "char[]"
-size = 37
-
 ["SERVER.0x100273ac"]
 section = ".data"
 name = "s_Error_Handler_closed__100273ac"
@@ -4884,3 +4863,27 @@ section = ".data"
 type = "char[36]"
 name = "g_crashdump_tail_10027318"
 size = 36
+
+["SERVER.0x1002956c"]
+section = ".data"
+name = "s_This_is_Gilde_talking__can_you_h_1002956c"
+type = "char[]"
+size = 40
+
+["SERVER.0x10029594"]
+section = ".data"
+name = "g_game_path_10029594"
+type = "char[260]"
+size = 260
+
+["SERVER.0x10029698"]
+section = ".data"
+name = "g_game_path_default_10029698"
+type = "char[260]"
+size = 260
+
+["SERVER.0x1002979c"]
+section = ".data"
+name = "g_server_flag_1002979c"
+type = "int"
+size = 4
