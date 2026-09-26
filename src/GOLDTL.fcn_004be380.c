@@ -1,9 +1,6 @@
-typedef struct {
-	int id;
-	int b;
-} fcn_004be380_entry;
+#include "g_10058a0.h"
 
-extern fcn_004be380_entry g_10058a0[8];
+extern IdSlot10058a0 g_10058a0[8];
 extern int g_6816d8;
 
 int __cdecl fcn_004693b0(int, int);

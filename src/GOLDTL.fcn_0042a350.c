@@ -3,9 +3,9 @@ extern int g_6b7f90;
 // GLOBAL: GOLD 0x6333b0
 extern int g_6b7f90;
 // GLOBAL: GOLDTL 0x6b7ed0
-extern int g_6b7ed0[16];
+extern int* g_6b7ed0[16];
 // GLOBAL: GOLD 0x6332f0
-extern int g_6b7ed0[16];
+extern int* g_6b7ed0[16];
 // FUNCTION: GOLD 0x0042b9f0
 // SIZE: 61
 // FUNCTION: GOLDTL 0x42a350

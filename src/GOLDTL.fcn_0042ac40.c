@@ -13,7 +13,7 @@ extern g_662408_f g_662408;
 // SIZE: 95
 
 extern int g_6b7f90;
-extern char* g_6b7ed0[16];
+extern int* g_6b7ed0[16];
 
 int __cdecl fcn_0042b280(int);
 int __cdecl fcn_0042b200(int);
@@ -26,7 +26,7 @@ int __cdecl fcn_0042ac40(int a1)
 
 	if (g_6b7f90 != 0 && (i = fcn_0042b280(a1)) >= 0 && (j = fcn_0042b200(a1)) >= 0) {
 		g_662408(a1);
-		(*(int*) (g_6b7ed0[i] + 0x14))--;
+		g_6b7ed0[i][5]--;
 		g_6b7f50[i][j] = r;
 	} else {
 		r = -1;

@@ -1,13 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct
-{
-	int i[0x2ec / 4];
-} fcn_00475ca0_Ent;
-// SIZE 0x2ec
+#include "gold_gui.h"
 
-extern fcn_00475ca0_Ent* g_00f8f080; /* 0x00f8f080 */
+extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
 int __cdecl fcn_00475be0(char* sub);
 
@@ -15,7 +11,7 @@ int __cdecl fcn_00475be0(char* sub);
 // SIZE: 390
 void __cdecl fcn_00475ca0(int id, int a2, int a3, int a4, int a5)
 {
-	fcn_00475ca0_Ent* e;
+	GuiEnt* e;
 	char* sub;
 	int fl;
 	int step;
@@ -26,8 +22,8 @@ void __cdecl fcn_00475ca0(int id, int a2, int a3, int a4, int a5)
 		return;
 	}
 	e = &g_00f8f080[id];
-	if (e->i[0x18 / 4] == 0x41) {
-		sub = (char*) e->i[0xc / 4];
+	if (e->kind == 0x41) {
+		sub = e->data;
 		if (*(int*) (sub + 0x28) & 1) {
 			if (strlen((char*) a2) > 0xfe) {
 				return;
@@ -59,14 +55,14 @@ void __cdecl fcn_00475ca0(int id, int a2, int a3, int a4, int a5)
 			return;
 		}
 	}
-	if (e->i[0x18 / 4] == 0x45) {
-		e->i[0x80 / 4] = a2;
-		e->i[0x84 / 4] = a3;
-		e->i[0x7c / 4] = a4;
-		if (*((unsigned char*) e + 0x88) & 0x10) {
-			e->i[0x90 / 4] = a5;
+	if (e->kind == 0x45) {
+		e->u.num.f80 = a2;
+		e->u.num.f84 = a3;
+		e->buf = (char*) a4;
+		if (e->u.num.f88 & 0x10) {
+			e->u.num.f90 = a5;
 		}
-	} else if (e->i[0x48 / 4] != 0 || e->i[0x4c / 4] != 0) {
-		e->i[0x2c / 4] = e->i[0x28 / 4] = (unsigned char) a2;
+	} else if (e->dirty != 0 || e->f4c != 0) {
+		e->f2c = e->f28 = (unsigned char) a2;
 	}
 }

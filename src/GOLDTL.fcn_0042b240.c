@@ -1,5 +1,5 @@
-extern int* g_6b7ed0[];
-extern int* g_6b7f10[];
+extern int* g_6b7ed0[16];
+extern int* g_6b7f10[16];
 // FUNCTION: GOLDTL 0x42b240
 // SIZE: 59
 

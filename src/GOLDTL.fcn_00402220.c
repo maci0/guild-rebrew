@@ -1,12 +1,5 @@
+#include "g_1552000.h"
 extern int g_675170;
-
-// SIZE 0x10
-struct sin_402220 {
-	short family;
-	unsigned short port;
-	unsigned long addr;
-	char zero[8];
-};
 
 extern struct sin_402220 g_1552010;
 extern struct sin_402220 g_1552000;

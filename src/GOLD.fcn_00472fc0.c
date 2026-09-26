@@ -3,35 +3,17 @@
 
 #include <string.h>
 
-typedef struct
-{
-	char pad00[0x18];
-	int* list;
-	short count;
-	char pad1e[0x26c - 0x1e];
-	int id;
-	char pad270[0x3c4 - 0x270];
-} fcn_00472fc0_Win;
-// SIZE 0x3c4
+#include "gold_gui.h"
 
-typedef struct
-{
-	int id;
-	char pad04[0x30 - 0x4];
-	fcn_00472fc0_Win* parent;
-	char pad34[0x2ec - 0x34];
-} fcn_00472fc0_Ent;
-// SIZE 0x2ec
-
-extern fcn_00472fc0_Win g_00f8f120[]; /* 0x00f8f120 */
-extern fcn_00472fc0_Ent** g_006ed964; /* 0x006ed964 */
+extern GuiWin g_00f8f120[]; /* 0x00f8f120 */
+extern GuiEnt** g_006ed964; /* 0x006ed964 */
 
 void __cdecl fcn_00472f40(int id);
 
 void __cdecl fcn_00472fc0(int win)
 {
-	fcn_00472fc0_Win* w;
-	fcn_00472fc0_Ent* tmp[0x181];
+	GuiWin* w;
+	GuiEnt* tmp[0x181];
 	int i;
 	int first;
 	int last;

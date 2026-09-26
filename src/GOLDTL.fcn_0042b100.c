@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x42b100
 // SIZE: 23
 
-extern int g_6b7ed0[];
+extern int* g_6b7ed0[16];
 
 int __cdecl fcn_0042b100(void)
 {

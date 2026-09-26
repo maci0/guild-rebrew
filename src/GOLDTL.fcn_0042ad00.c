@@ -4,7 +4,7 @@
 // SIZE: 95
 
 extern int g_6b7f90;
-extern char* g_6b7ed0[16];
+extern int* g_6b7ed0[16];
 extern int* g_6b7f50[16];
 int __cdecl fcn_0042ac40(int);
 
@@ -17,7 +17,7 @@ int __cdecl fcn_0042ad00(void)
 	if (g_6b7f90 != 0) {
 		for (i = 0; i < 0x10; i++) {
 			if (g_6b7ed0[i] != 0) {
-				for (j = 0; j < *(int*) (g_6b7ed0[i] + 0x18); j++) {
+				for (j = 0; j < g_6b7ed0[i][6]; j++) {
 					if (g_6b7f50[i][j] != 0 && fcn_0042ac40(g_6b7f50[i][j]) != 0) {
 						r = -1;
 					}
