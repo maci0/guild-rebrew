@@ -4,6 +4,8 @@
 /* GOLD twin of GOLDTL fcn_0045c290: the texture slot is 0x80 bytes here,
  * 0x70 in GOLDTL. */
 
+#include "g_fb9074.h"
+
 // SIZE 0x4
 typedef struct Col {
 	unsigned char a;
@@ -14,20 +16,13 @@ typedef struct Col {
 	unsigned char d;
 } Col;
 
-// SIZE 0x80
-typedef struct Tex {
-	char name[0x40];
-	int refs;
-	char pad[0x3c];
-} Tex;
-
-extern Tex* g_fb9074;
+extern TexSlot* g_fb9074;
 extern unsigned int g_fb9084;
 extern unsigned int g_fb91a8;
 
-Tex* __cdecl fcn_00460120(Col c, int* out)
+TexSlot* __cdecl fcn_00460120(Col c, int* out)
 {
-	Tex* t;
+	TexSlot* t;
 	int i;
 
 	if (g_fb91a8 == g_fb9084) {

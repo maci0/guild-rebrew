@@ -4,17 +4,11 @@ extern char g_7766bb;
 // FUNCTION: GOLDTL 0x00546b40
 // SIZE: 53
 
-typedef struct {
-	int a;
-	char* b;
-	int c;
-	int d;
-} Rec546b40;
-// SIZE 0x10
+#include "he_tables.h"
 
-extern Rec546b40 g_7dc6e0[];
+extern Rec7dc6e0 g_7dc6e0[64];
 
-void __cdecl fcn_005467e0(Rec546b40*);
+void __cdecl fcn_005467e0(Rec7dc6e0*);
 
 void __cdecl fcn_00546b40(void)
 {

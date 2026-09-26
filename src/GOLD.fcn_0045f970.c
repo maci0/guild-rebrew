@@ -1,9 +1,11 @@
 #include <string.h>
 
+#include "g_fb9074.h"
+
 /* GOLD twin of GOLDTL fcn_0045bde0: the texture slot is 0x80 bytes here,
  * 0x70 in GOLDTL. */
 
-extern char* g_fb9074;
+extern TexSlot* g_fb9074;
 extern unsigned int g_fb9084;
 
 int __cdecl fcn_005eab80(const char* a, const char* b);
@@ -17,7 +19,7 @@ char* __cdecl fcn_0045f970(const char* name)
 	char* p;
 
 	strcpy(buf, name);
-	p = g_fb9074;
+	p = (char*) g_fb9074;
 	for (i = 0; i < g_fb9084; i++, p += 0x80) {
 		if (*(int*) (p + 0x40) > 0 && fcn_005eab80(buf, p) == 0) {
 			return p;

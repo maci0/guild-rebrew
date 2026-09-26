@@ -1,6 +1,8 @@
-extern char g_7d2020[0xa400];
-extern char g_7dcae0[0x5000];
-extern char g_7dc6e0[0x400];
+#include "he_tables.h"
+
+extern Deal g_7d2020[256];
+extern ApEvent g_7dcae0[256];
+extern Rec7dc6e0 g_7dc6e0[64];
 
 // FUNCTION: GOLDTL 0x545430
 // SIZE: 221

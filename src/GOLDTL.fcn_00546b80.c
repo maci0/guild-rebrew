@@ -3,17 +3,11 @@
 // FUNCTION: GOLDTL 0x00546b80
 // SIZE: 39
 
-typedef struct {
-	int a;
-	int b;
-	int c;
-	int d;
-} Rec546b80;
-// SIZE 0x10
+#include "he_tables.h"
 
-extern Rec546b80 g_7dc6e0[];
+extern Rec7dc6e0 g_7dc6e0[64];
 
-void __cdecl fcn_005467e0(Rec546b80*);
+void __cdecl fcn_005467e0(Rec7dc6e0*);
 
 void __cdecl fcn_00546b80(int k)
 {

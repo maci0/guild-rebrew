@@ -3,17 +3,11 @@
 // FUNCTION: GOLD 0x005a8810
 // SIZE: 80
 
+#include "g_774a78.h"
+
 void __cdecl fcn_0041ddd0(void*);
 
-struct Node;
 extern struct Node* g_774a78;
-
-// SIZE 0x4c
-typedef struct Node {
-	int id;
-	char pad[0x44];
-	struct Node* next;
-} Node;
 
 int __cdecl fcn_005b1c90(int id)
 {

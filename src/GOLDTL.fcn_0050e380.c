@@ -5,33 +5,16 @@
 
 #include <string.h>
 
+#include "he_tables.h"
+
 #pragma pack(1)
-// SIZE 0xe
-typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
-} Blob;
-
-// SIZE 0xa4
-typedef struct {
-	int id;
-	int pad4;
-	int has_amount;
-	int owner;
-	int amount;
-	Blob blob;
-	char tail[0xa4 - 0x22];
-} Deal;
-
 // SIZE 0x1e
 typedef struct {
 	int id;
 	Deal* deal;
 	char* tail;
 	int amount;
-	Blob blob;
+	Pos14 pos;
 } Entry;
 
 // SIZE 0x21d
@@ -52,7 +35,7 @@ typedef struct {
 	int special;
 } Sorted;
 
-extern Deal g_7d2020[];
+extern Deal g_7d2020[256];
 
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int owner);
 char* __cdecl gm_AddObjekt(void);
@@ -85,8 +68,8 @@ int __cdecl fcn_0050e380(int owner, Summary* out)
 			if (d->has_amount != 0) {
 				out->entries[k].amount = d->amount;
 			}
-			out->entries[k].blob = d->blob;
-			out->entries[k].tail = d->tail;
+			out->entries[k].pos = d->pos;
+			out->entries[k].tail = d->name;
 			if (d->has_amount != 0) {
 				out->total -= d->amount;
 			}

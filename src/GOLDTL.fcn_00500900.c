@@ -6,9 +6,9 @@
 #include <stdio.h>
 #include <string.h>
 
-extern unsigned char g_100f1a0;
-extern unsigned char g_100f1a1;
-extern unsigned char g_100f1a2;
+#include "rgb.h"
+
+extern Rgb g_100f1a0;
 extern int g_773d40;
 extern char* g_773d44;
 extern char g_1015da0[];
@@ -24,9 +24,9 @@ void __cdecl fcn_00500900(void)
 	char line[260];
 	FILE* f;
 
-	g_100f1a1 = 0xff;
-	g_100f1a0 = 0;
-	g_100f1a2 = 0;
+	g_100f1a0.g = 0xff;
+	g_100f1a0.r = 0;
+	g_100f1a0.b = 0;
 	g_773d40 = 0;
 	sprintf(path, g_696528, g_1015da0);
 	f = fopen(path, g_6750e8);
