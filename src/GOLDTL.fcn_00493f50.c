@@ -1,19 +1,13 @@
-typedef struct {
-	int key;
-	int a;
-	int b;
-	int c;
-} fcn_00493f50_entry;
-// SIZE 0x10
+#include "g_664260.h"
 
-extern fcn_00493f50_entry g_664260[7];
+extern Mult664260 g_664260[7];
 
 // FUNCTION: GOLD 0x004948b0
 // SIZE: 39
 // FUNCTION: GOLDTL 0x493f50
 // SIZE: 39
 
-fcn_00493f50_entry* __cdecl fcn_00493f50(int key)
+Mult664260* __cdecl fcn_00493f50(int key)
 {
 	int i;
 

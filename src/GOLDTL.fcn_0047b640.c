@@ -1,5 +1,7 @@
 #include <string.h>
 
+#include "rgb.h"
+
 typedef struct TexDesc {
 	int pad0;
 	int w;
@@ -34,12 +36,6 @@ typedef struct Tiles {
 	int tile;
 } Tiles;
 // SIZE 0x38
-
-typedef struct Rgb {
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-} Rgb;
 
 extern int g_67dac0;
 extern int g_67dabc;

@@ -3,22 +3,16 @@
 // FUNCTION: GOLDTL 0x004ecc20
 // SIZE: 176
 
-typedef struct
-{
-	int a;
-	int b;
-	int c;
-} V12;
-// SIZE 0xc
+#include "g_772f90.h"
 
 extern int g_772fe0;
-extern V12* g_772fe4;
+extern Rec772fe4* g_772fe4;
 
 unsigned short __cdecl fcn_0042e410(unsigned short n);
 int __cdecl fcn_004ec9a0(int p);
 int __cdecl fcn_004ec950(int p, int id);
 
-V12* __cdecl fcn_004ecc20(int p)
+Rec772fe4* __cdecl fcn_004ecc20(int p)
 {
 	int step;
 	int idx;
@@ -32,7 +26,7 @@ V12* __cdecl fcn_004ecc20(int p)
 		idx = fcn_0042e410((unsigned short) g_772fe0);
 		n = g_772fe0;
 		while (n != 0) {
-			if (!fcn_004ec950(p, g_772fe4[idx].a)) {
+			if (!fcn_004ec950(p, g_772fe4[idx].key)) {
 				return &g_772fe4[idx];
 			}
 			n--;

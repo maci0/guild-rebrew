@@ -3,9 +3,11 @@
 // FUNCTION: GOLDTL 0x4ce040
 // SIZE: 60
 
+#include "g_9ba3a0.h"
+
 extern int g_772e8c;
 extern int g_9ba9f4;
-extern char g_9ba3a0[];
+extern logrec g_9ba3a0[15];
 
 char* __cdecl fcn_004ce040(void)
 {
@@ -26,5 +28,5 @@ char* __cdecl fcn_004ce040(void)
 		n = 0;
 		g_772e8c = n;
 	}
-	return g_9ba3a0 + n * 108;
+	return (char*) g_9ba3a0 + n * 108;
 }

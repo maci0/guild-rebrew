@@ -1,16 +1,8 @@
+#include "he_tables.h"
+
 void __cdecl fcn_0041d9e0(char*);
 
-// SIZE 0x50
-struct s_7dcae0 {
-	char b0;
-	char pad[3];
-	int f4;
-	int f8;
-	int fc;
-	char name[0x40];
-};
-
-extern struct s_7dcae0 g_7dcae0[256];
+extern ApEvent g_7dcae0[256];
 
 // FUNCTION: GOLD 0x0053f120
 // SIZE: 137
@@ -19,11 +11,10 @@ extern struct s_7dcae0 g_7dcae0[256];
 
 #include <string.h>
 
-
-struct s_7dcae0* __cdecl fcn_00546ef0(int a, char* name, int b, int c)
+ApEvent* __cdecl fcn_00546ef0(int a, char* name, int b, int c)
 {
 	int i;
-	struct s_7dcae0* r;
+	ApEvent* r;
 
 	for (i = 0; i < 256; i++) {
 		if (g_7dcae0[i].f8 == 0 && g_7dcae0[i].fc == 0 && g_7dcae0[i].name[0] == 0) {

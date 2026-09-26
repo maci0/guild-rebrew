@@ -1,17 +1,9 @@
 #include <string.h>
 
-struct fcn_004752e0_entry {
-	int a;
-	int b;
-	int c;
-	int d;
-	int e;
-	int used;
-};
-// SIZE 0x18
+#include "g_100f200.h"
 
 extern int g_100f804;
-extern struct fcn_004752e0_entry g_100f200[];
+extern Slot100f200 g_100f200[];
 // FUNCTION: GOLDTL 0x4752e0
 // SIZE: 50
 

@@ -3,8 +3,10 @@
 // FUNCTION: GOLDTL 0x0041bf00
 // SIZE: 143
 
-extern void* g_6b6f20[6];
-extern void* g_6b6f40;
+#include "octree.h"
+
+extern OctNode* g_6b6f20[6];
+extern OctRef* g_6b6f40;
 extern void* g_6b6f44;
 void __cdecl fcn_0064dfda(void* p);
 

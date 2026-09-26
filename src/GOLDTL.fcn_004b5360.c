@@ -1,10 +1,6 @@
-typedef struct {
-	unsigned char kind;
-	char pad1[0x21b];
-} fcn_004b5360_slot;
-// SIZE 0x21c
+#include "g_7f4ca2.h"
 
-extern fcn_004b5360_slot g_7f4ca2[];
+extern Slot7f4ca2 g_7f4ca2[768];
 
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 char* __cdecl gm_AddObjekt(void);

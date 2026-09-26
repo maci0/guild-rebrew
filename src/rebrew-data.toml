@@ -2273,7 +2273,7 @@ status = "VERIFIED"
 ["SERVER.0x1002944c"]
 section = ".data"
 name = "s_rb_1002944c"
-type = "char[]"
+type = "char[4]"
 size = 4
 status = "VERIFIED"
 

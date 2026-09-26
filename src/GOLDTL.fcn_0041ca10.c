@@ -3,6 +3,7 @@
 // FUNCTION: GOLDTL 0x0041ca10
 // SIZE: 142
 
+
 extern unsigned int g_6b6f38;
 extern unsigned int* g_6b6d18;
 extern unsigned char g_6b6008[3][0x100];

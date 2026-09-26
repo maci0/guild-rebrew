@@ -1,14 +1,8 @@
+#include "g_7f4ca2.h"
+
 extern char g_776708;
 
-// SIZE 0x21c
-struct s_7f4ca2 {
-	char kind;
-	char pad[0x161];
-	unsigned char b;
-	char pad2[0xb9];
-};
-
-extern struct s_7f4ca2 g_7f4ca2[768];
+extern Slot7f4ca2 g_7f4ca2[768];
 
 // FUNCTION: GOLD 0x522080
 // SIZE: 186

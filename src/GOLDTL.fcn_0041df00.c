@@ -1,32 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 
-// SIZE 0x28
-struct pool_41df00 {
-	char name[0x10];
-	int used;
-	int used_blocks;
-	int max;
-	int max_blocks;
-	int calls;
-	struct pool_41df00* next;
-};
-
-// SIZE 0x10
-struct block_41df00 {
-	struct pool_41df00* pool;
-	char* tag;
-	void* ptr;
-	int size;
-};
+#include "memtrack.h"
 
 extern int g_6b6f64;
 extern int g_6b6f68;
 extern int g_6b6f6c;
 extern int g_6b6f70;
 extern int g_6b6f74;
-extern struct block_41df00* g_6b6f80;
-extern struct pool_41df00 g_14cc5c0;
+extern MemBlock* g_6b6f80;
+extern struct MemPool g_14cc5c0;
 
 // FUNCTION: GOLD 0x00422750
 // SIZE: 440
@@ -37,8 +20,8 @@ extern struct pool_41df00 g_14cc5c0;
  * whose name contains filter. */
 void __cdecl fcn_0041df00(const char* filter)
 {
-	struct pool_41df00* p;
-	struct block_41df00* b;
+	struct MemPool* p;
+	MemBlock* b;
 	char* colon;
 	char show;
 	int i;

@@ -1,27 +1,10 @@
 // FUNCTION: GOLDTL 0x0041c190
 // SIZE: 248
 
-// SIZE 0x4
-typedef struct {
-	unsigned char lvl;
-	char pad;
-	unsigned short idx;
-} H41c190;
+#include "octree.h"
 
-// SIZE 0x18
-typedef struct {
-	unsigned int r;
-	unsigned int g;
-	unsigned int b;
-	unsigned int count;
-	unsigned int key;
-	unsigned char mask;
-	unsigned char idx;
-	char pad[2];
-} N41c190;
-
-extern N41c190* g_6b6f20[];
-extern H41c190* g_6b6f40;
+extern OctNode* g_6b6f20[6];
+extern OctRef* g_6b6f40;
 extern unsigned int g_6b6f38;
 
 void __cdecl fcn_0041c190(unsigned int half, int unused)

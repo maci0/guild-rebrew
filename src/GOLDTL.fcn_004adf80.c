@@ -1,11 +1,7 @@
-typedef struct {
-	int key;
-	char pad4[0x28];
-} fcn_004adf80_entry;
-// SIZE 0x2c
+#include "g_67fbb0.h"
 
 extern int g_67fbac;
-extern fcn_004adf80_entry* g_67fbb4;
+extern Entry2c* g_67fbb4;
 extern int g_7728cc;
 extern int g_7728c8;
 

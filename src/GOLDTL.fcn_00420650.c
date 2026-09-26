@@ -1,4 +1,6 @@
-extern char g_6b71b0[];
+#include "g_6b71b0.h"
+
+extern Chan g_6b71b0[10];
 extern char g_6b72b4[];
 extern char g_6b7e44[];
 
@@ -16,7 +18,7 @@ char* __cdecl fcn_00420650(void)
 	a = (int) g_6b72b4;
 	do {
 		if (*(char*) (a + 2) == 0 && *(char*) a != 0) {
-			return g_6b71b0 + i * 296;
+			return (char*) g_6b71b0 + i * 296;
 		}
 		a += 0x128;
 		i++;

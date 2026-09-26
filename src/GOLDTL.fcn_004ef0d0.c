@@ -5,15 +5,9 @@
 
 #include <stdio.h>
 
-// SIZE 0xf4
-typedef struct {
-	int key;
-	char name[0xf2 - 4];
-	unsigned char state;
-	char padf3;
-} Entry;
+#include "g_68e020.h"
 
-extern Entry g_68e020[32];
+extern Entry68e020 g_68e020[32];
 extern char g_68fedc[];
 extern char g_68fea0[];
 

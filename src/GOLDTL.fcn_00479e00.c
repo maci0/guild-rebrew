@@ -1,7 +1,7 @@
+#include "rgb.h"
+
 extern int g_100f1a8;
-extern unsigned char g_100f1b8;
-extern unsigned char g_100f1b9;
-extern unsigned char g_100f1ba;
+extern Rgb g_100f1b8;
 
 int __cdecl fcn_0041bac0(unsigned char r, unsigned char g, unsigned char b);
 
@@ -13,7 +13,7 @@ void __cdecl fcn_00479e00(unsigned char r, unsigned char g, unsigned char b)
 
 	c = fcn_0041bac0(r, g, b);
 	g_100f1a8 = (c << 16) | c;
-	g_100f1b8 = r;
-	g_100f1b9 = g;
-	g_100f1ba = b;
+	g_100f1b8.r = r;
+	g_100f1b8.g = g;
+	g_100f1b8.b = b;
 }

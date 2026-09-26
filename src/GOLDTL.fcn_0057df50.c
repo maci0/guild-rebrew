@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x57df50
 // SIZE: 324
 
-extern unsigned int g_7749f4;
+extern int g_7749f4;
 
 void __cdecl fcn_0057df50(int id, int on)
 {

@@ -1,7 +1,8 @@
+#include "g_680bd0.h"
 // GLOBAL: GOLDTL 0x680bd0
-extern char g_680bd0[];
+extern Entry680bd0 g_680bd0[48];
 // GLOBAL: GOLD 0x601f68
-extern char g_680bd0[];
+extern Entry680bd0 g_680bd0[48];
 // FUNCTION: GOLD 0x004b3ae0
 // SIZE: 46
 // FUNCTION: GOLDTL 0x4b3c50

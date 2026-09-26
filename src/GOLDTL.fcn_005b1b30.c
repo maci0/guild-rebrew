@@ -1,6 +1,6 @@
+#include "g_774a78.h"
 
-
-extern char* g_774a78;
+extern struct Node* g_774a78;
 extern char s_6ab3f4[];
 
 char* __cdecl fcn_005b1aa0(char*);
@@ -18,7 +18,7 @@ char* __cdecl fcn_005b1b10(int a1)
 {
 	char* p;
 
-	p = g_774a78;
+	p = (char*) g_774a78;
 	while (p != 0) {
 		if (*(int*) p == a1) {
 			return p + 0xc;
@@ -69,7 +69,7 @@ char* __cdecl fcn_005b1b30(char* a)
 			*(int*) (p + 4) = fcn_0064d3f8();
 			*(float*) (p + 0x44) = 1.0f;
 			fcn_005b1980(a, p);
-			g_774a78 = p;
+			g_774a78 = (Node*) p;
 			return p + 0xc;
 		}
 	}
@@ -110,8 +110,8 @@ char* __cdecl fcn_005b1b30(char* a)
 			*(int*) (p + 4) = fcn_0064d3f8();
 			*(float*) (p + 0x44) = 1.0f;
 			fcn_005b1980(a, p);
-			*(char**) (p + 0x48) = g_774a78;
-			g_774a78 = p;
+			*(char**) (p + 0x48) = (char*) g_774a78;
+			g_774a78 = (Node*) p;
 			return p + 0xc;
 		}
 	}

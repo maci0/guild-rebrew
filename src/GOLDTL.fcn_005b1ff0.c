@@ -3,7 +3,9 @@
 // FUNCTION: GOLDTL 0x005b1ff0
 // SIZE: 347
 
-extern char* g_774a78;
+#include "g_774a78.h"
+
+extern struct Node* g_774a78;
 extern char s_6ab408[];
 
 void __cdecl fcn_005b1ef0(void);
@@ -51,11 +53,11 @@ int __cdecl fcn_005b1ff0(int fh)
 		}
 		*(int*) p = -1;
 		if (g_774a78 != 0) {
-			*(char**) (p + 0x48) = g_774a78;
+			*(char**) (p + 0x48) = (char*) g_774a78;
 		}
-		g_774a78 = p;
+		g_774a78 = (Node*) p;
 	}
-	for (e = g_774a78; e != 0; e = *(char**) (e + 0x48)) {
+	for (e = (char*) g_774a78; e != 0; e = *(char**) (e + 0x48)) {
 		if (ls_ReadVfsDataChecked(e, 4, 1, fh) == 0) {
 			goto fail;
 		}

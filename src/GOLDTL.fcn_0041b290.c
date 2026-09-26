@@ -1,13 +1,8 @@
 #include <string.h>
 
-// SIZE 0x508
-struct adapter_41b290 {
-	char pad0[0x418];
-	unsigned long guid[4];
-	char pad428[0xe0];
-};
+#include "g_6b5dd0.h"
 
-extern struct adapter_41b290* g_6b5dd0;
+extern Adapter* g_6b5dd0;
 extern unsigned int g_6b5de8;
 
 int __cdecl fcn_004112b0(const char* sub, int mode);

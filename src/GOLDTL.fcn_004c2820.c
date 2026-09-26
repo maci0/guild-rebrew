@@ -1,9 +1,6 @@
-typedef struct {
-	int ids[0x45];
-} fcn_004c2820_group;
-// SIZE 0x114
+#include "g_688118.h"
 
-extern fcn_004c2820_group g_688118[];
+extern IdGroup g_688118[];
 
 // FUNCTION: GOLD 0x004c1fc0
 // SIZE: 64

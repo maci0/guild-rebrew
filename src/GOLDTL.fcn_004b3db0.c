@@ -1,11 +1,6 @@
-typedef struct {
-	int f0;
-	int key;
-	char pad8[0x14];
-} fcn_004b3db0_entry;
-// SIZE 0x1c
+#include "g_680bd0.h"
 
-extern fcn_004b3db0_entry g_680bd0[48];
+extern Entry680bd0 g_680bd0[48];
 
 int __cdecl fcn_004b3cb0(int);
 int __cdecl fcn_004b3b80(int);

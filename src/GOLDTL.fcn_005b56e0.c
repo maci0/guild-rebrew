@@ -3,17 +3,7 @@
 // FUNCTION: GOLDTL 0x005b56e0
 // SIZE: 101
 
-// SIZE 0x1c
-typedef struct {
-	int id;
-	int f4;
-	int f8;
-	int fc;
-	int f10;
-	int f14;
-	unsigned short level;
-	short pad;
-} Offer;
+#include "g_6abb08.h"
 
 extern Offer g_6abb08[];
 extern int g_6ac240;
