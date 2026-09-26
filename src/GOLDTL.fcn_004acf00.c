@@ -1,7 +1,9 @@
+#include "g_67fbb0.h"
+
 extern int g_67fba8;
 extern int g_67fbac;
-extern int* g_67fbb0;
-extern int* g_67fbb4;
+extern Entry2c* g_67fbb0;
+extern Entry2c* g_67fbb4;
 extern int g_7728c0;
 extern int g_7728c4;
 extern int g_7728c8;

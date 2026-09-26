@@ -4,6 +4,7 @@ typedef struct {
 	char pad0[0x18];
 	int* items;
 } fcn_0047cd20_set;
+// SIZE 0x1c
 
 extern Rgb g_100f1b8;
 

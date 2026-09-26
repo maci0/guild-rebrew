@@ -1,13 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// SIZE 0x10
-struct block_41e0c0 {
-	int size;
-	char* tag;
-	void* ptr;
-	int pad;
-};
+#include "memtrack.h"
 
 extern int g_6b6f64;
 extern int g_6b6f68;
@@ -15,7 +9,7 @@ extern int g_6b6f6c;
 extern int g_6b6f70;
 extern int g_6b6f74;
 extern int g_6b6f7c;
-extern struct block_41e0c0* g_6b6f80;
+extern MemBlock* g_6b6f80;
 extern char* g_14cc5e4;
 
 void __cdecl fcn_0041d9e0(const char*);
@@ -31,7 +25,7 @@ void __cdecl fcn_0041df00(int);
 void __cdecl fcn_0041e0c0(void)
 {
 	int i;
-	struct block_41e0c0* b;
+	MemBlock* b;
 	char* p;
 	char* next;
 	char msg[0x400];

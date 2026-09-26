@@ -5,13 +5,7 @@
 
 #include <string.h>
 
-typedef struct {
-	char name[0x40];
-	char text[0x24];
-	int b;
-	int a;
-} logrec;
-// SIZE 0x6c
+#include "g_9ba3a0.h"
 
 extern logrec g_9ba3a0[15];
 extern int g_9ba9f4;
