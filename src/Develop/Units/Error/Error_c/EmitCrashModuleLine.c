@@ -9,16 +9,21 @@
 
 char* __cdecl GetDebugRecordByIndex(char* arg1, unsigned int arg2);
 
-/* "\r\n" and " ", at 0x10027314 and 0x10027328.  Both addresses fall INSIDE
- * g_crashdump_data_10027104, which spans 0x10027104..0x1002733c and already
- * carries these exact bytes at offsets 528 and 548.  The reference has ONE
- * copy; defining them separately here emitted a second, and pushed every
- * later symbol in the section.  Alias into the blob instead. */
-extern char g_crashdump_data_10027104[568];
-#define g_crash_newline (g_crashdump_data_10027104 + 528)
-#define g_crash_space   (g_crashdump_data_10027104 + 548)
-#define g_crash_arrow   (g_crashdump_data_10027104 + 552) /* REF 0x1002732c */
-#define g_crash_unknown (g_crashdump_data_10027104 + 560) /* REF 0x10027334 */
+/* The crash-log strings from 0x10027318 to 0x1002733c.  They follow
+ * CrashDumpUnhandledExceptionFilter.c's two separator literals, which that
+ * file emits as string COMDATs after its own data, so they are defined in
+ * this TU, the next object in the link.  0x10027314 is the "\r\n" literal
+ * itself: this TU's copy folds into that file's COMDAT. */
+// DATA: SERVER 0x10027318
+char g_crashdump_tail_10027318[36] = {
+	0x5f, 0x5f, 0x63, 0x72, 0x61, 0x73, 0x68, 0x64, 0x75, 0x6d, 0x70, 0x2e,
+	0x6c, 0x6f, 0x67, 0x00, 0x20, 0x00, 0x00, 0x00, 0x2d, 0x2d, 0x3e, 0x20,
+	0x00, 0x00, 0x00, 0x00, 0x3f, 0x3f, 0x3f, 0x20, 0x00, 0x00, 0x00, 0x00,
+};
+#define g_crash_newline "\r\n"                        /* REF 0x10027314 */
+#define g_crash_space   (g_crashdump_tail_10027318 + 16) /* REF 0x10027328 */
+#define g_crash_arrow   (g_crashdump_tail_10027318 + 20) /* REF 0x1002732c */
+#define g_crash_unknown (g_crashdump_tail_10027318 + 28) /* REF 0x10027334 */
 
 unsigned char __cdecl EmitCrashModuleLine(int* st)
 {

@@ -2140,8 +2140,8 @@ size = 4
 ["SERVER.0x10027104"]
 section = ".data"
 name = "g_crashdump_data_10027104"
-type = "char[568]"
-size = 568
+type = "char[500]"
+size = 500
 status = "VERIFIED"
 
 ["SERVER.0x10028bf8"]
@@ -4879,3 +4879,8 @@ section = ".rdata"
 ["GOLDTL.0x00665f78"]
 section = ".rdata"
 
+["SERVER.0x10027318"]
+section = ".data"
+type = "char[36]"
+name = "g_crashdump_tail_10027318"
+size = 36
