@@ -24,8 +24,8 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* player, unsigned char* msg)
 {
 	char buf[0x80];
 
-	sprintf(buf, (char*) 0x1002d858, *(unsigned char*) (msg + 0x10));
-	LogMessageInternal((char*) 0x1002d70c, 0x3a5, buf, 1);
+	sprintf(buf, "lb_ExLobbyServerCommand: %i", *(unsigned char*) (msg + 0x10));
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x3a5, buf, 1);
 	switch (*(int*) (msg + 0x10)) {
 	case 0:
 		return lb_ExPlayerlist(player, msg);

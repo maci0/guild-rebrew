@@ -23,11 +23,11 @@ int __cdecl lb_ExPlayerHasJoined(char* player, char* msg)
 
 	flags = *(unsigned int*) player;
 	if ((flags & 0x4000) != 0) {
-		LogMessageInternal((char*) 0x1002d70c, 0x29a, (char*) 0x1002d740, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x29a, "invalid client state", 1);
 		msg[0] = 2;
 		return cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1 ? -1 : 0;
 	} else if ((flags & 0x2000) == 0) {
-		LogMessageInternal((char*) 0x1002d70c, 0x2a4, (char*) 0x1002d740, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2a4, "invalid client state", 1);
 		msg[0] = 2;
 		return cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1 ? -1 : 0;
 	} else {
@@ -45,7 +45,7 @@ join:
 		}
 	}
 	if (count >= g_max_players) {
-		LogMessageInternal((char*) 0x1002d70c, 0x2b1, (char*) 0x1002d848, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2b1, "Game is full", 1);
 		msg[0] = 2;
 		if (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) {
 			return -1;
@@ -87,14 +87,14 @@ join:
 		}
 	}
 
-	sprintf(buf, (char*) 0x1002d81c, *(unsigned int*) player);
-	LogMessageInternal((char*) 0x1002d70c, 0x2dd, buf, 1);
+	sprintf(buf, "lb_ExPlayerHasJoined: before <<memcpy>>: %i", *(unsigned int*) player);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2dd, buf, 1);
 	memcpy((char*) player + 0x26420c, m14, 87);
-	sprintf(buf, (char*) 0x1002d7f0, *(unsigned int*) player);
-	LogMessageInternal((char*) 0x1002d70c, 0x2e2, buf, 1);
+	sprintf(buf, "lb_ExPlayerHasJoined: after <<memcpy>>: %i", *(unsigned int*) player);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2e2, buf, 1);
 	*(unsigned int*) player &= ~0x2000;
-	sprintf(buf, (char*) 0x1002d7b4, *(unsigned int*) player);
-	LogMessageInternal((char*) 0x1002d70c, 0x2e7, buf, 1);
+	sprintf(buf, "lb_ExPlayerHasJoined: before <<srv_PutConnSCommand>>: %i", *(unsigned int*) player);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2e7, buf, 1);
 
 	for (slot = (PlayerSlot*) 0x101deb00;
 	     (int) slot < 0x114ffe20;
@@ -107,7 +107,7 @@ join:
 		}
 	}
 
-	sprintf(buf, (char*) 0x1002d788, *(unsigned int*) player);
-	LogMessageInternal((char*) 0x1002d70c, 0x2ef, buf, 1);
+	sprintf(buf, "lb_ExPlayerHasJoined: status on exit: %i", *(unsigned int*) player);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2ef, buf, 1);
 	return 0;
 }

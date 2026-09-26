@@ -34,10 +34,10 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 	}
 	entity = entity & 0xffff;
 	if (entity == 0xffff) {
-		LogMessageInternal((char*)0x1002c748, 0x290f, (char*)0x1002cbd4, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x290f, "gm_AllocSpieler() failed", 1);
 		return 1;
 	}
-	LogMessageInternal((char*)0x1002c748, 0x2917, (char*)0x1002cbbc, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2917, "ClientSpieler erzeugt", 1);
 	off = entity * 0x21c;
 	hash_index = 0x99099 * (unsigned char)*(char*)(cmd + 3);
 	*(int*)(0x10442d00 + hash_index * 4) = *(int*)(g_slot_table + off + 4);

@@ -8,12 +8,6 @@ char* __cdecl gm_AllocObjekt(int, int, int);
 extern int __cdecl rand(void);
 extern char g_entity_state_base[2];
 
-// DATA: SERVER 0x1002d364
-char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[] = "cm_ExAllocCharacter():gm_AllocSpieler() failed";
-
-// DATA: SERVER 0x1002d394
-char s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394[] = "Invalid 'GI_Id' for cmdt_ALLOC_CHARACTER in cm_ExecCommand()";
-
 /* Execution handler: creates a new citizen (Buerger) entity.
  * Seeds RNG state into the command packet, resolves the GI_Id
  * family filter, allocates the entity, links it to its home
@@ -23,7 +17,6 @@ char s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394[] = "Invalid 'GI_Id' for cmdt_A
 // GLOBAL: SERVER 0x100358a4
 extern int g_entity_id_field; /* 0x100358A4 */
 extern unsigned char g_slot_table[2];
-extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
 /* Round-536: ascending REF VA decl order (R521/R531–R535 mid-pocket lever; 2-string cluster). */
 // FUNCTION: GOLDTL 0x44c460
 // SIZE: 441
@@ -47,8 +40,8 @@ int __cdecl cm_ExCreateCitizen(int cmd, char* result)
 		field = gm_GetFieldByType((char *) cmd, *(int *) (cmd + 0x17));
 		*(int *) (cmd + 0x17) = field;
 		if (gm_StartFilteredEntitySearch(1, 1, field) == 0) {
-			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x5246,
-			                   s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x5246,
+			                   "Invalid 'GI_Id' for cmdt_ALLOC_CHARACTER in cm_ExecCommand()", 1);
 			return 1;
 		}
 	}
@@ -57,8 +50,8 @@ int __cdecl cm_ExCreateCitizen(int cmd, char* result)
 	    *(unsigned char *) (cmd + 0x1f), *(unsigned char *) (cmd + 0x20), 0);
 	entity = entity & 0xffff;
 	if (entity == 0xffff) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x525a,
-		                   s_cm_ExAllocCharacter___gm_AllocSp_1002d364, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x525a,
+		                   "cm_ExAllocCharacter():gm_AllocSpieler() failed", 1);
 		return 1;
 	}
 	if (*(int *) (cmd + 0x1b) != -1) {

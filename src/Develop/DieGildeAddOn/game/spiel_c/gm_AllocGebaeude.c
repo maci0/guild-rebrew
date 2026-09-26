@@ -58,7 +58,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	s.flag = 0;
 	geb = (char*) gm_SearchStruct();
 	if (geb == NULL) {
-		LogMessageInternal((char*) 0x10031004, 0x10cb, (char*) 0x10031454, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x10cb, "gm_AllocGebaeude(): geb overflow HELP !!!!!!", 1);
 		return NULL;
 	}
 	{
@@ -77,9 +77,9 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		 * base/index operands of the 0x600 table fill. */
 		nid = g_next_object_id;
 		s.record = rec;
-		sprintf(s.msg, (char*) 0x10031438, nid, s.type_id);
+		sprintf(s.msg, "----->GebID= %i GebProt= %i", nid, s.type_id);
 	}
-	LogMessageInternal((char*) 0x10031004, 0x10d8, s.msg, 8);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x10d8, s.msg, 8);
 	*(int*) (geb + 1) = *(int*) 0x10030b6c;
 	g_next_object_id = g_next_object_id + 1;
 	*(unsigned short*) (geb + 0x25) = (unsigned short) owner;
@@ -224,7 +224,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		 * reloads `mov ecx,[esi+0x71]` because the intervening char store may
 		 * alias the field.  Keeping a second copy in `s.record` was an extra
 		 * store plus three extra reloads. */
-		*(int*) (geb + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x10031428);
+		*(int*) (geb + 0x71) = (int) m_AllocTracked(0x600, "f3_gm:PlantMap");
 		/* 0x40 entries of 0x18 bytes, indexed: c2 strength-reduces the index
 		 * and emits the reference's `[eax+edx-0xb]` operand order. */
 		for (geb_type = 0; geb_type < 0x40; geb_type++) {
@@ -267,7 +267,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	case 0x4c:
 	case 0x4d:
 		{
-			char* rec = (char*) m_AllocTracked(0x3c, (const char*) 0x1002d504);
+			char* rec = (char*) m_AllocTracked(0x3c, "AHM_INFO");
 			*(int*) (geb + 0x65) = (int) rec;
 			*(int*) rec = -1;
 		}

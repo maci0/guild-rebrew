@@ -63,7 +63,7 @@ void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int f
 
 extern unsigned char g_connections[]; /* 0x101deb00: 8 slots of 0x264264 */
 extern unsigned int g_download_slots[8]; /* 0x101deac8 */
-extern char g_module_path[]; /* 0x101de9a0 */
+extern char g_module_path[0x104]; /* 0x101de9a0 */
 extern int g_current_year; /* 0x10035880 */
 extern unsigned int g_download_buffer; /* 0x101deae8 */
 extern int g_players_synced; /* 0x11764090: every player sent 0x20 */
@@ -106,16 +106,16 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 	module_path = (char*) g_module_path;
 	GetModuleFileNameA(0, module_path, 0x104);
 	ini_tail = strrchr(module_path, 0x5c);
-	*(unsigned int*) (ini_tail + 0) = *(unsigned int*) 0x1002993c;
-	*(unsigned int*) (ini_tail + 4) = *(unsigned int*) 0x10029940;
-	*(unsigned short*) (ini_tail + 8) = *(unsigned short*) 0x10029944;
+	*(unsigned int*) (ini_tail + 0) = *(unsigned int*) "\\game.ini";
+	*(unsigned int*) (ini_tail + 4) = *(unsigned int*) ("\\game.ini" + 4);
+	*(unsigned short*) (ini_tail + 8) = *(unsigned short*) ("\\game.ini" + 8);
 
-	g_tick_rate = (int) GetPrivateProfileIntA((char*) 0x1002992c, (char*) 0x10029934, 0x1d6b, module_path);
+	g_tick_rate = (int) GetPrivateProfileIntA("Config", "Port", 0x1d6b, module_path);
 	g_max_players = 2;
 	GetPrivateProfileStringA(
-		(char*) 0x100298f8,
-		(char*) 0x10029900,
-		(char*) 0x1002990c,
+		"General",
+		"GamePath",
+		"\\project\\diegildeaddon\\game\\",
 		(char*) 0x10029594,
 		0x104,
 		module_path
@@ -133,8 +133,8 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 	}
 
 	srv_Init();
-	sprintf(log_buffer, (char*) 0x100298d8, *(int*) &g_max_players);
-	LogMessageInternal((char*) 0x100298b0, 0x131, log_buffer, 1);
+	sprintf(log_buffer, "Waiting for %li Connection(s)\n", *(int*) &g_max_players);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x131, log_buffer, 1);
 
 	srand(timeGetTime());
 	last_announce_tick = 0;
@@ -163,7 +163,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 					goto lobby_check_announce;
 				}
 			}
-			LogMessageInternal((char*) 0x100298b0, 0x14e, (char*) 0x10029890, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x14e, "SERVER>>>> ALL PLAYER ARE READY", 1);
 		}
 
 	lobby_check_announce:
@@ -175,12 +175,12 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 		}
 
 		if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
-			LogMessageInternal((char*) 0x100298b0, 0x15f, (char*) 0x1002986c, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x15f, "Datatransfer failed => terminating", 1);
 			goto cleanup_and_exit;
 		}
 
 		if ((unsigned int) ProcessSendData() == 0xffffffff) {
-			LogMessageInternal((char*) 0x100298b0, 0x16a, (char*) 0x1002986c, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x16a, "Datatransfer failed => terminating", 1);
 			goto cleanup_and_exit;
 		}
 
@@ -188,7 +188,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 		do {
 			if ((*player_slot & 0x1000) != 0) {
 				if ((*player_slot & 0x400) != 0) {
-					LogMessageInternal((char*) 0x100298b0, 0x176, (char*) 0x10029834, 1);
+					LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x176, "Terminating, serving host requested <<END OF SESSION>>", 1);
 					goto cleanup_and_exit;
 				}
 				cm_ClosePlayerConnection(player_slot);
@@ -249,7 +249,7 @@ send_start_commands:
 		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 	} while ((int) player_slot < (int) (g_connections + 0x1321320));
 
-	LogMessageInternal((char*) 0x100298b0, 0x1ca, (char*) 0x10029824, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x1ca, "Receiving Data\n", 1);
 	phase_complete = 0;
 	while (phase_complete == 0) {
 		if (*(int*) &g_handler_started != 0) {
@@ -275,12 +275,12 @@ send_start_commands:
 
 	wait_start_io:
 		if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
-			LogMessageInternal((char*) 0x100298b0, 0x1df, (char*) 0x1002986c, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x1df, "Datatransfer failed => terminating", 1);
 			goto cleanup_and_exit;
 		}
 
 		if ((unsigned int) ProcessSendData() == 0xffffffff) {
-			LogMessageInternal((char*) 0x100298b0, 0x1df, (char*) 0x1002986c, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x1df, "Datatransfer failed => terminating", 1);
 			goto cleanup_and_exit;
 		}
 
@@ -288,9 +288,9 @@ send_start_commands:
 	}
 
 	srv_RecvGame();
-	LogMessageInternal((char*) 0x100298b0, 0x1f9, (char*) 0x1002980c, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x1f9, "Initializing Client(s)\n", 1);
 	if ((*(unsigned char*) &g_host_flags & 4) == 0) {
-		LogMessageInternal((char*) 0x100298b0, 0x1ff, (char*) 0x100297fc, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x1ff, "Sending data...", 1);
 		phase_complete = 0;
 		while (phase_complete == 0) {
 			phase_complete = 1;
@@ -323,7 +323,7 @@ send_start_commands:
 							*transfer_progress = *transfer_progress + 0x80;
 						}
 						else {
-							LogMessageInternal((char*) 0x100298b0, 0x228, (char*) 0x100297e4, 1);
+							LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x228, "Error is not critical!\n", 1);
 						}
 
 						sent_bytes = *transfer_progress;
@@ -340,12 +340,12 @@ send_start_commands:
 			} while ((int) transfer_progress < (int) (g_download_slots + 8));
 
 			if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
-				LogMessageInternal((char*) 0x100298b0, 0x23a, (char*) 0x1002986c, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x23a, "Datatransfer failed => terminating", 1);
 				goto cleanup_and_exit;
 			}
 
 			if ((unsigned int) ProcessSendData() == 0xffffffff) {
-				LogMessageInternal((char*) 0x100298b0, 0x23a, (char*) 0x1002986c, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x23a, "Datatransfer failed => terminating", 1);
 				goto cleanup_and_exit;
 			}
 
@@ -370,7 +370,7 @@ send_start_commands:
 	*(void**) &g_download_buffer = (void*) 0;
 	*(unsigned int*) &g_download_total_size = 0;
 	if ((host_flags & 4) == 0) {
-		LogMessageInternal((char*) 0x100298b0, 0x262, (char*) 0x100297bc, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x262, "Waiting for allocation of Player(s)\n", 1);
 		player_slot = (unsigned int*) g_connections;
 		do {
 			if ((*player_slot & 1) != 0) {
@@ -394,12 +394,12 @@ send_start_commands:
 			}
 
 			if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
-				LogMessageInternal((char*) 0x100298b0, 0x278, (char*) 0x1002986c, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x278, "Datatransfer failed => terminating", 1);
 				goto cleanup_and_exit;
 			}
 
 			if ((unsigned int) ProcessSendData() == 0xffffffff) {
-				LogMessageInternal((char*) 0x100298b0, 0x278, (char*) 0x1002986c, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x278, "Datatransfer failed => terminating", 1);
 				goto cleanup_and_exit;
 			}
 
@@ -422,7 +422,7 @@ send_start_commands:
 		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 	} while ((int) player_slot < (int) (g_connections + 0x1321320));
 
-	LogMessageInternal((char*) 0x100298b0, 0x2a8, (char*) 0x100297b0, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x2a8, "Let's go!\n", 1);
 
 	for (;;) {
 		if (*(int*) &g_handler_started != 0) {
@@ -457,7 +457,7 @@ send_start_commands:
 		player_slot = (unsigned int*) g_connections;
 		do {
 			if ((*player_slot != 0) && ((*player_slot & 0x40) != 0)) {
-				LogMessageInternal((char*) 0x100298b0, 0x2ce, (char*) 0x100297a0, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x2ce, "Usefull Sync", 1);
 				*player_slot = *player_slot & 0xffffffbf;
 				if (cm_QueuePlayerCommand(player_slot, (unsigned char*) ((char*) player_slot + 0x264154)) == -1) {
 					goto cleanup_and_exit;
@@ -559,12 +559,12 @@ send_start_commands:
 
 	game_loop_network_io:
 		if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
-			LogMessageInternal((char*) 0x100298b0, 0x348, (char*) 0x1002986c, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x348, "Datatransfer failed => terminating", 1);
 			goto cleanup_and_exit;
 		}
 
 		if ((unsigned int) ProcessSendData() == 0xffffffff) {
-			LogMessageInternal((char*) 0x100298b0, 0x348, (char*) 0x1002986c, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x348, "Datatransfer failed => terminating", 1);
 			goto cleanup_and_exit;
 		}
 

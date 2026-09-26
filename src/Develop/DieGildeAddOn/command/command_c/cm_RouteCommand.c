@@ -14,7 +14,7 @@ int __cdecl cm_RouteCommand(unsigned int* player, unsigned char* msg)
 	int i;
 
 	if ((*player & 0x6000) != 0) {
-		LogMessageInternal((char*) 0x1002d70c, 0x37b, (char*) 0x1002d740, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x37b, "invalid client state", 1);
 		*msg = 2;
 		return (cm_QueuePlayerCommand(player, msg) + 1 == 0) ? -1 : 0;
 	}

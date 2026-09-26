@@ -11,23 +11,10 @@ extern int g_file_version;
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
-extern char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[];
-extern char s_D__Develop_DieGildeAddOn_loadsav_1002d550[];
-extern char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[];
 extern unsigned int ls_ID2Ptr(void);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 
 extern int g_query_limit; 
-
-// DATA: SERVER 0x10031500
-char g_str_10031500[1] = {
-    0x67,
-};
-
-// DATA: SERVER 0x10031538
-char g_str_10031538[1] = {
-    0x67,
-};
 
 // GLOBAL: SERVER 0x1003543c
 extern int g_active_player_count; /* 0x1003543c */
@@ -65,8 +52,8 @@ unsigned int ls_ID2Ptr(void)
 
 	g_entity_table_end = gm_LookupEntityRecordById(g_entity_table_end);
 	if (g_entity_table_end == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_loadsav_1002d550, 0x1016,
-		    s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c", 0x1016,
+		    "ls_ID2Ptr(): Stadtspieler Id not found", 1);
 		return 0;
 	}
 	g_active_player_count = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
@@ -99,8 +86,8 @@ unsigned int ls_ID2Ptr(void)
 		}
 		if (*(int*) (record_cursor + 6) != -1) {
 			if (!gm_ResolveEntityById(&v1, &v2, &v3, *(int*) (record_cursor + 6))) {
-				LogMessageInternal(s_D__Develop_DieGildeAddOn_loadsav_1002d550, 0x1050,
-				    s_ls_ID2Ptr____Houston__wir_haben_e_1002d520, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c", 0x1050,
+				    "ls_ID2Ptr(): Houston, wir haben ein Problem...", 1);
 			} else if (v1 != 0) {
 				node = *(void**) (v1 + 0x5d);
 				if (node == 0) {
@@ -153,31 +140,5 @@ unsigned int ls_ID2Ptr(void)
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
 extern char g_stream_pool[1]; /* 0x10034670 */
 extern int g_stream_count; /* 0x10034678 */
-/* These five definitions are WIDER than the readers use, deliberately.  The
-   consumers (spiel_dumpD.c, gm_StartFilteredEntitySearch.c) declare each as a
-   scalar and the reference bytes at 0x10030b84 -- `ff | ffffffff | ff7f | ff7f
-   | ff` -- confirm those scalar widths are the real layout.  Rewriting these
-   definitions to the matching scalars is semantically right and MEASURED WORSE:
-   `.text` 8,633 -> 8,634 and raw-link `.data` 21,481 -> 21,856 (+375)
-   (round 925).  The array forms emit more of the reference's byte pattern than
-   the correct scalars do, because `.data` is sized by these definitions while
-   the shipped section is blitted from the layout package.  Left as-is on
-   measurement, not on preference -- do not "fix" it again without re-measuring
-   both numbers. */
-char g_filter_extra5[1] = {
-    0xff,
-};
-int g_query_filter_extra1[4] = {
-    0xff, 0xff, 0xff, 0xff,
-};
-int g_query_filter_extra2[4] = {
-    0xff, 0x7f, 0xff, 0x7f,
-};
-short g_query_filter_extra3[2] = {
-    0xff, 0x7f,
-};
-int g_query_filter_extra4[4] = {
-    0xff, 0x00, 0x00, 0x00,
-};
 /* Canonical definition lives in game/spiel_c/gm_NextEntityQueryMatch.c. */
 extern int g_query_filter_owner;

@@ -1,11 +1,11 @@
 #ifndef SAVE_HEADER_TAIL_H
 #define SAVE_HEADER_TAIL_H
 
-/* The 0x1002d4f0/f4/f8 defaults for the savegame header tail, as one
- * object: the three fields are adjacent and always written together.
- * Shared by ls_LoadSavegameHeader.c (reader) and link_stubs.c (the
- * defining emit site). Pack stays in this header; do not include from
- * entity.h (loadsave TUs). */
+/* Layout of the 9-byte savegame header tail ("Savegame" at 0x1002d4f0).
+ * ls_LoadSavegameHeader.c defines the bytes as a char array (a struct
+ * object makes msvc6 8-align the TU's .data, 4 bytes past the reference)
+ * and copies them through this type.  Pack stays in this header; do not
+ * include from entity.h (loadsave TUs). */
 #pragma pack(1)
 // SIZE 0x9
 struct SaveHeaderTail {

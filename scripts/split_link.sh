@@ -96,76 +96,15 @@ python3 scripts/make_split_rsp.py --split "$WORK/split" --objects "$OBJ_RSP" \
     --thunks "$WORK/thunks" --commons "$WORK/commons" --defs "$WORK/defs" \
     --out "$WORK/rsp.rsp"
 
-echo "== fold literals (member string COMDATs the blob already carries)"
-# msvc6 derives a `??_C@...` COMDAT name from the literal's contents and LINK
-# folds COMDATs by name, so re-declaring every member string here makes the
-# linker discard the members' copies: .rdata 0x33b1 -> 0x2fe1, raw 0x4000 ->
-# 0x3000, the reference's.  The generated array lands in `.data`, which
-# postlink overwrites wholesale.  See docs/msvc6-link-layout.md section 3.
-python3 scripts/gen_fold_literals.py --split-dir "$WORK/split" > "$WORK/fold_literals.c"
-rebrew-cmake-cl /nologo /c /O2 /Gd /MT /Fo"$WORK/fold_literals.obj" \
-    "$WORK/fold_literals.c" >/dev/null
-python3 - "$WORK/rsp.rsp" "${WORK#build/}/fold_literals.obj" <<'RSP'
-import shlex, struct, sys
-from pathlib import Path
-
-rsp, obj = Path(sys.argv[1]), sys.argv[2]
-tokens = shlex.split(rsp.read_text())
-
-
-def defines_literal(token):
-    """True if this *member* object defines a `??_C@` COMDAT of its own.
-
-    Game objects are irrelevant to the boundary: if one of ours defines the
-    literal first, the member's copy is discarded either way.  Only a member
-    object winning the name ahead of us breaks the fold.
-    """
-    if not token.endswith(".obj"):
-        return False
-    if not ("split/" in token or "g_rdata_piece" in token or "rdata_restore" in token):
-        return False
-    try:
-        d = (Path("build") / token).read_bytes()
-        symoff = struct.unpack_from("<I", d, 8)[0]
-        nsym = struct.unpack_from("<I", d, 12)[0]
-        strtab = d[symoff + nsym * 18:]
-        for i in range(nsym):
-            e = d[symoff + i * 18:symoff + (i + 1) * 18]
-            if e[:4] == b"\0\0\0\0":
-                off = struct.unpack_from("<I", e, 4)[0]
-                name = strtab[off:].split(b"\0")[0].decode("latin1")
-            else:
-                name = e.split(b"\0")[0].decode("latin1")
-            _v, secno, _t, cls, _a = struct.unpack_from("<IhHBB", e, 8)
-            if cls == 2 and secno > 0 and name.startswith("??_C@"):
-                return True
-    except (OSError, struct.error):
-        pass
-    return False
-
-
-if obj not in tokens:
-    # LINK keeps the FIRST COMDAT of a given name, so this object only has to
-    # precede the first member object that defines a `??_C@` -- not the whole
-    # link.  Everything before that point is game code whose `.data` our array
-    # would otherwise displace: at token 1 it shifted every game symbol by
-    # +0x488; here it shifts almost none (game `.data` is 0x3d4a of 0x3dbb
-    # before the boundary).  Verified both ways -- see msvc6-c-shapes.md #102.
-    pos = next((i for i, t in enumerate(tokens) if defines_literal(t)), 1)
-    tokens.insert(pos, obj)
-    print(f"fold object {obj} inserted at token {pos} (before the first member ??_C@)")
-rsp.write_text(" ".join(tokens))
-RSP
-
 if [ "${REBREW_SKIP_SPLIT_BLOB:-0}" != "1" ]; then
 echo "== split blob (member .rdata sections at their reference offsets)"
-# The sections that cannot fold (___lookuptable, the unnamed pointer tables,
-# the __real@8@ constants, ___dnames/___mnames) have reference offsets *inside*
-# rdata_restore.c's range, which one array cannot express: cut it into pieces
-# around them.  Verified: import directory 0x2778 -> 0x2610, zero mismatching
+# The member .rdata sections the link keeps (string literals, ___lookuptable,
+# the unnamed pointer tables, the __real@8@ constants, ___dnames/___mnames)
+# have reference offsets *inside* rdata_restore.c's range, which one array
+# cannot express: cut it into pieces around them.  Verified: zero mismatching
 # bytes in [0x1a0, 0x2608), .text placement and all four raw sizes unchanged.
-# The remaining 8 bytes of surplus are cvt.obj's `__real@8@0`, which the
-# reference packs at an odd offset - see docs/TODO.md round 133.
+# Only the all-zero literals ("", L"\0") cannot be placed unambiguously;
+# crt_region/rdata_fold.c folds those.
 python3 scripts/split_blob.py --rsp "$WORK/rsp.rsp" --split "$WORK/split" \
     --defs "$WORK/defs" --work "$WORK" --byte-align \
     --blob crt_region/rdata_restore.c.obj
@@ -201,11 +140,13 @@ echo "== data gap for this composition"
 # the first guess.
 DATA_RAW=0xe000
 GAP=0x6b34
+ZZ=0
 emit_gap_blob() {
-python3 - "$GAP" "$WORK/data_restore_split.c" <<'BLOB'
+python3 - "$GAP" "$WORK/data_restore_split.c" "$ZZ" <<'BLOB'
 import struct, sys
 from pathlib import Path
 size = int(sys.argv[1], 0)
+zz = int(sys.argv[3], 0)  # bytes .data$zz takes at the end of the section
 out = Path(sys.argv[2])
 ref = Path("original/Server/server.dll").read_bytes()
 pe = struct.unpack_from("<I", ref, 0x3C)[0]
@@ -217,7 +158,7 @@ for i in range(count):
         raw = struct.unpack_from("<I", ref, off + 16)[0]
         ptr = struct.unpack_from("<I", ref, off + 20)[0]
         break
-blob = ref[ptr + raw - size : ptr + raw]
+blob = ref[ptr + raw - zz - size : ptr + raw - zz]
 lines = [f"unsigned char g_data_restore_gap[0x{size:x}] = {{"]
 for i in range(0, len(blob), 16):
     lines.append("\t" + ",".join(f"0x{b:02x}" for b in blob[i : i + 16]) + ",")
@@ -262,7 +203,11 @@ cmd=$(sed "s#@CMakeFiles/server_dll.dir/objects1.rsp#@${RSP_PAD#build/}#;
 ( cd build && eval "$cmd" >/dev/null 2>&1 )
 blob_at=$(sed -n 's/^ 0003:\([0-9a-f]*\) *_g_data_restore_gap .*/\1/p' build/split_poc.map)
 [ -n "$blob_at" ] || { echo "g_data_restore_gap missing from build/split_poc.map"; exit 1; }
-want=$((DATA_RAW - 0x$blob_at))
+# rdata_fold.c's literals sit in .data$zz, which the linker groups after the
+# blob (4-aligned); leave room for them so the section still ends at DATA_RAW.
+zz=$(sed -n 's/^ 0003:[0-9a-f]* \([0-9a-f]*\)H \.data\$zz .*/\1/p' build/split_poc.map)
+ZZ=$(( (0x${zz:-0} + 3) & ~3 ))
+want=$((DATA_RAW - 0x$blob_at - ZZ))
 [ "$want" -gt 0 ] || { echo "game .data runs past $DATA_RAW (blob at 0x$blob_at)"; exit 1; }
 if [ "$want" -ne $((GAP)) ]; then
     echo "data gap: blob starts at 0x$blob_at, GAP $GAP -> $(printf '0x%x' "$want"); relinking"

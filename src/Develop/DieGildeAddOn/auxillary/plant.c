@@ -1,6 +1,26 @@
 #include "../../Units/Error/error.h"
 int __cdecl find_zone_record(char* base, int x, int y);
 
+/* Plant records (TANNE, BUCHE, EICHE) and a zero-id terminator, walked by
+ * lb_SearchRecordTable.  A struct object 8-aligns this TU's .data, which the
+ * reference shows (four zero bytes at 0x1002d874). */
+// SIZE 0x46
+typedef struct {
+	unsigned short id;   /* +0x00 */
+	char name[0x40];     /* +0x02 */
+	unsigned char f42;   /* +0x42 */
+	unsigned char f43;   /* +0x43 */
+	unsigned short f44;  /* +0x44 */
+} PLANT_INFO;
+
+// GLOBAL: SERVER 0x1002d878
+PLANT_INFO g_plant_info_table[4] = {
+	{ 0x1b7, "TANNE", 3, 1, 4 },
+	{ 0x1b8, "BUCHE", 5, 1, 4 },
+	{ 0x1b9, "EICHE", 5, 2, 8 },
+	{ 0, "", 0, 1, 0 },
+};
+
 // DATA: SERVER 0x1002d990
 char s_plt_SetPlantMap____Could_not_fin_1002d990[] = "plt_SetPlantMap(): Could not find map-entry!";
 
@@ -10,8 +30,107 @@ char s_D__Develop_DieGildeAddOn_auxilla_1002d9c0[] = "D:\\Develop\\DieGildeAddOn
 // DATA: SERVER 0x1002d9ec
 char s_plt_SetPlantMap____Map_is_not_al_1002d9ec[] = "plt_SetPlantMap(): Map is not alloced or PlantInfo not found...";
 
-// GLOBAL: SERVER 0x1002d878
-extern int g_plant_info_table; /* 0x1002d878 */
+/* 0x58 pairs read by plt_TableLookup through their raw address; a struct
+ * array, 8-aligned like the reference (four zero bytes at 0x1002da2c). */
+// SIZE 0x8
+typedef struct {
+	int first;
+	int second;
+} PLANT_PAIR;
+
+// DATA: SERVER 0x1002da30
+PLANT_PAIR g_plant_pair_table_1002da30[0x58] = {
+	{ 0, 0 },
+	{ 0x320008, 0 },
+	{ 0x4b000c, 0 },
+	{ 0x7d0014, 0 },
+	{ 0x80000, 0 },
+	{ 0xc0000, 0 },
+	{ 0xf0000, 0 },
+	{ 0x140000, 0 },
+	{ 0xa0000, 0x30000 },
+	{ 0xf0000, 0x90000 },
+	{ 0x190000, 0x100000 },
+	{ 0x140000, 0x140006 },
+	{ 0x1e0000, 0x3c0009 },
+	{ 0x2d0000, 0x6e000c },
+	{ 0x1e0000, 0xa0000 },
+	{ 0x2d0000, 0x1e0000 },
+	{ 0x460000, 0x3c0000 },
+	{ 0xa0000, 0xa0000 },
+	{ 0x140000, 0x1e0000 },
+	{ 0x190000, 0x3c0000 },
+	{ 0x1e0000, 0xf0003 },
+	{ 0x2d0000, 0x320006 },
+	{ 0x500000, 0x780009 },
+	{ 0x1e0000, 0x140003 },
+	{ 0x320000, 0x320005 },
+	{ 0x4b0000, 0x640006 },
+	{ 0x1e0000, 0xf0000 },
+	{ 0x320000, 0x230000 },
+	{ 0x4b0000, 0x460000 },
+	{ 0, 0 },
+	{ 0x1e0000, 0x1e000a },
+	{ 0x1e0000, 0x1e000a },
+	{ 0x1e0000, 0x1e000a },
+	{ 0x1e0000, 0x140003 },
+	{ 0x320000, 0x320005 },
+	{ 0x4b0000, 0x640006 },
+	{ 0x140000, 0x50000 },
+	{ 0x280000, 0xa0000 },
+	{ 0x640000, 0x140000 },
+	{ 0x1e0000, 0x1e000c },
+	{ 0xa0000, 0 },
+	{ 0x1e0000, 0x140003 },
+	{ 0x320000, 0x320005 },
+	{ 0x4b0000, 0x640006 },
+	{ 0x1e0000, 0x140008 },
+	{ 0x320000, 0x28000a },
+	{ 0x4b0000, 0x50000c },
+	{ 0x1e0000, 0x140003 },
+	{ 0x320000, 0x320005 },
+	{ 0x4b0000, 0x640006 },
+	{ 0x1e0000, 0x140003 },
+	{ 0x320000, 0x320005 },
+	{ 0x4b0000, 0x640006 },
+	{ 0x1e0000, 0x190004 },
+	{ 0x320000, 0x280005 },
+	{ 0x500000, 0x460006 },
+	{ 0x140000, 0x50000 },
+	{ 0x280000, 0xa0000 },
+	{ 0x500000, 0x140000 },
+	{ 0x140000, 0x50000 },
+	{ 0x280000, 0xa0000 },
+	{ 0x500000, 0x140000 },
+	{ 0x140000, 0x50000 },
+	{ 0x280000, 0xa0000 },
+	{ 0x500000, 0x140000 },
+	{ 0x140000, 0x50000 },
+	{ 0x280000, 0xa0000 },
+	{ 0x500000, 0x140000 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+};
+// GLOBAL: SERVER 0x1002dcf0
+int g_plant_flag_1002dcf0 = 1;
 
 // GLOBAL: SERVER 0x1003540c
 extern int g_dynamic_count;
@@ -31,8 +150,6 @@ extern int g_dynamic_count;
 // FUNCTION: SERVER 0x10014ee0
 // SIZE: 69
 
-extern int g_plant_info_table; /* 0x1002d878 */
-
 char* __cdecl lb_SearchRecordTable(int key)
 {
 	unsigned int idx;
@@ -45,7 +162,6 @@ char* __cdecl lb_SearchRecordTable(int key)
 	}
 	return 0;
 }
-
 
 // FUNCTION: GOLD 0x4bc5f0
 // SIZE: 80
@@ -228,4 +344,3 @@ int __cdecl plt_TableLookup(int index, int* out)
 	*(int*) ((char*) out + 4) = *(int*) (0x1002DA34 + index * 8);
 	return 1;
 }
-int g_plant_info_table = 0x415401b7;

@@ -8,9 +8,6 @@ extern char* g_item_def_table; /* 0x101de450, attested in rebrew-data.toml */
 extern unsigned char g_current_season;
 extern unsigned char g_connections[]; /* 0x101deb00 */
 
-extern char g_error_msg_sell_no_source[];
-extern char g_error_msg_sell_failed[];
-
 short* __cdecl gm_ResolveParentEntity(short*);
 int __cdecl compute_size(char*, int);
 int __cdecl gm_RemoveObjectWrapper(int, uint);
@@ -18,15 +15,6 @@ void* __cdecl gm_AddObjekt(int, uint, int);
 void* __cdecl gm_AllocRaum(char*, uint);
 int __cdecl sprintf(char*, const char*, ...);
 
-extern char s_cm_ExSellObjekt___Invalid__quell_1002cec4[];
-extern char s_cm_ExSellObjekt___Invalid__gm_ev_1002ce90[];
-extern char s_cm_ExSellObjekt____Object_not_fo_1002ce4c[];
-extern char s_cm_ExSellObjekt___Not_enough_Obj_1002cdfc[];
-extern char s_cm_ExSellObjekt___Invalid__ziel__1002cdcc[];
-extern char s_cm_ExSellObjekt___Lager_voll_1002cdac[];
-extern char s_cm_ExSellObjekt___Not_enough_Cre_1002cd78[];
-extern char s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0[];
-extern char s_cm_ExSellObjekt____gm_AllocObjek_1002cce8[];
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
@@ -268,7 +256,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				if ((uint)gm_GetMsgField((int)source_dynamic_entity, (int)source_object) -
 					((uint)(compute_size((char*)source_dynamic_entity, (int)*(ushort*)source_object) * *(int*)(source_object + 0xe)) >> 2) <
 					(uint)*(int*)(cmd + 0x1f)) {
-					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d79, g_error_msg_sell_failed, 8);
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d79, "cm_ExSellObjekt() Verkaufslimit \374berschritten", 8);
 					return 1;
 				}
 			}
@@ -315,7 +303,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				if (source_existing_entity != (void*)0) {
 					gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(cmd + 0x18));
 				} else {
-					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2def, g_error_msg_sell_no_source, 8);
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2def, "cm_ExSellObjekt(): Quell-Besitzer ist kein Geb\344ude", 8);
 					return 1;
 				}
 			} else {

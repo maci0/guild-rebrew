@@ -84,7 +84,14 @@ RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
 # the link produced -- and this gate, guarding .text alone, could not see .data
 # move at all.  Three rounds of data work were invisible to it.  Guard the raw
 # link's own .data so progress there is measured and regressions there caught.
-DATA_BASELINE=${DATA_BASELINE:-16415}
+# 15,787: server.c block 0x1002956c..0x10029ac0 defined in reference order.
+# 7,807: aemter tables, alchemy tables, command speed pair and dispatch table.
+# 5,309: command, loadsave and lobby strings as literals in first-use order.
+# 2,920: plant tables, spiel.c named block (spiel_data.c) and spiel literals.
+# 2,370: fold literals in .data$zz, after the library .data instead of inside it.
+# 2,012: library string literals placed in .rdata by split_blob, not folded.
+# 1,253: the tail blob holds the reference bytes up to where .data$zz starts.
+DATA_BASELINE=${DATA_BASELINE:-1253}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:

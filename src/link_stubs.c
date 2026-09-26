@@ -28,20 +28,19 @@ int fcn_1001a6a1 = 0;
  * gv_ExtendProductionTime.c called it as a function, so the link resolved
  * those calls to a data address.  Both now call gm_SubObjectNoKill directly.
  * (scripts/gen_link_stubs.py no longer exists; edit by hand.) */
-float g_output_share[] = {0.0f};
-int g_field_worker_count[] = {0};
-int g_field_entry_count[] = {0};
+float g_output_share[1] = {0.0f};
+int g_field_worker_count[4] = {0};
+int g_field_entry_count[4] = {0};
 char g_1002d444 = 0;
 char g_1002d45c = 0;
 char g_1002d474 = 0;
 int g_1002d4f0 = 0;
 int g_1002d4f4 = 0;
 char g_1002d4f8 = 0;
-char s_ls_tmp_1002d4fc = 0;
 char g_10031004[1] = {0};
 char g_10031484[1] = {0};
 char g_100314b8[1] = {0};
-unsigned short* g_entity_table_end = 0;
+
 int g_current_year = 0;
 int g_recv_game_buffer = 0;
 unsigned char* g_EntityListStart = 0;
@@ -57,7 +56,6 @@ unsigned char g_SearchFlag = 0;
 void* g_SomeGlobal = 0;
 char* g_action_table_base = 0;
 int g_active_player_count = 0;
-int g_alchemy_entity_table[1] = {0};
 int g_alloc_counter = 0;
 int g_alloc_root_count = 0;
 int g_alloc_root_count_max = 0;
@@ -67,7 +65,6 @@ int g_alloc_root_name_4 = 0;
 int g_alloc_root_size_max = 0;
 int g_alloc_root_size_total = 0;
 char* g_array_base = 0;
-unsigned char g_byte_table_30861 = 0;
 int g_console_handle = 0;
 float g_const_42_0 = 0;
 float g_const_1_over_32767 = 0;
@@ -75,20 +72,16 @@ float g_const_1_over_32767 = 0;
  * 0x10028938, now DEFINED in Units/m_alloc/m_alloc.c as the real 8-byte string.
  * Zeroed stubs here put them at 0x100366dc and left the reference's eight bytes
  * missing from .data entirely. */
-int g_dispatch_table[1] = {0};
-int g_dispatch_table_a[] = {0};
-int g_dispatch_table_b[] = {0};
+int g_dispatch_table_a[1] = {0};
+int g_dispatch_table_b[1] = {0};
 int g_dynamic_count = 0;
 int g_dynasty_field_2c = 0;
 int gm_CurrentHumanFamilyCount = 0;
 char* g_item_def_table = 0;
-int g_entity_id_counter = 0;
-int g_query_state_a0c[768] = {0};
-int g_file_version = 0;
+unsigned int g_query_state_a0c[768] = {0};
 float g_const_1_0 = 0;
 float g_const_neg_1_0 = 0;
 float g_const_0_0 = 0;
-int g_game_speed_value = 0;
 float g_gv_const_5680 = 0;
 float g_gv_const_57c4 = 0;
 float g_gv_const_57c8 = 0;
@@ -98,9 +91,7 @@ char g_msg_buf[1] = {0};
 int g_net_socket = 0;
 int g_object_count = 0;
 char g_office_slots[0x3f0];
-int g_plant_info_table = 0;
-int g_query_filter_max_id = 0;
-unsigned short g_query_filter_type = 0;
+
 int g_query_limit = 0;
 short g_record_table[1] = {0};
 int g_save_extra_70 = 0;
@@ -108,7 +99,6 @@ int g_save_extra_74 = 0;
 int g_save_extra_field = 0;
 int g_save_info[2] = {0};
 int g_sequence_counter = 0;
-unsigned char g_stat_b_array[1] = {0};
 char* g_table = 0;
 int vfs_CleanupSubobject = 0;
 int vfs_CompressBlock = 0;
@@ -123,7 +113,7 @@ int vfs_WriteBufferLocked = 0;
  * identity.  Real sparse layout (8 slots at 0x101deb00) is the data-restore
  * TU's job; sizes here just need to fit the .data VS and stay in range.) */
 char g_connections[0x264264] = {0};
-char g_player_slot_field[4] = {0};
+unsigned int g_player_slot_field = 0;
 char g_player_slot_overflow[0x264264] = {0};
 
 /* BSS tail pad: grows .data VS to the original's 0x174059c (zero-init -> .bss).
@@ -137,7 +127,6 @@ char g_player_slot_overflow[0x264264] = {0};
 unsigned char g_bss_tail[0x1266c94] = {0};
 
 /* String literal globals */
-char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";
 
 /* Special forwarding stubs */
 extern int __stdcall ServerMainThread(void*);
@@ -160,12 +149,10 @@ int g_worker_entry_count = 0;
 /* GROUP B: game memset/memmove (0x10021240 / 0x1001b200) - stubs until the
  * crt mem TUs are reversed; postlink rewrites call targets to the reference
  * VAs. */
-int g_field_worker_count_wt0[] = {0};
-int g_field_worker_count_wt1[] = {0};
-int g_field_worker_count_wt2[] = {0};
-int g_field_worker_count_wt3[] = {0};
-int g_producer_id_table = 0;
-void* g_crash_callback = 0;
+int g_field_worker_count_wt0[4] = {0};
+int g_field_worker_count_wt1[4] = {0};
+int g_field_worker_count_wt2[4] = {0};
+int g_field_worker_count_wt3[4] = {0};
 char g_crash_dump_all_frames = 0;
 int g_10034624 = 0;
 int g_10034628 = 0;
@@ -186,19 +173,16 @@ int g_117640bc = 0;
 int g_117640c0 = 0;
 int g_117640c4 = 0;
 int g_owner_window = 0;
-int g_const_21_0 = 0;
+float g_const_21_0 = 0;
 int g_download_received = 0;
 unsigned int g_download_buffer = 0;
 unsigned int g_download_total_size = 0;
-int g_download_slots = 0;
-unsigned char g_entity_base[] = {0};
-char g_entity_end[] = {0, 0, 0, 0};
+unsigned int g_download_slots[8] = {0};
+unsigned char g_entity_base[1] = {0};
+int g_entity_end = 0;
 unsigned char* g_entity_ptr = 0;
 /* Sell msgs: real .data strings (ExSell imm32); overlay GLOBAL on alchemistry_logic2.c */
-char g_error_msg_sell_failed[] = "cm_ExSellObjekt() Verkaufslimit \xfc" "berschritten";
-char g_error_msg_sell_no_dest[] = "cm_ExSellObjekt(): Ziel-Besitzer ist kein Geb\xe4ude";
-char g_error_msg_sell_no_source[] = "cm_ExSellObjekt(): Quell-Besitzer ist kein Geb\xe4ude";
-char g_log_buffer[] = {0, 0, 0, 0};
+int g_log_buffer = 0;
 int g_log_file_handle = 0;
 /* g_player_slots_base removed: ExSell uses g_connections@0x101deb00 */
 int g_query_count = 0;
@@ -206,7 +190,6 @@ int g_query_match_count = 0;
 int g_relationship_matrix_primary = 0;
 int g_relationship_matrix_secondary = 0;
 int g_sim_ents = 0;
-int g_office_role_templates = 0;
 /* g_unknown_1de450 removed round 932: it was a SECOND definition of the same
    address as `char* g_item_def_table` above (line 78), and wrongly typed `int`
    against that `char*`.  Two symbols for one .data address is the naming rule's
@@ -214,17 +197,6 @@ int g_office_role_templates = 0;
    the stub region instead of the attested symbol. */
 /* inflate_blocks / inflate_blocks_free are provided by the vendored
  * references/zlib-1.1.3/infblock.c; stubs here would shadow the real ones. */
-int g_chain_handler_table[1] = {0};
-char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[1] = "";
-char s_cm_ChkMoveCredits____Not_enough_m_1002c774[1] = "";
-char s_cm_ExAllocThemaPredigt____Execut_1002d184[1] = "";
-char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[1] = "";
-char s_cm_ExChangeBits___Invalid_Id_1002d114[1] = "";
-char s_cm_ExChangeDesire___Invalid_I_1002d0f4[1] = "";
-char s_cm_ExChangeFloat___Invalid_Id_1002d134[1] = "";
-char s_cm_ExClearLagerslot___Invalid__L_1002d088[1] = "";
-char s_cm_ExClearLagerslot___Lager_has_n_1002d054[1] = "";
-char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[1] = "";
 
 /* --- CRT locale stubs: resolve symbols that would otherwise pull
  * LIBCMT's locale objects (setlocal.obj/getqloc.obj/w_loc.obj/a_loc.obj),
@@ -266,13 +238,12 @@ float g_color_scale = 0;
 int g_entity_id_field = 0;
 unsigned int g_entity_slot_table[] = {0};
 unsigned int g_crc_table_241a0[256] = {0};
-unsigned char g_dynamic_entities[1] = {0};
 char* g_entity_type_table = 0;
 unsigned short* g_query_base = 0;
 int g_players_synced;
 unsigned int g_next_tick_time;
 unsigned char g_host_flags;
-char g_module_path[1];
+char g_module_path[0x104];
 
 /* removed round 1385: this stub displaced LIBCMT.lib(fputc.obj) at
    0x10023890; the reference's _putc is the library body. */
@@ -294,8 +265,6 @@ void* g_thread_handle = 0;
  * they land in .data, whose contents postlink replaces from the reference.
  *
  * `f88` is a dword fmul (float) in the target, unlike its qword neighbours. */
-unsigned char g_stat_table_30ba0[1];
-unsigned char g_stat_table_30dda[1];
 float g_float_const_a0 = 1.0f;
 float g_float_const_b0 = 0.5f;
 float g_float_const_b4 = 0.1f;
@@ -317,12 +286,6 @@ float g_const_0_06875 = 0.06875f;
 float g_const_2_2 = 2.2f;
 float g_const_1_5 = 1.5f;
 float g_const_0_01 = 0.01f;
-
-/* Savegame header tail: the 9 bytes "Savegame\0" copied into the header at
- * +0x9c by ls_LoadSavegameHeader. Layout lives in
- * DieGildeAddOn/loadsave/save_header_tail.h. */
-#include "Develop/DieGildeAddOn/loadsave/save_header_tail.h"
-struct SaveHeaderTail g_save_header_tail = { 0x65766153, 0x656d6167, 0 };
 
 /* Tick rate read from the server ini by ServerMainThread; the binary's
  * initial value is 0 and the profile read overwrites it at startup. */

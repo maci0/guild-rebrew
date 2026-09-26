@@ -15,7 +15,6 @@ extern int g_query_limit;
 extern unsigned char g_slot_table[2];
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
-extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c */
 
 extern int g_citizen_count;
 extern float g_const_1_5; /* 0x10025fb4 */

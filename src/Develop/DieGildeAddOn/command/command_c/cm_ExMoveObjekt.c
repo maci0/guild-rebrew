@@ -55,12 +55,6 @@
  */
 
 /* Round-534: ascending REF VA decl order (R521/R531/R532 mid-pocket lever). */
-// DATA: SERVER 0x1002cfc4
-char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[] = "cm_ExMoveObjekt() Object not found at source";
-// DATA: SERVER 0x1002cff4
-char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[] = "cm_ExMoveObjekt() Invalid 'ziel_besitzer_id'";
-// DATA: SERVER 0x1002d024
-char s_cm_ExMoveObjekt___Invalid__quell_1002d024[] = "cm_ExMoveObjekt() Invalid 'quell_besitzer_id'";
 
 /* Execution handler: moves an object from one inventory slot
  * to another. Validates source and destination entities, then
@@ -81,9 +75,9 @@ int __cdecl cm_ExMoveObjekt(int cmd, char* result)
 	*(int*) (cmd + 0x14) = object_id;
 	if (gm_ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x30a1,
-			s_cm_ExMoveObjekt___Invalid__quell_1002d024,
+			"cm_ExMoveObjekt() Invalid 'quell_besitzer_id'",
 			8
 		);
 		return 1;
@@ -103,9 +97,9 @@ int __cdecl cm_ExMoveObjekt(int cmd, char* result)
 	*(int*) (cmd + 0x10) = object_id;
 	if (gm_ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x30bd,
-			s_cm_ExMoveObjekt___Invalid__ziel__1002cff4,
+			"cm_ExMoveObjekt() Invalid 'ziel_besitzer_id'",
 			1
 		);
 		return 1;
@@ -142,9 +136,9 @@ int __cdecl cm_ExMoveObjekt(int cmd, char* result)
 
 	if (entity_or_node == 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x30f9,
-			s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4,
+			"cm_ExMoveObjekt() Object not found at source",
 			8
 		);
 		return 1;

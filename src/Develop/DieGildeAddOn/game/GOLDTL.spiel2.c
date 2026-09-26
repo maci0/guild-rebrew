@@ -48,7 +48,6 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 short* __cdecl gm_ResolveParentEntity(short*);
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
-extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c */
 extern char s_gm_AddObjekt____obj____ob_NULL_10031390[];
 extern char s_gm_AddObjekt____Parent_not_found_10031358[];
 extern unsigned char* g_EntityListStart;

@@ -108,4 +108,17 @@ typedef struct EntityQueryRecord {
 } EntityQueryRecord;
 #pragma pack(pop)
 
+/* --- Building default objects (0x15 bytes, 1-byte packed) ---
+ *
+ * One record per building type: gm_AllocBuildingDefaults (spiel5.c) matches
+ * the type byte and allocates each non-zero object id.  Defined in
+ * spiel_data.c at 0x10030860. */
+// SIZE 0x15
+#pragma pack(push, 1)
+typedef struct BuildingDefaults {
+    unsigned char building_type;    /* +0x00 */
+    unsigned short object_ids[10];  /* +0x01 */
+} BuildingDefaults;
+#pragma pack(pop)
+
 #endif /* GAME_STRUCTS_H */

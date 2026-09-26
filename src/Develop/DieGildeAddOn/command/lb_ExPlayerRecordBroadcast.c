@@ -14,7 +14,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 	unsigned char* rec;
 
 	if ((*player & 0x6000) != 0) {
-		LogMessageInternal((char*) 0x1002d70c, 0x31d, (char*) 0x1002d740, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x31d, "invalid client state", 1);
 		*msg = 2;
 		result = cm_QueuePlayerCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;

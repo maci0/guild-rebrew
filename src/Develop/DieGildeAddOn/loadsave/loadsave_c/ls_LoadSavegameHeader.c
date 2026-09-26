@@ -32,18 +32,16 @@
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; /* 0x1002d4ec */
-extern char s_ls_tmp_1002d4fc; /* 0x1002d4fc */
 
 #include "../save_header_tail.h"
-// SIZE 0x9
-extern struct SaveHeaderTail g_save_header_tail; /* 0x1002d4f0 */
+extern char g_save_header_tail[]; /* 0x1002d4f0 */
 
 int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 {
 	void* buf;
 	int i;
 
-	buf = m_AllocTracked(0xe100, &s_ls_tmp_1002d4fc);
+	buf = m_AllocTracked(0xe100, "ls:tmp");
 	if (!ls_ReadVfsDataChecked(dest, 4, 1, (void*) stream)) {
 		return 0;
 	}
@@ -145,15 +143,13 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 		}
 	}
 	else {
-		*(struct SaveHeaderTail*) (dest + 0x9c) = g_save_header_tail;
+		*(struct SaveHeaderTail*) (dest + 0x9c) = *(struct SaveHeaderTail*) g_save_header_tail;
 	}
 	return 1;
 }
 
-// GLOBAL: SERVER 0x1002d4f0
-extern struct SaveHeaderTail g_save_header_tail; /* 0x1002d4f0 */
+// GLOBAL: SERVER 0x1002d4ec
+int g_file_version = 0x1005a;
 
-// GLOBAL: SERVER 0x1002d4fc
-extern char s_ls_tmp_1002d4fc; /* 0x1002d4fc */
-struct SaveHeaderTail g_save_header_tail = {0x65766153};
-char s_ls_tmp_1002d4fc = 108;
+// GLOBAL: SERVER 0x1002d4f0
+char g_save_header_tail[] = "Savegame";

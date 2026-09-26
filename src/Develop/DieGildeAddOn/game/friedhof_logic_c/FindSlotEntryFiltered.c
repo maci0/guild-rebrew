@@ -1,16 +1,16 @@
 /* FindSlotEntryFiltered - proper C */
 
 // GLOBAL: SERVER 0x1002577c
-extern int g_field_worker_count_wt0[];
+extern int g_field_worker_count_wt0[4];
 
 // GLOBAL: SERVER 0x1002578c
-extern int g_field_worker_count_wt1[];
+extern int g_field_worker_count_wt1[4];
 
 // GLOBAL: SERVER 0x1002579c
-extern int g_field_worker_count_wt2[];
+extern int g_field_worker_count_wt2[4];
 
 // GLOBAL: SERVER 0x100257ac
-extern int g_field_worker_count_wt3[];
+extern int g_field_worker_count_wt3[4];
 
 // FUNCTION: SERVER 0x10010710
 // SIZE: 320

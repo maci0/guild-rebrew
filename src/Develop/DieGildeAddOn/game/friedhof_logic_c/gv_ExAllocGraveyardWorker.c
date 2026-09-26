@@ -87,7 +87,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 			chosen++;
 		}
 		if (chosen == 0x300) {
-			LogMessageInternal((char*) 0x1002d48c, 0x6ef, (char*) 0x1002d4bc, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\friedhof_logic.c", 0x6ef, "gv_ExAllocGraveyardWorker: array overflow...", 1);
 			return 0xffff;
 		}
 	}

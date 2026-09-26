@@ -323,15 +323,16 @@ void __cdecl InitNewDynastyEntity(int, void*, unsigned short, void*);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl LogMessageInternal(char*, int, char*, int);
 
-static char s_fmt_spid_100315e4[] = "----->SpID= %i playermode= %i";
+/* Named, in the reference's order: as a literal, the SpID format swaps two
+ * stack loads in this function (3681/3689).  The spiel.c path stays a raw
+ * address; gm_InitObjektHersteller emits it. */
 static char s_fmt_playerid_10031570[] =
     "----->PlayerID= %i PlayerName= %s";
-static char s_arr_overflow_10031604[] = "gm_AllocSpieler: array overflow...";
 static char s_bug_10031594[] = "gm_AllocSpieler: bug";
 static char s_family_overflow_100315ac[] =
     "gm_AllocSpieler(): gm_CurrentHumanFamilyCount overflow";
-/* Same bytes as spiel.c s_D__Develop_...@0x10031004 — share that def. */
-extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[];
+static char s_fmt_spid_100315e4[] = "----->SpID= %i playermode= %i";
+static char s_arr_overflow_10031604[] = "gm_AllocSpieler: array overflow...";
 
 /* The five trait bytes at record +0x80 (ahm entity +0x24). */
 // SIZE 0x5
@@ -352,8 +353,8 @@ extern float g_float_const_c4;  /* 0x100256c4: 30.0 */
 extern float g_float_const_c8;  /* 0x100256c8: 7.0 */
 extern float g_float_const_714; /* 0x10025714: 0.25 */
 
-extern unsigned char g_stat_table_30ba0[]; /* 0x10030ba0: 6-byte records, 5 stats + slot[0xd] default */
-extern unsigned char g_stat_table_30dda[]; /* 0x10030dda: 6-byte stat records by arg7 class */
+extern unsigned char g_stat_table_30ba0[780]; /* 0x10030ba0: 6-byte records, 5 stats + slot[0xd] default */
+#define g_stat_table_30dda (g_stat_table_30ba0 + 95 * 6)
 
 extern int g_dynasty_field_2c; /* 0x1003542c */
 extern int gm_CurrentHumanFamilyCount; /* 0x10035430 */
@@ -401,7 +402,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 		g_citizen_count--;
 	}
 	if (idx == 0x300) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2614,
+		LogMessageInternal((char*) 0x10031004, 0x2614,
 		                   s_arr_overflow_10031604, 1);
 		return 0xffff;
 	}
@@ -451,7 +452,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 	slot[0x217] = 0;
 	slot[0x218] = 1;
 	sprintf(work, s_fmt_spid_100315e4, g_next_object_id, type);
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2637, work, 8);
+	LogMessageInternal((char*) 0x10031004, 0x2637, work, 8);
 	*(int*) (slot + 4) = g_next_object_id;
 	g_next_object_id++;
 	*(int*) (slot + 0x1e4) = 0x3f800000; /* 1.0f */
@@ -683,7 +684,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 			 * the increment. */
 			n = gm_CurrentHumanFamilyCount;
 			if (n >= 0x10) {
-				LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x27f0,
+				LogMessageInternal((char*) 0x10031004, 0x27f0,
 				                   s_family_overflow_100315ac, 1);
 				return 0xffff;
 			}
@@ -934,10 +935,10 @@ draw_tail:
 		*stat = (char) (*stat + 0x2a);
 	}
 	if (idx == 0xffff) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x286c, s_bug_10031594,
+		LogMessageInternal((char*) 0x10031004, 0x286c, s_bug_10031594,
 		                   1);
 	}
 	sprintf(work, s_fmt_playerid_10031570, g_next_object_id, slot + 0x30);
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2888, work, 8);
+	LogMessageInternal((char*) 0x10031004, 0x2888, work, 8);
 	return idx;
 }

@@ -26,11 +26,9 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[]; /* 0x1002A0F8 */
 extern int g_game_speed_index; /* 0x1002C3F4 */
 extern int g_file_version; /* 0x1002D4EC */
 // GLOBAL: SERVER 0x1002d4f0
-extern struct SaveHeaderTail g_save_header_tail; /* 0x1002D4F0 */
-extern int g_producer_id_table; /* 0x1002DDE0 */
+extern char g_save_header_tail[]; /* 0x1002D4F0 */
+extern int g_producer_id_table[2720]; /* 0x1002DDE0 */
 extern unsigned char g_query_filter_state; /* 0x10030B9E */
-extern char g_str_10031500[1]; /* 0x10031500 */
-extern char g_str_10031538[1]; /* 0x10031538 */
 extern void * _FPinit; /* 0x100317D8, first init fnptr */
 extern char g_lock_stream_table; /* 0x100317F8, stream lock-pointer table anchor (0x100317f8..0x10031a58, stride 0x20) */
 extern struct rterr_entry g_rterrlist[18]; /* 0x10033EF0, _NMSG_WRITE runtime-error table (0x1001fe31) */
@@ -73,7 +71,7 @@ extern int g_query_match_count; /* 0x100A8C38 */
 extern unsigned int g_entity_slot_table[]; /* 0x100A8C94 */
 extern unsigned char* g_entity_ptr; /* 0x1014D8C0 */
 extern char* g_item_def_table; /* 0x101DE450 */
-extern char g_office_slots[]; /* 0x101DE5A0 */
+extern char g_office_slots[0x3f0]; /* 0x101DE5A0 */
 extern unsigned int g_download_total_size; /* 0x101DEAC0 */
 extern unsigned int g_download_received; /* 0x101DEAC4 */
 extern unsigned int g_download_slots[8]; /* 0x101DEAC8 */
@@ -98,7 +96,7 @@ extern float g_color_scale; /* 0x100256A4 */
 extern float g_float_const_a8; /* 0x100256A8 */
 extern double g_dbl_const_6d0; /* 0x100256D0 */
 // GLOBAL: SERVER 0x10025718
-extern int g_game_speed_table[]; /* 0x10025718 */
+extern int g_game_speed_table[5]; /* 0x10025718 */
 extern float g_const_42_0; /* 0x100257BC */
 extern float g_const_21_0; /* 0x100257C0 */
 extern double g_const_half; /* 0x100257D0 */

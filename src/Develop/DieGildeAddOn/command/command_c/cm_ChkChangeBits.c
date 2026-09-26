@@ -70,7 +70,7 @@ int __cdecl cm_ChkChangeBits(int cmd, char* result)
 	field = gm_GetFieldByType((char*) cmd, *(int *) (cmd + 0x10));
 	*(int *) (cmd + 0x10) = field;
 	if (gm_ResolveEntityById(&ent_a, &entity_or_node, &ent_c, field) == 0) {
-		LogMessageInternal((char*) 0x1002c748, 0x250d, (char*) 0x1002ca54, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x250d, "cm_ChkChangeBits() Invalid Id", 1);
 		return 1;
 	}
 	sel = ent_a ? ent_a : (entity_or_node ? entity_or_node : ent_c);
@@ -84,7 +84,7 @@ int __cdecl cm_ChkChangeBits(int cmd, char* result)
 		return 0;
 	}
 	if (*(int *) ((char*) ent_c + 0x1c8) & 0x800000) {
-		LogMessageInternal((char*) 0x1002c748, 0x2533, (char*) 0x1002ca04, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2533, "cm_ChkChangeBits() Invalid action on player flags <<pef_GELIEBTE already set>>", 1);
 		return 1;
 	}
 	return 0;
