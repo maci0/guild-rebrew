@@ -598,21 +598,6 @@ typedef struct {
 
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
-// GLOBAL: SERVER 0x10031570
-extern char s_fmt_playerid_10031570[];
-
-// GLOBAL: SERVER 0x10031594
-extern char s_bug_10031594[];
-
-// GLOBAL: SERVER 0x100315ac
-extern char s_family_overflow_100315ac[];
-
-// GLOBAL: SERVER 0x100315e4
-extern char s_fmt_spid_100315e4[];
-
-// GLOBAL: SERVER 0x10031604
-extern char s_arr_overflow_10031604[];
-
 // GLOBAL: SERVER 0x101deb00
 extern unsigned char g_connections[];
 // FUNCTION: GOLDTL 0x4193f0

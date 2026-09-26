@@ -22,7 +22,6 @@ extern unsigned char g_slot_table[2];
 int __cdecl gm_FreeObjectListRecursive(char**);
 extern int g_next_object_id; 
 int g_current_year;
-extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; 
 void __cdecl gv_Free3Fields(void* param);
 char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocRaum(char* geb, int obj_id);
@@ -145,7 +144,7 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 	unsigned short* item_ptr;
 	unsigned char* table_ptr;
 
-	table_ptr = &g_byte_table_30861;
+	table_ptr = (unsigned char*) g_building_defaults_10030860[0].object_ids;
 	do {
 		if (*building == *(table_ptr - 1)) {
 			query_result = gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, 0xff);
@@ -425,4 +424,3 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 /* Sets up an entity query with specific parameters. Configures
  * the query state machine for iterating filtered results. */
 
-unsigned char g_byte_table_30861 = 0;

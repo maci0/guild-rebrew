@@ -14,7 +14,6 @@ extern int g_query_limit;
 extern unsigned char g_slot_table[2];
 extern int g_next_object_id; 
 int g_current_year;
-extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; 
 extern int g_citizen_count;
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_WalkEntityChain(int);
@@ -35,8 +34,6 @@ char* __cdecl gm_FindEntityByOwner(int);
 int __cdecl gm_GetMsgField(char*, char*); 
 int __cdecl ahm_LookupEntityInTable(int); 
 
-// DATA: SERVER 0x10031628
-char s_gm_KannObjektHergestellt___pCObj_10031628[] = "gm_eval_SlotVoll(): Lager ist in keinem Geb\344ude";
 // FUNCTION: GOLD 0x00508660
 // SIZE: 77
 // FUNCTION: GOLDTL 0x50b7c0
@@ -655,7 +652,7 @@ int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 	pkt = obj;
 	ent = (char*) gm_EntityAccumulate((void*) pkt);
 	if (ent == NULL) {
-		LogMessageInternal((char*) 0x10031004, 0x31de, (char*) 0x10031628, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x31de, "gm_eval_SlotVoll(): Lager ist in keinem Geb\344ude", 1);
 		return 0;
 	}
 	is_cat2 = (gm_GetBuildingTypeCategory((unsigned char) *ent) == 2);

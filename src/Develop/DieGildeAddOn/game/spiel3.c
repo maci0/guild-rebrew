@@ -55,6 +55,5 @@ extern char* g_entity_type_table; /* 0x100A8C30 */
 extern unsigned char g_slot_table[2];
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
-extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c */
 
 extern int g_citizen_count;

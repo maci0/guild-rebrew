@@ -114,34 +114,34 @@ int __cdecl gm_Open(int map_id)
 	} while ((int) src_player_ptr < (int) 0x100a9bbc);
 	/* 0x100311f0 is "gm_Open(): Geb\344ude" (Latin-1 a-umlaut, byte 0xe4). */
 	LogMessageInternal((char*) 0x10031004, 0x4e3, "gm_Open(): Geb\344ude", 1);
-	g_entity_type_table = (char*) m_AllocTracked(0xca78, (const char*) 0x100311d8);
+	g_entity_type_table = (char*) m_AllocTracked(0xca78, "f3_gm:lpGebaeudePROT");
 	if (g_entity_type_table == 0) {
 		LogMessageInternal((char*) 0x10031004, 0x4e8, "Memory could not be allocated!", 1);
 		return -1;
 	}
-	g_entity_ptr = (unsigned char*) m_AllocTracked(0xa900, (const char*) 0x100311a0);
+	g_entity_ptr = (unsigned char*) m_AllocTracked(0xa900, "f3_gm:lpGebaeudeINST");
 	memset((void*) g_entity_ptr, 0, 0xa900);
 	if (g_entity_ptr == 0) {
 		return -2;
 	}
-	sprintf((char*) path_buf, (char*) 0x1003118c, map_id, (char*) 0x10031194);
+	sprintf((char*) path_buf, "%s%s", map_id, "A_Geb.dat");
 	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
-		LogMessageInternal((char*) 0x10031004, 0x4f5, (char*) 0x10031154, 1);
+		LogMessageInternal((char*) 0x10031004, 0x4f5, "Geb\344ude-Daten konnten nicht geladen werden! (A_Geb.dat)", 1);
 		return -3;
 	}
 	fread((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
 	fclose(file_handle);
-	g_item_def_table = (char*) m_AllocTracked(0xb9dc, (const char*) 0x10031140);
+	g_item_def_table = (char*) m_AllocTracked(0xb9dc, "f3_gm:lpObjektePROT");
 	if (g_item_def_table == 0) {
 		return -4;
 	}
-	g_query_base = (unsigned short*) m_AllocTracked(0x14f218, (const char*) 0x1003112c);
+	g_query_base = (unsigned short*) m_AllocTracked(0x14f218, "f3_gm:lpObjekteINST");
 	if (g_query_base == 0) {
 		return -5;
 	}
 	memset((void*) g_query_base, 0, 0x14f218);
-	sprintf((char*) path_buf, (char*) 0x1003118c, map_id, (char*) 0x10031120);
+	sprintf((char*) path_buf, "%s%s", map_id, "A_Obj.dat");
 	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal(

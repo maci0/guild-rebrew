@@ -87,7 +87,8 @@ RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
 # 15,787: server.c block 0x1002956c..0x10029ac0 defined in reference order.
 # 7,807: aemter tables, alchemy tables, command speed pair and dispatch table.
 # 5,309: command, loadsave and lobby strings as literals in first-use order.
-DATA_BASELINE=${DATA_BASELINE:-5309}
+# 2,920: plant tables, spiel.c named block (spiel_data.c) and spiel literals.
+DATA_BASELINE=${DATA_BASELINE:-2920}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:

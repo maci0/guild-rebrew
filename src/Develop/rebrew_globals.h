@@ -27,10 +27,8 @@ extern int g_game_speed_index; /* 0x1002C3F4 */
 extern int g_file_version; /* 0x1002D4EC */
 // GLOBAL: SERVER 0x1002d4f0
 extern char g_save_header_tail[]; /* 0x1002D4F0 */
-extern int g_producer_id_table; /* 0x1002DDE0 */
+extern int g_producer_id_table[2720]; /* 0x1002DDE0 */
 extern unsigned char g_query_filter_state; /* 0x10030B9E */
-extern char g_str_10031500[1]; /* 0x10031500 */
-extern char g_str_10031538[1]; /* 0x10031538 */
 extern void * _FPinit; /* 0x100317D8, first init fnptr */
 extern char g_lock_stream_table; /* 0x100317F8, stream lock-pointer table anchor (0x100317f8..0x10031a58, stride 0x20) */
 extern struct rterr_entry g_rterrlist[18]; /* 0x10033EF0, _NMSG_WRITE runtime-error table (0x1001fe31) */

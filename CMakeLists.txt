@@ -227,6 +227,7 @@ if(REBREW_BUILD_SERVER)
       --first-va trees.c=0x10006ec0
       --first-va trees2.c=0x10008800
       --first-va zutil.c=0x100092e0
+      --first-va spiel_data.c=0x100156b0
       --exclude gzio.c
       --exclude compress.c --exclude uncompr.c
     OUTPUT_VARIABLE ORDERED_SOURCES

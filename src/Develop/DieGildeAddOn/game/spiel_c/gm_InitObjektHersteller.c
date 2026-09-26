@@ -249,7 +249,7 @@ void __cdecl gm_InitObjektHersteller(void)
 	same_count = 0;
 	run_length = 0;
 
-	LogMessageInternal((char*) 0x10031004, 0x458, (char*) 0x1003102c, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x458, "gm_InitObjektHersteller(): fill tab...", 1);
 
 	/* Indexing through a local base pointer, rather than ten independent
 	 * literal-address stores, lets the second call's argument pushes hoist
@@ -266,7 +266,7 @@ void __cdecl gm_InitObjektHersteller(void)
 	mfr_table[12] = 0x35;
 	mfr_table[9] = 0x14;
 
-	LogMessageInternal((char*) 0x10031004, 0x46d, (char*) 0x10030fb0, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x46d, "gm_InitObjektHersteller(): Initialisiere gm_ObjektNr2MinimalHersteller[Objekte_MAX]", 1);
 
 	record_base = *(char**) 0x100a8c30;
 
@@ -314,7 +314,7 @@ void __cdecl gm_InitObjektHersteller(void)
 		} else {
 			same_count++;
 		}
-		LogMessageInternal((char*) 0x10031004, 0x490, (char*) 0x10030f54, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x490, "gm_InitObjektHersteller(): // ---- Alle Objekte im Geb\344ude-Prototypen durchgehen... ----", 1);
 
 		comp_count = 0;
 		record_base = *(char**) 0x100a8c30;
@@ -382,7 +382,7 @@ void __cdecl gm_InitObjektHersteller(void)
 		byte_offset += 0x24d;
 	} while (byte_offset < 0xca78);
 
-	LogMessageInternal((char*) 0x10031004, 0x4ae, (char*) 0x10030eec, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4ae, "gm_InitObjektHersteller(): Initialisieren der Objekt2MinimalHersteller-Tabelle anhand der Rohstoffe ", 1);
 
 	{
 		int* min_ptr;

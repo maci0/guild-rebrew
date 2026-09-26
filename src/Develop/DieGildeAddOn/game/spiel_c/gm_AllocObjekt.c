@@ -48,11 +48,11 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 		return NULL;
 	}
 	if (parent_id == -1) {
-		LogMessageInternal((char*) 0x10031004, 0xcb2, (char*) 0x10031310, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcb2, "gm_AllocObjekt(): Versuch Objekt au\337erhalb einer Hirachie zu erzeugen", 1);
 		return NULL;
 	}
 	if (gm_ResolveEntityById(&dynamic, &existing, &static_ptr, parent_id) == 0) {
-		LogMessageInternal((char*) 0x10031004, 0xcb8, (char*) 0x100312ec, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcb8, "gm_AllocObjekt(): Parent not found", 1);
 		return NULL;
 	}
 	if (dynamic != NULL) {
@@ -73,14 +73,14 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 			}
 			slot = gm_AllocateObjectSlot();
 			if (slot == NULL) {
-				LogMessageInternal((char*) 0x10031004, 0xcd4, (char*) 0x100312c8, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcd4, "gm_AllocObjekt(): Kein Platz mehr", 1);
 				return NULL;
 			}
 			*(char**) (last + 0x3f) = slot;
 		} else {
 			slot = gm_AllocateObjectSlot();
 			if (slot == NULL) {
-				LogMessageInternal((char*) 0x10031004, 0xcdd, (char*) 0x100312c8, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcdd, "gm_AllocObjekt(): Kein Platz mehr", 1);
 				return NULL;
 			}
 			*(char**) head = slot;
@@ -89,8 +89,8 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 
 	entry = g_item_def_table + (type << 6) + type;
 	*(unsigned short*) slot = (unsigned short) type;
-	sprintf(buffer, (const char*) 0x100312ac, g_next_object_id, type & 0xffff);
-	LogMessageInternal((char*) 0x10031004, 0xcee, buffer, 8);
+	sprintf(buffer, "----->ObjID= %i ObjProt= %i", g_next_object_id, type & 0xffff);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcee, buffer, 8);
 	*(int*) (slot + 2) = g_next_object_id;
 	g_next_object_id++;
 	if (dynamic != NULL) {
@@ -145,7 +145,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 			if (existing != NULL) {
 				walk_id = *(int*) ((char*) existing + 6);
 			} else if (static_ptr != NULL) {
-				LogMessageInternal((char*) 0x10031004, 0xd3d, (char*) 0x1003127c, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xd3d, "gm_AllocObjekt(): Karren in Spieler erzeugt?!?", 1);
 			}
 		}
 		slot[0x28] = 0;

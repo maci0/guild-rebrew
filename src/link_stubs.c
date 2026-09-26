@@ -65,7 +65,6 @@ int g_alloc_root_name_4 = 0;
 int g_alloc_root_size_max = 0;
 int g_alloc_root_size_total = 0;
 char* g_array_base = 0;
-unsigned char g_byte_table_30861 = 0;
 int g_console_handle = 0;
 float g_const_42_0 = 0;
 float g_const_1_over_32767 = 0;
@@ -92,9 +91,6 @@ char g_msg_buf[1] = {0};
 int g_net_socket = 0;
 int g_object_count = 0;
 char g_office_slots[0x3f0];
-int g_plant_info_table = 0;
-int g_query_filter_max_id = 0;
-short g_query_filter_type = 0;
 int g_query_limit = 0;
 short g_record_table[1] = {0};
 int g_save_extra_70 = 0;
@@ -157,7 +153,6 @@ int g_field_worker_count_wt0 = 0;
 int g_field_worker_count_wt1 = 0;
 int g_field_worker_count_wt2 = 0;
 int g_field_worker_count_wt3 = 0;
-int g_producer_id_table = 0;
 int g_crash_callback = 0;
 int g_crash_dump_all_frames = 0;
 int g_10034624 = 0;
@@ -273,8 +268,6 @@ void* g_thread_handle = 0;
  * they land in .data, whose contents postlink replaces from the reference.
  *
  * `f88` is a dword fmul (float) in the target, unlike its qword neighbours. */
-unsigned char g_stat_table_30ba0[1];
-unsigned char g_stat_table_30dda[1];
 float g_float_const_a0 = 1.0f;
 float g_float_const_b0 = 0.5f;
 float g_float_const_b4 = 0.1f;

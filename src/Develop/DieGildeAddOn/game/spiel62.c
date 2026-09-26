@@ -17,7 +17,6 @@ extern unsigned char g_slot_table[2];
 int __cdecl gm_FreeObjectListRecursive(char**);
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
-extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c */
 
 int __cdecl gm_GetBuildingTypeCategory(int);
 extern int g_citizen_count;
@@ -137,10 +136,10 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 			base_cursor[j] = -1;
 		}
 		if (arg2 == 1) {
-			sprintf(buffer, (char*) 0x10031538, entity_id);
+			sprintf(buffer, "gm_KillSpieler: Killing Player <id = %i> permanently", entity_id);
 		}
 	} else {
-		sprintf(buffer, (char*) 0x10031500, entity_id);
+		sprintf(buffer, "gm_KillSpieler: Killing Player <id = %i>, holding data", entity_id);
 	}
 }
 

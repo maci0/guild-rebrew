@@ -112,7 +112,7 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 			*(int*) (query_result + 0xe) = 3;
 		}
 		else {
-			ReportMessage((char*) 0x100314b8);
+			ReportMessage("gm_AllocRaum(): ob_LAGERFLAECHE_ALLGEMEIN is missing in ob_MARKTSTAND!");
 		}
 
 		sub = (char*) gm_AllocObjekt(*(int*) (obj + 2), 0xff, 1);
@@ -131,7 +131,7 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 					alloc_count++;
 				}
 				else {
-					LogMessageInternal((char*) 0x10031004, 0x16a6, (char*) 0x10031484, 1);
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x16a6, "gm_AllocRaum(): Too many objects in 'Marktstand'...", 1);
 				}
 			}
 			prod += 0x80;

@@ -99,6 +99,7 @@ name = "g_next_object_id"
 section = ".data"
 type = "int"
 status = "VERIFIED"
+size = 4
 
 ["SERVER.0x10035434"]
 name = "g_citizen_count"
@@ -221,8 +222,9 @@ size = 12
 ["SERVER.0x1002dde0"]
 name = "g_producer_id_table"
 section = ".data"
-type = "int"
+type = "int[2720]"
 status = "VERIFIED"
+size = 10880
 
 ["SERVER.0x1009b770"]
 name = "g_slot_array"
@@ -236,12 +238,14 @@ section = ".data"
 name = "g_query_filter_owner"
 type = "int"
 status = "VERIFIED"
+size = 4
 
 ["SERVER.0x10030b9e"]
 section = ".data"
 name = "g_query_filter_state"
 type = "unsigned char"
 status = "VERIFIED"
+size = 1
 
 ["SERVER.0x1003545e"]
 section = ".data"
@@ -297,30 +301,35 @@ section = ".data"
 name = "g_query_filter_extra2"
 type = "short"
 status = "VERIFIED"
+size = 2
 
 ["SERVER.0x10030b8e"]
 section = ".data"
 name = "g_query_filter_extra3"
 type = "short"
 status = "VERIFIED"
+size = 2
 
 ["SERVER.0x10030b84"]
 section = ".data"
 name = "g_filter_extra5"
 type = "unsigned char"
 status = "VERIFIED"
+size = 1
 
 ["SERVER.0x10030b88"]
 section = ".data"
 name = "g_query_filter_extra1"
 type = "int"
 status = "VERIFIED"
+size = 4
 
 ["SERVER.0x10030b90"]
 section = ".data"
 name = "g_query_filter_extra4"
 type = "unsigned char"
 status = "VERIFIED"
+size = 1
 
 ["SERVER.0x10035444"]
 section = ".data"
@@ -399,18 +408,6 @@ section = ".data"
 type = "int"
 status = "UNCHECKED"
 size = 4
-
-["SERVER.0x10031500"]
-name = "g_str_10031500"
-section = ".data"
-type = "char[1]"
-status = "VERIFIED"
-
-["SERVER.0x10031538"]
-name = "g_str_10031538"
-section = ".data"
-type = "char[1]"
-status = "VERIFIED"
 
 ["SERVER.0x10035a04"]
 name = "g_entity_type_bytes"
@@ -575,7 +572,7 @@ size = 4
 
 ["SERVER.0x10030b9c"]
 name = "g_query_filter_type"
-type = "short"
+type = "unsigned short"
 status = "VERIFIED"
 section = ".data"
 size = 2
@@ -761,13 +758,6 @@ type = "int"
 status = "UNCHECKED"
 section = ".data"
 size = 4
-
-["SERVER.0x10030861"]
-name = "g_byte_table_30861"
-type = "unsigned char"
-status = "VERIFIED"
-section = ".data"
-size = 1
 
 ["SERVER.0x1003542c"]
 name = "g_dynasty_field_2c"
@@ -976,13 +966,6 @@ type = "void*"
 section = ".idata"
 status = "UNCHECKED"
 size = 4
-
-["SERVER.0x100313fc"]
-name = "g_100313fc"
-type = "char"
-status = "VERIFIED"
-section = ".data"
-size = 1
 
 ["SERVER.0x10024000"]
 name = "__imp__GetLocalTime@4"
@@ -1917,14 +1900,16 @@ status = "VERIFIED"
 ["SERVER.0x1002d878"]
 name = "g_plant_info_table"
 section = ".data"
-type = "unsigned char"
+type = "PLANT_INFO[4]"
 status = "VERIFIED"
+size = 280
 
 ["SERVER.0x10030b70"]
 name = "g_entity_id_counter"
 section = ".data"
 type = "int"
 status = "VERIFIED"
+size = 4
 
 ["SERVER.0x10035408"]
 name = "g_sequence_counter"
@@ -2279,13 +2264,6 @@ type = "char[]"
 size = 48
 status = "VERIFIED"
 
-["SERVER.0x10031004"]
-type = "char[]"
-section = ".data"
-name = "s_D__Develop_DieGildeAddOn_game_sp_10031004"
-status = "VERIFIED"
-size = 38
-
 ["SERVER.0x1002d990"]
 section = ".data"
 name = "s_plt_SetPlantMap____Could_not_fin_1002d990"
@@ -2398,27 +2376,6 @@ status = "VERIFIED"
 type = "char[]"
 size = 46
 
-["SERVER.0x10031628"]
-section = ".data"
-name = "s_gm_KannObjektHergestellt___pCObj_10031628"
-status = "VERIFIED"
-type = "char[]"
-size = 48
-
-["SERVER.0x10031604"]
-section = ".data"
-name = "s_gm_AllocSpieler_array_overflow_10031604"
-size = 35
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x10031594"]
-section = ".data"
-name = "s_gm_AllocSpieler_bug_10031594"
-size = 21
-type = "char[]"
-status = "VERIFIED"
-
 ["SERVER.0x100273ac"]
 section = ".data"
 name = "s_Error_Handler_closed__100273ac"
@@ -2509,27 +2466,6 @@ name = "s_vfs__gz_compressed_file____s___i_10029474"
 status = "VERIFIED"
 type = "char[]"
 size = 45
-
-["SERVER.0x100315e4"]
-section = ".data"
-name = "s_SpID_i_playermode_i_100315e4"
-size = 30
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x10031570"]
-section = ".data"
-name = "s_PlayerID_i_PlayerName_s_10031570"
-size = 34
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x100315ac"]
-section = ".data"
-name = "s_gm_AllocSpieler_gm_CurrentHumanFamilyCou_100315ac"
-size = 55
-type = "char[]"
-status = "VERIFIED"
 
 ["SERVER.0x10027030"]
 section = ".data"
@@ -4549,3 +4485,45 @@ section = ".data"
 name = "g_alchemy_random_table_1002a1cc"
 type = "unsigned char[7812]"
 size = 7812
+
+["SERVER.0x1002da30"]
+section = ".data"
+name = "g_plant_pair_table_1002da30"
+type = "PLANT_PAIR[88]"
+size = 704
+
+["SERVER.0x1002dcf0"]
+section = ".data"
+name = "g_plant_flag_1002dcf0"
+type = "int"
+size = 4
+
+["SERVER.0x1002dd48"]
+section = ".data"
+name = "g_spiel_data_1002dd48"
+type = "unsigned int[38]"
+size = 152
+
+["SERVER.0x10030860"]
+section = ".data"
+name = "g_building_defaults_10030860"
+type = "BuildingDefaults[37]"
+size = 777
+
+["SERVER.0x10030b74"]
+section = ".data"
+name = "g_spiel_bytes_10030b74"
+type = "unsigned char[16]"
+size = 16
+
+["SERVER.0x10030ba0"]
+section = ".data"
+name = "g_stat_table_30ba0"
+type = "unsigned char[780]"
+size = 780
+
+["SERVER.0x10030eac"]
+section = ".data"
+name = "g_spiel_data_10030eac"
+type = "int[16]"
+size = 64
