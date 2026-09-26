@@ -89,7 +89,8 @@ RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
 # 5,309: command, loadsave and lobby strings as literals in first-use order.
 # 2,920: plant tables, spiel.c named block (spiel_data.c) and spiel literals.
 # 2,370: fold literals in .data$zz, after the library .data instead of inside it.
-DATA_BASELINE=${DATA_BASELINE:-2370}
+# 2,012: library string literals placed in .rdata by split_blob, not folded.
+DATA_BASELINE=${DATA_BASELINE:-2012}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:

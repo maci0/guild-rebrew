@@ -4,10 +4,10 @@
 `rdata_restore.c` reproduces the reference's `.rdata[0x12e8:0x2608)` with one
 array, and the member sections the link still needs land *after* it, pushing
 the import directory late (the postlink prefix check wants that region to be
-exactly `0x2468` bytes and byte-identical).  Most of those sections fold away -
-their `??_C@` names collide with `crt_region/rdata_fold.c`'s literals - but the
-rest cannot: `___lookuptable`, the unnamed pointer tables, the `__real@8@`
-constants, `___dnames` / `___mnames`.
+exactly `0x2468` bytes and byte-identical): the string literals (`??_C@`),
+`___lookuptable`, the unnamed pointer tables, the `__real@8@` constants,
+`___dnames` / `___mnames`.  Only the all-zero literals ("" and L"\0") match
+too many places to be placed; `crt_region/rdata_fold.c` folds those away.
 
 Those have reference offsets *inside* the array's range, which one contiguous
 array cannot express.  This cuts it into pieces around them.  With
@@ -110,8 +110,11 @@ def lower_alignment(path):
     path.write_bytes(bytes(raw))
 
 
-def locate(ref, body, mask, lo, hi):
+def locate(ref, body, mask, lo, hi, taken=()):
+    """First offset in [lo, hi) where *body* matches and no taken span overlaps."""
     for at in range(lo, hi - len(body) + 1):
+        if any(a < at + len(body) and at < b for a, b in taken):
+            continue
         for j, byte in enumerate(body):
             if j not in mask and ref[at + j] != byte:
                 break
@@ -143,6 +146,15 @@ def main():
     candidates = sorted((ROOT / args.split).glob("*.obj"))
     for extra in args.defs:
         candidates += sorted((ROOT / extra).glob("*.obj"))
+
+    def rdata_size(path):
+        secs = [s for s in coff_sections(path) if s[0].startswith(".rdata") and s[1]]
+        return len(secs[0][1]) if len(secs) == 1 else 0
+
+    # Longest first: a short section can match in several places, and must take
+    # one the longer, unambiguous sections leave free.
+    candidates.sort(key=rdata_size, reverse=True)
+    taken = []
     for path in candidates:
         secs = coff_sections(path)
         rdata = [s for s in secs if s[0].startswith(".rdata") and s[1]]
@@ -165,12 +177,12 @@ def main():
         if mask:
             print(f"  has pointers, left in the tail: {path.name}", file=sys.stderr)
             continue
-        if syms and all(n.startswith(FOLD_PREFIX) for n in syms):
-            # rdata_fold.c re-declares this literal, so the linker folds the
-            # section away and it emits no bytes: placing it would leave a gap.
+        if syms and all(n.startswith(FOLD_PREFIX) for n in syms) and not any(body):
+            # An all-zero literal matches every zero run; rdata_fold.c
+            # re-declares it, so the linker folds the section away.
             foldable += 1
             continue
-        at = locate(ref, body, mask, lo, hi)
+        at = locate(ref, body, mask, lo, hi, taken)
         if at < 0:
             foldable += 1          # re-declared literal: folds, emits nothing
             continue
@@ -182,6 +194,7 @@ def main():
             print(f"  odd offset {at:#x}, not placed: {path.name}", file=sys.stderr)
             continue
         placed.append((at, len(body), path, comdat))
+        taken.append((at, at + len(body)))
         if args.byte_align and at % args.align:
             # The reference packs this one right after a byte-packed literal, so
             # the object has to be able to start at an odd offset: its own
