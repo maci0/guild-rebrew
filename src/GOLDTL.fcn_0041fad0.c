@@ -6,11 +6,12 @@
 #include <string.h>
 #include <windows.h>
 
-extern char g_14cc460[0x128];
+#include "client_types.h"
+extern Chan_14cc460 g_14cc460;
 extern CRITICAL_SECTION g_14cc5a0;
 extern int g_6b71a4;
 extern int g_6b71a8;
-extern LARGE_INTEGER g_6b6f88;
+extern __int64 g_6b6f88;
 int __cdecl fcn_0042a120(int* out, int a, int b, int c);
 void __cdecl fcn_0042a2d0(int h);
 void __cdecl fcn_0041fa10(void* arg);
@@ -19,12 +20,12 @@ int __cdecl fcn_0041fad0(int a, int b, int c)
 {
 	DWORD tid;
 
-	memset(g_14cc460, 0, sizeof(g_14cc460));
+	memset(((char*)&g_14cc460), 0, sizeof(char[0x128]));
 	InitializeCriticalSection(&g_14cc5a0);
 	if (fcn_0042a120(&g_6b71a4, a, b, c) != 0 || fcn_0042a120(&g_6b71a8, a, b, c) != 0) {
 		return -1;
 	}
-	if (!QueryPerformanceFrequency(&g_6b6f88)) {
+	if (!QueryPerformanceFrequency(&(*(LARGE_INTEGER*)&g_6b6f88))) {
 		fcn_0042a2d0(g_6b71a4);
 		g_6b71a4 = 0;
 		return -1;

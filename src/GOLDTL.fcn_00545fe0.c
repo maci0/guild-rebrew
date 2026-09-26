@@ -58,9 +58,10 @@ struct spawn {
 };
 
 extern void (__cdecl* g_7d1d80[])(struct unit*);
-extern int g_7dc440[];
-extern struct unit g_77e980[1024];
-extern struct unit* g_7d1980[256];
+extern char g_7dc440[];
+#include "client_types.h"
+extern unit_77e980 g_77e980[1024];
+extern unsigned char* g_7d1980[];
 extern int g_7749d0;
 extern int g_7749d4;
 extern int g_7749d8;
@@ -77,7 +78,7 @@ struct unit* __cdecl fcn_00545fe0(struct spawn* t)
 	struct unit* u;
 
 	e = 0;
-	if (t->kind >= 0xa7 || g_7d1d80[t->kind] == 0 || g_7dc440[t->kind] == 0) {
+	if (t->kind >= 0xa7 || g_7d1d80[t->kind] == 0 || ((int*)g_7dc440)[t->kind] == 0) {
 		return 0;
 	}
 	if (t->owner != -1) {
@@ -87,14 +88,14 @@ struct unit* __cdecl fcn_00545fe0(struct spawn* t)
 		}
 	}
 	for (i = 0; i < 1024; i++) {
-		if (g_77e980[i].kind == 0) {
+		if (((struct unit*)g_77e980)[i].kind == 0) {
 			break;
 		}
 	}
 	if (i == 1024) {
 		return 0;
 	}
-	u = &g_77e980[i];
+	u = &((struct unit*)g_77e980)[i];
 	if (i > g_7749d4) {
 		g_7749d4 = i;
 	}
@@ -107,14 +108,14 @@ struct unit* __cdecl fcn_00545fe0(struct spawn* t)
 	}
 	if (t->flags & 8) {
 		for (j = 0; j < 256; j++) {
-			if (g_7d1980[j] == 0) {
+			if (((struct unit**)g_7d1980)[j] == 0) {
 				break;
 			}
 		}
 		if (j == 256) {
 			return 0;
 		}
-		g_7d1980[j] = u;
+		((struct unit**)g_7d1980)[j] = u;
 		if (j > g_7749d8) {
 			g_7749d8 = j;
 		}

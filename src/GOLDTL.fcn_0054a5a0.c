@@ -3,16 +3,6 @@
 // FUNCTION: GOLDTL 0x54a5a0
 // SIZE: 246
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 #pragma pack(1)
 // SIZE 0x7
 struct target7 {
@@ -23,9 +13,10 @@ struct target7 {
 };
 #pragma pack()
 
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_005015e0(char**, int, int, int);
 void __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_00502cd0(int, int, int, int);
@@ -40,8 +31,8 @@ void __cdecl fcn_0054a5a0(char* u)
 	if (u[0x78] & 4) {
 		return;
 	}
-	*(struct pos14*) (u + 0x52) = g_7f4c00;
-	fcn_00500bb0((struct pos14*) (u + 0x52), 0x18, 0, 0);
+	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0x18, 0, 0);
 	*(short*) (u + 0x56) = 7;
 	*(int*) (u + 0x58) = 0;
 	fcn_005015e0(&found, 0, 0, *(int*) (u + 0x10));

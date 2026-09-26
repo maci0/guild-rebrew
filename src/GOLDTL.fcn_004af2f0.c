@@ -29,7 +29,7 @@ typedef struct {
 	char pad3[0xb2];
 } Rec21c;
 
-extern Rec21c g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_004ae0f0(int);
 unsigned short __cdecl fcn_0042e410(int);
@@ -128,11 +128,11 @@ int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
 			if (i >= 768) {
 				return 0;
 			}
-			if (fcn_004ae130((unsigned short) i) != 0 && g_7f4ca0[i].kind == 0xf) {
+			if (fcn_004ae130((unsigned short) i) != 0 && ((Rec21c*)g_7f4ca0)[i].kind == 0xf) {
 				break;
 			}
 		}
-		r = &g_7f4ca0[i];
+		r = &((Rec21c*)g_7f4ca0)[i];
 		if (mode == 0) {
 			pairs[idx * 2 + 1] = r->key;
 		}
@@ -189,11 +189,11 @@ int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
 			if (i >= 768) {
 				return 0;
 			}
-			if ((fcn_004ae130((unsigned short) i) != 0 && g_7f4ca0[i].kind == 0x1a) || g_7f4ca0[i].kind == 0x15) {
+			if ((fcn_004ae130((unsigned short) i) != 0 && ((Rec21c*)g_7f4ca0)[i].kind == 0x1a) || ((Rec21c*)g_7f4ca0)[i].kind == 0x15) {
 				break;
 			}
 		}
-		r = &g_7f4ca0[i];
+		r = &((Rec21c*)g_7f4ca0)[i];
 		if (mode == 0) {
 			pairs[idx * 2 + 1] = r->key;
 		}
@@ -282,8 +282,8 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 		j = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (fcn_004ae130((unsigned short) j) != 0 && g_7f4ca0[j].grade >= 0x1e && g_7f4ca0[j].grade <= 0x21) {
-				r = &g_7f4ca0[j];
+			if (fcn_004ae130((unsigned short) j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			left--;
@@ -294,8 +294,8 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 		j = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (fcn_004ae1c0(j) != 0 && g_7f4ca0[j].grade >= 0x1e && g_7f4ca0[j].grade <= 0x21) {
-				r = &g_7f4ca0[j];
+			if (fcn_004ae1c0(j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			left--;
@@ -307,10 +307,10 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 		j = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (found == 0 && fcn_004ae1c0(j) != 0 && g_7f4ca0[j].grade >= 0x1e && g_7f4ca0[j].grade <= 0x21) {
-				found = &g_7f4ca0[j];
-			} else if (fcn_004ae210(j) != 0 && g_7f4ca0[j].grade >= 0x1e && g_7f4ca0[j].grade <= 0x21) {
-				r = &g_7f4ca0[j];
+			if (found == 0 && fcn_004ae1c0(j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
+				found = &((Rec21c*)g_7f4ca0)[j];
+			} else if (fcn_004ae210(j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			left--;
@@ -389,9 +389,9 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 		j = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (g_7f4ca0[j].side == 1 && fcn_004ae130((unsigned short) j) != 0 && fcn_004ae0f0(g_7f4ca0[j].key) != 0
-			    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15) {
-				r = &g_7f4ca0[j];
+			if (((Rec21c*)g_7f4ca0)[j].side == 1 && fcn_004ae130((unsigned short) j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
+			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -403,9 +403,9 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 		j = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (g_7f4ca0[j].side == 1 && fcn_004ae1c0(j) != 0 && fcn_004ae0f0(g_7f4ca0[j].key) != 0
-			    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15) {
-				r = &g_7f4ca0[j];
+			if (((Rec21c*)g_7f4ca0)[j].side == 1 && fcn_004ae1c0(j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
+			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -418,15 +418,15 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 		j = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (g_7f4ca0[j].side == 1) {
+			if (((Rec21c*)g_7f4ca0)[j].side == 1) {
 				if (found == 0 && fcn_004ae1c0(j) != 0
-				    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15) {
-					if (fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-						found = &g_7f4ca0[j];
+				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
+					if (fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+						found = &((Rec21c*)g_7f4ca0)[j];
 					}
-				} else if (fcn_004ae210(j) != 0 && fcn_004ae0f0(g_7f4ca0[j].key) != 0
-				    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15) {
-					r = &g_7f4ca0[j];
+				} else if (fcn_004ae210(j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
+				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
+					r = &((Rec21c*)g_7f4ca0)[j];
 					break;
 				}
 			}
@@ -507,9 +507,10 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 		j = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (g_7f4ca0[j].side == 0 && fcn_004ae130((unsigned short) j) != 0
-			    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-				r = &g_7f4ca0[j];
+			if (((Rec21c*)g_7f4ca0)[j].side == 0 && fcn_004ae130((unsigned short) j) != 0
+			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -521,9 +522,10 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 		j = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (g_7f4ca0[j].side == 0 && fcn_004ae1c0(j) != 0
-			    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-				r = &g_7f4ca0[j];
+			if (((Rec21c*)g_7f4ca0)[j].side == 0 && fcn_004ae1c0(j) != 0
+			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -536,15 +538,16 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 		j = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (g_7f4ca0[j].side == 0) {
+			if (((Rec21c*)g_7f4ca0)[j].side == 0) {
 				if (found == 0 && fcn_004ae1c0(j) != 0
-				    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15) {
-					if (fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-						found = &g_7f4ca0[j];
+				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
+					if (fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+						found = &((Rec21c*)g_7f4ca0)[j];
 					}
 				} else if (fcn_004ae210(j) != 0
-				    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-					r = &g_7f4ca0[j];
+				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
+				        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+					r = &((Rec21c*)g_7f4ca0)[j];
 					break;
 				}
 			}
@@ -629,8 +632,9 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 		left = 0x300;
 		do {
 			if (fcn_004ae130((unsigned short) j) != 0
-			    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-				r = &g_7f4ca0[j];
+			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -643,8 +647,9 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 		left = 0x300;
 		do {
 			if (fcn_004ae1c0(j) != 0
-			    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-				r = &g_7f4ca0[j];
+			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -658,13 +663,14 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 		left = 0x300;
 		do {
 			if (found == 0 && fcn_004ae1c0(j) != 0
-			    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15) {
-				if (fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-					found = &g_7f4ca0[j];
+			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
+				if (fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+					found = &((Rec21c*)g_7f4ca0)[j];
 				}
 			} else if (fcn_004ae210(j) != 0
-			    && g_7f4ca0[j].kind > 0 && g_7f4ca0[j].kind != 0xf && g_7f4ca0[j].kind != 0x1a && g_7f4ca0[j].kind != 0x15 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-				r = &g_7f4ca0[j];
+			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -807,8 +813,8 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 		left = 0x300;
 		do {
 			if (fcn_004ae130((unsigned short) j) != 0
-			    && g_7f4ca0[j].cls >= 0xd && g_7f4ca0[j].cls <= 0x12 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-				r = &g_7f4ca0[j];
+			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -821,8 +827,8 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 		left = 0x300;
 		do {
 			if (fcn_004ae1c0(j) != 0
-			    && g_7f4ca0[j].cls >= 0xd && g_7f4ca0[j].cls <= 0x12 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-				r = &g_7f4ca0[j];
+			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -836,13 +842,13 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 		left = 0x300;
 		do {
 			if (found == 0 && fcn_004ae1c0(j) != 0
-			    && g_7f4ca0[j].cls >= 0xd && g_7f4ca0[j].cls <= 0x12) {
-				if (fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-					found = &g_7f4ca0[j];
+			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12) {
+				if (fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+					found = &((Rec21c*)g_7f4ca0)[j];
 				}
 			} else if (fcn_004ae210(j) != 0
-			    && g_7f4ca0[j].cls >= 0xd && g_7f4ca0[j].cls <= 0x12 && fcn_004ae0f0(g_7f4ca0[j].key) != 0) {
-				r = &g_7f4ca0[j];
+			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -927,8 +933,8 @@ int __cdecl fcn_004afd70(int mode, int* pairs, int idx, char* text, void* out)
 		i = fcn_0042e410(0x300);
 		left = 0x300;
 		do {
-			if (fcn_004ae210(i) != 0 && fcn_004ae0f0(g_7f4ca0[i].key) != 0) {
-				r = &g_7f4ca0[i];
+			if (fcn_004ae210(i) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {
+				r = &((Rec21c*)g_7f4ca0)[i];
 				break;
 			}
 			next = (i + step) % 0x300;
@@ -980,7 +986,8 @@ typedef struct Msg {
 } Msg;
 // SIZE 0x114
 
-extern Pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern unsigned short g_774970;
 extern char* g_773dac;
 extern char* g_773db0;
@@ -1032,7 +1039,7 @@ int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
 
 		msg.kind = 5;
 		msg.target = -1;
-		msg.owner = g_7f4ca0[g_774970].key;
+		msg.owner = ((Rec21c*)g_7f4ca0)[g_774970].key;
 		msg.flags = 0;
 		msg.code = (unsigned char) codes[i];
 		msg.one = 1;
@@ -1042,12 +1049,12 @@ int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
 		list[0] = key;
 		list[3] = *(int*) (g_773db0 + 4);
 		for (j = 0; j < 0x300; j++) {
-			if (g_7f4ca0[j].key != key && fcn_004ae1c0(j) != 0) {
-				if (g_7f4ca0[j].kind != 0) {
-					list[1] = g_7f4ca0[j].key;
+			if (((Rec21c*)g_7f4ca0)[j].key != key && fcn_004ae1c0(j) != 0) {
+				if (((Rec21c*)g_7f4ca0)[j].kind != 0) {
+					list[1] = ((Rec21c*)g_7f4ca0)[j].key;
 				}
 			} else if (n < 16 && fcn_004ae210(j) != 0) {
-				list[n] = g_7f4ca0[j].key;
+				list[n] = ((Rec21c*)g_7f4ca0)[j].key;
 				n++;
 			}
 		}
@@ -1063,7 +1070,7 @@ int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
 		}
 		msg.count = (unsigned char) n;
 		msg.flags = 0x22;
-		msg.when = g_7f4c00;
+		msg.when = (*(Pos14*)&g_7f4c00);
 		fcn_00500bb0(&msg.when, 0x18, 0, 0);
 		msg.when.b0 = 0xa;
 		fcn_004c5980(&msg);

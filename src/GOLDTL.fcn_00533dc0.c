@@ -8,9 +8,10 @@ typedef struct {
 	char pad3b8[0x3cc - 0x3b8];
 } Window;
 
-extern Window g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
-extern unsigned char* g_7746c4;
+extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 
 void __cdecl fcn_0046f740(int, int, int, int);
@@ -23,7 +24,7 @@ void __cdecl fcn_00533dc0(int wnd, int page, int icon)
 	if (icon != 0) {
 		fcn_0046f740(0xb, 9, icon, wnd);
 	} else {
-		p = g_7746c4;
+		p = ((unsigned char*)g_7746c4);
 		if (p == 0) {
 			p = g_7746c8;
 		}
@@ -33,7 +34,7 @@ void __cdecl fcn_00533dc0(int wnd, int page, int icon)
 			fcn_0046f740(0xb, 9, *p + 0x427, wnd);
 		}
 	}
-	p = g_7746c4;
+	p = ((unsigned char*)g_7746c4);
 	if (p == 0) {
 		p = g_7746c8;
 	}
@@ -56,8 +57,8 @@ void __cdecl fcn_00533dc0(int wnd, int page, int icon)
 		fcn_0046f740(0x1f7, 0x43, 0x73e, wnd);
 		fcn_0046f740(0, 0x1a8, 0x73c, wnd);
 	}
-	g_1015f40[g_772514].margin[0] = 0x18;
-	g_1015f40[g_772514].margin[1] = 0x18;
-	g_1015f40[g_772514].margin[2] = 0x18;
-	g_1015f40[g_772514].margin[3] = 0x18;
+	((Window*)g_1015f40)[g_772514].margin[0] = 0x18;
+	((Window*)g_1015f40)[g_772514].margin[1] = 0x18;
+	((Window*)g_1015f40)[g_772514].margin[2] = 0x18;
+	((Window*)g_1015f40)[g_772514].margin[3] = 0x18;
 }

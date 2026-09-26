@@ -4,13 +4,10 @@
 // SIZE: 142
 
 // SIZE 0xc
-typedef struct {
-	int a;
-	int b;
-	int c;
-} Slot;
+#include "client_types.h"
+typedef Slot_779d00 Slot;
 
-extern Slot g_779d00[];
+extern Slot_779d00 g_779d00[];
 
 unsigned int __cdecl fcn_00430910(void*, int, int, int);
 

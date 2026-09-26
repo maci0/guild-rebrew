@@ -1,11 +1,8 @@
 // FUNCTION: GOLDTL 0x005c67d0
 // SIZE: 505
 
-typedef struct
-{
-	int btn;
-	char* item;
-} Btn;
+#include "client_types.h"
+typedef Btn_776c60 Btn;
 // SIZE 0x8
 
 typedef struct
@@ -22,10 +19,11 @@ typedef struct
 extern int g_6abb00;
 extern int g_1040490;
 extern int g_1040494;
-extern Win g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
 extern unsigned short g_774970;
-extern Btn g_776c60[6];
+extern Btn_776c60 g_776c60[6];
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14a92bc;
@@ -66,10 +64,10 @@ void __cdecl fcn_005c67d0(void)
 	fcn_0057e880(0x14, 0, 0, 0);
 	dlg = fcn_00470820(g_1040494 - 0x158, g_1040490 - 0x108, s_6ac77c);
 	fcn_004727a0(dlg, 0);
-	g_1015f40[g_772514].x3a8 = 0x18;
-	g_1015f40[g_772514].x3ac = 0x18;
-	g_1015f40[g_772514].x3b0 = 0x18;
-	g_1015f40[g_772514].x3b4 = 0x18;
+	((Win*)g_1015f40)[g_772514].x3a8 = 0x18;
+	((Win*)g_1015f40)[g_772514].x3ac = 0x18;
+	((Win*)g_1015f40)[g_772514].x3b0 = 0x18;
+	((Win*)g_1015f40)[g_772514].x3b4 = 0x18;
 	fcn_004727a0(dlg, 0);
 	fcn_00473a90(0, 0);
 	fcn_005c5da0(g_772514, 0, 0, g_774970, 0x1f3b);

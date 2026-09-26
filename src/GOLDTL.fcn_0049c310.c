@@ -1,5 +1,6 @@
-extern int g_7f4c00;
-extern int g_7f4c04;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern unsigned char g_773d75;
 
 int __cdecl fcn_004f5dd0(int);
@@ -30,8 +31,8 @@ int __cdecl fcn_0049c310(int unused, char* e, int busy, char* out, char* kind)
 	char* t;
 	float f1;
 
-	if (busy == 0 && (*(unsigned int*) (e + 4) & 3) == g_7f4c00 % 4 &&
-	    (*(unsigned int*) (e + 4) & 7) == (g_7f4c04 & 0xffff) % 8) {
+	if (busy == 0 && (*(unsigned int*) (e + 4) & 3) == (*(int*)&g_7f4c00) % 4 &&
+	    (*(unsigned int*) (e + 4) & 7) == ((*(int*)&g_7f4c04) & 0xffff) % 8) {
 		v1 = fcn_004f5dd0(*(int*) (e + 4));
 		v2 = fcn_004f5da0(*(int*) (e + 4));
 		if (fcn_0042e410(8) + 8 <= v1) {

@@ -9,7 +9,8 @@ typedef struct
 // SIZE 0xe
 #pragma pack(pop)
 
-extern fcn_0054ee10_Stamp g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char g_6a5af4[];
 extern char g_6a5ae0[];
 
@@ -41,14 +42,14 @@ void __cdecl fcn_0054ee10(char* t)
 	int n;
 	int i;
 
-	*(fcn_0054ee10_Stamp*) (t + 0x52) = g_7f4c00;
+	*(fcn_0054ee10_Stamp*) (t + 0x52) = (*(fcn_0054ee10_Stamp*)&g_7f4c00);
 	*(int*) (t + 0x70) = 2;
 	if ((t[0x78] & 2) == 0)
 		return;
 	a = fcn_00508e40(*(int*) (t + 0xac));
 	b = fcn_00508e40(*(int*) (t + 0xb0));
 	if (a == 0 || (*(int*) (a + 0x1c8) & 0x100) || b == 0 || (*(int*) (b + 0x1c8) & 0x200)) {
-		*(fcn_0054ee10_Stamp*) (t + 0x52) = g_7f4c00;
+		*(fcn_0054ee10_Stamp*) (t + 0x52) = (*(fcn_0054ee10_Stamp*)&g_7f4c00);
 		fcn_00500bb0((fcn_0054ee10_Stamp*) (t + 0x52), 0, 2, 0);
 		*(int*) (t + 0x84) = fcn_004c5620(-1, t);
 		return;

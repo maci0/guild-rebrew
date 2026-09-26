@@ -31,7 +31,8 @@ typedef struct {
 	int d;
 } Slot10;
 
-extern Slot10 g_1007ce0[24];
+#include "client_types.h"
+extern Card_1007ce0 g_1007ce0[24];
 
 int __cdecl fcn_0042e410(int id);
 
@@ -50,8 +51,8 @@ int __cdecl fcn_004a6ea0(State* s)
 	*(int*) ((char*) s + 0xb0) = (unsigned short) fcn_0042e410(3);
 	*(int*) ((char*) s + 0xbc) = 0;
 	for (i = 0; i < 24; i++) {
-		g_1007ce0[i].c = 3;
-		g_1007ce0[i].d = 0;
+		((Slot10*)g_1007ce0)[i].c = 3;
+		((Slot10*)g_1007ce0)[i].d = 0;
 	}
 	for (i = 0; i < 3; i++) {
 		for (j = 0; j < 5; j++) {

@@ -13,8 +13,9 @@ typedef struct Kind {
 } Kind;
 // SIZE 0x24d
 
-extern stamp14 g_7f4c00;
-extern Kind* g_868050;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned char* g_868050;
 extern unsigned short g_774970;
 extern char g_7f4ca0[];
 
@@ -63,7 +64,7 @@ int __cdecl fcn_004ba480(int* a1)
 	cnt = 0;
 	lim = fcn_0042e410(0x14) + 0x19;
 	chosen = ents[fcn_0042e410(n)];
-	kind = &g_868050[chosen[0]];
+	kind = &((Kind*)g_868050)[chosen[0]];
 	for (i = 0; i < 768; i++) {
 		rec = g_7f4ca0 + i * 540;
 		if (rec[2] == 0 && *(unsigned char**) (rec + 0x16c) == chosen) {
@@ -83,7 +84,7 @@ int __cdecl fcn_004ba480(int* a1)
 		m[0x36] = 1;
 		*(int*) (m + 0x5c) = v;
 		*(int*) (m + 8) = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
-		*(stamp14*) (m + 0x28) = g_7f4c00;
+		*(stamp14*) (m + 0x28) = (*(stamp14*)&g_7f4c00);
 		*(short*) (m + 0x64) = *(unsigned short*) (a1 + 1) + 0x12e7;
 		*(int*) (m + 0x58) = *(int*) (e + 2);
 		*(int*) (m + 0x60) = *(int*) (p + 2);

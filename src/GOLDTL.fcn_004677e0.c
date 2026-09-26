@@ -4,7 +4,8 @@ typedef struct
 } fcn_004677e0_Win;
 // SIZE 0x3cc
 
-extern fcn_004677e0_Win g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern char s_67d420[];
 
 void __cdecl fcn_0041d9e0(const char* msg);
@@ -21,7 +22,7 @@ int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, i
 	if (win < 0 || win > 0x60) {
 		return -1;
 	}
-	w = &g_1015f40[win];
+	w = &((fcn_004677e0_Win*)g_1015f40)[win];
 	if (w->i[0x290 / 4] == 0) {
 		return -1;
 	}

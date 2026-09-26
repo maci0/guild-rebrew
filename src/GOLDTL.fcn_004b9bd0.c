@@ -11,7 +11,8 @@ typedef struct Date {
 // SIZE 0xe
 
 extern char g_868060[];
-extern Date g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 unsigned short* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(unsigned short*, int);
@@ -61,7 +62,7 @@ int __cdecl fcn_004b9bd0(int* a1)
 	}
 	if (n == 0)
 		return 0x400;
-	d = g_7f4c00;
+	d = (*(Date*)&g_7f4c00);
 	d.a++;
 	r = fcn_0042e410(n);
 	s = ss[r];

@@ -14,7 +14,8 @@ typedef struct Obj {
 } Obj;
 // SIZE 0x2bc
 
-extern Obj g_1038140[];
+#include "client_types.h"
+extern Obj_1038140 g_1038140[];
 extern int g_14ce86c;
 
 char* __cdecl fcn_0045bde0(char* name);
@@ -29,7 +30,7 @@ void __cdecl fcn_004713b0(int k, char* a, char* b)
 	char* p;
 	char* q;
 
-	o = &g_1038140[k];
+	o = &((Obj*)g_1038140)[k];
 	p = 0;
 	if (a) {
 		strcpy(o->name1, a);

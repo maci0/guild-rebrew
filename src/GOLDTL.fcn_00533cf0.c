@@ -21,10 +21,11 @@ typedef struct {
 	char pad1a4[0x118];
 } Home;
 
-extern Unit* g_1015ea0;
+extern char* g_1015ea0;
 extern int g_7747a8;
 extern unsigned short g_773e40[];
-extern Home g_1038140[48];
+#include "client_types.h"
+extern Obj_1038140 g_1038140[];
 
 void __cdecl fcn_00533cf0(int mark)
 {
@@ -35,19 +36,19 @@ void __cdecl fcn_00533cf0(int mark)
 	if (mark != 0) {
 		g_7747a8 = 0;
 		for (i = 0; i < 48; i++) {
-			if (g_1038140[i].x190 != 0 && g_1038140[i].x1a0 != 0) {
-				h = &g_1038140[i];
+			if (((Home*)g_1038140)[i].x190 != 0 && ((Home*)g_1038140)[i].x1a0 != 0) {
+				h = &((Home*)g_1038140)[i];
 				for (k = 0; k < 0x400; k++) {
-					if (g_1015ea0[k].alive != 0 && g_1015ea0[k].home == h && g_1015ea0[k].marked == 0) {
+					if (((Unit*)g_1015ea0)[k].alive != 0 && ((Unit*)g_1015ea0)[k].home == h && ((Unit*)g_1015ea0)[k].marked == 0) {
 						g_773e40[g_7747a8++] = (unsigned short) k;
-						g_1015ea0[k].marked = 1;
+						((Unit*)g_1015ea0)[k].marked = 1;
 					}
 				}
 			}
 		}
 	} else {
 		for (i = 0; i < g_7747a8; i++) {
-			g_1015ea0[g_773e40[i]].marked = 0;
+			((Unit*)g_1015ea0)[g_773e40[i]].marked = 0;
 		}
 	}
 }

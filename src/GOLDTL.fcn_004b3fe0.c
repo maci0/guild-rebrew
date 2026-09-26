@@ -15,7 +15,8 @@ struct list_4b3fe0 {
 };
 // SIZE 0x8c
 
-extern struct list_4b3fe0 g_102cbc8[];
+#include "client_types.h"
+extern List8c_102cbc8 g_102cbc8[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -65,9 +66,9 @@ int __cdecl fcn_004b3fe0(int a1)
 		fcn_00469630(lst);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1)
 			g_774654 = 1;
-		if (g_100f1dc != -1 && g_102cbc8[lst].sel != -1
-		    && g_67d370 == g_102cbc8[lst].items[g_102cbc8[lst].sel]) {
-			e = *(int**) (g_1015ea0 + g_102cbc8[lst].items[g_102cbc8[lst].sel] * 756 + 0x2f0);
+		if (g_100f1dc != -1 && ((struct list_4b3fe0*)g_102cbc8)[lst].sel != -1
+		    && g_67d370 == ((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel]) {
+			e = *(int**) (g_1015ea0 + ((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel] * 756 + 0x2f0);
 			if (fcn_004b3ec0(*e, g_7e46ac) != 0) {
 				result = *e;
 				g_774654 = 1;

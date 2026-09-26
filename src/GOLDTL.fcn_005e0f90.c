@@ -46,8 +46,9 @@ typedef struct {
 	char pad44[0x2b0];
 } Ctl;
 
-extern Win g_1015f40[];
-extern Ctl* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 extern char s_6acfdc[];
 extern char s_6acff0[];
 extern char s_6a3a54[];
@@ -117,13 +118,13 @@ int __cdecl fcn_005e0f90(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (g_14ce8d8 != 0 && g_1015f40[sel].f260 == 0) {
+		if (g_14ce8d8 != 0 && ((Win*)g_1015f40)[sel].f260 == 0) {
 			for (i = 2; i < 16; i++) {
 				if (g_67d370 != slots[i].h && g_100f894 != slots[i].f8) {
 					if (g_100f894 == -1) {
 						continue;
 					}
-					if (g_1015ea0[g_1015f40[g_100f894].f27c].f40 != &g_1015f40[slots[i].f8]) {
+					if (((Ctl*)g_1015ea0)[((Win*)g_1015f40)[g_100f894].f27c].f40 != &((Win*)g_1015f40)[slots[i].f8]) {
 						continue;
 					}
 				}
@@ -133,7 +134,7 @@ int __cdecl fcn_005e0f90(void)
 					flag = 1;
 				}
 				fcn_00472170(slots[i].h, 0);
-				if (!fcn_005e0b40(g_1015ea0[slots[i].h].f10, g_1015ea0[slots[i].h].f14, slots[i].rec.text)) {
+				if (!fcn_005e0b40(((Ctl*)g_1015ea0)[slots[i].h].f10, ((Ctl*)g_1015ea0)[slots[i].h].f14, slots[i].rec.text)) {
 					fcn_00472170(slots[i].h, 1);
 					break;
 				}

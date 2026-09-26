@@ -3,17 +3,8 @@
 // FUNCTION: GOLD 0x0053eea0
 // SIZE: 256
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x14c
+#include "client_types.h"
 struct unit {
 	unsigned char kind;
 	char pad1[7];
@@ -21,7 +12,7 @@ struct unit {
 	char pada[2];
 	int owner;
 	char pad10[0x42];
-	struct pos14 dest;
+	pos14_7f4c00 dest;
 	char pad60[0x10];
 	int state;
 	char pad74[0xd8];
@@ -37,16 +28,16 @@ struct house {
 	char pad9[0x213];
 };
 
-extern struct house g_7f4ca0[];
-extern struct pos14 g_7f4c00;
+extern char g_7f4ca0[];
+extern pos14_7f4c00 g_7f4c00;
 
 void __cdecl fcn_00546be0(struct unit* u)
 {
 	if (u->house == 0xffff) {
 		return;
 	}
-	if (g_7f4ca0[u->house].owner == u->owner && g_7f4ca0[u->house].type != 0xf) {
-		if (g_7f4ca0[u->house].active > 0) {
+	if (((struct house*)g_7f4ca0)[u->house].owner == u->owner && ((struct house*)g_7f4ca0)[u->house].type != 0xf) {
+		if (((struct house*)g_7f4ca0)[u->house].active > 0) {
 			return;
 		}
 		switch (u->kind) {

@@ -14,7 +14,8 @@ typedef struct Ent {
 void __cdecl fcn_004f4830(int a, Stat* st);
 int __cdecl fcn_00507b00(int job);
 
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 unsigned short __cdecl fcn_0042e410(int n);
 
@@ -29,7 +30,7 @@ int __cdecl fcn_004910e0(Ent* e, int a2, int* out)
 	int d;
 
 	r = fcn_00507b00(e->job);
-	if (g_7f4c00 < 4) {
+	if ((*(int*)&g_7f4c00) < 4) {
 		return 0;
 	}
 	fcn_004f4830(0xc, &st);

@@ -1,14 +1,11 @@
-typedef struct Pair0c {
-	int key;
-	int val;
-	int pad;
-} Pair0c;
+#include "client_types.h"
+typedef Pair0c_1011980 Pair0c;
 // SIZE 0xc
 
 // GLOBAL: GOLDTL 0x1011980
-extern Pair0c g_1011980[6];
+extern Pair0c_1011980 g_1011980[6];
 // GLOBAL: GOLD 0xf8ab80
-extern Pair0c g_1011980[6];
+extern Pair0c_1011980 g_1011980[6];
 
 // FUNCTION: GOLD 0x00476b80
 // SIZE: 98

@@ -33,9 +33,10 @@ typedef struct Desc {
 } Desc;
 // SIZE 0x18
 
-extern int g_aed32c;
-extern int g_7f4c00;
-extern short g_7f4c04;
+extern char* g_aed32c;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c06;
 extern int g_7f4c0a;
 extern unsigned char g_773d75;
@@ -96,13 +97,13 @@ int __cdecl fcn_005dbf10(Ent* ent, Cmd* cmd)
 			v8 = 1;
 			one = 1;
 			fcn_004c4510(cmd->rec, *(int*) (cmd->rec + 1));
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - g_aed32c + 0x1c), &vc);
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - g_aed32c + 0x21), &v8);
-			fcn_004c4570(1, 1, (unsigned short) ((int) cmd->rec - g_aed32c + 0x20), &one);
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - g_aed32c + 0x2d), &g_7f4c00);
-			fcn_004c4570(2, 1, (unsigned short) ((int) cmd->rec - g_aed32c + 0x31), &g_7f4c04);
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - g_aed32c + 0x33), &g_7f4c06);
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - g_aed32c + 0x37), &g_7f4c0a);
+			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x1c), &vc);
+			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x21), &v8);
+			fcn_004c4570(1, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x20), &one);
+			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x2d), &(*(int*)&g_7f4c00));
+			fcn_004c4570(2, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x31), &(*(short*)&g_7f4c04));
+			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x33), &g_7f4c06);
+			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x37), &g_7f4c0a);
 			fcn_004c5360();
 		}
 		if (d->value == 0) {

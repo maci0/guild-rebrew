@@ -1,16 +1,10 @@
 // SIZE 0xc
-typedef struct {
-	float x;
-	float y;
-	float z;
-} Vec3;
+#include "client_types.h"
+typedef Vec3_67bbdc Vec3;
 
 // SIZE 0xc
-typedef struct {
-	int color;
-	float f4;
-	float f8;
-} Pal;
+#include "client_types.h"
+typedef Pal_1041d20 Pal;
 
 // SIZE 0x60
 typedef struct {
@@ -37,28 +31,28 @@ typedef struct {
 	int x3c8;
 } Cfg;
 
-extern void* g_1043254;
-extern char g_1042340;
-extern void* g_1042538;
+extern char* g_1043254;
+extern char g_1042340[];
+extern char* g_1042538;
 extern char g_1043060;
-extern void* g_1040c74;
-extern char g_1040640;
+extern char* g_1040c74;
+extern char g_1040640[];
 extern int g_6b8300;
 extern int g_6b89c0;
-extern Cfg* g_67a370;
-extern Vec3 g_6b86c4;
-extern Vec3 g_67bbdc;
-extern Pal g_1041d20[6];
-extern Slot g_1041d80[7];
+extern int g_67a370;
+extern Vec3_67bbdc g_6b86c4;
+extern Vec3_67bbdc g_67bbdc;
+extern Pal_1041d20 g_1041d20[6];
+extern char g_1041d80[];
 extern int g_6b8484;
-extern int g_6b8480;
-extern int g_6b847c;
-extern int g_6b8478;
+extern char* g_6b8480;
+extern char* g_6b847c;
+extern char* g_6b8478;
 extern int g_6b8058;
 extern int g_67a37c;
 extern int g_67a380;
 extern int g_6b8010;
-extern Level g_10432c0[];
+extern char g_10432c0[];
 
 void __cdecl fcn_004398d0(void*);
 void __cdecl fcn_00452420(void*);
@@ -76,11 +70,11 @@ void __cdecl fcn_00442e30(void)
 	char* d;
 	int n;
 
-	while (g_1043254 != &g_1042340) {
-		fcn_004398d0(g_1043254);
+	while ((*(void**)&g_1043254) != &(*(char*)g_1042340)) {
+		fcn_004398d0((*(void**)&g_1043254));
 	}
-	while (g_1040c74 != &g_1040640) {
-		fcn_00452420(g_1040c74);
+	while (((void*)g_1040c74) != &(*(char*)g_1040640)) {
+		fcn_00452420(((void*)g_1040c74));
 	}
 	if (g_6b8300 != 0) {
 		fcn_0043bcf0(g_6b8300);
@@ -90,12 +84,12 @@ void __cdecl fcn_00442e30(void)
 		fcn_00459b40(g_6b89c0);
 		g_6b89c0 = 0;
 	}
-	if (g_67a370->x3c8 != 0) {
-		fcn_0041ddd0(g_67a370->x3c8);
-		g_67a370->x3c8 = 0;
+	if (((Cfg*)g_67a370)->x3c8 != 0) {
+		fcn_0041ddd0(((Cfg*)g_67a370)->x3c8);
+		((Cfg*)g_67a370)->x3c8 = 0;
 	}
-	g_1043254 = &g_1042340;
-	g_1042538 = &g_1043060;
+	(*(void**)&g_1043254) = &(*(char*)g_1042340);
+	(*(void**)&g_1042538) = &g_1043060;
 	g_6b86c4.x = 0.0f;
 	g_6b86c4.y = 0.0f;
 	g_6b86c4.z = 0.0f;
@@ -109,13 +103,13 @@ void __cdecl fcn_00442e30(void)
 	}
 	n = 0x48;
 	for (i = 0; i < 7; i++) {
-		g_1041d80[i].a.x = g_67bbdc.x;
-		g_1041d80[i].a.y = g_67bbdc.y;
-		g_1041d80[i].a.z = g_67bbdc.z;
-		g_1041d80[i].b.x = g_6b86c4.x;
-		g_1041d80[i].b.y = g_6b86c4.y;
-		g_1041d80[i].b.z = g_6b86c4.z;
-		d = (char*) g_1041d80[i].pal;
+		((Slot*)g_1041d80)[i].a.x = g_67bbdc.x;
+		((Slot*)g_1041d80)[i].a.y = g_67bbdc.y;
+		((Slot*)g_1041d80)[i].a.z = g_67bbdc.z;
+		((Slot*)g_1041d80)[i].b.x = g_6b86c4.x;
+		((Slot*)g_1041d80)[i].b.y = g_6b86c4.y;
+		((Slot*)g_1041d80)[i].b.z = g_6b86c4.z;
+		d = (char*) ((Slot*)g_1041d80)[i].pal;
 		/*
 		 * TODO: replace this inline-asm copy with proper C once a spelling is
 		 * found; no msvc6 C memcpy form emits the prelude
@@ -140,16 +134,16 @@ void __cdecl fcn_00442e30(void)
 		}
 	}
 	g_6b8484 = 0;
-	g_6b8480 = 0;
-	g_6b847c = 0;
-	g_6b8478 = 0;
+	(*(int*)&g_6b8480) = 0;
+	(*(int*)&g_6b847c) = 0;
+	(*(int*)&g_6b8478) = 0;
 	fcn_00444040();
 	g_6b8058 = 0;
 	g_67a37c = 4;
 	g_67a380 = 0xf;
-	g_10432c0[g_6b8010].x84 = 0;
-	g_10432c0[g_6b8010].x80 = 0;
-	g_10432c0[g_6b8010].b3d5 = 0;
-	g_10432c0[g_6b8010].b3d4 = 0;
-	g_10432c0[g_6b8010].b0 = 0;
+	((Level*)g_10432c0)[g_6b8010].x84 = 0;
+	((Level*)g_10432c0)[g_6b8010].x80 = 0;
+	((Level*)g_10432c0)[g_6b8010].b3d5 = 0;
+	((Level*)g_10432c0)[g_6b8010].b3d4 = 0;
+	((Level*)g_10432c0)[g_6b8010].b0 = 0;
 }

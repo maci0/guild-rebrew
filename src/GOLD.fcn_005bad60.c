@@ -1,31 +1,20 @@
 // FUNCTION: GOLD 0x005bad60
 // SIZE: 508
 
-typedef struct
-{
-	int btn;
-	char* item;
-} Btn;
+#include "client_types.h"
+typedef Btn_776c60 Btn;
 // SIZE 0x8
 
-typedef struct
-{
-	char pad0[0x398];
-	int x398;
-	int x39c;
-	int x3a0;
-	int x3a4;
-	char pad3a8[0x3c4 - 0x3a8];
-} Win;
+typedef Win_f8f120 Win;
 // SIZE 0x3c4
 
 extern int g_6abb00;
 extern short g_fb9070;
 extern short g_fb9072;
-extern Win g_f8f120[];
+extern Win_f8f120 g_f8f120[];
 extern int g_772514;
 extern unsigned short g_774970;
-extern Btn g_776c60[6];
+extern Btn_776c60 g_776c60[6];
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14a92bc;

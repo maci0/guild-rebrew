@@ -11,7 +11,8 @@ struct unit {
 	char pad1[0x14b];
 };
 
-extern struct unit g_77e980[1024];
+#include "client_types.h"
+extern unit_77e980 g_77e980[1024];
 extern struct unit* g_7dc420;
 extern char g_7749dc;
 extern int g_7749e0;
@@ -51,7 +52,7 @@ struct unit* __cdecl fcn_005463a0(int n, ...)
 		}
 	}
 	va_end(ap);
-	g_7dc420 = g_77e980;
+	g_7dc420 = ((struct unit*)g_77e980);
 	i = 0;
 	while (g_7dc420->kind == 0 && i < 0x400) {
 		g_7dc420++;

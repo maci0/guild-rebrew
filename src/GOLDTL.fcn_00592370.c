@@ -4,13 +4,10 @@
 // SIZE: 136
 
 // SIZE 0xc
-typedef struct {
-	int a;
-	int b;
-	int c;
-} Slot;
+#include "client_types.h"
+typedef Slot_779d00 Slot;
 
-extern Slot g_779d00[];
+extern Slot_779d00 g_779d00[];
 
 int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
 

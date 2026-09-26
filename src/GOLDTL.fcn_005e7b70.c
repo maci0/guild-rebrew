@@ -50,10 +50,11 @@ typedef struct {
 
 extern Row_5e7b70 g_6ad584[];
 extern Slot_5e7b70 g_7765a0[];
-extern Win_5e7b70 g_1015f40[];
-extern Ctl_5e7b70* g_1015ea0;
-extern Gfx_5e7b70* g_772500;
-extern Ent_5e7b70 g_7f4ca0[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
+extern char* g_772500;
+extern char g_7f4ca0[];
 extern char* g_14a5320[];
 extern int g_772514;
 extern unsigned short g_774970;
@@ -83,33 +84,33 @@ void __cdecl fcn_005e7b70(int row, int count, int* list)
 
 	g_772514 = g_6ad584[row].win;
 	fcn_00519190((int) "$C");
-	w = g_1015f40[g_772514].w;
-	h = g_1015f40[g_772514].h;
+	w = ((Win_5e7b70*)g_1015f40)[g_772514].w;
+	h = ((Win_5e7b70*)g_1015f40)[g_772514].h;
 	x = (w - 0xc4) / 2;
 	info = g_7765a0[row].info;
 	sprintf(buf, "%s %s %s", g_14a5320[(info[9] ? 0x11e : 0x114) + info[0xd]], info + 0x30, info + 0x40);
 	c = fcn_0046fac0(0, 5, buf, g_6ad584[row].win);
-	g_1015ea0[c].w = w;
-	g_1015ea0[c].x6c = 1;
+	((Ctl_5e7b70*)g_1015ea0)[c].w = w;
+	((Ctl_5e7b70*)g_1015ea0)[c].x6c = 1;
 	fcn_00472900(c, 0x54);
 	if (row != 0) {
 		icon = g_7765a0[row].icon;
 		y = h / 2;
-		fcn_0046f740(x - 0x37, y - g_772500[icon].w / 2, icon, g_6ad584[row].win);
+		fcn_0046f740(x - 0x37, y - ((Gfx_5e7b70*)g_772500)[icon].w / 2, icon, g_6ad584[row].win);
 	} else {
-		icon = g_7f4ca0[g_774970].icon;
+		icon = ((Ent_5e7b70*)g_7f4ca0)[g_774970].icon;
 		y = h / 2;
-		fcn_0046f740(x - 0x37, y - g_772500[icon].w / 2, icon, g_6ad584[row].win);
+		fcn_0046f740(x - 0x37, y - ((Gfx_5e7b70*)g_772500)[icon].w / 2, icon, g_6ad584[row].win);
 	}
 	for (i = 0; i < count; i++, x += 0x20) {
 		if (g_7765a0[row].fixed >= 0) {
-			g_6ad584[row].items[i] = fcn_0046f740(x, y - g_772500[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
+			g_6ad584[row].items[i] = fcn_0046f740(x, y - ((Gfx_5e7b70*)g_772500)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
 		} else if (row != 0 && i < 2 && g_776658 == 4) {
-			g_6ad584[row].items[i] = fcn_0046f740(x, y - g_772500[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
+			g_6ad584[row].items[i] = fcn_0046f740(x, y - ((Gfx_5e7b70*)g_772500)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
 		} else {
-			g_6ad584[row].items[i] = fcn_0046f740(x, y - g_772500[list[i] + 0x775].w / 2, list[i] + 0x775, g_6ad584[row].win);
+			g_6ad584[row].items[i] = fcn_0046f740(x, y - ((Gfx_5e7b70*)g_772500)[list[i] + 0x775].w / 2, list[i] + 0x775, g_6ad584[row].win);
 			if (row == 0 && i < 2) {
-				g_1015ea0[g_6ad584[0].items[i]].x60 = 1;
+				((Ctl_5e7b70*)g_1015ea0)[g_6ad584[0].items[i]].x60 = 1;
 			}
 		}
 	}

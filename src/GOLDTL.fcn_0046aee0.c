@@ -39,9 +39,10 @@ typedef struct Win {
 } Win;
 // SIZE 0x3cc
 
-extern Slot* g_1015ea0;
-extern Win g_1015f40[];
-extern Slot** g_772540;
+extern char* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern void** g_772540;
 extern int g_67d38c;
 extern int g_67d388;
 extern int g_67d374;
@@ -70,13 +71,13 @@ int __cdecl fcn_0046aee0(int x, int y)
 	g_67d374 = -1;
 	for (i = 0x3ff; i >= 0; i--) {
 		hidden = 0;
-		s = g_772540[i];
+		s = ((Slot**)g_772540)[i];
 		if (s) {
 			if (s->owner) {
 				hidden = *(int*) (s->owner + 0x198);
 			}
 			if (x >= s->x && x <= s->x + s->w && y >= s->y && y <= s->y + s->h && !hidden
-				&& y >= s->top && y <= s->bottom && !s->hidden4c && !s->hidden48 && g_1015ea0[s->id].type == 0x40 && g_1015f40[s->result].active) {
+				&& y >= s->top && y <= s->bottom && !s->hidden4c && !s->hidden48 && ((Slot*)g_1015ea0)[s->id].type == 0x40 && ((Win*)g_1015f40)[s->result].active) {
 				g_67d38c = s->result;
 				break;
 			}
@@ -84,7 +85,7 @@ int __cdecl fcn_0046aee0(int x, int y)
 	}
 	for (i = 0x3ff; i >= 0; i--) {
 		hidden = 0;
-		s = g_772540[i];
+		s = ((Slot**)g_772540)[i];
 		if (s) {
 			if (s->owner) {
 				hidden = *(int*) (s->owner + 0x198);
@@ -92,7 +93,7 @@ int __cdecl fcn_0046aee0(int x, int y)
 			if (x >= s->x && x <= s->x + s->w && y >= s->y && y <= s->y + s->h && !hidden) {
 				lk = s->link;
 				if (lk) {
-					w = &g_1015ea0[lk[0x27c / 4]];
+					w = &((Slot*)g_1015ea0)[lk[0x27c / 4]];
 					left = lk[1] > w->left ? lk[1] : w->left;
 					right = lk[1] + lk[3] < w->right ? lk[1] + lk[3] : w->right;
 					top = lk[2] > w->top ? lk[2] : w->top;

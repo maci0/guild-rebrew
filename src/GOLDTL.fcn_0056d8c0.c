@@ -5,17 +5,8 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 char* __cdecl gm_AddObjekt(void);
@@ -58,5 +49,5 @@ void __cdecl fcn_0056d8c0(char* u)
 	}
 	*(int*) (u + 0x100) = 0;
 	*(int*) (u + 0x104) = 0;
-	*(struct pos14*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
 }

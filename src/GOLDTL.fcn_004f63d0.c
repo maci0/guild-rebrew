@@ -5,19 +5,9 @@
 
 #include <string.h>
 
+#include "client_types.h"
 #pragma pack(push, 1)
-typedef struct
-{
-	int id;
-	char p4[0xe];
-	int x12;
-	int x16;
-	char p1a[2];
-	unsigned char x1c;
-	char p1d[8];
-	unsigned int x25;
-	char p29[4];
-} Rec2d;
+typedef Rec2d_9a3800 Rec2d;
 // SIZE 0x2d
 #pragma pack(pop)
 
@@ -28,8 +18,9 @@ typedef struct
 } Pair;
 // SIZE 0x8
 
-extern Rec2d g_9a3800[512];
-extern Pair g_99f800[0x800];
+extern Rec2d_9a3800 g_9a3800[512];
+#include "client_types.h"
+extern Pair_99f800 g_99f800[0x800];
 extern char g_7f4ca0[];
 
 void* __cdecl fcn_00508e40(int id);
@@ -52,8 +43,8 @@ int __cdecl fcn_004f63d0(int id, int* out, unsigned short k)
 	}
 	memset(out, 0xff, 0x20 * 4);
 	for (i = 0; i < 0x800; i++) {
-		if (g_99f800[i].a == *(int*) (e + 4)) {
-			s = fcn_004f5810(g_99f800[i].b);
+		if (((Pair*)g_99f800)[i].a == *(int*) (e + 4)) {
+			s = fcn_004f5810(((Pair*)g_99f800)[i].b);
 			if (s != -1 && g_9a3800[s].x16 == id) {
 				out[cnt] = s;
 				cnt++;

@@ -6,14 +6,10 @@
 #include <string.h>
 
 // SIZE 0x4c
-typedef struct {
-	int handler;
-	unsigned char kind;
-	char name[0x43];
-	int param;
-} Entry;
+#include "client_types.h"
+typedef Entry_14d0c40 Entry;
 
-extern Entry g_14d0c40[];
+extern Entry_14d0c40 g_14d0c40[];
 void __cdecl fcn_0041d9e0(const char* msg);
 
 int __cdecl fcn_00406210(int idx, int handler, unsigned char kind, const char* name, int param)

@@ -1,11 +1,8 @@
-typedef struct Group {
-	int count;
-	int sel;
-	int ids[33];
-} Group;
+#include "client_types.h"
+typedef Group_102cbc4 Group;
 // SIZE 0x8c
 
-extern Group g_102cbc4[8];
+extern Group_102cbc4 g_102cbc4[8];
 
 void __cdecl fcn_00472380(int id, int on);
 

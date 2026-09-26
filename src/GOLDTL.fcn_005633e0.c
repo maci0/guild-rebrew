@@ -3,16 +3,6 @@
 // FUNCTION: GOLDTL 0x5633e0
 // SIZE: 461
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 #pragma pack(1)
 // SIZE 0x24d
 struct good {
@@ -30,15 +20,16 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct pos14 g_7f4c00;
-extern struct good* g_868050;
-extern struct house g_7f4ca0[768];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned char* g_868050;
+extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 extern char g_6b5c60[];
 extern char g_6a65a4[];
 
 unsigned short __cdecl fcn_0042e410(int);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -57,21 +48,21 @@ void __cdecl fcn_005633e0(char* u)
 	int v;
 
 	h = 0;
-	*(struct pos14*) (u + 0x52) = g_7f4c00;
-	fcn_00500bb0((struct pos14*) (u + 0x52), fcn_0042e410(3) + 4, 0, 0);
+	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), fcn_0042e410(3) + 4, 0, 0);
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0xac));
 	if (e != 0) {
-		gd = &g_868050[*e];
+		gd = &((struct good*)g_868050)[*e];
 		if (gd->kind != 0xd && gd->kind != 0xc && gd->kind != 0xb) {
 			fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 2, 0);
 			*(int*) (u + 0xb8) = 0;
 			if (*(unsigned short*) (e + 0x25) != 0xffff) {
-				h = &g_7f4ca0[*(unsigned short*) (e + 0x25)];
+				h = &((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x25)];
 				if (h != 0 && (u[0x78] & 2) != 0 && *e != 0x27) {
 					for (i = 0; i < 768; i++) {
-						if ((g_7f4ca0[i].type == 6 || g_7f4ca0[i].type == 7) && g_7f4ca0[i].owner != h->owner) {
+						if ((((struct house*)g_7f4ca0)[i].type == 6 || ((struct house*)g_7f4ca0)[i].type == 7) && ((struct house*)g_7f4ca0)[i].owner != h->owner) {
 							fcn_0051af00(text, 0x17f4, h->id, e, *(int*) (u + 0xb0));
-							fcn_00545e80(g_7f4ca0[i].owner, -1, text, 0, 0x5ec, *(int*) (e + 1), -1, g_6b5c60, g_6a65a4);
+							fcn_00545e80(((struct house*)g_7f4ca0)[i].owner, -1, text, 0, 0x5ec, *(int*) (e + 1), -1, g_6b5c60, g_6a65a4);
 						}
 					}
 				}

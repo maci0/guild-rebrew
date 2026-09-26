@@ -1,17 +1,7 @@
 void __cdecl fcn_004c5620(int, char*);
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x00547430
 // SIZE: 235

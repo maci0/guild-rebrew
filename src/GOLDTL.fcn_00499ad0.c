@@ -37,8 +37,9 @@ typedef struct {
 	char pad8[0x214];
 } House499a;
 
-extern House499a g_7f4ca0[768];
-extern Time499a g_7f4c00;
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern unsigned char g_6a375c;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -77,7 +78,7 @@ int __cdecl fcn_00499ad0(char* e)
 	fcn_004c4570(1, 1, 0xd, &ret);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);
-	st = g_7f4c00;
+	st = (*(Time499a*)&g_7f4c00);
 	fcn_00500bb0(&st, fcn_0042e410(4) + 1, fcn_0042e410(8) * 7, 0);
 	if (e[2] == 5) {
 		i = 0;
@@ -85,7 +86,7 @@ int __cdecl fcn_00499ad0(char* e)
 			if (i >= g_6a375c) {
 				break;
 			}
-			if (g_7f4ca0[k].type == 6 || g_7f4ca0[k].type == 7) {
+			if (((House499a*)g_7f4ca0)[k].type == 6 || ((House499a*)g_7f4ca0)[k].type == 7) {
 				{
 					int dst;
 					int n;
@@ -110,7 +111,7 @@ int __cdecl fcn_00499ad0(char* e)
 					rep stosb
 					}
 				}
-				m.owner = g_7f4ca0[k].owner;
+				m.owner = ((House499a*)g_7f4ca0)[k].owner;
 				m.kind = 0x69;
 				m.target = -1;
 				m.code = 9;

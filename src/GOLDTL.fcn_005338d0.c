@@ -14,7 +14,8 @@ typedef struct {
 	char path[0x80];
 } Cache;
 
-extern Cache g_7e46c0[32];
+#include "client_types.h"
+extern s_7e46c0 g_7e46c0[32];
 extern char g_6a3110[];
 extern char g_6a30e4[];
 
@@ -26,13 +27,13 @@ char* __cdecl fcn_005338d0(char* name, char* path, int arg)
 	int i;
 
 	for (i = 0; i < 32; i++) {
-		if (g_7e46c0[i].obj != 0 && strcmp(g_7e46c0[i].name, name) == 0) {
-			*(int*) (g_7e46c0[i].obj + 0x224) = 1;
-			return g_7e46c0[i].obj;
+		if (((Cache*)g_7e46c0)[i].obj != 0 && strcmp(((Cache*)g_7e46c0)[i].name, name) == 0) {
+			*(int*) (((Cache*)g_7e46c0)[i].obj + 0x224) = 1;
+			return ((Cache*)g_7e46c0)[i].obj;
 		}
 	}
 	for (i = 0; i < 32; i++) {
-		if (g_7e46c0[i].obj == 0) {
+		if (((Cache*)g_7e46c0)[i].obj == 0) {
 			break;
 		}
 	}
@@ -40,16 +41,16 @@ char* __cdecl fcn_005338d0(char* name, char* path, int arg)
 		sprintf(buf, g_6a3110, name);
 		return 0;
 	}
-	g_7e46c0[i].obj = fcn_00412eb0(name, 2);
-	if (g_7e46c0[i].obj == 0) {
+	((Cache*)g_7e46c0)[i].obj = fcn_00412eb0(name, 2);
+	if (((Cache*)g_7e46c0)[i].obj == 0) {
 		sprintf(buf, g_6a30e4, name);
 		return 0;
 	}
-	g_7e46c0[i].arg = arg;
-	strncpy(g_7e46c0[i].path, path, 0x80);
-	strncpy(g_7e46c0[i].name, name, 0x40);
-	g_7e46c0[i].path[0x7f] = 0;
-	g_7e46c0[i].name[0x3f] = 0;
-	*(int*) (g_7e46c0[i].obj + 0x224) = 1;
-	return g_7e46c0[i].obj;
+	((Cache*)g_7e46c0)[i].arg = arg;
+	strncpy(((Cache*)g_7e46c0)[i].path, path, 0x80);
+	strncpy(((Cache*)g_7e46c0)[i].name, name, 0x40);
+	((Cache*)g_7e46c0)[i].path[0x7f] = 0;
+	((Cache*)g_7e46c0)[i].name[0x3f] = 0;
+	*(int*) (((Cache*)g_7e46c0)[i].obj + 0x224) = 1;
+	return ((Cache*)g_7e46c0)[i].obj;
 }

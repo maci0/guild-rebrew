@@ -2,7 +2,8 @@ extern char g_99f5a0[];
 
 void __cdecl fcn_004c6a00(void* msg);
 
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x004f9190
 // SIZE: 132
@@ -40,7 +41,7 @@ void __cdecl fcn_004fb650(int a1, int a2, int a3, int a4)
 	buf[9] = 0x696e6974;
 	buf[0] = a1;
 	buf[1] = 0;
-	buf[2] = g_7f4c00;
+	buf[2] = (*(int*)&g_7f4c00);
 	buf[3] = a2;
 	buf[4] = a3;
 	buf[5] = 0;

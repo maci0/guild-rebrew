@@ -7,9 +7,10 @@ typedef struct {
 	char pad[0x28];
 } T422760;
 
+#include "client_types.h"
 // GLOBAL: GOLD 0x1460a20
-extern T422760 g_14cbbe0;
-extern T422760* g_6b7e88;
+extern Voice_14cbbe0 g_14cbbe0;
+extern char* g_6b7e88;
 // GLOBAL: GOLD 0x6332ac
 extern int g_6b7e8c;
 
@@ -26,9 +27,9 @@ T422760* __cdecl fcn_00422760(int key, int* idx)
 	int n;
 
 	if (g_6b7d7c == 0) {
-		return &g_14cbbe0;
+		return &(*(T422760*)&g_14cbbe0);
 	}
-	t = g_6b7e88;
+	t = ((T422760*)g_6b7e88);
 	if (t != 0) {
 		n = g_6b7e8c;
 		for (i = *idx; i < n; i++) {

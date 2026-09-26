@@ -20,7 +20,8 @@ typedef struct {
 } holder;
 // SIZE 0x18
 
-extern stamp14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 void __cdecl sim_SetSyncParams(stamp14*, unsigned char, unsigned char, unsigned char);
 int __cdecl fcn_00500d20(stamp14*, stamp14*);
@@ -29,11 +30,11 @@ int __cdecl fcn_004b52d0(holder* p, int flag, int limit)
 {
 	if (flag != 0) {
 		if (p->st.t == 0 && p->st.type == 0 && p->st.f6 == 0 && p->st.f10 == 0) {
-			p->st.t = g_7f4c00.t;
-			sim_SetSyncParams(&p->st, (unsigned char) g_7f4c00.type, (unsigned char) g_7f4c00.f6,
-			    (unsigned char) g_7f4c00.f10);
+			p->st.t = (*(stamp14*)&g_7f4c00).t;
+			sim_SetSyncParams(&p->st, (unsigned char) (*(stamp14*)&g_7f4c00).type, (unsigned char) (*(stamp14*)&g_7f4c00).f6,
+			    (unsigned char) (*(stamp14*)&g_7f4c00).f10);
 		}
-		return fcn_00500d20(&p->st, &g_7f4c00) >= limit;
+		return fcn_00500d20(&p->st, &(*(stamp14*)&g_7f4c00)) >= limit;
 	}
 	p->st.t = 0;
 	sim_SetSyncParams(&p->st, 0, 0, 0);

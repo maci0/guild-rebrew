@@ -1,7 +1,8 @@
+#include "client_types.h"
 // GLOBAL: GOLDTL 0x9a9220
-extern char g_9a9220[];
+extern Rec18_68da68 g_9a9220[42];
 // GLOBAL: GOLD 0x925120
-extern char g_9a9220[];
+extern Rec18_68da68 g_9a9220[42];
 // FUNCTION: GOLD 0x004e6f30
 // SIZE: 80
 // FUNCTION: GOLDTL 0x4e8af0

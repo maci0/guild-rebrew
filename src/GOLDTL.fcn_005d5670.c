@@ -3,17 +3,8 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	int f0;
 	char b4;
@@ -21,7 +12,7 @@ struct msg {
 	int f8;
 	int fc;
 	char pad10[0x18];
-	struct pos14 pos;
+	pos14_7f4c00 pos;
 	char b36;
 	char pad37[0x21];
 	int f58;
@@ -29,7 +20,7 @@ struct msg {
 	char pad60[0x98];
 };
 
-extern struct pos14 g_7f4c00;
+extern pos14_7f4c00 g_7f4c00;
 extern char s_6acc74[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
@@ -42,7 +33,7 @@ void __cdecl fcn_00471b60(int);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 unsigned short __cdecl fcn_0042e410(int);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
@@ -58,7 +49,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 {
 	int chance;
 	int dlg;
-	struct pos14 pos;
+	pos14_7f4c00 pos;
 	struct msg m;
 	char text[0x100];
 	char buf[0x80];

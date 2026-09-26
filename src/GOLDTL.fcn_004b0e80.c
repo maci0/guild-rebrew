@@ -14,9 +14,10 @@ typedef struct {
 	char padd[0x21c - 0xd];
 } Entity_4b0e80;
 
-extern stamp14_4b0e80 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char* g_773da8;
-extern Entity_4b0e80 g_7f4ca0[];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_0064eeec(char*);
 void __cdecl fcn_004c5530(void*);
@@ -96,7 +97,7 @@ int __cdecl fcn_004b0e80(int a1, int a2, char* a3)
 	}
 	cnt = 0;
 	for (i = 0; i < 0x300; i++) {
-		if (g_7f4ca0[i].slot != 0xffff && g_7f4ca0[i].type <= 4 && g_7f4ca0[i].faith == faith) {
+		if (((Entity_4b0e80*)g_7f4ca0)[i].slot != 0xffff && ((Entity_4b0e80*)g_7f4ca0)[i].type <= 4 && ((Entity_4b0e80*)g_7f4ca0)[i].faith == faith) {
 			cnt++;
 		}
 	}
@@ -113,7 +114,7 @@ int __cdecl fcn_004b0e80(int a1, int a2, char* a3)
 	m[0x36] = 2;
 	*(int*) (m + 0x58) = k;
 	*(int*) (m + 0x5c) = num;
-	*(stamp14_4b0e80*) (m + 0x28) = g_7f4c00;
+	*(stamp14_4b0e80*) (m + 0x28) = (*(stamp14_4b0e80*)&g_7f4c00);
 	*(short*) (m + 0x2c) = 8;
 	*(int*) (m + 0x2e) = 0;
 	fcn_004c5530(m);

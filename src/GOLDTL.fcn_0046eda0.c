@@ -71,9 +71,10 @@ typedef struct
 	char pad294[0x3cc - 0x294];
 } fcn_0046eda0_Win;
 
-extern fcn_0046eda0_Win g_1015f40[];
-extern fcn_0046eda0_Ent* g_1015ea0;
-extern fcn_0046eda0_Def* g_772500;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
+extern char* g_772500;
 extern int g_1040490;
 extern int g_1040494;
 
@@ -99,14 +100,14 @@ void __cdecl fcn_0046eda0(int w, int h, int win)
 	int gx;
 	int gy;
 
-	p = &g_1015f40[win];
+	p = &((fcn_0046eda0_Win*)g_1015f40)[win];
 	if (p->used == 0) {
 		return;
 	}
 	dw = w - p->w;
 	dh = h - p->h;
 	for (i = 0; i < p->count; i++) {
-		e = &g_1015ea0[p->children[i]];
+		e = &((fcn_0046eda0_Ent*)g_1015ea0)[p->children[i]];
 		if (p->y + p->h + dh < e->y + e->h) {
 			dh = e->y - p->y - p->h + e->h + 8;
 		}
@@ -131,7 +132,7 @@ void __cdecl fcn_0046eda0(int w, int h, int win)
 	p->w += dw;
 	p->h += dh;
 	if (p->flags & 4) {
-		g = (fcn_0046eda0_Grid*)&g_772500[p->def];
+		g = (fcn_0046eda0_Grid*)&((fcn_0046eda0_Def*)g_772500)[p->def];
 		ox = g->ox;
 		oy = g->oy;
 		gx = g->gx;
@@ -139,7 +140,7 @@ void __cdecl fcn_0046eda0(int w, int h, int win)
 		p->w = (p->w - ox * 2) / gx * gx + ox * 2;
 		p->h = (p->h - oy * 2) / gy * gy + oy * 2;
 	}
-	e = &g_1015ea0[p->ent];
+	e = &((fcn_0046eda0_Ent*)g_1015ea0)[p->ent];
 	e->bottom = p->y + p->h;
 	e->right = p->w + p->x;
 	if (p->y + p->h > g_1040490) {
@@ -149,7 +150,7 @@ void __cdecl fcn_0046eda0(int w, int h, int win)
 		p->w = g_1040494 - p->x;
 	}
 	if (p->flags & 4) {
-		g = (fcn_0046eda0_Grid*)&g_772500[p->def];
+		g = (fcn_0046eda0_Grid*)&((fcn_0046eda0_Def*)g_772500)[p->def];
 		ox = g->ox;
 		oy = g->oy;
 		gx = g->gx;
@@ -158,11 +159,11 @@ void __cdecl fcn_0046eda0(int w, int h, int win)
 		p->h = (p->h - oy * 2) / gy * gy + oy * 2;
 	}
 	for (i = 0; i < p->count; i++) {
-		e = &g_1015ea0[p->children[i]];
+		e = &((fcn_0046eda0_Ent*)g_1015ea0)[p->children[i]];
 		e->bottom = p->y + p->h;
 		e->right = p->w + p->x;
 	}
-	e = &g_1015ea0[p->ent];
+	e = &((fcn_0046eda0_Ent*)g_1015ea0)[p->ent];
 	e->w = p->w;
 	e->h = p->h;
 }

@@ -4,13 +4,8 @@
 // SIZE: 325
 
 // SIZE 0x14
-typedef struct {
-	float a;
-	float b;
-	float c;
-	float d;
-	float e;
-} Sample;
+#include "client_types.h"
+typedef Sample_99ec20 Sample;
 
 // SIZE 0x28
 typedef struct {
@@ -21,7 +16,7 @@ typedef struct {
 	char pad10[0x18];
 } Cur;
 
-extern Sample g_99ec20[16];
+extern Sample_99ec20 g_99ec20[16];
 extern double g_662950;
 
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);

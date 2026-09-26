@@ -6,23 +6,14 @@
 #include <math.h>
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl gm_StartFilteredEntitySearch();
 char* __cdecl gm_AddObjekt(void);
 void __cdecl fcn_00508cf0(int, int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
 void __cdecl fcn_0054d840(char* e)
@@ -44,7 +35,7 @@ void __cdecl fcn_0054d840(char* e)
 	if ((e[0x78] & 4) != 0) {
 		return;
 	}
-	*(struct pos14*) (e + 0x44) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x44) = g_7f4c00;
 	memset(cand, 0xff, sizeof(cand));
 	me = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 	for (o = gm_StartFilteredEntitySearch(1, 6); o != 0; o = gm_AddObjekt()) {
@@ -74,8 +65,8 @@ void __cdecl fcn_0054d840(char* e)
 	}
 	fcn_0064d41a(buf, "STREIFE_INIT: Target: %i, Way: %i, %i, %i, %i, Start: %i", *(int*) (e + 0xac), *(int*) (e + 0xb4),
 	    *(int*) (e + 0xb8), *(int*) (e + 0xbc), *(int*) (e + 0xc0), *(int*) (e + 0xb0));
-	*(struct pos14*) (e + 0x52) = g_7f4c00;
-	fcn_00500bb0((struct pos14*) (e + 0x52), 0, 0, 1);
+	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 	*(int*) (e + 0xd8) = 0;
 	e[0xdc] = 0;
 	*(int*) (e + 0xd4) = -1;

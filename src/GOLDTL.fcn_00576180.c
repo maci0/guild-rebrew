@@ -3,21 +3,12 @@
 // FUNCTION: GOLDTL 0x576180
 // SIZE: 628
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern float g_696550[];
 extern float g_696540[];
 
-int __cdecl fcn_00500e20(struct pos14*);
+int __cdecl fcn_00500e20(pos14_7f4c00*);
 char* __cdecl fcn_00508e40(int);
 int __cdecl ahm_CheckFlag(char*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -27,8 +18,8 @@ void __cdecl fcn_004ee6d0(char*, int, float);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_005764a0(char*, int);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
-int __cdecl fcn_00500d20(struct pos14*, struct pos14*);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+int __cdecl fcn_00500d20(pos14_7f4c00*, pos14_7f4c00*);
 
 void __cdecl fcn_00576180(char* u)
 {
@@ -60,24 +51,24 @@ void __cdecl fcn_00576180(char* u)
 				return;
 			}
 			if (fcn_005764a0(*(char**) (h + 0x16c), 0x24b) != 0) {
-				*(struct pos14*) (u + 0xc0) = g_7f4c00;
-				fcn_00500bb0((struct pos14*) (u + 0x52), 0, 0xf, 0);
+				*(pos14_7f4c00*) (u + 0xc0) = g_7f4c00;
+				fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 0xf, 0);
 				return;
 			}
 			if (*(int*) (u + 0x70) != 0) {
 				return;
 			}
-			*(int*) (u + 0xb8) -= fcn_00500d20((struct pos14*) (u + 0xc0), &g_7f4c00);
-			*(struct pos14*) (u + 0x52) = g_7f4c00;
-			fcn_00500bb0((struct pos14*) (u + 0x52), 0, 5, 0);
-			*(struct pos14*) (u + 0xc0) = g_7f4c00;
+			*(int*) (u + 0xb8) -= fcn_00500d20((pos14_7f4c00*) (u + 0xc0), &g_7f4c00);
+			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
+			*(pos14_7f4c00*) (u + 0xc0) = g_7f4c00;
 			if (*(int*) (u + 0xb8) <= 0) {
 				*(int*) (u + 0x70) = 1;
 			}
 			return;
 		}
-		*(struct pos14*) (u + 0xc0) = g_7f4c00;
-		fcn_00500bb0((struct pos14*) (u + 0x52), 1, 0, 0);
+		*(pos14_7f4c00*) (u + 0xc0) = g_7f4c00;
+		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
 		return;
 	}
 	fcn_00546190(u);

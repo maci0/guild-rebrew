@@ -9,7 +9,7 @@ typedef struct {
 } Slot;
 
 extern int g_6a25b8;
-extern unsigned char* g_7746c4;
+extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 extern int g_1040494;
 extern char g_6a2fac[];
@@ -26,7 +26,8 @@ extern int g_6a25f0;
 extern int g_6a25c0;
 extern unsigned short g_774970;
 extern int g_772514;
-extern Slot g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl fcn_004727a0(int h, int mode);
@@ -47,7 +48,7 @@ void __cdecl fcn_0052e5a0(void)
 		return;
 	}
 	if (g_7746c8 == 0) {
-		if (g_7746c4 != 0) {
+		if (((unsigned char*)g_7746c4) != 0) {
 			return;
 		}
 		g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2fac);
@@ -66,7 +67,7 @@ void __cdecl fcn_0052e5a0(void)
 	fcn_005186c0(*(unsigned short*) (g_7746c8 + 0x27), 2, 1, name);
 	fcn_00519190(g_6a2f9c, name, *g_7746c8 * 14 + 0x48e, g_7746c8 + 5);
 	fcn_004727a0(g_6a25b8, 0);
-	fcn_0046f740(((g_1015f40[g_772514].width - 0x30) >> 1) - 1, 0x4c, *g_7746c8 + 0x427, g_772514);
+	fcn_0046f740(((((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1) - 1, 0x4c, *g_7746c8 + 0x427, g_772514);
 	g_6a25c0 = fcn_004677e0(0x15, 0x7a, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
 	fcn_00472380(g_6a25c0, 0, 0x64, pct);
 	g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0cc);

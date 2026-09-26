@@ -7,17 +7,12 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-typedef struct Anim {
-	char* seq;
-	char frame;
-	char pad5[7];
-	char running;
-	char padd[7];
-} Anim;
+#include "client_types.h"
+typedef Anim_100e7a0 Anim;
 // SIZE 0x14
 
-extern Slot* g_1015ea0;
-extern Anim g_100e7a0[];
+extern char* g_1015ea0;
+extern Anim_100e7a0 g_100e7a0[0x30];
 
 // FUNCTION: GOLDTL 0x473030
 // SIZE: 131
@@ -28,7 +23,7 @@ void __cdecl fcn_00473030(int slot, char mode)
 	if (slot > 0x400) {
 		return;
 	}
-	s = &g_1015ea0[slot];
+	s = &((Slot*)g_1015ea0)[slot];
 	if (s->type != 4) {
 		return;
 	}

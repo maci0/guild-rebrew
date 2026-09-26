@@ -5,7 +5,8 @@ typedef struct {
 
 typedef int(__cdecl* fcn_004bbbd0_handler)(fcn_004bbbd0_msg*);
 
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern fcn_004bbbd0_handler g_6811b8[];
 
 char* __cdecl fcn_00508e40(int);
@@ -19,7 +20,7 @@ int __cdecl fcn_004bbbd0(fcn_004bbbd0_msg* m)
 {
 	char* p;
 
-	if (g_7f4c00 < 8)
+	if ((*(int*)&g_7f4c00) < 8)
 		return 0;
 	if (m == 0)
 		return -1;

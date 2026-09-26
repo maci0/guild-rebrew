@@ -74,8 +74,9 @@ typedef struct {
 	unsigned char count;
 } Party;
 
-extern Stamp g_7f4c00;
-extern Entity g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 extern char g_6b5c60[];
 
 void __cdecl fcn_005015e0(Player**, int, int, int);
@@ -116,7 +117,7 @@ void __cdecl fcn_0054b940(Order* o)
 	if (pl != 0) {
 		g = fcn_00502cd0(pl->home, 1, 0, 0x17);
 		if (g == 0) {
-			o->stamp = g_7f4c00;
+			o->stamp = (*(Stamp*)&g_7f4c00);
 			fcn_004c5620(-1, o);
 			return;
 		}
@@ -147,7 +148,7 @@ void __cdecl fcn_0054b940(Order* o)
 			rep stosb
 		}
 		n = 0;
-		party.ent = &g_7f4ca0[o->ent];
+		party.ent = &((Entity*)g_7f4ca0)[o->ent];
 		if (g != 0) {
 			first = g->a;
 			party.b = g->b;
@@ -182,11 +183,11 @@ void __cdecl fcn_0054b940(Order* o)
 			}
 			fcn_00545d40(party.ent->id, -1, msg, 0x20, 0x5fd, g_6b5c60);
 		}
-		o->stamp = g_7f4c00;
+		o->stamp = (*(Stamp*)&g_7f4c00);
 		fcn_004c5620(-1, o);
 		return;
 	case 1:
-		o->stamp = g_7f4c00;
+		o->stamp = (*(Stamp*)&g_7f4c00);
 		fcn_004c5620(-1, o);
 		return;
 	}

@@ -20,8 +20,9 @@ typedef struct
 	char pada[0x21c - 0xa];
 } fcn_005516e0_Ent;
 
-extern fcn_005516e0_Stamp g_7f4c00;
-extern fcn_005516e0_Ent g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 
 int __cdecl fcn_004c4450(int id);
 void __cdecl fcn_00546190(char* t);
@@ -61,7 +62,7 @@ void __cdecl fcn_005516e0(char* t)
 	*(int*) (t + 0x84) = -1;
 	switch (*(int*) (t + 0x70)) {
 	case 1:
-		e = &g_7f4ca0[*(unsigned short*) (t + 8)];
+		e = &((fcn_005516e0_Ent*)g_7f4ca0)[*(unsigned short*) (t + 8)];
 		fcn_00507130(fcn_00507b00(*(unsigned char*) (t + 0xb0)), &a, &b);
 		fcn_004c4510(e, e->h);
 		c = fcn_0042e410(0x10) + 0x10;
@@ -72,21 +73,21 @@ void __cdecl fcn_005516e0(char* t)
 		fcn_004c6470(e->h, *(unsigned char*) (t + 0xb0));
 		p = fcn_00508e40(*(int*) (t + 0xac));
 		if (p == 0) {
-			*(fcn_005516e0_Stamp*) (t + 0x52) = g_7f4c00;
+			*(fcn_005516e0_Stamp*) (t + 0x52) = (*(fcn_005516e0_Stamp*)&g_7f4c00);
 			fcn_004c5620(-1, t);
 			return;
 		}
 		fcn_0051af00(buf, 0x1a9c, e->id, (e->male ? 0x18f : 0x130) + *(unsigned char*) (t + 0xb0));
 		h = *(int*) (p + 4);
 		fcn_00545d40(h, h, buf, 0, 0x5f4, 0);
-		*(fcn_005516e0_Stamp*) (t + 0x52) = g_7f4c00;
+		*(fcn_005516e0_Stamp*) (t + 0x52) = (*(fcn_005516e0_Stamp*)&g_7f4c00);
 		fcn_004c5620(-1, t);
 		return;
 	case 0:
-		e = &g_7f4ca0[*(unsigned short*) (t + 8)];
+		e = &((fcn_005516e0_Ent*)g_7f4ca0)[*(unsigned short*) (t + 8)];
 		p = fcn_00508e40(*(int*) (t + 0xac));
 		if (p == 0) {
-			*(fcn_005516e0_Stamp*) (t + 0x52) = g_7f4c00;
+			*(fcn_005516e0_Stamp*) (t + 0x52) = (*(fcn_005516e0_Stamp*)&g_7f4c00);
 			fcn_004c5620(-1, t);
 			return;
 		}

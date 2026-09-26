@@ -31,7 +31,8 @@ typedef struct
 
 extern unsigned short g_774970;
 extern char g_7f4ca0[];
-extern Name14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 void __cdecl fcn_0051af00(void*, int, ...);
 int __cdecl fcn_00526120(char*, int);
@@ -52,7 +53,7 @@ int __cdecl fcn_0058ff60(char* a1, unsigned short* a2, int a3)
 		pkt.x36 = 1;
 		pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
 		pkt.xc = *(int*) (a1 + 1);
-		pkt.name = g_7f4c00;
+		pkt.name = (*(Name14*)&g_7f4c00);
 		if (d != 0) {
 			pkt.x60 = *(int*) (d + 2);
 		} else {

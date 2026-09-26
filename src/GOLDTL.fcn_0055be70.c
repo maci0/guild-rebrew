@@ -5,16 +5,6 @@
 
 #include <math.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x10
 struct search {
 	char* who;
@@ -23,7 +13,8 @@ struct search {
 	char* found;
 };
 
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl fcn_005462a0(void);
@@ -32,7 +23,7 @@ void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5ed0(int, char*, int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 unsigned short __cdecl fcn_0042e410(int);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
 int __cdecl fcn_0055be70(struct search* s)
@@ -88,8 +79,8 @@ int __cdecl fcn_0055be70(struct search* s)
 		}
 	}
 	*(int*) (found + 0xd4) = *(int*) (s->house + 4);
-	*(struct pos14*) (found + 0x52) = g_7f4c00;
-	fcn_00500bb0((struct pos14*) (found + 0x52), 0, 8, 0);
+	*(pos14_7f4c00*) (found + 0x52) = g_7f4c00;
+	fcn_00500bb0((pos14_7f4c00*) (found + 0x52), 0, 8, 0);
 	fcn_004c5620(0x400, found);
 	return 1;
 }

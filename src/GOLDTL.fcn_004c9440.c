@@ -15,7 +15,8 @@ typedef struct {
 // SIZE 0xe
 #pragma pack()
 
-extern stamp14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern int g_6a3438;
 extern int g_6a3434;
 extern int g_6a3430;
@@ -37,13 +38,13 @@ int __cdecl fcn_004c9440(char* x, char* out)
 {
 	int i;
 
-	if (fcn_00500cb0(&g_7f4c00, (stamp14*) (x + 0x10)) < 0) {
-		g_7f4c00 = *(stamp14*) (x + 0x10);
+	if (fcn_00500cb0(&(*(stamp14*)&g_7f4c00), (stamp14*) (x + 0x10)) < 0) {
+		(*(stamp14*)&g_7f4c00) = *(stamp14*) (x + 0x10);
 		if (g_6a3438 != 0)
 			fcn_00546d10();
 		if (g_6a3434 != 0) {
 			fcn_004fc180();
-			if (g_7f4c00.f6 % 6 == 0)
+			if ((*(stamp14*)&g_7f4c00).f6 % 6 == 0)
 				fcn_00500a40();
 		}
 		if (g_6a3430 != 0)

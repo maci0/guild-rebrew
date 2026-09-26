@@ -16,10 +16,11 @@ struct slot_4c3e30 {
 // SIZE 0xa
 #pragma pack(pop)
 
-extern struct node_4c3e30 g_9bade0[0x2000];
-extern struct slot_4c3e30 g_fb5760[0x8000];
-extern struct node_4c3e30* g_aed200;
-extern int g_aed324;
+extern char g_9bade0[];
+#include "client_types.h"
+extern cell10_fb5760 g_fb5760[0x8000];
+extern char* g_aed200;
+extern char* g_aed324;
 extern char g_1005780;
 extern int g_1005768;
 extern int g_1005760;
@@ -32,23 +33,23 @@ void __cdecl fcn_004c3e30(void)
 	int i;
 
 	for (i = 0; i < 0x2000; i++) {
-		g_9bade0[i].used = 0;
+		((struct node_4c3e30*)g_9bade0)[i].used = 0;
 		if (i == 0)
-			g_9bade0[0].prev = 0;
+			((struct node_4c3e30*)g_9bade0)[0].prev = 0;
 		else
-			g_9bade0[i].prev = &g_9bade0[i - 1];
+			((struct node_4c3e30*)g_9bade0)[i].prev = &((struct node_4c3e30*)g_9bade0)[i - 1];
 		if (i < 0x1fff)
-			g_9bade0[i].next = &g_9bade0[i + 1];
+			((struct node_4c3e30*)g_9bade0)[i].next = &((struct node_4c3e30*)g_9bade0)[i + 1];
 		else
-			g_9bade0[i].next = 0;
+			((struct node_4c3e30*)g_9bade0)[i].next = 0;
 	}
-	g_aed200 = g_9bade0;
-	g_aed324 = 0;
+	(*(struct node_4c3e30**)&g_aed200) = ((struct node_4c3e30*)g_9bade0);
+	(*(int*)&g_aed324) = 0;
 	g_1005780 = 0;
 	g_1005768 = 0;
 	g_1005760 = 0;
 	for (i = 0; i < 0x8000; i++) {
-		g_fb5760[i].owner = -1;
-		g_fb5760[i].free = 1;
+		((struct slot_4c3e30*)g_fb5760)[i].owner = -1;
+		((struct slot_4c3e30*)g_fb5760)[i].free = 1;
 	}
 }

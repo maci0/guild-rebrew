@@ -3,23 +3,13 @@
 // FUNCTION: GOLDTL 0x4f57e0
 // SIZE: 38
 
+#include "client_types.h"
 #pragma pack(push, 1)
-typedef struct
-{
-	int id;
-	char p4[0xe];
-	int x12;
-	int x16;
-	char p1a[2];
-	unsigned char x1c;
-	char p1d[8];
-	unsigned int x25;
-	char p29[4];
-} Rec2d;
+typedef Rec2d_9a3800 Rec2d;
 // SIZE 0x2d
 #pragma pack(pop)
 
-extern Rec2d g_9a3800[512];
+extern Rec2d_9a3800 g_9a3800[512];
 
 int __cdecl fcn_004f57e0(void)
 {

@@ -5,11 +5,12 @@
 
 extern int g_774714;
 extern int g_774950;
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern int g_774954;
 extern int g_774958;
 extern char g_774965;
-extern int g_68a9cc;
+extern char g_68a9cc[];
 extern int g_7749cc;
 extern int g_774934;
 extern int g_7747bc;
@@ -20,10 +21,10 @@ extern int g_7747c8;
 extern int g_7747cc;
 extern int g_6b5c2c;
 extern int g_774978;
-extern int g_7e2aa0;
-extern int g_7746cc;
-extern int g_7746c4;
-extern int g_7746c8;
+extern char* g_7e2aa0;
+extern char* g_7746cc;
+extern char* g_7746c4;
+extern unsigned char* g_7746c8;
 
 void __cdecl fcn_00545430(void);
 void __cdecl fcn_00538060(void);
@@ -50,11 +51,11 @@ void __cdecl fcn_0053f920(void)
 	fcn_00545430();
 	g_774714 = 1;
 	g_774950 = 1;
-	g_7f4c00 = 2;
+	(*(int*)&g_7f4c00) = 2;
 	g_774954 = 0;
 	g_774958 = 0;
 	g_774965 = 0;
-	g_68a9cc = 2;
+	(*(int*)g_68a9cc) = 2;
 	fcn_0042de90(fcn_00538060, 0x47);
 	fcn_0042df30(fcn_00538060, 1);
 	fcn_00546ed0();
@@ -75,10 +76,10 @@ void __cdecl fcn_0053f920(void)
 	fcn_00533880();
 	fcn_005338a0();
 	g_774978 = 0;
-	g_7e2aa0 = 0;
-	g_7746cc = 0;
-	g_7746c4 = 0;
-	g_7746c8 = 0;
+	(*(int*)&g_7e2aa0) = 0;
+	(*(int*)&g_7746cc) = 0;
+	(*(int*)&g_7746c4) = 0;
+	(*(int*)&g_7746c8) = 0;
 	fcn_005c80c0();
 	fcn_004bbd20();
 	fcn_0040bdc0();

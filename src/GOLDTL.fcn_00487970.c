@@ -18,13 +18,14 @@ typedef struct Race {
 	char pad242[0x24d - 0x242];
 } Race;
 
-extern Ent g_7f4ca0[];
-extern Race* g_868050;
-extern int g_7f4c00;
-extern int g_7f4c04;
+extern char g_7f4ca0[];
+extern unsigned char* g_868050;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
-extern char g_773d75;
+extern unsigned char g_773d75;
 extern char g_67e33c[];
 
 unsigned short __cdecl fcn_0042e410(int n);
@@ -67,7 +68,7 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 		y += *(int*) (it + 0xb4);
 	}
 	h = *(char**) (e + 0x16c);
-	r = &g_868050[*(unsigned char*) h];
+	r = &((Race*)g_868050)[*(unsigned char*) h];
 	dy = r->cap_y - y;
 	dx = r->cap_x - x;
 	if (dx <= 0 && dy <= 0) {
@@ -78,10 +79,10 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	}
 	memset(msg, 0, sizeof(msg));
 	msg[4] = 0x12;
-	*(int*) (msg + 8) = g_7f4ca0[*(unsigned short*) (h + 0x27)].handle;
+	*(int*) (msg + 8) = ((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle;
 	*(int*) (msg + 0xc) = *(int*) (h + 1);
-	*(int*) (msg + 0x28) = g_7f4c00;
-	*(int*) (msg + 0x2c) = g_7f4c04;
+	*(int*) (msg + 0x28) = (*(int*)&g_7f4c00);
+	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x30) = g_7f4c08;
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	msg[0x36] = 1;
@@ -92,7 +93,7 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	n = *(int*) (msg + 0x5c) + *(int*) (msg + 0x60);
 	fcn_004c4eb0(g_67e33c);
 	fcn_004c5530(msg);
-	fcn_004c5150(-1, g_7f4ca0[*(unsigned short*) (*(char**) (e + 0x16c) + 0x27)].handle, g_773d75, 0x1f40);
+	fcn_004c5150(-1, ((Ent*)g_7f4ca0)[*(unsigned short*) (*(char**) (e + 0x16c) + 0x27)].handle, (*(char*)&g_773d75), 0x1f40);
 	switch (fcn_0051e070()) {
 	case 0:
 		if (n == 1) {
@@ -112,7 +113,7 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 		break;
 	}
 	h = *(char**) (e + 0x16c);
-	fcn_00545e80(g_7f4ca0[*(unsigned short*) (h + 0x27)].handle, g_7f4ca0[*(unsigned short*) (h + 0x27)].handle, buf, 0, 0x60b, *(int*) (h + 1), -1, 0, 0);
+	fcn_00545e80(((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle, ((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle, buf, 0, 0x60b, *(int*) (h + 1), -1, 0, 0);
 	*(int*) (e + 0x1b8) -= n * 8000;
 	fcn_004c4ef0(g_67e33c);
 	*(int*) (e + 0x1c8) |= 8;

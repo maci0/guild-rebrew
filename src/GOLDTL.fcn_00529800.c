@@ -1,14 +1,9 @@
 int* __cdecl fcn_004ce610(char*);
 
 // SIZE 0x20
-struct s_7e2ac0 {
-	int key;
-	int pad[5];
-	int v;
-	int w;
-};
 
-extern struct s_7e2ac0 g_7e2ac0[48];
+#include "client_types.h"
+extern s_7e2ac0 g_7e2ac0[48];
 
 // FUNCTION: GOLD 0x00524940
 // SIZE: 141

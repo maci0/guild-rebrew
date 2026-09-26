@@ -1,14 +1,12 @@
-typedef struct {
-	int used;
-	char pad4[0x3d8];
-} Slot_4392c0;
+#include "client_types.h"
+typedef Slot_1043340 Slot_4392c0;
 // SIZE 0x3dc
 
 typedef void (__cdecl* node_fn_4392c0)(char* node);
 
 extern char g_6b8018;
 extern int g_6b8010;
-extern Slot_4392c0 g_1043340[64];
+extern Slot_1043340 g_1043340[64];
 extern char* g_1043254;
 extern char g_1042340[];
 extern char* g_1040c74;
@@ -16,7 +14,7 @@ extern char g_1040640[];
 extern int g_6b8484;
 extern int g_6b8300;
 extern int g_6b89c0;
-extern char* g_67a370;
+extern int g_67a370;
 extern char* g_1042c38;
 extern char g_1042d00[];
 extern char* g_1042320;
@@ -62,9 +60,9 @@ void __cdecl fcn_004392c0(void)
 				fcn_00459b40(g_6b89c0);
 				g_6b89c0 = 0;
 			}
-			if (*(void**) (g_67a370 + 0x3c8) != 0) {
-				fcn_0041ddd0(*(void**) (g_67a370 + 0x3c8));
-				*(void**) (g_67a370 + 0x3c8) = 0;
+			if (*(void**) (((char*)g_67a370) + 0x3c8) != 0) {
+				fcn_0041ddd0(*(void**) (((char*)g_67a370) + 0x3c8));
+				*(void**) (((char*)g_67a370) + 0x3c8) = 0;
 			}
 		}
 	}
@@ -82,9 +80,9 @@ void __cdecl fcn_004392c0(void)
 		fcn_00459b40(g_6b89c0);
 		g_6b89c0 = 0;
 	}
-	if (*(void**) (g_67a370 + 0x3c8) != 0) {
-		fcn_0041ddd0(*(void**) (g_67a370 + 0x3c8));
-		*(void**) (g_67a370 + 0x3c8) = 0;
+	if (*(void**) (((char*)g_67a370) + 0x3c8) != 0) {
+		fcn_0041ddd0(*(void**) (((char*)g_67a370) + 0x3c8));
+		*(void**) (((char*)g_67a370) + 0x3c8) = 0;
 	}
 	fcn_00452300();
 	fcn_00452280();

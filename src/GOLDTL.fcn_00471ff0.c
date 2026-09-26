@@ -1,5 +1,6 @@
-extern char g_1015f40[];
-extern char g_1038140[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern Obj_1038140 g_1038140[];
 extern int g_772534;
 
 int __cdecl fcn_00471f80(int id);
@@ -10,7 +11,7 @@ int __cdecl fcn_00471ff0(int j, int k)
 {
 	char* m;
 
-	m = g_1015f40 + ((int*) (g_1038140 + g_772534 * 0x2bc + 4))[k] * 0x3cc;
+	m = ((char*)g_1015f40) + ((int*) (((char*)g_1038140) + g_772534 * 0x2bc + 4))[k] * 0x3cc;
 	if (j > *(int*) (m + 0x2c)) {
 		return 0;
 	}

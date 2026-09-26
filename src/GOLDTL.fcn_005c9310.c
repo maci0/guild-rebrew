@@ -27,9 +27,10 @@ typedef struct
 } Screen;
 
 extern char* g_772500;
-extern Screen* g_77255c;
+extern char* g_77255c;
 extern int g_772514;
-extern Win g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 
 int __cdecl fcn_0050d5d0(int, int, char**);
 void __cdecl fcn_004727a0(int, int);
@@ -56,11 +57,11 @@ void __cdecl fcn_005c9310(unsigned short* who, int max, Row* rows, int dlg, int 
 	}
 	for (i = 0; i < cnt; i++) {
 		fcn_004727a0(dlg, n);
-		rows[i].icon = fcn_0046f740((g_77255c->width - w) >> 1, i * 0x80, 0x75a, g_772514);
-		rows[i].text = fcn_0046f100((g_77255c->width - w) >> 1, i * 0x80 + 4, w, 0x72, 0x10, g_772514);
+		rows[i].icon = fcn_0046f740((((Screen*)g_77255c)->width - w) >> 1, i * 0x80, 0x75a, g_772514);
+		rows[i].text = fcn_0046f100((((Screen*)g_77255c)->width - w) >> 1, i * 0x80 + 4, w, 0x72, 0x10, g_772514);
 		rows[i].obj = list[i];
-		g_1015f40[rows[i].text].x28c = 0x56;
-		g_1015f40[rows[i].text].x18 = 0x10;
+		((Win*)g_1015f40)[rows[i].text].x28c = 0x56;
+		((Win*)g_1015f40)[rows[i].text].x18 = 0x10;
 		t = gm_SearchTable67(*(int*) (rows[i].obj + 0xac));
 		if (t != 0) {
 			fcn_00519190(0x1f41, t, *(int*) (rows[i].obj + 0xb4), *(int*) (rows[i].obj + 0xc0), rows[i].obj + 0xc4);

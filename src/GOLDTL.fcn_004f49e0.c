@@ -18,21 +18,17 @@ typedef struct {
 #pragma pack()
 
 // SIZE 0x8
-typedef struct {
-	int owner;
-	int key;
-} Pair;
+#include "client_types.h"
+typedef Pair_99f800 Pair;
 
 // SIZE 0x24
-typedef struct {
-	int v;
-	char pad4[0x20];
-} Slot;
+#include "client_types.h"
+typedef Slot_68ff80 Slot;
 
-extern Slot g_68ff80[29];
+extern Slot_68ff80 g_68ff80[29];
 extern int g_773d38;
-extern Order g_9a3800[512];
-extern Pair g_99f800[0x800];
+extern Rec2d_9a3800 g_9a3800[512];
+extern Pair_99f800 g_99f800[0x800];
 
 int __cdecl fcn_00430910(void *, int, int, int);
 
@@ -61,7 +57,7 @@ int __cdecl fcn_004f49e0(int fp)
 		return 0;
 	}
 	for (i = 0; i < 512; i++) {
-		if (g_9a3800[i].id != -1) {
+		if (((Order*)g_9a3800)[i].id != -1) {
 			n1++;
 		}
 	}
@@ -77,32 +73,32 @@ int __cdecl fcn_004f49e0(int fp)
 		return 0;
 	}
 	for (i = 0; i < 512; i++) {
-		if (g_9a3800[i].id != -1) {
-			if (fcn_00430910(&g_9a3800[i].id, 4, 1, fp) == -1) {
+		if (((Order*)g_9a3800)[i].id != -1) {
+			if (fcn_00430910(&((Order*)g_9a3800)[i].id, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (fcn_00430910(g_9a3800[i].name, 0xe, 1, fp) == -1) {
+			if (fcn_00430910(((Order*)g_9a3800)[i].name, 0xe, 1, fp) == -1) {
 				return 0;
 			}
-			if (fcn_00430910(&g_9a3800[i].f12, 4, 1, fp) == -1) {
+			if (fcn_00430910(&((Order*)g_9a3800)[i].f12, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (fcn_00430910(&g_9a3800[i].target, 4, 1, fp) == -1) {
+			if (fcn_00430910(&((Order*)g_9a3800)[i].target, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (fcn_00430910(&g_9a3800[i].count, 2, 1, fp) == -1) {
+			if (fcn_00430910(&((Order*)g_9a3800)[i].count, 2, 1, fp) == -1) {
 				return 0;
 			}
-			if (fcn_00430910(&g_9a3800[i].kind, 1, 1, fp) == -1) {
+			if (fcn_00430910(&((Order*)g_9a3800)[i].kind, 1, 1, fp) == -1) {
 				return 0;
 			}
-			if (fcn_00430910(&g_9a3800[i].f1d, 4, 1, fp) == -1) {
+			if (fcn_00430910(&((Order*)g_9a3800)[i].f1d, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (fcn_00430910(&g_9a3800[i].arg, 4, 1, fp) == -1) {
+			if (fcn_00430910(&((Order*)g_9a3800)[i].arg, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (fcn_00430910(&g_9a3800[i].state, 4, 1, fp) == -1) {
+			if (fcn_00430910(&((Order*)g_9a3800)[i].state, 4, 1, fp) == -1) {
 				return 0;
 			}
 		}

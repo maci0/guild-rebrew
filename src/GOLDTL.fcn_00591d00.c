@@ -4,15 +4,12 @@
 // SIZE: 160
 
 // SIZE 0xc
-typedef struct {
-	int a;
-	int b;
-	int c;
-} Slot;
+#include "client_types.h"
+typedef Slot_779d00 Slot;
 
-extern Slot g_779d00[];
+extern Slot_779d00 g_779d00[];
 extern char g_14cf950;
-extern char g_14cf72a;
+extern char g_14cf72a[];
 extern char g_6b5c60[];
 
 void __cdecl fcn_00591c80(void);
@@ -26,9 +23,9 @@ void __cdecl fcn_00591d00(void)
 	int x;
 	char* r;
 
-	if (g_14cf950 != 0 && g_14cf72a == 0) {
+	if (g_14cf950 != 0 && (*(char*)g_14cf72a) == 0) {
 		for (i = 0; i < 11; i++) {
-			if ((char) g_779d00[i].a == g_14cf950 && g_14cf72a == 0) {
+			if ((char) g_779d00[i].a == g_14cf950 && (*(char*)g_14cf72a) == 0) {
 				fcn_00591c80();
 				if (g_779d00[i].b != -1) {
 					x = gm_SearchTable67(g_779d00[i].b);

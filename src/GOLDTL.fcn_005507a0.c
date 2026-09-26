@@ -1,16 +1,6 @@
 // FUNCTION: GOLDTL 0x5507a0
 // SIZE: 406
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x21c
 struct house {
 	unsigned short id;
@@ -20,8 +10,9 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct pos14 g_7f4c00;
-extern struct house g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 extern char* g_773da8;
 extern int g_100f884;
@@ -30,7 +21,7 @@ extern float g_6652c8;
 extern char g_6a5a10[];
 extern char g_6811b0[];
 
-int __cdecl fcn_00500cb0(struct pos14*, char*);
+int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_0050dac0(unsigned short);
@@ -68,7 +59,7 @@ void __cdecl fcn_005507a0(char* u)
 				return;
 			}
 			if (g_100f1dc == 2) {
-				fcn_004c5150(*(int*) (g_773da8 + 4), g_7f4ca0[*(unsigned short*) (u + 8)].owner, g_773d75,
+				fcn_004c5150(*(int*) (g_773da8 + 4), ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, g_773d75,
 				    (int) (fcn_0050dac0(*(unsigned short*) (u + 8)) * g_6652c8));
 				fcn_0050fe40(*(unsigned short*) (u + 8), 8);
 				fcn_00545780(u);

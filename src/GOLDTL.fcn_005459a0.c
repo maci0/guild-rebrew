@@ -6,22 +6,14 @@ extern int g_6a4768;
 extern int g_6a476c;
 
 // SIZE 0xc
-struct s_77e8c0 {
-	char* p;
-	int h;
-	int x8;
-};
 
-extern struct s_77e8c0 g_77e8c0[16];
+#include "client_types.h"
+extern s_77e8c0 g_77e8c0[16];
 
 // SIZE 0x3cc
-struct s_1015f4c {
-	char pad[0x270];
-	int f270;
-	char pad2[0x158];
-};
 
-extern struct s_1015f4c g_1015f4c[];
+#include "client_types.h"
+extern s_1015f4c g_1015f4c[];
 
 // FUNCTION: GOLDTL 0x5459a0
 // SIZE: 211

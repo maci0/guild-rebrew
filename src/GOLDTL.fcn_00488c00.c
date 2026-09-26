@@ -69,8 +69,9 @@ typedef struct Unit0488c00 {
 	char* info;
 } Unit0488c00;
 
-extern Ent0488c00 g_7f4ca0[768];
-extern Pos0488c00 g_7f4c00;
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 #pragma pack(push, 1)
 typedef struct Race0488c00 {
 	char kind;
@@ -78,7 +79,7 @@ typedef struct Race0488c00 {
 } Race0488c00;
 #pragma pack(pop)
 
-extern Race0488c00* g_868050;
+extern unsigned char* g_868050;
 
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl fcn_004c5530(Msg0488c00* m);
@@ -94,14 +95,15 @@ void __cdecl fcn_00488c00(Unit0488c00* u)
 
 	cnt = 2;
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].owner == u->info && g_7f4ca0[i].active && g_7f4ca0[i].job != 0 && *g_7f4ca0[i].job == 0x16) {
+		if (((Ent0488c00*)g_7f4ca0)[i].id != 0xffff && ((Ent0488c00*)g_7f4ca0)[i].owner == u->info && ((Ent0488c00*)g_7f4ca0)[i].active
+		    && ((Ent0488c00*)g_7f4ca0)[i].job != 0 && *((Ent0488c00*)g_7f4ca0)[i].job == 0x16) {
 			cnt--;
 		}
 	}
 	if (cnt <= 0) {
 		return;
 	}
-	race = &g_868050[*(unsigned char*)u->info];
+	race = &((Race0488c00*)g_868050)[*(unsigned char*)u->info];
 	if (race->kind == 4) {
 		res = fcn_00502cd0(*(int*)(u->info + 0x5d), 2, 6, 0, 0x60);
 	} else if (race->kind == 0x13) {
@@ -111,9 +113,9 @@ void __cdecl fcn_00488c00(Unit0488c00* u)
 	}
 	memset(&m, 0, sizeof(m));
 	m.type = 0x16;
-	m.seed = g_7f4ca0[*(unsigned short*)(u->info + 0x27)].seed;
+	m.seed = ((Ent0488c00*)g_7f4ca0)[*(unsigned short*)(u->info + 0x27)].seed;
 	m.id = *(int*)(u->info + 1);
-	m.pos = g_7f4c00;
+	m.pos = (*(Pos0488c00*)&g_7f4c00);
 	m.flag = 1;
 	if (res != 0) {
 		m.from = *(int*)(res + 2);
@@ -125,24 +127,24 @@ void __cdecl fcn_00488c00(Unit0488c00* u)
 		if (i >= 768) {
 			return;
 		}
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].owner == u->info && g_7f4ca0[i].active && (g_7f4ca0[i].flags & 0x10)) {
-			if (g_7f4ca0[i].job != 0) {
-				if (*g_7f4ca0[i].job == 0x16) {
-					g_7f4ca0[i].flags &= ~0x10;
+		if (((Ent0488c00*)g_7f4ca0)[i].id != 0xffff && ((Ent0488c00*)g_7f4ca0)[i].owner == u->info && ((Ent0488c00*)g_7f4ca0)[i].active && (((Ent0488c00*)g_7f4ca0)[i].flags & 0x10)) {
+			if (((Ent0488c00*)g_7f4ca0)[i].job != 0) {
+				if (*((Ent0488c00*)g_7f4ca0)[i].job == 0x16) {
+					((Ent0488c00*)g_7f4ca0)[i].flags &= ~0x10;
 				}
-			} else if (g_7f4ca0[i].aux != 0 && g_7f4ca0[i].aux->id == *(int*)(g_7f4ca0[i].owner + 1)) {
-				if (g_7f4ca0[i].b83 < g_7f4ca0[i].b82) {
-					m.target = g_7f4ca0[i].seed;
+			} else if (((Ent0488c00*)g_7f4ca0)[i].aux != 0 && ((Ent0488c00*)g_7f4ca0)[i].aux->id == *(int*)(((Ent0488c00*)g_7f4ca0)[i].owner + 1)) {
+				if (((Ent0488c00*)g_7f4ca0)[i].b83 < ((Ent0488c00*)g_7f4ca0)[i].b82) {
+					m.target = ((Ent0488c00*)g_7f4ca0)[i].seed;
 					m.mode = 3;
 					fcn_004c5530(&m);
 					cnt--;
 				} else {
-					m.target = g_7f4ca0[i].seed;
+					m.target = ((Ent0488c00*)g_7f4ca0)[i].seed;
 					m.mode = 2;
 					fcn_004c5530(&m);
 					cnt--;
 				}
-				g_7f4ca0[i].flags2 |= 4;
+				((Ent0488c00*)g_7f4ca0)[i].flags2 |= 4;
 			}
 		}
 		i++;

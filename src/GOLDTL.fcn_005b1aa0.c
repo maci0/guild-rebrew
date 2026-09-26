@@ -10,7 +10,8 @@ typedef struct {
 } Entry;
 
 extern Entry g_666044[];
-extern Entry g_699058[];
+#include "client_types.h"
+extern Rec15_699058 g_699058[37];
 
 Entry* __cdecl fcn_005b1aa0(char* c)
 {
@@ -24,8 +25,8 @@ Entry* __cdecl fcn_005b1aa0(char* c)
 		}
 	}
 	for (i = 0; i < 37; i++) {
-		if (g_699058[i].key == *c) {
-			return &g_699058[i];
+		if (((Entry*)g_699058)[i].key == *c) {
+			return &((Entry*)g_699058)[i];
 		}
 	}
 	return 0;

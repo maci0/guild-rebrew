@@ -21,11 +21,12 @@ extern char g_6a2f40[];
 extern char g_6a2f64[];
 extern char g_6a2f24[];
 extern char g_6a2f5c[];
-extern unsigned char* g_7746c4;
+extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 extern int g_772514;
-extern Slot g_1015f40[];
-extern Ent* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 extern char* g_99ec10;
 extern unsigned short g_774970;
 extern int g_14ad0d8;
@@ -62,8 +63,8 @@ void __cdecl fcn_0052e250(unsigned short* item)
 	}
 	g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2f40);
 	fcn_004727a0(g_6a25b8, 1);
-	if (g_7746c4 != 0 || g_7746c8 != 0) {
-		store = g_7746c4 != 0 ? g_7746c4 : g_7746c8;
+	if (((unsigned char*)g_7746c4) != 0 || g_7746c8 != 0) {
+		store = ((unsigned char*)g_7746c4) != 0 ? ((unsigned char*)g_7746c4) : g_7746c8;
 	}
 	if (store != 0) {
 		if (store[5] != 0) {
@@ -75,8 +76,8 @@ void __cdecl fcn_0052e250(unsigned short* item)
 		fcn_00519190(g_6a2f5c, *item * 2 + 0x9a8);
 	}
 	fcn_004727a0(g_6a25b8, 0);
-	id = fcn_0046f740(((g_1015f40[g_772514].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, g_772514);
-	g_1015ea0[id].f5c = 1;
+	id = fcn_0046f740(((((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, g_772514);
+	((Ent*)g_1015ea0)[id].f5c = 1;
 	rec = g_99ec10 + *item * 0x41;
 	if (store != 0 && (*rec == 2 || *rec == 6)) {
 		parent = gm_ResolveParentEntity(item);

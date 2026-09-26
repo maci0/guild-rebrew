@@ -24,14 +24,15 @@ typedef struct {
 // SIZE 0x21c
 
 extern Tab5c84 g_776aa0[16];
-extern Ent5c84 g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern char g_6ac820[];
 extern char g_6811b0[];
 extern int g_772514;
 extern char* g_772500;
 extern char* g_77255c;
-extern char g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -85,7 +86,7 @@ int __cdecl fcn_005c8400(void)
 	fcn_004727a0(h, 5);
 	fcn_00519190(0x1f40);
 	fcn_004727a0(h, 1);
-	fcn_005a5440(g_7f4ca0[g_774970].f178, g_776aa0, h, 1, 0);
+	fcn_005a5440(((Ent5c84*)g_7f4ca0)[g_774970].f178, g_776aa0, h, 1, 0);
 	for (k = 0; k < 9; k++) {
 		if (lines[k].bar != -1) {
 			fcn_0046f280(lines[k].bar);
@@ -111,8 +112,8 @@ int __cdecl fcn_005c8400(void)
 		lines[i].bar = fcn_0046f100((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a + 4, cy, 0x62, 0x10, g_772514);
 		lines[i].e = list[i];
 		/* both fields through one symbol: c2 chains the two stores, which issues the bar store first */
-		*(int*) (g_1015f40 + lines[i].bar * 0x3cc + 0x28c) = 0x56;
-		*(int*) (g_1015f40 + lines[i].bar * 0x3cc + 0x18) = 0x10;
+		*(int*) (((char*)g_1015f40) + lines[i].bar * 0x3cc + 0x28c) = 0x56;
+		*(int*) (((char*)g_1015f40) + lines[i].bar * 0x3cc + 0x18) = 0x10;
 		r = gm_SearchTable67(*(int*) (lines[i].e + 0xac));
 		if (r != 0) {
 			fcn_00519190(0x1f41, r, *(int*) (lines[i].e + 0xb4), *(int*) (lines[i].e + 0xc0), lines[i].e + 0xc4);

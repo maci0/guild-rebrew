@@ -3,11 +3,8 @@
 // FUNCTION: GOLDTL 0x005d36f0
 // SIZE: 393
 
-typedef struct {
-	float f;
-	int v;
-	float pad[3];
-} Pt5d36;
+#include "client_types.h"
+typedef Pt5d36_99ec2c Pt5d36;
 // SIZE 0x14
 
 typedef struct {
@@ -15,7 +12,7 @@ typedef struct {
 } Arg5d36;
 // SIZE 0x28
 
-extern Pt5d36 g_99ec2c[16];
+extern Pt5d36_99ec2c g_99ec2c[16];
 extern float g_773d4c;
 
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);

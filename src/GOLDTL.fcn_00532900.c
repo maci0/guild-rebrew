@@ -2,13 +2,9 @@ extern int g_77250c;
 extern int g_67a370;
 
 // SIZE 0xc8
-struct s_7e46c0 {
-	char* e;
-	char pad[0x44];
-	char name[0x80];
-};
 
-extern struct s_7e46c0 g_7e46c0[32];
+#include "client_types.h"
+extern s_7e46c0 g_7e46c0[32];
 
 // FUNCTION: GOLDTL 0x532900
 // SIZE: 157
@@ -22,7 +18,7 @@ void __cdecl fcn_00532750(void);
 void __cdecl fcn_00532900(void)
 {
 	int r[4];
-	struct s_7e46c0* p;
+	s_7e46c0* p;
 	char* e;
 
 	fcn_00472880(0x54);

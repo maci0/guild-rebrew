@@ -1,9 +1,6 @@
 // SIZE 0xc
-typedef struct {
-	float x;
-	float y;
-	float z;
-} Vec3;
+#include "client_types.h"
+typedef Vec3_67bbdc Vec3;
 
 // SIZE 0xc
 typedef struct {
@@ -20,9 +17,9 @@ typedef struct {
 } Slot;
 
 extern int g_6b7fdc;
-extern Vec3 g_67bbdc;
-extern Vec3 g_6b86c4;
-extern Slot g_1041d80[];
+extern Vec3_67bbdc g_67bbdc;
+extern Vec3_67bbdc g_6b86c4;
+extern char g_1041d80[];
 
 void* __cdecl fcn_0042ff50(const char*, const char*, int);
 void __cdecl fcn_004011f0(void*, int*);
@@ -69,13 +66,13 @@ void __cdecl fcn_00446df0(const char* name, void* stream)
 		fcn_004011d0(s, &g);
 		fcn_00438920(f, g, color);
 		for (i = 0; i < n; i++) {
-			fcn_00401280(s, &g_1041d80[i].a);
-			fcn_00401280(s, &g_1041d80[i].b);
+			fcn_00401280(s, &((Slot*)g_1041d80)[i].a);
+			fcn_00401280(s, &((Slot*)g_1041d80)[i].b);
 			for (k = 0; k < 6; k++) {
 				fcn_004011f0(s, &col);
-				g_1041d80[i].pal[k].color = col;
-				fcn_004011d0(s, &g_1041d80[i].pal[k].f4);
-				fcn_004011d0(s, &g_1041d80[i].pal[k].f8);
+				((Slot*)g_1041d80)[i].pal[k].color = col;
+				fcn_004011d0(s, &((Slot*)g_1041d80)[i].pal[k].f4);
+				fcn_004011d0(s, &((Slot*)g_1041d80)[i].pal[k].f8);
 			}
 		}
 		fcn_00401180(s, &more);

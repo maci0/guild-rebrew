@@ -7,20 +7,11 @@
 #include <windows.h>
 
 // SIZE 0x128
-typedef struct {
-	char name[0x100];
-	int handle;
-	unsigned char active;
-	unsigned char b105;
-	unsigned char b106;
-	unsigned char b107;
-	int f108;
-	int f10c;
-	char pad110[0x128 - 0x110];
-} Chan;
+#include "client_types.h"
+typedef Chan_14cc460 Chan;
 
 extern int g_6b71a4;
-extern Chan g_14cc460;
+extern Chan_14cc460 g_14cc460;
 extern CRITICAL_SECTION g_14cc5a0;
 Chan* __cdecl fcn_004205e0(const char* name);
 Chan* __cdecl fcn_00420690(void);

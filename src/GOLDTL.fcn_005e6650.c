@@ -5,17 +5,8 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	int f0;
 	char b4;
@@ -23,7 +14,7 @@ struct msg {
 	int f8;
 	int fc;
 	char pad10[0x18];
-	struct pos14 pos;
+	pos14_7f4c00 pos;
 	char b36;
 	char pad37;
 	int ids[4];
@@ -39,8 +30,8 @@ typedef struct {
 	char pad189[0x93];
 } House;
 
-extern struct pos14 g_7f4c00;
-extern House g_7f4ca0[768];
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern char s_6ad434[];
 extern char s_6811b0[];
@@ -99,7 +90,7 @@ void __cdecl fcn_005e6650(char* e)
 					if (n >= 4) {
 						break;
 					}
-					if (g_7f4ca0[i].b188 != 0) {
+					if (((House*)g_7f4ca0)[i].b188 != 0) {
 						list[n] = i;
 						n++;
 					}
@@ -108,11 +99,11 @@ void __cdecl fcn_005e6650(char* e)
 					memset(&m, 0, sizeof(m));
 					m.b4 = (char) 0xa1;
 					m.b36 = 1;
-					m.f8 = g_7f4ca0[g_774970].f4;
+					m.f8 = ((House*)g_7f4ca0)[g_774970].f4;
 					m.fc = *(int*) (e + 1);
 					m.pos = g_7f4c00;
 					for (i = 0; i < n; i++) {
-						m.ids[i] = g_7f4ca0[list[i]].f4;
+						m.ids[i] = ((House*)g_7f4ca0)[list[i]].f4;
 					}
 					fcn_004c5530(&m);
 					g_774654 = 1;

@@ -1,5 +1,6 @@
-extern int g_7f4c00;
-extern int g_7f4c04;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char s_67fb50[];
@@ -21,11 +22,11 @@ int __cdecl fcn_004aac00(char* a1, int a2, char* x)
 	*(int*) (msg + 0x5c) = *(int*) (a1 + 4);
 	*(int*) (msg + 0x58) = *(int*) (x + 4);
 	*(int*) (msg + 0x60) = *(int*) (x + 8);
-	*(int*) (msg + 0x28) = g_7f4c00;
+	*(int*) (msg + 0x28) = (*(int*)&g_7f4c00);
 	msg[4] = 0x2f;
 	*(int*) (msg + 0xc) = -1;
 	msg[0x36] = 1;
-	*(int*) (msg + 0x2c) = g_7f4c04;
+	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x30) = g_7f4c08;
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	fcn_004c4eb0(s_67fb50);

@@ -8,7 +8,8 @@ typedef struct Win {
 } Win;
 // SIZE 0x3cc
 
-extern Win g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern char s_67d54c[];
 
 void __cdecl fcn_0047ce50(void* tex);
@@ -22,7 +23,7 @@ void __cdecl fcn_0046e7a0(const char* name, int win)
 	char msg[0x400];
 	Win* w;
 
-	w = &g_1015f40[win];
+	w = &((Win*)g_1015f40)[win];
 	if (w->tex) {
 		fcn_0047ce50(w->tex);
 		w->tex = 0;

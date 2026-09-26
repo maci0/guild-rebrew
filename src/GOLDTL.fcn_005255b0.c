@@ -10,7 +10,8 @@ struct s_7e43a8 {
 	int e;
 };
 
-extern struct s_7e43a8 g_7e43a8;
+#include "client_types.h"
+extern Tabs_7e43a8 g_7e43a8;
 
 // FUNCTION: GOLD 0x00520620
 // SIZE: 189
@@ -25,20 +26,20 @@ int __cdecl fcn_005255b0(int x)
 {
 	int i;
 
-	if (ls_ReadVfsDataChecked(&g_7e43a8.e, 4, 1, x) == 0) {
+	if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).e, 4, 1, x) == 0) {
 		return 0;
 	}
 	for (i = 0; i < 24; i++) {
-		if (ls_ReadVfsDataChecked(&g_7e43a8.a[i], 4, 1, x) == 0) {
+		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).a[i], 4, 1, x) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(&g_7e43a8.b[i], 4, 1, x) == 0) {
+		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).b[i], 4, 1, x) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(&g_7e43a8.c[i], 4, 1, x) == 0) {
+		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).c[i], 4, 1, x) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(&g_7e43a8.d[i], 4, 1, x) == 0) {
+		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).d[i], 4, 1, x) == 0) {
 			return 0;
 		}
 	}

@@ -1,12 +1,8 @@
-typedef struct Card {
-	int rank;
-	int suit;
-	int count;
-	int owner;
-} Card;
+#include "client_types.h"
+typedef Card_1007ce0 Card;
 // SIZE 0x10
 
-extern Card g_1007ce0[24];
+extern Card_1007ce0 g_1007ce0[24];
 
 // FUNCTION: GOLDTL 0x4a7620
 // SIZE: 163

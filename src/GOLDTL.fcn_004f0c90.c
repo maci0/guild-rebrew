@@ -1,7 +1,8 @@
+#include "client_types.h"
 // GLOBAL: GOLDTL 0x7731b8
-extern char g_7731b8[];
+extern Slot170_7731b8 g_7731b8[8];
 // GLOBAL: GOLD 0x6f1008
-extern char g_7731b8[];
+extern Slot170_7731b8 g_7731b8[8];
 // FUNCTION: GOLD 0x004eedd0
 // SIZE: 48
 // FUNCTION: GOLDTL 0x4f0c90

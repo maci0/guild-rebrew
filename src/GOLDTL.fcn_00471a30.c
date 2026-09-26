@@ -32,9 +32,11 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Obj g_1038140[];
-extern Win g_1015f40[];
-extern Slot* g_1015ea0;
+#include "client_types.h"
+extern Obj_1038140 g_1038140[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 
 // FUNCTION: GOLDTL 0x471a30
 // SIZE: 182
@@ -45,12 +47,12 @@ void __cdecl fcn_00471a30(int k, int flag)
 	int i;
 	int j;
 
-	o = &g_1038140[k];
+	o = &((Obj*)g_1038140)[k];
 	if (o->used) {
 		for (i = 0; i < o->count; i++) {
-			w = &g_1015f40[o->wins[i]];
+			w = &((Win*)g_1015f40)[o->wins[i]];
 			for (j = 0; j < w->count; j++) {
-				g_1015ea0[w->children[j]].hidden = (flag == 0);
+				((Slot*)g_1015ea0)[w->children[j]].hidden = (flag == 0);
 			}
 		}
 		o->shown = flag;

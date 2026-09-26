@@ -1,16 +1,11 @@
 // FUNCTION: GOLDTL 0x005ae4f0
 // SIZE: 265
 
-typedef struct
-{
-	int x0;
-	int x4;
-	int btn;
-	char padc[0x34];
-} Loot;
+#include "client_types.h"
+typedef Loot_7774a0 Loot;
 // SIZE 0x40
 
-extern Loot g_7774a0[32];
+extern Loot_7774a0 g_7774a0[32];
 extern int g_14ce8e0;
 extern int g_774654;
 extern int g_100f1dc;

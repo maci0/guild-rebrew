@@ -22,14 +22,6 @@ struct house {
 };
 
 // SIZE 0x14c
-struct unit {
-	unsigned char kind;
-	char pad1[7];
-	unsigned short house;
-	char pada[0x66];
-	int target;
-	char pad74[0xd8];
-};
 
 // SIZE 0x114
 struct building {
@@ -41,15 +33,16 @@ struct building {
 	char pad31[0xe3];
 };
 
-extern struct house g_7f4ca0[768];
-extern struct unit g_77e980[1024];
-extern struct building g_9a9660[96];
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern unit_77e980 g_77e980[1024];
+extern char g_9a9660[];
 extern int g_774954;
 extern int g_773d68;
 extern char* g_14a5dbc[];
 extern char* g_14a60d0[];
 
-void __cdecl fcn_00546190(struct unit*);
+void __cdecl fcn_00546190(unit_77e980*);
 unsigned short __cdecl fcn_0042e410(int);
 int __cdecl fcn_004e6200(int, struct building*);
 void __cdecl fcn_004e6b10(int);
@@ -62,7 +55,7 @@ void __cdecl fcn_005413d0(int idx)
 	int j;
 	int found;
 	struct house* h;
-	struct unit* u;
+	unit_77e980* u;
 	struct building* b;
 	unsigned char k;
 
@@ -86,7 +79,7 @@ void __cdecl fcn_005413d0(int idx)
 	keep[2] = 0;
 	found = 0xffff;
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].type == 6 && g_7f4ca0[i].active != 0) {
+		if (((struct house*)g_7f4ca0)[i].type == 6 && ((struct house*)g_7f4ca0)[i].active != 0) {
 			found = i;
 			break;
 		}
@@ -95,8 +88,8 @@ void __cdecl fcn_005413d0(int idx)
 		g_774954 = 1;
 		return;
 	}
-	if (g_7f4ca0[idx].type == 6 && g_7f4ca0[idx].active == 0) {
-		h = &g_7f4ca0[idx];
+	if (((struct house*)g_7f4ca0)[idx].type == 6 && ((struct house*)g_7f4ca0)[idx].active == 0) {
+		h = &((struct house*)g_7f4ca0)[idx];
 		for (j = 0; j < 1024; j++) {
 			u = &g_77e980[j];
 			if (u->kind != 0 && u->house == idx) {
@@ -124,9 +117,10 @@ void __cdecl fcn_005413d0(int idx)
 		memset(h->slots, 0xff, sizeof(h->slots));
 		g_773d68++;
 		for (j = 0; j < 96; j++) {
-			if (g_9a9660[j].used != 0 && fcn_004e6200(h->owner, &g_9a9660[j]) != 0) {
-				if (g_9a9660[j].kind == 3 || g_9a9660[j].kind == 5 || g_9a9660[j].kind == 4 || g_9a9660[j].kind == 6 || g_9a9660[j].kind == 9 || g_9a9660[j].kind == 7) {
-					fcn_004e6b10(g_9a9660[j].handle);
+			if (((struct building*)g_9a9660)[j].used != 0 && fcn_004e6200(h->owner, &((struct building*)g_9a9660)[j]) != 0) {
+				if (((struct building*)g_9a9660)[j].kind == 3 || ((struct building*)g_9a9660)[j].kind == 5 || ((struct building*)g_9a9660)[j].kind == 4
+				    || ((struct building*)g_9a9660)[j].kind == 6 || ((struct building*)g_9a9660)[j].kind == 9 || ((struct building*)g_9a9660)[j].kind == 7) {
+					fcn_004e6b10(((struct building*)g_9a9660)[j].handle);
 				}
 			}
 		}

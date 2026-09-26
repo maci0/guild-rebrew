@@ -9,9 +9,10 @@ typedef struct Win {
 } Win;
 // SIZE 0x3cc
 
-extern Win g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
-extern Win* g_77255c;
+extern char* g_77255c;
 extern int g_100f1dc;
 extern int g_774654;
 
@@ -94,7 +95,7 @@ void __cdecl fcn_004b3490(void)
 	fcn_004727a0(h, 2);
 	fcn_00519190(0x10b0);
 	fcn_0046e830(-1, -1, g_772514, w, 0x767);
-	g_1015f40[w].style = 0x18;
+	((Win*)g_1015f40)[w].style = 0x18;
 	fcn_004727a0(h, 1);
 	fcn_00519190((int) "$C%s", text);
 	fcn_004727a0(h, 3);
@@ -159,11 +160,11 @@ void __cdecl fcn_004b3490(void)
 				fcn_004727a0(h, 2);
 				fcn_00519190(0x10b0);
 				fcn_0046e830(-1, -1, g_772514, w, 0x767);
-				g_1015f40[w].style = 0x18;
+				((Win*)g_1015f40)[w].style = 0x18;
 				fcn_004727a0(h, 1);
 				fcn_00519190((int) "$C%s", text);
-				g_77255c->x258 = 0;
-				g_77255c->x270 = 2;
+				((Win*)g_77255c)->x258 = 0;
+				((Win*)g_77255c)->x270 = 2;
 				fcn_004727a0(h, 3);
 				fcn_00519190((int) "$C$Z$[%s$]", name);
 			}

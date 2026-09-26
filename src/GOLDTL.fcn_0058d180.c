@@ -5,16 +5,6 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x21c
 struct house {
 	unsigned short id;
@@ -27,6 +17,7 @@ struct house {
 };
 
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	char pad0[4];
 	unsigned char kind;
@@ -34,7 +25,7 @@ struct msg {
 	int owner;
 	int target;
 	char pad10[0x18];
-	struct pos14 when;
+	pos14_7f4c00 when;
 	unsigned char code;
 	char pad37;
 	int field;
@@ -44,8 +35,8 @@ struct msg {
 	char pad61[0x97];
 };
 
-extern struct pos14 g_7f4c00;
-extern struct house g_7f4ca0[];
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 extern int g_772514;
 extern int g_100f1dc;
 extern int g_14ce8e0;
@@ -110,8 +101,8 @@ int __cdecl fcn_0058d180(char* who, char* a2)
 			if (g_67d370 == ok) {
 				hh = 0;
 				for (i = 0; i < 768; i++) {
-					if (g_7f4ca0[i].grave != 0) {
-						hh = &g_7f4ca0[i];
+					if (((struct house*)g_7f4ca0)[i].grave != 0) {
+						hh = &((struct house*)g_7f4ca0)[i];
 						break;
 					}
 				}
@@ -121,7 +112,7 @@ int __cdecl fcn_0058d180(char* who, char* a2)
 					memset(&m, 0, sizeof(m));
 					m.kind = 0x8d;
 					m.code = 1;
-					m.owner = g_7f4ca0[*(unsigned short*) (who + 0x27)].handle;
+					m.owner = ((struct house*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].handle;
 					m.target = *(int*) (who + 1);
 					m.when = g_7f4c00;
 					m.who = *(int*) (a2 + 4);

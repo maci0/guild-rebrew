@@ -32,7 +32,8 @@ typedef struct {
 	int mode;
 } Order_54f0c0;
 
-extern Stamp_54f0c0 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 Entity_54f0c0* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -100,7 +101,7 @@ void __cdecl fcn_0054f0c0(Order_54f0c0* o)
 					}
 				}
 			}
-			o->stamp = g_7f4c00;
+			o->stamp = (*(Stamp_54f0c0*)&g_7f4c00);
 			fcn_00500bb0(&o->stamp, 0, 2, 0);
 			o->event = fcn_004c5620(-1, o);
 		}

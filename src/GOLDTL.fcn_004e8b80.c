@@ -23,8 +23,10 @@ typedef struct {
 } tbl18;
 // SIZE 0x18
 
-extern rec18 g_9a9220[];
-extern tbl18 g_68da68[];
+#include "client_types.h"
+extern Rec18_68da68 g_9a9220[42];
+#include "client_types.h"
+extern Rec18_68da68 g_68da68[];
 
 int __cdecl fcn_004e8b80(int kind, int max, rec18* out)
 {
@@ -42,8 +44,8 @@ int __cdecl fcn_004e8b80(int kind, int max, rec18* out)
 		return 0;
 	n = 0;
 	for (i = start - 1; i >= 0 && n < max; i--) {
-		if (g_68da68[g_9a9220[i].kind].id == kind)
-			out[n++] = g_9a9220[i];
+		if (((tbl18*)g_68da68)[((rec18*)g_9a9220)[i].kind].id == kind)
+			out[n++] = ((rec18*)g_9a9220)[i];
 	}
 	return n;
 }

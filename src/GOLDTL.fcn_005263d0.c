@@ -18,20 +18,18 @@ typedef struct {
 } Obj2f4;
 // SIZE 0x2f4
 
-typedef struct {
-	int n;
-	char pad4[0x88];
-} List8c;
+#include "client_types.h"
+typedef List8c_102cbc8 List8c;
 // SIZE 0x8c
 
-extern unsigned int g_6b7fac;
+extern int g_6b7fac;
 extern char g_77470d;
 extern int g_7e46ac;
 extern int g_772514;
-extern Screen *g_77255c;
-extern Obj2f4 *g_1015ea0;
+extern char* g_77255c;
+extern char* g_1015ea0;
 extern int g_100f1dc;
-extern List8c g_102cbc8[];
+extern List8c_102cbc8 g_102cbc8[];
 extern char g_14cf950;
 extern int g_14ce8e0;
 extern int g_774654;
@@ -64,7 +62,7 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 	int i;
 	int k;
 
-	start = g_6b7fac;
+	start = (*(unsigned int*)&g_6b7fac);
 	id = -1;
 	result = 0;
 	if (g_77470d != 0) {
@@ -86,9 +84,9 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 	fcn_00471b60(h);
 	g_77470d = 1;
 	list = fcn_004693b0(0);
-	for (i = 0; i < g_77255c->count; i++) {
-		k = g_77255c->ids[i];
-		if (g_1015ea0[k].kind != 0x40) {
+	for (i = 0; i < ((Screen*)g_77255c)->count; i++) {
+		k = ((Screen*)g_77255c)->ids[i];
+		if (((Obj2f4*)g_1015ea0)[k].kind != 0x40) {
 			fcn_00469470(list, k);
 		}
 	}
@@ -96,7 +94,7 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 	fcn_004727a0(h, 0);
 	f80 = flags & 0x80;
 	if (f80) {
-		id = fcn_004677e0(0x1c, g_77255c->h - 0x18, g_77255c->w - 0x40, 0, 500, 0x83, 0x42, g_772514);
+		id = fcn_004677e0(0x1c, ((Screen*)g_77255c)->h - 0x18, ((Screen*)g_77255c)->w - 0x40, 0, 500, 0x83, 0x42, g_772514);
 	}
 	while (fcn_005373e0(fcn_005263d0, mode) != 0) {
 		fcn_00469630(list);
@@ -116,9 +114,9 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 			g_774654 = 1;
 		}
 		if (f80 && id != -1) {
-			fcn_00472380(id, 0, 500, g_6b7fac - start);
+			fcn_00472380(id, 0, 500, (*(unsigned int*)&g_6b7fac) - start);
 		}
-		if ((flags & 4) && g_6b7fac > start + 500) {
+		if ((flags & 4) && (*(unsigned int*)&g_6b7fac) > start + 500) {
 			g_774654 = 1;
 		}
 	}

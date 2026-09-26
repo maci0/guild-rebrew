@@ -46,10 +46,11 @@ typedef struct
 } Shop;
 // SIZE 0x24d
 
-extern Player g_7f4ca0[];
-extern Shop* g_868050;
+extern char g_7f4ca0[];
+extern unsigned char* g_868050;
 extern unsigned short g_774970;
-extern Name14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern int g_14abc44;
 extern int g_100f1dc;
 extern int g_67d370;
@@ -92,7 +93,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 	int i;
 
 	cnt = 0;
-	t = &g_868050[obj[0]];
+	t = &((Shop*)g_868050)[obj[0]];
 	if (t->x0 == 4) {
 		kind = 1;
 	}
@@ -127,12 +128,12 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 					if (n >= 3) {
 						break;
 					}
-					if (g_7f4ca0[i].x188 != 0) {
+					if (((Player*)g_7f4ca0)[i].x188 != 0) {
 						memset(&pkt, 0, sizeof(pkt));
 						pkt.type = 0x16;
-						pkt.x8 = g_7f4ca0[g_774970].x4;
+						pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
 						pkt.xc = *(int*) (obj + 1);
-						pkt.name = g_7f4c00;
+						pkt.name = (*(Name14*)&g_7f4c00);
 						pkt.x36 = 1;
 						if (a1 != 0) {
 							pkt.x60 = *(int*) (a1 + 2);
@@ -140,7 +141,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 						else {
 							pkt.x60 = -1;
 						}
-						pkt.x5c = g_7f4ca0[i].x4;
+						pkt.x5c = ((Player*)g_7f4ca0)[i].x4;
 						pkt.x58 = (char) a2;
 						fcn_004c5530(&pkt);
 						n++;

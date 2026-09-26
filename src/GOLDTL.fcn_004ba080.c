@@ -35,9 +35,10 @@ typedef struct Packet {
 } Packet;
 // SIZE 0xf8
 
-extern Player g_7f4ca0[];
-extern int g_7f4c00;
-extern int g_7f4c04;
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
@@ -99,8 +100,8 @@ int __cdecl fcn_004ba080(Req* r)
 		if (m >= 6) {
 			break;
 		}
-		if (g_7f4ca0[i].x2 == 0 && g_7f4ca0[i].x16c == p1 && g_7f4ca0[i].x165 != 0) {
-			list[m] = (char*) &g_7f4ca0[i];
+		if (((Player*)g_7f4ca0)[i].x2 == 0 && ((Player*)g_7f4ca0)[i].x16c == p1 && ((Player*)g_7f4ca0)[i].x165 != 0) {
+			list[m] = (char*) &((Player*)g_7f4ca0)[i];
 			m++;
 		}
 	}
@@ -123,8 +124,8 @@ int __cdecl fcn_004ba080(Req* r)
 		memset(&msg, 0, sizeof(msg));
 		msg.x8 = *(int*) (o + 4);
 		msg.xc = *(int*) (p1 + 1);
-		msg.x28 = g_7f4c00;
-		msg.x2c = g_7f4c04;
+		msg.x28 = (*(int*)&g_7f4c00);
+		msg.x2c = (*(int*)&g_7f4c04);
 		msg.x30 = g_7f4c08;
 		msg.type = 0x31;
 		msg.x36 = 1;

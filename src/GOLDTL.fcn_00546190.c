@@ -23,8 +23,9 @@ struct unit {
 	char pad80[0xcc];
 };
 
-extern struct unit* g_7d1980[256];
-extern struct unit g_77e980[1024];
+extern unsigned char* g_7d1980[];
+#include "client_types.h"
+extern unit_77e980 g_77e980[1024];
 extern int g_7749d4;
 extern int g_7749d8;
 extern int g_7dc424;
@@ -46,20 +47,20 @@ void __cdecl fcn_00546190(struct unit* u)
 	}
 	if (u->flags & 8) {
 		for (i = 0; i < 256; i++) {
-			if (g_7d1980[i] == u) {
+			if (((struct unit**)g_7d1980)[i] == u) {
 				break;
 			}
 		}
-		if (g_7d1980[i] != u) {
+		if (((struct unit**)g_7d1980)[i] != u) {
 			return;
 		}
-		if (g_7d1980[i]->slot != 0 && g_7d1980[i]->slot->dlg != -1) {
-			fcn_00545780(g_7d1980[i]);
+		if (((struct unit**)g_7d1980)[i]->slot != 0 && ((struct unit**)g_7d1980)[i]->slot->dlg != -1) {
+			fcn_00545780(((struct unit**)g_7d1980)[i]);
 		}
-		g_7d1980[i] = 0;
+		((struct unit**)g_7d1980)[i] = 0;
 		if (i == g_7749d8) {
 			for (n = g_7749d8; n >= 0; n--) {
-				if (g_7d1980[n] != 0) {
+				if (((struct unit**)g_7d1980)[n] != 0) {
 					break;
 				}
 			}
@@ -68,9 +69,9 @@ void __cdecl fcn_00546190(struct unit* u)
 	}
 	g_7dc424--;
 	memset(u, 0, sizeof(struct unit));
-	if (u == &g_77e980[g_7749d4]) {
+	if (u == &((struct unit*)g_77e980)[g_7749d4]) {
 		for (n = g_7749d4; n >= 0; n--) {
-			if (g_77e980[n].kind != 0) {
+			if (((struct unit*)g_77e980)[n].kind != 0) {
 				break;
 			}
 		}

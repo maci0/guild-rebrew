@@ -39,8 +39,9 @@ typedef struct {
 	char pad44[0x2b0];
 } Ctl;
 
-extern Win g_1015f40[];
-extern Ctl* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 extern char s_6acfdc[];
 extern char s_6acfcc[];
 extern char s_6acfb4[];
@@ -53,7 +54,7 @@ typedef struct {
 	int v[0x2580];
 } Blob;
 
-extern Blob g_7ea3c0;
+extern unsigned short g_7ea3c0[];
 extern int g_772514;
 extern int g_7e46ac;
 extern int g_6b7fdc;
@@ -120,13 +121,13 @@ int __cdecl fcn_005e0c50(Blob* src)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (g_14ce8d8 != 0 && g_1015f40[sel].f260 == 0) {
+		if (g_14ce8d8 != 0 && ((Win*)g_1015f40)[sel].f260 == 0) {
 			for (i = 2; i < 16; i++) {
 				if (g_67d370 != slots[i].h && g_100f894 != slots[i].f8) {
 					if (g_100f894 == -1) {
 						continue;
 					}
-					if (g_1015ea0[g_1015f40[g_100f894].f27c].f40 != &g_1015f40[slots[i].f8]) {
+					if (((Ctl*)g_1015ea0)[((Win*)g_1015f40)[g_100f894].f27c].f40 != &((Win*)g_1015f40)[slots[i].f8]) {
 						continue;
 					}
 				}
@@ -136,13 +137,13 @@ int __cdecl fcn_005e0c50(Blob* src)
 					flag = 1;
 				}
 				fcn_00472170(slots[i].h, 0);
-				if (!fcn_005e0b40(g_1015ea0[slots[i].h].f10, g_1015ea0[slots[i].h].f14, slots[i].rec.text)) {
+				if (!fcn_005e0b40(((Ctl*)g_1015ea0)[slots[i].h].f10, ((Ctl*)g_1015ea0)[slots[i].h].f14, slots[i].rec.text)) {
 					fcn_00472170(slots[i].h, 1);
 					break;
 				}
 				if (!flag || fcn_005dfe80(g_14ac64c, 0x101)) {
 					sprintf(buf, s_6ad004, i);
-					g_7ea3c0 = *src;
+					(*(Blob*)g_7ea3c0) = *src;
 					g_773de8 = (char) i;
 					h = fcn_005268c0(g_14ac648, 0);
 					fcn_0051e080(buf, slots[i].rec.text, 1);

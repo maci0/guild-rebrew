@@ -3,23 +3,14 @@
 // FUNCTION: GOLDTL 0x557270
 // SIZE: 484
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern int g_6643d8[];
 extern char* g_aed32c;
 extern char g_67ec2c[];
 
 unsigned short __cdecl fcn_0042e410(int);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl fcn_005462a0(void);
 void __cdecl fcn_005015e0(char**, int, int, int);
@@ -47,9 +38,9 @@ void __cdecl fcn_00557270(char* u)
 	*(int*) (u + 0xbc) = fcn_0042e410(4) + 5;
 	*(int*) (u + 0xc0) = 0;
 	*(int*) (u + 0xb8) = -1;
-	*(struct pos14*) (u + 0x52) = g_7f4c00;
-	*(struct pos14*) (u + 0x44) = g_7f4c00;
-	fcn_00500bb0((struct pos14*) (u + 0x52), 0, 1, 0);
+	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x44) = g_7f4c00;
+	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 	for (e = fcn_005463a0(1, 0, 0x74); e != 0; e = fcn_005462a0()) {
 		if (*(int*) (e + 4) != *(int*) (u + 4) && *(int*) (e + 0xb0) == *(int*) (u + 0xb0)) {
 			break;

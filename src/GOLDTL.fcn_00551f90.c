@@ -48,11 +48,12 @@ typedef struct {
 	int player;
 } Order_551f90;
 
-extern Stamp_551f90 g_7f4c00;
-extern Player_551f90* g_90e094;
-extern Kind_551f90* g_868050;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned char* g_90e094;
+extern unsigned char* g_868050;
 extern int g_6643d8[];
-extern Entity_551f90 g_7f4ca0[];
+extern char g_7f4ca0[];
 
 unsigned short __cdecl fcn_0042e410(int);
 int __cdecl fcn_004c5620(int, Order_551f90*);
@@ -72,12 +73,12 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 	Player_551f90* p;
 	int i;
 
-	o->stamp = g_7f4c00;
+	o->stamp = (*(Stamp_551f90*)&g_7f4c00);
 	n = 0x100;
 	i = fcn_0042e410(0x100);
 	do {
-		p = &g_90e094[i];
-		if (g_868050[p->kind].type == 7) {
+		p = &((Player_551f90*)g_90e094)[i];
+		if (((Kind_551f90*)g_868050)[p->kind].type == 7) {
 			o->rnd = fcn_0042e410(0x100);
 			o->value = g_6643d8[fcn_0042e410(0x10)];
 			n = sizeof(m);
@@ -110,10 +111,10 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 			*(int*) (m + 0xc) = -1;
 			m[4] = 0x78;
 			m[0x36] = 9;
-			*(Stamp_551f90*) (m + 0x28) = g_7f4c00;
+			*(Stamp_551f90*) (m + 0x28) = (*(Stamp_551f90*)&g_7f4c00);
 			for (i = 0; i < 0x300; i++) {
-				if (g_7f4ca0[i].type == 6 || g_7f4ca0[i].type == 7) {
-					*(int*) (m + 8) = g_7f4ca0[i].id;
+				if (((Entity_551f90*)g_7f4ca0)[i].type == 6 || ((Entity_551f90*)g_7f4ca0)[i].type == 7) {
+					*(int*) (m + 8) = ((Entity_551f90*)g_7f4ca0)[i].id;
 					fcn_004c5530(m);
 				}
 			}

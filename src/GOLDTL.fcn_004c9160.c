@@ -3,20 +3,11 @@
 
 #include <string.h>
 
-typedef struct {
-	int f0;
-	unsigned char type;
-	char pad5[3];
-	int who;
-	char padc[0x2a];
-	unsigned char flags;
-	char pad37[0x21];
-	int f58;
-	char pad5c[0x9c];
-} Msg;
+#include "client_types.h"
+typedef Msg_aed340 Msg;
 // SIZE 0xf8
 
-extern Msg g_aed340;
+extern Msg_aed340 g_aed340;
 extern char g_aed438[];
 extern int g_14cbca0;
 extern int g_7749d0;

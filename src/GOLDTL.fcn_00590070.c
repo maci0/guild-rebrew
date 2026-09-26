@@ -3,16 +3,6 @@
 // FUNCTION: GOLDTL 0x590070
 // SIZE: 692
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x21c
 struct house {
 	unsigned short id;
@@ -24,8 +14,9 @@ struct house {
 	char pad189[0x93];
 };
 
-extern struct pos14 g_7f4c00;
-extern struct house g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 extern int g_774800;
 extern int g_772514;
 extern int g_100f1dc;
@@ -34,7 +25,7 @@ extern int g_67d370;
 extern int g_774654;
 extern int g_14b556c;
 
-int __cdecl fcn_00500e20(struct pos14*);
+int __cdecl fcn_00500e20(pos14_7f4c00*);
 int __cdecl fcn_00525fb0(char*);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -104,8 +95,8 @@ void __cdecl fcn_00590070(char* who)
 			g_774654 = 1;
 		}
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].grave != 0) {
-				hh = &g_7f4ca0[i];
+			if (((struct house*)g_7f4ca0)[i].grave != 0) {
+				hh = &((struct house*)g_7f4ca0)[i];
 				break;
 			}
 		}

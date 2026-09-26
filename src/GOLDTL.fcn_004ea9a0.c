@@ -23,8 +23,9 @@ typedef struct {
 	char pad165[0x21c - 0x165];
 } Obj;
 
-extern Rec g_9a9220[];
-extern Obj g_7f4ca0[];
+#include "client_types.h"
+extern Rec18_68da68 g_9a9220[42];
+extern char g_7f4ca0[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
 char* __cdecl gm_AddObjekt(void);
@@ -58,7 +59,7 @@ void __cdecl fcn_004ea9a0(void)
 	for (e = gm_StartFilteredEntitySearch(1, 5, 7); e != 0 && k < 16; e = gm_AddObjekt()) {
 		if (*(unsigned short*) (e + 0x27) != 0xffff && !(e[0x5a] & 1)) {
 			total++;
-			o = &g_7f4ca0[*(unsigned short*) (e + 0x27)];
+			o = &((Obj*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
 			if (o->group >= 0xd && o->group <= 0x12) {
 				for (j = 0; j < 16; j++) {
 					if (list[j] == o) {
@@ -76,8 +77,8 @@ void __cdecl fcn_004ea9a0(void)
 	}
 	found = 1;
 	for (i = 36; i >= 0 && found != 0; i--) {
-		if (g_9a9220[i].c == 0x22) {
-			rec = g_9a9220[i];
+		if (((Rec*)g_9a9220)[i].c == 0x22) {
+			rec = ((Rec*)g_9a9220)[i];
 			found--;
 		}
 	}

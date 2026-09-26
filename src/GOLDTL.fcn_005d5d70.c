@@ -3,17 +3,8 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	int f0;
 	char b4;
@@ -21,7 +12,7 @@ struct msg {
 	int f8;
 	int fc;
 	char pad10[0x18];
-	struct pos14 pos;
+	pos14_7f4c00 pos;
 	char b36;
 	char pad37[0x21];
 	int f58;
@@ -38,8 +29,8 @@ typedef struct {
 	char pad8[0x214];
 } House;
 
-extern struct pos14 g_7f4c00;
-extern House g_7f4ca0[];
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern char s_6ac494[];
 extern int g_100f1dc;
@@ -101,26 +92,26 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 	do {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (fcn_00525f60(&g_7f4ca0[g_774970], 2)) {
+				if (fcn_00525f60(&((House*)g_7f4ca0)[g_774970], 2)) {
 					struct msg m;
 
 					a = fcn_0042e410(9) + 0x1d76;
 					b = fcn_0042e410(9) + 0x1d6d;
 					memset(&m, 0, sizeof(m));
-					m.f8 = g_7f4ca0[g_774970].f4;
+					m.f8 = ((House*)g_7f4ca0)[g_774970].f4;
 					m.pos = g_7f4c00;
 					m.b4 = 0x47;
 					m.b36 = 2;
 					m.w60 = b;
 					m.w62 = a;
 					m.f5c = *(int*) (e + 4);
-					m.fc = g_7f4ca0[g_774970].f4;
-					m.f58 = g_7f4ca0[g_774970].f4;
+					m.fc = ((House*)g_7f4ca0)[g_774970].f4;
+					m.f58 = ((House*)g_7f4ca0)[g_774970].f4;
 					h = fcn_004c5530(&m);
 					while (fcn_004c4450(h) == 0) {
 						fcn_00535960();
 					}
-					fcn_004c6ae0(g_7f4ca0[g_774970].f4, -2);
+					fcn_004c6ae0(((House*)g_7f4ca0)[g_774970].f4, -2);
 					fcn_0051af00(text, 0x1d6a, b, *(unsigned short*) e, a);
 					fcn_00526120(text, 0);
 					g_774654 = 3;

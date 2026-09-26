@@ -4,13 +4,10 @@
 // SIZE: 113
 
 // SIZE 0xc
-typedef struct {
-	int a;
-	int b;
-	int c;
-} Slot;
+#include "client_types.h"
+typedef Slot_779d00 Slot;
 
-extern Slot g_779d00[];
+extern Slot_779d00 g_779d00[];
 extern unsigned short g_774970;
 
 int __cdecl gm_SearchTable67(int);

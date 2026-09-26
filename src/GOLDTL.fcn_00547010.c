@@ -10,7 +10,8 @@ struct pos14_547010 {
 };
 #pragma pack()
 
-extern struct pos14_547010 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 // SIZE 0xf8
 struct msg_547010 {
@@ -32,7 +33,7 @@ struct s_7f4ca0 {
 	char pad[0x214];
 };
 
-extern struct s_7f4ca0 g_7f4ca0[];
+extern char g_7f4ca0[];
 
 // FUNCTION: GOLD 0x0053f240
 // SIZE: 142
@@ -53,8 +54,8 @@ void __cdecl fcn_00547010(void)
 		m.b4 = 0x6d;
 		m.fc = -1;
 		m.b36 = 2;
-		m.f8 = g_7f4ca0[g_774970].f4;
-		m.pos = g_7f4c00;
+		m.f8 = ((struct s_7f4ca0*)g_7f4ca0)[g_774970].f4;
+		m.pos = (*(struct pos14_547010*)&g_7f4c00);
 		fcn_004c5530(&m);
 	}
 }

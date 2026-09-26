@@ -53,8 +53,9 @@ extern short g_fb9072;
 extern char g_624144[];
 extern char g_624158[];
 extern int g_6ed938;
-extern Slot g_f8f110[];
-extern Ent* g_f8f080;
+#include "client_types.h"
+extern Slot_f8f110 g_f8f110[];
+extern char* g_f8f080;
 extern Row g_75f280[32];
 extern Obj g_770b80[];
 
@@ -81,14 +82,14 @@ void __cdecl fcn_00525260(int unused, char arg)
 		owner = g_6ed938;
 		fcn_00475f60(g_623864, 2);
 		id = fcn_00475b70(g_623864, 2, 0);
-		g_f8f080[id].f1d0 = 3;
-		g_f8f110[g_6ed938].h0 = id;
-		g_f8f080[id].owner = owner;
+		((Ent*)g_f8f080)[id].f1d0 = 3;
+		((Slot*)g_f8f110)[g_6ed938].h0 = id;
+		((Ent*)g_f8f080)[id].owner = owner;
 		id = fcn_00475b70(g_623864, 2, 1);
-		g_f8f080[id].f1d0 = 3;
-		g_f8f110[g_6ed938].h1 = id;
-		g_f8f080[id].owner = owner;
-		g_f8f110[owner].mode = 0x4e;
+		((Ent*)g_f8f080)[id].f1d0 = 3;
+		((Slot*)g_f8f110)[g_6ed938].h1 = id;
+		((Ent*)g_f8f080)[id].owner = owner;
+		((Slot*)g_f8f110)[owner].mode = 0x4e;
 		if (g_623864 != -1) {
 			if (g_623868 != -1) {
 				fcn_00475580(g_623868, 0);
@@ -105,8 +106,8 @@ void __cdecl fcn_00525260(int unused, char arg)
 			}
 			fcn_00475f60(g_623864, 2);
 			id = fcn_00473340(0x11, 4, 0x51d, g_6ed938, -2);
-			g_f8f080[id].f5c = 1;
-			g_f8f080[id].f1d0 = 3;
+			((Ent*)g_f8f080)[id].f5c = 1;
+			((Ent*)g_f8f080)[id].f1d0 = 3;
 			for (i = 0; i < 768; i++) {
 				if (g_770b80[i].marked != 0 && g_770b80[i].group != 0) {
 					g_770b80[i].marked = 0;

@@ -12,7 +12,8 @@ extern int g_67fcac;
 extern int g_67fcb0;
 extern int g_67fcb4;
 extern char g_1007ba0[];
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char* g_773da8;
 
 int __cdecl fcn_004b3010(int pos, int k, Val* v, char* buf);
@@ -124,7 +125,7 @@ int __cdecl fcn_004b1b60(void)
 			fcn_004c5530(msg);
 			return 1;
 		}
-		if (v.x0 > g_7f4c00) {
+		if (v.x0 > (*(int*)&g_7f4c00)) {
 			return 0;
 		}
 		pos += 6;

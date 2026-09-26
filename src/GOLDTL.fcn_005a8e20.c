@@ -24,10 +24,11 @@ typedef struct
 } Win;
 // SIZE 0x3cc
 
-extern Player g_7f4ca0[];
-extern Win g_1015f40[];
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern unsigned short g_774970;
-extern char g_773d75;
+extern unsigned char g_773d75;
 extern int g_772514;
 extern int g_100f1dc;
 extern int g_67d370;
@@ -75,7 +76,7 @@ void __cdecl fcn_005a8e20(void)
 	fcn_004727a0(dlg, 0);
 	fcn_0046e830(-1, -1, g_772514, w, 0x767);
 	fcn_00473a90(0, 0);
-	g_1015f40[w].x274 = 0x5a;
+	((Win*)g_1015f40)[w].x274 = 0x5a;
 	do {
 		if (flag != 0) {
 			fcn_004727a0(dlg, 1);
@@ -113,7 +114,7 @@ void __cdecl fcn_005a8e20(void)
 		if (g_100f1dc != -1) {
 			for (i = 0; i < n; i++) {
 				if (g_67d370 == rows[i].btn && *(unsigned short*) (rows[i].obj + 0x27) != g_774970 &&
-				    fcn_00526010(&g_7f4ca0[g_774970], *(int*) (rows[i].rel + 0xb0), g_773d75) != 0) {
+				    fcn_00526010(&((Player*)g_7f4ca0)[g_774970], *(int*) (rows[i].rel + 0xb0), (*(char*)&g_773d75)) != 0) {
 					fcn_00526920(rows[i].obj, -1, s_6b5c60);
 				}
 			}

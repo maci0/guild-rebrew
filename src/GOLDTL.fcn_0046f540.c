@@ -15,8 +15,9 @@ typedef struct
 } fcn_0046f540_Ent;
 // SIZE 0x2f4
 
-extern fcn_0046f540_Win g_1015f40[];
-extern fcn_0046f540_Ent** g_772540;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern void** g_772540;
 
 void __cdecl fcn_0046f4c0(int id);
 
@@ -34,13 +35,13 @@ void __cdecl fcn_0046f540(int win)
 
 	first = -1;
 	last = -1;
-	w = &g_1015f40[win];
+	w = &((fcn_0046f540_Win*)g_1015f40)[win];
 	for (i = 0x3ff; i >= 0; i--) {
-		if (g_772540[i] != 0 && g_772540[i]->id == w->i[0x27c / 4]) {
+		if (((fcn_0046f540_Ent**)g_772540)[i] != 0 && ((fcn_0046f540_Ent**)g_772540)[i]->id == w->i[0x27c / 4]) {
 			last = i;
 			break;
 		}
-		if (g_772540[i] != 0 && g_772540[i]->parent == w && first == -1) {
+		if (((fcn_0046f540_Ent**)g_772540)[i] != 0 && ((fcn_0046f540_Ent**)g_772540)[i]->parent == w && first == -1) {
 			first = i;
 		}
 	}
@@ -48,14 +49,14 @@ void __cdecl fcn_0046f540(int win)
 		first = last;
 	}
 	n = (first - last) * 4 + 4;
-	memcpy(tmp, &g_772540[last], n);
-	memmove(&g_772540[last], &g_772540[first + 1], 0xff8 - first * 4);
+	memcpy(tmp, &((fcn_0046f540_Ent**)g_772540)[last], n);
+	memmove(&((fcn_0046f540_Ent**)g_772540)[last], &((fcn_0046f540_Ent**)g_772540)[first + 1], 0xff8 - first * 4);
 	for (i = 0x3ff; i >= 0; i--) {
-		if (g_772540[i] != 0) {
+		if (((fcn_0046f540_Ent**)g_772540)[i] != 0) {
 			break;
 		}
 	}
-	memcpy(&g_772540[i + 1], tmp, n);
+	memcpy(&((fcn_0046f540_Ent**)g_772540)[i + 1], tmp, n);
 	for (i = 0; i < w->i[0x2c / 4]; i++) {
 		fcn_0046f4c0(((int*) w->i[0x28 / 4])[i]);
 	}

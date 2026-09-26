@@ -10,7 +10,8 @@ typedef struct {
 } stamp14;
 // SIZE 0xe
 
-extern stamp14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char* g_773da8;
 
 void __cdecl fcn_004c5530(void*);
@@ -25,7 +26,7 @@ int __cdecl fcn_004b0070(void)
 	*(int*) (m + 0xc) = -1;
 	m[0x36] = 1;
 	*(int*) (m + 0x58) = 1;
-	*(stamp14*) (m + 0x28) = g_7f4c00;
+	*(stamp14*) (m + 0x28) = (*(stamp14*)&g_7f4c00);
 	*(short*) (m + 0x2c) = 8;
 	*(int*) (m + 0x2e) = 0;
 	fcn_004c5530(m);

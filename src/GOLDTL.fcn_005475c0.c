@@ -12,7 +12,8 @@ typedef struct {
 	int c;
 } Msg;
 
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char g_6a58ac[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -36,7 +37,7 @@ void __cdecl fcn_005475c0(void)
 		if (w == 0) {
 			continue;
 		}
-		if (g_7f4c00 - *(int*) (w + 0x28) > 1) {
+		if ((*(int*)&g_7f4c00) - *(int*) (w + 0x28) > 1) {
 			Msg msg;
 
 			msg.tag = 0x636c6572;

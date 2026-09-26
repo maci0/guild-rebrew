@@ -17,12 +17,13 @@ typedef struct
 extern int g_6b7fdc;
 extern char s_6790b0[];
 extern int g_6b86d4;
-extern int g_67bbdc[];
-extern int g_6b86c4[];
+#include "client_types.h"
+extern Vec3_67bbdc g_67bbdc;
+extern Vec3_67bbdc g_6b86c4;
 extern int g_6b805c;
-extern int g_10425fc;
-extern int g_104329c;
-extern fcn_00446cd0_Cam g_1041d80[];
+extern float g_10425fc;
+extern float g_104329c;
+extern char g_1041d80[];
 extern int g_67a370;
 
 void* __cdecl fcn_0042ff50(char* name, char* mode, int flags);
@@ -52,18 +53,18 @@ void __cdecl fcn_00446cd0(char* name, void* stream)
 	g_6b86d4++;
 	fcn_00401360(s, 0x3a6c00bb);
 	fcn_00401260(s, 0);
-	fcn_004012f0(s, g_67bbdc);
-	fcn_004012f0(s, g_6b86c4);
+	fcn_004012f0(s, ((int*)&g_67bbdc));
+	fcn_004012f0(s, ((int*)&g_6b86c4));
 	fcn_00401360(s, g_6b805c);
-	fcn_00401260(s, g_10425fc);
-	fcn_00401260(s, g_104329c);
+	fcn_00401260(s, (*(int*)&g_10425fc));
+	fcn_00401260(s, (*(int*)&g_104329c));
 	for (i = 0; i < 7; i++) {
-		fcn_004012f0(s, g_1041d80[i].pos);
-		fcn_004012f0(s, g_1041d80[i].dir);
+		fcn_004012f0(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].pos);
+		fcn_004012f0(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].dir);
 		for (j = 0; j < 6; j++) {
-			fcn_00401360(s, g_1041d80[i].keys[j].k);
-			fcn_00401260(s, g_1041d80[i].keys[j].a);
-			fcn_00401260(s, g_1041d80[i].keys[j].b);
+			fcn_00401360(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].keys[j].k);
+			fcn_00401260(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].keys[j].a);
+			fcn_00401260(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].keys[j].b);
 		}
 	}
 	fcn_004379a0(g_67a370, 0, 0x18, (void*) fcn_00446c60, s);

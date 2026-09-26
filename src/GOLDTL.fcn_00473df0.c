@@ -22,12 +22,13 @@ typedef struct Tag {
 } Tag;
 // SIZE 0xc
 
-extern void* g_7725c0;
+extern char* g_7725c0;
 extern short g_7725c4;
 extern void* g_100f8a0;
 extern TexSlot g_100f860[3];
 extern TexSlot g_100f840;
-extern Tag g_1011980[6];
+#include "client_types.h"
+extern Pair0c_1011980 g_1011980[6];
 
 void* __cdecl fcn_004770a0(TexDesc* d, int fmt);
 
@@ -38,7 +39,7 @@ void __cdecl fcn_00473df0(void)
 	TexDesc d;
 	int i;
 
-	g_7725c0 = 0;
+	(*(void**)&g_7725c0) = 0;
 	g_7725c4 = 0;
 	memset(&d, 0, sizeof(d));
 	d.w = 0x40;
@@ -59,7 +60,7 @@ void __cdecl fcn_00473df0(void)
 	d.h = 0x100;
 	g_100f840.tex = fcn_004770a0(&d, 3);
 	for (i = 0; i < 6; i++) {
-		g_1011980[i].id = -1;
-		g_1011980[i].val = 0;
+		((Tag*)g_1011980)[i].id = -1;
+		((Tag*)g_1011980)[i].val = 0;
 	}
 }

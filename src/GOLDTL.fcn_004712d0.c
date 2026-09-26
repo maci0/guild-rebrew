@@ -12,7 +12,8 @@ typedef struct Obj {
 } Obj;
 // SIZE 0x2bc
 
-extern Obj g_1038140[];
+#include "client_types.h"
+extern Obj_1038140 g_1038140[];
 
 void __cdecl fcn_00471340(int k);
 void __cdecl fcn_004713b0(int k, char* a, char* b);
@@ -24,7 +25,7 @@ int __cdecl fcn_004712d0(int k, char* a, char* b)
 {
 	Obj* o;
 
-	o = &g_1038140[k];
+	o = &((Obj*)g_1038140)[k];
 	if (!o->used) {
 		return 0;
 	}

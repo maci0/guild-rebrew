@@ -20,7 +20,8 @@ extern int g_14ce8d8;
 extern int g_774654;
 extern int g_100f894;
 extern char* g_1015ea0;
-extern char g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_67d370;
 extern char g_774964;
 extern int g_14ac644;
@@ -75,8 +76,8 @@ int __cdecl fcn_005e0930(void)
 				    && (g_67d370 == items[i].id || g_100f894 == items[i].slot
 				        || (g_100f894 != -1
 				            && *(char**) (g_1015ea0
-				                   + *(int*) (g_1015f40 + g_100f894 * 0x3cc + 0x27c) * 0x2f4 + 0x40)
-				                == g_1015f40 + items[i].slot * 0x3cc))) {
+				                   + *(int*) (((char*)g_1015f40) + g_100f894 * 0x3cc + 0x27c) * 0x2f4 + 0x40)
+				                == ((char*)g_1015f40) + items[i].slot * 0x3cc))) {
 					goto found;
 				}
 			}

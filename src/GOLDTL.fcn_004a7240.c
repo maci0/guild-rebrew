@@ -14,7 +14,8 @@ typedef struct Hand {
 } Hand;
 // SIZE 0x14
 
-extern Card g_1007ce0[];
+#include "client_types.h"
+extern Card_1007ce0 g_1007ce0[24];
 
 int __cdecl fcn_004a7240(Hand* in, Hand* out, int a3)
 {
@@ -31,7 +32,7 @@ int __cdecl fcn_004a7240(Hand* in, Hand* out, int a3)
 	for (k = 0; k < 4 && swapped; k++) {
 		swapped = 0;
 		for (j = k + 1; j < 5; j++) {
-			if (g_1007ce0[out->c[j]].v < g_1007ce0[out->c[k]].v) {
+			if (((Card*)g_1007ce0)[out->c[j]].v < ((Card*)g_1007ce0)[out->c[k]].v) {
 				t = out->c[k];
 				out->c[k] = out->c[j];
 				swapped = 1;
@@ -39,11 +40,11 @@ int __cdecl fcn_004a7240(Hand* in, Hand* out, int a3)
 			}
 		}
 	}
-	if (g_1007ce0[out->c[0]].v != 0) {
+	if (((Card*)g_1007ce0)[out->c[0]].v != 0) {
 		return 0;
 	}
 	for (k = 0; k < 4; k++) {
-		if (g_1007ce0[out->c[k + 1]].v <= g_1007ce0[out->c[k]].v) {
+		if (((Card*)g_1007ce0)[out->c[k + 1]].v <= ((Card*)g_1007ce0)[out->c[k]].v) {
 			return 0;
 		}
 	}

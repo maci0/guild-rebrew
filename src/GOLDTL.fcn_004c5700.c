@@ -1,5 +1,6 @@
+#include "client_types.h"
 // GLOBAL: GOLDTL 0x7f4c00
-extern char g_7f4c00[];
+extern pos14_7f4c00 g_7f4c00;
 // FUNCTION: GOLD 0x004c4d40
 // SIZE: 112
 // FUNCTION: GOLDTL 0x4c5700
@@ -22,7 +23,7 @@ int __cdecl fcn_004c5700(Quad4* a1)
 {
 	char buf[0x9c];
 
-	if (fcn_00500cb0(a1, g_7f4c00) == 0) {
+	if (fcn_00500cb0(a1, ((char*)&g_7f4c00)) == 0) {
 		return -1;
 	}
 	buf[0] = 0x1e;

@@ -1,30 +1,18 @@
 // FUNCTION: GOLDTL 0x55a3d0
 // SIZE: 358
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x2f4
-struct trade {
-	char pad[0x2f4];
-};
 
-extern struct pos14 g_7f4c00;
-extern struct trade g_868080[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern trade_868080 g_868080[];
 extern unsigned char g_773d75;
 extern int g_100f884;
 extern int g_100f1dc;
 extern char g_6a5a10[];
 extern char g_6811b0[];
 
-int __cdecl fcn_00500cb0(struct pos14*, char*);
+int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
 char* __cdecl fcn_005463a0(int, ...);

@@ -1,17 +1,7 @@
 void __cdecl fcn_00546190(char*);
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x00571850
 // SIZE: 228
@@ -22,7 +12,7 @@ unsigned short* __cdecl fcn_00508e40(int);
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_00529160(char*, char*, int, char*);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_00579cf0(char* o)
 {
@@ -38,10 +28,10 @@ void __cdecl fcn_00579cf0(char* o)
 			fcn_00529160(r, q, *x, o);
 			*(int*) (o + 0xac) = 0;
 			*(int*) (o + 0xb8) = 0x1fe;
-			*(struct pos14*) (o + 0xbc) = g_7f4c00;
-			*(struct pos14*) (o + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (o + 0xbc) = g_7f4c00;
+			*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
 			*(int*) (o + 0x70) = 0;
-			fcn_00500bb0((struct pos14*) (o + 0x52), 0, 5, 0);
+			fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
 			return;
 		}
 	}

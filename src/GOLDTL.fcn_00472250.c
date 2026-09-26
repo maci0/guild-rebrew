@@ -12,21 +12,13 @@ typedef struct Win {
 	char pad280[0x3cc - 0x280];
 } Win;
 // SIZE 0x3cc
-typedef struct Obj {
-	int pad0;
-	int wins[0x60];
-	int count;
-	char pad188[0x190 - 0x188];
-	int used;
-	char pad194[0x1a4 - 0x194];
-	void* fx[2];
-	void* h[2];
-	char pad1b4[0x2bc - 0x1b4];
-} Obj;
+#include "client_types.h"
+typedef Obj_1038140 Obj;
 // SIZE 0x2bc
 
-extern Win g_1015f40[];
-extern Obj g_1038140[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern Obj_1038140 g_1038140[];
 
 // FUNCTION: GOLDTL 0x472250
 // SIZE: 97
@@ -35,9 +27,9 @@ int __cdecl fcn_00472250(int k, int i, int j)
 	Win* w;
 
 	if (k != -1) {
-		w = &g_1015f40[g_1038140[k].wins[i]];
+		w = &((Win*)g_1015f40)[g_1038140[k].wins[i]];
 	} else {
-		w = &g_1015f40[i];
+		w = &((Win*)g_1015f40)[i];
 	}
 	if (j > w->count) {
 		return -1;

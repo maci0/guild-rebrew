@@ -3,16 +3,13 @@
 // FUNCTION: GOLDTL 0x00504250
 // SIZE: 176
 
+#include "client_types.h"
 #pragma pack(push, 1)
-typedef struct
-{
-	unsigned char k;
-	unsigned short ids[10];
-} Rec15;
+typedef Rec15_699058 Rec15;
 // SIZE 0x15
 #pragma pack(pop)
 
-extern Rec15 g_699058[37];
+extern Rec15_699058 g_699058[37];
 
 char* __cdecl fcn_00502cd0(int list, int a, int b, int c, ...);
 char* __cdecl fcn_00502fe0(int a, int b, int c);

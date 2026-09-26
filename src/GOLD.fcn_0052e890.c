@@ -40,9 +40,10 @@ typedef struct {
 	char pad1e4[0x2ec - 0x1e4];
 } Ent;
 
-extern Slot g_f8f110[];
-extern SlotTail g_f8f120[];
-extern Ent* g_f8f080;
+#include "client_types.h"
+extern Slot_f8f110 g_f8f110[];
+extern Win_f8f120 g_f8f120[];
+extern char* g_f8f080;
 extern char g_631090[];
 
 int __cdecl fcn_004731c0(int x, int y, int kind, int owner);
@@ -52,22 +53,22 @@ int __cdecl fcn_0052e890(int x, int y, int owner, int other, int arg5, int* id2,
 {
 	SlotTail* s;
 
-	s = &g_f8f120[other];
+	s = &((SlotTail*)g_f8f120)[other];
 	*id1 = fcn_004731c0(x, y, 3, owner);
-	g_f8f110[owner].h0 = *id1;
-	g_f8f080[*id1].f4c = 1;
-	g_f8f080[*id1].f1c0 = 3;
+	((Slot*)g_f8f110)[owner].h0 = *id1;
+	((Ent*)g_f8f080)[*id1].f4c = 1;
+	((Ent*)g_f8f080)[*id1].f1c0 = 3;
 	*id2 = fcn_004731c0(x, y + 0x2a, 4, owner);
-	g_f8f110[owner].h1 = *id2;
-	g_f8f080[*id2].f4c = 1;
-	g_f8f080[*id2].f1c0 = 3;
-	g_f8f080[*id2].f1e0 = other;
-	g_f8f080[*id1].f1e0 = other;
+	((Slot*)g_f8f110)[owner].h1 = *id2;
+	((Ent*)g_f8f080)[*id2].f4c = 1;
+	((Ent*)g_f8f080)[*id2].f1c0 = 3;
+	((Ent*)g_f8f080)[*id2].f1e0 = other;
+	((Ent*)g_f8f080)[*id1].f1e0 = other;
 	*id3 = fcn_00473640(x - 0x13, y + 0x19, g_631090, owner);
-	g_f8f110[owner].h2 = *id3;
-	g_f8f080[*id3].f74 = 0x54;
-	g_f8f080[*id3].f5c = 1;
-	g_f8f080[*id3].f14 = 0x30;
+	((Slot*)g_f8f110)[owner].h2 = *id3;
+	((Ent*)g_f8f080)[*id3].f74 = 0x54;
+	((Ent*)g_f8f080)[*id3].f5c = 1;
+	((Ent*)g_f8f080)[*id3].f14 = 0x30;
 	s->f248 = 0;
 	s->f264 = arg5;
 	return 1;

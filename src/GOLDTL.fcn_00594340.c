@@ -28,23 +28,8 @@ typedef struct
 } Panel;
 // SIZE 0x58
 
-typedef struct
-{
-	int x0;
-	int x4;
-	int x8;
-	int xc;
-	int x10;
-	int x14;
-	int x18;
-	int x1c;
-	int x20;
-	int x24;
-	int x28;
-	int x2c;
-	int x30;
-	int x34;
-} Slot;
+#include "client_types.h"
+typedef Slot_778da0 Slot;
 // SIZE 0x38
 
 extern Pair g_778d48[4];
@@ -52,8 +37,8 @@ extern Pair g_779128[2];
 extern Panel g_779160[16];
 extern int g_7798a0;
 extern Slot g_7798c0[16];
-extern Slot g_778da0[16];
-extern Slot g_7796e0[16];
+extern Slot_778da0 g_778da0[16];
+extern Slot_778da0 g_7796e0[16];
 
 void __cdecl fcn_00594340(void)
 {

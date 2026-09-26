@@ -3,7 +3,8 @@
 // FUNCTION: GOLDTL 0x4ad1c0
 // SIZE: 228
 
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern int g_7728cc;
 extern int g_7728c4;
 
@@ -20,7 +21,7 @@ void __cdecl fcn_004ad1c0(void)
 	int limit;
 	char* p;
 
-	limit = g_7f4c00 + 0x578;
+	limit = (*(int*)&g_7f4c00) + 0x578;
 	if (fcn_004e8a80(0x26, a) == 0)
 		return;
 	if (fcn_004e8a80(0x27, b) == 0)

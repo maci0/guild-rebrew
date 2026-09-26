@@ -47,15 +47,16 @@ typedef struct {
 extern int g_6a25b4;
 extern int g_6a25b8;
 extern char g_774724;
-extern char g_77534c;
+extern unsigned char g_77534c;
 extern int g_1040494;
 extern char g_6a2e94[];
 extern char g_6a2ea8[];
 extern int g_772514;
-extern Slot g_1015f40[];
-extern Ent* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 extern Row g_7e30c0[32];
-extern Obj g_7f4ca0[];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl fcn_004727a0(int h, int mode);
@@ -71,7 +72,7 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 
 	if (g_6a25b4 == -1) {
 		g_774724 = arg;
-		if (g_77534c == 0) {
+		if ((*(char*)&g_77534c) == 0) {
 			g_6a25b4 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2ea8);
 		} else {
 			g_6a25b4 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2e94);
@@ -80,14 +81,14 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 		owner = g_772514;
 		fcn_004727a0(g_6a25b4, 2);
 		id = fcn_00472250(g_6a25b4, 2, 0);
-		g_1015ea0[id].f1d0 = 3;
-		g_1015f40[g_772514].h0 = id;
-		g_1015ea0[id].owner = owner;
+		((Ent*)g_1015ea0)[id].f1d0 = 3;
+		((Slot*)g_1015f40)[g_772514].h0 = id;
+		((Ent*)g_1015ea0)[id].owner = owner;
 		id = fcn_00472250(g_6a25b4, 2, 1);
-		g_1015ea0[id].f1d0 = 3;
-		g_1015f40[g_772514].h1 = id;
-		g_1015ea0[id].owner = owner;
-		g_1015f40[owner].mode = 0x4e;
+		((Ent*)g_1015ea0)[id].f1d0 = 3;
+		((Slot*)g_1015f40)[g_772514].h1 = id;
+		((Ent*)g_1015ea0)[id].owner = owner;
+		((Slot*)g_1015f40)[owner].mode = 0x4e;
 		if (g_6a25b4 != -1) {
 			if (g_6a25b8 != -1) {
 				fcn_00471af0(g_6a25b8, 0);
@@ -104,11 +105,11 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 			}
 			fcn_004727a0(g_6a25b4, 2);
 			id = fcn_0046f7e0(0x11, 4, 0x51d, g_772514, -2);
-			g_1015ea0[id].f5c = 1;
-			g_1015ea0[id].f1d0 = 3;
+			((Ent*)g_1015ea0)[id].f5c = 1;
+			((Ent*)g_1015ea0)[id].f1d0 = 3;
 			for (i = 0; i < 768; i++) {
-				if (g_7f4ca0[i].marked != 0 && g_7f4ca0[i].group != 0) {
-					g_7f4ca0[i].marked = 0;
+				if (((Obj*)g_7f4ca0)[i].marked != 0 && ((Obj*)g_7f4ca0)[i].group != 0) {
+					((Obj*)g_7f4ca0)[i].marked = 0;
 				}
 			}
 		}

@@ -9,11 +9,12 @@ typedef struct
 } Win;
 // SIZE 0x3cc
 
-extern Win g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_14ce8e0;
 extern int g_774654;
 extern int g_772514;
-extern char* g_67a370;
+extern int g_67a370;
 extern int g_6b8300;
 extern char* g_1042320;
 extern char g_1052a40[];
@@ -54,9 +55,9 @@ void __cdecl fcn_005b37d0(void)
 	char* p;
 
 	h = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
-	fcn_00472900(g_1015f40[h].x27c, 0x54);
+	fcn_00472900(((Win*)g_1015f40)[h].x27c, 0x54);
 	while (fcn_005373e0((void*) fcn_005b37d0, 0x657c7) != 0) {
-		w = &g_1015f40[h];
+		w = &((Win*)g_1015f40)[h];
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
@@ -71,7 +72,7 @@ void __cdecl fcn_005b37d0(void)
 		v = fcn_0045a230(0x1ff, 2, 0);
 		total += v;
 		fcn_00519190((int) s_6ab790, v);
-		v = fcn_00459d50(*(int*) (g_67a370 + 0xb0));
+		v = fcn_00459d50(*(int*) (((char*)g_67a370) + 0xb0));
 		total += v;
 		fcn_00519190((int) s_6ab778, v);
 		v = fcn_00459d90(g_6b8300, 1);

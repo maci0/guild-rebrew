@@ -3,17 +3,14 @@
 /* Twin of GOLDTL 0x5270c0; the GOLD slot records are 0x3c4 bytes, not 0x3cc. */
 
 // SIZE 0x3c4
-typedef struct {
-	char pad0[0x27c];
-	int panel;
-	char pad280[0x3c4 - 0x280];
-} Slot;
+#include "client_types.h"
+typedef Slot_f8f110 Slot;
 
 extern int g_623868;
 extern int g_623e90;
 extern int g_6238ac;
 extern int g_623848;
-extern Slot g_f8f110[];
+extern Slot_f8f110 g_f8f110[];
 extern int g_7662e0[15];
 extern int g_623828;
 extern int g_62382c;

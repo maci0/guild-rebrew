@@ -12,15 +12,14 @@ typedef struct
 } fcn_00472510_Ent;
 // SIZE 0x2f4
 
-typedef struct
-{
-	int i[175];
-} fcn_00472510_Page;
+#include "client_types.h"
+typedef Page_1038144 fcn_00472510_Page;
 // SIZE 0x2bc
 
-extern fcn_00472510_Win g_1015f40[];
-extern fcn_00472510_Ent* g_1015ea0;
-extern fcn_00472510_Page g_1038144[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
+extern Page_1038144 g_1038144[];
 extern int g_772534;
 
 // FUNCTION: GOLDTL 0x472510
@@ -31,11 +30,11 @@ void __cdecl fcn_00472510(int idx, int slot, int a3, int a4, int a5, int a6)
 	fcn_00472510_Ent* e;
 	char* sub;
 
-	w = &g_1015f40[g_1038144[g_772534].i[slot]];
+	w = &((fcn_00472510_Win*)g_1015f40)[g_1038144[g_772534].i[slot]];
 	if (idx > w->i[0x2c / 4]) {
 		return;
 	}
-	e = &g_1015ea0[((int*) w->i[0x28 / 4])[idx]];
+	e = &((fcn_00472510_Ent*)g_1015ea0)[((int*) w->i[0x28 / 4])[idx]];
 	if (e->i[0x20 / 4] == 0x41) {
 		sub = (char*) e->i[0xc / 4];
 		if (*(int*) (sub + 0x28) & 1) {

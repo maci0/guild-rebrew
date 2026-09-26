@@ -21,12 +21,13 @@ extern int g_14ce8d8;
 extern int g_774654;
 extern int g_100f894;
 extern char* g_1015ea0;
-extern char g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_67d370;
 extern char g_774964;
 extern int g_14ac644;
 extern char g_7e21a0[];
-extern int g_7747b0;
+extern unsigned char g_7747b0;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471db0(int, int);
@@ -78,8 +79,8 @@ int __cdecl fcn_005e0700(void)
 				    && (g_67d370 == items[i].id || g_100f894 == items[i].slot
 				        || (g_100f894 != -1
 				            && *(char**) (g_1015ea0
-				                   + *(int*) (g_1015f40 + g_100f894 * 0x3cc + 0x27c) * 0x2f4 + 0x40)
-				                == g_1015f40 + items[i].slot * 0x3cc))) {
+				                   + *(int*) (((char*)g_1015f40) + g_100f894 * 0x3cc + 0x27c) * 0x2f4 + 0x40)
+				                == ((char*)g_1015f40) + items[i].slot * 0x3cc))) {
 					goto found;
 				}
 			}
@@ -88,7 +89,7 @@ found:
 			if (g_774964 == 0 || fcn_005dfe80(g_14ac644, 0x101) != 0) {
 				sprintf(text, "Gamedata\\Saves\\%s.SAV", items[i].name);
 				strcpy(g_7e21a0, text);
-				g_7747b0 = 0xa;
+				(*(int*)&g_7747b0) = 0xa;
 				g_774654 = 1;
 				result = 1;
 			}

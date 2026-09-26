@@ -3,7 +3,8 @@
 // FUNCTION: GOLDTL 0x4ad630
 // SIZE: 97
 
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern int g_664e0c[];
 
 int __cdecl fcn_004e8a80(int id, int* out);
@@ -15,7 +16,7 @@ void __cdecl fcn_004ad630(void)
 	int info[6];
 	int n;
 
-	n = g_7f4c00;
+	n = (*(int*)&g_7f4c00);
 	if (n >= 4) {
 		n = n % 4;
 		if (n != 0) {

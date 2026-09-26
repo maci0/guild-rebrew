@@ -7,8 +7,9 @@ extern unsigned char* g_868050;
 extern int g_6652f8[];
 extern float g_6652d8[];
 extern unsigned char g_773d75;
-extern int g_8680b4[];
-extern unsigned short g_7f4c00;
+extern char g_8680b4[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 int __cdecl fcn_005015e0(void**, void**, void**, int);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
@@ -60,16 +61,16 @@ int __cdecl fcn_004f25a0(char* req)
 	}
 	*(int*) (slot + 4) = *(int*) ((char*) entity2 + 4);
 	*(unsigned short*) (slot + 8) = *(unsigned short*) ((char*) entity2 + 0x50);
-	*(unsigned short*) (slot + 0xa) = *(unsigned short*) (req + 0x11) + g_7f4c00;
+	*(unsigned short*) (slot + 0xa) = *(unsigned short*) (req + 0x11) + (unsigned short) g_7f4c00.a;
 	*(unsigned char*) (slot + 0xc) = 0xff;
 	for (j = 0; j < g_6652f8[*(int*) (req + 0xc)]; j++) {
 		*(int*) (*(char**) (slot + 0x10) + j * 0x44) = -1;
 	}
 	if (*(int*) (req + 0x13) > 0) {
-		fcn_00503930(*(int*) ((char*) entity2 + 4), (unsigned short) g_8680b4[g_773d75 * 189],
+		fcn_00503930(*(int*) ((char*) entity2 + 4), (unsigned short) ((int*)g_8680b4)[g_773d75 * 189],
 			*(int*) (req + 0x13));
 		fcn_005037c0(*(int*) (g_7f4ca0 + 4 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c),
-			(unsigned short) g_8680b4[g_773d75 * 189],
+			(unsigned short) ((int*)g_8680b4)[g_773d75 * 189],
 			(int) (*(int*) (req + 0x13) * g_6652d8[*(int*) (req + 0xc)]));
 		off = *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c;
 		player = g_7f4ca0 + off;

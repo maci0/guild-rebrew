@@ -17,10 +17,11 @@ typedef struct {
 	int id;
 } Req;
 
-extern int g_666018;
+extern __int64 g_666018;
 extern int g_66601c;
-extern int g_7f4c00;
-extern int g_7f4c04;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
@@ -46,7 +47,7 @@ int __cdecl fcn_005df6b0(char* e, char* a2)
 		memset(&req, 0, sizeof(req));
 		memset(&req.pad[2], -1, 0x20);
 		fcn_0051af00(text, 0x9c);
-		req.c = g_666018;
+		req.c = (*(int*)&g_666018);
 		req.a = 1;
 		req.size = 0x400;
 		req.kind = 6;
@@ -62,8 +63,8 @@ int __cdecl fcn_005df6b0(char* e, char* a2)
 	*(int*) (msg + 8) = *(int*) (r + 4);
 	msg[4] = (char) 0xa3;
 	*(int*) (msg + 0xc) = -1;
-	*(int*) (msg + 0x28) = g_7f4c00;
-	*(int*) (msg + 0x2c) = g_7f4c04;
+	*(int*) (msg + 0x28) = (*(int*)&g_7f4c00);
+	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x30) = g_7f4c08;
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	msg[0x36] = 1;

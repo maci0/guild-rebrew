@@ -38,14 +38,15 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern Player g_7f4ca0[];
-extern Player* g_7e4260[32];
-extern Name14 g_7f4c00;
+extern char g_7f4ca0[];
+extern char* g_7e4260[32];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;
 extern int g_774654;
-extern char* g_7746c8;
+extern unsigned char* g_7746c8;
 extern char s_6aa464[];
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -92,16 +93,16 @@ int __cdecl fcn_0059cde0(char* name)
 		}
 		if (g_100f1dc != -1) {
 			if (g_67d370 == btn1) {
-				for (p = fcn_005463a0(3, 0, 0x48, 2, *(unsigned short*) (g_7746c8 + 0x27), 3, *(int*) (g_7746c8 + 1)); p != 0; p = fcn_005462a0()) {
+				for (p = fcn_005463a0(3, 0, 0x48, 2, *(unsigned short*) (((char*)g_7746c8) + 0x27), 3, *(int*) (((char*)g_7746c8) + 1)); p != 0; p = fcn_005462a0()) {
 					if (strcmp(p + 0xac, name) == 0) {
 						break;
 					}
 				}
 				if (p == 0) {
 					pkt.type = 0x48;
-					pkt.x8 = g_7f4ca0[*(unsigned short*) (g_7746c8 + 0x27)].x4;
-					pkt.xc = *(int*) (g_7746c8 + 1);
-					pkt.name = g_7f4c00;
+					pkt.x8 = ((Player*)g_7f4ca0)[*(unsigned short*) (((char*)g_7746c8) + 0x27)].x4;
+					pkt.xc = *(int*) (((char*)g_7746c8) + 1);
+					pkt.name = (*(Name14*)&g_7f4c00);
 					pkt.x36 = 2;
 					strcpy(pkt.str, name);
 					for (i = 0; i < 8; i++) {
@@ -110,8 +111,8 @@ int __cdecl fcn_0059cde0(char* name)
 					cm_ExProdObjekt();
 					q = pkt.ids;
 					for (i = 0; i < 32; i++) {
-						if (g_7e4260[i] != 0 && g_7e4260[i]->x188 != 0) {
-							*q = g_7e4260[i]->x4;
+						if (((Player**)g_7e4260)[i] != 0 && ((Player**)g_7e4260)[i]->x188 != 0) {
+							*q = ((Player**)g_7e4260)[i]->x4;
 							q++;
 						}
 					}

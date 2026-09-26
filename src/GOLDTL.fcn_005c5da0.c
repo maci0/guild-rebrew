@@ -8,7 +8,8 @@ typedef struct {
 } Pair;
 
 extern int g_6abb00;
-extern Pair g_776c60[];
+#include "client_types.h"
+extern Btn_776c60 g_776c60[6];
 extern char* g_775318;
 extern char g_7f4ca0[];
 extern int g_772514;
@@ -25,8 +26,8 @@ void __cdecl fcn_005c5da0(int layer, int x, int y, unsigned short who, int text)
 
 	if (g_6abb00 == -1) {
 		for (i = 0; i < 6; i++) {
-			g_776c60[i].id = -1;
-			g_776c60[i].v = 0;
+			((Pair*)g_776c60)[i].id = -1;
+			((Pair*)g_776c60)[i].v = 0;
 		}
 		g_775318 = g_7f4ca0 + who * 540;
 		g_6abb00 = fcn_0046f100(x, y, 0xcd, 0xc4, 0x10, layer);

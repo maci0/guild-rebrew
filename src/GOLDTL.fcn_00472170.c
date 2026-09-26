@@ -35,8 +35,9 @@ typedef struct Win {
 } Win;
 // SIZE 0x3cc
 
-extern Slot* g_1015ea0;
-extern Win g_1015f40[];
+extern char* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 
 // FUNCTION: GOLDTL 0x472170
 // SIZE: 111
@@ -46,10 +47,10 @@ void __cdecl fcn_00472170(int slot, int flag)
 	Win* w;
 	int i;
 
-	s = &g_1015ea0[slot];
+	s = &((Slot*)g_1015ea0)[slot];
 	s->hidden = (flag == 0);
 	if (s->type == 0x40) {
-		w = &g_1015f40[s->result];
+		w = &((Win*)g_1015f40)[s->result];
 		for (i = 0; i < w->count; i++) {
 			fcn_00472170(w->children[i], flag);
 		}

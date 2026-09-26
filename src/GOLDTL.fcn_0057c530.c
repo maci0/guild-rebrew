@@ -1,16 +1,7 @@
 void __cdecl fcn_0057c530(char*, char*);
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 // SIZE 0xf8
 struct msg {
@@ -20,7 +11,7 @@ struct msg {
 	int f8;
 	int fc;
 	char pad2[0x18];
-	struct pos14 pos;
+	pos14_7f4c00 pos;
 	char b36;
 	char pad3[0x21];
 	char b58;

@@ -8,7 +8,8 @@ typedef struct {
 	char pad3b8[0x3c4 - 0x3b8];
 } Window;
 
-extern Window g_f8f110[];
+#include "client_types.h"
+extern Slot_f8f110 g_f8f110[];
 extern int g_6ed938;
 extern unsigned char* g_6f2308;
 extern unsigned char* g_6f230c;
@@ -56,8 +57,8 @@ void __cdecl fcn_0052e700(int wnd, int page, int icon)
 		fcn_004731c0(0x1f7, 0x43, 0x73e, wnd);
 		fcn_004731c0(0, 0x1a8, 0x73c, wnd);
 	}
-	g_f8f110[g_6ed938].margin[0] = 0x18;
-	g_f8f110[g_6ed938].margin[1] = 0x18;
-	g_f8f110[g_6ed938].margin[2] = 0x18;
-	g_f8f110[g_6ed938].margin[3] = 0x18;
+	((Window*)g_f8f110)[g_6ed938].margin[0] = 0x18;
+	((Window*)g_f8f110)[g_6ed938].margin[1] = 0x18;
+	((Window*)g_f8f110)[g_6ed938].margin[2] = 0x18;
+	((Window*)g_f8f110)[g_6ed938].margin[3] = 0x18;
 }

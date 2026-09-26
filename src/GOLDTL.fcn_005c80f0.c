@@ -4,11 +4,8 @@
 #include <string.h>
 #pragma intrinsic(memset)
 
-typedef struct Group {
-	int count;
-	int sel;
-	int ids[33];
-} Group;
+#include "client_types.h"
+typedef Group_102cbc4 Group;
 // SIZE 0x8c
 
 // SIZE 0x21c
@@ -25,8 +22,8 @@ typedef struct {
 #define HOUSES 768
 #define DISTRICT0 0x59a
 
-extern Group g_102cbc4[8];
-extern House5c80 g_7f4ca0[HOUSES];
+extern Group_102cbc4 g_102cbc4[8];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern int g_772514;
 extern int g_100f1dc;
@@ -84,8 +81,8 @@ void __cdecl fcn_005c80f0(void)
 	}
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < HOUSES; j++) {
-			if (g_7f4ca0[j].id != 0xffff && g_7f4ca0[j].district == DISTRICT0 - i && g_7f4ca0[j].id != g_774970
-				&& (g_7f4ca0[j].type == 6 || g_7f4ca0[j].type == 7 || g_7f4ca0[j].type == 5)) {
+			if (((House5c80*)g_7f4ca0)[j].id != 0xffff && ((House5c80*)g_7f4ca0)[j].district == DISTRICT0 - i && ((House5c80*)g_7f4ca0)[j].id != g_774970
+				&& (((House5c80*)g_7f4ca0)[j].type == 6 || ((House5c80*)g_7f4ca0)[j].type == 7 || ((House5c80*)g_7f4ca0)[j].type == 5)) {
 				fcn_00472640(btn[i], 0);
 			}
 		}
@@ -99,8 +96,8 @@ void __cdecl fcn_005c80f0(void)
 			b = btn[i];
 			fcn_00472640(b, 1);
 			for (j = 0; j < HOUSES; j++) {
-				if (g_7f4ca0[j].id != 0xffff && g_7f4ca0[j].district == i + DISTRICT0 && g_7f4ca0[j].id != g_774970
-					&& (g_7f4ca0[j].type == 6 || g_7f4ca0[j].type == 7 || g_7f4ca0[j].type == 5)) {
+				if (((House5c80*)g_7f4ca0)[j].id != 0xffff && ((House5c80*)g_7f4ca0)[j].district == i + DISTRICT0 && ((House5c80*)g_7f4ca0)[j].id != g_774970
+					&& (((House5c80*)g_7f4ca0)[j].type == 6 || ((House5c80*)g_7f4ca0)[j].type == 7 || ((House5c80*)g_7f4ca0)[j].type == 5)) {
 					fcn_00472640(b, 0);
 				}
 			}
@@ -112,7 +109,7 @@ void __cdecl fcn_005c80f0(void)
 			fcn_00472640(back, 0);
 		}
 		if (g_100f1dc == 2 && g_102cbc4[grp].sel != -1) {
-			me_h = &g_7f4ca0[g_774970];
+			me_h = &((House5c80*)g_7f4ca0)[g_774970];
 			district = g_102cbc4[grp].sel + DISTRICT0;
 			found = 0;
 			fcn_004c4510(me_h, me_h->handle);
@@ -123,8 +120,8 @@ void __cdecl fcn_005c80f0(void)
 			}
 			for (i = 8; i != 0; i--) {
 				for (j = 0; j < HOUSES; j++) {
-					if (g_7f4ca0[j].id != 0xffff && g_7f4ca0[j].district == g_102cbc4[grp].sel + DISTRICT0 && g_7f4ca0[j].id != g_774970
-						&& (g_7f4ca0[j].type == 6 || g_7f4ca0[j].type == 7 || g_7f4ca0[j].type == 5)) {
+					if (((House5c80*)g_7f4ca0)[j].id != 0xffff && ((House5c80*)g_7f4ca0)[j].district == g_102cbc4[grp].sel + DISTRICT0 && ((House5c80*)g_7f4ca0)[j].id != g_774970
+						&& (((House5c80*)g_7f4ca0)[j].type == 6 || ((House5c80*)g_7f4ca0)[j].type == 7 || ((House5c80*)g_7f4ca0)[j].type == 5)) {
 						found = 1;
 					}
 				}

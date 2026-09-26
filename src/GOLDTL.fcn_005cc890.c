@@ -1,16 +1,8 @@
 // FUNCTION: GOLDTL 0x005cc890
 // SIZE: 256
 
-typedef struct
-{
-	char pad0[0xc];
-	int xc;
-	char pad10[0x248];
-	int x258;
-	char pad25c[0x18];
-	int x274;
-	char pad278[0x3cc - 0x278];
-} Win;
+#include "client_types.h"
+typedef Win_1015f40 Win;
 // SIZE 0x3cc
 
 typedef struct
@@ -25,7 +17,7 @@ typedef struct
 // SIZE 0x38
 
 extern int g_772514;
-extern Win g_1015f40[];
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_14aadb0;
 extern int g_14aadb4[];
 

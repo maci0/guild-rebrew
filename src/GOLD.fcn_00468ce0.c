@@ -41,8 +41,9 @@ typedef struct Ent_468ce0 {
 	char pad44[0x2ec - 0x44];
 } Ent_468ce0;
 
-extern Win_468ce0 g_f8f120[];
-extern Ent_468ce0* g_f8f080;
+#include "client_types.h"
+extern Win_f8f120 g_f8f120[];
+extern char* g_f8f080;
 extern char s_5fe7ac[];
 
 void __cdecl fcn_004222b0(const char* msg);
@@ -58,7 +59,7 @@ int __cdecl fcn_00468ce0(int id, int win)
 	if (win < 0 || win > 0x60) {
 		return 0;
 	}
-	w = &g_f8f120[win];
+	w = &((Win_468ce0*)g_f8f120)[win];
 	if (w->active == 0) {
 		return 0;
 	}
@@ -67,14 +68,14 @@ int __cdecl fcn_00468ce0(int id, int win)
 		return 0;
 	}
 	fcn_004730d0(id, w);
-	g_f8f080[id].win = w;
-	g_f8f080[id].f40 = g_f8f080[w->parent].f40;
-	g_f8f080[id].top = w->y;
-	g_f8f080[id].bottom = w->h + w->y;
-	g_f8f080[id].left = w->x;
-	g_f8f080[id].right = w->w + w->x;
-	g_f8f080[id].f38 = g_f8f080[w->parent].f38;
-	bottom = g_f8f080[id].f16 + g_f8f080[id].f12 - w->y;
+	((Ent_468ce0*)g_f8f080)[id].win = w;
+	((Ent_468ce0*)g_f8f080)[id].f40 = ((Ent_468ce0*)g_f8f080)[w->parent].f40;
+	((Ent_468ce0*)g_f8f080)[id].top = w->y;
+	((Ent_468ce0*)g_f8f080)[id].bottom = w->h + w->y;
+	((Ent_468ce0*)g_f8f080)[id].left = w->x;
+	((Ent_468ce0*)g_f8f080)[id].right = w->w + w->x;
+	((Ent_468ce0*)g_f8f080)[id].f38 = ((Ent_468ce0*)g_f8f080)[w->parent].f38;
+	bottom = ((Ent_468ce0*)g_f8f080)[id].f16 + ((Ent_468ce0*)g_f8f080)[id].f12 - w->y;
 	if (bottom > w->bottom) {
 		w->bottom = bottom + 4;
 	}

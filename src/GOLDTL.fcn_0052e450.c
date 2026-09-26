@@ -20,8 +20,9 @@ extern int g_1040494;
 extern char g_6a2f80[];
 extern char g_6a2f74[];
 extern int g_772514;
-extern Slot g_1015f40[];
-extern Ent* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 extern unsigned short g_774970;
 extern int g_14b5e84;
 extern int g_6a25e8;
@@ -51,9 +52,9 @@ void __cdecl fcn_0052e450(unsigned short* e)
 			fcn_004727a0(g_6a25b8, 1);
 			fcn_00519190(g_6a2f74, *parent, *e * 2 + 0x9a8);
 			fcn_004727a0(g_6a25b8, 0);
-			x = ((g_1015f40[g_772514].width - 0x30) >> 1) - 1;
+			x = ((((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1) - 1;
 			id = fcn_0046f740(x, 0x30, *e + 0xdf, g_772514);
-			g_1015ea0[id].f5c = 1;
+			((Ent*)g_1015ea0)[id].f5c = 1;
 			if (*parent == g_774970) {
 				g_6a25e8 = fcn_0052dee0(x, 0xac, g_14b5e84);
 			}

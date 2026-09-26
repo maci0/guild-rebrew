@@ -6,23 +6,11 @@
 #include <stdlib.h>
 
 // SIZE 0x30
-typedef struct {
-	int h;
-	char* sample;
-	int prio;
-	int loop;
-	int time;
-	int flags;
-	int f18;
-	int f1c;
-	int f20;
-	int vol;
-	int pan;
-	int f2c;
-} Voice;
+#include "client_types.h"
+typedef Voice_14cbbe0 Voice;
 
 extern int g_6b7d7c;
-extern Voice g_14cbbe0;
+extern Voice_14cbbe0 g_14cbbe0;
 Voice* __cdecl fcn_004229b0(void);
 char* __cdecl fcn_00422530(int a, int b);
 void __cdecl fcn_0042a920(int h, int v);

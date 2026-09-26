@@ -1,16 +1,6 @@
 // FUNCTION: GOLDTL 0x579460
 // SIZE: 468
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x21c
 struct house {
 	char pad0[0x1cc];
@@ -18,8 +8,9 @@ struct house {
 	char pad1cd[0x4f];
 };
 
-extern struct pos14 g_7f4c00;
-extern struct house g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern int g_100f884;
 extern int g_100f1dc;
@@ -30,7 +21,7 @@ extern char g_6a7f1c[];
 char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
-int __cdecl fcn_00500cb0(struct pos14*, char*);
+int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 void __cdecl fcn_00579410(char*, struct house*);
 void __cdecl fcn_00579390(char*, struct house*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
@@ -46,7 +37,7 @@ void __cdecl fcn_00579460(char* u)
 
 	p = u + 0xac;
 	h = fcn_00508e40(*(int*) (u + 0xac));
-	if (h == 0 || (g_7f4ca0[*(unsigned short*) (u + 8)].flags & 1) != 0) {
+	if (h == 0 || (((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].flags & 1) != 0) {
 		*(int*) (u + 0x70) = -2;
 	}
 	if (*(int*) (u + 0x70) == -2) {
@@ -74,7 +65,7 @@ void __cdecl fcn_00579460(char* u)
 		break;
 	case 1:
 		if (fcn_00500cb0(&g_7f4c00, u + 0x52) > 0) {
-			fcn_00579410(p, &g_7f4ca0[g_774970]);
+			fcn_00579410(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
 			fcn_00546190(u);
 			break;
@@ -87,13 +78,13 @@ void __cdecl fcn_00579460(char* u)
 			return;
 		}
 		if (g_100f1dc == 2) {
-			fcn_00579390(p, &g_7f4ca0[g_774970]);
+			fcn_00579390(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
 			fcn_00546190(u);
 			return;
 		}
 		if (g_100f1dc == 1) {
-			fcn_00579410(p, &g_7f4ca0[g_774970]);
+			fcn_00579410(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
 			fcn_00546190(u);
 		}

@@ -3,17 +3,11 @@
 // FUNCTION: GOLDTL 0x0050e780
 // SIZE: 164
 
-typedef struct
-{
-	int x0;
-	int x4;
-	int x8;
-	unsigned short xc;
-	char pad[0x26];
-} Rec34;
+#include "client_types.h"
+typedef Rec34_7f3f00 Rec34;
 // SIZE 0x34
 
-extern Rec34 g_7f3f00[];
+extern Rec34_7f3f00 g_7f3f00[];
 extern int g_85ab60;
 
 int __cdecl fcn_0050e780(int i)

@@ -3,17 +3,8 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	int f0;
 	char b4;
@@ -21,7 +12,7 @@ struct msg {
 	int f8;
 	int fc;
 	char pad10[0x18];
-	struct pos14 pos;
+	pos14_7f4c00 pos;
 	char b36;
 	char pad37[0x21];
 	int f58;
@@ -38,7 +29,7 @@ typedef struct {
 	int pad[15];
 } Req;
 
-extern struct pos14 g_7f4c00;
+extern pos14_7f4c00 g_7f4c00;
 extern __int64 g_666018;
 
 unsigned char* __cdecl fcn_00508e40(int);

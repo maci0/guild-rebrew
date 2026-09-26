@@ -1,11 +1,3 @@
-#pragma pack(2)
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
 // SIZE 0xe
 
 // SIZE 0x21c
@@ -17,13 +9,14 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
-extern struct pos14 g_7f4c00;
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char* g_aed32c;
 extern unsigned char* g_868050;
 
-int __cdecl fcn_00500cb0(struct pos14*, struct pos14*);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_005015e0(char**, char**, char**, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_004c4510(char*, int);
@@ -56,7 +49,7 @@ void __cdecl fcn_0055fd10(char* u)
 		*(int*) (u + 0x70) += 1;
 		return;
 	case 1:
-		if (fcn_00500cb0((struct pos14*) (u + 0x52), &g_7f4c00) >= 0) {
+		if (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &g_7f4c00) >= 0) {
 			return;
 		}
 		fcn_005015e0(0, &h, 0, *(int*) (u + 0xac));
@@ -93,8 +86,8 @@ void __cdecl fcn_0055fd10(char* u)
 			}
 		}
 		if (*(int*) (u + 0xb4) != 0 || *(int*) (u + 0xb0) != 0) {
-			*(struct pos14*) (u + 0x52) = g_7f4c00;
-			fcn_00500bb0((struct pos14*) (u + 0x52), 0, 0xf, 0);
+			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 0xf, 0);
 			return;
 		}
 		msg = 0x5f6;
@@ -109,9 +102,9 @@ void __cdecl fcn_0055fd10(char* u)
 		w = fcn_005049a0(p);
 		fcn_0051af00(text, 0x1bba, p);
 		if (w != 0) {
-			fcn_00545e80(g_7f4ca0[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), *(int*) (w + 2), 0, 0);
+			fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), *(int*) (w + 2), 0, 0);
 		} else {
-			fcn_00545e80(g_7f4ca0[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), -1, 0, 0);
+			fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), -1, 0, 0);
 		}
 		fcn_00546190(u);
 		break;

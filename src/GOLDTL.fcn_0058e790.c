@@ -15,15 +15,16 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
 extern int g_772514;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_774654;
-extern int g_7f4c00;
-extern int g_7f4c04;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_6a96d8[];
@@ -77,19 +78,19 @@ void __cdecl fcn_0058e790(char* e, char* res)
 		char ev[0xf8];
 
 		amt = MIN(MAX((int) (fcn_0050dac0(g_774970) * g_6628bc), 0x27100), 0xc3500);
-		fcn_004c5150(g_7f4ca0[g_774970].handle, -1, g_773d75, amt);
+		fcn_004c5150(((struct house*)g_7f4ca0)[g_774970].handle, -1, g_773d75, amt);
 		memset(ev, 0, sizeof(ev));
 		ev[4] = (char) 0x8e;
-		*(int*) (ev + 8) = g_7f4ca0[g_774970].handle;
+		*(int*) (ev + 8) = ((struct house*)g_7f4ca0)[g_774970].handle;
 		*(int*) (ev + 0xc) = *(int*) (e + 1);
-		*(int*) (ev + 0x28) = g_7f4c00;
-		*(int*) (ev + 0x2c) = g_7f4c04;
+		*(int*) (ev + 0x28) = (*(int*)&g_7f4c00);
+		*(int*) (ev + 0x2c) = (*(int*)&g_7f4c04);
 		*(int*) (ev + 0x30) = g_7f4c08;
 		*(short*) (ev + 0x34) = g_7f4c0c;
 		ev[0x36] = 1;
 		*(int*) (ev + 0x58) = amt;
 		fcn_004c5530(ev);
-		fcn_005782f0(&g_7f4ca0[g_774970], 3);
+		fcn_005782f0(&((struct house*)g_7f4ca0)[g_774970], 3);
 	}
 	h = fcn_00470820(0, 0, g_6a96d8);
 	fcn_00473a90(0, 0);

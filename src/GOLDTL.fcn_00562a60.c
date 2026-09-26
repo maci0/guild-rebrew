@@ -3,16 +3,6 @@
 // FUNCTION: GOLDTL 0x562a60
 // SIZE: 316
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x21c
 struct house {
 	char pad0[0x21c];
@@ -24,9 +14,10 @@ typedef struct F8 {
 	int b;
 } F8;
 
-extern struct pos14 g_7f4c00;
-extern struct house g_7f4ca0[];
-extern F8 g_666018;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
+extern __int64 g_666018;
 
 char* __cdecl fcn_00508e40(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -40,7 +31,7 @@ void __cdecl fcn_00562a60(char* e)
 	int found;
 
 	fcn_00508e40(*(int*) (e + 0xb4));
-	*(struct pos14*) (e + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
 	if (*(int*) (e + 0x10) == -1) {
 		t = gm_StartFilteredEntitySearch(1, 5, 0x16);
 		if (t != 0 || (t = gm_StartFilteredEntitySearch(1, 5, 0xf)) != 0) {
@@ -56,7 +47,7 @@ void __cdecl fcn_00562a60(char* e)
 		t = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) h);
 	}
 	if (t == 0) {
-		if (fcn_004a5e60(&g_7f4ca0[*(unsigned short*) (e + 8)], 6, g_666018, 0, 100.0f, &found) != 0) {
+		if (fcn_004a5e60(&((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)], 6, (*(F8*)&g_666018), 0, 100.0f, &found) != 0) {
 			t = gm_StartFilteredEntitySearch(1, 1, found);
 		}
 	}

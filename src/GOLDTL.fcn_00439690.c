@@ -15,7 +15,8 @@ typedef struct Flags {
 } Flags;
 
 extern int g_6b8010;
-extern Player g_1043340[64];
+#include "client_types.h"
+extern Slot_1043340 g_1043340[64];
 extern unsigned int g_10405fc;
 extern unsigned int g_104061c;
 extern Flags g_1052bd0;
@@ -37,7 +38,7 @@ void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned i
 	save = g_6b8010;
 	fcn_00456c60();
 	for (i = 0; i < 64; i++) {
-		if (i != save && g_1043340[i].active != 0) {
+		if (i != save && ((Player*)g_1043340)[i].active != 0) {
 			fcn_004432d0(i, 1);
 			fcn_00456c60();
 		}

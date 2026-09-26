@@ -1,15 +1,16 @@
 extern int g_772f3c;
-extern char* g_6b8300;
+extern int g_6b8300;
 extern char g_77666a;
-extern char* g_772f40;
+extern int* g_772f40;
 extern int g_77250c;
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern int g_772f4c;
 extern int g_6791c8;
-extern char* g_67a370;
+extern int g_67a370;
 extern int g_6791d0;
 extern int g_68bfc4;
-extern int g_772f50;
+extern unsigned char* g_772f50;
 extern int g_1040490;
 extern int g_1040494;
 extern char g_67d67c[];
@@ -49,32 +50,32 @@ void __cdecl fcn_004e4730(char* a1)
 		fcn_004432d0(0, 1);
 		fcn_004432d0(s, 0);
 	}
-	if (g_6b8300 != 0) {
+	if (((char*)g_6b8300) != 0) {
 		if (g_77666a == 0) {
 			n = 2;
-			g_6b8300[0x8036] = (g_6b8300[0x8036] & 0xeb) | 8;
+			((char*)g_6b8300)[0x8036] = (((char*)g_6b8300)[0x8036] & 0xeb) | 8;
 		} else {
 			n = 1;
-			g_6b8300[0x8036] = (g_6b8300[0x8036] & 0xe7) | 4;
+			((char*)g_6b8300)[0x8036] = (((char*)g_6b8300)[0x8036] & 0xe7) | 4;
 		}
-		fcn_004428d0(g_6b8300, n >> 1, 1);
+		fcn_004428d0(((char*)g_6b8300), n >> 1, 1);
 	}
-	if ((g_772f40[0x26] & 0x20) != 0)
+	if ((((char*)g_772f40)[0x26] & 0x20) != 0)
 		fcn_00476970(g_77250c);
-	if (fcn_00500e20(&g_7f4c00) == 3)
+	if (fcn_00500e20(&(*(int*)&g_7f4c00)) == 3)
 		fcn_0052a7d0();
 	g_6791c8 = -2;
 	g_772f4c++;
-	if (g_67a370 != 0) {
-		ui = *(char**) (g_67a370 + 0x3c8);
+	if (((char*)g_67a370) != 0) {
+		ui = *(char**) (((char*)g_67a370) + 0x3c8);
 		if (ui != 0 && *(hook_4e4730*) (ui + 0x210) != 0)
-			(*(hook_4e4730*) (ui + 0x210))(g_67a370, 4, ui + 0x214, 0);
+			(*(hook_4e4730*) (ui + 0x210))(((char*)g_67a370), 4, ui + 0x214, 0);
 	}
 	g_68bfc4 = g_6791d0;
 	fcn_00443230(1);
-	if (g_772f50 != 0) {
-		fcn_00473150(g_772f50);
-		g_772f50 = 0;
+	if ((*(int*)&g_772f50) != 0) {
+		fcn_00473150((*(int*)&g_772f50));
+		(*(int*)&g_772f50) = 0;
 	}
 	fcn_004730c0(0, 0, g_1040494, g_1040490, g_67d67c, 0x5a, 0xa);
 }

@@ -18,8 +18,9 @@ typedef struct Order {
 } Order;
 // SIZE 0x58
 
-extern Ent g_7f4ca0[768];
-extern Order g_100d0c0[];
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern entry_100d0c0 g_100d0c0[];
 extern int g_100b0ac;
 
 char* __cdecl fcn_005463a0(int, int, int, int, int);
@@ -36,27 +37,27 @@ void __cdecl fcn_00487e60(char* e, int k)
 		found = 0;
 		if (k == 4) {
 			for (i = 0; i < g_100b0ac; i++) {
-				if (g_100d0c0[i].id == *(unsigned short*) (q + 0xac) && !(g_100d0c0[i].flags & 8)) {
+				if (((Order*)g_100d0c0)[i].id == *(unsigned short*) (q + 0xac) && !(((Order*)g_100d0c0)[i].flags & 8)) {
 					found = 1;
 				}
 			}
 		} else if (k == 8) {
 			for (i = 0; i < g_100b0ac; i++) {
-				if (g_100d0c0[i].id == *(unsigned short*) (q + 0xac) && !(g_100d0c0[i].flags & 0x10)) {
+				if (((Order*)g_100d0c0)[i].id == *(unsigned short*) (q + 0xac) && !(((Order*)g_100d0c0)[i].flags & 0x10)) {
 					found = 1;
 				}
 			}
 		} else if (k == 3) {
 			for (i = 0; i < g_100b0ac; i++) {
-				if (g_100d0c0[i].id == *(unsigned short*) (q + 0xac) && !(g_100d0c0[i].flags & 8)) {
+				if (((Order*)g_100d0c0)[i].id == *(unsigned short*) (q + 0xac) && !(((Order*)g_100d0c0)[i].flags & 8)) {
 					found = 1;
 				}
 			}
 		}
 		if (found) {
 			for (i = 0; i < 768; i++) {
-				if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].host == q) {
-					fcn_00529160(*(char**) (e + 0x16c), 0, g_7f4ca0[i].id, 0);
+				if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].host == q) {
+					fcn_00529160(*(char**) (e + 0x16c), 0, ((Ent*)g_7f4ca0)[i].id, 0);
 				}
 			}
 		}

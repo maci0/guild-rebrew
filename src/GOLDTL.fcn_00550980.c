@@ -3,16 +3,6 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
 struct msg {
 	char pad0[4];
@@ -38,14 +28,15 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
-extern struct pos14 g_7f4c00;
-extern struct house* g_773da8;
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char* g_773da8;
 extern unsigned char g_773d75;
 extern int g_100f884;
 extern int g_100f1dc;
 
-int __cdecl fcn_00500cb0(struct pos14*, struct pos14*);
+int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_0050dac0(unsigned short);
@@ -68,7 +59,7 @@ void __cdecl fcn_00550980(char* u)
 		fcn_00546190(u);
 		return;
 	}
-	if (fcn_00500cb0(&g_7f4c00, (struct pos14*) (u + 0x44)) == -1) {
+	if (fcn_00500cb0(&g_7f4c00, (pos14_7f4c00*) (u + 0x44)) == -1) {
 		return;
 	}
 	switch (*(int*) (u + 0x70)) {
@@ -89,7 +80,7 @@ void __cdecl fcn_00550980(char* u)
 		*(int*) (u + 0x70) = 1;
 		break;
 	case 1:
-		if (fcn_00500cb0(&g_7f4c00, (struct pos14*) (u + 0x52)) > 0) {
+		if (fcn_00500cb0(&g_7f4c00, (pos14_7f4c00*) (u + 0x52)) > 0) {
 			fcn_00545780(u);
 			fcn_00546190(u);
 			return;
@@ -104,13 +95,13 @@ void __cdecl fcn_00550980(char* u)
 		if (g_100f1dc == 2) {
 			memset(&m, 0, sizeof(m));
 			v = *(int*) (u + 0xb0);
-			fcn_004c51a0(g_773da8->owner, g_7f4ca0[*(unsigned short*) (u + 8)].owner, g_773d75, v);
+			fcn_004c51a0(((struct house*)g_773da8)->owner, ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, g_773d75, v);
 			m.kind = 0x56;
 			m.target = -1;
 			m.code = 0x11;
 			m.who = 4;
 			m.other = v;
-			m.owner = g_7f4ca0[*(unsigned short*) (u + 8)].owner;
+			m.owner = ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner;
 			fcn_004c5530(&m);
 			fcn_00545780(u);
 			fcn_00546190(u);

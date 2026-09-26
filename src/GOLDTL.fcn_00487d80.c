@@ -20,9 +20,10 @@ typedef struct Seg {
 } Seg;
 // SIZE 0x40
 
-extern Rec* g_99ec10;
+extern char* g_99ec10;
 extern Seg g_100b0c0[];
-extern Node g_100d0c0[];
+#include "client_types.h"
+extern entry_100d0c0 g_100d0c0[];
 
 // FUNCTION: GOLDTL 0x487d80
 // SIZE: 220
@@ -32,7 +33,7 @@ void __cdecl fcn_00487d80(int* ca, int* cb, Node* n)
 	Seg* s;
 
 	if (!(n->flags & 1)) {
-		if (g_99ec10[n->id].type == 0x17 || g_99ec10[n->id].type == 0x25) {
+		if (((Rec*)g_99ec10)[n->id].type == 0x17 || ((Rec*)g_99ec10)[n->id].type == 0x25) {
 			(*ca)++;
 		} else {
 			(*cb)++;
@@ -45,18 +46,18 @@ void __cdecl fcn_00487d80(int* ca, int* cb, Node* n)
 		}
 		s = &g_100b0c0[n->links[i]];
 		if (!(s->flags & 1)) {
-			if (g_99ec10[s->id].type == 0x17 || g_99ec10[s->id].type == 0x25) {
+			if (((Rec*)g_99ec10)[s->id].type == 0x17 || ((Rec*)g_99ec10)[s->id].type == 0x25) {
 				(*ca)++;
 			} else {
 				(*cb)++;
 			}
 			s->flags |= 1;
 			if (s->next != -1) {
-				g_100d0c0[s->next].flags |= 1;
+				((Node*)g_100d0c0)[s->next].flags |= 1;
 			}
 		}
 		if (s->next != -1) {
-			fcn_00487d80(ca, cb, &g_100d0c0[s->next]);
+			fcn_00487d80(ca, cb, &((Node*)g_100d0c0)[s->next]);
 		}
 	}
 }

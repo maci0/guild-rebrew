@@ -20,11 +20,12 @@ typedef struct {
 } Row5a92;
 // SIZE 0x2f4
 
-extern Ent5a92 g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
-extern Stamp5a92 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern unsigned char g_773d75;
-extern Row5a92 g_868080[];
+extern trade_868080 g_868080[];
 extern unsigned char g_6a375c;
 extern char g_6aae78[];
 extern int g_100f1dc;
@@ -62,7 +63,7 @@ void __cdecl fcn_005a92c0(char* p)
 	int i;
 	Stamp5a92 st;
 
-	ent = &g_7f4ca0[g_774970];
+	ent = &((Ent5a92*)g_7f4ca0)[g_774970];
 	n = gm_AccumulateTyped2(ent);
 	q = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 	ok = 0;
@@ -78,7 +79,7 @@ void __cdecl fcn_005a92c0(char* p)
 	fcn_00473a90(0, 0);
 	fcn_00471b60(h);
 	fcn_004727a0(h, 1);
-	fcn_00519190(0x19fe, ent->id, 0x3e80, &g_868080[g_773d75]);
+	fcn_00519190(0x19fe, ent->id, 0x3e80, &((Row5a92*)g_868080)[g_773d75]);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -118,7 +119,7 @@ void __cdecl fcn_005a92c0(char* p)
 				msg[4] = 0x69;
 				*(int*) (msg + 0xc) = -1;
 				msg[0x36] = 9;
-				*(Stamp5a92*) (msg + 0x28) = g_7f4c00;
+				*(Stamp5a92*) (msg + 0x28) = (*(Stamp5a92*)&g_7f4c00);
 				if (fcn_005809f0() == 0) {
 					fcn_00500bb0((Stamp5a92*) (msg + 0x28), 0, 5, 0);
 				} else {
@@ -129,7 +130,7 @@ void __cdecl fcn_005a92c0(char* p)
 				*(int*) (msg + 0x5c) = ent->f4;
 				fcn_004c5530(msg);
 				for (i = 0; i < 768 && n < g_6a375c; i++) {
-					if ((g_7f4ca0[i].b2 == 6 || g_7f4ca0[i].b2 == 7) && &g_7f4ca0[i] != ent) {
+					if ((((Ent5a92*)g_7f4ca0)[i].b2 == 6 || ((Ent5a92*)g_7f4ca0)[i].b2 == 7) && &((Ent5a92*)g_7f4ca0)[i] != ent) {
 						{
 							char* fdest;
 							int flen;
@@ -154,7 +155,7 @@ void __cdecl fcn_005a92c0(char* p)
 								rep stosb
 							}
 						}
-						*(int*) (msg + 8) = g_7f4ca0[i].f4;
+						*(int*) (msg + 8) = ((Ent5a92*)g_7f4ca0)[i].f4;
 						msg[4] = 0x69;
 						*(int*) (msg + 0xc) = -1;
 						msg[0x36] = 9;

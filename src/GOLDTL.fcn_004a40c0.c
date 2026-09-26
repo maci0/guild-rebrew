@@ -24,8 +24,9 @@ typedef struct Calc {
 } Calc;
 // SIZE 0xb4
 
-extern Recipe g_699058[0x25];
-extern char g_773d75;
+#include "client_types.h"
+extern Rec15_699058 g_699058[37];
+extern unsigned char g_773d75;
 
 float __cdecl fcn_0050bb50(int id, char k);
 float __cdecl fcn_0050b980(int id, int k);
@@ -38,7 +39,7 @@ int __cdecl fcn_004a40c0(Calc* p)
 	float sum;
 
 	for (i = 0; i < 0x25; i++) {
-		if (g_699058[i].id == p->id) {
+		if (((Recipe*)g_699058)[i].id == p->id) {
 			break;
 		}
 	}
@@ -47,8 +48,8 @@ int __cdecl fcn_004a40c0(Calc* p)
 	}
 	n = 0;
 	for (k = 0; k < 10; k++) {
-		if (g_699058[i].goods[k] != 0) {
-			p->goods[n] = g_699058[i].goods[k];
+		if (((Recipe*)g_699058)[i].goods[k] != 0) {
+			p->goods[n] = ((Recipe*)g_699058)[i].goods[k];
 			n++;
 		}
 	}
@@ -60,7 +61,7 @@ int __cdecl fcn_004a40c0(Calc* p)
 	p->worst = 0;
 	sum = 0;
 	for (k = 0; k < p->count; k++) {
-		p->price[k] = (int) fcn_0050bb50(p->goods[k], g_773d75);
+		p->price[k] = (int) fcn_0050bb50(p->goods[k], (*(char*)&g_773d75));
 		p->need[k] = (int) fcn_0050b980(p->goods[k], 100);
 		p->ratio[k] = (float) p->price[k] / p->need[k];
 		sum += p->ratio[k];

@@ -5,17 +5,8 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	char pad0[4];
 	unsigned char kind;
@@ -23,14 +14,14 @@ struct msg {
 	int owner;
 	int target;
 	char pad10[0x18];
-	struct pos14 when;
+	pos14_7f4c00 when;
 	unsigned char code;
 	char pad37[0x21];
 	int who;
 	char pad5c[0x9c];
 };
 
-extern struct pos14 g_7f4c00;
+extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004c5530(struct msg*);

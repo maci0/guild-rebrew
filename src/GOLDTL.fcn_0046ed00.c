@@ -16,7 +16,8 @@ typedef struct Win046ed00 {
 } Win046ed00;
 // SIZE 0x3cc
 
-extern Win046ed00 g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 
 void __cdecl fcn_0046ed00(int delta, int step, int k)
 {
@@ -25,21 +26,21 @@ void __cdecl fcn_0046ed00(int delta, int step, int k)
 	int sum;
 	int v;
 
-	scroll = *(volatile int*)&g_1015f40[k].scroll;
-	base = g_1015f40[k].base;
+	scroll = *(volatile int*)&((Win046ed00*)g_1015f40)[k].scroll;
+	base = ((Win046ed00*)g_1015f40)[k].base;
 	sum = base + scroll;
 	if (sum > 0 && step < 0) {
 		v = -sum;
 		if (step > v) {
 			v = step;
 		}
-		g_1015f40[k].scroll = v;
-	} else if (sum + g_1015f40[k].height < g_1015f40[k].limit && step > 0) {
-		v = g_1015f40[k].limit - g_1015f40[k].height - base - scroll;
+		((Win046ed00*)g_1015f40)[k].scroll = v;
+	} else if (sum + ((Win046ed00*)g_1015f40)[k].height < ((Win046ed00*)g_1015f40)[k].limit && step > 0) {
+		v = ((Win046ed00*)g_1015f40)[k].limit - ((Win046ed00*)g_1015f40)[k].height - base - scroll;
 		if (step < v) {
 			v = step;
 		}
-		g_1015f40[k].scroll += v;
+		((Win046ed00*)g_1015f40)[k].scroll += v;
 	}
-	g_1015f40[k].total += delta;
+	((Win046ed00*)g_1015f40)[k].total += delta;
 }

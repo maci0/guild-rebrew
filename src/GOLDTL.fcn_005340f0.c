@@ -7,7 +7,7 @@ struct s_772500 {
 	short y;
 };
 
-extern struct s_772500* g_772500;
+extern char* g_772500;
 
 // SIZE 0x3cc
 struct s_1015f4c {
@@ -23,7 +23,8 @@ struct s_1015f4c {
 	char pad3[0x20];
 };
 
-extern struct s_1015f4c g_1015f4c[];
+#include "client_types.h"
+extern s_1015f4c g_1015f4c[];
 
 // FUNCTION: GOLDTL 0x5340f0
 // SIZE: 100
@@ -32,13 +33,13 @@ void __cdecl fcn_005340f0(int i)
 {
 	struct s_772500* p;
 
-	if (g_1015f4c[i].idx != -1) {
-		p = &g_772500[g_1015f4c[i].idx];
-		g_1015f4c[i].x = p->x;
-		g_1015f4c[i].y = p->y;
-		g_1015f4c[i].w = 0x18;
-		g_1015f4c[i].h = 0x18;
-		g_1015f4c[i].c = 0x1b;
-		g_1015f4c[i].d = 0xb;
+	if (((struct s_1015f4c*)g_1015f4c)[i].idx != -1) {
+		p = &((struct s_772500*)g_772500)[((struct s_1015f4c*)g_1015f4c)[i].idx];
+		((struct s_1015f4c*)g_1015f4c)[i].x = p->x;
+		((struct s_1015f4c*)g_1015f4c)[i].y = p->y;
+		((struct s_1015f4c*)g_1015f4c)[i].w = 0x18;
+		((struct s_1015f4c*)g_1015f4c)[i].h = 0x18;
+		((struct s_1015f4c*)g_1015f4c)[i].c = 0x1b;
+		((struct s_1015f4c*)g_1015f4c)[i].d = 0xb;
 	}
 }

@@ -31,8 +31,9 @@ typedef struct {
 	char pad1f4[0x2f4 - 0x1f4];
 } Ent;
 
-extern Slot g_1015f40[];
-extern Ent* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 extern char g_6b5c60[];
 
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
@@ -42,22 +43,22 @@ int __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2,
 {
 	Slot* s;
 
-	s = &g_1015f40[other];
+	s = &((Slot*)g_1015f40)[other];
 	*id1 = fcn_0046f740(x, y, 3, owner);
-	g_1015f40[owner].h0 = *id1;
-	g_1015ea0[*id1].f5c = 1;
-	g_1015ea0[*id1].f1d0 = 3;
+	((Slot*)g_1015f40)[owner].h0 = *id1;
+	((Ent*)g_1015ea0)[*id1].f5c = 1;
+	((Ent*)g_1015ea0)[*id1].f1d0 = 3;
 	*id2 = fcn_0046f740(x, y + 0x2a, 4, owner);
-	g_1015f40[owner].h1 = *id2;
-	g_1015ea0[*id2].f5c = 1;
-	g_1015ea0[*id2].f1d0 = 3;
-	g_1015ea0[*id2].f1f0 = other;
-	g_1015ea0[*id1].f1f0 = other;
+	((Slot*)g_1015f40)[owner].h1 = *id2;
+	((Ent*)g_1015ea0)[*id2].f5c = 1;
+	((Ent*)g_1015ea0)[*id2].f1d0 = 3;
+	((Ent*)g_1015ea0)[*id2].f1f0 = other;
+	((Ent*)g_1015ea0)[*id1].f1f0 = other;
 	*id3 = fcn_0046fac0(x - 0x13, y + 0x19, g_6b5c60, owner);
-	g_1015f40[owner].h2 = *id3;
-	g_1015ea0[*id3].f84 = 0x54;
-	g_1015ea0[*id3].f6c = 1;
-	g_1015ea0[*id3].f18 = 0x30;
+	((Slot*)g_1015f40)[owner].h2 = *id3;
+	((Ent*)g_1015ea0)[*id3].f84 = 0x54;
+	((Ent*)g_1015ea0)[*id3].f6c = 1;
+	((Ent*)g_1015ea0)[*id3].f18 = 0x30;
 	s->f258 = 0;
 	s->f274 = arg5;
 	return 1;

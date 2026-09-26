@@ -7,7 +7,8 @@ struct job_4e8810 {
 };
 // SIZE 0x18
 
-extern struct job_4e8810 g_9a9220[30];
+#include "client_types.h"
+extern Rec18_68da68 g_9a9220[42];
 
 char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_005b2900(char*, char*, char*);
@@ -34,8 +35,8 @@ int __cdecl fcn_004e8810(unsigned char* a1)
 		return 0;
 	p1 = 0;
 	for (i = 0; i < 30; i++) {
-		if (g_9a9220[i].key == a1[4]) {
-			p1 = &g_9a9220[i];
+		if (((struct job_4e8810*)g_9a9220)[i].key == a1[4]) {
+			p1 = &((struct job_4e8810*)g_9a9220)[i];
 			break;
 		}
 	}
@@ -46,8 +47,8 @@ int __cdecl fcn_004e8810(unsigned char* a1)
 		return 0;
 	p2 = 0;
 	for (i = 0; i < 30; i++) {
-		if (g_9a9220[i].key == a1[5]) {
-			p2 = &g_9a9220[i];
+		if (((struct job_4e8810*)g_9a9220)[i].key == a1[5]) {
+			p2 = &((struct job_4e8810*)g_9a9220)[i];
 			break;
 		}
 	}

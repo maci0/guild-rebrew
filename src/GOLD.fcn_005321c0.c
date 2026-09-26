@@ -23,7 +23,8 @@ extern int g_6f2460;
 extern int g_6ed9d4;
 extern char g_624698[];
 extern Screen g_fb1024[];
-extern Window g_f8f110[];
+#include "client_types.h"
+extern Slot_f8f110 g_f8f110[];
 extern short g_fb9070;
 extern short g_fb9072;
 extern char g_75e760[];
@@ -109,8 +110,8 @@ int __cdecl fcn_005321c0(void)
 	fcn_0046e980();
 	screen = fcn_004741e0(0, 0, "Misc\\Loading_main");
 	fcn_004756a0(g_fb1024[screen].image, 3);
-	fcn_0046cd90(0, g_fb9070 - g_f8f110[g_fb1024[screen].window].height - 0x30,
-		g_f8f110[g_fb1024[screen].window].id);
+	fcn_0046cd90(0, g_fb9070 - ((Window*)g_f8f110)[g_fb1024[screen].window].height - 0x30,
+		((Window*)g_f8f110)[g_fb1024[screen].window].id);
 	fcn_004756a0(g_fb1024[screen].window, 1);
 	fcn_00515990(0x73, g_75e760);
 	fcn_00424990(0, 0);

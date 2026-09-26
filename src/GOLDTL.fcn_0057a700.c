@@ -5,17 +5,8 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	char pad0[4];
 	unsigned char kind;
@@ -23,7 +14,7 @@ struct msg {
 	int owner;
 	int target;
 	char pad10[0x18];
-	struct pos14 when;
+	pos14_7f4c00 when;
 	unsigned char code;
 	char pad37[0x21];
 	int who;
@@ -41,15 +32,15 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct pos14 g_7f4c00;
-extern struct house g_7f4ca0[];
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 
 char* __cdecl fcn_005463a0(int, ...);
 char* __cdecl fcn_005462a0(void);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_004c5530(struct msg*);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_0057a700(char* u)
 {
@@ -60,7 +51,7 @@ void __cdecl fcn_0057a700(char* u)
 	if (u[0x78] & 4) {
 		return;
 	}
-	*(struct pos14*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
 	for (o = fcn_005463a0(2, 0, 0x90, 3, *(int*) (u + 0x10)); o != 0; o = fcn_005462a0()) {
 		if (o != u) {
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
@@ -84,7 +75,7 @@ void __cdecl fcn_0057a700(char* u)
 	if (*(int*) (u + 0xb0) > 2) {
 		*(int*) (u + 0xb0) = 2;
 	}
-	fcn_005100f0(g_7f4ca0[*(unsigned short*) (u + 8)].owner, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
-	fcn_00500bb0((struct pos14*) (u + 0x52), 0, 5, 0);
+	fcn_005100f0(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
+	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 	fcn_004c5620(0, u);
 }

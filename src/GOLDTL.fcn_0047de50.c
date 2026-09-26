@@ -46,16 +46,17 @@ typedef struct {
 } Time47de;
 #pragma pack(pop)
 
-extern Time47de g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern Master47de* g_100e748;
-extern Ent47de g_7f4ca0[];
-extern Bld47de* g_7746c4;
-extern Bld47de* g_7746c8;
-extern Bld47de* g_100dc20;
+extern char g_7f4ca0[];
+extern char* g_7746c4;
+extern unsigned char* g_7746c8;
+extern char g_100dc20[];
 extern Master47de* g_100dc28;
 extern Ent47de* g_100dc2c;
 extern int g_100dc30;
-extern Office47de* g_868050;
+extern unsigned char* g_868050;
 
 int __cdecl fcn_0047dd60(Master47de*);
 int __cdecl gm_AccumulateTyped2(void*);
@@ -76,7 +77,7 @@ void __cdecl fcn_0047de50(Master47de* m)
 	char buf[0x100];
 	unsigned char k;
 
-	if (g_7f4c00.hour < 6 || (g_7f4c00.hour == 6 && g_7f4c00.min < 30)) {
+	if ((*(Time47de*)&g_7f4c00).hour < 6 || ((*(Time47de*)&g_7f4c00).hour == 6 && (*(Time47de*)&g_7f4c00).min < 30)) {
 		return;
 	}
 	if (fcn_0047dd60(m) == 0) {
@@ -88,19 +89,19 @@ void __cdecl fcn_0047de50(Master47de* m)
 	if (m == g_100e748) {
 		sprintf(buf, "Evaluation von Meister %s in %s beginnt...", g_100e748->name, g_100e748->bld->name);
 		sprintf(buf, "Aktuelles Budget: %li", g_100e748->budget);
-		sprintf(buf, "Tats\xe4" "chlich verf\xfcgbares Budget: %li", gm_AccumulateTyped2(&g_7f4ca0[m->bld->owner]));
+		sprintf(buf, "Tats\xe4" "chlich verf\xfcgbares Budget: %li", gm_AccumulateTyped2(&((Ent47de*)g_7f4ca0)[m->bld->owner]));
 	}
 	if (m->bld->owner == m->id) {
 		m->budget = gm_AccumulateTyped2(m);
 	}
-	if (m->bld == g_7746c4 || m->bld == g_7746c8) {
-		g_100dc20 = m->bld;
+	if (m->bld == ((Bld47de*)g_7746c4) || m->bld == ((Bld47de*)g_7746c8)) {
+		(*(Bld47de**)g_100dc20) = m->bld;
 		g_100dc28 = m;
-		g_100dc2c = &g_7f4ca0[m->bld->owner];
+		g_100dc2c = &((Ent47de*)g_7f4ca0)[m->bld->owner];
 		g_100dc30 = m->budget;
 	}
 	if (fcn_00504bd0(m->bld->office) == 1 || fcn_00504bd0(m->bld->office) == 4) {
-		k = g_868050[m->bld->office].kind;
+		k = ((Office47de*)g_868050)[m->bld->office].kind;
 		if (k == 0xe || k == 8 || k == 0x20) {
 			fcn_0047ebc0(m);
 		} else if (k == 0x1d) {
@@ -113,7 +114,7 @@ void __cdecl fcn_0047de50(Master47de* m)
 	} else if (fcn_00504bd0(m->bld->office) == 2) {
 		fcn_0047f6b0(m);
 	} else {
-		k = g_868050[m->bld->office].kind;
+		k = ((Office47de*)g_868050)[m->bld->office].kind;
 		if (k == 0x13) {
 			fcn_00480330(m);
 		} else if (k == 4) {

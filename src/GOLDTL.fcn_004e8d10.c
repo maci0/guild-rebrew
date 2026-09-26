@@ -26,8 +26,10 @@ typedef struct {
 	char pad9[3];
 } Pick;
 
-extern Slot g_9a9220[];
-extern Tmpl g_68da68[];
+#include "client_types.h"
+extern Rec18_68da68 g_9a9220[42];
+#include "client_types.h"
+extern Rec18_68da68 g_68da68[];
 
 int __cdecl fcn_004e7c70(char*, int, float*);
 
@@ -74,9 +76,9 @@ int __cdecl fcn_004e8d10(char* who, int n, Pick* picks)
 		picks[j].rank = 0;
 	}
 	for (i = 0; i < 30; i++) {
-		if (g_9a9220[i].state != 3 || g_9a9220[i].count >= 4)
+		if (((Slot*)g_9a9220)[i].state != 3 || ((Slot*)g_9a9220)[i].count >= 4)
 			continue;
-		t = g_9a9220[i].type;
+		t = ((Slot*)g_9a9220)[i].type;
 		if (fcn_004e7c70(who, t, &score) == 0)
 			continue;
 		better = 0;
@@ -90,17 +92,17 @@ int __cdecl fcn_004e8d10(char* who, int n, Pick* picks)
 			continue;
 		better = 0;
 		for (j = n - 1; j >= 0; j--) {
-			if (picks[j].rank < g_68da68[t].rank)
+			if (picks[j].rank < ((Tmpl*)g_68da68)[t].rank)
 				continue;
-			if (picks[j].rank != g_68da68[t].rank || !(picks[j].score <= score)) {
+			if (picks[j].rank != ((Tmpl*)g_68da68)[t].rank || !(picks[j].score <= score)) {
 				better = 1;
 				break;
 			}
 		}
 		if (j == -1) {
 			j = 0;
-			if (picks[0].rank < g_68da68[t].rank ||
-			    (picks[0].rank == g_68da68[t].rank && picks[0].score <= score))
+			if (picks[0].rank < ((Tmpl*)g_68da68)[t].rank ||
+			    (picks[0].rank == ((Tmpl*)g_68da68)[t].rank && picks[0].score <= score))
 				better = 1;
 		}
 		if (better) {
@@ -110,9 +112,9 @@ int __cdecl fcn_004e8d10(char* who, int n, Pick* picks)
 				picks[k].score = picks[k - 1].score;
 				picks[k].type = picks[k - 1].type;
 			}
-			picks[j].rank = g_68da68[g_9a9220[i].type].rank;
+			picks[j].rank = ((Tmpl*)g_68da68)[((Slot*)g_9a9220)[i].type].rank;
 			picks[j].score = score;
-			picks[j].type = g_9a9220[i].type;
+			picks[j].type = ((Slot*)g_9a9220)[i].type;
 		}
 	}
 	if (count < n)

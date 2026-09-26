@@ -11,8 +11,9 @@ typedef struct
 } Win;
 // SIZE 0x3cc
 
-extern Win g_1015f40[];
-extern char* g_67a370;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern int g_67a370;
 extern int g_775280;
 extern char* g_778b20[];
 extern int g_772514;
@@ -48,15 +49,15 @@ void __cdecl fcn_005b3490(void)
 	Win* win;
 
 	w = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
-	fcn_00472900(g_1015f40[w].x27c, 0x54);
+	fcn_00472900(((Win*)g_1015f40)[w].x27c, 0x54);
 	g_775280 = 0;
-	fcn_004379a0(g_67a370, 0, 0x100, (void*) fcn_005b3460, 0);
+	fcn_004379a0(((char*)g_67a370), 0, 0x100, (void*) fcn_005b3460, 0);
 	fcn_00519190(s_6ab5f8);
 	fcn_00519190(s_6ab5cc);
 	for (i = 0; i < g_775280; i++) {
 		memset(buf, 0, sizeof(buf));
 		g_772514 = w;
-		map = *(char**) (g_67a370 + 0xb0);
+		map = *(char**) (((char*)g_67a370) + 0xb0);
 		e = g_778b20[i];
 		fcn_00455350(e, e + 0x4c, v);
 		if (map != 0 && fcn_0045b990(map, v, &x, &y, &z)) {
@@ -71,7 +72,7 @@ void __cdecl fcn_005b3490(void)
 		fcn_00519190(s_6ab588, g_778b20[i], buf);
 	}
 	if (fcn_005373e0((void*) fcn_005b3490, 0x657c7) != 0) {
-		win = &g_1015f40[w];
+		win = &((Win*)g_1015f40)[w];
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;

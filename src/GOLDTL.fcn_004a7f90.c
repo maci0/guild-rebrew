@@ -1,14 +1,10 @@
-typedef struct Card {
-	int rank;
-	int suit;
-	int count;
-	int owner;
-} Card;
+#include "client_types.h"
+typedef Card_1007ce0 Card;
 // SIZE 0x10
 
-extern Card g_1007ce0[24];
+extern Card_1007ce0 g_1007ce0[24];
 
-extern unsigned char* g_1007cd4;
+extern char* g_1007cd4;
 
 // FUNCTION: GOLDTL 0x4a7f90
 // SIZE: 219
@@ -21,7 +17,7 @@ void __cdecl fcn_004a7f90(int* h, int* rank_n, int* rank, int* suit_n, int* suit
 	int n;
 	int i;
 
-	n = g_1007cd4[0xb5];
+	n = ((unsigned char*)g_1007cd4)[0xb5];
 	for (i = 2; i < n; i++) {
 		suits[g_1007ce0[h[i + 2]].suit]++;
 		ranks[g_1007ce0[h[i + 2]].rank]++;

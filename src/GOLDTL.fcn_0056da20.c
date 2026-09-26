@@ -4,16 +4,11 @@
 // SIZE: 232
 
 // SIZE 0x188
-typedef struct {
-	int a[24];
-	int b[24];
-	int pad[2];
-	int c[24];
-	int d[24];
-} Tabs;
+#include "client_types.h"
+typedef Tabs_7e43a8 Tabs;
 
-extern Tabs g_7e43a8;
-extern int g_7f4c04;
+extern Tabs_7e43a8 g_7e43a8;
+extern unsigned short g_7f4c04;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short __cdecl fcn_0042e410(int n);
@@ -28,11 +23,11 @@ void __cdecl fcn_0056da20(char* p)
 
 	switch (*(int*) (p + 0x70)) {
 	case 0:
-		for (i = (g_7f4c04 & 0xffff) + 1; i < (g_7f4c04 & 0xffff) + 4; i++) {
+		for (i = ((*(int*)&g_7f4c04) & 0xffff) + 1; i < ((*(int*)&g_7f4c04) & 0xffff) + 4; i++) {
 			g_7e43a8.a[i] = 1000;
 			g_7e43a8.b[i] = 3;
 		}
-		*(short*) (p + 0x56) = (short) (g_7f4c04 + 2);
+		*(short*) (p + 0x56) = (short) ((*(int*)&g_7f4c04) + 2);
 		*(int*) (p + 0x58) = 0;
 		*(int*) (p + 0x70) += 1;
 		return;

@@ -4,11 +4,8 @@
 #include <string.h>
 #pragma intrinsic(memset)
 
-typedef struct Group {
-	int count;
-	int sel;
-	int ids[33];
-} Group;
+#include "client_types.h"
+typedef Group_102cbc4 Group;
 // SIZE 0x8c
 
 // SIZE 0x2f4
@@ -20,8 +17,8 @@ typedef struct {
 	unsigned char* obj;
 } Slot5ada;
 
-extern Group g_102cbc4[8];
-extern Slot5ada* g_1015ea0;
+extern Group_102cbc4 g_102cbc4[8];
+extern char* g_1015ea0;
 extern int g_772514;
 extern int g_100f1dc;
 extern int g_14ce8e0;
@@ -115,12 +112,12 @@ void __cdecl fcn_005ada30(char* p)
 						fcn_0050c5d0(q, val);
 						b = fcn_00472250(d, 2, fcn_00519190(0x19fc, *q + 0x427, *(unsigned short*) (q + 0x27), q, e + 0x1c, val[0], val[1], e[0x37], e[0x36]));
 						btns[n] = b;
-						g_1015ea0[b].obj = q;
+						((Slot5ada*)g_1015ea0)[b].obj = q;
 						if (grp == -1) {
 							grp = fcn_004693b0(1, b);
-							g_1015ea0[b].shown = 1;
-							g_1015ea0[b].active = 1;
-							g_1015ea0[b].obj = q;
+							((Slot5ada*)g_1015ea0)[b].shown = 1;
+							((Slot5ada*)g_1015ea0)[b].active = 1;
+							((Slot5ada*)g_1015ea0)[b].obj = q;
 							g_102cbc4[grp].sel = 0;
 							n++;
 						}

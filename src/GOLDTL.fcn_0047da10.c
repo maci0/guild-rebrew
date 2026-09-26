@@ -23,7 +23,8 @@ typedef struct
 	char pad1d0[0x21c - 0x1d0];
 } fcn_0047da10_Ent;
 
-extern fcn_0047da10_Stamp g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern fcn_0047da10_Stamp g_100dc04;
 extern int g_100dc00;
 extern float g_100dc14;
@@ -31,7 +32,7 @@ extern int g_7747b4;
 extern float g_67db50;
 extern float g_67db54;
 extern unsigned char g_7747b0;
-extern fcn_0047da10_Ent g_7f4ca0[];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_00500d20(fcn_0047da10_Stamp* a, fcn_0047da10_Stamp* b);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -55,13 +56,13 @@ void __cdecl fcn_0047da10(void)
 	int k;
 	int idx;
 
-	now = g_7f4c00;
+	now = (*(fcn_0047da10_Stamp*)&g_7f4c00);
 	d = fcn_00500d20(&g_100dc04, &now);
 	f = d * 12.8f;
 	n = (int) f;
 	g_67db50 = (float) g_7747b4;
 	g_67db54 = g_7747b4 * 0.0625f + 0.5f;
-	if (d <= 0 || g_7f4c00.hour > 0x16 || g_7f4c00.hour < 6)
+	if (d <= 0 || (*(fcn_0047da10_Stamp*)&g_7f4c00).hour > 0x16 || (*(fcn_0047da10_Stamp*)&g_7f4c00).hour < 6)
 		return;
 	if (g_100dc04.t < now.t) {
 		g_100dc04 = now;
@@ -81,10 +82,11 @@ void __cdecl fcn_0047da10(void)
 	fcn_0064d41a(buf, "Player count: %i, Starting with: %i Count: %i Deltatime: %i", n, g_100dc00, n, d);
 	idx = g_100dc00;
 	for (k = n; k != 0; k--) {
-		if (g_7f4ca0[idx].id != 0xffff) {
-			e = &g_7f4ca0[idx];
+		if (((fcn_0047da10_Ent*)g_7f4ca0)[idx].id != 0xffff) {
+			e = &((fcn_0047da10_Ent*)g_7f4ca0)[idx];
 			fcn_00489920(e);
-			if (g_7f4c00.hour > 6 && g_7f4c00.hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5 || ((e->id ^ g_7f4c00.hour) & 1) == 0))
+			if ((*(fcn_0047da10_Stamp*)&g_7f4c00).hour > 6 && (*(fcn_0047da10_Stamp*)&g_7f4c00).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
+			    || ((e->id ^ (*(fcn_0047da10_Stamp*)&g_7f4c00).hour) & 1) == 0))
 				fcn_0047d810(e);
 			if ((fcn_0047dca0(e) != 0 && e->gold != 0) || (e->flags & 0x3000)) {
 				int v;

@@ -1,16 +1,6 @@
 // FUNCTION: GOLDTL 0x00563f60
 // SIZE: 592
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x7c
 typedef struct Req {
 	int id;
@@ -18,9 +8,10 @@ typedef struct Req {
 	char pad8[0x74];
 } Req;
 
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern unsigned char* g_868050;
-extern char g_773d75;
+extern unsigned char g_773d75;
 extern char g_6a6248[];
 
 typedef struct Ent {
@@ -31,7 +22,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[];
+extern char g_7f4ca0[];
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int count, ...);
 int __cdecl gm_CheckEntityType(unsigned char* e);
@@ -41,7 +32,7 @@ void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 void __cdecl fcn_0051af00(void* out, int id, ...);
 char* __cdecl fcn_0050dc90(unsigned char* e);
 void __cdecl fcn_00545e80(int a, int b, char* text, int c, int d, int e, int f, int g, char* h);
-void __cdecl fcn_00500bb0(struct pos14* t, int a, int b, int c);
+void __cdecl fcn_00500bb0(pos14_7f4c00* t, int a, int b, int c);
 int __cdecl fcn_004c5790(int kind, Req* r);
 void __cdecl fcn_00546190(char* o);
 
@@ -59,7 +50,7 @@ void __cdecl fcn_00563f60(char* o)
 	case 0:
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac));
 		if (e != 0) {
-			fcn_004c51f0(*(int*) (e + 1), -1, *(unsigned short*) (o + 0xb0), 1, g_773d75, 0);
+			fcn_004c51f0(*(int*) (e + 1), -1, *(unsigned short*) (o + 0xb0), 1, (*(char*)&g_773d75), 0);
 			fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0, 0x80);
 		}
 		(*(int*) (o + 0x70))++;
@@ -77,14 +68,14 @@ void __cdecl fcn_00563f60(char* o)
 						kind = 0x60b;
 					}
 				}
-				fcn_00545e80(g_7f4ca0[*(unsigned short*) (o + 8)].handle, g_7f4ca0[*(unsigned short*) (o + 8)].handle, buf, 0, kind, *(int*) (e + 1), *(int*) (p + 2), 0, g_6a6248);
+				fcn_00545e80(((Ent*)g_7f4ca0)[*(unsigned short*) (o + 8)].handle, ((Ent*)g_7f4ca0)[*(unsigned short*) (o + 8)].handle, buf, 0, kind, *(int*) (e + 1), *(int*) (p + 2), 0, g_6a6248);
 			}
 			if (gm_CheckEntityType(e)) {
 				Req m;
 
 				p = fcn_00502cd0(*(int*) (e + 0x5d), 1, 4, 2);
-				*(struct pos14*) &m = g_7f4c00;
-				fcn_00500bb0((struct pos14*) &m, 0, 0, 1);
+				*(pos14_7f4c00*) &m = g_7f4c00;
+				fcn_00500bb0((pos14_7f4c00*) &m, 0, 0, 1);
 				m.id = *(int*) (e + 1);
 				m.x4 = *(int*) (p + 2);
 				fcn_004c5790(4, &m);

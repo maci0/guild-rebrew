@@ -4,7 +4,8 @@ typedef struct
 } fcn_00472f10_Win;
 // SIZE 0x3cc
 
-extern fcn_00472f10_Win g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
 extern int g_772568;
 extern char s_67d890[];
@@ -23,7 +24,7 @@ void __cdecl fcn_00472f10(int x, int y, int id)
 	fcn_00472f10_Win* w;
 	int src;
 
-	w = &g_1015f40[g_772514];
+	w = &((fcn_00472f10_Win*)g_1015f40)[g_772514];
 	if (w->i[0x290 / 4] == 0) {
 		fcn_0041d9e0(s_67d890);
 		return;

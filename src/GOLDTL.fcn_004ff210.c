@@ -22,7 +22,7 @@ typedef struct
 	char pad28[0x21c - 0x28];
 } fcn_004ff210_Ent;
 
-extern fcn_004ff210_Ent g_7f4ca0[];
+extern char g_7f4ca0[];
 extern char* g_aed32c;
 #pragma pack(2)
 typedef struct
@@ -35,7 +35,8 @@ typedef struct
 // SIZE 0xe
 #pragma pack()
 
-extern fcn_004ff210_Stamp g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 void __cdecl fcn_004c4510(fcn_004ff210_Ent* e, int h);
 int __cdecl fcn_004c4700(unsigned char type, unsigned char count, short id, char* data);
@@ -54,7 +55,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 	char msg[0xf8];
 	fcn_004ff210_Ent* e;
 
-	e = &g_7f4ca0[id];
+	e = &((fcn_004ff210_Ent*)g_7f4ca0)[id];
 	if (e->id == 0xffff || e->kind == 10 || e->alive == 0)
 		return -1.0f;
 	if (e->kind != 0x14) {
@@ -70,7 +71,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			*(int*) (msg + 8) = e->h;
 			*(int*) (msg + 0xc) = -1;
 			msg[0x36] = 2;
-			*(fcn_004ff210_Stamp*) (msg + 0x28) = g_7f4c00;
+			*(fcn_004ff210_Stamp*) (msg + 0x28) = (*(fcn_004ff210_Stamp*)&g_7f4c00);
 			*(int*) (msg + 0x58) = e->h;
 			fcn_004c5530(msg);
 			return 0.0f;
@@ -96,7 +97,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			*(int*) (msg + 8) = e->h;
 			*(int*) (msg + 0xc) = -1;
 			msg[0x36] = 2;
-			*(fcn_004ff210_Stamp*) (msg + 0x28) = g_7f4c00;
+			*(fcn_004ff210_Stamp*) (msg + 0x28) = (*(fcn_004ff210_Stamp*)&g_7f4c00);
 			*(int*) (msg + 0x58) = e->h;
 			fcn_004c5530(msg);
 			return 0.0f;

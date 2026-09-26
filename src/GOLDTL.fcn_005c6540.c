@@ -38,11 +38,12 @@ typedef struct Player {
 extern int g_100f1dc;
 extern int g_774654;
 extern int g_14ce8e0;
-extern char g_7747b0;
+extern unsigned char g_7747b0;
 extern unsigned short g_774970;
-extern Ent g_7f4ca0[];
-extern Btn g_776c60[6];
-extern Player* g_775318;
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern Btn_776c60 g_776c60[6];
+extern char* g_775318;
 extern unsigned char g_773d75;
 
 Rec* __cdecl fcn_005c6220(int key, int* out);
@@ -81,7 +82,7 @@ int __cdecl fcn_005c6540(unsigned short* item)
 		dlg = fcn_00470820(0, 0, "panel\\useobj");
 		fcn_00471b60(dlg);
 		fcn_004727a0(dlg, 1);
-		if ((rec->mask & g_7f4ca0[g_774970].mask) == 0 && fcn_005c61e0(id = *item) != 0) {
+		if ((rec->mask & ((Ent*)g_7f4ca0)[g_774970].mask) == 0 && fcn_005c61e0(id = *item) != 0) {
 			fcn_00519190(0xfe3, id * 2 + 0x9a8, rec->price, id * 2 + 0x9a8);
 		} else {
 			fcn_00519190(0xfe4, *item * 2 + 0x9a8);
@@ -98,14 +99,14 @@ int __cdecl fcn_005c6540(unsigned short* item)
 				if (g_100f1dc == 2) {
 					buy = 1;
 					g_774654 = 1;
-				} else if (g_100f1dc == 1 && (g_7747b0 & 0x80) == 0) {
+				} else if (g_100f1dc == 1 && ((*(char*)&g_7747b0) & 0x80) == 0) {
 					fcn_0051af00(text, 0xfe6, *item * 2 + 0x9a8, *item * 2 + 0x9a8);
 					fcn_00471af0(dlg, 0);
 					if (fcn_00526120(text, 1) != 0) {
 						for (i = 0; i < 6; i++) {
-							if (g_776c60[i].item != 0 && (id = fcn_00471f80(g_776c60[i].btn)) != 0) {
-								fcn_004c51f0(-1, g_775318->handle, *g_776c60[i].item, id, g_773d75, 0);
-								fcn_00472380(g_776c60[i].btn, 0, 0x3e7, 0);
+							if (((Btn*)g_776c60)[i].item != 0 && (id = fcn_00471f80(((Btn*)g_776c60)[i].btn)) != 0) {
+								fcn_004c51f0(-1, ((Player*)g_775318)->handle, *((Btn*)g_776c60)[i].item, id, g_773d75, 0);
+								fcn_00472380(((Btn*)g_776c60)[i].btn, 0, 0x3e7, 0);
 							}
 						}
 						fcn_004737c0();
@@ -125,7 +126,7 @@ int __cdecl fcn_005c6540(unsigned short* item)
 		r.arg = -1;
 		r.dir = 0;
 		r.pad = 0;
-		fcn_005dbf10(&g_7f4ca0[g_774970], &r);
+		fcn_005dbf10(&((Ent*)g_7f4ca0)[g_774970], &r);
 	}
 	return r.dir;
 }

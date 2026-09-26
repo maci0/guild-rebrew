@@ -26,8 +26,9 @@ typedef struct {
 	float phase;
 } Weather;
 
-extern Stamp g_7f4c00;
-extern Weather g_7763a0;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern int g_7763a0;
 extern int g_6ad62c;
 extern float g_6ad628;
 extern float g_6ad630;
@@ -44,21 +45,21 @@ void __cdecl fcn_005e8b10(void)
 	float v;
 	int i;
 
-	s.a = g_7763a0.a;
-	s.b = (unsigned short) g_7763a0.b;
-	s.c = g_7763a0.c;
+	s.a = (*(Weather*)&g_7763a0).a;
+	s.b = (unsigned short) (*(Weather*)&g_7763a0).b;
+	s.c = (*(Weather*)&g_7763a0).c;
 	s.d = 0;
-	r = fcn_00500d20(&s, &g_7f4c00);
+	r = fcn_00500d20(&s, &(*(Stamp*)&g_7f4c00));
 	v = r * (1.0f / 60.0f);
 	if (!(v < 0.0f)) {
-		i = g_7f4c00.b;
+		i = (*(Stamp*)&g_7f4c00).b;
 		g_6ad62c = 0;
-		g_7763a0.phase += v * g_7763a0.t4[i];
-		g_6ad628 = g_7763a0.t0[i];
-		g_6ad630 = g_7763a0.t1[i];
-		g_6ad634 = ((float) sin(g_7763a0.phase) + 1.0f) * g_7763a0.t3[i] * 0.5f + g_7763a0.t2[i];
-		g_7763a0.a = g_7f4c00.a;
-		g_7763a0.b = i;
-		g_7763a0.c = g_7f4c00.c;
+		(*(Weather*)&g_7763a0).phase += v * (*(Weather*)&g_7763a0).t4[i];
+		g_6ad628 = (*(Weather*)&g_7763a0).t0[i];
+		g_6ad630 = (*(Weather*)&g_7763a0).t1[i];
+		g_6ad634 = ((float) sin((*(Weather*)&g_7763a0).phase) + 1.0f) * (*(Weather*)&g_7763a0).t3[i] * 0.5f + (*(Weather*)&g_7763a0).t2[i];
+		(*(Weather*)&g_7763a0).a = (*(Stamp*)&g_7f4c00).a;
+		(*(Weather*)&g_7763a0).b = i;
+		(*(Weather*)&g_7763a0).c = (*(Stamp*)&g_7f4c00).c;
 	}
 }

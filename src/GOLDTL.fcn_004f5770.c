@@ -10,7 +10,8 @@ typedef struct
 } Pair;
 // SIZE 0x8
 
-extern Pair g_99f800[];
+#include "client_types.h"
+extern Pair_99f800 g_99f800[0x800];
 extern char g_6903a8[];
 
 int __cdecl fcn_004f58b0(int b, int a);
@@ -23,8 +24,8 @@ int __cdecl fcn_004f5770(int a, int b)
 
 	k = fcn_004f58b0(b, a);
 	if (k > -1) {
-		g_99f800[k].a = b;
-		g_99f800[k].b = a;
+		((Pair*)g_99f800)[k].a = b;
+		((Pair*)g_99f800)[k].b = a;
 		sprintf(buf, g_6903a8, b, a, k);
 		return 1;
 	}

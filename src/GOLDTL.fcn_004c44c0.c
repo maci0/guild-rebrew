@@ -11,7 +11,8 @@ typedef struct {
 
 extern unsigned int g_100581c;
 extern unsigned int g_aed204;
-extern Slot10 g_fb5760[];
+#include "client_types.h"
+extern cell10_fb5760 g_fb5760[0x8000];
 
 int __cdecl fcn_004c44c0(void)
 {
@@ -26,10 +27,10 @@ int __cdecl fcn_004c44c0(void)
 		if (i >= end) {
 			break;
 		}
-		if (g_fb5760[i & 0x7fff].state == 0) {
+		if (((Slot10*)g_fb5760)[i & 0x7fff].state == 0) {
 			return 0;
 		}
-		if (g_fb5760[i & 0x7fff].state == 2) {
+		if (((Slot10*)g_fb5760)[i & 0x7fff].state == 2) {
 			r = -1;
 		}
 		i++;

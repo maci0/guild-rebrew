@@ -19,10 +19,8 @@ typedef struct {
 #pragma pack()
 
 // SIZE 0x8
-typedef struct {
-	int owner;
-	int key;
-} Pair;
+#include "client_types.h"
+typedef Pair_99f800 Pair;
 
 // SIZE 0x21c
 typedef struct {
@@ -31,10 +29,10 @@ typedef struct {
 	char pad8[0x21c - 8];
 } Obj;
 
-extern Order g_9a3800[];
-extern Pair g_99f800[];
+extern Rec2d_9a3800 g_9a3800[512];
+extern Pair_99f800 g_99f800[0x800];
 extern unsigned short g_774970;
-extern Obj g_7f4ca0[];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_004f5810(int key);
 char* __cdecl fcn_00508e40(int id);
@@ -51,28 +49,28 @@ int __cdecl fcn_004f5940(int key, int force)
 	if (k == -1) {
 		return 3;
 	}
-	if (g_9a3800[k].count > 0) {
-		g_9a3800[k].count--;
+	if (((Order*)g_9a3800)[k].count > 0) {
+		((Order*)g_9a3800)[k].count--;
 	}
-	if (g_9a3800[k].count != 0 && force == 0) {
+	if (((Order*)g_9a3800)[k].count != 0 && force == 0) {
 		return 2;
 	}
-	if (g_9a3800[k].state != 1 && (force == 0 || g_9a3800[k].state == 0)) {
+	if (((Order*)g_9a3800)[k].state != 1 && (force == 0 || ((Order*)g_9a3800)[k].state == 0)) {
 		return 1;
 	}
-	p = fcn_00508e40(g_9a3800[k].target);
-	fcn_004fa980(g_9a3800[k].arg, g_9a3800[k].kind);
+	p = fcn_00508e40(((Order*)g_9a3800)[k].target);
+	fcn_004fa980(((Order*)g_9a3800)[k].arg, ((Order*)g_9a3800)[k].kind);
 	for (i = 0; i < 2048; i++) {
 		if (key == g_99f800[i].key) {
-			if (g_774970 != 0xffff && g_99f800[i].owner == g_7f4ca0[g_774970].owner && p != 0 && force == 0) {
-				fcn_005b2a00(&g_7f4ca0[g_774970], p);
+			if (g_774970 != 0xffff && g_99f800[i].owner == ((Obj*)g_7f4ca0)[g_774970].owner && p != 0 && force == 0) {
+				fcn_005b2a00(&((Obj*)g_7f4ca0)[g_774970], p);
 			}
 			g_99f800[i].owner = -1;
 			g_99f800[i].key = -1;
 		}
 	}
-	g_9a3800[k].state = 0;
-	g_9a3800[k].target = -1;
-	g_9a3800[k].id = -1;
+	((Order*)g_9a3800)[k].state = 0;
+	((Order*)g_9a3800)[k].target = -1;
+	((Order*)g_9a3800)[k].id = -1;
 	return 0;
 }

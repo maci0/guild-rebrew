@@ -34,8 +34,9 @@ typedef struct
 } fcn_00467240_Ent;
 // SIZE 0x2f4
 
-extern fcn_00467240_Fld g_102d140[];
-extern fcn_00467240_Ent* g_1015ea0;
+#include "client_types.h"
+extern Fld_102d140 g_102d140[];
+extern char* g_1015ea0;
 extern char s_67d47c[];
 extern char s_67d474[];
 extern char s_67d46c[];
@@ -57,8 +58,8 @@ int __cdecl fcn_00467240(int x, int y, int w, int h, unsigned char flags)
 	char buf[24];
 
 	i = 1;
-	if (g_102d140[1].used != 0) {
-		while (g_102d140[i].used != 0) {
+	if (((fcn_00467240_Fld*)g_102d140)[1].used != 0) {
+		while (((fcn_00467240_Fld*)g_102d140)[i].used != 0) {
 			i++;
 		}
 		if (i > 0x7f) {
@@ -66,7 +67,7 @@ int __cdecl fcn_00467240(int x, int y, int w, int h, unsigned char flags)
 			return -1;
 		}
 	}
-	f = &g_102d140[i];
+	f = &((fcn_00467240_Fld*)g_102d140)[i];
 	f->idx = i;
 	f->x = x;
 	f->y = y;
@@ -101,21 +102,21 @@ int __cdecl fcn_00467240(int x, int y, int w, int h, unsigned char flags)
 		f->max = 0x20;
 	}
 	if (flags & 0x30) {
-		g_1015ea0[id].i[0x78 / 4] = 1;
+		((fcn_00467240_Ent*)g_1015ea0)[id].i[0x78 / 4] = 1;
 	}
-	g_1015ea0[id].i[0x20 / 4] = 0x41;
-	g_1015ea0[id].i[0x10 / 4] = f->x;
-	g_1015ea0[id].i[0x14 / 4] = f->y;
-	g_1015ea0[id].i[0x18 / 4] = f->w;
-	g_1015ea0[id].i[0x1c / 4] = f->h;
-	g_1015ea0[id].i[0x8 / 4] = 0;
-	g_1015ea0[id].i[0x88 / 4] = f->idx;
-	g_1015ea0[id].i[0x24 / 4] = 2;
-	g_1015ea0[id].i[0x30 / 4] = f->y;
-	g_1015ea0[id].i[0x28 / 4] = f->x;
-	g_1015ea0[id].i[0x2c / 4] = f->x + f->w;
-	g_1015ea0[id].i[0x34 / 4] = f->y + f->h;
-	g_1015ea0[id].i[0xc / 4] = (int) f;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x20 / 4] = 0x41;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x10 / 4] = f->x;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x14 / 4] = f->y;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x18 / 4] = f->w;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x1c / 4] = f->h;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x8 / 4] = 0;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x88 / 4] = f->idx;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x24 / 4] = 2;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x30 / 4] = f->y;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x28 / 4] = f->x;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x2c / 4] = f->x + f->w;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x34 / 4] = f->y + f->h;
+	((fcn_00467240_Ent*)g_1015ea0)[id].i[0xc / 4] = (int) f;
 	f->ent = id;
 	return id;
 }

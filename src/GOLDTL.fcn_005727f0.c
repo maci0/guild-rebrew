@@ -23,22 +23,13 @@ struct house {
 	char pad180[0x9c];
 };
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-extern struct pos14 g_7f4c00;
-extern struct house g_7f4ca0[];
-extern struct rec* g_99ec10;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
+extern char* g_99ec10;
 extern unsigned char g_773d75;
 
-int __cdecl fcn_00500cb0(struct pos14*, struct pos14*);
+int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_005015e0(char**, int, int, int);
 unsigned short __cdecl fcn_0042e410(unsigned short);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
@@ -64,7 +55,7 @@ void __cdecl fcn_005727f0(char* e)
 		if (*(int*) (e + 0x14) == 0 && *(int*) (e + 0x18) == 0) {
 			break;
 		}
-		if (fcn_00500cb0((struct pos14*) (e + 0x52), &g_7f4c00) >= 0) {
+		if (fcn_00500cb0((pos14_7f4c00*) (e + 0x52), &g_7f4c00) >= 0) {
 			return;
 		}
 		fcn_005015e0(&r, 0, 0, *(int*) (e + 0xb0));
@@ -72,16 +63,16 @@ void __cdecl fcn_005727f0(char* e)
 			*(int*) (e + 0x70) = -1;
 			return;
 		}
-		p = &g_99ec10[*(unsigned short*) (e + 0xac)];
+		p = &((struct rec*)g_99ec10)[*(unsigned short*) (e + 0xac)];
 		amt = (fcn_0042e410((unsigned short) (p->level * 40)) + p->level * 40)
 		    * (*(int*) (e + 0x18) + *(int*) (e + 0x14));
 		fcn_004c51f0(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, g_773d75, 0);
 		fcn_0051af00(buf, 0x1bb8, *(unsigned short*) (e + 0xac) * 2 + 0x9a8, x, amt);
-		fcn_00545e80(g_7f4ca0[*(unsigned short*) (r + 0x27)].handle, -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
+		fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (r + 0x27)].handle, -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
 		    "_NACHRICHTEN_HS_08");
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].who == e) {
-				fcn_00529160(r, 0, g_7f4ca0[i].id, 0);
+			if (((struct house*)g_7f4ca0)[i].who == e) {
+				fcn_00529160(r, 0, ((struct house*)g_7f4ca0)[i].id, 0);
 			}
 		}
 		fcn_00546190(e);
@@ -89,8 +80,8 @@ void __cdecl fcn_005727f0(char* e)
 	case -2:
 	case -1:
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].who == e) {
-				fcn_00529160(0, 0, g_7f4ca0[i].id, 0);
+			if (((struct house*)g_7f4ca0)[i].who == e) {
+				fcn_00529160(0, 0, ((struct house*)g_7f4ca0)[i].id, 0);
 			}
 		}
 		break;

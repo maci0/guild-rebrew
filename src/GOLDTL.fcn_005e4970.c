@@ -14,8 +14,9 @@ typedef struct Player {
 extern int g_1040490;
 extern int g_1040494;
 extern char s_67d67c[];
-extern Player g_1015f40[];
-extern Player* g_77255c;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_77255c;
 extern int g_7725c8;
 extern int g_14ce8e0;
 extern char g_14cf950;
@@ -51,19 +52,19 @@ void __cdecl fcn_005e4970(void)
 	win = fcn_0046e940(100, 0, 0x258, g_1040490, 0x10);
 	fcn_00471c80(win, 1);
 	fcn_00519190(0x2004);
-	g_77255c->scroll = -g_1040490;
+	(*(Player**)&g_77255c)->scroll = -g_1040490;
 	i = 0;
 	g_7725c8 = 1;
 	while (fcn_005373e0(fcn_005e4970, 0x24087)) {
 		if (g_14ce8e0 || g_14cf950) {
 			g_774654 = 1;
 		}
-		g_77255c = &g_1015f40[win];
+		(*(Player**)&g_77255c) = &((Player*)g_1015f40)[win];
 		if (i % speed == 0) {
-			g_77255c->scroll++;
+			(*(Player**)&g_77255c)->scroll++;
 		}
 		i++;
-		if (g_77255c->lines * 1.5 + g_77255c->scroll > g_77255c->limit) {
+		if ((*(Player**)&g_77255c)->lines * 1.5 + (*(Player**)&g_77255c)->scroll > (*(Player**)&g_77255c)->limit) {
 			g_774654 = 1;
 		}
 		if (g_6a24e4 >= 80.0f) {
@@ -77,9 +78,9 @@ void __cdecl fcn_005e4970(void)
 	fade = fcn_004730c0(0, 0, g_1040494, g_1040490, s_67d67c, 0x3c, 1);
 	while ((*fade & 4) == 0) {
 		fcn_005373e0(0, 0x24087);
-		g_77255c = &g_1015f40[win];
+		(*(Player**)&g_77255c) = &((Player*)g_1015f40)[win];
 		if (i % speed == 0) {
-			g_77255c->scroll++;
+			(*(Player**)&g_77255c)->scroll++;
 		}
 		if (g_6a24e4 >= 80.0f) {
 			speed = 4;

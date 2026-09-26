@@ -12,8 +12,9 @@ typedef struct
 } fcn_0046fac0_Ent;
 // SIZE 0x2f4
 
-extern fcn_0046fac0_Win g_1015f40[];
-extern fcn_0046fac0_Ent* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 extern int g_67d398;
 extern char g_67d5bc[];
 extern char s_67d420[];
@@ -32,7 +33,7 @@ int __cdecl fcn_0046fac0(int x, int y, char* text, int win)
 	fcn_0046fac0_Win* w;
 	int id;
 
-	w = &g_1015f40[win];
+	w = &((fcn_0046fac0_Win*)g_1015f40)[win];
 	if (w->i[0x290 / 4] == 0) {
 		return -1;
 	}
@@ -41,31 +42,31 @@ int __cdecl fcn_0046fac0(int x, int y, char* text, int win)
 		return -1;
 	}
 	id = fcn_00469890();
-	g_1015ea0[id].i[0x88 / 4] = fcn_0041db70(0x101, g_67d5bc);
-	if (g_1015ea0[id].i[0x88 / 4] == 0) {
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x88 / 4] = fcn_0041db70(0x101, g_67d5bc);
+	if (((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x88 / 4] == 0) {
 		return -1;
 	}
-	strcpy((char*) g_1015ea0[id].i[0x88 / 4], text);
+	strcpy((char*) ((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x88 / 4], text);
 	if (w->i[0x28c / 4] != 0) {
-		g_1015ea0[id].i[0x84 / 4] = w->i[0x28c / 4];
+		((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x84 / 4] = w->i[0x28c / 4];
 	} else {
-		g_1015ea0[id].i[0x84 / 4] = g_67d398;
+		((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x84 / 4] = g_67d398;
 	}
-	g_1015ea0[id].i[0x20 / 4] = 0x43;
-	g_1015ea0[id].i[0x10 / 4] = w->i[0x4 / 4] + x;
-	g_1015ea0[id].i[0x14 / 4] = w->i[0x8 / 4] - w->i[0x258 / 4] + y;
-	g_1015ea0[id].i[0x18 / 4] = fcn_0046b520(text, g_1015ea0[id].i[0x84 / 4]) + 0x60;
-	g_1015ea0[id].i[0x1c / 4] = *(unsigned short*) (fcn_00466190(g_1015ea0[id].i[0x84 / 4]) + 8);
-	g_1015ea0[id].i[0x24 / 4] = 2;
-	g_1015ea0[id].i[0x40 / 4] = (int) w;
-	g_1015ea0[id].i[0xc / 4] = (int) w;
-	g_1015ea0[id].i[0x30 / 4] = w->i[0x8 / 4];
-	g_1015ea0[id].i[0x34 / 4] = w->i[0x10 / 4] + w->i[0x8 / 4];
-	g_1015ea0[id].i[0x28 / 4] = w->i[0x4 / 4];
-	g_1015ea0[id].i[0x2c / 4] = w->i[0xc / 4] + w->i[0x4 / 4];
-	g_1015ea0[id].i[0x50 / 4] = g_1015ea0[w->i[0x27c / 4]].i[0x50 / 4];
-	if (g_1015ea0[id].i[0x1c / 4] + y > w->i[0x254 / 4]) {
-		w->i[0x254 / 4] = g_1015ea0[id].i[0x1c / 4] + y;
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x20 / 4] = 0x43;
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x10 / 4] = w->i[0x4 / 4] + x;
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x14 / 4] = w->i[0x8 / 4] - w->i[0x258 / 4] + y;
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x18 / 4] = fcn_0046b520(text, ((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x84 / 4]) + 0x60;
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x1c / 4] = *(unsigned short*) (fcn_00466190(((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x84 / 4]) + 8);
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x24 / 4] = 2;
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x40 / 4] = (int) w;
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0xc / 4] = (int) w;
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x30 / 4] = w->i[0x8 / 4];
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x34 / 4] = w->i[0x10 / 4] + w->i[0x8 / 4];
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x28 / 4] = w->i[0x4 / 4];
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x2c / 4] = w->i[0xc / 4] + w->i[0x4 / 4];
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x50 / 4] = ((fcn_0046fac0_Ent*)g_1015ea0)[w->i[0x27c / 4]].i[0x50 / 4];
+	if (((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x1c / 4] + y > w->i[0x254 / 4]) {
+		w->i[0x254 / 4] = ((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x1c / 4] + y;
 	}
 	fcn_0046f650(id, w);
 	((int*) w->i[0x28 / 4])[w->i[0x2c / 4]] = id;

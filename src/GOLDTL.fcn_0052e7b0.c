@@ -26,8 +26,9 @@ extern int g_7746f0;
 extern int g_14b5f10;
 extern unsigned short g_774970;
 extern int g_772514;
-extern Slot g_1015f40[];
-extern Ctl* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 extern char g_6a2fc8[];
 extern char g_6a2e8c[];
 
@@ -67,7 +68,7 @@ void __cdecl fcn_0052e7b0(char* e)
 		fcn_005186c0(*(unsigned short*) e, 1, 4, buf);
 		fcn_00519190(g_6a2e8c, buf, pct);
 		fcn_004727a0(g_6a25b8, 0);
-		x = (g_1015f40[g_772514].width - 0x30) >> 1;
+		x = (((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1;
 		g_6a25c0 = fcn_004677e0(0x18, 0x6c, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
 		fcn_00472380(g_6a25c0, -0x7f, 0x7f, rel);
 		if (e[2] == 5 || e[2] == 6 || e[2] == 7) {
@@ -86,11 +87,11 @@ void __cdecl fcn_0052e7b0(char* e)
 		fcn_00519190(buf);
 	}
 	fcn_004727a0(g_6a25b8, 0);
-	x = (g_1015f40[g_772514].width - 0x30) >> 1;
+	x = (((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1;
 	if (e != 0) {
 		g_6a25d8 = fcn_0046f740(x, 0x38, *(int*) (e + 0x18c), g_772514);
-		g_1015ea0[g_6a25d8].owner = e;
-		g_1015ea0[g_6a25d8].linked = 1;
+		((Ctl*)g_1015ea0)[g_6a25d8].owner = e;
+		((Ctl*)g_1015ea0)[g_6a25d8].linked = 1;
 	}
 	else {
 		fcn_0046f740(x, 0x38, 0x521, g_772514);

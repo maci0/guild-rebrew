@@ -36,9 +36,10 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern Player g_7f4ca0[];
-extern Player* g_7e4260[32];
-extern Name14 g_7f4c00;
+extern char g_7f4ca0[];
+extern char* g_7e4260[32];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern int g_14abc44;
 extern int g_100f1dc;
 extern int g_67d370;
@@ -96,9 +97,9 @@ int __cdecl fcn_005add40(int unused, char* e)
 				}
 				if (p == 0) {
 					pkt.type = 0x49;
-					pkt.x8 = g_7f4ca0[*(unsigned short*) (g_7746c4 + 0x27)].x4;
+					pkt.x8 = ((Player*)g_7f4ca0)[*(unsigned short*) (g_7746c4 + 0x27)].x4;
 					pkt.xc = *(int*) (g_7746c4 + 1);
-					pkt.name = g_7f4c00;
+					pkt.name = (*(Name14*)&g_7f4c00);
 					pkt.x36 = 1;
 					pkt.x58 = *(int*) (e + 1);
 					pkt.x5c = *(int*) (g_7746c4 + 1);
@@ -110,8 +111,8 @@ int __cdecl fcn_005add40(int unused, char* e)
 						if (n >= 8) {
 							break;
 						}
-						if (g_7e4260[i] != 0 && g_7e4260[i]->x188 != 0) {
-							pkt.ids[n] = g_7e4260[i]->x4;
+						if (((Player**)g_7e4260)[i] != 0 && ((Player**)g_7e4260)[i]->x188 != 0) {
+							pkt.ids[n] = ((Player**)g_7e4260)[i]->x4;
 							n++;
 						}
 					}
@@ -129,8 +130,8 @@ int __cdecl fcn_005add40(int unused, char* e)
 					r = 1;
 					g_774654 = 2;
 					for (i = 0; i < 32; i++) {
-						if (g_7e4260[i] != 0 && g_7e4260[i]->x188 != 0) {
-							fcn_00529160(0, 0, g_7e4260[i]->x0, p);
+						if (((Player**)g_7e4260)[i] != 0 && ((Player**)g_7e4260)[i]->x188 != 0) {
+							fcn_00529160(0, 0, ((Player**)g_7e4260)[i]->x0, p);
 						}
 					}
 				}

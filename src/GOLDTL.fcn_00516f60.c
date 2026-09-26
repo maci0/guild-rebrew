@@ -52,13 +52,14 @@ typedef struct {
 	Hook* hook;
 } Scene;
 
-extern char g_7f4c00;
-extern Entity g_7f4ca0[768];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 extern int g_6b8010;
-extern Camera* g_6b8014;
+extern int g_6b8014;
 extern unsigned short g_774970;
 extern char g_773dd4;
-extern Scene* g_67a370;
+extern int g_67a370;
 extern int g_6b8300;
 extern int g_77666c;
 extern char g_6b8061;
@@ -90,27 +91,27 @@ void __cdecl fcn_00516f60(void)
 	View* v;
 	int i;
 
-	mode = fcn_00500e20(&g_7f4c00);
+	mode = fcn_00500e20(&(*(char*)&g_7f4c00));
 	if (g_6b8010 != 0) {
 		return;
 	}
-	v = fcn_00509570(&g_7f4ca0[g_774970]);
+	v = fcn_00509570(&((Entity*)g_7f4ca0)[g_774970]);
 	if (v != 0 && v->zoom != -1.0f) {
-		fcn_00438b40(g_6b8014, v->pos);
+		fcn_00438b40(((Camera*)g_6b8014), v->pos);
 		fcn_0052ac60(v->zoom);
-		g_6b8014->angle = v->angle;
-		fcn_00438cb0(g_6b8014, g_6b8014->pos);
+		((Camera*)g_6b8014)->angle = v->angle;
+		fcn_00438cb0(((Camera*)g_6b8014), ((Camera*)g_6b8014)->pos);
 	} else {
 		fcn_0052ac60(0.33f);
 	}
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].obj != 0 && fcn_00413190(g_7f4ca0[i].obj->model) == 0 && g_7f4ca0[i].obj->owner == -1) {
-			if (g_7f4ca0[i].obj->body->visible == 0
-				|| (g_7f4ca0[i].obj->rider != 0 && g_7f4ca0[i].obj->rider->visible == 0)) {
-				fcn_00402aa0(g_7f4ca0[i].obj);
+		if (((Entity*)g_7f4ca0)[i].obj != 0 && fcn_00413190(((Entity*)g_7f4ca0)[i].obj->model) == 0 && ((Entity*)g_7f4ca0)[i].obj->owner == -1) {
+			if (((Entity*)g_7f4ca0)[i].obj->body->visible == 0
+				|| (((Entity*)g_7f4ca0)[i].obj->rider != 0 && ((Entity*)g_7f4ca0)[i].obj->rider->visible == 0)) {
+				fcn_00402aa0(((Entity*)g_7f4ca0)[i].obj);
 			}
-			fcn_00402a00(g_7f4ca0[i].obj, 1);
-			fcn_004fdcf0(&g_7f4ca0[i]);
+			fcn_00402a00(((Entity*)g_7f4ca0)[i].obj, 1);
+			fcn_004fdcf0(&((Entity*)g_7f4ca0)[i]);
 		}
 	}
 	if (mode == 1) {
@@ -122,18 +123,18 @@ void __cdecl fcn_00516f60(void)
 	} else if (mode == 3) {
 		g_773dd4 = 3;
 	}
-	fcn_00437ac0(g_67a370, 0, 0xe0, fcn_00516550);
-	fcn_00437ac0(g_67a370, 0, 0xc0, fcn_005165b0);
+	fcn_00437ac0((*(Scene**)&g_67a370), 0, 0xe0, fcn_00516550);
+	fcn_00437ac0((*(Scene**)&g_67a370), 0, 0xc0, fcn_005165b0);
 	fcn_00516be0();
-	if (g_67a370 != 0 && g_67a370->hook != 0 && g_67a370->hook->notify != 0) {
-		g_67a370->hook->notify(g_67a370, 4, g_67a370->hook->arg, 0);
+	if ((*(Scene**)&g_67a370) != 0 && (*(Scene**)&g_67a370)->hook != 0 && (*(Scene**)&g_67a370)->hook->notify != 0) {
+		(*(Scene**)&g_67a370)->hook->notify((*(Scene**)&g_67a370), 4, (*(Scene**)&g_67a370)->hook->arg, 0);
 	}
 	fcn_00516040();
 	fcn_00516de0(g_6b8300, 0);
 	g_6b8061 = 1;
 	g_6791c8 = 0;
 	g_67a964 = 1.0f - (unsigned char) g_77666c * 0.01f;
-	fcn_0052a960(&g_7f4c00);
+	fcn_0052a960(&(*(char*)&g_7f4c00));
 	if (g_6b859b != 0) {
 		fcn_00443230(0);
 	} else {

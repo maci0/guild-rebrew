@@ -11,13 +11,10 @@ typedef struct {
 } Offer;
 
 // SIZE 0x18
-typedef struct {
-	short demand;
-	short supply;
-	char pad4[0x18 - 4];
-} Cell;
+#include "client_types.h"
+typedef Cell_99ef80 Cell;
 
-extern Cell g_99ef80[9][8];
+extern Cell_99ef80 g_99ef80[9][8];
 
 void __cdecl fcn_004f4830(int kind, Offer* o);
 void __cdecl fcn_005015e0(char** out, int a, int b, int key);

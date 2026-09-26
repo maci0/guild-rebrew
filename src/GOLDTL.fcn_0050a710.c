@@ -18,7 +18,7 @@ typedef struct
 } Ent21c;
 // SIZE 0x21c
 
-extern Ent21c g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern int g_773d70;
 
 #pragma pack(push, 1)
@@ -34,7 +34,8 @@ typedef struct
 // SIZE 0x2d
 #pragma pack(pop)
 
-extern Rec2d g_9a3800[512];
+#include "client_types.h"
+extern Rec2d_9a3800 g_9a3800[512];
 
 int __cdecl fcn_0050a710(unsigned char* p)
 {
@@ -51,15 +52,15 @@ int __cdecl fcn_0050a710(unsigned char* p)
 	for (i = 0; i < 768; i++) {
 		found = 0;
 		cnt = 0;
-		if (g_7f4ca0[i].x4 != id && (g_7f4ca0[i].x2 == 6 || g_7f4ca0[i].x2 == 7)) {
-			if (g_7f4ca0[i].x5c == id || g_7f4ca0[i].x60 == id || g_7f4ca0[i].x64 == id) {
+		if (((Ent21c*)g_7f4ca0)[i].x4 != id && (((Ent21c*)g_7f4ca0)[i].x2 == 6 || ((Ent21c*)g_7f4ca0)[i].x2 == 7)) {
+			if (((Ent21c*)g_7f4ca0)[i].x5c == id || ((Ent21c*)g_7f4ca0)[i].x60 == id || ((Ent21c*)g_7f4ca0)[i].x64 == id) {
 				return 0;
 			}
 			for (j = 0; j < 5; j++) {
-				if (g_7f4ca0[i].x68[j] == id) {
+				if (((Ent21c*)g_7f4ca0)[i].x68[j] == id) {
 					found |= 1;
 					cnt++;
-				} else if (g_7f4ca0[i].x68[j] != -1) {
+				} else if (((Ent21c*)g_7f4ca0)[i].x68[j] != -1) {
 					cnt++;
 				}
 			}
@@ -72,7 +73,7 @@ int __cdecl fcn_0050a710(unsigned char* p)
 		return 1;
 	}
 	for (i = 0; i < 512; i++) {
-		if (g_9a3800[i].x12 == id && g_9a3800[i].x25 != 0) {
+		if (((Rec2d*)g_9a3800)[i].x12 == id && ((Rec2d*)g_9a3800)[i].x25 != 0) {
 			return 0;
 		}
 	}

@@ -30,10 +30,11 @@ extern int g_7f4c10;
 extern int g_6b7fac;
 extern int g_7f3ee8;
 extern Item g_1038150[];
-extern Slot g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern char g_699a9c[];
 extern int g_85ab60;
-extern Edge g_7f3f00[];
+extern Rec34_7f3f00 g_7f3f00[];
 
 int __cdecl fcn_00470820(int a, int b, int c);
 void __cdecl fcn_00471b60(int h);
@@ -53,7 +54,7 @@ int __cdecl fcn_0050f780(int arg, unsigned char* a, unsigned short* b)
 	g_7f4c10 = fcn_00470820(0, 0, arg);
 	fcn_00471b60(g_7f4c10);
 	g_7f3ee8 = g_6b7fac;
-	s = &g_1015f40[g_1038150[g_7f4c10].owner];
+	s = &((Slot*)g_1015f40)[g_1038150[g_7f4c10].owner];
 	fcn_004727a0(0, 1);
 	if (*b == 0xfd) {
 		fcn_00519190(g_699a9c, 0x19, *a * 14 + 0x48e);
@@ -68,12 +69,12 @@ int __cdecl fcn_0050f780(int arg, unsigned char* a, unsigned short* b)
 	fcn_0050ee80(a, b);
 	for (i = 0; i < g_85ab60; i++) {
 		for (j = 0; j < i; j++) {
-			if (g_7f3f00[j].key == g_7f3f00[i].a) {
-				fcn_0050f750(g_7f3f00[j].from + 0x18, g_7f3f00[j].to + 0x30, g_7f3f00[i].from + 0x18,
-					     g_7f3f00[i].to + 0x18);
-			} else if (g_7f3f00[j].key == g_7f3f00[i].b) {
-				fcn_0050f750(g_7f3f00[j].from + 0x18, g_7f3f00[j].to + 0x30, g_7f3f00[i].from + 0x18,
-					     g_7f3f00[i].to + 0x18);
+			if (((Edge*)g_7f3f00)[j].key == ((Edge*)g_7f3f00)[i].a) {
+				fcn_0050f750(((Edge*)g_7f3f00)[j].from + 0x18, ((Edge*)g_7f3f00)[j].to + 0x30, ((Edge*)g_7f3f00)[i].from + 0x18,
+					     ((Edge*)g_7f3f00)[i].to + 0x18);
+			} else if (((Edge*)g_7f3f00)[j].key == ((Edge*)g_7f3f00)[i].b) {
+				fcn_0050f750(((Edge*)g_7f3f00)[j].from + 0x18, ((Edge*)g_7f3f00)[j].to + 0x30, ((Edge*)g_7f3f00)[i].from + 0x18,
+					     ((Edge*)g_7f3f00)[i].to + 0x18);
 			}
 		}
 	}

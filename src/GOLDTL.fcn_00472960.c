@@ -13,7 +13,8 @@ typedef struct {
 	char pad294[0x3cc - 0x294];
 } Win472960;
 
-extern Win472960 g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
 extern int g_772558;
 
@@ -26,7 +27,7 @@ void __cdecl fcn_00472960(int x, int y, unsigned char r, unsigned char g, unsign
 {
 	Win472960* w;
 
-	w = &g_1015f40[g_772514];
+	w = &((Win472960*)g_1015f40)[g_772514];
 	if (w->active == 0) {
 		return;
 	}

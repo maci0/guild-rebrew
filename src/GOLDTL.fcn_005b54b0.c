@@ -16,11 +16,12 @@ typedef struct {
 
 #define HOUSES 768
 
-extern House5b54 g_7f4ca0[HOUSES];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern char* g_773da8;
-extern int g_7f4c00;
-extern int g_7f4c04;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
@@ -55,8 +56,8 @@ void __cdecl fcn_005b54b0(char* p)
 	msg[0x26] = (char) 0xa2;
 	*(int*) (msg + 0x14) = -1;
 	msg[0x30] = 2;
-	*(int*) (msg + 0xc) = g_7f4ca0[g_774970].handle;
-	*(int*) (msg + 0x34) = g_7f4ca0[*(unsigned short*) (e + 0x27)].handle;
+	*(int*) (msg + 0xc) = ((House5b54*)g_7f4ca0)[g_774970].handle;
+	*(int*) (msg + 0x34) = ((House5b54*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].handle;
 	*(int*) (msg + 0x38) = *(int*) (par + 4);
 	msg[0x7c] = 9;
 	for (i = 0; i < 16; i++) {
@@ -84,13 +85,13 @@ void __cdecl fcn_005b54b0(char* p)
 		if (n >= 4) {
 			break;
 		}
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].owner == e) {
-			((int*) (msg + 0xc0))[n] = g_7f4ca0[i].handle;
+		if (((House5b54*)g_7f4ca0)[i].id != 0xffff && ((House5b54*)g_7f4ca0)[i].owner == e) {
+			((int*) (msg + 0xc0))[n] = ((House5b54*)g_7f4ca0)[i].handle;
 			n++;
 		}
 	}
-	*(int*) (msg + 0x18) = g_7f4c00;
-	*(int*) (msg + 0x1c) = g_7f4c04;
+	*(int*) (msg + 0x18) = (*(int*)&g_7f4c00);
+	*(int*) (msg + 0x1c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x20) = g_7f4c08;
 	*(short*) (msg + 0x24) = g_7f4c0c;
 	fcn_00500bb0(msg + 0x18, 0, 0xf, 0);

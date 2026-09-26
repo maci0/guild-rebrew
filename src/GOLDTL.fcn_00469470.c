@@ -1,8 +1,5 @@
-typedef struct Group {
-	int count;
-	int sel;
-	int ids[33];
-} Group;
+#include "client_types.h"
+typedef Group_102cbc4 Group;
 // SIZE 0x8c
 
 typedef struct Slot {
@@ -14,8 +11,8 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Group g_102cbc4[8];
-extern Slot* g_1015ea0;
+extern Group_102cbc4 g_102cbc4[8];
+extern char* g_1015ea0;
 
 void __cdecl fcn_004695a0(int g, int sel);
 
@@ -24,8 +21,8 @@ void __cdecl fcn_004695a0(int g, int sel);
 void __cdecl fcn_00469470(int g, int id)
 {
 	g_102cbc4[g].ids[g_102cbc4[g].count] = id;
-	g_1015ea0[id].dirty = 1;
-	g_1015ea0[id].flags &= ~2;
+	((Slot*)g_1015ea0)[id].dirty = 1;
+	((Slot*)g_1015ea0)[id].flags &= ~2;
 	g_102cbc4[g].count++;
 	if (g_102cbc4[g].sel == -1) {
 		fcn_004695a0(g, 0);

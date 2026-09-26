@@ -45,11 +45,12 @@ typedef struct
 } Win;
 // SIZE 0x3cc
 
-extern Player g_7f4ca0[];
-extern Win g_1015f40[];
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
-extern Name14 g_7f4c00;
+extern pos14_7f4c00 g_7f4c00;
 extern int g_772514;
 extern int g_100f1dc;
 extern int g_67d370;
@@ -88,17 +89,17 @@ void __cdecl fcn_005c5b10(char* a)
 	dlg = fcn_00470820(0, 0, s_6ac738);
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 0);
-	g_1015f40[g_772514].x3a8 = 0xe;
-	g_1015f40[g_772514].x3ac = 0xe;
-	g_1015f40[g_772514].x3b0 = 0xe;
-	g_1015f40[g_772514].x3b4 = 0xe;
+	((Win*)g_1015f40)[g_772514].x3a8 = 0xe;
+	((Win*)g_1015f40)[g_772514].x3ac = 0xe;
+	((Win*)g_1015f40)[g_772514].x3b0 = 0xe;
+	((Win*)g_1015f40)[g_772514].x3b4 = 0xe;
 	fcn_004727a0(dlg, 1);
 	fcn_00519190(0x19a9);
 	fcn_004727a0(dlg, 2);
 	s = fcn_00519190(0x19aa, g_773d75);
 	sl = fcn_00472250(dlg, 2, s);
 	btn2 = fcn_00472250(dlg, 2, s + 1);
-	v = fcn_0050b710(gm_AccumulateTyped2(&g_7f4ca0[g_774970]), g_773d75) > 1000 ? 1000 : fcn_0050b710(gm_AccumulateTyped2(&g_7f4ca0[g_774970]), g_773d75);
+	v = fcn_0050b710(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75) > 1000 ? 1000 : fcn_0050b710(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75);
 	fcn_00472380(sl, 0x64, v, 0x64);
 	if (fcn_005373e0((void*) fcn_005c5b10, 0x677c7) != 0) {
 		do {
@@ -107,13 +108,13 @@ void __cdecl fcn_005c5b10(char* a)
 					v = fcn_0050b750(fcn_00471f80(sl), g_773d75);
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x38;
-					pkt.x8 = g_7f4ca0[g_774970].x4;
+					pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
 					pkt.xc = *(int*) (a + 1);
-					pkt.name = g_7f4c00;
+					pkt.name = (*(Name14*)&g_7f4c00);
 					pkt.x36 = 1;
 					pkt.x58 = v;
 					fcn_004c4eb0(s_6ac730);
-					fcn_004c5150(-1, g_7f4ca0[g_774970].x4, g_773d75, v);
+					fcn_004c5150(-1, ((Player*)g_7f4ca0)[g_774970].x4, g_773d75, v);
 					fcn_004c5530(&pkt);
 					fcn_004c4ef0(s_6ac730);
 					g_774654 = 1;

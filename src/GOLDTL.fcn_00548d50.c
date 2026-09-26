@@ -3,17 +3,8 @@
 // FUNCTION: GOLDTL 0x548d50
 // SIZE: 432
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	char pad0[4];
 	unsigned char kind;
@@ -21,7 +12,7 @@ struct msg {
 	int player;
 	int target;
 	char pad10[0x18];
-	struct pos14 when;
+	pos14_7f4c00 when;
 	unsigned char mode;
 	char pad37[0x21];
 	int who;
@@ -36,7 +27,7 @@ struct stats {
 	char pad1c[8];
 };
 
-extern struct pos14 g_7f4c00;
+extern pos14_7f4c00 g_7f4c00;
 extern char* g_773da8;
 extern float g_662a3c;
 extern float g_6629c0;

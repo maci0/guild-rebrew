@@ -27,7 +27,8 @@ typedef struct {
 } Kind5bfd;
 // SIZE 0x14
 
-extern Rec5bfd g_9a3800[];
+#include "client_types.h"
+extern Rec2d_9a3800 g_9a3800[512];
 extern Kind5bfd g_14aa314[];
 extern char g_6ac4c8[];
 extern int g_772514;
@@ -70,7 +71,7 @@ void __cdecl fcn_005bfdf0(unsigned short* who, unsigned short* e)
 		return;
 	}
 	for (i = 0; i < n; i++) {
-		recs[i] = g_9a3800[list[i]];
+		recs[i] = ((Rec5bfd*)g_9a3800)[list[i]];
 	}
 	fcn_004f6780(n, recs);
 	h = fcn_00470820(0, 0, g_6ac4c8);

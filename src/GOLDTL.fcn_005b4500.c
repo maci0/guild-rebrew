@@ -19,8 +19,9 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern Win g_1015f40[];
-extern Player g_7f4ca0[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char g_7f4ca0[];
 extern int g_14ce8e0;
 extern int g_774654;
 extern int g_772514;
@@ -48,9 +49,9 @@ void __cdecl fcn_005b4500(void)
 	int n;
 
 	w = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
-	fcn_00472900(g_1015f40[w].x27c, 0x54);
+	fcn_00472900(((Win*)g_1015f40)[w].x27c, 0x54);
 	if (fcn_005373e0((void*) fcn_005b4500, 0x657c7) != 0) {
-		win = &g_1015f40[w];
+		win = &((Win*)g_1015f40)[w];
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
@@ -58,12 +59,12 @@ void __cdecl fcn_005b4500(void)
 			g_772514 = w;
 			fcn_00519190(s_6811b0);
 			for (i = 0; i < 768; i++) {
-				if (g_7f4ca0[i].x0 != 0xffff) {
+				if (((Player*)g_7f4ca0)[i].x0 != 0xffff) {
 					n = 0;
-					for (e = fcn_00502cd0(g_7f4ca0[i].x178, 1, 5); e != 0; e = gm_NextEntityQueryMatch()) {
+					for (e = fcn_00502cd0(((Player*)g_7f4ca0)[i].x178, 1, 5); e != 0; e = gm_NextEntityQueryMatch()) {
 						if (fcn_005c61e0(*(unsigned short*) e) != 0 && *(int*) (e + 0x21) != 0) {
 							if (n == 0) {
-								fcn_00519190(s_6ab848, g_7f4ca0[i].name);
+								fcn_00519190(s_6ab848, ((Player*)g_7f4ca0)[i].name);
 								fcn_00519190(s_6ab834);
 							}
 							n++;

@@ -11,13 +11,14 @@ typedef struct {
 	char pad[0x214];
 } Slot5c0d;
 
-extern Slot5c0d g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_774654;
-extern int g_7f4c00;
-extern int g_7f4c04;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_6ac494[];
@@ -57,12 +58,12 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 	if (*obj == g_774970) {
 		return 0;
 	}
-	if (fcn_0055c140(&g_7f4ca0[g_774970], obj, &cnt) == 0) {
+	if (fcn_0055c140(&((Slot5c0d*)g_7f4ca0)[g_774970], obj, &cnt) == 0) {
 		fcn_0051af00(text, 0x190f, *obj);
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (fcn_00579640(obj, &g_7f4ca0[g_774970]) == 0) {
+	if (fcn_00579640(obj, &((Slot5c0d*)g_7f4ca0)[g_774970]) == 0) {
 		fcn_0051af00(text, 0x409f, *obj);
 		fcn_00526120(text, 0);
 		return 0;
@@ -72,7 +73,7 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (fcn_00525f60(&g_7f4ca0[g_774970], 1) == 0) {
+	if (fcn_00525f60(&((Slot5c0d*)g_7f4ca0)[g_774970], 1) == 0) {
 		return 0;
 	}
 	d = fcn_00470820(0, 0, g_6ac494);
@@ -100,10 +101,10 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 				gm_StartFilteredEntitySearch(1, 5, 0xa);
 				ev[4] = 0x35;
 				ev[0x36] = 2;
-				*(int*) (ev + 8) = g_7f4ca0[g_774970].f4;
-				*(int*) (ev + 0xc) = g_7f4ca0[g_774970].f4;
-				*(int*) (ev + 0x58) = g_7f4c00;
-				*(int*) (ev + 0x5c) = g_7f4c04;
+				*(int*) (ev + 8) = ((Slot5c0d*)g_7f4ca0)[g_774970].f4;
+				*(int*) (ev + 0xc) = ((Slot5c0d*)g_7f4ca0)[g_774970].f4;
+				*(int*) (ev + 0x58) = (*(int*)&g_7f4c00);
+				*(int*) (ev + 0x5c) = (*(int*)&g_7f4c04);
 				*(int*) (ev + 0x60) = g_7f4c08;
 				*(short*) (ev + 0x64) = g_7f4c0c;
 				ev[0x6d] = (char) fcn_0042e410(0x1d);

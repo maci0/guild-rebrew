@@ -15,7 +15,8 @@ typedef struct {
 } rec18;
 // SIZE 0x18
 
-extern rec18 g_9a9220[];
+#include "client_types.h"
+extern Rec18_68da68 g_9a9220[42];
 
 char* __cdecl fcn_00508e40(int);
 
@@ -26,14 +27,14 @@ int __cdecl fcn_004e82d0(unsigned char* m)
 	if (m[6] == 0xff)
 		return 1;
 	for (i = 0; i < 42; i++) {
-		if (g_9a9220[i].c0 == m[0])
+		if (((rec18*)g_9a9220)[i].c0 == m[0])
 			break;
 	}
 	if (i >= 42)
 		return 0;
-	if (g_9a9220[i].f10 != 1)
+	if (((rec18*)g_9a9220)[i].f10 != 1)
 		return 0;
-	if (g_9a9220[i].f14 != -1)
+	if (((rec18*)g_9a9220)[i].f14 != -1)
 		return 0;
 	if (*(int*) (m + 7) != -1 && fcn_00508e40(*(int*) (m + 7)) == 0)
 		return 0;

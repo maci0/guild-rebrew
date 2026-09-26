@@ -15,7 +15,8 @@ typedef struct Win0471c00 {
 } Win0471c00;
 // SIZE 0x3cc
 
-extern Win0471c00 g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_1015ea8;
 extern int g_1015eac;
 
@@ -27,7 +28,7 @@ void __cdecl fcn_00471c00(int k, unsigned char center)
 	int x;
 	int y;
 
-	w = &g_1015f40[k];
+	w = &((Win0471c00*)g_1015f40)[k];
 	if (center & 1) {
 		x = g_1015eac - w->width / 2;
 	} else {

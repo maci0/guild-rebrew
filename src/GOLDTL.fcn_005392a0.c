@@ -1,5 +1,6 @@
-extern int g_7f4c00;
-extern short g_7f4c04;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c06;
 
 // FUNCTION: GOLDTL 0x5392a0
@@ -29,8 +30,8 @@ void __cdecl fcn_005392a0(char* name, int net)
 	} else {
 		sprintf(path, "%s/%s.CTY", "gamedata/cities", name);
 	}
-	g_7f4c00 = 0;
-	g_7f4c04 = 6;
+	(*(int*)&g_7f4c00) = 0;
+	(*(short*)&g_7f4c04) = 6;
 	g_7f4c06 = 0;
 	fcn_0051e080(path, "city", 2);
 	gm_InitEntitySlots();

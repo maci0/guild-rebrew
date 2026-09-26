@@ -32,7 +32,8 @@ typedef struct
 } Set;
 // SIZE 0x38
 
-extern Slot170 g_7731b8[8];
+#include "client_types.h"
+extern Slot170_7731b8 g_7731b8[8];
 extern Set g_772ff8[8];
 
 Slot170* __cdecl fcn_004f0c90(int id);
@@ -54,6 +55,6 @@ void __cdecl fcn_004f0e40(int id, void* fn, void* ctx)
 		s->ctx = ctx;
 	} else {
 		s->fn = (void*) fcn_004ef250;
-		s->ctx = &g_772ff8[s - g_7731b8];
+		s->ctx = &g_772ff8[s - ((Slot170*)g_7731b8)];
 	}
 }

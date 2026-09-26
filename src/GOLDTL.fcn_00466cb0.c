@@ -1,28 +1,7 @@
 #include <stdio.h>
 
-typedef struct
-{
-	int idx;
-	int x;
-	int y;
-	int pad0c;
-	int w;
-	int h;
-	int max;
-	int f1c;
-	int pad20;
-	unsigned char digits;
-	char pad25[3];
-	int flags;
-	char pad2c[0x12c - 0x2c];
-	int f12c;
-	int used;
-	int ent;
-	int font;
-	int def;
-	int f140;
-	char pad144[0x160 - 0x144];
-} fcn_00466cb0_Fld;
+#include "client_types.h"
+typedef Fld_102d140 fcn_00466cb0_Fld;
 // SIZE 0x160
 
 typedef struct
@@ -39,9 +18,9 @@ typedef struct
 } fcn_00466cb0_Ent;
 // SIZE 0x2f4
 
-extern fcn_00466cb0_Fld g_102d140[];
-extern fcn_00466cb0_Def* g_772500;
-extern fcn_00466cb0_Ent* g_1015ea0;
+extern Fld_102d140 g_102d140[];
+extern char* g_772500;
+extern char* g_1015ea0;
 extern int g_1040490;
 extern int g_1040494;
 extern int g_67d398;
@@ -79,8 +58,8 @@ int __cdecl fcn_00466cb0(int x, int y, int def, unsigned char flags)
 	f->y = y;
 	f->def = def;
 	f->idx = i;
-	f->w = g_772500[def].w;
-	f->h = g_772500[def].h;
+	f->w = ((fcn_00466cb0_Def*)g_772500)[def].w;
+	f->h = ((fcn_00466cb0_Def*)g_772500)[def].h;
 	f->f1c = 0;
 	f->f12c = 0;
 	f->max = 999;
@@ -107,20 +86,20 @@ int __cdecl fcn_00466cb0(int x, int y, int def, unsigned char flags)
 		f->max = f->max > 0x19 ? f->max : 0x19;
 	}
 	id = fcn_00469890();
-	g_1015ea0[id].i[0x20 / 4] = 0x41;
-	g_1015ea0[id].i[0x10 / 4] = f->x;
-	g_1015ea0[id].i[0x14 / 4] = f->y;
-	g_1015ea0[id].i[0x18 / 4] = f->w;
-	g_1015ea0[id].i[0x1c / 4] = f->h;
-	g_1015ea0[id].i[0x8 / 4] = def;
-	g_1015ea0[id].i[0x88 / 4] = i;
-	g_1015ea0[id].i[0x24 / 4] = 2;
-	g_1015ea0[id].i[0x30 / 4] = 0;
-	g_1015ea0[id].i[0x34 / 4] = g_1040490;
-	g_1015ea0[id].i[0x28 / 4] = 0;
-	g_1015ea0[id].i[0x2c / 4] = g_1040494;
-	g_1015ea0[id].i[0xc / 4] = (int) f;
-	g_1015ea0[id].i[0x84 / 4] = g_67d398;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x20 / 4] = 0x41;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x10 / 4] = f->x;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x14 / 4] = f->y;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x18 / 4] = f->w;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x1c / 4] = f->h;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x8 / 4] = def;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x88 / 4] = i;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x24 / 4] = 2;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x30 / 4] = 0;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x34 / 4] = g_1040490;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x28 / 4] = 0;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x2c / 4] = g_1040494;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0xc / 4] = (int) f;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x84 / 4] = g_67d398;
 	f->ent = id;
 	return id;
 }

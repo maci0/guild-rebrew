@@ -2,12 +2,10 @@
 // SIZE: 95
 
 // SIZE 0x8
-typedef struct {
-	int owner;
-	int key;
-} Pair;
+#include "client_types.h"
+typedef Pair_99f800 Pair;
 
-extern Pair g_99f800[];
+extern Pair_99f800 g_99f800[0x800];
 
 /* The scan is a goto loop tested at the top: a for or while loop gives the
  * same instructions but lays the -1 exit out ahead of the shared epilogue. */

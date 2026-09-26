@@ -4,16 +4,11 @@
 // SIZE: 167
 
 // SIZE 0x188
-typedef struct {
-	int a[24];
-	int b[24];
-	int pad[2];
-	int c[24];
-	int d[24];
-} Tabs;
+#include "client_types.h"
+typedef Tabs_7e43a8 Tabs;
 
 extern int g_7e4530;
-extern Tabs g_7e43a8;
+extern Tabs_7e43a8 g_7e43a8;
 
 unsigned int __cdecl fcn_00430910(void* p, int size, int n, int f);
 int __cdecl fcn_005e8c00(int f);

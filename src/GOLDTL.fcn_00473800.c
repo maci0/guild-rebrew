@@ -36,13 +36,14 @@ extern int g_67d964;
 extern int g_7725f8;
 extern int g_67d968;
 extern int g_67d8cc;
-extern int g_7725c4;
-extern int g_7725c0;
-extern Slot g_100e7a0[];
+extern short g_7725c4;
+extern char* g_7725c0;
+#include "client_types.h"
+extern Anim_100e7a0 g_100e7a0[0x30];
 extern int g_67d378;
 extern int g_67d398;
-extern Item g_1011980[6];
-extern Cls* g_772500;
+extern Pair0c_1011980 g_1011980[6];
+extern char* g_772500;
 extern int g_67d3ac;
 extern int g_1015ea4;
 extern int g_772568;
@@ -85,19 +86,19 @@ void __cdecl fcn_00473800(Ctx* c, int x, int y)
 	y1 = g_67d968;
 	fcn_0047a040(0, 0, c->w, c->h);
 	if (g_67d8cc == -1) {
-		fcn_0047cba0(x, y, c, g_7725c0, g_7725c4 & 0xffff);
+		fcn_0047cba0(x, y, c, (*(int*)&g_7725c0), (*(int*)&g_7725c4) & 0xffff);
 	} else {
-		g_100e7a0[g_67d8cc].x = (short) x;
-		g_100e7a0[g_67d8cc].y = (short) y;
+		((Slot*)g_100e7a0)[g_67d8cc].x = (short) x;
+		((Slot*)g_100e7a0)[g_67d8cc].y = (short) y;
 		fcn_0047cd70(g_67d8cc, c);
 	}
 	old = g_67d378;
 	fcn_00472880(g_67d398 + 1);
 	k = 0;
 	for (i = 0; i < 6; i++) {
-		p = &g_1011980[i];
+		p = &((Item*)g_1011980)[i];
 		if (p->id != -1) {
-			px = x + g_772500[g_67d3ac].x50 + k % 3 * 0x1a;
+			px = x + ((Cls*)g_772500)[g_67d3ac].x50 + k % 3 * 0x1a;
 			py = (g_1015ea4 + 0x1a) * (k / 3) + y;
 			h = fcn_00466190(p->id);
 			if (fcn_0047cc80(px, py, c, h, g_772568, 0.5f, 0)) {

@@ -1,11 +1,12 @@
 #include <string.h>
 
 extern char* g_6b5c20;
-extern int g_14d0c40[0x4c0];
-extern int g_14d0020[0x300];
+#include "client_types.h"
+extern Entry_14d0c40 g_14d0c40[];
+extern void* g_14d0020[];
 extern int g_1551f40[0x30];
-extern int g_6b5c5c;
-extern char g_6b5c60;
+extern void* g_6b5c5c;
+extern char g_6b5c60[];
 
 int __cdecl fcn_00406280();
 int __cdecl fcn_00406410();
@@ -40,27 +41,27 @@ int __cdecl fcn_0040bde0(void)
 	if (g_6b5c20 == 0) {
 		return 0;
 	}
-	memset(g_14d0c40, 0, sizeof(g_14d0c40));
-	memset(g_14d0020, 0, sizeof(g_14d0020));
+	memset(((int*)g_14d0c40), 0, sizeof(int[0x4c0]));
+	memset(((int*)g_14d0020), 0, sizeof(int[0x300]));
 	fcn_00406210(7, fcn_004079f0, 1, "bewegung/dreh_90_rechts", 2);
-	fcn_00406210(0, fcn_004079d0, 1, &g_6b5c60, 0);
-	fcn_00406210(23, fcn_00406280, 1, &g_6b5c60, 0);
+	fcn_00406210(0, fcn_004079d0, 1, &(*(char*)g_6b5c60), 0);
+	fcn_00406210(23, fcn_00406280, 1, &(*(char*)g_6b5c60), 0);
 	fcn_00406210(45, fcn_0040a600, 1, "bewegung/gehen", 3);
 	fcn_00406210(58, fcn_0040aa00, 1, "bewegung/gehen", 3);
-	fcn_00406210(57, fcn_0040b7f0, 1, &g_6b5c60, 1);
-	fcn_00406210(46, fcn_00406280, 1, &g_6b5c60, 1);
-	fcn_00406210(47, fcn_00406410, 1, &g_6b5c60, 0);
-	fcn_00406210(48, fcn_004065c0, 1, &g_6b5c60, 0);
-	fcn_00406210(49, fcn_004068e0, 1, &g_6b5c60, 0);
-	fcn_00406210(50, fcn_00406b50, 1, &g_6b5c60, 0);
-	fcn_00406210(51, fcn_00407390, 1, &g_6b5c60, 3);
-	fcn_00406210(53, fcn_00406db0, 1, &g_6b5c60, 1);
-	fcn_00406210(54, fcn_00406e70, 1, &g_6b5c60, 0);
-	fcn_00406210(55, fcn_0040ba00, 1, &g_6b5c60, 1);
-	fcn_00406210(56, fcn_0040ba30, 1, &g_6b5c60, 1);
-	fcn_00406210(59, fcn_0040bd80, 1, &g_6b5c60, 1);
-	fcn_00406210(52, fcn_004066d0, 1, &g_6b5c60, 5);
+	fcn_00406210(57, fcn_0040b7f0, 1, &(*(char*)g_6b5c60), 1);
+	fcn_00406210(46, fcn_00406280, 1, &(*(char*)g_6b5c60), 1);
+	fcn_00406210(47, fcn_00406410, 1, &(*(char*)g_6b5c60), 0);
+	fcn_00406210(48, fcn_004065c0, 1, &(*(char*)g_6b5c60), 0);
+	fcn_00406210(49, fcn_004068e0, 1, &(*(char*)g_6b5c60), 0);
+	fcn_00406210(50, fcn_00406b50, 1, &(*(char*)g_6b5c60), 0);
+	fcn_00406210(51, fcn_00407390, 1, &(*(char*)g_6b5c60), 3);
+	fcn_00406210(53, fcn_00406db0, 1, &(*(char*)g_6b5c60), 1);
+	fcn_00406210(54, fcn_00406e70, 1, &(*(char*)g_6b5c60), 0);
+	fcn_00406210(55, fcn_0040ba00, 1, &(*(char*)g_6b5c60), 1);
+	fcn_00406210(56, fcn_0040ba30, 1, &(*(char*)g_6b5c60), 1);
+	fcn_00406210(59, fcn_0040bd80, 1, &(*(char*)g_6b5c60), 1);
+	fcn_00406210(52, fcn_004066d0, 1, &(*(char*)g_6b5c60), 5);
 	memset(g_1551f40, 0, sizeof(g_1551f40));
-	g_6b5c5c = fcn_00408220(60.0f);
+	(*(int*)&g_6b5c5c) = fcn_00408220(60.0f);
 	return 1;
 }

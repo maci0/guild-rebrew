@@ -12,10 +12,8 @@ typedef struct {
 #pragma pack()
 
 // SIZE 0x8
-typedef struct {
-	int owner;
-	int key;
-} Pair;
+#include "client_types.h"
+typedef Pair_99f800 Pair;
 
 // SIZE 0x21c
 typedef struct {
@@ -26,9 +24,9 @@ typedef struct {
 	char pad8[0x21c - 8];
 } Obj;
 
-extern Order g_9a3800[];
-extern Pair g_99f800[];
-extern Obj g_7f4ca0[];
+extern Rec2d_9a3800 g_9a3800[512];
+extern Pair_99f800 g_99f800[0x800];
+extern char g_7f4ca0[];
 
 char* __cdecl fcn_00508e40(int id);
 void __cdecl fcn_004c5870(int id, int v);
@@ -53,9 +51,9 @@ int __cdecl fcn_004f5f30(int target, int count, int* ids)
 	m = 0;
 	if (p != 0) {
 		for (k = 0; k < 768 && m < 8; k++) {
-			if ((g_7f4ca0[k].type == 6 || g_7f4ca0[k].type == 7) && g_7f4ca0[k].owner != target) {
+			if ((((Obj*)g_7f4ca0)[k].type == 6 || ((Obj*)g_7f4ca0)[k].type == 7) && ((Obj*)g_7f4ca0)[k].owner != target) {
 				flag[m] = 0;
-				who[m] = (char*) &g_7f4ca0[k];
+				who[m] = (char*) &((Obj*)g_7f4ca0)[k];
 				m++;
 			}
 		}
@@ -64,7 +62,7 @@ int __cdecl fcn_004f5f30(int target, int count, int* ids)
 		id = ids[i];
 		found = 0;
 		for (j = 0; j < 512; j++) {
-			if (g_9a3800[j].id == id) {
+			if (((Order*)g_9a3800)[j].id == id) {
 				found = 1;
 				break;
 			}

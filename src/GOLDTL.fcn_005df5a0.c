@@ -19,8 +19,9 @@ typedef struct {
 	char p37[0xc1];
 } Msg;
 
-extern int g_7f4c00;
-extern int g_7f4c04;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
@@ -33,8 +34,8 @@ int __cdecl fcn_005df5a0(char* a1)
 	msg.kind = 0xa4;
 	msg.owner = *(int*) (a1 + 4);
 	msg.entity = -1;
-	msg.a = g_7f4c00;
-	msg.b = g_7f4c04;
+	msg.a = (*(int*)&g_7f4c00);
+	msg.b = (*(int*)&g_7f4c04);
 	msg.c = g_7f4c08;
 	msg.d = g_7f4c0c;
 	msg.flag = 1;

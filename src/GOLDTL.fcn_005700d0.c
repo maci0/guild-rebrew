@@ -3,16 +3,6 @@
 // FUNCTION: GOLDTL 0x5700d0
 // SIZE: 241
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x10
 struct step {
 	int when;
@@ -31,11 +21,12 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct pos14 g_7f4c00;
-extern struct step g_77e0a0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_77e0a0[];
 extern char g_776709;
 extern unsigned short g_774970;
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern char* g_14a5320[];
 
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
@@ -51,19 +42,19 @@ void __cdecl fcn_005700d0(char* u)
 		fcn_00546190(u);
 		break;
 	case 0:
-		t = g_77e0a0[*(int*) (u + 0xac)].msg;
+		t = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].msg;
 		if (t != 0 && t != -1 && g_776709 != 0) {
-			fcn_00545d40(g_7f4ca0[g_774970].owner, -1, g_14a5320[t], 0x40, 0x5f9, 0);
+			fcn_00545d40(((struct house*)g_7f4ca0)[g_774970].owner, -1, g_14a5320[t], 0x40, 0x5f9, 0);
 		}
 		(*(int*) (u + 0xac))++;
-		if (g_77e0a0[*(int*) (u + 0xac)].msg == 0) {
+		if (((struct step*)g_77e0a0)[*(int*) (u + 0xac)].msg == 0) {
 			*(int*) (u + 0x70) = 1;
 			return;
 		}
-		*(struct pos14*) (u + 0x52) = g_7f4c00;
-		*(int*) (u + 0x52) = g_77e0a0[*(int*) (u + 0xac)].when;
-		*(short*) (u + 0x56) = g_77e0a0[*(int*) (u + 0xac)].dur;
-		*(int*) (u + 0x58) = g_77e0a0[*(int*) (u + 0xac)].arg;
+		*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+		*(int*) (u + 0x52) = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].when;
+		*(short*) (u + 0x56) = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].dur;
+		*(int*) (u + 0x58) = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].arg;
 		break;
 	}
 }

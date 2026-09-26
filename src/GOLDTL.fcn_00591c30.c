@@ -18,7 +18,8 @@ typedef struct {
 } Ent591c;
 // SIZE 0xc
 
-extern Ent591c g_779d00[11];
+#include "client_types.h"
+extern Slot_779d00 g_779d00[];
 
 // FUNCTION: GOLD 0x5896e0
 // SIZE: 63
@@ -29,12 +30,12 @@ void __cdecl fcn_00591c40(void)
 {
 	int i;
 
-	memset(g_779d00, 0, sizeof(g_779d00));
+	memset(((Ent591c*)g_779d00), 0, sizeof(Ent591c[11]));
 	for (i = 0; i < 11; i++) {
-		g_779d00[i].c = (char) (i + 0x3b);
+		((Ent591c*)g_779d00)[i].c = (char) (i + 0x3b);
 		if (i == 10) {
-			g_779d00[10].c = 0x57;
+			((Ent591c*)g_779d00)[10].c = 0x57;
 		}
-		fcn_00591c30((char*) &g_779d00[i]);
+		fcn_00591c30((char*) &((Ent591c*)g_779d00)[i]);
 	}
 }

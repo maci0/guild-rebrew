@@ -1,16 +1,5 @@
-
-
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 // SIZE 0xf8
 struct msg {
@@ -20,7 +9,7 @@ struct msg {
 	int f8;
 	int fc;
 	char pad2[0x18];
-	struct pos14 pos;
+	pos14_7f4c00 pos;
 	char b36;
 	char pad3[0x21];
 	char b58;
@@ -35,19 +24,19 @@ struct msg {
 // SIZE: 182
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
 void __cdecl fcn_0054e2d0(char* o)
 {
 	if (o[0x78] & 2) {
 		if (gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac)) == 0) {
-			*(struct pos14*) (o + 0x52) = g_7f4c00;
-			fcn_00500bb0((struct pos14*) (o + 0x52), 0, 0, 1);
+			*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+			fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 			*(int*) (o + 0x84) = fcn_004c5620(-1, o);
 		}
-		*(struct pos14*) (o + 0x52) = g_7f4c00;
-		fcn_00500bb0((struct pos14*) (o + 0x52), 0, 0, 1);
+		*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 		*(int*) (o + 0x84) = fcn_004c5620(0, o);
 	}
 }

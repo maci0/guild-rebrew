@@ -26,7 +26,8 @@ typedef struct
 // SIZE 0x38
 
 extern int g_772514;
-extern Win g_f8f120[];
+#include "client_types.h"
+extern Win_f8f120 g_f8f120[];
 extern int g_14aadc0[];
 
 int __cdecl fcn_005cc240(int, int, int);
@@ -47,7 +48,7 @@ int __cdecl fcn_005c07a0(int a1, int a2, int a3, unsigned int n, Item* items)
 		return 0;
 	}
 	y = fcn_005cc240(a1, a2, a3);
-	half = g_f8f120[g_772514].x8 / 2;
+	half = ((Win*)g_f8f120)[g_772514].x8 / 2;
 	fcn_0051af00(buf, 0x16a7, items[0].x34 + 0x253);
 	fcn_005c9090((int) buf, half, 8, half * 2, 0x55);
 	for (i = 0; i < n; i++) {
@@ -57,7 +58,7 @@ int __cdecl fcn_005c07a0(int a1, int a2, int a3, unsigned int n, Item* items)
 		fcn_005c9160(g_14aadc0[items[i].x2c], 0x14a, i * 0x70 + 0x28 + 0x1e, 200, 0x55);
 	}
 	fcn_005cc2f0(n, items);
-	g_f8f120[g_772514].x248 = y;
-	g_f8f120[g_772514].x264 = 0x70;
+	((Win*)g_f8f120)[g_772514].x248 = y;
+	((Win*)g_f8f120)[g_772514].x264 = 0x70;
 	return 1;
 }

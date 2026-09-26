@@ -5,17 +5,8 @@
 
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	char pad0[4];
 	unsigned char kind;
@@ -23,7 +14,7 @@ struct msg {
 	int owner;
 	int target;
 	char pad10[0x18];
-	struct pos14 when;
+	pos14_7f4c00 when;
 	unsigned char code;
 	char pad37[0x21];
 	int who;
@@ -44,8 +35,8 @@ struct house {
 	char pad170[0xac];
 };
 
-extern struct pos14 g_7f4c00;
-extern struct house g_7f4ca0[768];
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 
 void __cdecl fcn_004c5530(struct msg*);
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -63,9 +54,9 @@ void __cdecl fcn_0057c170(struct house* a, struct house* b)
 
 	h = 0;
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].type == 0 && g_7f4ca0[i].site != 0 && g_7f4ca0[i].trade == 0
-		    && *(unsigned short*) (g_7f4ca0[i].site + 0x27) == b->id) {
-			h = &g_7f4ca0[i];
+		if (((struct house*)g_7f4ca0)[i].type == 0 && ((struct house*)g_7f4ca0)[i].site != 0 && ((struct house*)g_7f4ca0)[i].trade == 0
+		    && *(unsigned short*) (((struct house*)g_7f4ca0)[i].site + 0x27) == b->id) {
+			h = &((struct house*)g_7f4ca0)[i];
 			break;
 		}
 	}

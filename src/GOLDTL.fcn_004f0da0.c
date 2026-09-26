@@ -24,7 +24,8 @@ typedef struct
 } Slot170;
 // SIZE 0x170
 
-extern Slot170 g_7731b8[8];
+#include "client_types.h"
+extern Slot170_7731b8 g_7731b8[8];
 extern unsigned char* g_868050;
 
 void __cdecl fcn_005015e0(unsigned char** out, int a, int b, int id);
@@ -36,10 +37,10 @@ void __cdecl fcn_004f0da0(void)
 	unsigned char* r;
 
 	for (i = 0; i < 8; i++) {
-		if (g_7731b8[i].id != -1) {
-			fcn_005015e0(&r, 0, 0, g_7731b8[i].id);
-			if ((r == 0 && g_7731b8[i].flags == 0) || (g_868050[*r * 0x24d] != 0x1e && g_7731b8[i].flags == 0)) {
-				fcn_004f0930(g_7731b8[i].id);
+		if (((Slot170*)g_7731b8)[i].id != -1) {
+			fcn_005015e0(&r, 0, 0, ((Slot170*)g_7731b8)[i].id);
+			if ((r == 0 && ((Slot170*)g_7731b8)[i].flags == 0) || (g_868050[*r * 0x24d] != 0x1e && ((Slot170*)g_7731b8)[i].flags == 0)) {
+				fcn_004f0930(((Slot170*)g_7731b8)[i].id);
 			}
 		}
 	}

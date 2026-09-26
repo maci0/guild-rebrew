@@ -1,9 +1,5 @@
-typedef struct {
-	int state;
-	int flag;
-	int c;
-	int d;
-} fcn_004a7af0_slot;
+#include "client_types.h"
+typedef slot_1007ce8 fcn_004a7af0_slot;
 // SIZE 0x10
 
 typedef struct {
@@ -12,7 +8,7 @@ typedef struct {
 	int last;
 } fcn_004a7af0_obj;
 
-extern fcn_004a7af0_slot g_1007ce8[];
+extern slot_1007ce8 g_1007ce8[];
 
 int __cdecl fcn_004a7880(int);
 

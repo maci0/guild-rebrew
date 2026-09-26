@@ -3,21 +3,12 @@
 // FUNCTION: GOLDTL 0x4ea460
 // SIZE: 79
 
-typedef struct
-{
-	unsigned char id;
-	char pad1[3];
-	int x4;
-	unsigned char type;
-	char pad9[3];
-	int xc;
-	unsigned char x10;
-	char pad11[7];
-} Rec18;
+#include "client_types.h"
+typedef Rec18_68da68 Rec18;
 // SIZE 0x18
 
-extern Rec18 g_9a9220[42];
-extern Rec18 g_68da68[];
+extern Rec18_68da68 g_9a9220[42];
+extern Rec18_68da68 g_68da68[];
 
 void* __cdecl fcn_00508e40(int);
 

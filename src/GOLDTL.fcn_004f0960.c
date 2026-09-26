@@ -3,16 +3,11 @@
 // FUNCTION: GOLDTL 0x4f0960
 // SIZE: 88
 
-typedef struct
-{
-	int id;
-	char pad[0x158];
-	int h[3];
-	char tail[8];
-} Slot170;
+#include "client_types.h"
+typedef Slot170_7731b8 Slot170;
 // SIZE 0x170
 
-extern Slot170 g_7731b8[8];
+extern Slot170_7731b8 g_7731b8[8];
 
 int __cdecl fcn_004f0960(int id)
 {

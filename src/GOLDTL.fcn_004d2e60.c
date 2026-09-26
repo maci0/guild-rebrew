@@ -6,7 +6,8 @@
 extern int g_7725c8;
 extern int g_774930;
 extern int g_7e46ac;
-extern char g_7f4c00[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char g_68bd68[];
 extern char g_68bd54[];
 extern char g_68bd44[];
@@ -43,7 +44,7 @@ void __cdecl fcn_004d2e60(void)
 	}
 	g_7e46ac = 0x7d6c6;
 	fcn_00536bb0();
-	fcn_0052a960(g_7f4c00);
+	fcn_0052a960(((char*)&g_7f4c00));
 	p = fcn_00426fd0(g_68bcec);
 	if (p != 0) {
 		fcn_00428230(p);

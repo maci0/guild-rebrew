@@ -6,17 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0xf8
+#include "client_types.h"
 struct msg {
 	int f0;
 	char b4;
@@ -24,7 +15,7 @@ struct msg {
 	int f8;
 	int fc;
 	char pad10[0x18];
-	struct pos14 pos;
+	pos14_7f4c00 pos;
 	char b36;
 	char pad37[0x39];
 	int f70;
@@ -37,12 +28,12 @@ typedef struct {
 	char pad0[8];
 	unsigned short w8;
 	char pada[0x48];
-	struct pos14 pos52;
+	pos14_7f4c00 pos52;
 	char pad60[0x10];
 	int f70;
 	char pad74[0x50];
 	int fc4;
-	struct pos14 posc8;
+	pos14_7f4c00 posc8;
 } Obj;
 #pragma pack()
 
@@ -53,8 +44,8 @@ typedef struct {
 	char pad8[0x214];
 } House;
 
-extern struct pos14 g_7f4c00;
-extern House g_7f4ca0[];
+extern pos14_7f4c00 g_7f4c00;
+extern char g_7f4ca0[];
 extern char s_6acd1c[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
@@ -109,7 +100,7 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 				p->pos52 = g_7f4c00;
 				p->posc8 = g_7f4c00;
 				fcn_004c5620(p->f70, p);
-				m.f70 = g_7f4ca0[p->w8].f4;
+				m.f70 = ((House*)g_7f4ca0)[p->w8].f4;
 				fcn_004c5530(&m);
 			}
 		}
@@ -142,7 +133,7 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 							p->pos52 = g_7f4c00;
 							found |= 1;
 							fcn_004c5620(0, p);
-							m.f70 = g_7f4ca0[p->w8].f4;
+							m.f70 = ((House*)g_7f4ca0)[p->w8].f4;
 							fcn_004c5530(&m);
 							fcn_0051af00(t, 0x1db9, p->w8);
 							t = text + strlen(text);

@@ -47,10 +47,11 @@ typedef struct
 } Shop;
 // SIZE 0x24d
 
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
-extern Name14 g_7f4c00;
-extern Shop* g_868050;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned char* g_868050;
 extern int g_772514;
 extern int g_100f1dc;
 extern int g_67d370;
@@ -122,10 +123,10 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 				if (p == 0) {
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 7;
-					pkt.x8 = g_7f4ca0[g_774970].x4;
+					pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
 					pkt.xc = *(int*) (obj + 1);
 					pkt.x36 = 1;
-					pkt.name = g_7f4c00;
+					pkt.name = (*(Name14*)&g_7f4c00);
 					pkt.x5c = 1;
 					if (gm_CheckEntityType(obj) != 0) {
 						pkt.x60 = -1;
@@ -135,7 +136,7 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 					}
 					pkt.x58 = 0;
 					fcn_004c5530(&pkt);
-					fcn_0051af00(buf, 0x1939, g_868050[obj[0]].x223 + 0x130);
+					fcn_0051af00(buf, 0x1939, ((Shop*)g_868050)[obj[0]].x223 + 0x130);
 					fcn_00473660();
 					fcn_00526120(buf, 0);
 				}

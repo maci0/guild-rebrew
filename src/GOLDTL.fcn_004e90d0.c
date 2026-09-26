@@ -13,7 +13,8 @@ typedef struct {
 	int f;
 } fcn_004e90d0_E;
 
-extern char g_9a9220[];
+#include "client_types.h"
+extern Rec18_68da68 g_9a9220[42];
 char* __cdecl fcn_00508e40(int);
 
 char* __cdecl fcn_004e90d0(int a1)

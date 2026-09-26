@@ -32,9 +32,11 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Obj g_1038140[];
-extern Win g_1015f40[];
-extern Slot* g_1015ea0;
+#include "client_types.h"
+extern Obj_1038140 g_1038140[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 extern int g_1015ea8;
 extern int g_1015eac;
 
@@ -48,10 +50,10 @@ void __cdecl fcn_00471b60(int k)
 	Win* w;
 	int i;
 
-	o = &g_1038140[k];
+	o = &((Obj*)g_1038140)[k];
 	for (i = 0; i < o->count; i++) {
-		w = &g_1015f40[o->wins[i]];
-		if (g_1015ea0[w->slot].link == 0) {
+		w = &((Win*)g_1015f40)[o->wins[i]];
+		if (((Slot*)g_1015ea0)[w->slot].link == 0) {
 			fcn_00469c40(g_1015eac - w->width / 2, g_1015ea8 - w->height / 2, w->slot);
 		}
 	}

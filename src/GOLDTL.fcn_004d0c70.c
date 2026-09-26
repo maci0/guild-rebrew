@@ -40,12 +40,13 @@ typedef struct Game {
 } Game;
 
 extern Entry g_9b4840[6];
-extern char* g_7e4260[0x20];
-extern Game* g_772f24;
+extern char* g_7e4260[32];
+extern unsigned short* g_772f24;
 extern int g_772514;
-extern char g_6b5c60;
-extern Slot* g_1015ea0;
-extern Win g_1015f40[];
+extern char g_6b5c60[];
+extern char* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 
 int __cdecl fcn_004cef70(int a1, char* a2);
 int __cdecl fcn_00469c30(int x, int y, int a3);
@@ -80,27 +81,27 @@ void __cdecl fcn_004d0c70(void)
 			break;
 		}
 		u = g_7e4260[i];
-		if (u != 0 && (fcn_004cef70(g_772f24->id, u) & 0x800) != 0) {
+		if (u != 0 && (fcn_004cef70(((Game*)g_772f24)->id, u) & 0x800) != 0) {
 			g_9b4840[k].frame = fcn_00469c30(k * 0x80 + 0x18, 0xf, 0x5da);
 			g_9b4840[k].win = fcn_0046e940(k * 0x80, 0, 0x80, 0x4b, 0x110);
 			name = fcn_004ce610(u);
 			if (name != 0 && *name != 0) {
 				g_9b4840[k].name = fcn_0046f740(0x54, 0xf, (int) (*name + 0xdf), g_772514);
 				fcn_00472680(g_9b4840[k].name, -2);
-				g_9b4840[k].label = fcn_0046fac0(0x54, 0x26, &g_6b5c60, g_772514);
-				g_1015ea0[g_9b4840[k].label].color = 0x54;
-				g_1015ea0[g_9b4840[k].label].h = 0x18;
-				g_1015ea0[g_9b4840[k].label].centered = 1;
+				g_9b4840[k].label = fcn_0046fac0(0x54, 0x26, &(*(char*)g_6b5c60), g_772514);
+				((Slot*)g_1015ea0)[g_9b4840[k].label].color = 0x54;
+				((Slot*)g_1015ea0)[g_9b4840[k].label].h = 0x18;
+				((Slot*)g_1015ea0)[g_9b4840[k].label].centered = 1;
 			}
 			g_9b4840[k].unit = u;
-			g_1015f40[g_9b4840[k].win].border = 0;
-			g_1015f40[g_9b4840[k].win].color = 0x54;
+			((Win*)g_1015f40)[g_9b4840[k].win].border = 0;
+			((Win*)g_1015f40)[g_9b4840[k].win].color = 0x54;
 			g_9b4840[k].icon = fcn_0046f740(0x28, 0x11, *(int*) (u + 0x18c), g_772514);
-			g_1015ea0[g_9b4840[k].icon].shadow = 1;
-			g_9b4840[k].text = fcn_0046fac0(0, 0, &g_6b5c60, g_772514);
-			g_1015ea0[g_9b4840[k].text].color = 0x54;
-			g_1015ea0[g_9b4840[k].text].h = 0x80;
-			g_1015ea0[g_9b4840[k].text].centered = 1;
+			((Slot*)g_1015ea0)[g_9b4840[k].icon].shadow = 1;
+			g_9b4840[k].text = fcn_0046fac0(0, 0, &(*(char*)g_6b5c60), g_772514);
+			((Slot*)g_1015ea0)[g_9b4840[k].text].color = 0x54;
+			((Slot*)g_1015ea0)[g_9b4840[k].text].h = 0x80;
+			((Slot*)g_1015ea0)[g_9b4840[k].text].centered = 1;
 			v = fcn_00507e30((int) u, 3);
 			fcn_00534160(0x24, 0x41, v, 0x4df);
 			k++;

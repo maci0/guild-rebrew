@@ -3,7 +3,8 @@
 // FUNCTION: GOLD 0x004e58e0
 // SIZE: 159
 
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char g_68d8a8[];
 extern char g_68d870[];
 extern char g_68d780[];
@@ -23,7 +24,7 @@ void __cdecl fcn_004e73f0(unsigned char* e, char* out)
 		name = g_68d870;
 	else
 		name = g_68d780 + e[2] * 0x18;
-	fcn_0064d41a(out, g_68d8a8, g_7f4c00, *(int*) (e + 4), *(unsigned short*) e, name, e + 0x30, e[8],
+	fcn_0064d41a(out, g_68d8a8, (*(int*)&g_7f4c00), *(int*) (e + 4), *(unsigned short*) e, name, e + 0x30, e[8],
 	    g_14a6544[e[9]], *(unsigned short*) (e + 0xa), g_14a6538[e[0xc]], g_14a5770[e[0xd]], g_14a57e0[e[0x164]],
 	    g_14a5b54[e[0x165]]);
 }

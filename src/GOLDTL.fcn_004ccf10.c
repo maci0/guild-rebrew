@@ -1,4 +1,5 @@
-extern int g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern unsigned short g_774970;
 extern char g_7f4ca0[];
 
@@ -35,11 +36,11 @@ int __cdecl fcn_004ccf10(int cmd, char* result)
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
-		if (g_7f4c00 - *(int*) ((char*) entity + 0x28) > 1) {
+		if ((*(int*)&g_7f4c00) - *(int*) ((char*) entity + 0x28) > 1) {
 			*(int*) ((char*) entity + 0x1c) = -1;
 			*(int*) ((char*) entity + 0x20) = -1;
 			*(int*) ((char*) entity + 0x24) = -1;
-			*(int*) ((char*) entity + 0x28) = g_7f4c00 - 1;
+			*(int*) ((char*) entity + 0x28) = (*(int*)&g_7f4c00) - 1;
 		}
 		else {
 			return 1;

@@ -1,9 +1,6 @@
 // SIZE 0xc
-typedef struct {
-	float x;
-	float y;
-	float z;
-} Vec3;
+#include "client_types.h"
+typedef Vec3_67bbdc Vec3;
 
 // SIZE 0xc
 typedef struct {
@@ -29,15 +26,15 @@ typedef struct {
 
 extern int g_6b7fdc;
 extern int g_6b8484;
-extern Vec3 g_67bbdc;
-extern Vec3 g_6b86c4;
-extern Cfg* g_67a370;
+extern Vec3_67bbdc g_67bbdc;
+extern Vec3_67bbdc g_6b86c4;
+extern int g_67a370;
 extern int g_6b805c;
 extern float g_10425fc;
 extern float g_104329c;
-extern Slot g_1041d80[];
-extern void* g_1043254;
-extern char g_1042340;
+extern char g_1041d80[];
+extern char* g_1043254;
+extern char g_1042340[];
 extern int g_6b8300;
 
 void* __cdecl fcn_0042ff50(const char*, const char*, int);
@@ -75,32 +72,32 @@ void __cdecl fcn_00446f70(const char* name, void* stream)
 	fcn_00401260(s, 0.0f);
 	fcn_004012f0(s, &g_67bbdc);
 	fcn_004012f0(s, &g_6b86c4);
-	fcn_00401360(s, g_67a370->xb4);
+	fcn_00401360(s, ((Cfg*)g_67a370)->xb4);
 	fcn_00401360(s, g_6b805c);
 	fcn_00401260(s, g_10425fc);
 	fcn_00401260(s, g_104329c);
 	for (i = 0; i < 7; i++) {
-		fcn_004012f0(s, &g_1041d80[i].a);
-		fcn_004012f0(s, &g_1041d80[i].b);
+		fcn_004012f0(s, &((Slot*)g_1041d80)[i].a);
+		fcn_004012f0(s, &((Slot*)g_1041d80)[i].b);
 		for (k = 0; k < 6; k++) {
-			fcn_00401360(s, g_1041d80[i].pal[k].color);
-			fcn_00401260(s, g_1041d80[i].pal[k].f4);
-			fcn_00401260(s, g_1041d80[i].pal[k].f8);
+			fcn_00401360(s, ((Slot*)g_1041d80)[i].pal[k].color);
+			fcn_00401260(s, ((Slot*)g_1041d80)[i].pal[k].f4);
+			fcn_00401260(s, ((Slot*)g_1041d80)[i].pal[k].f8);
 		}
 	}
 	n = 0;
-	for (p = g_1043254; p != &g_1042340; p = fcn_00437890(p)) {
+	for (p = ((void*)g_1043254); p != &(*(char*)g_1042340); p = fcn_00437890(p)) {
 		n++;
 	}
 	fcn_00401360(s, n);
-	for (p = g_1043254; p != &g_1042340; p = fcn_00437890(p)) {
+	for (p = ((void*)g_1043254); p != &(*(char*)g_1042340); p = fcn_00437890(p)) {
 		fcn_00446540(s, p);
 	}
 	fcn_00401210(s, g_6b8300 != 0);
 	if (g_6b8300 != 0) {
 		fcn_004469e0(s, g_6b8300);
 	}
-	fcn_0043b740(s, g_67a370->x3c8);
+	fcn_0043b740(s, ((Cfg*)g_67a370)->x3c8);
 	if (stream == 0) {
 		CloseVfsStream(s);
 	}

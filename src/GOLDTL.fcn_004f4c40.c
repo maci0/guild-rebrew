@@ -31,11 +31,12 @@ typedef struct
 	int b;
 } fcn_004f4c40_Pair;
 
-extern fcn_004f4c40_Slot g_68ff80[];
+#include "client_types.h"
+extern Slot_68ff80 g_68ff80[29];
 extern int g_773d38;
 extern int g_6a23ac;
-extern fcn_004f4c40_Rec g_9a3800[];
-extern fcn_004f4c40_Pair g_99f800[];
+extern Rec2d_9a3800 g_9a3800[512];
+extern Pair_99f800 g_99f800[0x800];
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 
@@ -57,7 +58,7 @@ int __cdecl fcn_004f4c40(void* f)
 	if (ver != 0x1d)
 		return 0;
 	for (i = 0; i < 0x1d; i++) {
-		if (ls_ReadVfsDataChecked(&g_68ff80[i].id, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Slot*)g_68ff80)[i].id, 4, 1, f) == 0)
 			return 0;
 	}
 	if (ls_ReadVfsDataChecked(&g_773d38, 4, 1, f) == 0)
@@ -69,37 +70,37 @@ int __cdecl fcn_004f4c40(void* f)
 			return 0;
 	}
 	for (i = 0; i < n1; i++) {
-		if (ls_ReadVfsDataChecked(&g_9a3800[i].id, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Rec*)g_9a3800)[i].id, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(g_9a3800[i].name, 0xe, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(((fcn_004f4c40_Rec*)g_9a3800)[i].name, 0xe, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&g_9a3800[i].a, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Rec*)g_9a3800)[i].a, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&g_9a3800[i].b, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Rec*)g_9a3800)[i].b, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&g_9a3800[i].c, 2, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Rec*)g_9a3800)[i].c, 2, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&g_9a3800[i].d, 1, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Rec*)g_9a3800)[i].d, 1, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&g_9a3800[i].e, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Rec*)g_9a3800)[i].e, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&g_9a3800[i].f, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Rec*)g_9a3800)[i].f, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&g_9a3800[i].g, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Rec*)g_9a3800)[i].g, 4, 1, f) == 0)
 			return 0;
 	}
 	for (; i < 0x200; i++) {
-		g_9a3800[i].id = -1;
-		g_9a3800[i].a = -1;
-		g_9a3800[i].b = -1;
-		g_9a3800[i].c = 0;
-		g_9a3800[i].g = 0;
+		((fcn_004f4c40_Rec*)g_9a3800)[i].id = -1;
+		((fcn_004f4c40_Rec*)g_9a3800)[i].a = -1;
+		((fcn_004f4c40_Rec*)g_9a3800)[i].b = -1;
+		((fcn_004f4c40_Rec*)g_9a3800)[i].c = 0;
+		((fcn_004f4c40_Rec*)g_9a3800)[i].g = 0;
 	}
-	memset(g_99f800, 0xff, 0x800 * sizeof(fcn_004f4c40_Pair));
+	memset(((fcn_004f4c40_Pair*)g_99f800), 0xff, 0x800 * sizeof(fcn_004f4c40_Pair));
 	for (i = 0; i < n2; i++) {
-		if (ls_ReadVfsDataChecked(&g_99f800[i].a, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Pair*)g_99f800)[i].a, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&g_99f800[i].b, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Pair*)g_99f800)[i].b, 4, 1, f) == 0)
 			return 0;
 	}
 	return 1;

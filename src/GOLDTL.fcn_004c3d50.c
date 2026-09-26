@@ -12,23 +12,19 @@ typedef struct node99 {
 } node99;
 // SIZE 0x99
 
-typedef struct {
-	char f0;
-	char f1;
-	int f2;
-	int f6;
-} cell10;
+#include "client_types.h"
+typedef cell10_fb5760 cell10;
 // SIZE 0xa
 #pragma pack()
 
 extern int g_68a9dc;
-extern node99 g_9bade0[0x2000];
-extern node99* g_aed200;
-extern int g_aed324;
+extern char g_9bade0[];
+extern char* g_aed200;
+extern char* g_aed324;
 extern char g_1005780;
 extern int g_1005768;
 extern int g_1005760;
-extern cell10 g_fb5760[0x8000];
+extern cell10_fb5760 g_fb5760[0x8000];
 extern char* g_14cbca4;
 extern int g_6b7fac;
 extern int g_aecde4;
@@ -43,18 +39,18 @@ void __cdecl fcn_004c3d50(void)
 
 	g_68a9dc = -1;
 	for (i = 0; i < 0x2000; i++) {
-		g_9bade0[i].f0 = 0;
+		((node99*)g_9bade0)[i].f0 = 0;
 		if (i == 0)
-			g_9bade0[0].prev = 0;
+			((node99*)g_9bade0)[0].prev = 0;
 		else
-			g_9bade0[i].prev = &g_9bade0[i - 1];
+			((node99*)g_9bade0)[i].prev = &((node99*)g_9bade0)[i - 1];
 		if (i < 0x1fff)
-			g_9bade0[i].next = &g_9bade0[i + 1];
+			((node99*)g_9bade0)[i].next = &((node99*)g_9bade0)[i + 1];
 		else
-			g_9bade0[i].next = 0;
+			((node99*)g_9bade0)[i].next = 0;
 	}
-	g_aed200 = g_9bade0;
-	g_aed324 = 0;
+	(*(node99**)&g_aed200) = ((node99*)g_9bade0);
+	(*(int*)&g_aed324) = 0;
 	g_1005780 = 0;
 	g_1005768 = 0;
 	g_1005760 = 0;

@@ -46,9 +46,10 @@ typedef struct {
 	int tries;
 } Order_5635b0;
 
-extern Stamp_5635b0 g_7f4c00;
-extern Kind_5635b0* g_868050;
-extern Entity_5635b0 g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned char* g_868050;
+extern char g_7f4ca0[];
 
 unsigned short __cdecl fcn_0042e410(int);
 int __cdecl fcn_004c4450(int);
@@ -88,7 +89,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 				fcn_00546190(o);
 				return;
 			}
-			k = &g_868050[*(unsigned char*) p];
+			k = &((Kind_5635b0*)g_868050)[*(unsigned char*) p];
 			if (k->type == 0xd || k->type == 0xc || k->type == 0xb) {
 				fcn_00546190(o);
 				return;
@@ -98,7 +99,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 					if (*(unsigned short*) (p + 0x27) == 0xffff) {
 						goto next;
 					}
-					if (g_7f4ca0[*(unsigned short*) (p + 0x27)].type != 6 && g_7f4ca0[*(unsigned short*) (p + 0x27)].type != 7) {
+					if (((Entity_5635b0*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].type != 6 && ((Entity_5635b0*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].type != 7) {
 						goto next;
 					}
 				}
@@ -110,8 +111,8 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 					m[4] = 0x6e;
 					*(int*) (m + 0xc) = -1;
 					m[0x36] = 1;
-					*(int*) (m + 8) = g_7f4ca0[o->ent].id;
-					*(Stamp_5635b0*) (m + 0x28) = g_7f4c00;
+					*(int*) (m + 8) = ((Entity_5635b0*)g_7f4ca0)[o->ent].id;
+					*(Stamp_5635b0*) (m + 0x28) = (*(Stamp_5635b0*)&g_7f4c00);
 					*(int*) (m + 0x60) = o->who;
 					*(int*) (m + 0x68) = o->value;
 					fcn_004c5530(m);
@@ -122,7 +123,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 		}
 next:
 		o->tries = o->tries + 1;
-		o->stamp = g_7f4c00;
+		o->stamp = (*(Stamp_5635b0*)&g_7f4c00);
 		fcn_00500bb0(&o->stamp, fcn_0042e410(3) + 4, 0, 0);
 		return;
 	case -2:

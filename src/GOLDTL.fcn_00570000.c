@@ -1,17 +1,8 @@
 extern unsigned short g_774970;
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-extern struct pos14 g_7f4c00;
-extern int g_77e0a0;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern char g_77e0a0[];
 extern short g_77e0a4;
 extern int g_77e0a8;
 
@@ -22,7 +13,7 @@ struct s_7f4ca0 {
 	char pad2[0xb7];
 };
 
-extern struct s_7f4ca0 g_7f4ca0[];
+extern char g_7f4ca0[];
 
 // FUNCTION: GOLD 0x00567c50
 // SIZE: 193
@@ -36,7 +27,7 @@ void __cdecl fcn_00570000(char* o)
 {
 	int k;
 
-	k = fcn_00507b00(g_7f4ca0[g_774970].b164);
+	k = fcn_00507b00(((struct s_7f4ca0*)g_7f4ca0)[g_774970].b164);
 	if (k == 1 || k == 2 || k == 3) {
 		fcn_0056fe60("help_events_hw");
 	} else if (k == 5 || k == 6) {
@@ -48,8 +39,8 @@ void __cdecl fcn_00570000(char* o)
 	} else if (k == 11) {
 		fcn_0056fe60("help_events_dieb");
 	}
-	*(struct pos14*) (o + 0x52) = g_7f4c00;
-	*(int*) (o + 0x52) = g_77e0a0;
+	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+	*(int*) (o + 0x52) = (*(int*)g_77e0a0);
 	*(short*) (o + 0x56) = g_77e0a4;
 	*(int*) (o + 0x58) = g_77e0a8;
 }

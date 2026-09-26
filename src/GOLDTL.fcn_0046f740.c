@@ -29,7 +29,8 @@ typedef struct Win {
 } Win;
 // SIZE 0x3cc
 
-extern Win g_1015f40[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern char s_67d420[];
 
 void __cdecl fcn_0041d9e0(const char* msg);
@@ -43,7 +44,7 @@ int __cdecl fcn_0046f740(int x, int y, int a3, int win)
 	Win* w;
 	int id;
 
-	w = &g_1015f40[win];
+	w = &((Win*)g_1015f40)[win];
 	if (!w->used) {
 		return -1;
 	}

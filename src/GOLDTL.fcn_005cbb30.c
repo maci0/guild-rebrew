@@ -20,7 +20,8 @@ typedef struct {
 	int task;
 } Item5cbb;
 
-extern Time5cbb g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
@@ -92,7 +93,7 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 	}
 	for (t = fcn_005463a0(1, 0, 0x2c); t != 0; t = fcn_005462a0()) {
 		found = 0;
-		if (*(int*) (t + 0xc5) - g_7f4c00.day > mindays) {
+		if (*(int*) (t + 0xc5) - (*(Time5cbb*)&g_7f4c00).day > mindays) {
 			continue;
 		}
 		if ((ps[0] = fcn_00508e40(*(int*) (t + 0xac))) == 0) {
@@ -139,7 +140,7 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 		if (!found) {
 			continue;
 		}
-		mindays = *(int*) (t + 0xc5) - g_7f4c00.day;
+		mindays = *(int*) (t + 0xc5) - (*(Time5cbb*)&g_7f4c00).day;
 		o = out;
 		for (i = 0, k = 0; i < 6 && (unsigned int) i < max; i++) {
 			if (ps[i] != 0) {

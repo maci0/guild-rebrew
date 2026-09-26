@@ -9,7 +9,8 @@ typedef struct Card {
 } Card;
 // SIZE 0x10
 
-extern Card g_1007ce0[];
+#include "client_types.h"
+extern Card_1007ce0 g_1007ce0[24];
 
 int __cdecl fcn_004a7120(int* h, int* out, int a3)
 {
@@ -22,13 +23,13 @@ int __cdecl fcn_004a7120(int* h, int* out, int a3)
 		return 0;
 	}
 	for (; i < 4; i++) {
-		v = g_1007ce0[h[i]].v;
+		v = ((Card*)g_1007ce0)[h[i]].v;
 		out[0] = h[i];
 		for (j = i + 1; j < 5; j++) {
 			if (h[j] < 0) {
 				return 0;
 			}
-			if (g_1007ce0[h[j]].v == v) {
+			if (((Card*)g_1007ce0)[h[j]].v == v) {
 				out[1] = h[j];
 				return 1;
 			}

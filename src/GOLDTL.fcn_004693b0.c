@@ -1,10 +1,7 @@
 #include <stdarg.h>
 
-typedef struct Group {
-	int count;
-	int sel;
-	int ids[33];
-} Group;
+#include "client_types.h"
+typedef Group_102cbc4 Group;
 // SIZE 0x8c
 
 typedef struct Slot {
@@ -16,8 +13,8 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Group g_102cbc4[8];
-extern Slot* g_1015ea0;
+extern Group_102cbc4 g_102cbc4[8];
+extern char* g_1015ea0;
 extern char s_67d4b0[];
 
 void __cdecl fcn_0041d9e0(const char* msg);
@@ -47,8 +44,8 @@ int __cdecl fcn_004693b0(int n, ...)
 	va_start(ap, n);
 	for (j = 0; j < n; j++) {
 		g_102cbc4[i].ids[j] = va_arg(ap, int);
-		g_1015ea0[g_102cbc4[i].ids[j]].dirty = 1;
-		g_1015ea0[g_102cbc4[i].ids[j]].flags &= ~2;
+		((Slot*)g_1015ea0)[g_102cbc4[i].ids[j]].dirty = 1;
+		((Slot*)g_1015ea0)[g_102cbc4[i].ids[j]].flags &= ~2;
 	}
 	va_end(ap);
 	return i;

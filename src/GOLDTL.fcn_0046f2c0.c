@@ -36,8 +36,9 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Win g_1015f40[];
-extern Slot* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 
 void __cdecl fcn_0046b2b0(int slot);
 
@@ -50,26 +51,26 @@ int __cdecl fcn_0046f2c0(int win, int keep)
 	if (win > 0x60) {
 		return 0;
 	}
-	if (!g_1015f40[win].used) {
+	if (!((Win*)g_1015f40)[win].used) {
 		return 0;
 	}
-	for (i = g_1015f40[win].count - 1; i >= 0; i--) {
-		if (g_1015f40[win].children[i] == g_1015f40[win].hot[0]) {
-			g_1015f40[win].hot[0] = -1;
-		} else if (g_1015f40[win].children[i] == g_1015f40[win].hot[1]) {
-			g_1015f40[win].hot[1] = -1;
-		} else if (g_1015f40[win].children[i] == g_1015f40[win].hot[2]) {
-			g_1015f40[win].hot[2] = -1;
+	for (i = ((Win*)g_1015f40)[win].count - 1; i >= 0; i--) {
+		if (((Win*)g_1015f40)[win].children[i] == ((Win*)g_1015f40)[win].hot[0]) {
+			((Win*)g_1015f40)[win].hot[0] = -1;
+		} else if (((Win*)g_1015f40)[win].children[i] == ((Win*)g_1015f40)[win].hot[1]) {
+			((Win*)g_1015f40)[win].hot[1] = -1;
+		} else if (((Win*)g_1015f40)[win].children[i] == ((Win*)g_1015f40)[win].hot[2]) {
+			((Win*)g_1015f40)[win].hot[2] = -1;
 		}
-		if (g_1015ea0[g_1015f40[win].children[i]].type != 0x40 || keep) {
-			fcn_0046b2b0(g_1015f40[win].children[i]);
+		if (((Slot*)g_1015ea0)[((Win*)g_1015f40)[win].children[i]].type != 0x40 || keep) {
+			fcn_0046b2b0(((Win*)g_1015f40)[win].children[i]);
 		}
 	}
-	if (g_1015f40[win].text) {
-		g_1015f40[win].text[0] = 0;
+	if (((Win*)g_1015f40)[win].text) {
+		((Win*)g_1015f40)[win].text[0] = 0;
 	}
-	g_1015f40[win].sel = -1;
-	g_1015f40[win].base = 0;
-	g_1015f40[win].view = 0;
+	((Win*)g_1015f40)[win].sel = -1;
+	((Win*)g_1015f40)[win].base = 0;
+	((Win*)g_1015f40)[win].view = 0;
 	return 1;
 }

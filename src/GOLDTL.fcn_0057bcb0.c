@@ -1,17 +1,7 @@
 int __cdecl fcn_004c5620(int, char*);
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x00573770
 // SIZE: 198
@@ -30,8 +20,8 @@ void __cdecl fcn_0057bcb0(char* o)
 	if (o[0x78] & 4) {
 		return;
 	}
-	*(struct pos14*) (o + 0x44) = g_7f4c00;
-	*(struct pos14*) (o + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (o + 0x44) = g_7f4c00;
+	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
 	x = fcn_00508e40(*(int*) (o + 0xb0));
 	if (x == 0) {
 		*(int*) (o + 0x84) = fcn_004c5620(-1, o);

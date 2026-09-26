@@ -15,15 +15,16 @@ typedef struct Screen {
 } Screen;
 // SIZE 0x30
 
-extern unsigned int g_6b7fac;
+extern int g_6b7fac;
 extern char g_77470c;
 extern int g_7e46ac;
 extern int g_772514;
-extern Screen* g_77255c;
-extern Ctl* g_1015ea0;
+extern char* g_77255c;
+extern char* g_1015ea0;
 extern int g_100f1dc;
 extern int g_100f894;
-extern int g_102cbc8[];
+#include "client_types.h"
+extern List8c_102cbc8 g_102cbc8[];
 extern char g_14cf950;
 extern int g_14ce8e0;
 extern int g_774654;
@@ -63,7 +64,7 @@ int __cdecl fcn_00526120(char* text, int flags)
 	int i;
 	int id;
 
-	start = g_6b7fac;
+	start = (*(unsigned int*)&g_6b7fac);
 	timer = -1;
 	result = 0;
 	if (g_77470c != 0) {
@@ -90,9 +91,9 @@ int __cdecl fcn_00526120(char* text, int flags)
 	fcn_00471b60(dlg);
 	g_77470c = 1;
 	list = fcn_004693b0(0);
-	for (i = 0; i < g_77255c->count; i++) {
-		id = g_77255c->ids[i];
-		if (g_1015ea0[id].f20 != 0x40) {
+	for (i = 0; i < ((Screen*)g_77255c)->count; i++) {
+		id = ((Screen*)g_77255c)->ids[i];
+		if (((Ctl*)g_1015ea0)[id].f20 != 0x40) {
 			fcn_00469470(list, id);
 		}
 	}
@@ -100,7 +101,7 @@ int __cdecl fcn_00526120(char* text, int flags)
 	fcn_004727a0(dlg, 0);
 	bar = flags & 0x80;
 	if (bar) {
-		timer = fcn_004677e0(0x1c, g_77255c->x10 - 0x18, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, g_772514);
+		timer = fcn_004677e0(0x1c, ((Screen*)g_77255c)->x10 - 0x18, ((Screen*)g_77255c)->xc - 0x40, 0, 0x1f4, 0x83, 0x42, g_772514);
 	}
 	while (fcn_005373e0((void*) fcn_00526120, wait) != 0) {
 		fcn_00469630(list);
@@ -108,7 +109,7 @@ int __cdecl fcn_00526120(char* text, int flags)
 			fcn_004707d0(dlg);
 		}
 		if (g_100f1dc == 2 && g_100f894 == screen) {
-			result = g_102cbc8[list * 35] + 1;
+			result = ((int*)g_102cbc8)[list * 35] + 1;
 			g_774654 = 1;
 		} else if ((g_100f1dc == 1 && g_100f894 == screen) || g_14cf950 == 1) {
 			result = 0;
@@ -118,9 +119,9 @@ int __cdecl fcn_00526120(char* text, int flags)
 			g_774654 = 1;
 		}
 		if (bar && timer != -1) {
-			fcn_00472380(timer, 0, 0x1f4, g_6b7fac - start);
+			fcn_00472380(timer, 0, 0x1f4, (*(unsigned int*)&g_6b7fac) - start);
 		}
-		if ((flags & 4) && g_6b7fac > start + 0x1f4) {
+		if ((flags & 4) && (*(unsigned int*)&g_6b7fac) > start + 0x1f4) {
 			g_774654 = 1;
 		}
 	}

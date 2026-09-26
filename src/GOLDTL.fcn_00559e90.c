@@ -3,16 +3,6 @@
 // FUNCTION: GOLDTL 0x559e90
 // SIZE: 396
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
 // SIZE 0x10
 struct job {
 	int house;
@@ -22,10 +12,11 @@ struct job {
 	char pada[6];
 };
 
-extern struct pos14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_00559660(struct job*);
 void __cdecl fcn_00559aa0(struct job*);
 int __cdecl fcn_00559760(struct job*, int, int);
@@ -44,8 +35,8 @@ void __cdecl fcn_00559e90(char* u)
 		if (*(int*) (u + 0x84) != -1 && fcn_004c4450(*(int*) (u + 0x84)) == 0) {
 			return;
 		}
-		*(struct pos14*) (u + 0x52) = g_7f4c00;
-		fcn_00500bb0((struct pos14*) (u + 0x52), 0, 5, 0);
+		*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 		n = 0;
 		*(int*) (u + 0x84) = -1;
 		if (*(unsigned short*) (u + 0x56) >= 0x11) {
@@ -74,8 +65,8 @@ void __cdecl fcn_00559e90(char* u)
 		for (i = 0; i < 10; i++) {
 			*(int*) (u + 0x84) = fcn_00559760(&((struct job*) (u + 0xac))[i], n, 0);
 			if (*(int*) (u + 0x84) != -1) {
-				*(struct pos14*) (u + 0x52) = g_7f4c00;
-				fcn_00500bb0((struct pos14*) (u + 0x52), 0, 1, 0);
+				*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+				fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 				break;
 			}
 		}

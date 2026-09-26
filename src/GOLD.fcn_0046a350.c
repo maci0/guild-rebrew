@@ -53,8 +53,9 @@ typedef struct Fld_46a350 {
 	char pad28[0x160 - 0x28];
 } Fld_46a350;
 
-extern Win_46a350 g_f8f120[];
-extern Ent_46a350* g_f8f080;
+#include "client_types.h"
+extern Win_f8f120 g_f8f120[];
+extern char* g_f8f080;
 extern Fld_46a350 g_fa6158[];
 extern char s_5fe7ac[];
 
@@ -69,7 +70,7 @@ int __cdecl fcn_0046a350(int x, int y, int a3, int a4, int a5, int win)
 	Win_46a350* w;
 	int id;
 
-	w = &g_f8f120[win];
+	w = &((Win_46a350*)g_f8f120)[win];
 	if (w->active == 0) {
 		return -1;
 	}
@@ -79,14 +80,14 @@ int __cdecl fcn_0046a350(int x, int y, int a3, int a4, int a5, int win)
 	}
 	id = fcn_0046a100(w->x + x, w->y - w->scroll + y, a3, a4, a5);
 	fcn_004730d0(id, w);
-	g_f8f080[id].win = w;
-	g_f8f080[id].f40 = g_f8f080[w->parent].f40;
-	g_f8f080[id].top = w->y;
-	g_f8f080[id].bottom = w->h + w->y;
-	g_f8f080[id].left = w->x;
-	g_f8f080[id].right = w->x + w->w;
-	g_fa6158[g_f8f080[id].fld].f0 = w->f27c;
-	g_fa6158[g_f8f080[id].fld].f24 = w->x - g_f8f080[id].f10 - w->f12 + w->w;
+	((Ent_46a350*)g_f8f080)[id].win = w;
+	((Ent_46a350*)g_f8f080)[id].f40 = ((Ent_46a350*)g_f8f080)[w->parent].f40;
+	((Ent_46a350*)g_f8f080)[id].top = w->y;
+	((Ent_46a350*)g_f8f080)[id].bottom = w->h + w->y;
+	((Ent_46a350*)g_f8f080)[id].left = w->x;
+	((Ent_46a350*)g_f8f080)[id].right = w->x + w->w;
+	g_fa6158[((Ent_46a350*)g_f8f080)[id].fld].f0 = w->f27c;
+	g_fa6158[((Ent_46a350*)g_f8f080)[id].fld].f24 = w->x - ((Ent_46a350*)g_f8f080)[id].f10 - w->f12 + w->w;
 	w->list[w->count] = id;
 	w->count++;
 	return id;

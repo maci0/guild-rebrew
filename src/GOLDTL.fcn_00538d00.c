@@ -22,21 +22,23 @@ typedef struct {
 extern int g_774818;
 extern int g_7725c8;
 extern char g_6a3550[];
-extern Screen g_1038144[];
-extern Window g_1015f40[];
+#include "client_types.h"
+extern Page_1038144 g_1038144[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
 extern int g_1040490;
 extern int g_1040494;
 extern char g_7e25a0[];
 extern int g_774934;
 extern int g_774930;
-extern int g_7747b8;
+extern char* g_7747b8;
 extern char g_7e2080[];
 extern int g_774820;
 extern int g_774824;
 extern char g_7e23e0[];
-extern unsigned char g_774944;
+extern char g_774944;
 extern int g_67a590;
-extern int g_67a0d8;
+extern unsigned int g_67a0d8;
 
 void __cdecl fcn_0042bf20(char*, int);
 int __cdecl fcn_0042bd20(char*);
@@ -108,10 +110,10 @@ int __cdecl fcn_00538d00(void)
 	fcn_004b2070();
 	fcn_0046b4f0();
 	screen = fcn_00470820(0, 0, "Misc\\Loading_main");
-	fcn_00471c00(g_1038144[screen].image, 3);
-	fcn_00469c40(0, g_1040490 - g_1015f40[g_1038144[screen].window].height - 0x30,
-		g_1015f40[g_1038144[screen].window].id);
-	fcn_00471c00(g_1038144[screen].window, 1);
+	fcn_00471c00(((Screen*)g_1038144)[screen].image, 3);
+	fcn_00469c40(0, g_1040490 - ((Window*)g_1015f40)[((Screen*)g_1038144)[screen].window].height - 0x30,
+		((Window*)g_1015f40)[((Screen*)g_1038144)[screen].window].id);
+	fcn_00471c00(((Screen*)g_1038144)[screen].window, 1);
 	fcn_00519190(0x73, g_7e25a0);
 	fcn_00420db0(0, 0);
 	fcn_004c3d50();
@@ -138,7 +140,7 @@ int __cdecl fcn_00538d00(void)
 		fcn_00419480(0x30);
 		sprintf(path, "%ssfx\\", g_6a3550);
 		fcn_004226b0(path);
-		g_7747b8 = fcn_00422dc0("system.sbf", 0);
+		(*(int*)&g_7747b8) = fcn_00422dc0("system.sbf", 0);
 		sprintf(ini, "%s\\include_sfx.ini", g_7e2080);
 		fcn_0053f7b0(ini);
 	}
@@ -188,14 +190,14 @@ int __cdecl fcn_00538d00(void)
 		add ecx, ebx
 		rep stosb
 	}
-	g_774944 = 1;
+	(*(unsigned char*)&g_774944) = 1;
 	fcn_00429920();
 	fcn_0040c7c0();
 	fcn_00410870();
 	fcn_0040e1a0();
 	fcn_00411130();
 	g_67a590 = (int) fcn_0042a020;
-	g_67a0d8 = 0x400000;
+	(*(int*)&g_67a0d8) = 0x400000;
 	fcn_005e2510();
 	fcn_005356e0();
 	return 1;

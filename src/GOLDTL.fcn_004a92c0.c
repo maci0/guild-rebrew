@@ -6,8 +6,9 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[];
-extern int g_7f4c00;
+extern char g_7f4ca0[];
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_00508e40(int id);
 char* __cdecl fcn_005463a0(int a, int b, int c);
@@ -26,7 +27,7 @@ int __cdecl fcn_004a92c0(int a1, char* e, int a3, int a4, char* out)
 	int n;
 	int kind;
 
-	if (g_7f4c00 % 4 == (*(int*) (e + 4) & 3) && !fcn_00508e40(*(int*) (e + 0x5c))) {
+	if ((*(int*)&g_7f4c00) % 4 == (*(int*) (e + 4) & 3) && !fcn_00508e40(*(int*) (e + 0x5c))) {
 		for (p = fcn_005463a0(1, 0, 0x41); p; p = fcn_005462a0()) {
 			if (*(int*) (p + 0xb0) == *(int*) (e + 4) || *(int*) (p + 0xac) == *(int*) (e + 4)) {
 				return 0;
@@ -36,7 +37,7 @@ int __cdecl fcn_004a92c0(int a1, char* e, int a3, int a4, char* out)
 		n = fcn_004a5960(e, 0xc, kind, 30.0f, 100.0f, ids);
 		if (n) {
 			out[0] = 7;
-			*(int*) (out + 4) = g_7f4ca0[ids[fcn_0042e410(n)]].seed;
+			*(int*) (out + 4) = ((Ent*)g_7f4ca0)[ids[fcn_0042e410(n)]].seed;
 			return 1;
 		}
 	}

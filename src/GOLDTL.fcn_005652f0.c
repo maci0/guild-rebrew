@@ -8,7 +8,8 @@ typedef struct {
 } Rec14;
 // SIZE 0xe
 
-extern Rec14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 char* __cdecl fcn_00508e40(int);
 char* __cdecl fcn_005463a0(int, int, int, ...);
@@ -22,5 +23,5 @@ void __cdecl fcn_005652f0(char* e)
 	if (r != 0) {
 		*(int*) (r + 0x70) = -1;
 	}
-	*(Rec14*) (e + 0x52) = g_7f4c00;
+	*(Rec14*) (e + 0x52) = (*(Rec14*)&g_7f4c00);
 }

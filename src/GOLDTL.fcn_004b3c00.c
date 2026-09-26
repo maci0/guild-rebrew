@@ -12,7 +12,8 @@ typedef struct {
 	char f20;
 } fcn_004b3c00_rec;
 
-extern fcn_004b3c00_stamp g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 
 fcn_004b3c00_rec* __cdecl fcn_004b3bc0(int);
 
@@ -27,7 +28,7 @@ fcn_004b3c00_rec* __cdecl fcn_004b3c00(int a)
 
 	p = fcn_004b3bc0(a);
 	if (p != 0) {
-		p->when = g_7f4c00;
+		p->when = (*(fcn_004b3c00_stamp*)&g_7f4c00);
 		p->f18 = 0;
 		p->f1c = 0;
 		p->f20 = 0;

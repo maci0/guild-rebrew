@@ -8,11 +8,12 @@ typedef struct {
 	char p34c[0x90];
 } Slot;
 
-extern Slot g_1043340[];
-extern void* g_1043254;
-extern char g_1042340;
-extern void* g_1040c74;
-extern char g_1040640;
+#include "client_types.h"
+extern Slot_1043340 g_1043340[64];
+extern char* g_1043254;
+extern char g_1042340[];
+extern char* g_1040c74;
+extern char g_1040640[];
 extern int g_6b8300;
 extern int g_6b89c0;
 extern int g_6b8058;
@@ -37,14 +38,14 @@ char __cdecl fcn_004437a0(int idx)
 	ok = 0;
 	if (idx >= 0 && idx < 0x40) {
 		if (idx != g_6b8010) {
-			if (g_1043340[idx].used != 0) {
+			if (((Slot*)g_1043340)[idx].used != 0) {
 				prev = g_6b8010;
 				fcn_004432d0(idx, 1);
-				while (g_1043254 != &g_1042340) {
-					fcn_004398d0(g_1043254);
+				while (((void*)g_1043254) != &(*(char*)g_1042340)) {
+					fcn_004398d0(((void*)g_1043254));
 				}
-				while (g_1040c74 != &g_1040640) {
-					fcn_00452420(g_1040c74);
+				while (((void*)g_1040c74) != &(*(char*)g_1040640)) {
+					fcn_00452420(((void*)g_1040c74));
 				}
 				if (g_6b8300 != 0) {
 					fcn_0043bcf0(g_6b8300);
@@ -54,9 +55,9 @@ char __cdecl fcn_004437a0(int idx)
 					fcn_00459b40(g_6b89c0);
 					g_6b89c0 = 0;
 				}
-				if (g_1043340[idx].res != 0) {
-					fcn_0041ddd0(g_1043340[idx].res);
-					g_1043340[idx].res = 0;
+				if (((Slot*)g_1043340)[idx].res != 0) {
+					fcn_0041ddd0(((Slot*)g_1043340)[idx].res);
+					((Slot*)g_1043340)[idx].res = 0;
 				}
 				g_6b8058 = 0;
 				g_6b8484 = 0;

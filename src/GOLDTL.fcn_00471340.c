@@ -1,4 +1,5 @@
-extern char g_1038140[];
+#include "client_types.h"
+extern Obj_1038140 g_1038140[];
 
 void __cdecl fcn_004767f0(int a, int b, int c, int d, int e, int f, int g, int h);
 
@@ -10,7 +11,7 @@ void __cdecl fcn_00471340(int k)
 	char** pp;
 	int j;
 
-	base = g_1038140 + k * 0x2bc;
+	base = ((char*)g_1038140) + k * 0x2bc;
 	pp = (char**) (base + 0x1ac);
 	for (j = 2; j != 0; j--) {
 		fcn_004767f0(0, 0, *(int*) (*pp + 4), *(int*) (*pp + 8), *(int*) (*pp + 0x20), 0, 0, *(int*) ((char*) pp - 8));

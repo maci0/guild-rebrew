@@ -20,7 +20,8 @@ struct animopt_404150 {
 	unsigned char pad8[3];
 };
 
-extern struct kind_404150 g_14d0c40[];
+#include "client_types.h"
+extern Entry_14d0c40 g_14d0c40[];
 extern int g_675318;
 
 void __cdecl fcn_0042e540(char*);
@@ -43,8 +44,8 @@ char* __cdecl fcn_00404150(char* obj, int kind)
 	char path[0x110];
 	char msg[0x200];
 
-	sprintf(path, "character/%s/%s_%s.baf", obj + 0x130, g_14d0c40[kind].name, obj + 0x130);
-	sprintf(ani, "%s_%s", g_14d0c40[kind].name, obj + 0x130);
+	sprintf(path, "character/%s/%s_%s.baf", obj + 0x130, ((struct kind_404150*)g_14d0c40)[kind].name, obj + 0x130);
+	sprintf(ani, "%s_%s", ((struct kind_404150*)g_14d0c40)[kind].name, obj + 0x130);
 	fcn_0042e540(ani);
 	if (path[0] != 0) {
 		memset(&opt, 0, sizeof(opt));

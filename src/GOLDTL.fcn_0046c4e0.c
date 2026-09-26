@@ -17,8 +17,9 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Win g_1015f40[];
-extern Slot* g_1015ea0;
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
 
 void __cdecl fcn_00469110(int slot, int w);
 
@@ -30,11 +31,11 @@ void __cdecl fcn_0046c4e0(int win)
 	int maxw;
 	int i;
 
-	w = &g_1015f40[win];
+	w = &((Win*)g_1015f40)[win];
 	maxw = 0;
 	for (i = 0; i < w->count; i++) {
-		if (g_1015ea0[w->children[i]].type == 9 && g_1015ea0[w->children[i]].w > maxw) {
-			maxw = g_1015ea0[w->children[i]].w;
+		if (((Slot*)g_1015ea0)[w->children[i]].type == 9 && ((Slot*)g_1015ea0)[w->children[i]].w > maxw) {
+			maxw = ((Slot*)g_1015ea0)[w->children[i]].w;
 		}
 	}
 	maxw += 8;
@@ -42,8 +43,8 @@ void __cdecl fcn_0046c4e0(int win)
 		maxw = 0x80;
 	}
 	for (i = 0; i < w->count; i++) {
-		if (g_1015ea0[w->children[i]].type == 9) {
-			g_1015ea0[w->children[i]].visible = 1;
+		if (((Slot*)g_1015ea0)[w->children[i]].type == 9) {
+			((Slot*)g_1015ea0)[w->children[i]].visible = 1;
 			fcn_00469110(w->children[i], maxw);
 		}
 	}

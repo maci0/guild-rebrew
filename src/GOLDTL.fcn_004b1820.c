@@ -10,7 +10,8 @@ typedef struct {
 } stamp14;
 // SIZE 0xe
 
-extern stamp14 g_7f4c00;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca4[];
 
 int __cdecl fcn_004ae170(int);
@@ -22,7 +23,7 @@ int __cdecl fcn_004b1820(void)
 	char m[0xf8];
 	int i;
 
-	st = g_7f4c00;
+	st = (*(stamp14*)&g_7f4c00);
 	memset(m, 0, sizeof(m));
 	*(int*) ((char*) &st + 6) = 0;
 	for (i = 0; i < 0x300; i++) {

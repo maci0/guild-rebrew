@@ -3,18 +3,9 @@
 // FUNCTION: GOLDTL 0x56c8f0
 // SIZE: 500
 
-#pragma pack(2)
-// SIZE 0xe
-struct pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
-#pragma pack()
-
-extern struct pos14 g_7f4c00;
-extern char* g_868050;
+#include "client_types.h"
+extern pos14_7f4c00 g_7f4c00;
+extern unsigned char* g_868050;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AddObjekt(void);
@@ -39,7 +30,7 @@ void __cdecl fcn_0056c8f0(char* u)
 	n = 0;
 	m = 1;
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_AddObjekt()) {
-		t = g_868050 + *(unsigned char*) e * 0x24d;
+		t = ((char*)g_868050) + *(unsigned char*) e * 0x24d;
 		if (gm_CheckEntityType(e) == 0 && fcn_00505340(e) == 0 && *(char**) (e + 0x61) != 0 && *t != 3) {
 			list[n++] = e;
 		}
@@ -62,12 +53,12 @@ void __cdecl fcn_0056c8f0(char* u)
 		}
 	}
 	*(int*) (u + 0xec) = *(int*) (pick + 1);
-	*(struct pos14*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
 	if (*(unsigned short*) (u + 0x56) > 0x14) {
 		*(unsigned short*) (u + 0x56) = fcn_0042e410(10) + 8;
 		(*(int*) (u + 0x52))++;
 	}
-	*(struct pos14*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
 	if (*(unsigned short*) (u + 0x56) < 7) {
 		*(unsigned short*) (u + 0x56) = fcn_0042e410(10) + 8;
 	}

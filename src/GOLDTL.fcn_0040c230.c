@@ -44,7 +44,8 @@ typedef struct {
 	int nargs;
 } Entry;
 
-extern Entry g_14d0c40[];
+#include "client_types.h"
+extern Entry_14d0c40 g_14d0c40[];
 Task* __cdecl fcn_0040c0a0(char* e);
 void __cdecl fcn_004079d0(Task* t);
 
@@ -57,19 +58,19 @@ Task* __cdecl fcn_0040c230(char* e, void (__cdecl* done)(Task* t), unsigned char
 	if (e == 0) {
 		return 0;
 	}
-	if (g_14d0c40[kind].handler == 0) {
+	if (((Entry*)g_14d0c40)[kind].handler == 0) {
 		kind = 0;
 	}
 	t = fcn_0040c0a0(e);
 	if (t == 0) {
 		return 0;
 	}
-	t->run = g_14d0c40[kind].handler;
+	t->run = ((Entry*)g_14d0c40)[kind].handler;
 	t->kind = (char) kind;
 	t->owner = e;
 	t->state = 0;
 	va_start(ap, kind);
-	for (i = 0; i < g_14d0c40[(unsigned char) t->kind].nargs; i++) {
+	for (i = 0; i < ((Entry*)g_14d0c40)[(unsigned char) t->kind].nargs; i++) {
 		(&t->param)[i] = va_arg(ap, int);
 	}
 	va_end(ap);

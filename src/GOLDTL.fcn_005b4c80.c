@@ -23,9 +23,10 @@ typedef struct {
 	char pad2[0x21a];
 } Ent_5b4c80;
 
-extern Win_5b4c80 g_1015f40[];
-extern Ctl_5b4c80* g_1015ea0;
-extern Ent_5b4c80 g_7f4ca0[];
+#include "client_types.h"
+extern Win_1015f40 g_1015f40[0x60];
+extern char* g_1015ea0;
+extern char g_7f4ca0[];
 extern int g_14ce8e0;
 extern int g_774654;
 extern int g_100f1dc;
@@ -64,11 +65,11 @@ void __cdecl fcn_005b4c80(void)
 	fill = 1;
 	left = fcn_0046f100(0, 0, 0x140, 0x190, 0x10, win = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414));
 	right = fcn_0046f100(0x140, 0, 0x140, 0x190, 0x10, win);
-	fcn_00472900(g_1015f40[win].x27c, 0x54);
-	fcn_00472900(g_1015f40[left].x27c, 0x54);
-	fcn_00472900(g_1015f40[right].x27c, 0x54);
+	fcn_00472900(((Win_5b4c80*)g_1015f40)[win].x27c, 0x54);
+	fcn_00472900(((Win_5b4c80*)g_1015f40)[left].x27c, 0x54);
+	fcn_00472900(((Win_5b4c80*)g_1015f40)[right].x27c, 0x54);
 	if (fcn_005373e0((void*) fcn_005b4c80, 0x657c7)) {
-		rp = &g_1015f40[right];
+		rp = &((Win_5b4c80*)g_1015f40)[right];
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
@@ -76,8 +77,8 @@ void __cdecl fcn_005b4c80(void)
 			if (g_100f1dc != -1) {
 				for (i = 0; i < 0x300; i++) {
 					if (ids[i] != -1 && g_67d370 == ids[i]) {
-						if (g_1015ea0[g_67d370].ent != 0) {
-							fcn_005b4660(g_1015ea0[g_67d370].ent);
+						if (((Ctl_5b4c80*)g_1015ea0)[g_67d370].ent != 0) {
+							fcn_005b4660(((Ctl_5b4c80*)g_1015ea0)[g_67d370].ent);
 						}
 						break;
 					}
@@ -85,22 +86,22 @@ void __cdecl fcn_005b4c80(void)
 			}
 			if (fill) {
 				g_772514 = left;
-				saved = g_1015f40[left].x258;
+				saved = ((Win_5b4c80*)g_1015f40)[left].x258;
 				fcn_00519190((int) "$C");
 				ids[0] = fcn_00472250(-1, g_772514, fcn_00519190((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, fcn_005b44b0(0)));
-				g_1015ea0[ids[0]].ent = 0;
-				g_1015ea0[ids[0]].used = 1;
+				((Ctl_5b4c80*)g_1015ea0)[ids[0]].ent = 0;
+				((Ctl_5b4c80*)g_1015ea0)[ids[0]].used = 1;
 				n = 1;
 				for (i = 0; i < 0x300; i++) {
 					if (n >= 0x40) {
 						break;
 					}
 					ids[i] = -1;
-					if (g_7f4ca0[i].slot != 0xffff) {
-						ids[i] = fcn_00472250(-1, g_772514, fcn_00519190((int) "%it[%1N4]$6THeCnt:%i$A", g_7f4ca0[i].slot, fcn_005b44b0(&g_7f4ca0[i])));
-						g_1015ea0[ids[i]].ent = &g_7f4ca0[i];
+					if (((Ent_5b4c80*)g_7f4ca0)[i].slot != 0xffff) {
+						ids[i] = fcn_00472250(-1, g_772514, fcn_00519190((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)g_7f4ca0)[i].slot, fcn_005b44b0(&((Ent_5b4c80*)g_7f4ca0)[i])));
+						((Ctl_5b4c80*)g_1015ea0)[ids[i]].ent = &((Ent_5b4c80*)g_7f4ca0)[i];
 						n++;
-						g_1015ea0[ids[i]].used = 1;
+						((Ctl_5b4c80*)g_1015ea0)[ids[i]].used = 1;
 					}
 					if (n >= 0x3f) {
 						if (g_772514 == right) {
@@ -111,10 +112,10 @@ void __cdecl fcn_005b4c80(void)
 						n = 0;
 					}
 				}
-				g_1015f40[left].x258 = saved;
+				((Win_5b4c80*)g_1015f40)[left].x258 = saved;
 				fill = 0;
 			}
-			fcn_005b0f00(&g_1015f40[left]);
+			fcn_005b0f00(&((Win_5b4c80*)g_1015f40)[left]);
 			fcn_005b0f00(rp);
 		} while (fcn_005373e0((void*) fcn_005b4c80, 0x657c7));
 	}
