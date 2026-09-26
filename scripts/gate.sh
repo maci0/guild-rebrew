@@ -77,13 +77,14 @@ BASELINE=${BASELINE:-261}
 # omitted the leading dword and shifted every later .data symbol by -4.
 # .data 23,470 -> 22,541 (-929).  See section 158.
 RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
-# Raw-link .data divergence baseline (22,266 as of round 519).  The goal is a build that is
+# Raw-link .data divergence baseline (16,415: CrashDump blob split, split_link sizes its
+# tail blob from the map).  The goal is a build that is
 # byte-identical WITHOUT postlink, but postlink blits .data wholesale from the
 # layout package, so the shipped file shows `.data differing 0x0` no matter what
 # the link produced -- and this gate, guarding .text alone, could not see .data
 # move at all.  Three rounds of data work were invisible to it.  Guard the raw
 # link's own .data so progress there is measured and regressions there caught.
-DATA_BASELINE=${DATA_BASELINE:-21481}
+DATA_BASELINE=${DATA_BASELINE:-16415}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:

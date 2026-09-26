@@ -190,13 +190,18 @@ echo "== data gap for this composition"
 # (the members' bundled sections), so the CMake blob overshoots the reference's
 # 0xe000 raw size by 0x2460.  postlink overwrites `.data` wholesale, so only
 # the blob's LENGTH matters (docs/msvc6-link-layout.md section 2) - emit a
-# shorter one for this link and drop the CMake object.  Re-sweep the constant
-# when the composition's own `.data` changes.
-# GAP =0xe000 - (total .data of every object before the blob in rsp.rsp).
-# The reorg'd src/Develop composition emits S=0x7736 before the blob (was0x6b60
-# when GAP was0x74a0); the stale0x74a0 placed the ref-tail blob0xbd6 early ->
-# .data 45% off.  Re-derive on every composition change: GAP=0xe000-S.
-GAP=0x6b8c
+# shorter one for this link and drop the CMake object.
+#
+# The blob holds the reference's .data TAIL and is linked last, so it lands on
+# the reference's own bytes exactly when GAP = DATA_RAW - S, S being where the
+# link puts it.  Any other GAP misplaces all of it (+0x58 once cost 6,187 raw
+# .data bytes and pushed .data raw to 0xf000).  S moves whenever a game TU's
+# .data changes size, so after the link S is read from the map and, if GAP
+# was stale, the blob is re-emitted and the image relinked.  GAP below is only
+# the first guess.
+DATA_RAW=0xe000
+GAP=0x6b34
+emit_gap_blob() {
 python3 - "$GAP" "$WORK/data_restore_split.c" <<'BLOB'
 import struct, sys
 from pathlib import Path
@@ -222,6 +227,8 @@ print(f"wrote {out} ({size:#x} bytes)")
 BLOB
 rebrew-cmake-cl /nologo /c /O2 /Gd /MT \
     /Fo"$WORK/data_restore_split.obj" "$WORK/data_restore_split.c" >/dev/null
+}
+emit_gap_blob
 python3 - "$WORK/rsp.rsp" "${WORK#build/}/data_restore_split.obj" <<'RSP'
 import shlex, sys
 from pathlib import Path
@@ -253,6 +260,16 @@ cmd=$(sed "s#@CMakeFiles/server_dll.dir/objects1.rsp#@${RSP_PAD#build/}#;
            s#/implib:server.lib#/implib:split_poc.lib#;
            s# /pdb:[^ ]*##" build/CMakeFiles/server_dll.dir/link.txt)
 ( cd build && eval "$cmd" >/dev/null 2>&1 )
+blob_at=$(sed -n 's/^ 0003:\([0-9a-f]*\) *_g_data_restore_gap .*/\1/p' build/split_poc.map)
+[ -n "$blob_at" ] || { echo "g_data_restore_gap missing from build/split_poc.map"; exit 1; }
+want=$((DATA_RAW - 0x$blob_at))
+[ "$want" -gt 0 ] || { echo "game .data runs past $DATA_RAW (blob at 0x$blob_at)"; exit 1; }
+if [ "$want" -ne $((GAP)) ]; then
+    echo "data gap: blob starts at 0x$blob_at, GAP $GAP -> $(printf '0x%x' "$want"); relinking"
+    GAP=$(printf '0x%x' "$want")
+    emit_gap_blob
+    ( cd build && eval "$cmd" >/dev/null 2>&1 )
+fi
 python3 - <<'PY'
 import struct
 def vsize(path):
