@@ -520,9 +520,17 @@
 // __mbsnbicoll
 // SIZE: 63
 
+// LIBRARY: SERVER 0x10022FF1
+// ___ld12mul
+// SIZE: 544
+
 // LIBRARY: SERVER 0x1002328D
 // ___crtCompareStringA
 // SIZE: 597
+
+// LIBRARY: SERVER 0x1002350A
+// _strncnt
+// SIZE: 43
 
 // LIBRARY: SERVER 0x10023535
 // ___crtsetenv
