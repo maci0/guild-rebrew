@@ -1,7 +1,7 @@
-// SIZE 0x18
 typedef struct {
 	char c[0x18];
 } Anim_4e0210;
+// SIZE 0x18
 
 extern int g_772f44;
 extern int g_68bfc0;
