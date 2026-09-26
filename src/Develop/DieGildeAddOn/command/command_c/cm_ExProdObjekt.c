@@ -30,11 +30,6 @@ short* __cdecl gm_ResolveParentEntity(short*);
 double __cdecl gm_CalculateProductionValue(uint, int);
 int __cdecl gm_EntityAccumulate(void*);
 
-extern char s_cm_ExecProduction___Invalid__lager_1002cf9c[];
-extern char s_cm_ExecProduction___Lager_has_wron_1002cf74[];
-extern char s_cm_ExecProduction___Lager_hat_kein_1002cf48[];
-extern char s_cm_ExProdObjekt___Cannot_produce___1002cf1c[];
-extern char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[];
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
@@ -59,7 +54,6 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * g_item_def_table load below it and stored the clamp from eax: 21 linked
  * bytes, all gone with this shape. */
 
-
 int __cdecl cm_ExProdObjekt(int msg, char* result)
 {
 	int quantity;
@@ -82,7 +76,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	quantity = gm_ResolveEntityById((void**)0, (void**)&lager, (void**)0, quantity);
 	if (quantity == 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x2f3b,
 			"cm_ExProdObjekt() Invalid 'lager_id'",
 			1
@@ -91,7 +85,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	}
 	if ((*lager != 0x2a) && (*lager != 0x116)) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x2f53,
 			"cm_ExProdObjekt() Lager has wrong Type",
 			1
@@ -101,7 +95,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	owner = gm_ResolveParentEntity(lager);
 	if (owner == (short*)0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x2f6d,
 			"cm_ExProdObjekt() Lager hat keinen Besitzer",
 			1
@@ -141,7 +135,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	}
 	if (quantity == 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x2fb5,
 			"cm_ExProdObjekt(): Nicht gen\374gend Rohstoffe",
 			1
@@ -158,7 +152,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 			obj_entry = (ushort*)gm_ff_Objekt(*(int*)(lager + 10), 1, 0, (uint)*material_iter);
 			if (obj_entry == (ushort*)0) {
 				LogMessageInternal(
-					s_D__Develop_DieGildeAddOn_command_1002c748,
+					"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 					0x2fdd,
 					"cm_ExProdObjekt() Rohstoff verschwunden",
 					1

@@ -22,8 +22,7 @@
 
 typedef unsigned long DWORD;
 
-// GLOBAL: SERVER 0x10030b70
-int g_entity_id_counter = 1;
+extern int g_entity_id_counter;
 __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 
 /* Assigns the next sequential entity ID to the command packet at

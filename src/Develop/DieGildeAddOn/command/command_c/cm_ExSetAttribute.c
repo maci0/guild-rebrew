@@ -8,12 +8,6 @@
 #include "../../../Units/Error/error.h"
 #include "../command_internal.h"
 
-// GLOBAL: SERVER 0x1002d0d4
-char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[31] = {
-    0x63, 0x6d, 0x5f, 0x45, 0x78, 0x53, 0x65, 0x74, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74,
-    0x65, 0x28, 0x29, 0x20, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x20, 0x49, 0x64, 0x00,
-};
-
 /* Command handler: applies attribute updates to a game entity.
  * Resolves the target entity by ID from the command packet (offset 0x10),
  * then iterates over a list of field descriptors starting at offset 0x15.
@@ -48,8 +42,8 @@ int __cdecl cm_ExSetAttribute(int cmd, char* result)
 	*(int*) (base + 0x10) = field;
 	ok = gm_ResolveEntityById((void**) &resolved, &entity_or_node, &ent_c, field);
 	if (ok == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x32ed,
-		                   s_cm_ExSetAttribute___Invalid_Id_1002d0d4, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x32ed,
+		                   "cm_ExSetAttribute() Invalid Id", 1);
 		return 1;
 	}
 	if (resolved != 0)

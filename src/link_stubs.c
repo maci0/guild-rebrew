@@ -37,7 +37,6 @@ char g_1002d474 = 0;
 int g_1002d4f0 = 0;
 int g_1002d4f4 = 0;
 char g_1002d4f8 = 0;
-char s_ls_tmp_1002d4fc = 0;
 char g_10031004[1] = {0};
 char g_10031484[1] = {0};
 char g_100314b8[1] = {0};
@@ -80,9 +79,7 @@ int g_dynamic_count = 0;
 int g_dynasty_field_2c = 0;
 int gm_CurrentHumanFamilyCount = 0;
 char* g_item_def_table = 0;
-int g_entity_id_counter = 0;
 unsigned int g_query_state_a0c[768] = {0};
-int g_file_version = 0;
 float g_const_1_0 = 0;
 float g_const_neg_1_0 = 0;
 float g_const_0_0 = 0;
@@ -134,7 +131,6 @@ char g_player_slot_overflow[0x264264] = {0};
 unsigned char g_bss_tail[0x1266c94] = {0};
 
 /* String literal globals */
-char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";
 
 /* Special forwarding stubs */
 extern int __stdcall ServerMainThread(void*);
@@ -192,9 +188,6 @@ unsigned char g_entity_base[1] = {0};
 int g_entity_end = 0;
 unsigned char* g_entity_ptr = 0;
 /* Sell msgs: real .data strings (ExSell imm32); overlay GLOBAL on alchemistry_logic2.c */
-char g_error_msg_sell_failed[] = "cm_ExSellObjekt() Verkaufslimit \xfc" "berschritten";
-char g_error_msg_sell_no_dest[] = "cm_ExSellObjekt(): Ziel-Besitzer ist kein Geb\xe4ude";
-char g_error_msg_sell_no_source[] = "cm_ExSellObjekt(): Quell-Besitzer ist kein Geb\xe4ude";
 int g_log_buffer = 0;
 int g_log_file_handle = 0;
 /* g_player_slots_base removed: ExSell uses g_connections@0x101deb00 */
@@ -211,16 +204,6 @@ int g_sim_ents = 0;
 /* inflate_blocks / inflate_blocks_free are provided by the vendored
  * references/zlib-1.1.3/infblock.c; stubs here would shadow the real ones. */
 int g_chain_handler_table[1] = {0};
-char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[1] = "";
-char s_cm_ChkMoveCredits____Not_enough_m_1002c774[1] = "";
-char s_cm_ExAllocThemaPredigt____Execut_1002d184[1] = "";
-char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[1] = "";
-char s_cm_ExChangeBits___Invalid_Id_1002d114[1] = "";
-char s_cm_ExChangeDesire___Invalid_I_1002d0f4[1] = "";
-char s_cm_ExChangeFloat___Invalid_Id_1002d134[1] = "";
-char s_cm_ExClearLagerslot___Invalid__L_1002d088[1] = "";
-char s_cm_ExClearLagerslot___Lager_has_n_1002d054[1] = "";
-char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[1] = "";
 
 /* --- CRT locale stubs: resolve symbols that would otherwise pull
  * LIBCMT's locale objects (setlocal.obj/getqloc.obj/w_loc.obj/a_loc.obj),
@@ -313,12 +296,6 @@ float g_const_0_06875 = 0.06875f;
 float g_const_2_2 = 2.2f;
 float g_const_1_5 = 1.5f;
 float g_const_0_01 = 0.01f;
-
-/* Savegame header tail: the 9 bytes "Savegame\0" copied into the header at
- * +0x9c by ls_LoadSavegameHeader. Layout lives in
- * DieGildeAddOn/loadsave/save_header_tail.h. */
-#include "Develop/DieGildeAddOn/loadsave/save_header_tail.h"
-struct SaveHeaderTail g_save_header_tail = { 0x65766153, 0x656d6167, 0 };
 
 /* Tick rate read from the server ini by ServerMainThread; the binary's
  * initial value is 0 and the profile read overwrites it at startup. */

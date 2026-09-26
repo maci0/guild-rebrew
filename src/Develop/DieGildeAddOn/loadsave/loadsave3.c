@@ -11,9 +11,6 @@ extern int g_file_version;
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
-extern char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[];
-extern char s_D__Develop_DieGildeAddOn_loadsav_1002d550[];
-extern char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[];
 extern unsigned int ls_ID2Ptr(void);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 
@@ -65,8 +62,8 @@ unsigned int ls_ID2Ptr(void)
 
 	g_entity_table_end = gm_LookupEntityRecordById(g_entity_table_end);
 	if (g_entity_table_end == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_loadsav_1002d550, 0x1016,
-		    s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c", 0x1016,
+		    "ls_ID2Ptr(): Stadtspieler Id not found", 1);
 		return 0;
 	}
 	g_active_player_count = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
@@ -99,8 +96,8 @@ unsigned int ls_ID2Ptr(void)
 		}
 		if (*(int*) (record_cursor + 6) != -1) {
 			if (!gm_ResolveEntityById(&v1, &v2, &v3, *(int*) (record_cursor + 6))) {
-				LogMessageInternal(s_D__Develop_DieGildeAddOn_loadsav_1002d550, 0x1050,
-				    s_ls_ID2Ptr____Houston__wir_haben_e_1002d520, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c", 0x1050,
+				    "ls_ID2Ptr(): Houston, wir haben ein Problem...", 1);
 			} else if (v1 != 0) {
 				node = *(void**) (v1 + 0x5d);
 				if (node == 0) {

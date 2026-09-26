@@ -47,6 +47,8 @@ void __cdecl gm_NoopRet2(char* slot);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 // GLOBAL: SERVER 0x10030b6c
 int g_next_object_id = 1;
+// GLOBAL: SERVER 0x10030b70
+int g_entity_id_counter = 1;
 int g_current_year;
 // FUNCTION: GOLD 0x004fe7f0
 // SIZE: 57

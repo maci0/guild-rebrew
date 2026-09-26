@@ -7,11 +7,6 @@
 extern double _g_stat_max_d;
 // GLOBAL: SERVER 0x10025698
 extern double _g_stat_min_d;
-// GLOBAL: SERVER 0x1002d0f4
-char s_cm_ExChangeDesire___Invalid_I_1002d0f4[31] = {
-    0x63, 0x6d, 0x5f, 0x45, 0x78, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x65, 0x73, 0x69, 0x72,
-    0x65, 0x28, 0x29, 0x20, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x20, 0x49, 0x64, 0x00,
-};
 
 /* Byte offset off the resolved base, not a cached float*: `resolved` is
  * address-taken, so each use reloads it and the target addresses the slot
@@ -70,8 +65,8 @@ int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 	*(int*) (cmd + 0x10) = field;
 	ok = gm_ResolveEntityById(0, 0, (void**) &resolved, field);
 	if (ok == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x33af,
-		                   s_cm_ExChangeDesire___Invalid_I_1002d0f4, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x33af,
+		                   "cm_ExChangeDesire() Invalid Id", 1);
 		return 1;
 	}
 	src = (uchar*) (cmd + 0x15);

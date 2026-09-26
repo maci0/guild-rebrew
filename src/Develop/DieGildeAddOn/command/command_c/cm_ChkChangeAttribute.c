@@ -10,14 +10,6 @@
 #include "../../../Units/Error/error.h"
 
 /* Round-532: ascending REF VA decl order (R521/R531 mid-pocket lever; abuts ChkSellObjekt). */
-// DATA: SERVER 0x1002c90c
-char s_cm_ChkChangeAttribute___Target_obj_1002c90c[] = "cm_ChkChangeAttribute() Invalid action on player <<PartnerID already set>>";
-// DATA: SERVER 0x1002c958
-char s_cm_ChkChangeAttribute___Source_obj_1002c958[] = "cm_ChkChangeAttribute() Invalid action on player <<ID does not exist>>";
-// DATA: SERVER 0x1002c9a0
-char s_cm_ChkChangeAttribute___Error_i_1002c9a0[] = "cm_ChkChangeAttribute() Invalid action on player <<Change ID>>";
-// DATA: SERVER 0x1002c9e0
-char s_cm_ChkChangeAttribute___Invalid_I_1002c9e0[] = "cm_ChkChangeAttribute() Invalid Id";
 
 /* Validation handler: resolves entity by ID and validates each
  * attribute field descriptor (kind/value/offset) in the command
@@ -42,7 +34,7 @@ int __cdecl cm_ChkChangeAttribute(int cmd, char* result)
 
 	*(int *) (cmd + 0x10) = gm_GetFieldByType((char *) cmd, *(int *) (cmd + 0x10));
 	if (!gm_ResolveEntityById((void **) &t_b, (void **) &t_a, (void **) &t_d, *(int *) (cmd + 0x10))) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x243d, s_cm_ChkChangeAttribute___Invalid_I_1002c9e0, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x243d, "cm_ChkChangeAttribute() Invalid Id", 1);
 		return 1;
 	}
 	if (t_b)
@@ -61,18 +53,18 @@ int __cdecl cm_ChkChangeAttribute(int cmd, char* result)
 		field_cursor += 2;
 		if (t_d != 0) {
 			if (addr == (int) t_d + 4) {
-				LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2479, s_cm_ChkChangeAttribute___Error_i_1002c9a0, 1);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2479, "cm_ChkChangeAttribute() Invalid action on player <<Change ID>>", 1);
 				return 1;
 			}
 			if (addr == (int) t_d + 0x5c) {
 				entity_id = *(int *) field_cursor + *(int *) (t_d + 0x5c);
 				rec = (char *) gm_LookupEntityRecordById(entity_id);
 				if (rec == 0) {
-					LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x249b, s_cm_ChkChangeAttribute___Source_obj_1002c958, 1);
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x249b, "cm_ChkChangeAttribute() Invalid action on player <<ID does not exist>>", 1);
 					return 1;
 				}
 				if (*(int *) (rec + 0x5c) != -1 && *(int *) (rec + 0x5c) != *(int *) (t_d + 4)) {
-					LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x24a5, s_cm_ChkChangeAttribute___Target_obj_1002c90c, 1);
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x24a5, "cm_ChkChangeAttribute() Invalid action on player <<PartnerID already set>>", 1);
 					return 1;
 				}
 			}

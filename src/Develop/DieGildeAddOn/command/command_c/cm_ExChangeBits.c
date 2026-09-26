@@ -3,12 +3,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-// GLOBAL: SERVER 0x1002d114
-char s_cm_ExChangeBits___Invalid_Id_1002d114[29] = {
-    0x63, 0x6d, 0x5f, 0x45, 0x78, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x42, 0x69, 0x74, 0x73, 0x28,
-    0x29, 0x20, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x20, 0x49, 0x64, 0x00,
-};
-
 /* Execution handler: modifies a bit-field on an entity.  Resolves
  * the entity, then sets/clears bits at the command-specified offset
  * with the given size (1/2/4 bytes), mask and value.
@@ -41,8 +35,8 @@ int __cdecl cm_ExChangeBits(int cmd, char* result)
 	*(int*) (cmd + 0x10) = field;
 	field = gm_ResolveEntityById((void**) &resolved, &ent_a, &ent_c, field);
 	if (field == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x340d,
-		                   s_cm_ExChangeBits___Invalid_Id_1002d114, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x340d,
+		                   "cm_ExChangeBits() Invalid Id", 1);
 		return 1;
 	}
 	/* The offset add is hoisted out of the select: the target picks the

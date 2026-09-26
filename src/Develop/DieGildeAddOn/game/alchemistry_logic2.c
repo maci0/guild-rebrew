@@ -596,59 +596,7 @@ typedef struct {
 	PAIR entries[6];
 } TGT;
 
-
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
-
-// GLOBAL: SERVER 0x1002cc8c
-extern char g_error_msg_sell_no_dest[];
-
-// GLOBAL: SERVER 0x1002ccc0
-extern char s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0[];
-
-// GLOBAL: SERVER 0x1002cce8
-extern char s_cm_ExSellObjekt____gm_AllocObjek_1002cce8[];
-
-// GLOBAL: SERVER 0x1002cd14
-extern char g_error_msg_sell_no_source[];
-
-// GLOBAL: SERVER 0x1002cd48
-extern char g_error_msg_sell_failed[];
-
-// GLOBAL: SERVER 0x1002cd78
-extern char s_cm_ExSellObjekt___Not_enough_Cre_1002cd78[];
-
-// GLOBAL: SERVER 0x1002cdac
-extern char s_cm_ExSellObjekt___Lager_voll_1002cdac[];
-
-// GLOBAL: SERVER 0x1002cdcc
-extern char s_cm_ExSellObjekt___Invalid__ziel__1002cdcc[];
-
-// GLOBAL: SERVER 0x1002cdfc
-extern char s_cm_ExSellObjekt___Not_enough_Obj_1002cdfc[];
-
-// GLOBAL: SERVER 0x1002ce4c
-extern char s_cm_ExSellObjekt____Object_not_fo_1002ce4c[];
-
-// GLOBAL: SERVER 0x1002ce90
-extern char s_cm_ExSellObjekt___Invalid__gm_ev_1002ce90[];
-
-// GLOBAL: SERVER 0x1002cec4
-extern char s_cm_ExSellObjekt___Invalid__quell_1002cec4[];
-
-// GLOBAL: SERVER 0x1002cef4
-extern char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[];
-
-// GLOBAL: SERVER 0x1002cf1c
-extern char s_cm_ExProdObjekt___Cannot_produce___1002cf1c[];
-
-// GLOBAL: SERVER 0x1002cf48
-extern char s_cm_ExecProduction___Lager_hat_kein_1002cf48[];
-
-// GLOBAL: SERVER 0x1002cf74
-extern char s_cm_ExecProduction___Lager_has_wron_1002cf74[];
-
-// GLOBAL: SERVER 0x1002cf9c
-extern char s_cm_ExecProduction___Invalid__lager_1002cf9c[];
 
 // GLOBAL: SERVER 0x10031570
 extern char s_fmt_playerid_10031570[];
@@ -805,10 +753,8 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 	return 0;
 }
 
-
 /* Clears a slot if it matches a target value. Used during
  * alchemy cleanup to remove specific entity references. */
-
 
 // FUNCTION: SERVER 0x1000c3c0
 // SIZE: 83

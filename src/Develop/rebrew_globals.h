@@ -26,7 +26,7 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[]; /* 0x1002A0F8 */
 extern int g_game_speed_index; /* 0x1002C3F4 */
 extern int g_file_version; /* 0x1002D4EC */
 // GLOBAL: SERVER 0x1002d4f0
-extern struct SaveHeaderTail g_save_header_tail; /* 0x1002D4F0 */
+extern char g_save_header_tail[]; /* 0x1002D4F0 */
 extern int g_producer_id_table; /* 0x1002DDE0 */
 extern unsigned char g_query_filter_state; /* 0x10030B9E */
 extern char g_str_10031500[1]; /* 0x10031500 */

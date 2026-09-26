@@ -22,7 +22,7 @@ int __cdecl lb_HandleEntitySync(int player, int msg)
 	char* message;
 
 	if ((*(unsigned int*) player & 0x6000) != 0) {
-		LogMessageInternal((char*) 0x1002d70c, 0x354, (char*) 0x1002d740, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x354, "invalid client state", 1);
 		*(char*) msg = 2;
 		return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) ? -1 : 0;
 	}

@@ -1,8 +1,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-// GLOBAL: SERVER 0x1002d4ec
-int g_file_version;
+extern int g_file_version;
 // FUNCTION: GOLD 0x4ef4f0
 // SIZE: 128
 // FUNCTION: GOLDTL 0x4f15d0

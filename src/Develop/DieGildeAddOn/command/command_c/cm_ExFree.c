@@ -23,7 +23,7 @@ int __cdecl cm_ExFree(int cmd, char* result)
 	field &= 0xffff;
 	rc = gm_ResolveEntityById(&dyn, &exist, &static_rec, field);
 	if (rc == 0) {
-		LogMessageInternal((char*) 0x1002c748, 0x2a09, (char*) 0x1002cc5c, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2a09, "Invalid Id for cmdt_FREE in cm_ExecCommand()", 1);
 		return 1;
 	}
 	if (dyn != 0) {
@@ -33,7 +33,7 @@ int __cdecl cm_ExFree(int cmd, char* result)
 		}
 	} else {
 		if (exist != 0) {
-			LogMessageInternal((char*) 0x1002c748, 0x2a21, (char*) 0x1002cc3c, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2a21, "cm_ExFree(): Can't free Objects", 1);
 			return 1;
 		}
 		gm_KillSpieler((unsigned short) *(unsigned short*) static_rec, 1);

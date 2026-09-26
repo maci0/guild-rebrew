@@ -4,14 +4,6 @@ extern int __cdecl gm_GetFieldByType(char*, int);
 extern int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 extern int __cdecl gm_QueryEntitySum(int, unsigned char);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
-// GLOBAL: SERVER 0x1002c748
-extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
-// GLOBAL: SERVER 0x1002c774
-char s_cm_ChkMoveCredits____Not_enough_m_1002c774[48] = {
-    0x63, 0x6d, 0x5f, 0x43, 0x68, 0x6b, 0x4d, 0x6f, 0x76, 0x65, 0x43, 0x72, 0x65, 0x64, 0x69, 0x74,
-    0x73, 0x28, 0x29, 0x3a, 0x20, 0x4e, 0x6f, 0x74, 0x20, 0x65, 0x6e, 0x6f, 0x75, 0x67, 0x68, 0x20,
-    0x6d, 0x6f, 0x6e, 0x65, 0x79, 0x20, 0x61, 0x74, 0x20, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x00,
-};
 
 /* Validation handler: resolves the credit source entity and checks
  * that it has enough funds for the requested transfer.  Returns 1 on
@@ -27,13 +19,6 @@ char s_cm_ChkMoveCredits____Not_enough_m_1002c774[48] = {
  * 2nd param stops zero-extension) and the sub/jns balance check all
  * match structurally. */
 
-// GLOBAL: SERVER 0x1002c7a4
-char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[49] = {
-    0x63, 0x6d, 0x5f, 0x43, 0x68, 0x6b, 0x4d, 0x6f, 0x76, 0x65, 0x43, 0x72, 0x65, 0x64, 0x69, 0x74,
-    0x73, 0x28, 0x29, 0x3a, 0x20, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x20, 0x27, 0x71, 0x75,
-    0x65, 0x6c, 0x6c, 0x5f, 0x62, 0x65, 0x73, 0x69, 0x74, 0x7a, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x27,
-    0x00,
-};
 // FUNCTION: SERVER 0x1000cb20
 // SIZE: 171
 
@@ -53,8 +38,8 @@ int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
 	*(int*) (cmd + 0x14) = field;
 	if (gm_ResolveEntityById((void**) &resolved, &entity_or_node, &ent_c, field) == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x22f9,
-		                   s_cm_ChkMoveCredits____Invalid__qu_1002c7a4, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x22f9,
+		                   "cm_ChkMoveCredits(): Invalid 'quell_besitzer_id'", 1);
 		return 1;
 	}
 	if (resolved != 0)
@@ -64,8 +49,8 @@ int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 	else
 		sum_src = (int*) ((char*) ent_c + 0x178);
 	if (gm_QueryEntitySum(*sum_src, *(unsigned char*) (cmd + 0x1c)) - *(int*) (cmd + 0x1d) < 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x231b,
-		                   s_cm_ChkMoveCredits____Not_enough_m_1002c774, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x231b,
+		                   "cm_ChkMoveCredits(): Not enough money at source", 1);
 		return 1;
 	}
 	return 0;

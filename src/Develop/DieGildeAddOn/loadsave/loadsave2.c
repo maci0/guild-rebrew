@@ -10,12 +10,6 @@
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; /* 0x1002d4ec */
 /* Round-535: ascending REF VA decl order (R521/R531/R532/R534 mid-pocket lever). */
-// DATA: SERVER 0x1002d520
-char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[] = "ls_ID2Ptr(): Houston, wir haben ein Problem...";
-// DATA: SERVER 0x1002d550
-char s_D__Develop_DieGildeAddOn_loadsav_1002d550[] = "D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c";
-// DATA: SERVER 0x1002d580
-char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[] = "ls_ID2Ptr(): Stadtspieler Id not found";
 int ls_LoadExistingEntities(int);
 int ls_LoadEntities(int);
 extern unsigned int ls_ID2Ptr(void);
@@ -430,4 +424,3 @@ int __cdecl ls_LoadEntities(int arg1)
  * treasury, population, building counts, and political
  * state (offices, elections). */
 
-int g_file_version = 65626;

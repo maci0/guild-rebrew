@@ -1,13 +1,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-// GLOBAL: SERVER 0x1002d054
-char s_cm_ExClearLagerslot___Lager_has_n_1002d054[50] = {
-    0x63, 0x6d, 0x5f, 0x45, 0x78, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x4c, 0x61, 0x67, 0x65, 0x72, 0x73,
-    0x6c, 0x6f, 0x74, 0x28, 0x29, 0x20, 0x4c, 0x61, 0x67, 0x65, 0x72, 0x20, 0x68, 0x61, 0x73, 0x20,
-    0x6e, 0x6f, 0x20, 0x72, 0x65, 0x73, 0x65, 0x72, 0x76, 0x65, 0x64, 0x20, 0x53, 0x6c, 0x6f, 0x74,
-    0x73, 0x00,
-};
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
@@ -25,12 +18,6 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * remove call, result-byte store) matches structurally with cascaded
  * register-role swaps (dx/cx, eax/edx). */
 
-// GLOBAL: SERVER 0x1002d088
-char s_cm_ExClearLagerslot___Invalid__L_1002d088[40] = {
-    0x63, 0x6d, 0x5f, 0x45, 0x78, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x4c, 0x61, 0x67, 0x65, 0x72, 0x73,
-    0x6c, 0x6f, 0x74, 0x28, 0x29, 0x20, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x20, 0x27, 0x4c,
-    0x61, 0x67, 0x65, 0x72, 0x49, 0x64, 0x27, 0x00,
-};
 // FUNCTION: GOLDTL 0x404410
 // SIZE: 334
 // FUNCTION: SERVER 0x1000e690
@@ -46,8 +33,8 @@ int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
 	*(int*) (cmd + 8) = field;
 	field = gm_ResolveEntityById(0, (void**) &resolved, 0, field);
 	if (field == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x314b,
-		                   s_cm_ExClearLagerslot___Invalid__L_1002d088, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x314b,
+		                   "cm_ExClearLagerslot() Invalid 'LagerId'", 1);
 		return 1;
 	}
 	if ((*resolved == 0x2a) || (*resolved == 0x116)) {
@@ -65,7 +52,7 @@ int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
 		}
 		return 0;
 	}
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x3155,
-	                   s_cm_ExClearLagerslot___Lager_has_n_1002d054, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x3155,
+	                   "cm_ExClearLagerslot() Lager has no reserved Slots", 1);
 	return 1;
 }

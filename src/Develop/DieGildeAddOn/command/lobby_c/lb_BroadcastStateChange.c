@@ -15,7 +15,7 @@ int __cdecl lb_BroadcastStateChange(unsigned int* a, unsigned int* b, unsigned c
 
 	status = *a;
 	if (status & 0x6000) {
-		LogMessageInternal((char*) 0x1002d70c, 0x2fc, (char*) 0x1002d740, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2fc, "invalid client state", 1);
 		*(unsigned char*) b = 2;
 		return cm_QueuePlayerCommand(a, (unsigned char*) b) == -1 ? -1 : 0;
 	}

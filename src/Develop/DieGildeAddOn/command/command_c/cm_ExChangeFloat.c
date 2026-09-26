@@ -3,12 +3,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-// GLOBAL: SERVER 0x1002d134
-char s_cm_ExChangeFloat___Invalid_Id_1002d134[30] = {
-    0x63, 0x6d, 0x5f, 0x45, 0x78, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x46, 0x6c, 0x6f, 0x61, 0x74,
-    0x28, 0x29, 0x20, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x20, 0x49, 0x64, 0x00,
-};
-
 /* Execution handler: modifies a floating-point attribute on an
  * entity. Resolves the entity, then adds the command's float delta
  * to the field at the given offset. */
@@ -30,8 +24,8 @@ int __cdecl cm_ExChangeFloat(int cmd, char* result)
 	*(int*) (cmd + 0x10) = object_id;
 	object_id = gm_ResolveEntityById(&ent_c, &ent_a, (void**) &resolved, object_id);
 	if (object_id == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x347f,
-		                   s_cm_ExChangeFloat___Invalid_Id_1002d134, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x347f,
+		                   "cm_ExChangeFloat() Invalid Id", 1);
 		return 1;
 	}
 	entity = resolved;

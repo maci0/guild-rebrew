@@ -65,7 +65,7 @@ int __cdecl cm_ChkCutsceneReady(char* obj)
 		    (*(char *)(entity_ptr + 2) == '\x06' || *(char *)(entity_ptr + 2) == '\a') &&
 		    *(int *)(entity_ptr + 0x20c) != -1 &&
 		    *(int *)(entity_ptr + 0x20c) != *(int *)(obj + 0x10)) {
-			LogMessageInternal((char*) 0x1002c748, 0x26db, (char*) 0x1002caa8, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x26db, "cm_ChkCutsceneReady(): failed...", 1);
 			return 1;
 		}
 	}

@@ -267,7 +267,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	case 0x4c:
 	case 0x4d:
 		{
-			char* rec = (char*) m_AllocTracked(0x3c, (const char*) 0x1002d504);
+			char* rec = (char*) m_AllocTracked(0x3c, "AHM_INFO");
 			*(int*) (geb + 0x65) = (int) rec;
 			*(int*) rec = -1;
 		}

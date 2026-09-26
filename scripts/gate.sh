@@ -86,7 +86,8 @@ RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
 # link's own .data so progress there is measured and regressions there caught.
 # 15,787: server.c block 0x1002956c..0x10029ac0 defined in reference order.
 # 7,807: aemter tables, alchemy tables, command speed pair and dispatch table.
-DATA_BASELINE=${DATA_BASELINE:-7807}
+# 5,309: command, loadsave and lobby strings as literals in first-use order.
+DATA_BASELINE=${DATA_BASELINE:-5309}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:

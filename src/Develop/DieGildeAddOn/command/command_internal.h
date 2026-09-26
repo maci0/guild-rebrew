@@ -61,7 +61,6 @@ extern int g_next_object_id;
 extern unsigned char g_slot_table[2];
 
 /* __FILE__ string for LogMessageInternal calls in command.c */
-extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
 
 
 /* Entity query and search (correct signatures from spiel.c definitions) */

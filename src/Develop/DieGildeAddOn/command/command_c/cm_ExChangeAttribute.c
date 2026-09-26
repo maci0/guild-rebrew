@@ -3,13 +3,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-// GLOBAL: SERVER 0x1002d0b0
-char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[34] = {
-    0x63, 0x6d, 0x5f, 0x45, 0x78, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x41, 0x74, 0x74, 0x72, 0x69,
-    0x62, 0x75, 0x74, 0x65, 0x28, 0x29, 0x20, 0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x20, 0x49,
-    0x64, 0x00,
-};
-
 /* Execution handler: applies a batch of attribute deltas to an
  * entity.  Resolves the entity, then walks the command payload's
  * field descriptors (kind/value-count/offset) and adds each value
@@ -51,8 +44,8 @@ int __cdecl cm_ExChangeAttribute(int cmd, char* result)
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
 	ok = gm_ResolveEntityById((void**) &resolved, &entity_or_node, &ent_c, field);
 	if (ok == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x31f7,
-		                   s_cm_ExChangeAttribute___Invalid_I_1002d0b0, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x31f7,
+		                   "cm_ExChangeAttribute() Invalid Id", 1);
 		return 1;
 	}
 	*(int*) (base + 0x10) = field;

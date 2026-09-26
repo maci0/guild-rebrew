@@ -2072,8 +2072,9 @@ size = 1
 ["SERVER.0x1002d4f0"]
 name = "g_save_header_tail"
 section = ".data"
-type = "char"
+type = "char[9]"
 status = "VERIFIED"
+size = 9
 
 ["SERVER.0x100241a0"]
 name = "g_crc_table_241a0"
@@ -2123,12 +2124,6 @@ section = ".data"
 status = "VERIFIED"
 type = "handler_func[]"
 size = 424
-
-["SERVER.0x1002d4fc"]
-name = "s_ls_tmp_1002d4fc"
-type = "char"
-section = ".data"
-status = "VERIFIED"
 
 ["SERVER.0x11764088"]
 name = "g_tick_rate"
@@ -2312,118 +2307,6 @@ status = "VERIFIED"
 type = "char[]"
 size = 64
 
-["SERVER.0x1002c90c"]
-section = ".data"
-name = "s_cm_ChkChangeAttribute___Target_obj_1002c90c"
-status = "VERIFIED"
-type = "char[]"
-size = 75
-
-["SERVER.0x1002c958"]
-section = ".data"
-name = "s_cm_ChkChangeAttribute___Source_obj_1002c958"
-status = "VERIFIED"
-type = "char[]"
-size = 71
-
-["SERVER.0x1002c9a0"]
-section = ".data"
-name = "s_cm_ChkChangeAttribute___Error_i_1002c9a0"
-status = "VERIFIED"
-type = "char[]"
-size = 63
-
-["SERVER.0x1002c9e0"]
-section = ".data"
-name = "s_cm_ChkChangeAttribute___Invalid_I_1002c9e0"
-status = "VERIFIED"
-type = "char[]"
-size = 35
-
-["SERVER.0x1002c7d8"]
-section = ".data"
-name = "s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8"
-status = "VERIFIED"
-type = "char[]"
-size = 53
-
-["SERVER.0x1002c810"]
-section = ".data"
-name = "s_cm_ChkSellObjekt___Inventory_vol_1002c810"
-status = "VERIFIED"
-type = "char[]"
-size = 34
-
-["SERVER.0x1002c834"]
-section = ".data"
-name = "s_cm_ChkSellObjekt___Lager_voll_1002c834"
-status = "VERIFIED"
-type = "char[]"
-size = 30
-
-["SERVER.0x1002c854"]
-section = ".data"
-name = "s_cm_ChkSellObjekt___Invalid__ziel_1002c854"
-status = "VERIFIED"
-type = "char[]"
-size = 46
-
-["SERVER.0x1002c884"]
-section = ".data"
-name = "s_cm_ChkSellObjekt___Not_enough_Ob_1002c884"
-status = "VERIFIED"
-type = "char[]"
-size = 48
-
-["SERVER.0x1002c8b4"]
-section = ".data"
-name = "s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4"
-status = "VERIFIED"
-type = "char[]"
-size = 40
-
-["SERVER.0x1002c8dc"]
-section = ".data"
-name = "s_cm_ChkSellObjekt___Invalid__quel_1002c8dc"
-status = "VERIFIED"
-type = "char[]"
-size = 47
-
-["SERVER.0x1002d364"]
-section = ".data"
-name = "s_cm_ExAllocCharacter___gm_AllocSp_1002d364"
-status = "VERIFIED"
-type = "char[]"
-size = 47
-
-["SERVER.0x1002d394"]
-section = ".data"
-name = "s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394"
-status = "VERIFIED"
-type = "char[]"
-size = 61
-
-["SERVER.0x1002cfc4"]
-section = ".data"
-name = "s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4"
-status = "VERIFIED"
-type = "char[]"
-size = 45
-
-["SERVER.0x1002cff4"]
-section = ".data"
-name = "s_cm_ExMoveObjekt___Invalid__ziel__1002cff4"
-status = "VERIFIED"
-type = "char[]"
-size = 45
-
-["SERVER.0x1002d024"]
-section = ".data"
-name = "s_cm_ExMoveObjekt___Invalid__quell_1002d024"
-status = "VERIFIED"
-type = "char[]"
-size = 46
-
 ["SERVER.0x10029f78"]
 section = ".data"
 name = "s_amt_fio_LoadAemter____Can_t_load_10029f78"
@@ -2535,27 +2418,6 @@ name = "s_gm_AllocSpieler_bug_10031594"
 size = 21
 type = "char[]"
 status = "VERIFIED"
-
-["SERVER.0x1002d520"]
-section = ".data"
-name = "s_ls_ID2Ptr____Houston__wir_haben_e_1002d520"
-status = "VERIFIED"
-type = "char[]"
-size = 47
-
-["SERVER.0x1002d550"]
-section = ".data"
-name = "s_D__Develop_DieGildeAddOn_loadsav_1002d550"
-status = "VERIFIED"
-type = "char[]"
-size = 45
-
-["SERVER.0x1002d580"]
-section = ".data"
-name = "s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580"
-status = "VERIFIED"
-type = "char[]"
-size = 39
 
 ["SERVER.0x100273ac"]
 section = ".data"
@@ -2718,27 +2580,6 @@ status = "VERIFIED"
 size = 33
 type = "char[]"
 
-["SERVER.0x1002c748"]
-section = ".data"
-name = "s_D__Develop_DieGildeAddOn_command_1002c748"
-status = "VERIFIED"
-size = 43
-type = "char[]"
-
-["SERVER.0x1002c7a4"]
-section = ".data"
-name = "s_cm_ChkMoveCredits____Invalid__qu_1002c7a4"
-status = "VERIFIED"
-size = 49
-type = "char[]"
-
-["SERVER.0x1002c774"]
-section = ".data"
-name = "s_cm_ChkMoveCredits____Not_enough_m_1002c774"
-status = "VERIFIED"
-size = 48
-type = "char[]"
-
 ["SERVER.0x1002ca74"]
 section = ".data"
 name = "s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74"
@@ -2774,41 +2615,6 @@ status = "VERIFIED"
 size = 45
 type = "char[]"
 
-["SERVER.0x1002d184"]
-section = ".data"
-name = "s_cm_ExAllocThemaPredigt____Execut_1002d184"
-status = "VERIFIED"
-size = 35
-type = "char[]"
-
-["SERVER.0x1002d0b0"]
-section = ".data"
-name = "s_cm_ExChangeAttribute___Invalid_I_1002d0b0"
-status = "VERIFIED"
-size = 34
-type = "char[]"
-
-["SERVER.0x1002d114"]
-section = ".data"
-name = "s_cm_ExChangeBits___Invalid_Id_1002d114"
-status = "VERIFIED"
-size = 29
-type = "char[]"
-
-["SERVER.0x1002d0f4"]
-section = ".data"
-name = "s_cm_ExChangeDesire___Invalid_I_1002d0f4"
-status = "VERIFIED"
-size = 31
-type = "char[]"
-
-["SERVER.0x1002d134"]
-section = ".data"
-name = "s_cm_ExChangeFloat___Invalid_Id_1002d134"
-status = "VERIFIED"
-size = 30
-type = "char[]"
-
 ["SERVER.0x1002cc14"]
 section = ".data"
 name = "s_cm_ExChangePlayerIdentity___exec_1002cc14"
@@ -2821,20 +2627,6 @@ section = ".data"
 name = "s_cm_ExChangePlayerIdentity___fail_1002cbf0"
 status = "VERIFIED"
 size = 35
-type = "char[]"
-
-["SERVER.0x1002d088"]
-section = ".data"
-name = "s_cm_ExClearLagerslot___Invalid__L_1002d088"
-status = "VERIFIED"
-size = 40
-type = "char[]"
-
-["SERVER.0x1002d054"]
-section = ".data"
-name = "s_cm_ExClearLagerslot___Lager_has_n_1002d054"
-status = "VERIFIED"
-size = 50
 type = "char[]"
 
 ["SERVER.0x1002d41c"]
@@ -2884,111 +2676,6 @@ section = ".data"
 name = "s_cm_ExKillTransporter____invalid_t_1002d3d4"
 status = "VERIFIED"
 size = 42
-type = "char[]"
-
-["SERVER.0x1002cf9c"]
-section = ".data"
-name = "s_cm_ExProdObjekt_Invalid_lager_id_1002cf9c"
-size = 37
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cf74"]
-section = ".data"
-name = "s_cm_ExProdObjekt_Lager_has_wrong_Type_1002cf74"
-size = 39
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cf48"]
-section = ".data"
-name = "s_cm_ExProdObjekt_Lager_hat_keinen_Besitze_1002cf48"
-size = 44
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cf1c"]
-section = ".data"
-name = "s_cm_ExProdObjekt_Nicht_gen_gend_Rohstoffe_1002cf1c"
-size = 44
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cef4"]
-section = ".data"
-name = "s_cm_ExProdObjekt_Rohstoff_verschwunden_1002cef4"
-size = 40
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cec4"]
-section = ".data"
-name = "s_cm_ExSellObjekt_Invalid_quell_besitzer_i_1002cec4"
-size = 46
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002ce90"]
-section = ".data"
-name = "s_cm_ExSellObjekt_Invalid_gm_eval_ObjektBe_1002ce90"
-size = 51
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002ce4c"]
-section = ".data"
-name = "s_cm_ExSellObjekt_Object_not_found_ObjProt_1002ce4c"
-size = 65
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cdfc"]
-section = ".data"
-name = "s_cm_ExSellObjekt_Not_enough_Objekts_at_so_1002cdfc"
-size = 78
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cdcc"]
-section = ".data"
-name = "s_cm_ExSellObjekt_Invalid_ziel_besitzer_id_1002cdcc"
-size = 45
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cdac"]
-section = ".data"
-name = "s_cm_ExSellObjekt_Lager_voll_1002cdac"
-size = 29
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cd78"]
-section = ".data"
-name = "s_cm_ExSellObjekt_Not_enough_Credits_at_de_1002cd78"
-size = 52
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002ccc0"]
-section = ".data"
-name = "s_cm_ExSellObjekt_gm_AllocRaum_failed_1002ccc0"
-size = 39
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002cce8"]
-section = ".data"
-name = "s_cm_ExSellObjekt_gm_AllocObjekt_failed_1002cce8"
-size = 41
-type = "char[]"
-status = "VERIFIED"
-
-["SERVER.0x1002d0d4"]
-section = ".data"
-name = "s_cm_ExSetAttribute___Invalid_Id_1002d0d4"
-status = "VERIFIED"
-size = 31
 type = "char[]"
 
 ["SERVER.0x1002d214"]
@@ -3107,13 +2794,6 @@ type = "int[2]"
 name = "gz_magic"
 status = "VERIFIED"
 
-["SERVER.0x1002d464"]
-name = "__old_sbh_threshold"
-type = "unsigned int"
-size = 4
-section = ".data"
-status = "VERIFIED"
-
 ["SERVER.0x100366a8"]
 name = "__sbh_threshold"
 type = "unsigned int"
@@ -3127,27 +2807,6 @@ type = "int"
 size = 4
 section = ".data"
 status = "UNCHECKED"
-
-["SERVER.0x1002cd14"]
-name = "g_error_msg_sell_no_source"
-type = "char[]"
-size = 51
-section = ".data"
-status = "VERIFIED"
-
-["SERVER.0x1002cc8c"]
-name = "g_error_msg_sell_no_dest"
-type = "char[]"
-size = 50
-section = ".data"
-status = "VERIFIED"
-
-["SERVER.0x1002cd48"]
-name = "g_error_msg_sell_failed"
-type = "char[]"
-size = 46
-section = ".data"
-status = "VERIFIED"
 
 ["GOLDTL.0x00677918"]
 name = "g_log_level_table"

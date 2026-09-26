@@ -24,7 +24,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 	int result;
 
 	if ((*player & 0x6000) != 0) {
-		LogMessageInternal((char*) 0x1002d70c, 0x244, (char*) 0x1002d740, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x244, "invalid client state", 1);
 		*msg = 2;
 		result = cm_QueuePlayerCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
@@ -40,7 +40,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 	memcpy((char*) msg + 0x14, &list, sizeof(list));
 	result = cm_QueuePlayerCommand(player, msg);
 	if (result == -1) return -1;
-	LogMessageInternal((char*) 0x1002d70c, 0x258, (char*) 0x1002d6f8, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x258, "Got lb_ExPlayerlist", 1);
 	return 0;
 }
 
@@ -58,7 +58,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 	unsigned char* rec;
 
 	if ((*player & 0x6000) != 0) {
-		LogMessageInternal((char*) 0x1002d70c, 0x264, (char*) 0x1002d740, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x264, "invalid client state", 1);
 		*msg = 2;
 		result = cm_QueuePlayerCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
@@ -69,7 +69,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 		return (result + 1 == 0) ? -1 : 0;
 	}
 	if ((unsigned int) *(int *) (msg + 0x18) > 1) {
-		LogMessageInternal((char*) 0x1002d70c, 0x279, (char*) 0x1002d774, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x279, "invalid client data", 1);
 		*msg = 2;
 		result = cm_QueuePlayerCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
@@ -87,6 +87,6 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 		result = cm_QueuePlayerCommand((unsigned int*) conn, msg);
 		if (result == -1) return -1;
 	}
-	LogMessageInternal((char*) 0x1002d70c, 0x28c, (char*) 0x1002d758, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x28c, "Got lb_ExPlayerReadyStatus", 1);
 	return 0;
 }

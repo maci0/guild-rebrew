@@ -151,7 +151,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 			}
 
 			if (esi[0] == 0x1e) {
-				*(int*) (esi + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x1002d510);
+				*(int*) (esi + 0x71) = (int) m_AllocTracked(0x600, "f3g:PlantMap");
 				for (load_result = 0; load_result < 0x40; load_result++) {
 					if (!ls_ReadVfsDataChecked((void*) (*(int*) (esi + 0x71) + load_result * 0x18), 4, 1, (void*) stream_ctx)) {
 						return 0;
@@ -239,7 +239,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) stream_ctx)) {
 						return 0;
 					}
-					ahm_info = (int*) m_AllocTracked(0x3c, (const char*) 0x1002d504);
+					ahm_info = (int*) m_AllocTracked(0x3c, "AHM_INFO");
 					*(int*) (esi + 0x65) = (int) ahm_info;
 					*ahm_info = neg1;
 					goto label_10012d72;
