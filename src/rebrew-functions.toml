@@ -33170,3 +33170,10 @@ updated_at = "2026-09-26T03:13:17+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-26T03:13:17+00:00"
+
+["GOLDTL.0x0043a140"]
+size = 688
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-26T07:53:22+00:00"
+blocker = "hand-written alignment-prefixed rep movsd sequence no msvc6 C produces; reproduced with __asm (docs/msvc6-c-shapes.md 11, docs/codegen-walls.md 6b)"
