@@ -104,6 +104,39 @@ boundary: every symbol above `0xdf00` there is uninitialized, so the
 surplus was blob + emitted literals, never an initialized global the layout
 could not place.
 
+### The split link's tail blob, and what the raw-link `.data` figure measures
+
+`scripts/split_link.sh` drops `data_restore.c` and appends
+`data_restore_split.obj` last: a blob holding the reference's `.data` from
+offset `S` to `0xe000`, where `S` is where the link places it. Its bytes then
+sit on the reference's own bytes and add nothing to the gate's raw-link
+`.data` count. `S` moves whenever a game TU's `.data` changes size, so the
+script reads `S` from `build/split_poc.map` after linking and, if the blob size
+(`GAP = 0xe000 - S`) was stale, re-emits it and relinks. A hand-set `GAP`
+that went stale by `0x58` cost 6,187 bytes and pushed `.data` raw to `0xf000`.
+
+Raw-link `.data` differing is **16,415** of `0xe000` (gate `DATA_BASELINE`),
+by section offset:
+
+| range | differing | cause |
+|---|---|---|
+| `[0, 0x256c)` | 16 | stock zlib's `"1.1.3"` literal and its pointer swapped (`deflate.c`); `_z_errmsg` pointers into it |
+| `[0x256c, 0x4368)` | 6,948 | game TU data placed early: the reference has data no TU defines yet, first `0x344` bytes of `server.c` strings and path buffers at `0x1002956c..0x100298b0`, growing to `+0x6260` by the CRT |
+| `[0x4368, 0x73a8)` | 9,224 | LIBCMT member data, `fold_literals.obj`, `rdata_fold.c`: the reference places it about `0x6260` later, after the unmodelled game data |
+| `[0x73a8, 0x74cc)` | 227 | `link_stubs.c` constants that belong to game TUs |
+| `[0x74cc, 0xe000)` | 0 | the tail blob |
+
+Everything past `0x256c` is placement: each gap closes only by defining the
+missing reference data in the TU that owns it, in reference order.
+
+**A local array initialised from a string literal emits that literal as a
+`.data` COMDAT** (`char szSep[] = "---\r\n";`). If a data blob already carries
+the same bytes, the link holds them twice and every later symbol shifts.
+`CrashDumpUnhandledExceptionFilter.c` hit this (every symbol from `0x1002733c` on moved `+0x20`,
+raw-link `.data` 22,684 to 27,620): its blob now ends at `0x100272f8`, the two
+literals follow as that file's COMDATs, and `EmitCrashModuleLine.c` (the next
+object) defines the rest from `0x10027318`.
+
 ### The prefix cannot be dodged by reordering: sections merge by name
 
 The sub-sections of image section 2 are merged in **section-name order**, not
