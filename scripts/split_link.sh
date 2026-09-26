@@ -140,11 +140,13 @@ echo "== data gap for this composition"
 # the first guess.
 DATA_RAW=0xe000
 GAP=0x6b34
+ZZ=0
 emit_gap_blob() {
-python3 - "$GAP" "$WORK/data_restore_split.c" <<'BLOB'
+python3 - "$GAP" "$WORK/data_restore_split.c" "$ZZ" <<'BLOB'
 import struct, sys
 from pathlib import Path
 size = int(sys.argv[1], 0)
+zz = int(sys.argv[3], 0)  # bytes .data$zz takes at the end of the section
 out = Path(sys.argv[2])
 ref = Path("original/Server/server.dll").read_bytes()
 pe = struct.unpack_from("<I", ref, 0x3C)[0]
@@ -156,7 +158,7 @@ for i in range(count):
         raw = struct.unpack_from("<I", ref, off + 16)[0]
         ptr = struct.unpack_from("<I", ref, off + 20)[0]
         break
-blob = ref[ptr + raw - size : ptr + raw]
+blob = ref[ptr + raw - zz - size : ptr + raw - zz]
 lines = [f"unsigned char g_data_restore_gap[0x{size:x}] = {{"]
 for i in range(0, len(blob), 16):
     lines.append("\t" + ",".join(f"0x{b:02x}" for b in blob[i : i + 16]) + ",")
@@ -204,7 +206,8 @@ blob_at=$(sed -n 's/^ 0003:\([0-9a-f]*\) *_g_data_restore_gap .*/\1/p' build/spl
 # rdata_fold.c's literals sit in .data$zz, which the linker groups after the
 # blob (4-aligned); leave room for them so the section still ends at DATA_RAW.
 zz=$(sed -n 's/^ 0003:[0-9a-f]* \([0-9a-f]*\)H \.data\$zz .*/\1/p' build/split_poc.map)
-want=$((DATA_RAW - 0x$blob_at - ((0x${zz:-0} + 3) & ~3)))
+ZZ=$(( (0x${zz:-0} + 3) & ~3 ))
+want=$((DATA_RAW - 0x$blob_at - ZZ))
 [ "$want" -gt 0 ] || { echo "game .data runs past $DATA_RAW (blob at 0x$blob_at)"; exit 1; }
 if [ "$want" -ne $((GAP)) ]; then
     echo "data gap: blob starts at 0x$blob_at, GAP $GAP -> $(printf '0x%x' "$want"); relinking"
