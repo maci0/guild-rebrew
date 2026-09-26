@@ -1,11 +1,8 @@
 #include <string.h>
 
-#pragma pack(1)
-struct s36_4ce430 {
-	int v[9];
-};
-// SIZE 0x24
+#include "g_9baa20.h"
 
+#pragma pack(1)
 struct s87_4ce430 {
 	int v[21];
 	short w;
@@ -21,7 +18,7 @@ struct s72_4ce430 {
 };
 // SIZE 0x48
 
-extern struct s36_4ce430 g_9baa20;
+extern Rec9baa20 g_9baa20;
 extern int g_9baa08;
 extern int g_9baa04;
 
@@ -43,7 +40,7 @@ int __cdecl fcn_004ce430(char* rec, char* out)
 		out[0] = 2;
 	switch (*(int*) (rec + 0x10)) {
 	case 0:
-		g_9baa20 = *(struct s36_4ce430*) (rec + 0x14);
+		g_9baa20 = *(Rec9baa20*) (rec + 0x14);
 		break;
 	case 1:
 		r = fcn_004cdf00(*(int*) (rec + 0x14));

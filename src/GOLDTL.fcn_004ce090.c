@@ -3,9 +3,11 @@
 // FUNCTION: GOLD 0x004cd510
 // SIZE: 112
 
+#include "g_9baa20.h"
+
 extern int g_9baadc;
 extern unsigned char g_9baa96;
-extern unsigned int g_9baa20;
+extern Rec9baa20 g_9baa20;
 extern int g_9baa24[8];
 
 char* __cdecl fcn_004ce190(int);
@@ -21,7 +23,7 @@ int __cdecl fcn_004ce090(void)
 		need = g_9baa96;
 	else
 		need = g_9baa96;
-	if (g_9baa20 < need)
+	if (g_9baa20.count < need)
 		return 0;
 	cnt = 0;
 	for (i = 0; i < 8; i++) {

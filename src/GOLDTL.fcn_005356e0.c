@@ -1,12 +1,14 @@
 extern char g_7e2a80[];
-extern int g_774940;
+typedef void* HWND;
+
+extern HWND g_774940;
 extern int g_77496c;
 
 // FUNCTION: GOLDTL 0x5356e0
 // SIZE: 133
 
-__declspec(dllimport) int __stdcall PeekMessageA(void*, int, unsigned int, unsigned int, unsigned int);
-__declspec(dllimport) int __stdcall GetMessageA(void*, int, unsigned int, unsigned int);
+__declspec(dllimport) int __stdcall PeekMessageA(void*, HWND, unsigned int, unsigned int, unsigned int);
+__declspec(dllimport) int __stdcall GetMessageA(void*, HWND, unsigned int, unsigned int);
 __declspec(dllimport) int __stdcall TranslateMessage(void*);
 __declspec(dllimport) int __stdcall DispatchMessageA(void*);
 

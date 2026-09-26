@@ -1,4 +1,6 @@
-extern int g_774940;
+typedef void* HWND;
+
+extern HWND g_774940;
 extern char g_6a3448[];
 
 // FUNCTION: GOLD 0x531c00
@@ -20,7 +22,7 @@ int __cdecl fcn_00538710(void)
 {
 	char path[0x104];
 
-	InitializeLogAndErrorHandler((void*) fcn_00538220, (void*) fcn_00538700, g_774940, 0x10);
+	InitializeLogAndErrorHandler((void*) fcn_00538220, (void*) fcn_00538700, (int) g_774940, 0x10);
 	m_init(0xbb80);
 	fcn_0042dfb0(0x80);
 	sprintf(path, "%sgamedata\\Screenshots", g_6a3448);

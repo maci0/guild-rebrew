@@ -1,7 +1,8 @@
+#include "g_6abb08.h"
 // GLOBAL: GOLDTL 0x6abb08
-extern char g_6abb08[];
+extern Offer g_6abb08[];
 // GLOBAL: GOLD 0x62c420
-extern char g_6abb08[];
+extern Offer g_6abb08[];
 // FUNCTION: GOLD 0x005ba7b0
 // SIZE: 80
 // FUNCTION: GOLDTL 0x5c6220
@@ -19,10 +20,10 @@ char* __cdecl fcn_005c6220(int key, int* out)
 			if (out != 0) {
 				*out = n;
 			}
-			return (char*) (g_6abb08 + n * 0x1c);
+			return (char*) g_6abb08 + n * 0x1c;
 		}
 		n++;
-		v = *(int*) (g_6abb08 + n * 0x1c);
+		v = *(int*) ((char*) g_6abb08 + n * 0x1c);
 	}
 	return 0;
 }

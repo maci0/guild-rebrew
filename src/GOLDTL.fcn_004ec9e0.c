@@ -3,31 +3,16 @@
 // FUNCTION: GOLDTL 0x004ec9e0
 // SIZE: 181
 
-typedef struct
-{
-	int a;
-	int b;
-	int c;
-} V12;
-// SIZE 0xc
-
-typedef struct
-{
-	int active;
-	V12 v;
-	int y;
-	int x;
-} Slot18;
-// SIZE 0x18
+#include "g_772f90.h"
 
 extern int g_772f78;
 extern int g_772f7c;
 extern int g_772f80;
 extern int g_772f84;
 extern int g_772f88;
-extern Slot18 g_772f90[3];
+extern Slot772f90 g_772f90[3];
 extern int g_772fd8;
-extern V12* g_772fdc;
+extern Draw772* g_772fdc;
 
 void __cdecl fcn_004ecaa0(int a);
 

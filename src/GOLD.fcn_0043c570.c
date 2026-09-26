@@ -1,7 +1,7 @@
 extern char s_5fb698[];
 extern char s_5fb67c[];
 extern char g_633438;
-extern int g_5fb5b0;
+extern char* g_5fb5b0;
 
 char* __cdecl fcn_004223c0(int size, char* tag);
 void __cdecl fcn_0043ce60(char* o);
@@ -49,6 +49,6 @@ char* __cdecl fcn_0043c570(int kind, char* name)
 	}
 	*(int*) (o + 0x21c) = *(int*) (o + 0x218);
 	fcn_005de8c0(o, name, 0x40);
-	*(int*) (o + 0x208) = g_5fb5b0;
+	*(int*) (o + 0x208) = (int) g_5fb5b0;
 	return o;
 }

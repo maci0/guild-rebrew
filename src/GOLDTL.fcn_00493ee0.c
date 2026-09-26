@@ -1,11 +1,6 @@
-typedef struct Mult {
-	int key;
-	int mult;
-	int pad[2];
-} Mult;
-// SIZE 0x10
+#include "g_664260.h"
 
-extern Mult g_664260[7];
+extern Mult664260 g_664260[7];
 
 int __cdecl fcn_0050dac0(unsigned short id);
 

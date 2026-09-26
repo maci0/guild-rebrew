@@ -3,18 +3,12 @@
 // FUNCTION: GOLDTL 0x4ecbe0
 // SIZE: 52
 
-typedef struct
-{
-	int key;
-	int a;
-	int b;
-} Rec0c;
-// SIZE 0xc
+#include "g_772f90.h"
 
 extern int g_772fe0;
-extern Rec0c* g_772fe4;
+extern Rec772fe4* g_772fe4;
 
-Rec0c* __cdecl fcn_004ecbe0(int key)
+Rec772fe4* __cdecl fcn_004ecbe0(int key)
 {
 	int i;
 

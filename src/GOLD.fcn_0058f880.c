@@ -5,7 +5,7 @@
 
 extern int g_6f2688;
 extern char** g_6f5308;
-extern int g_5fb5b0;
+extern char* g_5fb5b0;
 
 void __cdecl fcn_00438d40(int, int, int, void*, int);
 char __cdecl fcn_0058f780(char* e, char* pfx);
@@ -26,7 +26,7 @@ void __cdecl fcn_0058f880(int a1, char** list)
 
 	g_6f2688 = 0;
 	g_6f5308 = list;
-	fcn_00438d40(g_5fb5b0, 0, 0x180, (void*) fcn_0058f780, a1);
+	fcn_00438d40((int) g_5fb5b0, 0, 0x180, (void*) fcn_0058f780, a1);
 	for (i = 0; i < g_6f2688; i++) {
 		e = g_6f5308[i];
 		if (e == 0) {
