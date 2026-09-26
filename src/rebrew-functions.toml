@@ -32675,3 +32675,24 @@ updated_at = "2026-09-25T23:15:19+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T23:16:31+00:00"
+
+["GOLDTL.0x00402370"]
+blocker = "inline-asm block-fill prelude (codegen-walls 6b): no msvc6 C spelling emits it"
+
+["GOLDTL.0x00416060"]
+blocker = "inline-asm block-fill prelude (codegen-walls 6b): no msvc6 C spelling emits it"
+
+["GOLDTL.0x00439020"]
+blocker = "inline-asm block-fill prelude (codegen-walls 6b): no msvc6 C spelling emits it"
+
+["GOLDTL.0x0044c940"]
+blocker = "inline-asm block-fill prelude (codegen-walls 6b): no msvc6 C spelling emits it"
+
+["GOLDTL.0x00499ad0"]
+blocker = "inline-asm block-fill prelude (codegen-walls 6b): no msvc6 C spelling emits it"
+
+["GOLDTL.0x004cf450"]
+blocker = "inline-asm block-fill prelude (codegen-walls 6b): no msvc6 C spelling emits it"
+
+["GOLDTL.0x00551f90"]
+blocker = "inline-asm block-fill prelude (codegen-walls 6b): no msvc6 C spelling emits it"
