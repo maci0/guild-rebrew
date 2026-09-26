@@ -108,26 +108,68 @@ could not place.
 
 `scripts/split_link.sh` drops `data_restore.c` and appends
 `data_restore_split.obj` last: a blob holding the reference's `.data` from
-offset `S` to `0xe000`, where `S` is where the link places it. Its bytes then
-sit on the reference's own bytes and add nothing to the gate's raw-link
+offset `S` (where the link places it) up to where the `.data$zz` group starts.
+`.data$zz` holds `crt_region/rdata_fold.c`'s two literals; the linker sorts it
+after every plain `.data` contribution, so the blob is sized
+`GAP = 0xe000 - S - align4(.data$zz)` and both end at `0xe000`. The blob's
+bytes sit on the reference's own and add nothing to the gate's raw-link
 `.data` count. `S` moves whenever a game TU's `.data` changes size, so the
-script reads `S` from `build/split_poc.map` after linking and, if the blob size
-(`GAP = 0xe000 - S`) was stale, re-emits it and relinks. A hand-set `GAP`
-that went stale by `0x58` cost 6,187 bytes and pushed `.data` raw to `0xf000`.
+script reads `S` and the `.data$zz` size from `build/split_poc.map` after
+linking and, if `GAP` was stale, re-emits the blob and relinks. A hand-set
+`GAP` that went stale by `0x58` cost 6,187 bytes and pushed `.data` raw to
+`0xf000`. When the reference bytes the blob would copy are all zero, msvc6
+puts the array in `.bss`: the section then ends at `S` and the raw size still
+rounds to `0xe000`.
 
-Raw-link `.data` differing is **16,415** of `0xe000` (gate `DATA_BASELINE`),
+Raw-link `.data` differing is **1,253** of `0xe000` (gate `DATA_BASELINE`),
 by section offset:
 
 | range | differing | cause |
 |---|---|---|
 | `[0, 0x256c)` | 16 | stock zlib's `"1.1.3"` literal and its pointer swapped (`deflate.c`); `_z_errmsg` pointers into it |
-| `[0x256c, 0x4368)` | 6,948 | game TU data placed early: the reference has data no TU defines yet, first `0x344` bytes of `server.c` strings and path buffers at `0x1002956c..0x100298b0`, growing to `+0x6260` by the CRT |
-| `[0x4368, 0x73a8)` | 9,224 | LIBCMT member data, `fold_literals.obj`, `rdata_fold.c`: the reference places it about `0x6260` later, after the unmodelled game data |
-| `[0x73a8, 0x74cc)` | 227 | `link_stubs.c` constants that belong to game TUs |
-| `[0x74cc, 0xe000)` | 0 | the tail blob |
+| `[0x256c, 0xa658)` | 0 | game data, defined in reference order |
+| `[0xa658, 0xcbb0)` | 16 | LIBCMT member data, at its reference offsets |
+| `[0xcbb0, 0xd274)` | ~1,213 | LIBCMT data the link does not carry, then `link_stubs.c`'s constants |
+| `[0xd274, 0xe000)` | ~8 | the tail blob and `.data$zz` |
 
-Everything past `0x256c` is placement: each gap closes only by defining the
-missing reference data in the TU that owns it, in reference order.
+The LIBCMT tail: the reference holds `setlocal.obj` (`0x10b` at `0xcbc8`),
+`ctype.obj` (`0x20a` at `0xccd4`), `charmax.obj` and `lconv.obj` data that
+this link never pulls (`link_stubs.c` satisfies `__pctype`, `___lc_handle`
+and friends so the NLS-importing objects stay out), so `crt0msg.obj`'s
+`_rterrs` lands `0x340` early; the data-only members `emit_defs.py` defines
+(`cmiscdat`, `nlsdata1`, `timeset`, `days`, `winxfltr`, `constpow`) are
+appended after the code-carrying ones instead of at their reference offsets.
+Matching each LIBCMT archive member's `.data` (relocation slots masked)
+against the reference gives the order: `exsup` `0xcba0`, `cmiscdat` `0xcbb0`,
+`setlocal` `0xcbc8`, `ctype` `0xccd4`, `nlsdata1` `0xcee0`, `crt0msg`
+`0xcef0`, `charmax` `0xcf78`, `timeset` `0xcf80`, `tzset` `0xd018`, `days`
+`0xd034`, `winxfltr` `0xd0a0`, `intrncvt` `0xd130`, `mbctype` `0xd160`,
+`lconv` `0xd310`, `constpow` `0xd350`. `link_stubs.c`'s `.rdata` constants
+(`g_float_const_*`, `g_dbl_const_*`) keep their values so the raw link
+computes correctly; the reference holds those bytes in `.rdata`.
+
+How msvc6 lays out a TU's `.data`, as used to close the game gaps:
+
+* Named initialised globals first, in definition order, then the string
+  literal COMDATs. A function's literals are emitted in **reverse** order of
+  first use in its code, functions in source order, so turning named string
+  arrays and raw `(char*) 0x1002....` addresses back into literals reproduces
+  the reference order, and a literal several split files share (a `__FILE__`
+  path) folds to the first object's copy.
+* A **struct** object gives the whole section 8-byte alignment and is itself
+  8-aligned; arrays of scalars (including 2-D) only 4. Four zero bytes in the
+  reference between two TUs' data (`0x10029aec`, `0x1002d874`, `0x1002dd44`)
+  mean the second TU's section starts with, or holds, a struct object.
+* A named array is not neutral: `gm_AllocSpieler`'s SpID format as a literal
+  swaps two stack loads (3681/3689), and `gm_Open` with the spiel.c path as a
+  literal instead of a raw address falls to 859/861. Both keep their old form;
+  `rebrew test` each file after the conversion.
+* So is a header line: dropping one unused `extern` from `rebrew_globals.h`
+  took `gm_Open` (which includes it) to 859/861 again. Keep declarations a
+  file sees unless `rebrew verify --full` holds.
+* A split TU's named globals would land after the literals of the files linked
+  before it: `spiel.c`'s named block therefore lives in the data-only
+  `game/spiel_data.c`, ordered by `--first-va` (CMakeLists.txt).
 
 **A local array initialised from a string literal emits that literal as a
 `.data` COMDAT** (`char szSep[] = "---\r\n";`). If a data blob already carries
@@ -252,8 +294,15 @@ from the literal's contents, so an object that references *the same literals*
 defines *the same COMDAT names*, and whatever the library emits for them is
 discarded.
 
-`crt_region/rdata_fold.c` does exactly that for the six objects' strings and
-carries no `.text` at all: the literals go to `.data` (referenced literals do
+**Current state:** `scripts/split_blob.py` now places the members' string
+COMDATs at their reference offsets inside the blob instead (longest first, so
+a short string takes a match the longer sections leave free), and
+`rdata_fold.c` folds only the all-zero pair (`"\0"`, `L"\0"`) that matches
+every zero run; its literals sit in `.data$zz` (section 2). The rest of this
+subsection records how folding was established.
+
+`crt_region/rdata_fold.c` did exactly that for the six objects' strings and
+carried no `.text` at all: the literals go to `.data` (referenced literals do
 not go to `.rdata`; see the section above), which costs nothing because
 postlink overwrites `.data` wholesale.  Measured on the CMake build:
 

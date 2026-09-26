@@ -6,9 +6,9 @@ unsigned int __cdecl gm_AllocSpieler(int p1, int p2, int p3, int p4, int p5, int
 void __cdecl plt_TableLookup(unsigned int a, unsigned short* b);
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes[1];
-// GLOBAL: SERVER 0x10035a05
-extern unsigned char g_stat_b_array[];
 extern unsigned char g_slot_table[2];
+/* 0x10035a05: the byte at +0x165 of each 0x21c-byte g_slot_table record. */
+#define g_stat_b_array ((unsigned char*) g_slot_table + 0x165)
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
 /* Simulation entity records are 0x21c bytes, based at g_slot_table

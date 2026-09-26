@@ -400,7 +400,7 @@ void __cdecl srv_LogWinsockError(int err_code)
  * high loop bound is required because angr's LoopSeer counts each
  * rep-stosd iteration — the memset alone is 252 iterations. */
 
-extern char g_office_slots[];
+extern char g_office_slots[0x3f0];
 // FUNCTION: GOLD 0x004e5cd0
 // SIZE: 372
 // FUNCTION: GOLDTL 0x4e7810

@@ -586,14 +586,14 @@ size = 4
 
 ["SERVER.0x101398a0"]
 name = "g_dispatch_table_b"
-type = "int*"
+type = "int[1]"
 status = "UNCHECKED"
 section = ".data"
 size = 4
 
 ["SERVER.0x1013989c"]
 name = "g_dispatch_table_a"
-type = "int*"
+type = "int[1]"
 status = "UNCHECKED"
 section = ".data"
 size = 4
@@ -614,7 +614,7 @@ size = 4
 
 ["SERVER.0x101de5a0"]
 name = "g_office_slots"
-type = "char[]"
+type = "char[1008]"
 status = "UNCHECKED"
 section = ".data"
 size = 4
@@ -772,13 +772,6 @@ type = "int"
 status = "UNCHECKED"
 section = ".data"
 size = 4
-
-["SERVER.0x10035a05"]
-name = "g_stat_b_array"
-type = "char"
-status = "UNCHECKED"
-section = ".data"
-size = 1
 
 ["SERVER.0x10025fa0"]
 name = "g_const_5fa0"
@@ -1953,8 +1946,9 @@ status = "VERIFIED"
 ["SERVER.0x10025718"]
 name = "g_game_speed_table"
 section = ".rdata"
-type = "int[]"
+type = "int[5]"
 status = "VERIFIED"
+size = 20
 
 ["SERVER.0x1002c3f0"]
 name = "g_game_speed_value"
@@ -1999,13 +1993,6 @@ name = "g_float_const_a8"
 section = ".rdata"
 type = "float"
 status = "VERIFIED"
-
-["SERVER.0x1009aca2"]
-name = "g_dynamic_entities"
-section = ".data"
-type = "unsigned char"
-status = "UNCHECKED"
-size = 1
 
 ["SERVER.0x101de460"]
 name = "g_save_info"
@@ -2664,10 +2651,11 @@ size = 38
 type = "char[]"
 
 ["SERVER.0x10034614"]
-type = "void *"
+type = "int"
 section = ".data"
 name = "g_crash_callback"
 status = "VERIFIED"
+size = 4
 
 ["SERVER.0x1003461c"]
 type = "char"
@@ -2690,39 +2678,45 @@ status = "VERIFIED"
 
 ["SERVER.0x1002577c"]
 section = ".rdata"
-type = "int[]"
+type = "int[4]"
 name = "g_field_worker_count_wt0"
 status = "VERIFIED"
+size = 16
 
 ["SERVER.0x1002578c"]
 section = ".rdata"
-type = "int[]"
+type = "int[4]"
 name = "g_field_worker_count_wt1"
 status = "VERIFIED"
+size = 16
 
 ["SERVER.0x1002579c"]
 section = ".rdata"
-type = "int[]"
+type = "int[4]"
 name = "g_field_worker_count_wt2"
 status = "VERIFIED"
+size = 16
 
 ["SERVER.0x100257ac"]
 section = ".rdata"
-type = "int[]"
+type = "int[4]"
 name = "g_field_worker_count_wt3"
 status = "VERIFIED"
+size = 16
 
 ["SERVER.0x1002575c"]
 section = ".rdata"
-type = "int[]"
+type = "int[4]"
 name = "g_field_worker_count"
 status = "VERIFIED"
+size = 16
 
 ["SERVER.0x1002576c"]
 section = ".rdata"
-type = "int[]"
+type = "int[4]"
 name = "g_field_entry_count"
 status = "VERIFIED"
+size = 16
 
 ["SERVER.0x10027488"]
 section = ".data"
@@ -4527,3 +4521,10 @@ section = ".data"
 name = "g_spiel_data_10030eac"
 type = "int[16]"
 size = 64
+
+["SERVER.0x1009aca2"]
+name = "g_dynamic_entities"
+section = ".data"
+type = "unsigned char"
+size = 1
+status = "UNCHECKED"

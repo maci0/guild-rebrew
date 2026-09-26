@@ -2,7 +2,7 @@
 #include "../../../Units/Error/error.h"
 #include "../office_slot.h"
 
-extern char g_office_slots[]; /* 0x101de5a0 */
+extern char g_office_slots[0x3f0]; /* 0x101de5a0 */
 void* __cdecl gm_LookupEntityRecordById(int);
 /* Validates if an entity is eligible for an office position.
  * Checks entity type, existing office holdings, and eligibility

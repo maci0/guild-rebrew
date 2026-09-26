@@ -8,9 +8,9 @@ extern int g_query_filter_max_id; /* 0x10030b94 */
 extern int g_query_filter_owner; /* 0x10030b98 */
 extern unsigned short g_query_filter_type; /* 0x10030b9c */
 // GLOBAL: SERVER 0x101398a0
-extern int g_dispatch_table_b[]; /* 0x101398a0 */
+extern int g_dispatch_table_b[1]; /* 0x101398a0 */
 // GLOBAL: SERVER 0x1013989c
-extern int g_dispatch_table_a[]; /* 0x1013989c */
+extern int g_dispatch_table_a[1]; /* 0x1013989c */
 
 // FUNCTION: SERVER 0x10016290
 // gm_NextEntityQueryMatch

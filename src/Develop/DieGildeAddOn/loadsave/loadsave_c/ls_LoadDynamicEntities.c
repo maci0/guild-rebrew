@@ -1,5 +1,3 @@
-// GLOBAL: SERVER 0x1009aca2
-extern char g_dynamic_entities[]; /* 0x1009aca2 */
 // FUNCTION: GOLD 0x0051db30
 // SIZE: 880
 // FUNCTION: GOLDTL 0x522ac0
@@ -17,7 +15,8 @@ extern char g_dynamic_entities[]; /* 0x1009aca2 */
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; /* 0x1002d4ec */
-extern char g_dynamic_entities[]; /* 0x1009aca2 */
+/* 0x1009aca2: two bytes into the 0xac-byte entity records at g_entity_base. */
+#define g_dynamic_entities ((char*) g_entity_base + 2)
 int ls_LoadDynamicEntities(void*);
 
 /* Loads graveyard-specific data from a save file. Reads

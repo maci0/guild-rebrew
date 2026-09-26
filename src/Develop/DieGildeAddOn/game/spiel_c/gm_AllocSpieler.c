@@ -353,7 +353,7 @@ extern float g_float_const_c4;  /* 0x100256c4: 30.0 */
 extern float g_float_const_c8;  /* 0x100256c8: 7.0 */
 extern float g_float_const_714; /* 0x10025714: 0.25 */
 
-extern unsigned char g_stat_table_30ba0[]; /* 0x10030ba0: 6-byte records, 5 stats + slot[0xd] default */
+extern unsigned char g_stat_table_30ba0[780]; /* 0x10030ba0: 6-byte records, 5 stats + slot[0xd] default */
 #define g_stat_table_30dda (g_stat_table_30ba0 + 95 * 6)
 
 extern int g_dynasty_field_2c; /* 0x1003542c */

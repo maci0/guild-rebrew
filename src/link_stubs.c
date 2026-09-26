@@ -29,8 +29,8 @@ int fcn_1001a6a1 = 0;
  * those calls to a data address.  Both now call gm_SubObjectNoKill directly.
  * (scripts/gen_link_stubs.py no longer exists; edit by hand.) */
 float g_output_share[1] = {0.0f};
-int g_field_worker_count[1] = {0};
-int g_field_entry_count[1] = {0};
+int g_field_worker_count[4] = {0};
+int g_field_entry_count[4] = {0};
 char g_1002d444 = 0;
 char g_1002d45c = 0;
 char g_1002d474 = 0;
@@ -40,7 +40,6 @@ char g_1002d4f8 = 0;
 char g_10031004[1] = {0};
 char g_10031484[1] = {0};
 char g_100314b8[1] = {0};
-int g_entity_table_end = 0;
 int g_current_year = 0;
 int g_recv_game_buffer = 0;
 unsigned char* g_EntityListStart = 0;
@@ -98,7 +97,6 @@ int g_save_extra_74 = 0;
 int g_save_extra_field = 0;
 int g_save_info[2] = {0};
 int g_sequence_counter = 0;
-unsigned char g_stat_b_array[1] = {0};
 char* g_table = 0;
 int vfs_CleanupSubobject = 0;
 int vfs_CompressBlock = 0;
@@ -113,7 +111,7 @@ int vfs_WriteBufferLocked = 0;
  * identity.  Real sparse layout (8 slots at 0x101deb00) is the data-restore
  * TU's job; sizes here just need to fit the .data VS and stay in range.) */
 char g_connections[0x264264] = {0};
-char g_player_slot_field[4] = {0};
+unsigned int g_player_slot_field = 0;
 char g_player_slot_overflow[0x264264] = {0};
 
 /* BSS tail pad: grows .data VS to the original's 0x174059c (zero-init -> .bss).
@@ -149,12 +147,11 @@ int g_worker_entry_count = 0;
 /* GROUP B: game memset/memmove (0x10021240 / 0x1001b200) - stubs until the
  * crt mem TUs are reversed; postlink rewrites call targets to the reference
  * VAs. */
-int g_field_worker_count_wt0 = 0;
-int g_field_worker_count_wt1 = 0;
-int g_field_worker_count_wt2 = 0;
-int g_field_worker_count_wt3 = 0;
-int g_crash_callback = 0;
-int g_crash_dump_all_frames = 0;
+int g_field_worker_count_wt0[4] = {0};
+int g_field_worker_count_wt1[4] = {0};
+int g_field_worker_count_wt2[4] = {0};
+int g_field_worker_count_wt3[4] = {0};
+char g_crash_dump_all_frames = 0;
 int g_10034624 = 0;
 int g_10034628 = 0;
 int g_1003462c = 0;
@@ -174,11 +171,11 @@ int g_117640bc = 0;
 int g_117640c0 = 0;
 int g_117640c4 = 0;
 int g_owner_window = 0;
-int g_const_21_0 = 0;
+float g_const_21_0 = 0;
 int g_download_received = 0;
 unsigned int g_download_buffer = 0;
 unsigned int g_download_total_size = 0;
-int g_download_slots = 0;
+unsigned int g_download_slots[8] = {0};
 unsigned char g_entity_base[1] = {0};
 int g_entity_end = 0;
 unsigned char* g_entity_ptr = 0;
@@ -198,7 +195,6 @@ int g_sim_ents = 0;
    the stub region instead of the attested symbol. */
 /* inflate_blocks / inflate_blocks_free are provided by the vendored
  * references/zlib-1.1.3/infblock.c; stubs here would shadow the real ones. */
-int g_chain_handler_table[1] = {0};
 
 /* --- CRT locale stubs: resolve symbols that would otherwise pull
  * LIBCMT's locale objects (setlocal.obj/getqloc.obj/w_loc.obj/a_loc.obj),
@@ -240,13 +236,12 @@ float g_color_scale = 0;
 int g_entity_id_field = 0;
 unsigned short g_entity_slot_table[1] = {0};
 unsigned int g_crc_table_241a0[256] = {0};
-unsigned char g_dynamic_entities[1] = {0};
 char* g_entity_type_table = 0;
 unsigned short* g_query_base = 0;
 int g_players_synced;
 unsigned int g_next_tick_time;
 unsigned char g_host_flags;
-char g_module_path[1];
+char g_module_path[0x104];
 
 /* removed round 1385: this stub displaced LIBCMT.lib(fputc.obj) at
    0x10023890; the reference's _putc is the library body. */

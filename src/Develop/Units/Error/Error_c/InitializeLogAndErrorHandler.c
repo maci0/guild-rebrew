@@ -4,7 +4,7 @@
 
 extern unsigned char g_file_write_mode[3];
 // GLOBAL: SERVER 0x10034614
-extern void* g_crash_callback;
+extern int g_crash_callback;
 
 // GLOBAL: SERVER 0x1003461c
 extern char g_crash_dump_all_frames; /* 0x117660e0 - byte access in this TU */
@@ -40,7 +40,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 
 	g_panic_callback = a;
 	g_log_mode_flags = d;
-	g_crash_callback = b;
+	g_crash_callback = (int) b;
 	g_owner_window = c;
 	g_crash_dump_all_frames = (d >> 4) & 1;
 	SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER) 0x10002770);
