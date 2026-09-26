@@ -4187,6 +4187,33 @@ harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored
 | `static __inline` identity function in the join (`hCrashLog = crash_id(hCrashLog);`, `espVal`, `hProcess`, `pCtx`, bare call) | 1142, 1145 | inlined and folded, join threaded |
 | scan-loop `nInstr`/`pInstr` moved to function scope, join copies `espVal`/`hCrashLog`/0 into them | 1149 | dead (reinitialised before the scan loop), removed |
 
+**Allocator transfers cannot be the vanishing join (traced).** The global allocator `fcn.1071beb0`
+(driver `0x107605d5`) moves a split value only through memory or an immediate, never register to
+register. After a split (`0x1071c086`), `fcn.1073d0c5` runs the rewrite `fcn.1073dda7`, which adds
+block-entry reloads (op 0x163, maker `fcn.10711ae3`, placed by `fcn.107105d9`) and operand loads
+`mov t, [sym]` (`fcn.1073e222`, op 1); `fcn.1073da19` adds spill stores (op 0x164, maker at
+`0x1070fbbc`). A reload's source is an immediate for a constant candidate (symbol kind 0xd,
+`0x10711aef`) and a memory operand (0x14a/0x14b) for every other kind. `fcn.10720d7c` then deletes
+the 0x164 stores `fcn.10769fea` accepts (`0x10720e12`) and turns the rest into op 1 (`0x10721ab2`). The peephole's
+self-move test (`0x10723ad5`) needs a register source, so no transfer can colour to a deletable
+self-move; and the pass runs after the third jump pass and before cleanup 1, so it can only add code
+to a join or empty it too early. Measured on ten variants (the current join, `break` join,
+register-copy join, seven conditional joins): 165 to 196 allocator-made moves each, 15 reaching the
+peephole, none register to register.
+
+**Peephole deletes, complete list** (`fcn.10723779`; op table `0x107280c0`/`0x107280d4` for ops
+0x18c to 0x1a5): register self-moves (`0x10723d1d`); a register copy `mov D, S` whose list
+predecessor is `mov S, D`, rewritten to a self-move at `0x10723c43` (the join's predecessor is the
+0xc000008e arm's call); op 0x19e with no destination (`0x10724599`); ops 395, 402, 405, 407, 410
+and 421 unconditionally (`0x10724597`); two-item folds that keep one item (`0x10723ff1`,
+`0x10724395`, `0x10724677`). Traced on small probes, ops 395, 402, 405 and 407 come only from
+`__try` (`__finally`, `__except`, `__leave`, also an empty `__try { } __finally { }`), which always
+adds the `fs:[0]` frame the reference lacks; `_alloca`, `__assume`, `__noop`, `_enable`,
+`_disable`, `_inp`, `_outp`, `_rotl`, intrinsic `abs`, `fabs`, `memset` and `strlen`, and a
+`volatile` local create none of them. A fifth op-0x19e creator, `0x107146ce` in `fcn.1071455e`
+(driver `0x10760541`), stores register parameters to their homes only when the convention bits
+(`[0x107ac378]+0x14 & 0x1c`) are 4; this function has 0x10.
+
 ## Finding 74: Processor Pack c2 (client targets): routine map, rules and open cases
 
 The two clients build with the `rebrew/msvc:6.0-sp5-pp-win32` image, whose `c2.dll` (loaded at
