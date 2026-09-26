@@ -4113,8 +4113,9 @@ by falling into a join block after 0xc000008e.
 bit 0, which includes labels and op 444). Between cleanup 1 and 2 only the peephole `fcn.10723779`
 deletes items: register self-moves (`0x10723d07`, deleted at `0x10723d1d`; the `szDateLen` and
 `szTimeLen` call-result copies are `mov eax, eax` self-moves, not stack stores) and op-0x19e uses
-(created for switch dispatch at `0x10711276`, the return value at `0x1071774d` and compare-with-0
-elimination at `0x1071b184`). After cleanup 2 only jumps and labels are deleted. A join body that
+(here from switch dispatch at `0x10711276`, the return value at `0x1071774d` and compare-with-0
+elimination at `0x1071b184`; all eight creation sites and the other deletions are listed at the end
+of this finding). After cleanup 2 only jumps and labels are deleted. A join body that
 vanishes needs a copy that global copy propagation keeps (seen only for call results and
 loop-carried variables) or one of those uses; no statement tried qualifies. Otherwise the join is
 the fill's IL prefix and must be pick-free (join cursor eax after 0xc000008e, fill cursor edx after
@@ -4186,6 +4187,43 @@ harness and sweeps): `.scratch/crashdump-kits/` in the main checkout (gitignored
 | second name for the fill's register value (`void* hL` for `hCrashLog`, `unsigned e2` for `espVal`): copied after the definition or taking the call/load directly with the old name copied from it; join `new = old;` or `old = new;`; fill reads either name; join ends in `break;` or `goto frame_fill;` (32 variants) | 1149 | copy folded, join threaded |
 | `static __inline` identity function in the join (`hCrashLog = crash_id(hCrashLog);`, `espVal`, `hProcess`, `pCtx`, bare call) | 1142, 1145 | inlined and folded, join threaded |
 | scan-loop `nInstr`/`pInstr` moved to function scope, join copies `espVal`/`hCrashLog`/0 into them | 1149 | dead (reinitialised before the scan loop), removed |
+
+**An op-0x19e use cannot stand alone in the join (traced).** c2 creates op 0x19e (`fcn.1070ceb9`,
+ecx 0x19e) at eight sites, and every one attaches the use to an anchor item in the same block:
+
+| Site | Routine | Anchor and placement | C shape |
+|------|---------|----------------------|---------|
+| `0x10711276` | `fcn.10710c3f` | before the table jump (op 397), after the range `ja`; only when the index operand is a register | jump-table switch |
+| `0x1071774d` | `fcn.10716f3a` | after the new `mov eax, value` of a `return`, before the exit jump | `return v;` |
+| `0x10767b45` | `fcn.107676d9` | same, for an `edx:eax` return | `__int64` return |
+| `0x1071b184` | `fcn.1071ae05` | after the flag-setting def whose `cmp x, 0` it removes; the walk back stops at a label, so def, use and jcc share a block; no use when the flags reach the jcc through a `mov` | `x = a - k; if (x)` |
+| `0x1071d000` | `fcn.1071cdfa` | after the `dec` of a compare-chain switch | small switch lowered to `dec`/`jcc` |
+| `0x107146d9` | `fcn.1071455e` | after each fixed-register setup `mov` of a string intrinsic (ecx count, eax value, esi, edi) | `memset`, `memcpy` |
+| `0x1074f598` | `fcn.1074f49d` | after an item whose other result is dead | multi-result ops |
+| `0x107664db` | `fcn.107663fc` | before a widened byte/word store | adjacent small stores |
+
+The peephole (`fcn.10723779`) deletes every use it reaches (`0x10724590`/`0x10724599`) but none of
+the anchors except a register self-move (`0x10723d1d`). A use therefore vanishes with its block only
+when its anchor is a self-move: the `return` copy of a value already in eax (a function exit, not a
+join) and an intrinsic setup whose operand is already in the fixed register. Every other item the
+peephole deletes: `add r, k` followed by `sub r, k` (or the reverse) on one register, flags unread
+(`0x10723ff1`, `0x10723ffa`; the IL folds such a pair in C, `espVal += 4; espVal -= 4;` gives 1149);
+op 0x166 intrinsic items, replaced by their expansion (`0x10724569`, `fcn.10766d4d`); ops 395, 402,
+405, 407, 410 and 421 (`0x10724597`), which only `__try` creates here (pseudo edges and markers of
+the SEH frame, which the reference lacks).
+
+| Join (fill in source order, join ends in `break;`) | Object | c2 result |
+|----------------------------------------------------|--------|-----------|
+| `memset(szDateBuf, 0, 0);`, `memset(&mbi, 0, 0);` | 1545, 1530 | the join survives cleanup 1 and the A arms merge; `xor ecx, ecx`, `xor eax, eax`, `lea edi` stay |
+| `memset(pExceptionPointers, 0, 0);` | 1544 | `mov edi, edi` and its use deleted (the pointer is edi); `xor ecx, ecx`, `xor eax, eax` stay |
+| every A arm and 0xc000008e: `nV = WriteFile(<newline>);`, join `memset(pExceptionPointers, nV, 0);` | 1547 (2123 bytes) | at peephole entry the join is `mov ecx, 0`, `mov eax, eax`, `mov edi, edi`, three uses, `jmp`; the peephole leaves only `xor ecx, ecx` |
+| `memcpy` with count 0 (buffers, `hCrashLog`, `espVal`, `pExceptionPointers` as both pointers) | 916-938 | also loads esi, which holds `WriteFile` |
+| `memmove(..., 0)`; `(void) memcmp(..., 0)`, `(void) strlen(...)` | 1331; 1149 | library call; folded as dead |
+| `if (--espVal) espVal++; else espVal++;`, `if ((espVal & 3) != 0)`, `if ((int) (espVal >> 2) > 0)` with `nFrames = 0x800` | 1518-1548 | the def stays with its use |
+| `switch (espVal & 7)` with six equal cases; an empty `switch (excCode)` | 1011; 1149 | the table jump stays; folded |
+
+A zero-count string op always keeps `mov ecx, 0`: ecx is not live across the preceding `WriteFile`,
+so no count operand can already be in it. Option A is closed: no op-0x19e use leaves the join empty.
 
 ## Finding 74: Processor Pack c2 (client targets): routine map, rules and open cases
 
