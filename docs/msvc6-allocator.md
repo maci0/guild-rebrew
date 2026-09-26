@@ -4101,12 +4101,39 @@ when `[0x107ac348]` is 0) zeroes each unconditional jumper's `+0x12` and passes 
 `fcn.1073f41d`, which walks back like the cross-jump (labels and op 444 skipped, `fcn.107291dc`
 compares). It merges only if the encoded sizes of the matched items (`fcn.1072afd4`, encoder
 `fcn.10729e5b`; a stack `lea` counts 6), summed front to back until the sum reaches 20, plus the
-larger `+0x12` exceed 20 (`jg` at `0x1073f646`; 20 while `[0x107ac0b4]`, bit 23 of the option word,
-is set), or if the match contains an unconditional jump. The survivor's `+0x12` becomes at least 20,
+larger `+0x12` exceed 20 (`jg` at `0x1073f646`), or if the match contains an unconditional jump.
+The size test runs only while `[0x107ac0b4]` is set; clear, `0x1073f5ba` merges any match of one
+item or more. The survivor's `+0x12` becomes at least 20,
 so after one merge every other jumper follows. The group-A arms share `push ebp`, `call esi` (message)
 and `push 0`, `lea`, `push`, `push 2`, `lea` (newline): 1+2+2+6+1+2+6 = 20, for any argument order,
 since the last push before `hCrashLog` is always a 1-byte `push reg`. The A arms therefore merge only
 by falling into a join block after 0xc000008e.
+
+**`[0x107ac0b4]` is `/Ot` (favour speed), traced and ruled out.** c2 decodes the per-function option
+word from c1's IL function record (reader `0x1072ff79` stores it at function `+0x18`, then calls the
+decoder `0x107308df`, `ecx` = word): bit 23 to `[0x107ac0b4]` (`0x1073090b`), also bit 8 `0x107ac0b8`,
+25 `0x107ac098`, 18 `0x107ac0a4`, 31 `0x107ac0bc`, 11 `0x107ac054`, 24 `0x107ac0d8`, 21 `0x107ac058`
+(copied to `0x107ac34c`), 9 `0x107ac11c`, 10 `0x107ac118`. Words read at `0x107308df` under gdb for
+this file: `/O2` and `/Ot`, `/Ox`, `/G5`, `/Gy`, `/Gf`, `/GF`, `/Gs`, `/Zi` 0x00a00800; `/Os` 0x00200800;
+`/Og-` 0x00800800; `/Op` 0x00a40800; `/Ge` 0x80a00800; `/Od` 0x00800000. Per function,
+`#pragma optimize("s", on)` and `("t", off)` give 0x00200800 (`"y", off` clears bit 11, `"w", on`
+sets 24 and 25, `"a", on` 25, `"p", on` 18). Only `/Os` or the size pragma clears bit 23, and c2
+reads the flag at 120 sites. Measured: clearing it under gdb right after the decoder gives 334/2115,
+the same as `/Os` and `#pragma optimize("s", on)` (334), so it is the whole favour-size code
+generator, not a merge switch. Clearing it only inside `fcn.1073f41d` (no-join source, fill in
+source order) gives 1941/2115 at 2091 bytes: the size test is skipped, so the B arms merge into
+the A tail too. The `+0x12` reset at `0x107290e7` leaves no carried credit, and the only jumpers to
+the A label are the seven A arms, so with the flag set nothing else can merge first.
+
+One more matched item cannot reach 21 either (traced on every A pair). Counting starts at the item
+after the first mismatch (`push msg`) and stops at the first sum of 20 or more; the reference bytes
+fix the counted items (1, 2, 2, 6, 1, 2, 6, then the 1-byte `push edx` last in any argument order),
+so the sum lands on 20 exactly. Overshoot needs the message push itself to match, and no two A arms
+share one: lengths 0xb, 0xa, 0x15, 0x14, 0x13, 0x18, 0x12, distinct strings, and the jump tables at
+`0x10002e9c`/`0x10002f1c` hold no second entry into 0xc000008e's arm. The size-free path
+(`0x1073f57c` records an unconditional jump, kind 0x11, or a kind 0x13 item met after the first
+match; `0x1073f648` merges there) needs such an item in the common tail, and the A tail holds only
+pushes (kind 0xc op 0xd), `call esi` (kind 0xe) and `lea` (kind 0xc op 0x12).
 
 **Join lifetime, traced.** An empty join is threaded by the third jump pass `fcn.107050de` (driver
 `0x10760574`), otherwise by cleanup 1 at `0x10723553` (`fcn.10703052` skips items without flag
