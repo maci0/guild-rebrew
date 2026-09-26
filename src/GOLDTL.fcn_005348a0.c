@@ -9,6 +9,7 @@ typedef struct {
 	float y;
 	float z;
 } Vec3;
+// SIZE 0xc
 
 typedef struct {
 	float x;
@@ -16,10 +17,12 @@ typedef struct {
 	float z;
 	float w;
 } Vec4;
+// SIZE 0x10
 
 typedef struct {
 	float m[16];
 } Mat4;
+// SIZE 0x40
 
 extern int g_7e4300;
 extern int g_7e4304;
