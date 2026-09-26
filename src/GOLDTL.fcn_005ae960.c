@@ -18,7 +18,7 @@ typedef struct
 } Req;
 // SIZE 0x50
 
-extern int g_666018;
+extern __int64 g_666018;
 extern int g_66601c;
 extern int g_14aba0c;
 
@@ -66,7 +66,7 @@ void __cdecl fcn_005ae960(char* a)
 	req.a = 0;
 	req.size = 0x400;
 	req.kind = 6;
-	req.c = g_666018;
+	req.c = (*(int*)&g_666018);
 	req.d = g_66601c;
 	fcn_0051af00(text, 0x19b8);
 	fcn_0052a0c0(a, 0);

@@ -20,8 +20,8 @@ struct good {
 };
 #pragma pack()
 
-extern struct house g_7f4ca0[];
-extern struct good* g_868050;
+extern char g_7f4ca0[];
+extern unsigned char* g_868050;
 extern unsigned char g_773d75;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -64,7 +64,7 @@ void __cdecl fcn_00550de0(char* e)
 				if (n >= 16) {
 					break;
 				}
-				p = &g_868050[*c];
+				p = &((struct good*)g_868050)[*c];
 				if (fcn_00504bd0(*c) == 1 || p->kind == 9) {
 					list[n++] = c;
 				}
@@ -90,9 +90,9 @@ void __cdecl fcn_00550de0(char* e)
 						}
 					}
 				}
-				if (g_7f4ca0[*(unsigned short*) (e + 8)].type == 6 && amt != 0) {
+				if (((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].type == 6 && amt != 0) {
 					fcn_0051af00(msg, 0x10b7, sel, amt);
-					fcn_00545e80(g_7f4ca0[*(unsigned short*) (e + 8)].handle, g_7f4ca0[*(unsigned short*) (e + 8)].handle,
+					fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, ((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle,
 					    msg, 0, 0x5ec, *(int*) (sel + 1), -1, 0, 0);
 				}
 			}

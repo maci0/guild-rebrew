@@ -4,7 +4,7 @@
 // SIZE: 120
 
 extern int* g_665f08;
-extern char* g_868050;
+extern unsigned char* g_868050;
 
 int __cdecl fcn_0057ed10(int* m);
 
@@ -15,7 +15,7 @@ int __cdecl fcn_0057fa40(int* m)
 		return 1;
 	}
 	if (g_665f08[14] >= 1 && m[1] != 0 && m[0] == 0x24) {
-		if (g_868050[*(unsigned char*) m[1] * 589] == 0xa) {
+		if (((char*)g_868050)[*(unsigned char*) m[1] * 589] == 0xa) {
 			g_665f08[14] = 2;
 			return 1;
 		}

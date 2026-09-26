@@ -52,7 +52,7 @@ typedef struct {
 } LoadFlags;
 
 extern int g_6b7fac;
-extern char* g_6b8014;
+extern int g_6b8014;
 extern char g_677618[];
 extern char g_677604[];
 extern char g_6775f4[];
@@ -103,13 +103,13 @@ Snow* __cdecl fcn_00416060(int count)
 	s->tint[2] = g_6b7fac;
 	s->tint[3] = g_6b7fac;
 	s->tint[4] = g_6b7fac;
-	if (g_6b8014 != 0) {
-		s->cam70 = *(int*) (g_6b8014 + 0x84);
-		s->cam74 = *(int*) (g_6b8014 + 0x88);
-		s->cam78 = *(int*) (g_6b8014 + 0x8c);
-		s->cam80 = *(int*) (g_6b8014 + 0x4c);
-		s->cam84 = *(int*) (g_6b8014 + 0x50);
-		s->cam88 = *(int*) (g_6b8014 + 0x54);
+	if (((char*)g_6b8014) != 0) {
+		s->cam70 = *(int*) (((char*)g_6b8014) + 0x84);
+		s->cam74 = *(int*) (((char*)g_6b8014) + 0x88);
+		s->cam78 = *(int*) (((char*)g_6b8014) + 0x8c);
+		s->cam80 = *(int*) (((char*)g_6b8014) + 0x4c);
+		s->cam84 = *(int*) (((char*)g_6b8014) + 0x50);
+		s->cam88 = *(int*) (((char*)g_6b8014) + 0x54);
 	}
 	if (count < 1) {
 		count = 1;

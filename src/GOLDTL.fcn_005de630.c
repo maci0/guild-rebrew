@@ -30,7 +30,7 @@ typedef struct {
 
 extern __int64 g_666018;
 extern char* g_14a5590;
-extern House g_7f4ca0[0x300];
+extern char g_7f4ca0[];
 extern int g_664398[];
 
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
@@ -75,10 +75,10 @@ int __cdecl fcn_005de630(House* obj, int* arg)
 	step = g_664398[fcn_0042e410(0x10)];
 	n = 3;
 	do {
-		if (g_7f4ca0[start].id != 0xffff && g_7f4ca0[start].b166 && &g_7f4ca0[start] != obj &&
-			&g_7f4ca0[start] != e) {
+		if (((House*)g_7f4ca0)[start].id != 0xffff && ((House*)g_7f4ca0)[start].b166 && &((House*)g_7f4ca0)[start] != obj &&
+			&((House*)g_7f4ca0)[start] != e) {
 			n--;
-			picks[n] = &g_7f4ca0[start];
+			picks[n] = &((House*)g_7f4ca0)[start];
 		}
 		start = (start + step) % 0x300;
 	} while (n != 0);

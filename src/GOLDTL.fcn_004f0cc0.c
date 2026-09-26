@@ -6,7 +6,7 @@ typedef struct {
 	int d[0x1a];
 } Blk4f0cc0;
 
-extern char g_6b7fac[];
+extern int g_6b7fac;
 
 char* __cdecl fcn_004f0c90(int a1);
 
@@ -37,7 +37,7 @@ int __cdecl fcn_004f0cc0(int* a, int flag)
 				e = p + i * 0x68;
 				*(Blk4f0cc0*) (e + 0x18) = blk;
 				*(int*) (p + 4) |= 2;
-				*(int*) (e + 0x78) = *(int*) g_6b7fac;
+				*(int*) (e + 0x78) = *(int*) ((char*)&g_6b7fac);
 				*(int*) (e + 0x74) = 1;
 				*(int*) (e + 0x7c) = 0;
 				if (flag != 0) {

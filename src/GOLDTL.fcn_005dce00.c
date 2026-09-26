@@ -16,8 +16,8 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[];
-extern int g_aed32c;
+extern char g_7f4ca0[];
+extern char* g_aed32c;
 
 void __cdecl fcn_0051af00(char*, int);
 int __cdecl fcn_005bdc30(int, int*, char*, int, int);
@@ -58,10 +58,10 @@ int __cdecl fcn_005dce00(char* cmd, char* arg)
 		ok = 1;
 	}
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].owner == obj) {
-			val = g_7f4ca0[i].level % 2 + g_7f4ca0[i].level / 2;
-			fcn_004c4510((int) &g_7f4ca0[i], g_7f4ca0[i].f4);
-			fcn_004c4570(1, 1, (unsigned short) ((int) &g_7f4ca0[i].level - g_aed32c), &val);
+		if (((Ent*)g_7f4ca0)[i].owner == obj) {
+			val = ((Ent*)g_7f4ca0)[i].level % 2 + ((Ent*)g_7f4ca0)[i].level / 2;
+			fcn_004c4510((int) &((Ent*)g_7f4ca0)[i], ((Ent*)g_7f4ca0)[i].f4);
+			fcn_004c4570(1, 1, (unsigned short) ((int) &((Ent*)g_7f4ca0)[i].level - (*(int*)&g_aed32c)), &val);
 			fcn_004c5360();
 		}
 	}

@@ -18,10 +18,10 @@ typedef struct {
 	int owner;
 } Figure;
 
-extern Entity g_7f4ca0[16];
-extern char g_773d75;
-extern Figure* g_773dac;
-extern Figure* g_773db0;
+extern char g_7f4ca0[];
+extern unsigned char g_773d75;
+extern char* g_773dac;
+extern char* g_773db0;
 extern char* g_aed32c;
 
 void __cdecl fcn_0064d3f8(void);
@@ -53,9 +53,9 @@ void __cdecl fcn_00511580(void)
 
 	fcn_0064d3f8();
 	for (i = 0; i < 16; i++) {
-		if (g_7f4ca0[i].slot != 0xffff && g_7f4ca0[i].type < 5) {
-			money = fcn_0050b750(fcn_0042e410(0x122) + 10, g_773d75);
-			fcn_004c4510(&g_7f4ca0[i], g_7f4ca0[i].owner);
+		if (((Entity*)g_7f4ca0)[i].slot != 0xffff && ((Entity*)g_7f4ca0)[i].type < 5) {
+			money = fcn_0050b750(fcn_0042e410(0x122) + 10, (*(char*)&g_773d75));
+			fcn_004c4510(&((Entity*)g_7f4ca0)[i], ((Entity*)g_7f4ca0)[i].owner);
 			fcn_004c4670(4, 1, 0x1ac, &money);
 			fcn_004c5360();
 		}
@@ -69,16 +69,16 @@ void __cdecl fcn_00511580(void)
 		fcn_004c4940();
 		ls_ID2Ptr();
 	}
-	g_773dac = fcn_004c4480(a);
-	g_773db0 = fcn_004c4480(b);
+	(*(Figure**)&g_773dac) = fcn_004c4480(a);
+	(*(Figure**)&g_773db0) = fcn_004c4480(b);
 	fcn_004c44a0();
 	flag = 0;
-	fcn_004c4510(g_773dac, g_773dac->owner);
-	fcn_004c4570(1, 1, (char*) g_773dac - g_aed32c + 0xc, &flag);
+	fcn_004c4510((*(Figure**)&g_773dac), (*(Figure**)&g_773dac)->owner);
+	fcn_004c4570(1, 1, (char*) (*(Figure**)&g_773dac) - g_aed32c + 0xc, &flag);
 	fcn_004c5360();
 	flag = 1;
-	fcn_004c4510(g_773db0, g_773db0->owner);
-	fcn_004c4570(1, 1, (char*) g_773db0 - g_aed32c + 0xc, &flag);
+	fcn_004c4510((*(Figure**)&g_773db0), (*(Figure**)&g_773db0)->owner);
+	fcn_004c4570(1, 1, (char*) (*(Figure**)&g_773db0) - g_aed32c + 0xc, &flag);
 	fcn_004c5360();
 	fcn_004c44b0();
 	while (fcn_004c44c0() == 0) {
@@ -97,7 +97,7 @@ void __cdecl fcn_00511580(void)
 	fcn_004c44a0();
 	for (i = 0; i < 8; i++) {
 		figures[i] = fcn_004c4fc0(0xb, -1, -1, fcn_0042e410(8) + 0x10, -1, 0, 0x13, 0);
-		fcn_004c51f0(-2, -1, 0x154, 1, g_773d75, 0);
+		fcn_004c51f0(-2, -1, 0x154, 1, (*(char*)&g_773d75), 0);
 	}
 	fcn_004c44b0();
 	while (fcn_004c44c0() == 0) {

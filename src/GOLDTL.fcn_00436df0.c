@@ -23,7 +23,7 @@ struct viewport_436df0 {
 	float max_z;
 };
 
-extern struct dev_436df0* g_6b5de0;
+extern void* g_6b5de0;
 extern struct viewport_436df0 g_1052be0;
 extern float g_1052c00[16];
 extern float g_67a28c;
@@ -46,7 +46,7 @@ void __cdecl fcn_00436df0(float fov, float aspect, float width, float height, fl
 {
 	struct dev_436df0* dev;
 
-	dev = g_6b5de0;
+	dev = ((struct dev_436df0*)g_6b5de0);
 	if (dev == 0) {
 		return;
 	}
@@ -65,7 +65,7 @@ void __cdecl fcn_00436df0(float fov, float aspect, float width, float height, fl
 	}
 	if (fov != g_67a2a4 || aspect != g_67a2a8 || znear != g_67a29c || zfar != g_67a2a0) {
 		fcn_005ecf13(g_1052c00, fov, aspect, znear, zfar);
-		g_6b5de0->vtbl->SetTransform(g_6b5de0, 3, g_1052c00);
+		((struct dev_436df0*)g_6b5de0)->vtbl->SetTransform(((struct dev_436df0*)g_6b5de0), 3, g_1052c00);
 		g_67a29c = znear;
 		g_67a2a0 = zfar;
 		g_67a2a8 = aspect;

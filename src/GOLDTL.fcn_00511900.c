@@ -12,7 +12,7 @@ typedef struct {
 } Figure;
 
 extern int g_7e1fa0[];
-extern char g_773d75;
+extern unsigned char g_773d75;
 extern int g_7747f8;
 extern char* g_aed32c;
 
@@ -72,9 +72,9 @@ void __cdecl fcn_00511900(int count, int size, int* faces)
 			start = (step + start) % size;
 		}
 		ids[i] = fcn_004c4fc0(5, -1, -1, 0x10, -1, face, 0, 2);
-		fcn_004c5150(-2, -1, g_773d75, fcn_0050b750(price[g_7e1fa0[i]], g_773d75));
+		fcn_004c5150(-2, -1, (*(char*)&g_773d75), fcn_0050b750(price[g_7e1fa0[i]], (*(char*)&g_773d75)));
 		if (g_7747f8 != 0) {
-			fcn_004c5150(-2, -1, g_773d75, fcn_0050b750(fcn_0042e410(5000) + 5000, g_773d75));
+			fcn_004c5150(-2, -1, (*(char*)&g_773d75), fcn_0050b750(fcn_0042e410(5000) + 5000, (*(char*)&g_773d75)));
 		}
 	}
 	fcn_004c44b0();

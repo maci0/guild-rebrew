@@ -28,7 +28,7 @@ typedef struct {
 	char pad1a8[0x21c - 0x1a8];
 } Obj;
 
-extern Obj g_7f4ca0[];
+extern char g_7f4ca0[];
 extern int g_773d48;
 extern int g_99f7ac;
 
@@ -51,7 +51,7 @@ int __cdecl fcn_004fc940(unsigned short id, Slots* s, unsigned char flags)
 	amt = offer.amount;
 	p = fcn_0050e4a0(1);
 	fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
-	n = g_7f4ca0[id].count_a + g_7f4ca0[id].count_b;
+	n = ((Obj*)g_7f4ca0)[id].count_a + ((Obj*)g_7f4ca0)[id].count_b;
 	f = n * (amt * 0.01f);
 	if (!(f > 0.0f)) {
 		f = 0.0f;
@@ -72,7 +72,7 @@ int __cdecl fcn_004fc940(unsigned short id, Slots* s, unsigned char flags)
 		if (flags & 1) {
 			p = fcn_0050e4a0(1);
 			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
-			fcn_004c51a0(*(int*) (p + 2), g_7f4ca0[id].owner, 0, v);
+			fcn_004c51a0(*(int*) (p + 2), ((Obj*)g_7f4ca0)[id].owner, 0, v);
 			g_773d48++;
 		}
 		if (flags & 2) {

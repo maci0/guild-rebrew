@@ -23,7 +23,7 @@ typedef struct {
 	char x7c[0x98];
 } Rec;
 
-extern Rec g_9a9660[96];
+extern char g_9a9660[];
 
 unsigned int __cdecl fcn_00430910(void* p, int size, int n, int f);
 
@@ -35,7 +35,7 @@ int __cdecl fcn_005212c0(int f)
 
 	count = 0;
 	for (i = 0; i < 96; i++) {
-		if (g_9a9660[i].id != -1) {
+		if (((Rec*)g_9a9660)[i].id != -1) {
 			count++;
 		}
 	}
@@ -43,7 +43,7 @@ int __cdecl fcn_005212c0(int f)
 		return 0;
 	}
 	for (i = 0; i < 96; i++) {
-		p = &g_9a9660[i];
+		p = &((Rec*)g_9a9660)[i];
 		if (p->id == -1) {
 			continue;
 		}

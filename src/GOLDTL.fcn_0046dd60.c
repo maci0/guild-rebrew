@@ -50,8 +50,8 @@ typedef struct
 } fcn_0046dd60_Win;
 
 extern fcn_0046dd60_Surf* g_77256c;
-extern fcn_0046dd60_Pal* g_77253c;
-extern fcn_0046dd60_Def* g_772500;
+extern char* g_77253c;
+extern char* g_772500;
 extern int g_7725f8;
 extern int g_7725fc;
 extern int g_67d964;
@@ -95,7 +95,7 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 	cw = w->w - w->mr - w->ml;
 	ch = w->h - w->mb - w->mt;
 	if (w->flags & 1)
-		fcn_0047c9c0(x0, y0, cw, ch, g_77253c->color, w->alpha);
+		fcn_0047c9c0(x0, y0, cw, ch, ((fcn_0046dd60_Pal*)g_77253c)->color, w->alpha);
 	else if (w->pal != 0)
 		fcn_0047c9c0(x0, y0, cw, ch, w->pal->color, w->alpha);
 	else if (w->img != 0)
@@ -106,7 +106,7 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 		s3 = g_67d964;
 		s4 = g_67d968;
 		fcn_0047a040(w->x, w->y, w->w + w->x, w->h + w->y);
-		d = &g_772500[w->tex];
+		d = &((fcn_0046dd60_Def*)g_772500)[w->tex];
 		if (w->sy >= 0)
 			oy = w->y - w->sy % d->h;
 		else

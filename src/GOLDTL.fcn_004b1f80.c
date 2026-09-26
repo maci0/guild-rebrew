@@ -15,7 +15,7 @@ typedef struct {
 } rec44;
 // SIZE 0x44
 
-extern rec44 g_1007bc0[4];
+extern char g_1007bc0[];
 extern unsigned char g_773d75;
 extern char g_868060[];
 extern char g_680890[];
@@ -36,10 +36,10 @@ void __cdecl fcn_004b1f80(void)
 	int j;
 
 	for (i = 0; i < 4; i++) {
-		g_1007bc0[i].flag = 1;
+		((rec44*)g_1007bc0)[i].flag = 1;
 		for (j = 0; j < 4; j++) {
-			g_1007bc0[i].slot[j].a = -1;
-			g_1007bc0[i].slot[j].b = 0xffff;
+			((rec44*)g_1007bc0)[i].slot[j].a = -1;
+			((rec44*)g_1007bc0)[i].slot[j].b = 0xffff;
 		}
 	}
 	fcn_0064d41a(buf, g_680890, g_868060 + g_773d75 * 0x2f4);

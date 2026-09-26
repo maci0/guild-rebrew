@@ -1,4 +1,4 @@
-extern int* g_6b7e98;
+extern char* g_6b7e98;
 // GLOBAL: GOLDTL 0x6766f0
 extern char g_6766f0[];
 // FUNCTION: GOLDTL 0x40e920
@@ -16,6 +16,6 @@ int __cdecl fcn_0040e920(void* a1)
 		fcn_00442be0(p);
 		return 1;
 	}
-	fcn_00425bf0(g_6b7e98, *(int*) ((char*) g_6b7e98 + 0x118), g_6766f0);
+	fcn_00425bf0(((int*)g_6b7e98), *(int*) ((char*) ((int*)g_6b7e98) + 0x118), g_6766f0);
 	return 1;
 }

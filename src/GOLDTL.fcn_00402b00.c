@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x00402b00
 // SIZE: 127
 
-extern float g_662d40[];
+extern float g_662d40[3];
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 void __cdecl fcn_00455140(char* src, float* v, float* out);
 float __cdecl fcn_00451380(float* a, float* b);

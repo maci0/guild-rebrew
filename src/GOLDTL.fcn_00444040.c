@@ -1,4 +1,4 @@
-extern char* g_6b8484;
+extern int g_6b8484;
 extern char* g_6b8478;
 extern char* g_6b847c;
 extern char* g_6b8480;
@@ -17,10 +17,10 @@ void __cdecl fcn_00439aa0(char* o);
 // SIZE: 310
 void __cdecl fcn_00444040(void)
 {
-	g_6b8484 = fcn_00439750(3, s_67a9ac);
-	fcn_00438ba0(g_6b8484, 0.0f, 0.0f, -256.0f);
-	fcn_00438d70(g_6b8484, 0.0f, 0.0f, 0.0f);
-	fcn_00439aa0(g_6b8484);
+	(*(char**)&g_6b8484) = fcn_00439750(3, s_67a9ac);
+	fcn_00438ba0((*(char**)&g_6b8484), 0.0f, 0.0f, -256.0f);
+	fcn_00438d70((*(char**)&g_6b8484), 0.0f, 0.0f, 0.0f);
+	fcn_00439aa0((*(char**)&g_6b8484));
 	if (g_6b8004 != 0) {
 		g_6b8478 = fcn_00439750(3, s_67a9c4);
 		fcn_00438ba0(g_6b8478, 0.0f, 256.0f, 0.0f);

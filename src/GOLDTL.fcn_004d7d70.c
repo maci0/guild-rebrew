@@ -25,7 +25,7 @@ extern int g_772ea4;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_68b7a8;
-extern char* g_772f24;
+extern unsigned short* g_772f24;
 extern int g_774654;
 
 void __cdecl fcn_00472380(int, int, int, int);
@@ -61,8 +61,8 @@ void __cdecl fcn_004d7d70(char* rec)
 	}
 	if (g_100f1dc == -1 || g_67d370 != g_68b7a8)
 		return;
-	l = *fcn_004ceac0(rec, g_772f24);
-	l.id = *(int*) (g_772f24 + 4);
+	l = *fcn_004ceac0(rec, ((char*)g_772f24));
+	l.id = *(int*) (((char*)g_772f24) + 4);
 	l.f4 = 5;
 	fcn_004c67c0(*(int*) (rec + 0x10), &l);
 }

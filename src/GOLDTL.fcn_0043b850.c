@@ -3,8 +3,8 @@
 
 typedef int (__cdecl* fcn_0043b850_f)(char*, int, char*);
 
-extern fcn_0043b850_f g_67a590;
-extern char* g_67a370;
+extern int g_67a590;
+extern int g_67a370;
 void __cdecl fcn_004011f0(int, void*);
 int __cdecl fcn_004011a0(int, void*);
 int __cdecl fcn_0043b500(char*);
@@ -23,6 +23,6 @@ void __cdecl fcn_0043b850(int r)
 		fcn_004011a0(r, name);
 		id = fcn_0043b500(name);
 		fcn_004011a0(r, val);
-		fcn_0043b660(g_67a370, id, g_67a590(g_67a370, id, val), val);
+		fcn_0043b660(((char*)g_67a370), id, (*(fcn_0043b850_f*)&g_67a590)(((char*)g_67a370), id, val), val);
 	}
 }

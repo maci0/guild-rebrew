@@ -1,5 +1,5 @@
 extern int g_772d18;
-extern volatile int g_6b7fac;
+extern int g_6b7fac;
 extern int g_772d2c;
 extern unsigned int g_772d38;
 
@@ -11,7 +11,7 @@ struct snd_4c0b40 {
 };
 // SIZE 0x10
 
-extern struct snd_4c0b40* g_772d34;
+extern char* g_772d34;
 
 char* __cdecl fcn_0064d470(char*, char*);
 void __cdecl fcn_004c2d90(float, int);
@@ -34,8 +34,8 @@ void __cdecl fcn_004c0b40(void)
 
 	if (g_772d18 != 0)
 		return;
-	now = g_6b7fac + (g_6b7fac + g_6b7fac * 2) * 4;
-	cur = g_772d34;
+	now = (*(volatile int*)&g_6b7fac) + ((*(volatile int*)&g_6b7fac) + (*(volatile int*)&g_6b7fac) * 2) * 4;
+	cur = (*(struct snd_4c0b40**)&g_772d34);
 	if (cur == 0)
 		return;
 	if (cur->started == 0) {
@@ -46,8 +46,8 @@ void __cdecl fcn_004c0b40(void)
 					fcn_004c2d90(0.0f, 0x7d0);
 					g_772d2c = one;
 				}
-				fcn_00423670(g_772d34->voice, 0, 0);
-				g_772d34->started = one;
+				fcn_00423670((*(struct snd_4c0b40**)&g_772d34)->voice, 0, 0);
+				(*(struct snd_4c0b40**)&g_772d34)->started = one;
 				g_772d38 = now;
 				return;
 			}
@@ -60,17 +60,17 @@ void __cdecl fcn_004c0b40(void)
 		return;
 	if (fcn_00423460(cur->voice) != 0)
 		return;
-	next = g_772d34->next;
-	fcn_00426170(g_772d34->voice, 0);
-	fcn_0041ddd0(g_772d34);
-	g_772d34 = next;
+	next = (*(struct snd_4c0b40**)&g_772d34)->next;
+	fcn_00426170((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
+	fcn_0041ddd0((*(struct snd_4c0b40**)&g_772d34));
+	(*(struct snd_4c0b40**)&g_772d34) = next;
 	g_772d38 = now;
 	if (next != 0 && next->voice != 0 && next->voice[1] != 0 && g_772d2c != 0
 	    && fcn_0064d470(next->voice[1] + 4, "MausclickLinks") != 0) {
-		next = g_772d34->next;
-		fcn_00426170(g_772d34->voice, 0);
-		fcn_0041ddd0(g_772d34);
-		g_772d34 = next;
+		next = (*(struct snd_4c0b40**)&g_772d34)->next;
+		fcn_00426170((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
+		fcn_0041ddd0((*(struct snd_4c0b40**)&g_772d34));
+		(*(struct snd_4c0b40**)&g_772d34) = next;
 		fcn_004c2d90(1.0f, 0x7d0);
 		g_772d2c = 0;
 	}

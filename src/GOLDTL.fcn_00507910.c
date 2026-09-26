@@ -46,7 +46,7 @@ typedef struct {
 	char pad1[0x24c];
 } Ent;
 
-extern Ent* g_868050;
+extern unsigned char* g_868050;
 
 float __cdecl fcn_0050b8d0(unsigned char* p, int k, int a, int b);
 
@@ -61,7 +61,7 @@ float __cdecl fcn_005101e0(unsigned char* p, int k, int a, int b)
 {
 	int c;
 
-	c = fcn_00507910(g_868050[k].type);
+	c = fcn_00507910(((Ent*)g_868050)[k].type);
 	if (c != 10 && c != 11 && c != 12) {
 		return fcn_0050b8d0(p, k, a, b) * 3.0f;
 	}

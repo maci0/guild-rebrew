@@ -4,7 +4,7 @@
 // SIZE: 73
 
 extern int* g_665f08;
-extern char g_6b7fac[];
+extern int g_6b7fac;
 
 int __cdecl fcn_0057f1d0(int* msg)
 {
@@ -15,7 +15,7 @@ int __cdecl fcn_0057f1d0(int* msg)
 		if (e != 0 && *e == 0x110) {
 			g_665f08[0] = 0xb;
 			g_665f08[1] = 0xb;
-			g_665f08[3] = *(volatile int*) g_6b7fac;
+			g_665f08[3] = *(volatile int*) ((char*)&g_6b7fac);
 			return 1;
 		}
 	}

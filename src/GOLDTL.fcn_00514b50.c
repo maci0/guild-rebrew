@@ -38,11 +38,11 @@ typedef struct {
 
 extern int g_14cbca0;
 extern int g_7747e8;
-extern Entity g_7f4ca0[768];
-extern Variant g_868060[];
+extern char g_7f4ca0[];
+extern char g_868060[];
 extern unsigned char g_6a375c;
-extern signed char g_7747b0;
-extern char g_773d75;
+extern unsigned char g_7747b0;
+extern unsigned char g_773d75;
 
 void __cdecl fcn_00511580(int);
 void __cdecl fcn_0053abe0(int);
@@ -68,14 +68,14 @@ int __cdecl fcn_00514b50(int variant)
 	fcn_00511580(0);
 	if (g_7747e8 != 0) {
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].type == 6) {
+			if (((Entity*)g_7f4ca0)[i].type == 6) {
 				fcn_0053abe0(i);
 				break;
 			}
 		}
 	}
 	k = variant;
-	if (g_868060[k].count - g_6a375c > 0) {
+	if (((Variant*)g_868060)[k].count - g_6a375c > 0) {
 		wares[0] = 0x18;
 		wares[1] = 0x27;
 		wares[2] = 0x33;
@@ -84,7 +84,7 @@ int __cdecl fcn_00514b50(int variant)
 		wares[5] = 0x4b;
 		wares[6] = 0x12;
 		wares[7] = 6;
-		if (g_7747b0 & 0x80) {
+		if ((*(signed char*)&g_7747b0) & 0x80) {
 			p = wares;
 			variant = sizeof(wares);
 			/*
@@ -111,9 +111,9 @@ int __cdecl fcn_00514b50(int variant)
 			wares[0] = 0x12;
 		} else {
 			for (i = 0; i < 768; i++) {
-				if (g_7f4ca0[i].type == 6 || g_7f4ca0[i].type == 7) {
+				if (((Entity*)g_7f4ca0)[i].type == 6 || ((Entity*)g_7f4ca0)[i].type == 7) {
 					for (j = 0; j < 8; j++) {
-						if (g_7f4ca0[i].trade == wares[j]) {
+						if (((Entity*)g_7f4ca0)[i].trade == wares[j]) {
 							wares[j] = 0;
 							break;
 						}
@@ -121,14 +121,14 @@ int __cdecl fcn_00514b50(int variant)
 				}
 			}
 		}
-		fcn_00511900(g_868060[k].count - g_6a375c, 8, wares);
+		fcn_00511900(((Variant*)g_868060)[k].count - g_6a375c, 8, wares);
 	}
 	fcn_00512ee0();
 	pl = fcn_0050e4a0(1);
 	if (pl != 0) {
 		u = fcn_00502cd0(pl->home, 2, 6, 0, 0x115);
 		if (u != 0) {
-			fcn_004c51a0(u->id, -1, g_773d75, 0x75300);
+			fcn_004c51a0(u->id, -1, (*(char*)&g_773d75), 0x75300);
 		}
 	}
 	return 1;

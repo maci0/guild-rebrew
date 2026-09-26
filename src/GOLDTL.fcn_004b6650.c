@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_773d75;
+extern unsigned char g_773d75;
 
 char* __cdecl fcn_00508e40(int id);
 unsigned short __cdecl fcn_0042e410(int n);
@@ -27,7 +27,7 @@ int __cdecl fcn_004b6650(int* a)
 	d = fcn_0042e410(3) + 1.0;
 	n = (int) (fcn_0050dac0(*(unsigned short*) t) * d * 0.01);
 	fcn_0051af00(buf, *(unsigned short*) (a + 1) + 0x12e7, n);
-	fcn_004c51a0(a[0], -1, g_773d75, n);
+	fcn_004c51a0(a[0], -1, (*(char*)&g_773d75), n);
 	fcn_00545d40(*(int*) (t + 4), *(int*) (t + 4), buf, strlen(buf) > 0x100 ? strlen(buf) > 0x100 : 0, 0x603, 0);
 	return 0;
 }

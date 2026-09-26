@@ -19,11 +19,11 @@ typedef struct Text {
 } Text;
 // SIZE 0x74
 
-extern Slot g_1007bc0[4];
+extern char g_1007bc0[];
 extern char g_1007ba0[];
 extern unsigned char g_773d75;
-extern char g_868060[][0x2f4];
-extern Text g_149d120[];
+extern char g_868060[];
+extern char g_149d120[][0x74];
 extern int g_67fca0;
 extern int g_67fca4;
 extern int g_67fca8;
@@ -47,24 +47,24 @@ void __cdecl fcn_004b1e60(void)
 	int j;
 
 	for (i = 0; i < 4; i++) {
-		g_1007bc0[i].x0 = 0;
+		((Slot*)g_1007bc0)[i].x0 = 0;
 		for (j = 0; j < 4; j++) {
-			g_1007bc0[i].p[j].a = -1;
-			g_1007bc0[i].p[j].b = 0xffff;
+			((Slot*)g_1007bc0)[i].p[j].a = -1;
+			((Slot*)g_1007bc0)[i].p[j].b = 0xffff;
 		}
 	}
 	g_67fca0 = -1;
 	g_67fca4 = -1;
-	sprintf(buf, "historie\\text_H_%s", g_868060[g_773d75]);
-	if (g_149d120[fcn_0042d630(buf)].x68 == 0 && fcn_0042d6b0(buf) == 0) {
+	sprintf(buf, "historie\\text_H_%s", ((char(*)[0x2f4])g_868060)[g_773d75]);
+	if (((Text*)g_149d120)[fcn_0042d630(buf)].x68 == 0 && fcn_0042d6b0(buf) == 0) {
 		g_7728d4 = 0;
 		return;
 	}
 	i = fcn_0042d630(buf);
 	n = 0x10;
-	g_67fca0 = g_149d120[i].x60;
-	g_67fca4 = g_149d120[i].x64;
-	g_67fca8 = g_149d120[i].x60;
+	g_67fca0 = ((Text*)g_149d120)[i].x60;
+	g_67fca4 = ((Text*)g_149d120)[i].x64;
+	g_67fca8 = ((Text*)g_149d120)[i].x60;
 	/* block-fill prelude, see docs/codegen-walls.md section 6b */
 	__asm {
 		mov edi, offset g_1007ba0

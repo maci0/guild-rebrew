@@ -23,7 +23,7 @@ typedef struct {
 extern __int64 g_666018;
 extern unsigned short g_7f4c04;
 extern char* g_14acb58;
-extern char* g_14ac6a0;
+extern int g_14ac6a0;
 extern char s_6acd74[];
 extern char s_6ace58[];
 extern int g_100f1dc;
@@ -94,7 +94,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 	result = 2;
 	memset(&req, 0, sizeof(req));
 	if (*(int*) (e + 0x1cc) & 0x40000) {
-		fcn_00526120(g_14ac6a0, 0);
+		fcn_00526120(((char*)g_14ac6a0), 0);
 		return 0x81;
 	}
 	req.size = 0xc00;

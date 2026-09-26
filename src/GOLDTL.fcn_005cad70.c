@@ -15,7 +15,7 @@ typedef struct {
 	int rest[15];
 } Desc;
 
-extern int g_666018;
+extern __int64 g_666018;
 extern int g_66601c;
 
 void __cdecl fcn_005ccca0(Desc*, int, int, int);
@@ -26,7 +26,7 @@ void __cdecl fcn_005cad70(int unused, int a)
 
 	memset(&d, 0, sizeof(d));
 	d.flags = 0x204;
-	d.w = g_666018;
+	d.w = (*(int*)&g_666018);
 	d.caps = 6;
 	d.h = g_66601c;
 	fcn_005ccca0(&d, a, 0, 0);

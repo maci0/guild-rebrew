@@ -1,5 +1,5 @@
 extern int g_6b8010;
-extern char* g_90e094;
+extern unsigned char* g_90e094;
 
 #pragma pack(1)
 // SIZE 0xa
@@ -31,7 +31,7 @@ void __cdecl fcn_0051ea70(void)
 	save = g_6b8010;
 	fcn_004432d0(0, 1);
 	for (i = 0; i < 0x100; i++) {
-		e = g_90e094 + i * 0xa9;
+		e = ((char*)g_90e094) + i * 0xa9;
 		if (*e != 0 && *(char**) (e + 0x61) != 0) {
 			*(char**) (*(char**) (e + 0x61) + 0x204) = e;
 		}

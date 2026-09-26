@@ -1,7 +1,7 @@
 // FUNCTION: GOLDTL 0x539380
 // SIZE: 258
 
-extern int g_6a375c;
+extern unsigned char g_6a375c;
 extern int g_14ce8e0;
 extern int g_774654;
 extern int g_100f1dc;
@@ -31,12 +31,12 @@ int __cdecl fcn_00539380(void)
 	h = fcn_00470820(0, 0, g_6a3a04);
 	fcn_00471b60(h);
 	d = fcn_00472250(h, 0, 0);
-	mode = *(unsigned char*) &g_6a375c;
-	*(unsigned char*) &g_6a375c = 2;
+	mode = *(unsigned char*) &(*(int*)&g_6a375c);
+	*(unsigned char*) &(*(int*)&g_6a375c) = 2;
 	if (mode >= 2) {
-		*(unsigned char*) &g_6a375c = mode;
+		*(unsigned char*) &(*(int*)&g_6a375c) = mode;
 	}
-	fcn_00472380(d, 2, 8, (unsigned char) g_6a375c);
+	fcn_00472380(d, 2, 8, (unsigned char) (*(int*)&g_6a375c));
 	fcn_00473a90(0, 0);
 	fcn_004727a0(h, 1);
 	fcn_00519190(0x1ab5);
@@ -49,7 +49,7 @@ int __cdecl fcn_00539380(void)
 		if (g_100f1dc == 1) {
 			g_774654 = 1;
 		} else if (g_100f1dc == 2) {
-			*(unsigned char*) &g_6a375c = fcn_00471f80(d);
+			*(unsigned char*) &(*(int*)&g_6a375c) = fcn_00471f80(d);
 			fcn_00471af0(h, 0);
 			result = 1;
 			g_774654 = 1;

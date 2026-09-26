@@ -12,7 +12,7 @@ typedef struct
 } Ent21c;
 // SIZE 0x21c
 
-extern Ent21c g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern char g_679060[];
 
 unsigned char* __cdecl fcn_00508e40(int id);
@@ -32,7 +32,7 @@ int __cdecl fcn_004f7bf0(unsigned char* a1, int* a2)
 		return 1;
 	}
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].id != 0xffff && (g_7f4ca0[i].x166 != 0x12 || g_7f4ca0[i].x166 <= 0x15)) {
+		if (((Ent21c*)g_7f4ca0)[i].id != 0xffff && (((Ent21c*)g_7f4ca0)[i].x166 != 0x12 || ((Ent21c*)g_7f4ca0)[i].x166 <= 0x15)) {
 			break;
 		}
 	}

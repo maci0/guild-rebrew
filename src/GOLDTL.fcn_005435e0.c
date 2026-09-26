@@ -46,10 +46,10 @@ typedef struct {
 	char motto[0x14];
 } Figure;
 
-extern Setup g_7e23e0;
+extern char g_7e23e0[];
 extern char* g_14a60d0[];
 extern char* g_14a5dbc[];
-extern char g_773d75;
+extern unsigned char g_773d75;
 extern signed char g_6a3440;
 
 void __cdecl fcn_004b3b40(void);
@@ -75,27 +75,27 @@ void __cdecl fcn_005435e0(void)
 	int i;
 
 	fcn_004b3b40();
-	if (g_7e23e0.enabled == 0) {
+	if ((*(Setup*)g_7e23e0).enabled == 0) {
 		return;
 	}
 	fcn_004c44a0();
-	h = fcn_004c5040(-1, -1, 0x10, g_7e23e0.look, g_7e23e0.face, g_7e23e0.hair, g_7e23e0.body,
-		g_7e23e0.name, g_7e23e0.family);
+	h = fcn_004c5040(-1, -1, 0x10, (*(Setup*)g_7e23e0).look, (*(Setup*)g_7e23e0).face, (*(Setup*)g_7e23e0).hair, (*(Setup*)g_7e23e0).body,
+		(*(Setup*)g_7e23e0).name, (*(Setup*)g_7e23e0).family);
 	fcn_004c44b0();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
 	}
 	p = fcn_004c4480(h);
 	fcn_004c44a0();
-	h = fcn_004c4fc0(9, -1, -1, fcn_0042e410(4) + 0x20, -1, g_7e23e0.child_look, 0, 1);
-	i = fcn_004c4fc0(9, -1, -1, fcn_0042e410(4) + 0x20, -1, g_7e23e0.spouse_look, 0, 0);
+	h = fcn_004c4fc0(9, -1, -1, fcn_0042e410(4) + 0x20, -1, (*(Setup*)g_7e23e0).child_look, 0, 1);
+	i = fcn_004c4fc0(9, -1, -1, fcn_0042e410(4) + 0x20, -1, (*(Setup*)g_7e23e0).spouse_look, 0, 0);
 	fcn_004c44b0();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
 	}
 	child = fcn_004c4480(h);
 	spouse = fcn_004c4480(i);
-	strncpy(spouse->family, g_7e23e0.family, 0x10);
+	strncpy(spouse->family, (*(Setup*)g_7e23e0).family, 0x10);
 	child->look = p->look;
 	child->home = p->home;
 	child->parent = p->id;
@@ -112,20 +112,20 @@ void __cdecl fcn_005435e0(void)
 	p->child = child->id;
 	child->parent = p->id;
 	spouse->parent = p->id;
-	strcpy(p->motto, g_7e23e0.motto);
-	p->emblem = g_7e23e0.emblem;
+	strcpy(p->motto, (*(Setup*)g_7e23e0).motto);
+	p->emblem = (*(Setup*)g_7e23e0).emblem;
 	fcn_004c54c0(p->id, spouse->id, 0x7f, 0);
 	fcn_004c54c0(spouse->id, p->id, 0x7f, 0);
 	fcn_004c54c0(p->id, child->id, 0x7f, 0);
 	fcn_004c54c0(child->id, p->id, 0x7f, 0);
 	fcn_004c54c0(spouse->id, child->id, 0x7f, 0);
 	fcn_004c54c0(child->id, spouse->id, 0x7f, 0);
-	fcn_004c5150(spouse->id, -1, g_773d75, (fcn_0042e410(0x200) + 0x1f4) << 5);
-	fcn_004c5150(child->id, -1, g_773d75, (fcn_0042e410(0x200) + 0x1f4) << 5);
+	fcn_004c5150(spouse->id, -1, (*(char*)&g_773d75), (fcn_0042e410(0x200) + 0x1f4) << 5);
+	fcn_004c5150(child->id, -1, (*(char*)&g_773d75), (fcn_0042e410(0x200) + 0x1f4) << 5);
 	if (g_6a3440 > -1) {
-		fcn_004b3e10(p->id, g_7e23e0.dynasty, 0);
+		fcn_004b3e10(p->id, (*(Setup*)g_7e23e0).dynasty, 0);
 	}
 	for (i = 0; i < 5; i++) {
-		p->skills[i] = g_7e23e0.skills[i];
+		p->skills[i] = (*(Setup*)g_7e23e0).skills[i];
 	}
 }

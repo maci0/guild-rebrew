@@ -31,7 +31,7 @@ typedef struct Seg {
 } Seg;
 // SIZE 0x40
 
-extern Rec* g_99ec10;
+extern char* g_99ec10;
 extern Seg g_100b0c0[];
 extern unsigned char g_773d75;
 
@@ -59,13 +59,13 @@ void __cdecl fcn_00486500(Node* n)
 						s->price = fcn_0050bb50(s->id, g_773d75);
 					}
 				}
-				n->sum += g_99ec10[n->id].weight[i] * s->price;
+				n->sum += ((Rec*)g_99ec10)[n->id].weight[i] * s->price;
 			}
 		}
-		n->sum = n->sum / g_99ec10[n->id].div;
+		n->sum = n->sum / ((Rec*)g_99ec10)[n->id].div;
 		n->base = fcn_0050b840(n->id);
 		n->value = n->base + n->sum;
 		n->price = fcn_0050bb50(n->id, g_773d75);
-		n->slope = (n->price - n->value) / g_99ec10[n->id].cap;
+		n->slope = (n->price - n->value) / ((Rec*)g_99ec10)[n->id].cap;
 	}
 }

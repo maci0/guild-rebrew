@@ -8,7 +8,7 @@ struct I41b5b0 {
 };
 
 extern int g_6777ac;
-extern I41b5b0* g_6b5df4;
+extern void* g_6b5df4;
 extern char g_6b5df0[];
 void __cdecl fcn_0041d9e0(char*);
 
@@ -18,5 +18,5 @@ void __cdecl fcn_0041b5b0(void)
 		fcn_0041d9e0((char*) 0x677870);
 	}
 	g_6777ac = 0;
-	g_6b5df4->vt[0x2c / 4](g_6b5df4, 0, 0, g_6b5df0, 0x2000);
+	((I41b5b0*)g_6b5df4)->vt[0x2c / 4](((I41b5b0*)g_6b5df4), 0, 0, g_6b5df0, 0x2000);
 }

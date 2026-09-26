@@ -1,4 +1,4 @@
-extern char* g_14d0020[0x300];
+extern void* g_14d0020[];
 extern int g_67a370;
 extern int g_6b8010;
 
@@ -23,11 +23,11 @@ int __cdecl fcn_004030e0(char* obj)
 	int saved;
 
 	if (obj != 0) {
-		while (g_14d0020[i] != obj && i < 0x300) {
+		while (((char**)g_14d0020)[i] != obj && i < 0x300) {
 			i++;
 		}
 		if (i < 0x300) {
-			g_14d0020[i] = 0;
+			((char**)g_14d0020)[i] = 0;
 			*(int*) obj = -1;
 			fcn_00405130(obj);
 			if (*(int*) (obj + 0x34) != 0) {

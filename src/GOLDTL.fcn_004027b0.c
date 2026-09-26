@@ -28,7 +28,7 @@ typedef struct {
 } Fade_4027b0;
 // SIZE 0xc
 
-extern Fade_4027b0 g_1551f40[16];
+extern int g_1551f40[0x30];
 extern int g_6b5c24;
 
 void __cdecl fcn_0043a3f0(char* node, char* m, Key4_4027b0 k);
@@ -49,10 +49,10 @@ void __cdecl fcn_004027b0(void)
 	int i;
 
 	for (i = 0; i < 16; i++) {
-		obj = g_1551f40[i].obj;
+		obj = ((Fade_4027b0*)g_1551f40)[i].obj;
 		if (obj != 0) {
-			t = ((float) g_6b5c24 - g_1551f40[i].start) * 0.02f;
-			if (!g_1551f40[i].fade_in) {
+			t = ((float) g_6b5c24 - ((Fade_4027b0*)g_1551f40)[i].start) * 0.02f;
+			if (!((Fade_4027b0*)g_1551f40)[i].fade_in) {
 				t = 1.0f - t;
 			}
 			if (!(t > 0.0f)) {
@@ -82,7 +82,7 @@ void __cdecl fcn_004027b0(void)
 				} else if (a == 255.0f) {
 					fcn_00402a00(obj, 1);
 				}
-				g_1551f40[i].obj = 0;
+				((Fade_4027b0*)g_1551f40)[i].obj = 0;
 			}
 		}
 	}

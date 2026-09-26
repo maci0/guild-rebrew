@@ -1,7 +1,7 @@
 extern int g_14cbca0;
 extern int g_699364;
-extern int g_68a9d4;
-extern unsigned char g_7f4ca0[];
+extern char g_68a9d4[];
+extern char g_7f4ca0[];
 
 // SIZE 0x30
 typedef struct {
@@ -32,8 +32,8 @@ int __cdecl fcn_004c76c0(int cmd, char* result)
 		*(int*) (cmd + 0x16) = field_id;
 		i = 0;
 		while ((unsigned short) i < 0x300) {
-			if (*(unsigned short*) (g_7f4ca0 + (unsigned int) (unsigned short) i * 0x21c) != (unsigned short) 0xffff &&
-				*(int*) (g_7f4ca0 + (unsigned int) (unsigned short) i * 0x21c + 4) == field_id) {
+			if (*(unsigned short*) (((unsigned char*)g_7f4ca0) + (unsigned int) (unsigned short) i * 0x21c) != (unsigned short) 0xffff &&
+				*(int*) (((unsigned char*)g_7f4ca0) + (unsigned int) (unsigned short) i * 0x21c + 4) == field_id) {
 				break;
 			}
 			i = i + 1;
@@ -44,7 +44,7 @@ int __cdecl fcn_004c76c0(int cmd, char* result)
 	building = fcn_005043d0(*(unsigned char*) (cmd + 0x14), i);
 	if (building == (char*) 0)
 		return 1;
-	g_68a9d4 = *(int*) (building + 1);
+	(*(int*)g_68a9d4) = *(int*) (building + 1);
 	*(unsigned short*) (building + 0x5a) = *(unsigned short*) (cmd + 0x1a);
 	if (*(int*) (cmd + 0x1c) != 0) {
 		*(copy_12_dwords*) (building + 0x65) = *(copy_12_dwords*) (cmd + 0x20);

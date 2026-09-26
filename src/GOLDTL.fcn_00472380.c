@@ -7,7 +7,7 @@ typedef struct
 } fcn_00472380_Ent;
 // SIZE 0x2f4
 
-extern fcn_00472380_Ent* g_1015ea0;
+extern char* g_1015ea0;
 
 int __cdecl fcn_004722c0(char* sub);
 
@@ -25,7 +25,7 @@ void __cdecl fcn_00472380(int id, int a2, int a3, int a4, int a5)
 	if (id == -1 || id > 0x400) {
 		return;
 	}
-	e = &g_1015ea0[id];
+	e = &((fcn_00472380_Ent*)g_1015ea0)[id];
 	if (e->i[0x20 / 4] == 0x41) {
 		sub = (char*) e->i[0xc / 4];
 		if (*(int*) (sub + 0x28) & 1) {

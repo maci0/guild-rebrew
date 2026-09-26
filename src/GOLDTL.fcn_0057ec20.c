@@ -3,13 +3,13 @@ extern int* g_665f08;
 // GLOBAL: GOLD 0x5eec60
 extern int* g_665f08;
 // GLOBAL: GOLDTL 0x6b7fc0
-extern char g_6b7fc0[];
+extern int g_6b7fc0;
 // GLOBAL: GOLD 0x6333e0
-extern char g_6b7fc0[];
+extern int g_6b7fc0;
 // GLOBAL: GOLDTL 0x774a14
-extern char g_774a14[];
+extern int g_774a14;
 // GLOBAL: GOLD 0x6f265c
-extern char g_774a14[];
+extern int g_774a14;
 // FUNCTION: GOLD 0x00576680
 // SIZE: 73
 // FUNCTION: GOLDTL 0x57ec20
@@ -19,7 +19,7 @@ int __cdecl fcn_0057ec20(int a1)
 {
 	int* p;
 
-	if (*(int*) g_774a14 == 0) {
+	if (*(int*) ((char*)&g_774a14) == 0) {
 		return 1;
 	}
 	p = g_665f08;
@@ -30,7 +30,7 @@ int __cdecl fcn_0057ec20(int a1)
 	if (p == 0) {
 		return 1;
 	}
-	if (*(int*) g_6b7fc0 != 0) {
+	if (*(int*) ((char*)&g_6b7fc0) != 0) {
 		return 0;
 	}
 	return (*(int*) ((char*) p + 0x68) & a1) != 0;

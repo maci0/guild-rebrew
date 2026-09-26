@@ -15,7 +15,7 @@ typedef struct {
 	char pad3[0xb2];
 } Rec21c;
 
-extern Rec21c g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 Rec21c* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
@@ -96,11 +96,11 @@ int __cdecl fcn_004af050(int mode, int* pairs, int idx, char* text, void* out)
 		goto send;
 	}
 	for (i = 0; i < 768; i++) {
-		if (fcn_004ae130((unsigned short) i) != 0 && (n == 0 || g_7f4ca0[i].side == want)) {
+		if (fcn_004ae130((unsigned short) i) != 0 && (n == 0 || ((Rec21c*)g_7f4ca0)[i].side == want)) {
 			v = fcn_0050dac0((unsigned short) i);
-			if (v > best && fcn_004ae0f0(g_7f4ca0[i].key) != 0) {
+			if (v > best && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {
 				best = v;
-				r = &g_7f4ca0[i];
+				r = &((Rec21c*)g_7f4ca0)[i];
 			}
 		}
 	}

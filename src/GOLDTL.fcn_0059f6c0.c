@@ -23,7 +23,7 @@ extern int g_14aaf18;
 extern int g_14aaf38;
 extern int g_14ad2c0;
 extern int g_14ab04c;
-extern int g_666018;
+extern __int64 g_666018;
 extern int g_66601c;
 extern char s_6aa714[];
 extern char s_6aa700[];
@@ -101,7 +101,7 @@ void __cdecl fcn_0059f6c0(int a0, int a1)
 					memset(&req, 0, sizeof(req));
 					req.size = 0x400;
 					req.kind = 6;
-					req.c = g_666018;
+					req.c = (*(int*)&g_666018);
 					req.d = g_66601c;
 					req.id = 0x727;
 					fcn_0051af00(text, 0x1707);

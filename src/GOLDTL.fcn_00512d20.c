@@ -42,9 +42,9 @@ typedef struct {
 	int id;
 } Handle;
 
-extern Office* g_868050;
-extern Entity g_7f4ca0[];
-extern char g_773d75;
+extern unsigned char* g_868050;
+extern char g_7f4ca0[];
+extern unsigned char g_773d75;
 
 int __cdecl fcn_00504bd0(int);
 void __cdecl fcn_004c51f0(int, int, int, int, char, int);
@@ -68,19 +68,19 @@ void __cdecl fcn_00512d20(Player* p)
 	Site* s;
 
 	fcn_00504bd0(p->office);
-	o = &g_868050[p->office];
+	o = &((Office*)g_868050)[p->office];
 	if (o->kind == 9) {
-		fcn_004c51f0(p->id, -1, 0x136, 1, g_773d75, 0);
-		fcn_004c5150(g_7f4ca0[p->slot].id, -1, g_773d75, fcn_0050b750(0x1f4, g_773d75));
+		fcn_004c51f0(p->id, -1, 0x136, 1, (*(char*)&g_773d75), 0);
+		fcn_004c5150(((Entity*)g_7f4ca0)[p->slot].id, -1, (*(char*)&g_773d75), fcn_0050b750(0x1f4, (*(char*)&g_773d75)));
 	} else if (o->kind != 4 && o->kind != 0x10 && o->kind != 0x13) {
-		fcn_004c51f0(p->id, -1, 0x134, 1, g_773d75, 0);
+		fcn_004c51f0(p->id, -1, 0x134, 1, (*(char*)&g_773d75), 0);
 	}
 	if (o->kind != 9) {
 		if (o->kind == 4 || o->kind == 0x10 || o->kind == 0x13 || o->kind == 0x1d) {
 			if (o->kind == 0x1d) {
 				h = fcn_004f36f0(p);
 			} else {
-				if (g_7f4ca0[p->slot].type != 6 && g_7f4ca0[p->slot].type != 7) {
+				if (((Entity*)g_7f4ca0)[p->slot].type != 6 && ((Entity*)g_7f4ca0)[p->slot].type != 7) {
 					fcn_004c6090(p, 0, o->level, 0);
 				}
 				h = fcn_004c6090(p, 0, o->level, 0);

@@ -1,4 +1,4 @@
-extern char* g_67a370;
+extern int g_67a370;
 extern int g_6b8300;
 
 // FUNCTION: GOLDTL 0x514f10
@@ -25,8 +25,8 @@ void __cdecl fcn_00514f10(void)
 			fcn_0052db70(e);
 		}
 	}
-	fcn_004379a0(g_67a370, 0, 0x40, (void*) fcn_00514e80, 0);
+	fcn_004379a0(((char*)g_67a370), 0, 0x40, (void*) fcn_00514e80, 0);
 	fcn_00514e30();
 	fcn_00598510();
-	fcn_0045b290(*(int*) (g_67a370 + 0xb0), g_6b8300);
+	fcn_0045b290(*(int*) (((char*)g_67a370) + 0xb0), g_6b8300);
 }

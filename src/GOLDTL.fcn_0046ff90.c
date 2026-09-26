@@ -15,7 +15,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Slot* g_1015ea0;
+extern char* g_1015ea0;
 
 int __cdecl fcn_0046b520(const char* text, int font);
 
@@ -27,7 +27,7 @@ void __cdecl fcn_0046ff90(int slot, char* text)
 	char* par;
 	int n;
 
-	s = &g_1015ea0[slot];
+	s = &((Slot*)g_1015ea0)[slot];
 	par = s->link;
 	if (par && s->buf) {
 		if (s->len) {

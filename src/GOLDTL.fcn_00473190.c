@@ -1,4 +1,4 @@
-extern volatile unsigned int g_6b7fb8;
+extern int g_6b7fb8;
 
 typedef struct Fade Fade;
 
@@ -27,8 +27,8 @@ void __cdecl fcn_00473190(Fade* t)
 	float elapsed;
 	float v;
 
-	elapsed = (float) (g_6b7fb8 - t->start);
-	if (g_6b7fb8 - t->last > 3) {
+	elapsed = (float) ((*(volatile unsigned int*)&g_6b7fb8) - t->start);
+	if ((*(volatile unsigned int*)&g_6b7fb8) - t->last > 3) {
 		elapsed = (float) (int) (t->last + 3) - (int) t->start;
 	}
 	if (t->flags & 1) {
@@ -51,5 +51,5 @@ void __cdecl fcn_00473190(Fade* t)
 	if (((t->flags & 1) && v == 1.0f) || ((t->flags & 2) && v == 0.0f)) {
 		t->flags |= 4;
 	}
-	t->last = g_6b7fb8;
+	t->last = (*(volatile unsigned int*)&g_6b7fb8);
 }

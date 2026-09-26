@@ -4,7 +4,7 @@
 // SIZE: 157
 
 extern unsigned short g_774970;
-extern unsigned char g_7f4ca0[];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_00504bd0(int k);
 char* __cdecl fcn_0050e4a0(int k);
@@ -20,7 +20,7 @@ void* __cdecl fcn_00507a10(unsigned char* e)
 	r = 0;
 	t = fcn_00504bd0(e[0]);
 	if (t == 5) {
-		c = g_7f4ca0[g_774970 * 0x21c + 0x169];
+		c = ((unsigned char*)g_7f4ca0)[g_774970 * 0x21c + 0x169];
 		if (c == 0x1e) {
 			o = fcn_0050e4a0(2);
 		} else if (c == 0x1f) {

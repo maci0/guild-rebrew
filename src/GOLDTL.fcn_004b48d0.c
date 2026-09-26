@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x4b48d0
 // SIZE: 208
 
-extern char* g_868050;
+extern unsigned char* g_868050;
 
 int __cdecl fcn_00506fd0(int);
 unsigned char* __cdecl fcn_00503fe0(int, ...);
@@ -27,7 +27,7 @@ int __cdecl fcn_004b48d0(unsigned short* a1)
 	e = fcn_00503fe0(2, 4, a1[0], 5, x);
 	while (cnt < 3 && e != 0) {
 		ok = 1;
-		row = g_868050 + *e * 0x24d;
+		row = ((char*)g_868050) + *e * 0x24d;
 		for (j = 0; j < 0x40; j++) {
 			v = *(unsigned short*) (row + 0x23 + j * 2);
 			if (v == 0)

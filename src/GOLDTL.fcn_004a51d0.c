@@ -22,7 +22,7 @@ typedef struct Def {
 	int mask;
 } Def;
 
-extern Rec* g_99ec10;
+extern char* g_99ec10;
 
 Def* __cdecl fcn_005c61e0(int id);
 int __cdecl fcn_005c6270(char* e, int id);
@@ -45,7 +45,7 @@ void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt)
 	cnt->free = 0;
 	cnt->total = 0;
 	for (it = *(char**) (e + 0x178); it != 0; it = *(char**) (it + 0x3f)) {
-		if (g_99ec10[*(unsigned short*) it].type == 9) {
+		if (((Rec*)g_99ec10)[*(unsigned short*) it].type == 9) {
 			continue;
 		}
 		cnt->total++;

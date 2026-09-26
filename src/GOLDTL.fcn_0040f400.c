@@ -9,7 +9,7 @@ struct query_40f400 {
 	char flag;
 };
 
-extern char* g_67a370;
+extern int g_67a370;
 
 int __cdecl fcn_0040f3d0();
 void __cdecl fcn_004379a0(char*, int, int, int (__cdecl*)(), struct query_40f400*);
@@ -30,7 +30,7 @@ int __cdecl fcn_0040f400(char** args)
 	q.count = 0;
 	q.result = 0;
 	if (q.name[0] != 0) {
-		fcn_004379a0(g_67a370, 0, 0xc0, fcn_0040f3d0, &q);
+		fcn_004379a0(((char*)g_67a370), 0, 0xc0, fcn_0040f3d0, &q);
 	}
 	return 0;
 }

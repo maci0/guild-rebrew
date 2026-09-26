@@ -10,7 +10,7 @@ typedef struct {
 	char name[0x4c];
 } Var;
 
-extern Var* g_6b7e9c;
+extern void* g_6b7e9c;
 
 Var* __cdecl fcn_00429e60(const char* name)
 {
@@ -18,13 +18,13 @@ Var* __cdecl fcn_00429e60(const char* name)
 	Var* p;
 
 	i = 0;
-	for (p = g_6b7e9c; i < 0x100; i++, p++) {
+	for (p = ((Var*)g_6b7e9c); i < 0x100; i++, p++) {
 		if (strcmp(p->name, name) == 0) {
 			break;
 		}
 	}
 	if (i < 0x100) {
-		return &g_6b7e9c[i];
+		return &((Var*)g_6b7e9c)[i];
 	}
 	return 0;
 }

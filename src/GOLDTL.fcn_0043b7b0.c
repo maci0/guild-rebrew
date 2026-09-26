@@ -3,7 +3,7 @@
 
 typedef int (__cdecl* fcn_0043b7b0_f)(char*, int, char*);
 
-extern fcn_0043b7b0_f g_67a590;
+extern int g_67a590;
 
 void __cdecl fcn_004011f0(int, void*);
 int __cdecl fcn_004011a0(int, void*);
@@ -24,7 +24,7 @@ void __cdecl fcn_0043b7b0(int r, char* o)
 		id = fcn_0043b500(name);
 		fcn_004011a0(r, val);
 		if (o != 0) {
-			fcn_0043b580(o, id, g_67a590(o, id, val), val);
+			fcn_0043b580(o, id, (*(fcn_0043b7b0_f*)&g_67a590)(o, id, val), val);
 		}
 	}
 }

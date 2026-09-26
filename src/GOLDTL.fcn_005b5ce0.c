@@ -26,7 +26,7 @@ typedef struct
 	unsigned char state;
 } Gauge;
 
-extern Ctl* g_1015ea0;
+extern char* g_1015ea0;
 extern char* g_14abbb0;
 extern char* g_14abc28;
 
@@ -50,16 +50,16 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 		}
 		g->state = 2;
 		fcn_0046f940(g->label, buf);
-		g_1015ea0[g->label].x18 = 0xa0;
-		g_1015ea0[g->label].x1c = 0x28;
+		((Ctl*)g_1015ea0)[g->label].x18 = 0xa0;
+		((Ctl*)g_1015ea0)[g->label].x1c = 0x28;
 		g->state = 2;
 		return;
 	}
 	if (g->obj != 0 && ((char*) g->obj)[8] != 0) {
 		fcn_00517c00(*g->obj, 1, 1, buf);
 		fcn_0046f940(g->label, buf);
-		g_1015ea0[g->label].x6c = 1;
-		g_1015ea0[g->label].x18 = 0xa0;
+		((Ctl*)g_1015ea0)[g->label].x6c = 1;
+		((Ctl*)g_1015ea0)[g->label].x18 = 0xa0;
 		g->state = 1;
 		return;
 	}
@@ -70,9 +70,9 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 	}
 	g->state = 0;
 	fcn_0046f940(g->label, buf);
-	g_1015ea0[g->label].x18 = 0xa0;
-	g_1015ea0[g->label].x1c = 0x28;
+	((Ctl*)g_1015ea0)[g->label].x18 = 0xa0;
+	((Ctl*)g_1015ea0)[g->label].x1c = 0x28;
 	fcn_0046f940(g->value, "");
 	g->state = 0;
-	g_1015ea0[g->icon].x2f0 = 0;
+	((Ctl*)g_1015ea0)[g->icon].x2f0 = 0;
 }

@@ -6,9 +6,9 @@ extern unsigned char g_773d75;
 // GLOBAL: GOLD 0x6f1bc5
 extern unsigned char g_773d75;
 // GLOBAL: GOLDTL 0x868060
-extern unsigned int g_868060[];
+extern char g_868060[];
 // GLOBAL: GOLD 0x7e3f40
-extern unsigned int g_868060[];
+extern char g_868060[];
 // FUNCTION: GOLDTL 0x5b24b0
 // SIZE: 162
 // FUNCTION: GOLD 0x5a9030
@@ -29,7 +29,7 @@ void __cdecl fcn_005b24b0(void* a1, void* a2)
 		        + (*(char*) ((char*) a2 + 9) ? 0x1333 : 0x1330),
 		    *(unsigned short*) a2,
 		    (fcn_0042e410(3) & 0xffff) + 0x1336,
-		    &g_868060[g_773d75 * 189]);
+		    &((unsigned int*)g_868060)[g_773d75 * 189]);
 		fcn_00545d40(*(int*) ((char*) a2 + 4), -1, g_774a80, 1, 0x5ec, (void*) 0);
 	}
 }

@@ -8,9 +8,9 @@ typedef struct
 // SIZE 0x21c
 
 extern int g_7e46ac;
-extern char g_773d75;
+extern unsigned char g_773d75;
 extern unsigned short g_774970;
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 extern int g_100f1dc;
 extern int g_774654;
 extern char g_14cf950;
@@ -40,12 +40,12 @@ int __cdecl fcn_005b5750(void)
 
 	r = 0;
 	timer = g_7e46ac;
-	if (fcn_00526010(&g_7f4ca0[g_774970], 0x140, g_773d75) == 0) {
+	if (fcn_00526010(&((Player*)g_7f4ca0)[g_774970], 0x140, (*(char*)&g_773d75)) == 0) {
 		return 0;
 	}
 	dlg = fcn_00470820(0, 0, s_68d704);
-	ctl = fcn_00472250(dlg, 0, fcn_00519190(0x1a34, (unsigned char) g_773d75));
-	v = gm_AccumulateTyped2(&g_7f4ca0[g_774970]);
+	ctl = fcn_00472250(dlg, 0, fcn_00519190(0x1a34, (unsigned char) (*(char*)&g_773d75)));
+	v = gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]);
 	if (v >= 0x12c0) {
 		v = 0x12c0;
 	}

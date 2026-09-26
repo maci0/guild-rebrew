@@ -13,7 +13,7 @@ typedef struct {
 	char pad174[0x21c - 0x174];
 } Obj;
 
-extern Obj g_7f4ca0[];
+extern char g_7f4ca0[];
 
 void __cdecl fcn_005b1c90(int h);
 void __cdecl fcn_0041ddd0(void* p);
@@ -30,7 +30,7 @@ int __cdecl fcn_00504130(unsigned char* o)
 	if (*o == 0) {
 		return -2;
 	}
-	if (*(unsigned short*) (o + 0x27) != 0xffff && g_7f4ca0[*(unsigned short*) (o + 0x27)].type == 6) {
+	if (*(unsigned short*) (o + 0x27) != 0xffff && ((Obj*)g_7f4ca0)[*(unsigned short*) (o + 0x27)].type == 6) {
 		fcn_005b1c90(*(int*) (o + 1));
 	}
 	switch (*o) {
@@ -55,11 +55,11 @@ int __cdecl fcn_00504130(unsigned char* o)
 		break;
 	}
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].work == o) {
-			g_7f4ca0[i].work = 0;
+		if (((Obj*)g_7f4ca0)[i].work == o) {
+			((Obj*)g_7f4ca0)[i].work = 0;
 		}
-		if (g_7f4ca0[i].home == o) {
-			g_7f4ca0[i].home = 0;
+		if (((Obj*)g_7f4ca0)[i].home == o) {
+			((Obj*)g_7f4ca0)[i].home = 0;
 		}
 	}
 	if (*(char**) (o + 0x5d) != 0) {

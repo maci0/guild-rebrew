@@ -7,7 +7,7 @@
  * 0x100104a0); the client keeps its own cm_GetBuildingStatCount at 0x4f1320
  * with different constants. */
 
-extern char* g_868050;
+extern unsigned char* g_868050;
 
 int __cdecl fcn_004f13d0(unsigned char* cmd)
 {
@@ -17,7 +17,7 @@ int __cdecl fcn_004f13d0(unsigned char* cmd)
 	char* type_entry;
 
 	entity_type = *cmd;
-	type_entry = g_868050 + (unsigned int) entity_type * 0x24d;
+	type_entry = ((char*)g_868050) + (unsigned int) entity_type * 0x24d;
 	upgrade_data = *(int*) (cmd + 0x65);
 	/* Reading the tier byte in each test rather than into a local makes the
 	 * record address a common subexpression, so msvc6 materialises it with

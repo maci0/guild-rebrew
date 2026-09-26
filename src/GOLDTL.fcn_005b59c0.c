@@ -26,7 +26,7 @@ typedef struct
 	int win;
 } fcn_005b59c0_Gauge;
 
-extern fcn_005b59c0_Ctl* g_1015ea0;
+extern char* g_1015ea0;
 extern unsigned char* g_868050;
 extern int g_772514;
 extern unsigned short g_774970;
@@ -55,28 +55,28 @@ void __cdecl fcn_005b59c0(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 	g->x1c = fcn_0046f740(g->x + 2, g->y, *(int*) (e + 0x18c), g_772514);
 	fcn_00517c00(*(unsigned short*) e, 1, 1, buf);
 	fcn_0046f940(g->label, buf);
-	g_1015ea0[g->label].x6c = 1;
-	g_1015ea0[g->label].x18 = 0xa0;
+	((fcn_005b59c0_Ctl*)g_1015ea0)[g->label].x6c = 1;
+	((fcn_005b59c0_Ctl*)g_1015ea0)[g->label].x18 = 0xa0;
 	g->bar = fcn_004677e0(g->x - 8, g->y + 0x32, 0x40, 0, 0x64, 0x75, 0x42, g_772514);
-	g_1015ea0[g->bar].x4c = 1;
+	((fcn_005b59c0_Ctl*)g_1015ea0)[g->bar].x4c = 1;
 	g->state = 1;
-	g_1015ea0[g->icon].x2f0 = (char*) e;
+	((fcn_005b59c0_Ctl*)g_1015ea0)[g->icon].x2f0 = (char*) e;
 	if (*(int*) (e + 0x174) != 0 && e[0x164] == 0) {
 		if (g->obj[0x165] == rec[0x230])
 			fcn_0051af00(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a39);
 		else if (g->obj[0x165] == rec[0x22f])
 			fcn_0051af00(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a3a);
 		fcn_0046f940(g->value, buf);
-		g_1015ea0[g->value].x6c = 1;
-		g_1015ea0[g->value].x18 = 0xa0;
+		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x6c = 1;
+		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x18 = 0xa0;
 	} else if (e[0x164] == 0) {
 		if (g->obj[0x165] == rec[0x230])
 			fcn_0051af00(buf, g_679060, 0x1a3b);
 		else if (g->obj[0x165] == rec[0x22f])
 			fcn_0051af00(buf, g_679060, 0x1a3c);
 		fcn_0046f940(g->value, buf);
-		g_1015ea0[g->value].x6c = 1;
-		g_1015ea0[g->value].x18 = 0xa0;
+		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x6c = 1;
+		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x18 = 0xa0;
 	}
 	if (full != 0) {
 		fcn_00534160(g->x, g->y + 0x64, e[0x83], 0x4df);

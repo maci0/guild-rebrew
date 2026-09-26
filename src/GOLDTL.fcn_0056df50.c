@@ -12,7 +12,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 extern char g_699874[];
 extern char g_6a6b70[];
@@ -49,7 +49,7 @@ void __cdecl fcn_0056df50(char* u)
 			goto kill;
 		}
 		if (*(unsigned short*) (t + 0x25) != 0xffff) {
-			fcn_004c5f60(*(int*) (t + 1), g_7f4ca0[*(unsigned short*) (t + 0x25)].owner, *(int*) (p + 4));
+			fcn_004c5f60(*(int*) (t + 1), ((struct house*)g_7f4ca0)[*(unsigned short*) (t + 0x25)].owner, *(int*) (p + 4));
 		} else {
 			fcn_004c5f60(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		}
@@ -57,7 +57,7 @@ void __cdecl fcn_0056df50(char* u)
 		if (*(int*) (u + 0xbc) == 0) {
 			goto kill;
 		}
-		h = &g_7f4ca0[*(unsigned short*) (t + 0x25)];
+		h = &((struct house*)g_7f4ca0)[*(unsigned short*) (t + 0x25)];
 		if (h != 0) {
 			if (h->type == 6 || h->type == 7) {
 				fcn_0051af00(text, 0x17e6, t, *(unsigned short*) p, *(int*) (u + 0xbc));

@@ -9,7 +9,7 @@ struct node_403bc0 {
 	unsigned char lit : 1;
 };
 
-extern float g_662d70[];
+extern float g_662d70[4];
 extern unsigned char g_6752a4;
 extern int g_67a370;
 

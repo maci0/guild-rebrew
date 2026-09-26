@@ -10,7 +10,7 @@ extern int g_67d370;
 extern int g_774654;
 extern int g_7e46ac;
 extern unsigned short g_774970;
-extern char g_773d75;
+extern unsigned char g_773d75;
 extern int g_665f78[];
 extern char g_7f4ca0[];
 
@@ -64,7 +64,7 @@ int __cdecl fcn_0058c890(char* a1, int a2, unsigned char a3, int a4)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (g_67d370 == ok) {
-				if (cost == 0 || fcn_00526010(g_7f4ca0 + g_774970 * 540, cost, g_773d75) != 0) {
+				if (cost == 0 || fcn_00526010(g_7f4ca0 + g_774970 * 540, cost, (*(char*)&g_773d75)) != 0) {
 					h = fcn_004f2f90(g_7f4ca0 + g_774970 * 540, a4, a1, a2, a3, cost);
 					while (h != -1 && (s = fcn_004c4450(h)) == 0) {
 						fcn_005373e0((void*) s, 0x20007);

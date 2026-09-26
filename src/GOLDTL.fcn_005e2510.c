@@ -5,7 +5,7 @@
 
 extern unsigned char g_7747b0;
 extern int g_6b5c94;
-extern unsigned int g_68a9cc;
+extern char g_68a9cc[];
 extern int g_7766a8;
 extern float g_675308;
 extern int g_7766b0;
@@ -18,7 +18,7 @@ void __cdecl fcn_005e2510(void)
 {
 	g_6b5c94 = 0;
 	if (g_7747b0 & 4) {
-		g_675308 = (float) ((g_68a9cc * 0.25 + 0.5) * 0.8);
+		g_675308 = (float) (((*(unsigned int*)g_68a9cc) * 0.25 + 0.5) * 0.8);
 	}
 	else {
 		g_675308 = (float) (g_7766a8 * 0.00625f + 0.25);

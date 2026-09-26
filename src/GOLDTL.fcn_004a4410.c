@@ -29,7 +29,7 @@ typedef struct Actor {
 	unsigned char flags;
 } Actor;
 
-extern Deal g_1008540[];
+extern char g_1008540[];
 
 // FUNCTION: GOLD 0x004a49a0
 // SIZE: 309
@@ -45,7 +45,7 @@ int __cdecl fcn_004a4410(float* s1, float* s2, int idx, Actor* e)
 
 	*s1 = 0;
 	*s2 = 0;
-	t = &g_1008540[idx];
+	t = &((Deal*)g_1008540)[idx];
 	if (t->flags & e->flags) {
 		k1 = 40.0f;
 		k2 = 50.0f;

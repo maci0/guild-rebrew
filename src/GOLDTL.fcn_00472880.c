@@ -12,7 +12,7 @@ typedef struct VfsEntry {
 } VfsEntry;
 // SIZE 0x54
 
-extern VfsEntry* g_772500;
+extern char* g_772500;
 extern char* g_772524;
 extern int g_67d378;
 extern int g_67d380;
@@ -26,7 +26,7 @@ char* __cdecl fcn_00466190(int idx);
 // SIZE: 115
 char* __cdecl fcn_00472880(int idx)
 {
-	if (g_772500[idx].kind != 7) {
+	if (((VfsEntry*)g_772500)[idx].kind != 7) {
 		return 0;
 	}
 	g_772524 = fcn_00466190(idx);

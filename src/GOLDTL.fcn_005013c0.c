@@ -6,7 +6,7 @@ typedef struct {
 #pragma pack(pop)
 // SIZE 0x41
 
-extern Obj5013c0* g_99ec10;
+extern char* g_99ec10;
 
 // FUNCTION: GOLDTL 0x005013c0
 // SIZE: 193
@@ -17,7 +17,7 @@ int __cdecl fcn_005013c0(unsigned short* id)
 	int i;
 
 	i = 0;
-	o = &g_99ec10[*id];
+	o = &((Obj5013c0*)g_99ec10)[*id];
 	while (t[i] != 0) {
 		if (o->kind == t[i]) {
 			return t[i];

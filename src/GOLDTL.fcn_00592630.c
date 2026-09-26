@@ -4,8 +4,8 @@
 // SIZE: 184
 
 extern char g_7f4ca0[];
-extern char* g_868050;
-extern int g_773d78;
+extern unsigned char* g_868050;
+extern char* g_773d78;
 
 void __cdecl fcn_005925e0(int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -23,7 +23,7 @@ void __cdecl fcn_00592630(void)
 		}
 	}
 	n = 1;
-	fcn_005925e0(0, g_773d78);
+	fcn_005925e0(0, (*(int*)&g_773d78));
 	e = gm_StartFilteredEntitySearch(1, 5, 0xf);
 	if (e != 0) {
 		n = 2;
@@ -34,7 +34,7 @@ void __cdecl fcn_00592630(void)
 	}
 	n = 3;
 	for (e = gm_StartFilteredEntitySearch(1, 4, i); e != 0; e = gm_AddObjekt()) {
-		if (g_868050[*e * 589] != 2) {
+		if (((char*)g_868050)[*e * 589] != 2) {
 			fcn_005925e0(n++, (int) e);
 		}
 	}

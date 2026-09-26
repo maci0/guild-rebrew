@@ -5,7 +5,7 @@ extern int g_772514;
 extern char* g_1015ea0;
 extern int g_14ac660[];
 extern int g_14ce8e0;
-extern unsigned char g_14cf950;
+extern char g_14cf950;
 extern int g_774654;
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -44,7 +44,7 @@ void __cdecl fcn_005e4cd0(void)
 		fcn_00472380(b, fcn_0057de80(0x605 + i) == 0);
 	}
 	while (fcn_005373e0(fcn_005e4cd0, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
+		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {
 			g_774654 = 1;
 			for (i = 0; i < 9; i++) {
 				fcn_0057df50(0x605 + i, fcn_00471f80(btn[i]) == 0);

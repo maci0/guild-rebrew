@@ -3,7 +3,7 @@
 
 extern char g_1040640[];
 extern char g_1040960[];
-extern char* g_67a370;
+extern int g_67a370;
 extern char* g_1040c74;
 extern char* g_1040958;
 
@@ -22,7 +22,7 @@ void __cdecl fcn_004523a0(char* o)
 	} else {
 		*(char**) (*(char**) (o + 0x314) + 0x318) = *(char**) (o + 0x318);
 	}
-	if (owner == g_67a370) {
+	if (owner == ((char*)g_67a370)) {
 		g_1040c74 = *(char**) (owner + 0xa4);
 		g_1040958 = *(char**) (owner + 0xa8);
 	}

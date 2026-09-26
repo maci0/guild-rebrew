@@ -3,9 +3,9 @@ extern char g_7f3b40[];
 // GLOBAL: GOLD 0x76faa0
 extern char g_7f3b40[];
 // GLOBAL: GOLDTL 0x7f3b00
-extern char g_7f3b00[];
+extern signed char g_7f3b00[];
 // GLOBAL: GOLD 0x76fa60
-extern char g_7f3b00[];
+extern signed char g_7f3b00[];
 // FUNCTION: GOLD 0x0050d460
 // SIZE: 37
 // FUNCTION: GOLDTL 0x510900

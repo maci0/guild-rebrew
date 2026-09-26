@@ -33,8 +33,8 @@ struct house {
 	char pad180[0x9c];
 };
 
-extern struct house g_7f4ca0[];
-extern struct rec* g_99ec10;
+extern char g_7f4ca0[];
+extern char* g_99ec10;
 
 char* __cdecl gm_SearchTable67(int);
 void __cdecl fcn_0051af00(char*, char*, ...);
@@ -57,7 +57,7 @@ void __cdecl fcn_00571720(char* e)
 		}
 	}
 	r = gm_SearchTable67(*(int*) (e + 0xbc));
-	v = (float) g_99ec10[*(unsigned short*) (e + 0xac)].base;
+	v = (float) ((struct rec*)g_99ec10)[*(unsigned short*) (e + 0xac)].base;
 	*(struct pos14*) (e + 0x52) = *(struct pos14*) (e + 0x44);
 	*(struct pos14*) (e + 0x60) = *(struct pos14*) (e + 0x44);
 	*(float*) (e + 0xb4) = v;
@@ -66,8 +66,8 @@ void __cdecl fcn_00571720(char* e)
 	*(int*) (e + 0xc4) = -1;
 	*(int*) (e + 0xc8) = 0;
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].who == e) {
-			fcn_00529160(r, 0, g_7f4ca0[i].id, e);
+		if (((struct house*)g_7f4ca0)[i].who == e) {
+			fcn_00529160(r, 0, ((struct house*)g_7f4ca0)[i].id, e);
 		}
 	}
 	*(float*) (e + 0xcc) = (fcn_0050fdb0(*(unsigned short*) (e + 8), 8, e + 0x8c) - 0.5) * 0.25;

@@ -1,7 +1,7 @@
 // GLOBAL: GOLDTL 0xaed32c
-extern int g_aed32c;
+extern char* g_aed32c;
 // GLOBAL: GOLD 0xa68d2c
-extern int g_aed32c;
+extern char* g_aed32c;
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
 extern char g_7f4ca0[];
 
@@ -43,7 +43,7 @@ char __cdecl fcn_004ce740(int a1)
 		c = -c0;
 		fcn_004ce6e0((void*) a1);
 		fcn_004c4510((void*) a1, *(int*) ((char*) a1 + 4));
-		fcn_004c4670(1, 1, (int) ((char*) a1) - g_aed32c + 0x1c5, &c);
+		fcn_004c4670(1, 1, (int) ((char*) a1) - (*(int*)&g_aed32c) + 0x1c5, &c);
 		fcn_004c5360();
 		e = *(void**) ((char*) a1 + 0x16c);
 		if (e != 0) {
@@ -64,7 +64,7 @@ char __cdecl fcn_004ce740(int a1)
 		return 1;
 	}
 	fcn_004c4510((void*) a1, *(int*) ((char*) a1 + 4));
-	fcn_004c4670(1, 1, (int) ((char*) a1) - g_aed32c + 0x1c5, &c);
+	fcn_004c4670(1, 1, (int) ((char*) a1) - (*(int*)&g_aed32c) + 0x1c5, &c);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) ((char*) a1 + 4), 0x1c8, 4, 0, 0x20000000);
 	return 0;

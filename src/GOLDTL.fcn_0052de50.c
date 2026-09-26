@@ -7,8 +7,8 @@ struct s_7f4ca0 {
 	char pad2[0x219];
 };
 
-extern struct s_7f4ca0 g_7f4ca0[];
-extern struct s_7f4ca0* g_773da8;
+extern char g_7f4ca0[];
+extern char* g_773da8;
 
 // FUNCTION: GOLD 0x005287b0
 // SIZE: 142
@@ -32,9 +32,9 @@ void __cdecl fcn_0052de50(void)
 	fcn_004432d0(0, 1);
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_AddObjekt()) {
 		if (*(unsigned short*) (e + 0x27) != 0xffff) {
-			r = &g_7f4ca0[*(unsigned short*) (e + 0x27)];
+			r = &((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
 		}
-		if (r != 0 && r != g_773da8 && (r->kind == 6 || r->kind == 7 || r->kind == 5) &&
+		if (r != 0 && r != ((struct s_7f4ca0*)g_773da8) && (r->kind == 6 || r->kind == 7 || r->kind == 5) &&
 		    (e[0x5a] & 1) == 0) {
 			fcn_0052dd80(e);
 			fcn_0052d9d0(e);

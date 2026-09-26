@@ -15,7 +15,7 @@ struct helpev {
 	int label;
 };
 
-extern struct helpev g_77e0a0[0x80];
+extern char g_77e0a0[];
 extern char g_6a3550[];
 
 int __cdecl fcn_0042dc90(char*);
@@ -34,7 +34,7 @@ void __cdecl fcn_0056fe60(char* name)
 	int i;
 
 	sprintf(path, "%s\\tutorial\\%s.ini", g_6a3550, name);
-	memset(g_77e0a0, 0, sizeof(g_77e0a0));
+	memset(((struct helpev*)g_77e0a0), 0, sizeof(struct helpev[0x80]));
 	f = fopen(path, "rt");
 	if (f == 0) {
 		MessageBoxA(0, "he_OpenHelpEvents(): Could not open help-definition!", "Error", 0x30);
@@ -49,16 +49,16 @@ void __cdecl fcn_0056fe60(char* name)
 			for (tok = strtok(line, delim); tok != 0; tok = strtok(0, delim)) {
 				if (i == 0) {
 					strcpy(label, tok);
-					g_77e0a0[n].label = fcn_0042dc90(label);
-					if (g_77e0a0[n].label == -1) {
+					((struct helpev*)g_77e0a0)[n].label = fcn_0042dc90(label);
+					if (((struct helpev*)g_77e0a0)[n].label == -1) {
 						sprintf(msg, "he_OpenHelpEvents(): invalid textlabel:%s", label);
 					}
 				} else if (i == 1) {
-					g_77e0a0[n].a = fcn_0064eeec(tok);
+					((struct helpev*)g_77e0a0)[n].a = fcn_0064eeec(tok);
 				} else if (i == 2) {
-					g_77e0a0[n].b = fcn_0064eeec(tok);
+					((struct helpev*)g_77e0a0)[n].b = fcn_0064eeec(tok);
 				} else if (i == 3) {
-					g_77e0a0[n].c = fcn_0064eeec(tok);
+					((struct helpev*)g_77e0a0)[n].c = fcn_0064eeec(tok);
 				}
 				i++;
 			}

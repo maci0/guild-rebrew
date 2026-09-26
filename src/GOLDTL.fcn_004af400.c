@@ -2,9 +2,9 @@
 extern float g_662910;
 
 // GLOBAL: GOLDTL 0x99ec10
-extern int g_99ec10;
+extern char* g_99ec10;
 // GLOBAL: GOLD 0x91aaf0
-extern int g_99ec10;
+extern char* g_99ec10;
 
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
 extern unsigned char g_773d75;
@@ -53,7 +53,7 @@ int __cdecl fcn_004af400(int a1, int a2, int a3, char* a4, int a5)
 	e = fcn_00502cd0(*(int*) ((char*) e + 0x14), 1, 5);
 	while (e != 0) {
 		k = *(unsigned short*) e;
-		if (*(unsigned char*) (g_99ec10 + k * 0x40 + k) == 9) {
+		if (*(unsigned char*) ((*(int*)&g_99ec10) + k * 0x40 + k) == 9) {
 			v = *(int*) ((char*) e + 0xe);
 			break;
 		}

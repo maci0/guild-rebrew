@@ -29,11 +29,11 @@ typedef struct {
 } Office;
 #pragma pack(pop)
 
-extern Entity g_7f4ca0[0x300];
-extern Player* g_90e094;
-extern Office* g_868050;
+extern char g_7f4ca0[];
+extern unsigned char* g_90e094;
+extern unsigned char* g_868050;
 extern char* g_aed32c;
-extern char g_773d75;
+extern unsigned char g_773d75;
 
 int __cdecl fcn_00504bd0(int);
 void __cdecl fcn_004c4510(void*, int);
@@ -49,30 +49,30 @@ void __cdecl fcn_005153f0(void)
 	Entity* e;
 	Player* p;
 
-	e = g_7f4ca0;
+	e = ((Entity*)g_7f4ca0);
 	for (i = 0; i < 0x300; i++) {
 		if (e->type == 6) {
 			break;
 		}
 		e++;
 	}
-	for (p = g_90e094;; p++) {
+	for (p = ((Player*)g_90e094);; p++) {
 		if (p->office == 0) {
 			continue;
 		}
 		if (fcn_00504bd0(p->office) == 1 || fcn_00504bd0(p->office) == 4 || fcn_00504bd0(p->office) == 2
-			|| g_868050[p->office].kind == 0x13 || g_868050[p->office].kind == 4
-			|| g_868050[p->office].kind == 0x10 || g_868050[p->office].kind == 5
-			|| g_868050[p->office].kind == 9) {
-			if (g_868050[p->office].kind != 0xb) {
+			|| ((Office*)g_868050)[p->office].kind == 0x13 || ((Office*)g_868050)[p->office].kind == 4
+			|| ((Office*)g_868050)[p->office].kind == 0x10 || ((Office*)g_868050)[p->office].kind == 5
+			|| ((Office*)g_868050)[p->office].kind == 9) {
+			if (((Office*)g_868050)[p->office].kind != 0xb) {
 				int value = 0xfa00;
 
 				fcn_004c4510(p, p->id);
 				fcn_004c4570(4, 1, (char*) p - g_aed32c + 0x39, &value);
 				fcn_004c5360();
 				fcn_004c5f60(p->id, e->id, e->id);
-				fcn_004c6090(p, 1, 0, g_868050[p->office].level);
-				fcn_004c51f0(p->id, -1, 0x135, 1, g_773d75, 0);
+				fcn_004c6090(p, 1, 0, ((Office*)g_868050)[p->office].level);
+				fcn_004c51f0(p->id, -1, 0x135, 1, (*(char*)&g_773d75), 0);
 			}
 		}
 	}

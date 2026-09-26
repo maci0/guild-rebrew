@@ -10,7 +10,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 unsigned short __cdecl fcn_0042e410(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, int* out);
@@ -32,10 +32,10 @@ int __cdecl fcn_004aa6a0(char* e, char* a2, char* out)
 	if (fcn_004a5340(e, 1, &mask, 0, fcn_0042e410(0x40), &idx) == 0) {
 		return 0;
 	}
-	if (fcn_0055c140(e, &g_7f4ca0[(unsigned short) idx], &cnt) == 0) {
+	if (fcn_0055c140(e, &((Ent*)g_7f4ca0)[(unsigned short) idx], &cnt) == 0) {
 		return 0;
 	}
-	if (fcn_00579640(&g_7f4ca0[(unsigned short) idx], e) == 0) {
+	if (fcn_00579640(&((Ent*)g_7f4ca0)[(unsigned short) idx], e) == 0) {
 		return 0;
 	}
 	if (cnt > 3) {
@@ -45,6 +45,6 @@ int __cdecl fcn_004aa6a0(char* e, char* a2, char* out)
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = g_7f4ca0[(unsigned short) idx].x4;
+	*(int*) (out + 4) = ((Ent*)g_7f4ca0)[(unsigned short) idx].x4;
 	return 1;
 }

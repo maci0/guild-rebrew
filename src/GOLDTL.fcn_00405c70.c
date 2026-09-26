@@ -1,4 +1,4 @@
-extern char* g_67a370;
+extern int g_67a370;
 
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 unsigned short __cdecl fcn_0042e410(int);
@@ -20,7 +20,7 @@ int __cdecl fcn_00405c70(float* pos, int marker)
 	int x;
 	int y;
 
-	map = *(char**) (g_67a370 + 0xb0);
+	map = *(char**) (((char*)g_67a370) + 0xb0);
 	if (map == 0) {
 		return 0;
 	}

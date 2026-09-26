@@ -12,7 +12,7 @@ typedef struct {
 } SaveReq;
 
 extern unsigned char g_7747b0;
-extern int g_14ac604;
+extern char* g_14ac604;
 extern int g_14ac608;
 extern char g_773de8;
 extern char g_6b5c60[];
@@ -37,7 +37,7 @@ void __cdecl fcn_005e40b0(void)
 			return;
 		}
 		if (fcn_005e4060() == 0) {
-			fcn_00533a40((char*) g_14ac604);
+			fcn_00533a40((char*) (*(int*)&g_14ac604));
 			return;
 		}
 		memset(&s, 0, sizeof(s));

@@ -1,5 +1,5 @@
 extern char* g_1015ea0;
-extern char* g_14a79c0[];
+extern int g_14a79c0[];
 
 int __cdecl fcn_0050dfd0(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
@@ -31,6 +31,6 @@ int __cdecl fcn_004bf000(unsigned short* a1, int a2, int a3, int col, int x, int
 	*(int*) (g_1015ea0 + id * 756 + 0x1d0) = 0x22;
 	*(int*) (g_1015ea0 + id * 756 + 0x1dc) = 4;
 	*(int*) (g_1015ea0 + id * 756 + 0x1e0) = 0xf;
-	fcn_0064d41a(g_1015ea0 + id * 756 + 0xcc, "%s", g_14a79c0[a3 * 2]);
+	fcn_0064d41a(g_1015ea0 + id * 756 + 0xcc, "%s", ((char**)g_14a79c0)[a3 * 2]);
 	return id;
 }

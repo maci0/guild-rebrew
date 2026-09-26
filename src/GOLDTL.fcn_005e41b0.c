@@ -33,7 +33,7 @@ extern Peer g_7f3ac0[8];
 extern unsigned char g_7747b0;
 extern char* g_14ac60c;
 extern unsigned char g_6a375c;
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern char g_7e2480[];
 extern char g_774980;
 extern char g_773de8;
@@ -72,7 +72,7 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 		fcn_00535850(g_7e46ac, g_14ac60c);
 		g_6a375c = 0;
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].id != 0xffff && (g_7f4ca0[i].kind == 6 || g_7f4ca0[i].kind == 7)) {
+			if (((Ent*)g_7f4ca0)[i].id != 0xffff && (((Ent*)g_7f4ca0)[i].kind == 6 || ((Ent*)g_7f4ca0)[i].kind == 7)) {
 				g_6a375c++;
 			}
 		}
@@ -92,7 +92,7 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 			CloseVfsStream(f);
 		}
 		memset(&m, 0, sizeof(m));
-		m.handle = g_7f4ca0[g_774970].handle;
+		m.handle = ((Ent*)g_7f4ca0)[g_774970].handle;
 		m.crc = crc;
 		fcn_004c5790(0x10, &m);
 		n = 0;

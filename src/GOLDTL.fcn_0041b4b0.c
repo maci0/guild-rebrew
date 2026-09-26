@@ -12,8 +12,8 @@ struct unk_41b4b0 {
 	struct unkvtbl_41b4b0* vtbl;
 };
 
-extern struct unk_41b4b0* g_6b5de4;
-extern struct unk_41b4b0* g_6b5de0;
+extern void* g_6b5de4;
+extern void* g_6b5de0;
 extern struct unk_41b4b0* g_6b5ddc;
 extern unsigned long g_14ce728;
 
@@ -26,13 +26,13 @@ void __cdecl fcn_0041b7c0(void);
 void __cdecl fcn_0041b4b0(void)
 {
 	fcn_0041b7c0();
-	if (g_6b5de4 != 0) {
-		g_14ce728 = g_6b5de4->vtbl->Release(g_6b5de4);
-		g_6b5de4 = 0;
+	if ((*(struct unk_41b4b0**)&g_6b5de4) != 0) {
+		g_14ce728 = (*(struct unk_41b4b0**)&g_6b5de4)->vtbl->Release((*(struct unk_41b4b0**)&g_6b5de4));
+		(*(struct unk_41b4b0**)&g_6b5de4) = 0;
 	}
-	if (g_6b5de0 != 0) {
-		g_14ce728 = g_6b5de0->vtbl->Release(g_6b5de0);
-		g_6b5de0 = 0;
+	if ((*(struct unk_41b4b0**)&g_6b5de0) != 0) {
+		g_14ce728 = (*(struct unk_41b4b0**)&g_6b5de0)->vtbl->Release((*(struct unk_41b4b0**)&g_6b5de0));
+		(*(struct unk_41b4b0**)&g_6b5de0) = 0;
 	}
 	if (g_6b5ddc != 0) {
 		g_14ce728 = g_6b5ddc->vtbl->Release(g_6b5ddc);

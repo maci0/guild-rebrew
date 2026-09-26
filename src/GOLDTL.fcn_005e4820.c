@@ -6,7 +6,7 @@ extern int g_14ac498;
 extern int g_14ac49c;
 extern int g_14ac4a0;
 extern int g_14ce8e0;
-extern unsigned char g_14cf950;
+extern char g_14cf950;
 extern int g_774654;
 extern int g_14ce8d8;
 extern int g_67d370;
@@ -43,7 +43,7 @@ void __cdecl fcn_005e4820(void)
 	b3 = fcn_005e3b10(3, g_14ac4a0, g_772514);
 	p = fcn_004693b0(3, b1, b2, b3);
 	while (fcn_005373e0(fcn_005e4820, 0x24087) != 0) {
-		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
+		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {
 			g_774654 = 1;
 		}
 		fcn_00469630(p);

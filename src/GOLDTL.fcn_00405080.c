@@ -9,19 +9,19 @@ typedef struct {
 	char pad[0x190];
 } T405080;
 
-extern T405080* g_6b5c20;
+extern char* g_6b5c20;
 
 T405080* __cdecl fcn_00405080(void)
 {
 	int i;
 
 	for (i = 0; i < 2000;) {
-		if (g_6b5c20[i++].used == 0) {
+		if (((T405080*)g_6b5c20)[i++].used == 0) {
 			break;
 		}
 	}
 	if (i >= 2000) {
 		return 0;
 	}
-	return &g_6b5c20[i - 1];
+	return &((T405080*)g_6b5c20)[i - 1];
 }

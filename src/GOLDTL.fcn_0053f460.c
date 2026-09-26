@@ -1,5 +1,5 @@
-extern int g_7747b0;
-extern char g_6a375c;
+extern unsigned char g_7747b0;
+extern unsigned char g_6a375c;
 extern int g_77250c;
 // FUNCTION: GOLD 0x00537b90
 // SIZE: 73
@@ -15,9 +15,9 @@ int __cdecl fcn_0053f460(void)
 {
 	int r;
 
-	g_7747b0 = 0;
+	(*(int*)&g_7747b0) = 0;
 	fcn_00473a90(0, 0);
-	g_6a375c = 1;
+	(*(char*)&g_6a375c) = 1;
 	r = fcn_0053ed60(1, 0);
 	if (r == 0) {
 		fcn_00476970(g_77250c);

@@ -4,7 +4,7 @@
 // SIZE: 168
 
 extern int g_6a3760;
-extern int g_681130;
+extern char g_681130[];
 extern int g_100f1dc;
 extern int g_774954;
 extern int g_774654;
@@ -26,7 +26,7 @@ void __cdecl fcn_004b6210(int arg)
 
 	mode = 0;
 	p = fcn_00508e40(g_6a3760);
-	h = fcn_00470820(mode, mode, &g_681130);
+	h = fcn_00470820(mode, mode, &(*(int*)g_681130));
 	fcn_00471b60(h);
 	fcn_004727a0(h, 1);
 	fcn_00519190(0x1b97, *p, *p);

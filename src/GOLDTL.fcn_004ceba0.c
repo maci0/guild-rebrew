@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x4ceba0
 // SIZE: 87
 
-extern char* g_67a370;
+extern int g_67a370;
 
 int __cdecl fcn_004ceba0(int x, int y)
 {
@@ -11,7 +11,7 @@ int __cdecl fcn_004ceba0(int x, int y)
 	int n;
 	int v;
 
-	m = *(char**) (g_67a370 + 0xb0);
+	m = *(char**) (((char*)g_67a370) + 0xb0);
 	n = *(int*) (m + 0x20);
 	if (x > n || x < 0 || y < 0 || y > n) {
 		return 0;

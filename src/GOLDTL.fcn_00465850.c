@@ -11,7 +11,7 @@ typedef struct VfsEntry {
 } VfsEntry;
 // SIZE 0x54
 
-extern VfsEntry* g_772500;
+extern char* g_772500;
 extern int g_772504;
 extern int g_772508;
 extern int g_6b7fac;
@@ -30,21 +30,22 @@ int __cdecl fcn_00465850(void)
 	best = -1;
 	stamp = g_6b7fac;
 	for (i = 1; i < g_772504; i++) {
-		if (g_772500[i].stamp < stamp && g_772500[i].refs <= 0 && !(g_772500[i].flags & 1) && g_772500[i].data != 0 && g_772500[i].size != 0) {
-			stamp = g_772500[i].stamp;
+		if (((VfsEntry*)g_772500)[i].stamp < stamp && ((VfsEntry*)g_772500)[i].refs <= 0 && !(((VfsEntry*)g_772500)[i].flags & 1)
+		    && ((VfsEntry*)g_772500)[i].data != 0 && ((VfsEntry*)g_772500)[i].size != 0) {
+			stamp = ((VfsEntry*)g_772500)[i].stamp;
 			best = i;
 		}
 	}
 	if (best == -1) {
 		return 0;
 	}
-	if (g_772500[best].kind < 0x10) {
-		fcn_0047b5d0(g_772500[best].data);
+	if (((VfsEntry*)g_772500)[best].kind < 0x10) {
+		fcn_0047b5d0(((VfsEntry*)g_772500)[best].data);
 	} else {
-		fcn_0041ddd0(g_772500[best].data);
-		g_772500[best].data = 0;
+		fcn_0041ddd0(((VfsEntry*)g_772500)[best].data);
+		((VfsEntry*)g_772500)[best].data = 0;
 	}
-	g_772500[best].data = 0;
-	g_772508 -= g_772500[best].size;
+	((VfsEntry*)g_772500)[best].data = 0;
+	g_772508 -= ((VfsEntry*)g_772500)[best].size;
 	return 1;
 }

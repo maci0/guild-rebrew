@@ -40,7 +40,7 @@ typedef struct Slot {
 // SIZE 0x2f4
 
 extern int g_67d370;
-extern Slot* g_1015ea0;
+extern char* g_1015ea0;
 extern int g_102d028;
 extern int g_102d02c;
 extern short g_14ce8c0;
@@ -70,7 +70,7 @@ void __cdecl fcn_00474040(void)
 	if (g_67d370 == -1) {
 		return;
 	}
-	s = &g_1015ea0[g_67d370];
+	s = &((Slot*)g_1015ea0)[g_67d370];
 	if (s->type != 0x45 || (s->flags & 0x40) != 0) {
 		return;
 	}
@@ -87,7 +87,7 @@ void __cdecl fcn_00474040(void)
 		fcn_0047b620(font, 1);
 		fcn_0047b620(font, 3);
 		bar = fcn_0047b620(font, 6);
-		s = &g_1015ea0[g_67d370];
+		s = &((Slot*)g_1015ea0)[g_67d370];
 		flags = s->flags;
 		max = s->max;
 		min = s->min;
@@ -108,11 +108,11 @@ void __cdecl fcn_00474040(void)
 				pos = max;
 			}
 			s->dirty = 1;
-			g_1015ea0[g_67d370].pos = pos;
+			((Slot*)g_1015ea0)[g_67d370].pos = pos;
 		}
 	}
-	if (g_14ce8d8 != 0 || (g_14ce8d4 != 0 && g_1015ea0[g_67d370].max >= 100)) {
-		s = &g_1015ea0[g_67d370];
+	if (g_14ce8d8 != 0 || (g_14ce8d4 != 0 && ((Slot*)g_1015ea0)[g_67d370].max >= 100)) {
+		s = &((Slot*)g_1015ea0)[g_67d370];
 		pos = s->pos;
 		max = s->max;
 		min = s->min;
@@ -129,6 +129,6 @@ void __cdecl fcn_00474040(void)
 			pos = max;
 		}
 		s->dirty = 1;
-		g_1015ea0[g_67d370].pos = pos;
+		((Slot*)g_1015ea0)[g_67d370].pos = pos;
 	}
 }

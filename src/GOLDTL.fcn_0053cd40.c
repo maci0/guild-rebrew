@@ -14,13 +14,13 @@ struct gadget {
 	char pad1d4[0x120];
 };
 
-extern struct gadget* g_1015ea0;
+extern char* g_1015ea0;
 extern char* g_14a5ad8[];
 extern int g_772514;
 extern char g_6a3f8c[];
 extern int g_100f1dc;
 extern int g_67d370;
-extern unsigned char g_7e23e3;
+extern char g_7e23e3;
 extern int g_774654;
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -68,10 +68,10 @@ int __cdecl fcn_0053cd40(int flags)
 		t = types[i];
 		id = fcn_0046f740((i % 3) * 0x60 + 0x64, (i / 3 * 5 + 5) * 0x10, t + 0x5a1, g_772514);
 		ids[i] = id;
-		g_1015ea0[id].visible = 1;
-		g_1015ea0[id].mode = 3;
-		strcpy(g_1015ea0[id].label, g_14a5ad8[t]);
-		g_1015ea0[id].font = 0x56;
+		((struct gadget*)g_1015ea0)[id].visible = 1;
+		((struct gadget*)g_1015ea0)[id].mode = 3;
+		strcpy(((struct gadget*)g_1015ea0)[id].label, g_14a5ad8[t]);
+		((struct gadget*)g_1015ea0)[id].font = 0x56;
 		fcn_00469470(list, id);
 	}
 	g_100f1dc = -1;
@@ -80,7 +80,7 @@ int __cdecl fcn_0053cd40(int flags)
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 11; i++) {
 				if (g_67d370 == ids[i]) {
-					g_7e23e3 = fcn_00507400(types[i], 1);
+					(*(unsigned char*)&g_7e23e3) = fcn_00507400(types[i], 1);
 					g_774654 = 1;
 					result = 1;
 					break;

@@ -14,7 +14,7 @@ typedef struct {
 	int fb0;
 } fcn_004a8810_game;
 
-extern fcn_004a8810_game* g_1007cd4;
+extern char* g_1007cd4;
 
 unsigned short __cdecl fcn_0042e410(short);
 
@@ -25,10 +25,10 @@ unsigned short __cdecl fcn_0042e410(short);
 
 void __cdecl fcn_004a8810(void)
 {
-	if (g_1007cd4->fb0 != 0) {
-		if (g_1007cd4->e[g_1007cd4->fb0].f24 != 0)
-			g_1007cd4->fac = fcn_0042e410((short) g_1007cd4->fa8 - (short) g_1007cd4->fa4) + g_1007cd4->fa4;
+	if (((fcn_004a8810_game*)g_1007cd4)->fb0 != 0) {
+		if (((fcn_004a8810_game*)g_1007cd4)->e[((fcn_004a8810_game*)g_1007cd4)->fb0].f24 != 0)
+			((fcn_004a8810_game*)g_1007cd4)->fac = fcn_0042e410((short) ((fcn_004a8810_game*)g_1007cd4)->fa8 - (short) ((fcn_004a8810_game*)g_1007cd4)->fa4) + ((fcn_004a8810_game*)g_1007cd4)->fa4;
 		else
-			g_1007cd4->fac = fcn_0042e410((short) ((g_1007cd4->fa8 - g_1007cd4->fa4) >> 1)) + g_1007cd4->fa4;
+			((fcn_004a8810_game*)g_1007cd4)->fac = fcn_0042e410((short) ((((fcn_004a8810_game*)g_1007cd4)->fa8 - ((fcn_004a8810_game*)g_1007cd4)->fa4) >> 1)) + ((fcn_004a8810_game*)g_1007cd4)->fa4;
 	}
 }

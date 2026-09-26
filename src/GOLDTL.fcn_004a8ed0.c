@@ -10,7 +10,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern char* g_77261c;
 extern float g_664154;
 
@@ -53,8 +53,8 @@ int __cdecl fcn_004a8ed0(char* a1, char* e, char* a3, char* a4, char* out)
 	t = 0;
 	i = fcn_0042e410(0x300);
 	for (n = 0x300; n != 0;) {
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].owner == q && g_7f4ca0[i].x2 == 0) {
-			t = &g_7f4ca0[i];
+		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].owner == q && ((Ent*)g_7f4ca0)[i].x2 == 0) {
+			t = &((Ent*)g_7f4ca0)[i];
 			break;
 		}
 		n--;

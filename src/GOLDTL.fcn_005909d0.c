@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x005909d0
 // SIZE: 419
 
-extern char* g_868050;
+extern unsigned char* g_868050;
 extern int g_772514;
 extern unsigned short g_774970;
 extern char g_7f4ca0[];
@@ -22,7 +22,7 @@ int __cdecl fcn_005909d0(int i)
 	char* rec;
 	int dlg;
 
-	rec = g_868050 + i * 589;
+	rec = ((char*)g_868050) + i * 589;
 	dlg = fcn_00470820(0, 0, s_6a99f4);
 	fcn_00471b60(dlg);
 	fcn_004727a0(0, 1);

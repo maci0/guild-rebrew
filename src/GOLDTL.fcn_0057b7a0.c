@@ -14,7 +14,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 
 char* __cdecl fcn_00508e40(int);
@@ -83,7 +83,7 @@ void __cdecl fcn_0057b7a0(char* e)
 					fcn_0051af00(buf, 0x414b, 0x229, *(unsigned short*) sel * 2 + 0x9a8, *(int*) (o + 0x16c));
 					break;
 				}
-				fcn_00545e80(g_7f4ca0[*(unsigned short*) (e + 8)].handle, -1, buf, 0, 0x5f2, *(int*) (p + 1),
+				fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, -1, buf, 0, 0x5f2, *(int*) (p + 1),
 				    *(int*) (q + 2), 0, "_NACHRICHTEN_FRIEDHOF_06");
 			}
 		}

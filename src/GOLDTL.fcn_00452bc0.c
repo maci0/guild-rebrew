@@ -16,7 +16,7 @@ struct IDev {
 	IDevVtbl* v;
 };
 
-extern IDev* g_6b5de0;
+extern void* g_6b5de0;
 extern unsigned int g_6b8714;
 extern unsigned int g_6b8710;
 extern void* g_104095c;
@@ -30,13 +30,13 @@ void __cdecl fcn_00452bc0(void)
 	char* p;
 	char* next;
 
-	g_6b5de0->v->SetRenderState(g_6b5de0, 0x8d, 1);
-	g_6b5de0->v->SetStreamSource(g_6b5de0, 0, g_104095c, g_6b8714);
-	g_6b5de0->v->SetVertexShader(g_6b5de0, g_6b8710);
+	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x8d, 1);
+	((IDev*)g_6b5de0)->v->SetStreamSource(((IDev*)g_6b5de0), 0, g_104095c, g_6b8714);
+	((IDev*)g_6b5de0)->v->SetVertexShader(((IDev*)g_6b5de0), g_6b8710);
 	for (p = g_1040c74; p != g_1040640; p = next) {
 		next = *(char**) (p + 0x314);
 		fcn_00452740(p);
 	}
-	g_6b5de0->v->SetStreamSource(g_6b5de0, 0, 0, 0);
-	g_6b5de0->v->SetRenderState(g_6b5de0, 0x8d, 0);
+	((IDev*)g_6b5de0)->v->SetStreamSource(((IDev*)g_6b5de0), 0, 0, 0);
+	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x8d, 0);
 }

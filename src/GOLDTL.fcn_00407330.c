@@ -6,7 +6,7 @@ typedef struct Picks {
 } Picks;
 // SIZE 0x84
 
-extern char* g_67a370;
+extern int g_67a370;
 
 void __cdecl fcn_004379a0(char*, int, int, void*, Picks*);
 int __cdecl fcn_00406ee0(char*, Picks*);
@@ -23,7 +23,7 @@ char* __cdecl fcn_00407330(void)
 	Picks p;
 
 	memset(&p, 0, sizeof(p));
-	fcn_004379a0(g_67a370, 0, 0x100, (void*) fcn_00406ee0, &p);
+	fcn_004379a0(((char*)g_67a370), 0, 0x100, (void*) fcn_00406ee0, &p);
 	if (p.count == 0) {
 		return 0;
 	}

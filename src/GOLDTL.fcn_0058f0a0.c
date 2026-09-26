@@ -6,7 +6,7 @@
 extern int g_7746d8;
 extern int g_7746a0;
 extern int g_774800;
-extern unsigned char g_14cf950;
+extern char g_14cf950;
 extern int g_14b55a0;
 extern int g_14b5570;
 extern int g_14b57bc;
@@ -93,19 +93,19 @@ void __cdecl fcn_0058f0a0(int arg)
 				fcn_0058fa40(arg);
 			}
 		} else if (g_774800 != 0) {
-			if (g_14cf950 == 0x1e) {
+			if ((*(unsigned char*)&g_14cf950) == 0x1e) {
 				fcn_0058f6a0(arg);
-			} else if (g_14cf950 == 0x2f) {
+			} else if ((*(unsigned char*)&g_14cf950) == 0x2f) {
 				fcn_0058fbd0(arg);
-			} else if (g_14cf950 == 0x22) {
+			} else if ((*(unsigned char*)&g_14cf950) == 0x22) {
 				fcn_0058dbe0(arg);
-			} else if (g_14cf950 == 0x23) {
+			} else if ((*(unsigned char*)&g_14cf950) == 0x23) {
 				fcn_0058f310(arg);
-			} else if (g_14cf950 == 0x19) {
+			} else if ((*(unsigned char*)&g_14cf950) == 0x19) {
 				fcn_0058fb60(arg);
-			} else if (g_14cf950 == 0x16) {
+			} else if ((*(unsigned char*)&g_14cf950) == 0x16) {
 				fcn_0058fa40(arg);
-			} else if (g_14cf950 == 0x11) {
+			} else if ((*(unsigned char*)&g_14cf950) == 0x11) {
 				fcn_0058fba0(arg);
 			}
 		}

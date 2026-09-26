@@ -1,9 +1,9 @@
 // FUNCTION: GOLDTL 0x005117e0
 // SIZE: 285
 
-extern int* g_773dac;
-extern int* g_773db0;
-extern int g_aed32c;
+extern char* g_773dac;
+extern char* g_773db0;
+extern char* g_aed32c;
 
 void __cdecl fcn_004c44a0(void);
 int __cdecl fcn_004c4fc0(int a, int b, int c, int d, int e, int f, int g, int h);
@@ -32,16 +32,16 @@ void __cdecl fcn_005117e0(void)
 		fcn_004c4940();
 		ls_ID2Ptr();
 	}
-	g_773dac = fcn_004c4480(a);
-	g_773db0 = fcn_004c4480(b);
+	(*(int**)&g_773dac) = fcn_004c4480(a);
+	(*(int**)&g_773db0) = fcn_004c4480(b);
 	fcn_004c44a0();
 	v = 0;
-	fcn_004c4510(g_773dac, g_773dac[1]);
-	fcn_004c4570(1, 1, (int) g_773dac - g_aed32c + 0xc, &v);
+	fcn_004c4510((*(int**)&g_773dac), (*(int**)&g_773dac)[1]);
+	fcn_004c4570(1, 1, (int) (*(int**)&g_773dac) - (*(int*)&g_aed32c) + 0xc, &v);
 	fcn_004c5360();
 	v = 1;
-	fcn_004c4510(g_773db0, g_773db0[1]);
-	fcn_004c4570(1, 1, (int) g_773db0 - g_aed32c + 0xc, &v);
+	fcn_004c4510((*(int**)&g_773db0), (*(int**)&g_773db0)[1]);
+	fcn_004c4570(1, 1, (int) (*(int**)&g_773db0) - (*(int*)&g_aed32c) + 0xc, &v);
 	fcn_004c5360();
 	fcn_004c44b0();
 	while (!fcn_004c44c0()) {

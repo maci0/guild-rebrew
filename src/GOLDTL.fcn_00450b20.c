@@ -22,7 +22,7 @@ struct Device {
 
 extern float g_67bbf0;
 extern float g_67bbf4;
-extern Device* g_6b5de0;
+extern void* g_6b5de0;
 
 // FUNCTION: GOLDTL 0x00450b20
 // SIZE: 326
@@ -53,5 +53,5 @@ void __cdecl fcn_00450b20(float scale, float* v, unsigned int color, char tint)
 	m.specular[1] = 0.0f;
 	m.specular[0] = 0.0f;
 	m.power = 0.0f;
-	g_6b5de0->vtbl->SetMaterial(g_6b5de0, &m);
+	((Device*)g_6b5de0)->vtbl->SetMaterial(((Device*)g_6b5de0), &m);
 }

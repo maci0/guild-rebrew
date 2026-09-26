@@ -11,7 +11,7 @@ struct vec4 {
 	float w;
 };
 
-extern struct vec4 g_662d70;
+extern float g_662d70[4];
 
 char* __cdecl fcn_0066080a(char*);
 int __cdecl sprintf(char*, const char*, ...);
@@ -40,7 +40,7 @@ char* __cdecl fcn_0053e7a0(char* name)
 		return 0;
 	}
 	fcn_00455350(p, p + 0x4c, &v);
-	r = fcn_00442910(0, &v, &g_662d70, "sp_STADTPUNKT_K");
+	r = fcn_00442910(0, &v, &(*(struct vec4*)g_662d70), "sp_STADTPUNKT_K");
 	r[0x215] |= 1;
 	*(int*) (r + 0x220) = 4;
 	r[0x216] = (r[0x216] & 0xfd) | 1;

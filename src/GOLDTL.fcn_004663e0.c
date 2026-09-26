@@ -15,7 +15,7 @@ typedef struct
 } fcn_004663e0_Ent;
 // SIZE 0x2f4
 
-extern fcn_004663e0_Ent* g_1015ea0;
+extern char* g_1015ea0;
 extern int g_67d394;
 extern int g_67d398;
 extern int g_1040490;
@@ -45,7 +45,7 @@ void __cdecl fcn_004663e0(char* f, int surf)
 	int y;
 	char buf[24];
 
-	e = &g_1015ea0[*(int*) (f + 0x134)];
+	e = &((fcn_004663e0_Ent*)g_1015ea0)[*(int*) (f + 0x134)];
 	font = fcn_00466190(g_67d394);
 	g0 = fcn_0047b620(font, 0);
 	g1 = fcn_0047b620(font, 1);

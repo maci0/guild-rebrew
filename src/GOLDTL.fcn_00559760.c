@@ -26,8 +26,8 @@ extern int g_7e4538;
 extern int g_7e453c;
 extern unsigned short g_7f4c04;
 extern unsigned short g_774970;
-extern struct house g_7f4ca0[];
-extern int g_90e094;
+extern char g_7f4ca0[];
+extern unsigned char* g_90e094;
 extern int g_6643d8[];
 
 int __cdecl fcn_004a55c0(struct house*, int, int*, float, float, unsigned short*);
@@ -63,17 +63,17 @@ int __cdecl fcn_00559760(char* s, int n, int m)
 		flt[0] = 0x402c20;
 		flt[1] = 0x20a0;
 	}
-	if (fcn_004a55c0(&g_7f4ca0[g_774970], 1, &flt[0], 0.0f, 100.0f, (unsigned short*) &x) == 0
-	    && fcn_004a55c0(&g_7f4ca0[g_774970], 1, &flt[1], 0.0f, 100.0f, (unsigned short*) &x) == 0) {
+	if (fcn_004a55c0(&((struct house*)g_7f4ca0)[g_774970], 1, &flt[0], 0.0f, 100.0f, (unsigned short*) &x) == 0
+	    && fcn_004a55c0(&((struct house*)g_7f4ca0)[g_774970], 1, &flt[1], 0.0f, 100.0f, (unsigned short*) &x) == 0) {
 		goto fail;
 	}
 	f.mask = 0xa7f4c3a0;
-	h = &g_7f4ca0[(unsigned short) x];
+	h = &((struct house*)g_7f4ca0)[(unsigned short) x];
 	f.b = 1;
 	if (h->who != 0) {
 		tgt = *(int*) (h->who + 1);
 	} else {
-		if (fcn_004a5e60(&g_7f4ca0[g_774970], 0, f, 0, 100.0f, &tgt) == 0) {
+		if (fcn_004a5e60(&((struct house*)g_7f4ca0)[g_774970], 0, f, 0, 100.0f, &tgt) == 0) {
 			goto fail;
 		}
 	}
@@ -82,7 +82,7 @@ int __cdecl fcn_00559760(char* s, int n, int m)
 	}
 	fcn_005015e0(&n, 0, 0, tgt);
 	if (n != 0) {
-		idx = (n - g_90e094) / 0xa9;
+		idx = (n - (*(int*)&g_90e094)) / 0xa9;
 		fcn_004c5420(h->handle, 0x1c8, 4, 0x40000000, 0);
 		*(int*) s = h->handle;
 		*(int*) (s + 4) = tgt;

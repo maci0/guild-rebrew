@@ -13,9 +13,9 @@ typedef struct {
 	char pad[0x214];
 } Slot5c0a;
 
-extern Slot5c0a g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
-extern int g_666018;
+extern __int64 g_666018;
 extern int g_66601c;
 extern int g_100f1dc;
 extern int g_14ce8e0;
@@ -54,7 +54,7 @@ void __cdecl fcn_005c0a90(int arg)
 	int t;
 	int v;
 
-	if (fcn_00525f60(&g_7f4ca0[g_774970], 2) == 0) {
+	if (fcn_00525f60(&((Slot5c0a*)g_7f4ca0)[g_774970], 2) == 0) {
 		return;
 	}
 	if (arg == 0) {
@@ -63,7 +63,7 @@ void __cdecl fcn_005c0a90(int arg)
 	memset(msg, 0, sizeof(msg));
 	msg[1] = 0x400;
 	msg[4] = 6;
-	msg[2] = g_666018;
+	msg[2] = (*(int*)&g_666018);
 	msg[3] = g_66601c;
 	fcn_0051af00(buf, 0x175f);
 	a = fcn_005cd440(msg, buf, 0, 0);
@@ -82,7 +82,7 @@ void __cdecl fcn_005c0a90(int arg)
 		fcn_00532ef0();
 		return;
 	}
-	if (fcn_00525f60(&g_7f4ca0[g_774970], 3) == 0) {
+	if (fcn_00525f60(&((Slot5c0a*)g_7f4ca0)[g_774970], 3) == 0) {
 		fcn_00532ef0();
 		return;
 	}
@@ -105,13 +105,13 @@ void __cdecl fcn_005c0a90(int arg)
 				v = *(int*) (b + 2);
 				*(int*) (ev + 8) = v;
 				*(int*) (ev + 0xc) = v;
-				*(int*) (ev + 0x5c) = g_7f4ca0[g_774970].f4;
+				*(int*) (ev + 0x5c) = ((Slot5c0a*)g_7f4ca0)[g_774970].f4;
 				*(int*) (ev + 0x60) = v;
 				*(int*) (ev + 0x58) = *(int*) (a + 2);
 				ev[4] = 0x2f;
 				ev[0x36] = 9;
 				fcn_004c5530(ev);
-				fcn_004c6ae0(g_7f4ca0[g_774970].f4, -3);
+				fcn_004c6ae0(((Slot5c0a*)g_7f4ca0)[g_774970].f4, -3);
 				fcn_0051af00(text, 0x1762, *b);
 				fcn_00526120(text, 0);
 				g_774654 = 1;

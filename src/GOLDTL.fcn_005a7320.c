@@ -11,8 +11,8 @@ extern int g_6b8014;
 extern int g_774688;
 extern int g_77468c;
 extern int g_7747c8;
-extern char g_7e3a40[];
-extern char g_7e3a50[];
+extern float g_7e3a40[3];
+extern float g_7e3a50[3];
 extern char g_6a30d4[];
 
 short* __cdecl fcn_00502cd0(int, int, int, int);
@@ -43,8 +43,8 @@ void __cdecl fcn_005a7320(int n, short v)
 		*(short*) (g_7746c4 + 0x29) = v;
 	}
 	g_774654 = g_774650 - g_774658 + 1;
-	fcn_00438b40(g_6b8014, g_7e3a40);
-	fcn_00438cb0(g_6b8014, g_7e3a50);
+	fcn_00438b40(g_6b8014, ((char*)g_7e3a40));
+	fcn_00438cb0(g_6b8014, ((char*)g_7e3a50));
 	g_774688 = 0;
 	g_77468c = 0;
 	fcn_004234e0(g_7747c8, g_6a30d4, 1, 0x3f, 0x7f, 0, 0);

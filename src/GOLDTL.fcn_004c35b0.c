@@ -5,7 +5,7 @@ typedef struct {
 } fcn_004c35b0_slot;
 // SIZE 0x21c
 
-extern fcn_004c35b0_slot g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 void __cdecl fcn_004c3540(fcn_004c35b0_slot*);
 
@@ -19,8 +19,8 @@ void __cdecl fcn_004c35b0(void)
 	int i;
 
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].active != 0) {
-			fcn_004c3540(&g_7f4ca0[i]);
+		if (((fcn_004c35b0_slot*)g_7f4ca0)[i].active != 0) {
+			fcn_004c3540(&((fcn_004c35b0_slot*)g_7f4ca0)[i]);
 			return;
 		}
 	}

@@ -22,7 +22,7 @@ typedef struct Pair {
 } Pair;
 // SIZE 0x8
 
-extern unsigned char g_776664;
+extern int g_776664;
 extern unsigned char g_776665;
 extern unsigned char g_776666;
 extern unsigned char g_776667;
@@ -36,22 +36,22 @@ extern float g_776680[3];
 extern float g_77668c;
 extern float g_776690[3];
 extern float g_77669c;
-extern int g_104061c;
+extern unsigned int g_104061c;
 extern unsigned char g_6752a4;
 extern int g_104336c;
 extern int g_67ac90;
 extern int g_6b8010;
-extern int g_7746c4;
-extern int g_7746c8;
+extern char* g_7746c4;
+extern unsigned char* g_7746c8;
 extern float g_67a964;
-extern Node* g_14d0020[768];
-extern char g_10432c0;
+extern void* g_14d0020[];
+extern char g_10432c0[];
 extern Pair g_6a2528[];
 extern Pair g_6a2540[];
-extern Pair g_6a2558;
-extern Pair g_6a2560;
-extern unsigned char g_774964;
-extern int g_774694;
+extern float g_6a2558;
+extern float g_6a2560;
+extern char g_774964;
+extern float g_774694;
 extern unsigned char g_6b8304;
 
 void __cdecl fcn_00516de0(int, int);
@@ -78,7 +78,7 @@ void __cdecl fcn_005e22a0(void)
 	float s;
 
 	depth = 0;
-	width = g_104061c;
+	width = (*(int*)&g_104061c);
 	hi = 0;
 	if (g_776667 == 0) {
 		hi = g_776667;
@@ -107,19 +107,19 @@ void __cdecl fcn_005e22a0(void)
 		fcn_004432d0(saved, 0);
 	}
 	fcn_00439690(g_776668, 0, 2 - g_776665, hi * width, 0);
-	if (g_7746c4 == 0 && g_7746c8 == 0) {
+	if ((*(int*)&g_7746c4) == 0 && (*(int*)&g_7746c8) == 0) {
 		g_67a964 = (float) (1.0 - (g_77666c & 0xff) * 0.01);
 	}
 	for (i = 0; i < 768; i++) {
-		if (g_14d0020[i] != 0 && g_14d0020[i]->owner == &g_10432c0) {
-			g_14d0020[i]->flags->mirror = g_6752a4;
+		if (((Node**)g_14d0020)[i] != 0 && ((Node**)g_14d0020)[i]->owner == &(*(char*)g_10432c0)) {
+			((Node**)g_14d0020)[i]->flags->mirror = g_6752a4;
 		}
 	}
 	fcn_00403330(g_77666b);
-	g_6a2558 = g_6a2528[g_776669];
-	g_6a2560 = g_6a2540[g_776669];
-	if (g_774964) {
-		fcn_0052ac60(g_774694);
+	(*(Pair*)&g_6a2558) = g_6a2528[g_776669];
+	(*(Pair*)&g_6a2560) = g_6a2540[g_776669];
+	if ((*(unsigned char*)&g_774964)) {
+		fcn_0052ac60((*(int*)&g_774694));
 	}
 	if (g_6b8304 != g_776668) {
 		fcn_0043bbf0(g_776668);
@@ -127,7 +127,7 @@ void __cdecl fcn_005e22a0(void)
 	saved = g_6b8010;
 	fcn_004432d0(0, 1);
 	fcn_00598510();
-	if (g_776664 == 0) {
+	if ((*(unsigned char*)&g_776664) == 0) {
 		fcn_0043ace0(0);
 	} else {
 		fcn_0043ace0(1);

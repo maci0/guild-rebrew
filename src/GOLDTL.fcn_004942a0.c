@@ -12,7 +12,7 @@ typedef struct Share {
 	int goal;
 } Share;
 
-extern Player g_868060[4];
+extern char g_868060[];
 
 int __cdecl fcn_0050dac0(unsigned short id);
 float __cdecl fcn_00502820(int x0, int y0, int x1, int y1);
@@ -46,7 +46,7 @@ void __cdecl fcn_004942a0(unsigned short* e, Share* out)
 	total = (int) (fcn_0050dac0(*e) * 0.025f);
 	max = 0;
 	for (i = 0; i < 3; i++) {
-		dist[i] = fcn_00502820(g_868060[0].x, g_868060[0].y, g_868060[i + 1].x, g_868060[i + 1].y);
+		dist[i] = fcn_00502820(((Player*)g_868060)[0].x, ((Player*)g_868060)[0].y, ((Player*)g_868060)[i + 1].x, ((Player*)g_868060)[i + 1].y);
 		if (dist[i] > max) {
 			max = dist[i];
 		}

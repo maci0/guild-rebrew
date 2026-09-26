@@ -11,7 +11,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 unsigned short __cdecl fcn_0042e410(int n);
 
@@ -30,13 +30,13 @@ Ent* __cdecl fcn_0048f450(int owner)
 		if (n >= 8) {
 			break;
 		}
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].kind == 0x14 && g_7f4ca0[i].owner == owner && g_7f4ca0[i].age > 0
-		    && g_7f4ca0[i].task != 0x88 && g_7f4ca0[i].task != 0x90 && g_7f4ca0[i].task != 0x89 && g_7f4ca0[i].task != 0x8a) {
+		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].kind == 0x14 && ((Ent*)g_7f4ca0)[i].owner == owner && ((Ent*)g_7f4ca0)[i].age > 0
+		    && ((Ent*)g_7f4ca0)[i].task != 0x88 && ((Ent*)g_7f4ca0)[i].task != 0x90 && ((Ent*)g_7f4ca0)[i].task != 0x89 && ((Ent*)g_7f4ca0)[i].task != 0x8a) {
 			list[n++] = i;
 		}
 	}
 	if (n < 2) {
 		return 0;
 	}
-	return &g_7f4ca0[list[fcn_0042e410(n)]];
+	return &((Ent*)g_7f4ca0)[list[fcn_0042e410(n)]];
 }

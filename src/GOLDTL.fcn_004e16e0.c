@@ -1,7 +1,7 @@
 extern char g_68ce48[];
-extern int* g_772f24;
+extern unsigned short* g_772f24;
 extern int g_772f2c;
-extern char g_6b5c60;
+extern char g_6b5c60[];
 extern int g_772514;
 extern char* g_77255c;
 extern int g_68bfbc;
@@ -39,19 +39,19 @@ void __cdecl fcn_004e16e0(char* a1, int* a2)
 
 	x = fcn_00508e40(a2[13]);
 	y = fcn_00508e40(a2[14]);
-	if (*(int*) (x + 4) == g_772f24[1])
+	if (*(int*) (x + 4) == ((int*)g_772f24)[1])
 		who = y;
 	else
 		who = x;
 	h = fcn_00470820(0, 0, g_68ce48);
 	fcn_00471d80(h, 3);
 	fcn_004727a0(h, 0);
-	t = fcn_00519190(0x10e6, g_772f2c, *(unsigned short*) g_772f24, *(unsigned short*) who);
+	t = fcn_00519190(0x10e6, g_772f2c, *(unsigned short*) ((int*)g_772f24), *(unsigned short*) who);
 	b0 = fcn_00472250(h, 0, t);
 	b1 = fcn_00472250(h, 0, t + 1);
 	b2 = fcn_00472250(h, 0, t + 2);
 	a1[0x94] = 4;
-	a1[0x14] = g_6b5c60;
+	a1[0x14] = (*(char*)g_6b5c60);
 	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, g_772514);
 	fcn_004e6e20(w, g_68bfbc * 75, 1);
 	while (fcn_005373e0(fcn_004e16e0, g_68bfb8) != 0) {

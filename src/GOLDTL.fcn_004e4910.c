@@ -1,7 +1,7 @@
 extern int g_772f3c;
 extern int g_772f4c;
 extern int g_68bfc4;
-extern char* g_67a370;
+extern int g_67a370;
 extern int g_6791d0;
 extern int g_68bfb8;
 extern int g_6b8014;
@@ -38,10 +38,10 @@ void __cdecl fcn_004e4910(void)
 		if (w != 0)
 			fcn_00428720(w);
 	}
-	if (g_67a370 != 0) {
-		ui = *(char**) (g_67a370 + 0x3c8);
+	if (((char*)g_67a370) != 0) {
+		ui = *(char**) (((char*)g_67a370) + 0x3c8);
 		if (ui != 0 && *(hook_4e4910*) (ui + 0x294) != 0)
-			(*(hook_4e4910*) (ui + 0x294))(g_67a370, 5, ui + 0x298, 0);
+			(*(hook_4e4910*) (ui + 0x294))(((char*)g_67a370), 5, ui + 0x298, 0);
 	}
 	if (g_6791d0 != -1) {
 		for (w = fcn_00426cc0(g_6791d0); w != 0 && (w[0x124] & 1) != 0; w = fcn_00426cc0(g_6791d0))
@@ -53,9 +53,9 @@ void __cdecl fcn_004e4910(void)
 		for (w = fcn_00426cc0(g_68bfc4); w != 0 && (w[0x124] & 1) != 0; w = fcn_00426cc0(g_68bfc4))
 			fcn_005373e0(0, g_68bfb8 | 0x80);
 	}
-	if (*(int*) (g_67a370 + 0xb0) != 0) {
-		gv_Free3Fields(*(int*) (g_67a370 + 0xb0));
-		*(int*) (g_67a370 + 0xb0) = 0;
+	if (*(int*) (((char*)g_67a370) + 0xb0) != 0) {
+		gv_Free3Fields(*(int*) (((char*)g_67a370) + 0xb0));
+		*(int*) (((char*)g_67a370) + 0xb0) = 0;
 	}
 	fcn_00433780(g_6b8014);
 	g_6b5cc0 = 0;

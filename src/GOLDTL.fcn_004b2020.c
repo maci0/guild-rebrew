@@ -9,7 +9,7 @@ typedef struct {
 } fcn_004b2020_group;
 // SIZE 0x44
 
-extern fcn_004b2020_group g_1007bc0[4];
+extern char g_1007bc0[];
 
 // FUNCTION: GOLD 0x4b1ee0
 // SIZE: 73
@@ -22,10 +22,10 @@ int __cdecl fcn_004b2020(unsigned short g)
 
 	if (g >= 4)
 		return 0;
-	g_1007bc0[g].a = 1;
+	((fcn_004b2020_group*)g_1007bc0)[g].a = 1;
 	for (i = 0; i < 4; i++) {
-		g_1007bc0[g].e[i].id = -1;
-		g_1007bc0[g].e[i].b = 0xffff;
+		((fcn_004b2020_group*)g_1007bc0)[g].e[i].id = -1;
+		((fcn_004b2020_group*)g_1007bc0)[g].e[i].b = 0xffff;
 	}
 	return 1;
 }

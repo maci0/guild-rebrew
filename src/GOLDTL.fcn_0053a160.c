@@ -9,8 +9,8 @@ extern char g_14cf950;
 extern int g_774654;
 extern int g_100f1dc;
 extern int g_67d370;
-extern int g_7747b0;
-extern unsigned char g_6a3440;
+extern unsigned char g_7747b0;
+extern signed char g_6a3440;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -45,7 +45,7 @@ int __cdecl fcn_0053a160(void)
 	b = fcn_00472250(h, 0, fcn_00519190(0x1ca7));
 	c = fcn_00472250(h, 0, fcn_00519190(0x1ca8));
 	list = fcn_004693b0(3, a, b, c);
-	g_6a3440 = 0xfe;
+	(*(unsigned char*)&g_6a3440) = 0xfe;
 	while (fcn_005373e0(fcn_0053a160, 0x24087) != 0) {
 		fcn_00469630(list);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
@@ -54,7 +54,7 @@ int __cdecl fcn_0053a160(void)
 		}
 		if (g_100f1dc != -1) {
 			if (g_67d370 == a) {
-				g_7747b0 = 5;
+				(*(int*)&g_7747b0) = 5;
 				fcn_00471af0(h, 0);
 				if (fcn_00539490() != 0) {
 					g_774654 = 1;
@@ -62,7 +62,7 @@ int __cdecl fcn_0053a160(void)
 				}
 				fcn_00471af0(h, 1);
 			} else if (g_67d370 == b) {
-				g_7747b0 = 5;
+				(*(int*)&g_7747b0) = 5;
 				fcn_00471af0(h, 0);
 				if (fcn_00539930(0) != 0) {
 					g_774654 = 1;
@@ -70,7 +70,7 @@ int __cdecl fcn_0053a160(void)
 				}
 				fcn_00471af0(h, 1);
 			} else if (g_67d370 == c) {
-				g_7747b0 = 4;
+				(*(int*)&g_7747b0) = 4;
 				fcn_00471af0(h, 0);
 				if (fcn_0053a020() != 0) {
 					g_774654 = 1;

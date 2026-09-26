@@ -1,4 +1,4 @@
-extern unsigned int g_10405c8;
+extern int g_10405c8;
 extern const float g_662e70[15];
 extern float g_1040544[15];
 extern float g_10404c4[15];
@@ -16,11 +16,11 @@ void __cdecl fcn_0045ccf0(unsigned int now)
 	float d;
 	int i;
 
-	if (now - g_10405c8 == 0) {
+	if (now - (*(unsigned int*)&g_10405c8) == 0) {
 		return;
 	}
-	dt = (float) (now - g_10405c8);
-	g_10405c8 = now;
+	dt = (float) (now - (*(unsigned int*)&g_10405c8));
+	(*(unsigned int*)&g_10405c8) = now;
 	for (i = 0; i < 15; i++) {
 		d = dt * g_662e70[i];
 		g_1040544[i] += d;

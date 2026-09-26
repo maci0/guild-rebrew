@@ -1,6 +1,6 @@
 extern int g_67a370;
 extern int g_6b89c0;
-extern char* g_6b8300;
+extern int g_6b8300;
 
 char __cdecl fcn_00438a80(void* p, int arg);
 void __cdecl fcn_004379a0(int list, int a, int mask, char(__cdecl* fn)(void*, int), int arg);
@@ -14,7 +14,7 @@ void __cdecl fcn_00438af0(unsigned char a)
 	if (g_6b89c0 != 0) {
 		fcn_00459710(g_6b89c0, 0);
 	}
-	if (g_6b8300 != 0) {
-		g_6b8300[0x8036] |= 1;
+	if (((char*)g_6b8300) != 0) {
+		((char*)g_6b8300)[0x8036] |= 1;
 	}
 }

@@ -31,8 +31,8 @@ typedef struct
 // SIZE 0x41
 
 extern int g_772514;
-extern Ctl* g_1015ea0;
-extern Rec65* g_99ec10;
+extern char* g_1015ea0;
+extern char* g_99ec10;
 
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
@@ -54,11 +54,11 @@ void __cdecl fcn_005ced80(int dlg, Entry* list, int* bars, int* icons)
 	for (i = 0; i < 7; i++) {
 		if (list[i].id != 0) {
 			h = fcn_0046f740(0xf, i * 0x30, list[i].id + 0xdf, g_772514);
-			g_1015ea0[h].x1d0 = 3;
-			g_1015ea0[h].x2f0 = &g_99ec10[list[i].id].type;
+			((Ctl*)g_1015ea0)[h].x1d0 = 3;
+			((Ctl*)g_1015ea0)[h].x2f0 = &((Rec65*)g_99ec10)[list[i].id].type;
 			fcn_00472640(h, 1);
-			g_1015ea0[h].x5c = 1;
-			g_1015ea0[h].x38 = list[i].b5 == 0;
+			((Ctl*)g_1015ea0)[h].x5c = 1;
+			((Ctl*)g_1015ea0)[h].x38 = list[i].b5 == 0;
 			icons[i] = h;
 			bars[i] = fcn_004677e0(0x64, i * 0x30 + 0xc, 0xc8, 0, 0x64, 0x7b, 0x802, g_772514);
 			fcn_00472380(bars[i], 0, 0x64, list[i].b4);

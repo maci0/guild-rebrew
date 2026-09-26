@@ -21,7 +21,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Slot* g_1015ea0;
+extern char* g_1015ea0;
 
 char* __cdecl fcn_00466190(int idx);
 
@@ -34,7 +34,7 @@ int __cdecl fcn_00472050(int slot, int* w, int* h)
 	char* g;
 
 	if (slot != -1) {
-		s = &g_1015ea0[slot];
+		s = &((Slot*)g_1015ea0)[slot];
 		if (s->type == 1 || s->type == 8 || s->type == 5) {
 			f = fcn_00466190(s->value);
 			if (f) {

@@ -8,7 +8,7 @@ typedef struct {
 	char data[0x21c];
 } Rec21c;
 
-extern Rec21c g_7f4ca0[];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_00509620(int a, int b);
 int __cdecl fcn_00508e40(int h);
@@ -33,7 +33,7 @@ int __cdecl fcn_004c79b0(char* o, char* out)
 				fcn_004f22e0(h, obj, *val, fcn_004f1790(*(int*) (obj + 0x65), val));
 			}
 			out[1] = 1;
-			*(Rec21c**) (out + 6) = &g_7f4ca0[idx];
+			*(Rec21c**) (out + 6) = &((Rec21c*)g_7f4ca0)[idx];
 		} else {
 			out[1] = 0;
 			*(int*) (out + 6) = 0;

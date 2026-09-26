@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x0051ebc0
 // SIZE: 304
 
-extern unsigned char* g_868054;
+extern unsigned short* g_868054;
 
 unsigned int __cdecl fcn_00430910(void* p, int size, int n, void* file);
 
@@ -15,14 +15,14 @@ int __cdecl fcn_0051ebc0(void* file)
 
 	count = 0;
 	for (i = 0; i < 0x5008; i++) {
-		if (*(short*) (g_868054 + i * 0x43) != 0) {
+		if (*(short*) (((unsigned char*)g_868054) + i * 0x43) != 0) {
 			count++;
 		}
 	}
 	if (fcn_00430910(&count, 4, 1, file) <= 0)
 		return 0;
 	for (i = 0; i < 0x5008; i++) {
-		rec = g_868054 + i * 0x43;
+		rec = ((unsigned char*)g_868054) + i * 0x43;
 		if (*(short*) rec != 0) {
 			if (fcn_00430910(rec, 2, 1, file) <= 0)
 				return 0;

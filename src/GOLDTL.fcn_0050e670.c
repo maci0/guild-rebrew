@@ -15,7 +15,7 @@ typedef struct
 } Ent21c;
 // SIZE 0x21c
 
-extern Ent21c g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 void __cdecl fcn_0050e670(int* ids, int* vals)
 {
@@ -27,17 +27,17 @@ void __cdecl fcn_0050e670(int* ids, int* vals)
 		vals[i] = 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].x4 != -1 && g_7f4ca0[i].x2 < 10 && g_7f4ca0[i].x1ac > vals[4]) {
-			vals[4] = g_7f4ca0[i].x1ac;
-			ids[4] = g_7f4ca0[i].id;
+		if (((Ent21c*)g_7f4ca0)[i].x4 != -1 && ((Ent21c*)g_7f4ca0)[i].x2 < 10 && ((Ent21c*)g_7f4ca0)[i].x1ac > vals[4]) {
+			vals[4] = ((Ent21c*)g_7f4ca0)[i].x1ac;
+			ids[4] = ((Ent21c*)g_7f4ca0)[i].id;
 			for (j = 3; j > -1; j--) {
-				if (g_7f4ca0[i].x1ac <= vals[j] || g_7f4ca0[i].x2 >= 10) {
+				if (((Ent21c*)g_7f4ca0)[i].x1ac <= vals[j] || ((Ent21c*)g_7f4ca0)[i].x2 >= 10) {
 					break;
 				}
 				vals[j + 1] = vals[j];
 				ids[j + 1] = ids[j];
-				vals[j] = g_7f4ca0[i].x1ac;
-				ids[j] = g_7f4ca0[i].id;
+				vals[j] = ((Ent21c*)g_7f4ca0)[i].x1ac;
+				ids[j] = ((Ent21c*)g_7f4ca0)[i].id;
 			}
 		}
 	}

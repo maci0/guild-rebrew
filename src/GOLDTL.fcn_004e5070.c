@@ -12,7 +12,7 @@ typedef struct {
 } rec35c;
 // SIZE 0x35c
 
-extern rec35c g_9b0e20[];
+extern char g_9b0e20[];
 
 void __cdecl fcn_004c4df0(int, void*);
 int __cdecl fcn_004c5930(int, int);
@@ -26,8 +26,8 @@ void __cdecl fcn_004e5070(unsigned char* s, int id)
 	int h;
 
 	for (i = 0; i < s[0x30]; i++) {
-		if (g_9b0e20[i].f10 == id) {
-			copy = g_9b0e20[i];
+		if (((rec35c*)g_9b0e20)[i].f10 == id) {
+			copy = ((rec35c*)g_9b0e20)[i];
 			copy.f8 = 0;
 			copy.f4 = 1;
 			copy.f0 = 1;

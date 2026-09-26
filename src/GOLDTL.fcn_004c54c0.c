@@ -1,7 +1,7 @@
 // GLOBAL: GOLDTL 0x67db50
 extern float g_67db50;
 // GLOBAL: GOLDTL 0x67db54
-extern int g_67db54;
+extern float g_67db54;
 // FUNCTION: GOLD 0x004c4b00
 // SIZE: 97
 // FUNCTION: GOLDTL 0x4c54c0
@@ -18,7 +18,7 @@ void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4)
 	*(int*) (buf + 0x14) = a2;
 	*(int*) (buf + 0x18) = a3;
 	*(int*) (buf + 0x1c) = a4;
-	*(int*) (buf + 0x20) = g_67db54;
+	*(int*) (buf + 0x20) = (*(int*)&g_67db54);
 	*(int*) (buf + 0x24) = (int) g_67db50;
 	fcn_004c4330(buf);
 }

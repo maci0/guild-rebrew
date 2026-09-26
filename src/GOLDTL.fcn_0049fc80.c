@@ -15,7 +15,7 @@ typedef struct Rec18 {
 } Rec18;
 // SIZE 0x18
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
 int __cdecl fcn_004e7b70(Ent* t, Rec18* a, Rec18* b);
@@ -43,7 +43,7 @@ Ent* __cdecl fcn_0049fc80(Ent* e)
 
 		fcn_004e8b40(e->x167, &q);
 		for (i = 0; i < 768; i++) {
-			t = &g_7f4ca0[i];
+			t = &((Ent*)g_7f4ca0)[i];
 			if (t->x166 != 0 && fcn_004e7b70(t, &q, &r) != 0 && q.x8 <= 1) {
 				if (best == 0) {
 					best = t;
@@ -91,7 +91,7 @@ Ent* __cdecl fcn_0049fc80(Ent* e)
 
 			mask = 0xc00;
 			if (fcn_004a5340(e, 1, &mask, 0, 25.0f, &idx) != 0) {
-				return &g_7f4ca0[(unsigned short) idx];
+				return &((Ent*)g_7f4ca0)[(unsigned short) idx];
 			}
 		}
 	}

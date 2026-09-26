@@ -35,8 +35,8 @@ typedef struct {
 	signed char count;
 } Book;
 
-extern char g_6b5c60;
-extern char* g_7747c4;
+extern char g_6b5c60[];
+extern int g_7747c4;
 
 char* __cdecl fcn_00401040(char*);
 void __cdecl fcn_00435500(char*, char*);
@@ -96,7 +96,7 @@ int __cdecl fcn_00535270(Book* b, signed char dir)
 			fcn_004712d0(b->widgets[i], top, bottom);
 			fcn_00471a30(b->widgets[i], 1);
 		} else {
-			fcn_004712d0(b->widgets[i], &g_6b5c60, &g_6b5c60);
+			fcn_004712d0(b->widgets[i], &(*(char*)g_6b5c60), &(*(char*)g_6b5c60));
 			fcn_00471a30(b->widgets[i], 0);
 		}
 	}
@@ -107,6 +107,6 @@ int __cdecl fcn_00535270(Book* b, signed char dir)
 	}
 	b->page += dir;
 	fcn_00534c20(b);
-	fcn_004234e0(g_7747c4, "Umblaettern_s", 1, 0x3f, 0x7f, 0, 0);
+	fcn_004234e0(((char*)g_7747c4), "Umblaettern_s", 1, 0x3f, 0x7f, 0, 0);
 	return 1;
 }

@@ -4,8 +4,8 @@
 // SIZE: 256
 
 extern int g_773d64;
-extern char* g_90e094;
-extern char* g_868050;
+extern unsigned char* g_90e094;
+extern unsigned char* g_868050;
 
 char* __cdecl sim_StartEntityQueryByType(char* e);
 
@@ -29,13 +29,13 @@ char* __cdecl fcn_00500480(char* obj, int* id, int* sub)
 	}
 	k = g_773d64;
 	do {
-		if (g_90e094[k * 169] != 0) {
-			d = g_868050 + (unsigned char) g_90e094[k * 169] * 589;
+		if (((char*)g_90e094)[k * 169] != 0) {
+			d = ((char*)g_868050) + (unsigned char) ((char*)g_90e094)[k * 169] * 589;
 			if (*d == 3 || *d == 0x16 || *d == 0xf) {
 				g_773d64 = k + 1;
 				*sub = -1;
-				*id = *(int*) (g_90e094 + k * 169 + 1);
-				return g_90e094 + k * 169;
+				*id = *(int*) (((char*)g_90e094) + k * 169 + 1);
+				return ((char*)g_90e094) + k * 169;
 			}
 		}
 		k = (k + 1) % 256;

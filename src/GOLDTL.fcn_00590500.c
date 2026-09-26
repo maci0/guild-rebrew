@@ -4,7 +4,7 @@
 // SIZE: 330
 
 extern unsigned int g_6a9654;
-extern volatile unsigned int g_6b7fac;
+extern int g_6b7fac;
 extern int g_774800;
 extern float g_664090;
 extern int g_67a370;
@@ -33,10 +33,10 @@ void __cdecl fcn_00590500(void)
 	n = 0;
 	vb = -1;
 	va = 0;
-	if (g_6b7fac < g_6a9654 + 4500) {
+	if ((*(volatile unsigned int*)&g_6b7fac) < g_6a9654 + 4500) {
 		return;
 	}
-	g_6a9654 = g_6b7fac;
+	g_6a9654 = (*(volatile unsigned int*)&g_6b7fac);
 	if (g_774800 == 0 && (float) gm_RandomFloat01() < g_664090) {
 		return;
 	}

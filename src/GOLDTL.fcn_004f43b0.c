@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x004f43b0
 // SIZE: 141
 
-extern unsigned short* g_773da8;
+extern char* g_773da8;
 
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 unsigned char* __cdecl fcn_004f18d0(int a, char* e, unsigned char* prev, void* filter, int mask);
@@ -15,7 +15,7 @@ unsigned char* __cdecl fcn_004f43b0(char* e, unsigned char lim)
 	unsigned char* r;
 
 	best = 0;
-	if (*(unsigned short*) (e + 0x27) == 0xffff || *(unsigned short*) (e + 0x27) == *g_773da8) {
+	if (*(unsigned short*) (e + 0x27) == 0xffff || *(unsigned short*) (e + 0x27) == *((unsigned short*)g_773da8)) {
 		return 0;
 	}
 	if (!fcn_00502cd0(*(int*) (e + 0x5d), 2, 4, 0x1f8, 6)) {

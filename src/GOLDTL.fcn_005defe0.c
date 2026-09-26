@@ -17,9 +17,9 @@ typedef struct Cand {
 } Cand;
 // SIZE 0x24
 
-extern int g_666018;
+extern __int64 g_666018;
 extern int g_66601c;
-extern Cand g_68ff68[29];
+extern char g_68ff68[];
 
 void __cdecl fcn_0051af00(char*, int, ...);
 char* __cdecl fcn_005cd440(int*, char*, int, int);
@@ -50,7 +50,7 @@ int __cdecl fcn_005defe0(char* ent, int* arg)
 		memset(desc, 0, sizeof(desc));
 		memset(desc + 7, 0xff, 8 * sizeof(int));
 		fcn_0051af00(name, 0x9c);
-		desc[2] = g_666018;
+		desc[2] = (*(int*)&g_666018);
 		desc[0] = 1;
 		desc[1] = 0x400;
 		desc[4] = 6;
@@ -70,8 +70,8 @@ int __cdecl fcn_005defe0(char* ent, int* arg)
 	twice = fcn_005c6270(ent, 0x2c5) != 0;
 	n = 0;
 	for (i = 0; i < 29; i++) {
-		if (g_68ff68[i].kind == 2 && g_68ff68[i].active && g_68ff68[i].ptr) {
-			list[n++] = g_68ff68[i].id;
+		if (((Cand*)g_68ff68)[i].kind == 2 && ((Cand*)g_68ff68)[i].active && ((Cand*)g_68ff68)[i].ptr) {
+			list[n++] = ((Cand*)g_68ff68)[i].id;
 		}
 	}
 	if (n == 0) {

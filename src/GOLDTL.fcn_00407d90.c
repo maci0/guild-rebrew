@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x00407d90
 // SIZE: 146
 
-extern char* g_14d0020[];
+extern void* g_14d0020[];
 int __cdecl fcn_00451840(char* a, char* b, float range);
 
 int __cdecl fcn_00407d90(char* self, char** out)
@@ -14,7 +14,7 @@ int __cdecl fcn_00407d90(char* self, char** out)
 	char* n;
 
 	count = 0;
-	p = g_14d0020;
+	p = ((char**)g_14d0020);
 	do {
 		if (count >= 16) {
 			break;
@@ -33,6 +33,6 @@ int __cdecl fcn_00407d90(char* self, char** out)
 			}
 		}
 		p++;
-	} while ((int) p < (int) (g_14d0020 + 0x300));
+	} while ((int) p < (int) (((char**)g_14d0020) + 0x300));
 	return count;
 }

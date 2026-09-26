@@ -6,7 +6,7 @@ struct reg_4e71a0 {
 };
 // SIZE 0x114
 
-extern struct reg_4e71a0 g_9a9660[96];
+extern char g_9a9660[];
 
 typedef void(__cdecl* cb_4e71a0)(void);
 
@@ -52,9 +52,9 @@ void __cdecl fcn_004e71a0(void)
 {
 	int i;
 
-	memset(g_9a9660, 0, sizeof(g_9a9660));
+	memset(((struct reg_4e71a0*)g_9a9660), 0, sizeof(struct reg_4e71a0[96]));
 	for (i = 0; i < 96; i++)
-		g_9a9660[i].id = -1;
+		((struct reg_4e71a0*)g_9a9660)[i].id = -1;
 	fcn_004e7160(0, fcn_004e1920, fcn_004e1950, 0, 0, 0);
 	fcn_004e7160(1, fcn_004da690, fcn_004dc5f0, fcn_004dc6e0, 0, 0);
 	fcn_004e7160(2, fcn_004dcf50, fcn_004df1b0, fcn_004dfba0, fcn_004dc7d0, 0);

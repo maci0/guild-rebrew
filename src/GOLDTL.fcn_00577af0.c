@@ -29,7 +29,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_00577ab0(struct house*);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -51,7 +51,7 @@ int __cdecl fcn_00577af0(int id, struct house* me)
 	if (fcn_00577ab0(me) != 0) {
 		e = gm_StartFilteredEntitySearch(1, 1, id);
 		if (e != 0) {
-			h = &g_7f4ca0[*(unsigned short*) (e + 0x27)];
+			h = &((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
 			a = fcn_00507f10(h, 2);
 			b = fcn_00507f10(me, 2);
 			if (a - b * 0.5f + gm_RandomFloat01() * 0.5 < 0.8) {

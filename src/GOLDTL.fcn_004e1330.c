@@ -22,11 +22,11 @@ typedef struct Cmd {
 	int b;
 } Cmd;
 
-extern Ent g_7f4ca0[0x300];
+extern char g_7f4ca0[];
 extern char* g_14a9a54;
 extern char* g_14a9a58;
 extern char* g_14a9a5c;
-extern char g_6b5c60;
+extern char g_6b5c60[];
 
 Ent* __cdecl fcn_00508e40(int);
 float __cdecl fcn_004ff040(Ent*);
@@ -52,35 +52,35 @@ int __cdecl fcn_004e1330(Cmd* cmd)
 	}
 	if (b->busy != 0 || a->busy != 0) {
 		if (b->kind == 6 || b->kind == 7) {
-			fcn_00545d40(g_7f4ca0[b->id].handle, -1, g_14a9a5c, 0, 0x5ec, 0);
+			fcn_00545d40(((Ent*)g_7f4ca0)[b->id].handle, -1, g_14a9a5c, 0, 0x5ec, 0);
 		}
 		if (a->kind == 6 || a->kind == 7) {
-			fcn_00545d40(g_7f4ca0[a->id].handle, -1, g_14a9a5c, 0, 0x5ec, 0);
+			fcn_00545d40(((Ent*)g_7f4ca0)[a->id].handle, -1, g_14a9a5c, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
 	if (fcn_004ff040(a) <= 0.0f) {
 		if (b->kind == 6 || b->kind == 7) {
-			fcn_00545d40(g_7f4ca0[b->id].handle, -1, g_14a9a58, 0, 0x5ec, 0);
+			fcn_00545d40(((Ent*)g_7f4ca0)[b->id].handle, -1, g_14a9a58, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
 	if (fcn_004ff040(b) <= 0.0f) {
 		if (a->kind == 6 || a->kind == 7) {
-			fcn_00545d40(g_7f4ca0[a->id].handle, -1, g_14a9a58, 0, 0x5ec, 0);
+			fcn_00545d40(((Ent*)g_7f4ca0)[a->id].handle, -1, g_14a9a58, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
 	if (a->kind == 6 || a->kind == 7) {
 		fcn_0051af00(buf, 0x11ca, b->id);
 		strcat(buf, g_14a9a54);
-		fcn_004e6240(a, cmd, buf, &g_6b5c60);
+		fcn_004e6240(a, cmd, buf, &(*(char*)g_6b5c60));
 		result = 1;
 	}
 	if (b->kind == 6 || b->kind == 7) {
 		fcn_0051af00(buf, 0x11ca, a->id);
 		strcat(buf, g_14a9a54);
-		fcn_004e6240(b, cmd, buf, &g_6b5c60);
+		fcn_004e6240(b, cmd, buf, &(*(char*)g_6b5c60));
 		result = 1;
 	}
 	if (result != 0) {

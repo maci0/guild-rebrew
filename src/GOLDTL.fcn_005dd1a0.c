@@ -25,7 +25,7 @@ typedef struct {
 } House;
 
 extern __int64 g_666018;
-extern House g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -52,7 +52,7 @@ int __cdecl fcn_005dd1a0(unsigned char* obj, int* arg)
 		result = 1;
 		req.kind = 6;
 		req.a = 1;
-		req.size = (g_7f4ca0[g_774970].b9 ? 1 : 2) | 0x400;
+		req.size = (((House*)g_7f4ca0)[g_774970].b9 ? 1 : 2) | 0x400;
 		req.cd = g_666018;
 		e = fcn_005cd440(&req, text, 0, 0);
 		if (e == 0) {

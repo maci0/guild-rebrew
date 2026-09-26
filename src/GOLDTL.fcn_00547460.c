@@ -34,7 +34,7 @@ struct s_7f4ca0 {
 	char pad[0x214];
 };
 
-extern struct s_7f4ca0 g_7f4ca0[];
+extern char g_7f4ca0[];
 
 // FUNCTION: GOLDTL 0x547460
 // SIZE: 141
@@ -58,7 +58,7 @@ void __cdecl fcn_00547460(void)
 			}
 		}
 		m.b4 = 0x22;
-		m.f8 = g_7f4ca0[*(unsigned short*) (e + 0x27)].f4;
+		m.f8 = ((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].f4;
 		m.fc = *(int*) (e + 1);
 		m.b36 = 2;
 		m.b58 = 1;

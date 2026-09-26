@@ -24,9 +24,9 @@ typedef struct {
 	int style;
 } Dialog;
 
-extern Office* g_868050;
-extern Dialog* g_77255c;
-extern int g_774970;
+extern unsigned char* g_868050;
+extern char* g_77255c;
+extern unsigned short g_774970;
 extern int g_14ce8e0;
 extern int g_774654;
 
@@ -45,13 +45,13 @@ void __cdecl fcn_00541150(Player* p)
 	Office* o;
 	int box;
 
-	o = &g_868050[p->office];
+	o = (Office*)(g_868050 + p->office * sizeof(Office));
 	box = fcn_00470820(0x3c, 0, "Runden\\Spielerrunde_Ende_geb");
 	fcn_00471b60(box);
 	fcn_004727a0(box, 1);
-	g_77255c->style = 0x55;
+	((Dialog*)g_77255c)->style = 0x55;
 	fcn_00504bd0(p->office);
-	if (fcn_0050c1b0(p, (unsigned short) g_774970, st) != 0) {
+	if (fcn_0050c1b0(p, (unsigned short) (*(int*)&g_774970), st) != 0) {
 		if (p->name[0] != 0) {
 			fcn_00519190("$A$Z%1s >%s<$2A", p->office * 14 + 0x48e, p->name);
 		} else {

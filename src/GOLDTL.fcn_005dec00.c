@@ -12,9 +12,9 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
-extern int g_666018;
+extern __int64 g_666018;
 extern int g_66601c;
 
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -41,9 +41,9 @@ int __cdecl fcn_005dec00(char* ent, int* arg)
 		memset(desc + 7, 0xff, 8 * sizeof(int));
 		fcn_0051af00(name, 0x9c);
 		desc[0] = 1;
-		desc[1] = ((g_7f4ca0[g_774970].b9 != 0) + 1) | 0x400;
+		desc[1] = ((((Ent*)g_7f4ca0)[g_774970].b9 != 0) + 1) | 0x400;
 		desc[4] = 6;
-		desc[2] = g_666018;
+		desc[2] = (*(int*)&g_666018);
 		desc[3] = g_66601c;
 		obj = fcn_005cd440(desc, name, 0, 0);
 		if (obj == 0) {

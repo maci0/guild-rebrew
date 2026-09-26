@@ -4,7 +4,7 @@ extern float g_67d368;
 extern int g_1015eac;
 extern int g_77250c;
 extern int g_6a251c;
-extern unsigned int g_6b7fac;
+extern int g_6b7fac;
 
 // FUNCTION: GOLDTL 0x5337f0
 // SIZE: 137
@@ -27,7 +27,7 @@ void __cdecl fcn_005337f0(void)
 			y = (int) (g_67d368 * 575.0f);
 		}
 		fcn_0046bd20(x, y, 0x258, 0x18, g_77250c, g_7e5fc0, 0x28);
-		if (g_6b7fac >= g_6a251c + 0x15e) {
+		if ((*(unsigned int*)&g_6b7fac) >= g_6a251c + 0x15e) {
 			g_7e5fc0[0] = 0;
 		}
 	}

@@ -26,7 +26,7 @@ typedef struct {
 	int shown;
 } Contact;
 
-extern Office* g_868050;
+extern unsigned char* g_868050;
 extern unsigned short g_774970;
 extern int g_67a370;
 extern int g_6b8300;
@@ -51,7 +51,7 @@ void __cdecl fcn_00516c50(Player* p, void* unit)
 	Office* o;
 	Contact* c;
 
-	o = &g_868050[p->office];
+	o = &((Office*)g_868050)[p->office];
 	if (unit == 0) {
 		unit = fcn_00502cd0(p->home, 2, 6, 0, 0xfd);
 	}

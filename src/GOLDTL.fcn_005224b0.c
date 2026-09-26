@@ -1,4 +1,4 @@
-extern char* g_90e094;
+extern unsigned char* g_90e094;
 // FUNCTION: GOLDTL 0x005224b0
 // SIZE: 64
 
@@ -10,7 +10,7 @@ char __cdecl fcn_005224b0(char* e)
 	char* r;
 
 	for (i = 0; i < 0x100; i++) {
-		r = g_90e094 + i * 0xa9;
+		r = ((char*)g_90e094) + i * 0xa9;
 		if (*r != 0 && *(int*) (e + 0x204) == *(int*) (r + 1)) {
 			fcn_00510820(e, r, 2);
 		}

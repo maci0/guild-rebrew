@@ -47,12 +47,12 @@ extern int g_77467c;
 extern unsigned char g_77534c;
 extern int g_6a24d8[];
 extern int g_7ea380[15];
-extern char* g_6a25ac;
-extern Rect g_1040480;
-extern Rect g_6a3764;
-extern Surface* g_774684;
+extern int g_6a25ac;
+extern int g_1040480;
+extern int g_6a3764;
+extern int g_774684;
 extern int g_6a25fc;
-extern Control* g_1015ea0;
+extern char* g_1015ea0;
 
 void __cdecl fcn_0047a040(int, int, int, int);
 int __cdecl fcn_00475290(int, int, int, int, int);
@@ -123,15 +123,15 @@ void __cdecl fcn_00526db0(char* name)
 	}
 	fcn_0041ddd0(data);
 	memset(g_7ea380, 0xff, sizeof(g_7ea380));
-	g_6a25ac = name;
-	g_1040480 = g_6a3764;
+	(*(char**)&g_6a25ac) = name;
+	(*(Rect*)&g_1040480) = (*(Rect*)&g_6a3764);
 	memset(&desc2, 0, sizeof(desc2));
 	desc2.width = 0x68;
 	desc2.height = 0x6e;
 	desc2.format = 0x15;
-	g_774684 = fcn_004770a0(&desc2, 3);
-	fcn_00476970(g_774684);
+	(*(Surface**)&g_774684) = fcn_004770a0(&desc2, 3);
+	fcn_00476970((*(Surface**)&g_774684));
 	g_6a25fc = fcn_00469c30(0x286, 0x23c, 0x544);
-	g_1015ea0[g_6a25fc].visible = 1;
+	((Control*)g_1015ea0)[g_6a25fc].visible = 1;
 	fcn_00472170(g_6a25fc, 0);
 }

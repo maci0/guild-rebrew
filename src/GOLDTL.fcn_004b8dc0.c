@@ -8,7 +8,7 @@ typedef struct {
 	char name[0x2f4];
 } Dyn;
 
-extern Dyn g_868060[];
+extern char g_868060[];
 
 char *__cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(char *, int);
@@ -74,9 +74,9 @@ int __cdecl fcn_004b8dc0(int *msg)
 	fcn_004c4570(1, 1, 0x12, &val);
 	fcn_004c5360();
 	if (*b == 0x47) {
-		fcn_0051af00(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, g_868060[*(int *) (b + 0x65)].name, g_868060[0].name);
+		fcn_0051af00(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[*(int *) (b + 0x65)].name, ((Dyn*)g_868060)[0].name);
 	} else {
-		fcn_0051af00(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, g_868060[0].name, g_868060[*(int *) (a + 0x65)].name);
+		fcn_0051af00(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[0].name, ((Dyn*)g_868060)[*(int *) (a + 0x65)].name);
 	}
 	fcn_00545d40(*(int *) (p + 4), *(int *) (p + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;

@@ -17,7 +17,7 @@ typedef struct {
 	int icon;
 } WareIcon;
 
-extern Ware* g_99ec10;
+extern char* g_99ec10;
 
 int __cdecl fcn_005053c0(unsigned short* slot)
 {
@@ -36,7 +36,7 @@ int __cdecl fcn_005053c0(unsigned short* slot)
 	Ware* w;
 	int i;
 
-	w = &g_99ec10[*slot];
+	w = &((Ware*)g_99ec10)[*slot];
 	if (w->type == 2 || w->type == 6) {
 		for (i = 0; icons[i].ware != 0; i++) {
 			if (icons[i].ware == *slot) {

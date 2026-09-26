@@ -12,7 +12,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
 extern int g_772514;
@@ -55,7 +55,7 @@ void __cdecl fcn_0058e510(char* e, char* res)
 
 	fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	m = fcn_0058e220(e, res);
-	p = fcn_004f65a0(&g_7f4ca0[g_774970], 4, list, &cnt);
+	p = fcn_004f65a0(&((struct house*)g_7f4ca0)[g_774970], 4, list, &cnt);
 	b = p == 0;
 	f = fcn_004f4770(e);
 	if (gm_RandomFloat01() + f - 0.1f < 1.0f) {
@@ -71,14 +71,14 @@ void __cdecl fcn_0058e510(char* e, char* res)
 	t = fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	if (b == 0) {
 		for (i = 0; i < cnt; i++) {
-			fcn_004c58b0(list[i], g_7f4ca0[g_774970].handle);
+			fcn_004c58b0(list[i], ((struct house*)g_7f4ca0)[g_774970].handle);
 		}
-		fcn_005782f0(&g_7f4ca0[g_774970], 1);
+		fcn_005782f0(&((struct house*)g_7f4ca0)[g_774970], 1);
 		fcn_00519190(0x40ef, 0x40cc, *p);
 		fcn_004c30a0(t, 0, "GEIST_KOMMT", fcn_0042e410(8), 0xfa);
 	} else if (b == 1) {
 		v = (fcn_0042e410(0x200) + 0x200) << 5;
-		fcn_004c5150(g_7f4ca0[g_774970].handle, -1, g_773d75, v);
+		fcn_004c5150(((struct house*)g_7f4ca0)[g_774970].handle, -1, g_773d75, v);
 		fcn_00519190(0x40f0, 0x40cc, v);
 		fcn_004c30a0(t, 0, "GEIST_KOMMT", fcn_0042e410(8), 0xfa);
 	} else {

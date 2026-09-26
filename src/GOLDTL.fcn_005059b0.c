@@ -71,11 +71,11 @@ typedef struct {
 	int flags;
 } Figure;
 
-extern char* g_868050;
-extern Obj* g_868054;
+extern unsigned char* g_868050;
+extern unsigned short* g_868054;
 extern char* g_99ec10;
-extern Entity g_7f4ca0[];
-extern Entity* g_773da8;
+extern char g_7f4ca0[];
+extern char* g_773da8;
 extern int g_6b8010;
 
 void __cdecl fcn_005b1c90(int);
@@ -100,32 +100,32 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 	int sc;
 	int i;
 
-	rec = g_868050 + s->type * 0x24d;
+	rec = ((char*)g_868050) + s->type * 0x24d;
 	s->owner = owner;
 	if (slot == 0xffff) {
 		return;
 	}
 	if (s->slot != slot) {
-		if (s->slot != 0xffff && g_7f4ca0[s->slot].type == 6) {
+		if (s->slot != 0xffff && ((Entity*)g_7f4ca0)[s->slot].type == 6) {
 			fcn_005b1c90(s->key);
 		}
-		if (g_7f4ca0[slot].type == 6) {
+		if (((Entity*)g_7f4ca0)[slot].type == 6) {
 			fcn_005b1b30(s);
 		}
 	}
-	if (s->slot != 0xffff && g_7f4ca0[s->slot].best == s) {
-		g_7f4ca0[s->slot].best = 0;
+	if (s->slot != 0xffff && ((Entity*)g_7f4ca0)[s->slot].best == s) {
+		((Entity*)g_7f4ca0)[s->slot].best = 0;
 	}
 	s->slot = slot;
 	if (*rec == 2) {
 		fcn_00505c80(s);
 		if (*rec == 2) {
-			if (g_7f4ca0[s->slot].best == 0 || g_7f4ca0[s->slot].best->type <= s->type) {
-				g_7f4ca0[s->slot].best = s;
+			if (((Entity*)g_7f4ca0)[s->slot].best == 0 || ((Entity*)g_7f4ca0)[s->slot].best->type <= s->type) {
+				((Entity*)g_7f4ca0)[s->slot].best = s;
 			}
 		}
 	}
-	if (g_7f4ca0[slot].type == 6 || g_7f4ca0[slot].type == 7) {
+	if (((Entity*)g_7f4ca0)[slot].type == 6 || ((Entity*)g_7f4ca0)[slot].type == 7) {
 		f = fcn_0050dc90(s);
 		if (f != 0) {
 			f->busy = 0;
@@ -135,17 +135,17 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 			}
 		}
 	}
-	q = g_868054;
+	q = ((Obj*)g_868054);
 	for (i = 0x5008; i != 0; i--) {
 		if (q->kind != 0 && g_99ec10[q->kind * 0x41] == 0x1d && q->key == s->key) {
-			q->id = g_7f4ca0[slot].id;
+			q->id = ((Entity*)g_7f4ca0)[slot].id;
 			if (q->link != 0) {
-				q->link->id = g_7f4ca0[slot].id;
+				q->link->id = ((Entity*)g_7f4ca0)[slot].id;
 			}
 			saved = g_6b8010;
 			m = q->model;
-			if (g_7f4ca0[slot].scene != 0 && (g_7f4ca0[slot].type == 5 || g_7f4ca0[slot].type == 6 || g_7f4ca0[slot].type == 7)) {
-				sc = g_7f4ca0[slot].scene - 0x599;
+			if (((Entity*)g_7f4ca0)[slot].scene != 0 && (((Entity*)g_7f4ca0)[slot].type == 5 || ((Entity*)g_7f4ca0)[slot].type == 6 || ((Entity*)g_7f4ca0)[slot].type == 7)) {
+				sc = ((Entity*)g_7f4ca0)[slot].scene - 0x599;
 			} else {
 				sc = 0;
 			}
@@ -158,8 +158,8 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 		}
 		q++;
 	}
-	e = &g_7f4ca0[slot];
-	if (e != g_773da8 && s->placed != 0 && (e->type == 6 || e->type == 7 || e->type == 5)) {
+	e = &((Entity*)g_7f4ca0)[slot];
+	if (e != ((Entity*)g_773da8) && s->placed != 0 && (e->type == 6 || e->type == 7 || e->type == 5)) {
 		saved = g_6b8010;
 		fcn_004432d0(0, 1);
 		fcn_0052dd80(s);

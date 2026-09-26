@@ -17,8 +17,8 @@ typedef struct Obj2f4 {
 extern int g_6b7fac;
 extern char g_77534d;
 extern int g_7e46ac;
-extern IdList* g_77255c;
-extern Obj2f4* g_1015ea0;
+extern char* g_77255c;
+extern char* g_1015ea0;
 extern int g_100f1dc;
 extern int g_774654;
 extern int g_14ce8e0;
@@ -75,9 +75,9 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 	fcn_00471b60(h);
 	g_77534d = 1;
 	ctx = fcn_004693b0(0);
-	for (i = 0; i < g_77255c->count; i++) {
-		id = g_77255c->ids[i];
-		if (g_1015ea0[id].kind != 0x40) {
+	for (i = 0; i < ((IdList*)g_77255c)->count; i++) {
+		id = ((IdList*)g_77255c)->ids[i];
+		if (((Obj2f4*)g_1015ea0)[id].kind != 0x40) {
 			fcn_00469470(ctx, id);
 		}
 	}

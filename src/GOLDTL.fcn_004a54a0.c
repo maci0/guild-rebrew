@@ -24,8 +24,8 @@ typedef struct Cand {
 } Cand;
 // SIZE 0x8
 
-extern unsigned short* g_77261c;
-extern int g_7728bc;
+extern char* g_77261c;
+extern unsigned int g_7728bc;
 
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, Query* q, int c);
 Cand* __cdecl fcn_004a34d0(void);
@@ -44,16 +44,16 @@ int __cdecl fcn_004a54a0(unsigned short* e, int a2, unsigned int n, char* src, f
 	}
 	memcpy(q.name, src, len);
 	q.kind = 2;
-	if (g_77261c != 0 && !(q.flags & 0x10000000)) {
+	if (((unsigned short*)g_77261c) != 0 && !(q.flags & 0x10000000)) {
 		q.x40 = 0;
 		q.flags = a2;
-		if (fcn_005cf720(*e, *g_77261c, &q, 0) != 0) {
-			*out = *g_77261c;
+		if (fcn_005cf720(*e, *((unsigned short*)g_77261c), &q, 0) != 0) {
+			*out = *((unsigned short*)g_77261c);
 			return 1;
 		}
 	}
 	q.x40 = 0;
-	for (i = g_7728bc; t = fcn_004a34d0(), i != 0 && t->obj != 0; i--) {
+	for (i = (*(int*)&g_7728bc); t = fcn_004a34d0(), i != 0 && t->obj != 0; i--) {
 		if (!(t->val < lo) && !(t->val > hi) && fcn_005cf720(*e, *t->obj, &q, 0) != 0) {
 			*out = *t->obj;
 			return 1;

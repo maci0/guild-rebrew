@@ -6,7 +6,7 @@
 extern char g_6a8428[];
 extern char g_6a840c[];
 extern char g_6a83f8[];
-extern int g_7749f8;
+extern int g_7749f8[];
 
 int* __cdecl fcn_0041db70(int size, char* tag);
 void __cdecl fcn_00580cf0(int);
@@ -62,7 +62,7 @@ int* __cdecl fcn_00580d50(void)
 	p[0x1a] = 0;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	g_7749f8 = fcn_004c3100(g_6a840c, 0);
+	(*(int*)g_7749f8) = fcn_004c3100(g_6a840c, 0);
 	return p;
 }
 #pragma optimize("", on)

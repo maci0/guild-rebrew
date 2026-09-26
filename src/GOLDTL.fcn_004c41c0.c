@@ -20,7 +20,7 @@ typedef struct node99 {
 // SIZE 0x99
 #pragma pack()
 
-extern node99* g_aed324;
+extern char* g_aed324;
 
 int __cdecl fcn_004c41c0(node99* n)
 {
@@ -31,7 +31,7 @@ int __cdecl fcn_004c41c0(node99* n)
 
 	if (n->f0 == 7 || n->fc == 0)
 		return 1;
-	for (p = g_aed324; p != 0; p = p->next) {
+	for (p = ((node99*)g_aed324); p != 0; p = p->next) {
 		if (p->f3 == n->f3 && p->f8 == n->fc)
 			break;
 	}
@@ -40,7 +40,7 @@ int __cdecl fcn_004c41c0(node99* n)
 	len = p->f10;
 	q = p;
 	for (off = 0x7e; off < len; off += 0x80) {
-		for (p = g_aed324; p != 0; p = p->next) {
+		for (p = ((node99*)g_aed324); p != 0; p = p->next) {
 			if (p->f3 == q->f3 && p->f8 == q->fc)
 				break;
 		}

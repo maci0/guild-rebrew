@@ -30,7 +30,7 @@ struct result {
 	struct rec44 rec;
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern int g_772514;
 extern int g_100f1dc;
@@ -75,7 +75,7 @@ int __cdecl fcn_0058dfb0(int a1, char* s, struct result* out)
 	out->f10 = **(int**) (s + 0x2c + *(int*) (s + 0x88) * 0xc);
 	p = *(struct rec44**) (s + 0x2c + *(int*) (s + 0x88) * 0xc);
 	out->rec = *p;
-	if ((g_7f4ca0[g_774970].flags & 8) != 0) {
+	if ((((struct house*)g_7f4ca0)[g_774970].flags & 8) != 0) {
 		fcn_005263d0(g_14b5650, g_14b5654, 0);
 		return 0;
 	}
@@ -100,11 +100,11 @@ int __cdecl fcn_0058dfb0(int a1, char* s, struct result* out)
 				g_774654 = 1;
 			} else {
 				if (g_67d370 == b4) {
-					k = fcn_00525f60(&g_7f4ca0[g_774970], 4);
+					k = fcn_00525f60(&((struct house*)g_7f4ca0)[g_774970], 4);
 				} else if (g_67d370 == b6) {
-					k = fcn_00525f60(&g_7f4ca0[g_774970], 6) * 2;
+					k = fcn_00525f60(&((struct house*)g_7f4ca0)[g_774970], 6) * 2;
 				} else if (g_67d370 == b8) {
-					k = fcn_00525f60(&g_7f4ca0[g_774970], 8) * 3;
+					k = fcn_00525f60(&((struct house*)g_7f4ca0)[g_774970], 8) * 3;
 				} else {
 					continue;
 				}

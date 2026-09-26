@@ -7,7 +7,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[];
+extern char g_7f4ca0[];
 extern int g_14cbca0;
 extern unsigned int g_14cbcb4;
 extern unsigned char g_6a375c;
@@ -27,7 +27,7 @@ int __cdecl fcn_0047dcf0(char* e)
 	o = e;
 	p = *(char**) (e + 0x16c);
 	if (p && *(unsigned short*) (p + 0x27) != 0xffff) {
-		o = (char*) &g_7f4ca0[*(unsigned short*) (p + 0x27)];
+		o = (char*) &((Ent*)g_7f4ca0)[*(unsigned short*) (p + 0x27)];
 	}
 	if (g_14cbca0 != -1 && *(unsigned int*) (o + 4) % g_6a375c != g_14cbcb4) {
 		return 0;

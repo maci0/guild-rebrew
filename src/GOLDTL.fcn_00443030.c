@@ -57,10 +57,10 @@ typedef struct {
 	int x3d8;
 } Level;
 
-extern char g_1042340;
+extern char g_1042340[];
 extern char g_1043060;
-extern char g_1040640;
-extern char g_1040960;
+extern char g_1040640[];
+extern char g_1040960[];
 
 Ent* __cdecl fcn_00439750(int, const char*);
 void __cdecl fcn_00438b40(Ent*, Vec3*);
@@ -91,7 +91,7 @@ char __cdecl fcn_00443030(Level* lv)
 	fcn_00438cb0(e, &lv->rot);
 	e->level = lv;
 	e->flags |= 3;
-	e->next = &g_1042340;
+	e->next = &(*(char*)g_1042340);
 	e->prev = &g_1043060;
 	lv->amb.x = 200.0f;
 	lv->amb.y = 200.0f;
@@ -99,8 +99,8 @@ char __cdecl fcn_00443030(Level* lv)
 	lv->e88 = e;
 	lv->e84 = e;
 	lv->e80 = e;
-	lv->xa4 = &g_1040640;
-	lv->xa8 = &g_1040960;
+	lv->xa4 = &(*(char*)g_1040640);
+	lv->xa8 = &(*(char*)g_1040960);
 	lv->x3d8 = 0;
 	lv->xac = 0;
 	lv->xb8 = 0;

@@ -9,8 +9,8 @@ typedef struct Rec {
 } Rec;
 // SIZE 0x21c
 
-extern Rec g_7f4ca0[0x300];
-extern char g_773d75;
+extern char g_7f4ca0[];
+extern unsigned char g_773d75;
 
 int __cdecl fcn_005015e0(char**, char**, char**, int);
 float __cdecl fcn_00507f10(char* e, int k);
@@ -47,32 +47,32 @@ int __cdecl fcn_004eb780(char* e, int* msg)
 	}
 	f = fcn_00507f10(e, 4);
 	amount = (int) (((gm_RandomFloat01() + 1.0f) * f * 15.0f + 5.0) * 2.55f);
-	fcn_004c51a0(-1, *(int*) (e + 4), g_773d75, msg[2]);
+	fcn_004c51a0(-1, *(int*) (e + 4), (*(char*)&g_773d75), msg[2]);
 	for (i = 0, cnt = 0; i < 0x300; i++) {
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].home == h && *(unsigned short*) (h + 0x27) != i) {
-			fcn_004c54c0(g_7f4ca0[*(unsigned short*) (h + 0x27)].owner, g_7f4ca0[i].owner, -amount, 1);
+		if (((Rec*)g_7f4ca0)[i].id != 0xffff && ((Rec*)g_7f4ca0)[i].home == h && *(unsigned short*) (h + 0x27) != i) {
+			fcn_004c54c0(((Rec*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].owner, ((Rec*)g_7f4ca0)[i].owner, -amount, 1);
 			cnt++;
 		}
 	}
 	if (cnt != 0) {
 		amount = (int) ((float) msg[2] / cnt) + 0x20;
 		for (i = 0; i < 0x300; i++) {
-			if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].home == h && *(unsigned short*) (h + 0x27) != i) {
-				fcn_004c51a0(g_7f4ca0[i].owner, -1, g_773d75, amount);
+			if (((Rec*)g_7f4ca0)[i].id != 0xffff && ((Rec*)g_7f4ca0)[i].home == h && *(unsigned short*) (h + 0x27) != i) {
+				fcn_004c51a0(((Rec*)g_7f4ca0)[i].owner, -1, (*(char*)&g_773d75), amount);
 			}
 		}
 	}
 	fcn_005100f0(*(int*) (e + 4), -5);
 	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x8000000, 0);
-	if (g_7f4ca0[*(unsigned short*) (h + 0x27)].type == 7 || g_7f4ca0[*(unsigned short*) (h + 0x27)].type == 6) {
+	if (((Rec*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].type == 7 || ((Rec*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].type == 6) {
 		fcn_0051af00(buf, 0x1663, h);
-		fcn_00545e80(g_7f4ca0[*(unsigned short*) (h + 0x27)].owner, -1, buf, 0, 0x5fb, *(int*) (h + 1), -1, 0, "");
+		fcn_00545e80(((Rec*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].owner, -1, buf, 0, 0x5fb, *(int*) (h + 1), -1, 0, "");
 	}
 	fcn_0051af00(buf, 0x1662, *(unsigned short*) (h + 0x27), h);
 	for (i = 0; i < 0x300; i++) {
-		if ((g_7f4ca0[i].type == 7 || g_7f4ca0[i].type == 6) && *(int*) (e + 4) != g_7f4ca0[i].owner
-		    && g_7f4ca0[i].owner != g_7f4ca0[*(unsigned short*) (h + 0x27)].owner) {
-			fcn_00545d40(g_7f4ca0[i].owner, -1, buf, 0, 0x5fd, "");
+		if ((((Rec*)g_7f4ca0)[i].type == 7 || ((Rec*)g_7f4ca0)[i].type == 6) && *(int*) (e + 4) != ((Rec*)g_7f4ca0)[i].owner
+		    && ((Rec*)g_7f4ca0)[i].owner != ((Rec*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].owner) {
+			fcn_00545d40(((Rec*)g_7f4ca0)[i].owner, -1, buf, 0, 0x5fd, "");
 		}
 	}
 	if (e[2] == 6) {

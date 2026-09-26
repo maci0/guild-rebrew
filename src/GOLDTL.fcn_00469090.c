@@ -22,7 +22,7 @@ typedef struct Slot0469090 {
 } Slot0469090;
 // SIZE 0x2f4
 
-extern Slot0469090* g_1015ea0;
+extern char* g_1015ea0;
 extern int g_1040494;
 
 void __cdecl fcn_00469c40(int x, int y, int slot);
@@ -34,7 +34,7 @@ void __cdecl fcn_00469090(int slot)
 	int x;
 	int y;
 
-	s = &g_1015ea0[slot];
+	s = &((Slot0469090*)g_1015ea0)[slot];
 	if (s->used != 0) {
 		r = s->link;
 		if (r != 0) {

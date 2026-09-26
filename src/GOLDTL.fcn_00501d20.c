@@ -1,5 +1,5 @@
 extern char g_85ab90[];
-extern int g_773d78;
+extern char* g_773d78;
 extern unsigned char g_773d75;
 extern unsigned char* g_868050;
 extern char* g_99ec10;
@@ -35,8 +35,8 @@ void __cdecl fcn_00501d20(int season)
 	ids[6] = 0x2db;
 	ids[7] = 0;
 
-	g_773d78 = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
-	if (g_773d78 == 0) {
+	(*(int*)&g_773d78) = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
+	if ((*(int*)&g_773d78) == 0) {
 		return;
 	}
 
@@ -71,7 +71,7 @@ void __cdecl fcn_00501d20(int season)
 	}
 
 	for (i = 0; i < 0x55; i++) {
-		result = fcn_00502cd0(*(int*) ((char*) g_773d78 + 0x5d), 1, 0, *(unsigned short*) (slots + i * 0x80 + 0x3c));
+		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&g_773d78) + 0x5d), 1, 0, *(unsigned short*) (slots + i * 0x80 + 0x3c));
 		if (result != 0) {
 			result = fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
 			if (*(int*) (slots + i * 0x80 + 4) != 0) {
@@ -84,7 +84,7 @@ void __cdecl fcn_00501d20(int season)
 
 	for (i = 0; ids[i] != 0; i++) {
 		count = 0;
-		result = fcn_00502cd0(*(int*) ((char*) g_773d78 + 0x5d), 1, 0, ids[i]);
+		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&g_773d78) + 0x5d), 1, 0, ids[i]);
 		if (result != 0) {
 			r2 = fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
 			if (r2 != 0) {

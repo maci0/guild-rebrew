@@ -8,7 +8,7 @@ typedef struct Slot {
 
 extern int g_1052de0;
 extern char* g_14a5320[];
-extern Slot g_1007bc0[4];
+extern char g_1007bc0[];
 extern int g_67fca0;
 
 int __cdecl sprintf(char* buf, const char* fmt, ...);
@@ -106,7 +106,7 @@ Slot* __cdecl fcn_004b24c0(int id)
 		return 0;
 	}
 	if (n > -1 && n < 4) {
-		slot = &g_1007bc0[n];
+		slot = &((Slot*)g_1007bc0)[n];
 		if (set) {
 			fcn_004b2020(n);
 		}

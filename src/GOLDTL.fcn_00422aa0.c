@@ -1,4 +1,4 @@
-extern char* g_6b7d78;
+extern int* g_6b7d78;
 extern int g_6b7d7c;
 // GLOBAL: GOLD 0x14607c0
 extern char g_14cb980[];
@@ -11,7 +11,7 @@ char* __cdecl fcn_00422aa0(void)
 {
 	char* p;
 
-	p = g_6b7d78;
+	p = ((char*)g_6b7d78);
 	if (g_6b7d7c == 0) {
 		return g_14cb980;
 	}

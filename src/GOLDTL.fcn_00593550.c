@@ -21,7 +21,7 @@ typedef struct
 extern int* g_774a34;
 extern int g_6a9b9c;
 extern int g_772514;
-extern Ctl* g_1015ea0;
+extern char* g_1015ea0;
 extern char* g_14a5774;
 extern char* g_14a579c;
 extern char* g_14b5d54;
@@ -56,17 +56,17 @@ void __cdecl fcn_00593550(void)
 			if (*(int*) (p + 4) != 0) {
 				strcat(buf, g_14b5d54);
 			}
-			fcn_0046fac0(g_1015ea0[h].x18 + 10, y, buf, g_772514);
-			y = y + g_1015ea0[h].x1c + 5;
+			fcn_0046fac0(((Ctl*)g_1015ea0)[h].x18 + 10, y, buf, g_772514);
+			y = y + ((Ctl*)g_1015ea0)[h].x1c + 5;
 			g_779cc0[i] = h;
 			if (p == g_779cb8) {
 				g_779ce0 = i;
 			} else {
-				g_1015ea0[h].x5c = 1;
-				g_1015ea0[h].x1d0 = 3;
+				((Ctl*)g_1015ea0)[h].x5c = 1;
+				((Ctl*)g_1015ea0)[h].x1d0 = 3;
 			}
 			if (g_779c40 == *(int*) p) {
-				g_1015ea0[h].x38 = 1;
+				((Ctl*)g_1015ea0)[h].x38 = 1;
 			}
 		}
 	}

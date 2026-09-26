@@ -1,4 +1,4 @@
-extern int g_8680b4[];
+extern char g_8680b4[];
 // FUNCTION: GOLD 0x00509ee0
 // SIZE: 64
 // FUNCTION: GOLDTL 0x0050d320
@@ -12,7 +12,7 @@ int __cdecl fcn_0050d320(char* entity, char season)
 	char* r;
 
 	result = 0;
-	r = fcn_00502cd0(*(int*) (entity + 0x178), 1, result, (int) (unsigned short) g_8680b4[season * 189]);
+	r = fcn_00502cd0(*(int*) (entity + 0x178), 1, result, (int) (unsigned short) ((int*)g_8680b4)[season * 189]);
 	if (r) {
 		result = *(int*) (r + 0xe);
 	}

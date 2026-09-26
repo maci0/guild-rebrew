@@ -18,7 +18,7 @@ typedef struct
 } Ent21c;
 // SIZE 0x21c
 
-extern Ent21c g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_004ff860(unsigned char* p)
 {
@@ -35,15 +35,15 @@ int __cdecl fcn_004ff860(unsigned char* p)
 	for (i = 0; i < 768; i++) {
 		found = 0;
 		cnt = 0;
-		if (g_7f4ca0[i].x4 != id && (g_7f4ca0[i].x2 == 6 || g_7f4ca0[i].x2 == 7)) {
-			if (g_7f4ca0[i].x5c == id || g_7f4ca0[i].x60 == id || g_7f4ca0[i].x64 == id) {
+		if (((Ent21c*)g_7f4ca0)[i].x4 != id && (((Ent21c*)g_7f4ca0)[i].x2 == 6 || ((Ent21c*)g_7f4ca0)[i].x2 == 7)) {
+			if (((Ent21c*)g_7f4ca0)[i].x5c == id || ((Ent21c*)g_7f4ca0)[i].x60 == id || ((Ent21c*)g_7f4ca0)[i].x64 == id) {
 				return 0;
 			}
 			for (j = 0; j < 5; j++) {
-				if (g_7f4ca0[i].x68[j] == id) {
+				if (((Ent21c*)g_7f4ca0)[i].x68[j] == id) {
 					found |= 1;
 					cnt++;
-				} else if (g_7f4ca0[i].x68[j] != -1) {
+				} else if (((Ent21c*)g_7f4ca0)[i].x68[j] != -1) {
 					cnt++;
 				}
 			}

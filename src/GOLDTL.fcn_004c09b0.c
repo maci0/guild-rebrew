@@ -8,7 +8,7 @@ struct fcn_004c09b0_node {
 // SIZE 0x10
 
 extern int g_772d2c;
-extern fcn_004c09b0_node* g_772d34;
+extern char* g_772d34;
 
 void __cdecl fcn_004c2d90(float, int);
 void __cdecl fcn_00426170(int*, int);
@@ -27,10 +27,10 @@ void __cdecl fcn_004c09b0(void)
 		g_772d2c = 0;
 		fcn_004c2d90(1.0f, 2000);
 	}
-	while (g_772d34 != 0) {
-		next = g_772d34->next;
-		fcn_00426170(g_772d34->f0, 0);
-		fcn_0041ddd0(g_772d34);
-		g_772d34 = next;
+	while ((*(fcn_004c09b0_node**)&g_772d34) != 0) {
+		next = (*(fcn_004c09b0_node**)&g_772d34)->next;
+		fcn_00426170((*(fcn_004c09b0_node**)&g_772d34)->f0, 0);
+		fcn_0041ddd0((*(fcn_004c09b0_node**)&g_772d34));
+		(*(fcn_004c09b0_node**)&g_772d34) = next;
 	}
 }

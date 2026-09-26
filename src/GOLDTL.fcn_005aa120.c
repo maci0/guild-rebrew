@@ -23,7 +23,7 @@ typedef struct {
 
 #define MAX5AA1(a, b) ((a) > (b) ? (a) : (b))
 
-extern Ent5aa1 g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
 extern float g_662910;
@@ -58,8 +58,8 @@ int __cdecl fcn_005aa120(int unused, char* p)
 	int t;
 	int w1;
 
-	cost = (int) MAX5AA1(fcn_0050dac0(g_7f4ca0[g_774970].id) * g_662910, g_664388);
-	if (fcn_00526010(&g_7f4ca0[g_774970], cost, g_773d75) == 0) {
+	cost = (int) MAX5AA1(fcn_0050dac0(((Ent5aa1*)g_7f4ca0)[g_774970].id) * g_662910, g_664388);
+	if (fcn_00526010(&((Ent5aa1*)g_7f4ca0)[g_774970], cost, g_773d75) == 0) {
 		return 0;
 	}
 	h = fcn_00470820(0, 0, g_6aaf58);
@@ -70,10 +70,10 @@ int __cdecl fcn_005aa120(int unused, char* p)
 	fcn_004727a0(h, 1);
 	fcn_00519190(0x165f);
 	fcn_004727a0(h, 2);
-	if (g_7f4ca0[g_774970].b9 == 0) {
-		name = g_7f4ca0[g_774970].b169 + 0x253;
+	if (((Ent5aa1*)g_7f4ca0)[g_774970].b9 == 0) {
+		name = ((Ent5aa1*)g_7f4ca0)[g_774970].b169 + 0x253;
 	} else {
-		name = g_7f4ca0[g_774970].b169 + 0x27b;
+		name = ((Ent5aa1*)g_7f4ca0)[g_774970].b169 + 0x27b;
 	}
 	t = fcn_00519190(0x1660, name, 5, cost, *(unsigned short*) (p + 0x27), p);
 	w1 = fcn_00472250(h, 2, t);
@@ -84,11 +84,11 @@ int __cdecl fcn_005aa120(int unused, char* p)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == w1 && fcn_00526010(&g_7f4ca0[g_774970], cost, g_773d75) != 0) {
+			if (g_67d370 == w1 && fcn_00526010(&((Ent5aa1*)g_7f4ca0)[g_774970], cost, g_773d75) != 0) {
 				req.kind = 2;
 				req.who = *(int*) (p + 1);
 				req.cost = cost;
-				fcn_004eb780(&g_7f4ca0[g_774970], &req);
+				fcn_004eb780(&((Ent5aa1*)g_7f4ca0)[g_774970], &req);
 				g_774654 = 2;
 			} else if (g_67d370 == w2) {
 				g_774654 = 1;

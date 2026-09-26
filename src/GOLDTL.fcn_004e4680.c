@@ -9,7 +9,7 @@ typedef struct
 } Obj;
 // SIZE 0xc98
 
-extern Obj* g_6b7e94;
+extern char* g_6b7e94;
 
 int __cdecl fcn_005373e0(int, int);
 
@@ -18,7 +18,7 @@ static __inline int any_pending(void)
 	int i;
 
 	for (i = 0; i < 128; i++) {
-		if (g_6b7e94[i].id != -1 && g_6b7e94[i].state == -2) {
+		if (((Obj*)g_6b7e94)[i].id != -1 && ((Obj*)g_6b7e94)[i].state == -2) {
 			return 1;
 		}
 	}

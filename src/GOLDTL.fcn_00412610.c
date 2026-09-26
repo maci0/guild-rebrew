@@ -5,8 +5,8 @@ struct cam_412610 {
 	int v[0x13];
 };
 
-extern struct cam_412610 g_14ce8c0;
-extern struct cam_412610 g_14cf900;
+extern short g_14ce8c0;
+extern int g_14cf900[];
 
 void __cdecl fcn_004124b0(void);
 
@@ -17,6 +17,6 @@ void __cdecl fcn_004124b0(void);
 void __cdecl fcn_00412610(void)
 {
 	fcn_00411fe0();
-	g_14ce8c0 = g_14cf900;
+	(*(struct cam_412610*)&g_14ce8c0) = (*(struct cam_412610*)g_14cf900);
 	fcn_004124b0();
 }

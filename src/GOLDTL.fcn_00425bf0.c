@@ -9,7 +9,7 @@ struct log_425bf0 {
 
 extern char* g_6b7e98;
 extern int g_6b7eb0;
-extern struct log_425bf0* g_14cb8f0;
+extern void* g_14cb8f0;
 
 // FUNCTION: GOLD 0x004273d0
 // SIZE: 416
@@ -41,8 +41,8 @@ void __cdecl fcn_00425bf0(char* s, unsigned int pos, const char* msg)
 		}
 		sprintf(buf, "%s", msg);
 	log:
-		strncpy(g_14cb8f0[g_6b7eb0].text, buf, 0x7f);
-		g_14cb8f0[g_6b7eb0].line = line;
+		strncpy(((struct log_425bf0*)g_14cb8f0)[g_6b7eb0].text, buf, 0x7f);
+		((struct log_425bf0*)g_14cb8f0)[g_6b7eb0].line = line;
 		g_6b7eb0++;
 		if (g_6b7eb0 > 0x1e) {
 			g_6b7eb0 = 0;
@@ -50,8 +50,8 @@ void __cdecl fcn_00425bf0(char* s, unsigned int pos, const char* msg)
 		sprintf(buf, "\"%s\" %s in Line: %i", g_6b7e98, msg, line);
 	} else {
 		sprintf(buf, "%s", msg);
-		strncpy(g_14cb8f0[g_6b7eb0].text, buf, 0x7f);
-		g_14cb8f0[g_6b7eb0].line = 0;
+		strncpy(((struct log_425bf0*)g_14cb8f0)[g_6b7eb0].text, buf, 0x7f);
+		((struct log_425bf0*)g_14cb8f0)[g_6b7eb0].line = 0;
 		g_6b7eb0++;
 		if (g_6b7eb0 > 0x1e) {
 			g_6b7eb0 = 0;

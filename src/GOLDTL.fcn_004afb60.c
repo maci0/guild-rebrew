@@ -17,7 +17,7 @@ typedef struct {
 	char pad3[0xb2];
 } Rec21c;
 
-extern Rec21c g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 Rec21c* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
@@ -97,16 +97,16 @@ int __cdecl fcn_004afb60(int mode, int* pairs, int idx, char* text, void* out)
 		goto send;
 	}
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].cls >= 0x13 && g_7f4ca0[i].cls <= 0x45
-		    && (g_7f4ca0[i].cls < 0x1f || g_7f4ca0[i].cls > 0x21)
-		    && (g_7f4ca0[i].cls < 0x28 || g_7f4ca0[i].cls > 0x2d)
-		    && (g_7f4ca0[i].cls < 0x34 || g_7f4ca0[i].cls > 0x39)
+		if (((Rec21c*)g_7f4ca0)[i].cls >= 0x13 && ((Rec21c*)g_7f4ca0)[i].cls <= 0x45
+		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x1f || ((Rec21c*)g_7f4ca0)[i].cls > 0x21)
+		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x28 || ((Rec21c*)g_7f4ca0)[i].cls > 0x2d)
+		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x34 || ((Rec21c*)g_7f4ca0)[i].cls > 0x39)
 		    && fcn_004ae130((unsigned short) i) != 0) {
 			v = fcn_0050dac0((unsigned short) i);
-			if (v > score[4] && fcn_004ae0f0(g_7f4ca0[i].key) != 0) {
+			if (v > score[4] && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {
 				score[4] = v;
 				found |= 1;
-				ids[4] = g_7f4ca0[i].id;
+				ids[4] = ((Rec21c*)g_7f4ca0)[i].id;
 				for (k = 3; k >= 0; k--) {
 					if (score[k + 1] > score[k]) {
 						t = score[k];
@@ -123,7 +123,7 @@ int __cdecl fcn_004afb60(int mode, int* pairs, int idx, char* text, void* out)
 	if (found == 0) {
 		return 0;
 	}
-	r = &g_7f4ca0[ids[(unsigned short) fcn_0042e410(5)]];
+	r = &((Rec21c*)g_7f4ca0)[ids[(unsigned short) fcn_0042e410(5)]];
 	if (mode == 0) {
 		pairs[idx * 2 + 1] = r->key;
 	}

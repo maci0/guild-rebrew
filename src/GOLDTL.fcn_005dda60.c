@@ -16,7 +16,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[0x300];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_0042e410(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
@@ -40,9 +40,9 @@ int __cdecl fcn_005dda60(Ent* ent, int* arg)
 	r = fcn_0042e410(0x300) & 0xffff;
 	n = 0x300;
 	while (n != 0) {
-		if (r != ent->id && g_7f4ca0[r].id != 0xffff && g_7f4ca0[r].kind < 10 &&
-		    g_7f4ca0[r].side != ent->side && g_7f4ca0[r].ready != 0) {
-			picks[0] = &g_7f4ca0[r];
+		if (r != ent->id && ((Ent*)g_7f4ca0)[r].id != 0xffff && ((Ent*)g_7f4ca0)[r].kind < 10 &&
+		    ((Ent*)g_7f4ca0)[r].side != ent->side && ((Ent*)g_7f4ca0)[r].ready != 0) {
+			picks[0] = &((Ent*)g_7f4ca0)[r];
 			break;
 		}
 		n--;
@@ -51,9 +51,9 @@ int __cdecl fcn_005dda60(Ent* ent, int* arg)
 	r = fcn_0042e410(0x300) & 0xffff;
 	m = 0x300;
 	while (m != 0) {
-		if (r != ent->id && r != picks[0]->id && g_7f4ca0[r].id != 0xffff &&
-		    g_7f4ca0[r].kind < 10 && g_7f4ca0[r].side != ent->side) {
-			picks[1] = &g_7f4ca0[r];
+		if (r != ent->id && r != picks[0]->id && ((Ent*)g_7f4ca0)[r].id != 0xffff &&
+		    ((Ent*)g_7f4ca0)[r].kind < 10 && ((Ent*)g_7f4ca0)[r].side != ent->side) {
+			picks[1] = &((Ent*)g_7f4ca0)[r];
 			break;
 		}
 		m--;
@@ -62,9 +62,9 @@ int __cdecl fcn_005dda60(Ent* ent, int* arg)
 	r = fcn_0042e410(0x300) & 0xffff;
 	m = 0x300;
 	while (m != 0) {
-		if (r != ent->id && r != picks[0]->id && r != picks[1]->id && g_7f4ca0[r].id != 0xffff &&
-		    g_7f4ca0[r].kind < 10 && g_7f4ca0[r].side != ent->side) {
-			picks[2] = &g_7f4ca0[r];
+		if (r != ent->id && r != picks[0]->id && r != picks[1]->id && ((Ent*)g_7f4ca0)[r].id != 0xffff &&
+		    ((Ent*)g_7f4ca0)[r].kind < 10 && ((Ent*)g_7f4ca0)[r].side != ent->side) {
+			picks[2] = &((Ent*)g_7f4ca0)[r];
 			break;
 		}
 		m--;

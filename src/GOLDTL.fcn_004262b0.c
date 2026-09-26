@@ -17,7 +17,7 @@ typedef struct {
 	int count;
 } Script;
 
-extern Script* g_6b7eb8;
+extern char* g_6b7eb8;
 
 Def* __cdecl fcn_004262b0(Script* s, const char* name)
 {
@@ -27,7 +27,7 @@ Def* __cdecl fcn_004262b0(Script* s, const char* name)
 	int i;
 	int n;
 
-	o = g_6b7eb8;
+	o = ((Script*)g_6b7eb8);
 	if (o == 0) {
 		o = s;
 	}

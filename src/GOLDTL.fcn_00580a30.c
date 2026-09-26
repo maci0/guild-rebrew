@@ -11,7 +11,7 @@ extern char* g_774a10;
 extern int g_6a81dc[5];
 extern pagefn g_6a81f0[5];
 extern int* g_665f08;
-extern volatile int g_6b7fac;
+extern int g_6b7fac;
 
 char* __cdecl fcn_00580d50(void);
 char* __cdecl fcn_00584010(void);
@@ -65,8 +65,8 @@ fail:
 	}
 	g_665f08[0] = 1;
 	g_665f08[1] = 1;
-	g_665f08[2] = g_6b7fac;
-	g_665f08[3] = g_6b7fac;
+	g_665f08[2] = (*(volatile int*)&g_6b7fac);
+	g_665f08[3] = (*(volatile int*)&g_6b7fac);
 	g_665f08[4] = 0;
 	g_665f08[5] = 0;
 	g_665f08[6] = (int) g_774a10;

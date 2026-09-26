@@ -4,10 +4,10 @@ typedef struct Kind {
 } Kind;
 // SIZE 0x24d
 
-extern Kind* g_868050;
+extern unsigned char* g_868050;
 extern unsigned char* g_90e094;
 extern char g_7f4ca0[];
-extern char g_773d75;
+extern unsigned char g_773d75;
 
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -46,7 +46,7 @@ int __cdecl fcn_004ab910(int a1, unsigned short* a2, int a3, char* a4)
 	e = g_90e094;
 	for (i = 0; i < 0x100; i++, e += 0xa9) {
 		if (e[0] != 0 && *(unsigned short*) (e + 0x27) == *a2
-		    && g_868050[e[0]].type == 0x1f
+		    && ((Kind*)g_868050)[e[0]].type == 0x1f
 		    && fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x28a) != 0) {
 			if (best == 0) {
 				best = e;
@@ -66,7 +66,7 @@ int __cdecl fcn_004ab910(int a1, unsigned short* a2, int a3, char* a4)
 	if (fcn_004a5340(a2, 1, &lim, 0.0f, fcn_0042e410(0x20) + 25.0f, &id) == 0)
 		return 0;
 	p = g_7f4ca0 + id * 540;
-	money = (int) (fcn_0050b810(*(int*) ((char*) a2 + 0x178), g_773d75) * 0.25f);
+	money = (int) (fcn_0050b810(*(int*) ((char*) a2 + 0x178), (*(char*)&g_773d75)) * 0.25f);
 	fcn_0050dac0(*a2);
 	for (n = best_v - 1; n > 0; n--) {
 		if (money > (n > 1 ? n : 1) * 32000)

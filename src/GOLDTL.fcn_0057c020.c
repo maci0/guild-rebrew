@@ -22,7 +22,7 @@ struct house {
 	char pad167[0xb5];
 };
 
-extern struct house g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_004e8b40(int, rec18*);
 unsigned short __cdecl fcn_0042e410(int);
@@ -48,8 +48,8 @@ void __cdecl fcn_0057c020(struct house* a, struct house* b)
 	} else {
 		d = -20 - fcn_0042e410(0x10);
 		for (i = 0; i < 768; i++) {
-			if (i != b->id && (g_7f4ca0[i].type == 6 || g_7f4ca0[i].type == 7 || g_7f4ca0[i].type == 5)) {
-				fcn_004c54c0(b->owner, g_7f4ca0[i].owner, d, 1);
+			if (i != b->id && (((struct house*)g_7f4ca0)[i].type == 6 || ((struct house*)g_7f4ca0)[i].type == 7 || ((struct house*)g_7f4ca0)[i].type == 5)) {
+				fcn_004c54c0(b->owner, ((struct house*)g_7f4ca0)[i].owner, d, 1);
 			}
 		}
 	}

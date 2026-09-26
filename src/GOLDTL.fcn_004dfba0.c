@@ -1,4 +1,4 @@
-extern int* g_772f24;
+extern unsigned short* g_772f24;
 
 char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_00493640(int*);
@@ -47,7 +47,7 @@ void __cdecl fcn_004dfba0(char* a1, int* ev)
 		break;
 	case 4:
 		if (*(int*) (a1 + 0x10) == ev[7] || *(int*) (a1 + 0x10) == ev[8] || *(int*) (a1 + 0x10) == ev[9]) {
-			e = fcn_00508e40(g_772f24[1]);
+			e = fcn_00508e40(((int*)g_772f24)[1]);
 			*(int*) (a1 + 0x94) = fcn_00493a30(e, ev);
 		}
 		break;

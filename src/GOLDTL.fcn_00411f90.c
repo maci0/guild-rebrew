@@ -21,17 +21,17 @@ typedef struct {
 } T411f90;
 
 extern int g_6b5c94;
-extern T411f90 g_14ce920;
+extern int g_14ce920[];
 
 void __cdecl fcn_00411f90(void)
 {
 	T411f90 t;
 
 	if (g_6b5c94 != 0) {
-		t = g_14ce920;
-		g_14ce920.f0c = g_14ce920.f20;
-		g_14ce920.f18 = g_14ce920.f2c;
-		g_14ce920.f2c = t.f18;
-		g_14ce920.f20 = t.f0c;
+		t = (*(T411f90*)g_14ce920);
+		(*(T411f90*)g_14ce920).f0c = (*(T411f90*)g_14ce920).f20;
+		(*(T411f90*)g_14ce920).f18 = (*(T411f90*)g_14ce920).f2c;
+		(*(T411f90*)g_14ce920).f2c = t.f18;
+		(*(T411f90*)g_14ce920).f20 = t.f0c;
 	}
 }

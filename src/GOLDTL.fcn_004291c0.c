@@ -27,7 +27,7 @@ struct stack_4291c0 {
 };
 
 extern int g_6b7ec4;
-extern int g_6b7eb8;
+extern char* g_6b7eb8;
 
 void __cdecl fcn_00426680(int lex, struct tok_4291c0* t);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
@@ -63,7 +63,7 @@ int __cdecl fcn_004291c0(char* g)
 	do {
 		fcn_00426680(*(int*) (g + 0x118), &t);
 		if (t.type == 1) {
-			g_6b7eb8 = 0;
+			(*(int*)&g_6b7eb8) = 0;
 			if (t.u.num == 9) {
 				s = *(struct stack_4291c0**) (g + 0xc28);
 				if (s->count > 0) {
@@ -80,7 +80,7 @@ int __cdecl fcn_004291c0(char* g)
 				return 0;
 			}
 		} else if (t.type == 10) {
-			g_6b7eb8 = 0;
+			(*(int*)&g_6b7eb8) = 0;
 			switch (t.u.num) {
 			case 1:
 				fcn_00427070();
@@ -121,7 +121,7 @@ int __cdecl fcn_004291c0(char* g)
 		} else if (t.type == 8) {
 			fcn_00425fe0(g, t.u.num);
 		} else if (t.type == 11) {
-			g_6b7eb8 = t.u.num;
+			(*(int*)&g_6b7eb8) = t.u.num;
 			(*(int*) (g + 0x118))++;
 		} else if (t.type != 12) {
 			sprintf(msg, "Unknown symbol : '%s'", t.u.text);

@@ -23,7 +23,7 @@ extern int g_776c90;
 extern int g_777ca0;
 extern int g_778b00;
 extern char g_1016198[];
-extern Font5c89* g_1015ea0;
+extern char* g_1015ea0;
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
 extern int g_772514;
@@ -89,7 +89,7 @@ int __cdecl fcn_005c89a0(void)
 				g_777d00[n].btn = fcn_0046f740(0, n * 0x3e, *e + 0x427, g_772514);
 				fcn_0051af00(buf, g_6ac870, *e * 14 + 0x48e, e + 5);
 				g_777d00[n].name_text = fcn_0046fac0(0x40, n * 0x3e + 8, buf, g_772514);
-				g_1015ea0[g_777d00[n].name_text].w = 0xa0;
+				((Font5c89*)g_1015ea0)[g_777d00[n].name_text].w = 0xa0;
 				fcn_00472900(g_777d00[n].name_text, 0x54);
 				fcn_0051af00(buf, g_68be7c, *(int*) (m + 0x1b8));
 				g_777d00[n].value_text = fcn_0046fac0(0x180, n * 0x3e + 0x14, buf, g_772514);

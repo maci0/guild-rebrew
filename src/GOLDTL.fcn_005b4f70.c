@@ -21,7 +21,7 @@ typedef struct {
 	unsigned char* data;
 } Map5b4f;
 
-extern char* g_67a370;
+extern int g_67a370;
 extern int g_7e46ac;
 extern int g_100f1dc;
 extern int g_67d370;
@@ -118,7 +118,7 @@ void __cdecl fcn_005b4f70(void)
 			}
 		}
 		fcn_004727a0(d, 1);
-		m = *(Map5b4f**) (g_67a370 + 0xb0);
+		m = *(Map5b4f**) (((char*)g_67a370) + 0xb0);
 		if (m != 0 && frame % 128 == 0) {
 			for (i = 0; i < 256; i++) {
 				pal[i].r = (unsigned char) i;

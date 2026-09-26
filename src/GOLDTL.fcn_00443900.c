@@ -25,13 +25,13 @@ typedef struct
 } fcn_00443900_Ctx;
 // SIZE 0x8
 
-extern fcn_00443900_Scene* g_67a370;
-extern fcn_00443900_Obj* g_1043254;
-extern fcn_00443900_Obj* g_1042538;
-extern void* g_1040c74;
-extern void* g_1040958;
-extern fcn_00443900_Obj g_1042340;
-extern fcn_00443900_Obj g_1043060;
+extern int g_67a370;
+extern char* g_1043254;
+extern char* g_1042538;
+extern char* g_1040c74;
+extern char* g_1040958;
+extern char g_1042340[];
+extern char g_1043060;
 
 void __cdecl fcn_004379a0(fcn_00443900_Scene* s, fcn_00443900_Obj* o, int mask, void* fn, void* ctx);
 void __cdecl fcn_004438b0(void);
@@ -50,13 +50,13 @@ char __cdecl fcn_00443900(fcn_00443900_Obj* o, fcn_00443900_Scene* from, fcn_004
 	if (from == to) {
 		return 1;
 	}
-	if (from == g_67a370) {
-		from->head = g_1043254;
-		from->tail = g_1042538;
-		from->fa4 = g_1040c74;
-		from->fa8 = g_1040958;
+	if (from == ((fcn_00443900_Scene*)g_67a370)) {
+		from->head = (*(fcn_00443900_Obj**)&g_1043254);
+		from->tail = (*(fcn_00443900_Obj**)&g_1042538);
+		from->fa4 = (*(void**)&g_1040c74);
+		from->fa8 = (*(void**)&g_1040958);
 	}
-	for (p = from->head; p != &g_1042340; p = p->next) {
+	for (p = from->head; p != &(*(fcn_00443900_Obj*)g_1042340); p = p->next) {
 		if (p == o) {
 			break;
 		}
@@ -64,43 +64,43 @@ char __cdecl fcn_00443900(fcn_00443900_Obj* o, fcn_00443900_Scene* from, fcn_004
 	if (p != o) {
 		return 0;
 	}
-	if (o->prev == &g_1043060) {
+	if (o->prev == &(*(fcn_00443900_Obj*)&g_1043060)) {
 		from->head = o->next;
 	} else {
 		o->prev->next = o->next;
 	}
-	if (o->next == &g_1042340) {
+	if (o->next == &(*(fcn_00443900_Obj*)g_1042340)) {
 		from->tail = o->prev;
 	} else {
 		o->next->prev = o->prev;
 	}
-	if (from == g_67a370) {
-		g_1043254 = from->head;
-		g_1042538 = from->tail;
-		g_1040c74 = from->fa4;
-		g_1040958 = from->fa8;
+	if (from == ((fcn_00443900_Scene*)g_67a370)) {
+		(*(fcn_00443900_Obj**)&g_1043254) = from->head;
+		(*(fcn_00443900_Obj**)&g_1042538) = from->tail;
+		(*(void**)&g_1040c74) = from->fa4;
+		(*(void**)&g_1040958) = from->fa8;
 	}
 	ctx.from = from;
 	ctx.to = to;
 	fcn_004379a0(from, o, 0x3ff, (void*) fcn_004438b0, &ctx);
-	if (to == g_67a370) {
-		to->head = g_1043254;
-		to->tail = g_1042538;
-		to->fa4 = g_1040c74;
-		to->fa8 = g_1040958;
+	if (to == ((fcn_00443900_Scene*)g_67a370)) {
+		to->head = (*(fcn_00443900_Obj**)&g_1043254);
+		to->tail = (*(fcn_00443900_Obj**)&g_1042538);
+		to->fa4 = (*(void**)&g_1040c74);
+		to->fa8 = (*(void**)&g_1040958);
 	} else if (to->head == 0) {
 		fcn_00443030(to);
 	}
-	o->next = &g_1042340;
+	o->next = &(*(fcn_00443900_Obj*)g_1042340);
 	p = to->tail;
 	p->next = o;
 	o->prev = p;
 	to->tail = o;
-	if (to == g_67a370) {
-		g_1043254 = to->head;
-		g_1042538 = to->tail;
-		g_1040c74 = to->fa4;
-		g_1040958 = to->fa8;
+	if (to == ((fcn_00443900_Scene*)g_67a370)) {
+		(*(fcn_00443900_Obj**)&g_1043254) = to->head;
+		(*(fcn_00443900_Obj**)&g_1042538) = to->tail;
+		(*(void**)&g_1040c74) = to->fa4;
+		(*(void**)&g_1040958) = to->fa8;
 	}
 	return 1;
 }

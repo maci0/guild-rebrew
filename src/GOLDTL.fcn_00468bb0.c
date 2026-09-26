@@ -7,7 +7,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Slot* g_1015ea0;
+extern char* g_1015ea0;
 
 // FUNCTION: GOLDTL 0x468bb0
 // SIZE: 128
@@ -17,7 +17,7 @@ void __cdecl fcn_00468bb0(int slot, int n, ...)
 	int i;
 	va_list ap;
 
-	p = &g_1015ea0[slot];
+	p = &((Slot*)g_1015ea0)[slot];
 	p->text[0] = 0;
 	va_start(ap, n);
 	for (i = 0; i < n; i++) {

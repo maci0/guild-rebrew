@@ -2,7 +2,7 @@
 // SIZE: 250
 
 extern char g_6a4120[];
-extern char g_6a3440;
+extern signed char g_6a3440;
 extern int g_14ce8e0;
 extern char g_14cf950;
 extern int g_774654;
@@ -30,7 +30,7 @@ int __cdecl fcn_0053e8a0(void)
 	h = fcn_00470820(0, 0, g_6a4120);
 	fcn_00471b60(h);
 	fcn_00519190(0x1adf);
-	if (g_6a3440 != -1) {
+	if ((*(char*)&g_6a3440) != -1) {
 		fcn_00519190(0x1ae0);
 	}
 	s = fcn_00519190(0x1ae1);

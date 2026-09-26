@@ -8,7 +8,7 @@ struct log_428230 {
 };
 
 extern int g_6b7eb0;
-extern struct log_428230* g_14cb8f0;
+extern void* g_14cb8f0;
 
 int __cdecl fcn_00427f00(char*);
 void __cdecl fcn_00429d30(char*);
@@ -44,8 +44,8 @@ int __cdecl fcn_00428230(char* script)
 	*(int*) (script + 0xc84) = 0;
 	*(char**) (script + 0xc28) = script + 0x128;
 	sprintf(msg, "Run script: %s", script);
-	strncpy(g_14cb8f0[g_6b7eb0].text, msg, 0x7f);
-	g_14cb8f0[g_6b7eb0].shown = 0;
+	strncpy(((struct log_428230*)g_14cb8f0)[g_6b7eb0].text, msg, 0x7f);
+	((struct log_428230*)g_14cb8f0)[g_6b7eb0].shown = 0;
 	g_6b7eb0++;
 	if (g_6b7eb0 > 0x1e) {
 		g_6b7eb0 = 0;

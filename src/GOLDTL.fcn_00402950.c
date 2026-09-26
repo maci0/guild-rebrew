@@ -17,7 +17,7 @@ typedef struct {
 	unsigned char x;
 } V402950;
 
-extern E402950 g_1551f40[16];
+extern int g_1551f40[0x30];
 extern int g_6b5c24;
 void __cdecl fcn_00402a00(char* e, int on);
 void __cdecl fcn_0043a3f0(char* o, int v, V402950 c);
@@ -29,16 +29,16 @@ void __cdecl fcn_00402950(char* e, char b)
 	char* o;
 
 	for (i = 0; i < 16; i++) {
-		if (g_1551f40[i].e == 0) {
+		if (((E402950*)g_1551f40)[i].e == 0) {
 			break;
 		}
 	}
 	if (i >= 16) {
 		return;
 	}
-	g_1551f40[i].e = e;
-	g_1551f40[i].b = b;
-	g_1551f40[i].c = g_6b5c24 - 1;
+	((E402950*)g_1551f40)[i].e = e;
+	((E402950*)g_1551f40)[i].b = b;
+	((E402950*)g_1551f40)[i].c = g_6b5c24 - 1;
 	fcn_00402a00(e, 1);
 	*(int*) &v = 0;
 	v.r = 0xff;

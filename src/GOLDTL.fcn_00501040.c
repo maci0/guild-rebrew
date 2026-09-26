@@ -7,7 +7,7 @@
 extern unsigned int g_868118;
 extern unsigned int g_85ab84;
 extern unsigned int g_6965d8[0xaa0];
-extern char* g_868050;
+extern unsigned char* g_868050;
 extern unsigned char* g_90e094;
 extern char* g_99ec10;
 extern unsigned short* g_868054;
@@ -50,8 +50,8 @@ int __cdecl fcn_00501040(char* dir)
 		src += 0xbd;
 		dst += 0xaa4;
 	} while ((int) src < (int) &g_868118 + 0xbd * 4 * 5);
-	g_868050 = fcn_0041db70(0xca78, "f3_gm:lpGebaeudePROT");
-	if (g_868050 == 0) {
+	(*(char**)&g_868050) = fcn_0041db70(0xca78, "f3_gm:lpGebaeudePROT");
+	if ((*(char**)&g_868050) == 0) {
 		return -1;
 	}
 	g_90e094 = fcn_0041db70(0xa900, "f3_gm:lpGebaeudeINST");
@@ -64,7 +64,7 @@ int __cdecl fcn_00501040(char* dir)
 	if (f == 0) {
 		return -3;
 	}
-	fread(g_868050, 0x24d, 0x58, f);
+	fread((*(char**)&g_868050), 0x24d, 0x58, f);
 	fclose(f);
 	g_99ec10 = fcn_0041db70(0xb9dc, "f3_gm:lpObjektePROT");
 	if (g_99ec10 == 0) {
@@ -88,7 +88,7 @@ int __cdecl fcn_00501040(char* dir)
 	do {
 		count = 0;
 		left = 0x40;
-		slot = (unsigned short*) (g_868050 + row * 0x24d + 0x23);
+		slot = (unsigned short*) ((*(char**)&g_868050) + row * 0x24d + 0x23);
 		do {
 			entry = *slot;
 			if (entry != 0xffff) {
@@ -104,7 +104,7 @@ int __cdecl fcn_00501040(char* dir)
 			slot++;
 			left--;
 		} while (left != 0);
-		total = g_868050 + row * 0x24d + 0x21;
+		total = (*(char**)&g_868050) + row * 0x24d + 0x21;
 		row++;
 		*total += (char) count;
 	} while (row < 0x58);

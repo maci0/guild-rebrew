@@ -22,7 +22,7 @@ typedef struct Ware {
 extern Seg g_100b0c0[];
 extern int g_100b0a8;
 extern unsigned char g_773d75;
-extern int g_773d78;
+extern char* g_773d78;
 
 int __cdecl fcn_0050dfd0(char* pkt, int item_id);
 int __cdecl gm_GetMsgField(char* pkt, Ware* q);
@@ -59,7 +59,7 @@ void __cdecl fcn_0047e0e0(int a1, char* pkt)
 					w = fcn_00502cd0(*(int*) (town + 0x14), 1, 0, g_100b0c0[i].id);
 					if (w != 0) {
 						if (gm_GetMsgField(town, w) - (int) ((unsigned int) (fcn_0050dfd0(town, w->id) * w->unit) >> 2) >= 5) {
-							g_100b0c0[i].owner = g_773d78;
+							g_100b0c0[i].owner = (*(int*)&g_773d78);
 						}
 					}
 				}

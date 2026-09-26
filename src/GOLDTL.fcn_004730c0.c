@@ -12,7 +12,7 @@ typedef struct Sprite {
 } Sprite;
 // SIZE 0x64
 
-extern Sprite* g_1015ec0[0x20];
+extern char* g_1015ec0[];
 extern int g_6b7fb8;
 extern char s_67d8b0[];
 
@@ -27,7 +27,7 @@ Sprite* __cdecl fcn_004730c0(int a1, int a2, int a3, int a4, int a5, int a6, int
 	Sprite* p;
 
 	for (i = 0; i < 0x20; i++) {
-		if (g_1015ec0[i] == 0) {
+		if (((Sprite**)g_1015ec0)[i] == 0) {
 			break;
 		}
 	}
@@ -44,6 +44,6 @@ Sprite* __cdecl fcn_004730c0(int a1, int a2, int a3, int a4, int a5, int a6, int
 	p->tex = fcn_0047ce00(a5, 0);
 	p->t0 = g_6b7fb8;
 	p->t1 = g_6b7fb8;
-	g_1015ec0[i] = p;
+	((Sprite**)g_1015ec0)[i] = p;
 	return p;
 }

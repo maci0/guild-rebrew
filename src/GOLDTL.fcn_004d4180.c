@@ -14,8 +14,8 @@ typedef struct {
 } ent2c;
 // SIZE 0x2c
 
-extern unsigned char* g_772eb4;
-extern char* g_772e9c;
+extern char* g_772eb4;
+extern unsigned short* g_772e9c;
 extern char g_9b0e20[];
 
 char* __cdecl fcn_004cef30(int);
@@ -32,16 +32,16 @@ void __cdecl fcn_004d4180(char* x)
 	ent2c* d;
 
 	rec = 0;
-	for (i = 0; i < g_772eb4[0x30]; i++) {
-		if (*(int*) (g_772eb4 + 0x34 + i * 4) == *(int*) (x + 4)) {
+	for (i = 0; i < ((unsigned char*)g_772eb4)[0x30]; i++) {
+		if (*(int*) (((unsigned char*)g_772eb4) + 0x34 + i * 4) == *(int*) (x + 4)) {
 			rec = g_9b0e20 + i * 0x35c;
 			break;
 		}
 	}
-	if (x == g_772e9c)
-		base = (int*) (g_772eb4 + 0xc0);
+	if (x == ((char*)g_772e9c))
+		base = (int*) (((unsigned char*)g_772eb4) + 0xc0);
 	else
-		base = (int*) (g_772eb4 + 0x80);
+		base = (int*) (((unsigned char*)g_772eb4) + 0x80);
 	for (i = 0; i < 16; i++) {
 		if (base[i] == -1)
 			continue;

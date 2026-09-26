@@ -33,22 +33,22 @@ typedef struct Game {
 	int player;
 } Game;
 
-extern volatile unsigned int g_6b7fb8;
+extern int g_6b7fb8;
 extern int g_772efc;
 extern int g_772e94;
 extern int g_772ea4;
 extern int g_772ea8;
 extern int g_774654;
-extern int g_7747b0;
+extern unsigned char g_7747b0;
 extern char g_14cf950;
-extern Unit* g_7e4260[0x20];
+extern char* g_7e4260[32];
 extern int g_67a370;
-extern char g_6b5c60;
+extern char g_6b5c60[];
 extern char* g_14a97d4;
-extern Party* g_772eb4;
-extern Game* g_772f24;
+extern char* g_772eb4;
+extern unsigned short* g_772f24;
 extern int g_68b79c;
-extern Slot g_9b0e20[];
+extern char g_9b0e20[];
 
 unsigned short __cdecl fcn_0042e410(int n);
 void __cdecl fcn_004d1a80(void);
@@ -72,7 +72,7 @@ void __cdecl fcn_004d9f20(int arg)
 	int id;
 	int i;
 
-	last = g_6b7fb8 - 0x15e;
+	last = (*(volatile unsigned int*)&g_6b7fb8) - 0x15e;
 	r = fcn_0042e410(100);
 	fcn_004d1a80();
 	fcn_004d7e50(arg);
@@ -87,14 +87,14 @@ void __cdecl fcn_004d9f20(int arg)
 		if (g_772ea8 != 0) {
 			break;
 		}
-		if ((g_7747b0 & 4) == 0 && g_14cf950 == 0x39) {
+		if (((*(int*)&g_7747b0) & 4) == 0 && g_14cf950 == 0x39) {
 			g_772e94 = g_772e94 == 0;
 			for (i = 0; i < 0x20; i++) {
-				if (g_7e4260[i] != 0 && g_7e4260[i]->obj->owner == g_67a370) {
-					fcn_00405540(g_7e4260[i]->obj, g_772e94);
+				if (((Unit**)g_7e4260)[i] != 0 && ((Unit**)g_7e4260)[i]->obj->owner == g_67a370) {
+					fcn_00405540(((Unit**)g_7e4260)[i]->obj, g_772e94);
 				}
 			}
-			fcn_00533a40(&g_6b5c60);
+			fcn_00533a40(&(*(char*)g_6b5c60));
 		}
 		if (g_772e94 != 0) {
 			fcn_00533a40(g_14a97d4);
@@ -104,9 +104,9 @@ void __cdecl fcn_004d9f20(int arg)
 		if (g_772ea4 != 0 || g_772ea8 != 0) {
 			g_774654 = 1;
 		} else if (g_772e94 == 0) {
-			if (g_6b7fb8 > last + 0x1a4) {
-				for (i = 0; i < g_772eb4->count; i++) {
-					id = g_772eb4->ids[i];
+			if ((*(volatile unsigned int*)&g_6b7fb8) > last + 0x1a4) {
+				for (i = 0; i < ((Party*)g_772eb4)->count; i++) {
+					id = ((Party*)g_772eb4)->ids[i];
 					if (id != -1) {
 						e = fcn_00508e40(id);
 						if (e != 0 && e->kind != 6 && e->kind != 7) {
@@ -114,13 +114,13 @@ void __cdecl fcn_004d9f20(int arg)
 						}
 					}
 				}
-				last = g_6b7fb8;
+				last = (*(volatile unsigned int*)&g_6b7fb8);
 			}
-			if (g_772f24->player == g_68b79c) {
-				fcn_004d4f30(g_772eb4);
-				for (i = 0; i < g_772eb4->count; i++) {
-					if (g_772eb4->ids[i] != -1) {
-						fcn_004d8d00(&g_9b0e20[i]);
+			if (((Game*)g_772f24)->player == g_68b79c) {
+				fcn_004d4f30(((Party*)g_772eb4));
+				for (i = 0; i < ((Party*)g_772eb4)->count; i++) {
+					if (((Party*)g_772eb4)->ids[i] != -1) {
+						fcn_004d8d00(&((Slot*)g_9b0e20)[i]);
 					}
 				}
 			}

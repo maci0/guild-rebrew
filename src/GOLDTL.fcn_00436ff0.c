@@ -16,7 +16,7 @@ struct unk_436ff0 {
 
 extern unsigned long g_14ce728;
 extern int g_6b7fdc;
-extern unsigned int g_6b7ff8;
+extern unsigned char g_6b7ff8;
 extern void* g_6b5de0;
 
 char* __cdecl fcn_0041db70(int size, const char* tag);
@@ -56,7 +56,7 @@ void __cdecl fcn_00436ff0(char* name, int format, struct unk_436ff0** tex, unsig
 		}
 		fcn_00430580(f);
 	}
-	fcn_006129e7(g_6b5de0, buf, read, width >> (unsigned char) g_6b7ff8, height >> (unsigned char) g_6b7ff8, mips, 0,
+	fcn_006129e7(g_6b5de0, buf, read, width >> (unsigned char) (*(unsigned int*)&g_6b7ff8), height >> (unsigned char) (*(unsigned int*)&g_6b7ff8), mips, 0,
 	    format, 1, 0xffffffff, 0xffffffff, 0xff000000, 0, 0, tex);
 	fcn_0041ddd0(buf);
 }

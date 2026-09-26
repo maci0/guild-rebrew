@@ -41,7 +41,7 @@ typedef struct {
 	int map;
 } Game4cf450;
 
-extern Game4cf450* g_67a370;
+extern int g_67a370;
 extern Slot4cf450 g_9b9ec0[32];
 
 char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
@@ -64,7 +64,7 @@ Slot4cf450* __cdecl fcn_004cf450(float* pos, int x, int y)
 	d[0] = 0.0f;
 	d[1] = 0.0f;
 	d[2] = 0.0f;
-	map = g_67a370->map;
+	map = ((Game4cf450*)g_67a370)->map;
 	for (i = 0; i < 32; i++) {
 		if (g_9b9ec0[i].obj == 0) {
 			goto found;

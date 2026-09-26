@@ -27,9 +27,9 @@ typedef struct {
 	char pad2ec[8];
 } Variant;
 
-extern Variant g_868060[];
+extern char g_868060[];
 extern char* g_aed32c;
-extern char g_773d75;
+extern unsigned char g_773d75;
 
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 Shop* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -58,7 +58,7 @@ void __cdecl fcn_00512910(void)
 		if (w != 0) {
 			count = 0;
 			for (i = 0; i < 16; i++) {
-				if (g_868060[kind].buy[i] != 0) {
+				if (((Variant*)g_868060)[kind].buy[i] != 0) {
 					count++;
 				}
 			}
@@ -67,11 +67,11 @@ void __cdecl fcn_00512910(void)
 			count = 4;
 			fcn_004c4570(4, 1, (char*) w - g_aed32c + 0xe, &count);
 			fcn_004c5360();
-			p = g_868060[kind].buy;
+			p = ((Variant*)g_868060)[kind].buy;
 			for (i = 16; i != 0; i--) {
 				if (*p != 0) {
-					fcn_004c51f0(w->id, -1, *p, 1, g_773d75, 0);
-					fcn_004c51f0(-1, w->id, *p, 1, g_773d75, 0);
+					fcn_004c51f0(w->id, -1, *p, 1, (*(char*)&g_773d75), 0);
+					fcn_004c51f0(-1, w->id, *p, 1, (*(char*)&g_773d75), 0);
 				}
 				p++;
 			}
@@ -80,7 +80,7 @@ void __cdecl fcn_00512910(void)
 		if (w != 0) {
 			count = 0;
 			for (i = 0; i < 16; i++) {
-				if (g_868060[kind].sell[i] != 0) {
+				if (((Variant*)g_868060)[kind].sell[i] != 0) {
 					count++;
 				}
 			}
@@ -89,11 +89,11 @@ void __cdecl fcn_00512910(void)
 			count = 4;
 			fcn_004c4570(4, 1, (char*) w - g_aed32c + 0xe, &count);
 			fcn_004c5360();
-			p = g_868060[kind].sell;
+			p = ((Variant*)g_868060)[kind].sell;
 			for (i = 16; i != 0; i--) {
 				if (*p != 0) {
-					fcn_004c51f0(w->id, -1, *p, 1, g_773d75, 0);
-					fcn_004c51f0(-1, w->id, *p, 1, g_773d75, 0);
+					fcn_004c51f0(w->id, -1, *p, 1, (*(char*)&g_773d75), 0);
+					fcn_004c51f0(-1, w->id, *p, 1, (*(char*)&g_773d75), 0);
 				}
 				p++;
 			}

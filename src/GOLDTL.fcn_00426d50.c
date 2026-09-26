@@ -29,7 +29,7 @@ typedef struct {
 } Script;
 // SIZE 0xc98
 
-extern Script *g_6b7e94;
+extern char* g_6b7e94;
 extern int g_6b7fdc;
 extern int g_14cb430;
 extern int g_14c93a0[0x800];
@@ -64,7 +64,7 @@ Script *__cdecl fcn_00426d50(char *name)
 		return 0;
 	}
 	for (i = 0; i < 0x80; i++) {
-		if (g_6b7e94[i].name[0] == 0) {
+		if (((Script*)g_6b7e94)[i].name[0] == 0) {
 			break;
 		}
 	}
@@ -74,7 +74,7 @@ Script *__cdecl fcn_00426d50(char *name)
 		return 0;
 	}
 	g_14cb430 = i;
-	sc = &g_6b7e94[i];
+	sc = &((Script*)g_6b7e94)[i];
 	tmp = fcn_0041db70(0xfa01, "ect_LoadScript:tmp");
 	out = fcn_0041db70(0xfa01, "ect_LoadScript:output");
 	memset(out, 0, 0xfa01);

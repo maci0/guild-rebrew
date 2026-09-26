@@ -4,14 +4,14 @@
 // SIZE: 179
 
 extern int* g_665f08;
-extern volatile unsigned int g_6b7fac;
+extern int g_6b7fac;
 extern float g_665f10;
 
 void __cdecl fcn_00580560(void);
 void __cdecl fcn_005805e0(void);
 void __cdecl fcn_00472380(int, int, int, int, int);
 
-#define ELAPSED(t) (g_6b7fac - (t) ? g_6b7fac - (t) : 0)
+#define ELAPSED(t) ((*(volatile unsigned int*)&g_6b7fac) - (t) ? (*(volatile unsigned int*)&g_6b7fac) - (t) : 0)
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 void __cdecl fcn_00580610(void)

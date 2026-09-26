@@ -5,7 +5,7 @@
 
 #include <math.h>
 
-extern char* g_67a370;
+extern int g_67a370;
 extern int g_772f10;
 extern char* g_9b46c0[];
 
@@ -28,7 +28,7 @@ char* __cdecl fcn_004d3600(char* e)
 	res = 0;
 	best = 1000000.0f;
 	g_772f10 = 0;
-	fcn_004379a0(g_67a370, 0, 0x40, fcn_004d35b0, e);
+	fcn_004379a0(((char*)g_67a370), 0, 0x40, fcn_004d35b0, e);
 	c = *(char**) (*(char**) (e + 0x184) + 0x34);
 	fcn_00455350(c, c + 0x4c, pos);
 	for (i = 0; i < g_772f10; i++) {

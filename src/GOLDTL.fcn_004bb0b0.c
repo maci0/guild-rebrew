@@ -8,7 +8,7 @@ typedef struct Rec {
 // SIZE 0x41
 #pragma pack(pop)
 
-extern Rec* g_99ec10;
+extern char* g_99ec10;
 extern unsigned char g_773d75;
 
 unsigned short __cdecl fcn_0042e410(int);
@@ -44,7 +44,7 @@ int __cdecl fcn_004bb0b0(int* a1)
 	}
 	e = fcn_00502cd0(*(int*) (p + 0x178), 1, 5);
 	while (e != 0 && n < 6) {
-		if (g_99ec10[*e].type != 9) {
+		if (((Rec*)g_99ec10)[*e].type != 9) {
 			found[n] = e;
 			n++;
 		}

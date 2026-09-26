@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char* g_67a370;
+extern int g_67a370;
 
 unsigned short __cdecl fcn_0042e410(unsigned short);
 int __cdecl fcn_00406340(char*, char*, int);
@@ -33,7 +33,7 @@ void __cdecl fcn_004bc6b0(char** a1)
 			fcn_00406340(a1[0], "bewegung/fressen", fcn_0042e410(3) + 1);
 		return;
 	}
-	g = *(int*) (g_67a370 + 0xb0);
+	g = *(int*) (((char*)g_67a370) + 0xb0);
 	n = fcn_0042e410(3) + 1;
 	n = fcn_004bc8a0((int*) (a1 + 4), n, pts[0]);
 	if (n <= 0)

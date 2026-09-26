@@ -4,13 +4,13 @@
 // SIZE: 44
 
 extern int* g_665f08;
-extern char g_774a14[];
+extern int g_774a14;
 
 int __cdecl fcn_005809a0(int a1)
 {
 	int* p;
 
-	if (*(int*) g_774a14 == 0) {
+	if (*(int*) ((char*)&g_774a14) == 0) {
 		return -4;
 	}
 	p = g_665f08;

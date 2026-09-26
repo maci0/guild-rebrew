@@ -16,8 +16,8 @@ typedef struct {
 } Row5a66;
 // SIZE 0x2f4
 
-extern Ent5a66 g_7f4ca0[];
-extern Row5a66 g_868060[];
+extern char g_7f4ca0[];
+extern char g_868060[];
 extern char g_6aacdc[];
 extern int g_14ce8e0;
 extern int g_100f1dc;
@@ -48,7 +48,7 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 	h = fcn_00470820(0, 0, g_6aacdc);
 	fcn_00471b60(h);
 	fcn_004727a0(h, 1);
-	fcn_00519190(0x1909, w, n * 2 + 0x9a8, &g_868060[k], k);
+	fcn_00519190(0x1909, w, n * 2 + 0x9a8, &((Row5a66*)g_868060)[k], k);
 	if (fcn_005373e0(fcn_005a66b0, 0x677c7) != 0) {
 		do {
 			if (g_14ce8e0 != 0 || g_100f1dc == 1) {
@@ -67,7 +67,7 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 				msg[4] = 0x27;
 				*(int*) (msg + 0xc) = -1;
 				msg[0x36] = 1;
-				*(int*) (msg + 8) = g_7f4ca0[*(unsigned short*) (who + 0x27)].f4;
+				*(int*) (msg + 8) = ((Ent5a66*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].f4;
 				*(int*) (msg + 0x58) = *(int*) (who + 1);
 				msg[0x5c] = k;
 				*(int*) (msg + 0x60) = (int) (a - fa);

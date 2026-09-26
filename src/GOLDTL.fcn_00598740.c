@@ -4,7 +4,7 @@
 // SIZE: 123
 
 extern int g_6b8010;
-extern float g_662d40[];
+extern float g_662d40[3];
 
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00455140(int, float*, float*);

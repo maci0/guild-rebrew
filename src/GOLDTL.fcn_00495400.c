@@ -28,8 +28,8 @@ struct Plan {
 	char pad2c[0x68];
 };
 
-extern Actor g_7f4ca0[];
-extern Plan g_1008540[73];
+extern char g_7f4ca0[];
+extern char g_1008540[];
 
 int __cdecl fcn_00495150(int);
 void __cdecl fcn_00495120(int);
@@ -60,7 +60,7 @@ int __cdecl fcn_00495400(int who, int idx, int arg, Pos *out1, Pos *out2)
 	res2 = 0;
 	a1.valid = 0;
 	b1.valid = 0;
-	me = &g_7f4ca0[idx];
+	me = &((Actor*)g_7f4ca0)[idx];
 	a2.valid = 0;
 	b2.valid = 0;
 	if (fcn_00495150(who) != 0) {
@@ -70,7 +70,7 @@ int __cdecl fcn_00495400(int who, int idx, int arg, Pos *out1, Pos *out2)
 		me->flags = 1;
 	}
 	for (i = 0; i < 73; i++) {
-		pl = &g_1008540[i];
+		pl = &((Plan*)g_1008540)[i];
 		if (pl->kind == 0 || pl->kind == me->kind || fcn_00495150(pl->kind) != 0) {
 			continue;
 		}

@@ -9,8 +9,8 @@ typedef struct Slot046f4c0 {
 } Slot046f4c0;
 // SIZE 0x2f4
 
-extern Slot046f4c0* g_1015ea0;
-extern Slot046f4c0** g_772540;
+extern char* g_1015ea0;
+extern void** g_772540;
 
 void __cdecl fcn_0046f4c0(int slot)
 {
@@ -20,16 +20,16 @@ void __cdecl fcn_0046f4c0(int slot)
 
 	free = -1;
 	i = 0x3ff;
-	s = &g_1015ea0[slot];
+	s = &((Slot046f4c0*)g_1015ea0)[slot];
 	do {
-		if (g_772540[i] == s) {
+		if (((Slot046f4c0**)g_772540)[i] == s) {
 			if (free != -1) {
-				g_772540[free] = g_772540[i];
-				memmove(&g_772540[i], &g_772540[i + 1], 0xff8 - i * 4);
+				((Slot046f4c0**)g_772540)[free] = ((Slot046f4c0**)g_772540)[i];
+				memmove(&((Slot046f4c0**)g_772540)[i], &((Slot046f4c0**)g_772540)[i + 1], 0xff8 - i * 4);
 			}
 			return;
 		}
-		if (g_772540[i] != 0 && free == -1) {
+		if (((Slot046f4c0**)g_772540)[i] != 0 && free == -1) {
 			free = i + 1;
 		}
 		i--;

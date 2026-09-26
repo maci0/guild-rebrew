@@ -11,7 +11,7 @@ struct s_7f4ca0 {
 	char pad3[0x67];
 };
 
-extern struct s_7f4ca0 g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 // FUNCTION: GOLD 0x0052c450
 // SIZE: 115
@@ -28,8 +28,8 @@ void __cdecl fcn_00531b80(void)
 	for (e = fcn_00502cd0(0, 2, 7, 4, 0x1d); e != 0; e = gm_NextEntityQueryMatch()) {
 		*(int*) (e + 0x20) = 0;
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].kind == 1 && g_7f4ca0[i].p != 0 &&
-			    *(int*) (g_7f4ca0[i].p + 1) == *(int*) (e + 0x1c) && (g_7f4ca0[i].flags & 1) != 0) {
+			if (((struct s_7f4ca0*)g_7f4ca0)[i].id != 0xffff && ((struct s_7f4ca0*)g_7f4ca0)[i].kind == 1 && ((struct s_7f4ca0*)g_7f4ca0)[i].p != 0 &&
+			    *(int*) (((struct s_7f4ca0*)g_7f4ca0)[i].p + 1) == *(int*) (e + 0x1c) && (((struct s_7f4ca0*)g_7f4ca0)[i].flags & 1) != 0) {
 				*(int*) (e + 0x20) |= 1;
 			}
 		}

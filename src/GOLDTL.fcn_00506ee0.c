@@ -7,7 +7,7 @@ typedef struct {
 } Rec506ee0;
 // SIZE 0x21c
 
-extern Rec506ee0 g_7f4ca0[];
+extern char g_7f4ca0[];
 
 // FUNCTION: GOLDTL 0x00506ee0
 // SIZE: 132
@@ -19,7 +19,7 @@ int __cdecl fcn_00506ee0(unsigned short id, int n, ...)
 	int i;
 
 	r = 0;
-	rec = g_7f4ca0[id];
+	rec = ((Rec506ee0*)g_7f4ca0)[id];
 	if (n <= -1) {
 		return r;
 	}

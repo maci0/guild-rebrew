@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x4b3aa0
 // SIZE: 132
 
-extern unsigned char g_77494c;
+extern int g_77494c;
 extern int g_14cbca0;
 extern int g_1007cd0;
 extern int g_14cbcb0;
@@ -19,7 +19,7 @@ void __cdecl fcn_004b3aa0(int a1)
 {
 	int buf[0x1f];
 
-	if ((g_77494c & 8) != 0 || g_14cbca0 == -1) {
+	if (((*(unsigned char*)&g_77494c) & 8) != 0 || g_14cbca0 == -1) {
 		buf[0] = GetTickCount();
 		fcn_004c5790(5, buf);
 	}

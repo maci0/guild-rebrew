@@ -51,8 +51,8 @@ struct Device {
 };
 
 extern int g_772608;
-extern VB* g_772614;
-extern Device* g_6b5de0;
+extern int g_772614;
+extern void* g_6b5de0;
 
 int __cdecl fcn_0047b8b0(int, int, int, int, Quad*);
 void __cdecl fcn_0047b9f0(Quad*, int);
@@ -80,22 +80,22 @@ void __cdecl fcn_0047c9c0(int a1, int a2, int a3, int a4, int tex, float alpha)
 	{
 		void* ptr;
 
-		if (g_772614->vtbl->Lock(g_772614, 0, 0x18, &ptr, 0x2000) < 0) {
+		if (((VB*)g_772614)->vtbl->Lock(((VB*)g_772614), 0, 0x18, &ptr, 0x2000) < 0) {
 			return;
 		}
 		*(Verts*) ptr = q.vs;
 	}
-	g_772614->vtbl->Unlock(g_772614);
+	((VB*)g_772614)->vtbl->Unlock(((VB*)g_772614));
 	fcn_0047c4e0();
 	fcn_004372d0(0xfe, 0, 0, 1, 1);
-	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 0);
-	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x88, 0);
-	if (g_6b5de0->vtbl->BeginScene(g_6b5de0) >= 0) {
-		g_6b5de0->vtbl->SetTexture(g_6b5de0, 0, tex);
-		g_6b5de0->vtbl->DrawPrimitive(g_6b5de0, 4, 0, 2);
-		g_6b5de0->vtbl->EndScene(g_6b5de0);
+	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 7, 0);
+	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x88, 0);
+	if (((Device*)g_6b5de0)->vtbl->BeginScene(((Device*)g_6b5de0)) >= 0) {
+		((Device*)g_6b5de0)->vtbl->SetTexture(((Device*)g_6b5de0), 0, tex);
+		((Device*)g_6b5de0)->vtbl->DrawPrimitive(((Device*)g_6b5de0), 4, 0, 2);
+		((Device*)g_6b5de0)->vtbl->EndScene(((Device*)g_6b5de0));
 	}
 	g_772608++;
-	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 1);
-	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x88, 1);
+	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 7, 1);
+	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x88, 1);
 }

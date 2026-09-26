@@ -23,8 +23,8 @@ extern int g_67d370;
 extern int g_6a2590;
 extern int g_6a2594;
 extern char g_7746f4;
-extern int g_7746c8;
-extern int g_7746c4;
+extern unsigned char* g_7746c8;
+extern char* g_7746c4;
 extern unsigned short g_774970;
 
 unsigned char* __cdecl fcn_005bdc30(int, Query*, int, int, int);
@@ -54,7 +54,7 @@ void __cdecl fcn_00599f90(void)
 	if (e == 0 || g_7746f4 != 0) {
 		return;
 	}
-	if (g_7746c8 != 0) {
+	if ((*(int*)&g_7746c8) != 0) {
 		if (gm_CheckEntityType(e) && *e == 0x47) {
 			fcn_00526920(e, 0xfd, "");
 			return;
@@ -68,7 +68,7 @@ void __cdecl fcn_00599f90(void)
 		}
 		return;
 	}
-	if (g_7746c8 == 0 && g_7746c4 == 0) {
+	if ((*(int*)&g_7746c8) == 0 && (*(int*)&g_7746c4) == 0) {
 		fcn_0052cbb0(e);
 		return;
 	}

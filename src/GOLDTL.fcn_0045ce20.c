@@ -16,7 +16,7 @@ typedef struct Tex {
 	int pad6c;
 } Tex;
 
-extern Tex* g_104049c;
+extern char* g_104049c;
 extern unsigned int g_10404a0;
 
 void __cdecl fcn_0045ce20(Tex* t)
@@ -26,8 +26,8 @@ void __cdecl fcn_0045ce20(Tex* t)
 	unsigned int i;
 
 	if ((t->flags & 2) == 0 && t->name[0] != '*') {
-		idx = t - g_104049c;
-		list = g_104049c;
+		idx = t - ((Tex*)g_104049c);
+		list = ((Tex*)g_104049c);
 		for (i = 0; i < g_10404a0; i++) {
 			if (list[i].refs > 0 && (list[i].flags & 2) != 0 && list[i].parent == idx) {
 				list[i].x50 = t->x50;

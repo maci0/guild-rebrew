@@ -12,7 +12,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern int g_772514;
 extern int g_100f1dc;
@@ -65,9 +65,9 @@ void __cdecl fcn_0058acb0(int unused, char* p)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (g_67d370 == ok) {
-				if (fcn_00525f60(&g_7f4ca0[g_774970], b) == 1) {
+				if (fcn_00525f60(&((struct house*)g_7f4ca0)[g_774970], b) == 1) {
 					v = 0;
-					fcn_005100f0(g_7f4ca0[g_774970].handle, -b);
+					fcn_005100f0(((struct house*)g_7f4ca0)[g_774970].handle, -b);
 					fcn_004c4510(p, *(int*) (p + 2));
 					fcn_004c4570(4, 1, 0x1c, &v);
 					fcn_004c4570(4, 1, 0x20, &v);

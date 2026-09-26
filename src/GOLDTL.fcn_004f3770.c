@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x004f3770
 // SIZE: 144
 
-extern unsigned short* g_773da8;
+extern char* g_773da8;
 extern float g_662914;
 extern float g_6628a8;
 
@@ -20,7 +20,7 @@ int __cdecl fcn_004f3770(char* p)
 		return 0;
 	}
 	o = *(char**) (p + 0x16c);
-	if (o != 0 && *(unsigned short*) (o + 0x27) != 0xffff && *(unsigned short*) (o + 0x27) != *g_773da8) {
+	if (o != 0 && *(unsigned short*) (o + 0x27) != 0xffff && *(unsigned short*) (o + 0x27) != *((unsigned short*)g_773da8)) {
 		d = *(float*) (p + 0x14) - fcn_004f3800(o) * g_662914;
 		w = *(float*) (p + 0x1c) - d;
 		fcn_004c5480(*(int*) (p + 4), 0x1c, -d);

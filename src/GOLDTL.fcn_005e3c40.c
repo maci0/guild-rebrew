@@ -11,8 +11,8 @@ typedef struct {
 
 extern int g_1040490;
 extern int g_1040494;
-extern Rect g_1040480;
-extern Rect g_6a3764;
+extern int g_1040480;
+extern int g_6a3764;
 extern int g_774954;
 extern int g_774670;
 extern char g_67d67c[];
@@ -39,7 +39,7 @@ void __cdecl fcn_005e3c40(void)
 		g_774670 = 6;
 		return;
 	}
-	g_1040480 = g_6a3764;
+	(*(Rect*)&g_1040480) = (*(Rect*)&g_6a3764);
 	fcn_0046b4f0();
 	fcn_005270c0(1);
 	fcn_00528fd0();

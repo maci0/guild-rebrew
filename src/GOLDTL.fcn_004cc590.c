@@ -9,10 +9,10 @@ struct rec_4cc590 {
 };
 // SIZE 0x21c
 
-extern struct rec_4cc590 g_7f4ca0[];
+extern char g_7f4ca0[];
 extern int g_14cbca0;
 extern int g_699364;
-extern int g_68a9d0;
+extern char g_68a9d0[];
 extern int(__stdcall* g_662318)(void);
 
 void __cdecl fcn_0042e4c0(int);
@@ -57,20 +57,20 @@ int __cdecl fcn_004cc590(unsigned char* a1, char* a2)
 	if (id == 0xffff)
 		return 1;
 	if (*(int*) (a1 + 0x1b) != -1 && (r = gm_FindRecordById(*(int*) (a1 + 0x1b))) != 0)
-		fcn_004fe470(g_7f4ca0[id].id, *(int*) (e + 1), *(int*) (r + 2), 0, 0);
+		fcn_004fe470(((struct rec_4cc590*)g_7f4ca0)[id].id, *(int*) (e + 1), *(int*) (r + 2), 0, 0);
 	else
-		fcn_004fe470(g_7f4ca0[id].id, *(int*) (e + 1), -1, 0, 0);
-	g_7f4ca0[id].owner = 0;
-	g_7f4ca0[id].kind = 0xd;
+		fcn_004fe470(((struct rec_4cc590*)g_7f4ca0)[id].id, *(int*) (e + 1), -1, 0, 0);
+	((struct rec_4cc590*)g_7f4ca0)[id].owner = 0;
+	((struct rec_4cc590*)g_7f4ca0)[id].kind = 0xd;
 	if (a1[0x21] != 0) {
-		fcn_00502fe0(g_7f4ca0[id].id, a1[0x21], 1);
-		fcn_004ce9e0(&g_7f4ca0[id]);
+		fcn_00502fe0(((struct rec_4cc590*)g_7f4ca0)[id].id, a1[0x21], 1);
+		fcn_004ce9e0(&((struct rec_4cc590*)g_7f4ca0)[id]);
 	}
-	g_68a9d0 = g_7f4ca0[id].id;
+	(*(int*)g_68a9d0) = ((struct rec_4cc590*)g_7f4ca0)[id].id;
 	if (a2 != 0) {
 		a2[0] = 1;
 		a2[1] = 1;
-		*(struct rec_4cc590**) (a2 + 6) = &g_7f4ca0[id];
+		*(struct rec_4cc590**) (a2 + 6) = &((struct rec_4cc590*)g_7f4ca0)[id];
 	}
 	return 0;
 }

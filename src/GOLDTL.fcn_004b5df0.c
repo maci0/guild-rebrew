@@ -30,9 +30,9 @@ typedef struct Req {
 } Req;
 // SIZE 0x7c
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
-extern Job g_10069a0[128];
+extern char g_10069a0[];
 extern int g_67d370;
 extern int g_100f1dc;
 extern int g_774654;
@@ -81,12 +81,12 @@ void __cdecl fcn_004b5df0(int flags)
 	s = 0;
 	done = 0;
 	cancel = 0;
-	ent = &g_7f4ca0[g_774970];
+	ent = &((Ent*)g_7f4ca0)[g_774970];
 	for (i = 0; i < 128; i++) {
-		if (g_10069a0[i].op != 0 && g_10069a0[i].id == ent->x4) {
-			s = fcn_004b3c50(g_10069a0[i].op);
+		if (((Job*)g_10069a0)[i].op != 0 && ((Job*)g_10069a0)[i].id == ent->x4) {
+			s = fcn_004b3c50(((Job*)g_10069a0)[i].op);
 			level = s->level + 1;
-			memset(&g_10069a0[i], 0, sizeof(Job));
+			memset(&((Job*)g_10069a0)[i], 0, sizeof(Job));
 			break;
 		}
 	}

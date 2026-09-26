@@ -13,7 +13,7 @@ struct host_57eba0 {
 	struct cb_57eba0* cb;
 };
 
-extern struct host_57eba0* g_665f08;
+extern int* g_665f08;
 
 // FUNCTION: GOLD 0x576600
 // SIZE: 125
@@ -27,18 +27,18 @@ int __cdecl fcn_0057eba0(int a, int b, int c, int d)
 	if (g_774a14 == 0) {
 		return 1;
 	}
-	if (g_665f08->cb == 0) {
+	if (((struct host_57eba0*)g_665f08)->cb == 0) {
 		return 1;
 	}
 	if (g_6b7fc0 != 0) {
 		return 0;
 	}
-	if (g_665f08->cb->fn == 0) {
+	if (((struct host_57eba0*)g_665f08)->cb->fn == 0) {
 		return 1;
 	}
 	buf[0] = a;
 	buf[1] = b;
 	buf[2] = c;
 	buf[3] = d;
-	return g_665f08->cb->fn(buf);
+	return ((struct host_57eba0*)g_665f08)->cb->fn(buf);
 }

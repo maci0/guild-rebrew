@@ -13,7 +13,7 @@ typedef struct Spin {
 } Spin;
 // SIZE 0x130
 
-extern Spin* g_7725d0;
+extern int g_7725d0;
 extern int g_14ce8dc;
 extern int g_14ce8d0;
 extern int g_7725e8;
@@ -35,21 +35,21 @@ int __cdecl fcn_00474780(void)
 	int step;
 	Spin* p;
 
-	if (g_7725d0 == 0 || !(g_7725d0->flags & 2)) {
+	if ((*(Spin**)&g_7725d0) == 0 || !((*(Spin**)&g_7725d0)->flags & 2)) {
 		return 0;
 	}
-	if (g_14ce8dc != 0 && g_7725d0->value < g_7725d0->max) {
-		g_7725d0->value = g_7725d0->max;
+	if (g_14ce8dc != 0 && (*(Spin**)&g_7725d0)->value < (*(Spin**)&g_7725d0)->max) {
+		(*(Spin**)&g_7725d0)->value = (*(Spin**)&g_7725d0)->max;
 	}
-	if (g_14ce8d0 == 0 || g_7725d0->value == -1) {
+	if (g_14ce8d0 == 0 || (*(Spin**)&g_7725d0)->value == -1) {
 		return 0;
 	}
 	if (g_7725e8 == 0) {
-		step = fcn_004722c0(g_7725d0);
+		step = fcn_004722c0((*(Spin**)&g_7725d0));
 		g_7725e8 = 1;
 		g_100f1e0 = g_6b5c84;
 		g_100f1d8 = g_6772c0;
-		p = g_7725d0;
+		p = (*(Spin**)&g_7725d0);
 		g_7725b8 = p->value;
 		g_7725dc = g_14ce8c0;
 		g_7725e0 = g_14ce8c2;
@@ -59,6 +59,6 @@ int __cdecl fcn_00474780(void)
 		}
 		p->pos = (g_7725b8 - p->min) * 4 / step + g_7725e0;
 	}
-	fcn_00473f50(g_7725d0, g_7725b8, g_7725e0, g_14ce8c2);
+	fcn_00473f50((*(Spin**)&g_7725d0), g_7725b8, g_7725e0, g_14ce8c2);
 	return 1;
 }

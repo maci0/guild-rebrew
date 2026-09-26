@@ -21,7 +21,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Slot* g_1015ea0;
+extern char* g_1015ea0;
 
 // FUNCTION: GOLDTL 0x471f80
 // SIZE: 105
@@ -30,7 +30,7 @@ int __cdecl fcn_00471f80(int slot)
 	Slot* s;
 	char* d;
 
-	s = &g_1015ea0[slot];
+	s = &((Slot*)g_1015ea0)[slot];
 	if (s->type == 0x41) {
 		d = s->data;
 		if (*(int*) (d + 0x28) & 0x10) {

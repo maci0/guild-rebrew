@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x4228c0
 // SIZE: 76
 
-extern char* g_6b7d78;
+extern int* g_6b7d78;
 extern int g_6b7d7c;
 extern char g_14cb980[];
 
@@ -12,7 +12,7 @@ char* __cdecl fcn_004228c0(char* key)
 	char* p;
 	int i;
 
-	p = g_6b7d78;
+	p = ((char*)g_6b7d78);
 	if (g_6b7d7c == 0) {
 		return g_14cb980;
 	}

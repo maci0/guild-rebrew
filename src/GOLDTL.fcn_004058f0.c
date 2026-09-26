@@ -15,8 +15,8 @@ typedef struct {
 	Cell* cells;
 } Grid;
 
-extern Grid* g_1043370;
-extern char* g_67a370;
+extern char g_1043370[];
+extern int g_67a370;
 extern int g_14d1f40[];
 extern int g_1511f40[];
 
@@ -26,9 +26,9 @@ void __cdecl fcn_004058f0(Grid* m)
 	int i;
 	int j;
 
-	if (g_1043370 == m) {
+	if ((*(Grid**)g_1043370) == m) {
 		dst = g_14d1f40;
-	} else if (*(Grid**) (g_67a370 + 0xb0) == m) {
+	} else if (*(Grid**) (((char*)g_67a370) + 0xb0) == m) {
 		dst = g_1511f40;
 	} else {
 		return;

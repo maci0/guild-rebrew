@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-extern char* g_67a370;
+extern int g_67a370;
 
 void __cdecl fcn_0045b920(int, int, int, float*);
 
@@ -16,7 +16,7 @@ float __cdecl fcn_004cf070(int a, int b, int c, int d)
 	float dz;
 	int h;
 
-	h = *(int*) (g_67a370 + 0xb0);
+	h = *(int*) (((char*)g_67a370) + 0xb0);
 	fcn_0045b920(h, a, b, v1);
 	fcn_0045b920(h, c, d, v2);
 	dx = v1[0] - v2[0];

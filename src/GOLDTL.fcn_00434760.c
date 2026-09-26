@@ -1,4 +1,4 @@
-extern char g_1042320[];
+extern char* g_1042320;
 extern char g_1052a40[];
 extern unsigned int g_67a0d8;
 
@@ -44,7 +44,7 @@ void __cdecl fcn_00434760(char* a, char force)
 			return;
 		}
 		*(int*) (a + 0x14c) = 0;
-		for (e = *(char**) g_1042320; e != g_1052a40; e = *(char**) (e + 0x160)) {
+		for (e = *(char**) ((char*)&g_1042320); e != g_1052a40; e = *(char**) (e + 0x160)) {
 			if (*(int*) (e + 0x14c) == 0) {
 				n += fcn_004346f0(e);
 			}

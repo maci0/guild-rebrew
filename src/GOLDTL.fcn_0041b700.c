@@ -37,8 +37,8 @@ struct Device {
 };
 
 extern int g_6777ac;
-extern Device* g_6b5de0;
-extern Vb* g_6b5df4;
+extern void* g_6b5de0;
+extern void* g_6b5df4;
 void __cdecl fcn_0041d9e0(const char* msg);
 
 void __cdecl fcn_0041b700(void)
@@ -47,13 +47,13 @@ void __cdecl fcn_0041b700(void)
 		fcn_0041d9e0("dd_EndLines called w/o dd_BeginLines!");
 	}
 	if (g_6777ac >= 0) {
-		g_6b5df4->vtbl->Unlock(g_6b5df4);
-		if (g_6777ac > 0 && g_6b5de0->vtbl->BeginScene(g_6b5de0) >= 0) {
-			g_6b5de0->vtbl->SetVertexShader(g_6b5de0, 0x44);
-			g_6b5de0->vtbl->SetStreamSource(g_6b5de0, 0, g_6b5df4, 0x14);
-			g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 0);
-			g_6b5de0->vtbl->DrawPrimitive(g_6b5de0, 2, 0, g_6777ac / 2);
-			g_6b5de0->vtbl->EndScene(g_6b5de0);
+		((Vb*)g_6b5df4)->vtbl->Unlock(((Vb*)g_6b5df4));
+		if (g_6777ac > 0 && (*(Device**)&g_6b5de0)->vtbl->BeginScene((*(Device**)&g_6b5de0)) >= 0) {
+			(*(Device**)&g_6b5de0)->vtbl->SetVertexShader((*(Device**)&g_6b5de0), 0x44);
+			(*(Device**)&g_6b5de0)->vtbl->SetStreamSource((*(Device**)&g_6b5de0), 0, ((Vb*)g_6b5df4), 0x14);
+			(*(Device**)&g_6b5de0)->vtbl->SetRenderState((*(Device**)&g_6b5de0), 7, 0);
+			(*(Device**)&g_6b5de0)->vtbl->DrawPrimitive((*(Device**)&g_6b5de0), 2, 0, g_6777ac / 2);
+			(*(Device**)&g_6b5de0)->vtbl->EndScene((*(Device**)&g_6b5de0));
 		}
 	}
 	g_6777ac = -1;

@@ -4,7 +4,7 @@
 // SIZE: 212
 
 extern int g_6b8010;
-extern char* g_67a370;
+extern int g_67a370;
 extern int g_6b8058;
 extern int g_6b8300;
 extern char g_10432c0[];
@@ -29,7 +29,7 @@ int __cdecl fcn_00402610(char* obj)
 	r = *(int*) (p + 0xb0);
 	if (r == 0) {
 		x = g_6b8058;
-		if (p != g_67a370) {
+		if (p != (*(char**)&g_67a370)) {
 			x = *(int*) (p + 0x3d8);
 		}
 		if (*(p + 0x3d5) == 0 && x != 0) {
@@ -41,7 +41,7 @@ int __cdecl fcn_00402610(char* obj)
 			fcn_0045b700(g_6b8300, *(int*) (*(char**) (obj + 0x88) + 0xb4), 2);
 		p = *(char**) (obj + 0x88);
 		r = *(int*) (p + 0xb0);
-		if (p != g_10432c0 && g_67a370 == p && r != 0) {
+		if (p != g_10432c0 && (*(char**)&g_67a370) == p && r != 0) {
 			fcn_004058f0(r);
 		}
 		if (flags != 0) {

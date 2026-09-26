@@ -6,7 +6,7 @@ extern int g_7e46ac;
 extern int g_774a2c;
 extern char g_6a3448[];
 extern char g_6a9b68[];
-extern char* g_77250c;
+extern int g_77250c;
 extern char* g_14b5f14;
 
 void __cdecl fcn_00533a40(char*);
@@ -21,6 +21,6 @@ void __cdecl fcn_00592400(void)
 	fcn_00533a40(g_6b5c60);
 	fcn_005373e0(0, g_7e46ac);
 	fcn_0064d41a(buf, g_6a9b68, g_6a3448, g_774a2c++);
-	fcn_0060fa6b(buf, 0, *(int*) (g_77250c + 0x24), 0, 0);
+	fcn_0060fa6b(buf, 0, *(int*) (((char*)g_77250c) + 0x24), 0, 0);
 	fcn_00533a40(g_14b5f14);
 }

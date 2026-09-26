@@ -14,7 +14,7 @@ typedef struct
 // SIZE 0x21c
 
 extern unsigned short g_774970;
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 extern int g_7746a0;
 extern int g_14aa2f0;
 extern int g_14aa2f4;
@@ -62,7 +62,7 @@ void __cdecl fcn_005a9c50(int arg)
 			else {
 				e = 0;
 			}
-			if ((g_7f4ca0[g_774970].x1c8 & 0x4000) && g_7f4ca0[g_774970].xd == 1 && fcn_0057ec70(0x2000) == 1) {
+			if ((((Player*)g_7f4ca0)[g_774970].x1c8 & 0x4000) && ((Player*)g_7f4ca0)[g_774970].xd == 1 && fcn_0057ec70(0x2000) == 1) {
 				d = fcn_005338d0(s_6aaedc, g_14ad248, 0x16);
 			}
 			else {

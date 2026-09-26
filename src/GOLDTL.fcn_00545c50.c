@@ -9,7 +9,7 @@ struct ev_545c50 {
 	int h;
 };
 
-extern struct ev_545c50* g_7749e4;
+extern unsigned char** g_7749e4;
 
 // FUNCTION: GOLD 0x53df10
 // SIZE: 233
@@ -27,17 +27,17 @@ void __cdecl fcn_00545c50(struct ev_545c50* ne)
 	if (g_6a476c == -1) {
 		return;
 	}
-	if (g_7749e4 != 0) {
-		if (g_7749e4->s != -1) {
-			fcn_00472380(g_7749e4->s, 0);
+	if ((*(struct ev_545c50**)&g_7749e4) != 0) {
+		if ((*(struct ev_545c50**)&g_7749e4)->s != -1) {
+			fcn_00472380((*(struct ev_545c50**)&g_7749e4)->s, 0);
 		}
-		fcn_00471af0(g_7749e4->h, 0);
-		e = g_7749e4->e;
+		fcn_00471af0((*(struct ev_545c50**)&g_7749e4)->h, 0);
+		e = (*(struct ev_545c50**)&g_7749e4)->e;
 		if (e != 0 && ((e[0] == 0x11 && (e[0xf0] & 0x40) != 0) || e[0] == 0x87) &&
 		    (g_7747b0 & 4) == 0) {
 			g_6b7fc0 = 0;
 		}
-		g_7749e4 = 0;
+		(*(struct ev_545c50**)&g_7749e4) = 0;
 	}
 	if (ne != 0 && ne->h != -1) {
 		if (ne->s != -1) {
@@ -51,5 +51,5 @@ void __cdecl fcn_00545c50(struct ev_545c50* ne)
 			g_6b7fc0 = 1;
 		}
 	}
-	g_7749e4 = ne;
+	(*(struct ev_545c50**)&g_7749e4) = ne;
 }

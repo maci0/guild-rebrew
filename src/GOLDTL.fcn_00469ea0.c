@@ -14,7 +14,7 @@ typedef struct {
 	char p50[4];
 } Rec;
 
-extern Rec* g_772500;
+extern char* g_772500;
 extern signed char g_772510;
 
 int __cdecl fcn_00466190(int);
@@ -31,22 +31,22 @@ int __cdecl fcn_00469ea0(int a1, int a2, int idx, int a4)
 	r = 0;
 	if (idx <= g_772504) {
 		base = -1;
-		if ((g_772500[idx].type == 5 || g_772500[idx].type == 8) && g_772500[idx].x30 == 0) {
-			if (g_772500[g_772500[idx].link].x34 == 0) {
+		if ((((Rec*)g_772500)[idx].type == 5 || ((Rec*)g_772500)[idx].type == 8) && ((Rec*)g_772500)[idx].x30 == 0) {
+			if (((Rec*)g_772500)[((Rec*)g_772500)[idx].link].x34 == 0) {
 				r = fcn_00466190(idx);
 			}
 			base = idx;
-			idx = g_772500[idx].link;
-		} else if (g_772500[idx].x34 == 0) {
+			idx = ((Rec*)g_772500)[idx].link;
+		} else if (((Rec*)g_772500)[idx].x34 == 0) {
 			r = fcn_00466190(idx);
 		}
-		if (g_772500[idx].flags & 2) {
+		if (((Rec*)g_772500)[idx].flags & 2) {
 			idx += g_772510;
 		}
 		if (r == 0) {
-			r = g_772500[idx].x34;
+			r = ((Rec*)g_772500)[idx].x34;
 		}
-		switch ((base == -1) ? g_772500[idx].type : g_772500[base].type) {
+		switch ((base == -1) ? ((Rec*)g_772500)[idx].type : ((Rec*)g_772500)[base].type) {
 		case 5:
 		case 8:
 			if (base != -1) {

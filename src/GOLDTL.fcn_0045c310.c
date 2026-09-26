@@ -10,7 +10,7 @@ typedef struct Tex {
 	char pad[0x24];
 } Tex;
 
-extern Tex* g_104049c;
+extern char* g_104049c;
 extern unsigned int g_10404a0;
 
 void __cdecl fcn_0045c310(Tex* t, char all)
@@ -22,7 +22,7 @@ void __cdecl fcn_0045c310(Tex* t, char all)
 		return;
 	}
 	if (all != 0 && *(int*) ((char*) t + 0x5c) > 0 && ((char*) t)[0x5d] == 0 && t->id != -1) {
-		list = g_104049c;
+		list = ((Tex*)g_104049c);
 		for (i = 0; i < g_10404a0; i++) {
 			if (list[i].refs > 0 && list[i].id == t->id) {
 				list[i].refs++;

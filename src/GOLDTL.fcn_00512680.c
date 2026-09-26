@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-extern char g_773d75;
+extern unsigned char g_773d75;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
@@ -64,11 +64,11 @@ void __cdecl fcn_00512680(void)
 					continue;
 				}
 				if (*s == 0x1e) {
-					fcn_004c51f0(*(int*) (a + 2), -1, ids[i], 2, g_773d75, 0);
+					fcn_004c51f0(*(int*) (a + 2), -1, ids[i], 2, (*(char*)&g_773d75), 0);
 				} else {
-					fcn_004c51f0(*(int*) (a + 2), -1, ids[i], 2 - (i != 0), g_773d75, 0);
+					fcn_004c51f0(*(int*) (a + 2), -1, ids[i], 2 - (i != 0), (*(char*)&g_773d75), 0);
 					if (i == 0) {
-						fcn_004c51f0(*(int*) (b + 2), -1, ids[0], fcn_0042e410(0x14) + 0x14, g_773d75, 0);
+						fcn_004c51f0(*(int*) (b + 2), -1, ids[0], fcn_0042e410(0x14) + 0x14, (*(char*)&g_773d75), 0);
 					}
 				}
 				switch (ids[i]) {
@@ -102,7 +102,7 @@ void __cdecl fcn_00512680(void)
 				default:
 					continue;
 				}
-				fcn_004c51f0(*(int*) (a + 2), -1, v, 2 - (i != 0), g_773d75, 0);
+				fcn_004c51f0(*(int*) (a + 2), -1, v, 2 - (i != 0), (*(char*)&g_773d75), 0);
 			}
 		}
 	} while ((kind = *++p) != 0);

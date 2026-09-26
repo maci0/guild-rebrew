@@ -4,7 +4,7 @@
 // SIZE: 184
 
 extern int g_67a370;
-extern char* g_6b8014;
+extern int g_6b8014;
 
 void __cdecl fcn_00438ac0(char*, int);
 void __cdecl fcn_00438af0(unsigned char);
@@ -27,7 +27,7 @@ void __cdecl fcn_00438cb0(char* o, int* v)
 		fcn_00437ac0(g_67a370, o, 0xc0, fcn_00456df0);
 		return;
 	}
-	if (o == g_6b8014) {
+	if (o == ((char*)g_6b8014)) {
 		fcn_00438af0(0);
 	}
 	n[0] = -p[0];

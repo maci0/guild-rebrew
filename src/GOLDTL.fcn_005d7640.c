@@ -20,7 +20,7 @@ typedef struct Cmd {
 	Ent* target;
 } Cmd;
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern char s_6a2f5c[];
 extern char s_6acd38[];
 extern int g_100f1dc;
@@ -83,11 +83,11 @@ int __cdecl fcn_005d7640(Ent* ent, Cmd* cmd)
 		if (left == 0) {
 			break;
 		}
-		if (g_7f4ca0[i].rank == want_a) {
-			pa = &g_7f4ca0[i];
+		if (((Ent*)g_7f4ca0)[i].rank == want_a) {
+			pa = &((Ent*)g_7f4ca0)[i];
 			left--;
-		} else if (g_7f4ca0[i].rank == want_b) {
-			pb = &g_7f4ca0[i];
+		} else if (((Ent*)g_7f4ca0)[i].rank == want_b) {
+			pb = &((Ent*)g_7f4ca0)[i];
 			left--;
 		}
 	}

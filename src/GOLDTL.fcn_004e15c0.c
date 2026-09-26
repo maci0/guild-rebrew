@@ -1,6 +1,6 @@
 extern char g_68ce48[];
 extern unsigned short* g_772f24;
-extern char g_6b5c60;
+extern char g_6b5c60[];
 extern int g_772514;
 extern char* g_77255c;
 extern int g_68bfbc;
@@ -30,7 +30,7 @@ void __cdecl fcn_004e15c0(char* a1)
 	fcn_004727a0(h, 0);
 	fcn_00519190(0x10de, *g_772f24);
 	a1[0x94] = 0;
-	a1[0x14] = g_6b5c60;
+	a1[0x14] = (*(char*)g_6b5c60);
 	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, g_772514);
 	fcn_004e6e20(w, g_68bfbc * 75, 1);
 	while (fcn_005373e0(fcn_004e15c0, g_68bfb8) != 0) {

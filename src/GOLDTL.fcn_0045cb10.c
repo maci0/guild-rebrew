@@ -24,7 +24,7 @@ typedef struct Tex {
 	char pad5e[0x12];
 } Tex;
 
-extern Tex* g_104049c;
+extern char* g_104049c;
 extern unsigned int g_10404a0;
 
 Tex* __cdecl fcn_0045cb10(int idx, char kind)
@@ -33,18 +33,18 @@ Tex* __cdecl fcn_0045cb10(int idx, char kind)
 	int id;
 
 	if (kind == 0) {
-		return &g_104049c[idx];
+		return &((Tex*)g_104049c)[idx];
 	}
-	id = g_104049c[idx].id;
-	if (g_104049c[idx].col.a < 0xff || g_104049c[idx].col.c0) {
-		for (p = &g_104049c[g_10404a0 - 1]; p >= g_104049c; p--) {
+	id = ((Tex*)g_104049c)[idx].id;
+	if (((Tex*)g_104049c)[idx].col.a < 0xff || ((Tex*)g_104049c)[idx].col.c0) {
+		for (p = &((Tex*)g_104049c)[g_10404a0 - 1]; p >= ((Tex*)g_104049c); p--) {
 			if (p->refs > 0 && p->id == id && p->kind == kind) {
 				return p;
 			}
 		}
 		return 0;
 	}
-	for (p = g_104049c; p <= &g_104049c[g_10404a0 - 1]; p++) {
+	for (p = ((Tex*)g_104049c); p <= &((Tex*)g_104049c)[g_10404a0 - 1]; p++) {
 		if (p->refs > 0 && p->id == id && p->kind == kind) {
 			return p;
 		}

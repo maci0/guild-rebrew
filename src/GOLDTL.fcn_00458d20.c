@@ -18,7 +18,7 @@ struct IDev {
 	IDevVtbl* v;
 };
 
-extern IDev* g_6b5de0;
+extern void* g_6b5de0;
 extern int g_1052bac;
 extern int g_1042a08;
 
@@ -30,10 +30,10 @@ void __cdecl fcn_00458d20(char* o)
 	for (i = 0; i < 4; i++) {
 		e = *(char**) (o + 0x1ec) + i * 0x9c + 0x1384;
 		if (*(char**) e != 0 && *(int*) (e + 0x90) > 0) {
-			g_6b5de0->v->SetStreamSource(g_6b5de0, 0, *(void**) (e + 0x80), 0x18);
-			g_6b5de0->v->SetIndices(g_6b5de0, *(void**) (e + 0x84), 0);
-			g_6b5de0->v->SetTexture(g_6b5de0, 0, *(void**) (*(char**) e + 0x50));
-			g_6b5de0->v->DrawIndexedPrimitive(g_6b5de0, 4, 0, *(unsigned int*) (e + 0x94), 0, *(unsigned int*) (e + 0x90));
+			((IDev*)g_6b5de0)->v->SetStreamSource(((IDev*)g_6b5de0), 0, *(void**) (e + 0x80), 0x18);
+			((IDev*)g_6b5de0)->v->SetIndices(((IDev*)g_6b5de0), *(void**) (e + 0x84), 0);
+			((IDev*)g_6b5de0)->v->SetTexture(((IDev*)g_6b5de0), 0, *(void**) (*(char**) e + 0x50));
+			((IDev*)g_6b5de0)->v->DrawIndexedPrimitive(((IDev*)g_6b5de0), 4, 0, *(unsigned int*) (e + 0x94), 0, *(unsigned int*) (e + 0x90));
 			g_1052bac += *(int*) (e + 0x94);
 			g_1042a08 += *(int*) (e + 0x90);
 		}

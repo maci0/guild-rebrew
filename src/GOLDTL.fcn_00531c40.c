@@ -1,5 +1,5 @@
-extern char* g_67a370;
-extern volatile int g_6b7fac;
+extern int g_67a370;
+extern int g_6b7fac;
 
 // SIZE 0x10c
 struct s_7e6060 {
@@ -29,7 +29,7 @@ void __cdecl fcn_00531c40(char* o, int a, char* name)
 	if (o == 0) {
 		return;
 	}
-	if (*(char**) (o + 0x88) != g_67a370) {
+	if (*(char**) (o + 0x88) != ((char*)g_67a370)) {
 		return;
 	}
 	for (i = 0; i < 64; i++) {
@@ -45,7 +45,7 @@ void __cdecl fcn_00531c40(char* o, int a, char* name)
 	if (k >= 64) {
 		int now;
 
-		now = g_6b7fac;
+		now = (*(volatile int*)&g_6b7fac);
 		k = -1;
 		for (i = 0; i < 64; i++) {
 			if (g_7e6060[i].t < now) {
@@ -57,7 +57,7 @@ void __cdecl fcn_00531c40(char* o, int a, char* name)
 		}
 	}
 	p = &g_7e6060[k];
-	p->t = g_6b7fac;
+	p->t = (*(volatile int*)&g_6b7fac);
 	p->o = o;
 	p->a = a;
 	*(void**) (o + 0x228) = (void*) fcn_00531c00;

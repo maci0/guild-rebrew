@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char* g_6b7fdc;
+extern int g_6b7fdc;
 
 int __cdecl fcn_0065f220(const char*, const char*);
 
@@ -21,7 +21,7 @@ char __cdecl fcn_00430f70(char* start, char siblings, char* ext, char (__cdecl* 
 		return 0;
 	}
 	if (dir == 0) {
-		dir = g_6b7fdc;
+		dir = ((char*)g_6b7fdc);
 		if (dir == 0) {
 			return 1;
 		}

@@ -5,7 +5,7 @@ typedef struct Kind {
 	char pad248[0x24d - 0x248];
 } Kind;
 
-extern Kind* g_868050;
+extern unsigned char* g_868050;
 extern unsigned char* g_90e094;
 
 int __cdecl gm_CheckStatLevel(int, int);
@@ -39,7 +39,7 @@ int __cdecl fcn_004abbe0(int a1, unsigned short* a2, int a3, char* a4)
 	for (a1 = 0x100; a1 != 0; a1--, e += 0xa9) {
 		if (e[0] == 0 || *(unsigned short*) (e + 0x27) != *a2)
 			continue;
-		kind = &g_868050[e[0]];
+		kind = &((Kind*)g_868050)[e[0]];
 		if (kind->type != 0x1f)
 			continue;
 		if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x27f) == 0)

@@ -23,7 +23,7 @@ typedef struct {
 	float height;
 } View;
 
-extern View* g_6b8014;
+extern int g_6b8014;
 extern float g_774690;
 extern float g_6a2558;
 extern float g_6a2560;
@@ -40,9 +40,9 @@ void __cdecl fcn_0052ad70(void)
 	float d;
 	View* v;
 
-	if (g_6b8014 != 0) {
-		d = fcn_00413d10(&g_6b8014->x);
-		v = g_6b8014;
+	if ((*(View**)&g_6b8014) != 0) {
+		d = fcn_00413d10(&(*(View**)&g_6b8014)->x);
+		v = (*(View**)&g_6b8014);
 		d = d + ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558) - (v->height + v->y);
 		if (fabs(d) > 5.0) {
 			step = d * 0.06666667f;

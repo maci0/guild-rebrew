@@ -5,7 +5,7 @@ extern unsigned int g_104061c;
 extern unsigned int g_10405fc;
 extern int g_6b89b8;
 extern void* g_6b5de0;
-extern void* g_1040610[3];
+extern void** g_1040610[];
 
 long __stdcall fcn_005ef8cf(void*, unsigned int, unsigned int, int, int, int, void**);
 
@@ -20,13 +20,13 @@ void __cdecl fcn_00456c80(void)
 			if (i > 2) {
 				return;
 			}
-			fcn_005ef8cf(g_6b5de0, s, s, g_6b89b8, 0, 0, &g_1040610[i]);
+			fcn_005ef8cf(g_6b5de0, s, s, g_6b89b8, 0, 0, &((void**)g_1040610)[i]);
 			i++;
 		}
 	} else {
 		i = 0;
 	}
 	for (; i <= 2; i++) {
-		g_1040610[i] = 0;
+		((void**)g_1040610)[i] = 0;
 	}
 }

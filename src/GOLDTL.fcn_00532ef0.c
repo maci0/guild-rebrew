@@ -16,7 +16,7 @@ extern int g_6b5cbc;
 extern float g_14ce880[3];
 extern float g_7e3a40[3];
 extern float g_7e3a50[3];
-extern View* g_6b8014;
+extern int g_6b8014;
 extern int g_774650;
 extern int g_774654;
 extern int g_774658;
@@ -39,14 +39,14 @@ void __cdecl fcn_00532ef0(void)
 	done = 0;
 	if (g_6b5cc0 != 0) {
 		if (fcn_00451840(g_14ce880, g_7e3a40, 0.1f)) {
-			fcn_00433780(g_6b8014);
+			fcn_00433780(((View*)g_6b8014));
 			g_6b5cc0 = 0;
 			g_6b5cbc = 0;
 			done = 1;
-			fcn_00438b40(g_6b8014, g_7e3a40);
-			fcn_00438cb0(g_6b8014, g_7e3a50);
+			fcn_00438b40(((View*)g_6b8014), g_7e3a40);
+			fcn_00438cb0(((View*)g_6b8014), g_7e3a50);
 		} else {
-			fcn_00433780(g_6b8014);
+			fcn_00433780(((View*)g_6b8014));
 			g_6b5cc0 = 0;
 			g_6b5cbc = 0;
 		}
@@ -66,7 +66,7 @@ void __cdecl fcn_00532ef0(void)
 				fcn_00530510();
 			}
 		}
-	} else if ((!fcn_00451840(g_6b8014->rot, g_7e3a50, 0.1f) || !fcn_00451840(g_6b8014->pos, g_7e3a40, 0.1f)) &&
+	} else if ((!fcn_00451840(((View*)g_6b8014)->rot, g_7e3a50, 0.1f) || !fcn_00451840(((View*)g_6b8014)->pos, g_7e3a40, 0.1f)) &&
 		   done == 0) {
 		fcn_0052d820();
 		if (g_7746a8 != 0) {

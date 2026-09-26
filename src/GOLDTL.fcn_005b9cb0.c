@@ -12,9 +12,9 @@ typedef struct
 // SIZE 0x21c
 
 extern double g_662b20;
-extern char g_773d75;
+extern unsigned char g_773d75;
 extern unsigned short g_774970;
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 
 float __cdecl fcn_0050b980(int, char);
 int __cdecl fcn_0051e070(void);
@@ -60,6 +60,6 @@ void __cdecl fcn_005b9cb0(int n, char** items)
 		for (i = 0; i < n; i++) {
 			fcn_00506300(items[i]);
 		}
-		fcn_004c5150(g_7f4ca0[g_774970].x4, -1, g_773d75, price);
+		fcn_004c5150(((Player*)g_7f4ca0)[g_774970].x4, -1, (*(char*)&g_773d75), price);
 	}
 }

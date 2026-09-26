@@ -14,8 +14,8 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[768];
-extern short g_7f4c04;
+extern char g_7f4ca0[];
+extern unsigned short g_7f4c04;
 extern unsigned char* g_868050;
 
 unsigned short __cdecl fcn_0042e410(int n);
@@ -29,7 +29,7 @@ void __cdecl fcn_00487360(char* e)
 	int n;
 	int i;
 
-	k = g_7f4c04;
+	k = (*(short*)&g_7f4c04);
 	if (k != 7 && k != 12 && k != 18) {
 		*(int*) (e + 0x1b4) &= ~0x40;
 		return;
@@ -39,13 +39,13 @@ void __cdecl fcn_00487360(char* e)
 	}
 	o = *(char**) (e + 0x16c);
 	*(int*) (e + 0x1b4) |= 0x40;
-	kind = g_7f4ca0[*(unsigned short*) (o + 0x27)].x2;
+	kind = ((Ent*)g_7f4ca0)[*(unsigned short*) (o + 0x27)].x2;
 	if ((kind == 6 || kind == 7) && !(*(int*) (e + 0x1b4) & 2)) {
 		return;
 	}
 	n = 0;
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].owner == o && g_7f4ca0[i].x165 != 0) {
+		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].owner == o && ((Ent*)g_7f4ca0)[i].x165 != 0) {
 			n++;
 		}
 	}

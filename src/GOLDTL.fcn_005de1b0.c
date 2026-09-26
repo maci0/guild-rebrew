@@ -38,7 +38,7 @@ typedef struct {
 	char pad170[0xac];
 } House;
 
-extern House g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern __int64 g_666018;
 extern char* g_14a558c;
 extern char* g_14a5590;
@@ -94,10 +94,10 @@ int __cdecl fcn_005de1b0(unsigned char* obj, int* arg)
 			return 0;
 		}
 	}
-	fcn_004c54c0(*(unsigned short*) e, g_7f4ca0[q->w27].f4, -20 - fcn_0042e410(0x20), 1);
+	fcn_004c54c0(*(unsigned short*) e, ((House*)g_7f4ca0)[q->w27].f4, -20 - fcn_0042e410(0x20), 1);
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].b2 == 0 && g_7f4ca0[i].f16c == q) {
-			fcn_004ff210(i, (int) -((gm_RandomFloat01() * 0.2f + 0.1f) * g_7f4ca0[i].f1c));
+		if (((House*)g_7f4ca0)[i].b2 == 0 && ((House*)g_7f4ca0)[i].f16c == q) {
+			fcn_004ff210(i, (int) -((gm_RandomFloat01() * 0.2f + 0.1f) * ((House*)g_7f4ca0)[i].f1c));
 		}
 	}
 	if (e[2] == 6 || e[2] == 7) {

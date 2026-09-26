@@ -5,7 +5,7 @@
 
 extern int* g_665f08;
 extern int g_7749f8[];
-extern int g_774a10;
+extern char* g_774a10;
 extern int g_774a14;
 extern int g_774a18;
 
@@ -22,8 +22,8 @@ void __cdecl fcn_00580c20(void)
 			fcn_004230e0(g_7749f8[i]);
 		}
 	}
-	fcn_00580cf0(g_774a10);
-	g_774a10 = 0;
+	fcn_00580cf0((*(int*)&g_774a10));
+	(*(int*)&g_774a10) = 0;
 	g_665f08[0] = 0;
 	g_665f08[2] = 0;
 	g_665f08[3] = 0;

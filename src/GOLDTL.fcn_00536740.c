@@ -2,9 +2,9 @@ extern char g_14cf736;
 extern int g_14ce8d8;
 extern int g_14ce8e0;
 extern short g_7725c4;
-extern int g_7746b4;
+extern char* g_7746b4;
 extern int g_7ea360;
-extern char* g_67a370;
+extern int g_67a370;
 extern int g_100f1e8;
 extern int g_100f1ec;
 
@@ -31,13 +31,13 @@ void __cdecl fcn_00536740(void)
 		g_7725c4 = 0x21;
 		if (g_14ce8d8 != 0) {
 			fcn_004234e0(0, "schuss_s", 1, 0x3f, 0x7f, 0, 0);
-			if (g_7746b4 != 0) {
-				fcn_00536640(g_7746b4);
+			if ((*(int*)&g_7746b4) != 0) {
+				fcn_00536640((*(int*)&g_7746b4));
 			}
 			g_7ea360 = 0;
 		}
 		if (g_14ce8e0 != 0) {
-			p = *(int*) (g_67a370 + 0xb0);
+			p = *(int*) (((char*)g_67a370) + 0xb0);
 			if (fcn_0045bad0(p, g_100f1e8, g_100f1ec, &b, &a) != 0 &&
 			    fcn_0045b920(p, b, a, buf) != 0) {
 				fcn_004cf110(buf);

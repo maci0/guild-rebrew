@@ -1,4 +1,4 @@
-extern char* g_772f24;
+extern unsigned short* g_772f24;
 extern int g_68b79c;
 extern char* g_aed32c;
 
@@ -18,7 +18,7 @@ void __cdecl fcn_004d4e30(char* e)
 	char* q;
 
 	o = *(char**) (e + 0x17c);
-	if (*(int*) (g_772f24 + 4) == g_68b79c) {
+	if (*(int*) (((char*)g_772f24) + 4) == g_68b79c) {
 		q = fcn_004ce680(o);
 		if (q != 0) {
 			int v = -1;

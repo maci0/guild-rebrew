@@ -1,11 +1,11 @@
 // FUNCTION: GOLDTL 0x435710
 // SIZE: 147
 
-extern unsigned int g_6b7fac;
+extern int g_6b7fac;
 
 void __cdecl fcn_00435710(char* o, float a, float b, unsigned int t0, unsigned int t1)
 {
-	unsigned int now = g_6b7fac;
+	unsigned int now = (*(unsigned int*)&g_6b7fac);
 	float f;
 
 	if (o == 0 || *(int*) (o + 0x68) == 0 || t0 > t1) {

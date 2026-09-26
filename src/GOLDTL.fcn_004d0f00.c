@@ -5,7 +5,7 @@ extern int g_14ce8cc;
 extern int g_67d370;
 extern char* g_7746a4;
 extern char g_14cf736;
-extern int g_772e9c;
+extern unsigned short* g_772e9c;
 extern int g_772ed4;
 extern int g_772ed8;
 
@@ -42,7 +42,7 @@ void __cdecl fcn_004d0f00(void)
 		    && (e == 0 || fcn_004ce270(e, t) == 0)) {
 			fcn_004d1910();
 			t[0x188] = 1;
-			if (*(int*) (t + 0x16c) == g_772e9c)
+			if (*(int*) (t + 0x16c) == (*(int*)&g_772e9c))
 				fcn_004c30a0(*(unsigned short*) t, g_772ed4, "_ARBEITER_KOMMENTARE_KLICK", -1, 0);
 			else
 				fcn_004c30a0(*(unsigned short*) t, g_772ed8, "_ARBEITER_KOMMENTARE_KLICK", -1, 0);

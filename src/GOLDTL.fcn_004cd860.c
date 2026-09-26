@@ -5,7 +5,7 @@ typedef struct {
 
 extern int g_14cbca0;
 extern int g_699364;
-extern int g_68a9d8;
+extern char g_68a9d8[];
 
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
@@ -43,7 +43,7 @@ int __cdecl fcn_004cd860(char* a1, char* a2)
 	q = fcn_00502fe0(*(int*) (e2 + 1), 0xca, 1);
 	if (q == 0)
 		return 1;
-	g_68a9d8 = *(int*) (q + 2);
+	(*(int*)g_68a9d8) = *(int*) (q + 2);
 found:
 	*(stamp14*) (q + 0x1c) = *(stamp14*) (a1 + 0x18);
 	*(int*) (q + 0x2a) = *(int*) (a1 + 0x26);

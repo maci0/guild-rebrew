@@ -14,7 +14,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 
 char* __cdecl fcn_00508e40(int);
@@ -75,7 +75,7 @@ void __cdecl fcn_00566950(char* e)
 				amt = (int) fcn_0050bb50(*(unsigned short*) sel, g_773d75);
 				fcn_004c51f0(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
 				fcn_0051af00(buf, 0x1bb9, *(int*) (o + 0x16c), *(unsigned short*) sel * 2 + 0x9a8, amt);
-				fcn_00545e80(g_7f4ca0[*(unsigned short*) (e + 8)].handle, -1, buf, 0, 0x5f2, *(int*) (p + 1),
+				fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, -1, buf, 0, 0x5f2, *(int*) (p + 1),
 				    *(int*) (q + 2), 0, "_NACHRICHTEN_HS_09");
 			}
 		}

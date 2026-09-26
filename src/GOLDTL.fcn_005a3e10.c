@@ -9,7 +9,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
 extern char* g_7746cc;
@@ -47,7 +47,7 @@ void __cdecl fcn_005a3e10(void)
 	int v;
 
 	dlg = fcn_00470820(0, 0, s_6aa830);
-	have = gm_AccumulateTyped2(&g_7f4ca0[g_774970]);
+	have = gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]);
 	stock = fcn_0050d270(*(int*) (g_7746cc + 0x14));
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 0);
@@ -68,10 +68,10 @@ void __cdecl fcn_005a3e10(void)
 			if (g_100f1dc == 2) {
 				v = fcn_0050b750(fcn_00471f80(sl), g_773d75);
 				if (stock < v) {
-					fcn_004c5150(*(int*) (g_7746cc + 2), g_7f4ca0[g_774970].x4, g_773d75, v - stock);
+					fcn_004c5150(*(int*) (g_7746cc + 2), ((Player*)g_7f4ca0)[g_774970].x4, g_773d75, v - stock);
 				}
 				else {
-					fcn_004c5150(g_7f4ca0[g_774970].x4, *(int*) (g_7746cc + 2), g_773d75, stock - v);
+					fcn_004c5150(((Player*)g_7f4ca0)[g_774970].x4, *(int*) (g_7746cc + 2), g_773d75, stock - v);
 				}
 				g_774654 = 1;
 			}

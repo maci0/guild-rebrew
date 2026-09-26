@@ -9,7 +9,7 @@ typedef struct {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[];
+extern char g_7f4ca0[];
 
 unsigned short* __cdecl fcn_00508e40(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -50,8 +50,8 @@ int __cdecl fcn_004ba690(int* a1)
 		return 0x400;
 	chosen = ents[fcn_0042e410(n)];
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].kind == 1 && g_7f4ca0[i].owner == chosen) {
-			rec = (char*) &g_7f4ca0[i];
+		if (((Ent*)g_7f4ca0)[i].kind == 1 && ((Ent*)g_7f4ca0)[i].owner == chosen) {
+			rec = (char*) &((Ent*)g_7f4ca0)[i];
 			break;
 		}
 	}

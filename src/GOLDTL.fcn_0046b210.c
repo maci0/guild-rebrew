@@ -23,7 +23,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Slot* g_1015ea0;
+extern char* g_1015ea0;
 extern int g_772528;
 extern int g_67d370;
 
@@ -35,7 +35,7 @@ int __cdecl fcn_0046b210(int x, int y)
 	Slot* s;
 
 	for (i = g_772528; i >= 0; i--) {
-		s = &g_1015ea0[i];
+		s = &((Slot*)g_1015ea0)[i];
 		if (x >= s->x && x <= s->x + s->w && y >= s->y && y <= s->y + s->h && s->type == 0x40) {
 			if (s->used == 0) {
 				break;

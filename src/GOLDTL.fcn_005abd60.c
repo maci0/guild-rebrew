@@ -21,7 +21,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 extern char* g_77255c;
 extern char* g_772500;
 extern char* g_14a6554;
@@ -79,7 +79,7 @@ void __cdecl fcn_005abd60(void)
 			pb[i] = b[i];
 			items[i].x0 = 0;
 			if (a[i] != 0xffff) {
-				items[i].x0 = &g_7f4ca0[a[i]];
+				items[i].x0 = &((Player*)g_7f4ca0)[a[i]];
 			}
 		}
 		if (dirty != 0) {

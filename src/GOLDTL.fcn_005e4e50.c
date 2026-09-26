@@ -12,13 +12,13 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern char s_6ad3c4[];
 extern char s_681140[];
 extern char s_6ad3bc[];
 extern char s_6ad3a8[];
-extern int g_7746c4;
+extern char* g_7746c4;
 extern int g_14ce8e0;
 extern int g_100f1dc;
 extern int g_67d370;
@@ -55,11 +55,11 @@ void __cdecl fcn_005e4e50(Ent* other)
 	int max;
 	int i;
 
-	me = &g_7f4ca0[g_774970];
+	me = &((Ent*)g_7f4ca0)[g_774970];
 	h = fcn_00470820(0, 0, s_6ad3c4);
-	found = fcn_004f65a0(&g_7f4ca0[g_774970], 4, list, &count);
-	if (g_7746c4) {
-		max = fcn_0050c710(g_7746c4, 0x24, 1);
+	found = fcn_004f65a0(&((Ent*)g_7f4ca0)[g_774970], 4, list, &count);
+	if ((*(int*)&g_7746c4)) {
+		max = fcn_0050c710((*(int*)&g_7746c4), 0x24, 1);
 	} else {
 		max = 1;
 	}
@@ -85,13 +85,13 @@ void __cdecl fcn_005e4e50(Ent* other)
 		if (g_100f1dc != -1 && g_67d370 == yes) {
 			if (found) {
 				for (i = 0; i < count; i++) {
-					fcn_004c58b0(list[i], g_7f4ca0[g_774970].handle);
+					fcn_004c58b0(list[i], ((Ent*)g_7f4ca0)[g_774970].handle);
 				}
-				fcn_004c6ae0(g_7f4ca0[g_774970].handle, -1);
+				fcn_004c6ae0(((Ent*)g_7f4ca0)[g_774970].handle, -1);
 				fcn_004c6ae0(other->handle, -1);
 				fcn_004c5420(me->handle, 0x1cc, 4, 0x20000, 0);
 				fcn_0051af00(text, 0x422f, other->id);
-				fcn_00545d40(g_7f4ca0[g_774970].handle, -1, text, 0, 0x5ec, 0);
+				fcn_00545d40(((Ent*)g_7f4ca0)[g_774970].handle, -1, text, 0, 0x5ec, 0);
 				if (other->kind == 6 || other->kind == 7) {
 					fcn_0051af00(text, 0x4230, g_774970, 1);
 					fcn_00545d40(other->handle, -1, text, 0, 0x5ec, s_6ad3a8);

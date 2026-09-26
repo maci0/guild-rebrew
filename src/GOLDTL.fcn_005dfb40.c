@@ -35,8 +35,8 @@ extern char s_6acf98[];
 extern char s_6acf90[];
 extern int g_772514;
 extern int g_14ac654;
-extern Slot* g_1015ea0;
-extern Win* g_77255c;
+extern char* g_1015ea0;
+extern char* g_77255c;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_14ce8d8;
@@ -99,10 +99,10 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	fcn_004727a0(dlg, 1);
 	for (i = 0; i < n; i++) {
 		recs[i].id = fcn_0046fac0(0, (short) (i * 24), recs[i].name, g_772514);
-		g_1015ea0[recs[i].id].f5c = 1;
-		g_1015ea0[recs[i].id].f6c = 1;
-		g_1015ea0[recs[i].id].f18 = g_77255c->fc;
-		g_1015ea0[recs[i].id].f1d0 = 3;
+		((Slot*)g_1015ea0)[recs[i].id].f5c = 1;
+		((Slot*)g_1015ea0)[recs[i].id].f6c = 1;
+		((Slot*)g_1015ea0)[recs[i].id].f18 = ((Win*)g_77255c)->fc;
+		((Slot*)g_1015ea0)[recs[i].id].f1d0 = 3;
 	}
 	_itoa(n, buf, 10);
 	fcn_0046f940(field, buf);

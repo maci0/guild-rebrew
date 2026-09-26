@@ -1,6 +1,6 @@
 extern int g_14cbca0;
 extern int g_699364;
-extern int g_68a9d0;
+extern char g_68a9d0[];
 extern char g_7f4ca0[];
 
 int __cdecl rand(void);
@@ -45,7 +45,7 @@ int __cdecl fcn_004c7870(int cmd, char* result)
 	if (entity == 0xffff)
 		return 1;
 	off = entity * 0x21c;
-	g_68a9d0 = *(int*) (g_7f4ca0 + off + 4);
+	(*(int*)g_68a9d0) = *(int*) (g_7f4ca0 + off + 4);
 	strncpy(g_7f4ca0 + off + 0x30, (char*) cmd + 0x25, 0x10);
 	entry = fcn_00509570(g_7f4ca0 + off);
 	if (entry != 0) {

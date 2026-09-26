@@ -1,4 +1,4 @@
-extern char* g_67a370;
+extern int g_67a370;
 
 unsigned short __cdecl fcn_0042e410(unsigned short);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
@@ -20,7 +20,7 @@ int __cdecl fcn_004bc8a0(float* a1, int n, float* out)
 	int k;
 	char* g;
 
-	g = *(char**) (g_67a370 + 0xb0);
+	g = *(char**) (((char*)g_67a370) + 0xb0);
 	fcn_0045b990(g, a1, &x, &y, &z);
 	for (k = 0; k < n; k++) {
 		nx = fcn_0042e410(10) + x - 4;

@@ -3,7 +3,7 @@
 typedef void (__cdecl* dispose_fn_4398d0)(char* obj);
 
 extern int g_6b8010;
-extern char* g_67a370;
+extern int g_67a370;
 extern char g_10432c0[];
 extern char g_1040640[];
 
@@ -37,7 +37,7 @@ void __cdecl fcn_004398d0(char* obj)
 	saved = g_6b8010;
 	u = *(char**) (obj + 0x20c);
 	idx = -1;
-	if (g_67a370 != u) {
+	if (((char*)g_67a370) != u) {
 		sprintf(msg, "d3_DisposeObject(): invalid universe by object %s", obj);
 		idx = (unsigned int) (u - g_10432c0) / 0x3dc;
 		fcn_004432d0(idx, 1);

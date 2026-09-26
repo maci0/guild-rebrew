@@ -12,7 +12,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern float g_662da8;
 
 unsigned short __cdecl fcn_0042e410(int n);
@@ -32,7 +32,7 @@ int __cdecl fcn_0048dcd0(char* e, char* a2, char* a3)
 	if (fcn_004a5340(e, 1, &mask, 0, fcn_0042e410(0x20) + g_662da8, &idx) == 0) {
 		return 0;
 	}
-	t = &g_7f4ca0[(unsigned short) idx];
+	t = &((Ent*)g_7f4ca0)[(unsigned short) idx];
 	n = fcn_004e99c0(t->x166) / 3 + 2;
 	thr[0] = n + 3;
 	thr[1] = n + 5;

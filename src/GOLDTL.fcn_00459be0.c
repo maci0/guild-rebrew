@@ -12,7 +12,7 @@ extern char* g_1042c38;
 extern char g_1042d00[];
 extern char* g_1042320;
 extern char g_1052a40[];
-extern Item* g_104049c;
+extern char* g_104049c;
 extern unsigned int g_10404a0;
 
 void __cdecl fcn_00459be0(unsigned int flags)
@@ -33,7 +33,7 @@ void __cdecl fcn_00459be0(unsigned int flags)
 		}
 	}
 	if ((flags & 0x100) == 0) {
-		it = g_104049c;
+		it = ((Item*)g_104049c);
 		for (; i < g_10404a0; i++) {
 			it[i].flags &= 0xbf;
 		}

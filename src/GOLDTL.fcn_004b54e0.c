@@ -11,7 +11,7 @@ typedef struct {
 } Entry24;
 
 extern int g_7e46ac;
-extern Entry24 g_10069a0[128];
+extern char g_10069a0[];
 
 void __cdecl fcn_004b5530(int handle, int flags);
 
@@ -22,8 +22,8 @@ void __cdecl fcn_004b54e0(int key)
 
 	flags = g_7e46ac | 0x80;
 	for (i = 0; i < 128; i++) {
-		if (g_10069a0[i].handle != 0 && g_10069a0[i].key == key) {
-			fcn_004b5530(g_10069a0[i].handle, flags | 0x80);
+		if (((Entry24*)g_10069a0)[i].handle != 0 && ((Entry24*)g_10069a0)[i].key == key) {
+			fcn_004b5530(((Entry24*)g_10069a0)[i].handle, flags | 0x80);
 		}
 	}
 }

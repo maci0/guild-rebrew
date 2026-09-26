@@ -1,4 +1,4 @@
-extern char* g_67a370;
+extern int g_67a370;
 extern int g_677680;
 
 // SIZE 0x54
@@ -13,7 +13,7 @@ struct snd_418e00 {
 	int keep;
 };
 
-extern struct snd_418e00* g_6b5d08;
+extern char* g_6b5d08;
 
 void __cdecl fcn_004237f0(char*, int);
 void __cdecl fcn_004225e0(char*, int);
@@ -31,38 +31,38 @@ void __cdecl fcn_00418e00(void)
 {
 	int i;
 
-	if (g_6b5d08 == 0) {
+	if (((struct snd_418e00*)g_6b5d08) == 0) {
 		return;
 	}
 	for (i = 0; i < g_677680; i++) {
-		if (g_6b5d08[i].obj == 0) {
+		if (((struct snd_418e00*)g_6b5d08)[i].obj == 0) {
 			continue;
 		}
-		if (*(char**) (g_6b5d08[i].obj + 0x20c) != g_67a370) {
-			if (g_6b5d08[i].voice == 0) {
+		if (*(char**) (((struct snd_418e00*)g_6b5d08)[i].obj + 0x20c) != ((char*)g_67a370)) {
+			if (((struct snd_418e00*)g_6b5d08)[i].voice == 0) {
 				continue;
 			}
-			fcn_004237f0(g_6b5d08[i].voice, 0);
-			*(unsigned int*) (g_6b5d08[i].voice + 0x14) |= 8;
-			if (g_6b5d08[i].keep == 0) {
-				fcn_004225e0(g_6b5d08[i].voice, 0);
-				g_6b5d08[i].voice = 0;
+			fcn_004237f0(((struct snd_418e00*)g_6b5d08)[i].voice, 0);
+			*(unsigned int*) (((struct snd_418e00*)g_6b5d08)[i].voice + 0x14) |= 8;
+			if (((struct snd_418e00*)g_6b5d08)[i].keep == 0) {
+				fcn_004225e0(((struct snd_418e00*)g_6b5d08)[i].voice, 0);
+				((struct snd_418e00*)g_6b5d08)[i].voice = 0;
 			}
 			continue;
 		}
-		fcn_004190d0(&g_6b5d08[i]);
-		fcn_00418fb0(&g_6b5d08[i]);
-		if (g_6b5d08[i].voice == 0 || fcn_00423460(g_6b5d08[i].voice) != 0) {
+		fcn_004190d0(&((struct snd_418e00*)g_6b5d08)[i]);
+		fcn_00418fb0(&((struct snd_418e00*)g_6b5d08)[i]);
+		if (((struct snd_418e00*)g_6b5d08)[i].voice == 0 || fcn_00423460(((struct snd_418e00*)g_6b5d08)[i].voice) != 0) {
 			continue;
 		}
-		g_6b5d08[i].idle++;
-		if (g_6b5d08[i].idle > 500 && g_6b5d08[i].keep == 0) {
-			if (g_6b5d08[i].fade != 0) {
-				fcn_00418d70(&g_6b5d08[i]);
+		((struct snd_418e00*)g_6b5d08)[i].idle++;
+		if (((struct snd_418e00*)g_6b5d08)[i].idle > 500 && ((struct snd_418e00*)g_6b5d08)[i].keep == 0) {
+			if (((struct snd_418e00*)g_6b5d08)[i].fade != 0) {
+				fcn_00418d70(&((struct snd_418e00*)g_6b5d08)[i]);
 			} else {
-				fcn_004225e0(g_6b5d08[i].voice, 0);
-				*(unsigned int*) (g_6b5d08[i].voice + 0x14) |= 8;
-				g_6b5d08[i].voice = 0;
+				fcn_004225e0(((struct snd_418e00*)g_6b5d08)[i].voice, 0);
+				*(unsigned int*) (((struct snd_418e00*)g_6b5d08)[i].voice + 0x14) |= 8;
+				((struct snd_418e00*)g_6b5d08)[i].voice = 0;
 			}
 		}
 	}

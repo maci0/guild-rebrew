@@ -31,11 +31,11 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
-extern char* g_868050;
-extern Ent* g_773dac;
-extern Ent* g_773db0;
+extern unsigned char* g_868050;
+extern char* g_773dac;
+extern char* g_773db0;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_AddObjekt(void);
@@ -57,7 +57,7 @@ int __cdecl fcn_005d9ca0(Ent* ent, Ent* other, int count, int flag)
 	ids[3] = 0xffff;
 	q = gm_StartFilteredEntitySearch(1, 6);
 	while (q != 0) {
-		if (g_868050[*q * 0x24d] == 15) {
+		if (((char*)g_868050)[*q * 0x24d] == 15) {
 			break;
 		}
 		q = gm_AddObjekt();
@@ -67,7 +67,7 @@ int __cdecl fcn_005d9ca0(Ent* ent, Ent* other, int count, int flag)
 	}
 
 	msg.src = ent->handle;
-	msg.dst = g_7f4ca0[g_774970].handle;
+	msg.dst = ((Ent*)g_7f4ca0)[g_774970].handle;
 	msg.owner = ent->handle;
 	msg.type = 0x2c;
 	msg.b36 = 2;
@@ -79,32 +79,32 @@ int __cdecl fcn_005d9ca0(Ent* ent, Ent* other, int count, int flag)
 	msg.who[3] = -1;
 	if (flag == 0) {
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].rank == 13) {
-				msg.who[0] = g_7f4ca0[i].handle;
-				ids[1] = g_7f4ca0[i].id;
+			if (((Ent*)g_7f4ca0)[i].rank == 13) {
+				msg.who[0] = ((Ent*)g_7f4ca0)[i].handle;
+				ids[1] = ((Ent*)g_7f4ca0)[i].id;
 				break;
 			}
 		}
 		if (msg.who[0] == -1) {
 			if ((short) fcn_0042e410(2)) {
-				msg.who[0] = g_773dac->handle;
-				ids[1] = g_773dac->id;
+				msg.who[0] = ((Ent*)g_773dac)->handle;
+				ids[1] = ((Ent*)g_773dac)->id;
 			} else {
-				msg.who[0] = g_773db0->handle;
-				ids[1] = g_773db0->id;
+				msg.who[0] = ((Ent*)g_773db0)->handle;
+				ids[1] = ((Ent*)g_773db0)->id;
 			}
 		}
 	} else {
-		msg.who[0] = !ent->female ? g_773dac->handle : g_773db0->handle;
-		ids[1] = !ent->female ? g_773dac->id : g_773db0->id;
+		msg.who[0] = !ent->female ? ((Ent*)g_773dac)->handle : ((Ent*)g_773db0)->handle;
+		ids[1] = !ent->female ? ((Ent*)g_773dac)->id : ((Ent*)g_773db0)->id;
 	}
 	if (other->rank != 0x11 && ent->rank != 0x11) {
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].rank == 0x11) {
+			if (((Ent*)g_7f4ca0)[i].rank == 0x11) {
 				if (count > 2) {
-					msg.who[3] = g_7f4ca0[i].handle;
+					msg.who[3] = ((Ent*)g_7f4ca0)[i].handle;
 				}
-				ids[2] = g_7f4ca0[i].id;
+				ids[2] = ((Ent*)g_7f4ca0)[i].id;
 				break;
 			}
 		}
@@ -117,11 +117,11 @@ int __cdecl fcn_005d9ca0(Ent* ent, Ent* other, int count, int flag)
 	} else {
 		ids[3] = (unsigned short) out;
 	}
-	msg.who[1] = g_7f4ca0[out & 0xffff].handle;
+	msg.who[1] = ((Ent*)g_7f4ca0)[out & 0xffff].handle;
 	if (!fcn_004a57a0(ent, 0xc00, 4, ids, 0, 100.0f, &out)) {
 		return 0x40;
 	}
-	msg.who[2] = g_7f4ca0[out & 0xffff].handle;
+	msg.who[2] = ((Ent*)g_7f4ca0)[out & 0xffff].handle;
 	fcn_004c5530(&msg);
 	return 0x10;
 }

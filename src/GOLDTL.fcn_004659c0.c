@@ -11,7 +11,7 @@ typedef struct
 } fcn_004659c0_Def;
 // SIZE 0x54
 
-extern fcn_004659c0_Def* g_772500;
+extern char* g_772500;
 extern int g_772508;
 extern int g_67d36c;
 extern FILE* g_772564;
@@ -37,15 +37,15 @@ int __cdecl fcn_004659c0(int idx, char* path)
 	char* old;
 	char buf[0x80];
 
-	if (g_772500[idx].data == 0) {
-		while (g_772500[idx].size + g_772508 > g_67d36c) {
+	if (((fcn_004659c0_Def*)g_772500)[idx].data == 0) {
+		while (((fcn_004659c0_Def*)g_772500)[idx].size + g_772508 > g_67d36c) {
 			if (fcn_00465850() == 0) {
 				break;
 			}
 		}
-		g_772500[idx].data = fcn_0041db70(g_772500[idx].size, s_67d410);
-		if (g_772500[idx].data == 0) {
-			sprintf(buf, s_67d3d4, idx, &g_772500[idx]);
+		((fcn_004659c0_Def*)g_772500)[idx].data = fcn_0041db70(((fcn_004659c0_Def*)g_772500)[idx].size, s_67d410);
+		if (((fcn_004659c0_Def*)g_772500)[idx].data == 0) {
+			sprintf(buf, s_67d3d4, idx, &((fcn_004659c0_Def*)g_772500)[idx]);
 			return 0;
 		}
 		if (path != 0) {
@@ -56,22 +56,22 @@ int __cdecl fcn_004659c0(int idx, char* path)
 		if (g_772564 == 0) {
 			return 0;
 		}
-		fseek(g_772564, g_772500[idx].ofs, 0);
-		fread(g_772500[idx].data, g_772500[idx].size, 1, g_772564);
-		if (g_772500[idx].fmt < 0x10) {
+		fseek(g_772564, ((fcn_004659c0_Def*)g_772500)[idx].ofs, 0);
+		fread(((fcn_004659c0_Def*)g_772500)[idx].data, ((fcn_004659c0_Def*)g_772500)[idx].size, 1, g_772564);
+		if (((fcn_004659c0_Def*)g_772500)[idx].fmt < 0x10) {
 			save = g_67dabc;
 			for (i = 0; i < g_7725b0; i++) {
-				if (fcn_0065f220(g_7725ac + i * 0x30, g_772500[idx].name) == 0) {
+				if (fcn_0065f220(g_7725ac + i * 0x30, ((fcn_004659c0_Def*)g_772500)[idx].name) == 0) {
 					g_67dabc = 0;
 					break;
 				}
 			}
-			old = g_772500[idx].data;
-			g_772500[idx].data = fcn_0047acf0(old);
+			old = ((fcn_004659c0_Def*)g_772500)[idx].data;
+			((fcn_004659c0_Def*)g_772500)[idx].data = fcn_0047acf0(old);
 			fcn_0041ddd0(old);
 			g_67dabc = save;
 		}
-		g_772508 += g_772500[idx].size;
+		g_772508 += ((fcn_004659c0_Def*)g_772500)[idx].size;
 	}
 	fclose(g_772564);
 	return 1;

@@ -4,7 +4,7 @@
 // SIZE: 129
 
 extern unsigned char* g_868050;
-extern int g_99ec10;
+extern char* g_99ec10;
 
 float __cdecl fcn_0050b980(int k, int n);
 
@@ -23,7 +23,7 @@ int __cdecl fcn_0050d170(int k)
 		if (w == 0) {
 			break;
 		}
-		rec = g_99ec10 + (w & 0x7fff) * 0x40 + (w & 0x7fff);
+		rec = (*(int*)&g_99ec10) + (w & 0x7fff) * 0x40 + (w & 0x7fff);
 		if (w & 0x8000) {
 			total = (int) (fcn_0050b980(*(unsigned char*) rec, 100) + total);
 		}

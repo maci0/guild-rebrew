@@ -4,7 +4,7 @@
 // SIZE: 73
 
 extern int g_774a14;
-extern char* g_665f08;
+extern int* g_665f08;
 extern int g_6b7fc0;
 
 int __cdecl fcn_0057ec70(int mask)
@@ -14,7 +14,7 @@ int __cdecl fcn_0057ec70(int mask)
 	if (g_774a14 == 0) {
 		return 1;
 	}
-	p = g_665f08;
+	p = ((char*)g_665f08);
 	if (*(int*) (p + 0x3c) == 2 || *(int*) p == 5) {
 		return 0;
 	}

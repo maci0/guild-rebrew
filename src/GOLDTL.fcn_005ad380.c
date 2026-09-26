@@ -30,7 +30,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern char* g_7746c4;
 extern int g_14abab4;
@@ -74,7 +74,7 @@ int __cdecl fcn_005ad380(int unused, char* e)
 	if (e == 0) {
 		return 0;
 	}
-	p = &g_7f4ca0[*(unsigned short*) (e + 0x27)];
+	p = &((Player*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
 	if (fcn_0055c050(e) == 0) {
 		fcn_0051af00(buf, 0x1a92, *(unsigned short*) (e + 0x27), e);
 		fcn_00526120(buf, 0);
@@ -101,15 +101,15 @@ int __cdecl fcn_005ad380(int unused, char* e)
 				pkt.type = 0x3f;
 				pkt.x36 = 1;
 				n = 0;
-				pkt.x8 = g_7f4ca0[g_774970].x4;
+				pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
 				pkt.x58 = *(int*) (e + 1);
 				pkt.x5c = *(int*) (g_7746c4 + 1);
 				for (i = 0; i < 8; i++) {
 					pkt.ids[i] = -1;
 				}
 				for (i = 0; i < 768; i++) {
-					if (g_7f4ca0[i].x188 != 0) {
-						pkt.ids[n] = g_7f4ca0[i].x4;
+					if (((Player*)g_7f4ca0)[i].x188 != 0) {
+						pkt.ids[n] = ((Player*)g_7f4ca0)[i].x4;
 						n++;
 					}
 				}

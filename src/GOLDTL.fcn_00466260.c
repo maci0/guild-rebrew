@@ -12,7 +12,7 @@ typedef struct VfsEntry {
 } VfsEntry;
 // SIZE 0x54
 
-extern VfsEntry* g_772500;
+extern char* g_772500;
 extern signed char g_772510;
 extern int g_772568;
 
@@ -25,20 +25,20 @@ int __cdecl fcn_00466260(int idx, void** out, int* out_idx)
 	int j;
 
 	g_772568 = 0;
-	if (g_772500[idx].flags & 2) {
+	if (((VfsEntry*)g_772500)[idx].flags & 2) {
 		idx += g_772510;
 	}
 	j = idx;
-	if ((g_772500[idx].kind == 5 || g_772500[idx].kind == 8) && g_772500[idx].offset == 0) {
-		if (g_772500[g_772500[idx].link].data == 0) {
-			fcn_004659c0(g_772500[idx].link, 0);
+	if ((((VfsEntry*)g_772500)[idx].kind == 5 || ((VfsEntry*)g_772500)[idx].kind == 8) && ((VfsEntry*)g_772500)[idx].offset == 0) {
+		if (((VfsEntry*)g_772500)[((VfsEntry*)g_772500)[idx].link].data == 0) {
+			fcn_004659c0(((VfsEntry*)g_772500)[idx].link, 0);
 		}
-		j = g_772500[idx].link;
+		j = ((VfsEntry*)g_772500)[idx].link;
 		g_772568 = idx - j;
-	} else if (g_772500[idx].data == 0) {
+	} else if (((VfsEntry*)g_772500)[idx].data == 0) {
 		fcn_004659c0(idx, 0);
 	}
-	*out = g_772500[j].data;
+	*out = ((VfsEntry*)g_772500)[j].data;
 	*out_idx = idx;
 	return 1;
 }

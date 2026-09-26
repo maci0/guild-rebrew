@@ -11,7 +11,7 @@ struct cap_4cb6f0 {
 };
 // SIZE 0x8
 
-extern Kind* g_868050;
+extern unsigned char* g_868050;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00508e40(int);
@@ -35,14 +35,14 @@ int __cdecl fcn_004cb6f0(char* a1, char* a2)
 	p = fcn_00508e40(*(int*) (a1 + 0x14));
 	if (p == 0 && *(int*) (a1 + 0x14) != -1)
 		return 1;
-	if (g_868050[e[0]].type == 1) {
+	if (((Kind*)g_868050)[e[0]].type == 1) {
 		fcn_004fac80(e[0], &info);
 		if (e[0x65] >= info.cap)
 			return 1;
 		e[0x65]++;
 	}
 	old = *(unsigned char**) (p + 0x170);
-	if (old != 0 && g_868050[old[0]].type == 1 && old[0x65] > 0)
+	if (old != 0 && ((Kind*)g_868050)[old[0]].type == 1 && old[0x65] > 0)
 		old[0x65]--;
 	*(unsigned char**) (p + 0x170) = e;
 	if (a2 != 0) {

@@ -12,7 +12,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern char* g_aed32c;
 extern char g_6a58c0[];
 extern char g_6b5c60[];
@@ -39,18 +39,18 @@ void __cdecl fcn_00548f00(void)
 		if (house != 0xffff && (e[0x5a] & 1) == 0) {
 			zero4 = 0;
 			zero2 = 0;
-			t = g_7f4ca0[house].type;
+			t = ((struct house*)g_7f4ca0)[house].type;
 			if ((t == 6 || t == 7) && *(short*) (e + 0x69) > 0) {
 				if ((double) *(short*) (e + 0x6b) / *(short*) (e + 0x69) < 0.5) {
 					char text[0x200];
 
 					fcn_0051af00(text, 0x18a1, e, *(short*) (e + 0x69), *(int*) (e + 0x65));
-					fcn_00545e80(g_7f4ca0[*(unsigned short*) (e + 0x27)].owner, -1, text, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6a58c0);
+					fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner, -1, text, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6a58c0);
 				} else {
 					char text2[0x200];
 
 					fcn_0051af00(text2, 0x18a2, e, *(short*) (e + 0x69), *(int*) (e + 0x65));
-					fcn_00545e80(g_7f4ca0[*(unsigned short*) (e + 0x27)].owner, -1, text2, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6b5c60);
+					fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner, -1, text2, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6b5c60);
 				}
 			}
 			fcn_004c4510(e, *(int*) (e + 1));

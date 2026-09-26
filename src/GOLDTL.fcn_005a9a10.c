@@ -23,7 +23,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern int g_14abb2c;
 extern int g_14abb28;
@@ -67,7 +67,7 @@ void __cdecl fcn_005a9a10(void)
 	prev = -1;
 	cnt = 0;
 	flag = 1;
-	p = &g_7f4ca0[g_774970];
+	p = &((Player*)g_7f4ca0)[g_774970];
 	if (p->xd < 2) {
 		fcn_00526120(g_14abb2c, 0);
 		return;

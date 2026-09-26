@@ -13,8 +13,8 @@ typedef struct {
 #pragma pack(pop)
 // SIZE 0x24d, 0x41
 
-extern Kind50bec0* g_868050;
-extern Obj50bec0* g_99ec10;
+extern unsigned char* g_868050;
+extern char* g_99ec10;
 
 // FUNCTION: GOLDTL 0x0050bec0
 // SIZE: 100
@@ -26,13 +26,13 @@ int __cdecl fcn_0050bec0(unsigned char* s, int* out)
 	int w;
 
 	n = 0;
-	k = &g_868050[*s];
+	k = &((Kind50bec0*)g_868050)[*s];
 	for (i = 0; i < 0x40; i++) {
 		if (k->slot[i] == 0) {
 			break;
 		}
 		w = k->slot[i] & 0x7fff;
-		if (g_99ec10[w].kind != 0x21) {
+		if (((Obj50bec0*)g_99ec10)[w].kind != 0x21) {
 			n++;
 		}
 		if (out != 0) {
@@ -55,7 +55,7 @@ int __cdecl fcn_0050bf30(unsigned char* s, unsigned short* key, int* out)
 	int w;
 
 	n = 0;
-	k = &g_868050[*s];
+	k = &((Kind50bec0*)g_868050)[*s];
 	for (i = 0; i < k->cnt; i++) {
 		if ((unsigned short) (k->slot[i] & 0x7fff) == *key) {
 			break;
@@ -69,7 +69,7 @@ int __cdecl fcn_0050bf30(unsigned char* s, unsigned short* key, int* out)
 			break;
 		}
 		w = k->slot[i] & 0x7fff;
-		o = &g_99ec10[w];
+		o = &((Obj50bec0*)g_99ec10)[w];
 		if (o->kind == 2 || o->kind == 6) {
 			break;
 		}

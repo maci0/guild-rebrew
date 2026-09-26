@@ -14,7 +14,7 @@ typedef struct
 } Player35c;
 // SIZE 0x35c
 
-extern Player35c g_9b0e20[];
+extern char g_9b0e20[];
 
 int __cdecl fcn_004e4fc0(unsigned char* a1)
 {
@@ -23,7 +23,7 @@ int __cdecl fcn_004e4fc0(unsigned char* a1)
 
 	r = 1;
 	for (i = 0; i < a1[0x30]; i++) {
-		if (g_9b0e20[i].used != 0 && g_9b0e20[i].x8 == 0 && g_9b0e20[i].x10 != -1) {
+		if (((Player35c*)g_9b0e20)[i].used != 0 && ((Player35c*)g_9b0e20)[i].x8 == 0 && ((Player35c*)g_9b0e20)[i].x10 != -1) {
 			r = 0;
 			break;
 		}

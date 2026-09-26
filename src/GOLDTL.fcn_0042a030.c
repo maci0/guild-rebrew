@@ -10,7 +10,7 @@ typedef struct {
 	char pad3[0xc98 - 0x125];
 } E42a030;
 
-extern E42a030* g_6b7e94;
+extern char* g_6b7e94;
 
 int __cdecl fcn_0042a030(void)
 {
@@ -19,7 +19,7 @@ int __cdecl fcn_0042a030(void)
 	E42a030* e;
 
 	n = 0;
-	e = g_6b7e94;
+	e = ((E42a030*)g_6b7e94);
 	for (i = 0; i < 0x80; i++) {
 		if ((e[i].used != 0 && e[i].owner != -1) || (e[i].flags & 1)) {
 			n++;

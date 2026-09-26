@@ -12,7 +12,7 @@ typedef struct {
 	char pad2[0x18];
 } T418dc0;
 
-extern T418dc0* g_6b5d08;
+extern char* g_6b5d08;
 
 T418dc0* __cdecl fcn_00418dc0(void)
 {
@@ -21,7 +21,7 @@ T418dc0* __cdecl fcn_00418dc0(void)
 	T418dc0* t;
 	int n;
 
-	t = g_6b5d08;
+	t = ((T418dc0*)g_6b5d08);
 	if (t != 0) {
 		n = g_677680;
 		for (; i < n; i++) {

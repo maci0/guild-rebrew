@@ -10,13 +10,13 @@ typedef struct
 } Tile;
 // SIZE 0x24d
 
-extern Tile* g_868050;
+extern unsigned char* g_868050;
 
 int __cdecl fcn_004d5450(unsigned char* a1)
 {
 	Tile* t;
 
-	t = &g_868050[a1[0]];
+	t = &((Tile*)g_868050)[a1[0]];
 	if (t->type == 0x13) {
 		return 0;
 	}

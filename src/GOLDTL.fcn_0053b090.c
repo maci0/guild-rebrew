@@ -22,7 +22,7 @@ typedef struct Figure {
 	unsigned char state;
 } Figure;
 
-extern char g_662d40[];
+extern float g_662d40[3];
 extern int g_14abee0[];
 
 char* __cdecl fcn_00445600(int, int, int, int);
@@ -55,8 +55,8 @@ Figure* __cdecl fcn_0053b090(int res, int kind, int anim)
 		pos[0] = 0.0f;
 		pos[1] = 0.0f;
 		pos[2] = 0.0f;
-		fcn_00455140(h, g_662d40, at);
-		pos[1] = fcn_00451380(g_662d40, at);
+		fcn_00455140(h, ((char*)g_662d40), at);
+		pos[1] = fcn_00451380(((char*)g_662d40), at);
 		fcn_00438cb0(f->model, pos);
 		fcn_004053a0(f, 0);
 		f->model->owner = f;

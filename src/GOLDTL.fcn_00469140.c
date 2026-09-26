@@ -39,7 +39,7 @@ typedef struct {
 	char p90[0x264];
 } Tile;
 
-extern Tile* g_1015ea0;
+extern char* g_1015ea0;
 extern int g_1040490;
 extern int g_1040494;
 
@@ -90,27 +90,27 @@ int __cdecl fcn_00469140(int a1, int a2, int w, int h, char* src)
 	int i;
 
 	idx = fcn_00469890();
-	g_1015ea0[idx].x20 = 0x47;
-	g_1015ea0[idx].x10 = a1;
-	g_1015ea0[idx].x14 = a2;
-	g_1015ea0[idx].x1c = h;
-	g_1015ea0[idx].x18 = w;
-	g_1015ea0[idx].x08 = -1;
-	g_1015ea0[idx].x30 = 0;
-	g_1015ea0[idx].x34 = g_1040490;
-	g_1015ea0[idx].x28 = 0;
-	g_1015ea0[idx].x2c = g_1040494;
+	((Tile*)g_1015ea0)[idx].x20 = 0x47;
+	((Tile*)g_1015ea0)[idx].x10 = a1;
+	((Tile*)g_1015ea0)[idx].x14 = a2;
+	((Tile*)g_1015ea0)[idx].x1c = h;
+	((Tile*)g_1015ea0)[idx].x18 = w;
+	((Tile*)g_1015ea0)[idx].x08 = -1;
+	((Tile*)g_1015ea0)[idx].x30 = 0;
+	((Tile*)g_1015ea0)[idx].x34 = g_1040490;
+	((Tile*)g_1015ea0)[idx].x28 = 0;
+	((Tile*)g_1015ea0)[idx].x2c = g_1040494;
 	fill0((char*) &desc, 0x5c);
 	desc.h = h;
 	desc.w = w;
 	desc.x28 = 0x17;
-	g_1015ea0[idx].surf = fcn_004770a0(&desc, 0);
-	s = g_1015ea0[idx].surf;
+	((Tile*)g_1015ea0)[idx].surf = fcn_004770a0(&desc, 0);
+	s = ((Tile*)g_1015ea0)[idx].surf;
 	if (fcn_00475fd0(s)) {
 		for (i = 0; i < h; i++) {
 			memcpy(s->bits + s->pitch * i, src + i * w * 2, w * 2);
 		}
-		fcn_00476060(g_1015ea0[idx].surf);
+		fcn_00476060(((Tile*)g_1015ea0)[idx].surf);
 	}
 	return idx;
 }

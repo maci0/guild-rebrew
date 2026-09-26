@@ -12,7 +12,7 @@ struct IDev {
 	IDevVtbl* v;
 };
 
-extern IDev* g_6b5de0;
+extern void* g_6b5de0;
 extern float g_1042ce4;
 extern float g_1042a14;
 extern char g_6b8060;
@@ -41,8 +41,8 @@ void __cdecl fcn_00438920(float a, float b, int c)
 		fcn_00438840(a, b);
 		g_10425fc = a;
 		g_104329c = b;
-		g_6b5de0->v->SetRenderState(g_6b5de0, 0x24, g_1042ce4);
-		g_6b5de0->v->SetRenderState(g_6b5de0, 0x25, g_1042a14);
+		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x24, g_1042ce4);
+		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x25, g_1042a14);
 	} else {
 		on = 0;
 		if (g_6b8060 != 0) {

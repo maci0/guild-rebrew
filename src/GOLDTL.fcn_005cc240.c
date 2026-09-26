@@ -7,7 +7,7 @@ void __cdecl fcn_0046f2c0(int, int);
 void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
 
 extern int g_772514;
-extern int g_1016198[][243];
+extern char g_1016198[];
 extern char s_6811b0[];
 
 int __cdecl fcn_005cc240(int dlg, int sel, int alt)
@@ -16,11 +16,11 @@ int __cdecl fcn_005cc240(int dlg, int sel, int alt)
 	int old;
 
 	fcn_004727a0(dlg, sel);
-	prev = g_1016198[g_772514][0];
+	prev = ((int(*)[243])g_1016198)[g_772514][0];
 	fcn_00519190(s_6811b0);
 	fcn_0046f2c0(g_772514, 1);
 	if (alt != -1) {
-		g_1016198[g_772514][0] = 0;
+		((int(*)[243])g_1016198)[g_772514][0] = 0;
 		old = g_772514;
 		fcn_004727a0(dlg, alt);
 		fcn_00519190(s_6811b0);

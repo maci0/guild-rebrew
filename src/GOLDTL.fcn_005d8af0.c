@@ -16,7 +16,7 @@ typedef struct {
 	char pad85[0x197];
 } House;
 
-extern House g_7f4ca0[768];
+extern char g_7f4ca0[];
 extern float g_662964;
 extern unsigned char g_773d75;
 extern char s_6acdcc[];
@@ -67,10 +67,10 @@ int __cdecl fcn_005d8af0(House* e)
 		fcn_004c5150(-1, e->f4, g_773d75, money);
 		fcn_004c6ae0(e->f4, -6);
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].b2 < 10 && g_7f4ca0[i].b2 != 6 && g_7f4ca0[i].b2 != 7 &&
-				g_7f4ca0[i].bc != e->bc) {
-				if ((unsigned char) rank > fcn_0042e410(0x7e) + g_7f4ca0[i].b84) {
-					fcn_004c4510(&g_7f4ca0[i], g_7f4ca0[i].f4);
+			if (((House*)g_7f4ca0)[i].id != 0xffff && ((House*)g_7f4ca0)[i].b2 < 10 && ((House*)g_7f4ca0)[i].b2 != 6 && ((House*)g_7f4ca0)[i].b2 != 7 &&
+				((House*)g_7f4ca0)[i].bc != e->bc) {
+				if ((unsigned char) rank > fcn_0042e410(0x7e) + ((House*)g_7f4ca0)[i].b84) {
+					fcn_004c4510(&((House*)g_7f4ca0)[i], ((House*)g_7f4ca0)[i].f4);
 					fcn_004c4570(1, 1, 0xc, &who);
 					fcn_004c5360();
 				}
@@ -110,7 +110,7 @@ int __cdecl fcn_005d8af0(House* e)
 						fcn_004c5150(-1, e->f4, g_773d75, money);
 						fcn_004c6ae0(e->f4, -6);
 						for (i = 0; i < 768; i++) {
-							h = &g_7f4ca0[i];
+							h = &((House*)g_7f4ca0)[i];
 							/* the redundant b2 test keeps the loop pointer on b2, as in the original */
 							if (h->id != 0xffff && h->b2 < 10 && h->b2 <= 10 && h->bc != e->bc) {
 								if (rank > fcn_0042e410(0x7e) + h->b84) {

@@ -16,7 +16,7 @@ extern unsigned int g_14ce7cc;
 extern unsigned int g_6b8710;
 extern unsigned int g_6b8714;
 extern int g_67bc4c;
-extern IDev* g_6b5de0;
+extern void* g_6b5de0;
 extern char g_1040640[];
 extern char g_1040960[];
 extern char* g_1040c74;
@@ -39,6 +39,6 @@ void __cdecl fcn_00452280(void)
 	g_1040c78 = 0;
 	g_1040958 = g_1040960;
 	g_6b8714 = stride;
-	g_6b5de0->v->CreateVertexBuffer(g_6b5de0, g_67bc4c * stride, 0x248, fvf, 0, &g_104095c);
+	((IDev*)g_6b5de0)->v->CreateVertexBuffer(((IDev*)g_6b5de0), g_67bc4c * stride, 0x248, fvf, 0, &g_104095c);
 	g_6b8718 = 0;
 }

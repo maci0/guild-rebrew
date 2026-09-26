@@ -14,7 +14,7 @@ typedef struct
 // SIZE 0x2f4
 
 extern int g_772514;
-extern Ctl* g_1015ea0;
+extern char* g_1015ea0;
 extern char* g_14a5ad8[];
 extern int g_100f1dc;
 extern int g_67d370;
@@ -71,15 +71,15 @@ int __cdecl fcn_00593ff0(int a1)
 		t = types[i];
 		h = fcn_0046f740(i % 3 * 96 + 100, (i / 3 + 1) * 80, t + 0x5a1, g_772514);
 		btns[i] = h;
-		g_1015ea0[h].x5c = 1;
-		g_1015ea0[h].x1d0 = 3;
+		((Ctl*)g_1015ea0)[h].x5c = 1;
+		((Ctl*)g_1015ea0)[h].x1d0 = 3;
 		s = g_14a5ad8[t];
-		d = g_1015ea0[h].name;
+		d = ((Ctl*)g_1015ea0)[h].name;
 		do {
 			c = *s++;
 			*d++ = c;
 		} while (c != 0);
-		g_1015ea0[h].x1cc = 0x56;
+		((Ctl*)g_1015ea0)[h].x1cc = 0x56;
 		fcn_00469470(grp, h);
 	}
 	g_100f1dc = -1;

@@ -28,10 +28,10 @@ struct item {
 };
 #pragma pack()
 
-extern struct fsm* g_665f08;
+extern int* g_665f08;
 /* volatile: the original loads the tick before the state pointer */
-extern volatile int g_6b7fac;
-extern struct good* g_868050;
+extern int g_6b7fac;
+extern unsigned char* g_868050;
 extern unsigned short g_774970;
 
 int __cdecl fcn_0057f770(int* ev)
@@ -39,27 +39,27 @@ int __cdecl fcn_0057f770(int* ev)
 	struct item* p;
 
 	if (ev[0] == 0x2b && (p = (struct item*) ev[1]) != 0) {
-		if (g_868050[p->good].kind == 2 && p->owner == g_774970 && g_665f08->flag == 0
+		if (((struct good*)g_868050)[p->good].kind == 2 && p->owner == g_774970 && (*(struct fsm**)&g_665f08)->flag == 0
 		    && (ev[3] == 5 || ev[3] == 2 || ev[3] == 0xd || ev[3] == 8)) {
-			g_665f08->flag = 1;
-			g_665f08->next = 0xa;
-			g_665f08->state = g_665f08->next;
-			g_665f08->since = g_6b7fac;
+			(*(struct fsm**)&g_665f08)->flag = 1;
+			(*(struct fsm**)&g_665f08)->next = 0xa;
+			(*(struct fsm**)&g_665f08)->state = (*(struct fsm**)&g_665f08)->next;
+			(*(struct fsm**)&g_665f08)->since = (*(volatile int*)&g_6b7fac);
 		}
 	} else if (ev[0] == 0x10 && (p = (struct item*) ev[1]) != 0) {
-		if (g_868050[p->good].kind == 2 && p->owner == g_774970) {
-			if (ev[2] == 0 && g_665f08->flag == 0) {
-				g_665f08->next = 9;
+		if (((struct good*)g_868050)[p->good].kind == 2 && p->owner == g_774970) {
+			if (ev[2] == 0 && (*(struct fsm**)&g_665f08)->flag == 0) {
+				(*(struct fsm**)&g_665f08)->next = 9;
 			}
 			if (ev[2] == 1) {
-				if (g_665f08->flag == 1) {
-					g_665f08->next = 0xb;
+				if ((*(struct fsm**)&g_665f08)->flag == 1) {
+					(*(struct fsm**)&g_665f08)->next = 0xb;
 				} else {
-					g_665f08->next = 4;
+					(*(struct fsm**)&g_665f08)->next = 4;
 				}
 			}
-			g_665f08->state = g_665f08->next;
-			g_665f08->since = g_6b7fac;
+			(*(struct fsm**)&g_665f08)->state = (*(struct fsm**)&g_665f08)->next;
+			(*(struct fsm**)&g_665f08)->since = (*(volatile int*)&g_6b7fac);
 			return 1;
 		}
 	}

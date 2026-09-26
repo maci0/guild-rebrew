@@ -15,7 +15,7 @@ typedef struct
 } Slot;
 // SIZE 0x2f4
 
-extern Slot* g_1015ea0;
+extern char* g_1015ea0;
 extern int g_772514;
 extern char s_6ac948[];
 extern char s_68be7c[];
@@ -56,9 +56,9 @@ int __cdecl fcn_005c9450(unsigned short* who, int n, int* arr)
 		fcn_0051af00(buf, s_68be7c, v);
 		fcn_0046fac0(0x80, y + 0x1b, buf, g_772514);
 		if (flag == 1 && cnt < n) {
-			g_1015ea0[h].x5c = 1;
-			g_1015ea0[h].x1d0 = 3;
-			g_1015ea0[h].x2f0 = e;
+			((Slot*)g_1015ea0)[h].x5c = 1;
+			((Slot*)g_1015ea0)[h].x1d0 = 3;
+			((Slot*)g_1015ea0)[h].x2f0 = e;
 			arr[cnt] = h;
 		}
 		cnt++;

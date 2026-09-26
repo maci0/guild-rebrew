@@ -15,7 +15,7 @@ typedef struct Player {
 } Player;
 // SIZE 0x21c
 
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 
 int __cdecl fcn_004e9310(int k, int max, char** out);
 int __cdecl fcn_005ca560(Sel* s);
@@ -49,9 +49,9 @@ unsigned int __cdecl fcn_005cbfb0(char* e, unsigned int max, Sel* out, void* q)
 		if (m >= 3) {
 			break;
 		}
-		if (g_7f4ca0[i].id != 0xffff && g_7f4ca0[i].id != *(unsigned short*) e &&
-		    g_7f4ca0[i].x168 == *(unsigned char*) (e + 0x168)) {
-			pl[m] = &g_7f4ca0[i];
+		if (((Player*)g_7f4ca0)[i].id != 0xffff && ((Player*)g_7f4ca0)[i].id != *(unsigned short*) e &&
+		    ((Player*)g_7f4ca0)[i].x168 == *(unsigned char*) (e + 0x168)) {
+			pl[m] = &((Player*)g_7f4ca0)[i];
 			m++;
 		}
 	}

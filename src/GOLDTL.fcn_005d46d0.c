@@ -31,8 +31,8 @@ typedef struct {
 	House* house;
 } Slot;
 
-extern House g_7f4ca0[];
-extern Slot* g_1015ea0;
+extern char g_7f4ca0[];
+extern char* g_1015ea0;
 extern char s_6acc18[];
 extern char s_6acc08[];
 extern char s_6a9680[];
@@ -98,13 +98,13 @@ void __cdecl fcn_005d46d0(void)
 	for (i = 0; i < count; i++) {
 		fl = (int) (list[i].f1c * 100.0f);
 		h = fcn_0046f740(0x28, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2),
-			g_7f4ca0[list[i].id].f54, g_772514);
-		g_1015ea0[h].shown = 1;
-		g_1015ea0[h].style = 3;
-		g_1015ea0[h].house = &g_7f4ca0[list[i].id];
+			((House*)g_7f4ca0)[list[i].id].f54, g_772514);
+		((Slot*)g_1015ea0)[h].shown = 1;
+		((Slot*)g_1015ea0)[h].style = 3;
+		((Slot*)g_1015ea0)[h].house = &((House*)g_7f4ca0)[list[i].id];
 		sprintf(text, s_6a9680, list[i].id);
 		fcn_005c9090(text, 0x36, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 0x22, 0x12c, 0x56);
-		v = MIN(MAX(g_7f4ca0[list[i].id].f54 - 0x59a, 0), 7);
+		v = MIN(MAX(((House*)g_7f4ca0)[list[i].id].f54 - 0x59a, 0), 7);
 		h = fcn_004677e0(0x5a, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 7, 0x12c, 0, 0x64,
 			cols[v], 0x42, g_772514);
 		fcn_00472380(h, 0, 0x64, fl);

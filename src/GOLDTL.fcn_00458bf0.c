@@ -35,10 +35,10 @@ struct Device {
 	DeviceVtbl* vtbl;
 };
 
-extern Device* g_6b5de0;
+extern void* g_6b5de0;
 extern char g_6b89bc;
-extern Ent* g_6b86ec;
-extern Ent* g_1041d00;
+extern char* g_6b86ec;
+extern char* g_1041d00;
 
 Mat* __stdcall fcn_005ec410(Mat*, float, float, float);
 Mat* __stdcall fcn_005eb970(Mat*, Mat*, Mat*);
@@ -55,25 +55,25 @@ void __cdecl fcn_00458bf0(Ent* n)
 
 	fcn_005ec410(&m, -n->x, -n->y, -n->z);
 	fcn_005eb970(&m, &m, &n->world);
-	g_6b5de0->vtbl->SetTransform(g_6b5de0, 0x100, &m);
-	g_6b5de0->vtbl->SetVertexShader(g_6b5de0, 0x142);
+	((Device*)g_6b5de0)->vtbl->SetTransform(((Device*)g_6b5de0), 0x100, &m);
+	((Device*)g_6b5de0)->vtbl->SetVertexShader(((Device*)g_6b5de0), 0x142);
 	fcn_004372d0(0x7f, 0, 0, 1, 0);
 	if (!g_6b89bc) {
-		g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x13, 1);
-		g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x14, 4);
+		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x13, 1);
+		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x14, 4);
 	}
-	for (e = g_6b86ec; e != 0; e = e->next) {
+	for (e = ((Ent*)g_6b86ec); e != 0; e = e->next) {
 		if (e->flags & 0x80) {
 			fcn_00458d20(e);
 		}
 	}
-	for (e = g_1041d00; e != 0; e = e->next) {
+	for (e = ((Ent*)g_1041d00); e != 0; e = e->next) {
 		if (e->flags & 0x80) {
 			fcn_00458d20(e);
 		}
 	}
 	if (!g_6b89bc) {
-		g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x13, 5);
-		g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x14, 6);
+		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x13, 5);
+		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x14, 6);
 	}
 }

@@ -1,4 +1,4 @@
-extern char* g_90e094;
+extern unsigned char* g_90e094;
 extern unsigned char* g_868050;
 extern unsigned char g_773d75;
 
@@ -23,7 +23,7 @@ int __cdecl fcn_004976e0(int unused, char* e, int unused2, char* out, char* out2
 	if (out[0] == 0) {
 		minv = fcn_0042e410(0x24) + 0x23;
 		best = 0;
-		p = g_90e094;
+		p = ((char*)g_90e094);
 		for (i = 0; i < 0x100; i++) {
 			if (p[0] != 0 && *(unsigned short*) (p + 0x25) == *(unsigned short*) e && !(p[0x5a] & 0x45) &&
 			    ((1 << g_868050[*(unsigned char*) p + *(unsigned char*) p * 588]) & 0x7c43b4) &&
@@ -51,7 +51,7 @@ int __cdecl fcn_004976e0(int unused, char* e, int unused2, char* out, char* out2
 			}
 		}
 	} else if (out[0] == 4) {
-		p = g_90e094;
+		p = ((char*)g_90e094);
 		for (i = 0; i < 0x100; i++, p += 0xa9) {
 			if (p[0] != 0 && *(int*) (p + 1) == *(int*) (out + 4)) {
 				if (p[0x5a] & 5) {

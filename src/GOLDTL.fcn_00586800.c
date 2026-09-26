@@ -12,7 +12,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
 extern int g_772514;
@@ -89,11 +89,11 @@ int __cdecl fcn_00586800(char* e)
 		} else if (g_100f1dc != -1) {
 			if (g_67d370 == ok) {
 				c = fcn_0050b750(fcn_00471f80(line), g_773d75);
-				if (fcn_00526010(&g_7f4ca0[g_774970], c, g_773d75) != 0) {
+				if (fcn_00526010(&((struct house*)g_7f4ca0)[g_774970], c, g_773d75) != 0) {
 					fcn_004eeb50(p, (float) c / n * f * 0.75f);
 					r = 1;
 					g_774654 = 1;
-					fcn_004c5150(*(int*) (p + 4), g_7f4ca0[g_774970].handle, g_773d75, c);
+					fcn_004c5150(*(int*) (p + 4), ((struct house*)g_7f4ca0)[g_774970].handle, g_773d75, c);
 				}
 			} else if (g_67d370 == cancel) {
 				g_774654 = 1;

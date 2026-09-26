@@ -32,7 +32,7 @@ typedef struct {
 #pragma pack(pop)
 // SIZE 0x41
 
-extern Obj41* g_99ec10;
+extern char* g_99ec10;
 extern float g_773d4c;
 extern double g_665b80;
 extern double g_662908;
@@ -48,7 +48,7 @@ int __cdecl fcn_00502450(int a, int b)
 	Obj41* o;
 
 	w = g_85ab80[a].c[b].w;
-	o = &g_99ec10[w];
+	o = &((Obj41*)g_99ec10)[w];
 	if (o->kind == 0x17 || o->kind == 0x25) {
 		return 0;
 	}

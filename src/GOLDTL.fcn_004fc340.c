@@ -5,7 +5,7 @@
 
 extern float g_6628bc;
 extern const double g_6640f8;
-extern const double g_662ad8;
+extern double g_662ad8;
 
 void __cdecl fcn_004f4830(int, int*);
 

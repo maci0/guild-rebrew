@@ -16,7 +16,7 @@ typedef struct {
 } ent2c;
 // SIZE 0x2c
 
-extern char* g_67a370;
+extern int g_67a370;
 
 void __cdecl fcn_00455350(char*, char*, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
@@ -33,7 +33,7 @@ int __cdecl fcn_004d1250(char* rec, char* e, char* obj)
 	int y;
 	int z;
 
-	h = *(int*) (g_67a370 + 0xb0);
+	h = *(int*) (((char*)g_67a370) + 0xb0);
 	if (obj == 0 || e == 0 || rec == 0)
 		return -1;
 	fcn_00455350(obj, obj + 0x4c, v);

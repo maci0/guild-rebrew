@@ -1,7 +1,7 @@
 // FUNCTION: GOLDTL 0x004132a0
 // SIZE: 212
 
-extern char* g_6b8014;
+extern int g_6b8014;
 extern float g_1052bc0;
 extern float g_1052bc8;
 extern float g_10432a4;
@@ -16,7 +16,7 @@ void __cdecl fcn_004132a0(float x, float y, float y0, float y1, float* out)
 	float dy;
 	float t;
 
-	fcn_005ebbb9(m, (float*) (g_6b8014 + 0x18c));
+	fcn_005ebbb9(m, (float*) (((char*)g_6b8014) + 0x18c));
 	v[0] = x - g_1052bc0;
 	v[1] = -(y - g_1052bc8);
 	v[2] = g_10432a4;

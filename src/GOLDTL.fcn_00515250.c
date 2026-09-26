@@ -17,12 +17,12 @@ typedef struct {
 	char name[0x2f4];
 } Variant;
 
-extern Entity g_7f4ca0[768];
-extern Variant g_868060[4];
+extern char g_7f4ca0[];
+extern char g_868060[];
 extern unsigned char g_7747b0;
-extern Entity* g_773dac;
-extern Entity* g_773db0;
-extern Entity* g_773db4[];
+extern char* g_773dac;
+extern char* g_773db0;
+extern char* g_773db4[];
 
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_005016c0(void);
@@ -41,7 +41,7 @@ void __cdecl fcn_00515250(void)
 	if ((g_7747b0 & 0x40) == 0) {
 		fcn_005016c0();
 		for (i = 0; i < 4; i++) {
-			if (g_868060[i].name[0] == 0) {
+			if (((Variant*)g_868060)[i].name[0] == 0) {
 				break;
 			}
 			fcn_005016f0(i);
@@ -52,26 +52,26 @@ void __cdecl fcn_00515250(void)
 		if (n == 0) {
 			break;
 		}
-		if (g_7f4ca0[i].type == 0xc) {
-			if (g_7f4ca0[i].faith == 0) {
-				g_773dac = &g_7f4ca0[i];
+		if (((Entity*)g_7f4ca0)[i].type == 0xc) {
+			if (((Entity*)g_7f4ca0)[i].faith == 0) {
+				(*(Entity**)&g_773dac) = &((Entity*)g_7f4ca0)[i];
 				n--;
-			} else if (g_7f4ca0[i].faith == 1) {
-				g_773db0 = &g_7f4ca0[i];
+			} else if (((Entity*)g_7f4ca0)[i].faith == 1) {
+				(*(Entity**)&g_773db0) = &((Entity*)g_7f4ca0)[i];
 				n--;
 			}
 		}
 	}
-	p = g_773db4;
+	p = ((Entity**)g_773db4);
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].type == 0xb) {
-			*p++ = &g_7f4ca0[i];
+		if (((Entity*)g_7f4ca0)[i].type == 0xb) {
+			*p++ = &((Entity*)g_7f4ca0)[i];
 		}
 	}
-	if (g_773dac == 0) {
+	if ((*(Entity**)&g_773dac) == 0) {
 		fcn_0041d9e0("init_LocalData(): gm_RichterKatholisch==NULL");
 	}
-	if (g_773db0 == 0) {
+	if ((*(Entity**)&g_773db0) == 0) {
 		fcn_0041d9e0("init_LocalData(): gm_RichterEvangelisch==NULL");
 	}
 	if ((g_7747b0 & 0x44) == 0) {

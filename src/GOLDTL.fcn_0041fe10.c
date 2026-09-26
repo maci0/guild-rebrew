@@ -23,8 +23,8 @@ typedef struct Chan {
 	struct Chan* next;
 } Chan;
 
-extern int* g_6b71a4;
-extern int* g_6b71a8;
+extern int g_6b71a4;
+extern int g_6b71a8;
 extern int g_6b719c;
 extern char g_6b6f90[];
 extern char g_14cc360[];
@@ -47,7 +47,7 @@ int __cdecl fcn_0041fe10(Chan* c, int restart)
 	int err;
 	Chan* cur;
 
-	if (g_6b71a4 == 0 || g_6b71a8 == 0) {
+	if (((int*)g_6b71a4) == 0 || ((int*)g_6b71a8) == 0) {
 		return 0;
 	}
 	EnterCriticalSection(&g_14cc5a0);
@@ -62,10 +62,10 @@ int __cdecl fcn_0041fe10(Chan* c, int restart)
 		strcat(path, c->name);
 		if (c->handle == 0) {
 			if (c->music != 0) {
-				err = fcn_0042abd0(g_6b71a8, path, &c->handle);
+				err = fcn_0042abd0(((int*)g_6b71a8), path, &c->handle);
 			}
 			else {
-				err = fcn_0042abd0(g_6b71a4, path, &c->handle) == -1;
+				err = fcn_0042abd0(((int*)g_6b71a4), path, &c->handle) == -1;
 			}
 			if (err != 0) {
 				LeaveCriticalSection(&g_14cc5a0);

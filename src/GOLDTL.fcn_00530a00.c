@@ -7,8 +7,8 @@ struct s_7f4ca0 {
 	char pad2[0x94];
 };
 
-extern struct s_7f4ca0 g_7f4ca0[768];
-extern struct s_7f4ca0* g_7e4260[32];
+extern char g_7f4ca0[];
+extern char* g_7e4260[32];
 
 // FUNCTION: GOLD 0x0052b2d0
 // SIZE: 166
@@ -23,22 +23,22 @@ void __cdecl fcn_00530a00(char* b)
 	struct s_7f4ca0** out;
 	int i;
 
-	memset(g_7e4260, 0, sizeof(g_7e4260));
+	memset(((struct s_7f4ca0**)g_7e4260), 0, sizeof(struct s_7f4ca0*[32]));
 	if (b != 0) {
-		out = g_7e4260;
-		for (i = 0; i < 768 && (int) out < (int) &g_7e4260[31]; i++) {
-			if (g_7f4ca0[i].d != 0 && *(int*) (g_7f4ca0[i].d + 0x2c) == *(int*) (b + 1)) {
-				*out++ = &g_7f4ca0[i];
-				if ((int) out > (int) &g_7e4260[8]) {
-					fcn_00402a00(g_7f4ca0[i].d, 0);
+		out = ((struct s_7f4ca0**)g_7e4260);
+		for (i = 0; i < 768 && (int) out < (int) &((struct s_7f4ca0**)g_7e4260)[31]; i++) {
+			if (((struct s_7f4ca0*)g_7f4ca0)[i].d != 0 && *(int*) (((struct s_7f4ca0*)g_7f4ca0)[i].d + 0x2c) == *(int*) (b + 1)) {
+				*out++ = &((struct s_7f4ca0*)g_7f4ca0)[i];
+				if ((int) out > (int) &((struct s_7f4ca0**)g_7e4260)[8]) {
+					fcn_00402a00(((struct s_7f4ca0*)g_7f4ca0)[i].d, 0);
 				}
 			}
 		}
 	} else {
-		out = g_7e4260;
-		for (i = 0; i < 768 && (int) out < (int) &g_7e4260[31]; i++) {
-			if (g_7f4ca0[i].d != 0 && *(int*) (g_7f4ca0[i].d + 0x2c) == -1) {
-				*out++ = &g_7f4ca0[i];
+		out = ((struct s_7f4ca0**)g_7e4260);
+		for (i = 0; i < 768 && (int) out < (int) &((struct s_7f4ca0**)g_7e4260)[31]; i++) {
+			if (((struct s_7f4ca0*)g_7f4ca0)[i].d != 0 && *(int*) (((struct s_7f4ca0*)g_7f4ca0)[i].d + 0x2c) == -1) {
+				*out++ = &((struct s_7f4ca0*)g_7f4ca0)[i];
 			}
 		}
 	}

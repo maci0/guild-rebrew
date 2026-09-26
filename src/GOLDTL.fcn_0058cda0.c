@@ -12,7 +12,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
 extern int g_772514;
@@ -55,7 +55,7 @@ int __cdecl fcn_0058cda0(char* who, int k)
 	if (*(unsigned short*) (who + 0x27) == g_774970) {
 		x = 0;
 	} else {
-		x = fcn_004f4440(&g_7f4ca0[g_774970], 0xff, k, 1, &got);
+		x = fcn_004f4440(&((struct house*)g_7f4ca0)[g_774970], 0xff, k, 1, &got);
 	}
 	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Friedhof");
 	fcn_00473a90(0, 0);
@@ -78,8 +78,8 @@ int __cdecl fcn_0058cda0(char* who, int k)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (g_67d370 == ok) {
-				if (x == 0 || fcn_00526010(&g_7f4ca0[g_774970], x, g_773d75) != 0) {
-					id = fcn_004f2540(&g_7f4ca0[g_774970], who, k, 10, x);
+				if (x == 0 || fcn_00526010(&((struct house*)g_7f4ca0)[g_774970], x, g_773d75) != 0) {
+					id = fcn_004f2540(&((struct house*)g_7f4ca0)[g_774970], who, k, 10, x);
 					while (id != -1 && fcn_004c4450(id) == 0) {
 						fcn_005373e0(0, 0x20007);
 					}

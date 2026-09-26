@@ -4,7 +4,7 @@
 // SIZE: 402
 
 extern char g_868354[][0x2f4];
-extern char* g_7746a0;
+extern int g_7746a0;
 extern char* g_7746a4;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
@@ -46,15 +46,15 @@ void __cdecl fcn_005a3680(void)
 	fcn_005338a0();
 	if (fcn_005373e0((void*) fcn_005a3680, 0x677d7) != 0) {
 		do {
-			g_7746a0 = 0;
+			(*(char**)&g_7746a0) = 0;
 			for (i = 0; i < 3; i++) {
 				fcn_005338d0(items[i], g_868354[i], 0);
 			}
 			g_7746a4 = fcn_00443bf0((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
 			if (g_14ce8cc != 0 && g_7746a4 != 0) {
-				g_7746a0 = g_7746a4;
+				(*(char**)&g_7746a0) = g_7746a4;
 				for (i = 0; i < 3; i++) {
-					if (g_7746a0 == items[i]) {
+					if ((*(char**)&g_7746a0) == items[i]) {
 						for (e = gm_StartFilteredEntitySearch(1, 0, 0x47); e != 0; e = gm_AddObjekt()) {
 							if (*(int*) (e + 0x65) == i + 1) {
 								fcn_005a31b0(e, 1);

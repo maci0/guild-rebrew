@@ -7,7 +7,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 unsigned short __cdecl fcn_0042e410(int n);
 void __cdecl fcn_004c4510(Ent* e, int h);
@@ -25,14 +25,14 @@ void __cdecl fcn_00495890(void)
 
 	flags = 1;
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].kind != 3) {
+		if (((Ent*)g_7f4ca0)[i].kind != 3) {
 			continue;
 		}
 		flags |= fcn_0042e410(2) ? 2 : 0;
 		flags |= fcn_0042e410(3) ? 4 : 0;
 		flags |= fcn_0042e410(3) ? 8 : 0;
 		flags |= fcn_0042e410(2) ? 0x10 : 0;
-		fcn_004c4510(&g_7f4ca0[i], g_7f4ca0[i].handle);
+		fcn_004c4510(&((Ent*)g_7f4ca0)[i], ((Ent*)g_7f4ca0)[i].handle);
 		fcn_004c4570(4, 1, 0x1e8, &flags);
 		fcn_004c5360();
 	}

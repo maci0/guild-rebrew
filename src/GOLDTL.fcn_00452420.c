@@ -1,7 +1,7 @@
 // FUNCTION: GOLDTL 0x452420
 // SIZE: 188
 
-extern char* g_67a370;
+extern int g_67a370;
 
 void __cdecl fcn_004523a0(char*);
 void __cdecl fcn_0045bfb0(int);
@@ -12,7 +12,7 @@ void __cdecl fcn_00452420(char* o)
 	char* owner;
 
 	owner = *(char**) (o + 0x2f4);
-	if (owner == g_67a370) {
+	if (owner == ((char*)g_67a370)) {
 		*(char**) (*(char**) (o + 0x314) + 0x318) = *(char**) (o + 0x318);
 		*(char**) (*(char**) (o + 0x318) + 0x314) = *(char**) (o + 0x314);
 		if (o == *(char**) (owner + 0xa4)) {

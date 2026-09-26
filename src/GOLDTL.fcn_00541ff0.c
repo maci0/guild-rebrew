@@ -40,7 +40,7 @@ typedef struct {
 	char pad68[0x90];
 } Msg;
 
-extern Entity g_7f4ca0[];
+extern char g_7f4ca0[];
 
 void __cdecl fcn_004c4510(Entity*, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
@@ -61,24 +61,24 @@ void __cdecl fcn_00541ff0(int index)
 	int step;
 	int busy;
 
-	if (g_7f4ca0[index].type != 6 && g_7f4ca0[index].type != 7 && g_7f4ca0[index].type < 10) {
+	if (((Entity*)g_7f4ca0)[index].type != 6 && ((Entity*)g_7f4ca0)[index].type != 7 && ((Entity*)g_7f4ca0)[index].type < 10) {
 		int one;
 
-		e = &g_7f4ca0[index];
+		e = &((Entity*)g_7f4ca0)[index];
 		one = 1;
-		if (g_7f4ca0[index].apprentice != 0 || g_7f4ca0[index].type == 5 || g_7f4ca0[index].type == 1
-			|| g_7f4ca0[index].type == 2 || g_7f4ca0[index].type == 4) {
+		if (((Entity*)g_7f4ca0)[index].apprentice != 0 || ((Entity*)g_7f4ca0)[index].type == 5 || ((Entity*)g_7f4ca0)[index].type == 1
+			|| ((Entity*)g_7f4ca0)[index].type == 2 || ((Entity*)g_7f4ca0)[index].type == 4) {
 			fcn_004c4510(e, e->id);
 			fcn_004c4670(4, 1, 0x174, &one);
 			fcn_004c5360();
 		}
-		if (g_7f4ca0[index].trade != 0) {
-			step = gm_GetOppositeStatIndex(g_7f4ca0[index].trade);
+		if (((Entity*)g_7f4ca0)[index].trade != 0) {
+			step = gm_GetOppositeStatIndex(((Entity*)g_7f4ca0)[index].trade);
 			busy = fcn_005463a0(2, 2, e->slot, 0, 0x24);
 			e->busy++;
 			grade = fcn_00507540(index, info);
 			e->busy--;
-			if (busy == 0 && step != 0 && step < 6 && grade >= 1.0 && g_7f4ca0[index].rank >= 0) {
+			if (busy == 0 && step != 0 && step < 6 && grade >= 1.0 && ((Entity*)g_7f4ca0)[index].rank >= 0) {
 				memset(&msg, 0, sizeof(msg));
 				msg.x64 = 0;
 				msg.x5c = 0;
@@ -93,10 +93,10 @@ void __cdecl fcn_00541ff0(int index)
 				fcn_005100f0(e->id, -4);
 			}
 		}
-	} else if (g_7f4ca0[index].type == 6 || g_7f4ca0[index].type == 7) {
+	} else if (((Entity*)g_7f4ca0)[index].type == 6 || ((Entity*)g_7f4ca0)[index].type == 7) {
 		int flag;
 
-		e = &g_7f4ca0[index];
+		e = &((Entity*)g_7f4ca0)[index];
 		flag = 1;
 		fcn_004c4510(e, e->id);
 		fcn_004c4670(4, 1, 0x174, &flag);

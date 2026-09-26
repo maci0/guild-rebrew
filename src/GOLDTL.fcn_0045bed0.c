@@ -7,7 +7,7 @@ extern int g_10405cc;
 extern unsigned int g_10404a0;
 extern int g_67bd2c;
 extern int g_10405c4;
-extern void* g_104049c;
+extern char* g_104049c;
 extern int g_10404c0[32];
 extern int g_10405c0;
 extern int g_1040540[32];
@@ -23,7 +23,7 @@ void __cdecl fcn_0045bed0(unsigned int n, int a2)
 	g_10404a0 = n;
 	g_67bd2c = a2;
 	g_10405c4 = 0;
-	g_104049c = fcn_0041db70(n * 0x70, g_67bd38);
+	(*(void**)&g_104049c) = fcn_0041db70(n * 0x70, g_67bd38);
 	memset(g_10404c0, 0, sizeof(g_10404c0));
 	g_10405c0 = 0;
 	memset(g_1040540, 0, sizeof(g_1040540));

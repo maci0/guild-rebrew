@@ -11,7 +11,7 @@ struct fcn_0047c520_dev {
 };
 
 extern int g_772618;
-extern fcn_0047c520_dev* g_6b5de0;
+extern void* g_6b5de0;
 
 // FUNCTION: GOLDTL 0x47c520
 // SIZE: 58
@@ -19,8 +19,8 @@ extern fcn_0047c520_dev* g_6b5de0;
 void __cdecl fcn_0047c520(void)
 {
 	if (g_772618 != 0) {
-		g_6b5de0->vtbl->f14c(g_6b5de0, 0, 0, 0);
-		g_6b5de0->vtbl->ff4(g_6b5de0, 0, 0);
+		((fcn_0047c520_dev*)g_6b5de0)->vtbl->f14c(((fcn_0047c520_dev*)g_6b5de0), 0, 0, 0);
+		((fcn_0047c520_dev*)g_6b5de0)->vtbl->ff4(((fcn_0047c520_dev*)g_6b5de0), 0, 0);
 		g_772618 = 0;
 	}
 }

@@ -18,7 +18,7 @@ struct s_7f4ca0 {
 	char pad5[0x6a];
 };
 
-extern struct s_7f4ca0 g_7f4ca0[768];
+extern char g_7f4ca0[];
 
 // FUNCTION: GOLD 0x0053a6b0
 // SIZE: 202
@@ -39,7 +39,7 @@ void __cdecl fcn_005421f0(void)
 	char c;
 
 	i = 0;
-	for (k = &g_7f4ca0[0].kind; (int) k < (int) &g_7f4ca0[768].kind; k += sizeof(struct s_7f4ca0)) {
+	for (k = &((struct s_7f4ca0*)g_7f4ca0)[0].kind; (int) k < (int) &((struct s_7f4ca0*)g_7f4ca0)[768].kind; k += sizeof(struct s_7f4ca0)) {
 		r = (struct s_7f4ca0*) (k - 2);
 		if (r->id != 0xffff) {
 			if (r->b164 != 0 || r->b165 != 0) {

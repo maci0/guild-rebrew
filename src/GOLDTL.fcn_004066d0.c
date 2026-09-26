@@ -7,7 +7,7 @@ struct room_4066d0 {
 	char pad[0x3d8];
 };
 
-extern struct room_4066d0 g_1043370[];
+extern char g_1043370[];
 extern int g_6b8010;
 
 int __cdecl fcn_00413190(int);
@@ -50,7 +50,7 @@ void __cdecl fcn_004066d0(char* ev)
 	fcn_004432d0(room, 1);
 	door = fcn_00445600(0, 0x120, 0, ev + 0x130);
 	if (door != 0) {
-		map = g_1043370[room].map;
+		map = ((struct room_4066d0*)g_1043370)[room].map;
 		fcn_00455350(door, door + 0x4c, pos);
 		if (fcn_0045b990(map, pos, &col, &row, &height)) {
 			fcn_004051d0(obj, ev, 0x2d, col, row, room);

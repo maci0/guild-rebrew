@@ -27,7 +27,7 @@ typedef struct Player {
 // SIZE 0x2f4
 
 extern unsigned char g_773d75;
-extern Player g_868060[];
+extern char g_868060[];
 
 Ent* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(Ent*, int);
@@ -94,9 +94,9 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 	fcn_005015e0(&work, 0, 0, o->shop);
 	if (shop != 0 && work != 0) {
 		if (*shop == 'G') {
-			fcn_0051af00(text, cmd->text + 0x12e7, g_868060[0].name);
+			fcn_0051af00(text, cmd->text + 0x12e7, ((Player*)g_868060)[0].name);
 		} else {
-			fcn_0051af00(text, cmd->text + 0x12e7, g_868060[*(int*) (work + 0x65)].name, amount);
+			fcn_0051af00(text, cmd->text + 0x12e7, ((Player*)g_868060)[*(int*) (work + 0x65)].name, amount);
 		}
 		fcn_00545d40(e->handle, e->handle, text, 0x100 < strlen(text), 0x5ef, 0);
 	}

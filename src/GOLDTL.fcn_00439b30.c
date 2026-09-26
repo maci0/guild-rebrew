@@ -1,14 +1,14 @@
 // FUNCTION: GOLDTL 0x439b30
 // SIZE: 112
 
-extern char* g_6b8014;
+extern int g_6b8014;
 
 void __cdecl fcn_00439b30(char* o)
 {
 	switch (*(int*) (o + 0x218)) {
 	case 3:
-		if (g_6b8014 == o) {
-			g_6b8014 = 0;
+		if ((*(char**)&g_6b8014) == o) {
+			(*(char**)&g_6b8014) = 0;
 		}
 	case 1:
 	case 2:

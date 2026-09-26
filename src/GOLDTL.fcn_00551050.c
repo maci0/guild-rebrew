@@ -10,7 +10,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern struct house g_7f4ca0[];
+extern char g_7f4ca0[];
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, unsigned short);
 unsigned char* __cdecl gm_AddObjekt(void);
@@ -43,9 +43,9 @@ void __cdecl fcn_00551050(char* u)
 			if (e != 0) {
 				fcn_0050ff70(e, -0x32);
 			}
-			if (g_7f4ca0[*(unsigned short*) (u + 8)].type == 6) {
+			if (((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].type == 6) {
 				fcn_0051af00(text, 0x10b8, e);
-				fcn_00545e80(g_7f4ca0[*(unsigned short*) (u + 8)].owner, g_7f4ca0[*(unsigned short*) (u + 8)].owner, text, 0,
+				fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, text, 0,
 				    0x5ec, *(int*) (e + 1), -1, 0, 0);
 			}
 		}

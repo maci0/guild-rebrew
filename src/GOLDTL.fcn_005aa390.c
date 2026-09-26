@@ -8,7 +8,7 @@ typedef struct {
 } Ent5aa3;
 // SIZE 0x21c
 
-extern Ent5aa3 g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern int g_14aad38;
 extern int g_14aac9c;
@@ -28,13 +28,13 @@ void __cdecl fcn_005aa390(void)
 	int flen;
 	int r;
 
-	r = fcn_004eb260(&g_7f4ca0[g_774970]);
+	r = fcn_004eb260(&((Ent5aa3*)g_7f4ca0)[g_774970]);
 	if (r != 1) {
 		if (r == -1) {
 			fcn_00526120(g_14aad38, 0);
 			return;
 		}
-		fcn_00525f60(&g_7f4ca0[g_774970], 5);
+		fcn_00525f60(&((Ent5aa3*)g_7f4ca0)[g_774970], 5);
 		return;
 	}
 	flen = 0x50;

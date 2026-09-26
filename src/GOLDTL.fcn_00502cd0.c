@@ -6,7 +6,7 @@
 /* The T&L build of gm_ff_Objekt (SERVER 0x10016460): the invalid flag
  * combination returns NULL without the LogMessageInternal call. */
 
-extern int g_99ec10;
+extern char* g_99ec10;
 extern int g_69938c;
 extern unsigned int g_699390;
 extern unsigned short g_699394;
@@ -17,7 +17,7 @@ extern unsigned char g_773d99;
 extern unsigned char g_773d90;
 extern int g_773d94;
 extern int g_868058;
-extern int g_868054;
+extern unsigned short* g_868054;
 extern unsigned short* g_773da4;
 
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -29,7 +29,7 @@ unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...)
 	unsigned char flag1;
 	unsigned char flag2;
 
-	if (g_99ec10 == 0) {
+	if ((*(int*)&g_99ec10) == 0) {
 		return (unsigned short*) 0;
 	}
 
@@ -92,7 +92,7 @@ unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...)
 			if (flag2 != 0) {
 				return (unsigned short*) 0;
 			}
-			container_id = g_868054;
+			container_id = (*(int*)&g_868054);
 			goto query_tail;
 		}
 	}

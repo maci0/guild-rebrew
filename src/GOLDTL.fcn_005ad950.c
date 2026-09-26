@@ -17,7 +17,7 @@ typedef struct {
 	int id;
 } Req;
 
-extern char* g_868050;
+extern unsigned char* g_868050;
 
 int __cdecl fcn_00525fb0(unsigned char*);
 void __cdecl fcn_0052a0c0(unsigned char*, int);
@@ -39,7 +39,7 @@ void __cdecl fcn_005ad950(unsigned char* e)
 			fcn_0052a0c0(e, 0);
 			req.id = 0x727;
 			req.kind = 7;
-			if (g_868050[*e * 589] == 0x13) {
+			if (((char*)g_868050)[*e * 589] == 0x13) {
 				req.c = 0x90010;
 				req.d = 0;
 			}

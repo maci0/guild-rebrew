@@ -1,4 +1,4 @@
-extern int g_666018;
+extern __int64 g_666018;
 extern int g_66601c;
 extern char g_5c0d90[];
 
@@ -23,7 +23,7 @@ void __cdecl fcn_005c1090(int a1)
 	memset(buf, 0, 0x50);
 	*(int*) (buf + 4) = 0x400;
 	*(int*) (buf + 0x10) = 6;
-	*(int*) (buf + 8) = g_666018;
+	*(int*) (buf + 8) = (*(int*)&g_666018);
 	*(int*) (buf + 0xc) = g_66601c;
 	fcn_0051af00(buf + 0x50, 0x190d);
 	fcn_005cd440(buf, buf + 0x50, 0, (int) g_5c0d90);

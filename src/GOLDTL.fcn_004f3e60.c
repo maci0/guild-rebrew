@@ -9,7 +9,7 @@ typedef struct Kind4f3e60 {
 #pragma pack(pop)
 // SIZE 0x24d
 
-extern Kind4f3e60* g_868050;
+extern unsigned char* g_868050;
 extern char g_7f4ca0[];
 
 // FUNCTION: GOLD 0x4f1d50
@@ -23,7 +23,7 @@ int __cdecl fcn_004f3e60(unsigned char* s, int* count)
 	int n;
 	int p;
 
-	k = &g_868050[*s];
+	k = &((Kind4f3e60*)g_868050)[*s];
 	if (k->kind != 0x1d) {
 		return -1;
 	}

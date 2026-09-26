@@ -7,18 +7,18 @@ struct tick_42dcd0 {
 	int paused;
 };
 
-extern volatile int g_6b7fb8;
-extern volatile int g_6b7fc0;
-extern struct tick_42dcd0 g_1052c60[32];
-extern volatile unsigned int g_6b7fac;
+extern int g_6b7fb8;
+extern int g_6b7fc0;
+extern int g_1052c60[0x60];
+extern int g_6b7fac;
 extern volatile int g_6b7fb0;
 extern volatile int g_6b7fb4;
 extern volatile char g_6b7fc8;
 extern int g_6b7fcc;
-extern volatile int g_6b7fc4;
-extern unsigned int g_1052c48;
+extern int g_6b7fc4;
+extern unsigned int g_1052c48[2];
 extern unsigned int g_1052c50;
-extern unsigned int g_6b7fa8;
+extern int g_6b7fa8;
 
 typedef void (__stdcall* timecb_42dcd0)(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
 
@@ -39,29 +39,30 @@ void __stdcall fcn_0042dcd0(unsigned int id, unsigned int msg, unsigned long use
 		return;
 	}
 	g_6b7fbc = 1;
-	g_6b7fb8++;
-	if (g_6b7fc0 == 0) {
+	(*(volatile int*)&g_6b7fb8)++;
+	if ((*(volatile int*)&g_6b7fc0) == 0) {
 		for (i = 0; i < 32; i++) {
-			if (g_1052c60[i].fn != 0 && g_6b7fac % g_1052c60[i].period == 0 && g_1052c60[i].paused == 0) {
-				g_1052c60[i].fn();
+			if (((struct tick_42dcd0*)g_1052c60)[i].fn != 0 && (*(volatile unsigned int*)&g_6b7fac) % ((struct tick_42dcd0*)g_1052c60)[i].period == 0
+			    && ((struct tick_42dcd0*)g_1052c60)[i].paused == 0) {
+				((struct tick_42dcd0*)g_1052c60)[i].fn();
 			}
 		}
-		if (g_6b7fac % 3 == 0) {
+		if ((*(volatile unsigned int*)&g_6b7fac) % 3 == 0) {
 			g_6b7fb0++;
 		}
-		if (g_6b7fac & 1) {
+		if ((*(volatile unsigned int*)&g_6b7fac) & 1) {
 			g_6b7fb4++;
 		}
 		if (g_6b7fc8 != 0) {
 			if (++g_6b7fcc % 20 == 0) {
-				g_6b7fac++;
+				(*(volatile unsigned int*)&g_6b7fac)++;
 			}
 		} else {
-			g_6b7fac++;
+			(*(volatile unsigned int*)&g_6b7fac)++;
 		}
 	}
-	if (g_6b7fc4 != 0) {
-		g_6b7fa8 = timeSetEvent(g_1052c50, g_1052c48 + 5, fcn_0042dcd0, 0, 0);
+	if ((*(volatile int*)&g_6b7fc4) != 0) {
+		(*(unsigned int*)&g_6b7fa8) = timeSetEvent(g_1052c50, (*(unsigned int*)g_1052c48) + 5, fcn_0042dcd0, 0, 0);
 	}
 	g_6b7fbc = 0;
 }

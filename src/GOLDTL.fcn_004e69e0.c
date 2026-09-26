@@ -20,15 +20,15 @@ typedef struct
 } Ent114;
 // SIZE 0x114
 
-extern Ent114 g_9a9660[96];
+extern char g_9a9660[];
 
 Ent114* __cdecl fcn_004e69e0(int type, int key)
 {
 	int i;
 
 	for (i = 0; i < 96; i++) {
-		if (g_9a9660[i].active != 0 && g_9a9660[i].type == type && g_9a9660[i].key == key) {
-			return &g_9a9660[i];
+		if (((Ent114*)g_9a9660)[i].active != 0 && ((Ent114*)g_9a9660)[i].type == type && ((Ent114*)g_9a9660)[i].key == key) {
+			return &((Ent114*)g_9a9660)[i];
 		}
 	}
 	return 0;

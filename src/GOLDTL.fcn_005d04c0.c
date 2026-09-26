@@ -9,7 +9,7 @@ typedef struct {
 } Row5d04;
 // SIZE 0x2f4
 
-extern Row5d04 g_868060[4];
+extern char g_868060[];
 extern char g_6a40d0[];
 extern char g_6a40b0[];
 extern char g_6a40a0[];
@@ -56,8 +56,8 @@ void __cdecl fcn_005d04c0(void)
 		pos[0] = *(float*) (a + 0x4c);
 		pos[1] = *(float*) (a + 0x50);
 		z = *(float*) (a + 0x54);
-		pos[0] += g_868060[i].a * g_66418c * dx;
-		pos[2] = g_868060[i].b * g_665e64 * dz + z;
+		pos[0] += ((Row5d04*)g_868060)[i].a * g_66418c * dx;
+		pos[2] = ((Row5d04*)g_868060)[i].b * g_665e64 * dz + z;
 		o = fcn_00442910(0, pos, a + 0x84, g_6a40a0);
 		o[0x215] |= 1;
 		o[0x216] = (o[0x216] & ~2) | 1;

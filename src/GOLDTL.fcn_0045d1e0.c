@@ -19,7 +19,7 @@ typedef struct {
 	int x6c;
 } Tex;
 
-extern Tex* g_104049c;
+extern char* g_104049c;
 extern unsigned int g_10404a0;
 extern int g_10405c0;
 
@@ -72,14 +72,14 @@ Tex* __cdecl fcn_0045d1e0(Tex* src, int color, char recurse)
 		if (src->flags & 2) {
 			p->x44 = src->x44;
 		} else {
-			p->x44 = src - g_104049c;
+			p->x44 = src - ((Tex*)g_104049c);
 		}
 		g_10405c4++;
 		if (p->x48 != -1 && p->x5c > 0 && recurse) {
 			p->x48 = g_10405c0;
 			for (i = 0; i < g_10404a0; i++) {
-				if (g_104049c[i].x40 > 0 && g_104049c[i].x48 == src->x48) {
-					fcn_0045d1e0(&g_104049c[i], color, 0);
+				if (((Tex*)g_104049c)[i].x40 > 0 && ((Tex*)g_104049c)[i].x48 == src->x48) {
+					fcn_0045d1e0(&((Tex*)g_104049c)[i], color, 0);
 				}
 			}
 			g_10405c0++;

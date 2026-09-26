@@ -22,8 +22,8 @@ struct Bank {
 };
 
 extern int g_6b7d7c;
-extern Bank* g_6b7d78;
-extern Sample g_14cbc20;
+extern int* g_6b7d78;
+extern char g_14cbc20[];
 
 Sample* __cdecl fcn_00422530(Bank* bank, const char* name)
 {
@@ -35,7 +35,7 @@ Sample* __cdecl fcn_00422530(Bank* bank, const char* name)
 	r = 0;
 	i = 0;
 	if (g_6b7d7c == 0) {
-		return &g_14cbc20;
+		return &(*(Sample*)g_14cbc20);
 	}
 	if (bank != 0) {
 		n = bank->count;
@@ -46,7 +46,7 @@ Sample* __cdecl fcn_00422530(Bank* bank, const char* name)
 			}
 		}
 	} else {
-		for (b = g_6b7d78; b != 0; b = b->next) {
+		for (b = ((Bank*)g_6b7d78); b != 0; b = b->next) {
 			r = fcn_00422530(b, name);
 			if (r != 0) {
 				break;

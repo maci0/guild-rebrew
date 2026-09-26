@@ -56,7 +56,7 @@ struct Device {
 extern int g_6b8014;
 extern Mat g_1040cc0;
 extern Mat g_1040c80;
-extern Device* g_6b5de0;
+extern void* g_6b5de0;
 extern int g_67a370;
 extern char g_6b8000;
 
@@ -93,9 +93,9 @@ void __cdecl fcn_00451df0(Ent* e)
 	fcn_005ed45f(&g_1040cc0, &p);
 	fcn_005ebea2(&g_1040c80, 0, &g_1040cc0);
 	fcn_005ebbb9(&g_1040c80, &g_1040c80);
-	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x16, 2);
+	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x16, 2);
 	g_6b8000 = 1;
 	fcn_004379a0(g_67a370, 0, 0x40, fcn_00451f80, &big);
 	g_6b8000 = 0;
-	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x16, 3);
+	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x16, 3);
 }

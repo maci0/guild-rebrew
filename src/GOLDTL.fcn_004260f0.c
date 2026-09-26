@@ -7,7 +7,7 @@ struct sym_4260f0 {
 };
 
 extern char* g_6b7eb8;
-extern struct sym_4260f0* g_14cb8e0;
+extern void* g_14cb8e0;
 extern int g_14cb8e4;
 
 // FUNCTION: GOLD 0x4278d0
@@ -40,8 +40,8 @@ void* __cdecl fcn_004260f0(char* ctx, char* name)
 		}
 	}
 	for (i = 0; i < g_14cb8e4; i++) {
-		if (strcmp(g_14cb8e0[i].name, name) == 0) {
-			return &g_14cb8e0[i];
+		if (strcmp(((struct sym_4260f0*)g_14cb8e0)[i].name, name) == 0) {
+			return &((struct sym_4260f0*)g_14cb8e0)[i];
 		}
 	}
 	return 0;

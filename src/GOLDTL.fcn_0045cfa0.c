@@ -14,7 +14,7 @@ typedef struct Rec045cfa0 {
 
 typedef void(__cdecl* Progress045cfa0)(int stage, int done, int total);
 
-extern Rec045cfa0* g_104049c;
+extern char* g_104049c;
 extern unsigned int g_10404a0;
 extern int g_6b8af0;
 
@@ -31,13 +31,13 @@ void __cdecl fcn_0045cfa0(Progress045cfa0 cb)
 	if (cb != 0) {
 		total = 0;
 		for (i = 0; i < g_10404a0; i++) {
-			if (g_104049c[i].level > 0 && (g_104049c[i].flags & 2) == 0) {
+			if (((Rec045cfa0*)g_104049c)[i].level > 0 && (((Rec045cfa0*)g_104049c)[i].flags & 2) == 0) {
 				total++;
 			}
 		}
 	}
 	done = 0;
-	r = g_104049c;
+	r = ((Rec045cfa0*)g_104049c);
 	for (i = 0; i < g_10404a0; i++, r++) {
 		if (r->level > 0 && (r->flags & 2) == 0) {
 			fcn_0045ce90(r);

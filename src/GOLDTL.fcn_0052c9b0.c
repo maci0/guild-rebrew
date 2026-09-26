@@ -18,7 +18,7 @@ typedef struct {
 	char pad0[0x21c];
 } Rec;
 
-extern View* g_6b8014;
+extern int g_6b8014;
 extern int g_6b7fc0;
 extern int g_7e4300;
 extern int g_6a99e8;
@@ -29,17 +29,17 @@ extern char g_6a2574;
 extern char g_14cf70f;
 extern int g_774650;
 extern int g_774658;
-extern int g_7746c4;
-extern int g_7746c8;
+extern char* g_7746c4;
+extern unsigned char* g_7746c8;
 extern unsigned short g_774970;
-extern Rec g_7f4ca0[];
-extern int g_774694;
-extern int g_7e3a40;
-extern int g_7e3a44;
-extern int g_7e3a48;
-extern int g_7e3a50;
-extern int g_7e3a54;
-extern int g_7e3a58;
+extern char g_7f4ca0[];
+extern float g_774694;
+extern float g_7e3a40[3];
+extern float g_7e3a44;
+extern float g_7e3a48;
+extern float g_7e3a50[3];
+extern float g_7e3a54;
+extern float g_7e3a58;
 extern int g_6772c4;
 extern short g_14ce8c0;
 extern int g_1040494;
@@ -59,7 +59,7 @@ int __cdecl fcn_0052c9b0(void)
 {
 	char* p;
 
-	if (g_6b8014 != 0 && g_6b7fc0 == 0) {
+	if (((View*)g_6b8014) != 0 && g_6b7fc0 == 0) {
 		if (g_7e4300 == 0 && g_6a99e8 == -1) {
 			if (g_14ce8e8 == 0) {
 				g_774668 = fcn_0052b720();
@@ -70,24 +70,24 @@ int __cdecl fcn_0052c9b0(void)
 			if (g_6a2574 != 0 && g_14cf70f == 0) {
 				fcn_0052ad70();
 			}
-			if (g_774668 != 0 && g_774650 == g_774658 && g_7746c4 == 0 && g_7746c8 == 0) {
-				p = fcn_00509570(&g_7f4ca0[g_774970]);
+			if (g_774668 != 0 && g_774650 == g_774658 && (*(int*)&g_7746c4) == 0 && (*(int*)&g_7746c8) == 0) {
+				p = fcn_00509570(&((Rec*)g_7f4ca0)[g_774970]);
 				if (p != 0) {
-					*(int*) (p + 0x8c) = g_6b8014->x;
-					*(int*) (p + 0x90) = g_6b8014->y;
-					*(int*) (p + 0x94) = g_6b8014->z;
-					*(int*) (p + 0x9c) = g_6b8014->rx;
-					*(int*) (p + 0xa0) = g_6b8014->ry;
-					*(int*) (p + 0xa4) = g_6b8014->rz;
-					*(int*) (p + 0x88) = g_774694;
+					*(int*) (p + 0x8c) = ((View*)g_6b8014)->x;
+					*(int*) (p + 0x90) = ((View*)g_6b8014)->y;
+					*(int*) (p + 0x94) = ((View*)g_6b8014)->z;
+					*(int*) (p + 0x9c) = ((View*)g_6b8014)->rx;
+					*(int*) (p + 0xa0) = ((View*)g_6b8014)->ry;
+					*(int*) (p + 0xa4) = ((View*)g_6b8014)->rz;
+					*(int*) (p + 0x88) = (*(int*)&g_774694);
 				}
 			}
-			g_7e3a50 = g_6b8014->rx;
-			g_7e3a54 = g_6b8014->ry;
-			g_7e3a58 = g_6b8014->rz;
-			g_7e3a40 = g_6b8014->x;
-			g_7e3a44 = g_6b8014->y;
-			g_7e3a48 = g_6b8014->z;
+			(*(int*)g_7e3a50) = ((View*)g_6b8014)->rx;
+			(*(int*)&g_7e3a54) = ((View*)g_6b8014)->ry;
+			(*(int*)&g_7e3a58) = ((View*)g_6b8014)->rz;
+			(*(int*)g_7e3a40) = ((View*)g_6b8014)->x;
+			(*(int*)&g_7e3a44) = ((View*)g_6b8014)->y;
+			(*(int*)&g_7e3a48) = ((View*)g_6b8014)->z;
 		}
 		return g_774668;
 	}

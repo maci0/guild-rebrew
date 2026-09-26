@@ -5,8 +5,8 @@ extern float g_1043288;
 extern float g_10529c8;
 extern float g_10421a0;
 extern float g_10432a4;
-extern int g_1042a28;
-extern int g_1042a24;
+extern float g_1042a28;
+extern float g_1042a24;
 extern float g_1052bbc;
 extern float g_1052bc0;
 extern float g_1052bb4;
@@ -37,11 +37,11 @@ void __cdecl fcn_00438da0(float w, float h, float x, float y, float znear, float
 	int bottom;
 
 	if (g_10529d8 == w && g_10529d4 == h && g_1042570 == x && g_1042574 == y && g_10432a4 == dist && g_10529c8 == znear
-	    && g_10421a0 == zfar && g_1042a28 == sw && g_1042a24 == sh) {
+	    && g_10421a0 == zfar && (*(int*)&g_1042a28) == sw && (*(int*)&g_1042a24) == sh) {
 		return;
 	}
-	g_1042a28 = sw;
-	g_1042a24 = sh;
+	(*(int*)&g_1042a28) = sw;
+	(*(int*)&g_1042a24) = sh;
 	g_10529d8 = w;
 	g_10529d4 = h;
 	g_10529c8 = znear;

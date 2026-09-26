@@ -5,7 +5,7 @@
 
 #include <string.h>
 
-extern char* g_868050;
+extern unsigned char* g_868050;
 extern char* g_99ec10;
 
 int __cdecl _strcmpi(const char* a, const char* b);
@@ -47,7 +47,7 @@ int __cdecl fcn_005105a0(char* o)
 		return 0;
 	}
 	for (i = 0; i < 88; i++) {
-		if (_strcmpi(type, g_868050 + i * 589 + 1) == 0) {
+		if (_strcmpi(type, ((char*)g_868050) + i * 589 + 1) == 0) {
 			*(int*) (o + 0x48) = i | 0x2000000;
 			return 1;
 		}

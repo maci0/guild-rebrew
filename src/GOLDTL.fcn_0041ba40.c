@@ -29,20 +29,20 @@ struct Device {
 	DeviceVtbl* vtbl;
 };
 
-extern Device* g_6b5de0;
-extern Font* g_6b5de4;
+extern void* g_6b5de0;
+extern void* g_6b5de4;
 extern void* g_6b5df4;
 long __stdcall D3DXCreateFont(Device* dev, HFONT font, Font** out);
 int __cdecl fcn_0041b870(void);
 
 int __cdecl fcn_0041ba40(void)
 {
-	if (g_6b5de4 == 0) {
-		D3DXCreateFont(g_6b5de0, (HFONT) GetStockObject(0xc), &g_6b5de4);
+	if ((*(Font**)&g_6b5de4) == 0) {
+		D3DXCreateFont(((Device*)g_6b5de0), (HFONT) GetStockObject(0xc), &(*(Font**)&g_6b5de4));
 	}
-	if (g_6b5de4 != 0) {
-		g_6b5de4->vtbl->OnResetDevice(g_6b5de4);
+	if ((*(Font**)&g_6b5de4) != 0) {
+		(*(Font**)&g_6b5de4)->vtbl->OnResetDevice((*(Font**)&g_6b5de4));
 	}
-	g_6b5de0->vtbl->CreateVertexBuffer(g_6b5de0, 0x500, 0x208, 0x44, 0, &g_6b5df4);
+	((Device*)g_6b5de0)->vtbl->CreateVertexBuffer(((Device*)g_6b5de0), 0x500, 0x208, 0x44, 0, &g_6b5df4);
 	return fcn_0041b870();
 }

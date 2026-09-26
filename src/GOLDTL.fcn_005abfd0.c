@@ -11,7 +11,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern Player g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern int g_772514;
 extern int g_14ab930;
@@ -58,7 +58,7 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 	if (*(unsigned short*) (e + 0x27) == 0xffff) {
 		return;
 	}
-	amt = fcn_004f5da0(g_7f4ca0[g_774970].x4);
+	amt = fcn_004f5da0(((Player*)g_7f4ca0)[g_774970].x4);
 	dlg = fcn_00470820(0, 0, s_6ab060);
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 0);
@@ -83,13 +83,13 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 		}
 		if (g_100f1dc != -1 && flag != 0) {
 			if (g_67d370 == btnA) {
-				me = &g_7f4ca0[g_774970];
+				me = &((Player*)g_7f4ca0)[g_774970];
 				v = fcn_00471f80(btnB);
 				if (fcn_00525f60(me, v) != 0) {
 					fcn_005100f0(me->x4, -v);
 					if (*(unsigned short*) (e + 0x27) != 0xffff && *(unsigned short*) (e + 0x27) != g_774970) {
-						fcn_005100f0(g_7f4ca0[*(unsigned short*) (e + 0x27)].x4, 1);
-						fcn_005b21d0(&g_7f4ca0[g_774970], &g_7f4ca0[*(unsigned short*) (e + 0x27)], e);
+						fcn_005100f0(((Player*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].x4, 1);
+						fcn_005b21d0(&((Player*)g_7f4ca0)[g_774970], &((Player*)g_7f4ca0)[*(unsigned short*) (e + 0x27)], e);
 					}
 					fcn_004f5e20(me->x4, v / 2);
 					fcn_00526120(g_14ab930, 0);

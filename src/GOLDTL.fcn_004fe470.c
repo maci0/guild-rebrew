@@ -5,7 +5,7 @@
 
 extern int g_6b8010;
 extern char* g_7746c4;
-extern char* g_7746c8;
+extern unsigned char* g_7746c8;
 extern char g_675908[];
 extern char g_68149c[];
 extern char g_6753fc[];
@@ -77,7 +77,7 @@ char* __cdecl fcn_004fe470(int id, int type, int sub, int x, int y)
 	}
 	*(int*) (*(char**) (o + 0x184) + 0x2c) = type;
 	*(int*) (*(char**) (o + 0x184) + 0x30) = sub;
-	if ((g_7746c4 != 0 && g_7746c4 != b) || (g_7746c8 != 0 && g_7746c8 != b)) {
+	if ((g_7746c4 != 0 && g_7746c4 != b) || ((*(char**)&g_7746c8) != 0 && (*(char**)&g_7746c8) != b)) {
 		fcn_00402a00(*(char**) (o + 0x184), 0);
 	}
 	return *(char**) (o + 0x184);

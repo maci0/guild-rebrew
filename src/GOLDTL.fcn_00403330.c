@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x00403330
 // SIZE: 176
 
-extern char* g_14d0020[];
+extern void* g_14d0020[];
 extern int g_6b8010;
 extern int g_6b5c34;
 int __cdecl fcn_00413190(int p);
@@ -20,7 +20,7 @@ void __cdecl fcn_00403330(unsigned char mode)
 	char* e;
 
 	saved = g_6b8010;
-	p = g_14d0020;
+	p = ((char**)g_14d0020);
 	do {
 		e = *p;
 		if (e != 0) {
@@ -37,7 +37,7 @@ void __cdecl fcn_00403330(unsigned char mode)
 			}
 		}
 		p++;
-	} while ((int) p < (int) (g_14d0020 + 0x300));
+	} while ((int) p < (int) (((char**)g_14d0020) + 0x300));
 	g_6b5c34 = 2 - mode;
 	fcn_004432d0(saved, 1);
 }

@@ -23,7 +23,7 @@ typedef struct
 } House;
 
 extern unsigned short g_774970;
-extern House g_7f4ca0[];
+extern char g_7f4ca0[];
 extern int g_14b5bc0;
 extern char* g_14b5bc8;
 extern char g_6b5c60[];
@@ -43,11 +43,11 @@ void __cdecl fcn_005e5130(void)
 	Req* p;
 	int n;
 
-	if (g_7f4ca0[g_774970].flags & 0x20000) {
+	if (((House*)g_7f4ca0)[g_774970].flags & 0x20000) {
 		fcn_00526120(g_14b5bc0, 4);
 		return;
 	}
-	if (fcn_00525f60(&g_7f4ca0[g_774970], 1)) {
+	if (fcn_00525f60(&((House*)g_7f4ca0)[g_774970], 1)) {
 		n = 0x50;
 		p = &req;
 		__asm {

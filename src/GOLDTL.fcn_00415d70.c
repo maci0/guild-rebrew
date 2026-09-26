@@ -71,9 +71,9 @@ typedef struct {
 	unsigned int u1;
 } Lines;
 
-extern Device *g_6b5de0;
+extern void* g_6b5de0;
 extern VBuf *g_6b5cb4;
-extern volatile unsigned int g_6b7fac;
+extern int g_6b7fac;
 
 void __cdecl fcn_00415710(Lines *, float);
 void __cdecl fcn_00437160(int, int, int);
@@ -100,35 +100,35 @@ void __cdecl fcn_00415d70(Lines *l)
 		return;
 	}
 	if (l->t0 != l->t1) {
-		if (g_6b7fac >= l->t1) {
+		if ((*(volatile unsigned int*)&g_6b7fac) >= l->t1) {
 			l->count = l->count1;
 		} else {
 			span = l->t1 - l->t0;
-			rem = l->t1 - g_6b7fac;
+			rem = l->t1 - (*(volatile unsigned int*)&g_6b7fac);
 			l->count = (span - rem) * l->count1 / span + l->count0 * rem / span;
 		}
 	}
 	if (l->u0 != l->u1) {
-		if (g_6b7fac >= l->u1) {
+		if ((*(volatile unsigned int*)&g_6b7fac) >= l->u1) {
 			l->a = l->a1;
 			l->b = l->b1;
 		} else {
 			span = l->u1 - l->u0;
-			rem = l->u1 - g_6b7fac;
+			rem = l->u1 - (*(volatile unsigned int*)&g_6b7fac);
 			l->a = rem * l->a0 / span + (span - rem) * l->a1 / span;
 			l->b = rem * l->b0 / span + (span - rem) * l->b1 / span;
 		}
 	}
-	dt = (g_6b7fac - l->last) * 0.1f;
-	l->last = g_6b7fac;
+	dt = ((*(volatile unsigned int*)&g_6b7fac) - l->last) * 0.1f;
+	l->last = (*(volatile unsigned int*)&g_6b7fac);
 	if (l->count == 0) {
 		return;
 	}
 	fcn_00415710(l, dt);
 	fcn_00437160(0, 0, 0);
 	fcn_004372d0(0x80, 0, 0, 0, 0);
-	g_6b5de0->vtbl->SetVertexShader(g_6b5de0, 0x44);
-	g_6b5de0->vtbl->SetStreamSource(g_6b5de0, 0, g_6b5cb4, 0x14);
+	((Device*)g_6b5de0)->vtbl->SetVertexShader(((Device*)g_6b5de0), 0x44);
+	((Device*)g_6b5de0)->vtbl->SetStreamSource(((Device*)g_6b5de0), 0, g_6b5cb4, 0x14);
 	n = l->count;
 	fade = 1.0f - n * 0.0005f;
 	c1 = (int) (128.0f * fade);
@@ -155,13 +155,13 @@ void __cdecl fcn_00415d70(Lines *l)
 		k++;
 		if (k >= 0x80) {
 			g_6b5cb4->vtbl->Unlock(g_6b5cb4);
-			g_6b5de0->vtbl->DrawPrimitive(g_6b5de0, 2, 0, k / 2);
+			((Device*)g_6b5de0)->vtbl->DrawPrimitive(((Device*)g_6b5de0), 2, 0, k / 2);
 			k = 0;
 		}
 	}
 	if (k != 0) {
 		g_6b5cb4->vtbl->Unlock(g_6b5cb4);
-		g_6b5de0->vtbl->DrawPrimitive(g_6b5de0, 2, 0, k / 2);
+		((Device*)g_6b5de0)->vtbl->DrawPrimitive(((Device*)g_6b5de0), 2, 0, k / 2);
 	}
 	fcn_00437270();
 }

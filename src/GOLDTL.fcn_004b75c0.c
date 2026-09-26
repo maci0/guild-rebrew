@@ -3,7 +3,7 @@
 // FUNCTION: GOLDTL 0x4b75c0
 // SIZE: 283
 
-extern char g_773d75;
+extern unsigned char g_773d75;
 
 void* __cdecl fcn_00508e40(int);
 unsigned short __cdecl fcn_0042e410(int);
@@ -37,7 +37,7 @@ int __cdecl fcn_004b75c0(void* a1)
 	n = (int) (((double) fcn_0050dac0(*(unsigned short*) p) * d) *
 	    0.01);
 	fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, n);
-	fcn_004c51a0(-1, *(int*) a1, g_773d75, n);
+	fcn_004c51a0(-1, *(int*) a1, (*(char*)&g_773d75), n);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;

@@ -18,8 +18,8 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern Ent g_7f4ca0[768];
-extern char g_773d75;
+extern char g_7f4ca0[];
+extern unsigned char g_773d75;
 
 unsigned short __cdecl fcn_0042e410(int n);
 int __cdecl fcn_004eb260(char* e);
@@ -47,7 +47,7 @@ int __cdecl fcn_0049fad0(int a1, char* e, int a3, char* out)
 		return 0;
 	}
 	v = (int) max(fcn_0050dac0(*(unsigned short*) e) * 0.01f, 160.0f);
-	if (v > (int) (fcn_0050d320(e, g_773d75) * 0.22f)) {
+	if (v > (int) (fcn_0050d320(e, (*(char*)&g_773d75)) * 0.22f)) {
 		return 0;
 	}
 	f.mask = 0x807d4190;
@@ -61,7 +61,7 @@ int __cdecl fcn_0049fad0(int a1, char* e, int a3, char* out)
 	}
 	n = 0;
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].home == q) {
+		if (((Ent*)g_7f4ca0)[i].home == q) {
 			n++;
 		}
 	}

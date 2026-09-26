@@ -10,7 +10,7 @@ struct cmd_429ed0 {
 	int flags;
 };
 
-extern struct cmd_429ed0* g_6b7e9c;
+extern void* g_6b7e9c;
 
 void __cdecl fcn_0041d9e0(const char*);
 int __cdecl fcn_00429e60(const char*);
@@ -37,7 +37,7 @@ int __cdecl fcn_00429ed0(const char* name, void* fn, int flags, int nargs, ...)
 		return 0;
 	}
 	for (; i < 0x100; i++) {
-		if (g_6b7e9c[i].fn == 0) {
+		if (((struct cmd_429ed0*)g_6b7e9c)[i].fn == 0) {
 			break;
 		}
 	}
@@ -45,14 +45,14 @@ int __cdecl fcn_00429ed0(const char* name, void* fn, int flags, int nargs, ...)
 		fcn_0041d9e0("evt_ImportCommand: Too many commands!");
 		return 0;
 	}
-	g_6b7e9c[i].fn = fn;
-	g_6b7e9c[i].nargs = nargs;
-	g_6b7e9c[i].flags = flags;
+	((struct cmd_429ed0*)g_6b7e9c)[i].fn = fn;
+	((struct cmd_429ed0*)g_6b7e9c)[i].nargs = nargs;
+	((struct cmd_429ed0*)g_6b7e9c)[i].flags = flags;
 	va_start(ap, nargs);
 	for (k = 0; k < nargs; k++) {
-		g_6b7e9c[i].types[k] = va_arg(ap, int);
+		((struct cmd_429ed0*)g_6b7e9c)[i].types[k] = va_arg(ap, int);
 	}
 	va_end(ap);
-	strcpy(g_6b7e9c[i].name, name);
+	strcpy(((struct cmd_429ed0*)g_6b7e9c)[i].name, name);
 	return 1;
 }

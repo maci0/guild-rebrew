@@ -20,39 +20,39 @@ typedef struct node99 {
 // SIZE 0x99
 #pragma pack()
 
-extern node99* g_1005760;
+extern int g_1005760;
 extern int g_14cbca0;
-extern node99* g_14cbca8;
+extern unsigned char* g_14cbca8;
 
 int __cdecl fcn_004c49f0(node99*);
 void __cdecl fcn_00421290(void);
 
 int __cdecl fcn_004c3ff0(void)
 {
-	if (g_1005760 == 0)
+	if ((*(node99**)&g_1005760) == 0)
 		return 0;
 	if (g_14cbca0 == -1) {
 		while (1) {
-			if (fcn_004c49f0(g_1005760) != 0)
+			if (fcn_004c49f0((*(node99**)&g_1005760)) != 0)
 				break;
-			g_1005760 = g_1005760->next;
-			if (g_1005760 == 0)
+			(*(node99**)&g_1005760) = (*(node99**)&g_1005760)->next;
+			if ((*(node99**)&g_1005760) == 0)
 				return 0;
-			g_1005760->prev = 0;
+			(*(node99**)&g_1005760)->prev = 0;
 		}
 		return 1;
 	}
 	do {
-		if (g_14cbca8 != 0) {
+		if ((*(node99**)&g_14cbca8) != 0) {
 			fcn_00421290();
-			if (g_14cbca8 != 0)
+			if ((*(node99**)&g_14cbca8) != 0)
 				return 0;
 		}
-		g_14cbca8 = g_1005760;
-		g_1005760 = g_1005760->next;
-		if (g_1005760 != 0)
-			g_1005760->prev = 0;
+		(*(node99**)&g_14cbca8) = (*(node99**)&g_1005760);
+		(*(node99**)&g_1005760) = (*(node99**)&g_1005760)->next;
+		if ((*(node99**)&g_1005760) != 0)
+			(*(node99**)&g_1005760)->prev = 0;
 		fcn_00421290();
-	} while (g_1005760 != 0);
+	} while ((*(node99**)&g_1005760) != 0);
 	return 0;
 }

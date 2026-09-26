@@ -13,12 +13,12 @@ typedef struct {
 	char pad1b2[0x6a];
 } House5a74;
 
-extern House5a74 g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned char* g_868050;
 extern unsigned short g_774970;
-extern signed char g_7747b0;
+extern unsigned char g_7747b0;
 extern char* g_14ad474;
-extern int g_7f4c04;
+extern unsigned short g_7f4c04;
 extern int g_7e2700;
 
 int __cdecl fcn_00504bd0(int);
@@ -46,8 +46,8 @@ int __cdecl fcn_005a74a0(unsigned char* p)
 	if ((*(unsigned short*) (p + 0x5a) & 0x400) != 0) {
 		return 0;
 	}
-	if ((g_7747b0 & 0x80) == 0) {
-		x = g_7f4ca0[g_774970].f1b1;
+	if (((*(signed char*)&g_7747b0) & 0x80) == 0) {
+		x = ((House5a74*)g_7f4ca0)[g_774970].f1b1;
 		if (!(x > 0 && (*tbl == 6 || *tbl == 4)) && (r & 0x200) == 0) {
 			own = *(unsigned short*) (p + 0x27);
 			if (own != g_774970) {
@@ -57,7 +57,7 @@ int __cdecl fcn_005a74a0(unsigned char* p)
 				if (fcn_005a7400(p, (int*) &a, &b) == 0) {
 					strcpy(title, g_14ad474);
 					x = a;
-					if ((g_7f4c04 & 0xffff) < x) {
+					if (((*(int*)&g_7f4c04) & 0xffff) < x) {
 						if (kind == 3 || kind == 5) {
 							fcn_0051af00(text, 0x2059, p);
 						}

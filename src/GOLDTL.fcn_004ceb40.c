@@ -19,7 +19,7 @@ typedef struct
 // SIZE 0x35c
 
 extern char* g_772eb4;
-extern Player35c g_9b0e20[];
+extern char g_9b0e20[];
 
 Slot2c* __cdecl fcn_004ceb40(char* a1)
 {
@@ -30,7 +30,7 @@ Slot2c* __cdecl fcn_004ceb40(char* a1)
 
 	n = *(unsigned char*) (g_772eb4 + 0x30);
 	for (i = 0; i < n; i++) {
-		p = &g_9b0e20[i];
+		p = &((Player35c*)g_9b0e20)[i];
 		for (j = 0; j < 16; j++) {
 			if (p->slots[j].id == *(int*) (a1 + 4)) {
 				return &p->slots[j];

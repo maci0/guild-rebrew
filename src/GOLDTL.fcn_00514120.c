@@ -34,10 +34,10 @@ typedef struct {
 
 extern int g_699364;
 extern int g_67a370;
-extern Figure* g_773da8;
-extern char g_773d75;
-extern Variant g_868060[4];
-extern Device* g_6b8300;
+extern char* g_773da8;
+extern unsigned char g_773d75;
+extern char g_868060[];
+extern int g_6b8300;
 
 void __cdecl fcn_00517250(char*, int);
 void __cdecl fcn_004432d0(int, int);
@@ -126,9 +126,9 @@ int __cdecl fcn_00514120(char* map)
 		ls_ID2Ptr();
 	}
 	fcn_004c44a0();
-	g_773da8 = fcn_004c4480(h);
-	strcpy(g_773da8->name, "STADT");
-	fcn_004c5150(g_773da8->id, -1, g_773d75, 200000000);
+	(*(Figure**)&g_773da8) = fcn_004c4480(h);
+	strcpy((*(Figure**)&g_773da8)->name, "STADT");
+	fcn_004c5150((*(Figure**)&g_773da8)->id, -1, (*(char*)&g_773d75), 200000000);
 	while (fcn_004c44c0() == 0) {
 		fcn_004c3ff0();
 		fcn_004c4940();
@@ -136,8 +136,8 @@ int __cdecl fcn_00514120(char* map)
 	}
 	fcn_004c44b0();
 	for (i = 1; i < 4; i++) {
-		if (g_868060[i].used != 0) {
-			fcn_004c5150(g_773da8->id, -1, (char) i, 200000000);
+		if (((Variant*)g_868060)[i].used != 0) {
+			fcn_004c5150((*(Figure**)&g_773da8)->id, -1, (char) i, 200000000);
 		}
 	}
 	fcn_00512680();
@@ -148,29 +148,29 @@ int __cdecl fcn_00514120(char* map)
 		fcn_00535960();
 	}
 	for (s = gm_StartFilteredEntitySearch(1, 5, 0x1c); s != 0; s = gm_AddObjekt()) {
-		fcn_005059b0(s, g_773da8->slot, g_773da8->slot);
+		fcn_005059b0(s, (*(Figure**)&g_773da8)->slot, (*(Figure**)&g_773da8)->slot);
 	}
 	fcn_005016c0();
 	for (i = 0; i < 4; i++) {
-		if (g_868060[i].name[0] == 0) {
+		if (((Variant*)g_868060)[i].name[0] == 0) {
 			break;
 		}
 		fcn_005016f0(i);
 	}
 	fcn_004c44a0();
-	fcn_005017a0((unsigned char) g_773d75);
+	fcn_005017a0((unsigned char) (*(char*)&g_773d75));
 	fcn_004c44b0();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
 	}
 	fcn_004432d0(1, 0);
 	fcn_004432d0(0, 0);
-	if (g_6b8300->kind == 0x80) {
-		((Scene*) g_67a370)->view = fcn_0045b700(g_6b8300, 0x100, 2);
-	} else if (g_6b8300->kind == 0x40) {
-		((Scene*) g_67a370)->view = fcn_0045b700(g_6b8300, 0x80, 2);
+	if (((Device*)g_6b8300)->kind == 0x80) {
+		((Scene*) g_67a370)->view = fcn_0045b700(((Device*)g_6b8300), 0x100, 2);
+	} else if (((Device*)g_6b8300)->kind == 0x40) {
+		((Scene*) g_67a370)->view = fcn_0045b700(((Device*)g_6b8300), 0x80, 2);
 	} else {
-		((Scene*) g_67a370)->view = fcn_0045b700(g_6b8300, 0x100, 2);
+		((Scene*) g_67a370)->view = fcn_0045b700(((Device*)g_6b8300), 0x100, 2);
 	}
 	return 0;
 }

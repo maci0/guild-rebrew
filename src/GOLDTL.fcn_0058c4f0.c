@@ -19,8 +19,8 @@ struct icon {
 	char pad[0x41];
 };
 
-extern struct gadget* g_1015ea0;
-extern struct icon* g_99ec10;
+extern char* g_1015ea0;
+extern char* g_99ec10;
 extern int g_665f58[4];
 extern int g_665f84[4];
 extern int g_772514;
@@ -41,22 +41,22 @@ void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel)
 	fcn_00519190((int) g_6811b0);
 	for (i = 0; i < 4; i++) {
 		ids[i] = fcn_0046f740(6 + i * 0x6c, 0, g_665f58[i], g_772514);
-		g_1015ea0[ids[i]].visible = 1;
-		g_1015ea0[ids[i]].mode = 3;
-		g_1015ea0[ids[i]].image = (char*) &g_99ec10[g_665f84[i]];
+		((struct gadget*)g_1015ea0)[ids[i]].visible = 1;
+		((struct gadget*)g_1015ea0)[ids[i]].mode = 3;
+		((struct gadget*)g_1015ea0)[ids[i]].image = (char*) &((struct icon*)g_99ec10)[g_665f84[i]];
 	}
 	fcn_00472640(ids[1], (unsigned char) s[0x19]);
 	fcn_00472640(ids[2], (unsigned char) s[0x1a]);
 	fcn_00472640(ids[3], (unsigned char) s[0x1b]);
 	if (*sel == 3 && s[0x1b] == 1) {
-		g_1015ea0[ids[3]].hot = 1;
+		((struct gadget*)g_1015ea0)[ids[3]].hot = 1;
 	} else if (*sel == 2 && s[0x1a] == 1) {
-		g_1015ea0[ids[2]].hot = 1;
+		((struct gadget*)g_1015ea0)[ids[2]].hot = 1;
 	} else if (*sel == 1 && s[0x19] == 1) {
-		g_1015ea0[ids[1]].hot = 1;
+		((struct gadget*)g_1015ea0)[ids[1]].hot = 1;
 	} else {
-		g_1015ea0[ids[0]].hot = 1;
+		((struct gadget*)g_1015ea0)[ids[0]].hot = 1;
 		*sel = 0;
 	}
-	g_1015ea0[ids[*sel]].focus = 1;
+	((struct gadget*)g_1015ea0)[ids[*sel]].focus = 1;
 }

@@ -5,7 +5,7 @@ struct msgbuf_4c4570 {
 };
 // SIZE 0x78
 
-extern struct msgbuf_4c4570 g_aed224;
+extern unsigned char g_aed224;
 extern char* g_aed32c;
 
 // FUNCTION: GOLD 0x004c3c00
@@ -25,9 +25,9 @@ int __cdecl fcn_004c4570(unsigned char size, unsigned char count, unsigned short
 	need = count * size + g_aed208 + 4;
 	if (need >= 0x77)
 		return 1;
-	p = g_aed224.data + g_aed208;
+	p = (*(struct msgbuf_4c4570*)&g_aed224).data + g_aed208;
 	g_aed208 = need;
-	g_aed224.n++;
+	(*(struct msgbuf_4c4570*)&g_aed224).n++;
 	*p++ = size;
 	*p++ = count;
 	*(unsigned short*) p = off;

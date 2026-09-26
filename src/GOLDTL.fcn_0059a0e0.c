@@ -11,7 +11,7 @@ typedef struct
 } Rec65;
 // SIZE 0x41
 
-extern Rec65* g_99ec10;
+extern char* g_99ec10;
 extern unsigned char* g_7746c8;
 extern unsigned short g_774970;
 extern int g_774650;
@@ -21,7 +21,7 @@ extern int g_7e2708;
 extern unsigned char* g_7e2704;
 extern int g_7746b8;
 extern int g_7746f0;
-extern char* g_868050;
+extern unsigned char* g_868050;
 
 int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -37,7 +37,7 @@ void __cdecl fcn_0059a0e0(void)
 	char* r;
 
 	if (g_7e431c != 0) {
-		r = &g_99ec10[*g_7e431c].type;
+		r = &((Rec65*)g_99ec10)[*g_7e431c].type;
 		if ((*r == 6 || *r == 2) && (fcn_00506380(g_774970, g_7746c8, g_7e431c, 0) & 0x4000)) {
 			x = fcn_00502cd0(*(int*) (g_7746c8 + 0x5d), 2, 6, 0, 0xfd);
 			fcn_005a86a0((int) g_7e431c);
@@ -65,7 +65,7 @@ void __cdecl fcn_0059a0e0(void)
 		fcn_00516c50(g_7746c8, x);
 	}
 	e = g_7746c8;
-	r = g_868050 + *e * 589;
+	r = ((char*)g_868050) + *e * 589;
 	if (*e == 0x20 || *e == 0x1f || *e == 0x1e || r[0] == 0x1f || r[0] == 0x1d) {
 		fcn_00597ec0(e);
 	}

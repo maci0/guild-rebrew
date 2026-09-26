@@ -29,7 +29,7 @@ typedef struct {
 	int kind;
 } System;
 
-extern float g_662d70[];
+extern float g_662d70[4];
 System* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, char* e, void (__cdecl* cb)(void));
 void __cdecl fcn_004526d0(System* s, float* pos);
 void __cdecl fcn_00416d50(void);

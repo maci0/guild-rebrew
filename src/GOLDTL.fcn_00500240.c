@@ -22,7 +22,7 @@ typedef struct {
 	char pad1cc[0x21c - 0x1cc];
 } Obj;
 
-extern Obj g_7f4ca0[];
+extern char g_7f4ca0[];
 
 int __cdecl gm_EntityClassCheck(int kind);
 int __cdecl gm_IsInRange(int cls);
@@ -35,11 +35,11 @@ Obj* __cdecl fcn_00500240(char* who, int kind, int group)
 
 	if (kind != 0) {
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca0[i].id != 0xffff && !(g_7f4ca0[i].flags & 0x2000) && g_7f4ca0[i].type <= 1 &&
-			    (g_7f4ca0[i].kind == kind || g_7f4ca0[i].kind == 0) && g_7f4ca0[i].home == 0 &&
-			    (float) g_7f4ca0[i].age >= g_7f4ca0[i].years && g_7f4ca0[i].group == group) {
+			if (((Obj*)g_7f4ca0)[i].id != 0xffff && !(((Obj*)g_7f4ca0)[i].flags & 0x2000) && ((Obj*)g_7f4ca0)[i].type <= 1 &&
+			    (((Obj*)g_7f4ca0)[i].kind == kind || ((Obj*)g_7f4ca0)[i].kind == 0) && ((Obj*)g_7f4ca0)[i].home == 0 &&
+			    (float) ((Obj*)g_7f4ca0)[i].age >= ((Obj*)g_7f4ca0)[i].years && ((Obj*)g_7f4ca0)[i].group == group) {
 				c = gm_EntityClassCheck(kind);
-				if ((c == 2 || g_7f4ca0[i].cls == c) &&
+				if ((c == 2 || ((Obj*)g_7f4ca0)[i].cls == c) &&
 				    (*(unsigned short*) (who + 0x27) == 0xffff ||
 				     fcn_0050f950(*(unsigned short*) (who + 0x27), i) > -30)) {
 					goto found;
@@ -53,14 +53,14 @@ Obj* __cdecl fcn_00500240(char* who, int kind, int group)
 	}
 	c = gm_IsInRange((unsigned char) group);
 	for (i = 0; i < 768; i++) {
-		if (g_7f4ca0[i].id != 0xffff && !(g_7f4ca0[i].flags & 0x2000) && g_7f4ca0[i].type <= 1 &&
-		    g_7f4ca0[i].group == group && g_7f4ca0[i].home == 0 && (c == 2 || g_7f4ca0[i].cls == c) &&
+		if (((Obj*)g_7f4ca0)[i].id != 0xffff && !(((Obj*)g_7f4ca0)[i].flags & 0x2000) && ((Obj*)g_7f4ca0)[i].type <= 1 &&
+		    ((Obj*)g_7f4ca0)[i].group == group && ((Obj*)g_7f4ca0)[i].home == 0 && (c == 2 || ((Obj*)g_7f4ca0)[i].cls == c) &&
 		    (*(unsigned short*) (who + 0x27) == 0xffff || fcn_0050f950(*(unsigned short*) (who + 0x27), i) > -30)) {
 			goto found;
 		}
 	}
 	return 0;
 found:
-	g_7f4ca0[i].flags |= 0x2000;
-	return &g_7f4ca0[i];
+	((Obj*)g_7f4ca0)[i].flags |= 0x2000;
+	return &((Obj*)g_7f4ca0)[i];
 }

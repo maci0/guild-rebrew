@@ -18,8 +18,8 @@ typedef struct
 } Shop;
 // SIZE 0x24d
 
-extern Player g_7f4ca0[];
-extern Shop* g_868050;
+extern char g_7f4ca0[];
+extern unsigned char* g_868050;
 extern unsigned short g_774970;
 
 void* __cdecl fcn_0050dc90(unsigned char*);
@@ -46,8 +46,8 @@ void __cdecl fcn_005cf560(unsigned char* obj)
 	if (obj == 0 || g_774970 != *(unsigned short*) (obj + 0x27)) {
 		return;
 	}
-	me = &g_7f4ca0[g_774970];
-	t = &g_868050[obj[0]];
+	me = &((Player*)g_7f4ca0)[g_774970];
+	t = &((Shop*)g_868050)[obj[0]];
 	x = fcn_0050dc90(obj);
 	if (t->x0 == 5 || t->x0 == 9) {
 		mode = 0x40;

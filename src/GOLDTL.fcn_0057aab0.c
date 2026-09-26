@@ -38,10 +38,10 @@ typedef struct {
 	char pad174[0xa8];
 } Unit57aa;
 
-extern Bld57aa* g_90e094;
-extern Office57aa* g_868050;
-extern unsigned short* g_773da8;
-extern Unit57aa g_7f4ca0[768];
+extern unsigned char* g_90e094;
+extern unsigned char* g_868050;
+extern char* g_773da8;
+extern char g_7f4ca0[];
 extern char g_6b5c60[];
 
 int __cdecl fcn_0057a890(Unit57aa*, float, int, int*);
@@ -108,15 +108,15 @@ void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 	v3set(&p, self->pos->x, self->pos->y, self->pos->z);
 	for (i = 0; i < 0x100; i++) {
 		lo = 0;
-		b = &g_90e094[i];
-		o = &g_868050[b->office];
+		b = &((Bld57aa*)g_90e094)[i];
+		o = &((Office57aa*)g_868050)[b->office];
 		hi = 0;
 		if (o->kind > 0x1f) {
 			hi = 1 << (o->kind - 0x20);
 		} else {
 			lo = 1 << o->kind;
 		}
-		if (b->owner == 0xffff || b->owner == *g_773da8) {
+		if (b->owner == 0xffff || b->owner == *((unsigned short*)g_773da8)) {
 			continue;
 		}
 		bp = b->pos;
@@ -130,12 +130,12 @@ void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 		dv.x = p.x - q.x;
 		dv.y = p.y - q.y;
 		dv.z = p.z - q.z;
-		house = &g_7f4ca0[b->owner];
+		house = &((Unit57aa*)g_7f4ca0)[b->owner];
 		if ((d = v3len(&dv)) > range) {
 			continue;
 		}
 		for (j = 0; j < 768; j++) {
-			u = &g_7f4ca0[j];
+			u = &((Unit57aa*)g_7f4ca0)[j];
 			if (u->id == 0xffff || u->type >= 10 || (u->owner & 3) != side) {
 				continue;
 			}

@@ -17,7 +17,7 @@ typedef struct {
 	int id;
 } Req;
 
-extern int g_666018;
+extern __int64 g_666018;
 extern int g_66601c;
 extern float g_662a6c;
 
@@ -40,7 +40,7 @@ int __cdecl fcn_005deac0(char* e, char* a2)
 		memset(&req, 0, sizeof(req));
 		memset(&req.pad[2], -1, 0x20);
 		fcn_0051af00(text, 0x9c);
-		req.c = g_666018;
+		req.c = (*(int*)&g_666018);
 		req.a = 0;
 		req.size = 0x400;
 		req.kind = 6;

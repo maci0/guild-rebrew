@@ -10,7 +10,7 @@ typedef struct
 } Shop;
 // SIZE 0x24d
 
-extern Shop* g_868050;
+extern unsigned char* g_868050;
 extern unsigned short g_774970;
 extern int g_14ce8e0;
 extern int g_774654;
@@ -35,7 +35,7 @@ void __cdecl fcn_005c95d0(unsigned char* a)
 	Shop* t;
 	int dlg;
 
-	t = &g_868050[a[0]];
+	t = &((Shop*)g_868050)[a[0]];
 	dlg = fcn_00470820(0x3c, 0, s_6a4320);
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 1);

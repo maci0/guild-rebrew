@@ -7,7 +7,7 @@ struct s_7f4ca0 {
 	char pad2[0x219];
 };
 
-extern struct s_7f4ca0 g_7f4ca0[];
+extern char g_7f4ca0[];
 
 // FUNCTION: GOLDTL 0x52d9d0
 // SIZE: 160
@@ -28,7 +28,7 @@ void __cdecl fcn_0052d9d0(char* e)
 	if (*(unsigned short*) (e + 0x27) == 0xffff) {
 		return;
 	}
-	k = g_7f4ca0[*(unsigned short*) (e + 0x27)].kind;
+	k = ((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].kind;
 	if (k == 6 || k == 7 || k == 5) {
 		if ((o[0x214] & 1) == 0) {
 			saved = *(int*) (o + 0x1f4);

@@ -22,9 +22,9 @@ typedef struct {
 
 #define HOUSES 768
 
-extern House5a96 g_7f4ca0[HOUSES];
+extern char g_7f4ca0[];
 extern char* g_772500;
-extern int* g_77255c;
+extern char* g_77255c;
 extern int g_772514;
 extern int g_14abb40;
 extern int g_14abb44;
@@ -93,8 +93,8 @@ int __cdecl fcn_005a96a0(char* who, int id)
 				if (n >= 4) {
 					break;
 				}
-				if (g_7f4ca0[j].id != 0xffff && g_7f4ca0[j].owner == id) {
-					houses[n] = &g_7f4ca0[j];
+				if (((House5a96*)g_7f4ca0)[j].id != 0xffff && ((House5a96*)g_7f4ca0)[j].owner == id) {
+					houses[n] = &((House5a96*)g_7f4ca0)[j];
 					n++;
 				}
 			}
@@ -119,8 +119,8 @@ int __cdecl fcn_005a96a0(char* who, int id)
 					fcn_00519190(0x1a0c);
 				}
 				else {
-					w = (g_77255c[3] - *(short*) (g_772500 + 0x1ebd8) * 2) / 3;
-					off = (g_77255c[3] - *(short*) (g_772500 + 0x1ebd8) * 2) % 3 / 2;
+					w = (((int*)g_77255c)[3] - *(short*) (g_772500 + 0x1ebd8) * 2) / 3;
+					off = (((int*)g_77255c)[3] - *(short*) (g_772500 + 0x1ebd8) * 2) % 3 / 2;
 					for (i = 0; i < n; i++) {
 						items[i].x = off + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2) + (i % 2 + 1) * w - 10;
 						items[i].f30 = 0;

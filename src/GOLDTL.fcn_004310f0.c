@@ -6,7 +6,7 @@
 extern int g_6b7fdc;
 extern int g_6b7fec;
 extern int g_6b7fe4;
-extern int g_6b7fe0;
+extern char g_6b7fe0[];
 extern char g_6b7fe8;
 extern char g_67a0b8[];
 
@@ -40,8 +40,8 @@ void __cdecl fcn_004310f0(char verbose)
 		}
 	}
 	g_6b7fec = 0;
-	if (g_6b7fe0 != 0) {
-		fcn_0041e410(&g_6b7fe0);
+	if ((*(int*)g_6b7fe0) != 0) {
+		fcn_0041e410(&(*(int*)g_6b7fe0));
 	}
 	g_6b7fe8 = 0;
 }

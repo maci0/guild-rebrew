@@ -22,7 +22,7 @@ typedef struct {
 } Entity_4a5960;
 
 extern int g_664398[];
-extern Entity_4a5960 g_7f4ca0[];
+extern char g_7f4ca0[];
 
 unsigned short __cdecl fcn_0042e410(int);
 int __cdecl fcn_00508f80(unsigned short, int);
@@ -61,9 +61,9 @@ unsigned int __cdecl fcn_004a5960(unsigned short* e, unsigned int max, int a2, f
 	cnt = 0;
 	i = fcn_0042e410(0x300);
 	while (cnt < max && tries != 0) {
-		t = g_7f4ca0[i].type;
+		t = ((Entity_4a5960*)g_7f4ca0)[i].type;
 		if (t != 8 && t != 7 && t != 5 && t != 9 && t != 0x14) {
-			job = g_7f4ca0[i].job;
+			job = ((Entity_4a5960*)g_7f4ca0)[i].job;
 			if (job != 0 && job != 0x52 && fcn_005cf720(*e, (unsigned short) i, &q, 0) != 0
 			    && abs(a2 - fcn_00508f80((unsigned short) i, 0)) < 6) {
 				if (!ranged || (f = fcn_0050f980(i, *e, 1), !(f < lo) && !(f > hi))) {
@@ -77,9 +77,9 @@ unsigned int __cdecl fcn_004a5960(unsigned short* e, unsigned int max, int a2, f
 	tries = 0x300;
 	i = fcn_0042e410(0x300);
 	while (cnt < max && tries != 0) {
-		t = g_7f4ca0[i].type;
+		t = ((Entity_4a5960*)g_7f4ca0)[i].type;
 		if (t != 8 && t != 7 && t != 5 && t != 9 && t != 0x14) {
-			if (g_7f4ca0[i].job == 0 && fcn_005cf720(*e, (unsigned short) i, &q, 0) != 0
+			if (((Entity_4a5960*)g_7f4ca0)[i].job == 0 && fcn_005cf720(*e, (unsigned short) i, &q, 0) != 0
 			    && abs(a2 - fcn_00508f80((unsigned short) i, 0)) < 6) {
 				if (!ranged || (f = fcn_0050f980(i, *e, 1), !(f < lo) && !(f > hi))) {
 					out[cnt++] = (unsigned short) i;

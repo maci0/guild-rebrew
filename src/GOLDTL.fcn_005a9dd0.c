@@ -14,9 +14,9 @@ typedef struct {
 	char pad16a[0xb2];
 } House5a9d;
 
-extern House5a9d g_7f4ca0[];
+extern char g_7f4ca0[];
 extern unsigned char* g_868050;
-extern char g_868060[][0x2f4];
+extern char g_868060[];
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
 extern int g_100f1dc;
@@ -64,17 +64,17 @@ void __cdecl fcn_005a9dd0(unsigned char* p)
 	tbl = g_868050 + p[0] * 0x24d;
 	obj = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x142);
 	n = fcn_0050b810(*(int*) (obj + 0x14), g_773d75);
-	acc = gm_AccumulateTyped2(&g_7f4ca0[g_774970]);
-	if (*tbl == 0x17 && g_7f4ca0[g_774970].kind == 0x1e) {
+	acc = gm_AccumulateTyped2(&((House5a9d*)g_7f4ca0)[g_774970]);
+	if (*tbl == 0x17 && ((House5a9d*)g_7f4ca0)[g_774970].kind == 0x1e) {
 		ok = 1;
 	}
-	else if (*tbl == 0x18 && g_7f4ca0[g_774970].kind == 0x1f) {
+	else if (*tbl == 0x18 && ((House5a9d*)g_7f4ca0)[g_774970].kind == 0x1f) {
 		ok = 1;
 	}
-	else if (*tbl == 0x19 && g_7f4ca0[g_774970].kind == 0x20) {
+	else if (*tbl == 0x19 && ((House5a9d*)g_7f4ca0)[g_774970].kind == 0x20) {
 		ok = 1;
 	}
-	else if (*tbl == 0x1a && g_7f4ca0[g_774970].kind == 0x21) {
+	else if (*tbl == 0x1a && ((House5a9d*)g_7f4ca0)[g_774970].kind == 0x21) {
 		ok = 1;
 	}
 	else {
@@ -88,7 +88,7 @@ void __cdecl fcn_005a9dd0(unsigned char* p)
 	if (ok != 0) {
 		int col;
 
-		b = fcn_00519190(0x1a1b, *(unsigned short*) (g_868060[g_773d75] + 0x54) * 2 + 0x9a8);
+		b = fcn_00519190(0x1a1b, *(unsigned short*) (((char(*)[0x2f4])g_868060)[g_773d75] + 0x54) * 2 + 0x9a8);
 		fcn_005c9030(0x640, acc, 0x20, &col);
 		fcn_00472380(fcn_00472250(d, 1, b), fcn_0050b710(0x640, g_773d75), fcn_0050b710(col, g_773d75), fcn_0050b710(0x640, g_773d75));
 		h1 = fcn_00472250(d, 1, b + 1);
@@ -103,8 +103,8 @@ void __cdecl fcn_005a9dd0(unsigned char* p)
 			if (g_67d370 == h1) {
 				v = fcn_00471f80(fcn_00472250(d, 1, b));
 				v = fcn_0050b750(v, g_773d75);
-				if (fcn_00526010(&g_7f4ca0[g_774970], v, g_773d75) != 0) {
-					fcn_004c5150(*(int*) (obj + 2), g_7f4ca0[g_774970].handle, g_773d75, v);
+				if (fcn_00526010(&((House5a9d*)g_7f4ca0)[g_774970], v, g_773d75) != 0) {
+					fcn_004c5150(*(int*) (obj + 2), ((House5a9d*)g_7f4ca0)[g_774970].handle, g_773d75, v);
 					g_774654 = 1;
 				}
 			}
