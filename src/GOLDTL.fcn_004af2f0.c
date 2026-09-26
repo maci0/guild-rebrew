@@ -947,3 +947,126 @@ send:
 	return 1;
 }
 #pragma optimize("", on)
+
+#pragma pack(push, 2)
+typedef struct Pos14 {
+	int a;
+	short b0;
+	short b1;
+	int c;
+	short d;
+} Pos14;
+#pragma pack(pop)
+// SIZE 0xe
+
+typedef struct Msg {
+	int h0;
+	int h4;
+	unsigned char kind;
+	char p9[3];
+	int owner;
+	int h10;
+	int target;
+	Pos14 when;
+	unsigned char flags;
+	char p27[9];
+	unsigned char count;
+	char p31[3];
+	int ids[16];
+	char p74[8];
+	unsigned char code;
+	unsigned char one;
+	char p7e[0x114 - 0x7e];
+} Msg;
+// SIZE 0x114
+
+extern Pos14 g_7f4c00;
+extern unsigned short g_774970;
+extern char* g_773dac;
+extern char* g_773db0;
+
+void __cdecl fcn_00500bb0(Pos14*, int, int, int);
+void __cdecl fcn_004c5980(Msg*);
+
+/* In this file for the same reason as fcn_004af2f0: with the bodies of
+ * fcn_004ae130/1c0/210 in view, c2 keeps the zero in edx across the first
+ * call; declared from another file the object is 16 bytes longer. */
+// FUNCTION: GOLDTL 0x4b0780
+// SIZE: 666
+int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
+{
+	int n;
+	unsigned short* e;
+	int codes[4];
+	int i;
+	int j;
+	int key;
+
+	e = (unsigned short*) fcn_00508e40(pairs[idx * 2 + 1]);
+	if (e == 0 || fcn_004ae130(*e) == 0) {
+		return 0;
+	}
+	{
+		char names[4][8] = {"SHAUFEN", "KOEPFEN", "GALGEN", "KANONE"};
+
+		n = 4;
+		codes[0] = 3;
+		codes[1] = 0;
+		codes[2] = 2;
+		codes[3] = 4;
+		if (text[0] != '-') {
+			return 0;
+		}
+		for (i = 0; i < 4; i++) {
+			if (memcmp(text + 1, names[i], strlen(names[i])) == 0) {
+				break;
+			}
+		}
+		if (i >= 4) {
+			return 0;
+		}
+	}
+	{
+		int list[16];
+		Msg msg;
+
+		msg.kind = 5;
+		msg.target = -1;
+		msg.owner = g_7f4ca0[g_774970].key;
+		msg.flags = 0;
+		msg.code = (unsigned char) codes[i];
+		msg.one = 1;
+		list[1] = -1;
+		key = *(int*) (e + 2);
+		list[2] = *(int*) (g_773dac + 4);
+		list[0] = key;
+		list[3] = *(int*) (g_773db0 + 4);
+		for (j = 0; j < 0x300; j++) {
+			if (g_7f4ca0[j].key != key && fcn_004ae1c0(j) != 0) {
+				if (g_7f4ca0[j].kind != 0) {
+					list[1] = g_7f4ca0[j].key;
+				}
+			} else if (n < 16 && fcn_004ae210(j) != 0) {
+				list[n] = g_7f4ca0[j].key;
+				n++;
+			}
+		}
+		if (list[1] == -1) {
+			list[1] = list[n - 1];
+			n--;
+		}
+		for (j = 0; j < n; j++) {
+			msg.ids[j] = list[j];
+		}
+		for (j = n; j < 16; j++) {
+			msg.ids[j] = -1;
+		}
+		msg.count = (unsigned char) n;
+		msg.flags = 0x22;
+		msg.when = g_7f4c00;
+		fcn_00500bb0(&msg.when, 0x18, 0, 0);
+		msg.when.b0 = 0xa;
+		fcn_004c5980(&msg);
+	}
+	return 1;
+}
