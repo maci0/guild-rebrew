@@ -1,3 +1,6 @@
+// FUNCTION: GOLDTL 0x00596810
+// SIZE: 767
+
 
 typedef struct {
 	int kind;
@@ -25,8 +28,6 @@ typedef struct {
 
 extern Lane g_778d4c[4];
 extern Watch g_778da0[16];
-// FUNCTION: GOLDTL 0x00596810
-// SIZE: 767
 extern Ent* g_1015ea0;
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
