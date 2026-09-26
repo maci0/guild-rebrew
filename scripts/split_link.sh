@@ -262,7 +262,10 @@ cmd=$(sed "s#@CMakeFiles/server_dll.dir/objects1.rsp#@${RSP_PAD#build/}#;
 ( cd build && eval "$cmd" >/dev/null 2>&1 )
 blob_at=$(sed -n 's/^ 0003:\([0-9a-f]*\) *_g_data_restore_gap .*/\1/p' build/split_poc.map)
 [ -n "$blob_at" ] || { echo "g_data_restore_gap missing from build/split_poc.map"; exit 1; }
-want=$((DATA_RAW - 0x$blob_at))
+# The fold literals sit in .data$zz, which the linker groups after the blob;
+# leave room for them so the section still ends at DATA_RAW.
+zz=$(sed -n 's/^ 0003:[0-9a-f]* \([0-9a-f]*\)H \.data\$zz .*/\1/p' build/split_poc.map)
+want=$((DATA_RAW - 0x$blob_at - 0x${zz:-0}))
 [ "$want" -gt 0 ] || { echo "game .data runs past $DATA_RAW (blob at 0x$blob_at)"; exit 1; }
 if [ "$want" -ne $((GAP)) ]; then
     echo "data gap: blob starts at 0x$blob_at, GAP $GAP -> $(printf '0x%x' "$want"); relinking"

@@ -37,6 +37,10 @@
  */
 // SUPPORT: SERVER folds the six LIBCMT objects' duplicate .rdata COMDATs
 
+/* ".data$zz" sorts after every plain .data contribution, so these bytes
+ * (which the reference has in .rdata) no longer displace the library .data
+ * linked after this object. */
+#pragma data_seg(".data$zz")
 const char* g_rdata_fold_refs[] = {
 	"IsProcessorFeaturePresent",
 	"KERNEL32",
