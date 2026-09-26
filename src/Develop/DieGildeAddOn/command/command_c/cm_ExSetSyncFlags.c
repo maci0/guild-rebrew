@@ -40,15 +40,12 @@ typedef struct player_slot {
 
 // GLOBAL: SERVER 0x10025718
 extern int g_game_speed_table[];
+extern int g_game_speed_value;
+extern int g_game_speed_index;
 
 /* Execution handler: sets synchronization flags on a player slot.
  * Handles three flag types: 0x01 (sets flag 0x20), 0x0e (sets
  * flag 0x40), 0x12 (sets game speed from g_game_speed_table). */
-
-// GLOBAL: SERVER 0x1002c3f0
-int g_game_speed_value = 770;
-// GLOBAL: SERVER 0x1002c3f4
-int g_game_speed_index = 2;
 // FUNCTION: SERVER 0x1000efb0
 int __cdecl cm_ExSetSyncFlags(int cmd, char* result)
 {

@@ -687,10 +687,10 @@ size = 4
 
 ["SERVER.0x1002c050"]
 name = "g_alchemy_entity_table"
-type = "int"
+type = "int[232]"
 status = "VERIFIED"
 section = ".data"
-size = 4
+size = 928
 
 ["SERVER.0x10028938"]
 name = "g_default_group_name"
@@ -846,10 +846,10 @@ section = ".rdata"
 
 ["SERVER.0x10029bb8"]
 name = "g_office_role_templates"
-type = "OFFICE_ROLE_TEMPLATE[]"
+type = "OFFICE_ROLE_TEMPLATE[40]"
 status = "VERIFIED"
 section = ".data"
-size = 1
+size = 960
 
 ["SERVER.0x1009aca0"]
 name = "g_entity_base"
@@ -2122,7 +2122,7 @@ name = "g_dispatch_table"
 section = ".data"
 status = "VERIFIED"
 type = "handler_func[]"
-size = 256
+size = 424
 
 ["SERVER.0x1002d4fc"]
 name = "s_ls_tmp_1002d4fc"
@@ -3105,27 +3105,6 @@ status = "VERIFIED"
 section = ".data"
 type = "int[2]"
 name = "gz_magic"
-status = "VERIFIED"
-
-["SERVER.0x1002b374"]
-section = ".data"
-name = "__locktable"
-type = "CRITICAL_SECTION*[]"
-size = 176
-status = "VERIFIED"
-
-["SERVER.0x1002aa84"]
-name = "g_rdata_fold_refs"
-type = "const char*[]"
-size = 48
-section = ".data"
-status = "VERIFIED"
-
-["SERVER.0x1002b440"]
-name = "__old_small_block_heap"
-type = "int"
-size = 4
-section = ".data"
 status = "VERIFIED"
 
 ["SERVER.0x1002d464"]
@@ -4887,3 +4866,27 @@ section = ".data"
 name = "g_server_flag_1002979c"
 type = "int"
 size = 4
+
+["SERVER.0x10029af0"]
+section = ".data"
+name = "g_office_float_table_10029af0"
+type = "float[7][7]"
+size = 196
+
+["SERVER.0x1002a0f0"]
+section = ".data"
+name = "g_alchemy_one_1002a0f0"
+type = "float"
+size = 4
+
+["SERVER.0x1002a0f4"]
+section = ".data"
+name = "g_alchemy_half_1002a0f4"
+type = "float"
+size = 4
+
+["SERVER.0x1002a1cc"]
+section = ".data"
+name = "g_alchemy_random_table_1002a1cc"
+type = "unsigned char[7812]"
+size = 7812

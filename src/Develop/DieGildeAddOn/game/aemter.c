@@ -13,8 +13,62 @@
  * copy_12_dwords is byte-identical, this copy names the touched fields). */
 #include "game_structs.h"
 
+/* Nothing reads this table; it opens the TU's data (8-aligned, so the
+ * link pads four bytes ahead of it). */
+// DATA: SERVER 0x10029af0
+float g_office_float_table_10029af0[7][7] = {
+	{ 1.0f, -2.5f, -2.5f, -2.5f, -5.0f, -5.0f, -10.0f },
+	{ 1.0f, 0.0f, -2.5f, -5.0f, -2.5f, -7.0f, -10.0f },
+	{ 1.0f, -2.5f, 0.0f, -2.5f, -5.0f, -5.0f, -10.0f },
+	{ 1.0f, -5.0f, -2.5f, 0.0f, -7.5f, -2.5f, -10.0f },
+	{ 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, -5.0f, -10.0f },
+	{ 1.0f, 1.0f, 1.0f, 1.0f, -5.0f, 0.0f, -10.0f },
+	{ 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f },
+};
+
 // GLOBAL: SERVER 0x10029bb8
-extern OFFICE_ROLE_TEMPLATE g_office_role_templates[];
+OFFICE_ROLE_TEMPLATE g_office_role_templates[40] = {
+	{ 0, 0, 0, 0, 0, 0x40a00000 },
+	{ 1, 1, 1, 0x1f4, 1, 0x40a00000 },
+	{ 2, 1, 2, 0x2bc, 0, 0x40a00000 },
+	{ 3, 1, 3, 0x3e8, 0, 0x40a00000 },
+	{ 4, 2, 1, 0x1f4, 1, 0x40a00000 },
+	{ 5, 2, 2, 0x2bc, 0, 0x40a00000 },
+	{ 6, 2, 3, 0x3e8, 0, 0x40a00000 },
+	{ 7, 3, 1, 0x1f4, 1, 0x40a00000 },
+	{ 8, 3, 2, 0x2bc, 0, 0x40a00000 },
+	{ 9, 3, 3, 0x3e8, 0, 0x40a00000 },
+	{ 0xa, 4, 4, 0x7d0, 0, 0x40a00000 },
+	{ 0xb, 4, 4, 0x7d0, 0, 0x40a00000 },
+	{ 0xc, 4, 4, 0x7d0, 0, 0x40a00000 },
+	{ 0xd, 4, 5, 0x9c4, 0, 0x40a00000 },
+	{ 0xe, 4, 5, 0x9c4, 0, 0x40a00000 },
+	{ 0xf, 4, 6, 0xbb8, 0, 0x40a00000 },
+	{ 0x10, 5, 4, 0x7d0, 0, 0x40c00000 },
+	{ 0x11, 5, 4, 0x7d0, 0, 0x40c00000 },
+	{ 0x12, 5, 4, 0x7d0, 0, 0x40c00000 },
+	{ 0x13, 5, 5, 0x9c4, 0, 0x40c00000 },
+	{ 0x14, 5, 5, 0x9c4, 0, 0x41000000 },
+	{ 0x15, 5, 6, 0xbb8, 0, 0x41000000 },
+	{ 0x16, 6, 7, 0x1388, 0, 0x40e00000 },
+	{ 0x17, 6, 7, 0x1388, 0, 0x40e00000 },
+	{ 0x18, 6, 7, 0x1388, 0, 0x41200000 },
+	{ 0x19, 6, 8, 0x1b58, 0, 0x40e00000 },
+	{ 0x1a, 6, 8, 0x1b58, 0, 0x41400000 },
+	{ 0x1b, 6, 9, 0x2710, 0, 0x40e00000 },
+	{ 0x1c, 7, 4, 0xbb8, 0, 0x40a00000 },
+	{ 0x1d, 7, 4, 0xbb8, 0, 0x40a00000 },
+	{ 0x1e, 7, 4, 0xbb8, 0, 0x40a00000 },
+	{ 0x1f, 7, 4, 0xbb8, 0, 0x40a00000 },
+	{ 0x20, 7, 4, 0xbb8, 0, 0x40a00000 },
+	{ 0x21, 7, 4, 0xbb8, 0, 0x40a00000 },
+	{ 0x22, 7, 4, 0xbb8, 0, 0x41000000 },
+	{ 0x23, 8, 0xa, 0x4e20, 0, 0x40a00000 },
+	{ 0x24, 8, 0xa, 0x4e20, 0, 0x40a00000 },
+	{ 0x25, 8, 0xb, 0x7530, 0, 0x40a00000 },
+	{ 0x26, 8, 0xc, 0xc350, 0, 0x40a00000 },
+	{ 0x27, 8, 0xc, 0xc350, 0, 0x40a00000 },
+};
 void* __cdecl gm_LookupEntityRecordById(int entityId);
 
 /* Validates whether an entity can take an office position.  Scans the

@@ -85,7 +85,8 @@ RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
 # move at all.  Three rounds of data work were invisible to it.  Guard the raw
 # link's own .data so progress there is measured and regressions there caught.
 # 15,787: server.c block 0x1002956c..0x10029ac0 defined in reference order.
-DATA_BASELINE=${DATA_BASELINE:-15787}
+# 7,807: aemter tables, alchemy tables, command speed pair and dispatch table.
+DATA_BASELINE=${DATA_BASELINE:-7807}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:

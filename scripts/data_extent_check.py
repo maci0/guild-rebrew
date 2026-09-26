@@ -211,6 +211,11 @@ def main():
     for cur, nxt, end in contained + overlaps:
         if cur["name"] in KNOWN_GAP_BLOBS:
             continue  # verified container; its inner symbols are views by design
+        if nxt["name"] in KNOWN_GAP_BLOBS:
+            # The blob's VA is only where its copy of the reference starts; the
+            # game symbols defined over those bytes own them (split_link drops
+            # data_restore.c), so a real object reaching into it is no conflict.
+            continue
         if view_status(nxt["name"], src_dir) == "owns":
             bugs.append((cur, nxt, end))
 

@@ -57,7 +57,6 @@ unsigned char g_SearchFlag = 0;
 void* g_SomeGlobal = 0;
 char* g_action_table_base = 0;
 int g_active_player_count = 0;
-int g_alchemy_entity_table[1] = {0};
 int g_alloc_counter = 0;
 int g_alloc_root_count = 0;
 int g_alloc_root_count_max = 0;
@@ -75,7 +74,6 @@ float g_const_1_over_32767 = 0;
  * 0x10028938, now DEFINED in Units/m_alloc/m_alloc.c as the real 8-byte string.
  * Zeroed stubs here put them at 0x100366dc and left the reference's eight bytes
  * missing from .data entirely. */
-int g_dispatch_table[1] = {0};
 int g_dispatch_table_a[1] = {0};
 int g_dispatch_table_b[1] = {0};
 int g_dynamic_count = 0;
@@ -88,7 +86,6 @@ int g_file_version = 0;
 float g_const_1_0 = 0;
 float g_const_neg_1_0 = 0;
 float g_const_0_0 = 0;
-int g_game_speed_value = 0;
 float g_gv_const_5680 = 0;
 float g_gv_const_57c4 = 0;
 float g_gv_const_57c8 = 0;
@@ -206,7 +203,6 @@ int g_query_match_count = 0;
 int g_relationship_matrix_primary = 0;
 int g_relationship_matrix_secondary = 0;
 int g_sim_ents = 0;
-int g_office_role_templates = 0;
 /* g_unknown_1de450 removed round 932: it was a SECOND definition of the same
    address as `char* g_item_def_table` above (line 78), and wrongly typed `int`
    against that `char*`.  Two symbols for one .data address is the naming rule's

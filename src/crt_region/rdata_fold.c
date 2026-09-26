@@ -37,7 +37,6 @@
  */
 // SUPPORT: SERVER folds the six LIBCMT objects' duplicate .rdata COMDATs
 
-// GLOBAL: SERVER 0x1002aa84
 const char* g_rdata_fold_refs[] = {
 	"IsProcessorFeaturePresent",
 	"KERNEL32",
