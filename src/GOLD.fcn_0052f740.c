@@ -35,7 +35,7 @@ typedef struct {
 	signed char count;
 } Book;
 
-extern char g_631090;
+extern char g_631090[];
 extern char* g_6f240c;
 
 char* __cdecl fcn_00401040(char*);
@@ -96,7 +96,7 @@ int __cdecl fcn_0052f740(Book* b, signed char dir)
 			fcn_00474c90(b->widgets[i], top, bottom);
 			fcn_004754c0(b->widgets[i], 1);
 		} else {
-			fcn_00474c90(b->widgets[i], &g_631090, &g_631090);
+			fcn_00474c90(b->widgets[i], &(*(char*)g_631090), &(*(char*)g_631090));
 			fcn_004754c0(b->widgets[i], 0);
 		}
 	}

@@ -13,7 +13,7 @@
  * copy_12_dwords is byte-identical, this copy names the touched fields). */
 #include "game_structs.h"
 
-extern char g_office_slots[];
+extern char g_office_slots[0x3f0];
 
 unsigned char *__cdecl fcn_00508e40(int id);
 

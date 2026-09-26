@@ -30,9 +30,9 @@
 #include "../../../Units/Error/error.h"
 
 // GLOBAL: GOLDTL 0x6b8300
-extern char g_6b8300[];
+extern int g_6b8300;
 // GLOBAL: GOLD 0x633738
-extern char g_6b8300[];
+extern int g_6b8300;
 // FUNCTION: GOLD 0x0040bf60
 // SIZE: 96
 // FUNCTION: GOLDTL 0x40ce80
@@ -47,7 +47,7 @@ void __cdecl cm_ChkSetGebBesitzer(char* cmd)
 	e = *(void**) (cmd + 0x14);
 	r = fcn_00422460(0, cmd + 0x130);
 	if (r != 0) {
-		if (*(int*) g_6b8300 != 0) {
+		if (*(int*) ((char*)&g_6b8300) != 0) {
 			ahm_AllocateEntitySlot(r, *(int*) ((char*) e + 0x34), 0x7f, 3000.0f);
 		} else {
 			ahm_AllocateEntitySlot(r, *(int*) ((char*) e + 0x34), 0x7f, 1000.0f);

@@ -46,10 +46,10 @@ typedef struct {
 	char pad8[0x214];
 } House;
 
-extern Player g_868060[4];
-extern House g_7f4ca0[];
+extern char g_868060[];
+extern char g_7f4ca0[];
 extern unsigned short g_774970;
-extern Slot* g_f8f080;
+extern char* g_f8f080;
 extern char s_6ace6c[];
 extern char s_679060[];
 extern char s_68be7c[];
@@ -85,7 +85,7 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 	int result;
 	int i;
 
-	fcn_004942a0(&g_7f4ca0[g_774970], shares);
+	fcn_004942a0(&((House*)g_7f4ca0)[g_774970], shares);
 	dlg = fcn_00470820(0, 0, s_6ace6c);
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 1);
@@ -93,9 +93,9 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 	fcn_004727a0(dlg, 2);
 	for (i = 0; i < 3; i++) {
 		ids[i] = fcn_0046f740(0x14, i * 0x5a + 10, 0x4c6, g_772514);
-		g_f8f080[ids[i]].shown = 1;
-		g_f8f080[ids[i]].style = 3;
-		fcn_0051af00(text, s_679060, g_868060[i + 1].name);
+		((Slot*)g_f8f080)[ids[i]].shown = 1;
+		((Slot*)g_f8f080)[ids[i]].style = 3;
+		fcn_0051af00(text, s_679060, ((Player*)g_868060)[i + 1].name);
 		fcn_0046fac0(0xbe, i * 0x5a + 10, text, g_772514);
 		fcn_0051af00(text, s_679060, shares[i].kind + 0x16b7);
 		fcn_0046fac0(0xbe, i * 0x5a + 10 + 0x14, text, g_772514);
@@ -123,7 +123,7 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 						m.b4 = 0x5f;
 						m.f8 = *(int*) (p + 2);
 						m.fc = -1;
-						m.f58 = g_7f4ca0[g_774970].f4;
+						m.f58 = ((House*)g_7f4ca0)[g_774970].f4;
 						m.b64 = (char) shares[i].kind;
 						m.b65 = (char) shares[i].goal;
 						m.f60 = shares[i].amount;

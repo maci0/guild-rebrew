@@ -29,20 +29,20 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 // FUNCTION: GOLDTL 0x4297c0
 // SIZE: 59
 // gm_ResetAllEntities
-extern unsigned char* g_6b7e94;
-extern unsigned char* g_6b7e98;
+extern char* g_6b7e94;
+extern char* g_6b7e98;
 extern void __cdecl fcn_00429670(unsigned char*);
 void __cdecl gm_ResetAllEntities(void)
 {
 	int i;
 	unsigned char* e;
 	for (i = 0; i < 0x64c00; i += 0xc98) {
-		e = g_6b7e94 + i;
+		e = ((unsigned char*)g_6b7e94) + i;
 		if (e[0x124] & 1) {
-			g_6b7e98 = e;
+			(*(unsigned char**)&g_6b7e98) = e;
 			fcn_00429670(e);
 		}
 	}
-	g_6b7e98 = 0;
+	(*(unsigned char**)&g_6b7e98) = 0;
 }
 

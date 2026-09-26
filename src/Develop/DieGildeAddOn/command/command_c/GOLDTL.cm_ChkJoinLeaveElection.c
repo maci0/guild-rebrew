@@ -6,7 +6,7 @@
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
-#define g_entity_table_end ((unsigned short*) g_773da8)
+#define g_entity_table_end ((unsigned short*) (*(unsigned int*)&g_773da8))
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
@@ -15,8 +15,8 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * in the election slots and an empty slot exists. For 'leav',
  * verifies the player is actually in a slot. */
 
-extern unsigned int g_773da8;
-extern unsigned int g_773da8;
+extern char* g_773da8;
+extern char* g_773da8;
 extern char g_7f4ca0[];
 extern char g_7f4ca0[];
 // FUNCTION: GOLD 0x4c6870

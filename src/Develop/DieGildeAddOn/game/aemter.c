@@ -24,7 +24,7 @@ void* __cdecl gm_LookupEntityRecordById(int entityId);
  * byte.  Returns 1 when valid, 0 otherwise. */
 
 // GLOBAL: SERVER 0x101de5a0
-extern char g_office_slots[]; /* 0x101de5a0 */
+extern char g_office_slots[0x3f0]; /* 0x101de5a0 */
 // FUNCTION: SERVER 0x1000b1c0
 // SIZE: 205
 

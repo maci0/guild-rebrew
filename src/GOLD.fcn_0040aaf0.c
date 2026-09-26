@@ -1,5 +1,5 @@
 // GLOBAL: GOLD 0x5ebb74
-extern float g_662d40[];
+extern float g_662d40[3];
 // FUNCTION: GOLD 0x40aaf0
 // SIZE: 219
 

@@ -39,7 +39,7 @@ unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern char* g_array_base;
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 void __cdecl free_node(char*);
 int __cdecl gm_FreeObjectListRecursive(char**);
 void __cdecl gm_NoopRet2(void);

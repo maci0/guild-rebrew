@@ -6,7 +6,7 @@
 
 void* __cdecl gm_LookupEntityRecordById(int);
 
-extern char g_office_slots[]; 
+extern char g_office_slots[0x3f0]; 
 
 // DATA: SERVER 0x10029f78
 char s_amt_fio_LoadAemter____Can_t_load_10029f78[] = "amt_fio_LoadAemter(): Can't load msetter";

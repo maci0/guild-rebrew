@@ -1,5 +1,5 @@
 // GLOBAL: GOLD 0x5ebba4
-extern float g_662d70[];
+extern float g_662d70[4];
 // GLOBAL: GOLD 0x5f122c
 extern unsigned char g_6752a4;
 // GLOBAL: GOLD 0x5fb5b0

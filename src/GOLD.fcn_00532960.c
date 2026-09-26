@@ -28,23 +28,23 @@ extern char g_7e2000[];
 extern char g_7e1d00[];
 extern char g_6a3a28[];
 extern char g_6a3778[];
-extern int g_7747b0;
-extern int g_6a375c;
+extern unsigned char g_7747b0;
+extern unsigned char g_6a375c;
 extern short g_7e2510;
 extern int g_6a3764;
 extern int g_6a3768;
 extern int g_6a376c;
 extern int g_6a3770;
-extern int g_10529c8;
-extern int g_10421a0;
-extern int g_10432a4;
+extern float g_10529c8;
+extern float g_10421a0;
+extern float g_10432a4;
 // SIZE 4
 struct shortpair {
 	short lo;
 	short hi;
 };
 
-extern struct shortpair g_fb9070;
+extern short g_fb9070;
 extern int g_77250c;
 
 int __cdecl fcn_00539380(void);
@@ -62,8 +62,8 @@ int __cdecl fcn_00532960(void)
 		if (fcn_0053ed60(1, 1) != 0) {
 			sprintf(g_7e21a0, g_6a3a28, g_6a3778, g_7e1d00);
 			strcpy(g_7e2000, "127.0.0.1");
-			g_7747b0 |= 0x10;
-			g_7e2520.mode = *(char*) &g_6a375c;
+			(*(int*)&g_7747b0) |= 0x10;
+			g_7e2520.mode = *(char*) &(*(int*)&g_6a375c);
 			g_7e2520.size = 0x6a;
 			g_7e2520.a = 1;
 			g_7e2520.b = 1;
@@ -72,7 +72,7 @@ int __cdecl fcn_00532960(void)
 			g_9baa70.info = g_7e2520;
 			g_9baa70.x = 0x3f;
 			fcn_00438da0((float) (g_6a376c - g_6a3764), (float) (g_6a3770 - g_6a3768), (float) g_6a3764,
-			    (float) g_6a3768, g_10529c8, g_10421a0, g_10432a4, g_fb9070.hi, g_fb9070.lo);
+			    (float) g_6a3768, (*(int*)&g_10529c8), (*(int*)&g_10421a0), (*(int*)&g_10432a4), (*(struct shortpair*)&g_fb9070).hi, (*(struct shortpair*)&g_fb9070).lo);
 			return 1;
 		}
 	}

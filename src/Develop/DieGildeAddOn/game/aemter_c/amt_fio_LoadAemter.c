@@ -7,7 +7,7 @@
  * names are the ones kept; the aemter.c twin had `a/b/c/type/d`). */
 #include "game_structs.h"
 
-extern char g_office_slots[]; /* 0x101de5a0 */
+extern char g_office_slots[0x3f0]; /* 0x101de5a0 */
 extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize,
                                          int elementCount, int streamCtx);
 extern void __cdecl srv_InitBuildingTypeTable(void);
