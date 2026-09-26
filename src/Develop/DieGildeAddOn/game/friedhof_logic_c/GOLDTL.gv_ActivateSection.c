@@ -11,7 +11,7 @@ extern char g_7f4ca0[];
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 extern unsigned short* g_entity_table_end; /* TL 0x773da8 (server 0x1003546c) */
-extern unsigned char* g_entity_type_table; /* TL 0x868050 (server 0x100a8c30) */
+extern char* g_entity_type_table; /* TL 0x868050 (server 0x100a8c30) */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 /* TL data VAs re-derived from disasm — GOLDTL has no data layout, so these
  * externs shadow the shared server-header symbols (which resolve to server
@@ -36,7 +36,7 @@ int __cdecl gv_ActivateSection(void* cmd)
 		if (grave_id != 0xffff) {
 			if (g_7f4ca0 + grave_id * 0x21c != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
-				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
+				if (((unsigned char*)g_entity_type_table)[field_id + field_id * 588] != 0x1d) {
 					return -2;
 				}
 				workers = *(void**) ((char*) entity + 0x65);

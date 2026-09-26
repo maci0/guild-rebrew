@@ -28,9 +28,9 @@ int fcn_1001a6a1 = 0;
  * gv_ExtendProductionTime.c called it as a function, so the link resolved
  * those calls to a data address.  Both now call gm_SubObjectNoKill directly.
  * (scripts/gen_link_stubs.py no longer exists; edit by hand.) */
-float g_output_share[1] = {0.0f};
-int g_field_worker_count[1] = {0};
-int g_field_entry_count[1] = {0};
+float g_output_share[] = {0.0f};
+int g_field_worker_count[] = {0};
+int g_field_entry_count[] = {0};
 char g_1002d444 = 0;
 char g_1002d45c = 0;
 char g_1002d474 = 0;
@@ -41,7 +41,7 @@ char s_ls_tmp_1002d4fc = 0;
 char g_10031004[1] = {0};
 char g_10031484[1] = {0};
 char g_100314b8[1] = {0};
-int g_entity_table_end = 0;
+unsigned short* g_entity_table_end = 0;
 int g_current_year = 0;
 int g_recv_game_buffer = 0;
 unsigned char* g_EntityListStart = 0;
@@ -76,14 +76,14 @@ float g_const_1_over_32767 = 0;
  * Zeroed stubs here put them at 0x100366dc and left the reference's eight bytes
  * missing from .data entirely. */
 int g_dispatch_table[1] = {0};
-int g_dispatch_table_a[1] = {0};
-int g_dispatch_table_b[1] = {0};
+int g_dispatch_table_a[] = {0};
+int g_dispatch_table_b[] = {0};
 int g_dynamic_count = 0;
 int g_dynasty_field_2c = 0;
 int gm_CurrentHumanFamilyCount = 0;
 char* g_item_def_table = 0;
 int g_entity_id_counter = 0;
-unsigned int g_query_state_a0c[768] = {0};
+int g_query_state_a0c[768] = {0};
 int g_file_version = 0;
 float g_const_1_0 = 0;
 float g_const_neg_1_0 = 0;
@@ -100,7 +100,7 @@ int g_object_count = 0;
 char g_office_slots[0x3f0];
 int g_plant_info_table = 0;
 int g_query_filter_max_id = 0;
-short g_query_filter_type = 0;
+unsigned short g_query_filter_type = 0;
 int g_query_limit = 0;
 short g_record_table[1] = {0};
 int g_save_extra_70 = 0;
@@ -160,13 +160,13 @@ int g_worker_entry_count = 0;
 /* GROUP B: game memset/memmove (0x10021240 / 0x1001b200) - stubs until the
  * crt mem TUs are reversed; postlink rewrites call targets to the reference
  * VAs. */
-int g_field_worker_count_wt0 = 0;
-int g_field_worker_count_wt1 = 0;
-int g_field_worker_count_wt2 = 0;
-int g_field_worker_count_wt3 = 0;
+int g_field_worker_count_wt0[] = {0};
+int g_field_worker_count_wt1[] = {0};
+int g_field_worker_count_wt2[] = {0};
+int g_field_worker_count_wt3[] = {0};
 int g_producer_id_table = 0;
-int g_crash_callback = 0;
-int g_crash_dump_all_frames = 0;
+void* g_crash_callback = 0;
+char g_crash_dump_all_frames = 0;
 int g_10034624 = 0;
 int g_10034628 = 0;
 int g_1003462c = 0;
@@ -191,14 +191,14 @@ int g_download_received = 0;
 unsigned int g_download_buffer = 0;
 unsigned int g_download_total_size = 0;
 int g_download_slots = 0;
-unsigned char g_entity_base[1] = {0};
-int g_entity_end = 0;
+unsigned char g_entity_base[] = {0};
+char g_entity_end[] = {0, 0, 0, 0};
 unsigned char* g_entity_ptr = 0;
 /* Sell msgs: real .data strings (ExSell imm32); overlay GLOBAL on alchemistry_logic2.c */
 char g_error_msg_sell_failed[] = "cm_ExSellObjekt() Verkaufslimit \xfc" "berschritten";
 char g_error_msg_sell_no_dest[] = "cm_ExSellObjekt(): Ziel-Besitzer ist kein Geb\xe4ude";
 char g_error_msg_sell_no_source[] = "cm_ExSellObjekt(): Quell-Besitzer ist kein Geb\xe4ude";
-int g_log_buffer = 0;
+char g_log_buffer[] = {0, 0, 0, 0};
 int g_log_file_handle = 0;
 /* g_player_slots_base removed: ExSell uses g_connections@0x101deb00 */
 int g_query_count = 0;
@@ -264,7 +264,7 @@ int g_max_players = 0;
 int g_game_speed_table[5] = {0};
 float g_color_scale = 0;
 int g_entity_id_field = 0;
-unsigned short g_entity_slot_table[1] = {0};
+unsigned int g_entity_slot_table[] = {0};
 unsigned int g_crc_table_241a0[256] = {0};
 unsigned char g_dynamic_entities[1] = {0};
 char* g_entity_type_table = 0;

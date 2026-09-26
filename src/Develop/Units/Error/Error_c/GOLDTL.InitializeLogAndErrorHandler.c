@@ -13,7 +13,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-extern int g_panic_callback;
+extern void (*g_panic_callback)(void);
 extern void* g_crash_callback;
 extern unsigned int g_log_mode_flags; /* TL image: re-derive VA from TL disasm, not 0x10034618 */
 extern char g_crash_dump_all_frames;

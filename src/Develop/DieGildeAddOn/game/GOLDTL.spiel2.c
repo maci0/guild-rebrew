@@ -63,7 +63,7 @@ extern unsigned short g_FilterVal25;
 extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
 void __cdecl gv_Free3Fields(void* param);
-extern int g_query_state_a0c[];
+extern int g_query_state_a0c[768];
 extern unsigned char g_byte_table_30861;
 char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocRaum(char* geb, int obj_id);

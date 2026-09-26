@@ -62,7 +62,7 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 char __cdecl check_memory_protection(unsigned int);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned char __cdecl EmitCrashModuleLine(int*);
-int g_crash_callback = 0;
+void* g_crash_callback = 0;
 
 /* Crash handler: rewrites the module path to <name>.dbg, loads and decrypts
  * it, appends a dated record to __crashdump.log (exception name, then one
