@@ -4024,7 +4024,9 @@ without interfering: interference inside a block is tuple-level.
 
 ## Finding 73: CrashDump's frame-fill tie (0x10002c5c) against the cross-jump, picker and DAG rules (traced in c2)
 
-Still 4 linked bytes. The decision is the ready-list order at `0x107278ae`: priority (`+0x2c`)
+Closed (`0x10002770`). Spelling: group_a_done is `espVal += 4` then the same `espVal -= 4` on both arms of `if (nFrames)`, then `break`. The frame fill writes `frameInfo[0]` before `frameInfo[1]`. Frame immediate `sub esp,0x280`. Measured `rebrew test`: RELOC, 2115/2115, delta 0 (was NEAR_MATCHING 2111/2115, the four bytes `6c 40 54 3c` at `0x10002c5d`). A single subtract, or one `goto` to a shared subtract, leaves `add ebx,4` / `sub ebx,4` (2127 bytes). Identical arms fold away after the group-A tails have cross-jumped, so the tails stay shared and the join emits nothing. The scheduler then issues `89 54 24 3c` before `89 6c 24 40`.
+
+The decision, for the joins that do not fold, is the ready-list order at `0x107278ae`: priority (`+0x2c`)
 descending, then sequence (`+0x36`) ascending. Sequence is the block-local creation order
 (`0x10726361`, counter `0x1079f16c` reset at `0x1072631f`), so the group-A join `fi[1]`, the first
 item of the merged frame-fill block, always issues before `fi[0]` at equal height. The rules that

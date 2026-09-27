@@ -13,12 +13,10 @@ updated_at = "2026-09-22T10:50:21+00:00"
 
 ["SERVER.0x10002770"]
 size = 2115
-status = "NEAR_MATCHING"
+status = "RELOC"
 analysis = "Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride)."
-blocker = "frame 0x284 vs ref 0x280 (the older 0x28c figure is wrong); every 0x280 route measured costs ~50 bytes (6 confirmations, shapes 81); body length-exact, tables byte-identical"
-blocker_delta = 1638
-updated_by = "verify"
-updated_at = "2026-09-25T10:25:38+00:00"
+updated_by = "test"
+updated_at = "2026-09-26T17:28:00+00:00"
 
 ["SERVER.0x10002fc0"]
 size = 376

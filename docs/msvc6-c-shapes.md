@@ -2887,6 +2887,8 @@ note the dishonesty in the header so the next reader does not "fix" it back.
 
 ## 81. CrashDump frame rule: every 0x280 path costs ~50 bytes
 
+Closed for `0x10002770`. The frame immediate is already `sub esp,0x280`. The last four bytes were store order at `0x10002c5c`, not the frame. Spelling: `espVal += 4` then `if (nFrames) espVal -= 4; else espVal -= 4; break` as the group-A join, and the frame fill writes `frameInfo[0]` before `frameInfo[1]`. Measured RELOC, 2115/2115, delta 0 (was NEAR_MATCHING 2111/2115). Window bytes `54 3c 6c 40`. One `goto` to a shared subtract leaves the `add`/`sub` in the object (2127). See Finding 73.
+
 Four independent routes to the target frame (`space`-drop, hProcess reload,
 pDbgBuf kill, nested-loop shape) all land `sub esp,0x280` exactly and all lose
 ~45-60 matches on both rulers. The frame counts overlapping live ranges

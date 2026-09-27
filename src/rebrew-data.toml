@@ -4431,96 +4431,112 @@ section = ".data"
 type = "char[36]"
 name = "g_crashdump_tail_10027318"
 size = 36
+status = "VERIFIED"
 
 ["SERVER.0x1002956c"]
 section = ".data"
 name = "s_This_is_Gilde_talking__can_you_h_1002956c"
 type = "char[]"
 size = 40
+status = "VERIFIED"
 
 ["SERVER.0x10029594"]
 section = ".data"
 name = "g_game_path_10029594"
 type = "char[260]"
 size = 260
+status = "VERIFIED"
 
 ["SERVER.0x10029698"]
 section = ".data"
 name = "g_game_path_default_10029698"
 type = "char[260]"
 size = 260
+status = "VERIFIED"
 
 ["SERVER.0x1002979c"]
 section = ".data"
 name = "g_server_flag_1002979c"
 type = "int"
 size = 4
+status = "VERIFIED"
 
 ["SERVER.0x10029af0"]
 section = ".data"
 name = "g_office_float_table_10029af0"
 type = "float[7][7]"
 size = 196
+status = "VERIFIED"
 
 ["SERVER.0x1002a0f0"]
 section = ".data"
 name = "g_alchemy_one_1002a0f0"
 type = "float"
 size = 4
+status = "VERIFIED"
 
 ["SERVER.0x1002a0f4"]
 section = ".data"
 name = "g_alchemy_half_1002a0f4"
 type = "float"
 size = 4
+status = "VERIFIED"
 
 ["SERVER.0x1002a1cc"]
 section = ".data"
 name = "g_alchemy_random_table_1002a1cc"
 type = "unsigned char[7812]"
 size = 7812
+status = "VERIFIED"
 
 ["SERVER.0x1002da30"]
 section = ".data"
 name = "g_plant_pair_table_1002da30"
 type = "PLANT_PAIR[88]"
 size = 704
+status = "VERIFIED"
 
 ["SERVER.0x1002dcf0"]
 section = ".data"
 name = "g_plant_flag_1002dcf0"
 type = "int"
 size = 4
+status = "VERIFIED"
 
 ["SERVER.0x1002dd48"]
 section = ".data"
 name = "g_spiel_data_1002dd48"
 type = "unsigned int[38]"
 size = 152
+status = "VERIFIED"
 
 ["SERVER.0x10030860"]
 section = ".data"
 name = "g_building_defaults_10030860"
 type = "BuildingDefaults[37]"
 size = 777
+status = "VERIFIED"
 
 ["SERVER.0x10030b74"]
 section = ".data"
 name = "g_spiel_bytes_10030b74"
 type = "unsigned char[16]"
 size = 16
+status = "VERIFIED"
 
 ["SERVER.0x10030ba0"]
 section = ".data"
 name = "g_stat_table_30ba0"
 type = "unsigned char[780]"
 size = 780
+status = "VERIFIED"
 
 ["SERVER.0x10030eac"]
 section = ".data"
 name = "g_spiel_data_10030eac"
 type = "int[16]"
 size = 64
+status = "VERIFIED"
 
 ["SERVER.0x1009aca2"]
 name = "g_dynamic_entities"

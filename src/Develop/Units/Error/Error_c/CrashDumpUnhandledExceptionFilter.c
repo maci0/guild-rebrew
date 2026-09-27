@@ -88,14 +88,15 @@ void* g_crash_callback = 0;
  * only into the block that falls through to a jump target, so the reference's
  * two tails need two targets: the B cases `break` to the frame fill, which
  * case 0xc00000fd falls into, and the A cases jump to group_a_done, which
- * case 0xc000008e falls into.  group_a_done repeats the frame fill's first
- * statement, the hCrashLog store, and jumps past the frame fill's copy.  It
- * uses no scratch register (hCrashLog is ebp), so the copies compile alike:
- * c2 cross-jumps them into the frame fill and then tail A's newline call
- * into tail B's, as in the reference.  An
- * empty label there collapses into the switch end and the A arms stop
- * merging; a copy that loads into a scratch register (frameInfo[0]) differs
- * between the two sites and stays in tail A.  pStack is stored after the
+ * case 0xc000008e falls into.  group_a_done is `espVal += 4` and then the
+ * same `espVal -= 4` in both arms of `if (nFrames)`.  The net is zero.  A
+ * single subtract, or one `goto` to a shared subtract, leaves `add ebx,4` /
+ * `sub ebx,4` in the object (2127 bytes).  Identical arms are folded away
+ * only after the A tails have cross-jumped into case 0xc000008e's newline,
+ * so the tails stay shared and the join itself emits nothing.  An empty
+ * label there collapses into the switch end and the A arms stop merging; a
+ * copy that loads into a scratch register (frameInfo[0]) differs between the
+ * two sites and stays in tail A.  pStack is stored after the
  * frameInfo zero stores, as in the reference; stored in the join copies it
  * lands before them, and hDbgFile and pDbgBuf (three references each) come
  * out in each other's stack slots.
@@ -116,13 +117,12 @@ void* g_crash_callback = 0;
  * pick before the szLine pair's, giving eax, ecx, edx.  The two literals
  * are the reference's strings at 0x10027314 and 0x100272f8.
  *
- * Still open: the frame fill's frameInfo[0] and [1] stores issue in the
- * reverse order (both have priority 2; IL order decides, and the [1] store
- * is the group-A join).  Every other join is ruled out in msvc6-allocator.md
- * Finding 73: scratch loads pick eax here and edx at the frame fill, the
- * pStack store orders the add ahead of the xor, register copies fold away,
- * and a volatile pCtx load merges but shifts pCtx's slot and its barrier
- * lets the Eip load issue first. */
+ * Frame fill stores (0x10002c5c).  frameInfo[0] is written before
+ * frameInfo[1].  Both stores have priority 2, so source order is the issue
+ * order once the group-A join no longer occupies the first slot: `89 54 24 3c`
+ * then `89 6c 24 40`.  The frame is `sub esp,0x280`.  Measured RELOC,
+ * 2115/2115, delta 0 (was NEAR_MATCHING 2111/2115).  The joins that do not
+ * fold are in msvc6-allocator.md Finding 73. */
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
@@ -289,8 +289,12 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 								WriteFile(hCrashLog, (const char*) 0x1002721c, 0x12, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 group_a_done:
-								frameInfo[1] = (int) hCrashLog;
-								goto frame_fill;
+								espVal += 4;
+								if (nFrames)
+									espVal -= 4;
+								else
+									espVal -= 4;
+								break;
 							case 0xc000008f:
 								WriteFile(hCrashLog, (const char*) 0x10027208, 0x12, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
@@ -332,9 +336,8 @@ group_a_done:
 							}
 
 							/* Stack walk */
-							frameInfo[1] = (int) hCrashLog;
-frame_fill:
 							frameInfo[0] = (int) pDbgBuf;
+							frameInfo[1] = (int) hCrashLog;
 							frameInfo[2] = (int) pCtx->Eip;
 							frameInfo[3] = 0;
 							frameInfo[4] = 0;
