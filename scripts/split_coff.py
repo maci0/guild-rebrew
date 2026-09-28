@@ -508,6 +508,14 @@ def main() -> int:
         "loading the whole member from the archive",
     )
     ap.add_argument(
+        "--drop-data",
+        action="append",
+        default=[],
+        help="member basename whose plain .data is not carried. The split "
+        "link's gap blob copies those reference bytes; carrying the section "
+        "on the function object places it at the .text order instead",
+    )
+    ap.add_argument(
         "--trim",
         action="store_true",
         help="cut each emitted section to the reference function's size (the map "
@@ -731,9 +739,16 @@ def main() -> int:
                 mapped.add(sec)
         claimed: set[int] = set()
         data_secs: set[int] = set()
+        member_base = member.replace("\\", "/").split("/")[-1].lower()
+        drop_data = member_base in {n.lower() for n in args.drop_data}
         if args.with_data:
             for i, sec in enumerate(coff.sections):
                 nm = sec["name"].rstrip(b"\0").decode("ascii", "replace")
+                # Plain .data of a dropped member is supplied by the gap blob.
+                # .bss/.rdata/.CRT$* still have to travel with the function or
+                # LINK pulls the whole archive member back in.
+                if drop_data and nm.split("$", 1)[0] == ".data":
+                    continue
                 if nm.startswith((".data", ".bss", ".rdata", ".CRT$")):
                     data_secs.add(i)
         funcs_sorted = sorted(funcs, key=lambda f: f[0])

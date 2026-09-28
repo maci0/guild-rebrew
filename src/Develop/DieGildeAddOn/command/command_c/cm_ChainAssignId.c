@@ -1,7 +1,7 @@
 /* cm_ChainAssignId - proper C */
 
 // GLOBAL: SERVER 0x1176408c
-extern int g_chain_id_start;
+int g_chain_id_start = 0;
 
 /* Chain handler: assigns the next sequential chain ID to the command
  * packet at offset 0x10, then increments the global counter. */

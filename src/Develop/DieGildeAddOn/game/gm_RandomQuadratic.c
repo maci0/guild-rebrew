@@ -26,9 +26,9 @@ extern float g_const_0_0; /* 0x100256cc */
 
 // GLOBAL: SERVER 0x1009acfc
 int g_some_limit;
-unsigned int g_1009b764;
+unsigned int g_player_record_dst;
 char* g_slot_array;
-unsigned int g_100a8cf8;
+unsigned int g_player_record_src;
 
 // FUNCTION: SERVER 0x1001a110
 // gm_RandomQuadratic

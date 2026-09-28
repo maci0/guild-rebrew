@@ -1,8 +1,7 @@
 // GLOBAL: SERVER 0x11764084
-extern int g_max_players; /* 0x11764084 */
+int g_max_players = 0; /* 0x11764084 */
 // GLOBAL: SERVER 0x11764088
-extern int g_tick_rate;    /* 0x11764088 */
-// FUNCTION: SERVER 0x100093a0
+int g_tick_rate = 0;    /* 0x11764088 */
 extern int g_tick_rate;    /* 0x11764088 */
 extern int g_max_players; /* 0x11764084 */
 #include "../../Units/Error/error.h"
@@ -62,20 +61,28 @@ void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int f
 
 
 extern unsigned char g_connections[0x264264]; /* 0x101deb00: 8 slots of 0x264264 */
-extern unsigned int g_download_slots[8]; /* 0x101deac8 */
-extern char g_module_path[0x104]; /* 0x101de9a0 */
+// GLOBAL: SERVER 0x101deac8
+unsigned int g_download_slots[8] = {0}; /* 0x101deac8 */
+// GLOBAL: SERVER 0x101de9a0
+char g_module_path[0x104] = {0}; /* 0x101de9a0 */
 extern int g_current_year; /* 0x10035880 */
-extern unsigned int g_download_buffer; /* 0x101deae8 */
-extern int g_players_synced; /* 0x11764090: every player sent 0x20 */
-extern unsigned int g_next_tick_time; /* 0x101deaf0 */
-extern unsigned int g_download_total_size; /* 0x101deac0 */
+// GLOBAL: SERVER 0x101deae8
+unsigned int g_download_buffer = 0; /* 0x101deae8 */
+// GLOBAL: SERVER 0x11764090
+int g_players_synced = 0; /* 0x11764090: every player sent 0x20 */
+// GLOBAL: SERVER 0x101deaf0
+unsigned int g_next_tick_time = 0; /* 0x101deaf0 */
+// GLOBAL: SERVER 0x101deac0
+unsigned int g_download_total_size = 0; /* 0x101deac0 */
 extern int g_handler_started; /* 0x10034680 */
 extern int g_clock_copy_mid; /* 0x10035888 */
 extern unsigned short g_current_hour; /* 0x10035884 */
-extern unsigned char g_host_flags; /* 0x101de464 */
+// GLOBAL: SERVER 0x101de464
+unsigned char g_host_flags = 0; /* 0x101de464 */
 extern short g_clock_copy_tail; /* 0x1003588c */
 extern int g_game_speed_value; /* 0x1002c3f0 */
 
+// FUNCTION: SERVER 0x100093a0
 int __stdcall ServerMainThread(void* lpThreadParameter)
 {
 	char* module_path;

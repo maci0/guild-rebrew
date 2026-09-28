@@ -8,39 +8,28 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #include "entity.h"
+#include "game_data.h"
 
 #pragma intrinsic(memcpy, memset)
 
 void __cdecl gm_InitEntitySlots(void);
-extern int g_query_limit;
 extern unsigned char g_slot_table[2];
 int __cdecl gm_FreeObjectListRecursive(char**);
-extern int g_next_object_id; /* defined in spiel.c */
-int g_current_year;
 
 int __cdecl gm_GetBuildingTypeCategory(int);
-extern int g_citizen_count;
 // DATA: SERVER 0x10035a04
 extern unsigned char g_entity_type_bytes[1];
 // GLOBAL: SERVER 0x1003542c
-extern int g_dynasty_field_2c; /* 0x1003542c */
+int g_next_family_index = 0; /* 0x1003542c */
 
 // GLOBAL: SERVER 0x10035430
-extern int gm_CurrentHumanFamilyCount; /* 0x10035430 */
+int gm_CurrentHumanFamilyCount = 0; /* 0x10035430 */
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_RandomMod(unsigned short range);
 int __cdecl gm_LookupEntityRecordById(int);
-extern float g_const_1_5; /* 0x10025fb4 */
-extern float g_const_2_2; /* 0x10025fb0 */
-extern float g_const_0_06875; /* 0x10025fac */
-extern float g_const_896_0; /* 0x10025fa8 */
-extern double g_const_1_over_720; /* 0x10025fa0 */
-extern float g_const_0_0; /* 0x100256cc */
-extern float g_gv_const_57c8; /* 0x100257c8 */
-extern double g_const_half; /* 0x100257d0 */
-extern unsigned char g_current_season;
+
 
 /* Initializes an entity if it exists. Validates the entity
  * pointer, then sets default field values. No-op on NULL. */
@@ -170,7 +159,7 @@ void __cdecl gm_InitEntitySlots(void)
 	} while ((int) ptr < (int) g_entity_end);
 
 	g_citizen_count = 0;
-	g_dynasty_field_2c = 0;
+	g_next_family_index = 0;
 	gm_CurrentHumanFamilyCount = 0;
 }
 

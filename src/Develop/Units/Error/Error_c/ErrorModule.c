@@ -10,7 +10,7 @@ char* __cdecl GetDebugRecordByIndex();
 extern void (*g_panic_callback)(void);
 
 // DATA: SERVER 0x1002733c
-char s_LogFile_has_been_deleted__1002733c[] = "LogFile has been deleted!\n";
+char s_LogFile_has_been_deleted[] = "LogFile has been deleted!\n";
 
 // DATA: SERVER 0x10027358
 unsigned char g_file_write_mode[3] = {
@@ -18,7 +18,7 @@ unsigned char g_file_write_mode[3] = {
 };
 
 // DATA: SERVER 0x1002735c
-char s__________________________________1002735c[] = "* ------------------------------------------------------------ *\n[%s], Date: %s";
+char s_error_log_banner[] = "* ------------------------------------------------------------ *\n[%s], Date: %s";
 // FUNCTION: GOLD 0x421ed0
 // SIZE: 48
 // FUNCTION: GOLDTL 0x41d4d0

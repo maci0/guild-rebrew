@@ -18,7 +18,7 @@
  *     return 0;
  *   }
  *   LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x397d,
- *                      s_cm_ExKillSpieler___Could_not_fin_1002d154,1);
+ *                      s_cm_ExKillSpieler___Could_not_fin,1);
  *   return 0;
  * }
  */
@@ -27,7 +27,7 @@
 #include "../../../Units/Error/error.h"
 
 // GLOBAL: SERVER 0x1002d154
-extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
+extern char s_cm_ExKillSpieler___Could_not_fin[];
 
 /* Execution handler: removes/kills a player entity (Spieler).
  * Deallocates the player and cleans up associated resources. */

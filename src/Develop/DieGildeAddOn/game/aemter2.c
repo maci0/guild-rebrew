@@ -9,31 +9,31 @@ void* __cdecl gm_LookupEntityRecordById(int);
 extern char g_office_slots[0x3f0]; 
 
 // DATA: SERVER 0x10029f78
-char s_amt_fio_LoadAemter____Can_t_load_10029f78[] = "amt_fio_LoadAemter(): Can't load msetter";
+char s_amt_cant_load_msetter[] = "amt_fio_LoadAemter(): Can't load msetter";
 
 // DATA: SERVER 0x10029fa4
-char s_amt_fio_LoadAemter____Can_t_load_10029fa4[] = "amt_fio_LoadAemter(): Can't load status";
+char s_amt_cant_load_status[] = "amt_fio_LoadAemter(): Can't load status";
 
 // DATA: SERVER 0x10029fcc
-char s_amt_fio_LoadAemter____Can_t_load_10029fcc[] = "amt_fio_LoadAemter(): Can't load pcount";
+char s_amt_cant_load_pcount[] = "amt_fio_LoadAemter(): Can't load pcount";
 
 // DATA: SERVER 0x10029ff4
-char s_amt_fio_LoadAemter____Can_t_load_10029ff4[] = "amt_fio_LoadAemter(): Can't load mamt";
+char s_amt_cant_load_mamt[] = "amt_fio_LoadAemter(): Can't load mamt";
 
 // DATA: SERVER 0x1002a01c
-char s_amt_fio_LoadAemter____Can_t_load_1002a01c[] = "amt_fio_LoadAemter(): Can't load mplayerid";
+char s_amt_cant_load_mplayerid[] = "amt_fio_LoadAemter(): Can't load mplayerid";
 
 // DATA: SERVER 0x1002a048
-char s_amt_fio_LoadAemter____Can_t_load_1002a048[] = "amt_fio_LoadAemter(): Can't load id";
+char s_amt_cant_load_id[] = "amt_fio_LoadAemter(): Can't load id";
 
 // DATA: SERVER 0x1002a06c
-char s_amt_fio_LoadAemter____count_read_1002a06c[] = "amt_fio_LoadAemter(): count read is %i, expected %i";
+char s_amt_count_mismatch[] = "amt_fio_LoadAemter(): count read is %i, expected %i";
 
 // DATA: SERVER 0x1002a0a0
-char s_D__Develop_DieGildeAddOn_game_ae_1002a0a0[] = "D:\\Develop\\DieGildeAddOn\\game\\aemter.c";
+char s_D__Develop_DieGildeAddOn_game_ae[] = "D:\\Develop\\DieGildeAddOn\\game\\aemter.c";
 
 // DATA: SERVER 0x1002a0c8
-char s_amt_fio_LoadAemter____Can_t_load_1002a0c8[] = "amt_fio_LoadAemter(): Can't load count";
+char s_amt_cant_load_count[] = "amt_fio_LoadAemter(): Can't load count";
 // FUNCTION: GOLDTL 0x4e8940
 // SIZE: 151
 // FUNCTION: SERVER 0x1000B820

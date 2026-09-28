@@ -1,7 +1,7 @@
 #include "../Units/Error/error.h"
 #include "../Units/m_alloc/m_alloc.h"
-extern char s_Cant_set_SO_RCVBUF_100293e4[];
-extern char s_Cant_set_SO_SNDBUF_100293c4[];
+extern char s_Cant_set_SO_RCVBUF[];
+extern char s_Cant_set_SO_SNDBUF[];
 
 #include <stdio.h>
 #include <string.h>
@@ -21,6 +21,9 @@ void __cdecl srv_LogWinsockError(int err_code);
 
 #include "server_internal.h"
 
+// GLOBAL: SERVER 0x101deaec
+int g_net_socket = 0;
+
 void __cdecl srv_InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
 void __cdecl m_ShutdownAllocator();
@@ -30,7 +33,6 @@ void __cdecl m_init(int);
 int __cdecl srv_SendPlayerData(unsigned int*);
 
 // DATA: SERVER 0x1003467c
-// DATA: SERVER 0x101deb14
 // DATA: SERVER 0x114ffe20
 // FUNCTION: GOLDTL 0x4e7600
 // SIZE: 90
@@ -119,7 +121,7 @@ int __cdecl srv_CreateListenSocket(int port)
 	optval = 0x20000;
 	if (setsockopt(sock, 0xFFFF, 0x1002, (const char*) &optval, 4) == -1) {
 		/* original source logs the RCVBUF text on this path */
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x424, s_Cant_set_SO_RCVBUF_100293e4, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x424, s_Cant_set_SO_RCVBUF, 1);
 		goto close_sock;
 	}
 
@@ -127,7 +129,7 @@ int __cdecl srv_CreateListenSocket(int port)
 	optval = 0x20000;
 	if (setsockopt(sock, 0xFFFF, 0x1001, (const char*) &optval, 4) == -1) {
 		/* original source logs the SNDBUF text on this path */
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x42b, s_Cant_set_SO_SNDBUF_100293c4, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x42b, s_Cant_set_SO_SNDBUF, 1);
 		goto close_sock;
 	}
 

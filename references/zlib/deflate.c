@@ -216,7 +216,11 @@ int ZEXPORT deflateInit2_(strm, level, method, windowBits, memLevel, strategy,
 {
     deflate_state *s;
     int noheader = 0;
-    static const char* my_version = ZLIB_VERSION;
+    /* Named bytes first, then the pointer, in one 12-byte run. A pointer
+     * initialized from the macro emits the pointer section before the
+     * literal, which is the opposite of the reference. */
+    static char my_version_str[8] = {'1', '.', '1', '.', '3', 0, 0, 0};
+    static const char* my_version = my_version_str;
 
     ushf *overlay;
     /* We overlay pending_buf and d_buf+l_buf. This works since the average

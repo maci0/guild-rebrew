@@ -3,6 +3,7 @@
 // Path search setup: seeds the start and goal nodes of the grid and runs the
 // expansion step (0x421ba0) until it reaches the goal or runs out.
 
+// SIZE 0x1c
 typedef struct PathNode {
 	int type;
 	short mark;

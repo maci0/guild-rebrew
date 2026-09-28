@@ -83,4 +83,4 @@ int __cdecl CloseVfsStream(void* stream)
 
 
 
-char s_rb_1002944c[4] = { 'r', 'b', 0, 0 };
+char s_gzip_mode_rb[4] = { 'r', 'b', 0, 0 };

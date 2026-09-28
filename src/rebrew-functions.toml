@@ -234,7 +234,7 @@ size = 2434
 status = "RELOC"
 analysis = "Core orchestration loop. Phase 1 (Lobby): Loops accepting connections until connected_players == g_max_players and every connected player has the 0x800 ready flag. Then transitions into Phase 2 (Transfer). | PHASE 0: Read game.ini config — server port (default 7531), game path, max players | Initialize server: thread priority, logging, packet pool, game data, listen socket | PHASE 1 — LOBBY: Wait for all players to connect and set ready flag (0x800). Broadcasts server info every 3 seconds. Processes network I/O. Handles disconnect requests (0x1000) and host disconnect (0x400 = terminate). | PHASE 3 — DATA RECEIVE: Wait for host to send savegame data (flag 0x08 cleared when done). Then call RecvGameSavegame to deserialize game state. | PHASE 5 — PLAYER ALLOCATION: Wait for each player to allocate their character entity (flag 0x10 set, cleared when cmd received). | PHASE 6 — GAME LOOP: Main simulation tick. Checks sync flags (0x40=sync data, 0x20=sync ready). Advances game clock, broadcasts sync packets (cmd 0x1E). Processes commands via ProcessAndBroadcastAllCommands. Speed controlled by g_game_speed_value. | PHASE 4 — DATA SEND: Stream savegame to all non-host clients in 128-byte chunks (cmd type 0x09). First sends total size (cmd type 0x08). Clears flag 0x04 when transfer complete per player."
 updated_by = "test"
-updated_at = "2026-09-24T11:53:28+00:00"
+updated_at = "2026-09-27T08:04:14+00:00"
 
 ["SERVER.0x10009d30"]
 size = 296
@@ -288,7 +288,7 @@ size = 750
 status = "RELOC"
 analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
 updated_by = "test"
-updated_at = "2026-09-24T21:30:48+00:00"
+updated_at = "2026-09-27T08:05:01+00:00"
 
 ["SERVER.0x1000a860"]
 size = 131
@@ -1455,7 +1455,7 @@ updated_at = "2026-09-22T05:50:31+00:00"
 size = 3689
 status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-24T21:22:51+00:00"
+updated_at = "2026-09-27T08:05:29+00:00"
 
 ["SERVER.0x100196c0"]
 size = 81
@@ -3975,9 +3975,9 @@ size = 37
 
 ["GOLDTL.0x0057c8f0"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-25T10:57:47+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-27T19:26:17+00:00"
 size = 36
 
 ["GOLDTL.0x0057ecf0"]
@@ -4068,9 +4068,9 @@ updated_at = "2026-09-21T14:03:59+00:00"
 size = 48
 
 ["GOLDTL.0x004193f0"]
-status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-27T19:55:04+00:00"
 size = 144
 
 ["GOLDTL.0x0041caa0"]
@@ -4412,11 +4412,11 @@ status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-22T19:07:00+00:00"
 
-["GOLDTL.0x0040c630"]
-size = 48
-
 ["GOLDTL.0x00479ed0"]
-size = 38
+size = 77
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-27T17:55:24+00:00"
 
 ["GOLDTL.0x0047cb60"]
 size = 50
@@ -4776,6 +4776,7 @@ updated_at = "2026-09-22T19:20:08+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T19:20:17+00:00"
+size = 18
 
 ["GOLDTL.0x0040eca0"]
 status = "RELOC"
@@ -6555,15 +6556,15 @@ updated_at = "2026-09-22T21:08:27+00:00"
 
 ["GOLDTL.0x0042b040"]
 size = 64
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-25T03:04:36+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-27T19:26:19+00:00"
 
 ["GOLDTL.0x0042b080"]
 size = 64
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-25T03:04:36+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-27T19:26:18+00:00"
 
 ["GOLDTL.0x0040c740"]
 size = 57
@@ -14233,8 +14234,9 @@ updated_at = "2026-09-25T05:11:07+00:00"
 
 ["GOLDTL.0x00487d80"]
 status = "RELOC"
-updated_by = "verify"
-updated_at = "2026-09-25T05:11:07+00:00"
+updated_by = "test"
+updated_at = "2026-09-27T19:24:24+00:00"
+size = 220
 
 ["GOLDTL.0x0048f660"]
 status = "RELOC"
@@ -15341,6 +15343,7 @@ updated_at = "2026-09-25T05:11:07+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-25T05:11:07+00:00"
+size = 160
 
 ["GOLDTL.0x004ece30"]
 status = "RELOC"
@@ -33362,7 +33365,7 @@ size = 779
 size = 667
 status = "NEAR_MATCHING"
 updated_by = "test"
-updated_at = "2026-09-26T15:22:39+00:00"
+updated_at = "2026-09-27T19:50:47+00:00"
 
 ["GOLDTL.0x0040ba30"]
 size = 833
@@ -33392,7 +33395,7 @@ size = 758
 size = 760
 status = "NEAR_MATCHING"
 updated_by = "test"
-updated_at = "2026-09-26T15:22:51+00:00"
+updated_at = "2026-09-27T19:50:46+00:00"
 
 ["GOLDTL.0x004d74b0"]
 size = 801
@@ -33434,7 +33437,7 @@ updated_at = "2026-09-26T15:23:02+00:00"
 size = 801
 status = "NEAR_MATCHING"
 updated_by = "test"
-updated_at = "2026-09-26T15:23:04+00:00"
+updated_at = "2026-09-27T19:50:45+00:00"
 
 ["GOLDTL.0x0057e880"]
 size = 763
@@ -33450,3 +33453,103 @@ updated_at = "2026-09-26T15:23:07+00:00"
 
 ["GOLDTL.0x005db8e0"]
 size = 637
+
+["GOLDTL.0x00427f00"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x00431330"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x0044c620"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x00485650"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x0049be10"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x004a0e20"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x004a8880"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x004c3170"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x00507f10"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x00546850"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-27T19:18:00+00:00"
+
+["GOLDTL.0x00409020"]
+size = 170
+
+["GOLDTL.0x004131e0"]
+size = 183
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-27T21:45:45+00:00"
+
+["GOLDTL.0x00413c40"]
+size = 205
+
+["GOLDTL.0x00413d10"]
+size = 229
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-27T23:14:55+00:00"
+
+["GOLDTL.0x0040c630"]
+size = 130
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-28T02:03:06+00:00"
+
+["GOLDTL.0x00404f60"]
+size = 283
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-28T01:47:34+00:00"
+
+["GOLDTL.0x0040c120"]
+size = 272
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-28T02:29:23+00:00"
+blocker = "reference byte at the 0x33 guard is a single int 3 (cc); __asm { int 3 } is the spelling that matches"
+
+["GOLDTL.0x0040fea0"]
+size = 297
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-28T02:44:03+00:00"
+blocker = "three-rep alignment prelude (lea/and/sub/jle/rep stos) is original hand-written asm; plain memset cannot emit it"
+
+["GOLDTL.0x004124b0"]
+size = 266
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-28T03:37:26+00:00"

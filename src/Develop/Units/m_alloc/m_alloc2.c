@@ -29,9 +29,9 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
  * counters, and maintains the allocation list. */
 
 
-/* Five truncated stub arrays used to live here -- g_str_10028888,
- * s_Pointer_not_freed_10028aec, s_Memory_Shutdown_Anomaly_10028b04, s_m_pool_alloc_tp_m_pool_10028b60 and
- * s_m_pool_get_free_tp_m_pool_10028b78 -- each holding only the FIRST BYTE of
+/* Five truncated stub arrays used to live here -- s_m_alloc_header,
+ * s_Pointer_not_freed, s_Memory_Shutdown_Anomaly, s_m_pool_alloc_tp_m_pool and
+ * s_m_pool_get_free_tp_m_pool -- each holding only the FIRST BYTE of
  * a string the reference has in full at that VA.  Every one of those strings
  * is already emitted by this TU as a real `??_C@` COMDAT literal, from the
  * call sites above:
@@ -62,11 +62,11 @@ void __cdecl m_ShutdownAllocator(void)
 	if (g_stat2 != 0 || g_stat1 != 0) {
 		sprintf(buf, "[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i block(s) left in %i bytes.", g_stat4, g_stat3, g_stat2, g_stat1);
 		ReportMessage(buf);
-		if (g_flag_3c != 0) {
+		if (g_alloc_report_groups != 0) {
 			m_ReportGroupInfo(0);
 		}
 	} else {
-		if (g_flag_3c == 0) {
+		if (g_alloc_report_groups == 0) {
 			goto cleanup;
 		}
 		m_ReportGroupInfo(0);

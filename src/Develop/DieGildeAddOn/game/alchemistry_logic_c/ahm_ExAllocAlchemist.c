@@ -26,7 +26,7 @@ extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_AllocTracked(unsigned int size, const char* source);
 /* Defined in alchemistry_logic2.c; same literal, same VA. */
-extern char s_ahm_AllocAhmInfo_1002a0f8[];
+extern char s_ahm_AllocAhmInfo[];
 
 /* Allocates a new alchemy entity: resolves the parent building record,
  * finds a free slot in the static entity table (0x100358a0, stride 0x21c),
@@ -216,7 +216,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 
 	if (*(int*) ((char*) dynamic + 0x65) == 0) {
-		*(int*) ((char*) dynamic + 0x65) = (int) m_AllocTracked(0x3c, s_ahm_AllocAhmInfo_1002a0f8);
+		*(int*) ((char*) dynamic + 0x65) = (int) m_AllocTracked(0x3c, s_ahm_AllocAhmInfo);
 	}
 
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);

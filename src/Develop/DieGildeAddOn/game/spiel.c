@@ -9,6 +9,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #include "entity.h"
+#include "game_data.h"
 
 #pragma intrinsic(memcpy, memset)
 
@@ -18,23 +19,12 @@
 #include "game_structs.h"
 #define Record LinkedNode
 
-extern int g_query_limit;
 void __cdecl m_FreeTracked(void*);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl gm_GetBuildingTypeCategory(int);
-extern int g_citizen_count;
 int __cdecl gm_GetBuildingTypeCategory(int btype);
-extern float g_const_1_5; /* 0x10025fb4 */
-extern float g_const_2_2; /* 0x10025fb0 */
-extern float g_const_0_06875; /* 0x10025fac */
-extern float g_const_896_0; /* 0x10025fa8 */
-extern double g_const_1_over_720; /* 0x10025fa0 */
-extern float g_const_0_0; /* 0x100256cc */
-extern float g_gv_const_57c8; /* 0x100257c8 */
-extern double g_const_half; /* 0x100257d0 */
-extern unsigned char g_current_season;
 
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
@@ -43,9 +33,7 @@ extern unsigned char g_current_season;
 extern unsigned char g_slot_table[2];
 void __cdecl gm_NoopRet2(char* slot);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-extern int g_next_object_id;
 extern int g_entity_id_counter;
-int g_current_year;
 // FUNCTION: GOLD 0x004fe7f0
 // SIZE: 57
 // FUNCTION: GOLDTL 0x5012b0

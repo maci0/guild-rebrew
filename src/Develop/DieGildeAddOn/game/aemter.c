@@ -16,7 +16,7 @@
 /* Nothing reads this table; it opens the TU's data (8-aligned, so the
  * link pads four bytes ahead of it). */
 // DATA: SERVER 0x10029af0
-float g_office_float_table_10029af0[7][7] = {
+float g_office_float_table[7][7] = {
 	{ 1.0f, -2.5f, -2.5f, -2.5f, -5.0f, -5.0f, -10.0f },
 	{ 1.0f, 0.0f, -2.5f, -5.0f, -2.5f, -7.0f, -10.0f },
 	{ 1.0f, -2.5f, 0.0f, -2.5f, -5.0f, -5.0f, -10.0f },

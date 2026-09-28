@@ -12,17 +12,9 @@ typedef struct Node {
 } Node;
 // SIZE 0x58
 
-typedef struct Seg {
-	int id;
-	int next;
-	char pad8[0x3c - 8];
-	int flags;
-} Seg;
-// SIZE 0x40
-
 extern char* g_99ec10;
-extern Seg g_100b0c0[];
 #include "client_types.h"
+extern Seg g_100b0c0[];
 extern entry_100d0c0 g_100d0c0[];
 
 // FUNCTION: GOLDTL 0x487d80

@@ -8,31 +8,19 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #include "entity.h"
+#include "game_data.h"
 
 #pragma intrinsic(memcpy, memset)
 
-extern int g_query_limit;
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern unsigned char g_slot_table[2];
-extern int g_next_object_id; 
-int g_current_year;
 
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char* geb);
 
 int __cdecl gm_GetBuildingTypeCategory(int);
-extern int g_citizen_count;
 int __cdecl gm_GetBuildingTypeCategory(int btype);
-extern float g_const_1_5; 
-extern float g_const_2_2; 
-extern float g_const_0_06875; 
-extern float g_const_896_0; 
-extern double g_const_1_over_720; 
-extern float g_const_0_0; 
-extern float g_gv_const_57c8; 
-extern double g_const_half; 
-extern unsigned char g_current_season;
 char* __cdecl gm_FindEntityByOwner(int); 
 
 // FUNCTION: GOLD 0x00501ce0

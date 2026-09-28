@@ -51,3 +51,50 @@ int __cdecl fcn_00407610(char* ev)
 	}
 	return cell;
 }
+
+/* Pair list walked by fcn_00407760. count at +0, bytes at +8. */
+// SIZE 0xc
+typedef struct PairRun {
+	int count;
+	int pad4;
+	unsigned char* bytes;
+} PairRun;
+
+// FUNCTION: GOLDTL 0x407760
+// SIZE: 159
+
+int __cdecl fcn_00407760(char* flags, PairRun* src, char* dst, char* scale)
+{
+	int step;
+	int i;
+	int n;
+	int hi;
+	unsigned char* bytes;
+
+	n = 0;
+	i = 1;
+	if (flags != 0 && (flags[4] & 0x10) != 0) {
+		step = 2;
+	} else {
+		step = (int) (*(float*) 0x6628e0 / *(float*) (scale + 0x10) + *(float*) 0x6628cc);
+		if (step < i) {
+			step = i;
+		}
+	}
+	while (i < src->count) {
+		bytes = src->bytes;
+		hi = bytes[i * 2 + 1];
+		n = n + 1;
+		dst[n * 2 - 2] = bytes[i * 2];
+		dst[n * 2 - 1] = (char) hi;
+		i = i + step;
+	}
+	if (i != src->count - 1) {
+		bytes = src->bytes;
+		hi = bytes[src->count * 2 - 1];
+		n = n + 1;
+		dst[n * 2 - 2] = bytes[src->count * 2 - 2];
+		dst[n * 2 - 1] = (char) hi;
+	}
+	return n;
+}

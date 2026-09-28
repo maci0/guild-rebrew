@@ -18,8 +18,8 @@
  *   cVar1 = *cmd;
  *   if ((((cVar1 != '\0') && (cVar1 != '\x05')) && (cVar1 != '\x06')) && (cVar1 != '\a')) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x270b,
- *                        s_Invalid_Commandtype_in_Execution_1002cacc,1);
- *     printf(s_Invalid_Commandtype_in_Execution_1002cacc);
+ *                        s_Invalid_Commandtype_in_Execution,1);
+ *     printf(s_Invalid_Commandtype_in_Execution);
  *     return 1;
  *   }
  *   if (result != (char *)0x0) {
@@ -34,7 +34,7 @@
 
 int __cdecl printf(const char*, ...);
 // GLOBAL: SERVER 0x1002cacc
-extern char s_Invalid_Commandtype_in_Execution_1002cacc[];
+extern char s_Invalid_Commandtype_in_Execution[];
 
 /* Validation handler: checks that the first byte of the command
  * is a valid command type (0x00, 0x05, 0x06, or 0x07). Logs

@@ -19,52 +19,52 @@ extern float g_const_0_0;
 
 /* Nothing reads these two; they open the TU's data. */
 // GLOBAL: SERVER 0x1002a0f0
-float g_alchemy_one_1002a0f0 = 1.0f;
+float g_alchemy_one = 1.0f;
 // GLOBAL: SERVER 0x1002a0f4
-float g_alchemy_half_1002a0f4 = 0.5f;
+float g_alchemy_half = 0.5f;
 
 // DATA: SERVER 0x1002a0f8
-char s_ahm_AllocAhmInfo_1002a0f8[] = "ahm_AllocAhmInfo";
+char s_ahm_AllocAhmInfo[] = "ahm_AllocAhmInfo";
 /* Round-522: REF 0x1002a10c..0x1002a19c — path + ExAlloc msgs missing from BLD. */
 
 // DATA: SERVER 0x1002a10c
-char s_D__Develop_DieGildeAddOn_game_al_1002a10c[] = "D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c";
+char s_D__Develop_DieGildeAddOn_game_al[] = "D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c";
 
 // DATA: SERVER 0x1002a140
-char s_ahm_ExAllocAlchemist__array_over_1002a140[] = "ahm_ExAllocAlchemist: array overflow...";
+char s_ahm_ExAllocAlchemist__array_over[] = "ahm_ExAllocAlchemist: array overflow...";
 
 // DATA: SERVER 0x1002a168
-char s_ahm_ExAllocAlchemist__wrong_type_1002a168[] = "ahm_ExAllocAlchemist: wrong type of target geb...";
+char s_ahm_ExAllocAlchemist__wrong_type[] = "ahm_ExAllocAlchemist: wrong type of target geb...";
 
 // DATA: SERVER 0x1002a19c
-char s_ahm_ExAllocAlchemist__cant_find_1002a19c[] = "ahm_ExAllocAlchemist: cant find target geb...";
+char s_ahm_ExAllocAlchemist__cant_find[] = "ahm_ExAllocAlchemist: cant find target geb...";
 
 // GLOBAL: SERVER 0x10025688
-extern double g_dbl_const_688; /* 0x10025688 */
+extern double g_const_2; /* 0x10025688 */
 
 // GLOBAL: SERVER 0x100256d0
-extern double g_dbl_const_6d0; /* 0x100256d0 */
+extern double g_const_0_001; /* 0x100256d0 */
 
 // GLOBAL: SERVER 0x100257d8
-extern double g_dbl_const_7d8; /* 0x100257d8 */
+extern double g_const_one_d; /* 0x100257d8 */
 
 // GLOBAL: SERVER 0x10025810
-extern double g_dbl_const_810; /* 0x10025810 */
+extern double g_const_0_2; /* 0x10025810 */
 
 // GLOBAL: SERVER 0x10025f88
-extern float g_dbl_const_f88; /* 0x10025f88 */
+extern float g_const_0_6; /* 0x10025f88 */
 
 // GLOBAL: SERVER 0x10025f90
-extern double g_dbl_const_f90; /* 0x10025f90 */
+extern double g_const_8; /* 0x10025f90 */
 
 // GLOBAL: SERVER 0x10025f98
-extern double g_dbl_const_f98; /* 0x10025f98 */
+extern double g_const_900; /* 0x10025f98 */
 
 /* 32 records at a 244-byte stride.  ahm_InitRandomEntity addresses them by raw
  * address (0x1002a1d0, 0x1002a200 and the in-use byte at 0x1002a2c2, each
  * plus idx * 244); the bytes are the reference's. */
 // DATA: SERVER 0x1002a1cc
-unsigned char g_alchemy_random_table_1002a1cc[0x1e84] = {
+unsigned char g_alchemy_random_table[0x1e84] = {
 	0x00, 0x00, 0x00, 0x00, 0x6e, 0x65, 0x56, 0x6d, 0x4d, 0x61, 0x76, 0x65, 0x6e, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x6f, 0x66, 0x20, 0x52, 0x65, 0x61, 0x64, 0x69,
 	0x6e, 0x67, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x20, 0x60, 0x60, 0x40, 0x00, 0x00, 0x00,
@@ -598,10 +598,51 @@ typedef struct {
 
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
-// GLOBAL: SERVER 0x101deb00
 extern unsigned char g_connections[0x264264];
+
+void __cdecl fcn_00418fb0(char* src);
+void __cdecl fcn_004190d0(char* src);
+void __cdecl fcn_00423670(char* obj, int a, int b);
+
+/* Sound-pan request filled for fcn_00418fb0. */
+typedef struct PanReq {
+	char pad[0x34];
+	void* emitter;
+	void* label;
+	int gap3c;
+	int mode;
+	int flag;
+	float level;
+	char tail[8];
+} PanReq;
+
 // FUNCTION: GOLDTL 0x4193f0
 // SIZE: 144
+
+int __cdecl fcn_004193f0(char* obj, void* label, int mode, float amount)
+{
+	PanReq req;
+	float scaled;
+
+	if (obj == 0 || label == 0) {
+		return 0;
+	}
+	scaled = (float) (amount * *(double*) 0x662b40);
+	req.label = label;
+	req.flag = 1;
+	req.emitter = obj;
+	*(int*) (obj + 0xc) = 1;
+	*(int*) (obj + 0x14) = 0;
+	req.mode = mode;
+	req.level = scaled;
+	fcn_00418fb0((char*) &req);
+	fcn_004190d0((char*) &req);
+	if (*(int*) (obj + 0x24) == 0) {
+		return 0;
+	}
+	fcn_00423670(obj, 0, 0);
+	return 1;
+}
 
 /* Clamps a floating-point alchemy value to valid bounds.
  * Prevents stat overflow/underflow during recipe processing.
@@ -843,7 +884,7 @@ int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 			return 0;
 	}
 	if (*(int*) (arg2 + 0x65) == 0)
-		*(int*) (arg2 + 0x65) = (int) m_AllocTracked(0x3c, s_ahm_AllocAhmInfo_1002a0f8);
+		*(int*) (arg2 + 0x65) = (int) m_AllocTracked(0x3c, s_ahm_AllocAhmInfo);
 	memcpy((void*) *(int*) (arg2 + 0x65), buf, 0x3c);
 	return 1;
 }
@@ -875,7 +916,7 @@ found:
 	do {
 		/* volatile pins the store right after the multiply; without it
 		 * MSVC6 sinks it past the pointer bump to `fstp [eax-0xc]`. */
-		*(volatile float*) table_cursor = table_cursor[-1] * g_dbl_const_6d0;
+		*(volatile float*) table_cursor = table_cursor[-1] * g_const_0_001;
 		table_cursor += 3;
 		n--;
 	} while (n != 0);

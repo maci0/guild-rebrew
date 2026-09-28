@@ -23,7 +23,7 @@
  *   *(int *)(iVar1 + 0x10) = iVar2;
  *   iVar2 = gm_ResolveEntityById((void **)&param_1,&local_4,&local_8,iVar2);
  *   if (iVar2 == 0) {
- *     msg = s_cm_ChkChangeBits___Invalid_Id_1002ca54;
+ *     msg = s_cm_ChkChangeBits___Invalid_Id;
  *     line = 0x250d;
  *   }
  *   else {
@@ -37,7 +37,7 @@
  *        ((*(uint *)((int)local_8 + 0x1c8) & 0x800000) == 0)) {
  *       return 0;
  *     }
- *     msg = s_cm_ChkChangeBits___Invalid_actio_1002ca04;
+ *     msg = s_cm_ChkChangeBits___Invalid_actio;
  *     line = 0x2533;
  *   }
  *   LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,line,msg,1);
@@ -49,14 +49,14 @@
 #include "../../../Units/Error/error.h"
 
 // GLOBAL: SERVER 0x1002ca04
-extern char s_cm_ChkChangeBits___Invalid_actio_1002ca04[];
+extern char s_cm_ChkChangeBits___Invalid_actio[];
 
 /* Validation handler: resolves entity by ID from the command
  * packet's field type info. Logs and rejects if entity ID is
  * invalid. Used as precondition check for bit-field changes. */
 
 // GLOBAL: SERVER 0x1002ca54
-extern char s_cm_ChkChangeBits___Invalid_Id_1002ca54[];
+extern char s_cm_ChkChangeBits___Invalid_Id[];
 // FUNCTION: SERVER 0x1000cf30
 int __cdecl cm_ChkChangeBits(int cmd, char* result)
 {

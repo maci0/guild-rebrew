@@ -14,13 +14,13 @@ int ls_LoadEntities(int);
 extern int g_citizen_count;
 
 // GLOBAL: SERVER 0x10035470
-extern int g_save_extra_70;
+int g_save_header_aux = 0;
 
 // GLOBAL: SERVER 0x10035474
-extern int g_save_extra_74;
+int g_save_header_aux_b = 0;
 
 // GLOBAL: SERVER 0x10035478
-extern int g_save_extra_field;
+int g_save_extra_field = 0;
 
 /* Loads graveyard-specific data from a save file. Reads
  * production slots, worker assignments, and field states
@@ -56,10 +56,10 @@ int __cdecl ls_LoadEntities(int ctx)
 		return 0;
 	}
 	g_citizen_count = header_field;
-	if (ls_ReadVfsDataChecked(&g_save_extra_70, 4, 1, (void*) ctx) == 0) {
+	if (ls_ReadVfsDataChecked(&g_save_header_aux, 4, 1, (void*) ctx) == 0) {
 		return 0;
 	}
-	if (ls_ReadVfsDataChecked(&g_save_extra_74, 4, 1, (void*) ctx) == 0) {
+	if (ls_ReadVfsDataChecked(&g_save_header_aux_b, 4, 1, (void*) ctx) == 0) {
 		return 0;
 	}
 

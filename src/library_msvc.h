@@ -106,7 +106,7 @@
 
 // LIBRARY: SERVER 0x1001B070
 // __fpmath
-// SIZE: 23
+// SIZE: 24
 
 // LIBRARY: SERVER 0x1001B12F
 // _toupper
@@ -147,6 +147,10 @@
 // LIBRARY: SERVER 0x1001BAA4
 // __initstdio
 // SIZE: 168
+
+// LIBRARY: SERVER 0x1001BB4C
+// crt_fcloseall_thunk
+// SIZE: 20
 
 // LIBRARY: SERVER 0x1001BB8F
 // __lock_file
@@ -625,7 +629,7 @@
 
 // LIBRARY: SERVER 0x1001B757
 // unlock_09e
-// SIZE: 9
+// SIZE: 334
 
 // LIBRARY: SERVER 0x1001B8A5
 // _unlock_9
@@ -735,6 +739,10 @@
 // _ValidateEH3RN
 // SIZE: 35
 
+// LIBRARY: SERVER 0x1001E7B1
+// _EH3_save_context_entry
+// SIZE: 9
+
 // LIBRARY: SERVER 0x1001E7BA
 // _EH3_save_context
 // SIZE: 24
@@ -801,7 +809,7 @@
 
 // LIBRARY: SERVER 0x1002001D
 // unlock_09f
-// SIZE: 9
+// SIZE: 137
 
 // LIBRARY: SERVER 0x100200A6
 // unlock_09g

@@ -12,8 +12,8 @@ typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
-extern unsigned int g_100a8cf8;
-extern unsigned int g_1009b764;
+extern unsigned int g_player_record_src;
+extern unsigned int g_player_record_dst;
 /* fcn.1001a140 — the original binary calls this thunk (srand(timeGetTime()))
  * between the producible-count loop and the exit log; the reversed CRT
  * provided it as `getpid` before run_000.c was dropped (c77489a). */
@@ -96,8 +96,8 @@ int __cdecl gm_Open(int map_id)
 	   text sits in a relocation slot, so a wrong string still scores RELOC;
 	   see docs/msvc6-c-shapes.md section 36. */
 	LogMessageInternal((char*) 0x10031004, 0x4d6, "gm_Open(): St\344dte", 1);
-	src_player_ptr = (unsigned int*) &g_100a8cf8;
-	dst_player_ptr = (unsigned int*) &g_1009b764;
+	src_player_ptr = (unsigned int*) &g_player_record_src;
+	dst_player_ptr = (unsigned int*) &g_player_record_dst;
 	do {
 		unsigned int* copy_dst;
 		unsigned int* base;
@@ -199,21 +199,21 @@ int __cdecl gm_Open(int map_id)
 
 /* Resets all entities to initial state. Walks the entity
  * tables and clears all active entities without deallocation. */
-int g_citizen_count;
+extern int g_citizen_count;
 extern unsigned char g_current_season;
-extern int g_dynasty_field_44;
-char g_dynasty_field_48;
-extern char g_dynasty_field_49;
-extern int g_dynasty_field_4c;
+extern int g_dynasty_name;
+extern char g_dynasty_name_ready;
+extern char g_dynasty_scan_flag;
+extern int g_dynasty_scan_count;
 // GLOBAL: SERVER 0x10035454
 char g_query_active;
 // GLOBAL: SERVER 0x1003545c
 char g_query_flag1;
-char g_query_flag2;
+extern char g_query_flag2;
 // GLOBAL: SERVER 0x1003545e
 char g_query_flag3;
 extern unsigned char* g_query_filter_base;
-unsigned short* g_query_cursor;
+extern unsigned short* g_query_cursor;
 extern unsigned short* g_entity_table_end;
 extern unsigned char g_slot_table[2];
 extern char g_entity_state_base[2];
@@ -222,7 +222,7 @@ extern unsigned char g_entity_type_bytes[1];
 int g_array_count = 0;
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
 // DATA: SERVER 0x1003463c
-int g_flag_3c = 0;
+int g_alloc_report_groups = 0;
 // DATA: SERVER 0x10034640
 void* g_array_ptr = 0;
 // GLOBAL: SERVER 0x10034670

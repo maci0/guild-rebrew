@@ -21,7 +21,7 @@
  *     return 0;
  *   }
  *   LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x256b,
- *                      s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74,1);
+ *                      s_cm_ChkSetGebBesitzer___Invalid_I,1);
  *   return 1;
  * }
  */
@@ -30,7 +30,7 @@
 #include "../../../Units/Error/error.h"
 
 // GLOBAL: SERVER 0x1002ca74
-extern char s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74[];
+extern char s_cm_ChkSetGebBesitzer___Invalid_I[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Validation handler: checks if a building (Gebaeude) can have

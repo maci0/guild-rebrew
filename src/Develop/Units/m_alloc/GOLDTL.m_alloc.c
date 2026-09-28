@@ -15,7 +15,7 @@ extern int g_alloc_root_count;
 extern int g_alloc_root_size_total;
 extern int g_alloc_root_count_max;
 extern int g_alloc_root_size_max;
-extern int g_alloc_root_field_20;
+extern int g_alloc_root_spare;
 extern int g_list_head;
 
 // FUNCTION: GOLD 0x004226a0
@@ -93,7 +93,7 @@ void __cdecl m_init(int n)
 	g_alloc_root_size_total = 0;
 	g_alloc_root_count_max = 0;
 	g_alloc_root_size_max = 0;
-	g_alloc_root_field_20 = 0;
+	g_alloc_root_spare = 0;
 	g_list_head = 0;
 }
 #pragma optimize("", on)

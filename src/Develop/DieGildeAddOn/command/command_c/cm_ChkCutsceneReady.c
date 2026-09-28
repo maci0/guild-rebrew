@@ -32,7 +32,7 @@
  *     }
  *   }
  *   LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x26db,
- *                      s_cm_ChkCutsceneReady____failed____1002caa8,1);
+ *                      s_cm_ChkCutsceneReady____failed,1);
  *   return 1;
  * }
  */
@@ -41,7 +41,7 @@
 #include "../../../Units/Error/error.h"
 
 // GLOBAL: SERVER 0x1002caa8
-extern char s_cm_ChkCutsceneReady____failed____1002caa8[];
+extern char s_cm_ChkCutsceneReady____failed[];
 
 /* Validation handler: checks if up to 16 entities referenced
  * by IDs in the command payload are all in cutscene-ready state

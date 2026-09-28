@@ -8,25 +8,13 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #include "entity.h"
+#include "game_data.h"
 #pragma intrinsic(memcpy, memset)
 
-extern int g_query_limit;
 extern unsigned char g_slot_table[2];
-extern int g_next_object_id; 
-int g_current_year;
-extern int g_citizen_count;
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_WalkEntityChain(int);
-extern float g_const_1_5; 
-extern float g_const_2_2; 
-extern float g_const_0_06875; 
-extern float g_const_896_0; 
-extern double g_const_1_over_720; 
-extern float g_const_0_0; 
-extern float g_gv_const_57c8; 
-extern double g_const_half; 
 double __cdecl gm_CalculateProductionValue(int, unsigned char);
-extern unsigned char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);
 int __cdecl compute_size(char*); 
@@ -212,7 +200,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 			mod_value = (float) ((double) weight * g_const_896_0 * g_const_1_over_720 + mod_value);
 		}
 	} else {
-		mod_value = g_gv_const_57c8;
+		mod_value = g_graveyard_const_c;
 	}
 	/* The quotient is scaled in place as a float register variable that
 	   is its own destination, as the composite loop does with `mod_value`:

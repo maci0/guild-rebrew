@@ -24,29 +24,29 @@
 
 extern void __cdecl fcn_1001fdf8(void);   /* 0x1001fdf8 - pre-exit hook */
 extern void __cdecl fcn_1001fe31(int);    /* 0x1001fe31 - __NMSG_WRITE */
-extern void (__cdecl* g_100317f0)(int);   /* 0x100317f0 - _exit hook */
+extern void (__cdecl* g_crt_exit_hook)(int);   /* 0x100317f0 - _exit hook */
 
 void __cdecl _amsg_exit(int msg)
 {
     if (__error_mode == 1 || (__error_mode == 0 && __app_type == 1))
         fcn_1001fdf8();
     fcn_1001fe31(msg);
-    g_100317f0(0xff);
+    g_crt_exit_hook(0xff);
 }
 
 /* _crt_runtime_error: gated on the report-mode flags; calls __NMSG_WRITE
  * twice (0xfc = "abort pressed", 0xff = generic) around an optional user
- * hook (g_100356e0).  Mirrors the game's copy of crt0msg.c. */
+ * hook (g_crt_runtime_error_hook).  Mirrors the game's copy of crt0msg.c. */
 
-extern void (__cdecl* g_100356e0)(void);   /* 0x100356e0 - runtime-error hook */
+extern void (__cdecl* g_crt_runtime_error_hook)(void);   /* 0x100356e0 - runtime-error hook */
 
 void __cdecl fcn_1001fdf8(void)
 {
     if (__error_mode == 1 || (__error_mode == 0 && __app_type == 1))
     {
         fcn_1001fe31(0xfc);
-        if (g_100356e0 != NULL)
-            g_100356e0();
+        if (g_crt_runtime_error_hook != NULL)
+            g_crt_runtime_error_hook();
         fcn_1001fe31(0xff);
     }
 }

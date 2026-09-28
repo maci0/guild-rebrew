@@ -26,7 +26,7 @@
  *
  *   puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
  *   if (puVar1 == (ushort *)0x0) {
- *     msg = s_cm_ExSetGebBesitzer____Could_not_1002d214;
+ *     msg = s_ex_set_owner_missing_c;
  *     line = 0x4972;
  *   }
  *   else {
@@ -35,7 +35,7 @@
  *       puVar3 = (ushort *)gm_LookupEntityRecordById(*(int *)(param_1 + 0x14));
  *       if ((puVar3 == (ushort *)0x0) && (*(int *)(param_1 + 0x14) != -1)) {
  *         LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x4990,
- *                            s_cm_ExSetGebBesitzer____Could_not_1002d1a8,1);
+ *                            s_ex_set_owner_missing_a,1);
  *         return 2;
  *       }
  *       gm_AssignBuildingOwner((uchar *)puVar1,*puVar3,(uint)*puVar2);
@@ -49,7 +49,7 @@
  *       }
  *       return 0;
  *     }
- *     msg = s_cm_ExSetGebBesitzer____Could_not_1002d1e0;
+ *     msg = s_ex_set_owner_missing_b;
  *     line = 0x4980;
  *   }
  *   LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,line,msg,1);
@@ -60,7 +60,7 @@
 void __cdecl gm_AssignBuildingOwner(char*, uint, uint);
 
 // GLOBAL: SERVER 0x1002d1a8
-extern char s_cm_ExSetGebBesitzer____Could_not_1002d1a8[];
+extern char s_ex_set_owner_missing_a[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Execution handler: sets the owner (Besitzer) of a building.
@@ -68,9 +68,9 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * handles old/new owner linkage. */
 
 // GLOBAL: SERVER 0x1002d1e0
-extern char s_cm_ExSetGebBesitzer____Could_not_1002d1e0[];
+extern char s_ex_set_owner_missing_b[];
 // GLOBAL: SERVER 0x1002d214
-extern char s_cm_ExSetGebBesitzer____Could_not_1002d214[];
+extern char s_ex_set_owner_missing_c[];
 // FUNCTION: SERVER 0x1000f3b0
 int __cdecl cm_ExSetGebBesitzer(int cmd, char* result)
 {

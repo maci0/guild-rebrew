@@ -15,13 +15,13 @@ extern char g_log_newline[2]; /* 0x100270E4 */
 extern char g_log_default_name[13]; /* 0x100270E8 */
 extern char g_crash_newline[4]; /* 0x10027314 */
 extern char g_crash_space[4]; /* 0x10027328 */
-extern char g_str_10028888[1]; /* 0x10028888 */
-extern char g_str_10028aec[1]; /* 0x10028AEC */
-extern char g_str_10028b04[1]; /* 0x10028B04 */
-extern char s_m_pool_alloc_tp_m_pool_10028b60[24]; /* 0x10028B60 */
-extern char s_m_pool_get_free_tp_m_pool_10028b78[27]; /* 0x10028B78 */
+extern char s_m_alloc_header[1]; /* 0x10028888 */
+extern char s_Pointer_not_freed[1]; /* 0x10028AEC */
+extern char s_Memory_Shutdown_Anomaly[1]; /* 0x10028B04 */
+extern char s_m_pool_alloc_tp_m_pool[24]; /* 0x10028B60 */
+extern char s_m_pool_get_free_tp_m_pool[27]; /* 0x10028B78 */
 extern unsigned char g_data_restore_gap[0xb000]; /* 0x1002A000 */
-extern char s_ahm_AllocAhmInfo_1002a0f8[]; /* 0x1002A0F8 */
+extern char s_ahm_AllocAhmInfo[]; /* 0x1002A0F8 */
 // GLOBAL: SERVER 0x1002c3f4
 extern int g_game_speed_index; /* 0x1002C3F4 */
 extern int g_file_version; /* 0x1002D4EC */
@@ -39,7 +39,7 @@ extern int g_stat1; /* 0x10034628 */
 extern int g_stat2; /* 0x1003462C */
 extern int g_stat3; /* 0x10034630 */
 extern int g_stat4; /* 0x10034634 */
-extern int g_flag_3c; /* 0x1003463C */
+extern int g_alloc_report_groups; /* 0x1003463C */
 extern void* g_array_ptr; /* 0x10034640 */
 extern int g_connection_counter; /* 0x1003467C, connection counter */
 // GLOBAL: SERVER 0x10034680
@@ -88,23 +88,23 @@ extern int g_log_file_handle; /* 0x11766204 */
 
 /* .rdata */
 // GLOBAL: SERVER 0x100241a0
-extern unsigned int g_crc_table_241a0[256]; /* 0x100241A0 */
-extern const unsigned char g_rdata_restore_252e8[]; /* 0x100252E8 */
-extern double g_dbl_const_688; /* 0x10025688 */
+extern unsigned int g_crc_table[256]; /* 0x100241A0 */
+extern const unsigned char g_rdata_restore[]; /* 0x100252E8 */
+extern double g_const_2; /* 0x10025688 */
 // GLOBAL: SERVER 0x100256a4
 extern float g_color_scale; /* 0x100256A4 */
-extern float g_float_const_a8; /* 0x100256A8 */
-extern double g_dbl_const_6d0; /* 0x100256D0 */
+extern float g_const_neg_1_0f; /* 0x100256A8 */
+extern double g_const_0_001; /* 0x100256D0 */
 // GLOBAL: SERVER 0x10025718
 extern int g_game_speed_table[5]; /* 0x10025718 */
 extern float g_const_42_0; /* 0x100257BC */
 extern float g_const_21_0; /* 0x100257C0 */
 extern double g_const_half; /* 0x100257D0 */
-extern double g_dbl_const_7d8; /* 0x100257D8 */
-extern double g_dbl_const_810; /* 0x10025810 */
-extern float g_dbl_const_f88; /* 0x10025F88 */
-extern double g_dbl_const_f90; /* 0x10025F90 */
-extern double g_dbl_const_f98; /* 0x10025F98 */
+extern double g_const_one_d; /* 0x100257D8 */
+extern double g_const_0_2; /* 0x10025810 */
+extern float g_const_0_6; /* 0x10025F88 */
+extern double g_const_8; /* 0x10025F90 */
+extern double g_const_900; /* 0x10025F98 */
 extern double g_const_1_over_720; /* 0x10025FA0 */
 extern float g_const_896_0; /* 0x10025FA8 */
 extern float g_const_0_06875; /* 0x10025FAC */
@@ -114,11 +114,11 @@ extern float g_const_0_01; /* 0x10025FB8 */
 extern float g_const_1_over_32767; /* 0x10025FBC */
 
 /* .bss */
-extern void (__cdecl *g_100317f0)(int); /* 0x100317F0, _exit hook fnptr */
+extern void (__cdecl *g_crt_exit_hook)(int); /* 0x100317F0, _exit hook fnptr */
 extern int __tlsindex; /* 0x10031B6C, TLS index */
 extern char g_old_sbh_region_head; /* 0x10031B78, block allocator region-list head node */
 extern OldSbhRegion * __old_sbh_p_starting_region; /* 0x10033B98, __old_sbh_p_starting_region (V5 sbh rover) */
-extern unsigned int g_10033b9c; /* 0x10033B9C, block alloc threshold (allocator mode 2) */
+extern unsigned int g_block_alloc_threshold; /* 0x10033B9C, block alloc threshold (allocator mode 2) */
 extern unsigned int _osver; /* 0x100354B4, OS version dword (GetVersion) */
 extern unsigned int _winver; /* 0x100354B8, (major << 8) | minor */
 extern unsigned int _winmajor; /* 0x100354BC, OS major */
@@ -127,18 +127,18 @@ extern int __argc; /* 0x100354C4 */
 extern char** __argv; /* 0x100354C8 */
 extern char** __envp; /* 0x100354D0 */
 extern char* _pgmptr; /* 0x100354E0 */
-extern char g_100354e8; /* 0x100354E8, 0x1001bb4c tail flag */
+extern char g_crt_exit_tail_flag; /* 0x100354E8, 0x1001bb4c tail flag */
 extern int _C_Termination_Done; /* 0x100354EC, _cexit-already-ran flag */
 extern int __proc_attached; /* 0x100354FC, __CRT_INIT attach/detach refcount */
 extern void * _aenvptr; /* 0x10035500, environment strings ptr */
 extern int __error_mode; /* 0x10035508, __amsg_exit report-mode flag */
 extern int __app_type; /* 0x1003550C, __amsg_exit report-mode flag 2 */
-extern int g_1003559c; /* 0x1003559C, new-handler retry flag (_callnewh) */
-extern void * g_100355a0; /* 0x100355A0, _pnhheap new-handler fnptr (0x1001d238) */
+extern int g_new_handler_retry; /* 0x1003559C, new-handler retry flag (_callnewh) */
+extern void * g_new_handler; /* 0x100355A0, _pnhheap new-handler fnptr (0x1001d238) */
 extern int __old_sbh_decommitable_pages; /* 0x100355A4, fully-free page count (SBH) */
-extern char g_100355d8[0x104]; /* 0x100355D8, module filename buffer (0x104) */
-extern int g_100356dc; /* 0x100356DC, env mode: 0=uninit, 1=W, 2=A */
-extern void (*g_100356e0)(void); /* 0x100356E0, _crt_runtime_error user hook (0x1001fdf8) */
+extern char g_crt_module_filename[0x104]; /* 0x100355D8, module filename buffer (0x104) */
+extern int g_crt_env_mode; /* 0x100356DC, env mode: 0=uninit, 1=W, 2=A */
+extern void (*g_crt_runtime_error_hook)(void); /* 0x100356E0, _crt_runtime_error user hook (0x1001fdf8) */
 extern void * pfnMessageBoxA; /* 0x10035838, cached MessageBoxA proc (0x10022107) */
 extern void * pfnGetActiveWindow; /* 0x1003583C, cached GetActiveWindow proc (0x10022107) */
 extern void * pfnGetLastActivePopup; /* 0x10035840, cached GetLastActivePopup proc (0x10022107) */
@@ -157,16 +157,15 @@ extern void * __sbh_pHeaderList; /* 0x11766444, pool: region descriptor array */
 extern unsigned int g_max_pool_alloc_size; /* 0x11766448, max pool allocation size (allocator mode 3) */
 extern void * _crtheap; /* 0x1176644C, process heap handle */
 extern int __active_heap; /* 0x11766450, allocator mode: 3=pool, 2=block */
-extern int g_11766460[0x40]; /* 0x11766460, stream group ptr table (0x11766460..0x1176655c, 0x40 entries) */
+extern int g_stream_group_table[0x40]; /* 0x11766460, stream group ptr table (0x11766460..0x1176655c, 0x40 entries) */
 extern int _nfile; /* 0x11766560, CRT file-handle count (init 0x20, bounds-checked) */
 extern void ** __pioinfo; /* 0x11766564, per-handle file table - __flsall/_fcloseall walk this */
 extern int __nstream; /* 0x11767580, tracked-block (stream) table count */
 extern void * _acmdln; /* 0x11767584, GetCommandLineA result */
-extern int (__stdcall *g_11767588)(void *, unsigned int, void *); /* 0x11767588, DllMain user handler fnptr */
-extern int g_1176758c; /* 0x1176758C, __envp built flag */
-extern int g_11767590; /* 0x11767590, cmdline/env parsed flag */
+extern int (__stdcall *g_dllmain_user_handler)(void *, unsigned int, void *); /* 0x11767588, DllMain user handler fnptr */
+extern int g_envp_built; /* 0x1176758C, __envp built flag */
+extern int g_cmdline_parsed; /* 0x11767590, cmdline/env parsed flag */
 
-#endif /* REBREW_GLOBALS_H */
 // GLOBAL: SERVER 0x10034638
 extern int g_alloc_counter;
 // GLOBAL: SERVER 0x117640b4
@@ -178,8 +177,10 @@ extern int g_alloc_root_count_max;
 // GLOBAL: SERVER 0x117640b8
 extern int g_alloc_root_size_max;
 // GLOBAL: SERVER 0x117640c0
-extern int g_alloc_root_field_20;
+extern int g_alloc_root_spare;
 // GLOBAL: SERVER 0x117640a0
 extern int g_alloc_root_name;
 // GLOBAL: SERVER 0x117640a4
 extern int g_alloc_root_name_4;
+
+#endif /* REBREW_GLOBALS_H */

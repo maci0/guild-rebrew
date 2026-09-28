@@ -12,23 +12,23 @@
 void __cdecl srv_LogWinsockError(int err_code);
 void __cdecl srv_InitBuildingTypeTable(void);
 
-extern char s_Unknown_winsock_error_u_10028bdc[];
-extern char s_WSANOTINITIALISED_100293b0[];
-extern char s_WSAENETDOWN_10029380[];
-extern char s_WSAEFAULT_1002931c[];
-extern char s_WSAENOTCONN_100292f0[];
-extern char s_WSAEINTR_100292a4[];
-extern char s_WSAEINPROGRESS_1002921c[];
-extern char s_WSAENETRESET_10029194[];
-extern char s_WSAENOTSOCK_10029164[];
-extern char s_WSAEOPNOTSUPP_10029068[];
-extern char s_WSAESHUTDOWN_10028fc8[];
-extern char s_WSAEWOULDBLOCK_10028f6c[];
-extern char s_WSAEMSGSIZE_10028f10[];
-extern char s_WSAEINVAL_10028e3c[];
-extern char s_WSAECONNABORTED_10028da0[];
-extern char s_WSAETIMEDOUT_10028d24[];
-extern char s_WSAECONNRESET_10028bf8[];
+extern char s_Unknown_winsock_error_u[];
+extern char s_WSANOTINITIALISED[];
+extern char s_WSAENETDOWN[];
+extern char s_WSAEFAULT[];
+extern char s_WSAENOTCONN[];
+extern char s_WSAEINTR[];
+extern char s_WSAEINPROGRESS[];
+extern char s_WSAENETRESET[];
+extern char s_WSAENOTSOCK[];
+extern char s_WSAEOPNOTSUPP[];
+extern char s_WSAESHUTDOWN[];
+extern char s_WSAEWOULDBLOCK[];
+extern char s_WSAEMSGSIZE[];
+extern char s_WSAEINVAL[];
+extern char s_WSAECONNABORTED[];
+extern char s_WSAETIMEDOUT[];
+extern char s_WSAECONNRESET[];
 // FUNCTION: SERVER 0x1000ad40
 // srv_LogWinsockError
 
@@ -38,13 +38,13 @@ void __cdecl srv_LogWinsockError(int err_code)
 
 	switch (err_code) {
 	case 0x276d:
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x769, s_WSANOTINITIALISED_100293b0, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x769, s_WSANOTINITIALISED, 1);
 		return;
 	case 0x2742:
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x76b,
-			s_WSAENETDOWN_10029380,
+			s_WSAENETDOWN,
 			1
 		);
 		return;
@@ -52,7 +52,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x76d,
-			s_WSAEFAULT_1002931c,
+			s_WSAEFAULT,
 			1
 		);
 		return;
@@ -60,7 +60,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x76f,
-			s_WSAENOTCONN_100292f0,
+			s_WSAENOTCONN,
 			1
 		);
 		return;
@@ -68,7 +68,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x771,
-			s_WSAEINTR_100292a4,
+			s_WSAEINTR,
 			1
 		);
 		return;
@@ -76,7 +76,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x773,
-			s_WSAEINPROGRESS_1002921c,
+			s_WSAEINPROGRESS,
 			1
 		);
 		return;
@@ -84,7 +84,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x775,
-			s_WSAENETRESET_10029194,
+			s_WSAENETRESET,
 			1
 		);
 		return;
@@ -92,7 +92,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x777,
-			s_WSAENOTSOCK_10029164,
+			s_WSAENOTSOCK,
 			1
 		);
 		return;
@@ -100,7 +100,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x779,
-			s_WSAEOPNOTSUPP_10029068,
+			s_WSAEOPNOTSUPP,
 			1
 		);
 		return;
@@ -108,7 +108,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x77b,
-			s_WSAESHUTDOWN_10028fc8,
+			s_WSAESHUTDOWN,
 			1
 		);
 		return;
@@ -116,7 +116,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x77d,
-			s_WSAEWOULDBLOCK_10028f6c,
+			s_WSAEWOULDBLOCK,
 			1
 		);
 		return;
@@ -124,7 +124,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x77f,
-			s_WSAEMSGSIZE_10028f10,
+			s_WSAEMSGSIZE,
 			1
 		);
 		return;
@@ -132,7 +132,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x781,
-			s_WSAEINVAL_10028e3c,
+			s_WSAEINVAL,
 			1
 		);
 		return;
@@ -140,7 +140,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x783,
-			s_WSAECONNABORTED_10028da0,
+			s_WSAECONNABORTED,
 			1
 		);
 		return;
@@ -148,7 +148,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x785,
-			s_WSAETIMEDOUT_10028d24,
+			s_WSAETIMEDOUT,
 			1
 		);
 		return;
@@ -156,12 +156,12 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x787,
-			s_WSAECONNRESET_10028bf8,
+			s_WSAECONNRESET,
 			1
 		);
 		return;
 	default:
-		sprintf(buf, s_Unknown_winsock_error_u_10028bdc, err_code);
+		sprintf(buf, s_Unknown_winsock_error_u, err_code);
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x789, buf, 1);
 		return;
 	}

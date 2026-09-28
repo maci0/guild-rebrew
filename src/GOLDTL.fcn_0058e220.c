@@ -1,3 +1,4 @@
+/* Entity row walked by fcn_0058e220. */
 // SIZE 0x21c
 typedef struct
 {

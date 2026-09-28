@@ -18,13 +18,13 @@
  *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
  *   if (puVar2 == (ushort *)0x0) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x4a94,
- *                        s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec,1);
+ *                        s_cm_ExSetGebUpgrade____Could_not_f,1);
  *     return 1;
  *   }
  *   uVar3 = (uint)(byte)*puVar2;
  *   pcVar1 = (char *)(g_entity_type_table + uVar3 + uVar3 * 0x24c);
  *   if ((byte)pcVar1[0x248] <= *(byte *)(g_entity_type_table + uVar3 + 0x247 + uVar3 * 0x24c)) {
- *     ReportMessage(s_cm_ExSetGebUpgrade____already_hi_1002d2c0);
+ *     ReportMessage(s_cm_ExSetGebUpgrade____already_hi);
  *     return 1;
  *   }
  *   *(byte *)puVar2 = (byte)*puVar2 + 1;
@@ -60,9 +60,9 @@ void __cdecl gm_AllocBuildingDefaults(uchar*);
 void __cdecl gv_UpgradeField(uchar*);
 void __cdecl gm_ObjectsAvailble(int);
 
-extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
+extern char s_cm_ExSetGebUpgrade____Could_not_f[];
 // GLOBAL: SERVER 0x1002d2c0
-extern char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[];
+extern char s_cm_ExSetGebUpgrade____already_hi[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Execution handler: upgrades a building to the next tier.

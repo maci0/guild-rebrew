@@ -23,15 +23,15 @@ int __cdecl vfs_FlushAndClose(int);
  * addresses (gm_Open, vfs_OpenStream, vfs_ReadData); nothing names these
  * symbols, but they must occupy this exact span. */
 
-char s_rb_1002944c[4] = { 'r', 'b', 0, 0 };
+char s_gzip_mode_rb[4] = { 'r', 'b', 0, 0 };
 // GLOBAL: SERVER 0x10029450
-unsigned int g_gzip_magic_1f_10029450 = 0x1f;
+unsigned int g_gzip_magic_1f = 0x1f;
 // GLOBAL: SERVER 0x10029454
-unsigned int g_gzip_magic_8b_10029454 = 0x8b;
+unsigned int g_gzip_magic_8b = 0x8b;
 // DATA: SERVER 0x10029458
-char s_D__Develop_Units_vfs_vfs_c_10029458[] = "D:\\Develop\\Units\\vfs\\vfs.c";
+char s_D__Develop_Units_vfs_vfs_c[] = "D:\\Develop\\Units\\vfs\\vfs.c";
 // DATA: SERVER 0x10029474
-char s_vfs__gz_compressed_file____s___i_10029474[] = "vfs: gz-compressed file (\"%s\") in zip found!";
+char s_vfs__gz_compressed_file____s___i[] = "vfs: gz-compressed file (\"%s\") in zip found!";
 
 // FUNCTION: SERVER 0x10008C80
 // vfs_CleanupObject

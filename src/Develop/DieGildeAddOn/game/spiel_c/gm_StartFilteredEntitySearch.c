@@ -15,13 +15,13 @@ extern int g_query_filter_extra1; /* 0x10030b88 */
 // GLOBAL: GOLDTL 0x699388
 extern unsigned char g_query_filter_extra4; /* 0x10030b90 */
 // GLOBAL: GOLDTL 0x773d80
-extern int g_dynasty_field_44; /* 0x10035444 */
+extern int g_dynasty_name; /* 0x10035444 */
 // GLOBAL: GOLDTL 0x773d85
-extern char g_dynasty_field_49; /* 0x10035449 */
+extern char g_dynasty_scan_flag; /* 0x10035449 */
 // GLOBAL: GOLDTL 0x773d88
-extern int g_dynasty_field_4c; /* 0x1003544c */
+extern int g_dynasty_scan_count; /* 0x1003544c */
 // GLOBAL: GOLDTL 0x773d84
-extern char g_dynasty_field_48; /* 0x10035448 */
+extern char g_dynasty_name_ready; /* 0x10035448 */
 
 // FUNCTION: GOLDTL 0x503fe0
 // SIZE: 288
@@ -49,11 +49,11 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 	g_query_filter_extra2 = 0x7fff;
 	g_query_filter_extra3 = 0x7fff;
 	g_query_filter_extra1 = -1;
-	g_dynasty_field_44 = 0;
+	g_dynasty_name = 0;
 	g_query_filter_extra4 = 0xff;
-	g_dynasty_field_49 = 1;
-	g_dynasty_field_4c = 0;
-	g_dynasty_field_48 = 0;
+	g_dynasty_scan_flag = 1;
+	g_dynasty_scan_count = 0;
+	g_dynasty_name_ready = 0;
 
 	if (arg_count > 0) {
 		arg_ptr = &arg_count;
@@ -74,7 +74,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 				break;
 			case 2:
 				arg_ptr++;
-				strcpy((char*) g_dynasty_field_44, *(char**) arg_ptr);
+				strcpy((char*) g_dynasty_name, *(char**) arg_ptr);
 				break;
 			case 3:
 				g_query_filter_extra2 = *(short*) (arg_ptr + 1);
@@ -89,7 +89,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 				arg_ptr++;
 				break;
 			case 6:
-				g_dynasty_field_48 = 1;
+				g_dynasty_name_ready = 1;
 				break;
 			default:
 				break;

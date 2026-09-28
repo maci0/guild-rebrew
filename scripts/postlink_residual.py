@@ -45,8 +45,9 @@ sys.path.insert(0, str(ROOT))
 from rebrew.binary_loader import load_binary  # noqa: E402
 from rebrew.layout_meta import load_package  # noqa: E402
 from rebrew.postlink import (  # noqa: E402
-    FIXERS, FIXER_ORDER, MIN_LAYOUT_MAP_COVERAGE, _binary_info_from_bytes, _map_coverage,
+    FIXERS, FIXER_ORDER, MIN_LAYOUT_MAP_COVERAGE, binary_info_from_bytes, map_coverage,
 )
+from rebrew.status import linker_produced_match  # noqa: E402
 
 IMAGE_BASE = 0x10000000
 
@@ -77,28 +78,30 @@ def _refuse_if_stale(built: Path) -> None:
         sys.exit(f"postlink_residual: {built} does not exist -- the link step "
                  f"did not produce it (check its exit status).")
     built_ns = built.stat().st_mtime_ns
-    newer = [p for p in (ROOT / "src").rglob("*.c") if p.stat().st_mtime_ns > built_ns]
-    if newer:
-        sample = ", ".join(p.name for p in newer[:3])
-        sys.exit(f"postlink_residual: {built.name} is older than {len(newer)} "
-                 f"source file(s) ({sample}{'...' if len(newer) > 3 else ''}).  "
-                 f"Re-run the build and link before measuring; a stale binary "
-                 f"reports the previous round's residue.")
-
-    # The check above compares sources against the LINK OUTPUT, which misses the
-    # step in between: `split_link.sh` consumes CMake's prebuilt objects, so
-    # editing a source and re-linking without re-compiling relinks the STALE
-    # object and the figure does not move.  Round 201 lost a measurement to
-    # exactly that -- a `.data` probe read as a false null until `cmake --build`
-    # was run first.  Compare each source against its own object too.
+    # Only sources that have a server object are inputs to this link. A newer
+    # client .c with no object here is not a stale server link.
     objdir = ROOT / "build/CMakeFiles/server_dll.dir/src"
     if objdir.exists():
+        newer_objs = []
         stale_objs = []
         for src in (ROOT / "src").rglob("*.c"):
             obj = objdir / src.relative_to(ROOT / "src")
             obj = obj.with_name(obj.name + ".obj")
-            if obj.exists() and obj.stat().st_mtime_ns < src.stat().st_mtime_ns:
+            if not obj.exists():
+                continue
+            obj_ns = obj.stat().st_mtime_ns
+            if obj_ns > built_ns:
+                newer_objs.append(obj.name)
+            if obj_ns < src.stat().st_mtime_ns:
                 stale_objs.append(src.name)
+        if newer_objs:
+            sample = ", ".join(newer_objs[:3])
+            sys.exit(
+                f"postlink_residual: {built.name} is older than {len(newer_objs)} "
+                f"object(s) ({sample}{'...' if len(newer_objs) > 3 else ''}).  "
+                f"Re-run the link before measuring; a stale binary reports the "
+                f"previous round's residue."
+            )
         if stale_objs:
             sample = ", ".join(stale_objs[:3])
             sys.exit(
@@ -138,7 +141,7 @@ def main() -> int:
     _refuse_if_stale(built_path)
     meta = load_package(ROOT / args.layout)
     info_b = load_binary(built_path)
-    op_ok, op_tot, call_ok, call_tot = _map_coverage(bytes(load_binary(built_path).data), meta, info_b)
+    op_ok, op_tot, call_ok, call_tot = map_coverage(bytes(load_binary(built_path).data), meta, info_b)
     cover = (op_ok + call_ok) / max(1, op_tot + call_tot)
     if cover < MIN_LAYOUT_MAP_COVERAGE:
         print(f"WARNING: layout-map coverage {100 * cover:.2f}% is below the "
@@ -150,7 +153,7 @@ def main() -> int:
     for name in FIXER_ORDER:
         before = bytes(built)
         with contextlib.suppress(ValueError):
-            info_b = _binary_info_from_bytes(bytes(built), built_path)
+            info_b = binary_info_from_bytes(bytes(built), built_path)
         # Deliverable contract: reproduce the reference's FILE geometry, not
         # just its bytes.  A converged link still sits one FileAlignment block
         # later before .reloc (0x36000 against 0x35000), which costs 4096 bytes
@@ -322,6 +325,19 @@ def main() -> int:
     if built_path.exists():
         pre = built_path.read_bytes()
         ss = sections(pre)
+        blob_at = None
+        zz_at = None
+        map_path = ROOT / args.link_map
+        if map_path.exists():
+            for line in map_path.read_text(errors="replace").splitlines():
+                parts = line.split()
+                if not parts or ":" not in parts[0] or not parts[0].startswith("0003:"):
+                    continue
+                off = int(parts[0].split(":", 1)[1], 16)
+                if "_g_data_restore_gap" in line:
+                    blob_at = off
+                elif ".data$zz" in line and zz_at is None:
+                    zz_at = off
         print("\nraw link vs reference (pre-fixer -- what the build actually produces):")
         total = 0
         for name in (".text", ".rdata", ".data", ".reloc"):
@@ -329,29 +345,71 @@ def main() -> int:
                 continue
             _vr, _v_r, pr_r, rs_r = sr[name]
             _vs, _v_s, pr_s, rs_s = ss[name]
-            span = min(rs_r, rs_s)
-            d = sum(1 for i in range(span) if ref[pr_r + i] != pre[pr_s + i])
+            ref_slice = ref[pr_r:pr_r + rs_r]
+            raw_slice = pre[pr_s:pr_s + rs_s]
+            splice = None
+            if name == ".data" and blob_at is not None:
+                splice_end = zz_at if zz_at is not None and zz_at > blob_at else max(rs_r, rs_s)
+                splice = (blob_at, splice_end)
+            matched, produced = linker_produced_match(ref_slice, raw_slice, splice)
+            differing = produced - matched
             if name != ".text":
-                total += d
-            print(f"  {name:9s} differing {d:#7x} of {span:#7x}"
-                  f" ({100.0 * d / span:.1f}%)")
-        # Guard the guard.  This block only means anything when `built_path` is
-        # the RAW link.  `--write` rewrites its output in place, and the CMake
-        # POST_BUILD step does the same to build/server.dll, so pointing
+                total += differing
+            extra = ""
+            if splice is not None:
+                extra = (
+                    f"  splice {splice[0]:#x}:{splice[1]:#x}"
+                    f" ({splice[1] - splice[0]}B) excluded"
+                )
+            # gate.sh reads `  .data differing 0xN`. N is the linker-produced
+            # count: a reference splice is already out of `differing`.
+            print(
+                f"  {name:9s} differing {differing:#x}"
+                f" of {produced:#x}{extra}"
+            )
+        # Guard the guard.  `--write` rewrites its output in place, and the
+        # CMake POST_BUILD step does the same to build/server.dll, so pointing
         # `--built` at an already-postlinked image makes every line below read
-        # 0.0% -- restoring precisely the self-certification this block was
-        # added (round 450) to prevent.  `.data` is blitted wholesale from the
-        # layout package, so a raw link matching it exactly is not a triumph,
-        # it is the tell that we are measuring the answer key.
+        # 0.0%.  Postlink copies .data and leaves .text VirtualSize alone, so
+        # identical .data together with the reference .text VirtualSize is one
+        # answer-key tell.
+        #
+        # The other tell does not need a matching .text.  The split link's gap
+        # blob copies reference .data from g_data_restore_gap to the end of the
+        # raw section.  The historical tail is 0xd274 (docs/msvc6-link-layout.md):
+        # a blob that starts earlier is filling the LIBCMT band the link did
+        # not emit, and a .data diff of 0 is the copy.
         _dr, _dvs, d_rp, d_rr = sr[".data"]
         _sr2, _svs, d_sp, d_sr = ss[".data"]
-        if d_rr == d_sr and ref[d_rp : d_rp + d_rr] == pre[d_sp : d_sp + d_sr]:
-            print("  !! .data is byte-identical to the reference, which the raw link"
-                  " cannot produce.", file=sys.stderr)
+        text_same_size = sr[".text"][1] == ss[".text"][1]
+        data_same = (
+            d_rr == d_sr and ref[d_rp : d_rp + d_rr] == pre[d_sp : d_sp + d_sr]
+        )
+        blob_at = None
+        map_path = ROOT / args.link_map
+        if map_path.exists():
+            for line in map_path.read_text(errors="replace").splitlines():
+                if "_g_data_restore_gap" not in line:
+                    continue
+                parts = line.split()
+                if parts and ":" in parts[0]:
+                    blob_at = int(parts[0].split(":", 1)[1], 16)
+                    break
+        if text_same_size and data_same:
+            print("  !! .data is byte-identical and .text VirtualSize matches,"
+                  " which is what a postlinked image looks like.", file=sys.stderr)
             print(f"  !! {built_path} looks ALREADY POSTLINKED, so the percentages"
                   " below are meaningless.", file=sys.stderr)
             print("  !! Pass the raw link instead (build/split_poc.dll), or run with"
                   " no --built.", file=sys.stderr)
+        if blob_at is not None:
+            print(f"  !! g_data_restore_gap starts at {blob_at:#x}; the link is"
+                  " splicing reference .data.", file=sys.stderr)
+            print("  !! A .data diff of 0 across that span is the answer key,"
+                  " not bytes the linker produced.", file=sys.stderr)
+            if blob_at < 0xD274:
+                print(f"  !! g_data_restore_gap starts at {blob_at:#x}, before the"
+                      " historical .data tail 0xd274.", file=sys.stderr)
         h = min(sr[".text"][2], ss[".text"][2])
         hd = sum(1 for i in range(h) if ref[i] != pre[i])
         total += hd

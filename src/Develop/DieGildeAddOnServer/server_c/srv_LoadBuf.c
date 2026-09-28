@@ -1,6 +1,5 @@
 // GLOBAL: SERVER 0x117640c4
 int g_list_head;
-// FUNCTION: SERVER 0x1000a570
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 
@@ -20,6 +19,9 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
 /* Network functions (local externs — signatures differ from net.h) */
 int __cdecl srv_LoadBuf(void);
 #include "../server_internal.h"
+
+// GLOBAL: SERVER 0x101deac4
+unsigned int g_download_received = 0;
 
 int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 extern int srv_ReceivePacketHeader(unsigned int* conn);
@@ -58,6 +60,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  *     exits share one `xor eax,eax` epilogue. */
 
 
+// FUNCTION: SERVER 0x1000a570
 int __cdecl srv_LoadBuf(void)
 {
 	char logbuf_hi[256];

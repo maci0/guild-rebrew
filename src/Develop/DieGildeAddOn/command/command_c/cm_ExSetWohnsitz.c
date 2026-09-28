@@ -19,7 +19,7 @@
  *
  *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x10));
  *   if (puVar2 == (ushort *)0x0) {
- *     msg = s_cm_ExSetWohnsitz____Could_not_fi_1002d298;
+ *     msg = s_ex_set_home_missing_b;
  *     line = 0x49de;
  *   }
  *   else {
@@ -28,7 +28,7 @@
  *       if (*(char *)(g_entity_type_table + (uint)(byte)*puVar2 * 0x24d) == '\x01') {
  *         plt_TableLookup((uint)(byte)*puVar2,(int *)local_8);
  *         if (local_8[0] <= *(byte *)((int)puVar2 + 0x65)) {
- *           msg = s_cm_ExSetWohnsitz____Residence_is_1002d240;
+ *           msg = s_cm_ExSetWohnsitz____Residence_is;
  *           line = 0x4a08;
  *           goto LAB_1000f519;
  *         }
@@ -60,7 +60,7 @@
 void __cdecl plt_TableLookup(uint, ushort*);
 
 // GLOBAL: SERVER 0x1002d240
-extern char s_cm_ExSetWohnsitz____Residence_is_1002d240[];
+extern char s_cm_ExSetWohnsitz____Residence_is[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Execution handler: sets a citizen's residence (Wohnsitz).
@@ -68,9 +68,9 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * citizen's home to the specified building. */
 
 // GLOBAL: SERVER 0x1002d268
-extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[];
+extern char s_ex_set_home_missing_a[];
 // GLOBAL: SERVER 0x1002d298
-extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d298[];
+extern char s_ex_set_home_missing_b[];
 // FUNCTION: SERVER 0x1000f480
 int __cdecl cm_ExSetWohnsitz(int cmd, char* result)
 {

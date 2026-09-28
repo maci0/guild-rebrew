@@ -13,7 +13,7 @@ extern int g_sequence_counter;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; /* 0x1002d4ec */
 // GLOBAL: SERVER 0x101de460
-extern int g_save_info[2];
+int g_save_info[2] = {0};
 extern int vfs_OpenStream(char*, char*, int);
 int ls_LoadSavegameHeader(int, char*);
 int ls_LoadExistingEntities(int);
@@ -29,7 +29,7 @@ extern unsigned int ls_ID2Ptr(void);
  * for graveyard buildings. */
 
 // GLOBAL: SERVER 0x101de560
-extern int g_recv_game_buffer;
+int g_recv_game_buffer = 0;
 // FUNCTION: SERVER 0x10014260
 // srv_RecvGame
 

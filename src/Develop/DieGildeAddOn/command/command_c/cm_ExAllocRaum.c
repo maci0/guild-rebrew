@@ -17,14 +17,14 @@ typedef struct copy_12_dwords {
 char* __cdecl gm_AllocGebaeude(uchar, uint);
 
 // GLOBAL: SERVER 0x1002caf0
-extern char s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0[];
+extern char s_Invalid__GI_Id__for_cmdt_ALLOC_B[];
 
 /* Execution handler: allocates a new room/space (Raum) entity.
  * Resolves entity by ID, calls gm_AllocBuildingDefaults to set
  * up building defaults, and returns via result. */
 
 // GLOBAL: SERVER 0x1002cb34
-extern char s_gm_AllocGebaeude___failed_1002cb34[];
+extern char s_gm_AllocGebaeude___failed[];
 // FUNCTION: GOLDTL 0x43bf60
 // SIZE: 268
 // FUNCTION: SERVER 0x1000d350

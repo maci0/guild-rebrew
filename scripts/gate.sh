@@ -90,8 +90,11 @@ RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
 # 2,920: plant tables, spiel.c named block (spiel_data.c) and spiel literals.
 # 2,370: fold literals in .data$zz, after the library .data instead of inside it.
 # 2,012: library string literals placed in .rdata by split_blob, not folded.
-# 1,253: the tail blob holds the reference bytes up to where .data$zz starts.
-DATA_BASELINE=${DATA_BASELINE:-1253}
+# 1,253: the tail blob held the reference bytes up to where .data$zz starts.
+# 0: library .data through ___lc_time_c is linked from objects. The gap blob
+# starts at 0xd30c, past the historical tail 0xd274, and [0, 0xd30c) matches
+# without that blob covering it.
+DATA_BASELINE=${DATA_BASELINE:-0}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:
@@ -198,6 +201,15 @@ if bash scripts/split_link.sh > .scratch/gate-link.log 2>&1; then
             rc=1
         else
             echo "raw-link .data $dnow, baseline $DATA_BASELINE held"
+        fi
+        if grep -q "splicing reference .data" .scratch/gate-residue.log; then
+            echo "REGRESSION: g_data_restore_gap is splicing reference .data into the link"
+            rc=1
+        fi
+        if grep -q "before the historical .data tail" .scratch/gate-residue.log; then
+            echo "REGRESSION: g_data_restore_gap starts before the historical .data tail 0xd274"
+            echo "  The gap blob is copying reference .data the link did not emit."
+            rc=1
         fi
     else
         echo "raw-link .data not measured (see .scratch/gate-residue.log)"

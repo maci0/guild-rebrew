@@ -121,30 +121,32 @@ linking and, if `GAP` was stale, re-emits the blob and relinks. A hand-set
 puts the array in `.bss`: the section then ends at `S` and the raw size still
 rounds to `0xe000`.
 
-Raw-link `.data` differing is **1,253** of `0xe000` (gate `DATA_BASELINE`),
-by section offset:
+Raw-link `.data` differing is **0** of `0xe000` (gate `DATA_BASELINE`).
+`scripts/emit_crt_data.py` links the library sections below, in this order,
+after every other `.data` contribution and before the gap blob.
+`g_data_restore_gap` therefore starts at `0xd30c`, past the old tail
+`0xd274`. A blob that starts earlier is copying reference `.data` the link
+did not emit; `postlink_residual.py` flags that, and `gate.sh` fails on it.
 
-| range | differing | cause |
-|---|---|---|
-| `[0, 0x256c)` | 16 | stock zlib's `"1.1.3"` literal and its pointer swapped (`deflate.c`); `_z_errmsg` pointers into it |
-| `[0x256c, 0xa658)` | 0 | game data, defined in reference order |
-| `[0xa658, 0xcbb0)` | 16 | LIBCMT member data, at its reference offsets |
-| `[0xcbb0, 0xd274)` | ~1,213 | LIBCMT data the link does not carry, then `link_stubs.c`'s constants |
-| `[0xd274, 0xe000)` | ~8 | the tail blob and `.data$zz` |
+`___lc_time_curr` (4 bytes at `0xd258`) points at `___lc_time_c` (the
+`0xac` C-locale time table at `0xd260`, ALIGN_8, so the 4 bytes at `0xd25c`
+are the linker's pad). The table's day and month slots relocate to the
+string COMDATs already resident in the `.rdata` blob; those names are
+absolute symbols, because leaving them undefined pulls `strftime.obj` and
+its `.text`. `intrncvt` is raised from ALIGN_8 to ALIGN_16 so it lands at
+`0xd130` instead of `0xd128`. `charmax` is not a separate contribution: its
+4 bytes are the tail of `crt0msg`. `lconv` (`0xd310`) and `constpow`
+(`0xd350`) stay inside the tail blob. `link_stubs.c` still keeps the BSS
+definitions (`__pctype` is not among them; `ctype.obj` emits it) that stop
+the archive from contributing a second copy.
 
-The LIBCMT tail: the reference holds `setlocal.obj` (`0x10b` at `0xcbc8`),
-`ctype.obj` (`0x20a` at `0xccd4`), `charmax.obj` and `lconv.obj` data that
-this link never pulls (`link_stubs.c` satisfies `__pctype`, `___lc_handle`
-and friends so the NLS-importing objects stay out), so `crt0msg.obj`'s
-`_rterrs` lands `0x340` early; the data-only members `emit_defs.py` defines
-(`cmiscdat`, `nlsdata1`, `timeset`, `days`, `winxfltr`, `constpow`) are
-appended after the code-carrying ones instead of at their reference offsets.
 Matching each LIBCMT archive member's `.data` (relocation slots masked)
 against the reference gives the order: `exsup` `0xcba0`, `cmiscdat` `0xcbb0`,
 `setlocal` `0xcbc8`, `ctype` `0xccd4`, `nlsdata1` `0xcee0`, `crt0msg`
 `0xcef0`, `charmax` `0xcf78`, `timeset` `0xcf80`, `tzset` `0xd018`, `days`
 `0xd034`, `winxfltr` `0xd0a0`, `intrncvt` `0xd130`, `mbctype` `0xd160`,
-`lconv` `0xd310`, `constpow` `0xd350`. `link_stubs.c`'s `.rdata` constants
+`___lc_time_curr` `0xd258`, `___lc_time_c` `0xd260`, `lconv` `0xd310`,
+`constpow` `0xd350`. `link_stubs.c`'s `.rdata` constants
 (`g_float_const_*`, `g_dbl_const_*`) keep their values so the raw link
 computes correctly; the reference holds those bytes in `.rdata`.
 

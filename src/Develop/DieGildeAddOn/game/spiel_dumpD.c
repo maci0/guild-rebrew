@@ -20,9 +20,9 @@ extern short g_query_filter_extra2; /* 0x10030b8c */
 extern short g_query_filter_extra3; /* 0x10030b8e */
 
 extern unsigned char g_query_filter_extra4; /* 0x10030b90 */
-extern char g_dynasty_field_48; /* 0x10035448 */
-extern char g_dynasty_field_49; /* 0x10035449 */
-extern int g_dynasty_field_4c; /* 0x1003544c */
+extern char g_dynasty_name_ready; /* 0x10035448 */
+extern char g_dynasty_scan_flag; /* 0x10035449 */
+extern int g_dynasty_scan_count; /* 0x1003544c */
 
 /* Adds b units of object a to the list reachable from the resolved parent
  * entity, or accumulates the amount into an existing entry.  Returns the
@@ -181,11 +181,11 @@ void* __cdecl gm_FindNextFilteredEntity(void)
 	if (g_entity_type_table == 0) {
 		return 0;
 	}
-	if (g_dynasty_field_4c > 0x100) {
+	if (g_dynasty_scan_count > 0x100) {
 		return 0;
 	}
-	if (g_dynasty_field_49 != 0) {
-		g_dynasty_field_49 = 0;
+	if (g_dynasty_scan_flag != 0) {
+		g_dynasty_scan_flag = 0;
 		while (g_query_filter_base < end) {
 			if (*g_query_filter_base != 0) {
 				break;
@@ -202,7 +202,7 @@ void* __cdecl gm_FindNextFilteredEntity(void)
 		return 0;
 	}
 	while (match == 0) {
-		if (g_dynasty_field_48 != 0) {
+		if (g_dynasty_name_ready != 0) {
 			match = 1;
 		}
 		if (g_filter_extra5 != 0xff) {
@@ -242,7 +242,7 @@ void* __cdecl gm_FindNextFilteredEntity(void)
 			         g_query_filter_extra4);
 		}
 	counted:
-		g_dynasty_field_4c++;
+		g_dynasty_scan_count++;
 		if (match == 0) {
 			while (*list_head == 0 || 1) {
 				list_head += 0xa9;

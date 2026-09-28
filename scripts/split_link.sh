@@ -72,7 +72,9 @@ rm -rf "$WORK/split"
 # leaves those references at RVA 0 and ~74 layout-map entries fail with a built
 # value of exactly image_base (docs/TODO.md round 137).  See rounds 129-138.
 python3 scripts/split_coff.py "${LIBS[@]}" --map "$MAP" \
-    --out "$WORK/split" --with-data --trim --split-rdata --promote-statics
+    --out "$WORK/split" --with-data --trim --split-rdata --promote-statics \
+    --drop-data crt0msg.obj --drop-data tzset.obj --drop-data intrncvt.obj \
+    --drop-data mbctype.obj
 
 echo "== import thunks"
 rm -rf "$WORK/thunks"
@@ -87,9 +89,19 @@ echo "== response file (pass 1, so emit_defs can see the real object set)"
 python3 scripts/make_split_rsp.py --split "$WORK/split" --objects "$OBJ_RSP" \
     --thunks "$WORK/thunks" --commons "$WORK/commons" --out "$WORK/rsp1.rsp"
 
+echo "== CRT .data band (library sections, reference order, before the tail)"
+rm -rf "$WORK/crt_data"
+python3 scripts/emit_crt_data.py --lib .scratch/libcmt/LIBCMT.sp6.LIB \
+    --out "$WORK/crt_data"
+CRT_SKIP=()
+while IFS= read -r sym; do
+    [ -n "$sym" ] && CRT_SKIP+=(--skip "$sym")
+done < "$WORK/crt_data/skip.txt"
+
 echo "== definitions (iterated to a fixed point)"
 rm -rf "$WORK/defs"
-python3 scripts/emit_defs.py "${LIBS[@]}" --rsp "$WORK/rsp1.rsp" --out "$WORK/defs"
+python3 scripts/emit_defs.py "${LIBS[@]}" "${CRT_SKIP[@]}" --rsp "$WORK/rsp1.rsp" \
+    --out "$WORK/defs"
 
 echo "== response file (final) and link"
 python3 scripts/make_split_rsp.py --split "$WORK/split" --objects "$OBJ_RSP" \
@@ -110,6 +122,180 @@ python3 scripts/split_blob.py --rsp "$WORK/rsp.rsp" --split "$WORK/split" \
     --blob crt_region/rdata_restore.c.obj
 fi
 
+echo "== place mlock critsects and __bufin at the reference addresses"
+# The four mlock critsects are one .bss block. Raw .data's lock table stores
+# their reference VAs; the block currently links 0x190 too early. Growing the
+# section in front moves only those symbols. __bufin is a 0x1000 common whose
+# reference address is 0x11766580; an absolute definition writes that into the
+# _iob slots without allocating the common.
+python3 - <<'PY'
+import struct
+from pathlib import Path
+obj = Path("build/split_poc/split/1001cfa1_.text.obj")
+data = bytearray(obj.read_bytes())
+nsec = struct.unpack_from("<H", data, 2)[0]
+symptr, nsyms = struct.unpack_from("<II", data, 8)
+bss = None
+for i in range(nsec):
+    off = 20 + i * 40
+    name = data[off:off+8].rstrip(b"\0")
+    if name == b".bss":
+        bss = (i + 1, off)
+        break
+if bss is None:
+    raise SystemExit("mlock object has no .bss")
+secno, off = bss
+pad = 0x190
+size = struct.unpack_from("<I", data, off + 16)[0]
+struct.pack_into("<I", data, off + 8, struct.unpack_from("<I", data, off + 8)[0] + pad)
+struct.pack_into("<I", data, off + 16, size + pad)
+# symbol values in this section, and the section aux length.
+# Names longer than 8 bytes live in the string table; those are the critsects.
+strtab = symptr + nsyms * 18
+def sym_name(ent):
+    raw = data[ent:ent+8]
+    if raw[:4] == b"\0\0\0\0":
+        so = struct.unpack_from("<I", raw, 4)[0]
+        end = data.index(b"\0", strtab + so)
+        return data[strtab + so:end]
+    return raw.split(b"\0", 1)[0]
+moved = []
+i = 0
+while i < nsyms:
+    ent = symptr + i * 18
+    sec = struct.unpack_from("<h", data, ent + 12)[0]
+    naux = data[ent + 17]
+    name = sym_name(ent)
+    if sec == secno and name.startswith(b".") and naux:
+        ln = struct.unpack_from("<I", data, ent + 18)[0]
+        if ln == size:
+            struct.pack_into("<I", data, ent + 18, size + pad)
+    elif sec == secno and not name.startswith(b"."):
+        struct.pack_into("<I", data, ent + 8, struct.unpack_from("<I", data, ent + 8)[0] + pad)
+        moved.append(name.decode())
+    i += 1 + naux
+obj.write_bytes(data)
+print(f"mlock .bss {size:#x} -> {size+pad:#x} moved {moved}")
+
+# __bufin is a common in this object (sec 0, value = size). A separate
+# absolute object loses to it under /FORCE:MULTIPLE, and the _iob slots then
+# store the common's address. An in-object absolute is what LINK honours.
+buf = Path("build/split_poc/split/1001baa4_.text.obj")
+bdata = bytearray(buf.read_bytes())
+bsym, bn = struct.unpack_from("<II", bdata, 8)
+bstr = bsym + bn * 18
+bi = 0
+bufin_fixed = False
+while bi < bn:
+    ent = bsym + bi * 18
+    naux = bdata[ent + 17]
+    raw = bdata[ent:ent+8]
+    if raw[:4] == b"\0\0\0\0":
+        so = struct.unpack_from("<I", raw, 4)[0]
+        nm = bdata[bstr+so:bdata.index(b"\0", bstr+so)]
+    else:
+        nm = raw.split(b"\0", 1)[0]
+    if nm == b"__bufin":
+        struct.pack_into("<IhHBB", bdata, ent + 8, 0x11766580, -1, 0, 2, 0)
+        bufin_fixed = True
+    bi += 1 + naux
+if not bufin_fixed:
+    raise SystemExit("__bufin missing from the _iob object")
+buf.write_bytes(bdata)
+print("pinned __bufin at 0x11766580")
+PY
+python3 - <<'PY'
+import struct
+from pathlib import Path
+
+def coff_syms(data):
+    symptr, nsyms, opt = struct.unpack_from("<IIH", data, 8)
+    strtab = symptr + nsyms * 18
+    def name_at(ent):
+        raw = data[ent:ent+8]
+        if raw[:4] == b"\0\0\0\0":
+            so = struct.unpack_from("<I", raw, 4)[0]
+            end = data.index(b"\0", strtab + so)
+            return data[strtab+so:end]
+        return raw.split(b"\0", 1)[0]
+    return symptr, nsyms, opt, strtab, name_at
+
+# inflate.c's "1.1.3" is the COMDAT ??_C@_05NLJN@1?41?43?$AA@. deflate's
+# 8-byte array is the reference's copy but a different symbol, so inflate's
+# COMDAT stays and shifts every later .data byte by 8. An external of that
+# name on the array, linked first, makes LINK drop inflate's section.
+alias = b"??_C@_05NLJN@1?41?43?$AA@"
+defl = Path("build/CMakeFiles/server_dll.dir/references/zlib-1.1.3/deflate.c.obj")
+data = bytearray(defl.read_bytes())
+symptr, nsyms, opt, strtab, name_at = coff_syms(data)
+have = False
+i = 0
+while i < nsyms:
+    ent = symptr + i * 18
+    if name_at(ent) == alias:
+        have = True
+    i += 1 + data[ent + 17]
+if not have:
+    nsec = struct.unpack_from("<H", data, 2)[0]
+    secno = None
+    off = 20 + opt
+    for si in range(nsec):
+        rsize, rptr = struct.unpack_from("<II", data, off + 16)
+        if rptr and data[rptr:rptr+8] == b"1.1.3\x00\x00\x00":
+            secno = si + 1
+        for delta in (20, 24, 28):
+            ptr = struct.unpack_from("<I", data, off + delta)[0]
+            if ptr >= symptr:
+                raise SystemExit("deflate object layout is not header-then-symtab")
+        off += 40
+    if secno is None:
+        raise SystemExit("deflate version bytes not found")
+    strlen = struct.unpack_from("<I", data, strtab)[0]
+    sym = bytearray(18)
+    struct.pack_into("<II", sym, 0, 0, strlen)
+    struct.pack_into("<IhHBB", sym, 8, 0, secno, 0, 2, 0)
+    newstr = bytearray(data[strtab:strtab+strlen]) + alias + b"\0"
+    struct.pack_into("<I", newstr, 0, len(newstr))
+    data = data[:strtab] + sym + newstr
+    struct.pack_into("<I", data, 12, nsyms + 1)
+    defl.write_bytes(data)
+    print(f"aliased {alias.decode()} onto deflate .data section {secno}")
+else:
+    print("deflate version COMDAT alias already present")
+
+# rdata_fold.c's pointer array is the only non-zero at the end of raw .data.
+# The two empty-string COMDATs in the same object are the zeros the reference
+# already has; dropping the pointer section keeps those COMDATs so the library
+# copies stay folded out.
+fold = Path("build/CMakeFiles/server_dll.dir/src/crt_region/rdata_fold.c.obj")
+fdata = bytearray(fold.read_bytes())
+symptr, nsyms, opt, strtab, name_at = coff_syms(fdata)
+secno = None
+i = 0
+while i < nsyms:
+    ent = symptr + i * 18
+    if name_at(ent) == b"_g_rdata_fold_refs":
+        secno = struct.unpack_from("<h", fdata, ent + 12)[0]
+    i += 1 + fdata[ent + 17]
+if secno is None:
+    raise SystemExit("g_rdata_fold_refs missing")
+off = 20 + opt + (secno - 1) * 40
+name = bytes(fdata[off:off+8]).rstrip(b"\0")
+if name != b".discard":
+    fdata[off:off+8] = b".discard"
+    flags = struct.unpack_from("<I", fdata, off + 36)[0]
+    struct.pack_into("<I", fdata, off + 36, flags | 0x800)  # IMAGE_SCN_LNK_REMOVE
+    fold.write_bytes(fdata)
+    print("discarded g_rdata_fold_refs section")
+else:
+    print("g_rdata_fold_refs section already discarded")
+PY
+mkdir -p "$WORK/abs"
+python3 scripts/emit_absolute_obj.py --name _z_errmsg_empty --value 0x10034620 \
+    --out "$WORK/abs/abs__z_errmsg_empty.obj"
+echo "wrote absolute _z_errmsg_empty"
+# The rsp is rebuilt below; this object is added with the other absolutes.
+
 echo "== absolute definitions for the static labels the split leaves undefined"
 # split_coff splits a member per section, so a relocation to a local label in
 # another of its sections ($T17396, the LIBCMT SEH scopetable malloc's prologue
@@ -122,69 +308,93 @@ echo "== absolute definitions for the static labels the split leaves undefined"
 # link wrote.  No section bytes are added, so the geometry is untouched.
 python3 scripts/resolve_static_labels.py --rsp "$WORK/rsp.rsp" \
     --reference original/Server/server.dll --out "$WORK/abs" --rewrite
-
-echo "== data gap for this composition"
-# `data_restore.c`'s blob is sized for the CMake composition (its own .data
-# ends at 0xdf00 with a 0x9a00 blob).  The split objects carry more `.data`
-# (the members' bundled sections), so the CMake blob overshoots the reference's
-# 0xe000 raw size by 0x2460.  postlink overwrites `.data` wholesale, so only
-# the blob's LENGTH matters (docs/msvc6-link-layout.md section 2) - emit a
-# shorter one for this link and drop the CMake object.
-#
-# The blob holds the reference's .data TAIL and is linked last, so it lands on
-# the reference's own bytes exactly when GAP = DATA_RAW - S, S being where the
-# link puts it.  Any other GAP misplaces all of it (+0x58 once cost 6,187 raw
-# .data bytes and pushed .data raw to 0xf000).  S moves whenever a game TU's
-# .data changes size, so after the link S is read from the map and, if GAP
-# was stale, the blob is re-emitted and the image relinked.  GAP below is only
-# the first guess.
-DATA_RAW=0xe000
-GAP=0x6b34
-ZZ=0
-emit_gap_blob() {
-python3 - "$GAP" "$WORK/data_restore_split.c" "$ZZ" <<'BLOB'
-import struct, sys
+# z_errmsg empty-string anchor. The CMake link already carries the same
+# absolute object; appending a second copy is a duplicate symbol. __bufin
+# is pinned inside its own object, above.
+if ! grep -q 'abs__z_errmsg_empty\.obj' "$WORK/rsp.rsp"; then
+  printf ' %s' "${WORK#build/}/abs/abs__z_errmsg_empty.obj" >> "$WORK/rsp.rsp"
+fi
+# LIBCMT .data for the band before the historical tail. After every other
+# contribution and before the gap blob, so the blob cannot cover 0xcbb0.
+python3 - "$WORK/rsp.rsp" "$WORK/crt_data" <<'PY'
+import sys
 from pathlib import Path
-size = int(sys.argv[1], 0)
-zz = int(sys.argv[3], 0)  # bytes .data$zz takes at the end of the section
-out = Path(sys.argv[2])
-ref = Path("original/Server/server.dll").read_bytes()
-pe = struct.unpack_from("<I", ref, 0x3C)[0]
-count = struct.unpack_from("<H", ref, pe + 6)[0]
-opt = pe + 24
-for i in range(count):
-    off = opt + struct.unpack_from("<H", ref, pe + 20)[0] + i * 40
-    if ref[off : off + 8].rstrip(b"\0") == b".data":
-        raw = struct.unpack_from("<I", ref, off + 16)[0]
-        ptr = struct.unpack_from("<I", ref, off + 20)[0]
-        break
-blob = ref[ptr + raw - zz - size : ptr + raw - zz]
-lines = [f"unsigned char g_data_restore_gap[0x{size:x}] = {{"]
-for i in range(0, len(blob), 16):
-    lines.append("\t" + ",".join(f"0x{b:02x}" for b in blob[i : i + 16]) + ",")
-lines.append("};")
-out.write_text("\n".join(lines) + "\n")
-print(f"wrote {out} ({size:#x} bytes)")
-BLOB
-rebrew-cmake-cl /nologo /c /O2 /Gd /MT \
-    /Fo"$WORK/data_restore_split.obj" "$WORK/data_restore_split.c" >/dev/null
-}
-emit_gap_blob
-python3 - "$WORK/rsp.rsp" "${WORK#build/}/data_restore_split.obj" <<'RSP'
+rsp, folder = Path(sys.argv[1]), Path(sys.argv[2])
+objs = sorted(folder.glob("crt_*.obj"))
+if not objs:
+    raise SystemExit("no CRT .data objects")
+text = rsp.read_text().rstrip()
+extra = " ".join(p.relative_to(Path("build")).as_posix() for p in objs)
+rsp.write_text(text + " " + extra + "\n")
+print(f"appended {len(objs)} CRT .data objects ahead of the gap blob")
+PY
+
+echo "== drop the reference .data splice"
+# data_restore.c.obj is a copy of reference .data. lconv and constpow now
+# come from LIBCMT (emit_crt_data.py), and the bytes after constpow through
+# the file-alignment boundary are zeros, so the section still rounds to
+# raw 0xe000 without pasting the reference.
+python3 - "$WORK/rsp.rsp" <<'RSP'
 import shlex, sys
 from pathlib import Path
-rsp, obj = Path(sys.argv[1]), sys.argv[2]
+rsp = Path(sys.argv[1])
 tokens = shlex.split(rsp.read_text())
-tokens = [t for t in tokens if not t.endswith("/crt_region/data_restore.c.obj")]
-# The pad is a LENGTH-only filler (its bytes are the reference .data tail and
-# postlink overwrites .data wholesale), but inserting it FIRST displaced every
-# game .data symbol by +0x74a0, which alone accounted for 0x1758 of the .data
-# residue.  Appending it instead keeps the geometry (raw still 0xe000) and drops
-# the uniform displacement to +0x488.  See docs/msvc6-c-shapes.md section 101.
-tokens.append(obj)
-rsp.write_text(" ".join(tokens))
-print(f"swapped the CMake data blob for {obj}")
+kept = [t for t in tokens if not t.endswith("/crt_region/data_restore.c.obj")
+        and not t.endswith("/data_restore_split.obj")]
+rsp.write_text(" ".join(kept) + "\n")
+print(f"dropped the reference .data splice ({len(tokens) - len(kept)} object(s))")
 RSP
+
+echo "== pin ___lconv_static_null at 0x10035864"
+# lconv's nine empty-string slots relocate to this address. The byte sits
+# inside the ioinit commons span (___pioinfo runs 0xe7f8..0xe8f8), which is
+# uninitialized, so naming offset 0x74 of that section does not move any
+# later BSS symbol and does emit a base reloc. An absolute symbol would
+# write the same value and leave the reloc out.
+python3 - "$WORK/commons/commons_ioinit.obj.obj" <<'PY'
+import struct, sys
+from pathlib import Path
+path = Path(sys.argv[1])
+data = bytearray(path.read_bytes())
+symptr, nsyms = struct.unpack_from("<II", data, 8)
+strtab = symptr + nsyms * 18
+name = b"___lconv_static_null"
+# section: __nhandle at 0, ___pioinfo at 8, size 0x108, placed at 0xe7f0.
+# 0xe864 - 0xe7f0 = 0x74.
+NULL_OFF = 0x74
+nsec = struct.unpack_from("<H", data, 2)[0]
+if nsec != 1:
+    raise SystemExit(f"ioinit commons has {nsec} sections")
+size = struct.unpack_from("<I", data, 20 + 16)[0]
+if size < NULL_OFF + 1:
+    raise SystemExit(f"ioinit .bss is {size:#x}, null wants {NULL_OFF:#x}")
+i = 0
+while i < nsyms:
+    ent = symptr + i * 18
+    naux = data[ent + 17]
+    raw = data[ent:ent + 8]
+    if raw[:4] == b"\0\0\0\0":
+        so = struct.unpack_from("<I", raw, 4)[0]
+        end = data.index(b"\0", strtab + so)
+        nm = data[strtab + so:end]
+    else:
+        nm = raw.split(b"\0", 1)[0]
+    if nm == name:
+        print("___lconv_static_null already pinned")
+        break
+    i += 1 + naux
+else:
+    strlen = struct.unpack_from("<I", data, strtab)[0]
+    sym = bytearray(18)
+    struct.pack_into("<II", sym, 0, 0, strlen)
+    struct.pack_into("<IhHBB", sym, 8, NULL_OFF, 1, 0, 2, 0)
+    newstr = bytearray(data[strtab:strtab + strlen]) + name + b"\0"
+    struct.pack_into("<I", newstr, 0, len(newstr))
+    data = data[:strtab] + sym + newstr
+    struct.pack_into("<I", data, 12, nsyms + 1)
+    path.write_bytes(data)
+    print(f"pinned ___lconv_static_null at section+{NULL_OFF:#x}")
+PY
 
 echo "== pad short functions (so the symbols after them keep their reference VAs)"
 # `make_split_rsp.py` orders the link by reference VA, so an object whose .text
@@ -201,19 +411,9 @@ cmd=$(sed "s#@CMakeFiles/server_dll.dir/objects1.rsp#@${RSP_PAD#build/}#;
            s#/implib:server.lib#/implib:split_poc.lib#;
            s# /pdb:[^ ]*##" build/CMakeFiles/server_dll.dir/link.txt)
 ( cd build && eval "$cmd" >/dev/null 2>&1 )
-blob_at=$(sed -n 's/^ 0003:\([0-9a-f]*\) *_g_data_restore_gap .*/\1/p' build/split_poc.map)
-[ -n "$blob_at" ] || { echo "g_data_restore_gap missing from build/split_poc.map"; exit 1; }
-# rdata_fold.c's literals sit in .data$zz, which the linker groups after the
-# blob (4-aligned); leave room for them so the section still ends at DATA_RAW.
-zz=$(sed -n 's/^ 0003:[0-9a-f]* \([0-9a-f]*\)H \.data\$zz .*/\1/p' build/split_poc.map)
-ZZ=$(( (0x${zz:-0} + 3) & ~3 ))
-want=$((DATA_RAW - 0x$blob_at - ZZ))
-[ "$want" -gt 0 ] || { echo "game .data runs past $DATA_RAW (blob at 0x$blob_at)"; exit 1; }
-if [ "$want" -ne $((GAP)) ]; then
-    echo "data gap: blob starts at 0x$blob_at, GAP $GAP -> $(printf '0x%x' "$want"); relinking"
-    GAP=$(printf '0x%x' "$want")
-    emit_gap_blob
-    ( cd build && eval "$cmd" >/dev/null 2>&1 )
+if grep -q '_g_data_restore_gap' build/split_poc.map; then
+    echo "g_data_restore_gap is still in build/split_poc.map; the reference .data splice is linked" >&2
+    exit 1
 fi
 python3 - <<'PY'
 import struct
@@ -232,4 +432,8 @@ got = vsize('build/split_poc.dll')
 print('reference .text %#x' % ref)
 print('split-set .text %#x  (%+d)' % (got, got - ref))
 PY
+# head closes the pipe after four lines. Under pipefail that SIGPIPE is a
+# failure even when the link and the audit both succeeded.
+set +o pipefail
 python3 scripts/split_audit.py build/split_poc.map | head -4
+set -o pipefail

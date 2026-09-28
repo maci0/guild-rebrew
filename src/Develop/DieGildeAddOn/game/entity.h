@@ -15,10 +15,10 @@ extern int g_worker_entry_count[];
 extern char g_entity_end[];
 extern float g_const_1_0;
 extern float g_const_neg_1_0;
-extern int g_dynasty_field_2c;
+extern int g_next_family_index;
 extern int gm_CurrentHumanFamilyCount; /* 0x10035430, attested: "gm_AllocSpieler(): gm_CurrentHumanFamilyCount overflow" */
-extern int g_query_state_a0c[];
-extern BuildingDefaults g_building_defaults_10030860[]; /* spiel_data.c */
+extern unsigned int g_entity_records[768];
+extern BuildingDefaults g_building_defaults[]; /* spiel_data.c */
 extern unsigned char g_entity_base[];
 extern unsigned int g_entity_slot_table[];
 extern char g_entity_state_base[2];

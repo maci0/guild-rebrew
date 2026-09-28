@@ -5,6 +5,11 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+// GLOBAL: SERVER 0x11766100
+char g_log_buffer[256] = {0};
+// GLOBAL: SERVER 0x11766204
+int g_log_file_handle = 0;
+
 void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
 
 // DATA: SERVER 0x10027078

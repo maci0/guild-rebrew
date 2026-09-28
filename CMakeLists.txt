@@ -253,7 +253,24 @@ if(REBREW_BUILD_SERVER)
   list(REMOVE_ITEM SERVER_SOURCES "${_DATA_GAP}")
   list(INSERT SERVER_SOURCES 1 "${_DATA_GAP}")
 
-  add_library(server_dll SHARED ${SERVER_SOURCES} ${LINK_STUBS})
+  # zutil.c names _z_errmsg_empty. The reference keeps that address inside
+  # the gap blob (0x10034620). An absolute COFF symbol satisfies the link
+  # and contributes no section bytes; a C definition would.
+  set(_Z_ERRMSG_EMPTY "${CMAKE_BINARY_DIR}/abs__z_errmsg_empty.obj")
+  add_custom_command(
+    OUTPUT "${_Z_ERRMSG_EMPTY}"
+    COMMAND python3 "${PROJECT_SOURCE_DIR}/scripts/emit_absolute_obj.py"
+            --name _z_errmsg_empty --value 0x10034620
+            --out "${_Z_ERRMSG_EMPTY}"
+    DEPENDS "${PROJECT_SOURCE_DIR}/scripts/emit_absolute_obj.py"
+    VERBATIM
+  )
+  set_source_files_properties("${_Z_ERRMSG_EMPTY}" PROPERTIES
+    EXTERNAL_OBJECT TRUE
+    GENERATED TRUE
+  )
+
+  add_library(server_dll SHARED ${SERVER_SOURCES} ${LINK_STUBS} "${_Z_ERRMSG_EMPTY}")
 
 
   target_include_directories(server_dll PRIVATE

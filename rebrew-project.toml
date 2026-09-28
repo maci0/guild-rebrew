@@ -30,6 +30,9 @@ ghidra_program_path = "/server.dll"
 # `rebrew sync --push` -- while this pointer is versioned.
 binsync_state_dir = "binsync"
 binary = "original/Server/server.dll"
+# Whole-file status scores this pre-postlink image. build/server.dll is the
+# postlink output and is not what the linker wrote.
+raw_link = "build/split_poc.dll"
 format = "pe"
 arch = "x86_32"
 marker = "SERVER"

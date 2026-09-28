@@ -4,7 +4,7 @@
 #include "../../../Units/Error/error.h"
 
 // GLOBAL: SERVER 0x1002d2ec
-extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
+extern char s_cm_ExSetGebUpgrade____Could_not_f[];
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
@@ -40,7 +40,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 		match = gm_NextEntityQueryMatch();
 	}
 
-	slot_scan = &g_query_state_a0c;
+	slot_scan = &g_entity_records;
 	do {
 		if ((ushort*) *slot_scan == building) {
 			*slot_scan = 0;

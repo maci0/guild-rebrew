@@ -1,11 +1,11 @@
 // DATA: SERVER 0x10027030
-unsigned int g_broadcast_ff_10027030 = 0xffffffff;
+unsigned int g_broadcast_ff = 0xffffffff;
 
 // DATA: SERVER 0x10027034
-char s_broadcast_path_10027034[] = "D:\\Develop\\Units\\net\\broadcast.c";
+char s_broadcast_path[] = "D:\\Develop\\Units\\net\\broadcast.c";
 
 // DATA: SERVER 0x10027058
-char s_Sending_Broadcast_10027058[] = "Sending Broadcast";
+char s_Sending_Broadcast[] = "Sending Broadcast";
 // FUNCTION: GOLDTL 0x5c86b0
 // SIZE: 191
 // FUNCTION: SERVER 0x10001130
@@ -44,5 +44,5 @@ void __cdecl SendBroadcastPacket(int port, char* buf)
 
 	closesocket(s);
 
-	LogMessageInternal(s_broadcast_path_10027034, 0x14f, s_Sending_Broadcast_10027058, 1);
+	LogMessageInternal(s_broadcast_path, 0x14f, s_Sending_Broadcast, 1);
 }

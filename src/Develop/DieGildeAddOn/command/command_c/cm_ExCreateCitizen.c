@@ -15,7 +15,7 @@ extern char g_entity_state_base[2];
  * slot at offset 0x264200. Writes result status into result[0]. */
 
 // GLOBAL: SERVER 0x100358a4
-extern int g_entity_id_field; /* 0x100358A4 */
+int g_entity_id_field = 0; /* 0x100358A4 */
 extern unsigned char g_slot_table[2];
 /* Round-536: ascending REF VA decl order (R521/R531–R535 mid-pocket lever; 2-string cluster). */
 // FUNCTION: GOLDTL 0x44c460
@@ -58,7 +58,7 @@ int __cdecl cm_ExCreateCitizen(int cmd, char* result)
 		gm_FindRecordById(*(int *) (cmd + 0x1b));
 	}
 	idx = entity * 0x21c;
-	g_query_state_a0c[entity * 0x87] = 0;
+	g_entity_records[entity * 0x87] = 0;
 	g_entity_state_base[idx] = 0xd;
 	if (*(unsigned char *) (cmd + 0x21) != 0) {
 		gm_AllocObjekt(*(unsigned int *) ((char*) &g_entity_id_field + idx),

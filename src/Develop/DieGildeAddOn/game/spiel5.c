@@ -9,10 +9,10 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #include "entity.h"
+#include "game_data.h"
 
 #pragma intrinsic(memcpy, memset)
 
-extern int g_query_limit;
 void __cdecl m_FreeTracked(void*);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -20,8 +20,6 @@ unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern unsigned char g_slot_table[2];
 int __cdecl gm_FreeObjectListRecursive(char**);
-extern int g_next_object_id; 
-int g_current_year;
 void __cdecl gv_Free3Fields(void* param);
 char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocRaum(char* geb, int obj_id);
@@ -32,17 +30,7 @@ void __cdecl gv_SpawnEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
-extern int g_citizen_count;
 int __cdecl gm_GetBuildingTypeCategory(int btype);
-extern float g_const_1_5; 
-extern float g_const_2_2; 
-extern float g_const_0_06875; 
-extern float g_const_896_0; 
-extern double g_const_1_over_720; 
-extern float g_const_0_0; 
-extern float g_gv_const_57c8; 
-extern double g_const_half; 
-extern unsigned char g_current_season;
 
 // FUNCTION: GOLD 0x005012b0
 // SIZE: 48
@@ -78,7 +66,7 @@ char* __cdecl gm_SearchStruct(void)
 // FUNCTION: SERVER 0x10017240
 // gm_CleanupBuildingEntity
 
-/* g_query_state_a0c: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
+/* g_entity_records: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
 
 int __cdecl gm_CleanupBuildingEntity(unsigned char* building)
 {
@@ -113,7 +101,7 @@ int __cdecl gm_CleanupBuildingEntity(unsigned char* building)
 	}
 	*(int*) (building + 0x65) = 0;
 cleanup_loop:
-	entity_scan = &g_query_state_a0c;
+	entity_scan = &g_entity_records;
 	do {
 		if ((unsigned char*) entity_scan[1] == building) {
 			entity_scan[1] = 0;
@@ -144,7 +132,7 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 	unsigned short* item_ptr;
 	unsigned char* table_ptr;
 
-	table_ptr = (unsigned char*) g_building_defaults_10030860[0].object_ids;
+	table_ptr = (unsigned char*) g_building_defaults[0].object_ids;
 	do {
 		if (*building == *(table_ptr - 1)) {
 			query_result = gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, 0xff);

@@ -41,7 +41,7 @@ extern int __cdecl sprintf(char* buf, const char* fmt, ...);
  * immediately before zutil.c.obj, so a named array here lands right before
  * z_errmsg.  A raw address cast emitted nothing and left the slot empty.
  * Declared before use — MSVC6 C requires it. */
-char s_0x_08X_length_100294a4[] = "0x%08X -> length: %u, read: %u compressed: %u";
+char s_fmt_hex_length[] = "0x%08X -> length: %u, read: %u compressed: %u";
 
 
 /* The stream flag byte at +0x13c. */
@@ -159,7 +159,7 @@ finalize:
 		g_stream_count = g_stream_count + 1;
 		((vfs_mode_bits*) (stream + 0x13c))->read = *(unsigned char*) &mode14;
 		((vfs_mode_bits*) (stream + 0x13c))->compressed = mode18;
-		sprintf(stream, s_0x_08X_length_100294a4, buf, size, (unsigned char) mode14, mode18);
+		sprintf(stream, s_fmt_hex_length, buf, size, (unsigned char) mode14, mode18);
 	}
 	result = (int) stream;
 done:

@@ -119,7 +119,10 @@ def main() -> int:
             and s["section"] == 0
             and s["value"] > 0
         ]
-        commons = [(n, v) for n, v in commons if n not in seen]
+        # __bufin is defined as an absolute at the reference VA. Leaving the
+        # common here allocates 0x1000 bytes at the wrong address, and the
+        # _iob relocations then store that address in raw .data.
+        commons = [(n, v) for n, v in commons if n not in seen and n != "__bufin"]
         if not commons:
             continue
         seen.update(n for n, _ in commons)

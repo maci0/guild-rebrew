@@ -15,7 +15,7 @@
  *   pvVar1 = gm_FindRecordById(*(int *)(cmd + 0x10));
  *   if (pvVar1 == (void *)0x0) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x52d8,
- *                        s_cm_ExKillTransporter____invalid_t_1002d3d4,1);
+ *                        s_cm_ExKillTransporter____invalid_t,1);
  *     return 1;
  *   }
  *   gm_RemoveEntityLink((int)pvVar1);
@@ -35,7 +35,7 @@
 #include "../../../Units/Error/error.h"
 
 // GLOBAL: SERVER 0x1002d3d4
-extern char s_cm_ExKillTransporter____invalid_t_1002d3d4[];
+extern char s_cm_ExKillTransporter____invalid_t[];
 
 /* Execution handler: removes a transporter entity. Resolves
  * entity by ID and deallocates it from the game world. */

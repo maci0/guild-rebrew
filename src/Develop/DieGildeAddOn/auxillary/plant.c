@@ -22,13 +22,13 @@ PLANT_INFO g_plant_info_table[4] = {
 };
 
 // DATA: SERVER 0x1002d990
-char s_plt_SetPlantMap____Could_not_fin_1002d990[] = "plt_SetPlantMap(): Could not find map-entry!";
+char s_plt_SetPlantMap____Could_not_fin[] = "plt_SetPlantMap(): Could not find map-entry!";
 
 // DATA: SERVER 0x1002d9c0
-char s_D__Develop_DieGildeAddOn_auxilla_1002d9c0[] = "D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c";
+char s_D__Develop_DieGildeAddOn_auxilla[] = "D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c";
 
 // DATA: SERVER 0x1002d9ec
-char s_plt_SetPlantMap____Map_is_not_al_1002d9ec[] = "plt_SetPlantMap(): Map is not alloced or PlantInfo not found...";
+char s_plt_SetPlantMap____Map_is_not_al[] = "plt_SetPlantMap(): Map is not alloced or PlantInfo not found...";
 
 /* 0x58 pairs read by plt_TableLookup through their raw address; a struct
  * array, 8-aligned like the reference (four zero bytes at 0x1002da2c). */
@@ -39,7 +39,7 @@ typedef struct {
 } PLANT_PAIR;
 
 // DATA: SERVER 0x1002da30
-PLANT_PAIR g_plant_pair_table_1002da30[0x58] = {
+PLANT_PAIR g_plant_pair_table[0x58] = {
 	{ 0, 0 },
 	{ 0x320008, 0 },
 	{ 0x4b000c, 0 },
@@ -130,10 +130,10 @@ PLANT_PAIR g_plant_pair_table_1002da30[0x58] = {
 	{ 0, 0 },
 };
 // GLOBAL: SERVER 0x1002dcf0
-int g_plant_flag_1002dcf0 = 1;
+int g_plant_flag = 1;
 
 // GLOBAL: SERVER 0x1003540c
-extern int g_dynamic_count;
+int g_dynamic_count = 0;
 
 /* Finds a record in a linked table by matching type fields.
  * Iterates from base pointer, comparing type1/type2 bytes.
@@ -280,7 +280,7 @@ int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int 
 
 	map = (char*) lb_SearchRecordTable(zone_type);
 	if (zone_table == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_auxilla_1002d9c0, 0x83, s_plt_SetPlantMap____Map_is_not_al_1002d9ec, 1);
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_auxilla, 0x83, s_plt_SetPlantMap____Map_is_not_al, 1);
 		return 0;
 	}
 	marker = 0xff;
@@ -302,7 +302,7 @@ int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int 
 		i++;
 		record_cursor += 0x18;
 	}
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_auxilla_1002d9c0, 0x9b, s_plt_SetPlantMap____Could_not_fin_1002d990, 1);
+	LogMessageInternal(s_D__Develop_DieGildeAddOn_auxilla, 0x9b, s_plt_SetPlantMap____Could_not_fin, 1);
 	return 0;
 store_new:
 	*(int*) ((char*) zone_table + i * 24) = g_dynamic_count;

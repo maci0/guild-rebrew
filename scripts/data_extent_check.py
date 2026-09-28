@@ -203,7 +203,9 @@ def main():
     rows = load_rows(args.toml)
     contained, overlaps = classify(rows)
 
-    src_dir = REPO / "src" / "server.dll"
+    # Sources live under src/, not the old src/server.dll layout. A missing
+    # directory made every crossing look owned, including #define views.
+    src_dir = REPO / "src"
     # A crossing where the inner symbol OWNS storage is a real bug: two objects
     # claim the same bytes.  Where it is a view, the outer entry legitimately
     # covers those bytes and nothing is wrong.

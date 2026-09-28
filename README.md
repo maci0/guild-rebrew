@@ -4,6 +4,12 @@ Byte-identical C89 source reconstruction of **Europa 1400: The Guild** (`server.
 
 Uses the [rebrew](../rebrew/) toolchain for compiler-in-the-loop decompilation matching with MSVC6 under Wine.
 
+<!-- progress:start -->
+<p align="center">
+  <img src="docs/progress.svg" width="715" alt="Decompilation progress. One block per discovered function, in address order. server.dll 509 of 543 functions. Europa1400Gold_TL.exe 823 of 5012 game functions. Europa1400Gold.exe 350 of 4638 functions.">
+</p>
+<!-- progress:end -->
+
 ## Quick Start
 
 ```bash
@@ -85,11 +91,11 @@ for both clients (see `cmake/toolchain-msvc-6.0-sp6-docker.cmake`).
 
 ## Targets
 
-| Target | Binary | Status |
-|--------|--------|--------|
-| `server.dll` | `original/Server/server.dll` | Active: 543 discovered, 283 annotated |
-| `Europa1400Gold_TL.exe` | `original/Europa1400Gold_TL.exe` | Active focus: 6335 discovered, 883 annotated |
-| `Europa1400Gold.exe` | `original/Europa1400Gold.exe` | Validation: 4638 discovered, 456 annotated |
+| Target | Binary | Role |
+|--------|--------|------|
+| `server.dll` | `original/Server/server.dll` | Default |
+| `Europa1400Gold_TL.exe` | `original/Europa1400Gold_TL.exe` | Active focus |
+| `Europa1400Gold.exe` | `original/Europa1400Gold.exe` | Validation |
 
 Game knowledge: [docs/game-compendium.md](docs/game-compendium.md): canonical
 compendium (game, binaries, tree, network, community ecosystem).

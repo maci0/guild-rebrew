@@ -62,7 +62,7 @@ extern unsigned short g_FilterVal25;
 extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
 void __cdecl gv_Free3Fields(void* param);
-extern unsigned int g_query_state_a0c[768];
+extern unsigned int g_entity_records[768];
 extern unsigned char g_byte_table_30861;
 char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocRaum(char* geb, int obj_id);
@@ -79,7 +79,7 @@ void __cdecl amt_ClearEntityLinks(short*);
 void __cdecl gm_InitEntityIfValid(void* arg1);
 void __cdecl gm_KillSpieler(unsigned int idx, int param);
 extern int g_citizen_count;
-extern int g_dynasty_field_2c;
+extern int g_next_family_index;
 extern int g_dynasty_generation_counter;
 extern unsigned char g_entity_base[1];
 extern int g_entity_end;
@@ -100,7 +100,7 @@ extern float g_const_0_06875; /* 0x10025fac */
 extern float g_const_896_0; /* 0x10025fa8 */
 extern double g_const_1_over_720; /* 0x10025fa0 */
 extern float g_const_0_0; /* 0x100256cc */
-extern float g_gv_const_57c8; /* 0x100257c8 */
+extern float g_graveyard_const_c; /* 0x100257c8 */
 extern double g_const_half; /* 0x100257d0 */
 double __cdecl gm_CalculateProductionValue(int, int);
 extern unsigned char g_current_season;

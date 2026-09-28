@@ -2,15 +2,20 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+// GLOBAL: SERVER 0x10035458
+int g_query_count = 0;
+// GLOBAL: SERVER 0x100a8c38
+int g_query_match_count = 0;
+
 // GLOBAL: SERVER 0x10035450
-extern int g_query_limit; /* 0x10035450 */
+int g_query_limit = 0; /* 0x10035450 */
 extern int g_query_filter_max_id; /* 0x10030b94 */
 extern int g_query_filter_owner; /* 0x10030b98 */
 extern unsigned short g_query_filter_type; /* 0x10030b9c */
 // GLOBAL: SERVER 0x101398a0
-extern int g_dispatch_table_b[1]; /* 0x101398a0 */
+int g_dispatch_table_b[1] = {0}; /* 0x101398a0 */
 // GLOBAL: SERVER 0x1013989c
-extern int g_dispatch_table_a[1]; /* 0x1013989c */
+int g_dispatch_table_a[1] = {0}; /* 0x1013989c */
 
 // FUNCTION: SERVER 0x10016290
 // gm_NextEntityQueryMatch
@@ -186,17 +191,17 @@ extern unsigned char g_query_filter_state;
 // GLOBAL: SERVER 0x1003545d
 char g_query_flag2;
 // GLOBAL: SERVER 0x10035434
-int g_citizen_count;
+int g_citizen_count = 0;
 // GLOBAL: SERVER 0x10035439
 unsigned char g_current_season;
 // GLOBAL: SERVER 0x10035444
-int g_dynasty_field_44;
+int g_dynasty_name;
 // GLOBAL: SERVER 0x10035448
-char g_dynasty_field_48;
+char g_dynasty_name_ready;
 // GLOBAL: SERVER 0x10035449
-char g_dynasty_field_49;
+char g_dynasty_scan_flag;
 // GLOBAL: SERVER 0x1003544c
-int g_dynasty_field_4c;
+int g_dynasty_scan_count;
 // GLOBAL: SERVER 0x10035464
 unsigned char* g_query_filter_base;
 /* Round-558: same-size majority types that still emit BSS commons.
@@ -204,7 +209,7 @@ unsigned char* g_query_filter_base;
 // GLOBAL: SERVER 0x1003546c
 unsigned short* g_entity_table_end;
 // GLOBAL: SERVER 0x10035880
-int g_current_year;
+int g_current_year = 0;
 // GLOBAL: SERVER 0x10035884
 unsigned short g_current_hour;
 // GLOBAL: SERVER 0x10035888

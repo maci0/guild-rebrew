@@ -17,7 +17,7 @@
  *
  *   puVar1 = (undefined2 *)gm_LookupEntityRecordById(*(int *)(cmd + 0x10));
  *   if (puVar1 == (undefined2 *)0x0) {
- *     pcVar2 = s_cm_ExCreateGeb____Could_not_find_1002d41c;
+ *     pcVar2 = s_cm_ExCreateGeb____Could_not_find;
  *     line = 0x5386;
  *   }
  *   else {
@@ -34,7 +34,7 @@
  *       }
  *       return 0;
  *     }
- *     pcVar2 = s_cm_ExCreateGeb____failed_1002d400;
+ *     pcVar2 = s_cm_ExCreateGeb____failed;
  *     line = 0x539e;
  *   }
  *   LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,line,pcVar2,1);
@@ -51,7 +51,7 @@
 char* __cdecl gm_AllocGebaeude(unsigned char, unsigned short);
 
 // GLOBAL: SERVER 0x1002d400
-extern char s_cm_ExCreateGeb____failed_1002d400[];
+extern char s_cm_ExCreateGeb____failed[];
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -62,7 +62,7 @@ extern char s_cm_ExCreateGeb____failed_1002d400[];
  * via gm_AllocGebaeude and initializes its owner and type. */
 
 // GLOBAL: SERVER 0x1002d41c
-extern char s_cm_ExCreateGeb____Could_not_find_1002d41c[];
+extern char s_cm_ExCreateGeb____Could_not_find[];
 // FUNCTION: SERVER 0x1000fb30
 int __cdecl cm_ExCreateGeb(int cmd, char* result)
 {
