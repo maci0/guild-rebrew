@@ -1,4 +1,4 @@
-# ☕ Guild Rebrew: Europa 1400 Decompilation
+# Guild Rebrew: Europa 1400 Decompilation
 
 Byte-identical C89 source reconstruction of **Europa 1400: The Guild** (`server.dll`).
 
