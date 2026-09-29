@@ -543,7 +543,7 @@ Semantically correct C reconstruction preserved as a comment above the naked
 function in `spiel622.c` (best result 35/395 after ~7 formulations). The
 cap/goto CFG shape (single `cap` variable, shared clamp epilogue reached via
 `goto clamp`) DOES reproduce the reference's prologue register set (4
-callee-saved pushes, `edi`=entity_index). That part was the key unlock.
+callee-saved pushes, `edi`=entity_index). That part was the decisive change.
 Still blocked on three allocation/peephole details:
 
 1. **Ent-address shape**: reference emits `mov ecx,[g_item_def_table]; mov
@@ -3646,7 +3646,7 @@ becomes `xor edi,edi` / `xor ebp,ebp` / `xor ebx,ebx`: a different order, and `e
 role. Consistent with Findings 62/63: the rotation seen *between two functions* is the same
 rule evaluated at a different live-set size, not noise and not a colourer whim.
 
-**Consequence for the walled rows, and why this does not unlock them.** If the reference
+**Consequence for the walled rows, and why this does not close them.** If the reference
 homes a triple `(ebx, edi, esi)` where we home `(esi, ebx, edi)` at the *same* cardinality,
 the difference is upstream of the homes: cardinality, call pressure, or the kernel, and
 the sweep above says no source-level naming reaches it. This is the mechanical form of

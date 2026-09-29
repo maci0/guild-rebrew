@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Write the README progress map, docs/progress.svg.
 
-One square per discovered function, in address order, colored the way the
-recoverage dashboard colors a match. The palette is the solid fills from
-recoverage's potato view. Matched is exact, reloc, or proven: the same set
-that view's progress bar counts. A function whose address falls in the
+One square per discovered function, in address order, filled with the
+relumea brand's verdict colours in light and dark. Matched is exact, reloc, or
+proven. A function whose address falls in the
 target's ``external_ranges`` is linked library code. It is drawn, and it is
 left out of the matched/game fraction.
 
@@ -21,24 +20,45 @@ import tomllib
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-# Solid fills from recoverage potato.COLORS. size/error/no-size are the
-# function statuses the dashboard folds into a neighbour; they stay distinct
-# here so the legend can name them.
-COLORS: dict[str, str] = {
-    "exact": "#10b981",
-    "reloc": "#0ea5e9",
-    "proven": "#06b6d4",
-    "near_matching": "#f59e0b",
-    "size_mismatch": "#d97706",
-    "stub": "#ef4444",
-    "compile_error": "#e11d48",
-    "missing_size": "#94a3b8",
-    "library": "#C0C0D4",
-    "unannotated": "#3F4958",
+# Brand tokens, copied from relumea.ai `src/system/tokens.css` (light, dark).
+# Change a value there first; this table mirrors it. The SVG carries both
+# themes and switches on the viewer's `prefers-color-scheme`.
+TOKENS: dict[str, tuple[str, str]] = {
+    "surface": ("#ffffff", "#131316"),
+    "surface-3": ("#eef0f3", "#212126"),
+    "border": ("#e7e8ec", "#28282e"),
+    "control-line": ("#82828a", "#767681"),
+    "text": ("#0a0a0b", "#ededef"),
+    "text-muted": ("#55585f", "#a3a3ab"),
+    "accent": ("#0f7a42", "#3fbf7a"),
+    "cell-exact": ("#86d3a4", "#2f7a56"),
+    "cell-reloc": ("#7fcbb8", "#31806f"),
+    "cell-proven": ("#a9dcc1", "#3f7a63"),
+    "cell-near": ("#e8cf86", "#8a6c2c"),
+    "cell-stub": ("#c3c7cf", "#6a6a73"),
+    "cell-fail": ("#e8a49c", "#a05c54"),
+    "cell-unlit": ("#eff0f3", "#212124"),
 }
 
+# One brand verdict fill per state. The brand has no fill for SIZE_MISMATCH or
+# MISSING_SIZE, so they share the stub and fail fills and the legend names both
+# states on that key. Library code is not a verdict: it is drawn as an outline.
+STATE_FILL: dict[str, str] = {
+    "exact": "cell-exact",
+    "reloc": "cell-reloc",
+    "proven": "cell-proven",
+    "near_matching": "cell-near",
+    "size_mismatch": "cell-stub",
+    "stub": "cell-stub",
+    "compile_error": "cell-fail",
+    "missing_size": "cell-fail",
+    "library": "control-line",
+    "unannotated": "cell-unlit",
+}
+OUTLINED: frozenset[str] = frozenset({"library"})
+
 # Left to right on the summary bar: matched, then everything else, library
-# and untouched last so the bar reads as work done against work left.
+# and unattempted last so the bar reads as work done against work left.
 BAR_ORDER: tuple[str, ...] = (
     "exact",
     "reloc",
@@ -52,17 +72,16 @@ BAR_ORDER: tuple[str, ...] = (
     "unannotated",
 )
 
-LEGEND: tuple[tuple[str, str], ...] = (
-    ("exact", "exact"),
-    ("reloc", "reloc"),
-    ("proven", "proven"),
-    ("near_matching", "near"),
-    ("size_mismatch", "size"),
-    ("stub", "stub"),
-    ("compile_error", "error"),
-    ("missing_size", "no size"),
-    ("library", "library"),
-    ("unannotated", "untouched"),
+# One legend key per fill; a key names every state it carries.
+LEGEND: tuple[tuple[tuple[str, str], ...], ...] = (
+    (("exact", "exact"),),
+    (("reloc", "reloc"),),
+    (("proven", "proven"),),
+    (("near_matching", "near"),),
+    (("stub", "stub"), ("size_mismatch", "size")),
+    (("compile_error", "error"), ("missing_size", "no size")),
+    (("library", "library"),),
+    (("unannotated", "unattempted"),),
 )
 
 MATCHED: frozenset[str] = frozenset({"exact", "reloc", "proven"})
@@ -71,13 +90,12 @@ MATCHED: frozenset[str] = frozenset({"exact", "reloc", "proven"})
 # table as functions.
 _DATA_MARKERS: frozenset[str] = frozenset({"GLOBAL", "DATA", "VTABLE", "STRING"})
 
-BG = "#0f1216"
-TRACK = "#1f2937"
-TEXT = "#e7edf4"
-MUTED = "#8b949e"
-ACCENT = "#06b6d4"
-BORDER = "#1c2a38"
-FONT = "ui-sans-serif, system-ui, sans-serif"
+# Brand faces; an SVG loaded as an image cannot fetch fonts, so the stacks
+# fall back to the platform sans and mono.
+FONT_SANS = "Archivo, ui-sans-serif, system-ui, sans-serif"
+FONT_MONO = "'JetBrains Mono', ui-monospace, monospace"
+CARD_RADIUS = 14  # rounded-card
+SWATCH_RADIUS = 3  # rounded-cell
 
 CELL = 4
 GAP = 1
@@ -147,7 +165,7 @@ def block_state(status: str | None, library: bool, target: str, va: int) -> str:
     if status is None:
         return "unannotated"
     key = status.lower()
-    if key not in COLORS:
+    if key not in STATE_FILL:
         raise SystemExit(f"{target}: {va:#x} has unmapped status {status}")
     return key
 
@@ -181,7 +199,7 @@ def load_blocks(
 
 
 def counts_of(states: tuple[str, ...]) -> dict[str, int]:
-    counts = {key: 0 for key in COLORS}
+    counts = {key: 0 for key in STATE_FILL}
     for state in states:
         counts[state] += 1
     return counts
@@ -214,7 +232,7 @@ def place_blocks(
     states: tuple[str, ...], columns: int, origin_x: int, origin_y: int
 ) -> dict[str, list[tuple[int, int]]]:
     """Top-left of each square, grouped by state. One square per function."""
-    placed: dict[str, list[tuple[int, int]]] = {key: [] for key in COLORS}
+    placed: dict[str, list[tuple[int, int]]] = {key: [] for key in STATE_FILL}
     stride = CELL + GAP
     for index, state in enumerate(states):
         col = index % columns
@@ -256,7 +274,10 @@ def percent(matched: int, game: int) -> str:
     return f"{matched / game * 100:.1f}%"
 
 
-def _path(squares: list[tuple[int, int]]) -> str:
+def _path(squares: list[tuple[int, int]], outlined: bool) -> str:
+    if outlined:  # a 1px stroke centred inside the cell keeps the same footprint
+        side = CELL - 1
+        return "".join(f"M{x + 0.5} {y + 0.5}h{side}v{side}h-{side}z" for x, y in squares)
     return "".join(f"M{x} {y}h{CELL}v{CELL}h-{CELL}z" for x, y in squares)
 
 
@@ -271,13 +292,15 @@ class _Svg:
         x: int,
         y: int,
         content: str,
-        fill: str,
+        token: str,
         size: int,
         anchor: str = "start",
         weight: int = 400,
+        mono: bool = False,
     ) -> None:
+        face = " mono" if mono else ""
         self.lines.append(
-            f'<text x="{x}" y="{y}" fill="{fill}" font-family="{FONT}" '
+            f'<text x="{x}" y="{y}" class="f-{token}{face}" '
             f'font-size="{size}" font-weight="{weight}" text-anchor="{anchor}">'
             f"{xml_text(content)}</text>"
         )
@@ -288,17 +311,21 @@ class _Svg:
         y: float,
         w: float,
         h: float,
-        fill: str,
+        css_class: str,
         rx: float = 0,
-        stroke: str | None = None,
         extra: str = "",
     ) -> None:
-        stroke_attr = f' stroke="{stroke}"' if stroke else ""
         radius = f' rx="{rx}" ry="{rx}"' if rx else ""
         self.lines.append(
             f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" '
-            f'fill="{fill}"{radius}{stroke_attr}{extra}/>'
+            f'class="{css_class}"{radius}{extra}/>'
         )
+
+
+def state_class(state: str) -> str:
+    """Filled cell, or an outline for a state that is not a verdict."""
+    prefix = "o" if state in OUTLINED else "f"
+    return f"{prefix}-{STATE_FILL[state]}"
 
 
 def draw_target(
@@ -307,25 +334,37 @@ def draw_target(
     matched, game = game_matched(states)
     left = PAD
     right = PAD + bar_w
-    svg.text(left, svg.y, name, TEXT, 15, weight=650)
+    svg.text(left, svg.y, name, "text", 15, weight=600, mono=True)
     fraction = f"{matched} / {game}"
     if game != len(states):
         fraction += " game"
     pct = percent(matched, game)
-    svg.text(right, svg.y, pct, ACCENT, 14, anchor="end", weight=650)
-    svg.text(right - int(len(pct) * 8.4) - 12, svg.y, fraction, MUTED, 13, anchor="end")
+    svg.text(right, svg.y, pct, "accent", 14, anchor="end", weight=600, mono=True)
+    svg.text(
+        right - int(len(pct) * 8.4) - 12, svg.y, fraction, "text-muted", 13, anchor="end", mono=True
+    )
     svg.y += 12
 
     svg.lines.append(
         f'<clipPath id="{clip_id}"><rect x="{left}" y="{svg.y}" width="{bar_w}" '
         f'height="{BAR_H}" rx="{BAR_H / 2}" ry="{BAR_H / 2}"/></clipPath>'
     )
-    svg.rect(left, svg.y, bar_w, BAR_H, TRACK, rx=BAR_H / 2, extra=f' clip-path="url(#{clip_id})"')
+    svg.rect(
+        left,
+        svg.y,
+        bar_w,
+        BAR_H,
+        "f-surface-3",
+        rx=BAR_H / 2,
+        extra=f' clip-path="url(#{clip_id})"',
+    )
     cursor = float(left)
     for state, span in segment_widths(counts_of(states), bar_w):
         if span <= 0:
             continue
-        svg.rect(cursor, svg.y, span, BAR_H, COLORS[state], extra=f' clip-path="url(#{clip_id})"')
+        svg.rect(
+            cursor, svg.y, span, BAR_H, state_class(state), extra=f' clip-path="url(#{clip_id})"'
+        )
         cursor += span
     svg.y += BAR_H + 8
 
@@ -338,7 +377,8 @@ def draw_target(
         if not squares:
             continue
         svg.lines.append(
-            f'<path fill="{COLORS[state]}" d="{_path(squares)}" shape-rendering="crispEdges"/>'
+            f'<path class="{state_class(state)}" d="{_path(squares, state in OUTLINED)}" '
+            'shape-rendering="crispEdges"/>'
         )
     if drawn != len(states):
         raise SystemExit(f"{name}: drew {drawn} blocks for {len(states)} functions")
@@ -351,7 +391,11 @@ def _legend_span(label: str) -> int:
 
 
 def draw_legend(svg: _Svg, counts: dict[str, int], bar_w: int) -> None:
-    items = [(state, label) for state, label in LEGEND if counts[state]]
+    items: list[tuple[str, str]] = []
+    for key in LEGEND:
+        present = [(state, label) for state, label in key if counts[state]]
+        if present:
+            items.append((present[0][0], " / ".join(label for _, label in present)))
     x = PAD
     baseline = svg.y + 4
     for state, label in items:
@@ -359,8 +403,11 @@ def draw_legend(svg: _Svg, counts: dict[str, int], bar_w: int) -> None:
         if x > PAD and x + needed > PAD + bar_w:
             x = PAD
             baseline += 18
-        svg.rect(x, baseline - 9, 10, 10, COLORS[state], rx=2)
-        svg.text(x + 16, baseline, label, MUTED, 12)
+        if state in OUTLINED:
+            svg.rect(x + 0.5, baseline - 8.5, 9, 9, state_class(state), rx=SWATCH_RADIUS)
+        else:
+            svg.rect(x, baseline - 9, 10, 10, state_class(state), rx=SWATCH_RADIUS)
+        svg.text(x + 16, baseline, label, "text-muted", 12)
         x += needed
     svg.y = baseline + 18
 
@@ -382,13 +429,28 @@ def wrap_caption(text: str, width: int, size: int) -> list[str]:
     return lines
 
 
+def stylesheet() -> str:
+    """Fill (`f-`) and outline (`o-`) classes per token, light then dark."""
+
+    def rules(theme: int) -> str:
+        return "".join(
+            f".f-{name}{{fill:{pair[theme]}}}.o-{name}{{fill:none;stroke:{pair[theme]}}}"
+            for name, pair in TOKENS.items()
+        )
+
+    return (
+        f"text{{font-family:{FONT_SANS}}}.mono{{font-family:{FONT_MONO}}}"
+        f"{rules(0)}@media (prefers-color-scheme:dark){{{rules(1)}}}"
+    )
+
+
 def render(targets: list[tuple[str, tuple[str, ...]]]) -> str:
     columns = column_count(INNER)
     bar_w = grid_width(columns)
     width = PAD * 2 + bar_w
     svg = _Svg(width)
     svg.y = PAD + 12
-    totals = {key: 0 for key in COLORS}
+    totals = {key: 0 for key in STATE_FILL}
     for name, states in targets:
         for state, count in counts_of(states).items():
             totals[state] += count
@@ -398,9 +460,9 @@ def render(targets: list[tuple[str, tuple[str, ...]]]) -> str:
         "One block per discovered function, in address order. Matched is exact, reloc, or proven."
     )
     if totals["library"]:
-        note += " Silver blocks are linked library code and are not in the count."
+        note += " Outlined blocks are linked library code and are not in the count."
     for line in wrap_caption(note, bar_w, 11):
-        svg.text(PAD, svg.y, line, MUTED, 11)
+        svg.text(PAD, svg.y, line, "text-muted", 11)
         svg.y += 15
     height = svg.y + PAD - 15
     body = "\n".join(svg.lines)
@@ -411,9 +473,10 @@ def render(targets: list[tuple[str, tuple[str, ...]]]) -> str:
         f'viewBox="0 0 {width} {height}" role="img">\n'
         "<title>Decompilation progress</title>\n"
         f"<desc>{xml_text(note)}</desc>\n"
-        f'<rect width="{width}" height="{height}" rx="12" fill="{BG}"/>\n'
-        f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" '
-        f'fill="none" stroke="{BORDER}"/>\n'
+        f"<style>{stylesheet()}</style>\n"
+        f'<rect width="{width}" height="{height}" rx="{CARD_RADIUS}" class="f-surface"/>\n'
+        f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="{CARD_RADIUS}" '
+        'class="o-border"/>\n'
         f"{body}\n"
         "</svg>\n"
     )
