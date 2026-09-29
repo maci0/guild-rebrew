@@ -20,9 +20,10 @@ import tomllib
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-# Brand tokens, copied from relumea.ai `src/system/tokens.css` (light, dark).
-# Change a value there first; this table mirrors it. The SVG carries both
-# themes and switches on the viewer's `prefers-color-scheme`.
+# Brand tokens (light, dark), copied by hand from relumea.ai
+# `src/system/tokens.css` on its feat/brand-refresh branch. Nothing checks for
+# drift: change a value there first, then here. The SVG carries both themes
+# and switches on the viewer's `prefers-color-scheme`.
 TOKENS: dict[str, tuple[str, str]] = {
     "surface": ("#ffffff", "#131316"),
     "surface-3": ("#eef0f3", "#212126"),
@@ -94,8 +95,8 @@ _DATA_MARKERS: frozenset[str] = frozenset({"GLOBAL", "DATA", "VTABLE", "STRING"}
 # fall back to the platform sans and mono.
 FONT_SANS = "Archivo, ui-sans-serif, system-ui, sans-serif"
 FONT_MONO = "'JetBrains Mono', ui-monospace, monospace"
-CARD_RADIUS = 14  # rounded-card
-SWATCH_RADIUS = 3  # rounded-cell
+CARD_RADIUS = 14  # --radius-card
+SWATCH_RADIUS = 3  # --radius-cell
 
 CELL = 4
 GAP = 1
@@ -362,8 +363,15 @@ def draw_target(
     for state, span in segment_widths(counts_of(states), bar_w):
         if span <= 0:
             continue
+        # A stroked outline inside the clipped bar reads as a hollow box, so
+        # the bar fills library with the outline colour.
         svg.rect(
-            cursor, svg.y, span, BAR_H, state_class(state), extra=f' clip-path="url(#{clip_id})"'
+            cursor,
+            svg.y,
+            span,
+            BAR_H,
+            f"f-{STATE_FILL[state]}",
+            extra=f' clip-path="url(#{clip_id})"',
         )
         cursor += span
     svg.y += BAR_H + 8
@@ -391,11 +399,14 @@ def _legend_span(label: str) -> int:
 
 
 def draw_legend(svg: _Svg, counts: dict[str, int], bar_w: int) -> None:
+    """One key per fill, each label carrying its count, so the per-state
+    numbers do not depend on telling the fills apart."""
     items: list[tuple[str, str]] = []
     for key in LEGEND:
         present = [(state, label) for state, label in key if counts[state]]
         if present:
-            items.append((present[0][0], " / ".join(label for _, label in present)))
+            text = " / ".join(f"{label} {counts[state]}" for state, label in present)
+            items.append((present[0][0], text))
     x = PAD
     baseline = svg.y + 4
     for state, label in items:
@@ -403,10 +414,9 @@ def draw_legend(svg: _Svg, counts: dict[str, int], bar_w: int) -> None:
         if x > PAD and x + needed > PAD + bar_w:
             x = PAD
             baseline += 18
-        if state in OUTLINED:
-            svg.rect(x + 0.5, baseline - 8.5, 9, 9, state_class(state), rx=SWATCH_RADIUS)
-        else:
-            svg.rect(x, baseline - 9, 10, 10, state_class(state), rx=SWATCH_RADIUS)
+        # Every swatch gets the control-line edge: the lightest fills are
+        # under 3:1 against the card and would not show without it.
+        svg.rect(x + 0.5, baseline - 8.5, 9, 9, f"{state_class(state)} edge", rx=SWATCH_RADIUS)
         svg.text(x + 16, baseline, label, "text-muted", 12)
         x += needed
     svg.y = baseline + 18
@@ -430,13 +440,15 @@ def wrap_caption(text: str, width: int, size: int) -> list[str]:
 
 
 def stylesheet() -> str:
-    """Fill (`f-`) and outline (`o-`) classes per token, light then dark."""
+    """Fill (`f-`) and outline (`o-`) classes per token, plus the swatch
+    `edge` stroke, light then dark."""
 
     def rules(theme: int) -> str:
-        return "".join(
+        tokens = "".join(
             f".f-{name}{{fill:{pair[theme]}}}.o-{name}{{fill:none;stroke:{pair[theme]}}}"
             for name, pair in TOKENS.items()
         )
+        return f"{tokens}.edge{{stroke:{TOKENS['control-line'][theme]}}}"
 
     return (
         f"text{{font-family:{FONT_SANS}}}.mono{{font-family:{FONT_MONO}}}"
@@ -487,7 +499,11 @@ def readme_block(svg_width: int, targets: list[tuple[str, tuple[str, ...]]]) -> 
     for name, states in targets:
         matched, game = game_matched(states)
         noun = "game functions" if game != len(states) else "functions"
-        bits.append(f"{name} {matched} of {game} {noun}")
+        counts = counts_of(states)
+        breakdown = ", ".join(
+            f"{label} {counts[state]}" for key in LEGEND for state, label in key if counts[state]
+        )
+        bits.append(f"{name} {matched} of {game} {noun} ({breakdown})")
     alt = (
         "Decompilation progress. One block per discovered function, in address order. "
         + ". ".join(bits)
