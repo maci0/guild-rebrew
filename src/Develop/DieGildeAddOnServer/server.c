@@ -35,7 +35,7 @@ void* g_thread_handle = 0;
 // FUNCTION: SERVER 0x10009310
 // SIZE: 8
 
-int __stdcall exit_handler(int a, int b, int c)
+int __stdcall DllMain(int a, int b, int c)
 {
 	return 1;
 }

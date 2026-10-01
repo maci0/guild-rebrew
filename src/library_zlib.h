@@ -211,4 +211,25 @@
 // zcalloc
 // SIZE: 19
 
+
+// LIBRARY: SERVER 0x10001021
+// library_zlib_cont (split from a merged entry; round 248)
+// SIZE: 269
+
+// LIBRARY: SERVER 0x100011fb
+// library_zlib_cont (split from a merged entry; round 248)
+// SIZE: 298
+
+// LIBRARY: SERVER 0x10001504
+// library_zlib_cont (split from a merged entry; round 248)
+// SIZE: 37
+
+// LIBRARY: SERVER 0x10001bb7
+// library_zlib_cont (split from a merged entry; round 248)
+// SIZE: 9
+
+// LIBRARY: SERVER 0x10005da3
+// library_zlib_cont (split from a merged entry; round 248)
+// SIZE: 13
+
 #endif

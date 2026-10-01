@@ -13,17 +13,15 @@
 #pragma intrinsic(memcpy, memset)
 
 void __cdecl gm_InitEntitySlots(void);
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 int __cdecl gm_FreeObjectListRecursive(char**);
 
 int __cdecl gm_GetBuildingTypeCategory(int);
-// DATA: SERVER 0x10035a04
-extern unsigned char g_entity_type_bytes[1];
 // GLOBAL: SERVER 0x1003542c
-int g_next_family_index = 0; /* 0x1003542c */
+int g_next_family_index; /* 0x1003542c */
 
 // GLOBAL: SERVER 0x10035430
-int gm_CurrentHumanFamilyCount = 0; /* 0x10035430 */
+int gm_CurrentHumanFamilyCount; /* 0x10035430 */
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
@@ -90,11 +88,11 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 	int* base_cursor;
 	int* base;
 
-	entity = (char*) 0x100358a0 + index * 0x21c;
+	entity = (char*) ((int) g_slot_table + 0x0) + index * 0x21c;
 	entity_id = *(int*) (entity + 4);
 	if (*(unsigned char*) (entity + 2) != 0xf) {
 		entity[8] = 0;
-		*(short*) (entity + 0x28) = *(short*) 0x10035880;
+		*(short*) (entity + 0x28) = *(short*) &g_current_year;
 		gm_InitEntityIfValid((short*) entity);
 		entity[2] = 0xf;
 	}
@@ -103,7 +101,7 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 		if (*(unsigned short*) entity != 0xffff) {
 			g_citizen_count--;
 		}
-		base = (int*) 0x100358fc;
+		base = (int*) ((int) g_slot_table + 0x5c);
 		do {
 			base_cursor = base;
 			for (j = 0; j < 8; j++) {
@@ -113,14 +111,14 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 				base_cursor++;
 			}
 			base = (int*) ((char*) base + 0x21c);
-		} while ((int) base < 0x1009acfc);
+		} while ((int) base < ((int) g_slot_table + 0x6545c));
 		memset(entity, 0, 0x21c);
 		*(unsigned short*) entity = 0xffff;
-		*(int*) ((char*) 0x100358a4 + index * 0x21c) = -1;
+		*(int*) ((char*) (g_slot_table + 4) + index * 0x21c) = -1;
 		/* Written as a dword loop, not memset: msvc6 expands both to the same
 		 * `rep stosd`, but only this form sets edi before ecx as the original
 		 * does. A memset call emits `mov ecx,8` first. */
-		base_cursor = (int*) ((char*) 0x100358fc + index * 0x21c);
+		base_cursor = (int*) ((char*) ((int) g_slot_table + 0x5c) + index * 0x21c);
 		for (j = 0; j < 8; j++) {
 			base_cursor[j] = -1;
 		}
@@ -156,7 +154,7 @@ void __cdecl gm_InitEntitySlots(void)
 		memset(ptr, 0, 0xAC);
 		*(short*) ptr = (short) 0xFFFF;
 		ptr = ptr + 0xAC;
-	} while ((int) ptr < (int) g_entity_end);
+	} while ((int) ptr < (int) (g_entity_base + 16 * 0xac));
 
 	g_citizen_count = 0;
 	g_next_family_index = 0;
@@ -242,9 +240,9 @@ int __cdecl gm_CheckStatLevel(int entity_idx, int stat_id)
 	int result;
 
 	idx = entity_idx * 0x21c;
-	val = gm_MapEntityStatRange((int) g_entity_type_bytes[idx]);
+	val = gm_MapEntityStatRange((int) g_slot_table[idx + 0x164]);
 	if (val == stat_id) {
-		return (unsigned int) g_entity_type_bytes[idx];
+		return (unsigned int) g_slot_table[idx + 0x164];
 	}
 	result = (int) gm_GetEntityTableEntry((char*) &g_slot_table + idx);
 	if (result == 0) {
@@ -505,11 +503,11 @@ int __cdecl gm_LookupEntityRecordById(int search_id)
 	char* base_cursor;
 	int i;
 	i = 0;
-	base_cursor = (char*) 0x100358A4;
-	while ((int) base_cursor < (int) 0x1009ACA4) {
+	base_cursor = (char*) (g_slot_table + 4);
+	while ((int) base_cursor < (int) (g_slot_table + 0x300 * 0x21c + 4)) {
 		if (*(unsigned short*) (base_cursor - 4) != 0xFFFF) {
 			if (*(int*) base_cursor == search_id) {
-				return i * 0x21C + 0x100358A0;
+				return i * 0x21C + (int) g_slot_table;
 			}
 		}
 		base_cursor += 0x21C;

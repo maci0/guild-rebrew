@@ -424,7 +424,7 @@ binaries were built with the same compiler product and version
 
 | binary | compiler version | code generator | `Rich` record | pp-only `test ah,X` sites |
 |--------|------------------|----------------|---------------|---------------------------|
-| SERVER | cl 12.00.8804 | stock VC6 c2 | **none** (no Rich header) | **0** |
+| SERVER | cl 12.00.8804 | stock VC6 c2 | stock copy: comp_id `0x000a2306`, count 37; configured copy: stripped | **0** |
 | GOLDTL | cl 12.00.8804 | **Processor Pack** c2 13.00.9044 | comp_id `0x00302354`, count 154 | 1011 |
 | GOLD | cl 12.00.8804 | **Processor Pack** c2 13.00.9044 | comp_id `0x00302354`, count 157 | 841 |
 
@@ -436,8 +436,11 @@ Three independent measurements, all agreeing:
    i.e. c2.dll 13.00.9044.0.  Nine VC6 code generators are registered
    (`6.0`, `sp1`-`sp6`, `win9x`, `sp5-pp`) and each stamps a different
    `@comp.id`; only `sp5-pp` uses product `0x0030`.  Both clients' Rich headers
-   carry exactly that record (counts 154/157 objects); SERVER's file has no
-   Rich header at all (minimal 0x80 DOS stub), so nothing is recorded there.
+   carry exactly that record (counts 154/157 objects). Matching local stock
+   SERVER copies carry product 10/build 8966, count 37. The configured project
+   copy has altered headers, including a removed Rich record and minimal
+   0x80 DOS stub; its four section contents are identical to the stock copies.
+   See `msvc6-link-layout.md` section 18 for hashes, paths and all records.
    Do not trust `diec`'s "compiler 13.00.9178" line for these clients: that
    value comes from a non-compiler Rich entry (a statically linked SDK/MSS32
    object); the compiler record is the `0x0030`/9044 one.

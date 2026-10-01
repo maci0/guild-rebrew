@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 /* cm_ProcessCommandQueue - Master Command Router (0x1000aac0).
  *
  * Byte-exact at the link (639/639 masked, obj 639).  Load-bearing shapes:
@@ -67,7 +68,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 	unsigned char t2;
 
 	(void) a;
-	for (tab = (char*) 0x10442cf0; (int) tab < 0x11764010; tab += 0x264264) {
+	for (tab = (char*) (int) (g_connections + 0x2641f0); (int) tab < (int) (g_connections + 0x1585510); tab += 0x264264) {
 		pkt = *(char**) tab;
 		held = 0;
 		while (pkt != 0) {
@@ -116,7 +117,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 				if (g_dispatch_table[*(unsigned char*) pkt](pkt, 0) == 0) {
 				if (*(unsigned char*) pkt == 0x20 && *(unsigned char*) (pkt + 0x10) == 0xe) {
 					slot = (char*) g_connections + (unsigned int) *(unsigned char*) (pkt + 3) * 0x264264;
-					memcpy((char*) 0x10442c54 + (unsigned int) *(unsigned char*) (pkt + 3) * 0x264264, pkt, 0x99);
+					memcpy((char*) (int) (g_connections + 0x264154) + (unsigned int) *(unsigned char*) (pkt + 3) * 0x264264, pkt, 0x99);
 					goto advance;
 				}
 				t2 = ((unsigned char*) g_connections)[(unsigned int) *(unsigned char*) (pkt + 3) * 0x264264];
@@ -138,7 +139,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 					}
 					slot += 0x264264;
 					i++;
-				} while ((int) slot < 0x114ffe20);
+				} while ((int) slot < (int) (g_connections + 0x1321320));
 				goto advance;
 				}
 			queued:

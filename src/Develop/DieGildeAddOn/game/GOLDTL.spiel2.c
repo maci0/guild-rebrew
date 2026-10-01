@@ -39,7 +39,7 @@ unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern char* g_array_base;
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 void __cdecl free_node(char*);
 int __cdecl gm_FreeObjectListRecursive(char**);
 void __cdecl gm_NoopRet2(void);
@@ -81,8 +81,7 @@ void __cdecl gm_KillSpieler(unsigned int idx, int param);
 extern int g_citizen_count;
 extern int g_next_family_index;
 extern int g_dynasty_generation_counter;
-extern unsigned char g_entity_base[1];
-extern int g_entity_end;
+extern unsigned char g_entity_base[16 * 0xac];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
@@ -94,14 +93,14 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddObjekt(int, int, int);
 extern unsigned int g_entity_slot_table[];
-extern float g_const_1_5; /* 0x10025fb4 */
-extern float g_const_2_2; /* 0x10025fb0 */
-extern float g_const_0_06875; /* 0x10025fac */
-extern float g_const_896_0; /* 0x10025fa8 */
-extern double g_const_1_over_720; /* 0x10025fa0 */
-extern float g_const_0_0; /* 0x100256cc */
-extern float g_graveyard_const_c; /* 0x100257c8 */
-extern double g_const_half; /* 0x100257d0 */
+extern const float g_const_1_5; /* 0x10025fb4 */
+extern const float g_const_2_2; /* 0x10025fb0 */
+extern const float g_const_0_06875; /* 0x10025fac */
+extern const float g_const_896_0; /* 0x10025fa8 */
+extern const double g_const_1_over_720; /* 0x10025fa0 */
+extern const float g_const_0_0; /* 0x100256cc */
+extern const float g_graveyard_const_c; /* 0x100257c8 */
+extern const double g_const_half; /* 0x100257d0 */
 double __cdecl gm_CalculateProductionValue(int, int);
 extern unsigned char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
@@ -111,8 +110,8 @@ char* __cdecl gm_FindEntityByOwner(int); /* 0x10019c60 */
 int __cdecl gm_GetMsgField(char*, char*); /* 0x10019cd0 */
 int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
 double __cdecl gm_RandomFloat01(void);
-extern float g_const_1_0;
-extern float g_const_neg_1_0;
+extern const float g_const_1_0f;
+extern const float g_const_neg_1_0;
 
 /* Scans the per-entity slot table for an entry whose 16-bit id
  * matches arg2. Each entity owns 0x2a90 bytes at 0x85ab90 (TL image),

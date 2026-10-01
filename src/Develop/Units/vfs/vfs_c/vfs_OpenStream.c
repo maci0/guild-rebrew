@@ -4,10 +4,13 @@
 #include "zlib.h"
 
 #include <ctype.h>
+
+extern unsigned int g_gzip_magic_1f;
+extern unsigned int g_gzip_magic_8b;
+extern void* g_stream_pool;
 #include <stdio.h>
 #include "../../../DieGildeAddOn/game/entity.h"
 extern unsigned int __cdecl crc32(unsigned int crc, unsigned char* buf, unsigned int len);
-extern int __cdecl crt_toupper(int current_char);
 /* Opens a VFS stream over a caller buffer. Parses the mode flags
  * (N = none, R = read, W = write, Z = zlib) and initializes the
  * stream structure with the matching inflate/deflate setup.
@@ -74,7 +77,7 @@ int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_fla
 		goto done;
 	}
 	for (path_cursor = mode_flags; *path_cursor != 0; path_cursor++) {
-	switch (crt_toupper(*path_cursor)) {
+	switch (toupper(*path_cursor)) {
 		case 'N':
 			mode18 = 0;
 			mode13 = 0;
@@ -93,13 +96,13 @@ int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_fla
 			break;
 		}
 	}
-	stream = (char*) m_PoolAlloc((void*) 0x10034670, 0x140, 0x10);
+	stream = (char*) m_PoolAlloc((void*) &g_stream_pool, 0x140, 0x10);
 	*(unsigned char*) (stream + 0x13c) = (unsigned char) ((*(unsigned char*) (stream + 0x13c) & 0xeb) | 0x22);
 	if (*(unsigned char*) &mode14 != 0) {
 		if (mode13 != 0) {
 			if (size <= 10) {
 				mode18 = 0;
-			} else if (buf[0] == *(int*) 0x10029450 && buf[1] == *(int*) 0x10029454) {
+			} else if (buf[0] == (int) g_gzip_magic_1f && buf[1] == (int) g_gzip_magic_8b) {
 				mode18 = 1;
 				goto inflate_setup;
 			} else {
@@ -119,7 +122,7 @@ int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_fla
 		*(int*) (stream + 0x110) = 0;
 		*(int*) (stream + 0x120) = 0;
 		*(int*) (stream + 0x124) = 0;
-		if (inflateInit2_((void*) (stream + 0x100), -0xf, (char*) 0x1002706c, 0x38) == 0) {
+		if (inflateInit2_((void*) (stream + 0x100), -0xf, ZLIB_VERSION, 0x38) == 0) {
 			goto finalize;
 		}
 		goto cleanup;
@@ -128,8 +131,8 @@ int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_fla
 		if (size < 0x12) {
 			goto cleanup;
 		}
-		buf[0] = *(unsigned char*) 0x10029450;
-		buf[1] = *(unsigned char*) 0x10029454;
+		buf[0] = *(unsigned char*) &g_gzip_magic_1f;
+		buf[1] = *(unsigned char*) &g_gzip_magic_8b;
 		buf[2] = 8;
 		buf[8] = 0;
 		buf[7] = 0;
@@ -145,7 +148,7 @@ int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_fla
 		*(int*) (stream + 0x120) = 0;
 		*(int*) (stream + 0x124) = 0;
 		*(int*) (stream + 0x138) = crc32(0, 0, 0);
-		if (deflateInit2_((void*) (stream + 0x100), -1, 8, -0xf, 8, 0, (char*) 0x1002706c, 0x38) != 0) {
+		if (deflateInit2_((void*) (stream + 0x100), -1, 8, -0xf, 8, 0, ZLIB_VERSION, 0x38) != 0) {
 			goto cleanup;
 		}
 		*(int*) (stream + 0x114) = 0xa;
@@ -165,7 +168,7 @@ finalize:
 done:
 	return result;
 cleanup:
-	m_pool_free((void*) 0x10034670, stream);
+	m_pool_free((void*) &g_stream_pool, stream);
 	return 0;
 }
 

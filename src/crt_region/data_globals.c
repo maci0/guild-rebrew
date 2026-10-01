@@ -76,7 +76,7 @@ void* _aenvptr;          /* environment strings ptr */
 // DATA: SERVER 0x10035508
 int __error_mode;            /* __amsg_exit report-mode flag */
 // DATA: SERVER 0x1003550c
-int __app_type;            /* __amsg_exit report-mode flag 2 */
+extern int __app_type;     /* LIBCMT dllcrt0.obj owns the report-mode flag. */
 // DATA: SERVER 0x1003559c
 int g_new_handler_retry;            /* new-handler retry flag (_callnewh) */
 
@@ -99,9 +99,9 @@ void* pfnGetLastActivePopup;          /* cached GetLastActivePopup proc (0x10022
 // DATA: SERVER 0x11766438
 void* __sbh_pHeaderScan;          /* pool: region scan cursor (ptr into array) */
 // DATA: SERVER 0x11766440
-int __sbh_cntHeaderList = 0; /* pool: region count */
+extern int __sbh_cntHeaderList; /* LIBCMT sbheap.obj owns the region count. */
 // DATA: SERVER 0x11766444
-void* __sbh_pHeaderList = 0; /* pool: region descriptor array */
+extern void* __sbh_pHeaderList; /* LIBCMT sbheap.obj owns the descriptor array. */
 // DATA: SERVER 0x11766448
 unsigned int g_max_pool_alloc_size;   /* max pool allocation size (mode 3) */
 // DATA: SERVER 0x1176644c

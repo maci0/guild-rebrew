@@ -30,7 +30,7 @@ int __cdecl gm_GetBuildingTypeCategory(int btype);
  * memory via m_AllocTracked and zeroes the initial fields. */
 
 // DATA: SERVER 0x100358a0
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 void __cdecl gm_NoopRet2(char* slot);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int g_entity_id_counter;
@@ -200,7 +200,7 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 	}
 	if (static_ptr != NULL) {
 		*static_ptr = NULL;
-		entity_cursor = (char*) 0x100358a0;
+		entity_cursor = (char*) g_slot_table;
 		for (i = 0; i < 0x300; i++) {
 			if (*(unsigned short*) entity_cursor != 0xffff && *(int*) (entity_cursor + 4) == entity_id) {
 				*static_ptr = entity_cursor;

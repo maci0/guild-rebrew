@@ -1,8 +1,15 @@
 # MSVC 6.0: C source shapes that decide the emitted bytes
 
-Catalogue of source-level patterns that changed a function from mismatch to
-byte match against the original `server.dll`. Each entry names the emitted
-instruction difference, the fix, and a verified call site.
+Catalogue of measured source-level patterns against the original `server.dll`,
+including successful rewrites and rejected variants. Record each new discovery
+here with the target and VA, compiler profile and flags, C spelling, emitted
+instruction difference, complete-body result, and evidence location. Separate
+observed output from explanations that have not been demonstrated.
+
+The current server build uses plain MSVC 6.0 SP5 and stock libraries. New native
+results below compare ordinary toolchain output; historical postlink results
+are identified as such and do not establish whole-file identity. Processor Pack
+client results, including §202, have a different code generator.
 
 Companion docs: `msvc6-allocator.md` covers register allocation decisions;
 this file covers declaration types, operand forms, statement order, and loop
@@ -25,27 +32,27 @@ diff shows, then read it; many sections belong to more than one row.
 
 | What the diff shows | Sections |
 |---|---|
-| Wrong index scale, `mov` against `lea` of a global, wrong operand width, uninitialised locals, a wrong symbol under `~~` | 1, 2, 3, 4, 6, 34, 121, 162, 176, 177, 183, 184, 194 |
+| Wrong index scale, `mov` against `lea` of a global, wrong operand width, uninitialised locals, a wrong symbol under `~~` | 1, 2, 3, 4, 6, 34, 121, 162, 176, 177, 183, 184, 194, 205, 209 |
 | Base/index roles swapped, displacement not folded, `lea` fusion, strength reduction | 5, 21, 29, 30, 31, 35, 70, 73, 132, 133, 161, 182, 191, 193 |
 | Byte loads and zero-extension (`movzx`, `and eax,0xff`, `xor`+`mov r16`) | 27, 43, 52, 131, 134, 192, 193 |
-| x87: `fimul`/`fidiv` forms, `fxch`, `_ftol`, float compares, operand and evaluation order | 8a, 15, 46, 82, 159, 165, 175, 189, 190, 195, 202 |
+| x87: `fimul`/`fidiv` forms, `fxch`, `_ftol`, float compares, operand and evaluation order | 8a, 15, 46, 82, 159, 165, 175, 189, 190, 195, 202, 203, 204, 211 |
 | Signed against unsigned conditional jumps | 55, 173 |
 | Branch polarity, fall-through site, loop form, cold-block placement | 7, 8, 17, 47, 54, 57, 59, 61, 64, 76, 86, 180, 181, 196, 202 |
 | `switch` and jump tables | 53, 65, 114 |
 | Epilogues merged or duplicated, shared exits and cleanup arms | 56, 74, 112, 117, 202 |
-| Two loads or stores in the wrong order, a load sunk or hoisted, RMW idiom choice | 8b, 8c, 10, 20, 42, 45, 48, 60, 77, 78, 80, 86b, 109, 163, 164, 185, 191, 202 |
-| `volatile` as a scheduling or form lever, and symbols instead of it | 22, 24, 27, 30, 39, 51, 52, 60, 76, 94, 187 |
+| Two loads or stores in the wrong order, a load sunk or hoisted, RMW idiom choice | 8b, 8c, 10, 20, 42, 45, 48, 60, 77, 78, 80, 86b, 109, 163, 164, 185, 191, 202, 203, 204, 205, 206 |
+| `volatile` as a scheduling or form lever, and symbols instead of it | 22, 24, 27, 30, 39, 51, 52, 60, 76, 94, 187, 204, 205 |
 | Statement order, hoisting a definition | 33, 84, 85, 116, 118, 163 |
 | `eax`/`ecx`/`edx` or callee-saved register choice (also `msvc6-allocator.md`) | 9, 25, 36, 40, 41, 62, 72, 72b, 126, 130, 135, 180, 202 |
 | Frame size, prologue, parameter-slot homing, `[esp+N]` offsets | 13, 14, 37, 38, 75, 81, 178, 179, 202 |
-| Constants rematerialised or CSE'd, shared clamp values, ternary constant forms | 23, 26, 28, 62, 63, 126, 199, 202 |
+| Constants rematerialised or CSE'd, shared clamp values, ternary constant forms | 23, 26, 28, 62, 63, 126, 199, 202, 211, 212 |
 | Inline `memset`, struct copy, `rep movsd`, inlining, fill loops | 11, 71, 104, 174, 197 |
 | A store or call present in one side only, call order and call counts, wrong argument | 16, 66, 67, 68, 111, 113, 188 |
-| Aliasing and `#pragma optimize` | 44, 61a |
+| Aliasing and `#pragma optimize` | 44, 61a, 204, 206 |
 | `__asm` blocks | 69, 97 |
 | CFLAGS, `/Ox` against `/O2`, the sp5-pp toolchain pins | 12, 49, 58, 90, 91, 105, 106, 107, 115, 142 to 147 |
-| `.data`/`.rdata` placement, COMDATs, the import table | 98, 100 to 103, 148 to 158 |
-| Status and ruler traps: `match_count`, PROVEN, RELOC, residue attribution | 16, 18, 19, 19a, 32, 79, 83, 87, 88, 89, 93, 95, 96, 99, 108, 119, 160 |
+| `.data`/`.rdata` placement, COMDATs, the import table | 98, 100 to 103, 148 to 158, 211, 212, 213 |
+| Status and ruler traps: `match_count`, PROVEN, RELOC, residue attribution | 16, 18, 19, 19a, 32, 79, 83, 87, 88, 89, 93, 95, 96, 99, 108, 119, 160, 205, 207, 208, 209, 210, 211 |
 | Localising a fault in the linked residue (`drift_windows`, displacement windows) | 122 to 129, 136 to 141 |
 | Summaries of what the residue is | 50, 92, 139, 141 |
 | Per-function case notes (`gm_AllocSpieler`, `CrashDump`, `ServerMainThread`, `srv_LoadBuf`) | 81, 109, 110, 116, 117, 120, 126, 127, 140, 159, 185, 186, 187, 188, 196, 197, 198, 199 |
@@ -1522,7 +1529,7 @@ Two confirmed instances:
 **Before trusting a RELOC, resolve every `~~` operand.** Our object is
 unlinked, so its slot holds only the addend while the original's holds
 `symbol_va + addend`; subtracting gives the symbol VA, which
-`src/Develop/rebrew_globals.h`, `db/server.dll_functions.csv`, and
+`src/Develop/rebrew_globals.h`, `db/coverage-server.dll.toml`, and
 `src/rebrew-data.toml` can name. For string literals, read the bytes at the
 original's address straight out of the binary and compare.
 
@@ -4108,11 +4115,13 @@ The historical overshoot (`0x22ac8` against `0x22846`) is one era of the
 split-link; later prelayouts have been short (`0x221f6`) or exact. Residue
 is `scripts/gate.sh` `RESIDUE_BASELINE`.
 
-Finally, a negative worth recording so nobody repeats the search: **neither binary has a Rich
+Historical comparison only: **neither of these two files has a Rich
 header.** The DOS stub runs straight from the standard message to the PE signature, and both
 stubs are byte-identical across all 0x80 bytes. So the exact MSVC build IDs cannot be
 recovered from file metadata, and the compiler-identity question stays where section 92 left
-it: answerable only from emitted bytes.
+it: answerable only from emitted bytes in this pair. Matching local stock SERVER
+copies do contain Rich records; see `msvc6-link-layout.md` section 18. The
+configured project reference has altered headers relative to those copies.
 
 ## 99. The measuring script and the shipping pipeline had drifted apart
 
@@ -8727,3 +8736,458 @@ Finding 74.
   tails apart; with `return 1;` in the arms the second arm's call was cross-jumped into the first.
   Each arm declares its own message struct, which lets arm 2 store the type byte before the `e + 4`
   load (as in 0x5d63e0) while arm 1 stores `f8` first.
+
+## 203. A separate product local preserves the field-first x87 load with a shared constant
+
+Measured on `ahm_ExAllocAlchemist`, server VA `0x1000bdf0`, plain MSVC 6.0 SP5,
+`/O2 /Gd /DREBREW_ALLOW_NAKED`. The complete reference extent is 1002 bytes.
+Replacing the literal `0.33f` with `g_const_0_33` in an inline product changes
+`fld [esi+0x1c]; fmul [constant]` to `fld [constant]; fmul [esi+0x1c]`:
+998/1002 bytes match. Commuting the factors or reading the constant through a
+`const float*` produces the same failure.
+
+The matching source loads the field into a local and multiplies that local in
+a separate statement:
+
+```c
+float v = (float) rand_value;
+float* fp = (float*) (slot + 0x1c);
+float product;
+
+product = *fp;
+product *= g_const_0_33;
+v += product;
+*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
+v -= (double) *fp * g_const_0_1;
+*(float*) (slot + 0x10) = v;
+```
+
+This keeps the reference's separate `fild`, field-first `fld`/`fmul`, popping
+`faddp`/`fsubp`, and the `slot+0x18` copy between the updates. The product local
+introduces no emitted memory spill in this function. A float local declaration
+alone is not evidence of a rounding store; inspect the emitted instructions.
+The `(double)` factor remains necessary for this subtraction's `fsubp` form.
+Using a double factor for the *0.33 product* instead gives 1004 bytes and only
+634 matching bytes here; §189's success on `gm_AllocSpieler` is site-specific.
+
+The actual production file tests RELOC, **1002/1002**, with 46 relocation
+slots. The shared constant's reference address is `0x100256b8`. Evidence:
+`.scratch/native-float-scheduling/ahm-33-product-production.json`, the
+`ahm-33-product.c` diagnostic, and the adjacent rejected `ahm-33-*.json` files.
+The native linked audit confirms removal of one duplicate four-byte float;
+the effect on section extent is discussed in `msvc6-link-layout.md` §10.
+
+## 204. Extern float reads can change scheduling even when the value and width agree
+
+Same plain SP5 `/O2 /Gd` profile as §203. Two literal-to-symbol replacements
+in `ahm_ExAllocAlchemist` preserve all 1002 bytes:
+
+```c
+float fv = gm_RandomQuadratic() * g_const_7;
+*(int*) (slot + 0x20) = 0x41400000;
+*(float*) (slot + 0x14) = (fv + 30.0f) - g_const_2f;
+```
+
+The initializer keeps `fmul [g_const_7]` ahead of the `slot+0x20` integer
+store. Replacing `30.0f` with `g_const_30` does not preserve the following
+memory `fadd`: it hoists `fld [g_const_30]` above that store, uses a stack
+`fadd`, and adds a trailing `fstp st(0)`. The object grows from 1002 to 1006
+bytes. Values and native fixups are correct, but the instructions are not.
+
+In `gv_ExAllocGraveyardWorker` (`0x10011bf0`, reference 1040 bytes), replacing
+the 1000/8/4 float literals with their existing readonly symbols leaves the
+body at 1040 bytes but only 1026 match. The remaining difference includes an
+early `fdivr` ahead of the nearby integer stores. Replacing only 4 and 8 also
+reproduces the 14-byte mismatch. These literal spellings remain necessary to
+preserve these two bodies in the measured profile. Section 211 removes their
+duplicate definitions by changing the other readers to literals instead.
+
+The following negative controls are saved to avoid repeating them:
+
+| Site and variant | Object bytes | Matching bytes | Result |
+|---|---:|---:|---|
+| Alchemist: direct extern 30; compound add/sub; commuted add; double `fv` local | 1006 | 571 | SIZE_MISMATCH |
+| Alchemist: `*(float*)&g_const_30` or a mutable pointer local | 1006 | 571 | SIZE_MISMATCH |
+| Alchemist: block-scoped extern before or after the `fv` declaration | 1006 | 571 | SIZE_MISMATCH |
+| Alchemist: local const definition before/after the function, or local `selectany` owner | 1006 | 571 | SIZE_MISMATCH |
+| Alchemist: file-static const, file-static mutable float, or block-static const owner | 1006 | 571 | SIZE_MISMATCH |
+| Graveyard: const pointer/array read, quotient local, counter first, `for` initializer, commuted add | 1040 | 1026 | NEAR_MATCHING |
+| Graveyard: mutable-pointer dividend or all three constant reads | 1040 | 1026 | NEAR_MATCHING |
+| Graveyard: block-scoped externs before or after the float/int locals | 1040 | 1026 | NEAR_MATCHING |
+| Graveyard: local definitions of all three constants before/after the function, or `selectany` owners | 1040 | 1026 | NEAR_MATCHING |
+| Graveyard: file-static const, file-static mutable floats, or block-static const owners | 1040 | 1026 | NEAR_MATCHING |
+| Graveyard: volatile result/stores | 1040 | 1023 | NEAR_MATCHING |
+| Graveyard: float divisor | 1044 | 811 | SIZE_MISMATCH |
+| Graveyard: double add | 1044 | 814 | SIZE_MISMATCH |
+| Graveyard: volatile dividend, with or without volatile stores | 1044 | 835 | SIZE_MISMATCH |
+
+The cast probes only read the existing const objects; they do not change their
+definitions. Moving the externs changes their first declaration's scope, but
+does not fix these cases. This rejects these particular spellings, not every
+possible aliasing or declaration-order mechanism. An `/Oa` probe also failed;
+a bounded three-minute flag sweep found no match and was not exhaustive.
+
+The local-owner controls define the real constant values in the consuming
+translation unit and replace the literals with their names. Definitions
+before the function, definitions after it with preceding extern declarations,
+and `__declspec(selectany)` definitions all reproduce the same failures.
+Both unchanged literal controls still pass their complete 1002/1040-byte
+bodies. Local readonly ownership alone does not recover these instruction
+schedules. These isolated sources were tested with `--no-promote`; no
+production source, metadata, library or link changed. The first graveyard
+after-definition control lacked the declarations and failed to compile;
+it was corrected before recording the body comparison.
+
+Private ownership does not rescue these cases either. Fresh unique names
+with file-scope `static const float`, file-scope `static float`, and
+function-scope `static const float` all reproduce the same 1006/571
+alchemist and 1040/1026 graveyard failures. Their unchanged literal controls
+again pass both complete bodies. These tests distinguish internal linkage,
+mutability and static block scope from the prior extern-visible owners;
+they do not establish what MSVC would do for every constant expression or
+optimization profile. None was promoted or linked into the canonical DLL.
+
+Evidence: `.scratch/native-float-readers/`,
+`.scratch/native-float-scheduling/{ahm-summary,summary}.json`,
+`.scratch/native-float-scheduling/graveyard-quick-sweep.json`, and all eight
+`.scratch/native-float-aliases/*.json` with their corresponding C files.
+Local-owner controls and their unchanged full-match baselines are in
+`.scratch/native-local-float-owners/{probe.py,audit.json,*-*.c,*-*.json}`.
+Private-owner controls are in
+`.scratch/native-static-float-owners/{probe.py,audit.json,*-*.c,*-*.json}`.
+Production changes require a complete-body match before promotion.
+
+## 205. Recover a native address operand without changing its scale or access width
+
+Measured on the server with plain SP5 `/O2 /Gd`; office and kill-player tests
+also carry `/DREBREW_ALLOW_NAKED`. `gm_AllocGebaeude` retains its existing
+`#pragma optimize("y", off)` and existing block-fill prelude. These five
+complete bodies recover eight formerly numeric address operands:
+
+| Function | VA | Bytes | Newly native operands | Final object result |
+|---|---|---:|---:|---|
+| `plt_TableLookup` | `0x100151b0` | 41 | 2 | RELOC, 2 slots |
+| `amt_ExecuteOfficeAssignment` | `0x1000b4d0` | 836 | 3 | RELOC, 37 slots |
+| `gm_AllocBuildingDefaults` | `0x10017330` | 207 | 1 | RELOC, 9 slots |
+| `gm_KillSpieler` | `0x10017fb0` | 278 | 1 | RELOC, 15 slots |
+| `gm_AllocGebaeude` | `0x100174d0` | 1078 | 1 | RELOC, 49 slots |
+
+**Record fields preserve the scale.** The plant table at `0x1002da30` contains
+0x58 records of two ints, stride eight. Reading its fields emits the original
+scale-eight loads, with native DIR32 fixups for both displacements:
+
+```c
+*out = g_plant_pair_table[index].first;
+*(int*) ((char*) out + 4) = g_plant_pair_table[index].second;
+```
+
+**Narrow the read at the field, not the owner.** The office record is 24 bytes
+at `0x10029bb8`. The original reads at `0x10029bc0 + role*24` are byte reads
+of its int field `f8`; use `*(unsigned char*)&g_office_role_templates[role].f8`
+at both sites. The read at `0x10029bc8 + role*24` uses the int field `f10`.
+Declaring the whole table as bytes or comparing the full `f8` int would lose
+the recovered record stride or access semantics.
+
+**A packed record bound still folds into an immediate.** Building defaults
+start at `0x10030860`, 37 records of 21 bytes. The bound at `0x10030b6a` is
+one byte beyond the record array:
+
+```c
+(int) table_ptr < (int) (g_building_defaults + 37) + 1
+```
+
+This is a native symbol-plus-addend `cmp` immediate, without an extra load;
+`0x10030860 + 37*21 + 1 == 0x10030b6a`. See also §184.
+
+**Keep the low-word memory read of a wider owner.** The kill-player store is
+`*(short*)(entity + 0x28) = *(short*)&g_current_year;`. The owner is an int
+at reference `0x10035880`; the reference instruction reads only its low
+16 bits. This spelling preserves that read and adds its native fixup.
+
+**A plain symbol read can already give the required schedule.** The building
+ID store now reads `g_next_object_id` directly:
+
+```c
+*(int*) (geb + 1) = g_next_object_id;
+```
+
+This preserves 1078/1078 bytes. Reading through `volatile int*` instead keeps
+the size but matches only 982/1078: cleanup, the read, and subsequent stores
+are rescheduled. The older comment requiring a raw address was stale. Retest
+such comments against the current TU and flags before adding a barrier.
+
+Evidence: `.scratch/native-symbol-operands/*-test.json` and the saved
+`*-before.c` files. The canonical full verify passes 262/262 functions;
+all 597 mapped functions retain their addresses, and the linked image now
+has 3499 live base relocations, equal to the reference count. **Placement is
+still wrong at 164 sites** (145 data, 18 readonly, one final unwind operand).
+EXACT becoming RELOC here records real native fixups; it is not a loss of
+instruction matching and does not establish correct linked data placement.
+
+## 206. An unused extern declaration can affect another function's emitted schedule
+
+Removing only `extern const unsigned char g_rdata_restore[];` from
+`src/Develop/rebrew_globals.h` changes 80 bytes of `gm_Open`'s scheduling.
+Restoring it recovers the complete match. The declaration has no storage
+definition or active use; it does not restore the removed readonly blob.
+Mapped function addresses remain unchanged in this control.
+
+This is an empirical translation-unit sensitivity, not a demonstrated rule
+that declaration order controls a particular register or alias edge. Compiler
+symbol ordering is a hypothesis. §204's block-scoped float extern controls
+did not reproduce a useful scheduling change. Keep unused-declaration removal
+in the measured diff when cleaning a matching TU, and verify its affected
+functions. The native readonly-owner checkpoint and restoration are recorded
+in `docs/HANDOFF.md`; §195 describes a related declaration sensitivity.
+
+## 207. Inline pointer tables can cause a false instruction diff despite a full byte match
+
+This is a comparison-tool finding, not an MSVC instruction-selection rule.
+`gm_AllocGebaeude`'s 1078-byte body contains inline pointer-table data. Before
+the Rebrew fix, disassembling target addresses and candidate zero relocation
+slots produced different instruction boundaries: `rebrew test` passed the
+whole body while `rebrew diff` invented 39 structural rows and a missing tail.
+The scorer could also assign a nonzero mnemonic penalty to an explicit
+complete relocated-byte match.
+
+Whole-buffer equality after masking the **provided valid relocation slots**
+is decisive. Rebrew now uses reference boundaries for the equal candidate
+buffer, retains the candidate's raw bytes, and emits `db` for slices that
+cannot decode at that width. The scorer returns zero structural/byte metrics
+for this equality case, preserving its existing prologue bonus. A wrong
+unmasked byte or invalid relocation marker still follows the mismatch path.
+
+Regression example: `c3 39 78 01 10 15 78 01 10 90 c3` against
+`c3 00 00 00 00 00 00 00 00 90 c3`, relocation offsets `[1, 5]`. These
+are equal after explicit masking; decoding the pointer bytes as code is not
+evidence of a source mismatch.
+
+The actual building diff now has 295 exact rows, 51 relocation rows, and zero
+structural rows. Fix and regressions are in sibling Rebrew's
+`src/rebrew/matcher/scoring.py` and `tests/test_scoring.py`; 321 targeted
+scoring/diff/matching tests pass. Evidence:
+`.scratch/native-symbol-operands/building-symbol-fixed-diff.json` and
+`.scratch/native-symbol-operands/rebrew-matching-tests.log`.
+
+## 208. Multidimensional struct arrays nest declarators in the C AST
+
+This is a type-tool finding, not an MSVC codegen rule. Running `rebrew types`
+on the current source tree crashed on `float m[4][4]` in
+`src/GOLD.fcn_004497f0.c`. Tree-sitter represents this as an outer
+`array_declarator` whose `declarator` is another `array_declarator`, rather
+than a direct `field_identifier`. Assuming an immediate identifier raises
+`StopIteration` before layout checking begins.
+
+The shared struct parser now follows the declarator chain to the field name,
+keeps every array suffix, and returns an incomplete layout when no supported
+field identifier exists. Existing recursive type sizing/alignment supplies
+the multidimensional layout. The regression includes `float m[4][4]` and
+`double grid[2][3][4]` after a byte field, checking names, full spellings,
+offsets, alignment and final size.
+
+The actual command now parses 1016 structs with zero findings; that absence
+is not proof of every layout because the command only checks available
+decompiler evidence. All 34 type-model/CLI tests, Ruff check/format and mypy
+pass. The fix benefits the CLI, decompiler naming and BinSync consumers at
+their shared parser. Evidence:
+`.scratch/native-header-controls/canonical-release-types.json`; sibling
+Rebrew's `src/rebrew/types.py` and `tests/test_types.py`.
+
+## 209. A masked call match does not establish the callee's identity
+
+Plain MSVC 6 SP5, project `/O2 /Gd` plus `/MT`: `vfs_FlushStream` at
+`0x10003b90` in `src/Develop/Units/vfs/vfs2.c` had the wrong API at its
+flush call. `fread(buffer, 1, used, stream)` and
+`fwrite(buffer, 1, used, stream)` have the same argument shape. The reference
+call at `0x10003bc5` targets stock `fwrite` at `0x1001a931`; the old native
+call targeted `fread` at `0x1001aa6a`. Changing the C callee to `fwrite`
+preserves all 182 bytes under object relocation masking (RELOC, two fixups)
+and corrects the linked call. The stream's write-mode check and compressed
+buffer flush agree with that binding. This is a source-semantic correction,
+not an optimization-flag change or a CRT reimplementation.
+
+Stock `memcpy` and `memmove` present a stronger ambiguity: both COFF `.text`
+contributions are identical across all 821 bytes and 46 relocations.
+`lib-match` correctly reports both names; body equality cannot choose one.
+Their genuine CRT callers identify the reference binding. Swapping their
+existing `/INCLUDE` positions puts `memmove` at `0x1001b200` and `memcpy`
+at `0x1001eab0`, fixing ten linked CRT callsites without changing either
+stock body. Details and callers are in `msvc6-link-layout.md` section 19.
+
+The final raw PE `.text` audit masks only the actual HIGHLOW slots, not all
+COFF relocation fields. A resolved direct-call REL32 displacement is not a
+PE HIGHLOW slot, so wrong callees remain visible to this audit even when the
+object comparison passes. After the binding fixes and section 20's native
+alignment correction, the complete 143360-byte raw section has zero
+unmasked differences and the same 3140 HIGHLOW sites. There are still 4644
+raw differing bytes inside those slots because data/IAT addresses differ;
+this establishes neither raw code equality nor whole-file equality.
+
+Evidence: `.scratch/native-data-layout-audit/flush-fwrite-test.json`,
+`unmasked-text-instructions.json`, `memory-section-hashes.json`,
+`correct-memory-callers.json`, and
+`canonical-alias-audit.json`.
+
+## 210. Zero-code CRT aliases belong in library identity candidates
+
+This is a library-tool finding. The unmodified SP5 `LIBCMT.LIB` has 40
+`build\intel\st_obj\tcmap` members with machine zero, one empty `.text`,
+and weak `SEARCH_ALIAS` symbols. For example `__tcschr` forwards to
+`__mbschr`. LIEF rejects the machine-zero object, and a body-only library
+index omitted its alias. It could consequently report `__mbschr` as
+uniquely identified when the bytes cannot distinguish the two names.
+
+Rebrew now parses these symbols with LIEF, normalizing the machine in an
+in-memory parser copy only, and resolves aliases after indexing archive
+bodies. No stock library or linker input is changed. AUX records count in
+the target's raw symbol index; the compact LIEF symbol iterator does not
+include them, so the lookup explicitly accounts for them. Alias chains
+forward the existing body and relocation mask. Unresolved targets and
+cycles without a body do not supply bytes or match anything. Provenance
+records the alias member followed by the actual code owner.
+
+The real `lib-match --va 0x1002377b` now returns `__mbschr` and `__tcschr`
+as candidates, with null unique symbol/object fields. Regression checks
+exercise machine-zero and ordinary i386 objects, raw indices after an AUX
+record, chains, absent targets, cycles, batch/single-VA JSON, and an unchanged
+archive. All 40 stock aliases are now indexed with no unresolved targets,
+and the archive's SHA-256 remains unchanged. All 89 library/COFF tests pass;
+Ruff and mypy pass. Evidence:
+`.scratch/native-data-layout-audit/{alias-libmatch,stock-alias-index}.json`; fix in sibling
+Rebrew's `gen_flirt_pat.py`, `lib_match.py`, `tests/test_lib_match.py`, and
+`CHANGELOG.md`. Section 20 of the linker companion records what retaining
+one such stock member does to native alignment.
+
+## 211. Change the other readers to literals when symbolizing a literal breaks scheduling
+
+Plain SP5 `/O2 /Gd`: the three `g_const_30` reads inside `gm_AllocSpieler`
+at `0x10018850` can instead use `30.0f`, preserving all 3689 bytes under
+relocation masking (140 fixups). The existing unused extern declaration is
+retained. The reverse transformation need not reproduce section 204's
+alchemist scheduling failure: these are different functions and expressions.
+
+`gm_CalculateProductionValue` at `0x10019720` uses project
+`/O2 /Gd /DREBREW_ALLOW_NAKED` and its existing scoped
+`#pragma optimize("a", on)`. Changing the no-manufacturer arm from
+`mod_value = g_graveyard_const_c;` to `mod_value = 4.0f;` preserves the entire
+396-byte body and its 16 fixups. Full unchanged controls pass both bodies.
+The pragma, declarations and other source shapes are retained.
+
+These were the remaining active readers of the named 30/4 float owners.
+The named 1000/8 owners already had no active readers. All four duplicate
+ordinary `.rdata` definitions can therefore be removed, keeping the real
+compiler literal COMDATs already required by alchemist and graveyard code.
+The extern declarations in `game_float_constants.c` retain inventory labels
+and define no extra storage. No assembler aliases, accessor functions,
+library changes or postlink rewriting are needed.
+
+Two native links check more than the isolated bodies. Changing the readers
+alone leaves all extents unchanged and gives 31477 overlapping differences
+at that diagnostic timestamp. Removing the four definitions as well reduces
+`.rdata` VirtualSize from `0x2ea1` to `0x2e91`, leaving 16 bytes of excess
+against `0x2e81`; the diagnostic has 30088 differences and the unchanged
+16384-byte length gap. All existing mapped function positions, the 100 import
+identities, DLL order, 23 displaced IAT slots and named hints remain unchanged.
+The complete raw `.text` still matches after masking only its actual HIGHLOW
+sites, and both images have precisely the same code fixup sites.
+
+The readonly checker explicitly maps the four inventory labels to their real
+MSVC `__real@4@...` symbols. It checks bytes, readonly flags and full extents
+for all 52 values, and rejects a remaining named duplicate. The current
+native build passes; the old native diagnostic fails with
+`Duplicate literal owner: g_graveyard_const_a`. This checks values at their
+actual native locations, not equality of their locations with the reference.
+At this checkpoint the compiler pools are at `0x100252e8..0x100252f4`, and
+placement remains unfinished. Linker companion section 23 records the
+ownership result; section 24 restores the two strings' positions with native
+object ordering and documents rejected constant and `/ORDER` controls.
+
+Evidence: `.scratch/native-crt-storage-builds/literal_callers.py`,
+`literal-callers-audit.json`, `link_literals.py`, `literal-links-audit.json`,
+`canonical-literals-readonly.txt` and `rejected-duplicate-readonly.txt`.
+
+## 212. Literal doubles can preserve memory operands and share the stock CRT pool
+
+Plain SP5 `/O2 /Gd`, project `/MT`: both `g_const_one_d` reads inside
+`gm_AllocSpieler` at `0x10018850` can use `1.0`, retaining the complete
+3689-byte RELOC body and 140 fixups. The two expressions subtract a float
+random value from the double constant before trait interpolation. Existing
+casts, statements and unused extern declarations are kept. In these
+expressions the literal rewrite preserves the required memory operands;
+do not assume that every literal one becomes `fld1` or every operation folds.
+
+`cm_ExChangeDesire` at `0x1000e9c0` can likewise replace its three active
+`_g_stat_min_d` reads with `0.0`: two comparisons and the clamp assignment.
+Its whole 214-byte body still passes RELOC with ten fixups. Keep the goto
+join, double temporary, slot-addressing macro and extern declarations.
+In this source shape zero does not introduce a shorter incompatible `ftst`
+or load. Full unchanged controls pass both functions.
+
+These remove all active readers of the two named double definitions.
+Those definitions become extern inventory labels; the actual
+`__real@8@00000000000000000000` and
+`__real@8@3fff8000000000000000` COMDATs provide zero and one. Stock CRT
+`cvt.obj` and `testfdiv.obj` use these same pool symbols. The reference
+pointer operands prove the intended sharing: stock `__positive`'s operand
+at `0x1001f2bb` targets `0x10025698`; `__ms_p5_test_fdiv`'s operand at
+`0x1001f1d0` targets `0x100257d8`. Previously the native CRT instead read
+separate doubles at `0x100260f0` and `0x100260b0`. Equal values alone would
+not establish that ownership relationship. No CRT body is changed.
+
+A separate successful but unpromoted probe changes only graveyard's
+`1000.0f` read back to `g_graveyard_const_a`, adding its const extern
+declaration. `gv_ExAllocGraveyardWorker` at `0x10011bf0` remains 1040-byte
+RELOC with 34 fixups. This leaves its 8/4 literals unchanged. It does not
+contradict section 204's failed rewrite of all three values at once; the
+individual transformation has a different scheduling effect. Keeping the
+named 1000 owner in native controls worsens placement, so it stays diagnostic.
+
+The double rewrites and shared providers are promoted. All 52 readonly
+checks now include six actual compiler-pool owners. The pre-change native
+DLL fails the new duplicate guard for `_g_stat_min_d`. Native placement
+results and the rejected zlib/code-order controls are in linker companion
+sections 25–26. Evidence: `.scratch/native-pool-ownership/{readers.py,
+readers-audit.json,pool-users.json,link.py,links-audit.json}` and
+`rejected-double-owners.txt`.
+
+## 213. A pooled empty string can occupy writable BSS
+
+Measured in the native plain-SP5 CMake build, `/O2 /Gd /MT`, with the existing
+Win32 and `REBREW_ALLOW_NAKED` project definitions. `zutil.c` contains:
+
+```c
+const char *z_errmsg[10] = {
+    "need dictionary", "stream end", "", "file error", "stream error",
+    "data error", "insufficient memory", "buffer error",
+    "incompatible version", ""
+};
+```
+
+Both empty strings use the same public compiler symbol
+`??_C@_00A@?$AA@`. Its actual COFF section is a **one-byte `.bss` COMDAT**,
+flags `0xc0301080` (uninitialized, writable, align four). It has no initialized
+file bytes. The other message literals occupy initialized `.data` COMDATs.
+The pointer table itself is 40 initialized bytes with ten DIR32 fields.
+`const char *` qualifies the pointed-to characters; this declaration does
+not make the pointer array readonly.
+
+The matched code's references establish `_z_errmsg` at reference
+`0x100294d4`, versus native `0x100294d0`. Its two empty-message pointer
+fields, reference `0x100294dc` and `0x100294f8`, both target `0x10034620`.
+The corresponding native fields at `0x100294d8` and `0x100294f4` both target
+`0x117650c8`. Thus the small zero at the reference address has a real compiler
+literal owner, even though it is not a direct code operand or an initialized
+string contribution. No new definition or padding is added.
+
+Storage classification is not determined by zero bytes alone. Section 212's
+double-zero literal is a readonly `.rdata` COMDAT, and the named
+`const float g_const_0_0 = 0.0f` remains in ordinary readonly `.rdata`.
+Those existing native value checks pass. This empty-string observation is
+specific to the measured source/profile; it is not a rule for every string
+qualification or compiler flag.
+
+Evidence: `.scratch/native-storage-bindings/{audit.py,audit.json,operands.json}`,
+the canonical `zutil.c.obj`, and its source in `references/zlib-1.1.3/zutil.c`.
+Linker companion sections 27–28 document the operand-based storage audit and
+the separate successful type-table ownership change. No zlib or CRT body
+changes accompany either finding.

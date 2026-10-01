@@ -8,8 +8,8 @@
 
 int __cdecl gv_AllocGraveyardField(unsigned char* field);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-extern int g_field_worker_count[4];
-extern int g_field_entry_count[4];
+extern const int g_field_worker_count[4];
+extern const int g_field_entry_count[4];
 
 // SIZE 0x24
 typedef struct {

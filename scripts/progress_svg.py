@@ -8,7 +8,7 @@ that view's progress bar counts. A function whose address falls in the
 target's ``external_ranges`` is linked library code. It is drawn, and it is
 left out of the matched/game fraction.
 
-Regenerate after the coverage database changes:
+Regenerate after the coverage data changes:
 
     python3 scripts/progress_svg.py
 """
@@ -16,10 +16,11 @@ Regenerate after the coverage database changes:
 from __future__ import annotations
 
 import json
-import sqlite3
 import tomllib
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
+from rebrew.coverage_toml import CoverageTomlError, CoverageSnapshot, load_coverage_from
 
 # Solid fills from recoverage potato.COLORS. size/error/no-size are the
 # function statuses the dashboard folds into a neighbour; they stay distinct
@@ -120,18 +121,22 @@ def in_ranges(va: int, ranges: tuple[tuple[int, int], ...]) -> bool:
     return any(lo <= va <= hi for lo, hi in ranges)
 
 
-def load_statuses(conn: sqlite3.Connection, target: str) -> dict[int, str]:
-    rows = conn.execute(
-        "SELECT va, status, markerType FROM functions WHERE target = ?",
-        (target,),
-    ).fetchall()
+def load_statuses(snapshot: CoverageSnapshot, target: str) -> dict[int, str]:
+    """Per-VA status, read from the target's coverage snapshot.
+
+    The snapshot is rebrew's coverage-<target>.toml, parsed by rebrew itself,
+    so this script and the dashboard read the same rows through the same
+    reader. Its function rows are data rows too (GLOBAL/DATA/VTABLE/STRING
+    markers); those are skipped here exactly as the SQL filter used to.
+    """
     found: dict[int, str] = {}
-    for va, status, marker in rows:
-        if marker in _DATA_MARKERS:
+    for fn in snapshot.functions:
+        if fn.markerType in _DATA_MARKERS:
             continue
+        va = fn.va
         if not isinstance(va, int):
             raise SystemExit(f"{target}: function va {va!r} is not an int")
-        name = (status or "").strip()
+        name = (fn.status or "").strip()
         if not name:
             raise SystemExit(f"{target}: function {va:#x} has an empty status")
         previous = found.get(va)
@@ -154,7 +159,7 @@ def block_state(status: str | None, library: bool, target: str, va: int) -> str:
 
 def load_blocks(
     root: Path,
-    conn: sqlite3.Connection,
+    snapshot: CoverageSnapshot,
     target: str,
     inventory_file: str,
     ranges: tuple[tuple[int, int], ...],
@@ -165,7 +170,7 @@ def load_blocks(
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, list) or not payload:
         raise SystemExit(f"{target}: inventory {path} is empty")
-    statuses = load_statuses(conn, target)
+    statuses = load_statuses(snapshot, target)
     seen: set[int] = set()
     ordered: list[tuple[int, str]] = []
     for entry in payload:
@@ -471,26 +476,29 @@ def collect(root: Path) -> list[tuple[str, tuple[str, ...]]]:
     if not isinstance(default, str) or default not in targets_cfg:
         raise SystemExit("default_target is missing from targets")
     names = [default, *[name for name in targets_cfg if name != default]]
-    db_path = root / str(db_dir) / "coverage.db"
-    if not db_path.is_file():
-        raise SystemExit(f"coverage database not found at {db_path}")
-    conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
-    try:
-        collected: list[tuple[str, tuple[str, ...]]] = []
-        for name in names:
-            table = targets_cfg[name]
-            if not isinstance(table, dict):
-                raise SystemExit(f"{name}: target table is not a table")
-            inventory = table.get("inventory_file")
-            if not isinstance(inventory, str) or not inventory:
-                raise SystemExit(f"{name}: no inventory_file")
-            states = load_blocks(
-                root, conn, name, inventory, parse_ranges(table.get("external_ranges"), name)
-            )
-            collected.append((name, states))
-        return collected
-    finally:
-        conn.close()
+    directory = root / str(db_dir)
+    if not sorted(directory.glob("coverage-*.toml")):
+        raise SystemExit(
+            f"no coverage-<target>.toml found in {directory}; "
+            "run 'rebrew build-db' to write it"
+        )
+    collected: list[tuple[str, tuple[str, ...]]] = []
+    for name in names:
+        table = targets_cfg[name]
+        if not isinstance(table, dict):
+            raise SystemExit(f"{name}: target table is not a table")
+        inventory = table.get("inventory_file")
+        if not isinstance(inventory, str) or not inventory:
+            raise SystemExit(f"{name}: no inventory_file")
+        try:
+            snapshot = load_coverage_from(directory, name)
+        except CoverageTomlError as exc:
+            raise SystemExit(f"{name}: {exc}") from exc
+        states = load_blocks(
+            root, snapshot, name, inventory, parse_ranges(table.get("external_ranges"), name)
+        )
+        collected.append((name, states))
+    return collected
 
 
 def main() -> None:

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "../../DieGildeAddOn/game/entity.h"
 
+extern void* g_stream_pool;
 void __cdecl free(void*);
 int __cdecl vfs_CleanupObject(char*);
 int __cdecl vfs_DestroyEntity(char*);
@@ -18,12 +19,9 @@ int __cdecl vfs_FlushAndClose(int);
  *
  * The reference places "rb\\0\\0" (fopen mode), then the gzip magic dwords
  * 0x1f / 0x8b, then the vfs.c path and the gz-compressed-file message.
- * Without the 12-byte prefix, this TU's named strings start at 0x1002944c
- * and displace everything after them.  Callers already push/cmp the raw
- * addresses (gm_Open, vfs_OpenStream, vfs_ReadData); nothing names these
- * symbols, but they must occupy this exact span. */
+ * The fopen mode is emitted naturally by gm_Open; these globals own the
+ * magic dwords and messages referenced by VFS callers. */
 
-char s_gzip_mode_rb[4] = { 'r', 'b', 0, 0 };
 // GLOBAL: SERVER 0x10029450
 unsigned int g_gzip_magic_1f = 0x1f;
 // GLOBAL: SERVER 0x10029454
@@ -74,7 +72,7 @@ int __cdecl vfs_CleanupObject(char* obj)
 // CloseVfsStream
 
 
-extern char g_stream_pool[1];
+extern void* g_stream_pool;
 
 int __cdecl CloseVfsStream(void* stream)
 {
@@ -130,7 +128,7 @@ int __cdecl CloseVfsStream(void* stream)
 				}
 		}
 		g_stream_count--;
-		m_pool_free((int*) 0x10034670, stream);
+		m_pool_free((int*) &g_stream_pool, stream);
 	}
 	return result;
 }

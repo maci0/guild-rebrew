@@ -47,14 +47,9 @@ def object_symbols(objdir: Path) -> dict[str, tuple[Path, str]]:
 
 def catalog() -> dict[str, tuple[int, int]]:
     """normalized name -> (VA, size) for every LIBRARY entry."""
-    out: dict[str, tuple[int, int]] = {}
-    for line in (ROOT / "db/server.dll_functions.csv").read_text().splitlines():
-        if not line or line.startswith(("#", "address")):
-            continue
-        addr, name, _sym, typ, size = line.split("|")
-        if typ == "library":
-            out.setdefault(norm(name), (int(addr, 16), int(size)))
-    return out
+    import catalog_functions
+
+    return {norm(name): row for name, row in catalog_functions.library_functions().items()}
 
 
 def cand_bytes(obj: Path, raw: str) -> tuple[bytes, set[int]]:

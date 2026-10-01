@@ -1,9 +1,13 @@
+format = 1
+
 ["SERVER.0x1003467c"]
 note = "connection counter"
 name = "g_connection_counter"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x101deaec"]
 note = "listen socket"
@@ -17,31 +21,20 @@ size = 4
 note = "first player slot (stride 0x264264 bytes)"
 name = "g_connections"
 section = ".data"
-type = "unsigned char[]"
+type = "unsigned char[22566276]"
 status = "VERIFIED"
-size = 1
-
-["SERVER.0x114ffe20"]
-note = "overflow slot"
-name = "g_player_slot_overflow"
-section = ".data"
-type = "unsigned int"
-status = "VERIFIED"
-size = 4
-
-["SERVER.0x101deb14"]
-name = "g_player_slot_field"
-section = ".data"
-type = "unsigned int"
-status = "VERIFIED"
-size = 4
+size = 22566276
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x101deac0"]
-name = "g_download_total_size"
+name = "g_download_state"
 section = ".data"
-type = "unsigned int"
+type = "struct DownloadState"
 status = "VERIFIED"
-size = 4
+size = 44
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x101deac4"]
 name = "g_download_received"
@@ -49,6 +42,8 @@ section = ".data"
 type = "unsigned int"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x101deac8"]
 name = "g_download_slots"
@@ -56,6 +51,8 @@ section = ".data"
 type = "unsigned int[8]"
 status = "VERIFIED"
 size = 32
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x101deae8"]
 name = "g_download_buffer"
@@ -63,13 +60,8 @@ section = ".data"
 type = "unsigned int"
 status = "VERIFIED"
 size = 4
-
-["SERVER.0x101de5a4"]
-name = "g_office_slots_00_entityId"
-section = ".data"
-type = "int"
-status = "VERIFIED"
-size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x101de454"]
 note = "auxiliary entity count (loadsave)"
@@ -98,8 +90,10 @@ size = 4
 name = "g_next_object_id"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10035434"]
 name = "g_citizen_count"
@@ -119,56 +113,76 @@ size = 1
 name = "s_ahm_AllocAhmInfo"
 section = ".data"
 type = "char[]"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256b4"]
 name = "g_const_0_1"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256b8"]
 name = "g_const_0_33"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256c0"]
 name = "g_const_2f"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+size = 4
 
 ["SERVER.0x100256c4"]
 name = "g_const_30"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256c8"]
 name = "g_const_7"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256a0"]
 name = "g_const_1_0f"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256ac"]
 name = "g_const_1_over_252"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+size = 4
 
 ["SERVER.0x100256b0"]
 name = "g_const_0_5"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1003546c"]
 name = "g_entity_table_end"
@@ -180,9 +194,11 @@ size = 4
 ["SERVER.0x100358a0"]
 name = "g_slot_table"
 section = ".data"
-type = "unsigned char[2]"
+type = "unsigned char[414720]"
 status = "VERIFIED"
-size = 2
+size = 414720
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x1014d8c0"]
 name = "g_entity_ptr"
@@ -205,47 +221,32 @@ type = "unsigned short*"
 status = "VERIFIED"
 size = 4
 
-["SERVER.0x100a8cf8"]
-name = "g_player_record_src"
-section = ".data"
-type = ""
-status = "VERIFIED"
-size = 4
-
-["SERVER.0x1009b764"]
-name = "g_player_record_dst"
-section = ".data"
-type = ""
-status = "VERIFIED"
-size = 4
-
 ["SERVER.0x1002dde0"]
 name = "g_producer_id_table"
 section = ".data"
 type = "int[2720]"
-status = "VERIFIED"
+status = "DRIFT"
 size = 10880
-
-["SERVER.0x1009b770"]
-name = "g_slot_array"
-section = ".data"
-type = "char*"
-status = "VERIFIED"
-size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b98"]
 section = ".data"
 name = "g_query_filter_owner"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b9e"]
 section = ".data"
 name = "g_query_filter_state"
 type = "unsigned char"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1003545e"]
 section = ".data"
@@ -300,36 +301,46 @@ size = 4
 section = ".data"
 name = "g_query_filter_extra2"
 type = "short"
-status = "VERIFIED"
+status = "DRIFT"
 size = 2
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b8e"]
 section = ".data"
 name = "g_query_filter_extra3"
 type = "short"
-status = "VERIFIED"
+status = "DRIFT"
 size = 2
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b84"]
 section = ".data"
 name = "g_filter_extra5"
 type = "unsigned char"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b88"]
 section = ".data"
 name = "g_query_filter_extra1"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b90"]
 section = ".data"
 name = "g_query_filter_extra4"
 type = "unsigned char"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10035444"]
 section = ".data"
@@ -395,47 +406,22 @@ type = "short"
 status = "VERIFIED"
 size = 2
 
-["SERVER.0x1009acfc"]
-name = "g_some_limit"
-section = ".data"
-type = "int"
-status = "VERIFIED"
-size = 4
-
-["SERVER.0x100358fc"]
-name = "g_entity_ref_table"
-section = ".data"
-type = "int"
-status = "VERIFIED"
-size = 4
-
-["SERVER.0x10035a04"]
-name = "g_entity_type_bytes"
-section = ".data"
-type = "unsigned char[1]"
-status = "VERIFIED"
-size = 1
-note = "byte: reference writes it with mov byte ptr [ecx+0x10035a04],dl (0x10015542), beside the +0x10035a05 byte store"
-
-["SERVER.0x100358a2"]
-name = "g_entity_state_base"
-section = ".data"
-type = "char[2]"
-status = "VERIFIED"
-size = 2
-
 ["SERVER.0x1002d4ec"]
 name = "g_file_version"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766100"]
 name = "g_log_buffer"
 section = ".data"
-type = "char[256]"
+type = "char[260]"
 status = "VERIFIED"
-size = 256
+size = 260
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766204"]
 name = "g_log_file_handle"
@@ -443,6 +429,8 @@ section = ".data"
 type = "int"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10027078"]
 name = "g_log_level_table"
@@ -472,50 +460,66 @@ status = "VERIFIED"
 name = "g_array_count"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034628"]
 name = "g_stat1"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1003462c"]
 name = "g_stat2"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034630"]
 name = "g_stat3"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034634"]
 name = "g_stat4"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1003463c"]
 name = "g_alloc_report_groups"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034640"]
 name = "g_array_ptr"
 section = ".data"
 type = "void*"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640c4"]
 name = "g_list_head"
 section = ".data"
-type = "int"
+type = "struct GroupNode*"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10028b04"]
 name = "s_Memory_Shutdown_Anomaly"
@@ -556,27 +560,36 @@ size = 1
 name = "g_stream_count"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034670"]
 name = "g_stream_pool"
 section = ".data"
-type = "char[1]"
-status = "VERIFIED"
+type = "void*"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+size = 4
 
 ["SERVER.0x10030b94"]
 name = "g_query_filter_max_id"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
 section = ".data"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b9c"]
 name = "g_query_filter_type"
 type = "unsigned short"
-status = "VERIFIED"
+status = "DRIFT"
 section = ".data"
 size = 2
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1003543c"]
 name = "g_active_player_count"
@@ -587,24 +600,21 @@ size = 4
 
 ["SERVER.0x101398a0"]
 name = "g_dispatch_table_b"
-type = "int[1]"
+type = "int[20488]"
 status = "VERIFIED"
 section = ".data"
-size = 4
-
-["SERVER.0x1013989c"]
-name = "g_dispatch_table_a"
-type = "int[1]"
-status = "VERIFIED"
-section = ".data"
-size = 4
+size = 81952
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034638"]
 name = "g_alloc_counter"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
 section = ".data"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10035450"]
 name = "g_query_limit"
@@ -618,28 +628,36 @@ name = "g_office_slots"
 type = "char[1008]"
 status = "VERIFIED"
 section = ".data"
-size = 4
+size = 1008
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256bc"]
 name = "g_const_0_2f"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256cc"]
 name = "g_const_0_0"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640a0"]
-name = "g_alloc_root_name"
-type = "int"
+name = "g_alloc_root"
+type = "struct GroupNode"
 status = "VERIFIED"
 section = ".data"
-size = 1
+size = 40
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640b0"]
 name = "g_alloc_root_size_total"
@@ -647,6 +665,8 @@ type = "int"
 status = "VERIFIED"
 section = ".data"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640b4"]
 name = "g_alloc_root_count"
@@ -654,6 +674,8 @@ type = "int"
 status = "VERIFIED"
 section = ".data"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640b8"]
 name = "g_alloc_root_size_max"
@@ -661,6 +683,8 @@ type = "int"
 status = "VERIFIED"
 section = ".data"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640bc"]
 name = "g_alloc_root_count_max"
@@ -668,6 +692,8 @@ type = "int"
 status = "VERIFIED"
 section = ".data"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640c0"]
 name = "g_alloc_root_spare"
@@ -675,6 +701,8 @@ type = "int"
 status = "VERIFIED"
 section = ".data"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1003540c"]
 name = "g_dynamic_count"
@@ -686,9 +714,11 @@ size = 4
 ["SERVER.0x1002c050"]
 name = "g_alchemy_entity_table"
 type = "int[232]"
-status = "VERIFIED"
+status = "DRIFT"
 section = ".data"
 size = 928
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10028938"]
 name = "g_default_group_name"
@@ -710,41 +740,44 @@ type = "int"
 status = "VERIFIED"
 section = ".data"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10035478"]
 name = "g_save_extra_field"
-type = "int"
+type = "int[8]"
 status = "VERIFIED"
 section = ".data"
-size = 4
+size = 32
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025680"]
 name = "g_graveyard_const_a"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100257c4"]
 name = "g_graveyard_const_b"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100257c8"]
 name = "g_graveyard_const_c"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
 size = 4
-
-["SERVER.0x10035a0c"]
-name = "g_entity_records"
-type = "unsigned int[768]"
-status = "VERIFIED"
-section = ".data"
-size = 3072
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10035470"]
 name = "g_save_header_aux"
@@ -776,78 +809,94 @@ size = 4
 
 ["SERVER.0x10025fa0"]
 name = "g_const_1_over_720"
-type = "float"
-status = "VERIFIED"
+type = "const double"
+status = "DRIFT"
 section = ".rdata"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025fa8"]
 name = "g_const_896_0"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025fac"]
 name = "g_const_0_06875"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025fb0"]
 name = "g_const_2_2"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025fb4"]
 name = "g_const_1_5"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025fb8"]
 name = "g_const_0_01"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025fbc"]
 name = "g_const_1_over_32767"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100257bc"]
 name = "g_const_42_0"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
 section = ".rdata"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+size = 4
 
 ["SERVER.0x100257d0"]
 name = "g_const_half"
-type = "float"
-status = "VERIFIED"
+type = "const double"
+status = "DRIFT"
 section = ".rdata"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029bb8"]
 name = "g_office_role_templates"
 type = "OFFICE_ROLE_TEMPLATE[40]"
-status = "VERIFIED"
+status = "DRIFT"
 section = ".data"
 size = 160
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1009aca0"]
 name = "g_entity_base"
-type = "unsigned char[]"
+type = "unsigned char[2752]"
 section = ".data"
 status = "VERIFIED"
-size = 1
-
-["SERVER.0x1009b760"]
-name = "g_entity_end"
-type = "unsigned char"
-section = ".data"
-status = "VERIFIED"
-size = 1
+size = 2752
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x1002415c"]
 name = "__imp__accept@12"
@@ -855,6 +904,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024160"]
 name = "__imp__listen@8"
@@ -862,6 +913,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024164"]
 name = "__imp__send@16"
@@ -869,6 +922,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024168"]
 name = "__imp__recv@16"
@@ -876,20 +931,26 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002416c"]
 name = "__imp__ioctlsocket@12"
 type = "void*"
 section = ".idata"
-status = "DRIFT"
+status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:52:16+00:00"
 
 ["SERVER.0x10024170"]
 name = "__imp__WSAGetLastError@0"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024174"]
 name = "__imp__shutdown@8"
@@ -897,6 +958,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024178"]
 name = "__imp__WSAStartup@8"
@@ -904,6 +967,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002417c"]
 name = "__imp__WSACleanup@0"
@@ -911,6 +976,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024180"]
 name = "__imp__socket@12"
@@ -918,6 +985,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024184"]
 name = "__imp__setsockopt@20"
@@ -925,6 +994,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024188"]
 name = "__imp__htonl@4"
@@ -932,6 +1003,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002418c"]
 name = "__imp__htons@4"
@@ -939,6 +1012,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024190"]
 name = "__imp__bind@12"
@@ -946,6 +1021,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024194"]
 name = "__imp__sendto@24"
@@ -953,6 +1030,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024198"]
 name = "__imp__closesocket@4"
@@ -960,6 +1039,8 @@ type = "void*"
 section = ".idata"
 status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024000"]
 name = "__imp__GetLocalTime@4"
@@ -972,190 +1053,244 @@ size = 4
 name = "__imp__OutputDebugStringA@4"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024008"]
 name = "__imp__UnhandledExceptionFilter@4"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002400c"]
 name = "__imp__VirtualFree@12"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024010"]
 name = "__imp__CloseHandle@4"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024014"]
 name = "__imp__ReadProcessMemory@20"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024018"]
 name = "__imp__VirtualQuery@12"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002401c"]
 name = "__imp__GetTimeFormatA@24"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024020"]
 name = "__imp__GetDateFormatA@24"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024024"]
 name = "__imp__WriteFile@20"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024028"]
 name = "__imp__SetFilePointer@16"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002402c"]
 name = "__imp__GetCurrentProcess@0"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024030"]
 name = "__imp__VirtualAlloc@16"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024034"]
 name = "__imp__ReadFile@20"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024038"]
 name = "__imp__CreateFileA@28"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002403c"]
 name = "__imp__GetModuleFileNameA@12"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024040"]
 name = "__imp__SetUnhandledExceptionFilter@4"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024044"]
 name = "__imp__GetStdHandle@4"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024048"]
 name = "__imp__AllocConsole@0"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002404c"]
 name = "__imp__FreeConsole@0"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024050"]
 name = "__imp__CreateThread@24"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024054"]
 name = "__imp__TerminateThread@8"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024058"]
 name = "__imp__Sleep@4"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002405c"]
 name = "__imp__GetTickCount@0"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024060"]
 name = "__imp__GetPrivateProfileStringA@24"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024064"]
 name = "__imp__GetPrivateProfileIntA@16"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024068"]
 name = "__imp__SetThreadPriority@8"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002406c"]
 name = "__imp__GetCurrentThread@0"
 type = "void*"
 section = ".idata"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10024070"]
 name = "__imp__GetStartupInfoA@4"
@@ -1483,25 +1618,32 @@ status = "VERIFIED"
 
 ["SERVER.0x100252e8"]
 section = ".rdata"
-name = "g_rdata_restore"
-status = "VERIFIED"
-type = "const unsigned char[]"
+name = "unz_copyright"
+status = "DRIFT"
+type = "const char[44]"
+size = 44
+updated_by = "verify"
+updated_at = "2026-10-01T03:52:16+00:00"
 
 ["SERVER.0x1002b600"]
 section = ".data"
 name = "g_data_restore_gap"
-status = "VERIFIED"
+status = "DRIFT"
 
 # ---- GROUP C: CRT-startup + allocator-pool globals (data_globals.c) ----
 type = "unsigned char[0x9a00]"
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x10033b9c"]
 name = "g_block_alloc_threshold"
 type = "unsigned int"
 section = ".bss"
 note = "block alloc threshold (allocator mode 2)"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100354b4"]
 name = "_osver"
@@ -1574,6 +1716,8 @@ section = ".bss"
 note = "max pool allocation size (allocator mode 3)"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1176644c"]
 name = "_crtheap"
@@ -1582,6 +1726,8 @@ section = ".bss"
 note = "process heap handle"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766450"]
 name = "__active_heap"
@@ -1590,29 +1736,37 @@ section = ".bss"
 note = "allocator mode: 3=pool, 2=block"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11767584"]
 name = "_acmdln"
 type = "void *"
 section = ".bss"
 note = "GetCommandLineA result"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x11767588"]
 name = "g_dllmain_user_handler"
 type = "int (__stdcall *)(void *, unsigned int, void *)"
 section = ".bss"
 note = "DllMain user handler fnptr"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x100317f8"]
 name = "g_lock_stream_table"
 type = "char"
 section = ".data"
 note = "stream lock-pointer table anchor (0x100317f8..0x10031a58, stride 0x20)"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10031aac"]
 name = "locktable"
@@ -1621,8 +1775,10 @@ section = ".data"
 note = "per-lock CRITICAL_SECTION ptr table (0x30 = 48 entries, 0x10031aac..0x10031b6c)"
 
 # ---- extra globals referenced by the crt_region CRT-startup/allocator fns ----
-status = "VERIFIED"
+status = "DRIFT"
 size = 192
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x11766438"]
 name = "__sbh_pHeaderScan"
@@ -1631,6 +1787,8 @@ section = ".bss"
 note = "pool: region scan cursor (ptr into array)"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766440"]
 name = "__sbh_cntHeaderList"
@@ -1639,6 +1797,8 @@ section = ".bss"
 note = "pool: region count"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766444"]
 name = "__sbh_pHeaderList"
@@ -1647,6 +1807,8 @@ section = ".bss"
 note = "pool: region descriptor array"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766430"]
 name = "__sbh_sizeHeaderList"
@@ -1655,6 +1817,8 @@ section = ".bss"
 note = "__sbh_sizeHeaderList - allocated header-list size"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766434"]
 name = "__sbh_indGroupDefer"
@@ -1663,6 +1827,8 @@ section = ".bss"
 note = "__sbh_indGroupDefer - deferred group index"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1176643c"]
 name = "__sbh_pHeaderDefer"
@@ -1671,6 +1837,8 @@ section = ".bss"
 note = "__sbh_pHeaderDefer - deferred group header"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766460"]
 name = "g_stream_group_table"
@@ -1679,6 +1847,8 @@ section = ".bss"
 note = "stream group ptr table (0x11766460..0x1176655c, 0x40 entries)"
 status = "VERIFIED"
 size = 256
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766560"]
 name = "__nfile"
@@ -1687,69 +1857,87 @@ section = ".bss"
 note = "current stream count"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11767580"]
 name = "__nstream"
 type = "int"
 section = ".bss"
 note = "tracked-block table count"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x1176758c"]
 name = "g_envp_built"
 type = "int"
 section = ".bss"
 note = "__envp built flag"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x11767590"]
 name = "g_cmdline_parsed"
 type = "int"
 section = ".bss"
 note = "cmdline/env parsed flag"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x10031b6c"]
 name = "__tlsindex"
 type = "int"
 section = ".bss"
 note = "TLS index (__tlsindex)"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10031b78"]
 name = "g_old_sbh_region_head"
 type = "char"
 section = ".bss"
 note = "block allocator region-list head node"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10033b98"]
 name = "__old_sbh_p_starting_region"
 type = "OldSbhRegion *"
 section = ".bss"
 note = "__old_sbh_p_starting_region (V5 sbh rover)"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100317d8"]
 name = "_FPinit"
 type = "void *"
 section = ".data"
 note = "first init fnptr"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100317f0"]
 name = "g_crt_exit_hook"
 type = "void (__cdecl *)(int)"
 section = ".bss"
 note = "_exit hook fnptr"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100354c4"]
 name = "__argc"
@@ -1852,7 +2040,9 @@ name = "g_rterrlist"
 type = "struct rterr_entry[18]"
 section = ".data"
 note = "_NMSG_WRITE runtime-error table (0x1001fe31)"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10035838"]
 name = "pfnMessageBoxA"
@@ -1885,6 +2075,8 @@ section = ".bss"
 note = "tracked-block (stream) table ptr - __flsall/_fcloseall walk this"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10028bdc"]
 section = ".data"
@@ -1897,15 +2089,19 @@ status = "VERIFIED"
 name = "g_plant_info_table"
 section = ".data"
 type = "PLANT_INFO[4]"
-status = "VERIFIED"
+status = "DRIFT"
 size = 16
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b70"]
 name = "g_entity_id_counter"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10035408"]
 name = "g_sequence_counter"
@@ -1920,57 +2116,60 @@ section = ".bss"
 type = "int"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025690"]
 name = "_g_stat_max_d"
 section = ".rdata"
-type = "double"
-status = "VERIFIED"
+type = "const double"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+size = 8
 
 ["SERVER.0x10025698"]
 name = "_g_stat_min_d"
 section = ".rdata"
-type = "double"
-status = "VERIFIED"
-
-["SERVER.0x100358a4"]
-name = "g_entity_id_field"
-section = ".data"
-type = "int"
-status = "VERIFIED"
-size = 4
+type = "const double"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+size = 8
 
 ["SERVER.0x100256a4"]
 name = "g_color_scale"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+size = 4
 
 ["SERVER.0x10025718"]
 name = "g_game_speed_table"
 section = ".rdata"
-type = "int[5]"
-status = "VERIFIED"
+type = "const int[5]"
+status = "DRIFT"
 size = 20
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002c3f0"]
 name = "g_game_speed_value"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002c3f4"]
 name = "g_game_speed_index"
 section = ".data"
 type = "int"
-status = "VERIFIED"
-
-["SERVER.0x100a8c94"]
-name = "g_entity_slot_table"
-section = ".data"
-type = "unsigned int[]"
-status = "VERIFIED"
-size = 4
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11764084"]
 name = "g_max_players"
@@ -1978,31 +2177,42 @@ section = ".bss"
 type = "int"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256d0"]
 name = "g_const_0_001"
 section = ".rdata"
-type = "double"
-status = "VERIFIED"
+type = "const double"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100257c0"]
 name = "g_const_21_0"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+size = 4
 
 ["SERVER.0x100256a8"]
 name = "g_const_neg_1_0f"
 section = ".rdata"
-type = "float"
-status = "VERIFIED"
+type = "const float"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x101de460"]
 name = "g_save_info"
 section = ".data"
-type = "int"
+type = "int[63]"
 status = "VERIFIED"
-size = 4
+size = 252
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11764094"]
 name = "g_thread_handle"
@@ -2010,25 +2220,33 @@ section = ".bss"
 type = "void *"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034680"]
 name = "g_handler_started"
 section = ".data"
 type = "int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034618"]
 name = "g_log_mode_flags"
 section = ".data"
 type = "unsigned int"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034610"]
 name = "g_panic_callback"
 section = ".data"
 type = "void(*)(void)"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117660e0"]
 name = "g_owner_window"
@@ -2036,20 +2254,26 @@ section = ".bss"
 type = "int"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640e0"]
 name = "g_log_message_buffer"
 section = ".bss"
-type = "char"
+type = "char[8192]"
 status = "VERIFIED"
-size = 1
+size = 8192
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d4f0"]
 name = "g_save_header_tail"
 section = ".data"
 type = "char[9]"
-status = "VERIFIED"
+status = "DRIFT"
 size = 9
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100241a0"]
 name = "g_crc_table"
@@ -2059,46 +2283,60 @@ status = "VERIFIED"
 
 ["SERVER.0x10025688"]
 name = "g_const_2"
-type = "double"
+type = "const double"
 section = ".rdata"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100257d8"]
 name = "g_const_one_d"
-type = "double"
+type = "const double"
 section = ".rdata"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025810"]
 name = "g_const_0_2"
-type = "double"
+type = "const double"
 section = ".rdata"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025f88"]
 name = "g_const_0_6"
-type = "float"
+type = "const float"
 section = ".rdata"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025f90"]
 name = "g_const_8"
-type = "double"
+type = "const double"
 section = ".rdata"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025f98"]
 name = "g_const_900"
-type = "double"
+type = "const double"
 section = ".rdata"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002c3f8"]
 name = "g_dispatch_table"
 section = ".data"
-status = "VERIFIED"
+status = "DRIFT"
 type = "handler_func[]"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11764088"]
 name = "g_tick_rate"
@@ -2106,6 +2344,8 @@ type = "int"
 section = ".data"
 status = "VERIFIED"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10027104"]
 section = ".data"
@@ -2245,126 +2485,162 @@ section = ".data"
 name = "s_gzip_mode_rb"
 type = "char[4]"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100294a4"]
 section = ".data"
 name = "s_fmt_hex_length"
 type = "char[]"
 size = 1
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d990"]
 section = ".data"
 name = "s_plt_SetPlantMap____Could_not_fin"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d9c0"]
 section = ".data"
 name = "s_D__Develop_DieGildeAddOn_auxilla"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d9ec"]
 section = ".data"
 name = "s_plt_SetPlantMap____Map_is_not_al"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029f78"]
 section = ".data"
 name = "s_amt_cant_load_msetter"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029fa4"]
 section = ".data"
 name = "s_amt_cant_load_status"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029fcc"]
 section = ".data"
 name = "s_amt_cant_load_pcount"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029ff4"]
 section = ".data"
 name = "s_amt_cant_load_mamt"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a01c"]
 section = ".data"
 name = "s_amt_cant_load_mplayerid"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a048"]
 section = ".data"
 name = "s_amt_cant_load_id"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a06c"]
 section = ".data"
 name = "s_amt_count_mismatch"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a0a0"]
 section = ".data"
 name = "s_D__Develop_DieGildeAddOn_game_ae"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a0c8"]
 section = ".data"
 name = "s_amt_cant_load_count"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a10c"]
 section = ".data"
 name = "s_D__Develop_DieGildeAddOn_game_al"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a140"]
 section = ".data"
 name = "s_ahm_ExAllocAlchemist__array_over"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a168"]
 section = ".data"
 name = "s_ahm_ExAllocAlchemist__wrong_type"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a19c"]
 section = ".data"
 name = "s_ahm_ExAllocAlchemist__cant_find"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100273ac"]
 section = ".data"
@@ -2446,16 +2722,20 @@ size = 1
 ["SERVER.0x10029458"]
 section = ".data"
 name = "s_D__Develop_Units_vfs_vfs_c"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029474"]
 section = ".data"
 name = "s_vfs__gz_compressed_file____s___i"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10027030"]
 section = ".data"
@@ -2467,93 +2747,119 @@ size = 4
 ["SERVER.0x10029450"]
 section = ".data"
 name = "g_gzip_magic_1f"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029454"]
 section = ".data"
 name = "g_gzip_magic_8b"
-status = "VERIFIED"
+status = "DRIFT"
 type = "char[]"
 size = 1
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002ca54"]
 section = ".data"
 name = "s_cm_ChkChangeBits___Invalid_Id"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002ca04"]
 section = ".data"
 name = "s_cm_ChkChangeBits___Invalid_actio"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cacc"]
 section = ".data"
 name = "s_Invalid_Commandtype_in_Execution"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002caa8"]
 section = ".data"
 name = "s_cm_ChkCutsceneReady____failed"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002ca74"]
 section = ".data"
 name = "s_cm_ChkSetGebBesitzer___Invalid_I"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cb34"]
 section = ".data"
 name = "s_gm_AllocGebaeude___failed"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002caf0"]
 section = ".data"
 name = "s_Invalid__GI_Id__for_cmdt_ALLOC_B"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cb50"]
 section = ".data"
 name = "s_Invalid__GI_Id__for_cmdt_ALLOC_S"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cb8c"]
 section = ".data"
 name = "s_cm_ExAllocSpieler___gm_AllocSpie"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cc14"]
 section = ".data"
 name = "s_cm_ExChangePlayerIdentity___exec"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cbf0"]
 section = ".data"
 name = "s_cm_ExChangePlayerIdentity___fail"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d41c"]
 section = ".data"
@@ -2565,72 +2871,92 @@ type = "char[]"
 ["SERVER.0x1002d400"]
 section = ".data"
 name = "s_cm_ExCreateGeb____failed"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d2ec"]
 section = ".data"
 name = "s_cm_ExSetGebUpgrade____Could_not_f"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d33c"]
 section = ".data"
 name = "s_cm_ExEmployWorker____Illegal_geb"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d318"]
 section = ".data"
 name = "s_cm_ExEmployWorker____Illegal_gw"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d154"]
 section = ".data"
 name = "s_cm_ExKillSpieler___Could_not_fin"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d3d4"]
 section = ".data"
 name = "s_cm_ExKillTransporter____invalid_t"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d214"]
 section = ".data"
 name = "s_ex_set_owner_missing_c"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d1e0"]
 section = ".data"
 name = "s_ex_set_owner_missing_b"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d1a8"]
 section = ".data"
 name = "s_ex_set_owner_missing_a"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d2c0"]
 section = ".data"
 name = "s_cm_ExSetGebUpgrade____already_hi"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d298"]
 section = ".data"
@@ -2642,29 +2968,37 @@ type = "char[]"
 ["SERVER.0x1002d268"]
 section = ".data"
 name = "s_ex_set_home_missing_a"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d240"]
 section = ".data"
 name = "s_cm_ExSetWohnsitz____Residence_is"
-status = "VERIFIED"
+status = "DRIFT"
 size = 1
 type = "char[]"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034614"]
 type = "int"
 section = ".data"
 name = "g_crash_callback"
-status = "VERIFIED"
+status = "DRIFT"
 size = 4
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1003461c"]
 type = "char"
 section = ".data"
 name = "g_crash_dump_all_frames"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x101de560"]
 type = "int"
@@ -2681,45 +3015,57 @@ status = "VERIFIED"
 
 ["SERVER.0x1002577c"]
 section = ".rdata"
-type = "int[4]"
+type = "const int[4]"
 name = "g_field_worker_count_wt0"
-status = "VERIFIED"
+status = "DRIFT"
 size = 16
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002578c"]
 section = ".rdata"
-type = "int[4]"
+type = "const int[4]"
 name = "g_field_worker_count_wt1"
-status = "VERIFIED"
+status = "DRIFT"
 size = 16
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002579c"]
 section = ".rdata"
-type = "int[4]"
+type = "const int[4]"
 name = "g_field_worker_count_wt2"
-status = "VERIFIED"
+status = "DRIFT"
 size = 16
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100257ac"]
 section = ".rdata"
-type = "int[4]"
+type = "const int[4]"
 name = "g_field_worker_count_wt3"
-status = "VERIFIED"
+status = "DRIFT"
 size = 16
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002575c"]
 section = ".rdata"
-type = "int[4]"
+type = "const int[4]"
 name = "g_field_worker_count"
-status = "VERIFIED"
+status = "DRIFT"
 size = 16
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002576c"]
 section = ".rdata"
-type = "int[4]"
+type = "const int[4]"
 name = "g_field_entry_count"
-status = "VERIFIED"
+status = "DRIFT"
 size = 16
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10027488"]
 section = ".data"
@@ -4441,105 +4787,135 @@ section = ".data"
 name = "s_This_is_Gilde_talking__can_you_h"
 type = "char[]"
 size = 1
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029594"]
 section = ".data"
 name = "g_game_path"
 type = "char[260]"
 size = 260
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029698"]
 section = ".data"
 name = "g_game_path_default"
 type = "char[260]"
 size = 260
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002979c"]
 section = ".data"
 name = "g_server_flag"
 type = "int"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029af0"]
 section = ".data"
 name = "g_office_float_table"
 type = "float[7][7]"
 size = 196
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a0f0"]
 section = ".data"
 name = "g_alchemy_one"
 type = "float"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a0f4"]
 section = ".data"
 name = "g_alchemy_half"
 type = "float"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a1cc"]
 section = ".data"
 name = "g_alchemy_random_table"
 type = "unsigned char[7812]"
 size = 7812
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002da30"]
 section = ".data"
 name = "g_plant_pair_table"
 type = "PLANT_PAIR[88]"
 size = 352
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002dcf0"]
 section = ".data"
 name = "g_plant_flag"
 type = "int"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002dd48"]
 section = ".data"
 name = "g_spiel_const_table"
 type = "unsigned int[38]"
 size = 152
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030860"]
 section = ".data"
 name = "g_building_defaults"
 type = "BuildingDefaults[37]"
 size = 148
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b74"]
 section = ".data"
 name = "g_spiel_byte_table"
 type = "unsigned char[16]"
 size = 16
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030ba0"]
 section = ".data"
 name = "g_stat_table"
 type = "unsigned char[780]"
 size = 780
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030eac"]
 section = ".data"
 name = "g_spiel_space_fill"
 type = "int[16]"
 size = 64
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1009aca2"]
 name = "g_dynamic_entities"
@@ -4553,49 +4929,54 @@ name = "s_fmt_player_id"
 type = "char[34]"
 size = 34
 section = ".data"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10031594"]
 name = "s_alloc_spieler_bug"
 type = "char[21]"
 size = 21
 section = ".data"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100315ac"]
 name = "s_family_count_overflow"
 type = "char[55]"
 size = 55
 section = ".data"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100315e4"]
 name = "s_fmt_sp_id"
 type = "char[30]"
 size = 30
 section = ".data"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10031604"]
 name = "s_alloc_spieler_array_overflow"
 type = "char[35]"
 size = 35
 section = ".data"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025714"]
 name = "g_const_0_25"
-type = "float"
+type = "const float"
 size = 4
 section = ".rdata"
-status = "VERIFIED"
-
-["SERVER.0x101de464"]
-name = "g_host_flags"
-type = "unsigned char"
-size = 1
-section = ".data"
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x101de9a0"]
 name = "g_module_path"
@@ -4617,6 +4998,8 @@ type = "int"
 size = 4
 section = ".data"
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10027000"]
 name = "g_before_g_broadcast_ff"
@@ -4637,7 +5020,9 @@ name = "g_before_g_log_level_table"
 section = ".data"
 type = "unsigned char[0x1f]"
 size = 31
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100270e6"]
 name = "g_before_g_log_default_name"
@@ -4910,42 +5295,54 @@ name = "g_text_before_D_Develop_Units_vfs_vfs_c"
 section = ".data"
 type = "unsigned char[0x3]"
 size = 3
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029459"]
 name = "g_text_before_vfs_gz_compressed_file_s_i"
 section = ".data"
 type = "unsigned char[0x1b]"
 size = 27
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029475"]
 name = "g_text_before_fmt_hex_length"
 section = ".data"
 type = "unsigned char[0x2f]"
 size = 47
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100294a5"]
 name = "g_text_before_This_is_Gilde_talking_can_you_h"
 section = ".data"
 type = "unsigned char[0xc7]"
 size = 199
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002956d"]
 name = "g_before_g_game_path"
 section = ".data"
 type = "unsigned char[0x27]"
 size = 39
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100297a0"]
 name = "g_before_g_office_float_table"
 section = ".data"
 type = "unsigned char[0x350]"
 size = 848
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029bb4"]
 name = "g_before_g_office_role_templates"
@@ -4959,357 +5356,459 @@ name = "g_text_before_amt_cant_load_msetter"
 section = ".data"
 type = "unsigned char[0x320]"
 size = 800
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029f79"]
 name = "g_text_before_amt_cant_load_status"
 section = ".data"
 type = "unsigned char[0x2b]"
 size = 43
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029fa5"]
 name = "g_text_before_amt_cant_load_pcount"
 section = ".data"
 type = "unsigned char[0x27]"
 size = 39
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029fcd"]
 name = "g_text_before_amt_cant_load_mamt"
 section = ".data"
 type = "unsigned char[0x27]"
 size = 39
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10029ff5"]
 name = "g_text_before_amt_cant_load_mplayerid"
 section = ".data"
 type = "unsigned char[0x27]"
 size = 39
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a01d"]
 name = "g_text_before_amt_cant_load_id"
 section = ".data"
 type = "unsigned char[0x2b]"
 size = 43
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a049"]
 name = "g_text_before_amt_count_mismatch"
 section = ".data"
 type = "unsigned char[0x23]"
 size = 35
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a06d"]
 name = "g_text_before_D_Develop_DieGildeAddOn_game_ae"
 section = ".data"
 type = "unsigned char[0x33]"
 size = 51
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a0a1"]
 name = "g_text_before_amt_cant_load_count"
 section = ".data"
 type = "unsigned char[0x27]"
 size = 39
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a0c9"]
 name = "g_before_g_alchemy_one"
 section = ".data"
 type = "unsigned char[0x27]"
 size = 39
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a0f9"]
 name = "g_text_before_D_Develop_DieGildeAddOn_game_al"
 section = ".data"
 type = "unsigned char[0x13]"
 size = 19
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a10d"]
 name = "g_text_before_ahm_ExAllocAlchemist_array_over"
 section = ".data"
 type = "unsigned char[0x33]"
 size = 51
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a141"]
 name = "g_text_before_ahm_ExAllocAlchemist_wrong_type"
 section = ".data"
 type = "unsigned char[0x27]"
 size = 39
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a169"]
 name = "g_text_before_ahm_ExAllocAlchemist_cant_find"
 section = ".data"
 type = "unsigned char[0x33]"
 size = 51
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002a19d"]
 name = "g_before_g_alchemy_random_table"
 section = ".data"
 type = "unsigned char[0x2f]"
 size = 47
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002c3fc"]
 name = "g_before_g_chain_handler_table"
 section = ".data"
 type = "unsigned char[0x1a4]"
 size = 420
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002c5a4"]
 name = "g_text_before_cm_ChkChangeBits_Invalid_actio"
 section = ".data"
 type = "unsigned char[0x460]"
 size = 1120
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002ca05"]
 name = "g_text_before_cm_ChkChangeBits_Invalid_Id"
 section = ".data"
 type = "unsigned char[0x4f]"
 size = 79
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002ca55"]
 name = "g_text_before_cm_ChkSetGebBesitzer_Invalid_I"
 section = ".data"
 type = "unsigned char[0x1f]"
 size = 31
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002ca75"]
 name = "g_text_before_cm_ChkCutsceneReady_failed"
 section = ".data"
 type = "unsigned char[0x33]"
 size = 51
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002caa9"]
 name = "g_text_before_Invalid_Commandtype_in_Execution"
 section = ".data"
 type = "unsigned char[0x23]"
 size = 35
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cacd"]
 name = "g_text_before_Invalid_GI_Id_for_cmdt_ALLOC_B"
 section = ".data"
 type = "unsigned char[0x23]"
 size = 35
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002caf1"]
 name = "g_text_before_gm_AllocGebaeude_failed"
 section = ".data"
 type = "unsigned char[0x43]"
 size = 67
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cb35"]
 name = "g_text_before_Invalid_GI_Id_for_cmdt_ALLOC_S"
 section = ".data"
 type = "unsigned char[0x1b]"
 size = 27
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cb51"]
 name = "g_text_before_cm_ExAllocSpieler_gm_AllocSpie"
 section = ".data"
 type = "unsigned char[0x3b]"
 size = 59
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cb8d"]
 name = "g_text_before_cm_ExChangePlayerIdentity_fail"
 section = ".data"
 type = "unsigned char[0x63]"
 size = 99
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cbf1"]
 name = "g_text_before_cm_ExChangePlayerIdentity_exec"
 section = ".data"
 type = "unsigned char[0x23]"
 size = 35
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002cc15"]
 name = "g_text_before_cm_ExKillSpieler_Could_not_fin"
 section = ".data"
 type = "unsigned char[0x53f]"
 size = 1343
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d155"]
 name = "g_text_before_ex_set_owner_missing_a"
 section = ".data"
 type = "unsigned char[0x53]"
 size = 83
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d1a9"]
 name = "g_text_before_ex_set_owner_missing_b"
 section = ".data"
 type = "unsigned char[0x37]"
 size = 55
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d1e1"]
 name = "g_text_before_ex_set_owner_missing_c"
 section = ".data"
 type = "unsigned char[0x33]"
 size = 51
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d215"]
 name = "g_text_before_cm_ExSetWohnsitz_Residence_is"
 section = ".data"
 type = "unsigned char[0x2b]"
 size = 43
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d241"]
 name = "g_text_before_ex_set_home_missing_a"
 section = ".data"
 type = "unsigned char[0x27]"
 size = 39
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d269"]
 name = "g_text_before_ex_set_home_missing_b"
 section = ".data"
 type = "unsigned char[0x2f]"
 size = 47
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d299"]
 name = "g_text_before_cm_ExSetGebUpgrade_already_hi"
 section = ".data"
 type = "unsigned char[0x27]"
 size = 39
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d2c1"]
 name = "g_text_before_cm_ExSetGebUpgrade_Could_not_f"
 section = ".data"
 type = "unsigned char[0x2b]"
 size = 43
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d2ed"]
 name = "g_text_before_cm_ExEmployWorker_Illegal_gw"
 section = ".data"
 type = "unsigned char[0x2b]"
 size = 43
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d319"]
 name = "g_text_before_cm_ExEmployWorker_Illegal_geb"
 section = ".data"
 type = "unsigned char[0x23]"
 size = 35
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d33d"]
 name = "g_text_before_cm_ExKillTransporter_invalid_t"
 section = ".data"
 type = "unsigned char[0x97]"
 size = 151
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d3d5"]
 name = "g_text_before_cm_ExCreateGeb_failed"
 section = ".data"
 type = "unsigned char[0x2b]"
 size = 43
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d401"]
 name = "g_text_before_cm_ExCreateGeb_Could_not_find"
 section = ".data"
 type = "unsigned char[0x1b]"
 size = 27
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d41d"]
 name = "g_before_g_file_version"
 section = ".data"
 type = "unsigned char[0xcf]"
 size = 207
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d4f9"]
 name = "g_before_g_plant_info_table"
 section = ".data"
 type = "unsigned char[0x37f]"
 size = 895
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d888"]
 name = "g_text_before_plt_SetPlantMap_Could_not_fin"
 section = ".data"
 type = "unsigned char[0x108]"
 size = 264
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d991"]
 name = "g_text_before_D_Develop_DieGildeAddOn_auxilla"
 section = ".data"
 type = "unsigned char[0x2f]"
 size = 47
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d9c1"]
 name = "g_text_before_plt_SetPlantMap_Map_is_not_al"
 section = ".data"
 type = "unsigned char[0x2b]"
 size = 43
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002d9ed"]
 name = "g_before_g_plant_pair_table"
 section = ".data"
 type = "unsigned char[0x43]"
 size = 67
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002db90"]
 name = "g_before_g_plant_flag"
 section = ".data"
 type = "unsigned char[0x160]"
 size = 352
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002dcf4"]
 name = "g_before_g_spiel_const_table"
 section = ".data"
 type = "unsigned char[0x54]"
 size = 84
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100308f4"]
 name = "g_before_g_next_object_id"
 section = ".data"
 type = "unsigned char[0x278]"
 size = 632
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b85"]
 name = "g_before_g_query_filter_extra1"
 section = ".data"
 type = "unsigned char[0x3]"
 size = 3
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030b91"]
 name = "g_before_g_query_filter_max_id"
@@ -5323,112 +5822,144 @@ name = "g_before_g_stat_table"
 section = ".data"
 type = "unsigned char[0x1]"
 size = 1
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10030eec"]
 name = "g_text_before_fmt_player_id"
 section = ".data"
 type = "unsigned char[0x684]"
 size = 1668
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10031592"]
 name = "g_text_before_alloc_spieler_bug"
 section = ".data"
 type = "unsigned char[0x2]"
 size = 2
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100315a9"]
 name = "g_text_before_family_count_overflow"
 section = ".data"
 type = "unsigned char[0x3]"
 size = 3
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100315e3"]
 name = "g_text_before_fmt_sp_id"
 section = ".data"
 type = "unsigned char[0x1]"
 size = 1
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10031602"]
 name = "g_text_before_alloc_spieler_array_overflow"
 section = ".data"
 type = "unsigned char[0x2]"
 size = 2
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10031627"]
 name = "g_before_FPinit"
 section = ".data"
 type = "unsigned char[0x1b1]"
 size = 433
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100317dc"]
 name = "g_before_g_crt_exit_hook"
 section = ".data"
 type = "unsigned char[0x14]"
 size = 20
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100317f4"]
 name = "g_before_g_lock_stream_table"
 section = ".data"
 type = "unsigned char[0x4]"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100317f9"]
 name = "g_before_locktable"
 section = ".data"
 type = "unsigned char[0x2b3]"
 size = 691
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10031b70"]
 name = "g_before_g_old_sbh_region_head"
 section = ".data"
 type = "unsigned char[0x8]"
 size = 8
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10031b79"]
 name = "g_before_g_block_alloc_threshold"
 section = ".data"
 type = "unsigned char[0x2023]"
 size = 8227
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10033ba0"]
 name = "g_before_g_rterrlist"
 section = ".data"
 type = "unsigned char[0x350]"
 size = 848
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10033f38"]
 name = "g_before_g_panic_callback"
 section = ".data"
 type = "unsigned char[0x6d8]"
 size = 1752
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x1003461d"]
 name = "g_before_g_array_count"
 section = ".data"
 type = "unsigned char[0x7]"
 size = 7
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034644"]
 name = "g_before_g_stream_pool"
 section = ".data"
 type = "unsigned char[0x2c]"
 size = 44
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10034671"]
 name = "g_before_g_stream_count"
@@ -5442,7 +5973,9 @@ name = "g_data_section_tail"
 section = ".data"
 type = "unsigned char[0x97c]"
 size = 2428
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002407c"]
 name = "g_iat_after_LCMapStringW"
@@ -5526,56 +6059,72 @@ name = "g_before_g_graveyard_const_a"
 section = ".rdata"
 type = "unsigned char[0x397]"
 size = 919
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025684"]
 name = "g_before_g_const_2"
 section = ".rdata"
 type = "unsigned char[0x4]"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100256d8"]
-name = "g_before_g_const_0_25"
+name = "g_cost_rate_table"
 section = ".rdata"
-type = "unsigned char[0x3c]"
+type = "const float[5][3]"
 size = 60
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1002572c"]
-name = "g_before_g_field_worker_count"
+name = "g_output_share"
 section = ".rdata"
-type = "unsigned char[0x30]"
-size = 48
-status = "VERIFIED"
+type = "const float[4]"
+size = 16
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100257cc"]
 name = "g_before_g_const_half"
 section = ".rdata"
 type = "unsigned char[0x4]"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T04:24:18+00:00"
 
 ["SERVER.0x100257d4"]
 name = "g_before_g_const_one_d"
 section = ".rdata"
 type = "unsigned char[0x4]"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x100257e0"]
-name = "g_before_g_const_0_2"
+name = "g_interval_values"
 section = ".rdata"
-type = "unsigned char[0x30]"
-size = 48
-status = "VERIFIED"
+type = "const int[10]"
+size = 40
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:52:16+00:00"
 
 ["SERVER.0x10025818"]
-name = "g_before_g_const_0_6"
+name = "g_player_trait_ranges"
 section = ".rdata"
-type = "unsigned char[0x770]"
+type = "const float[17][28]"
 size = 1904
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025f8c"]
 name = "g_before_g_const_8"
@@ -5583,20 +6132,26 @@ section = ".rdata"
 type = "unsigned char[0x4]"
 size = 4
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:52:16+00:00"
 
 ["SERVER.0x10025fa4"]
 name = "g_before_g_const_896_0"
 section = ".rdata"
 type = "unsigned char[0x4]"
 size = 4
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10025fc0"]
 name = "g_rdata_before_imports"
 section = ".rdata"
 type = "unsigned char[0x648]"
 size = 1608
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x10026608"]
 name = "g_import_bookkeeping"
@@ -5634,11 +6189,13 @@ size = 2
 status = "VERIFIED"
 
 ["SERVER.0x10035440"]
-name = "g_before_g_dynasty_name"
+name = "g_saved_dynasty_field"
 section = ".data"
-type = "unsigned char[0x4]"
+type = "unsigned int"
 size = 4
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x1003544a"]
 name = "g_before_g_dynasty_scan_count"
@@ -5843,32 +6400,11 @@ type = "unsigned char[0x90ba0]"
 size = 592800
 status = "VERIFIED"
 
-["SERVER.0x101398a4"]
-name = "g_before_g_entity_ptr"
-section = ".data"
-type = "unsigned char[0x1401c]"
-size = 81948
-status = "VERIFIED"
-
-["SERVER.0x1014d8c4"]
-name = "g_before_g_item_def_table"
-section = ".data"
-type = "unsigned char[0x90b8c]"
-size = 592780
-status = "VERIFIED"
-
 ["SERVER.0x101de458"]
 name = "g_before_g_save_info"
 section = ".data"
 type = "unsigned char[0x8]"
 size = 8
-status = "VERIFIED"
-
-["SERVER.0x101de465"]
-name = "g_before_g_aux_entity_buffer"
-section = ".data"
-type = "unsigned char[0xf7]"
-size = 247
 status = "VERIFIED"
 
 ["SERVER.0x101de564"]
@@ -5905,6 +6441,8 @@ section = ".data"
 type = "unsigned char[0x8]"
 size = 8
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640a8"]
 name = "g_before_g_alloc_root_size_total"
@@ -5912,6 +6450,8 @@ section = ".data"
 type = "unsigned char[0x8]"
 size = 8
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640c8"]
 name = "g_before_g_log_message_buffer"
@@ -5919,6 +6459,8 @@ section = ".data"
 type = "unsigned char[0x18]"
 size = 24
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117640e1"]
 name = "g_before_g_owner_window"
@@ -5926,6 +6468,8 @@ section = ".data"
 type = "unsigned char[0x1fff]"
 size = 8191
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x117660e4"]
 name = "g_before_g_log_buffer"
@@ -5933,6 +6477,8 @@ section = ".data"
 type = "unsigned char[0x1c]"
 size = 28
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766200"]
 name = "g_before_g_log_file_handle"
@@ -5940,6 +6486,8 @@ section = ".data"
 type = "unsigned char[0x4]"
 size = 4
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766208"]
 name = "g_before_sbh_pHeaderScan"
@@ -5947,6 +6495,8 @@ section = ".data"
 type = "unsigned char[0x230]"
 size = 560
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766454"]
 name = "g_before_g_stream_group_table"
@@ -5954,24 +6504,174 @@ section = ".data"
 type = "unsigned char[0xc]"
 size = 12
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
 
 ["SERVER.0x11766568"]
 name = "g_before_nstream"
 section = ".data"
 type = "unsigned char[0x1018]"
 size = 4120
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
 ["SERVER.0x11767594"]
 name = "g_bss_section_tail"
 section = ".data"
 type = "unsigned char[0x8]"
 size = 8
-status = "VERIFIED"
+status = "DRIFT"
+updated_by = "verify"
+updated_at = "2026-09-30T08:25:36+00:00"
 
-["SERVER.0x114ffe24"]
-name = "g_player_slot_overflow_pad"
+["SERVER.0x10034260"]
 section = ".data"
-type = "char[0x264260]"
-size = 2507360
+updated_by = "data"
+updated_at = "2026-09-30T07:32:02+00:00"
+
+["SERVER.0x100264c8"]
+section = ".rdata"
+updated_by = "data"
+updated_at = "2026-09-30T07:33:39+00:00"
+
+["SERVER.0x100a9820"]
+size = 589824
 status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-09-30T08:43:46+00:00"
+type = "char[589824]"
+section = ".data"
+name = "g_relationship_matrix_primary"
+
+["SERVER.0x1014d8e0"]
+size = 589824
+status = "VERIFIED"
+updated_by = "verify"
+updated_at = "2026-09-30T08:43:46+00:00"
+type = "char[589824]"
+section = ".data"
+name = "g_relationship_matrix_secondary"
+
+["SERVER.0x1009b760"]
+name = "g_town_records"
+updated_by = "verify"
+updated_at = "2026-09-30T08:43:46+00:00"
+size = 54480
+status = "VERIFIED"
+type = "unsigned char[54480]"
+section = ".data"
+
+["SERVER.0x100a8c40"]
+name = "g_city_records"
+updated_by = "verify"
+updated_at = "2026-09-30T09:16:26+00:00"
+size = 3024
+status = "VERIFIED"
+type = "unsigned char[3024]"
+section = ".data"
+
+["SERVER.0x10139820"]
+name = "g_manufacturer_types"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+size = 100
+status = "VERIFIED"
+type = "int[25]"
+section = ".bss"
+
+["SERVER.0x101dd8e0"]
+name = "g_minimum_manufacturer"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+type = "int[732]"
+size = 2928
+status = "VERIFIED"
+section = ".bss"
+
+["SERVER.0x10025808"]
+type = "const float"
+updated_by = "data"
+updated_at = "2026-09-30T14:39:51+00:00"
+name = "g_dynasty_initial_trait_offset"
+size = 4
+status = "UNCHECKED"
+
+["SERVER.0x101de580"]
+type = "unsigned char[24]"
+updated_by = "data"
+updated_at = "2026-09-30T15:00:30+00:00"
+name = "g_save_session_state"
+size = 24
+status = "UNCHECKED"
+
+["SERVER.0x1002574c"]
+type = "const int[4]"
+updated_by = "data"
+updated_at = "2026-10-01T01:33:48+00:00"
+size = 16
+status = "UNCHECKED"
+section = ".rdata"
+
+["SERVER.0x10025340"]
+name = "g_type_adjustments"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+type = "const struct TypeAdjustment[15]"
+size = 600
+status = "DRIFT"
+section = ".rdata"
+
+["SERVER.0x10025598"]
+name = "g_type_adjustments_count"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+type = "const int"
+size = 4
+status = "DRIFT"
+section = ".rdata"
+
+["SERVER.0x100255a0"]
+name = "g_type_adjustments_secondary"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+type = "const struct TypeAdjustment[5]"
+size = 200
+status = "DRIFT"
+section = ".rdata"
+
+["SERVER.0x10025668"]
+name = "g_type_adjustments_secondary_count"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+type = "const int"
+size = 4
+status = "DRIFT"
+section = ".rdata"
+
+["SERVER.0x1002566c"]
+name = "g_type_multipliers"
+updated_by = "verify"
+updated_at = "2026-10-01T03:03:30+00:00"
+type = "const float[5]"
+size = 20
+status = "DRIFT"
+section = ".rdata"
+
+["SERVER.0x10025314"]
+name = "g_file_extension_names"
+updated_by = "verify"
+updated_at = "2026-10-01T03:52:16+00:00"
+type = "const char[41]"
+size = 41
+status = "DRIFT"
+section = ".rdata"
+
+["SERVER.0x1002573c"]
+name = "g_output_adjustments"
+updated_by = "verify"
+updated_at = "2026-10-01T03:52:16+00:00"
+type = "const float[4]"
+size = 16
+status = "DRIFT"
+section = ".rdata"

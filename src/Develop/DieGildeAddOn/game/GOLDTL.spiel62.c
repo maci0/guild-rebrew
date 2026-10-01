@@ -13,7 +13,7 @@
 
 void __cdecl gm_InitEntitySlots(void);
 extern int g_query_limit;
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 int __cdecl gm_FreeObjectListRecursive(char**);
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;

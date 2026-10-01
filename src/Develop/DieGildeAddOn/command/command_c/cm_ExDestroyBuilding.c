@@ -40,13 +40,13 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 		match = gm_NextEntityQueryMatch();
 	}
 
-	slot_scan = &g_entity_records;
+	slot_scan = (int*) (g_slot_table + 0x16c);
 	do {
 		if ((ushort*) *slot_scan == building) {
 			*slot_scan = 0;
 		}
 		slot_scan = slot_scan + 0x87;
-	} while ((int) slot_scan < 0x1009ae0c);
+	} while ((int) slot_scan < (int) (g_slot_table + sizeof(g_slot_table) + 0x16c));
 
 	gm_CleanupBuildingEntity((uchar*) building);
 

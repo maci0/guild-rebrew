@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 #include <stdio.h>
 #include <string.h>
 #include "command.h"
@@ -25,7 +26,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 		result = cm_QueuePlayerCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
-	for (conn = (unsigned char*) 0x101deb00; (int) conn < 0x114ffe20;
+	for (conn = (unsigned char*) (int) g_connections; (int) conn < (int) (g_connections + 0x1321320);
 	     conn += 0x264264) {
 		if ((*(unsigned int*) conn & 1) == 0) continue;
 		if ((*(unsigned int*) conn & 0x200) == 0) continue;
@@ -37,7 +38,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 	}
 	*(int*) (rec + 4) = *(int*) ((char*) player + 0x264210);
 	memcpy((char*) player + 0x26420c, rec, 0x57);
-	for (conn = (unsigned char*) 0x101deb00; (int) conn < 0x114ffe20;
+	for (conn = (unsigned char*) (int) g_connections; (int) conn < (int) (g_connections + 0x1321320);
 	     conn += 0x264264) {
 		if ((*(unsigned int*) conn & 1) == 0) continue;
 		if ((*(unsigned int*) conn & 0x200) == 0) continue;

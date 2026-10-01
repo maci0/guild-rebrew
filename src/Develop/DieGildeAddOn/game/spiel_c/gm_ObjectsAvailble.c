@@ -1,3 +1,4 @@
+extern unsigned char g_town_records[5 * 0x2a90];
 /* gm_ObjectsAvailble — refreshes the market item availability. */
 
 // FUNCTION: SERVER 0x10015f70
@@ -24,7 +25,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
  * def+0x2e), allocates missing objects and refreshes the per-item counts
  * for the ids list.
  *
- * Byte-exact.  `g_slot_array` is the array symbol (`(char*) &g_slot_array`,
+ * Byte-exact.  `g_town_records + 0x10` is the building-array base (
  * not a pointer load), 0x55 slots of 0x80 bytes per season.  Every walk is
  * a counted index loop; msvc6 strength-reduces them into the reference's
  * down-counters and pointer walks, and the ids walk folds its first
@@ -66,7 +67,7 @@ void __cdecl gm_ObjectsAvailble(int season)
 	}
 
 	query = 0;
-	slots = (char*) &g_slot_array + season * 0x2a90;
+	slots = (char*) g_town_records + 0x10 + season * 0x2a90;
 	if (season != g_current_season) {
 		return;
 	}

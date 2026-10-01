@@ -8,6 +8,9 @@
 
 #pragma intrinsic(memcpy, memset)
 
+extern int g_manufacturer_types[25];
+extern int g_minimum_manufacturer[732];
+
 
 
 /* Game function - gm_InitObjektHersteller (initialize object manufacturers)
@@ -240,7 +243,7 @@ void __cdecl gm_InitObjektHersteller(void)
 	int comp_count;
 
 	/* Zero manufacturer table (25 ints) */
-	table_cursor = (int*) 0x10139820;
+	table_cursor = g_manufacturer_types;
 	for (i = 0x19; i != 0; i--) {
 		*table_cursor = 0;
 		table_cursor++;
@@ -254,7 +257,7 @@ void __cdecl gm_InitObjektHersteller(void)
 	/* Indexing through a local base pointer, rather than ten independent
 	 * literal-address stores, lets the second call's argument pushes hoist
 	 * ahead of the stores the way the target does. */
-	mfr_table = (int*) 0x10139820;
+	mfr_table = g_manufacturer_types;
 	mfr_table[8] = 0x2f;
 	mfr_table[7] = 0x32;
 	mfr_table[6] = 0x29;
@@ -268,10 +271,10 @@ void __cdecl gm_InitObjektHersteller(void)
 
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x46d, "gm_InitObjektHersteller(): Initialisiere gm_ObjektNr2MinimalHersteller[Objekte_MAX]", 1);
 
-	record_base = *(char**) 0x100a8c30;
+	record_base = (char*) g_entity_type_table;
 
 	/* Fill ObjektNr2MinimalHersteller with 0x58 (732 ints) */
-	table_cursor = (int*) 0x101dd8e0;
+	table_cursor = g_minimum_manufacturer;
 	for (i = 0x2dc; i != 0; i--) {
 		*table_cursor = 0x58;
 		table_cursor++;
@@ -317,7 +320,7 @@ void __cdecl gm_InitObjektHersteller(void)
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x490, "gm_InitObjektHersteller(): // ---- Alle Objekte im Geb\344ude-Prototypen durchgehen... ----", 1);
 
 		comp_count = 0;
-		record_base = *(char**) 0x100a8c30;
+		record_base = (char*) g_entity_type_table;
 
 		/* Unsigned `> 0` gives the target's `test al,al; jbe`, where a plain
 		 * `!= 0` emits `je`; the loop-bottom compare stays signed (`jl`). */
@@ -342,7 +345,7 @@ void __cdecl gm_InitObjektHersteller(void)
 
 					ent_idx = entry & 0x7fff;
 					mfr_start = *(unsigned char*) (g_item_def_table + (ent_idx << 6) + ent_idx + 0x21);
-					mfr_start = *(int*) (mfr_start * 4 + 0x10139820);
+					mfr_start = g_manufacturer_types[mfr_start];
 
 					mfr_record = record_base + mfr_start * 0x24d;
 					mfr_type_alias = &mfr_type;
@@ -367,9 +370,9 @@ void __cdecl gm_InitObjektHersteller(void)
 					}
 
 					mfr_start += (consec * same_count) / run_length;
-					new_val = *(int*) (ent_idx * 4 + 0x101dd8e0);
+					new_val = g_minimum_manufacturer[ent_idx];
 					if (mfr_start < new_val) {
-						*(int*) (ent_idx * 4 + 0x101dd8e0) = mfr_start;
+						g_minimum_manufacturer[ent_idx] = mfr_start;
 					}
 				}
 
@@ -388,16 +391,16 @@ void __cdecl gm_InitObjektHersteller(void)
 		int* min_ptr;
 		unsigned char* type_ptr;
 
-		min_ptr = (int*) 0x101dd8e0;
+		min_ptr = g_minimum_manufacturer;
 		type_ptr = (unsigned char*) (g_item_def_table + 0x21);
 
 		do {
 			if (*min_ptr == 0x58) {
-				*min_ptr = *(int*) (*type_ptr * 4 + 0x10139820);
+				*min_ptr = g_manufacturer_types[*type_ptr];
 			}
 			min_ptr++;
 			type_ptr += 0x41;
-		} while ((int) min_ptr < 0x101de450);
+		} while ((int) min_ptr < (int) (g_minimum_manufacturer + 732));
 	}
 }
 

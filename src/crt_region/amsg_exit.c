@@ -3,7 +3,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-/* NOT a game override: this is stock LIBCMT __amsg_exit from dllcrt0.obj.
+/* LIBCMT dllcrt0.obj supplies __amsg_exit.
  * The bytes at 0x1001ba71 are identical to the library body outside that
  * object's own relocation slots, so the original simply linked it. The same
  * holds for the other functions in this file (see
@@ -24,16 +24,6 @@
 
 extern void __cdecl fcn_1001fdf8(void);   /* 0x1001fdf8 - pre-exit hook */
 extern void __cdecl fcn_1001fe31(int);    /* 0x1001fe31 - __NMSG_WRITE */
-extern void (__cdecl* g_crt_exit_hook)(int);   /* 0x100317f0 - _exit hook */
-
-void __cdecl _amsg_exit(int msg)
-{
-    if (__error_mode == 1 || (__error_mode == 0 && __app_type == 1))
-        fcn_1001fdf8();
-    fcn_1001fe31(msg);
-    g_crt_exit_hook(0xff);
-}
-
 /* _crt_runtime_error: gated on the report-mode flags; calls __NMSG_WRITE
  * twice (0xfc = "abort pressed", 0xff = generic) around an optional user
  * hook (g_crt_runtime_error_hook).  Mirrors the game's copy of crt0msg.c. */

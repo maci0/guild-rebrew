@@ -7,6 +7,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+extern unsigned char g_slot_table[0x300 * 0x21c];
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 
 int __cdecl gm_LookupEntityRecordById(int);
@@ -106,21 +107,21 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 	*(unsigned short*) rec_b = *(unsigned short*) to_ent;
 	rec_b[2] = 9;
 
-	memcpy((char*) 0x100358a0 + chain * 0x21c, rec_a, 0x21c);
-	memcpy((char*) 0x100358a0 + to_slot * 0x21c, rec_b, 0x21c);
+	memcpy((char*) ((int) g_slot_table + 0x0) + chain * 0x21c, rec_a, 0x21c);
+	memcpy((char*) ((int) g_slot_table + 0x0) + to_slot * 0x21c, rec_b, 0x21c);
 
-	obj = *(char**) ((char*) 0x10035a18 + chain * 0x21c);
+	obj = *(char**) ((char*) ((int) g_slot_table + 0x178) + chain * 0x21c);
 	while (obj != NULL) {
-		*(int*) (obj + 6) = *(int*) ((char*) 0x100358a4 + chain * 0x21c);
+		*(int*) (obj + 6) = *(int*) ((char*) (g_slot_table + 4) + chain * 0x21c);
 		obj = *(char**) (obj + 0x3f);
 	}
-	obj = *(char**) ((char*) 0x10035a18 + to_slot * 0x21c);
+	obj = *(char**) ((char*) ((int) g_slot_table + 0x178) + to_slot * 0x21c);
 	while (obj != NULL) {
-		*(int*) (obj + 6) = *(int*) ((char*) 0x100358a4 + to_slot * 0x21c);
+		*(int*) (obj + 6) = *(int*) ((char*) (g_slot_table + 4) + to_slot * 0x21c);
 		obj = *(char**) (obj + 0x3f);
 	}
 
-	dst = (char*) 0x100358fc;
+	dst = (char*) ((int) g_slot_table + 0x5c);
 	counter = 0x300;
 	do {
 		ent = dst;
@@ -150,9 +151,9 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 		obj = *(char**) (obj + 0x3f);
 	}
 
-	*(int*) ((char*) 0x10035a48 + chain * 0x21c) = link;
-	*(int*) ((char*) 0x10035a34 + chain * 0x21c) = 4;
-	*(int*) ((char*) 0x10035a68 + chain * 0x21c) = 0;
+	*(int*) ((char*) (g_slot_table + 0x1a8) + chain * 0x21c) = link;
+	*(int*) ((char*) (g_slot_table + 0x194) + chain * 0x21c) = 4;
+	*(int*) ((char*) (g_slot_table + 0x1c8) + chain * 0x21c) = 0;
 	gm_KillSpieler(*(unsigned short*) rec_b, 0);
 
 	return chain;

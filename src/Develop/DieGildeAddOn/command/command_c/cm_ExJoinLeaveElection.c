@@ -1,3 +1,4 @@
+extern unsigned char g_slot_table[0x300 * 0x21c];
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -60,7 +61,7 @@ int __cdecl cm_ExJoinLeaveElection(int cmd, char* result)
 		if (query_result == 0) return 1;
 		slot_index = *(unsigned short *) (query_result + 0x27);
 		if (slot_index != 0xffff) {
-			rec = (char *) (0x100358a0 + slot_index * 0x21c);
+			rec = (char *) ((int) g_slot_table + slot_index * 0x21c);
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) g_entity_table_end) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;

@@ -4,8 +4,8 @@
  * loadsave_dump1.c); twin of GOLD 0x4f17f0. */
 
 int __cdecl fcn_00430910(void* buf, int elementSize, int elementCount, void* streamCtx);
-extern int g_field_worker_count[4];
-extern int g_field_entry_count[4];
+extern const int g_field_worker_count[4];
+extern const int g_field_entry_count[4];
 
 // SIZE 0x24
 typedef struct {

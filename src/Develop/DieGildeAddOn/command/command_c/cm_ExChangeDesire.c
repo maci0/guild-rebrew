@@ -4,9 +4,9 @@
 #include "../../../Units/Error/error.h"
 
 // GLOBAL: SERVER 0x10025690
-extern double _g_stat_max_d;
+extern const double _g_stat_max_d;
 // GLOBAL: SERVER 0x10025698
-extern double _g_stat_min_d;
+extern const double _g_stat_min_d;
 
 /* Byte offset off the resolved base, not a cached float*: `resolved` is
  * address-taken, so each use reloads it and the target addresses the slot
@@ -79,13 +79,13 @@ int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 			off = (idx * 3 + 0x24) * 4;
 			src += 4;
 			STAT(off) += delta;
-			if (STAT(off) < _g_stat_min_d) goto pick;
+			if (STAT(off) < 0.0) goto pick;
 			if (STAT(off) < _g_stat_max_d) goto pick;
 			clamped = _g_stat_max_d;
 			goto store;
 		pick:
-			if (STAT(off) < _g_stat_min_d) {
-				clamped = _g_stat_min_d;
+			if (STAT(off) < 0.0) {
+				clamped = 0.0;
 				goto store;
 			}
 			clamped = STAT(off);

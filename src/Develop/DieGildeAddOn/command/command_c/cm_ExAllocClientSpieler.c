@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
@@ -40,7 +41,7 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2917, "ClientSpieler erzeugt", 1);
 	off = entity * 0x21c;
 	hash_index = 0x99099 * (unsigned char)*(char*)(cmd + 3);
-	*(int*)(0x10442d00 + hash_index * 4) = *(int*)(g_slot_table + off + 4);
+	*(int*)((int) (g_connections + 0x264200) + hash_index * 4) = *(int*)(g_slot_table + off + 4);
 	strncpy(g_slot_table + off + 0x30, (char*)cmd + 0x25, 0x10);
 	entry = gm_GetEntityTableEntry(g_slot_table + off);
 	if (entry != 0) {

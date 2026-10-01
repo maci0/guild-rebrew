@@ -14,7 +14,7 @@
 #pragma intrinsic(memcpy, memset)
 
 
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 
 
 /* Initializes the object production (Hersteller) system.
@@ -23,9 +23,7 @@ extern unsigned char g_slot_table[2];
 
 // DATA: SERVER 0x1002dde0
 
-// DATA: SERVER 0x1009b764
 // DATA: SERVER 0x100a8c34
 
-// DATA: SERVER 0x100a8cf8
 // DATA: SERVER 0x1014d8c0
 // DATA: SERVER 0x101de450

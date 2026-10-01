@@ -2,6 +2,7 @@
 #include <string.h>
 #include <time.h>
 #include <windows.h>
+#include <mmsystem.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
@@ -10,8 +11,11 @@ void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 
 extern void (*g_panic_callback)(void);
 extern unsigned int g_log_mode_flags;
-int g_owner_window = 0;
-char g_log_message_buffer[] = {0};
+// GLOBAL: SERVER 0x117660e0
+int g_owner_window;
+/* Reference storage runs from 0x117640e0 to the window at 0x117660e0. */
+// GLOBAL: SERVER 0x117640e0
+char g_log_message_buffer[0x2000];
 extern char s_ERROR_Handler_has_not_been[];
 extern char s_error_title[];
 extern char s_FATAL_ERROR_s_lu_s[];
@@ -59,7 +63,8 @@ extern char g_log_message_buffer[];
 /* REF 0x100273ac..0x10027488 — named emit; kill anonymous COMDATs in this TU. */
 
 // GLOBAL: SERVER 0x117660e0
-extern int g_owner_window;
+extern // GLOBAL: SERVER 0x117660e0
+int g_owner_window;
 extern void (*g_panic_callback)(void);
 // FUNCTION: SERVER 0x100034c0
 // ShutdownLogAndErrorHandler
@@ -158,17 +163,17 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 {
 	unsigned char flags;
 
-	if (*(int*) 0x10034610 == 0) {
-		((void (__stdcall*)(int, char*, char*, int)) *(void**) 0x10024148)(0, s_ERROR_Handler_has_not_been, s_error_title, 0x10030);
+	if (g_panic_callback == 0) {
+		MessageBoxA(0, s_ERROR_Handler_has_not_been, s_error_title, 0x10030);
 		return;
 	}
-	flags = *(unsigned char*) 0x10034618;
+	flags = *(unsigned char*) &g_log_mode_flags;
 	if (flags & 1) {
 		if (flags & 0x20) {
-			sprintf((char*) 0x117640e0, s_Time_8lu_Module_s_Line, ((int (__cdecl*)(void)) *(void**) 0x10024154)(), module, line, msg);
+			sprintf(g_log_message_buffer, s_Time_8lu_Module_s_Line, timeGetTime(), module, line, msg);
 		} else {
-			sprintf((char*) 0x117640e0, s_tModule_s_Line_lu_s, module, line, msg);
+			sprintf(g_log_message_buffer, s_tModule_s_Line_lu_s, module, line, msg);
 		}
-		DispatchLogOutput((char*) 0x117640e0, *(int*) 0x10034618, severity);
+		DispatchLogOutput(g_log_message_buffer, g_log_mode_flags, severity);
 	}
 }

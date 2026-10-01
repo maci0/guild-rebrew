@@ -10,7 +10,7 @@
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 #define g_entity_slot_table ((unsigned int*) 0x8680b4)
 #define g_entity_type_table ((unsigned char*) 0x868050)
-extern float g_output_share[1];
+extern const float g_output_share[4];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);

@@ -5,8 +5,7 @@ extern int __cdecl gm_RandomMod(unsigned short range);
 unsigned int __cdecl gm_AllocSpieler(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 void __cdecl plt_TableLookup(unsigned int a, unsigned short* b);
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param);
-extern unsigned char g_entity_type_bytes[1];
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 /* 0x10035a05: the byte at +0x165 of each 0x21c-byte g_slot_table record. */
 #define g_stat_b_array ((unsigned char*) g_slot_table + 0x165)
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
@@ -218,7 +217,7 @@ void* __cdecl sim_CreateCitizen(unsigned char flags, int citizen_type, int paren
 		}
 		if ((flags & 2) != 0) {
 			g_stat_b_array[new_entity_slot * 0x21c] = stat_b;
-			g_entity_type_bytes[new_entity_slot * 0x21c] = stat_a;
+			g_slot_table[new_entity_slot * 0x21c + 0x164] = stat_a;
 		}
 	}
 	else {

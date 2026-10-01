@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 #include "../Units/Error/error.h"
 #include "../Units/m_alloc/m_alloc.h"
 extern char s_Cant_set_SO_RCVBUF[];
@@ -20,9 +21,10 @@ int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
 void __cdecl srv_LogWinsockError(int err_code);
 
 #include "server_internal.h"
+extern char g_game_path[0x104];
+extern int g_players_synced;
 
-// GLOBAL: SERVER 0x101deaec
-int g_net_socket = 0;
+extern int g_net_socket;
 
 void __cdecl srv_InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
@@ -33,7 +35,6 @@ void __cdecl m_init(int);
 int __cdecl srv_SendPlayerData(unsigned int*);
 
 // DATA: SERVER 0x1003467c
-// DATA: SERVER 0x114ffe20
 // FUNCTION: GOLDTL 0x4e7600
 // SIZE: 90
 // FUNCTION: SERVER 0x10009d30
@@ -49,7 +50,7 @@ int __cdecl srv_Init(void)
 	SetThreadPriority(hThread, 2);
 	((int (__cdecl*)(void*, int, int, int)) InitializeLogAndErrorHandler)((void*) srv_CleanupSockets, 0, 0, 3);
 	m_init(0x7fa6);
-	strcpy(path, (char*) 0x10029594);
+	strcpy(path, g_game_path);
 	strcat(path, "data\\");
 	if (gm_Open(path) < 0) {
 		sprintf(msg, "Could not open gamefiles path:%s", path);
@@ -58,12 +59,12 @@ int __cdecl srv_Init(void)
 	}
 	gm_InitEntitySlots();
 	srv_InitBuildingTypeTable();
-	g_net_socket = srv_CreateListenSocket(*(int*) 0x11764088);
+	g_net_socket = srv_CreateListenSocket(g_tick_rate);
 	if (g_net_socket == -1) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x3db, "***ERROR: Initialization of Socket failed!\n", 1);
 		goto srv_done;
 	}
-	*(int*) 0x11764090 = 0;
+	g_players_synced = 0;
 srv_done:
 	;
 }
@@ -90,12 +91,12 @@ int __cdecl srv_CreateListenSocket(int port)
 
 	/* init player slot flags */
 	{
-		unsigned int* slot_walk = &g_player_slot_field;
+		unsigned int* slot_walk = (unsigned int*) (g_connections + 0x14);
 		do {
 			*(int*) ((char*) slot_walk - 0x14) = 0;
 			*slot_walk = 0xFFFFFFFF;
 			slot_walk = (unsigned int*) ((char*) slot_walk + 0x264264);
-		} while ((int) slot_walk < 0x114ffe34);
+		} while ((int) slot_walk < (int) (g_connections + 0x1321334));
 	}
 
 	WSAStartup(0x101, (WSADATA*) wsadata);
@@ -172,8 +173,8 @@ cleanup_wsa:
 void __cdecl srv_CleanupSockets(void)
 {
 	int slot_walk;
-	slot_walk = 0x101deb14;
-	while (slot_walk < 0x114ffe34) {
+	slot_walk = (int) (g_connections + 0x14);
+	while (slot_walk < (int) (g_connections + 0x1321334)) {
 		if (*(int*) (slot_walk - 0x14)) {
 			shutdown(*(int*) slot_walk, 2);
 			closesocket(*(int*) slot_walk);
@@ -242,24 +243,24 @@ int __cdecl srv_AcceptConnections(void)
 		return -1;
 
 	i = 0;
-	slot_walk = 0x101deb00;
+	slot_walk = (int) g_connections;
 	while (1) {
 		if (*(int*) slot_walk == 0)
 			break;
 		slot_walk += 0x264264;
 		i++;
-		if (slot_walk >= 0x114ffe20)
+		if (slot_walk >= (int) (g_connections + 0x1321320))
 			goto no_slots;
 	}
-	slot = (unsigned char*) 0x101deb00 + i * 0x264264;
+	slot = (unsigned char*) (int) g_connections + i * 0x264264;
 	if (slot != 0)
 		goto do_accept;
 
 no_slots:
 	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x495, "No more Slots for new Connections!\n", 1);
-	if (*(int*) 0x114ffe20 != 0)
+	if (*(int*) (int) (g_connections + 0x1321320) != 0)
 		goto ret_neg1;
-	slot = (unsigned char*) 0x101deb00 + 8 * 0x264264;
+	slot = (unsigned char*) (int) g_connections + 8 * 0x264264;
 
 do_accept:
 	addrlen = 16;
@@ -366,7 +367,7 @@ int __cdecl srv_ReceivePacketHeader(unsigned int* conn)
 		return 0;
 
 	state = *(unsigned short*) ((char*) conn + 0x14a);
-	recv_fn = (int (__stdcall*)(unsigned int, char*, int, int)) * (void**) 0x10024168;
+	recv_fn = recv;
 	if (state < 3) {
 		n = recv_fn(*(unsigned int*) ((char*) conn + 0x14),
 			    (char*) conn + 0x18 + *(unsigned short*) ((char*) conn + 0x14a),

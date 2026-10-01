@@ -1,3 +1,5 @@
+extern const float g_dynasty_initial_trait_offset;
+extern unsigned char g_city_records[4 * 0x2f4];
 #include "../entity.h"
 
 // FUNCTION: GOLDTL 0x5d6030
@@ -58,11 +60,11 @@ void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, 
 	*(float*) ((char*) entity + 0x18) = 1000.0f;
 	for (j = 0; j < 5; j++) {
 		*(char*) ((char*) entity + 0x80 + j) =
-			(char) (long) ((float) (gm_RandomMod(0x2a) & 0xffff) + *(float*) 0x10025808);
+			(char) (long) ((float) (gm_RandomMod(0x2a) & 0xffff) + g_dynasty_initial_trait_offset);
 	}
 	*(char*) ((char*) entity + 0xd) = 9;
 	gm_AddObjekt(*(int*) ((char*) entity + 4),
-	             (unsigned short) g_entity_slot_table[(unsigned int) g_current_season * 189],
+	             (unsigned short) ((unsigned int*) (g_city_records + 0x54))[(unsigned int) g_current_season * 189],
 	             0xf42400);
 	gm_RandomMod(2);
 	*(char*) ((char*) entity + 2) = 3;

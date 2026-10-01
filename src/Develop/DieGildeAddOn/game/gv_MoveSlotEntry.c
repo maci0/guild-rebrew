@@ -1,3 +1,4 @@
+extern unsigned char g_city_records[4 * 0x2f4];
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #include "entity.h"
@@ -92,7 +93,7 @@ int __cdecl gv_MoveSlotEntry(void* a)
 	/* The three -1 exits share one epilogue in the target (0x10011bd8),
 	 * reached by a far jump from each guard. */
 	if (rec2 == 0 || *(unsigned short*) ((char*) rec2 + 0x27) == 0xffff ||
-	    0x100358a0 + (*(unsigned short*) ((char*) rec2 + 0x27) & 0xffff) * 540 ==
+	    (int) g_slot_table + (*(unsigned short*) ((char*) rec2 + 0x27) & 0xffff) * 540 ==
 	        g_entity_table_end)
 		return -1;
 	if (*(unsigned char*) (g_entity_type_table + *(unsigned char*) rec2 +
@@ -169,16 +170,16 @@ done:
 	count = *(int*) ((char*) cmd + 0x11);
 	if (count > 0) {
 		gm_SubObjectNoKill(*(int*) ((char*) a + 4),
-		                   (unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
+		                   (unsigned int) *(unsigned short*) ((char*) ((unsigned int*) (g_city_records + 0x54)) +
 		                                                       g_current_season * 756),
 		                   count);
 		/* fild re-reads the field (0x10011b7c) instead of the register, and
 		 * the conversion is an implicit cast, not a pushed double. */
 		i = (int) ((float) *(int*) ((char*) cmd + 0x11) *
 		           g_output_share[*(int*) ((char*) cmd + 0xd)]);
-		gm_AddObjekt(*(int*) (0x100358a4 +
+		gm_AddObjekt(*(int*) ((int) (g_slot_table + 4) +
 		                                 (unsigned short) *(unsigned short*) ((char*) rec2 + 0x27) * 540),
-		                         (unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
+		                         (unsigned int) *(unsigned short*) ((char*) ((unsigned int*) (g_city_records + 0x54)) +
 		                                                             g_current_season * 756),
 		                         i);
 	}

@@ -7,6 +7,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+extern int g_save_extra_field[8];
 extern int g_file_version; 
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
@@ -58,11 +59,11 @@ unsigned int ls_ID2Ptr(void)
 	}
 	g_active_player_count = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
 	if (g_file_version >= 0x10017) {
-		for (id_cursor = (int*) 0x10035478; (int) id_cursor < 0x10035498; id_cursor++) {
+		for (id_cursor = g_save_extra_field; (int) id_cursor < (int) (g_save_extra_field + 8); id_cursor++) {
 			*id_cursor = gm_LookupEntityRecordById(*id_cursor);
 		}
 	}
-	for (entity_cursor = (unsigned char*) 0x10035a10; (int) entity_cursor < 0x1009ae10; entity_cursor += 0x21c) {
+	for (entity_cursor = g_slot_table + 0x170; (int) entity_cursor < (int) (g_slot_table + 0x300 * 0x21c + 0x170); entity_cursor += 0x21c) {
 		rec = entity_cursor - 0x170;
 		if (*(unsigned short*) rec == 0xffff) {
 			continue;
@@ -138,7 +139,7 @@ unsigned int ls_ID2Ptr(void)
 }
 
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
-extern char g_stream_pool[1]; /* 0x10034670 */
+extern void* g_stream_pool; /* 0x10034670 */
 extern int g_stream_count; /* 0x10034678 */
 /* Canonical definition lives in game/spiel_c/gm_NextEntityQueryMatch.c. */
 extern int g_query_filter_owner;

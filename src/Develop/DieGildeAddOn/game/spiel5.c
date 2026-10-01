@@ -18,7 +18,7 @@ int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 int __cdecl gm_FreeObjectListRecursive(char**);
 void __cdecl gv_Free3Fields(void* param);
 char* __cdecl gm_SearchStruct(void);
@@ -66,7 +66,7 @@ char* __cdecl gm_SearchStruct(void)
 // FUNCTION: SERVER 0x10017240
 // gm_CleanupBuildingEntity
 
-/* g_entity_records: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
+/* Building links are fields at slot+0x16c, stride 0x21c, 768 slots. */
 
 int __cdecl gm_CleanupBuildingEntity(unsigned char* building)
 {
@@ -101,7 +101,7 @@ int __cdecl gm_CleanupBuildingEntity(unsigned char* building)
 	}
 	*(int*) (building + 0x65) = 0;
 cleanup_loop:
-	entity_scan = &g_entity_records;
+	entity_scan = (int*) (g_slot_table + 0x16c);
 	do {
 		if ((unsigned char*) entity_scan[1] == building) {
 			entity_scan[1] = 0;
@@ -110,7 +110,7 @@ cleanup_loop:
 			*entity_scan = 0;
 		}
 		entity_scan = entity_scan + 0x87;
-	} while ((int) entity_scan < 0x1009ae0c);
+	} while ((int) entity_scan < (int) (g_slot_table + sizeof(g_slot_table) + 0x16c));
 	if (*(int*) (building + 0x5d) != 0) {
 		gm_FreeObjectListRecursive((char**) (building + 0x5d));
 	}
@@ -164,7 +164,7 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 			}
 		}
 		table_ptr = table_ptr + 0x15;
-	} while ((int) table_ptr < 0x10030b6a);
+	} while ((int) table_ptr < (int) (g_building_defaults + 37) + 1);
 }
 
 /* Sets worker limits for a building based on its type and
@@ -411,4 +411,3 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 
 /* Sets up an entity query with specific parameters. Configures
  * the query state machine for iterating filtered results. */
-

@@ -1,3 +1,5 @@
+extern int g_minimum_manufacturer[732];
+extern unsigned char g_city_records[4 * 0x2f4];
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 
@@ -11,7 +13,7 @@
 #include "game_data.h"
 #pragma intrinsic(memcpy, memset)
 
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_WalkEntityChain(int);
 double __cdecl gm_CalculateProductionValue(int, unsigned char);
@@ -39,7 +41,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 	ent = gm_ff_Objekt(entity, 1, 4, 9);
 	if (ent != (short*) 0) {
 		do {
-			if ((short) g_entity_slot_table[(obj_type & 0xff) * 189] == *ent) {
+			if ((short) ((unsigned int*) (g_city_records + 0x54))[(obj_type & 0xff) * 189] == *ent) {
 				total = total + *(int*) (ent + 7);
 			}
 			ent = gm_NextEntityQueryMatch();
@@ -191,7 +193,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	divisor_ptr = &divisor;
 	quot = quot / *divisor_ptr;
 	quot_f = (float) quot;
-	min_val = *(int*) (entity_index * 4 + 0x101dd8e0);
+	min_val = g_minimum_manufacturer[entity_index];
 	record = g_entity_type_table + min_val * 0x24d;
 	if (min_val != 0) {
 		mod_value = g_const_0_0;
@@ -200,7 +202,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 			mod_value = (float) ((double) weight * g_const_896_0 * g_const_1_over_720 + mod_value);
 		}
 	} else {
-		mod_value = g_graveyard_const_c;
+		mod_value = 4.0f;
 	}
 	/* The quotient is scaled in place as a float register variable that
 	   is its own destination, as the composite loop does with `mod_value`:
@@ -380,7 +382,7 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 	sum = 0;
 	idx = (unsigned int) (unsigned char) g_current_season * 189;
 	result = (int) gm_ff_Objekt(
-	    *(int*) (entity + 0x178), 1, 0, (int) (unsigned short) g_entity_slot_table[idx]);
+	    *(int*) (entity + 0x178), 1, 0, (int) (unsigned short) ((unsigned int*) (g_city_records + 0x54))[idx]);
 	if (result) {
 		do {
 			sum += *(int*) (result + 0xe);
@@ -518,7 +520,7 @@ int __cdecl gm_WalkEntityChain(int raw_idx)
 	if (idx >= 0x300) {
 		return -1;
 	}
-	slot = (unsigned int) idx * 0x21c + 0x100358a0;
+	slot = (unsigned int) idx * 0x21c + (int) g_slot_table;
 	if (*(unsigned short*) slot == 0xFFFF) {
 		return -1;
 	}
@@ -556,12 +558,12 @@ char* __cdecl gm_FindEntityByOwner(int arg1)
 		return record;
 	}
 	i = 0;
-	record_cursor = 0x100358a2;
-	while (record_cursor < 0x1009aca2) {
+	record_cursor = (int) g_slot_table + 2;
+	while (record_cursor < (int) g_slot_table + 0x65402) {
 		if (*(char*) (record_cursor + 0x162) != 0 && *(int*) (record_cursor + 0x16a) == arg1) {
 			if (*(char*) record_cursor == 6 || *(char*) record_cursor == 7 || *(char*) record_cursor == 1 ||
 			    *(char*) record_cursor == 2) {
-				record = (char*) (0x100358a0 + i * 0x21c);
+				record = (char*) ((int) g_slot_table + i * 0x21c);
 				break;
 			}
 		}

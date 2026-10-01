@@ -1,3 +1,4 @@
+extern unsigned char g_slot_table[0x300 * 0x21c];
 /* gv_ReplaceProductionWorker - proper C */
 
 // FUNCTION: SERVER 0x10011540
@@ -27,7 +28,7 @@ int __cdecl gv_ReplaceProductionWorker(void* a)
 	gm_ResolveEntityById(&rec, 0, 0, *(int*) ((char*) a + 8));
 	if (rec == 0 ||
 	    *(unsigned short*) ((char*) rec + 0x27) == limit ||
-	    0x100358a0 + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
+	    ((int) g_slot_table + 0x0) + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
 	        g_entity_table_end)
 		return -1;
 	type = *(unsigned char*) rec;

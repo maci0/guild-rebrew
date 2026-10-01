@@ -59,7 +59,7 @@ if [ -f build/CMakeFiles/server_dll.dir/flags.make ]; then
         echo "  build.make has been hand-edited, so this script would measure a" >&2
         echo "  build the tree cannot reproduce.  Restore with:" >&2
         echo "    rm -rf build && cmake -B build -S . \\" >&2
-        echo "      --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake \\" >&2
+        echo "      --toolchain cmake/toolchain-msvc-6.0-sp5-docker.cmake \\" >&2
         echo "      -DCMAKE_BUILD_TYPE=Release -DREBREW_DEBUG_INFO=OFF" >&2
         exit 4
     fi
@@ -78,7 +78,7 @@ for f in "$@"; do
     # Compile the live file.  A frozen copy under a dot-prefixed name was tried
     # to defeat the agents' sample-write sweeps and it collapses the composition
     # (`exactly at their reference VA: 0`, residue x12) -- something downstream
-    # in split_link.sh/pad_short_functions.py keys off the object's source path.
+    # in split_link.sh keys off the object's source path.
     # The race is handled socially instead: a file is only measured after its
     # agent says "file frozen".
     cmd=$(echo "$line" \

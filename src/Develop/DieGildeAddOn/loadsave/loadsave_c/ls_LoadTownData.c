@@ -1,3 +1,5 @@
+extern unsigned char g_city_records[4 * 0x2f4];
+extern unsigned char g_town_records[5 * 0x2a90];
 // FUNCTION: SERVER 0x10013b10
 #include "../../../Units/Error/error.h"
 #include "../../../Units/m_alloc/m_alloc.h"
@@ -15,7 +17,7 @@ int ls_LoadTownData(int);
 /* ls_LoadTownData — two-phase save load.  Phase 1 walks the per-player
  * building-slot table (0x1009b768, stride 0x2a90): 4 header dwords, then
  * `count` (default 0x3e) records of 0x80 bytes.  Phase 2 walks the town
- * records (0x100a8c88, stride 0x2f4) with name/timestamps/flags/population/
+ * records (base 0x100a8c40, cursor +0x48, stride 0x2f4) with name/timestamps/flags/population/
  * resource pairs/political state.
  *
  * Byte-match note: RELOC, 1361/1361.  The
@@ -79,7 +81,7 @@ int __cdecl ls_LoadTownData(int file)
 		}
 	}
 
-	for (ptr = 0x1009b768; ptr < 0x100a8c38; ptr += 0x2a90) {
+	for (ptr = (int) (g_town_records + 8); ptr < (int) (g_town_records + 5 * 0x2a90 + 8); ptr += 0x2a90) {
 		char* inner;
 		int i;
 		char* hdr = (char*) (ptr - 8);
@@ -141,8 +143,8 @@ int __cdecl ls_LoadTownData(int file)
 
 	}
 
-	ptr2 = 0x100a8c88;
-	while (ptr2 < 0x100a9858) {
+	ptr2 = (int) (g_city_records + 0x48);
+	while (ptr2 < (int) g_city_records + 4 * 0x2f4 + 0x48) {
 		char* q = (char*) (ptr2 - 8);
 		char* b = (char*) (ptr2 - 0x48);
 		char* inner;

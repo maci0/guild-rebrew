@@ -327,6 +327,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 
 // SIZE 0x28
 #include "../group_node.h"
+#include "../alloc_root.h"
 
 void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 {

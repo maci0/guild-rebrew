@@ -1,8 +1,8 @@
 // GLOBAL: SERVER 0x1002575c
-extern int g_field_worker_count[4];
+extern const int g_field_worker_count[4];
 
 // GLOBAL: SERVER 0x1002576c
-extern int g_field_entry_count[4];
+extern const int g_field_entry_count[4];
 // FUNCTION: GOLD 0x004efc10
 // SIZE: 832
 // FUNCTION: GOLDTL 0x4f1d20

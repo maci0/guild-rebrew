@@ -33,13 +33,8 @@ H = {
  0x10018850:("gm_AllocSpieler","src/shared/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c","_gm_AllocSpieler"),
  0x10019ed0:("gm_CheckInventoryCapacity","src/shared/DieGildeAddOn/game/spiel622.c","_gm_CheckInventoryCapacity"),
 }
-rows=[]
-for ln in open("db/server.dll_functions.csv"):
-    p=ln.strip().split("|")
-    if len(p)>=5:
-        try: rows.append((int(p[0],16),int(p[4]),p[1]))
-        except ValueError: pass
-rows.sort()
+import catalog_functions
+rows=catalog_functions.load_functions()
 def nextva(va):
     for a,sz,_n in rows:
         if a>va: return a

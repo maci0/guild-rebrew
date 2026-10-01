@@ -18,10 +18,10 @@ shared_dir = "src"
 # VC6 idiom (`fnstsw ax; test ah,0x40/0x01`, 10 sites in game code, 0
 # Processor-Pack sites binary-wide).  `rebrew toolchain detect --target
 # server.dll` verifies this and refuses a `-pp` profile; scripts/gate.sh runs
-# it.  Plain SP5 and SP6 output is byte-identical for every function measured,
-# so sp6 is kept as the pinned profile (the discriminator is pack vs plain,
-# not the service pack).
-compiler = { profile = "msvc-6.0-sp6" }
+# it. Plain SP5 and SP6 output is byte-identical for all 262 reversed functions.
+# SP5 is pinned because its stock CRT formatter matches the reference;
+# SP6 adds 93 bytes to that library function.
+compiler = { profile = "msvc-6.0-sp5" }
 ghidra_program_path = "/server.dll"
 # Shared BinSync state dir: `functions/*.toml`, `global_vars.toml`,
 # `structs/*.toml`, write-locked 0444.  Configured here so `rebrew sync` and
@@ -30,9 +30,8 @@ ghidra_program_path = "/server.dll"
 # `rebrew sync --push` -- while this pointer is versioned.
 binsync_state_dir = "binsync"
 binary = "original/Server/server.dll"
-# Whole-file status scores this pre-postlink image. build/server.dll is the
-# postlink output and is not what the linker wrote.
-raw_link = "build/split_poc.dll"
+# Whole-file status scores the raw toolchain output.
+raw_link = "build/server.dll"
 format = "pe"
 arch = "x86_32"
 marker = "SERVER"
@@ -54,9 +53,10 @@ layout = {target = "server.dll", link_options = ["/BASE:0x10000000"], image_base
 KERNEL32 = "KERNEL32.lib"
 USER32 = "USER32.lib"
 WS2_32 = "WS2_32.lib"
+LIBCMT = "LIBCMT.lib"
 WINMM = "WINMM.lib"
 MSVCRT = ""
-LIBCMT = "LIBCMT.lib"
+
 
 [targets."Europa1400Gold_TL.exe"]
 # Code generator lock (round 1379): same compiler VERSION as the server
@@ -126,8 +126,8 @@ MSS32 = "MSS32.lib"
 MSVCRT = ""
 LIBCMT = "LIBCMT.lib"
 [compiler]
-profile = "msvc-6.0-sp6"
-# Docker-only toolchain: CL.EXE runs inside rebrew/msvc:6.0-win32 (the
+profile = "msvc-6.0-sp5"
+# Docker-only toolchain: CL.EXE runs inside rebrew/msvc:6.0-sp5-win32 (the
 # standard rebrew runner); no host toolchain tree, so these legacy fields
 # are empty.
 command = ""

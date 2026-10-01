@@ -356,6 +356,8 @@ extern int __cdecl inflate(void* zstrm, int flush); /* 0x100058d0, zlib */
 /* Named symbols from vfs4.c — use these instead of string literals / raw
  * address casts so the gz message is not also emitted as a ??_C@ COMDAT. */
 extern char s_D__Develop_Units_vfs_vfs_c[];
+extern unsigned int g_gzip_magic_1f;
+extern unsigned int g_gzip_magic_8b;
 extern char s_vfs__gz_compressed_file____s___i[];
 
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
@@ -457,8 +459,8 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 			goto done;
 		}
 		*(unsigned char*) (stream + 0x13c) = (unsigned char) (flags & ~4);
-		if ((unsigned int) *(unsigned char*) buf != *(unsigned int*) 0x10029450 ||
-		    (unsigned int) *(unsigned char*) (buf + 1) != *(unsigned int*) 0x10029454) {
+		if ((unsigned int) *(unsigned char*) buf != g_gzip_magic_1f ||
+		    (unsigned int) *(unsigned char*) (buf + 1) != g_gzip_magic_8b) {
 			goto done;
 		}
 		sprintf(name, s_vfs__gz_compressed_file____s___i, stream);

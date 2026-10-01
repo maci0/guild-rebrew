@@ -1,3 +1,4 @@
+extern unsigned char g_town_records[5 * 0x2a90];
 // FUNCTION: GOLDTL 0x506000
 // SIZE: 720
 // FUNCTION: SERVER 0x10017c40
@@ -104,7 +105,7 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 
 	if ((*(unsigned short*) obj >= 0x92 && *(unsigned short*) obj <= 0x97) ||
 	    *(unsigned short*) obj == 0x2db) {
-		slot = (char*) &g_slot_array + (unsigned int) g_current_season * 0x2a90;
+		slot = (char*) g_town_records + 0x10 + (unsigned int) g_current_season * 0x2a90;
 		query_result = (char*) gm_ff_Objekt(*(int*) (obj + 0x14), 1, 0, 0x116);
 		if (query_result != NULL) {
 			query_result[0x1c] = 0xc;
@@ -136,7 +137,7 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 			}
 			prod += 0x80;
 			slot += 0x80;
-		} while ((int) prod < 0x10030860);
+		} while ((int) prod < (int) (g_producer_id_table + 2720));
 	}
 
 	return obj;

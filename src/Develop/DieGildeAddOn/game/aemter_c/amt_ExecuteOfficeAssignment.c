@@ -1,8 +1,11 @@
+extern unsigned char g_slot_table[0x300 * 0x21c];
 // FUNCTION: SERVER 0x1000b4d0
 #include "../../../Units/Error/error.h"
+#include "../../../game_structs.h"
 #include "../office_slot.h"
 
-extern char g_office_slots[0x3f0]; /* 0x101de5a0 */
+extern char g_office_slots[0x3f0]; /* ((int) g_office_slots + 0x0) */
+extern OFFICE_ROLE_TEMPLATE g_office_role_templates[40];
 void* __cdecl gm_LookupEntityRecordById(int);
 /* Validates if an entity is eligible for an office position.
  * Checks entity type, existing office holdings, and eligibility
@@ -145,8 +148,8 @@ after_old_clear:
 			}
 
 			/* Compare role priorities */
-			if (*(unsigned char*) ((unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role * 0x18 + 0x10029bc0) >=
-			    *(unsigned char*) (*(unsigned char*) (ent + 0x166) * 0x18 + 0x10029bc0)) {
+			if (*(unsigned char*) &g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role].f8 >=
+			    *(unsigned char*) &g_office_role_templates[*(unsigned char*) (ent + 0x166)].f8) {
 				*(char*) (ent + 0x167) = ((OfficeSlot*) g_office_slots)[record_index].role;
 			}
 
@@ -176,12 +179,12 @@ after_old_clear:
 			}
 
 			/* Check role's count property */
-			if (*(int*) ((unsigned int) (unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role * 0x18 + 0x10029bc8) != 0) {
+			if (g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role].f10 != 0) {
 				unsigned char* scan;
 				k = 0;
-				scan = (unsigned char*) 0x101de5a8;
+				scan = (unsigned char*) ((int) g_office_slots + 0x8);
 
-				while ((int) scan < 0x101de878) {
+				while ((int) scan < ((int) g_office_slots + 0x2d8)) {
 					if (*scan == (unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role && k != record_index) {
 						goto dec_count;
 					}
@@ -218,13 +221,13 @@ after_old_clear:
 			/* Medium role path (0x1c-0x22) */
 			if (*(char*) (ent + 0x169) != 0) {
 				int* scan;
-				scan = (int*) 0x101de874;
+				scan = (int*) ((int) g_office_slots + 0x2d4);
 				do {
 					if (*(char*) ((char*) scan + 4) == *(char*) (ent + 0x169) && *scan == *(int*) (ent + 4)) {
 						*scan = -1;
 					}
 					scan = (int*) ((char*) scan + 0x18);
-				} while ((int) scan < 0x101de91c);
+				} while ((int) scan < ((int) g_office_slots + 0x37c));
 			}
 
 			*(char*) (ent + 0x169) = ((OfficeSlot*) g_office_slots)[record_index].role;
@@ -260,8 +263,8 @@ after_old_clear:
 				int row;
 				row = 0;
 				do {
-					*(int*) (0x10035a6c + row * 0x21c) =
-						*(int*) (0x10035a6c + row * 0x21c) & ~mask;
+					*(int*) (g_slot_table + 0x1cc + row * 0x21c) =
+						*(int*) (g_slot_table + 0x1cc + row * 0x21c) & ~mask;
 					row++;
 				} while (row < 768);
 			}

@@ -1,3 +1,4 @@
+#include "../../download_state.h"
 // GLOBAL: SERVER 0x11764084
 int g_max_players = 0; /* 0x11764084 */
 // GLOBAL: SERVER 0x11764088
@@ -60,25 +61,18 @@ void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int f
  *     as a do/while the back-edge and exit branches swap. */
 
 
-extern unsigned char g_connections[0x264264]; /* 0x101deb00: 8 slots of 0x264264 */
-// GLOBAL: SERVER 0x101deac8
-unsigned int g_download_slots[8] = {0}; /* 0x101deac8 */
-// GLOBAL: SERVER 0x101de9a0
-char g_module_path[0x104] = {0}; /* 0x101de9a0 */
+extern unsigned char g_connections[9 * 0x264264]; /* 0x101deb00: 8 slots of 0x264264 */
+extern char g_module_path[0x104];
+extern char g_game_path[0x104];
 extern int g_current_year; /* 0x10035880 */
-// GLOBAL: SERVER 0x101deae8
-unsigned int g_download_buffer = 0; /* 0x101deae8 */
 // GLOBAL: SERVER 0x11764090
 int g_players_synced = 0; /* 0x11764090: every player sent 0x20 */
-// GLOBAL: SERVER 0x101deaf0
-unsigned int g_next_tick_time = 0; /* 0x101deaf0 */
-// GLOBAL: SERVER 0x101deac0
-unsigned int g_download_total_size = 0; /* 0x101deac0 */
+extern unsigned int g_next_tick_time;
 extern int g_handler_started; /* 0x10034680 */
 extern int g_clock_copy_mid; /* 0x10035888 */
 extern unsigned short g_current_hour; /* 0x10035884 */
-// GLOBAL: SERVER 0x101de464
-unsigned char g_host_flags = 0; /* 0x101de464 */
+extern unsigned char g_host_flags; /* Historical alias; no separate allocation. */
+extern int g_save_info[63];
 extern short g_clock_copy_tail; /* 0x1003588c */
 extern int g_game_speed_value; /* 0x1002c3f0 */
 
@@ -123,7 +117,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 		"General",
 		"GamePath",
 		"\\project\\diegildeaddon\\game\\",
-		(char*) 0x10029594,
+		g_game_path,
 		0x104,
 		module_path
 	);
@@ -296,7 +290,7 @@ send_start_commands:
 
 	srv_RecvGame();
 	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x1f9, "Initializing Client(s)\n", 1);
-	if ((*(unsigned char*) &g_host_flags & 4) == 0) {
+	if ((*((unsigned char*) g_save_info + 4) & 4) == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x1ff, "Sending data...", 1);
 		phase_complete = 0;
 		while (phase_complete == 0) {
@@ -370,7 +364,7 @@ send_start_commands:
 	}
 
 	m_FreeTracked(*(void**) &g_download_buffer);
-	host_flags = *(unsigned char*) &g_host_flags;
+	host_flags = *((unsigned char*) g_save_info + 4);
 
 	/* the reference stores 0x101deae8 before 0x101deac0 (0x10009931,
 	 * 0x10009937); the store order follows the source order here */

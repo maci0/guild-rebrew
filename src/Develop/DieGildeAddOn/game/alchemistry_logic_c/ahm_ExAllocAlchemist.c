@@ -10,6 +10,18 @@
 #include "rebrew_globals.h"
 #include "../entity.h"
 
+extern const float g_const_1_0f;
+extern const float g_const_1_over_252;
+extern const float g_const_0_5;
+extern const float g_const_0_1;
+extern const float g_const_0_2f;
+extern const float g_const_0_33;
+extern const float g_const_2f;
+extern const float g_const_30;
+extern const float g_const_7;
+
+
+
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
 int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
@@ -21,7 +33,7 @@ extern int g_next_object_id;
 extern unsigned char g_current_season;
 
 extern int g_citizen_count;
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_AllocTracked(unsigned int size, const char* source);
@@ -35,8 +47,7 @@ extern char s_ahm_AllocAhmInfo[];
  * building's alchemy data block (record->0x65). Returns the slot index or
  * 0xffff on failure.
  *
- * Matches the reference (1002 bytes).  The inline comments at each block say
- * which spelling is load-bearing. */
+ * Native references match the reference (1002 bytes). */
 
 unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 {
@@ -59,13 +70,13 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	building_id = *(int*) (cmd_payload + 8);
 	gm_ResolveEntityById(&dynamic, 0, 0, building_id);
 	if (dynamic == 0) {
-		LogMessageInternal((char*) 0x1002a10c, 0x449, (char*) 0x1002a19c, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", 0x449, "ahm_ExAllocAlchemist: cant find target geb...", 1);
 		return 0xffff;
 	}
 
 	building_type = (unsigned char) *(char*) dynamic;
 	if (*((char*) (g_entity_type_table + building_type + building_type * 0x24c)) != 0x1e) {
-		LogMessageInternal((char*) 0x1002a10c, 0x451, (char*) 0x1002a168, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", 0x451, "ahm_ExAllocAlchemist: wrong type of target geb...", 1);
 		goto ret_false;
 	}
 
@@ -79,7 +90,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 				break;
 		}
 		if (slot_index == 0x300) {
-			LogMessageInternal((char*) 0x1002a10c, 0x45d, (char*) 0x1002a140, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", 0x45d, "ahm_ExAllocAlchemist: array overflow...", 1);
 			ret_false:
 			return 0xffff;
 		}
@@ -90,31 +101,19 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 
 	memset((void*) (g_slot_table + slot_index * 0x21c), 0, 0x21c);
-	/* The 0xffff store goes through `slot` and the +4 store through the
-	 * symbol: c2 cannot prove the two disjoint, so the +4 store depends on
-	 * this one and lifts its scheduling priority just below the `or eax,-1`,
-	 * giving the reference's `or eax,-1; mov word ptr [esi],0xffff` at
-	 * 0x1000bee6.  `volatile` makes the store a barrier that
-	 * holds the `or` behind it.  The +0x5c fill is a loop, not memset: the
-	 * destination stays its own register, `lea edx,[edx+..]; mov edi,edx`
-	 * as at 0x1000bef4 (shapes 197). */
+	/* Indexing the sentinel through the ushort array keeps this transient
+	 * write live while the later slot-index write uses the byte pointer.
+	 * MSVC schedules or eax,-1 before the sentinel, as in the reference. */
 	slot = (char*) (g_slot_table + slot_index * 0x21c);
 	minus_one = -1;
-	*(unsigned short*) slot = 0xffff;
+	((unsigned short*) g_slot_table)[slot_index * 270] = 0xffff;
 	*(int*) (g_slot_table + slot_index * 0x21c + 4) = minus_one;
 	for (i = 0; i < 8; i++)
 		((int*) (g_slot_table + slot_index * 0x21c + 0x5c))[i] = minus_one;
 
-	/* Both counters are read into a local ahead of their stores and written
-	 * back after, which emits the reference's ecx traffic instead of a
-	 * load-inc-store pair.  The citizen count is read through its literal
-	 * address: c2 must assume that read may alias `slot`, so the 0xffff
-	 * store above stays live although the slot-index store now goes through
-	 * `slot`.  Through `slot` that store has no may-alias edges to the later
-	 * slot stores, so its priority drops below the `mov dl,1`, as at
-	 * 0x1000bf09.  Through the symbol it outranks the `1` and issues first. */
+	/* Read both native counters before their respective updates. */
 	{
-		int live = *(int*) 0x10035434 + 1;
+		int live = g_citizen_count + 1;
 		int seq;
 		one = 1;
 		*(unsigned short*) slot = (unsigned short) slot_index;
@@ -170,15 +169,15 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		 * ahead of `mov [esi+0x20],0x41400000` at 0x1000bfe5.  Leaving the
 		 * multiply in the store expression below lets msvc6 schedule the
 		 * constant store first. */
-		float fv = gm_RandomQuadratic() * *(float*) 0x100256c8;
+		float fv = gm_RandomQuadratic() * g_const_7;
 		*(int*) (slot + 0x20) = 0x41400000;
 		*(float*) (slot + 0x14) =
-			(fv + *(float*) 0x100256c4) - *(float*) 0x100256c0;
+			(fv + 30.0f) - g_const_2f;
 	}
 
 	{
 		float f_tmp = *(float*) (slot + 0x1c);
-		rand_value = (int) (*(float*) 0x100256bc * f_tmp);
+		rand_value = (int) (g_const_0_2f * f_tmp);
 	}
 	rand_value = (unsigned short) gm_RandomMod(rand_value);
 
@@ -186,8 +185,8 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	 * reference's popping `faddp`/`fsubp` after a separate `fild`.  A
 	 * single expression uses `fiadd`, or a non-popping `fadd` plus a trailing
 	 * `fstp st(0)` when the conversion is a named local.  Reading slot+0x1c
-	 * through the `fp` local loads the field first (`fld [esi+0x1c]; fmul
-	 * [const]`); spelled inline, msvc6 loads the constant first.  The
+	 * through `fp` and multiplying a separate local loads the field first
+	 * (`fld [esi+0x1c]; fmul [const]`); inline, msvc6 loads the constant first. The
 	 * slot+0x18 copy sits between the two updates, where the reference
 	 * stores it (0x1000c02b); there a float product in `v -=` gives
 	 * `fsubr st,st(1)` plus a trailing `fstp st(0)`, and the `(double)`
@@ -195,9 +194,12 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	{
 		float v = (float) rand_value;
 		float* fp = (float*) (slot + 0x1c);
-		v += *fp * *(float*) 0x100256b8;
+		float product;
+		product = *fp;
+		product *= g_const_0_33;
+		v += product;
 		*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
-		v -= (double) *fp * *(float*) 0x100256b4;
+		v -= (double) *fp * g_const_0_1;
 		*(float*) (slot + 0x10) = v;
 	}
 
@@ -232,7 +234,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	alch_props = (unsigned char) *(char*) (cmd_payload + 0xf);
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);
 	*(float*) (alch_data_ptr + 4) =
-		((float) alch_props * *(float*) 0x100256ac + *(float*) 0x100256a0) * *(float*) 0x100256b0;
+		((float) alch_props * g_const_1_over_252 + g_const_1_0f) * g_const_0_5;
 
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);
 	*(char*) (alch_data_ptr + 8) = *(char*) (cmd_payload + 0xc);
@@ -277,4 +279,3 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 
 	return *(unsigned short*) slot;
 }
-

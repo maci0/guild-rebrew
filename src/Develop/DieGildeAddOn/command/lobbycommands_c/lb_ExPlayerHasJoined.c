@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 // FUNCTION: SERVER 0x100147b0
 #include <stdio.h>
 #include <string.h>
@@ -36,8 +37,8 @@ int __cdecl lb_ExPlayerHasJoined(char* player, char* msg)
 
 join:
 	count = 0;
-	for (slot = (PlayerSlot*) 0x101deb00;
-	     (int) slot < 0x114ffe20;
+	for (slot = (PlayerSlot*) (int) g_connections;
+	     (int) slot < (int) (g_connections + 0x1321320);
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
 		flags = slot->flags;
 		if ((flags & 1) && (flags & 0x200) && !(flags & 0x2000)) {
@@ -55,17 +56,17 @@ join:
 	}
 
 	m14 = msg + 0x14;
-	slot = (PlayerSlot*) 0x101deb00;
+	slot = (PlayerSlot*) (int) g_connections;
 	*(unsigned int*) (m14 + 4) = 0;
-	for (; (int) slot < 0x114ffe20;
+	for (; (int) slot < (int) (g_connections + 0x1321320);
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
 		flags = slot->flags;
 		if ((flags & 1) && (flags & 0x200) && (char*) slot != player &&
 		    *(int*) ((char*) slot + 0x264218) == *(int*) (m14 + 0xc)) {
 			arr[0] = 0; arr[1] = 0; arr[2] = 0; arr[3] = 0;
 			arr[4] = 0; arr[5] = 0; arr[6] = 0; arr[7] = 0;
-			for (slot_cursor = arr, slot2 = (PlayerSlot*) 0x101deb00;
-			     (int) slot2 < 0x114ffe20;
+			for (slot_cursor = arr, slot2 = (PlayerSlot*) (int) g_connections;
+			     (int) slot2 < (int) (g_connections + 0x1321320);
 			     slot2 = (PlayerSlot*) ((char*) slot2 + 0x264264), slot_cursor++) {
 				flags = slot2->flags;
 				if ((flags & 1) && (flags & 0x200) && (char*) slot2 != player) {
@@ -96,8 +97,8 @@ join:
 	sprintf(buf, "lb_ExPlayerHasJoined: before <<srv_PutConnSCommand>>: %i", *(unsigned int*) player);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2e7, buf, 1);
 
-	for (slot = (PlayerSlot*) 0x101deb00;
-	     (int) slot < 0x114ffe20;
+	for (slot = (PlayerSlot*) (int) g_connections;
+	     (int) slot < (int) (g_connections + 0x1321320);
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
 		flags = slot->flags;
 		if ((flags & 1) && (flags & 0x200)) {

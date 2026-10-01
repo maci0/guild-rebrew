@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 /* Command-layer router: refuses commands from clients flagged 0x6000, routes a
  * reply addressed to one connection (msg+0x18) to that connection's slot, and
  * otherwise queues the command to every ready player slot.  Restored from
@@ -19,14 +20,14 @@ int __cdecl cm_RouteCommand(unsigned int* player, unsigned char* msg)
 		return (cm_QueuePlayerCommand(player, msg) + 1 == 0) ? -1 : 0;
 	}
 	if (*(unsigned int*) (msg + 0x18) != 0) {
-		for (i = 0, conn = (unsigned int*) 0x101deb04; (int) conn < 0x114ffe24;
+		for (i = 0, conn = (unsigned int*) (int) (g_connections + 0x4); (int) conn < (int) (g_connections + 0x1321324);
 		     conn = (unsigned int*) ((char*) conn + 0x264264), i++) {
 			if (*conn == *(unsigned int*) (msg + 0x18)) {
 				if (cm_QueuePlayerCommand(
-				        (unsigned int*) ((char*) 0x101deb00 + i * 0x264264), msg)
+				        (unsigned int*) ((char*) (int) g_connections + i * 0x264264), msg)
 				    == -1)
 					return -1;
-				if (*(unsigned int*) ((char*) 0x101deb04 + i * 0x264264)
+				if (*(unsigned int*) ((char*) (int) (g_connections + 0x4) + i * 0x264264)
 				        != *(unsigned int*) ((char*) player + 4)
 				    && cm_QueuePlayerCommand(player, msg) == -1)
 					return -1;
@@ -36,7 +37,7 @@ int __cdecl cm_RouteCommand(unsigned int* player, unsigned char* msg)
 		*msg = 2;
 		return (cm_QueuePlayerCommand(player, msg) + 1 == 0) ? -1 : 0;
 	}
-	for (conn = (unsigned int*) 0x101deb00; (int) conn < 0x114ffe20;
+	for (conn = (unsigned int*) (int) g_connections; (int) conn < (int) (g_connections + 0x1321320);
 	     conn = (unsigned int*) ((char*) conn + 0x264264)) {
 		if ((*conn & 1) == 0)
 			continue;

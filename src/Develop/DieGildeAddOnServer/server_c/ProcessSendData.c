@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 
@@ -48,6 +49,6 @@ int __cdecl ProcessSendData(void)
 			}
 		}
 		slot_cursor += 0x264264;
-	} while ((int) slot_cursor < 0x114ffe20);
+	} while ((int) slot_cursor < (int) (g_connections + 0x1321320));
 	return 0;
 }

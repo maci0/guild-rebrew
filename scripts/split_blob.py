@@ -7,7 +7,7 @@ the import directory late (the postlink prefix check wants that region to be
 exactly `0x2468` bytes and byte-identical): the string literals (`??_C@`),
 `___lookuptable`, the unnamed pointer tables, the `__real@8@` constants,
 `___dnames` / `___mnames`.  Only the all-zero literals ("" and L"\0") match
-too many places to be placed; `crt_region/rdata_fold.c` folds those away.
+too many byte patterns; matching code references determine their positions.
 
 Those have reference offsets *inside* the array's range, which one contiguous
 array cannot express.  This cuts it into pieces around them.  With
@@ -36,6 +36,8 @@ import struct
 import subprocess
 import sys
 from pathlib import Path
+
+import lief
 
 ROOT = Path(__file__).resolve().parents[1]
 FOLD_PREFIX = "??_C@"
@@ -123,21 +125,72 @@ def locate(ref, body, mask, lo, hi, taken=()):
     return -1
 
 
+def zero_literal_offsets(paths):
+    """Recover ambiguous zero literals from relocation operands in matching code."""
+    binary = lief.PE.parse(str(ROOT / "original/Server/server.dll"))
+    base = binary.optional_header.imagebase
+    targets = {}
+    for path in paths:
+        try:
+            va = int(path.name.split("_", 1)[0], 16)
+        except ValueError:
+            continue
+        text = binary.get_section(".text")
+        if not base + text.virtual_address <= va < base + text.virtual_address + text.virtual_size:
+            continue
+        obj = lief.COFF.parse(str(path))
+        for section in obj.sections:
+            if section.name != ".text" or not section.content:
+                continue
+            body = bytes(section.content)
+            ref = bytes(binary.get_content_from_virtual_address(va - base, len(body)))
+            mask = {i for r in section.relocations for i in range(r.address, r.address + 4)}
+            if len(ref) != len(body) or any(
+                a != b for i, (a, b) in enumerate(zip(ref, body, strict=False)) if i not in mask
+            ):
+                continue
+            for reloc in section.relocations:
+                symbol = reloc.symbol
+                if symbol is None or symbol.name not in (
+                    "??_C@_01A@?$AA?$AA@",
+                    "??_C@_13A@?$AA?$AA?$AA?$AA@",
+                ):
+                    continue
+                if reloc.type != lief.COFF.Relocation.TYPE.I386_DIR32:
+                    continue
+                at = reloc.address
+                target = int.from_bytes(ref[at : at + 4], "little") - int.from_bytes(
+                    body[at : at + 4], "little"
+                )
+                targets.setdefault(symbol.name, set()).add(
+                    target - base - binary.get_section(".rdata").virtual_address
+                )
+    if any(len(values) != 1 for values in targets.values()):
+        raise ValueError("matching code has inconsistent zero literal targets")
+    return {name: next(iter(values)) for name, values in targets.items()}
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--rsp", required=True)
     ap.add_argument("--split", required=True, help="split_coff output directory")
-    ap.add_argument("--defs", action="append", default=[],
-                    help="additional directories to take placed sections from "
-                         "(emit_defs.py output)")
+    ap.add_argument(
+        "--defs",
+        action="append",
+        default=[],
+        help="additional directories to take placed sections from (emit_defs.py output)",
+    )
     ap.add_argument("--work", required=True, help="where the piece sources go")
     ap.add_argument("--blob", required=True, help="rsp token of the blob to cut")
     ap.add_argument("--lo", default="0x12e8")
     ap.add_argument("--hi", default="0x2608")
     ap.add_argument("--align", type=int, default=4)
-    ap.add_argument("--byte-align", action="store_true",
-                    help="patch the generated pieces to ALIGN_1 so a section the "
-                         "reference packs at an odd offset can follow one")
+    ap.add_argument(
+        "--byte-align",
+        action="store_true",
+        help="patch the generated pieces to ALIGN_1 so a section the "
+        "reference packs at an odd offset can follow one",
+    )
     args = ap.parse_args()
     lo, hi = int(args.lo, 0), int(args.hi, 0)
 
@@ -154,6 +207,8 @@ def main():
     # Longest first: a short section can match in several places, and must take
     # one the longer, unambiguous sections leave free.
     candidates.sort(key=rdata_size, reverse=True)
+    zero_offsets = zero_literal_offsets(candidates)
+    zero_placed = set()
     taken = []
     for path in candidates:
         secs = coff_sections(path)
@@ -178,13 +233,18 @@ def main():
             print(f"  has pointers, left in the tail: {path.name}", file=sys.stderr)
             continue
         if syms and all(n.startswith(FOLD_PREFIX) for n in syms) and not any(body):
-            # An all-zero literal matches every zero run; rdata_fold.c
-            # re-declares it, so the linker folds the section away.
-            foldable += 1
-            continue
-        at = locate(ref, body, mask, lo, hi, taken)
+            symbol = syms[0]
+            if symbol in zero_placed:
+                foldable += 1
+                continue
+            at = zero_offsets.get(symbol, -1)
+            if at < lo or at + len(body) > hi or ref[at : at + len(body)] != body:
+                raise ValueError(f"cannot locate zero literal {symbol} from matching code")
+            zero_placed.add(symbol)
+        else:
+            at = locate(ref, body, mask, lo, hi, taken)
         if at < 0:
-            foldable += 1          # re-declared literal: folds, emits nothing
+            foldable += 1  # re-declared literal: folds, emits nothing
             continue
         if at % args.align and not args.byte_align:
             # msvc6 emits the cut pieces as 4-aligned `.rdata` sections, so a
@@ -202,8 +262,7 @@ def main():
             lower_alignment(path)
     placed.sort()
     print(
-        f"{len(placed)} sections placed, {foldable} not found (folded or not in "
-        f"the blob range)",
+        f"{len(placed)} sections placed, {foldable} not found (folded or not in the blob range)",
         file=sys.stderr,
     )
 
@@ -217,11 +276,7 @@ def main():
         # A COMDAT section (??_C@, __real@) is byte-packed - the reference has
         # one at an odd offset - while a plain one is aligned.  Measured: a real
         # at 0x1341 is followed by 0x1349, and a 0x3d-byte table by 0x40.
-        cursor = (
-            at + size
-            if comdat
-            else (at + size + args.align - 1) // args.align * args.align
-        )
+        cursor = at + size if comdat else (at + size + args.align - 1) // args.align * args.align
     pieces.append((cursor, hi))
 
     rsp = Path(args.rsp)
@@ -233,7 +288,7 @@ def main():
     piece_tokens = []
     for i, (a, b) in enumerate(pieces):
         if a == b:
-            piece_tokens.append(None)      # sections are adjacent: no gap
+            piece_tokens.append(None)  # sections are adjacent: no gap
             continue
         name = f"g_rdata_piece_{i}"
         src = Path(args.work) / f"{name}.c"

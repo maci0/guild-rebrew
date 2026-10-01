@@ -39,7 +39,7 @@ typedef struct player_slot {
 } player_slot;
 
 // GLOBAL: SERVER 0x10025718
-extern int g_game_speed_table[5];
+extern const int g_game_speed_table[5];
 extern int g_game_speed_value;
 extern int g_game_speed_index;
 

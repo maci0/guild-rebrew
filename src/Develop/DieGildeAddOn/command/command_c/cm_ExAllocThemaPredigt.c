@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
@@ -26,7 +27,7 @@ int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 	f = 0x99099 * (unsigned char) *(char*) (cmd + 3);
 	cmd += 0x18;
 	dst = obj + 0x1c;
-	*(int*) (0x10442d08 + f * 4) = *(int*) (obj + 2);
+	*(int*) ((int) (g_connections + 0x264208) + f * 4) = *(int*) (obj + 2);
 	obj[0x12] = 0x40;
 	memcpy(dst, cmd, 7);
 	obj[0x22] = 0;

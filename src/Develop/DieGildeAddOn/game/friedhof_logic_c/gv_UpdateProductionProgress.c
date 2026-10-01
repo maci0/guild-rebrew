@@ -1,3 +1,4 @@
+extern unsigned char g_slot_table[0x300 * 0x21c];
 /* gv_UpdateProductionProgress - advances a production slot's progress by the
  * building's production time, clamped to [0, 0xff]. */
 
@@ -24,7 +25,7 @@ int __cdecl gv_UpdateProductionProgress(void* building)
 	if (entity) {
 		grave_id = *(unsigned short*) ((char*) entity + 0x27);
 		if (grave_id != 0xffff) {
-			if ((char*) 0x100358a0 + grave_id * 0x21c != (char*) g_entity_table_end) {
+			if ((char*) ((int) g_slot_table + 0x0) + grave_id * 0x21c != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
 				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
 					return -2;

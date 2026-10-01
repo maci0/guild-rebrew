@@ -20,7 +20,6 @@ extern char s_Pointer_not_freed[1]; /* 0x10028AEC */
 extern char s_Memory_Shutdown_Anomaly[1]; /* 0x10028B04 */
 extern char s_m_pool_alloc_tp_m_pool[24]; /* 0x10028B60 */
 extern char s_m_pool_get_free_tp_m_pool[27]; /* 0x10028B78 */
-extern unsigned char g_data_restore_gap[0xb000]; /* 0x1002A000 */
 extern char s_ahm_AllocAhmInfo[]; /* 0x1002A0F8 */
 // GLOBAL: SERVER 0x1002c3f4
 extern int g_game_speed_index; /* 0x1002C3F4 */
@@ -57,9 +56,9 @@ extern unsigned short g_current_hour; /* 0x10035884 */
 extern int g_clock_copy_mid; /* 0x10035888 */
 // GLOBAL: SERVER 0x1003588c
 extern short g_clock_copy_tail; /* 0x1003588C */
-// GLOBAL: SERVER 0x100358a4
-extern int g_entity_id_field; /* 0x100358A4 */
-extern int g_entity_ref_table; /* 0x100358FC */
+/* Unused field names retained for VC6 symbol ordering; storage belongs to g_slot_table. */
+extern int g_entity_id_field;
+extern int g_entity_ref_table;
 extern unsigned char g_entity_base[]; /* 0x1009ACA0 */
 // GLOBAL: SERVER 0x1009aca2
 extern char g_dynamic_entities[]; /* 0x1009ACA2 */
@@ -77,41 +76,42 @@ extern unsigned int g_download_received; /* 0x101DEAC4 */
 extern unsigned int g_download_slots[8]; /* 0x101DEAC8 */
 extern unsigned int g_download_buffer; /* 0x101DEAE8 */
 extern int g_net_socket; /* 0x101DEAEC, listen socket */
-extern unsigned char g_connections[0x264264]; /* 0x101DEB00, first player slot (stride 0x264264 bytes) */
+extern unsigned char g_connections[9 * 0x264264]; /* 0x101DEB00, eight regular slots plus one admin slot (stride 0x264264 bytes) */
 extern unsigned int g_player_slot_field; /* 0x101DEB14 */
 extern unsigned int g_player_slot_overflow; /* 0x114FFE20, overflow slot */
 // GLOBAL: SERVER 0x11764088
 extern int g_tick_rate; /* 0x11764088 */
 extern int g_list_head; /* 0x117640C4 */
-extern char g_log_buffer[256]; /* 0x11766100 */
+extern char g_log_buffer[260]; /* 0x11766100, 260 bytes */
 extern int g_log_file_handle; /* 0x11766204 */
 
 /* .rdata */
 // GLOBAL: SERVER 0x100241a0
 extern unsigned int g_crc_table[256]; /* 0x100241A0 */
-extern const unsigned char g_rdata_restore[]; /* 0x100252E8 */
-extern double g_const_2; /* 0x10025688 */
+/* Preserve MSVC 6's declaration order; the unused restore storage is gone. */
+extern const unsigned char g_rdata_restore[];
+extern const double g_const_2; /* 0x10025688 */
 // GLOBAL: SERVER 0x100256a4
-extern float g_color_scale; /* 0x100256A4 */
-extern float g_const_neg_1_0f; /* 0x100256A8 */
-extern double g_const_0_001; /* 0x100256D0 */
+extern const float g_color_scale; /* 0x100256A4 */
+extern const float g_const_neg_1_0f; /* 0x100256A8 */
+extern const double g_const_0_001; /* 0x100256D0 */
 // GLOBAL: SERVER 0x10025718
-extern int g_game_speed_table[5]; /* 0x10025718 */
-extern float g_const_42_0; /* 0x100257BC */
-extern float g_const_21_0; /* 0x100257C0 */
-extern double g_const_half; /* 0x100257D0 */
-extern double g_const_one_d; /* 0x100257D8 */
-extern double g_const_0_2; /* 0x10025810 */
-extern float g_const_0_6; /* 0x10025F88 */
-extern double g_const_8; /* 0x10025F90 */
-extern double g_const_900; /* 0x10025F98 */
-extern double g_const_1_over_720; /* 0x10025FA0 */
-extern float g_const_896_0; /* 0x10025FA8 */
-extern float g_const_0_06875; /* 0x10025FAC */
-extern float g_const_2_2; /* 0x10025FB0 */
-extern float g_const_1_5; /* 0x10025FB4 */
-extern float g_const_0_01; /* 0x10025FB8 */
-extern float g_const_1_over_32767; /* 0x10025FBC */
+extern const int g_game_speed_table[5]; /* 0x10025718 */
+extern const float g_const_42_0; /* 0x100257BC */
+extern const float g_const_21_0; /* 0x100257C0 */
+extern const double g_const_half; /* 0x100257D0 */
+extern const double g_const_one_d; /* 0x100257D8 */
+extern const double g_const_0_2; /* 0x10025810 */
+extern const float g_const_0_6; /* 0x10025F88 */
+extern const double g_const_8; /* 0x10025F90 */
+extern const double g_const_900; /* 0x10025F98 */
+extern const double g_const_1_over_720; /* 0x10025FA0 */
+extern const float g_const_896_0; /* 0x10025FA8 */
+extern const float g_const_0_06875; /* 0x10025FAC */
+extern const float g_const_2_2; /* 0x10025FB0 */
+extern const float g_const_1_5; /* 0x10025FB4 */
+extern const float g_const_0_01; /* 0x10025FB8 */
+extern const float g_const_1_over_32767; /* 0x10025FBC */
 
 /* .bss */
 extern void (__cdecl *g_crt_exit_hook)(int); /* 0x100317F0, _exit hook fnptr */

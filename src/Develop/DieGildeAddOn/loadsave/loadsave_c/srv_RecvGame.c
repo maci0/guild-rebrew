@@ -1,19 +1,27 @@
+// GLOBAL: SERVER 0x10035440
+unsigned int g_saved_dynasty_field;
+
+extern unsigned char g_save_session_state[24];
 #include "../../../Units/Error/error.h"
 #include "../../../Units/m_alloc/m_alloc.h"
 #include "../../../Units/vfs/vfs.h"
 #include "../../game/entity.h"
 extern int g_entity_id_counter;
 extern int g_sequence_counter;
+extern int g_next_object_id;
+extern int g_next_family_index;
+extern int g_citizen_count;
+extern unsigned char g_current_season;
 
 
 #include <stdlib.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#include "../../../download_state.h"
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; /* 0x1002d4ec */
-// GLOBAL: SERVER 0x101de460
-int g_save_info[2] = {0};
+extern int g_save_info[63];
 extern int vfs_OpenStream(char*, char*, int);
 int ls_LoadSavegameHeader(int, char*);
 int ls_LoadExistingEntities(int);
@@ -28,8 +36,7 @@ extern unsigned int ls_ID2Ptr(void);
  * production slots, worker assignments, and field states
  * for graveyard buildings. */
 
-// GLOBAL: SERVER 0x101de560
-int g_recv_game_buffer = 0;
+extern int g_recv_game_buffer;
 // FUNCTION: SERVER 0x10014260
 // srv_RecvGame
 
@@ -39,7 +46,7 @@ int srv_RecvGame(void)
 	int load_status;
 	char* entity_state_ptr;
 
-	file_handle = vfs_OpenStream((char*) g_download_buffer, (char*) g_download_total_size, (int) (const char*) 0x1002944c);
+	file_handle = vfs_OpenStream((char*) g_download_buffer, (char*) g_download_total_size, (int) "rb");
 	if (file_handle == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
@@ -64,15 +71,15 @@ int srv_RecvGame(void)
 		g_recv_game_buffer = 0;
 		return 0;
 	}
-	*(int*) 0x1003546c = 0;
-	if (ls_ReadVfsDataChecked((void*) 0x10030b6c, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) 0x1176408c, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) 0x10035880, 0xe, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) 0x10035439, 1, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) 0x1003546c, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) 0x1003542c, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) 0x10035430, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) 0x10035434, 4, 1, (void*) file_handle) == 0) {
+	g_entity_table_end = 0;
+	if (ls_ReadVfsDataChecked((void*) &g_next_object_id, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_chain_id_start, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_current_year, 0xe, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_current_season, 1, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_entity_table_end, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_next_family_index, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &gm_CurrentHumanFamilyCount, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_citizen_count, 4, 1, (void*) file_handle) == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
 			0x121e,
@@ -84,8 +91,8 @@ int srv_RecvGame(void)
 		g_recv_game_buffer = 0;
 		return 0;
 	}
-	ls_ReadVfsDataChecked((void*) 0x10035440, 4, 1, (void*) file_handle);
-	ls_ReadVfsDataChecked((void*) 0x101de580, 0x18, 1, (void*) file_handle);
+	ls_ReadVfsDataChecked((void*) &g_saved_dynasty_field, 4, 1, (void*) file_handle);
+	ls_ReadVfsDataChecked((void*) g_save_session_state, 0x18, 1, (void*) file_handle);
 	if (g_file_version >= 0x10030) {
 		ls_ReadVfsDataChecked((void*) &g_entity_id_counter, 4, 1, (void*) file_handle);
 	}
@@ -146,14 +153,14 @@ int srv_RecvGame(void)
 		g_recv_game_buffer = 0;
 		return 0;
 	}
-	entity_state_ptr = (char*) 0x100358a2;
+	entity_state_ptr = (char*) (g_slot_table + 2);
 	do {
 		if (*(unsigned short*) (entity_state_ptr - 2) != 0xffff &&
 			*entity_state_ptr == '\x06') {
 			*entity_state_ptr = '\x05';
 		}
 		entity_state_ptr = entity_state_ptr + 0x21c;
-	} while ((int) entity_state_ptr < (int) 0x1009aca2);
+	} while ((int) entity_state_ptr < ((int) g_slot_table + 0x65402));
 	load_status = ls_LoadTownData(file_handle);
 	if (load_status == 0) {
 		LogMessageInternal(

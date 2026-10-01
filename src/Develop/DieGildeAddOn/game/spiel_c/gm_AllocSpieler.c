@@ -300,13 +300,14 @@
 
 extern int g_next_object_id; /* 0x10030b6c */
 extern int g_citizen_count; /* 0x10035434 */
-extern double g_const_2; /* 0x10025688 */
-extern double g_const_0_001; /* 0x100256d0 */
-extern double g_const_one_d; /* 0x100257d8 */
-extern double g_const_0_2; /* 0x10025810 */
-extern float g_const_0_6; /* 0x10025f88 - fmul dword, not qword */
-extern double g_const_8; /* 0x10025f90 */
-extern double g_const_900; /* 0x10025f98 */
+extern const double g_const_2; /* 0x10025688 */
+extern const double g_const_0_001; /* 0x100256d0 */
+extern const double g_const_one_d; /* 0x100257d8 */
+extern const float g_player_trait_ranges[17][28];
+extern const double g_const_0_2; /* 0x10025810 */
+extern const float g_const_0_6; /* 0x10025f88 - fmul dword, not qword */
+extern const double g_const_8; /* 0x10025f90 */
+extern const double g_const_900; /* 0x10025f98 */
 int __cdecl gm_EntityClassCheck(int);
 int __cdecl gm_IsInRange(int);
 int __cdecl gm_RandomMod(unsigned short);
@@ -343,18 +344,18 @@ struct traits5 {
 	unsigned char b[5];
 };
 
-extern unsigned char g_slot_table[2]; /* 0x100358a0: 0x300 records of 0x21c */
+extern unsigned char g_slot_table[0x300 * 0x21c]; /* 0x100358a0: 0x300 records of 0x21c */
 
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 
-extern float g_const_1_0f;  /* 0x100256a0: 1.0 */
-extern float g_const_0_5;  /* 0x100256b0: 0.5 */
-extern float g_const_0_1;  /* 0x100256b4: 0.1 */
-extern float g_const_0_33;  /* 0x100256b8: 0.33 */
-extern float g_const_30;  /* 0x100256c4: 30.0 */
-extern float g_const_7;  /* 0x100256c8: 7.0 */
-extern float g_const_0_25; /* 0x10025714: 0.25 */
+extern const float g_const_1_0f;  /* 0x100256a0: 1.0 */
+extern const float g_const_0_5;  /* 0x100256b0: 0.5 */
+extern const float g_const_0_1;  /* 0x100256b4: 0.1 */
+extern const float g_const_0_33;  /* 0x100256b8: 0.33 */
+extern const float g_const_30;  /* 0x100256c4: 30.0 */
+extern const float g_const_7;  /* 0x100256c8: 7.0 */
+extern const float g_const_0_25; /* 0x10025714: 0.25 */
 
 extern unsigned char g_stat_table[780]; /* 0x10030ba0: 6-byte records, 5 stats + slot[0xd] default */
 #define g_stat_table_30dda (g_stat_table + 95 * 6)
@@ -406,7 +407,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 		g_citizen_count--;
 	}
 	if (idx == 0x300) {
-		LogMessageInternal((char*) 0x10031004, 0x2614,
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x2614,
 		                   s_alloc_spieler_array_overflow, 1);
 		return 0xffff;
 	}
@@ -456,7 +457,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 	slot[0x217] = 0;
 	slot[0x218] = 1;
 	sprintf(work, s_fmt_sp_id, g_next_object_id, type);
-	LogMessageInternal((char*) 0x10031004, 0x2637, work, 8);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x2637, work, 8);
 	*(int*) (slot + 4) = g_next_object_id;
 	g_next_object_id++;
 	*(int*) (slot + 0x1e4) = 0x3f800000; /* 1.0f */
@@ -501,7 +502,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 			g_next_family_index = n + 1;
 			blend = gm_RandomQuadratic() * g_const_7;
 			*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
-			*(float*) (slot + 0x14) = (float) blend + g_const_30;
+			*(float*) (slot + 0x14) = (float) blend + 30.0f;
 			*(float*) (slot + 0x10) =
 			    (float) ((double) *(float*) (slot + 0x1c) * g_const_0_33 +
 			             (double) (unsigned short) gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
@@ -617,7 +618,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 		}
 		/* 14-iteration trait interpolation from the trait table */
 		dst = (float*) (slot + 0x88);
-		src = (float*) (0x10025818 + n * 0x70);
+		src = (float*) ((int) g_player_trait_ranges + n * 0x70);
 		for (i = 0xe; i != 0; i--) {
 			dst[0] = (float) (gm_RandomFloat01() * (double) (src[1] - src[0]) +
 			                  src[0]);
@@ -688,7 +689,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 			 * the increment. */
 			n = gm_CurrentHumanFamilyCount;
 			if (n >= 0x10) {
-				LogMessageInternal((char*) 0x10031004, 0x27f0,
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x27f0,
 				                   s_family_count_overflow, 1);
 				return 0xffff;
 			}
@@ -705,7 +706,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 		*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 		*(float*) (slot + 0x14) =
 		    (float) (gm_RandomQuadratic() * g_const_7) +
-		    g_const_30;
+		    30.0f;
 		*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
 		*(float*) (slot + 0x10) =
 		    (float) ((double) *(float*) (slot + 0x1c) * g_const_0_33 +
@@ -768,7 +769,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 
 		rnd01 = gm_RandomFloat01();
 		*(float*) (slot + 0x88 + i * 0xc) =
-		    (float) ((float) (g_const_one_d - rnd01) *
+		    (float) ((float) (1.0 - rnd01) *
 		                 *(float*) (father + 0x88 + i * 0xc) +
 		             rnd01 * *(float*) (mother + 0x88 + i * 0xc));
 		*(float*) (slot + 0x90 + i * 0xc) =
@@ -820,7 +821,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 			 * (double) casts the mother term compiles to fild + fmul [weight]
 			 * and all three arms share the reference's tail fmul (0x10018f5e). */
 			*trait_home = *(unsigned char*) (father + 0x80 + i);
-			slot[0x80 + i] = (char) (((g_const_one_d - weight) * trait_byte +
+			slot[0x80 + i] = (char) (((1.0 - weight) * trait_byte +
 			                          *(unsigned char*) (mother + 0x80 + i) * weight) *
 			                         g_const_0_5);
 		}
@@ -874,7 +875,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 	*(float*) (slot + 0x14) =
 	    (float) ((gm_RandomQuadratic() * g_const_7 +
-	              g_const_30) *
+	              30.0f) *
 	                 g_const_0_6 +
 	             (*(float*) (father + 0x14) + *(float*) (mother + 0x14)) *
 	                 g_const_0_2);
@@ -939,10 +940,10 @@ draw_tail:
 		*stat = (char) (*stat + 0x2a);
 	}
 	if (idx == 0xffff) {
-		LogMessageInternal((char*) 0x10031004, 0x286c, s_alloc_spieler_bug,
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x286c, s_alloc_spieler_bug,
 		                   1);
 	}
 	sprintf(work, s_fmt_player_id, g_next_object_id, slot + 0x30);
-	LogMessageInternal((char*) 0x10031004, 0x2888, work, 8);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x2888, work, 8);
 	return idx;
 }

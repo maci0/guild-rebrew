@@ -7,7 +7,6 @@
 #include <ctype.h>
 #include <stdio.h>
 extern unsigned int __cdecl crc32(unsigned int crc, unsigned char* buf, unsigned int len);
-extern int __cdecl crt_toupper(int current_char);
 /* Opens a VFS stream over a caller buffer. Parses the mode flags
  * (N = none, R = read, W = write, Z = zlib) and initializes the
  * stream structure with the matching inflate/deflate setup.
@@ -80,12 +79,11 @@ extern int __cdecl crt_toupper(int current_char);
  *   - /O1 and /Ot give frame-pointer prologues, /Ox matches /O2: no flag
  *     lever. The CFLAGS header stays /O2 /Gd (matches metadata). */
  /* This session, 406/701 -> 450/701 (obj 693 vs target 704), PROVEN retained.
- *   - Loop switches on crt_toupper(*p) directly with char cases
+ *   - Loop switches on toupper(*p) directly with char cases
  *     ('N'/'R'/'W'/'Z'): the compiler emits the target's `add eax,-0x4e`
  *     plus mapping-table form for the raw value. The old `- 0x4e` spelling
  *     emits `sub` and is byte-different. Mapping is bijective, behavior
- *     unchanged. The binary calls crt_toupper (0x1001b0c0), not _toupper,
- *     so the call target now resolves to the same function (was `**`).
+ *     unchanged. The CRT supplies toupper.
  *   - `int r = 0` result var with early `goto done` / tail `r = stream`
  *     reproduces the prologue `xor eax,eax` (shared early-out zero skipping
  *     the tail `mov eax,esi`) and the exact push/test/store prologue order.
@@ -115,7 +113,7 @@ extern int __cdecl crt_toupper(int current_char);
  *
  * The 11B size gap is closable but costs alignment. Two changes together
  * give obj 701 exactly:
- *   - `switch (crt_toupper(*p))` with the loop reading `*p` directly (no
+ *   - `switch (toupper(*p))` with the loop reading `*p` directly (no
  *     `c` hoist) emits the target's `cmp byte ptr [eax],0` entry test and
  *     makes the whole flag loop byte-exact through the jump table.
  *   - The target loads mode18 from [esp+0x18] twice in the sprintf tail
@@ -212,7 +210,7 @@ int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_fla
 		goto done;
 	}
 	for (path_cursor = mode_flags, current_char = *mode_flags; *path_cursor != 0; path_cursor++, current_char = *path_cursor) {
-	switch (crt_toupper(current_char)) {
+	switch (toupper(current_char)) {
 		case 'N':
 			mode18 = 0;
 			mode13 = 0;

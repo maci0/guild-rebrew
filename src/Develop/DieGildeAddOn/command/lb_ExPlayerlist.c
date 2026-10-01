@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 /* lb_ExPlayerlist / lb_SendLobbyConfig.  Split out of lobbycommands.c: the reference interleaves
  * lb_ExPlayerHasJoined / lb_BroadcastStateChange / lb_HandleEntitySync /
  * cm_RouteCommand between these functions, so one object cannot be
@@ -31,7 +32,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 	}
 	memset(&list, 0, sizeof(list));
 	list.count = 0;
-	for (conn = (unsigned int*) 0x101deb00; (int) conn < 0x114ffe20; conn = (unsigned int*) ((char*) conn + 0x264264)) {
+	for (conn = (unsigned int*) (int) g_connections; (int) conn < (int) (g_connections + 0x1321320); conn = (unsigned int*) ((char*) conn + 0x264264)) {
 		if ((*conn & 1) == 0) continue;
 		if ((*conn & 0x200) == 0) continue;
 		list.ids[list.count] = conn[1];
@@ -81,7 +82,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 	} else {
 		*player &= ~0x800;
 	}
-	for (conn = (unsigned char*) 0x101deb00; (int) conn < 0x114ffe20; conn += 0x264264) {
+	for (conn = (unsigned char*) (int) g_connections; (int) conn < (int) (g_connections + 0x1321320); conn += 0x264264) {
 		if ((*(unsigned int *) conn & 1) == 0) continue;
 		if ((*(unsigned int *) conn & 0x200) == 0) continue;
 		result = cm_QueuePlayerCommand((unsigned int*) conn, msg);

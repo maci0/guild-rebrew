@@ -252,8 +252,8 @@ int __cdecl ls_LoadEntities(int arg1)
 			if (inner_result == 0) {
 				return 0;
 			}
-			*(int*) (read_result + 0x10035a0c) = 0;
-			inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x10035a0c), 4, 1, (void*) stream);
+			*(int*) ((int) g_slot_table + read_result + 0x16c) = 0;
+			inner_result = ls_ReadVfsDataChecked((void*) ((int) g_slot_table + read_result + 0x16c), 4, 1, (void*) stream);
 			if (inner_result == 0) {
 				return 0;
 			}

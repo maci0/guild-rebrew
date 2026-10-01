@@ -30,7 +30,7 @@ char s_D__Develop_DieGildeAddOn_auxilla[] = "D:\\Develop\\DieGildeAddOn\\auxilla
 // DATA: SERVER 0x1002d9ec
 char s_plt_SetPlantMap____Map_is_not_al[] = "plt_SetPlantMap(): Map is not alloced or PlantInfo not found...";
 
-/* 0x58 pairs read by plt_TableLookup through their raw address; a struct
+/* 0x58 pairs read by plt_TableLookup; a struct
  * array, 8-aligned like the reference (four zero bytes at 0x1002da2c). */
 // SIZE 0x8
 typedef struct {
@@ -133,7 +133,7 @@ PLANT_PAIR g_plant_pair_table[0x58] = {
 int g_plant_flag = 1;
 
 // GLOBAL: SERVER 0x1003540c
-int g_dynamic_count = 0;
+int g_dynamic_count;
 
 /* Finds a record in a linked table by matching type fields.
  * Iterates from base pointer, comparing type1/type2 bytes.
@@ -340,7 +340,7 @@ int __cdecl plt_TableLookup(int index, int* out)
 	if (index >= 0x58) {
 		return 0;
 	}
-	*out = *(int*) (0x1002DA30 + index * 8);
-	*(int*) ((char*) out + 4) = *(int*) (0x1002DA34 + index * 8);
+	*out = g_plant_pair_table[index].first;
+	*(int*) ((char*) out + 4) = g_plant_pair_table[index].second;
 	return 1;
 }

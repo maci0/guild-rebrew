@@ -7,6 +7,8 @@
 #include <string.h>
 #include <windows.h>
 
+extern char g_crash_dump_all_frames;
+
 char* __cdecl GetDebugRecordByIndex(char* arg1, unsigned int arg2);
 
 /* The crash-log strings from 0x10027318 to 0x1002733c.  They follow
@@ -60,7 +62,7 @@ found:
 		memcpy(arrow, g_crash_arrow, 5);
 
 		st4 = st[4];
-		flag = *(char*) 0x1003461c;
+		flag = g_crash_dump_all_frames;
 		extra = 0;
 		if (st4 == 0) {
 			st[4] = entry[1];

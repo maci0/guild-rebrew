@@ -13,6 +13,7 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 #include "../group_node.h"
 
 extern int g_alloc_root_name; /* 0x117640a0 - root group node */
+#include "../alloc_root.h"
 
 void __cdecl m_ReportGroupInfo(const char* toggle)
 {

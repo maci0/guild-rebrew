@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 // FUNCTION: SERVER 0x10014a50
 // lb_BroadcastStateChange
 
@@ -28,8 +29,8 @@ int __cdecl lb_BroadcastStateChange(unsigned int* a, unsigned int* b, unsigned c
 		*(unsigned int*) ((char*) b + 0x18) = 0;
 	}
 
-	for (conn = (unsigned int*) 0x101deb00;
-	     (int) conn < 0x114ffe20;
+	for (conn = (unsigned int*) (int) g_connections;
+	     (int) conn < (int) (g_connections + 0x1321320);
 	     conn = (unsigned int*) ((char*) conn + 0x264264)) {
 		status = *conn;
 		if ((status & 1) && (status & 0x200)) {

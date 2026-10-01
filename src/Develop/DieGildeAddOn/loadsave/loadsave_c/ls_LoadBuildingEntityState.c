@@ -1,8 +1,6 @@
-// GLOBAL: SERVER 0x101de454
-int g_aux_entity_count = 0; /* 0x101de454 */
+extern int g_aux_entity_count; /* 0x101de454 */
 
-// GLOBAL: SERVER 0x101de55c
-int g_aux_entity_buffer = 0; /* 0x101de55c */
+extern int g_aux_entity_buffer; /* 0x101de55c */
 // FUNCTION: SERVER 0x100128f0
 #include "../../../Units/Error/error.h"
 #include "../../../Units/m_alloc/m_alloc.h"

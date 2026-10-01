@@ -1,13 +1,5 @@
-/* The crash-dump message and exception-name data this file addresses by
- * absolute VA.  Every string below is referenced from the code as a literal
- * address -- `LogMessageInternal((char*) 0x10027104, ...)`, the WriteFile
- * argument table at 0x10027178..0x10027260, `CreateFileA((const char*)
- * 0x10027318, ...)` -- and none of it was defined anywhere, so those reads
- * landed outside the section.  Bytes are generated from the reference.
- * The blob ends at 0x100272f8: the two separator literals below
- * ("-...-\r\n" at 0x100272f8, "\r\n" at 0x10027314) follow it as this
- * file's string COMDATs, and the strings after them are in
- * EmitCrashModuleLine.c, the next object in the link. */
+/* Crash-dump messages and exception names. Code references their native
+ * storage so the compiler and linker emit address relocations. */
 // DATA: SERVER 0x10027104
 char g_crashdump_data[500] = {
 	0x6e, 0x6f, 0x20, 0x64, 0x62, 0x67, 0x20, 0x66, 0x69, 0x6c, 0x65, 0x00,
@@ -58,6 +50,8 @@ char g_crashdump_data[500] = {
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
+
+extern char g_crashdump_tail[36];
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
 char __cdecl check_memory_protection(unsigned int);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
@@ -195,7 +189,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 					ReadFile(hDbgFile, pDbgBuf, dwDbgFileSize, &dwBytesRead, 0);
 					if (dwDbgFileSize == dwBytesRead) {
 						/* Open crash log for append */
-						hCrashLog = CreateFileA((const char*) 0x10027318, 0x40000000, 0, 0, 4, 0x80, 0);
+						hCrashLog = CreateFileA((const char*) g_crashdump_tail, 0x40000000, 0, 0, 4, 0x80, 0);
 
 						/* Decrypt dbg: rotate-XOR each dword.  The counter is dwDbgFileSize
 						 * (dead after the size check): the reference keeps it in that
@@ -241,52 +235,52 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 
 							switch (excCode) {
 							case 0x80000004:
-								WriteFile(hCrashLog, (const char*) 0x100272ec, 0xb, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x1e8), 0xb, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								goto group_a_done;
 							case 0x80000003:
-								WriteFile(hCrashLog, (const char*) 0x100272e0, 0xa, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x1dc), 0xa, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								goto group_a_done;
 							case 0xc0000005:
 								/* ACCESS_VIOLATION */
-								WriteFile(hCrashLog, (const char*) 0x100272cc, 0x11, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x1c8), 0x11, &nBytesWritten, 0);
 								if (pExceptionPointers->ExceptionRecord->ExceptionInformation[0] == 0) {
-									WriteFile(hCrashLog, (const char*) 0x100272c4, 5, &nBytesWritten, 0);
+									WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x1c0), 5, &nBytesWritten, 0);
 								}
 								else {
-									WriteFile(hCrashLog, (const char*) 0x100272bc, 6, &nBytesWritten, 0);
+									WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x1b8), 6, &nBytesWritten, 0);
 								}
-								sprintf(szDateBuf, (const char*) 0x100272b4, pExceptionPointers->ExceptionRecord->ExceptionInformation[1]);
+								sprintf(szDateBuf, (const char*) (g_crashdump_data + 0x1b0), pExceptionPointers->ExceptionRecord->ExceptionInformation[1]);
 								WriteFile(hCrashLog, szDateBuf, strlen(szDateBuf), &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc0000006:
-								WriteFile(hCrashLog, (const char*) 0x100272a4, 0xd, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x1a0), 0xd, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc000001d:
-								WriteFile(hCrashLog, (const char*) 0x10027290, 0x13, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x18c), 0x13, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc000008c:
-								WriteFile(hCrashLog, (const char*) 0x10027278, 0x15, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x174), 0x15, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								goto group_a_done;
 							case 0xc000008d:
-								WriteFile(hCrashLog, (const char*) 0x10027260, 0x14, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x15c), 0x14, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								goto group_a_done;
 							case 0xc0000026:
-								WriteFile(hCrashLog, (const char*) 0x1002724c, 0x13, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x148), 0x13, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								goto group_a_done;
 							case 0xc0000025:
-								WriteFile(hCrashLog, (const char*) 0x10027230, 0x18, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x12c), 0x18, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								goto group_a_done;
 							case 0xc000008e:
-								WriteFile(hCrashLog, (const char*) 0x1002721c, 0x12, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x118), 0x12, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 group_a_done:
 								espVal += 4;
@@ -296,39 +290,39 @@ group_a_done:
 									espVal -= 4;
 								break;
 							case 0xc000008f:
-								WriteFile(hCrashLog, (const char*) 0x10027208, 0x12, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x104), 0x12, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc0000090:
-								WriteFile(hCrashLog, (const char*) 0x100271f0, 0x15, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0xec), 0x15, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc0000091:
-								WriteFile(hCrashLog, (const char*) 0x100271e0, 0xc, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0xdc), 0xc, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc0000092:
-								WriteFile(hCrashLog, (const char*) 0x100271d0, 0xf, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0xcc), 0xf, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc0000093:
-								WriteFile(hCrashLog, (const char*) 0x100271c0, 0xd, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0xbc), 0xd, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc0000094:
-								WriteFile(hCrashLog, (const char*) 0x100271ac, 0x12, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0xa8), 0x12, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc0000095:
-								WriteFile(hCrashLog, (const char*) 0x1002719c, 0xc, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x98), 0xc, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc0000096:
-								WriteFile(hCrashLog, (const char*) 0x10027188, 0x10, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x84), 0x10, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							case 0xc00000fd:
-								WriteFile(hCrashLog, (const char*) 0x10027178, 0xe, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) (g_crashdump_data + 0x74), 0xe, &nBytesWritten, 0);
 								WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 								break;
 							default:
@@ -400,25 +394,25 @@ done_walk:
 							}
 						}
 						else {
-							LogMessageInternal((char*) 0x10027144, 0x20f, (char*) 0x10027164, 1);
+							LogMessageInternal((char*) (g_crashdump_data + 0x40), 0x20f, (char*) (g_crashdump_data + 0x60), 1);
 						}
 					}
 					else {
-						LogMessageInternal((char*) 0x10027144, 0x213, (char*) 0x1002712c, 1);
+						LogMessageInternal((char*) (g_crashdump_data + 0x40), 0x213, (char*) (g_crashdump_data + 0x28), 1);
 					}
 					VirtualFree(pDbgBuf, 0, 0x8000);
 				}
 				else {
-					LogMessageInternal((char*) 0x10027144, 0x218, (char*) 0x10027120, 1);
+					LogMessageInternal((char*) (g_crashdump_data + 0x40), 0x218, (char*) (g_crashdump_data + 0x1c), 1);
 				}
 			}
 			else {
-				LogMessageInternal((char*) 0x10027144, 0x21b, (char*) 0x10027110, 1);
+				LogMessageInternal((char*) (g_crashdump_data + 0x40), 0x21b, (char*) (g_crashdump_data + 0xc), 1);
 			}
 			CloseHandle(hDbgFile);
 		}
 		else {
-			LogMessageInternal((char*) 0x10027144, 0x220, (char*) 0x10027104, 1);
+			LogMessageInternal((char*) (g_crashdump_data + 0x40), 0x220, (char*) (g_crashdump_data + 0x0), 1);
 		}
 	}
 

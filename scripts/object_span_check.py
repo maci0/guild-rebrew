@@ -46,7 +46,6 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 BUILD = REPO / "build" / "CMakeFiles" / "server_dll.dir"
-SRC = REPO / "src" / "shared"
 
 
 def text_size(obj_path):
@@ -83,6 +82,26 @@ def track_map():
     return out
 
 
+def inventory_vas():
+    """Every discovered function VA, ascending, from the binary's inventory.
+
+    The span of a file is "its first function .. the next FUNCTION in the
+    reference", and the next function is NOT always an annotated one: library
+    code the tree has not reversed still sits between two game functions.  Only
+    262 of the 543 discovered server functions carry an annotation, so looking
+    the neighbour up in `rebrew-functions.toml` overshot by 5392 bytes on
+    `broadcast.c` (one 192-byte function, reported as a 5392-byte span and a
+    -5200 shortfall).  The inventory is the whole picture; the metadata is only
+    the annotated subset.
+    """
+    path = REPO / "db" / "inventory-server.dll.json"
+    try:
+        rows = json.loads(path.read_text())
+    except (OSError, ValueError):
+        return []
+    return sorted(f["va"] for f in rows if isinstance(f.get("va"), int))
+
+
 def file_vas(src_path):
     """Every `// FUNCTION: SERVER 0xNNN` VA in a source file, ascending."""
     try:
@@ -101,6 +120,7 @@ def main():
 
     track = track_map()
     vas = sorted(track)
+    all_vas = inventory_vas() or vas
     longf = set()
     linklog = REPO / ".scratch" / "gate-link.log"
     if linklog.exists():
@@ -115,11 +135,16 @@ def main():
                 continue
             obj = Path(root) / f
             rel = obj.relative_to(BUILD)
-            # strip the leading src/shared/ to find the .c it came from
+            # Map the object back to its source by anchoring on the `src`
+            # component, not on a fixed prefix.  The tree was reorganised in
+            # f6921e5e into several roots (`src/Develop/...`, `src/crt_region/...`,
+            # `src/shared/...`, `src/link_stubs.c.obj`); the old check demanded
+            # `src/shared` and therefore skipped EVERY object, reporting
+            # "measured 0 objects" as if the check had passed.
             parts = list(rel.parts)
-            if parts[0] != "src" or parts[1] != "shared":
+            if "src" not in parts:
                 continue
-            src = SRC.joinpath(*parts[2:])  # .../foo.c.obj -> .../foo.c
+            src = REPO.joinpath(*parts[parts.index("src"):])  # .../foo.c.obj -> .../foo.c
             src = src.with_suffix("")
             if not src.exists():
                 continue
@@ -133,7 +158,7 @@ def main():
             # the correct answer is 0.
             lo = min(fvas)
             last = max(fvas)
-            nxt = next((v for v in vas if v > last), None)
+            nxt = next((v for v in all_vas if v > last), None)
             if nxt is None:
                 continue
             span = nxt - lo

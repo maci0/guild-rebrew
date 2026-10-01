@@ -65,15 +65,15 @@
 // __malloc
 
 // LIBRARY: SERVER 0x1001A960
-// _fwrite
+// SYMBOL: __fwrite_lk
 // SIZE: 266
 
 // LIBRARY: SERVER 0x1001AA6A
-// _fread
+// SYMBOL: _fread
 // SIZE: 47
 
 // LIBRARY: SERVER 0x1001AA99
-// __fread
+// SYMBOL: __fread_lk
 // SIZE: 232
 
 // LIBRARY: SERVER 0x1001AB81
@@ -109,7 +109,8 @@
 // SIZE: 24
 
 // LIBRARY: SERVER 0x1001B12F
-// _toupper
+// SYMBOL: __toupper_lk
+// _toupper_lk
 // SIZE: 204
 
 // LIBRARY: SERVER 0x1001B535
@@ -297,7 +298,8 @@
 // SIZE: 395
 
 // LIBRARY: SERVER 0x1001EAB0
-// _memmove
+// SYMBOL: _memcpy
+// memcpy: resolved from stock CRT call targets; its body also matches memmove.
 // SIZE: 664
 
 // LIBRARY: SERVER 0x1001EDE5
@@ -592,7 +594,7 @@
 // SIZE: 9
 
 // LIBRARY: SERVER 0x1001A931
-// _crt_locked_call4a
+// SYMBOL: _fwrite
 // SIZE: 47
 
 // LIBRARY: SERVER 0x1001ABEB
@@ -620,11 +622,13 @@
 // SIZE: 56
 
 // LIBRARY: SERVER 0x1001B0C0
-// crt_toupper
+// SYMBOL: _toupper
+// toupper
 // SIZE: 111
 
 // LIBRARY: SERVER 0x1001B200
-// _memmove2
+// SYMBOL: _memmove
+// memmove: resolved from stock CRT call targets; its body also matches memcpy.
 // SIZE: 664
 
 // LIBRARY: SERVER 0x1001B757
@@ -756,11 +760,11 @@
 // SIZE: 27
 
 // LIBRARY: SERVER 0x1001E8B4
-// crt_write_wrap
+// SYMBOL: __write
 // SIZE: 101
 
 // LIBRARY: SERVER 0x1001EEC1
-// _crt_lseek_wrap
+// SYMBOL: __read
 // SIZE: 101
 
 // LIBRARY: SERVER 0x1001F0FF
@@ -796,7 +800,7 @@
 // SIZE: 37
 
 // LIBRARY: SERVER 0x1001F8D0
-// CopyCString
+// SYMBOL: _strcpy
 // SIZE: 7
 
 // LIBRARY: SERVER 0x1001FB12
@@ -977,6 +981,27 @@
 // LIBRARY: SERVER 0x10022497
 // ___ld12cvt
 // SIZE: 199
+
+
+// LIBRARY: SERVER 0x1001baa4
+// library_msvc_cont (split from a merged entry; round 248)
+// SIZE: 188
+
+// LIBRARY: SERVER 0x1001d4ea
+// library_msvc_cont (split from a merged entry; round 248)
+// SIZE: 43
+
+// LIBRARY: SERVER 0x1001e704
+// library_msvc_cont (split from a merged entry; round 248)
+// SIZE: 34
+
+// LIBRARY: SERVER 0x1001f265
+// library_msvc_cont (split from a merged entry; round 248)
+// SIZE: 78
+
+// LIBRARY: SERVER 0x1001f2b3
+// library_msvc_cont (split from a merged entry; round 248)
+// SIZE: 24
 
 #endif
 

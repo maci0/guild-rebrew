@@ -37,7 +37,7 @@ int __cdecl AssignProductionSlot(void* req)
 	gm_ResolveEntityById(&building, 0, 0, *(int*) ((char*) req + 8));
 	if (!building ||
 	    *(unsigned short*) ((char*) building + 0x27) == 0xffff ||
-	    (char*) 0x100358a0 + *(unsigned short*) ((char*) building + 0x27) * 0x21c ==
+	    (char*) ((int) g_slot_table + 0x0) + *(unsigned short*) ((char*) building + 0x27) * 0x21c ==
 	        (char*) g_entity_table_end)
 		return -1;
 	if (g_entity_type_table[*(unsigned char*) building +

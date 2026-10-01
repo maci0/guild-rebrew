@@ -8,23 +8,18 @@ script shares no code with any of them: it parses the PE headers directly with
 much stronger claim than one tool reporting green, and it is the check that
 catches a tool being wrong about its own project.
 
-It also answers the question the byte count alone does not: does any residual
-byte touch an EXPORTED entry point or the PE entry point?  If not, the
-deliverable's public behaviour is exact and every differing byte is internal.
+Defaults to the raw linker output. Structural checks are diagnostic; success
+requires every file byte and the file length to equal the reference.
 
 Usage: python3 scripts/verify_objective.py [--ref PATH] [--build PATH]
 Exit status: 0 when every criterion below holds, 1 otherwise.
 """
+import argparse
 import struct
 import sys
 
 REF = "original/Server/server.dll"
 BLD = "build/server.dll"
-for i, a in enumerate(sys.argv):
-    if a == "--ref":
-        REF = sys.argv[i + 1]
-    elif a == "--build":
-        BLD = sys.argv[i + 1]
 
 TEXT_VSIZE = 0x22846
 IMPORT_COUNT = 100
@@ -49,9 +44,9 @@ def load(path):
 
 def rva2off(secs, base, rva):
     for va, vs, rp, rs in secs.values():
-        if va - base <= rva < va - base + max(vs, rs):
+        if va - base <= rva < va - base + rs:
             return rp + (rva - (va - base))
-    return None
+    raise ValueError("RVA 0x%x has no file-backed section" % rva)
 
 
 def import_dlls(d, secs, base, opt):
@@ -90,8 +85,12 @@ def export_names(d, secs, base, opt):
 
 
 def main():
-    rd, rs, rbase, rentry, ropt = load(REF)
-    bd, bs, bbase, bentry, bopt = load(BLD)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--ref", default=REF)
+    parser.add_argument("--build", default=BLD)
+    args = parser.parse_args()
+    rd, rs, rbase, rentry, ropt = load(args.ref)
+    bd, bs, bbase, bentry, bopt = load(args.build)
     ok = True
 
     def chk(label, cond, detail=""):
@@ -150,22 +149,15 @@ def main():
         same = rd[o:o + 0x40] == bd[o:o + 0x40]
         chk("export %s body identical (0x40 bytes)" % nm, same)
 
-    # The objective's final clause is `residue at zero`.  This script checks
-    # every STRUCTURAL criterion independently, but it does NOT fail on a
-    # non-zero residue: the residue is an accepted baseline until the last byte
-    # lands, and a verifier that failed on it would be red for the entire
-    # project.  It reports the number and leaves the judgement to the caller.
-    print()
-    if len(diffs) == 0:
-        print("VERDICT: 100%% byte-identical -- objective met")
-        return 0
-    print("VERDICT: %s (%d residual bytes, all inside .text%s)"
-          % ("structural criteria hold" if ok else "STRUCTURAL CRITERIA FAILED",
-             len(diffs),
-             ", none touching an export or the entry point" if not touched
-             else ", EXPORT TOUCHED: %s" % touched))
+    chk("whole file byte-identical", rd == bd,
+        "%d differing + %d length delta" % (len(diffs), abs(len(rd) - len(bd))))
+    print("VERDICT: %s" % ("raw-link file identical" if ok else "OBJECTIVE NOT MET"))
     return 0 if ok else 1
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except (OSError, ValueError, struct.error) as exc:
+        print("VERDICT: invalid verification input: %s" % exc, file=sys.stderr)
+        sys.exit(2)

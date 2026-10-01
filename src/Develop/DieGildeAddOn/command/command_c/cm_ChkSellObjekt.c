@@ -54,7 +54,7 @@ int __cdecl cm_ChkSellObjekt(char* cmd)
 		if (t_c) {
 			slot_index = *(unsigned short *) (t_c + 0x27);
 			if (slot_index != 0xffff) {
-				list_head = (char *) (0x100358a0 + slot_index * 0x21c);
+				list_head = (char *) ((int) g_slot_table + slot_index * 0x21c);
 			} else {
 				list_head = 0;
 			}

@@ -34,4 +34,4 @@
 
 // DATA: SERVER 0x100a8c30
 extern char* g_entity_type_table; /* 0x100A8C30 */
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];

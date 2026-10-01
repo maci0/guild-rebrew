@@ -14,7 +14,7 @@
 
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
 
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char* geb);
@@ -167,9 +167,9 @@ int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 // FUNCTION: SERVER 0x10017b00
 // gm_AssignBuildingOwner
 
-#define PTR_10035A10(idx) (*(unsigned char***) (((idx) * 0x21c) + 0x10035a10))
-#define BYTE_100358A2(idx) (*(unsigned char*) (((idx) * 0x21c) + 0x100358a2))
-#define DWORD_100358A4(idx) (*(unsigned int*) (((idx) * 0x21c) + 0x100358a4))
+#define PTR_10035A10(idx) (*(unsigned char***) (((idx) * 0x21c) + ((int) g_slot_table + 0x170)))
+#define BYTE_100358A2(idx) (*(unsigned char*) (((idx) * 0x21c) + ((int) g_slot_table + 0x2)))
+#define DWORD_100358A4(idx) (*(unsigned int*) (((idx) * 0x21c) + ((int) g_slot_table + 0x4)))
 
 void __cdecl gm_AssignBuildingOwner(unsigned char* building, unsigned short new_owner, unsigned int owner_slot)
 {

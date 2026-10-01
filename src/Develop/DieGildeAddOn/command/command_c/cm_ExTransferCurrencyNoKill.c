@@ -1,3 +1,4 @@
+extern unsigned char g_city_records[4 * 0x2f4];
 #include "../command_internal.h"
 #include "../../game/entity.h"
 
@@ -18,7 +19,7 @@ int __cdecl cm_ExTransferCurrencyNoKill(int cmd, char* result)
 		*(int*) (cmd + 0x14) = field_result;
 		gm_SubObjectNoKill(
 			field_result,
-			(unsigned int) (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) (cmd + 0x1c) * 189],
+			(unsigned int) (unsigned short) ((unsigned int*) (g_city_records + 0x54))[(unsigned int) *(unsigned char*) (cmd + 0x1c) * 189],
 			*(int*) (cmd + 0x1d)
 		);
 	}
@@ -27,7 +28,7 @@ int __cdecl cm_ExTransferCurrencyNoKill(int cmd, char* result)
 		*(int*) (cmd + 0x10) = field_result;
 		gm_AddObjekt(
 			field_result,
-			(unsigned int) (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) (cmd + 0x1c) * 189],
+			(unsigned int) (unsigned short) ((unsigned int*) (g_city_records + 0x54))[(unsigned int) *(unsigned char*) (cmd + 0x1c) * 189],
 			*(int*) (cmd + 0x1d)
 		);
 	}

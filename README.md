@@ -66,13 +66,12 @@ guild-rebrew/
 ├── docs/                 # Codegen notes, traps, naming, TODO (map: docs/README.md)
 ├── layout/server.dll/    # Link layout package
 ├── rebrew-project.toml   # Project configuration
-├── reccmp-project.yml    # reccmp configuration
 └── AGENTS.md             # Full project reference
 ```
 
 The MSVC6 compiler is not vendored: every CL.EXE/LINK.EXE call runs through
-a docker image: `rebrew/msvc:6.0-sp6-win32` for the server, `rebrew/msvc:6.0-sp5-pp-win32`
-for both clients (see `cmake/toolchain-msvc-6.0-sp6-docker.cmake`).
+a docker image: `rebrew/msvc:6.0-sp5-win32` for the server, `rebrew/msvc:6.0-sp5-pp-win32`
+for both clients (see `cmake/toolchain-msvc-6.0-sp5-docker.cmake`).
 
 ## Documentation
 

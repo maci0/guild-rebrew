@@ -1,7 +1,9 @@
+extern unsigned char g_slot_table[0x300 * 0x21c];
 // FUNCTION: GOLDTL 0x5974e0
 // SIZE: 1113
 // FUNCTION: SERVER 0x100174d0
 
+#include "../../../Units/Error/error.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "rebrew_types.h"
@@ -73,14 +75,14 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		 * symbol the load is forwarded into the call as a scratch temporary,
 		 * scheduled first, and every later scratch register (the two
 		 * `lea r,[ebp-0x410]`, the counter loads) lands on the reference's.
-		 * The `geb + 1` store keeps the literal: the symbol there swaps the
-		 * base/index operands of the 0x600 table fill. */
+		 * Both counter reads now use the native symbol and preserve the
+		 * complete matching body. */
 		nid = g_next_object_id;
 		s.record = rec;
 		sprintf(s.msg, "----->GebID= %i GebProt= %i", nid, s.type_id);
 	}
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x10d8, s.msg, 8);
-	*(int*) (geb + 1) = *(int*) 0x10030b6c;
+	*(int*) (geb + 1) = g_next_object_id;
 	g_next_object_id = g_next_object_id + 1;
 	*(unsigned short*) (geb + 0x25) = (unsigned short) owner;
 	*(unsigned short*) (geb + 0x27) = (unsigned short) owner;
@@ -191,7 +193,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		*(struct blk14*) (geb + 0x69) = *(struct blk14*) &g_current_year;
 		if ((unsigned short) owner != 0xffff)
 			*(int*) (geb + 0x65) =
-			    *(int*) ((char*) 0x100358a4 + (unsigned short) owner * 0x21c);
+			    *(int*) ((char*) (g_slot_table + 4) + (unsigned short) owner * 0x21c);
 		else
 			*(int*) (geb + 0x65) = -1;
 		break;
@@ -281,4 +283,3 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	return geb;
 }
 #pragma optimize("", on)
-

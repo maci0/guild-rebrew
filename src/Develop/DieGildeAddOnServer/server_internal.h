@@ -15,15 +15,4 @@ extern void __cdecl Exit(void);
  * Used by cm_ProcessCommandQueue.c. */
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
-/* Round-trip catalog names.  exit_handler and ServerMainThread are __stdcall,
- * so every cross-TU reference is decorated with @N (DllMain calls
- * _exit_handler@12, Init takes &_ServerMainThread@4).  A FUNCTION
- * definition's catalog name cannot carry the @N suffix, so these LIBRARY
- * markers supply the decorated spelling round-trip resolves against. */
-// LIBRARY: SERVER 0x10009310
-// _exit_handler@12
-
-// LIBRARY: SERVER 0x100093a0
-// _ServerMainThread@4
-
 #endif /* SERVER_INTERNAL_H */

@@ -12,8 +12,8 @@ extern char* g_1007cd4;
 // SIZE: 219
 void __cdecl fcn_004a7f90(int* h, int* rank_n, int* rank, int* suit_n, int* suit)
 {
-	int suits[4] = { 0 };
-	int ranks[6] = { 0 };
+	int suits[4] ;
+	int ranks[6] ;
 	int n;
 	int i;
 

@@ -1,3 +1,4 @@
+extern unsigned char g_city_records[4 * 0x2f4];
 // FUNCTION: SERVER 0x1000d930
 
 #include "../command_internal.h"
@@ -6,7 +7,7 @@
 
 extern char* g_item_def_table; /* 0x101de450, attested in rebrew-data.toml */
 extern unsigned char g_current_season;
-extern unsigned char g_connections[0x264264]; /* 0x101deb00 */
+extern unsigned char g_connections[9 * 0x264264]; /* 0x101deb00 */
 
 short* __cdecl gm_ResolveParentEntity(short*);
 int __cdecl compute_size(char*, int);
@@ -313,7 +314,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (*(int*)(cmd + 0x23) != 0) {
 			gm_AddObjekt(
 				*(int*)(source_owner_entity + 2),
-				(uint) (unsigned short) g_entity_slot_table[(unsigned char) cmd[0x1e] * 189],
+				(uint) (unsigned short) ((unsigned int*) (g_city_records + 0x54))[(unsigned char) cmd[0x1e] * 189],
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
 			);
 			if (source_dynamic_entity != (short*)0) {
@@ -371,7 +372,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			gm_SubObjekt(
 				*(void**)(dest_owner_entity + 2),
-				(uint) (unsigned short) g_entity_slot_table[(unsigned char) cmd[0x1e] * 189],
+				(uint) (unsigned short) ((unsigned int*) (g_city_records + 0x54))[(unsigned char) cmd[0x1e] * 189],
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
 			);
 			if (dest_dynamic_entity != (short*)0) {

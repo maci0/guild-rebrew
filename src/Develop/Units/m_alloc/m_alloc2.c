@@ -3,6 +3,7 @@
 #include <string.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#include "alloc_root.h"
 
 #pragma intrinsic(memset, strcmp, strcpy)
 

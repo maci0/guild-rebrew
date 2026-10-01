@@ -6,7 +6,6 @@
 #include <stdlib.h>
 
 int __cdecl deflate(void*, int);  /* zlib deflate — the original calls it directly */
-int __cdecl _crt_locked_call4a(void*, int, int, void*);
 unsigned int __cdecl vfs_GetByte(int*);
 unsigned int __cdecl vfs_FlushStream(int, int);
 void __cdecl vfs_WriteUint32LE(int, unsigned int);
@@ -39,7 +38,7 @@ unsigned int __cdecl vfs_FlushStream(int stream, int dest)
 	do {
 		remaining = 0x4000 - *(int*) (stream + 0x10);
 		if (remaining != 0) {
-			write_result = _crt_locked_call4a(*(void**) (stream + 0x48), 1, remaining, *(void**) (stream + 0x40));
+			write_result = fwrite(*(void**) (stream + 0x48), 1, remaining, *(FILE**) (stream + 0x40));
 			if (write_result != remaining) {
 				*(int*) (stream + 0x38) = -1;
 				return (unsigned int) -1;

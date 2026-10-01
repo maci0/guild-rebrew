@@ -1,3 +1,4 @@
+extern unsigned char g_city_records[4 * 0x2f4];
 /* gv_ExtendProductionTime - proper C */
 
 // FUNCTION: SERVER 0x100113b0
@@ -6,6 +7,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #include "../entity.h"
+extern unsigned char g_current_season;
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
@@ -35,7 +37,7 @@ int __cdecl gv_ExtendProductionTime(void* building)
 	if (entity) {
 		grave_id = *(unsigned short*) ((char*) entity + 0x27);
 		if (grave_id != 0xffff) {
-			if ((char*) 0x100358a0 + grave_id * 0x21c != (char*) g_entity_table_end) {
+			if ((char*) ((int) g_slot_table + 0x0) + grave_id * 0x21c != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
 				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
 					return -2;
@@ -59,11 +61,11 @@ int __cdecl gv_ExtendProductionTime(void* building)
 				*(short*) ((char*) slot + 0xa) += *(short*) ((char*) building + 0x11);
 				if (*(int*) ((char*) building + 0x13) > 0) {
 					obj4 = *(int*) ((char*) object + 4);
-					word1 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
+					word1 = (unsigned short) ((unsigned int*) (g_city_records + 0x54))[(unsigned int) g_current_season * 189];
 					gm_SubObjectNoKill(obj4, word1, *(int*) ((char*) building + 0x13));
-					word2 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
+					word2 = (unsigned short) ((unsigned int*) (g_city_records + 0x54))[(unsigned int) g_current_season * 189];
 					ftol_val = (int) (*(int*) ((char*) building + 0x13) * g_output_share[*(int*) ((char*) building + 0xc)]);
-					gm_AddObjekt(*(int*) ((char*) 0x100358a4 + *(unsigned short*) ((char*) entity + 0x27) * 0x21c),
+					gm_AddObjekt(*(int*) ((char*) ((int) g_slot_table + 0x4) + *(unsigned short*) ((char*) entity + 0x27) * 0x21c),
 					    word2, ftol_val);
 				}
 				return 0;

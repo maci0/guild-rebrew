@@ -112,26 +112,6 @@ extern int g_alloc_counter;          /* 0x10034638 */
  * A /G3-/G6 x /Gd /Oy /Oy- /Op flag sweep reports every combination equal and
  * "flags unlikely to help". */
 
-// GLOBAL: SERVER 0x117640a0
-int g_alloc_root_name = 0;        /* 0x117640a0 */
-
-// GLOBAL: SERVER 0x117640a4
-int g_alloc_root_name_4 = 0;      /* 0x117640a4 */
-
-// GLOBAL: SERVER 0x117640b0
-int g_alloc_root_size_total = 0;  /* 0x117640b0 */
-
-// GLOBAL: SERVER 0x117640b4
-int g_alloc_root_count = 0;       /* 0x117640b4 */
-
-// GLOBAL: SERVER 0x117640b8
-int g_alloc_root_size_max = 0;    /* 0x117640b8 */
-
-// GLOBAL: SERVER 0x117640bc
-int g_alloc_root_count_max = 0;   /* 0x117640bc */
-
-// GLOBAL: SERVER 0x117640c0
-int g_alloc_root_spare = 0;    /* 0x117640c0 */
 
 // FUNCTION: SERVER 0x10006820
 // m_FreeTracked
@@ -139,6 +119,10 @@ int g_alloc_root_spare = 0;    /* 0x117640c0 */
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#include "alloc_root.h"
+// GLOBAL: SERVER 0x117640a0
+struct GroupNode g_alloc_root;
+
 /* "_main_:" at 0x10028938 -- the default allocation-group name.  m_init reads
  * it as two dwords (`mov eax,[0x10028938]` / `mov ecx,[0x1002893c]`), which is
  * why it was declared as a pair of ints -- but nothing DEFINED it.

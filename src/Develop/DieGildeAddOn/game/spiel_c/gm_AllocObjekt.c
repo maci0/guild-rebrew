@@ -1,3 +1,4 @@
+extern unsigned char g_slot_table[0x300 * 0x21c];
 /* gm_AllocObjekt - high-level object allocation: resolve the parent record,
  * link a fresh pool slot into the parent's object list, initialize the object
  * record, then run the per-type field setup selected by the object prototype.
@@ -130,7 +131,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 	case 0x135:
 	case 0x136:
 		if (dynamic != NULL) {
-			*(int*) (slot + 0xa) = *(int*) ((char*) 0x100358a4
+			*(int*) (slot + 0xa) = *(int*) ((char*) (g_slot_table + 4)
 				+ *(unsigned short*) ((char*) dynamic + 0x27) * 0x21c);
 		} else if (existing != NULL) {
 			*(int*) (slot + 0xa) = *(int*) (gm_ResolveParentEntity(existing) + 4);

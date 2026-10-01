@@ -1,7 +1,7 @@
 /* cm_AssignSequenceCounter - proper C */
 
 // GLOBAL: SERVER 0x10035408
-int g_sequence_counter = 0;
+int g_sequence_counter;
 
 /* Assigns the next sequential ID counter value to the command packet
  * at offset 0x10, then increments the global counter. */

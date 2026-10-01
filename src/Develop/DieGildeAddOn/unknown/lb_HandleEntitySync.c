@@ -1,3 +1,4 @@
+extern unsigned char g_connections[9 * 0x264264];
 /* lb_HandleEntitySync - proper C */
 
 // FUNCTION: SERVER 0x10014bf0
@@ -35,12 +36,12 @@ int __cdecl lb_HandleEntitySync(int player, int msg)
 	 * `do/while` gives the single-compare loop with the `jl` back-edge. */
 	message = (char*) msg;
 	i = 0;
-	tab = 0x101deb04;
+	tab = (int) (g_connections + 0x4);
 	eid = *(int*) (message + 0x14);
 	dst = message + 0x14;
-	while (tab < 0x114ffe24) {
+	while (tab < (int) (g_connections + 0x1321324)) {
 		if (*(int*) tab == eid) {
-			memcpy(dst, (void*) (0x10442d0c + (unsigned int) i * 0x264264), 0x57);
+			memcpy(dst, (void*) ((int) (g_connections + 0x26420c) + (unsigned int) i * 0x264264), 0x57);
 			return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) message) == -1) ? -1 : 0;
 		}
 		tab += 0x264264;

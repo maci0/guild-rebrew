@@ -4,9 +4,9 @@
  * two named globals, named for the global that follows it.
  */
 
-/* Eight player slots, stride 0x264264, 0x101deb00 through 0x114ffe20. */
+/* Eight player slots plus the admin slot, stride 0x264264. */
 // GLOBAL: SERVER 0x101deb00
-extern unsigned char g_connections[0x1321320];
+extern unsigned char g_connections[9 * 0x264264];
 
 /* .data */
 // GLOBAL: SERVER 0x10027000
@@ -491,22 +491,20 @@ extern unsigned char g_before_g_graveyard_const_a[0x397];
 extern unsigned char g_before_g_const_2[0x4];
 
 // GLOBAL: SERVER 0x100256a8
-extern float g_const_neg_1_0f;
+extern const float g_const_neg_1_0f;
 
 // GLOBAL: SERVER 0x100256ac
-extern float g_const_1_over_252;
+extern const float g_const_1_over_252;
 
 // GLOBAL: SERVER 0x100256bc
-extern float g_const_0_2f;
+extern const float g_const_0_2f;
 
 // GLOBAL: SERVER 0x100256c0
-extern float g_const_2f;
+extern const float g_const_2f;
 
 // GLOBAL: SERVER 0x100256d8
 extern unsigned char g_before_g_const_0_25[0x3c];
 
-// GLOBAL: SERVER 0x1002572c
-extern unsigned char g_before_g_field_worker_count[0x30];
 
 // GLOBAL: SERVER 0x100257cc
 extern unsigned char g_before_g_const_half[0x4];
@@ -517,8 +515,6 @@ extern unsigned char g_before_g_const_one_d[0x4];
 // GLOBAL: SERVER 0x100257e0
 extern unsigned char g_before_g_const_0_2[0x30];
 
-// GLOBAL: SERVER 0x10025818
-extern unsigned char g_before_g_const_0_6[0x770];
 
 // GLOBAL: SERVER 0x10025f8c
 extern unsigned char g_before_g_const_8[0x4];
@@ -547,9 +543,6 @@ extern unsigned char g_before_g_current_season[0x1];
 
 // GLOBAL: SERVER 0x1003543a
 extern unsigned char g_before_g_active_player_count[0x2];
-
-// GLOBAL: SERVER 0x10035440
-extern unsigned char g_before_g_dynasty_name[0x4];
 
 // GLOBAL: SERVER 0x1003544a
 extern unsigned char g_before_g_dynasty_scan_count[0x2];
@@ -638,17 +631,11 @@ extern unsigned char g_before_g_player_record_src[0x60];
 // GLOBAL: SERVER 0x100a8cfc
 extern unsigned char g_before_g_dispatch_table_a[0x90ba0];
 
-// GLOBAL: SERVER 0x101398a4
-extern unsigned char g_before_g_entity_ptr[0x1401c];
 
-// GLOBAL: SERVER 0x1014d8c4
-extern unsigned char g_before_g_item_def_table[0x90b8c];
 
 // GLOBAL: SERVER 0x101de458
 extern unsigned char g_before_g_save_info[0x8];
 
-// GLOBAL: SERVER 0x101de465
-extern unsigned char g_before_g_aux_entity_buffer[0xf7];
 
 // GLOBAL: SERVER 0x101de564
 extern unsigned char g_before_g_office_slots[0x3c];

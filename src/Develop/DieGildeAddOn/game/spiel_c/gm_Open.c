@@ -12,20 +12,12 @@ typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
-extern unsigned int g_player_record_src;
-extern unsigned int g_player_record_dst;
+extern unsigned char g_city_records[4 * 0x2f4];
+extern unsigned char g_town_records[5 * 0x2a90];
 /* fcn.1001a140 — the original binary calls this thunk (srand(timeGetTime()))
  * between the producible-count loop and the exit log; the reversed CRT
  * provided it as `getpid` before run_000.c was dropped (c77489a). */
 extern void __cdecl srv_SeedRandomWithTime(void);
-
-/* Round-548: cross-TU path share with the spiel module's named definition.  The
-   reference pushes the SAME address (0x10031004, "D:\Develop\DieGildeAddOn\game\
-   spiel.c") at every log site, so it is one shared object, not an anonymous
-   per-site literal.  Expressed as the raw-address cast the rest of the tree uses
-   for this exact string; the earlier `extern char s_...[]` form had no definition
-   anywhere, so every one of the 11 sites emitted an unrelocatable operand
-   (round 924). */
 
 // FUNCTION: SERVER 0x10015950
 // gm_Open
@@ -91,13 +83,16 @@ int __cdecl gm_Open(int map_id)
 	char* def_row;
 	char* cat_p;
 
-	LogMessageInternal((char*) 0x10031004, 0x4d3, "gm_Open(): enter", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d3, "gm_Open(): enter", 1);
 	/* 0x10031204 is "gm_Open(): St\344dte" (Latin-1 a-umlaut, byte 0xe4).  The
 	   text sits in a relocation slot, so a wrong string still scores RELOC;
 	   see docs/msvc6-c-shapes.md section 36. */
-	LogMessageInternal((char*) 0x10031004, 0x4d6, "gm_Open(): St\344dte", 1);
-	src_player_ptr = (unsigned int*) &g_player_record_src;
-	dst_player_ptr = (unsigned int*) &g_player_record_dst;
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d6, "gm_Open(): St\344dte", 1);
+	/* The reference initializes five seasonal tables from four city records.
+	 * Its final source read extends into the following relationship storage;
+	 * preserve that bound rather than inventing a fifth city record. */
+	src_player_ptr = (unsigned int*) (g_city_records + 0xb8);
+	dst_player_ptr = (unsigned int*) (g_town_records + 4);
 	do {
 		unsigned int* copy_dst;
 		unsigned int* base;
@@ -111,12 +106,12 @@ int __cdecl gm_Open(int map_id)
 		memcpy((void*) copy_dst, (void*) &g_producer_id_table, 0x2a80);
 		src_player_ptr = src_player_ptr + 0xbd;
 		dst_player_ptr = dst_player_ptr + 0xaa4;
-	} while ((int) src_player_ptr < (int) 0x100a9bbc);
+	} while ((int) src_player_ptr < (int) g_city_records + 0xb8 + 5 * 0x2f4);
 	/* 0x100311f0 is "gm_Open(): Geb\344ude" (Latin-1 a-umlaut, byte 0xe4). */
-	LogMessageInternal((char*) 0x10031004, 0x4e3, "gm_Open(): Geb\344ude", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e3, "gm_Open(): Geb\344ude", 1);
 	g_entity_type_table = (char*) m_AllocTracked(0xca78, "f3_gm:lpGebaeudePROT");
 	if (g_entity_type_table == 0) {
-		LogMessageInternal((char*) 0x10031004, 0x4e8, "Memory could not be allocated!", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e8, "Memory could not be allocated!", 1);
 		return -1;
 	}
 	g_entity_ptr = (unsigned char*) m_AllocTracked(0xa900, "f3_gm:lpGebaeudeINST");
@@ -125,9 +120,9 @@ int __cdecl gm_Open(int map_id)
 		return -2;
 	}
 	sprintf((char*) path_buf, "%s%s", map_id, "A_Geb.dat");
-	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
+	file_handle = fopen((char*) path_buf, "rb");
 	if (file_handle == 0) {
-		LogMessageInternal((char*) 0x10031004, 0x4f5, "Geb\344ude-Daten konnten nicht geladen werden! (A_Geb.dat)", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4f5, "Geb\344ude-Daten konnten nicht geladen werden! (A_Geb.dat)", 1);
 		return -3;
 	}
 	fread((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
@@ -142,10 +137,10 @@ int __cdecl gm_Open(int map_id)
 	}
 	memset((void*) g_query_base, 0, 0x14f218);
 	sprintf((char*) path_buf, "%s%s", map_id, "A_Obj.dat");
-	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
+	file_handle = fopen((char*) path_buf, "rb");
 	if (file_handle == 0) {
 		LogMessageInternal(
-			(char*) 0x10031004,
+			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
 			0x52d,
 			"Objekt-Daten konnten nicht geladen werden! (A_Obj.dat)",
 			1
@@ -154,12 +149,12 @@ int __cdecl gm_Open(int map_id)
 	}
 	fread((void*) g_item_def_table, 0x41, 0x2dc, file_handle);
 	fclose(file_handle);
-	LogMessageInternal((char*) 0x10031004, 0x536, "gm_Open(): gm_InitObjektHersteller", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x536, "gm_Open(): gm_InitObjektHersteller", 1);
 	gm_InitObjektHersteller();
-	LogMessageInternal((char*) 0x10031004, 0x53a, "gm_Open(): gm_KillAllSpieler", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x53a, "gm_Open(): gm_KillAllSpieler", 1);
 	gm_InitEntitySlots();
 	LogMessageInternal(
-		(char*) 0x10031004,
+		"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
 		0x53e,
 		"gm_Open(): ---- Das dusselige Datendesign hinbiegen !! -----",
 		1
@@ -186,13 +181,13 @@ int __cdecl gm_Open(int map_id)
 			slot_counter = slot_counter + -1;
 		} while (slot_counter != 0);
 		*(char*) (g_entity_type_table + row_index * 0x24d + 0x21) =
-			*(char*) (g_entity_type_table + row_index * 0x24d + 0x21) + producible_count;
+			*(char*) (g_entity_type_table + row_index * 0x24d + 0x21) + (char) producible_count;
 		row_index = row_index + 1;
 	} while (row_index < 0x58);
 	/* Original seeds the RNG from the system timer before the exit log
 	 * (fcn.1001a140 = srand(timeGetTime())). */
 	srv_SeedRandomWithTime();
-	LogMessageInternal((char*) 0x10031004, 0x588, "gm_Open(): exit", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x588, "gm_Open(): exit", 1);
 	return 0;
 }
 
@@ -215,7 +210,8 @@ char g_query_flag3;
 extern unsigned char* g_query_filter_base;
 extern unsigned short* g_query_cursor;
 extern unsigned short* g_entity_table_end;
-extern unsigned char g_slot_table[2];
+extern unsigned char g_slot_table[0x300 * 0x21c];
+/* Unused declarations preserve VC6 allocation in gm_Open; no storage is emitted. */
 extern char g_entity_state_base[2];
 extern unsigned char g_entity_type_bytes[1];
 // DATA: SERVER 0x10034624
@@ -226,9 +222,7 @@ int g_alloc_report_groups = 0;
 // DATA: SERVER 0x10034640
 void* g_array_ptr = 0;
 // GLOBAL: SERVER 0x10034670
-char g_stream_pool[1] = {
-    0x00,
-};
+void* g_stream_pool = 0;
 // DATA: SERVER 0x10034678
 int g_stream_count = 0; /* 0x10034678 */
 int g_connection_counter = 0;

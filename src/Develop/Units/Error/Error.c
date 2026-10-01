@@ -6,9 +6,9 @@
 #include "rebrew_globals.h"
 
 // GLOBAL: SERVER 0x11766100
-char g_log_buffer[256] = {0};
+char g_log_buffer[260];
 // GLOBAL: SERVER 0x11766204
-int g_log_file_handle = 0;
+int g_log_file_handle;
 
 void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
 

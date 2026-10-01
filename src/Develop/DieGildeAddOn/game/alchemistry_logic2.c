@@ -12,10 +12,10 @@ int __cdecl gm_ObjectsAvailble(int season);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_KillSpieler(unsigned int index, int param);
 void* __cdecl gm_NextEntityQueryMatch(void);
-extern float g_color_scale;
+extern const float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
-extern float g_const_0_0;
+extern const float g_const_0_0;
 
 /* Nothing reads these two; they open the TU's data. */
 // GLOBAL: SERVER 0x1002a0f0
@@ -40,25 +40,25 @@ char s_ahm_ExAllocAlchemist__wrong_type[] = "ahm_ExAllocAlchemist: wrong type of
 char s_ahm_ExAllocAlchemist__cant_find[] = "ahm_ExAllocAlchemist: cant find target geb...";
 
 // GLOBAL: SERVER 0x10025688
-extern double g_const_2; /* 0x10025688 */
+extern const double g_const_2; /* 0x10025688 */
 
 // GLOBAL: SERVER 0x100256d0
-extern double g_const_0_001; /* 0x100256d0 */
+extern const double g_const_0_001; /* 0x100256d0 */
 
 // GLOBAL: SERVER 0x100257d8
-extern double g_const_one_d; /* 0x100257d8 */
+extern const double g_const_one_d; /* 0x100257d8 */
 
 // GLOBAL: SERVER 0x10025810
-extern double g_const_0_2; /* 0x10025810 */
+extern const double g_const_0_2; /* 0x10025810 */
 
 // GLOBAL: SERVER 0x10025f88
-extern float g_const_0_6; /* 0x10025f88 */
+extern const float g_const_0_6; /* 0x10025f88 */
 
 // GLOBAL: SERVER 0x10025f90
-extern double g_const_8; /* 0x10025f90 */
+extern const double g_const_8; /* 0x10025f90 */
 
 // GLOBAL: SERVER 0x10025f98
-extern double g_const_900; /* 0x10025f98 */
+extern const double g_const_900; /* 0x10025f98 */
 
 /* 32 records at a 244-byte stride.  ahm_InitRandomEntity addresses them by raw
  * address (0x1002a1d0, 0x1002a200 and the in-use byte at 0x1002a2c2, each
@@ -598,55 +598,11 @@ typedef struct {
 
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
-extern unsigned char g_connections[0x264264];
-
-void __cdecl fcn_00418fb0(char* src);
-void __cdecl fcn_004190d0(char* src);
-void __cdecl fcn_00423670(char* obj, int a, int b);
-
-/* Sound-pan request filled for fcn_00418fb0. */
-typedef struct PanReq {
-	char pad[0x34];
-	void* emitter;
-	void* label;
-	int gap3c;
-	int mode;
-	int flag;
-	float level;
-	char tail[8];
-} PanReq;
-
-// FUNCTION: GOLDTL 0x4193f0
-// SIZE: 144
-
-int __cdecl fcn_004193f0(char* obj, void* label, int mode, float amount)
-{
-	PanReq req;
-	float scaled;
-
-	if (obj == 0 || label == 0) {
-		return 0;
-	}
-	scaled = (float) (amount * *(double*) 0x662b40);
-	req.label = label;
-	req.flag = 1;
-	req.emitter = obj;
-	*(int*) (obj + 0xc) = 1;
-	*(int*) (obj + 0x14) = 0;
-	req.mode = mode;
-	req.level = scaled;
-	fcn_00418fb0((char*) &req);
-	fcn_004190d0((char*) &req);
-	if (*(int*) (obj + 0x24) == 0) {
-		return 0;
-	}
-	fcn_00423670(obj, 0, 0);
-	return 1;
-}
+extern unsigned char g_connections[9 * 0x264264];
 
 /* Clamps a floating-point alchemy value to valid bounds.
  * Prevents stat overflow/underflow during recipe processing.
- * g_const_0_0 (0x100256cc) and g_const_1_0 (0x100256a0) hold
+ * g_const_0_0 (0x100256cc) and g_const_1_0f (0x100256a0) hold
  * 0.0f and 1.0f, so this is a clamp into [0.0, 1.0].
  *
  * The in-range test is one short-circuit `&&`, not a nested if, and the two
@@ -791,14 +747,14 @@ int __cdecl ahm_ClampFloatValue(float* arg1, float* arg2)
 	float clamp;
 
 	sum = arg1[4] + arg2[1];
-	if (sum > g_const_0_0 && sum < g_const_1_0) {
+	if (sum > g_const_0_0 && sum < g_const_1_0f) {
 		arg2[1] = sum;
 		return 1;
 	}
 	if (sum <= g_const_0_0) {
 		clamp = g_const_0_0;
 	} else {
-		clamp = g_const_1_0;
+		clamp = g_const_1_0f;
 	}
 	arg2[1] = clamp;
 	return 1;
@@ -903,7 +859,7 @@ char* __cdecl ahm_InitRandomEntity(void)
 	idx = gm_RandomMod(0x20) & 0xffff;
 	counter = 0x20;
 	while (counter != 0) {
-		if (*(unsigned char*) (0x1002a2c2 + idx * 244) == 0)
+		if (*(unsigned char*) (g_alchemy_random_table + 0xf6 + idx * 244) == 0)
 			goto found;
 		counter--;
 		idx = (idx + 1) & 0x1f;
@@ -911,7 +867,7 @@ char* __cdecl ahm_InitRandomEntity(void)
 	return 0;
 found:
 	off = idx * 244;
-	table_cursor = (float*) (0x1002a200 + off);
+	table_cursor = (float*) (g_alchemy_random_table + 0x34 + off);
 	n = 0xe;
 	do {
 		/* volatile pins the store right after the multiply; without it
@@ -920,8 +876,8 @@ found:
 		table_cursor += 3;
 		n--;
 	} while (n != 0);
-	*(unsigned char*) (0x1002a2c2 + off) = 1;
-	return (char*) (0x1002a1d0 + off);
+	*(unsigned char*) (g_alchemy_random_table + 0xf6 + off) = 1;
+	return (char*) (g_alchemy_random_table + 4 + off);
 }
 
 // FUNCTION: SERVER 0x1000c670

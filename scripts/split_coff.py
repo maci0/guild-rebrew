@@ -208,7 +208,13 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     commons: list[tuple[int, int, int]] = []
     synth_total = 0
     synth_sec = 0
-    if extra and emit_commons:
+    if emit_commons:
+        # Not `extra and emit_commons`: a blob with no sections of its own to
+        # emit still declares COMMON symbols, and leaving them at section 0 put
+        # a second definition of the same symbol on the link next to the blob
+        # that does place it in a synthetic .bss.  LINK resolved the pair
+        # first-wins and reported 34 LNK4006, which looked like a placement
+        # defect and was not.
         off = 0
         for i, sym in enumerate(coff.symbols):
             if sym is None:

@@ -1,5 +1,5 @@
-// GLOBAL: SERVER 0x117640c4
-int g_list_head;
+extern unsigned char g_connections[9 * 0x264264];
+extern int g_list_head;
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 
@@ -9,6 +9,7 @@ int g_list_head;
 #include <winsock2.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#include "../../download_state.h"
 
 /* Command layer (local externs — server.header uses different signatures) */
 int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
@@ -20,8 +21,7 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
 int __cdecl srv_LoadBuf(void);
 #include "../server_internal.h"
 
-// GLOBAL: SERVER 0x101deac4
-unsigned int g_download_received = 0;
+
 
 int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 extern int srv_ReceivePacketHeader(unsigned int* conn);
@@ -52,8 +52,9 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  *     advance it. The cmd-3 tail stores `*conn` directly and the memcpy
  *     addends are plain locals so the picks, and every later scratch
  *     register, land where the reference has them.
- *   - Download arm 8: both global stores plain and issued before the memset,
- *     so the rep stosd sinks below the two pushes.
+ *   - Download arm 8: counters and slots are members of DownloadState.
+ *     This preserves the two counter stores before the intrinsic memset;
+ *     separate extern objects let msvc6 move both stores after rep stosd.
  *   - The per-arm slot store `conn+0x1b = i` stops c2 hoisting the shared
  *     srv_QueueCommandForProcessing prefix.
  *   - Admin loop: one cached flag byte feeds both flag tests, and all three
@@ -134,7 +135,7 @@ int __cdecl srv_LoadBuf(void)
 						 * and in the memcpy arm below. */
 						g_download_total_size = total;
 						g_download_received = 0;
-						memset((void*) 0x101deac8, 0xff, 32);
+						memset(g_download_slots, 0xff, sizeof(g_download_slots));
 						g_download_buffer = (unsigned int) m_AllocTracked(total, "srv_LoadBuf");
 					}
 					else if (*(unsigned char*) (conn + 6) == 9) {
@@ -199,15 +200,15 @@ int __cdecl srv_LoadBuf(void)
 	 * looping back on bit 0, so the loop condition is re-tested at the bottom
 	 * off the same `mov al`. All three exits of this loop share the single
 	 * `xor eax,eax` epilogue below. */
-	while ((*(unsigned char*) 0x114ffe20 & 1) != 0) {
-		if (srv_ReceivePacketHeader((unsigned int*) 0x114ffe20) == -1) {
+	while ((*(unsigned char*) (int) (g_connections + 0x1321320) & 1) != 0) {
+		if (srv_ReceivePacketHeader((unsigned int*) (int) (g_connections + 0x1321320)) == -1) {
 			goto done;
 		}
-		admin_flags = *(unsigned char*) 0x114ffe20;
+		admin_flags = *(unsigned char*) (int) (g_connections + 0x1321320);
 		if ((admin_flags & 0x80) != 0) {
 			pktbuf[0] = 2;
-			cm_QueuePlayerCommand((unsigned int*) 0x114ffe20, pktbuf);
-			cm_ClosePlayerConnection((unsigned int*) 0x114ffe20);
+			cm_QueuePlayerCommand((unsigned int*) (int) (g_connections + 0x1321320), pktbuf);
+			cm_ClosePlayerConnection((unsigned int*) (int) (g_connections + 0x1321320));
 			goto done;
 		}
 	}

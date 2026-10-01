@@ -155,7 +155,7 @@ int __cdecl amt_ClearEntityLinks(char* entity)
 
 	default_val = (unsigned short) g_current_hour;
 	result = 0;
-	slot = (OfficeSlot*) 0x101de5a0;
+	slot = (OfficeSlot*) ((int) g_office_slots + 0x0);
 	for (i = 0; i < 0x2a; i++) {
 		if (slot[i].entityId == *(int*) (entity + 4)) {
 			slot[i].entityId = -1;
@@ -203,7 +203,7 @@ void __cdecl amt_UpdateEntityLinks(char* entity, int arg2)
 
 	default_val = (unsigned short) g_current_hour;
 	result = 0;
-	slot = (OfficeSlot*) 0x101de5a0;
+	slot = (OfficeSlot*) ((int) g_office_slots + 0x0);
 	for (i = 0; i < 0x2a; i++) {
 		if (slot[i].entityId == *(int*) (entity + 4) && arg2 != 0) {
 			slot[i].entityId = -1;

@@ -34,6 +34,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 #: the hand-reversed LIBCMT bodies the split objects replace
 DROP = (
+    "crt_region/game_float_constants.c.obj",
+    "crt_region/locale_time_strings.c.obj", "crt_region/locale_time_table.c.obj",
     "crt_region/initterm.c.obj", "crt_region/dllmain.c.obj",
     "crt_region/mlock.c.obj", "crt_region/sbh_pool.c.obj",
     "crt_region/sbh_aliases.c.obj", "crt_region/crt_heap.c.obj",
