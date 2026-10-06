@@ -59,14 +59,14 @@ name = "g_download_state"
 section = ".bss"
 type = "struct DownloadState"
 size = 44
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T08:30:58+00:00"
 status = "EXACT"
 storage_kind = "object"
 backing = ""
 file = "src/bss_layout/bss_late.c"
 marker_type = "GLOBAL"
-link_symbol = "_g_download_total_size"
+link_symbol = "_g_download_state"
 
 ["SERVER.0x101deac0".verification]
 status = "EXACT"

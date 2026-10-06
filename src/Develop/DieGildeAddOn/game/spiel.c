@@ -2164,7 +2164,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		sprintf(s.msg, "----->GebID= %i GebProt= %i", nid, s.type_id);
 	}
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x10d8, s.msg, 8);
-	*(int*) (geb + 1) = *(int*) 0x10030b6c;
+	*(int*) (geb + 1) = g_next_object_id;
 	g_next_object_id = g_next_object_id + 1;
 	*(unsigned short*) (geb + 0x25) = (unsigned short) owner;
 	*(unsigned short*) (geb + 0x27) = (unsigned short) owner;
@@ -2275,7 +2275,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		*(struct blk14*) (geb + 0x69) = *(struct blk14*) &g_current_year;
 		if ((unsigned short) owner != 0xffff)
 			*(int*) (geb + 0x65) =
-			    *(int*) ((char*) 0x100358a4 + (unsigned short) owner * 0x21c);
+			    *(int*) ((char*) g_slot_table + 4 + (unsigned short) owner * 0x21c);
 		else
 			*(int*) (geb + 0x65) = -1;
 		break;
@@ -3251,9 +3251,9 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 		obj = *(char**) (obj + 0x3f);
 	}
 
-	*(int*) ((char*) 0x10035a48 + chain * 0x21c) = link;
-	*(int*) ((char*) 0x10035a34 + chain * 0x21c) = 4;
-	*(int*) ((char*) 0x10035a68 + chain * 0x21c) = 0;
+	*(int*) ((char*) g_slot_table + 0x1a8 + chain * 0x21c) = link;
+	*(int*) ((char*) g_slot_table + 0x194 + chain * 0x21c) = 4;
+	*(int*) ((char*) g_slot_table + 0x1c8 + chain * 0x21c) = 0;
 	gm_KillSpieler(*(unsigned short*) rec_b, 0);
 
 	return chain;

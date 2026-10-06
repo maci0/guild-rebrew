@@ -471,11 +471,11 @@ after_old_clear:
 			}
 
 			{
-				int row;
+				int row; extern unsigned char g_slot_table[];
 				row = 0;
 				do {
-					*(int*) (0x10035a6c + row * 0x21c) =
-						*(int*) (0x10035a6c + row * 0x21c) & ~mask;
+					*(int*) ((int) g_slot_table + 0x1cc + row * 0x21c) =
+						*(int*) ((int) g_slot_table + 0x1cc + row * 0x21c) & ~mask;
 					row++;
 				} while (row < 768);
 			}

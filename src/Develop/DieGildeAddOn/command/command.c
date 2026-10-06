@@ -939,7 +939,7 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2917, "ClientSpieler erzeugt", 1);
 	off = entity * 0x21c;
 	hash_index = 0x99099 * (unsigned char)*(char*)(cmd + 3);
-	*(int*)(0x10442d00 + hash_index * 4) = *(int*)(g_slot_table + off + 4);
+	*(int*)((int) g_connections + 0x264200 + hash_index * 4) = *(int*)(g_slot_table + off + 4);
 	strncpy(g_slot_table + off + 0x30, (char*)cmd + 0x25, 0x10);
 	entry = gm_GetEntityTableEntry(g_slot_table + off);
 	if (entry != 0) {
@@ -2773,7 +2773,7 @@ int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 	f = 0x99099 * (unsigned char) *(char*) (cmd + 3);
 	cmd += 0x18;
 	dst = obj + 0x1c;
-	*(int*) (0x10442d08 + f * 4) = *(int*) (obj + 2);
+	*(int*) ((int) g_connections + 0x264208 + f * 4) = *(int*) (obj + 2);
 	obj[0x12] = 0x40;
 	memcpy(dst, cmd, 7);
 	obj[0x22] = 0;
@@ -3190,7 +3190,7 @@ int __cdecl cm_ExCreateCitizen(int cmd, char* result)
 		gm_AllocObjekt(*(unsigned int *) ((char*) &g_entity_id_field + idx),
 		               *(unsigned char *) (cmd + 0x21), 1);
 	}
-	*((unsigned int *) (0x10442d00 + (unsigned char) *(char *) (cmd + 3) * 0x264264)) =
+	*((unsigned int *) ((int) g_connections + 0x264200 + (unsigned char) *(char *) (cmd + 3) * 0x264264)) =
 	    *(unsigned int *) ((char*) &g_entity_id_field + idx);
 	if (result) {
 		result[0] = 1;

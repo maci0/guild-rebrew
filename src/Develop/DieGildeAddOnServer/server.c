@@ -10,10 +10,10 @@
 #include "server_internal.h"
 
 extern unsigned char g_host_flags; /* 0x101de464 */
-extern unsigned int g_download_total_size; /* 0x101deac0 */
-extern unsigned int g_download_received;
-extern unsigned int g_download_slots[8]; /* 0x101deac8 */
-extern unsigned int g_download_buffer; /* 0x101deae8 */
+#include "../download_state.h"
+
+
+
 extern int g_list_head;
 extern unsigned int g_player_slot_field;
 int __stdcall ServerMainThread(void* lpThreadParameter);
@@ -1268,7 +1268,7 @@ int __cdecl srv_LoadBuf(void)
 						 * and in the memcpy arm below. */
 						g_download_total_size = total;
 						g_download_received = 0;
-						memset((void*) 0x101deac8, 0xff, 32);
+						memset(g_download_slots, 0xff, 32);
 						g_download_buffer = (unsigned int) m_AllocTracked(total, "srv_LoadBuf");
 					}
 					else if (*(unsigned char*) (conn + 6) == 9) {

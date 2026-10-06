@@ -305,7 +305,7 @@ int __cdecl plt_TableLookup(int index, int* out)
 	if (index >= 0x58) {
 		return 0;
 	}
-	*out = *(int*) (0x1002DA30 + index * 8);
-	*(int*) ((char*) out + 4) = *(int*) (0x1002DA34 + index * 8);
+	*out = *(int*) ((int) g_plant_pair_table + index * 8);
+	*(int*) ((char*) out + 4) = *(int*) ((int) g_plant_pair_table + 4 + index * 8);
 	return 1;
 }

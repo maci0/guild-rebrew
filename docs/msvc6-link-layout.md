@@ -4953,10 +4953,27 @@ Two source facts the order depends on, both measured:
   reference (the 1.0 folds into LIBCMT's `__real@8@3fff8000000000000000`, ordered in
   `common-data-order.txt`). Changing either alone swaps two reload blocks at the function tail; both together
   match.
+- **Base relocations.** Every absolute address the reference relocates must be a symbol in the source.
+  `scripts/symbolize_addresses.py` rewrites `(T*) 0xVA` casts (also `&row + offset`); loops need both ends
+  named (`p < (int) sym + extent`), with the original's signed or unsigned compare: naming only the start
+  changes the strength-reduced loop. Float constants in `.rdata` are the users' `__real@4` literal pools
+  (ahm_ExAllocAlchemist at 0x100256a0..c8, gv_ExAllocGraveyardWorker's 1000/8/4), placed by
+  `common-data-order.txt`; `g_download_state` is one struct (`WHOLE` in the generator), and that store order
+  is what fixes `srv_LoadBuf`. Missing sites went from 473 to 2: `ahm_ExAllocAlchemist`'s
+  `g_citizen_count` read (its schedule needs the read to may-alias `slot`) and `gm_InitObjektHersteller`'s
+  `g_minimum_manufacturer` store (naming it changes `gm_Open`'s code).
+- **`gm_Open` depends on the TU's declarations.** Adding or removing a file-scope declaration, even an
+  unused one in an included header (`game_data.h`), or a new line before it, changes its code; block-scope
+  `extern`s inside the using function do not.
+- **`.reloc` VirtualSize is LINK's reservation**, `12 * N` for N input DIR32 records (section 76). Restoring
+  relocations raised it from 49296 to 51288 bytes; the reference's 66420 needs about 1260 more input fixups.
 - **Left, all linker-internal ordering:**
-  - LIBCMT `.bss` member order: the reference places lconv's 1-byte `.bss` after crtmbox and txtmode while
-    its `.data` stays early. LINK orders `.bss` strictly by load order, and the members involved have no code
-    to anchor without keeping it, so 9 pointers in `__lconv_c` (18 bytes) differ.
+  - LIBCMT `.bss` member order: `/INCLUDE:___lc_time_intl` and `___lc_id` before `___crtGetStringTypeA`,
+    and `__fmode` after `___crtMessageBoxA`, load inittime, nlsdata3 and txtmode where the reference has them.
+    The reference also has getqloc, initnum, initctyp and initmon (0x3c bytes) before a_str, winsig and
+    inithelp (0x1c) between txtmode and lconv, and w_str, w_loc and a_loc (0xc) between lconv and a_cmp.
+    Those members keep no code, and including one of their functions would keep it, so a_str through a_cmp
+    sit 0x3c to 0x64 low and `__lconv_c` differs in 9 bytes.
   - IAT: KERNEL32 slots 73 to 80 (`RtlUnwind`, see 5b). The hint/name table records the original load
     order (game imports, USER32, WINMM, then the CRT's imports as their members load); loading the CRT's
     imports naturally reproduces it except `GetLastError` and `GetCPInfo`, but the IAT is a sort permutation

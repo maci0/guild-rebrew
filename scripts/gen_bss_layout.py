@@ -31,14 +31,15 @@ HEAD2 = (0x10034624, 0x10035498)
 LATE = (0x10035878, 0x11766208)
 PLACEHOLDER = re.compile(r"g_(before|alignment)|g_(data|bss)_section_tail")
 # Declared types of the alias names, which have no row of their own.
-ALIAS_TYPES = {"g_alloc_root_name": "int", "g_download_total_size": "unsigned int", "g_entity_end": "char[]"}
+ALIAS_TYPES = {"g_alloc_root_name": "int", "g_entity_end": "char[]"}
 ELEMENT_SIZE = {"char": 1, "unsigned char": 1, "short": 2, "unsigned short": 2, "int": 4, "unsigned int": 4, "float": 4}
 # Reference row name -> the name the code uses for the same address.
 ALIASES: dict[str, str] = {
     "g_alloc_root": "g_alloc_root_name",
-    "g_download_state": "g_download_total_size",
     "g_town_records": "g_entity_end",
 }
+# Objects the code reaches through a struct type: emitted whole, their field rows not split out.
+WHOLE = {"g_download_state"}
 SCALAR = {1: "char", 2: "short", 4: "int"}
 ARRAY_ALIGN = 4
 
@@ -65,6 +66,8 @@ def load_items(root: Path) -> list[dict]:
 def split(items: list[dict], lo: int, hi: int) -> list[dict]:
     """Rows in [lo, hi) as consecutive allocations: a row that overlaps its successor ends where the successor starts."""
     rows = [i for i in items if lo <= i["va"] < hi]
+    for whole in [i for i in rows if i["name"] in WHOLE]:
+        rows = [i for i in rows if not whole["va"] < i["va"] < whole["va"] + whole["size"]]
     for here, nxt in zip(rows, rows[1:] + [{"va": hi}]):
         here["size"] = min(here["size"] or 1, nxt["va"] - here["va"])
         if here["name"] in ALIASES:

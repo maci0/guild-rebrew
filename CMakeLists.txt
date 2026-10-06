@@ -127,20 +127,10 @@ if(REBREW_BUILD_SERVER)
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/_[^/]*\\.c$")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt/")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/zlib/")
-  # Pure CRT bodies live in LIBCMT. Keep only game/layout files under crt_region.
-  # amsg_exit.c is deliberately NOT here: its nine publics have no user in the
-  # tree, and /INCLUDE:__CRT_INIT@12 pulls dllcrt0.obj for /ENTRY, which defines
-  # _amsg_exit itself (LNK2005 otherwise). crt0msg.obj is pulled by that same
-  # member, and rdata_restore.c's blob already owns its 20 long strings.
-  # Dropping it costs .text and .rdata (measured: .text -0xa330 when the whole
-  # keep-list went missing).
+  # Pure CRT bodies and data live in LIBCMT, so nothing under crt_region is
+  # compiled. amsg_exit.c in particular: /INCLUDE:__CRT_INIT@12 pulls
+  # dllcrt0.obj for /ENTRY, which defines _amsg_exit itself (LNK2005 otherwise).
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt_region/")
-  set(_CRT_REGION_KEEP
-    # rdata_fold.c shares the `??_C@...` COMDAT names of six LIBCMT .rdata
-    # literals; linking it first makes the linker discard the library copies
-    # (.rdata raw 0x4000 -> 0x3000, the reference's). No .text.
-  )
-  list(APPEND SERVER_SOURCES ${_CRT_REGION_KEEP})
 
 
 

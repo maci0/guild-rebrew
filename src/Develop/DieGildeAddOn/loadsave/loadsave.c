@@ -12,7 +12,7 @@ extern char g_dynasty_initial_trait_offset[];
 #include <stdlib.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-
+#include "../../download_state.h"
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; 
 int ls_LoadExistingEntities(int);

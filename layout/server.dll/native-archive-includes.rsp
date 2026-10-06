@@ -121,9 +121,12 @@
 /INCLUDE:_strcmp
 /INCLUDE:_strcspn
 /INCLUDE:_strpbrk
+/INCLUDE:___lc_time_intl
+/INCLUDE:___lc_id
 /INCLUDE:___crtGetStringTypeA
 /INCLUDE:__setmbcp
 /INCLUDE:___crtMessageBoxA
+/INCLUDE:__fmode
 /INCLUDE:__chsize_lk
 /INCLUDE:_atol
 /INCLUDE:__getenv_lk
