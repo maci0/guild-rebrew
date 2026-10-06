@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004f5190
-// SIZE: 104
 // FUNCTION: GOLDTL 0x4f7580
-// SIZE: 104
 
 int  __cdecl fcn_005d5930(void*, void*);
 extern char g_679060[];

@@ -13,7 +13,6 @@ int __cdecl fcn_004675f0(int x, int y, int a3, int a4, int a5, int a6, int a7);
 int __cdecl fcn_00465eb0(int id, int win);
 
 // FUNCTION: GOLDTL 0x4677e0
-// SIZE: 144
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win)
 {
 	fcn_004677e0_Win* w;

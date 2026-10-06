@@ -11,7 +11,6 @@ typedef struct Bits8 {
 // SIZE 0x1
 
 // FUNCTION: GOLDTL 0x459c70
-// SIZE: 82
 int __cdecl fcn_00459c70(char* a)
 {
 	int r;

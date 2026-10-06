@@ -63,7 +63,6 @@ void __cdecl fcn_00500bb0(Stamp_551f90*, int, int, int);
 void __cdecl fcn_005b2790(void);
 
 // FUNCTION: GOLDTL 0x551f90
-// SIZE: 652
 
 void __cdecl fcn_00551f90(Order_551f90* o)
 {

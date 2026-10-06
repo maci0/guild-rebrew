@@ -5,9 +5,7 @@ typedef struct {
 // SIZE 0x14
 
 // FUNCTION: GOLD 0x4ef6b0
-// SIZE: 96
 // FUNCTION: GOLDTL 0x004f1790
-// SIZE: 87
 int __cdecl fcn_004f1790(char* a, Elem4f1790* e)
 {
 	if (e->kind == 0) {

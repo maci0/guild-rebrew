@@ -5,7 +5,6 @@ extern Mult664260 g_664260[7];
 int __cdecl fcn_0050dac0(unsigned short id);
 
 // FUNCTION: GOLDTL 0x493ee0
-// SIZE: 102
 int __cdecl fcn_00493ee0(unsigned short* a, unsigned short* b, int key)
 {
 	int v;

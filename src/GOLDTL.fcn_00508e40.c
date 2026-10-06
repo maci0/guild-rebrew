@@ -1,8 +1,6 @@
 extern char g_7f4ca4[];
 // FUNCTION: GOLDTL 0x508e40
-// SIZE: 64
 // FUNCTION: GOLD 0x505df0
-// SIZE: 64
 
 char* __cdecl fcn_00508e40(int a1)
 {

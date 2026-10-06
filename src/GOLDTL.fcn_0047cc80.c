@@ -2,7 +2,6 @@ int __cdecl fcn_0047cc40(int, int, int, void*, int, float);
 void __cdecl fcn_0047b9a0(int, unsigned char, unsigned char, unsigned char);
 
 // FUNCTION: GOLDTL 0x47cc80
-// SIZE: 76
 
 int __cdecl fcn_0047cc80(int a1, int a2, int a3, void* s, int idx, float scale, int tint)
 {

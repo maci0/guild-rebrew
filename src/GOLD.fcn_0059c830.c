@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0059c830
-// SIZE: 24
 // FUNCTION: GOLDTL 0x5a59b0
-// SIZE: 24
 
 // fcn_0059c830 — count non-(-1) of 16 entries (stride 0x1c).
 

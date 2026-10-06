@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004ef470
-// SIZE: 128
 // FUNCTION: GOLDTL 0x004f13d0
-// SIZE: 128
 
 /* Second copy of the server cm_GetBuildingStatCount body (server
  * 0x100104a0); the client keeps its own cm_GetBuildingStatCount at 0x4f1320

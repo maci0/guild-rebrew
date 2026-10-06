@@ -24,7 +24,6 @@ int __cdecl fcn_005cf720(unsigned short a, unsigned short b, void* q, int c);
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 // FUNCTION: GOLDTL 0x005cbfb0
-// SIZE: 335
 
 /* Fills out[] with the entries fcn_004e9310 lists for e[0x168], then up to
  * three players whose byte 0x168 matches. Returns the count filled; with

@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0049dd80
-// SIZE: 341
 // FUNCTION: GOLDTL 0x49d7c0
-// SIZE: 341
 
 typedef struct Blk24 {
 	unsigned char kind;

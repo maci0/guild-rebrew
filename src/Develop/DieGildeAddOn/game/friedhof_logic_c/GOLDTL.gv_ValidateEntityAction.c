@@ -3,7 +3,6 @@
  * then spawns the requested number of graveyard entities. */
 
 // FUNCTION: GOLDTL 0x4f2ee0
-// SIZE: 176
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"

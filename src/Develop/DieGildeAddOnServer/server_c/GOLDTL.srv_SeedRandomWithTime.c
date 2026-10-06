@@ -5,7 +5,6 @@
  */
 
 // FUNCTION: GOLDTL 0x42e4b0
-// SIZE: 14
 
 __declspec(dllimport) unsigned int __stdcall timeGetTime(void);
 extern void __cdecl srand(unsigned int);

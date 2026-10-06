@@ -45,7 +45,6 @@ void __cdecl fcn_005b0f00(Win_5b4c80*);
 int __cdecl fcn_0046f280(int);
 
 // FUNCTION: GOLDTL 0x5b4c80
-// SIZE: 741
 
 /* Modal two-column entity list: fills it once, then pumps the UI and opens
  * the entry the player picks. */

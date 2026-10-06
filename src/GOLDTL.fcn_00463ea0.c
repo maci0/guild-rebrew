@@ -42,9 +42,7 @@ extern const int g_663fb8[];
 #define base_dist g_663fb8
 
 // FUNCTION: GOLD 0x4671d0
-// SIZE: 1037
 // FUNCTION: GOLDTL 0x00463ea0
-// SIZE: 1037
 
 void fcn_00463ea0(s, ltree, dtree)
     deflate_state *s;

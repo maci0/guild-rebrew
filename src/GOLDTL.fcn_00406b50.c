@@ -7,9 +7,7 @@ int __cdecl fcn_004042b0(char*);
 void __cdecl fcn_004045c0(char*);
 
 // FUNCTION: GOLD 0x00405fb0
-// SIZE: 275
 // FUNCTION: GOLDTL 0x406b50
-// SIZE: 275
 
 /* Steps a drop-object event: plays the drop motion and releases the object
  * at the motion's trigger frame. */

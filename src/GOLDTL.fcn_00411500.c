@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x411500
-// SIZE: 28
 
 extern int (__stdcall *g_662008)(int, int, int, int, int*, int);
 

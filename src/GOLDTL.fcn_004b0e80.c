@@ -26,7 +26,6 @@ void __cdecl fcn_004c5530(void*);
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 // FUNCTION: GOLDTL 0x4b0e80
-// SIZE: 645
 
 int __cdecl fcn_004b0e80(int a1, int a2, char* a3)
 {

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x432120
-// SIZE: 119
 
 // SIZE 0xc0
 typedef struct Rec {

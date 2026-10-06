@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004d8c40
-// SIZE: 34
 // fcn_004d8c40 — for table: if(*p) fcn_004e3250(*p).
 
 int __cdecl fcn_004e3250(int);

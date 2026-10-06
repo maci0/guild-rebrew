@@ -10,9 +10,7 @@ void __cdecl fcn_00425bf0(char*, int, const char*);
 void __cdecl fcn_0041d9e0(const char*);
 
 // FUNCTION: GOLD 0x0040c210
-// SIZE: 274
 // FUNCTION: GOLDTL 0x40d130
-// SIZE: 274
 
 /* PlayCharacterAniScriptInt(): like PlayCharacterAniScript() with an
  * integer parameter handed to the script. */

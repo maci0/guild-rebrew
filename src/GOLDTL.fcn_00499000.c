@@ -8,9 +8,7 @@ int __cdecl fcn_004a4680(float* o1, float* o2, int a3, char* e, Stat* st);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 // FUNCTION: GOLD 0x004995c0
-// SIZE: 131
 // FUNCTION: GOLDTL 0x499000
-// SIZE: 131
 int __cdecl fcn_00499000(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7)
 {
 	Stat st;

@@ -11,9 +11,7 @@ extern float g_773d4c;
 // GLOBAL: GOLD 0x6f1b9c
 extern float g_773d4c;
 // FUNCTION: GOLD 0x004f9e00
-// SIZE: 48
 // FUNCTION: GOLDTL 0x4fc460
-// SIZE: 46
 
 #include <string.h>
 

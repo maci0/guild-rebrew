@@ -10,7 +10,6 @@ char* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl fcn_00442be0(char*);
 
 // FUNCTION: GOLDTL 0x004cc030
-// SIZE: 558
 
 int __cdecl fcn_004cc030(char* cmd, char* result)
 {

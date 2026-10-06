@@ -38,7 +38,6 @@ int __cdecl fcn_00469c30(int x, int y, int a3);
 void __cdecl fcn_00465eb0(int id, int win);
 
 // FUNCTION: GOLDTL 0x46f740
-// SIZE: 152
 int __cdecl fcn_0046f740(int x, int y, int a3, int win)
 {
 	Win* w;

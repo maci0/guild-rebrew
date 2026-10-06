@@ -1,7 +1,6 @@
 #include <string.h>
 
 // FUNCTION: GOLDTL 0x477560
-// SIZE: 41
 
 void __cdecl fcn_00477560(const void* src, char* hdr)
 {

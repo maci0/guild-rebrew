@@ -9,9 +9,7 @@ struct stat_4b4dc0 {
 // SIZE 0xc
 
 // FUNCTION: GOLD 0x004b4c50
-// SIZE: 241
 // FUNCTION: GOLDTL 0x4b4dc0
-// SIZE: 241
 
 int __cdecl fcn_004b4dc0(int a0, int a1, char* a2)
 {

@@ -20,7 +20,6 @@ extern char s_67d4b0[];
 void __cdecl fcn_0041d9e0(const char* msg);
 
 // FUNCTION: GOLDTL 0x4693b0
-// SIZE: 192
 int __cdecl fcn_004693b0(int n, ...)
 {
 	int i;

@@ -3,9 +3,7 @@ extern char g_10069a0[];
 // GLOBAL: GOLD 0xf82320
 extern char g_10069a0[];
 // FUNCTION: GOLDTL 0x4b3b60
-// SIZE: 22
 // FUNCTION: GOLD 0x004b39f0
-// SIZE: 22
 // fcn_004b39f0 — zeroes 0x1200 bytes at the shared buffer, returns 1.
 // (GOLDTL 0x10069a0 / GOLD 0xf82320.)
 

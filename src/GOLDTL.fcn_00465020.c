@@ -65,9 +65,7 @@ int __cdecl fcn_00465160(unz_s* s, uInt* piSizeVar, uLong* poffset_local_extrafi
 int __cdecl fcn_004615b0(z_streamp z, int w, const char* version, int stream_size);
 
 // FUNCTION: GOLD 0x004680f0
-// SIZE: 312
 // FUNCTION: GOLDTL 0x465020
-// SIZE: 312
 int __cdecl fcn_00465020(unzFile file)
 {
 	int err = UNZ_OK;

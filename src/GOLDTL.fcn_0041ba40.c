@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0041ba40
-// SIZE: 84
 
 #include <windows.h>
 

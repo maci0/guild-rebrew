@@ -32,9 +32,7 @@ typedef struct Actor {
 extern char g_1008540[];
 
 // FUNCTION: GOLD 0x004a49a0
-// SIZE: 309
 // FUNCTION: GOLDTL 0x004a4410
-// SIZE: 309
 int __cdecl fcn_004a4410(float* s1, float* s2, int idx, Actor* e)
 {
 	Deal* t;

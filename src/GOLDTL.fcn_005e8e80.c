@@ -41,9 +41,7 @@ extern int g_6b7fac;
 V4* __cdecl fcn_005e8850(void);
 
 // FUNCTION: GOLD 0x005dc2f0
-// SIZE: 99
 // FUNCTION: GOLDTL 0x005e8de0
-// SIZE: 99
 
 int __cdecl fcn_005e8de0(float a, float b, float* out)
 {
@@ -62,9 +60,7 @@ int __cdecl fcn_005e8de0(float a, float b, float* out)
 }
 
 // FUNCTION: GOLD 0x5dc390
-// SIZE: 341
 // FUNCTION: GOLDTL 0x005e8e80
-// SIZE: 341
 
 int __cdecl fcn_005e8e80(Particle* o, V3* pos, V3* dir, float speed, float b, float a)
 {

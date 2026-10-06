@@ -8,7 +8,6 @@ struct fcn_00473700_slot {
 #include "client_types.h"
 extern Pair0c_1011980 g_1011980[6];
 // FUNCTION: GOLDTL 0x473700
-// SIZE: 78
 
 void __cdecl fcn_00473700(int key, int n)
 {

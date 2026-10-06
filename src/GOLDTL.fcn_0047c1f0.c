@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0047c1f0
-// SIZE: 607
 
 typedef struct Vtx {
 	float x;

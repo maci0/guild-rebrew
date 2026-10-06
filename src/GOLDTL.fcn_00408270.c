@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x4076e0
-// SIZE: 91
 // FUNCTION: GOLDTL 0x408270
-// SIZE: 91
 
 int __cdecl fcn_00408270(float* a, float* b, int* ox, int* oy)
 {

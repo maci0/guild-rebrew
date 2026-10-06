@@ -1,11 +1,11 @@
 #include "../../Units/Error/error.h"
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+extern unsigned char g_entity_type_bytes[1];
 extern int __cdecl gm_RandomMod(unsigned short range);
 unsigned int __cdecl gm_AllocSpieler(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 void __cdecl plt_TableLookup(unsigned int a, unsigned short* b);
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param);
-extern unsigned char g_entity_type_bytes[1];
 extern unsigned char g_slot_table[2];
 /* 0x10035a05: the byte at +0x165 of each 0x21c-byte g_slot_table record. */
 #define g_stat_b_array ((unsigned char*) g_slot_table + 0x165)
@@ -29,8 +29,6 @@ unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
  * family tree linkages. Used in citizen creation to find
  * compatible parents for stat inheritance. */
 
-// FUNCTION: SERVER 0x100151e0
-// sim_FindAndMatchParents
 
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param)
 {
@@ -122,12 +120,6 @@ done2:
 /* Updates entity priority/scheduling. Called during simulation
  * tick to adjust entity processing order based on game state. */
 
-// FUNCTION: GOLD 0x004fda10
-// SIZE: 83
-// FUNCTION: GOLDTL 0x5001e0
-// SIZE: 83
-// FUNCTION: SERVER 0x10015400
-// sim_PriorityUpdate
 
 void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 {
@@ -150,12 +142,6 @@ void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
  * Dispatches entity iteration across buildings, citizens, or
  * other entity categories based on the type selector. */
 
-// FUNCTION: GOLD 0x4fdc10
-// SIZE: 160
-// FUNCTION: GOLDTL 0x005003e0
-// SIZE: 160
-// FUNCTION: SERVER 0x10015460
-// sim_StartEntityQueryByType
 
 unsigned short* __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 {
@@ -204,8 +190,6 @@ unsigned short* __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
  * from parent entities. Allocates entity memory, assigns random
  * stats via gm_AllocSpieler, and links to home. */
 
-// FUNCTION: SERVER 0x10015500
-// sim_CreateCitizen
 
 void* __cdecl sim_CreateCitizen(unsigned char flags, int citizen_type, int parent_id, unsigned char stat_a, unsigned char stat_b)
 {
@@ -244,8 +228,6 @@ error:
  * counters, triggers periodic events (taxes, production cycles),
  * and notifies connected clients of time changes. */
 
-// FUNCTION: SERVER 0x100155c0
-// sim_AdvanceGameClock
 
 #pragma pack(push, 1)
 // SIZE 0xe
@@ -315,8 +297,6 @@ void __cdecl sim_AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4
  * engine. Stores target, type, and field values for later use
  * by the query dispatcher. */
 
-// FUNCTION: SERVER 0x10015690
-// sim_SetSyncParams
 
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10)
 {

@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00578440
-// SIZE: 493
 // FUNCTION: GOLDTL 0x580a30
-// SIZE: 493
 
 typedef char* (__cdecl* pagefn)(void);
 

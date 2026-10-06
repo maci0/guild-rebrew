@@ -1,8 +1,6 @@
 extern char g_774a80[];
 // FUNCTION: GOLD 0x005a91a0
-// SIZE: 180
 // FUNCTION: GOLDTL 0x5b2620
-// SIZE: 180
 
 unsigned short __cdecl fcn_0042e410(int);
 void __cdecl fcn_0051af00(void*, int, ...);

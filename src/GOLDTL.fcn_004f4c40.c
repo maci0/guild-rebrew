@@ -41,7 +41,6 @@ extern Pair_99f800 g_99f800[0x800];
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 
 // FUNCTION: GOLDTL 0x004f4c40
-// SIZE: 617
 int __cdecl fcn_004f4c40(void* f)
 {
 	int ver;

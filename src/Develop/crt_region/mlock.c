@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x45ee00
-// SIZE: 21
 // _munlock — 3-arg forward with source-arg pair.
 
 int __cdecl fcn_0045ee20(int, int, int);

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00525b40
-// SIZE: 824
 
 /* Client counterpart of srv_RecvGame: waits until the downloaded savegame
  * (g_fb5740, g_aed328 bytes) is complete, then loads it from memory. */

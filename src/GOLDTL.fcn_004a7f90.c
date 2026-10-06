@@ -7,9 +7,7 @@ extern Card_1007ce0 g_1007ce0[24];
 extern char* g_1007cd4;
 
 // FUNCTION: GOLDTL 0x4a7f90
-// SIZE: 219
 // FUNCTION: GOLD 0x004a7e70
-// SIZE: 219
 void __cdecl fcn_004a7f90(int* h, int* rank_n, int* rank, int* suit_n, int* suit)
 {
 	int suits[4] = { 0 };

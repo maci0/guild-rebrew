@@ -1,7 +1,6 @@
 /* FindSlotEntryFiltered - proper C */
 
 // FUNCTION: GOLDTL 0x4f18d0
-// SIZE: 320
 
 
 #include "rebrew_types.h"

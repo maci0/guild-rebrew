@@ -4,9 +4,7 @@ void __cdecl fcn_00546190(char*);
 extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x00571850
-// SIZE: 228
 // FUNCTION: GOLDTL 0x579cf0
-// SIZE: 228
 
 unsigned short* __cdecl fcn_00508e40(int);
 char* __cdecl gm_SearchTable67(int);

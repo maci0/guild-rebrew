@@ -3,9 +3,7 @@ extern char g_774964;
 // GLOBAL: GOLD 0x6f25ac
 extern char g_774964;
 // FUNCTION: GOLD 0x005d7530
-// SIZE: 66
 // FUNCTION: GOLDTL 0x5e4060
-// SIZE: 66
 
 extern char g_7f4ca0[];
 

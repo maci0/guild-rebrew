@@ -14,9 +14,7 @@ int __cdecl fcn_004e8b40(int, rec18*);
 int __cdecl fcn_004e8b80(int, int, rec18*);
 
 // FUNCTION: GOLD 0x4e7770
-// SIZE: 304
 // FUNCTION: GOLDTL 0x4e93d0
-// SIZE: 292
 
 int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out)
 {

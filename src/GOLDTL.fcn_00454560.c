@@ -4,9 +4,7 @@ extern char g_6b89a0[];
 void __cdecl fcn_0041e2e0(int* pool, void* p);
 
 // FUNCTION: GOLD 0x00457c20
-// SIZE: 81
 // FUNCTION: GOLDTL 0x454560
-// SIZE: 81
 void __cdecl fcn_00454560(char** n)
 {
 	char* p;

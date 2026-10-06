@@ -5,7 +5,6 @@ extern Obj_1038140 g_1038140[];
 extern int g_772534;
 
 // FUNCTION: GOLDTL 0x471f20
-// SIZE: 94
 char* __cdecl fcn_00471f20(int j, int k)
 {
 	char* m;

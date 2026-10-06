@@ -1,7 +1,6 @@
 // GLOBAL: GOLDTL 0x1015ea0
 extern char* g_1015ea0;
 // FUNCTION: GOLDTL 0x469110
-// SIZE: 40
 
 void __cdecl fcn_00469090(int);
 

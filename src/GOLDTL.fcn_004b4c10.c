@@ -3,9 +3,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 char* __cdecl gm_AddObjekt(void);
 
 // FUNCTION: GOLD 0x004b4aa0
-// SIZE: 79
 // FUNCTION: GOLDTL 0x4b4c10
-// SIZE: 79
 
 int __cdecl fcn_004b4c10(unsigned short* e, int b, int c)
 {

@@ -58,9 +58,7 @@ static __inline void send_hit(int id)
 }
 
 // FUNCTION: GOLD 0x5d2870
-// SIZE: 573
 // FUNCTION: GOLDTL 0x005deda0
-// SIZE: 573
 
 int __cdecl fcn_005deda0(char* e, char* a2)
 {

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x40dca0
-// SIZE: 42
 
 // fcn_0040cd70 — count nodes with [n+0x88]==[0x67a370].
 

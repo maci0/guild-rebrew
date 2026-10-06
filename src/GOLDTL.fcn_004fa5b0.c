@@ -3,9 +3,7 @@ extern char g_690478[];
 // GLOBAL: GOLD 0x611748
 extern char g_690478[];
 // FUNCTION: GOLD 0x004f81c0
-// SIZE: 64
 // FUNCTION: GOLDTL 0x4fa5b0
-// SIZE: 58
 
 typedef int (__cdecl* fcn_004fa5b0_fn)(char*, int);
 

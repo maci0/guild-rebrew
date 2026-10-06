@@ -24,7 +24,6 @@ typedef struct Slot {
 extern char* g_1015ea0;
 
 // FUNCTION: GOLDTL 0x471f80
-// SIZE: 105
 int __cdecl fcn_00471f80(int slot)
 {
 	Slot* s;

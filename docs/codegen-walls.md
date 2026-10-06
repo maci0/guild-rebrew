@@ -213,7 +213,7 @@ original game source used raw asm at the same site," with "a code shape no MSVC6
 produce" as the example of positive evidence. That condition is satisfied here: measured, not
 assumed. But the *writer* was almost certainly the compiler vendor, not the game: the same 24-byte
 idiom at six independent call sites is a CRT `memset` expansion, and the enclosing function is not
-library code (`rebrew lib-match --stock-lib LIBCMT.LIB --va 0x1000b040` reports "Safe to reverse").
+library code (`rebrew library match --stock-lib LIBCMT.LIB --va 0x1000b040` reports "Safe to reverse").
 So the strict reading of the clause and the byte objective pull apart, and the cost of choosing the
 strict reading is 108,180 bytes.
 
@@ -634,7 +634,7 @@ to read the whole objective. Measured on the current tree, the same command repo
 | `headers` | differing `0x0` | differing **267** (`0x10b`) |
 | `.text` | differing `0x21b9` | differing `0x3810` |
 
-**`rebrew postlink` writes those four sections from the layout package.** They are copied, not
+**`rebrew build postlink` writes those four sections from the layout package.** They are copied, not
 compiled; the raw link produces 30,123 bytes the fixers overwrite. So the objective's "every data byte
 matching" is satisfied **by construction**, and no measurement of the data sections can ever be
 evidence about codegen. This is not a defect and it is not hidden (`measure-traps` §6h and the
@@ -708,7 +708,7 @@ that share no code:
 | `cmp` over the whole file (above) | 8,628, i.e. exactly the `.text` residue 0x21b4 |
 | `cmp` over `.data`+`.bss` alone (from `0x22846` to `0x174059c`) | **0** differing bytes |
 
-**Why the round brief's `.data` framing is now a dead end.** `rebrew postlink`'s data fixer *copies* the
+**Why the round brief's `.data` framing is now a dead end.** `rebrew build postlink`'s data fixer *copies* the
 reference's `.data` wholesale: the baseline log records `0x7806` non-`.text` bytes overwritten per link.
 So the raw-link `.data` figure the gate enforces as a ceiling (`21,481`) measures the **build's**
 placement, not the deliverable's content. The objective's "every data byte matching" clause is satisfied
@@ -1447,7 +1447,7 @@ the first cluster at 39.2% is the one with a fully enumerated and fully losing p
 
 ### 26. Three per-file toolchain pins to `msvc-6.0-sp5-pp` are load-bearing and uniquely optimal (round 1051)
 
-`src/rebrew-functions.toml` carries per-function `toolchain` keys, and `rebrew cmake-flags` turns them into
+`src/rebrew-functions.toml` carries per-function `toolchain` keys, and `rebrew build cmake-flags` turns them into
 `/REBREW_TOOLCHAIN:<name>` on the compile line. Three files carry one:
 
 | file | carriers it holds |
@@ -2558,3 +2558,107 @@ mechanisms were traced in c2 12.00.9782 (`msvc6-allocator.md`).
   where that `fmul` is not yet ready. Every
   spelling of the blend (casts, operand order, temporaries, weight type and storage,
   pointer or index addressing) folds to the same IL.
+
+
+### 50. Character sitting queries: byte zero extension still unmatched
+
+TL `CharacterSitting` (`0x0040df00`) and `CharacterSitsDown` (`0x0040e110`)
+have identical 56-byte shapes with separate diagnostic literals. First-pass C
+matches the 39-byte null/log/return prefix and then emits `mov al,[eax+0x8c];
+shr eax,4; and eax,1; ret` (52 bytes, 40/56 positional agreement). The reference
+uses `xor edx,edx; mov dl,[eax+0x8c]; mov eax,edx` before that shift and mask.
+
+Bounded scratch probes at the first query: unsigned-char and unsigned-int
+bitfield views; signed/unsigned int, unsigned char, unsigned short and register
+byte temporaries; signed-byte source; mask-before-shift; boolean flag test —
+all 52 bytes, 40/56. Volatile byte load and negated signed one-bit field emit
+57 bytes, 40/57. Single exit emits 69 bytes, 5/69. `/O2 /Gd /G5` and non-PP
+MSVC6 SP5 remain 52/40; `/O1 /Gd` and `/O2 /Gd /Os` emit 51 bytes, 23/56;
+`/Og-` emits 84 bytes, 2/84. None accepted. Canonical names are attested, but
+both statuses remain SIZE_MISMATCH, with CLI-managed four-byte size blockers.
+Judgement: zero-extension/partial-register optimization is the remaining wall;
+this bounded set does not establish impossibility. Receipts `.scratch/goal-character/`.
+
+### 51. Task-removal memset setup: two scheduling ties remain
+
+TL `0x004050c0`, after C-shapes260, is NEAR_MATCHING 98/110 with equal full
+length and no relocations. Both clear sites invert `mov ecx,0x65` and
+`xor eax,eax`. Local declaration swap, zero supplied by known-null next,
+comma return, sizeof-based count, named zero and volatile pointee are inert;
+`/G5` and `/G6` are also inert. Moving the next reload before the previous-link
+store emits 107 bytes, 62/110 and is rejected because it changes the observed
+reload placement. Bounded GA (12 generations, population 8, jobs 4, seed 23)
+exits one after 67.77 seconds without an exact candidate. Its best source includes
+auto-inline pragmas and does not match; it is not applied.
+Canonical source hash is unchanged across the GA. Session 61758 is closed;
+receipts `.scratch/goal-character/{ga-job,ga-50c0}.json`. Judgement: a scheduler
+ordering tie remains; no complete-file progress is established.
+
+
+### 52. Sound request: rotation resolved in a later staged candidate
+
+Later staged evidence (2026-10-04): a double scaled temporary with conversion
+only at the final float store resolves the rotation, RELOC132/132 under default
+flags. The same change matches the new constructor150/150. A symbolic read-only
+scale declaration preserves the result; explicit native-slot validation rejects
+wrong scale/call bindings. Canonical application awaits the full baseline and
+after-header gates. Receipts .scratch/goal-shared-sound/; C-shapes261.
+The probes below remain retired historical evidence.
+
+TL `0x004193f0` has a complete 132-byte body plus twelve NOPs, not a 144-byte
+body. Canonical size is now 132, status NEAR_MATCHING 124/132, three call
+relocations. Reference `push &req; mov emitter; fstp level` versus candidate
+`fstp level; push &req; mov emitter` remains the eight-byte rotation described
+in TODO round984. New scratch probes: volatile amount parameter, volatile mode
+parameter, level assignment in the helper argument's comma expression, and
+helpers declared with `PanReq*` instead of `char*`. Each remains 132 bytes,
+124/132. None applied; default flags unchanged. Evidence
+`.scratch/goal-sound-order/{volatile-amount,mode-slot,comma-call,typed-calls}-test.json`.
+The request and the positional-sound array both have 0x54-byte record extent;
+voice +0x34, game-object pointer +0x38 and level +0x48 are confirmed by the
+panning/volume helpers. Canonical shared type consolidation remains outstanding.
+
+### 53. Pair-copy allocation after correcting the tail's alias behavior
+
+TL `0x00407760` retains the register-role wall described in TODO round985.
+New reference evidence requires the odd tail read after the even store and a
+reload of source pointer/count (measure-traps overlapping-buffer finding).
+That faithful tail changes the compiled body to 163 bytes, 18/163 positional
+agreement. Scratch explicit first-loop low byte, a pair pointer, and reuse of
+the dead first argument as the step are all inert at 163/18. None of those
+scratch shapes is applied. The semantic tail repair is applied and remains
+SIZE_MISMATCH; no semantic PROVEN or byte-match status is claimed. Do not
+restore the early odd-byte prefetch merely to recover the old 76/162 score.
+Receipts `.scratch/goal-sound-order/7760-{tail,low,pair,parameter}-test.json`.
+
+Shared sound resolution accepted2026-10-04: TL constructor150/150 and request132/132 are canonical RELOC, voice helper is EXACT29/29 in both clients. Dedicated inferred client_sound.h preserves one84-byte record/API; full all-target comparison94642 has no lost matches or removed rows, zero4110 drift. Earlier staged/pending wall52/shapes261 wording is historical. No raw linked-file gain.
+
+
+## Bounded TL setup and return ordering controls, 2026-10-04
+
+TL57a3d0 remains801 bytes with only two integer-to-float temporary stack
+displacements different: native stores/loads esp+18 while C uses esp+10.
+Twenty-eight scratch forms (including the baseline, expression casts and
+assignments, real local-declaration reorderings, and six ordinary flag checks)
+produce no supported full match. Production body/flags remain unchanged.
+
+TL4c3a50 remains760 bytes. Its348-byte code prefix differs only at eight
+bytes: C emits LEA edx,[eax+15] then MOV esi,15, while native reverses the two.
+Every103-entry inline jump-table target agrees under actual COFF label values,
+addends and function base. Structured diff disassembles this pointer table as
+code and reports207 structural instructions, so that summary must not drive
+case-value edits. Eight bounded source forms and five ordinary flag checks
+yield no accepted repair. An inline-table-aware diff proposal is recorded
+in sibling rebrew/docs/IDEAS-GUILD.md; no upstream implementation changed.
+
+TL420db0 remains667 bytes/eight differing bytes. The null-host branch targets
+a different shared epilogue and OR eax,-1 moves across three register POPs.
+Twelve bounded return/structured-host forms, including baseline and duplicate
+controls, yield no repair. The scratch default-socket-return form also changes
+failure semantics and is not a source candidate. All production instructions,
+flags and statuses for these three routines remain unchanged.
+
+Evidence `.scratch/goal-tl-training/probe*.json` and native diff/command-table
+audit reports. These are rejected controls, not source promotions or proof of
+one unique original spelling. Future work can use the deferred native named
+call/global bindings rather than repeat these controls or emit assembly.

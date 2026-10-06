@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x59e360
-// SIZE: 528
 // FUNCTION: GOLDTL 0x005a74a0
-// SIZE: 517
 
 #include <string.h>
 #pragma intrinsic(strcpy, strcat)

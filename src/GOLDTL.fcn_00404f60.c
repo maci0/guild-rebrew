@@ -9,7 +9,6 @@ void __cdecl fcn_00435500(char* o, char* name);
  * side: that is what keeps the null test, the far jne back to the byte
  * return, and a separate copy of the -1 epilogue. */
 // FUNCTION: GOLDTL 0x404f60
-// SIZE: 283
 
 int __cdecl fcn_00404f60(char* ev)
 {

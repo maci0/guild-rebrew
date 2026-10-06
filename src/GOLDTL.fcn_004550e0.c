@@ -6,9 +6,7 @@ void __cdecl fcn_004379a0(int list, int a, int mask, char(__cdecl* fn)(void*, in
 void __cdecl fcn_00454850(int* n, int a, int b, int c);
 
 // FUNCTION: GOLD 0x004587a0
-// SIZE: 81
 // FUNCTION: GOLDTL 0x4550e0
-// SIZE: 81
 void __cdecl fcn_004550e0(int a1, int* n)
 {
 	int i;

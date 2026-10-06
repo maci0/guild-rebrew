@@ -10,9 +10,7 @@ void __cdecl fcn_004bcf20(fcn_004bd150_entry*, void*);
 void __cdecl fcn_00442d50(void*, int);
 
 // FUNCTION: GOLD 0x004bcb90
-// SIZE: 69
 // FUNCTION: GOLDTL 0x4bd150
-// SIZE: 69
 
 void __cdecl fcn_004bd150(fcn_004bd150_entry* tab)
 {

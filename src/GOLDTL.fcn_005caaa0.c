@@ -53,7 +53,6 @@ void __cdecl fcn_00472640(int i, int flag);
 float __cdecl fcn_0050f980(int a, int b, int c);
 
 // FUNCTION: GOLDTL 0x005caaa0
-// SIZE: 715
 int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* s)
 {
 	int cx;

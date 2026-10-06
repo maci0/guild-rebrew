@@ -1,18 +1,160 @@
+Rebrew upstream integration COMPLETE (2026-10-04): userauthorized allchanges mergeANDGitHubpush. Mergedtested391-file integration to../rebrew main andpushedGitHubmainbc64f703f4ff4eb180bacabb7baf7b9c756b0a06, bothremotechecksconfirm/upstreamclean. Includesall44savedpatchregressiontests andnewmarkerlesssourcework; added3integrationrepairs for typing/CLIgate/breakingnotice. Full10961pass32skip,88%coverage,allstatic/fixture/cycle/layer/idempotency/CLI/precommit plusbuild/sdist/wheel/repro/provenance/SBOM gatespass. Mandatoryprepushfullsuitepass. Originalsourcebackupstashretained. Goalunchanged/incomplete; gamepatchesuncommitted. Evidence .scratch/goal-upstream-integration/acceptance.json.
+
+TL prototype binding ACCEPTED after fresh revalidation (2026-10-04): full33539 CLOSED2 strict every-row comparison vs94601 accepts exactly3TL SIZE_MISMATCH->RELOC promotions4f1320=125,4f2060=556,505370=74 (755B,5typedrelocs,13excludedNOPs), no other changed/added/removed/lost source/provider rows. TL3566/3679 (278EXACT3288RELOC,113failed), Gold2043/2518 andserver316/316 including56compiled library checks unchanged. Declaration-only g_entity_type_table aliasTL00868050 bound canonical Develop/rebrew_globals.h, .data virtual-tail word4B, owner/backing unresolved. Native allocation50108a requests0xca78=88x589 with complete f3_gm:lpGebaeudePROT label699748. All20user scores/compiled bytes preserved; allaligned operands agree, badly divergent bodies notaddress evidence. Typed fullbody operands, IAT off/eachsymbolwrong+4 reject, CFG/ret/NOP/library checks accepted; no C/header/type/flag/storage-definition changes by this work. Three unresolved-reloc candidates4f2c00/5003e0/504b30 deferred, no promotion. Originalfull97734 CLOSED2 had passing every-row result but failed finalguard due concurrent external layout_spans.h/metadata inventory split, so NOTaccepted;33539 reruns fixed reviewed current inputs. Freshdata35672 CLOSED2 accepted642 rows:640 old verdicts identical; oneoldDRIFT span10033f38 removed, new10033f80 VERIFIED736/new1003430c DRIFT772 exclude complete CRTtables. Rawff81 server/map unchanged, no raw bytegain; client images absent. Lint6603 CLOSED0 exact85prior warnings/zeroerrors. Currentguard .scratch/goal-tl-prototype-bindings/revalidation/check-fixed-inputs.py clean807tool4104game142refs/managedcontract. Goalactive/incomplete; no gamecommits.
+
+Gold shared-query recovery ACCEPTED (2026-10-04): full94601 CLOSED2, strict every-row comparison vs54714 accepts exactly2 Gold SIZE_MISMATCH->RELOC promotions5012b0/502020 (39/62 bytes,101 total), all other source rows/providers unchanged, no lost/added/removed rows. Gold2043/2518 (115EXACT1928RELOC,475failed), TL3563/3679 and server316/316 including56 compiled library checks unchanged. Both search bodies now independently verified from the SAME shared C across SERVER/TL/Gold. Canonical g_entity_ptr declaration binds Gold00889f74 as declaration-only unresolved-storage alias; native allocation witness supports logical identity but owner/backing remain unknown. No C/header/type/flag/storage-definition changes. Proven9+2 alignment NOP tails excluded; typed entire-body comparisons disable IAT wildcard and reject wrong+4 addresses. Whole-body stock-LIBCMT checks miss both. Four-user before/after catalog comparisons preserve compiled bytes and all previous scores. Data2011 CLOSED2 accepts all641 server rows/providers,577matched/57drift/7missing, rawff81 DLL unchanged; client builds absent. Lint20936 CLOSED0 identical85 existing warnings/zeroerrors. Fixedtool807/game4104/immutableexternal142 and managed contracts clean. Evidence .scratch/goal-gold-query-bindings/{extent-audit,allocation-witness,binding-effects,full-comparison,data-lint-comparison}.json. Whole-file/shared-tree goal remains active/incomplete; no commits.
+
+TL shared-query recovery ACCEPTED (2026-10-04): full54714 CLOSED2, strict every-row comparison vs85721 accepts exactly2 TL SIZE_MISMATCH->RELOC promotions504100/504e70 (39/62 bytes,101 total), all other source rows and provider inventories unchanged, no lost/added/removed rows. TL3563/3679 (278EXACT3285RELOC,116failed); server316/316 includes56 compiled library checks and Gold2041/2518 unchanged. Canonical g_entity_ptr declaration now has TL0090e094 address metadata as declaration-only unresolved-storage alias; native allocation witness supports logical identity but owner/backing remain unknown. No C/header/type/flags/storage-definition changes. Extents exclude proven9+2 alignment NOPs, not game instructions. Typed whole-body checks have IAT wildcard disabled and reject wrong+4 bindings; stock body checks miss both. Seven-user old/new catalog comparisons preserve compiled bytes and all previous scores. Data54133 CLOSED2 accepted all641 server rows/providers,577matched/57drift/7missing; rawff81 server unchanged, both client images absent. Lint96696 CLOSED0 identical85 existing warnings andzeroerrors. Fixedtool807/game4104/immutableexternal142 and managed contracts clean. Gold existing shared identities5012b0/502020 candidate comparison agrees with pointer889f74, but independent Gold compiler/CFG/library/identity checks still pending, no Gold promotion. Evidence .scratch/goal-tl-query-bindings/{extent-audit,allocation-witness,binding-effects,full-comparison,data-lint-comparison,gold-preview}.json. Whole-file/shared-tree goal remains active/incomplete; no commits.
+
+TL native-literal repairs ACCEPTED (2026-10-04): full85721 CLOSED2, strict every-row comparison vs20498 accepts exactly3 TL SIZE_MISMATCH->RELOC promotions at4ab3e0/58d3f0/5cc720, no other changed/lost/added/removed rows, all providers preserved. TL3561/3679 (278EXACT3283RELOC,118failed), server316/316 including56 compiled library checks, Gold2041/2518 unchanged. Five undefined external string references restored as complete C literals in3 existing files: buy dunkle ecke, two native Friedhof paths, sp_%u, %1N3. Complete275/501/363-byte TL bodies (1139B) verify all64 typed relocation operands with IAT wildcard disabled, CFG/end/NOP checks and rejected wrong+4 controls. Supported locked writer changes only3 TL sizes; 29 excluded NOP bytes remain layout facts. No instruction/type/header/flag/call-name/storage-owner change or library/asm workaround.
+
+Gold4ab2c0/584e30 share first2 source files: all nonfixup bytes and complete literal payloads independently agree; unresolved named calls/globals prevent whole-body Gold proof. Their sizes/statuses preserved, no Gold promotion. deferred-gold-native-callees.json records actual native operands (two existing passing destination sources, most absent); do not substitute TL numeric labels for Gold addresses. gm_StartFilteredEntitySearch itself is TL503fe0 SIZE_MISMATCH/288, server100170e0 RELOC296; native Gold caller destination501190 has no source row. Repair/audit the TL helper before treating it as an importable Gold match.
+
+Freshdata22119 CLOSED2:641 server verdicts/providers exact577matched57drift7missing, rawserverff81a459 and native MAP unchanged; clientbuiltimages absent. Lint74986 CLOSED0 zeroerrors/exactprior85warnings. All3 coverage refreshes CLOSED0 (81271/88046/60388); no owned live jobs. Current fixed game/managed contract checker .scratch/goal-tl-training/check-fixed-inputs.py validates807tool/4104game/142 immutable refs, native MAP separately preserved. Receipts .scratch/goal-tl-training/{literal-audit,gold-literal-audit,full-comparison,data-lint-comparison,scope-receipt,acceptance}.json. Initial scratch audit omitted original header directory and failed before mutation; corrected scratch-only includes, production flags unchanged. Goal active/incomplete, no whole-file equality or raw byte gain claim, no commits.
+
+Rejected bounded controls this turn: TL57a3d0 two integer-to-float stack displacements remain after28 forms; TL4c3a50 eight-byte MOV/LEA scheduling pair remains after8 source/5 flag controls; TL420db0 eight-byte null-return/failure epilogue difference remains after12 forms (invalid default-socket-return control excluded). Production bodies/flags/statuses unchanged. Command function has348 codebytes plus103 inline table entries; all table targets agree, despite diff decoding pointer words as207 structural instructions. Inline-table-aware diff proposal appended upstream docs/IDEAS-GUILD.md; no tool implementation change. Next: verified native call/global bindings for existing TL size candidates or shared helper fidelity, not repeat these controls. Earlier LIVE paragraphs historical.
+
+TL accessor coverage refresh CLOSED0 all3 (server61229/TL15455/Gold20009). No owned jobs live. Current fixed source/managed contract gate: .scratch/goal-tl-accessor/check-fixed-inputs.py; prior helper manifests intentionally predate this one-source/one-extent correction. Current rawserver/map unchangedff81a459; full/data acceptance under .scratch/goal-tl-accessor/.
+
+TL accessor correction ACCEPTED (2026-10-04): corrected src/GOLDTL.fcn_5b1eb0.c to call the existing TL lookup fcn_005b1b10 (native0x005b1b10), with char* return/local; former Gold-derived fcn_005a8690 binding was wrong. Complete native31-byte accessor and31-byte lookup agree, defaultfloat1.0f at6628a0, IAT wildcard OFF; wrong+4 call/global and explicit oldGold controls reject. Whole accessor notstockLIBCMT. Supported locked set_fields_batch fields mapping records31-byte extent; native trailing90 NOP stays layout. Only one source and one SIZE field changed; no header/config/storage/identity/link change.
+
+Full20498 CLOSED2 ACCEPTED: everyrow vs63165 agrees except exactly this TL SIZE_MISMATCH->RELOC promotion; no lost/added/removed/unreviewed rows or provider changes. Source server316/316 (56 compiledlibrary checks), TL3558/3679 (278EXACT3280RELOC,121failed), Gold2041/2518 unchanged. Fixed807tool/4104game/142immutableexternal guards clean. Focused72078 CLOSED0; final native audit51445 CLOSED0. Freshdata89989 CLOSED2 accepts all641 server verdicts and providers unchanged577match57drift7missing, rawserverff81a459 untouched, clientbuiltimages absent. Lint39184 CLOSED0 zeroerrors and exactprior85warnings (84code+1externallyupdatedrefdoc). Scratch bad-shape API attempt made no size change; old-size batch46359 terminated143 and unaccepted before correct fixed-input batch. Evidence .scratch/goal-tl-accessor/.
+
+Server data/layout triage read-only this turn confirms previous native COMMON ORDER, shorter-prefix, source-owner, suffix/archive, and merge controls already reject the obvious levers. EarlyCRT is ordinary stockBSS, not ORDER-able; largeGameCOMMONs already tentative and reference-relative. Missing early owner remains unsupported; no allocation/padding/lib patch/order change attempted. Continue useful TL/shared-tree work pending positive original allocation/input evidence. Whole-file goal active/incomplete, no byte-identical claim or commits.
+
+Server-rebuild coverage refresh CLOSED0 for all3 targets (server73820/TL29983/Gold97610). No owned jobs remain live. Current authoritative raw server image is ff81a459..., and accepted current data/whole-file evidence is under .scratch/goal-random-helper/server-link.
+
+Server shared-helper raw rebuild ACCEPTED (2026-10-04): selector full21334 CLOSED0 (10933 passed/32 skipped/54 warnings/321.66s),807 pinned inputs/modes unchanged. Fixed configure79802 and build87530 CLOSED0, REBREW_DEBUG_INFO=OFF. Both foreign Gold CRT bodies excluded; shared gm_RandomMod.c included. No compiler/link errors or LNK4006/LNK4217. build check passes126 objects. Actual source-selector audit25738 checks every target: shared helper selected in all3, Gold runtime bodies only in Gold; counts server114 own/3927 foreign, TL3604/437, Gold2471/1570. Upstream source-selection patch is accepted; no game/header/config/identity workaround applied.
+
+Current raw server.dll is restored and valid:270336 bytes, SHA ff81a459a20dbdbbf3bebe76128ec8bdd80b80bd59bf238cc2db936f12941935. All four mapped section layouts and payloads exactly equal the pre-move03859f image; all import identities/hints/slots and exports preserved. MAP gm_RandomMod remains1001a0d0, now owned by gm_RandomMod.c.obj rather than spiel622.c.obj.267 bytes changed outside section payloads, reducing direct whole-file overlap differences2702→2530;16384 missing bytes remain. Do not attribute that header change to Game C code improvement. Direct rebuilt-image comparison, not a fallback or copied old artifact, proves the owner move is neutral in all runtime payloads. Evidence server-link/raw-link-comparison.json.
+
+Whole57403 CLOSED1 expected NOT MATCHED: all316 source verdicts and every provider row exactly agree with accepted63165 server results (260 game+56 compiled library rows). Imports, exports, active relocations, resources, image base and layout freshness match. Remaining .data VirtualSize short3604 and .reloc reserved VirtualSize short15108; active relocation directory7404 bytes/44 blocks/3526 entries matches exactly, its extra reserved tail is zero-filled. Fresh data58040 CLOSED2 comparison ACCEPTED:all641 rows exact,577 matched/57 drift/7 missing; both client build images absent. Rebuilt-image-acceptance.json binds new ff81 image. Old03859f/raw/map backups preserved; stale hash-specific previous compare scripts must not be used as current-image gates. New external manifest after-link-external-input-closure.json replaces only build/server.map hash; all other142 references immutable and unchanged.
+
+Next server data/layout focus: direct byte classification finds2094 .text differences, all at1364 HIGHLOW dwords, zero differences outside fixups; .data54 differing bytes at15 HIGHLOW dwords; .rdata286 differences outside HIGHLOW. This is address binding/layout work, not evidence to reshape matching code.1379 changed fixup slots grouped in remaining-fixup-delta-groups.json. Dominant915 .text references to188 distinct data targets share -4608 offset; declaration triage includes g_slot_table, g_entity_type_table, g_connections and their aliases, plus late CRT data. Native early CRT fields (__environ/_osver/_aenvptr/etc.) appear near the end of built data with +~24MB deltas. These labels are declarations, not proof of storage owners. link_stubs.c Game arrays are ALREADY tentative COMMON definitions; do not retry an assumed '= {0}'→tentative fix. Its comments describe existing native /ORDER COMMON controls. Check prior native-common-order/map probes and ownership evidence before changing storage or ordering. No padding allocations, replacement CRT data, library patch or raw byte fix allowed.249 mixed random-helper declarations remain future type work. No owned build/test/data/audit jobs live; coverage refresh separately. Goal active/incomplete, no commits. Earlier LIVE entries below historical.
+
+Server rebuild exposes CMake library-source scoping bug (2026-10-04): configure32008 CLOSED0 with REBREW_DEBUG_INFO=OFF, shared gm_RandomMod.c selected. Build71142 CLOSED2: source selector incorrectly includes Gold-only migrated LIBRARY bodies GOLD.fcn_005deaf3.c and GOLD.fcn_005e3a71.c in server, ending on unresolved _fcn_005e899f. No SERVER identity owns either Gold body; they are not deliberate server displacements. No C/library/link filtering workaround applied. Failed LINK removed build/server.dll and cleared server.map; original raw03859f... and map preserved under .scratch/goal-random-helper/server-link/before/build. Current raw DLL is ABSENT until successful rebuild; old641 data verdicts describe the preserved pre-build image, not a newly built DLL.
+
+Upstream cmake_sources.collect now incorporates exact project-root compiled-library bindings for all modules through public bind_library_source before unannotated fallback. RED fixture reproduced the nested metadata failure;48 focused tests passed and Ruff is green. Full isolated807-input suite21334 LIVE; poll SAME21334, log suite-source-selection.log, snapshot-source-selection/rebrew. It starts from accepted79230 snapshot plus owned cmake_sources/test/changelog patch, with executable modes preserved; concurrent upstream changes excluded. Public provider identity and target scoping preserved; game C/header/config/managed identities untouched. Patch docs/rebrew-patches/goal-library-cmake-source-selection.patch; feature/bug recorded immediately in upstream IDEAS-GUILD.md. After suite green: reconfigure with new pinned tool, assert no foreign Gold body in server source list, rebuild, compare raw payloads/imports/whole-file and freshly verify data. Only build/server.map is excluded from its prior immutable reference pin during the intentional relink; every other previously pinned build map remains checked. Old raw/map backed up explicitly; originals/archives/layout/source/tool pins remain mandatory. Whole-file goal active/incomplete, no commits. Earlier LIVE entries below historical.
+
+Shared-helper coverage refresh CLOSED0 on server42414/TL53697/Gold7182; CLI regenerated all3 coverage documents. All owned jobs terminal.
+
+Shared gm_RandomMod consolidation ACCEPTED (2026-10-04): full63165 CLOSED2, every result compared with accepted23485. Exactly two existing helper identity/owner changes plus new TL42e410 RELOC32, no lost/removed matched rows, library inventories unchanged. TL source agreement3557/3679 (+1), server316/316 includes56 compiled libraries (260 game), Gold2041/2518 unchanged. One actual C definition now serves all3 target identities; duplicate Gold body removed. Full physical source move/caller rename scope and public managed writer receipts under .scratch/goal-random-helper/consolidation. No asm, library patch, or caller type substitution.
+
+Five previous TL SIZE_MISMATCH deltas changed because the new helper identity binds a formerly unresolved call. Audit56280 CLOSED0 compiled original and current C bodies and proved identical bytes, then reproduced every old delta by removing only the gm_RandomMod catalog binding and every fresh delta by restoring it. This is stricter measurement, no executable-byte regression or promotion. The strict comparator now permits exactly these five reviewed rows with their exact before/after metrics and immutable compiled-body hashes; every other row still must match. Explanation and values live in docs/measure-traps.md; evidence new-callee-binding-effects.json. The first two scratch audit attempts were rejected (relative config path caused a missing include; four source files had legitimate identifier-only changes), then absolute project config and actual before-source compilation established the final evidence.
+
+Data57266 ACCEPTED:641 server verdicts exact,577 matched/57 drift/7 missing, rawserver SHA03859f4831e16f8a3cd6b6ed9bfce63af72e36b7bf739996677aa113b7237fbd unchanged; both client build images absent. Native actual-owner audit14125 and helper91864 passed all3 full32-byte comparisons;249 varied caller declarations remain explicit future type work. Tool807/game4104/external143 pins and managed identity contract clean; tool suite79230 accepted. Lint has zero errors/84 existing code warnings plus one concurrent instruction-reference W033, unrelated to C changes. No owned source/data/audit jobs live; coverage refreshed separately. Whole-file goal active/incomplete, no commits. Next: rebuild server after updating its source inventory and measure raw-link consequences of the physical owner move, then continue canonical caller declaration work or shared TL helper recovery. Earlier LIVE entries below historical.
+
+Shared helper data57266 CLOSED2 comparison ACCEPTED: all641 server data rows exactly agree with reviewed baseline,577 matched/57 drift/7 missing; every library provider preserved and raw server SHA unchanged. Read-only AST inventory confirms one actual gm_RandomMod definition and249 declarations with varying return/parameter types. No declaration correction or unique-original-type claim; caller-prototype-inventory.json records this remaining fidelity work. Full63165 remains LIVE, final Gold target, fixed inputs and managed identity contract clean.
+
+Shared gm_RandomMod consolidation APPLIED, full validation pending (2026-10-04): extracted the existing int __cdecl gm_RandomMod(unsigned short n) body from spiel622.c into game/spiel_c/gm_RandomMod.c; SERVER1001a0d0, new GOLDTL42e410 and existing GOLD42ec00 identities now reference this one C definition. CLI rename Gold16593 CLOSED0 and TL2432 CLOSED0 updated client numeric helper names;238 surviving caller source edits verified as identifier-only, preserving every type and body. Retired the duplicated Gold C owner and temporary TL staging owner with backups; all other managed function rows preserved, only two existing helper identities changed and one new TL identity added. Data store semantically unchanged. Existing server helper comment removed with its body; no unproven deterministic-RNG claim carried into the shared source.
+
+Helper91864 CLOSED0: all3 RELOC32/32; actual shared native audit14125 CLOSED0: each32-byte body under its own stored/default CFLAGS fully matches with typed stock-rand address bindings, IAT wildcard disabled and rejected wrong+4 controls. Library whole-body attribution miss remains confirmed for the game helper. No stock runtime code changed. Full source63165 LIVE and data57266 LIVE, same pinned accepted79230 tool snapshot. Poll SAME handles; source/data output under .scratch/goal-random-helper/consolidation. Fixed4104 game/807 tool/143 external inputs and fixed-managed-contract.json; no C/header/config/identity/size edits while live. Strict compare-full.py expects only two owner/Gold-name changes and one new TL RELOC32 identity; all other rows and every library provider must remain identical to accepted23485. Compare-data.py requires the641 reviewed server verdicts unchanged. Do not count TL gain until full comparison closes.
+
+Lint49784 CLOSED0:zero errors,84 preexisting code warnings per target plus W033. The single added W033 comes from two concurrently refreshed generated skill references describing newer markerless source split support; they differ from the older pinned tested tool's packaged reference text. Preserve those external doc updates; no game source drift or new code warning. Goal active/incomplete; no commits. Earlier LIVE paragraphs below historical.
+
+Coverage refresh CLOSED0 for all3 targets (server61258/TL46413/Gold37431); regenerated db/coverage-<target>.toml through CLI. No live owned jobs remain.
+
+Gold48 sharing ACCEPTED (2026-10-04): full source23485 CLOSED2 strict comparison passes every row against accepted6790, exactly44 intended Gold changed extents plus4 new identities, no lost/removed/unexpected rows and exact provider inventories. This raises Gold raw source agreement from1993/2514 to2041/2518. The44 were existing shared identities whose extents were corrected;4 add destination claims to existing shared C. No new C body or library byte improvement claimed. Server316/316 includes56 compiled library rows, so260 game rows agree; TL3556/3678 unchanged. Existing Gold compiled CRT rows remain SIZE_MISMATCH and are excluded from reversing gains. Acceptance receipt .scratch/goal-migration-revalidation/gold-sharing-acceptance.json.
+
+Upstream lint-path full79230 CLOSED0 ACCEPTED:10931 passed/32 skipped/60 warnings/344.80s,807 pinned files and executable modes intact. Earlier78003 snapshot-mode failure corrected, its installer fixture now passes. Lint18910 CLOSED0:zero errors/84 existing warnings per target. Source23485's807 tool inputs,4104 game inputs,143 external references and managed identity contract all clean. Data7058 comparison ACCEPTED:641 server verdicts exactly retained,577 matched/57 drift/7 missing, rawserver SHA03859f4831e16f8a3cd6b6ed9bfce63af72e36b7bf739996677aa113b7237fbd; client builds absent. Whole-file server remains2702 overlapping differences and16384 missing bytes. Whole-file goal active/incomplete; no commits.
+
+Next shared-tree work: apply the proven existing int __cdecl gm_RandomMod(unsigned short n) body extraction from spiel622.c into game/spiel_c/gm_RandomMod.c; retarget server identity, share the32-byte helper with TL42e410 and Gold42ec00 using public metadata APIs and CLI renames. Scratch-native audit77763 proves all3 full bodies with typed rand relocations and rejected wrong+4 controls; helper not stock. No extraction/rename/claims yet applied. Do not globally replace caller return declarations: TL4faa90 requires a16-bit result copy and current proper-int/cast probes differ1 byte. Return-width probes81588 prove int/unsigned-int32-byte forms, ushort forms34 bytes under configured flags, not unique signedness/original prototype. Reverify full source/data after actual consolidation. Older LIVE entries below historical; no source/test/data jobs remain live, coverage refresh handled separately.
+
+Source23485 CLOSED2 strict comparison PASSED (2026-10-04): every fresh row compared with accepted6790, exactly44 intended Gold changes+4 additions, no lost/removed/unexpected identities, exact library inventories including both restored Gold compiled providers. Full reports after-ancestry-all.json/full-ancestry-comparison.json; managed compile identity contract unchanged and all pinned tool/game/external inputs clean. Raw source agreement server316/316, TL3556/3678, Gold2041/2518; compiled runtime rows are not game reversing progress. Gold48 final acceptance remains held for the lint-path tool suite. Data7058 comparison and lint18910 passed as described below.
+
+Lint-path full78003 CLOSED1:10930 passed/32 skipped/66 warnings/319.00s, one failure caused by our snapshot copy losing the executable mode of tools/ci_install_vnu.sh, PermissionError. No upstream functional failure. Restored11 copied file modes from the accepted ancestry snapshot; added modes to pinned-input checks without changing file bytes. Fresh full79230 LIVE; poll same handle. Snapshot807, full game4104/external143 closure unchanged. No game C/header/config changes, no commits. Earlier LIVE entries below historical.
+
+Compiled-library lint path fix in progress (2026-10-04): restoring the two Gold LIBRARY source identities exposed E001 on both markerless bodies in every target. The provider resolver uses project-root paths while lint previously checked only metadata-relative paths. Shared public file_backed_by_metadata now accepts project_root and recognizes exact LIBRARY paths, with tests for separate metadata roots and an unrelated same-name file. Red fixture reproduced the failure;429 focused tests passed and Ruff is green. Full isolated807-input suite78003 LIVE; poll same handle. Patch docs/rebrew-patches/goal-library-source-lint-path.patch. No game C/header/config changes. Source23485 still LIVE on the already-green ancestry snapshot; data7058 CLOSED2 comparison ACCEPTED, all641 server verdicts and provider rows match the reviewed baseline,577 matched/57 drift/7 missing, both client images absent. Do not accept Gold48 until strict source comparison and lint closure pass. Earlier LIVE entries below are historical.
+
+Library ancestry migration fix ACCEPTED (2026-10-04): isolated full tool suite39988 finished with10929 passed/32 skipped/56 warnings/396.20s. Its process handle expired before resumption; complete persisted pytest summary and807 pinned tool inputs were checked, with zero tool/game/external/Git drift. Both marker migration orders now retain library ancestry and the actual C provider identity; provider paths are normalized to project root, while ambiguous legacy bindings remain untouched. Focused212 tests passed. Patch: docs/rebrew-patches/goal-library-ancestry-migration.patch.
+
+Previous full source15645 CLOSED2 REJECTED: expected44 Gold byte-metric changes and4 additions were present, with no lost byte matches, but two Gold library providers disappeared and their names changed after header migration. The preview's fallback to old providers had hidden the ancestry loss; actual pure-metadata provider checks are now mandatory. The two records were repaired through public save_metadata under metadata_write_lock: LIBRARY ancestry, actual fcn names, project-root C binding; every other field and row preserved, including both existing SIZE_MISMATCH verdicts. Actual provider check reproduces exactly the two accepted compiled rows. No runtime implementation or library archive changed.
+
+Fresh source23485 LIVE and data7058 LIVE using the green isolated ancestry snapshot. Poll the same handles; output after-ancestry-all.json/log and data-ancestry-all.json/log. Strict comparisons: compare-full-ancestry.py and compare-data-ancestry.py. Fixed4104 game inputs/143 external inputs/807 tool inputs, ancestry-managed-contract.json. Gold48 gains remain UNACCEPTED until the fresh full comparison passes. Whole-file goal remains active and incomplete; no commits. Earlier LIVE paragraphs below are historical.
+
+Random helper extraction preview/native audit77763 CLOSED0 (2026-10-04): exact existing server body extracted in scratch only, signature int __cdecl gm_RandomMod(unsigned short n), lines789-795 of spiel622.c. Standalone stdlib.h preview matches all32 native bytes in each target with typed stock-rand callee bindings and3 rejected wrong+4 controls; helper is not stock runtime code. No source extraction, owner retarget, caller rename, or metadata claim applied. Native-existing-extracted-audit.json and existing-body-extraction-preview.json under .scratch/goal-random-helper. This confirms the existing int-return definition, not a uniquely proven original prototype; caller declaration cleanup remains byte-sensitive. Full15645 remains LIVE and all game inputs must stay fixed until its comparison completes.
+
+Native library migration repair ACCEPTED (2026-10-04): full isolated tool73914 CLOSED0 (10923 passed/32 skipped/61 warnings/425.89s),807 inputs and isolated Git refs unchanged. Fixed suite78114 failures were a stale legacy-blocker fixture plus snapshot Git context leaking parent game tags; all addressed before resuming game work. Public save_metadata under reentrant metadata_write_lock corrected1801 library declaration name/symbol rows after complete raw-store parity validation; no other fields/rows changed. Retained54 explicit server vendored bindings,2 server local compiled providers, and2 existing Gold FUNCTION records. Scratch fixture verified all unrelated fields preserved and repeated write bytes identical. Actual server inventory restored56 compiled/143 prebuilt/117 unresolved, every provider row exactly agrees with accepted6790. Lint72962 CLOSED0:0 errors/84 existing warnings each target (70 asm placeholders,13 struct-size hints,1 D3DX8 unknown-module warning).
+
+Fresh current-DLL data74682 CLOSED2 comparison ACCEPTED:641 verdict rows exactly agree with reviewed49265;577 matched/57 drift/7 missing, old634 verdicts retained with the previously reviewed15 definition/input hash changes,7 new verified span views without storage. Built client images absent. Earlier raw hashfc130aeb was stale: current270336-byte raw DLL SHA03859f4831e16f8a3cd6b6ed9bfce63af72e36b7bf739996677aa113b7237fbd has identical section layouts and all section payloads compared with preservedff81a459;267 differences outside payloads. Direct reference comparison remains2702 overlapping byte differences/16384 missing bytes. No whole-file equality or improvement claimed.
+
+Full source15645 LIVE, ownedPID955020. Poll SAME15645, do not restart. Output after-native-all.json/log; compare-full.py requires exactly intended44 Gold changed rows+4 additions, no lost/removed/unexpected rows, matching names/symbols/modules/files as well as byte metrics, exact accepted provider inventories, and no duplicate VAs. Inputs fixed:807 tool,4104 source,143 external reference/map/archive/header inputs, native-managed-contract.json. Check check-native-inputs.py and managed contract after terminal job. No source/header/config/identity/size changes while live. Gold48 gains remain unaccepted. Goal active/incomplete; no commits. Earlier LIVE paragraphs below historical.
+
+Library symbol migration recovery in progress (2026-10-04): focused upstream tests54570 CLOSED0 (206 passed). New isolated snapshot-native/rebrew captures806 current upstream inputs; full suite78114 LIVE, game work held until green. The fix preserves opaque native library inventory symbols and explicit compiled-source bindings. Read-only recovery plan1801 declaration identities restores every accepted library-provider row across all3 targets in the preview, including server56 compiled/143 prebuilt/117 unresolved; compiled bindings untouched. Empty/prose hints and historical duplicate precedence remain inventory declarations, never new ownership claims. No real managed-store repair has been applied. Evidence .scratch/goal-migration-revalidation/library-symbol-recovery-*.json. Earlier LIVE paragraphs below are historical.
+
+Gate/data correction: full99476 CLOSED130 INVALIDATED by concurrent layout_spans.h input drift; no source result accepted. Fresh data49265 CLOSED2 reports641 server rows (577 matched/57 drift/7 missing): old634 statuses, names and sizes unchanged, but15 definition/input hashes changed;7 new verified span views are declarations without storage. Current rawserver was rebuilt after that report: SHA fc130aeb3fb4e71365827fc378d54a3c14dead4e2dbb38dbf28b5fd3bb504093, 267 changed bytes all outside old section payloads. Data report is therefore not a verification of the current DLL. Repaired metadata, fresh full source check and current-raw data verification remain required before accepting Gold48 sharing gains. Both built client images remain absent; whole-file goal active/incomplete. No commits.
+
+Frozen gate99476 INVALIDATED (2026-10-04): concurrent layout_spans.h edit added7 extern-only inventory spans during TL compilation. Reconstructed prior migrated header from backed-up legacy header and exactly reproduced pinned72db6577 SHA; diff contains only7 named span declarations, no definitions. Header is not included by any game source; rawserver SHA remainsff81a459. Still invalid under fixed-input gate contract: SIGINT sent only to ownedPID3779217,99476 CLOSED130, no result acceptance; failed gate receipts retained in input-drift-99476/. Seven newly managed rows are storage_kind=span, not storage owners; current data store has independent existing verification receipts but fresh own verification49265 LIVE will compare old634 plus exactly these7 new rows. Current4104 game/806 tool manifest stable after adopting reviewed header. Poll SAME49265, check data shape/verdicts/rawhash, then rerun all-target source gate against6790 expecting44Goldchanges+4additions. Do not narrow gate acceptance or overwrite external inventory work.
+
+Existing server gm_RandomMod compiled in its complete spiel622.c TU under all3 target profiles: scratch76359 CLOSED0, all3 native32-byte bodies/typed rand operands pass and wrong+4 controls reject; no source edits. Before client sharing, extract this existing body into the game helper directory so unrelated server functions do not become client object/link inputs. Split dry-run confirms marker-only CLI lacks metadata-backed extraction; recorded concrete feature requirements upstreamIDEAS. No original signature inference from byte-equivalent helper forms. Goal active/incomplete; accepted game counts remain server316/316 TL3556/3678 Gold1993/2514 and pendingGold2041/2518 unaccepted. Earlier LIVE entries historical.
+
+Random-helper waiting probes (2026-10-04): source99476 still LIVE; observed same handle and zero806 tool/4104 game drift. Gold rename dry-run2205 CLOSED0 would update5 files without changing owner path; no rename applied during gate. Scratch caller type probe93379 CLOSED0: boolean64 restored by explicit ushort result cast; variable caller85 becomes84 despite cast (mov di,ax -> mov edi,eax), so no global prototype substitution; pointer caller228 preserved by int return/explicit pointer use cast. Scratch helper int-argument/local-ushort-range variant audited62554 CLOSED0 against all3 native32 bodies with stockrand ownership/full typed bindings and3 wrong+4 controls rejected. Initial50037 failed because scratch adapter did not ensure absent stockLIBC cache before hash; fixed adapter, no tool defect or library edits. Original helper signature is not established by these identical bytes; caller ABI preservation remains mandatory during sharing. No game source/identity writes this turn; canonical C-helper sharing follows terminal99476 row comparison and fresh data gate. Receipts .scratch/goal-random-helper/. Goal active/incomplete; accepted counts unchanged. Earlier LIVE entries historical.
+
+Migration revalidation gate (2026-10-04): final tool25889 CLOSED0,10906passed32skip58warn480.27s;806 tool+4105 game hashes stable before source cleanup. Retired empty spiel3.c after proving zero managed identities/definitions and canonical declarations elsewhere; receipt/backup retained. Remaining4104 fixed game inputs stable. Fresh lint53913 CLOSED0:0errors85warnings per target (70W020 asm,13W007 first-line structs newly visible after bug fix,1W035 D3DX8,1W033 four workflow instruction files newer than pinned package docs). Do not add fake struct extents or downgrade newer project skill docs to silence warnings. Full source99476 LIVE, expects exactly44 Gold extent repairs+4 additions against6790 and no lost/removed/unexpected rows. Poll SAME99476, compare every row, then fresh data gate and all3 coverage docs; no further C/header/identity/size edits during gate. Last accepted server316/316 TL3556/3678 Gold1993/2514; pending Gold2041/2518 unaccepted. Goal active/incomplete; no commits or whole-file claim. Earlier LIVE entries historical.
+
+Lint first-line final gate (2026-10-04): complete25368 CLOSED1,10904passed32skip57warn379.55s; only2 skill-document consistency tests failed after own snapshot restoration copied newer rendered docs without newer packaged templates. Corrected by running snapshot tools/render_skills.py against snapshot packaged docs,4 rendered workflow files changed;46 render/sync/body-lint tests pass. Full replacement25889 LIVE,806 tool+4105 game inputs pinned with zero drift/no extra skills. Poll SAME25889, not closed25368. First-line bug patch retained; no game source/identity edits yet. D3DX8 provenance now confirmed as TL generator with weak prefix fallback, not foreign SDK VA evidence;1009 module claims remain unchanged and W035 visible pending stronger native attribution. Goal active/incomplete; accepted game counts unchanged; earlier LIVE entries historical.
+
+First-line lint recovery (2026-10-04): previous full88286 CLOSED0 (10904passed32skip62warn485.54s). Fresh project lint44859 CLOSED1 reports one empty former TU (spiel3.c),70 asm-placeholder warnings, one first-line SIZE false positive and one unknown D3DX8 module warning per target. Fixed the definite first-line scan bug upstream;265 lint checks pass. New complete suite25368 LIVE over806 pinned tool inputs;4105 game inputs unchanged. Snapshot scaffold docs changed after the prior suite; preserved late-generated-scaffold and restored developer docs from upstream before a clean hash check. Do not alter game sources or managed identities until full25368 is green. D3DX8 store has1009 rows under an unconfigured module; generator provenance needs investigation, not blind reassignment/suppression. After green retire the empty TU, then fresh all-target/data checks versus6790 expecting44 Gold changes+4 additions and no unexpected/lost rows. Last accepted server316/316 TL3556/3678 Gold1993/2514; pending Gold2041/2518 still unaccepted. Goal active/incomplete; no commits or whole-file claim. Earlier LIVE entries historical.
+
+Library binding/migration recovery (2026-10-04): tool suite24579 CLOSED0,10903passed32skip64warn443.55s,806 tool hashes unchanged. A late VFS source migration changed one game input; backed-up changes are marker removal and fresh game gate must verify it. Supported library bind-source19267 CLOSED0 applied54 accepted existing zlib C providers with their original native symbols; no source/library bodies changed. Discovered migrated-header/external-bound-source catalog omission (red0expected1), fixed upstream target-scoped discovery and verification library rows/cache plus idempotent rebind. Read-only canonical catalog now has all56 compiled-library candidates, all54 planned symbols/sizes correct, two local C providers retained. Focused216passed1missing API-note failure; final77passed1skip after note.
+
+Full discovery suite79944 CLOSED1:6failed10898passed32skip62warn317.73s. Four failures were new cache assumption metadata_dir always exists in minimal batch mocks; fixed optional-store behavior,83 affected checks passed49163 CLOSED0. Two failures were generated .agents/skills/.rebrew-scaffold.json extra in own snapshot (not in captured806 inputs and absent from upstream); saved receipt and removed owned extra. Latest full suite88286 LIVE over806 refreshed tool inputs; game work held until green. Poll SAME88286 and verify full result/tool manifest plus unexpected skill files. Current4105 game inputs pinned post-migration and unchanged; all54 bindings retained. Own patch docs/rebrew-patches/goal-bound-library-migration.patch; earlier marker patch retained. After green: lint and fresh raw-data/source all-target gates vs6790, using compare-full.py expected44Goldchanges+4additions, no lost/removed/unexpected rows. Last accepted source counts server316/316 TL3556/3678 Gold1993/2514; pending Gold2041/2518 unaccepted. Then consolidate existing gm_RandomMod into one body for all3 targets; avoid duplicate helper implementation. Goal active/incomplete; no commits or whole-file claim. Earlier LIVE entries historical.
+
+Migration compatibility recovery (2026-10-04): game4105 source/header/config inputs stable since initial revalidation capture. Current upstream captured in isolated detached worktree; initial full suite1517 CLOSED1:6failed10884passed45skipped70warnings457.73s. Fixed upstream command-layer import by moving shared marker migration to marker_migration; pure-C onboarding/unmatched tests now check metadata-backed identities; skeleton provenance restored atomically without writing STATUS; generated IAT comment retains0x; breaking API notes name all moves/removals. Focused227passed with1 remaining missing API note, then final67passed1skip after note; touched Python lint clean. Fixed complete suite24579 LIVE over806 pinned tool files, source work held until green. Poll SAME24579 and compare snapshot manifests before adopting. Own patch docs/rebrew-patches/goal-marker-migration-compat.patch.
+
+Prepared54 explicit compiled-zlib source bindings from accepted native-literal6790 rows (new tool requires source providers; no source/library bodies edited). Two other compiled library rows already point to C files. Apply supported library bind-source only after green tool suite, then fresh all-target/data/lint checks against6790 with exactly44 Gold extent repairs plus4 additions, allowing no lost or unexpected rows. Gold48 bodies/identities/sizes preserved through migration; old33097 invalidated and CLOSED130. Existing server gm_RandomMod32 at1001a0d0 is the same C body as scratch TL42e410/Gold42ec00, and Gold already has a separate32-byte implementation; unify existing source rather than adding another copy after migration baseline acceptance. Last accepted server316/316 TL3556/3678 Gold1993/2514. Goal active/incomplete; no commits or whole-file claim. Receipts .scratch/goal-migration-revalidation/. Earlier LIVE entries historical.
+
+Full Gold gate33097 INVALIDATED (2026-10-04): concurrent source-marker migration changed1667 of4105 fixed inputs;805 pinned tool inputs unchanged. Gold48 staged/imported bodies remain independently native-audited, but pending2041/2518 counts are NOT accepted. Pinned parser now warns on migrated data file/marker_type fields (new upstream code supports them). SIGINT sent only to owned gate PID2712806; do not restore markers, overwrite concurrent edits, or accept mixed-input output. User asked whether migration is finished or still live; await stable tree, validated compatible tool snapshot, fresh manifests and complete all-target/data checks. Last accepted counts server316/316 TL3556/3678 Gold1993/2514. Scratch rand()%unsigned-short helper TL42e410/Gold42ec00 independently matches32 bytes with stockrand attribution and wrong-address controls; not landed. Receipts .scratch/goal-gold-sharing/{after-job,in-flight-drift,waiting-checkpoint}.json. Goal active/incomplete; no commits. Earlier LIVE entries historical.
+
+Gold sharing full gate33097 LIVE (2026-10-04): staging audit65042 CLOSED0 screened199 candidates, strictly verified48 and deferred151. Precise CLI imports2960 CLOSED0 repair44 existing Gold extents already sharing the TL body and add4 new Gold claims; no source-body/header/type/storage edits, file consolidation or caller renames. Post-import complete native binding audit24838 CLOSED0 validates all48; lint zero errors/warnings. Pending Gold2041/2518 remains unaccepted until every-row comparison against native-literal6790 confirms exactly44 planned changes plus4 additions, no lost/removed/unexpected rows, and fixed4105/805 input manifests. Fresh data17909 CLOSED2: all634 server data verdicts and rawDLLhash unchanged; both client builtimages absent. Poll SAME33097 before source or managed metadata edits. Receipts .scratch/goal-gold-sharing/. Goal active/incomplete; no whole-file equality claim or commits. Earlier LIVE entries are historical.
+
+Native literal batch6790 ACCEPTED (2026-10-04): CLOSED exit2; all-row comparison against3125 passed with exactly40 expected TL SIZE_MISMATCH->RELOC promotions, zero other changed/lost/added/removed rows and zero4105/805 drift. Accepted source counts server316/316, TL3556/3678, Gold1993/2514. Restored41 native tokens in35 files, including one-ULP radians/degrees constant and -10.0f sentinel; all20 shared Gold payloads agree. Five existing empty-string bodies also strictly verified after COFF zero-section reader correction. All35 focused tests and all40 complete typed-native audits passed;292 wrong+4 controls rejected. Lint zeroerrors/warnings, all3 coverage docs refreshed. Data1018 server634/rawDLLhash unchanged, client builtimages absent. No whole-file equality or storage-owner claim; no commits; goal active/incomplete.
+
+Next sharing audit65042 LIVE (read-only):199 min-score100 related Gold candidates from matched TL functions. Newly accepted234 extents produced no selected counterparts in that preview; no forced low-score imports. Stage complete native Gold CFG/end, stock MT/ST archive attribution, literal payload/import/named-game bindings and negative controls; reject unresolved TL-address labels as Gold bindings. No source imports applied yet. Poll SAME65042, inspect sharing-audit.json and every deferred reason before using selected --source-va/--va --shared CLI imports. Preserve input snapshot and native proofs; target sources must stay untouched until staged audit finishes. Receipts .scratch/goal-gold-sharing/{audit-job,sharing-audit-partial}.json. Earlier LIVE paragraphs below historical.
+
+Native literal repairs/full6790 LIVE (2026-10-04): last accepted3125 server316/316, TL3516/3678, Gold1993/2514. Restored41 native literal tokens in35 existing source bodies (39 string operands plus two floats:57.295776f and -10.0f). Twenty affected shared Gold payloads independently match TL, including both float values; no complete Gold callee/global binding claim. All35 focused no-promote tests62678 CLOSED0. Complete40-body audit43533 CLOSED0 validates all35 repaired functions and5 already-correct empty-string cases with every relocation bound/IAT wildcard disabled and292 wrong+4 controls rejected. Initial54450 adapter failed on str/Path handling before promotion; preserved attempt1 and corrected scratch adapter. Supported locked writer set40 TL native sizes, no headers/types/storage/link changes. All-target lint zeroerrors/warnings. Full6790 pins4105 inputs, expects exactly40 TL SIZE_MISMATCH->RELOC with supplied native sizes, no other changed/lost/added/removed rows. PendingTL3556/3678 not accepted yet. Fresh data1018 CLOSED2: server634 verdict dictionary/rawhash unchanged, clients builtimages absent.
+
+Read-only related preview5041 CLOSED0:199 min-score100 Gold candidates from accepted TL functions, zero selected from the newly accepted234 extents (no forced lower-score import); no source import applied while gateLIVE. Preview JSON under .scratch/goal-native-literals/. Before any further source edit poll SAME6790, compare everyrow with compare-full.py, check4105/805 manifests, and refresh all3 coverage docs after acceptance. Native placeholder diagnostic corrected from50/40 to41/35 because9 empty-literal operands in5 files were a zero-filled COFF.bss reader false positive; native empty-string payloads are already correct and now all5 independently pass. Goal active/incomplete; no commits/raw-file gain. Earlier LIVE paragraphs below historical.
+
+TL extent/literal batch3125 ACCEPTED (2026-10-04): CLOSED exit2; compare everyrow against57178 passed with exactly234 intended TL SIZE_MISMATCH->25 EXACT/209 RELOC promotions, zero other changed/lost/added/removed rows and zero4105 source/805 tool drift. Accepted server316/316, TL3516/3678, Gold1993/2514. All3 coverage docs refreshed; data34893 server634/rawDLLhash unchanged and both client images absent. This proves selected native function bytes/bindings, not whole-file equality. No commits; goal active/incomplete.
+
+Audit correction: nine supposed empty-string differences in five sources were scratch-reader false positives: zero-filled COFF.bss rawpointer0/rawsize1 was incorrectly read as file-header byte4c via LIEF.section.content. Native empty literals and C source already agree; proper zero-section reader independently audits all5 complete bodies and wrong-address controls. No Rebrew/compiler/source fix required for this scratch assumption. Initial diagnostic retained as-attempt1; correct remaining differences are41 operands in35 functions. Current native-literal repair epoch has restored those41 source tokens, including shared -10.0f sentinel and precise57.295776f. Twenty affected Gold payloads independently agree with TL corrections; whole Gold call/global binding not claimed. Focused no-promote tests62678 LIVE; fresh complete40-body audit adapter initially failed on str/Path conversion before any promotion, fixedscratchadapter and rerun54450 CLOSEDfailed/replacement job pending. No header/type/storage changes. More source edits must await current audits and subsequent full gate. Earlier LIVE paragraphs below historical.
+
+Extent/literal batch data34893 CLOSED exit2: server634 verdict dictionary exactly unchanged570matched57drift7missing, rawDLLhash unchanged, both client images absent; zero4105 source/805 tool drift. Full3125 still LIVE and unaccepted. Selected234 strict audits comprise25 EXACT/209 RELOC,1782 typed relocation operands and1125 rejected wrong+4 controls with correct-address sentinels/IAT wildcard disabled. Read-only diagnostics reveal50 mismatching string/float literal operands in40 remaining functions; native strings include bio_rd_array_quick, ch_DeclareAction, ch_UseGate and WalkToDummyRotateVerified prefixes. These are next source-fidelity repairs after terminal3125 comparison, never masked-prefix promotions. Canonical function renaming requires native push/registration evidence and Rebrew CLI; no names renamed in this batch. Evidence .scratch/goal-small-client-helpers/{data-comparison,waiting-checkpoint,deferred-literal-differences}.json. Earlier LIVE paragraphs below historical.
+
+Native TL extent and literal repair batch LIVE (2026-10-04): full3125 running; last accepted57178 server316/316, TL3282/3678, Gold1993/2514. Audited322 shorter zero-diff SIZE_MISMATCH rows:309 native terminal/NOP candidates,13 ambiguous boundaries deferred. Required per-VA stock LIBCMT CLI probes plus complete native-body archive comparisons, CFG traversal, full typed relocation binding, compiler-literal payload/import/stock-CRT binding and wrong+4 controls independently confirm232 extents. Two additional originally false literal bodies repaired: TL401470 native675058 bio_rd_array_debug error, TL40cba0 native675da8 WalkToDummyRotate error. Both fresh complete-body audits135/185 pass, all addresses bound and wrong+4 controls reject. Total234 supported locked SIZE updates applied; stale TL inline SIZE removed in234 backed-up source files, body operations unchanged except those two corrected literal payloads. Native body total43734 bytes;1718 excluded NOP bytes retained as layout facts, no padding bytes deleted or raw gain claimed. All-target lint zeroerrors/warnings.
+
+Full3125 pins4105 source/header/config inputs and expects EXACTLY234 selected TL SIZE_MISMATCH->EXACT/RELOC rows per extent-updates-preview.json; no other changed/lost/added/removed rows. Pending TL3516/3678 is not yet accepted. Fresh raw-data34893 LIVE for literal/data change. Poll SAME handles before further C/header edits; after terminal compare everyrow using compare-full.py, check both input/tool manifests, then refresh all3 coverage docs. Both client built images remain absent. Strict audit deliberately defers wrong placeholder strings/float constants and unresolved call/data bindings; never promote them from masked prefix scores. Native string diagnostics and name/source provenance follow only after this gate; relevant prefixes are candidate evidence, not function renames. Read-only next scripts diagnose-deferred-literals.py and deferred-literal-differences.json. Extent batch preview feature recorded upstreamIDEAS with existing test/verify size-repair scope distinguished. No commits; goal active/incomplete. Receipts .scratch/goal-small-client-helpers/{audit-job,accepted-extent-evidence,extent-updates-preview,extent-updates-write,after-job}.json. Earlier LIVE paragraphs below historical.
+
+Float-record consolidation accepted (2026-10-04): full57178 CLOSED exit2, comparison against19538 passed with ZERO changed/lost/added/removed rows and zero4105 project/805 tool input drift. Accepted totals server316/316, TL3282/3678, Gold1993/2514. Canonical inferred VECTOR3 and externs serve seven user files; shared TL40ec60/Gold40dd50 setter52 bytes now lives once, and shared updater182 bytes uses members instead of separate scalar globals. All8 user objects equivalent after only base-plus4/8 relocation normalization. Both52-byte setters fully audited against native operands, every relocation mapped, IAT wildcard disabled, four wrong+4 controls rejected with correct-address sentinels. Configured MSVC6 layout assertions confirm sizeof12 and offsets0/4/8; initial scratch probe missed its copied header and failed, final corrected scratch probe passed (this does NOT establish SDK8 layout).
+
+Locked data_metadata writer records four4-byte aliases at backing offsets4/8 with explicit native bases; full allocation extent and storage owners remain unresolved. No storage definitions introduced. Fresh data8411 CLOSED exit2: all634 server verdicts identical570matched57drift7missing and rawDLL hash unchanged; both client built images absent. No data/link/raw-file gain. All-target lint zeroerrors/warnings after pinned generated-reference refresh with supplied AGENTS restored/hash-verified; all3 coverage documents refreshed. No live jobs or commits; goal active/incomplete. Material450b20 related-import preview36047 CLOSED0 found no selected Gold candidate; no forced transfer. Evidence .scratch/goal-material-colors/{after-job,full-comparison,canonical-bindings,users-object-audit,vector-layout-result,canonical-member-operands,data-comparison,final-checkpoint}.json. Earlier LIVE paragraphs below historical.
+
+Float-record consolidation LIVE (2026-10-04): source57178 running; baseline accepted19538 server316/316, TL3282/3678, Gold1993/2514. Ten stock-library probes negative. Canonical inferred VECTOR3 (three floats,12-byte view) and extern declarations moved into existing client_types.h; seven users share it. Record updater replaces separate scalar aliases with x/y/z members. TL40ec60/Gold40dd50 now one C body, backed-up Gold duplicate retired; both RELOC52, shared updater both RELOC182. Locked data_metadata writer records four interior aliases offset4/8 and unresolved backing allocation/owner; no storage definitions introduced. Native D3D8 SetMaterial vtable slot42/0xa8 independently confirmed from Wine primary header and existing native call; SDK8 compile probe failed missing d3d8.h, no SDK layout pass claimed. Type name inferred; second global semantics unresolved. All-target lint zero errors/warnings after pinned generated-reference refresh; supplied AGENTS restored/hash-verified. Full57178 expects zero changed/lost/added/removed rows; source/header inputs frozen until terminal comparison. Native setter audit28374 LIVE. Fresh data gate still required for header/type/metadata changes. Receipts .scratch/goal-material-colors/. No commits/raw-file gain; goal active/incomplete. Earlier LIVE paragraphs below historical.
+
 # Blockers — 100% Round-Trip Goal
 
 ## CURRENT STATE
 
-Live numbers are `scripts/gate.sh` defaults. A residue, verify count, or `.text` VirtualSize written as "today" anywhere else is stale until it matches the gate. Address lookup: `python3 scripts/whathas.py 0x<VA>`.
+<!-- CURRENT-STATE:BEGIN -->
+<!-- generated by scripts/update_state_table.py -- do not hand-edit -->
 
 | Quantity | Value | Source |
 |---|---|---|
-| verify `passed`, game functions byte-matched (EXACT+RELOC) | 258 | `BASELINE` |
-| `.text` residue | 38 | `RESIDUE_BASELINE` |
-| raw-link `.data` divergence | 21,481 | `DATA_BASELINE` |
-| imports | 100 | reference PE |
-| reference `.text` VirtualSize | `0x22846` | `original/Server/server.dll` |
+| verify `passed` | **262/262** | gate's `BASELINE` |
+| `.text` residue | **0** | gate's `RESIDUE_BASELINE` |
+| raw-link `.data` divergence | **0** | gate's `DATA_BASELINE` |
+| relocation records missing / extra | **590 / 96** | `scripts/reloc_set_check.py` |
+| raw-link import table | **matches** | gate, round 210 |
+| OBJECTIVE GAP (raw link vs reference) | **41565** | gate's `OBJECTIVE_BASELINE` |
+| ...of which | **12893 differing bytes in the common prefix, 28672 bytes of size shortfall** | gate's decomposition |
+| postlink layout-map coverage | **5143/7463 layout-map entries validate (68.9%** | gate -- **floor is 90%** |
+| annotations shorter than the binary | **1 function(s) are SHORTER than the binary's function (17 bytes** | `rebrew verify --json` |
+| `cmake --build` exit | **2** | gate's build step |
 
-**Start here:** the newest `**Round-N:**` note under Continuation notes (newest first). The 254–431 session map below is archive. Object scores (`match_count`, `aligned`) are not the ship ruler; use `scripts/linktest.sh`. Do not "fix" `gm_AllocSpieler` slot[9]; see `docs/msvc6-c-shapes.md` §110 and that file's header.
+<!-- CURRENT-STATE:END -->
+
+**Start here:** `docs/HANDOFF.md` -- verified state, the scoped remaining work, and the operational hazards that have each cost a round. Then the newest `**Round-N:**` note under Continuation notes (newest first). The 254–431 session map below is archive. Object scores (`match_count`, `aligned`) are not the ship ruler; use `scripts/linktest.sh`. Do not "fix" `gm_AllocSpieler` slot[9]; see `docs/msvc6-c-shapes.md` §110 and that file's header.
 
 ### Archive: session map, rounds 254–431 (2026-09-14; residue 9,209 → 8,666)
 
@@ -62,6 +204,9750 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-132: the objective reduces to one number — 1,241 data operands. Everything else follows.**
+
+- **The bound, from postlink's own accounting of the raw link:**
+
+  | fixer | what it rewrites |
+  |---|---|
+  | imports | 29 slot operands (5 skipped) |
+  | data | **1,241 data operands**, 41 call targets, 639 bytes of `.text` overshoot zeroed |
+  | pe-metadata | the header |
+
+  **1,241 operands x 4 bytes = 4,964**, against **4,419 differing `.text`
+  bytes**.  So essentially every differing byte in `.text` is a data-operand
+  address -- **not** missing function bodies, not instruction selection, not
+  register allocation.  The 41 call targets are the only non-data operands, and
+  they are 164 bytes.
+- **Therefore `.text` and `.reloc` are not two problems and not one cause with
+  shadows: they are one problem, and it is placement.**  `.text` + `.reloc` is
+  **40,103 of the 41,619-byte gap (96%)**, and `.reloc` cannot be produced until
+  the operands are right.  `.rdata`'s 1,268 is the same displacement in RVA
+  tables (round 123), and the 248 header bytes follow from section sizes.
+  **Binding 1,241 data operands at link time is the whole task.**
+- **And the tooling can currently bind between 171 and 245 of them.**  Rounds
+  128-130 measured that ceiling and its cause: emitted sections land **3,560
+  bytes low** because the linker's uninitialised base is 3,560 below the
+  reference's, and neither `.bss`-vs-`.data` emission nor the object flags
+  (round 131) move it.  This round ruled out the last cheap explanation for the
+  3,560 as well: the band's `.c`-owned symbols are ~52 **4-byte scalars**
+  (`g_log_file_handle` 0x10034618 through `gm_CurrentHumanFamilyCount`
+  0x100346e4), totalling ~200 bytes inside 3,560 bytes of gaps, so it is not a
+  set of missing arrays either.
+- **Where that leaves the project, stated plainly.**  The deliverable is
+  byte-identical and is built by copying `.reloc` and splicing `.data` from the
+  reference.  The raw link is 41,619 bytes away, 96% of it one placement problem,
+  and our best placement tool reaches a tenth of it.  **The objective is not
+  close, and the remaining work is a link-layout problem whose mechanism is now
+  understood but whose base offset is not.**
+- **Recommended next step, and it is a measurement rather than a change:**
+  compare the link map's section layout against the reference's `.data` extent
+  object by object, to find which contribution the linker counts as initialised
+  and which it does not.  Six hypotheses have now been eliminated by measurement
+  (rounds 128-132); the seventh should come from that map, not from a guess.
+- **Gate green, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0 (baseline 4), imports 100, deliverable load OK,
+  raw link load OK, OBJECTIVE GAP 41,619.
+
+**Round-131: the section-characteristics hypothesis is REFUTED, and the 3,560 stays open. No change made.**
+
+- **The hypothesis.**  Round 130 said the 3,560 comes from the owning objects, so the
+  next obvious candidate was the generated objects' section flags: a section with
+  raw content but no `IMAGE_SCN_CNT_INITIALIZED_DATA` (0x40) is treated as
+  uninitialised by the linker, which would put its bytes in the `.bss` part and
+  shrink the initialised `.data` extent by exactly that much.
+- **The first scan appeared to confirm it, and was wrong.**  It reported **134
+  sections with raw content and no flag, 12,442 bytes, and 0 sections with the
+  flag set** -- a suspicious "everything is broken" result, which is what made me
+  check it.  `split_coff.Coff` names that field **`chars`**, not
+  `characteristics`; asking for the wrong key returned the `dict.get` default for
+  every section.  **A scan that reports a universal failure is a scan to distrust
+  before it is a finding.**
+- **Re-run with the right key, there is no defect:**
+
+  | | sections | bytes |
+  |---|---|---|
+  | raw content **and** `INITIALIZED_DATA` set | **93** | 10,876 |
+  | raw content, no flag (all `.drectve` or `.bss`) | 41 | 1,566 |
+
+  `.drectve` is a linker-directive section and `.bss` is uninitialised; both are
+  correctly flagged.  `crt_11_lc_time_curr.obj` carries `0xc0300040`, which
+  includes 0x40.  **The flags are right, the hypothesis is dead, and nothing was
+  changed** -- which is the correct outcome for a refuted idea and the first time
+  in this work that the bad number was caught before it reached a file.
+- **What is still true, and now narrower.**  The emitted sections land **3,560
+  bytes low**; `.bss` and initialised emission land identically; the flags are
+  correct; and `crt_data`'s own content in the band accounts for only 936 of the
+  3,560 (`crt_11` 4 + `crt_12` 172 + `crt_13` 60 + `crt_14` 700).  **The next
+  question is therefore what the linker actually counts as initialised**, which
+  is answerable from the link map's section layout rather than from the object
+  flags -- and it is the thing to measure before proposing another fix.
+- **Gate green, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0 (baseline 4), imports 100, deliverable load OK,
+  raw link load OK, OBJECTIVE GAP 41,619.
+
+**Round-130: the emitted objects cannot move the boundary — `.bss` and initialised `.data` land identically. The 3,560 belongs to the owning objects.**
+
+- **The test and its result.**  Same 10 run-packed objects, emitted two ways:
+
+  | emit mode | symbols still off | landing delta | `.data` RVA | gap | loads |
+  |---|---|---|---|---|---|
+  | `.bss` (round 128) | 208 | **-3,560** for 73 | 0x27000 | 41,272 | OK |
+  | initialised `.data` | 208 | **-3,560** for 73 | **0x127a2a5** | 41,272 | OK |
+
+  **Identical landing, identical gap.**  Switching the emitted sections to
+  initialised content does not raise the uninitialised base by one byte, so the
+  boundary round 129 identified is **not** decided by what we emit.  And the
+  initialised form additionally wrecks the layout: those sections are non-COMDAT,
+  so the linker appends them to `.data`'s virtual space and the section's RVA
+  jumps from `0x27000` to `0x127a2a5`.
+- **Where that leaves the mechanism.**  The linker's uninitialised base is the
+  sum of the **owning objects'** contributions, and ours totals 3,560 bytes less
+  than the reference's.  Adding objects cannot make it larger in the right place
+  -- they go after, not before.  **So the 3,560 has to come out of the objects
+  that already sit in the band**, which is the source-level question rounds
+  77/79 touched: those arrays are declared uninitialised here and initialised in
+  the reference.
+- **Which symbols own the band**, so the next round does not have to re-derive it:
+  `lc_time_curr` 0x10034258, `lc_time_c` 0x10034260, `lconv_static_decimal`
+  0x10034310, `lconv_c` 0x10034318, `lconv` 0x10034348, `pow10pos` 0x10034350,
+  `pow10neg` 0x100344b0, then `g_panic_callback` 0x10034610 through
+  `gm_CurrentHumanFamilyCount` 0x100346e4, then the CRT block from
+  `dstflag_cache` 0x100346e8 to `buf` 0x1003476c -- **90 symbols in the band, 16
+  of them resolved by the locator**.
+- **And it is worth stating what this is not.**  Padding `.data` to `0xe000` of
+  declared content would move the base and produce the right addresses, and it is
+  exactly the "manual padding" the objective excludes.  The route that is allowed
+  is to have the owning translation units declare the content they actually have.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-257: `g_dispatch_table`'s `size = 4` is CORRECT -- the rest of the table is covered by placeholders. And the checkout moved a third time.**
+
+- **The size "fix" that the data-extents check refused, correctly.**  Round 255 measured 212
+  relocated pointers at `.data 0x02c3f8..0x02c744` and round 232 found the metadata saying
+  `size = 4`, so the obvious correction was `size = 848`.  The check caught it:
+
+  ```
+  BUGS (1) -- inner symbol owns storage, two objects claim it:
+    g_dispatch_table @0x1002c3f8 handler_func[] size=848 (size)
+      crosses g_before_g_chain_handler_table @0x1002c3fc by 0x34c
+  ```
+
+  **And the refusal is right, not pedantic.**  `g_before_g_chain_handler_table` at
+  0x1002c3fc carries `type = "unsigned char[0x1a4]"`, `size = 420`, is declared in
+  `src/crt_region/section_spans.c`, and **the table's remaining entries are covered by
+  entries like it** -- so `size = 4` for the first slot plus placeholders for the rest is a
+  *consistent* model of 212 pointers, and `848` over-claims 0x34c bytes another symbol owns.
+  **Reverted.**  The dispatch table is not mis-sized; it is covered piecewise.
+- **Which reframes the round-255 work item.**  Those 212 pointers need **C initialisers**
+  in `section_spans.c` rather than a metadata size change -- the metadata already describes
+  the extent, and the defect is that the bytes arrive from a blob instead of from
+  declarations naming the handlers.  **The extents check is what turned a plausible metadata
+  edit into a correct one**, and it is the third time this session that a check caught a
+  change that looked right.
+- **And the checkout moved a third time -- a new record for diagnosis, not for cost.**
+  `HEAD` was back on `b6074799` with `_prologue_read_failed` absent, so recovery was again:
+
+  ```
+  git checkout main && git apply .scratch/rebrew-session-fixes.patch
+  ```
+
+  **One command, one minute, and the gate returned from 10 red rows to 1.**  Round 247 cost
+  a full round to diagnose the same failure; round 256 and this one cost a command each.
+  **That is the whole value of the tooling work this session did.**
+- **Gate state at the cap:** lint 0/0, verify 262/262, 1-function size warning, rebrew
+  checkout preflighted (7981be45) with a named recovery patch, raw-link `.data` 0, residue 0,
+  relocations 590/96 held, raw-link import table MATCHES, exports identical, deliverable
+  byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9% against 90%,
+  `cmake --build` exit 2, **GATE: FAIL on the build alone**.
+
+**Round-256: the checkout moved AGAIN, mid-run -- and round 250's recovery patch restored the session in one command.**
+
+- **The recurrence, and it happened during a gate run.**  Nine red rows appeared with the
+  same signature as round 247, and the preflight had *passed* earlier in the same run:
+
+  ```
+  required rebrew symbols import        <- the preflight, earlier in this run
+  ...
+  ImportError: cannot import name 'binary_info_from_bytes' from 'rebrew.postlink'
+  ```
+
+  **So the editable checkout was moved between the preflight and the residue step.**  The
+  reflog:
+
+  ```
+  b6074799 HEAD@{0}: checkout: moving from main to b6074799f5...
+  7981be45 HEAD@{1}: reset: moving to HEAD
+  7981be45 HEAD@{2}: checkout: moving from b6074799f5... to main
+  ```
+
+  **Something outside this work is checking that commit out repeatedly**, and the two
+  movements are an hour apart -- so it is recurring, not a one-off.
+- **And the recovery was one command, because round 250 saved it:**
+
+  ```
+  git checkout main
+  git apply .scratch/rebrew-session-fixes.patch
+  ```
+
+  **`_starts_function`, `_looks_like_inventory_merge`, `_prologue_read_failed` and the four
+  postlink/binary_loader symbols all came back, the gate went from 9 red rows to 1**, and
+  `lint` returned to 0/0, `verify` to 262/262, the deliverable to byte-identical, the gap to
+  41,565.  **An unverified backup is a second failure waiting to happen; this one was
+  verified in round 250 and used in round 256.**
+- **What that says about the tooling half of the objective, which is what this session was
+  for.**  The two things that would have hidden this -- a gate that reports five symptoms of
+  one cause, and editorial work that lives only in someone else's checkout -- are both now
+  handled: the preflight names the checkout and the missing symbol, and the patch names
+  itself in the gate's own output.  **The failure still happened; it no longer costs a
+  round to diagnose.**
+- **And the objective's status at the cap, unchanged and honestly:**  the **deliverable is
+  byte-identical** (286,720 bytes, whole-file `cmp`), 262/262 annotated functions verify,
+  the raw link loads and its import table matches, relocations hold at 590/96 -- and the
+  **raw link is 41,565 bytes from the reference** with the toolchain's own link refusing
+  postlink at **68.9%** coverage against a 90% floor.  **The first clause is not met and the
+  evidence says it needs the original build's archives; the second clause has 7 gate checks
+  and 6 rebrew fixes behind it and is open by construction.**
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning, rebrew checkout
+  preflighted (7981be45) with a named recovery patch, raw-link `.data` 0, residue 0,
+  relocations 590/96 held, raw-link import table MATCHES, exports identical, deliverable
+  byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9% against 90%,
+  `cmake --build` exit 2, **GATE: FAIL on the build alone**.
+
+**Round-255: the `.data` fixup work item scoped -- 47 tables, 334 targets, one of them 212 entries.**
+
+- **The item, from rounds 231-232:** 260 of the reference's `.data` relocation records are
+  absent from our link because `.data` is emitted as bytes rather than from C initialisers.
+  **This round turns "260 fixups" into a list of things to declare.**  Reading the
+  reference's own `.data` relocations and grouping contiguous four-byte targets:
+
+  | | count |
+  |---|---|
+  | `.data` relocation targets in the reference | **334** |
+  | contiguous tables they form | **47** |
+  | largest table | **212 entries** at `.data 0x02c3f8..0x02c744` |
+  | next | 43 entries at 0x034260; 10 at 0x0294d4; 10 at 0x034318; 6, 4, 3, 2 ... |
+
+  **One table is 63% of the work and it is the dispatch table round 232 found
+  (`g_dispatch_table`), whose metadata still says `size = 4`.**  The next is 43 entries, and
+  **40 of the 47 tables hold ten entries or fewer** -- so the bulk is one array plus a long
+  tail of small ones.
+- **Which makes the "without post linking mangling" clause concrete rather than
+  open-ended.**  The change is: declare each table as an array of the right pointer type
+  initialised with the symbols its entries name, at the VA `rebrew-data.toml` already
+  records, and update the metadata's `size` from 4 to 212 for the dispatch table.  **The
+  offsets, the values and the names are all known** -- the targets are image addresses that
+  the locator resolves.
+- **And it is the honest answer to "how much is left"**: **one 212-entry array, one
+  43-entry table, and 45 small ones** -- not a wall, and not nothing.  Rounds 231-232 found
+  the defect; this round gives it a size.
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning, rebrew checkout
+  preflighted, raw-link `.data` 0, residue 0, relocations 590/96 held, raw-link import
+  table MATCHES, exports identical, deliverable byte-identical, both load OK, OBJECTIVE
+  GAP 41,565, postlink coverage 68.9% against 90%, `cmake --build` exit 2, GATE: FAIL on
+  the build alone.
+
+**Round-254: the generated state table and the gate agree on every row, checked line by line.**
+
+- **The check, because the table's whole purpose is to be believed without re-deriving it:**
+
+  | table row | gate's live value | agree |
+  |---|---|---|
+  | verify `passed` | 262/262 | yes |
+  | `.text` residue | 0, baseline 4 | yes |
+  | raw-link `.data` | 0, baseline 0 | yes |
+  | relocation records | 590 / 96 | yes |
+  | raw-link import table | matches | yes |
+  | OBJECTIVE GAP | 41,565 | yes |
+  | ...of which | 12,893 + 28,672 | yes |
+  | coverage | 5,143/7,463 (68.9%) | yes |
+  | annotations shorter | 1 function, 17 bytes | yes |
+  | `cmake --build` exit | 2 | yes |
+
+  **Ten rows, ten agreements** -- which is what round 238's generator was for, and what
+  round 209's hand-maintained version could not deliver twice in one session.
+- **And the row that changed since round 251 is the one that should have.**  "annotations
+  shorter than the binary" moved from **2 functions / 25 bytes** to **1 function / 17
+  bytes**, and the gate's warning line moved with it:
+
+  ```
+  1 function(s) are SHORTER than the binary's function (17 bytes missing
+  1 of them open with a new function -- INVENTORY MERGES
+  ```
+
+  **A generated document that tracks a fix made three rounds earlier, without anyone
+  editing it, is the whole point.**
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning, rebrew checkout
+  preflighted, raw-link `.data` 0, residue 0, relocations 590/96 held, raw-link import
+  table MATCHES, exports identical, deliverable byte-identical, both load OK, OBJECTIVE
+  GAP 41,565, postlink coverage 68.9% against 90%, `cmake --build` exit 2, GATE: FAIL on
+  the build alone.
+
+**Round-253: the objective assessed against its own words, with the measurement behind each clause.**
+
+- **The objective has two clauses and they stand in different places.**
+
+  | clause | status | evidence |
+  |---|---|---|
+  | *"100% file identical straight out of the toolchain, without post linking mangling"* | **NOT MET** | raw link is **41,565 bytes** from the reference; the toolchain's own link cannot be postlinked at **68.9%** coverage against a 90% floor |
+  | *"fix all tooling deficits ... fix them directly in rebrew"* | **served, open-ended** | 7 gate checks added or repaired; 6 rebrew fixes; 95 inventory entries corrected |
+
+- **And the first clause is an INPUT problem, measured rather than argued.**  Every lever the
+  build can reach was named and tried:
+
+  | lever | rounds | result |
+  |---|---|---|
+  | object order, declaration order, section flags, emitted-object count | 138-155 | no movement |
+  | COMMON pool placement (`--with-commons`, packing, absolutes, `/MERGE`) | 128-155 | linker-internal |
+  | COMMON pool placement (**base-relative `.bss` object**) | 177-182 | **works**, 41,619 -> 39,519, but the layout package then refuses the `.text` |
+  | IAT slot order | 171-176, 212-222 | linker-internal until **round 225**, when inverting the `/include` mapping **fixed it exactly** |
+  | hint/name record order | 226-230 | a second order the linker keeps; no lever found |
+  | import thunks (106 against the reference's 10) | 202-208 | **proved a CRT-archive property** by substituting `LIBC.lib` (0 thunks) |
+  | `/TIMESTAMP` | 241 | **LINK 6.0 has no such option** (LNK4044) |
+  | `.data` pointer tables | 231-232 | 260 loader fixups absent because `.data` is emitted as bytes, not initialisers |
+
+  **Seven families of lever, each measured, and the residue is on the far side of `link.exe`
+  and of archives this image does not have.**
+- **Which is a finding about the objective, not a failure of effort.**  Byte identity of the
+  output needs **identity** of the input -- the original CRT archive, the ordinal-based
+  `WS2_32` import library, the compiler's own COMMON ordering.  **Round 225 is the proof
+  that this reasoning is not an excuse**: one of those "linker-internal" conclusions was
+  wrong, and inverting a mapping fixed the import table exactly.  **Six others were then
+  re-tested and held.**
+- **What is met, precisely.**  `build/server.dll` **is** byte-identical to the reference
+  (286,720 bytes, whole-file `cmp`), 262/262 annotated functions verify, the raw link loads,
+  the relocation records hold at 590/96, and the two-objective gap and the coverage ratio
+  are printed on every run.
+- **And the tooling half is where this session's work went.**  In one session the gate went
+  from having one check that could fail on the raw link to five, from a tautological import
+  check to a real one, from an unchecked build exit to a reported one, and from a
+  hand-maintained state table to a generated one -- **and four checks that could not fail
+  were found and fixed.**
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning (inventory over-count,
+  named), rebrew checkout preflighted, raw-link `.data` 0, residue 0, relocations 590/96
+  held, raw-link import table MATCHES, exports identical, deliverable byte-identical, both
+  load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9% against 90%, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-252: the rebrew work made re-derivable from the tracked documents, not only from a gitignored patch.**
+
+- **Why this is needed.**  Round 250 saved the session's rebrew diff to
+  `.scratch/rebrew-session-fixes.patch`, and `.scratch/` is **gitignored** -- so the
+  recovery aid disappears with a clean.  The patch is still the fast path (verified to
+  apply); this is the durable one.
+- **What was added to rebrew, by name, so it can be rebuilt from this document:**
+
+  | module | symbol | purpose | rounds |
+  |---|---|---|---|
+  | `discover.py` | `_starts_function` | eight prologue shapes = "a function ends here" | 193, 196-197, 245 |
+  | `discover.py` | (sweep change) | record the first `ret` **and** the first `ret` a prologue follows | 195 |
+  | `discover.py` | (recovery) | insert the missed function as a candidate before sizing | 194 |
+  | `discover.py` | `_prologue_read_failed` | one warning per run when a read fails | 219-220 |
+  | `verify.py` | `_looks_like_inventory_merge` | merge vs truncated annotation, from the bytes | 192, 247 |
+  | `verify.py` | `_pe_sections_for_merge_check` | minimal section reader for the check above | 192 |
+  | `verify.py` | (print) | the size-divergence warning in the human output | 189 |
+
+  **326 added lines across two files**, and the four-entry list of symbols the project's
+  own scripts import -- `binary_info_from_bytes`, `map_coverage`, `FIXERS`,
+  `decode_binary_name` -- is what round 247's preflight now checks every run.
+- **Which closes the last durability hole this session opened.**  The work is in the
+  checkout, named in the patch, **and** described here well enough to rewrite: the two
+  places it can be lost have a recovery path each, and the second one is tracked.
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning, rebrew checkout
+  preflighted with a named recovery patch, raw-link `.data` 0, residue 0, relocations
+  590/96 held, raw-link import table MATCHES, exports identical, deliverable byte-identical,
+  both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-251: full gate re-verified after the checkout recovery. Every row is measured and the only red one is the objective's own unmet condition.**
+
+- **The complete run, 26 rows, nothing inherited:**
+
+  | group | rows | value |
+  |---|---|---|
+  | source | lint / verify / size divergences | **0-0 / 262-262 / 1, and it is an inventory merge** |
+  | **rebrew checkout** | HEAD, uncommitted, symbols, patch | **7981be45, 2, import OK, patch named** |
+  | raw link | `.data` / residue / relocations / imports / load | **0 / 0 / 590-96 / MATCH / OK** |
+  | deliverable | imports / load / whole-file / criteria | **match / OK / byte-identical / deliverable-only** |
+  | objective | OBJECTIVE GAP / coverage | **41,565 / 68.9% against 90%** |
+  | **red** | `cmake --build` | **exit 2** |
+
+  **The size-divergence row now reads "1 of them open with a new function -- INVENTORY
+  MERGES"**: round 247's detector fix sees the jump-table merge that rounds 245-246
+  measured but could not detect, so the one remaining entry is named as an inventory
+  over-count rather than left as an unexplained shortfall.
+- **And the gate's own history is visible in its output now.**  Every check that this
+  session fixed prints something it did not before: the whole-file comparison (round 166),
+  the relocation records (170), the build's exit status and the coverage ratio (183, 234),
+  the raw-link import table (210), the checkout preflight and its recovery patch (249-250),
+  and the state table that regenerates itself (238).
+- **What is still red, stated once more because it is the whole answer:** the toolchain
+  cannot produce the deliverable unaided at 68.9% coverage against a 90% floor, and the raw
+  link is 41,565 bytes from the reference.  **Both trace to code we have not reproduced and
+  to libraries we link as stock**; rounds 128-251 measured every lever the build can reach
+  and found the remainder on the far side of `link.exe` and of archives this image does not
+  have.
+- **Gate state:** as tabulated -- 25 rows measured, 1 red, and the red one is true.
+
+**Round-250: this session's rebrew fixes are saved as a patch, and the gate points at it.**
+
+- **Why a patch and not a commit.**  The two files this session changed in rebrew
+  (`discover.py`, `verify.py`) live in someone else's editable checkout, which was moved off
+  `main` once already and whose edits survived only because a `git stash` happened to hold
+  them.  **Committing to that checkout is not this project's call; making the work
+  recoverable is.**  `git diff` of the two files is written to
+  `.scratch/rebrew-session-fixes.patch` (420 lines, 2 files) and the gate names it on every
+  run:
+
+  ```
+  rebrew HEAD: 7981be45
+    (2 uncommitted file(s) in the checkout)
+    recovery patch: .scratch/rebrew-session-fixes.patch
+  required rebrew symbols import
+  ```
+
+- **And the patch was verified rather than assumed.**  Stashing the working tree, applying
+  the patch to the clean checkout with `--check`, and popping the stash back:
+
+  ```
+  patch applies cleanly to a clean tree
+  ```
+
+  **An unverified backup is a second failure waiting to happen** -- and this session has
+  already paid for one assumption of that kind.
+- **The patch holds the session's rebrew work, listed so it can be reviewed rather than
+  trusted:**
+
+  | fix | rounds |
+  |---|---|
+  | `verify.py`: prints annotations shorter than the binary's function | 189 |
+  | `verify.py`: tells inventory MERGES from truncated annotations | 192, 247 |
+  | `discover.py`: recovers the functions a merge hid | 193-194, 245 |
+  | `discover.py`: sweeps every `ret`, not just the first | 195 |
+  | `discover.py`: eight prologue shapes across three rounds | 196-197, 245 |
+  | both: a read failure is reported once instead of looking like "not found" | 219-220 |
+
+  **None of it moved the OBJECTIVE GAP, and all of it changed what the project can see**
+  -- which is the honest summary of the tooling half of this objective.
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning, **rebrew checkout
+  preflighted with a named recovery patch**, raw-link `.data` 0, residue 0, relocations
+  590/96 held, raw-link import table MATCHES, exports identical, deliverable byte-identical,
+  both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-249: the gate preflights the rebrew checkout -- the incident that cost a round now reports itself by name.**
+
+- **The failure mode, restated because it is the reason for the check.**  The editable
+  rebrew checkout was moved off `main`, and nothing said "wrong commit".  What the gate
+  said was:
+
+  ```
+  REGRESSION: raw-link .data not measured
+  REGRESSION: the pre-fixer section table is missing from the residue report
+  REGRESSION: wine load check failed
+  REGRESSION: rebrew library match d3dx8 failed on GOLDTL
+  REGRESSION: the deliverable differs from the reference
+  ```
+
+  **Five symptoms, one cause, and the cause was in a log file**: `postlink_residual.py`
+  raising `ImportError: cannot import name 'map_coverage'`.  **A gate that reports five
+  wrong things about a sixth is the same class as the checks this session has been fixing**
+  -- a metric reporting on an artefact rather than the thing it names.
+- **The check, before anything depends on the checkout:** it prints the checkout's
+  `HEAD`, the count of uncommitted files, and the result of importing the four symbols the
+  project's own scripts need:
+
+  ```
+  == rebrew checkout
+  rebrew HEAD: 7981be45
+    (2 uncommitted file(s) in the checkout)
+  required rebrew symbols import
+  ```
+
+  and on failure it says what to look at rather than what broke:
+
+  ```
+  REGRESSION: the editable rebrew checkout is unusable -- rebrew.postlink.map_coverage (ImportError)
+    The project does NOT build against this checkout.  Check
+    `git -C /home/maci/Desktop/Projects/relumea/rebrew rev-parse HEAD`:
+    a moved HEAD is the cause, not a regression in this tree.
+  ```
+
+  **`git rev-parse HEAD` is printed every run**, because the lesson of round 247 was that
+  `git status` on a checkout something else can move is not evidence about which commit the
+  project is built against.  **The uncommitted-file count is printed too**, so a reader can
+  see that this session's rebrew fixes are present rather than committed.
+- **And it makes the session's rebrew work visible.**  The two uncommitted files are
+  `discover.py` and `verify.py` -- the prologue shapes, the ret-sweep, the once-per-run
+  read warning and the merge detector.  **They live in a working tree that a `git checkout`
+  can erase**, which is exactly what happened once; the gate now says so on every run.
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning, **rebrew checkout
+  preflighted**, raw-link `.data` 0, residue 0, relocations 590/96 held, raw-link import
+  table MATCHES, exports identical, deliverable byte-identical, both load OK, OBJECTIVE GAP
+  41,565, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-248: the recovered functions attributed as far as the project's own machinery can.**
+
+- **The 11 certain ones are marked.**  Of the 101 functions the inventory regeneration
+  recovered, **11 sit inside an old entry carrying a `// LIBRARY:` marker** -- crc32's
+  continuation at 0x100011fb and its neighbours in `library_zlib.h`, five more in
+  `library_msvc.h` -- and are now marked with the same module and a size from the
+  regenerated inventory.  **The denominator moves 337 -> 335 and lint stays clean at
+  0/0.**
+- **And the rest cannot be attributed by the existing machinery, which is the finding.**
+  `rebrew library match` compares *reversed functions* -- annotated bodies -- against an
+  archive, and the recovered functions are unnamed `fcn.<va>` rows with no source.  There
+  is nothing to match and nothing to compile, so **~55 recovered functions default to
+  "game work" by absence rather than by evidence.**
+- **Which is the honest state of the count, and worth stating plainly:** `rebrew status`
+  now reads **262/335**.  The numerator is real.  The denominator is **280 game functions
+  the old inventory exposed plus 55 recovered rows whose status is unknown** -- some are
+  game code the merged entries hid (which is the fix working), some are statically-linked
+  library code the project does not reverse (which is the fix over-counting).
+  **Attribution needs a body to compare, and a body needs an annotation, so the answer is a
+  person or a decompiler looking at 55 addresses -- not another rebrew pass.**
+- **And the wrong-checkout incident is closed.**  Round 247's recovery holds: `main`
+  (7981be45), every needed symbol imports, lint 0/0, deliverable byte-identical, raw-link
+  imports matching, relocations 590/96 held, OBJECTIVE GAP 41,565.
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-247: the rebrew checkout was on the WRONG COMMIT. That, not any edit of mine, broke the deliverable and the lint row.**
+
+- **The symptom chain, from the user's question about the function count.**  `rebrew status`
+  began reporting **262/375** where it had reported **262/280**, and `rebrew lint` went from
+  0 warnings to 7 -- neither attributable to a change I could point at.  The answer was not
+  in the project at all:
+
+  ```
+  current HEAD: b6074799 merge fix/scope-keeps-external-libs
+  stash base : 7981be45 release: v2.18.0
+  reflog:
+    b6074799 HEAD@{0}: checkout: moving from main to b6074799f5...
+  ```
+
+  **The editable rebrew checkout had been moved off `main` mid-session by something outside
+  this work.**  The commit it moved to lacks `postlink.map_coverage`,
+  `postlink.binary_info_from_bytes`, `binary_loader.decode_binary_name` and the lint
+  behaviour the project depends on -- so **`scripts/postlink_residual.py` died with an
+  ImportError**, the deliverable was never rebuilt, and every downstream row
+  (`raw-link .data`, the pre-fixer table, wine load, lib-match, toolchain detect) failed
+  **because of one missing module symbol, not because the project regressed.**
+- **And the work was recoverable because it was stashed, not lost.**  `git stash list` held
+  the working state including this session's `discover.py` and `verify.py` edits; returning
+  to `main` and applying it restored every symbol.  **Verified by importing all four:**
+
+  ```
+  from rebrew.postlink import binary_info_from_bytes, map_coverage, FIXERS
+  from rebrew.binary_loader import decode_binary_name
+  from rebrew.verify import _looks_like_inventory_merge
+  from rebrew.discover import _starts_function
+  ```
+
+- **And the gate came straight back:**
+
+  | row | before the fix | after |
+  |---|---|---|
+  | lint | **7 warnings** | **0 errors, 0 warnings** |
+  | raw-link `.data` | "not measured" | **0, baseline 0 held** |
+  | deliverable | **differs** | **byte-identical (286,720 bytes)** |
+  | raw-link imports | -- | **match (100)** |
+  | relocation records | -- | **590 / 96 held** |
+  | OBJECTIVE GAP | -- | **41,565** |
+
+  **The only red row is `cmake --build exit 2`, which it has been all session.**  The 7
+  W022 warnings were therefore an artefact of the wrong checkout's lint, not of the seven
+  `= 0` initializers I spent a round trying to remove -- **and the de-initialisation was
+  reverted before it could do more damage**, having already broken the deliverable.
+- **And the user's question, answered.**  `status`'s denominator is
+  `|annotated ∪ (inventory − library)|` (`status.py:437`), where *library* means VAs with a
+  `// LIBRARY:` marker or a module in `external_libs`.  The inventory regeneration of
+  rounds 193-197 split merged entries and recovered **101 functions (543 -> 644)**, and the
+  markers name the OLD entries' start addresses -- so functions that used to sit inside a
+  marked entry (crc32's continuation at 0x100011fb, for one) became separate and unmarked.
+  **On `main` the denominator is 337; 44 of the 101 are still excluded as library and 57 are
+  counted as game work.**  Since the project does not reverse LIBCMT/CRT/zlib, those need
+  attribution before the count is honest.
+- **The lesson, which cost a round to learn twice.**  Two rounds ago the same checkout
+  question was answered by reading `git show HEAD` and comparing with the stash; **`git
+  status` on a checkout someone else can move is not evidence about which commit the
+  project is built against.**  `git rev-parse HEAD` and the reflog are.
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-246: the last divergence is a merge too -- hidden behind a jump table. All twelve were inventory defects.**
+
+- **The arithmetic, finally correct.**  `cm_DispatchProduction` at 0x10010260:
+
+  | | bytes | contents |
+  |---|---|---|
+  | code | **116** | ends `83 c8 ff c3 8b ff` -- `or eax,-1; ret; mov edi,edi` |
+  | jump table at +116 | **28** | seven 4-byte entries, `0x10010288 .. 0x100102c4`, all `.text` |
+  | **+144 onward** | **17** | **real code**: `mov eax,[esp+4]; add eax,0x10; push eax; call ...; ret` |
+
+  **116 + 28 = 144, exactly the annotation**, and the inventory's 161 is that plus **the
+  next function**.  **So it is a merge** -- and `_looks_like_inventory_merge` cannot see it,
+  because the rule is "a `ret` followed by a prologue" and **what precedes this function is
+  a jump table, not a `ret`.**
+- **Which closes the sequence that began in round 189.**  **All twelve size divergences were
+  inventory defects; none was a truncated annotation.**  The count went 12 -> 11 -> 8 -> 3
+  -> 2 -> 1 across rounds 193-197 and 245, each step a prologue shape or a sweep correction,
+  and the last one went by arithmetic rather than by another shape.  **Twelve apparent
+  reverse-engineering tasks, and not one of them was one.**  The genuine work items are
+  named in the next bullet.
+- **And it corrects round 245's write-up**, which called this a code-generation difference
+  between two spellings of the same `switch`.  **The measurement that settled it was one
+  offset**: the first read used the `.text`-relative offset 0xF260 as a file offset and
+  described 176 bytes of the wrong function, which is precisely round 199's off-by-0x1000.
+  **Third time in this session that comparing the whole region beat explaining a spot** --
+  and the fix each time is to derive the offset from the section table instead of
+  subtracting by hand.
+- **What is actually left in the size list: nothing that is a reversing task.**  The single
+  remaining entry is this one, and it is the inventory's trailing padding.  **The genuine
+  work items this session identified are elsewhere**: the 260 `.data` pointers that need
+  initialisers (round 231-232), the pointer tables' metadata sizes, and the last third of
+  `.text` that round 215 found is not the reference's instruction stream.
+- **Gate state:** lint 0/0, verify 262/262, 1-function size warning (an inventory over-count,
+  cause named), raw-link `.data` 0, residue 0, relocations 590/96 held, raw-link import table
+  MATCHES, exports identical, deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565,
+  postlink coverage 68.9% against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the
+  build alone.
+
+**Round-245: one more prologue shape -- 2 divergences left become 1, and the last one is a JUMP TABLE, not a merge.**
+
+- **The shape, found by reading the binary rather than guessing.**  `cm_MarkAndReturn`'s
+  inventory entry ends at 0x1000d33e while the binary has a **second function at
+  0x1000d340**:
+
+  ```
+  0x1000d33d  c3                ret        <- our function ends
+  0x1000d33e  90 90             nop nop    <- padding
+  0x1000d340  b8 01 00 00 00    mov eax, 1 <- a NEW function: `return 1;`
+  0x1000d345  c3                ret
+  ```
+
+  **`b8 <imm32>` followed by `ret`** -- a function that is nothing but a constant return.
+  The detector had five shapes for a frame-establishing prologue and none for this, so the
+  merge read as a truncation.  Added, deliberately narrowed to `b8 <imm32> ret` rather than
+  bare `b8`, because a mid-function `mov eax, <something>` is common and a `ret` five bytes
+  later is not:
+
+  | | before | after |
+  |---|---|---|
+  | inventory functions | 638 | **644** |
+  | size divergences | **2** | **1** |
+  | bytes missing | 25 | **17** |
+
+- **And the last one was written up as a codegen difference and is not -- corrected in
+  round 246.**  `cm_DispatchProduction` (annotated 144, inventory 161) looked like a
+  `switch` that the reference compiled to a jump table and ours did not.  **Reading it with
+  the correct file offset** (RVA 0x10260, not the `.text`-relative 0xF260 -- an off-by-0x1000
+  of mine, round 199's exact class):
+
+  | | bytes |
+  |---|---|
+  | code | **116**, ending `83 c8 ff c3 8b ff` (`or eax,-1; ret`) |
+  | jump table at +116 | **28**, seven 4-byte entries, all `.text` addresses |
+  | **+144 onward** | **17 bytes of REAL CODE**: `8b442404 83c010 50 e843160000 83c404 c3` |
+
+  **code + table = 144 -- exactly our annotation** -- and the inventory's 161 is that plus
+  **the next function**.  So it was an inventory merge after all, **and the detector could
+  not see it because the merge point is behind a jump table**: the rule wants a `ret`
+  followed by a prologue, and what precedes this function is a table, not a `ret`.
+- **So the size-divergence list is down to one entry with a named cause**, from twelve
+  entries and 3,771 bytes in round 189 -- **and that last one is a codegen item for the
+  reversal ladder, not a discovery defect.**  The detector has now been given **eight**
+  prologue shapes across rounds 192-197 and 245, each added because a measured boundary
+  showed it missing.
+- **Gate state:** lint 0/0, verify 262/262, **1-function** size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9%
+  against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-244: the gate's whole output read line by line. Every row is meaningful, and the two red ones are the objective's own two unmet conditions.**
+
+- **The audit, 25 rows, each asked one question: can this line ever be false?**  After four
+  fixes to checks that could not fail (whole-file 166, exit status 183, import redirect 210,
+  threshold 217-218), the remaining rows all have a way to go red and each is measured
+  against something outside itself:
+
+  | group | rows | measured against |
+  |---|---|---|
+  | integrity | build-tree, toolchain images, toolchain alignment, pins | `build/`, `docker`, the reference's own code generator |
+  | source | lint, verify, size divergences | 4,118 files; 262 annotations; the binary's function extents |
+  | **raw link** | residue, **relocation records**, **import table**, raw-link load, OBJECTIVE GAP | `build/split_poc.dll` vs the reference |
+  | deliverable | import table, wine load, whole-file `cmp`, objective criteria | `build/server.dll` vs the reference |
+
+  **Four of the twenty-five are new this session** (whole-file, relocation records, the
+  raw-link import table, the coverage row) and **three were repaired** -- and the raw link
+  now has five independent checks where before this session it had two.
+- **And the two red rows are exactly the objective.**  The gate prints:
+
+  ```
+  REGRESSION: cmake --build failed (exit 2) while matching 0 compiler/linker errors
+  error: postlink failed: built .text is not position-aligned ... 5143/7463 (68.9%)
+  OBJECTIVE GAP: 41565 bytes between the raw link and the reference
+  ```
+
+  **"100% file identical straight out of the toolchain" fails in two ways and the gate names
+  both**: the raw link is 41,565 bytes off, and the toolchain's own link cannot be
+  postlinked into the deliverable at 68.9% coverage against a 90% floor.  **Neither is a
+  check bug, and round 236 showed the second is not a criterion artefact either.**
+- **What the gate says that is green and was not before this session:**
+
+  | | before | now |
+  |---|---|---|
+  | raw-link import table | **tautological check** | **matches the reference** |
+  | whole-file comparison | absent | deliverable byte-identical, asserted |
+  | relocation records | unmeasured | 590/96 held |
+  | build exit status | unchecked | exit 2 reported |
+  | coverage | buried in an error | a named row |
+- **Gate state:** the same two red rows; everything else held.  **The gate is now as honest
+  as this branch can make it, and what it reports is that the raw link is not the
+  reference's.**
+
+**Round-243: the tree audited for experiment leftovers -- the absolute-symbol object is deliberate, not one.**
+
+- **What the audit found.**  `git status` shows the session's edits where they belong
+  (`scripts/gate.sh`, `scripts/emit_thunks.py`, `src/crt_region/crt_imports.c`,
+  `db/inventory-server.dll.json`) and no experiment scratch in `scripts/` -- every stray
+  response file, trial image and strip directory from rounds 175-241 was removed as it was
+  made.  **One artefact looked like a leftover and is not:**
+  `build/abs__z_errmsg_empty.obj`, cited by **both** response files, i.e. part of the link.
+- **It is generated on purpose, and `split_link.sh` says why.**  It defines
+  `_z_errmsg_empty` as a **COFF absolute symbol** (section -1, value 0x10034620):
+
+  > *"z_errmsg empty-string anchor. The CMake link already carries the same absolute
+  > object; appending a second copy is a duplicate symbol."*
+
+  and its neighbour promotes the `$T17396`-style static labels that `split_coff` leaves
+  undefined when it splits a member per section -- **the seven SEH prologues that would
+  otherwise push 0x10000000 where the reference pushes a scopetable address** (round 180's
+  21 bytes, 7 of postlink's failing operands).  **No section bytes are added, so the
+  geometry is untouched.**
+- **And it is a link-time placement technique, which is worth naming against the
+  objective.**  "Without post linking mangling and manual padding" is about the *output*,
+  but an absolute symbol pins an address at link time and **round 126 measured the cost of
+  that class precisely**: a build using them scored **39,061 against 41,619** -- better --
+  while shipping an image **that did not load**, because forcing an address removes the
+  relocation that makes it an address.  **The gate's raw-link load check exists because of
+  that round**, and the current absolute use is narrow enough to pass it.
+- **Which is the honest position on it:** deliberate, documented, small, and **not free** --
+  it is one of the places the split link substitutes a link-time address for a produced
+  one.  Recorded so the next reader does not have to re-derive whether it is debris.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, **raw link loads OK**, OBJECTIVE GAP 41,565, postlink coverage
+  68.9% against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-242: the state-table writer ate the prose around it. Anchored; the duplicate table removed.**
+
+- **Two defects in what round 238 added, both found by reading the document rather than
+  the writer's output.**
+
+  | defect | cause | fix |
+  |---|---|---|
+  | a SECOND state table sat below the generated one | the generator was inserted without removing the hand-maintained block round 209 had left | **removed**, with its obsolete round-209 prose |
+  | the round-238 note was **deleted** by the writer | the note quotes the marker strings, and the regex matched them anywhere | **anchored to line starts** |
+
+  **The second is the interesting one.**  `re.sub(BEGIN + ".*?" + END, block, text, flags=re.S)`
+  finds the *first* `<!-- CURRENT-STATE:BEGIN -->` and the *next* `<!-- CURRENT-STATE:END -->`
+  -- and the round-238 note contains both as quoted text, so the match ran from the real
+  open marker to the quoted close marker and replaced the note, the fix description and the
+  round-237 heading with a table.  **It ran once per gate run and looked like success:**
+
+  ```
+  state table regenerated: verify 262/262, gap 41565, imports matches
+  ```
+
+  **A generated document that can silently eat the prose around it is the same failure the
+  table itself had** -- correct content, wrong place, nothing reporting it.
+- **The fix is one anchor:**
+
+  ```python
+  pattern = r"(?m)^" + re.escape(BEGIN) + r"$.*?^" + re.escape(END) + r"$"
+  ```
+
+  **Both markers must own their line**, which quoted prose never does.  Verified after a
+  full gate run: **one marker pair, one table, note intact.**
+- **And it is the seventh measurement/tooling error this branch has caught in its own work**
+  (rounds 95, 101, 119, 183, 199, 236-237, 242).  **The pattern is unchanged: the artefact
+  was produced, the number was plausible, and only reading the result found it.**
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9%
+  against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-241: LINK 6.0 has no `/TIMESTAMP`. The two clock bytes cannot be controlled at link time.**
+
+- **The idea, and it was a good one.**  Round 239 found the raw link's only non-determinism
+  is the PE `TimeDateStamp` at 0xD0 (plus a copy at `.rdata+0x2e34`).  The reference's is a
+  real date -- **0x699004a9, 2026-02-14 05:14:17 UTC** -- and `link.exe` has a
+  `/TIMESTAMP:<value>` option in every version from 7 onward, which would make the raw link
+  reproduce the original's stamp and remove those bytes from the gap.
+- **And LINK 6.0 rejected the flag by name:**
+
+  ```
+  LINK : warning LNK4044: unrecognized option "TIMESTAMP:0x699004a9"; ignored
+  ```
+
+  **Measured, not assumed**: the flag was placed on the link line, and the resulting image's
+  `TimeDateStamp` was **0x6abc878b** -- the build clock -- with the gap unchanged at
+  41,565.  `/TIMESTAMP` arrived with the linker that shipped with Visual Studio .NET;
+  MSVC 6 does not have it.
+- **So the stamps are a property of the toolchain that cannot be set**, and they are two
+  bytes of the gap that no source change reaches -- the same category as the CRT's import
+  thunks (rounds 202-208) and the COMMON allocation (rounds 140-155).  **Three levers now
+  measured as absent rather than assumed absent.**
+- **And it is worth noting what the deliverable does here.**  `rebrew build postlink` writes the
+  reference's own header values, which is why the **deliverable** is byte-identical while
+  the **raw link** carries the build clock.  **The two bytes are a difference the objective
+  names and the toolchain cannot remove** -- which is a small, concrete part of why "straight
+  out of the toolchain" is not reachable with these tools.
+- **Cleaned up:** the trial image and its library removed.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9%
+  against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-240: the 41,564 reading does not reproduce. The gap is 41,565; the outlier is unexplained and stays that way.**
+
+- **The check.**  Two more full gate runs:
+
+  ```
+  OBJECTIVE GAP: 41565 bytes between the raw link and the reference
+  OBJECTIVE GAP: 41565 bytes between the raw link and the reference
+  ```
+
+  **Four measurements now agree on 41,565** -- two saved links (round 239) and two gate
+  runs (this round) -- against **one** reading of 41,564 (round 238).  So the outlier is
+  not a variance to be quoted, and round 238's `± 1` has been corrected in place.
+- **And the correct disposition of an unexplained sample is to say so.**  The tempting
+  moves were to average it (41,564.5, a number no measurement produces) or to call it
+  noise (which would licence ignoring the next one).  **Neither; it is recorded as one
+  reading with no cause found**, and the reproducible value is what the gate and the state
+  table carry.
+- **What the round does leave standing** is round 239's real result: the link is
+  non-deterministic in exactly **two bytes**, both timestamps, and both differ from the
+  reference's in every run -- so nothing that varies is inside the gap.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP **41,565** (four measurements),
+  postlink coverage 68.9% against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the
+  build alone.
+
+**Round-239: the link IS non-deterministic -- two timestamp bytes -- but that is not where the gap's +/-1 came from.**
+
+- **The determinism test.**  Three consecutive `scripts/split_link.sh` runs, three
+  different md5s:
+
+  ```
+  run 1: a859a68b1a7b929d71ab7ce68e432149
+  run 2: 31d7140c1809260cb3b62d812df1f10d
+  run 3: 4982e2060c012f05a829c605df63817b
+  ```
+
+  **Same size (258,048), and `cmp -l` between two of them finds exactly TWO differing
+  bytes:** file offset **0xD0**, which is the PE **`TimeDateStamp`**, and **0x26E34**,
+  `.rdata+0x2e34`, which carries the same value.  **So the link is deterministic in
+  everything except the build clock** -- and both bytes differ from the reference's in
+  every run (0x61/0x8c against 0x00 and 0xa0), so they contribute a constant to the gap,
+  not a varying one.
+- **And that refutes the +/-1 explanation round 238 offered.**  Measuring the gap on two
+  saved links independently gives **41,565 for both**.  So the gate's once-reported
+  **41,564** is not link content and not the timestamps.  **The remaining candidates are
+  the gate's own summation** -- it adds hex values scraped from the residue report's table
+  -- **or the residue step's own arithmetic.**  Recorded as an open question rather than
+  attributed, because the two artefacts I can measure agree with each other and disagree
+  with one gate run, and a 1-byte discrepancy is exactly the size that invites a wrong
+  explanation.
+- **And it is a real tooling item rather than trivia**: a progress meter that reads
+  differently on identical inputs cannot be used to judge a 1-byte change, and this branch
+  has made 1-byte changes (round 216).
+- **What is already established about the two timestamps:** they are the only
+  non-determinism, they are in headers the reference fixes, and **postlink writes the
+  reference's own values there** -- which is why the deliverable is byte-identical while
+  the raw link is not.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9%
+  against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-238: the state table is now GENERATED, not maintained -- it had gone stale twice in one session.**
+
+- **The recurrence.**  `docs/TODO.md`'s CURRENT STATE table was corrected by hand in round
+  209 and was stale again by round 238: it still read *"raw-link import table: 15 of 100
+  entries differ"* after round 225 made them match, and *"OBJECTIVE GAP 41,619"* against a
+  measured 41,565.  **Correcting an instance fixes the instance; the table's own heading
+  says "Live numbers are `scripts/gate.sh` defaults" and nothing made that true.**
+- **The fix: `scripts/update_state_table.py`.**  It reads a gate run on stdin, extracts the
+  ten measured rows, and rewrites the block between the two state markers.  `scripts/gate.sh`
+  calls it at the end of every run, **best-effort** -- a documentation write must never
+  decide the gate's verdict:
+
+  ```
+  state table regenerated: verify 262/262, gap 41565, imports matches
+  ```
+
+  The regenerated table immediately showed three rows the hand-maintained one had wrong
+  (imports, gap, gap decomposition), **none of which needed a human to notice them.**
+- **And the writer clobbered this very note on its first runs, which is the lesson worth
+  keeping.**  It matched the marker strings wherever they appeared, and this note quotes
+  them -- so the regex replaced everything from the quoted open marker to the quoted close
+  marker and **deleted the paragraph explaining the fix**.  Repaired in round 242, and the
+  writer now anchors both markers to the start of a line:
+
+  ```python
+  re.sub(r"(?m)^" + re.escape(BEGIN) + r"$.*?^" + re.escape(END) + r"$", block, text, flags=re.S)
+  ```
+
+  **A generated document that can silently eat the prose around it is the same failure the
+  table itself had** -- correct content, wrong place, nothing reporting it.
+
+**Round-237: my reader and rebrew now agree (68.7% against 68.9%). The 2.5-point gap was a signed/unsigned bug of mine.**
+
+- **The correction.**  Round 236 classified failing calls by comparing `struct.unpack_from("<i",
+  ...)` -- **signed** -- against the displacement parsed from the layout file, while rebrew
+  reads the slot with `struct.unpack_from("<I", ...)` -- **unsigned**.  For a negative
+  displacement the two never compare equal, so **30 entries were misclassified as
+  "displacement matches but fails the context test"**, and round 236's headline
+  decomposition was wrong in that row.  Re-run with rebrew's own reading:
+
+  | class | round 236 (signed) | **round 237 (unsigned)** |
+  |---|---|---|
+  | validating | 1,590 (58.7%) | **1,760 (65.0%)** |
+  | not an `E8`/`E9` at the offset | 882 | **882** (unchanged) |
+  | target matches, context bad | 30 | **0** |
+  | target differs | 205 | **65** |
+
+  **Zero entries fail with a matching target**, because `map_coverage`'s `cur == val`
+  branch already accepts them -- the docstring's *"or it already holds the reference
+  value"* is implemented, and round 236's 30 were an artefact of comparing a signed read
+  against an unsigned constant.
+- **And the whole-map figure reconciles.**  `(3,369 operands + 1,760 calls) / 7,463 =
+  **68.7%**`, against rebrew's own **68.9%** -- a 0.2-point difference, not the 2.5 points
+  round 234 recorded.  **The two independent measurements now agree**, which is worth more
+  than either number: the gap between them was a bug in mine, and finding it took one
+  change of dtype.
+- **And the conclusion is unchanged, which is the point of re-deriving it.**  **882 of the
+  947 failures are still "not a call in our build"** -- code we have not reproduced -- so
+  the floor remains an honest measure and `.text` remains the work.
+- **This is the sixth measurement error this branch has caught in its own work** (rounds
+  95, 101, 119, 183, 199, 236-237), and every one was **reading a value in a different
+  form from the one the tool reads it in**: region, offset, then dtype.  **The countermeasure
+  that keeps working is comparing against the tool's own arithmetic -- here, one line of
+  `postlink.py` read before trusting the classification.**
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9%
+  against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-236: the failing calls decomposed -- 79% are not calls at all in our build. The prefix-window hypothesis is refuted.**
+
+- **The lead, and why it looked strong.**  The first failing call below `.text+0x4000`
+  (`.text+0x1d7`, in `fcn.10001130`) has a **matching displacement** -- both call
+  0x10003640 -- and fails only because the two bytes before the `E8` differ:
+
+  ```
+  ref  ...68 34 70 02 10 e8 65 24 00 00...
+  ours ...68 34 1a 03 10 e8 65 24 00 00...
+  ```
+
+  `02 10` against `03 10` -- **the high bytes of a `push <address>` immediate**, differing
+  for the reason every address on this branch differs.  The layout's `prefix2` window
+  includes them, so **a call whose target is correct fails because a neighbouring operand
+  moved** -- which would make the 90% floor partly an artefact of the window, and might
+  explain why `cmake --build` refuses.
+- **And the hypothesis is refuted by the count.**  Classifying all 2,707 call entries:
+
+  | class | count | share |
+  |---|---|---|
+  | validate | 1,590 | 59% |
+  | fail, **displacement matches** (false negatives) | **30** | **2.7% of the 1,117 failures** |
+  | fail, displacement differs (wrong target) | 205 | 18% |
+  | fail, **not an `E8`/`E9` at that offset** | **882** | **79%** |
+
+  **882 of the 1,117 failures are not calls in our build at all** -- the bytes there are a
+  different instruction, which is round 215's finding (only 75% of the instruction stream
+  is the reference's) measured on postlink's own data.  **The false negatives are 30
+  entries, 0.4% of the map**: real, worth knowing, and nowhere near enough to move 68.9%
+  to 90%.
+- **So the coverage floor stands as an honest measure of reproduced code**, and the
+  `cmake --build` failure is not a criterion artefact.  **The round's value is that it
+  removes a plausible and wrong explanation** -- one that would otherwise have justified
+  relaxing the floor, which is exactly the move that would have hidden the real gap.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9%
+  against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-235: the failing calls are concentrated in the last third, and it is the same third round 215 found.**
+
+- **The distribution.**  Of 2,685 readable call entries, 1,095 fail -- bucketed by
+  `.text` position:
+
+  | region | failing calls |
+  |---|---|
+  | `.text+0x0000-0x3fff` | 15 |
+  | `.text+0x4000-0x7fff` | 21 |
+  | `.text+0x8000-0xbfff` | 116 |
+  | `.text+0xc000-0xffff` | 50 |
+  | `.text+0x10000-0x13fff` | 33 |
+  | `.text+0x14000-0x17fff` | 14 |
+  | **`.text+0x18000-0x1bfff`** | **358** |
+  | **`.text+0x1c000-0x1ffff`** | **283** |
+  | **`.text+0x20000-0x23fff`** | **205** |
+  | **last three buckets** | **846 of 1,095 = 77%** |
+
+  **Three quarters of the failures sit past `.text+0x18000`**, which is exactly where
+  round 215's instruction-stream agreement ends (36,575 instructions, `.text+0x19160`).
+  **Two independent measurements, taken twenty rounds apart from different data, put the
+  same boundary in the same place.**
+- **And the 15 in the first 16 KB are worth naming rather than ignoring.**  They are not
+  the same phenomenon: that region is where the streams agree instruction-for-instruction,
+  so a failing call there means the two bytes before an `E8` are not the recorded pair
+  **while the surroundings are right** -- the narrow, checkable case, and the one a
+  candidate function's fix would flip first.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 68.9%
+  against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-234: the coverage ratio is now a named gate row, and my independent reader disagrees with rebrew's by 2.5 points.**
+
+- **Why it needed naming.**  `rebrew build postlink` prints the ratio inside its failure
+  message, so it read as part of an error blob rather than as **the objective's own
+  progress meter**.  The gate now extracts it and prints it beside the gap:
+
+  ```
+  compile/link errors: 0   cmake exit: 2
+  postlink layout-map coverage: 5143/7463 layout-map entries validate (68.9%
+    (the floor is 90%; it is code, not placement -- see OBJECTIVE GAP)
+  ```
+
+  **Two numbers on every run now measure the objective directly:** `OBJECTIVE GAP 41,565`
+  for the raw link, and this ratio for whether the toolchain can produce the deliverable
+  unaided.
+- **And the two measurements disagree, which is recorded rather than smoothed.**  Round
+  233's independent reader got **66.4%** (operands 70.8%, calls 58.7%) where rebrew reports
+  **68.9%**.  Both implement the same docstring; the difference is in the call rule --
+  mine requires the recorded prefix and suffix to match exactly, rebrew's also accepts a
+  call that already holds the reference displacement.  **Neither is wrong and the gap
+  matters less than the fact that both are far below 90%**; but a reader comparing the two
+  should know why they differ rather than concluding one is broken.
+- **And it is in the CURRENT STATE table** now, so the state document carries the number
+  rather than only the prose in a round note.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, **postlink coverage
+  68.9% against a 90% floor (named)**, `cmake --build` exit 2, GATE: FAIL on the build
+  alone.
+
+**Round-233: postlink's coverage floor measured faithfully -- 66.4%, and it is CODE, not placement.**
+
+- **The measurement, implementing postlink's own two criteria** rather than a stricter
+  proxy.  `map_coverage`'s docstring: an operand validates when the slot already holds the
+  reference value **or** a pointer into the reference's `.rdata`/`.data` span; a call
+  validates when it already holds the reference value **or** sits on an `E8`/`E9` with the
+  recorded two-byte context on either side.
+
+  | map | validating | total | coverage |
+  |---|---|---|---|
+  | operands | 3,369 | 4,756 | **70.8%** |
+  | calls | 1,590 | 2,707 | **58.7%** |
+  | **whole map** | **4,959** | **7,463** | **66.4%** |
+
+  **Against a 90% floor.**  (postlink itself reported 68.9% before this session's changes;
+  my reader is within a few points of it, and the first attempt at this measurement -- which
+  compared call *displacements* instead of context -- returned 0.0% for calls and had to be
+  discarded.)
+- **And the failing half is CALLS, not operands.**  Operands validate at 70.8% because the
+  rule accepts any pointer into `.rdata`/`.data`; **calls validate only at 58.7%**, and a
+  call fails when the two bytes before the `E8`/`E9` are not the ones the layout package
+  recorded -- **i.e. when our instruction stream has different code there**, which is
+  round 215's finding that the last 28% of `.text` diverges, seen on postlink's own terms.
+- **So the `cmake --build` failure is the same fact as the OBJECTIVE GAP**, and neither is
+  closable by a linker or layout lever: the calls that fail are calls in code we have not
+  reproduced instruction-for-instruction.  **Rounds 183-233 have taken this from "postlink
+  refuses for an unknown reason" to a measured 66.4% whose shortfall is named.**
+- **What the session changed, in one place, because it is a lot:**
+
+  | | before | after |
+  |---|---|---|
+  | BUILD/MAP checks that could fail | 0 (whole-file absent) | **3 fixed, 1 added** |
+  | raw-link import table | not measured (tautological check) | **matches the reference** |
+  | inventory size divergences | 12 / 3,771 bytes | **2 / 25 bytes** |
+  | OBJECTIVE GAP | 41,619 | **41,565** |
+  | checks that cannot fail | 4 found | **4 fixed** |
+
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, postlink coverage 66.4%
+  against a 90% floor, `cmake --build` exit 2, GATE: FAIL on the build alone.
+
+**Round-232: the pointer table is `g_dispatch_table`, metadata-recorded at size 4, and no source declares it. The work item is now named.**
+
+- **What the table is.**  Reading it upward from `.data+0x53f8` (VA 0x1002c3f8):
+
+  ```
+  0x1002c3f8: 0x1000d2e0, 0x1000d330, 0x1000d340, 0x1000d2e0,
+              0x1000d330, 0x1000d2e0, 0x1000d2e0, 0x1000d2e0, ...
+  ```
+
+  **Every target is a real function** (`fcn.1000d2e0`, `fcn.1000d330`, ...), and
+  `src/rebrew-data.toml` already names it:
+
+  ```toml
+  ["SERVER.0x1002c3f8"]
+  name = "g_dispatch_table"
+  section = ".data"
+  type = "handler_func[]"
+  size = 4
+  ```
+
+  **`size = 4`** -- one entry, where the table clearly holds many.  **The metadata
+  understates the table by however many pointers follow, and that is why only one of the
+  260 missing records was ever attributable.**
+- **And no source declares it.**  Searching `src/` for `g_dispatch_table` finds only
+  `g_dispatch_table_a` and `g_dispatch_table_b` -- **two externs for a differently-named
+  pair in `GOLDTL.gm_NextEntityQueryMatch.c`**.  **The symbols the metadata names have no
+  definition anywhere in the tree**, so the bytes arrive through the emit path and the
+  linker has nothing to relocate.
+- **Which makes the work item concrete and bounded.**  Scanning every four-byte word of
+  the reference's `.data` for a value inside the image:
+
+  | | count |
+  |---|---|
+  | `.data` words holding an image address | **677** |
+  | `.data` words the reference RELOCATES (round 180) | **334** |
+  | of those, missing from our link | **260** |
+
+  **677 addresses, 334 of which the reference marks as fixups, 260 of which we do not
+  emit.**  The others are addresses the reference stores as literals too -- so the split is
+  not "all pointers" but "the ones the original named symbolically", and that split is the
+  work: each needs a C declaration naming its symbol rather than a byte.  **The offsets are
+  known, the values are known, and `rebrew-data.toml` already has a home for the names --
+  what is missing is the initialisers.**
+- **And it is the objective's second clause, not a side quest.**  "Without post linking
+  mangling and manual padding" fails exactly here: `.data` is byte-perfect and *not
+  produced*, and 260 loader fixups that the reference carries are absent.  **A green
+  `.data` row on a spliced section is the fifth instance of the class this session has been
+  finding** -- a metric reporting on an artefact rather than on the thing it names.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-231: the 260 missing `.data` relocations are FUNCTION POINTERS. Our `.data` holds the right bytes without the records.**
+
+- **The measurement.**  Of the 590 missing relocation records, 310 are in `.text` and
+  **260 in `.data`**.  Reading the four bytes each missing record names -- from the
+  reference, which is where the values are correct -- gives:
+
+  | `.data` RVA | word | what it is |
+  |---|---|---|
+  | 0x0294dc | **0x10034620** | the pool's base |
+  | 0x0294f8 | **0x10034620** | the pool's base |
+  | 0x02c3f8 | **0x1000d2e0** | a `.text` function |
+  | 0x02c3fc | **0x1000d330** | a `.text` function |
+  | 0x02c400 | **0x1000d340** | a `.text` function |
+
+  **Every one is an absolute address**, and the pattern is a **table of function pointers**
+  at 0x02c3f8 upward plus the pool base at 0x0294dc.
+- **So the values are right and the records are absent.**  `.data` is byte-identical to the
+  reference (0 differing bytes, held at 0 by the gate since round 133) -- **so the linker
+  wrote the correct addresses without emitting a relocation for them**, which it does only
+  when the bytes are literals rather than symbol-initialised data.  **Our `.data` comes from
+  emitted bytes; the reference's came from C initialisers naming those functions.**
+- **Which is the same root as the objective's second clause.**  "Without post linking
+  mangling" means the section should be *produced* by the compiler from declarations, not
+  spliced; the missing relocations are the **fingerprint of the splice**, and they are
+  counted here for the first time.  **`.data` looking perfect while carrying 260 addresses
+  the loader would not fix is exactly the class of defect this branch has found four times:
+  a metric that is green on an artefact that is not right.**
+- **And it explains the `.reloc` size term.**  28,672 bytes of the gap is `.reloc`'s
+  `SizeOfRawData` being 0xa000 against 0x11000.  **494 fewer records** (590 missing, 96
+  extra) at eight bytes per block plus FileAlignment rounding is that shortfall, and 260 of
+  the 590 are this one cause.
+- **What would fix it**, named rather than attempted: the pointer tables would have to be
+  declared as arrays of function pointers initialised with those symbols, so the compiler
+  emits them and the linker records the relocations.  **The offsets and values are both
+  known** -- they are the table above -- which makes it a mechanical change to whatever
+  emits `.data` rather than a reversal.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-230: in the reference the hint/name records are ordered INDEPENDENTLY of the import table. Ours follow the table.**
+
+- **The two orders, read from the same file:**
+
+  | | first six entries |
+  |---|---|
+  | reference **import table** (KERNEL32) | `GetLocalTime, OutputDebugStringA, UnhandledExceptionFilter, VirtualFree, CloseHandle, ReadProcessMemory` |
+  | reference **hint/name records**, physical order | `WriteConsoleA, OutputDebugStringA, UnhandledExceptionFilter, VirtualFree, CloseHandle, ReadProcessMemory` |
+  | ours, import table | `GetLocalTime, OutputDebugStringA, ...` -- **matches the reference** |
+  | ours, hint/name records | `GetLocalTime, OutputDebugStringA, ...` -- **follows our table** |
+
+  **The reference's table and its records disagree in the first entry** (`GetLocalTime`
+  against `WriteConsoleA`) and agree from the second onward.  **Ours agree throughout,
+  because our records are emitted in the table's order.**
+- **Which relocates the problem precisely.**  Rounds 226-229 treated the records'
+  displacement as one thing; there are **two orders**, and we have only ever had one of
+  them.  Of the 178 records, **176 sit at byte-identical offsets** -- so the ordering is
+  right for all but a handful; the mismatches are concentrated in the KERNEL32 block, where
+  the reference's physical order diverges from its own table.
+- **And it means the `/include` lever that fixed the table (round 225) cannot fix the
+  records**, because in the reference the records are not in the table's order.  **The
+  reference's linker placed records by something other than the order it listed them in**,
+  and that something is `WriteConsoleA`-first -- the one entry whose position differs from
+  the table's.
+- **What that is, as a hypothesis to test:** the records are in the order the linker
+  **resolved** each import, and `WriteConsoleA` is resolved before `GetLocalTime` because
+  something references its plain symbol first.  **That is measurable** -- the same
+  first-reference scan round 173 ran on `.text` -- and it would name the object responsible
+  rather than requiring another blind reordering.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-229: the hint/name records are REORDERED, not shifted. `GetLocalTime` precedes `GetSystemTime` in ours and follows it in the reference.**
+
+- **The measurement that settles it.**  Asking where two adjacent records sit in each image:
+
+  | record | reference | raw link |
+  |---|---|---|
+  | `GetSystemTime` (first occurrence) | 0x2a80 | **0x2b6a** |
+  | `GetLocalTime` (first occurrence) | 0x2a8e | **0x280c** |
+
+  **In the reference they are adjacent and in that order** (0x2a80 then 0x2a8e, 14 bytes
+  apart -- hint, string, NUL).  **In ours `GetLocalTime` comes first, at 0x280c, and
+  `GetSystemTime` is 0x35E bytes later at 0x2b6a.**  So the 0x282 displacement round 227
+  measured is **not a uniform shift**: the records are in a different physical order, and
+  two adjacent records have moved past each other.
+- **Which explains why no shift reproduces the other stream.**  Round 228 tested
+  `ref[i+0x282:] == our[i:]` and got False; with a reordering that test **could not**
+  succeed.  **The two rounds' results are consistent and this one supplies the mechanism:**
+  identical prefix, identical strings, different physical order.
+- **And it is the same class as everything else that is left.**  The import table's entries
+  are `link.exe`'s order (rounds 171-176, fixed in 225 once the right lever was found); the
+  hint/name records' physical order is `link.exe`'s order too, and it is **not** the import
+  table's order, or the two would agree.  **Two orders the linker keeps, one of which we
+  found a lever for.**
+- **What that suggests for the next attempt, stated as a hypothesis to test rather than a
+  conclusion:** the records are emitted in the order the linker *first needs* each import,
+  which is the same quantity round 173 measured as first-reference order and which
+  round 225's `/include` reordering demonstrably moves.  **The `/include` order that fixed
+  the IAT may or may not be the one that fixes the records** -- and that is one link to
+  find out, not a dead end.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-228: `.rdata` is identical for 0x2614 bytes. Round 227's "block order" reading was too strong.**
+
+- **The measurement.**  Comparing the two `.rdata` sections byte by byte from the first
+  printable run (0x59f, `- deflate 1.1.3 Copyright 1995-1998 Jean-loup Gailly`):
+
+  | | |
+  |---|---|
+  | identical from | 0x59f |
+  | **first difference** | **0x2614** |
+  | the bytes there | ref `06 6a 02 00` (0x26a06) / ours `c8 6d 02 00` (0x26dc8) |
+
+  **A 0x2075-byte identical prefix**, containing the whole deflate/zlib string block and
+  every section-name and format string.  Round 227 read the bytes immediately in front of
+  the `GetLocalTime` record and concluded the *block order* differed; **it does not** -- the
+  word-class map of the first 0x300 bytes is character-for-character identical in the two
+  images (`RRRR...O..OOOO...`), and so is everything up to 0x2614.
+- **What actually differs is a table of RVAs, from 0x2614 on.**  Both images hold the same
+  shape -- an RVA into the name records, a constant, another RVA, two zero words, repeating
+  -- and the values differ:
+
+  ```
+  ref  at 0x2614: 0x26a06, 0x24000, 0x267b4, 0x0, 0x0, 0x26a34, 0x24148, 0x267c8
+  ours at 0x2614: 0x26dc8, 0x24000, 0x267b4, 0x0, 0x0, 0x26df6?, ...
+  ```
+
+  **The second and third values agree** (0x24000, 0x267b4) while the first differs by exactly
+  the hint/name table's 0x282 displacement.  So this is a table pointing at the **name
+  records**, and it inherits their offset.
+- **Which makes the name table's position the single remaining `.rdata` question**, and it
+  is upstream of both the 108 IAT bytes and this table.  Round 227's "ordinal IAT sits in
+  front of the records in ours" was a reading of the four words immediately before one
+  record -- **true of that spot and not of the layout**, which is why the block-class map
+  was run this round before repeating it.
+- **And it is the third time in three rounds that looking at one spot produced a conclusion
+  the whole-file view contradicted** (199's offsets, 212's rotation, 227's block order).
+  **The countermeasure is the same each time and is cheap: compare the whole region, then
+  explain the spot.**
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-227: `.rdata`'s internal BLOCK ORDER differs. In the reference the name records are contiguous; in ours an IAT block sits in front of them.**
+
+- **The 0x282-byte displacement, read backwards from the table.**  `GetLocalTime`'s record
+  is at `.rdata+0x2a8e` in the reference and `+0x280c` in ours, with the **same hint
+  (`0x011b`) and the same string** -- so the records match and only their position does.
+  What precedes them is the difference:
+
+  | | 32 bytes immediately before the record |
+  |---|---|
+  | reference | `...oneInformation\0\0` `5d01` `GetSystemTime\0` -- **more name records** |
+  | ours | `14000080 03000080 00000000` -- **ordinal IAT values** |
+
+  **In the reference the hint/name table is one contiguous run of records.  In ours a block
+  of `0x80000000|ordinal` IAT entries sits immediately in front of it**, so the records
+  start 0x282 earlier and every IAT entry that points at them (the 108 differing bytes at
+  `.rdata+0x0`) holds a different RVA.
+- **So this is `.rdata`'s internal block order**, not the import order (fixed in round 225)
+  and not the section's size (VirtualSize matches at 0x2e81).  **The same class as the
+  COMMON pool and the IAT slots: the linker decides where a table it built goes.**
+- **And it is the first time the defect was visible.**  Until round 225 the permuted
+  ordinals made every IAT word differ, and the hint table's offset was indistinguishable
+  from the noise.  **Two rounds of fixes have now separated three `.rdata` facts that were
+  one number**: the ordinal order (fixed), the name records' offset (this), and the
+  section's size (never wrong).
+- **What is left, in one table:**
+
+  | | value | cause | lever |
+  |---|---|---|---|
+  | `.reloc` | 35,684 (28,672 of it size) | 590 missing relocation records | pool placement, linker-internal |
+  | `.text` | 4,395 | operand encodings + the CRT's import thunks | linker/library-internal |
+  | `.rdata` | 1,238 | **block order: ordinal IAT in front of the name records** | linker-internal |
+  | headers | 248 | PE metadata | postlink patches it |
+
+  **Every row is now attributed to a specific mechanism, and all four are `link.exe`'s
+  placement decisions or the archives it is given.**
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-226: the residual `.rdata` is the hint/name table's PLACEMENT, not the import order.**
+
+- **What the 1,238 remaining `.rdata` bytes are.**  With the IAT order fixed, the
+  differences are read as words rather than bytes: 178 runs, the largest 82 bytes, and 108
+  bytes inside the first 0x200 -- the IAT itself.  Those read:
+
+  | offset | reference | raw link |
+  |---|---|---|
+  | +0x000 | `0x00026a8e` | `0x0002680c` |
+  | +0x070 | `0x00026bb2` | `0x00026a06` |
+  | +0x074 | `0x00026acc` | `0x00026a18` |
+
+  **These are IAT entries holding an RVA to an import's Hint/Name record**, and in both
+  images the target lies inside `.rdata` (which spans RVAs 0x24000..0x26e81).  The
+  reference's records sit at RVA 0x26a8e and ours at 0x2680c -- **the same records, 0x282
+  bytes apart.**
+- **So the import ORDER is fixed and the import NAME RECORDS are misplaced.**  That is a
+  different defect from round 225's and the first time this branch can see it: while the
+  ordinals were permuted, the name records' offsets were lost in the noise.  **The fix in
+  round 225 did not create this; it revealed it.**
+- **And it is a `.rdata` layout question**, i.e. the same family as rounds 128-155's pool
+  and 171-176's IAT: where the linker places a table it builds itself.  `.rdata`'s
+  VirtualSize matches the reference exactly (0x2e81), so this is placement inside a
+  correctly-sized section, not a sizing problem.
+- **What is still true after round 225, restated because it changes the shape of the
+  remaining work:**
+
+  | | 183-224 | after 225 |
+  |---|---|---|
+  | raw-link import table | 15 entries differ | **matches** |
+  | `.text` differing | 4,419 | 4,395 |
+  | `.rdata` differing | 1,268 | **1,238** |
+  | gap | 41,620 | **41,565** |
+
+  **The gate's raw-link import row has gone from red to green**, and the two remaining
+  rows are `.text` and the hint/name placement.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table MATCHES, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,565, `cmake --build` exit 2,
+  GATE: FAIL on the build alone.
+
+**Round-225: BREAKTHROUGH -- the WS2_32 IAT order now matches the reference EXACTLY. The gate's raw-link import row is green for the first time.**
+
+- **The mapping, derived from round 224's two probes and then inverted.**  Comparing each
+  probe's `/include` order with its resulting IAT gives a **fixed permutation of the input
+  positions**:
+
+  ```
+  out = in[[2,3,4,5,6,7,1,9,10,11,12,13,14,15,0,8]]
+  ```
+
+  **It fits both probes exactly** -- round 224's "reference order" probe and its reverse --
+  so the linker's IAT assignment is position-fixed, not content-dependent.  Inverting it
+  against the reference's IAT yields the `/include` order that should produce that IAT:
+
+  | position | import | | position | import |
+  |---|---|---|---|---|
+  | 0 | `sendto@24` | | 8 | `closesocket@4` |
+  | 1 | `shutdown@8` | | 9 | `WSAStartup@8` |
+  | 2 | `accept@12` | | 10 | `WSACleanup@0` |
+  | 3 | `listen@8` | | 11 | `socket@12` |
+  | 4 | `send@16` | | 12 | `setsockopt@20` |
+  | 5 | `recv@16` | | 13 | `htonl@4` |
+  | 6 | `ioctlsocket@12` | | 14 | `htons@4` |
+  | 7 | `WSAGetLastError@0` | | 15 | `bind@12` |
+
+- **And it reproduces the reference's IAT exactly:**
+
+  ```
+  predicted -> IAT [1, 13, 19, 16, 10, 111, 22, 115, 116, 23, 21, 8, 9, 2, 20, 3]
+  reference     IAT [1, 13, 19, 16, 10, 111, 22, 115, 116, 23, 21, 8, 9, 2, 20, 3]
+  MATCH
+  ```
+
+  **Sixteen ordinals, in the reference's order, for the first time on this branch.**
+- **And the effect is not confined to the import table:**
+
+  | | before | after |
+  |---|---|---|
+  | raw-link import table | **15 entries differ** | **matches the reference (100)** |
+  | `.text` differing bytes | 4,419 | **4,395** |
+  | `.rdata` differing bytes | 1,268 | **1,238** |
+  | OBJECTIVE GAP | 41,620 | **41,565** |
+
+  The gate's raw-link import row now reads **"raw link imports match the reference (100) --
+  not tautological"**, and `OBJECTIVE_BASELINE` is lowered to **41,565** to match.
+- **Which vindicates round 224's correction and round 210's check.**  Round 212 concluded
+  the `/include` order was not a lever from a single null; round 224 noticed it had moved
+  the number and said so.  **Without the raw-link import check added in round 210, none of
+  this was visible at all** -- the gate had reported "imports match the reference (100)" for
+  a hundred rounds while comparing the reference with its own copy.
+- **`.data` is still 0, relocations still 590/96, verify still 262/262, the raw link still
+  loads, and the deliverable is still byte-identical** -- the fix moves nothing it should
+  not.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, **raw-link import table MATCHES**, exports identical,
+  deliverable byte-identical, both load OK, **OBJECTIVE GAP 41,565**, `cmake --build`
+  exit 2, GATE: FAIL on the build alone.
+
+**Round-224: the `/include` order IS a lever on the IAT -- two probes, two different orders. It is not yet the right lever.**
+
+- **What round 212 showed and was read past.**  That round reordered four `/include` lines,
+  the import table went **15 -> 16** differing, and the conclusion recorded was "the
+  `/include` order is not what sets the name table".  **It moved the number, so it IS what
+  sets the name table** -- in the wrong direction, but a lever that moves something is a
+  lever.  Round 212's null was too strong.
+- **And two probes confirm it.**  Writing the WS2_32 `/include` block in **(a)** the
+  reference's IAT order and **(b)** its reverse, and reading the resulting WS2_32 sequence
+  from the built raw link:
+
+  | `/include` order | resulting IAT |
+  |---|---|
+  | the reference's IAT order | `19, 16, 10, 111, 22, 115, 13, 23, 21, 8, 9, 2, 20, 3, 1, 116` |
+  | its reverse | `2, 9, 8, 21, 23, 116, 20, 22, 111, 10, 16, 19, 13, 1, 3, 115` |
+  | (the shipped block) | `19, 16, 10, 116, 22, 111, 13, 23, 21, 8, 9, 2, 20, 3, 1, 115` |
+
+  **Three different inputs, three different outputs, none of them the reference's**
+  (`1, 13, 19, 16, 10, 111, 22, 115, 116, 23, 21, 8, 9, 2, 20, 3`).  So the mapping is
+  real, deterministic, and **not** identity, reversal, or rotation.
+- **And the deviations have a shape worth recording.**  With the reference order as input,
+  the output is the input's positions `2..7`, then position `1`, then `9..15`, then `0`,
+  then `8` -- i.e. **`listen`, `accept` and `WSAStartup` are moved to the end of the
+  processing order**.  Those three are exactly the imports the code references directly as
+  well as through `/include`, which is consistent with the IAT being built from the
+  **first reference**, not from the declaration order -- and round 173 measured that
+  first-reference order (`115, 23, 21, 10, 9, 2, 13, 22, 3, 116, 1, 16, 111, 19, 20, 8`)
+  without recognising that it was the same question.
+- **So the lever is real and the search is not done.**  What is needed is the `/include`
+  (or reference) order that maps to the reference's IAT, and the mapping is now known to be
+  a function of both the declaration order **and** which symbols the code already
+  references.  **That is a solvable inversion** -- 16 ordinals, and each probe costs one
+  link -- where rounds 171-176 and 212-213 recorded five nulls instead.
+- **Restored and verified:** `crt_imports.c` byte-identical to the backup, relinked, gate
+  at its previous state.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing in WS2_32 only,
+  exports identical, deliverable byte-identical, both load OK, OBJECTIVE GAP 41,620,
+  `cmake --build` exit 2, GATE: FAIL on the build and the raw-link import table.
+
+**Round-223: the state table brought in line with rounds 210-222, and two `VirtualSize` values kept apart.**
+
+- **Two corrections to the document's own summary, both of things this branch got wrong
+  while working:**
+
+  | fix | why it mattered |
+  |---|---|
+  | `0x22ac8` (split link) and `0x225e2` (**CMake** link) are now separate rows | rounds 216-217 compared a `.text` size from one artefact against the reference and drew conclusions about the other; the raw link is **larger** than the reference, the deliverable's own link is **612 short** |
+  | the four gap components marked as one cause | round 222 measured that the name table *is* the IAT order, so "15 import entries" is not a fourth defect |
+
+- **And the unified table, which is the shape the objective actually has:**
+
+  | what is counted | how many | same cause? |
+  |---|---|---|
+  | `.text` differing bytes | 4,419 | yes |
+  | `.rdata` differing bytes | 1,268 | yes |
+  | missing relocation records | 590 | yes |
+  | differing import entries | 15 | **it is the IAT order itself** |
+
+  **They move together** -- which is why no per-region fix on this branch has ever moved one
+  without disturbing another, and why every attempt to shave the gap by touching a single
+  region (rounds 147, 158, 164) has paid for it somewhere else.
+- **The two new rows are the ones the gate measures on every run** -- the raw-link import
+  table (added round 210) and the `jmp [IAT]` thunk count (round 202's finding, printed by
+  neither) -- so a reader no longer has to re-derive them to see the state.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing in WS2_32 only,
+  exports identical, deliverable byte-identical, both load OK, OBJECTIVE GAP 41,620,
+  `cmake --build` exit 2, GATE: FAIL on the build and the raw-link import table.
+
+**Round-222: the name table IS the IAT order. The last two "components" are one root cause.**
+
+- **The question.**  Round 210 found 15 differing entries in the raw link's import table and
+  round 172 had found the IAT slots permuted.  Are those two defects or one?  Reading both
+  from the same file -- the Name Pointer Table order and the FirstThunk slot order:
+
+  | | WS2_32 name-table order | IAT slot order | equal? |
+  |---|---|---|---|
+  | reference | `1, 13, 19, 16, 10, 111, 22, 115, 116, 23, 21, 8, 9, 2, 20, 3` | identical | **True** |
+  | raw link | `19, 16, 10, 116, 22, 111, 13, 23, 21, 8, 9, 2, 20, 3, 1, 115` | identical | **True** |
+
+  **In both images the name table lists the imports in exactly the order the IAT slots
+  hold them.**  So the 15 "differing entries" *are* the permuted slots -- one fact written
+  in two places, not two defects to fix.
+- **Which collapses the objective's remaining gap to a single sentence.**  After rounds
+  183-222 the raw link differs from the reference in:
+
+  | | cause | lever |
+  |---|---|---|
+  | `.text` 612 short | the linker's addresses for the CRT's import references and the IAT | none found (208) |
+  | import table 15 entries | **the same IAT slot order** | none found (171-176, 212-213, 221) |
+
+  **One root cause, two symptoms**: the linker decides which IAT slot each import gets, the
+  name table follows it, and every code operand that names a slot inherits the difference
+  -- which is why `.text` is 612 bytes short (10,714 differently-encoded operands, round
+  201) and why `.rdata` differs by 1,268 (round 171).  **The four components the CURRENT
+  STATE table lists are one phenomenon counted four ways.**
+- **And it explains a number that has looked like four separate ones.**  `.text` 4,419
+  differing bytes, `.rdata` 1,268, 590 missing relocations, 15 import entries -- all of them
+  move together with the IAT slots and the pool, which is why no per-region fix has ever
+  moved one without disturbing another.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing in WS2_32 only,
+  exports identical, deliverable byte-identical, both load OK, OBJECTIVE GAP 41,620,
+  `cmake --build` exit 2, GATE: FAIL on the build and the raw-link import table.
+
+**Round-221: the import defect is confined to ONE descriptor's internal order. The descriptors themselves match exactly.**
+
+- **The untested lever.**  Rounds 171-176 varied the `.def` order, the import library's own
+  symbol order, the code's first-reference order and the `/include` order, and none moved
+  the WS2_32 sequence.  **The order of the libraries on the link line had never been
+  varied**, and it is the obvious remaining input -- so both were read before testing:
+
+  | | descriptors, in order |
+  |---|---|
+  | reference | `KERNEL32.dll, USER32.dll, WS2_32.dll, WINMM.dll` |
+  | raw link | `KERNEL32.dll, USER32.dll, WS2_32.dll, WINMM.dll` |
+
+  **Identical**, and the link line's own order is
+  `server.lib KERNEL32.lib USER32.lib WS2_32.lib WINMM.lib LIBCMT.lib ...` -- the same
+  four in the same sequence.  **So there is nothing to reorder: the descriptor order is
+  already right, and varying the library order could not have changed it.**
+- **Which narrows the 15 differing entries precisely.**  They are **all inside the
+  WS2_32 descriptor** -- the same sixteen ordinals, permuted, with the other three
+  descriptors' 84 entries matching entry for entry.  **The defect is one list, in one
+  descriptor, not a general ordering problem**, and it is the only thing standing between
+  the raw link and a matching import table.
+- **And the lever list for it is now closed**, which is the useful part: `.def` order, the
+  library's symbol order, the code's first-reference order, the `/include` order and the
+  library order on the command line have each been named and measured, and the sequence
+  has not moved for any of them.  **What remains is `link.exe`'s own decision about the
+  entries of a single descriptor**, which is the same conclusion rounds 140-155 reached
+  about the COMMON pool and rounds 202-208 about the thunk count.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing in WS2_32 only,
+  exports identical, deliverable byte-identical, both load OK, OBJECTIVE GAP 41,620,
+  `cmake --build` exit 2, GATE: FAIL on the build and the raw-link import table.
+
+**Round-220: the sibling helper hardened, and the once-per-run warning checked for noise.**
+
+- **`_is_padding` had the identical shape.**  Both helpers that read the binary return
+  `False` for two different facts -- *"this is not a prologue"* / *"this is not padding"*
+  and *"I could not read"*.  Round 219 fixed `_starts_function`; this round fixes the
+  other, sharing the same once-per-run flag so a run reports the condition at most once
+  whichever helper hits it first.
+- **And the noise question settled by running it, not by reasoning about it.**  A
+  once-per-run warning is only useful if ordinary runs do not produce one -- otherwise it
+  becomes the DEBUG line it replaced, just louder and equally ignored.  Capturing WARNING
+  output from a full `discover_functions` on the reference:
+
+  ```
+  $ python -c "... logging.basicConfig(level=WARNING) ... discover_functions(...)"
+  functions: 638
+  ```
+
+  **No warning, and the function count unchanged at 638.**  The condition fires only when
+  a read genuinely fails.
+- **Which closes the shape rather than the two instances.**  Both silent returns are now
+  reportable, and the flag is shared, so the next helper added here inherits the pattern
+  rather than the trap.  **The check is cheap: one boolean and a message that names the
+  address and the exception.**
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,620, `cmake --build` exit 2,
+  GATE: FAIL on the build and the raw-link import table.
+
+**Round-219: round 193's silent `except` hardened -- a read failure now says so once, instead of looking like "no boundaries found".**
+
+- **The shape.**  `_starts_function` (added round 193) returned `False` both for "this is
+  not a prologue" and for "I could not read the binary".  Round 193 shipped exactly that
+  bug -- a call to a method the loader does not have, swallowed into `False` for every
+  invocation -- and it was only caught because the inventory came back **byte-identical**
+  after a change.  **Two different facts sharing one return value is the defect**, and
+  it was still there in the shipped function.
+- **The fix, deliberately minimal.**  The read failure is logged **once per run** at
+  WARNING, naming the address and the exception, and saying what it means:
+
+  ```
+  could not read 16 bytes at 0x<va> for a prologue test (<exc>); every such failure is
+  treated as 'not a prologue', so a systematic read problem looks exactly like
+  'no boundaries found' -- which is how round 193 shipped a fix that did nothing
+  ```
+
+  **Once, not per call**: a run legitimately probes addresses at section ends, and a
+  warning per probe would be noise the reader learns to skip -- which is how the DEBUG
+  line it replaces was ignored in the first place.  **`discover_functions` still returns
+  638 functions** on the reference, so the guard changes no result.
+- **And a self-inflicted syntax error on the way, worth one line.**  The first edit
+  inserted the new docstring before the existing one and left the function with two
+  unterminated-string lines; Python caught it immediately and the repair was one
+  deletion.  **Editing a docstring by pattern-matching its first line is a fragile way to
+  insert a block**, and the four prologue shapes added in rounds 196-197 were edited the
+  same way without trouble only because they sit in the middle of an expression.
+- **What this round does not do:** it does not make `_starts_function` return a tri-state,
+  because every caller would then have to handle it and the only thing any of them can do
+  with "unreadable" is the same as with "not a prologue" -- keep the conservative gap.
+  **The value is in the report, not the return value**, and the report now exists.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,620, `cmake --build` exit 2,
+  GATE: FAIL on the build and the raw-link import table.
+
+**Round-218: the sentinel itself removed, so the same trap cannot return. Then the whole gate swept for it.**
+
+- **The trap, not just its instance.**  Round 217 defined `OBJECTIVE_BASELINE`, which made
+  the note work -- but left the comparison as `${OBJECTIVE_BASELINE:-999999999}`, so
+  **deleting the definition again would silently restore ninety rounds of silence.**  The
+  idiom is the bug: *unset means compare against infinity* cannot be distinguished from
+  *working and quiet*.  Changed to abort:
+
+  ```sh
+  if [ "${gap:-0}" -gt "${OBJECTIVE_BASELINE:?OBJECTIVE_BASELINE must be defined}" ]; then
+  ```
+
+  **Proved rather than asserted:**
+
+  ```
+  $ OBJECTIVE_BASELINE= bash -c 'gap=5; if [ "${gap:-0}" -gt "${OBJECTIVE_BASELINE:?...}" ]; then echo fired; fi'
+  bash: line 1: OBJECTIVE_BASELINE: OBJECTIVE_BASELINE must be defined
+  ```
+
+  **A gate whose threshold has gone missing stops, rather than going quiet.**
+- **And the class swept for, not just this member.**  Two searches over `scripts/gate.sh`:
+
+  | search | result |
+  |---|---|
+  | sentinel defaults (`${VAR:-<6+ digits>}`) | **1 before, 0 after** |
+  | variables used but never assigned | `EXT`, `REBREW_PY` -- both assigned, one in a subshell, one via `${REBREW_PY:-.venv/bin/python}` |
+  | conditions with two literal operands | none |
+  | `grep -c ... | 0` shapes | none |
+
+  **The round-217 defect was the only instance**, and the idiom that produced it is now
+  gone from the file.
+- **Which is the useful half of a class hunt: fixing the member, then removing the shape
+  that made it possible.**  Rounds 166, 183, 210 each fixed a check; this pair fixes a
+  check *and* the pattern, so the fourth instance cannot be written the same way.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,620, `cmake --build` exit 2,
+  GATE: FAIL on the build and the raw-link import table.
+
+**Round-217: OBJECTIVE_BASELINE was never defined. The line that qualifies the gap has been dead code for ninety rounds.**
+
+- **The defect.**  Round 122 recorded *"added OBJECTIVE_BASELINE=41619 and the OBJECTIVE
+  GAP line"*.  The gap line is there; **the variable is not.**  Its only two references
+  are:
+
+  ```
+  341: if [ "${gap:-0}" -gt "${OBJECTIVE_BASELINE:-999999999}" ]; then
+  342:     echo "  (above the ${OBJECTIVE_BASELINE} baseline; the raws must match ...)"
+  ```
+
+  Both default to **999999999**, which no gap will exceed, so **the note that says whether
+  the number is progress could never print.**  The gate has been reporting the session's
+  one real progress meter with no annotation on it since round 122.
+- **And it went unnoticed because the note is silent in the healthy case.**  A dead branch
+  that prints nothing when the value is good is indistinguishable from a working one
+  until the value is bad -- and by then the reader believes the silence.  **This is the
+  same failure shape as round 210's tautological import check and round 183's unchecked
+  exit status: a check that cannot fail.**  Four now, all found by reading the check
+  rather than by seeing it go red.
+
+  | defect | rounds | shape |
+  |---|---|---|
+  | whole-file comparison absent | until 166 | nothing asserted the file equals the reference |
+  | build step did not check its exit status | until 183 | "0 errors" while the build failed |
+  | import check read the deliverable | until 210 | compared the reference with its own copy |
+  | OBJECTIVE_BASELINE undefined | 122-217 | the qualifying note could never fire |
+
+- **Fixed, and the threshold set to what the gate measures.**  Defined beside the other
+  baselines at **41,620**, with the round-216 history recorded in the comment: the
+  thunk-symbol fix was a correctness fix that moved the gap **up** by one byte, because
+  the seven stubs now sit at the reference's spacing but still name our IAT slots.  **The
+  note still does not print at equality, which is the correct behaviour and now the
+  correct reason** -- 41,620 is not greater than 41,620.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP **41,620** with a live baseline,
+  `cmake --build` exit 2, GATE: FAIL on the build and the raw-link import table.
+
+**Round-216: a real bug in `emit_thunks.py` -- every thunk symbol carried offset 0. Fixed; the number barely moves.**
+
+- **The symptom, from the map.**  Our emitted block held five of the seven socket stubs
+  where the reference has seven, with two at the end of `.text` instead, and the map gave
+  the reason:
+
+  ```
+  0001:00019160  _sendto@24       1001a160 f  import_thunks.obj
+  0001:00019160  _closesocket@4   1001a160 f  import_thunks.obj
+  ```
+
+  **Two symbols at the same address.**  `build_object` wrote each COFF symbol as
+  `struct.pack("<IhHBB", 0, section, 0x20, 2, 0)` -- the first field is **Value**, and it
+  was hardcoded to **0** for the defined symbol as well as the undefined one:
+
+  ```python
+  for _off, sym in relocs:
+      for name, section in (("__imp_" + sym, 0), (sym, 1)):
+          symtab += name_bytes(name) + struct.pack("<IhHBB", 0, section, 0x20, 2, 0)
+  ```
+
+  The `_off` was computed, carried in `relocs`, used for the relocation -- **and never used
+  for the symbol's own value.**  Every thunk claimed offset 0, so LINK could place only one
+  of them correctly and scattered the rest.
+- **The fix and its effect.**
+
+  ```python
+  for off, sym in relocs:
+      for name, section, value in (("__imp_" + sym, 0, 0), (sym, 1, off)):
+          symtab += name_bytes(name) + struct.pack("<IhHBB", value, section, 0x20, 2, 0)
+  ```
+
+  | | before | after |
+  |---|---|---|
+  | `import_thunks.obj` symbols at distinct addresses | **5 of 7** | **7 of 7** |
+  | `jmp [IAT]` thunks in the raw link | 106 | **102** |
+  | OBJECTIVE GAP | 41,619 | **41,620** |
+
+  **Seven distinct addresses now** -- 0x1001a160, 166, 16c, 172, 178, 17e, 184, exactly the
+  reference's spacing -- and the gap moves by **+1 byte**, which is to say not at all.
+- **And why: the bytes still differ, for the reason everything else does.**  Ours at
+  0x1001a160 is `ff 25 90410210` -- `jmp [0x10024190]` -- where the reference has
+  `jmp [0x10024198]`.  **The thunk is correct for OUR IAT**, because the linker put
+  `__imp__closesocket@4` at 0x10024190 (round 172's permuted order); the reference put it at
+  0x10024198.  **So this round fixed a real structural bug and the residual is the
+  round-172 IAT ordering**, which rounds 171-176 and 212-213 established has no lever.
+- **Which is worth stating as a pattern rather than a disappointment.**  The bug was worth
+  fixing on its own terms -- an object emitting five of seven symbols at one address is
+  wrong regardless of what the metric says -- and **the metric's indifference is itself the
+  information**: it confirms that the `.text` difference is not in how our objects are
+  built but in the addresses the linker hands them.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing, exports identical,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP **41,620**, `cmake --build`
+  exit 2, GATE: FAIL on the build and the raw-link import table.
+
+**Round-215: 75% of `.text` matches instruction-for-instruction in ONE unbroken run. The rest is the last quarter.**
+
+- **The measurement.**  Disassembling both `.text` sections and comparing mnemonics
+  positionally, then describing the agreement as runs rather than as a percentage:
+
+  | | |
+  |---|---|
+  | reference instructions | **50,910** |
+  | ours | **50,375** |
+  | **first agreement run** | **36,575 instructions, unbroken** |
+  | runs after that | **1,031**, nearly all of length 1 or 2 |
+  | total agreeing | **37,789 of 50,375 (75.0%)** |
+
+  **One run of 36,575 with nothing wrong in it, then a thousand fragments.**  That is not
+  a scattered difference; it is a clean boundary.
+- **And the boundary is exactly where round 201 found it** -- `.text+0x19160`,
+  instruction 36,575, where the reference has IAT thunks and ours has real code.  **The
+  first 72% of the section is the reference's code instruction for instruction; the last
+  28% is a different arrangement of the same libraries.**
+- **Which is the whole gap, in one shape.**  Every cause this branch has measured lives on
+  the far side of that boundary: the 106 thunks against 10 (rounds 202-208), the 10,714
+  differently-encoded instructions (201), the 535 missing instructions, the 612 bytes.
+  **The game code is already matching** -- `rebrew verify` says 262/262 -- **and what
+  remains is how the linked libraries are laid out and reached**, which rounds 128-214
+  showed is decided by `link.exe` and by archives we do not have.
+- **Which also explains why the `.text` colour has been stubbornly binary.**  A difference
+  spread over 75% of a section would move the residue a little at a time; **a difference
+  confined to the last quarter behind a hard boundary moves it in one 612-byte step**, and
+  no per-function fix can address it because no function is what is wrong.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table differing, exports identical
+  on all three images, deliverable byte-identical, both load OK, OBJECTIVE GAP 41,619,
+  `cmake --build` exit 2, GATE: FAIL on the build and the raw-link import table.
+
+**Round-214: exports audited -- sound on all three images. The raw-link gap is now exactly two things.**
+
+- **The check round 210's finding suggested auditing next**, since the import table had a
+  tautological check in front of it and exports are its sibling.  Reading the export
+  directory of all three images, names **and** resolved VAs:
+
+  | image | exports |
+  |---|---|
+  | reference | `Init 0x10009320`, `Exit 0x10009350` |
+  | deliverable | `Init 0x10009320`, `Exit 0x10009350` |
+  | **raw link** | `Init 0x10009320`, `Exit 0x10009350` |
+
+  **Identical on all three**, and `verify_objective.py` already checks names, VAs and the
+  first 0x40 bytes of each body (lines 121, 151).  **No blind spot here, and no defect
+  either** -- worth stating because "we did not look" and "we looked and it is fine" are
+  different claims, and the import table taught this branch that the difference matters.
+- **Which narrows the raw-link gap to exactly two components**, both now measured and both
+  named in the gate:
+
+  | | size | cause | status |
+  |---|---|---|---|
+  | `.text` | **612 short** | 106 import thunks against the reference's 10 (+576) over ~1,188 bytes of uncompiled bodies | library-internal (208) + uncompiled code |
+  | import order | **15 entries** | the same 16 WS2_32 ordinals permuted | linker-internal (171-176, 212-213) |
+
+  **Everything else about the raw link matches its reference**: imports count 100,
+  exports names/addresses/bodies, `.data` bytes, `.reloc` presence counts (590/96 held),
+  headers, and the wine load.  **Rounds 183-214 have emptied the gap down to those two,
+  and neither has a lever in this image.**
+- **And the goal's two clauses stand in different places** (goal active, round 214/256):
+  the first -- the raw link identical without postlink -- is **input-blocked** and has been
+  since round 208's substitution test; the second -- *"fix all tooling deficits ... fix
+  them directly in rebrew"* -- is **open-ended by construction**, and this session has
+  taken it a long way: four rebrew fixes, three gate tautologies, the inventory, and this
+  audit.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table measured and differing,
+  exports identical on all three images, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2, GATE: FAIL on the build and the raw-link
+  import table.
+
+**Round-213: the "rotation" was not one. Corrected by testing the property instead of reading it off an index-wise diff.**
+
+- **The claim and its check.**  Round 212 said the raw link's WS2_32 ordinals were the
+  reference's **rotated left by two**, and that this made the defect "as small as which
+  import is written first".  Testing that directly -- take the sequence, try every shift,
+  see whether any reproduces the other:
+
+  ```
+  reference WS2_32: [1, 13, 19, 16, 10, 111, 22, 115, 116, 23, 21, 8, 9, 2, 20, 3]
+  raw link WS2_32 : [19, 16, 10, 116, 22, 111, 13, 23, 21, 8, 9, 2, 20, 3, 1, 115]
+  same multiset: True
+  => not a rotation of each other
+  ```
+
+  **No shift works.**  The first three entries match by coincidence (they are the
+  reference's positions 2-4), and from position 3 the two disagree: ours runs
+  `116, 22, 111, 13` where the reference runs `111, 22, 115, 116`.
+- **Where the mistake came from, because it is the same one as round 199's.**  The claim
+  was read off an **index-wise diff** of a build that had just been changed -- and a
+  change that moves entries around makes an index-wise diff show long runs of
+  "differences" whatever the underlying relation is.  **A property was asserted from a
+  listing instead of tested against the data.**  The correction costs one script and
+  would have cost one line in round 212.
+- **And the sequence itself has no lever, as rounds 171-176 found.**  The `.def` order,
+  the library's internal symbol order, the code's first-reference order, and now the
+  `/include` order have all been varied and none moves it.  **The four permutations are
+  the same sixteen ordinals in an order `link.exe` decides.**
+- **So this round removes a mechanism rather than adding one, and that is the useful
+  part.**  Rounds 212-213 together: the `/include` order is not the name table's order
+  (measured: 15 -> 16 differs after reordering toward the reference), and the relation
+  between the two orders is a permutation rather than a rotation (measured above).
+  **Both negative, both with the varied input named.**
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table measured and differing,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2,
+  GATE: FAIL on the build and the raw-link import table.
+
+**Round-212: swapping `/include` order to the reference's makes the import table WORSE (15 -> 16). But the shape is a rotation, which is a real clue.**
+
+- **The experiment.**  `crt_imports.c`'s WS2_32 block lists `WSACleanup, shutdown,
+  WSAGetLastError, WSAStartup` where the reference's order is `WSAGetLastError, shutdown,
+  WSAStartup, WSACleanup`.  Reordering the four `/include` lines to the reference's
+  sequence:
+
+  | | differing entries |
+  |---|---|
+  | before | **15** |
+  | after | **16** |
+
+  **Worse, so it was reverted.**  The `/include` order is not what sets the name table.
+- **And the "rotation" read out of it was WRONG -- corrected in round 213.**  The
+  reordered build's WS2_32 sequence only *looked* like the reference's shifted by two
+  because it was compared position by position after a change that had already moved
+  things.  Testing it properly -- on the reverted, shipped link, against every possible
+  shift:
+
+  ```
+  reference WS2_32: [1, 13, 19, 16, 10, 111, 22, 115, 116, 23, 21, 8, 9, 2, 20, 3]
+  raw link WS2_32 : [19, 16, 10, 116, 22, 111, 13, 23, 21, 8, 9, 2, 20, 3, 1, 115]
+  same multiset: True
+  => not a rotation of each other
+  ```
+
+  **Same sixteen ordinals, genuinely permuted.**  The first three match by coincidence
+  (`19, 16, 10` is the reference's positions 2-4) and the rest do not.  **A rotation would
+  have been a much smaller problem than this is**, and the claim was made from an
+  index-wise diff rather than from the sequence itself -- the same class of mistake as
+  round 199's offset arithmetic, caught the same way, by testing the property instead of
+  reading it.
+- **So the import order remains a permutation with no known lever**, which is where
+  rounds 171-176 left it.  **This round adds no mechanism; it removes one that was never
+  there.**
+- **Reverted and verified:** `crt_imports.c` restored, relinked, the gate's raw-link import
+  row is back to its pre-experiment state, lint 0/0, verify 262/262, OBJECTIVE GAP 41,619.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table measured and differing,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2,
+  GATE: FAIL on those two rows.
+
+**Round-211: the rest of the gate audited for the same tautology. Two checks sound, and the gate now has exactly two honest failures.**
+
+- **Every remaining check read, looking for the round-166/183/210 shape** -- a check that
+  measures an artefact the pipeline has already made correct:
+
+  | check | reads | verdict |
+  |---|---|---|
+  | build-tree integrity | `rebrew build check` on `build/` | sound |
+  | rebrew lint | the tree | sound |
+  | toolchain images | `docker image inspect` | sound |
+  | deliverable link + residue | `build/split_poc.dll` | sound |
+  | relocation records | **raw link** (added round 170) | sound |
+  | data extents | `src/rebrew-data.toml` | sound |
+  | import table | deliverable **and now raw link** (round 210) | fixed |
+  | wine load + exports | `build/server.dll` **and** `build/split_poc.dll` | sound |
+  | lib-match d3dx8 | `references/dxsdk8/lib/d3dx8.lib` | sound |
+  | toolchain alignment / per-file pins | `rebrew toolchain detect` on the reference | sound |
+  | deliverable byte for byte | **whole file** (added round 166) | sound |
+  | objective structural criteria | `build/server.dll` via `verify_objective.py` | **documented as deliverable-only** (round 122) |
+
+  **One more tautology found and fixed, three already fixed this session, the rest sound.**
+  The `verify_objective.py` entry is the only one that still measures the deliverable, and
+  it says so in its own verdict -- *"the DELIVERABLE is 100% byte-identical"* -- which is
+  the honest form.
+- **And the gate's failures are now exactly the objective's two open clauses:**
+
+  ```
+  REGRESSION: cmake --build failed (exit 2) while matching 0 compiler/linker errors
+  REGRESSION: raw-link import table differs -- DIFF ref=100 raw=100
+  GATE: FAIL
+  ```
+
+  **Both are real, both are differences from the reference, and neither is a check bug.**
+  The first is postlink refusing a `.text` that is 612 bytes short of the layout package's
+  requirement; the second is the 15 permuted WS2_32 ordinals of round 210.  **A red gate
+  that names two true things is worth more than the green one that hid them**, and this is
+  the state the objective should be measured in.
+- **What the session's tooling work adds up to**, since the gate's colour changed twice
+  under it: **the whole-file check (166), the relocation-record check (170), the
+  exit-status build check (183), the import-redirect (210), four rebrew fixes (189, 192,
+  195, 196-197) and 95 corrected inventory entries.**  None of them moved the OBJECTIVE
+  GAP, and all of them changed what the project can see about it.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, raw-link import table **measured and differing**,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2,
+  **GATE: FAIL on those two rows**.
+
+**Round-210: the import check was TAUTOLOGICAL -- it compared the reference with postlink's copy of the reference. Pointing it at the raw link finds 15 differing entries.**
+
+- **The blind assertion.**  `scripts/gate.sh`'s import step reads **`build/server.dll`**
+  and compares its import table against the reference's, requiring exactly 100 matching
+  entries.  But `build/server.dll` is the **deliverable**, which `rebrew build postlink` builds
+  from the reference -- so the check compares the reference with a copy of the reference
+  and **can never fail**.  It is the same tautology rebrew's own `verify --data` warns
+  about out loud (round 170: *"these results are tautological -- point --built at the raw
+  link instead"*), and the gate had been repeating it for as long as the check has
+  existed.
+- **And pointing it at the raw link finds a real difference.**  The same reader over
+  `build/split_poc.dll`:
+
+  ```
+  REGRESSION: raw-link import table differs -- DIFF ref=100 raw=100
+  ```
+
+  **Same count, different entries -- 15 of 100:**
+
+  | index | reference | raw link |
+  |---|---|---|
+  | 83 | `WS2_32.dll!ord1` | `WS2_32.dll!ord19` |
+  | 84 | `WS2_32.dll!ord13` | `WS2_32.dll!ord16` |
+  | 85 | `WS2_32.dll!ord19` | `WS2_32.dll!ord10` |
+  | 86 | `WS2_32.dll!ord16` | `WS2_32.dll!ord116` |
+  | ... | | |
+
+  **It is round 172's IAT ordering, surfacing in the import NAME table** -- the same
+  sixteen WS2_32 ordinals, permuted.  The "imports 100" row the gate has printed for a
+  hundred rounds was true and meant far less than it appeared to: **the count was right
+  because postlink had copied it, and the order has been wrong the whole time.**
+- **Which is the third tautology this branch has found in its own gate**, after the
+  whole-file comparison that did not exist (166) and the build step that did not check
+  its exit status (183).  **All three had the same shape: a check reading an artefact the
+  pipeline had already made correct.**  The gate now measures the raw link's import table
+  as well, and fails on it, which is why `GATE: FAIL` has one more honest row.
+- **The fix is the check, not the table.**  The order cannot be corrected from `src/`
+  (rounds 171-176 established the linker chooses it); what this round adds is that **the
+  gate now says so** instead of reporting a green "imports match the reference (100)".
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, **raw-link import table measured and differing**,
+  deliverable byte-identical, both load OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-209: the CURRENT STATE table was stale by a wide margin, and the evidence on the first clause is consolidated here for a human decision.**
+
+- **A documentation defect, found by reading the file the way a newcomer would.**  The
+  table at the top of this document says *"Live numbers are `scripts/gate.sh` defaults"*
+  and gave **verify 258, residue 38, raw-link `.data` 21,481**.  The gate's actual
+  defaults are **261, 4 and 0**, and the measured values **262, 0 and 0**.  **A state table
+  that does not move with the gate is worse than no table** -- it is the first thing a
+  reader trusts and the last thing anyone re-derives.  Corrected in place, with the
+  OBJECTIVE GAP decomposition and the build's own `.text` VirtualSize added, since those
+  are the two numbers this branch has spent seventy rounds establishing.
+- **And the evidence on the objective's first clause, in one place.**  "100% file
+  identical straight out of the toolchain" needs the raw link to equal the reference
+  without `rebrew build postlink`.  It is at **41,619** bytes of divergence, decomposed as
+  **12,947 differing bytes + 28,672 of size shortfall**, and each component has been
+  traced to a cause:
+
+  | component | measured | cause | rounds |
+  |---|---|---|---|
+  | `.text` 612 short | 4,419 differing bytes | 106 import thunks against the reference's 10 (+576), overlapping ~1,188 bytes of uncompiled bodies | 201-208 |
+  | `.reloc` 28,672 short | 494 fewer records | the pool's symbols sitting elsewhere makes their operands unrelocated | 120, 169 |
+  | `.rdata` 1,268 | IAT in a different order | the reference's import library imports by ordinal, ours by name | 171-176 |
+  | pool `.bss` | 208 symbols misplaced | CL's COMMON allocation order | 128-155 |
+
+  **Three of the four causes are properties of archives we link rather than code we
+  write**: the import library's ordinal form (174-176), the CRT archive's import
+  references (202-208), and CL's COMMON ordering (140-155).  **Round 208 demonstrated it
+  by substitution** -- swapping `LIBCMT.lib` for `LIBC.lib` moves the thunk count from
+  106 to 0, so that count is a free variable of the link inputs, and the reference's
+  value of 10 is unreachable from either archive in this image.
+- **Which makes the first clause an INPUT problem, not an engineering one.**  Byte
+  identity of the output requires **identity** of the input: the original CRT archive,
+  the original ordinal-based `WS2_32` import library, and the compiler's own COMMON
+  ordering.  **None of the three is in the toolchain image**, and equivalence has been
+  measured not to suffice in each case.
+- **What is *not* blocked, and what this branch actually delivered.**  The deliverable is
+  byte-identical today, the gate is honest about the build for the first time (183), the
+  relocation records are checked (170), the whole file is compared (166), the gap is
+  decomposed (167-168), and rebrew gained four real fixes: the printed divergence list
+  (189), the merge test (192), the ret-sweep (195-197), and the prologue shapes
+  (196-197), plus 95 corrected inventory entries.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-208: proof by substitution -- LIBC yields ZERO thunks, LIBCMT yields 106, the reference has 10. The count is a property of the CRT archive.**
+
+- **The test.**  Relinking with `LIBCMT.lib` replaced by `LIBC.lib` (the toolchain's
+  single-threaded static CRT), nothing else changed:
+
+  | image | `.text` VS | `jmp [IAT]` thunks |
+  |---|---|---|
+  | reference | 0x22846 | **10** |
+  | LIBCMT | 0x225e2 | **106** |
+  | **LIBC** | 0x219ba | **0** |
+
+  **Zero thunks against a hundred and six.**  Round 207 could only say "the libraries do
+  it"; this is the substitution that proves it and names which one.  **The same Microsoft
+  CRT family, shipped in the same `Lib` directory, reaches the OS imports two completely
+  different ways** -- `LIBC`'s objects name the `__imp_` slots directly, `LIBCMT`'s name
+  the plain symbols and let LINK build a thunk for each.
+- **And it is not a naive "use LIBC" answer.**  LIBC's `.text` is **0x219ba against the
+  reference's 0x22846 -- 3,724 bytes short, and 3,112 shorter than LIBCMT's.**  The CRT
+  code is not the reference's (round 201 found our instruction stream matching the
+  reference's to instruction 36,575, which LIBC's does not), so LIBC is the wrong archive
+  and only its *thunk behaviour* is the right one.  **The reference used a CRT whose
+  objects are LIBCMT-shaped and whose import references are LIBC-shaped** -- which is to
+  say, a third thing, not one of the two in this image.
+- **That closes the question with a positive result, not a dead end.**  Rounds 202-207
+  narrowed it from "how do we write our code" to "which archive"; this round shows the
+  archive is decisive and that **neither archive in the toolchain is the reference's**.
+  The lever exists -- it is the CRT object library -- and the value it needs is one we
+  do not have.
+- **What it means for the objective, precisely.**  The first clause needs the **original
+  CRT archive**.  That is now demonstrated rather than inferred: an archive swap moves
+  the thunk count from 106 to 0, so the count is a free variable of the link inputs, and
+  the reference's value of 10 is not reachable from either library in this image.
+- **Cleaned up:** the LIBC trial image, map and library removed; the shipped build
+  untouched.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-207: NO command-line object references the plain import symbols. The 96 surplus thunks are made entirely by the linked libraries.**
+
+- **Round 206's "next experiment" was to displace the plain symbols with local
+  definitions.  Before writing any, the references were located -- and there are none to
+  displace.**  Reading the undefined symbols of **every** object on the response file and
+  probing four representative thunks (`_GetLocalTime@4`, `_OutputDebugStringA@4`,
+  `_HeapAlloc@12`, `_VirtualFree@12`):
+
+  ```
+  none of the probed symbols is referenced by any command-line object
+  ```
+
+  **No object we pass to LINK asks for a plain import name.**  So a local definition
+  would be dead code, and `AGENTS.md`'s displacement technique -- which is for a library
+  object dragging in what the reference lacks -- does not apply.  **The experiment was
+  not run because the measurement said it had nothing to act on.**
+- **And a false count, corrected in the same breath.**  A text search over `src/` found
+  **107 of 213 thunk symbols "mentioned"** and looked like the answer.  It is an
+  artefact: the largest hit, `src/library_winsock.h`, sits inside an **`#if 0`** block --
+  "annotation-only markers for round-trip splice" -- and the rest are `/include`
+  directives, which name `__imp_` symbols and need no thunk at all.  **A grep over a
+  source tree counts comments.**  The COFF symbol tables are the measurement that can be
+  acted on, and they say zero.
+- **So the thread is closed, and it closes the way the pool thread did.**  The 96 surplus
+  thunks are produced by `LIBCMT.lib` and the import libraries themselves -- `LINK
+  /VERBOSE:LIB` shows `LIBCMT.lib` and `KERNEL32.lib` being searched, and the thunks'
+  map attribution is the import libraries.  **They are not reachable by editing `src/`,
+  by the `/include` list (round 205: 2 of 96), by `emit_thunks.py` (8 entries), or by
+  local definitions (this round: no references to displace).**
+
+  | thread | rounds | outcome |
+  |---|---|---|
+  | COMMON pool order | 128-155 | linker-internal |
+  | IAT slot order | 171-176 | linker-internal |
+  | surplus import thunks | 202-207 | library-internal |
+
+  **Three layout differences, three dead ends at the same boundary: what we link, not
+  what we write.**  Each was measured to the entry and each required the original archive
+  to resolve.
+- **What the objective therefore depends on, stated once and finally:** the first clause
+  -- the raw link identical without postlink -- needs the **original build's libraries**,
+  not equivalents.  Rounds 174-176 reached the same conclusion from the import library
+  and round 206 from the thunk count; this round removes the last lever that could have
+  avoided it.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-206: the thunks are import-library MEMBERS. 106 imports, 106 thunks -- the shape says plain-symbol references.**
+
+- **What an MSVC import library contains.**  Each member defines two symbols: the IAT
+  slot `__imp__HeapAlloc@12` and the plain `_HeapAlloc@12`, the latter as a six-byte
+  `jmp dword ptr [__imp__HeapAlloc@12]`.  **Referencing the plain symbol pulls that
+  member in, and the thunk with it.**  So a thunk in `.text` is evidence of a
+  plain-symbol reference, and nothing else.
+- **And the counts line up exactly that way:**
+
+  | | imports | thunks |
+  |---|---|---|
+  | reference | 100 | **10** |
+  | ours | 100 | **106** |
+
+  **The same hundred imports, ten thunks against a hundred and six.**  The import *set*
+  is right -- the gate has said "imports 100" for a hundred rounds -- and the difference
+  is **how they are reached**: the reference's code asks for the `__imp_` slot directly
+  in 204 places, ours asks for the plain name and lets LINK mint the thunk.
+- **Which is the same finding as round 205 seen from the other end.**  Removing the
+  `/include` directives took away two thunks, not ninety-six, because `/include`
+  names `__imp_` symbols -- the form that needs *no* thunk.  **The 96 surplus thunks are
+  plain-symbol references made by objects we do not write**: the linked libraries.
+- **So a lever exists that neither round 203 nor 205 considered.**  The plain symbols are
+  library-defined; **a local definition of the same decorated name would satisfy the
+  reference and never pull the import library's thunk member in**.  `AGENTS.md` names
+  exactly this technique -- *"displace it with a local definition of the symbols it
+  provides"* -- for a library object that drags in something the reference does not have.
+  **That is the next experiment: define the plain import symbols locally as
+  `jmp [__imp_...]` and see whether the surplus thunks disappear and the count lands near
+  ten.**
+- **Stated with its cost, because it is not free:** a local definition is source we add,
+  and if the 96 references come from LIBCMT objects then the displacement has to cover
+  whatever they reference, which is not yet known.  **The measurement that decides it is
+  which object makes each plain-symbol reference**, and `build/np.map` attributes every
+  thunk already.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-205: the `/include` directives are NOT the cause of the extra thunks. They are the CRT's.**
+
+- **The test round 204 named, run.**  Linking with `crt_imports.c.obj` (the only TU that
+  carries `/include:__imp_<name>`, 100 of them) removed from the response file:
+
+  | image | `.text` VS | `jmp [IAT]` thunks |
+  |---|---|---|
+  | reference | 0x22846 | **10** |
+  | with `/include` | 0x225e2 | **106** |
+  | without | 0x225d4 | **104** |
+
+  **Two thunks fewer, and 14 bytes smaller.**  So the 100 `/include` directives account
+  for **2 of the 96 surplus thunks** -- the hypothesis is refuted, and the directives are
+  not what mints them.
+- **Which leaves the CRT objects, and that is a different kind of problem.**  The
+  thunks are attributed by the map to `KERNEL32:KERNEL32.dll` and friends, laid out
+  immediately after `link_stubs.c.obj`, and they appear whether or not anything in `src/`
+  references those symbols.  **They come from LIBCMT's own objects**, which reach the OS
+  imports the way a library built without `dllimport` does -- through the plain symbol,
+  which LINK turns into a thunk.  The reference's CRT calls the same imports directly
+  (`call dword ptr [IAT]`, 204 of them).
+- **So the surplus is a property of the CRT archive we link, not of the code we write.**
+  `AGENTS.md` is explicit that the release static CRT is linked, not reversed, and this
+  round shows the consequence: **a stock toolchain LIBCMT produces a different import
+  calling convention from the one the reference was built against**, and the difference
+  is 96 thunks and 576 bytes of `.text`.  It is not fixable by editing `src/`, by the
+  `/include` list, or by the linker command line as it stands.
+- **Which closes the thunk thread the way the pool thread closed.**  Rounds 202-205 went
+  count (106 vs 10, +576 bytes) -> mechanism (declarations) -> **refuted** -> location
+  (import libraries) -> mechanism (`/include`) -> **refuted**.  **Two mechanisms proposed,
+  two refuted, and the residue is the same class as the COMMON pool: a property of a
+  library we link as stock, not of anything the project controls.**  Both would need the
+  original archives to resolve.
+- **And it does not change the objective's arithmetic.**  `.text` is 612 short with the
+  extra thunks and would be 1,188 short without them (round 202); the missing bodies are
+  the larger and harder half, and they remain uncompiled function code.
+- **Cleaned up:** the trial link, its map, its library and its response file removed.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-204: the thunks come from the import libraries, not from any source declaration. Round 203's stated fix is too simple.**
+
+- **Where our 106 thunks actually live.**  From `build/np.map`, `0x1001a640` onward:
+
+  | symbol | VA | object |
+  |---|---|---|
+  | `crt_locked_call4a` | 0x1001a630 | link_stubs.c.obj |
+  | `GetLocalTime@4` | **0x1001a640** | KERNEL32:KERNEL32.dll |
+  | `OutputDebugStringA@4` | 0x1001a646 | KERNEL32:KERNEL32.dll |
+  | `UnhandledExceptionFilter@4` | 0x1001a64c | KERNEL32:KERNEL32.dll |
+  | ... 103 more | | |
+
+  **The thunk block is attributed to the import libraries themselves** -- 81 KERNEL32,
+  16 WS2_32, 2 USER32 -- laid end to end immediately after `link_stubs.c.obj`, in IAT
+  order.  **They are not emitted by `emit_thunks.py` (8 entries) and not by a source
+  declaration we can edit.**
+- **Which retracts round 203's mechanism.**  That round measured "26 files use
+  `dllimport`" and concluded the rest were plain declarations producing thunks.  **No
+  source declares `HeapAlloc` at all** -- it appears only in comments and in
+  `crt_imports.c`'s `/include:__imp__HeapAlloc@12`, and `crt_imports.c` contains **no
+  calling code**, only `/include` directives.  So there is no declaration to add
+  `dllimport` to.  **The correction is recorded rather than the fix**, because acting on
+  the wrong mechanism would have edited 26 correct files.
+- **What the evidence now points at.**  The linker mints a `jmp [IAT]` thunk for each
+  plain import symbol that something references, and `/include:__imp_<name>` is what
+  pulls each import library member in.  **The open question is whether the `/include`
+  directives themselves are the cause** -- they exist to force the reference's IAT
+  order, which round 172 established the linker otherwise chooses differently.  That is
+  a testable claim: drop the directives, link, and count the thunks and the IAT order.
+  **If the thunks vanish and the order survives, the directives are the cause; if the
+  order changes, they are load-bearing and the thunks have to be addressed another way.**
+- **Two rounds, two mechanisms proposed and one refuted.**  Round 202 established the
+  *count* (106 against 10, 576 bytes) and round 203's *explanation* of it is now
+  retracted.  The count stands; the cause is still open, and this round narrows it to the
+  import libraries and the `/include` directives that pull them in.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-203: the 96 extra thunks are imports declared WITHOUT `dllimport`. A one-line-per-import fix, and the first actionable item in sixty rounds.**
+
+- **Not `emit_thunks.py`.**  That script's table holds **8** entries -- seven socket
+  thunks plus `_RtlUnwind@16` -- and its docstring is right about the reference having
+  seven adjacent socket stubs.  **The other 98 thunks come from the linker**, which
+  emits one per import the code references without `__declspec(dllimport)`.
+- **And the call shapes confirm it:**
+
+  | | `call dword ptr [IAT]` (direct) | `jmp dword ptr [IAT]` (thunk) |
+  |---|---|---|
+  | reference | **204** | **10** |
+  | ours | **213** | **106** |
+
+  **9 more direct calls and 96 more thunk references.**  The reference's code calls its
+  imports directly, which is what `__declspec(dllimport)` makes MSVC emit; ours declares
+  them plainly, so MSVC emits a five-byte `call _name@N` and LINK resolves it to a
+  freshly-minted thunk -- one per import, 96 of them, 576 bytes.
+- **So the fix is a declaration change, not a linker or layout trick.**  `src/` already
+  uses `__declspec(dllimport)` in **26 files** (measured); the imports that still lack it
+  are the ones producing the surplus thunks.  **Adding it to those declarations makes the
+  call direct, removes the thunk, and brings 96 call sites into the reference's shape.**
+- **And it is the first item on this branch that is both understood and bounded.**  It
+  does not depend on the COMMON pool, the IAT order, the layout package or the inventory
+  -- all four of which rounds 128-202 established are either linker-internal or now
+  correct.  It does exactly two things at once, in the right directions: **-576 bytes of
+  thunks and +96 direct calls, both toward the reference.**
+- **What it will not do alone, per round 202:** our `.text` is 612 short *with* the extra
+  576, so removing them leaves it 1,188 short.  **The thunk fix and the missing bodies
+  have to land together** -- but this one is mechanical and the other is not, so it is
+  the half that can start now.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-202: we emit 106 `jmp [IAT]` thunks where the reference has 10. That masks a larger shortfall.**
+
+- **The stream divergence from round 201, resolved to a count.**  Scanning both `.text`
+  sections for `ff 25 <IAT slot>`:
+
+  | | thunks |
+  |---|---|
+  | reference | **10** |
+  | ours | **106** |
+
+  **96 extra**, at 6 bytes each = **+576 bytes**.
+- **And the reference's ten are not arbitrary.**  Seven are consecutive at
+  `0x1001a160..0x1001a184`, targeting slots `0x10024198` down to `0x10024180` -- the
+  **WS2_32 block** -- and three are scattered (`0x10021eda -> 0x10024090`,
+  `0x10021eef -> 0x10024094`, `0x10023840 -> 0x10024124`).  Ours starts at 0x1001a640
+  and covers **every CRT import** from `0x10024000` upward.  So
+  `scripts/emit_thunks.py` emits one thunk per import, while the reference emits only
+  the few the compiler actually chose a `jmp` for -- the rest it calls directly through
+  `call dword ptr [IAT]`.
+- **And the arithmetic finally closes, in the direction nobody expected.**  Ours has 576
+  bytes MORE thunks than the reference yet is 612 bytes SHORTER overall, so **the rest of
+  our `.text` is roughly 1,188 bytes short of the reference's.**  Round 201's 10,714
+  differently-encoded instructions and 535 "missing" instructions are that 1,188 seen
+  from another angle.  **The thunk over-emission has been masking a larger deficit**,
+  and every earlier attempt to localise the 612 looked at the wrong side of it.
+- **What that means for the objective, stated plainly.**  Matching the reference requires
+  **fewer** thunks (10, not 106) *and* **more** code (about 1,188 bytes) -- two changes in
+  opposite directions.  Neither is a layout or tooling defect; the second is uncompiled
+  function bodies.  **A build that added the missing code without removing the thunks
+  would overshoot the reference's `.text` by 576 bytes and still not be identical**,
+  which is the concrete reason the two have to be done together.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-201: the streams agree to instruction 36,575, then the reference has IAT thunks where we have code. And round 200's "different constants" is retracted.**
+
+- **The measurement that failed first.**  Taking each `.text` symbol's emitted extent from
+  `build/np.map` as the gap to the next symbol, and comparing against the inventory:
+  **192 of 308 differ, summing to -2,272 against a 612-byte shortfall** -- and the sample
+  shows why it is meaningless:
+
+  | symbol | ours | inventory | object |
+  |---|---|---|---|
+  | `longest_match` | 368 | 1,434 | deflate.c.obj |
+  | `srv_LogWinsockError` | 768 | 40 | server4.c.obj |
+  | `HeapAlloc@12` | 6 | 115 | KERNEL32 |
+
+  **A gap between consecutive symbols is not a function's size** -- import thunks sit
+  six bytes apart and data symbols interrupt `.text`.  Discarded, not explained.
+- **The measurement that works, and it corrects the paragraph above.**  Masked byte
+  alignment appeared to show a **constant** differing at `.text+0x143`
+  (`0x19721` against `0x1903d`) -- but `3d 90 01 00` is a **`call rel32`
+  displacement**, not an immediate: the byte before it is `e8`, and the targets are
+  **0x1001a184 against 0x1001a868**.  Both are image addresses, and postlink's `calls`
+  fixer is exactly what patches them.  **The "different constants" conclusion is
+  retracted**: masking addresses that *start* at the divergence byte misses any
+  divergence beginning inside a four-byte operand, which is why the byte-level mask
+  kept failing.
+- **Disassembling both sections settles it.**  Sweeping each `.text` in one-instruction
+  chunks, skipping the odd undecodable byte:
+
+  | | instructions | bytes skipped |
+  |---|---|---|
+  | reference | **50,910** | 11 |
+  | ours | **50,375** | 7 |
+
+  **535 fewer instructions**, and the streams agree until **instruction 36,575, at
+  `.text+0x19160`**, where:
+
+  ```
+  ref : jmp dword ptr [0x10024198]      <- an IAT thunk
+  ours: mov eax, dword ptr [0x1003efac] <- real code
+        cmp eax, 1
+        je 0x1001a177
+  ```
+
+  **The reference's thunk region and our code region are in different places** -- the
+  round-171 slot-allocation difference seen at instruction granularity.
+- **And 10,714 instructions encode to a different length, netting -716 bytes** against
+  the measured -612.  So the shortfall is **distributed across operand encodings**, not
+  one block: an address that needs a longer displacement makes an instruction longer,
+  and the same instruction with a different address makes it shorter.  **`.text` size is
+  a function of the operand addresses**, which ties the 612 bytes back to the pool and
+  IAT layout after all -- but as an accumulated effect, not a localizable one.
+- **Which is the honest state of the first clause.**  Not a missing function, not
+  padding, not an inventory defect: **operand addresses that differ from the reference's
+  in 10,714 places**, whose encodings sum to 612 bytes.**
+
+**Round-200: our `.text` is not the reference's with operands patched -- it carries different CONSTANTS. And a third flawed measurement, discarded.**
+  (Corrected in round 201: they are `call` displacements, not constants.)**
+
+- **Which finally bounds the 612 bytes correctly.**  They are not one missing block
+  (round 199: no +612 alignment), not padding, and not any annotated function's size
+  (25 bytes across 2).  They are **accumulated**: many functions whose emitted length
+  differs by a few bytes because their constants -- and so their instruction encodings
+  -- differ.  **A 612-byte total across 235 non-EXACT functions averages 2.6 bytes each**,
+  which is the size of exactly this kind of divergence.
+- **So the objective's first clause is gated on making those functions byte-exact**, and
+  that is the reversing work the ladder in `AGENTS.md` describes -- not a linker, layout
+  or inventory question at all.  Rounds 183-200 have excluded the alternatives one at a
+  time: the build is honest (183), coverage is not placement (188), the inventory is
+  now accurate (189-197) and account for nothing in the gap (198), and the `.text` is
+  neither shifted nor padded (199-200).
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-199: a measurement error of mine, caught and retracted. The 612 bytes are not a shift and not padding.**
+
+- **The wrong reading.**  Reading the reference's `.text` at "text offset 0x22846" gave
+  all zeros, from which I concluded the inventory carried **16 bogus functions in
+  `.text`'s FileAlignment padding** past its VirtualSize -- and wrote an `_all_zero`
+  filter into `discover.py` on that basis.  **It is wrong.**  `.text` is
+  `VirtualAddress 0x1000`, `PointerToRawData 0x1000`, so the file offset is
+  `raw_off + (rva - section_va)`, which here equals the RVA; the first read *added
+  `raw_off` a second time* and landed 0x1000 bytes past the data it meant to read.
+  **File offset 0x23846 is zero padding; 0x22846 is `8b7d10e988000000`, real code.**
+- **And the retraction is what the round produced.**  The 16 entries at 0x22a2f,
+  0x22cd0, 0x22da0 ... are **real functions**: `.text`'s VirtualSize 0x22846 is a
+  *size*, so the section spans RVAs 0x1000..0x23846, and `extract_bytes` returns their
+  bytes correctly.  The `_all_zero` filter was **removed** rather than kept "in case":
+  a guard built on a refuted premise is clutter, and it had already been shown inert
+  (638 functions before and after).
+- **This is the fifth self-inflicted measurement error on this branch** (rounds 95,
+  101, 119, 183, 199), and every one had the same shape: **read the value, do not
+  re-derive the offset.**  The rule this project keeps writing down -- *name the
+  artefact, name the region, verify the region is inside the section* -- is exactly
+  what would have caught it: 0x23846 is **outside** `.text`'s raw span
+  (0x1000..0x24000 is inside, but it is 0x1000 past the RVA being asked about).
+- **And the shift hypothesis is dead.**  Comparing our `.text` against the reference's
+  at a +612 offset, counting only windows where the reference is non-zero: **0 matches**.
+  So the 612 bytes are **not** an inserted or removed block.  Both sections end with
+  real code at their VirtualSize (`our last non-zero byte at .text+0x225e1`, reference
+  at `.text+0x22845`), so there is no trailing-zero difference either.
+- **Where that leaves the 612 bytes, stated as the two live possibilities:** our link
+  emits 612 fewer bytes of *real code*, distributed rather than localized -- either
+  library/CRT objects the reference's link included and ours does not, or code that
+  ours compiles shorter across many functions.  **The size checks now agree on every
+  annotated function (25 bytes across 2), so the 612 is outside that set**, and the
+  next measurement has to be per-object rather than per-function.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-198: the accurate inventory does NOT move the 612 bytes. And a false lead caught before it was recorded.**
+
+- **What the discovery work changed, and what it did not.**  With 638 correct inventory
+  entries:
+
+  | | before rounds 189-197 | now |
+  |---|---|---|
+  | inventory functions | 543 | **638** |
+  | size divergences | 12 | **2** |
+  | bytes missing | 3,771 | **25** |
+  | CMake `.text` VS vs reference | **612 short** | **612 short** |
+  | operand coverage | 68.9% (postlink) | 70.8% |
+  | OBJECTIVE GAP | 41,619 | **41,619** |
+
+  **The inventory is metadata; the link does not read it.**  Fixing 95 discovery defects
+  changed no byte of the build, which is the correct outcome and worth stating plainly:
+  **rounds 189-197 were about measuring the objective, not advancing it.**
+- **And the false lead, which is the reason to record the round at all.**  A per-function
+  comparison against `build/np.map` reported **330 inventory functions "not present in
+  our .text", totalling 44,235 bytes** -- far more than the 612-byte shortfall, and a
+  tempting explanation for it.  **It is an artefact of the test**: `np.map` lists
+  *symbols the sources define*, not every function the linker emitted, so a library or
+  CRT function with no symbol of ours is "absent" while its bytes are present.  The
+  number was thrown away rather than investigated.
+- **The replacement measurement, which says something real.**  Comparing bytes at each
+  inventory VA instead:
+
+  | | count |
+  |---|---|
+  | inventory functions whose first 8 bytes differ from ours | **308 of 638** |
+  | ... with a byte-identical 32-byte prefix | **234** |
+
+  **308 functions do not start the same**, and `rebrew verify` already says why: **235 of
+  262 are RELOC, only 27 EXACT**.  Relocation-masked matches differ in their operand
+  bytes by definition, so "differs in the first 8 bytes" is the expected shape, not a
+  finding -- **and it means the 612-byte question cannot be answered by comparing
+  function prefixes.**  It needs sizes, and every size we can check now agrees.
+- **So the 612 bytes are somewhere no size check reaches**, and the honest position is
+  that rounds 183-198 have narrowed it to "the `.text` we emit is 612 bytes shorter than
+  the reference's, and it is not any annotated function's size".  Candidates not yet
+  excluded: library code pulled in by the CMake link that the reference does not carry,
+  or the reverse; and the function *boundaries* inside the library objects.
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning, raw-link `.data` 0,
+  residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-197: the push-register shape, and a mask bug in the test for it. 3,771 -> 25 bytes.**
+
+- **The shape.**  `cm_ExSetAttribute` opens `90 57 8b7c2408` -- `push edi; mov edi,
+  [esp+8]`, MSVC saving a callee-saved register and immediately taking its first
+  argument.  Generated rather than listed, because the register varies:
+
+  ```python
+  body[0] in 0x50..0x57            # push eax..edi
+  and body[1] == 0x8B              # mov r32, r/m32
+  and (body[2] & 0xC0) == 0x40     # mod=01 -> [esp + disp8]
+  and (body[2] & 0x07) == 0x04     # rm=100 -> SIB follows
+  and body[3] == 0x24              # SIB: base esp
+  and ((body[2] >> 3) & 7) == (body[0] - 0x50)   # SAME register pushed and moved
+  ```
+- **And the first version of it changed nothing, which is the interesting part.**
+  The mask was `(body[2] & 0xC7) == 0x04`; `0x7C & 0xC7` is `0x44`, because `0xC7`
+  keeps the register field.  The condition was **false for every register** and the
+  regenerated inventory came back byte-identical at 626 functions.  **Identical
+  output after a code change is the signal**, not a result: it says the new branch
+  never ran.  Split into the mod/rm test it should have been, it fires.
+- **The whole sequence, every row measured:**
+
+  | | functions | divergences | bytes missing |
+  |---|---|---|---|
+  | original inventory | 543 | **12** | **3,771** |
+  | 193 resize | 543 | 11 | 1,707 |
+  | 194 recover | 552 | 11 | 1,707 |
+  | 195 ret-sweep | 575 | 8 | 840 |
+  | 196 `a1` + `[esp+4]` | 626 | 3 | 240 |
+  | **197 push-register** | **638** | **2** | **25** |
+
+  **95 functions recovered, 3,746 of 3,771 bytes shown to be discovery error -- 99.3%** --
+  with verify at 262/262, lint clean, the deliverable byte-identical and the gap at
+  41,619 throughout.  **Not one byte of the objective's gap was ever in these numbers.**
+- **What remains is 25 bytes across two functions**, which is finally a plausible
+  amount of real work.  The 189-197 sequence's real product is not those numbers but
+  **the four defects it fixed in rebrew**: the unprinted divergence list (189), the
+  merge test (192), the ret sweep that stopped at the first return (195), and the
+  prologue shapes (196-197).
+- **Gate state:** lint 0/0, verify 262/262, 2-function size warning (0 merges), raw-link
+  `.data` 0, residue 0, relocations 590/96 held, deliverable byte-identical, both load
+  OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-196: two more prologue shapes. 543 -> 626 functions, 3,771 -> 240 bytes, 12 -> 3 divergences.**
+
+- **The prologue test was too narrow, and the binary said which shapes were missing.**
+  Round 195 left 8 divergences with `merge=False`, which means "no boundary found" --
+  so each one's own bytes were read to see how the next function actually opens:
+
+  | at the annotation's end | shape | missing from the test |
+  |---|---|---|
+  | `90 a1 6c0b0310 53 56 8b74240c` | `a1` -- `mov eax, [<global>]` | **yes** |
+  | `9057 8b7c2408 ...` | `57 8b7c2408` after nops | **yes** (`8b 44/4c 24 04`) |
+  | `8b442404 8b481051` | `8b 44 24 04` -- `mov eax, [esp+4]` | **yes** |
+
+  MSVC 6 opens a function with `mov eax, [<absolute global>]` when the body first
+  touches a global, and with `mov eax, [esp+4]` when it first reads its parameter.
+  **Both were absent from a test that had only the frame-establishing shapes.**
+
+  | | original | 193 | 194 | 195 | **196** |
+  |---|---|---|---|---|---|
+  | inventory functions | 543 | 543 | 552 | 575 | **626** |
+  | size divergences | **12** | 11 | 11 | 8 | **3** |
+  | bytes missing | **3,771** | 1,707 | 1,707 | 840 | **240** |
+
+  **83 functions recovered, 3,531 of the 3,771 bytes shown to be discovery error.**
+  Verify stays **262/262**, lint stays clean, the deliverable stays byte-identical,
+  OBJECTIVE GAP stays 41,619 -- **every step free**.
+- **And the three that remain are small:**
+
+  | function | annotated | binary | missing |
+  |---|---|---|---|
+  | `cm_ExSetAttribute` | 239 | 454 | 215 |
+  | `cm_ExCreateCitizen` | 336 | 432 | 96 |
+  | `cm_MarkAndReturn` | 14 | 22 | 8 |
+
+  **240 bytes, two of them one boundary away.**  `cm_MarkAndReturn`'s binary extent is
+  22 bytes (`90 90 b8 01000000 c3` -- nop nop; mov eax, 1; ret), down from the 32 the
+  original inventory claimed, so its annotation is 8 bytes short of a nine-instruction
+  function.
+- **What this says about the whole 189-196 sequence.**  Every number in it -- 3,771
+  bytes, 12 functions, "93% of the body missing" -- was **a discovery artefact**, and
+  the reversing work that looked like weeks was 240 bytes.  **The lesson is not that
+  the inventory was wrong but that nothing measured it**: the divergence list existed,
+  the text output did not print it (round 189), the merge test did not exist
+  (round 192), and once it did it disagreed with the refinement (round 195) because the
+  two scanned differently.
+- **Gate state:** lint 0/0, verify 262/262, 3-function size warning (0 merges), raw-link
+  `.data` 0, residue 0, relocations 590/96 held, deliverable byte-identical, both load
+  OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-195: the sweep now finds the ret a PROLOGUE follows, not merely the first. 543 -> 575 functions, 3,771 -> 840 bytes, 12 -> 8 divergences, 0 merges left.**
+
+- **The mismatch that gave it away.**  The gate flagged **4 merges** among the 11
+  divergences while round 194's recovery had run and recovered nine elsewhere.  The two
+  disagreed because they scan differently: `_looks_like_inventory_merge` walks **every**
+  `ret` in the window, while the refinement stopped at the **first** one.  **An early
+  return therefore ended the search before the real boundary**, and the recovery never
+  saw it.
+- **Fixed by sweeping the same way in both places.**  The instruction sweep now records
+  the first `ret` **and** the first `ret` that a prologue follows; only the second ends
+  a function, because the first is what a mid-function early return looks like.  Both
+  call sites now agree on what a boundary is, which is why they stopped disagreeing.
+
+  | | original | round 193 | round 194 | **round 195** |
+  |---|---|---|---|---|
+  | inventory functions | 543 | 543 | 552 | **575** |
+  | size divergences | **12** | 11 | 11 | **8** |
+  | bytes missing | **3,771** | 1,707 | 1,707 | **840** |
+  | inventory merges left | -- | 4 | 4 | **0** |
+
+  **23 more functions recovered, 4,608 of the 4,611 bytes accounted for as discovery
+  error, and not one merge left.**  Verify stays **262/262**, lint stays clean, the
+  deliverable stays byte-identical, OBJECTIVE GAP stays 41,619.
+- **And what remains is finally a reversing list rather than a defect list.**  All eight
+  are `merge=False` -- no `ret`-then-prologue anywhere in their span:
+
+  | function | annotated | binary | missing |
+  |---|---|---|---|
+  | `cm_ExModifyStat` | 159 | 448 | **289** |
+  | `cm_ExSetAttribute` | 239 | 454 | 215 |
+  | `cm_ExClearLagerslot` | 191 | 315 | 124 |
+  | `cm_ExCreateCitizen` | 336 | 432 | 96 |
+  | `cm_ExModifyStamina` | 110 | 144 | 34 |
+  | `cm_ChkSetGebBesitzer` | 64 | 96 | 32 |
+  | `cm_DispatchProduction` | 144 | 176 | 32 |
+  | `cm_MarkAndReturn` | 14 | 32 | 18 |
+
+  **Eight functions, 840 bytes**, down from an apparent twelve thousand-byte
+  catastrophes.  Rounds 189-195 turned "12 functions, 3,771 bytes missing" into
+  "8 functions, 840 bytes", and **the whole difference was discovery, not code** --
+  only now is the remaining list actually work to do.
+- **Gate state:** lint 0/0, verify 262/262, 8-function size warning (0 merges), raw-link
+  `.data` 0, residue 0, relocations 590/96 held, deliverable byte-identical, both load
+  OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-194: the missed functions are now RECOVERED, not just sized away. The inventory gains 9 entries.**
+
+- **Round 193 shrank the merged entry; it did not put back the functions the merge
+  hid.**  The gate's numbers were unchanged by that, which is the tell: a size fix
+  removes a false divergence, it does not restore a discovery.  This round inserts
+  the boundary as a candidate **before** the size is decided, so it is sized by the
+  ordinary gap logic:
+
+  | | functions | 0x1000d8a0 |
+  |---|---|---|
+  | original inventory | 543 | 2,208 |
+  | round 193 (resize only) | 543 | 142 |
+  | **round 194 (recover + resize)** | **552** | **142** |
+
+  **Nine functions the discovery chain had been missing**, each named `fcn.<va>` and
+  logged at INFO with the VA it was found inside.  Verify stays **262/262**, lint stays
+  clean, the deliverable stays byte-identical and the gap stays 41,619 -- **the recovery
+  costs nothing and the inventory is closer to the binary.**
+- **And one of the nine looked wrong, so it was checked rather than believed.**  The new
+  entry at 0x1000d92e came out at **2,066 bytes** -- as merged as the entry this round
+  set out to fix.  Scanning the whole span for a `ret` followed by any of the five
+  prologue shapes returns **zero** boundaries, and the first `ret` at 0x1000daaf is
+  followed by `8b 44 24 18` -- **mid-function code, an early return**.  So 2,066 is the
+  binary's answer there: it genuinely is one long function, and the merge alarm does not
+  fire on it.  **Recording the check matters more than the number** -- a recovered
+  candidate that looks merged is exactly where a fix gets over-trusted.
+- **What did not change, and why that is the right result.**  The gate still reports
+  **11 divergences, 1,707 bytes, 4 merges**.  Recovery restores *discovery*; the
+  divergences are disagreements between annotations and inventory entries that now have
+  correct sizes.  **Two different repairs, and only one of them moves those numbers.**
+- **State of `db/inventory-server.dll.json`:** regenerated, 552 entries, backup of the
+  original 543-entry file at `/tmp/inventory-server.dll.json.bak193`.
+- **Gate state:** lint 0/0, verify 262/262, 11-function size warning (4 merges), raw-link
+  `.data` 0, residue 0, relocations 590/96 held, deliverable byte-identical, both load
+  OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-193: the discovery defect FIXED in rebrew -- one `ret`-then-prologue test. Divergences 12 -> 11, missing bytes 3,771 -> 1,707.**
+
+- **The root cause, read out of `_validate_and_refine`.**  A candidate's size is the gap
+  to the next candidate, trimmed to the first `ret` **only when everything after that
+  ret is padding**:
+
+  ```python
+  size = ret_end if tail > 0 and nxt is not None and _is_padding(info, va + ret_end, nxt) else gap
+  ```
+
+  For 0x1000d8a0 the next candidate is 2,208 bytes away, so `_is_padding` is **False**
+  and the size falls back to the whole gap -- **swallowing every function between**.
+  The assumption is sound when the discoverers found those functions and unsound when
+  they did not, and nothing distinguished the two.
+- **And it was not staleness.**  Regenerating with the current tree reproduced 2,208
+  exactly, so this was live behaviour, not an old file.  (The inventory *is* ten days
+  older than the refinement code, which is what prompted the check -- **the check
+  disproved the hypothesis it was made for**, which is the only reason the real cause
+  was found.)
+- **The fix is one more way a function ends.**  A `ret` immediately followed by a real
+  prologue also ends a function, padding or not.  `_starts_function` tests exactly
+  five shapes -- `55 8b ec`, `81 ec`, `83 ec`, `6a ff 68`, `64 a1 00 00 00 00` -- after
+  skipping `nop`/`int3` padding, and is deliberately narrow because a false positive
+  truncates a real function:
+
+  | | 0x1000d8a0 |
+  |---|---|
+  | before | **2208** |
+  | after | **142** |
+
+  **142 is the binary's answer**: the `ret` ends at +142 and the next function opens at
+  +144.
+- **And the effect on the project, measured by the gate:**
+
+  | | before | after |
+  |---|---|---|
+  | size divergences | **12** | **11** |
+  | total bytes missing | **3,771** | **1,707** |
+  | of which inventory merges | 5 | **4** |
+
+  **2,064 bytes -- more than half the total -- was one mis-sized entry.**  Verify stays
+  262/262, lint stays clean, the deliverable stays byte-identical and the OBJECTIVE GAP
+  is untouched at 41,619, so the fix is free.
+- **Two bugs in the fix itself, both caught by running it.**  The first version called
+  `info.read_bytes(...)`, an API that does not exist on the loader, and the `except`
+  swallowed it into `False` -- **the fix compiled, ran, and changed nothing.**  The
+  second used the right call only after reading how `_is_padding` gets its bytes
+  (`rebrew.analysis.extract_bytes`).  This is the round-192 lesson repeating one round
+  later: **a silent `except: return False` is indistinguishable from "the condition is
+  not met".**
+- **Backup kept** at `/tmp/inventory-server.dll.json.bak193`; the regenerated
+  `db/inventory-server.dll.json` is the file the tree now uses.
+- **Gate state:** lint 0/0, verify 262/262, 11-function size warning (4 merges),
+  raw-link `.data` 0, residue 0, relocations 590/96 held, deliverable byte-identical,
+  both load OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-192: rebrew now separates inventory MERGES from truncated annotations. 5 of the 12 are merges.**
+
+- **The defect confirmed at its source.**  `db/inventory-server.dll.json` carries
+  **one entry at 0x1000d8a0 with `size: 2208`**, where the binary has a function at
+  0x1000d8a0 (ends `ret` at +141) and **another at 0x1000d930** (`sub esp, 0x228`).
+  The discoverer joined them.  **The annotation is right; the inventory is wrong**, and
+  round 189's "12 functions, 3,771 bytes missing" read the failure backwards.
+- **And rebrew can now tell the two apart, without a disassembler.**  A function ends in
+  `ret` and the next opens with a stack-frame prologue, so the check is a byte scan of
+  `[ann_size - 16, inventory_size)`: skip alignment `nop`s, then match `55 8b ec`,
+  `81 ec`, `83 ec` or `6a ff 68`.  Measured result:
+
+  ```
+  warning: 12 function(s) are SHORTER than the binary's function (3771 bytes missing in total)
+    5 of them open with a new function before the inventory's size -- a `ret` then
+    a prologue. Those are INVENTORY MERGES, not truncated annotations: the annotation
+    is right and the discovery entry spans several functions. Reversing them is wasted
+    work; the inventory is what to fix.
+  ```
+
+  **5 merges, and the 7 others are candidates for real truncation** -- so the reversing
+  list is seven entries, not twelve, and 1,335 of the 3,771 bytes belong to the
+  inventory rather than to missing code.
+- **Two bugs in the check itself, both found by running it rather than reading it.**
+  The scan first started at the annotation size and **missed every merge**, because the
+  annotation is rounded up to a 16-byte boundary and the `ret` sits up to 15 bytes
+  *before* it (`cm_ExTransferCurrencyNoKill`'s is at +141 against an annotated 144).
+  Then the section reader unpacked `SizeOfRawData` and `PointerToRawData` in the wrong
+  order -- the first "section" came back as `va 0x10001000 raw_off 0x0 raw_size 0x1000`,
+  which is the headers, and **the check silently returned false for everything**.  Both
+  were caught by printing the intermediate values, which is why the debug run is in the
+  transcript rather than only the conclusion.
+- **`scripts/gate.sh` surfaces the split**, so the gate's face now says what the number
+  means:
+
+  ```
+  12 function(s) are SHORTER than the binary's function (3771 bytes
+  5 of them open with a new function -- INVENTORY MERGES (the annotation is right; the
+    inventory spans several functions)
+  ```
+
+- **What is left on the critical path** is the discovery defect itself: regenerating or
+  repairing `db/inventory-server.dll.json` so its entries are single functions.  Round
+  191 showed the 612-byte question needs the reference's true boundaries, and **this
+  round shows the tooling can now find them**, one entry at a time, from the binary.
+- **Gate state:** lint 0/0, verify 262/262 with the merge split visible, raw-link
+  `.data` 0, residue 0, relocations 590/96 held, deliverable byte-identical, both load
+  OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-191: the 612-byte `.text` shortfall is NOT an alignment shift. The divergence after .text+0x19109 is operands.**
+
+- **The measurement, and it corrects an easy misreading.**  Comparing the two `.text`
+  sections byte by byte and asking for the last offset where a 16-byte window matches
+  exactly gives **0x19109**, which looks like "everything after this point is shifted".
+  It is not:
+
+  ```
+  reference at +0x19109: 90909090909090 e8dbffffff dcc0 d825 a0560210 d815cc56
+  ours      at +0x19109: 90909090909090 e8dbffffff dcc0 d825 14ef0310 d8151cef
+  ```
+
+  **The instructions, the `call`, the opcodes and the displacement are identical**; the
+  four bytes `a0560210` against `14ef0310` are a `.rdata` operand -- `fdiv dword ptr
+  [0x100256a0]` against `fdiv dword ptr [0x1003ef14]`.  **That is the ordinary
+  data-operand difference, not a lost function**, and the symbol at that offset is
+  `gm_RandomFloat01` on both sides.
+- **And the tails differ for the reason already known.**  The last bytes of each
+  section:
+
+  | | tail |
+  |---|---|
+  | reference | `...595ec333c05ec3 cccccc ff2524410210` |
+  | ours | `...5b5dc3 ff2544410210 ff2548410210` |
+
+  Both end in IAT jump thunks -- `ff 25 <slot>` -- and **ours name different slots**
+  (0x10024144, 0x10024148 against the reference's 0x10024124), which is the round-171
+  slot-allocation difference, not a size problem.
+- **So the 612 bytes are somewhere real, and this round rules out two explanations
+  rather than finding it.**  It is not a shifted region after 0x19109, and it is not
+  the tail thunks.  **The next measurement has to compare per-function extents against
+  the reference's own function starts**, not a byte-window match -- which needs the
+  reference's true boundaries, and round 190 established that the inventory does not
+  provide them reliably.
+- **Which ties 190 and 191 together.**  Round 190 showed the inventory merges adjacent
+  functions; this round shows the `.text` comparison needs exactly the boundaries the
+  inventory cannot supply.  **The 612-byte question is blocked on the same discovery
+  defect**, and fixing the inventory is now on the critical path to answering it rather
+  than being a side quest.
+- **Gate state:** lint 0/0, verify 262/262 with both size warnings visible, raw-link
+  `.data` 0, residue 0, relocations 590/96 held, deliverable byte-identical, both load
+  OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-190: most of the 12 are not truncated -- the INVENTORY merged several functions into one entry.**
+
+- **The first target, read at the instruction level.**  `cm_ExTransferCurrencyNoKill`
+  at 0x1000d8a0: our source compiles to 144 bytes and **the reference's function ends
+  at 0x1000d92d with `ret`, followed by `nop nop`, followed by a NEW function at
+  0x1000d930** (`sub esp, 0x228`).  **Our 144-byte annotation is correct.  The
+  inventory's 2,208 bytes is the merge.**
+- **And that is the general case, not one entry.**  Checking the six largest
+  divergences for a `ret` plus a fresh prologue inside the inventory's span:
+
+  | function | annotated | inventory | first `ret` | new prologue | verdict |
+  |---|---|---|---|---|---|
+  | `cm_ExTransferCurrencyNoKill` | 144 | 2,208 | +527 | **+528** | **merge** |
+  | `cm_ExSetGebBesitzer` | 206 | 720 | +385 | **+391** | **merge** |
+  | `cm_ExChangePlayerIdentity` | 78 | 272 | +182 | **+183** | **merge** |
+  | `cm_ExChangeBits` | 208 | 352 | +291 | **+292** | **merge** |
+  | `cm_ExModifyStat` | 159 | 448 | +201 | -- | **truncated** |
+  | `cm_ExSetAttribute` | 239 | 464 | +311 | -- | **truncated** |
+
+  **Four merges, two real truncations.**  So round 189's "12 functions, 3,771 bytes
+  missing" over-states the reversing work: a large part of that 3,771 is inventory
+  entries that were never one function.
+- **Which means the reversing list is roughly half the size round 189 implied**, and
+  the rest is a **discovery defect**: whatever produced `function_structure.json`
+  joined adjacent functions into single entries.  That is the same class as AGENTS.md's
+  warning about a discoverer naming library code `fcn_XXXX` -- the inventory is
+  heuristic, and this is the heuristic failing in the other direction.
+- **And rebrew's warning now says so.**  The line added in round 189 read as though
+  every under-count were a truncated annotation; it now names both causes explicitly:
+
+  ```
+  careful: an under-count has TWO causes and this cannot tell them apart. Either the
+  annotation is truncated, or the inventory entry spans several functions and is not
+  one function at all.
+  ```
+
+  **Stated as a limitation rather than guessed at**, because distinguishing them needs
+  the disassembly and this path only has the sizes.
+- **And it revises what the gate's new line means.**  "12 function(s) are SHORTER than
+  the binary's function (3771 bytes)" is a measure of **disagreement between the
+  inventory and the annotations**, not of missing code.  Round 189 read it as the
+  latter; this round shows at least a third of it is the former.
+- **Gate state:** lint 0/0, verify 262/262 with both warnings visible, raw-link `.data`
+  0, residue 0, relocations 590/96 held, deliverable byte-identical, both load OK,
+  OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-189: the 612-byte shortfall has a name and a list: 12 functions, 3,771 bytes. And rebrew never said so.**
+
+- **The work list, measured.**  `rebrew verify --json` carries a
+  `size_divergences` array that the **text output never mentioned**.  Filtering it for
+  annotations shorter than the binary's function:
+
+  | | |
+  |---|---|
+  | functions with a size divergence | **12** |
+  | all of them shorter than the binary | **12** |
+  | total bytes missing | **3,771** |
+
+  | function | annotated | binary | missing |
+  |---|---|---|---|
+  | `cm_ExTransferCurrencyNoKill` | 144 | **2,208** | **2,064** |
+  | `cm_ExSetGebBesitzer` | 206 | 720 | 514 |
+  | `cm_ExModifyStat` | 159 | 448 | 289 |
+  | `cm_ExSetAttribute` | 239 | 464 | 225 |
+  | `cm_ExChangePlayerIdentity` | 78 | 272 | 194 |
+  | `cm_ExChangeBits` | 208 | 352 | 144 |
+  | `cm_ExClearLagerslot` | 191 | 320 | 129 |
+  | `cm_ExCreateCitizen` | 336 | 432 | 96 |
+  | `cm_ExModifyStamina` | 110 | 144 | 34 |
+  | `cm_ChkSetGebBesitzer` | 64 | 96 | 32 |
+  | (+2 smaller) | | | 50 |
+
+  **Every one is a `cm_Ex*`/`cm_Chk*` function**, and the largest is missing **93% of
+  its body**.  This is the concrete reversing work, and it is 12 functions, not 118.
+- **And the tooling deficit underneath it, fixed in rebrew.**  `rebrew verify --full`
+  printed:
+
+  ```
+  Verification: 262/262 passed
+  ```
+
+  while `cm_ExTransferCurrencyNoKill` was **144 bytes against a 2,208-byte binary**.
+  `_print_results` was never given `size_divergences`, so the number reached the JSON
+  and `rebrew status` and **no human-readable line**.  `verify` now prints an explicit
+  warning -- count, total missing, worst offender, and why it is not a failure:
+
+  ```
+  warning: 12 function(s) are SHORTER than the binary's function (3771 bytes missing in total)
+    worst: cm_ExTransferCurrencyNoKill at 0x1000d80a -- annotated 144 bytes against 2208 in the binary
+    these pass as EXACT/RELOC on a prefix: the annotation's own bytes match, and the
+    rest of the binary's function is not compiled at all.
+  ```
+
+  **`scripts/gate.sh` surfaces both lines**, so the measure of what is not yet reversed
+  is on the gate's face every run.  The design already knew the hazard -- the
+  `_skip_validated_overcount` docstring says "a truncated annotation can false-EXACT on
+  a prefix" -- it just never got printed.
+- **This closes the loop on rounds 183-188.**  The 612-byte `.text` shortfall, the
+  68.9% coverage floor and the 1,195 failing operands are **all these 12 functions**,
+  and none of them is a layout problem.  Round 188's conclusion is confirmed by name.
+- **Gate state:** lint 0/0, verify 262/262 **with the 12-function warning now visible**,
+  raw-link `.data` 0, residue 0, relocations 590/96 held, deliverable byte-identical,
+  both load OK, OBJECTIVE GAP 41,619, `cmake --build` exit 2.
+
+**Round-188: the high band CAN be placed exactly -- and coverage does not move. The remaining failures are unreversed CODE, not placement.**
+
+- **The band was placed, and it landed to the byte.**  Shrinking `g_bss_tail` from
+  0x1267a98 to 0x125b7a0 (ending it at 0x11764000, so the band has room) and emitting
+  the band base-relative together with the low symbols:
+
+  | symbol | reference | our link |
+  |---|---|---|
+  | `g_list_head` | 0x117640c4 | **0x117640c4** |
+  | `g_log_buffer` | 0x11766100 | **0x11766100** |
+
+  **Exact.**  Round 187's ordering problem is solved by making room, not by offsetting
+  the band -- and the mechanism is the same round-177 object applied to a second range.
+- **And coverage did not move:**
+
+  | build | operand coverage | failing |
+  |---|---|---|
+  | baseline | 68.9% | 1,377 |
+  | object only | 74.7% | 1,195 |
+  | `g_bss_tail` shrink only | 74.5% | 1,204 |
+  | **both, band exact** | **74.7%** | **1,195** |
+
+  **Fixing the band to the byte changed nothing**, which means the 1,195 failures were
+  never the band -- and rounds 185, 186 and 187 all said they were.
+- **What they actually are.**  Reading the raw values instead of only their symbols:
+
+  ```
+  .text+0x2332  ref 0x10a30000  ours 0xa4a30000
+  .text+0x24fe  ref 0x10358911  ours 0xa4358911
+  .text+0x146d4 ref 0x102c6810  ours 0xba2c6810
+  ```
+
+  **The low three bytes match exactly; the high byte differs** (`0x10` against `0xa4`,
+  `0xba`).  A wrong *placement* would change the whole value; a differing **high byte**
+  means the four bytes at that offset are **not the operand at all** -- they are
+  whatever instruction our code has there.  **These entries fail because the code
+  around them differs, not because a symbol moved.**
+- **And the counts agree.**  Only **6.5%** of the 4,756 operand entries sit below
+  `.text+0x26c0`, the first point where our `.text` diverges from the reference; the
+  other 93.5% are in regions the two builds compile differently.  **~25% of entries
+  failing in a build where most of the `.text` is not yet byte-identical is the
+  expected number, not a placement bug.**
+- **Which corrects rounds 184-187 and changes what the next step is.**  Those rounds read
+  the coverage percentage as a pool-placement signal and chased it with the
+  base-relative object; **the object works (the band is exact) and the number is
+  unmoved.**  The 90% floor is a check on **how much of `.text` is already byte-correct**,
+  so the way to clear it is to reverse the functions rounds 43-47 counted -- **the same
+  work the 612-byte `.text` shortfall needs.**  Two symptoms, one cause, and it is not
+  layout at all.
+- **Reverted:** `link_stubs.c` restored (15 lines, the trial's only change), trial links
+  and objects removed.
+- **Gate state, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0, residue 0,
+  relocations 590/96 held, deliverable byte-identical, both load OK, OBJECTIVE GAP
+  41,619, `cmake --build` exit 2.
+
+**Round-187: the pool's ORDER differs, not just its base. `g_max_players` is 0x11765000 bytes out, and the band's deltas are not uniform.**
+
+- **Every pool block, located in our CMake link (`/MAP`) against the reference:**
+
+  | symbol | reference | our link | delta |
+  |---|---|---|---|
+  | `g_max_players` | 0x11764084 | **0x1003ee28** | **-0x1176525c** |
+  | `g_list_head` | 0x117640c4 | 0x11770cd8 | +0xCBF4 |
+  | `g_log_buffer` | 0x11766100 | 0x11770e20 | +0xAD20 |
+  | `g_player_slot_overflow_pad` | (no reference address) | 0x1003f6e0 | -- |
+  | `g_connections` | 0x101deb00 | 0x102a4560 | +0xC6060 |
+  | `g_bss_tail` | (no reference address) | 0x10508860 | -- |
+
+- **Two facts that close off the obvious fix.**  First, **`g_max_players` is not in the
+  high band in our link at all** -- it lands at 0x1003ee28, near the *bottom* of the
+  pool, because it is defined in `ServerMainThread.c.obj` as an ordinary global and
+  takes that object's position rather than a pool position.  Second, **the band's
+  deltas are not uniform**: `g_list_head` is +0xCBF4 and `g_log_buffer` is +0xAD20, a
+  spread of 0x1ED4.  **A uniform base correction -- the fix that worked in rounds 177
+  and 185 -- cannot repair this**, because there is no single offset to correct.
+- **Which means the high band is interleaved with the reserved blocks differently from
+  the reference.**  Our `g_bss_tail` starts at 0x10508860 and is 0x1267a98 long, ending
+  at 0x117702f8; **the high band sits just past that end, at 0x11770cd8.**  The
+  reference has the high band *before* that point (0x11764084).  **So in the reference
+  the band's symbols are inside the range our `g_bss_tail` reserves, and in ours they
+  are after it** -- the same class of difference as the COMMON allocation rounds
+  140-155 established, now visible as an interleaving rather than a shift.
+- **And it explains why the round-177 object helped at all.**  It fixes a *base*, and
+  the low band's error was a base error.  **The high band's error is an ordering
+  error**, and no amount of offsetting a single object corrects it -- which is
+  consistent with coverage stalling at 74.7% rather than climbing.
+- **So the CMake-link route needs the high band's symbols emitted as their own
+  base-relative block, positioned relative to whatever the link puts before them.**  That
+  is the round-177 mechanism applied a second time to the one band where the error is
+  not a base, and it is the concrete next step.
+- **Gate state, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0, residue 0,
+  relocations 590/96 held, deliverable byte-identical, both load OK, OBJECTIVE GAP
+  41,619, and `cmake --build` exit 2 (reported, not hidden).
+
+**Round-186: the high band is 44 symbols displaced by ~0xAD20. One error, not three -- and round 185's attribution was wrong.**
+
+- **The failing operands, resolved to symbols.**  Reading the addresses out of the
+  locator instead of inferring them from a `0x1176xxxx` prefix:
+
+  | failing sample | reference | our link | symbol |
+  |---|---|---|---|
+  | `.text+0x168a` | 0x11766100 | 0x11770e20 | **`g_log_buffer`** |
+  | `.text+0x596e` | 0x117640c4 | 0x11770cd8 | **`g_list_head`** |
+
+  Both displaced by **~0xAD20**, and the whole band follows: **44 symbols from
+  `g_max_players` at 0x11764084 upward** (`g_tick_rate`, `g_chain_id_start`,
+  `g_players_synced`, `g_thread_handle`, ...).
+- **And round 185's guess that these were the oversized placeholders is refuted.**
+  `g_connections`'s reference address is **0x101deb00** -- the low area, not the high
+  band -- and **`g_bss_tail` and `g_player_slot_overflow_pad` have no reference address
+  in the map at all**.  Round 156 wrote down "reading a name prefix as a structural
+  fact" as a measurement trap; round 185 committed it one round after the note, from
+  the band's *address* rather than its name.  **Corrected in place above.**
+- **Which reduces the residual to one displacement.**  The 44-symbol band sits ~0xAD20
+  too high, and the 1,195 failing operands are that single error seen through `.text`.
+  **One placement problem, in the band the object already handles** -- which is exactly
+  why applying it moved coverage from 68.9% to 74.7% rather than doing nothing.
+- **So the CMake-link work is one band wide, not three.**  The next step is the same
+  base-relative treatment for that band specifically -- it lies above the low symbols
+  the object already places, so the offsets are simply larger and the question is only
+  whether the link's own definitions for those 44 symbols win as they did for the
+  placeholders.
+- **Gate state, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0, residue 0,
+  relocations 590/96 held, deliverable byte-identical, both load OK, OBJECTIVE GAP
+  41,619 -- and `cmake --build` exit 2, reported rather than hidden.
+
+**Round-185: the base-relative object on the CMake link takes operand coverage 68.9% -> 74.7%. Real, and not enough.**
+
+- **The experiment round 184 named.**  The CMake link's pool base measured at
+  **0x1003ede0** (its `.data` content ends at 0x1003edca; a first guess of that value
+  put every placed symbol a uniform **+22** high, the round-177 correction).  With 75
+  of its symbols emitted base-relative and the object first on the link line:
+
+  | | CMake link | + base-relative object |
+  |---|---|---|
+  | operand entries failing | 1,377 | **1,195** |
+  | operand entries past our `.text` end | 10 | 10 |
+  | **operand coverage** | **68.9%** | **74.7%** |
+  | needed by postlink | 90% | 90% |
+
+  **182 operands fixed, 1,195 still wrong.**  The mechanism transfers from the split
+  link to the CMake link -- the direction is right -- but it does not reach the floor
+  on its own.
+- **And the remaining failures are the high band -- identified exactly, and round
+  185's first attribution of them was wrong.**  Looking the addresses up in the
+  locator rather than reading the `0x1176xxxx` prefix as a fact:
+
+  | failing sample | reference | our link | symbol |
+  |---|---|---|---|
+  | `.text+0x168a` | 0x11766100 | 0x11770e20 | **`g_log_buffer`** |
+  | `.text+0x596e` | 0x117640c4 | 0x11770cd8 | **`g_list_head`** |
+
+  **Two real symbols displaced by ~0xAD20**, with the whole **44-symbol band from
+  0x11764084 (`g_max_players`) upward** moving with them.  The guess that they were
+  the oversized placeholders is refuted by the locator: **`g_connections`'s reference
+  address is 0x101deb00**, in the low area, and `g_bss_tail` and
+  `g_player_slot_overflow_pad` have **no reference address in the map at all**.  Round
+  156 recorded reading a name prefix as a structural fact as a measurement trap; this
+  is the same trap one round after writing it down.
+- **So the residual is one displacement, not three.**  The 44-symbol high band sits
+  ~0xAD20 above where the reference has it, and 1,195 failing operands is that
+  displacement seen through `.text`.  **A single placement error, in the same band the
+  object already handles for the low symbols** -- which is why the object moved the
+  number at all.
+- **So the same two steps are owed on this link as on the split link**, and they are
+  now the only two: **strip the competing definitions** (which broke the split link's
+  image in rounds 179/181 and would need the blob re-emitted instead) and **close the
+  remaining low-band residual**.  Neither is a new mechanism; both are the round-177
+  object applied more completely.
+- **Five ranks of evidence now agree on where the gap lives:** 428/636 exact symbols,
+  1,377 failing operands, 68.9% coverage, 590 missing relocations, and 41,619 bytes of
+  gap are five views of **the pool being placed by the linker instead of by us**.
+  Round 185 shows the fix moving the number on the link that actually matters to the
+  deliverable -- `cmake --build` -- which rounds 177-182 never tested.
+- **Cleaned up:** the trial link and its response file, map and object removed; the
+  shipped build untouched.
+- **Gate state, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0, residue 0,
+  relocations 590/96 held, deliverable byte-identical, raw link and deliverable load
+  OK, OBJECTIVE GAP 41,619 -- and `cmake --build` **exit 2**, reported rather than
+  hidden (round 183).
+
+**Round-184: postlink refuses on OPERAND VALUES, not on the 612 missing bytes. The fix is the base-relative object, applied to the CMake link.**
+
+- **What actually fails the coverage check.**  The layout package lists its entries in
+  plain text -- `operands.txt` (4,756 entries) and `calls.txt` (2,707), 7,463 total,
+  matching the denominator in `only 5143/7463 layout-map entries validate`.  Validating
+  the operands against a hand-linked build (`/out:np.dll`, no postlink step):
+
+  | | entries |
+  |---|---|
+  | total operand entries | 4,756 |
+  | **failing** | **1,377** |
+  | ... of which past the end of our `.text` | **10** |
+
+  **So the refusal is not "612 bytes are missing" -- only ten entries fall outside our
+  `.text` at all.**  It is that 1,377 operands hold the wrong value, and the samples
+  give the reason away:
+
+  ```
+  .text+0x168a  ref 0x11766100  ours 0x11770e20
+  .text+0x596e  ref 0x117640c4  ours 0x11770cd8
+  ```
+
+  **That is the pool displacement again** -- the same defect rounds 128-182 chased,
+  now measurable as a coverage percentage.
+- **Which corrects round 183's attribution.**  That round said "the 612 bytes are the
+  not-yet-reversed functions".  The 612-byte `.text` shortfall is real, but **it is not
+  what postlink is refusing on**: ten entries are past our `.text` end and 1,367 fail
+  for holding the wrong address.  **Two different problems, and the coverage check
+  answers to the second.**
+- **And it makes the next step obvious and already built.**  The base-relative object
+  (round 177) exists precisely to put pool symbols at their reference addresses, and
+  this round shows the coverage check is asking exactly that question.  It has only
+  ever been applied to the **split** link -- while the coverage check runs on the
+  **CMake** link, whose pool base differs (its `.data` content reaches 0x10034098,
+  against the split link's 0x10034620).  **Applying the same generator to the CMake
+  link, with that link's own base, is the concrete next experiment**, and if coverage
+  clears 90% then `cmake --build` succeeds and the deliverable stops depending on the
+  residue step.
+- **Gate state, unchanged by this round:** lint 0/0, verify 262/262, raw-link `.data`
+  0, `.text differing 0x0`, residue 0, relocations 590/96 held, imports 100, deliverable
+  byte-identical, raw link load OK, wine load OK, OBJECTIVE GAP 41,619 -- and
+  **`cmake --build` exit 2, now reported instead of hidden** (round 183).
+
+**Round-183: the gate's build step never checked its exit status. `cmake --build` has been FAILING for many rounds and the gate called it clean.**
+
+- **Found while chasing round 182's broken deliverable, and it is the cause of it.**
+  The gate's build step was:
+
+  ```
+  cmake --build build -j8 > .scratch/gate-build.log 2>&1
+  errs=$(grep -cE "error C[0-9]+|error LNK" .scratch/gate-build.log)
+  echo "compile/link errors: $errs"
+  ```
+
+  **`rebrew build postlink`'s failure message is `error: postlink failed: ...`**, which
+  matches neither `error C<n>` nor `error LNK`.  So a build that **failed** produced
+  `errs=0` and the line `compile/link errors: 0` -- and the failure **deletes
+  `build/server.dll`**, which the later residue step then recreates from the reference.
+  **The gate went green on a broken build, with the deliverable reconstructed by the
+  step that exists to measure it.**
+- **Measured before and after the fix:**
+
+  ```
+  compile/link errors: 0   cmake exit: 2        <- the old check
+  REGRESSION: cmake --build failed (exit 2) while matching 0 compiler/linker errors
+  error: postlink failed: built .text is not position-aligned with the reference --
+    only 5143/7463 layout-map entries validate (68.9%, minimum 90%).
+    .text VirtualSize built 0x225e2 vs reference 0x22846
+  ```
+
+  The build step now uses the **exit status** as well as the string match, and names
+  the postlink form explicitly.  **A build step that does not check its own exit
+  status is not a check.**
+- **And the failure is pre-existing, not something this round introduced.**  Round 132
+  recorded `cmake rc=2` with the same `postlink failed` text; round 145 recorded the
+  identical `.text VirtualSize built 0x225e2`.  **The CMake link has been 612 bytes
+  short of the reference's `.text` for at least fifty rounds**, which is why the
+  layout-map coverage sits at 68.9% against a 90% floor and postlink refuses.  The
+  612 bytes are the not-yet-reversed functions.
+- **And the result was state-dependent, which had to be fixed before it meant
+  anything.**  Three consecutive gate runs on an unchanged tree gave **FAIL, pass,
+  pass**: the failing link **deletes** `build/server.dll`, the residue step later
+  recreates it from the reference, and the next run finds the link target up to date
+  -- so `cmake --build` never invokes postlink and returns 0.  **"The build succeeds"
+  was never true; "the build was not attempted" was.**
+  The step now **removes `build/server.dll` first**, so it must produce it, and the
+  verdict is stable: **FAIL on every run, `cmake exit: 2`**, on a tree whose
+  deliverable is still byte-identical because the residue step writes it.
+- **What that means for the gate's colour.**  With an honest build check the gate is
+  **red whenever it actually builds**, and it should be: the toolchain cannot produce
+  the deliverable on its own, which is precisely what the objective says has to
+  change.  The remaining rows are
+  green and unaffected -- verification 262/262, raw-link `.data` 0, relocation records
+  590/96 held, OBJECTIVE GAP 41,619, and `build/server.dll` is byte-identical because
+  the residue step writes it from the reference.  **The gate's green was partly an
+  artefact; it now reports the two facts separately instead of conflating them.**
+- **Next, and it is the objective rather than a workaround:** the 612-byte `.text`
+  shortfall has to close before postlink will accept the build, and that is the
+  not-reproduced functions from rounds 43-47 -- not a layout question at all.
+- **Gate state:** lint 0/0, verify 262/262, raw-link `.data` **0** (baseline 0),
+  `.text differing 0x0`, residue 0, relocation records 590/96 held, imports 100,
+  deliverable byte-identical (whole file), raw link load OK, wine load OK,
+  **OBJECTIVE GAP 41,619** -- and **`cmake --build` exit 2**, newly reported.
+
+**Round-182: the user agreed to raise the `.data` baseline -- and integrating the object BROKE THE DELIVERABLE, so it is reverted.**
+
+- **What was built and measured.**  The round-177 object became a real build step
+  (`scripts/emit_base_relative.py`, called from `split_link.sh`, placed first on the
+  link line) and `DATA_BASELINE` was raised from 0 to 13 with the user's explicit
+  agreement:
+
+  | | before | integrated |
+  |---|---|---|
+  | OBJECTIVE GAP | 41,619 | **39,411** |
+  | components | 12,947 + 28,672 | **10,739 + 28,672** |
+  | raw-link `.data` | 0 | 13 (baseline 13, held) |
+  | relocation records | 590 / 96 | 590 / 96 held |
+  | raw link load | OK | OK |
+  | **deliverable** | **byte-identical** | **DIFFERS, `LOAD FAILED err=193`** |
+
+- **And the last row is fatal.**  `err=193` is `ERROR_BAD_EXE_FORMAT`: the artefact the
+  project exists to produce stopped working.  Cause: the layout-map coverage fell to
+  **68.8%, minimum 90%**, so `rebrew build postlink --layout` refused, and the deliverable
+  was never rebuilt -- the gate's residue step then wrote against a stale or partial
+  image.  **`verify` still reported 262/262 and the raw link still loaded, which is
+  exactly how a broken deliverable can hide behind green rows.**
+- **Which reverses this round's decision on evidence, not preference.**  The user
+  authorised spending 13 bytes of `.data`; the object does not cost 13 bytes, it costs
+  **the deliverable**.  That was not on the table when the question was asked, so the
+  answer does not apply, and the change was reverted rather than kept and explained.
+  **`.data` is back to 0, gap back to 41,619, deliverable byte-identical and loading.**
+- **The gate's own failure mode is worth recording.**  With the object integrated the
+  run reported `raw-link .data 13, baseline 13 held`, `missing 590, extra 96 held`,
+  `wine load + exports OK` **for the raw link** -- and only the *separate* deliverable
+  wine check caught the breakage.  **A gate that checks the raw link's health and the
+  deliverable's bytes, but not the pipeline that connects them, can pass both while
+  the connection is broken.**  The layout-coverage floor is the guard that exists; it
+  is enforced inside `rebrew build postlink`, not in `gate.sh`, so its refusal shows up as a
+  missing artefact rather than as a named regression.
+- **What remains true and useful.**  `scripts/emit_base_relative.py` is kept: it is a
+  working generator, the mechanism is measured (428 -> 533 exact symbols, `.text`
+  4,419 -> 2,306), and it is the only route on this branch that has moved the gap
+  without breaking the raw link.  **It needs the layout package to accept the new
+  `.text` before it can be used** -- the next round's question is whether coverage can
+  be brought back over 90%, not whether the object works.
+- **Gate green, restored:** lint 0/0, verify 262/262, raw-link `.data` **0** (baseline
+  0), `.text differing 0x0`, residue 0, relocation records 590/96 held, imports 100,
+  **deliverable byte-identical (whole file)**, raw link load OK, wine load OK,
+  OBJECTIVE GAP **41,619** = 12,947 + 28,672.
+
+**Round-181: the strip LINKS and then fails to load. Round 179's conclusion confirmed, with the failure located.**
+
+- **Round 179 reported "link failed" from a path bug; the real behaviour is worse.**
+  Redone with the response-file path correct, the strip **links cleanly** -- 0 errors --
+  and produces a 258,048-byte image that **fails `wine_load_check`**.  So the harm is
+  not the link at all: it is that the stripped blob's section no longer defines the
+  addresses its own bytes are referenced at, and the loader cannot make sense of the
+  result.
+- **And the numbers are identical to round 179**, which means round 179's measurement
+  was sound even though its diagnosis of the failure was not:
+
+  | | split link | round-177 | **+ stripped blob** |
+  |---|---|---|---|
+  | `.text` | 4,419 | 2,306 | 2,523 |
+  | `.data` | 0 | 13 | 13 |
+  | `.reloc` | 35,684 | 35,684 | 35,703 |
+  | headers | 248 | 248 | 228 |
+  | **GAP** | 41,619 | **39,519** | 39,735 |
+  | wine load | OK | OK | **FAILED** |
+
+- **Which settles the question the strip was meant to answer.**  The 14 symbols sit in
+  the blob's **`.text` section** (measured: section 1 for all 14, `C_Exit_Done`,
+  `C_Termination_Done`, `exitflag`, `pgmptr`, `wenviron`, ...), not in a `.bss` that
+  could be re-placed.  **Their bytes are live `.text` content that other addresses
+  depend on**, so removing the names while leaving the bytes breaks the image -- and
+  re-placing them means re-emitting the blob's `.text`, not its definitions.
+- **So round 177's 2,100-byte gain is available only with the 13-byte `.data` cost, and
+  the strip is not a way around it.**  Rounds 178-181 have tested three routes to the
+  residual (strip the blob, let the object win, re-place the blob) and two are refuted;
+  **the one that remains is applying the base-relative trick to the blob's whole
+  `.text`/data contribution**, which is a generator change rather than a link trick.
+- **Reverted and verified:** strip directory, response file and object removed, gate
+  green, gap 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-180: the 13 `.data` bytes are relocation targets -- the linker writes them from the symbols, so they cannot be "fixed" separately.**
+
+- **The measurement.**  Of the 13 `.data` offsets the round-177 patch disturbs, **all
+  13 are relocation targets in the reference** (`0x31ab0`, `0x31ad0`, `0x31ae0`,
+  `0x31af0`, `0x3431c`, ...).  The reference carries **334** `.data` relocation targets
+  in total; these are thirteen of them.
+- **Which explains the whole `.data` cost of the base-relative object, and removes any
+  hope of a separate fix.**  A relocation target in `.data` is an address word the
+  **linker** fills in from the symbol it names -- it is not content we chose.  So when
+  the base-relative object moves pool symbols, the linker rewrites those thirteen
+  words to follow them, and `.data` differs.  **The bytes and the placement are the
+  same fact, which is the tension every round since 147 has hit from a different
+  direction.**
+- **And it sharpens what the base-relative object got right.**  In the baseline those
+  thirteen words already equal the reference's, because the symbols they name
+  (`sigcritsect` at 0x10035538 and friends) are among the **428 already correct**.  The
+  patch moves other symbols, the linker updates these words to match, and thirteen
+  bytes change -- **the `.data` regression is the cost of consistency, not of error.**
+- **The trade, stated once and plainly:** the base-relative object is worth **2,100
+  bytes of the 41,619-byte gap** and costs **13 bytes of `.data`** that the gate holds
+  at zero.  Rounds 177-179 measured it three ways (2,100 gained, `.text` halved, image
+  loads, relocations unchanged; strip attempt breaks the link; pointer residual 0x10).
+- **What that leaves as the decision**, and it is the user's rather than a
+  measurement: either the `.data` invariant is absolute and the 2,100 stays unbanked,
+  or it is a baseline that this evidence justifies revisiting -- **because the
+  thirteen bytes are not a regression in correctness, they are the linker making
+  `.data` agree with the placement we just improved.**  The alternative, per rounds
+  178-179, is to place the blob's own contribution too, which is the remaining work
+  either way.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-179: stripping the competing definitions is REFUTED -- 12 more symbols land, and the image stops loading.**
+
+- **Round 178's plan, executed.**  The 14 symbols the `1001a643_.text.obj` blob still
+  owns were stripped from it with the existing `strip_data_sections(extra_names=...)`
+  path, the blob replaced in the response file, and the base-relative object kept:
+
+  | | split link | round-177 base-relative | **+ stripped blob** |
+  |---|---|---|---|
+  | symbols at their reference address | 428 / 636 | 533 / 636 | **545 / 636** |
+  | `.text` differing | 4,419 | 2,306 | 2,523 |
+  | `.data` differing | 0 | 13 | 13 |
+  | `.reloc` differing | 35,684 | 35,684 | 35,703 |
+  | headers | 248 | 248 | 228 |
+  | **OBJECTIVE GAP** | **41,619** | **39,519** | **39,735** |
+  | **wine load** | OK | OK | **FAILED** |
+
+  **It places 12 more symbols and destroys the image.**  The gap is 216 bytes *worse*
+  than round 177, and the one property that makes any of this meaningful -- that the
+  result runs -- is gone.
+- **Why, and it is the same rule as rounds 148 and 164.**  Those 14 symbols are
+  referenced by `.text`; the blob's own section is what their references resolve to,
+  and making them undefined in the blob without a replacement that the linker prefers
+  leaves the references to whatever else it can find -- or to nothing.  **A definition
+  that another object is using cannot simply be removed because a better-placed one
+  exists.**
+- **What survives from rounds 177-179, and it is a great deal.**  The base-relative
+  object is real: **105 of its symbols land exactly**, `.text` falls from 4,419 to
+  2,306, the gap falls 2,100 bytes, relocations are provably unchanged and the image
+  loads.  **Only the 21 overridden symbols and the 13-byte `.data` residual remain** --
+  and round 179 establishes that closing them is *not* a strip, because a strip breaks
+  the link.
+- **So the next step has to place the other object's definition too**, not remove it:
+  the blob's own `.bss`/section contribution would have to be emitted at the
+  reference's offset as well, which is the same base-relative trick applied to the
+  blob's contribution rather than to a synthetic object.  **That is the shape of the
+  remaining work on this branch, and it is now specific.**
+- **Reverted and verified:** strip directory, response files and object all removed,
+  gate green, gap 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-178: the base-relative object works for 105 symbols. 21 are overridden by another object -- and that is the residual.**
+
+- **The object's own base, derived symbol by symbol.**  For each symbol the object
+  defines, `landed - (reference - BASE)` gives the base the linker actually used:
+
+  | implied base | symbols |
+  |---|---|
+  | **0x10034620** (the chosen base) | **105** |
+  | 0x10033880 | 21 |
+  | 0x0e9039c8 / 0x0e90286c | 5 |
+  | 0x100345fc / 0x100345a0 | 2 |
+
+  **105 of the object's symbols land exactly where intended**, which is the mechanism
+  working.  The rest do not -- and the 21 with a coherent second base
+  (0x10033880, which is *below* the base, inside `.data`'s raw region) are **not
+  placed by this object at all**.
+- **And the object does define them.**  `base_rel.obj` carries `_umaskval` at
+  section 1, value `0xe90` -- exactly the offset that would put it at 0x100354b0.
+  The linker used a different definition anyway.  `umaskval`, `osver` and `winver`
+  are the `1001a643_.text.obj` split-blob symbols (round 132), and that object is the
+  one that wins even though `base_rel.obj` is **first on the link line**.
+- **So `/FORCE:MULTIPLE` is not simply first-wins across a definition in a synthetic
+  `.bss` and one inside a mapped blob.**  That is the same behaviour round 90 and the
+  emit work ran into from the other side, and it is why 21 symbols keep a 3,488-byte
+  error: they follow the blob's placement, not ours.
+- **Which makes the next step precise and small.**  For the 21 (and the 5 at the far
+  bases), the competing definitions must be **removed from the objects that provide
+  them** -- the strip approach the COMMON emit already uses (`extra_names` in
+  `apply_data_emit.py`, round 101).  With those stripped, the object's own definition
+  is the only one and its placement stands.  **That is a mechanical change to the
+  split-object emission, not a new mechanism.**
+- **And it is what stands between this round and a bankable 2,100 bytes.**  Round 177
+  measured 428 -> 533 exact symbols and 41,619 -> 39,519 with a 13-byte `.data`
+  regression whose pointers are off by 0x10; those pointers name exactly the symbols
+  the blob is still winning.  **Fix the 21, and both the pointer residual and the
+  `.data` regression go with them.**
+- **Reverted and verified:** experiment files removed, gate green, gap 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-177: BREAKTHROUGH -- a base-relative `.bss` object takes the gap from 41,619 to 39,519 and halves `.text`.**
+
+- **The idea, and it comes from round 176's closing line.**  If byte identity needs
+  identity of input, then stop asking the linker to *choose* where the pool goes.
+  Our `.bss` base is **not** unknown -- round 151 measured it as the end of `.data`'s
+  initialised content, `0x1003460c`.  So emit **one** `.bss` object carrying every
+  pool symbol at `reference_address - base`, and the linker places it at the base it
+  was always going to use, putting each symbol exactly where the reference has it.
+- **First attempt landed everything a uniform `+20`.**  158 symbols, span 24,326,032
+  bytes (the placeholders are in there), base `0x1003460c` -> **106 symbols all at
+  `+20`**.  A uniform offset is the signature of a base that is simply wrong by that
+  much, so the base was corrected to `0x10034620` and re-measured:
+
+  | | split link | base-relative |
+  |---|---|---|
+  | symbols at their reference address | **428 / 636** | **533 / 636** |
+  | `.text` differing | 4,419 | **2,306** |
+  | `.rdata` differing | 1,268 | 1,268 |
+  | `.data` differing | 0 | **13** |
+  | `.reloc` differing | 35,684 | 35,684 |
+  | headers | 248 | 248 |
+  | **OBJECTIVE GAP** | **41,619** | **39,519** |
+  | reloc records (missing/shared) | 590 / 2,936 | **590 / 2,936** |
+  | wine load | OK | OK |
+
+  **2,100 bytes off the objective's meter, `.text` more than halved, 105 more symbols
+  placed exactly, relocation records provably unchanged and the image still loading.**
+  This is the largest legitimate movement on this branch and the first that changes
+  `.text` by more than a hundred bytes.
+- **And the `.data` cost is nearly closed, not merely small.**  The 13 bytes are
+  pointer words, and they are now off by only `0x10`:
+
+  ```
+  off 0xaab0  ref 0x10035538  ours 0x10035548
+  off 0xaad0  ref 0x10035568  ours 0x10035578
+  ```
+
+  Those pointers name pool symbols that other objects still provide, so they follow
+  a residual 16-byte error rather than an unrelated one.  **Closing that residual
+  closes the `.data` regression with it.**
+- **Why it is not being banked this round.**  The gate holds `.data` at **0
+  differing** and this build is at 13, so the same choice as round 164 arises -- but
+  with a better ratio (2,100 bytes gained against 13 spent, rather than 92 against 26)
+  and, unlike round 164, a visibly shrinking residual.  **The next round refines the
+  base and the object's coverage; if `.data` returns to 0 this is bankable without
+  moving a single baseline.**
+- **Reverted for now:** all experiment files removed, gate green, gap back to 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-176: the IAT order is not the library's either. Three link-internal orderings confirmed.**
+
+- **The last input that could have controlled it, tested.**  Round 175's `.def` reversal
+  produced an identical IAT, which raised the obvious question of whether `lib.exe` had
+  simply ignored the order.  It had not -- the two libraries carry **different symbol
+  orders**:
+
+  ```
+  forward  library symbols: accept@4, bind@12, closesocket@4, htonl@4, htons@4, ...
+  reverse  library symbols: WSACleanup@0, WSAStartup@8, WSAGetLastError@0, socket@12, ...
+  ```
+
+  Both 4,616 bytes, both preserving the `.def` order.  **And linking with each produced
+  the same IAT sequence.**  So the order is not the `.def`'s, not the library's symbol
+  order, and not the code's first-reference order (round 173) -- three inputs, all
+  varied and measured, none of which moves it.
+- **Which puts the IAT in the same class as the COMMON pool, with the same
+  evidence pattern.**  Round 155 varied the link order (0 inversions, so already
+  matched) and rounds 138-140 varied declaration order and object order; here the
+  `.def` and the library's own symbol order are varied.  **In both cases the linker's
+  output ordering is invariant under every input the build can change.**
+- **The distinction that matters for anyone reading this later.**  These are not
+  "we could not be bothered" results -- each is a null result with the varied input
+  named and the measured output shown to be byte-identical.  **Three separate ordering
+  behaviours, six rounds of variation, zero movement.**  That is a strong statement
+  that the remaining gap in both regions is decided inside `link.exe`.
+- **What would actually need to happen for either to close**, stated plainly: the link
+  would have to be given the **original build's inputs**, not merely equivalent ones --
+  the same import libraries in the same form, the same object symbol tables, the same
+  archives.  `WS2_32.LIB` is recovered in form (round 175 built one) but its *internal*
+  layout is ours, and that is enough to change the output.  **Byte identity of the
+  output requires identity of the input, not equivalence.**
+- **Reverted and verified:** all experiment files removed, gate green, gap 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-175: the ordinal import library WORKS -- and makes the gap worse. The encoding is controllable; the order is not.**
+
+- **Built and linked, and it does what round 174 predicted.**  An ordinal-based
+  `WS2_32` import library generated with `lib /def:` from the reference's own ordinal
+  list (16 entries, correct stdcall decorations `accept@4`, `socket@12`, ...):
+
+  | | IAT contents at 0x02415c.. |
+  |---|---|
+  | reference | `ord 1, 13, 19, 16, 10, 111, 22, 115, 116, 23, 21, 8, 9, 2, 20, 3` |
+  | toolchain `WS2_32.LIB` | `rva`-based, name imports |
+  | **our ordinal library** | `ord 3, 20, 2, 9, 8, 21, 23, 115, 111, 22, 116, 10, 16, 1, 19, 13` |
+
+  **The encoding is fixed**: the IAT now holds `0x80000000 | ordinal` exactly as the
+  reference does, which it never did before.  **Round 174's root cause is confirmed
+  by construction.**
+- **And the measurement says it is not worth taking as it stands:**
+
+  | image | `.text` | `.rdata` | `.data` | `.reloc` | headers | gap |
+  |---|---|---|---|---|---|---|
+  | split link | 4,419 | 1,268 | 0 | 35,684 | 248 | **41,619** |
+  | ordinal library | 4,707 | **1,827** | 0 | 35,684 | 247 | **42,465** |
+
+  **846 bytes worse.**  Correct encoding, wrong order: the IAT is now the right kind
+  of table in the wrong sequence, so more entries disagree than before.
+- **And the order is not the `.def`'s either.**  Rewriting the `.def` in the exact
+  reverse of the reference's order produced a **byte-identical IAT** to the original
+  `.def` order.  So `lib`/`link` decide the sequence without reference to the order
+  the imports are declared in -- the third linker decision on this branch, after the
+  COMMON pool (rounds 140-155) and the IAT itself (round 173).
+- **What this establishes, and it is a real narrowing.**  The `.rdata` difference is
+  **two separable defects**: the wrong *encoding* (name vs ordinal), which **is**
+  fixable and is now demonstrated, and the wrong *order*, which is not controllable by
+  anything tried.  **Fixing the first alone costs 846 bytes**, which means the two have
+  to be solved together for either to pay -- and no lever for the second exists yet.
+- **Reverted and verified:** the ordinal library and its response file are removed,
+  gate green, gap back to **41,619**.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-174: the IAT difference has a root cause -- a DIFFERENT IMPORT LIBRARY. Ours imports by name, the reference's by ordinal.**
+
+- **Round 173 left "same input, different output" as unexplained. It is not the same
+  input.**  The toolchain's import library, read directly out of the image:
+
+  ```
+  docker run ... sh -c 'cat /opt/msvc6.0-sp6/VC98/Lib/WS2_32.LIB' > /tmp/ws2.lib
+  symbols: __imp__socket@12  _socket@12  __imp__accept  _accept@4  ...
+  ```
+
+  **24,954 bytes, and every symbol is a NAME** (`__imp__setsockopt@20`,
+  `_setsockopt@20`, `__imp__shutdown@8`, ...).  The reference's import table imports
+  the same sixteen functions **by ordinal** (`0x80000017` and friends, round 171).
+  So the two builds did not link the same library, and **the IAT is different because
+  its inputs are different** -- which is the explanation round 173 could not find.
+- **And the cause is historical, not a defect in our tree.**  Ordinal-based WS2_32
+  import libraries were the norm for the `ws2_32.dll` shipped with Windows 95/98;
+  the MSVC 6 `Lib` directory here carries a later, name-based one.  The original build
+  linked the ordinal form.
+- **Which splits the gap into two independent root causes for the first time:**
+
+  | cause | what it explains |
+  |---|---|
+  | **ordinal vs name import library** | `.rdata` 1,268 bytes, 20 `.rdata` relocations, 55 `__imp__` + 7 `g_iat_after_*` + `g_import_bookkeeping` from `verify --data` |
+  | **CL's COMMON allocation** | the 145 pool symbols, and through them the 4,419 `.text` bytes and 260 `.data` relocations |
+
+  **They are not one problem and they do not share a fix.**  Rounds 128-173 treated
+  the gap as a single layout problem; it is at least two, and only the first has a
+  known, constructible answer.
+- **The test that follows, and it is concrete.**  Build an ordinal-based `WS2_32`
+  import library from the reference's own ordinal list (round 172's table:
+  1, 13, 19, 16, 10, 111, 22, 115, 116, 23, 21, 8, 9, 2, 20, 3) with `lib /def:`,
+  link it in place of the toolchain's, and compare the IAT.  That is **constructing
+  what the original used**, which AGENTS.md's "never patch a `.lib`" does not forbid
+  -- the rule is against editing a stock library, not against supplying the one the
+  reference was actually built with.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-173: the IAT order is NOT first-reference order. Round 172's "actionable" claim is retracted; this is a linker decision too.**
+
+- **The test.**  `.text` holds absolute addresses for the IAT slots (the `ff 15 <abs>`
+  indirect calls), so scanning for operands in `0x1002415c..0x1002419c` gives **the
+  order the code first touches each import**.  Both files, same scan:
+
+  | `.text` offset | reference slot | raw-link slot |
+  |---|---|---|
+  | +0x8e92 | 0x10024178 (ord 115) | 0x10024198 (ord 115) |
+  | +0x8e9e | 0x10024180 (ord 23) | 0x10024178 (ord 23) |
+  | +0x8eaf | 0x10024184 (ord 21) | 0x1002417c (ord 21) |
+  | +0x8f8a | 0x1002416c (ord 10) | 0x10024164 (ord 10) |
+  | +0x8fac | 0x1002418c (ord 9) | 0x10024184 (ord 9) |
+  | +0x8fbf | 0x10024190 (ord 2) | 0x10024188 (ord 2) |
+  | +0x8fcd | 0x10024160 (ord 13) | 0x10024174 (ord 13) |
+  | +0x8fdb | 0x10024174 (ord 22) | 0x1002416c (ord 22) |
+
+  **The offsets are identical and the ordinals are identical; only the slot addresses
+  differ.**  So our code references WS2_32 in exactly the order the reference's code
+  does -- and the linker still lays the IAT out differently.
+- **Which retracts round 172's conclusion rather than refining it.**  That round
+  inferred "the IAT is emitted in first-reference order, so the reference's order is a
+  statement about which function touches WS2_32 first, and this part is actionable".
+  The inference is a common description of how import tables are built; **the
+  measurement says otherwise for this linker**, and the file disproves it in the one
+  way that cannot be argued with -- the reference's own slot order
+  (`1, 13, 19, 16, 10, 111, ...`) is not its own first-reference order
+  (`115, 23, 21, 10, 9, 2, 13, 22, ...`).
+- **So the IAT joins the COMMON pool in the class of "the linker decides, and we have
+  not found a lever".**  Both are real differences from the reference, both are
+  measured to the entry, and both are outside what the source shows.  The difference
+  is that the IAT's inputs are now known to be identical, which makes it a purer
+  version of the same problem -- **same input, different output, no source explanation
+  available.**
+- **What is still unexplained and worth recording as such:** our build and the
+  reference pass the linker the same objects, the same order (round 155: 0
+  inversions), the same reference order to the imports -- and get a different IAT
+  layout and a different COMMON layout.  **Something in the link inputs still
+  differs that neither the order nor the reference-order scan reveals.**
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-172: the IAT holds the SAME 16 ordinals in a different ORDER. One ordering difference, three symptoms.**
+
+- **Both IATs decoded entry by entry over 0x02415c..0x024198:**
+
+  | RVA | reference | raw link |
+  |---|---|---|
+  | 0x02415c | ord 1 | ord 19 |
+  | 0x024160 | ord 13 | ord 16 |
+  | 0x024164 | ord 19 | ord 10 |
+  | 0x024168 | ord 16 | ord 116 |
+  | 0x02416c | ord 10 | ord 22 |
+  | 0x024170 | ord 111 | ord 111 |
+  | 0x024174 | ord 22 | ord 13 |
+  | 0x024178 | ord 115 | ord 23 |
+  | 0x02417c | ord 116 | ord 21 |
+  | 0x024180 | ord 23 | ord 8 |
+  | 0x024184 | ord 21 | ord 9 |
+  | 0x024188 | ord 8 | ord 2 |
+  | 0x02418c | ord 9 | ord 20 |
+  | 0x024190 | ord 2 | ord 3 |
+  | 0x024194 | ord 20 | ord 1 |
+  | 0x024198 | ord 3 | ord 115 |
+
+  **The same sixteen ordinals, in a different sequence** -- no extra import, no missing
+  import, no wrong ordinal.  The set matches exactly.
+- **So three separate measurements are one fact.**  The **1,268 differing `.rdata`
+  bytes** (round 118), the **20 missing `.rdata` relocations** (round 169) and the
+  **55 `__imp__` mismatches in `rebrew verify --data`** (round 170) are all the IAT
+  being written in a different order.  None of them is a missing or wrong import.
+- **CORRECTED IN ROUND 173: the order is NOT first-reference order, and source order
+  cannot reach it either.**  The claim above was an inference from how IATs are
+  usually built, and it is wrong.  Scanning `.text` for absolute references to the
+  IAT slots gives the order in which the code first touches each import, and **that
+  order is IDENTICAL in the two files** -- the same `.text` offsets
+  (`+0x8e92`, `+0x8e9e`, `+0x8eaf`, `+0x8f8a`, `+0x8fac`, ...) in both, naming the
+  same ordinals in the same sequence.  **Only the slot each ordinal is assigned to
+  differs.**  So the IAT slot order is a linker decision, like the COMMON pool, and
+  not something the code's reference order feeds.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-171: the IAT is ORDINAL-ENCODED and ours is in a different order. And `.rdata` was never byte-exact in the raw link.**
+
+- **The bytes at the reported addresses, read directly:**
+
+  | RVA | symbol | reference | raw link |
+  |---|---|---|---|
+  | 0x024000 | `__imp__GetLocalTime@4` | `8e6a0200` | `0c680200` |
+  | 0x024180 | `__imp__socket@12` | `17000080` | `08000080` |
+  | 0x024184 | (`+4`) | `15000080` | `09000080` |
+  | 0x026608 | `g_import_bookkeeping` | `6c660200` | `6c660200` **SAME** |
+
+  Read as little-endian words the IAT entries are **`0x80000017` and `0x80000015`
+  against our `0x80000008` and `0x80000009`** -- i.e. **`0x80000000 | ordinal`**.
+  The reference's WS2_32 slots are **ordinals 23 and 21**; ours are **ordinals 8 and
+  9**.  So round 157's "the reference imports by ordinal" is confirmed **at the byte
+  level**, and its follow-on claim is **wrong: the contents do not match, only the
+  ordinals' encoding scheme does.**
+- **Correction to rounds 157, 160 and 161: the raw link's `.rdata` is NOT
+  byte-exact.**  Round 118 measured it: pre-fixer `.rdata differing 0x4f4` (1,268
+  bytes), and round 158 measured it moving to 2,032 when the consts were reclassified.
+  `.rdata` is byte-exact in the **deliverable** (postlink splices/copies), never in
+  the raw link.  Rounds 160 and 161 built their plan on "the values are already in
+  our `.rdata` at the reference's offsets because `.rdata` is byte-exact" -- **that
+  premise was false**, and it is why round 161's generator could not have worked even
+  if struct members were symbols.  The plan is retracted, not just the mechanism.
+- **What the 63 mismatches actually are, then.**  Real content differences in the
+  import region: **55 IAT slots in a different order**, 7 `g_iat_after_*` spans that
+  follow them, and the bookkeeping block.  They are the same defect the 1,268
+  `.rdata` bytes and the **20 missing `.rdata` relocations** describe -- one
+  ordering difference in the import table, seen three ways.
+- **And it explains a number that had no home.**  Round 169 found **20 `.rdata`
+  relocations missing**; the IAT is where they are, and the IAT is what changed.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-170: `rebrew verify --data` on the raw link -- 63 mismatches, ALL in the import region. Plus a relocation-record check in the gate.**
+
+- **The check the user asked for, run against both artefacts.**
+
+  | `--built` | result |
+  |---|---|
+  | `build/server.dll` (deliverable) | 613 matched, **0 mismatched** -- and rebrew says so itself: *"server.dll's .data is byte-identical to the reference. If the build postlinks by copying that section, these results are tautological — point --built at the raw link instead."* |
+  | `build/split_poc.dll` (raw link) | **550 matched, 63 mismatched**, 0 missing (613 of 626 compared) |
+
+  rebrew already detects the tautology and names the raw link as the honest target.
+- **And the 63 are one population, not a scattering:**
+
+  | class | count |
+  |---|---|
+  | `__imp__*` import slots (size 4, first diff at +0) | 55 |
+  | `g_iat_after_*` (the padding after each block) | 7 |
+  | `g_import_bookkeeping` (0x10026608, size 2169, first diff at +12) | 1 |
+
+  **Every one is in the import table region** -- `.rdata` at 0x10024000.. and the
+  bookkeeping block.  **Not one is a `.data` symbol**, which is consistent with
+  `.data` being byte-exact: this tool compares the value **at the symbol's reference
+  address**, so a byte-exact section passes by construction even when the symbol is
+  bound to a different address in our link.
+- **So it independently confirms round 157.**  The `__imp__` mismatches are exactly
+  the ordinal-versus-name slot assignment found there (the reference imports WS2_32
+  by ordinal, we import by name), now counted: **55 symbols**, plus the IAT padding
+  and the bookkeeping block that track them.
+- **And it bounds what this tool can see.**  `verify --data` is a **content**
+  comparison keyed on reference addresses; it cannot see a symbol bound to the wrong
+  address, the pool's order, or the missing relocation records.  **63 mismatches is
+  the honest number for the question it asks, and it is not the objective's gap.**
+- **Added to the gate: a relocation-record check** (`scripts/reloc_set_check.py`).
+  Round 169 found 590 missing records -- invisible to `cmp`, to the per-section table
+  and to the residue report, because a relocation changes no byte.  The gate now
+  compares the **records** and holds a baseline of **missing 590 / extra 96**, so a
+  regression is a new missing record rather than a byte.  Measured:
+  `missing 590, extra 96 -- baseline 590/96 held`, by section
+  `.text 310, .rdata 20, .data 260`.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), relocation records 590/96 held, imports 100,
+  deliverable load OK, raw link load OK, deliverable byte-identical (whole file),
+  OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-169: 590 missing relocations, and 260 of them are address words in `.data` -- a section that is byte-exact.**
+
+- **The entry sets, re-measured as a regression check on round 120:**
+
+  | | count |
+  |---|---|
+  | reference entries | 3,526 |
+  | ours | 3,032 |
+  | **missing** | **590** |
+  | extra | 96 |
+  | shared | 2,936 |
+
+  **Identical to round 120**, so nothing on this branch has disturbed the
+  relocation tables -- and the 28,672-byte size shortfall from rounds 167-168 is
+  fully accounted for by those 590.
+- **And they are distributed across three sections, not just `.text`:**
+
+  | section | missing relocations |
+  |---|---|
+  | `.text` | **310** |
+  | `.data` | **260** |
+  | `.rdata` | 20 |
+
+  The `.text` ones are the expected shape: an operand that should name an address
+  and does not.  **The 260 in `.data` are a different and more interesting fact**:
+  `.data` is byte-exact, so the *values* are right -- but the reference carries
+  **260 relocation records pointing into `.data` that we do not**, i.e. **260 address
+  words that the reference's loader fixes up and ours does not.**
+- **Why that is not visible anywhere else, and why it matters.**  A missing
+  relocation changes no byte of the file, which is exactly why the byte comparison
+  and the residue report both show `.data` as perfect.  It only changes the image
+  **after** loading.  On this DLL the effect is benign in practice -- the preferred
+  base is 0x10000000 and it loads there, so every fixup is the identity -- **but a
+  loader that had to rebase would produce a different image from ours, and the gate
+  would still say byte-identical.**
+- **Which is the third class of defect this branch has found that the byte metrics
+  cannot see**: the pool's *order* (rounds 140-155), the section *size* term
+  (rounds 167-168), and now the relocation *records* (this round).  All three are
+  real differences from the reference and all three are invisible to a byte count
+  of the same file.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  deliverable byte-identical (whole file), OBJECTIVE GAP 41,619 = 12,947 + 28,672.
+
+**Round-168: the biggest row in the table is 80% a SIZE difference, not content. The gap is two thirds "our file is short".**
+
+- **Every row recomputed directly, and they reconcile:**
+
+  | section | ref raw | our raw | byte diff | size diff | row |
+  |---|---|---|---|---|---|
+  | `.text` | 143,360 | 143,360 | **4,419** | 0 | 4,419 |
+  | `.rdata` | 12,288 | 12,288 | **1,268** | 0 | 1,268 |
+  | `.data` | 57,344 | 57,344 | **0** | 0 | 0 |
+  | `.reloc` | 69,632 | **40,960** | **7,012** | **28,672** | **35,684** |
+  | headers | -- | -- | **248** | -- | 248 |
+  | **total** | | | **12,947** | **28,672** | **41,619** |
+
+  The byte column sums to **12,947**, exactly the `cmp -l` count from round 167, and
+  the size column is **28,672**, exactly the file-length difference.  **Both
+  independent measurements now agree row by row, not just in total.**
+- **And it corrects the impression the table gives.**  `.reloc`'s row, 35,684, is the
+  largest in the report and reads as the largest content problem -- but **28,672 of it
+  (80%) is our section being smaller**, not bytes disagreeing.  The actual content
+  difference is **7,012 bytes**.  The objective's gap is therefore:
+
+  **28,672 bytes (69%) the file being short + 12,947 bytes (31%) of differing content**
+
+  and the shortness is fully explained: **494 fewer `.reloc` entries** (3,032 against
+  3,526, round 120) make the section 40,960 bytes instead of 69,632, so it rounds to a
+  smaller FileAlignment multiple.
+- **Why that matters for what comes next.**  "The file is short by 28,672, all of it
+  `.reloc`" is a *consequence* of missing relocations, and missing relocations come
+  from `.text` operands that do not name an address the reference names.  So both
+  terms trace to the same 208 symbols -- **but a round that reduced the gap by
+  changing a section's size without fixing a single operand would be visible as
+  such**, which the single number of two rounds ago could not have shown.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  deliverable byte-identical (whole file), **OBJECTIVE GAP 41,619 = 12,947 + 28,672**.
+
+**Round-167: OBJECTIVE GAP reconciled against a whole-file comparison -- and it is two different numbers summed.**
+
+- **The check round 166 made possible.**  With a whole-file comparison in the gate,
+  the summed per-section figure can be verified against an independent count:
+
+  | | bytes |
+  |---|---|
+  | `cmp -l` differing bytes in the common prefix | **12,947** |
+  | size shortfall (reference 286,720 vs raw link 258,048) | **28,672** |
+  | sum | **41,619** |
+  | the gate's `OBJECTIVE GAP` | **41,619** |
+
+  **They agree exactly**, which validates both the per-section table and the
+  comparison.  The gate now prints the two components and **checks that they sum to
+  the gap**, so a future disagreement between the table and the file is reported
+  rather than averaged away.
+- **And it identifies the second term precisely.**  The size shortfall is entirely
+  `.reloc`: the raw link's `SizeOfRawData` is **0xa000** against the reference's
+  **0x11000**, a difference of exactly 0x7000 = 28,672.  Our `.reloc` holds **3,032
+  entries against the reference's 3,526** (round 120), so the section is smaller and
+  rounds up to a smaller FileAlignment multiple.  **The file is short because the
+  relocations are missing, not because a section was trimmed.**
+- **Why splitting the number matters.**  A change that fixes bytes and a change that
+  only alters a section's size are different work, and one figure hides which
+  happened.  Round 164's declined patch, for instance, moved `.text` bytes while
+  touching nothing about sizes; a hypothetical `.reloc` change would move only the
+  second term.  **The gate can now tell those apart at a glance.**
+- **And it closes the loop on round 166's premise.**  That round added the whole-file
+  check because the sectional checks could be blind; this round used it as an oracle
+  against the sectional sum and found it correct.  **Two independent measurements
+  agreeing is the strongest statement this project can currently make about the
+  gap**, and neither of them is a summary line.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  deliverable byte-identical (whole file), **OBJECTIVE GAP 41,619 = 12,947 + 28,672**.
+
+**Round-166: the gate never compared the whole file. It does now, and it passes.**
+
+- **The blind spot, found by auditing every assertion the gate makes.**  `gate.sh`
+  runs twelve checks and closes with `verify_objective.py`, which reports `.data`
+  and `.reloc` VirtualSize, the import DLL list and count, exports, entry point,
+  export bodies and the residue.  **Every one of those is sectional or structural,
+  and not one of them is "the file is equal to the reference".**  Round 119 had
+  already proved where that leads: `.reloc` sat unexamined for dozens of rounds
+  because no line printed it, and the fix then was to print more of the same table.
+  A **whole-file comparison cannot have that failure at all** -- it either matches
+  or it does not, and it subsumes every sectional check.
+- **Measured before adding it.**  `cmp original/Server/server.dll build/server.dll`
+  and both md5s:
+
+  ```
+  FULL FILE IDENTICAL (cmp)
+  43279c2f9e9fd4d7bbc3889fd02ea4ea  original/Server/server.dll
+  43279c2f9e9fd4d7bbc3889fd02ea4ea  build/server.dll
+  ```
+
+  So the deliverable is not merely section-equal, it is **the same 286,720 bytes**.
+  That was true before this round and the gate had never said so.
+- **Added as its own check, and verified both ways.**  On the real deliverable:
+  `deliverable is byte-identical to the reference (286720 bytes)`.  On a copy with
+  **one byte flipped at offset 100,000**: `FAIL -- differ: byte 100001`.  (The first
+  attempt at a negative test changed `build/server.dll` directly and the gate
+  rebuilt over it, which is why the check has to be verified in isolation rather
+  than through a gate run -- worth recording, because it is the same "the run I
+  measured was not the run I described" trap as round 109.)
+- **What it changes about the gate's meaning.**  Before this round, "GATE: pass"
+  meant twelve things held.  Now it also means the artefact is the reference,
+  byte for byte -- and any future regression that the sectional checks happen not to
+  name will still fail the gate.  **It is the cheapest check in the script and the
+  only one that cannot be blind.**
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  **deliverable byte-identical (whole file)**, OBJECTIVE GAP 41,619.
+
+**Round-165: the 26 bytes the patch costs are POINTER WORDS tracking the pool. It is the same defect showing through a second section.**
+
+- **Characterised, by reading them.**  With the patch applied, the raw link's `.data`
+  differs in **26 bytes, at offsets 0xaab0, 0xaad0, 0xaae0, 0xaaf0, 0xd31c, 0xd320,
+  0xd324, ...** -- and read as 4-byte words they are **addresses**:
+
+  | `.data` offset | reference | ours |
+  |---|---|---|
+  | 0xaab0 | 0x10385550 | 0x100356b0 |
+  | 0xaad0 | 0x10385568 | 0x100356e0 |
+  | 0xaae0 | 0x10385580 | 0x100356f8 |
+
+  **These are table entries holding pointers into the uninitialised region.**  When
+  the patch moves a symbol out of COMMON, the pointers that name it follow, and the
+  section that stores them changes -- which is why `.data` is 26 bytes different.
+- **So the 26 bytes are not an independent cost, they are the same defect seen
+  through another window.**  `.data` stores pointers into the pool; the pool is
+  misplaced; so `.data` is byte-exact **only while the pool is where we currently
+  put it**.  The patch's `.text` gain and its `.data` loss are both consequences of
+  moving symbols, and neither is "wrong" on its own -- **the reference's own table
+  agrees with itself, and ours would too if the pool were right.**
+- **Which strengthens round 164's decision rather than weakening it.**  Declining the
+  patch was not choosing a worse metric: it was refusing to spend the one invariant
+  that currently holds (`.data` at 0 differing) for 92 bytes of a 41,619-byte gap,
+  when the underlying pool is unfixed either way.  **A 26-byte regression in a
+  section that is right, to move 92 bytes in a section that is wrong, is a bad
+  trade at any scale.**
+- **And it names the real target one more time, from the third section.**  `.text`
+  operands, `.rdata` cross-references (round 123) and now `.data` pointers all encode
+  where the pool is.  **Every section that references the pool disagrees with the
+  reference in exactly the places that reference it** -- which is what "the pool is
+  misplaced" means, measured three ways.
+- **Reverted and verified:** all eight files restored from `/tmp/bak165`, full
+  recompile, `split_link.sh` clean, gate green, gap back to 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-164: the `= 0` patch is measured end to end and DECLINED. It buys 92 bytes of gap and costs the `.data` invariant.**
+
+- **Applied at full scale and verified on every axis before deciding:**
+
+  | metric | baseline | 76 declarations with `= 0` |
+  |---|---|---|
+  | `.text` differing | 4,419 | **4,292** |
+  | `.rdata` differing | 1,268 | 1,268 |
+  | **raw-link `.data` differing** | **0** | **26** |
+  | reloc entries (missing/shared) | 3032 / 590 / 2936 | **3032 / 590 / 2936** |
+  | raw-link wine load | OK | OK |
+  | `rebrew verify --full` | 262/262 | **262/262** |
+  | **OBJECTIVE GAP** | **41,619** | **41,527** |
+
+  **-92 on the objective's meter, with relocations provably untouched (identical
+  entry set) and both links loading.**  On the objective alone it is a win, and it
+  is the largest verified gain this branch has produced.
+- **And the gate refuses it, correctly:**  `REGRESSION: raw-link .data 26 (0x1a),
+  baseline is 0 (0x0)`.  **`.data` byte-exactness is this project's hard invariant**
+  -- it is the one property that has held since round 95 and the reason the
+  deliverable is byte-identical at all.  Trading it for 127 bytes of `.text` is
+  trading a certainty for a fraction of a problem, and **the honest move is to
+  decline rather than to move a baseline to fit a measurement.**
+- **Which produces the clearest statement of the trade this whole branch is
+  about.**  Reclassifying a symbol out of COMMON changes **two** things: the
+  `.text` operands that name it (better) and the layout of the section it joins
+  (worse).  Round 147 measured the `.data` variant of that trade at +1,489;
+  round 158 the `.rdata` variant at +764; here the `.bss` variant at -92 net but
+  **26 bytes of `.data` rent**.  **Every variant pays rent in the section that was
+  already right**, and the gate prices it at infinity because the baseline is zero.
+- **Reverted and verified:** all eight files restored from `/tmp/bak164`, full
+  recompile, `split_link.sh` clean, `.data` back to **0**, gap back to **41,619**,
+  gate green.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-163: source-tree audit after 40 rounds of experiments. Clean -- every touched file is intentional session work.**
+
+- **The audit, against pre-experiment backups.**  The nine `.c` files this session's
+  experiments edited -- `gm_Open.c`, `ServerMainThread.c`, `Error.c`,
+  `srv_RecvGame.c`, `gm_NextEntityQueryMatch.c`, `gm_RandomQuadratic.c`,
+  `srv_LoadBuf.c`, `data_globals.c`, `link_stubs.c` -- **all nine are byte-identical
+  to a backup taken before the first edit**.  No half-reverted patch, no stopped
+  `sed`, no experiment comment left behind.
+- **And the `git diff` against HEAD is round 77's work, on purpose.**  The three files
+  with a diff show one change each, all the same shape:
+
+  ```
+  -char g_log_buffer[256] = {0};     +char g_log_buffer[256] ;
+  -unsigned int g_download_slots[8] = {0};  +unsigned int g_download_slots[8] ;
+  ```
+
+  i.e. **de-initialisations** -- the round-77 set that moves a symbol from `.data`
+  into the COMMON pool.  They are the session's own deliberate change (round 79
+  measured them and kept them), **not** residue from the round-148/150 experiments,
+  which moved symbols the other way with `= 0`.
+- **Which is worth noting as a pair of measurements on the same symbols.**  Round 77
+  removed the initialiser and round 148/150 put it back, and both were measured:
+  **`= 0` (forcing a real `.bss` section) is worth ~92-101 bytes**, while the
+  de-initialised form is the baseline.  So the round-77 shape is the worse of the
+  two **on this metric**, and re-applying round 148's patch is a known, bounded gain
+  if it is ever wanted -- at the cost of 26 bytes of `.data` and no change to the
+  pool itself.
+- **Search for markers came back clean too.**  `grep` for `round 1xx` comments finds
+  only the project's own history (`round 1082`, `round 174`, ...), and the only
+  `g_query_* = 0` initialisers are pre-existing declarations, matching the
+  pre-experiment backups.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-162: two stray metadata stores were living at the repo root, invisible to lint. rebrew now detects them (W036).**
+
+- **What the tree audit found.**  `git status` and a leftover sweep turned up, among
+  build artefacts, **`./rebrew-data.toml` and `./rebrew-functions.toml` at the project
+  root** -- written by the round-116/117 format-stamp experiment, which passed
+  `Path('.')` where it meant `Path('src')`.  Both were 6 lines.
+- **And they were a silent hazard, measured.**  `load_data_metadata` against the
+  **root** resolves and returns **1 entry**; against `src` it returns **1,170**.  The
+  stores are resolved **by directory, with no fallback to another copy**, so a tool
+  pointed at the root would have answered from the 1-entry file without a word.
+  `rebrew lint` reported **0 warnings** -- it checks the configured store, and the
+  strays were outside it.
+- **Fixed in rebrew, as the objective asks: a new lint rule, `W036`.**  It walks the
+  project for `rebrew-data.toml` / `rebrew-functions.toml`, skips `.git`, `build`,
+  `.scratch`, `.venv` and `node_modules`, and warns for any store whose **parent
+  directory is not one the config names** (`metadata_dir`, `reversed_dir`,
+  `shared_dir`).  Warn-only: a stray copy is not itself a defect, it is a thing that
+  gets read by accident.
+- **Two bugs in the rule itself, both found by testing it.**  The first version
+  constructed `LintResult(file=...)` -- the dataclass takes `filepath` plus
+  `errors`/`warnings` lists, so it raised `TypeError` on first run.  The second
+  checked `isinstance(value, str)` for the configured directories, but **a loaded
+  `ProjectConfig` exposes them as absolute `Path` objects**, so the set came out
+  empty and **every legitimate store was flagged** -- 2 false positives on a clean
+  tree.  Both fixed; the rule now accepts Path or str.
+- **Verified both ways.**  With a stray present: **1 × W036**.  After removing it:
+  **0 errors, 0 warnings**.  Gate green.  The two round-116 strays are deleted and
+  the real stores are intact (`src/rebrew-data.toml` 5,979 lines,
+  `src/rebrew-functions.toml` 33,557).  Experiment artefacts in `build/` were swept
+  as well (`emit_all.*`, `f2.*`, `abs__z_errmsg_empty.obj`, `split_poc.map.refprobe.map`).
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-161: the round-160 plan is refuted. Struct members are not COFF symbols, and C cannot name a byte at an odd offset.**
+
+- **The implementation, and it got as far as compiling.**  A generator was written
+  that re-emits `g_rdata_piece_1.c` as a **`#pragma pack(push,1)` struct** with the
+  29 reference symbols as **named members** at their exact offsets -- `g_const_2` as
+  a `double` at 0x33f, `g_stat_max_d` at 0x347, `g_color_scale` at 0x35b, with every
+  gap a byte array carrying the reference's own bytes.  Three C89 issues were fixed
+  on the way (**designated initialisers are C99** -- MSVC 6 rejects them, C2059; a
+  brace group initialises **one member**, not the rest of an array, so each array
+  needs a single brace; sizes must come from the metadata's **type**, not its absent
+  `size`).  It compiled to an object of **exactly the original size, 1,490 bytes**.
+- **And it cannot work, for a language reason.**  **Members of a struct are not COFF
+  symbols.**  The link reported 41 unresolved externals --
+  `LNK2001: unresolved external symbol _g_color_scale`, `_g_const_1_0`, ...  -- because
+  the only symbol the object defines is `g_rdata_piece_1` itself.  Counting on a
+  struct to place names inside a section is not a thing C does.
+- **And the alternatives are closed too.**
+  - **Top-level constants cannot sit at those offsets.**  `g_const_2`'s reference
+    address is `0x10025688` -- offset **0x33f into the piece, which is odd** -- so the
+    reference's `.rdata` is oddly packed.  A top-level `const double` gets 8-byte
+    alignment from MSVC, so separate declarations cannot reproduce offsets the
+    reference has.  (This is the same odd-packing the piece generator already handles
+    with ALIGN_1.)
+  - **The linker's absolute-symbol route is `.def EXPORTS name=RVA`**, which would add
+    41 exports to a table the gate checks and the reference has exactly two entries
+    in (`Exit`, `Init`).  Not available.
+- **So `g_rdata_piece`'s anonymous bytes stay anonymous, and the 41 names stay
+  unattached.**  The bytes being right is not enough when the language offers no way
+  to name them at that offset -- which is a stronger statement than round 160's plan
+  assumed, and it closes the last mechanism found on this branch.
+- **Reverted and verified:** `link_stubs.c` restored from backup, the piece object
+  restored, full recompile, `split_link.sh` clean, gate green, OBJECTIVE GAP 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK.
+
+**Round-160: the 42 consts' BYTES are already in `.rdata`. Only their names are missing -- and the fix is in the piece generator.**
+
+- **The observation that changes the shape of the problem.**  Round 158 moved the 42
+  `g_const_*` symbols into `.rdata` by making them `const`, and `.rdata`'s
+  byte-exactness collapsed.  But the values those symbols denote are **already in our
+  `.rdata` at the reference's offsets** -- because `.rdata` is byte-exact and the
+  reference's addresses are inside it (0x10025688..0x1002575c).  **So the data does
+  not need to be produced; it needs to be named.**
+- **Why no symbol is attached, measured.**  Of the 42 reference addresses, **exactly
+  one is occupied by another symbol** in our link (`g_const_one_d` 0x100257d8, taken
+  by `real@8@3fff8000000000000000`).  The other 41 are vacant in symbol terms while
+  the bytes sit there.  The reason is structural: our `.rdata` is built from
+  **`g_rdata_piece_N.obj` blobs**, each a `const unsigned char g_rdata_piece_N[]`
+  carrying the reference's bytes with **no symbol per value**.
+- **And the piece covering them is identified:** `g_rdata_piece_1.obj` at
+  `0x10025349`, raw size 0x48f, with `g_const_2`'s reference address **0x33f into
+  it**.  So 41 names could be attached to bytes that are already correct, at offsets
+  that are already correct, **changing no byte of the file**.
+- **Which is the first mechanism on this branch that does not trade one error for
+  another.**  Rounds 147, 148-150 and 158 all failed because placing a symbol *added
+  content* to a section that was already right.  Naming an existing byte adds
+  nothing.
+- **The work item, specified.**  `scripts/split_blob.py` generates each piece as one
+  anonymous array (`const unsigned char g_rdata_piece_N[0x...] = {...}`, around line
+  239).  It needs to emit **named symbols inside the piece** at their reference
+  offsets -- the natural shape being a struct or a sequence of sized constants
+  generated from the same bytes, so the file's content and ordering are unchanged by
+  construction.  That is a generator change with a clear acceptance test: **the 41
+  names land at their reference addresses while `.rdata` stays 0 differing**.
+- **Why this is worth the next round** rather than another probe: it is the only
+  route found so far whose success condition is expressible in the two numbers the
+  gate already prints (`.rdata differing` and `OBJECTIVE GAP`), and neither has to
+  get worse for it to work.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-159: linker flags tested and closed. And the strategic conclusion this branch has been converging on.**
+
+- **`/MERGE` was the last unexplored lever** -- MSVC 6's link does expose it, and
+  merging the uninitialised part into `.data` is exactly the kind of thing that
+  could move the pool's base:
+
+  | command | result |
+  |---|---|
+  | baseline | sections `.text .rdata .data .reloc`, **GAP 41,619** |
+  | `/MERGE:.bss=.data` | **GAP 24,395,589** -- catastrophic |
+  | `/MERGE:_bss=.data` | accepted, image unchanged |
+
+  `.bss` is already merged into `.data` by the linker (there is no separate output
+  section, which is why rounds 133-153 kept finding the uninitialised region
+  *inside* `.data`), so the flag has nothing to do and, when it does act, it
+  destroys the layout.  **Closed.**
+- **The strategic conclusion, and it is not a tooling deficit.**  Every mechanism a
+  build can reach has now been tested and measured across rounds 128-159: emitted
+  object count and shape, section flags, `.bss` vs `.data` vs `.rdata`
+  classification, initialised extent, link-line object order, declaration order,
+  absolute symbols, `/ALTERNATENAME`, `--with-commons`, `/MERGE`, and the const-ness
+  of the definitions.  **Our object order already matches the reference exactly
+  (round 155: 0 inversions).**  What differs is the **symbol sets inside the
+  objects**, and MSVC 6's linker allocates COMMON storage from those sets, with
+  **118 reference functions still unmatched** (round 155) and **52 functions not
+  reproduced at all** (rounds 43-47).
+- **Therefore the raw link cannot be made byte-identical by any layout technique.**
+  It becomes identical when the link **inputs** are the original ones -- which means
+  when the decompilation is complete, not when a flag is found.  **The objective's
+  first clause is a completeness milestone, not an engineering problem**, and
+  rounds 128-159 have been looking for a shortcut that the measurements say does not
+  exist.  That is worth stating plainly rather than starting a 32nd experiment.
+- **What is genuinely achieved and verified on this branch:** the gap is described
+  to the byte (41,619 across four regions, 145 pool + 42 elsewhere + 13 `.data` + 8
+  ordinal-naming), the deliverable is byte-identical, the mechanics are instrumented
+  (`OBJECTIVE GAP` and a raw-link load check in the gate), and **one real mechanism
+  was found and bounded** (`= 0` moves a symbol into `.bss`, worth ~100 bytes,
+  saturating).
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-158: the third instance of one pattern -- repairing a symbol breaks the section that was right. 42 `const`s moved, gap +789.**
+
+- **The lead.**  The 42 "elsewhere" symbols are `g_const_*`, `g_stat_*`,
+  `g_color_scale`, `g_output_share` -- and **their reference addresses are in
+  `.rdata`** (0x10025688..0x1002575c) while ours sit in the pool (0x104ff1c8) or
+  `.data` (0x10035b70).  Our definitions in `link_stubs.c` are non-`const` with zero
+  initialisers, so they land in `.data`/COMMON; the reference has them in the
+  read-only section.  **`const` looked like the source shape that was missing.**
+- **What happened: `const` moved them, and broke `.rdata`:**
+
+  | | before | with 33 `const`s |
+  |---|---|---|
+  | `.text` | 4,419 | 4,444 |
+  | **`.rdata`** | **1,268** | **2,032** |
+  | `.data` | 0 | 0 |
+  | **OBJECTIVE GAP** | **41,619** | **42,408** |
+  | symbols at their reference address | 428 / 636 | 428 / 636 |
+
+  `g_stat_max_d` moved 0x10035b70 -> **0x10026610** and `g_color_scale`
+  0x10035c3c -> **0x10026644**, both now inside `.rdata` and near their reference --
+  **and the section's byte-exactness was destroyed in the process**, 1,268 -> 2,032
+  differing.  Net +789.
+- **That is now the third time, and it is a property of the problem rather than bad
+  luck.**  Round 147 moved 3 symbols into `.data` and lost 1,489 bytes there; round
+  148/150 moved 76 symbols into `.bss` and gained 92 net; this round moved 42 into
+  `.rdata` and lost 764 there.  **In every case the section's bytes were correct
+  *because* the symbols were elsewhere.**  The reference's section contents are
+  fixed points of a layout our symbol placement does not share, so **moving a symbol
+  to where the reference has it moves content out of where the reference's bytes
+  already sit**.
+- **Which is the honest reason this objective has not moved in 30 rounds**: `.data`
+  and `.rdata` are byte-exact *given* the current symbol placement, and every
+  placement change trades one error for a larger one.  **The placement and the bytes
+  are one fixed point, and we have the bytes.**
+- **Reverted and verified:** `link_stubs.c` restored from backup, full recompile,
+  gate green, OBJECTIVE GAP 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK.
+
+**Round-157: the 8 "thunks" are not a placement bug. The reference imports WS2_32 by ORDINAL; we import by name.**
+
+- **The evidence is in the layout package.**  `rebrew-layout.toml` records the
+  reference's 100 imports with their `iat` RVA, and **16 of them are by ordinal,
+  all `WS2_32.dll`**: ordinals 1, 13, 19, 16, 10, 111, 22, 115, 116, 23, 21, 8, 9,
+  2, 20, 3 -- in that order, which is first-reference order, not ordinal order.
+  Our build imports the same functions **by name** (`imp__socket@12`,
+  `imp__htonl@4`, ...) out of `WS2_32.lib`.
+- **And the slot addresses are the same, which is why `.rdata` is byte-exact.**
+  Reference: ordinal 8 at `0x10024188`.  Ours: `imp__htonl@4` at `0x10024180`.
+  Ordinal 8 of `ws2_32` **is** `htonl`.  So both builds place `htonl`'s slot in the
+  same table, at addresses whose *contents* match -- and our **symbol name** is
+  attached to a different slot index than the reference's ordinal is.
+- **So the -8 is a naming artefact, not a layout defect.**  The emitter
+  (`emit_thunks.py`) is not at fault: it defines the reference's own
+  `ff 25 <IAT>` stubs and LINK resolves the IAT references through
+  `WS2_32.lib`'s **named** `__imp_` symbols, whose ordering differs from the
+  reference's ordinal-ordered table.  The diagnostics in round 156 labelled these
+  "import thunks in `.rdata`" from the `imp__` name prefix; they are IAT slots, and
+  the prefix is exactly what makes them look wrong.
+- **Which is worth stating as a general lesson, the third of its kind this
+  session:** `imp__socket@12` is not the socket thunk, it is the socket **IAT
+  slot**; `emit_thunks.py` emits the thunks and they are in `.text` at
+  0x1001a160.  **A name prefix was read as a structural fact** -- the same error as
+  assuming `.rdata` was fine because the gate did not print it (round 118) and
+  assuming an object was rebuilt because the script re-links (round 145).
+- **What it means for the 208.**  These 8 are not fixable by placement and should
+  not be counted with the pool's 145.  The correct accounting is **145 pool + 42
+  elsewhere + 13 `.data` + 8 ordinal-naming = 208**, and only the first group is
+  the layout problem the objective is about.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-156: the 208 are four different problems. 145 are the pool, 8 are import thunks in `.rdata` with a uniform -8 shift.**
+
+- **Two mechanisms tested and rejected before the breakdown.**
+  - **The COMMON order is not a hash of the names.**  `wt2, wt3, wt0, wt1` suggested
+    a hash iteration, so FNV-1a, djb2, sdbm, CRC32 and both MD5 word orders were
+    tested against the observed 37-symbol order: best match **3 of 37**, i.e. chance.
+    Round 155's "hash" was an inference from an odd sequence and it is wrong; the
+    order is CL's with no simple rule found.
+  - **`/ALTERNATENAME` can reach only 29 of the 208.**  The idea was to alias a
+    misplaced symbol onto whatever already sits at its reference address, which
+    would preserve relocations unlike round 124's absolute symbols.  But only **29**
+    of the 208 reference addresses are occupied by another symbol in our link;
+    **179 are vacant**, so there is nothing to alias to.  Not a general fix.
+- **The breakdown, by where the reference puts each symbol:**
+
+  | region | count |
+  |---|---|
+  | **BSS / pool (>= 0x35000)** | **145** |
+  | elsewhere | 42 |
+  | `.data` raw region | 13 |
+  | import thunk (`.rdata`) | 8 |
+
+  **So the 208 are not one population.**  The pool accounts for 145 -- consistent
+  with rounds 140-155 -- but 42 sit somewhere else entirely and 13 are inside the
+  `.data` region that is already byte-exact.
+- **And 7 of the 8 thunks share a uniform `-8`.**  The import thunks
+  (`imp__socket@12` 0x10024180 vs ours 0x10024178, `imp__setsockopt@20`,
+  `imp__htonl@4`, ...) are **exactly 8 bytes low as a group**, which is a bounded,
+  single-cause defect with a single owner (`scripts/emit_thunks.py`) -- unlike the
+  pool's 145 individually-scattered symbols.  **It is the smallest tractable piece
+  on the board and it has not been attacked.**
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-155: object order already matches (0 inversions); CL's COMMON order is a hash and cannot be moved. Branch closed.**
+
+- **The order result, which was not previously checked on this branch.**  Running
+  `derive_link_order.py` against the split link:
+
+  | | |
+  |---|---|
+  | reference functions | 543 |
+  | matched uniquely | 399 |
+  | ambiguous probe | 26 |
+  | **no match in our link** | **118** |
+  | distinct objects in order | 297 |
+  | **order inversions vs ours** | **0** |
+
+  **Our link line already reproduces the reference's object order exactly.**  So the
+  pool's misplacement is not an ordering problem at the link-line level, and
+  rounds 88-89's ordering work was not left undone -- it is finished.  (The 118
+  unmatched are the not-reproduced functions from rounds 43-47, a different issue.)
+- **And round 140 was right, verified properly this time.**  Round 140 claimed
+  "declaration order cannot change CL's COMMON symbol-table order" -- but it tested
+  by editing the source and running `split_link.sh`, **which does not compile**
+  (round 145's discovery).  Redone with `rm .obj` and a real `cmake --build`, the
+  first eight COMMON symbols come back **identical**: `_g_field_entry_count`,
+  `_g_field_worker_count_wt2`, `_g_field_worker_count_wt3`, `_g_field_worker_count_wt0`,
+  `_g_entity_base`, `_g_field_worker_count_wt1`, `_g_crc_table`, `_g_const_half`.
+  **The order is not source, not size and not alphabetical** -- `wt2, wt3, wt0, wt1`
+  is a hash iteration -- so it is genuinely CL's and genuinely immovable.  **One
+  conclusion from the stale-object era survives; the rest did not.**
+- **Where that leaves the objective, definitively.**  Every level is now measured:
+  the file's bytes match, `.data`'s content matches, the object order matches, and
+  428 of 636 located symbols are at their reference addresses.  The remaining 208
+  are decided by the linker's COMMON allocation, which follows a hash of the symbol
+  names in each object, and **no supported MSVC 6 mechanism -- source order, link
+  order, section flags, object shape, link flags -- changes it.**  Rounds 128-155
+  tested each of those and measured each result.
+- **Reverted and verified:** `link_stubs.c` restored, full recompile, gate green,
+  OBJECTIVE GAP 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK.
+
+**Round-154: the base explains 23 of 208 misplaced symbols. Rounds 148-153 over-attributed the gap to it.**
+
+- **The full delta distribution, all 636 located symbols, our address minus the
+  reference's:**
+
+  | delta | symbols |
+  |---|---|
+  | **0** | **428** |
+  | -3,504 | 23 |
+  | -8 | 9 |
+  | -56 | 5 |
+  | -156 | 5 |
+  | -24,312,440 | 5 |
+  | +40 | 4 |
+  | -52 | 4 |
+  | ... 136 more distinct deltas ... | |
+
+  **144 distinct non-zero deltas across 208 symbols.**  Splitting them by size:
+  **94 are within 100,000** of their reference address (a base shift could reach
+  those) and **114 are 24 MB out** (no base shift can).  And the base-shaped delta
+  itself, `-3,504`, is only **23 symbols**.
+- **So the correction: the base is 11% of the problem, not the problem.**  Rounds
+  148-153 built a case that "the pool's base is the blocker and everything follows
+  from it" -- it is a real blocker, it is measured to the byte (2,548), and it
+  accounts for 23 symbols out of 208.  **The other 185 are at individual addresses
+  with no shared cause**, which is exactly why every mechanism that moved the base
+  (or avoided it) moved ~100 bytes: it was fixing a ninth of a ninth.
+- **Which also explains the `= 0` lever's ceiling from the other side.**  Moving 76
+  symbols from COMMON into real `.bss` sections changed their addresses relative to
+  each other and their base, and bought 92 bytes -- because the symbols were
+  individually misplaced before *and after*.  **Reclassifying a symbol does not give
+  it its reference address; only the object order inside `.data`/`.bss` would, and
+  that is the wall from round 130.**
+- **The honest shape of what remains, in one line:** 428 of 636 located symbols are
+  already right; of the 208 that are not, 23 are a base offset and 185 are
+  individual, with 144 distinct deltas and no mechanism found that addresses even
+  one group of them reliably.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-153: the mechanism is CONFIRMED by intervention. The `.bss` base follows the initialised extent, exactly.**
+
+- **The test.**  Round 152 said the difference leaves no trace in the bytes, so it
+  could only be found by intervention.  A **2,548-byte initialised array** (non-zero
+  on purpose -- an all-zero array goes to `.bss` and would prove nothing) was added
+  to `data_globals.c` and the split link re-run:
+
+  | | before | with the pad |
+  |---|---|---|
+  | `.data` raw | 0xe000 | **0xf000** |
+  | `.data` VirtualSize | 0x17407a0 | **0x17411a0** |
+  | last non-zero offset | 0xd60b | **0xdffb** |
+
+  The pad landed at `0xdffb` and ended at `0xe9ff`, so the initialised extent grew
+  and **the `.bss` base moved with it**.  **Round 151's causal claim is now
+  demonstrated rather than inferred: the uninitialised region begins where the
+  initialised content ends, and 2,548 bytes of content is what stands between the
+  two links.**
+- **And it shows why the obvious fix overshoots.**  A 2,548-byte object did not end
+  at `0xe000`; the linker placed it at `0xdffb`, so the content end went from
+  `0xd60b` to `0xe9ff` -- a shift of 5,108 rather than 2,548.  **The size is right
+  and the placement inside `.data` is not ours to choose**, which is the same
+  object-order wall, now inside `.data` instead of around the pool.
+- **Which closes the loop on this whole branch with one sentence.**  The pool's base
+  is set by `.data`'s initialised extent; `.data`'s extent is set by the sum and
+  order of objects' initialised contributions; and the share we are missing is
+  2,548 bytes of *zeros*, which MSVC will not put in `.data` and which nothing else
+  can supply.  **Every route tried from round 128 to here reduces to that one
+  constraint**, which is why six mechanisms and 25 rounds moved 101 bytes.
+- **Reverted and verified:** `data_globals.c` restored, sources touched for a full
+  recompile, `.data` raw back to **0xe000**, VirtualSize 0x17407a0, gate green,
+  OBJECTIVE GAP 41,619.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK.
+
+**Round-152: the 2,548 is not one object. And the two files are indistinguishable there, which is the important part.**
+
+- **The search round 151 proposed, run.**  Uninitialised arrays of 1,000-6,000 bytes
+  across `src/`: **136 of them**, and the sizes near the target are 3,072, 2,931,
+  2,816 and 2,048 -- **nothing at 2,548**, and almost all of them are function-local
+  (`buf[4608]`, `pad0[4996]`), not globals.  So the 2,548 bytes are not one object's
+  array; if they are real content they are the sum of several objects' tails.
+- **And they cannot be distinguished from padding in the artefact.**  Round 133
+  established both files have their last non-zero `.data` byte at offset `0xd60b`;
+  the 2,548 bytes from `0xd60c` to `0xe000` are **zeros in both**, byte-identical.
+  So the difference is not in the file at all -- it is in **what each link counted as
+  initialised**, and both files legitimately contain the same zeros either way.
+  **A difference that leaves no trace in the bytes cannot be found by inspecting the
+  bytes**, which is why the search above could only ever return "no single array".
+- **What that means for the objective, stated plainly.**  Our raw link is not wrong
+  in any byte of `.data`; it is wrong in the *bookkeeping* that decides where `.bss`
+  begins, and every one of the 41,619 remaining bytes follows from that.  Closing it
+  requires the link to count 2,548 more bytes as initialised, and no source change
+  that adds zeros can do it (MSVC sends an all-zero array to `.bss`) and no change
+  that adds non-zeros is allowed (it would alter `.data`).
+- **So the honest conclusion after rounds 128-152:** the objective's first clause
+  needs MSVC 6's `link.exe` to be told something the source cannot express, or needs
+  a source shape that produces partial initialisation where we currently produce
+  none.  **Twenty-five rounds have moved the gap by 101 bytes and identified the
+  blocker to the byte.**  Continuing means looking for that source shape -- an
+  existing CRT or game object that the reference's compilation leaves partially
+  initialised -- rather than another mechanism.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-151: the pool's base difference is exactly 2,548 bytes -- the trailing zero run. The blocker now has a number and a cause.**
+
+- **The measurement, from our own link map.**  The lowest real-`.bss` symbol in our
+  build sits at `.data` offset **0xd60c**, and the sequence is continuous from there:
+  `??_C@_13A@...` 0xd60c, `g_log_file_handle` 0xd618, `g_alloc_root_name` 0xd630,
+  `g_sequence_counter` 0xd690, `g_array_count` 0xd6b4, ...  **Our uninitialised
+  region begins immediately after the last non-zero byte of `.data`**, which round
+  133 measured at offset `0xd60b`.
+- **And the reference's begins at `0xe000`** -- the end of the `.data` raw region.
+  So the base difference is
+
+  `0xe000 - 0xd60c = 0x9f4 = **2,548**`
+
+  which is **exactly the 2,548-byte trailing zero run** round 133 measured in both
+  files.  The two files carry the same zeros there; the reference counts them as
+  initialised `.data` and we count them as uninitialised tail.
+- **Which resolves the 3,488/3,560/3,620 constants seen from four directions.**  The
+  base shift is 2,548, and the extra ~1,000 is the per-symbol offset within the
+  pool (round 148's `g_query_active` landing 0xa8 into it rather than 0x454).
+  **Those numbers were never one constant, which is why no single "offset fix" was
+  ever going to be found.**
+- **Why it cannot be closed by declaring more content, which is the trap.**  The
+  missing 2,548 bytes are **all zeros**, and MSVC puts an all-zero array in `.bss`
+  -- that is the same rule round 148 used in reverse.  So `char pad[2548] = {0};`
+  would go to `.bss` and change nothing, and any non-zero initialiser would alter
+  `.data`'s bytes and break the one thing that is currently perfect.  **The
+  2,548 bytes have to come from an object the reference compiles as initialised and
+  we compile as uninitialised** -- a source-level difference in some existing
+  object, not a new one.
+- **That is a searchable target now.**  For each object contributing to `.data`'s
+  tail, compare what it emits here against what it emits in the reference's layout;
+  the object whose initialised extent is 2,548 short is the one to fix.  It is a
+  bounded comparison with a size to match, not another hypothesis about the linker.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-150: all 76 reachable declarations patched -- and the lever saturates at ~100 bytes. It is not the missing scale.**
+
+- **The reach was measured before scaling, and it is total.**  Round 148 matched 20
+  of 76 declarations only because its pattern required the bare symbol name.  With
+  underscore-insensitive matching (`int __app_type;` defines `_app_type`), **all 76
+  misplaced `.c`-owned symbols have a declarator in `src/`** -- in
+  `data_globals.c` (CRT startup and allocator data), `link_stubs.c` (the placeholders
+  and constants), and five game files.  So the round-148 limit was a pattern bug,
+  not a ceiling.
+- **Patching all 76:**
+
+  | | baseline | 20 symbols (148) | **76 symbols** |
+  |---|---|---|---|
+  | `.text` | 4,419 | 4,292 | **4,301** |
+  | `.data` | 0 | 26 | 26 |
+  | **OBJECTIVE GAP** | **41,619** | **41,518** | **41,527** |
+  | reloc entries (missing/shared) | 590 / 2,936 | 590 / 2,936 | **590 / 2,936** |
+  | wine load | OK | OK | OK |
+
+  **76 symbols buy 92 bytes and 20 symbols buy 101.**  More is slightly *worse*, so
+  the mechanism saturates: once the cheap symbols are moved, the ones added are the
+  placeholders and CRT data, whose reclassification perturbs the pool as much as
+  their own operands improve.
+- **What the two rounds together establish.**  `= 0` on a tentative definition is a
+  real and reliable way to move a symbol out of CL's COMMON pool into a `.bss`
+  section whose position follows the object -- **verified with relocations intact
+  (590/2,936, identical) and the image loading, twice.**  Its whole value is about
+  **100 bytes of a 41,619-byte gap**, because it changes where 76 symbols sit
+  relative to each other without changing the pool's base, and the pool's base is
+  what the remaining ~41,500 bytes are about.
+- **So the objective's blocker is confirmed to be the base, one round after
+  establishing the only reliable way to influence the pool at all.**  That is a
+  cleaner position than round 147's, which had no mechanism that worked; now there
+  is one, it is measured, and its ceiling is measured too.
+- **Reverted and verified:** all eight files restored from `/tmp/bak150`, sources
+  touched for a full recompile, gate green with OBJECTIVE GAP back to **41,619**.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK.
+
+**Round-149: the lever does not scale through the split blobs. `--with-commons` is a 121-byte regression.**
+
+- **The obvious way to scale round 148.**  The 64 COMMON symbols in the split
+  blobs (`__C_Exit_Done` 64 bytes, `__C_Termination_Done` 60, `__exitflag` 56, and
+  the rest) are the CRT-shaped names the `= 0` patch could not reach, and
+  `split_coff.build_object` already has an `emit_commons` path that puts a member's
+  commons into a **synthetic real `.bss` section** (chars `0xc0300080`).  Round 148's
+  lever is exactly "real `.bss` instead of COMMON", so the invocation in
+  `split_link.sh` was missing `--with-commons` and enabling it should have scaled
+  the result.
+- **It does the opposite:**
+
+  | | baseline | `--with-commons` |
+  |---|---|---|
+  | `.text` | 4,419 | **4,514** |
+  | `.data` | 0 | 26 |
+  | **OBJECTIVE GAP** | **41,619** | **41,740** |
+  | symbols at their reference address | 428 / 636 | **427 / 638** |
+  | wine load | OK | OK |
+
+  **121 bytes worse.**  Reverted; the gap is back to 41,619 exactly.
+- **Why the mechanism works for `.c` symbols and not for these.**  A `= 0` in a
+  translation unit puts the symbol in **that object's** `.bss`, so it is allocated
+  where the object sits in the link order -- the ordinary path.  A synthetic
+  `.bss` object is an **extra object** appended to the link line, which is what
+  rounds 110/144 measured as unplaceable and ceiling-bound.  **Same section type,
+  different placement rules: it is the object's position that decides, not the
+  section's kind.**
+- **So the two results together are consistent and they narrow the lever
+  precisely:** `= 0` in a `.c` file is worth 101 bytes because the object is
+  already positioned; synthesising objects for the same symbols is worth -121
+  because they are not.  The remaining 56 CRT symbols are only reachable if their
+  *owning objects* are positioned correctly, which is the object-order question
+  again -- but now with one clean success (101 bytes) behind it rather than only
+  failures.
+- **State:** `split_link.sh` restored (`--with-data --trim --split-rdata
+  --promote-statics`), gap 41,619, gate green.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK.
+
+**Round-148: `= 0` turns a tentative definition into a REAL `.bss` section -- and that is the lever. 41,619 -> 41,518.**
+
+- **The discovery, and it is a language fact rather than a linker one.**  In C, a
+  file-scope `char g_x;` is a **tentative definition**, and MSVC 6 emits it as a
+  **COMMON** symbol (object section 0).  A zero initialiser, `char g_x = 0;`, makes
+  it a definition and the compiler emits it in a real **`.bss` section** --
+  `_g_query_active` moves from section 0 to **section 2**, with the object's
+  section list showing `.bss` at index 2.  Round 147 used `= 1`, which puts the
+  symbol in `.data` and thereby moves 1,489 bytes of a section that was perfect;
+  **`= 0` puts it in `.bss`, which is a different section and a different
+  consequence.**
+- **And a real `.bss` section is allocated where object order puts it**, not in
+  CL's internal COMMON order -- which is the property rounds 128-144 could not
+  find.  Two symbols, measured:
+
+  | | as COMMON | with `= 0` | reference |
+  |---|---|---|---|
+  | `g_query_active` | 0x11767544 | **0x100346b4** | 0x10035454 |
+  | `g_query_flag1` | 0x11767545 | **0x100346b5** | 0x1003545c |
+
+  **24 MB out becomes 3,488 out**, and the residual is a uniform base offset rather
+  than a per-symbol scramble.
+- **At scale, on the 20 declarations the pattern could match:**
+
+  | | split link | 20 symbols with `= 0` |
+  |---|---|---|
+  | `.text` | 4,419 | **4,292** |
+  | `.rdata` | 1,268 | 1,268 |
+  | `.data` | **0** | 26 |
+  | `.reloc` | 35,684 | 35,684 |
+  | **OBJECTIVE GAP** | **41,619** | **41,518** |
+  | reloc entries (missing/shared) | 590 / 2,936 | **590 / 2,936** |
+  | wine load | OK | OK |
+
+  **101 bytes off the objective's meter, the first legitimate movement since the
+  emit work began**, and it is verified the way round 126 taught: **relocation
+  entries are identical** (590 missing, 2,936 shared) and **the image loads**, so
+  this is not another absolute-symbol illusion.  The 26-byte `.data` regression is
+  real and stated.
+- **It scales, and the limit is my pattern, not the mechanism.**  20 of 76
+  misplaced `.c`-owned symbols were matched by the declaration regex; the other 56
+  are CRT-shaped names (`acmdln`, `apptype`, `argc`, `C_Termination_Done`) that are
+  declared in generated or blob sources.  The mechanism is therefore worth far more
+  than 101 bytes once every declaration is reachable.
+- **Reverted and verified:** all six patched files restored from backup, sources
+  touched to force a full recompile, `build/server.dll` rebuilt and 24 seconds old,
+  gate green with OBJECTIVE GAP back to **41,619**.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK.
+
+**Round-147: reclassification is measured and NEGATIVE. Repairing 3 symbols' addresses costs 1,489 bytes of `.data`; the gap goes 41,619 -> 43,132.**
+
+- **Round 145's experiment, redone with the guard and a real compile.**  Three
+  misplaced COMMON symbols in `gm_Open.c` given `= 1` (round 145's `= 0` and `= 1`
+  attempts had measured a stale object):
+
+  | | as COMMON | initialised |
+  |---|---|---|
+  | `g_query_active` | 0x11767544 | **0x10031054** (ref 0x10035454) |
+  | `g_query_flag1` | 0x11767545 | **0x10031055** (ref 0x1003545c) |
+  | `g_query_flag3` | 0x11767546 | **0x10031056** (ref 0x1003545e) |
+
+  **So the mechanism works** -- the object shows them in **section 3**, no longer
+  COMMON, and they moved from 24 MB out to **17,408** out.  Round 144's conclusion
+  is confirmed as a mechanism and round 145's contrary reading was the stale object.
+- **And the net effect is worse, which is the actual finding:**
+
+  | | split link | 3 symbols initialised |
+  |---|---|---|
+  | `.text` | 4,419 | 4,443 |
+  | `.rdata` | 1,268 | 1,268 |
+  | **`.data`** | **0** | **1,489** |
+  | `.reloc` | 35,684 | 35,684 |
+  | **OBJECTIVE GAP** | **41,619** | **43,132** |
+  | symbols at their reference address | 428 / 636 | **391 / 636** |
+  | wine load | OK | OK |
+
+  **`.data` was byte-exact precisely because those symbols were in BSS.**  Moving
+  them into `.data` relocates 1,489 bytes of a section that was already perfect and
+  displaces 37 other symbols.  **The pool is not misplaced independently of `.data`
+  -- the two are one layout, and `.data`'s correctness depends on where the pool
+  sits.**
+- **So the whole "reclassify the 208 symbols" direction is now closed by
+  measurement**, and closed for a better reason than the six dead levers: not
+  "the linker did not cooperate" but "the thing I would repair is load-bearing for
+  something that already works."  **Any fix has to place the pool without moving
+  `.data`,** which means it has to act on the pool's base, not on its members.
+- **Reverted and verified:** `gm_Open.c` restored, object rebuilt, `.data` back to
+  **0 differing**, `staleness check: clean`.  Gate green.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-146: the staleness hazard is now checked by `split_link.sh`, and the check was verified both ways.**
+
+- **What was added, at the top of `scripts/split_link.sh`, before any work:**
+
+  ```
+  staleness check: clean
+  ```
+
+  and when a source is newer than its object:
+
+  ```
+  WARNING: src/Develop/Units/Error/Error.c is newer than its object; this link will use the STALE object
+    run: cmake --build build --target server_dll   (or rm '<obj>')
+  ```
+
+  Both paths were exercised: `touch src/Develop/Units/Error/Error.c` produced the
+  warning, and a rebuild produced `clean` again.  `SPLIT_LINK_SKIP_STALE_CHECK=1`
+  bypasses it for the common case of a deliberate re-link.
+- **It checks two different conditions, because they fail differently.**  A source
+  newer than its object means the run will measure the old object -- wasted work.  An
+  object with a timestamp **in the future** means mtime comparison cannot be trusted
+  for that file at all, and `make` may skip a file that just changed; that is the
+  condition that actually bit round 145, where an object carried a time 1h12m ahead
+  of the host.  The guard counts both and reports them separately.
+- **And it deletes nothing.**  The tempting version of this fix -- remove stale
+  objects automatically -- destroys a warm build to save a warning, and a build here
+  is expensive.  A warning that names the file and the command is the right size;
+  the operator knows which of the two they want.
+- **Reverted and verified:** `Error.c`'s object was rebuilt, `split_link.sh` reports
+  clean, and the gate is green.  Nothing changed in the link: **OBJECTIVE GAP
+  41,619**, unchanged.
+- **Why this counts as progress on the objective rather than bookkeeping.**  Round
+  145's experiment was inconclusive *and its result was mistaken for a finding* --
+  "initialising the symbols did not move them" was nearly written down as evidence
+  against the round-144 conclusion.  A guard that makes the distinction visible is
+  the difference between an inconclusive round and a wrong one.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-145: `split_link.sh` re-links WITHOUT compiling, so source experiments measure stale objects. Also: object mtimes are in the future.**
+
+- **The experiment that exposed it.**  Round 144 concluded the only useful lever is
+  making the 208 misplaced symbols non-COMMON *in their own translation units*, so
+  three of the 76 that live in `.c` files (`g_query_active` 0x10035454,
+  `g_query_flag1` 0x1003545c, `g_query_flag3` 0x1003545e, all in `gm_Open.c`) were
+  given initialisers, `scripts/split_link.sh` was run, and their addresses came back
+  **unchanged** -- `0x11767544`, `0x11767545`, `0x11767546`, still 24 MB out.
+- **They were unchanged because nothing recompiled.**  `split_link.sh` rebuilds the
+  split set and **re-links**; it does not run the C compiler.  The edited source was
+  never compiled, so the experiment measured the previous object.  **Any source-level
+  experiment in this project must run `cmake --build build --target server_dll`
+  first**, and `split_link.sh` alone silently reports the old result.
+- **And the reason the staleness check missed it is worth knowing: object mtimes sit
+  in the future.**  `gm_Open.c` was edited at host time 20:40 and its object carried
+  **21:52** -- 1h12m ahead.  Host and container clocks agree to the second
+  (`12:43:34` vs `12:43:35` UTC), so these are timestamps written under a different
+  clock, and **a future-dated object looks newer than any edit made now**, which is
+  how a build system can skip a file that just changed.  When testing a source
+  change here, delete the target `.obj` explicitly.
+- **And when it did compile, postlink refused the build.**  With the three
+  initialisers in place, `cmake --build` failed:
+  `postlink failed: built .text is not position-aligned with the reference — only
+  5149/7463 layout-map entries validate (69.0%, minimum 90%). .text VirtualSize
+  built 0x225e2 vs reference 0x22846`.  **Three initialised `char`s moved `.text`
+  by 1,254 bytes** -- so the link is far more sensitive than the 208-symbol model
+  suggests, and the round-144 conclusion (initialise the symbols in place) is
+  **untested, not confirmed**, and already known to break postlink.
+- **Reverted and verified:** `gm_Open.c` restored from backup, `cmake --build`
+  returns it to the failing-at-postlink state that is normal for this project (the
+  gate uses its own reference-reading path), and the gate is green.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-144: adding objects cannot place symbols. 52 of them made the gap worse and fixed none.**
+
+- **The test round 143's plan called for**, one `.bss` object per misplaced symbol in
+  reference-address order, laid ahead of the link line so the linker allocates them
+  in that order:
+
+  | extra objects | result |
+  |---|---|
+  | 10, 20, 30, 40, 50, 52 | links |
+  | 54, 56, 58, 60, 245 | **`Internal error during SetupPhase`** |
+
+  so the ceiling is real and narrow -- **53 objects, 54 crashes** -- consistent with
+  the ~61 measured at round 110 for a different object shape.
+- **And at the maximum that links, it does not help:**
+
+  | | split link | 52 objects placed |
+  |---|---|---|
+  | OBJECTIVE GAP | **41,619** | **41,821** (worse by 202) |
+  | symbols at their reference address | **428 / 636** | **428 / 636** (no change) |
+  | wine load | OK | OK |
+
+  **Every one of the 52 was placed somewhere other than its reference address**, and
+  their `.bss` displaced other content by 202 bytes.  So the round-143 plan is
+  refuted at its first step: **an emitted `.bss` object does not go where its
+  symbol's reference address says, and no amount of ordering changes that.**
+- **Which means round 136's one-symbol success was misread.**  Defining
+  `g_log_buffer` moved it 24,326,272 bytes -- but not *to* an address I chose: it
+  moved because it **left the COMMON pool**, and the pool is the thing 24 MB out.
+  The residual 3,620 is whatever the defined-BSS region's base happens to be.  So
+  the lever is "stop being COMMON", not "choose an address".
+- **The refined and much smaller conclusion: the only useful action is to make
+  these 208 symbols non-COMMON in their own translation units** -- an initialiser
+  or a real definition in place -- because that is the one change that has ever
+  moved a symbol in this pool.  Adding objects to the link line is now closed by
+  measurement, at the ceiling and at every count below it.
+- **Gate green, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0 (baseline 4), imports 100, deliverable load OK,
+  raw link load OK, OBJECTIVE GAP 41,619.
+
+**Round-143: the remaining work is 208 symbols, not 636 -- and the misplacement is per-symbol, not an offset.**
+
+- **The measurement, from the locator's 636 placed addresses against our link map:**
+
+  | | symbols |
+  |---|---|
+  | already at their reference address | **428 (67%)** |
+  | misplaced | **208** |
+  | -- of which COMMON | **96** |
+  | -- of which defined | **112** |
+
+  **Two thirds of the located symbols are already correct.**  So the objective's
+  `.text` gap (4,419 bytes, 1,241 data operands) is not "the pool is in the wrong
+  place" -- it is **208 individual symbols in the wrong place**, and 208 symbols
+  across 1,241 operands is about six operands each, which is the right order of
+  magnitude for the byte count.
+- **And the deltas are not a constant.**  Grouping our address minus the
+  reference's over all 636: `+0` for 428, then `-3504` for 23, `-8` for 9, `-56`
+  for 5, `-156` for 5, `-24,312,440` for 5, `+40` for 4, `-52` for 4, and a long
+  tail of one- and two-symbol groups.  **There is no single offset to remove** --
+  which is why rounds 128-141 kept failing: every one of them looked for a
+  constant, and a constant is not what is wrong.
+- **So the plan is bounded and it is a list, not a mechanism.**  Place the 208:
+  the **112 defined** ones by object order (round 136 showed a defining object
+  goes where the object order puts it), and the **96 COMMON** ones by defining them
+  rather than declaring them (round 136 again, which moved one 24,326,272 bytes to
+  within 3,620 of its reference address).  The residual 3,620 is a separate,
+  smaller problem and it is now clearly separate.
+- **This is the first round on this branch to produce a target of the right kind:**
+  a list of named symbols with known reference addresses, verifiable one at a
+  time, rather than another hypothesis about the linker.  The locator already
+  resolves every address; what was missing was knowing how many of them are
+  already right, and the answer is 428 of 636.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-142: `.data` VirtualSize is invariant to BSS/initialised classification. The 516 is a real size difference. Two near-misses recorded.**
+
+- **A clean negative with a useful corollary.**  `g_log_buffer` (256 bytes),
+  `g_save_info` (8), `g_slot_table` (2), `g_entity_state_base` (2) and
+  `g_entity_type_bytes` (1) were changed from uninitialised to `= {0}` -- 269 bytes
+  reclassified from BSS to initialised -- and the rebuilt `.data` VirtualSize is
+  **0x17407a0, unchanged.**  So VS counts both kinds and **the 516-byte excess is
+  not a classification artefact: our declared content is genuinely 516 bytes
+  larger than the reference's.**  That is the first time this branch has produced
+  a property of the *right* kind -- a size, not an order.
+- **Two near-misses, both caught before they reached a build.**
+  - The first version of the experiment matched **every** sized global array and
+    hit `link_stubs.c`'s placeholders -- **24,319,184 bytes**, which would have
+    made the 24 MB initialised instead of BSS and destroyed the image.  Caught by
+    printing the byte total before building; reverted from backup.
+  - The second version added only **269** bytes against a 3,620-byte target, so it
+    could not have moved the base even if the model were right.  **A test whose
+    intervention is two orders of magnitude below the effect it is looking for
+    proves nothing**, and the honest conclusion is the corollary above, not the
+    base measurement I was after.
+- **Both files restored and verified** (`grep -c '= {0};'` on `Error.c` is 0;
+  `.data` VS back to 0x17407a0).  The tree is clean.
+- **Where this leaves the 516.**  It is a size, it is real, and it is now the only
+  quantity in this branch that is not an ordering question.  Sizing our declared
+  data against the reference's, symbol by symbol, is a bounded job -- 136 COMMON
+  symbols plus the defined ones -- and unlike the six dead levers it ends in an
+  answer rather than a hypothesis.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-141: the section-size model does not add up either, and this branch is not converging. Status recorded rather than another guess.**
+
+- **The target.**  Our `.data` VirtualSize is **0x17407a0** against the reference's
+  **0x174059c** -- **516 bytes** larger.  A single, small, concrete number, and the
+  kind of thing that should be attributable:
+
+  | | `.data` VS | minus raw 0xe000 |
+  |---|---|---|
+  | reference | 0x174059c (24,380,828) | 24,323,484 |
+  | ours | 0x17407a0 (24,381,344) | 24,324,000 |
+  | difference | **516** | **516** |
+
+- **And the attribution fails, in a way that falsifies the model.**  Summing every
+  distinct COMMON declaration across the link line gives **136 symbols,
+  24,330,152 bytes** -- which is **6,152 bytes more than our whole uninitialised
+  region** (24,324,000).  A pool cannot be larger than the space it occupies, so
+  **the additive model "COMMON total = BSS region" is wrong**, and any arithmetic
+  built on it (including the 516 attribution above) is unverified.
+- **Where this branch stands after rounds 128-141.**  Fourteen rounds produced
+  **six eliminated levers** (section count, gap size, section type, object flags,
+  initialised extent, link order, declaration order), **two corrected
+  conclusions** (round 133's "emit cannot place" and round 129's "extent is
+  short"), and **one confirmed mechanism** (defining rather than declaring moves
+  a symbol 24,326,272 bytes to within 3,620 of its reference address).  The
+  objective gap has not moved: **41,619 -> 41,619**.
+- **The honest read.**  The remaining work is a link-layout problem whose
+  *behaviour* is measured but whose *mechanism* is not, and the last three rounds
+  have each spent their budget on a hypothesis that the next round refuted.  The
+  one direction with evidence behind it is **defining the COMMON pool rather than
+  declaring it** (round 136), with a known residual of 3,620 bytes -- and that
+  residual is the same constant seen from four directions, which is the strongest
+  hint in this whole branch: it is structural, not symbolic.
+- **Recommendation, and it is a scope question for the user rather than a
+  technical one.**  The deliverable is byte-identical today via postlink; the
+  objective's first clause needs the raw link to match, which needs this pool
+  placed, which needs a mechanism that source order, link order, section flags
+  and object construction have all failed to influence.  Continuing means
+  characterising MSVC 6's `link.exe` COMMON allocation directly -- reading the
+  binary's behaviour rather than testing hypotheses against it.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-140: the allocation order is CL's COMMON symbol-table order, reversed -- and source order cannot change it. Sixth lever eliminated.**
+
+- **The rule, found from one object.**  `link_stubs.c.obj` declares 37 COMMON
+  symbols.  Their symbol-table order against the address they land at:
+
+  | index in the object's symbol table | band |
+  |---|---|
+  | 0..7 | **HIGH** (0x1176xxxx) |
+  | 8 (`g_bss_tail`, 19,298,968 bytes) | LOW 0x104ff200 |
+  | 9..31 (including `g_connections` at 28, `g_player_slot_overflow_pad` at 31) | LOW |
+  | 36 (`g_office_slots`) | LOW **0x10035c60** |
+
+  Ascending address runs **backwards** through the symbol table: index 36 is
+  lowest, index 8 is at 0x104ff200, and indices 0-7 are highest.  So COMMON
+  storage is satisfied **in reverse symbol-table order**, which is why the first
+  8 declared-in-the-object end up after the 24 MB of placeholders.
+- **And source order does not touch it.**  The three placeholders
+  (`g_connections`, `g_player_slot_overflow_pad`, `g_bss_tail`) were moved to the
+  **top** of `link_stubs.c`, rebuilt, and the object's COMMON order came back
+  **identical** -- `_g_field_entry_count`, `_g_field_entry_count_wt2`, ... -- with
+  the bands still **29/61**.  That is round 91's result for `.data`, now confirmed
+  for the COMMON pool: **CL emits COMMON symbols in its own order and C cannot
+  influence it.**  The file was restored unchanged.
+- **Six levers eliminated by measurement:** emitted-object count (128),
+  `.bss`-vs-`.data` (130), section flags (131), initialised extent (133), link-line
+  object order (138), and declaration order (this round).  **The pool's order is
+  decided by CL, and the only remaining way to change it is to stop leaving these
+  symbols COMMON at all** -- i.e. emit them as ordinary definitions, which round
+  136 showed moves a symbol 24 MB to within 3,620 of its reference address.
+- **So the actionable direction is now unambiguous**, and it is not another
+  ordering experiment: **define the pool instead of declaring it COMMON**, and
+  close the residual 3,620 by the same route.  Everything on this branch points
+  the same way.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-139: the "low band" IS the placeholders. There is one COMMON allocation; the 61 simply follow the 24 MB.**
+
+- **Correcting round 137's framing.**  The 29 "correct band" COMMON symbols are not
+  a distinct group of small variables that happens to be placed well.  Their size
+  distribution gives it away:
+
+  | band | n | min | median | max |
+  |---|---|---|---|---|
+  | "correct" (0x10035xxx) | 29 | 1 | 4 | **19,298,968** |
+  | "high" (0x1176xxxx) | 61 | 1 | 4 | 1,024 |
+
+  **`g_bss_tail` (19,298,968) and `g_player_slot_overflow_pad` (2,507,360) are in
+  the first group** -- they are COMMON symbols in `link_stubs.c`, not definitions,
+  and they are the 24 MB.  So there is no split: **one COMMON allocation, with the
+  placeholders inside it, and the 61 symbols are simply what comes after the
+  placeholders are satisfied.**
+- **Which is why five levers moved nothing.**  Object order (round 138), emitted
+  count (128), `.bss`-vs-`.data` (130), section flags (131) and extent (133) all
+  act on *where a contribution goes*; none of them acts on *the order the linker
+  satisfies COMMON declarations*, which is what actually decides this.
+- **And it also retires a hypothesis from this round before it was tested.**
+  "The low-band symbols must be defined elsewhere, so the linker uses the
+  definition" is refuted: **0 of 29 and 0 of 61 are also defined in any section**.
+  Both groups are COMMON-only.
+- **The statement of the problem, now minimal and testable.**  The reference has
+  its small BSS variables at `0x10035xxx` and its 24 MB placeholder **after**
+  them; we have the placeholder first and 61 variables after it.  The reference's
+  `.data` VirtualSize is 0x174059c against our 0x17407a0, so both carry the same
+  24 MB -- **the difference is purely the order in which the linker satisfies
+  COMMON declarations, and the link line does not set it.**
+- **Next: find what does.**  The candidates left are the order of the objects in
+  the *archive/resolution* sequence rather than the command line, and the order of
+  the COMMON entries within each object's symbol table -- which is what rounds
+  79-80 tested for `.data` and never for this pool.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-138: link order does not control the COMMON split. 29/61 is identical whatever the object order.**
+
+- **The measurement round 137 asked for, and its answer.**  Objects owning the
+  low-band (correct) COMMON symbols versus the high band:
+
+  | band | count | declaring objects |
+  |---|---|---|
+  | correct (0x10035xxx) | 29 | **`link_stubs.c` for all 29** |
+  | high (0x1176xxxx) | 61 | `gm_*` 25, `data_*` 23, `link_stubs` 8, `srv_*` 2, `ServerMainThread` 2, one blob |
+
+  and **`g_bss_tail` ends at exactly `0x11766c98`, which is where the high band
+  begins.**  So the layout is `some COMMON -> defined .bss (24 MB of placeholders)
+  -> the rest of the COMMON`, and the obvious reading was that link order decides
+  which group comes first.
+- **The test, and it is a clean negative.**  Two `gm_*` owners moved from their
+  mid-line positions to the **front** of the 545-token link line, relinked:
+
+  | image | correct band | high band |
+  |---|---|---|
+  | split link | 29 | 61 |
+  | owners early | **29** | **61** |
+
+  and not merely the counts: **the sets and every address are identical**
+  (`identical set: True`, `address differences: 0`).  So the COMMON split is
+  decided by something that ignores the link line entirely.
+- **Five levers now eliminated by measurement, not argument:** emitted-object
+  count (128), `.bss`-vs-`.data` emission (130), object section flags (131),
+  initialised extent (133), and object order (this round).  **Each was a
+  plausible mechanism and each moved nothing.**
+- **What is left, stated as the one fact that has to have an explanation.**
+  `g_bss_tail` ends at 0x11766c98; the high-band COMMON starts at 0x11766c98; the
+  low-band COMMON sits at 0x10035xxx *before* every defined `.bss` contribution
+  including `g_player_slot_overflow_pad` at 0x10036080.  **One set of COMMON
+  symbols is placed before defined BSS and another after, and the linker decides
+  which without reference to the link line.**  That is the question, and it is
+  now the only one on this branch.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-137: COMMON symbols occupy TWO bands, not one. 29 are already correct and 61 are 24 MB out.**
+
+- **The measurement, which corrects round 136's picture.**  Every `<common>`
+  symbol in the shipped split link, by address band:
+
+  | band | count | example |
+  |---|---|---|
+  | **0x1176xxxx** (past `.data`'s VirtualSize) | **61** | `_g_const_half` 0x11766c98 |
+  | **>= 0x10035000** (the BSS region) | **29** | `_g_office_slots` 0x10035c60 |
+  | below 0x10034000 | **0** | -- |
+
+  So this is not "COMMON is allocated after defined BSS", which is what round 136
+  concluded from a single symbol.  **A third of them are already in the right
+  region**, and the split is between two groups -- not one pool placed once.
+- **And it corrects a reading I made earlier in this same round.**  I had taken
+  `g_sequence_counter` at 0x10034690 to be COMMON; it is not in the `<common>`
+  band at all, it is a definition.  **Checking the band rather than the address
+  is what caught it** -- the same "measure the thing you name" rule, twice in one
+  round.
+- **What is established, and what is not.**
+  - Established: defined `.bss` content in the split link starts at **0x10035538**
+    (the lowest symbol at or above 0x35000), so the link's defined-BSS base is
+    effectively the reference's `0x35000`.
+  - Established: a symbol *defined* rather than COMMON moves from 0x117676a0 to
+    0x10034620 (round 136), i.e. the definition lands 3,620 below its reference
+    address and the COMMON form is 24 MB out.
+  - **Not established: why 29 COMMON symbols land correctly and 61 do not.**  That
+    difference is the whole remaining question, and it is now a comparison of two
+    named sets rather than an offset to explain -- the 29 against the 61, by
+    owning object.
+- **Next measurement, stated so it cannot drift:** list the owning object of each
+  of the 29 and each of the 61, and find the property that separates them.  Both
+  sets are COMMON, both are in the link line, and 24 MB of difference says the
+  linker is treating one group as if it belonged to a later section.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-136: defining a COMMON symbol moves it 24.3 MB to within 3,620 of its reference address. The mechanism is confirmed; a constant remains.**
+
+- **Round 134's hypothesis was right, and it is visible in our own map.**  Defined
+  `.bss` versus COMMON storage, in the shipped split link:
+
+  | symbol | address | storage |
+  |---|---|---|
+  | `g_player_slot_overflow_pad` | 0x10036080 | defined (`.bss`) |
+  | `g_connections` | 0x1029af00 | defined (`.bss`) |
+  | `g_bss_tail` | 0x104ff200 | defined (`.bss`) |
+  | `g_log_buffer` | **0x117676a0** | **COMMON** |
+
+  Every defined `.bss` symbol is allocated before every COMMON one, and the
+  reference has its equivalents at `0x10035xxx` -- at the *front*.  So the
+  inversion is real and it is exactly where round 134 predicted.
+- **The intervention and its size.**  One ordinary `.bss` object defining
+  `g_log_buffer`, placed first on the link line:
+
+  | | address |
+  |---|---|
+  | as COMMON | 0x117676a0 |
+  | as a definition | **0x10034620** |
+  | reference | 0x10035444 |
+
+  **24,326,272 bytes of movement, and the symbol is now at the right end of the
+  image.**  The placeholders shifted correctly with it
+  (`g_player_slot_overflow_pad` 0x10036080 -> 0x10036240, `g_bss_tail`
+  0x104ff200 -> 0x104ff3c0), so the ordering behaves as the hypothesis says.
+- **What is left is one constant, and it is the same 3,560.**  The definition
+  lands **3,620 bytes below** its reference address (`0x10035444 - 0x10034620`),
+  against the 3,560 the run-packed emit measured -- the same offset seen from
+  another direction.  So the emit route is not structurally unable to place
+  symbols (round 133's conclusion was too strong) -- it places them correctly
+  **relative to a base that is 3,560-3,620 too low**.
+- **And that makes the remaining question sharp: what sets the linker's `.bss`
+  base for defined storage?**  Our `.data` content ends at offset `0xd60b` in
+  both images (round 133) yet the linker starts `.bss` at `0xd218`, 3,560 earlier
+  -- inside the non-zero region.  Those two facts cannot both be explained by
+  "initialised extent", so the next measurement is the linker's own section
+  layout in `build/od.map` (already produced by this round's test) rather than
+  another hypothesis about content.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-135: the toolchain images had vanished from the daemon, and `verify` reported it as 262 source failures. Now guarded.**
+
+- **What happened.**  A gate run after round 134's experiment reported
+  **`Verification: 0/262 passed, 262 failed`**, all `COMPILE_ERROR`.  The first
+  hypothesis -- a damaged source tree from an interrupted tool call -- was wrong.
+  The real cause, from a single function's verbose output:
+
+  `toolchain 'msvc-6.0-sp6': docker image rebrew/msvc:6.0-sp6-win32 not built — run rebrew toolchain build msvc-6.0-sp6`
+
+  **Both** MSVC images had been removed from the Docker daemon (`docker images`
+  held only `rebrew/base*`, `rebrew/mingw`, `rebrew/base-dosemu`, plus unrelated
+  images); nothing in this project deletes them.  Rebuilding them restored the
+  gate in two steps: `msvc-6.0-sp6` took **0/262 -> 260/262**, and the remaining
+  two functions pinned to plain `msvc-6.0` took it to **262/262**.
+- **Why the response was fast and why it should have been faster.**  Round 126's
+  lesson was "a semantic check beats a byte count"; this is the same shape -- a
+  **missing toolchain is an environment fact, and `COMPILE_ERROR` is the wrong
+  label for it**.  The gate spent no source edits on the problem, but it did spend
+  a diagnosis.  A guard removes that:
+- **The guard, added to `scripts/gate.sh` before `verify` runs:**
+
+  ```
+  == toolchain images
+  toolchain images present
+  ```
+
+  and when an image is absent it fails immediately with the image named, the
+  exact `rebrew toolchain build` command, and the sentence **"Every function will
+  report COMPILE_ERROR until then; that is not a source break.  Not running
+  verify, because its result would be noise."**  Verified against a bogus image
+  name: it detects and prints `rebuild: rebrew toolchain build 9.9`.
+- **Both images are needed**, which is the part that would have cost a second
+  diagnosis: `msvc-6.0-sp6` for the target and `msvc-6.0` for **two functions
+  carrying that cflag override** (`ls_LoadBuildingEntityState` 0x100128f0 and
+  `gm_RemoveLinkedNodeById` 0x10016680).  The guard checks both.
+- **Gate green, fully restored:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0 (baseline 4), imports 100, deliverable load OK,
+  raw link load OK, **OBJECTIVE GAP 41,619** -- unchanged, since none of this
+  touched the link.
+
+**Round-134: object order does not reach the BSS pool. `link_stubs` last changes nothing, measured.**
+
+- **The hypothesis.**  The reference's uninitialised region begins at RVA `0x35000`
+  and its BSS symbols live at `0x10035xxx`; ours begin at `0x1176xxxx`, which is
+  `0x174059c` further out -- exactly our `.data` VirtualSize.  So the 24 MB sparse
+  placeholder (`g_bss_tail` 19,298,968 plus `g_connections` and
+  `g_player_slot_overflow_pad` at ~2.5 MB each, all in `link_stubs.c`) appeared to
+  be occupying the front of the uninitialised region and pushing the real BSS
+  behind it, where the reference has them the other way round.
+- **The test.**  `link_stubs.c.obj` moved from position **528 of 545** to last,
+  relinked:
+
+  | image | `.text` | `.rdata` | `.data` | `.reloc` | gap | symbols off | loads |
+  |---|---|---|---|---|---|---|---|
+  | split link | 4,419 | 1,268 | 0 | 35,684 | 41,619 | 208/636 | OK |
+  | stubs last | 4,419 | 1,268 | 0 | 35,684 | **41,619** | **208/636** | OK |
+
+  **No change at all**, and `g_log_buffer` sits at `0x117676a0` in both.  So the
+  BSS pool's base is not reachable through the link line's object order, which
+  also retires the ordering lever rounds 88-89 were using -- not because that
+  work was wrong, but because this pool is allocated by a different mechanism.
+- **What that leaves, stated as the next test rather than a guess.**  The
+  placeholder is a **defined** `.bss` object; the symbols we need to move are
+  **COMMON** in our objects.  A linker allocates defined BSS and COMMON storage in
+  that order, which would put a defined 24 MB array *before* every COMMON symbol --
+  precisely the inversion observed.  **The reference has no such split**: its BSS
+  symbols are ordinary definitions.  So the test is whether defining those symbols
+  (rather than leaving them COMMON) moves them to the front of the uninitialised
+  region -- which is a source/tooling change in how the objects are emitted, not
+  another link-line permutation.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.  The `stubs last` build was an experiment in `build/`.
+
+**Round-133: the 3,560 was never an extent problem. Both images end their `.data` content at the same offset, and the emitted pool lands on top of existing data.**
+
+- **The measurement that closes it.**  Last non-zero byte in `.data`'s raw region:
+
+  | image | raw | non-zero bytes | last non-zero at | trailing zeros |
+  |---|---|---|---|---|
+  | reference | 0xe000 | 24,019 | offset **0xd60b** | 2,548 |
+  | split link | 0xe000 | 24,019 | offset **0xd60b** | 2,548 |
+
+  **Identical.**  Our initialised content ends exactly where the reference's does,
+  so rounds 129-131 were chasing a boundary that does not differ.  Round 129 had
+  inferred "ours ends at 0x34218" from *where the emitted `.bss` landed*, not from
+  the file -- landing position is not extent, and that substitution is the error.
+- **What the number actually is.**  `0xd218` is inside the **non-zero** region
+  (`0xd60b` is the end).  So the emitted sections are not sitting in a spare
+  3,560-byte gap at all: **they are being placed on top of `.data` content that
+  already exists there**, and because emitted `.bss` contributes no file bytes the
+  section stays byte-identical while the *symbols* point into occupied space.
+  That is why 171 symbols land 3,560 low and why the emit gains only 347 bytes.
+- **And it explains the ceiling rounds 128-130 kept hitting without naming.**
+  An emitted `.bss` object is allocated in the linker's uninitialised pool, whose
+  base is its own choice; the symbols' in-section offsets are correct but the base
+  is not ours to set.  **The emit route cannot place anything by address** -- it
+  can only place content relative to whatever base the linker picks, which is why
+  it moves 347 bytes of 4,419 no matter how the objects are built.
+- **Six hypotheses eliminated by measurement across rounds 128-133** (ceiling as
+  count, gap size, section type, object validity, object flags, extent shortfall)
+  and the seventh is now a conclusion rather than a candidate: **the emit route is
+  structurally unable to set a data symbol's address.**  Only object *order and
+  sizes* decide addresses, so the work has to go there -- which is what the
+  split-link ordering rounds 88-89 were doing before this detour.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,618.
+
+**Round-129: the 3,560 is our initialised `.data` extent being short, and it is a declaration question, not padding.**
+
+- **CORRECTED IN ROUND 133: our initialised extent is NOT 3,560 short.**  The
+  table below infers the boundary from where the emitted `.bss` landed rather
+  than measuring it, and the actual measurement refutes it: **both images have
+  their last non-zero `.data` byte at offset `0xd60b`, identical, with the same
+  2,548-byte zero tail.**  The initialised *content* ends at the same place in
+  both.  What the table really shows is where the linker put our emitted pool --
+  `0x34218` -- which by the offset is **`0xd218`, inside the non-zero region**,
+  i.e. the emitted sections are landing on top of content that already exists
+  there.  That is a different and worse finding than "3,560 missing".
+  (Original text, kept to show the reasoning that was wrong:) Both images put
+  `.data` at RVA `0x27000` with `SizeOfRawData` `0xe000`; neither has a separate
+  `.bss`, so the uninitialised part lives inside `.data`'s VirtualSize:
+
+  | | `.data` VS | claimed extent |
+  |---|---|---|
+  | reference | 0x0174059c | 0x35000 |
+  | split link | 0x017407a0 | 0x34218 |
+- **And it is not missing content.**  The band `0x34218..0x35000` holds content in
+  **both** links, at the **same addresses**: `lc_time_curr` 0x10034258,
+  `pow10pos` 0x10034350, `pow10neg` 0x100344b0, `g_panic_callback` 0x10034610 and
+  12 more are placed identically in ours.  Our link lists **90** symbols in that
+  band, the locator resolves 16 of them.  The bytes are zeros in both, which is
+  why `.data` is byte-exact while the boundary still differs.
+- **So the fix is the inverse of round 77 and should not be reached for
+  casually.**  Round 77 de-initialised 19 sized arrays so their symbols fell into
+  the uninitialised region, and round 79 measured that as 4,414 -> 4,547 differing
+  `.text` bytes and reverted it.  **That measurement was of `.text` and could not
+  see this boundary at all** -- the same blind spot round 119 fixed in the gate
+  for `.reloc`.  The two effects are now separable: extending the initialised
+  extent by 3,560 moves every emitted symbol to its intended address, and its
+  `.text` cost is a number round 79 already measured.
+- **What that means for the next round.**  Re-apply the round-77 de-initialisation
+  set, re-link, and compare **three** numbers at once: `.text` differing, the
+  emitted symbols' landing delta (should go to 0), and the wine load.  If the
+  landing delta goes to zero the emit can finally place content, which is worth
+  more than the 133 `.text` bytes round 79 was judging it by.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, raw link load OK,
+  OBJECTIVE GAP 41,619.
+
+**Round-128: run-packing is legitimate and measures small — 41,619 -> 41,272, with the image still loading. The reason is a fixed 3,560-byte landing offset.**
+
+- **What was tried, and it is the sound version of round 124's idea.**  Emit the
+  misplaced symbols into **`.bss`**, which carries no file content, packed into
+  **contiguous runs** rather than one object each: **171 candidates -> 10
+  objects**.  Verified on all three axes this time, not bytes alone:
+
+  | image | `.text` | `.rdata` | `.data` | `.reloc` | gap | reloc missing/shared | loads |
+  |---|---|---|---|---|---|---|---|
+  | split link | 4,419 | 1,268 | 0 | 35,684 | 41,619 | 590/2,936 | **OK** |
+  | run-packed | **4,046** | 1,268 | 26 | 35,684 | **41,272** | **590/2,936** | **OK** |
+
+  **347 bytes of real movement**, an order of magnitude less than the absolute
+  symbols' illusory 2,389 -- and unlike them it keeps every relocation (2,936
+  shared, identical to the split link) and still loads.
+- **Why so little, measured.**  Comparing each symbol's reference address against
+  where it landed in `rp.map`:
+
+  | delta | symbols |
+  |---|---|
+  | **-3,560** | **73** |
+  | -24,308,304 | 21 |
+  | -1,733,888 | 16 |
+  | -24,300,116 | 14 |
+  | -8 | 7 |
+
+  The 73 are the emitted ones, and they are **all exactly 3,560 bytes low**.  **An
+  emitted `.bss` section does not go where its symbols' offsets say -- its base
+  is decided by the linker, from the sizes of everything before it.**  So the
+  mechanism places symbols correctly *relative to each other* and lands the whole
+  block at the wrong base.  The 21 and 16 and 14 are symbols the run-builder
+  never had a candidate for, still sitting where the split link put them.
+- **So the blocker is no longer the emit and no longer the ceiling -- it is
+  `.bss`'s base.**  Closing the 3,560 means making the sections before `.bss`
+  the reference's sizes, and the objective explicitly excludes "manual padding",
+  so the honest route is to make the preceding data the right size by construction.
+  That is where the next round should look, and the offset is now a number rather
+  than a suspicion.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, deliverable load OK, **raw link load
+  OK** (round 127's new check), OBJECTIVE GAP 41,619.  The run-packed build is an
+  experiment in `build/`; the shipped link is untouched.
+
+**Round-127: the meter is now load-checked. A shrinking gap with a broken image fails the gate.**
+
+- **The fix, and it is in the gate rather than in a note.**  Round 126's lesson was
+  that `OBJECTIVE GAP` counts differing **bytes** and cannot tell a produced byte
+  from a coincidental one -- a build scored **39,061** against **41,619** while
+  shipping an image that does not load.  A lesson written only in `docs/TODO.md`
+  is one a future round can ignore, so the raw link is now load-checked on every
+  run, immediately beside the number:
+
+  ```
+  OBJECTIVE GAP: 41619 bytes between the raw link and the reference
+    raw link loads: wine load + exports OK
+  ```
+
+  A red load line makes the gate **fail** with the reason spelled out ("a byte
+  gap can shrink while the image stops working -- check `.reloc` entries before
+  believing any improvement in the line above"), rather than leaving an
+  improved number standing on its own.
+- **Why this one is worth a whole round.**  Rounds 124-126 cost three rounds to a
+  metric that moved the wrong way, and every earlier measurement error in this
+  work (rounds 95, 101, 106, 109) was also a check that existed and was not run.
+  The gate already invoked `wine_load_check.sh` -- **on the deliverable only**,
+  never on the raw link, which is the artefact the objective is actually about.
+  The check was installed and pointed at the wrong file.
+- **State, unchanged and now honestly instrumented:** lint 0/0, verify 262/262,
+  raw-link `.data` 0, `.text differing 0x0`, residue 0 (baseline 4), imports 100,
+  deliverable wine load OK, **raw link wine load OK**, **OBJECTIVE GAP: 41619**.
+  The shipped link is untouched and the objective's first clause is unmet by
+  41,619 bytes.
+
+**Round-126: absolute symbols break the image. The last two rounds' "progress" was bytes matching without relocations.**
+
+- **The check I should have run first.**  `scripts/wine_load_check.sh` -- the
+  gate runs it on every build, and rounds 124-125 never did:
+
+  | image | load |
+  |---|---|
+  | `build/split_poc.dll` (no absolute symbols) | **wine load + exports OK** |
+  | `build/server.dll` (deliverable) | **wine load + exports OK** |
+  | `build/a.dll` (245 absolute symbols) | **LOAD FAILED err=998** |
+
+  `err=998` is `ERROR_NOACCESS`, which is what an image looks like when its
+  absolute addresses have no fixups and the loader cannot rebase them.
+- **Why, exactly, and it is checkable in the table.**  An absolute symbol is a
+  **link-time constant**, so the linker emits no relocation for references to it.
+  Relocation entry sets, same parse on all three:
+
+  | image | entries | missing vs reference | extra | shared |
+  |---|---|---|---|---|
+  | reference | 3,526 | -- | -- | -- |
+  | split link | 3,032 | 590 | 96 | **2,936** |
+  | absolute symbols | **1,580** | 3,478 | 1,532 | **48** |
+
+  **Shared entries collapse from 2,936 to 48.**  The `.text` bytes match because
+  the right digits were forced in at link time; the fixups that would have made
+  those digits correct after loading are gone.  **Byte equality with a missing
+  relocation is not equality** -- and the gap number got *better* while the file
+  got worse, which is the worst kind of progress metric.
+- **So the lesson is about the meter, not the mechanism.**  `OBJECTIVE GAP` counts
+  raw differing bytes and cannot tell a produced byte from a coincidental one.
+  Any future claim from it needs `wine_load_check.sh` alongside -- and that is
+  now the second thing this session that a cheap semantic check would have
+  caught before a confident write-up (the first was round 124's empty-file
+  "`.text differing 0`").
+- **What survives.**  `scripts/absolute_symbols.py` is kept as the tool that
+  found two real COFF bugs (byte-swapped `Machine`; an unmaintained string-table
+  length field, which is also what broke rounds 49-53's stripper), and because
+  the negative result is worth more than the file: **forcing addresses at link
+  time removes the relocations that make them addresses.**  The shipped link is
+  untouched and still loads.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, wine load OK, **OBJECTIVE GAP: 41619**.
+
+**Round-125: the two address sources combine, and "only misplaced" is load-bearing. 39,061.**
+
+- **CORRECTED IN ROUND 126: every row below is a byte count from an image that
+  does not load.**  The numbers are real measurements of the wrong thing, kept
+  because they show how plausible the wrong thing looked:
+
+  | absolute definitions | symbols | `.text` | gap | loads? |
+  |---|---|---|---|---|
+  | none (split link) | -- | 4,419 | 41,618 | **yes** |
+  | locator (`common_addresses.json`) | 208 | 1,980 | 39,230 | **no** |
+  | manifest (`rebrew-data.toml`) | 153 | 2,107 | 39,321 | **no** |
+  | **union of both** | **245** | **1,843** | **39,061** | **no** |
+
+  The two sources overlap but neither contains the other -- the locator resolves
+  symbols from `.text` operands, the manifest from recorded layout -- so the
+  union is the right input and gains 169 bytes over the better single source.
+- **And the negative result that defines the rule.**  Defining **all 1,045** known
+  symbols absolutely instead of only the misplaced ones is catastrophic:
+  **181,819** bytes differing with 8 link errors.  Overriding a symbol that is
+  already at its correct address moves the content that references it.  **So the
+  condition is not "we know the address" but "this symbol is in the wrong place
+  and we know where it belongs."**  Without that, the approach is four times
+  worse than doing nothing.
+- **What it costs to use.**  One object, 245 symbols, 8,405 bytes; placed first
+  on the link line so `/FORCE:MULTIPLE` keeps it; no section beyond one empty
+  `.bss` for LINK's sake; no size, no order, no packing, no SetupPhase ceiling.
+  **Every blocker rounds 106-117 catalogued is bypassed rather than solved**,
+  which is why this route moved the number when the emit route could not.
+- **The remaining shape, now measured:** `.text` 1,843, `.rdata` 1,268,
+  `.reloc` 35,689, headers 248, `.data` 13.  `.reloc` is 91% of it and is the
+  section postlink replaces wholesale -- so the objective's gap is now dominated
+  by the one region that cannot be produced until every `.text` operand is right.
+- **Gate green, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0 (baseline 4), imports 100, wine load OK,
+  **OBJECTIVE GAP: 41618** (the shipped link is untouched).
+
+**Round-124: CORRECTED IN ROUND 126 — absolute symbols do NOT work. The image they produce does not load.**
+
+> The result below (41,619 -> 39,230) is a **byte-count artefact**.  An absolute
+> symbol is a link-time constant, so the linker emits **no relocation** for every
+> reference to it: our `.reloc` collapses from **3,032 entries to 1,580**, and
+> its overlap with the reference from **2,936 to 48**.  The `.text` bytes then
+> match because the right digits were forced in -- but the loader has no fixup
+> and cannot rebase them.  `scripts/wine_load_check.sh build/a.dll` ->
+> **`LOAD FAILED err=998`**, against `wine load + exports OK` for both the split
+> link and the deliverable.  **Byte equality with a missing relocation is not
+> equality**; the round below measured bytes and never checked that the result
+> was still a working image.
+
+
+- **The idea.**  Our `.data` is already byte-exact, so the addresses exist; only the
+  symbol-to-address **binding** is wrong.  A COFF **absolute symbol** (section
+  number -1) binds a name to a numeric value with **no section at all** -- no
+  layout contribution, no size, no order dependence.  That sidesteps every
+  blocker the last ten rounds hit: LINK's SetupPhase section ceiling (round 110),
+  packing (rounds 111-117), and the manifest's unusable sizes (round 106),
+  because none of them applies to a symbol that has no section.
+- **It works, and here is the measurement.**  `scripts/absolute_symbols.py`
+  builds one object defining the **208** located-but-misplaced symbols as
+  absolute, placed **first** on the link line so `/FORCE:MULTIPLE` keeps it:
+
+  | region | split link | with absolute symbols |
+  |---|---|---|
+  | `.text` | 4,419 | **1,980** |
+  | `.rdata` | 1,268 | 1,268 |
+  | `.data` | **0** | 13 |
+  | `.reloc` | 35,684 | 35,721 |
+  | headers | 248 | 248 |
+  | **total** | **41,619** | **39,230** |
+
+  **2,389 bytes off the objective's own meter**, and the first movement it has
+  recorded.  The 13-byte `.data` regression is real and stated: `.data` holds
+  absolute addresses, so rebinding 208 symbols moves a few of those words.
+- **Two COFF bugs found by making it fail, both worth keeping.**
+  - **Machine was byte-swapped.**  `IMAGE_FILE_MACHINE_I386` is `0x014C`; packing
+    `0x4C01` stores the bytes reversed and LINK reports the object as foreign:
+    `LNK1136 invalid or corrupt file`.
+  - **The string table's length field was never updated.**  It must equal the
+    table's total byte length *including that 4-byte field*, and it stayed at 4
+    while names were appended, so LINK misread every entry:
+    **`Internal error during ReadSymbolTable`** -- the same failure as the COFF
+    stripper bugs of rounds 49-53.  Short names worked, long names did not, which
+    is what isolated it.  It now passes 200 symbols in one object.
+- **And one near-miss I have to record against myself.**  The first run said
+  "`.text differing 0`".  It was false: the link had produced a **section-less
+  524,288-byte file**, and my comparison of two empty buffers returned zero.  I
+  checked the file only because the key lookup threw.  **A zero from a failed
+  artefact is the most dangerous number in this project** -- fourth instance of
+  the same class (rounds 95, 106, 109), and the first where I nearly published
+  it as a breakthrough.  The measurement now verifies the image has sections
+  before reporting anything.
+- **What is left is now precisely bounded by the locator.**  `.text` still
+  differs by 1,980 bytes: those are the operands naming symbols the locator could
+  **not** place (it resolves 636 of the pool's symbols; the rest appear in no
+  `.text` operand and in no reference content).  Every symbol it *can* place is
+  now placed, by one object, with no section and no size.
+- **Gate green, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0 (baseline 4), imports 100, wine load OK,
+  **OBJECTIVE GAP: 41618** (the shipped link is untouched by this experiment; the
+  meter reads 41,618 rather than 41,619 because the split link's `.data` is one
+  byte shorter this run -- stated rather than rounded).
+
+**Round-123: `.rdata` is displaced RVAs, not literal data. One cause, three symptoms — and this is the last time it needs deriving.**
+
+- **The measurement.**  `.rdata` is 12,288 bytes in both.  Differing: **1,268
+  bytes, in 208 runs, longest 82**.  Read as 4-byte words: **418 differing words
+  of 3,072**, and the leading ones are not data but **RVA cross-references into
+  `.rdata` itself**:
+
+  | RVA | reference | ours | delta |
+  |---|---|---|---|
+  | 0x024000 | 0x00026a8e | 0x0002680c | +642 |
+  | 0x024070 | 0x00026bb2 | 0x00026a06 | +428 |
+  | 0x024078 | 0x00026cfc | 0x00026a24 | +728 |
+  | 0x024084 | 0x00026de8 | 0x00026a60 | +904 |
+
+  Both values lie inside `.rdata` in 118 of the 418, i.e. tables pointing at
+  other tables.  **Ours are systematically lower, which is displacement, not
+  different content.**
+- **So the objective gap is ONE problem, not five.**  `.text` operands naming
+  data (4,419 bytes), `.rdata` RVA tables (1,268), `.reloc` entries (35,684) and
+  the header fields (248) are all "the linker put this somewhere else".  The
+  emit work addresses exactly that, and it is why the same fix moves several
+  rows at once.  **Rounds 118, 120 and 121 each re-derived a piece of this and
+  each got the arithmetic wrong in a new way; the shape was visible from round
+  92, when `apply_data_emit.py` was written to place symbols by address.**
+- **What is genuinely left, in one sentence.**  Place the data symbols at the
+  reference's addresses at link time.  The blockers, all measured and none of
+  them new: the manifest's sizes are unusable (round 106 -- `g_connections`
+  reads 1), only 61 emitted sections link before LINK's SetupPhase ceiling
+  (round 110), packing is correct but cannot reduce the count enough because
+  section-symbol sizes are unknown (rounds 115-117), and `.reloc` cannot be
+  produced at all while `.text` differs (this round).
+- **Gate green, unchanged:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0 (baseline 4), imports 100, wine load OK,
+  **OBJECTIVE GAP: 41619** in the log.
+
+**Round-122: the gate now reports OBJECTIVE GAP, and the VERDICT no longer claims the objective is met.**
+
+- **The objective's own meter, in the gate, every run:**
+
+  ```
+  raw link vs reference (pre-fixer, the whole picture):
+    .text     differing 0x1143 of 0x23000
+    .rdata    differing 0x4f4 of 0x3000
+    .data     differing 0x0 of 0xe000
+    .reloc    differing 0x8b64 of 0x11000
+    headers   differing    0xf8 of  0x1000 (6.1%)
+  OBJECTIVE GAP: 41619 bytes between the raw link and the reference
+  ```
+
+  Summing the rows independently gives 4,419 + 1,268 + 0 + 35,684 + 248 =
+  **41,619**, so the meter agrees with the hand count.  `OBJECTIVE_BASELINE` is
+  declared next to the other baselines so the number is guarded rather than
+  merely printed.
+- **And the false assertion is gone.**  `verify_objective.py` printed
+  `VERDICT: 100%% byte-identical -- objective met` about
+  `build/server.dll` -- the **postlinked** artefact, which postlink builds by
+  copying the reference's `.reloc` (66,420 bytes) and splicing its `.data`.  Its
+  own code comment already said it "does NOT fail on a non-zero residue ... and
+  leaves the judgement to the caller", so the script knew; the sentence did not.
+  It now says **"the DELIVERABLE is 100%% byte-identical"** and states that this
+  says nothing about the objective's first clause.  **A gate that reports success
+  for the wrong artefact is worse than a gate that reports nothing**, because it
+  is the line a human reads.
+- **Where the project actually stands, stated once and plainly.**  The
+  deliverable matches the reference byte for byte.  The raw link does not, by
+  41,619 bytes, and the pipeline closes that by overwriting from the reference
+  rather than by producing it: `.reloc` replaced wholesale, `.data` spliced,
+  1,241 data operands and 41 call targets rewritten, 639 bytes of `.text`
+  overshoot zeroed, 29 import slots and the PE header rewritten.  **The
+  objective's first clause is unmet and now has a number that no summary line
+  contradicts.**
+- **Gate green, as defined after this round:** lint 0/0, verify 262/262,
+  raw-link `.data` 0, `.text differing 0x0`, residue 0 (baseline 4), imports 100,
+  wine load OK, the full pre-fixer table and **OBJECTIVE GAP: 41619** in the log.
+
+**Round-121: the gate's VERDICT is met by copying the reference's sections, not by the toolchain producing them. `.reloc` is replaced wholesale.**
+
+- **The measurement that settles it.**  Relocation entries, same parse on all
+  three files:
+
+  | image | `.reloc` VS | entries |
+  |---|---|---|
+  | reference | 0x010374 | **3,526** |
+  | raw link | 0x0090a8 | **3,032** |
+  | deliverable | 0x010374 | **3,526** |
+
+  A byte-patcher that only rewrites operands cannot add 494 entries.  The
+  deliverable has the reference's entry count because **`rebrew/postlink.py`
+  contains a fixer step literally titled "replace `.reloc`"** which writes the
+  reference's section bytes into the build.  **66,420 bytes -- 23% of the
+  286,720-byte file -- are copied from the answer key.**
+- **So the objective is not met, and the gate cannot see that it is not.**
+  `VERDICT: 100%% byte-identical` is true of the artefact and is reached by:
+  replacing `.reloc` wholesale; splicing reference `.data` (the
+  `g_data_restore_gap` splice earlier rounds documented); rewriting **1,241 data
+  operands**, 41 call targets, **639** bytes of text overshoot and 29 import
+  slots; rewriting the PE header and exporting new metadata.  The objective asks
+  for the file "straight out of the toolchain, without post linking mangling" --
+  every one of those is the mangling it names.
+- **This also reframes the 41,619 number a third time, now correctly.**  It is
+  not four additive regions and it is not one cause with three shadows.  **It is
+  the difference between what the linker produces and what the reference is**,
+  and the pipeline's current answer is to overwrite the difference from the
+  reference rather than to close it.  Only `.text` is genuinely narrowed by the
+  emit work (4,419 -> 4,247).
+- **What a truthful gate would assert**, and it is the next thing to build:
+  compare the **raw link** against the reference and require it to be equal, so
+  a copied section cannot pass as a produced one.  Round 119 made the gate print
+  the true numbers; this round shows the VERDICT line is still measuring the
+  wrong artefact.
+- **Gate green, as currently defined:** lint 0/0, verify 262/262, raw-link
+  `.data` 0, `.text differing 0x0`, residue 0 (baseline 4), imports 100, wine
+  load OK, `VERDICT: 100%% byte-identical`.
+
+**Round-120: `.reloc` is a SHADOW of the `.text` gap, not a second problem. The 41,619 bytes round 118 counted are not independent.**
+
+- **The relocation tables, counted.**  Reference **3,526** entries, ours
+  **3,032** -- **494 short** -- with **589 RVAs present only in the reference**
+  and 96 only in ours; 2,935 shared.  All entries are type 3 (HIGHLOW) bar 30
+  ABSOLUTE padding entries in the reference and 24 in ours, which is the
+  page-alignment padding each block carries.
+- **CORRECTED IN ROUND 121: `.reloc` is NOT downstream of `.text`.  postlink
+  replaces the whole section with the reference's.**  Read the fixer: "replace
+  `.reloc` (at the built file's own .reloc offset)" writes the reference's bytes
+  into the build, and the delivered file carries the reference's **3,526**
+  entries against the raw link's **3,032**.  A patcher cannot add 494 entries by
+  rewriting operands, so nothing about this is a consequence -- **it is a copy**,
+  66,420 bytes of it, 23% of the file.  The paragraph below drew the opposite
+  conclusion from the same numbers and is kept only to show the shape of the
+  error: the counts were right, the causal story was invented.
+- **What a missing HIGHLOW entry means.**  A HIGHLOW entry exists because
+  `.text` holds an absolute address at that RVA, so **589 RVAs where the
+  reference has an absolute reference and we have none** is `.text` content that
+  differs there.  That part stands as a description of the gap; what does not
+  stand is the claim that closing `.text` closes `.reloc`.
+  (A parse note, since it cost a step: the 16-bit entry is `type << 12 | offset`,
+  so reading it raw gives "types" like 0x3bae.  They are type 3 with offset 0xbae.)
+- **This corrects round 118's arithmetic, which I should not leave standing.**
+  That round presented 4,419 + 1,268 + 35,684 + 248 = 41,619 as "the gap" and
+  concluded "`.text` is only 11% of it, a round that closes all of `.text` has
+  closed a ninth".  **The regions are not additive.**  `.text` is the cause;
+  `.reloc` is its shadow; and closing the `.text` drives `.reloc` with it.  The
+  headline number was right and the conclusion drawn from it was wrong, which is
+  the same shape as the last three measurement errors.
+- **The 589 also has a known explanation.**  Rounds 43-47 established that the
+  split link does not reproduce **52 functions / 50,583 bytes** at all, and
+  those functions are exactly where absolute references would live.  So the 589
+  is that inventory showing up a second time, in a region the gate had been
+  discarding.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, wine load OK, `VERDICT: 100%%
+  byte-identical`, full pre-fixer table in the log.
+
+**Round-119: the gate now prints every region, so `.reloc` cannot hide again. That was the actual defect behind round 118.**
+
+- **Why `.reloc` was invisible, exactly.**  `scripts/gate.sh` parsed the residue
+  report with two `sed` expressions -- one for `^` `.text differing`, one for
+  `  .data ... differing` -- and printed those two lines and nothing else.
+  The report itself carried `.rdata`, `.reloc` and `headers` all along; the gate
+  **threw them away**.  So for dozens of rounds the human-readable output said
+  "residue 0, baseline 4 held" while `0x8b64` (35,684) bytes of `.reloc`
+  difference sat unprinted in the same buffer.
+- **Fixed in the gate, and it is a three-line change**: print the whole
+  `raw link vs reference` table, and **fail if that table is missing** -- so a
+  future refactor of the report cannot silently reintroduce the blind spot the
+  way the `sed` expressions did.  Output now:
+
+  ```
+  raw link vs reference (pre-fixer, the whole picture):
+    .text     differing 0x1143 of 0x23000
+    .rdata    differing 0x4f4 of 0x3000
+    .data     differing 0x0 of 0xe000
+    .reloc    differing 0x8b64 of 0x11000
+  ```
+- **rebrew was not at fault, and that is worth recording too.**  `rebrew verify
+  --whole-binary` reports all of it -- `.data`, `.reloc` and `.text` as
+  VirtualSize divergences (`.reloc` expected 66,420 against an actual 37,032)
+  plus exports, imports, rsrc and headers.  **The tool that could see the gap
+  was already installed; the gate was not calling it and was not reading all of
+  what it did call.**  Round 118's instinct to "fix it in rebrew" would have
+  patched the wrong repository.
+- **The general rule this is the third instance of.**  Rounds 95/101 read bytes
+  outside the section under discussion; rounds 106/109 inferred from a file that
+  had not been regenerated; this one trusted a summary line instead of the table
+  behind it.  All three are the same failure: **the measurement was narrower
+  than the claim made from it**, and every time the claim was confident and
+  wrong.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, wine load OK, `VERDICT: 100%%
+  byte-identical`, and the full pre-fixer table now in the log.
+
+**Round-118: the honest gap is 41,619 bytes across four regions, not 4,419 in `.text`. Two of them were never measured.**
+
+- **The deliverable IS byte-identical, and the raw link is not.**  Verified
+  section by section this round:
+
+  | | reference | built (`build/server.dll`) | differing |
+  |---|---|---|---|
+  | `.text` | 0x23000 | 0x23000 | **0** |
+  | `.rdata` | 0x3000 | 0x3000 | **0** |
+  | `.data` | 0xe000 | 0xe000 | **0** |
+  | `.reloc` | 0x11000 | 0x11000 | **0** |
+  | headers | 0x400 | 0x400 | **0** |
+  | file size | 286720 | 286720 | **0** |
+
+  So the *objective's* second half holds for the artefact -- and its first half
+  does not, because the same numbers **before the fixers** are:
+
+  | region | raw-link differing |
+  |---|---|
+  | `.text` | 0x1143 (4,419) |
+  | `.rdata` | 0x4f4 (1,268) |
+  | `.data` | **0** |
+  | `.reloc` | **0x8b64 (35,684)** |
+  | headers | 0xf8 (248) |
+  | **total** | **41,619** |
+
+- **`.reloc` is the largest single region and I had never measured it.**  Eight
+  times the `.text` figure that rounds 92-115 were all chasing.  The reason it
+  is absent from those notes is that the gate reports `.data` and `.text` by
+  name and nothing else, so a region with no line in the report read as a region
+  with no difference.  **A measurement that is not printed is not zero.**
+- **What the fixers do to close it**, from the tool's own accounting: imports
+  rewrite 29 slot operands (5 skipped), data rewrites **1,241 data operands**,
+  41 call targets and zeroes 639 bytes of text overshoot, pe-metadata rewrites
+  the header, and locality recovers 15 stale operands.  **Non-`.text` total
+  overwritten: 0x9150 (37,200 bytes)** -- which is the "post linking mangling"
+  the objective names, and it is mostly the data operands.
+- **So the work is the same work and the target is bigger.**  Placing the
+  symbols at link time is still the fix, and it now has a size: 1,241 data
+  operands across 41,619 bytes, of which `.text` is only 11%.  A round that
+  closes all of `.text` has closed a ninth of the gap.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text differing
+  0x0`, residue 0 (baseline 4), imports 100, wine load OK, `VERDICT: 100%%
+  byte-identical`.
+
+**Round-116/117: three rebrew APIs restored; the gate's residue step works again. Plus the stores' format stamps.**
+
+- **The gate was FAILING on an import error, not on bytes.**  `rebrew lint`
+  reported 9 warnings and `postlink_residual.py` — the tool that measures the
+  actual residue — could not run at all:
+
+  `ImportError: cannot import name 'binary_info_from_bytes' from 'rebrew.postlink'`
+
+  Three rebrew names the project depends on had been **made private or
+  removed**, and each is fixed in rebrew rather than worked around in the
+  project (AGENTS.md: never work around a missing tool in the sources):
+
+  | name | module | what it was |
+  |---|---|---|
+  | `binary_info_from_bytes` | `rebrew.postlink` | renamed to `_binary_info_from_bytes`; public alias restored |
+  | `map_coverage` | `rebrew.postlink` | renamed to `_map_coverage`; public alias restored |
+  | `linker_produced_match` | `rebrew.status` | **removed**; restored, with its removed dependency `compare_file_bytes` inlined |
+
+  The third was recovered from git history (`e955405a` removed it when status
+  started scoring the raw link) and reimplemented from its own docstring's
+  semantics: match count and span over two buffers, minus an optional
+  `[start, end)` splice, with a tail past the shorter file counted unmatched.
+  **With it back, the residue step reports again: `residue 0, baseline 4 held`.**
+- **The `format = 1` stamp, and a store that could not be stamped.**
+  `src/rebrew-data.toml` was mode **`-r--r--r--`**, so every writer's
+  `atomic_write_locked` no-op'd silently and the stamp could never land — the
+  lint was asking for something no reachable command could produce.  Two more
+  findings fell out of fixing it: `stamp_format` runs only from the **batch**
+  writers (`set_data_field` alone does not reach it), and the store-shape is
+  root-level, so the stamp must go through a *real* change — an idempotent
+  re-write short-circuits before stamping.
+- **Two mistakes of mine, both from passing the wrong path or module, both
+  repaired.**  `set_fields_batch(Path('.'))` created a **stray
+  `./rebrew-functions.toml`** at the repo root (lint 2 -> 1114 warnings), and
+  using module `server.dll` instead of `SERVER` appended a bogus row (W035).
+  Both stores were restored from backups taken before the first write.  **Third
+  time this work that a hard-coded path assumption, not the logic, was the bug
+  — and the first time the damage was to a metadata store rather than a build
+  artefact.**
+- **Gate green on the whole thing:** lint 0/0, verify 262/262, raw-link `.data`
+  0, `.text differing 0x0`, **residue 0** (baseline 4), imports 100, wine load OK,
+  `VERDICT: 100%% byte-identical`.
+
+**Round-115: the packing bug is found and fixed — `g_connections` was absorbed into a neighbour's run on a size of 1. The remaining crash is the known ceiling.**
+
+- **Reading LINK's whole output instead of grepping it found the failure**, which
+  is exactly what round 114 said to do and two earlier rounds got wrong.  The
+  `SetupPhase` crash was *hiding a resolution error behind it*: the real content
+  is `error LNK2001: unresolved external symbol _g_connections`, ten times over.
+- **The cause, and it is the manifest's unreliability again.**  `g_connections`
+  is 2,507,364 bytes, but the manifest records its size as **1** (round 106
+  established the manifest's sizes are unusable for exactly this).  The packed
+  run `001deac0_pack7` spans up to `0x101deb00`, so `g_connections` fell
+  *inside* it and was given a 1-byte slot — while the strip had already made the
+  real 2.5 MB object undefined.  **The 20 MB array vanished because a number in
+  a store was 1.**
+- **The rule, and it is the right one:** *only a COMMON symbol's size is
+  authoritative* — COFF stores it in `value`.  A section symbol's size comes
+  from the manifest and is a guess, so it must never be used to pack.  Symbols
+  without a trustworthy size are emitted one-per-object.  With the rule in place
+  the `LNK2001` cascade is **gone (0 occurrences)**, and `--pack` gets as far as
+  the SetupPhase ceiling from round 110 — which is now the only thing left
+  between packing and the remaining ~170 bytes.
+- **Why packing still does not reduce the count enough.**  Only COMMON symbols
+  are packable, and they are the minority; the section-resident ones fall back
+  to one object each, so the set is back to 155 and the ceiling applies.  So
+  packing is now *correct* but not yet *useful*, and the useful version needs
+  trustworthy sizes for the section-resident symbols — which is the manifest
+  question again, and not something a script can invent.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.  The
+  emit path stands at **4,247** with 120 objects placed, 0 link errors.
+
+**Round-114: `build_section_object` is sound and the packing integration is not. 4,247 stands, now with 120 objects placed.**
+
+- **The object builder is cleared.**  Taking the working response file and
+  appending a single `build_section_object` object — with **zero**, one, and two
+  extra symbols — **links in all three cases**.  So a packed-shaped object is
+  something LINK accepts, and round 113's "packing itself is the trigger" needs
+  the qualifier: it is the *integration*, not the object.
+  (Round 113's own bisection was run with `build/common_split` already deleted,
+  so the "one run crashes" result was a missing-file error — the same artefact
+  class as round 109, now twice.)
+- **What packing does differently, from the code.**  With `--pack` the COMMON
+  pass emits only **11** symbols instead of 83, because the rest are consumed by
+  the packed runs; the strip then undefines every name in `com_names`, which by
+  construction includes each run member.  The ordering is right (packing at line
+  254, strip at 332).  So every COMMON symbol should be defined exactly once, and
+  the link says otherwise with a `SetupPhase` crash that hides any resolution
+  error behind it.  **The next step is to stop LINK from hiding it** — capture
+  its full output rather than filtering to `error` lines, which is what sent
+  rounds 106 and 109 down the wrong path.
+- **The refactor's cost is now measured too:** the non-packed path places **120
+  objects** where it placed 143 before, and measures **4,247**.  Collecting
+  candidates into a sorted `pending` list changed the insertion order, and the
+  link-line order is what decides placement.  So the best *pack-free* number
+  observed is 4,197 (round 110) and the current one is 4,247; neither is
+  claimed as a result without a rerun.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-113: one packed run is enough to fail the link, so it is the packing itself and not the count, the size, or the section type. 4,247 stands.**
+
+- **The bisection, which removes the last two explanations.**  With `--pack-limit`:
+
+  | packed runs | result |
+  |---|---|
+  | 1 | crash |
+  | 2, 4, 8, 12, 16, 18 | crash |
+
+  and with a **single** run, both as `.bss` and as initialised `.data`, both
+  crash.  So round 110's section-count ceiling, round 111's gap-size theories and
+  round 112's section-type theory are all **not** what packing trips over.  One
+  well-formed object, replacing a handful of individually-emitted ones, is enough.
+- **What that leaves, stated as a question rather than a guess.**  The packed
+  object's own members are present and parse.  The symbols it replaces are no
+  longer emitted individually — that is what packing *means* — so the only
+  remaining explanation is that LINK does not resolve a symbol from a section
+  symbol's section in the way `build_section_object` declares it, or that the
+  response file's ordering makes the packed object precede the objects that
+  reference those symbols.  Both are checkable; neither is a one-line guess, and
+  this round had no budget to make the check safely.
+- **So `--pack` stays off and the total is 4,247**, from 4,419 at the start of
+  the emit work in round 92.  The remaining ~4,200 bytes are `.text` naming the
+  symbols packing would place, and the mechanism is identified and unproven —
+  which is a better place to stop than a half-change that breaks the link.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-112: the packed objects are valid COFF and LINK still rejects the set. Diagnosis stops here; 4,247 stands.**
+
+- **What was fixed and verified.**  `build_section_object` had **no `.bss`
+  support at all** — the `.bss` flag I added in round 93 went into
+  `emit_data_symbols.build_data_object`, a different function.  So every packed
+  run was emitted as **initialised `.data`** with 0xC0000040 characteristics,
+  which is both wrong for the region and the likely cause of the failure.  It
+  now emits `.bss` (0xC0000080) with a matching section symbol, and a packed
+  object validates: `.bss` section symbol, the pack symbol, and each member at
+  its own offset (`g_sequence_counter` 0x0, `g_dynamic_count` 0x4,
+  `g_next_family_index` 0x24, …), 22 symbols, `Coff` parses it clean.
+- **And it still does not link.**  `--pack` fails with `Internal error during
+  SetupPhase` (C00000FD) at 120 emitted objects, where the unpacked configuration
+  links at 143.  The three explanations that would explain a ceiling are all
+  ruled out by measurement:
+  - **count** — 120 < 143;
+  - **size** — the 18 packed runs total **767 bytes** of `.bss` VirtualSize,
+    largest single run 0x118;
+  - **object validity** — the object parses.
+  What is left is something about the *set* rather than any member, and I am not
+  going to guess at it in a round that has already spent its budget.
+- **So `--pack` stays off, and the honest total for the emit work stands at
+  4,247**, from 4,419 at the start of round 92.  The ~170 bytes round 110
+  measured at `--max-emit 61` are not reproducible after the refactor and are
+  not claimed.
+- **One thing worth carrying forward.**  Three separate times this work a
+  plausible mechanism was implemented in one function and its sibling in another
+  — the `.bss` flag, the `drop_common` switch, `MAX_EMIT_SIZE` — and the effect
+  was "nothing happened".  **A flag added to a helper only does something where
+  it is threaded through; check the call site, not the definition.**
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-111: the fix for the ceiling is identified — pack symbols into one section per contiguous run — and it does not link. Kept behind `--pack`; the state is 4,247.**
+
+- **The right idea, and it is the right idea.**  LINK's ceiling is on the count
+  of emitted sections (round 110: 61 links, 62 does not), and the **145**
+  relocation candidates fall into only **25** contiguous runs.  Packing each run
+  into one `.bss` section places every candidate in 25 sections — far under the
+  ceiling.  `apply_data_emit.py` now computes the runs, and `--pack` is the flag.
+- **It does not link, at any gap size.**  `--pack-gap` 0, 4, 16 and 0x40 all
+  fail with the same `Internal error during SetupPhase`, **including with only
+  120 objects where the unpacked configuration links at 143.**  So the failure
+  is the packed section itself, not the count and not the size — and it is not
+  the `.bss`-vs-`.data` choice (both were tried).  Two things had to be right
+  for a packed run to work and one of them is verified: the section must carry
+  **each** symbol at its in-section offset (a packed object naming only itself
+  strands the run — that was fixed), and the rest is unresolved.
+- **The refactor cost 50 bytes and that is recorded rather than hidden.**  Round
+  110 measured **4,197** at `--max-emit 61`; the same configuration now measures
+  **4,247**, because collecting the candidates into a sorted `pending` list
+  changed the order they are inserted at, and the link-line order is what
+  decides placement.  **So the reproducible figure is 4,247 and 4,197 is history.**
+- **Where the work stands, across rounds 92-111:** the raw link went from
+  **4,419 to 4,247** with the COMMON emit, the movers, and the general
+  relocation pass; `.data` is byte-exact; and the residual ~4,200 bytes is
+  `.text` naming the ~12 symbols that packing would place, which is the next
+  thing and is one mechanism away.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-110: the ceiling is real and sits at 61 emitted objects. Round 108 was right; this round's predecessor retracted it on a stale response file.**
+
+- **The measurement, with the response file pinned.**  Regenerating the section
+  manifest each time and recording the line count:
+
+  | `--max-emit` | response file | result |
+  |---|---|---|
+  | 60 | 688 tokens | **links — 4,197 differing `.text` bytes** |
+  | 62 | 690 tokens | `Internal error during SetupPhase` (C00000FD) |
+  | 64, 66, 68, 70 | 692-698 | the same crash |
+  | unlimited (72) | 700 | the same crash, 3 runs out of 3 on one md5 |
+
+  So the ceiling is **one object past 60** — 61, 4,197 — and it is a property of
+  the emitted `.bss` section count, not of any object's size (`--emit-size 4`
+  crashes identically at the same count, and disk is not it at 98 GB free).
+- **And round 109 retracted a correct finding.**  I claimed "the threshold does
+  not exist" because 62-72 all gave the same number — but the emit script had
+  thrown on a deleted `manifest.json`, so every one of those runs linked the
+  *stale* response file and none of them tested the configuration I named.  The
+  4,116 round 109 recorded as an observation came from that same stale file.
+  **A retraction needs the same evidence as the claim it retracts**; I checked
+  the number and not whether the run producing it was the run I described.
+- **The three measurement traps this work has now produced, in one place**,
+  because they are the same mistake wearing different hats: reading a number
+  from a file that was not regenerated (rounds 95, 106, 109), comparing bytes
+  outside the section being discussed (rounds 95, 101), and querying a symbol
+  table for presence when the bytes were the thing (rounds 75, 78).  **Each one
+  produced a confident, wrong conclusion that survived a round.**
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.  The
+  emit path stands at **4,197** with 143 objects placed, 0 link errors.
+
+**Round-109: round 108's "LINK ceiling" was not one. The reproducible state is 4,197; a better number exists once and is not adopted.**
+
+- **CORRECTED IN ROUND 110: the retraction below was itself the error, and
+  round 108 was right.**  I concluded "the threshold does not exist" because
+  62-72 and unlimited all gave the same result — but the emit script had thrown
+  (a deleted `manifest.json`), so those runs linked a **stale response file** and
+  none of them tested what I thought.  Re-measured with the response file's
+  md5 pinned and the manifest present, the ceiling is real and sits exactly
+  where round 108 put it.  **A retraction needs the same evidence as the claim
+  it retracts, and I did not check that the run I was measuring was the run I
+  described.**  The 4,116 below came from the same stale file.
+- **What is left of the general pass, measured.**  72 symbols can be relocated
+  and 60 of them are placed; the other 12 produce no measurable gain.  The emit
+  as a whole has taken the raw link from **4,419 to 4,197** across rounds
+  92-109.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-108: 4,247 -> 4,197. The general pass works up to 60 objects, and the ceiling is a LINK limit, not a bug in it.**
+
+- **Round 107's lead was right and it is a count.**  Bisecting
+  `--max-emit` through the general relocation pass:
+
+  | emitted | result |
+  |---|---|
+  | 16 | 4,247 |
+  | 32 | 4,242 |
+  | 48 | 4,239 |
+  | 56 | 4,230 |
+  | 58 | 4,232 |
+  | **60** | **4,197** |
+  | 62, 63, 64, all (72) | **LINK FAILS** — `Internal error during SetupPhase`, C00000FD |
+
+  So it is not one oversized object: **LINK 6.0 copes with 60 emitted `.bss`
+  sections and dies at 62.**  That is a hard ceiling in its setup phase, and it
+  is now the default (`--max-emit 60`) with the measurement recorded in the help
+  text, so the state is reproducible rather than lucky.
+- **The gain is real but modest**, and worth stating honestly: 60 additional
+  symbols buy **50 bytes** (4,247 -> 4,197), against 4,419 at the start of the
+  emit work.  The remaining 60 candidates are not worth chasing past a linker
+  that will not take them, and the honest next step is to place the rest by a
+  route that does not add sections to the link line — which is a different idea,
+  not a bigger `--max-emit`.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.  The
+  emit path measures **4,197** with 143 objects placed, 0 link errors.
+
+**Round-107: 4,407 -> 4,247. The improvement came from NOT emitting one object, and the general pass is still behind its flag.**
+
+- **The one object that should never have been emitted.**  `g_bss_tail` is a
+  **19,298,968-byte** COMMON placeholder in `link_stubs.c` (round 81's note:
+  the sparse region's real bytes come from the restore gap, and the sizes in
+  that file "just need to fit the .data VS").  The emit was writing it as an
+  object.  Round 106's `MAX_EMIT_SIZE` cap was applied to the *relocation* pass
+  but the **COMMON pass still used the symbol's own `value`** — so the 19 MB
+  object was still being built, and LINK's SetupPhase died with a stack overflow
+  (`C00000FD`) on every run.  Capping both passes fixes the crash *and* is worth
+  **160 bytes**: **4,407 -> 4,247**.
+- **So two of round 106's three findings were right and the third was
+  misattributed.**  The "stranded symbols" that made `Error.c` and
+  `ErrorModule.c` fail to link were not a cap-versus-strip ordering problem at
+  all: the link was crashing before it ever reached symbol resolution, and the
+  object list it printed on the way was the response file, not diagnostics.
+- **The general pass still does not link**, and now for a single identified
+  reason: 72 additional relocated objects push the object set to 700 tokens and
+  LINK fails in **SetupPhase** with the same overflow.  With the cap in both
+  passes the emitted set is 636 KB, so it is not size on disk — it is the
+  `.bss` **VirtualSize** on 155 sections that SetupPhase must account for.  That
+  is a real lead and it is not resolved: `--relocate-all` stays off.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+  The emit path measures **4,247** with 122 objects placed, 0 link errors.
+
+**Round-106: the general relocation rule is written and does not link. Kept behind `--relocate-all`; the verified 4,407 stands.**
+
+- **The rule is the right one and it is now in the tree.**  *Emit a symbol iff
+  the locator says it is somewhere else.*  That single criterion subsumes the
+  COMMON pass and the movers, and it is the difference between this and rounds
+  86-90: those moved sections whose content was already correct and lost
+  9,295 against 4,419, because the criterion there was "emit every located
+  section" rather than "emit only what is misplaced".
+- **It relocates 71 additional symbols and the link then fails**, in a way worth
+  recording because it is a property of the metadata, not of the code:
+  - **The manifest's sizes are unusable for this.**  `g_connections` reads 1,
+    the sparse arrays read 1, and where a size *is* large it is the 20 MB the
+    restore gap provides, not the symbol.  Emitting `b"\0" * 20058912` per symbol
+    **killed LINK with a stack overflow (C00000FD)**.  A cap of 0x10000 is
+    applied, and CRT data objects are kilobytes at most.
+  - **With the cap, symbols are still stranded.**  A size above the cap is
+    skipped, but the strip had already made that symbol undefined in its
+    object, so everything after it loses a definition: `Error.c`,
+    `ErrorModule.c`, `InitializeLogAndErrorHandler.c` all fail to link.  The
+    cap has to move the *decision* — a symbol that will not be emitted must
+    never be stripped — and that is the fix, not yet made.
+- **So it is behind `--relocate-all`, off by default**, with the measured state
+  without it: **122 objects placed, 4,407 differing `.text` bytes, 0 link
+  errors, 34 `LNK4006`**.  A broken generalisation is worth less than a working
+  narrow one, and the criterion is written down where round 107 can use it.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-105: the locator now places 636 symbols instead of 103. The emit can only use the COMMON subset of them, and that is the next step.**
+
+- **A filter in `locate_common.py` was hiding most of what it found.**  It
+  reported only symbols that are COMMON in our objects, so `_tzapiused`,
+  `___setlc_active` and the rest of the section-resident CRT objects were
+  located and then discarded.  It now writes **every** uniquely-located symbol:
+  **636** rather than 103, of which 103 are pool members.  `tzinfo` 0x100356f0,
+  `tzapiused` 0x100356e8 and `lastTZ` 0x1003579c are among them, each with
+  exactly one distinct reference value — the votes round 102 measured by hand.
+- **The emit cannot use them yet, and the reason is a one-line restriction.**
+  `apply_data_emit.py` only emits symbols where `section == 0` (COMMON).  These
+  live in a **section** of a split blob, so the address is known and the emit
+  walks straight past it: the run is unchanged at **122 objects placed, 4,407
+  differing bytes, 0 link errors**.  Placing them needs the same treatment the
+  movers got in round 101 — emit the symbol as its own object at the located
+  address, and undefine the copy in the blob with `extra_names`.
+- **Which is a good place to stop and summarise the last three rounds honestly.**
+  The data emit now works end to end and links, and the measurement is solid:
+  `.data` is byte-exact, the COMMON pool is placeable, and the residual is
+  ~4,400 bytes of `.text` naming symbols that are not yet bound to their
+  reference addresses.  The remaining step is mechanical — extend the emit from
+  COMMON symbols to *all* located symbols — and it should be its own round with
+  its own before/after, because it touches every blob.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-104: the split set defines 60 symbols in more than one blob. The within-object duplication is fixed; the cross-object one is a selection rule.**
+
+- **What round 103 proposed is done, and it was half the problem.**
+  `split_coff.py` only collected a blob's COMMON symbols when the blob also had
+  sections of its own to emit (`if extra and emit_commons`), so a blob with
+  nothing to emit left its COMMON at section 0 while another blob placed the
+  same symbol in a synthetic `.bss`.  The condition is now just
+  `emit_commons`, and the rebuilt split set has **0** objects that define a
+  symbol both as COMMON and in a section.
+- **The rest is cross-object, and it is a selection question, not a bug.**
+  **60 symbols are defined by more than one blob** — `___sbh_pHeaderList` by
+  **5**, `___sbh_cntHeaderList` by 5, `___old_sbh_p_starting_region` by 3,
+  `___sbh_pHeaderDefer` and `___sbh_pHeaderScan` by 3.  `/FORCE:MULTIPLE` picks
+  the first, so the link is correct but the split set is wasteful and noisy, and
+  34 `LNK4006` remain.
+- **What the rule should be, stated so it can be measured:** a COMMON symbol
+  belongs to exactly one blob — the first whose selection claims it — and every
+  other blob that declares it should emit it as a *reference*, not a definition.
+  That is a change to how `split_coff.py` picks the owner, and like last round's
+  it deserves its own measurement rather than an edit inside a placement round.
+- **And the measure that says it matters.**  `build/split_poc.dll` is
+  **4,419** differing `.text` bytes both before and after this change, so the
+  duplication costs warnings, not layout.  The emit path is where the bytes are,
+  and it stands at **4,407** with 122 objects placed.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text
+  differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-103: the last 16 duplicates are a property of the SPLIT SET, not of the placement. Chasing them further costs bytes.**
+
+- **The cause, found by looking at one blob.**  `10020915_.text.obj` carries
+  `_tzinfo` **twice** — in its `.text` (8 bytes) *and* as COMMON (8 bytes) —
+  and four other blobs do the same.  `split_coff.py` emits a symbol into both
+  places, so every one of these 16 is duplicated inside our own link before the
+  emit is even considered, and the `LNK4006` count has nothing to do with
+  placement.
+- **And the two obvious fixes both lose, which is the finding.**  Clearing the
+  `.text` copy as well as the COMMON one strips 8 bytes of real data and moves
+  the count **4,407 -> 4,416**; leaving the COMMON copy in place leaves the
+  duplicate but keeps the bytes.  So the choice is not "strip it or not" — it
+  is that **`split_coff.py` should emit the symbol once**, and until that is
+  changed the 34 `LNK4006` are a warning about the split set, not a defect in
+  the data layout.
+- **The fix, in one line of `split_coff.py`, is not made here** because it
+  changes every blob's contents and would need the whole 544-object strip
+  verification re-run; it belongs as its own round with its own measurement, not
+  as an edit smuggled into a placement round.
+- **State:** the emit stands at **4,407** differing `.text` bytes with 122
+  objects placed, 0 link errors.  `.data` is byte-exact.  The unplaced symbols
+  are the two with no address from any source (`_tzapiused`, `___setlc_active`)
+  and the 34 `LNK4006` above, which are now attributed.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-102: the last 16 duplicates named and measured. 12 of them already have reference addresses from the locator; 4 do not.**
+
+- **The list is short, which is the useful part.**  The link reports **16 unique
+  duplicate symbols** (34 warnings, mostly repeats): 13 CRT **data** objects,
+  3 functions (`_closesocket@4`, `_pinit`, `_RtlUnwind@16`) and 1 compiler
+  string.  Every one of them is a CRT/LIBCMT object, and none is game code —
+  which is what the `.data` byte-exactness of round 101 implies.
+- **12 of the 16 are already placed, and two content-match on top of that:**
+
+  | symbol | reference | source |
+  |---|---|---|
+  | `___app_type` | 0x1003550c | locator (5 votes, one value) |
+  | `_lastTZ` | 0x1003579c | locator |
+  | `_tzinfo` | 0x100356f0 | locator |
+  | `___sbh_pHeaderList` | 0x11766444 | locator (10 votes, one value) |
+  | `__fltused` | 0x100317d0 | content match |
+  | `__FPinit` | 0x100317d8 | content match |
+  | `_pinit` | 0x1002700c | content match |
+
+  and `___sbh_cntHeaderList` 0x11766440, `___unguarded_readlc_active` 0x1176642c
+  likewise.  **`_tzapiused` and `___setlc_active` have no address from either
+  source** — the only two of the 16 with no third option left.
+- **Why they are still duplicated despite having addresses, which is the next
+  thing to fix.**  They are COMMON in the **split blobs**, not in the game
+  objects: `10020915_.text.obj` carries `_tzinfo` as COMMON (value 8) and also in
+  its `.text`, and four blobs do.  `apply_data_emit.py` strips COMMON from every
+  object on the link line, so they should be covered — and the `LNK4006` says the
+  originals still win, so the strip is not reaching the blobs that define them.
+  That is one specific condition to check, and it is the whole remaining gap.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-101: `.data` is byte-exact, so the region's problem is symbol BINDING — 58 of 83 symbols there belong elsewhere. Moving the 27 the manifest places gives 4,419 -> 4,407.**
+
+- **The measurement, bounded correctly this time.**  `0x10034600..0x10035000`
+  is **2,560 of 2,560 identical bytes**, and the whole on-disk `.data` is **0
+  differing** for the second time.  (The first pass at this range ran to
+  `0x10035480`, past `.data`'s on-disk end, and read `.reloc` — round 95's
+  mistake again, caught this time by the bound in the sentence rather than a
+  round later.)
+- **So the region's content is right and its binding is wrong.**  Of the 83
+  symbols sitting in `0x10034600..0x10035000`: **25 are correctly placed, 27
+  belong later** (the reference has them in BSS), and **31 have no manifest
+  entry at all**.  Fifty-eight misfits in a byte-exact region — the clearest
+  statement of what remains anywhere in this work.
+- **The 27 are placeable now, and the distinction that makes them work matters.**
+  They are not the sections of rounds 86-90, which *duplicated* content the
+  link already had in the right place and so lost.  These are symbols that must
+  **move**: emitted into `.bss` at the manifest's address, with the originals
+  stripped.  `strip_data_sections` grew an `extra_names` set so a symbol can be
+  undefined while its section stays — the section is fine, the one symbol in it
+  is not.  Plus a fourth stripper subtlety, found by the link rather than by
+  reading: **an object that owns a mover must be rewritten even when it has no
+  dropped section and no COMMON**, or it keeps defining the symbol and the
+  emitted copy becomes the `LNK4006` "second definition ignored".
+- **Result: 122 emitted objects placed (from 49), 4,419 -> 4,407 differing
+  `.text` bytes, 0 link errors, 34 `LNK4006` left.**
+- **The last 34 are the 31 unplaced symbols.**  They are the same CRT objects
+  `locate_common.py` could not resolve — no `.text` operand names them, and
+  their content does not appear in the reference.  That is now a list of 31
+  names with no third source, and it is the only thing standing between the
+  emit and zero.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-100: a third source of reference addresses closes the placement question. `scripts/locate_common.py` places 103 of the pool's 135 by pairing `.text` offsets.**
+
+- **The method, and it is the one that was missing all along.**  Our link is
+  **position-aligned**: its `.text` and the reference's are the same length
+  (143,360 bytes) at the same addresses.  So the 4-byte operand at `.text`+i
+  holds *our* value in the built image and the *reference's* value in the
+  target.  Wherever a built operand names a symbol, the same offset names the
+  same object at its reference address.  Neither the declaration order (rounds
+  79-80) nor the content (round 96) could place a pooled symbol, because a
+  pooled symbol has no bytes and its order is CL's — but its **address appears
+  in `.text`**, and that is a third source neither of those had.
+- **It is validated, not assumed.**  Four addresses it produces — `FPinit`
+  0x100317d8, `dstend` 0x10034028, `FloatFormat` 0x10034148, `rgcode_page_info`
+  0x10034168 — were derived *independently* in round 97 by content matching plus
+  anchor arithmetic.  All four agree exactly.  A symbol with two or more
+  distinct votes is dropped, not guessed at: a small integer's bit pattern can
+  coincide with an address, and the tool counts those as 104 ambiguous.
+- **Coverage: 636 symbols uniquely located, of which 103 are COMMON pool
+  members** (of 135).  The other 32 have no `.text` operand naming them at all.
+- **Wired into the emit, and measured:** `apply_data_emit.py` now takes its
+  addresses from the locator and the manifest together and places **85** objects
+  instead of 49.  **4,466 -> 4,443 differing `.text` bytes**, linking with 0
+  errors.
+- **The residual is now one block.**  Comparing placed addresses against the
+  reference: `app_type` 0x1003550c against our 0x10034890, `osver` 0x100354b4
+  against 0x10034760, `g_dynasty_name` 0x10035444 against 0x100346b0 — a
+  **constant 0xC7C-0xD94 shift across the whole 0x100348xx..0x100354xx region**.
+  Not a scattering: one contiguous ~3.3 KB of content sits where the reference
+  has something else, and everything in that region is displaced by exactly it.
+  Finding that one block is the next single measurement, and the locator now
+  gives an address for every symbol in the region to check it against.
+- **Gate green, nothing kept:** lint 0/0, verify 262/262, raw-link `.data` 0,
+  `.text differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-99: the COMMON emission order is NOT an address order. That closes the last cheap idea, and the manifest is the only route left.**
+
+- **The test that settles it.**  Between the two agreeing anchors — emission
+  indices 30 (`FPinit` at 0x100317d8) and 54 (`dstend` at 0x10034028) — there are
+  24 symbols.  Exactly **one** of them (`FPinit`) is inside `.data`'s on-disk
+  region; the other 23 are BSS objects, which the reference necessarily places
+  at 0x10035xxx and above.  **So indices 31..53 sit outside the address range
+  that brackets them.**  An emission order that jumps from 0x100317d8 to BSS and
+  back to 0x10034028 is not an address order, and no interpolation over it can
+  work.
+- **This also corrects round 97**, whose note carries rounds 97-98: it read four
+  anchors in two increasing runs as "local order holds".  Counting the
+  intervening symbols shows those runs are an artefact of the anchors alone.
+  **The correct statement is the one round 91 already made: CL's COMMON emission
+  order is not something C can influence, and not something the address layout
+  follows.**
+- **So the last idea is closed, and what remains is a data task with a number
+  attached.**  Placing the uninitialised region needs the reference's address
+  and size for every COMMON symbol the manifest does not already have: **51
+  symbols**, worth 24,330,148 bytes of pool, surfacing as ~4,000 `.text` bytes
+  that name them.  Each entry is one `rebrew data list` lookup plus a boundary check
+  against the five anchors above, so a wrong entry fails immediately rather than
+  at the end.
+- **Round 100 should start from data, not tooling.**  Every mechanical route has
+  now been tried and measured: declaration order (79-80), size order (83),
+  `/INCLUDE:` (70-71), the explicit object order (88-89), whole-section emit
+  (86-90, 94), COMMON emit (92, 94), anchor-bounded content search (96-99).  The
+  remaining lever is information the project does not have yet.
+
+**Round-97: the anchors line up, and the arithmetic says the COMMON list is short by ~1.6 KB, not misordered.**
+
+- **The idea, worth recording even though it does not finish the job.**  The
+  reference was built from the same sources by the same compiler, so its COMMON
+  emission order should match ours (round 91 established that our *order* is
+  CL's, not C's — but the reference's is the same CL, on the same sources).  So
+  one known reference address should carry the rest.  Content matching found
+  **5** anchors:
+
+  | symbol | emission index | reference |
+  |---|---|---|
+  | `FPinit` | 30 | 0x100317d8 |
+  | `dstend` | 54 | 0x10034028 |
+  | `FloatFormat` | 57 | 0x10034148 |
+  | `rgcode_page_info` | 59 | 0x10034168 |
+  | `locktable` | 91 | 0x10031aac |
+
+- **Local order holds; global order does not.**  Indices 30 → 54 → 57 → 59 map
+  to increasing addresses.  Index 91 (`locktable`, 0x10031aac) goes *backwards*
+  past index 59 (0x10034168), so the emission order is not the reference's
+  order across the whole list — consistent with round 91, and the reason
+  interpolation cannot simply be run over all 135.
+- **But the gaps are diagnostic, and they point at a missing-content problem
+  rather than a misordering one.**  Comparing the reference's distance between
+  anchors with the sum of our symbol sizes over the same stretch:
+
+  | between indices | reference gap | our sizes | difference |
+  |---|---|---|---|
+  | 30..54 | 10,320 | 8,768 | **+1,552** |
+  | 54..57 | 288 | 212 | +76 |
+  | 57..59 | 32 | 12 | +20 |
+
+  All three are positive and small.  **We are not placing symbols wrongly; our
+  135-symbol list is missing roughly 1,648 bytes of COMMON content between
+  indices 30 and 59** — objects that do not reach our linker (the split blobs
+  contribute their own) or symbols the manifest never named.  Fill that in and
+  the interpolation has a closed system: anchor, add sizes, check against the
+  next anchor.
+- **LIBCMT is not the missing piece — it has no COMMON symbols at all.**
+  Scanning all **641** members of the stock archive finds **0** COMMON data
+  symbols, 0 bytes.  So the ~1,648-byte shortfall is not the library's, and
+  ruling that out matters: round 96 had guessed it was library data.
+- **And the gap is a partitioning difference, not missing content.**  All five
+  anchors sit *inside* `0x27000..0x35000`, the region round 95 proved
+  byte-identical.  So the bytes are right and only the **symbol boundaries**
+  differ: the reference splits that run into more, smaller objects than our link
+  does, and the arithmetic shows the reference's partitions consume the same
+  total over the same addresses.  That is also why the two small gaps (+76,
+  +20) are the right size to be alignment padding and the large one (+1,552) is
+  too big for it — there is at least one boundary in 30..54 we get wrong.
+- **What is left is therefore the reference's partition of `.data`, and the
+  five anchors are a working acceptance test for it:** place one symbol, add
+  sizes, and the next anchor must land exactly.  Getting there needs the
+  reference's symbol boundaries in the manifest — `rebrew data bss` per
+  object, checked against these anchors rather than against a count, so a wrong
+  boundary is caught immediately instead of at the end.
+- **Round 97's conclusion stands with one correction:** the local order of the
+  COMMON emission matches the reference between anchors 30..59, so the emission
+  order *is* usable as a placement order locally; it fails at index 91, and the
+  failing part is a boundary error rather than an ordering one.
+
+**Round-96: the 51 untracked COMMON symbols are not findable by content either — 4 of 51. This is the mirror image of round 69's library-code problem, for library DATA.**
+
+- **The measurement.**  Of the COMMON symbols the metadata does not place, 51
+  remain (the earlier count of 86 included symbols with no definition on the
+  link).  19 of them sit inside `.data`'s on-disk region; of those, content
+  matching finds **4** uniquely (`C_Exit_Done`, `C_Termination_Done`, `FPinit`,
+  `FloatFormat`, `acmdln`, `active_heap`, `aenvptr`, `app_type`, `argc`,
+  `argv` are the shape of them).  The other 15 repeat or are zero-filled, and
+  the remaining 32 are past the on-disk region where **there are no bytes to
+  match**.
+- **So the last piece is not a lookup loop after all, and I should not have
+  written it as one.**  Round 95 said the 86 "are CRT symbols the library
+  owns … `rebrew library match` names each of them, so the last piece is a lookup
+  loop, not a reversing problem."  That is wrong in the same way round 68 was:
+  **`lib-match` answers "is this address library code", not "where does the
+  library's data live in the reference".**  Naming a symbol does not place it,
+  because the placement is decided by the COMMON pool — the very thing rounds
+  79/80/83/91 showed cannot be expressed to the linker.
+- **And the symmetry is worth stating, because it ends the search cleanly:**
+  round 69 established that the *library code* is interleaved with game code in
+  the reference, and round 91 that the *library data* is pooled in an order
+  C cannot express.  The split set already solves the first (rounds 74/86: 437
+  of 543 functions placed).  **The second has no equivalent, because a pooled
+  symbol has no bytes to recognise.**
+- **What that leaves, honestly.**  The deliverable is byte-identical and `.data`
+  is byte-exact; what is not reproduced is where the linker puts 51 uninitialised
+  library data objects, which shows up as ~4,000 `.text` bytes naming them.
+  Closing it needs either the reference's library-data addresses recorded in the
+  manifest (a data-entry task, ~51 entries, each one `rebrew data list` plus a
+  content or structural match) or an absolute definition per symbol — the
+  per-symbol emitter with the manifest filled in, which is the same 734-symbol
+  job round 84 measured, narrowed now to the COMMON subset.
+
+**Round-95: `.data` is byte-identical. The entire remaining gap is the uninitialised region, where the file carries no bytes to compare.**
+
+- **The measurement, and it is the cleanest statement of where this work
+  stands.**  Comparing the built `.data` against the reference across its whole
+  on-disk extent, `0x27000`..`0x35000` — **0 differing bytes of 57,344**.  The
+  initialised data is not merely close; it is exact, and has been since round
+  77.
+- **And the hunt for the 0x827 shift was looking in the wrong place, twice.**
+  The "gap" I was measuring ran from `0x1003461c` to `0x10035408`, and 75% of it
+  matched — but the part that did not is *past* `0x10035000`, which is the end
+  of `.data`'s on-disk extent.  Those bytes belong to `.reloc`.  Reading them as
+  data produced a convincing one-dword difference (`0xCC` against `0x8C`, a
+  count that reads exactly like a table header) that means nothing.  **A
+  comparison must be bounded by the section it claims to be about** — the third
+  time this has bitten (rounds 75, 78 and now 95), and the rule is now written
+  down: *name the artefact, name the region, and check the region is inside the
+  section.*
+- **What the 4,058 differing `.text` bytes are, stated exactly.**  Round 78
+  measured 64% of them in operands naming a global, and round 91 established
+  those globals live in the COMMON pool.  With `.data` proven exact and every
+  operand naming a BSS-range symbol, the whole residual is **addresses the
+  linker assigned to uninitialised objects**.  There are no bytes there to
+  compare, which is why this has resisted every content-based method in rounds
+  75-90: they were all reading the initialised region, which was already right.
+- **So the remaining work is one thing, and it is now unambiguous:** place the
+  135 COMMON symbols (24,330,148 bytes) so that the 49 the metadata names land
+  at their reference addresses — which `apply_data_emit.py` does — and then find
+  reference addresses for the remaining 86, which are CRT symbols the library
+  owns.  `rebrew library match` names each of them, so the last piece is a lookup
+  loop, not a reversing problem.
+- **One housekeeping note, because the gate caught it and not me.**  `rebrew
+  lint` went to 1 warning — `W033`, three generated instruction files differing
+  from the installed rebrew — after the round-93 edit to the rebrew checkout.
+  `rebrew init --refresh-agents` cleared it.  Worth remembering: **editing rebrew
+  can leave the project's generated agents stale, and the gate reports it as a
+  lint regression rather than as what it is.**  Also note the refresh *rewrites*
+  `AGENTS.md`, so any hand-edit there is transient.
+- **Gate green:** lint 0/0, verify 262/262, raw-link `.data` 0, `.text
+  differing 0x0`, residue 0, imports 100, wine load + exports OK, deliverable
+  byte-identical.  The shipped link is unchanged; `.data` in it is byte-exact
+  today.
+
+**Round-94: the COMMON emit is now a build step (`apply_data_emit.py`) and reproduces 4,466. The section half is opt-in, because it measurably loses.**
+
+- **`scripts/apply_data_emit.py` combines the three pieces and links.**  49
+  COMMON symbols emitted into `.bss` and merged into the link line by reference
+  `.data` address, 33 objects stripped, `0 link errors`, `emit_all.dll` produced.
+- **Two calibrations it forced, both from earlier measurements being applied at
+  last:**
+  - **The section half is `--with-sections`, off by default.**  With sections on
+    the link is clean but the difference is **9,243**; with them off it is
+    **4,466**.  Round 90 measured the same thing (9,295 vs 4,419) and the reason
+    still holds: the located sections duplicate content the link already places
+    correctly, while the COMMON emit moves content that is genuinely misplaced.
+  - **Only COMMON symbols at or beyond `0x10035000` are emitted.**  Widening it
+    to the whole `.data` range added six symbols and cost 106 bytes
+    (**4,572 vs 4,466**), because below that point `.data` is already
+    byte-exact (round 57).
+- **The honest gap to round 92's number.**  Round 92 measured **4,058** for the
+  same mechanism; this build reproduces **4,466**.  The pool tells the story:
+
+  | symbol | before | after | reference |
+  |---|---|---|---|
+  | `g_current_season` | 0x1176753c | 0x100346a0 | 0x10035439 |
+  | `g_dynasty_name` | 0x11767520 | 0x100346b0 | 0x10035444 |
+
+  In round 92 the same symbols reached 0x10035c60; here they stop at 0x100346a0.
+  **The anchors are too coarse**: an emitted object is inserted before the next
+  object that *has* a known reference `.data` address, and there are only **93**
+  of those across 545 objects, so a slot can be thousands of bytes wide.  The
+  fix is more anchors, and the section manifest already supplies 248 of them
+  from 85 objects — it just needs to be consulted for **placement** as well as
+  for the (regressing) section emit.
+- **Gate green, nothing kept:** verify 262/262, raw-link `.data` 0, `.text
+  differing 0x0`, residue 0, imports 100, deliverable byte-identical.  The
+  shipped link is unchanged; the emit is a parallel experiment that reproduces.
+
+**Round-93: first rebrew-side fix of the session — `lib-match` now tells a stale cache from a hand-edited archive, instead of failing on both.**
+
+- **The deficit, from round 68.**  `rebrew library match --stock-lib LIBCMT.LIB`
+  aborted with *".scratch/libcmt_stock.LIB differs from the toolchain's stock
+  LIBCMT.LIB … delete the cached copy to re-extract it"*.  The cause that time
+  was benign: the cache predated a re-pulled toolchain image.  The tool had no
+  way to tell that apart from the case the check exists for — an archive someone
+  edited, which makes library code look like target code — so it demanded a
+  manual `rm` and a re-run before it would say anything.
+- **The fix, in `rebrew/src/rebrew/lib_match.py`.**  `ensure_stock_lib` now
+  writes a `.digest` sidecar recording the checksum of what it extracted, and
+  `assert_library_is_stock` reads it:
+  - the cached file **still matches its own record** and differs from the image →
+    the image moved under it → **re-extract silently and pass**;
+  - it **no longer matches its record** → a person changed it → **report**, and do
+    not overwrite the evidence.
+  The retry is a two-attempt loop around the same container invocation, so the
+  security flags (`--network=none`, `--security-opt=no-new-privileges`) and the
+  `md5sum "$1" "/out/$2"` form are unchanged.
+- **Both paths tested, deliberately, because the naive fix gets one of them
+  wrong.**  My first attempt simply re-extracted on any mismatch — which made
+  the hand-edited case *pass*, destroying the evidence and defeating the check
+  entirely.  That is the reason the sidecar exists, and it is the more useful
+  half of this round: **a check that repairs what it is meant to detect is worse
+  than no check.**
+
+  | case | result |
+  |---|---|
+  | file matches its record, image moved on | repaired, no error |
+  | file differs from its record (hand-edited) | reported, evidence preserved |
+  | file already matches the image | passes, as before |
+
+  `rebrew`'s own `tests/test_lib_match.py` still passes: **24 passed**.
+- **Worth noting for the rest of this work:** this is the third time in three
+  rounds that a tool's *output* was right and its *reporting* was the problem
+  (rounds 90 and 91 both came from reading a stale number).  The rebrew
+  convention of refusing rather than guessing is the right one, and the fix
+  keeps it while removing the false alarm.
+- **Gate green:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, deliverable byte-identical.  Differing `.text` bytes
+  stand at **4,058**.
+
+**Round-92: the COMMON emit works. 4,419 -> 4,058 differing bytes, and the pool is now within one constant shift.**
+
+- **The mechanism, built.**  Each of the **49 COMMON symbols** with a reference
+  address in the metadata emitted as its own one-symbol object in reference
+  order, its definition removed from the 33 source objects, and the originals
+  left alone — `strip_data_sections` gained a `common_names` set so only the
+  emitted names become undefined.  Removing all COMMON at once orphaned the 86
+  untracked CRT commons (`_g_const_0_001` and the rest, `LNK2001`); selectivity
+  is what makes it safe.
+- **Four defects, all found by linking, and the first two are instructive:**
+  1. **All-zero content must be emitted as `.bss`, not `.data`.**  These objects
+     stand in for COMMON, which the linker pools *uninitialised*; emitting them
+     as initialised added 5,019,994 bytes to the image and produced a
+     **5,275,648-byte DLL against a 286,720-byte reference.**
+  2. **A `.bss` section still carries its bytes in the object.**  With
+     `SizeOfRawData` 0 LINK seeks the VirtualSize and dies with
+     `LNK1106: invalid file or disk full: cannot seek to 0x1660`.  MSVC's own
+     `.bss` behaves the same; the uninitialized *flag* is what keeps the bytes
+     out of the image.
+  3. **The two layout conventions must not be mixed.**  Setting the symbol-table
+     offset as if the body were absent while still appending it produced a table
+     starting inside the body.
+  4. **Placement is the same bucket problem as rounds 87-90.**  All 49 inserted
+     at one point landed at the head of `.data` (0x100346xx).  Interleaving them
+     against the **93 objects that have a known reference `.data` address** (the
+     248 located sections plus the 35 the metadata names) put them in the right
+     region.
+- **The result, and it is a real one:**
+
+  | symbol | before | after | reference | off by |
+  |---|---|---|---|---|
+  | `g_current_season` | 0x1176753c | 0x10035c60 | 0x10035439 | **+0x827** |
+  | `g_dynasty_name` | 0x11767520 | 0x10035c70 | 0x10035444 | +0x82C |
+  | `g_dynasty_name_ready` | 0x11767519 | 0x10035c80 | 0x10035448 | +0x838 |
+
+  **4,419 -> 4,058 differing `.text` bytes**, the first reduction in three
+  rounds, and the small-COMMON group now sits inside a single **0x827** offset.
+- **So the next step is a single number to chase:** 0x827 = 2,087 bytes of
+  content sitting in `0x100346xx..0x10035c60` that the reference has elsewhere.
+  One section, findable by content with the round-86 tool, and moving it should
+  take that whole group to zero.
+- **Gate green, nothing kept:** verify 262/262, raw-link `.data` 0, `.text
+  differing 0x0`, residue 0, imports 100, deliverable byte-identical.
+
+**Round-91: why three levers failed, answered at last — CL6 emits COMMON symbols in its own order, not the source order.**
+
+- **The check round 80 skipped.**  Round 80 concluded the COMMON pool is "not
+  in symbol-table order" because `link_stubs.c` declares `g_connections` on
+  line 110 and `g_player_slot_overflow_pad` on line 114 while the pool places
+  the pad first, and reordering the declarations changed nothing.  The missing
+  step was to read the object's own table:
+
+  ```
+  COMMON symbols in link_stubs.c.obj, symbol-table order:
+     g_field_entry_count   g_field_worker_count_wt2   g_field_worker_count_wt3
+     g_field_worker_count_wt0   g_entity_base   g_field_worker_count_wt1
+     g_crc_table   g_const_half   g_bss_tail   g_const_0_01 ...
+  ```
+
+  **That is not the source order at all** — `wt0/wt1/wt2/wt3` are interleaved
+  and `g_bss_tail` sits mid-table.  So C cannot influence it: no declaration
+  order produces a different table.  Rounds 80's reorder and 83's size test were
+  both measuring a property of CL's emission, not of our source, which is why
+  both read as "no effect".
+- **And that reframes what the pool is.**  The whole COMMON pool is **135
+  symbols, 24,330,148 bytes**, and it is dominated by three placeholders:
+  `g_bss_tail` 19,298,968, `g_connections` 2,507,364,
+  `g_player_slot_overflow_pad` 2,507,360 (the last two documented in round 81 as
+  sized to fit the holes the restore gap leaves).  Remove the pool's ordering
+  problem and there are **135 objects** to place — not the 734 symbols round 84
+  counted across all of `.data`.
+- **Coverage for those 135:** **49 have a reference BSS address** in the
+  metadata (5,019,994 bytes); 86 do not, and they are mostly CRT symbols the
+  library owns (`FPinit`, `acmdln`, `app_type`, `C_Termination_Done`,
+  `C_Exit_Done`, `active_heap`, `aenvptr`, `FloatFormat`).
+- **So the mechanism, stated exactly:** the pool is filled in *object-table*
+  order, which we cannot write; but if each COMMON symbol is emitted as **its own
+  object**, the table order of that one object is irrelevant and the **link-line
+  order decides instead** — which we do control.  That is the same trick the
+  section emitter already uses for sections, applied to COMMON, and it is the
+  first mechanism in eleven rounds that is not blocked by something C cannot
+  express.  Next round's work: emit the 49 placed symbols as one-object-each and
+  measure the pool.
+- **Gate green:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, deliverable byte-identical.  Differing `.text` bytes
+  stand at **4,419**.
+
+**Round-90: the head of `.data` is already byte-identical, so the substitution has nothing to fix there. A wrong inference, caught by looking at the bytes.**
+
+- **The insertion rule round 89 pointed to, tested.**  Each emitted section
+  placed **immediately before the object it was taken from** (248 of 248), on
+  the reasoning that the line is already in reference order so the object's
+  slot is the right one.  It links cleanly -- 0 errors, `section_emit.dll` --
+  and gives **9,295 differing bytes against the 4,419 baseline**, with the
+  emitted sections still not landing.
+- **And the reason is visible in two bytes.**  I expected the CRT band to be
+  occupying the front (rounds 32/34 put it last), and went to check before
+  concluding.  **The reference and our build are byte-identical at
+  0x10027000-0x10027030** -- 24 identical bytes including the CRT pointers
+  `a4 ba 01 10` (0x1001baa4) and `eb 20 02 10` (0x100220eb) -- and 0x10027030 is
+  already `broadcast.c`'s data (`ff ff ff ff`, then the path string).  **The
+  head of `.data` is correct and fully placed.**  My "the CRT band is at the
+  front but should be last" inference was wrong, and checking the bytes cost one
+  command instead of a round of build-and-measure.
+- **So the substitution is not a fix, it is a duplicate.**  156 `LNK4006` say it
+  plainly: the emitted sections carry the same bytes as content the link
+  already places correctly.  Moving already-correct data to the same place is a
+  no-op at best, and the 4,876-byte regression is the cost of 248 objects
+  competing for slots in a region that is already right.
+- **The honest narrowing, after ten rounds on the emit.**  `.data`'s first
+  0x3000 bytes are byte-exact (round 57: 247 of 249 tracked symbols have the
+  right bytes at the right address).  The 4,419 residual bytes are operands
+  naming data in the **uninitialised** region -- the COMMON pool -- and rounds
+  79/80/83/88 established that pool's order is not the link order, not the
+  declaration order, not the size order, and not reachable by `/INCLUDE:`.
+  **The emit cannot place it because there is nothing in the link that decides
+  it.**  What would is an explicit absolute definition for each of the 2,821
+  affected operands, which is the per-symbol emitter's job with the manifest
+  filled in -- the 734-symbol job round 84 measured.
+- **Gate green, nothing kept:** verify 262/262, raw-link `.data` 0, `.text
+  differing 0x0`, residue 0, imports 100, deliverable byte-identical.  Differing
+  `.text` bytes stand at **4,419**.
+
+**Round-89: the link order is ALREADY the reference's order. 297 keyed objects, zero reorders. The 4,419 residual is not an ordering problem.**
+
+- **The experiment, and its result.**  Key every object on the link line by the
+  reference address of the functions it contains (399 reference functions match
+  our build byte-for-byte, covering **297 of 545 objects**), then sort the line
+  by that key.  Two things fell out, and the first is the finding:
+  - **An unkeyed object must inherit the key of the last keyed object before it**
+    (plus a small epsilon).  With a plain sort, every unkeyed object takes
+    `inf` and the whole tail moves to the end: **117,870 differing bytes**,
+    26x worse than the 4,419 baseline.  That is the same failure as round 88's
+    bucket insert, and worth writing down as a general trap — **a partial sort
+    key silently destroys the order it does not cover.**
+  - With the inheritance, **0 positions changed.**  The line `make_split_rsp.py`
+    already produced is already sorted by reference address.  The link order is
+    right.
+- **So the diagnosis changes, and the previous two rounds' conclusion was
+  wrong in its premise.**  Round 88 said "the object order is the one lever,
+  277 inversions away".  Those 277 inversions were measured against the **main**
+  link's map (round 70); the **split** link — the one that produces the 4,419 —
+  is already ordered.  The two configurations differ, and the inversion count
+  was quoted from the wrong one.  Round 71's local optimum was likewise a
+  property of the main link, not of the one in use.
+- **What the 4,419 bytes therefore are, narrowed to two things:**
+  1. **The COMMON pool's internal order** — rounds 79/80/83 established it is
+     not the declaration order, not the size order, and not movable by
+     `/INCLUDE:`.  2,821 of the bytes are operands naming globals we already know
+     by name, and the pool is what puts them at the wrong address.
+  2. **The 70 sections the emitter could not locate** (round 86), which stay
+     with their game objects and so keep their original positions.
+  Neither is an ordering problem any more.  Both need a placement mechanism
+  that does not depend on the link order — which is what the section emit is,
+  and why it is still the right tool: it just needs the *right* insertion
+  points, and round 89 shows those must come from each object's own reference
+  `.data` address, not from the order.
+- **Gate green, nothing kept:** verify 262/262, raw-link `.data` 0, `.text
+  differing 0x0`, residue 0, imports 100, wine load OK, deliverable
+  byte-identical.  Differing `.text` bytes stand at **4,419**.
+
+**Round-88: the substitution cannot work around the object order, and that closes the question. One order must satisfy both `.text` and `.data`.**
+
+- **The interleaving, done properly.**  `apply_section_emit.py` now merges the
+  248 emitted sections into the link line **by reference `.data` address**
+  instead of appending them at one bucket, using two sound anchor sources: the
+  34 objects the metadata places in `.data` at a known reference address, and
+  the 85 objects the emit took sections *from* (a section's address is a lower
+  bound for its object's own data).  It links: 0 errors, `section_emit.dll`
+  produced.
+- **And it moved almost nothing: 9,359 -> 9,295 differing bytes, and still 0 of
+  248 sections at their intended address.**  64 bytes is noise.
+- **Why, and this is the finding.**  **`.text` and `.data` placement are decided
+  by the same thing — the order objects appear on the link line.**  Our order
+  reproduces `.text` correctly (round 65) and therefore cannot simultaneously
+  place `.data` differently, because there is no second knob.  Forcing `.data`
+  by inserting sections at chosen positions only works if those positions are
+  right, and a position is right only if it matches the reference's object
+  order — which round 70/71 measured at **277 inversions** away.  **So the
+  `.data` mismatch and the object-order mismatch are not two problems.  They
+  are one, and the emit cannot be used to route around it.**
+- **What this retires, plainly.**  Rounds 39-88 spent fifty rounds on the emit
+  as a route to a reference-shaped `.data`.  The measurement says it is not a
+  route: the single remaining lever is the object order itself, and the lever
+  for that is the explicit ordered object list (`derive_link_order.py --out`,
+  171 objects) with LIBCMT split into its members at the right points — the
+  structural fix round 71 identified and this round confirms is load-bearing.
+- **What the fifty rounds did buy, which is not nothing:** the COFF machinery is
+  now correct and reusable — section location at 98.8% by content, a stripper
+  that survives 544 objects with a full verifier, a symbol-carrying section
+  emitter, and a link that succeeds with sections removed from 85 objects.  Any
+  future work on ordering can use it, and `docs/remaining-work.md` plus
+  `derive_link_order.py` are the inputs.
+- **Gate green, nothing kept:** verify 262/262, raw-link `.data` 0, `.text
+  differing 0x0`, residue 0, imports 100, wine load OK, deliverable
+  byte-identical.  Differing `.text` bytes stand at **4,419**.
+
+**Round-87: THE SUBSTITUTION LINKS. First time in 40 rounds. It is also wrong by 4,940 bytes, and the reason is precise.**
+
+- **What now works, in the order it broke.**  Four defects, each found by
+  linking rather than by reading:
+  1. **A relocated section must bring its symbols.**  The emitted object carried
+     only a section symbol, so every data global the old section defined became
+     unresolved — **435 LNK2001**.  `build_section_object` now writes the
+     section's own symbol table at its in-section offsets.
+  2. **COMMON symbols must be left alone.**  The stripper converts section-0
+     symbols to undefined so a fragment can supply them; that is right for the
+     per-symbol emit and wrong here, because COMMON is *pooled*, not
+     section-resident, and the section emit does not carry those globals.
+     `drop_common=False` — **435 -> 17 errors**.
+  3. **The 17 that remained** were data globals (`g_list_head`,
+     `g_download_slots`, `g_module_path`) that are COMMON *definitions* in the
+     stripped objects.  Covered by (2).
+  4. **Result: `section_emit.dll`, 258,048 bytes, 0 link errors** (54 `LNK4006`
+     remain, duplicates the linker resolves first-wins).
+- **And it is wrong: 9,359 differing `.text` bytes against the 4,419 baseline,
+  because not one emitted section landed where it was supposed to — 0 of 248.**
+  The cause is the insertion point, and it is a design error rather than a bug:
+  `apply_section_emit.py` inserts all 248 sections at the single
+  `data_globals.c.obj` / `link_stubs.c.obj` bucket.  **`.data` layout follows the
+  order objects appear on the link line**, so a section placed at the wrong
+  position in that line lands at the wrong address no matter how well its
+  content was located.  The sections span 0x27030..0x35000 and the bucket is a
+  single point, so they queue up behind each other in the wrong region.
+- **So the next step is derived, not guessed:** the emitted sections must be
+  **interleaved into the link line at the positions their reference addresses
+  imply** — that is, merged with the existing objects by `.data` address rather
+  than appended at a bucket.  `make_split_rsp.py` already orders objects by
+  reference VA, so the merge is a sort of one list against another, and the
+  emitted sections are just entries that also carry a `.data` address.  That is
+  the last structural piece.
+- **What is now proven, and worth more than the numbers:** the per-section route
+  is viable and the COFF machinery is correct.  Extraction, location, symbol
+  carry-over, stripping and linking all work; only the *ordering* is missing.
+  Four of the five steps of the round-39 plan are done, and the fifth is a sort.
+- **Gate green, nothing kept:** verify 262/262, raw-link `.data` 0, `.text
+  differing 0x0`, residue 0, imports 100, wine load OK, deliverable
+  byte-identical.  Differing `.text` bytes stand at **4,419**.
+
+**Round-86: `scripts/emit_data_sections.py` built and working. 247 of 320 sections placed at their reference address, zero collisions.**
+
+- **The tool, and the three things it had to get right.**  Each in turn cost
+  half the yield until fixed, which is why the numbers moved 48% -> 89% -> 77%
+  inside one round:
+  1. **Do not union candidates across probe windows.**  The first version
+     collected every position matching *any* window, so a section matching 3
+     places on its front and 1 on its middle was rejected as ambiguous.  The
+     right rule is *first window with exactly one hit wins*: **48.4% -> 88.8%.**
+  2. **Short sections need short probes.**  34 of the 36 sections that stayed
+     unlocated are **1-10 bytes**, and a 16-byte window never fits inside one.
+     Matching the whole section when it is shorter than the shortest window:
+     **88.8% -> 98.8%.**
+  3. **Two sections must not claim one address.**  At 98.8% thirty distinct
+     sections all landed on `0x2c748` — a run of identical bytes (zeros) matches
+     wherever it occurs.  Excluding already-claimed offsets, and locating the
+     **largest sections first** so an unambiguous one establishes the map before
+     small ones compete: **collisions 30 -> 0**, coverage 98.8% -> **77.2%**.
+- **That last trade is deliberate and is the right way round.**  88.8% with 30
+  collisions is not 88.8% of anything — a collision means the *same* reference
+  address is claimed twice, so those sections would be emitted overlapping.
+  **77.2% of 320 sections, each at a distinct reference address, is a sound
+  foundation**; the remaining 73 are a disambiguation problem, not a wrong
+  answer.  247 objects, **41,933 bytes**, all validated as well-formed COFF and
+  ordered by reference address.
+- **What the 73 need, in order of expected yield:** a chaining pass that tries
+  each surviving candidate and keeps the one under which the *next* section still
+  matches contiguously; then the forward-window re-ask for sections shorter than
+  a window; then, if any remain, the reference *address* of a symbol the
+  metadata already tracks inside them (only 9% of sections have one, so this is
+  the last resort, not the first).
+- **Then the substitution itself**, which round 84 proved is blocked only on
+  coverage: with 247 sections emitted, the stripper can drop those 247 sections
+  from their objects (the coverage rule passes for them by construction) and the
+  response file carries them in reference order.  The three unlocated sections
+  simply stay where they are.
+- **Gate green:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.  Differing
+  `.text` bytes stand at **4,419**.
+
+**Round-85: the escape from the 16% coverage wall — sections locate at 88% by content, and a section needs no per-symbol metadata.**
+
+- **Why this is the way round.**  Round 84 measured the wall: 136 of 870 data
+  symbols covered, so the stripper's "every symbol in a section must be covered"
+  rule kept all 343 sections and nothing could move.  But that rule is only
+  needed because the fragment is **per-symbol**.  A `.data`/`.bss` section is a
+  contiguous byte range: to move one you need its reference **start** and its
+  size — not a name for each of its symbols.  And the reference's `.data` is
+  byte-identical to ours at the same offsets (round 55), so a section's start is
+  findable by content.
+- **The measurements, each one better than the last:**
+
+  | method | placed of 320 |
+  |---|---|
+  | unique 32/24/16/12/8-byte **prefix** match | 243 (76%) |
+  | + forward window after the previously located section | 249 (78%) |
+  | + probes at the section's **middle and tail**, not just its prefix | **283 (88%)** |
+
+  Still 36 ambiguous and 1 zero-body.  The multi-offset probe is the whole
+  difference between 78% and 88%: a section whose first 32 bytes are
+  `00 00 00 00` matches a hundred places, but the same section's bytes at its
+  middle usually match one.  **Probe several windows inside the object, not
+  one at its front** — the same lesson as round 75/76's "search the bytes, not
+  the symbol table", applied to placement instead of presence.
+- **So the two routes now stand as:**
+
+  | route | coverage | what it needs |
+  |---|---|---|
+  | per-symbol fragment (rounds 39-56, retried 84) | **16%** of symbols | 734 more symbols named in the manifest |
+  | **per-section fragment (this round)** | **88%** of sections | a new emitter; no per-symbol metadata |
+
+  The second is smaller, needs none of the missing data, and the locating
+  technique is already proven twice.  It is the route to take.
+- **Still to build, and honestly sized:** emit each located section as a
+  one-section object ordered by its located address; disambiguate the remaining
+  36 by chaining (each section's candidate must let the *next* one match
+  contiguously); handle the 1 zero-body section; then strip and link with the
+  original order preserved.  At 88% most sections would move, and the stripper's
+  coverage rule would then pass for them by construction.
+- **Gate green:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.  Differing
+  `.text` bytes stand at **4,419**.
+
+**Round-84: the substitution retried and the blocker identified exactly. It is coverage: the fragment holds 16% of the data symbols, so every section is kept.**
+
+- **The retry, with the stripper fixed.**  172-object fragment extracted and
+  verified, 545 objects stripped and verified, response file rewritten with the
+  **original order preserved** (round 53's `/FORCE:MULTIPLE` lesson).  The link
+  then produced **292 `LNK4006` duplicate-symbol warnings and a 0-byte map** —
+  no output at all.
+- **The blocker, and it is one line of logic.**  The stripper refuses to drop a
+  `.data`/`.bss` section unless the fragment supplies **every** symbol in it
+  (the round-52 zlib rule).  Checking `ErrorModule2.c.obj`: its `.data` is
+  section 3, the symbol `s_Error_Handler_closed` is in it, and the *stripped*
+  copy still has that symbol in section 3 — because the section was kept whole.
+  Measured across the tree:
+
+  | | |
+  |---|---|
+  | game `.data`/`.bss` sections | **343** |
+  | that would be dropped | **0** |
+  | kept because one symbol is uncovered | **343** |
+  | data symbols the fragment covers | **136 of 870 (16%)** |
+
+  **Not one section can be dropped.**  The guard is doing exactly what it was
+  written to do — it prevented the round-52 zlib data loss — and it makes the
+  substitution impossible until coverage rises from 16%.
+- **So this is round 54's finding with the mechanism finally pinned.**  That
+  round measured 484 distinct data symbols against 147 tracked and called it a
+  manifest problem.  The mechanism is sharper than that: the gap is not the
+  manifest's *names* but the extractor's *coverage* — the fragment must contain
+  every symbol of every section, and it contains one sixth of them.  870 - 136
+  = **734 symbols** must be added before a single section can move, and that is
+  per-symbol work the rounds 39-56 programme never finished.
+- **And this is the honest end of that line, stated once.**  Per-symbol
+  extraction cannot place the layout until it covers ~100% of the data symbols;
+  section-level extraction (move whole sections as units) would not need that,
+  but round 54 showed only 9% of sections have a tracked anchor, so it has no
+  ordering information to work from.  The gap between those two is the manifest,
+  and the manifest is a reversing task, not a tooling one.  The tooling is
+  built and verified; what is missing is the data.
+- **Gate green, nothing kept from the attempt:** verify 262/262, raw-link
+  `.data` 0, `.text differing 0x0`, residue 0, imports 100, wine load OK,
+  deliverable byte-identical.  Differing `.text` bytes stand at **4,419**.
+
+**Round-83: the COMMON pool order resists every lever tried. Three independent attempts have now failed, and the substitution is the remaining one.**
+
+- **Attempt 3 — is the pool size-ordered?**  No.  Of the 90 COMMON symbols the
+  pool holds, the order is `g_office_slots`, `g_record_table`,
+  `g_const_1_over_720`, `g_const_0_06875`, `g_msg_buf`,
+  `g_player_slot_overflow_pad`, then a jump to `g_entity_records` at
+  0x1029a2e0.  Neither ascending nor descending by size.
+- **And the sharpest evidence yet that the pool is not in symbol-table order.**
+  `link_stubs.c` declares `g_connections` at line 110 and
+  `g_player_slot_overflow_pad` at line 114 — **in that order** — and the pool
+  places the pad at 0x10036080 and `g_connections` at 0x1029af00, the pad
+  first.  The reference has the opposite: `g_connections` at 0x101deb00,
+  `g_player_slot_overflow_pad` at 0x114ffe24.  So within a single object the
+  pool order is neither the declaration order nor the size order, and round 80's
+  reorder measured no change, which is consistent.
+- **The three attempts, so the next one is not a repeat:**
+
+  | lever | tried | result |
+  |---|---|---|
+  | declaration order within each object | round 80 | 4,419 -> 4,419, no change |
+  | `/INCLUDE:` to pull LIBCMT/objects earlier | rounds 70-71 | 339 -> 277 inversions, then a local optimum |
+  | size ordering | round 83 | not sorted either |
+
+- **So the pool is not controllable by anything expressible to LINK, and the
+  remaining lever is the one that bypasses it: explicit placement.**  Every
+  prerequisite for the substitution is now met and verified, which is why it is
+  worth retrying rather than leaving parked:
+  - the **extraction** is complete — 172 objects, 5,042,894 bytes, both code
+    paths now agreeing on extents (round 82's fix);
+  - the **stripper** is correct — 544 objects, `--verify` clean on names,
+    section membership, undefined-ness, symbol-stream alignment and
+    string-table placement (rounds 49-53, six COFF bugs fixed);
+  - the **response-file rewrite** must preserve the original order, because
+    `/FORCE:MULTIPLE` makes the first definition win (round 53's lesson);
+  - the **substitution itself** is the step that has never been completed —
+    round 50's failure was entirely the stripper defects that are now fixed.
+- **Gate green:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.  Differing
+  `.text` bytes stand at **4,419**.
+
+**Round-82: a real bug found by chasing a wrong one — the COMMON branch capped a declared array bound to 20 bytes.**
+
+- **Where it came from.**  Round 77's de-initialisation turned
+  `g_connections` from an initialised definition into a **tentative** one, which
+  moved it from the extractor's *section* path to its *COMMON* path.  The two
+  paths disagreed: the section path uses a source-declared array bound
+  **uncapped**, the COMMON path capped by `next_va` — and `g_player_slot_field`
+  is a field 20 bytes *inside* `g_connections` that lives in a different TU, so
+  the cap truncated a 2.5 MB object to **20 bytes**.  Silent: the run still
+  reported "extracted: 173" and nothing complained.
+- **Fix:** the COMMON path now uses a declared bound uncapped, exactly as the
+  section path does, and caps only its own fallback (the symbol's `value`,
+  which is a guess).  `g_connections` extracts at 2,507,364 again, the set is
+  172 objects / **5,042,894 bytes**, and the two paths can no longer disagree.
+- **The wrong finding from round 81, corrected in place.**  I wrote that
+  `declared_sizes()` picks up an `extern` and that `g_connections` therefore
+  reported 20,058,912.  **It does not:** `_DECL` already opens with
+  `(?!extern\b)`, externs are skipped, and `declared_sizes()['g_connections']`
+  is 2,507,364 from the real definition.  The error came from the function's own
+  docstring, written in round 47, which claimed link_stubs.c declares
+  `g_connections[0x1321320]` — **it declares `0x264264`.**  Five rounds of
+  reading a wrong comment as a measurement.  Docstring corrected, and the
+  caution kept: **a stale explanatory comment is as dangerous as a stale
+  number, because it survives re-derivation that would disprove it.**
+- **Also worth stating plainly:** the extractor's "extracted" count is not a
+  correctness measure.  It said 173 with a 20-byte `g_connections` and 172
+  with a 2.5 MB one.  Coverage counts what was *written*, not what was written
+  *correctly* — the same trap as rounds 59 and 64.
+- **Gate green:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.  Differing
+  `.text` bytes stand at **4,419**.
+
+**Round-81: chased a suspected 8x size bug that turned out to be a documented placeholder — and learned what the layout actually is.**
+
+- **The suspicion, and why it was reasonable.**  `g_connections` is
+  `0x1321320` bytes in the reference (8 slots of `0x264264`) and our definition
+  reads `unsigned char g_connections[0x264264]` — **exactly 8x too small.**
+  A pool that size short would displace everything after it, which is the
+  symptom round 80 reported.  The map confirms the displacement:
+  `_g_connections 1029af00 <common>` against a reference `0x101deb00`.
+- **It is not a bug, and the file says so.**  `src/link_stubs.c` above the
+  declaration: *"non-tentatively here — tentative defs become COMMON weak
+  symbols the linker parks at the END of .data ... Real sparse layout (8 slots
+  at 0x101deb00) is the data-restore TU's job; sizes here just need to fit the
+  .data VS and stay in range."*  The real bytes come from
+  `src/crt_region/data_restore.c`, which defines
+  `unsigned char g_data_restore_gap[0x9a00]` — a 39,424-byte blob of the
+  reference's own `.data` spliced in verbatim.  **So the sparse BSS region is
+  already byte-exact; the COMMON symbols are sized to fit the holes around it.**
+  Round 80's "the pool's size is right and its contents are shuffled" is now
+  explained: the size is right *because* of the splice.
+- **Correction: the tool bug I claimed here does not exist.**  I wrote that
+  `declared_sizes()` takes the first declaration it sees and so picked up the
+  `extern` in `crt_region/section_spans.c`.  It does not: `_DECL` already opens
+  with `(?!extern\b)`, externs are skipped, and
+  `declared_sizes()['g_connections']` returns **2,507,364** — from the real
+  definition at `link_stubs.c:110`, which is correct.  No change was needed and
+  none was made.  The claim came from `declared_sizes`'s own docstring, which
+  says "`unsigned char g_connections[0x1321320]` in link_stubs.c says
+  20,058,912" — **and link_stubs.c does not say that; it says `0x264264`.**  So
+  the error was in a comment I wrote in round 47 and then read back as fact.
+  Docstring corrected below.  Worth recording as a caution: a stale explanatory
+  comment is as dangerous as a stale measurement, and this one survived five
+  rounds because every number it backed was independently plausible.
+- **Gate green:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.  Differing
+  `.text` bytes stand at **4,419**.
+
+**Round-80: the per-object symbol order is NOT the lever either. Two negative results, both worth keeping.**
+
+- **Diagnosis that motivated it.**  Of the 46 objects carrying two or more
+  tracked BSS COMMON symbols, **41 list them in an order the reference does
+  not**.  MSVC6 fills the COMMON pool object by object, in each object's
+  symbol-table order, so 41 objects should be poisoning the pool.
+- **The fix, and the result.**  Reorder the file-scope tentative definitions in
+  each source by the reference address of the symbol (so CL emits them in the
+  order the original did), rebuild, relink.  Two files matched the pattern
+  (`link_stubs.c`, `gm_NextEntityQueryMatch.c`) and were reordered.
+  **The difference did not move: 4,419 before, 4,419 after.**
+- **So the pool is not filled from the symbol table order either.**  Either LINK
+  orders COMMON symbols by something other than their COFF table position, or
+  the 41 "wrong order" objects are not the ones that actually contribute to the
+  pool.  The second is more likely and testable: of the symbols visible in the
+  map, the large ones (`g_connections`, `g_slot_table`, `g_item_def_table`)
+  are the displaced ones, and they are 0x264264, 0x1321320 and 4 bytes — **the
+  pool's *size* is right and its *contents* are shuffled**, which is a different
+  failure from "each object is internally misordered".  Reverted, since a change
+  with no measurable benefit is noise.
+- **A second `git checkout -- <path>` slip, narrower this time and caught
+  faster.**  Reverting the two reordered files also reverted round 77's
+  de-initialisations in `link_stubs.c`, which the gate caught immediately
+  (`raw-link .data 13`, differing 4,800).  Re-applied from the round-77 rule and
+  the baseline returned exactly: **4,419, raw-link `.data` 0, gate pass.**  The
+  standing rule from round 79 stands and this is the argument for it — the
+  gate caught it in one run, but only because the effect was loud.
+- **Gate green:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.
+
+**Round-79: the pool ORDER is the binding constraint, not which section a symbol is in. A promising change measured worse and was reverted.**
+
+- **The experiment.**  37 tracked globals sit in our initialised `.data` while
+  the reference has them in BSS, and 25 of them are the simple
+  `int g_x = 0;` form — a scalar zero initializer forces `.data`.  Removing all
+  25 and rebuilding:
+
+  | state | differing `.text` bytes |
+  |---|---|
+  | round 77 baseline | **4,414** |
+  | 25 scalars de-initialised | 4,574 |
+  | …with the mlock pad re-tuned to `0xDF0` so the critsects were back at `0x10035538` | **4,547** |
+
+  **Worse, and worse with the pad correct.**  Moving those symbols to the right
+  *section* moved the COMMON pool in a way that displaced other symbols, and the
+  net was +133 bytes.  So **section membership is not the lever — pool order
+  is.**  The two have to be fixed together, order first, or every membership fix
+  costs more than it saves.  Reverted.
+- **A mistake I made twice, and the third time cost real work.**  To revert the
+  experiment I ran `git checkout -- src/`, which again discarded uncommitted
+  work — this time round 77's 19 de-initialisations *and* the round-16
+  `alchemistry_logic2.c` client-only move, the same fix destroyed in round 56 and
+  re-applied there.  Both were re-applied and re-verified (`LNK2001
+  _fcn_00423670 / _fcn_004190d0 / _fcn_00418fb0` is the tell-tale), but it cost
+  most of the round.  **Recorded as a standing rule: never `git checkout --` a
+  directory in this tree.  Revert the file, or `git stash push -- <paths>`.**
+  Cost of the slip: **5 bytes** (4,419 against 4,414), because the recovery
+  script used a narrower criterion than the original edit.
+- **Net: 4,419, gate green.**  verify 262/262, raw-link `.data` 0, `.text
+  differing 0x0`, residue 0, imports 100, wine load OK, deliverable
+  byte-identical.  Critsects confirmed back at `0x10035538`.
+- **The order, not the membership, is the next task.**  Round 70 derived the
+  reference's object order (171 objects, `derive_link_order.py --out`), and
+  rounds 70/71 showed `/INCLUDE:` alone reaches a local optimum at 277
+  inversions.  Applying that order to the **COMMON pool** — which MSVC6 fills in
+  object order, then symbol order within each object — is the untried lever,
+  and this round is the evidence that it is the one that pays.
+
+**Round-78: the remaining 4,414 bytes are COMMON-pool ordering, and the deltas are now measured per object.**
+
+- **The `= {0}` lever is exhausted.**  Sweeping every declaration whose symbol
+  the metadata places at or beyond `0x10035000` leaves only 11 hits, and 9 are
+  false positives (local assignments and unsized arrays).  So round 77's
+  mechanism has nothing more to give, which is worth recording before anyone
+  reaches for it again.
+- **Composition of the remaining 4,414 differing bytes:** 2,821 (64%) still sit
+  in operands naming a known global, 1,593 (36%) in nothing identifiable.  The
+  2,821 are dominated by the large identified objects of rounds 28-34:
+
+  | global | reference | built | delta |
+  |---|---|---|---|
+  | `g_item_def_table` | 0x101de450 | 0x10035bc8 | **−0x1A8888 early** |
+  | `g_entity_type_table` | 0x100a8c30 | 0x10035c44 | **−0x72FEC early** |
+  | `g_connections` | 0x101deb00 | 0x1029af00 | **+0xBC400 late** |
+  | `g_slot_table` | 0x100358a0 | 0x11767532 | **+0x1731C92 late** |
+  | `g_stream_group_table` | 0x11766460 | 0x117673c0 | +0xF60 |
+  | `g_log_buffer` | 0x11766100 | 0x117676a0 | +0x15A0 |
+
+  `_crtheap`, `__nfile` and `__pioinfo` are absent from the map entirely — they
+  come from the split blobs, which are not public symbols.
+- **So the next lever is the COMMON pool's order, not any individual
+  declaration.**  MSVC6 pools file-scope tentative definitions in the order the
+  linker encounters them, which is the object order on the link line and then
+  the symbol order inside each object.  Round 70/71 attacked that for `.text`
+  and got a local optimum; the same lever applies to the data pool and is
+  untouched.  The deltas above are the acceptance test: a fixed pool should
+  drive `g_log_buffer`'s +0x15A0 to zero, which alone is a large share of the
+  2,821.
+- **One measurement bug hit again, and it is the same family as rounds 75/76.**
+  The map parser I used required a `f` (function) flag, so **every COMMON symbol
+  read as ABSENT** — which made all eight objects in the table above look
+  missing.  LINK writes COMMON entries without that flag (`0003:017403e0
+  _g_log_buffer 117673e0 <common>`).  Third instance of "query the symbol table
+  and believe it about presence"; `derive_link_order.py`'s regex is the correct
+  one and should be the only one.
+- **Gate unchanged:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.
+
+**Round-77: the first measured improvement to `.text` in this work. 4,849 -> 4,414 differing bytes, gate green at every step.**
+
+- **Where the remaining 4,849 bytes were.**  The split link's `.text` differs
+  from the reference in **4,849 bytes** (against the main link's 42,875), over
+  1,319 runs in 236 functions — 3.7 bytes per run.  **3,123 of them (64%) sit in
+  operands that name a global the metadata already knows** (`0x11766100
+  g_log_buffer` and so on).  Only ~116 bytes are relocation placement.
+- **The cause of the largest single class, and the fix.**  `g_log_buffer` is
+  declared `char g_log_buffer[256] = {0};` — the initializer forces it into
+  **initialised** `.data`, while the reference has it at `0x11766100`, past the
+  on-disk part (`0x10035000`), i.e. in **BSS**.  Every `&g_log_buffer` in
+  `.text` therefore names the wrong address.  Round 56 tried this and saw "no
+  effect" — because the metric then was the tracked-symbol count, which cannot
+  see it, and because `split_link.sh` only relinks and never recompiles, so the
+  edit had not been compiled.
+- **The change, measured three times:**
+
+  | step | differing `.text` bytes |
+  |---|---|
+  | baseline | 4,849 |
+  | `g_log_buffer` de-initialised, and **the project actually rebuilt** | 4,829 |
+  | the same for all 19 **sized** arrays the reference places in BSS | 4,514 |
+  | mlock pad re-tuned (below) | **4,414** |
+
+  **435 bytes, 9% of the gap, gate green throughout.**
+- **Two traps, both worth what they cost:**
+  1. **Unsized arrays must be left alone.**
+     `char g_log_message_buffer[] = {0};` de-initialised becomes
+     `char g_log_message_buffer[];`, which has no size — the definition
+     disappears and the link fails with `LNK2001: unresolved external symbol
+     _g_log_message_buffer`.  Only `name[N] = {0}` is safely removable.
+  2. **The mlock pad is not a constant.**  Round 58 tuned it to `0xB78` to put
+     the critsects at `0x10035538`; de-initialising the BSS arrays moved the
+     whole pool **0x238 earlier**, the critsects landed at `0x10035300`, and the
+     raw-link `.data` regression (26 B, the `locktable` pointer table) returned.
+     Re-tuned to `0xDB0`: critsects back at `0x10035538`, and a further 100
+     bytes improved.  **Any change to the BSS pool invalidates that pad, and the
+     gate's `raw-link .data` check is what catches it.**
+- **Gate green:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.
+
+**Round-65b, corrected: the gate DOES produce a byte-identical deliverable, reproducibly. My claim that it could not was wrong.**
+
+- **What actually happens.**  `cmake --build build` alone **fails**: the
+  POST_BUILD postlink refuses at **65.0%** layout validation (`.text` 676
+  bytes short) and make deletes `server.dll`.  But `scripts/gate.sh:189` runs
+  `.venv/bin/python scripts/postlink_residual.py --write build/server.dll` in
+  its residue step, and **that** invocation succeeds and writes the
+  deliverable.  Observed twice, minutes apart: 21:49 and 21:57, each
+  **286,720 bytes, 0 bytes differing** from the reference by whole-file
+  comparison, each with `gate-build.log` ending in `Error 2`.  **Both facts are
+  true at once, and I spent a round concluding only one of them.**
+- **So the standing state is: `GATE: pass`, deliverable 100% byte-identical,
+  reproducible across repeated gate runs.**  Rounds 65 and 65b's "it cannot be
+  produced" was an error of inference: I ran the build directly, saw `Error 2`,
+  and attributed the absence of the target to the project instead of checking
+  which step actually writes it.
+- **The real defect this exposes, which is worth fixing:** the project's own
+  build does not complete.  A fresh clone that does
+  `cmake -S . -B build && cmake --build build` gets `Error 2` and no target;
+  only `scripts/gate.sh` recovers, and only because it privately re-runs
+  postlink.  Two build paths that disagree is a tooling deficit in itself — the
+  CMake POST_BUILD step and the gate's private step should be the same
+  invocation, so that the build either works or the gate says why.
+- **Why the two paths disagree — the real answer, and it is not reassuring.**
+  `postlink_residual.py` **does not abort** on low layout coverage.  It warns on
+  stderr and carries on: `WARNING: layout-map coverage 65% is below the 90% gate;
+  the fixers rewrite operands by fixed offset, so bytes inside the functions that
+  do not match may be patched at the wrong place.  **The output is an
+  intermediate artifact, not a runnable build.**`  So the gate's
+  `--write build/server.dll` produces the byte-identical file **while running the
+  fixers through a check that is failing** — 65% against a 90% minimum — and the
+  tool writing it says in those words that the result is not a runnable build.
+  The CMake POST_BUILD step is the same postlink with that check enforced, which
+  is why it fails and deletes the target.
+- **And yet the wine check passes**, which contradicts the tool's own warning.
+  One of the two is wrong; that has not been established, and it matters more
+  than either alone.
+- **The accurate state, without rounding any of it up:**
+
+  | claim | true? |
+  |---|---|
+  | `GATE: pass` | yes, reproducibly (21:49 and 21:57) |
+  | `build/server.dll` is 286,720 bytes, 0 differing from the reference | yes, whole-file comparison |
+  | it runs under wine with correct exports | yes |
+  | `cmake --build build` produces it | **no** — `Error 2`, target deleted |
+  | it is produced by a path that respects the project's own 90% gate | **no** — 65%, and labelled an intermediate artefact |
+
+  The **file** is byte-identical; the **toolchain** does not produce it, and the
+  step that does disclaims the result.  Under the objective's own wording —
+  "straight out of the toolchain, without post linking mangling" — this is not
+  met, and calling it met would be the same error as reading a stale artefact,
+  one level down: believing a green number whose producing step is known to run
+  below its own safety threshold.
+- **The next concrete step is narrow:** diff the two invocations (`rebrew
+  postlink --layout` from POST_BUILD against `postlink_residual.py --write`) and
+  find the flag that suppresses the refusal.  If `--write` simply omits the
+  coverage check, that is a **correctness hole in the gate**, because `gate.sh`
+  then reports success for a file its own tooling says is not a build output.
+  Closing it may cost the green gate — which would be the honest number.
+
+**Round-75: the split link is 437/543 with 96 functions genuinely absent, and those 96 split cleanly into 44 membership and 52 reversing.**
+
+- **First, a correction to round 74's own numbers, caused by the same flaw I have
+  now hit twice.**  The survey indexed probe -> function by way of the LINK map's
+  **public symbols**, so a function whose bytes are in the binary but which is not
+  a public symbol read as "absent".  Searching the `.text` blob directly instead:
+
+  | link | exact in place | displaced | truly absent |
+  |---|---|---|---|
+  | split link (corrected) | **437** | 10 | **96** (22,031 B) |
+  | split link (map-indexed, round 74) | 416 | 9 | 118 |
+  | main link | 214 | 76 | 253 |
+
+  The map-indexed figures were pessimistic by 21 functions.  **The lesson, now
+  paid for twice: a presence test must search the bytes, not a symbol table.**
+- **The 96 absent, classified:**
+
+  | band | annotation | count | what it is |
+  |---|---|---|---|
+  | library (>= 0x1001b000) | unannotated | **40** | membership — LIBCMT members the per-COMDAT split never claimed |
+  | game (< 0x1001b000) | RELOC | **52** | **ordinary reversing** — sources exist, are on the link, and compile differently |
+  | game | unannotated | 4 | membership |
+
+  So **44 are a membership question** (add these LIBCMT members to the split
+  selection) and **52 are a reversing question**.  The 52 are the honest core of
+  the objective: annotated, in `rebrew verify` as RELOC, and not byte-exact.
+- **The 52, by size**, for the work queue: `fcn.10016760` 1,392 B,
+  `fcn.100174d0` 1,088 B, `fcn.10012eb0` 896 B, `fcn.10014260` 896 B,
+  `fcn.1000a570` 752 B, `fcn.10017c40` 752 B.  Their sources are ordinary
+  project files (`ls_LoadDynamicEntities.c`, `m_AllocTracked.c`,
+  `ErrorModule2.c` and others) already on the link, so `rebrew diff` on each is
+  the direct route — no new scaffolding needed.
+- **The 44** are answerable without reversing at all: `rebrew library match
+  --stock-lib LIBCMT.LIB --va` names the member, and the member either exists in
+  the split selection or was filtered out.  `split_coff.py`'s own docstring
+  already records the likely cause (99 members selected carrying 40,896 B
+  against a reference region of 34,550 B — the selection is tuned by
+  over-inclusion, so some members are simply not in it).
+- **Gate unchanged:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.
+
+**Round-74: the split link places 416 functions exactly where the main link places 214. The split set is the right mechanism, and round 73 had that backwards.**
+
+- **Correction first.**  Round 73 concluded "the split set and LIBCMT are both
+  supplying library code, interleaved wrongly" and named the 287 split blobs as
+  the obstacle.  The premise was wrong: **`build/CMakeFiles/server_dll.dir/objects1.rsp`
+  contains 0 split blobs.**  All 194 objects on the main link are game and
+  CRT-region sources; LIBCMT arrives only through each object's own
+  `/DEFAULTLIB` directive, pulled after every command-line object.  So the two
+  mechanisms never appear on one link line, and they cannot collide.
+- **The measurement that settles it** — the same 543 reference functions, the
+  same 16-byte probe, against both configurations:
+
+  | link | exact in place | displaced | absent |
+  |---|---|---|---|
+  | main CMake link (game objects + LIBCMT) | **214** | 76 | 253 |
+  | split link (game objects + 287 split blobs) | **416** | 9 | **118** |
+
+  **+202 functions in the right place, and 135 fewer missing.**  The split set
+  is not the obstacle; it is the answer, and it is already built
+  (`scripts/split_coff.py`, per-COMDAT extraction from LIBCMT because it is
+  compiled `/Gy`).
+- **What the split link is missing.**  It produces 258,048 bytes against the
+  deliverable's 286,720 — 28,672 short — and 118 reference functions are absent
+  from it entirely.  So the two configurations fail in opposite directions: the
+  main link has the right code and the wrong layout; the split link has much
+  better layout and is missing code.
+- **So the objective now has a concrete shape it did not have yesterday.**  The
+  missing 118 are the ones to find: they are in the reference, they are not in
+  the split link, and `derive_link_order.py` will list them exactly.  They are
+  either LIBCMT members the per-COMDAT extraction did not claim (the docstring
+  records 99 selected members carrying 40,896 B against the reference region's
+  34,550 B — an over-inclusion that will itself displace things) or game
+  functions the split link drops.  Either way it is a membership question, not
+  a reversing question, and it is checkable.
+- **Gate unchanged:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.
+
+**Round-73: the 543 functions split three ways, and only one of the three needs reversing. 214 are exact in place; 76 are exact at the wrong address.**
+
+- **Re-derived with `rebrew-functions.toml` sizes** (the inventory disagrees with
+  the metadata on 162 functions, each by a few bytes, which does not change the
+  picture): 253 unreproduced functions, **50,583 bytes, 37%** of `.text`.
+- **But the right split is by *address*, and it changes the conclusion.**  Every
+  reference function falls into exactly one of three groups:
+
+  | group | functions | what is wrong |
+  |---|---|---|
+  | byte-exact **at the reference address** | **214** | nothing |
+  | byte-exact **at a different address** | **76** | **placement only** |
+  | not found in our image at all | 253 | the code itself |
+
+  The 76 are **all `LIBCMT:` objects** — `_fclose`, `__fclose_lk`, `_fopen`,
+  `_sprintf`, `__ftell_lk`, `__fseek_lk` … — i.e. the very objects round 70's
+  `/INCLUDE:` batch touched.  They have the **right bytes** and the **wrong
+  address**, by +1914, +6034, +8748, +20934 and other shifts.
+- **The mechanism, and it is the split set colliding with LIBCMT.**  At
+  `0x1001a18a` — where the reference has `_fclose` — our build has the split
+  blob `1001a18a_.text.obj`, while `_fclose` itself links from
+  `LIBCMT:fclose.obj` at 0x1001a868.  **Both mechanisms are supplying library
+  code, interleaved wrongly.**  The 287 split blobs occupy the band where
+  LIBCMT bodies belong.  That is why the `/INCLUDE:` batch helped (339 -> 277
+  inversions) and also why it could not finish: it is nudging LIBCMT forward
+  while 287 blobs sit in the way.
+- **So the three groups need three different things, and only the last needs a
+  human:**
+  1. **214** — done, leave alone.
+  2. **76** — mechanical: make the split set and LIBCMT agree on who supplies
+     each library function and in what order.  No reversing.
+  3. **253** — real reversing work.
+  Group 2 is the cheapest of the three and unblocks the most: those functions
+  already match, they are just in the wrong street.  **`rebrew build postlink
+  --layout` coverage is gated on group 2 finishing before group 3 can even be
+  measured**, so it is the right next thing rather than the tempting one.
+- **A trap this round walked past, recorded because it nearly misled me.**
+  Comparing each reference function against our `.text` *at the same VA* reports
+  "455 functions differ, 126,751 bytes, 0 of them relocation-only" — which
+  reads as "almost nothing matches".  It is wrong: the 76 that are displaced
+  still *match*, just elsewhere, and a same-VA comparison cannot see that.  The
+  displacement test is the one to run, and it is now the headline number.
+
+**Round-72: the objective is now fully sized. 53% of the reference's functions are byte-exact; 38% of its bytes are not reproduced at all.**
+
+- **Classifying the unmatched set** by searching each reference function's
+  first 16 bytes anywhere in the whole built image, not just at the same VA:
+
+  | | functions |
+  |---|---|
+  | matched byte-exact at its own address | 290 |
+  | **absent from our image entirely** | **242** |
+  | ambiguous (2 hits) | 9 |
+  | present elsewhere in the image | 2 |
+
+  So they are not misplaced and not wrongly ordered — **we do not produce that
+  code at all.**
+- **The whole reference `.text`, accounted for:**
+
+  | | functions | bytes |
+  |---|---|---|
+  | reference `.text` per the inventory | 543 | 140,354 |
+  | **byte-exact in our link** | **290 (53%)** | 87,230 |
+  | **not reproduced** | **253 (47%)** | **53,124 (38% of the code)** |
+
+  Of the 253: **128 game** (`< 0x1001b000`) and **125 in the library band**.
+  The largest unreproduced are `fcn.1000d8a0` (2,208 B),
+  `fcn.1001c19b` (1,857 B — round 68's "not in the libraries, safe to
+  reverse"), `fcn.10016760` (1,392 B), `fcn.10013b10` (1,376 B),
+  `fcn.1002255e` (1,233 B — `___strgtold12`, which `lib-match` *does* call
+  library, so that one is a linking question, not a reversing one).
+- **This is the honest shape of the remaining objective, and it is not a tooling
+  problem.**  Two independent deficits, now separated and sized:
+  1. **~38% of the reference's code bytes are not reproduced** — ordinary
+     reversing, the 281 unannotated functions from round 65, and
+     `rebrew todo` already ranks them;
+  2. **277 object-order inversions** — structural, and round 71 showed
+     `/INCLUDE:` alone cannot close it.
+  Closing (1) is the larger share of the gap and the one with no clever fix
+  available; closing (2) needs the explicit object list.  The 90% layout-coverage
+  gate is the single number both move.
+- **Gate unchanged:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.
+
+**Round-71: 277 inversions is a local optimum for single-symbol `/INCLUDE:` moves. The remaining fix is not a flag, it is the object list.**
+
+- **New tool: `scripts/climb_link_order.py`.**  It walks one candidate at a
+  time, relinks, measures, and keeps a directive only when the inversion count
+  drops — the discipline round 70's batch failure called for.  It edits
+  `link.txt` in place (a reconfigure per candidate costs more than the link).
+- **Result: `no single-symbol step improved the order`.**  Baseline 277, kept 0.
+  So 277 is a **local optimum** for this move, and the next 62 inversions are
+  not reachable by adding `/INCLUDE:` one symbol at a time.  That is a real
+  result and it redirects the work.
+- **What the local optimum means mechanically.**  `/INCLUDE:` can only pull an
+  object *earlier*.  Once an object is earlier than the reference wants it, no
+  amount of pulling others forward fixes it — the remaining inversions need
+  objects to move *later*, or the link line to be an **explicit ordered list**
+  rather than a game-object list plus a library archive.  `derive_link_order.py`
+  already writes that list (`--out`): 171 objects in reference order.  Feeding
+  it to the linker as an explicit object sequence, with `LIBCMT` split into its
+  constituent `.obj` files at the right points, is the structural fix; more
+  `/INCLUDE:` is not.
+- **The other half of the ceiling is unchanged.**  `derive_link_order.py`
+  matches 290 of 543 reference functions and finds **no match at all** for 243.
+  Those cannot be fixed by ordering — they are code we do not link, or link
+  differently (round 68's `fcn.1001c19b` is one: "not in the given libraries,
+  safe to reverse").  So the 90% coverage gate needs **two** things, and this
+  round found the boundary between them: order fixes the 290, reversing fixes
+  the rest.
+- **Gate unchanged:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.
+
+**Round-70: the link order is now derived mechanically, and the first fix moved 62 of 339 inversions. A second batch made it worse and was reverted.**
+
+- **New tool: `scripts/derive_link_order.py`.**  It takes the reference's
+  functions, probes each one's first 16 bytes, finds the function in *our* link
+  carrying the same bytes, reads the object that supplies it, and sorts by
+  **reference** address.  That ordering is the original link line.  No
+  reversing is involved; it is a measurement.  Current output:
+
+  | | |
+  |---|---|
+  | reference functions | 543 |
+  | matched uniquely | **290** |
+  | ambiguous probe | 10 |
+  | no match in our link | 243 |
+  | distinct objects in the derived order | 171 |
+  | **order inversions vs our link** | **339 -> 277** |
+
+  243 do not match at all, which is consistent with round 68's finding that much
+  of the band is code we link differently — the tool reports the ceiling, not
+  just the wins.
+- **Where the first inversions were.**  Objects 1-120 of the derived order agree
+  with ours exactly.  The divergence starts at #121: the reference places
+  `LIBCMT:fclose.obj`, `fopen.obj`, `sprintf.obj`, `ftell.obj`, `fseek.obj` and
+  `strrchr.obj` **before** `LIBCMT:dllcrt0.obj`, while we pull `dllcrt0` first
+  (position 196 against 197-204).  `dllcrt0` is also the displacement object
+  from the `LNK4006` warnings, so the two facts are the same fact.
+- **The fix, and its measured effect.**  Six `/INCLUDE:` directives added ahead
+  of the existing ones, in derived order:
+  `/INCLUDE:_fclose /INCLUDE:_fopen /INCLUDE:_sprintf /INCLUDE:_ftell
+  /INCLUDE:_fseek /INCLUDE:_strrchr`.  **Inversions 339 -> 277.**  The
+  mechanism is confirmed: the linker's pull order is set by which object first
+  references a symbol, and `/INCLUDE:` moves that.
+- **A second batch was tried and reverted, which is the point worth keeping.**
+  Adding `_strncpy _strchr _strstr _malloc _fwrite _fflush` made it **worse —
+  277 -> 294** — so it was removed.  Note also that `/INCLUDE:_ftol` is not a
+  symbol (`LIBCMT:ftol.obj` exports `__ftol`), and the linker said so with
+  `LNK2001`.  `/INCLUDE:` takes a **symbol**, not an object name, so each one
+  has to be checked against the map before it is trusted.
+- **Coverage has not moved yet: still 4,850/7,463 (65.0%).**  That is expected —
+  inversions in the object order do not become correct *function bodies*, and
+  the 90% gate measures spans.  The honest reading: 62 fewer inversions is real
+  progress toward the order, and the number to watch is still coverage.
+- **Gate unchanged:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK, deliverable byte-identical.
+
+**Round-69: the reference interleaves library code with game code from .text+0x789 onwards. Ours does not. That is the whole 34 KB.**
+
+- **Where our LIBCMT functions actually belong.**  Taking each `LIBCMT:*` symbol
+  from the raw map, probing its first 16 bytes and locating that probe in the
+  reference: **86 of 287 locate uniquely**, and their (reference − built) shifts
+  are all over the place — **−4065, +25126, −7704, −3424, −8748, +14404**, no
+  constant and no progression.
+- **And the striking part is how early the reference puts them:**
+
+  | symbol | object | our VA | reference VA |
+  |---|---|---|---|
+  | `___ld12mul` | `LIBCMT:tenpow.obj` | 0x1001a868 | **0x10009789** |
+  | `__except_handler3` | `LIBCMT:exsup3.obj` | 0x1001ab0c | **0x10004cd0** |
+  | `__fltout2` | `LIBCMT:cfout.obj` | 0x1001abe4 | **0x10007db7** |
+  | `___dtold` | `LIBCMT:cfout.obj` | 0x1001ac40 | 0x10007db7 |
+  | `__setmode_lk` | `LIBCMT:setmode.obj` | 0x1001ae11 | **0x10009090** |
+
+  `___ld12mul` belongs at **0x10009789** — `.text`+0x8789, deep inside the game
+  band, long before the 0x1001b000 CRT region.  Our build puts every LIBCMT
+  object *after* the game objects.  **The reference interleaves them, and that
+  interleaving is what `.text` layout is made of.**
+- **This reframes the whole remaining gap, and it also explains round 65.**  The
+  game band's leading boundaries matched because game objects *are* first on both
+  link lines; the divergence starts at the first library object the reference
+  pulled in early, and everything after it is displaced.  So the 34,028
+  "library" bytes and the 8,185 "game" bytes are **not two independent problems**
+  — a single wrong object order displaces both.
+- **The fix is mechanical and now fully specified.**  Every library function
+  already has a name, and `lib-match` turns a name into its object.  So: take
+  the reference's function VAs, map each to its supplying object, sort by VA,
+  and that ordering is the link line the original used.  Emit it as an explicit
+  object list (or as `/INCLUDE:` in that order) ahead of the game objects that
+  precede them.  Nothing here needs new reversing — it needs the order written
+  down and fed to the linker.
+- **The measurement to watch is `rebrew build postlink --layout`'s layout-map
+  coverage**, currently 65% with a 90% gate.  It is the honest single number for
+  this work, and it moves only if the order does.
+
+**Round-68: most of the remaining gap is stock LIBCMT the linker IS pulling — at the wrong place. That is a link-order problem, and it is mechanical.**
+
+- **Certifying the top mismatches with `rebrew library match --stock-lib`:**
+
+  | VA | differing | verdict |
+  |---|---|---|
+  | 0x1002255e | 1210 | library: `___strgtold12` |
+  | 0x1001eab0 | 813 | library: `_memcpy` |
+  | 0x1001b200 | 808 | library: `_memcpy` |
+  | 0x1001d540 | 803 | library: `___sbh_free_block` |
+  | 0x1001d869 | 768 | library: `___sbh_alloc_block` |
+  | 0x1001dd1e | 747 | library: `___sbh_resize_block` |
+  | 0x1001b5cc | 717 | library: `_realloc` |
+  | 0x1002044c | 700 | library: `__sopen` |
+  | 0x1001c19b | 1819 | **not in the libraries — safe to reverse** |
+
+  So round 67's framing needs one correction: the high band is *not* all
+  library.  `fcn.1001c19b`, the single largest mismatch, is a game function
+  living above 0x1001b000.  Seven of the other eight **are** stock LIBCMT, which
+  the linker is supposed to supply byte-for-byte.
+- **The bytes are right; the place is wrong.**  The raw map shows
+  `_memcpy 1001eed0 f LIBCMT:memcpy.obj` — our build *is* pulling the stock
+  object.  The reference has `_memcpy` at **0x1001b200**, so ours lands
+  **+15,568 (0x3CE0) bytes late**.  Our build puts **114** library symbols
+  (`__fsopen`, `_fopen`, `_sprintf`, `_ftell`, `_fseek`, … from
+  `LIBCMT:fopen.obj`, `sprintf.obj`, `ftell.obj`, `fseek.obj`) inside
+  `0x1001b200..0x1001eed0`, where the reference has library code of a different
+  identity.
+- **So the remaining 34,028 library bytes are a link-order problem, not a
+  reversing problem**, and it is the mechanical kind: the reference's LIBCMT
+  objects were pulled in a different order than ours.  The lever is the order
+  the linker resolves the archive — `/INCLUDE:` directives and the order
+  objects appear on the link line both move it.  This is the same
+  "order decides the layout" mechanism as the game band, which round 65 showed
+  already agrees, and the two together are what move `rebrew build postlink --layout`
+  from 65% toward 90%.
+- **Also worth recording:** `.scratch/libcmt_stock.LIB` had gone stale and made
+  `rebrew library match` refuse to run at all ("differs from the toolchain's stock
+  LIBCMT.LIB").  Deleting the cached copy re-extracts it.  A stale cache that
+  disables the very check meant to certify this work is a trap worth avoiding
+  twice.
+
+**Round-67: the 65% -> 90% work is now a work list, and 80% of it is the statically linked library, not the game.**
+
+- **455 of 543 functions differ from the reference in the raw link; 88 are
+  exact.  42,213 bytes differ, split by band:**
+
+  | band | functions differing | differing bytes |
+  |---|---|---|
+  | game (`< 0x1001b000`) | 272 | **8,185** |
+  | CRT / statically linked library (`>= 0x1001b000`) | 183 | **34,028** |
+
+  So **four fifths of the remaining gap is library code the linker is supposed
+  to supply**, not game logic.  238 of the 455 have no public symbol at all in
+  the map — they are LIBCMT bodies arriving from the split set and the
+  `crt_region/` sources, and they are the code `rebrew library match` exists to
+  certify.
+- **The biggest single contributors** (differing bytes / function size / VA):
+  `fcn.1001c19b` 1819/1857, `fcn.1002255e` 1210/1233,
+  `fcn.1001eab0` 813/821, `fcn.1001b200` 808/821, `fcn.1001d540` 803/809.
+  Note how close the differing count is to the function size in each case —
+  these are functions that are **almost entirely** wrong, not functions with a
+  few operand mismatches.  That is the signature of **the wrong bytes being
+  linked**, not of codegen drift, and it is consistent with every earlier
+  measurement this round.
+- **So the ordered work list for closing 65% -> 90% is:**
+  1. the 183 library functions (34,028 bytes) — certify each against the
+     LIBCMT that is actually linked with `rebrew library match --stock-lib
+     LIBCMT.LIB --va`, and where the body is not stock, find the one that is;
+  2. the 272 game functions (8,185 bytes) — ordinary reversing work, and the
+     part `rebrew todo` already ranks.
+  Item 1 is the larger and the cheaper, and it is the one the split-set
+  experiment exists to serve.
+- **No completion claim.**  The file is byte-identical only through the
+  reference-guided post-link path; the toolchain is at 65%, and this round puts
+  a number and a list on what the remaining 25 points consist of.
+
+**Round-66: the difference between the two invocations is the reference binary itself. That settles what the objective means.**
+
+- **The flag hunt is over; the cause is not a flag.**  The two invocations were
+  run on the same input, `.scratch/server.dll.prelayout` (294,912 bytes, the
+  artefact POST_BUILD copies before converging):
+
+  | invocation | reference available? | result |
+  |---|---|---|
+  | `rebrew build postlink --layout` (POST_BUILD) | **no** — text-only layout package by design | **refuses**, 65.0% coverage; output left **110,062 bytes** different |
+  | `postlink_residual.py --write` (gate) | **yes** — line 170 reads `original/Server/server.dll` | succeeds; output **0 bytes** different |
+
+  `postlink_residual.py` line 170: `ref = (ROOT / args.reference).read_bytes()`.
+  The CMake comment for POST_BUILD says it converges "**WITHOUT needing the
+  original binary at build time**".  So the two paths differ in *information*,
+  not in flags: the gate's path gets to compare against the reference and
+  rewrite operands against it; the build's path is told to do the same job from
+  metadata alone, and cannot.
+- **Which means the honest answer to the objective.**  The deliverable is
+  byte-identical **by way of a post-link step that reads the original binary and
+  rewrites the linked file against it.**  The objective asks for the file
+  "straight out of the toolchain, without post linking mangling and manual
+  padding etc".  This is post-linking, and the reference-guided operand rewrite
+  is the substance of it.  So:
+  - the **file** matches, and that is a real, reproducible result worth having;
+  - the **objective is not met**, and the green `VERDICT: 100% byte-identical`
+    is measuring the patched artefact rather than the toolchain's output.
+- **What the 65% is actually telling us**, now that the reference is removed
+  from the question.  `rebrew build postlink --layout` validates 4,853 of 7,463
+  layout-map code spans against metadata and needs 90%.  The unvalidating 2,620
+  spans are functions whose bytes the link does not reproduce — consistent with
+  round 65's 42,875 differing `.text` bytes.  **The gap between 65% and 90% is
+  the amount of function-body work remaining before the toolchain can produce
+  the file unaided**, and it is the number to drive now, not the byte counts.
+- **What remains established from round 65, unchanged:** the layout is right
+  (leading function boundaries and sizes all match), the content is not (42,875
+  of 143,360 `.text` bytes differ, first a 6-byte constant in
+  `_SendBroadcastPacket`).  Link order and `/FORCE:MULTIPLE` displacement are
+  both ruled out.
+
+**Round-65: the layout is positionally CORRECT from the first byte. The 42,875 differing bytes are content, concentrated in the 281 unverified functions.**
+
+- **Object order is not the problem, and the evidence is direct.**  Reference and
+  raw link agree on every leading function boundary:
+
+  | VA | reference size | raw link | lands at |
+  |---|---|---|---|
+  | 0x10001000 | 304 | `_adler32` | 0x10001130 ✓ |
+  | 0x10001130 | 179 | `_SendBroadcastPacket` | 0x100011f0 ✓ |
+  | 0x100011f0 | 320 | `_crc32` | 0x10001330 ✓ |
+  | 0x10001330 | 512 | `_deflateInit2_` | 0x10001530 ✓ |
+  | 0x10001530 | 128 | `_deflateReset` | 0x100015b0 ✓ |
+  | 0x100015b0 | 688 | `_deflate` | 0x10001860 ✓ |
+
+  Every size matches the reference exactly, so `.text` is laid out where the
+  reference has it.  The "reference here: `fcn.10001130`" in the previous
+  round's table was just the inventory lacking names, and I over-read it.
+- **So the divergence is content.**  First differing byte is `.text+0x143` in
+  `_SendBroadcastPacket`: reference `3d 90 01 00` (`cmp eax,0x190`), raw
+  `f1 96 01 00` (`cmp eax,0x196`).  A 6-byte constant.  The remaining 42,875
+  differing bytes (30%) are the same kind of thing across the binary.
+- **Why postlink calls it "not position-aligned".**  The layout package has
+  **7,463 entries**, far finer than the 543 functions — code spans, not
+  functions — and **4,843 validate (64.9%)**.  A span fails validation when the
+  bytes it keys on differ, so a content mismatch is reported as a
+  *position* failure.  The two are being conflated, and the 90% minimum is
+  really a content-coverage threshold wearing a position-failure message.
+- **The arithmetic that makes this tractable.**  The inventory has **543**
+  functions; `rebrew verify` accounts for **262** (gate reads 262/262, and
+  "262/262 passed" is the *whole* annotated set, not a 262-of-543 count).  The
+  42,875 differing bytes and the 2,620 unvalidating spans therefore sit in the
+  unannotated remainder.  **The blocker to a clean byte-identical build is
+  unverified function bodies, not layout.**
+- **And the honest statement about rounds 58-62:** the green readings required a
+  `build/server.dll` that already existed.  postlink is a POST_BUILD step, so
+  an incremental build with unchanged inputs never re-runs it, and the stale
+  output stood there.  `--clean-first` deletes the target and exposes that the
+  current tree cannot recreate it.  **A gate that does not force a clean build
+  is measuring the last good artefact, not the tree.**
+- **Gate: FAIL.**  Not a measurement artefact this time — the build genuinely
+  does not produce its target, and saying otherwise would repeat round 63's
+  error.
+
+**Round-64: the deliverable is currently NOT BUILDABLE. The clean build produces no `build/server.dll` at all, and two hypotheses are now ruled out.**
+
+- **State, stated without hedging.**  `cmake --build build --clean-first` ends
+  with `make[2]: *** Deleting file 'server.dll'` and `Error 2`.  **There is no
+  `build/server.dll` in the tree.**  postlink refuses:
+  `.text VirtualSize built 0x225a2 vs reference 0x22846` (676 short) and
+  layout-map validation **64.9%** against a 90% minimum.  Whatever the gate
+  reported in rounds 58-62 came from a stale artefact; the deliverable is not
+  currently byte-identical to anything, because it does not exist.
+- **Ruled out: the `LNK4006` displacement hypothesis.**  The warnings on a
+  clean build say *our* definitions win — `__amsg_exit already defined in
+  amsg_exit.c.obj` and `___app_type already defined in link_stubs.c.obj`, both
+  "second definition ignored" on the **LIBCMT** side.  The map confirms both
+  resolve from the split set.  `/FORCE:MULTIPLE` is not handing us the library
+  versions, so forcing the displacement objects earlier on the link line would
+  not have fixed anything.
+- **Ruled out: the new `src/GOLDTL.fcn_004193f0.c`.**  Removing it entirely and
+  reconfiguring leaves `.text` at **0x225a2**, identical.  It is not shifting
+  the layout.
+- **What the raw link actually looks like**, produced by hand to `/out:raw.dll`
+  so there is no stale file to misread:
+
+  | | value |
+  |---|---|
+  | raw `.text` size | 0x225a2 (reference 0x22846) |
+  | bytes differing from the reference | **42,875 of 143,360 (30%)** |
+  | first divergence | **`.text+0x143` = VA 0x10001143**, `fcn.10001130` |
+  | at that point | reference `3d 90 01 00` (`cmp eax,0x190`) vs raw `f1 96 01 00` (`cmp eax,0x196`) |
+
+  A 30% difference beginning at the 323rd byte of `.text`, where only a
+  **constant** differs, is not scattered code drift — it is the **function
+  order** differing from very early on.  The link places `.text` in object-list
+  order, and `build/CMakeFiles/server_dll.dir/objects1.rsp` now lists 194
+  entries beginning `crt_imports.c.obj, data_restore.c.obj, adler32.c.obj` and
+  ending `rdata_restore.c.obj, link_stubs.c.obj, abs__z_errmsg_empty.obj`.
+- **The leading hypothesis for round 65, and why it is the leading one:** the
+  green state was produced by a link whose `objects1.rsp` had a *different
+  order*, and re-running `cmake -S . -B build` **regenerated** that file,
+  changing `.text` layout wholesale.  The fix is to pin the object order
+  explicitly rather than inherit whatever CMake last wrote — the same class of
+  problem as the `/OPT:REF` COMDAT relocation in round 22, where four summary
+  numbers agreed and the bytes were still wrong.
+- **Gate:** FAIL, and it should.  Nothing here is a measurement artefact; the
+  build genuinely does not produce its target.
+
+**Round-63: the green state of rounds 58-62 was NOT reproducible. A clean build fails, and that is the real finding.**
+
+- **What I set out to do** was the round-62 follow-up: convert the remaining
+  call-argument sites one file at a time, checking `.text` VirtualSize after
+  each.  The harness reported all seven files `BAD` with the *identical* size
+  `0x22a98` — which is impossible for seven independent edits, and was the clue:
+  **`split_poc.dll` was stale and the check was reading a dead file.**  The
+  error text said the built `.text` was `0x225a2`; the file on disk said
+  `0x22a98`.  Two artefacts, two different numbers, neither being measured.
+- **The clean build is the truth, and it fails:**
+
+  ```
+  cmake --build build --clean-first
+  split .text 0x22a98 (reference 0x22846)  -> 584 B of 93 symbols past .text
+  [FAIL] all differing bytes inside .text   756 of 764
+  [INFO] residual differing bytes: 764
+  VERDICT: STRUCTURAL CRITERIA FAILED      GATE: FAIL
+  ```
+
+  So rounds 58-62 reported `residue 0`, `GATE: pass` and
+  "100% byte-identical" **on an incremental build that a clean rebuild does not
+  reproduce.**  The deliverable is currently **764 residual bytes short of
+  byte-identical**, not 0.  I should have run `--clean-first` before declaring
+  the objective met; AGENTS.md warns about exactly this for `LNK4006`, and the
+  same staleness applies to every number I reported.
+- **One more stale-reading trap, same round.**  `build/server.dll` `.text` is
+  `0x22846` — exactly the reference — while `build/split_poc.dll` is `0x22a98`.
+  Reporting "our .text matches" from one artefact while the other disagrees is
+  how round 11's "no objective residue" and round 13's "sub-3-minute" both went
+  wrong.  **A measurement must name the artefact it read.**
+- **The likely mechanism, for round 64 to confirm.**  A clean build prints the
+  `LNK4006` displacement warnings that an incremental build suppresses —
+  `__amsg_exit` (`amsg_exit.c.obj`), `___app_type` (`link_stubs.c.obj`),
+  `_putc` — and the link runs **`/FORCE:MULTIPLE`, where the first definition
+  wins**.  If a clean link orders the LIBCMT objects ahead of ours, the library
+  definitions win and 764 bytes of code change.  The fix is to guarantee the
+  displacement objects come first on the link line, not to rely on link order
+  that only sometimes holds.
+- **Consequential loss, stated plainly:** reverting `ahm_ExAllocAlchemist.c`
+  during the isolation step also reverted **round 61's proven 4-site
+  conversion**.  It was worth 4 relocation entries and the proof of mechanism;
+  the site list in the round-61 note is what makes it a 10-minute redo.
+- **Split-link convergence:** the first `split_link.sh` pass after a clean
+  build reports "definition cascade ran 0 pass(es); it must iterate (2 is the
+  steady state)" and leaves the build unconverged.  A **second** pass
+  converges (verify 262/262, raw `.data` 0, `.text` differing 0x0, residue 0,
+  imports 100, wine load OK) but still leaves 764 residue bytes.  The gate
+  should run the cascade to its fixed point rather than once.
+
+**Round-62: the 18-site tranche broke the build and was reverted. The proven 4-site conversion stands. Two corrections to the site inventory.**
+
+- **The site counts carried false positives, and I should have expected it.**
+  Classifying the 39 on-disk/exact sites by context:
+  - **3 are not addresses at all** — `} while ((int) prod < 0x10030860);`,
+    `} while ((int) string_cursor < 0x100270e4);`.  A loop bound that merely
+    *coincides* with a global's address.  Converting these would be a silent
+    semantic change, and my scan treated them as address uses.
+  - 1 was a comment.  The rest are genuine.
+  So the honest inventory needs a **cast-preceded or `&`-preceded test, not
+  "the literal equals a known VA"** — a literal that happens to be a known VA is
+  not thereby a reference.  That filter leaves **18** genuinely safe sites.
+- **The tranche was applied and it broke the build.**  18 conversions across 10
+  files, with `extern` declarations added for the six symbols that had none
+  (`s_error_log_banner`, `s_LogFile_has_been_deleted`, `g_gzip_magic_1f/8b`,
+  `g_game_path`, `g_log_format_table`, `g_log_level_table`, `s_gzip_mode_rb`).
+  It compiled, then postlink refused:
+  `.text VirtualSize built 0x225a2 vs reference 0x22846`, layout-map validation
+  **63.9%** (minimum 90).  A symbol reference is not always a drop-in: where the
+  literal was compared against or indexed as a bare number, naming the object
+  changes what CL emits, and a function changed size.  **Reverted** — the 10
+  files are back at HEAD.
+- **What is kept is the round-61 change**, which is verified and isolated:
+  `.reloc` 3032 -> **3036** non-absolute entries, reference 3526, `.text`
+  differing 0x0, gate pass, deliverable 100% byte-identical.
+- **What the failure teaches, for the next tranche.**  Converting a call
+  *argument* that is a pointer is safe — that is what round 61 proved.  What
+  broke the build were the sites where the literal is used as a **value or a
+  bound**, not a pointer: `*(int*) addr` where the symbol's own type changes the
+  expression, and loop bounds.  The next tranche must take **only call
+  arguments and `&`-forms**, verify `.text` VirtualSize is still 0x22846 after
+  each file, and revert immediately when it is not — checking the size after
+  every single file, not after all ten.
+- **Gate: pass**, deliverable 100% byte-identical, nothing lost.
+
+**Round-61: the symbol-reference mechanism is PROVEN. 4 sites converted: `.text` still 0x0 differing, `.reloc` gained exactly 4 entries.**
+
+- **The 181 sites, broken down by what has to be true first:**
+
+  | region | already at reference address | misplaced | absent from map |
+  |---|---|---|---|
+  | on-disk (`.data` < 0x10035000) | **45** | 24 | 14 |
+  | BSS (>= 0x10035000) | 0 | 89 | 9 |
+
+  The "on-disk / exact" 45 are the usable tranche, and they are all
+  `LogMessageInternal` string arguments — a call site naming a literal address.
+- **Proof, on `ahm_ExAllocAlchemist.c`:** four `(char*) 0x1002a1xx` literals
+  replaced by `s_D__Develop_DieGildeAddOn_game_al`,
+  `s_ahm_ExAllocAlchemist__array_over`, `..._wrong_type`, `..._cant_find`
+  (the string pool lives in `alchemistry_logic2.c`), with `extern char[]`
+  declarations added.  The object now carries
+  `IMAGE_REL_I386_DIR32` (type 0x0036) against each string — the relocations
+  exist.  **And at the link, `.reloc` went 3032 -> 3036 non-absolute entries:
+  exactly the four converted, with `.text` differing 0x0 and the gate green.**
+  So the mechanism is: one converted site, one relocation, no byte change.
+- **A measurement error of mine, worth recording.**  I first read the
+  relocation count as "505 before, 505 after" and nearly concluded the
+  mechanism does not work.  The counter was unpacking the section header at
+  `s+12`, which is VirtualAddress, not SizeOfRawData/PointerToRawData — so it
+  was walking the wrong offset and counting garbage.  Same shape as round 60's
+  out-of-region read: **a counter that disagrees with a known-good earlier
+  number is wrong, not the build.**  The earlier structural count (41 blocks /
+  3032 entries) was correct and is the baseline.
+- **Where the arithmetic leaves the gap.**  Reference 3,526 entries, ours 3,036:
+  **490 short.**  The 181 code sites can only supply 181 of them, so **~309 more
+  must come from the `.data` pointer tables** — the reference records fixups for
+  the addresses `locktable` and `g_before_g_panic_callback` hold, and a
+  hardcoded pointer constant in C produces no relocation.  That is the second
+  half of the work and it is in the data, not the code.
+- **Gate unchanged:** verify 262/262, raw-link `.data` 0, `.text differing 0x0`,
+  residue 0, imports 100, wine load OK.
+
+**Round-60: the site count is 181, not 936 (comments), and the conversion is blocked on BSS placement — plus a measurement of mine that was simply wrong.**
+
+- **Correction: 936 -> 181.**  The round-59 count matched address literals anywhere in
+  a line, including inside `/* */` comments — 755 of the 936 were comment text
+  explaining the very address.  Counting code only (stripping `//` and `/* */`)
+  gives **181 hardcoded address literals in 53 files**.  The shape of the work
+  is unchanged, its size is 5x smaller, and the 181 figure is the one to plan
+  against.  The address->name map itself is sound: 626 distinct VAs, **none**
+  claimed by more than one target, 613 of them SERVER.
+- **Correction: an ad-hoc check I ran this round was invalid, and its "finding"
+  was not a finding.**  I compared bytes at `0x100358a0` (`g_slot_table`) between
+  the two binaries and got a total mismatch, concluding the object was mislaid.
+  **0x358a0 is past the end of `.data`'s on-disk part (0x27000..0x35000), so the
+  read landed in `.reloc`.**  The object is uninitialised (BSS); content cannot
+  say anything about where it belongs.  Round 57's 247-of-249 result is
+  unaffected — it was correctly bounded to the on-disk region — but any check
+  must stay inside `0x10027000..0x10035000`, and one that does not will
+  manufacture a difference out of unrelated bytes.
+- **Where that leaves the conversion.**  A symbol reference resolves to wherever
+  the linker *placed* the object.  For objects in the on-disk region the data is
+  already right (round 57), so a symbol reference should resolve to the right
+  address.  For the BSS region there is no content signal at all — placement has
+  to come from the manifest and the ordering work of rounds 28/31/33/37.  So the
+  181 sites should be done **in two tranches**: on-disk-region globals first,
+  where the mechanism can be validated by a byte comparison; BSS globals only
+  after placement is proven.  Doing all 181 at once would mix a proven mechanism
+  with an unproven one and make the result uninterpretable.
+- **Gate still passes; deliverable still 100% byte-identical.**
+
+**Round-59: the remaining raw-link work is now fully counted — and most of it is 936 hardcoded address literals.**
+
+- **Where the raw link stands, per section** (`postlink_residual.py`, the
+  "what the build actually produces" block):
+
+  | section | raw-link difference |
+  |---|---|
+  | `.data` | **0x0 — already correct** |
+  | `.text` | 0x12f1 (4,849) |
+  | `.rdata` | 0x4f4 (1,268) |
+  | `.reloc` | **0x8b6b (35,435)** |
+  | headers | 0xf8 (248) |
+
+  total the fixers overwrite: 0x9157 (37,207).  And what they do: 29 import
+  slot operands, **1244 data operands**, 39 call targets, 592 overshoot bytes
+  zeroed, `.reloc` replaced wholesale, pe-metadata normalised.
+- **The `.reloc` gap is the interesting one, and it has a single cause.**  The
+  reference carries **44 blocks / 3,526 entries**, ours **41 / 3,032**, and only
+  14 of 41 shared pages have identical entry lists (page 0x2000: 98 reference
+  entries against 66 of ours).  A relocation does not change a byte — it marks
+  an absolute operand for rebasing — and our `.text` bytes already match.  So
+  the missing ~494 fixups are operands that **the reference emits as symbol
+  references and we emit as hardcoded constants**: our C says
+  `*(int *) 0x1002d4f0`, the original said `&g_save_header_tail`, and only the
+  second produces an `IMAGE_REL_I386_DIR32` the linker records.
+- **That makes the transformation countable: 936 hardcoded address literals,
+  across 113 files, each naming a global the metadata already knows.**  Rewriting
+  them as symbol references is what would make the link emit the reference's
+  `.reloc` on its own.
+- **The dependency, stated so the order is not got wrong:** this only works once
+  the link *places* each object at the reference address, because a symbol
+  reference resolves to wherever the linker put the object.  Round 57 already
+  showed 247 of 249 tracked `.data` objects have the right bytes at the right
+  address, so the ordering description is nearly right — but "nearly" is the
+  whole remaining risk, and rounds 26/33/37 are the standing evidence that
+  getting it partly right is worse than not starting.
+- **Gate still passes**; the deliverable is still 100% byte-identical.
+
+**Round-58: the deliverable is 100% byte-identical and the gate passes. One stale constant in `split_link.sh` was holding the last 8 bytes.**
+
+- **The defect.**  `split_link.sh` has a step that moves the four mlock
+  critsects to their reference addresses, and it pads the owning `.bss` by a
+  hardcoded `0x190` on the comment "the block currently links 0x190 too early".
+  **The measured displacement was 0x9E8, not 0x190.**  Round 57's byte-level test
+  had already shown the only two genuinely wrong data objects are
+  `locktable`'s four `CRITICAL_SECTION` pointers and one pointer table, and that
+  the lock object's address was off by exactly this 0x9E8 — the two facts fit
+  together, and neither was visible from the other side.
+- **Two adjustments, both measured rather than guessed:**
+  1. `pad` 0x190 -> **0x9E8**: the critsects moved to 0x100353a8, i.e. 0x190
+     *short* of the reference — the pad loses 0x190 to section alignment.
+  2. `pad` 0x9E8 -> **0xB78** (= 0x9E8 + the 0x190 absorbed): `_sigcritsect`
+     lands at **0x10035538**, the reference address.
+- **Result — the whole gate, first pass in this session:**
+
+  ```
+  raw-link .data 0, baseline 0 held      residue 0, baseline 4 held
+  imports match the reference (100)       wine load + exports OK
+  [PASS] .text/.rdata/.data/.reloc VirtualSize == reference
+  [PASS] export names + VAs identical;  entry 0x1001b9d4
+  [INFO] residual differing bytes: 0
+  VERDICT: 100% byte-identical -- objective met      GATE: pass
+  ```
+
+  Both long-standing REGRESSIONs are gone: the raw-link `.data` divergence
+  (26 B) and the wine load failure.  The last 8 residue bytes — `.reloc` VA,
+  SizeOfImage, SizeOfInitializedData, BaseOfData, `IMAGE_FILE_DEBUG_STRIPPED` —
+  were all downstream of the `.data` extent, which this pad corrects.
+- **What this does NOT mean.**  The deliverable is byte-identical **with
+  postlink**.  The raw link still differs (13,384 bytes whole-file), so the
+  objective's second half — *straight out of the toolchain* — is untouched: the
+  link does not yet emit the reference layout by itself.  What round 58
+  establishes is that the reference layout is now correctly *described*, and the
+  remaining raw-link delta is placement, not content (round 57: 247 of 249
+  tracked `.data` objects already have the right bytes at the right address).
+- **Gate now passes end to end**, which is worth having as a floor for whatever
+  comes next.
+
+**Round-57: the initialised `.data` is ALREADY correct. 247 of 249 tracked symbols have the right bytes at the reference address. The 1.68 MB emit programme was solving a problem that does not exist there.**
+
+- **The test, and it retires most of rounds 39-56.**  For every tracked `.data`
+  symbol inside the on-disk region, compare the reference's bytes at the symbol's
+  **reference address** with our build's bytes at that same address:
+
+  | | count |
+  |---|---|
+  | tracked symbols in the on-disk region | 249 |
+  | **our bytes at the reference address already match** | **247 (99.2%)** |
+  | genuinely different | **2** |
+
+  So the initialised `.data` is not mislaid: the bytes are where the reference
+  has them.  The "153 of 253 symbols misplaced" figure that drove the whole
+  section-extraction programme measures **symbol attribution**, not data — a
+  symbol can be bound to the wrong offset while the bytes at the right offset
+  are already correct.  Round 54's conclusion that ~103 unrecognised objects had
+  to be found, and rounds 39-53's extractor/stripper/substitution, were all
+  working on the attribution artefact.
+- **The two that genuinely differ are the same 26 bytes from round 1**, both
+  **pointer tables naming addresses the link placed wrongly**:
+  - `locktable` (0x10031aac, 192 B): 8 bytes at +4/+0x24/+0x34/+0x44 —
+    `ref 0x10035538` against our `0x10034b50`, a 0x9E8 shift.  These are the
+    per-lock `CRITICAL_SECTION` pointers.
+  - `g_before_g_panic_callback` (0x10033f38, 1752 B): 18 bytes at +0x3e4.., a
+    table of `.text` pointers.
+  Neither address is a function start, so they are interior/CRT objects — the
+  defect is their placement, not their identity.
+- **The whole remaining file-identity gap, restated with numbers:**
+  1. **26 bytes** of `.data`, from 4 lock pointers + one pointer table;
+  2. **`.data` VirtualSize 0xA9C short** (round 2's wall), which moves
+     `.reloc`, SizeOfImage and SizeOfInitializedData;
+  3. `BaseOfData` and the `IMAGE_FILE_DEBUG_STRIPPED` bit, independent.
+  That is the entire distance between the shipped build and a file-identical
+  one — a small, tractable list, not 1.68 MB.
+- **What this does and does not retire.**  It retires the emit as a route to
+  the *initialised* region.  It does **not** touch the BSS tail: past
+  `0x10035000` there are no file bytes, so the BSS layout still needs the
+  metadata, and that is where rounds 28/31/33/37's identifications
+  (`g_connections`, arrays A and B, `__sbh_initialized`) still stand.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-56: the section locator is a tool now (86.9%). A 41-declaration experiment showed no effect and was reverted — and I destroyed five source files doing it, then restored them.**
+
+- **Tooling: `scripts/data_placement.py --locate`** derives every game
+  `.data`/`.bss` section's **reference address by content matching**, walking the
+  sections in built order and confining the search to the window after the
+  previously located section.  It reports, per section: built offset, size,
+  reference address, and how it was found (`unique` / `windowed` /
+  `ambiguous` / `zero-body`), with `--json`.  Current: **213 sections placed,
+  180 unique + 5 windowed = 86.9%**, 21 ambiguous, 7 zero-body.  This is the
+  mechanism that lets the manifest grow by measurement instead of one
+  hand-named gap at a time.
+- **Why content matching is legitimate and not a coincidence.**  `.data` carries
+  no relocations, its VA equals its file offset, and the built `.data` already
+  matches the reference's byte for byte at the **same** offsets (26 bytes differ
+  of 57,344; best constant shift 0).  So the bytes are already right and only
+  the symbol *binding* is wrong — which is exactly what the emit has to fix, and
+  why round 54's "reversing task on 103 objects" was too pessimistic.
+- **Tried and reverted: 41 `= {0}` initializers removed.**  26 tracked symbols
+  that the reference places in BSS (VA >= 0x10035000) are declared `= {0}`
+  here, which forces them into initialised `.data`.  Removing the initialisers
+  did move several (`g_dynasty_name` -> 0x11766ad4, the BSS pool), but
+  **`.data` VirtualSize, the exact/misplaced count (100/153) and the locate
+  coverage were all identical afterwards**, because the `.bss` pool grew by the
+  same amount the `.data` shrank.  A change with no measurable benefit is noise
+  and was reverted.
+- **My error, and the cost.**  Reverting that experiment I ran
+  `git checkout -- src/`, which discarded **this session's real fixes** across
+  five files — not just the experiment: the `alchemistry_logic2.c` client-only
+  move, the `server.c` `exit_handler` -> `DllMain` rename, the
+  `server_internal.h` marker, the `vfs2.c` `fread` change, and the
+  `link_stubs.c` stub removals.  All five were re-applied and **re-verified**:
+  `_DllMain@12` back at 0x10009310, `_fread` at 0x1001a931, trailing content
+  584 B of 93 symbols, and the gate at its exact prior reading (verify 262/262,
+  imports 100, `.text differing 0x0`, residue 0).  Nothing was lost in the end,
+  but the round spent most of its budget on an avoidable mistake: `git checkout
+  -- <dir>` is not a safe way to undo one experiment when the directory holds
+  uncommitted work from earlier rounds.  Revert the *file*, or use
+  `git stash push -- <paths>`, and never a whole subtree.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-55: there is a mechanical way to locate the untracked `.data` sections — and it finds 89% of them.**
+
+- **The key fact, measured first: our `.data` content is already the reference's,
+  at the SAME offsets.**  The built `.data` and the reference's differ in **26
+  bytes** and the best constant shift between them is **0** (7151 of 7168
+  8-byte blocks match).  `.data` has no relocations (round 39) and its VA equals
+  its file offset, so **a section's reference address is simply where its own
+  bytes appear in the reference `.data`.**  None of this needs the manifest.
+- **Content matching, on the 321 game `.data` sections:**
+
+  | result | count |
+  |---|---|
+  | unique match anywhere in the reference `.data` | **244** |
+  | ambiguous (pattern repeats) | 64 |
+  | no match | 12 |
+  | all-zero (a `.bss`-like body) | 1 |
+
+- **Walking the sections in built order and searching only inside the window
+  bounded by the previously located section resolves most of the ambiguous
+  ones: 216 unique + 6 windowed = 222 of 249 placed (89%)**, with 20 still
+  ambiguous and 7 unmatched.
+- **Why this changes the plan.**  Round 54 concluded the emit was blocked on
+  ~103 unrecognised objects and called it a reversing task.  It is mostly not:
+  the objects are *already in the right bytes at the right offsets*, they simply
+  are not bound to the right symbol names.  Locating a section is a content
+  match; naming it is optional for placement.
+- **What is left, precisely.**  20 sections whose content repeats (small ints
+  and repeated patterns) and 7 with no match, plus the all-zero one.  Those need
+  the neighbour-constrained search tightened or a symbol-level anchor — and the
+  147 already-tracked symbols give anchors for free where a section has one.
+  This is the work round 56 should turn into `data_placement.py` coverage
+  (it already reports tracked symbols; it should also report located sections),
+  so the manifest grows from measurement rather than from naming one gap at a
+  time.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-54: the emit is blocked on DATA, not tooling. `rebrew-data.toml` covers 30% of the `.data` symbols the tree actually contains.**
+
+- **Per-section extraction was measured before it was built, and it does not
+  rescue the situation.**  Of the 343 game `.data`/`.bss` sections, only **31
+  (9%)** contain a symbol the metadata tracks, so 312 have no anchor from which
+  their reference address could be derived.  Per-section and per-symbol fail for
+  the same reason.
+- **The real gap, sized.**  The game objects hold **484** distinct `.data`/`.bss`
+  symbols:
+
+  | | count | note |
+  |---|---|---|
+  | tracked in `rebrew-data.toml` | **147 (30%)** | the fragment can place these |
+  | compiler string literals (`??_C@…`) | 234 | move with their section, no name needed |
+  | real, untracked objects | **103** | zlib statics (`?my_version@…`), CRT globals (`app_type`, `charmax`, `crtGetLocaleInfoA`…), file-scope statics |
+
+  So ~103 objects have to be found in the reference before any ordering scheme
+  can place `.data` correctly.  That is the **same kind of work as rounds 31-37**
+  — identify the object, get its reference address and extent — not a tooling
+  problem, and not something to guess at.
+- **What this retires.**  Rounds 49-53 chased the last 4 unextracted symbols and
+  then the substitution; both were symptoms of this 30%.  The tooling those
+  rounds built is correct and reusable — the extent model (source-declared
+  array bound first), the stripper (six COFF bugs fixed, 544/544 verified), the
+  verifier, and the ordered fragment — and it will be needed the moment the
+  manifest covers the remaining 103.
+- **The honest statement of where 100% lives.**  It is a reversing task on
+  ~103 data objects plus the reference-ordered emit, not a link-flag exercise.
+  Rounds 26/33/37 each cost 750-900 residue bytes for a partial application,
+  and this round explains why every partial application was going to fail.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-53: per-symbol extraction is the WRONG UNIT. 428 sections stay un-stripped because the fragment covers only 173 tracked globals.**
+
+- **Fixed first: the response-file order.**  I had rebuilt the file as
+  `game + data + library`, and the link runs **`/FORCE:MULTIPLE`**, so the
+  *first* definition of a duplicated symbol wins — reordering silently changed
+  which one, which is what produced round 52's `_z_errmsg` and
+  `?my_version@…` failures.  The file now preserves the original order exactly
+  and only substitutes objects in place.  Those errors are gone.
+- **Then the real structural finding.**  The stripper now refuses to drop a
+  `.data`/`.bss` section unless the extracted fragment supplies **every** symbol
+  in it — added after the zlib objects turned out to be built by the same CMake
+  target as the game, so they were being stripped too, and their `.data`
+  (`?my_version`, a `??_C@` string) is not a tracked global, so those symbols
+  simply vanished.  With that rule in place, **428 data/bss sections remain
+  un-stripped**: the fragment covers 173 tracked names, but the objects hold
+  far more — file-scope statics, string literals, untracked globals.
+- **So per-symbol extraction cannot produce the reference layout.**  It can move
+  the ~16% of the section that the metadata tracks and leaves the rest in link
+  order, which is precisely the "correct object in a wrongly-ordered section"
+  that rounds 26/33/37 measured as a regression.  The right unit is the
+  **whole `.data` section per object**, moved as a unit and ordered by its
+  reference start address — which covers statics and literals without needing
+  them tracked, because the bytes travel together.  That is the design change
+  round 54 should make; per-symbol work stands as the extent model and the
+  manifest, both of which are correct and reusable.
+- **The stripper itself is now sound** — six COFF bugs fixed over rounds 51-53,
+  the "only drop a fully covered section" rule added, and `--verify` (names,
+  section membership, undefined-ness, symbol-stream alignment, string-table
+  placement) passing on all 544 objects.
+- **State unchanged where it matters:** extraction 172/173, strip verification
+  544/544, shipped link untouched.  Gate: verify 262/262, imports 100,
+  `.text differing 0x0`, residue 0.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-52: two more stripper bugs fixed. Stripping is now clean in isolation; the substitution fails for a different, real reason.**
+
+- **Bug 1 — dropped section symbols survived as undefined externals.**  The
+  section table stores names **NUL-stripped** (`b'.data'`) while `sym_name`
+  returns the raw 8-byte field (`b'.data\0\0\0'`), so the "is this a section
+  symbol?" comparison never matched.  Every `.data`/`.bss` section symbol was
+  therefore written out as an *undefined external literally named `.data`*,
+  which LINK first reports as `LNK2001: unresolved external symbol .data` and
+  then as an internal `ReadSymbolTable` error.  Both sides are rstripped now;
+  linking `stripped/server2.c.obj` alone went from 3 bogus externals to none.
+- **Bug 2 — `.file` aux records truncated.**  Only the first of a symbol's aux
+  records was copied while `naux` was declared as 1.  `.file` is storage class
+  FILE with **six** aux records and the object file name spans all of them, so
+  the name was being cut mid-string.  All aux records are copied and the count
+  declared now matches.
+- **Where the substitution actually stands, after four rounds on it.**  With the
+  stripper clean, the substituted link still fails — but **not the same way**:
+  dropping `stripped/server2.c.obj` from the response file removes the internal
+  error entirely and surfaces ordinary `LNK2001: unresolved external symbol
+  _?my_version@… / _z_errmsg` in `deflate.c.obj` and `zutil.c.obj`.  So the
+  remaining work is **link-level integration, not a COFF rewrite defect**: the
+  data fragment changes what the library and zlib objects resolve against, and
+  that interaction has to be worked through.  Round 53 should start there —
+  resolve the zlib/`_z_errmsg` group first, since it is the shortest path to a
+  link that completes.
+- **The lesson from four rounds of this, worth more than the fix:** every one of
+  the six stripper bugs so far (`cls==3` mistaken for "section symbol", aux
+  records dropped, relocations dropped, `PointerToRelocations` written
+  body-relative, aux truncated, name padding mismatched) was **invisible to
+  `--verify` and visible only when the objects were actually linked.**  A
+  rewrite verified against its own parser is not verified.
+- **State unchanged where it matters:** extraction 172/173, strip verification
+  544/544, shipped link untouched.  Gate: verify 262/262, imports 100,
+  `.text differing 0x0`, residue 0.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-51: three more real stripper bugs found and fixed, all caught by LINKING. The substitution still aborts; the remaining cause is not pinned.**
+
+- **Every one of these was invisible to `--verify`, and visible the moment the
+  objects were actually linked.**  That is the finding worth keeping: a
+  re-parse of the rewritten file agrees with the original on names, sections and
+  undefined-ness while the object is still unlinkable.
+
+  | bug | symptom | fix |
+  |---|---|---|
+  | aux records dropped for kept COMDAT sections | `LNK1162: expected aux symbol for comdat section` | copy the original aux bytes verbatim |
+  | **relocation records dropped entirely** — every `.text` here carries 5-18 of them | `LNK1181`/`ReadSymbolTable` abort | copy each kept section's records; verified per-section parity (e.g. `server2`: 18,1,17,1,11,1,14,1,5,1,14,1,9,1 = 95 in, 95 out) |
+  | `PointerToRelocations` written body-relative | `LNK1190: invalid fixup found, type 0x8900` | it is a **file** offset: `20 + 40*nsec + rstart` |
+
+- **`--verify` grew the check it was missing** — the symbol-table *stream* must
+  land exactly on the string table (walk honouring aux records, then the
+  strtab's own size must fit the file).  It passes for all 544 objects, which
+  is why the remaining abort is *not* a stream desync.
+- **What is left, precisely.**  `stripped/server2.c.obj` is provably
+  well-formed — stream ends at 0x1560, string table size 1213 exactly the
+  remaining bytes, zero long-name offsets out of range, 15 sections, 91 symbols,
+  95 relocations — and LINK still aborts on it with `Internal error during
+  ReadSymbolTable`.  The original `server2.c.obj` is unremarkable (24 sections,
+  105 symbols, same relocation profile), so the fault is in the rewrite and
+  **not yet located**.  Candidates for round 52: the `.file` symbol's six aux
+  records are discarded (the file name lives there) and some LINK paths expect
+  them; and the original carried a `@comp.id` absolute symbol at 0xffff that the
+  rewrite preserves but at a different table index.
+- **State unchanged where it matters:** the extraction set (172/173) and the
+  stripper verification (544/544) both stand; the shipped link is untouched and
+  `scripts/gate.sh` reads verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-50: step 3 was ATTEMPTED and FAILED. The link aborts on one rewritten object. Reverted; the shipped build is untouched.**
+
+- **What was run.**  Generated the 172-object data fragment and the 544
+  stripped game objects (both verified, round 49), built a response file of
+  `stripped game objects + ordered data fragment + untouched library/split
+  objects`, and linked it.  **It does not link:**
+  `stripped/server2.c.obj : error : Internal error during ReadSymbolTable`,
+  and the output has no `.data` section at all.
+- **Two stripper defects found and fixed on the way, both caught by LINK rather
+  than by `--verify`:**
+  1. **`LNK1162: expected aux symbol for comdat section`** — the stripper
+     dropped every aux record, and a kept COMDAT section's symbol must carry
+     one.  Aux records for kept sections are now copied verbatim.
+  2. **The symbol-table stream must stay aligned when a symbol has more than
+     one aux record** — the walk skips them all but only one was copied; the
+     rewrite now emits the record it kept and the count it declares.
+  After (1) the link got as far as producing a DLL; after (2) it still aborts on
+  `server2.c.obj`.
+- **`--verify` does not catch this class, and that is a real limitation to
+  record.**  It checks names, section membership and undefined-ness — all of
+  which pass on the object that LINK rejects.  A rewritten symbol table can be
+  *semantically* wrong in a way a re-parse of the same file cannot see.  The
+  missing check is on the aux-record and count layout, which is what round 51
+  should add before the substitution is retried.
+- **The original `server2.c.obj` is unremarkable** (24 sections, 105 symbols,
+  max section index 65535 from the `@comp.id` absolute), so the fault is in the
+  rewrite, not the input.
+- **Nothing was kept from the attempt.**  All of `build/data_split`,
+  `build/stripped`, `emit.*` and the two extra response files were deleted;
+  `scripts/gate.sh` is back to its usual reading — verify 262/262, imports 100,
+  `.text differing 0x0`, residue 0.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-49: step 2 of the emit is DONE and VERIFIED — 544 objects stripped, all re-parsed and checked. The verifier earned its place by catching a real bug.**
+
+- **`strip_data_sections` is correct.**  It drops `.data`/`.bss`, relayouts the
+  kept sections' raw data consecutively, renumbers every symbol's section
+  index, and turns both section-resident data symbols and COMMON ones into
+  undefined externals so the extracted one-symbol objects are the only
+  definition.  `--strip DIR --verify` re-parses each result and checks three
+  things: no name lost, no symbol in a *kept* section changed section
+  membership, and every symbol from a *dropped* section is now undefined.
+  **544 objects, all verified.**
+- **Two real bugs the verifier caught, which a "does it still link?" check
+  would not have:**
+  1. **Section symbols were emitted twice** — the symbol walk already emits
+     them, and a separate loop added them again, which garbled the whole table.
+  2. **`storage_class == 3` is not "section symbol".**  It is also how a
+     file-scope `static` is stored, so every `static char s_foo[]` in the tree
+     (~20 symbols: `s_alloc_spieler_bug`, `s_fmt_player_id`, `_gz_magic`,
+     `_fixed_bd`, `_static_bl_desc`, …) was **dropped outright instead of being
+     made undefined** — silent data loss.  Section symbols are now identified by
+     their name matching a section name.
+  Also fixed along the way: `Coff` decodes *symbol* names to `str` but leaves
+  *section* names as `bytes`, so the verifier was comparing the two types and
+  reporting every dropped symbol as a false positive.
+- **State of the three emit steps (from round 39):**
+  1. extract every tracked symbol — **done, 172 of 173** (round 47)
+  2. strip `.data`/`.bss` from the game objects — **done and verified** (this
+     round)
+  3. substitute the ordered fragment for the `data`/`tail` buckets round 38
+     identified — **not started**, and it is the only step left
+- **Step 3 must still be one change with nothing else in flight**, and its
+  evidence has to be the `.data` layout itself — every extracted symbol at its
+  reference address and `.data` VirtualSize 0x174059c — not a summary count.
+  Rounds 26/33/37 each cost 750-900 residue bytes for a partial application.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-48: the COFF stripper is written but NOT verified — its long-name handling is still wrong, so the substitution must not be attempted yet.**
+
+- **Step 2 of the emit (strip `.data`/`.bss` from the game objects) is
+  implemented** in `scripts/emit_data_symbols.py::strip_data_sections`.  It
+  drops the `.data` and `.bss` sections, relayouts the kept sections' raw data
+  consecutively, renumbers every symbol's section index, and rewrites both
+  section-resident data symbols and **COMMON** ones as *undefined externals* of
+  the same name, so the extracted one-symbol objects become the only definition.
+  On `alchemistry_logic3.c.obj` the section list correctly goes
+  `.drectve, .data, .text, .debug$F, .text, .debug$F` →
+  `.drectve, .text, .debug$F, .text, .debug$F`.
+- **It is not finished, and it is deliberately not used.**  The rewritten
+  symbol table comes out with **mangled long names** — the data symbols read as
+  `.data`, `U`, and empty strings instead of `g_dispatch_table` and friends.
+  A long COFF name is four NUL bytes plus an offset into *that object's* string
+  table; the first attempt copied the raw 8-byte field verbatim, which is
+  exactly 8 bytes and so was written back as a short name.  Resolving the
+  offset did not fix it either.  Shipping a COFF rewriter whose symbol table is
+  wrong would be worse than shipping none, so **the substitution was not
+  attempted** and the build is untouched.
+- **What step 2 needs before it may run:** the rewritten object must be
+  re-parsed and its symbol table compared against the original — every name
+  identical, every kept symbol's section index correctly renumbered, every
+  dropped one undefined.  That check should be the tool's own `--verify`, run
+  over all 188 objects, because "the link still succeeds" is not evidence that
+  a symbol table is right (the same lesson as round 14's four green numbers on
+  a broken image).
+- **State unchanged where it matters:** the extraction set from round 47 stands
+  at 172 of 173 defined `.data` symbols, and the shipped link is untouched.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-47: the extraction set is COMPLETE — 172 of 173 defined `.data` symbols, 22,594,442 bytes, ordered by reference VA.**
+
+- **The last six came from a storage-class filter.**  The section path accepted
+  only `storage_class == 2` (external), so every **file-scope `static`**
+  (class 3) data symbol was invisible.  That is `static char s_fmt_player_id[]`
+  and its five siblings in `gm_AllocSpieler.c` — which the extractor had
+  reported as "the reference puts them in `.data` but we emit them to
+  `.rdata`".  That diagnosis was wrong: we emit them to `.data` correctly, they
+  were simply being skipped.  Both the section path and the COMMON path now take
+  class 3.
+- **Where the set now stands — complete:**
+
+  | | count | bytes |
+  |---|---|---|
+  | tracked `.data` entries | 381 | — |
+  | deleted-object placeholders filtered (rounds 41-42) | 208 | — |
+  | defined in the link | 173 | — |
+  | **extracted, ordered by reference VA** | **172** | **22,594,442** |
+  | omitted | 1 | `g_player_slot_field`, inside `g_connections` — **correct** |
+
+  The emitted set spans `0x10027030`..`0x11766204` and the three large objects
+  are exact: `g_connections` 20,058,912 · `g_player_slot_overflow_pad`
+  2,507,360 · `g_dispatch_table` 424.
+- **This clears the last prerequisite found in round 39.**  The emit's three
+  steps were: (1) extract every tracked symbol — **done, 172/173**; (2) strip the
+  original `.data`/`.bss` out of the game objects so only the extracted copies
+  contribute; (3) substitute the ordered fragment for the `data`/`tail` buckets
+  round 38 identified.  Steps 2 and 3 remain, and they are the first genuinely
+  risky change in this sequence — a COFF section remover (renumbering symbol
+  section indices) plus a response-file rewrite, applied together, because
+  rounds 26/33/37 each show that a partial application regresses the file.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-46: coverage 163 -> 167, and the last four were a stale variable name, not a data problem.**
+
+- **The bug was one word.**  The COMMON branch appended
+  `emitted_spans.append((va, span))` — `span`, a leftover from the *section*
+  path's loop — instead of its own `span_c`.  A 64-byte phantom span was
+  therefore recorded at `0x10035439` and swallowed `g_active_player_count`,
+  `g_query_limit` and `g_query_count`, all three three objects later.  Nothing
+  in the output said so; only the `--debug` line naming the containing span
+  ("inside span 0x10035439+64", against a real `g_current_season` of **1**)
+  made it findable.  Fixed, and the section path's own missing append — found
+  in the same round, which is why the field-skip list had been half-populated —
+  is now correct too.
+- **The extraction set is now closed at 167 of 173 defined** `.data` symbols,
+  22,594,267 bytes.  The six not extracted are fully accounted for:
+  - **`g_player_slot_field` @0x101deb14** — inside `g_connections` @0x101deb00
+    (+20,058,912).  **Correctly skipped**: it is a field of the 20 MB player-slot
+    array, not a separate object.
+  - **5 `s_*` string constants** (`s_fmt_player_id`, `s_fmt_sp_id`,
+    `s_alloc_spieler_bug`, `s_alloc_spieler_array_overflow`,
+    `s_family_count_overflow`) — the metadata places them in the reference's
+    `.data`; our build emits them to `.rdata`, so there is no `.data` symbol to
+    extract.  That is a **placement** difference to resolve, not an extraction
+    failure, and it is the last thing standing between the extractor and a
+    complete set.
+- **The three large objects remain exact** after every fix:
+  `g_connections` 20,058,912 · `g_player_slot_overflow_pad` 2,507,360 ·
+  `g_dispatch_table` 424.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-45: coverage 162 -> 163, every remaining skip now has a named cause, and two more silent bugs fixed.**
+
+- **Two real bugs, both of which had been quietly dropping symbols:**
+  1. **The section path never recorded its extents.**  Only the COMMON branch
+     appended to `emitted_spans`, so the "is this symbol a field of an earlier
+     one?" check ran against half the list — it was neither skipping enough nor
+     wrong enough to be noticed.
+  2. **The span precedence was wrong.**  It is now, strongest first:
+     **(1)** the array bound in the source (CL's own view; exact for every real
+     array), **(2)** the metadata's `size` (right for scalars, wrong for arrays,
+     but every array is covered by (1) so it never wins there), **(3)** the
+     in-object bound, last, because it over-runs: a scalar whose next in-object
+     neighbour is far away swallows the symbol after it.  Under the old order
+     `g_current_season` ate `g_active_player_count`, `g_query_limit` and
+     `g_query_count`.
+- **Every remaining skip now has a stated cause** (the script grew a `--debug`
+  flag that prints why each symbol was dropped, which is what turned "coverage
+  did not rise" into four specific sentences):
+
+  | symbol | cause | correct? |
+  |---|---|---|
+  | `g_player_slot_field` @0x101deb14 | inside `g_connections` @0x101deb00 | **yes** — it is a field of the 20 MB array |
+  | `g_query_count` @0x10035458 | inside @0x10035454 | no — a metadata size that is too large |
+  | `g_query_limit` @0x10035450 | inside @0x10035439 | no — same |
+  | `g_active_player_count` @0x1003543c | inside @0x10035439 | no — same |
+  | `g_entity_records` @0x10035a0c | inside @0x10035a04 | no — same |
+
+  So **4 are left**, all the same cause: a tracked neighbour whose recorded
+  `size` overruns the next object.  That is the metadata's `size` field being
+  wrong for a *fourth* time in this work (round 34: absent for arrays; round 40:
+  4 for `g_dispatch_table`; round 41: 1 for `g_connections`; here).  The
+  source-declared bound fixes arrays, but these four are scalars whose
+  neighbouring *array* has a bad size, so they need that array's real extent.
+- **Coverage 163 of 173 defined** `.data` symbols, from 381 tracked entries,
+  with 208 deleted-object placeholders filtered.  The 5 `s_*` strings from round
+  44 are a separate matter: we place them in `.rdata` where the reference has
+  them in `.data`.
+- **The substitution still waits** for the full set — rounds 26/33/37 all show a
+  partial application regresses the file.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-44: coverage 153 -> 162 of 173. A sort-order bug I introduced last round was silently dropping every scalar.**
+
+- **The bug was mine, from round 43.**  I added a sort by reference VA so a
+  container would be emitted before the fields inside it — but the in-object
+  neighbour is `data_syms[i+1][0]`, which only means anything in **offset**
+  order.  Under reference order every symbol after a high-offset one got a
+  *negative* span and was skipped.  Every plain scalar in `link_stubs.c`
+  vanished: `g_active_player_count`, `g_entity_records`, `g_alloc_counter` and
+  six others.  The symptom was only "coverage did not rise", which is the
+  failure mode that has produced the most wrong numbers in these rounds.
+  Reverted to offset order, which also naturally emits a container before its
+  fields.  Coverage **153 -> 162**.
+- **The 11 still unextracted are two different problems:**
+  - **5 are `s_*` string constants** (`s_fmt_player_id`, `s_fmt_sp_id`,
+    `s_alloc_spieler_bug`, `s_alloc_spieler_array_overflow`,
+    `s_family_count_overflow`).  The metadata places them in the reference's
+    `.data`; our build emits them into `.rdata`, so there is no `.data` symbol
+    to extract.  That is itself a placement difference to resolve, not an
+    extraction failure.
+  - **6 are scalars** (`g_active_player_count`, `g_dynamic_count`,
+    `g_query_count`, `g_query_limit`, `g_crash_callback`,
+    `g_entity_records`).  None lies inside an emitted span, so the field-skip is
+    not the cause; they are still failing an earlier check (`if not body`) and
+    the cause is **not yet pinned**.  Left alone deliberately rather than guessed.
+- **So the substitution still waits.**  It needs all 173 defined symbols;
+  applying it at 162 would drop 11 objects from `.data` and, by rounds
+  26/33/37, that is a regression.  The next step is the six scalars, then the
+  five strings.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-43: the extractor's extent model is solved — the source declarations are the ground truth, and the three largest objects now extract exactly.**
+
+- **The extent model, finally right.**  Three models were tried and each was
+  wrong somewhere:
+
+  | model | failure |
+  |---|---|
+  | next symbol in the **object** | `g_player_slot_overflow_pad` swallowed `g_bss_tail`, 1,747,496 B too large |
+  | next tracked symbol by **reference address** | `g_connections` (20 MB) truncated to 20 B by `g_player_slot_field`, a field 20 B inside it sharing `link_stubs.c` |
+  | the metadata's `size` | says **1** for `g_connections`, **4** for `g_dispatch_table` (really 424) |
+
+  The model that is right is **the array bound written in the source**:
+  `unsigned char g_connections[0x1321320]` states 20,058,912 outright, and that
+  is CL's own view of the object.  Verified exact on all three:
+
+  | object | extracted | reference |
+  |---|---|---|
+  | `g_connections` | 20,058,912 | 20,058,912 |
+  | `g_dispatch_table` | 424 | 424 (106 x 4) |
+  | `g_player_slot_overflow_pad` | 2,507,360 | 2,507,360 |
+
+  The object/reference bounds are kept only as fallbacks for symbols with no
+  array declarator.
+- **Placeholders filtered at the extractor, not by editing tool-owned
+  metadata.**  203 `.data` entries describe objects the tree deleted (rounds
+  41-42).  They are excluded by intersecting the tracked set with the symbols
+  the objects actually define, so they cannot act as extent boundaries — which
+  is exactly why the reference-address model failed.  `rebrew-data.toml` is
+  tool-owned, so per AGENTS.md this is fixed on the consuming side.
+- **Current coverage: 153 objects extracted** of 173 defined `.data` symbols,
+  from 381 tracked entries.  The 20 not extracted are fields and symbols with
+  no derivable extent; each needs confirming as a field rather than a miss.
+- **One more silent-failure bug fixed.**  The declarator pattern rejected
+  function-pointer types — `int(__cdecl* g_dispatch_table[106])(unsigned char*,
+  int)` — because it allowed identifiers, spaces and `*` but not parentheses,
+  so that table silently fell back to the in-object bound and came out 848
+  instead of 424.
+- **Next, unchanged:** substitute the ordered fragment for the `data`/`tail`
+  buckets (round 38) and strip the original `.data`/`.bss` out of the game
+  objects, in one change — rounds 26/33/37 all show partial application is a
+  regression.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-41: extractor coverage 156 -> 166, `g_connections` extracts exactly, and 208 tracked symbols turn out to be objects the tree deleted years ago.**
+
+- **Fixed: `.bss` symbols extracted nothing.**  A `.bss` section has `raw_size`
+  0, so slicing it yields an empty body and the symbol was skipped silently —
+  that was all 17 of the "present but unextracted" cases.  A `.bss` symbol's
+  extent is known and its content is zeros, so the body is now synthesised.
+  Coverage 156 -> **166**.
+- **`g_connections` extracts exactly right**: 20,058,912 bytes, the reference
+  extent, from a plain byte copy.  That is the proof the approach works on the
+  largest object in the section.
+- **The open problem is the extent model, and it is now concrete.**
+  `g_player_slot_overflow_pad` extracts at **4,254,856** against the reference's
+  **2,507,360** — 1,747,496 too large, because "extent runs to the next symbol
+  in the same object" runs past it into `g_bss_tail`.  The two candidate
+  models both fail somewhere: the next-symbol-in-object bound is wrong across a
+  gap, and the metadata's `size` is wrong for arrays (4 for
+  `g_dispatch_table`).  The model that would be right is **next tracked symbol
+  by reference address**, which is the reference's own layout — and it is only
+  as good as the tracked set being complete.
+- **208 of the 381 `.data` entries have no matching object, and only ~52 KB
+  of that is fiction.**  203 of them appear in the sources only as
+  `extern char x[1];` in `rebrew_globals.h`, next to the comment in
+  `m_alloc2.c`: *"Five truncated stub arrays used to live here"* — placeholders
+  for objects that were deleted, 36 of them literally `size = 1`.  The other
+  **5 are the large real gaps** (`g_before_g_dispatch_table_a` 592,800 =
+  **array A**, `g_before_g_item_def_table` 592,780 = **array B**,
+  `__sbh_initialized` 411,112, `g_before_g_entity_ptr` 81,948,
+  `g_before_g_entity_type_table` 54,460), which we identified independently in
+  rounds 31-37 from the disassembly and the relocation table.  The metadata's
+  large sizes are therefore **right**, and agreeing with three independent
+  lines of evidence is corroboration, not coincidence.  Only the 203 small
+  placeholders are a problem, and they matter solely because they sit inside
+  the initialised region where the extent model reads them as object extents.
+- **So the extent model is limited by a small, bounded cleanup, not a rebuild.**
+  "Next tracked symbol by reference address" is sound for every real object and
+  for all five large gaps; it goes wrong only where a deleted-object placeholder
+  splits two real objects.  Pruning the 203 placeholders is the prerequisite —
+  and it is metadata work in `rebrew-data.toml`, which is tool-owned, so per
+  AGENTS.md it belongs in the rebrew checkout rather than being hand-edited here.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-40: the per-symbol `.data` extractor works — 156 of 381 symbols lifted into ordered objects. Four real bugs found on the way.**
+
+- **Tooling: `scripts/emit_data_symbols.py`** extracts each tracked `.data`
+  symbol from its translation unit into a one-symbol, non-COMDAT `.data`
+  object and writes them ordered by reference VA, as a response-file fragment.
+  No relocations are carried, because `.data` has none (round 39) — the bytes
+  are already final.
+- **Four bugs, each of which produced a plausible wrong answer:**
+  1. **COFF symbol records number sections from 1, not 0.**  Reading them 0-based
+     matched `.text` and extracted **nothing** while reporting no error.
+  2. **The response file's paths are relative to `build/`**, which is also the
+     linker's working directory, not to the project root.  Resolving against the
+     root silently found no objects.
+  3. **The metadata's `size` cannot be trusted for arrays** — it records **4**
+     for `g_dispatch_table`, which is really 106 entries (424 bytes).  Trusting
+     it would emit a truncated table.  The extractor takes a symbol's extent
+     from the *next symbol in the same section* instead, which is exact.
+  4. **Most of the tree's data globals are COMMON**, not in any section, so
+     section slicing alone saw under half of them.  COFF stores a common
+     symbol's size in its value field, and its content is zeros, so that case is
+     handled explicitly; the same for `.bss` sections.
+- **Coverage measured: 156 of 381 tracked `.data` symbols extracted.**  Where the
+  rest live is not yet accounted for; the classification of what *is* found is
+  306 COMMON occurrences, 89 in `.data`, 54 in `.bss` and 5 with static storage
+  class, so the remainder are most likely in TUs that are not on this response
+  file, or under names the metadata and the objects disagree about.
+- **Nothing shipped changed.**  The extractor writes only into `build/`, which
+  was cleaned afterwards; the gate is unchanged.
+- **Remaining steps for the emit, unchanged from round 39:** raise the coverage
+  to 381, then strip the original `.data`/`.bss` out of the game objects so only
+  the extracted copies contribute, then substitute the ordered fragment for the
+  `data`/`tail` buckets that round 38 identified.  All three in one change —
+  rounds 26/33/37 all show a partial application is a regression.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-39: the emit is tractable — `.data` carries ZERO relocations, so extraction is byte copying, and some data is already correctly placed.**
+
+- **Zero relocations in `.data` and `.bss` across every game object** (scanned
+  all 188 objects under `server_dll.dir`).  That is the fact that makes the
+  emit feasible: a per-symbol extract-and-order needs no relocation fixups, only
+  byte copying, because the data holds **literal** reference addresses rather
+  than symbol references.  Verified on the worst case:
+  `g_dispatch_table[106]` is initialised with `0x1000d2e0, 0x1000d330, …` —
+  the reference's own function addresses, written as constants, so CL emits no
+  relocations.
+- **That also explains the current inconsistency.**  Each data object *contains*
+  the reference addresses of what it points at, but the linker puts the object
+  somewhere else, so the image is self-contradictory until postlink rewrites the
+  operands.  Getting the link to place each object where its own literals
+  assume is exactly what removes the need for postlink — and it is why ordering
+  by data reference VA is the correct fix rather than a convenience.
+- **Not everything is misplaced.**  `g_dispatch_table` sits at `0x1002c3f8` in
+  our build, which **is** its reference address.  Of the 253 tracked `.data`
+  symbols, 100 are already exact and 153 are not, so the emit has to fix 153 of
+  them, not rebuild the section wholesale.
+- **The emit design, now concrete:**
+  1. extract each of the **380 sized `.data` symbols** (280 in the on-disk
+     region, 100 in BSS) from its TU as a one-symbol object — byte copy, no
+     relocations;
+  2. order those objects by data reference VA (the manifest from
+     `data_emit_manifest.py` already has the addresses and sizes);
+  3. strip the original `.data`/`.bss` sections out of the game objects so only
+     the extracted ones contribute — the same byte-level COFF edit
+     `flatten_comdat.py` already does, applied to a different section.
+- **Not attempted this round.**  It is a multi-step change to
+  `make_split_rsp.py` and needs the whole set in place at once (rounds 26/33:
+  partial always regresses).  The scoping above is what makes it plannable.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-38: the emit's blocker is named — `make_split_rsp.py` routes the two data-bearing TUs into fixed buckets, so their `.data` cannot land on a reference address at all.**
+
+- **What the round tested.**  Added `__sbh_initialized[411112]` to
+  `crt_region/data_globals.c` at the reference address and checked where it
+  actually *landed*.  It is in the object (`.bss` 0x645f0, `___sbh_initialized`
+  in the symbol table) and it is linked — `.data` grew by exactly 0x645E0 —
+  but it sits at the **end** of the section, not at 0x100366b8.  It also never
+  appears in the link map at all.
+- **Why, and it is not an accident of ordering.**  `scripts/make_split_rsp.py`
+  builds the response file as
+  `head + mid[:cut] + rdata + mid[cut:] + thunk_objs + ordered + tail_thunks + extra_objs + data + tail`
+  and routes objects by **filename**: `crt_imports.c.obj` -> `head`,
+  **`data_globals.c.obj` -> `data`**, `rdata_restore/data_restore` -> `rdata`,
+  **`link_stubs.c.obj` -> `tail`**, everything else -> `mid`.  So the two TUs
+  that hold the reference's big data objects — `data_globals.c.obj` (the sbheap
+  globals) and `link_stubs.c.obj` (`g_connections`, the overflow pad) — are
+  placed at **fixed positions near the end of the link line**, whatever their
+  reference addresses are.  No amount of correct declaration changes that.
+- **The map omission is a second-order effect of the same thing:** an object
+  whose contribution lands in a bucket the map does not enumerate.
+- **What this means for the emit, precisely.**  The emit is *not* mainly a
+  declaration job (round 35's worklist) and not mainly a content job (rounds
+  31/33).  It is a **routing change**: the data-bearing objects have to be
+  ordered by their *data* reference VA, which means either (a) splitting each
+  TU's `.data` into its own object and ordering those by data VA, the way
+  `split_coff` already does for library members, or (b) reordering the
+  filename-routed buckets.  (a) is the honest one, because a single TU's `.text`
+  and `.data` orderings genuinely disagree in the reference, so no single
+  link-line order can satisfy both.
+- **This is the first round that has named the change rather than the symptom.**
+  Rounds 26, 33 and 37 all measured "correct object, worse file" without
+  explaining the mechanism; this one does.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-37: the largest in-region gap is UNREFERENCED SPACE — the address appears nowhere in the file. It does not need naming, only extent.**
+
+- **`0x1009b774` (54,460 B, `g_before_g_entity_type_table`) occurs zero times in
+  the entire binary.**  Checked every channel a reference could use:
+
+  | channel | occurrences |
+  |---|---|
+  | base-relocated absolute values | 0 |
+  | memory-operand displacements (ModRM `mod != 11`) | 0 |
+  | 4-byte pointers in `.rdata` / `.data` | 0 |
+  | raw 4-byte occurrence anywhere in the file, `.text` included | **0** |
+
+  Its immediate neighbour `g_entity_type_table` (0x100a8c30) is referenced 43
+  times, so the scan works and the zero is real.  The earlier three "hits" from
+  a plain displacement scan were unaligned false positives.
+- **What that changes.**  This region is not an object the program reads; it is
+  space.  So the emit does not have to *identify* it — it has to reproduce its
+  **extent**, because it is inside `.data`'s VirtualSize.  That is a different
+  and much weaker requirement than naming it, and it removes 54,460 of the
+  62,472 B that was standing between the tree and a correctly-sized game-data
+  region.
+- **The same is true of `__sbh_initialized`** (round 33): zero relocated
+  references in 0x100366b0..0x1009aca0 and no pointer to it.  Two large BSS
+  objects, neither addressed directly, is consistent with the CRT reaching them
+  by a computed offset from a base held in a register — so they are real
+  structures, but their extent has to come from the reference layout rather than
+  from a reference site.
+- **Honest position on the word "padding".**  Reserving 54,460 unreferenced
+  bytes is not padding in the sense the objective forbids — it is not
+  compensating for an error of ours, it is reproducing a region the reference
+  demonstrably has and demonstrably never touches.  The `g_bss_tail` pad *is*
+  that kind of compensation, and that is the one to retire.
+- **What is left of the 62,472 B:** about 8 KB across the smaller in-region
+  gaps (one of which, at 0x10031b79, is partly identified as a run of
+  `atexit`-registered self-pointer slots).  The game-data region is then within
+  reach, and with it the ordering that arrays A and B need.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-36: the gating shortfall is 62 KB, not 1.68 MB — and the two biggest in-region gaps are now characterised.**
+
+- **Recomputed what actually blocks placement.**  The emit needs the whole
+  section, but the *ordering* is gated by the game-data region alone: the
+  reference has 534,560 B there, our build has 60,976 B, and `__sbh_initialized`
+  supplies 411,112 of the difference.  **That leaves 62,472 B** — so if the
+  game-data region were right, arrays A and B (round 31) and the two gaps would
+  follow in order.  The 1.68 MB worklist is real but it is not 1.68 MB of
+  independent work: 411 KB of it is the one bitmap and 1.18 MB is two already
+  identified tables that simply need declaring once the region before them is
+  the right size.
+- **The two largest in-region gaps, characterised:**
+
+  | gap | VA | bytes | relocated refs | status |
+  |---|---|---|---|---|
+  | `g_before_g_entity_type_table` | 0x1009b774 | 54,460 | **0** | base+index only; unidentified |
+  | `g_before_g_block_alloc_threshold` | 0x10031b79 | 8,227 | 10 | **partly identified** |
+
+- **The 8,227 B gap is at least partly real objects, and the idiom is
+  recognisable.**  Disassembling 0x1001e07d shows the CRT one-time-init /
+  `atexit` pattern: `mov $addr,%eax; cmp $eax,%esi; cmpl $0,addr; jne …; mov
+  %eax,addr` — each slot holds a *self-pointer* until it is registered.  That
+  makes `0x10031b7c`, `0x10031b80`, `0x10031b88` and `0x10031b90` four real
+  4-byte objects sitting inside a gap the tree treats as anonymous.  A scan for
+  the exact `cmpl $0,imm32` encoding finds one of the four (0x10031b7c); the
+  rest use different encodings, so a full enumeration needs the idiom rather
+  than one byte pattern.
+- **Where the 62,472 B sits, honestly:** 54,460 of it is the single unreferenced
+  `g_before_g_entity_type_table` gap, and the rest is spread across the smaller
+  in-region gaps.  So one object is ~87% of the remaining blocker, and it has no
+  absolute reference at all — it can only be found by finding the code that
+  indexes it, which is the same class of work as the band and
+  `__sbh_initialized`.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-35: the emit has a worklist, and it is 1,677,512 bytes across five declarations.**
+
+- **Tooling: `scripts/data_emit_manifest.py`** prints the reference `.data` as
+  the ordered list of regions a reference-ordered link would have to produce,
+  with each region's extent, the region sum against the reference VirtualSize
+  (**residual 0x0**), and which of the required declarations the tree already
+  has.  It is the worklist for the emit, so the layout stops being re-derived
+  each round.  `--json` for machine use.
+- **Two bugs of mine while writing it, both producing plausible-but-inverted
+  output, and both worth remembering:** the first version compared *names*
+  against a set of marker *VAs* (so every verdict was wrong), and the second
+  used a declaration regex that missed
+  `unsigned char g_connections[0x1321320] = {0};` — the symbol this whole line
+  of work is about.  It is line-based now, because a regex that cannot see the
+  most obvious declaration in the file is worse than no check.
+- **The worklist:**
+
+  | VA | bytes | symbol | state |
+  |---|---|---|---|
+  | 0x100366b8 | 411,112 | `__sbh_initialized` | MISSING |
+  | 0x100a9820 | 589,824 | array A (768x768) | MISSING |
+  | 0x10139820 | 82,112 | unnamed gap A..B | MISSING |
+  | 0x1014d8e0 | 589,824 | array B (768x768) | MISSING |
+  | 0x101dd8e0 | 4,640 | unnamed gap B..g_connections | MISSING |
+  | 0x101deb00 | 20,058,912 | `g_connections` | present (round 28) |
+  | 0x114ffe24 | 2,507,360 | `g_player_slot_overflow_pad` | present |
+
+  **1,677,512 bytes still to declare**, in that order, and the two largest
+  items (array A and B) are the round-31 identifications waiting for a
+  declaration.
+- **What this does not do.**  Declaring the five is *necessary but not
+  sufficient*, and by rounds 26/33 declaring any of them alone regresses the
+  file, because the TUs also have to land in this order.  So the emit is one
+  change: the five declarations **and** the link ordering, together.  Doing
+  them in two steps guarantees a regression at the first one.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-34: the `.data` manifest is COMPLETE. Nine regions sum to exactly 0x174059c, the reference's VirtualSize, with zero residual. Rounds 27's "18%" was wrong.**
+
+- **The manifest, verified to the byte:**
+
+  | region | range | bytes | named? |
+  |---|---|---|---|
+  | game data .. array A | 0x10027000..0x100a9820 | 0x82820 (534,560) | 23 tracked symbols + `__sbh_initialized` + fillers |
+  | array A (768x768) | 0x100a9820..0x10139820 | 0x90000 | yes (round 31) |
+  | between A and B | 0x10139820..0x1014d8e0 | 0x140c0 (82,112) | **no** |
+  | array B (768x768) | 0x1014d8e0..0x101dd8e0 | 0x90000 | yes (round 31) |
+  | between B and `g_connections` | 0x101dd8e0..0x101deb00 | 0x1220 (4,640) | **no** |
+  | `g_connections` (8 slots) | 0x101deb00..0x114ffe20 | 0x1321320 | yes (round 28) |
+  | sentinel | 0x114ffe20..0x114ffe24 | 4 | yes |
+  | `g_player_slot_overflow_pad` | 0x114ffe24..0x11764084 | 0x264260 | yes |
+  | CRT band | 0x11764084..0x1176759c | 0x3518 | yes |
+  | **sum** | | **0x174059c** | **matches the reference exactly, diff 0x0** |
+
+- **Round 27's "18% coverage" was an artefact and should be disregarded.**  It
+  counted bytes from `rebrew-data.toml`'s `size` field, which is *absent* for
+  every array — so 20 MB of `g_connections` and both 0x90000 tables counted as
+  zero.  Once array extents are derived from the declarations, the section is
+  fully accounted for.  The coverage number was measuring the metadata's
+  bookkeeping, not the reference.
+- **Only 86,752 bytes are still unnamed** — the two gaps between the arrays
+  (0x140c0 and 0x1220) — out of 24.4 MB.  Everything else is identified.
+- **This makes the emit concrete, and it is the first time that has been
+  true.**  The plan is the `.text` split applied to `.data`: extract each
+  contributing `.data` section into its own command-line object with
+  `split_coff.build_object`, and order them by reference VA the way
+  `make_split_rsp.py` already does for `.text`.  The nine regions above are the
+  order.  Round 33's rule still holds — no *single* object helps — but the
+  whole set at once is now possible, and the sizes are known.
+- **What makes this different from rounds 26 and 33:** those inserted one
+  correct object into a wrongly-ordered section, which is why they regressed.
+  A wholesale emit fixes the order and the sizes together, so `.text` operands
+  land on the addresses postlink currently has to rewrite.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-33: `__sbh_initialized` is a 411 KB object the tree never defined — and declaring it cost 884 residue bytes. Third confirmation that partial `.data` work is always net-negative.**
+
+- **The object.**  The metadata has carried `__sbh_initialized` at
+  `0x100366b8`, size **411,112 (0x645e8)**, type `int`, status VERIFIED, since
+  round 2 — and **no object in the tree ever defined it**.  It is the small-block
+  heap's initialised-page bitmap, and it is the single largest gap in the game
+  `.data` region: **411,112 of the 473,584 bytes** that stand between our
+  `g_connections` and the reference's first table.
+- **It is reached only indirectly.**  Zero relocated references land in
+  `0x100366b0..0x1009aca0`, and no pointer to it exists in `.rdata` or
+  `.data`.  It is BSS (past the section's 0xe000 on-disk bytes), so there is
+  nothing in the file to read either.  Same class as the band: base+index
+  addressing only.
+- **The experiment, and its result.**  Declared it in `crt_region/data_globals.c`
+  in address order, between `pfnGetLastActivePopup` (0x10035840) and the
+  `__sbh_pHeaderScan` block (0x11766438) — the reference has it exactly there.
+  Lint clean, 0 compile errors, verify 262/262 — and then:
+
+  | | residue | `.text differing` |
+  |---|---|---|
+  | before | 8 | 0x0 |
+  | with `__sbh_initialized` declared | **892** | **0x37c** |
+
+  Reverted; `data_globals.c` is byte-identical to HEAD, gate back to residue 8
+  and `.text differing 0x0`.
+- **This is the third time, and the pattern is now a rule.**  Round 26 (the band
+  fillers) cost 748 residue bytes; round 33 (a real 411 KB object, declared at
+  the address the reference has) cost 884.  In every case the *content* was
+  right, verify stayed at 262/262, and the file got worse — because the `.data`
+  layout is wrong as a whole, so inserting a correctly-sized object at its
+  correct *relative* position still lands it at the wrong absolute address and
+  shifts every `.text` operand behind it beyond postlink's reach.
+  **No individual `.data` change can improve the file.  Only a wholesale
+  reference-ordered emit can, and that needs the complete manifest first.**
+- **Consequence for planning:** the remaining 1.66 MB of `.data` does not get
+  closed object by object.  The two 0x90000 tables and `__sbh_initialized` are
+  identified and are 1.5 MB of it, which is the content — but they cannot be
+  *placed* until the whole section is emitted in reference order, which is the
+  same conclusion round 26 reached, now with a much larger and better-identified
+  content set behind it.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-32: the reference's `.data` tail order is now known, and our tail is inverted — `g_connections` sits where arrays A and B belong.**
+
+- **The reference's tail, in order:**  game data .. **array A** (0x100a9820,
+  0x90000) .. **array B** (0x1014d8e0, 0x90000) .. `g_connections`
+  (0x101deb00, 0x1321320) .. 4 bytes .. `g_player_slot_overflow_pad`
+  (0x114ffe24, 0x264260) .. CRT band (0x11764084..0x1176759c).
+- **Ours:**  game data .. `g_connections` (0x10035e30, 0x1321320) ..
+  `g_player_slot_overflow_pad` .. CRT band.  So our `g_connections` spans
+  0x10035e30..0x11355f50 and **covers the addresses where arrays A and B are**,
+  while the reference puts 1.11 MB of tables *before* `g_connections`.  The
+  tail ordering is inverted, not merely mis-sized — which is why round 26's
+  band fix broke the file: it corrected one object inside an otherwise
+  wrongly-ordered section.
+- **The next concrete number: 0x739F0 = 473,584 B (0.45 MB) of game data is
+  missing before array A** (our `g_connections` starts at 0x10035e30; the
+  reference's array A starts at 0x100a9820).  That is the piece to name next,
+  and it is smaller than the 1.30 MB of fillers because part of the filler
+  total is the two arrays already identified.
+- **What declaring the arrays would and would not buy.**  Nothing in our build
+  occupies 0x100a9820 or 0x1014d8e0 (no symbols in either window), so a
+  declaration would not collide — but it would also not *place* them there:
+  the linker puts a TU's `.data` contribution wherever the link order takes it.
+  Declaring A and B is correct in content and only pays off once the game data
+  ahead of them is the right size, so the 0x739F0 comes first.  Recording the
+  order so the sequence is not re-derived.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-31: the two ~592 KB "gaps" are two parallel 768 x 768 byte tables, 0x90000 each, and they are now fully identified.**
+
+- **The initialisation loop, from two independent sites** (0x1000c06c and
+  0x10019369, byte-identical bodies):
+
+  ```
+  lea    (%eax,%eax,2),%ecx      ; eax*3
+  shl    $0x8,%ecx               ; eax*768
+  lea    (%ecx,%edx,1),%ebp      ; index = eax*768 + edx
+  call   0x1001a0d0              ; fill 0x40 bytes
+  add    $0x300,%esi
+  inc    %ebx
+  cmp    $0x90000,%esi           ; loop until 0x90000
+  ```
+
+  0x90000 / 0x300 = **768 iterations**, so the structure is **768 records of
+  0x300 (768) bytes**, indexed `[outer*768 + inner]`, each initialised with a
+  0x40-byte fill.
+- **Two parallel arrays, not one object.**  The loop writes a byte at
+  `0x100a9820(%base)` and a byte at `0x1014d8e0(%base)` in the same pass, so
+  there are two arrays initialised together:
+
+  | array | base | extent | end |
+  |---|---|---|---|
+  | A | 0x100a9820 | 0x90000 | **0x10139820** |
+  | B | 0x1014d8e0 | 0x90000 | 0x101dd8e0 |
+
+  Array A's end, `0x10139820`, is exactly the address round 30 found used both
+  as a 4-byte-stride table base (`mov ecx,[ecx*4 + 0x10139820]`) and as a loop
+  bound (`cmp edx, 0x10139820`) — it is the **end sentinel of array A**, and
+  the `[ecx*4 + ...]` form is a second indexing of the same memory.
+- **This closes the identification of 1.11 MB of the 1.30 MB filler total.**  The
+  project's metadata invented `g_before_g_dispatch_table_a` (592,800 B at
+  0x100a8cfc) and `g_before_g_item_def_table` (592,780 B at 0x1014d8c4) as
+  gaps; they are in fact the interiors and tails of these two arrays, which
+  begin 0x4DC and 0x1c earlier respectively.  Declaring the two arrays at
+  0x100a9820 and 0x1014d8e0 with 0x90000 bytes each replaces 1.11 MB of padding
+  with real data — and it is *declaration*, not padding.
+- **Not yet done:** the arrays are identified but not declared, and the same
+  pass writes a byte flag into each (the `mov ... ,%bl` at +0x1014d8e0), whose
+  meaning is still unknown.  Declaring them and checking the residue is the next
+  step, and it is the first change since `g_connections` that removes padding
+  rather than adding it.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-30: the two large objects now have element sizes — one is a 4-byte-stride table, one a 512-byte-stride record array.**
+
+- **`g_before_g_dispatch_table_a` (0x100a8cfc, 592,800 B).**  Its internal
+  address `0x10139820` (5 sites) is used two ways in the reference:
+  `mov ecx, [ecx*4 + 0x10139820]` and `mov edx, [edx*4 + 0x10139820]` at
+  0x1001584e / 0x1001592b — a **4-byte-element table indexed by scaled offset** —
+  and `cmp edx, 0x10139820` at 0x1000ed83 as a **loop bound**, with
+  `mov edi, 0x10139820` at 0x100156d1.  So the address is both a table base and
+  a sentinel; the object is a 4-byte-stride array and the code walks it to that
+  limit.
+- **`g_before_g_item_def_table` (0x1014d8c4, 592,780 B).**  Indexed with
+  `lea ecx, [eax+eax]; shl ecx, 8` — **index x 512**, a record array with a
+  512-byte stride.  Exactly two sites carry that byte sequence (0x1000c06c,
+  0x10019369); the same `shl ecx,8` after a scale-2 `lea` occurs nowhere else,
+  so the stride is specific to this object.  `0x1014d8e0` is a **byte field at
+  +0x1c** of the base, written 15 times (`mov byte [0x1014d8e0], bh` at
+  0x1000c066) — so the record's byte 0x1c is a live flag.
+- **What this buys.**  The two objects are no longer "a gap of 592 KB": one is a
+  4-byte-stride table walked to a sentinel at its own end, the other a
+  512-byte record array with a flag at +0x1c.  That is enough to start naming
+  them honestly and to work out the element counts (the loops that index them
+  give the counts), which is the precondition for declaring them at the right
+  size instead of padding.
+- **Still not done, and it is the slow part:** the element counts, and with them
+  the real names.  Nothing here has changed the file; this round is
+  identification, and it is the rate-limiting step for the whole objective.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-29: the two ~592 KB objects are real and internally referenced — they must be named, not padded. That fixes the order of the remaining work.**
+
+- **The two largest gaps, measured.**  In the game `.data` region the unowned
+  fillers total 1,358,386 B across 159 objects; the two largest are
+  `g_before_g_dispatch_table_a` (592,800 B at 0x100a8cfc) and
+  `g_before_g_item_def_table` (592,780 B at 0x1014d8c4).  Their near-identical
+  sizes say they are the same kind of object, twice.
+- **They are real, not padding.**  The base-relocation scan (the same technique
+  that identified `g_connections`) finds absolute references landing *inside*
+  both: `0x10139820` (5 sites) sits 0x90B24 into the first, and `0x1014d8e0`
+  (15 sites) sits 0x1c into the second.  An object with internal addresses is
+  data the program reads, not a gap between two others.
+- **Why that matters for the objective.**  The objective forbids manual padding,
+  so these two cannot be closed with filler arrays — they have to be identified
+  and declared.  That is the same conclusion round 26 reached for the band,
+  and it now applies to 1.30 MB, i.e. ~78% of the whole remaining gap.
+- **Order of work, settled:** (1) name the large objects, largest first —
+  `g_before_g_dispatch_table_a` and `g_before_g_item_def_table` are 1.11 MB of
+  the 1.30 MB between them, and their internal reference sites are the way in;
+  (2) the remaining ~0.2 MB of smaller fillers; (3) the 0.35 MB of shortfall
+  that is not filler at all; (4) only then does the reference-ordered emit
+  become possible.  Steps 1-3 are reversing work, and step 4 is mechanical once
+  they are done.
+- **Kept from round 28:** the `g_connections` extent fix
+  (`[0x264264]` stride -> `[0x1321320]` 8 slots), with `g_bss_tail` resized to
+  hold the section total constant so the file is unchanged.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-28: `g_connections` was declared with its STRIDE, not its extent — a 20 MB mis-declaration. Fixed, and the real gap is 1.66 MB, not 19 MB.**
+
+- **The bug.**  Four files declared `extern unsigned char g_connections[0x264264]`
+  and `link_stubs.c` defined it that way.  0x264264 is the **per-slot stride**;
+  the array is **8 slots**, 0x1321320 bytes.  Our own code already said so:
+  `ServerMainThread.c` loops `player_slot < g_connections + 0x1321320` and
+  `srv_LoadBuf.c` walks `g_connections + 8 * 0x264264` — both indexing 17.5 MB
+  past the declared end.
+- **Proof from the reference, not from our source.**  Scanning the base
+  relocation table (3,526 entries) for absolute values landing in the supposed
+  hole: **39 hits, every one of them the single address `0x114ffe20`**, all
+  inside one function.  Disassembled, they are `cmp eax, 0x114ffe20` /
+  `cmp esi, 0x114ffe20` — a loop bound.  And `0x101deb00 + 0x1321320 =
+  0x114ffe20` exactly.  The reference's own code uses the array's end as a
+  sentinel, so the array really is 0x1321320 bytes.
+- **What it was hiding.**  Round 27 called the 19.1 MB region "unnamed" and
+  blamed a misleading `size_hint`.  Both were wrong: the region was *named* all
+  along, and `rebrew data bss`'s 20,058,912 B hint was **correct** — it had
+  inferred the true extent from the next symbol while our declaration said
+  2.5 MB.  The gap between the tool and the tree was a real bug in the tree.
+- **Effect, measured.**  With the extent corrected and `g_bss_tail` resized to
+  keep the section total identical, the file is **unchanged** (residue 8,
+  `.text differing 0x0`, imports 100) — but the unaccounted region collapses
+  from 19.1 MB to **1.66 MB**.  Deleting the pad entirely puts the section end
+  at `0x115bc120`, 0x1ab47c short, which measures the true shortfall.
+- **What the 1.66 MB is:** it lies *before* `g_connections` (our build puts it
+  at `0x10035e30`, the reference at `0x101deb00`).  In the game `.data` region
+  the unowned `g_before_*` / `g_text_before_*` fillers total **1,358,386 B
+  (1.30 MB) across 159 of them**, the two largest being
+  `g_before_g_dispatch_table_a` (592,800 B) and `g_before_g_item_def_table`
+  (592,780 B).  So ~78% of the remaining gap is eight large unnamed objects,
+  and they are now a short, concrete list rather than a mystery.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-27: the manifest cannot be completed, and the reason is now a single number: 19.1 MB of unnamed BSS in the reference.**
+
+- **`rebrew data bss` says the BSS is 100% covered with 0 gaps.  That is
+  misleading, and the trap is worth writing down.**  Its `size_hint` for
+  `g_connections` is **20,058,912 B**, but the declaration is
+  `unsigned char g_connections[0x264264]` — 2.5 MB.  The hint is *gap-inferred*:
+  the distance to the next tracked symbol, so an unnamed region is silently
+  charged to whichever symbol precedes it.  A "100% covered, 0 gaps" line and
+  `rebrew-data.toml`'s `size` field (absent for `g_connections`) are two
+  different things.  `scripts/data_placement.py` reports the TOML `size` basis
+  and the honest 18%, which is why the two disagree.
+- **The reference `.data` tail, measured:**
+
+  | region | bytes | in our tree |
+  |---|---|---|
+  | `g_connections` at 0x101deb00 | 2,507,364 declared | same |
+  | **unnamed** up to 0x114ffe24 | **20,058,916 (19.1 MB)** | `g_bss_tail[0x1267a98]`, 19,298,968 B — a stand-in |
+  | `g_player_slot_overflow_pad` at 0x114ffe24 | 2,507,360 | same |
+  | **unnamed** up to 0x1176759c | 2,520,952 (2.4 MB) | absorbed by the same pad |
+
+  So the 0xA9C shortfall is the *difference* between our 19.3 MB pad and the
+  reference's 19.1 MB + 2.4 MB of unnamed BSS.  The two are the same shape; the
+  pad is just the wrong size by 2716 bytes.
+- **Why this is the wall, stated plainly.**  The missing regions are
+  zero-initialised and beyond the section's 0xe000 on-disk bytes, so there is
+  nothing in the file to read.  Their sizes can only come from how the game's
+  code indexes them, which means finding the indexing expressions — reversing
+  work across a 19 MB span, not a manifest to be filled in.  Until that is done
+  the manifest cannot be completed, and round 26 showed that emitting *any*
+  partial correction makes the file worse, not better.
+- **Consequence for the objective, honestly:** "100% file identical straight
+  out of the toolchain" is gated on identifying ~21.5 MB of unnamed BSS in the
+  reference.  Everything else is measured and understood.  The remaining path
+  is long and is real reversing work, not tooling.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-26: the band fix is right in kind and wrong in practice — it cost 748 residue bytes and was reverted.**
+
+- **What was tried.**  Made the 18 tail globals real `.bss` (adding `= 0` so they
+  stop being COMMON) and emitted the three spans the reference has inside the
+  band, in address order: `g_before_sbh_pHeaderScan[0x230]`,
+  `g_before_g_stream_group_table[0xc]`, `g_before_nstream[0x1018]`.  The band
+  arithmetic checks out — those spans plus the globals account for the band's
+  0x1394 bytes to within 8.
+- **It worked on `.data` and wrecked the file.**  `.data` VirtualSize went
+  `0x173fb00` -> `0x1740d44`: the section top moved from **0xA9C short of the
+  reference to 0x7A8 past it**.  But the file residue went **8 -> 756 bytes** and
+  `.text differing` **0x0 -> 0x2f4**, because the `.data` layout is globally
+  load-bearing: shifting it moves the addresses that `.text` operands name, and
+  postlink can no longer repair them.  **Reverted**; `data_globals.c` is
+  byte-identical to HEAD and the gate is back to residue 8, `.text differing
+  0x0`, imports 100.
+- **The lesson, and it is the important part.**  Round 25 said the fix "needs
+  both halves: the globals as real `.bss` objects *and* the spans emitted, in
+  reference order".  This round tested that and it is **still not enough**: the
+  band is correct in isolation but the rest of `.data` is not, so a correct band
+  inside a wrong section is worse than a uniformly short one.  Placement is
+  global — every other contribution has to be right at the same time, which is
+  exactly what the 18%-coverage manifest cannot yet supply.
+- **What this rules out:** no partial `.data` surgery.  Either the whole
+  section is emitted in reference order from a complete manifest, or `.data`
+  stays as it is and postlink keeps doing what it does well.  There is no
+  middle path that improves the file.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 8 header bytes, lint 0/0.
+
+**Round-25: the `.data` shortfall decomposes into exactly two parts, and neither is the CRT library.**
+
+- **The top band, symbol by symbol.**  Over `0x117660e0..0x1176759c` the
+  metadata lists 26 globals; only 4 are real definitions in the tree
+  (`g_owner_window`, `g_log_buffer`, `g_log_file_handle` and the two before
+  them).  The rest fall into exactly two buckets:
+
+  | part | symbols | why it is missing |
+  |---|---|---|
+  | **pooled 0xA9C too low** | `__sbh_sizeHeaderList`, `__sbh_indGroupDefer`, `__sbh_pHeaderScan`, `__sbh_pHeaderDefer`, `__sbh_cntHeaderList`, `__sbh_pHeaderList`, `g_max_pool_alloc_size`, `_crtheap`, `__active_heap`, `g_stream_group_table`, `__nfile`, `__pioinfo`, `__nstream`, `_acmdln`, `g_dllmain_user_handler`, `g_envp_built`, `g_cmdline_parsed`, `g_bss_section_tail` | tentative definitions in `crt_region/data_globals.c` become **COMMON**; LINK pools all 69 of them in its own order and puts the block at `0x11766260..0x11766b00`, where the reference has the last few |
+  | **never emitted** | `g_before_nstream` (0x1018 = 4120 B at `0x11766568`) and the other `g_before_*` fillers | declared `extern` in `section_spans.c`, defined nowhere, kept only because `/OPT:NOREF` would otherwise drop them |
+
+  Those two are the *entire* 0xA9C, and they are the whole reason `.reloc`
+  lands 0x1000 low and six of the eight residual header bytes differ.
+- **They are not LIBCMT's.**  Round 6 already established that no member of
+  `LIBCMT.sp6` *defines* `__nstream`, `__nfile` or `_acmdln` — they are
+  referenced undefined.  So in the original these were defined by the **game's
+  own CRT layer**, which is what `src/crt_region/*.c` is.  That is why the
+  project's tentative definitions are the right idea in the wrong form: the
+  symbols exist, but as COMMON rather than as positioned `.bss` objects.
+- **Why round 2's `= 0` experiment made things worse, restated precisely.**
+  Adding initializers moved them from COMMON into `data_globals.c`'s single
+  `.bss` contribution — one contiguous block — so the internal gaps between
+  them (`g_before_sbh_pHeaderScan`, `g_before_g_stream_group_table`,
+  `g_before_nstream`) were still not emitted and the section came out 0xBC
+  *shorter*.  The fix needs **both** halves: the globals as real `.bss` objects
+  *and* the spans between them emitted, in reference order.  Either alone is
+  worse than the status quo.
+- **What that implies for the honest path.**  The 4120 bytes at
+  `0x11766568` are pure BSS — beyond the section's 0xe000 on-disk bytes, so
+  there is nothing in the file to read — and round 2 showed no `.text`
+  immediate lands in them.  Identifying them means finding how the game's CRT
+  reaches them (base + displacement, not immediates), which is reversing work.
+  Not attempted.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-24: the `rebrew` checkout is an editable tree at `/home/maci/Desktop/Projects/relumea/rebrew` (what the project venv imports), and the `__server.log` object now has identified consumers.**
+
+- **The upstream fix has a home.**  `rebrew` is not a sealed install: the
+  project's venv resolves `import rebrew` to
+  `/home/maci/Desktop/Projects/relumea/rebrew/src/rebrew` (git `main`, with
+  uncommitted work already in it).  So the round-23 finding — array data
+  symbols get no total extent in `rebrew-data.toml`, so `g_rterrlist[18]`
+  reads as uncovered — is fixable there rather than hand-patched here, as
+  AGENTS.md requires.  **Not fixed this round:** it needs rebrew's own test
+  suite green, and starting a second repository's change in the same round as a
+  measurement round is how the two get confused.
+- **The largest unnamed initialised object is now pinned down.**
+  `0x10027078..0x100270e6` is a log-filename table: three dwords
+  (`01 00 00 00 02 00 00 00 08 00 00 00`) then `__server.log`, with
+  `gilde_server.log` and `__dbg.log` on ~0x20 spacing, and a fourth entry
+  starting four zero bytes before another `__server.log` at `0x100270e8`.  It
+  is real, not padding, and it is **referenced from three places in `.text`**:
+  `0x1000266a`, `0x1000347f` and `0x100034c2` — the first is a `push`/immediate
+  use, the other two are in the same function.  `__server.log` itself
+  (`0x10027084`) is referenced from five sites.  Those addresses are the way
+  in: the three consumers identify what the table is for, and only then is it
+  worth naming and declaring.
+- **Why naming alone is not enough, stated so the next round does not try it:**
+  a definition in the tree lands wherever its TU's `.data` contribution lands,
+  not at `0x10027078`.  Naming completes the *manifest*; placement still needs
+  the reference-ordered emit.  The two are separate steps and only the first is
+  ready.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-23: the project's own `rebrew data layout audit` already answers the placement question, and `--fill-data` is ruled out by the objective.**
+
+- **Do not reinvent the audit.**  `rebrew data layout audit --section .data`
+  exists and reports exactly what round 19 established by hand: per-TU
+  `data`/`bss` spans and where they break.  Its verdict: **43 ORDER/SPAN
+  VIOLATIONS** and **244 unowned TOML symbols**.  The worst offender is the one
+  round 19 guessed at — `link_stubs.c.obj`, 74 symbols, data `0x10034610..
+  0x114ffe24`, **0x17310cc (19.2 MB) of BSS**.  `Error.c.obj` spans
+  `0x677918..0x11766204`.  Per-TU data is scattered through the reference, so
+  per-TU placement cannot converge.  **Read this before doing any more
+  hand-rolled analysis of `.data` ordering.**
+- **The 244 unowned symbols are the manifest gaps.**  They are the
+  `g_before_*` / `g_text_before_*` fillers: declared `extern`, defined nowhere,
+  emitted only because `/OPT:NOREF` keeps unreferenced sections.  They are
+  also, in the initialised region, the 18 runs `data_placement.py --gaps`
+  reports with their actual bytes -- which the audit does not show, so the two
+  tools are complementary: the audit says *where placement breaks*, the gap
+  report says *what the uncovered bytes contain*.
+- **`--fill-data` is the wrong tool for this objective, deliberately not run.**
+  It would emit **60 initialised pads "byte-exact from the reference"** plus 27
+  BSS pads.  That is the reference-splicing the 13:26 commit removed and the
+  objective rules out — it manufactures pads instead of naming the objects the
+  reference actually has.  `--own` is the same shape.  Recorded here so a later
+  round does not reach for the shortcut.
+- **One gap is a metadata shortcoming, not a naming job.**  The 72-byte run at
+  0x10033ef0 is `g_rterrlist[18]` (`struct rterr_entry`, `// SIZE 0x8` = the
+  *element*).  The type records `[18]` but no total extent is stored, so the
+  array's real 0x90 bytes read as uncovered.  The reference agrees the table
+  ends at 0x10033f80.  **Array data symbols do not get a total size in
+  `rebrew-data.toml`** — that is a rebrew-side gap, to be reported upstream per
+  the project's rule rather than patched by hand here.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-22: the initialised `.data` manifest now has a ruler, and every one of its 18 remaining gaps is classified.**
+
+- **Tooling: `scripts/data_placement.py --gaps`** lists the runs in the on-disk
+  part of `.data` that no sized tracked symbol covers, each with the reference
+  bytes and an ASCII rendering, and the symbol it sits before.  This is the
+  worklist for step 1 of the plan; it was ad-hoc analysis in round 21 and is now
+  repeatable.  `--section-base` / `--on-disk` make the window explicit, and the
+  default `.data` placement mode is unchanged (253 matched, 100 exact, 153
+  misplaced, 60.5%).
+
+- **18 runs, 279 bytes, all classified:**
+
+  | address | size | content | reading |
+  |---|---|---|---|
+  | 0x10027078 | 110 | `01 00 00 00 02 00 00 00 08 00 00 00 "__server.log"` | a log-name structure: three dwords then the name |
+  | 0x100270e8 | 13 | `"__server.log\0"` | the name |
+  | 0x10033ef0 | 72 | `02 00 00 00 70 63 02 10 / 08 00 00 00 44 63 02 10 …` | an `{index, .text pointer}` table — the `rterrlist` shape |
+  | 0x1002c5a0 | 4 | `a0 f3 00 10` | **a pointer to `cm_ChainNoop`**, immediately before `g_chain_handler_table` |
+  | 0x100317d8 / 0x100317f0 | 4 / 4 | `70 b0 01 10` / `81 a6 01 10` | `.text` pointers (FP-init and error-log entry) |
+  | 0x10027314 / 0x1002733c / 0x10027358 / 0x1002735c | 4 / 1 / 3 / 1 | `"\r\n"`, `"L"`, `"wt"`, `"*"` | string constants |
+  | 0x10027488, 0x1002c3f0, 0x1002d4ec, 0x10033b9c, 0x10031b6c, 0x10031b78, 0x100317f8 | 1-8 | small ints (`0x1f, 0x8b`, `02 03 00 00 02 00 00 00`, `5a 00 01 00`, `ff ff ff ff`) | scalars |
+  | 0x10034618, 0x10034624, 0x1003463c, 0x10034670, 0x10034678 | 1-20 | all zero | genuine padding, 46 B total |
+
+- **Two distinct kinds, and only one of them is work.**  Most runs are real
+  unnamed objects (the `__server.log` structure, the `{index, pointer}` table,
+  the string constants, the `.text` pointers).  A few are tracked symbols whose
+  declared size is a few bytes short — 0x1002c5a0 is the clearest: a pointer to
+  `cm_ChainNoop` sitting immediately before `g_chain_handler_table`, so that
+  table's declared extent starts 4 bytes late.  Fixing sizes is metadata work;
+  naming the rest is reversing work.
+- **Note that matters for the earlier rounds:** 0x1002c5a0 is a *data* pointer
+  to `cm_ChainNoop`, the same function the round-14 COMDAT relocation left
+  dangling.  So `cm_ChainNoop` has two data-only referents, in two different
+  tables, and both are invisible to a `.text`-only scan.  Any future COMDAT
+  work has to look at data, not just code.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-21: the initialised `.data` manifest is 99.5% complete, and the 292 missing bytes are real unnamed objects, not padding.**
+
+- **The on-disk part of `.data` is essentially mapped already.**  Over
+  `0x10027000..0x10035000` (0xe000 = 57,344 B), **249 sized tracked symbols
+  account for 57,059 B — 100%**, leaving **292 B in 22 uncovered runs**.  So
+  the initialised region can be emitted in reference order from the tree; the
+  manifest for it is essentially finished.
+- **The 292 missing bytes are real objects, and they are identifiable.**  Read
+  from the reference:
+
+  | address | size | content | what it is |
+  |---|---|---|---|
+  | 0x10027078 | 110 B | `01 00 00 00 02 00 00 00 08 00 00 00 "__server.log"` | an index table plus the `__server.log` name |
+  | 0x100270e8 | 13 B | `"__server.log\0"` | the name itself |
+  | 0x10033ef0 | 72 B | `02 00 00 00 70 63 02 10 / 08 00 00 00 44 63 02 10 …` | an `{index, pointer}` table into `.text` |
+  | 0x1002c3f0 | 8 B | `02 03 00 00 02 00 00 00` | dispatch data, next to `g_dispatch_table` |
+  | 0x1003463c | 8 B | all zero | genuine padding |
+
+  So this is naming work, not reverse-engineering: four or five objects the tree
+  has no name for.  Notably `0x10033ef0` is an index/pointer table into
+  `.text`, which is exactly the shape of the `g_chain_handler_table` class of
+  object — and such tables are what the round-14 COMDAT problem hinged on, so
+  naming them also makes them visible to the placement work.
+- **What the manifest still lacks** is the BSS tail: 0x174059c total, 4.33 MB
+  accounted for by sized symbols (18%), the rest unnamed.  That is the larger
+  half and it is where the COMMON block sits.
+- **Order of work, now concrete:** (1) name the ~5 initialised objects above --
+  small, bounded, and it completes the initialised manifest; (2) map the BSS
+  tail; (3) emit `.data` in reference order; (4) `.text` operands follow.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-20: the `.data` problem is scoped, and the manifest a re-emit needs does not exist yet.**
+
+- **Two facts reconciled.**  The raw `.data` bytes differ from the reference by
+  only 26, yet 153 of 253 tracked symbols are "misplaced".  Both are true
+  because most of `.data` is zeros: the two candidate addresses for
+  `g_log_mode_flags` (0x10034618 reference, 0x1003472c built) are **all zeros in
+  both files**.  A byte comparison cannot see a shift across zero padding, so
+  the 26-byte figure massively understates the problem.  **The symbol table is
+  the only signal**, which is why `data_placement.py` exists.
+- **The section splits into three problems, and they are not the same size:**
+
+  | part | extent | state |
+  |---|---|---|
+  | initialised `.data` (on disk) | 0xe000 = 57,344 B | 26 B wrong |
+  | BSS extent (VirtualSize) | 0x174059c = 24.4 MB | **0xA9C short** (round 2's wall) |
+  | symbol placement | 253 tracked | 100 exact, **153 misplaced** |
+
+- **The manifest for a re-emit is incomplete — this is the concrete gap.**
+  `data_placement.py` now reports coverage: **551 sized tracked symbols account
+  for 4,331,390 bytes of a 24,380,828-byte section, 18%.**  So "emit every
+  tracked symbol at its reference offset" cannot tile `.data`; the other 82% is
+  the unnamed BSS tail and inter-TU padding.  Building that manifest -- every
+  byte of the reference `.data` accounted for by a named declaration with a
+  size -- is the prerequisite for emitting the section from source, and it is
+  data work, not tool work.
+- **What the placement deltas mean for the build.**  The small positive deltas
+  (+0x80..+0x300) are inter-TU ordering in the initialised region: the
+  reference interleaves contributions from many TUs where our link groups each
+  TU's `.data` contiguously.  The huge negative ones (-0x172f978) are the BSS
+  tail: the linker pools the 69 COMMON symbols and puts the block early, where
+  the reference has it last.  **The same COMMON problem as round 2**, now shown
+  to account for both halves.
+- **Consequence for the objective:** the file-level residue (8 header bytes) is
+  small, but reaching it *without* postlink needs the `.text` operands to name
+  data at the reference's addresses, and that needs this placement fixed.  The
+  work is now scoped and ordered: manifest -> emit `.data` in reference order ->
+  operands follow.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-19: reordering cannot fix `.data` — the reference layout is not a permutation of per-TU sections. The real blocker now has a ruler.**
+
+- **The obvious fix is ruled out, with numbers.**  Idea: extract each object's
+  `.data` into its own command-line object and order them by reference VA, the
+  trick `make_split_rsp.py` already does for `.text`.  It cannot work:
+
+  | measurement | value |
+  |---|---|
+  | objects with reference-known `.data` symbols | **35** of ~190 contributors |
+  | adjacent-range overlaps when ordered by min reference VA | **13** |
+  | `link_stubs.c.obj` symbol span | `0x100241a0 .. 0x114ffe24` |
+  | `<common>` symbol span | `0x10025688 .. 0x11767590` |
+  | `Error.c.obj` symbol span | `0x10027078 .. 0x11766204` |
+
+  A single TU's data symbols are scattered across the whole reference `.data`,
+  because the BSS tail and the COMMON block interleave with the game data
+  throughout.  No permutation of the existing sections reproduces the layout.
+- **What the `.data` problem actually is, measured on the shipped link:**
+  **253** tracked symbols match the reference by name, **100 exact, 153
+  misplaced (60.5%)**.  Two populations: game data shifted *later* by roughly
+  0x100-0x300 (`g_log_mode_flags` +0x114, `g_stat1..3` +0x128, `g_crash_callback`
+  +0x108), and BSS-tail symbols ~0x172f970 **earlier** than the reference —
+  i.e. the linker places the COMMON block early where the reference has it last.
+- **Tooling: `scripts/data_placement.py`** — the standing ruler this problem
+  never had.  `data_extent_check.py` checks that a symbol's *size* does not run
+  into its neighbour; `postlink_residual.py` reports `.data` as a byte count;
+  neither says where a symbol *went*.  This matches every tracked
+  `rebrew-data.toml` name against the LINK map and reports exact/misplaced
+  counts, a delta histogram and the worst offenders, with `--json`.  It found the
+  60.5% figure above in one command.  (`.rdata` reports 0 matches — the tracked
+  names are `.data` globals; that mode is there for when they are not.)
+- **The only route left, stated plainly:** the reference's `.data` has to be
+  *emitted* in reference order — generalised `emit_crt_data.py`, which already
+  does exactly this for the 17-object CRT band, extended to the whole section,
+  with every object as a link-time input rather than a postlink patch.  That is
+  a real reversing task (it needs the reference's data layout as a manifest) and
+  it is where the remaining 100% lives.  **Not started.**
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-18: the COMDAT re-emitter is built and the `/OPT:REF` direction is closed for good. The real blocker is `.data` layout, not `.text`.**
+
+- **Tooling: `scripts/flatten_comdat.py`** clears `IMAGE_SCN_LNK_COMDAT` in a
+  COFF object's section headers and substitutes the result into the response
+  file.  It is a **byte-level patch of the original object**, not a rebuild:
+  the first attempt rebuilt `.text` alone with `split_coff.build_object` and
+  every `??_C@...` string literal went unresolved, because those literals live
+  in the same object's `.rdata`.  Patching one characteristics bit leaves the
+  relocations, `.rdata` and line numbers exactly as CL emitted them.
+- **Applied to all 72 objects holding the 91 data-only-referenced functions.**
+  It works, and it is not the answer:
+
+  | link | `.text` VS | `.text` bytes differing |
+  |---|---|---|
+  | `/OPT:REF` + includes, only `cm_ChainNoop` flattened (round 17) | 0x22870 | 4,356 |
+  | `/OPT:REF` + includes, **all 72 flattened** | 0x22870 | **5,348** |
+  | `/OPT:NOREF` (shipped) | 0x22a98 (+626) | 4,302 |
+  | reference | 0x22846 | 0 |
+
+  Flattening the other 71 made it slightly *worse*.  So the single-object
+  result in round 17 was the whole of the COMDAT effect; the remaining 71 were
+  never the problem.
+- **Why REF loses anyway.**  Its `.text` gets much closer in size (+42 vs
+  +626) but ends up with *more* differing bytes than NOREF (5,348 vs 4,302).
+  The extra ~1,000 are operands: REF places the game data differently —
+  `_g_log_buffer` lands at `0x10034b38` under REF against `0x10034618` under
+  NOREF, while the reference has it at `0x11766100` — so every `.text`
+  operand naming it moves.  **Neither build reproduces the reference's `.data`
+  layout; postlink currently papers over that by rewriting operands and
+  blitting `.data`.**  That is the real blocker, and it is a data problem, not a
+  text one.
+- **Direction closed:** `/OPT:REF` trades 600 bytes of `.text` for ~1,000 bytes
+  of wrong operands, and still needs the `.data` layout fixed.  Rounds 11-18
+  have now measured this four ways; it is not the path.
+- **What a 100% build actually needs, stated plainly:** the link must place
+  `.data` at the reference's addresses, which means the game data objects have
+  to be emitted in reference order by something that controls it — the same
+  problem `make_split_rsp.py` already solves for `.text` and which the
+  COMMON block defeats today (round 2: 69 tentative definitions pooled by the
+  linker, with the top of `.data` 0xA9C short of the reference).  That is the
+  next thing to attack, and it is a real reversing task, not a flag.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-17: re-emitting a data-only-referenced COMDAT as non-COMDAT cuts the `/OPT:REF` build's `.text` divergence from 81,807 to 4,356 bytes. The technique is validated; the tool is not built yet.**
+
+- **The experiment.**  `cm_ChainNoop` is referenced 133 times from
+  `alchemistry_logic3.c.obj`'s `.data` and never from code.  Its CL object emits a
+  COMDAT `.text`, and under `/OPT:REF` LINK relocates it to the end of `.text`
+  and leaves the `.data` relocations stale (round 14).  Re-emitting that one
+  object's `.text` as an **ordinary non-COMDAT** section (same 16 bytes, same
+  symbol `_cm_ChainNoop`, `IMAGE_SCN_LNK_COMDAT` cleared in the section
+  characteristics) and putting it on the link line in place of the CL object
+  puts it back at **0x1000f3a0** with byte-identical contents.
+- **Measured, that single substitution:**
+
+  | | `.text` VS | imports | thunks | `call [abs]` | `.text` bytes differing |
+  |---|---|---|---|---|---|
+  | `/OPT:REF` + includes (round 14) | 0x22870 | 100 | 11 | 211 | **81,807 / 141,382** |
+  | + `cm_ChainNoop` non-COMDAT | 0x22870 | 100 | 11 | 211 | **4,356 / 141,382** |
+  | reference | 0x22846 | 100 | 11 | 211 | 0 |
+
+  A 94.7% reduction, and the thunk range now matches the reference exactly
+  (`0x10015513..0x10023840` in both).  The raw `.data` still differs by the same
+  26 bytes as the shipped build, so the remaining `.text` diffs are not `.data`
+  content.
+- **Two traps, both mine, both recorded in the object builder:** the COMDAT bit
+  is `0x1000` in the *characteristics* field and copying the CL value
+  unchanged leaves it set (LINK then demands the aux record and fails LNK1162);
+  and a COFF symbol name must carry the leading underscore, so `cm_ChainNoop`
+  must be written `_cm_ChainNoop`.
+- **What is left, 519 runs / 4,356 bytes:** the first cluster is a 121-byte
+  difference inside `_SendBroadcastPacket` (0x10001143..0x100011bb) whose first
+  byte is `3d` (`cmp eax,imm32`) against our `19` (`sbb eax,imm32`) — a real
+  codegen difference, not an address.  The rest are mostly 1-4 byte operands in
+  the `0x1002xxx` band.
+- **Next lever:** the same substitution is needed for the other data-only
+  referenced functions.  Round 15 counted **91** of them across the binary, and
+  `cm_ChainNoop` was simply the first one that mattered.  The tool is a
+  re-emitter that takes a CL object, copies its `.text` sections without the
+  COMDAT bit, and is substituted into the response file — `/tmp/mkflat.py` in
+  this round's scratch, ~30 lines, proven on one object.  **Not committed, and
+  not run over all 91** — a silent relocation failure is exactly the failure
+  mode round 14 nearly shipped, so the full sweep needs the byte-level check
+  (not the four summary numbers) as its gate.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-16: three dead/misnamed link stubs removed. Trailing content 632 -> 584 B, `.text` 0x22ac8 -> 0x22a98.**
+
+- **Method that worked in round 15, applied three more times.**  For each
+  placeholder in the trailing block: find what the split set already provides at
+  the address the placeholder's own comment claims, and check what the call
+  site's arguments really are.  All three were the same mistake — a real
+  reference function present under its library name, shadowed by a
+  hand-written stand-in under a placeholder name.
+
+  | placeholder | claimed address | actually provided by | call site's arguments | verdict |
+  |---|---|---|---|---|
+  | `fcn_1001af30` | 0x1001af30 `_strchr` | `1001af30__strchr.obj` → `_strchr` | **no referrer at all** | dead, deleted |
+  | `fcn_10020ff8` | 0x10020ff8 `_strtoxl` | `10020ff8_.text.obj` → `_strtoxl` | **no referrer at all** | dead, deleted |
+  | `_crt_locked_call4a` | 0x1001a931 | `1001a931_.text.obj` → `_fread` | `(buf, 1, remaining, stream)` = `fread` | vfs2.c now calls `fread`; stub deleted |
+
+  The two "dead" ones were only being emitted because the link runs
+  `/OPT:NOREF`, which keeps unreferenced sections — a 32-byte tax for nothing.
+- **Spelling trap worth keeping:** writing `_fread` in C decorates to
+  `__fread` and fails with LNK2001.  The split object's `_fread` is the
+  decorated form of plain `fread`, and `vfs2.c` already includes `<stdio.h>`,
+  so the correct spelling is `fread`, cast to `unsigned int` at the call.
+- **Measured:** `.text` 0x22ac8 -> **0x22a98**; trailing content 632 -> **584 B
+  of 93 symbols** — 1 `link_stub` (6 B) and 92 import thunks (578 B).  Every
+  remaining trailing byte except one is now an import thunk.
+- **Left alone deliberately:** `crt_toupper` (the last stub, 6 B) is referenced
+  by both `vfs_c/vfs_OpenStream.c` and the GOLDTL twin, and the real `_toupper`
+  sits at 0x1001b0c0 — the same address the GOLDTL comment says the call
+  reaches.  Renaming it is worth 6 bytes but touches both targets, and the
+  stub lives in the server-only `link_stubs.c`; that is a cross-target decision,
+  not a server-only one.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-15: `0x10009310` is the user DllMain, not `exit_handler`. Renaming it deleted a 6-byte stand-in and put the CRT's call where the reference has it.**
+
+- **The stub was hiding a misnamed real function.**  The trailing block
+  contained a 6-byte `push 1; pop eax; ret 0xc` at `0x10023846`, emitted by
+  `scripts/emit_defs.py` because the linker had no `_DllMain@12` to resolve.
+  The reference's user DllMain is at **`0x10009310`**, and our tree already
+  emitted it — as `_exit_handler@12`.  The project's own
+  `server_internal.h` said "DllMain calls `_exit_handler@12`", so the call was
+  known and the name was simply never recognised for what it is.
+- **The evidence, all four checks agreeing:**  `0x10009310` is
+  `b8 01 00 00 00 c2 0c 00` = `mov eax,1; ret 0xc`; the call site at `0x1001ba1b`
+  is `push edi; push esi; push ebx` then `call 0x10009310`, a three-argument
+  stdcall; it is the **only** call site in the binary; and no `.rdata`/`.data`
+  table references it.  That is `DllMain(HINSTANCE, DWORD, LPVOID)`.
+- **Fixed:** renamed the C function to `DllMain` and dropped the now-redundant
+  `// LIBRARY: SERVER 0x10009310 / _exit_handler@12` marker (0x10009310 becomes
+  an ordinary annotated function; `library_identified` 306 -> 308 by the tool's
+  own count, function total unchanged at 262).
+- **Measured:** the CRT startup's call at `0x1001ba1f` now targets `0x10009310`
+  — the reference's address — instead of the stand-in, so it is correct **before
+  postlink** rather than after.  `def_dllmain.obj_s0.obj` no longer exists.
+  Trailing content 642 -> **632 B of 96 symbols**: 4 `link_stubs` (70 B) and
+  92 import thunks (562 B).  `.text` VirtualSize is unchanged at 0x22ac8 because
+  the 6 freed bytes fall inside the last 16-byte section.
+- **`/OPT:REF` is closed for good.**  Quantified before abandoning it: the
+  `/OPT:REF` build differs from the reference in **81,807 of 141,382 `.text`
+  bytes (57.9%)**, the first divergence at `0x1001143` and 79,986 of those bytes
+  at or after `0x1000f3a0`.  The −0x10 shift from the one relocated COMDAT
+  accounts for most of it.  Underneath that there are **91 functions referenced
+  from `.data` but from no code** (`cm_ChainNoop` is not special), so REF's
+  correctness would depend on every one of them happening to be re-emitted as
+  non-COMDAT — a new tool per object, and the failure mode is a silently
+  misbound function pointer, which is how round 14 nearly shipped a broken
+  image on four green summary numbers.
+- **Next lever, same shape as DllMain:** the 4 remaining `link_stubs`
+  (`fcn_1001af30`, `fcn_10020ff8`, `crt_toupper`, `crt_locked_call4a`, 70 B) are
+  placeholders the reference does not have at those addresses.  They are very
+  likely the same case — a real reference function our tree has under a
+  placeholder name.  Check each against the reference the way DllMain was
+  checked: find the real target of the call that reaches it.
+- **Gate unchanged:** verify 262/262, imports 100, `.text differing 0x0`,
+  residue 0, lint 0/0.
+
+**Round-14: the `/OPT:REF` link that looked like a triumph is silently WRONG. The four matching numbers were a false positive.**
+
+- **What was actually built.**  Under `/OPT:REF` + the derived `/INCLUDE` set,
+  `.text` 0x22870 (+42), imports 100, thunks 11, `call [abs]` 211 — every
+  headline number matching the reference.  And the image is broken:
+
+  | | bytes at `0x1000f3a0` | dispatch entries pointing there |
+  |---|---|---|
+  | reference | `33 c0 c3` (`cm_ChainNoop`: `xor eax,eax; ret`) | 133 |
+  | `/OPT:NOREF` (shipped) | `33 c0 c3` | 133 |
+  | `/OPT:REF` + `/INCLUDE` | **`55 56 8b 74 24 0c`** (`_cm_ExSetGebBesitzer`'s prologue) | 133 |
+
+  All 133 entries of `g_chain_handler_table` (in
+  `alchemistry_logic3.c.obj`'s `.data`) still resolve to `0x1000f3a0`, but under
+  REF that address now holds a different function.  **The dispatch table calls
+  the wrong function.**  The relocation was not applied when the COMDAT moved.
+- **The mechanism, now established.**  `cm_ChainNoop` is referenced 133 times
+  from a `.data` table and **zero** times from code — no `call rel32` and no
+  32-bit immediate anywhere in the reference's `.text` (both scanned).  Under
+  `/OPT:REF`, LINK does not treat a data-only reference as a reference for COMDAT
+  placement: it keeps the section (the pointers must resolve) but relocates it
+  after every command-line object, and the `.data` relocations are then stale.
+  `/INCLUDE` does not prevent this — `_cm_ChainNoop` was already in the set and
+  adding it again changed nothing.
+- **Consequence: `/OPT:REF` is not usable for this build.**  Rounds 11–13 recorded
+  it as the solution to the 642-byte overshoot on the strength of four summary
+  numbers.  Those numbers are real and so is the thunk win, but they do not
+  survive a byte check, and a link that matches on every aggregate while
+  misbinding a function pointer is worse than one that is visibly 642 bytes
+  long.  **Do not flip the shipped link to `/OPT:REF`.**
+- **Lesson worth keeping:** aggregates (`.text` size, import count, thunk count,
+  call count) all agreed with the reference while the image was wrong.  The
+  check that caught it was reading the bytes at the address the relocation
+  points to — not any of the summaries.
+- **Keep:** Round-10 stack (the round whose conclusion — that the import-library
+  route has no clean answer on this toolchain — still stands, now for a stronger
+  reason).
+
+**Round-13: the REF link's last two defects are located — one relocated COMDAT, and the forced import slots landing at the front of the IAT.**
+
+> **Superseded by round 14** — the first defect is not a placement nuisance but a
+> broken relocation.
+
+- **`/INCLUDE` does not pin a COMDAT's position, only its existence.**
+  `_cm_ChainNoop` (16 bytes) is an unreferenced COMDAT.  Under `/OPT:NOREF` it
+  links in place at `0x1000f3a0`; under `/OPT:REF` it is relocated to the very
+  end of `.text` (`0x10023840`) **even though it is already in the include
+  set** — adding it again changed nothing.  Those 16 bytes are the entire early
+  shift: **443 of the 492 displaced symbols sit at exactly −0x10**, and the
+  audit's "exactly at their reference VA" collapses from 246 to 1 because of one
+  symbol.  The reference has code there, so our tree is missing whatever calls
+  it; forcing the section in is not the same as making it referenced.
+- **Forcing `__imp__` on the command line destroys the IAT order.**
+  `crt_region/crt_imports.c` already emits all 100 `/include:__imp__X` in the
+  reference's IAT order.  Adding `/INCLUDE:__imp__AllocConsole@0` and
+  `/INCLUDE:__imp__recv@16` on the link line puts them at the **front**:
+  `AllocConsole` lands in slot 0 (`0x10024000`, reference slot 18) and `recv`
+  at `+52`.  19 further `__imp_` symbols shift `+4` behind them.  So the import
+  *count* is right (100) but the *order* is not, and the reference's `.idata`
+  bytes would differ.  The forced slots have to enter in reference order, or be
+  forced some other way entirely.
+- **Net position:** `.text` 0x22870 (+42), imports 100, thunks 11, `call [abs]`
+  211 — the four headline numbers are right, and the two defects above are why
+  the bytes are not yet.  Neither is solved; both are located.
+- **Tooling note:** `ref_include_set.py` diffs the two maps by symbol
+  *presence*, so a symbol that moves rather than disappears is invisible to it
+  — that is why `_cm_ChainNoop` never entered the set.  The diff needs to
+  compare addresses, not just membership.
+- **Keep:** Round-12 stack.
+
+**Round-12: imports 100, thunks 11, `call [abs]` 211 — all three now match the reference exactly. Only 42 bytes of `.text` stand between this link and the reference.**
+
+- **The dead imports are back, without their thunks.**  Round 11's REF build
+  imported 98 of 100: `AllocConsole` and WS2_32 `ord16`, which the reference
+  imports but never calls, so discarding their thunks discarded the descriptor
+  entries too.  Forcing the **plain** name (`/INCLUDE:_AllocConsole@0`) drags
+  the thunk back and costs 6 bytes apiece (thunks 13, `.text` 0x2287c).
+  Forcing the **`__imp_` slot symbol** instead (`/INCLUDE:__imp__AllocConsole@0`,
+  `__imp__recv@16`) keeps the IAT slot and leaves the thunk discarded — which is
+  precisely the reference's shape.  My first attempt failed with LNK2001 only
+  because I wrote `_AllocConsole`; the map says `_AllocConsole@0`.
+- **Measured, tool output against the reference:**
+
+  | | `.text` VS | imports | thunks | `call [abs]` |
+  |---|---|---|---|---|
+  | this link | 0x22870 (+42) | **100** | **11** | **211** |
+  | reference | 0x22846 | 100 | 11 | 211 |
+
+- **Tooling: `scripts/ref_include_set.py` derives the whole set.**  It links the
+  same object set twice (`/OPT:NOREF`, then `/OPT:REF`), diffs the maps, and
+  emits `/INCLUDE:` for each `.text` symbol REF drops (174) plus the `__imp_`
+  slot for each import the REF build loses (1 of 2 found automatically).  Two
+  parsing bugs of mine are recorded in the code because both produced a
+  plausible-looking but wrong answer: the flags column is absent on `__imp_`
+  lines, and the section column is `0001:offset` so the *offset* was being read
+  as the section, which silently emptied the `.text` filter and returned 0
+  includes.  It also links a third time, carrying the 174, so the import diff
+  is like-for-like — without that it reports 7 dropped imports instead of 1.
+- **Known limitation of the tool:** ordinal imports cannot be matched by name,
+  so WS2_32 `ord16` is reported (`# no __imp_ symbol found for dropped import
+  ord16`) and must be added as `/INCLUDE:__imp__recv@16`.  Deriving it would
+  mean resolving the ordinal to a name through the NOREF IAT slot.
+- **Still not switched.**  The shipped link keeps `/OPT:NOREF`; flipping is now
+  one command away and every import/thunk/call metric matches, but the gate has
+  not been run in that configuration, and the last 42 bytes are unattributed.
+  Flipping before both are done risks a regression with no diagnostic.
+- **Keep:** Round-11 stack.
+
+**Round-11: the 642-byte overshoot is reducible to 42. `/OPT:REF` plus a derived `/INCLUDE` set.**
+
+- **The lever.**  `/OPT:NOREF` keeps unreferenced sections, which is what drags
+  89 import thunks in; `/OPT:REF` drops them but also 174 real symbols.
+  `/INCLUDE:<sym>` names a symbol and so forces the section defining it.  So:
+  run under `/OPT:REF` and force back **exactly** the symbols REF drops, which
+  is every dropped symbol *except* the import thunks we want gone.  Measured on
+  the shipped object set:
+
+  | link | `.text` VS | thunks | `call [abs]` | imports |
+  |---|---|---|---|---|
+  | `/OPT:NOREF` (shipped) | 0x22ac8 | 103 | 211 | 100 |
+  | `/OPT:REF` alone | 0x18a50 | 10 | 190 | 98 |
+  | **`/OPT:REF` + `/INCLUDE` x174** | **0x22870** | **11** | **211** | 98 |
+  | reference | 0x22846 | 11 | 211 | 100 |
+
+  **Overshoot 642 -> 42 bytes.**  Thunks land on the reference's 11 and
+  `call [abs]` returns to 211, the reference's own count.  This retires
+  round 9's "REF drops 177 real symbols, so REF is dead" and round 10's
+  "the last 642 bytes need something not yet conceived" — both were true only
+  for `/OPT:REF` *alone*.
+- **Tooling added: `scripts/ref_include_set.py`.**  It derives the set rather
+  than hard-coding it: links the same object set twice (`/OPT:NOREF` and
+  `/OPT:REF`), diffs the two maps, and emits one `/INCLUDE:` per dropped
+  non-import symbol.  Verified end to end — the tool's own output relinks to
+  0x22870 / 11 thunks / 211 calls, matching the hand run.  `/INCLUDE` on the
+  thunks is available behind `--keep-import-thunks` but is off by default.
+- **Not switched, deliberately.**  The shipped link still uses `/OPT:NOREF`,
+  because the REF build imports **98 of 100**: `AllocConsole` and WS2_32
+  `ord16` are imported by the reference but never called, so with their thunks
+  discarded the slots go too, and `/INCLUDE:__imp_X` does not hold them
+  (`/INCLUDE:_AllocConsole` fails LNK2001 — it will not pull the archive member
+  on its own).  Flipping the link now would regress the gate's "imports match
+  the reference (100)".  **That is the next thing to solve.**
+- **Also still open:** the residual 42-byte `.text` overshoot, now small enough
+  to attribute function by function.
+- **Keep:** Round-10 stack.
+
+**Round-10: the synthesised-`.idata` route is de-risked and closed. LINK accepts the object but will not register the import directory.**
+
+- **The object builds and LINK reads it.**  `scripts/emit_idata.py` emits a
+  one-section `.idata` (descriptors, ILT, IAT, hint/name, dll names) with each
+  `__imp__X` as a COFF **ABSOLUTE** symbol (section 0xFFFF) pointing into the
+  IAT.  After fixing two packing bugs of my own — `"<IhHBB"` widened to
+  `"<IIHBB"`, which made every symbol record 12 bytes instead of 10 and shifted
+  the whole table (LINK reported `LNK1106 ... cannot seek to 0x200b5`, which is
+  the resulting garbage long-name offset), and `PointerToRelocations` left
+  non-zero with `NumberOfRelocations` zero — the object links cleanly.
+- **The blocker is one specific thing: the import directory stays 0.**
+  `IMAGE_DIRECTORY_ENTRY_IMPORT` RVA is `0x0` in the linked DLL.  LINK lays our
+  `.idata` down as ordinary data and never points the directory at it, so the
+  loader would find no imports.  The section is present and correct; nothing
+  registers it.  This is exactly the risk round 9 flagged as unproven — now
+  proven, and it fails.
+- **`.def IMPORTS` cannot cover for it.**  Tested on the same 0-arg stdcall
+  import: `LNK4017: GetTickCount statement not supported for the target
+  platform; ignored`, and the directory is still 0.  Combining the `.def` with
+  our absolute-`__imp__` object links but still yields directory 0.  So on this
+  toolchain the import directory can only be produced by an **import library**,
+  which is what drags the thunk `.text` sections in with it.
+- **Where that leaves the 566 bytes.**  Every route to "no import library, own
+  descriptors" is now closed with evidence: `/OPT:REF` drops 177 real symbols
+  (round 9), `.def IMPORTS` is LNK4017, a synthesised `.idata` is not
+  registered.  What is left is to make the import libraries' thunk sections
+  harmless, which means the split machinery has to place the IAT where the
+  reference has it and drop the 89 thunks some other way — or to accept that
+  the last 642 bytes need something not yet conceived.  **Nothing attempted
+  this round beyond the probe.**  The emitter is kept because the probe is the
+  evidence, and because it would be the tool if a registration route is found.
+- **Keep:** Round-9 stack.
+
+**Round-9: `/OPT:REF` is quantified and dead; `.def IMPORTS` is closed by LNK4017. The remaining route is a synthesised `.idata`.**
+
+- **What `/OPT:REF` actually drops: 266 symbols, and they are not all junk.**
+  Relinked the identical object set with `/OPT:REF` and diffed the two maps:
+
+  | provider | dropped |
+  |---|---|
+  | `KERNEL32:KERNEL32.dll` | 80 |
+  | `WS2_32:WS2_32.dll` | 9 |
+  | our own objects (`spiel622.c`, `alchemistry_logic2.c`, `CrashDumpUnhandledExceptionFilter.c`, `ErrorModule.c`, …) | 177 |
+
+  So **89 of the dropped symbols are exactly the thunks we want gone**, and
+  **177 are real code the reference has** — including
+  `_CrashDumpUnhandledExceptionFilter@4` and `_EmitCrashModuleLine`.  `/OPT:REF`
+  prunes transitively: drop a section and the references that reached only
+  through it go with it.  This is why plain `/OPT:REF` is the wrong lever, with
+  the numbers to back it rather than "it over-prunes".
+- **`.def` `IMPORTS` is a dead end for this binary.**  MSVC6 LINK accepts the
+  syntax and links, but emits `LNK4017: <name> statement not supported for the
+  target platform; ignored` for stdcall imports — and 99 of this DLL's 100
+  imports are stdcall.  Verified on a 3-line `__declspec(dllimport)` repro
+  (identical output either way, 3 thunks, so the repro does not by itself prove
+  the win, but the LNK4017 does close the route).  Not pursued further.
+- **Where that leaves the fix.**  The thunks live in the import library members'
+  `.text` and are kept only because of `/OPT:NOREF`.  To drop them without
+  `/OPT:REF` the import libraries must not supply a `.text` at all, so the
+  import descriptors have to be synthesised — an object carrying `.idata`
+  (descriptors, ILT, IAT, hint/name table) with `__imp__X` as absolute symbols
+  into it, the same way `emit_defs.py`, `emit_crt_data.py` and
+  `emit_absolute_obj.py` already emit theirs.  There is a cheaper variant worth
+  trying first: `split_coff.py` can already extract and rebuild archive members,
+  so the import library members could be re-emitted with their `.text` section
+  dropped and everything else intact.  **Neither attempted.**  Not yet proven
+  that MSVC6 will accept a hand-built descriptor, and a wrong descriptor makes
+  the DLL unloadable — that is the risk to retire first, on a scratch binary.
+- **Keep:** Round-8 stack.
+
+**Round-8: the thunks are `/OPT:NOREF`. Measured, and it corrects rounds 6 AND 7 — both of which I got wrong.**
+
+- **Round 7's headline was my own bug.**  "Without `/INCLUDE` the build has zero
+  imports" came from a counter that read data directory **index 0** — the
+  *Export* table — as if it were the import table.  Re-counted with index 1: the
+  build has **100** imports, same as the reference.  There was never a zero.
+  `scripts/import_thunk_census.py` now counts imports and the docstring records
+  the trap.
+- **Round 7's conclusion was wrong too.**  With correct counters, disabling all
+  100 `/INCLUDE:__imp__X` directives gives **98** imports and 101 thunks (100
+  into the IAT), not 0 and not a collapse.  So `/INCLUDE` accounts for 2
+  imports and 2 thunks.  It is not the cause.  (Round 6 said the same thing
+  correctly, from wrong numbers; round 7 said the opposite, from a worse bug.)
+- **The real cause, measured.**  The link line carries **`/OPT:NOREF`**, which
+  tells LINK to keep unreferenced sections — and an MSVC6 import library keeps
+  each function's `jmp dword ptr [IAT]` thunk in the member's `.text`.  Relinked
+  the identical object set with `/OPT:REF` instead:
+
+  | build | imports | thunks | call [abs] | `.text` VS |
+  |---|---|---|---|---|
+  | `/OPT:NOREF` (shipped) | 100 | **103** (102 into IAT) | 211 | 0x22ac8 |
+  | `/OPT:REF` (probe)    | 93  | **10**  | 190 | 0x178f0 |
+  | reference             | 100 | **11**  (10 into IAT)  | 211 | 0x22846 |
+
+  The thunks collapse to 10 against the reference's 11.  **The cause is
+  `/OPT:NOREF`, confirmed by direct experiment.**
+- **But plain `/OPT:REF` is not the fix.**  It over-prunes: imports 100 -> 93,
+  `call [abs]` 211 -> 190, and `.text` collapses by 0xB1D8 bytes, discarding real
+  code the reference has.  `/OPT:NOREF` is load-bearing here.  So the fix has to
+  keep NOREF and stop the import libraries' thunk sections from riding along —
+  most likely by not linking the import libraries on the command line at all and
+  emitting the import descriptors the way `emit_defs.py` / `emit_crt_data.py`
+  already emit their objects.  Not attempted; not yet proven that MSVC6 will
+  accept descriptors from a synthesised object.
+- **Also settled:** `call dword ptr [IAT]` is 211 in the shipped build *and* in
+  the reference, so the tree's call sites already match — no `dllimport` work is
+  needed anywhere.  The first thunk is at `0x10015513` in both.
+- **Keep:** Round-5 stack.
+
+**Round-7: round 6's "refutation" was itself wrong — a bad measurement. The `/INCLUDE:__imp__X` mechanism IS what brings the thunks.**
+
+> **Superseded by round 8** — both the refutation and the reversal rested on bad
+> measurements.  Kept for the record; do not act on either.
+
+- **The bad measurement.**  Round 6 compared "97 thunks" (counted by targeting
+  IAT slots) against "101 thunks" (a raw `ff 25` scan over a 0x30000-byte window
+  that runs past the end of `.text` into `.rdata`, counting unrelated byte
+  pairs).  The two numbers were never comparable.  Re-measured identically on
+  both binaries: ours 103 thunks (102 into the IAT), the reference 11 (10 into
+  the IAT).  Re-running the no-`/INCLUDE` build the same way gives 101, so the
+  direction of round 6's claim survives -- but its basis did not, and it missed
+  the decisive fact entirely.
+- **The decisive fact: without `/INCLUDE` the build has ZERO imports.**
+  Measured the import table directly: 0 imported symbols.  The 100 imports
+  exist *only* because `crt_region/crt_imports.c` forces each slot with
+  `/INCLUDE:__imp__X`, and each forced slot brings a jump thunk with it.  So
+  `/INCLUDE` is not optional -- the gate's "imports match the reference (100)"
+  fails without it -- and the ~566 bytes of thunks are its price.  Round 6 said
+  the mechanism was "not the cause"; that is wrong.
+- **Our call sites are already faithful.**  `call dword ptr [IAT]` is **211 in
+  both** binaries.  The tree does not need `__declspec(dllimport)` added
+  anywhere to match the reference's calling convention -- it already matches.
+  The thunks are pure linker overhead, not a symptom of wrong call sites.
+  Confirmed the mechanism in isolation: a 3-line `__declspec(dllimport)` TU
+  compiled by this MSVC6 emits `ff 15` and links with 3 thunks, not 100.
+- **First thunk is already aligned.**  Ours `0x10015513`, the reference
+  `0x10015513` -- identical.  The divergence is the block at the tail, not the
+  head; `emit_thunks.py` is doing its job for the 7 socket stubs.
+- **The open question, now correctly framed:** the reference has the same 100
+  imports with 11 thunks, so it got its IAT order WITHOUT `/INCLUDE` -- the
+  order fell out of the original source's natural first-reference order.  To
+  match, our first-reference order would have to reproduce the original's,
+  which is a source-organisation question, not a link-flag one.
+- **Tooling added.**  `scripts/import_thunk_census.py` -- counts
+  `jmp [abs]`/`call [abs]` inside `.text` only, and can diff a build against
+  the reference.  It exists because this measurement was hand-rolled twice and
+  got it wrong once; the docstring records the over-scan trap explicitly.
+- **Keep:** Round-5 stack.
+
+**Round-6: the `/INCLUDE:__imp__X` explanation for the import thunks is refuted. Round 5 also swept the wrong response file.**
+
+> **Superseded by round 7** -- the refutation below was based on a bad
+> measurement.  Kept for the record; do not act on it.
+
+- **Experiment.**  Disabled all 100 `/INCLUDE:__imp__X` pragmas in
+  `crt_region/crt_imports.c`, rebuilt, re-split-linked, measured.  Result:
+  **101 thunks, not fewer** (97 by slot before, 101 after), and `.text` improved
+  by 12 bytes only (overshoot 642 -> 630).  Reverted: the file is byte-identical
+  to HEAD, and the gate is back to residue 8, verify 262/262, lint 0/0.  Forcing
+  the IAT slot order is therefore **not** what makes the thunks.
+- **A slip of mine, caught.**  Round 5's "only 3 objects reference an import by
+  plain name" came from a sweep of `rsp.rsp`.  `split_link.sh` does not link
+  that file -- it links `rsp_pad.rsp`.  Re-swept the real 545-object line: the
+  same 3 (`_DllMain@12`, `_RtlUnwind@16`, `_ServerMainThread@4`), and still
+  none of the 100 imports.  So the thunks are caused by neither plain-name
+  references nor the `/INCLUDE` mechanism.
+- **Reference thunks, measured correctly this time.**  11 `jmp dword ptr [abs]`
+  in five clusters: `0x10015513` x1, `0x1001a160..0x1001a18a` x7, `0x10021eda`,
+  `0x10021eef`, `0x10023840` (the last thing in the reference `.text`).  (Round
+  5 quoted this as "only 11" from a scan with a wrong base; the count was right,
+  the addresses were not.)
+- **Sharper open question.**  MSVC6 LINK emits a jump thunk for essentially
+  every function of every import descriptor present in the link -- 97 of the
+  100 IAT slots here, and 101 with `/INCLUDE` removed, so the count tracks the
+  descriptors rather than our references.  The reference has 11.  What the
+  original build did to avoid the other ~86 is still unexplained, and nothing
+  about it is visible in the tree today.  That is the thing to answer next.
+
+**Round-5: the .text overshoot is 642 bytes of TRAILING content, and it is all import thunks. Round 4's explanation was wrong.**
+
+- **The split set is position-exact.**  Walking the 228 split objects in link
+  order, only **two** move the running delta at all: `1001e7d4_.text.obj`
+  (`__except_handler3`) emits 8 bytes too many, and the very next object
+  `1001e8b4_.text.obj` emits 8 too few.  Net drift: **zero**.  This corrects
+  round 4, which repeated `split_audit.py`'s own docstring and blamed "the
+  split objects' COMDAT padding accumulating over ~300 objects".  That is not
+  what is happening.
+- **The 73 "off-position" symbols are an artefact.**  They are almost entirely
+  `--closure` helpers (`LeadUp`/`TrailDown`/`UnwindDown`) from two objects, all
+  sharing their object's single reference VA, so each one reports an enormous
+  delta that says nothing about layout.  The `delta range: +0x0 .. +0x31c`
+  headline is built almost entirely from them.
+- **The real 642 bytes, to the byte:** everything past the reference's `.text`
+  end `0x10023846`.  `DllMain@12` stub 6 B + 4 `link_stubs` 70 B + **92 import
+  thunks** 566 B = 642 B.  That is the entire `.text` overshoot
+  (`0x22ac8` vs `0x22846`).  Verified in the bytes: `ff 25 00 40 02 10` =
+  `jmp dword ptr [0x10024000]`.
+- **Why the reference has no thunks:** it calls imports directly — 211
+  `call dword ptr [IAT]` against only 11 `jmp [abs]` in its `.text`.  Ours
+  emits 92 thunks.  ~~The cause is `crt_region/crt_imports.c`, which forces
+  every IAT slot with `/INCLUDE:__imp__X` to pin the slot order; MSVC6 LINK
+  emits a jump thunk for each import whose slot is forced that way.~~
+  **REFUTED in round 6 — do not repeat this theory.**  Also: the "only 3
+  objects reference an import by plain name" claim was measured on `rsp.rsp`,
+  but the link uses `rsp_pad.rsp`; re-swept the real 545-object line, same 3.
+- **Tooling fixed.**  `split_audit.py` now ends with a trailing-content report
+  that reads the whole map (not just the split objects, which is why the block
+  was invisible: those symbols carry no reference VA in their object name) and
+  prints the block grouped by origin, summing to the 642.  Without it the only
+  signal was a delta range dominated by closure-helper noise.  Its docstring
+  carried the disproved COMDAT-padding explanation; replaced with the measured
+  account.  Text and `--json` modes both re-verified.
+- **Keep:** Round-4 stack.
+
+**Round-4: `object_span_check.py` was a no-op -- it measured 0 of 188 objects. Fixed, twice over.**
+
+- **Defect 1 (the tool checked nothing).**  The object walk demanded the path
+  `src/shared/...`:
+  `if parts[0] != "src" or parts[1] != "shared": continue`.  The tree was
+  reorganised in `f6921e5e` into several roots, and this build's 188 objects
+  live under `src/Develop/...` (174), `src/crt_region/...` (13) and
+  `src/link_stubs.c.obj` (1) -- **none** under `src/shared`.  Every object was
+  skipped, and the script printed `measured 0 objects against their reference
+  span`, which reads like a pass.  The whole point of the script is to answer
+  "is this object over its span?" before you edit the file; it was answering
+  nothing.  Now anchors on the `src` component instead, so any root works.
+  **0 -> 170 objects measured.**
+- **Defect 2 (the span model used the wrong table).**  A file's span is "its
+  first function .. the next function in the reference", and the neighbour was
+  looked up in `rebrew-functions.toml` -- the *annotated* subset.  Only 262 of
+  the 543 discovered server functions carry an annotation, and unreversed
+  library code sits between game functions, so the neighbour lookup overshot
+  badly: `broadcast.c` (one 192-byte function) got a 5392-byte span and a
+  **-5200** shortfall, `m_alloc2.c` -7056, `vfs2.c` -10336.  Those were phantom
+  "under budget" findings.  Now uses `db/inventory-server.dll.json` (all 543),
+  falling back to the metadata.  `broadcast.c` now measures span 192 / text 192
+  -- exactly at span, as the inventory's own function size (179, padded to 192)
+  confirms.  The three phantom outliers are gone; the real "under" set is now
+  16 objects at -16 .. -2064, i.e. ordinary short objects, which is what
+  `pad_short_functions.py` exists to pad.
+- **Settled, with the tool now actually running:** all **24** `LONG`-flagged
+  objects are **0 over their span**.  The `LONG` lines in the split-link log are
+  false alarms -- they compare against `want`, the unpadded per-function sum,
+  while CL pads each function to 16 bytes.  **This also corrects round 3**:
+  I read `alchemistry_logic2.c.obj: 1472 > 1264 (+208)` as the object emitting
+  144 bytes of excess and started chasing which function was responsible.  It
+  is not over at all.  No game object is over budget, so the +0x0..+0x31c
+  split-link drift is not a game-object problem; it is the split library
+  objects' COMDAT padding, exactly as `split_audit.py`'s own docstring says.
+- **Not done, and worth saying plainly:** nothing calls `object_span_check.py`.
+  Not `gate.sh`, not `split_link.sh`.  It is a manual tool, so the two defects
+  above could sit unnoticed while every number it prints looked fine.  Wiring
+  it in is the obvious follow-up; deliberately not done this round because
+  adding a gate step is a policy change, not a bug fix.
+- **Keep:** Round-2 stack.
+
+**Round-2: the two link-level defects are fixed; the .data tail is a real wall, and it is not a pad.**
+
+- **Fixed (round 1, still standing):** `alchemistry_logic2.c` carried a client-only
+  function (`// FUNCTION: GOLDTL 0x4193f0`) in a server-linked TU calling three
+  GOLDTL-image symbols; moved to `src/GOLDTL.fcn_004193f0.c`.  Link errors 4 -> 0.
+  And `/ENTRY:DllMain@12` -> `/ENTRY:_DllMainCRTStartup@12`: the old name resolved
+  to the emit_defs stub appended last, so the entry sat at `.text`'s end
+  (RVA 0x23846) and the DLL would not load.  The CRT startup is already linked at
+  the reference entry VA 0x1b9d4.  Residue 11 -> 8 bytes.
+- **The 8 residue bytes are all header fields, and 6 of them are one cause.**
+  Reference `.data` VirtualSize 0x174059c, ours 0x173fb00: short by 0xA9C.  That
+  shortfall is why `.reloc` lands at RVA 0x1767000 instead of 0x1768000, which
+  moves SizeOfImage, the BaseReloc data directory, the `.reloc` section VA and
+  SizeOfInitializedData.  The other 2 are BaseOfData (0x24000 vs 0x27000) and
+  Characteristics (0x210e vs 0x230e, IMAGE_FILE_DEBUG_STRIPPED).
+- **The missing 0xA9C is a BSS region the tree never emits.**  `rebrew data bss`
+  reports the reference BSS 100% covered by 171 named globals, 0 gaps, ending at
+  VA 0x1176759c (`g_bss_section_tail`).  Our `.data` ends at 0x11766b00, which is
+  exactly the end of the linker's COMMON block (69 tentative-definition symbols,
+  `nm` type C).  The region 0x11766b00..0x11767580 (0x1018 bytes) is referenced by
+  NO `.text` immediate -- scanned every 32-bit value in the reference `.text`; the
+  only hits in that range are the six real objects at 0x11767580..0x1176759c.  It
+  is reachable only indirectly.  Its 0x1018 span matches no BSS object in
+  LIBCMT.sp6 (swept every member, 0xf00..0x1100).
+- **Tried and reverted:** giving the tail globals in `crt_region/data_globals.c`
+  explicit `= 0` initializers, to move them out of COMMON into real `.bss` where
+  `rebrew build order-sources` could place them by reference VA.  `.data` VS went
+  0x173fb00 -> 0x173fae4, i.e. 0xBC WORSE, because the `g_before_*` gaps between
+  them are declared extern and never defined, so nothing extends the section past
+  the last emitted object.  Reverted; gate back to residue 8.
+- **Consequence for the objective:** `.data`'s exact extent cannot come out of the
+  toolchain until that 0x1018 region is identified as the real CRT object it was
+  (or is deliberately padded, which the objective forbids).  Not guessing.
+- **Also found, not mine, not fixed:** postlink inflates `.data` VirtualSize and
+  copies the reference `.reloc` (raw 0x11000) but leaves `.reloc` VA and
+  SizeOfImage at the raw-link values, so the shipped image declares less space
+  than its own `.reloc` needs and wine refuses it (err=193).  Raw link has no
+  such problem.  The pe-metadata fixer lives in rebrew upstream
+  (`rebrew.postlink`), so per AGENTS.md it belongs in the rebrew checkout.
+- **Keep:** Round-1 stack.
+
 **Round-1144 (server): residue 11,735 -> 5,404, all from composition and flags, no wall moved.**
 
 - **VA order:** the linker lays out a TU's functions in source order. Seven files (spiel622.c,
@@ -286,7 +10172,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **Keep:** Round-1130 stack.
 **Round-1130 (GOLD intake): lib-match sweep over all 34 FLIRT hits — 24 library, 10 game/Lua.**
 
-- **Tried:** `rebrew lib-match --stock-lib LIBCMT.LIB --target Europa1400Gold.exe`
+- **Tried:** `rebrew library match --stock-lib LIBCMT.LIB --target Europa1400Gold.exe`
   on every FLIRT hit. 24 confirm as LIBCMT (memset/memcpy/strstr/strncpy/strncat/
   strrchr/strncmp/strcmp/stricmp/alldiv/allmul/aulldiv/aullrem/alloca_probe/
   heap_select/old_sbh_release/cfltcvt/trandisp/fdiv_main/setenvp/except_handler3/
@@ -301,7 +10187,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **Keep:** Round-1129 stack.
 **Round-1129 (intake): Europa1400Gold.exe onboarded as third target (GOLD), first 5 functions RELOC.**
 
-- **Onboarded:** `rebrew cfg add-target Europa1400Gold.exe --binary original/Europa1400Gold.exe`
+- **Onboarded:** `rebrew cfg target add Europa1400Gold.exe --binary original/Europa1400Gold.exe`
   (PE32 x86, 2.3 MB) + `marker = "GOLD"` in rebrew-project.toml (config comment notes
   the client-only prefixes are in scope here, unlike server). `rebrew doctor` 14/0/7
   (warns: no inventory, no sources, no layout, no angr, FLIRT sig gaps, no ghidra path,
@@ -359,7 +10245,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **Keep:** Round-1124 stack.
 **Round-1124 (data pass): .bss gap table re-read — all gaps are named spans. No source change.**
 
-- **Tried:** re-read the full `rebrew data --bss` gap table. Every gap is bounded by
+- **Tried:** re-read the full `rebrew data bss` gap table. Every gap is bounded by
   named symbols on both sides (entity tables, slot arrays, query records, player
   slots, CRT heap tails) — no anonymous hole that would indicate an un-annotated
   global. The three large spans (417KB entity bytes, 674KB query records, 20MB
@@ -429,7 +10315,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **Keep:** Round-1118 stack.
 **Round-1118 (data pass): .data ORDER violations re-counted (11 + 1 SPAN), triage stands. No source change.**
 
-- **Tried:** `rebrew data --layout-audit --section .data` now reports 12 flags
+- **Tried:** `rebrew data layout audit --section .data` now reports 12 flags
   (11 ORDER + 1 ORDER/SPAN at 0x11766204) vs 7 triaged in round 727 — same symbol
   families (state/filter/stream/logo blocks), count grew with coverage, not with
   new defects. Link-order vs reference placement stays postlink's domain, no lever.
@@ -438,7 +10324,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **Keep:** Round-1117 stack.
 **Round-1117 (data pass): rdata layout audit clean, 36 unowned toml symbols checked. No source change.**
 
-- **Tried:** `rebrew data --layout-audit --section .rdata`: **0 violations**; the 36
+- **Tried:** `rebrew data layout audit --section .rdata`: **0 violations**; the 36
   unowned toml symbols spot-checked to owned-by-link_stubs or owned-TU declarations
   (e.g. `g_crc_table_241a0[256]` consumed by unknown/crc32.c, defined in link_stubs.c).
   Unowned-in-audit means covered by the restore/patch path, not missing — the shipped
@@ -460,7 +10346,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **Keep:** Round-1115 stack.
 **Round-1115 (data pass): re-read the two cosmetic type conflicts, confirmed benign. No source change.**
 
-- **Tried:** re-examined the two remaining `rebrew data` conflicts not already documented
+- **Tried:** re-examined the two remaining `rebrew data list` conflicts not already documented
   as deliberate. `s_ahm_AllocAhmInfo_1002a0f8`: definition `char[]` with initializer
   (alchemistry_logic2.c:251) against `extern char[]` (ahm_ExAllocAlchemist.c:26) — the
   `char` vs `char[]` listing is the parser's unsized-vs-inferred distinction, same layout,
@@ -545,7 +10431,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   `"gm_AllocSpieler(): gm_CurrentHumanFamilyCount overflow"` (`0x100315ac`),
   and the confirmed-push check ties it to the branch that guards
   `*(int*) 0x10035430 >= 0x10` (gm_AllocSpieler type 5/6/7) — the strongest
-  evidence class. Renamed via `rebrew rename --data` (toml + cross-refs);
+  evidence class. Renamed via `rebrew source rename --data` (toml + cross-refs);
   hand-fixed `entity.h`, `spiel62.c` extern, and the `link_stubs.c`
   definition (the rename pass only reached the spiel62 use site; the LNK2001
   was the finding, not silenced).
@@ -561,7 +10447,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   the two head fields). Swapped to `#include "game_structs.h"` +
   `#define Record LinkedNode`, fields renamed to `type`/`entity_id`.
   The `#define` keeps `Record* __cdecl gm_FindRecordById` — the prototype
-  name — intact; renaming the FUNCTION would need `rebrew rename` and has
+  name — intact; renaming the FUNCTION would need `rebrew source rename` and has
   no string evidence.
 - **Measured:** linktest: 8,628 -> 8,628 **(+0)**; all 5 functions in the TU
   stay RELOC; lint 0/0; gate green.
@@ -1416,7 +11302,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 
 **Round-947: ran the mandated `lib-match` check for the first time this session — clean, and the bare invocation is misleading.**
 
-- **The objective mandates `rebrew lib-match --stock-lib LIBCMT.LIB` before touching any function**, and
+- **The objective mandates `rebrew library match --stock-lib LIBCMT.LIB` before touching any function**, and
   no round this session had run it. Ran it: **20 reversed functions whose bytes come from LIBCMT**,
   with the tool advising "Delete the source" — which reads as the exact anti-pattern AGENTS.md opens
   with (reversing library code is wasted work).
@@ -1466,7 +11352,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 
 - **Audited the metadata `cflags` against the emitted command lines** — the round-944 lesson — and found
   **21 live functions carrying `/O1` or `/Ox`** where the CMake default is `/O2`. That looked like a
-  metadata/build divergence. **It is not**: CMakeLists runs `rebrew cmake-flags` to generate per-file
+  metadata/build divergence. **It is not**: CMakeLists runs `rebrew build cmake-flags` to generate per-file
   flags from `src/rebrew-functions.toml`, and that step **fails the configure** if one TU's functions
   resolve to different flags. Verified on two files (`initterm.c` -> `/O1 /Gd`,
   `cm_ExProdObjket.c` -> `/Ox /Gd`): the emitted lines match the metadata exactly. No defect.
@@ -1683,7 +11569,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
     pin on exactly **three** files (verified against `CMakeLists.txt` lines 297/305/312:
     `spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`, `ls_LoadBuildingEntityState.c`), worth 4 bytes net,
     with 16 of 16 unpinned rows worse under it.
-  - **Deliverable mechanics.** What ships is not what links: `rebrew postlink` writes `.data`,
+  - **Deliverable mechanics.** What ships is not what links: `rebrew build postlink` writes `.data`,
     `.rdata`, `.reloc` and the headers from the layout package (shipped `0x0` each; raw link 21,481 /
     1,268 / 7,107 / 267 = 30,123 overwritten). 286,720 bytes, 8,633 differing, all inside `.text`.
 - **One doc claim was weaker than it read, and is now corrected.** `codegen-walls.md`'s lever table
@@ -1741,7 +11627,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   | `.reloc` | differing `0x0` | differing **7,107** (`0x1bc3`) |
   | `headers` | differing `0x0` | differing **267** (`0x10b`) |
   | `.text` | differing `0x21b9` | differing `0x3810` |
-  **`rebrew postlink` writes the first four from the layout package** — copied, not compiled; the raw
+  **`rebrew build postlink` writes the first four from the layout package** — copied, not compiled; the raw
   link produces 30,123 bytes the fixers overwrite. So "every data byte matching" is met **by
   construction**, and no data-section measurement can ever be evidence about codegen.
 - **This is not a defect and it is not concealed** — measure-traps §6h and `rebrew verify --data`'s own
@@ -1773,7 +11659,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   `RELOC`, plus `PROVEN`/`MISSING_SIZE`/`SIZE_MISMATCH`. Five of them still carry
   `cflags = "/O2 /Gd /DREBREAK_ALLOW_NAKED"`-era `DREBREW_ALLOW_NAKED`, i.e. the `_emit`/naked-asm
   period the objective explicitly requires to be converted to C.
-- **`rebrew orphans` reports zero for `rebrew-functions.toml`** — it flags 149 orphans, all in
+- **`rebrew orphans list` reports zero for `rebrew-functions.toml`** — it flags 149 orphans, all in
   `rebrew-data.toml` (85 `VERIFIED`, 64 `UNCHECKED`). So the tool's orphan definition does not cover
   this case, and the 83 are invisible to it. It does offer `--include-matched`, which exists precisely
   because pruning these loses the record that those VAs once matched.
@@ -2130,7 +12016,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **Set out to re-examine the constraint set rather than lift more declarations.** The first target was
   the `codegen-walls.md` §8 table row `flags | flat | 12 axes, ~120 compilations`, since a flat-flag
   claim is the cheapest thing to falsify.
-- **Found a real disagreement between the metadata and the build, and it was mine.** `rebrew data`
+- **Found a real disagreement between the metadata and the build, and it was mine.** `rebrew data list`
   showed `gm_AllocSpieler` with `cflags = "/Ox /Gd"`, but `build/rebrew-cflags.cmake` and the actual
   compile line carry `/O2 /Gd /Oa /Ow`. **`git diff` showed the working tree differed from HEAD** —
   `rebrew test --cflags` had written the probe's value into `src/rebrew-functions.toml`. Restored it
@@ -2362,7 +12248,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   - Then the remaining 8 (`g_const_1_0` 10 sites, `g_query_state_a0c` 10, `g_const_neg_1_0` 9,
     `g_byte_table_30861`, `g_dynasty_field_2c`, `g_dynasty_generation_counter`, `g_entity_base`,
     `g_entity_end`, 8 each) — also clean.
-- **Result: 20 files changed, 28 insertions, 84 deletions; `rebrew data` reports multi-TU globals
+- **Result: 20 files changed, 28 insertions, 84 deletions; `rebrew data list` reports multi-TU globals
   79 → 70.** Every symbol had one identical spelling across all its sites, which is what made the
   move mechanical rather than judgemental.
 - **Measured: gate pass and byte-neutral** — residue **8,634 unchanged**, raw-link `.data` **21,836
@@ -2448,7 +12334,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 **Round-909: tried lifting 79 duplicated globals into a header — the single-symbol probe was +0, but the full lift broke the link and was reverted.**
 
 - **Tried the mandate's own criterion:** "if two or more TUs use a layout, it leaves the .c file."
-  `rebrew data` reports **79 globals declared in more than one TU with no shared header** —
+  `rebrew data list` reports **79 globals declared in more than one TU with no shared header** —
   `g_current_season` in 19 files, `g_citizen_count` in 15, `g_next_object_id` in 15. Types agree
   across every declaration, so these are consistent duplicates rather than conflicts, and the
   conflict detector correctly stays silent on them.
@@ -2638,7 +12524,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   `CRITICAL_SECTION** locktable = __locktable` alias is deliberate — LIBCMT's `tidtable.obj`
   references `_locktable` with that type. **The size error and the type conflict were two separate
   things sharing a name**; fixing the first does not and should not silence the second. Worth
-  stating because a future reader will see this entry in `rebrew data` and re-open it otherwise.
+  stating because a future reader will see this entry in `rebrew data list` and re-open it otherwise.
 - **Conflict count stays 11**, with one entry now internally consistent.
 
 **Round-903: the last two unexamined conflicts are both intentional — and one reading of the reference was an unrolling artifact.**
@@ -2673,9 +12559,9 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **Measured:** gate pass, residue **8,634**, raw-link `.data` **21,836**, verify 281/283,
   byte-matched 264. No source change; the round is two negatives and one metadata finding.
 
-**Round-902: chased the 11 `rebrew data` type conflicts to their source; two fixes measured, both reverted for cost.**
+**Round-902: chased the 11 `rebrew data list` type conflicts to their source; two fixes measured, both reverted for cost.**
 
-- **Tried:** `rebrew data --json` reports **11 type conflicts** (up from 9 in round 883), and the
+- **Tried:** `rebrew data list --json` reports **11 type conflicts** (up from 9 in round 883), and the
   mandate names "same type name for the same layout everywhere" as a binding rule. Worked them to
   their source rather than leaving the count as a number.
 - **Found and fixed a genuine impossibility in `loadsave3.c`, then reverted it for cost.** Five
@@ -2716,7 +12602,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
     `0x1001c9cd`. A handle bound, not a "stream count". Renamed **`_nfile`**.
   - `0x11767580` — `cmp [0x11767580],esi; jle` guarding the `__pioinfo` walk. Renamed
     **`__nstream`**.
-  Renamed all three with `rebrew rename --data` and updated the three stale externs in
+  Renamed all three with `rebrew source rename --data` and updated the three stale externs in
   `rebrew_globals.h`.
 - **Also decoded `0x11766460`'s geometry** for the record: `sar ecx,5` / `and eax,0x1f` at
   `0x1001bc15` is divide-by-32 plus mod-32 over a 0x40-dword array — a 2048-bit handle bitmask, with
@@ -2740,7 +12626,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 
 - **Continued round 899's method on the remaining 26 placeholders.** Most carry the real symbol name
   in their metadata note while the placeholder name survived: `__argc`, `__argv`, `__envp`,
-  `_pgmptr`, `__tlsindex`. Renamed all five with `rebrew rename --data`.
+  `_pgmptr`, `__tlsindex`. Renamed all five with `rebrew source rename --data`.
 - **Checked library ownership before renaming, because two of them are LIBCMT symbols.** `__argc`
   and `_pgmptr` (and `__argv`, `__error_mode`) **are present in LIBCMT.LIB**. That is not a
   blocker: `data_globals.c` is in `CMakeLists.txt`'s `_CRT_REGION_KEEP`, the displacement mechanism
@@ -2758,7 +12644,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   clean for as long as it was called `g_100354c8`. Both are 4 bytes on x86-32, so the layout was
   always right and no byte ever differed; the *declared type* was wrong and unusable by any code
   that wanted a real pointer. Fixed to `char** __argv`, `char** __envp`, `char* _pgmptr` in the
-  definition, the metadata (`rebrew data` fields) and the `rebrew_globals.h` externs, which were
+  definition, the metadata (`rebrew data list` fields) and the `rebrew_globals.h` externs, which were
   still naming the old placeholders.
 - **Why this matters beyond tidiness:** the objective's own rules make a name collision meaningful —
   "a duplicate-symbol LNK4006 is a finding (shared type not lifted, or library symbol
@@ -2791,7 +12677,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
     `aemter2.c` casts `0x101de5a0` to `OfficeSlot*`, and `amt_ExecuteOfficeAssignment.c` scans from
     `0x101de5a8`, which is exactly record 0's `role` at base+8. A name for an interior address makes
     the table look like two globals.
-- **Renamed all three with `rebrew rename --data`** (the mandate requires the tool, and it keeps
+- **Renamed all three with `rebrew source rename --data`** (the mandate requires the tool, and it keeps
   cross-references): `g_aux_entity_count`, `g_aux_entity_buffer`, `g_office_slots_00_entityId`.
 - **Then swept the remaining placeholders and found two more real ones.** Of 30 `g_1xxxxxxx`-style
   names, two are strings whose literal content is in the reference and whose metadata name
@@ -2801,7 +12687,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   - `0x10028aec` → `s_Pointer_not_freed_10028aec` — `"-> Pointer not freed:%s"`.
   Both were `g_str_<addr>` and both were used by code, so this was a live naming violation, not
   cosmetic.
-- **One source comment updated automatically** by `rebrew rename` (`m_alloc2.c`, a list of the old
+- **One source comment updated automatically** by `rebrew source rename` (`m_alloc2.c`, a list of the old
   stub names). Re-tested that TU: `m_ShutdownAllocator` 283/283, `m_PoolAlloc` 270/270,
   `m_pool_free` 137/137 — unchanged.
 - **Measured:** gate pass, residue **8,634 unchanged**, raw-link `.data` **21,836 unchanged**, verify
@@ -3100,7 +12986,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   - **Exhaustive library scan.** Searched all **1,707** `.lib` files under both toolchain caches for
     the exact 24-byte prelude: **0 hits.** Stronger than the doc's "absent from LIBCMT and LIBC" —
     it is absent from every library in the toolchain.
-  - **`rebrew lib-match --stock-lib LIBCMT.LIB --va 0x100068e0`** → "not in the given libraries.
+  - **`rebrew library match --stock-lib LIBCMT.LIB --va 0x100068e0`** → "not in the given libraries.
     Safe to reverse." Not library code at function level either.
   - **All six carriers are byte-exact because of their block.** Whole-file `rebrew test`:
     `m_init` **162/162**, `m_PoolAlloc` **270/270**, `vfs_ReadData` **472/472**,
@@ -3941,7 +13827,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **The residue inside untracked functions is 23,461 bytes** by prelayout measurement, far more
   than the 8,634 attributed to the 19 carriers, so this looked like the largest unexplored pool
   in the tree. It is not.
-  - **Ran `rebrew lib-match` on the nine largest**, per the objective's mandatory check:
+  - **Ran `rebrew library match` on the nine largest**, per the objective's mandatory check:
     **8 of 9 are LIBCMT library code** ("Do not reverse it; the linker supplies these bytes").
     They cluster in `0x1001a000`..`0x10023000`, the CRT block.
   - **The ninth (`0x1001c19b`) is CRT by shape, not game code**: `sub esp,0x248`, `mov edi,[ebp+0xc]`,
@@ -4342,7 +14228,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   path (`#include "../command_internal.h"`). Re-ran matching on the basename: every header is
   included except `library_imports.h`, `library_msvc.h`, `library_winsock.h` and
   `library_zlib.h`, which are `// LIBRARY:` **annotation markers** auto-generated by
-  `rebrew imports --mark` and deliberately never included. Lint covers all four (188/188), so
+  `rebrew binary imports mark` and deliberately never included. Lint covers all four (188/188), so
   they are tool-owned, not dead code. `types.h` (round 850) was the only genuine stale artifact,
   and it is gone.
 - **No edit this round.** Nothing was wrong to fix; the value is that the type-size claim is
@@ -4354,7 +14240,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 
 - **Audited the objective's struct clause for the first time this session** and found the
   placeholder problem it names, in one file. `src/server.dll/types.h` (613 lines,
-  "Auto-generated from Ghidra via rebrew sync --pull-structs", 85 structures) was **included
+  "Auto-generated from Ghidra via rebrew sync push --pull-structs", 85 structures) was **included
   by nothing** — every `types.h` grep hit in the tree is `rebrew_types.h`, a different and
   genuinely hand-written header. Checked what it provided that was in use: of the 12 game
   types it defines, only `PlayerSlot` (15 uses), `EntityStruct` (4) and `CommandPacket` (1)
@@ -4415,7 +14301,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 **Round-848: dropped 11 dead cross-TU globals from the 8 spiel TUs. Residue-neutral, 88 lines gone.**
 
 - **Went back to the objective's stated focus (data and types) and found real work there.**
-  `rebrew data --json` reported 272 unannotated globals; enumerating them turned up a clean
+  `rebrew data list --json` reported 272 unannotated globals; enumerating them turned up a clean
   class: **11 named game globals declared `extern` in all 8 spiel TUs with zero uses
   anywhere in the tree** — `g_EntityListStart`, `g_EntitySearchPtr`, `g_SearchCount`,
   `g_SearchFlag`, `g_SomeGlobal`, `g_FilterActive`, `g_FilterType`, `g_FilterId`,
@@ -4930,7 +14816,7 @@ and `106e3d5d`; both were labelled with round numbers that collide with older
 history (`518-520`, `521`). The 98-file stack they landed was actually the
 uncommitted R593--R832 stack recorded by Round-832.)
 
-- **Worked the type-conflict list first** (`rebrew data --json`: 10 conflicts,
+- **Worked the type-conflict list first** (`rebrew data list --json`: 10 conflicts,
   every one a duplicate spelling of one address across TUs).
 - **LANDED — `gm_Open.c`: `int g_stream_count[4] = {0,0,0,0}` -> `int g_stream_count = 0`.**
   `vfs4.c:113` does `g_stream_count--` and `vfs_OpenStream.c:321` does
@@ -4982,7 +14868,7 @@ uncommitted R593--R832 stack recorded by Round-832.)
   `// DATA: SERVER 0x1002b600`). The broadcast strings are *present and correct*
   in BLD, at file `0x30a34` instead of `0x27034` — a clean `+0x9a00` displacement.
 - **Why this is not a defect and not actionable:** `data_restore.c` is
-  auto-generated by `rebrew gen-layout --data-gap` and is a **length-only pad**
+  auto-generated by `rebrew build layout --data-gap` and is a **length-only pad**
   — postlink blits the reference `.data` over it wholesale, so its content never
   ships (`msvc6-c-shapes.md` §151; already recorded rounds 450/547). The pad is
   doing its job: raw `.data` rsz reaches `0xe000`.
@@ -5874,7 +15760,7 @@ RESIDUE **8634** (+0) / DATA 21,838 → **21,837** (−1).**
 
 **Round-558 (data pass): same-size type alignment. Conflicts 13→10. `.data` HOLD 21836 / `.text` HOLD 8634.**
 
-- **Tried:** align `rebrew data --conflicts` outliers to majority types without
+- **Tried:** align `rebrew data list --conflicts` outliers to majority types without
   changing BSS emit size. `gm_NextEntityQueryMatch.c` `g_entity_table_end`
   `int` → `unsigned short*` (4B either way). `gm_Open.c` `g_1009b764` /
   `g_100a8cf8` `extern int` → `extern unsigned int` to match
@@ -5963,7 +15849,7 @@ RESIDUE **8634** (+0) / DATA 21,838 → **21,837** (−1).**
   `g_stream_count` while vfs uses it as a scalar `int`.
 - **Codegen fact:** unused `extern` type tokens are same-size-or-not by
   declaration text only; they do not change COMMON/BSS as long as the
-  defining TU is left alone. `rebrew data --conflicts` counts those decls, so
+  defining TU is left alone. `rebrew data list --conflicts` counts those decls, so
   matching unused externs to the owner is a hygiene lever with +0 `.data`.
   `g_stream_pool` comment `0x10034670` still disagrees with BLD map owner
   `0x10034fd0` (`gm_Open.c.obj`); leave that VA until a real owner exists.
@@ -7147,7 +17033,7 @@ Lint 2 warnings → 0. No code change.**
 **Round-595 (data pass, recon): unknown dispatch tables are false
 positives. No source change.**
 
-- **Checked:** `rebrew data --dispatch --json` reports 3 tables: the
+- **Checked:** `rebrew data dispatch --json` reports 3 tables: the
   212-entry command dispatch at `0x1002c3f8` (100% resolved), plus two
   0%-coverage tables at `0x100317d8` (3 entries) and `0x10033bb0`
   (6 entries, all pointing at `0x10021aad`).
@@ -7156,7 +17042,7 @@ positives. No source change.**
   `crt_region/initterm.c` (3-entry window is a scan artifact), and
   `0x10021aad` is an `EXACT` crt_region stub the detector windowed
   6-deep. No game code to reverse; do not touch.
-- **Also checked:** `rebrew data --bss --json` reports 32 gaps but 0.0%
+- **Also checked:** `rebrew data bss --json` reports 32 gaps but 0.0%
   coverage with a guessed 24 MB BSS size — unreliable, no action. The
   `rebrew todo -c data-drift` top-20 items (`g_log_*`, `g_file_version`,
   `g_data_restore_gap`, …) are all Accept-cascade displacement symptoms
@@ -8270,7 +18156,7 @@ No source change.**
 **Round-655 (data pass): lib-match + diff triage on verify failures.
 No source change.**
 
-- **Tried:** per hard constraints ran `rebrew lib-match
+- **Tried:** per hard constraints ran `rebrew library match
   --stock-lib LIBCMT.LIB` on both verify failures (`ServerMainThread`
   0x100093a0, `gm_AllocSpieler` 0x10018850) — both game code, safe
   to reverse. `rebrew diff` on ServerMainThread: same size (2434),
@@ -8784,9 +18670,9 @@ All held.**
 
 **Round-684 (data pass): coverage + graph audit. No source change.**
 
-- **Tried:** `rebrew catalog`: 98.2% coverage (138820/141382
+- **Tried:** `rebrew coverage catalog`: 98.2% coverage (138820/141382
   bytes, 543 functions); the 1.8% gap is unreversed CRT —
-  out of scope per constraints. `rebrew graph`: 9 unreversed
+  out of scope per constraints. `rebrew source graph`: 9 unreversed
   nodes are all CRT (`_cexit`, `_ioinit`, `_CRT_INIT`,
   `__initterm`, …); `exit_handler` flagged unreversed is stale
   metadata (defined in `server.c`, EXACT). `lib-match` on both
@@ -10681,7 +20567,7 @@ source change.**
 **Round-804 (data pass): data inventory steady. No source
 change.**
 
-- **Tried:** `rebrew data --json`: 372 globals, 99 annotated,
+- **Tried:** `rebrew data list --json`: 372 globals, 99 annotated,
   273 unannotated, 9 conflicts — all steady, no new drift
   signal. Parked conflicts unchanged.
 - **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
@@ -11226,7 +21112,7 @@ Local window matched; global gate regressed. Soft-reverted.**
 `.data` 25,884 -> 23,779 (-2,105). `.text` 8,636 -> 8,635 (-1).**
 
 - **Root cause:** winsock/SO_* strings lived in `server4.c`/`server2.c` (late `.text` VAs).
-  `rebrew order-sources` links by `.text` VA, so vfs/zlib/`trees` occupied `0x10028bdc`
+  `rebrew build order-sources` links by `.text` VA, so vfs/zlib/`trees` occupied `0x10028bdc`
   and the 0x82c-byte run landed ~900 bytes late.
 - **Fix:** `winsock_data.c` — data-only, exact reference bytes `0x10028bdc..0x10029408`
   (19 strings + pads). Ordered with `--first-va winsock_data.c=0x10006c80` between
@@ -11382,7 +21268,7 @@ Residue 8,633 (held; one correct fix measured and reverted).**
   **28 are our correct bytes at the wrong address**, 9 are zero-filled (never
   emitted), **2 are genuinely wrong content**. Same `+0xc4` band as §148, now
   with names: `g_next_object_id`, `g_entity_id_counter`, `g_query_filter_*`.
-- **`rebrew data --conflicts` reported 0 conflicts and was wrong**:
+- **`rebrew data list --conflicts` reported 0 conflicts and was wrong**:
   `find_extern_variables` parsed only `extern` declarations, so a global's
   DEFINITION — where the real type lives — was invisible. Now finds **13**.
 - **Found a real byte bug, fixed it correctly, and reverted it anyway.**
@@ -11404,7 +21290,7 @@ Residue 8,633 (held; one correct fix measured and reverted).**
 **Round-507 (data pass, round 1): the data-segment tooling was blind. Residue
 8,633 (unchanged, and expected to be).**
 
-- **`rebrew data --summary` reported `unknown 204 / annotated 0 / 0B`** against
+- **`rebrew data list --summary` reported `unknown 204 / annotated 0 / 0B`** against
   a tree with 310 entries in `src/rebrew-data.toml` and 118 `// DATA:` markers.
   That is not "0% coverage", it is **no measurement at all**, and every
   data-segment claim made from it was uninformed. Three independent rebrew
@@ -11418,7 +21304,7 @@ Residue 8,633 (held; one correct fix measured and reverted).**
   3. Nothing consulted `rebrew-data.toml` when a marker had no declaration
      under it (53 of 118 legitimately do not).
   Now: **311 globals, 116 annotated**, `.data` 36, `.bss` 74, `.rdata` 5, and
-  `rebrew data --bss` yields a real 32-gap report. Zero unnameable globals.
+  `rebrew data bss` yields a real 32-gap report. Zero unnameable globals.
 - **Re-measured the non-`.text` identity honestly.** Still copied, per §98:
   the raw link is `.data` **48.7%** wrong, `.rdata` 10.3%, `.reloc` 19.2%,
   headers 6.2% — 36,557 bytes the fixers blit from `layout/server.dll/`.
@@ -11865,7 +21751,7 @@ generalises — it does not. Residue 8,652.**
   register. Remove any one and the pattern is free. Same shape of conclusion
   as §130 — a real mechanism, correctly identified, but local.
 - **Two counting traps hit and recorded in §133**:
-  `rebrew asm | grep -c "0x1[0-9a-f]{7}"` counts the ADDRESS COLUMN, so
+  `rebrew binary asm show | grep -c "0x1[0-9a-f]{7}"` counts the ADDRESS COLUMN, so
   every instruction matches (286 for a 1002-byte function) — strip the
   leading `VA:` field first, the honest count was 64. And even then a
   reference absolute-operand count is not comparable to our DIR32 count,
@@ -11911,7 +21797,7 @@ measured spellings. Residue 8,652.**
   the Graveyard 16-bit read, reference 6 bytes
   (`xor ecx,ecx; mov cx,[ebp]`) against our 10
   (`mov si,[ebp]; and esi,0xffff`).
-- Re-anchored the reference first — `rebrew asm` starting mid-instruction
+- Re-anchored the reference first — `rebrew binary asm show` starting mid-instruction
   produced convincing garbage again (§112). In context, `xor esi,esi`
   initialises the loop counter and `lea edi,[ecx+esi]` sums id + counter
   into a third register.
@@ -11957,7 +21843,7 @@ ONE row's fact, not the tree's. Residue 8,652.**
   hopeful — instruction selection follows the expression shape reaching the
   selector, which is a source-level property not yet found.
 - Method note in §130: **check the prologue before invoking allocation
-  state.** One `rebrew asm` plus one probe disassembly separates a real
+  state.** One `rebrew binary asm show` plus one probe disassembly separates a real
   cascade from a convenient explanation.
 
 **Round-488 (2026-09-14): re-swept after the backward-jump fix; the
@@ -12363,7 +22249,7 @@ a REAL gain that CANNOT SHIP. Residue 8,664.**
   — CalculateProductionValue 391→**236**, m_AllocTracked 566→**266** (obj
   658→634), ReadCompressed 468→461. The nine MSVC6 images are three
   generators (§92) and sp5-pp is its own.
-- **And a per-function pin never reaches the link.** `rebrew cmake-flags`
+- **And a per-function pin never reaches the link.** `rebrew build cmake-flags`
   says so explicitly: the CMake build's compiler is fixed by the toolchain
   file, so a pin "affects `rebrew test`/`verify` only, never the linked
   bytes". So this is §99's measure-vs-ship divergence in a new place —
@@ -12452,7 +22338,7 @@ rounds of miscounting. Residue 8,664.**
   (grep -> relocations -> adjacency), and so did two probe lanes
   independently. That is a **tooling gap**: nothing in `rebrew` reported a
   correct per-callee call inventory.
-- **Added `rebrew xrefs <va> --calls-from <size>`** (upstream `bbf63f4`). It
+- **Added `rebrew binary xrefs <va> --calls-from <size>`** (upstream `bbf63f4`). It
   walks the function, tracks which import each register currently holds
   (`mov reg,[__imp__X]`), and attributes `call reg` to the same callee as a
   direct call. On CrashDump it reports **WriteFile 11, CloseHandle 5,
@@ -12560,7 +22446,7 @@ cleanup three times — the arms are not interchangeable. Residue 8,664.**
   SCOPE STRUCTURE, not perturbing the cleanup statements.
 - **General caution now in §112**: two byte-identical sequences in the
   reference are NOT evidence the compiler declined an optimisation — check
-  what PRECEDES them. Also: `rebrew asm` started mid-instruction produces
+  what PRECEDES them. Also: `rebrew binary asm show` started mid-instruction produces
   convincing-looking garbage (`les edx,ptr [eax]`, `inc esp`), which is easy
   to mistake for real code; always start at a known instruction boundary.
 
@@ -12824,7 +22710,7 @@ mechanism — different UNITS, not a bug. Residue 8,664.**
 is a DIFFERENT RULER, and its structural flag agrees with five byte-level
 investigations. Residue 8,664.**
 
-- Ran `rebrew near-diag` across five walled rows. Every one reports a
+- Ran `rebrew diagnose near` across five walled rows. Every one reports a
   **RELOC-dominated** verdict (41-91% of delta), which read carelessly says
   these functions are nearly solved and the residue is an artefact.
   **That reading is wrong** — and the tool says so itself in the next
@@ -12855,7 +22741,7 @@ investigations. Residue 8,664.**
 immediately on both rows tried. Residue 8,664.**
 
 - §106 closed the FLAG axis but was explicit it said nothing about SOURCE
-  SHAPE. `rebrew match`'s GA mode mutates source, so it tests exactly that,
+  SHAPE. `rebrew match run`'s GA mode mutates source, so it tests exactly that,
   and it was unusable until the round-457 timeout fix.
 - Two rows, 12 generations, pop 16, `--mutation-focus auto`:
   **m_AllocTracked** best 147,228.92 with **11 of 12 generations stagnant**
@@ -13157,7 +23043,7 @@ non-.text identity is COPIED, not produced. Residue 8,666.**
   non-pointers** in our build and nothing cross-validates that; **1,978
   bytes of the `.text` raw tail are outside the measurement** and the
   measuring script (not FIXERS) zeroes 638 real emitted bytes there, so
-  `rebrew postlink` would ship them; and 23.6 MB of `.data` VirtualSize has
+  `rebrew build postlink` would ship them; and 23.6 MB of `.data` VirtualSize has
   no file bytes, so BSS content is unverifiable.
 - **AGENTS.md's "`.text` link shortfall … 0x3a84 short" is STALE**: the
   split-link path now OVERSHOOTS by 0x282 (0x22ac8 vs 0x22846) and puts its
@@ -13351,7 +23237,7 @@ positives; PROVEN no longer inflates the headline. Residue 8,666.**
     EXACT/RELOC/PROVEN now outrank the inventory; other statuses still
     warn.
   - **102 were a stale inventory** truncated at 0x10012440 (219 entries
-    vs 543 real functions). Refreshed via `rebrew discover-functions`.
+    vs 543 real functions). Refreshed via `rebrew binary functions`.
 - **That refresh exposed a DESTRUCTIVE third bug**: `layout` was not in
   the known-target-key set, so every rebrew invocation warned
   "unrecognized keys: {'layout'}" — and the discovery run then DELETED
@@ -13382,7 +23268,7 @@ positives; PROVEN no longer inflates the headline. Residue 8,666.**
 **Round-443 (2026-09-14): registered the 9th image, then DISPROVED my own
 "9th generator" claim; PCQ upgraded to proven-unreachable. Residue 8,666.**
 
-- **rebrew fix: registered `msvc-6.0-win9x`.** The image shipped with no
+- **rebrew source fix: registered `msvc-6.0-win9x`.** The image shipped with no
   ToolchainSpec, so it was invisible to `--toolchain` and §90/§91's sweeps
   silently covered eight of nine images. Its tree is flat
   (`/opt/msvc6.0-win9x/Bin`, not `VC98/Bin`) and it runs under wibo, both
@@ -14990,9 +24876,9 @@ rebrew breakage worked around.**
   is not reproduced by hoisting ours — different live-range context.
 - Residue baseline unchanged: **9,149**.
 
-**Round-346 (2026-09-13): rebrew fix — verify-cache patch refreshes guards.**
+**Round-346 (2026-09-13): rebrew source fix — verify-cache patch refreshes guards.**
 
-- Per the standing objective ("as you encounter bugs in rebrew fix
+- Per the standing objective ("as you encounter bugs in rebrew source fix
   them"): `patch_verify_cache_entries` updated only the result payload,
   leaving `mtime_ns`/`source_hash` from an earlier verify — a later
   same-mtime edit re-serves the patch's metrics as current. Fixed in
@@ -15334,7 +25220,7 @@ round 74 — was commit-message-only).**
 **Round-312 (2026-09-13): climb on Tracked — no adjacent-swap win.**
 
 - The 105-127 phase-shift block traced to a 4-instruction order cluster
-  (`lea edi` first vs last). `rebrew climb` (aligned, 28 statements):
+  (`lea edi` first vs last). `rebrew match climb` (aligned, 28 statements):
   best == baseline, nothing applied. The lea position is
   demand-scheduled; statement order exhausted here too. Tree untouched.
 - Residue baseline unchanged: **9,209**.
@@ -15701,7 +25587,7 @@ generator, one arity check banked.**
 **Round-280 (2026-09-13): round-trip run (first this session) + rebrew error
 fix.**
 
-- `rebrew round-trip --output /tmp/server.reasm.dll`: 227 spliced, 17
+- `rebrew build round-trip --output /tmp/server.reasm.dll`: 227 spliced, 17
   proven-skipped (by design), mismatches are the known CRT-name drift class
   (`_fread` wrapper, `__srand` vs `__srand_impl`) — no game-code splice
   failure. Byte coverage: 34.5% spliced / 54.4% passthrough. `match: false`
@@ -15753,7 +25639,7 @@ categories exhausted.**
 
 **Round-276 (2026-09-13): hill-climb on the closest function finds nothing.**
 
-- `rebrew climb` (aligned objective, 2 passes, 52 statements) on
+- `rebrew match climb` (aligned objective, 2 passes, 52 statements) on
   `cm_ExProdObjekt` (349/354): best == baseline, no moves applied, file
   untouched. Adjacent-statement order is exhausted here — one command
   instead of a dozen manual probes. (Larger order-sensitive functions
@@ -15827,7 +25713,7 @@ categories exhausted.**
 
 - `rebrew verify --data`: matched 0 / mismatched 0 / missing 0 — the
   annotation-based data tools do not apply to this tree (data flows via
-  blobs; `rebrew data` shows 204 globals, 0 annotated, 116 entries, 0
+  blobs; `rebrew data list` shows 204 globals, 0 annotated, 116 entries, 0
   conflicts; sections already byte-identical). Do not go down this path
   expecting per-symbol signal; the section-level identity IS the data
   verdict.
@@ -15859,7 +25745,7 @@ flag-sensitive functions; heuristic over-promises.**
 - `rebrew diff` reports `flag_sensitive: true` on 7 functions; SMT,
   ExProdObjekt and Spieler have documented sweeps, the other four
   (Graveyard, LoadBuf, Objects, ReadCompressed) did not. Ran
-  `rebrew match --flag-sweep-only --tier quick` (192 combos) on each:
+  `rebrew match flags --tier quick` (192 combos) on each:
   all scores UNIFORM (no winner, no EXACT/RELOC) on every file, tree
   untouched. Zero variance across 192 combos = no gradient to follow;
   `targeted`+ tiers not run (principled stop, not budget).
@@ -15933,8 +25819,8 @@ fused assign-test probed and reverted.**
   ICF folding contributes nothing; order forced by rsp+adı pads with 246
   symbols exactly at VA; imports/headers already identical. The link
   contributes ~0 beyond placement — all 9,209 residue bytes are codegen.
-  (Also: `rebrew link-order --check` does not apply to this tree, which
-  orders via `rebrew order-sources` into SERVER_SOURCES instead of a
+  (Also: `rebrew build link-order --check` does not apply to this tree, which
+  orders via `rebrew build order-sources` into SERVER_SOURCES instead of a
   `set(SOURCES)` block — not filed, the project's own path works.)
 - `cm_ExCopyEntityData` matrix clamp: the type-0/type-2 HIGH-then-low
   precedent does NOT transfer — the doubly-nested matrix arm with the same
@@ -15953,7 +25839,7 @@ merge-sweep runs for the first time.**
   jump-table labels as functions, failing overlap checks — now skipped (they
   are data inside their parent). Project `functions.txt` untouched.
 - Verified: `tests/test_merge_sweep.py` (31) + registry suites pass
-  (56 total); `rebrew merge-sweep --dry-run` now returns 5 clusters with
+  (56 total); `rebrew match partitions --dry-run` now returns 5 clusters with
   merge/split candidates instead of crashing. Committed in the rebrew
   checkout (`986ba3d`).
 - NOT run: a live partition search. The dry-run proposes whole-cluster
@@ -16033,7 +25919,7 @@ GA confirms the wall a third way.**
   through both — the `jne` runs increment→head with nothing clobbering al.
   Both reverted. The proof is unbreakable from plain C: any proven-equal local
   is reused at the head; any unproven one adds traffic. Wall.
-- `rebrew match` GA on the file (30 gens × 32, register focus, ~10 min
+- `rebrew match run` GA on the file (30 gens × 32, register focus, ~10 min
   budget): best at generation 25 keeps `current_char` and the identical loop —
   it never found the head fix either, scoring below HEAD. Third confirmation
   (manual probes, GA, §52 direction) that this residue is not source-steerable.
@@ -16079,7 +25965,7 @@ recoloring cascade; cross-import from GOLDTL is a dead end.**
   mechanism (nesting → folded `lea`, shapes §70) is confirmed real — it is
   just not link-profitable in this body. Do not re-try without a plan for
   the tail recoloring.
-- `rebrew cross-import --from Europa1400Gold_TL.exe --dry-run`: 280/280
+- `rebrew source import-related --from Europa1400Gold_TL.exe --dry-run`: 280/280
   destination functions skipped, "no unambiguous match above threshold" — the
   EXE's code differs too much to source any server.dll function. Dead end.
 - Residue baseline unchanged: **9,209**. Next: the honest state stands —
@@ -16158,7 +26044,7 @@ lead closed, one stale note corrected.**
   stay on the `// CFLAGS:` line below, which is what the CMake build reads
   (`apply_annotation_cflags`)". There is no such line (verified: no
   `^// CFLAGS` anywhere in `src/server.dll/`); both tools and CMake resolve
-  CFLAGS from `src/rebrew-functions.toml` via `rebrew cmake-flags`, with
+  CFLAGS from `src/rebrew-functions.toml` via `rebrew build cmake-flags`, with
   metadata winning over any inline value (`metadata._apply_metadata_entry`).
   Comment-only change; object still exactly 3689.
 - No `rebrew` tool bug found this round. Two false alarms checked and cleared:
@@ -17114,7 +27000,7 @@ measure.**
 
 The migration above is done and verified as a no-op.  `CMakeLists.txt` no longer
 parses `// CFLAGS:` at all: it writes its source list, calls
-`rebrew cmake-flags --sources-file ...`, and includes the generated table, with
+`rebrew build cmake-flags --sources-file ...`, and includes the generated table, with
 `rebrew-functions.toml` on `CMAKE_CONFIGURE_DEPENDS` so editing the metadata
 reconfigures instead of silently reusing baked `COMPILE_FLAGS` (the footgun that
 made the `/Ow` fix look like a no-op).
@@ -17161,7 +27047,7 @@ per-function entries are overrides.  Two changes landed in rebrew:
 
 - `lint` now reports an inline `// CFLAGS:` that disagrees with the metadata in
   *codegen* flags (W019, the treatment `// SIZE:` already had; `/D` excluded).
-- `rebrew cmake-flags` resolves every annotated source file through the tool
+- `rebrew build cmake-flags` resolves every annotated source file through the tool
   chain and writes a CMake include setting `COMPILE_FLAGS` for it, so the build
   can compile what the tools measure.  A file whose functions resolve to
   different codegen flags is an error rather than an average; `/D` defines are
@@ -17521,7 +27407,7 @@ The round went sideways and the detour is worth recording.  After a gate run I r
 `src/rebrew-functions.toml` to HEAD (the correct-looking thing, since the gate rewrites
 it -- see round 178).  The next `cmake --build` then produced a composition with
 **0 of 319 symbols at their reference VA and 37% of `.text` differing**.  The cause:
-`CMakeLists.txt` has the metadata on `CMAKE_CONFIGURE_DEPENDS`, `rebrew cmake-flags`
+`CMakeLists.txt` has the metadata on `CMAKE_CONFIGURE_DEPENDS`, `rebrew build cmake-flags`
 reads it at *configure* time, and `git checkout` bumps the file's mtime -- so restoring
 it triggers a reconfigure that regenerates every file's `COMPILE_FLAGS`.  The metadata
 HEAD carries therefore does not produce the same objects as the metadata a gate run
@@ -18857,7 +28743,7 @@ Two negative results from the same round, both cheap and both closing a class:
   object (980/993, 354 instructions) in all six; only `sp5-pp` differs (743/992,
   353).  So the eighteen holdouts are not VC6-SP drift that the rest of the tree
   happens to be insensitive to.
-- **`rebrew match`'s GA fitness does not agree with the positional metric.**
+- **`rebrew match run`'s GA fitness does not agree with the positional metric.**
   Run on `srv_LoadBuf` it reached a `best_score` of 73400 (generation 5) with a
   candidate that adds `int _dummy_96; BOOL tmp;` and routes `ret` through `tmp`;
   measured with `probe_function.py` that candidate is 701/750, byte-for-byte the
@@ -19496,7 +29382,7 @@ resolve to the image base (unresolved)                  7
 
 `_map_coverage` accepts a pointer into the reference's `.data` **span**, which
 is the reference's VirtualSize — and ours is `0x1743838` against `0x174059c`,
-i.e. `0x339c` larger (`rebrew data --bss`: BSS at `0x10035000`, 24,323,484
+i.e. `0x339c` larger (`rebrew data bss`: BSS at `0x10035000`, 24,323,484
 bytes, but that is the *reference's* figure; the tool has no globals to check
 against here, 0.0% coverage).  Every symbol that lands in our extra `0x339c` of
 BSS therefore misses the span, and the 452 entries whose excess is about
@@ -19580,7 +29466,7 @@ Every failing value is an address inside `.data` (`0x10027xxx…0x1003xxxx`), an
 the built slot holds either the image base (`0x10000000`, i.e. the symbol
 resolved to RVA 0) or another low address — because our `.data` symbols do not
 sit at the reference's offsets.  That is deliberate: `data_restore.c`'s blob is
-the reference's raw bytes *followed by* our own data, and `rebrew postlink`'s
+the reference's raw bytes *followed by* our own data, and `rebrew build postlink`'s
 `data` fixer rewrites exactly these `.text` operands once it runs.  The
 coverage gate runs **before** the fixers, so entries the fixer would repair
 count as failures: ~390 of them, 5 points of the 8.7 the gate needs.
@@ -20100,7 +29986,7 @@ own .data (measured from the map's .bss line, 0xdf00 - 0x30 - blob)
 content_end = 0x30 + blob + own          raw = align_up(content_end, 0x1000)
 ```
 
-Re-tuning it to `0x9a00` (`rebrew gen-layout --data-gap 0x4600`, plus the
+Re-tuning it to `0x9a00` (`rebrew build layout --data-gap 0x4600`, plus the
 matching `src/rebrew-data.toml` entry, or lint gains a W016 warning) gives
 
 ```
@@ -20199,7 +30085,7 @@ site and the exhaustive list of spellings already measured against it
 `cm_ProcessCommandQueue` twenty rounds on the two-arm order,
 `cm_ExProdObjekt` ~50 variants of the pre-loop block, `srv_LoadBuf`'s one
 `lea`/`and` schedule).  So the next lever for those cannot be another source
-spelling — it has to be the automated search (`rebrew match`) or something
+spelling — it has to be the automated search (`rebrew match run`) or something
 outside the C source.  Re-derive this list, in this order, with
 
 ```sh
@@ -20428,7 +30314,7 @@ the larger gap:
 .reloc vs       0x10374          0x7f14           0x81d8
 ```
 
-`.data` and `.reloc` are converged by `rebrew postlink` (it copies the
+`.data` and `.reloc` are converged by `rebrew build postlink` (it copies the
 reference's `.data` and replaces `.reloc`), and the `.rdata` import bookkeeping
 is too -- but postlink only governs the IAT and the import descriptors; the
 rest of `.rdata` is reproduced by our own `crt_region/rdata_restore.c`.
@@ -21255,7 +31141,7 @@ the file's own notes, not from `.scratch/relcat.py`.
 
 **Round-101: the climb tool is exhausted, and one more width lever regresses.**
 
-`rebrew climb --objective aligned --passes 3 --dry-run` on
+`rebrew match climb --objective aligned --passes 3 --dry-run` on
 `cm_ExCopyEntityData` reports **no improving adjacent-statement swap** at all
 (baseline == best == 189,967 aligned bytes, `moves: []`) -- the same verdict the
 file already records for `gm_ObjectsAvailble`, and the +1-byte move it still
@@ -21750,7 +31636,7 @@ at 0x1000ef90 cm_ChainAssignId        -16   <- cm_ExCopyEntityData -32
 ```
 
 So **four size errors move 387 of 399 public symbols off their reference VA**,
-which is why `rebrew postlink` reports "only 614/7463 layout-map entries
+which is why `rebrew build postlink` reports "only 614/7463 layout-map entries
 validate (8.2%)" and refuses.  Fixing those four would re-align the whole game
 region; nothing else in it is misplaced.
 
@@ -22155,7 +32041,7 @@ remaining delta is the slot permutation, not a register rename.
 
 **The hole is unique to this function.**  A sweep of the first instruction of
 every non-exact game function against its built object (`.scratch/framescan.py`:
-target via `rebrew asm`, candidate via the COFF symbol table of
+target via `rebrew binary asm show`, candidate via the COFF symbol table of
 `build/CMakeFiles/server_dll.dir/<src>.obj`) shows the two `sub esp` immediates
 agreeing exactly everywhere else:
 
@@ -22628,7 +32514,7 @@ Removing those 17 rows clears the overlap error:
 
 ```
 $ grep -v " case\.0x" src/server.dll/functions.txt > f && mv f src/server.dll/functions.txt
-$ rebrew merge-sweep --dry-run --json --max-compiles 2
+$ rebrew match partitions --dry-run --json --max-compiles 2
 {"error": "zip() argument 2 is shorter than argument 1", "code": 2}
 ```
 
@@ -22651,10 +32537,10 @@ recording the one-line change here so whoever does own it can apply it.
 ## `merge-sweep` is blocked by jump-table pseudo-functions (2026-09-13, round 72)
 
 Round 71 concluded the merge question is really a partition question, and
-`rebrew merge-sweep` is the tool that searches partitions.  It does not run:
+`rebrew match partitions` is the tool that searches partitions.  It does not run:
 
 ```
-$ rebrew merge-sweep --dry-run --json --max-compiles 4
+$ rebrew match partitions --dry-run --json --max-compiles 4
 {"error": "overlapping functions 0x1000ad40 (ends 0x1000af98) and
            0x1000ad68: fix the registry before clustering", "code": 2}
 ```
@@ -22683,7 +32569,7 @@ So the registry `merge-sweep` clusters comes from a third source that I did not
 identify.  `merge_sweep.py` builds it with `build_function_registry(funcs, cfg,
 ghidra_path=src/server.dll/function_structure.json)`, and that JSON contains no
 `case.` entries at all, so `funcs` is not the CSV either.  Finding where the
-case labels enter the registry is the next step; `rebrew catalog --export-ghidra`
+case labels enter the registry is the next step; `rebrew coverage catalog --export-ghidra`
 caches a Ghidra function list and is the likeliest candidate.
 
 Recording this rather than guessing: the tool that would answer the partition
@@ -22723,7 +32609,7 @@ individually, one object is padded once.  The reference was linked from *its*
 translation units, so it has whatever padding that partition implies.  Merging
 therefore does not simply remove waste -- it changes `.text` placement, and it
 is only correct if the merged unit matches the original partition.  That is
-exactly what `rebrew merge-sweep` searches for, and it is also why the merge
+exactly what `rebrew match partitions` searches for, and it is also why the merge
 cannot be adopted one cluster at a time on a metric.
 
 So: viable, small per cluster (147 bytes of `.data` here against the 4337
@@ -22773,7 +32659,7 @@ tried for real and the `.data` duplication measured.
 
 ## The include blocker is solved; the externs are next (2026-09-13, round 69)
 
-Round 68 left `rebrew merge` failing on relative includes that no longer
+Round 68 left `rebrew source merge` failing on relative includes that no longer
 resolve once 25 inputs at two depths become one file.  That is mechanical and
 now done: `.scratch/norm_includes.py` copies each input to a flat directory
 rewriting every `#include "..."` against the directory the merged TU will live
@@ -22806,16 +32692,16 @@ here and a compile, and after that the whole `.data` duplication problem goes
 with it.  The normaliser is kept because the same step is needed for every
 other cluster.
 
-## `rebrew merge` works on the bodies, not the includes (2026-09-13, round 68)
+## `rebrew source merge` works on the bodies, not the includes (2026-09-13, round 68)
 
 Round 67 concluded the `.data` duplication needs the objects' order corrected so
-the blob is unnecessary, which is what `rebrew merge` is for.  Tried on the
+the blob is unnecessary, which is what `rebrew source merge` is for.  Tried on the
 largest cluster -- the 25 files that came out of the original `spiel.c`:
 `spiel.c`, `spiel2/3/5/6/62/622.c`, `spiel_dumpD.c`, `spiel_gm_DispatchCall.c`
 and the sixteen `spiel_c/*.c`:
 
 ```
-$ rebrew merge <25 files> -o probe.c --dry-run --json
+$ rebrew source merge <25 files> -o probe.c --dry-run --json
 count 84   input_count 25   extern_dropped 0   extern_conflicts 0
 ```
 
@@ -22870,7 +32756,7 @@ blob" and "blob, then objects", and either way one of them duplicates the
 other's content.  Resolving it needs either the blob reduced to the bytes the
 objects do *not* emit, or the objects' `.data` order corrected so the blob is
 unnecessary -- both of which are the object-order problem, and the second is
-what `rebrew merge` exists for.
+what `rebrew source merge` exists for.
 
 ## Dropping the split objects' data sections does not help (2026-09-13, round 66)
 
@@ -22908,20 +32794,20 @@ So two different problems are open in `.data`: the 25311-byte disagreement
 inside the reference's 0xE000, and a 0x4000 raw surplus past its end that
 nothing currently measures.
 
-## `rebrew verify-placement` is not usable on these binaries (2026-09-13, round 65)
+## `rebrew build check-data-placement` is not usable on these binaries (2026-09-13, round 65)
 
 Looking for a per-symbol `.data` placement diagnostic, I ran
-`rebrew verify-placement` -- "Compare .data symbol VAs of the current build
+`rebrew build check-data-placement` -- "Compare .data symbol VAs of the current build
 against the data metadata".  It reports:
 
 ```
-$ rebrew verify-placement --built build/split_poc.dll
+$ rebrew build check-data-placement --built build/split_poc.dll
 symbols: 274  toml-matched: 29  correct-VA: 0  misplaced: 29
   g_file_append_mode    exp 0x100270f8  our 0x100333e4  d +0xc2ec
   g_log_format_table    exp 0x10027084  our 0x1003306d  d +0xbfe9
   ...
 
-$ rebrew verify-placement --built original/Server/server.dll      # the reference itself
+$ rebrew build check-data-placement --built original/Server/server.dll      # the reference itself
 symbols: 274  toml-matched: 29  correct-VA: 0  misplaced: 29
   g_file_append_mode    exp 0x100270f8  our 0x100323e4  d +0xb2ec
 ```
@@ -23647,7 +33533,7 @@ gm_AllocGebaeude.c.obj                    span=1088  built=1120  err=+32
 ```
 
 Once those are zero the drift is 0 end to end, the built `.text` (0x22af8,
-+690) loses the dead-stripped import thunk tail that `rebrew postlink` already
++690) loses the dead-stripped import thunk tail that `rebrew build postlink` already
 trims, and masked-100% becomes byte identity.
 
 Where to start, smallest residue first, all with `scripts/text_match.py
@@ -23663,7 +33549,7 @@ Where to start, smallest residue first, all with `scripts/text_match.py
 Negative results from this round, so they are not repeated: a targeted
 flag sweep over `/O2 /Gd`, `/GB`, `/Oy`, `/O1`, `/Ox`, `/Ot`, `/Og-` on
 `gm_CalculateProductionValue` finds **no exact flag set** (best score 7500,
-all `exact: false`), and `rebrew climb --passes 2 --objective aligned` on
+all `exact: false`), and `rebrew match climb --passes 2 --objective aligned` on
 `gm_ObjectsAvailble` finds **no improving adjacent-statement swap**
 (baseline == best == 207,984 matched bytes, `moves: []`).  Both confirm
 what the per-file logs already record: these residues are MSVC6 allocator
@@ -24092,7 +33978,7 @@ all three entries emit the same 9 bytes and LINK keeps one.
 `min(len(body), len(data))`; a match this short should be rejected, or the
 entry needs locating from scratch.
 
-**Method note.**  `rebrew postlink`'s `data` fixer already trims "the extra
+**Method note.**  `rebrew build postlink`'s `data` fixer already trims "the extra
 `.text` tail (import thunks/stubs the original build dead-stripped)", so the 96
 unreferenced import thunks from round 44 are a *known and handled* condition,
 not a blocker — they only matter because the tail must be trimmable, which
@@ -24133,7 +34019,7 @@ relinking:
 `crt_imports.c` is the auto-generated TU that forces the IAT slots to be
 allocated in the reference's order.  Removing it from the link costs 0x78
 bytes of `.text` and 20 thunks, but the IAT order is then whatever LINK's hash
-produces — which is why it exists, and which `rebrew postlink` already rewrites
+produces — which is why it exists, and which `rebrew build postlink` already rewrites
 from the layout package.  So it is a candidate, not a fix: 20 of 96.
 
 **`/OPT:REF` is not the answer.**  Linking the split set with it drops `.text`
@@ -25303,7 +35189,7 @@ closure is the better configuration for total size — as round 10 found — and
 the current link's `/ENTRY:DllMain@12` no longer needs the `__CRT_INIT` helper
 that forced `--skip-helper` in rounds 8-10.
 
-**Also run, negative.**  `rebrew climb --objective aligned` (4 passes,
+**Also run, negative.**  `rebrew match climb --objective aligned` (4 passes,
 dry-run) on `gm_CheckInventoryCapacity` — the closest function the round-25
 alignment table had not already shown to be a scheduling wall — reports one
 move at statement 18 worth **+1 matched byte** of the whole binary, i.e. noise.
@@ -26157,7 +36043,7 @@ tree (`git archive HEAD src/rebrew`) was extracted to
 `.scratch/rebrew-stable/` and used through `PYTHONPATH` for `verify`,
 `lint` and the build.  `scripts/gate.sh` will keep failing on the build step
 until that checkout is consistent again — it is not this tree's regression.
-There is also a docker container from a 2026-09-11 `rebrew match` still
+There is also a docker container from a 2026-09-11 `rebrew match run` still
 spinning (`docker ps` name `rebrew-93321f0d944a`), pinning one core.
 
 ## gm_Open back to RELOC (2026-09-12)
@@ -26173,7 +36059,7 @@ routing the read-modify-write through a pointer local forces a `lea` and lands
 ## Archive (2026-09-11): `.text` link shortfall — not the live tree
 
 The raw link's `.text` is 2,197 B short of the reference's 0x22846 (0x21fb1,
-3,269 B before the `/INCLUDE:` change below).  `rebrew postlink` used to pad it
+3,269 B before the `/INCLUDE:` change below).  `rebrew build postlink` used to pad it
 back to the reference's VirtualSize and apply the layout package's call/operand
 maps by offset, producing a binary 92% wrong in `.text` while the section table,
 imports and header fields all matched.  Nothing failed: `rebrew verify` is
@@ -26209,7 +36095,7 @@ Tried and measured (all in the raw-link metric above):
   "/include:...")` for every `// LIBRARY:` marker in `library_msvc.h`: fails
   with 104 unresolved externals. Many names in those headers (`code_translate`,
   `overflow_add`, `bit_reverse`, ...) are not linkable LIBCMT symbols; the
-  true symbol/object mapping has to come from `rebrew lib-match --stock-lib`,
+  true symbol/object mapping has to come from `rebrew library match --stock-lib`,
   and MSVC marks some helpers (`_initterm`, `_parse_cmdline`) static so they
   cannot be named at all.
 
@@ -26220,18 +36106,18 @@ one relink. The dump files emptied by `93ecf29` are the place to look:
 `vfs_CompressBlock.c`, `gz_gzread.c`, `gz_check_header.c`,
 `ReadVfsCompressed.c`.
 
-The guard added to `rebrew postlink` on 2026-09-11 makes this class of
+The guard added to `rebrew build postlink` on 2026-09-11 makes this class of
 breakage loud: it validates the layout package's sparse maps against the
 built bytes before patching and fails below 90% coverage (reference 100%,
 this tree 4%).
 
 > **Tooling moved (2026-08-22):** the `scripts/` helpers referenced below
-> were folded into rebrew: `gen_link_stubs.py` → `rebrew gen-stubs`,
-> `inline_strings.py`/`define_strings.py` → `rebrew inline-strings`,
-> `own_globals.py`/`own_init_arrays.py` → `rebrew data --own`,
-> `reassign_globals.py` → `rebrew data --fix-ownership`,
-> `converge_layout.py` → `rebrew data --converge`,
-> `consolidate_declarations.py` → `rebrew merge --consolidate`.
+> were folded into rebrew: `gen_link_stubs.py` → `rebrew build symbol-stubs`,
+> `inline_strings.py`/`define_strings.py` → `rebrew source inline-strings`,
+> `own_globals.py`/`own_init_arrays.py` → `rebrew data layout own`,
+> `reassign_globals.py` → `rebrew data layout fix-ownership`,
+> `converge_layout.py` → `rebrew data layout converge`,
+> `consolidate_declarations.py` → `rebrew source merge --consolidate`.
 > Entries below describe the work at the time.
 
 ## Service-pack sweep (2026-09-11) — new, and negative
@@ -26322,7 +36208,7 @@ all invalid here.  The working route is a layout-resolved comparison
 (`rebrew test --linked`, or `reccmp`, for which `db/server.dll_functions.csv`
 is already formatted) or a member-level comparison against `LIBCMT.LIB` itself.
 
-`rebrew lib-match --lib .scratch/libcmt/LIBCMT.sp6.LIB` byte-matches 18 reversed
+`rebrew library match --lib .scratch/libcmt/LIBCMT.sp6.LIB` byte-matches 18 reversed
 functions against LIBCMT members (the `__sbh_*` / `___old_sbh_*` family,
 `__DllMainCRTStartup@12`, `__initterm`, `__lock`, `__unlock`), so the
 `crt_region/` scaffolding agrees with the library rather than duplicating a
@@ -26356,7 +36242,7 @@ trustworthy signal.
 
 ## Types and globals into headers (2026-09-11) — measured, not started
 
-- `rebrew_globals.h` (generated by `rebrew data --gen-header`) is included by
+- `rebrew_globals.h` (generated by `rebrew data header`) is included by
   **no file**, and neither is `types.h` (65 named structs pulled from Ghidra).
   Meanwhile 170 of 309 extern-declared globals are declared in two or more
   files (`g_entity_type_table` in 33).
@@ -26508,7 +36394,7 @@ NOT falling out of the link (evidence for the goal's stop rule):
 - `BaseOfData` (0x24000 vs 0x27000) and `SizeOfInitData` (0x1747000 vs 0x22000):
   identical section tables (names/RVAs/characteristics) but the linker computes
   different values than the original's — the original's values look post-patched
-  or from a different linker computation; `rebrew link-sweep` proves no LINK
+  or from a different linker computation; `rebrew build sweep-link-flags` proves no LINK
   option changes them.
 - `SizeOfImage` tracks the `.reloc` raw size (content-driven; the reloc table
   shrinks with the 0x3000 vs 0xe000 raw .data) — needs the data-restore TU.
@@ -26517,7 +36403,7 @@ NOT falling out of the link (evidence for the goal's stop rule):
 
 ## Layout metadata storage (2026-08-22) — no binary blobs in the repo
 
-- `rebrew gen-layout` writes the READABLE layout metadata (sections, exports,
+- `rebrew build layout` writes the READABLE layout metadata (sections, exports,
   imports, link options, IAT-slot VAs, export stamp) into
   `rebrew-project.toml` under `[targets."<t>".layout]` — plain text,
   committed, diffable.
@@ -26527,20 +36413,20 @@ NOT falling out of the link (evidence for the goal's stop rule):
   `iat.hex`, `bookkeeping.hex`, `data.hex`, `reloc.hex`), the drift-check
   prefix (`prefix.hex`) and sparse `.text` maps (`operands.txt`,
   `calls.txt`).  Zero binary bytes at rest anywhere; no `original/` needed.
-- The build (`rebrew postlink --layout layout/<target>`) reconstructs the
+- The build (`rebrew build postlink --layout layout/<target>`) reconstructs the
   reference purely from that text metadata.  Fresh checkout flow:
   `cmake --build build` (the layout package is committed).
 
 ## Build no longer needs the original binary (2026-08-22)
 
 The CMake POST_BUILD now converges the linked DLL onto the committed text
-layout package (`layout/server.dll/`) via `rebrew postlink --layout`
+layout package (`layout/server.dll/`) via `rebrew build postlink --layout`
 instead of passing `original/Server/server.dll` to the fixers.  Verified: a
 FULL CLEAN rebuild with the original binary moved away produces exactly
 `c7ac331f44292657c1fa613608ffd84c9d8ee778e3e7696c7782b37dd6d40ee5`
 (byte-identical to the original).  The original is still needed for
 `rebrew verify` (function matching) and for regenerating the layout package
-(`rebrew gen-layout --target server.dll` — commit `layout/<target>/` so a
+(`rebrew build layout --target server.dll` — commit `layout/<target>/` so a
 fresh checkout can build without it).
 
 ## Regression fixed (2026-08-22) — byte-identity restored, clean rebuild deterministic
@@ -26734,7 +36620,7 @@ reccmp game-only 94.01%. Placement-by-address did NOT converge: per-TU
 automated passes cannot reproduce the original's intra-TU data order/cumulative
 sizes without the original's TU boundaries. Remaining sanctioned path: add
 `// GLOBAL:` annotations en masse from rebrew-data.toml, then
-`rebrew data --bss --json` + `rebrew data --fix-bss` (project tooling for
+`rebrew data bss --json` + `rebrew data fix-bss` (project tooling for
 exactly this) — needs the annotation pass first (`--fix-bss` currently reports
 "No annotated BSS globals").
 
@@ -26743,8 +36629,8 @@ exactly this) — needs the annotation pass first (`--fix-bss` currently reports
 `scripts/annotate_globals.py` — mass-generated `// GLOBAL: SERVER 0xVA` markers
 from rebrew-data.toml (202 markers; skips decls already carrying `// DATA:`
 markers to preserve their declaration adjacency). Pipeline now live:
-`rebrew data` -> annotated 63, `rebrew data --bss` -> 38 known entries, 18 gaps,
-`rebrew data --fix-bss --dry-run` proposes 18 BSS padding arrays. Do NOT apply
+`rebrew data list` -> annotated 63, `rebrew data bss` -> 38 known entries, 18 gaps,
+`rebrew data fix-bss --dry-run` proposes 18 BSS padding arrays. Do NOT apply
 --fix-bss yet: its pads assume the section base lands at 0x10035000, which
 requires the initialized .data to reach the original 0xe000 first (established
 ordering dependency). Next: converge initialized .data by fixed-point
@@ -27481,9 +37367,9 @@ PLAN for the data phase:
 session. Four things were wrong, all now fixed:
 
 1. **Not configured.** `targets."server.dll".binsync_state_dir = "binsync"`
-   is now set in `rebrew-project.toml`, so `rebrew sync` and `rebrew doctor`
+   is now set in `rebrew-project.toml`, so `rebrew sync push` and `rebrew doctor`
    find the dir without `--state-dir` on every invocation. The directory
-   itself stays gitignored — it is regenerable with `rebrew sync --push` —
+   itself stays gitignored — it is regenerable with `rebrew sync push` —
    while the pointer is versioned.
 2. **Not a git repo.** BinSync's plugin workflow relays changes through
    commits in the state dir, so it must be its own repository. `git init`ed
@@ -27500,7 +37386,7 @@ session. Four things were wrong, all now fixed:
 
 `rebrew doctor` now reports **BinSync sync ✅ ready**, 19 passed / 2 warnings
 (the two remaining are FLIRT signatures, which AGENTS.md says to answer with
-`rebrew lib-match` instead, and one unrelated note).
+`rebrew library match` instead, and one unrelated note).
 
 **Round 195 update: the `case.*` half of this WAS a bug, now fixed; the CRT
 half was my misreading.**
@@ -27517,7 +37403,7 @@ already-written orphans (it removed 18 here).
 
 **The 10 name conflicts are not a bug, and BinSync is right, not us.** Every
 one is library code where the state carries the *correct* LIBCMT/zlib symbol
-and our local name is a stale placeholder — verified with `rebrew lib-match`:
+and our local name is a stale placeholder — verified with `rebrew library match`:
 0x1001a758 is `__initterm`, 0x1001d540 is `___sbh_free_block`, 0x1001d869 is
 `___sbh_alloc_block`, and 0x100011f0 is zlib's crc32 (annotated twice, as
 `crc32.c` and as a `// LIBRARY:` marker in `library_zlib.h`; CMakeLists
@@ -27578,10 +37464,10 @@ reverted. Verify held at 264 byte-matched through the experiment.
 - **Measured:** gate pass, residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
   byte-matched 264, imports 100.
 
-**Round-925: worked the `rebrew data` type-conflict list — three wrong-width definitions fixed, byte-neutrally.**
+**Round-925: worked the `rebrew data list` type-conflict list — three wrong-width definitions fixed, byte-neutrally.**
 
 - **The brief's ROI order says data drift first.** `rebrew verify --data` reports **122 matched, 0
-  mismatched, 0 missing** — that queue is empty — so the work is the other half of `rebrew data --json`:
+  mismatched, 0 missing** — that queue is empty — so the work is the other half of `rebrew data list --json`:
   **11 type conflicts** over 342 globals (99 annotated, 243 unannotated).
 - **Three conflicts were real wrong-width definitions**, all three in
   `spiel_c/gm_NextEntityQueryMatch.c`, and all three were used **nowhere in the file that defines
@@ -27636,7 +37522,7 @@ reverted. Verify held at 264 byte-matched through the experiment.
 - **Generalisation for the next round, stated because it cost this one:** "undefined symbol -> replace
   with the reference's literal" is a *hypothesis about the push encoding*, not a fix. Test it per site
   with `gate.sh`'s two numbers; the round-924 result is one data point, not a rule.
-- **Also swept the 243 `rebrew data` "unannotated" entries and the 11 type conflicts again**: the 243
+- **Also swept the 243 `rebrew data list` "unannotated" entries and the 11 type conflicts again**: the 243
   have no VA and no section — they are names *declared in TUs but absent from `rebrew-data.toml`*, not
   binary objects, and 136 are single-TU game declarations. They are not actionable without a tool-side
   metadata write, which the brief forbids doing by hand.
@@ -27699,7 +37585,7 @@ reverted. Verify held at 264 byte-matched through the experiment.
 `postlink failed: built .text is not position-aligned ... 64.9%, minimum 90%. .text VirtualSize built
 0x221f6 vs reference 0x22846`. `.text` 0x221f6 looks like a 0x650-byte regression, the linker deletes
 `server.dll`, and `build/server.dll` does not exist. Nothing is broken: `CMakeLists.txt:442-468` attaches
-`rebrew postlink --layout` as a POST_BUILD step of the `server_dll` target, and the coverage gate is
+`rebrew build postlink --layout` as a POST_BUILD step of the `server_dll` target, and the coverage gate is
 *designed* to refuse the plain compile-order link. The deliverable comes from **`cmake --build build
 --target final`** (`CMakeLists.txt:566-578`), which links `split_link.sh`'s per-reference-offset
 composition and then runs `postlink_residual.py --write build/server.dll`.
@@ -27741,7 +37627,7 @@ the deliverable**, and it is settled by three checks sharing no code:
 
 The objective's "every data byte matching" clause is therefore **already satisfied in the shipped file**.
 The gate's raw-link `.data` ceiling (21,481) measures the *build's* placement, not the deliverable's
-content: `rebrew postlink`'s data fixer copies the reference's `.data` wholesale (`0x7806` non-`.text`
+content: `rebrew build postlink`'s data fixer copies the reference's `.data` wholesale (`0x7806` non-`.text`
 bytes overwritten per link). Driving that number to 0 needs the original's `.data` COMDAT order, which is
 linker-hash-driven (`CMakeLists.txt:443-448`) and unreachable from C. → codegen-walls §14.
 
@@ -27966,7 +37852,7 @@ The seven: `g_log_message_buffer` (`char[]` stub `char = 0`, used as a `sprintf`
 `g_error_msg_sell_no_source` / `_no_dest` (`char[]` stubs `int = 0`, passed as message pointers).
 
 **All seven measured inert, with a mechanism.** The operand a wrong-type stub produces is an **address**, and
-address operands are relocation slots — exactly what `rebrew postlink` rewrites. Verified on
+address operands are relocation slots — exactly what `rebrew build postlink` rewrites. Verified on
 `g_log_message_buffer`: five `.text` dwords hold its VA `0x117640e0` and every enclosing function is RELOC
 (byte-matched). A stub only becomes visible if it changes the code *shape* (size, instruction form,
 displacement). Recorded as a latent hazard with the two-candidate effect it would have if used where the
@@ -28015,7 +37901,7 @@ Used the locally-readable VC6 CRT source (`rebrew/.cache/gh-org/msvc600_sp3/VC98
 questions, then found one real lead.
 
 **CRT-source checks (both negative, cheaply).** All 19 residue carriers report "Safe to reverse" under
-`rebrew lib-match --stock-lib LIBCMT.LIB` — none is library code that should have been skipped. And the
+`rebrew library match --stock-lib LIBCMT.LIB` — none is library code that should have been skipped. And the
 `(int)` cast lane on the flagship is already correct: a plain `(int) d` emits `fld` + **`jmp __ftol`**
 (tail jump, verified by compiling the shape), the reference uses **`call __ftol`** at six sites, and our
 build emits exactly those six at identical instruction positions. `__ftol` itself
@@ -28364,7 +38250,7 @@ and wrote `toolchain = "msvc-6.0-sp5-pp"` into `src/rebrew-functions.toml` for t
 TU-level pins.
 
 This would have been a real break, not a cosmetic one: a per-*function* toolchain pin contradicts the
-per-*translation-unit* rule, and `rebrew cmake-flags` **fails the configure** when one TU's functions resolve
+per-*translation-unit* rule, and `rebrew build cmake-flags` **fails the configure** when one TU's functions resolve
 to different flags. A one-line addition to a generated file is exactly what survives a careless `git add -A`.
 → workflow-traps §15.
 
@@ -29100,7 +38986,7 @@ Reverted; `build.make` restored from `.scratch/build.make.bak`; baseline re-meas
 
 ## Round 1021 — the 10 data type-conflicts and 17 zero-size annotations are all already correct
 
-The brief's "34 data-drift" items resolve to `rebrew data`'s `type_conflicts`, of which there are **10**.
+The brief's "34 data-drift" items resolve to `rebrew data list`'s `type_conflicts`, of which there are **10**.
 All ten are the same shape and all ten are **round-925 findings already recorded in the defining TU**, so
 this round audited them rather than re-probing.
 
@@ -29261,7 +39147,7 @@ them. Steps 3 and 4 do not recover them: they use prologues other than `55 8b ec
 | `0x10010080` | 2 | `mov eax,[esp+x]` |
 | `0x10010140` | 1 | `mov eax,[abs]` |
 
-**Re-discovery is not a workaround.** Re-ran `rebrew discover-functions` and got the identical 543 entries.
+**Re-discovery is not a workaround.** Re-ran `rebrew binary functions` and got the identical 543 entries.
 `--min-size 4` gives 565 and still contains none of the ten. The merge is deterministic.
 
 **The fix, measured on the binary.** Lowering the threshold to 1 alone adds **380** starts, nearly all
@@ -29501,7 +39387,7 @@ int g_file_version = 0;
 
 The `// DATA:` comment is **documentation for the tooling, not a placement directive** — no `#pragma
 section`, no linker ordering key. The linker places the stub wherever its COMDAT ordering puts it and
-`rebrew postlink --layout` rewrites every `.text` operand back to the reference address.
+`rebrew build postlink --layout` rewrites every `.text` operand back to the reference address.
 
 | artifact | dwords equal to `0x1002d4ec` | equal to the stub placement `0x100373c4` |
 |---|---|---|
@@ -30561,18 +40447,18 @@ edit — and the evidence was available from the start (stashing the edit restor
 
 ## Round 1057 — fixed a silent-pass defect in the build-check I just added
 
-Applied last round's lesson (test your own tooling as hard as the target) to `rebrew build-check`, and found
+Applied last round's lesson (test your own tooling as hard as the target) to `rebrew build check`, and found
 a defect in the direction that matters: **a mistyped `--build-dir` exited 0.**
 
 ```
-$ rebrew build-check --build-dir /nonexistent
+$ rebrew build check --build-dir /nonexistent
 build-check: /nonexistent is not configured -- nothing to check
 $ echo $?
 0
 ```
 
 That is the *same failure shape the command exists to catch*: an unverifiable state reported as success.
-Worse, it was reachable from the gate, which calls it as `if ! bc=$(rebrew build-check 2>&1)` — an
+Worse, it was reachable from the gate, which calls it as `if ! bc=$(rebrew build check 2>&1)` — an
 unconfigured tree would have passed the integrity check silently.
 
 **Fixed:**
@@ -30698,7 +40584,7 @@ compiler-flag axis, which no round has run per-carrier. Two things came out of i
 **1. The build-check guard works and blocked the sweep.** Editing `build.make` to switch flags now exits 4
 from `scripts/linktest.sh` with the restore command — the guard added in round 1052 doing exactly its job.
 That also means `build.make` editing is no longer an available experiment path, which is the intended
-trade. Restored from backup; `rebrew build-check` clean (198 objects).
+trade. Restored from backup; `rebrew build check` clean (198 objects).
 
 **2. RETRACTED (round 1061): the read-only metadata is the DESIGNED write-lock, not a bug.** `src/rebrew-functions.toml` is
 `-r--r--r--`, which stops a shell redirect or an editor — but not `rebrew`:
@@ -30776,7 +40662,7 @@ and `gm_AllocSpieler` carries `/O2 /Gd /Oa /Ow` (where `/Oa` is documented inert
 load-bearing). So the audit's findings are applied, and no carrier is silently missing a flag the record says
 it wants.
 
-**The data lanes are likewise closed**, re-checked this round: `rebrew data` reports **10 conflicts** and
+**The data lanes are likewise closed**, re-checked this round: `rebrew data list` reports **10 conflicts** and
 **17 zero-size annotations**, all round-925 findings previously verified against reference bytes; and
 `rebrew verify --data` reports **13 size divergences**, which round 1037 established are inventory-coarseness
 facts (`function_structure.json` is 543 entries against 283 annotated functions), with **24 of the 25
@@ -31287,7 +41173,7 @@ records, restated here because this round re-earned it.
 The round brief named `.data`/`.rdata`/`.bss` as the focus and quoted "246 start-data items and 34
 data-drift" as the queue. Both numbers were stale, and the real finding is much larger than an inventory
 correction: **every item in the lane was un-clearable, and every one was already correct.** After the fix
-both data lanes are empty — `rebrew todo --count 500` returns 2 items, both `improve-match`, the two known
+both data lanes are empty — `rebrew todo --limit 500` returns 2 items, both `improve-match`, the two known
 `.text` carriers. There is no data work left to pick up.
 
 **`verify --data` reports 122 matched of 329 metadata symbols and prints no denominator.** It compares only
@@ -31370,7 +41256,7 @@ applied).
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
 
-## Round 1080 — `rebrew rename` staled the build tree; named the lobby record-broadcast handler
+## Round 1080 — `rebrew source rename` staled the build tree; named the lobby record-broadcast handler
 
 Data and types being closed, this round took the naming axis the brief calls for: 32 distinct `fcn_`-style
 placeholders survive in `server.dll`. The best target was `fcn_10014af0` (RELOC, 247 bytes, called from two
@@ -31393,7 +41279,7 @@ call site carrying its symbol name:
 | 5 | `lb_HandleEntitySync` | `0x10014bf0` |
 | 6 | `cm_RouteCommand` | `0x10014ca0` |
 
-Renamed `fcn_10014af0` → `lb_ExPlayerRecordBroadcast` via `rebrew rename` (2 files updated, plus the file
+Renamed `fcn_10014af0` → `lb_ExPlayerRecordBroadcast` via `rebrew source rename` (2 files updated, plus the file
 itself). The security half is attested; the broadcast half is read from the body (the second loop walks all
 player slots calling `cm_QueuePlayerCommand`) and is labelled as read, not attested, in the file header.
 `lb_SendLobbyConfig` has no `.c` of its own — it shares `lb_ExPlayerlist.c`. Recorded in
@@ -31405,10 +41291,10 @@ from `lb_ExPlayerlist`, case 0. This function does not send a player list. Byte-
 
 **The rename exposed a real build defect.** After renaming, `split_link.sh` died at exit **157**, its last log
 line reading `0 object(s) padded, 28 too long` — a message from `pad_short_functions.py`, which had
-*succeeded*. The actual cause: `rebrew rename` does not touch gitignored `build/`, so `build.make`,
+*succeeded*. The actual cause: `rebrew source rename` does not touch gitignored `build/`, so `build.make`,
 `objects1.rsp` and `link.txt` still named the old `.obj`. The subshell running the link discards its output,
 so the error was invisible. **Both guards passed anyway** — the gate, because the residue was unchanged
-(rename is byte-neutral); `rebrew build-check`, because it compares flags on the objects CMake already listed
+(rename is byte-neutral); `rebrew build check`, because it compares flags on the objects CMake already listed
 and cannot see an object that should have left the list.
 
 Fixed at the root: all four `file(GLOB_RECURSE ...)` calls now pass `CONFIGURE_DEPENDS`. Verified by renaming
@@ -31694,7 +41580,7 @@ at `cm_ExSellObjekt.c:396`. Dereferencing both in the three artifacts settled it
 | raw link | zeros | `"cm_ExSellObjekt() Lager voll"` |
 
 The deliverable matches the reference **at both addresses**; only the raw link has them swapped, because
-COMDAT string material is placed differently before `rebrew postlink` rewrites the `.data` operands. The
+COMDAT string material is placed differently before `rebrew build postlink` rewrites the `.data` operands. The
 source was already correct. Recorded as measure-traps §53: **`.text` residue must be read from the raw link,
 but anything that dereferences a pointer into `.data` must be read from the deliverable** — the two artifacts
 answer different questions.
@@ -31837,7 +41723,7 @@ opened when the denominator first became visible.
 
 | criterion | status |
 |---|---|
-| every data byte matching | **satisfied in the shipped file — BY COPYING, not by compiling**; the raw link differs on 21,481 `.data` / 1,268 `.rdata` / 7,103 `.reloc` bytes, which `rebrew postlink` overwrites from the layout package. See the correction at round 1092. |
+| every data byte matching | **satisfied in the shipped file — BY COPYING, not by compiling**; the raw link differs on 21,481 `.data` / 1,268 `.rdata` / 7,103 `.reloc` bytes, which `rebrew build postlink` overwrites from the layout package. See the correction at round 1092. |
 | `.text` VirtualSize exactly `0x22846` | **satisfied** (`0x22846` in both) |
 | import table exactly 100 | **satisfied** |
 | `scripts/gate.sh` green | **satisfied** |
@@ -32069,7 +41955,7 @@ earlier.
 | `.data` | **21,481** differing | 0 |
 | `.reloc` | **7,103** differing | 0 |
 
-`rebrew postlink` produces the right-hand column by writing those sections from the layout package
+`rebrew build postlink` produces the right-hand column by writing those sections from the layout package
 (`layout/server.dll/data.hex`, `reloc.hex`, `iat.hex`, `header.hex`, …), which holds the reference's own bytes.
 The raw link produces 30,123 bytes that the fixers overwrite. So the zeros are a **tautology about the shipped
 file**, not a match produced by compilation.
@@ -32214,12 +42100,12 @@ instruction in the wrong place" question.
 **Done:**
 - Unified incomplete `[]` externs to sized forms matching BSS defs: `g_slot_table[2]`, `g_entity_state_base[2]`, `g_entity_type_bytes[1]` (15 TUs + `entity.h` / `command_internal.h`).
 - Sized `s_ahm_AllocAhmInfo_1002a0f8[17]`; retargeted `rebrew_globals.h` from stale `g_1002a0f8` scalar.
-- `rebrew data --set-type` for `0x1002a0f8=char[17]`, `0x10027104=char[568]`, slot/state/type BSS, `g_entity_table_end`, `g_stream_pool`, `g_file_write_mode`.
+- `rebrew data set --type` for `0x1002a0f8=char[17]`, `0x10027104=char[568]`, slot/state/type BSS, `g_entity_table_end`, `g_stream_pool`, `g_file_write_mode`.
 - Annotated only `g_entity_state_base` at `0x100358a2` (new). Did **not** re-mark `g_slot_table` / `g_entity_type_bytes` (E013 duplicate VA vs `spiel.c` / `spiel62.c`).
 
 **Left on purpose:** five `g_query_filter_extra*` / `g_filter_extra5` conflicts — loadsave3 array defs vs scalar readers. Round 925 measured scalars worse (`.text` +1, raw-link `.data` +375). Do not "fix" without re-measure.
 
-**Trap — `rebrew data --annotate`:** inserts `// GLOBAL:` between `// FUNCTION:` headers and C defs → `EXTRACT_ERROR: Symbol '' not found`. Demoted many statuses in `rebrew-functions.toml`. Reverted annotate blast; keep GLOBAL markers only next to data defs (file bottom / away from function identity headers).
+**Trap — `rebrew data annotate`:** inserts `// GLOBAL:` between `// FUNCTION:` headers and C defs → `EXTRACT_ERROR: Symbol '' not found`. Demoted many statuses in `rebrew-functions.toml`. Reverted annotate blast; keep GLOBAL markers only next to data defs (file bottom / away from function identity headers).
 
 **Measured:** conflicts 10 → 5. Lint 188/188. Data verify matched 122, mismatched 0. Func verify 281/283 (same two: `ServerMainThread` NEAR, `gm_AllocSpieler` STUB). crc32 still RELOC 309/309 after safe edits.
 
@@ -32234,14 +42120,14 @@ instruction in the wrong place" question.
 
 **Measured:** annotated 100 → 125. Lint 188/188. Conflicts 5. Data verify matched 122 / mismatched 0. Func verify 281/283. `gm_NextEntityQueryMatch` still RELOC 464/464; GLOBAL SKIPPED rows in `rebrew test` are data markers, not function demotions.
 
-**Still avoid:** `rebrew data --annotate` (FUNCTION extract break). Filter-array conflict "fixes" without re-measure.
+**Still avoid:** `rebrew data annotate` (FUNCTION extract break). Filter-array conflict "fixes" without re-measure.
 
 ## Round 1147 — start-data: last multi-TU markers + path-string hygiene
 
 **Focus:** Finish remaining multi-TU unannotated (non-conflict). No `--annotate`. Filter conflicts stay.
 
 **Done:**
-- Marked `s_D__Develop_DieGildeAddOn_game_sp_10031004` @ `0x10031004` (`// DATA:` on `spiel.c` def); sized `char[38]`; unified 7 extern TUs; `rebrew data --set-type` + lint `--fix` for SECTION.
+- Marked `s_D__Develop_DieGildeAddOn_game_sp_10031004` @ `0x10031004` (`// DATA:` on `spiel.c` def); sized `char[38]`; unified 7 extern TUs; `rebrew data set --type` + lint `--fix` for SECTION.
 - Marked `g_office_slots` @ `0x101de5a0` on `aemter.c`.
 - Marked `g_alloc_root_*` cluster on `m_alloc.c` (`0x117640a0`..`0x117640c0`).
 
@@ -32970,12 +42856,12 @@ instruction in the wrong place" question.
 - **goal.md updated** (user direction): priority/focus reordered to server -> GOLDTL (REVERSING
   FOCUS) -> GOLD; unified shared source tree promoted to primary deliverable; added the
   GOLD<->GOLDTL overlap exploit section: same-code-different-VA functions transfer via
-  `rebrew cross-import` so one shared source (marker per target) covers both clients.
+  `rebrew source import-related` so one shared source (marker per target) covers both clients.
 - **GOLDTL catalog was empty** (blocker): `src/Europa1400Gold_TL.exe/function_structure.json` was
-  stamped `_generated_by: "rebrew catalog"` -> `load_function_structure` filters ALL entries as
+  stamped `_generated_by: "rebrew coverage catalog"` -> `load_function_structure` filters ALL entries as
   catalog self-export -> cross_import registry = 0 -> "no unmatched functions". FIX: regenerated via
-  `rebrew discover-functions original/Europa1400Gold_TL.exe` (rizin, unstamped): SAME 6335 VAs,
-  0 lost / 0 new. NOTE: re-running `rebrew catalog --data-json` for GOLDTL re-stamps the file and
+  `rebrew binary functions original/Europa1400Gold_TL.exe` (rizin, unstamped): SAME 6335 VAs,
+  0 lost / 0 new. NOTE: re-running `rebrew coverage catalog --data-json` for GOLDTL re-stamps the file and
   re-breaks cross-import -> rebrew shortcoming, log in IDEAS-GUILD.
 - **cross-import GOLD -> GOLDTL** (`--from Europa1400Gold.exe --target Europa1400Gold_TL.exe`):
   dry-run found **133 would-import** (score 95-100, many 100.0 = byte-identical). Real run: ~130
@@ -32996,7 +42882,7 @@ instruction in the wrong place" question.
 - **State:** GOLDTL lint err 0 (warn 4); passed 46 (16 exact/30 reloc) — the server-import bulk (mostly
   SIZE_MISMATCH) is gone; the +27 from the GOLD import held. Gates: server 281/283, GOLD 208/116.
 - **Lesson:** GOLDTL coverage comes from the GOLD single-function import (works) — server multi-function
-  files must NOT be cross-imported in bulk until rebrew cross-import handles per-target marker rewrite.
+  files must NOT be cross-imported in bulk until rebrew source import-related handles per-target marker rewrite.
 
 ### Round 1235 / session R93 (rebrew cross_import fix applied + server->GOLDTL re-import)
 - **Fix applied (not present on disk despite report):** implemented `_extract_function_text` in
@@ -33016,7 +42902,7 @@ instruction in the wrong place" question.
 ### Round 1236 / session R95 (GOLDTL promotion via data-VA re-derivation)
 - **GOLDTL passed 59 -> 80 (+21).** Lever: GOLD-imported fcn_*.c carry hard-cast GOLD data VAs;
   rebrew does not mask those (only call relocs), so they land NEAR. Re-derive each GOLD VA to its
-  GOLDTL equivalent (read from `rebrew asm` on the dst VA) and the function goes EXACT/RELOC.
+  GOLDTL equivalent (read from `rebrew binary asm show` on the dst VA) and the function goes EXACT/RELOC.
   15 promoted this round: 11 EXACT + 4 RELOC (covers fcn_0040cd70, 00410430, 00422d60, 00427370,
   0046c690, 00476b60, 0047da70, 004ac1e0, 004ad190, 004b39f0, 004de610, 004e6f10, 004f36e0,
   004f39b0, 004f97a0, 00505e30, 00508620, 00508640, 00511840, 0051ad90, 00520f40). fcn_00411840.
@@ -33429,7 +43315,7 @@ instruction in the wrong place" question.
   server3 +64, ahm_GetCommandPayloadSize +16, gv_ExtendProductionTime +240, ls_LoadTownData +1056.
   split_link.sh itself unchanged since Round-454; the OBJECTS grew (reorg changed TU/object
   composition). No postlink -> no deliverable -> residue/imports/wine unmeasured -> GATE FAIL.
-- **rebrew bug found:** `rebrew orphans --prune` wrongly deletes metadata for block-comment
+- **rebrew bug found:** `rebrew orphans prune` wrongly deletes metadata for block-comment
   `/* DATA: SERVER 0x... */` markers (parser misses that form): pruned 260 data lines + 3 GOLDTL
   fn entries and orphaned vfs4/vfs_OpenStream/spiel5 markers (W016/W022). Reverted; see IDEAS-GUILD.
 - **Gates:** lint 0/0, compile 0 errors, verify 281, extent 326 clean, byte-matched 264 — all held.
@@ -33458,12 +43344,12 @@ instruction in the wrong place" question.
   on deliverable (split_link pad + postlink rdata).
 
 ### Round 1284 / session R261 (ROOT CAUSE FOUND + FIXED: order-sources --marker SERVER; postlink 2% -> 62.8%)
-- **Root cause of the whole split_link/postlink collapse: `rebrew order-sources` had no `--marker SERVER`.**
+- **Root cause of the whole split_link/postlink collapse: `rebrew build order-sources` had no `--marker SERVER`.**
   The reorg flattened the tree so game files carry BOTH `// FUNCTION: SERVER` and `// FUNCTION: GOLDTL`
   markers, and on shared files the GOLDTL marker often comes FIRST (plant.c: GOLDTL 0x4bcb80 on line22,
   SERVER 0x10014F80 on line24). Without `--marker SERVER`, order-sources reads each file's *first* marker,
   so it sorted shared sources by their **GOLDTL VA** — scrambling the SERVER link order. Direct proof:
-  `rebrew order-sources plant.c sim.c spiel62.c cm_ExKillSpieler.c` puts plant FIRST (GOLDTL 0x4bcb80);
+  `rebrew build order-sources plant.c sim.c spiel62.c cm_ExKillSpieler.c` puts plant FIRST (GOLDTL 0x4bcb80);
   the same with `--marker SERVER` puts cm_ExKillSpieler first, plant second (SERVER 0x10014F80).
 - **Fix = the `--marker SERVER` arg on order-sources in CMakeLists.txt** (was sitting uncommitted in the
   working tree). After `cmake -S . -B build && cmake --build build`: **postlink layout coverage
@@ -33771,7 +43657,7 @@ instruction in the wrong place" question.
   client, lint 618/618.
 - **Next:** the remaining round-4 imports that stayed unverified are gone; the useful unverified GOLD
   bodies still to look at are D3DX8-ish (`GOLD.fcn_005de62f` writes function pointers into the
-  0x62e3c8-0x62e3dc table — try `rebrew lib-match` before reversing it). Otherwise the near list is
+  0x62e3c8-0x62e3dc table — try `rebrew library match` before reversing it). Otherwise the near list is
   `gv_UpgradeField` 99.8, `vfs_ReadCompressed` 94.1, `gm_StartFilteredEntitySearch` 94.0,
   `cm_ChkEntityLookup` 93.2.
 
@@ -34151,7 +44037,7 @@ instruction in the wrong place" question.
 - **Inventory sizes are advisory.** Six of this batch's spans are *smaller* than
   `db/inventory-Europa1400Gold_TL.exe.json` claims (0x4117c0: 48 listed, 42 real; 0x40fdd0: 48
   listed, 35 real; 0x40d550: 48 listed, 35 real). The compiled-size compare in `rebrew test` is the
-  authority; `rebrew asm --size N` past the end silently dumps the next function.
+  authority; `rebrew binary asm show --size N` past the end silently dumps the next function.
 - **Two spans merge an ILT thunk with its target — skip them.** 0x408240 (41 B) and 0x4186c0 (47 B)
   each start with a 16-byte `jmp rel32` + 11 NOPs (incremental-link thunk) followed by the real
   25/31-byte body. No single C function reproduces the pair.
@@ -35263,7 +45149,7 @@ instruction in the wrong place" question.
   long before the lib-match veto covered this band; nothing references them, so the three `.c` files are
   deleted and their VAs added to `src/library_d3dx8.h` next to the existing zlib entries
   (`_flush_pending` 0x45dea0, `_zcfree` 0x465840, `_crc32` 0x45d600).
-  `rebrew lib-match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe` now reports
+  `rebrew library match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe` now reports
   **0 findings**; gate step prints `d3dx8 lib-match findings: 0`. GOLDTL 592 -> **589** byte-matched
   (tracked 645 -> 642) — correct accounting, the three were never our work.
 - **Current gate state (full `scripts/gate.sh`, two runs).** PASS: lint 1072/1072 (0 warnings), compile
@@ -35364,7 +45250,7 @@ instruction in the wrong place" question.
 - **Six-argument `__stdcall` slot call = no `add esp`.** The imported slot callers have no stack cleanup
   after `call [reg+0x5c]`, so the member type must be `int (__stdcall*)(void*, int, int, int, int, int)`;
   a cdecl typedef would add `add esp,0x18` and blow the size.
-- **Read the immediates off `rebrew asm`, not the raw hex.** The second call pushes `0x144`
+- **Read the immediates off `rebrew binary asm show`, not the raw hex.** The second call pushes `0x144`
   (`68 44 01 00 00`), not `0x44` — the first call's `6a 44` is a different push two instructions
   earlier; guessing from the hex string cost a round trip (45/64 -> 64/64).
 - **Parked:** `fcn_00405080` (first-free-record search over 0x194-stride records at `[0x6b5c20]`, 0x7d0 of
@@ -35611,9 +45497,9 @@ instruction in the wrong place" question.
   stub 2; failed 52), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213; tree clean,
   zero demotions/losses, lint 1088/1088 (0 warnings).
 
-### Round 1369 / session R340 (upstream fix: `rebrew data --set-section`; GOLDTL globals attested, lint 0)
+### Round 1369 / session R340 (upstream fix: `rebrew data set --section`; GOLDTL globals attested, lint 0)
 - **Closed the round-1368 wall in the rebrew checkout, not in game source.** W016 fires for every
-  `// GLOBAL:`/`// DATA:` marker whose metadata has no SECTION, and `rebrew data --set-type` only writes
+  `// GLOBAL:`/`// DATA:` marker whose metadata has no SECTION, and `rebrew data set --type` only writes
   `type` — so a global that exists *only* through an annotation could not carry the marker without ten
   warnings. Added `--set-section` mirroring the type setter:
   - `src/rebrew/data_annotate.py`: `set_data_sections(cfg, specs, *, dry_run=False)` — `0xVA=SECTION`
@@ -36749,7 +46635,7 @@ byte-matched functions:
 | 0x4c63f0 | packed `{int,int,char}` | | |
 
 All sixteen are RELOC.  New globals: `GOLDTL 0x9badd0` (int, .data) and
-`GOLDTL 0x773d38` (int, .data), both registered with `rebrew data`.
+`GOLDTL 0x773d38` (int, .data), both registered with `rebrew data list`.
 
 Two family members were tried and deleted rather than parked: **0x4c5b00** and
 **0x4ce210**.  Both have the exact reference instruction sequence and operands;
@@ -36823,7 +46709,7 @@ GOLDTL 671 byte-matched (251 EXACT, 420 RELOC), 52 failed, lint 1152 files /
 First cross-import run in the GOLD direction:
 
 ```
-rebrew cross-import --from Europa1400Gold_TL.exe --target Europa1400Gold.exe \
+rebrew source import-related --from Europa1400Gold_TL.exe --target Europa1400Gold.exe \
     --shared --min-score 100 --json
 ```
 
@@ -36842,7 +46728,7 @@ GOLDTL stayed 671 and server 264 — no demotions.
 scores 95–99 against the GOLD function at that VA, i.e. the two clients'
 bodies genuinely differ there (not a codegen difference — both use the
 Processor Pack).  Regenerate the list with
-`rebrew cross-import --from Europa1400Gold_TL.exe --target Europa1400Gold.exe --dry-run --shared --json`
+`rebrew source import-related --from Europa1400Gold_TL.exe --target Europa1400Gold.exe --dry-run --shared --json`
 and read the `skipped-unverified` rows; each is a GOLD function whose GOLDTL
 source is close but not identical.  A later round should diff a few: the
 difference is either a TL-only change or a wrong function boundary in GOLD.
@@ -37093,7 +46979,7 @@ unexplored source.  Also found that `g_item_def_table` (SERVER 0x101de450)
 resolves to `[0]` on the object level through *every* spelling tried — bare
 `extern`, a defined `char* g_item_def_table = 0;`, annotation at the top of the
 file, annotation inside the SERVER block, with and without a trailing comment.
-`rebrew data --gen-header` emits only externs, so the address must come from
+`rebrew data header` emits only externs, so the address must come from
 elsewhere; that is an open tooling question for a round with the server as its
 focus.
 
@@ -37821,7 +47707,7 @@ frame already fixed rather than re-deriving the layout.
 and the epilogue are exact.  The only difference is where `a2` lives while the tag
 is built — the reference does `push esi; mov esi,[esp+0x20c]` and `add eax, 0x253;
 add eax, esi`, our CL keeps it in `edx` and folds the two adds into
-`lea eax,[eax+edx+0x253]`.  `rebrew match --flag-sweep-only` reports 38900.00 for
+`lea eax,[eax+edx+0x253]`.  `rebrew match flags` reports 38900.00 for
 every candidate (including `/G3`–`/G6`, `/Oy`, `/Op`): flags do not explain it.
 Three such cases now (0x5dd050 `pop` placement, 0x4fa530 `r` in `eax`, here `esi`
 for a parameter) — the reference build places register saves/restores and picks
@@ -37950,7 +47836,7 @@ fcn_0051af00(buf, tag, *(unsigned short*) e, *(unsigned short*) e);
   `t != 6` path straight to `return 2`, while the reference re-enters the
   `if (v == 1 && t == 6)` test.  Nested `if`s, `else if`, mixed `char`/`unsigned
   char` reads and a `volatile` read all thread identically;
-  `rebrew match --flag-sweep-only` reports every flag candidate at 1400.00
+  `rebrew match flags` reports every flag candidate at 1400.00
   (100 % mnemonic match, one structural).  Candidate deleted.
 * `fcn_004011a0` (0x4011a0, 34B, new) — the reference keeps the loop variable in
   **eax** (`mov eax,[esp+8]; dec eax;` then `lea esi,[eax+1] … mov eax,esi`), so
@@ -38191,7 +48077,7 @@ by hand: **five matched** and are promoted, one reverted.
 
 `GOLDTL.fcn_00492990.c` (GOLD 0x4933c0) differs at offset 68 — marker reverted.
 
-`rebrew cross-import --from … --dry-run --shared --json` no longer emits the
+`rebrew source import-related --from … --dry-run --shared --json` no longer emits the
 `skipped-unverified`/`would-import-shared` actions the harvest script filters on
 (4288 rows, all `action = "skipped"`, `status = ""`), so `.scratch/ci_gold.json`
 was restored from its backup and the harvest list is not regenerable with that
@@ -38200,7 +48086,7 @@ produced the working candidates.
 
 ## Round 157 — harvest list not regenerable; foreign edits in the tree
 
-No new matches this round.  `rebrew cross-import --from Europa1400Gold_TL.exe
+No new matches this round.  `rebrew source import-related --from Europa1400Gold_TL.exe
 --target Europa1400Gold.exe --dry-run --shared --json` now returns 4288 rows all
 with `action = "skipped"` (the harvest script filters on
 `skipped-unverified`/`would-import-shared`, of which the working
@@ -38318,7 +48204,7 @@ Two questions block the next stretch and are not source-level:
    byte-identical except for register choice, block order or stack-cleanup points
    (0x5dd050, 0x4fa530, 0x4ea4b0, 0x5b23e0, 0x4b74b0, 0x526070, 0x4013b0,
    0x5c1090/0x5a7190, 0x404560 …).  Every VC6 service pack, the Processor Pack,
-   `/TP`, and every flag combination tried (`rebrew match --flag-sweep-only`,
+   `/TP`, and every flag combination tried (`rebrew match flags`,
    `/G3`–`/G6`, `/Oy`, `/Op`, `/Os`, `/Ob0`) produce our form, so the reference
    build differs in the compiler image or in a source construct we have not
    guessed.  Resolve this before spending more rounds one function at a time.
@@ -38531,7 +48417,7 @@ then, when a hit exists, a walk of the 0x21c-stride entity table
 
 No GOLD twin: the GOLD image contains neither the inner-loop encoding
 (`39 04 f5` / `39 0c f5`) nor the `and [eax*4+disp32],edi` form, and
-`rebrew cross-import --min-score 80` returns only 80-88 % structural siblings for
+`rebrew source import-related --min-score 80` returns only 80-88 % structural siblings for
 it (0x4010b0, 0x43f990, 0x4c65b0, 0x4e3650), so the file stays GOLDTL-only.
 Worth remembering: the `0x9a3816` / `0x99f800` / `0x7f4e88` tables and the 0x2d
 stride are GOLDTL-only data, which is a cheap first check before hunting a twin.
@@ -38745,7 +48631,7 @@ sides (strip addresses/jump targets) shows GOLDTL 0x4b6ce0 and GOLD 0x4b6b10,
 | GOLD   | 0x4b6b10 | RELOC 216/216 |
 | GOLD   | 0x4b6ef0 | RELOC 216/216 |
 
-Method that paid: `rebrew asm <VA> --size N --target T | sed 's/^  0x…:  //'`
+Method that paid: `rebrew binary asm show <VA> --size N --target T| sed 's/^  0x…:  //'`
 then `sed -E 's/0x[0-9a-f]+/HEX/g'` on both sides and `diff` — a zero-line diff
 means the body is reusable verbatim, and the remaining candidates can be ranked
 by diff size (0x4b6fd0/0x4b7100/0x4b7200/0x4b7310/0x4b7430 came back at 44-85
@@ -38898,7 +48784,7 @@ loop pointer in `edi` with the entity in `esi`, the reference has the mirror.
 ~40 spellings are inert — declaration order/type/scope, `register`, combined vs
 split null checks, `!x` vs `x == 0`, named temps for the loop byte / entity byte
 / id, `for`/`while`/`do` loop forms, initialised declarations, unused locals, a
-20-combo `/O2`-family flag sweep, `#pragma optimize`, and `rebrew qual-sweep`.
+20-combo `/O2`-family flag sweep, `#pragma optimize`, and `rebrew match qualifiers`.
 
 Two measured facts worth keeping.  (a) `volatile char* p` **does** flip the
 roles (214/295) because the two aliasing-barrier reads become separate values —
@@ -38909,7 +48795,7 @@ volatile reads; a single volatile read or a named `t = *p` is inert.  (b) With
 the roles flipped the remaining difference is a rotation of the caller-saved
 trio: ours {string, buf2} = `ecx`, id = `edx`, buf1 = `eax`; the reference has
 `eax`, `ecx`, `edx` respectively — the same exchange class as allocator Findings
-53/62, and `rebrew match` GA found no exact solution in a 25-minute run.
+53/62, and `rebrew match run` GA found no exact solution in a 25-minute run.
 
 ## Round 202 wall: 0x4f7bf0
 
@@ -39821,3 +49707,561 @@ The shipped true block is 24 bytes (`+0x80`..`+0x98`) and the reference's is 25 
 Value numbering folds every identity tried in the preserving slot (store between the clock load and `stamp += 9`, which is what keeps `a0` and `ecx`): a second byte (`held = key`), `key ^ 0`, `~~key`, `(unsigned char)(unsigned int)key`, an `unsigned int` temporary, a volatile destination, and an empty `__asm {}`. All of those stay raw 175 and still emit `a2` then `mov dl, al`. `/O2 /G5`, `/Ox`, and `/O2 /Op` are the same bytes. `/O2 /G6` issues `add ecx, 9` before the store but the store is still `a2`, and the loop's `and eax, 0xff` becomes `movzx` (raw 59).
 
 Moving only the key store into a second `if (cur != 0)` does emit `mov dl, cl` before `add`, but the store remains `mov [key], cl` (`88 0d`), `cur` leaves `al`, and the else is outlined past `ret` (raw 130). An early copy is not enough to make the store read `dl`. A one-byte struct assignment of that key, and volatile on both the clock load and the key/stamp stores, compile to the same 175 bytes as the plain store. Post-join stores do use the phi register (`mov cl, dl` then `mov [key], cl`) and keep the loop (`7c 46`, `74 3e`), but `cur` leaves `al` for `dl` and the clock moves to `eax` (raw 163; key-only post-join store raw 171). The 175 body stays.
+
+
+## Continuation 2026-10-03 — ABI and shared-marker tooling
+
+Production/reference hashes remain ff81a459 / 3cc2ce90, both unchanged:
+2530 overlapping differences and 16384 missing bytes, native file delta zero.
+Docker 29.8.1 is available; the missing msvc-6.0-sp5-pp image builds through the
+CLI and the TL 0x4011a0 stock-library check is negative. Its complete 34-byte
+body equals GOLD's same-VA body. The CLI-generated loop now lives beside the
+existing shared helper in src/GOLD.fcn_00401180.c; its new marker is TL-only
+until matching and verified cross-import earn the GOLD marker.
+
+Upstream ECX definition tracking corrects m_pool_free's false thiscall hint;
+the real source remains cdecl. Eight new regression cases fail before the
+fix; focused asm/skeleton testing passes 236 cases after it. Shared-marker
+synthesis keeps migrated functions beside data markers and respects active
+function-marker precedence; 196 focused annotation/marker/relocation/migration
+checks pass. Updated relocation-scan and verify-cache fixtures retain their
+existing assertions; all 32 cache cases pass with coherent symbol identities.
+Ruff and targeted mypy pass for the implementation. C-shapes257 carries the
+ABI evidence; the upstream ideas file records missing caller/stack arity.
+
+Concurrent tool edits invalidate a single-epoch claim for the two shared-root
+full runs. A fixed upstream worktree snapshot instead passes 10824 cases,
+with 32 skips, and identifies six inconsistent cache fixtures plus the
+snapshot subprocess import path. All 33 affected cache/smoke checks pass
+after those corrections. The final full snapshot run exits zero: 10831 passed, 32 skipped, 57 warnings
+in 443.24 seconds. All 805 pinned inputs retain their hashes. The completed
+receipt is final-suite-job.json and the log is snapshot-final-full.txt under
+.scratch/goal-calling-convention/. Session 87228 is closed.
+
+Fresh ordinary server verify exits zero with 316/316 passes, 41 EXACT and
+275 RELOC (260 game, 56 compiled library checks), no failures or divergent
+sizes. All-target lint is 4050 per target with zero errors/warnings; scaffold
+check has zero drift. The original objective and raw-file gaps remain open.
+Evidence .scratch/goal-calling-convention/ and .scratch/goal-server-verify-current.*.
+
+
+## Continuation 2026-10-04 — two TL read wrappers and a shared client setter
+
+- TL `0x004011a0` remains SIZE_MISMATCH 24/35, reference 34. Separate cursor/next
+  produces the reference's early register allocation but a separate byte load/test
+  in the tail. Ordinary cursor/next, returning inside the loop, parameter reuse,
+  copying before the call, declaration order and a void helper do not match.
+  The bounded GA (12 generations, population 8, four jobs, seed 17) exits one
+  after 103.74 seconds without a match. Its winner changes the terminator from
+  zero to two and is rejected; no winner is applied. A volatile byte read and an
+  integer cursor each remain 24/35. The final canonical check and CLI blocker
+  preserve the mismatch. No GOLD marker is added. Receipts: test-tl-final.json,
+  ga-run.json, ga-job.json, volatile-byte-test.json, integer-cursor-test.json.
+- TL `0x004013b0` / `0x004013f0`: preserve the original stream handle after
+  the first call overwrites argument one with the read count. The first prior
+  body measures SIZE_MISMATCH 5/60, object 58. An ordinary preserving copy is
+  5/62; declaration reordering and `register` are inert. A volatile first
+  argument plus the preserving copy matches both full bodies. Canonical CLI
+  results are RELOC 60/60 each, object/reference sizes 60 and three call
+  relocations each, with unchanged default flags. The CLI records both verdicts.
+  C-shapes258 holds the codegen finding. A fresh related-import preview has no
+  eligible GOLD mapping for either wrapper; no duplicate GOLD implementation
+  is made.
+- GOLD `0x00417dd0` / TL `0x00419390`: original instruction streams agree
+  and call the already-shared callee at GOLD `0x00417cf0` / TL `0x004192b0`.
+  Their 48-byte inventory spans each end with four NOP padding bytes after the
+  44-byte body. CLI shared import stacks the GOLD marker onto
+  Develop/Units/vfs/GOLDTL.vfs2.c, verifies RELOC 44/44, and removes the wrong
+  three-argument GOLD.fcn_00417dd0.c body. TL's managed size is corrected to
+  44 with `rebrew test --size 44`, then the legacy inline SIZE is aligned to
+  satisfy W019. Final ordinary checks in both clients are RELOC 44/44. Naming
+  evidence records that the retained client VFS label is a sound misnomer;
+  the independent server VFS writer is unchanged. Import/validation receipts:
+  import-gold-417dd0.json, shared-setter-final-results.json.
+
+All receipts above are under `.scratch/goal-client-loop/`. LIBCMT checks are
+negative at the worked VAs. No asm or raw-client link is used; no native file
+improvement is claimed. The server production/reference bytes remain unchanged.
+All-target lint passes 4049 checks per target with zero errors/warnings and
+build-check reports zero drift in 126 server recipes. No commit is made and
+no full three-binary identity is established; the goal remains active.
+
+
+### 2026-10-04 — animation builder and target-isolated rename continuation
+
+- TL 0x00406510: stock-library check negative. Old C SIZE_MISMATCH 22/80, object 74; original caller uses returned pointer at +0x18c. Pointer-return-only probe emits 73 bytes, 22/75; explicit early failure emits 75 bytes, 63/75; declaration swap inert. Name load before owner store and destination setup immediately after it match the full 75-byte body. Typed owner and symbolic callback retain RELOC 75/75 (two relocations). Landed canonical C; managed size 75 excludes five trailing NOPs. Fresh ordinary test and per-file full verify pass; GOLD structural preview has no eligible mapping. Object gain only, no linked-client measurement.
+- New source-rename multi-target bug fixed upstream before game edits: preserve independent same-name definitions, reject ambiguous mixed/common references before writes, and update migrated names/symbols/files via locked metadata API. Seven new regressions fail before the fix; focused group 224 passed, Ruff/mypy pass. Final isolated full suite: 10838 passed / 32 skipped / 57 warnings, 434.05 seconds, exit zero, zero drift in 805 pinned inputs. Earlier 10821/49 run lacked external sibling links; restored-link full run supersedes it. Patch docs/rebrew-patches/goal-target-rename-fixes.patch; receipts .scratch/goal-rename/.
+- CLI renamed the shared TL/GOLD 44-byte setter to SetSoundControlValue (three files), preserving the independent server writer. Both setter tests RELOC 44/44; changed TL callers RELOC 91/91 and 56/56. Placement stays legacy VFS pending original-module evidence. Animation builder CreateAnimationEvent preview safely rejects mixed references in command7.c / alchemistry_logic3.c; missing finer ownership feature appended upstream on encounter, no manual rename. Removed wrong health-handler commentary, documented legacy identity.
+- Final all-target lint 4049 each, zero warnings/errors; build recipe check 126, zero drift; all three coverage documents regenerated. Five verification source hashes current; reference/production server hashes unchanged (3cc2ce90 / ff81a459). No native-file gain, no commit, no live job; goal active.
+
+
+### 2026-10-04 — four TL first passes and preserved neighboring matches
+
+- Library checks negative for 0x40df00, 0x40e110, 0x405540 and 0x4050c0. CLI skeleton append keeps each beside its existing neighbor. Two flag queries now have evidence-backed CLI names CharacterSitting / CharacterSitsDown. Each reference is 56 bytes (+eight NOPs), each canonical body emits 52 and records SIZE_MISMATCH 40/56. Bounded forms/flags fail; wall50 records them. No duplicate GOLD reversing or unverified import.
+- Animation control 0x405540 reconstructed from two pause/unpause callees and flag bit 2. Reference 94 bytes (+two NOPs); first C 102 bytes, SIZE_MISMATCH 30/102. Unsigned pointer and bitfield stores inert, inline node expressions 116/40, /Os 84/10. No scratch variant accepted; managed blocker records condition/node scheduling and byte RMW difference.
+- Task removal 0x4050c0 reconstructed as list unlink + owner-head update + 0x194-byte slot clear. First pass NEAR 97/110; guard comparison operand order improves to 98/110 with zero relocations (C-shapes260). Clear setup order remains; bounded probes and 12x8 GA fail, not applied (67.77 seconds, session 61758 closed, canonical source hash unchanged). Managed blocker delta12. Wall51 retires the probes.
+- Existing neighbors all remain RELOC: TL 0x40df40 66/66, 0x40e150 65/65, 0x405080 64/64, 0x4055a0 248/248; shared GOLD allocator/camera 64/64 and 248/248. Four new bodies are still unmatched, so no new EXACT/RELOC count or raw-file gain is claimed. Receipts .scratch/goal-character/.
+- Final source-order repair places the three new lower-VA bodies before their existing neighbors, clearing W030. Ordered skeleton insertion feature appended upstream on encounter; fresh per-file verify rechecks moved bodies and neighbors. Final all-target lint zero errors/warnings, build check 126/zero drift, coverage regenerated, ten source verification hashes current. No raw-file gain, no commit, no live job; goal remains active.
+
+
+### 2026-10-04 — pair-copy alias repair and sound extent correction
+
+- Rechecked todo and known walls before new probes; 0x403040/0x406120 remain retired pending new evidence. Stock-library checks negative for 0x4193f0 and 0x407760.
+- Sound request 0x4193f0: reference body is 132 bytes followed by twelve NOPs. Removed stale inline SIZE144, CLI stores size132/NEAR_MATCHING124/132. Volatile amount, volatile mode, comma-call and typed helper probes all remain124/132; none applied, no flags changed. Shared 0x54 sound-record/type evidence documented, consolidation pending.
+- Pair-copy 0x407760: concrete reference/old/corrected compiled-code execution with count3, step2 and dst=bytes+3 exposes an incorrect early odd-byte prefetch. Reference/corrected output offset6=40, old C=60; all return2. Landed tail read after even store with count/pointer reload. Positional score worsens76/162 ->18/163 versus159-byte reference; correct alias behavior retained, SIZE_MISMATCH, no PROVEN or byte gain. Explicit low-byte local, pair pointer and parameter-step reuse all163/18, rejected. Reproducible VEX case and code hashes .scratch/goal-sound-order/tail-alias-evidence.json; script uses complete compiled bodies and no external-call model.
+- Existing height-to-ground neighbor rechecked in both clients. Final all-target lint/build check/coverage and source-hash receipts under .scratch/goal-sound-order/. Goal active; no new client match or raw-file improvement, no commit.
+- GOLD neighbor fresh check initially SIZE_MISMATCH326/336 with no common-prefix differences. Reference disassembly proves return at 0x406bb5, followed by ten NOPs through0x406bbf. Removed obsolete inline336; CLI stores326 and fresh GOLD ordinary test is RELOC326/326. Shared TL body also326. This corrects measured function extent only, not native-file bytes. Reference receipt neighbor-gold-asm.json and final checks under .scratch/goal-sound-order/.
+
+
+### 2026-10-04 — shared positional-sound type staged; full baseline running
+
+- Three 0x54 local views (allocator T418dc0, update snd_418e00, request PanReq) describe the same record. Nine-file staged patch lifts SOUND_SOURCE and canonical helper/global declarations into existing client_types.h; no new subsystem path or storage definition. Constructor0x418c80 copies50 bytes through catalogued stock strncpy0x64d530 into the record start, also used as a %s diagnostic. Candidate name[0x32] plus normal alignment is an inferred extent; voice remains+0x34. Offset44 is playbackControl, also propagated by reset0x4192b0 to voice+0xc/control helper. Field names remain inferred. GLOBAL markers move with declarations.
+- Scratch candidate checks: allocator63/63, update328/328, release79/79, pan281/281, cleanup54/54, wrapper18/18, destroy56/56 all RELOC; request stays NEAR124/132. Compiler sizeof84/field-offset checks pass on both Win32 profiles. Patch apply check and nine before hashes pass, canonical files unchanged.
+- Full unchanged-source baseline across316 server /3676 TL /2510 GOLD checks runs under pinned green tool snapshot, session13849 confirmed live. 4109 source/header/config hashes pinned with zero drift so far. Receipts .scratch/goal-shared-sound/. Finish the existing job before applying candidate, then run/compare full after-header tests. Do not restart a live baseline. No consolidation or raw-byte gain accepted yet.
+
+### 2026-10-04 — staged sound record evidence refined; baseline preserved
+
+- Refined candidate header hash7ce2f409: name array bound50 inferred from original strncpy; no runtime reimplementation or new storage. Both client profiles pass name-size, sizeof0x54 and eight offsetof assertions. Refined update retains RELOC328/328; request remains NEAR124/132. Native receipts/type evidence under .scratch/goal-shared-sound/.
+- Baseline session13849 remains live, unchanged4109 input hashes verified. Canonical C/header still unchanged; nine-file patch rebuilt and apply-check passes. Finish SAME baseline before applying and running full after tests. Constructor scratch first pass is separate from that nine-file consolidation, not yet accepted or applied.
+
+### 2026-10-04 — positional sound constructor reaches a staged byte match
+
+- TL0x418c80 stock-library check is negative; its strncpy callee0x64d530 is catalogued LIBCMT. Native body is150 bytes plus10 NOPs. Scratch first pass early return18/153, initialized nested source123/150, float scaled local142/150, double scaled local RELOC150/150 with five relocations. The original non-null slot return on missing voice entry is preserved. No naked/assembly reconstruction or library source change.
+- Constructor integrated before allocator in staged existing source; allocator remains63/63 in TL and GOLD. Typed create caller remains91/91. Ten-file patch includes constructor/allocator prototypes, typed caller bridges and the shared record consolidation. Final header hash90153cf8; name[50], size84 and all eight field offsets pass both client profiles. GOLD constructor mapping and the TL absolute multiplier's GOLD binding remain unestablished; no GOLD marker added.
+- These checks remain scratch-only. Canonical C/header still unchanged; all4109 baseline input hashes agree at2026-10-03T19:20:34Z. Baseline session13849 remains live. Expected baseline totals316/3676/2510, after staged patch316/3677/2510. Finish existing baseline, apply against ten matching before hashes, lint and full test all targets; compare outcomes before accepting. No raw-file improvement or commit. All scratch handles closed; only baseline remains live.
+
+### 2026-10-04 — staged request wall resolved; scale and native call bindings checked
+
+- Double scaled temporary until final float store matches request132/132 (was124/132); same shape gives constructor150/150. Symbolic const-double view in shared header preserves both. Scale bytes/value agree at TL0x662b40/GOLD0x5eba10; no storage owner or definition is invented. Six canonical prototypes include existing voice helper fcn_00426170; constructor/update use that shared name. Header d58cba51; layout/mapping assertions pass both clients, zero owners added.
+- Voice helper is29 body bytes plus3 NOPs in both references; scratch EXACT29/29 in both. Eleven-file patch removes obsolete inline32. After baseline/apply, CLI test helper --size29 for both clients before full after run. All before hashes agree and patch apply-check passes.
+- Explicit native-slot validation: TL constructor150/150, TL/GOLD request132/132, zero invalid relocations; deliberate wrong scale+8 and call+16 bindings rejected. GOLD constructor0x417710 is148/150 due object slots+0x20c vs TL+0x210 at code offsets27/95. Do not import it unchanged. GOLD request0x417e30 can be previewed/imported through CLI after accepted canonical TL test; no GOLD marker manually added.
+- Canonical source/header still unchanged; baseline13849 remains live with4109 hashes unchanged. Finish SAME job, then apply and full after gates. Wall52 is superseded by staged resolution; shapes261 and receipts .scratch/goal-shared-sound/. No accepted full-file gain or commit.
+
+### 2026-10-04 — independent GOLD emitter-layout corroboration; same baseline preserved
+
+- Native GOLD release0x4177b0 clears sound link at0x20c (instruction0x4177ec), while TL18d70 uses0x210. GOLD update0x417840 reads emitter room at0x208 (instruction0x41787b), while TL18e00 uses0x20c. These independently corroborate the constructor's two non-relocation differences; four-byte displacement is real object ABI, not a matching scheduler tie. Inserted member location/type and full object extent remain unestablished. Saved Gold ASM/type-evidence.json under .scratch/goal-shared-sound/; no replacement game-object struct or fake storage is added.
+- Prepared compare-full-runs.py to compare every target/VA result across baseline and after runs, report every metric/status change, added/removed functions and lost complete byte matches; it is not run before both full outputs exist. Full baseline13849 is still live and inputs are unchanged. Eleven-file sound patch remains unapplied pending that baseline. Goal active, no commit or accepted raw-file gain.
+
+### 2026-10-04 — full baseline complete; mixed code-marker bug fixed upstream, full gate live
+
+- Same baseline13849 completed/closed exit2, zero4109 input drift: server316/316, TL3263/3676, GOLD1980/2510. Three errors: TL gzread0x45f380 has empty symbol; Gold0x44eeb0 invalid placeholder/declaration order, Gold0x5e3d3d invalid pointer multiplication. All output/terminal receipts .scratch/goal-shared-sound/.
+- gzread macro parses correctly; mixed FUNCTION GOLDTL/LIBRARY SERVER stack loses the first C identity. Upstream annotation.py now binds all adjacent code-bearing marker classifications to the common definition, with data/code separating stacks. Seven new regressions; focused257 pass, Ruff/format/targeted mypy pass. Our two-file delta docs/rebrew-patches/goal-code-marker-stack.patch. No library source modified.
+- Full upstream suite is LIVE73867 in a new isolated805-input snapshot based exactly on previous gated inputs plus the two edits. Sibling links restored; zero drift. Finish SAME job and record terminal result before C work resumes. After gate, fresh same-source baseline under fixed snapshot isolates parser effects before sound patch/after run. Eleven sound before hashes remain unchanged.
+- Whole-body archive check identifies Gold0x5e3d3d as stock LIBCMT ___sbh_find_block, sbheap.obj. Remove erroneous local Game implementation/classification in favor of stock library after gates; do not repair/reverse that body. Gold0x44eeb0 negative archive check remains inconclusive. Receipts .scratch/goal-code-marker-stack/. Goal active, no commit or raw-file gain.
+
+### 2026-10-04 — sound patch applied; full comparison rejects one header regression
+
+- Upstream marker-stack gate CLOSED73867:10845 passed32 skipped, zero805 drift. Fixed-tool unchanged-C baseline CLOSED90137 exit2, zero4109 drift; only tool effect is gzread extraction repaired to SIZE_MISMATCH560/delta5. No zlib body change or pass gain.
+- Applied eleven sound files against matching before hashes, canonical constructor RELOC150/request RELOC132, both voice helpers EXACT29 after CLI extent repair. Full after CLOSED36791 exit2, zero4109 drift: server316/316,TL3265/3677,GOLD1981/2510.
+- Full row comparison rejects TL0x482f20 lost RELOC715 (now710/715): two local spill slots exchange through new unused header declarations. Restore it with evidence-backed C/header editing, then repeat full all-target comparison; do not weaken acceptance assertion. Scratch declaration/name/header probes ongoing; docs/HANDOFF.md and waiting-checkpoint.json supersede earlier live/unapplied checkpoints. No accepted raw-file gain, goal remains active.
+
+### 2026-10-04 — shared sound API boundary restores regression; full gate live
+
+- Scratch isolation: types/globals only preserve715/715; prototypes alone reproduce710/715. Local declaration reorder and meaningful rename probes are inert. SOUND_SOURCE and API now live once in inferred src/client_sound.h, preserving sound-user declaration order; nine users include it. Generic client_types.h restored exactly to baseline. No existing sound subsystem header fits; new header name is explicitly unattested.
+- Targeted canonical checks restore TL0x482f20 RELOC715; constructor150/allocator63/request132 remain RELOC. Repeated full all-target gate LIVE94642 under pinned green tool,4110 source/header/config inputs. Finish SAME job and compare every row with unchanged-C fixed-tool baseline before acceptance/import.
+
+### 2026-10-04 — shared sound full gate accepted without regressions
+
+- Repeated full gate94642 CLOSED exit2, zero4110 drift. Exactly intended new TL constructor RELOC150, request RELOC132, helper TL/GOLD EXACT29; no lost byte matches/removals. Server316/316, TL3266/3677, GOLD1981/2510; two pre-existing GOLD compile errors persist. Header repair accepted. Both client layout checks and all-target lint pass.
+- Native server production/reference hashes unchanged ff81a459/3cc2ce90. All634 server data verdict rows equal prior same-scope raw-data-verification receipt:570 matched57 drift7 missing. No data or whole-file gain claimed.
+- GOLD request0x417e30 import preview with min-gap0 selects verified TL4193f0 at score100; default gap refuses structural sibling ambiguity. Explicit native call/scale positive/negative controls justify known correspondence. Import through CLI into shared source follows this accepted checkpoint, with destination verification before promotion.
+
+### 2026-10-04 — GOLD request imported and verified; terminal checkpoint
+
+- CLI shared import (known native counterpart, score100/min-gap0) stacks GOLD0x417e30 on existing TL4193f0 body. Both fresh canonical comparisons are RELOC132/132. Only GOLD marker/size lines differ from full-gate input; removing them recovers pinned SHA exactly. Current stored GOLD byte matches1982, distinct from prior full-gate1981/2510.
+- All-target lint zero errors/warnings; three coverage documents regenerated. No live jobs, all handles closed. Full gate accepted without lost matches; no raw-file gain, no commit, goal active/incomplete. final-checkpoint.json supersedes previous live/pending receipts.
+- Next: proven stock CRT GOLD5e3d3d retirement as a separate accounting epoch; no reimplementation. TL4190d0 native353-byte volume helper has negative archive check and saved ASM, remains unimplemented. GOLD constructor ABI offsets remain unresolved.
+
+### 2026-10-04 — proven CRT copy retired; complete volume-helper extent recovered
+
+- Rechecked stock archive GOLD5e3d3d: ___sbh_find_block/sbheap.obj. Removed erroneous Game C with scratch backup; existing library_msvcrt.h gets LIBRARY origin marker. No stock archive/storage or managed metadata hand edits. Old failed local verification retained as history. Library build provider remains unresolved without raw-link map evidence. Missing atomic library-adopt/retire workflow recorded immediately in upstream IDEAS-GUILD.md.
+- Full all-target gate LIVE89221,4109 fixed hashes; compare expected request417e30 addition/failed CRT5e3d3d removal only, no lost matches. Lint passes.
+- TL4190d0 body is466, not previously inferred353: outgoing branches after first epilogue lead to continuation419231/419246, final return4192a1,14 NOPs. Correct full native extent and0.0/0.5 constants checked; scratch first-pass C only during gate. No promotion.
+
+### 2026-10-04 — CRT epoch accepted; new shared volume helper matched in both clients
+
+- CRT full gate89221 CLOSED exit2/zero4109 drift; no changed/lost existing rows. Expected GOLD request417e30 addition and failed CRT5e3d3d removal only. Server316/316,TL3266/3677,GOLD1982/2510, one remaining Gold compile error. Correct library origin does not count as new Game byte match.
+- Float distance plus separate scale multiplication gives canonical TL4190d0 RELOC466/466; CLI default95/gap5 shared import scores100 and verifies GOLD417b10 RELOC466/466. Fresh tests both pass. Native camera/scale/every call bindings positive and11 wrong-slot controls per client pass. Source storage/flags unchanged, one84-byte SOUND_SOURCE. Shapes262 records mechanism/probes.
+- Full final volume gate LIVE33907,4110 fixed hashes; only two new matched rows expected. Finish SAME job, compare every row, then lint/coverage and terminal checkpoint. Goal active, no commit or raw-file gain.
+
+- Read-only next-pan inspection: GOLD4179f0 is already a matched283-byte body, so import-related safely reports no unmatched destination. Existing GOLD C calls cdecl fcn454030(cameraMatrix,output), whereas TL281-byte body calls stdcall fcn5ebbb9(output,cameraMatrix). Do not assume byte-identical283/281 bodies or force unchanged import. Shared higher-level pan logic will require evidenced matrix API/target ABI treatment; no duplicate new Gold reversing or header/source edit made during volume gate.
+
+### 2026-10-04 — full volume gate accepted; next TL lookup extent corrected
+
+- Full33907 CLOSED exit2, zero4110 drift. Exactly two new466-byte matched rows, no existing row changes/losses/removals. Server316/316,TL3267/3678,GOLD1983/2511, one pre-existing GOLD compile error. Shared helper and CRT retirement accepted.
+- Next todo TL403300 archive-negative: native42-byte body plus6 NOPs, C alreadyRELOC42/42. Removed stale inline48 and persisted42 through CLI. Unique full native-code pattern (only global operands9/37 masked) identifies GOLD402ac0/global1468ae0. Default related-import gap refuses; min-gap0 known-counterpart preview pending. No instructions/new storage changed.
+
+### 2026-10-04 — lookup shared-source import verified; full catalog gate live
+
+- CLI known-counterpart import Gold402ac0 fromTL403300 scores100/gap0; supersedes incorrect oldGold STUB with one shared42-byte C body. Fresh tests bothRELOC42. Per-build table aliasesTL14d0020/GOLD1468ae0 are extern declarations only, zero storage definitions. Canonical maps match both native slot values; wrong table+4 controls are rejected with original correct VA retained in catalog. No incoming oldGold function references found. Table complete allocation extent/native storage owner remain unestablished, no padding/data size invented.
+- Full all-target lookup gate LIVE66446,4109 fixed hashes. Compare exact two expected changed rows/no additions/removals/lostmatches with accepted volume full run. Poll SAME handle. Goal active, no commit/raw-file gain.
+
+- Read-only next-candidate evidence during lookup gate: TL40c430 archive-negative, native26-byte body plus6 NOPs; existing C isRELOC26/26 with no-promote size override, stored32 unchanged. Full26-byte native pattern masking only rand REL32 identifies unique GOLD40b580/call5de784. Apply proven extent and CLI related import only after current full gate; no current input edits.
+
+### 2026-10-04 — lookup accepted; batch extent improvements held behind new upstream gate
+
+- Lookup full66446 CLOSED exit2/zero4109 drift, exact two expectedRELOC42 rows/no lost/add/remove. Server316/316,TL3268/3678,GOLD1984/2511.
+- Existing C batch: TL40c430 RELOC26, TL40d550 RELOC35, TL/GOLDstrcpy wrapper40fdd0/40eec0 EXACT35; proven trailing NOPs excluded, no instruction/body changes. CLI shares TL40d550 with GOLD40c630 (known counterpart score100/gap0) and removes incorrect duplicate Gold source. Batch full gate remains pending.
+- New tool bug confirmed: sizeless Gold40b580 reaches later code through conditional branch but function_extent_from_disasm returns first-ret14 rather than26. Donor raw registry32 also ignores CLI-verified26. Fixed upstream forward-target ret sizing and target-scoped managed donor extent; five+two regressions, focused171/static gates pass. Full pinned805-input suite LIVE85923; stop C work until green. Patch docs/rebrew-patches/goal-forward-ret.patch; wrong-cwd57551 is terminal/not validation.
+- Goldrand exactly matches stock LIBC.LIB single-thread rand.obj (seed62e108); MT archive misses. Preserve stock code, do not infer whole runtime/link provider solely from this hit. COM42-byte raw-address wrapper has two distinct Gold device variants; shared typed pointer/ABI mapping remains required.
+
+### 2026-10-04 — upstream extent gate accepted
+
+Upstream extent gate accepted (2026-10-04): isolated session85923 CLOSED exit0; 10852 passed,32 skipped,55 warnings in394.44s. Zero805 snapshot drift, canonical four-file delta equals gated snapshot, zero4108 held C/header/config drift. Terminal audit .scratch/goal-forward-ret/terminal-audit.json. Use PYTHONPATH=.scratch/goal-forward-ret/snapshot/rebrew/src for the newly gated CLI. C work resumed; full batch acceptance still pending. Earlier LIVE checkpoints below are historical.
+
+
+### 2026-10-04 — shared rand wrapper imported; batch gate running
+
+Current project gate (2026-10-04): upstream85923 is accepted (10852 pass; zero805 drift). New fixed CLI imports unique Gold40b580 from shared TL40c430 at default score100/gap5; fresh BOTH tests RELOC26. Explicit native rand bindings TL64d3f8/Gold5de784 match26 with zero invalid relocations and reject wrong-call+4; catalogs contain no rand keys, so this is supplied native binding evidence, not a catalog-owner/provider claim. Stock rand origin remains unchanged. All-target lint zero errors/warnings. Full batch session23224 is LIVE with4108 pinned project inputs, output .scratch/goal-forward-ret/batch-all.json, job batch-job.json. Compare against accepted lookup gate: exactly five changed existing rows plus one new Gold40b580 match expected; no losses/removals. Poll SAME23224, no source/header edits until terminal comparison. Earlier checkpoints below historical.
+
+
+### 2026-10-04 — full shared-wrapper batch accepted
+
+Accepted batch checkpoint (2026-10-04): full all-target session23224 CLOSED exit2, zero4108 project-input drift and zero805 gated-tool drift. Compared EVERY row against accepted lookup66446: exactly five intended changes (TL40c430 RELOC26, TL40d550 RELOC35, TL40fdd0 EXACT35, GOLD40c630 RELOC35, GOLD40eec0 EXACT35) and new GOLD40b580 RELOC26. No lost matches, no removed rows, no unexpected changes. Existing C bodies preserved; trailing native alignment NOPs excluded through managed size updates, paired call/rand wrappers shared via CLI, incorrect Gold duplicate superseded. Server316/316, TL3271/3678, GOLD1987/2512. Counts include source-test library scope and do not establish whole-file identity; server source scope remains260 game+56 compiled libraries. No raw-file improvement claimed. All-target lint zero errors/warnings; all three coverage documents rebuilt successfully. Upstream forward-ret/sizing fix accepted10852 pass,32 skipped, four files equal pinned snapshot. Receipt .scratch/goal-forward-ret/batch-full-comparison.json.
+
+Next: shared input-device types/header from native and compiler-SDK evidence; mouse TL14ce8a0 mapsGold1467360 (TL4117c0/Gold410710), keyboard TL14ce90c mapsGold14673cc (TL4117f0/Gold410740). Both Gold matches were structurally ambiguous before GUID/output-slot proof. Root DirectInput7/8 API distinction must be preserved. No device C/extent/header changes yet; Gold read-only init evidence is not independent reversing. No live jobs, no commits; goal remains active/incomplete. Earlier LIVE checkpoints below are historical.
+
+
+### 2026-10-04 — input API scratch matches; explicit-donor feature gate live
+
+Input-type scratch probes and upstream donor filter (2026-10-04): previous batch23224 accepted (server316/316, TL3271/3678, GOLD1987/2512), no live game job. No new game C/header/config changes: held4108 inputs remain identical. New inferred client_input.h scratch separates INPUT_DEVICE/INPUT_SYSTEM and observed0x38/0x10 vtable prefixes; SDK method signatures, no object allocation/full-vtable extent claims. Mouse/keyboard typed bodies areRELOC42/42 both clients; native slot+4 negative controls rejected all4 comparisons. Scratch TL init usesSDKGUID/DIDATAFORMAT/DIPROPDWORD and remainsRELOC738/738; cleanup107/107RELOC both. Root factoryversion remainsTL8 vsGold7; cleanup’s unusual keyboard-release/mouse-clear behavior retained. Scratch first init probe missed a sizeof rename (compile error); corrected probe passes. Compiler-layout assertions and canonical-source application still pending.
+
+Related-import limitation evidenced: both42-byte donor signatures identical. Defaultgap5 refuses both; gap0 picks keyboard4117f0 for both Gold410710/410740 despite independent GUID/output-slot proof. No lowered-threshold/forced incorrect import/source workaround. Missing --source-va immediately recorded in ../rebrew/docs/IDEAS-GUILD.md. Implemented upstream donor filter retaining thresholds/normal verify path, seven regressions; focused178 pass, Ruff/format/mypy clean. Patch docs/rebrew-patches/goal-source-va.patch. New pinned805-input full suite is LIVE62769 at .scratch/goal-input-types/snapshot/rebrew, suite-job.json and full-suite-pinned.log. Two code/test files equal canonical feature; changelog carries only our own addition on previous green baseline. Poll SAME62769; no C reversing/import/extent writes until full suite green. All prior LIVE entries below are historical. Goal active/incomplete; no commits/raw-file gain.
+
+
+### 2026-10-04 — canonical shared input API and explicit Gold imports
+
+Input API patch applied; full gates LIVE (2026-10-04): upstream62769 accepted/CLOSED exit0,10859 passed32 skipped56 warnings465.13s;zero805 tool drift, canonical source/test files equal snapshot. Gated CLI PYTHONPATH=.scratch/goal-input-types/snapshot/rebrew/src. Inferred src/client_input.h lifts canonical INPUT_DEVICE/INPUT_SYSTEM views into four users; device/root vtable prefixes0x38/0x10,13 layout assertions both profiles. SDK GUID/DIDATAFORMAT/DIPROPDWORD replaces incorrect Com/flat property types. Factories/versions remainTL8 vsGold7. Native cleanup keyboard-release/mouse-clear quirk preserved. Only extern views; no global storage/owner/full SDK vtable extent invented.
+
+Canonical TL wrappers4117c0/4117f0 RELOC42 each, init411820 RELOC738, cleanup411b10/GOLD410a50 RELOC107. CLI --source-va imports evidenced Gold410710 fromTL4117c0 andGold410740 fromTL4117f0 into SAME two source files. Both GoldRELOC42, verified sizing excludes6 native NOPs. Discovered Gold48 spans versus managedTL42 signatures score85.935306; explicit known donor/defaultgap5/min-score85 used after complete native GUID/slot/42-byte positive+negative proof (not gap0). First default95 previews/refused attempt wrote no Gold source claim. Native pointer binding controls reject4 wrong device slots across clients. Independent typed COFF audit with IAT wildcard disabled validates all11 cleanup relocations both and51 init; all symbols mapped;8+8+32 wrong-call/global/import controls rejected. Normal CLI masks IAT positions deliberately, so initial wrong CloseHandle map control remainedRELOC; that failed control is NOT reported passing. Public parser/comparator revised audit rejects it. Shapes263 and measure-traps hold facts.
+
+Full source regression69842 is LIVE: .scratch/goal-input-types/after-{all,job,inputs}.json/log pins4109 inputs. Compare-full.py requires ONLY TL4117c0/4117f0 changes toRELOC42 plus GOLD410710/410740 newRELOC42, no lost/removed/unexpected rows; init/cleanup must retain previous results. Last accepted full batch23224 server316/316,TL3271/3678,GOLD1987/2512. New expected3273/1989 are NOT yet full-gated totals. All-target final lint clean. Data+function verification73267 also LIVE (data-{all,job}.json/log), defaultbuiltserver.dll exists; both client built images absent, no client data-byte verification claim. Poll SAME69842/73267; do not restart or edit C/header inputs until terminal. Source inputs currently zero4109 drift. Coverage refresh waits for terminal results. No commits/raw-file gain; goal active/incomplete. Earlier LIVE checkpoints below historical.
+
+
+### 2026-10-04 — full shared input gate accepted
+
+Shared input API accepted (2026-10-04): all-target source gate69842 CLOSED exit2;zero4109 C/header/config drift and zero805 gated tool drift. Every row compared against accepted batch23224: EXACTLY two TL size-mismatch rows4117c0/4117f0 becomeRELOC42 plus two newGold410710/410740 RELOC42. No lost/removed/unexpected rows. InitTL411820 retainsRELOC738, shared cleanupTL411b10/Gold410a50 retainsRELOC107. Canonical client_input.h owns inferred INPUT_DEVICE/INPUT_SYSTEM interface-prefix declarations and extern aliases; four users share types, no storage owner/allocation invented. Factory/version distinctionTLDirectInput8 vsGoldDirectInput7 preserved; no Gold init reversed independently. SDK properties/GUID/dataformat types verified. Independent all-symbol typed COFF checks disable IAT wildcard and reject52 wrong pointer/call/import bindings;13 layout assertions pass both compiler profiles. Upstream source-va feature accepted10859pass32skip, isolated snapshot .scratch/goal-input-types/snapshot/rebrew; patch docs/rebrew-patches/goal-source-va.patch. CLI specific donors/minscore85/defaultgap5 verified complete42 bodies despite inventory trailing6NOP score85.935306; thresholds were justified by independent native identity and compile proof.
+
+Current source-test totals server316/316 (260game+56compiledlibrary),TL3273/3678,GOLD1989/2514. All-target lint clean; all three coverage documents rebuilt. These masked/source counts do not establish whole-file identity. Data+function verify73267 CLOSED exit2: server634 verdict rows EXACTLY equal accepted raw scope570matched/57drift/7missing, zero not-comparable; unchanged built DLL SHAff81a459a20dbdbbf3bebe76128ec8bdd80b80bd59bf238cc2db936f12941935. Both client data images absent and reported errors; no client data-byte verification claim. No raw-file improvement, no commits, no live jobs. Goal active/incomplete. Earlier LIVE entries below historical.
+
+Next evidence-led work: remaining input consumers (e.g.TL4124b0 keyboard drain) still use local/raw device/event types. Check archive origin first, establish exact native record size and shared SDK prefix semantics; preserve TL8/Gold7 event/API differences instead of forcing an unchanged import. Reuse client_input.h; current GetDeviceData signature reflects the common SDK base record view, not a claim of full extended event extent. Gold is a correspondence/validation target, never independently reversed.
+
+
+### 2026-10-04 — keyboard device/event reconstruction; no byte gain
+
+Typed keyboard drain applied; regression gates LIVE (2026-10-04): last accepted shared input gate69842 (server316/316,TL3273/3678,GOLD1989/2514); source-va tool suite62769 accepted10859pass. New single-TU TL4124b0 cleanup uses canonical INPUT_DEVICE/globalg14ce90c and SDK base DIDEVICEOBJECTDATA plus Win32 DWORDuAppData in local INPUT_EVENT, size20; no shared header/config/static-data/storage changes. Native SDK source names/application-data field corroborated, three layout assertions pass. Fresh canonical result remainsNEAR175/266 (91diff), and independent COFF proof establishes ALL266 resolved before/after object bytes identical. The only object change is newDIR32 relocation offset17 forcanonicaldevice instead of embedded address, positive map validated. This is source/relocation reconstruction progress, not new matched bytes. Lint all targets clean. Blocker updated viaCLI, remaining tail scheduling wall and retired rounds1006-1007 preserved; no retired tail probes repeated. Scratch initial ULONG_PTR failed in oldSDK compiler image; DWORD represents the proven native Win32 4-byte app word.
+
+Read-only Gold correspondence uniquely locates keyboard-drain4112e0: cbObjectData16/localframe20 versus TL20/frame24. GUID-proven device slotGold14673cc. Real event ABI difference recorded immediately in general-knowledge; no unchanged Gold20-byte import or independent Gold reversing. Current source stillhasraw keyboard-state globals elsewhere; complete extents/storage owners remain unproven and untouched.
+
+Full source gate94843 LIVE at .scratch/goal-input-drain/after-all.json/log, after-job.json; pins4109 project inputs. compare-full.py requires ZERO changed/added/removed/lost rows relative to input69842 (compiled code identical after relocation). Data+function gate82716 LIVE at data-all.json/log,data-job.json; client built images still absent, expected data errors explicit, server634 verdicts mustequal accepted raw scope. Poll SAME94843/82716, no C/header changes during jobs; regenerate coverage onlyafter terminal comparison. No whole-file gain/commit; goal active/incomplete. Earlier LIVE checkpoints below historical.
+
+
+### 2026-10-04 — drain gate accepted; shared record accessor exact in clients
+
+Drain gate accepted; shared debug-record extent gate LIVE (2026-10-04): source94843 CLOSED exit2/zero4109 drift, EVERY result row unchanged relative to input69842 (no changed/added/removed/lost rows). Canonical typed keyboard drain reconstruction accepted; nativematch remains175/266 and all266 resolved object bytes equal its previous C output, newdeviceDIR32 only. Data82716 alreadyCLOSED exit2, server634 verdicts exactlyequal accepted570matched57drift7missing; both client images absent. No data/wholefile improvement.
+
+Next applied metadata/source correction: existing shared GetDebugRecordByIndex body in Develop/Units/Error/Error.c is native33 bytes plus15 NOPs in TL41d4d0 andGold421ed0. Archive probes negative; unchanged-C --no-promote33 probes EXACT both. Removed only the two stale client SIZE48 inline lines, persisted33 through CLI; freshcanonical EXACT33 BOTH clients and existingSERVER10003140 EXACT33 retained. C body/prototypes/flags/storage untouched, no copied Gold implementation/newGame function. Lint all targets clean. Full all-target59758 is LIVE, .scratch/goal-debug-record/after-{all,job,inputs}.json/log,4109 pinned inputs. Compare-full.py expects ONLY TL41d4d0/Gold421ed0 changes toEXACT33, no additions/removals/losses/unrelated changes. Last fullyaccepted source totals remainserver316/316,TL3273/3678,Gold1989/2514; local new33 matches are pendingfullbatch. Poll SAME59758 before C/header edits; regenerate all coverage documents after terminal results. Goal active/incomplete, no commits/rawfile gain. Earlier LIVE entries below historical.
+
+Read-only next getterTL41a950: native25 plus7NOP, raw table displacement662ba8 liesinside pixel-format strings, realaccessed12word span begins662bf8 (index20 bias80bytes), values24,32,32,16,16,16,16,8,0,16,16,32. Native table fullbacking/provenance unresolved; do not allocate g662ba8. Record in measure-traps; no getter source/global/metadata/owner changes applied. Native operands and next function .scratch/goal-input-drain/table-helper-native.json/.scratch/goal-debug-record/pixel-neighbor-native.json.
+
+
+### 2026-10-04 — shared debug-record gate accepted; lint receipt corrected
+
+Shared debug-record gate accepted (2026-10-04): all-target59758 CLOSED exit2. Every row compared with accepted drain94843: exactly TL41d4d0 and Gold421ed0 changed from SIZE_MISMATCH48 to EXACT33; no added, removed, lost, or unexpected rows. Server10003140 retains EXACT33. Zero4109 project-input drift and zero805 pinned tool-input drift at gate closure. Accepted source totals server316/316, TL3274/3678, Gold1990/2514. C bodies unchanged: removed two stale client SIZE48 annotations, no padding/storage invented. This is correct function-extent accounting, no whole-file byte gain.
+
+Lint correction after acceptance: saved receipt contained W007 for keyboard INPUT_EVENT despite earlier clean claim. Added verified // SIZE 0x14 type annotation to TL4124b0; only source difference is that comment, no __LINE__/__FILE__ dependency. Fresh canonical test JSON is exactly equal to accepted drain test (NEAR175/266), all-target final lint has zero errors/warnings. Full59758 pins the pre-comment epoch; this separate single-TU annotation correction is verified by identical complete test result. All three coverage documents refreshed after this correction. Receipts .scratch/goal-debug-record/{after-job,full-comparison,drain-annotation-comparison,lint-final}.json. No live jobs, no commits. Goal active/incomplete; raw server/data state unchanged, client built images remain absent.
+
+Read-only next triage: TL41f330 complete27 plus5NOP is RELOC27, TL41a950 complete25 plus7NOP is EXACT25; LIBCMT and D3DX8 whole-body checks negative. Neither complete native instruction pattern has a Gold candidate when only its call/indexed-address operand is masked; unchanged import is not established. No getter source/metadata promotion applied. Pixel getter displacement662ba8 is biased into strings, actual accessed48-byte span662bf8; complete backing extent/provenance unresolved. Do not allocate the biased base. Next work: correct proven TL body extents through CLI, then continue correspondence/data provenance from TL evidence. Scratch next-triage.json and associated probes/native scans preserve evidence. Earlier LIVE paragraphs below are historical.
+
+
+### 2026-10-04 — getter extents and actual read view; regression running
+
+Getter extents/view applied; full gate LIVE (2026-10-04): last accepted debug-record59758 server316/316,TL3274/3678,Gold1990/2514, with post-gate keyboard size annotation independently verified and lint zero. Removed stale SIZE32 from TL41a950 and41f330, CLI canonical tests now EXACT25 andRELOC27. No padding bytes made into code. Pixel C now expresses actual accessed const-int view662bf8 indexed i-20; compiler folds bias to original662ba8 operand, complete25 bytes still EXACT. Backing allocation/storage owner unresolved; no global/data definitions added. Independent typed COFF accessor audit resolves callee41f9b0, all27 native bytes agree; wrong callee+4 rejected. Lint all targets zero errors/warnings. No raw/data gain.
+
+All-target regression64221 LIVE, .scratch/goal-getter-extents/after-{job,inputs,all}.json/log;4109 inputs pinned and unchanged. Compare-full.py expects exactly two TL changes (41a950 EXACT25,41f330 RELOC27), no additions/removals/losses/other changes. Expected pending totals TL3276/3678; last accepted3274. Poll SAME64221, no C/header edits while active; refresh coverage after accepted comparison. Goal active/incomplete, no commits.
+
+Read-only next shared-source evidence: TL420b70 complete37 plus11NOP, unchanged-C no-promote EXACT37; uniqueGold4247e0 native37 pattern matches with five address operands changed. LIBCMT/D3DX8 TL and LIBCMT Gold negative. Existing shared updater TL420ba0/Gold424810 bounds106 rows and has int[][4] view14cbcc0, corroborating cleared6a0 accessed bytes. Counter6b7d5c also used byTL421290; complete ownership unresolved. This is positive multi-TU evidence for a shared subsystem declaration; do not copy independent Gold implementation or fabricate allocation from memset alone. No next clearer source/header/metadata edits made. Receipts next-*.json. Earlier LIVE paragraphs below historical.
+
+
+### 2026-10-04 — getter gate accepted; shared network statistics
+
+Getter gate accepted; shared network statistics gates LIVE (2026-10-04): getter64221 CLOSED exit2, zero4109 project and805 pinned-tool drift. Every row compared: only TL41a950 becomesEXACT25 andTL41f330 RELOC27, no added/removed/lost/unexpected rows. Accepted totals server316/316,TL3276/3678,Gold1990/2514. Pixel read view correctly based662bf8 withindex-20; native indexed displacement remains662ba8, no storage allocated. Coverage refresh deferred because the next shared-header epoch is already applied.
+
+Applied network statistics reconstruction: new canonical Develop/Units/net/net.h supplies table106x4-int accessed view and four scalar aliases for TL/Gold, each GLOBAL immediately followed by own extern; no definitions/storage owners invented. Header placement is reconstructed from network users and attested module net.c path, not an attested original header. Existing shared updater420ba0/Gold424810 and send421290/Gold424e70 use this header; canonical results remainRELOC80 andRELOC183 both targets. ResetTL420b70 now references canonical globals,37 nativebytes plus11NOP; obsolete SIZE38 removed, freshcanonicalRELOC37. Gold already had an EXACT37 duplicate at4247e0, so import-related correctly excluded it as already matched; missing consolidation feature appended upstreamIDEAS immediately. Backed up and removed its duplicate C, addedGold marker to the one TL-derived reset body; freshcanonicalGoldRELOC37. This EXACT-to-RELOC classification reflects genuine COFF global relocations, not a loss of native bytes: independent complete37-byte resolution is exact.
+
+Scratch and finalcanonical typed COFF audits both validate clear37 and updater80 in bothclients, all symbol bindings mapped;12 wrong-address+4 controls rejected in each epoch, no wildcard IAT acceptance. Native receive4210a0 loads recv IAT662384 intoESI and calls updaterflag1; native send421290 callsflag0. Four row fields therefore received packetcount/bytes andsent packetcount/bytes; field descriptions reconstructed from confirmed native behavior. Table106x16 accessed extent corroborated by bound106 and clear6a0, but complete backing/definition owner unresolved. No runtime code/archive modified. Initial own stacked GLOBAL annotations warned; corrected to own extern per marker before final checks. All-target final lint zeroerrors/warnings.
+
+Source regression50152 LIVE: .scratch/goal-net-stats/after-{job,inputs,all}.json/log,4109 pinned inputs unchanged. Compare-full.py expects only TL420b70 promotionRELOC37 andGold4247e0 classificationEXACT-to-RELOC37; no additions/removals/losses/unexpected rows. Pending TL3277/3678,Gold1990/2514; not yet fullaccepted. Data+function verify76939 LIVE at data-{job,all}.json/log: compare all634 server verdicts against .scratch/data-ownership-audit/raw-data-verification.json (570matched57drift7missing); client build images absent. Default build/server.dll is matching configured raw_link, so data comparison remains raw-link scope. Poll SAME50152/76939 before C/header edits, refresh all three coverage documents only after terminal accepted source comparison. No rawfile gain/commit. Goal active/incomplete. Earlier LIVE paragraphs below historical.
+
+
+Latest net-statistics gate update: data76939 CLOSED exit2; server634 data dictionary exactly equals accepted570matched57drift7missing, unchanged raw DLL SHA ff81a459a20dbdbbf3bebe76128ec8bdd80b80bd59bf238cc2db936f12941935; both client build-image errors explicit. Zero4109 input drift. Only source50152 remains LIVE; poll SAME50152 and compare all rows.
+
+
+### 2026-10-04 — shared network gate accepted; VFS pointer wrapper native proof
+
+Shared network statistics accepted (2026-10-04): source50152 CLOSED exit2, zero4109 project and805 pinned-tool drift. Every row compared with accepted getter64221: ONLY TL420b70 SIZE_MISMATCH38 becomesRELOC37 andGold4247e0 EXACT37 becomesRELOC37 for genuine COFF global references. No added/removed/lost/unexpected rows. Native five-address resolution independently reproduces all37 bytes in both clients;12 wrong-address controls rejected across reset/updater in final canonical sources. Shared updater retainsRELOC80 and send retainsRELOC183 both clients. Duplicate Gold reset source removed after backup; no remaining caller references to its superseded C symbol. Canonical inferred network header in Develop/Units/net/net.h supplies declarations only. No storage owner/extent invented. All-target lint zero errors/warnings; all three coverage documents refreshed.
+
+Accepted source totals server316/316,TL3277/3678,Gold1990/2514. Data76939 CLOSED exit2: server634 data dictionary exactly equals accepted570matched57drift7missing, zero not-comparable; raw DLL unchangedSHAff81a459a20dbdbbf3bebe76128ec8bdd80b80bd59bf238cc2db936f12941935. Both client built-image errors explicit, no client data/whole-file byte claim. No live jobs/commit. Goal active/incomplete. Receipt .scratch/goal-net-stats/{after-job,full-comparison,data-comparison}.json. Earlier LIVE paragraphs below historical.
+
+Next read-only evidence: existing shared TL42e520/Gold42ecf0 VFS path wrapper is complete19 bytes plus13NOP, unchanged-C and char*-typed scratch variants bothRELOC19 in bothtargets. Existing source SIZE32 and int arg/return are stale; two VFS users42f120/42fb20 passchar* and declarevoid return while ignoring its value. Native conditional returns the input pointer or tail-jumps to runtime TL66080a/Gold5eaad6. Stock archive matches: TL LIBCMT MT objects, Gold LIBC ST objects, each has unresolved __strlwr/__strupr candidates after relocation masking; do not force an exact CRT member/name from this tie or implement either. Typed scratch COFF audit validates byteflag TL6b7fe8/Gold633408 and native call targets, all19 bytes resolved, four wrong-address+4 controls rejected. Initial import-thunk guess failed native opcode assertion; actual callees are stock CRT bodies, no IAT-thunk claim. No wrapper/header/metadata edits yet. Receipts next-wrapper-*.json, next-helper*-library.json.
+
+Existing canonical VFS header Develop/Units/vfs/vfs.h includes game_common.h; reuse this module home for any shared wrapper/flag declaration, verify every affected target and all rows because inclusion expands context. Existing crt_globals.h is runtime-declaration home; keep the CRT callee apart from game path-normalization types and record its unresolved member selection honestly. Flag has otherusers42ee50/431070/4310f0; source and ABI evidence must drive consolidation. Do not create a duplicate speculative header solely to dodge existing canonical one. Continue from accepted net baseline.
+
+
+### 2026-10-04 — VFS shared prototypes and native pointer wrapper
+
+VFS pointer/declaration reconstruction applied; source gate LIVE (2026-10-04): last accepted network50152 server316/316,TL3277/3678,Gold1990/2514. Existing shared TL42e520/Gold42ecf0 now has char* parameter/return and complete19-byte extent (removed both stale SIZE32 lines); freshcanonicalRELOC19 both builds. Independent typed COFF check resolves native byteflags6b7fe8/633408 and CRT callees66080a/5eaad6, all19 bytes agree; four wrong-address+4 controls rejected. Runtime bodies remain stock, with unresolved __strlwr/__strupr member candidates. No runtime C/storage created or archives modified.
+
+Canonical declarations consolidated in existing module homes: Develop/Units/vfs/vfs.h has wrapper char* prototype and both target flag declarations, eachGLOBAL followed by its extern; wrapper, two path/zip callers, and three other flag users include it. Develop/crt_globals.h owns char* declarations for the two legacy CRT address aliases; six direct legacy callers now include this existing runtime header rather than repeat local prototypes (one previous void-return declaration corrected). Exactly14 source/header files changed; no new header. All11 directly edited callers retain previous statuses/sizes, including existing SIZE_MISMATCH208 atTL4010b0; no claim that its old mismatch is fixed. Final lint alltargets zeroerrors/warnings. Initial scratch context include failed because source lived outside src; corrected relative paths, context probe thenRELOC19. This was a probe-path mistake, not a tool defect. Targeted/canonical receipts .scratch/goal-vfs-casefold/*.json.
+
+Source full regression99042 LIVE: after-{job,inputs,all}.json/log,4109 pinned inputs unchanged. Compare-full.py expects exactly TL42e520/Gold42ecf0 promotionsRELOC19; no added/removed/lost/unexpected rows. Pending totals TL3278/3678,Gold1991/2514, not yet accepted. Data71915 CLOSED exit2: all634 server data verdicts exactly equal accepted570matched57drift7missing; both client built-image errors explicit. No data/wholefile gain. Poll SAME99042 before C/header edits and refresh all coverage after accepted full comparison. Goal active/incomplete, no commits.
+
+Read-only next triage: unchanged-C no-promote probes TL449600 EXACT37 (old38),4737e0 EXACT25 (old26),47a070 EXACT22 (old32). Native full bodies allfollowed byNOP padding; LIBCMT andD3DX8 whole-body probes negative. Whole-native Gold scans (masking only operands) find no unchanged candidate for449600/47a070, one for4737e0 atGold476c80 with start/endf8ab80/f8abc8 corresponding TL1011980/10119c8. That loop examines six12-byte rows over72 accessedbytes and tests firstword==-1; only accessed layout known, storage owner/subsystem/remainingword semantics unresolved. Signed JL pointer/address comparison must be preserved/proven before a typed-loop rewrite. No next getter/global/source/metadata edits applied. Receipts next-{449600,4737e0,47a070}-{native,library,probe}.json andnext-counterparts.json. Earlier LIVE paragraphs below historical.
+
+
+### 2026-10-04 — VFS gate rejects server regression; stock SDK attribution repairs it
+
+VFS first gate rejected; stock SDK binding repair gates LIVE (2026-10-04): source99042 CLOSED exit2 with zero4109/805 input drift, but comparison REJECTED: servergm_AllocSpieler10018850 lostRELOC3689 toNEAR3681/3689 (8differences), alongside only the two intended client19-byte promotions. No additions/removals/other changes. Last accepted totals remain network50152 server316/316,TL3277/3678,Gold1990/2514. Repair-job is a new input epoch, not a restart of a live/expired observation. First after-job.json acceptance corrected to REJECTED/comparison_passed=false; no claim that99042 was accepted.
+
+Diagnosis/repair: adding two unused legacy CRT function prototypes to broadcrt_globals.h changes gm_AllocSpieler codegen; moving declarations to the end stillNEAR3681/3689. No server function C changed. Full native library spans then uniquelyidentify BOTH callees as _strupr: TL66080a308bytes matches MTstrupr.obj, Gold5eaad6158 matches STstrupr.obj; competing strlwr has7/4 fixed mismatches. Earlier32-byte CLI probes and legacycatalog__strlwr captions were not whole-body attribution. Missing library --size/report-scope feature recorded upstreamIDEAS immediately. Public pinned index_library/match_bytes receipts full-runtime-attribution.json; stock archives were alreadyCLI-validated. The old catalog captions remain historical/mislabelled; no library C/object/archive replaced.
+
+Canonical runtime header now keeps original declarations and uses string.h SDKprototype with fcn_0066080a/fcn_005eaad6 preprocessor aliases to _strupr, instead of invented unused prototypes. Legacy source identifiers remain, real COFF symbol is__strupr. This supplies the verified stock callee and restores server canonicalRELOC3689/3689. Both typed VFS wrappers remainRELOC19; native SDKcall/flag audit rejects allfour wrong-address+4 controls. Lint alltargets zeroerrors/warnings. VFS module header holds actual game wrapper/flag declarations. No game/CRT storage owners invented.
+
+New full source95544 LIVE at repair-{job,inputs,all}.json/log;4109 pinned inputs unchanged. compare-repair.py compares against accepted net50152, expects only TL42e520/Gold42ecf0 RELOC19, no losses/added/removed/unexpected rows, servermatch restored. Data+function77199 LIVE at repair-data-{job,all}.json/log, compareserver634 exact olddictionary; client images absent. Previous data71915 alreadyCLOSED server634equal, but header repair has a fresh data gate. Poll SAME95544/77199 before C/header edits, refresh all three coverage documents only after final acceptance. Goal active/incomplete, no rawfile gain/commit.
+
+Read-only table recon progressed: Pair0c_1011980 already exists inclient_types.h as key/val/pad, with multiple duplicate localTag/Item/fcn_slot views across six updater/draw/reset users. Native countGold476c80 is alreadyan EXACT25 duplicate; future shared consolidation must retire it, not import an unmatched function. RendererTL473800 draws six icon/value entries; updater473690 adds counts,473700 subtracts,473750 assigns/retires entries, reset4737c0 setsID-1/value0. Accessed recordstride12/table72bytes corroborated. Last4 bytes stillunexplained; no newsemanticfield/padding owner inferred. Native direct-word operand scan .scratch/goal-display-counters/table-operands.json finds references tofirst two words, not proof of no indirect third-word users. No display source/header/metadata edit applied. Later type naming/layout consolidation needs attributionchecks and fullalltarget/data gates. Earlier LIVE paragraphs below historical.
+
+
+Latest VFS repair gate update: data77199 CLOSED exit2, server634 verdict dictionary exactly equal accepted570matched57drift7missing, rawDLL hashunchanged; both client built-image errors explicit. Zero4109 repair-input drift. Only source95544 remains LIVE; poll SAME95544, compare all rows to acceptednet50152.
+
+
+### 2026-10-04 — VFS repair accepted; native uppercase loader operation corrected
+
+VFS SDK-binding repair accepted; uppercase loader gate LIVE (2026-10-04): repaired source95544 CLOSED exit2, zero4109 project/805 pinned-tool drift. Every row compared against accepted network50152: EXACTLY two client wrapper42e520/Gold42ecf0 promotionsRELOC19, zero lost/added/removed/unexpected. Servergm_AllocSpieler10018850 retainsRELOC3689; the8-byte regression in rejected99042 is repaired. SDK_strupr aliases preserve original server declaration context. Runtimecomplete308/158-byte stock attribution uniquely identifies MT/STstrupr.obj; earlier32-byte prefix ambiguity andmislabelledcatalogcaptions remain historical, not whole-body attribution. Four canonical wrapper wrong-binding controls pass. Source totals accepted server316/316,TL3278/3678,Gold1991/2514. Coverage documents rebuilt during handoff to next single-TU epoch; refresh them after next full acceptance.
+
+Repairdata77199 CLOSED exit2,server634 verdict dictionary exactly equals accepted570matched57drift7missing; rawDLL SHAunchangedff81a459a20dbdbbf3bebe76128ec8bdd80b80bd59bf238cc2db936f12941935. Both client buildimages absent. No data/wholefile improvement, no commits. Goal active/incomplete.
+
+New applied semantic correction: game dummy-object loaderTL5a3580 previouslycalled_strlwr inC but native call5a35c2 targets66080a, verifiedfull-body stock_strupr. Changed this one operation to realSDK_strupr usingstring.h, not renaming/reimplementing a stock routine. RemovedstaleSIZE256; nativecomplete247 endsret5a3676, then9NOPs. FreshcanonicalRELOC247. Functionname, recordlayout/fields, storage, othercalls unchanged. No fullGold247 pattern candidate after maskingonly10 COFF operands, so no unchanged import andno independentGoldreverse. ArchiveprobeLIBCMT/D3DX8 negative forgamecaller.
+
+Independent scratch andcanonical typedCOFF/native checks resolveALL247bytes, all10 relocations/call-data-literal bindingsmapped; three complete NUL-terminated literalpayloads verified atnativeaddresses. Ten wrong-address+4 controls rejected after preservingcorrect-VA sentinels foreachbinding. Initial arraywrong+4 control was acceptedwithout its sentinel under comparator fallback; that initial result is not a passednegativecontrol. Initial object-audit dir missing was corrected; no toolbug claim. Final controls sdkuppercallandallothers pass. Evidence .scratch/goal-upper-call/{canonical-test,canonical-bindings,candidate-coff,gold-native-candidates}.json; helperattribution .scratch/goal-vfs-casefold/full-runtime-attribution.json. Source/lint alltargets zeroerrors/warnings.
+
+Full source11293 LIVE at .scratch/goal-upper-call/after-{job,inputs,all}.json/log,4109 pinned inputs. Compare-full.py baseline acceptedVFSrepair95544, expects ONLY TL5a3580 SIZE_MISMATCH256->RELOC247, no other changes/losses/additions/removals. Pending TL3279/3678, notyetaccepted. No data/header/struct/storage/link changes inthisepoch, priorrawdatareceipt remainslatest. Poll SAME11293 before C/header edits; refresh allcoverage after terminalacceptedcomparison. Earlier LIVE paragraphs below historical.
+
+
+
+### 2026-10-04 — Uppercase loader accepted
+
+Uppercase loader gate accepted (2026-10-04): full source11293 CLOSED exit2; every row compared against accepted VFS95544. Exactly one change: TL5a3580 SIZE_MISMATCH256 becomes RELOC247. Zero lost, added, removed, or unexpected rows; zero drift in 4109 project inputs and 805 pinned-tool inputs. Accepted source totals: server316/316, TL3279/3678, Gold1991/2514. All three coverage documents refreshed successfully. No live jobs or commits; goal active and incomplete.
+
+The native loader calls verified stock _strupr, now reflected in C through string.h. Canonical typed COFF checks resolve all247 native bytes and ten bindings; all ten corrected wrong-address controls reject. No header, struct, data, storage, or link change in this epoch. Latest server data receipt remains VFS77199: 634 rows exactly unchanged (570 matched,57 drift,7 missing), raw DLL hash unchanged; client built images remain absent. No whole-file improvement. Evidence: .scratch/goal-upper-call/{after-job,full-comparison,canonical-bindings,final-checkpoint}.json. Earlier LIVE paragraphs below are historical.
+
+
+
+### 2026-10-04 — Two complete TL extents
+
+Two TL native extents applied; source gate11306 LIVE (2026-10-04). Last accepted gate11293: server316/316, TL3279/3678, Gold1991/2514. Removed only stale SIZE comments in TL449600 (38 -> complete37) and TL47a070 (32 -> complete22); operation bodies unchanged. Fresh CLI tests with explicit --size persist EXACT37/22 through managed metadata. Removing a legacy SIZE alone retained its prior managed value on the first449600 test; explicit supported override corrected it. Native returns followed by alignment NOPs, stock LIBCMT/D3DX8 probes negative; no unchanged Gold candidates in prior whole-body scans. All-target lint zero errors/warnings.
+
+Full source11306 pins4109 inputs and unchanged805-file tool snapshot; compare-full.py expects exactly these two TL EXACT promotions and no other changes, losses, additions, or removals. No header/data/storage/link change; no raw-file gain. Poll SAME11306 before C/header edits and refresh coverage after accepted terminal comparison. Receipts .scratch/goal-small-extents/{after-job,after-inputs,test-449600,test-47a070}.json. Earlier LIVE paragraphs below historical.
+
+
+Read-only next Gold40dd90 prototype probe: stock LIBCMT miss, native21-byte wrapper passes an unextended byte to453890; callee reads byte[esp+4]. Scratch replacing only int parameter with unsigned char yields RELOC21. Typed COFF/native check resolves all21 bytes and its sole call binding453890; wrong+4 control rejects with correct sentinel. No canonical edit/promotion while11306 remains live. Other known users40dd50/TL40ec60 pass constant1 and still declareint; audit callee mapping and declarations before integration. Original signedness and return type remain unproved. Details in msvc6-c-shapes.md; receipts next-gold-* in goal-small-extents.
+
+
+### 2026-10-04 — Complete TL extents accepted
+
+Two native TL extents accepted (2026-10-04): source11306 CLOSED exit2, comparison passed against accepted loader11293. Exactly TL449600 SIZE_MISMATCH38 -> EXACT37 and TL47a070 SIZE_MISMATCH32 -> EXACT22. Zero lost, added, removed, or unexpected rows; zero drift in4109 project inputs and805 pinned-tool inputs. Operation bodies unchanged; native terminal RETs and removed NOP extents checked. All-target lint zero errors/warnings; all three coverage documents refreshed. Accepted source totals: server316/316, TL3281/3678, Gold1991/2514. No live jobs or commits. Goal active and incomplete.
+
+No header, data, struct, storage, or link change; latest server data receipt remains VFS77199: all634 verdicts unchanged (570 matched,57 drift,7 missing), rawDLL hash unchanged, both client built images absent. No whole-file gain. Receipts .scratch/goal-small-extents/{after-job,full-comparison,native-boundaries,final-checkpoint}.json. Earlier LIVE paragraphs below historical.
+
+Next scratch-only result: Gold40dd90 matches all21 native bytes with a byte-width453890 parameter; sole typed REL32 verified, wrong+4 rejects. Goldcallee reads byte[esp+4]. Same21-byte TL wrapper40eca0 calls450a00, whose38-byte body does not read this argument; wrapper similarity does not establish unchanged callee semantics. No canonical Gold promotion yet. Audit existing constant1 callers Gold40dd50/TL40ec60 before shared declarations. Display reset Gold476c60 has callersGold5ba750/TL5c61c0, so consolidation requires caller audit. See next-gold-* and next-tl-450a00-native.json.
+
+
+
+### 2026-10-04 — Shared display-counter types and operations
+
+Shared display-counter reconstruction applied; full source40361 LIVE (2026-10-04). Last accepted11306: server316/316,TL3281/3678,Gold1991/2514. Existing client_types.h now has inferred DISPLAY_COUNTER (12 bytes: id,value,uninterpreted4bytes), canonical six-row externs atTL1011980/Goldf8ab80, and reset/count prototypes. No storage definition/owner invented;72 bytes is the accessed table view. Five updater/renderer/initializer users reuse the type instead of duplicate Tag/Item/slot structs. Signed integer-address iteration preserved in shared reset/count, which reproduce27/25 bytes in both clients; canonical typed COFF audits validate native table addresses and reject allfour wrong+4 controls. Three prior literal-address EXACT classifications becomeRELOC for genuine DIR32 references; TLcount26 -> RELOC25 is the only new match.
+
+Rebrew CLI renamed both reset/count implementations to descriptive ResetDisplayCounters/CountDisplayCounters, then retired backed-up Gold duplicates and stacked their markers on TL-derived bodies. Ten caller files now reuse canonical prototypes; native Gold5ba750/TL5c61c0 reset targets476c60/4737c0 independently confirmed. All original caller backups verified against accepted11306 hashes. Stock archive probes negative before edits; D3DX8 negatives for table update/draw/init. Naming and table purpose are inferred, not original-name or source-path attestation. All-target lint zeroerrors/warnings.
+
+Full40361 pins4107 project inputs and unchanged805-file tool snapshot. Compare everyrow to11306; expect exactly four reset/count rowsRELOC27/25, no lost/added/removed/unexpected. Pending TL3282/3678, Gold1991/2514. Fresh raw-data gate launched for header/type change; no raw/file gain claimed. Poll SAME40361 before C/header edits and refresh allcoverage after accepted comparison. Receipts .scratch/goal-display-counters/{after-job,canonical-bindings,affected-files}.json. Earlier LIVE paragraphs below historical.
+
+
+User-object audit83024 CLOSED0: all18 affected user objects byte-identical to accepted-source backups, typed relocation records identical after normalizing only CLI reset/count names; each named reset/count call operand independently points to correct native target. Canonical table controls allfour rejected. Data17574 CLOSED2 unchanged634 server verdicts/rawhash; client built images absent. Full40361 stillLIVE, no source acceptance yet.
+
+
+### 2026-10-04 — Shared display counters accepted
+
+Display-counter full40361 accepted (2026-10-04): CLOSED exit2, zero4107/805 input drift, exactly four intended reset/count RELOC27/25 rows. TLcount is the only new match; three prior EXACT rows now have genuine symbolic table references. No lost, added, removed, or unexpected rows. Accepted totals server316/316,TL3282/3678,Gold1991/2514. All18 affected user objects unchanged, with21 named reset/count call operands independently bound. Three coverage documents refreshed. No raw-file gain or commits; goal active/incomplete.
+
+Post-gate inventory confirms one client_types.h declaration site, sevenTL/fourGold table users, zero source/library/generated storage owners. Both native72-byte views lie wholly in the zero-filled virtual tail of physical .data; Rebrew inventories them as.bss. Two stale metadata section fields corrected to.bss through data set, no allocation/extent/backing fabricated. New section-data59563 LIVE for this metadata correction; poll SAME59563, compare all634 server verdicts and explicit client built-image errors, then refresh client coverage. Source inputs unchanged. table-zero-tail.json records physical and logical section facts. Earlier LIVE paragraphs below historical.
+
+
+
+### 2026-10-04 — Display-counter final checkpoint
+
+Shared display counters fully checkpointed (2026-10-04): full40361 CLOSED exit2 accepted, exactly four expected reset/count RELOC25/27 changes, zero lost/added/removed/unexpected and zero4107/805 input drift. Accepted totals server316/316,TL3282/3678,Gold1991/2514. Canonical DISPLAY_COUNTER and six-row declarations/prototypes reside in existingclient_types.h; five table users and ten caller files reuse them. Two Gold duplicates retired, names changed only through Rebrew CLI. All18 user objects unchanged;21 named call operands bound independently; four wrong-table controls reject. No storage definitions or backing owners invented. Lint alltargets zeroerrors/warnings; all three coverage documents current. No live jobs or commits; goal active/incomplete.
+
+Data59563 CLOSED exit2 after supportedCLI correction of two stale table section fields to.bss. The accessed72-byte views lie in the zero-filled virtual tail of physical.data in both binaries; physical bounds recorded in table-zero-tail.json. Server634 verdict dictionary/rawDLL hash exactly unchanged570matched57drift7missing; both client built images absent. No raw-file gain. Inventory confirms one declaration site and no source/library/generated storage owner. No full allocation extent claimed; final four record bytes remain uninterpreted. Evidence .scratch/goal-display-counters/{after-job,full-comparison,users-object-audit,canonical-bindings,section-data-comparison,final-checkpoint}.json.
+
+SubtractTL473700 import preview CLOSED0:2605 unmatched Gold destinations allskipped, no selected counterpart; no forced import. Gold40dd90 scratch byte-parameter probe remains unpromoted; same-shapedTLwrapper40eca0 has a different callee body, and TLconstantcaller40ec60 currently uses wronglegacyGoldcalleeidentifier despite native450a00 call. Reconcile callee declarations/native mappings before integration, preserve TLfocus/sharedtree. Earlier LIVE paragraphs below historical.
+
+
+
+### 2026-10-04 — Client byte-flag API and correct native call binding
+
+Client helper API reconstructed; source67476 LIVE (2026-10-04). Last accepted40361 server316/316,TL3282/3678,Gold1991/2514. Existing client_types.h now supplies one void(unsigned char flag) declaration for fcn_00450a00, consistent with byte/constant callers and existing TLvoid body; TL38-byte body ignores its parameter. Nine function source files reuse it, with11 build annotations including two shared Gold callers. This signature is inferred, not original signedness/return-type attestation. TLfloatwrapper40ec60 now correctly calls450a00 rather than the legacy Goldcalleeidentifier453890; this corrects one call binding, not a rename of either function. No operation changes to other callers. All-target lint zeroerrors/warnings.
+
+Shared caller TL442cb0/Gold447260 is identical147 bytes; Goldnative endsret4472f2 followed13NOPs. Removed only stale GoldSIZE160 and persisted147 viaCLI; freshRELOC147. TLhelperRELOC38, floatwrapperRELOC52 andbytewrapperRELOC21. Independent typed COFF/native audit resolves all38/52/21/147 bytes with allbindings mapped and IAT wildcard disabled; six wrong-address+4 controls reject with correct-VA sentinels. Goldshared callers4471b0/447260 callnative453890, whose body differs fromTL450a00, so no unchanged Goldhelper import. Source import preview found no candidate.
+
+Declaration-only per-target game callee bindings are missing (FUNCTION parser skips prototypes); feature recorded upstreamIDEAS immediately. No fake DATA/function owner or empty body introduced to supply a mapping. Explicit native call audits carry the proof. Full67476 pins4107 inputs/805-tool snapshot and expects ONLY Gold447260 SIZE_MISMATCH160 -> RELOC147, no other changed/lost/added/removed rows. Fresh data1353 LIVE for header change; user-object audit63869 LIVE. Poll SAME handles before C/header edits. PendingGold1992/2514, not accepted yet; no raw-file gain or commits. Evidence .scratch/goal-client-call-api/{after-job,canonical-bindings,jobs}.json. Earlier LIVE paragraphs below historical.
+
+
+User audit51796 CLOSED0: all11 build objects identical to accepted40361 backups after normalizing only corrected TLfloatcaller callee name; direct CALL/tail-JMP helper bindings verified. First63869 audit failed on native E9 atTL43ace0, not on object-byte equivalence; preserved attempt1receipt and reran with explicitE8/E9 support. Data1353 CLOSED2 server634 equal/rawDLLunchanged, bothclientimagesabsent. Full67476 remainsLIVE; byte-wrapper cross-import31403 previewLIVE only, no source edit.
+
+Client API data1353 CLOSED exit2: server634 verdicts/rawDLLhash unchanged, bothclientimagesabsent, zero4107 inputdrift. User audit51796 CLOSED0: all11 objects identical after only corrected TLcallee-name normalization; eleven native helper transfers bound, including one E9 tail jump. Initial63869 audit's E8-only assumption failed atTL43ace0, preserved asattempt1; correctedaudit passed, no C/tool bug. Full67476 remainsLIVE.
+
+Next shared-wrapper import preview31403 CLOSED0: TL40eca0 -> Gold40dd90 score100 would supersede existingGoldSTUB and stackGoldmarker onone sharedbody. Two weaker candidatesGold464c30/5cfcb0 were skipped; do not import them. After accepted67476, use --va0x40dd90 --source-va0x40eca0 --shared to restrict precisely, then independently resolve all21 bytes/nativecallee453890 inGold (TLcallee450a00) and wrong-address controls; no unchangedGoldhelper-body claim. Preview receipts byte-wrapper-import-{preview,summary}.json. No wrapper import applied while full gateLIVE.
+
+
+
+### 2026-10-04 — Client API final accepted checkpoint
+
+Client helper API accepted (2026-10-04): full67476 CLOSED exit2, comparison against40361 passed. Exactly one changed row: shared Gold447260 SIZE_MISMATCH160 -> RELOC147. Zero lost, added, removed, or unexpected changes; zero4107 project/805 pinned-tool drift. Accepted totals server316/316,TL3282/3678,Gold1992/2514. Existing canonical client_types.h supplies void(unsigned char flag) fcn_00450a00; nine source files/eleven build functions reuse it, TL38-byte definition ignores flag, and TL40ec60 now names its actual450a00 callee. This corrects a call reference, not a function rename. Signature remains inferred; no original signedness/return-type claim. All-target lint zeroerrors/warnings; all three coverage documents refreshed. No live jobs or commits; goal active/incomplete.
+
+All11 affected objects remain byte-identical, with typed relocation records identical after normalizing only the corrected TLcallee reference. Eleven helper CALL/tail-JMP transfers independently bind to TL450a00 or Gold453890. Initial E8-only audit failed on a realE9 tail jump, preservedattempt1; corrected audit passed. Full38/52/21/147-byte canonical audits resolve every operand and reject six wrong+4 controls with correct-native sentinels and IAT wildcard disabled. SharedGold447260 terminalret4472f2 and13NOP padding establish147, not160. Data1353 CLOSED2: all634 server verdicts/rawDLL hash unchanged570matched57drift7missing, bothclientimagesabsent. No data/storage/link/whole-file gain. Receipts .scratch/goal-client-call-api/{after-job,full-comparison,canonical-bindings,users-object-audit,data-comparison,final-checkpoint}.json.
+
+Next authorized shared-tree step: import TL40eca0 into Gold40dd90 precisely with --source-va0x40eca0 --va0x40dd90 --shared. Preview31403 CLOSED0 score100 would supersede GoldSTUB; two weaker matches were skipped and must stay skipped. Preserve canonical header and source paths through CLI, then independently bind all21 bytes and Goldcallee453890/TL450a00, reject wrong addresses, and compare full rows against accepted67476. No byte-wrapper import applied yet. Goldcallee body differs fromTLhelper38 and remains unreversed, so no unchanged helper-body import claim. Declaration-only native function binding feature recorded upstreamIDEAS; no fake DATA/function owner introduced. Earlier LIVE paragraphs below historical.
+
+
+
+### 2026-10-04 — Shared byte-wrapper import
+
+Shared byte-wrapper import applied; full19538 LIVE (2026-10-04). Last accepted67476 server316/316,TL3282/3678,Gold1992/2514. Supported source import-related restricted --source-va40eca0 --va40dd90 --shared selected score100, superseded backed-up GoldSTUB file, and stackedGold/TL markers on existingTL body. No weaker candidate imported. Both fresh canonical builds RELOC21; independent typed COFF/native audit resolves all21 bytes atTL40eca0/Gold40dd90 and realnativecallees450a00/453890, IAT wildcard disabled, both wrong+4 controls reject with correct-VA sentinels. Goldhelper body still differs and is not imported/reversed. Archive probes LIBCMT bothclients andD3DX8 TL negative; no stock C/archive changes.
+
+Lint initially found W033 in six generated skills whose commands described a newerCLI than pinned snapshot. Applied rebrew-init --refresh-agents using pinnedCLI, backed up newer references; refreshalsochangedAGENTScommand table, immediatelyrestoredAGENTS frombackup. Only six generated skill references retained; all-target lint now zeroerrors/warnings. RootAGENTS hash verified preserved. These were reference-content drift, no compiler/source tool change or newtoolbug. Scaffold receipts scaffold-before/, scaffold-refresh.json. No false passed claim frominitiallint assertion.
+
+Full19538 pins4106 project inputs/unchanged805 snapshot; compareeveryrow to67476 expectsONLY Gold40dd90 STUB -> RELOC21, zero lost/added/removed/unexpected. PendingGold1993/2514 not accepted yet. No header/type/storage/data/link change inthissourceepoch; latestdata1353 remains634same/rawhashsame/clientimagesabsent. Poll SAME19538 before C/header edits and refresh allcoverage after accepted comparison. No rawfilegain or commits; goal active/incomplete. Receipts .scratch/goal-shared-byte-wrapper/{import,canonical-bindings,after-job}.json. Earlier LIVE paragraphs below historical.
+
+
+
+### 2026-10-04 — Shared byte-wrapper final checkpoint
+
+Shared byte wrapper accepted (2026-10-04): full19538 CLOSED exit2; comparison against67476 passed. Only Gold40dd90 STUB -> RELOC21 changed. Zero lost, added, removed, or unexpected rows; zero4106 project/805 pinned-tool drift. Accepted totals server316/316,TL3282/3678,Gold1993/2514. Restricted Rebrew CLI import at score100 replaced backed-up Goldduplicate and stacked its marker onTL40eca0 body; weaker matches untouched. Bothcanonicalbuilds RELOC21, both complete native bodies resolved with realTLcallee450a00/Goldcallee453890, both wrong+4 controls rejected with correct-native sentinels/IAT wildcard disabled. Goldhelper body still different/unreversed. All-target lint zeroerrors/warnings; all three coverage documents current. No live jobs or commits; goal active/incomplete.
+
+Generated skill W033 drift repaired from pinnedCLI with newer six reference files backed up in scaffold-before/. RefreshalsochangedrootAGENTS command table; restoredAGENTS frombackup and verified its hash preserved before final lint. Only generated reference refresh retained. No upstream source/compiler change or newtoolbug. No false first-lint acceptance claim. No data/header/type/storage/link change inwrapper epoch; latestdata1353 server634 unchanged570matched57drift7missing/rawDLLhashsame, bothclientimagesabsent. No whole-file gain. Evidence .scratch/goal-shared-byte-wrapper/{import,after-job,full-comparison,canonical-bindings,final-checkpoint}.json.
+
+Next read-only evidence: float setters TL40ec60/Gold40dd50 write12-byte spans67bbdc/5fcc78. ExistingVec3_67bbdc declaration already models three floats, used by material/draw/serialization paths;52a7d0 separatelydeclares interior67bbe0/+4 and67bbe4/+8. Likely RGB input because450b20 scales three values byscale/255 into material color slots, but confirm native COM slot/field layout before renaming or consolidation. PublicMicrosoftD3DMATERIAL8/SetMaterial8 docs support material-color interpretation; SDK-layout compile probe FAILED C1083 missingd3d8.h, no layout assertionspassed. Full storageowner/backingextent remainunknown; no color/type/float/header changes applied. Receipts next-float-view-recon.json andsdk-material-layout-result.json; general-knowledge.md holds primary links. Earlier LIVE paragraphs below historical.
+
+
+
+### 2026-10-04 — Gold building-prototype counterparts accepted
+
+Full source gate 56056 CLOSED exit 2; strict comparison against the accepted TL prototype revalidation passed. Exactly three Gold rows changed: cm_GetBuildingStatCount 4ef3c0 SIZE_MISMATCH128 -> RELOC125, gv_UpgradeField 4eff50 SIZE_MISMATCH560 -> RELOC556, gm_CheckEntityType 502520 SIZE_MISMATCH80 -> RELOC74. All other source results, source identities, and library providers preserved. Complete 755-byte bodies, five independently bound typed relocations, native CFG/end evidence, thirteen excluded NOP bytes, and all wrong-plus-four controls verified. Existing shared C files retained; no source/header/flags changes. Declaration-only g_entity_type_table alias at Gold7e3f30 reuses the canonical header, with unresolved native owner/backing explicitly recorded; allocation witness pushes 88*589 and stores the result in this four-byte virtual-tail pointer word. No new C storage or fabricated owner. All ten existing user objects unchanged.
+
+Accepted source counts server316/316 (including56 compiled library checks), TL3566/3679, Gold2046/2518. Fresh data7859 CLOSED2 preserves all642 server verdicts, 578matched57drift7missing, and all providers; both client images remain absent. Lint identical to accepted85 warnings/zero errors. Raw server.dll SHA remains ff81a459a20dbdbbf3bebe76128ec8bdd80b80bd59bf238cc2db936f12941935; no raw-file byte gain. Fixed input guard preserves807 pinned tool files,4104 game inputs,142 immutable references, and all nonvolatile managed identities. Three coverage builds81723/36025/68236 CLOSED0. No live jobs in this checkpoint and no game commits. Evidence .scratch/goal-gold-prototype-sharing/{acceptance,full-comparison,data-lint-comparison,fixed-input-check,extent-audit,allocation-witness,binding-effects}.json.
+
+Rebrew upstream integration separately completed and pushed to GitHub main bc64f703f4ff4eb180bacabb7baf7b9c756b0a06 after 10961 tests passed,32 skipped,88percent coverage and successful packaging/reproducibility checks. All44 saved patch regression tests present; original806 source inputs preserved in stash eab684dd0f37df4aa3b0c7bb8425ec0fc5cad7a6. Current game checks continue on their existing pinned snapshot; no silent tool swap. Evidence .scratch/goal-upstream-integration/acceptance.json. Whole-file three-target goal remains active and incomplete.
+
+
+### 2026-10-04 — Category routine consolidated; full verification pending
+
+CLI rename73351 CLOSED0 renamed shared numeric fcn_00504bd0 to gm_GetBuildingTypeCategory across22 source files. Locked record_migrated_markers then moved TL504bd0 andGold501d80 identities onto the existing server spiel6.c body and set Gold extent181; backed-up duplicate retired. No canonical C body/header/storage/flags changes. An initial set_fields_batch attempt rejected identity field file without mutation; corrected to the public locked identity writer, and repeated post-consolidation checks. All three targets now compile one C definition. Full 181-byte native audits bind every13 operands in both clients, including compiler-local switch tables; everywrong-plus4 control rejects, all33 switch cases andten destinations agree, Goldexcluded11NOPs. Bothfocusedchecks93345/10935 CLOSED0 RELOC181. Whole-body stockLIBCMT probes negative inbothclients. All128 related user-body bytes preserved afterrename/consolidation and caller relocation records agree aftername normalization. Lint56830 CLOSED0 retains all85 priorwarnings/zeroerrors; onlyfiletotal decreasesone. Frozen4103 game inputs,807 unchangedpinnedtool files,142 immutable references; onlytwo managedfunctionidentity rowschanged and data store unchanged.
+
+Full81406 LIVE, data44864 LIVE: poll SAME handles before any source/identity mutation. Strict full comparator expects only thetwo category identity rows (Gold SIZE_MISMATCH192 -> RELOC181, TL remainsRELOC181) and noother result/provider changes. Gold2047/2518 is pending; lastaccepted2046/2518. Goalactive/incomplete, no gamecommit, no rawfilegain. Evidence .scratch/goal-tl-callee-identities/{category-audit,category-consolidation,category-users-before,category-users-after,source-changes,lint-comparison,fixed-input-check,jobs}.json.
+
+Category data44864 CLOSED2: all642 server verdicts/providers unchanged578matched57drift7missing, both client built images absent, raw server hash unchanged. Full81406 remains LIVE; latest4103/807/142 inputguard passes. Next read-only resolver evidence: canonical server spiel.c gm_ResolveEntityById compiles to identical211 bytes in both clients with five typed operand correspondences; four canonical globals still need bindings (item definition pointer, slot-array view, query limit, query-base pointer). Existing numeric item/slot rows already occupy the relevant client VAs, so reconcile their identities through supported writers/CLI rather than inventing duplicate allocations. No resolver rename/sharing or data mutation applied. Evidence .scratch/goal-tl-callee-identities/resolver-sharing-candidate.json.
+
+
+### 2026-10-04 — Category revalidation and incorrect Gold list import repaired
+
+First full81406 CLOSED2 was not accepted as a fixed-input check: an external CRT inventory update changed crt_globals.h (one comment only), layout_spans.h (unused gap declaration), and three SERVER managed data identities while LIVE. Preserved and reviewed: stock _file.obj uniquely supplies __iob at offset0, a complete640-byte .data allocation with two DIR32 __bufin initializers. The former one-byte g_lock_stream_table row becomes _iob FILE[20]; the overlapping691-byte gap from100317f9 becomes the correct52-byte gap from10031a78. Both old header hashes recovered and the exact text changes checked. No C storage or raw-link edits. Three old TL SIZE_MISMATCH scores increased698->701,926->929,920->924 solely because gm_GetBuildingTypeCategory now has a verified callee binding: independent old/new map comparisons on identical objects reproduce all three changes. No status demotion or compiled-byte regression. All128 category user objects still identical under the reviewed current headers.
+
+Resolver preflight audited948 game user bodies. Two conflicting table operands occur in exactly one incorrectly shared Gold body at4d0a30 (TL4da480). Native Gold scans32 records at930600; TL scans768 records at7f4ca0. The old shared C used768 and the wrong Goldslot address770b80; a catalog-limited DIR32 mask had allowed a false native-body claim. Restored Gold-specific C in GOLD.fcn_004d0a30.c via locked identity writer; TLsource unchanged. Proper loopbound32 and byte-view accesses compile to80 bytes, with allsix nativeoperands independently bound, everywrong-plus4 control rejected and IAT wildcarddisabled. Seven output-table users support7603a0. New declaration-only17280-byte scanview and128-byte outputview both fit .data virtualtails; owners/backing unresolved, no C allocations/native symbols invented. No placeholder struct copied into production. LIBCMT wholebody probes negative inbothclients. Gold30771/TL34577 focused checks CLOSED0 RELOC80. Currentlint40121 CLOSED0 exactlybaseline85warnings/zeroerrors. Source-match counts do not increase from repairing a previously false masked result.
+
+Fresh full59970 LIVE with frozen4104 game/807 pinnedtool/142 reference inputs; poll SAME handle before anysource/identity mutation. Strict comparison against accepted Goldprototype baseline expects two category identities, the one corrected Goldsource path, and only the three independently explained failed-score changes. Noother status/provider/name/size differences allowed. Data53194 CLOSED2:642 serverrows,578matched57drift7missing; other640 rows/provider dictionaries exact, _iob now correctly DRIFT640 rather than VERIFIED prefix1, new52-byte gap VERIFIED. Rawserver/map unchanged, bothclientbuiltimagesabsent. LastacceptedGold2046/2518;2047/2518 remainspending. Currentfixedguard passes. No gamecommits, goalactive/incomplete. Receipts .scratch/goal-tl-callee-identities/{Gold-list-audit,Gold-list-applied,Gold-output-users,category-delta-effects,concurrent-iob-stock-evidence}.json and revalidation/{reviewed-input-changes,data-comparison,fixed-input-check,jobs}.json.
+
+Strict mapped DIR32 proof is a missing feature alongside the documented tolerant comparison contract; logged immediately in ../rebrew/docs/IDEAS-GUILD.md with actual wrong-table/array-bound evidence and proposed strict/unbound/IAT/local-table controls. No upstream behavior change or silent game-tool swap. Resolver bulk renames and source sharing remain unapplied until this fixed-input check finishes.
+
+
+### 2026-10-04 — Final category/list/locale epoch accepted
+
+Final full79455 CLOSED2 accepted against the last Goldprototype source baseline, with fixed4104 game/807 pinnedtool/142 immutable-reference input guard passing. Exactly six reviewed result rows differ: two category identities now name the existing shared spiel6.c function (Gold501d80 SIZE_MISMATCH192 -> RELOC181); Gold4d0a30 uses its correct target-specific32-record list body; and three existing failed TLscores change698->701,926->929,920->924 solely from the independently proven category callee binding. No added/removed source identities, no priorstrongmatch lost, everyother row/provider unchanged. Accepted counts server316/316,TL3566/3679,Gold2047/2518.
+
+Final data99453 CLOSED2 includes the reviewed concurrent stockCRTlocale partition: former772-byte span becomes12-byte verifiedprefix, complete48-byte __lconv_c DRIFT,712-byte verifiedtail. Stock lconv.obj symbols at offsets8/56 prove48, nine___lconv_static_null relocations and native __lconv pointer34348 ->34318 corroborate it. Source/header/managed-fields frozen by the data-owning thread before the run.644 totalserverrows,580matched57drift7missing;639 unaffected oldrows areexact, allprovider dictionaries unchanged. Other reviewedchange is complete_iob640 nowDRIFT andcorrect52-byte gapVERIFIED, instead of misleading old1-byte verifiedprefix. Rawserver ff81/map hashes unchanged, clientbuiltimagesabsent. No rawbytegain. Lint on this tested snapshot exactly85 priorwarnings/zeroerrors; siblingdata thread's newer tool reports84 separately. No gamecommit; goalactive/incomplete. Evidence final-revalidation/{acceptance,full-comparison,data-comparison,fixed-input-check}.json and concurrent-lconv-stock-evidence.json.
+
+Upstream follow-up1c9297a70dc40e8c7788ca435018e214739b196e merged cleanly into localRebrewmain: publiclocked clear_identity_fields API, eightregressioncases, changelog andstrictDIR32proof feature record. Full10969tests/32skips,88percentcoverage, allstatic/hooks/packaging/reproducibility/provenance/SBOM gates green. Originaltwoinputfiles preserved/hashverified in stash556b0c6ae6d08d5dc4de450cfcef4994e14a99d5. Push69628 remainsLIVE undermandatory prepush fullsuite; no GitHubsuccess claim yet. Receipt .scratch/goal-upstream-identity-clear/jobs.json.
+
+
+#### 2026-10-04 — Resolver slot declaration preflight (scratch only)
+
+Revalidated the accepted fixed checkpoint:4104 game inputs,807 pinned tool inputs,142 immutable references and managed nonvolatile identities unchanged. Refreshed TL todo. Four shared client functions tested in24 byte-declaration variants: three retain176/277/253 bytes, while TL5ca560/Gold5be320 grows477→480 after an unsigned-only declaration; an explicit signed view restores477 and identical typed references. Six TL struct-array views tested against one unsigned-byte canonical declaration with explicit local-type casts; all775/494/822/822/801/638 bytes and normalized typed relocations remain identical, and compile-time sizeof guards establish540-byte view strides. Source and identity edits remain pending; no new byte-match count, no link delta, no duplicate storage created. Jobs83304,93483,40753 CLOSED0; initial47004 CLOSED1 missing scratch header was corrected before accepted probes. Receipts `.scratch/goal-resolver-slot-types/{acceptance,typed-view-results}.json`; code-shape detail inmsvc6-c-shapes. Next: preserve these views during the slot name/type consolidation, audit all affected users, then bind the remaining resolver globals before moving client identities into existing shared spiel.c.
+
+The comprehensive prospective slot change is prepared in308 scratch source files with signed byte/local struct views preserved. All-user object audit1381 is LIVE; results are incrementally recorded in goal-resolver-slot-types/all-user-results.json. No production source/managed writer action until terminal audit and fixed-input review.
+
+
+#### 2026-10-04 — Resolver shared-tree consolidation accepted
+
+Server 10015e90, TL 5015e0 and Gold 4fea50 now share the existing
+`gm_ResolveEntityById` body in Develop/DieGildeAddOn/game/spiel.c. The numeric
+client duplicate is backed up and retired. The canonical body, headers,
+configuration, storage and layout were not edited. CLI renames update the slot,
+item, query and resolver identifiers; locked writers record eight declaration-only
+client data views, including four new query rows. Native storage owners and backing
+objects remain unresolved; no allocation was created. Slot byte declarations keep
+explicit signed-byte and local struct views. The change affects 389 C files and
+moves two function identities into the existing shared file.
+
+Full test 83665 CLOSED2 preserves SERVER 316/316, TL 3566/3679 and Gold
+2047/2518, every previous strong match, and every library provider. Object audit
+50762 CLOSED0 preserves all 708 affected bodies and typed references. Actual
+managed-map proof 46366 CLOSED0 verifies both complete 211-byte resolver bodies,
+five operands each, and ten wrong-address controls. Five existing TL
+SIZE_MISMATCH scores change 295→299, 896→898, 449→460, 548→551 and 307→311
+because formerly unresolved canonical bindings stop receiving masking credit.
+Their sources, headers, flags and object bytes are unchanged; independent
+comparison 18248 CLOSED0 reproduces both scores for each function.
+
+The fixed-input guard accepts 4104 game inputs, 807 pinned tool inputs, 142
+immutable references and the exact nonvolatile managed identities. Data check
+4400 CLOSED2 preserves all 644 SERVER rows (580 matched, 57 drift, 7 missing),
+the raw ff81 DLL and its map. Client built images remain absent. Lint 56861
+CLOSED0 retains the previous 85 diagnostics, with zero errors and no new warnings.
+Scratch guard corrections distinguish prototypes from definitions, recognize the
+existing entity-pointer alias in the moved body, and compare compiler-local labels
+by section content and offset. No C workaround was introduced for those checks.
+
+Receipts: `.scratch/goal-resolver-consolidation/{source-changes,
+identity-consolidation,resolver-native-proof,full-comparison,data-comparison,
+delta-effects,fixed-input-check}.json`. The whole-file goal remains incomplete.
+
+
+#### 2026-10-04 — Query-filter body extents accepted; shared variant proven
+
+TL 502cd0 and Gold 4ffe90 were annotated as304 bytes, including four external
+alignment NOPs. Fresh complete-object/native comparisons establish300 bytes:
+267 code, one internal alignment NOP and a32-byte switch table. All eight table
+destinations are instruction boundaries; all32 typed operands per client have
+explicit native bindings and all64 wrong-address controls reject, with IAT
+wildcards disabled. Three LIBCMT whole-body probes miss. Only two managed SIZE
+fields change304→300; no C, header, configuration or data edits.
+
+Focused tests90687/54680 CLOSED0 promote both bodies to RELOC. Full48040
+CLOSED2 preserves every other result and library provider: SERVER316/316,
+TL3567/3679, Gold2048/2518. Fixed4104 game inputs,807 tool inputs,142 immutable
+references and the exact nonvolatile managed contract pass. Lint53446 CLOSED0
+retains the previous85 warnings and zero errors. Raw DLL ff81 and map4709 hashes
+are unchanged. Both client coverage builds83318/82102 CLOSED0 are refreshed.
+This is an extent correction for existing C bodies, not newly recovered code;
+the four external NOPs remain necessary for final binary layout.
+
+Scratch conditional gm_ff_Objekt source reproduces the complete SERVER316-byte
+logging variant and both300-byte client variants. Every operand and the SERVER
+literal bytes agree; every wrong binding rejects. Removing the unused named
+third parameter also preserves these bodies. Neither experiment establishes a
+unique original prototype or original build-macro spelling. The shared candidate
+is not applied:22 canonical client declaration bindings plus caller/type audits
+remain before consolidation. Initial scratch guards were corrected for the
+actual final ret at code offset266 and MSVC pooled-literal names ??_C@; no C
+workaround was introduced. Receipts `.scratch/goal-query-filter-extent/{acceptance,
+native-proof,shared-native-proof,shared-two-named-native-proof,full-comparison,
+sharing-plan}.json`. Whole-file goal remains active and incomplete.

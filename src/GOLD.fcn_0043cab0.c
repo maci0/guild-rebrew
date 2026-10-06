@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x43cab0
-// SIZE: 112
 
 extern char* g_fc2dec;
 

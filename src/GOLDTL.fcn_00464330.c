@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x467660
-// SIZE: 31
 // FUNCTION: GOLDTL 0x464330
-// SIZE: 31
 
 unsigned int __cdecl fcn_00464330(unsigned int v, int n)
 {

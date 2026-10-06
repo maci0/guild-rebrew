@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005b10e0
-// SIZE: 272
 
 extern short g_14ce8c0;
 extern short g_14ce8c2;

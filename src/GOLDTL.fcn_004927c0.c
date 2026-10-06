@@ -1,3 +1,4 @@
+// SIZE 0x58
 typedef struct Deal {
 	int price;
 	int tax;
@@ -29,9 +30,7 @@ int __cdecl fcn_0050b750(int a, unsigned char k);
 float __cdecl gm_RandomFloat01(void);
 
 // FUNCTION: GOLD 0x004931f0
-// SIZE: 394
 // FUNCTION: GOLDTL 0x004927c0
-// SIZE: 394
 int __cdecl fcn_004927c0(unsigned char* e, Deal* o, int kind)
 {
 	char* d;

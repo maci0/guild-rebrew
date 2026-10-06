@@ -3,9 +3,7 @@ extern char g_665b88[];
 // GLOBAL: GOLD 0x5ee8e0
 extern char g_665b88[];
 // FUNCTION: GOLD 0x004ffc90
-// SIZE: 43
 // FUNCTION: GOLDTL 0x502820
-// SIZE: 43
 
 #include <math.h>
 

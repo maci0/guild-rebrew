@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00420db0
-// SIZE: 189
 // FUNCTION: GOLDTL 0x0041c3b0
-// SIZE: 189
 
 #include "octree.h"
 

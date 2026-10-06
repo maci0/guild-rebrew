@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4e59c0
-// SIZE: 60
 
 extern void* g_14d0020[];
 

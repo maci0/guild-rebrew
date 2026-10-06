@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x4a0090
-// SIZE: 352
 // FUNCTION: GOLDTL 0x49fad0
-// SIZE: 344
 
 #define max(a, b) ((a) > (b) ? (a) : (b))
 

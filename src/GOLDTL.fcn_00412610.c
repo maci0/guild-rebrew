@@ -11,7 +11,6 @@ extern int g_14cf900[];
 void __cdecl fcn_004124b0(void);
 
 // FUNCTION: GOLDTL 0x412610
-// SIZE: 31
 
 /* Resets the camera to its saved start state and reapplies it. */
 void __cdecl fcn_00412610(void)

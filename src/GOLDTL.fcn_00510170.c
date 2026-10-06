@@ -2,9 +2,7 @@ extern unsigned char* g_90e094;
 extern unsigned char* g_868050;
 
 // FUNCTION: GOLD 0x0050ccd0
-// SIZE: 102
 // FUNCTION: GOLDTL 0x510170
-// SIZE: 102
 
 int __cdecl fcn_00510170(char* a)
 {

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Map every reference .text function to the static-library member that supplies it.
 
-`rebrew lib-match` answers "is this *reversed* function actually library code?".
+`rebrew library match` answers "is this *reversed* function actually library code?".
 This answers the next question, which the LIBCMT placement work needs: for each
 function in the *reference*, which archive member body is it?  The output is an
 ordered (VA, member, symbol, size) list, i.e. the order the member objects have
@@ -281,16 +281,13 @@ def match(index, data: bytes, exclude=None, canon=None):
 
 
 def load_catalog(root: Path) -> list[tuple[int, str, int]]:
-    """(va, name, size) from the reccmp-format catalog CSV."""
-    out = []
-    for line in (root / "db/server.dll_functions.csv").read_text().splitlines():
-        if line.startswith("#") or line.startswith("address"):
-            continue
-        parts = line.split("|")
-        if len(parts) < 5:
-            continue
-        out.append((int(parts[0], 16), parts[1], int(parts[4])))
-    return out
+    """(va, name, size) from db/coverage-<target>.toml plus the inventory."""
+    import sys
+
+    sys.path.insert(0, str(root / "scripts"))
+    import catalog_functions
+
+    return catalog_functions.load_functions()
 
 
 def main() -> int:
@@ -304,7 +301,6 @@ def main() -> int:
         "match SP5/base (dosmaperr, NMSG_WRITE, setmbcp, output).",
     )
     ap.add_argument("--target-bin", default="original/Server/server.dll")
-    ap.add_argument("--catalog", default="db/server.dll_functions.csv")
     ap.add_argument("--from", dest="from_va", default="0x1001a150")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
@@ -318,7 +314,7 @@ def main() -> int:
         if not lp.exists():
             sys.exit(
                 f"map_libcmt: {lp} not found.  Extract it once with\n"
-                f"  rebrew lib-match --stock-lib {DEFAULT_STOCK}\n"
+                f"  rebrew library match --stock-lib {DEFAULT_STOCK}\n"
                 "or point --lib at the toolchain's LIBCMT.LIB."
             )
         lib_paths.append(lp)

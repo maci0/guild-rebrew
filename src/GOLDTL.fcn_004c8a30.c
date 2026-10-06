@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4c8a30
-// SIZE: 217
 
 int __cdecl fcn_004c4dc0(unsigned char* msg, int serial);
 int __cdecl fcn_005015e0(char**, char**, char**, int);

@@ -45,7 +45,6 @@ int __cdecl fcn_004c5620(int, Order_54f0c0*);
 void __cdecl fcn_00546190(Order_54f0c0*);
 
 // FUNCTION: GOLDTL 0x54f0c0
-// SIZE: 635
 
 void __cdecl fcn_0054f0c0(Order_54f0c0* o)
 {

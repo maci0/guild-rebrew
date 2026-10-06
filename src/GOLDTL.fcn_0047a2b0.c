@@ -4,7 +4,6 @@
 extern Anim_100e7a0 g_100e7a0[0x30];
 
 // FUNCTION: GOLDTL 0x47a2b0
-// SIZE: 36
 
 void __cdecl fcn_0047a2b0(int i)
 {

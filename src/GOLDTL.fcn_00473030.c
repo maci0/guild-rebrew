@@ -15,7 +15,6 @@ extern char* g_1015ea0;
 extern Anim_100e7a0 g_100e7a0[0x30];
 
 // FUNCTION: GOLDTL 0x473030
-// SIZE: 131
 void __cdecl fcn_00473030(int slot, char mode)
 {
 	Slot* s;

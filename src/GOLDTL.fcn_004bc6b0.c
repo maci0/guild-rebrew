@@ -9,9 +9,7 @@ char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 char* __cdecl fcn_0040c120(char*, int, int, int, int);
 
 // FUNCTION: GOLD 0x004bc1a0
-// SIZE: 306
 // FUNCTION: GOLDTL 0x4bc6b0
-// SIZE: 306
 
 void __cdecl fcn_004bc6b0(char** a1)
 {

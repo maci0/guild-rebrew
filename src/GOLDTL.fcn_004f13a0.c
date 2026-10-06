@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004ef440
-// SIZE: 46
 // FUNCTION: GOLDTL 0x4f13a0
-// SIZE: 46
 
 int __cdecl cm_GetBuildingStatCount(char*);
 

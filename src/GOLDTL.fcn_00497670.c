@@ -5,9 +5,7 @@ float __cdecl fcn_0050bb50(int id, unsigned char k);
 void __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char k, int n);
 
 // FUNCTION: GOLD 0x00497c70
-// SIZE: 100
 // FUNCTION: GOLDTL 0x497670
-// SIZE: 100
 int __cdecl fcn_00497670(int a1, char* it, char* x)
 {
 	char* t;

@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00422b30
-// SIZE: 112
 // FUNCTION: GOLDTL 0x0041e2e0
-// SIZE: 112
 
 typedef struct Chunk Chunk;
 

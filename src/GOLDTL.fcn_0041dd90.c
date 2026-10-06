@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x4225e0
-// SIZE: 64
 // FUNCTION: GOLDTL 0x41dd90
-// SIZE: 60
 
 #include "memtrack.h"
 

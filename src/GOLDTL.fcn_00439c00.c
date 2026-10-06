@@ -13,7 +13,6 @@ void __cdecl fcn_00439ba0(Node* a, Node* b);
 void __cdecl fcn_00439aa0(Node* b);
 
 // FUNCTION: GOLDTL 0x439c00
-// SIZE: 94
 void __cdecl fcn_00439c00(Node* a, Node* b)
 {
 	b->root = a == 0;

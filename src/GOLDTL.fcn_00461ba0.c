@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x461ba0
-// SIZE: 196
 
 #include "zutil.h"
 #include "infblock.h"

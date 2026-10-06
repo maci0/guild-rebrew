@@ -8,9 +8,7 @@ extern entry_100d0c0 g_100d0c0[];
 void __cdecl fcn_004c52d0(int, int);
 
 // FUNCTION: GOLD 0x47ed50
-// SIZE: 68
 // FUNCTION: GOLDTL 0x47e220
-// SIZE: 68
 
 void __cdecl fcn_0047e220(char* x)
 {

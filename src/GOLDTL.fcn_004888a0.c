@@ -22,9 +22,7 @@ extern char g_7f4ca0[];
 unsigned short __cdecl fcn_0042e410(int n);
 
 // FUNCTION: GOLD 0x4892f0
-// SIZE: 384
 // FUNCTION: GOLDTL 0x004888a0
-// SIZE: 378
 int __cdecl fcn_004888a0(Ent* e)
 {
 	int found;

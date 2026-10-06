@@ -1,3 +1,4 @@
+// SIZE 0x211
 typedef struct Node {
 	char pad0[0x1f0];
 	struct Node* next;
@@ -13,7 +14,6 @@ void __cdecl fcn_0043cb20(Node* a, Node* b);
 void __cdecl fcn_0043ca20(Node* b);
 
 // FUNCTION: GOLD 0x43cb80
-// SIZE: 94
 void __cdecl fcn_0043cb80(Node* a, Node* b)
 {
 	b->root = a == 0;

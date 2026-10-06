@@ -12,7 +12,6 @@
  */
 
 /* Nothing reads this run through its own address. */
-// DATA: SERVER 0x1002dd48
 unsigned int g_spiel_const_table[38] = {
 	0x41000000, 0x40e00000, 0x41000000, 0x41100000, 0x41a00000, 0x41a80000, 0x41a00000, 0x41980000,
 	0, 0, 1, 1, 0x42200000, 0x10, 2, 0x41700000,
@@ -23,7 +22,6 @@ unsigned int g_spiel_const_table[38] = {
 
 /* 0x80-byte producer records; gm_Open copies all 0x2a80 bytes, gm_AllocRaum
  * walks them up to 0x10030860. */
-// GLOBAL: SERVER 0x1002dde0
 int g_producer_id_table[2720] = {
 	0x1d4, 0, 0x40a00000, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0xf, 0, 0, 0x92,
@@ -370,7 +368,6 @@ int g_producer_id_table[2720] = {
 /* Building default objects (gm_AllocBuildingDefaults, spiel5.c).  The only
  * struct object here, so it also gives this TU's .data the 8-byte
  * alignment the reference shows (four zero bytes at 0x1002dd44). */
-// DATA: SERVER 0x10030860
 BuildingDefaults g_building_defaults[37] = {
 	{ 0x29, { 0, 0, 0x1d4, 0x155, 0x156, 0, 0, 0, 0, 0 } },
 	{ 0x2a, { 0, 0, 0x1d4, 0x155, 0x156, 0x158, 0x157, 0, 0, 0 } },
@@ -411,40 +408,37 @@ BuildingDefaults g_building_defaults[37] = {
 	{ 0x00, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
 };
 
-// GLOBAL: SERVER 0x10030b6c
 int g_next_object_id = 1;
-// GLOBAL: SERVER 0x10030b70
+
 int g_entity_id_counter = 1;
+
 /* Nothing reads these through their own address. */
-// DATA: SERVER 0x10030b74
 unsigned char g_spiel_byte_table[16] = {
 	0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x02, 0x02, 0x03, 0x04, 0x05, 0x00, 0x00, 0x00,
 };
 
 /* Entity query filter defaults (gm_ff_Objekt, gm_StartFilteredEntitySearch,
  * gm_NextEntityQueryMatch, spiel_dumpD.c); 0xff / -1 / 0x7fff mean "any". */
-// GLOBAL: SERVER 0x10030b84
 unsigned char g_filter_extra5 = 0xff;
-// GLOBAL: SERVER 0x10030b88
+
 int g_query_filter_extra1 = -1;
-// GLOBAL: SERVER 0x10030b8c
+
 short g_query_filter_extra2 = 0x7fff;
-// GLOBAL: SERVER 0x10030b8e
+
 short g_query_filter_extra3 = 0x7fff;
-// GLOBAL: SERVER 0x10030b90
+
 unsigned char g_query_filter_extra4 = 0xff;
-// GLOBAL: SERVER 0x10030b94
+
 int g_query_filter_max_id = 0x7fff;
-// GLOBAL: SERVER 0x10030b98
+
 int g_query_filter_owner = -1;
-// GLOBAL: SERVER 0x10030b9c
+
 unsigned short g_query_filter_type = 0xffff;
-// GLOBAL: SERVER 0x10030b9e
+
 unsigned char g_query_filter_state = 0xff;
 
 /* 6-byte stat records for gm_AllocSpieler: 95 by slot+0x164, then 35 by
  * slot+0x165 from 0x10030dda (g_stat_table_30dda). */
-// GLOBAL: SERVER 0x10030ba0
 unsigned char g_stat_table[780] = { /* 130 records of 6 */
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x69, 0x69, 0xe7, 0xe7, 0x69, 0x04, 0x3f, 0x3f, 0xbd, 0xbd,
 	0x3f, 0x03, 0x3f, 0x3f, 0x7e, 0x7e, 0x2a, 0x02, 0x3f, 0x2a, 0x54, 0x54, 0x15, 0x02, 0x3f, 0x15,
@@ -498,7 +492,6 @@ unsigned char g_stat_table[780] = { /* 130 records of 6 */
 };
 
 /* Nothing reads these through their own address. */
-// DATA: SERVER 0x10030eac
 int g_spiel_space_fill[16] = {
 	0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
 	0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,

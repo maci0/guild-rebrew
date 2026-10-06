@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00415d70
-// SIZE: 739
 
 typedef struct Device Device;
 typedef struct VBuf VBuf;

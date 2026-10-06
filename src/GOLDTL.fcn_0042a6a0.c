@@ -8,9 +8,7 @@ extern g_6623bc_f g_6623bc;
 // GLOBAL: GOLD 0x5eb35c
 extern g_6623bc_f g_6623bc;
 // FUNCTION: GOLD 0x0042bc40
-// SIZE: 95
 // FUNCTION: GOLDTL 0x42a6a0
-// SIZE: 95
 
 extern int g_6b7f90;
 extern int* g_6b7ed0[16];

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00421890
-// SIZE: 779
 // Path search setup: seeds the start and goal nodes of the grid and runs the
 // expansion step (0x421ba0) until it reaches the goal or runs out.
 

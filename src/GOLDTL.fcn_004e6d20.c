@@ -4,9 +4,7 @@ extern char g_68d6dc[];
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 // FUNCTION: GOLD 0x004e5360
-// SIZE: 127
 // FUNCTION: GOLDTL 0x4e6d20
-// SIZE: 127
 
 float __cdecl fcn_004e6d20(void)
 {

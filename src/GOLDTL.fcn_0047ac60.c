@@ -21,7 +21,6 @@ void __cdecl fcn_00475f80(Item* p);
 void __cdecl fcn_0041ddd0(void* p);
 
 // FUNCTION: GOLDTL 0x47ac60
-// SIZE: 134
 void __cdecl fcn_0047ac60(Group* g)
 {
 	int i;

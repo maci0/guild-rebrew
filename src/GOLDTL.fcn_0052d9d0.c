@@ -10,7 +10,6 @@ struct s_7f4ca0 {
 extern char g_7f4ca0[];
 
 // FUNCTION: GOLDTL 0x52d9d0
-// SIZE: 160
 
 void __cdecl fcn_004379a0(int, char*, int, void*, char*);
 char __cdecl fcn_0052d860(char*, char*);

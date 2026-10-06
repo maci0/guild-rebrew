@@ -36,7 +36,6 @@ void __cdecl fcn_00459be0(int a);
 int __cdecl fcn_00459d00(int obj, int flag);
 
 // FUNCTION: GOLDTL 0x459d90
-// SIZE: 262
 int __cdecl fcn_00459d90(fcn_00459d90_Tex* t, char flag)
 {
 	int r;

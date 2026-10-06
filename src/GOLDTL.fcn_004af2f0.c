@@ -35,9 +35,7 @@ int __cdecl fcn_004ae0f0(int);
 unsigned short __cdecl fcn_0042e410(int);
 
 // FUNCTION: GOLD 0x004adff0
-// SIZE: 60
 // FUNCTION: GOLDTL 0x4ae130
-// SIZE: 60
 
 /* The original translation unit held this callee in the same file as
  * fcn_004af2f0, and msvc6's same-TU callee analysis is what keeps `w` in edx
@@ -57,9 +55,7 @@ int __cdecl fcn_004ae130(unsigned short a1)
 }
 
 // FUNCTION: GOLD 0x004ae080
-// SIZE: 70
 // FUNCTION: GOLDTL 0x4ae1c0
-// SIZE: 70
 
 int __cdecl fcn_004ae1c0(int a1)
 {
@@ -82,9 +78,7 @@ int __cdecl fcn_004ae1c0(int a1)
 }
 
 // FUNCTION: GOLD 0x004ae0d0
-// SIZE: 65
 // FUNCTION: GOLDTL 0x4ae210
-// SIZE: 65
 
 int __cdecl fcn_004ae210(int a1)
 {
@@ -105,9 +99,7 @@ int __cdecl fcn_004ae210(int a1)
 }
 
 // FUNCTION: GOLD 0x004ae160
-// SIZE: 273
 // FUNCTION: GOLDTL 0x4ae2a0
-// SIZE: 273
 
 #pragma optimize("y", off)
 int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
@@ -166,9 +158,7 @@ int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
 #pragma optimize("", on)
 
 // FUNCTION: GOLD 0x004ae280
-// SIZE: 278
 // FUNCTION: GOLDTL 0x4ae3c0
-// SIZE: 278
 
 #pragma optimize("y", off)
 int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
@@ -227,9 +217,7 @@ int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
 #pragma optimize("", on)
 
 // FUNCTION: GOLD 0x4ae3a0
-// SIZE: 608
 // FUNCTION: GOLDTL 0x4ae4e0
-// SIZE: 608
 
 #pragma optimize("y", off)
 int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
@@ -333,9 +321,7 @@ send:
 #pragma optimize("", on)
 
 // FUNCTION: GOLD 0x004ae600
-// SIZE: 761
 // FUNCTION: GOLDTL 0x4ae740
-// SIZE: 761
 
 #pragma optimize("y", off)
 int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
@@ -451,9 +437,7 @@ send:
 #pragma optimize("", on)
 
 // FUNCTION: GOLD 0x004ae900
-// SIZE: 764
 // FUNCTION: GOLDTL 0x4aea40
-// SIZE: 764
 
 #pragma optimize("y", off)
 int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
@@ -572,9 +556,7 @@ send:
 #pragma optimize("", on)
 
 // FUNCTION: GOLD 0x004aec00
-// SIZE: 772
 // FUNCTION: GOLDTL 0x4aed40
-// SIZE: 772
 
 #pragma optimize("y", off)
 int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
@@ -694,9 +676,7 @@ send:
 #pragma optimize("", on)
 
 // FUNCTION: GOLDTL 0x4af2f0
-// SIZE: 264
 // FUNCTION: GOLD 0x4af1b0
-// SIZE: 264
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x200) and
  * addresses the 0x200 scratch buffer off ebp; section 13 of
@@ -756,9 +736,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 }
 
 // FUNCTION: GOLD 0x4af3f0
-// SIZE: 720
 // FUNCTION: GOLDTL 0x4af530
-// SIZE: 710
 
 #pragma optimize("y", off)
 int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
@@ -872,9 +850,7 @@ send:
 #pragma optimize("", on)
 
 // FUNCTION: GOLD 0x004afc30
-// SIZE: 405
 // FUNCTION: GOLDTL 0x4afd70
-// SIZE: 405
 
 #pragma optimize("y", off)
 int __cdecl fcn_004afd70(int mode, int* pairs, int idx, char* text, void* out)
@@ -999,7 +975,6 @@ void __cdecl fcn_004c5980(Msg*);
  * fcn_004ae130/1c0/210 in view, c2 keeps the zero in edx across the first
  * call; declared from another file the object is 16 bytes longer. */
 // FUNCTION: GOLDTL 0x4b0780
-// SIZE: 666
 int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
 {
 	int n;

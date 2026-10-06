@@ -28,7 +28,6 @@ struct track_417f00 {
 };
 
 // FUNCTION: GOLDTL 0x417f00
-// SIZE: 252
 int __cdecl fcn_00417f00(struct track_417f00* tr, unsigned int t)
 {
 	struct key_417f00* k;

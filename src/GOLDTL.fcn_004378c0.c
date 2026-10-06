@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x438c60
-// SIZE: 224
 // FUNCTION: GOLDTL 0x4378c0
-// SIZE: 216
 
 char __cdecl fcn_004378c0(int which, unsigned int flags)
 {

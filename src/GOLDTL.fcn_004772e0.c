@@ -16,7 +16,6 @@ int __cdecl fcn_00475fd0(Surf*);
 void __cdecl fcn_00476060(Surf*);
 
 // FUNCTION: GOLDTL 0x004772e0
-// SIZE: 302
 
 void __cdecl fcn_004772e0(int x, int y, int w, int h, Surf* s)
 {

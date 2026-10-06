@@ -2,9 +2,7 @@ extern char* g_6b7e98;
 // GLOBAL: GOLD 0x5f1b68
 extern char g_675be8[];
 // FUNCTION: GOLD 0x0040b860
-// SIZE: 64
 // FUNCTION: GOLDTL 0x40c780
-// SIZE: 64
 
 void __cdecl fcn_00425bf0(void*, int, void*);
 

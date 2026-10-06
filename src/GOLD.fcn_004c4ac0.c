@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004c4ac0
-// SIZE: 61
 // fcn_004c4ac0 — x[0]=0x1a; x[0x10]=a1; x[0x14]=a2; x[0x18]=a3; fcn_004c39c0(&x).
 
 int __cdecl fcn_004c39c0(void*);

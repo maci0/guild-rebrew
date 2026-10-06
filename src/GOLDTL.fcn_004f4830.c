@@ -3,9 +3,7 @@ extern char g_68ff68[];
 // GLOBAL: GOLD 0x611238
 extern char g_68ff68[];
 // FUNCTION: GOLD 0x004f2720
-// SIZE: 48
 // FUNCTION: GOLDTL 0x4f4830
-// SIZE: 43
 
 #include <string.h>
 
@@ -28,9 +26,7 @@ void __cdecl fcn_004f5110(char* buf, int k);
 void __cdecl fcn_005b26e0(char* o, char* buf);
 
 // FUNCTION: GOLD 0x4f27d0
-// SIZE: 160
 // FUNCTION: GOLDTL 0x004f48e0
-// SIZE: 146
 int __cdecl fcn_004f48e0(char* s)
 {
 	int rec[9];
@@ -54,9 +50,7 @@ int __cdecl fcn_004f48e0(char* s)
 extern char g_9a3825[];
 
 // FUNCTION: GOLD 0x4f39e0
-// SIZE: 70
 // FUNCTION: GOLDTL 0x004f5dd0
-// SIZE: 70
 
 int __cdecl fcn_004f5dd0(int a)
 {

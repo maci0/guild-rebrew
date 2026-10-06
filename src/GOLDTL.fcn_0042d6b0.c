@@ -24,9 +24,7 @@ int* __cdecl fcn_0041db70(int size, const char* tag);
 void __cdecl fcn_0041ddd0(void* p);
 
 // FUNCTION: GOLD 0x42e360
-// SIZE: 464
 // FUNCTION: GOLDTL 0x42d6b0
-// SIZE: 454
 
 /* Reloads a text bank from its language resource file. */
 int __cdecl fcn_0042d6b0(const char* name)

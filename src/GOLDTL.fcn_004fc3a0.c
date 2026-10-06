@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4fc3a0
-// SIZE: 178
 
 void __cdecl fcn_004f4830(int, int*);
 

@@ -91,7 +91,6 @@ static __inline void copy0(void* dst, void* src, int size)
 }
 
 // FUNCTION: GOLDTL 0x00449ba0
-// SIZE: 528
 
 void __cdecl fcn_00449ba0(Ent* e, Obj* o, int id)
 {

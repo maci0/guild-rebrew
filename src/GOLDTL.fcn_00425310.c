@@ -5,7 +5,6 @@ extern char* g_6b7d68;
 extern int g_6b7d6c;
 
 // FUNCTION: GOLDTL 0x425310
-// SIZE: 417
 
 /* Writes the sample bank as text, blanks in names replaced by '~'. */
 int __cdecl fcn_00425310(const char* file)

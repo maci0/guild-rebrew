@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4a73f0
-// SIZE: 251
 
 typedef struct Card {
 	int v;

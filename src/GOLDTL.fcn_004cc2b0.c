@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004cb730
-// SIZE: 131
 // FUNCTION: GOLDTL 0x4cc2b0
-// SIZE: 131
 
 typedef struct {
 	unsigned short id;

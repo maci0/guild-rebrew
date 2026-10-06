@@ -8,7 +8,6 @@ project(rebrew C)
 include(CheckCSourceCompiles)
 include(CMakeDependentOption)
 include(CMakePushCheckState)
-include("${CMAKE_CURRENT_LIST_DIR}/cmake/reccmp.cmake")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
@@ -107,14 +106,14 @@ if(REBREW_BUILD_SERVER)
     find_program(_REBREW_SRC_BIN rebrew REQUIRED)
   endif()
   set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
-               "${PROJECT_SOURCE_DIR}/src/rebrew-functions.toml")
+               "${PROJECT_SOURCE_DIR}/rebrew-functions.toml")
   execute_process(
-    COMMAND "${_REBREW_SRC_BIN}" cmake-sources --target "server.dll"
+    COMMAND "${_REBREW_SRC_BIN}" build cmake-sources --target "server.dll"
             -o ${CMAKE_BINARY_DIR}/rebrew-sources-server.cmake
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     RESULT_VARIABLE _REBREW_SOURCES_RC)
   if(NOT _REBREW_SOURCES_RC EQUAL 0)
-    message(FATAL_ERROR "rebrew cmake-sources failed for server.dll")
+    message(FATAL_ERROR "rebrew build cmake-sources failed for server.dll")
   endif()
   include(${CMAKE_BINARY_DIR}/rebrew-sources-server.cmake)
   set(SERVER_SOURCES ${REBREW_SOURCES})
@@ -129,49 +128,20 @@ if(REBREW_BUILD_SERVER)
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt/")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/zlib/")
   # Pure CRT bodies live in LIBCMT. Keep only game/layout files under crt_region.
-  #
-  # All 68 annotated functions under crt_region/ were measured to be
-  # byte-identical to stock LIBCMT (identical outside the library object's own
-  # relocation slots). They are linked library code that was reversed by
-  # mistake; none of it is reversing work to finish. Evidence and the exact
-  # symbol/object for each: .scratch/libcmt_probe/SUMMARY.md, reproduce with
-  # .scratch/libcmt_probe/cmp_libcmt.py. Note _initterm and _parse_cmdline are
-  # static (COFF storage class 3) in the CRT, so they are absent from the
-  # archive symbol index; a scan that only walks external symbols misses them.
-  #
-  # The deliverable link (scripts/split_link.sh) takes each LIBCMT function
-  # from the stock archive at its own reference VA, so no whole library object
-  # (and none of its extra imports) enters it. The reversed CRT bodies that
-  # once displaced sbheap.obj (IsBadWritePtr) and mlock.obj (FatalAppExitA)
-  # are gone: without them the split link keeps residue, imports (100) and
-  # .rdata unchanged. What stays here is layout data plus one displacement:
-  #   amsg_exit.c                        keeps crt0msg.obj out. That object
-  #       contributes the runtime-error message strings, which rdata_restore.c
-  #       also supplies, so linking both overshoots .rdata by 0x320.
-  #       Deleting them from the blob and letting the library provide them was
-  #       tried and does not work: the original packs those strings into 0x2eb
-  #       bytes, while the linker places crt0msg's 23 separate COMDATs with
-  #       per-section padding into 0x32b. The content is then correct and
-  #       unduplicated, but .rdata is 0x40 long and postlink still refuses it.
-  #       Only the blob reproduces the original's tighter packing, so the blob
-  #       keeps the strings and crt0msg.obj stays out of the link.
-  # Dropping amsg_exit.c was tried and measured; it regresses the
-  # .rdata size.
+  # amsg_exit.c is deliberately NOT here: its nine publics have no user in the
+  # tree, and /INCLUDE:__CRT_INIT@12 pulls dllcrt0.obj for /ENTRY, which defines
+  # _amsg_exit itself (LNK2005 otherwise). crt0msg.obj is pulled by that same
+  # member, and rdata_restore.c's blob already owns its 20 long strings.
+  # Dropping it costs .text and .rdata (measured: .text -0xa330 when the whole
+  # keep-list went missing).
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt_region/")
   set(_CRT_REGION_KEEP
-    "${PROJECT_SOURCE_DIR}/src/crt_region/crt_imports.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/data_restore.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/data_globals.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/rdata_restore.c"
-    "${PROJECT_SOURCE_DIR}/src/crt_region/amsg_exit.c"
-    # rdata_fold.c references the string literals six LIBCMT objects emit as
-    # .rdata COMDATs a second time after rdata_restore.c's blob.  Same content
-    # means the same `??_C@...` COMDAT name, so linking this first makes the
-    # linker discard the library's copies: .rdata raw 0x4000 -> 0x3000, the
-    # reference's.  It carries no .text.
-    "${PROJECT_SOURCE_DIR}/src/crt_region/rdata_fold.c"
+    # rdata_fold.c shares the `??_C@...` COMDAT names of six LIBCMT .rdata
+    # literals; linking it first makes the linker discard the library copies
+    # (.rdata raw 0x4000 -> 0x3000, the reference's). No .text.
   )
   list(APPEND SERVER_SOURCES ${_CRT_REGION_KEEP})
+
 
 
   if(NOT MSVC_FOR_DECOMP)
@@ -205,14 +175,13 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/zutil.c"
   )
 
-  set(LINK_STUBS "${PROJECT_SOURCE_DIR}/src/link_stubs.c")
 
   # Order objects by original function VA (fixes reccmp "0 aligned"; drops
   # zlib files absent from the original). The --first-va table supplies the
   # zlib files' first-function VAs (they have no // FUNCTION: markers); the
   # --exclude list drops files absent from the original server.dll.
   execute_process(
-    COMMAND rebrew order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES}
+    COMMAND "${_REBREW_SRC_BIN}" build order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES}
       --marker SERVER
       --first-va adler32.c=0x10001000
       --first-va crc32.c=0x100011f0
@@ -226,7 +195,9 @@ if(REBREW_BUILD_SERVER)
       --first-va winsock_data.c=0x10006c80
       --first-va trees.c=0x10006ec0
       --first-va trees2.c=0x10008800
+      --first-va bss_head.c=0x10001000
       --first-va zutil.c=0x100092e0
+      --first-va bss_head2.c=0x100092e1
       --first-va spiel_data.c=0x100156b0
       --exclude gzio.c
       --exclude compress.c --exclude uncompr.c
@@ -234,108 +205,86 @@ if(REBREW_BUILD_SERVER)
     OUTPUT_STRIP_TRAILING_WHITESPACE
     RESULT_VARIABLE ORDER_RC)
   if(NOT ORDER_RC EQUAL 0)
-    message(FATAL_ERROR "rebrew order-sources failed")
+    message(FATAL_ERROR "rebrew build order-sources failed")
   endif()
   string(REPLACE "\n" ";" SERVER_SOURCES "${ORDERED_SOURCES}")
 
-  # Link crt_imports.obj FIRST: its /include directives allocate IAT slots in
-  # the original binary's exact import order. If any other object's code
-  # references an import earlier, the linker gives that import an earlier slot
-  # and the whole IAT layout shifts (kernel32 @ 0x24000 must stay exact).
-  set(_CRT_IMPORTS "${PROJECT_SOURCE_DIR}/src/crt_region/crt_imports.c")
-  list(REMOVE_ITEM SERVER_SOURCES "${_CRT_IMPORTS}")
-  list(INSERT SERVER_SOURCES 0 "${_CRT_IMPORTS}")
-
-  # Link the .data gap TU next: it declares the raw .data bytes our game TUs
-  # do not emit (original [0x3000:0xe000]), so the raw link's .data rsz reaches
-  # 0xe000 and the section-derived header fields fall out of the link.
-  set(_DATA_GAP "${PROJECT_SOURCE_DIR}/src/crt_region/data_restore.c")
-  list(REMOVE_ITEM SERVER_SOURCES "${_DATA_GAP}")
-  list(INSERT SERVER_SOURCES 1 "${_DATA_GAP}")
-
-  # zutil.c names _z_errmsg_empty. The reference keeps that address inside
-  # the gap blob (0x10034620). An absolute COFF symbol satisfies the link
-  # and contributes no section bytes; a C definition would.
-  set(_Z_ERRMSG_EMPTY "${CMAKE_BINARY_DIR}/abs__z_errmsg_empty.obj")
-  add_custom_command(
-    OUTPUT "${_Z_ERRMSG_EMPTY}"
-    COMMAND python3 "${PROJECT_SOURCE_DIR}/scripts/emit_absolute_obj.py"
-            --name _z_errmsg_empty --value 0x10034620
-            --out "${_Z_ERRMSG_EMPTY}"
-    DEPENDS "${PROJECT_SOURCE_DIR}/scripts/emit_absolute_obj.py"
-    VERBATIM
-  )
-  set_source_files_properties("${_Z_ERRMSG_EMPTY}" PROPERTIES
-    EXTERNAL_OBJECT TRUE
-    GENERATED TRUE
-  )
-
-  add_library(server_dll SHARED ${SERVER_SOURCES} ${LINK_STUBS} "${_Z_ERRMSG_EMPTY}")
-
+  # The game's zero-initialized data sits in two generated objects (docs/msvc6-link-layout.md 5c):
+  # bss_head.c is an ordinary object (its .bss precedes the CRT's); bss_late.c is a static library
+  # listed after the stock archives, so LINK loads it after the CRT and its .bss follows theirs.
+  list(FILTER SERVER_SOURCES EXCLUDE REGEX "/bss_late\\.c$")
+  add_library(server_dll SHARED ${SERVER_SOURCES})
+  add_library(bss_late STATIC "${PROJECT_SOURCE_DIR}/src/bss_layout/bss_late.c")
 
   target_include_directories(server_dll PRIVATE
     # Unified tree: src/Develop mirrors D:\Develop (game headers live at its
-    # root); src/ holds rebrew scaffolding (link_stubs.c, .def files).
+    # root); src/ holds rebrew scaffolding (generated bss_layout/, .def files).
     "${PROJECT_SOURCE_DIR}/src/Develop"
     "${PROJECT_SOURCE_DIR}/src"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3"
   )
 
-  # System import libs resolve inside the toolchain image via LIB
-  # (Z:\opt\msvc6.0\VC98\Lib); WS2_32/WINMM are not in CMake's default set.
-  # LIBCMT is the release static CRT the original binary links against: the
-  # stock library from the toolchain image, resolved via LIB. The CRT is
-  # linked, not reversed.
-  #
-  # It must stay stock. The build previously used a hand-stripped copy under
-  # .scratch/ with 22 objects removed, which was both gitignored (so the build
-  # was unreproducible on a fresh clone) and unnecessary. This CMake link
-  # pulls sbheap.obj, validate.obj and mlock.obj whole, and with them
-  # IsBadWritePtr / FatalAppExitA, imports the original server.dll does not
-  # have. The deliverable is the split link (scripts/split_link.sh), which
-  # takes each library function at its own reference VA, so its import set
-  # matches the reference (100).
-  #
-  # Never patch a library to make the link work. Displace the offending object
-  # with a local definition, as amsg_exit.c does, or change what references
-  # it. A doctored .lib cannot be reproduced from a clean checkout and hides the very
-  # duplication `rebrew lib-match` exists to catch; that check refuses to run
-  # if the extracted copy differs from the toolchain image's.
-  # External archives come from REBREW_EXTERNAL_LIBS in the generated source
-  # list (rebrew cmake-sources ← targets.<name>.external_libs): the stock
-  # .lib links at build time, in config order (static archives last).
-  target_link_libraries(server_dll PRIVATE ${REBREW_EXTERNAL_LIBS})
+  # Link unchanged stock archives in config order.
+  target_link_libraries(server_dll PRIVATE ${REBREW_EXTERNAL_LIBS} bss_late)
 
   set_property(TARGET server_dll PROPERTY OUTPUT_NAME "server")
   set_property(TARGET server_dll PROPERTY PREFIX "")
   set_property(TARGET server_dll PROPERTY SUFFIX ".dll")
 
-  target_sources(server_dll PRIVATE "${PROJECT_SOURCE_DIR}/src/server.def")
+  if(MSVC_FOR_DECOMP)
+    # Native LIB owns the export timestamp; native LINK owns the COFF timestamp.
+    if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/python")
+      set(_SERVER_TIMESTAMP_PYTHON "${PROJECT_SOURCE_DIR}/.venv/bin/python")
+    else()
+      find_package(Python3 REQUIRED COMPONENTS Interpreter)
+      set(_SERVER_TIMESTAMP_PYTHON "${Python3_EXECUTABLE}")
+    endif()
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+      "${PROJECT_SOURCE_DIR}/scripts/native_timestamps.py"
+      "${PROJECT_SOURCE_DIR}/rebrew-project.toml")
+    execute_process(
+      COMMAND "${_SERVER_TIMESTAMP_PYTHON}" "${PROJECT_SOURCE_DIR}/scripts/native_timestamps.py"
+      RESULT_VARIABLE _SERVER_TIMESTAMP_RC OUTPUT_VARIABLE _SERVER_TIMESTAMPS
+      OUTPUT_STRIP_TRAILING_WHITESPACE)
+    if(NOT _SERVER_TIMESTAMP_RC EQUAL 0)
+      message(FATAL_ERROR "Cannot read native server build timestamps")
+    endif()
+    list(GET _SERVER_TIMESTAMPS 0 _SERVER_LINK_EPOCH)
+    list(GET _SERVER_TIMESTAMPS 1 _SERVER_EXPORT_EPOCH)
+    list(GET _SERVER_TIMESTAMPS 2 _SERVER_REFERENCE)
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${_SERVER_REFERENCE}")
+    set(_SERVER_EXPORT_DIR "${CMAKE_CURRENT_BINARY_DIR}/native-export")
+    set(_SERVER_EXP "${_SERVER_EXPORT_DIR}/server.exp")
+    set(_SERVER_ARCHIVE_COMMAND "${CMAKE_AR}")
+    if (DEFINED REBREW_CMAKE_AR_COMMAND)
+      set(_SERVER_ARCHIVE_COMMAND ${REBREW_CMAKE_AR_COMMAND})
+    endif()
+    add_custom_command(OUTPUT "${_SERVER_EXP}"
+      BYPRODUCTS "${_SERVER_EXPORT_DIR}/server.lib"
+      COMMAND "${CMAKE_COMMAND}" -E make_directory "${_SERVER_EXPORT_DIR}"
+      COMMAND "${CMAKE_COMMAND}" -E env "SOURCE_DATE_EPOCH=${_SERVER_EXPORT_EPOCH}"
+        ${_SERVER_ARCHIVE_COMMAND} /nologo /MACHINE:IX86
+        "/DEF:${PROJECT_SOURCE_DIR}/src/server.def" "/OUT:${_SERVER_EXPORT_DIR}/server.lib"
+      DEPENDS "${PROJECT_SOURCE_DIR}/src/server.def" "${_SERVER_REFERENCE}"
+        "${PROJECT_SOURCE_DIR}/scripts/native_timestamps.py"
+        "${PROJECT_SOURCE_DIR}/rebrew-project.toml"
+      VERBATIM)
+    set_source_files_properties("${_SERVER_EXP}" PROPERTIES GENERATED TRUE EXTERNAL_OBJECT TRUE)
+    target_sources(server_dll PRIVATE "${_SERVER_EXP}")
+    set_property(TARGET server_dll PROPERTY RULE_LAUNCH_LINK
+      "\"${CMAKE_COMMAND}\" -E env SOURCE_DATE_EPOCH=${_SERVER_LINK_EPOCH} \"REBREW_TOOLCHAIN_OVERLAY_DIR=${PROJECT_SOURCE_DIR}/cmake/toolchain-overlays\"")
+  else()
+    target_sources(server_dll PRIVATE "${PROJECT_SOURCE_DIR}/src/server.def")
+  endif()
 
-  # NO per-file toolchain pins (round 1379f).  The server's own bytes say it was
-  # built by ONE plain VC6 code generator: zero Processor-Pack x87 compares
-  # (`fnstsw ax; test ah,0x44/0x05`) anywhere in its .text, ten plain ones
-  # (`test ah,0x01`) in game code, and every matched function that carries a
-  # comparison reproduces under sp5/sp6 and BREAKS under msvc-6.0-sp5-pp
-  # (docs/general-knowledge.md rounds 1379/1379e).  Three files used to be pinned
-  # to sp5-pp because that scored a few more matching bytes on functions nobody
-  # has matched yet (gm_FindNextFilteredEntity 171/346 vs 162/346,
-  # ahm_ExAllocAlchemist 834 vs 828, ls_LoadBuildingEntityState 824 vs 820) - a
-  # wrong-compiler coincidence, not the original build.  scripts/gate.sh fails if
-  # a pin of the other generator family comes back.  Measured with all three
-  # objects force-rebuilt under sp6: verify 281 passed / 264 byte-matched, gate
-  # residue 11735, raw-link .data 22749 and imports 100 are IDENTICAL to the
-  # pinned build, so the pins bought nothing the deliverable can see (the
-  # historical "residue 8,652 -> 8,641" belongs to the round that added the first
-  # pin and is not reproducible at today's residue level).
+  # Plain VC6 SP5 preserves all game matches and supplies the matching stock CRT.
+  # The server's x87 comparisons exclude the Processor Pack code generator.
 
   if(MSVC)
     foreach(_zsrc IN LISTS ZLIB_SOURCES)
       set_source_files_properties("${_zsrc}" PROPERTIES COMPILE_FLAGS "/O2")
     endforeach()
   endif()
-
-  reccmp_add_target(server_dll ID SERVER)
 
   if (MSVC)
     target_compile_options(server_dll PRIVATE /W3)
@@ -368,12 +317,12 @@ if(REBREW_BUILD_GOLD)
     find_program(_REBREW_GOLD_BIN rebrew REQUIRED)
   endif()
   execute_process(
-    COMMAND "${_REBREW_GOLD_BIN}" cmake-sources --target "Europa1400Gold.exe"
+    COMMAND "${_REBREW_GOLD_BIN}" build cmake-sources --target "Europa1400Gold.exe"
             -o ${CMAKE_BINARY_DIR}/rebrew-sources-gold.cmake
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     RESULT_VARIABLE _REBREW_GOLD_RC)
   if(NOT _REBREW_GOLD_RC EQUAL 0)
-    message(FATAL_ERROR "rebrew cmake-sources failed for Europa1400Gold.exe")
+    message(FATAL_ERROR "rebrew build cmake-sources failed for Europa1400Gold.exe")
   endif()
   include(${CMAKE_BINARY_DIR}/rebrew-sources-gold.cmake)
   set(GOLD_SOURCES ${REBREW_SOURCES})
@@ -390,7 +339,6 @@ if(REBREW_BUILD_GOLD)
     set_property(TARGET europa1400gold PROPERTY OUTPUT_NAME "Europa1400Gold")
     set_property(TARGET europa1400gold PROPERTY SUFFIX ".exe")
 
-    reccmp_add_target(europa1400gold ID GOLD)
   else()
     message(STATUS "Europa1400Gold: cmake-sources selected no TUs — skipping")
   endif()
@@ -408,12 +356,12 @@ if(REBREW_BUILD_GOLDTL)
     find_program(_REBREW_GOLDTL_BIN rebrew REQUIRED)
   endif()
   execute_process(
-    COMMAND "${_REBREW_GOLDTL_BIN}" cmake-sources --target "Europa1400Gold_TL.exe"
+    COMMAND "${_REBREW_GOLDTL_BIN}" build cmake-sources --target "Europa1400Gold_TL.exe"
             -o ${CMAKE_BINARY_DIR}/rebrew-sources-goldtl.cmake
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     RESULT_VARIABLE _REBREW_GOLDTL_RC)
   if(NOT _REBREW_GOLDTL_RC EQUAL 0)
-    message(FATAL_ERROR "rebrew cmake-sources failed for Europa1400Gold_TL.exe")
+    message(FATAL_ERROR "rebrew build cmake-sources failed for Europa1400Gold_TL.exe")
   endif()
   include(${CMAKE_BINARY_DIR}/rebrew-sources-goldtl.cmake)
   set(GOLDTL_SOURCES ${REBREW_SOURCES})
@@ -430,7 +378,6 @@ if(REBREW_BUILD_GOLDTL)
     set_property(TARGET europa1400gold_tl PROPERTY OUTPUT_NAME "Europa1400Gold_TL")
     set_property(TARGET europa1400gold_tl PROPERTY SUFFIX ".exe")
 
-    reccmp_add_target(europa1400gold_tl ID GOLDTL)
   else()
     message(STATUS "Europa1400Gold_TL: cmake-sources selected no TUs — skipping")
   endif()
@@ -466,45 +413,29 @@ if (MSVC_FOR_DECOMP)
   set(CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL "/incremental:no")
 
   if(TARGET server_dll)
-    # /FORCE:MULTIPLE is still required for exactly two symbols. The link
-    # resolves _CRT_INIT from LIBCMT dllcrt0.obj, and
-    # that object also defines ___app_type and __amsg_exit. The game overrides
-    # both (amsg_exit.c is the reversed 0x1001ba71), so they collide. Dropping
-    # the flag fails with LNK2005 on those two until dllcrt0.obj is replaced.
-    # Every other duplicate has been resolved; the link is otherwise clean.
+    set_property(TARGET server_dll APPEND PROPERTY LINK_DEPENDS
+      "${PROJECT_SOURCE_DIR}/layout/server.dll/common-data-order.txt"
+      "${PROJECT_SOURCE_DIR}/layout/server.dll/import-includes.rsp"
+      "${PROJECT_SOURCE_DIR}/layout/server.dll/native-archive-includes.rsp"
+      "${PROJECT_SOURCE_DIR}/layout/server.dll/game-includes.rsp")
+    target_link_options(server_dll PRIVATE
+      "/ORDER:@${PROJECT_SOURCE_DIR}/layout/server.dll/common-data-order.txt")
+    # The order file places readonly COMDATs as well as COMMON data.
+    # Retention anchors keep real readonly owners and native CRT/import placement.
+    # The stock tcschr alias contributes native final-thunk alignment; no padding object.
+    # The untouched stock reference leaves the PE checksum at LINK's default zero.
+    # LINK uses Microsoft's runtime for import sorting; CL and stock archives stay SP5.
+    target_link_options(server_dll PRIVATE
+      "/REBREW_TOOLCHAIN:msvc-6.0-sp5-crt"
+      "/OPT:REF" "/NODEFAULTLIB:LIBCMTD"
+      "@${PROJECT_SOURCE_DIR}/layout/server.dll/import-includes.rsp"
+      "@${PROJECT_SOURCE_DIR}/layout/server.dll/native-archive-includes.rsp"
+      "@${PROJECT_SOURCE_DIR}/layout/server.dll/game-includes.rsp"
+      "/MAP:${CMAKE_CURRENT_BINARY_DIR}/server.map")
     if(REBREW_DEBUG_INFO)
       target_compile_options(server_dll PRIVATE /Z7)
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12" "/INCLUDE:___ld12mul" "/INCLUDE:__except_handler3" "/INCLUDE:___dtold" "/INCLUDE:_wctomb" "/INCLUDE:__setmode_lk" "/INCLUDE:__strdup" "/INCLUDE:__NLG_Notify" "/INCLUDE:__ms_p5_mp_test_fdiv")
-    else()
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12" "/INCLUDE:___ld12mul" "/INCLUDE:__except_handler3" "/INCLUDE:___dtold" "/INCLUDE:_wctomb" "/INCLUDE:__setmode_lk" "/INCLUDE:__strdup" "/INCLUDE:__NLG_Notify" "/INCLUDE:__ms_p5_mp_test_fdiv")
+      target_link_options(server_dll PRIVATE /debug)
     endif()
-    # Post-link (rebrew postlink --layout layout/server.dll): converge the
-    # linked DLL onto the original's layout byte-for-byte, purely from the
-    # committed text layout package.  imports: the MSVC6 linker's IAT slot
-    # order is hash-driven and cannot be forced for all DLLs via /include,
-    # so the slot order (and the .text operands pointing at the slots) is
-    # rewritten to the reference's.  data: grows .data to 0xe000 (copying
-    # the reference's bytes — the linker's .data COMDAT order is also
-    # hash-driven), rewrites the remaining .text data operands / E8-E9
-    # targets, and replaces .reloc.  pe-metadata: normalizes the DOS
-    # stub/e_lfanew, TimeDateStamp, CheckSum, .data VirtualSize (BSS tail),
-    # .reloc VA and SizeOfImage.  Content is untouched.
-    # The section-geometry rules this depends on (raw-size rounding, the
-    # .rdata prefix gate, the .data gap blob's sizing) are measured and
-    # written up in docs/msvc6-link-layout.md.
-    add_custom_command(TARGET server_dll POST_BUILD
-      # Converge the linked DLL onto the original's layout WITHOUT needing the
-      # original binary at build time: the text-only layout package
-      # (layout/<target>/) from 'rebrew gen-layout' carries the reference as
-      # plain-text metadata (no binary blobs), and 'rebrew postlink --layout'
-      # reconstructs the reference from it.  Regenerate the package whenever
-      # the original changes (rebrew gen-layout --target server.dll) and
-      # commit it.
-      COMMAND ${CMAKE_COMMAND} -E echo "Converging layout onto reference (rebrew postlink --layout)"
-      COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:server_dll>" "${PROJECT_SOURCE_DIR}/.scratch/server.dll.prelayout"
-      COMMAND rebrew postlink "$<TARGET_FILE:server_dll>"
-              --layout "${PROJECT_SOURCE_DIR}/layout/server.dll"
-      VERBATIM)
   endif()
 endif()
 
@@ -519,7 +450,7 @@ endif()
 # (annotation /O2 /Gd /Oa, metadata /Oa /Ow, every note measured on the
 # metadata) and was 363 linked bytes behind its own notes.
 #
-# `rebrew cmake-flags` resolves every source through the same chain the tools
+# `rebrew build cmake-flags` resolves every source through the same chain the tools
 # use and writes the table; this file only consumes it.  The metadata is a
 # configure dependency, so editing it reconfigures the build instead of
 # silently reusing baked COMPILE_FLAGS.
@@ -542,16 +473,16 @@ if(MSVC_FOR_DECOMP AND TARGET server_dll)
     file(APPEND "${_rebrew_sources_txt}" "${_rel}\n")
   endforeach()
   set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
-               "${PROJECT_SOURCE_DIR}/src/rebrew-functions.toml")
+               "${PROJECT_SOURCE_DIR}/rebrew-functions.toml")
   execute_process(
-    COMMAND "${REBREW_BIN}" cmake-flags
+    COMMAND "${REBREW_BIN}" build cmake-flags
             --sources-file "${_rebrew_sources_txt}"
             --output "${_rebrew_cflags_cmake}"
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
     RESULT_VARIABLE _rebrew_flags_rc)
   if(NOT _rebrew_flags_rc EQUAL 0)
     message(FATAL_ERROR
-      "rebrew cmake-flags failed (rc=${_rebrew_flags_rc}). It refuses a file "
+      "rebrew build cmake-flags failed (rc=${_rebrew_flags_rc}). It refuses a file "
       "whose functions resolve to different flags, because a translation unit "
       "compiles with one flag set; split the file or align the metadata.")
   endif()
@@ -585,42 +516,12 @@ if(EXISTS "${CLANGFORMAT_BIN}")
   endif()
 endif()
 
-# ---------------------------------------------------------------------------
-# reccmp configuration (generates reccmp-build.yml)
-# ---------------------------------------------------------------------------
-
-reccmp_configure()
-
-# ---------------------------------------------------------------------------
-# final: the aligned composition + layout convergence (the deliverable)
-# ---------------------------------------------------------------------------
-# The CMake link above lays .text out in compile order, so postlink's alignment
-# gate refuses it (that refusal is by design: a wrong-offset patch is silent).
-# scripts/split_link.sh links the per-reference-offset composition instead, and
-# scripts/postlink_residual.py applies the fixers around the gate and writes the
-# converged DLL to build/server.dll.  See docs/TODO.md round 148.
+# The deliverable is the raw toolchain output; verification reports remaining differences.
 if(MSVC_FOR_DECOMP AND TARGET server_dll)
-  set(REBREW_PY "${PROJECT_SOURCE_DIR}/.venv/bin/python")
-  if(NOT EXISTS "${REBREW_PY}")
-    set(REBREW_PY python3)
-  endif()
-  # The nested build MUST be able to fail without stopping the target: the
-  # POST_BUILD postlink step refuses a non-position-aligned link by design, so
-  # `cmake --build --target server_dll` always exits non-zero on a tree whose
-  # composition is not yet aligned -- which is exactly the case `final` exists
-  # to fix.  It is therefore run up to three times: the first pass with -j
-  # aborts mid-way through the object list when postlink fails, leaving the
-  # remaining objects unbuilt, and the retries finish them.  Measured
-  # (round 1102): after `rm -rf build` + configure, a single `--target final`
-  # left objects incomplete and reported residue 0x15294 (86,676) against the
-  # 8,628 baseline; running the plain build first, or the retry below, restores
-  # it.  Each retry is cheap once the objects are up to date.
   add_custom_target(final
-    COMMAND bash -c "${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll -j || ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll -j || ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll || true"
-    COMMAND bash "${PROJECT_SOURCE_DIR}/scripts/split_link.sh"
-    COMMAND "${REBREW_PY}" "${PROJECT_SOURCE_DIR}/scripts/postlink_residual.py"
-            --write build/server.dll
+    COMMAND "${_REBREW_SRC_BIN}" verify --whole-binary --built "$<TARGET_FILE:server_dll>" --json
+    DEPENDS server_dll
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
-    COMMENT "final: linking the aligned composition and converging it onto the reference"
+    COMMENT "Verify raw server.dll against the reference"
     VERBATIM)
 endif()

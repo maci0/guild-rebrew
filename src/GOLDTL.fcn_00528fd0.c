@@ -3,7 +3,6 @@ extern int g_77250c;
 // GLOBAL: GOLDTL 0x6a2598
 extern int g_6a2598;
 // FUNCTION: GOLDTL 0x528fd0
-// SIZE: 48
 
 void __cdecl fcn_00476970(int);
 void __cdecl fcn_00527f60(int, int);

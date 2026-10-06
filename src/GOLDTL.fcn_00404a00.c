@@ -23,9 +23,7 @@ char* __cdecl fcn_00434970(char*, char*, struct animopt_404a00);
 void __cdecl fcn_00435500(char*, char*);
 
 // FUNCTION: GOLD 0x00404200
-// SIZE: 342
 // FUNCTION: GOLDTL 0x404a00
-// SIZE: 342
 
 /* Loads each named motion of a character that is not loaded yet; walking
  * and cart pulling are loaded looping. */

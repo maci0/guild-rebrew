@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0040dd50
-// SIZE: 52
 // fcn_0040dd50 — store floats to globals; fcn_00453890(1); return 1.
 
 int __cdecl fcn_00453890(int);

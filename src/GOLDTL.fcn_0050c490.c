@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00509090
-// SIZE: 72
 // FUNCTION: GOLDTL 0x0050c490
-// SIZE: 72
 
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);

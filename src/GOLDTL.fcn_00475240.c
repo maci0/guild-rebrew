@@ -8,7 +8,6 @@ void __cdecl fcn_00472880(int);
 void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
 
 // FUNCTION: GOLDTL 0x475240
-// SIZE: 80
 
 void __cdecl fcn_00475240(int a)
 {

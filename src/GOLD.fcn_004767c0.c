@@ -23,7 +23,6 @@ void* __cdecl fcn_004223c0(int size, const char* tag);
 void* __cdecl fcn_00448200(int name, int a2);
 
 // FUNCTION: GOLD 0x004767c0
-// SIZE: 137
 /* GOLD twin of GOLDTL fcn_004730c0: passes 1, not 0, as the second
  * argument of the texture load. */
 Sprite* __cdecl fcn_004767c0(int a1, int a2, int a3, int a4, int a5, int a6, int a7)

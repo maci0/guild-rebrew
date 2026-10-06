@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0041f4c0
-// SIZE: 112
 
 typedef struct Snd Snd;
 

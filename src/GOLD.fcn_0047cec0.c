@@ -8,7 +8,6 @@ unsigned short __cdecl sim_FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes[1];
 
 // FUNCTION: GOLD 0x0047cec0
-// SIZE: 41
 // fcn_0047cec0 — store 3 globals (masked).
 
 void __cdecl fcn_0047cec0(int u1, int u2, int u3, int c, int d, char e)
@@ -20,7 +19,6 @@ void __cdecl fcn_0047cec0(int u1, int u2, int u3, int c, int d, char e)
 }
 
 // FUNCTION: GOLDTL 0x500c50
-// SIZE: 41
 // sim_SetSyncParams
 
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10)

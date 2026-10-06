@@ -4,7 +4,6 @@ int __cdecl fcn_0041dd90(char*);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
 // FUNCTION: GOLDTL 0x410230
-// SIZE: 110
 
 /* SetEmitterVelocity: sets a particle emitter's velocity in hundredths. */
 int __cdecl fcn_00410230(char** obj, int* x, int* y, int* z)

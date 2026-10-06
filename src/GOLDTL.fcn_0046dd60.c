@@ -67,7 +67,6 @@ void __cdecl fcn_0047cba0(int x, int y, int surf, int tex, int c);
 void __cdecl fcn_0047c7b0(int x, int y, int w, int h, int bits, float alpha);
 
 // FUNCTION: GOLDTL 0x0046dd60
-// SIZE: 646
 void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 {
 	void* p;

@@ -3,9 +3,7 @@ int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
 char* __cdecl fcn_00508e40(int id);
 
 // FUNCTION: GOLD 0x004a9280
-// SIZE: 208
 // FUNCTION: GOLDTL 0x4a93a0
-// SIZE: 208
 int __cdecl fcn_004a93a0(int a1, char* e, int a3, int a4, char* out)
 {
 	int d[32];

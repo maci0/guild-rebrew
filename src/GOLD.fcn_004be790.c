@@ -8,7 +8,6 @@ void __cdecl fcn_004760a0(int, int);
 int __cdecl fcn_005de7a2(char*, char*, ...);
 
 // FUNCTION: GOLD 0x004be790
-// SIZE: 329
 
 int __cdecl fcn_004be790(unsigned short* a1, int a2, int a3, int col, int x, int y, int layer, int* out)
 {

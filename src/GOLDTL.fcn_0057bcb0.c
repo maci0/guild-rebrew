@@ -4,9 +4,7 @@ int __cdecl fcn_004c5620(int, char*);
 extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x00573770
-// SIZE: 198
 // FUNCTION: GOLDTL 0x57bcb0
-// SIZE: 198
 
 char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);

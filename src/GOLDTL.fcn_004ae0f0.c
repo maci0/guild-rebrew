@@ -12,9 +12,7 @@ typedef struct {
 extern char g_1007bc0[];
 
 // FUNCTION: GOLD 0x004adfb0
-// SIZE: 49
 // FUNCTION: GOLDTL 0x4ae0f0
-// SIZE: 49
 
 int __cdecl fcn_004ae0f0(int id)
 {

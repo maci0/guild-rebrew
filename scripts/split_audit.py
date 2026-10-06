@@ -33,6 +33,53 @@ split objects' COMDAT padding accumulating over ~300 objects.
 `--closure` helpers are the extreme outliers (`memcpy.obj`'s `LeadUp1` lands
 0x3640 *below* its reference VA, `__STRINGTOLD`'s helper 0xa5c above), so they
 should be excluded when reading the drift.
+
+**Corrected round 5.**  The conclusion of that paragraph is wrong, and it is why
+this script read as "the drift is everywhere" for a long time.  Walking the
+split objects in link order, only TWO of the 228 move the running delta at all:
+`1001e7d4_.text.obj` (`__except_handler3`) emits 8 bytes too many, and the next
+object, `1001e8b4_.text.obj`, emits 8 too few.  The split set therefore **nets
+to exactly zero drift** and is position-exact.  The `delta range` line is
+dominated by the `--closure` helpers, which all share their object's reference
+VA and so report enormous deltas that mean nothing about layout.
+
+The real 642-byte `.text` overshoot is **trailing content**, which a per-symbol
+delta table can never show, because those symbols have no reference VA in their
+object name.  It is now reported explicitly at the end of the run: past the
+reference's `.text` end 0x10023846 sit a `DllMain@12` stub (6 B), 4 `link_stubs`
+(70 B) and the import thunks (566 B) that the reference does not have — the
+reference calls imports directly and has 11 thunks; ours has 103.
+
+**What causes the thunks** (round 8, after two wrong answers in rounds 6 and 7 —
+both from bad measurements, see docs/TODO.md; the cause is neither plain-name
+references nor the `/INCLUDE:__imp__X` directives):
+
+* Our `call dword ptr [IAT]` count is **211, the same as the reference's**, so
+  the tree's call sites already match; the thunks are pure linker overhead.
+  `scripts/import_thunk_census.py` measures all of this.
+* The link line carries **`/OPT:NOREF`**, which tells LINK to keep unreferenced
+  sections — and an MSVC6 import library holds each function's
+  `jmp dword ptr [IAT]` thunk in the member's `.text`.  Relinking the identical
+  object set with `/OPT:REF` drops the thunks from **103 to 10** against the
+  reference's 11.
+* `/OPT:REF` alone is NOT the fix.  Diffing the two maps, it drops 266 symbols:
+  89 are the import thunks we want gone (80 KERNEL32 + 9 WS2_32) but **177 are
+  real code the reference has** — `_CrashDumpUnhandledExceptionFilter@4`,
+  `_EmitCrashModuleLine` and 175 more.  Pruning is transitive: drop a section
+  and whatever reached only through it goes too.  `/OPT:NOREF` is load-bearing.
+* `.def` `IMPORTS` cannot substitute for the import libraries: MSVC6 accepts the
+  syntax but emits `LNK4017 ... not supported for the target platform` for
+  stdcall names, and 99 of the 100 imports here are stdcall.
+* So the fix must keep NOREF and synthesise the import descriptors (an object
+  carrying `.idata`, with `__imp__X` absolute into it) instead of letting the
+  import libraries supply a `.text` full of thunks.  Not implemented.
+  **Superseded by round 11/12:** the working answer is `/OPT:REF` plus a derived
+  `/INCLUDE` set — `scripts/ref_include_set.py` computes it.  With that link the
+  thunks land on the reference's 11, the import table on 100 and `call [abs]`
+  on 211, leaving 42 bytes of `.text`.  The synthesised-`.idata` emitter
+  (`scripts/emit_idata.py`) is kept only as the evidence for the round-10 probe:
+  LINK accepts such an object but never points IMAGE_DIRECTORY_ENTRY_IMPORT at
+  it, so it cannot be used.
 """
 
 from __future__ import annotations
@@ -123,6 +170,52 @@ def main() -> int:
     print(f"{'symbol':34} {'reference':>11} {'built':>11} {'delta':>9}")
     for ref, va, name in rows[:10] + rows[-10:]:
         print(f"{name:34} {ref:#11x} {va:#11x} {va - ref:+#9x}")
+
+    # ---- trailing content: what sits past the last reference-aligned symbol --
+    # Round 5.  The split set itself is position-exact: walking the objects in
+    # link order, only TWO of them move the running delta at all --
+    # `1001e7d4_.text.obj` (__except_handler3) emits 8 bytes too many and the
+    # very next object, `1001e8b4_.text.obj`, emits 8 too few, so the split set
+    # NETS TO ZERO.  The 642-byte .text overshoot is entirely TRAILING: the
+    # whole block above lives past the reference's .text end, and none of it
+    # is drift.  Nothing reported that before -- the "delta range" line is
+    # dominated by closure helpers (LeadUp/TrailDown/UnwindDown), which all
+    # share their object's reference VA and so look like enormous misplacements
+    # while saying nothing about layout.
+    last_ref = max(ref for ref, _va, _n in rows if ref <= min(v for _r, v, _n in rows))
+    aligned = [(ref, va, n) for ref, va, n in rows if va == ref]
+    if aligned:
+        boundary = max(va for _r, va, _n in aligned)
+        # Everything in the MAP at or above the reference's .text end, not just
+        # the split objects: the trailing block is DLL import thunks plus
+        # def/commons/stub objects, none of which carry a reference VA in their
+        # name, so filtering to split objects (as the delta table above does)
+        # hides the whole cause of the overshoot.
+        ref_end = int(args.reference_end, 16)
+        tail = []
+        for line in open(args.mapfile, errors="replace"):
+            m = LINE.match(line)
+            if not m:
+                continue
+            va = int(m.group(4), 16)
+            if va >= ref_end:
+                tail.append((va, m.group(3), m.group(6)))
+        tail.sort()
+        print()
+        print(f"trailing content at or above the reference .text end {ref_end:#x}:")
+        if not tail:
+            print("  (none)")
+        else:
+            groups = {}
+            for va, sym, obj in tail:
+                groups.setdefault(obj, []).append((va, sym))
+            for obj, items in sorted(groups.items(), key=lambda kv: min(v for v, _ in kv[1])):
+                lo = min(v for v, _ in items)
+                hi = max(v for v, _ in items)
+                print(f"  {lo:#11x}..{hi + 6:#11x}  {hi + 6 - lo:5d} B  "
+                      f"{len(items):3d} x {obj}")
+            print(f"  {'total':>11}      {hi + 6 - min(v for v, _s, _o in tail):5d} B of "
+                  f"{len(tail)} symbol(s) past the reference's .text")
     return 0
 
 

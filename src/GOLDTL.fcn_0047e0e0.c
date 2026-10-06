@@ -32,9 +32,7 @@ char* __cdecl fcn_00503d10(int id);
 Ware* __cdecl fcn_00502cd0(int, int, int, int);
 
 // FUNCTION: GOLD 0x0047ec10
-// SIZE: 315
 // FUNCTION: GOLDTL 0x0047e0e0
-// SIZE: 315
 void __cdecl fcn_0047e0e0(int a1, char* pkt)
 {
 	float ratio;

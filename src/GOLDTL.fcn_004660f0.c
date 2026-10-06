@@ -12,7 +12,6 @@ extern ClipRect* g_77257c[2];
 extern int g_77258c[2];
 
 // FUNCTION: GOLDTL 0x4660f0
-// SIZE: 145
 void __cdecl fcn_004660f0(int x, int y, int w, int h)
 {
 	int i;

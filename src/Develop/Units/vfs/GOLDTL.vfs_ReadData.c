@@ -315,7 +315,6 @@
  */
 
 // FUNCTION: GOLDTL 0x4306b0
-// SIZE: 448
 // vfs_ReadData
 
 #include <string.h>

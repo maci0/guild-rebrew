@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004b6e10
-// SIZE: 216
 // FUNCTION: GOLDTL 0x4b70c0
-// SIZE: 216
 
 extern unsigned char g_773d75;
 

@@ -29,7 +29,7 @@ extern int g_citizen_count; /* 0x10035434, gm_NextEntityQueryMatch.c */
 extern unsigned char g_current_season; /* 0x10035439 */
 
 // DATA: SERVER 0x100256cc
-extern float g_const_0_0;
+extern const float g_const_0_0;
 // DATA: SERVER 0x100257c8
 extern float g_graveyard_const_c;
 // DATA: SERVER 0x100257d0

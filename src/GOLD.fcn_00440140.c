@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00440140
-// SIZE: 47
 void __cdecl fcn_00440140(char* a)
 {
 	int i;

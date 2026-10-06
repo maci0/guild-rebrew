@@ -12,17 +12,12 @@ extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 extern float g_output_share[];
 extern int g_worker_entry_count[];
-extern char g_entity_end[];
-extern float g_const_1_0;
+extern const float g_const_1_0f;
 extern float g_const_neg_1_0;
 extern int g_next_family_index;
 extern int gm_CurrentHumanFamilyCount; /* 0x10035430, attested: "gm_AllocSpieler(): gm_CurrentHumanFamilyCount overflow" */
-extern unsigned int g_entity_records[768];
 extern BuildingDefaults g_building_defaults[]; /* spiel_data.c */
 extern unsigned char g_entity_base[];
-extern unsigned int g_entity_slot_table[];
-extern char g_entity_state_base[2];
-extern unsigned char g_entity_type_bytes[1];
 
 // SIZE 0x21c — 768 entries at g_slot_table (0x100358a0).
 //
@@ -103,5 +98,10 @@ extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** 
 
 /* State Reset */
 extern void __cdecl gm_ResetAllEntities(void);
+extern char g_entity_end[];
+extern unsigned int g_entity_records[768];
+extern unsigned int g_entity_slot_table[];
+extern char g_entity_state_base[2];
+extern unsigned char g_entity_type_bytes[1];
 
 #endif /* ENTITY_H */

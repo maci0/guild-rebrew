@@ -19,9 +19,7 @@ struct msg {
 };
 
 // FUNCTION: GOLD 0x005473c0
-// SIZE: 102
 // FUNCTION: GOLDTL 0x54f340
-// SIZE: 102
 
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 

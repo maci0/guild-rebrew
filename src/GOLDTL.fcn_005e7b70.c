@@ -67,7 +67,6 @@ void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_0046f740(int x, int y, int gfx, int win);
 
 // FUNCTION: GOLDTL 0x5e7b70
-// SIZE: 691
 
 /* Lays out one row of the panel: caption, icon, then one button per item. */
 void __cdecl fcn_005e7b70(int row, int count, int* list)

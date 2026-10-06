@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005e3d3d
-// SIZE: 43
 // fcn_005e3d3d — scan table from [0x14ead3c], return node with [n+0xc] close to a.
 
 int __cdecl fcn_005e3d3d(int a)

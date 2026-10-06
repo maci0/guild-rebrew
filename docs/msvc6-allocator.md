@@ -60,7 +60,7 @@ Isolated mechanism probes go in `.scratch/` via `rebrew-cmake-cl` on PATH
 `/home/maci/.local/bin`. Image is SP6 (`12.00.8804`); notes that say
 "8168 will not reproduce" describe a different backend.
 
-Reference bytes come from `rebrew asm 0x10016460 --size 200 --json`.
+Reference bytes come from `rebrew binary asm show 0x10016460 --size 200 --json`.
 
 ## Register set & baseline (from rebrew docs)
 
@@ -165,7 +165,7 @@ Tried: allocation stayed flipped (zero in `esi`, table in `eax`):
   the entry check and stores, `i = arg_count;` hoisted before the stores.
 - Every `/O` variant and the pragma family from the summary (`optimize`,
   `intrinsic`, `check_stack`, `auto_inline`, `inline_depth`, `volatile`,
-  `default_char_unsigned`), SP1–SP6 toolchains, `rebrew match
+  `default_char_unsigned`), SP1–SP6 toolchains, `rebrew match run
   --flag-sweep-only --tier quick` (produced no better result).
 
 Conclusion so far: the flip is driven by the **presence of a post-loop
@@ -1697,7 +1697,7 @@ for the kept byte) is still not steerable.
 ## Deep-dive: the rebrew flag-sweep tiers (never fully swept)
 
 The earlier sweeps tried only the /O and /G axes by hand (~6 combos).
-`rebrew match --flag-sweep-only` exposes the full tiered grid
+`rebrew match flags` exposes the full tiered grid
 (`docs/FLAG_SWEEP_TIERS.md`): quick 192, targeted 1,152 (default), normal
 5,376, thorough ~86k sampled, full ~100k sampled.  The axes include
 `/Ob0..2` (inlining), `/ML /MT /MD /MLd /MTd /MDd` (runtime library),
@@ -2125,7 +2125,7 @@ table-search helpers before attempting C.
   an iVar1 alias, pointer-typed, indexed stores, `&param` in the
   gm_ResolveEntityById call) makes MSVC6 hoist a *volatile* load
   (`mov eax,[esp+4]`) before the frame setup and materialize `cmd+0x10` into a
-  second callee-saved register.  The flag sweep cannot help: `rebrew match
+  second callee-saved register.  The flag sweep cannot help: `rebrew match run
   --flag-sweep-only` crashes on the Capstone CS_ERR_DETAIL bug (same as
   `rebrew diff -r`).  Kept fenced-naked.
 
@@ -4283,7 +4283,7 @@ adds the `fs:[0]` frame the reference lacks; `_alloca`, `__assume`, `__noop`, `_
 
 **Flags do not break the tie** (measured on the 2111/2115 source, `rebrew test --cflags`, object
 bytes): `/O2 /Gd` 2111; `/G5`, `/GB`, `/Op` 2111 (same default weight row); `/Ow` 2074; `/G6` (the
-other weight row) 652; `/Oa` 1136; `/G6 /Ow` 649. A sampled `rebrew match --flag-sweep-only
+other weight row) 652; `/Oa` 1136; `/G6 /Ow` 649. A sampled `rebrew match flags
 --tier full` (95,280 of 6,193,152 combinations) found no exact result.
 
 ## Finding 74: Processor Pack c2 (client targets): routine map, rules and open cases
@@ -4383,3 +4383,24 @@ Open cases, each traced to one decision:
   first-loop values, among them `x0` (esi, priority 202), so it gets edi and `result` (priority 33)
   gets esi. With a 0-based first loop (no `n - 1`) the interference is gone, but the table walker is
   no longer strength-reduced.
+
+## Unused shared function declarations can alter spill-slot assignment
+
+At TL0x482f20, adding six unused sound API prototypes to client_types.h
+exchanges two local stack slots (0x10 and0x18) at five instructions. Body715
+and all39 relocations stay fixed; native715/715 becomes710/715. Scratch
+isolation preserves the match with the shared record/global declarations
+alone and reproduces the loss with prototypes alone. Moving the header first,
+reversing/reordering prototypes, omitting parameter names, meaningful local
+renames, and local declaration order probes are inert. This observation does
+not establish a general optimizer mechanism or identify one offending prototype.
+
+The shared sound API now has its own inferred client_sound.h, included by
+nine sound users, with original declaration order preserved. client_types.h
+returns exactly to baseline and canonical0x482f20 is RELOC715/715 again;
+constructor150/allocator63/request132 retain their complete matches. The full
+all-target repeat remains required to accept this header repair. Evidence:
+.scratch/goal-shared-sound/stack-slot-probes/{results,naming-results,header-results,
+declaration-results}.json and repaired-482f20-test.json. The first descriptive
+rename probe accidentally changed the include extension and failed; corrected
+probe is in header-results.json, not evidence of a compiler error.

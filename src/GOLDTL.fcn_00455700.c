@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x455700
-// SIZE: 187
 
 float* __stdcall fcn_005eb970(float*, float*, float*);
 

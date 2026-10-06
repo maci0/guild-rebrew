@@ -19,7 +19,6 @@ int __cdecl fcn_00413190(int);
 void __cdecl fcn_00402aa0(char*);
 
 // FUNCTION: GOLDTL 0x403bc0
-// SIZE: 284
 
 /* Moves an object's scene nodes to another room. */
 int __cdecl fcn_00403bc0(char* obj, int room)

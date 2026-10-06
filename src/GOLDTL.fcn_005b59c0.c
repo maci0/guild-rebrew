@@ -44,7 +44,6 @@ int __cdecl fcn_0050f950(int a1, int a2);
 void __cdecl fcn_00472380(int, int, int, ...);
 
 // FUNCTION: GOLDTL 0x005b59c0
-// SIZE: 680
 void __cdecl fcn_005b59c0(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 {
 	char buf[0x80];

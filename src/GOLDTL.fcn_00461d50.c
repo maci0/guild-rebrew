@@ -9,9 +9,7 @@ struct internal_state {int dummy;};
 #define BMAX 15
 
 // FUNCTION: GOLD 0x465640
-// SIZE: 1200
 // FUNCTION: GOLDTL 0x00461d50
-// SIZE: 1200
 
 int fcn_00461d50(b, n, s, d, e, t, m, hp, hn, v)
 uIntf *b;               /* code lengths in bits (all assumed <= BMAX) */

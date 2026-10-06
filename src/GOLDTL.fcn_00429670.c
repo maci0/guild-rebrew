@@ -10,9 +10,7 @@ void __cdecl fcn_00429490(char*);
 void __cdecl fcn_004291c0(char*);
 
 // FUNCTION: GOLD 0x0042ada0
-// SIZE: 326
 // FUNCTION: GOLDTL 0x429670
-// SIZE: 326
 
 /* Runs a script until it blocks, with the script pushed as the current one
  * for the duration. */

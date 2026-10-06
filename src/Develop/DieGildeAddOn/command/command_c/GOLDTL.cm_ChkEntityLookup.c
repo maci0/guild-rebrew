@@ -33,8 +33,6 @@
  * clears result[1] and result[6..9] to 0 and writes result[0] = found ? 1 : 2.
  * Per-build body under the shared name; the server twin keeps its own. */
 
-// FUNCTION: GOLDTL 0x4cc490
-// SIZE: 44
 int __cdecl fcn_004f48e0(char* idPtr);
 
 int __cdecl cm_ChkEntityLookup(int cmd, char* result)

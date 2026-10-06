@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x46ed00
-// SIZE: 160
 // scroll is read through a volatile lvalue so the later += stays a memory
 // read-modify-write (add [mem],reg) as in the reference.
 

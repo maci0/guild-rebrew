@@ -23,9 +23,7 @@ int __cdecl fcn_004abe20(void);
 int __cdecl fcn_004abf80(void);
 
 // FUNCTION: GOLD 0x4abed0
-// SIZE: 620
 // FUNCTION: GOLDTL 0x004abff0
-// SIZE: 620
 int __cdecl fcn_004abff0(char* e)
 {
 	Deed d;

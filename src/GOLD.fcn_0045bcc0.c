@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x45bcc0
-// SIZE: 317
 /* GOLD twin of GOLDTL fcn_00457140 with the GOLD object layout: entity array
  * at 0x754 with 0x80-byte slots, parent at 0x1f8, flags byte at 0x211. */
 // m is a double compared as !(m < b[i].y): that is the spelling that loads the

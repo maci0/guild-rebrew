@@ -4,9 +4,7 @@ extern float g_665368;
 extern double g_665be8;
 extern double g_6629c8;
 // FUNCTION: GOLD 0x508a50
-// SIZE: 82
 // FUNCTION: GOLDTL 0x0050bbb0
-// SIZE: 82
 
 float __cdecl fcn_0050bbb0(int idx)
 {

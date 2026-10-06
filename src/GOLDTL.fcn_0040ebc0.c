@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0040dcb0
-// SIZE: 160
 // FUNCTION: GOLDTL 0x0040ebc0
-// SIZE: 160
 
 extern char* g_6b7e98;
 void __cdecl fcn_00412b10(char* e, float x, float y, float z, float rx, float ry, float rz, int w, int f);

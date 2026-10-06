@@ -1,7 +1,6 @@
 int __cdecl gzread(void* file, void* buf, unsigned len);
 
 // FUNCTION: GOLDTL 0x45f5e0
-// SIZE: 79
 char* __cdecl fcn_0045f5e0(void* file, char* buf, int len)
 {
 	char* b = buf;

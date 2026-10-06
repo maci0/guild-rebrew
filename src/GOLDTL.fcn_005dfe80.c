@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005dfe80
-// SIZE: 478
 
 typedef struct IdList {
 	char pad0[0x28];

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005e4970
-// SIZE: 722
 
 typedef struct Player {
 	char pad0[0x10];

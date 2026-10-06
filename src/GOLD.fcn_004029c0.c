@@ -1,7 +1,6 @@
 // GLOBAL: GOLD 0x1468ae0
 extern void* g_1468ae0[];
 // FUNCTION: GOLD 0x4029c0
-// SIZE: 110
 
 #include <string.h>
 

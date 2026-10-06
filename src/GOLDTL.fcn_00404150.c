@@ -31,9 +31,7 @@ char* __cdecl fcn_00434970(char*, char*, struct animopt_404150);
 int __cdecl fcn_00413190(int);
 
 // FUNCTION: GOLD 0x00403950
-// SIZE: 344
 // FUNCTION: GOLDTL 0x404150
-// SIZE: 344
 
 /* Attaches the named motion of a character kind to an object. */
 char* __cdecl fcn_00404150(char* obj, int kind)

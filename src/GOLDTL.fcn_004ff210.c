@@ -47,7 +47,6 @@ void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5480(int a1, int a2, float a3);
 
 // FUNCTION: GOLDTL 0x004ff210
-// SIZE: 639
 float __cdecl fcn_004ff210(unsigned short id, int delta)
 {
 	char dead;

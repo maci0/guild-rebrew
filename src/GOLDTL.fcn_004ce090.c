@@ -1,7 +1,5 @@
 // FUNCTION: GOLDTL 0x4ce090
-// SIZE: 103
 // FUNCTION: GOLD 0x004cd510
-// SIZE: 112
 
 #include "g_9baa20.h"
 

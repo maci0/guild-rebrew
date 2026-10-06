@@ -39,9 +39,7 @@ float __cdecl fcn_0050bb50(int id, unsigned char k);
 float __cdecl fcn_0050b840(int id);
 
 // FUNCTION: GOLD 0x00487030
-// SIZE: 310
 // FUNCTION: GOLDTL 0x00486500
-// SIZE: 310
 void __cdecl fcn_00486500(Node* n)
 {
 	Seg* s;

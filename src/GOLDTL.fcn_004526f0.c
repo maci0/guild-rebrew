@@ -3,9 +3,7 @@ void __cdecl fcn_004519d0(float* m, float* v);
 void __cdecl fcn_00438cb0(char* p, float* v);
 
 // FUNCTION: GOLD 0x00455a30
-// SIZE: 72
 // FUNCTION: GOLDTL 0x4526f0
-// SIZE: 72
 void __cdecl fcn_004526f0(char* a, int b, int c)
 {
 	float m[16];

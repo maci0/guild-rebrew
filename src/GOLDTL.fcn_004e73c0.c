@@ -3,7 +3,6 @@
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 // FUNCTION: GOLDTL 0x4e73c0
-// SIZE: 34
 void __cdecl fcn_004e73c0(void)
 {
 	char buf[0x400];

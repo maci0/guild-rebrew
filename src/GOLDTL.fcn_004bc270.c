@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004bbd60
-// SIZE: 123
 // FUNCTION: GOLDTL 0x4bc270
-// SIZE: 123
 
 typedef struct {
 	char* obj;

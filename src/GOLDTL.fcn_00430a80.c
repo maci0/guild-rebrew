@@ -10,9 +10,7 @@ void __cdecl fcn_0041d9e0(const char* msg);
 int __cdecl fcn_0045f890(void* gz, int off, int whence);
 
 // FUNCTION: GOLD 0x430fa0
-// SIZE: 464
 // FUNCTION: GOLDTL 0x430a80
-// SIZE: 449
 
 /* vfs_fseek: seeks a plain, gzip or zip-member stream; zip members seek forward by reading. */
 int __cdecl fcn_00430a80(char* s, int off, int whence)

@@ -16,9 +16,7 @@ void __cdecl fcn_0041d9e0(const char*);
 void __cdecl fcn_0041df00(int);
 
 // FUNCTION: GOLD 0x00422910
-// SIZE: 262
 // FUNCTION: GOLDTL 0x41e0c0
-// SIZE: 262
 
 /* Shuts the memory tracker down: reports leaks, frees every tracked block
  * and the pool list. */

@@ -39,9 +39,7 @@ struct internal_state {
 #define NEXTBYTE (z->avail_in--,z->total_in++,*z->next_in++)
 
 // FUNCTION: GOLD 0x465160
-// SIZE: 1072
 // FUNCTION: GOLDTL 0x004616e0
-// SIZE: 1072
 
 int __cdecl fcn_004616e0(z_streamp z, int f)
 {

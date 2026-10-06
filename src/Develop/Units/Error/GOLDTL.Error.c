@@ -71,9 +71,7 @@ char g_log_default_name[12] = {
 /* Dispatches a log message to the configured output handlers
  * (file, debugger, etc.). Routes based on severity level. */
 // FUNCTION: GOLD 0x004214a0
-// SIZE: 284
 // FUNCTION: GOLDTL 0x41caa0
-// SIZE: 284
 // DispatchLogOutput
 
 void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)

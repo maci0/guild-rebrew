@@ -17,7 +17,6 @@ struct panel_4bfca0 {
 // SIZE 0x27a8
 
 // FUNCTION: GOLDTL 0x4bfca0
-// SIZE: 346
 
 void __cdecl fcn_004bfca0(char* list, struct panel_4bfca0* panel)
 {

@@ -101,13 +101,32 @@ DieGildeAddOn\loadsave\loadsave.c
 attested by one of these. **This list is the authority**; the tree is not speculation where it agrees
 with it.
 
-**The `_c` directory suffixes in this repository's working tree are NOT attested.** Our files live
-under `game/spiel_c/`, `command/command_c/`, `loadsave/loadsave_c/` and so on, but no `__FILE__` string
-contains `_c\`: the originals were `spiel.c`, `command.c`, `loadsave.c` in the plain directories shown
-above. The suffixes are a decompiler-era artefact of splitting one original translation unit into many
-files, kept because moving ~140 files would churn every path in the metadata for no gain. They should
-not be read as evidence about the original layout, and a future round that reorganises the tree should
-target the attested names. Recorded so the difference reads as deliberate rather than as attestation.
+**The `_c` directory suffixes are not attested.** No `__FILE__` string contains `_c\`; the decompiler-era
+split of one translation unit into one file per function is gone for the server. The server tree now has
+one file per original translation unit, in the order the linker lays them out (verified: every one of the
+260 server game functions links at its reference VA):
+
+| Reference VA run | File | Functions |
+|---|---|---|
+| `0x10001130` | `Units/net/broadcast.c` | 1 |
+| `0x10002640`-`0x10003640` | `Units/Error/Error.c` | 11 |
+| `0x100036d0`-`0x10003cf0` | `Units/vfs/gz_stream.c` | 8 (zlib `gzio.c` with VFS readers; the name is inferred, no `__FILE__` string) |
+| `0x10006580`-`0x10006e30` | `Units/m_alloc/m_alloc.c` | 7 |
+| `0x10008a50`-`0x10009020` | `Units/vfs/vfs.c` | 6 |
+| `0x10009310`-`0x1000b040` | `DieGildeAddOnServer/server.c` | 19 |
+| `0x1000b1c0`-`0x1000baf0` | `DieGildeAddOn/game/aemter.c` | 10 |
+| `0x1000bd50`-`0x1000ca90` | `DieGildeAddOn/game/alchemistry_logic.c` | 16 |
+| `0x1000cb20`-`0x100104a0` | `DieGildeAddOn/command/command.c` | 68 |
+| `0x10010530`-`0x10011bf0` | `DieGildeAddOn/game/friedhof_logic.c` | 17 |
+| `0x10012000`-`0x10014260` | `DieGildeAddOn/loadsave/loadsave.c` | 11 |
+| `0x100145e0`-`0x10014db0` | `DieGildeAddOn/command/lobbycommands.c` | 8 |
+| `0x10014ee0`-`0x100151b0` | `DieGildeAddOn/auxillary/plant.c` | 6 |
+| `0x100151e0`-`0x10015690` | `DieGildeAddOn/game/sim.c` | 6 |
+| `0x100156c0`-`0x1001a110` | `DieGildeAddOn/game/spiel.c` | 66 |
+
+The `__LINE__` values the code passes to `LogMessageInternal` rise with the VA inside each file, so the
+linked order is the source order. The client targets still keep divergent twins as `GOLDTL.<name>.c`
+beside these files.
 
 ### Merged Source Tree (speculative)
 
@@ -159,6 +178,7 @@ D:\Develop\
     net\
       broadcast.c                        [server.dll] network broadcast
       net.c                              [Gold.exe, TL.exe] network layer
+      net.h                              [Gold.exe, TL.exe] reconstructed statistics header (speculative; multi-TU native evidence)
     vfs\
       vfs.c                              [server.dll] virtual file system
 ```
@@ -511,7 +531,7 @@ curl -s -H "Authorization: Bearer $REVENG_API_KEY" \
   "https://api.reveng.ai/v2/analyses/1468081/functions/strings?page_size=2000" \
   | jq -r '.data.strings[] | select(.value|test("^[A-Za-z_]+\\(\\):")) | "\(.functions[0].function_vaddr)\t\(.value)"'
 # then confirm the owner pushes the literal
-rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
+rebrew binary asm show 0x<VA> --size <size>| grep 'push 0x100[23]'
 ```
 
 ### server.dll
@@ -635,3 +655,98 @@ Constants seen in strings follow patterns:
 - Sim events: `HE_SIM_EINWANDERUNG`, `HE_SIM_KRANKHEITEN`, `HE_SIM_PERSONAL`
 
 Pattern: `prefix_UPPER_SNAKE_CASE` where prefix is a short module/type tag.
+
+
+### Client sound setter corrected from a legacy VFS misnomer
+
+`vfs_WriteUint32LE` at TL `0x00419390` / GOLD `0x00417dd0` stores its second
+argument at object offset `0x50`, calling TL `0x004192b0` / GOLD `0x00417cf0`
+first when that argument is nonzero. The callee's shared C emits the
+`3dSound-Handle is attached to %s` diagnostic. TL callers `0x004c39b0` and
+`0x004c3a10` use this setter when creating and destroying a sound handle.
+The client setter therefore does not serialize a little-endian word. Its exact
+control-field meaning and original symbol/module name remain unestablished.
+The client symbol is now `SetSoundControlValue` (descriptive, without an
+invented module prefix); CLI rename updates the shared body and two TL callers.
+`Units/vfs/GOLDTL.vfs2.c` placement remains a legacy reconstruction label,
+not attested original organization. The server function with
+that same name at `0x10003cf0` really writes four bytes with `fputc`; the target-aware
+CLI rename preserves that independent server function and its callers.
+The clients now share one verified setter body with two markers. Evidence:
+`.scratch/goal-client-loop/asm-{gold-417dd0,tl-419390}.json`,
+`src/GOLDTL.fcn_004192b0.c`, and the two sound-handle caller files.
+
+
+### TL animation builder still has an unrelated command name
+
+TL `0x00406510` creates an animation task through `0x0040c0a0`, installs callback
+`0x00406410`, copies its name at `+0xf0`, and returns the task pointer. Caller
+`0x0040d7f7` tests that pointer and sets its `+0x18c` flag. The callback loads
+and starts an animation; this body is unrelated to the server command handler
+also named `cm_ExModifyHealth`. The pointer return and full 75-byte body are
+recovered, and the copied health-handler comment has been removed. Its current
+symbol and command-directory placement remain explicitly untrusted legacy labels.
+A descriptive `CreateAnimationEvent` rename was previewed, but safely rejected:
+`command7.c` and `alchemistry_logic3.c` contain ambiguous references to independent
+same-name server/client symbols. The missing reference-level ownership feature is
+recorded in upstream `docs/IDEAS-GUILD.md`; no manual symbol rename bypasses it.
+Evidence: `.scratch/goal-builder/xrefs.json`, `canonical-test.json`,
+`src/GOLDTL.fcn_00406410.c`, and
+`.scratch/goal-rename/project-builder-preview.json`.
+
+
+### Attested character sitting queries (2026-10-04)
+
+| TL VA | Attested name | Evidence | Standing |
+|---|---|---|---|
+| `0x0040df00` | `CharacterSitting` | Direct push of `0x006762d4`: `CharacterSitting(): invalid character` | CLI renamed from `fcn_0040df00`; first-pass C, SIZE_MISMATCH |
+| `0x0040e110` | `CharacterSitsDown` | Direct push of `0x0067635c`: `CharacterSitsDown(): invalid character` | CLI renamed from `fcn_0040e110`; first-pass C, SIZE_MISMATCH |
+
+Both functions dereference their first argument, log a null character through
+`0x00425bf0`, and return bit 4 of the byte at character offset `0x8c`.
+The two reference bodies are each 56 bytes followed by eight NOPs; their
+separate diagnostics attest two distinct API symbols despite identical flag
+queries. Keep the recovered spelling without an invented module prefix.
+No original file/module path is established; the bodies remain beside their
+existing neighboring wrappers. Evidence: `.scratch/goal-next-asm-{df00,e110}.json`,
+`.scratch/goal-character/rename-{sitting,sitsdown}.json`; original string bytes
+were read directly at the pushed VAs.
+
+
+### Inferred display-counter names (2026-10-04)
+
+ResetDisplayCounters (TL4737c0/Gold476c60) and CountDisplayCounters (TL4737e0/Gold476c80) are descriptive names, renamed through Rebrew CLI. DISPLAY_COUNTER names the shared12-byte record by native TL473800 renderer/update use: six IDs select icons and each displayed value is formatted; reset writes ID-1/value0 and count counts nonfree IDs. The final four bytes remain uninterpreted, not declared padding. These are inferred domain names, not recovered original symbols or source-path attestation. Existing client_types.h remains the canonical home because the original subsystem/header is unproved. See .scratch/goal-display-counters/{table-operands,canonical-bindings,rename-reset-tl,rename-count-tl}.json.
+
+- Inferred shared type `VECTOR3` replaces address-derived `Vec3_67bbdc`: three floats,12-byte view with offsets0/4/8, reused by seven client sources. TL67bbdc/Gold5fcc78 includes ambient RGB use; TL6b86c4 semantics remain unresolved. No original-name or source-path attestation. Evidence `.scratch/goal-material-colors/field-alias-bindings.json`; original allocation ownership remains unresolved.
+
+### Shared random helper consolidation (2026-10-04)
+
+| Image | VA | Current name | Standing |
+|-------|----|--------------|----------|
+| server.dll | `0x1001a0d0` | `gm_RandomMod` | Existing reconstructed server name retained; body moved from spiel622.c to game/spiel_c/gm_RandomMod.c. |
+| Europa1400Gold_TL.exe | `0x0042e410` | `gm_RandomMod` | Numeric caller alias fcn_0042e410 renamed; newly recovered32-byte identity shares the server body. |
+| Europa1400Gold.exe | `0x0042ec00` | `gm_RandomMod` | Renamed from fcn_0042ec00; duplicate body retired for the shared definition. |
+
+This is a semantic shared-name choice anchored in the existing server reconstruction, not an original-symbol or log-string attestation. The existing `int __cdecl gm_RandomMod(unsigned short n)` C form produces all32 native bytes in each image, including a typed call to that image's stock `rand`. It does not prove unique original signedness or parameter spelling. Caller prototype narrowing remains unresolved; the rename preserves caller declaration types. Evidence: .scratch/goal-random-helper/consolidation/native-shared-body-audit.json and consolidation-scope-check.json. Full-tree verification63165 is accepted: all existing matches retained and the TL helper added. Five prior mismatches have stricter deltas under the newly bound call catalog; before/after compiled bytes are identical.
+
+
+### Existing resolver name shared across builds (2026-10-04)
+
+The existing descriptive SERVER name `gm_ResolveEntityById` now identifies the
+same complete 211-byte function in both clients. This is structural and native
+byte evidence, with five independently bound globals; it is not original-name
+string attestation.
+
+| Build | VA | Standing |
+|-------|----|----------|
+| SERVER | 0x10015e90 | Existing descriptive canonical name |
+| GOLDTL | 0x005015e0 | Renamed from fcn_005015e0; shared SERVER body |
+| GOLD | 0x004fea50 | Renamed from fcn_005015e0; shared SERVER body |
+
+All three identities select the existing spiel.c definition. Client global views
+reuse the SERVER names g_item_def_table, g_slot_table, g_query_limit and
+ g_query_base at independently established per-build addresses. No new module
+prefix or storage owner is inferred. Evidence:
+`.scratch/goal-resolver-consolidation/{identity-consolidation,resolver-native-proof,
+binding-actions}.json`; allocation and physical-view evidence:
+`.scratch/goal-tl-callee-identities/resolver-native-witness.json`.

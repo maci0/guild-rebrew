@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x5886f0
-// SIZE: 28
 
 // fcn_00580070 — (a[0x10] - c0) / (c1 - c0) where c0=0x665f18 c1=0x665f14.
 

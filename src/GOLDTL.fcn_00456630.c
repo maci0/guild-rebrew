@@ -16,9 +16,7 @@ extern unsigned int g_6b89ac;
 int __cdecl fcn_00456590(fcn_00456630_Slot* s, int a, char b, unsigned int key, unsigned int stamp);
 
 // FUNCTION: GOLD 0x0045ac50
-// SIZE: 275
 // FUNCTION: GOLDTL 0x456630
-// SIZE: 275
 int __cdecl fcn_00456630(int a, char b, unsigned int key, unsigned int stamp, int unused)
 {
 	fcn_00456630_Slot* s;

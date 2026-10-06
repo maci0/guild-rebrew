@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x457140
-// SIZE: 336
 // m is a double compared as !(m < b[i].y): that is the spelling that loads the
 // float first and copies m for fld/fld st(1)/fcompp with the test ah,5 mask.
 

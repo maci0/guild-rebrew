@@ -3,7 +3,6 @@ extern void* g_6b5de0;
 // GLOBAL: GOLDTL 0x14ce820
 extern char g_14ce820[];
 // FUNCTION: GOLDTL 0x41b7f0
-// SIZE: 36
 
 typedef struct
 {

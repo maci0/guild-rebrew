@@ -3,7 +3,6 @@ extern int g_774654;
 extern int g_774960;
 
 // FUNCTION: GOLDTL 0x538480
-// SIZE: 118
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);

@@ -3,9 +3,7 @@ extern char g_6811b0[];
 // GLOBAL: GOLD 0x602548
 extern char g_6811b0[];
 // FUNCTION: GOLD 0x00577b10
-// SIZE: 91
 // FUNCTION: GOLDTL 0x5800e0
-// SIZE: 91
 
 extern int* g_665f08;
 

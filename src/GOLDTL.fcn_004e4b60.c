@@ -1,3 +1,4 @@
+// SIZE 0x4
 typedef struct {
 	unsigned char r;
 	unsigned char g;
@@ -16,7 +17,6 @@ void __cdecl fcn_00459940(int h, int s, int a);
 void __cdecl fcn_00459980(int h, int s, int a, float b);
 
 // FUNCTION: GOLDTL 0x004e4b60
-// SIZE: 145
 void __cdecl fcn_004e4b60(int a1)
 {
 	Col4e4b60 c;

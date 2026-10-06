@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x475320
-// SIZE: 54
 
 int __cdecl fcn_00475320(unsigned char* buf, int n)
 {

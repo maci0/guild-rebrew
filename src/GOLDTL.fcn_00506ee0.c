@@ -10,7 +10,6 @@ typedef struct {
 extern char g_7f4ca0[];
 
 // FUNCTION: GOLDTL 0x00506ee0
-// SIZE: 132
 int __cdecl fcn_00506ee0(unsigned short id, int n, ...)
 {
 	Rec506ee0 rec;

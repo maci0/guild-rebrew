@@ -59,7 +59,6 @@ unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 
 // FUNCTION: GOLDTL 0x52df40
-// SIZE: 780
 void __cdecl fcn_0052df40(unsigned char* s)
 {
 	char name[128];

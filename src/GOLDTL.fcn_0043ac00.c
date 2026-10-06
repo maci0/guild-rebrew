@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x43ac00
-// SIZE: 123
 
 // SIZE 0x14
 typedef struct Ctx {

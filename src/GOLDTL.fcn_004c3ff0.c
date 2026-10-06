@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x4c3680
-// SIZE: 160
 // FUNCTION: GOLDTL 0x4c3ff0
-// SIZE: 148
 
 #pragma pack(1)
 typedef struct node99 {

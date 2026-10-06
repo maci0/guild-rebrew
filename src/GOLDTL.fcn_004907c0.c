@@ -6,9 +6,7 @@ typedef struct Stat {
 void __cdecl fcn_004f4830(int a, Stat* buf);
 
 // FUNCTION: GOLD 0x4911f0
-// SIZE: 212
 // FUNCTION: GOLDTL 0x4907c0
-// SIZE: 212
 int __cdecl fcn_004907c0(char* e, int a2, int* out)
 {
 	Stat st;

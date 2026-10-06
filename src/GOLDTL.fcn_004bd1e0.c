@@ -21,7 +21,6 @@ int __cdecl fcn_0065f220(const char* a, const char* b);
 void* __cdecl fcn_0064fde9(void* p, int size);
 
 // FUNCTION: GOLDTL 0x004bd1e0
-// SIZE: 758
 char __cdecl fcn_004bd1e0(char* name)
 {
 	float m[16];

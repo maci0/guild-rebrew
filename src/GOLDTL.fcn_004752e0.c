@@ -5,7 +5,6 @@
 extern int g_100f804;
 extern Slot100f200 g_100f200[];
 // FUNCTION: GOLDTL 0x4752e0
-// SIZE: 50
 
 void __cdecl fcn_004752e0(int i)
 {

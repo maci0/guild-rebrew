@@ -16,7 +16,6 @@ typedef struct Anim {
 extern Anim_100e7a0 g_100e7a0[0x30];
 
 // FUNCTION: GOLDTL 0x47a200
-// SIZE: 123
 int __cdecl fcn_0047a200(short x, short y, void* img, unsigned char flag)
 {
 	int i;

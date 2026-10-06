@@ -19,7 +19,6 @@ typedef struct Run {
 } Run;
 
 // FUNCTION: GOLDTL 0x47a710
-// SIZE: 636
 int __cdecl fcn_0047a710(int x, int y, char* hdr, Surface* s)
 {
 	int* runs;

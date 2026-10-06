@@ -16,9 +16,7 @@ struct host_57eba0 {
 extern int* g_665f08;
 
 // FUNCTION: GOLD 0x576600
-// SIZE: 125
 // FUNCTION: GOLDTL 0x57eba0
-// SIZE: 125
 
 int __cdecl fcn_0057eba0(int a, int b, int c, int d)
 {

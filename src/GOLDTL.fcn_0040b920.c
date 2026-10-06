@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0040b920
-// SIZE: 219
 
 extern float g_662d40[3];
 char* __cdecl fcn_00402610(char* p);

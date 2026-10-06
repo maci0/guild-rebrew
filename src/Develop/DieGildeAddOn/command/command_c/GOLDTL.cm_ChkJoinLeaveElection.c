@@ -19,11 +19,6 @@ extern char* g_773da8;
 extern char* g_773da8;
 extern char g_7f4ca0[];
 extern char g_7f4ca0[];
-// FUNCTION: GOLD 0x4c6870
-// SIZE: 336
-// FUNCTION: GOLDTL 0x4c7400
-// SIZE: 336
-// cm_ChkJoinLeaveElection
 
 int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 {

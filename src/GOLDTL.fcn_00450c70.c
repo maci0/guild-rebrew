@@ -5,7 +5,6 @@ extern int g_6b86fc;
 extern void* g_6b870c;
 
 // FUNCTION: GOLDTL 0x450c70
-// SIZE: 62
 void __cdecl fcn_00450c70(void)
 {
 	int i;

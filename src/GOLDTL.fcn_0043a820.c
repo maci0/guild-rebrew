@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x43a820
-// SIZE: 416
 // The squared distance goes through dx/dy/dz statements; written as one
 // expression c2 orders the CSE'd differences y before x.
 

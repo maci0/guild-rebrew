@@ -15,9 +15,7 @@ struct vec_4bc090 {
 // SIZE 0x10
 
 // FUNCTION: GOLD 0x004bbb80
-// SIZE: 331
 // FUNCTION: GOLDTL 0x4bc090
-// SIZE: 331
 
 void __cdecl fcn_004bc090(char* a1)
 {

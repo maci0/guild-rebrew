@@ -11,9 +11,7 @@ extern void (__stdcall *g_66234c)(int);
 // GLOBAL: GOLD 0x5eb2b8
 extern void (__stdcall *g_662360)(void);
 // FUNCTION: GOLD 0x00424c30
-// SIZE: 68
 // FUNCTION: GOLDTL 0x421050
-// SIZE: 68
 
 void __cdecl fcn_00421050(void)
 {

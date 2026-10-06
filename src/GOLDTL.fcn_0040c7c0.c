@@ -18,7 +18,6 @@ int __cdecl fcn_0040c780();
 void __cdecl fcn_00429ed0(const char*, void*, ...);
 
 // FUNCTION: GOLDTL 0x40c7c0
-// SIZE: 360
 
 /* Registers the core script commands. */
 void __cdecl fcn_0040c7c0(void)

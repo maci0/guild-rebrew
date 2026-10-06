@@ -3,7 +3,6 @@ char* __cdecl fcn_00402610(char*);
 /* Walks a short run of map cells on the task at obj+0x128. Returns 0 when
  * one of those cells is empty or type 0xd, and 1 otherwise. */
 // FUNCTION: GOLDTL 0x409020
-// SIZE: 170
 
 int __cdecl fcn_00409020(char* obj)
 {

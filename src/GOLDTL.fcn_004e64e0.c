@@ -22,9 +22,7 @@ int __cdecl fcn_004c6aa0(Msg*);
 void __cdecl fcn_004c4ef0(char*);
 
 // FUNCTION: GOLD 0x004e4b50
-// SIZE: 360
 // FUNCTION: GOLDTL 0x004e64e0
-// SIZE: 360
 
 int __cdecl fcn_004e64e0(int* c)
 {

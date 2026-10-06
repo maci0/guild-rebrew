@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0047da70
-// SIZE: 38
 // fcn_0047da70 — for slots: if([p]!=0xffff) fcn_0047daa0(p).
 
 void __cdecl fcn_0047daa0(int);

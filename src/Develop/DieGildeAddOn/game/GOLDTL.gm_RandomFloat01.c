@@ -1,7 +1,6 @@
 /* gm_RandomFloat01 - proper C */
 
 // FUNCTION: GOLDTL 0x42e450
-// SIZE: 22
 
 
 #include "rebrew_types.h"

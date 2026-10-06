@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x411bb0
-// SIZE: 38
 
 int __cdecl fcn_00411bb0(void)
 {

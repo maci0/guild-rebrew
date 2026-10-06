@@ -9,9 +9,7 @@ extern int g_query_filter_max_id;
 extern int g_query_filter_owner;
 
 // FUNCTION: GOLD 0x004ffcc0
-// SIZE: 464
 // FUNCTION: GOLDTL 0x502850
-// SIZE: 464
 // gm_NextEntityQueryMatch
 //   RELOC 464/464.
 //   The last wall was a two-web callee-save colouring tie-break: the depth

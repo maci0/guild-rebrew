@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005bcb10
-// SIZE: 676
 
 typedef struct {
 	int btn;

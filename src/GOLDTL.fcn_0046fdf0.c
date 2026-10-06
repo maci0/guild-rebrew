@@ -27,7 +27,6 @@ int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_0046f650(int slot, fcn_0046fdf0_Win* parent);
 
 // FUNCTION: GOLDTL 0x46fdf0
-// SIZE: 411
 int __cdecl fcn_0046fdf0(int x, int y, char* text, int win)
 {
 	fcn_0046fdf0_Win* w;

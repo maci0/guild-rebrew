@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005a8a50
-// SIZE: 28
 // fcn_005a8a50 — if(e=fcn_005a8600(*(int*)(a+1))) e[0x44/4]=b.
 
 int __cdecl fcn_005a8600(int);

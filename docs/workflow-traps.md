@@ -35,7 +35,7 @@ rule is walls §6b.
 - **C only, no `__asm`** except where the original had hand-written assembly. Directly forbade
   the largest measured lever (codegen-walls §6). One pre-existing `__asm` block-fill is
   admissible because the original contains a 24-byte hand-written fill prelude there.
-- **Do not reverse zlib or LIBCMT**: they are linked in. (`rebrew lib-match` is the check;
+- **Do not reverse zlib or LIBCMT**: they are linked in. (`rebrew library match` is the check;
   FLIRT finds only 9 of the 68 functions that turned out to be stock LIBCMT.)
 - **Library code and the CRT region are out of scope**, so the crt-region objects' "LONG"
   reports and the split-symbol drift are not the objective.
@@ -114,7 +114,7 @@ Each cost real budget and each is the kind of mistake the next attempt would rep
 - **Check the *size* of a work-vein before spending rounds in it (round 918).** Five rounds
   (909-913) went into a declaration-lift refactor before anyone counted the population: of 44
   candidate symbols, **6 are blocked, 31 have a single declaration site** (not a dedup), leaving ~7.
-  Fifteen symbols were lifted at zero byte cost. **One `rebrew data --json` query would have shown
+  Fifteen symbols were lifted at zero byte cost. **One `rebrew data list --json` query would have shown
   the vein was nearly empty before the third failed batch.** When a vein's payoff is "provably
   byte-neutral", that is a signal it is not on the critical path. Measure the population first.
 
@@ -163,7 +163,7 @@ Two failures in this class, two different correct answers: `cm_ExSellObjekt` nee
 pushes first.
 
 
-## 3c. `rebrew data`'s type-conflict list is a signal, not a work queue (round 925)
+## 3c. `rebrew data list`'s type-conflict list is a signal, not a work queue (round 925)
 
 The tool reports 11 conflicts over 342 globals. They are **not** 11 bugs, and triaging them by count
 rather than by reading costs rounds in both directions:
@@ -214,7 +214,7 @@ Two traps met while writing the missing check, both already documented separatel
 `Init resolved / Exit resolved` and exit 0.
 
 
-## 5. `rebrew lib-match` without `--allow` is not a finding (round 947)
+## 5. `rebrew library match` without `--allow` is not a finding (round 947)
 
 Run bare, the check reports **20 reversed functions whose bytes come from LIBCMT** and prints
 "These do not need reversing: the linker supplies them. Delete the source...". That reads like a serious
@@ -226,7 +226,7 @@ have).
 The allowlist is consumed by `.pre-commit-config.yaml`, which invokes the tool **with** the flag:
 
 ```
-rebrew lib-match --stock-lib LIBCMT.LIB --allow scripts/library_code_allowlist.txt
+rebrew library match --stock-lib LIBCMT.LIB --allow scripts/library_code_allowlist.txt
 ```
 
 Run that way the answer is `No reversed function matches a linked library.` Clean.
@@ -236,7 +236,7 @@ is a different question being asked. Cross-check coverage directly when in doubt
 VAs and confirm each appears in the allowlist (all 20 did, round 947).
 
 ```sh
-rebrew lib-match --stock-lib LIBCMT.LIB --json > /tmp/lm.json
+rebrew library match --stock-lib LIBCMT.LIB --json > /tmp/lm.json
 python3 -c "import json,re; d=json.load(open('/tmp/lm.json')); \
   a=set(m.lower() for m in re.findall(r'0x[0-9a-fA-F]+', open('scripts/library_code_allowlist.txt').read())); \
   print([x['va'] for x in d['findings'] if x['va'].lower() not in a])"
@@ -602,7 +602,7 @@ leaving a new line in the tool-owned file:
 
 **Why this matters more than an ordinary stray write.** A per-*function* toolchain pin contradicts this
 project's rule that the toolchain is chosen per *translation unit* (`CMakeLists.txt` pins whole files via
-`COMPILE_OPTIONS`, and §142 requires every function in the file to survive the switch). `rebrew cmake-flags`
+`COMPILE_OPTIONS`, and §142 requires every function in the file to survive the switch). `rebrew build cmake-flags`
 **fails the configure** when one TU's functions resolve to different flags, so committing this line would
 have broken the build for a reason with no connection to the change that caused it, and the diff is one line
 in a 3,000-line generated file, which is exactly the kind of thing that rides along in a `git add -A`.
@@ -610,7 +610,7 @@ in a 3,000-line generated file, which is exactly the kind of thing that rides al
 Caught by reading the tool's banner output rather than only the JSON, and reverted with
 `git checkout -- src/rebrew-functions.toml`.
 
-**The rule.** `rebrew test`, `rebrew match` and `rebrew diff` are **writers**. Before any probe batch:
+**The rule.** `rebrew test`, `rebrew match run` and `rebrew diff` are **writers**. Before any probe batch:
 
 ```bash
 git status --short src/rebrew-functions.toml src/rebrew-data.toml   # must be clean before
@@ -955,9 +955,9 @@ the message has to name both fixes.
 at all on this tree, because the out-of-line call breaks the composition before any residue number exists.
 That is a stronger statement than "it measured worse".
 
-## 25. `rebrew rename` leaves the CMake tree stale, and both guards miss it (round 1080)
+## 25. `rebrew source rename` leaves the CMake tree stale, and both guards miss it (round 1080)
 
-`rebrew rename` renames the `.c` file and rewrites every cross-reference. It does **not** touch `build/`,
+`rebrew source rename` renames the `.c` file and rewrites every cross-reference. It does **not** touch `build/`,
 which is gitignored, and `build/` is what `split_link.sh`, `linktest.sh` and `postlink` all read. Rename a
 file and the build system keeps pointing at an object that no longer compiles.
 
@@ -977,7 +977,7 @@ the real error is unreadable.
 
 - `scripts/gate.sh` ran `cmake --build` and the **residue was unchanged** (8628, the rename is byte-neutral),
   so nothing looked wrong.
-- `rebrew build-check` reported clean. It compares flag tokens in `build.make` against CMake's `Custom`
+- `rebrew build check` reported clean. It compares flag tokens in `build.make` against CMake's `Custom`
   comments, and a renamed source changes the **object set**, not any object's flags. An object that should
   have left the list is never inspected, because the check only looks at objects that are still there.
 
@@ -993,7 +993,7 @@ this round found `build-check` inspecting the objects present and never the obje
 shape of bug: the population is assumed, the contents are verified. When adding a check, ask what happens to
 it when the *set* changes, not just the values.
 
-**Recovery:** after any `rebrew rename`, re-run the configure step (or rely on `CONFIGURE_DEPENDS` now being
+**Recovery:** after any `rebrew source rename`, re-run the configure step (or rely on `CONFIGURE_DEPENDS` now being
 set). `cmake -B build -S . --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake -DCMAKE_BUILD_TYPE=Release
 -DREBREW_DEBUG_INFO=OFF`.
 
@@ -1032,7 +1032,7 @@ residue must lie inside the 19 carriers, and any total far above 8,628 means re-
 
 ## 27. The GOLDTL client statically links D3DX8: run `lib-match` against `d3dx8.lib`, not just LIBCMT (round 1143)
 
-The pre-commit `no-library-code` hook and `rebrew lib-match --stock-lib LIBCMT.LIB` only check the *default*
+The pre-commit `no-library-code` hook and `rebrew library match --stock-lib LIBCMT.LIB` only check the *default*
 target (`server.dll`) against LIBCMT. **The client targets link other static libraries** that LIBCMT never
 covers, and one of them silently supplies a large chunk of `.text`.
 
@@ -1066,7 +1066,7 @@ on linker-supplied code.
 
 **The lesson:** when a target statically links libraries beyond the CRT, the LIBCMT-only hook cannot see them.
 Ask *what libraries this binary actually linked*, not "is it LIBCMT?". TL's required answer is
-`rebrew lib-match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe`; GOLD's is "no static
+`rebrew library match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe`; GOLD's is "no static
 DX, skip". The import table (pefile) shows which DLLs are imported, but static-link library code is invisible
 to imports: you must look for it in `.text` by its strings (here the `D3DXERR_*` / `D3DX8 shader assembler`
 strings in `.text` at `0x4b5xxx`) and byte-match the bodies.

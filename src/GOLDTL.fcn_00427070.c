@@ -39,9 +39,7 @@ void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 #define LEX_427070 (*(int*) (g_6b7e98 + 0x118))
 
 // FUNCTION: GOLD 0x004287e0
-// SIZE: 513
 // FUNCTION: GOLDTL 0x427070
-// SIZE: 513
 
 /* Parses a while head: evaluates the condition and pushes a loop level. */
 int __cdecl fcn_00427070(void)

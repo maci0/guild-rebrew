@@ -1,3 +1,4 @@
+// SIZE 0x6
 typedef struct {
 	int who;
 	unsigned short op;
@@ -12,9 +13,7 @@ extern fcn_004bbbd0_handler g_6811b8[];
 char* __cdecl fcn_00508e40(int);
 
 // FUNCTION: GOLD 0x4bb6c0
-// SIZE: 96
 // FUNCTION: GOLDTL 0x4bbbd0
-// SIZE: 95
 
 int __cdecl fcn_004bbbd0(fcn_004bbbd0_msg* m)
 {

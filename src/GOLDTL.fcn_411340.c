@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x411340
-// SIZE: 12
 
 
 /* Import-thunk forwarder: pushes its arg straight into the IAT slot

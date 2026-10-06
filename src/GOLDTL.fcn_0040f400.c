@@ -15,9 +15,7 @@ int __cdecl fcn_0040f3d0();
 void __cdecl fcn_004379a0(char*, int, int, int (__cdecl*)(), struct query_40f400*);
 
 // FUNCTION: GOLD 0x0040e4f0
-// SIZE: 111
 // FUNCTION: GOLDTL 0x40f400
-// SIZE: 111
 
 /* Script command: runs the name query callback over every object of the
  * current room. */

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0041b700
-// SIZE: 190
 
 typedef struct Vb Vb;
 

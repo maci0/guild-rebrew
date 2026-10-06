@@ -2,7 +2,6 @@
 #pragma intrinsic(memset)
 
 // FUNCTION: GOLDTL 0x591c30
-// SIZE: 14
 
 void __cdecl fcn_00591c30(char* p)
 {
@@ -22,9 +21,7 @@ typedef struct {
 extern Slot_779d00 g_779d00[];
 
 // FUNCTION: GOLD 0x5896e0
-// SIZE: 63
 // FUNCTION: GOLDTL 0x00591c40
-// SIZE: 63
 
 void __cdecl fcn_00591c40(void)
 {

@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00461fc0
-// SIZE: 147
 // FUNCTION: GOLDTL 0x45e180
-// SIZE: 147
 
 #include "deflate.h"
 

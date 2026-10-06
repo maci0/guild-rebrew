@@ -33,9 +33,7 @@ extern Rec18_68da68 g_68da68[];
 int __cdecl fcn_004e7c70(char*, int, float*);
 
 // FUNCTION: GOLD 0x004e7320
-// SIZE: 487
 // FUNCTION: GOLDTL 0x004e8ee0
-// SIZE: 487
 
 int __cdecl fcn_004e8ee0(char* who, int n, Pick* picks, int* full_out)
 {

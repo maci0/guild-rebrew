@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005dbb60
-// SIZE: 802
 
 typedef struct Player {
 	char name[0x2f4];

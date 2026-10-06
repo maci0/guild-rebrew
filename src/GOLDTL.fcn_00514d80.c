@@ -1,7 +1,6 @@
 extern int g_67a370;
 
 // FUNCTION: GOLDTL 0x514d80
-// SIZE: 169
 
 #include <string.h>
 

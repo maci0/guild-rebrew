@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004b3bd0
-// SIZE: 56
 // fcn_004b3bd0 — set globals + fcn_004fe1e0(0xf82328, 0,0,0) + [0xf82340]=0.
 
 int __cdecl fcn_004fe1e0(int, int, int, int);

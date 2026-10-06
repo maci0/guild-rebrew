@@ -1,7 +1,6 @@
 void __cdecl fcn_00455540(int, int, float*);
 
 // FUNCTION: GOLDTL 0x4bdfb0
-// SIZE: 67
 
 void __cdecl fcn_004bdfb0(float* ox, float* oy, int x, int y, char** ctx)
 {

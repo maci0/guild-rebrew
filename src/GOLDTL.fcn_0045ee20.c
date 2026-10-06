@@ -16,7 +16,6 @@ int __cdecl fcn_0045f2c0(gz_stream* s);
 void __cdecl fcn_0045f110(gz_stream* s);
 
 // FUNCTION: GOLDTL 0x45ee20
-// SIZE: 566
 gzFile __cdecl fcn_0045ee20(const char* path, const char* mode, int fd)
 {
 	int err;

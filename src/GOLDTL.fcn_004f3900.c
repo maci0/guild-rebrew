@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x004f3900
-// SIZE: 685
 /* Save counterpart of the graveyard loader (GOLDTL 0x4f3bb0,
  * loadsave_dump1.c); twin of GOLD 0x4f17f0. */
 

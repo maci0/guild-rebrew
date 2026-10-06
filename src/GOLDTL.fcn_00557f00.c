@@ -13,9 +13,7 @@ void __cdecl fcn_00417180(int, char*, int, struct rgba_00557f00, float*, int, in
                           float, float, float);
 
 // FUNCTION: GOLD 0x0054fe50
-// SIZE: 108
 // FUNCTION: GOLDTL 0x557f00
-// SIZE: 108
 
 void __cdecl fcn_00557f00(char* o)
 {

@@ -16,9 +16,7 @@ void __cdecl fcn_0041d9e0(const char*);
 int __cdecl fcn_00429e60(const char*);
 
 // FUNCTION: GOLD 0x42b5b0
-// SIZE: 257
 // FUNCTION: GOLDTL 0x429ed0
-// SIZE: 257
 
 /* evt_ImportCommand: registers a script command with its argument types. */
 int __cdecl fcn_00429ed0(const char* name, void* fn, int flags, int nargs, ...)

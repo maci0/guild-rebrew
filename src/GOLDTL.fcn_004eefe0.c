@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4eefe0
-// SIZE: 30
 
 #include "g_68e020.h"
 

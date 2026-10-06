@@ -22,9 +22,7 @@ struct slot_4b11a0 {
 // SIZE 0x18
 
 // FUNCTION: GOLD 0x004b1060
-// SIZE: 370
 // FUNCTION: GOLDTL 0x4b11a0
-// SIZE: 370
 
 int __cdecl fcn_004b11a0(int a1, int a2, char* arg)
 {

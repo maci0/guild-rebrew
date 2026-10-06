@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0040e4c0
-// SIZE: 36
 // fcn_0040e4c0 — fcn_005de800(a, arg2); if(r) fcn_00411b70(a); return 1.
 
 int __cdecl fcn_005de800(void*, void*);

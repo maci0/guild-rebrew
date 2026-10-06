@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x47c5d0
-// SIZE: 48
 // FUNCTION: GOLDTL 0x479890
-// SIZE: 36
 
 #include <string.h>
 
@@ -42,9 +40,7 @@ extern char s_67d8bc[];
 extern char g_100eb80[];
 
 // FUNCTION: GOLDTL 0x4798c0
-// SIZE: 216
 // FUNCTION: GOLD 0x47c600
-// SIZE: 216
 
 /* fcn_00479890 must stay in this file: msvc6's same-TU callee analysis sees
  * that it leaves edx alone, so `b` stays in edx across the call. */

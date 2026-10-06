@@ -13,7 +13,6 @@ typedef struct {
 	unsigned short f44;  /* +0x44 */
 } PLANT_INFO;
 
-// GLOBAL: SERVER 0x1002d878
 PLANT_INFO g_plant_info_table[4] = {
 	{ 0x1b7, "TANNE", 3, 1, 4 },
 	{ 0x1b8, "BUCHE", 5, 1, 4 },
@@ -21,13 +20,10 @@ PLANT_INFO g_plant_info_table[4] = {
 	{ 0, "", 0, 1, 0 },
 };
 
-// DATA: SERVER 0x1002d990
 char s_plt_SetPlantMap____Could_not_fin[] = "plt_SetPlantMap(): Could not find map-entry!";
 
-// DATA: SERVER 0x1002d9c0
 char s_D__Develop_DieGildeAddOn_auxilla[] = "D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c";
 
-// DATA: SERVER 0x1002d9ec
 char s_plt_SetPlantMap____Map_is_not_al[] = "plt_SetPlantMap(): Map is not alloced or PlantInfo not found...";
 
 /* 0x58 pairs read by plt_TableLookup through their raw address; a struct
@@ -38,7 +34,6 @@ typedef struct {
 	int second;
 } PLANT_PAIR;
 
-// DATA: SERVER 0x1002da30
 PLANT_PAIR g_plant_pair_table[0x58] = {
 	{ 0, 0 },
 	{ 0x320008, 0 },
@@ -129,26 +124,18 @@ PLANT_PAIR g_plant_pair_table[0x58] = {
 	{ 0, 0 },
 	{ 0, 0 },
 };
-// GLOBAL: SERVER 0x1002dcf0
 int g_plant_flag = 1;
 
-// GLOBAL: SERVER 0x1003540c
-int g_dynamic_count = 0;
+extern int g_dynamic_count;
 
 /* Finds a record in a linked table by matching type fields.
  * Iterates from base pointer, comparing type1/type2 bytes.
  * Returns pointer to matching record or NULL. */
-// FUNCTION: GOLD 0x004bc5a0
-// SIZE: 80
-// FUNCTION: GOLDTL 0x4bcb80
-// SIZE: 80
 
 /* Checks if a zone is available for planting. Validates
  * the zone record, checks plant capacity, and verifies
  * the zone type matches the requested plant type. */
 
-// FUNCTION: SERVER 0x10014ee0
-// SIZE: 69
 
 char* __cdecl lb_SearchRecordTable(int key)
 {
@@ -163,12 +150,6 @@ char* __cdecl lb_SearchRecordTable(int key)
 	return 0;
 }
 
-// FUNCTION: GOLD 0x4bc5f0
-// SIZE: 80
-// FUNCTION: GOLDTL 0x4bcbd0
-// SIZE: 80
-// FUNCTION: SERVER 0x10014f30
-// plt_FindRecord
 char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 {
 	int i;
@@ -187,12 +168,6 @@ char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 	}
 	return (char*) 0;
 }
-// FUNCTION: GOLD 0x4bc6a0
-// SIZE: 112
-// FUNCTION: GOLDTL 0x4bcc80
-// SIZE: 103
-// FUNCTION: SERVER 0x10014F80
-// find_zone_record
 int __cdecl find_zone_record(char* base, int x, int y)
 {
 	int i;
@@ -228,12 +203,6 @@ int __cdecl find_zone_record(char* base, int x, int y)
  * records for a matching grid position. Returns record index
  * or -1 if not found. */
 
-// FUNCTION: GOLD 0x4bc710
-// SIZE: 176
-// FUNCTION: GOLDTL 0x4bccf0
-// SIZE: 163
-// FUNCTION: SERVER 0x10014ff0
-// plt_CheckZoneAvailability
 int __cdecl plt_CheckZoneAvailability(int zone_table, unsigned int x, unsigned int y, int zone_type)
 {
 	int i;
@@ -268,8 +237,6 @@ int __cdecl plt_CheckZoneAvailability(int zone_table, unsigned int x, unsigned i
  * zone record with the specified plant type and coordinates.
  * Returns the record pointer on success. */
 
-// FUNCTION: SERVER 0x100150a0
-// plt_SetPlantMap
 int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int zone_type, int extra)
 {
 	char* map;
@@ -333,8 +300,6 @@ set_xy:
 /* Simple lookup into a global table by index. Returns value
  * through out-pointer. Returns 0 if index out of range. */
 
-// FUNCTION: SERVER 0x100151B0
-// plt_TableLookup
 int __cdecl plt_TableLookup(int index, int* out)
 {
 	if (index >= 0x58) {

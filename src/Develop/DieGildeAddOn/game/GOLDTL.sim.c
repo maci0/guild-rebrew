@@ -8,9 +8,7 @@ unsigned short __cdecl sim_FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes[1];
 
 // FUNCTION: GOLD 0x00424370
-// SIZE: 81
 // FUNCTION: GOLDTL 0x420700
-// SIZE: 81
 void __cdecl fcn_0042b040(int, void*);
 
 void __cdecl fcn_00420700(char* entity, char* data)

@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0040b240
-// SIZE: 40
 // fcn_0040b240 — clear node table 0x1468ae0..0x14696e0.
 
 int __cdecl fcn_004028a0(int);

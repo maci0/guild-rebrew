@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0050ca10
-// SIZE: 64
 // FUNCTION: GOLDTL 0x0050fe40
-// SIZE: 64
 
 extern char g_7f4ca0[];
 

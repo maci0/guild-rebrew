@@ -2,7 +2,7 @@
 
 Every function carrying linked `.text` residue has an explicit behavioral
 verdict as of rounds 288–297. Method: independent instruction-level review
-of the C source against the reference disassembly (`rebrew asm` +
+of the C source against the reference disassembly (`rebrew binary asm show` +
 `rebrew diff --json`), hunting wrong constants/offsets/call args/loop
 bounds/branch outcomes; register allocation, scheduling, spill slots and
 other documented codegen walls ignored. Reviews were read-only except

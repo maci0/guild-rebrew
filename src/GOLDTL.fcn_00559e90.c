@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x551dc0
-// SIZE: 400
 // FUNCTION: GOLDTL 0x559e90
-// SIZE: 396
 
 // SIZE 0x10
 struct job {

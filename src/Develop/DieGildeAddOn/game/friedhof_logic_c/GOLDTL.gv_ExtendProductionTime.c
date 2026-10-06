@@ -1,7 +1,6 @@
 /* gv_ExtendProductionTime - proper C */
 
 // FUNCTION: GOLDTL 0x4f2880
-// SIZE: 400
 
 
 #include "rebrew_types.h"

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x45f5b0
-// SIZE: 39
 
 int __cdecl gzread(int, void*, unsigned);
 

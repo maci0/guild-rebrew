@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4f5810
-// SIZE: 31
 
 // fcn_004f36e0 — first table (stride 0x2d) index equal to a, else -1.
 

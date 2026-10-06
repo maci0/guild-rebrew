@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x004f53a0
-// SIZE: 776
 
 /* Same by-value request struct as fcn_004f5300: caller 0x4f56b0 copies 0x2d bytes. */
 // SIZE 0x2d

@@ -2,9 +2,7 @@ extern double g_662a48;
 extern double g_6640e8;
 extern unsigned char g_773d75;
 // FUNCTION: GOLD 0x004b6a20
-// SIZE: 238
 // FUNCTION: GOLDTL 0x4b6bf0
-// SIZE: 238
 
 #include <string.h>
 

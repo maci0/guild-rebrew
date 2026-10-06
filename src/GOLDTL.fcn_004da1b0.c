@@ -8,7 +8,6 @@ int __cdecl fcn_0064d41a(char*, const char*, ...);
 void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
 
 // FUNCTION: GOLDTL 0x004da1b0
-// SIZE: 206
 void __cdecl fcn_004da1b0(void)
 {
 	char buf[0x80];

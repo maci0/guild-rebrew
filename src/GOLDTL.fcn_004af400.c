@@ -20,9 +20,7 @@ int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl fcn_0051af00(void*, int, ...);
 
 // FUNCTION: GOLDTL 0x4af400
-// SIZE: 289
 // FUNCTION: GOLD 0x4af2c0
-// SIZE: 289
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x20c) and
  * addresses the 0x200 scratch buffer off ebp; section 13 of

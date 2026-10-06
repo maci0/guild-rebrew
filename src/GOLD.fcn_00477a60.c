@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00477a60
-// SIZE: 293
 
 typedef struct Spin00477a60 {
 	char pad0[0x18];

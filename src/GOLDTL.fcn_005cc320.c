@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005cc320
-// SIZE: 256
 
 #include "client_types.h"
 typedef Win_1015f40 Win;

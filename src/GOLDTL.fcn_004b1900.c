@@ -6,9 +6,7 @@ int __cdecl atoi(const char* s);
 void __cdecl fcn_004c5530(char* msg);
 
 // FUNCTION: GOLD 0x4b17c0
-// SIZE: 190
 // FUNCTION: GOLDTL 0x004b1900
-// SIZE: 190
 int __cdecl fcn_004b1900(int a1, int a2, char* s)
 {
 	char msg[0xf8];

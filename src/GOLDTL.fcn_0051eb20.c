@@ -2,7 +2,6 @@ extern int g_6b8010;
 extern unsigned char* g_90e094;
 
 // FUNCTION: GOLDTL 0x51eb20
-// SIZE: 147
 
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00446f70(int, int);

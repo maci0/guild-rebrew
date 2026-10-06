@@ -1,7 +1,6 @@
 /* gv_Free3Fields - proper C */
 
 // FUNCTION: GOLDTL 0x45b790
-// SIZE: 66
 
 
 extern void __cdecl m_FreeTracked(void* ptr);

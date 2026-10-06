@@ -6,9 +6,7 @@ void __cdecl fcn_00425bf0(char*, int, const char*);
 void __cdecl fcn_004056a0(char*, int);
 
 // FUNCTION: GOLD 0x40c9a0
-// SIZE: 190
 // FUNCTION: GOLDTL 0x40d8c0
-// SIZE: 190
 
 /* SetCharacterCamera(): puts the camera into one of the character views. */
 int __cdecl fcn_0040d8c0(char** ch, char** view)

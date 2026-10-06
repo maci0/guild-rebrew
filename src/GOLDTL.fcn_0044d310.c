@@ -4,7 +4,6 @@ void* __cdecl fcn_0064f026(int, int);
 float __cdecl fcn_0064d62e(void*);
 
 // FUNCTION: GOLDTL 0x44d310
-// SIZE: 51
 void __cdecl fcn_0044d310(int a1, int a2)
 {
 	char* base;

@@ -3,7 +3,6 @@
 int __cdecl fcn_004c6db0(void*);
 
 // FUNCTION: GOLDTL 0x4f0930
-// SIZE: 33
 int __cdecl fcn_004f0930(int a1)
 {
 	int pair[2];

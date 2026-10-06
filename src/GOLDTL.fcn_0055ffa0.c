@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0055ffa0
-// SIZE: 54
 
 typedef struct {
 	short w[7];

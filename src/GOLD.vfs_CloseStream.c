@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x463050
-// SIZE: 176
 
 /* GOLD twin of vfs_CloseStream (vfs.c): GOLD's CRT keeps errno in a plain
  * global, where GOLDTL and the server call _errno(). */

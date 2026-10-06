@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0044e6f0
-// SIZE: 8
 // FUNCTION: GOLDTL 0x44d8d0
-// SIZE: 8
 
 // fcn_0044e6f0 — increments dword at (param2)+8.
 

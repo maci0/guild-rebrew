@@ -11,9 +11,7 @@ short* __cdecl fcn_00509570(char*);
 char* __cdecl fcn_00508e40(int);
 
 // FUNCTION: GOLD 0x004c6cd0
-// SIZE: 314
 // FUNCTION: GOLDTL 0x004c7870
-// SIZE: 314
 
 int __cdecl fcn_004c7870(int cmd, char* result)
 {

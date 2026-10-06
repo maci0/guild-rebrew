@@ -34,7 +34,6 @@ int __cdecl fcn_0041fd70(char*, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 // FUNCTION: GOLDTL 0x4c2100
-// SIZE: 808
 void __cdecl fcn_004c2100(void)
 {
 	unsigned char* e;

@@ -1,9 +1,7 @@
 extern unsigned char* g_868050;
 
 // FUNCTION: GOLD 0x00524210
-// SIZE: 142
 // FUNCTION: GOLDTL 0x5290d0
-// SIZE: 142
 
 unsigned char* __cdecl fcn_00508e40(int);
 int __cdecl ahm_CheckFlag(unsigned char*);

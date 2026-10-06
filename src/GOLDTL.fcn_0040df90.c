@@ -1,9 +1,7 @@
 // GLOBAL: GOLD 0x5f1230
 extern char g_6752a8[];
 // FUNCTION: GOLD 0x0040d060
-// SIZE: 27
 // FUNCTION: GOLDTL 0x40df90
-// SIZE: 27
 
 #include <string.h>
 

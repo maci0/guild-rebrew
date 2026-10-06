@@ -20,7 +20,6 @@ void __cdecl fcn_004713b0(int k, char* a, char* b);
 void __cdecl fcn_00471490(int k);
 
 // FUNCTION: GOLDTL 0x4712d0
-// SIZE: 106
 int __cdecl fcn_004712d0(int k, char* a, char* b)
 {
 	Obj* o;

@@ -19,7 +19,6 @@ int __cdecl vfs_FlushAndClose(int);
  * position and returns the byte value, or error on EOF. */
 
 // FUNCTION: GOLDTL 0x419390
-// SIZE: 48
 void __cdecl vfs_WriteUint32LE(int stream, unsigned int value)
 {
 	if (value != 0)

@@ -5,7 +5,6 @@ extern int g_6b7fdc;
 int __cdecl fcn_0065f220(const char*, const char*);
 
 // FUNCTION: GOLDTL 0x430f70
-// SIZE: 256
 
 /* Calls cb for every file of a VFS directory (and its subdirectories),
  * optionally only for one extension; stops when cb returns 0. */

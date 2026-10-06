@@ -14,7 +14,6 @@ unsigned char* __cdecl lb_SearchRecordTable(int id);
 void __cdecl fcn_004bd150(fcn_004bceb0_Entry* tab);
 
 // FUNCTION: GOLDTL 0x004bceb0
-// SIZE: 104
 void __cdecl fcn_004bceb0(fcn_004bceb0_Entry* tab)
 {
 	unsigned char* r;

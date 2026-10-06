@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005c6540
-// SIZE: 647
 
 typedef struct Req {
 	unsigned short* s;

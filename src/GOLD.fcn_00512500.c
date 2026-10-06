@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00512500
-// SIZE: 26
 // FUNCTION: GOLDTL 0x515c40
-// SIZE: 26
 
 // fcn_00512500 — fcn_00501190(1,5,0xb); if non-null fcn_00511e90(r).
 

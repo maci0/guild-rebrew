@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00420210
-// SIZE: 791
 
 typedef struct Chan Chan;
 // SIZE 0x128

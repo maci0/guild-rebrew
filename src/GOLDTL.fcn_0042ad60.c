@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x42ad60
-// SIZE: 48
 
 int __cdecl fcn_0042b200(int);
 typedef void (__stdcall* fcn_0042ad60_f)(int);

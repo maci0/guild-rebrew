@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004eafa0
-// SIZE: 37
 // FUNCTION: GOLDTL 0x004ecd20
-// SIZE: 37
 
 extern float g_662a3c;
 

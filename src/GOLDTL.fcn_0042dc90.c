@@ -3,9 +3,7 @@ extern char g_1053000[][0x50];
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
 // FUNCTION: GOLD 0x0042e770
-// SIZE: 53
 // FUNCTION: GOLDTL 0x42dc90
-// SIZE: 53
 int __cdecl fcn_0042dc90(const char* name)
 {
 	int i;

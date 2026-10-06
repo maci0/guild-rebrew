@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0041c190
-// SIZE: 248
 
 #include "octree.h"
 

@@ -5,9 +5,7 @@ float __cdecl fcn_004e6d20(void);
 unsigned int __cdecl fcn_004e6cb0(int);
 
 // FUNCTION: GOLD 0x4e26d0
-// SIZE: 393
 // FUNCTION: GOLDTL 0x004e3ff0
-// SIZE: 393
 
 void __cdecl fcn_004e3ff0(char* a, int* b)
 {

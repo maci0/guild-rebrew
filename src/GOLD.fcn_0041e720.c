@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0041e720
-// SIZE: 21
 // fcn_0041e720 — if(arg) *(void**)0x146356c = arg->vtable[2](arg).
 
 void __cdecl fcn_0041e720(void* a)

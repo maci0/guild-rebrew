@@ -1,7 +1,6 @@
 extern float g_5eb788;
 
 // FUNCTION: GOLD 0x435900
-// SIZE: 69
 char* __cdecl fcn_00435900(char* a)
 {
 	float best;

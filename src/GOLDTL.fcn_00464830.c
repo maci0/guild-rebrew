@@ -1,9 +1,7 @@
 #include <stdio.h>
 
 // FUNCTION: GOLD 0x00467a10
-// SIZE: 59
 // FUNCTION: GOLDTL 0x464830
-// SIZE: 59
 int __cdecl fcn_00464830(FILE* fin, int* pi)
 {
 	unsigned char c;

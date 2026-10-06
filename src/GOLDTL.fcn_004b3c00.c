@@ -18,9 +18,7 @@ extern pos14_7f4c00 g_7f4c00;
 fcn_004b3c00_rec* __cdecl fcn_004b3bc0(int);
 
 // FUNCTION: GOLD 0x004b3a90
-// SIZE: 72
 // FUNCTION: GOLDTL 0x4b3c00
-// SIZE: 72
 
 fcn_004b3c00_rec* __cdecl fcn_004b3c00(int a)
 {

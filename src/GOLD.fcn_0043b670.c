@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0043b670
-// SIZE: 52
 // fcn_0043b670 — set bits; return 1.
 
 int __cdecl fcn_0043b670(char* a, int b)

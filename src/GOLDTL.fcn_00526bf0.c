@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00526bf0
-// SIZE: 435
 
 typedef struct Device Device;
 

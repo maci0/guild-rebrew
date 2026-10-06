@@ -4,9 +4,7 @@ extern g_662454_f g_662454;
 // GLOBAL: GOLD 0x5eb310
 extern g_662454_f g_662454;
 // FUNCTION: GOLD 0x0042ba30
-// SIZE: 54
 // FUNCTION: GOLDTL 0x42a390
-// SIZE: 54
 
 extern int g_6b7f90;
 

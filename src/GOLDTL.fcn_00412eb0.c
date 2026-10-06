@@ -2,9 +2,7 @@
 extern int g_6b5cc4;
 extern int g_67a370;
 // FUNCTION: GOLD 0x00411900
-// SIZE: 90
 // FUNCTION: GOLDTL 0x412eb0
-// SIZE: 90
 
 void __cdecl fcn_004379a0(int, int, int, void*, int);
 void __cdecl fcn_00412e80(void);

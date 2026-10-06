@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0044f5f0
-// SIZE: 37
 // fcn_0044f5f0 — accumulate and reset fields. (a=param2)
 
 void __cdecl fcn_0044f5f0(int u, int* a)

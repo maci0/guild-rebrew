@@ -3,7 +3,6 @@ extern char g_1040640[];
 void __cdecl fcn_00452420(char* p);
 
 // FUNCTION: GOLDTL 0x4438b0
-// SIZE: 74
 char __cdecl fcn_004438b0(char* a, char** b)
 {
 	char* p;

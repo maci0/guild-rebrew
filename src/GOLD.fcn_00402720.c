@@ -1,7 +1,6 @@
 extern void* g_1468ae0[];
 extern char g_10432c0[];
 // FUNCTION: GOLD 0x402720
-// SIZE: 133
 
 int __cdecl fcn_00451840(void*, int, int);
 

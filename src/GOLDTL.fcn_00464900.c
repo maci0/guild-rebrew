@@ -61,9 +61,7 @@ typedef struct {
 } unz_s;
 
 // FUNCTION: GOLD 0x00467ae0
-// SIZE: 295
 // FUNCTION: GOLDTL 0x464900
-// SIZE: 295
 uLong __cdecl fcn_00464900(FILE* fin)
 {
 	unsigned char* buf;

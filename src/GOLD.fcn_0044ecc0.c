@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0044ecc0
-// SIZE: 29
 // fcn_0044ecc0 — a[1] = fcn_005df7d1(fcn_005dfb95(0, 0x5ebb58)).
 
 int __cdecl fcn_005dfb95(int, int);

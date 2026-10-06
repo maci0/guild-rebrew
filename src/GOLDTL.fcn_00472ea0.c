@@ -40,7 +40,6 @@ void __cdecl fcn_0041d9e0(const char* msg);
 void __cdecl fcn_004772e0(int a, int b, int c, int d, int e);
 
 // FUNCTION: GOLDTL 0x472ea0
-// SIZE: 97
 void __cdecl fcn_00472ea0(int a, int b, int c, int d)
 {
 	Win* w;

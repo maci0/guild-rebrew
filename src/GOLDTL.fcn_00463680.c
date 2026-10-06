@@ -35,9 +35,7 @@ extern const uch g_663734[BL_CODES];
 void __cdecl fcn_004638d0(deflate_state* s, ct_data* tree, int max_code);
 
 // FUNCTION: GOLD 0x00466a60
-// SIZE: 586
 // FUNCTION: GOLDTL 0x463680
-// SIZE: 586
 void __cdecl fcn_00463680(deflate_state* s, int lcodes, int dcodes, int blcodes)
 {
 	int rank;

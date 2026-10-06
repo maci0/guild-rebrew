@@ -4,9 +4,7 @@ extern unsigned char* g_868050;
 extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x00565af0
-// SIZE: 236
 // FUNCTION: GOLDTL 0x56de60
-// SIZE: 236
 
 void __cdecl fcn_00546190(char*);
 unsigned char* __cdecl gm_SearchTable67(int);

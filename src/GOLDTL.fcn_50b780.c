@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x50b780
-// SIZE: 17
 
 // fcn_00508620 — (param1) * table[param2].
 

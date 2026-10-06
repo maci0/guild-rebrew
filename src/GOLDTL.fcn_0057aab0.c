@@ -73,7 +73,6 @@ static __inline float v3len(Vec57aa* v)
 }
 
 // FUNCTION: GOLDTL 0x57aab0
-// SIZE: 668
 void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 {
 	float range;

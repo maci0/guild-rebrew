@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00435410
-// SIZE: 226
 
 typedef struct Mesh435410 Mesh435410;
 

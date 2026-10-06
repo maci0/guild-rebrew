@@ -17,7 +17,6 @@ extern char* g_1015ea0;
 void __cdecl fcn_004695a0(int g, int sel);
 
 // FUNCTION: GOLDTL 0x469470
-// SIZE: 146
 void __cdecl fcn_00469470(int g, int id)
 {
 	g_102cbc4[g].ids[g_102cbc4[g].count] = id;

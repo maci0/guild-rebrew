@@ -22,7 +22,6 @@ int __cdecl gm_GetBuildingTypeCategory(int);
 extern int g_citizen_count;
 
 // FUNCTION: GOLDTL 0x4cef30
-// SIZE: 64
 // gm_LookupEntityRecordById
 int __cdecl gm_LookupEntityRecordById(int search_id)
 {

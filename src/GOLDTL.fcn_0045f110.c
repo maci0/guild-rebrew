@@ -13,9 +13,7 @@ extern int g_67bd70[2];
 int __cdecl fcn_0045f240(gz_stream* s);
 
 // FUNCTION: GOLD 0x462ea0
-// SIZE: 304
 // FUNCTION: GOLDTL 0x45f110
-// SIZE: 294
 void __cdecl fcn_0045f110(gz_stream* s)
 {
 	int method;

@@ -4,9 +4,7 @@ int __cdecl fcn_0048e360(int a1, char* p, int a3);
 int __cdecl fcn_0048e4b0(int a1, char* p, int a3);
 
 // FUNCTION: GOLDTL 0x48e050
-// SIZE: 148
 // FUNCTION: GOLD 0x0048eaa0
-// SIZE: 160
 int __cdecl fcn_0048e050(int a1, char* p, int a3)
 {
 	switch (*(int*) (p + 0x10)) {

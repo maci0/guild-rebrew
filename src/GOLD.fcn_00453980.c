@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00453980
-// SIZE: 28
 // fcn_00453980 — zero five globals.
 
 void __cdecl fcn_00453980(void)

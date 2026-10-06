@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x4f4420
-// SIZE: 64
 // FUNCTION: GOLDTL 0x4f6810
-// SIZE: 60
 
 int __cdecl fcn_004f6810(char* a1, unsigned int kind)
 {

@@ -15,9 +15,7 @@ __declspec(dllimport) unsigned long __stdcall FormatMessageA(unsigned long, cons
 __declspec(dllimport) void* __stdcall LocalFree(void*);
 
 // FUNCTION: GOLD 0x00401d50
-// SIZE: 254
 // FUNCTION: GOLDTL 0x402220
-// SIZE: 254
 
 /* Opens the UDP broadcast socket once: bound to any address, with the
  * broadcast destination on the given port. */

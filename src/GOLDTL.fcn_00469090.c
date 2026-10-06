@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x469090
-// SIZE: 128
 // y = s->y assigned after x in each arm schedules the load between the two
 // divisions.
 

@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004bda60
-// SIZE: 27
 // fcn_004bda60 — count nodes from a to b (by 0x3c chain), else 0.
 
 int __cdecl fcn_004bda60(char* a, char* b)

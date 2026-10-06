@@ -8,7 +8,6 @@ extern int g_772d24;
 void __cdecl fcn_004c2d90(float, int);
 
 // FUNCTION: GOLDTL 0x4c2d50
-// SIZE: 63
 
 void __cdecl fcn_004c2d50(void)
 {

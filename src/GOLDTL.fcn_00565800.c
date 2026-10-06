@@ -4,9 +4,7 @@ void __cdecl fcn_00546190(char*);
 extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x0055d590
-// SIZE: 115
 // FUNCTION: GOLDTL 0x565800
-// SIZE: 115
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_0050c710(char*, int, int);

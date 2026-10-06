@@ -4,9 +4,7 @@ extern int g_675170;
 // GLOBAL: GOLD 0x14eaae0
 extern struct sin_402220 g_1552000;
 // FUNCTION: GOLD 0x00401e70
-// SIZE: 37
 // FUNCTION: GOLDTL 0x402340
-// SIZE: 37
 
 extern int (__stdcall *g_662350)(int, int, int, int, int, int);
 

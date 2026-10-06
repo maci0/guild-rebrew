@@ -1,7 +1,5 @@
 // FUNCTION: GOLDTL 0x4af1d0
-// SIZE: 288
 // FUNCTION: GOLD 0x4af090
-// SIZE: 288
 
 /* Callees of this translation unit; see src/GOLDTL.fcn_004af2f0.c, the
  * sibling in the same address family. */

@@ -44,7 +44,6 @@ void __cdecl fcn_0045ce90(Tex*);
 void __cdecl fcn_0045bfb0(Tex*);
 
 // FUNCTION: GOLDTL 0x00442a30
-// SIZE: 432
 
 char __cdecl fcn_00442a30(Ent* e, Obj* o, unsigned char lod, char refresh)
 {

@@ -4,9 +4,7 @@ extern Entry680bd0 g_680bd0[48];
 // GLOBAL: GOLD 0x601f68
 extern Entry680bd0 g_680bd0[48];
 // FUNCTION: GOLD 0x004b3ae0
-// SIZE: 46
 // FUNCTION: GOLDTL 0x4b3c50
-// SIZE: 46
 
 char* __cdecl fcn_004b3c50(int a1)
 {

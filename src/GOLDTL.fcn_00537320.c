@@ -9,7 +9,6 @@ extern int g_1040490;
 extern int g_1040494;
 
 // FUNCTION: GOLDTL 0x537320
-// SIZE: 144
 
 void __cdecl fcn_00537320(int flags)
 {

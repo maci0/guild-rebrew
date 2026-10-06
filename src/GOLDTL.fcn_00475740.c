@@ -5,7 +5,6 @@ void* __cdecl fcn_0041db70(unsigned int, char*);
 void __cdecl fcn_004754b0(void*, void*, int);
 
 // FUNCTION: GOLDTL 0x475740
-// SIZE: 64
 
 void* __cdecl fcn_00475740(void* src)
 {

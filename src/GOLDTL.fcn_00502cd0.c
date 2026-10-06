@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004ffe90
-// SIZE: 304
 // FUNCTION: GOLDTL 0x00502cd0
-// SIZE: 304
 
 /* The T&L build of gm_ff_Objekt (SERVER 0x10016460): the invalid flag
  * combination returns NULL without the LogMessageInternal call. */

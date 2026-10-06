@@ -8,9 +8,7 @@ char* __cdecl fcn_0041db70(int size, char* tag);
 char* __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n);
 
 // FUNCTION: GOLD 0x42ea90
-// SIZE: 293
 // FUNCTION: GOLDTL 0x0042dfb0
-// SIZE: 293
 
 int __cdecl fcn_0042dfb0(unsigned short count)
 {

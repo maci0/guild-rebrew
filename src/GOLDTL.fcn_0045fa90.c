@@ -1,9 +1,7 @@
 int __cdecl fcn_0045f240(char* s);
 
 // FUNCTION: GOLD 0x463670
-// SIZE: 65
 // FUNCTION: GOLDTL 0x45fa90
-// SIZE: 65
 unsigned long __cdecl fcn_0045fa90(char* s)
 {
 	unsigned long x = (unsigned long) fcn_0045f240(s);

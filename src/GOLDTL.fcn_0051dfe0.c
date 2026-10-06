@@ -2,9 +2,7 @@ extern int g_6a23a8;
 extern char g_665c18[5][64];
 
 // FUNCTION: GOLD 0x00519040
-// SIZE: 144
 // FUNCTION: GOLDTL 0x51dfe0
-// SIZE: 144
 
 #include <string.h>
 

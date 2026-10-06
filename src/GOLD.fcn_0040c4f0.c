@@ -11,7 +11,6 @@ char* __cdecl fcn_0040b400(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_004273d0(char*, int, const char*);
 
 // FUNCTION: GOLD 0x40c4f0
-// SIZE: 306
 
 /* TakeObjectScript(): queues a take-object animation task that runs a
  * script; the calling script waits for it when it blocks. */

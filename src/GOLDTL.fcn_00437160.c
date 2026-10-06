@@ -27,7 +27,6 @@ extern char g_67a2ac;
 void __cdecl fcn_00450b20(float a, char* b, int c, int d);
 
 // FUNCTION: GOLDTL 0x437160
-// SIZE: 261
 void __cdecl fcn_00437160(unsigned char fog, int color, char light)
 {
 	((IDev*)g_6b5de0)->v->m88(((IDev*)g_6b5de0));

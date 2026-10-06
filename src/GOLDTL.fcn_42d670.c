@@ -3,9 +3,7 @@ extern int g_149d188[];
 // GLOBAL: GOLD 0x1432028
 extern int g_149d188[];
 // FUNCTION: GOLD 0x0042e320
-// SIZE: 60
 // FUNCTION: GOLDTL 0x42d670
-// SIZE: 60
 
 int __cdecl fcn_0042d630(int);
 int __cdecl fcn_0041ddd0(int);

@@ -6,7 +6,6 @@ extern Rgb g_100f1b8;
 int __cdecl fcn_0041bac0(unsigned char r, unsigned char g, unsigned char b);
 
 // FUNCTION: GOLDTL 0x479e00
-// SIZE: 64
 void __cdecl fcn_00479e00(unsigned char r, unsigned char g, unsigned char b)
 {
 	int c;

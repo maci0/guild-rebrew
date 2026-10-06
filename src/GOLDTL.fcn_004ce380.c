@@ -1,8 +1,6 @@
 extern int g_9badd0;
 // FUNCTION: GOLD 0x004cd7c0
-// SIZE: 84
 // FUNCTION: GOLDTL 0x4ce380
-// SIZE: 84
 
 #include <string.h>
 

@@ -3,9 +3,7 @@
 extern Mult664260 g_664260[7];
 
 // FUNCTION: GOLD 0x004948b0
-// SIZE: 39
 // FUNCTION: GOLDTL 0x493f50
-// SIZE: 39
 
 Mult664260* __cdecl fcn_00493f50(int key)
 {

@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004ce270
-// SIZE: 30
 // FUNCTION: GOLDTL 0x4cf0f0
-// SIZE: 30
 
 // fcn_004ce270 — a[0x16c/4] != b[0x16c/4].
 

@@ -50,7 +50,6 @@ void __cdecl fcn_004222b0(const char* msg);
 void __cdecl fcn_004730d0(int slot, Win_468ce0* parent);
 
 // FUNCTION: GOLD 0x468ce0
-// SIZE: 311
 int __cdecl fcn_00468ce0(int id, int win)
 {
 	Win_468ce0* w;

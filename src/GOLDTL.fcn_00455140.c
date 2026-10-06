@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x455140
-// SIZE: 247
 // The per-parent temporary is a 16-byte vector; with a 12-byte one or a float
 // array c2 keeps all three results on the x87 stack and drops the frame.
 

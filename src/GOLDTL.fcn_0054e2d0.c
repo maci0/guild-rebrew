@@ -19,9 +19,7 @@ struct msg {
 };
 
 // FUNCTION: GOLD 0x00546350
-// SIZE: 182
 // FUNCTION: GOLDTL 0x54e2d0
-// SIZE: 182
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);

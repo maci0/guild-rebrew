@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x477480
-// SIZE: 31
 
 typedef int (__stdcall* fcn_00477480_f)(void*);
 

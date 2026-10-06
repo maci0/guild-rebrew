@@ -58,31 +58,18 @@ extern int g_clock_copy_mid; /* 0x10035888 */
 // GLOBAL: SERVER 0x1003588c
 extern short g_clock_copy_tail; /* 0x1003588C */
 // GLOBAL: SERVER 0x100358a4
-extern int g_entity_id_field; /* 0x100358A4 */
-extern int g_entity_ref_table; /* 0x100358FC */
 extern unsigned char g_entity_base[]; /* 0x1009ACA0 */
 // GLOBAL: SERVER 0x1009aca2
-extern char g_dynamic_entities[]; /* 0x1009ACA2 */
-extern int g_some_limit; /* 0x1009ACFC */
-extern char* g_slot_array; /* 0x1009B770 */
 extern char* g_entity_type_table; /* 0x100A8C30 */
 extern unsigned short* g_query_base; /* 0x100A8C34 */
 extern int g_query_match_count; /* 0x100A8C38 */
-extern unsigned int g_entity_slot_table[]; /* 0x100A8C94 */
 extern unsigned char* g_entity_ptr; /* 0x1014D8C0 */
 extern char* g_item_def_table; /* 0x101DE450 */
 extern char g_office_slots[0x3f0]; /* 0x101DE5A0 */
-extern unsigned int g_download_total_size; /* 0x101DEAC0 */
-extern unsigned int g_download_received; /* 0x101DEAC4 */
-extern unsigned int g_download_slots[8]; /* 0x101DEAC8 */
-extern unsigned int g_download_buffer; /* 0x101DEAE8 */
 extern int g_net_socket; /* 0x101DEAEC, listen socket */
 extern unsigned char g_connections[0x264264]; /* 0x101DEB00, first player slot (stride 0x264264 bytes) */
-extern unsigned int g_player_slot_field; /* 0x101DEB14 */
-extern unsigned int g_player_slot_overflow; /* 0x114FFE20, overflow slot */
 // GLOBAL: SERVER 0x11764088
 extern int g_tick_rate; /* 0x11764088 */
-extern int g_list_head; /* 0x117640C4 */
 extern char g_log_buffer[256]; /* 0x11766100 */
 extern int g_log_file_handle; /* 0x11766204 */
 
@@ -100,7 +87,6 @@ extern int g_game_speed_table[5]; /* 0x10025718 */
 extern float g_const_42_0; /* 0x100257BC */
 extern float g_const_21_0; /* 0x100257C0 */
 extern double g_const_half; /* 0x100257D0 */
-extern double g_const_one_d; /* 0x100257D8 */
 extern double g_const_0_2; /* 0x10025810 */
 extern float g_const_0_6; /* 0x10025F88 */
 extern double g_const_8; /* 0x10025F90 */
@@ -168,19 +154,32 @@ extern int g_cmdline_parsed; /* 0x11767590, cmdline/env parsed flag */
 
 // GLOBAL: SERVER 0x10034638
 extern int g_alloc_counter;
-// GLOBAL: SERVER 0x117640b4
+extern int g_entity_id_field; /* 0x100358A4 */
+extern int g_entity_ref_table; /* 0x100358FC */
+extern char g_dynamic_entities[]; /* 0x1009ACA2 */
+extern int g_some_limit; /* 0x1009ACFC */
+extern char* g_slot_array; /* 0x1009B770 */
+extern unsigned int g_entity_slot_table[]; /* 0x100A8C94 */
+extern unsigned int g_download_total_size; /* 0x101DEAC0 */
+extern unsigned int g_download_received; /* 0x101DEAC4 */
+extern unsigned int g_download_slots[8]; /* 0x101DEAC8 */
+extern unsigned int g_download_buffer; /* 0x101DEAE8 */
+extern unsigned int g_player_slot_field; /* 0x101DEB14 */
+extern unsigned int g_player_slot_overflow; /* 0x114FFE20, overflow slot */
+extern int g_list_head; /* 0x117640C4 */
 extern int g_alloc_root_count;
-// GLOBAL: SERVER 0x117640b0
 extern int g_alloc_root_size_total;
-// GLOBAL: SERVER 0x117640bc
 extern int g_alloc_root_count_max;
-// GLOBAL: SERVER 0x117640b8
 extern int g_alloc_root_size_max;
-// GLOBAL: SERVER 0x117640c0
 extern int g_alloc_root_spare;
-// GLOBAL: SERVER 0x117640a0
 extern int g_alloc_root_name;
-// GLOBAL: SERVER 0x117640a4
 extern int g_alloc_root_name_4;
+// GLOBAL: SERVER 0x117640b4
+// GLOBAL: SERVER 0x117640b0
+// GLOBAL: SERVER 0x117640bc
+// GLOBAL: SERVER 0x117640b8
+// GLOBAL: SERVER 0x117640c0
+// GLOBAL: SERVER 0x117640a0
+// GLOBAL: SERVER 0x117640a4
 
 #endif /* REBREW_GLOBALS_H */

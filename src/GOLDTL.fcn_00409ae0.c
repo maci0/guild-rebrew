@@ -28,9 +28,7 @@ void __cdecl fcn_0041ddd0(void*);
 void __cdecl fcn_004050c0(char*);
 
 // FUNCTION: GOLD 0x00408cb0
-// SIZE: 419
 // FUNCTION: GOLDTL 0x409ae0
-// SIZE: 419
 
 /* Starts a walk event: removes a pending morph, attaches the walk (or cart
  * pulling) motion and scales its speed to the event's step time. */

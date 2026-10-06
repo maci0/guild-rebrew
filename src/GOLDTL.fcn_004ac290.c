@@ -2,9 +2,7 @@ char* __cdecl fcn_004ac1e0(int);
 unsigned short __cdecl fcn_0042e410(int);
 
 // FUNCTION: GOLD 0x004ac170
-// SIZE: 45
 // FUNCTION: GOLDTL 0x4ac290
-// SIZE: 45
 
 unsigned short __cdecl fcn_004ac290(int id)
 {

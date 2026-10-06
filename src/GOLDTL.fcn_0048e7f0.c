@@ -1,9 +1,7 @@
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 
 // FUNCTION: GOLD 0x0048f240
-// SIZE: 93
 // FUNCTION: GOLDTL 0x48e7f0
-// SIZE: 93
 
 int __cdecl fcn_0048e7f0(char* e, unsigned short** out)
 {

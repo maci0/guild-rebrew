@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x4497f0
-// SIZE: 304
 
 typedef struct Mat04497f0 {
 	float m[4][4];

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x478cc0
-// SIZE: 142
 // if (rows > 0) while (rows != 0) {...}, not a do-while: that form puts dst
 // and rows in the dead surf/spr parameter slots like the reference.
 

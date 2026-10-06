@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x43d860
-// SIZE: 405
 // The squared distance goes through dx/dy/dz statements; written as one
 // expression c2 orders the CSE'd differences y before x.
 

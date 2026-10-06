@@ -69,7 +69,6 @@ void __cdecl fcn_004379a0(int, int, int, void (__cdecl*)(void), void*);
 void __cdecl fcn_00451f80(void);
 
 // FUNCTION: GOLDTL 0x00451df0
-// SIZE: 385
 
 void __cdecl fcn_00451df0(Ent* e)
 {

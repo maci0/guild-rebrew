@@ -3,9 +3,7 @@ float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl fcn_0042e410(int n);
 
 // FUNCTION: GOLD 0x4941d0
-// SIZE: 192
 // FUNCTION: GOLDTL 0x493800
-// SIZE: 178
 int __cdecl fcn_00493800(char* p)
 {
 	unsigned short* a;

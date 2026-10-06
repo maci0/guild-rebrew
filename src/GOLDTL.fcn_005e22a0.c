@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005e22a0
-// SIZE: 621
 
 typedef struct Flags215 {
 	char pad0[0x215];

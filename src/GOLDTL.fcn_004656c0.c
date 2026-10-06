@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 // FUNCTION: GOLDTL 0x4656c0
-// SIZE: 130
 int __cdecl fcn_004656c0(char* s, char* comment, unsigned long size_buf)
 {
 	unsigned long read_this;

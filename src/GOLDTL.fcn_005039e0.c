@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00500b90
-// SIZE: 140
 // FUNCTION: GOLDTL 0x005039e0
-// SIZE: 140
 
 #include "client_types.h"
 #pragma pack(push, 1)

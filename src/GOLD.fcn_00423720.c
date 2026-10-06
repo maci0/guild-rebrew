@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00423720
-// SIZE: 32
 // fcn_00423720 — list search node with [n+8]==a.
 
 int __cdecl fcn_00423720(int a)

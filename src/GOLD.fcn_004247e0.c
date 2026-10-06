@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004247e0
-// SIZE: 37
 // fcn_004247e0 — memset 0x1460b00 (0x1a8*4) + zero 4 globals.
 
 #include <string.h>

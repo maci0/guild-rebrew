@@ -21,7 +21,6 @@ int __cdecl fcn_00476060(fcn_00475f80_obj*);
 void __cdecl fcn_0041ddd0(void*);
 
 // FUNCTION: GOLDTL 0x475f80
-// SIZE: 78
 
 int __cdecl fcn_00475f80(fcn_00475f80_obj* o)
 {

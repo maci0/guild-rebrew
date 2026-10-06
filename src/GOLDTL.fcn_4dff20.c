@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4dff20
-// SIZE: 37
 
 // fcn_004de610 — out = [0x9afe00 + ([0x772f60] % [0x68bfc8])*4] % a; [0x772f60]++; return out.
 

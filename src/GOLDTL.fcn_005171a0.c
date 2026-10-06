@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x005139a0
-// SIZE: 170
 // FUNCTION: GOLDTL 0x5171a0
-// SIZE: 170
 
 #include <stdlib.h>
 #include <string.h>

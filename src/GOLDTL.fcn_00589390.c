@@ -3,9 +3,7 @@ extern char g_77dda0[];
 // GLOBAL: GOLD 0x6f9f60
 extern char g_77dda0[];
 // FUNCTION: GOLD 0x00580d10
-// SIZE: 57
 // FUNCTION: GOLDTL 0x589390
-// SIZE: 57
 
 typedef struct {
 	int f0;

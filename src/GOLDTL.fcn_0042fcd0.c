@@ -5,9 +5,7 @@
 char* __cdecl fcn_0042f420(char* node, char* stop, char* out);
 
 // FUNCTION: GOLD 0x4302e0
-// SIZE: 400
 // FUNCTION: GOLDTL 0x42fcd0
-// SIZE: 387
 
 /* Creates every missing directory on the way to a file path. */
 char __cdecl fcn_0042fcd0(char* path, char* node)

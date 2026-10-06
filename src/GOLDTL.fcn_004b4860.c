@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004b46f0
-// SIZE: 97
 // FUNCTION: GOLDTL 0x4b4860
-// SIZE: 97
 
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;

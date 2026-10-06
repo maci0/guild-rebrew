@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x5740f0
-// SIZE: 240
 // FUNCTION: GOLDTL 0x57c630
-// SIZE: 237
 
 unsigned short __cdecl fcn_0042e410(int);
 void __cdecl fcn_005100f0(int, int);

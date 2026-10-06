@@ -1,9 +1,7 @@
 void __cdecl fcn_004eb780(int, int*);
 
 // FUNCTION: GOLD 0x004a01f0
-// SIZE: 67
 // FUNCTION: GOLDTL 0x49fc30
-// SIZE: 67
 
 int __cdecl fcn_0049fc30(int a, char* e)
 {

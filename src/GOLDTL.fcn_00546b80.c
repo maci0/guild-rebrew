@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0053ee40
-// SIZE: 39
 // FUNCTION: GOLDTL 0x00546b80
-// SIZE: 39
 
 #include "he_tables.h"
 

@@ -9,7 +9,6 @@ typedef struct Range14 {
 // SIZE 0x14
 
 // FUNCTION: GOLDTL 0x43c070
-// SIZE: 90
 int __cdecl fcn_0043c070(char* a, int x, int id, unsigned char tag)
 {
 	Range14* e;

@@ -2,7 +2,6 @@
  * work type and job index, or NULL when the request is invalid. */
 
 // FUNCTION: GOLDTL 0x4f1650
-// SIZE: 320
 
 extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
 

@@ -53,7 +53,6 @@ typedef struct {
 } Grid;
 
 // FUNCTION: GOLDTL 0x0043f6b0
-// SIZE: 297
 
 void __cdecl fcn_0043f6b0(Grid* g)
 {

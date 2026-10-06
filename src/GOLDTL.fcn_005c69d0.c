@@ -4,9 +4,7 @@ extern Loot_7774a0 g_7774a0[32];
 // GLOBAL: GOLD 0x6f3880
 extern Loot_7774a0 g_7774a0[32];
 // FUNCTION: GOLD 0x005baf60
-// SIZE: 60
 // FUNCTION: GOLDTL 0x5c69d0
-// SIZE: 60
 
 // SIZE 0x40
 typedef struct {

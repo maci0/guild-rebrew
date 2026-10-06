@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x005d30e0
-// SIZE: 150
 // FUNCTION: GOLDTL 0x005df610
-// SIZE: 150
 
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)

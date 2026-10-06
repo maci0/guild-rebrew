@@ -2,7 +2,6 @@
 extern char g_6a5708[];
 extern char g_7f4cd0[];
 // FUNCTION: GOLDTL 0x5453d0
-// SIZE: 60
 
 void __cdecl fcn_0064d41a(void*, void*, int, void*);
 

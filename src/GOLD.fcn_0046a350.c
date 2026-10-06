@@ -64,7 +64,6 @@ int __cdecl fcn_0046a100(int x, int y, int a3, int a4, int a5);
 void __cdecl fcn_004730d0(int slot, Win_46a350* parent);
 
 // FUNCTION: GOLD 0x46a350
-// SIZE: 350
 int __cdecl fcn_0046a350(int x, int y, int a3, int a4, int a5, int win)
 {
 	Win_46a350* w;

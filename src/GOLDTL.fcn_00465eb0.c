@@ -19,7 +19,6 @@ void __cdecl fcn_0041d9e0(const char* msg);
 void __cdecl fcn_0046f650(int slot, fcn_00465eb0_Win* parent);
 
 // FUNCTION: GOLDTL 0x465eb0
-// SIZE: 293
 int __cdecl fcn_00465eb0(int id, int win)
 {
 	fcn_00465eb0_Win* w;

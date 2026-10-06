@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x005cda10
-// SIZE: 713
 // FUNCTION: GOLDTL 0x005d9ca0
-// SIZE: 713
 
 typedef struct Msg {
 	int pad0;

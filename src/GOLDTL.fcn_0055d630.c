@@ -7,7 +7,6 @@ struct list_55d630 {
 };
 
 // FUNCTION: GOLDTL 0x55d630
-// SIZE: 175
 
 #include <string.h>
 

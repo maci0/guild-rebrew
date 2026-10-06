@@ -67,7 +67,6 @@ void __cdecl fcn_00438b40(Ent*, Vec3*);
 void __cdecl fcn_00438cb0(Ent*, Vec3*);
 
 // FUNCTION: GOLDTL 0x00443030
-// SIZE: 512
 
 char __cdecl fcn_00443030(Level* lv)
 {

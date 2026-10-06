@@ -16,9 +16,7 @@ void __cdecl fcn_00428720(char* g);
 int __cdecl fcn_00425ec0(char* g, int arg, int kind, char* name);
 
 // FUNCTION: GOLD 0x004277c0
-// SIZE: 260
 // FUNCTION: GOLDTL 0x425fe0
-// SIZE: 260
 int __cdecl fcn_00425fe0(char* g, int arg)
 {
 	struct tok_425fe0 t;

@@ -3,9 +3,7 @@ extern int g_699368;
 // GLOBAL: GOLD 0x61a638
 extern int g_699368;
 // FUNCTION: GOLD 0x004e5150
-// SIZE: 46
 // FUNCTION: GOLDTL 0x4e6ae0
-// SIZE: 46
 
 #include <string.h>
 

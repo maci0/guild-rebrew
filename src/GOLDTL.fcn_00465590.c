@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 // FUNCTION: GOLDTL 0x465590
-// SIZE: 153
 int __cdecl fcn_00465590(char* s, void* buf, unsigned int len)
 {
 	char* p;

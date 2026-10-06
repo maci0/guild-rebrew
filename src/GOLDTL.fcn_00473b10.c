@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00473b10
-// SIZE: 733
 
 typedef struct Win {
 	int id;

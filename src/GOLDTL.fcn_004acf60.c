@@ -20,9 +20,7 @@ struct slot_4acf60 {
 // SIZE 0x18
 
 // FUNCTION: GOLD 0x4ace40
-// SIZE: 457
 // FUNCTION: GOLDTL 0x4acf60
-// SIZE: 457
 
 void __cdecl fcn_004acf60(void)
 {

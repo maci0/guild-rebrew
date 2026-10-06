@@ -7,9 +7,7 @@ extern char* g_fb5740;
 // GLOBAL: GOLDTL 0x1005820
 extern unsigned int g_1005820;
 // FUNCTION: GOLD 0x004c6a90
-// SIZE: 55
 // FUNCTION: GOLDTL 0x4c7630
-// SIZE: 55
 
 int __cdecl fcn_0041db70(int, char*);
 

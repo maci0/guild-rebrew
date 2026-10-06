@@ -2,7 +2,6 @@ extern int g_773de0;
 extern char* g_7f3e60[];
 
 // FUNCTION: GOLDTL 0x514d00
-// SIZE: 48
 
 #include <string.h>
 

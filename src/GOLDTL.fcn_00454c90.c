@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00454c90
-// SIZE: 743
 
 typedef struct Box {
 	char pad0[0x10];

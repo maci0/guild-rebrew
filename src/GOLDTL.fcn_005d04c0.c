@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005d04c0
-// SIZE: 406
 
 typedef struct {
 	char pad[0x40];

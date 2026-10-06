@@ -6,9 +6,7 @@ extern Rec18_68da68 g_68da68[];
 extern Rec18_68da68 g_9a9220[42];
 
 // FUNCTION: GOLD 0x004e6030
-// SIZE: 121
 // FUNCTION: GOLDTL 0x004e7b70
-// SIZE: 121
 int __cdecl fcn_004e7b70(char* e, Rec18* kind, Rec18* slot)
 {
 	int r;
@@ -32,7 +30,6 @@ int __cdecl fcn_004e7b70(char* e, Rec18* kind, Rec18* slot)
 }
 
 // FUNCTION: GOLDTL 0x004e7bf0
-// SIZE: 124
 int __cdecl fcn_004e7bf0(char* e, Rec18* kind, Rec18* slot)
 {
 	int r;

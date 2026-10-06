@@ -8,7 +8,6 @@ extern char g_1042340[];
 char __cdecl fcn_004378c0(int, unsigned int);
 
 // FUNCTION: GOLDTL 0x4379a0
-// SIZE: 288
 
 /* Walks a scene subtree and calls cb(node, ctx) for every node whose type
  * matches the flags; stops and returns 0 when cb returns 0. */

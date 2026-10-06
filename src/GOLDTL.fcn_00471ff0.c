@@ -6,7 +6,6 @@ extern int g_772534;
 int __cdecl fcn_00471f80(int id);
 
 // FUNCTION: GOLDTL 0x471ff0
-// SIZE: 84
 int __cdecl fcn_00471ff0(int j, int k)
 {
 	char* m;

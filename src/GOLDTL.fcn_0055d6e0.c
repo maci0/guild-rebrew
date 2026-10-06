@@ -2,9 +2,7 @@ extern int g_7e453c;
 extern int g_7e4538;
 
 // FUNCTION: GOLD 0x00555510
-// SIZE: 132
 // FUNCTION: GOLDTL 0x55d6e0
-// SIZE: 132
 
 void __cdecl fcn_0055d6e0(char* a, char* b)
 {

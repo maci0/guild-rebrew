@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00476c80
-// SIZE: 25
 // fcn_00476c80 — count != -1 over 0xf8ab80 (stride 0xc).
 
 int __cdecl fcn_00476c80(void)

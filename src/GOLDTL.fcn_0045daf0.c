@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x45daf0
-// SIZE: 202
 
 #include "deflate.h"
 

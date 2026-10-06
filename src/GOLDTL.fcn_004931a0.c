@@ -3,7 +3,6 @@ double __cdecl fcn_00507f10(int, int);
 float __cdecl gm_RandomFloat01(void);
 
 // FUNCTION: GOLDTL 0x4931a0
-// SIZE: 87
 
 int __cdecl fcn_004931a0(int a, int b)
 {

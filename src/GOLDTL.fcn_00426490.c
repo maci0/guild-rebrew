@@ -1,9 +1,7 @@
 #include <string.h>
 
 // FUNCTION: GOLD 0x427c70
-// SIZE: 339
 // FUNCTION: GOLDTL 0x426490
-// SIZE: 339
 
 /* Classifies a script type keyword (up to the first blank or ')'). */
 int __cdecl fcn_00426490(const char* s)
