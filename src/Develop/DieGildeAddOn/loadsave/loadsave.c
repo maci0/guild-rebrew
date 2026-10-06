@@ -998,7 +998,7 @@ int __cdecl ls_LoadEntities(int ctx)
 		if (ls_ReadVfsDataChecked(&id, 2, 1, (void*) ctx) == 0) {
 			return 0;
 		}
-		slot = (char*) (0x100358a0 + ((int) (unsigned short) id) * 0x21c);
+		slot = (char*) ((int) g_slot_table + ((int) (unsigned short) id) * 0x21c);
 		*(short*) slot = id;
 
 		if (g_file_version >= 0x1003e) {
@@ -1330,7 +1330,7 @@ int ls_LoadTownData(int);
 
 int __cdecl ls_LoadTownData(int file)
 {
-	int count;
+	int count; extern unsigned char g_city_records[];
 	int ptr;
 	int ptr2;
 	void* ctx;
@@ -1343,7 +1343,7 @@ int __cdecl ls_LoadTownData(int file)
 		}
 	}
 
-	for (ptr = 0x1009b768; ptr < 0x100a8c38; ptr += 0x2a90) {
+	for (ptr = (int) g_entity_end + 8; ptr < (int) g_entity_end + 0xd4d8; ptr += 0x2a90) {
 		char* inner;
 		int i;
 		char* hdr = (char*) (ptr - 8);
@@ -1405,8 +1405,8 @@ int __cdecl ls_LoadTownData(int file)
 
 	}
 
-	ptr2 = 0x100a8c88;
-	while (ptr2 < 0x100a9858) {
+	ptr2 = (int) g_city_records + 0x48;
+	while (ptr2 < (int) g_city_records + 0xc18) {
 		char* q = (char*) (ptr2 - 8);
 		char* b = (char*) (ptr2 - 0x48);
 		char* inner;
@@ -1592,11 +1592,11 @@ unsigned int ls_ID2Ptr(void)
 	}
 	g_active_player_count = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
 	if (g_file_version >= 0x10017) {
-		for (id_cursor = (int*) 0x10035478; (int) id_cursor < 0x10035498; id_cursor++) {
+		for (id_cursor = (int*) &g_save_extra_field; (int) id_cursor < (int) ((char*) &g_save_extra_field + 0x20); id_cursor++) {
 			*id_cursor = gm_LookupEntityRecordById(*id_cursor);
 		}
 	}
-	for (entity_cursor = (unsigned char*) 0x10035a10; (int) entity_cursor < 0x1009ae10; entity_cursor += 0x21c) {
+	for (entity_cursor = (unsigned char*) g_slot_table + 0x170; (int) entity_cursor < (int) g_slot_table + 0x65570; entity_cursor += 0x21c) {
 		rec = entity_cursor - 0x170;
 		if (*(unsigned short*) rec == 0xffff) {
 			continue;
@@ -1798,7 +1798,7 @@ int srv_RecvGame(void)
 			*entity_state_ptr = '\x05';
 		}
 		entity_state_ptr = entity_state_ptr + 0x21c;
-	} while ((int) entity_state_ptr < (int) 0x1009aca2);
+	} while ((int) entity_state_ptr < (int) ((char*) &g_entity_state_base + 0x65400));
 	load_status = ls_LoadTownData(file_handle);
 	if (load_status == 0) {
 		LogMessageInternal(

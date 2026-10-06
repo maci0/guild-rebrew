@@ -3,10 +3,10 @@
 /* 0x100256a0 and 0x100256ac..0x100256c8 are ahm_ExAllocAlchemist's float
  * literal pool (alchemistry_logic.c); readers spell the literals and
  * common-data-order.txt places the __real@4 COMDATs between these
- * definitions. The double zero and one labels are literal COMDATs too,
+ * definitions. The 1000/8/4 floats are gv_ExAllocGraveyardWorker's literals
+ * (friedhof_logic.c), placed the same way. The double zero and one labels
+ * are literal COMDATs too,
  * shared by game and stock CRT readers. */
-
-__declspec(selectany) const float g_graveyard_const_a = 1000.0f;
 
 __declspec(selectany) const double g_const_2 = 2.0;
 
@@ -54,10 +54,6 @@ __declspec(selectany) const int g_field_worker_count_wt3[4] = {0, 0, 0, 2};
 __declspec(selectany) const float g_const_42_0 = 42.0f;
 
 __declspec(selectany) const float g_const_21_0 = 21.0f;
-
-__declspec(selectany) const float g_graveyard_const_b = 8.0f;
-
-__declspec(selectany) const float g_graveyard_const_c = 4.0f;
 
 __declspec(selectany) const double g_const_half = 0.5;
 

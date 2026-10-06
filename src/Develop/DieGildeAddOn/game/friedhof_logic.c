@@ -1,7 +1,4 @@
 extern unsigned char g_current_season;
-extern char g_graveyard_const_c[];
-extern char g_graveyard_const_b[];
-extern char g_graveyard_const_a[];
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
@@ -890,7 +887,7 @@ int __cdecl gv_ReplaceProductionWorker(void* a)
 	gm_ResolveEntityById(&rec, 0, 0, *(int*) ((char*) a + 8));
 	if (rec == 0 ||
 	    *(unsigned short*) ((char*) rec + 0x27) == limit ||
-	    0x100358a0 + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
+	    (unsigned int) g_slot_table + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
 	        g_entity_table_end)
 		return -1;
 	type = *(unsigned char*) rec;
@@ -1162,7 +1159,7 @@ int __cdecl gv_MoveSlotEntry(void* a)
 	/* The three -1 exits share one epilogue in the target (0x10011bd8),
 	 * reached by a far jump from each guard. */
 	if (rec2 == 0 || *(unsigned short*) ((char*) rec2 + 0x27) == 0xffff ||
-	    0x100358a0 + (*(unsigned short*) ((char*) rec2 + 0x27) & 0xffff) * 540 ==
+	    (unsigned int) g_slot_table + (*(unsigned short*) ((char*) rec2 + 0x27) & 0xffff) * 540 ==
 	        g_entity_table_end)
 		return -1;
 	if (*(unsigned char*) (g_entity_type_table + *(unsigned char*) rec2 +
@@ -1246,7 +1243,7 @@ done:
 		 * the conversion is an implicit cast, not a pushed double. */
 		i = (int) ((float) *(int*) ((char*) cmd + 0x11) *
 		           g_output_share[*(int*) ((char*) cmd + 0xd)]);
-		gm_AddObjekt(*(int*) (0x100358a4 +
+		gm_AddObjekt(*(int*) ((int) g_slot_table + 4 +
 		                                 (unsigned short) *(unsigned short*) ((char*) rec2 + 0x27) * 540),
 		                         (unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
 		                                                             g_current_season * 756),
@@ -1297,7 +1294,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	gm_ResolveEntityById(&entity, 0, 0, *(int*) ((char*) req + 8));
 	if (!entity ||
 	    *(unsigned short*) ((char*) entity + 0x27) == 0xffff ||
-	    (char*) 0x100358a0 + *(unsigned short*) ((char*) entity + 0x27) * 0x21c == (char*) g_entity_table_end)
+	    (char*) g_slot_table + *(unsigned short*) ((char*) entity + 0x27) * 0x21c == (char*) g_entity_table_end)
 		return -1;
 	field_id = *(unsigned char*) entity;
 	if (g_entity_type_table[field_id + field_id * 588] != 0x1d)
@@ -1328,8 +1325,8 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	if (!entry || *(int*) entry != job_id)
 		goto fail_ffff;
 	chosen = 0;
-	grave_cursor = 0x100358a0;
-	while (grave_cursor < 0x1009aca0) {
+	grave_cursor = (int) g_slot_table;
+	while (grave_cursor < (int) ((char*) g_slot_table + 0x65400)) {
 		if (*(unsigned short*) grave_cursor == 0xffff)
 			break;
 		grave_cursor += 0x21c;
@@ -1337,8 +1334,8 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	}
 	if (chosen == 0x300) {
 		chosen = 0;
-		grave_cursor = 0x100358a2;
-		while (grave_cursor < 0x1009aca2) {
+		grave_cursor = (int) ((char*) g_slot_table + 2);
+		while (grave_cursor < (int) ((char*) g_slot_table + 0x65402)) {
 			if (*(unsigned char*) grave_cursor == 0xf)
 				break;
 			grave_cursor += 0x21c;
@@ -1349,7 +1346,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 			return 0xffff;
 		}
 	}
-	if (*(unsigned char*) ((char*) 0x100358a2 + chosen * 0x21c) == 0xf)
+	if (*(unsigned char*) ((char*) g_slot_table + 2 + chosen * 0x21c) == 0xf)
 		g_citizen_count--;
 	off = chosen * 0x21c;
 	grave = (char*) g_slot_table + off;
@@ -1429,15 +1426,15 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		 * the +0x24 and +0x28 stores (0x10011f0b).  Dividing by `(float) g`
 		 * rather than `g` gives `fdivr [mem]`; a plain variable divisor
 		 * gives `fld; fdiv st,st(1)` plus a trailing `fstp st(0)`. */
-		f = gm_RandomFloat01() * *(float*) 0x100257c8;
+		f = gm_RandomFloat01() * 4.0f;
 		*(int*) (grave + 0x18) = 0;
 		*(int*) (grave + 0x1c) = 0x447a0000; /* 1000.0f */
 		*(int*) (grave + 0x20) = 0;
 		*(int*) (grave + 0x24) = 0;
-		g = f + *(float*) 0x100257c4;
+		g = f + 8.0f;
 		*(unsigned short*) (grave + 0x28) = 0;
 		*(int*) (grave + 0x2c) = 0;
-		*(float*) (grave + 0x14) = *(float*) 0x10025680 / (float) g;
+		*(float*) (grave + 0x14) = 1000.0f / (float) g;
 		/* Index expressions inline, each call inside its store: the index
 		 * temporaries then rank below the strength-reduced n*0x300 (esi),
 		 * n itself stays on the stack and the zeros come from ebx, as at

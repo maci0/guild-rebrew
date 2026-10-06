@@ -23,7 +23,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 	}
 	memset(&list, 0, sizeof(list));
 	list.count = 0;
-	for (conn = (unsigned int*) 0x101deb00; (int) conn < 0x114ffe20; conn = (unsigned int*) ((char*) conn + 0x264264)) {
+	for (conn = (unsigned int*) g_connections; (int) conn < (int) g_connections + 0x1321320; conn = (unsigned int*) ((char*) conn + 0x264264)) {
 		if ((*conn & 1) == 0) continue;
 		if ((*conn & 0x200) == 0) continue;
 		list.ids[list.count] = conn[1];
@@ -71,7 +71,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 	} else {
 		*player &= ~0x800;
 	}
-	for (conn = (unsigned char*) 0x101deb00; (int) conn < 0x114ffe20; conn += 0x264264) {
+	for (conn = (unsigned char*) g_connections; (int) conn < (int) g_connections + 0x1321320; conn += 0x264264) {
 		if ((*(unsigned int *) conn & 1) == 0) continue;
 		if ((*(unsigned int *) conn & 0x200) == 0) continue;
 		result = cm_QueuePlayerCommand((unsigned int*) conn, msg);
@@ -118,8 +118,8 @@ int __cdecl lb_ExPlayerHasJoined(char* player, char* msg)
 
 join:
 	count = 0;
-	for (slot = (PlayerSlot*) 0x101deb00;
-	     (int) slot < 0x114ffe20;
+	for (slot = (PlayerSlot*) g_connections;
+	     (int) slot < (int) g_connections + 0x1321320;
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
 		flags = slot->flags;
 		if ((flags & 1) && (flags & 0x200) && !(flags & 0x2000)) {
@@ -137,17 +137,17 @@ join:
 	}
 
 	m14 = msg + 0x14;
-	slot = (PlayerSlot*) 0x101deb00;
+	slot = (PlayerSlot*) g_connections;
 	*(unsigned int*) (m14 + 4) = 0;
-	for (; (int) slot < 0x114ffe20;
+	for (; (int) slot < (int) g_connections + 0x1321320;
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
 		flags = slot->flags;
 		if ((flags & 1) && (flags & 0x200) && (char*) slot != player &&
 		    *(int*) ((char*) slot + 0x264218) == *(int*) (m14 + 0xc)) {
 			arr[0] = 0; arr[1] = 0; arr[2] = 0; arr[3] = 0;
 			arr[4] = 0; arr[5] = 0; arr[6] = 0; arr[7] = 0;
-			for (slot_cursor = arr, slot2 = (PlayerSlot*) 0x101deb00;
-			     (int) slot2 < 0x114ffe20;
+			for (slot_cursor = arr, slot2 = (PlayerSlot*) g_connections;
+			     (int) slot2 < (int) g_connections + 0x1321320;
 			     slot2 = (PlayerSlot*) ((char*) slot2 + 0x264264), slot_cursor++) {
 				flags = slot2->flags;
 				if ((flags & 1) && (flags & 0x200) && (char*) slot2 != player) {
@@ -178,8 +178,8 @@ join:
 	sprintf(buf, "lb_ExPlayerHasJoined: before <<srv_PutConnSCommand>>: %i", *(unsigned int*) player);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2e7, buf, 1);
 
-	for (slot = (PlayerSlot*) 0x101deb00;
-	     (int) slot < 0x114ffe20;
+	for (slot = (PlayerSlot*) g_connections;
+	     (int) slot < (int) g_connections + 0x1321320;
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
 		flags = slot->flags;
 		if ((flags & 1) && (flags & 0x200)) {
@@ -222,8 +222,8 @@ int __cdecl lb_BroadcastStateChange(unsigned int* a, unsigned int* b, unsigned c
 		*(unsigned int*) ((char*) b + 0x18) = 0;
 	}
 
-	for (conn = (unsigned int*) 0x101deb00;
-	     (int) conn < 0x114ffe20;
+	for (conn = (unsigned int*) g_connections;
+	     (int) conn < (int) g_connections + 0x1321320;
 	     conn = (unsigned int*) ((char*) conn + 0x264264)) {
 		status = *conn;
 		if ((status & 1) && (status & 0x200)) {
@@ -254,7 +254,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 		result = cm_QueuePlayerCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
-	for (conn = (unsigned char*) 0x101deb00; (int) conn < 0x114ffe20;
+	for (conn = (unsigned char*) g_connections; (int) conn < (int) g_connections + 0x1321320;
 	     conn += 0x264264) {
 		if ((*(unsigned int*) conn & 1) == 0) continue;
 		if ((*(unsigned int*) conn & 0x200) == 0) continue;
@@ -266,7 +266,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 	}
 	*(int*) (rec + 4) = *(int*) ((char*) player + 0x264210);
 	memcpy((char*) player + 0x26420c, rec, 0x57);
-	for (conn = (unsigned char*) 0x101deb00; (int) conn < 0x114ffe20;
+	for (conn = (unsigned char*) g_connections; (int) conn < (int) g_connections + 0x1321320;
 	     conn += 0x264264) {
 		if ((*(unsigned int*) conn & 1) == 0) continue;
 		if ((*(unsigned int*) conn & 0x200) == 0) continue;
@@ -309,12 +309,12 @@ int __cdecl lb_HandleEntitySync(int player, int msg)
 	 * `do/while` gives the single-compare loop with the `jl` back-edge. */
 	message = (char*) msg;
 	i = 0;
-	tab = 0x101deb04;
+	tab = (int) g_connections + 4;
 	eid = *(int*) (message + 0x14);
 	dst = message + 0x14;
-	while (tab < 0x114ffe24) {
+	while (tab < (int) g_connections + 0x1321324) {
 		if (*(int*) tab == eid) {
-			memcpy(dst, (void*) (0x10442d0c + (unsigned int) i * 0x264264), 0x57);
+			memcpy(dst, (void*) ((int) g_connections + 0x26420c + (unsigned int) i * 0x264264), 0x57);
 			return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) message) == -1) ? -1 : 0;
 		}
 		tab += 0x264264;
@@ -335,14 +335,14 @@ int __cdecl cm_RouteCommand(unsigned int* player, unsigned char* msg)
 		return (cm_QueuePlayerCommand(player, msg) + 1 == 0) ? -1 : 0;
 	}
 	if (*(unsigned int*) (msg + 0x18) != 0) {
-		for (i = 0, conn = (unsigned int*) 0x101deb04; (int) conn < 0x114ffe24;
+		for (i = 0, conn = (unsigned int*) (g_connections + 4); (int) conn < (int) g_connections + 0x1321324;
 		     conn = (unsigned int*) ((char*) conn + 0x264264), i++) {
 			if (*conn == *(unsigned int*) (msg + 0x18)) {
 				if (cm_QueuePlayerCommand(
-				        (unsigned int*) ((char*) 0x101deb00 + i * 0x264264), msg)
+				        (unsigned int*) ((char*) g_connections + i * 0x264264), msg)
 				    == -1)
 					return -1;
-				if (*(unsigned int*) ((char*) 0x101deb04 + i * 0x264264)
+				if (*(unsigned int*) ((char*) g_connections + 4 + i * 0x264264)
 				        != *(unsigned int*) ((char*) player + 4)
 				    && cm_QueuePlayerCommand(player, msg) == -1)
 					return -1;
@@ -352,7 +352,7 @@ int __cdecl cm_RouteCommand(unsigned int* player, unsigned char* msg)
 		*msg = 2;
 		return (cm_QueuePlayerCommand(player, msg) + 1 == 0) ? -1 : 0;
 	}
-	for (conn = (unsigned int*) 0x101deb00; (int) conn < 0x114ffe20;
+	for (conn = (unsigned int*) g_connections; (int) conn < (int) g_connections + 0x1321320;
 	     conn = (unsigned int*) ((char*) conn + 0x264264)) {
 		if ((*conn & 1) == 0)
 			continue;

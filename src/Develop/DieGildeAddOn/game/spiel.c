@@ -154,9 +154,9 @@ unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 
 char* __cdecl gm_FindEntityByOwner(int); 
 
-#define PTR_10035A10(idx) (*(unsigned char***) (((idx) * 0x21c) + 0x10035a10))
-#define BYTE_100358A2(idx) (*(unsigned char*) (((idx) * 0x21c) + 0x100358a2))
-#define DWORD_100358A4(idx) (*(unsigned int*) (((idx) * 0x21c) + 0x100358a4))
+#define PTR_10035A10(idx) (*(unsigned char***) (((idx) * 0x21c) + ((int) g_slot_table + 0x170)))
+#define BYTE_100358A2(idx) (*(unsigned char*) (((idx) * 0x21c) + ((int) g_slot_table + 2)))
+#define DWORD_100358A4(idx) (*(unsigned int*) (((idx) * 0x21c) + ((int) g_slot_table + 4)))
 
 extern int g_query_limit;              
 
@@ -653,7 +653,7 @@ void __cdecl gm_InitObjektHersteller(void)
 
 					ent_idx = entry & 0x7fff;
 					mfr_start = *(unsigned char*) (g_item_def_table + (ent_idx << 6) + ent_idx + 0x21);
-					mfr_start = *(int*) (mfr_start * 4 + 0x10139820);
+					mfr_start = *(int*) (mfr_start * 4 + (int) g_manufacturer_types);
 
 					mfr_record = record_base + mfr_start * 0x24d;
 					mfr_type_alias = &mfr_type;
@@ -678,7 +678,7 @@ void __cdecl gm_InitObjektHersteller(void)
 					}
 
 					mfr_start += (consec * same_count) / run_length;
-					new_val = *(int*) (ent_idx * 4 + 0x101dd8e0);
+					new_val = *(int*) (ent_idx * 4 + (int) g_minimum_manufacturer);
 					if (mfr_start < new_val) {
 						*(int*) (ent_idx * 4 + 0x101dd8e0) = mfr_start;
 					}
@@ -704,11 +704,11 @@ void __cdecl gm_InitObjektHersteller(void)
 
 		do {
 			if (*min_ptr == 0x58) {
-				*min_ptr = *(int*) (*type_ptr * 4 + 0x10139820);
+				*min_ptr = *(int*) (*type_ptr * 4 + (int) g_manufacturer_types);
 			}
 			min_ptr++;
 			type_ptr += 0x41;
-		} while ((int) min_ptr < 0x101de450);
+		} while ((int) min_ptr < (int) ((char*) &g_minimum_manufacturer + 0xb70));
 	}
 }
 
@@ -767,7 +767,7 @@ void __cdecl gm_InitObjektHersteller(void)
 
 int __cdecl gm_Open(int map_id)
 {
-	unsigned int* src_player_ptr;
+	unsigned int* src_player_ptr; extern char s_gzip_mode_rb[];
 	unsigned int* dst_player_ptr;
 	unsigned int player_field;
 	FILE* file_handle;
@@ -782,11 +782,11 @@ int __cdecl gm_Open(int map_id)
 	char* def_row;
 	char* cat_p;
 
-	LogMessageInternal((char*) 0x10031004, 0x4d3, "gm_Open(): enter", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d3, "gm_Open(): enter", 1);
 	/* 0x10031204 is "gm_Open(): St\344dte" (Latin-1 a-umlaut, byte 0xe4).  The
 	   text sits in a relocation slot, so a wrong string still scores RELOC;
 	   see docs/msvc6-c-shapes.md section 36. */
-	LogMessageInternal((char*) 0x10031004, 0x4d6, "gm_Open(): St\344dte", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d6, "gm_Open(): St\344dte", 1);
 	src_player_ptr = (unsigned int*) &g_player_record_src;
 	dst_player_ptr = (unsigned int*) &g_player_record_dst;
 	do {
@@ -802,12 +802,12 @@ int __cdecl gm_Open(int map_id)
 		memcpy((void*) copy_dst, (void*) &g_producer_id_table, 0x2a80);
 		src_player_ptr = src_player_ptr + 0xbd;
 		dst_player_ptr = dst_player_ptr + 0xaa4;
-	} while ((int) src_player_ptr < (int) 0x100a9bbc);
+	} while ((int) src_player_ptr < (int) ((char*) &g_player_record_src + 0xec4));
 	/* 0x100311f0 is "gm_Open(): Geb\344ude" (Latin-1 a-umlaut, byte 0xe4). */
-	LogMessageInternal((char*) 0x10031004, 0x4e3, "gm_Open(): Geb\344ude", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e3, "gm_Open(): Geb\344ude", 1);
 	g_entity_type_table = (char*) m_AllocTracked(0xca78, "f3_gm:lpGebaeudePROT");
 	if (g_entity_type_table == 0) {
-		LogMessageInternal((char*) 0x10031004, 0x4e8, "Memory could not be allocated!", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e8, "Memory could not be allocated!", 1);
 		return -1;
 	}
 	g_entity_ptr = (unsigned char*) m_AllocTracked(0xa900, "f3_gm:lpGebaeudeINST");
@@ -816,9 +816,9 @@ int __cdecl gm_Open(int map_id)
 		return -2;
 	}
 	sprintf((char*) path_buf, "%s%s", map_id, "A_Geb.dat");
-	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
+	file_handle = fopen((char*) path_buf, s_gzip_mode_rb);
 	if (file_handle == 0) {
-		LogMessageInternal((char*) 0x10031004, 0x4f5, "Geb\344ude-Daten konnten nicht geladen werden! (A_Geb.dat)", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4f5, "Geb\344ude-Daten konnten nicht geladen werden! (A_Geb.dat)", 1);
 		return -3;
 	}
 	fread((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
@@ -833,10 +833,10 @@ int __cdecl gm_Open(int map_id)
 	}
 	memset((void*) g_query_base, 0, 0x14f218);
 	sprintf((char*) path_buf, "%s%s", map_id, "A_Obj.dat");
-	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
+	file_handle = fopen((char*) path_buf, s_gzip_mode_rb);
 	if (file_handle == 0) {
 		LogMessageInternal(
-			(char*) 0x10031004,
+			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
 			0x52d,
 			"Objekt-Daten konnten nicht geladen werden! (A_Obj.dat)",
 			1
@@ -845,15 +845,15 @@ int __cdecl gm_Open(int map_id)
 	}
 	fread((void*) g_item_def_table, 0x41, 0x2dc, file_handle);
 	fclose(file_handle);
-	LogMessageInternal((char*) 0x10031004, 0x536, "gm_Open(): gm_InitObjektHersteller", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x536, "gm_Open(): gm_InitObjektHersteller", 1);
 	/* Called through a pointer: with the callee defined earlier in this TU a direct
 	 * call lets the compiler use its register summary and gm_Open sheds ebx
 	 * (859 vs 861 bytes); the reference does not. */
 	((void (__cdecl*)(void)) gm_InitObjektHersteller)();
-	LogMessageInternal((char*) 0x10031004, 0x53a, "gm_Open(): gm_KillAllSpieler", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x53a, "gm_Open(): gm_KillAllSpieler", 1);
 	gm_InitEntitySlots();
 	LogMessageInternal(
-		(char*) 0x10031004,
+		"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
 		0x53e,
 		"gm_Open(): ---- Das dusselige Datendesign hinbiegen !! -----",
 		1
@@ -886,7 +886,7 @@ int __cdecl gm_Open(int map_id)
 	/* Original seeds the RNG from the system timer before the exit log
 	 * (fcn.1001a140 = srand(timeGetTime())). */
 	srv_SeedRandomWithTime();
-	LogMessageInternal((char*) 0x10031004, 0x588, "gm_Open(): exit", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x588, "gm_Open(): exit", 1);
 	return 0;
 }
 
@@ -1172,8 +1172,8 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 	int i;
 
 	for (i = 0; i < 0x55; i++) {
-		if (*(unsigned short*) (0x1009b770 + arg1 * 0x2a90 + i * 0x80) == arg2) {
-			return (char*) (0x1009b770 + arg1 * 0x2a90 + i * 0x80);
+		if (*(unsigned short*) ((int) g_entity_end + 0x10 + arg1 * 0x2a90 + i * 0x80) == arg2) {
+			return (char*) ((int) g_entity_end + 0x10 + arg1 * 0x2a90 + i * 0x80);
 		}
 	}
 	return 0;
@@ -2038,7 +2038,7 @@ cleanup_loop:
 			*entity_scan = 0;
 		}
 		entity_scan = entity_scan + 0x87;
-	} while ((int) entity_scan < 0x1009ae0c);
+	} while ((int) entity_scan < (int) ((char*) &g_entity_records + 0x65400));
 	if (*(int*) (building + 0x5d) != 0) {
 		gm_FreeObjectListRecursive((char**) (building + 0x5d));
 	}
@@ -2090,7 +2090,7 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 			}
 		}
 		table_ptr = table_ptr + 0x15;
-	} while ((int) table_ptr < 0x10030b6a);
+	} while ((int) table_ptr < (int) ((char*) g_building_defaults + 0x30a));
 }
 
 /* Sets worker limits for a building based on its type and
@@ -2655,7 +2655,7 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 			}
 			prod += 0x80;
 			slot += 0x80;
-		} while ((int) prod < 0x10030860);
+		} while ((int) prod < (int) ((char*) &g_producer_id_table + 0x2a80));
 	}
 
 	return obj;
@@ -2730,7 +2730,7 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 				base_cursor++;
 			}
 			base = (int*) ((char*) base + 0x21c);
-		} while ((int) base < 0x1009acfc);
+		} while ((int) base < (int) ((char*) &g_entity_ref_table + 0x65400));
 		memset(entity, 0, 0x21c);
 		*(unsigned short*) entity = 0xffff;
 		*(int*) ((char*) &g_entity_id_field + index * 0x21c) = -1;
@@ -3086,11 +3086,11 @@ int __cdecl gm_LookupEntityRecordById(int search_id)
 	char* base_cursor;
 	int i;
 	i = 0;
-	base_cursor = (char*) 0x100358A4;
-	while ((int) base_cursor < (int) 0x1009ACA4) {
+	base_cursor = (char*) &g_entity_id_field;
+	while ((int) base_cursor < (int) ((char*) &g_entity_id_field + 0x65400)) {
 		if (*(unsigned short*) (base_cursor - 4) != 0xFFFF) {
 			if (*(int*) base_cursor == search_id) {
-				return i * 0x21C + 0x100358A0;
+				return i * 0x21C + (int) g_slot_table;
 			}
 		}
 		base_cursor += 0x21C;
@@ -3210,12 +3210,12 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 	memcpy((char*) &g_slot_table + chain * 0x21c, rec_a, 0x21c);
 	memcpy((char*) &g_slot_table + to_slot * 0x21c, rec_b, 0x21c);
 
-	obj = *(char**) ((char*) 0x10035a18 + chain * 0x21c);
+	obj = *(char**) ((char*) g_slot_table + 0x178 + chain * 0x21c);
 	while (obj != NULL) {
 		*(int*) (obj + 6) = *(int*) ((char*) &g_entity_id_field + chain * 0x21c);
 		obj = *(char**) (obj + 0x3f);
 	}
-	obj = *(char**) ((char*) 0x10035a18 + to_slot * 0x21c);
+	obj = *(char**) ((char*) g_slot_table + 0x178 + to_slot * 0x21c);
 	while (obj != NULL) {
 		*(int*) (obj + 6) = *(int*) ((char*) &g_entity_id_field + to_slot * 0x21c);
 		obj = *(char**) (obj + 0x3f);
@@ -3264,7 +3264,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 #pragma intrinsic(memcpy, memset, strlen, strcpy)
 unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, int arg4, int location, int arg6, int arg7, int arg8)
 {
-	char* slot;
+	char* slot; extern const float g_player_trait_ranges[];
 	char* mother;
 	char* father;
 	char work[0x400];
@@ -3305,7 +3305,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 		g_citizen_count--;
 	}
 	if (idx == 0x300) {
-		LogMessageInternal((char*) 0x10031004, 0x2614,
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x2614,
 		                   "gm_AllocSpieler: array overflow...", 1);
 		return 0xffff;
 	}
@@ -3355,7 +3355,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 	slot[0x217] = 0;
 	slot[0x218] = 1;
 	sprintf(work, "----->SpID= %i playermode= %i", g_next_object_id, type);
-	LogMessageInternal((char*) 0x10031004, 0x2637, work, 8);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x2637, work, 8);
 	*(int*) (slot + 4) = g_next_object_id;
 	g_next_object_id++;
 	*(int*) (slot + 0x1e4) = 0x3f800000; /* 1.0f */
@@ -3516,7 +3516,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 		}
 		/* 14-iteration trait interpolation from the trait table */
 		dst = (float*) (slot + 0x88);
-		src = (float*) (0x10025818 + n * 0x70);
+		src = (float*) ((int) g_player_trait_ranges + n * 0x70);
 		for (i = 0xe; i != 0; i--) {
 			dst[0] = (float) (gm_RandomFloat01() * (double) (src[1] - src[0]) +
 			                  src[0]);
@@ -3587,7 +3587,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 			 * the increment. */
 			n = gm_CurrentHumanFamilyCount;
 			if (n >= 0x10) {
-				LogMessageInternal((char*) 0x10031004, 0x27f0,
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x27f0,
 				                   "gm_AllocSpieler(): gm_CurrentHumanFamilyCount overflow", 1);
 				return 0xffff;
 			}
@@ -3838,11 +3838,11 @@ draw_tail:
 		*stat = (char) (*stat + 0x2a);
 	}
 	if (idx == 0xffff) {
-		LogMessageInternal((char*) 0x10031004, 0x286c, "gm_AllocSpieler: bug",
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x286c, "gm_AllocSpieler: bug",
 		                   1);
 	}
 	sprintf(work, "----->PlayerID= %i PlayerName= %s", g_next_object_id, slot + 0x30);
-	LogMessageInternal((char*) 0x10031004, 0x2888, work, 8);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x2888, work, 8);
 	return idx;
 }
 
@@ -3867,7 +3867,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 #pragma optimize("a", on)
 double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 {
-	char* entity;
+	char* entity; extern char g_minimum_manufacturer[];
 	char* record;
 	float value;
 	double quot;
@@ -3921,7 +3921,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	divisor_ptr = &divisor;
 	quot = quot / *divisor_ptr;
 	quot_f = (float) quot;
-	min_val = *(int*) (entity_index * 4 + 0x101dd8e0);
+	min_val = *(int*) (entity_index * 4 + (int) g_minimum_manufacturer);
 	record = g_entity_type_table + min_val * 0x24d;
 	if (min_val != 0) {
 		mod_value = g_const_0_0;
@@ -3930,7 +3930,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 			mod_value = (float) ((double) weight * g_const_896_0 * g_const_1_over_720 + mod_value);
 		}
 	} else {
-		mod_value = g_graveyard_const_c;
+		mod_value = 4.0f;
 	}
 	/* The quotient is scaled in place as a float register variable that
 	   is its own destination, as the composite loop does with `mod_value`:
@@ -4214,7 +4214,7 @@ int __cdecl gm_WalkEntityChain(unsigned short raw_idx)
 	if (idx >= 0x300) {
 		return -1;
 	}
-	slot = (unsigned int) idx * 0x21c + 0x100358a0;
+	slot = (unsigned int) idx * 0x21c + (unsigned int) g_slot_table;
 	if (*(unsigned short*) slot == 0xFFFF) {
 		return -1;
 	}
@@ -4250,12 +4250,12 @@ char* __cdecl gm_FindEntityByOwner(int arg1)
 		return record;
 	}
 	i = 0;
-	record_cursor = 0x100358a2;
-	while (record_cursor < 0x1009aca2) {
+	record_cursor = (int) g_slot_table + 2;
+	while (record_cursor < (int) g_slot_table + 0x65402) {
 		if (*(char*) (record_cursor + 0x162) != 0 && *(int*) (record_cursor + 0x16a) == arg1) {
 			if (*(char*) record_cursor == 6 || *(char*) record_cursor == 7 || *(char*) record_cursor == 1 ||
 			    *(char*) record_cursor == 2) {
-				record = (char*) (0x100358a0 + i * 0x21c);
+				record = (char*) ((int) g_slot_table + i * 0x21c);
 				break;
 			}
 		}

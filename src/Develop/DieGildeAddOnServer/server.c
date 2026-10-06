@@ -819,7 +819,7 @@ int __cdecl srv_CreateListenSocket(int port)
 			*(int*) ((char*) slot_walk - 0x14) = 0;
 			*slot_walk = 0xFFFFFFFF;
 			slot_walk = (unsigned int*) ((char*) slot_walk + 0x264264);
-		} while ((int) slot_walk < 0x114ffe34);
+		} while ((int) slot_walk < (int) ((char*) &g_player_slot_field + 0x1321320));
 	}
 
 	WSAStartup(0x101, (WSADATA*) wsadata);
@@ -894,8 +894,8 @@ cleanup_wsa:
 void __cdecl srv_CleanupSockets(void)
 {
 	int slot_walk;
-	slot_walk = 0x101deb14;
-	while (slot_walk < 0x114ffe34) {
+	slot_walk = (int) &g_player_slot_field;
+	while (slot_walk < (int) ((char*) &g_player_slot_field + 0x1321320)) {
 		if (*(int*) (slot_walk - 0x14)) {
 			shutdown(*(int*) slot_walk, 2);
 			closesocket(*(int*) slot_walk);
@@ -962,13 +962,13 @@ int __cdecl srv_AcceptConnections(void)
 		return -1;
 
 	i = 0;
-	slot_walk = 0x101deb00;
+	slot_walk = (int) g_connections;
 	while (1) {
 		if (*(int*) slot_walk == 0)
 			break;
 		slot_walk += 0x264264;
 		i++;
-		if (slot_walk >= 0x114ffe20)
+		if (slot_walk >= (int) g_connections + 0x1321320)
 			goto no_slots;
 	}
 	slot = (unsigned char*) &g_connections + i * 0x264264;
@@ -1081,7 +1081,7 @@ int __cdecl srv_ReceivePacketHeader(unsigned int* conn)
 		return 0;
 
 	state = *(unsigned short*) ((char*) conn + 0x14a);
-	recv_fn = (int (__stdcall*)(unsigned int, char*, int, int)) * (void**) 0x10024168;
+	recv_fn = (int (__stdcall*)(unsigned int, char*, int, int)) recv;
 	if (state < 3) {
 		n = recv_fn(*(unsigned int*) ((char*) conn + 0x14),
 			    (char*) conn + 0x18 + *(unsigned short*) ((char*) conn + 0x14a),
@@ -1383,7 +1383,7 @@ int __cdecl ProcessSendData(void)
 			}
 		}
 		slot_cursor += 0x264264;
-	} while ((int) slot_cursor < 0x114ffe20);
+	} while ((int) slot_cursor < (int) g_connections + 0x1321320);
 	return 0;
 }
 #pragma optimize("", on)
@@ -1509,7 +1509,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 	unsigned char t2;
 
 	(void) a;
-	for (tab = (char*) 0x10442cf0; (int) tab < 0x11764010; tab += 0x264264) {
+	for (tab = (char*) g_connections + 0x2641f0; (int) tab < (int) g_connections + 0x1585510; tab += 0x264264) {
 		pkt = *(char**) tab;
 		held = 0;
 		while (pkt != 0) {
@@ -1558,7 +1558,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 				if (g_dispatch_table[*(unsigned char*) pkt](pkt, 0) == 0) {
 				if (*(unsigned char*) pkt == 0x20 && *(unsigned char*) (pkt + 0x10) == 0xe) {
 					slot = (char*) g_connections + (unsigned int) *(unsigned char*) (pkt + 3) * 0x264264;
-					memcpy((char*) 0x10442c54 + (unsigned int) *(unsigned char*) (pkt + 3) * 0x264264, pkt, 0x99);
+					memcpy((char*) g_connections + 0x264154 + (unsigned int) *(unsigned char*) (pkt + 3) * 0x264264, pkt, 0x99);
 					goto advance;
 				}
 				t2 = ((unsigned char*) g_connections)[(unsigned int) *(unsigned char*) (pkt + 3) * 0x264264];
@@ -1580,7 +1580,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 					}
 					slot += 0x264264;
 					i++;
-				} while ((int) slot < 0x114ffe20);
+				} while ((int) slot < (int) g_connections + 0x1321320);
 				goto advance;
 				}
 			queued:

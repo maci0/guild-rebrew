@@ -24,7 +24,7 @@ g_type_adjustments_count
 g_type_adjustments_secondary
 g_type_adjustments_secondary_count
 g_type_multipliers
-g_graveyard_const_a
+_real@4@4008fa00000000000000
 g_const_2
 _real@8@4008fa00000000000000
 _real@8@00000000000000000000
@@ -55,8 +55,8 @@ g_field_worker_count_wt2
 g_field_worker_count_wt3
 g_const_42_0
 g_const_21_0
-g_graveyard_const_b
-g_graveyard_const_c
+_real@4@40028000000000000000
+_real@4@40018000000000000000
 g_const_half
 _real@8@3fff8000000000000000
 g_interval_values

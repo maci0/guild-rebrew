@@ -865,13 +865,13 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	building_id = *(int*) (cmd_payload + 8);
 	gm_ResolveEntityById(&dynamic, 0, 0, building_id);
 	if (dynamic == 0) {
-		LogMessageInternal((char*) 0x1002a10c, 0x449, (char*) 0x1002a19c, 1);
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_al, 0x449, s_ahm_ExAllocAlchemist__cant_find, 1);
 		return 0xffff;
 	}
 
 	building_type = (unsigned char) *(char*) dynamic;
 	if (*((char*) (g_entity_type_table + building_type + building_type * 0x24c)) != 0x1e) {
-		LogMessageInternal((char*) 0x1002a10c, 0x451, (char*) 0x1002a168, 1);
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_al, 0x451, s_ahm_ExAllocAlchemist__wrong_type, 1);
 		goto ret_false;
 	}
 
@@ -885,7 +885,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 				break;
 		}
 		if (slot_index == 0x300) {
-			LogMessageInternal((char*) 0x1002a10c, 0x45d, (char*) 0x1002a140, 1);
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_al, 0x45d, s_ahm_ExAllocAlchemist__array_over, 1);
 			ret_false:
 			return 0xffff;
 		}
@@ -1291,7 +1291,7 @@ char* __cdecl ahm_InitRandomEntity(void)
 	idx = gm_RandomMod(0x20) & 0xffff;
 	counter = 0x20;
 	while (counter != 0) {
-		if (*(unsigned char*) (0x1002a2c2 + idx * 244) == 0)
+		if (*(unsigned char*) ((unsigned int) g_alchemy_random_table + 0xf6 + idx * 244) == 0)
 			goto found;
 		counter--;
 		idx = (idx + 1) & 0x1f;
@@ -1299,7 +1299,7 @@ char* __cdecl ahm_InitRandomEntity(void)
 	return 0;
 found:
 	off = idx * 244;
-	table_cursor = (float*) (0x1002a200 + off);
+	table_cursor = (float*) ((unsigned int) g_alchemy_random_table + 0x34 + off);
 	n = 0xe;
 	do {
 		/* volatile pins the store right after the multiply; without it
@@ -1308,8 +1308,8 @@ found:
 		table_cursor += 3;
 		n--;
 	} while (n != 0);
-	*(unsigned char*) (0x1002a2c2 + off) = 1;
-	return (char*) (0x1002a1d0 + off);
+	*(unsigned char*) ((unsigned int) g_alchemy_random_table + 0xf6 + off) = 1;
+	return (char*) ((unsigned int) g_alchemy_random_table + 4 + off);
 }
 
 
@@ -1583,7 +1583,7 @@ int __cdecl gm_GetFieldByType(char* p, int type)
 		i += byte_value;
 		i <<= 4;
 		i += byte_value;
-		return ((int*) 0x10442d00)[i * 9];
+		return ((int*) (g_connections + 0x264200))[i * 9];
 	}
 	if (type == -3) {
 		byte_value = (unsigned char) p[3];
@@ -1593,7 +1593,7 @@ int __cdecl gm_GetFieldByType(char* p, int type)
 		i += byte_value;
 		i <<= 4;
 		i += byte_value;
-		return ((int*) 0x10442d04)[i * 9];
+		return ((int*) (g_connections + 0x264204))[i * 9];
 	}
 	if (type == -4) {
 		byte_value = (unsigned char) p[3];
@@ -1603,7 +1603,7 @@ int __cdecl gm_GetFieldByType(char* p, int type)
 		i += byte_value;
 		i <<= 4;
 		i += byte_value;
-		return ((int*) 0x10442d08)[i * 9];
+		return ((int*) (g_connections + 0x264208))[i * 9];
 	}
 	return type;
 }

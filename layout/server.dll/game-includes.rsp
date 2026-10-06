@@ -287,9 +287,6 @@
 /INCLUDE:_g_field_worker_count_wt2
 /INCLUDE:_g_field_worker_count_wt3
 /INCLUDE:_g_game_speed_table
-/INCLUDE:_g_graveyard_const_a
-/INCLUDE:_g_graveyard_const_b
-/INCLUDE:_g_graveyard_const_c
 /INCLUDE:_g_interval_values
 /INCLUDE:_g_output_adjustments
 /INCLUDE:_g_output_share

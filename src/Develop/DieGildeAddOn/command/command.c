@@ -427,7 +427,7 @@ int __cdecl cm_ChkSellObjekt(char* cmd)
 		if (t_c) {
 			slot_index = *(unsigned short *) (t_c + 0x27);
 			if (slot_index != 0xffff) {
-				list_head = (char *) (0x100358a0 + slot_index * 0x21c);
+				list_head = (char *) ((int) g_slot_table + slot_index * 0x21c);
 			} else {
 				list_head = 0;
 			}
@@ -694,7 +694,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 		if (query_result == 0) return 1;
 		slot_index = *(unsigned short *) (query_result + 0x27);
 		if (slot_index != 0xffff) {
-			rec = (char *) (0x100358a0 + slot_index * 0x21c);
+			rec = (char *) ((int) g_slot_table + slot_index * 0x21c);
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) g_entity_table_end) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;
@@ -3010,7 +3010,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 			*slot_scan = 0;
 		}
 		slot_scan = slot_scan + 0x87;
-	} while ((int) slot_scan < 0x1009ae0c);
+	} while ((int) slot_scan < (int) ((char*) &g_entity_records + 0x65400));
 
 	gm_CleanupBuildingEntity((uchar*) building);
 
@@ -3449,7 +3449,7 @@ int __cdecl cm_ExJoinLeaveElection(int cmd, char* result)
 		if (query_result == 0) return 1;
 		slot_index = *(unsigned short *) (query_result + 0x27);
 		if (slot_index != 0xffff) {
-			rec = (char *) (0x100358a0 + slot_index * 0x21c);
+			rec = (char *) ((int) g_slot_table + slot_index * 0x21c);
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) g_entity_table_end) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;

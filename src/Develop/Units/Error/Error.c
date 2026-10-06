@@ -720,7 +720,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 				fclose(file);
 			}
 			string_cursor += 0x20;
-		} while ((int) string_cursor < 0x100270e4);
+		} while ((int) string_cursor < (int) ((char*) &g_log_format_table + 0x60));
 	}
 	if (g_log_mode_flags & 8) {
 		AllocConsole();
@@ -730,7 +730,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	do {
 		DispatchLogOutput((char*) &g_log_message_buffer, g_log_mode_flags, *(int*) string_cursor);
 		string_cursor += 4;
-	} while ((int) string_cursor < 0x10027084);
+	} while ((int) string_cursor < (int) ((char*) &g_log_level_table + 0xc));
 }
 
 void __cdecl ShutdownLogAndErrorHandler(void)

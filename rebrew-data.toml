@@ -1668,11 +1668,11 @@ type = "const float"
 status = "EXACT"
 section = ".rdata"
 size = 4
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T07:00:24+00:00"
 storage_kind = "literal"
 link_symbol = "__real@4@4008fa00000000000000"
-file = "src/link_stubs.c"
+file = "src/Develop/DieGildeAddOn/game/friedhof_logic.c"
 marker_type = "DATA"
 
 ["SERVER.0x10025680".verification]
@@ -1687,11 +1687,11 @@ type = "const float"
 status = "EXACT"
 section = ".rdata"
 size = 4
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T07:00:24+00:00"
 storage_kind = "literal"
 link_symbol = "__real@4@40028000000000000000"
-file = "src/link_stubs.c"
+file = "src/Develop/DieGildeAddOn/game/friedhof_logic.c"
 marker_type = "DATA"
 
 ["SERVER.0x100257c4".verification]
@@ -1706,11 +1706,11 @@ type = "const float"
 status = "EXACT"
 section = ".rdata"
 size = 4
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T07:00:24+00:00"
 storage_kind = "literal"
 link_symbol = "__real@4@40018000000000000000"
-file = "src/link_stubs.c"
+file = "src/Develop/DieGildeAddOn/game/friedhof_logic.c"
 marker_type = "DATA"
 
 ["SERVER.0x100257c8".verification]
