@@ -1,10 +1,10 @@
 /* Game constants in their original readonly order. */
 
-/* The 1000/30/8/4 float labels below describe compiler literal COMDATs.
- * Game readers use the matching literal spellings; these extern declarations
- * retain the inventory labels without defining duplicate readonly storage. */
-/* The double zero and one labels also describe compiler literal COMDATs.
- * Game and stock CRT readers share those native pool definitions. */
+/* 0x100256a0 and 0x100256ac..0x100256c8 are ahm_ExAllocAlchemist's float
+ * literal pool (alchemistry_logic.c); readers spell the literals and
+ * common-data-order.txt places the __real@4 COMDATs between these
+ * definitions. The double zero and one labels are literal COMDATs too,
+ * shared by game and stock CRT readers. */
 
 __declspec(selectany) const float g_graveyard_const_a = 1000.0f;
 
@@ -13,27 +13,9 @@ __declspec(selectany) const double g_const_2 = 2.0;
 
 extern const double _g_stat_min_d;
 
-__declspec(selectany) const float g_const_1_0f = 1.0f;
-
 __declspec(selectany) const float g_color_scale = 252.0f;
 
 __declspec(selectany) const float g_const_neg_1_0 = -1.0f;
-
-__declspec(selectany) const float g_const_1_over_252 = 0.003968254197388887f;
-
-__declspec(selectany) const float g_const_0_5 = 0.5f;
-
-__declspec(selectany) const float g_const_0_1 = 0.10000000149011612f;
-
-__declspec(selectany) const float g_const_0_33 = 0.33000001311302185f;
-
-__declspec(selectany) const float g_const_0_2f = 0.20000000298023224f;
-
-__declspec(selectany) const float g_const_2f = 2.0f;
-
-__declspec(selectany) const float g_const_30 = 30.0f;
-
-__declspec(selectany) const float g_const_7 = 7.0f;
 
 __declspec(selectany) const float g_const_0_0 = 0.0f;
 

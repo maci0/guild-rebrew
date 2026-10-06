@@ -208,12 +208,6 @@ struct traits5 {
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 
-extern const float g_const_1_0f;  
-extern const float g_const_0_5;  
-extern const float g_const_0_1;  
-extern const float g_const_0_33;  
-extern const float g_const_30;  
-extern const float g_const_7;  
 extern const float g_const_0_25; 
 
 extern unsigned char g_stat_table[780]; 
@@ -3398,20 +3392,20 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 			*(struct traits5*) (slot + 0x80) = *(struct traits5*) (ent + 0x24);
 			memcpy(slot + 0x88, ent + 0x2c, 0xa8);
 			*(float*) (slot + 0x1d0) =
-			    (float) (gm_RandomFloat01() * g_const_0_5) +
+			    (float) ((float) gm_RandomFloat01() * 0.5f) +
 			    g_const_0_25;
 			n = g_next_family_index;
 			*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 			*(unsigned short*) (slot + 0x50) = (unsigned short) n;
 			g_next_family_index = n + 1;
-			blend = gm_RandomQuadratic() * g_const_7;
+			blend = gm_RandomQuadratic() * 7.0f;
 			*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
-			*(float*) (slot + 0x14) = (float) blend + g_const_30;
+			*(float*) (slot + 0x14) = (float) blend + 30.0f;
 			*(float*) (slot + 0x10) =
-			    (float) ((double) *(float*) (slot + 0x1c) * g_const_0_33 +
+			    (float) ((double) (*(float*) (slot + 0x1c) * 0.33f) +
 			             (double) (unsigned short) gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
 			                                            g_const_0_2)) -
-			             (double) *(float*) (slot + 0x1c) * g_const_0_1);
+			             (double) (*(float*) (slot + 0x1c) * 0.1f));
 			*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
 			if (idx < 2) {
 				slot[0x217] = 0x58;
@@ -3426,8 +3420,8 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 				for (n = (int) (age - *(float*) (slot + 0x20)); n > 0; n--) {
 					acc = acc - decay_citizen + decay_citizen / acc;
 				}
-				if (acc <= g_const_1_0f) {
-					acc = g_const_1_0f;
+				if (acc <= 1.0f) {
+					acc = 1.0f;
 				}
 				*(float*) (slot + 0x1c) = acc;
 				return *(unsigned short*) slot;
@@ -3549,7 +3543,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 		}
 		slot[0xc] = (char) gm_RandomMod(2);
 		*(float*) (slot + 0x1d0) =
-		    (float) (gm_RandomFloat01() * g_const_0_5) +
+		    (float) ((float) gm_RandomFloat01() * 0.5f) +
 		    g_const_0_25;
 		/* Stat modifiers through the second draw belong to this path only:
 		 * the two-parent path's mutual block jumps past them to the shared
@@ -3609,14 +3603,14 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 		}
 		*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 		*(float*) (slot + 0x14) =
-		    (float) (gm_RandomQuadratic() * g_const_7) +
-		    g_const_30;
+		    (float) (gm_RandomQuadratic() * 7.0f) +
+		    30.0f;
 		*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
 		*(float*) (slot + 0x10) =
-		    (float) ((double) *(float*) (slot + 0x1c) * g_const_0_33 +
+		    (float) ((double) (*(float*) (slot + 0x1c) * 0.33f) +
 		             (double) (unsigned short) gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
 		                                            g_const_0_2)) -
-		             (double) *(float*) (slot + 0x1c) * g_const_0_1);
+		             (double) (*(float*) (slot + 0x1c) * 0.1f));
 		*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
 		/* first of two discarded gm_RandomMod(0x10) draws (0x1001956a); the
 		 * second, at draw_tail, is the one both paths reach */
@@ -3713,21 +3707,21 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 		weight = (float) gm_RandomFloat01();
 		if (i == best_father) {
 			slot[0x80 + i] = (char) (
-			    (double) *(unsigned char*) (father + 0x80 + i) *
-			    g_const_0_5);
+			    (double) (*(unsigned char*) (father + 0x80 + i) *
+			    0.5f));
 		} else if (i == best_mother) {
 			slot[0x80 + i] = (char) (
-			    (double) *(unsigned char*) (mother + 0x80 + i) *
-			    g_const_0_5);
+			    (double) (*(unsigned char*) (mother + 0x80 + i) *
+			    0.5f));
 		} else {
 			/* The father byte goes through an int with a memory home, which
 			 * is what makes msvc6 emit fimul (shapes 82); without the
 			 * (double) casts the mother term compiles to fild + fmul [weight]
 			 * and all three arms share the reference's tail fmul (0x10018f5e). */
 			*trait_home = *(unsigned char*) (father + 0x80 + i);
-			slot[0x80 + i] = (char) (((1.0 - weight) * trait_byte +
+			slot[0x80 + i] = (char) ((float) ((1.0 - weight) * trait_byte +
 			                          *(unsigned char*) (mother + 0x80 + i) * weight) *
-			                         g_const_0_5);
+			                         0.5f);
 		}
 	}
 	/* no gm_RandomMod(2) / gm_RandomFloat01 pair here: on the two-parent
@@ -3778,17 +3772,17 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 	}
 	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 	*(float*) (slot + 0x14) =
-	    (float) ((gm_RandomQuadratic() * g_const_7 +
-	              g_const_30) *
+	    (float) ((gm_RandomQuadratic() * 7.0f +
+	              30.0f) *
 	                 g_const_0_6 +
 	             (*(float*) (father + 0x14) + *(float*) (mother + 0x14)) *
 	                 g_const_0_2);
 	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
 	*(float*) (slot + 0x10) =
-	    (float) ((double) *(float*) (slot + 0x1c) * g_const_0_33 +
+	    (float) ((double) (*(float*) (slot + 0x1c) * 0.33f) +
 	             (double) (unsigned short) gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
 	                                            g_const_0_2)) -
-	             (double) *(float*) (slot + 0x1c) * g_const_0_1);
+	             (double) (*(float*) (slot + 0x1c) * 0.1f));
 	*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
 	/* Symmetric sympathy-matrix init: both [j][id] and [id][j].  The index
 	 * is written into each store rather than held in a local: msvc6 then
@@ -3828,8 +3822,8 @@ draw_tail:
 		for (n = (int) (age - *(float*) (slot + 0x20)); n > 0; n--) {
 			decay = decay - acc + acc / decay;
 		}
-		if (decay <= g_const_1_0f) {
-			decay = g_const_1_0f;
+		if (decay <= 1.0f) {
+			decay = 1.0f;
 		}
 		*(float*) (slot + 0x1c) = decay;
 	}
@@ -4531,11 +4525,8 @@ float __cdecl gm_RandomQuadratic(void)
 	float rand_val;
 
 	rand_val = (float) gm_RandomFloat01();
-	rand_val = (rand_val + rand_val) - g_const_1_0f;
-	if (rand_val < g_const_0_0) {
-		return g_const_neg_1_0 * rand_val * rand_val;
-	}
-	return g_const_1_0f * rand_val * rand_val;
+	rand_val = (rand_val + rand_val) - 1.0f;
+	return (rand_val < g_const_0_0 ? g_const_neg_1_0 : 1.0f) * rand_val * rand_val;
 }
 
 extern unsigned int g_player_record_dst;

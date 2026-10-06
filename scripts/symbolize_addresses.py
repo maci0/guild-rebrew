@@ -13,6 +13,7 @@ Needs build/server.dll and build/server.map from a current build.
 """
 
 import argparse
+import bisect
 import re
 import tomllib
 from pathlib import Path
@@ -46,7 +47,13 @@ def missing_targets(root: Path, obj: str) -> dict[int, str]:
             defined.add(d[1])
     funcs.sort()
     rows = tomllib.loads((root / "rebrew-data.toml").read_text())
-    names = {int(k[-8:], 16): r["name"] for k, r in rows.items() if k.startswith("SERVER.0x") and isinstance(r, dict) and r.get("name")}
+    # Row VA -> (C name the link defines, size); link_symbol wins over the analysis label.
+    extents = sorted(
+        (int(k[-8:], 16), (r.get("link_symbol") or "_" + r["name"])[1:], int(r.get("size", 1)))
+        for k, r in rows.items()
+        if k.startswith("SERVER.0x") and isinstance(r, dict) and r.get("name")
+    )
+    starts = [va for va, _, _ in extents]
     text = next(s for s in ref.sections if s.Name.startswith(b".text"))
     found: dict[int, str] = {}
     for rva in ref_sites - got_sites:
@@ -56,9 +63,13 @@ def missing_targets(root: Path, obj: str) -> dict[int, str]:
         if owner is None or owner[1] != obj:
             continue
         value = int.from_bytes(ref.get_data(rva, 4), "little")
-        name = names.get(value)
-        if name in defined and not name.startswith("g_gap_"):
-            found[value] = name
+        i = bisect.bisect_right(starts, value) - 1
+        if i < 0:
+            continue
+        va, name, size = extents[i]
+        if value >= va + size or name not in defined or name.startswith("g_gap_"):
+            continue
+        found[value] = f"&{name}" if value == va else f"((char*) &{name} + {value - va:#x})"
     return found
 
 
@@ -88,20 +99,21 @@ def main() -> None:
     targets = missing_targets(root, path.name + ".obj")
     text = path.read_text()
     changed = 0
-    for va, name in sorted(targets.items()):
+    for va, expr in sorted(targets.items()):
         skipped = [body_span(text, func) for func in args.skip]
         pattern = re.compile(rf"(\([^()]*\*\s*\)\s*)0x0*{va:x}\b", re.I)
+        n = 0
 
-        def rewrite(m: re.Match[str], name: str = name) -> str:
+        def rewrite(m: re.Match[str], expr: str = expr) -> str:
+            nonlocal n
             if any(lo <= m.start() < hi for lo, hi in skipped):
                 return m[0]
-            return f"{m[1]}&{name}"
+            n += 1
+            return f"{m[1]}{expr}"
 
-        new = pattern.sub(rewrite, text)
-        n = sum(1 for _ in re.finditer(rf"&{name}\b", new)) - sum(1 for _ in re.finditer(rf"&{name}\b", text))
-        text = new
+        text = pattern.sub(rewrite, text)
         changed += n
-        print(f"0x{va:08x} {name}: {n}")
+        print(f"0x{va:08x} {expr}: {n}")
     if args.declare:
         # Append to an existing extern line: a new line shifts line numbers, which changes codegen in some TUs.
         anchor = re.search(r"^extern [^\n]*;$", text, re.M)

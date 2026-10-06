@@ -359,8 +359,8 @@ after_old_clear:
 			}
 
 			/* Compare role priorities */
-			if (*(unsigned char*) ((unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role * 0x18 + 0x10029bc0) >=
-			    *(unsigned char*) (*(unsigned char*) (ent + 0x166) * 0x18 + 0x10029bc0)) {
+			if (*(unsigned char*) ((unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role * 0x18 + (unsigned int) ((char*) &g_office_role_templates + 0x8)) >=
+			    *(unsigned char*) (*(unsigned char*) (ent + 0x166) * 0x18 + (unsigned int) ((char*) &g_office_role_templates + 0x8))) {
 				*(char*) (ent + 0x167) = ((OfficeSlot*) g_office_slots)[record_index].role;
 			}
 
@@ -390,12 +390,12 @@ after_old_clear:
 			}
 
 			/* Check role's count property */
-			if (*(int*) ((unsigned int) (unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role * 0x18 + 0x10029bc8) != 0) {
+			if (*(int*) ((unsigned int) (unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role * 0x18 + (unsigned int) ((char*) &g_office_role_templates + 0x10)) != 0) {
 				unsigned char* scan;
 				k = 0;
-				scan = (unsigned char*) 0x101de5a8;
+				scan = (unsigned char*) ((char*) &g_office_slots + 0x8);
 
-				while ((int) scan < 0x101de878) {
+				while ((int) scan < (int) ((char*) &g_office_slots + 0x2d8)) {
 					if (*scan == (unsigned char) ((OfficeSlot*) g_office_slots)[record_index].role && k != record_index) {
 						goto dec_count;
 					}
@@ -432,13 +432,13 @@ after_old_clear:
 			/* Medium role path (0x1c-0x22) */
 			if (*(char*) (ent + 0x169) != 0) {
 				int* scan;
-				scan = (int*) 0x101de874;
+				scan = (int*) ((char*) &g_office_slots + 0x2d4);
 				do {
 					if (*(char*) ((char*) scan + 4) == *(char*) (ent + 0x169) && *scan == *(int*) (ent + 4)) {
 						*scan = -1;
 					}
 					scan = (int*) ((char*) scan + 0x18);
-				} while ((int) scan < 0x101de91c);
+				} while ((int) scan < (int) ((char*) &g_office_slots + 0x37c));
 			}
 
 			*(char*) (ent + 0x169) = ((OfficeSlot*) g_office_slots)[record_index].role;
@@ -597,7 +597,7 @@ int __cdecl amt_ClearEntityLinks(char* entity)
 
 	default_val = (unsigned short) g_current_hour;
 	result = 0;
-	slot = (OfficeSlot*) 0x101de5a0;
+	slot = (OfficeSlot*) g_office_slots;
 	for (i = 0; i < 0x2a; i++) {
 		if (slot[i].entityId == *(int*) (entity + 4)) {
 			slot[i].entityId = -1;
@@ -641,7 +641,7 @@ void __cdecl amt_UpdateEntityLinks(char* entity, int arg2)
 
 	default_val = (unsigned short) g_current_hour;
 	result = 0;
-	slot = (OfficeSlot*) 0x101de5a0;
+	slot = (OfficeSlot*) g_office_slots;
 	for (i = 0; i < 0x2a; i++) {
 		if (slot[i].entityId == *(int*) (entity + 4) && arg2 != 0) {
 			slot[i].entityId = -1;

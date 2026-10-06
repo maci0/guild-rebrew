@@ -1,11 +1,3 @@
-extern char g_const_7[];
-extern char g_const_30[];
-extern char g_const_2f[];
-extern char g_const_1_over_252[];
-extern char g_const_0_5[];
-extern char g_const_0_33[];
-extern char g_const_0_2f[];
-extern char g_const_0_1[];
 #include <string.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
@@ -984,15 +976,15 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		 * ahead of `mov [esi+0x20],0x41400000` at 0x1000bfe5.  Leaving the
 		 * multiply in the store expression below lets msvc6 schedule the
 		 * constant store first. */
-		float fv = gm_RandomQuadratic() * *(float*) 0x100256c8;
+		float fv = gm_RandomQuadratic() * 7.0f;
 		*(int*) (slot + 0x20) = 0x41400000;
 		*(float*) (slot + 0x14) =
-			(fv + *(float*) 0x100256c4) - *(float*) 0x100256c0;
+			(fv + 30.0f) - 2.0f;
 	}
 
 	{
 		float f_tmp = *(float*) (slot + 0x1c);
-		rand_value = (int) (*(float*) 0x100256bc * f_tmp);
+		rand_value = (int) (0.2f * f_tmp);
 	}
 	rand_value = (unsigned short) gm_RandomMod(rand_value);
 
@@ -1009,9 +1001,9 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	{
 		float v = (float) rand_value;
 		float* fp = (float*) (slot + 0x1c);
-		v += *fp * *(float*) 0x100256b8;
+		v += *fp * 0.33f;
 		*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
-		v -= (double) *fp * *(float*) 0x100256b4;
+		v -= (double) (*fp * 0.1f);
 		*(float*) (slot + 0x10) = v;
 	}
 
@@ -1046,7 +1038,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	alch_props = (unsigned char) *(char*) (cmd_payload + 0xf);
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);
 	*(float*) (alch_data_ptr + 4) =
-		((float) alch_props * *(float*) 0x100256ac + *(float*) 0x100256a0) * *(float*) 0x100256b0;
+		((float) alch_props * 0.003968254197388887f + 1.0f) * 0.5f;
 
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);
 	*(char*) (alch_data_ptr + 8) = *(char*) (cmd_payload + 0xc);
@@ -1197,14 +1189,14 @@ int __cdecl ahm_ClampFloatValue(float* arg1, float* arg2)
 	float clamp;
 
 	sum = arg1[4] + arg2[1];
-	if (sum > g_const_0_0 && sum < g_const_1_0f) {
+	if (sum > g_const_0_0 && sum < 1.0f) {
 		arg2[1] = sum;
 		return 1;
 	}
 	if (sum <= g_const_0_0) {
 		clamp = g_const_0_0;
 	} else {
-		clamp = g_const_1_0f;
+		clamp = 1.0f;
 	}
 	arg2[1] = clamp;
 	return 1;

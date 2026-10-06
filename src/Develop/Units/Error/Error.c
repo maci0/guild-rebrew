@@ -699,10 +699,10 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	g_crash_callback = (void*) b;
 	g_owner_window = c;
 	g_crash_dump_all_frames = (d >> 4) & 1;
-	SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER) 0x10002770);
+	SetUnhandledExceptionFilter(CrashDumpUnhandledExceptionFilter);
 	now = time(0);
 	GetWindowTextA((HWND) c, path, 0x100);
-	((void (__stdcall*)(int, const char*, int)) *(void**) 0x1002403c)(0, (const char*) &g_log_buffer, 0x104);
+	GetModuleFileNameA(0, (char*) &g_log_buffer, 0x104);
 	*strrchr((char*) &g_log_buffer, 0x5c) = 0;
 	sprintf((char*) &g_log_message_buffer, "* ------------------------------------------------------------ *\n[%s], Date: %s", path, ctime((long*) &now));
 	if (g_log_mode_flags & 1) {
@@ -723,8 +723,8 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 		} while ((int) string_cursor < 0x100270e4);
 	}
 	if (g_log_mode_flags & 8) {
-		((void (__stdcall*)(void)) *(void**) 0x10024048)();
-		g_log_file_handle = ((int (__stdcall*)(int)) *(void**) 0x10024044)(-0xb);
+		AllocConsole();
+		g_log_file_handle = (int) GetStdHandle((DWORD) -0xb);
 	}
 	string_cursor = (char*) &g_log_level_table;
 	do {
@@ -820,13 +820,13 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 	unsigned char flags;
 
 	if (*(int*) &g_panic_callback == 0) {
-		((void (__stdcall*)(int, char*, char*, int)) *(void**) 0x10024148)(0, "ERROR-Handler has not been started...", "Error!", 0x10030);
+		MessageBoxA(0, "ERROR-Handler has not been started...", "Error!", 0x10030);
 		return;
 	}
 	flags = *(unsigned char*) &g_log_mode_flags;
 	if (flags & 1) {
 		if (flags & 0x20) {
-			sprintf((char*) &g_log_message_buffer, "Time:%8lu\tModule '%s':\tLine:%lu:\t%s", ((int (__cdecl*)(void)) *(void**) 0x10024154)(), module, line, msg);
+			sprintf((char*) &g_log_message_buffer, "Time:%8lu\tModule '%s':\tLine:%lu:\t%s", timeGetTime(), module, line, msg);
 		} else {
 			sprintf((char*) &g_log_message_buffer, "tModule '%s':\tLine:%lu:\t%s", module, line, msg);
 		}
