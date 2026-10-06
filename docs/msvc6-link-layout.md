@@ -4982,7 +4982,10 @@ Two source facts the order depends on, both measured:
     inithelp (0x1c) between txtmode and lconv, and w_str, w_loc and a_loc (0xc) between lconv and a_cmp.
     Those members keep no code, and including one of their functions would keep it, so a_str through a_cmp
     sit 0x3c to 0x64 low and `__lconv_c` differs in 9 bytes.
-  - IAT: KERNEL32 slots 73 to 80 (`RtlUnwind`, see 5b). The hint/name table records the original load
+  - IAT: KERNEL32 slots 73 to 80 (`RtlUnwind`, see 5b). The reference's RtlUnwind thunk is the last `.text`
+    item, so its member loaded after all CRT code, yet seven KERNEL32 slots follow it. Leaving those seven
+    out of `import-includes.rsp` does not reproduce that: they still resolve before RtlUnwind's member
+    (RtlUnwind lands at slot 79, `.text` diff 65 -> 87), so the original's library search order differs. The hint/name table records the original load
     order (game imports, USER32, WINMM, then the CRT's imports as their members load); loading the CRT's
     imports naturally reproduces it except `GetLastError` and `GetCPInfo`, but the IAT is a sort permutation
     of the whole load order and then misplaces 67 slots, so the include list stays.
