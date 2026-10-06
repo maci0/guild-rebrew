@@ -43,8 +43,6 @@ extern char g_stream_pool[1];
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl vfs_ReadCompressed(int zstrm, char* buf, unsigned int total);
 extern int __cdecl gzread(void* handle, char* buf, unsigned int total);
-extern char s_D__Develop_Units_vfs_vfs_c[];
-extern char s_vfs__gz_compressed_file____s___i[];
 
 #include <ctype.h>
 
@@ -80,17 +78,11 @@ unsigned int g_gzip_magic_1f = 0x1f;
 
 unsigned int g_gzip_magic_8b = 0x8b;
 
-char s_D__Develop_Units_vfs_vfs_c[] = "D:\\Develop\\Units\\vfs\\vfs.c";
-
-char s_vfs__gz_compressed_file____s___i[] = "vfs: gz-compressed file (\"%s\") in zip found!";
-
 /* Data span SERVER 0x100294a4
  * Must sit in this TU: link order already places vfs_OpenStream.c.obj
  * immediately before zutil.c.obj, so a named array here lands right before
  * z_errmsg.  A raw address cast emitted nothing and left the slot empty.
  * Declared before use — MSVC6 C requires it. */
-char s_fmt_hex_length[] = "0x%08X -> length: %u, read: %u compressed: %u";
-
 int __cdecl vfs_DestroyEntity(char* entity)
 {
 	if (!entity) {
@@ -381,8 +373,8 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 		    (unsigned int) *(unsigned char*) (buf + 1) != *(unsigned int*) &g_gzip_magic_8b) {
 			goto done;
 		}
-		sprintf(name, s_vfs__gz_compressed_file____s___i, stream);
-		LogMessageInternal(s_D__Develop_Units_vfs_vfs_c, 0x5b4, name, 1);
+		sprintf(name, "vfs: gz-compressed file (\"%s\") in zip found!", stream);
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x5b4, name, 1);
 		goto done;
 	}
 	if (flags & 8) {
@@ -496,7 +488,7 @@ finalize:
 		g_stream_count = g_stream_count + 1;
 		((vfs_mode_bits*) (stream + 0x13c))->read = *(unsigned char*) &mode14;
 		((vfs_mode_bits*) (stream + 0x13c))->compressed = mode18;
-		sprintf(stream, s_fmt_hex_length, buf, size, (unsigned char) mode14, mode18);
+		sprintf(stream, "0x%08X -> length: %u, read: %u compressed: %u", buf, size, (unsigned char) mode14, mode18);
 	}
 	result = (int) stream;
 done:

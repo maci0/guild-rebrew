@@ -241,10 +241,12 @@ section = ".data"
 type = "char[]"
 status = "EXACT"
 size = 17
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:03:14+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0BB@HGI@ahm_AllocAhmInfo?$AA@"
+storage_kind = "literal"
 
 ["SERVER.0x1002a0f8".verification]
 status = "EXACT"
@@ -1577,9 +1579,9 @@ type = "int[232]"
 status = "EXACT"
 section = ".data"
 size = 928
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
+updated_by = "data"
+updated_at = "2026-10-06T08:54:56+00:00"
+file = "src/Develop/DieGildeAddOn/command/command.c"
 marker_type = "GLOBAL"
 
 ["SERVER.0x1002c050".verification]
@@ -4579,10 +4581,10 @@ section = ".data"
 name = "s_Unknown_winsock_error_u"
 type = "char[]"
 size = 28
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10028bdc".verification]
@@ -4733,11 +4735,11 @@ measured_at = "2026-10-06T01:18:03+00:00"
 name = "g_game_speed_value"
 section = ".data"
 type = "int"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T08:54:56+00:00"
 size = 4
 status = "EXACT"
-file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
+file = "src/Develop/DieGildeAddOn/command/command.c"
 marker_type = "GLOBAL"
 
 ["SERVER.0x1002c3f0".verification]
@@ -4750,11 +4752,11 @@ measured_at = "2026-10-06T01:18:03+00:00"
 name = "g_game_speed_index"
 section = ".data"
 type = "int"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T08:54:56+00:00"
 size = 4
 status = "EXACT"
-file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
+file = "src/Develop/DieGildeAddOn/command/command.c"
 marker_type = "GLOBAL"
 
 ["SERVER.0x1002c3f4".verification]
@@ -5095,10 +5097,10 @@ name = "g_dispatch_table"
 section = ".data"
 type = "handler_func[]"
 size = 424
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T08:54:56+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
+file = "src/Develop/DieGildeAddOn/command/command.c"
 marker_type = "GLOBAL"
 
 ["SERVER.0x1002c3f8".verification]
@@ -5148,10 +5150,10 @@ section = ".data"
 name = "s_WSAECONNRESET"
 type = "char[]"
 size = 297
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10028bf8".verification]
@@ -5165,10 +5167,10 @@ section = ".data"
 name = "s_WSAETIMEDOUT"
 type = "char[]"
 size = 121
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10028d24".verification]
@@ -5182,10 +5184,10 @@ section = ".data"
 name = "s_WSAECONNABORTED"
 type = "char[]"
 size = 155
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10028da0".verification]
@@ -5199,10 +5201,10 @@ section = ".data"
 name = "s_WSAEINVAL"
 type = "char[]"
 size = 210
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10028e3c".verification]
@@ -5216,10 +5218,10 @@ section = ".data"
 name = "s_WSAEMSGSIZE"
 type = "char[]"
 size = 91
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10028f10".verification]
@@ -5233,10 +5235,10 @@ section = ".data"
 name = "s_WSAEWOULDBLOCK"
 type = "char[]"
 size = 91
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10028f6c".verification]
@@ -5250,10 +5252,10 @@ section = ".data"
 name = "s_WSAESHUTDOWN"
 type = "char[]"
 size = 158
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10028fc8".verification]
@@ -5267,10 +5269,10 @@ section = ".data"
 name = "s_WSAEOPNOTSUPP"
 type = "char[]"
 size = 249
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10029068".verification]
@@ -5284,10 +5286,10 @@ section = ".data"
 name = "s_WSAENOTSOCK"
 type = "char[]"
 size = 45
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10029164".verification]
@@ -5301,10 +5303,10 @@ section = ".data"
 name = "s_WSAENETRESET"
 type = "char[]"
 size = 133
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10029194".verification]
@@ -5318,10 +5320,10 @@ section = ".data"
 name = "s_WSAEINPROGRESS"
 type = "char[]"
 size = 133
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x1002921c".verification]
@@ -5335,10 +5337,10 @@ section = ".data"
 name = "s_WSAEINTR"
 type = "char[]"
 size = 74
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x100292a4".verification]
@@ -5352,10 +5354,10 @@ section = ".data"
 name = "s_WSAENOTCONN"
 type = "char[]"
 size = 42
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x100292f0".verification]
@@ -5369,10 +5371,10 @@ section = ".data"
 name = "s_WSAEFAULT"
 type = "char[]"
 size = 99
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x1002931c".verification]
@@ -5386,10 +5388,10 @@ section = ".data"
 name = "s_WSAENETDOWN"
 type = "char[]"
 size = 47
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x10029380".verification]
@@ -5403,10 +5405,10 @@ section = ".data"
 name = "s_WSANOTINITIALISED"
 type = "char[]"
 size = 18
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x100293b0".verification]
@@ -5420,10 +5422,10 @@ section = ".data"
 name = "s_Cant_set_SO_SNDBUF"
 type = "char[]"
 size = 30
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x100293c4".verification]
@@ -5437,10 +5439,10 @@ section = ".data"
 name = "s_Cant_set_SO_RCVBUF"
 type = "char[]"
 size = 30
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:09:33+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOnServer/winsock_data.c"
+file = "src/Develop/Units/net/net_errors.c"
 marker_type = "DATA"
 
 ["SERVER.0x100293e4".verification]
@@ -5471,11 +5473,13 @@ section = ".data"
 name = "s_fmt_hex_length"
 type = "char[]"
 size = 46
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/Units/vfs/vfs.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CO@BOAG@0x?$CF08X?5?9?$DO?5length?3?5?$CFu?0?5read?3?5?$CFu?5c@"
+storage_kind = "literal"
 
 ["SERVER.0x100294a4".verification]
 status = "EXACT"
@@ -5488,11 +5492,13 @@ section = ".data"
 name = "s_plt_SetPlantMap____Could_not_fin"
 type = "char[]"
 size = 45
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:08:26+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/auxillary/plant.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CN@CBCI@plt_SetPlantMap?$CI?$CJ?3?5Could?5not?5fin@"
+storage_kind = "literal"
 
 ["SERVER.0x1002d990".verification]
 status = "EXACT"
@@ -5505,11 +5511,13 @@ section = ".data"
 name = "s_D__Develop_DieGildeAddOn_auxilla"
 type = "char[]"
 size = 43
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:08:26+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/auxillary/plant.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CL@OCPJ@D?3?2Develop?2DieGildeAddOn?2auxilla@"
+storage_kind = "literal"
 
 ["SERVER.0x1002d9c0".verification]
 status = "EXACT"
@@ -5522,11 +5530,13 @@ section = ".data"
 name = "s_plt_SetPlantMap____Map_is_not_al"
 type = "char[]"
 size = 64
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:08:26+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/auxillary/plant.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0EA@OPMM@plt_SetPlantMap?$CI?$CJ?3?5Map?5is?5not?5al@"
+storage_kind = "literal"
 
 ["SERVER.0x1002d9ec".verification]
 status = "EXACT"
@@ -5539,11 +5549,13 @@ section = ".data"
 name = "s_amt_cant_load_msetter"
 type = "char[]"
 size = 41
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/game/aemter.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CJ@ODIJ@amt_fio_LoadAemter?$CI?$CJ?3?5Can?8t?5load@"
+storage_kind = "literal"
 
 ["SERVER.0x10029f78".verification]
 status = "EXACT"
@@ -5556,11 +5568,13 @@ section = ".data"
 name = "s_amt_cant_load_status"
 type = "char[]"
 size = 40
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/game/aemter.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CI@MIPI@amt_fio_LoadAemter?$CI?$CJ?3?5Can?8t?5load@"
+storage_kind = "literal"
 
 ["SERVER.0x10029fa4".verification]
 status = "EXACT"
@@ -5573,11 +5587,13 @@ section = ".data"
 name = "s_amt_cant_load_pcount"
 type = "char[]"
 size = 40
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/game/aemter.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CI@CDK@amt_fio_LoadAemter?$CI?$CJ?3?5Can?8t?5load@"
+storage_kind = "literal"
 
 ["SERVER.0x10029fcc".verification]
 status = "EXACT"
@@ -5590,11 +5606,13 @@ section = ".data"
 name = "s_amt_cant_load_mamt"
 type = "char[]"
 size = 38
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/game/aemter.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CG@OLLE@amt_fio_LoadAemter?$CI?$CJ?3?5Can?8t?5load@"
+storage_kind = "literal"
 
 ["SERVER.0x10029ff4".verification]
 status = "EXACT"
@@ -5607,11 +5625,13 @@ section = ".data"
 name = "s_amt_cant_load_mplayerid"
 type = "char[]"
 size = 43
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/game/aemter.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CL@BBND@amt_fio_LoadAemter?$CI?$CJ?3?5Can?8t?5load@"
+storage_kind = "literal"
 
 ["SERVER.0x1002a01c".verification]
 status = "EXACT"
@@ -5624,11 +5644,13 @@ section = ".data"
 name = "s_amt_cant_load_id"
 type = "char[]"
 size = 36
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/game/aemter.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CE@OEDG@amt_fio_LoadAemter?$CI?$CJ?3?5Can?8t?5load@"
+storage_kind = "literal"
 
 ["SERVER.0x1002a048".verification]
 status = "EXACT"
@@ -5641,11 +5663,13 @@ section = ".data"
 name = "s_amt_count_mismatch"
 type = "char[]"
 size = 52
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/game/aemter.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0DE@PDBL@amt_fio_LoadAemter?$CI?$CJ?3?5count?5read@"
+storage_kind = "literal"
 
 ["SERVER.0x1002a06c".verification]
 status = "EXACT"
@@ -5658,11 +5682,13 @@ section = ".data"
 name = "s_D__Develop_DieGildeAddOn_game_ae"
 type = "char[]"
 size = 39
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/game/aemter.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CH@KHA@D?3?2Develop?2DieGildeAddOn?2game?2ae@"
+storage_kind = "literal"
 
 ["SERVER.0x1002a0a0".verification]
 status = "EXACT"
@@ -5675,11 +5701,13 @@ section = ".data"
 name = "s_amt_cant_load_count"
 type = "char[]"
 size = 39
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/DieGildeAddOn/game/aemter.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CH@DCBJ@amt_fio_LoadAemter?$CI?$CJ?3?5Can?8t?5load@"
+storage_kind = "literal"
 
 ["SERVER.0x1002a0c8".verification]
 status = "EXACT"
@@ -5939,11 +5967,13 @@ section = ".data"
 name = "s_broadcast_path"
 type = "char[]"
 size = 33
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/Units/net/broadcast.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CB@LMKK@D?3?2Develop?2Units?2net?2broadcast?4c@"
+storage_kind = "literal"
 
 ["SERVER.0x10027034".verification]
 status = "EXACT"
@@ -5956,11 +5986,13 @@ section = ".data"
 name = "s_Sending_Broadcast"
 type = "char[]"
 size = 18
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/Units/net/broadcast.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0BC@GMNE@Sending?5Broadcast?$AA@"
+storage_kind = "literal"
 
 ["SERVER.0x10027058".verification]
 status = "EXACT"
@@ -5973,11 +6005,13 @@ section = ".data"
 name = "s_D__Develop_Units_vfs_vfs_c"
 type = "char[]"
 size = 27
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/Units/vfs/vfs.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0BL@MBPP@D?3?2Develop?2Units?2vfs?2vfs?4c?$AA@"
+storage_kind = "literal"
 
 ["SERVER.0x10029458".verification]
 status = "EXACT"
@@ -5990,11 +6024,13 @@ section = ".data"
 name = "s_vfs__gz_compressed_file____s___i"
 type = "char[]"
 size = 45
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "EXACT"
 file = "src/Develop/Units/vfs/vfs.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CN@NDJK@vfs?3?5gz?9compressed?5file?5?$CI?$CC?$CFs?$CC?$CJ?5i@"
+storage_kind = "literal"
 
 ["SERVER.0x10029474".verification]
 status = "EXACT"
@@ -6583,11 +6619,11 @@ measured_at = "2026-10-06T02:28:37+00:00"
 type = "dispatch_fn[]"
 section = ".data"
 name = "g_chain_handler_table"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T08:54:56+00:00"
 size = 424
 status = "EXACT"
-file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
+file = "src/Develop/DieGildeAddOn/command/command.c"
 marker_type = "GLOBAL"
 
 ["SERVER.0x1002c5a0".verification]
@@ -10148,9 +10184,9 @@ name = "g_alchemy_random_table"
 type = "unsigned char[7812]"
 size = 7812
 status = "EXACT"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
+updated_by = "data"
+updated_at = "2026-10-06T08:54:56+00:00"
+file = "src/Develop/DieGildeAddOn/command/command.c"
 marker_type = "DATA"
 
 ["SERVER.0x1002a1cc".verification]
@@ -10164,10 +10200,10 @@ section = ".data"
 name = "g_plant_pair_table"
 type = "PLANT_PAIR[88]"
 size = 704
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:53+00:00"
 status = "EXACT"
-file = "src/Develop/DieGildeAddOn/auxillary/plant.c"
+file = "src/Develop/DieGildeAddOn/auxillary/plant_pairs.c"
 marker_type = "DATA"
 
 ["SERVER.0x1002da30".verification]
@@ -10182,9 +10218,9 @@ name = "g_plant_flag"
 type = "int"
 size = 4
 status = "EXACT"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/Develop/DieGildeAddOn/auxillary/plant.c"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:53+00:00"
+file = "src/Develop/DieGildeAddOn/auxillary/plant_pairs.c"
 marker_type = "GLOBAL"
 
 ["SERVER.0x1002dcf0".verification]
@@ -10303,10 +10339,12 @@ type = "char[34]"
 size = 34
 section = ".data"
 status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CC@EGHA@?9?9?9?9?9?$DOPlayerID?$DN?5?$CFi?5PlayerName?$DN?5?$CF@"
+storage_kind = "literal"
 
 ["SERVER.0x10031570".verification]
 status = "VERIFIED"
@@ -10320,10 +10358,12 @@ type = "char[21]"
 size = 21
 section = ".data"
 status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0BF@MNPB@gm_AllocSpieler?3?5bug?$AA@"
+storage_kind = "literal"
 
 ["SERVER.0x10031594".verification]
 status = "VERIFIED"
@@ -10337,10 +10377,12 @@ type = "char[55]"
 size = 55
 section = ".data"
 status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0DH@EONK@gm_AllocSpieler?$CI?$CJ?3?5gm_CurrentHum@"
+storage_kind = "literal"
 
 ["SERVER.0x100315ac".verification]
 status = "VERIFIED"
@@ -10354,10 +10396,12 @@ type = "char[30]"
 size = 30
 section = ".data"
 status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0BO@MOBC@?9?9?9?9?9?$DOSpID?$DN?5?$CFi?5playermode?$DN?5?$CFi?$AA@"
+storage_kind = "literal"
 
 ["SERVER.0x100315e4".verification]
 status = "VERIFIED"
@@ -10371,10 +10415,12 @@ type = "char[35]"
 size = 35
 section = ".data"
 status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
 marker_type = "DATA"
+link_symbol = "??_C@_0CD@JKGN@gm_AllocSpieler?3?5array?5overflow?4@"
+storage_kind = "literal"
 
 ["SERVER.0x10031604".verification]
 status = "VERIFIED"
@@ -10546,11 +10592,12 @@ section = ".data"
 type = "unsigned char[0x20]"
 size = 28
 status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+storage_kind = "literal"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
+link_symbol = "??_C@_0BL@LPKA@?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?$AN?6?$AA@"
 
 ["SERVER.0x100272f8".verification]
 status = "VERIFIED"
@@ -10780,11 +10827,12 @@ section = ".data"
 type = "unsigned char[0x16d0]"
 size = 5112
 status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+storage_kind = "literal"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
+link_symbol = "??_C@_0BK@BNJN@invalid?5bit?5length?5repeat?$AA@"
 
 ["SERVER.0x10027490".verification]
 status = "VERIFIED"
@@ -11284,11 +11332,12 @@ section = ".data"
 type = "unsigned char[0x350]"
 size = 848
 status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
+storage_kind = "literal"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
+link_symbol = "??_C@_0N@HEKL@Usefull?5Sync?$AA@"
 
 ["SERVER.0x100297a0".verification]
 status = "VERIFIED"
@@ -12184,11 +12233,12 @@ section = ".data"
 type = "unsigned char[0x54]"
 size = 84
 status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
+storage_kind = "literal"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
+link_symbol = "??_C@_0CE@PGGH@D?3?2Develop?2DieGildeAddOn?2game?2si@"
 
 ["SERVER.0x1002dcf4".verification]
 status = "VERIFIED"
@@ -12274,11 +12324,12 @@ section = ".data"
 type = "unsigned char[0x684]"
 size = 1668
 status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
-storage_kind = "span"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
+storage_kind = "literal"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
+link_symbol = "??_C@_0GF@IFF@gm_InitObjektHersteller?$CI?$CJ?3?5Initi@"
 
 ["SERVER.0x10030eec".verification]
 status = "VERIFIED"
@@ -14919,13 +14970,14 @@ name = "g_error_diagnostic_literal_pool"
 type = "unsigned char[488]"
 size = 488
 section = ".data"
-storage_kind = "span"
+storage_kind = "literal"
 file = "src/layout_spans.h"
 marker_type = "GLOBAL"
 note = "Error.c compiler string pool with native inter-literal alignment, bad dbg file through SINGLE_STEP; all 488 bytes emitted by Error.c.obj; inventory view only, no allocation"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-06T09:06:00+00:00"
 status = "VERIFIED"
+link_symbol = "??_C@_0N@NJP@bad?5dbg?5file?$AA@"
 
 ["SERVER.0x10027110".verification]
 status = "VERIFIED"

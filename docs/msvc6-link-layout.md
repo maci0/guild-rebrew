@@ -4962,6 +4962,14 @@ Two source facts the order depends on, both measured:
   is what fixes `srv_LoadBuf`. Missing sites went from 473 to 2: `ahm_ExAllocAlchemist`'s
   `g_citizen_count` read (its schedule needs the read to may-alias `slot`) and `gm_InitObjektHersteller`'s
   `g_minimum_manufacturer` store (naming it changes `gm_Open`'s code).
+- **TU boundaries from the literal pools.** VC6 emits a TU's string literals after its plain `.data`, so
+  plain data after another object's literals starts the next TU. On that evidence `g_alchemy_random_table`
+  through `g_chain_handler_table` and `gm_GetFieldByType` are command.c's, `plt_TableLookup` with its pair
+  table is its own TU (`plant_pairs.c`, opening an 8-aligned block), and the strings of aemter, alchemistry,
+  plant, broadcast and vfs are literals at their uses. Objects link in file-name order (Units, then the
+  server, then the add-on files, alphabetically), which is why the data-only winsock string TU is
+  `Units/net/net_errors.c`. In the map, every game object's `.data` is now plain data followed by `??_C@`
+  literals. `rebrew source rehome` re-points a moved function's row.
 - **`gm_Open` depends on the TU's declarations.** Adding or removing a file-scope declaration, even an
   unused one in an included header (`game_data.h`), or a new line before it, changes its code; block-scope
   `extern`s inside the using function do not.

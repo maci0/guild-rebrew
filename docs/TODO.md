@@ -13194,7 +13194,7 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 - **Byte-compared all 20 against the reference first.** All 20 already matched, so this is a
   coverage repair, not a bug hunt — but until they were named, nothing checked them.
 - **Named them from the source, which already declared every one.** 19 are the winsock error
-  strings in `winsock_data.c` (`s_WSAECONNRESET_10028bf8` … `s_Cant_set_SO_RCVBUF_100293e4`); the
+  strings in `net_errors.c` (`s_WSAECONNRESET_10028bf8` … `s_Cant_set_SO_RCVBUF_100293e4`); the
   twentieth is `g_crashdump_data_10027104` (568 bytes) in
   `CrashDumpUnhandledExceptionFilter.c`. Sizes taken from the reference spans (4-byte aligned;
   `0x10028e3c` confirmed by reading the pad tail) rather than from the source, so the size records
@@ -15801,7 +15801,7 @@ RESIDUE **8634** (+0) / DATA 21,838 → **21,837** (−1).**
 
 - **Tried:** `rebrew lint --fix` then one source comment. No function body, no
   BSS emit, no CRT/LIBCMT.
-- **W016 (20):** DATA markers in `winsock_data.c` (18), `vfs4.c`
+- **W016 (20):** DATA markers in `net_errors.c` (18), `vfs4.c`
   (`0x1002944c`), `vfs_OpenStream.c` (`0x100294a4`) lacked SECTION metadata.
   `--fix` wrote `section = ".data"` into `src/rebrew-data.toml` from the
   binary VA map. Markers in source stayed `/* DATA: SERVER 0x… */`; lint
@@ -18991,7 +18991,7 @@ No source change.**
 No source change.**
 
 - **Tried:** TUs with no `// FUNCTION:` marker: only 3
-  (`spiel3.c`, `spiel_gm_DispatchCall.c`, `winsock_data.c`) —
+  (`spiel3.c`, `spiel_gm_DispatchCall.c`, `net_errors.c`) —
   all data-only/annotation carriers passing lint via DATA
   markers (R680 lesson). Placement review: tree matches the
   source-tree map, no new `__FILE__` evidence for moves.
@@ -21078,7 +21078,7 @@ Local window matched; global gate regressed. Soft-reverted.**
 - **Root cause:** explicit `char pad_*[N] = { 0 }` arrays are zero-init, so
   MSVC6 parks them late (BSS). They duplicated natural 4-byte alignment
   padding and polluted the empty-string slot `z_errmsg` points at.
-- **Fix:** delete all `pad_*` from `winsock_data.c` and `vfs_OpenStream.c`.
+- **Fix:** delete all `pad_*` from `net_errors.c` and `vfs_OpenStream.c`.
   Every ref gap is exactly align-to-4 after the NUL.
 - Spans still 100% match. Empty BSS improved slightly but still late.
 - Next: `0x10027400` (−4 before `"need dictionary"`). See §157.
@@ -21114,8 +21114,8 @@ Local window matched; global gate regressed. Soft-reverted.**
 - **Root cause:** winsock/SO_* strings lived in `server4.c`/`server2.c` (late `.text` VAs).
   `rebrew build order-sources` links by `.text` VA, so vfs/zlib/`trees` occupied `0x10028bdc`
   and the 0x82c-byte run landed ~900 bytes late.
-- **Fix:** `winsock_data.c` — data-only, exact reference bytes `0x10028bdc..0x10029408`
-  (19 strings + pads). Ordered with `--first-va winsock_data.c=0x10006c80` between
+- **Fix:** `net_errors.c` — data-only, exact reference bytes `0x10028bdc..0x10029408`
+  (19 strings + pads). Ordered with `--first-va net_errors.c=0x10006c80` between
   m_alloc2 and trees. Callers use named symbols (no duplicate literals).
 - **Result:** that span 2092/2092 MATCH; trees at `0x10029408` MATCH.
 - **Quirk:** game-object link order is `.text` VA, not `.data` VA. Data that belongs

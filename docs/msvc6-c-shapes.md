@@ -7399,10 +7399,10 @@ can still win.
 
 ### The fix: a data-only TU ordered between m_alloc2 and trees
 
-Extracted the exact reference bytes `0x10028bdc..0x10029408` (19 strings + pads, 2092 bytes) into `winsock_data.c`: no functions. Ordered it with:
+Extracted the exact reference bytes `0x10028bdc..0x10029408` (19 strings + pads, 2092 bytes) into `net_errors.c`: no functions. Ordered it with:
 
 ```
---first-va winsock_data.c=0x10006c80   # between m_alloc2 (0x10006c00) and trees (0x10006ec0)
+--first-va net_errors.c=0x10006c80   # between m_alloc2 (0x10006c00) and trees (0x10006ec0)
 ```
 
 Callers in `server4.c` / `server2.c` now reference the named symbols; they must NOT also spell the same text as a string literal or the bytes emit twice (same class as §151/§153).

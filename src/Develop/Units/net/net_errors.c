@@ -1,16 +1,8 @@
-/* Winsock / socket option error strings that the reference places at
- * 0x10028bdc..0x10029408 -- immediately after m_alloc2's literals and
- * immediately before zlib trees.c's static tables.
- *
- * They used to live as (a) a named global + (b) anonymous literals in
- * server4.c / server2.c.  Those TUs' first functions sit at 0x1000ad40 /
- * 0x10009d30, so rebrew order-sources (CMakeLists.txt) links them AFTER
- * vfs/zlib (trees at 0x10006ec0), and the 0x82c-byte run landed ~900 bytes
- * late with trees/vfs occupying the winsock slot.  This TU is data-only
- * and is ordered between m_alloc2 and trees via --first-va (see
- * CMakeLists.txt).  Callers reference these by name; they must NOT also
- * spell the same text as a string literal or the bytes emit twice.
- */
+/* Winsock and socket-option error strings, 0x10028bdc..0x10029408: a data-only
+ * Units TU. The original links its objects in file-name order, and this run sits
+ * between m_alloc and trees, so the TU name sorts there; having no code, it is
+ * still placed by --first-va (CMakeLists.txt). server.c reads these by name and
+ * must not spell the same text as a literal, or the bytes are emitted twice. */
 
 char s_Unknown_winsock_error_u[] = "Unknown winsock error %u!!!";
 
