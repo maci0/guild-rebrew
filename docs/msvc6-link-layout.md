@@ -4963,8 +4963,8 @@ Two source facts the order depends on, both measured:
   through `g_chain_handler_table` and `gm_GetFieldByType` are command.c's, `plt_TableLookup` with its pair
   table is its own TU (`plant_pairs.c`, opening an 8-aligned block), and the strings of aemter, alchemistry,
   plant, broadcast and vfs are literals at their uses. Objects link in file-name order (Units, then the
-  server, then the add-on files, alphabetically), which is why the data-only winsock string TU is
-  `Units/net/net_errors.c`. In the map, every game object's `.data` is now plain data followed by `??_C@`
+  server, then the add-on files, alphabetically), and both client builds name the network unit
+  `D:\develop\units\net\net.c`, so the data-only winsock string TU is `Units/net/net.c`. In the map, every game object's `.data` is now plain data followed by `??_C@`
   literals. `rebrew source rehome` re-points a moved function's row.
 - **`gm_Open` depends on the TU's declarations.** Adding or removing a file-scope declaration, even an
   unused one in an included header (`game_data.h`), or a new line before it, changes its code; block-scope

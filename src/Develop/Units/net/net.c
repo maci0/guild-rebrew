@@ -1,8 +1,8 @@
-/* Winsock and socket-option error strings, 0x10028bdc..0x10029408: a data-only
- * Units TU. The original links its objects in file-name order, and this run sits
- * between m_alloc and trees, so the TU name sorts there; having no code, it is
- * still placed by --first-va (CMakeLists.txt). server.c reads these by name and
- * must not spell the same text as a literal, or the bytes are emitted twice. */
+/* Winsock and socket-option error strings, 0x10028bdc..0x10029408: the data of the network unit,
+ * D:\develop\units\net\net.c in both client builds. The original links objects in file-name order
+ * and this run sits between m_alloc and trees, where net sorts; having no code here, the TU is still
+ * placed by --first-va (CMakeLists.txt). server.c reads these by name and must not spell the same
+ * text as a literal, or the bytes are emitted twice. */
 
 char s_Unknown_winsock_error_u[] = "Unknown winsock error %u!!!";
 
