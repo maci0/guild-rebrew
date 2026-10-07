@@ -4985,6 +4985,16 @@ Two source facts the order depends on, both measured:
   imports and RtlUnwind follow naturally. Every DLL's hint/name order then equals the reference's except
   `GetLastError` (load index 42 against 37; no loaded member between `toupper.obj` and `realloc.obj`
   references it). Raw `.rdata` differs in 242 bytes (was 1768).
+- **Random helpers are their own object (`game/zufall.c`).** Both clients hold `gm_RandomMod`, a range helper
+  (`gm_RandomMod(2n + 1) - n`), `gm_RandomFloat01`, `gm_RandomQuadratic`, a squared `gm_RandomFloat01`,
+  `srv_SeedRandomWithTime` and `srv_SeedRandom` contiguously (TL 0x42e410..0x42e4c5), after a trace unit
+  (`tr_*`, 0x42dfb0..) and apart from spiel.c's client span. The server's five sit after spiel.c's last
+  function, so the object links last and its name must sort after `spiel.c`; no path string names it.
+  The trace unit is not in the server: its initialized pointers to `"*bRaIn DeaD%&"` and
+  `"%aRscH Ab :-)"` would keep those strings, and the server has neither. The range helper is kept as
+  discarded code (the image is unchanged; Rich C objects 36 to 37, the reference's count). The squared
+  helper is left out: compiled to the clients' exact 10 bytes, it makes ICF keep `a_map.obj`'s copy of
+  `strncnt` instead of `a_cmp.obj`'s, moving the CRT from `__isctype` on by 0x2b (`.text` VirtualSize +16).
 - **Left:**
   - IAT slot order. LINK sorts the `.idata$5` contributions (function imports, dropped ones and null thunks,
     in load order) with the runtime's qsort keyed by DLL name; a Python model of the VC6 qsort over that
