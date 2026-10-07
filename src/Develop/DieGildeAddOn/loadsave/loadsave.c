@@ -109,6 +109,98 @@ typedef struct {
 	void* entry_table; /* 0x20 */
 } GraveyardSlot;
 
+/* Client-only (TL 0x4f3900, discarded): writes the graveyard slot of a field that ls_LoadGraveyardData
+ * reads back (the client places it right before the loader). */
+int __cdecl gv_fio_SaveGraveyardData(void* stream_ctx, unsigned char* field)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	GraveyardSlot* slot;
+	char* entry;
+	char* worker;
+	int i;
+
+	slot = *(GraveyardSlot**) (field + 0x65);
+	if (slot == 0) {
+		return 0;
+	}
+	if (!vfs_fwrite(slot, 4, 1, stream_ctx)) {
+		return 0;
+	}
+	if (!vfs_fwrite(&slot->type, 4, 1, stream_ctx)) {
+		return 0;
+	}
+	if (!vfs_fwrite(&slot->b18, 1, 1, stream_ctx)) {
+		return 0;
+	}
+	if (!vfs_fwrite(&slot->b19, 1, 1, stream_ctx)) {
+		return 0;
+	}
+	if (!vfs_fwrite(&slot->b1a, 1, 1, stream_ctx)) {
+		return 0;
+	}
+	if (!vfs_fwrite(&slot->b1b, 1, 1, stream_ctx)) {
+		return 0;
+	}
+	entry = (char*) slot->entry_table;
+	for (i = 0; i < g_field_entry_count[slot->type]; i++, entry += 0x44) {
+		if (!vfs_fwrite(entry, 4, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(entry + 4, 0x10, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(entry + 0x14, 0x10, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(entry + 0x24, 5, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(entry + 0x2c, 4, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(entry + 0x30, 4, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(entry + 0x34, 4, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(entry + 0x38, 4, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(entry + 0x3c, 4, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(entry + 0x40, 4, 1, stream_ctx)) {
+			return 0;
+		}
+	}
+	worker = (char*) slot->worker;
+	for (i = 0; i < g_field_worker_count[slot->type]; i++, worker += 0x14) {
+		int sid;
+
+		if (!vfs_fwrite(worker, 4, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(worker + 4, 4, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(worker + 8, 2, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(worker + 0xa, 2, 1, stream_ctx)) {
+			return 0;
+		}
+		if (!vfs_fwrite(worker + 0xc, 1, 1, stream_ctx)) {
+			return 0;
+		}
+		sid = (*(char**) (worker + 0x10) - (char*) slot->entry_table) / 0x44;
+		if (!vfs_fwrite(&sid, 4, 1, stream_ctx)) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 /* Loads a graveyard field's savegame data: the slot header (id + type),
  * then the slot-entry table (g_field_entry_count[type] entries of 0x44 bytes) and
  * the worker table (g_field_worker_count[type] entries of 0x14 bytes).  Each entry's
@@ -344,6 +436,182 @@ void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, 
 	*(char*) ((char*) entity + 2) = 3;
 }
 
+
+/* Client-only savegame writers (TL 0x51ebc0, 0x51f170, 0x520860; discarded). Each writes what the
+ * matching loader reads back: the object table, the 16 dynamic entities and the two relationship
+ * matrices. The client saves through vfs_fwrite, whose unsigned result 0 means failure. */
+
+int __cdecl ls_SaveObjects(void* file)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	int count;
+	int i;
+	unsigned char* rec;
+
+	count = 0;
+	for (i = 0; i < 0x5008; i++) {
+		if (*(short*) ((unsigned char*) g_query_base + i * 0x43) != 0) {
+			count++;
+		}
+	}
+	if (vfs_fwrite(&count, 4, 1, file) <= 0) {
+		return 0;
+	}
+	for (i = 0; i < 0x5008; i++) {
+		rec = (unsigned char*) g_query_base + i * 0x43;
+		if (*(short*) rec != 0) {
+			if (vfs_fwrite(rec, 2, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(rec + 2, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(rec + 6, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(rec + 0xa, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(rec + 0xe, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(rec + 0x12, 1, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(rec + 0x13, 1, 1, file) <= 0) {
+				return 0;
+			}
+			rec += 0x1c;
+			if (vfs_fwrite(rec, 0x1f, 1, file) <= 0) {
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+
+int __cdecl ls_SaveDynamicEntities(void* f)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	extern int g_file_version;
+	int i;
+
+	for (i = 0; i < 16; i++) {
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0, 2, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x2, 0x10, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x14, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x28, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x1c, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x20, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x2c, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x30, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x34, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x38, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x40, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x44, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x48, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x4c, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x50, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (g_file_version >= 0x10014) {
+			if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x54, 4, 1, f) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x58, 4, 1, f) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x5c, 4, 1, f) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x3c, 4, 1, f) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x64, 4, 1, f) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x68, 4, 1, f) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x6c, 4, 1, f) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x60, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x74, 0x11, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x88, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x8c, 0x10, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x9c, 0xc, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0xa8, 4, 1, f) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x70, 4, 1, f) <= 0) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int __cdecl ls_SaveRelationships(void* file)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	int i;
+	int j;
+
+	for (j = 0; j < 0x300; j++) {
+		for (i = 0; i < 0x300; i++) {
+			if (vfs_fwrite(&g_relationship_matrix_primary[j * 0x300 + i], 1, 1, file) <= 0) {
+				return 0;
+			}
+		}
+	}
+	for (j = 0; j < 0x300; j++) {
+		for (i = 0; i < 0x300; i++) {
+			if (vfs_fwrite(&g_relationship_matrix_secondary[j * 0x300 + i], 1, 1, file) <= 0) {
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
 
 int __cdecl vfs_ReadData(void*, int, int, void*);
 

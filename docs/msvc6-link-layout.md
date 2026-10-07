@@ -5055,9 +5055,20 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   `vfs_OpenStream`: `vfs_init` (`getcwd`). Compiled from `vfs.c`, every one matches the TL client in all
   common bytes (`rebrew test -t Europa1400Gold_TL.exe`) except `vfs_AddFile`, whose two array moves use the
   aligned-copy asm of `vfs_ReadData` and allocate registers differently (1477 bytes against 1472); a
-  `memcpy` there would load `memcpy.obj`, an assembler member, early. Not built: `vfs:Open` (0x42ff50), the
-  readers and seek helpers between `vfs_ReadData` and `vfs_OpenStream`, 0x430f70 and the shutdown
-  (0x4310f0).
+  `memcpy` there would load `memcpy.obj`, an assembler member, early.
+- **vfs.c's file API (round 18).** The rest of the client TU is built too, in its order: `vfs_Tfopen`
+  (0x42ff50, the `vfs:Open`/`vfs_Tfopen` messages) after `vfs_RemoveFile`; `vfs_fgetc`, `vfs_fgets`,
+  `vfs_fwrite`, `vfs_fseek` and `vfs_ftell` (0x430870..0x430c50) after `vfs_ReadData`; `vfs_ForEachFile`
+  (0x430f70) after `vfs_OpenStream`; `vfs_exit` (0x4310f0, `%i vfs_file(s) were left open!`) after
+  `vfs_init`. `vfs_Tfopen` opens loose and new files through `gzopen`, which only links now that gzio.c is
+  stock; its storage is the stream pool and count, the tree root and `g_file_extension_names`. `vfs_exit`
+  walks and frees the pools through m_alloc.c's client pool helpers (TL 0x41e350..0x41e4d0, after
+  `m_pool_free`: next, first, free-all, clear, info, stats), and m_alloc.c gains the client's
+  `m_is_tracked` (0x41dd90, `g_array_count`/`g_array_ptr`). Under the TL client's code generator
+  (Processor Pack, `rebrew test -t Europa1400Gold_TL.exe --no-promote`) every one matches the client in all
+  common bytes except `vfs_Tfopen` (register and frame layout; 22 DIR32 like the client) and
+  `m_pool_next` (register choice, no fixups). No CRT member or import is added (all already load). 40
+  more DIR32 records.
 - **The tree's references.** The file search calls `FindFirstFileA`, `FindNextFileA`, `FindClose`,
   `FileTimeToLocalFileTime` and `FileTimeToSystemTime` directly, so they load in the game's library pass
   after Error.c's imports, as the exact IAT solution needs; `import-includes.rsp` now forces only Error.c's
@@ -5079,13 +5090,43 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   data holds the unit's ` unzip 0.15a Copyright 1998 Gilles Vollant ` right before vfs.c's `.BIN` table. The
   vendored file lists its changes: the 0.15a copyright string (selectany, ordered as before), the client's
   `unzGetFilePos`/`unzGoToFilePos` (TL 0x465750, 0x465790) appended, SIZE comments. It links between
-  `trees2.c` and `vfs.c` and leaves every function VA unchanged; Rich counts one more game C object.
+  `trees.c` and `vfs.c` and leaves every function VA unchanged; Rich counts one more game C object.
+- **zlib is stock 1.1.3, whole files (round 18).** The vendored files had every function the server does not
+  call removed (`#if 0`, "not present in original DLL"), which `/OPT:REF` drops anyway, `gzio.c` was replaced
+  by a decompiled copy (`Units/vfs/gz_stream.c`, `vfs_GetByte` for `get_byte` and so on), and `trees.c` was
+  split into `trees.c` and `trees2.c`. Compiled whole, stock `gzio.c` gives the server's eight gzio functions
+  byte for byte, and one stock `trees.c` gives the server's function order: VC6 emits a static function
+  after the first function that references it (`get_byte` after `check_header`, `putLong` after
+  `gzclose`, `build_tree` after `_tr_flush_block`). The discarded public gzio functions load exactly the
+  four LIBCMT members the Rich header was short, in the first library pass and with no new import or data
+  byte: `fprintf.obj` (gz_open's header), `fdopen.obj` (gzdopen; `zutil.h` maps `fdopen` to `_fdopen` for
+  MSC), `vsprintf.obj` (gzprintf) and `rewind.obj` (gzrewind). `gzsetparams` needs `deflateParams`, so
+  `deflate.c` must be whole as well. The four bytes `border[]` carried after its 19 entries are
+  `inflateSync`'s `mark[4] = {0, 0, 0xff, 0xff}`, a static whose plain `.rdata` follows `infblock.obj`'s:
+  `border` is stock again and `mark` is a selectany object ordered after it, anchored by
+  `game-includes.rsp` (`gen_game_includes.py` ZLIB_ANCHORS; a `/include` directive in `inflate.obj` itself
+  does not keep it, `/VERBOSE` reports it discarded). `compress.c` and `uncompr.c` stay out: they would be
+  two more game C objects. The restored code adds 30 DIR32 records; Rich now counts 124 LIBCMT C members
+  and 37 game C objects, both equal to the reference.
 - **Late CRT anchors.** Object references load after the whole command-line include list, so the anchors from
   `_memmove` to `_strpbrk` are in `late-archive-includes.txt`, which `scripts/gen_bss_layout.py` writes into
   `bss_head2.c` as `#pragma comment(linker, "/include:...")`. LINK reads `bss_head2.obj` after `vfs.obj`; the
   vfs group above already loads `memmove.obj`, and `findfile.obj` puts `GetLastError` at the reference's load
   index 37. A directive in `vfs.c` itself would not work: LINK takes an object's directives before its
   symbols.
+- **spiel.c's unit conversions and price formatting (round 18).** TL 0x50b710, 0x50b750, 0x50b780 and
+  0x50b7a0, before `gm_QueryEntitySum`, divide or multiply an amount by an item's units per trade unit,
+  `g_spiel_space_fill[id - 61]` (16 dwords of 32 for item ids 61..76). The client addresses that table as
+  0x6995bc, 61 dwords below it: spiel's `.data` maps to the server's at +0xf997808 up to the client's
+  extra 6-byte record at 0x6995d8 and at +0xf9977fc from the table on (`.scratch/measure/align_bytes.py`),
+  the table's bytes are identical, and no other code in either image reads it. The item id is the first
+  word of `g_entity_slot_table`'s record, as in `gm_QueryEntitySum`. TL 0x50bb50 (`gm_GetSeasonPrice`)
+  reads `g_slot_array`'s 0x2a90-byte season tables like `gm_FindSlotById` (client 0x85ab90 is server
+  0x1009b770, the offset `g_entity_slot_table` has) and falls back to `gm_CalculateProductionValue`.
+  TL 0x50bc10 (`gm_FormatPrice`) groups thousands with dots through `itoa`: the client's only `_itoa`
+  call in a server TU. `xtoa.obj` already loads for `getqloc.obj`, so the old name adds the fifth alias
+  object and nothing else. All six match the client in all common bytes under its code generator except
+  `gm_FormatPrice` (one x87 load scheduled before a string scan). 16 more DIR32 records.
 - **Random helpers are their own object (`game/zufall.c`).** Both clients hold `gm_RandomMod`, a range helper
   (`gm_RandomMod(2n + 1) - n`), `gm_RandomFloat01`, `gm_RandomQuadratic`, a squared `gm_RandomFloat01` (TL
   0x42e4a0), `srv_SeedRandomWithTime` and `srv_SeedRandom` contiguously (TL 0x42e410..0x42e4c5), after a trace
@@ -5149,30 +5190,74 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   `GetFullPathNameA`, `GetDriveTypeA` and `mkdir.obj`'s `CreateDirectoryA`, loaded through OLDNAMES aliases
   after LIBCMT's first pass). That is (h, w, m, t) = (5, 7, 0, 14); the placements around it are not unique.
   The tree port above builds exactly this array, and the native link's IAT equals the reference's.
+- **The building-site box cache (round 18).** plant.c's client TU continues after `plt_SetPlantMap` with the
+  3D vegetation loader, the box cache and the `rd_` building-site helpers; their literals (`!bk_`, `bk_`,
+  `rd_GetBKSize(): Unbekannter Bauplatz '%s'`) sit in plant.c's client literal pool. The cache is the
+  server's `g_aux_entity_count`/`g_aux_entity_buffer`: `ls_LoadBuildingEntityState` (server 0x100128f0,
+  client 0x522510) reads a count and `realloc`s the buffer to count * 0x60 bytes, then reads 0x40 + 0x10 +
+  0x10 bytes per record, exactly the client's box records (name, low and high corner) at 0x10058e0 and
+  0x10058e4 (`.scratch/measure/anchors2.py` pairs the two loaders' operands). `rd_AddBKBox` (TL 0x4bd1e0)
+  calls `strnicmp` and `strcmpi`: the client's only `_strnicmp` caller in a server TU, and `strnicmp.obj`
+  already loads for `getqloc.obj`, so the old name adds the sixth alias object and nothing else. It needs
+  only `realloc` and a call through the 3D object's interface. 34 DIR32 records. Its neighbours call engine
+  code the server lacks; `rd_GetBKSize` (0x4bdf40) is deferred (log macro, below).
+- **Savegame writers (round 18).** The client saves; the server only loads. Each writer mirrors a server
+  loader field by field and calls `vfs_fwrite`, which is only linkable now: `ls_SaveObjects`,
+  `ls_SaveDynamicEntities` and `ls_SaveRelationships` (TL 0x51ebc0, 0x51f170, 0x520860, before
+  `ls_ReadVfsDataChecked`), `gv_fio_SaveGraveyardData` (0x4f3900, before `ls_LoadGraveyardData`) and
+  `ahm_fio_SaveAhmInfo` (0x4eed10, before `ahm_AllocAhmInfo`). Their storage is the loaders'
+  (`g_query_base`, `g_entity_base`, both relationship matrices, the graveyard slot and the alchemist record).
+  `vfs_fwrite` returns `unsigned int` like `fwrite`: the client tests its result with `ja`/`jbe`. spiel.c
+  also gains `gm_SlotKindIsOneOf` (0x506ee0, variadic, `g_slot_table`). All match the client in all common
+  bytes under its code generator.
+- **The server's log macro (round 18).** The server build expands the game's log macro to
+  `LogMessageInternal(file, line, message, level)`; the clients compile it to nothing. Server
+  `amt_fio_LoadAemter` logs every failed field ("Can't load id", ...), client 0x4ec520 has no such call;
+  server `ahm_ExAllocAlchemist` logs three errors, client 0x4ee290 none. A formatted message survives in the
+  client as an unused `sprintf` into a local buffer (client `amt_fio_SaveAemter` 0x4ec410, `rd_GetBKSize`,
+  `vfs_Tfopen`, `vfs_init`); a literal message leaves no trace. So a client-only function's server copy can
+  hold `LogMessageInternal` calls, two DIR32 records for each literal message and one for each formatted
+  one, that no binary records. The ports carry the client's code only, so `vfs_Tfopen` and `vfs_init` lack
+  the call their server copies made. `amt_fio_SaveAemter` and `rd_GetBKSize` are ported but not committed:
+  with them `_strncnt`'s ICF survivor flips to `a_map.obj` (`.scratch/measure/icf_predict.py --omit`), and
+  their server copies had a log call anyway. This bounds what any reconstruction from the clients can prove:
+  the exact `.reloc` reservation needs the server's log calls in discarded code, which no image shows.
+- **Ruled out (round 18).** The four -1 dwords the client's command.c keeps between `g_game_speed_index` and
+  the dispatch table (TL 0x68a9d0..0x68a9dc) sit inside plain `.data`, which LINK never discards, and the
+  server has none: they and the helpers reading them (TL 0x4c4dc0, 0x4c76c0, 0x4c7870, 0x4cc590) are not in
+  the server's source. The client's command.c functions that the portability scan reports (TL 0x4cb6f0,
+  0x4cc2b0, 0x4cd750, 0x4cd7a0) are entries 57, 64, 92 and 93 of the client's dispatch table: client
+  versions of server handlers, not extra functions. Error.c's `GILDE_SEASON`/`GILDE_DISASTER`/`GILDE_DAYTIME`
+  registration (TL 0x41db30) calls a client debug-variable unit and its three dwords are absent from the
+  server's Error.c storage; TL 0x41ca10 (nearest palette colour) belongs to a client graphics unit. sim's name
+  table (client 0x773d3c..0x773d44, read by 0x5007f0..0x500a20) is defined in a client-only TU before
+  sim.c. The alchemistry deck (0x772f78..0x7731b8) and the client's 8 x 0x170 alchemist table stay unmapped:
+  the server's `ahm_LookupEntityInTable` walks a 10 x 0x5c table in command.c's `.data`, so the two builds
+  declare that storage differently. Address brackets between equal-offset anchors are not proof by
+  themselves: aemter's TL 0x4e98d0 brackets onto `g_module_path`, which the server uses.
 - **Measured** (native link of the committed tree against `original/Server/server.dll`; `.scratch/measure`
   scripts: section byte compare, IAT and hint/name compare per DLL, Rich records, link map, ICF predictor):
 
-  | | main f829a810 | round 16 fcfdd827 | now | reference |
-  |---|---|---|---|---|
-  | functions at reference VA | 260 | 260 | 260 | 260 |
-  | `rebrew verify` | not re-run | 316/316 | 316/316 | |
-  | `.text` differing bytes | 138 | 146 (all IAT operands) | 0 | 0 |
-  | `.rdata` differing bytes | 242 | 122 | 0 | 0 |
-  | `.data` differing bytes | 0 | 0 | 0 | 0 |
-  | hint/name order diffs | 6 (KERNEL32) | 0 | 0 | 0 |
-  | IAT slots off the reference | 53 of 100 | 37 of 100 | 0 of 100 | 0 |
-  | Rich game C / LIBCMT C / alias / imports | 36 / 113 / 1 / 109 | 38 / 116 / 1 / 127 | 38 / 120 / 4 / 126 | 37 / 124 / 6 / 126 |
-  | `.reloc` VirtualSize | 51312 | 59928 | 59868 | 66420 |
-  | whole file | | | 91 header bytes differ, 8192 bytes short | |
+  | | main f829a810 | round 16 fcfdd827 | round 17 477dc53e | now | reference |
+  |---|---|---|---|---|---|
+  | functions at reference VA | 260 | 260 | 260 | 260 | 260 |
+  | `rebrew verify` | not re-run | 316/316 | 316/316 | 316/316 | |
+  | `.text` differing bytes | 138 | 146 (all IAT operands) | 0 | 0 | 0 |
+  | `.rdata` differing bytes | 242 | 122 | 0 | 0 | 0 |
+  | `.data` differing bytes | 0 | 0 | 0 | 0 | 0 |
+  | hint/name order diffs | 6 (KERNEL32) | 0 | 0 | 0 | 0 |
+  | IAT slots off the reference | 53 of 100 | 37 of 100 | 0 of 100 | 0 of 100 | 0 |
+  | Rich game C / LIBCMT C / alias / imports | 36 / 113 / 1 / 109 | 38 / 116 / 1 / 127 | 38 / 120 / 4 / 126 | 37 / 124 / 6 / 126 | 37 / 124 / 6 / 126 |
+  | `.reloc` VirtualSize | 51312 | 59928 | 59868 | 61476 | 66420 |
+  | header bytes differing (`cmp`, first 0x400) | | | 269 | 6 | |
+  | file size | | | 8192 short | 4096 short | 286720 |
 
-  Three of the 38 game C objects are the generated BSS objects, and `unzip.c` is one. `rebrew binary relocs`
-  reports all 3499 sites and no extra one. Every byte of `.text`, `.rdata` and `.data` equals the reference;
-  the 91 differing bytes are all in the first 0x400 (Rich records and the PE fields that follow from the
-  `.reloc` reservation), and the raw `.reloc` section is 8192 bytes shorter.
-- **Left:**
-  - `.reloc` reservation: 546 input DIR32 records short of 66420 (the timer's 68 left with it).
-  - Rich: 4 LIBCMT C members and 2 alias objects short; one game C object over, with three generated BSS
-    objects counted. Client references still unported: the plant box cache (TL 0x4bd1e0: `stricmp`,
-    `strnicmp`) and spiel 0x50bc10 (`itoa`) are no longer ruled out by load order when they use the old
-    names; each needs its storage mapped first. (The TL rows label 0x66080a `__strlwr`; it is `_strupr`, so
-    its many game callers load no new member.)
+  `rebrew binary relocs` reports all 3499 sites and no extra one. Every byte of `.text`, `.rdata` and `.data`
+  equals the reference and every Rich record matches; the 6 differing header bytes are the `.reloc` section
+  size fields and the image size and checksum that follow from the reservation, and the raw `.reloc`
+  section is one page shorter.
+- **Left:** the `.reloc` reservation, 412 input DIR32 records short of 66420 (5123 of 5535). Every other
+  count the image records is now equal. The remaining records belong to discarded server code: client-only
+  functions whose storage is not yet mapped (the alchemistry deck, aemter's office counters, the loadsave
+  writers that read unmapped tables, spiel's BAD set) and the log calls the server's discarded functions
+  made, which no binary shows (see the log macro above).

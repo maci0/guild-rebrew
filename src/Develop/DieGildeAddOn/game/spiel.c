@@ -3381,6 +3381,35 @@ int __cdecl gm_EntityHasProfession(unsigned short slot, int n, ...)
 	return found;
 }
 
+/* Client-only (TL 0x506ee0, discarded): 1 when slot's kind byte (+0x164) equals one of the n ints that
+ * follow. */
+int __cdecl gm_SlotKindIsOneOf(unsigned short slot, int n, ...)
+{
+	struct SLOT_COPY {
+		unsigned char head[0x164];
+		unsigned char kind;
+		unsigned char tail[0x21c - 0x165];
+	} rec;
+	va_list ap;
+	int r;
+	int i;
+
+	r = 0;
+	rec = ((struct SLOT_COPY*) g_slot_table)[slot];
+	if (n <= -1) {
+		return r;
+	}
+	va_start(ap, n);
+	for (i = 0; i < n; i++) {
+		if (rec.kind == va_arg(ap, int)) {
+			r = 1;
+			break;
+		}
+	}
+	va_end(ap);
+	return r;
+}
+
 int __cdecl gm_GetGuildBuildingKind(int guild)
 {
 	switch (guild) {
@@ -4937,6 +4966,38 @@ draw_tail:
 	return idx;
 }
 
+/* Client-only unit conversions (TL 0x50b710, 0x50b750, 0x50b780, 0x50b7a0; discarded). An item's
+ * amount per trade unit is g_spiel_space_fill[id - 61], 16 entries of 32 for item ids 61..76; the
+ * client addresses the table as 0x6995bc, 61 dwords below it, and nothing else reads it. */
+
+int __cdecl gm_AmountToUnits(int amount, unsigned char type)
+{
+	extern int g_spiel_space_fill[16];
+
+	return (int) ((float) amount / g_spiel_space_fill[*(unsigned short*) &g_entity_slot_table[type * 189] - 61] + 0.5);
+}
+
+int __cdecl gm_UnitsToAmount(int units, unsigned char type)
+{
+	extern int g_spiel_space_fill[16];
+
+	return units * g_spiel_space_fill[*(unsigned short*) &g_entity_slot_table[type * 189] - 61];
+}
+
+int __cdecl gm_UnitsToAmountById(int units, int id)
+{
+	extern int g_spiel_space_fill[16];
+
+	return units * g_spiel_space_fill[id - 61];
+}
+
+int __cdecl gm_AmountToUnitsById(int amount, int id)
+{
+	extern int g_spiel_space_fill[16];
+
+	return amount / g_spiel_space_fill[id - 61];
+}
+
 int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 {
 	short* ent;
@@ -5125,6 +5186,20 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 }
 #pragma optimize("", on)
 
+/* Client-only (TL 0x50bb50, discarded): the season's price of item id from the season's 0x55-entry
+ * table in g_slot_array (gm_FindSlotById's records), else its production value. */
+float __cdecl gm_GetSeasonPrice(int id, unsigned char season)
+{
+	int i;
+
+	for (i = 0; i < 0x55; i++) {
+		if (*(unsigned short*) ((char*) &g_slot_array + season * 0x2a90 + i * 0x80) == id) {
+			return *(float*) ((char*) &g_slot_array + 0x38 + season * 0x2a90 + i * 0x80);
+		}
+	}
+	return gm_CalculateProductionValue(id, 100);
+}
+
 /* Client-only mood, store and building-level helpers (discarded). */
 
 float __cdecl gm_GetHappinessFactor(int slot)
@@ -5141,6 +5216,72 @@ float __cdecl gm_GetHappinessFactor(int slot)
 		return 1.0f;
 	}
 	return (float) (v * (1.0 / 1008.0) + 1.0);
+}
+
+/* Client-only (TL 0x50bc10, discarded): formats amount of item type in trade units as
+ * "[-]1.234.567<0x11>", grouping thousands with dots. The client calls _itoa; itoa is its old name,
+ * which OLDNAMES resolves after xtoa.obj loads for getqloc.obj. */
+void __cdecl gm_FormatPrice(int amount, unsigned char type, char* out)
+{
+	char digits[0x40];
+	char text[0x80];
+	int units;
+	int len;
+	int k;
+	int i;
+	char* p;
+
+	units = gm_AmountToUnits(abs(amount), type);
+	if (amount < 0) {
+		if (units != 0) {
+			if (units >= 1000) {
+				itoa(units, digits, 10);
+				k = -1;
+				len = (int) ((strlen(digits) - 1) * (1.0f / 3) + strlen(digits));
+				i = strlen(digits);
+				if (i >= 0) {
+					p = text + len;
+					do {
+						*p-- = digits[i];
+						if (i != 0 && k > 0 && (k + 1) % 3 == 0) {
+							*p-- = '.';
+						}
+						k++;
+					} while (--i >= 0);
+				}
+				text[len] = 0;
+				sprintf(out, "-%s%c", text, 0x11);
+				return;
+			}
+			sprintf(out, "-%i%c", units, 0x11);
+			return;
+		}
+	} else {
+		if (units >= 1000) {
+			itoa(units, digits, 10);
+			k = -1;
+			len = (int) ((strlen(digits) - 1) * (1.0f / 3) + strlen(digits));
+			i = strlen(digits);
+			if (i >= 0) {
+				p = text + len;
+				do {
+					*p-- = digits[i];
+					if (i != 0 && k > 0 && (k + 1) % 3 == 0) {
+						*p-- = '.';
+					}
+					k++;
+				} while (--i >= 0);
+			}
+			text[len] = 0;
+			sprintf(out, "%s%c", text, 0x11);
+			return;
+		}
+		if (units != 0) {
+			sprintf(out, "%i%c", units, 0x11);
+			return;
+		}
+	}
+	sprintf(out, "0%c", 0x11);
 }
 
 int __cdecl gm_ListBuildingStores(unsigned char* building, void** out)

@@ -710,6 +710,50 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
  * a building. Sets up recipe slots and ingredient storage. */
 
 
+/* Client-only (TL 0x4eed10, discarded): writes the alchemist record of a building that ahm_AllocAhmInfo
+ * sets up, or an empty record with id -1. */
+int __cdecl ahm_fio_SaveAhmInfo(void* file, char* obj)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	char buf[0x3c];
+	char* data;
+	int i;
+
+	data = *(char**) (obj + 0x65);
+	memset(buf, 0, 0x3c);
+	*(int*) buf = -1;
+	if (data == 0) {
+		data = buf;
+	}
+	if (vfs_fwrite(data, 4, 1, file) <= 0) {
+		return 0;
+	}
+	if (vfs_fwrite(data + 4, 4, 1, file) <= 0) {
+		return 0;
+	}
+	if (vfs_fwrite(data + 8, 1, 1, file) <= 0) {
+		return 0;
+	}
+	if (vfs_fwrite(data + 9, 1, 1, file) <= 0) {
+		return 0;
+	}
+	if (vfs_fwrite(data + 0xa, 1, 1, file) <= 0) {
+		return 0;
+	}
+	if (vfs_fwrite(data + 0xb, 1, 1, file) <= 0) {
+		return 0;
+	}
+	for (i = 0; i < 6; i++) {
+		if (vfs_fwrite(data + 0xc + i * 8, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(data + 0x10 + i * 8, 4, 1, file) <= 0) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 {
 	char buf[0x3c];

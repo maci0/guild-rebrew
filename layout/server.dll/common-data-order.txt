@@ -2,6 +2,7 @@ crc_table
 deflate_copyright
 configuration_table
 border
+mark
 inflate_copyright
 cplens
 cplext

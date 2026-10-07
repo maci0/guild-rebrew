@@ -3,7 +3,8 @@
 The server link uses /OPT:REF so unreferenced library code and import thunks drop out, but the game
 functions are reached by address, not by symbol, and so are the shared float constants. Each function
 symbol is anchored in VA order (that order fixes how the linker lays them out), followed by every
-`__declspec(selectany)` constant that `game_float_constants.c` defines.
+`__declspec(selectany)` constant that `game_float_constants.c` defines and the zlib objects in
+ZLIB_ANCHORS.
 Re-run after a function row or a constant is added, renamed or removed.
 """
 
@@ -12,6 +13,9 @@ import tomllib
 from pathlib import Path
 
 CONSTANTS = "src/Develop/DieGildeAddOn/game/game_float_constants.c"
+# Selectany zlib objects that only discarded code references; the original kept them as plain
+# .rdata of their object (inflate.c's inflateSync marker).
+ZLIB_ANCHORS = ("mark",)
 SELECTANY = re.compile(r"^__declspec\(selectany\)\s+const\s+[\w ]+?\s+(\w+)\s*(?:\[|=)", re.M)
 
 
@@ -38,7 +42,7 @@ def main() -> None:
     constants = sorted(SELECTANY.findall((root / CONSTANTS).read_text()))
     out = root / "layout/server.dll/game-includes.rsp"
     lines = [f"/INCLUDE:{by_va[va]}\n" for va in sorted(by_va)]
-    lines += [f"/INCLUDE:_{name}\n" for name in constants]
+    lines += [f"/INCLUDE:_{name}\n" for name in (*constants, *ZLIB_ANCHORS)]
     out.write_text("".join(lines))
     print(f"{len(by_va)} functions, {len(constants)} constants -> {out.relative_to(root)}")
 

@@ -160,7 +160,6 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/inftrees.c"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/infutil.c"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/trees.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/trees2.c"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/uncompr.c"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/zutil.c"
   )
@@ -184,12 +183,11 @@ if(REBREW_BUILD_SERVER)
       --first-va infutil.c=0x10006440
       --first-va net.c=0x10006c80
       --first-va trees.c=0x10006ec0
-      --first-va trees2.c=0x10008800
       --first-va bss_head.c=0x10001000
       --first-va zutil.c=0x100092e0
       --first-va bss_head2.c=0x100092e1
       --first-va spiel_data.c=0x100156b0
-      --exclude gzio.c
+      --first-va gzio.c=0x100036d0
       --exclude compress.c --exclude uncompr.c
     OUTPUT_VARIABLE ORDERED_SOURCES
     OUTPUT_STRIP_TRAILING_WHITESPACE

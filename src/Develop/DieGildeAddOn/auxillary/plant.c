@@ -221,3 +221,90 @@ set_xy:
 	return (int) rec;
 }
 
+
+/* Client-only building-site boxes (TL 0x4bd1e0, after plt_SetPlantMap; discarded). The
+ * boxes are the 0x60-byte records ls_LoadBuildingEntityState reads into g_aux_entity_buffer, counted
+ * by g_aux_entity_count: a site name and the bounding box of its 3D object. The client compares names
+ * with _strnicmp and _strcmpi; strnicmp and strcmpi are their old names. */
+
+/* SIZE 0x60 */
+typedef struct BK_BOX {
+	char name[0x40];
+	float lo[4];
+	float hi[4];
+} BK_BOX;
+
+/* SIZE 0x50 */
+typedef struct BK_VERTEX {
+	float p[3];
+	char pad[0x44];
+} BK_VERTEX;
+
+typedef BK_VERTEX* (__cdecl* BK_GET_VERTICES)(char* name, char* obj, float* matrix);
+
+/* Adds the box of a building-site object (name "bk_..." or "!bk_...") to the cache once. */
+char __cdecl rd_AddBKBox(char* name)
+{
+	extern int __cdecl strnicmp(const char* a, const char* b, unsigned int n);
+	extern int __cdecl strcmpi(const char* a, const char* b);
+	extern void* __cdecl realloc(void* p, unsigned int size);
+	extern int g_aux_entity_count;
+	extern int g_aux_entity_buffer;
+	float m[16];
+	BK_VERTEX* v;
+	char* d;
+	char* obj;
+	int i;
+
+	if (strnicmp(name, "bk_", 3) != 0 && strnicmp(name, "!bk_", 4) != 0) {
+		return 1;
+	}
+	for (i = 0; i < g_aux_entity_count; i++) {
+		if (strcmpi(name, ((BK_BOX*) g_aux_entity_buffer)[i].name) == 0) {
+			return 1;
+		}
+	}
+	obj = *(char**) (name + 0x1cc);
+	m[1] = m[2] = m[3] = m[4] = m[6] = m[7] = m[8] = m[9] = m[11] = m[12] = m[13] = m[14] = 0.0f;
+	m[0] = m[5] = m[10] = m[15] = 1.0f;
+	v = (*(BK_GET_VERTICES*) (*(char**) (obj + 0x318) + 0x1f0))(name, obj, m);
+	g_aux_entity_buffer = (int) realloc((void*) g_aux_entity_buffer, (g_aux_entity_count + 1) * sizeof(BK_BOX));
+	d = ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].name;
+	while ((*d++ = *name++) != 0) {
+	}
+	((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[0] = v->p[0];
+	((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[1] = v->p[1];
+	((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[2] = v->p[2];
+	((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[0] = v->p[0];
+	((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[1] = v->p[1];
+	((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[2] = v->p[2];
+	for (i = 1; i < 8; i++) {
+		((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[0] =
+		    v[i].p[0] < ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[0]
+		        ? v[i].p[0]
+		        : ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[0];
+		((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[1] =
+		    v[i].p[1] < ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[1]
+		        ? v[i].p[1]
+		        : ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[1];
+		((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[2] =
+		    v[i].p[2] < ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[2]
+		        ? v[i].p[2]
+		        : ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].lo[2];
+		((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[0] =
+		    v[i].p[0] > ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[0]
+		        ? v[i].p[0]
+		        : ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[0];
+		((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[1] =
+		    v[i].p[1] > ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[1]
+		        ? v[i].p[1]
+		        : ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[1];
+		((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[2] =
+		    v[i].p[2] > ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[2]
+		        ? v[i].p[2]
+		        : ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[2];
+	}
+	g_aux_entity_count++;
+	return 1;
+}
+

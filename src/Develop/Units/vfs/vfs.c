@@ -35,7 +35,7 @@ extern int __cdecl inflate(void* zstrm, int flush);
 
 int __cdecl unzCloseCurrentFile(char*);
 int __cdecl unzClose(char*);
-int __cdecl vfs_FlushAndClose(int);
+int __cdecl gzclose(int);
 
 extern char g_stream_pool[1];
 #include <string.h>
@@ -999,6 +999,189 @@ char __cdecl vfs_RemoveFile(char* path, VFS_DIR* root)
 	return 0;
 }
 
+/* Opens path below root (TL client 0x42ff50; its messages name it vfs:Open and vfs_Tfopen). mode letters:
+ * R or W read or write, B or T binary or text, Z or N gzip or plain. A file inside a zip archive opens as
+ * the archive member; a loose or new file through gzopen or fopen. */
+/* Opens path below root (TL client 0x42ff50; its messages name it vfs:Open and vfs_Tfopen). mode letters:
+ * R or W read or write, B or T binary or text, Z or N gzip or plain. A file inside a zip archive opens as
+ * the archive member; a loose or new file through gzopen or fopen. */
+/* Opens path below root (TL client 0x42ff50; its messages name it vfs:Open and vfs_Tfopen). mode letters:
+ * R or W read or write, B or T binary or text, Z or N gzip or plain. A file inside a zip archive opens as
+ * the archive member; a loose or new file through gzopen or fopen. */
+char* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
+{
+	extern int __cdecl unzGoToFilePos(char* file, unsigned long pos, unsigned long num);
+	extern int __cdecl unzOpenCurrentFile(char* file);
+	char* stream;
+	unsigned char packed;
+	unsigned char binary;
+	unsigned char read;
+	VFS_DIR* dir;
+	char* modes[2];
+	char* p;
+	VFS_FILE* file;
+	char* zip;
+	void* h;
+	int err;
+	char name[0x100];
+	unsigned long info[0x14];
+	char arch[0x100];
+	char entry[0x100];
+
+	stream = 0;
+	if (path == 0 || *path == 0 || mode == 0 || root == 0) {
+		goto done;
+	}
+	read = 1;
+	binary = 1;
+	packed = 1;
+	for (p = mode; *p != 0; p++) {
+		switch (toupper(*p)) {
+		case 'B':
+			binary = 1;
+			break;
+		case 'N':
+			packed = 0;
+			break;
+		case 'R':
+			read = 1;
+			break;
+		case 'T':
+			binary = 0;
+			break;
+		case 'W':
+			read = 0;
+			break;
+		case 'Z':
+			packed = 1;
+			break;
+		}
+	}
+	if (read) {
+		file = vfs_LookupPath(path, root, &dir);
+		if (file == 0) {
+			goto not_found;
+		}
+		if (file->source != 0) {
+			if (!binary) {
+				ReportMessage("Unsupported Read-Mode in vfs:Open (textfile inside zip)");
+				return 0;
+			}
+			vfs_GetFilePath(0, file->source, 0, arch);
+			strcat(arch, g_file_extension_names + file->archive * 6);
+			vfs_ToBackslashes(arch);
+			zip = unzOpen(arch);
+			if (zip == 0) {
+				goto not_found;
+			}
+			vfs_GetFilePath(file, dir, file->source, entry);
+			_strupr(entry);
+			if ((unsigned long) file->stamp > 0) {
+				err = unzGoToFilePos(zip, file->stamp, file->packed);
+				if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) != 0) {
+					goto close;
+				}
+				_strupr(name);
+				vfs_ToSlashes(name);
+				if (info[8] > 0 && strcmp(entry, name) == 0) {
+				open_member:
+					err = unzOpenCurrentFile(zip);
+				}
+				if (err != 0) {
+					goto close;
+				}
+				stream = (char*) m_PoolAlloc(g_stream_pool, 0x140, 0x10);
+				((vfs_mode_bits*) (stream + 0x13c))->b2 = 1;
+				((vfs_mode_bits*) (stream + 0x13c))->b4 = 1;
+				*(char**) (stream + 0x100) = zip;
+				goto opened;
+			}
+			do {
+				if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
+					_strupr(name);
+					vfs_ToSlashes(name);
+					if (info[8] > 0 && strcmp(entry, name) == 0) {
+						goto open_member;
+					}
+				}
+			} while (unzGoToNextFile(zip) == 0);
+		close:
+			unzClose(zip);
+		not_found:
+			sprintf(entry, "vfs_Tfopen: Could not find \"%s\"!!", path);
+			return stream;
+		}
+		modes[0] = "rt";
+		modes[1] = "rb";
+		vfs_GetFilePath(file, dir, 0, arch);
+		vfs_ToBackslashes(arch);
+		if (packed) {
+			h = gzopen(arch, modes[binary]);
+		} else {
+			h = fopen(arch, modes[binary]);
+		}
+		if (h == 0) {
+			goto not_found;
+		}
+		stream = (char*) m_PoolAlloc(g_stream_pool, 0x140, 0x10);
+		*(void**) (stream + 0x100) = h;
+		((vfs_mode_bits*) (stream + 0x13c))->b4 = 0;
+	opened:
+		strcpy(stream, path);
+		((vfs_mode_bits*) (stream + 0x13c))->b5 = 0;
+		((vfs_mode_bits*) (stream + 0x13c))->read = 1;
+	set_mode:
+		((vfs_mode_bits*) (stream + 0x13c))->b1 = binary;
+		((vfs_mode_bits*) (stream + 0x13c))->compressed = packed;
+		g_stream_count++;
+		return stream;
+	}
+	for (p = path; *p == '\\' || *p == '/'; p++) {
+	}
+	strcpy(name, p);
+	vfs_ToSlashes(name);
+	strcpy(entry, name);
+	vfs_NormalizeCase(name);
+	file = vfs_LookupPath(name, root, &dir);
+	if (file == 0 || file->source != 0) {
+		if (!vfs_MakeDirs(entry, root)) {
+			return 0;
+		}
+		if (file == 0) {
+			vfs_AddPath(name, root, 0, 0, 0, 0, -1);
+			file = vfs_LookupPath(name, root, &dir);
+			if (file == 0) {
+				sprintf(entry, "vfs_Tfopen: Could write to \"%s\"!!", path);
+				ReportMessage(entry);
+				return stream;
+			}
+		}
+	}
+	modes[0] = "wt";
+	modes[1] = "wb";
+	file->offset = -1;
+	file->source = 0;
+	file->stamp = 0;
+	vfs_GetFilePath(file, dir, 0, arch);
+	vfs_ToBackslashes(arch);
+	if (packed) {
+		h = gzopen(arch, modes[binary]);
+	} else {
+		h = fopen(arch, modes[binary]);
+	}
+	if (h == 0) {
+		goto done;
+	}
+	stream = (char*) m_PoolAlloc(g_stream_pool, 0x140, 0x10);
+	*(void**) (stream + 0x100) = h;
+	strcpy(stream, path);
+	((vfs_mode_bits*) (stream + 0x13c))->read = 0;
+	((vfs_mode_bits*) (stream + 0x13c))->b5 = 0;
+	goto set_mode;
+done:
+	return stream;
+}
+
 int __cdecl CloseVfsStream(void* stream)
 {
 	int result;
@@ -1046,7 +1229,7 @@ int __cdecl CloseVfsStream(void* stream)
 						unzCloseCurrentFile(*(void**) ((char*) stream + 0x100));
 						unzClose(*(void**) ((char*) stream + 0x100));
 					} else if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
-						vfs_FlushAndClose((int) *(void**) ((char*) stream + 0x100));
+						gzclose((int) *(void**) ((char*) stream + 0x100));
 					} else {
 						fclose(*(void**) ((char*) stream + 0x100));
 					}
@@ -1174,6 +1357,227 @@ done:
 	return result;
 }
 
+/* Client-only stream helpers (TL client 0x430870..0x430c50, between vfs_ReadData and vfs_OpenStream;
+ * discarded). */
+
+/* Reads one byte; -1 at the end or on error. */
+int __cdecl vfs_fgetc(char* stream)
+{
+	char c;
+
+	if (vfs_ReadData(&c, 1, 1, stream) == 1) {
+		return c;
+	}
+	return -1;
+}
+
+/* Reads one line of at most max characters into buf, dropping the line end. */
+char* __cdecl vfs_fgets(char* buf, int max, char* stream)
+{
+	int c;
+	char* p;
+	int i;
+
+	c = vfs_fgetc(stream);
+	if (c == -1) {
+		return 0;
+	}
+	p = buf;
+	i = 0;
+	while (c != '\r' && c != '\n' && c != -1 && i < max) {
+		*p++ = (char) c;
+		i++;
+		c = vfs_fgetc(stream);
+	}
+	*p = 0;
+	if (c != -1) {
+		while (c == '\r' || c == '\n') {
+			c = vfs_fgetc(stream);
+		}
+	}
+	return buf;
+}
+
+/* Writes count items of size bytes: into a memory stream (deflated when compressed), through gzwrite, or
+ * through fwrite. Returns the bytes or items written, -1 on error. */
+unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream)
+{
+	int result;
+	int total;
+	void* h;
+	unsigned char flags;
+	char mem;
+
+	result = -1;
+	if (stream == 0) {
+		goto done;
+	}
+	flags = *(unsigned char*) (stream + 0x13c);
+	if (flags & 1) {
+		goto done;
+	}
+	h = *(void**) (stream + 0x100);
+	if (h == 0 && !(flags & 0x20)) {
+		goto done;
+	}
+	total = size * count;
+	mem = (flags >> 5) & 1;
+	if (mem && !(flags & 8) && *(unsigned int*) (stream + 0x110) < (unsigned int) total) {
+		total = *(int*) (stream + 0x110);
+	}
+	if (total == 0) {
+		result = total;
+		goto done;
+	}
+	if (buf == 0) {
+		goto done;
+	}
+	if (mem) {
+		if (flags & 8) {
+			*(char**) (stream + 0x100) = buf;
+			*(int*) (stream + 0x104) = total;
+			deflate((z_streamp) (stream + 0x100), 0);
+			*(unsigned int*) (stream + 0x138) = crc32(*(unsigned int*) (stream + 0x138), (unsigned char*) buf, total);
+			result = total - *(int*) (stream + 0x104);
+			goto done;
+		}
+		{
+			char* fdest;
+
+			fdest = *(char**) (stream + 0x10c);
+			/* The same hand-written alignment copy as vfs_ReadData's. */
+			__asm {
+				mov edi, fdest
+				mov esi, buf
+				mov ebx, total
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short L1
+				rep movsb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep movsd
+			L1:
+				add ecx, ebx
+				rep movsb
+			}
+		}
+		*(char**) (stream + 0x10c) += total;
+		*(int*) (stream + 0x110) -= total;
+		*(int*) (stream + 0x114) += total;
+		result = total;
+		goto done;
+	}
+	if (flags & 8) {
+		result = gzwrite(h, buf, total);
+		goto done;
+	}
+	result = fwrite(buf, size, count, h);
+done:
+	return result;
+}
+
+/* Seeks a plain, gzip or zip-member stream opened for reading; a zip member seeks forward by reading. */
+int __cdecl vfs_fseek(char* s, int off, int whence)
+{
+	extern long __cdecl unztell(void* file);
+	extern int __cdecl unzOpenCurrentFile(char* file);
+	int r;
+	int pos;
+	void* buf;
+
+	r = -1;
+	if (s != 0 && *(void**) (s + 0x100) != 0 && (s[0x13c] & 0x20) == 0) {
+		if (s[0x13c] & 1) {
+			if (s[0x13c] & 0x10) {
+				s[0x13c] &= ~4;
+				if (whence == 0) {
+					pos = unztell(*(void**) (s + 0x100));
+					if (pos <= off) {
+						if (pos == off) {
+							r = 0;
+						} else {
+							off -= pos;
+							buf = m_AllocTracked(off, "vfs:fseek(inzip,SEEK_SET,skip)");
+							if (unzReadCurrentFile(*(int*) (s + 0x100), (char*) buf, off) == off) {
+								r = 0;
+							}
+							m_FreeTracked(buf);
+						}
+					} else {
+						unzCloseCurrentFile(*(char**) (s + 0x100));
+						if (unzOpenCurrentFile(*(char**) (s + 0x100)) == 0) {
+							buf = m_AllocTracked(off, "vfs:fseek(inzip,SEEK_SET,skip)");
+							if (unzReadCurrentFile(*(int*) (s + 0x100), (char*) buf, off) == off) {
+								r = 0;
+							}
+							m_FreeTracked(buf);
+						}
+					}
+				} else if (whence == 1) {
+					if (off >= 0) {
+						if (off == 0) {
+							r = 0;
+						} else {
+							buf = m_AllocTracked(off, "vfs:fseek(inzip,SEEK_CUR,skip)");
+							if (unzReadCurrentFile(*(int*) (s + 0x100), (char*) buf, off) == off) {
+								r = 0;
+							}
+							m_FreeTracked(buf);
+						}
+					} else {
+						ReportMessage("Unsupported vfs_fseek(inzip,SEEK_CUR)");
+					}
+				} else {
+					ReportMessage("Unsupported vfs_fseek(inzip,SEEK_END)");
+				}
+			} else if (s[0x13c] & 8) {
+				r = gzseek(*(void**) (s + 0x100), off, whence);
+				r = r != -1 ? 0 : -1;
+			} else {
+				r = fseek(*(FILE**) (s + 0x100), off, whence);
+				r = r != 0 ? -1 : 0;
+			}
+		} else {
+			ReportMessage("Seeking only supported in read-only files");
+		}
+	}
+	return r;
+}
+
+/* Position in a memory, zip-member, gzip or plain stream; -1 on error. */
+long __cdecl vfs_ftell(char* a)
+{
+	extern long __cdecl unztell(void* file);
+	void* h;
+	long r;
+
+	r = -1;
+	if (a != 0) {
+		h = *(void**) (a + 0x100);
+		if (h != 0 || ((vfs_mode_bits*) (a + 0x13c))->b5) {
+			if (((vfs_mode_bits*) (a + 0x13c))->b5) {
+				r = *(long*) (a + 0x108);
+			} else if (((vfs_mode_bits*) (a + 0x13c))->read) {
+				if (((vfs_mode_bits*) (a + 0x13c))->b4) {
+					r = unztell(h);
+				} else if (((vfs_mode_bits*) (a + 0x13c))->compressed) {
+					r = gztell(h);
+				} else {
+					r = ftell(h);
+				}
+			} else if (((vfs_mode_bits*) (a + 0x13c))->compressed) {
+				r = gztell(h);
+			} else {
+				r = ftell(h);
+			}
+		}
+	}
+	return r;
+}
+
 int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
 	char* stream;
@@ -1286,6 +1690,57 @@ cleanup:
 	return 0;
 }
 
+/* Client-only (TL client 0x430f70, discarded): calls cb for every file of dir and its subdirectories
+ * (and dir's later siblings when siblings is set), optionally only for one extension; stops when cb
+ * returns 0. dir 0 is the root. */
+char __cdecl vfs_ForEachFile(VFS_DIR* start, char siblings, char* ext, char (__cdecl* cb)(VFS_FILE*, VFS_DIR*, void*), void* ctx)
+{
+	int i;
+	VFS_FILE* f;
+	char* dot;
+	VFS_DIR* dir;
+
+	dir = start;
+	if (cb == 0) {
+		return 0;
+	}
+	if (dir == 0) {
+		dir = g_vfs_root;
+		if (dir == 0) {
+			return 1;
+		}
+	}
+	do {
+		if (dir->loaded == 0) {
+			break;
+		}
+		if (ext == 0) {
+			for (i = 0, f = dir->files; i < dir->count; i++, f++) {
+				if (!cb(f, dir, ctx)) {
+					return 0;
+				}
+			}
+		} else {
+			for (i = 0, f = dir->files; i < dir->count; i++, f++) {
+				dot = strrchr(f->name, '.');
+				if (dot != 0 && stricmp(dot + 1, ext) == 0) {
+					if (!cb(f, dir, ctx)) {
+						return 0;
+					}
+				}
+			}
+		}
+		if (dir->child != 0) {
+			vfs_ForEachFile(dir->child, 1, ext, cb, ctx);
+		}
+		if (!siblings) {
+			break;
+		}
+		dir = dir->next;
+	} while (dir != 0);
+	return 1;
+}
+
 /* Mounts the file system rooted at name; flag selects case-insensitive compares. Returns whether the
  * root was found. TL client 0x431070; getcwd is called by its old name. */
 int __cdecl vfs_init(char* name, char flag)
@@ -1300,4 +1755,37 @@ int __cdecl vfs_init(char* name, char flag)
 	sprintf(buf, "vfs_init: root -> \"%s\" relative to \"%s\"", name, cwd);
 	*(int*) g_vfs_item_pool = 0;
 	return g_vfs_root != 0;
+}
+
+/* Client-only (TL client 0x4310f0, discarded): unmounts the file system and closes the streams left open;
+ * verbose reports how many were. */
+void __cdecl vfs_exit(char verbose)
+{
+	extern void* __cdecl m_pool_first(void* head, int* it);
+	extern void* __cdecl m_pool_next(int* it);
+	extern void __cdecl m_pool_free_all(void* head);
+	int it[3];
+	char buf[0x100];
+	char* s;
+
+	if (g_vfs_root != 0) {
+		vfs_FreeDirs(g_vfs_root);
+		g_vfs_root = 0;
+	}
+	if (g_stream_count != 0 && verbose != 0) {
+		sprintf(buf, "%i vfs_file(s) were left open!", g_stream_count);
+		ReportMessage(buf);
+	}
+	if (*(void**) g_stream_pool != 0) {
+		s = (char*) m_pool_first(*(void**) g_stream_pool, it);
+		while (s != 0) {
+			CloseVfsStream(s);
+			s = (char*) m_pool_next(it);
+		}
+	}
+	g_stream_count = 0;
+	if (*(void**) g_vfs_item_pool != 0) {
+		m_pool_free_all((void*) g_vfs_item_pool);
+	}
+	g_vfs_case_sensitive = 0;
 }

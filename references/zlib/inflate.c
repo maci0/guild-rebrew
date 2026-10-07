@@ -137,8 +137,6 @@ int stream_size;
 }
 
 
-/* stripped: not present in original DLL */
-#if 0
 int ZEXPORT inflateInit_(z, version, stream_size)
 z_streamp z;
 const char *version;
@@ -146,7 +144,6 @@ int stream_size;
 {
   return inflateInit2_(z, DEF_WBITS, version, stream_size);
 }
-#endif
 
 
 #define NEEDBYTE {if(z->avail_in==0)return r;r=f;}
@@ -280,8 +277,6 @@ int f;
 }
 
 
-/* stripped: not present in original DLL */
-#if 0
 int ZEXPORT inflateSetDictionary(z, dictionary, dictLength)
 z_streamp z;
 const Bytef *dictionary;
@@ -304,11 +299,15 @@ uInt  dictLength;
   z->state->mode = BLOCKS;
   return Z_OK;
 }
-#endif
 
 
-/* stripped: not present in original DLL */
-#if 0
+/* inflateSync's marker bytes, moved out of block scope into a selectany
+ * object so common-data-order.txt can place them right after border[], where
+ * the original image has them (the static's object-order position).
+ * layout/server.dll/game-includes.rsp keeps the COMDAT that /OPT:REF would
+ * drop with inflateSync, as the static's plain .rdata was kept. */
+__declspec(selectany) const Byte mark[4] = {0, 0, 0xff, 0xff};
+
 int ZEXPORT inflateSync(z)
 z_streamp z;
 {
@@ -333,7 +332,6 @@ z_streamp z;
   /* search */
   while (n && m < 4)
   {
-    static const Byte mark[4] = {0, 0, 0xff, 0xff};
     if (*p == mark[m])
       m++;
     else if (*p)
@@ -358,7 +356,6 @@ z_streamp z;
   z->state->mode = BLOCKS;
   return Z_OK;
 }
-#endif
 
 
 /* Returns true if inflate is currently at the end of a block generated
@@ -368,8 +365,6 @@ z_streamp z;
  * decompressing, PPP checks that at the end of input packet, inflate is
  * waiting for these length bytes.
  */
-/* stripped: not present in original DLL */
-#if 0
 int ZEXPORT inflateSyncPoint(z)
 z_streamp z;
 {
@@ -377,4 +372,3 @@ z_streamp z;
     return Z_STREAM_ERROR;
   return inflate_blocks_sync_point(z->state->blocks);
 }
-#endif

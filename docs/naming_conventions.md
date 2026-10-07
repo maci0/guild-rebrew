@@ -110,7 +110,7 @@ one file per original translation unit, in the order the linker lays them out (v
 |---|---|---|
 | `0x10001130` | `Units/net/broadcast.c` | 1 |
 | `0x10002640`-`0x10003640` | `Units/Error/Error.c` | 11 |
-| `0x100036d0`-`0x10003cf0` | `Units/vfs/gz_stream.c` | 8 (zlib `gzio.c` with VFS readers; the name is inferred, no `__FILE__` string) |
+| `0x100036d0`-`0x10003cf0` | `references/zlib/gzio.c` | 8 (stock zlib 1.1.3 `gzio.c`; vfs.c calls its `gzread` and `gzclose`) |
 | `0x10006580`-`0x10006e30` | `Units/m_alloc/m_alloc.c` | 7 |
 | `0x10008a50`-`0x10008c80` | `Units/vfs/unzip.c` | 3 (stock minizip 0.15; the name is inferred, no `__FILE__` string) |
 | `0x10008d10`-`0x10009020` | `Units/vfs/vfs.c` | 3 |

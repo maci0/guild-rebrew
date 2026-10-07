@@ -10,12 +10,6 @@
 /INCLUDE:_ReportFatalError
 /INCLUDE:_ReportMessage
 /INCLUDE:_LogMessageInternal
-/INCLUDE:_vfs_GetByte
-/INCLUDE:_vfs_CloseStream
-/INCLUDE:_vfs_FlushStream
-/INCLUDE:_vfs_ReadUint32BE
-/INCLUDE:_vfs_FlushAndClose
-/INCLUDE:_vfs_WriteUint32LE
 /INCLUDE:_m_AllocTracked
 /INCLUDE:_m_FreeTracked
 /INCLUDE:_m_init
@@ -292,3 +286,4 @@
 /INCLUDE:_g_output_share
 /INCLUDE:_g_player_trait_ranges
 /INCLUDE:_g_worker_entry_count
+/INCLUDE:_mark

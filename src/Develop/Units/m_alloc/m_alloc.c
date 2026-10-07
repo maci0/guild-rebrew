@@ -685,6 +685,25 @@ extern void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, 
 extern void __cdecl free(void* ptr);
 extern void* __cdecl malloc(unsigned int size);
 
+/* Client-only (TL 0x41dd90, discarded): 1 when ptr is null or a tracked allocation. */
+int __cdecl m_is_tracked(void* ptr)
+{
+	char* entry;
+	int i;
+
+	if (ptr != 0) {
+		entry = (char*) g_array_ptr;
+		for (i = 0; i < g_array_count; i++) {
+			if (*(void**) (entry + 8) == ptr) {
+				break;
+			}
+			entry += 0x10;
+		}
+		return i != g_array_count;
+	}
+	return 1;
+}
+
 void __cdecl m_FreeTracked(void* ptr)
 {
 	char* pool;
@@ -1092,5 +1111,156 @@ void __cdecl m_pool_free(int* pool, int* block)
 	}
 }
 
-/* Returns a block to the packet pool free list. Adds the block
- * back to the free chain for reuse. */
+/* Client-only pool helpers (TL 0x41e350..0x41e4d0, after m_pool_free; discarded). An iterator is
+ * three ints: the current block, the next slot index in it, and the block's used slots left. */
+
+void* __cdecl m_pool_next(int* it)
+{
+	int idx;
+	int stride;
+	char* slot;
+
+	if (it != 0 && it[0] != 0) {
+		idx = it[1];
+		do {
+			stride = ((struct BlockNode*) it[0])->size;
+			if (it[2] == 0) {
+				it[2] = ((struct BlockNode*) it[0])->count;
+			}
+			slot = (char*) it[0] + 0x10 + idx * stride;
+			if (it[2] > 0) {
+				while (*(int*) slot == 0) {
+					idx++;
+					slot += stride;
+				}
+				if (--it[2] <= 0) {
+					it[1] = 0;
+					it[0] = (int) ((struct BlockNode*) it[0])->next;
+					it[2] = 0;
+				} else {
+					it[1] = idx + 1;
+				}
+				return slot + 4;
+			}
+			it[0] = (int) ((struct BlockNode*) it[0])->next;
+		} while (it[0] != 0);
+	}
+	return 0;
+}
+
+void* __cdecl m_pool_first(struct BlockNode* head, int* it)
+{
+	if (head != 0 && it != 0) {
+		it[0] = (int) head;
+		it[1] = 0;
+		it[2] = 0;
+		return m_pool_next(it);
+	}
+	return 0;
+}
+
+void __cdecl m_pool_free_all(struct BlockNode** head)
+{
+	struct BlockNode* block;
+	struct BlockNode* next;
+
+	if (head == 0) {
+		return;
+	}
+	block = *head;
+	while (block != 0) {
+		next = block->next;
+		m_FreeTracked(block);
+		block = next;
+	}
+	*head = 0;
+}
+
+int __cdecl m_pool_clear(struct BlockNode** head)
+{
+	int n;
+	struct BlockNode* block;
+	int i;
+	char* slot;
+
+	n = 0;
+	if (head != 0) {
+		block = *head;
+		if (block != 0) {
+			do {
+				n += block->count;
+				block->count = 0;
+				slot = (char*) block + 0x10;
+				for (i = 0; i < block->max; i++) {
+					*(int*) slot = 0;
+					slot += block->size;
+				}
+				block = block->next;
+			} while (block != 0);
+		}
+	}
+	return n;
+}
+
+void __cdecl m_pool_info(struct BlockNode** head, int* count, int* max, int* size)
+{
+	struct BlockNode* block;
+	int a;
+	int b;
+	int c;
+
+	a = 0;
+	b = 0;
+	c = 0;
+	if (head != 0) {
+		block = *head;
+		if (block != 0) {
+			a = block->count;
+			b = block->max;
+			c = block->size;
+		}
+	}
+	if (count != 0) {
+		*count = a;
+	}
+	if (max != 0) {
+		*max = b;
+	}
+	if (size != 0) {
+		*size = c;
+	}
+}
+
+void __cdecl m_pool_stats(struct BlockNode* block, int* blocks, int* used, int* slots, unsigned int* avg_size)
+{
+	int c;
+	int a;
+	int b;
+	unsigned int d;
+
+	c = 0;
+	a = 0;
+	b = 0;
+	d = 0;
+	for (; block != 0; block = block->next) {
+		c++;
+		a += block->count;
+		b += block->max;
+		d += block->size;
+	}
+	if (c > 0) {
+		d /= c;
+	}
+	if (blocks != 0) {
+		*blocks = c;
+	}
+	if (used != 0) {
+		*used = a;
+	}
+	if (slots != 0) {
+		*slots = b;
+	}
+	if (avg_size != 0) {
+		*avg_size = d;
+	}
+}

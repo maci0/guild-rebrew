@@ -190,8 +190,6 @@ struct static_tree_desc_s {int dummy;}; /* for buggy compilers */
     zmemzero((Bytef *)s->head, (unsigned)(s->hash_size-1)*sizeof(*s->head));
 
 /* ========================================================================= */
-/* stripped: not present in original DLL */
-#if 0
 int ZEXPORT deflateInit_(strm, level, version, stream_size)
     z_streamp strm;
     int level;
@@ -202,7 +200,6 @@ int ZEXPORT deflateInit_(strm, level, version, stream_size)
 			 Z_DEFAULT_STRATEGY, version, stream_size);
     /* To do: ignore strm->next_in if we use it as window */
 }
-#endif
 
 
 /* ========================================================================= */
@@ -295,8 +292,6 @@ int ZEXPORT deflateInit2_(strm, level, method, windowBits, memLevel, strategy,
 }
 
 /* ========================================================================= */
-/* stripped: not present in original DLL */
-#if 0
 int ZEXPORT deflateSetDictionary (strm, dictionary, dictLength)
     z_streamp strm;
     const Bytef *dictionary;
@@ -336,7 +331,6 @@ int ZEXPORT deflateSetDictionary (strm, dictionary, dictLength)
     if (hash_head) hash_head = 0;  /* to make compiler happy */
     return Z_OK;
 }
-#endif
 
 
 /* ========================================================================= */
@@ -370,8 +364,6 @@ int ZEXPORT deflateReset (strm)
 }
 
 /* ========================================================================= */
-/* stripped: not present in original DLL */
-#if 0
 int ZEXPORT deflateParams(strm, level, strategy)
     z_streamp strm;
     int level;
@@ -406,7 +398,6 @@ int ZEXPORT deflateParams(strm, level, strategy)
     s->strategy = strategy;
     return err;
 }
-#endif
 
 
 /* =========================================================================
@@ -612,8 +603,6 @@ int ZEXPORT deflateEnd (strm)
  * To simplify the source, this is not supported for 16-bit MSDOS (which
  * doesn't have enough memory anyway to duplicate compression states).
  */
-/* stripped: not present in original DLL */
-#if 0
 int ZEXPORT deflateCopy (dest, source)
     z_streamp dest;
     z_streamp source;
@@ -668,7 +657,6 @@ int ZEXPORT deflateCopy (dest, source)
     return Z_OK;
 #endif
 }
-#endif
 
 
 /* ===========================================================================
