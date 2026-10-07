@@ -4985,11 +4985,48 @@ Two source facts the order depends on, both measured:
   imports and RtlUnwind follow naturally. Every DLL's hint/name order then equals the reference's except
   `GetLastError` (load index 42 against 37; no loaded member between `toupper.obj` and `realloc.obj`
   references it). Raw `.rdata` differs in 242 bytes (was 1768).
-- **Left:**
-  - IAT slot order. LINK sorts the `.idata$5` contributions (function imports, dropped ones and null thunks,
-    in load order) with the runtime's qsort keyed by DLL name; a Python model of the VC6 qsort over that
-    array reproduces our build's KERNEL32 slots exactly. For the reference, a hill-climb over the unknown
-    entries (dropped imports after load index 28, the other DLLs as whole blocks) gets within 8 of 81
-    KERNEL32 slots, not to 0, so the original array holds something this build lacks. The 138 `.text`
-    bytes that differ are all IAT slot operands.
-  - `.reloc` reservation (above).
+- **Left:** the IAT slot order (all 138 differing `.text` bytes are IAT slot operands), the 98-byte
+  `GetLastError` hint/name shift, and the `.reloc` reservation. Section 5e explains all three.
+
+### 5e. The server was linked from source files shared with the client (2026-10-07)
+
+The game's source files (`spiel.c`, `aemter.c`, `net.c`, ...) were compiled into the clients and the server.
+`/O2` implies `/Gy`, so the server's `/OPT:REF` discarded every function the server never calls: the TL
+client's `aemter.c` holds about 19 KB of code, the server's 2.9 KB. The discarded functions still shaped the
+server image, and the remaining differences are their fingerprints. The general rules are in rebrew's
+`rebrew-data-analysis` skill, `references/link-fingerprints.md`.
+
+- **Rich header.** The reference's `@comp.id` counts against this build: game C objects (10/8966) 37 vs 36,
+  LIBCMT C members (10/8047) 124 vs 113, weak-alias objects (12/7291) 6 vs 1, import members (1/0) 126 vs 109,
+  descriptors and null thunks (19/8034) 9 vs 9, asm members (14/7299) 22 vs 22. So the original linked one more
+  game object, 11 more LIBCMT C members, 5 more alias objects and 17 more import functions, and no extra DLL.
+- **IAT order.** LINK sorts the `.idata$4`/`.idata$5` contributions with MSVCRT 6.0.8797's `qsort` (middle
+  pivot, no median-of-three, selection sort for runs of 8 or fewer, leftmost maximum), comparing only the
+  module file name. The array is every loaded import member in `/VERBOSE` load order, dropped ones included,
+  plus each DLL's null thunk; each null thunk then moves to the end of its DLL's run. A Python port of this
+  predicts this build's IAT exactly for all four DLLs over four different relinks. With 17 extra dropped
+  imports (KERNEL32 in both passes plus WS2_32/WINMM), exact solutions for the reference exist; the bytes do
+  not say which functions they were.
+- **A fully dropped DLL leaves its name.** LINK keeps the DLL name string when all its imports are dropped
+  (ADVAPI32 and WINSPOOL probes added `ADVAPI32.dll`/`WINSPOOL.DRV` to the import area); the reference has none,
+  so the extra imports come from KERNEL32, USER32, WS2_32 and WINMM.
+- **`.reloc` reservation.** DIR32 records in discarded functions and discarded data COMDATs count, REL32 do
+  not: a discarded function with 1261 absolute stores gives exactly the reference's 66420, `SizeOfImage` and
+  file size, with no other byte changed. All 3499 relocation sites are now present (`rebrew binary relocs`).
+- **Load position.** A discarded CRT reference loads its member where it is first referenced: `_chmod` or
+  `_rmdir` referenced between `toupper.obj` and `realloc.obj` puts `GetLastError` at the reference's load
+  index 37 (`.rdata` 242 to 138). That needs the CRT anchors that follow to move from the command-line
+  include list (read before any object) into a later object's `#pragma comment(linker, "/include:...")`.
+- **Shown, not adopted.** A synthetic discarded TU (placeholder API calls and CRT references) reproduces
+  `.text`, `.rdata`, `.data` and the Rich header byte for byte. It proves the model but invents code, so
+  the build instead reconstructs the real client-only functions in the shared files: the client `net.c`
+  (WS2_32 connect, select, gethostbyname, ...), the timer unit that also holds `gm_Random*` (WINMM timers;
+  the likely 37th game object), the `.BIN` file search before `vfs.c` (KERNEL32 `FindFirstFileA`, ...) and the
+  self-contained client-only functions of the game TUs (about 1000 to 1370 DIR32). Discarded code must still
+  link, because LINK resolves references before it discards, so only functions whose callees and globals
+  exist in the server belong in the server build.
+- **`chr.obj` comes from `MSVCRT.LIB` today.** `bss_late` compiles with `-MD` (CMake sets the runtime only on
+  `server_dll`), which adds `/DEFAULTLIB:MSVCRT` and the LNK4098 warning, and the late `__tcschr` resolves from
+  `MSVCRT.LIB(chr.obj)`. With `-MT`, LIBCMT's identical member loads later: `_RtlUnwind@16` sits 2 bytes early
+  and `.text` ends 10 bytes long. The thunk's position is another load-order fingerprint to resolve with the
+  reconstructed inputs.
