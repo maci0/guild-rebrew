@@ -15770,3 +15770,25 @@ writer = "verify"
 input_hash = "0b90457e022e5d3f87fcfd5ff6facb76c4b8cc27340ab05b96f6606374ecc4e5"
 definition_hash = "ce3d32744f34c09974cf6ef27ed0978319ef1aa88efb3b6b7d126233ddbf123c"
 measured_at = "2026-10-06T05:44:21+00:00"
+
+["SERVER.0x10034668"]
+name = "g_vfs_root"
+updated_by = "data"
+updated_at = "2026-10-07T18:40:50+00:00"
+type = "void*"
+size = 4
+section = ".bss"
+storage_kind = "object"
+file = "src/bss_layout/bss_head2.c"
+link_symbol = "_g_vfs_root"
+
+["SERVER.0x1003466c"]
+name = "g_vfs_item_pool"
+updated_by = "data"
+updated_at = "2026-10-07T18:40:50+00:00"
+type = "void*"
+size = 4
+section = ".bss"
+storage_kind = "object"
+file = "src/bss_layout/bss_head2.c"
+link_symbol = "_g_vfs_item_pool"
