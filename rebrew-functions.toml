@@ -179109,7 +179109,7 @@ marker_type = "FUNCTION"
 name = "CloseVfsStream"
 
 ["SERVER.0x10008d10".verification]
-source_hash = "ce14f7388b1033364a8034fb8918d73ebd296ea5967adc9af5649dae60e503dd"
+source_hash = "af029b9ff439cc85b5d9eff7a3fd89a9a9140cce09a38855fca42b3c4c28b340"
 reference_hash = "eaa2d5459b0c70d5da9601b5c016041a295e8c7a36a4a3e1c9b3f049e2622b5f"
 reference_size = "301"
 headers_hash = "7d3428e0c597a5d715e7a3b065e25a5f09f85601e84e7d29b7be6b25414c6915"
@@ -179120,10 +179120,10 @@ module = "SERVER"
 va = "0x10008d10"
 context_hash = ""
 defines = "[]"
-input_hash = "817320a0cb922732ffcf50c21a9c6ca81073561826e7aa241217bbb75f79d766"
+input_hash = "750bf68d95cf550a789dcac8f53c08df742fac6d4bb61f1ea5456f2ba66a2957"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:59:00+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10008e40"]
 size = 472
@@ -179137,7 +179137,7 @@ marker_type = "FUNCTION"
 name = "vfs_ReadData"
 
 ["SERVER.0x10008e40".verification]
-source_hash = "ce14f7388b1033364a8034fb8918d73ebd296ea5967adc9af5649dae60e503dd"
+source_hash = "af029b9ff439cc85b5d9eff7a3fd89a9a9140cce09a38855fca42b3c4c28b340"
 reference_hash = "7e85fe6e59909ddb5a837c38dbbec66cb5a194d8af6fe5ba3b0f65e0eae40b29"
 reference_size = "472"
 headers_hash = "7d3428e0c597a5d715e7a3b065e25a5f09f85601e84e7d29b7be6b25414c6915"
@@ -179148,10 +179148,10 @@ module = "SERVER"
 va = "0x10008e40"
 context_hash = ""
 defines = "[]"
-input_hash = "4c0564c14c40fa8007e6da5e9116c6da4b4d9938ce56765019ac76838660155e"
+input_hash = "c191e5622a4665e5674ad426cdad6a479193ed69ddff5bd1a377f46e39e992f3"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:59:00+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10009020"]
 size = 701
@@ -179166,7 +179166,7 @@ name = "vfs_OpenStream"
 note = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
 
 ["SERVER.0x10009020".verification]
-source_hash = "ce14f7388b1033364a8034fb8918d73ebd296ea5967adc9af5649dae60e503dd"
+source_hash = "af029b9ff439cc85b5d9eff7a3fd89a9a9140cce09a38855fca42b3c4c28b340"
 reference_hash = "7a948d2052e93bc4bdb0f2f11e76022b06491cbd0c5cd942cacde568eeac42cc"
 reference_size = "701"
 headers_hash = "7d3428e0c597a5d715e7a3b065e25a5f09f85601e84e7d29b7be6b25414c6915"
@@ -179177,10 +179177,10 @@ module = "SERVER"
 va = "0x10009020"
 context_hash = ""
 defines = "[]"
-input_hash = "2490096279b53a0748f9c492cbc91e0f1ef82a759969883ec0d026be1232d01d"
+input_hash = "b30c5df6dce7d95093ac8899d9bb29b3e2cae483e4efc6a693a2820f5ad968b3"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:59:00+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100092e0"]
 size = 19
@@ -180068,7 +180068,7 @@ marker_type = "FUNCTION"
 name = "ahm_ResetEntityState"
 
 ["SERVER.0x1000bd50".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "aebad3a8b58612911a063e4c4e43c985bd7a0632ed33ab74a7a47b1aa9f7a51a"
 reference_size = "66"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180079,10 +180079,10 @@ module = "SERVER"
 va = "0x1000bd50"
 context_hash = ""
 defines = "[]"
-input_hash = "4b3ea941e944526545407b81846234ef721e1174c57b8644770e9463bb4e175b"
+input_hash = "63747dba835fc803f146ad5e921d07065536efb5e2842998de8eb5cf7c601aaf"
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000bda0"]
 size = 70
@@ -180096,7 +180096,7 @@ marker_type = "FUNCTION"
 name = "ahm_CheckFlag"
 
 ["SERVER.0x1000bda0".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "3be945f40ede178214afd7a611300885b5dcee8b5c045d4828c9b7b10db10b87"
 reference_size = "70"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180107,10 +180107,10 @@ module = "SERVER"
 va = "0x1000bda0"
 context_hash = ""
 defines = "[]"
-input_hash = "43057554d0fb1cbf839982ba36a1a645ef56dbab6cb383cc59226687ddcde910"
+input_hash = "b2306832be5b675bbdc9a4c5c263f6b752b56f3c56bd0e1b5cdf48bd5829140b"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000bdf0"]
 size = 1002
@@ -180126,7 +180126,7 @@ name = "ahm_ExAllocAlchemist"
 note = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
 
 ["SERVER.0x1000bdf0".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "6817d18f579fb6bca88f7be15cc27d4136e4b26216a8ed8904a6a933cdd54f58"
 reference_size = "1002"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180137,10 +180137,10 @@ module = "SERVER"
 va = "0x1000bdf0"
 context_hash = ""
 defines = "[]"
-input_hash = "b63f8b60c8b592807d41fcb5871e7c44d653d7a1dccc24c9b50143d7a48150b6"
+input_hash = "6548c9f87fc22a08f13a4966062138c32de60649319b31a3306e70d1732e640f"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c1e0"]
 size = 148
@@ -180154,7 +180154,7 @@ marker_type = "FUNCTION"
 name = "ahm_ApplyColorComponent"
 
 ["SERVER.0x1000c1e0".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "8e0f12428d2018c46683089d388ab5accc75aa579f7f9358581f81355700ee38"
 reference_size = "148"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180165,10 +180165,10 @@ module = "SERVER"
 va = "0x1000c1e0"
 context_hash = ""
 defines = "[]"
-input_hash = "729dce769f305ab27768af9ca7356fb027bd165a4a98aae1c6b3d4a5b5fab0d2"
+input_hash = "67f5f1582c35d1c64219083a286047cc29447852b58952b56162725ad993eaa8"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c280"]
 size = 130
@@ -180179,7 +180179,7 @@ marker_type = "FUNCTION"
 name = "ahm_AllocateEntitySlot"
 
 ["SERVER.0x1000c280".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "a6ae744a915f458bce000f7097f47e34a53884facc7d5dc5d5a193e9e685a290"
 reference_size = "130"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180190,10 +180190,10 @@ module = "SERVER"
 va = "0x1000c280"
 context_hash = ""
 defines = "[]"
-input_hash = "397122b2635149ba7a65ef547b98790b893d858d5360986fd6ccaf8c16010c45"
+input_hash = "57c26994e468a66cd25224ea45a1ac325149a08c9a78c3d3a58aeb4244395146"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c310"]
 size = 110
@@ -180204,7 +180204,7 @@ marker_type = "FUNCTION"
 name = "ahm_SlotClearMatch"
 
 ["SERVER.0x1000c310".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "f83721487f53c055b20d3e6cb4ac005fe33513d04c80d15c2154b63a0659dec7"
 reference_size = "110"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180215,10 +180215,10 @@ module = "SERVER"
 va = "0x1000c310"
 context_hash = ""
 defines = "[]"
-input_hash = "0387294ccaa4f1cb23519ab1fdc7dfd50dda51f9cc7a6bc9af764e19de244895"
+input_hash = "6a8c4660ebf20bc9639e47d5f31c824186e57d98fc7037c9c1c73f3c1fe27345"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c380"]
 size = 51
@@ -180229,7 +180229,7 @@ marker_type = "FUNCTION"
 name = "ahm_SearchAndSet"
 
 ["SERVER.0x1000c380".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "b99793951f35e53c06b6f110ae3612d8d9db65fbb1666f045eb56772688f907b"
 reference_size = "51"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180240,10 +180240,10 @@ module = "SERVER"
 va = "0x1000c380"
 context_hash = ""
 defines = "[]"
-input_hash = "505c4401dc782f13592747feb04346c2705e2bd4d5374e158ceef79ee3083d8b"
+input_hash = "84bd5fb6ec41121db778226e19c71797c8d129d8b944045c0382a1b0bdc69964"
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c3c0"]
 size = 83
@@ -180255,7 +180255,7 @@ marker_type = "FUNCTION"
 name = "ahm_ClampFloatValue"
 
 ["SERVER.0x1000c3c0".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "05ede26f8560a5355311db727b817720471f8326e69ca42747705b4289b2076f"
 reference_size = "83"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180266,10 +180266,10 @@ module = "SERVER"
 va = "0x1000c3c0"
 context_hash = ""
 defines = "[]"
-input_hash = "643d57e48f961b71be2fe6f0a0adaf2e35f708b140011dee32561ef395f28bd0"
+input_hash = "b265b9e1977d01797c48e9fca7cb5b6e6b818d4e68881fef38346d8915802156"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c420"]
 size = 166
@@ -180280,7 +180280,7 @@ marker_type = "FUNCTION"
 name = "ahm_FireEntityAndCleanup"
 
 ["SERVER.0x1000c420".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "09962a3a767cbfb762df4c8c6e01ba623a3a2ec63ca6717abe5993b6cb3e8e70"
 reference_size = "166"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180291,10 +180291,10 @@ module = "SERVER"
 va = "0x1000c420"
 context_hash = ""
 defines = "[]"
-input_hash = "727a5789fc65561a2b62aa371621496c5f884bc0e5605b1f398a50211166efbb"
+input_hash = "566cea846796a732621f351835ef3b74da600c54539619cfff0bc5addede655f"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c4d0"]
 size = 295
@@ -180305,7 +180305,7 @@ marker_type = "FUNCTION"
 name = "ahm_AllocAhmInfo"
 
 ["SERVER.0x1000c4d0".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "21c6b1696a20dc5f2de2b84270d6904e7dc2fbaf774405966adc094c6fb42458"
 reference_size = "295"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180316,10 +180316,10 @@ module = "SERVER"
 va = "0x1000c4d0"
 context_hash = ""
 defines = "[]"
-input_hash = "b48a22a6bedf8963e52e20a8e01acee0a848badcb21a3c31ca1a135848c7efaf"
+input_hash = "a10c4ac86197ca6070ad3b68a21ed25bf36b93951e0f799fbcf0433ba9cd40f5"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c600"]
 size = 109
@@ -180330,7 +180330,7 @@ marker_type = "FUNCTION"
 name = "ahm_InitRandomEntity"
 
 ["SERVER.0x1000c600".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "ef1ed6639d43c89c2d6cf82c18bcdd10effbc220b4ba7915f557de71dc6b0039"
 reference_size = "109"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180341,10 +180341,10 @@ module = "SERVER"
 va = "0x1000c600"
 context_hash = ""
 defines = "[]"
-input_hash = "8c7deefa35f77625a3794189771257d3a9798eb1d19bdf98f15293ca3a3135df"
+input_hash = "54096207f1e6aded0030d94587bfb64b9638af0b260784f6e53d32d390058342"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c670"]
 size = 45
@@ -180356,7 +180356,7 @@ marker_type = "FUNCTION"
 name = "ahm_LookupEntityInTable"
 
 ["SERVER.0x1000c670".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "1a5091e64794136e91b20110bda69d22d21b86e3a1a8c4020d04f7cf26ef1b80"
 reference_size = "45"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180367,10 +180367,10 @@ module = "SERVER"
 va = "0x1000c670"
 context_hash = ""
 defines = "[]"
-input_hash = "65ea987ca7812c993ae6798c1b44d409e415aed0a677c78e7a41b4eed7000be3"
+input_hash = "c1b68f3217b4f78ed75bfd4db6309a662f94f4c26cacc9936bae35c21b36fcc8"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c6a0"]
 size = 102
@@ -180381,7 +180381,7 @@ marker_type = "FUNCTION"
 name = "ahm_QueryEntityBuildingType"
 
 ["SERVER.0x1000c6a0".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "6fca31225e1bbf409f7a0175f9e201c8f11f287460182d85f84438c9d3e0705e"
 reference_size = "102"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180392,10 +180392,10 @@ module = "SERVER"
 va = "0x1000c6a0"
 context_hash = ""
 defines = "[]"
-input_hash = "932768e219376b14877a7e2ad337ba4288a7769d4a9aef5dac8c132fb49e45e3"
+input_hash = "37c91109e64db738fea779265f2ca096335704cc94b061ee244b8fb46c9594be"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000c710"]
 size = 752
@@ -180407,7 +180407,7 @@ marker_type = "FUNCTION"
 name = "ahm_GetCommandPayloadSize"
 
 ["SERVER.0x1000c710".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "4882195b7acff368923d753e602cc44d0a044100d927ddb55a03702bae09ad6d"
 reference_size = "752"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180418,10 +180418,10 @@ module = "SERVER"
 va = "0x1000c710"
 context_hash = ""
 defines = "[]"
-input_hash = "37984c95b3f0e6802f88c573bf89e5c90b01de605e60397e53e52a7593b507eb"
+input_hash = "ee77d1c49338985470cdf573d5cd7ec597eb502691707a36210565d5319784ca"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000ca00"]
 size = 130
@@ -180435,7 +180435,7 @@ name = "ahm_ProcessEntityChain"
 note = "Iterates through a linked list of CommandPackets generated from a Command 0x05 / 0x06 block. Runs secondary validation handlers from g_entity_chain_handlers. Re-flags commands to 0x01/0x02 status based on success/fail."
 
 ["SERVER.0x1000ca00".verification]
-source_hash = "582da6258092c8f40e69ce07562600d60f5872c5fc0a29825cfc408af882fcf2"
+source_hash = "2a1d98177d0fb9e338bd6dfcca847afa2fdb58d1602882a16936440a9fa94f1a"
 reference_hash = "12d387991cc8739e719a7e3f818d201bcb394a2f549364af0ad1b7191770219e"
 reference_size = "130"
 headers_hash = "859a9659b69ea53732af59aae1d187b2dd15b3c7b51afdbde67222885d8678da"
@@ -180446,10 +180446,10 @@ module = "SERVER"
 va = "0x1000ca00"
 context_hash = ""
 defines = "[]"
-input_hash = "ab2fb6a4d2961dda275f9128f67920662459325acef89caf0f5a3fa6ec91f4a9"
+input_hash = "d83709efcdf7124b32b048eb9526779a0ee4a734cd6958959ee1caf1f1346b49"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1000ca90"]
 size = 130
@@ -182741,7 +182741,7 @@ marker_type = "FUNCTION"
 name = "ls_LoadGraveyardData"
 
 ["SERVER.0x10012000".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "537e0e867e4be26a5f541d445a6c32cc7130faea66757325aa2ab46d13216b90"
 reference_size = "728"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -182752,10 +182752,10 @@ module = "SERVER"
 va = "0x10012000"
 context_hash = ""
 defines = "[]"
-input_hash = "3d4a4dfe6c965ae1d681705ff6518668b4a71b89e2b3bcf7efe7dd7404ace426"
+input_hash = "83e30ce3686bbc6aa4e42e1ea68608d54584bfb4e025e6d05de47ef0918370a8"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100122e0"]
 size = 346
@@ -182769,7 +182769,7 @@ marker_type = "FUNCTION"
 name = "InitNewDynastyEntity"
 
 ["SERVER.0x100122e0".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "ded5f1884e0e3b8ecbfca060f5c8a0cc92a9608760d428be902df832ba020fd2"
 reference_size = "346"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -182780,10 +182780,10 @@ module = "SERVER"
 va = "0x100122e0"
 context_hash = ""
 defines = "[]"
-input_hash = "6d8811fca6574eff9a0dda4c9e009d12a74321282645ef50808626860ab7d268"
+input_hash = "12d2f9a6e8946171f2ec174b76a266d80a7c58b76040e1f7ff0552739bfa2b63"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10012440"]
 size = 37
@@ -182794,7 +182794,7 @@ marker_type = "FUNCTION"
 name = "ls_ReadVfsDataChecked"
 
 ["SERVER.0x10012440".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "8f6706c8792b78e90974d8948dae03ce22b22fbb7e53488827b9a5fbf692cdbc"
 reference_size = "37"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -182805,10 +182805,10 @@ module = "SERVER"
 va = "0x10012440"
 context_hash = ""
 defines = "[]"
-input_hash = "ccbee1aeb0f7d085a5ce329e57b759cc1d44481f67b991b3b12ce010c9a54837"
+input_hash = "e684bdb66203495ca66f0aa0cd9787d5f8a4d712335522f1a1cbdf9c89b35647"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10012470"]
 size = 857
@@ -182821,7 +182821,7 @@ name = "ls_LoadSavegameHeader"
 note = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stream. Allocates 0xE100 temp buffer, reads format version, player count, map name (32 bytes), timestamps, difficulty, player scores (8 entries for version > 0x10033), savegame description (96 bytes). Returns 1 on success, 0 on read failure."
 
 ["SERVER.0x10012470".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "812d1ad59b761cab85b5c3b9c3c76117962fd81ca95e616defee318f1a31c017"
 reference_size = "857"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -182832,10 +182832,10 @@ module = "SERVER"
 va = "0x10012470"
 context_hash = ""
 defines = "[]"
-input_hash = "4efcdeeb6140cea2a40f616d54cac52735c0583c3a9aaab3731846ee924241ef"
+input_hash = "63460870e2f48a9e16a122dc9161d3459a31d19d5612580609a2ae122d8e6b59"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100127d0"]
 size = 282
@@ -182848,7 +182848,7 @@ marker_type = "FUNCTION"
 name = "ls_LoadExistingEntities"
 
 ["SERVER.0x100127d0".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "953441a7a61505fa4980ae6470f357bd3c03986a1b03d27e7d4eb8e2291b0969"
 reference_size = "282"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -182859,10 +182859,10 @@ module = "SERVER"
 va = "0x100127d0"
 context_hash = ""
 defines = "[]"
-input_hash = "e285f497cd5d98582f36899efb5c37a491c0ccf220ca1786bccf6198eec05171"
+input_hash = "c9ef6f8535dbf10d853c5739e37fa227884e26d1a5d296fb6d8cdfd92041d4d2"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100128f0"]
 size = 1463
@@ -182878,7 +182878,7 @@ name = "ls_LoadBuildingEntityState"
 note = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 
 ["SERVER.0x100128f0".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "5ca43c6bc58fabbb2296d80d62ebb45205700587291ad0be3aebf7f3b6f56e92"
 reference_size = "1463"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -182889,10 +182889,10 @@ module = "SERVER"
 va = "0x100128f0"
 context_hash = ""
 defines = "[]"
-input_hash = "b0a4122db9cafe5d0d6cd9d6d129abe86a93bb99cae271f8ca7419f0bedb2112"
+input_hash = "7e8676ddec1be220ea854912a94aff48f265f8f47bb413337383ebe1a9a324d7"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10012eb0"]
 size = 884
@@ -182906,7 +182906,7 @@ marker_type = "FUNCTION"
 name = "ls_LoadDynamicEntities"
 
 ["SERVER.0x10012eb0".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "d264d33de4788c97808303286e9f6799f91d6ca13b2bc0ebd06545ef946b9a10"
 reference_size = "884"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -182917,10 +182917,10 @@ module = "SERVER"
 va = "0x10012eb0"
 context_hash = ""
 defines = "[]"
-input_hash = "7e138c42584368d0ff081377139330cf5a50f1fe85a5359f2bfd02540df513c2"
+input_hash = "5f9c01cfab174c41e26feef7a7513302f1a75242b676cbb1c0606ddbbf66d4b3"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10013230"]
 size = 2268
@@ -182936,7 +182936,7 @@ marker_type = "FUNCTION"
 name = "ls_LoadEntities"
 
 ["SERVER.0x10013230".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "491b1d6197ab9af193a174c46f5d5fcc67a0de0b87e086bd9eaa6c658c511f09"
 reference_size = "2268"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -182947,10 +182947,10 @@ module = "SERVER"
 va = "0x10013230"
 context_hash = ""
 defines = "[]"
-input_hash = "6ff72dc57b66b955c48fc8974f9248fbca0b78afa6edb324cf320c53c7401e3a"
+input_hash = "fe4f7f5fdc9a7cb2be0ccfa6a2f3608e81c95a417fc61ba82056c12fa2a02207"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10013b10"]
 size = 1361
@@ -182965,7 +182965,7 @@ name = "ls_LoadTownData"
 note = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success."
 
 ["SERVER.0x10013b10".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "d4218b3a96e191fb077b0da633653e86ace4e2ccbfe74e95d0ddec47e73fc7b1"
 reference_size = "1361"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -182976,10 +182976,10 @@ module = "SERVER"
 va = "0x10013b10"
 context_hash = ""
 defines = "[]"
-input_hash = "019972f0158e8214297098d08596e53f2744d6aed214af1762e65b8968f1a840"
+input_hash = "9c6b73edc93c323e71446ee1fe16d118f7ab89e8a0ed561ef9305c50e788c0a8"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10014070"]
 size = 491
@@ -182993,7 +182993,7 @@ marker_type = "FUNCTION"
 name = "ls_ID2Ptr"
 
 ["SERVER.0x10014070".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "6918866bff153861612548330a602ed88f2e2a8506092d2ac23206091febae6b"
 reference_size = "491"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -183004,10 +183004,10 @@ module = "SERVER"
 va = "0x10014070"
 context_hash = ""
 defines = "[]"
-input_hash = "9703bfb7a1b4fd17fd393e1c88d52da47ee8a30bd6822bb257c3fe7038e07f0a"
+input_hash = "1df3ae4b43781e5ac9816ff431a04bb560488b0c9cbf0f5914edb61ae24bf9cf"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10014260"]
 size = 892
@@ -183021,7 +183021,7 @@ marker_type = "FUNCTION"
 name = "srv_RecvGame"
 
 ["SERVER.0x10014260".verification]
-source_hash = "4b67ee42a432523614bab6e101291f7a1a322b0582e06ed985c343c24efbfe37"
+source_hash = "9a73654b0f31d95d584d934b3a133eeb1f47ee93552b63ac62cacd2b396f8be2"
 reference_hash = "0466594f1e6cb0876386cad4d1dfbdd935184c4ed18e73d7cbf0814dd5240514"
 reference_size = "892"
 headers_hash = "90d694f90aefc950d97590900d7bcf47a989d1d85b9839bce97b2969c11b7b20"
@@ -183032,10 +183032,10 @@ module = "SERVER"
 va = "0x10014260"
 context_hash = ""
 defines = "[]"
-input_hash = "f017689104ad5a3b73fb0b780cb0fc0691af18e315f03b74656dca9afaf8c636"
+input_hash = "678b096c1b7d66dfcccc09aa3f57d0f963a503b2234a72335a931770a7c60ddb"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100145e0"]
 size = 209
@@ -183265,7 +183265,7 @@ marker_type = "FUNCTION"
 name = "lb_SearchRecordTable"
 
 ["SERVER.0x10014ee0".verification]
-source_hash = "8c9f2e61e70b8eed5c063f3cc0e4ed524939c47871200e65fa7ac4e56dba4d97"
+source_hash = "0f1fa923a82335daefe52e8a72929a162a08dc740e85146f9ac5fe72a56f2801"
 reference_hash = "5cb16d214bad14f3e236f5064e9d1e7ae2b5e5de13ed60004c42b5b8ae6422ce"
 reference_size = "69"
 headers_hash = "7afa75afeb48c50df882e3df6b4dd67ce3cbdef92ac1c7d757d83f63eb279179"
@@ -183276,10 +183276,10 @@ module = "SERVER"
 va = "0x10014ee0"
 context_hash = ""
 defines = "[]"
-input_hash = "19a4ede06e2094042c09b70d0c6a49c546cb66179d0f1ebda67293cf2288b1f4"
+input_hash = "a803708b6f41ce76a373d23c81a93ec452e9f9b03a755c7d85c7b31ded3b6120"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:19:41+00:00"
 
 ["SERVER.0x10014f30"]
 size = 74
@@ -183290,7 +183290,7 @@ marker_type = "FUNCTION"
 name = "plt_FindRecord"
 
 ["SERVER.0x10014f30".verification]
-source_hash = "8c9f2e61e70b8eed5c063f3cc0e4ed524939c47871200e65fa7ac4e56dba4d97"
+source_hash = "0f1fa923a82335daefe52e8a72929a162a08dc740e85146f9ac5fe72a56f2801"
 reference_hash = "c64c8954aa990221c638817ea19eefd3380ba1b01e45302c78f2036b88f74ea8"
 reference_size = "74"
 headers_hash = "7afa75afeb48c50df882e3df6b4dd67ce3cbdef92ac1c7d757d83f63eb279179"
@@ -183301,10 +183301,10 @@ module = "SERVER"
 va = "0x10014f30"
 context_hash = ""
 defines = "[]"
-input_hash = "db4676cd91f7275936855643acc84492a47b958a409f9837da95d225e38658b4"
+input_hash = "8be19fc38a13361f01d4cdb8418ae5b832f6304d3cc63b39eef468c2ffaa1e8f"
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:19:41+00:00"
 
 ["SERVER.0x10014f80"]
 size = 103
@@ -183315,7 +183315,7 @@ marker_type = "FUNCTION"
 name = "find_zone_record"
 
 ["SERVER.0x10014f80".verification]
-source_hash = "8c9f2e61e70b8eed5c063f3cc0e4ed524939c47871200e65fa7ac4e56dba4d97"
+source_hash = "0f1fa923a82335daefe52e8a72929a162a08dc740e85146f9ac5fe72a56f2801"
 reference_hash = "f3516cbcad5127bb76c1c3bea543b0625230f039f0924dc788dc7d7dbbb169a7"
 reference_size = "103"
 headers_hash = "7afa75afeb48c50df882e3df6b4dd67ce3cbdef92ac1c7d757d83f63eb279179"
@@ -183326,10 +183326,10 @@ module = "SERVER"
 va = "0x10014f80"
 context_hash = ""
 defines = "[]"
-input_hash = "18b77b3938698e3be340a0764eb9fd725762e30ec0b47552281711a4087b653a"
+input_hash = "2119177e2d5bc091f3fdb12c73d021f7cf27baf55a5e753e49549528e1a55b26"
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:19:41+00:00"
 
 ["SERVER.0x10014ff0"]
 size = 175
@@ -183340,7 +183340,7 @@ marker_type = "FUNCTION"
 name = "plt_CheckZoneAvailability"
 
 ["SERVER.0x10014ff0".verification]
-source_hash = "8c9f2e61e70b8eed5c063f3cc0e4ed524939c47871200e65fa7ac4e56dba4d97"
+source_hash = "0f1fa923a82335daefe52e8a72929a162a08dc740e85146f9ac5fe72a56f2801"
 reference_hash = "d1344e62de0655d2d5f941b1822d62daab36e15ba74d16848d882aa9bbd15fb4"
 reference_size = "175"
 headers_hash = "7afa75afeb48c50df882e3df6b4dd67ce3cbdef92ac1c7d757d83f63eb279179"
@@ -183351,10 +183351,10 @@ module = "SERVER"
 va = "0x10014ff0"
 context_hash = ""
 defines = "[]"
-input_hash = "4a49f1208e01746b5b06c2fdda6045c2638446abf1b6469b42743c3a2af20e3c"
+input_hash = "9484dabac39048a082e35f2177d7187a0f0292500c510fcd7d8ef5ff196efe90"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:19:41+00:00"
 
 ["SERVER.0x100150a0"]
 size = 257
@@ -183365,7 +183365,7 @@ marker_type = "FUNCTION"
 name = "plt_SetPlantMap"
 
 ["SERVER.0x100150a0".verification]
-source_hash = "8c9f2e61e70b8eed5c063f3cc0e4ed524939c47871200e65fa7ac4e56dba4d97"
+source_hash = "0f1fa923a82335daefe52e8a72929a162a08dc740e85146f9ac5fe72a56f2801"
 reference_hash = "f832a475b6086175838e7606d8c970681951efefe76371bf0617b318ce2fa52e"
 reference_size = "257"
 headers_hash = "7afa75afeb48c50df882e3df6b4dd67ce3cbdef92ac1c7d757d83f63eb279179"
@@ -183376,10 +183376,10 @@ module = "SERVER"
 va = "0x100150a0"
 context_hash = ""
 defines = "[]"
-input_hash = "ea72034ce68472b92b337d7168411aa3c439af62093d619aec21f1c8f79282d7"
+input_hash = "4539bd4e42cf97507285c5843d32cd6b8b3cdb99d1dd24e77d330e85b048bb33"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:11:27+00:00"
+measured_at = "2026-10-07T20:19:41+00:00"
 
 ["SERVER.0x100151b0"]
 size = 41
@@ -183619,7 +183619,7 @@ marker_type = "FUNCTION"
 name = "gm_InitObjektHersteller"
 
 ["SERVER.0x100156c0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "e474301f997dcf8254caf250684df71cda37d45409ac0d9d23f735c92a8af62c"
 reference_size = "642"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183630,10 +183630,10 @@ module = "SERVER"
 va = "0x100156c0"
 context_hash = ""
 defines = "[]"
-input_hash = "ba07b654f4647cd6fa943fd90c7ac8db699487d9f05d6adb0e9b437baa857506"
+input_hash = "3258be4f237f788f1a1fbe9d4007179c3caf6e9cfba7a44e047442fbac258691"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10015950"]
 size = 861
@@ -183650,7 +183650,7 @@ name = "gm_Open"
 note = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
 
 ["SERVER.0x10015950".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "a5a0a25b68ef35b98196f1d044fb2ce6e1da4c2bd182ab358625cb0d650e738b"
 reference_size = "861"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183661,10 +183661,10 @@ module = "SERVER"
 va = "0x10015950"
 context_hash = ""
 defines = "[]"
-input_hash = "1570d78af5c9b6170e00787ea6a5a3c1dc4641a9e1c1675d615c9e7a46a01bdd"
+input_hash = "5f706514c5739cf11a5963eeac27df8158044c10fa8c2c6c6d35dd230ffe5535"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10015cb0"]
 size = 57
@@ -183678,7 +183678,7 @@ marker_type = "FUNCTION"
 name = "gm_ResetAllEntities"
 
 ["SERVER.0x10015cb0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "d29e6acdd9ea29b7bacad225691d785373b1f716e544ec50536a259e0866dfa6"
 reference_size = "57"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183689,10 +183689,10 @@ module = "SERVER"
 va = "0x10015cb0"
 context_hash = ""
 defines = "[]"
-input_hash = "82a302e35f6957c7827efb3a4ff49b079a554555d14b4c50b69f280e8554d356"
+input_hash = "db307a479f18edb0d453323d468ca568ae79a13b8a3098e649747e850e8d52e0"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10015cf0"]
 size = 194
@@ -183707,7 +183707,7 @@ marker_type = "FUNCTION"
 name = "gm_CleanupObjectEntities"
 
 ["SERVER.0x10015cf0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "327c38d4aa12b033f4290c66d451e7f26daff15483e6c14d68bab1cc7499d850"
 reference_size = "194"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183718,10 +183718,10 @@ module = "SERVER"
 va = "0x10015cf0"
 context_hash = ""
 defines = "[]"
-input_hash = "a82a8a0dc3ab22ac7fc5c2e9835a3c608e266210a2a05ec417f794642cb495a1"
+input_hash = "21618559607cb47bc28293dc58294c33039641c4314227624e61410533a55c0a"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10015dc0"]
 size = 55
@@ -183734,7 +183734,7 @@ marker_type = "FUNCTION"
 name = "gm_FindRecordById"
 
 ["SERVER.0x10015dc0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "0f2913a694e22c3480afafa8ee9f005b9213a1f76af733808fb64b32d3af703a"
 reference_size = "55"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183745,10 +183745,10 @@ module = "SERVER"
 va = "0x10015dc0"
 context_hash = ""
 defines = "[]"
-input_hash = "b3652fe82ddb23d3dd626dd2fed8f092f114a0f52ff03d98f518a32477a5b97c"
+input_hash = "b4051b54ed4e7f5615f61f0e254bcfffab32c538904901b4bd21eb787632f7da"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10015e00"]
 size = 135
@@ -183761,7 +183761,7 @@ marker_type = "FUNCTION"
 name = "gm_CleanupAllEntities"
 
 ["SERVER.0x10015e00".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "03698efd210f7fc495672ac8037ae856fdc39a3af1f3ec0182e0c5be157a359c"
 reference_size = "135"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183772,10 +183772,10 @@ module = "SERVER"
 va = "0x10015e00"
 context_hash = ""
 defines = "[]"
-input_hash = "28c6a64b1d3b7954715191bd4bbf9aade5b63e7f421e0db3403c5459c080bf76"
+input_hash = "88968ba722cd6c1dc5923abbb2b2313369a92bec1e479c8f47ca9a02a1a01d2c"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10015e90"]
 size = 211
@@ -183788,7 +183788,7 @@ marker_type = "FUNCTION"
 name = "gm_ResolveEntityById"
 
 ["SERVER.0x10015e90".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "08edffbec8021f5a011b900e46642d4042508e669a5cfad7800de59b190d5bed"
 reference_size = "211"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183799,10 +183799,10 @@ module = "SERVER"
 va = "0x10015e90"
 context_hash = ""
 defines = "[]"
-input_hash = "12a864539db4825b45c3009fdc98dece5e93cfb8fb7af7fd228d0dd7167c5317"
+input_hash = "a604bbee8d3f787d27b780b1f3cf4574a87db45e3880ed659029cd799f2fd345"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10015f70"]
 size = 714
@@ -183818,7 +183818,7 @@ name = "gm_ObjectsAvailble"
 note = "Refreshes market availability table (85 entries of 0x80 bytes each). Scans all buildings for producible items, marks ingredients as available, then auto-allocates missing market objects. Also counts special resource types (0x92-0x97, 0x2db) in the town market."
 
 ["SERVER.0x10015f70".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "7767d5dddf150be81a4037ee640770a2c1531c28ba44bdb95c0a4cb8ebee7bab"
 reference_size = "714"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183829,10 +183829,10 @@ module = "SERVER"
 va = "0x10015f70"
 context_hash = ""
 defines = "[]"
-input_hash = "a816a857a891f3cd0ff08c9dca633584e20250bc05e2f2a1cef917437c312b71"
+input_hash = "4bd1b653126f3b4b31214b98d8b6dad8596f08576820868972a330967e963a3c"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016240"]
 size = 72
@@ -183846,7 +183846,7 @@ marker_type = "FUNCTION"
 name = "gm_FindSlotById"
 
 ["SERVER.0x10016240".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "b8697c7da643a64f1ef3ff55ac5dd5665bd1bf513a77bf30c8b3caeb43aeb511"
 reference_size = "72"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183857,10 +183857,10 @@ module = "SERVER"
 va = "0x10016240"
 context_hash = ""
 defines = "[]"
-input_hash = "f77f7f577f916a8566bbbe82683d03915f1a413145990b174e4371c06137ccd6"
+input_hash = "4379591c40b04f4684a7e9837c4c2c50c04ff1454ad04a8be79d01a8ef866d69"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016290"]
 size = 464
@@ -183876,7 +183876,7 @@ name = "gm_NextEntityQueryMatch"
 note = "Apply active query filters (id/type/owner/group) to current candidate."
 
 ["SERVER.0x10016290".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "d5db2d9aae647088c8ee2af32671cd31706b29b6cef67126b9bb94fb04cd8635"
 reference_size = "464"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183887,10 +183887,10 @@ module = "SERVER"
 va = "0x10016290"
 context_hash = ""
 defines = "[]"
-input_hash = "410c15eaa8f0fbc26117c2d1f892220655b6737cf89b2567f8bfb5f8437a6f7c"
+input_hash = "531fb33f7f1b21b200d16d326ae322f69ae235f78993a66958e4146633f29241"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016460"]
 size = 316
@@ -183906,7 +183906,7 @@ marker_type = "FUNCTION"
 name = "gm_ff_Objekt"
 
 ["SERVER.0x10016460".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "70fcd64689e65d8ce0d3b6a9a46d0db6a46b6094181b87f3511d97ae35e46250"
 reference_size = "316"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183917,10 +183917,10 @@ module = "SERVER"
 va = "0x10016460"
 context_hash = ""
 defines = "[]"
-input_hash = "50322fd9a3ab5a7600432c07c5b0fbc2d3a63e999c3f2f535472f3244ceb270d"
+input_hash = "bc473f9eb6be0f9a6210e6a578c7e17e536c3c5235b439442c14f61b17d54c37"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100165a0"]
 size = 37
@@ -183936,7 +183936,7 @@ name = "gm_AllocateObjectSlot"
 note = "Walks the primary linked list of object allocations starting at g_existing_entities (a global pointer array). Looks for the first slot with an active flag == 0. Stops searching after 0x5007 (20487) slots. Returns pointer to the slot or NULL if full. | Scan fixed object pool and return first free slot."
 
 ["SERVER.0x100165a0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "3bddf704710a73eb1553ba33cf1cfa4660f28982625f937af8919501d9cdcdb5"
 reference_size = "37"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183947,10 +183947,10 @@ module = "SERVER"
 va = "0x100165a0"
 context_hash = ""
 defines = "[]"
-input_hash = "eea44386b091d2b462b8ef28ea902b7f3b4b5c9de08b31db005938535cf8e5c0"
+input_hash = "3ee98cba0c7ee18a6385eb85d1204a2f1b5867676ad081ec129aa4729d2921fc"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100165d0"]
 size = 155
@@ -183964,7 +183964,7 @@ marker_type = "FUNCTION"
 name = "gm_RemoveObjectByType"
 
 ["SERVER.0x100165d0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "157222b71349e4c0d9a1229a655439b941b54fddac7add4379d0ea1e5c1ec93d"
 reference_size = "155"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -183975,10 +183975,10 @@ module = "SERVER"
 va = "0x100165d0"
 context_hash = ""
 defines = "[]"
-input_hash = "6288543464c2e3082577beb3e7dbd63ff3a6e03895d41cb744ee2694b1c063ef"
+input_hash = "5ccaecd9b1b3744af367d578c11f0d67768df62109e157642605f1d04cbcf847"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016670"]
 size = 1
@@ -183992,7 +183992,7 @@ name = "gm_NoopRet2"
 note = "Linear search by object type id within sibling linked list."
 
 ["SERVER.0x10016670".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
 reference_size = "1"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184003,10 +184003,10 @@ module = "SERVER"
 va = "0x10016670"
 context_hash = ""
 defines = "[]"
-input_hash = "5225c626ac422dab91015980761e289351f9453a4c650c0cb8a531c05ba657f9"
+input_hash = "028508b751f06f2949e1d6f5bf54e3b7096c0a038af1a04da23427943441a687"
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016680"]
 size = 139
@@ -184020,7 +184020,7 @@ marker_type = "FUNCTION"
 name = "gm_RemoveLinkedNodeById"
 
 ["SERVER.0x10016680".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "073834b216672d8b88ce85fceac9cc5aac8568a20ffb15dae968b434c8b7a315"
 reference_size = "139"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184031,10 +184031,10 @@ module = "SERVER"
 va = "0x10016680"
 context_hash = ""
 defines = "[]"
-input_hash = "f6a28229b30bd52d3203e2e226c9562b3796fe70a0618a54d6392fe437f9aeec"
+input_hash = "d014990e234fb301bbd7312b411d2d4a040570e76e918e5f26aa3049302c9472"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016710"]
 size = 66
@@ -184048,7 +184048,7 @@ marker_type = "FUNCTION"
 name = "gm_FreeObjectListRecursive"
 
 ["SERVER.0x10016710".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "0e96dee6c6244ee0f4aedbf0c75b22e2f11f73df6e24b74b7c7fd8867ed9f581"
 reference_size = "66"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184059,10 +184059,10 @@ module = "SERVER"
 va = "0x10016710"
 context_hash = ""
 defines = "[]"
-input_hash = "c24d6e3a00f983722509214aa9122b2f6c1e5b92fa98fc6c4ebf5f3d03b0736f"
+input_hash = "da06e461b31fd41a4c04ec3e25d5ebe6ad75541d76d1a6650c1e3554ac3e8f45"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016760"]
 size = 1379
@@ -184078,7 +184078,7 @@ name = "gm_AllocObjekt"
 note = "High-level entity allocation wrapper. Resolves the parent_id using gm_ResolveEntityById to find the appropriate entity list head. Allocates a new object slot using gm_AllocateObjectSlot. Inserts the new object into the parent's linked list and initializes basic fields (type, id from global g_next_entity_id, parent pointer)."
 
 ["SERVER.0x10016760".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "f172788ba2b8ca321fbb77a27f3241b4e9d7e7eaa6cc6b4af963e86b4867ca9b"
 reference_size = "1379"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184089,10 +184089,10 @@ module = "SERVER"
 va = "0x10016760"
 context_hash = ""
 defines = "[]"
-input_hash = "ea5248b3aab0961d280439e7fc13c896258da094069e2c42f36026572f5816f9"
+input_hash = "719b14e4f0796c29c64c9b7c822c731f2b1e324cd54de8a050a5904b8eb624be"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016cd0"]
 size = 272
@@ -184106,7 +184106,7 @@ marker_type = "FUNCTION"
 name = "gm_AddObjekt"
 
 ["SERVER.0x10016cd0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "3f96d6e5d3054ea891e4d184f7b8fa10c9d64f9278addd5cc84edb103cef41ca"
 reference_size = "272"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184117,10 +184117,10 @@ module = "SERVER"
 va = "0x10016cd0"
 context_hash = ""
 defines = "[]"
-input_hash = "15bfd2eaee66bda145bf3b733ee4a1b9216594e0f66ebab18b1d784a18d563e0"
+input_hash = "a99b7a3c233c67bc379469200dd0bdfbe9d73410465e71283e66ebc59ea77914"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016de0"]
 size = 186
@@ -184134,7 +184134,7 @@ marker_type = "FUNCTION"
 name = "gm_SubObjekt"
 
 ["SERVER.0x10016de0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "23804f2798d3a022be68d1ab8cf9ed1d01653ac0ceab9f92a9a4f3240e546aff"
 reference_size = "186"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184145,10 +184145,10 @@ module = "SERVER"
 va = "0x10016de0"
 context_hash = ""
 defines = "[]"
-input_hash = "42740dffab71f2fbaddaceb05229d525c155e9f1558eae8f91d132cf5d40dc8c"
+input_hash = "b319462607a3fc62fd6ec0bfd49d6dc1a09e112cd094ddb8074c428018072ccd"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016ea0"]
 size = 211
@@ -184163,7 +184163,7 @@ name = "gm_SubObjectNoKill"
 note = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016ea0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "d3ec5c7f585c31f08363f2cc7b4bc8d5b20f269d3820528b35444759bb613f19"
 reference_size = "211"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184174,10 +184174,10 @@ module = "SERVER"
 va = "0x10016ea0"
 context_hash = ""
 defines = "[]"
-input_hash = "e131948f24b19b7fe240b4c4dc5ca9a28d2475a0e2fa271cda595609cafc7462"
+input_hash = "92e818f41b9bb406623e193844766523888c49412b90ee7016093ae93241ee44"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10016f80"]
 size = 346
@@ -184190,7 +184190,7 @@ marker_type = "FUNCTION"
 name = "gm_FindNextFilteredEntity"
 
 ["SERVER.0x10016f80".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "a9b68ec075e4512025a271e767732573f0386f88fe20a28ba598df90e5a710ad"
 reference_size = "346"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184201,10 +184201,10 @@ module = "SERVER"
 va = "0x10016f80"
 context_hash = ""
 defines = "[]"
-input_hash = "950cd5cd448afa24334a8666d7fdee7cbeb7d05ab18bb9dd292022cd51bc4cc6"
+input_hash = "7e4d3555f54edcd12ebc9a577871249e8a3cedfea41c81dc9856c264d8c9046b"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100170e0"]
 size = 296
@@ -184217,7 +184217,7 @@ marker_type = "FUNCTION"
 name = "gm_StartFilteredEntitySearch"
 
 ["SERVER.0x100170e0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "1124c369018f9454ed35b6c101a4686fd2f6afea3e083fc811b652b5188d4b6d"
 reference_size = "296"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184228,10 +184228,10 @@ module = "SERVER"
 va = "0x100170e0"
 context_hash = ""
 defines = "[]"
-input_hash = "29fe66e03c8edcdc756c549c9e9f408c5a049fa922673ea3ef72c8a5cf5805a2"
+input_hash = "1cd037501c2dc3b5c36292d922003f3af3e402f2374616920ea8a3dcd88138f6"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017210"]
 size = 39
@@ -184245,7 +184245,7 @@ marker_type = "FUNCTION"
 name = "gm_SearchStruct"
 
 ["SERVER.0x10017210".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "911624d2c295288a45a673e2d5e33d155add47dfdf20b65aba3020827791da36"
 reference_size = "39"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184256,10 +184256,10 @@ module = "SERVER"
 va = "0x10017210"
 context_hash = ""
 defines = "[]"
-input_hash = "fac734ee0befead9ca258f9da4ba903f83be8ac57d9c1cd967d6a3ef33b32cb6"
+input_hash = "c844ca86b767cf2ee8a90d6216e48e551985da9793cfd8406720d1e6d9a35091"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017240"]
 size = 232
@@ -184272,7 +184272,7 @@ marker_type = "FUNCTION"
 name = "gm_CleanupBuildingEntity"
 
 ["SERVER.0x10017240".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "7261685972c7f5d5eb9f33e71a6aeefe8054da5dffa7e4e50c96d2db4bcf2141"
 reference_size = "232"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184283,10 +184283,10 @@ module = "SERVER"
 va = "0x10017240"
 context_hash = ""
 defines = "[]"
-input_hash = "8dfb7abb0e3af20211797c9b9271c20e153b613cf2934645add9275e62124505"
+input_hash = "0b450cc6fce3818e37ae4ab9b80dbbe8fbb7ee267ae476d32f13f58c56063a0e"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017330"]
 size = 207
@@ -184300,7 +184300,7 @@ marker_type = "FUNCTION"
 name = "gm_AllocBuildingDefaults"
 
 ["SERVER.0x10017330".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "9cae9c8f9714d0efb757074c26c4954d03923db2c72365d445103ef0d9910461"
 reference_size = "207"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184311,10 +184311,10 @@ module = "SERVER"
 va = "0x10017330"
 context_hash = ""
 defines = "[]"
-input_hash = "42ed1695c0a62a9a013d5be8c468ef7c2eb330d57cf8038810ce7b531daf4287"
+input_hash = "df6c212e2059a80300b3bd93d53a360ddb33ca0293f97768c55e79f842d683a2"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017400"]
 size = 202
@@ -184327,7 +184327,7 @@ marker_type = "FUNCTION"
 name = "gm_SetBuildingWorkerLimits"
 
 ["SERVER.0x10017400".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "7960f38adda4a65a0687d1a9b84b2310823f3d827f2d879fcba30f0b7b8d2779"
 reference_size = "202"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184338,10 +184338,10 @@ module = "SERVER"
 va = "0x10017400"
 context_hash = ""
 defines = "[]"
-input_hash = "2af387bbfe41694266840ec014962616348eea58aed3efac58573e8afa937a1e"
+input_hash = "8fb9ab7aa1f07a585dde7a6e55d3e6e3d2ad6cc58dcff761140eb993f2079754"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100174d0"]
 size = 1078
@@ -184356,7 +184356,7 @@ marker_type = "FUNCTION"
 name = "gm_AllocGebaeude"
 
 ["SERVER.0x100174d0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "fef43e069ee724fe852a7e0e7f951a70786b59fdc974da39b36d10f1c1054fdd"
 reference_size = "1078"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184367,10 +184367,10 @@ module = "SERVER"
 va = "0x100174d0"
 context_hash = ""
 defines = "[]"
-input_hash = "550d1c349b277eea0e100fd70630dde3e3553963439da88b527ae7ad82403058"
+input_hash = "3e66754e00e46305ab2bb2b37ed50f6c01907cd8a54bff7f08528b942c5c604e"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017910"]
 size = 145
@@ -184384,7 +184384,7 @@ marker_type = "FUNCTION"
 name = "gm_SetupEntityQuery"
 
 ["SERVER.0x10017910".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "0a0f4815670b31ceb761d9f406a715dc82d006bff799b1403a050abf1dd5a30f"
 reference_size = "145"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184395,10 +184395,10 @@ module = "SERVER"
 va = "0x10017910"
 context_hash = ""
 defines = "[]"
-input_hash = "3c03144e21c8df69d84c7766b0550c8865541597602e34c0e8d4b5883397efdd"
+input_hash = "5a7eae260c65ead0ac8e9afd947e2963752a2d2a46eb9edf5ce78519e6bd95fa"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100179b0"]
 size = 181
@@ -184411,7 +184411,7 @@ marker_type = "FUNCTION"
 name = "gm_GetBuildingTypeCategory"
 
 ["SERVER.0x100179b0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "fda7272023ac334a1afb68c1d09e8eaa77ef4cdf1d75888c6f4fd03fd59101bc"
 reference_size = "181"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184422,10 +184422,10 @@ module = "SERVER"
 va = "0x100179b0"
 context_hash = ""
 defines = "[]"
-input_hash = "d2e8d58216981ea12ed1e750a7b29f19368068138fcc4ba8027c7a2c8d0bab04"
+input_hash = "be45af7a8171ed1dd1346f826c075aed582d2799753e24ea1a5a5ed1da84a300"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017a70"]
 size = 62
@@ -184438,7 +184438,7 @@ marker_type = "FUNCTION"
 name = "gm_SearchTable67"
 
 ["SERVER.0x10017a70".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "d4c5daf750dcac7f2e341d93d556a49d0dcfdd07f7a3edc3368eb2777d333e73"
 reference_size = "62"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184449,10 +184449,10 @@ module = "SERVER"
 va = "0x10017a70"
 context_hash = ""
 defines = "[]"
-input_hash = "ff8731be2766e5c938930224f62c30dc0f191bd1d4f1629e942fdfba0ccbca1e"
+input_hash = "ca85f3cffa8f068a2a5d45190b9ac9774abd0ed25dd3af6c68610e105e81a93c"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017ab0"]
 size = 74
@@ -184466,7 +184466,7 @@ marker_type = "FUNCTION"
 name = "gm_CheckEntityType"
 
 ["SERVER.0x10017ab0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "7341e5161e26043cdb7c42bf2dfbfe75af9106551b6985ec17d8e5cc412becdd"
 reference_size = "74"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184477,10 +184477,10 @@ module = "SERVER"
 va = "0x10017ab0"
 context_hash = ""
 defines = "[]"
-input_hash = "34ed9332e3e2527ff1a00fb635c0a37b7bdaf1e45554d5c9120fff21d27677c1"
+input_hash = "15cd806290b1bbda4e52ba04818369d0d3f794947453a9bc1158121fe5681b4c"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017b00"]
 size = 320
@@ -184493,7 +184493,7 @@ marker_type = "FUNCTION"
 name = "gm_AssignBuildingOwner"
 
 ["SERVER.0x10017b00".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "538715d4ac929a488566411f138da1a66be9b84a5369d6f2c380a8aa2b937125"
 reference_size = "320"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184504,10 +184504,10 @@ module = "SERVER"
 va = "0x10017b00"
 context_hash = ""
 defines = "[]"
-input_hash = "f5e765685c41342762ba2ee13d2c7870cccdbe1a0460e6c7cc7ab575c5b98f07"
+input_hash = "bcf933b9e245d54dc190672d018964f1239f243e5b49e01290645e0bc730e016"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017c40"]
 size = 742
@@ -184521,7 +184521,7 @@ marker_type = "FUNCTION"
 name = "gm_AllocRaum"
 
 ["SERVER.0x10017c40".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "d8e9e985f0933adc39c4bd8489ec2b21b7cb7c2bbaf76d928f47ef1401f73a5d"
 reference_size = "742"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184532,10 +184532,10 @@ module = "SERVER"
 va = "0x10017c40"
 context_hash = ""
 defines = "[]"
-input_hash = "dd86925e254cd203d70024c6f727eb62f4b815be445b771e6ba31b1d1d27d245"
+input_hash = "ba58180186a3add96cc96ade0e675f3795b8d6487ce395ba829880fdfabad0e3"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017f30"]
 size = 35
@@ -184550,7 +184550,7 @@ marker_type = "FUNCTION"
 name = "gm_RemoveObjectWrapper"
 
 ["SERVER.0x10017f30".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "00ebfabb23dd873eb3de79077c5efc087b1f4d24b4e5c899c8d439efbd689d3c"
 reference_size = "35"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184561,10 +184561,10 @@ module = "SERVER"
 va = "0x10017f30"
 context_hash = ""
 defines = "[]"
-input_hash = "1ee4332d4841f004d9ec2a0fbaecbc0750fc895151bb3298df4b206e6af9250a"
+input_hash = "c1f96ac1abbca9ad5c3a3c62b6f836d48ed538a23a4e8bdd214e8203def784a5"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017f60"]
 size = 36
@@ -184578,7 +184578,7 @@ marker_type = "FUNCTION"
 name = "gm_RemoveEntityLink"
 
 ["SERVER.0x10017f60".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "15876bc48c4b391b5c7ce08ce2dfa2dbca01d668a5cdbb931cb6841cc67f4c7d"
 reference_size = "36"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184589,10 +184589,10 @@ module = "SERVER"
 va = "0x10017f60"
 context_hash = ""
 defines = "[]"
-input_hash = "d8e73d055b074224fac4cd9335c3ba307fa0102ff70b602e2609191af4e75cba"
+input_hash = "0af75bacfc6f9d2dd5e20998819539c57fdc16954e5e0da67af691b2f27c1bd9"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017f90"]
 size = 23
@@ -184605,7 +184605,7 @@ name = "gm_InitEntityIfValid"
 note = "Checks if the provided entity pointer is valid and active (not -1). If so, it invokes amt_ClearEntityLinks on it to detach it from game world lists before deletion or recycling."
 
 ["SERVER.0x10017f90".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "27edae4bbec75765082e0332a6c14170bd216d5194c874388444af92241de830"
 reference_size = "23"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184616,10 +184616,10 @@ module = "SERVER"
 va = "0x10017f90"
 context_hash = ""
 defines = "[]"
-input_hash = "ec574ed9631be62d976548f6e6e997420ec2e72f0173f68639dd291efc6af446"
+input_hash = "7e040cfbb8b830f0534c40070bc2395e382561dc920502243c2de7ace1d1ca11"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10017fb0"]
 size = 278
@@ -184634,7 +184634,7 @@ marker_type = "FUNCTION"
 name = "gm_KillSpieler"
 
 ["SERVER.0x10017fb0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "c06b4e6065e9e9f2796ce1a22200fa2e9fc588847b802085f476e06218a768a9"
 reference_size = "278"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184645,10 +184645,10 @@ module = "SERVER"
 va = "0x10017fb0"
 context_hash = ""
 defines = "[]"
-input_hash = "78c179ef2aede062e456bf02283cc0497045fc9fd852dbd2c298c41f0b6fa5be"
+input_hash = "78ed689f96c20fb29e1a77eff329963637da4ef54518b9a0f985153bf57feea2"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100180d0"]
 size = 81
@@ -184661,7 +184661,7 @@ marker_type = "FUNCTION"
 name = "gm_InitEntitySlots"
 
 ["SERVER.0x100180d0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "1d5473ae0a37717d694725ffecdc4e902fcaa671cbeb59eebdd13a02e6f0757c"
 reference_size = "81"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184672,10 +184672,10 @@ module = "SERVER"
 va = "0x100180d0"
 context_hash = ""
 defines = "[]"
-input_hash = "c55eb27ac95c0c0c2662fdbe37c00c2718064b180049c651079999511bc3007c"
+input_hash = "2bfba592eb353cb09c4f077f7d48151db2df16daca67a36b34cfef544e8b2b36"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10018130"]
 size = 32
@@ -184688,7 +184688,7 @@ marker_type = "FUNCTION"
 name = "gm_IsInRange"
 
 ["SERVER.0x10018130".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "b87b8a1866c209375054aa1f6ebbeec826e2fd252c862314deebe1300ebbbfec"
 reference_size = "32"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184699,10 +184699,10 @@ module = "SERVER"
 va = "0x10018130"
 context_hash = ""
 defines = "[]"
-input_hash = "2235c46d5250169ed493a20658ad632053414f1fe401f73e0f4cf7492fd53c04"
+input_hash = "417b305be00f26eb132618dee599cb4b4c83c1f59efbcea193a5181e1a27b7ac"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10018150"]
 size = 70
@@ -184715,7 +184715,7 @@ marker_type = "FUNCTION"
 name = "gm_EntityClassCheck"
 
 ["SERVER.0x10018150".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "f06b7bed8f395f938c5895aab734a00aa24b76568fdbcf34bf569f6dac560894"
 reference_size = "70"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184726,10 +184726,10 @@ module = "SERVER"
 va = "0x10018150"
 context_hash = ""
 defines = "[]"
-input_hash = "854446a62b79655276075d2d8a2616f2ee35891b25e5de8c99070d2ac1ae34c9"
+input_hash = "36e5298d68db58ce369a9e41da867c6da031439c2cbbd68b12d7f6b26b7d826a"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100181a0"]
 size = 87
@@ -184742,7 +184742,7 @@ marker_type = "FUNCTION"
 name = "gm_CheckStatLevel"
 
 ["SERVER.0x100181a0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "e927664a52c2c6393a6ee69d6ece7be2c1c5bfc2a3626ac42899b54506e371ee"
 reference_size = "87"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184753,10 +184753,10 @@ module = "SERVER"
 va = "0x100181a0"
 context_hash = ""
 defines = "[]"
-input_hash = "e3c4be668426151e6749aef3848ae51d90bb9210bf93cfc1dc0384febfb9467d"
+input_hash = "a6cef4c03e4787dfceb8fca679043bacd4f2739f68a7bcbb967676bd2b32406e"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10018200"]
 size = 291
@@ -184769,7 +184769,7 @@ marker_type = "FUNCTION"
 name = "gm_MapEntityStatRange"
 
 ["SERVER.0x10018200".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "d96ae742461dfc4b8cde121c3f59bf25b5ca4858208e4e7994af5246f433475c"
 reference_size = "291"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184780,10 +184780,10 @@ module = "SERVER"
 va = "0x10018200"
 context_hash = ""
 defines = "[]"
-input_hash = "dfb9def7ad152faa3f7a19b485f8089372d29f36a16e7e9e1f79285ebebf2299"
+input_hash = "208df82a75ab6c30cefaa51aded120329fa051ce49808eea47e21e854d1a32eb"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10018330"]
 size = 276
@@ -184796,7 +184796,7 @@ marker_type = "FUNCTION"
 name = "gm_GetOppositeStatIndex"
 
 ["SERVER.0x10018330".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "ec77f04a06c3890be0491ffa6f868c10aa1d04479feb5ebdef7f5048ac4428fc"
 reference_size = "276"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184807,10 +184807,10 @@ module = "SERVER"
 va = "0x10018330"
 context_hash = ""
 defines = "[]"
-input_hash = "f112848257c8907d861cdaf1ea076a4815eef2fbaf8b5baf1cbe6004d8e43833"
+input_hash = "4ecfc5d8ac0ca27ef9a05538ca7eea2a6d21d83c2087e57e941dff0f82cab18d"
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10018450"]
 size = 78
@@ -184823,7 +184823,7 @@ marker_type = "FUNCTION"
 name = "gm_RandomStatModifier"
 
 ["SERVER.0x10018450".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "596f80795f5f878222e39bbef453011157118a34a4532d29ee1d1c77b61ec4f8"
 reference_size = "78"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184834,10 +184834,10 @@ module = "SERVER"
 va = "0x10018450"
 context_hash = ""
 defines = "[]"
-input_hash = "cd059b250ae3c8295f3c40a1230e70df22d3d81c4b50f091f7a8d38af9994b4c"
+input_hash = "9ac85ee788eec5d292515433b4388f2ef3fb3cd5011bbcbd7216f6cdab82b6d6"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100184a0"]
 size = 56
@@ -184850,7 +184850,7 @@ marker_type = "FUNCTION"
 name = "gm_LookupEntityRecordById"
 
 ["SERVER.0x100184a0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "d1c05023d599ca1a54da8615be9096050e5eddf5931f2d4c9bc278e0342036b8"
 reference_size = "56"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184861,10 +184861,10 @@ module = "SERVER"
 va = "0x100184a0"
 context_hash = ""
 defines = "[]"
-input_hash = "cbbe051118ef6e01f3c6a01fac7e41a32e32d26a25307c175b0f7e180ca20b5a"
+input_hash = "9eeeef344999abc63917f0ccc3692af57981b8d7a09b0cb4cbb1c20e7b97893d"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100184e0"]
 size = 66
@@ -184879,7 +184879,7 @@ marker_type = "FUNCTION"
 name = "gm_GetEntityTableEntry"
 
 ["SERVER.0x100184e0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "7d89608d421c9c335961d706ebf131d3d1fc59748e56d77d7f9c789a8f72de82"
 reference_size = "66"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184890,10 +184890,10 @@ module = "SERVER"
 va = "0x100184e0"
 context_hash = ""
 defines = "[]"
-input_hash = "8fde106a4b64efea9d680b5a07cb6619924cfa0c2dbd7191be2c2f4712330cf2"
+input_hash = "d865cec811c64b3d46527bf8ae017980ea04c6738c6fb3efb4ebad8a89a40ed0"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10018530"]
 size = 800
@@ -184907,7 +184907,7 @@ marker_type = "FUNCTION"
 name = "gm_ChangePlayerIdentityImpl"
 
 ["SERVER.0x10018530".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "93678cc0a9823899263fdf40773dda27dca12ed992970f3151dd21a925d0cdb2"
 reference_size = "800"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184918,10 +184918,10 @@ module = "SERVER"
 va = "0x10018530"
 context_hash = ""
 defines = "[]"
-input_hash = "d71e4dbb977e70ea054115558eab33a1ac606c1e970f2668b9695bac57b6f91d"
+input_hash = "f777f14f492f5bfcf9f849455e79219efb1ab6acb72db46d696242b587b6f5f8"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10018850"]
 size = 3689
@@ -184934,7 +184934,7 @@ marker_type = "FUNCTION"
 name = "gm_AllocSpieler"
 
 ["SERVER.0x10018850".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "4a37e49e4834167e048c2c5b3fe7b6850190f403a44bf7686a868c29ca4c892f"
 reference_size = "3689"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184945,10 +184945,10 @@ module = "SERVER"
 va = "0x10018850"
 context_hash = ""
 defines = "[]"
-input_hash = "2aa4b9899a0b30734fb4c7060af8e2f7c4e9948f2039e1cbd1638a242fec0f6c"
+input_hash = "71fe7c14b3f39499a61ce8fdcc09687f424c921517e3b31744e2268e9362fcc1"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100196c0"]
 size = 81
@@ -184962,7 +184962,7 @@ marker_type = "FUNCTION"
 name = "gm_QueryEntitySum"
 
 ["SERVER.0x100196c0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "53f7b07f26bc437e910a277e1c3e5e4b7ac1e9bd5ad46b6f21aeaa2586d26f60"
 reference_size = "81"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -184973,10 +184973,10 @@ module = "SERVER"
 va = "0x100196c0"
 context_hash = ""
 defines = "[]"
-input_hash = "d55537864830dac7e54e456fa31bb7cc993705534cc9af24fa519932da742973"
+input_hash = "1dff1ce8573b69cdc194fc1a385aebce86023697175acf48c478cca69b8f1322"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019720"]
 size = 396
@@ -184989,7 +184989,7 @@ marker_type = "FUNCTION"
 name = "gm_CalculateProductionValue"
 
 ["SERVER.0x10019720".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "628d422ecc38389060038e7afad1dac27e5d0927c0f401738c7cf387bb4cd6eb"
 reference_size = "396"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185000,10 +185000,10 @@ module = "SERVER"
 va = "0x10019720"
 context_hash = ""
 defines = "[]"
-input_hash = "98ed920c9dd7ec0bc2c1a7aeb0ec10b3d5cac14cc053fbb8ab7064553bedbe2f"
+input_hash = "77e8bb96153d9257a3278528be560240fc16a2615d96818c3c12aeed68e9376e"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x100198b0"]
 size = 355
@@ -185018,7 +185018,7 @@ name = "gm_SumBuildingProductionValues"
 note = "Recursive production value calculator. Computes the base value of an object type by looking up prototype data (stride 0x41), applying worker skill bonuses from building prototypes, and recursively summing ingredient costs (up to 4 ingredients). Caches result at proto_entry+0x38. Applies quality and production multipliers."
 
 ["SERVER.0x100198b0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "540d42192dc4f9eb3e94ea88cfcf03fa9ed27c6269d6c8ec1d73ac27ab25d33e"
 reference_size = "355"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185029,10 +185029,10 @@ module = "SERVER"
 va = "0x100198b0"
 context_hash = ""
 defines = "[]"
-input_hash = "71f9b17c1e74cdff9e41ba1d11b45a7a4efd55067342bd518472f8021de1e1fe"
+input_hash = "afbc3e7e29744f12a485df902f4981497f9640e6f8938f7cca72d61d2a6a2f73"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019a20"]
 size = 74
@@ -185045,7 +185045,7 @@ marker_type = "FUNCTION"
 name = "gm_AccumulateTyped2"
 
 ["SERVER.0x10019a20".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "bf4dff7ae9c3311c28cb66b242dcee69e4754116ccdc5b19f26732bbf064fba1"
 reference_size = "74"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185056,10 +185056,10 @@ module = "SERVER"
 va = "0x10019a20"
 context_hash = ""
 defines = "[]"
-input_hash = "d482b713642e96d59f96cd9b9108f0de28e3ee10ee7cd6425b228cbe55f0186d"
+input_hash = "071f484604999e8e695a249b57db0cabcf04da0f87b254617e30b2b4cd854dc6"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019a70"]
 size = 102
@@ -185072,7 +185072,7 @@ marker_type = "FUNCTION"
 name = "gm_EntityQuerySum"
 
 ["SERVER.0x10019a70".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "19e06f55485aee0fe56371b85d955b37040b48b78688b322d287561aacad0cd6"
 reference_size = "102"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185083,10 +185083,10 @@ module = "SERVER"
 va = "0x10019a70"
 context_hash = ""
 defines = "[]"
-input_hash = "0126bc6f53735bb1f08b24d30b69b21923ea3585b89f6a64464109def1434415"
+input_hash = "75d8948c6f31b15ed25a50f55960fd46163a272b63eb80766d5c1e8745e2cdf9"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019ae0"]
 size = 82
@@ -185099,7 +185099,7 @@ marker_type = "FUNCTION"
 name = "gm_ResolveParentEntity"
 
 ["SERVER.0x10019ae0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "2f651676ccef428348ba335324a9ce14a81519ff9c5a651894d2d9616525b732"
 reference_size = "82"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185110,10 +185110,10 @@ module = "SERVER"
 va = "0x10019ae0"
 context_hash = ""
 defines = "[]"
-input_hash = "9204c6f399f618a970718f3c09cd361a55f1c288e300b2a1c2863f2a5f3d079d"
+input_hash = "afd52f0d1fbf4249da6c9584e0bf25e7e6b797209369efb1bfd6e357671456ff"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019b40"]
 size = 62
@@ -185126,7 +185126,7 @@ marker_type = "FUNCTION"
 name = "gm_GetEntityType"
 
 ["SERVER.0x10019b40".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "f62dd02aa72089fd9ed7105bf86ba1886dfb02308806ff846ceb7464dcc3fad6"
 reference_size = "62"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185137,10 +185137,10 @@ module = "SERVER"
 va = "0x10019b40"
 context_hash = ""
 defines = "[]"
-input_hash = "d2018988dd246c316fc5778f537008d98ea2976b59e986cd667b9df2e408eb06"
+input_hash = "a9b11c7cfeab6811e995d4c5e0c3399a013e004a726507ff8ebcf1f3299b4885"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019b80"]
 size = 83
@@ -185153,7 +185153,7 @@ marker_type = "FUNCTION"
 name = "gm_EntityAccumulate"
 
 ["SERVER.0x10019b80".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "e2e5765565e90dbf4de3140604d3e8f8a6dc2eb12351d1991b78d3faee49517e"
 reference_size = "83"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185164,10 +185164,10 @@ module = "SERVER"
 va = "0x10019b80"
 context_hash = ""
 defines = "[]"
-input_hash = "29624bdc0ba09ef1b32f15b45b6d51a8d506d4167781c40d6b80180cba2379d6"
+input_hash = "cf66e5981c28d91c84ea8502befaee11c9015f7da2cfd3f68b2b6795e2541fff"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019be0"]
 size = 124
@@ -185180,7 +185180,7 @@ marker_type = "FUNCTION"
 name = "gm_WalkEntityChain"
 
 ["SERVER.0x10019be0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "ea7d56f8b6a9c128bd30eb43de27fc3dea721d12fbb386fa45b34f65993607cf"
 reference_size = "124"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185191,10 +185191,10 @@ module = "SERVER"
 va = "0x10019be0"
 context_hash = ""
 defines = "[]"
-input_hash = "c6a12a41af6173a062654067c99dd732512d3a12e4f8e73bd59001a538f5002f"
+input_hash = "47001a30d4dacde55b5b725604ff2623123efe0889595099a11558965dffade8"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019c60"]
 size = 98
@@ -185207,7 +185207,7 @@ marker_type = "FUNCTION"
 name = "gm_FindEntityByOwner"
 
 ["SERVER.0x10019c60".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "86990c26efc768c926dc13b57b7d82d41a863d03d666d079c1e93fc374b37668"
 reference_size = "98"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185218,10 +185218,10 @@ module = "SERVER"
 va = "0x10019c60"
 context_hash = ""
 defines = "[]"
-input_hash = "dc3d2555fe96d0b3dc809e43c68bf66923c3fa48334399f4a316f902c1d94e47"
+input_hash = "6be4d65b734071e818072753ef820ac1c96844cefdc06424394f3bbf7acaa981"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019cd0"]
 size = 48
@@ -185234,7 +185234,7 @@ marker_type = "FUNCTION"
 name = "gm_GetMsgField"
 
 ["SERVER.0x10019cd0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "81a86423474dc848dd35e026f2e8ceef23d0e2f9d4a12835ad992f7c29213f84"
 reference_size = "48"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185245,10 +185245,10 @@ module = "SERVER"
 va = "0x10019cd0"
 context_hash = ""
 defines = "[]"
-input_hash = "91067b941ed3ac267055146145f6231b4b876487abac3b76dc4cc039cf815311"
+input_hash = "995461004ee705887ba732b83d5d882a97763152a2c37487c646ec4125c8bd63"
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019d00"]
 size = 39
@@ -185261,7 +185261,7 @@ marker_type = "FUNCTION"
 name = "compute_size"
 
 ["SERVER.0x10019d00".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "fb9c5fd43cc48230e93ec5dcad601b2dabac65859b089d5fc68b587b2cc9d552"
 reference_size = "39"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185272,10 +185272,10 @@ module = "SERVER"
 va = "0x10019d00"
 context_hash = ""
 defines = "[]"
-input_hash = "48adf0685dd8d1a14f40112226b3f0b5bd5c9db5749b960a7c1da33049e94b30"
+input_hash = "c31492901a4ca70edbd7f46c951671065176029bb6139732888395950d0aa64a"
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019d30"]
 size = 407
@@ -185288,7 +185288,7 @@ marker_type = "FUNCTION"
 name = "gm_eval_SlotVoll"
 
 ["SERVER.0x10019d30".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "9b2a02776b7b24db5c69e1448a3cfac771a670f06a2b4f6a10c3758d53804333"
 reference_size = "407"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185299,10 +185299,10 @@ module = "SERVER"
 va = "0x10019d30"
 context_hash = ""
 defines = "[]"
-input_hash = "997f1d20257be6d6196812316b4559f2d48124e34503650801b1cc8dfd8943bd"
+input_hash = "ab323816d205bf7cb1ad9d3ea72c1cd121146341fd3906d2b8ee7c69483a7963"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x10019ed0"]
 size = 395
@@ -185316,7 +185316,7 @@ marker_type = "FUNCTION"
 name = "gm_CheckInventoryCapacity"
 
 ["SERVER.0x10019ed0".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "2b22951bdb263be7a567dc7729b85867fce9383ad36a9c1ec508830ea6b1c33b"
 reference_size = "395"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185327,10 +185327,10 @@ module = "SERVER"
 va = "0x10019ed0"
 context_hash = ""
 defines = "[]"
-input_hash = "c8b0c25d518022e5b5f4dfd7f56d2c74f56402c7c16efe7099a704bb29e102e1"
+input_hash = "7c9228c343202bdf6199bd104041d0759fcde73f8d813fa72dfa0e27e9d0f6dc"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1001a060"]
 size = 97
@@ -185343,7 +185343,7 @@ marker_type = "FUNCTION"
 name = "gm_EntitySetField"
 
 ["SERVER.0x1001a060".verification]
-source_hash = "4fd1550bbf5d340d20ccba6d05ded3e7906fed06fa1208704274d34f7b5a52d6"
+source_hash = "1e537223f626dbc02f977f6693c1fe17641eb5b57f659c1ffe21ae593c147603"
 reference_hash = "3f9e42c1b9d030ba39c72235ba84489393ae0bfecbc503c0c0c7098b0396f826"
 reference_size = "97"
 headers_hash = "62b56b6e9fb673a18cc80424552d6069daec0572e1851667727008fa02141670"
@@ -185354,10 +185354,10 @@ module = "SERVER"
 va = "0x1001a060"
 context_hash = ""
 defines = "[]"
-input_hash = "df21e3564ab3e99476e27839a70d6d331f9595dfb8a4cb10dd6ac81a7f6e6948"
+input_hash = "b6f0cba070bbe5a2be733a953fc83329c113a73b80e796dcd2dab6c1c5b0b2b1"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-07T19:56:56+00:00"
+measured_at = "2026-10-07T20:17:36+00:00"
 
 ["SERVER.0x1001a0d0"]
 size = 32

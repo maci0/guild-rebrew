@@ -1400,7 +1400,7 @@ char* __cdecl vfs_fgets(char* buf, int max, char* stream)
 
 /* Writes count items of size bytes: into a memory stream (deflated when compressed), through gzwrite, or
  * through fwrite. Returns the bytes or items written, -1 on error. */
-int __cdecl vfs_fwrite(char* buf, int size, int count, char* stream)
+unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream)
 {
 	int result;
 	int total;

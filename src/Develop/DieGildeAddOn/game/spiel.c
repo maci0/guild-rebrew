@@ -3381,6 +3381,35 @@ int __cdecl gm_EntityHasProfession(unsigned short slot, int n, ...)
 	return found;
 }
 
+/* Client-only (TL 0x506ee0, discarded): 1 when slot's kind byte (+0x164) equals one of the n ints that
+ * follow. */
+int __cdecl gm_SlotKindIsOneOf(unsigned short slot, int n, ...)
+{
+	struct SLOT_COPY {
+		unsigned char head[0x164];
+		unsigned char kind;
+		unsigned char tail[0x21c - 0x165];
+	} rec;
+	va_list ap;
+	int r;
+	int i;
+
+	r = 0;
+	rec = ((struct SLOT_COPY*) g_slot_table)[slot];
+	if (n <= -1) {
+		return r;
+	}
+	va_start(ap, n);
+	for (i = 0; i < n; i++) {
+		if (rec.kind == va_arg(ap, int)) {
+			r = 1;
+			break;
+		}
+	}
+	va_end(ap);
+	return r;
+}
+
 int __cdecl gm_GetGuildBuildingKind(int guild)
 {
 	switch (guild) {
