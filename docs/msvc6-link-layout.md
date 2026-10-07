@@ -4972,7 +4972,7 @@ Two source facts the order depends on, both measured:
   unused one in an included header (`game_data.h`), or a new line before it, changes its code; block-scope
   `extern`s inside the using function do not.
 - **`.reloc` VirtualSize is LINK's reservation**, `12 * N` for N input DIR32 records (section 76). Restoring
-  relocations raised it from 49296 to 51288 bytes; the reference's 66420 needs about 1260 more input fixups.
+  relocations raised it from 49296 to 51288 bytes; the reference's 66420 needed about 1260 more input fixups (about 1090 after the net.c code below).
 - **Load order of the late CRT members and the imports (2026-10-07).** The original link had no include list
   past the code members it needed: `setlocal.obj` pulled getqloc, initnum, initctyp and initmon (code
   discarded, `.bss` kept), and initctyp pulled `a_str.obj`. `native-archive-includes.rsp` therefore stops
@@ -4985,11 +4985,26 @@ Two source facts the order depends on, both measured:
   imports and RtlUnwind follow naturally. Every DLL's hint/name order then equals the reference's except
   `GetLastError` (load index 42 against 37; no loaded member between `toupper.obj` and `realloc.obj`
   references it). Raw `.rdata` differs in 242 bytes (was 1768).
+- **Discarded client code in `Units/net/net.c` (2026-10-07).** The client's TCP connection functions
+  (Europa1400Gold_TL.exe 0x4208a0..0x421347, nine functions) are reconstructed there with no
+  anchor, so `/OPT:REF` discards them. They load seven WS2_32 members the server lacks (`inet_ntoa`,
+  `gethostbyname`, `gethostname`, `getsockopt`, `select`, `connect`, `inet_addr`; Rich import count
+  109 -> 116, reference 126) and add 170 input DIR32 records (`.reloc` 51312 -> 53352). The IAT model
+  over the new load order predicts 38 KERNEL32 slots off the reference instead of 53; WS2_32 stays
+  exact. Their client state has no proven server allocation and is `selectany`. Side effect: native ICF
+  keeps a_map.obj's `_strncnt` instead of a_cmp.obj's (section 57), moving 150 labels by up to +48 bytes
+  (16199 `.text` and 8 `.data` bytes). Which subset of the functions flips the survivor follows neither
+  COMDAT count nor size, so the full set is kept rather than tuned.
+- **Not in the server's `broadcast.c`: the client's broadcast open (TL 0x402220).** Its `GetLastError`
+  call would load that import in the game's KERNEL32 pass (load index 28; the reference has 37), and
+  with it the IAT model predicts 72 KERNEL32 slots off. The rest of the client browser (TL
+  0x402320..0x402604: close, send, recvfrom search) changes the prediction by one slot (39) and adds
+  `recvfrom` and `fprintf.obj`; with no measured support it is not added.
 - **Left:**
   - IAT slot order. LINK sorts the `.idata$5` contributions (function imports, dropped ones and null thunks,
     in load order) with the runtime's qsort keyed by DLL name; a Python model of the VC6 qsort over that
     array reproduces our build's KERNEL32 slots exactly. For the reference, a hill-climb over the unknown
     entries (dropped imports after load index 28, the other DLLs as whole blocks) gets within 8 of 81
-    KERNEL32 slots, not to 0, so the original array holds something this build lacks. The 138 `.text`
+    KERNEL32 slots, not to 0, so the original array holds something this build lacks. Apart from the ICF move above, the `.text`
     bytes that differ are all IAT slot operands.
   - `.reloc` reservation (above).
