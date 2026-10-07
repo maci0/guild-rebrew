@@ -320,6 +320,71 @@ extern int g_some_limit;
 
 extern char* g_slot_array;
 
+/* Client-only game-clock helpers (the Gold T&L client's spiel order).  No
+ * server function calls them, so /OPT:REF discards them; their absolute
+ * fixups, where they have any, still count toward LINK's .reloc reservation. */
+
+int __cdecl gm_CompareGameTime(char* a, char* b)
+{
+	int ta;
+	int tb;
+
+	if (*(int*) a < *(int*) b) {
+		return -1;
+	}
+	if (*(int*) a > *(int*) b) {
+		return 1;
+	}
+	ta = (*(unsigned short*) (a + 4) * 60 + *(int*) (a + 6)) * 60 + *(int*) (a + 0xa);
+	tb = (*(unsigned short*) (b + 4) * 60 + *(int*) (b + 6)) * 60 + *(int*) (b + 0xa);
+	if (ta < tb) {
+		return -1;
+	}
+	return ta > tb;
+}
+
+int __cdecl gm_GameTimeMinutesBetween(char* a, char* b)
+{
+	return ((*(int*) b - *(int*) a) * 24 - *(unsigned short*) (a + 4) + *(unsigned short*) (b + 4)) * 60 -
+	       *(int*) (a + 6) + *(int*) (b + 6);
+}
+
+void __cdecl gm_PackGameTime(int* src, char* dst)
+{
+	*(short*) (dst + 2) = (short) *src + 0x578;
+	dst[1] = (char) (*src % 4) * 3 + 1;
+	dst[0] = 1;
+	dst[4] = ((char*) src)[4];
+	dst[5] = ((char*) src)[6];
+	*(int*) (dst + 6) = *(int*) ((char*) src + 0xa);
+}
+
+void __cdecl gm_UnpackGameTime(char* src, char* dst)
+{
+	*(int*) dst = *(short*) (src + 2) - 0x578;
+	*(unsigned short*) (dst + 4) = (unsigned short) *(char*) (src + 4);
+	*(int*) (dst + 6) = *(signed char*) (src + 5);
+	*(int*) (dst + 0xa) = *(int*) (src + 6);
+}
+
+void __cdecl gm_AdvanceGameTime(void* clock, int unused, int hours, int minutes, int seconds)
+{
+	void __cdecl sim_AdvanceGameClock(void* clock, int arg2, int arg3, int arg4);
+
+	(void) unused;
+	sim_AdvanceGameClock(clock, hours, minutes, seconds);
+}
+
+int __cdecl gm_GetPackedSeason(char* packed)
+{
+	return *(short*) (packed + 2) % 4;
+}
+
+int __cdecl gm_GetSeason(int* time)
+{
+	return *time % 4;
+}
+
 
 /* Game function - gm_InitObjektHersteller (initialize object manufacturers)
  *
@@ -1160,6 +1225,65 @@ void __cdecl gm_ObjectsAvailble(int season)
 	}
 }
 
+/* Client-only item-category helpers (discarded; see gm_CompareGameTime). */
+
+int __cdecl gm_GetItemCategory(unsigned short* item)
+{
+	int kinds[16] = { 1, 3, 4, 0xb, 0xd, 0xe, 0x12, 0x13, 0x15, 0x16, 0x1a, 0x1b, 0x1c, 0x1f, 0x21, 0 };
+	char* def;
+	int i;
+
+	i = 0;
+	def = g_item_def_table + *item * 0x41;
+	while (kinds[i] != 0) {
+		if (*def == kinds[i]) {
+			return kinds[i];
+		}
+		i++;
+	}
+	return 0;
+}
+
+int __cdecl gm_IsRawItem(int item)
+{
+	char kind;
+
+	kind = g_item_def_table[item * 0x41];
+	if (kind == 1 || kind == 0x1a || kind == 0xb || kind == 0x1c || kind == 0x1b || kind == 3 || kind == 4) {
+		return 1;
+	}
+	return 0;
+}
+
+/* Client-only: production of slot b of player a's building slots, summed
+ * over the items they hold (discarded). */
+int __cdecl gm_GetSlotProduction(int player, int slot)
+{
+	char* cell;
+	unsigned char* e;
+	int sum;
+	int j;
+
+	sum = 0;
+	cell = (char*) &g_slot_array + player * 0x2a90 + slot * 0x80;
+	if (cell[0x40] == 0) {
+		return 0;
+	}
+	for (j = 0; j < 4; j++) {
+		if (cell[0x40 + j * 8] != 0) {
+			for (e = (unsigned char*) gm_StartFilteredEntitySearch(1, 5, *(unsigned char*) (cell + 0x40 + j * 8)); e != 0;
+			     e = gm_FindNextFilteredEntity()) {
+				sum = (int) (sum + *(float*) (cell + 0x44 + j * 8));
+			}
+		}
+	}
+	sum = (int) (sum * 0.5);
+	if (*(float*) (cell + 0x24) != g_const_0_0) {
+		sum = (int) (*(float*) (cell + 0x24) / *(float*) (cell + 0x20) * sum);
+	}
+	return sum;
+}
+
 /* Scans the per-entity slot table for an entry whose 16-bit id
  * matches arg2. Each entity owns 0x2a90 bytes at 0x1009b770,
  * holding 0x55 slots of 0x80 bytes; returns the matching slot
@@ -1177,6 +1301,24 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 		}
 	}
 	return 0;
+}
+
+/* Client-only: map distance between two tile positions (discarded). */
+double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
+{
+	double __cdecl sqrt(double x);
+	double dx;
+	double dy;
+
+	dx = (double) x1 - (double) x2;
+	dy = (double) y1 - (double) y2;
+	if (dx < 0) {
+		dx = -dx;
+	}
+	if (dy < 0) {
+		dy = -dy;
+	}
+	return sqrt(dx * dx + dy * dy) * 2.90816330909729;
 }
 
 void* __cdecl gm_NextEntityQueryMatch(void)
@@ -1292,6 +1434,140 @@ lab_43e:
         }
     }
     return (void*)matched_ent;
+}
+
+/* Client-only: the item-list variant of gm_NextEntityQueryMatch.  It walks
+ * the query's 0x43-byte item records (g_query_flag1) or their +0x3f links,
+ * keeping the link stack in g_dispatch_table_a/b, and applies the id, owner,
+ * type and item-kind filters (discarded). */
+void* __cdecl gm_NextQueryItemMatch(void)
+{
+	unsigned short* cur;
+	char match;
+
+	match = 0;
+	if (g_item_def_table == 0) {
+		return 0;
+	}
+	cur = g_query_cursor;
+	if (cur == 0) {
+		return 0;
+	}
+	if (g_query_active != 0) {
+		g_query_active = 0;
+		if (g_query_flag2 != 0 && *(int*) ((char*) cur + 0x14) != 0) {
+			g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
+			g_query_match_count++;
+		}
+		if (*cur != 0) {
+			g_query_count = 1;
+		}
+	}
+	else if (g_query_flag1 != 0) {
+		cur = (unsigned short*) ((char*) cur + 0x43);
+		g_query_cursor = cur;
+		if (*cur != 0) {
+			g_query_count++;
+		}
+		while (g_query_count < g_query_limit && *cur == 0) {
+			cur = (unsigned short*) ((char*) cur + 0x43);
+			g_query_cursor = cur;
+		}
+	}
+	else {
+		cur = *(unsigned short**) ((char*) cur + 0x3f);
+		g_query_cursor = cur;
+		if (cur != 0) {
+			if (g_query_flag2 != 0 && *(int*) ((char*) cur + 0x14) != 0) {
+				g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
+				g_query_match_count++;
+			}
+		}
+		else {
+			if (g_query_flag2 == 0 || g_query_match_count == 0) {
+				return 0;
+			}
+			cur = (unsigned short*) g_dispatch_table_a[g_query_match_count];
+			g_query_match_count--;
+			g_query_cursor = cur;
+			if (*(int*) ((char*) cur + 0x14) != 0) {
+				g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
+				g_query_match_count++;
+			}
+		}
+	}
+	if (g_query_count >= g_query_limit) {
+		return 0;
+	}
+	for (;;) {
+		match = g_query_flag3 != 0;
+		if (g_query_filter_max_id != 0x7fff) {
+			if (*cur != g_query_filter_max_id) {
+				goto next;
+			}
+			match = 1;
+		}
+		if (g_query_filter_owner != -1) {
+			if (*(int*) ((char*) cur + 2) != g_query_filter_owner) {
+				goto next;
+			}
+			match = 1;
+		}
+		if (g_query_filter_type != 0xffff) {
+			if (gm_GetEntityType((short*) cur) != g_query_filter_type) {
+				goto next;
+			}
+			match = 1;
+		}
+		if (g_query_filter_state != 0xff) {
+			if ((unsigned char) g_item_def_table[*cur * 0x41] != g_query_filter_state) {
+				goto next;
+			}
+			match = 1;
+		}
+		if (match) {
+			return cur;
+		}
+next:
+		match = 0;
+		if (g_query_flag1 != 0) {
+			cur = (unsigned short*) ((char*) cur + 0x43);
+			g_query_cursor = cur;
+			if (*cur != 0) {
+				g_query_count++;
+			}
+			while (g_query_count < g_query_limit && *cur == 0) {
+				cur = (unsigned short*) ((char*) cur + 0x43);
+				g_query_cursor = cur;
+			}
+		}
+		else {
+			cur = *(unsigned short**) ((char*) cur + 0x3f);
+			g_query_cursor = cur;
+			if (cur != 0) {
+				if (g_query_flag2 != 0 && *(int*) ((char*) cur + 0x14) != 0) {
+					g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
+					g_query_match_count++;
+				}
+			}
+			else {
+				if (g_query_flag2 == 0 || g_query_match_count == 0) {
+					return 0;
+				}
+				cur = (unsigned short*) g_dispatch_table_a[g_query_match_count];
+				g_query_match_count--;
+				g_query_cursor = cur;
+				if (*(int*) ((char*) cur + 0x14) != 0) {
+					g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
+					g_query_match_count++;
+				}
+			}
+		}
+		if (g_query_count > g_query_limit || (char*) cur >= (char*) g_query_base + 0x14f218) {
+			g_query_cursor = 0;
+			return 0;
+		}
+	}
 }
 
 /* Initializes the query state from a list of (type, value) vararg pairs.
@@ -1775,6 +2051,49 @@ int __cdecl gm_SubObjectNoKill(int a, int b, int c)
 		gm_RemoveObjectByType(list_head, b);
 	}
 	return 1;
+}
+
+/* Client-only tavern and owner lookups (discarded). */
+
+char* __cdecl gm_FindTavernServing(int item)
+{
+	char* list[8];
+	int i;
+
+	if (g_active_player_count == 0) {
+		return 0;
+	}
+	list[0] = (char*) gm_ff_Objekt(*(int*) ((char*) g_active_player_count + 0x5d), 1, 0, 0x92);
+	list[1] = (char*) gm_ff_Objekt(*(int*) ((char*) g_active_player_count + 0x5d), 1, 0, 0x93);
+	list[2] = (char*) gm_ff_Objekt(*(int*) ((char*) g_active_player_count + 0x5d), 1, 0, 0x94);
+	list[3] = (char*) gm_ff_Objekt(*(int*) ((char*) g_active_player_count + 0x5d), 1, 0, 0x95);
+	list[4] = (char*) gm_ff_Objekt(*(int*) ((char*) g_active_player_count + 0x5d), 1, 0, 0x96);
+	list[5] = (char*) gm_ff_Objekt(*(int*) ((char*) g_active_player_count + 0x5d), 1, 0, 0x97);
+	list[6] = (char*) gm_ff_Objekt(*(int*) ((char*) g_active_player_count + 0x5d), 1, 0, 0x2db);
+	list[7] = 0;
+	for (i = 0; list[i] != 0; i++) {
+		if (gm_ff_Objekt(*(int*) (list[i] + 0x14), 2, 6, 0, item) != 0) {
+			return (char*) gm_ff_Objekt(*(int*) (list[i] + 0x14), 1, 0, 0x116);
+		}
+	}
+	return 0;
+}
+
+void* __cdecl gm_FindKind47ByOwner(int owner)
+{
+	void* entry;
+
+	entry = gm_StartFilteredEntitySearch(1, 0, 0x47);
+	if (entry == 0) {
+		return 0;
+	}
+	do {
+		if (*(int*) ((char*) entry + 0x65) == owner) {
+			return entry;
+		}
+		entry = gm_FindNextFilteredEntity();
+	} while (entry != 0);
+	return 0;
 }
 
 /* Scans the entity array for the next entity matching the active filter
@@ -2366,6 +2685,61 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 }
 #pragma optimize("", on)
 
+/* Client-only: the building's market store, else its first store item
+ * (discarded). */
+void* __cdecl gm_FindBuildingStore(unsigned char* building)
+{
+	unsigned char* type;
+	unsigned short* slot;
+	void* found;
+	int category;
+	int item;
+	int i;
+
+	found = 0;
+	category = gm_GetBuildingTypeCategory(building[0]);
+	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
+	if (category == 1 || category == 7 || category == 8) {
+		if (type[0] == 0x1d) {
+			item = 0x205;
+		}
+		else if (type[0] == 0x16) {
+			item = 0x12e;
+		}
+		else if (type[0] == 4) {
+			item = 0x54;
+		}
+		else if (type[0] == 0x1f) {
+			item = 0xfd;
+		}
+		else {
+			item = 0;
+		}
+		if (item != 0) {
+			found = gm_ff_Objekt(*(int*) (building + 0x5d), 1, 0, item);
+			if (found != 0) {
+				return found;
+			}
+		}
+	}
+	else if (category == 4) {
+		return gm_ff_Objekt(*(int*) (building + 0x5d), 1, 0, 0xf7);
+	}
+	else if (gm_CheckEntityType(building) != 0) {
+		return gm_ff_Objekt(*(int*) (building + 0x5d), 1, 0, 0xfd);
+	}
+	slot = (unsigned short*) (type + 0x23);
+	for (i = 0; i < 0x40; i++, slot++) {
+		if (*slot != 0xffff) {
+			item = *slot & 0x7fff;
+			if (g_item_def_table[item * 0x41] == 2 && item != 0xfd) {
+				return gm_ff_Objekt(*(int*) (building + 0x5d), 1, 0, item);
+			}
+		}
+	}
+	return found;
+}
+
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* entity)
 {
 	char* type_entry;
@@ -2438,6 +2812,44 @@ int __cdecl gm_GetBuildingTypeCategory(int arg1)
 	}
 }
 
+/* Client-only: nearest free building of `kind` to `self` (discarded). */
+unsigned char* __cdecl gm_FindNearestOfKind(unsigned char* self, int kind)
+{
+	double __cdecl sqrt(double x);
+	int __cdecl gm_IsWarehouse(unsigned char* building);
+	float best;
+	unsigned char* found;
+	unsigned char* e;
+	float* a;
+	float* b;
+	float dx;
+	float dy;
+	float dz;
+	float d;
+
+	best = 1e8f;
+	found = 0;
+	for (e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
+		if (gm_CheckEntityType(e) != 0 || gm_IsWarehouse(e) != 0) {
+			continue;
+		}
+		a = *(float**) (e + 0x61);
+		if (a == 0 || e == self || *e != kind || *(unsigned short*) (e + 0x27) != 0xffff) {
+			continue;
+		}
+		b = *(float**) (self + 0x61);
+		dx = a[0x13] - b[0x13];
+		dy = a[0x14] - b[0x14];
+		dz = a[0x15] - b[0x15];
+		d = (float) sqrt(dz * dz + dy * dy + dx * dx);
+		if (d < best) {
+			best = d;
+			found = e;
+		}
+	}
+	return found;
+}
+
 /* Searches a specific entity table (type 0x67) for a matching
  * entry. Used for specialized entity lookups. */
 
@@ -2461,6 +2873,28 @@ void* __cdecl gm_SearchTable67(int id)
 	return 0;
 }
 
+/* Client-only building-type queries (discarded). */
+
+int __cdecl gm_ListTypesOfKind(int kind, int* out)
+{
+	int n;
+	int i;
+
+	n = 0;
+	for (i = 0; i < 0x58; i++) {
+		if ((unsigned char) g_entity_type_table[i * 0x24d] == kind) {
+			out[n] = i;
+			n++;
+		}
+	}
+	return n;
+}
+
+int __cdecl gm_IsWarehouse(unsigned char* building)
+{
+	return g_entity_type_table[*building * 0x24d] == 10;
+}
+
 /* Checks if an entity's type matches the expected class.
  * Returns non-zero if the entity type field matches. */
 
@@ -2479,6 +2913,54 @@ int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 		return 1;
 	}
 	return 0;
+}
+
+/* Client-only: the residents of `building` grouped by trade: two worker
+ * lists (the building type's two trades), the master's index and the other
+ * residents (discarded). */
+int __cdecl gm_CollectBuildingResidents(unsigned char* building, unsigned char* home, int* out)
+{
+	unsigned char* type;
+	unsigned char* e;
+	int* first;
+	int* second;
+	int* other;
+	int count;
+	int i;
+
+	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
+	out[0] = 0;
+	for (i = 0; i < 0x18; i++) {
+		out[1 + i] = 0xffff;
+	}
+	for (i = 0; i < 0xc; i++) {
+		out[0x19 + i] = 0xffff;
+	}
+	out[0x25] = 0xffff;
+	first = out + 1;
+	second = out + 0xd;
+	other = out + 0x19;
+	count = 0;
+	for (i = 0, e = g_slot_table + 0x165; e < g_slot_table + 0x165 + 0x300 * 0x21c; i++, e += 0x21c) {
+		if (*(unsigned char**) (e + 7) != home) {
+			continue;
+		}
+		if (type[0x22f] == e[0]) {
+			*first++ = *(unsigned short*) (e - 0x165);
+		}
+		else if (type[0x230] == e[0]) {
+			*second++ = *(unsigned short*) (e - 0x165);
+		}
+		else if (type[0x223] != 0 && type[0x224] != 0 && (type[0x223] == e[-1] || type[0x224] == e[-1])) {
+			out[0x25] = i;
+		}
+		else {
+			*other++ = *(unsigned short*) (e - 0x165);
+		}
+		count++;
+	}
+	out[0] = count;
+	return count;
 }
 
 void __cdecl gm_AssignBuildingOwner(unsigned char* building, unsigned short new_owner, unsigned int owner_slot)
@@ -2827,6 +3309,315 @@ int __cdecl gm_EntityClassCheck(int type)
 	}
 }
 
+/* Client-only office, profession and skill tables (discarded). */
+
+int __cdecl gm_EntityHasOffice(unsigned short slot, int n, ...)
+{
+	unsigned char* e;
+	int* role;
+	int found;
+	int i;
+
+	found = 0;
+	e = g_slot_table + slot * 0x21c;
+	if (n <= -1) {
+		return found;
+	}
+	role = &n + 1;
+	for (i = 0; i < n && !found; i++, role++) {
+		if (e[0x166] == *role || e[0x169] == *role) {
+			found = 1;
+		}
+	}
+	return found;
+}
+
+int __cdecl gm_EntityHasProfession(unsigned short slot, int n, ...)
+{
+	unsigned char profession;
+	int* wanted;
+	int found;
+	int i;
+
+	found = 0;
+	profession = g_slot_table[slot * 0x21c + 0x164];
+	if (n <= -1) {
+		return found;
+	}
+	wanted = &n + 1;
+	for (i = 0; i < n; i++, wanted++) {
+		if (profession == *wanted) {
+			found = 1;
+			break;
+		}
+	}
+	return found;
+}
+
+int __cdecl gm_GetGuildBuildingKind(int guild)
+{
+	switch (guild) {
+	case 1:
+		return 0xf;
+	case 7:
+		return 4;
+	case 6:
+		return 7;
+	case 2:
+		return 0x17;
+	case 3:
+		return 0x18;
+	case 4:
+		return 0x19;
+	case 5:
+		return 0x1a;
+	}
+	return 0;
+}
+
+int __cdecl gm_GetStatBuildingKind(int stat)
+{
+	int range;
+
+	range = gm_MapEntityStatRange(stat);
+	if (range == 0) {
+		return 0;
+	}
+	switch (range) {
+	case 11:
+		return 0x4;
+	case 9:
+		return 0x5;
+	case 7:
+		return 0x7;
+	case 6:
+		return 0x8;
+	case 8:
+		return 0x9;
+	case 5:
+		return 0xe;
+	case 12:
+		return 0x10;
+	case 1:
+		return 0x12;
+	case 10:
+		return 0x13;
+	case 2:
+		return 0x14;
+	case 3:
+		return 0x15;
+	case 4:
+		return 0x16;
+	case 13:
+		return 0x1d;
+	case 16:
+		return 0;
+	}
+	return 0;
+}
+
+int __cdecl gm_GetRangeBuildingKind(int range)
+{
+	switch (range) {
+	case 11:
+		return 0x4;
+	case 9:
+		return 0x5;
+	case 7:
+		return 0x7;
+	case 6:
+		return 0x8;
+	case 8:
+		return 0x9;
+	case 5:
+		return 0xe;
+	case 12:
+		return 0x10;
+	case 1:
+		return 0x12;
+	case 10:
+		return 0x13;
+	case 2:
+		return 0x14;
+	case 3:
+		return 0x15;
+	case 4:
+		return 0x16;
+	case 13:
+		return 0x1d;
+	case 16:
+		return 0;
+	}
+	return 0;
+}
+
+int __cdecl gm_GetSkillPair(int skill, int* first, int* second)
+{
+	switch (skill) {
+	case 2:
+		*first = 1;
+		*second = 0;
+		return 1;
+	case 4:
+		*first = 1;
+		*second = 2;
+		return 1;
+	case 5:
+		*first = 1;
+		*second = 0;
+		return 1;
+	case 6:
+		*first = 0;
+		*second = 1;
+		return 1;
+	case 7:
+		*first = 4;
+		*second = 1;
+		return 1;
+	case 8:
+		*first = 0;
+		*second = 3;
+		return 1;
+	case 9:
+		*first = 0;
+		*second = 4;
+		return 1;
+	case 10:
+		*first = 3;
+		*second = 2;
+		return 1;
+	case 11:
+		*first = 2;
+		*second = 3;
+		return 1;
+	case 12:
+		*first = 3;
+		*second = 2;
+		return 1;
+	case 13:
+		*first = 2;
+		*second = 0;
+		return 1;
+	}
+	*first = 1;
+	*second = 0;
+	return 1;
+}
+
+int __cdecl gm_GetStatFirstItem(int stat)
+{
+	int range;
+
+	range = gm_MapEntityStatRange(stat);
+	if (range == 0) {
+		return 0;
+	}
+	switch (range) {
+	case 11:
+		return 0xb;
+	case 9:
+		return 0xe;
+	case 7:
+		return 0x14;
+	case 6:
+		return 0x17;
+	case 8:
+		return 0x1a;
+	case 5:
+		return 0x21;
+	case 12:
+		return 0x27;
+	case 1:
+		return 0x29;
+	case 10:
+		return 0x2c;
+	case 2:
+		return 0x2f;
+	case 3:
+		return 0x32;
+	case 4:
+		return 0x35;
+	case 13:
+		return 0x48;
+	case 15:
+		return 0x51;
+	case 14:
+		return 0x4e;
+	}
+	return 0;
+}
+
+int __cdecl gm_GetItemGuild(int item)
+{
+	if (item >= 1 && item <= 6) {
+		return 7;
+	}
+	if (item >= 0x28 && item <= 0x2d) {
+		return 7;
+	}
+	if (item >= 0x23 && item <= 0x27) {
+		return 2;
+	}
+	if (item >= 0x2e && item <= 0x33) {
+		return 3;
+	}
+	if (item >= 0x3a && item <= 0x3f) {
+		return 4;
+	}
+	if (item >= 0x40 && item <= 0x45) {
+		return 5;
+	}
+	if (item >= 0xd && item <= 6) {
+		return 6;
+	}
+	return 0;
+}
+
+int __cdecl gm_GetRangeStatId(int range, int level)
+{
+	int d;
+
+	if (range == 0) {
+		return 0;
+	}
+	d = level - 1;
+	switch (range) {
+	case 11:
+		return 0x6 - d;
+	case 9:
+		return 0xc - d;
+	case 7:
+		return 0x12 - d;
+	case 6:
+		return 0x18 - d;
+	case 8:
+		return 0x1e - d;
+	case 5:
+		return 0x27 - d;
+	case 12:
+		return 0x2d - d;
+	case 1:
+		return 0x33 - d;
+	case 10:
+		return 0x39 - d;
+	case 2:
+		return 0x3f - d;
+	case 3:
+		return 0x45 - d;
+	case 4:
+		return 0x4b - d;
+	case 13:
+		return 0x51 - d;
+	case 15:
+		return 0x5e - d;
+	case 14:
+		return 0x58 - d;
+	case 16:
+		return 0;
+	}
+	return 0;
+}
+
 /* Checks if an entity's stat is at or above a threshold.
  * Used for skill/ability requirement checks. */
 
@@ -2848,6 +3639,59 @@ int __cdecl gm_CheckStatLevel(int entity_idx, int stat_id)
 		return 0;
 	}
 	return (unsigned int) *(unsigned char*) (result + 0x74 + stat_id);
+}
+
+/* Client-only building-kind and guild-hall helpers (discarded). */
+
+int __cdecl gm_GetKindStatRange(int kind)
+{
+	switch (kind) {
+	case 4:
+		return 0xb;
+	case 5:
+		return 9;
+	case 7:
+		return 7;
+	case 8:
+		return 6;
+	case 9:
+		return 8;
+	case 14:
+		return 5;
+	case 16:
+		return 0xc;
+	case 18:
+		return 1;
+	case 19:
+		return 0xa;
+	case 20:
+		return 2;
+	case 21:
+		return 3;
+	case 22:
+		return 4;
+	case 29:
+		return 0xd;
+	case 31:
+		return 0xe;
+	case 32:
+		return 0xf;
+	}
+	return 0;
+}
+
+void __cdecl gm_RingGuildHallBell(int guild)
+{
+	char* __cdecl gm_GetGuildHall(int guild);
+	char* hall;
+
+	hall = gm_GetGuildHall(guild);
+	if (guild == 1) {
+		gm_ff_Objekt(*(int*) (hall + 0x5d), 2, 6, 0, 0x115);
+	}
+	else {
+		gm_ff_Objekt(*(int*) (hall + 0x5d), 2, 6, 0, 0x142);
+	}
 }
 
 /* Maps and clamps an entity stat value to a valid range.
@@ -2973,6 +3817,58 @@ int __cdecl gm_MapEntityStatRange(int stat_id)
 	}
 }
 
+/* Client-only: the stat range of an item pair id (discarded). */
+int __cdecl gm_MapItemPairRange(unsigned int item)
+{
+	switch (item) {
+	case 0:
+		return 0;
+	case 1:
+	case 2:
+		return 0xb;
+	case 3:
+	case 4:
+		return 0x7;
+	case 5:
+	case 6:
+		return 0x6;
+	case 7:
+	case 8:
+		return 0x8;
+	case 13:
+	case 14:
+		return 0x5;
+	case 15:
+	case 16:
+		return 0xc;
+	case 17:
+	case 18:
+		return 0x1;
+	case 19:
+	case 20:
+		return 0xa;
+	case 21:
+	case 22:
+		return 0x2;
+	case 23:
+	case 24:
+		return 0x3;
+	case 25:
+	case 26:
+		return 0x4;
+	case 27:
+	case 28:
+		return 0xd;
+	case 31:
+	case 32:
+		return 0xe;
+	case 33:
+	case 34:
+		return 0xf;
+	}
+	return 0;
+}
+
 /* Returns the opposite stat index for paired stats.
  * E.g., maps strength to weakness, charisma to shyness.
  * Used for character stat balancing. */
@@ -3053,6 +3949,12 @@ int __cdecl gm_GetOppositeStatIndex(int stat_id)
 	return result;
 }
 
+/* Client-only: blends two weights 60/40 both ways and averages (discarded). */
+float __cdecl gm_BlendWeights(float a, float b)
+{
+	return (((a - b * b) * 0.6f + 0.4f) + ((a * a - b) * 0.4f + 0.6f)) * 0.5f;
+}
+
 /* Generates a random stat modifier. Produces a random
  * delta value for stat variation during entity creation
  * or level-up events. */
@@ -3099,6 +4001,142 @@ int __cdecl gm_LookupEntityRecordById(int search_id)
 	return 0;
 }
 
+/* Client-only age, rank and family helpers (discarded). */
+
+float __cdecl gm_GetEntityAge(int slot)
+{
+	return (float) *(unsigned short*) (g_slot_table + 0xa + (slot & 0xffff) * 0x21c);
+}
+
+int __cdecl gm_GetOfficeRank(unsigned short slot, int skip_parent)
+{
+	int __cdecl amt_GetRoleTemplate(int role, void* out);
+	int tmpl[6];
+	unsigned short* parent;
+	int rank;
+	int up;
+
+	if (*(int*) (g_slot_table + 4 + slot * 0x21c) == -1 || g_slot_table[8 + slot * 0x21c] == 0) {
+		return 0;
+	}
+	if (amt_GetRoleTemplate(g_slot_table[0x166 + slot * 0x21c], tmpl) == 0) {
+		return 1;
+	}
+	rank = (tmpl[2] & 0xff) + 1;
+	if ((char) tmpl[2] == 10 || skip_parent != 0) {
+		return rank;
+	}
+	parent = (unsigned short*) gm_LookupEntityRecordById(*(int*) (g_slot_table + 0x60 + slot * 0x21c));
+	if (parent == 0) {
+		return rank;
+	}
+	up = gm_GetOfficeRank(*parent, 1);
+	if (rank > up) {
+		return rank;
+	}
+	return gm_GetOfficeRank(*parent, 1);
+}
+
+int __cdecl gm_GetCouncilRank(unsigned short slot, int skip_parent)
+{
+	int __cdecl amt_GetRoleTemplate(int role, void* out);
+	int tmpl[6];
+	unsigned short* parent;
+	int rank;
+	int up;
+
+	if (*(int*) (g_slot_table + 4 + slot * 0x21c) == -1 || g_slot_table[8 + slot * 0x21c] == 0) {
+		return 0;
+	}
+	if (amt_GetRoleTemplate(g_slot_table[0x167 + slot * 0x21c], tmpl) == 0) {
+		return 1;
+	}
+	rank = (tmpl[2] & 0xff) + 1;
+	if ((char) tmpl[2] == 10 || skip_parent != 0) {
+		return rank;
+	}
+	parent = (unsigned short*) gm_LookupEntityRecordById(*(int*) (g_slot_table + 0x60 + slot * 0x21c));
+	if (parent == 0) {
+		return rank;
+	}
+	up = gm_GetCouncilRank(*parent, 1);
+	if (rank > up) {
+		return rank;
+	}
+	return gm_GetCouncilRank(*parent, 1);
+}
+
+int __cdecl gm_GetBirthday(char* entity, unsigned char* out)
+{
+	void __cdecl gm_PackGameTime(int* src, char* dst);
+	int time[4];
+	char packed[12];
+	unsigned int seed;
+	int age;
+
+	if (entity[8] != 0) {
+		return 0;
+	}
+	age = *(short*) (entity + 0x28);
+	time[0] = age;
+	gm_PackGameTime(time, packed);
+	seed = *(unsigned int*) (entity + 0x30) ^ *(short*) (packed + 2);
+	out[1] = (unsigned char) (((seed >> 3) % 7 + age % 19) % 12 + 1);
+	out[0] = (unsigned char) ((seed >> 5) % 28 + 1);
+	*(short*) (out + 2) = *(short*) (packed + 2);
+	return 1;
+}
+
+int __cdecl gm_CanMarry(char* a, char* b)
+{
+	int __cdecl sim_IsUnderage(int slot);
+	char* other;
+	int age_diff;
+	int i;
+	int first;
+
+	age_diff = (unsigned char) b[0x58] - (unsigned char) a[0x58];
+	if (b[8] == 0) {
+		return 0;
+	}
+	for (i = 0; i < 8; i++) {
+		if (*(int*) (a + 0x5c + i * 4) == *(int*) (b + 4)) {
+			break;
+		}
+	}
+	if (i < 8) {
+		if (i == 1 || i == 2) {
+			return 0;
+		}
+		if (i != 0) {
+			return sim_IsUnderage(*(unsigned short*) b) == 0;
+		}
+		first = 2;
+	}
+	else {
+		if (age_diff != 0 || *(unsigned short*) (a + 0x50) != *(unsigned short*) (b + 0x50)) {
+			return 0;
+		}
+		first = 3;
+	}
+	for (i = 3; i < 8; i++) {
+		if (*(int*) (a + 0x5c + i * 4) == -1) {
+			continue;
+		}
+		other = (char*) gm_LookupEntityRecordById(*(int*) (a + 0x5c + i * 4));
+		if (other != 0 && sim_IsUnderage(*(unsigned short*) other) == 0 && other[8] != 0) {
+			return 0;
+		}
+	}
+	if (first > 2) {
+		other = (char*) gm_LookupEntityRecordById(*(int*) (a + 0x5c));
+		if (other != 0 && other[8] != 0) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 /* Gets a pointer to an entity's type table entry.
  * Indexes into g_entity_type_table by the entity's type byte. */
 
@@ -3120,6 +4158,32 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
 		}
 	}
 	return (short*) 0;
+}
+
+/* Client-only: number of living children; non-zero when one is of age
+ * (discarded). */
+int __cdecl gm_CountChildren(char* entity, int* count_out)
+{
+	char* child;
+	int adult;
+	int count;
+	int i;
+
+	adult = 0;
+	count = 0;
+	for (i = 0; i < 5; i++) {
+		child = (char*) gm_LookupEntityRecordById(*(int*) (entity + 0x68 + i * 4));
+		if (child != 0 && *(unsigned char*) (child + 8) > 0) {
+			count++;
+			if (*(unsigned short*) (child + 0xa) > 0xb) {
+				adult = 1;
+			}
+		}
+	}
+	if (count_out != 0) {
+		*count_out = count;
+	}
+	return adult;
 }
 
 int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
@@ -3864,6 +4928,39 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 	return total;
 }
 
+/* Client-only store and manufacturer queries (discarded). */
+
+int __cdecl gm_SumStoreCount(int store)
+{
+	void* entry;
+	int total;
+
+	total = 0;
+	entry = gm_ff_Objekt(store, 1, 4, 9);
+	while (entry != 0) {
+		total = total + *(int*) ((char*) entry + 0xe);
+		entry = gm_NextEntityQueryMatch();
+	}
+	return total;
+}
+
+float __cdecl gm_GetManufacturerRating(int item)
+{
+	extern char g_minimum_manufacturer[];
+	unsigned char* type;
+	char* def;
+	float sum;
+	int i;
+
+	sum = g_const_0_0;
+	type = (unsigned char*) g_entity_type_table + ((int*) g_minimum_manufacturer)[item] * 0x24d;
+	for (i = 0; i < 2; i++) {
+		sum += type[0x233 + i] * 896.0f * (1.0 / 720.0);
+	}
+	def = g_item_def_table + item * 0x41;
+	return sum * *(int*) (def + 0x22) / (int) *(unsigned short*) (def + 0x36);
+}
+
 #pragma optimize("a", on)
 double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 {
@@ -4001,6 +5098,353 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 }
 #pragma optimize("", on)
 
+/* Client-only mood, store and building-level helpers (discarded). */
+
+float __cdecl gm_GetHappinessFactor(int slot)
+{
+	unsigned char* e;
+	float v;
+
+	e = g_slot_table + slot * 0x21c;
+	if (e == 0) {
+		return 1.0f;
+	}
+	v = e[0x80];
+	if (v <= g_const_42_0) {
+		return 1.0f;
+	}
+	return (float) (v * (1.0 / 1008.0) + 1.0);
+}
+
+int __cdecl gm_ListBuildingStores(unsigned char* building, void** out)
+{
+	unsigned short* slot;
+	void* store;
+	int n;
+	int i;
+
+	n = 0;
+	slot = (unsigned short*) ((unsigned char*) g_entity_type_table + building[0] * 0x24d + 0x23);
+	for (i = 0; i < 0x40 && *slot != 0; i++, slot++) {
+		store = gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, *slot & 0x7fff);
+		if (store != 0) {
+			out[n++] = store;
+		}
+	}
+	return n;
+}
+
+int __cdecl gm_ListProducts(unsigned char* building, int* out)
+{
+	unsigned char* type;
+	int n;
+	int i;
+	int item;
+
+	n = 0;
+	type = (unsigned char*) g_entity_type_table + *building * 0x24d;
+	for (i = 0; i < 0x40; i++) {
+		if (*(unsigned short*) (type + 0x23 + i * 2) == 0) {
+			break;
+		}
+		item = *(unsigned short*) (type + 0x23 + i * 2) & 0x7fff;
+		if (g_item_def_table[item * 0x41] != 0x21) {
+			n++;
+		}
+		if (out != 0) {
+			out[n] = item;
+		}
+	}
+	return n;
+}
+
+int __cdecl gm_ListProductsAfter(unsigned char* building, unsigned short* key, int* out)
+{
+	unsigned char* type;
+	char kind;
+	int n;
+	int i;
+	int item;
+
+	n = 0;
+	type = (unsigned char*) g_entity_type_table + *building * 0x24d;
+	for (i = 0; i < type[0x22]; i++) {
+		if ((unsigned short) (*(unsigned short*) (type + 0x23 + i * 2) & 0x7fff) == *key) {
+			break;
+		}
+	}
+	if (i >= type[0x22]) {
+		return 0;
+	}
+	for (i++; i < 0x40; i++) {
+		if (*(unsigned short*) (type + 0x23 + i * 2) == 0) {
+			break;
+		}
+		item = *(unsigned short*) (type + 0x23 + i * 2) & 0x7fff;
+		kind = g_item_def_table[item * 0x41];
+		if (kind == 2 || kind == 6) {
+			break;
+		}
+		if (kind != 0x21) {
+			n++;
+		}
+		if (out != 0) {
+			out[n] = item;
+		}
+	}
+	return n;
+}
+
+int __cdecl gm_GetEntityMood(char* entity)
+{
+	return (signed char) entity[0x5c];
+}
+
+int __cdecl gm_ListGuildHouses(char* player, void** out)
+{
+	char* house;
+	int n;
+
+	n = 0;
+	house = (char*) gm_ff_Objekt(n, 2, 7, 4, 0x1d);
+	while (house != 0 && n < 3) {
+		if (*(int*) (house + 0x1c) == *(int*) (player + 1)) {
+			if (out != 0) {
+				out[n] = house;
+			}
+			n++;
+		}
+		house = (char*) gm_NextEntityQueryMatch();
+	}
+	return n;
+}
+
+int __cdecl gm_GetBuildingLevel(unsigned char* building)
+{
+	unsigned char* type;
+
+	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
+	switch (type[0]) {
+	case 2:
+	case 5:
+	case 7:
+		return type[0x247];
+	case 4:
+	case 11:
+	case 12:
+	case 13:
+	case 16:
+		break;
+	}
+	return type[0x247];
+}
+
+int __cdecl gm_HasLevelFor(unsigned char* building, unsigned char* other)
+{
+	unsigned char* type;
+	int need;
+	int level;
+
+	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
+	level = 0;
+	need = gm_GetBuildingLevel(other);
+	if (type[0x247] == 1) {
+		level = 1;
+	}
+	else if (type[0x247] == 2) {
+		level = 2;
+	}
+	else if (type[0x247] == 3) {
+		level = 7;
+	}
+	return level >= need;
+}
+
+int __cdecl gm_SumProductPoints(unsigned char* building, int kind, int scaled)
+{
+	unsigned char* type;
+	int sum;
+	int i;
+	int item;
+
+	sum = 0;
+	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
+	for (i = 0; i < 0x40; i++) {
+		item = *(unsigned short*) (type + 0x23 + i * 2) & 0x7fff;
+		if (item != 0 && type[0x1a3 + i] == kind && gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, item) != 0) {
+			sum += type[0x1e3 + i];
+		}
+	}
+	if (scaled) {
+		return (int) (sum * (gm_GetEntityMood((char*) building) * 0.01) + 0.5);
+	}
+	return sum;
+}
+
+int __cdecl gm_SumTypePoints(int type_index, int kind)
+{
+	unsigned char* type;
+	int sum;
+	int i;
+
+	sum = 0;
+	type = (unsigned char*) g_entity_type_table + type_index * 0x24d;
+	for (i = 0; i < 0x40; i++) {
+		if ((*(unsigned short*) (type + 0x23 + i * 2) & 0x7fff) != 0 && type[0x1a3 + i] == kind) {
+			sum += type[0x1e3 + i];
+		}
+	}
+	return sum;
+}
+
+int __cdecl gm_DaytimeMinutesBetween(char* from, char* to)
+{
+	int __cdecl gm_CompareGameTime(char* a, char* b);
+	void __cdecl sim_SetSyncParams(void* target, unsigned char type_id, unsigned int field_6, unsigned int field_10);
+	char cur[14];
+	float m;
+	int total;
+	int days;
+
+	if (gm_CompareGameTime(from, to) > 0) {
+		return 0;
+	}
+	*(int*) cur = *(int*) from;
+	*(int*) (cur + 4) = *(int*) (from + 4);
+	*(int*) (cur + 8) = *(int*) (from + 8);
+	*(short*) (cur + 0xc) = *(short*) (from + 0xc);
+	if (*(int*) cur < *(int*) to) {
+		m = (float) (*(unsigned short*) (cur + 4) * 60 + *(int*) (cur + 6));
+		m = m < 360.0f ? 360.0f : (m > 1380.0f ? 1380.0f : m);
+		total = (int) (1380.0f - (int) m);
+		(*(int*) cur)++;
+		sim_SetSyncParams(cur, 6, 0, 0);
+	}
+	else {
+		total = 0;
+	}
+	for (days = *(int*) to - *(int*) cur; days > 0; days--) {
+		total = (int) (total + 1020.0f);
+	}
+	m = (float) (*(unsigned short*) (to + 4) * 60 + *(int*) (to + 6));
+	m = m < 360.0f ? 360.0f : (m > 1380.0f ? 1380.0f : m);
+	total += (int) m;
+	m = (float) (*(unsigned short*) (cur + 4) * 60 + *(int*) (cur + 6));
+	m = m < 360.0f ? 360.0f : (m > 1380.0f ? 1380.0f : m);
+	return total - (int) m;
+}
+
+/* Client-only: a building's stock (its market or tavern store, the items it
+ * holds, their counts and capacities) for producers or consumers
+ * (discarded). */
+
+int __cdecl gm_GetBuildingStock(char* building, void* stock, int producers)
+{
+	typedef struct {
+		int max;
+		int n;
+		int caps[16];
+		unsigned short ids[16];
+		int vals[16];
+		char pada8[0xb4 - 0xa8];
+		char* store;
+	} STOCK;
+	STOCK* out;
+	char* store;
+	unsigned short* e;
+	char* def;
+
+	out = (STOCK*) stock;
+	memset(out, 0, sizeof(STOCK));
+	if (gm_ff_Objekt(*(int*) (building + 0x5d), 1, 0, 0xfd) == 0) {
+		return 0;
+	}
+	store = (char*) gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, 0x2a);
+	if (store == 0) {
+		store = (char*) gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, 0x116);
+		if (store == 0) {
+			return 0;
+		}
+	}
+	if (producers) {
+		if (*(unsigned short*) store == 0x116) {
+			return 0;
+		}
+		out->max = (unsigned char) store[0x1c];
+	}
+	else {
+		out->max = (unsigned char) store[0x1d];
+		if (*(unsigned short*) store == 0x116 && (unsigned char) store[0x1c] > out->max) {
+			out->max = (unsigned char) store[0x1c];
+		}
+	}
+	for (e = gm_ff_Objekt(*(int*) (store + 0x14), 1, 5); e != 0; e = (unsigned short*) gm_NextEntityQueryMatch()) {
+		def = g_item_def_table + *e * 0x41;
+		if (((*def == 0x17 || *def == 0x25) && producers) || (*def != 0x17 && *def != 0x25 && !producers) ||
+		    *(unsigned short*) store == 0x116) {
+			out->vals[out->n] = gm_GetMsgField(store, (char*) e);
+			out->caps[out->n] = compute_size(store, *e);
+			out->ids[out->n] = *e;
+			out->n++;
+		}
+	}
+	out->store = store;
+	return 1;
+}
+
+int __cdecl gm_GetBuildingFoodStock(char* building, void* stock, int producers)
+{
+	typedef struct {
+		int max;
+		int n;
+		int caps[16];
+		unsigned short ids[16];
+		int vals[16];
+		char pada8[0xb4 - 0xa8];
+		char* store;
+	} STOCK;
+	STOCK* out;
+	char* store;
+	unsigned short* e;
+	char* def;
+
+	out = (STOCK*) stock;
+	memset(out, 0, sizeof(STOCK));
+	if (gm_ff_Objekt(*(int*) (building + 0x5d), 1, 0, 0xfd) == 0) {
+		return 0;
+	}
+	store = (char*) gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, 0x2a);
+	if (store == 0) {
+		store = (char*) gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, 0x116);
+		if (store == 0) {
+			return 0;
+		}
+	}
+	if (producers) {
+		if (*(unsigned short*) store == 0x116) {
+			return 0;
+		}
+		out->max = (unsigned char) store[0x1c];
+	}
+	else {
+		out->max = (unsigned char) store[0x1d];
+		if (*(unsigned short*) store == 0x116 && (unsigned char) store[0x1c] > out->max) {
+			out->max = (unsigned char) store[0x1c];
+		}
+	}
+	for (e = gm_ff_Objekt(*(int*) (store + 0x14), 1, 5); e != 0; e = (unsigned short*) gm_NextEntityQueryMatch()) {
+		def = g_item_def_table + *e * 0x41;
+		if ((*def == 0x17 && producers) || (*def != 0x17 && !producers)) {
+			out->vals[out->n] = gm_GetMsgField(store, (char*) e);
+			out->caps[out->n] = compute_size(store, *e);
+			out->ids[out->n] = *e;
+			out->n++;
+		}
+	}
+	out->store = store;
+	return 1;
+}
+
 /* Sums production values across all buildings of a type.
  * Aggregates daily/weekly output for economic reporting. */
 
@@ -4113,6 +5557,58 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 	return sum;
 }
 
+/* Client-only treasury sums (discarded). */
+
+int __cdecl gm_SumTreasury(char* entity)
+{
+	char* r;
+	int sum;
+
+	sum = 0;
+	r = (char*) gm_ff_Objekt(*(int*) (entity + 0x178), 1, 4, 9);
+	if (r) {
+		do {
+			sum += *(int*) (r + 0xe);
+			r = (char*) gm_NextEntityQueryMatch();
+		} while (r);
+	}
+	return sum;
+}
+
+int __cdecl gm_GetSeasonTreasury(char* entity, char season)
+{
+	char* r;
+	int result;
+
+	result = 0;
+	r = (char*) gm_ff_Objekt(*(int*) (entity + 0x178), 1, result, (int) (unsigned short) g_entity_slot_table[season * 189]);
+	if (r) {
+		result = *(int*) (r + 0xe);
+	}
+	return result;
+}
+
+int __cdecl gm_SumSlotTreasury(int slot)
+{
+	char* owner;
+	char* r;
+	int sum;
+
+	owner = (char*) gm_LookupEntityRecordById(*(int*) (g_slot_table + 4 + slot * 0x21c));
+	if (owner == 0) {
+		return -1;
+	}
+	sum = 0;
+	r = (char*) gm_ff_Objekt(*(int*) (owner + 0x178), 1, 4, 9);
+	if (r) {
+		do {
+			sum += *(int*) (r + 0xe);
+			r = (char*) gm_NextEntityQueryMatch();
+		} while (r);
+	}
+	return sum;
+}
+
 int __cdecl gm_EntityQuerySum(int arg1)
 {
 	int sum;
@@ -4133,6 +5629,21 @@ int __cdecl gm_EntityQuerySum(int arg1)
 	return sum;
 }
 
+/* Client-only: the simulation record behind an entity reference (discarded). */
+short* __cdecl gm_ResolveEntityRecord(short* entity)
+{
+	void* dynamic_ent;
+
+	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &entity, *(int*) (entity + 5));
+	if (entity == (short*) 0) {
+		if (dynamic_ent != (void*) 0 && *(unsigned short*) ((char*) dynamic_ent + 0x25) != 0xffff) {
+			return (short*) (g_slot_table + *(unsigned short*) ((char*) dynamic_ent + 0x25) * 0x21c);
+		}
+		entity = (short*) 0;
+	}
+	return entity;
+}
+
 /* Resolves a parent entity reference. Follows entity chain
  * links to find the parent. Returns parent pointer. */
 
@@ -4150,6 +5661,21 @@ short* __cdecl gm_ResolveParentEntity(short* entity)
 		entity = (short*) 0;
 	}
 	return entity;
+}
+
+/* Client-only: the slot index behind an entity reference (discarded). */
+unsigned short __cdecl gm_ResolveEntitySlot(short* entity)
+{
+	void* dynamic_ent;
+
+	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &entity, *(int*) (entity + 5));
+	if (entity != (short*) 0) {
+		return *entity;
+	}
+	if (dynamic_ent != (void*) 0) {
+		return *(unsigned short*) ((char*) dynamic_ent + 0x25);
+	}
+	return 0xffff;
 }
 
 /* Gets the type (class) of an entity as an unsigned short.
@@ -4265,6 +5791,32 @@ char* __cdecl gm_FindEntityByOwner(int arg1)
 	return record;
 }
 
+/* Client-only: the tax on a fortune at rate 1-3 (discarded). */
+int __cdecl gm_CalcFortuneTax(int fortune, int rate)
+{
+	int tax;
+
+	tax = 0;
+	if (fortune > g_const_0_0) {
+		if (fortune < 32000) {
+			fortune = 32000;
+		}
+		else if (fortune > 256000) {
+			fortune = 256000;
+		}
+	}
+	if (rate == 1) {
+		tax = (int) (fortune * 0.05f);
+	}
+	else if (rate == 2) {
+		tax = (int) (fortune * 0.1f);
+	}
+	else if (rate == 3) {
+		tax = (int) (fortune * 0.15f);
+	}
+	return (int) (tax + 0.5);
+}
+
 /* Finds an entity by its owner. Searches for an entity
  * whose owner field matches the given ID. */
 
@@ -4277,6 +5829,18 @@ int __cdecl gm_GetMsgField(char* msg, char* pkt)
 		return *(int*) (pkt + 0xe) - 1;
 	}
 	return *(int*) (pkt + 0xe);
+}
+
+/* Client-only: a store's field for one item (discarded). */
+int __cdecl gm_GetStoreItemField(char* store, int item)
+{
+	char* entry;
+
+	entry = (char*) gm_ff_Objekt(*(int*) (store + 0x14), 1, 0, item);
+	if (entry == 0) {
+		return 0;
+	}
+	return gm_GetMsgField(store, entry);
 }
 
 /* Gets a message field from a command packet. Reads a
@@ -4389,6 +5953,31 @@ limited:
 	return size < requested ? size : requested;
 }
 
+/* Client-only: room left in a store for `item`, capped at `limit`
+ * (discarded). */
+int __cdecl gm_GetStoreRoom(char* store, int item, int limit)
+{
+	char* entry;
+	int cap;
+	int free_room;
+	int n;
+
+	cap = compute_size(store, item);
+	entry = (char*) gm_ff_Objekt(*(int*) (store + 0x14), 1, 0, item);
+	if (entry != 0) {
+		free_room = cap - *(int*) (entry + 0xe);
+		return free_room > limit ? limit : free_room;
+	}
+	n = 0;
+	for (entry = (char*) gm_ff_Objekt(*(int*) (store + 0x14), 1, 5); entry != 0; entry = (char*) gm_NextEntityQueryMatch()) {
+		n++;
+	}
+	if (n >= (unsigned char) store[0x1c]) {
+		return 0;
+	}
+	return cap < limit ? cap : limit;
+}
+
 /* Byte-exact.  The scan is a plain index loop over the zero-terminated
  * list: msvc6 folds the first `list[i] != 0` test (list[0] is the
  * constant 8), keeps 8 in eax as the loop-carried element and walks a
@@ -4475,6 +6064,147 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 	return ((cap < 0) - 1) & cap;
 }
 
+/* Client-only guild, wealth-ranking and relationship helpers (discarded). */
+
+char* __cdecl gm_GetGuildHall(int guild)
+{
+	char* hall;
+
+	hall = 0;
+	switch (guild) {
+	case 1:
+		hall = (char*) gm_StartFilteredEntitySearch(1, 5, 0xf);
+		break;
+	case 6:
+	case 7:
+		hall = 0;
+		break;
+	case 2:
+		hall = (char*) gm_StartFilteredEntitySearch(1, 5, 0x17);
+		break;
+	case 3:
+		hall = (char*) gm_StartFilteredEntitySearch(1, 5, 0x18);
+		break;
+	case 4:
+		hall = (char*) gm_StartFilteredEntitySearch(1, 5, 0x19);
+		break;
+	case 5:
+		hall = (char*) gm_StartFilteredEntitySearch(1, 5, 0x1a);
+		break;
+	}
+	return hall;
+}
+
+int __cdecl gm_GetTypeGuild(int type_index, int* guild)
+{
+	int found;
+
+	found = 1;
+	switch ((unsigned char) g_entity_type_table[type_index * 0x24d]) {
+	case 15:
+		*guild = 1;
+		break;
+	case 23:
+		*guild = 2;
+		break;
+	case 24:
+		*guild = 3;
+		break;
+	case 25:
+		*guild = 4;
+		break;
+	case 26:
+		*guild = 5;
+		break;
+	case 7:
+		*guild = 6;
+		found = 0;
+		break;
+	case 4:
+		*guild = 7;
+		found = 0;
+		break;
+	case 16:
+		*guild = 7;
+	default:
+		found = 0;
+		break;
+	}
+	return found;
+}
+
+int __cdecl gm_GetWealthRank(int slot, int extra)
+{
+	unsigned char* e;
+	int rank;
+	int wealth;
+	int j;
+
+	rank = 1;
+	if (slot < 0 || slot >= 0x300) {
+		return 0;
+	}
+	wealth = *(int*) (g_slot_table + 0x1ac + slot * 0x21c) + extra;
+	for (j = 0, e = g_slot_table; j < 0x300; j++, e += 0x21c) {
+		if (wealth <= *(int*) (e + 0x1ac) && *(unsigned short*) e != 0xffff && e[2] < 10 && j != slot) {
+			rank++;
+		}
+	}
+	return rank;
+}
+
+void __cdecl gm_GetRichestFive(int* ids, int* wealth)
+{
+	unsigned char* e;
+	int i;
+	int j;
+
+	for (i = 0; i < 5; i++) {
+		ids[i] = 0xffff;
+		wealth[i] = 0;
+	}
+	for (i = 0, e = g_slot_table; i < 0x300; i++, e += 0x21c) {
+		if (*(int*) (e + 4) != -1 && e[2] < 10 && *(int*) (e + 0x1ac) > wealth[4]) {
+			wealth[4] = *(int*) (e + 0x1ac);
+			ids[4] = *(unsigned short*) e;
+			for (j = 3; j > -1; j--) {
+				if (*(int*) (e + 0x1ac) <= wealth[j] || e[2] >= 10) {
+					break;
+				}
+				wealth[j + 1] = wealth[j];
+				ids[j + 1] = ids[j];
+				wealth[j] = *(int*) (e + 0x1ac);
+				ids[j] = *(unsigned short*) e;
+			}
+		}
+	}
+}
+
+int __cdecl gm_GetRelationship(int a, int b)
+{
+	if (a == b) {
+		return 0x7f;
+	}
+	return (signed char) g_relationship_matrix_primary[a * 0x300 + b];
+}
+
+int __cdecl gm_HasNoGuildHouse(char* entity)
+{
+	unsigned char* e;
+	int i;
+
+	if (entity[0x1b1] == 0) {
+		return 0;
+	}
+	e = g_entity_ptr;
+	for (i = 0; i < 0x100; i++, e += 0xa9) {
+		if (*e != 0 && g_entity_type_table[*e * 0x24d] == 4 && *(int*) (e + 0x65) == *(int*) (entity + 4)) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 void __cdecl gm_EntitySetField(void)
 {
 	int entity;
@@ -4497,4 +6227,71 @@ void __cdecl gm_EntitySetField(void)
 		}
 		entity = (int) gm_FindNextFilteredEntity();
 	} while (entity);
+}
+
+/* Client-only building-upgrade counts (discarded). */
+
+int __cdecl gm_CountHouseUpgradesA(char* house)
+{
+	int n;
+
+	n = 1;
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x27a) != 0) {
+		n = 2;
+	}
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x27b) != 0) {
+		n++;
+	}
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x292) != 0) {
+		n++;
+	}
+	return n;
+}
+
+int __cdecl gm_CountHouseUpgradesB(char* house)
+{
+	int n;
+
+	n = 2;
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x274) != 0) {
+		n = 3;
+	}
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x27e) != 0) {
+		n++;
+	}
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x28e) != 0) {
+		n++;
+	}
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x291) != 0) {
+		n++;
+	}
+	return n;
+}
+
+int __cdecl gm_CountHouseUpgradesC(char* house)
+{
+	int n;
+
+	n = 1;
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x285)) {
+		n = 2;
+	}
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x288)) {
+		n++;
+	}
+	return n;
+}
+
+int __cdecl gm_CountHouseUpgradesD(char* house)
+{
+	int n;
+
+	n = 4;
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x284)) {
+		n = 7;
+	}
+	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x289)) {
+		n += 3;
+	}
+	return n;
 }

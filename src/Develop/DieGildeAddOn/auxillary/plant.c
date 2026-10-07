@@ -63,6 +63,35 @@ char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 	}
 	return (char*) 0;
 }
+/* Client-only plant-record lookups (the Gold T&L client's plant order).  No
+ * server function calls them, so /OPT:REF discards them. */
+
+char* __cdecl plt_FindRecordByOwner(char* base, int owner)
+{
+	char* p;
+	int i;
+
+	for (i = 0, p = base + 0x14; i < 0x40; i++, p += 0x18) {
+		if (p[-7] != (char) 0xff && *(int*) p == owner) {
+			return base + i * 0x18;
+		}
+	}
+	return 0;
+}
+
+char* __cdecl plt_FindRecordById(char* base, int id)
+{
+	char* p;
+	int i;
+
+	for (i = 0, p = base; i < 0x40; i++, p += 0x18) {
+		if (p[0xd] != (char) 0xff && *(int*) p == id) {
+			return base + i * 0x18;
+		}
+	}
+	return 0;
+}
+
 int __cdecl find_zone_record(char* base, int x, int y)
 {
 	int i;

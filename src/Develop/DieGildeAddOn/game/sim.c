@@ -25,6 +25,47 @@ unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
  * into the pointer instead, which cost every access in both scan loops. */
 #define SIM_ENT_OFF(i) (((i) & 0xffff) * 0x21c)
 
+/* Client-only family check (the Gold T&L client's sim order).  No server
+ * function calls it, so /OPT:REF discards it; its absolute fixups still count
+ * toward LINK's .reloc reservation. */
+int __cdecl sim_IsUnrelated(unsigned char* entity)
+{
+	int id;
+	int i;
+	int j;
+	int found;
+	int count;
+	unsigned char* e;
+
+	if (entity[2] == 6 || entity[2] == 7) {
+		return 0;
+	}
+	id = *(int*) (entity + 4);
+	for (i = 0; i < 0x300; i++) {
+		e = g_slot_table + i * 0x21c;
+		found = 0;
+		count = 0;
+		if (*(int*) (e + 4) != id && (e[2] == 6 || e[2] == 7)) {
+			if (*(int*) (e + 0x5c) == id || *(int*) (e + 0x60) == id || *(int*) (e + 0x64) == id) {
+				return 0;
+			}
+			for (j = 0; j < 5; j++) {
+				if (*(int*) (e + 0x68 + j * 4) == id) {
+					found |= 1;
+					count++;
+				}
+				else if (*(int*) (e + 0x68 + j * 4) != -1) {
+					count++;
+				}
+			}
+			if (found && count < 5) {
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+
 /* Searches for matching parent entities by type and creates
  * family tree linkages. Used in citizen creation to find
  * compatible parents for stat inheritance. */
@@ -117,6 +158,15 @@ done2:
 		0, 0, 0, 2);
 }
 
+/* Client-only: whether an entity is younger than its adult age (discarded). */
+int __cdecl sim_IsUnderage(int slot)
+{
+	unsigned int i;
+
+	i = (unsigned int) slot & 0xffff;
+	return *(unsigned short*) (g_slot_table + 0xa + i * 0x21c) < *(float*) (g_slot_table + 0x20 + i * 0x21c);
+}
+
 /* Updates entity priority/scheduling. Called during simulation
  * tick to adjust entity processing order based on game state. */
 
@@ -136,6 +186,50 @@ void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 		*(char**) (ctx + 0x170) = entity;
 		entity[0x65]++;
 	}
+}
+
+/* Client-only: claims a free, adult resident of `kind` (or of `group`) that
+ * gets on with `who`'s household (discarded). */
+unsigned char* __cdecl sim_ClaimResident(char* who, int kind, int group)
+{
+	int __cdecl gm_EntityClassCheck(int kind);
+	int __cdecl gm_IsInRange(int group);
+	int __cdecl gm_GetRelationship(int a, int b);
+	unsigned char* e;
+	int i;
+	int c;
+
+	if (kind != 0) {
+		for (i = 0; i < 0x300; i++) {
+			e = g_slot_table + i * 0x21c;
+			if (*(unsigned short*) e != 0xffff && !(*(int*) (e + 0x1c8) & 0x2000) && e[2] <= 1 &&
+			    (e[0x165] == kind || e[0x165] == 0) && *(int*) (e + 0x16c) == 0 &&
+			    (float) *(unsigned short*) (e + 0xa) >= *(float*) (e + 0x20) && e[0x164] == group) {
+				c = gm_EntityClassCheck(kind);
+				if ((c == 2 || e[9] == c) &&
+				    (*(unsigned short*) (who + 0x27) == 0xffff ||
+				     gm_GetRelationship(*(unsigned short*) (who + 0x27), i) > -30)) {
+					*(int*) (e + 0x1c8) |= 0x2000;
+					return e;
+				}
+			}
+		}
+		return 0;
+	}
+	if (group == 0) {
+		return 0;
+	}
+	c = gm_IsInRange((unsigned char) group);
+	for (i = 0; i < 0x300; i++) {
+		e = g_slot_table + i * 0x21c;
+		if (*(unsigned short*) e != 0xffff && !(*(int*) (e + 0x1c8) & 0x2000) && e[2] <= 1 && e[0x164] == group &&
+		    *(int*) (e + 0x16c) == 0 && (c == 2 || e[9] == c) &&
+		    (*(unsigned short*) (who + 0x27) == 0xffff || gm_GetRelationship(*(unsigned short*) (who + 0x27), i) > -30)) {
+			*(int*) (e + 0x1c8) |= 0x2000;
+			return e;
+		}
+	}
+	return 0;
 }
 
 /* Starts an entity query filtered by type byte from arg1.
@@ -186,6 +280,40 @@ unsigned short* __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 	return result;
 }
 
+/* Client-only: the entity's service building, else the next market, mill or
+ * tavern after the last one handed out (cursor kept at TL 0x773d64, the last
+ * dword of the server's unnamed 0x10035410 block).  Discarded. */
+char* __cdecl sim_NextServiceBuilding(char* entity, int* id, int* sub)
+{
+	extern char g_gap_10035410[28];
+	unsigned short* query;
+	unsigned char* type;
+	int k;
+	int n;
+
+	n = 0xff;
+	if (*(char**) (entity + 0x170) != 0) {
+		query = sim_StartEntityQueryByType(*(unsigned char**) (entity + 0x170));
+		*sub = query != 0 ? *(int*) ((char*) query + 2) : -1;
+		*id = *(int*) (*(char**) (entity + 0x170) + 1);
+		return *(char**) (entity + 0x170);
+	}
+	k = *(int*) (g_gap_10035410 + 0x18);
+	do {
+		if (g_entity_ptr[k * 0xa9] != 0) {
+			type = (unsigned char*) g_entity_type_table + g_entity_ptr[k * 0xa9] * 0x24d;
+			if (*type == 3 || *type == 0x16 || *type == 0xf) {
+				*(int*) (g_gap_10035410 + 0x18) = k + 1;
+				*sub = -1;
+				*id = *(int*) (g_entity_ptr + k * 0xa9 + 1);
+				return (char*) g_entity_ptr + k * 0xa9;
+			}
+		}
+		k = (k + 1) % 0x100;
+	} while (--n != 0);
+	return 0;
+}
+
 /* Creates a new citizen entity with initial stats generated
  * from parent entities. Allocates entity memory, assigns random
  * stats via gm_AllocSpieler, and links to home. */
@@ -222,6 +350,53 @@ error:
 		1
 	);
 	return (void*) 0;
+}
+
+/* Client-only: calls `visit` for every file below `dir` (discarded). */
+void __cdecl sim_WalkDirectory(char* dir, int arg, void (__cdecl* visit)(char* path))
+{
+	struct sim_finddata {
+		unsigned attrib;
+		long time_create;
+		long time_access;
+		long time_write;
+		unsigned long size;
+		char name[260];
+	};
+	long __cdecl _findfirst(const char* spec, struct sim_finddata* data);
+	int __cdecl _findnext(long handle, struct sim_finddata* data);
+	int __cdecl _findclose(long handle);
+	char* __cdecl strcpy(char* dst, const char* src);
+	char* __cdecl strcat(char* dst, const char* src);
+	int __cdecl strcmp(const char* a, const char* b);
+	char path[0x100];
+	struct sim_finddata fd;
+	long h;
+
+	strcpy(path, dir);
+	strcat(path, "*");
+	h = _findfirst(path, &fd);
+	if (h == -1) {
+		return;
+	}
+	do {
+		if (strcmp(fd.name, ".") != 0 && strcmp(fd.name, "..") != 0) {
+			if (fd.attrib & 0x10) {
+				strcpy(path, dir);
+				strcat(path, fd.name);
+				strcat(path, "\\");
+				sim_WalkDirectory(path, arg, visit);
+			}
+			else {
+				strcpy(path, dir);
+				strcat(path, fd.name);
+				if (visit != 0) {
+					visit(path);
+				}
+			}
+		}
+	} while (_findnext(h, &fd) == 0);
+	_findclose(h);
 }
 
 /* Advances the game clock by one tick. Updates day/hour/minute
