@@ -350,8 +350,10 @@ unattested working names, not original layout.
 ## 11. Files (vfs)
 
 - Unit `Units/vfs/vfs.c`: `vfs_OpenStream`, `vfs_CloseStream`,
-  `vfs_FlushAndClose`, `vfs_ReadData`, `vfs_ReadCompressed`, `vfs_GetByte`,
-  `vfs_ReadUint32BE`, `vfs_CleanupObject`, `vfs_DestroyEntity`; zlib gzio
+  `vfs_FlushAndClose`, `vfs_ReadData`, `vfs_GetByte`, `vfs_ReadUint32BE`; the
+  client's directory tree (discarded in the server). Unit `Units/vfs/unzip.c`:
+  minizip 0.15 (`unzClose`, `unzReadCurrentFile`, `unzCloseCurrentFile` live
+  in the server); zlib gzio
   wrappers (`gzread`, `check_header`); shared `gz_stream` (0x64) header lifted
   to `src/Develop/Units/vfs/gz_stream.h`.
 

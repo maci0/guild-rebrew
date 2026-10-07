@@ -18,14 +18,6 @@
 /INCLUDE:__imp__GetStdHandle@4
 /INCLUDE:__imp__AllocConsole@0
 /INCLUDE:__imp__FreeConsole@0
-/INCLUDE:__imp__CreateThread@24
-/INCLUDE:__imp__TerminateThread@8
-/INCLUDE:__imp__Sleep@4
-/INCLUDE:__imp__GetTickCount@0
-/INCLUDE:__imp__GetPrivateProfileStringA@24
-/INCLUDE:__imp__GetPrivateProfileIntA@16
-/INCLUDE:__imp__SetThreadPriority@8
-/INCLUDE:__imp__GetCurrentThread@0
 /INCLUDE:__imp__GetWindowTextA@12
 /INCLUDE:__imp__MessageBoxA@16
 /INCLUDE:__imp__closesocket@4

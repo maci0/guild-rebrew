@@ -1244,6 +1244,20 @@ int __cdecl gm_GetItemCategory(unsigned short* item)
 	return 0;
 }
 
+
+/* Client-only (TL 0x501490, discarded): the item type whose name is name, or 0. The client calls the
+ * case-insensitive compare by its old name, strcmpi. */
+int __cdecl gm_FindItemTypeByName(char* name)
+{
+	int i;
+
+	for (i = 0; i < 0x2dc; i++) {
+		if (strcmpi(name, g_item_def_table + i * 0x41 + 1) == 0) {
+			return i;
+		}
+	}
+	return 0;
+}
 int __cdecl gm_IsRawItem(int item)
 {
 	char kind;
@@ -2869,6 +2883,19 @@ void* __cdecl gm_SearchTable67(int id)
 			continue;
 		}
 		return (void*) (g_entity_ptr + i * 0xa9);
+	}
+	return 0;
+}
+
+/* Client-only (TL 0x504eb0, discarded): the building type whose name is name, or 0. */
+int __cdecl gm_FindBuildingTypeByName(char* name)
+{
+	int i;
+
+	for (i = 0; i < 0x58; i++) {
+		if (strcmpi(name, g_entity_type_table + i * 0x24d + 1) == 0) {
+			return i;
+		}
 	}
 	return 0;
 }

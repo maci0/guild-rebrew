@@ -7,8 +7,8 @@
 #include "../../DieGildeAddOn/game/entity.h"
 
 void __cdecl free(void*);
-int __cdecl vfs_CleanupObject(char*);
-int __cdecl vfs_DestroyEntity(char*);
+int __cdecl unzCloseCurrentFile(char*);
+int __cdecl unzClose(char*);
 int __cdecl vfs_FlushAndClose(int);
 
 /* Reads a single byte from a VFS stream. Advances the read
@@ -65,8 +65,8 @@ int __cdecl CloseVfsStream(void* stream)
 		} else {
 				if (*(void**) ((char*) stream + 0x100) != 0) {
 					if ((*(unsigned char*) ((char*) stream + 0x13c) & 1) && (*(unsigned char*) ((char*) stream + 0x13c) & 0x10)) {
-						vfs_CleanupObject(*(void**) ((char*) stream + 0x100));
-						vfs_DestroyEntity(*(void**) ((char*) stream + 0x100));
+						unzCloseCurrentFile(*(void**) ((char*) stream + 0x100));
+						unzClose(*(void**) ((char*) stream + 0x100));
 					} else if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
 						vfs_FlushAndClose((int) *(void**) ((char*) stream + 0x100));
 					} else {

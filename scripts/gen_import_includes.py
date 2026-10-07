@@ -4,9 +4,10 @@ LINK numbers IAT slots by sorting the loaded import contributions with the runti
 name (docs/msvc6-link-layout.md section 73), so the slot order is a fixed function of the load order. The
 reference's hint/name table records that load order. Its KERNEL32 imports came in three library passes: the
 ones the game objects reference, then (after USER32, WS2_32 and WINMM) the ones LIBCMT's members reference,
-then RtlUnwind and the rest once exsup.obj loaded. Only the first group and the other DLLs are forced here, in
-hint/name order; LIBCMT's own references load the rest. WS2_32 imports by ordinal and has no hint/name entries;
-its includes run in reverse IAT order, which section 5c measured to reproduce its slots.
+then RtlUnwind and the rest once exsup.obj loaded. Only the start of the first group and the other DLLs are
+forced here, in hint/name order; the objects and LIBCMT's own references load the rest. WS2_32 imports by
+ordinal and has no hint/name entries; its includes run in reverse IAT order, which section 5c measured to
+reproduce its slots.
 """
 
 import re
@@ -16,10 +17,11 @@ import pefile
 
 REFERENCE = "original/Server/server.dll"
 SOURCE = "src/crt_region/crt_imports.c"
-# KERNEL32 imports the game objects reference: the reference's first KERNEL32 load pass, which ends where its
-# qsort permutation places the WS2_32 block (a search over the reference IAT puts USER32, WS2_32 and WINMM after
-# load index 28; forcing 28 rather than 30 also leaves GetTimeZoneInformation and GetSystemTime to LIBCMT).
-GAME_KERNEL32_IMPORTS = 28
+# KERNEL32 imports forced in the reference's load order: Error.c's twenty, the first of the game's library
+# pass. The game objects' own references load the rest of that pass in object order (vfs.c's discarded file
+# search imports, then server.c's eight, docs/msvc6-link-layout.md 5f). An /INCLUDE keeps its import past
+# /OPT:REF, so an import the reference drops cannot be forced here.
+GAME_KERNEL32_IMPORTS = 20
 
 
 def project_root() -> Path:

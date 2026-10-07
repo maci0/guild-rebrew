@@ -23,9 +23,9 @@
 /INCLUDE:_m_ShutdownAllocator
 /INCLUDE:_m_PoolAlloc
 /INCLUDE:_m_pool_free
-/INCLUDE:_vfs_DestroyEntity
-/INCLUDE:_vfs_ReadCompressed
-/INCLUDE:_vfs_CleanupObject
+/INCLUDE:_unzClose
+/INCLUDE:_unzReadCurrentFile
+/INCLUDE:_unzCloseCurrentFile
 /INCLUDE:_CloseVfsStream
 /INCLUDE:_vfs_ReadData
 /INCLUDE:_vfs_OpenStream

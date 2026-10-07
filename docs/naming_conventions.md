@@ -112,7 +112,8 @@ one file per original translation unit, in the order the linker lays them out (v
 | `0x10002640`-`0x10003640` | `Units/Error/Error.c` | 11 |
 | `0x100036d0`-`0x10003cf0` | `Units/vfs/gz_stream.c` | 8 (zlib `gzio.c` with VFS readers; the name is inferred, no `__FILE__` string) |
 | `0x10006580`-`0x10006e30` | `Units/m_alloc/m_alloc.c` | 7 |
-| `0x10008a50`-`0x10009020` | `Units/vfs/vfs.c` | 6 |
+| `0x10008a50`-`0x10008c80` | `Units/vfs/unzip.c` | 3 (stock minizip 0.15; the name is inferred, no `__FILE__` string) |
+| `0x10008d10`-`0x10009020` | `Units/vfs/vfs.c` | 3 |
 | `0x10009310`-`0x1000b040` | `DieGildeAddOnServer/server.c` | 19 |
 | `0x1000b1c0`-`0x1000baf0` | `DieGildeAddOn/game/aemter.c` | 10 |
 | `0x1000bd50`-`0x1000ca90` | `DieGildeAddOn/game/alchemistry_logic.c` | 16 |

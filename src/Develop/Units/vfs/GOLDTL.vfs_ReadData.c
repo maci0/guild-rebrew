@@ -1,7 +1,7 @@
 // CFLAGS: /O2 /Gd /Oy-
 /* vfs_ReadData — VFS stream read (0x10008E40). Reads from a memory buffer
  * (flags & 0x20: cursor at stream+0x100, flushed via inflate when
- * flags & 8), a gzip-in-zip payload (flags & 0x10 → vfs_ReadCompressed), a
+ * flags & 8), a gzip-in-zip payload (flags & 0x10 → unzReadCurrentFile), a
  * raw stream (flags & 8 → fcn_10003960) or a plain file (fcn_1001aa6a).
  * The stream handle/cursor is the first dword of the stream+0x100 zone.
  *
@@ -64,7 +64,7 @@
  *
  * Handle caching, measured and reverted. The target loads `*(int*)zstrm`
  * once at 0x10008e76 and keeps that value live as the memcpy source and as
- * the handle argument to all three of vfs_ReadCompressed / fcn_10003960 /
+ * the handle argument to all three of unzReadCurrentFile / fcn_10003960 /
  * fread, spilling it to the dead `count` slot at 0x10008f00. Hoisting it
  * into a `char* handle` local and feeding all four uses from it does
  * reproduce that spill and cuts the structural mismatches 143 -> 141, but
@@ -155,7 +155,7 @@
  * The `~~`/relocation operands re-verified against original/Server/server.dll
  * bytes this session: 0x10029450/54 hold 0x1f/0x8b, 0x10029458 the vfs.c path,
  * 0x10029474 the gz-found format, all equal to this file's literals; the call
- * targets are vfs_ReadCompressed (0x10008a90), fcn_10003960 (zlib gzread),
+ * targets are unzReadCurrentFile (0x10008a90), fcn_10003960 (zlib gzread),
  * fread (0x1001aa6a LIBCMT) and inflate (zlib inflate), all real.
  * EXACT/RELOC remains out of reach from C: the 24-byte dest-alignment prelude
  * at 0x10008f0c is hand-written asm per docs/msvc6-allocator.md (725 sites,
@@ -321,7 +321,7 @@
 
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
-extern int __cdecl vfs_ReadCompressed(int zstrm, char* buf, unsigned int total);
+extern int __cdecl unzReadCurrentFile(int zstrm, char* buf, unsigned int total);
 extern int __cdecl gzread(void* handle, char* buf, unsigned int total);
 extern int __cdecl fread(char* buf, int size, int count, void* handle); /* 0x1001aa6a LIBCMT */
 extern int __cdecl inflate(void* zstrm, int flush); /* 0x100058d0, zlib */
@@ -398,7 +398,7 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 		goto done;
 	}
 	if (flags & 0x10) {
-		result = vfs_ReadCompressed(*(int*) zstrm, buf, (unsigned int) total);
+		result = unzReadCurrentFile(*(int*) zstrm, buf, (unsigned int) total);
 		flags = *(unsigned char*) (stream + 0x13c);
 		if (!(flags & 4)) {
 			goto done;
