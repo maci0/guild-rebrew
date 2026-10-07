@@ -17,8 +17,9 @@ import pefile
 REFERENCE = "original/Server/server.dll"
 SOURCE = "src/crt_region/crt_imports.c"
 # KERNEL32 imports the game objects reference: the reference's first KERNEL32 load pass, which ends where its
-# qsort permutation places the WS2_32 block; load index 30 (GetLocalTime) starts the second pass.
-GAME_KERNEL32_IMPORTS = 30
+# qsort permutation places the WS2_32 block (a search over the reference IAT puts USER32, WS2_32 and WINMM after
+# load index 28; forcing 28 rather than 30 also leaves GetTimeZoneInformation and GetSystemTime to LIBCMT).
+GAME_KERNEL32_IMPORTS = 28
 
 
 def project_root() -> Path:
