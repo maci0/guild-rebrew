@@ -5055,9 +5055,20 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   `vfs_OpenStream`: `vfs_init` (`getcwd`). Compiled from `vfs.c`, every one matches the TL client in all
   common bytes (`rebrew test -t Europa1400Gold_TL.exe`) except `vfs_AddFile`, whose two array moves use the
   aligned-copy asm of `vfs_ReadData` and allocate registers differently (1477 bytes against 1472); a
-  `memcpy` there would load `memcpy.obj`, an assembler member, early. Not built: `vfs:Open` (0x42ff50), the
-  readers and seek helpers between `vfs_ReadData` and `vfs_OpenStream`, 0x430f70 and the shutdown
-  (0x4310f0).
+  `memcpy` there would load `memcpy.obj`, an assembler member, early.
+- **vfs.c's file API (round 18).** The rest of the client TU is built too, in its order: `vfs_Tfopen`
+  (0x42ff50, the `vfs:Open`/`vfs_Tfopen` messages) after `vfs_RemoveFile`; `vfs_fgetc`, `vfs_fgets`,
+  `vfs_fwrite`, `vfs_fseek` and `vfs_ftell` (0x430870..0x430c50) after `vfs_ReadData`; `vfs_ForEachFile`
+  (0x430f70) after `vfs_OpenStream`; `vfs_exit` (0x4310f0, `%i vfs_file(s) were left open!`) after
+  `vfs_init`. `vfs_Tfopen` opens loose and new files through `gzopen`, which only links now that gzio.c is
+  stock; its storage is the stream pool and count, the tree root and `g_file_extension_names`. `vfs_exit`
+  walks and frees the pools through m_alloc.c's client pool helpers (TL 0x41e350..0x41e4d0, after
+  `m_pool_free`: next, first, free-all, clear, info, stats), and m_alloc.c gains the client's
+  `m_is_tracked` (0x41dd90, `g_array_count`/`g_array_ptr`). Under the TL client's code generator
+  (Processor Pack, `rebrew test -t Europa1400Gold_TL.exe --no-promote`) every one matches the client in all
+  common bytes except `vfs_Tfopen` (register and frame layout; 22 DIR32 like the client) and
+  `m_pool_next` (register choice, no fixups). No CRT member or import is added (all already load). 40
+  more DIR32 records.
 - **The tree's references.** The file search calls `FindFirstFileA`, `FindNextFileA`, `FindClose`,
   `FileTimeToLocalFileTime` and `FileTimeToSystemTime` directly, so they load in the game's library pass
   after Error.c's imports, as the exact IAT solution needs; `import-includes.rsp` now forces only Error.c's
@@ -5103,6 +5114,19 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   vfs group above already loads `memmove.obj`, and `findfile.obj` puts `GetLastError` at the reference's load
   index 37. A directive in `vfs.c` itself would not work: LINK takes an object's directives before its
   symbols.
+- **spiel.c's unit conversions and price formatting (round 18).** TL 0x50b710, 0x50b750, 0x50b780 and
+  0x50b7a0, before `gm_QueryEntitySum`, divide or multiply an amount by an item's units per trade unit,
+  `g_spiel_space_fill[id - 61]` (16 dwords of 32 for item ids 61..76). The client addresses that table as
+  0x6995bc, 61 dwords below it: spiel's `.data` maps to the server's at +0xf997808 up to the client's
+  extra 6-byte record at 0x6995d8 and at +0xf9977fc from the table on (`.scratch/measure/align_bytes.py`),
+  the table's bytes are identical, and no other code in either image reads it. The item id is the first
+  word of `g_entity_slot_table`'s record, as in `gm_QueryEntitySum`. TL 0x50bb50 (`gm_GetSeasonPrice`)
+  reads `g_slot_array`'s 0x2a90-byte season tables like `gm_FindSlotById` (client 0x85ab90 is server
+  0x1009b770, the offset `g_entity_slot_table` has) and falls back to `gm_CalculateProductionValue`.
+  TL 0x50bc10 (`gm_FormatPrice`) groups thousands with dots through `itoa`: the client's only `_itoa`
+  call in a server TU. `xtoa.obj` already loads for `getqloc.obj`, so the old name adds the fifth alias
+  object and nothing else. All six match the client in all common bytes under its code generator except
+  `gm_FormatPrice` (one x87 load scheduled before a string scan). 16 more DIR32 records.
 - **Random helpers are their own object (`game/zufall.c`).** Both clients hold `gm_RandomMod`, a range helper
   (`gm_RandomMod(2n + 1) - n`), `gm_RandomFloat01`, `gm_RandomQuadratic`, a squared `gm_RandomFloat01` (TL
   0x42e4a0), `srv_SeedRandomWithTime` and `srv_SeedRandom` contiguously (TL 0x42e410..0x42e4c5), after a trace
