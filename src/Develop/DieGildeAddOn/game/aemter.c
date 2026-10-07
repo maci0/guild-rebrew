@@ -619,6 +619,597 @@ int __cdecl amt_ClearEntityLinks(char* entity)
 	return result;
 }
 
+/* Client-only office helpers (the Gold T&L client's aemter.c order).  No server
+ * function calls them, so /OPT:REF discards them; their absolute fixups still
+ * count toward LINK's .reloc reservation. */
+
+typedef struct {
+	int type;
+	float score;
+	unsigned char rank;
+	char pad9[3];
+} OfficePick;
+// SIZE 0xc
+
+int __cdecl amt_GetSlotByRole(int role, OfficeSlot* out)
+{
+	int i;
+
+	for (i = 0; i < 0x2a; i++) {
+		if (((OfficeSlot*) g_office_slots)[i].role == role) {
+			break;
+		}
+	}
+	if (i >= 0x2a) {
+		return 0;
+	}
+	*out = ((OfficeSlot*) g_office_slots)[i];
+	return 1;
+}
+
+int __cdecl amt_GetRoleGroup(int role)
+{
+	if (role >= 0x28) {
+		return 0;
+	}
+	return g_office_role_templates[role].f4;
+}
+
+int __cdecl amt_GetSlotByType(unsigned char type, OfficeSlot* out)
+{
+	int i;
+
+	for (i = 0; i < 0x2a; i++) {
+		if ((unsigned char) ((OfficeSlot*) g_office_slots)[i].type == type) {
+			break;
+		}
+	}
+	if (i >= 0x2a) {
+		return 0;
+	}
+	*out = ((OfficeSlot*) g_office_slots)[i];
+	return 1;
+}
+
+int __cdecl amt_GetRoleTemplate(int role, OFFICE_ROLE_TEMPLATE* out)
+{
+	if (role >= 0x28) {
+		*out = g_office_role_templates[0];
+		return 0;
+	}
+	*out = g_office_role_templates[role];
+	return 1;
+}
+
+int __cdecl amt_ListSlotsOfGroup(int group, int max, OfficeSlot* out)
+{
+	int n;
+	int i;
+	int start;
+
+	if (group == 0) {
+		return 0;
+	}
+	if (group <= 6) {
+		start = 30;
+	}
+	else if (group == 8) {
+		start = 0x2a;
+	}
+	else {
+		return 0;
+	}
+	n = 0;
+	for (i = start - 1; i >= 0 && n < max; i--) {
+		if (g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[i].role].f4 == group) {
+			out[n++] = ((OfficeSlot*) g_office_slots)[i];
+		}
+	}
+	return n;
+}
+
+int __cdecl amt_ListHeldSlotsOfGroup(int group, int max, OfficeSlot* out)
+{
+	int n;
+	int i;
+	int start;
+
+	if (group == 0) {
+		return 0;
+	}
+	if (group <= 6) {
+		start = 30;
+	}
+	else if (group == 5) {
+		start = 0x2a;
+	}
+	else {
+		return 0;
+	}
+	n = 0;
+	for (i = start - 1; i >= 0 && n < max; i--) {
+		if (g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[i].role].f4 == group &&
+		    gm_LookupEntityRecordById(((OfficeSlot*) g_office_slots)[i].entityId) != 0) {
+			out[n++] = ((OfficeSlot*) g_office_slots)[i];
+		}
+	}
+	return n;
+}
+
+int __cdecl amt_ListCouncilSlots(int all, int max, OfficeSlot* out)
+{
+	int n;
+	int i;
+
+	n = 0;
+	for (i = 30; i < 37; i++) {
+		if (n >= max) {
+			break;
+		}
+		if (g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[i].role].f4 == 7 &&
+		    (all != 0 || ((OfficeSlot*) g_office_slots)[i].entityId != -1)) {
+			*out = ((OfficeSlot*) g_office_slots)[i];
+			n++;
+			out++;
+		}
+	}
+	return n;
+}
+
+int __cdecl amt_RankOpenOffices(unsigned char* who, int n, OfficePick* picks)
+{
+	int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out);
+	float score;
+	int count;
+	int i;
+	int j;
+	int k;
+	int t;
+	int found;
+
+	count = 0;
+	if (n <= 0) {
+		return 0;
+	}
+	for (j = n - 1; j >= 0; j--) {
+		picks[j].score = -100.0f;
+		picks[j].type = 0;
+		picks[j].rank = 0;
+	}
+	for (i = 0; i < 30; i++) {
+		if (((OfficeSlot*) g_office_slots)[i].state != 3 || ((OfficeSlot*) g_office_slots)[i].count >= 4) {
+			continue;
+		}
+		t = (unsigned char) ((OfficeSlot*) g_office_slots)[i].role;
+		if (amt_GetOfficeAffinity(who, t, &score) == 0) {
+			continue;
+		}
+		found = 0;
+		for (j = n - 1; j >= 0 && !found; j--) {
+			if (picks[j].type == t) {
+				found = 1;
+			}
+		}
+		if (found) {
+			continue;
+		}
+		found = 0;
+		for (j = n - 1; j >= 0; j--) {
+			if (picks[j].rank < (unsigned char) g_office_role_templates[t].f8) {
+				continue;
+			}
+			if (picks[j].rank != (unsigned char) g_office_role_templates[t].f8 || !(picks[j].score <= score)) {
+				found = 1;
+				break;
+			}
+		}
+		if (j == -1) {
+			j = 0;
+			if (picks[0].rank < (unsigned char) g_office_role_templates[t].f8 ||
+			    (picks[0].rank == (unsigned char) g_office_role_templates[t].f8 && picks[0].score <= score)) {
+				found = 1;
+			}
+		}
+		if (found) {
+			count++;
+			for (k = n - 1; k > j; k--) {
+				picks[k] = picks[k - 1];
+			}
+			picks[j].rank = (unsigned char) g_office_role_templates[t].f8;
+			picks[j].score = score;
+			picks[j].type = t;
+		}
+	}
+	return count < n ? count : n;
+}
+
+int __cdecl amt_RankAllOffices(unsigned char* who, int n, OfficePick* picks, int* full_out)
+{
+	int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out);
+	float score;
+	int count;
+	int i;
+	int j;
+	int k;
+	int t;
+	int found;
+	int full;
+
+	count = 0;
+	full = 0;
+	if (n <= 0) {
+		return 0;
+	}
+	for (j = n - 1; j >= 0; j--) {
+		picks[j].score = -100.0f;
+		picks[j].type = 0;
+		picks[j].rank = 0;
+	}
+	for (i = 0; i < 30; i++) {
+		if (((OfficeSlot*) g_office_slots)[i].state != 3) {
+			continue;
+		}
+		t = (unsigned char) ((OfficeSlot*) g_office_slots)[i].role;
+		if (amt_GetOfficeAffinity(who, t, &score) == 0) {
+			continue;
+		}
+		if (((OfficeSlot*) g_office_slots)[i].count >= 4) {
+			full = 1;
+			continue;
+		}
+		found = 0;
+		for (j = n - 1; j >= 0 && !found; j--) {
+			if (picks[j].type == t) {
+				found = 1;
+			}
+		}
+		if (found) {
+			continue;
+		}
+		found = 0;
+		for (j = n - 1; j >= 0; j--) {
+			if (picks[j].rank < (unsigned char) g_office_role_templates[t].f8) {
+				continue;
+			}
+			if (picks[j].rank != (unsigned char) g_office_role_templates[t].f8 || !(picks[j].score <= score)) {
+				found = 1;
+				break;
+			}
+		}
+		if (j == -1) {
+			j = 0;
+			if (picks[0].rank < (unsigned char) g_office_role_templates[t].f8 ||
+			    (picks[0].rank == (unsigned char) g_office_role_templates[t].f8 && picks[0].score <= score)) {
+				found = 1;
+			}
+		}
+		if (found) {
+			count++;
+			for (k = n - 1; k > j; k--) {
+				picks[k] = picks[k - 1];
+			}
+			picks[j].rank = (unsigned char) g_office_role_templates[t].f8;
+			picks[j].score = score;
+			picks[j].type = t;
+		}
+	}
+	if (full_out != 0) {
+		*full_out = full;
+	}
+	return count < n ? count : n;
+}
+
+void* __cdecl amt_GetRoleHolder(int role)
+{
+	int i;
+
+	for (i = 0; i < 0x2a; i++) {
+		if (((OfficeSlot*) g_office_slots)[i].role == role) {
+			return gm_LookupEntityRecordById(((OfficeSlot*) g_office_slots)[i].entityId);
+		}
+	}
+	return 0;
+}
+
+void* __cdecl amt_GetSuperiorHolder(int role)
+{
+	OfficeSlot slot;
+
+	if (role == 0x24) {
+		if (amt_GetSlotByRole(0x27, &slot) != 0) {
+			return gm_LookupEntityRecordById(slot.entityId);
+		}
+	}
+	else if (role == 0x25 || role == 0x23) {
+		if (amt_GetSlotByRole(0x26, &slot) != 0) {
+			return gm_LookupEntityRecordById(slot.entityId);
+		}
+	}
+	return 0;
+}
+
+int __cdecl amt_IsNextRoleStep(unsigned char* entity, int role)
+{
+	OFFICE_ROLE_TEMPLATE want;
+	OFFICE_ROLE_TEMPLATE held;
+	int a;
+	int b;
+
+	if (role == 0 || role > 0x1b) {
+		return 0;
+	}
+	if (amt_GetRoleTemplate(role, &want) == 0) {
+		return 0;
+	}
+	if (amt_GetRoleTemplate(entity[0x166], &held) == 0) {
+		return 0;
+	}
+	if (want.f4 != held.f4) {
+		return 0;
+	}
+	a = (want.f8 & 0xff) % 3;
+	b = (held.f8 & 0xff) % 3;
+	if (a == 0 && b != 0) {
+		return 1;
+	}
+	if (a == 2 && b == 0) {
+		return 1;
+	}
+	if (a == 1 && b == 2) {
+		return 1;
+	}
+	return 0;
+}
+
+int __cdecl amt_HasIdleSuperior(int role)
+{
+	OFFICE_ROLE_TEMPLATE tmpl;
+	OfficeSlot list[6];
+	int n;
+	int i;
+	unsigned char* e;
+
+	if (amt_GetRoleTemplate(role, &tmpl) == 0) {
+		return 0;
+	}
+	n = amt_ListSlotsOfGroup(tmpl.f4, 6, list);
+	if (n == 0) {
+		return 0;
+	}
+	for (i = 0; i < n; i++) {
+		e = gm_LookupEntityRecordById(list[i].entityId);
+		if (e != 0 && amt_IsNextRoleStep(e, role) != 0 && e[0x1b1] == 0) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int __cdecl amt_ListSuperiors(int role, int max, unsigned char** out)
+{
+	OFFICE_ROLE_TEMPLATE tmpl;
+	OfficeSlot list[6];
+	int n;
+	int i;
+	int cnt;
+	unsigned char* e;
+
+	if (amt_GetRoleTemplate(role, &tmpl) == 0) {
+		return 0;
+	}
+	n = amt_ListSlotsOfGroup(tmpl.f4, max < 6 ? max : 6, list);
+	if (n == 0) {
+		return 0;
+	}
+	n = n < max ? n : max;
+	cnt = 0;
+	for (i = 0; i < n; i++) {
+		e = gm_LookupEntityRecordById(list[i].entityId);
+		if (e != 0 && amt_IsNextRoleStep(e, role) != 0) {
+			out[cnt++] = e;
+		}
+	}
+	return cnt;
+}
+
+int __cdecl amt_ListPromotionRoles(unsigned char* entity, int max, int* out)
+{
+	OFFICE_ROLE_TEMPLATE tmpl;
+	OfficeSlot list[6];
+	int want;
+	int n;
+	int i;
+	int cnt;
+	int role;
+	int level;
+
+	if (entity[0x166] == 0) {
+		return 0;
+	}
+	if (amt_GetRoleTemplate(entity[0x166], &tmpl) == 0) {
+		return 0;
+	}
+	n = amt_ListSlotsOfGroup(tmpl.f4, 6, list);
+	if (n == 0) {
+		return 0;
+	}
+	want = (tmpl.f8 & 0xff) % 3 == 1 ? 0 : (tmpl.f8 & 0xff) - 1;
+	cnt = 0;
+	for (i = 0; i < n && cnt < max; i++) {
+		if (list[i].state == 3) {
+			role = (unsigned char) list[i].role;
+			amt_GetRoleTemplate(role, &tmpl);
+			level = tmpl.f8 & 0xff;
+			if (level % 3 == 0) {
+				out[cnt++] = role;
+			}
+			else if (want == level) {
+				out[cnt++] = role;
+				if (tmpl.f10 != 0) {
+					break;
+				}
+			}
+		}
+	}
+	return cnt;
+}
+
+void __cdecl amt_ExpandSlots(int count, OfficeSlot* p)
+{
+	int i;
+
+	for (i = 0; i < count; i++) {
+		p[i] = ((OfficeSlot*) g_office_slots)[(unsigned char) p[i].type];
+	}
+}
+
+int __cdecl amt_FindVacantRoleBelow(int role)
+{
+	OfficeSlot slot;
+
+	if (role == 0) {
+		return 0;
+	}
+	if (role >= 0x1b) {
+		role = 0x1b;
+	}
+	while (role > 0) {
+		if (amt_GetSlotByRole(role, &slot) != 0 && slot.state == 3 && slot.count <= 1) {
+			break;
+		}
+		role--;
+	}
+	return role;
+}
+
+int __cdecl amt_ListRolesOfLevel(int level, int max, int* out)
+{
+	OFFICE_ROLE_TEMPLATE tmpl;
+	int i;
+	int n;
+	int role;
+
+	if (max < 1) {
+		return 0;
+	}
+	n = 0;
+	for (i = 0; i < 0x1c && n < max; i++) {
+		role = (unsigned char) ((OfficeSlot*) g_office_slots)[i].role;
+		amt_GetRoleTemplate(role, &tmpl);
+		if ((unsigned char) tmpl.f8 == level) {
+			out[n++] = role;
+		}
+	}
+	return n;
+}
+
+int __cdecl amt_GetRoleLevel(int role)
+{
+	OFFICE_ROLE_TEMPLATE tmpl;
+
+	amt_GetRoleTemplate(role, &tmpl);
+	return tmpl.f8 & 0xff;
+}
+
+int __cdecl amt_GetGroupVacancyFlags(int group)
+{
+	extern char g_entity_state_base[2];
+	extern char g_dynamic_entities[];
+	OfficeSlot list[6];
+	unsigned char* holder;
+	unsigned char* setter;
+	unsigned char* e;
+	int flags;
+	int n;
+	int i;
+	int j;
+
+	flags = 0;
+	n = amt_ListSlotsOfGroup(group, 6, list);
+	for (i = 0; i < n; i++) {
+		if (list[i].state == 2) {
+			holder = gm_LookupEntityRecordById(list[i].assignmentId);
+			setter = gm_LookupEntityRecordById(list[i].entityId);
+			if (holder == 0 || holder[8] == 0 || holder[0x1b1] != 0 || setter == 0 || setter[8] == 0) {
+				continue;
+			}
+			for (j = 0; j < n; j++) {
+				if (list[j].entityId == list[i].assignmentId) {
+					flags |= 1;
+					break;
+				}
+			}
+		}
+		else if (list[i].state == 3 && list[i].count > 0) {
+			for (e = (unsigned char*) g_entity_state_base; e < (unsigned char*) g_dynamic_entities; e += 0x21c) {
+				if (e[0x166] == (unsigned char) list[i].role) {
+					flags |= 1;
+					if ((e[0] == 6 || e[0] == 7) && e[0x1af] == 0) {
+						flags |= 2;
+						break;
+					}
+				}
+			}
+		}
+	}
+	if (flags & 1) {
+		for (i = 0; i < n; i++) {
+			e = gm_LookupEntityRecordById(list[i].entityId);
+			if (e != 0 && (e[2] == 6 || e[2] == 7) && e[0x1b1] == 0) {
+				flags |= 2;
+				break;
+			}
+		}
+	}
+	return (flags & 2) >> 1;
+}
+
+int __cdecl amt_IsPendingAssignment(int group, char* slot)
+{
+	OfficeSlot list[6];
+	int n;
+	int i;
+	unsigned char* a;
+	unsigned char* b;
+
+	if (slot[0x10] != 2) {
+		return 0;
+	}
+	n = amt_ListSlotsOfGroup(group, 6, list);
+	a = gm_LookupEntityRecordById(*(int*) (slot + 0x14));
+	b = gm_LookupEntityRecordById(*(int*) (slot + 4));
+	if (a == 0 || a[8] == 0 || a[0x1b1] != 0 || b == 0 || b[8] == 0) {
+		return 0;
+	}
+	for (i = 0; i < n; i++) {
+		if (list[i].entityId == *(int*) (slot + 0x14)) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int __cdecl amt_HasCouncilHolder(void)
+{
+	int left;
+	int i;
+
+	left = 7;
+	for (i = 36; i != 0 && left != 0; i--) {
+		if (g_office_role_templates[(unsigned char) ((OfficeSlot*) g_office_slots)[i].role].f4 == 7) {
+			if (((OfficeSlot*) g_office_slots)[i].entityId != -1) {
+				if (gm_LookupEntityRecordById(((OfficeSlot*) g_office_slots)[i].entityId) != 0) {
+					return 1;
+				}
+			}
+			else {
+				left--;
+			}
+		}
+	}
+	return 0;
+}
+
 /* Updates entity links for an office assignment. Sets up
  * the bidirectional references between the office slot and
  * the entity holding it. */
@@ -661,6 +1252,103 @@ void __cdecl amt_UpdateEntityLinks(char* entity, int arg2)
 		*(char*) (entity + 0x169) = 0;
 	}
 	*(char*) (entity + 0x168) = 0;
+}
+
+/* Client-only building-upgrade checks (discarded; see the block above). */
+
+int __cdecl amt_CanUpgradeBuildingTier1(char* building)
+{
+	unsigned char kind;
+
+	kind = *(unsigned char*) (building + 0x169);
+	if (kind < 0x1e || kind > 0x21) {
+		return 0;
+	}
+	if ((*(int*) (building + 0x1c8) & 0x4000000) != 0) {
+		return -1;
+	}
+	if (*(int*) (building + 0x194) < 3) {
+		return -2;
+	}
+	return 1;
+}
+
+int __cdecl amt_CanUpgradeBuildingTier2(unsigned char* building)
+{
+	extern char* g_entity_type_table;
+	unsigned char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
+	unsigned char* hit;
+	int kind;
+
+	if (building[0x169] < 0x1e || building[0x169] > 0x21) {
+		return 0;
+	}
+	switch (building[0x169]) {
+	case 0x1f:
+		kind = 0x18;
+		break;
+	case 0x20:
+		kind = 0x19;
+		break;
+	case 0x21:
+		kind = 0x1a;
+		break;
+	case 0x1e:
+		kind = 0x17;
+		break;
+	default:
+		return 0;
+	}
+	hit = gm_StartFilteredEntitySearch(1, 5, kind);
+	if (hit == 0 || (hit[0x5a] & 1) != 0) {
+		return 0;
+	}
+	if ((unsigned char) g_entity_type_table[*hit * 0x24d + 0x247] < 2) {
+		return 0;
+	}
+	if (*(unsigned int*) (building + 0x1c8) & 0x8000000) {
+		return -1;
+	}
+	return *(int*) (building + 0x194) < 5 ? -2 : 1;
+}
+
+int __cdecl amt_CanUpgradeBuildingTier3(unsigned char* building)
+{
+	extern char* g_entity_type_table;
+	unsigned char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
+	unsigned char* hit;
+	int kind;
+
+	if (building[0x169] < 0x1e || building[0x169] > 0x21) {
+		return 0;
+	}
+	switch (building[0x169]) {
+	case 0x1f:
+		kind = 0x18;
+		break;
+	case 0x20:
+		kind = 0x19;
+		break;
+	case 0x21:
+		kind = 0x1a;
+		break;
+	case 0x1e:
+		kind = 0x17;
+		break;
+	default:
+		return 0;
+	}
+	hit = gm_StartFilteredEntitySearch(1, 5, kind);
+	if (hit == 0 || (hit[0x5a] & 1) != 0) {
+		return 0;
+	}
+	if ((unsigned char) g_entity_type_table[*hit * 0x24d + 0x247] < 3) {
+		return 0;
+	}
+	if (*(unsigned int*) (building + 0x1c8) & 0x10000000) {
+		return -1;
+	}
+	return *(int*) (building + 0x194) < 8 ? -2 : 1;
 }
 
 /* Validates if an entity is eligible for an office position.
@@ -765,6 +1453,42 @@ int __cdecl amt_fio_LoadAemter(int streamCtx, int version)
 		}
 	}
 	return 1;
+}
+
+/* Client-only town-hall helpers (discarded; see the blocks above). */
+
+void* __cdecl amt_GetTownHallHolder(unsigned char* building)
+{
+	extern char* g_entity_type_table;
+	int* office;
+
+	if (g_entity_type_table[building[0] * 0x24d] == 0x1e) {
+		office = *(int**) (building + 0x65);
+		if (office != 0) {
+			return gm_LookupEntityRecordById(*office);
+		}
+	}
+	return 0;
+}
+
+int __cdecl amt_CountTownHallSeats(char* entity)
+{
+	int __cdecl ahm_CheckFlag(void* entity);
+	char* seats;
+	int i;
+	int n;
+
+	if (ahm_CheckFlag(entity) == 0) {
+		return 0;
+	}
+	n = 0;
+	seats = *(char**) (*(char**) (entity + 0x16c) + 0x65);
+	for (i = 0; i < 6; i++) {
+		if (*(int*) (seats + 0xc + i * 8) != 0) {
+			n++;
+		}
+	}
+	return n;
 }
 
 /* 0x101de5a0 */
