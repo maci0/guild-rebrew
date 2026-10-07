@@ -379,7 +379,9 @@ endif()
 
 if (MSVC_FOR_DECOMP)
   if(TARGET server_dll)
-    set_property(TARGET server_dll PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    # bss_late too: compiled -MD it names MSVCRT as a default library, and LINK then resolves late CRT
+    # references (such as the OLDNAMES alias targets) to MSVCRT.dll imports instead of LIBCMT members.
+    set_property(TARGET server_dll bss_late PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
   endif()
 
   set(CMAKE_C_FLAGS "/W3 /D \"WIN32\" /D \"_WINDOWS\" /D \"_WIN32_WINNT=0x0400\"")

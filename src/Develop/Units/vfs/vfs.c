@@ -502,7 +502,9 @@ cleanup:
  * The server never calls them and /OPT:REF discards them, but their CRT
  * references still load strupr.obj, findfile.obj and mkdir.obj. They follow
  * vfs_OpenStream: the reference loads those members after toupper.obj
- * (findfile.obj puts GetLastError after toupper.obj's imports). */
+ * (findfile.obj puts GetLastError after toupper.obj's imports). mkdir is
+ * called by its old name: OLDNAMES' alias object resolves it after LIBCMT's
+ * first pass, which puts CreateDirectoryA after the CRT's own imports. */
 #include <io.h>
 #include <direct.h>
 
@@ -585,7 +587,7 @@ char __cdecl vfs_MakeDirs(char* path, VFS_DIR* dir)
 			}
 			h = _findfirst(cur, &fd);
 			if (h == -1) {
-				if (_mkdir(cur) != 0) {
+				if (mkdir(cur) != 0) {
 					return 0;
 				}
 			} else {

@@ -4977,9 +4977,8 @@ Two source facts the order depends on, both measured:
   past the code members it needed: `setlocal.obj` pulled getqloc, initnum, initctyp and initmon (code
   discarded, `.bss` kept), and initctyp pulled `a_str.obj`. The include list therefore stops after
   `_strpbrk` (its entries after `_toupper` are in `bss_head2.c`, 5f) and LIBCMT's own references load the rest, which places those members' `.bss` before
-  `a_str` and `GetCPInfo` before `GetStringTypeA` as in the reference: `.data` is byte-identical. The empty
-  `chr.obj` alias that aligns `_RtlUnwind@16` is included from `bss_late.c` (generated), which LINK reads after
-  LIBCMT's first pass; listed up front it loads `mbschr.obj` early.
+  `a_str` and `GetCPInfo` before `GetStringTypeA` as in the reference: `.data` is byte-identical. A late
+  alias object aligns `_RtlUnwind@16` (section 20); it is now OLDNAMES' `mkdir` alias (5e), not `chr.obj`.
   The imports load in the reference's hint/name order: `scripts/gen_import_includes.py` forces only the 28
   KERNEL32 imports of the first library pass (the game's), then USER32, WS2_32 (reversed) and WINMM; the CRT's
   imports and RtlUnwind follow naturally. Every DLL's hint/name order then equals the reference's except
@@ -5020,10 +5019,17 @@ current measurements.
   the build instead reconstructs the real client-only functions in the shared files (5f). Discarded code must
   still link, because LINK resolves references before it discards, so only functions whose callees and globals
   exist in the server belong in the server build.
-- **`chr.obj` comes from `MSVCRT.LIB` today.** `bss_late` compiles with `-MD` (CMake sets the runtime only on
-  `server_dll`), which adds `/DEFAULTLIB:MSVCRT` and the LNK4098 warning, and the late `__tcschr` resolves from
-  `MSVCRT.LIB(chr.obj)`. With `-MT`, LIBCMT's identical member loads later: `_RtlUnwind@16` sits 2 bytes early
-  and `.text` ends 10 bytes long. The thunk's position is another load-order fingerprint still to resolve.
+- **Weak-alias objects and old names.** Rich product 12 build 7291 marks LIBCMT's 40 `tcmap` members and all
+  230 `OLDNAMES.LIB` members, the alias objects that map a POSIX name (`mkdir`, `getcwd`, `stricmp`, `itoa`,
+  ...) to the underscore function. No LIBCMT member references a `__tcs` name, and the TL client calls no
+  `_mbs*` function from game code, so the reference's six are old-name references (or `_tcs` calls in
+  server-only code, which no binary preserves). Because OLDNAMES is searched after LIBCMT, an old-name
+  reference loads its LIBCMT member one pass later than the underscore name would: `vfs_MakeDirs` calls
+  `mkdir`, and `CreateDirectoryA` now loads after every CRT import (load index 130), where the exact IAT
+  solution (5f) puts one dropped import. Any such alias loaded late gives `_RtlUnwind@16` the alignment that
+  `MSVCRT.LIB(chr.obj)` used to provide, so `bss_late` now compiles `-MT` like the DLL (`-MD` named MSVCRT as
+  a default library, which resolved late CRT references to MSVCRT.dll imports) and no `__tcschr` include
+  remains.
 
 ### 5f. Reconstructed client code in the shared files: status (2026-10-08)
 
@@ -5115,6 +5121,14 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   nearest a given gap vector, `iat_hyp.py` checks a named array). With h + w + m + t = 26 the exact splits
   are (h, w + m, t) = (3, 5, 18), (5, 5, 16), (5, 7, 14) and (7, 5, 14). None has h = 0: the original's game
   objects referenced KERNEL32 functions that `/OPT:REF` dropped.
+- **An exact IAT from real client code.** One named array reproduces all 100 reference slots with the
+  model (`iat_hyp.py`): this build's array without the timer's five WINMM imports, with the vfs file search's
+  five KERNEL32 imports (`FindFirstFileA`, `FindNextFileA`, `FindClose`, `FileTimeToLocalFileTime`,
+  `FileTimeToSystemTime`, TL 0x42f6d0 calls them directly) after `FreeConsole` (vfs.c links between Error.c
+  and server.c), `DeleteFileA` after `GetLastError` (`remove` in TL 0x42fe60 loads `unlink.obj` with
+  `findfile.obj`), and four imports after `SetEnvironmentVariableA` (`getcwd.obj`'s `GetCurrentDirectoryA`,
+  `GetFullPathNameA`, `GetDriveTypeA` and `mkdir.obj`'s `CreateDirectoryA`, loaded through OLDNAMES aliases
+  after LIBCMT's first pass). That is (h, w, m, t) = (5, 7, 0, 14). The placements around it are not unique.
 - **Measured** (native link of the committed tree against `original/Server/server.dll`; `.scratch` scripts:
   section byte compare, IAT and hint/name compare per DLL, Rich records, link map):
 

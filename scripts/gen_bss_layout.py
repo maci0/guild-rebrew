@@ -38,11 +38,6 @@ ALIASES: dict[str, str] = {
     "g_alloc_root": "g_alloc_root_name",
     "g_town_records": "g_entity_end",
 }
-# bss_late.lib loads after LIBCMT's first pass, so a directive here reaches LINK after the CRT members it
-# would otherwise pull early. Retaining chr.obj (an empty stock alias member for __mbschr) gives
-# _RtlUnwind@16 the reference's alignment (docs/msvc6-link-layout.md section 20); listed up front, the
-# alias loads mbschr.obj early and moves the CRT code after it.
-LATE_DIRECTIVES = ('#pragma comment(linker, "/include:__tcschr")',)
 # LINK reads bss_head2.obj after vfs.obj (only zutil.obj, with no new CRT reference, lies between), so the stock
 # members these includes select load after vfs.obj's own CRT references: toupper.obj, then the client-only vfs
 # functions' strupr/findfile/mkdir members, then memmove.obj (docs/msvc6-link-layout.md section 5f). Listed in
@@ -153,7 +148,7 @@ def main() -> None:
         raise SystemExit(f"{HEAD2_INCLUDES}: not an /INCLUDE: line: {bad[0]}")
     head2_directives = tuple(f'#pragma comment(linker, "/include:{line[len("/INCLUDE:"):]}")' for line in includes)
     (out / "bss_head2.c").write_text(emit(head2, HEAD2[0], HEAD2[1], "Game .bss up to the CRT's", head2_directives))
-    (out / "bss_late.c").write_text(emit(late, LATE[0], LATE[1], "Game .bss that follows the CRT's", LATE_DIRECTIVES))
+    (out / "bss_late.c").write_text(emit(late, LATE[0], LATE[1], "Game .bss that follows the CRT's"))
     print(f"head {len(head)} + {len(head2)} objects, late {len(late)} objects")
 
 
