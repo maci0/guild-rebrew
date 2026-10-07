@@ -1557,6 +1557,44 @@ int __cdecl ls_LoadTownData(int file)
 	return 1;
 }
 
+/* Client-only: reads the two 768x768 relationship matrices of a savegame
+ * (256 or 512 rows in older versions).  No server function calls it, so
+ * /OPT:REF discards it; its absolute fixups still count toward LINK's .reloc
+ * reservation. */
+int __cdecl ls_LoadRelationships(int stream_ctx)
+{
+	extern int g_file_version;
+	extern char g_relationship_matrix_primary[];
+	extern char g_relationship_matrix_secondary[];
+	int n;
+	int i;
+	int j;
+
+	if (g_file_version < 0x1003a) {
+		n = 0x100;
+	}
+	else {
+		n = g_file_version < 0x10042 ? 0x200 : 0x300;
+	}
+	for (j = 0; j < n; j++) {
+		for (i = 0; i < n; i++) {
+			if (ls_ReadVfsDataChecked(&g_relationship_matrix_primary[j * 0x300 + i], 1, 1, (void*) stream_ctx) == 0) {
+				return 0;
+			}
+		}
+	}
+	if (g_file_version >= 0x10036) {
+		for (j = 0; j < n; j++) {
+			for (i = 0; i < n; i++) {
+				if (ls_ReadVfsDataChecked(&g_relationship_matrix_secondary[j * 0x300 + i], 1, 1, (void*) stream_ctx) == 0) {
+					return 0;
+				}
+			}
+		}
+	}
+	return 1;
+}
+
 
 // RELOC, 491/491. The entity loop indexes from the record base (rec = entity_cursor -
 // 0x170, positive offsets) so msvc6 keeps the address CSE out of the

@@ -1737,6 +1737,42 @@ void __cdecl srv_LogWinsockError(int err_code)
 	}
 }
 
+/* Client-only statistic-dump formatters (the Gold T&L client's order).  No
+ * server function calls them, so /OPT:REF discards them; their absolute
+ * fixups still count toward LINK's .reloc reservation. */
+
+void __cdecl srv_FormatStatDumpBegin(void)
+{
+	char buf[0x400];
+
+	sprintf(buf, "++++++++++ Begin statistic dump in round %i +++++++++", g_current_year);
+}
+
+void __cdecl srv_FormatStatAttributes(char* entity, char* out)
+{
+	unsigned int f;
+
+	sprintf(out, "%5.2f\t %5.2f\t %5.2f\t %5.2f\t %5.2f\t %5.2f\t %i\t", *(float*) (entity + 0x10),
+	    *(float*) (entity + 0x14), *(float*) (entity + 0x18), *(float*) (entity + 0x1c),
+	    *(float*) (entity + 0x20), *(int*) (entity + 0x24), *(short*) (entity + 0x28));
+	f = *(unsigned int*) (entity + 0x2c);
+	sprintf(out + strlen(out), "%i\t %i\t %i\t %i\t %i\t %i\t %i\t %i\t %i\t", f & 0xf, (f >> 4) & 0xf,
+	    (f >> 8) & 0xf, (f >> 12) & 3, (f >> 14) & 7, (f >> 17) & 7, (f >> 20) & 7, (f >> 23) & 3,
+	    (f >> 25) & 0xf);
+}
+
+void __cdecl srv_FormatStatSkills(unsigned char* entity, char* out)
+{
+	sprintf(out, "%i\t%i\t%i\t%i\t%i\t", entity[0x80], entity[0x81], entity[0x82], entity[0x83], entity[0x84]);
+}
+
+void __cdecl srv_FormatStatDumpEnd(void)
+{
+	char buf[0x400];
+
+	sprintf(buf, "++++++++++ End statistic dump in round %i +++++++++", g_current_year);
+}
+
 /* Initializes the building type lookup table (42 entries, 0x18 bytes
  * each, base g_office_slots = 0x101de5a0). Zeroes the table, stamps
  * id=i / unk=-1 / unk2=-1 per entry, then assigns each entry's type code
@@ -2058,3 +2094,79 @@ void __cdecl srv_InitBuildingTypeTable(void)
 	*(unsigned char*) (g_office_slots + 0x3e0) = 0x27;
 }
 #pragma optimize("", on)
+
+/* Client-only office queries (the Gold T&L client places them after
+ * srv_InitBuildingTypeTable).  Discarded, like the formatters above. */
+
+int __cdecl srv_GetEntityOfficeSlot(unsigned char* entity, void* role_out, void* slot_out)
+{
+	typedef struct {
+		int v[6];
+	} Row24;
+	extern int g_office_role_templates[40][6];
+	int found;
+	int i;
+	int key;
+
+	found = 0;
+	if (entity == 0 || *(unsigned short*) entity == 0xffff || entity[0x166] == 0) {
+		return 0;
+	}
+	key = *(int*) (entity + 4);
+	for (i = 0; i < 0x1e; i++) {
+		if (key == ((Row24*) g_office_slots)[i].v[1]) {
+			found = 1;
+			*(Row24*) slot_out = ((Row24*) g_office_slots)[i];
+			*(Row24*) role_out = *(Row24*) g_office_role_templates[(unsigned char) ((Row24*) g_office_slots)[i].v[2]];
+			break;
+		}
+	}
+	return found;
+}
+
+int __cdecl srv_GetEntityCouncilSlot(unsigned char* entity, void* role_out, void* slot_out)
+{
+	typedef struct {
+		int v[6];
+	} Row24;
+	extern int g_office_role_templates[40][6];
+	int found;
+	int i;
+	int key;
+
+	found = 0;
+	if (entity == 0 || *(unsigned short*) entity == 0xffff || entity[0x169] == 0) {
+		return 0;
+	}
+	key = *(int*) (entity + 4);
+	for (i = 0x1e; i < 0x25; i++) {
+		if (key == ((Row24*) g_office_slots)[i].v[1]) {
+			found = 1;
+			*(Row24*) slot_out = ((Row24*) g_office_slots)[i];
+			*(Row24*) role_out = *(Row24*) g_office_role_templates[(unsigned char) ((Row24*) g_office_slots)[i].v[2]];
+			break;
+		}
+	}
+	return found;
+}
+
+int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out)
+{
+	extern int g_office_role_templates[40][6];
+	extern float g_office_float_table[7][7];
+
+	if (entity == 0 || *(unsigned short*) entity == 0xffff || role == 0 || role >= 30) {
+		return 0;
+	}
+	if (entity[0x166] >= 30 || entity[0x167] >= 30) {
+		return 0;
+	}
+	if ((g_office_role_templates[entity[0x167]][2] & 0xff) + 1 < (g_office_role_templates[role][2] & 0xff)) {
+		return 0;
+	}
+	if ((g_office_role_templates[entity[0x166]][2] & 0xff) >= (g_office_role_templates[role][2] & 0xff)) {
+		return 0;
+	}
+	*out = g_office_float_table[g_office_role_templates[entity[0x166]][1]][g_office_role_templates[role][1]];
+	return 1;
+}

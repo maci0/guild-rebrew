@@ -4972,11 +4972,11 @@ Two source facts the order depends on, both measured:
   unused one in an included header (`game_data.h`), or a new line before it, changes its code; block-scope
   `extern`s inside the using function do not.
 - **`.reloc` VirtualSize is LINK's reservation**, `12 * N` for N input DIR32 records (section 76). Restoring
-  relocations raised it from 49296 to 51288 bytes; the reference's 66420 needs about 1260 more input fixups.
+  relocations raised it from 49296 to 51288 bytes; 5f has the current reservation.
 - **Load order of the late CRT members and the imports (2026-10-07).** The original link had no include list
   past the code members it needed: `setlocal.obj` pulled getqloc, initnum, initctyp and initmon (code
-  discarded, `.bss` kept), and initctyp pulled `a_str.obj`. `native-archive-includes.rsp` therefore stops
-  after `_strpbrk` and LIBCMT's own references load the rest, which places those members' `.bss` before
+  discarded, `.bss` kept), and initctyp pulled `a_str.obj`. The include list therefore stops after
+  `_strpbrk` (its entries after `_toupper` are in `bss_head2.c`, 5f) and LIBCMT's own references load the rest, which places those members' `.bss` before
   `a_str` and `GetCPInfo` before `GetStringTypeA` as in the reference: `.data` is byte-identical. The empty
   `chr.obj` alias that aligns `_RtlUnwind@16` is included from `bss_late.c` (generated), which LINK reads after
   LIBCMT's first pass; listed up front it loads `mbschr.obj` early.
@@ -4985,8 +4985,8 @@ Two source facts the order depends on, both measured:
   imports and RtlUnwind follow naturally. Every DLL's hint/name order then equals the reference's except
   `GetLastError` (load index 42 against 37; no loaded member between `toupper.obj` and `realloc.obj`
   references it). Raw `.rdata` differs in 242 bytes (was 1768).
-- **Left:** the IAT slot order (all 138 differing `.text` bytes are IAT slot operands), the 98-byte
-  `GetLastError` hint/name shift, and the `.reloc` reservation. Section 5e explains all three.
+- **Left:** `GetLastError` now loads at index 37 and the hint/name order is exact (5f); the IAT slot order and
+  the `.reloc` reservation remain (5e explains them, 5f has the current numbers).
 
 ### 5e. The server was linked from source files shared with the client (2026-10-07)
 
@@ -4994,39 +4994,142 @@ The game's source files (`spiel.c`, `aemter.c`, `net.c`, ...) were compiled into
 `/O2` implies `/Gy`, so the server's `/OPT:REF` discarded every function the server never calls: the TL
 client's `aemter.c` holds about 19 KB of code, the server's 2.9 KB. The discarded functions still shaped the
 server image, and the remaining differences are their fingerprints. The general rules are in rebrew's
-`rebrew-data-analysis` skill, `references/link-fingerprints.md`.
+`rebrew-data-analysis` skill, `references/link-fingerprints.md`. Section 5f has the reconstructed code and the
+current measurements.
 
-- **Rich header.** The reference's `@comp.id` counts against this build: game C objects (10/8966) 37 vs 36,
-  LIBCMT C members (10/8047) 124 vs 113, weak-alias objects (12/7291) 6 vs 1, import members (1/0) 126 vs 109,
-  descriptors and null thunks (19/8034) 9 vs 9, asm members (14/7299) 22 vs 22. So the original linked one more
-  game object, 11 more LIBCMT C members, 5 more alias objects and 17 more import functions, and no extra DLL.
+- **Rich header.** The reference's `@comp.id` counts: game C objects (10/8966) 37, LIBCMT C members (10/8047)
+  124, weak-alias objects (12/7291) 6, import members (1/0) 126, descriptors and null thunks (19/8034) 9, asm
+  members (14/7299) 22. Before any reconstruction (main at f829a810) this build had 36, 113, 1, 109, 9 and 22:
+  the original linked more LIBCMT C members, alias objects and import functions, and no extra DLL.
 - **IAT order.** LINK sorts the `.idata$4`/`.idata$5` contributions with MSVCRT 6.0.8797's `qsort` (middle
   pivot, no median-of-three, selection sort for runs of 8 or fewer, leftmost maximum), comparing only the
   module file name. The array is every loaded import member in `/VERBOSE` load order, dropped ones included,
   plus each DLL's null thunk; each null thunk then moves to the end of its DLL's run. A Python port of this
-  predicts this build's IAT exactly for all four DLLs over four different relinks. With 17 extra dropped
-  imports (KERNEL32 in both passes plus WS2_32/WINMM), exact solutions for the reference exist; the bytes do
-  not say which functions they were.
+  predicts this build's IAT exactly for all four DLLs over every relink measured. The bytes fix only the
+  array, not which functions loaded the dropped members.
 - **A fully dropped DLL leaves its name.** LINK keeps the DLL name string when all its imports are dropped
   (ADVAPI32 and WINSPOOL probes added `ADVAPI32.dll`/`WINSPOOL.DRV` to the import area); the reference has none,
   so the extra imports come from KERNEL32, USER32, WS2_32 and WINMM.
 - **`.reloc` reservation.** DIR32 records in discarded functions and discarded data COMDATs count, REL32 do
   not: a discarded function with 1261 absolute stores gives exactly the reference's 66420, `SizeOfImage` and
-  file size, with no other byte changed. All 3499 relocation sites are now present (`rebrew binary relocs`).
-- **Load position.** A discarded CRT reference loads its member where it is first referenced: `_chmod` or
-  `_rmdir` referenced between `toupper.obj` and `realloc.obj` puts `GetLastError` at the reference's load
-  index 37 (`.rdata` 242 to 138). That needs the CRT anchors that follow to move from the command-line
-  include list (read before any object) into a later object's `#pragma comment(linker, "/include:...")`.
+  file size, with no other byte changed. All 3499 relocation sites are present (`rebrew binary relocs`).
+- **Load position.** A discarded CRT reference loads its member where it is first referenced, so the CRT
+  anchors after `_toupper` are read from `bss_head2.c` instead of the command line (5f).
 - **Shown, not adopted.** A synthetic discarded TU (placeholder API calls and CRT references) reproduces
   `.text`, `.rdata`, `.data` and the Rich header byte for byte. It proves the model but invents code, so
-  the build instead reconstructs the real client-only functions in the shared files: the client `net.c`
-  (WS2_32 connect, select, gethostbyname, ...), the timer unit that also holds `gm_Random*` (WINMM timers;
-  the likely 37th game object), the `.BIN` file search before `vfs.c` (KERNEL32 `FindFirstFileA`, ...) and the
-  self-contained client-only functions of the game TUs (about 1000 to 1370 DIR32). Discarded code must still
-  link, because LINK resolves references before it discards, so only functions whose callees and globals
+  the build instead reconstructs the real client-only functions in the shared files (5f). Discarded code must
+  still link, because LINK resolves references before it discards, so only functions whose callees and globals
   exist in the server belong in the server build.
 - **`chr.obj` comes from `MSVCRT.LIB` today.** `bss_late` compiles with `-MD` (CMake sets the runtime only on
   `server_dll`), which adds `/DEFAULTLIB:MSVCRT` and the LNK4098 warning, and the late `__tcschr` resolves from
   `MSVCRT.LIB(chr.obj)`. With `-MT`, LIBCMT's identical member loads later: `_RtlUnwind@16` sits 2 bytes early
-  and `.text` ends 10 bytes long. The thunk's position is another load-order fingerprint to resolve with the
-  reconstructed inputs.
+  and `.text` ends 10 bytes long. The thunk's position is another load-order fingerprint still to resolve.
+
+### 5f. Reconstructed client code in the shared files: status (2026-10-08)
+
+Every function below is ported from Europa1400Gold_TL.exe (TL), written against server symbols, and called by
+no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functions.toml` (no server VA).
+
+- **`Units/net/net.c`.** The client's TCP connection functions (TL 0x4208a0..0x421347, nine functions). They
+  load seven WS2_32 members the server lacks (`inet_ntoa`, `gethostbyname`, `gethostname`, `getsockopt`,
+  `select`, `connect`, `inet_addr`) and add 170 DIR32 records. Their client state has no proven server
+  allocation and is `selectany`. Not added: the client's broadcast open (TL 0x402220), whose `GetLastError`
+  call would load that import in the game's KERNEL32 pass (load index 28; the reference has 37), and the rest
+  of the client browser (TL 0x402320..0x402604), which adds `recvfrom` and `fprintf.obj` with no measured
+  support.
+- **`vfs.c` is the client's vfs TU.** The TL client's `.data` holds one literal pool from `0x679e60` to
+  `0x67a0d4`: the gzip magic words (plain data, read by `vfs_ReadData`/`vfs_OpenStream`), then literals in
+  creation order from `vfs:IGetSubDir` (0x42e5a0) through `%i vfs_file(s) were left open!` (0x4310f0). The
+  directory tree, the `.BIN` file search (0x42f6d0), `vfs:Open`, `CloseVfsStream`, `vfs_ReadData`,
+  `vfs_OpenStream` and `vfs_init` (0x431070) are one TU, the server's `vfs.c`; its `.BIN5`..`.BIN` table is
+  `g_file_extension_names`. The client's unzip functions (0x464600..) are a second TU whose server functions
+  (`vfs_DestroyEntity` = `unzClose`, `vfs_ReadCompressed`, `vfs_CleanupObject`) also sit in our `vfs.c`.
+  The unit calls `_strupr` (0x42e520), `_findfirst`/`_findclose`/`_mkdir` (0x42fcd0), `remove` and `memmove`
+  (0x42fe60), `qsort` (0x42ee50), `_getcwd` (`vfs_init`) and `_stricmp` (0x42e4d0, 0x42e680, 0x430f70).
+  `stricmp.obj` and `memmove.obj` are assembler members whose code stays when unreferenced, so their code
+  position is their load position: the reference has `memmove` directly after `toupper` and `_stricmp` late
+  (0x10022cd0, loaded by `getqloc.obj`). The server's `vfs.c` therefore did not reference `_stricmp`, and its
+  other CRT references followed `vfs_OpenStream`'s `toupper`. Built, after `vfs_OpenStream`:
+  `vfs_NormalizeCase` (0x42e520, `_strupr` unless `g_vfs_case_sensitive`), `vfs_GetDirPath` (0x42f420) and
+  `vfs_MakeDirs` (0x42fcd0); compiled from `vfs.c` they match the TL client (RELOC/EXACT/RELOC with
+  `rebrew test -t Europa1400Gold_TL.exe --symbol ... --va ...`). The client's flag at 0x6b7fe8 sits between its
+  stream pool and stream count, as the server's 4 bytes at 0x10034674 do between `g_stream_pool` and
+  `g_stream_count`; that row is `char g_vfs_case_sensitive` plus 3 pad bytes. Not built: the client's order
+  (tree code before `vfs_OpenStream`) and every function reaching 0x42e4d0, including the file search.
+- **Late CRT anchors.** Object references load after the whole command-line include list, so the anchors from
+  `_memmove` to `_strpbrk` are in `late-archive-includes.txt`, which `scripts/gen_bss_layout.py` writes into
+  `bss_head2.c` as `#pragma comment(linker, "/include:...")`. LINK reads `bss_head2.obj` after `vfs.obj`, so
+  `strupr.obj`, `findfile.obj` and `mkdir.obj` load between `toupper.obj` and `memmove.obj`, and `findfile.obj`
+  puts `GetLastError` at the reference's load index 37. A directive in `vfs.c` itself would not work: LINK
+  takes an object's directives before its symbols.
+- **Random helpers are their own object (`game/zufall.c`).** Both clients hold `gm_RandomMod`, a range helper
+  (`gm_RandomMod(2n + 1) - n`), `gm_RandomFloat01`, `gm_RandomQuadratic`, a squared `gm_RandomFloat01` (TL
+  0x42e4a0), `srv_SeedRandomWithTime` and `srv_SeedRandom` contiguously (TL 0x42e410..0x42e4c5), after a trace
+  unit (`tr_*`, 0x42dfb0..) and apart from spiel.c's client span. The server's five sit after spiel.c's last
+  function, so the object links last; no path string names it. The range and squared helpers are discarded
+  code. The trace unit is not in the server: its initialized pointers to `"*bRaIn DeaD%&"` and
+  `"%aRscH Ab :-)"` would keep those strings, and the server has neither.
+- **Timer unit (`Units/timer/timer.c`).** The clients' `tb_*` multimedia-timer unit (TL 0x42dcd0..0x42df70) is
+  a separate TU from the trace unit: its message is a literal, and the trace unit's plain data follows it. Its
+  references load the five WINMM members the server lacks (`timeSetEvent`, `timeBeginPeriod`,
+  `timeGetDevCaps`, `timeKillEvent`, `timeEndPeriod`) and add 68 DIR32 records. Its storage has no attested
+  server owner, so offsets into the unnamed BSS block `g_gap_10035a10` stand in. `tb_Init` calls `srand`
+  (TL 0x42de49, as in Gold), and the reference loads `rand.obj` after `memmove.obj`, so the object is read
+  after `bss_head2.obj`: it links between `bss_head2.c` and `server.c` (`--first-va timer.c`). Read between
+  `net.c` and `trees.c`, where a Units file name sorts, it loads `rand.obj` first and moves the CRT from
+  0x1001b1fb on by 4 bytes (2984 `.text` bytes). Neither its name nor its position has path evidence.
+- **Game TUs.** 146 function definitions, each placed after the server function that precedes it in the
+  client: `aemter.c` (TL 0x4e8a80..0x4ec810) and `server.c` (0x4e73c0..0x4e7c70) office and stat-dump helpers;
+  `friedhof_logic.c` slot helpers (0x4f1790..0x4f1890, 0x4f1a10, 0x4f3800, 0x4f3e60); `plant.c` record lookups
+  (0x4bcc20, 0x4bcc50); `sim.c` family, age and directory helpers (0x4ff860, 0x4fffb0, 0x500240, 0x500480,
+  0x500660); `alchemistry_logic.c` recipe, avatar and trait helpers (0x4ec8a0..0x4ece30, 0x4eceb0,
+  0x4eefe0..0x4ef0d0, 0x4f0eb0, 0x4f0f60, 0x4f0ff0..0x4f1290, 0x4f13a0, 0x4f1450, 0x4f14c0); 74 `spiel.c`
+  definitions (game-clock, query, store and ranking helpers and four building-upgrade counters); and
+  `loadsave.c`'s relationship-matrix loader (0x524610). 0x500660 calls
+  `_findfirst`/`_findnext`/`_findclose`, the same `findfile.obj` as `vfs_MakeDirs`. 0x500480's scan cursor
+  (TL 0x773d64) is the last dword of the server's unnamed 0x10035410 block, below `g_next_family_index` as in
+  the client. Not ported: client copies of server functions (amt_FindEntity27, amt_ClearEntityLinks,
+  AssignProductionSlot, cm_GetBuildingStatCount, and the spiel functions that are server functions:
+  `gm_InitObjektHersteller`, `gm_ObjectsAvailble`, `gm_ff_Objekt`, `gm_SubObjekt`, `gm_SubObjectNoKill`,
+  `gm_FindNextFilteredEntity`, `gm_MapEntityStatRange`, `gm_LookupEntityRecordById`, `gm_EntitySetField`);
+  functions calling `_stricmp`, `_strnicmp` or `_strcmpi` (plant's box cache 0x4bd1e0, spiel 0x501490,
+  0x504eb0), because a game reference loads those members in the first library pass, ahead of where the
+  reference has them; functions whose storage has no server allocation (aemter 0x4e98d0, alchemistry's card
+  deck and player prototype, sim 0x5007f0..0x500a20, most client-only loaders) and functions reaching them
+  (spiel 0x502780, friedhof 0x4f1a40); and TL 0x522e30, the client's `ls_LoadEntities`.
+- **ICF survivor.** LINK folds the identical `_strncnt` COMDATs of `a_cmp.obj` and `a_map.obj`; the reference
+  keeps `a_cmp.obj`'s. Which copy survives depends on the whole input set: neither COMDAT count nor size
+  predicts it (`findfile.obj` + `mkdir.obj` without `strupr.obj` flip it; the net code and the game-TU code
+  each flipped it on their own branches, and the squared helper alone on the timer branch). With all of the
+  above it keeps `a_map.obj`'s (`.text` VirtualSize +16, 16198 bytes differ); adding the clients' squared
+  helper restores `a_cmp.obj`'s. The helper is real code of the same object, so it is included rather than
+  any real function removed. Each further input must be measured for this.
+- **Measured** (native link of the committed tree against `original/Server/server.dll`; `.scratch` scripts:
+  section byte compare, IAT and hint/name compare per DLL, Rich records, link map):
+
+  | | main f829a810 | now | reference |
+  |---|---|---|---|
+  | functions at reference VA | 260 | 260 | 260 |
+  | `rebrew verify` | not re-run | 316/316 | |
+  | `.text` differing bytes | 138 | 146 (all IAT operands) | 0 |
+  | `.rdata` differing bytes | 242 | 122 | 0 |
+  | `.data` differing bytes | 0 | 0 | 0 |
+  | hint/name order diffs | 6 (KERNEL32) | 0 | 0 |
+  | IAT slots off the reference | 53 of 100 | 37 of 100 (KERNEL32 only) | 0 |
+  | Rich game C / LIBCMT C / alias / imports | 36 / 113 / 1 / 109 | 38 / 116 / 1 / 127 | 37 / 124 / 6 / 126 |
+  | `.reloc` VirtualSize | 51312 | 59928 | 66420 |
+
+  Three of the 38 game C objects are the generated BSS objects. `.reloc` is 718 DIR32 records above main
+  (the branches' separate gains add to 730; a member loaded by several units, such as `findfile.obj`,
+  counts once).
+  `rebrew binary relocs` reports all 3499 sites and no extra one. `rebrew verify --data` differs only in the
+  37 KERNEL32 IAT slots and `g_import_bookkeeping`. The IAT model predicts this build's IAT exactly; against
+  the reference, USER32, WS2_32 and WINMM are exact and KERNEL32 has 37 slots off. Removing any one dropped
+  import from the model's array (131 contributions) also moves two USER32 slots, while Rich counts one import
+  member more than the reference.
+- **Left:**
+  - KERNEL32 IAT slot order (37 slots) and the 146 `.text` operand bytes that read those slots.
+  - `.reloc` reservation: 541 input DIR32 records short of 66420.
+  - Rich: 8 LIBCMT C members and 5 alias objects short, one import member over. Known client references this
+    build lacks include `remove` (vfs 0x42fe60) and `_getcwd` (the client's `vfs_init`); no measured input yet
+    explains the extra import.

@@ -43,6 +43,11 @@ ALIASES: dict[str, str] = {
 # _RtlUnwind@16 the reference's alignment (docs/msvc6-link-layout.md section 20); listed up front, the
 # alias loads mbschr.obj early and moves the CRT code after it.
 LATE_DIRECTIVES = ('#pragma comment(linker, "/include:__tcschr")',)
+# LINK reads bss_head2.obj after vfs.obj (only zutil.obj, with no new CRT reference, lies between), so the stock
+# members these includes select load after vfs.obj's own CRT references: toupper.obj, then the client-only vfs
+# functions' strupr/findfile/mkdir members, then memmove.obj (docs/msvc6-link-layout.md section 5f). Listed in
+# native-archive-includes.rsp they would precede every object's references.
+HEAD2_INCLUDES = "layout/server.dll/late-archive-includes.txt"
 # Objects the code reaches through a struct type: emitted whole, their field rows not split out.
 WHOLE = {"g_download_state"}
 SCALAR = {1: "char", 2: "short", 4: "int"}
@@ -143,7 +148,11 @@ def main() -> None:
     head2 = split(items, *HEAD2)
     late = split(items, *LATE)
     (out / "bss_head.c").write_text(emit(head, HEAD[0], HEAD[1], "Game .bss before zutil's empty string"))
-    (out / "bss_head2.c").write_text(emit(head2, HEAD2[0], HEAD2[1], "Game .bss up to the CRT's"))
+    includes = (root / HEAD2_INCLUDES).read_text().split()
+    if bad := [line for line in includes if not line.startswith("/INCLUDE:")]:
+        raise SystemExit(f"{HEAD2_INCLUDES}: not an /INCLUDE: line: {bad[0]}")
+    head2_directives = tuple(f'#pragma comment(linker, "/include:{line[len("/INCLUDE:"):]}")' for line in includes)
+    (out / "bss_head2.c").write_text(emit(head2, HEAD2[0], HEAD2[1], "Game .bss up to the CRT's", head2_directives))
     (out / "bss_late.c").write_text(emit(late, LATE[0], LATE[1], "Game .bss that follows the CRT's", LATE_DIRECTIVES))
     print(f"head {len(head)} + {len(head2)} objects, late {len(late)} objects")
 

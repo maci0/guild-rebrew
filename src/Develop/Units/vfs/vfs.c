@@ -497,3 +497,103 @@ cleanup:
 	m_pool_free((void*) &g_stream_pool, stream);
 	return 0;
 }
+
+/* Client-only functions of this TU (TL client 0x42e520, 0x42f420, 0x42fcd0).
+ * The server never calls them and /OPT:REF discards them, but their CRT
+ * references still load strupr.obj, findfile.obj and mkdir.obj. They follow
+ * vfs_OpenStream: the reference loads those members after toupper.obj
+ * (findfile.obj puts GetLastError after toupper.obj's imports). */
+#include <io.h>
+#include <direct.h>
+
+extern char g_vfs_case_sensitive;
+
+/* Upper-cases a name unless the file system is case-sensitive. */
+char* __cdecl vfs_NormalizeCase(char* name)
+{
+	if (g_vfs_case_sensitive != 0) {
+		return name;
+	}
+	return _strupr(name);
+}
+
+/* SIZE 0x11c */
+typedef struct VFS_DIR {
+	char name[0x100];
+	int count;
+	void* files;
+	struct VFS_DIR* next;
+	struct VFS_DIR* child;
+	struct VFS_DIR* parent;
+	void* items;
+	char loaded;
+} VFS_DIR;
+
+/* Writes the path of dir relative to its ancestor stop into out. */
+char* __cdecl vfs_GetDirPath(VFS_DIR* dir, VFS_DIR* stop, char* out)
+{
+	char tmp[0x100];
+	VFS_DIR* p;
+
+	p = dir;
+	if (p == 0) {
+		return 0;
+	}
+	strcpy(out, p->name);
+	while (p != 0) {
+		if (p->parent == stop) {
+			break;
+		}
+		p = p->parent;
+		strcpy(tmp, p->name);
+		strcat(tmp, out);
+		strcpy(out, tmp);
+	}
+	return out;
+}
+
+/* Creates every missing directory of path below dir. */
+char __cdecl vfs_MakeDirs(char* path, VFS_DIR* dir)
+{
+	char* s;
+	long h;
+	char p[0x100];
+	char rest[0x100];
+	char cur[0x100];
+	char base[0x100];
+	struct _finddata_t fd;
+
+	if (path == 0 || *path == 0) {
+		return 0;
+	}
+	strcpy(p, path);
+	s = strrchr(p, '/');
+	if (s != 0) {
+		vfs_GetDirPath(dir, 0, base);
+		s[1] = 0;
+		strcpy(rest, p);
+		s = strchr(rest, '/');
+		while (s != 0) {
+			s++;
+			strcpy(p, s);
+			*s = 0;
+			strcat(base, rest);
+			strcpy(cur, base);
+			s = strrchr(cur, '/');
+			if (s != 0) {
+				*s = 0;
+			}
+			h = _findfirst(cur, &fd);
+			if (h == -1) {
+				if (_mkdir(cur) != 0) {
+					return 0;
+				}
+			} else {
+				_findclose(h);
+			}
+			strcpy(rest, p);
+			s = strchr(rest, '/');
+		}
+	}
+	return 1;
+}

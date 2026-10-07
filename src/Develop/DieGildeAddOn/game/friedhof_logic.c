@@ -96,6 +96,43 @@ void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 	return 0;
 }
 
+/* Client-only slot helpers (the Gold T&L client's friedhof order).  No server
+ * function calls them, so /OPT:REF discards them; their absolute fixups still
+ * count toward LINK's .reloc reservation. */
+
+int __cdecl gv_GetSlotEntryIndex(char* worker, int* entry)
+{
+	if (entry[0] == 0) {
+		return ((char*) entry - *(char**) (worker + 8)) / 0x14;
+	}
+	if (entry[0] == 1) {
+		return ((char*) entry - *(char**) (worker + 0xc)) / 0x14;
+	}
+	if (entry[0] == 2) {
+		return ((char*) entry - *(char**) (worker + 0x10)) / 0x14;
+	}
+	if (entry[0] == 3) {
+		return ((char*) entry - *(char**) (worker + 0x14)) / 0x14;
+	}
+	return -1;
+}
+
+int __cdecl gv_eval_SameField(char* building, char* entry)
+{
+	unsigned short field;
+
+	field = *(unsigned short*) (building + 0x50);
+	if (*(unsigned short*) (entry + 8) == field && field != 0x7fff) {
+		return 1;
+	}
+	return 0;
+}
+
+int __cdecl gv_eval_SameOwner(int* wanted, int* entry)
+{
+	return entry[1] == wanted[1];
+}
+
 /* gv_eval_SlotFrei -- 14 bytes at 0x10010700, between this function and
  * FindSlotEntryFiltered, in the same translation unit in the reference.  The 7
  * bytes of `nop` that separate the two are msvc6's 16-byte intra-section
@@ -125,6 +162,44 @@ int __cdecl gv_eval_SlotFrei(void* unused, int* p)
 {
 	(void) unused;
 	return *(int*) ((char*) p + 4) == -1;
+}
+
+int __cdecl gv_eval_SlotBelegt(void* unused, int* p)
+{
+	(void) unused;
+	return p[1] != -1;
+}
+
+int __cdecl gv_eval_HasWorker(void* unused, int* slot)
+{
+	int i;
+	int n;
+	int* worker;
+
+	(void) unused;
+	n = g_worker_entry_count[slot[0]];
+	worker = (int*) slot[4];
+	for (i = 0; i < n; i++, worker += 0x11) {
+		if (*worker != -1) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int __cdecl gv_eval_HasWorkerId(int* wanted, int* slot)
+{
+	int n;
+	int i;
+
+	i = 0;
+	n = g_worker_entry_count[*slot];
+	for (; i < n; i++) {
+		if (*(int*) ((char*) slot[4] + i * 0x44) == *wanted) {
+			return 1;
+		}
+	}
+	return 0;
 }
 
 
@@ -202,6 +277,16 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
 		cursor = (char*) cursor + 0x14;
 	}
 	return 0;
+}
+
+/* Client-only: the first slot of the building holding worker `entity`
+ * (discarded, like the helpers above). */
+void* __cdecl gv_FindWorkerSlot(void* building, int* entity)
+{
+	if (entity == 0 || *entity == -1) {
+		return 0;
+	}
+	return FindSlotEntryFiltered(entity, building, 0, (void*) gv_eval_HasWorkerId, 0xff);
 }
 
 
@@ -1475,4 +1560,66 @@ clear_entry:
 	 * they reach the log path's epilogue at 0x10011d77, as in the reference. */
 fail_ffff:
 	return 0xffff;
+}
+
+/* Client-only: the graveyard's upgrade bonus, 0.0125 per point of its
+ * upgrades (discarded). */
+float __cdecl gv_GetUpgradeBonus(char* graveyard)
+{
+	unsigned short* __cdecl gm_ff_Objekt(int container, int arg_count, int first_arg, ...);
+	int sum;
+
+	sum = 0;
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x1ff) != 0) {
+		sum = 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x202) != 0) {
+		sum += 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x208) != 0) {
+		sum += 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x20d) != 0) {
+		sum += 15;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x214) != 0) {
+		sum += 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x216) != 0) {
+		sum += 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x219) != 0) {
+		sum += 15;
+	}
+	return sum * 0.0125f;
+}
+
+/* Client-only: whether a graveyard (kind 0x1d) has room for another
+ * gravedigger; *count gets the current number (discarded). */
+int __cdecl gv_HasGravediggerRoom(unsigned char* building, int* count)
+{
+	unsigned char* kind;
+	unsigned char* e;
+	int cap;
+	int n;
+
+	kind = (unsigned char*) (g_entity_type_table + *building * 0x24d);
+	if (kind[0] != 0x1d) {
+		return -1;
+	}
+	if (*(int*) (building + 0x65) == 0) {
+		return -1;
+	}
+	cap = kind[0x232] + kind[0x231];
+	n = 0;
+	for (e = g_slot_table + 0x16c; e < g_slot_table + 0x16c + 0x65400; e += 0x21c) {
+		if (*(unsigned short*) (e - 0x16c) != 0xffff && *(char*) (e - 0x16a) == 0x14 &&
+		    *(unsigned char**) e == building) {
+			n++;
+		}
+	}
+	if (count != 0) {
+		*count = n;
+	}
+	return n < cap;
 }
