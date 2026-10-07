@@ -4995,11 +4995,22 @@ Two source facts the order depends on, both measured:
   discarded code (the image is unchanged; Rich C objects 36 to 37, the reference's count). The squared
   helper is left out: compiled to the clients' exact 10 bytes, it makes ICF keep `a_map.obj`'s copy of
   `strncnt` instead of `a_cmp.obj`'s, moving the CRT from `__isctype` on by 0x2b (`.text` VirtualSize +16).
+- **Discarded timer unit (`Units/timer/timer.c`).** The clients' `tb_*` multimedia-timer unit (TL
+  0x42dcd0..0x42df70) is a separate TU from the trace unit: its message is a literal, and the trace unit's
+  plain data follows it. Linked as discarded code, its references load the five WINMM members the server
+  lacks (`timeSetEvent`, `timeBeginPeriod`, `timeGetDevCaps`, `timeKillEvent`, `timeEndPeriod`); /OPT:REF
+  drops the imports but their `.idata$5` contributions stay in the qsorted array. Measured against the
+  previous build: imports differing in IAT slot from the reference 53 to 41 of 100, raw `.text` differences
+  138 to 124 and `.rdata` 242 to 212, import members in Rich 109 to 114, `.reloc` VirtualSize 51312 to
+  52128 (68 more DIR32); `.data` and hint/name order unchanged, every function at its VA. Its storage has
+  no attested server owner, so offsets into the unnamed BSS block `g_gap_10035a10` stand in. It links
+  between `net.c` and `trees.c` (`--first-va timer.c`), where a Units file sorts. Rich C objects become 38
+  against the reference's 37, but three of ours are the generated BSS objects.
 - **Left:**
   - IAT slot order. LINK sorts the `.idata$5` contributions (function imports, dropped ones and null thunks,
     in load order) with the runtime's qsort keyed by DLL name; a Python model of the VC6 qsort over that
     array reproduces our build's KERNEL32 slots exactly. For the reference, a hill-climb over the unknown
     entries (dropped imports after load index 28, the other DLLs as whole blocks) gets within 8 of 81
-    KERNEL32 slots, not to 0, so the original array holds something this build lacks. The 138 `.text`
+    KERNEL32 slots, not to 0, so the original array holds something this build lacks. The 124 `.text`
     bytes that differ are all IAT slot operands.
   - `.reloc` reservation (above).
