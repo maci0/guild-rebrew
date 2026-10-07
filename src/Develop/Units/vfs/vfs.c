@@ -35,7 +35,7 @@ extern int __cdecl inflate(void* zstrm, int flush);
 
 int __cdecl unzCloseCurrentFile(char*);
 int __cdecl unzClose(char*);
-int __cdecl vfs_FlushAndClose(int);
+int __cdecl gzclose(int);
 
 extern char g_stream_pool[1];
 #include <string.h>
@@ -1046,7 +1046,7 @@ int __cdecl CloseVfsStream(void* stream)
 						unzCloseCurrentFile(*(void**) ((char*) stream + 0x100));
 						unzClose(*(void**) ((char*) stream + 0x100));
 					} else if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
-						vfs_FlushAndClose((int) *(void**) ((char*) stream + 0x100));
+						gzclose((int) *(void**) ((char*) stream + 0x100));
 					} else {
 						fclose(*(void**) ((char*) stream + 0x100));
 					}

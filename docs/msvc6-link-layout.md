@@ -5079,7 +5079,24 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   data holds the unit's ` unzip 0.15a Copyright 1998 Gilles Vollant ` right before vfs.c's `.BIN` table. The
   vendored file lists its changes: the 0.15a copyright string (selectany, ordered as before), the client's
   `unzGetFilePos`/`unzGoToFilePos` (TL 0x465750, 0x465790) appended, SIZE comments. It links between
-  `trees2.c` and `vfs.c` and leaves every function VA unchanged; Rich counts one more game C object.
+  `trees.c` and `vfs.c` and leaves every function VA unchanged; Rich counts one more game C object.
+- **zlib is stock 1.1.3, whole files (round 18).** The vendored files had every function the server does not
+  call removed (`#if 0`, "not present in original DLL"), which `/OPT:REF` drops anyway, `gzio.c` was replaced
+  by a decompiled copy (`Units/vfs/gz_stream.c`, `vfs_GetByte` for `get_byte` and so on), and `trees.c` was
+  split into `trees.c` and `trees2.c`. Compiled whole, stock `gzio.c` gives the server's eight gzio functions
+  byte for byte, and one stock `trees.c` gives the server's function order: VC6 emits a static function
+  after the first function that references it (`get_byte` after `check_header`, `putLong` after
+  `gzclose`, `build_tree` after `_tr_flush_block`). The discarded public gzio functions load exactly the
+  four LIBCMT members the Rich header was short, in the first library pass and with no new import or data
+  byte: `fprintf.obj` (gz_open's header), `fdopen.obj` (gzdopen; `zutil.h` maps `fdopen` to `_fdopen` for
+  MSC), `vsprintf.obj` (gzprintf) and `rewind.obj` (gzrewind). `gzsetparams` needs `deflateParams`, so
+  `deflate.c` must be whole as well. The four bytes `border[]` carried after its 19 entries are
+  `inflateSync`'s `mark[4] = {0, 0, 0xff, 0xff}`, a static whose plain `.rdata` follows `infblock.obj`'s:
+  `border` is stock again and `mark` is a selectany object ordered after it, anchored by
+  `game-includes.rsp` (`gen_game_includes.py` ZLIB_ANCHORS; a `/include` directive in `inflate.obj` itself
+  does not keep it, `/VERBOSE` reports it discarded). `compress.c` and `uncompr.c` stay out: they would be
+  two more game C objects. The restored code adds 30 DIR32 records; Rich now counts 124 LIBCMT C members
+  and 37 game C objects, both equal to the reference.
 - **Late CRT anchors.** Object references load after the whole command-line include list, so the anchors from
   `_memmove` to `_strpbrk` are in `late-archive-includes.txt`, which `scripts/gen_bss_layout.py` writes into
   `bss_head2.c` as `#pragma comment(linker, "/include:...")`. LINK reads `bss_head2.obj` after `vfs.obj`; the

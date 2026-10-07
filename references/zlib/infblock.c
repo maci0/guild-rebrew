@@ -15,11 +15,9 @@ struct inflate_codes_state {int dummy;}; /* for buggy compilers */
 #define exop word.what.Exop
 #define bits word.what.Bits
 
-/* Table for deflate from PKZIP's appnote.txt.  The original binary carries a
- * trailing 0xffff0000 dword after the 19 entries (never indexed — the code
- * only walks border[0..18]); we reproduce it so .rdata matches byte-for-byte. */
+/* Table for deflate from PKZIP's appnote.txt. */
 __declspec(selectany) const uInt border[] = { /* Order of the bit length code lengths */
-        16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15, 0xffff0000};
+        16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15};
 
 /*
    Notes beyond the 1.93a appnote.txt:
@@ -119,7 +117,6 @@ uInt w;
 }
 
 
-/* stripped: dumped as infblock_dump.c */
 int inflate_blocks(s, z, r)
 inflate_blocks_statef *s;
 z_streamp z;
@@ -367,7 +364,6 @@ int r;
 }
 
 
-/* stripped: dumped */
 int inflate_blocks_free(s, z)
 inflate_blocks_statef *s;
 z_streamp z;
@@ -381,12 +377,6 @@ z_streamp z;
 }
 
 
-
-/* stripped: not present in original DLL.  inflateSetDictionary and
- * inflateSyncPoint (the only callers) are #if 0'd in inflate.c, so these two
- * bodies are unreferenced; the tree links /OPT:NOREF, which keeps
- * unreferenced COMDATs, so they must not be compiled at all. */
-#if 0
 void inflate_set_dictionary(s, d, n)
 inflate_blocks_statef *s;
 const Bytef *d;
@@ -407,5 +397,4 @@ inflate_blocks_statef *s;
 {
   return s->mode == LENS;
 }
-#endif
 
