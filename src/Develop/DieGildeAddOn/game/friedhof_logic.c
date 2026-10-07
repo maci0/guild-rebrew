@@ -1562,6 +1562,38 @@ fail_ffff:
 	return 0xffff;
 }
 
+/* Client-only: the graveyard's upgrade bonus, 0.0125 per point of its
+ * upgrades (discarded). */
+float __cdecl gv_GetUpgradeBonus(char* graveyard)
+{
+	unsigned short* __cdecl gm_ff_Objekt(int container, int arg_count, int first_arg, ...);
+	int sum;
+
+	sum = 0;
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x1ff) != 0) {
+		sum = 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x202) != 0) {
+		sum += 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x208) != 0) {
+		sum += 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x20d) != 0) {
+		sum += 15;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x214) != 0) {
+		sum += 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x216) != 0) {
+		sum += 10;
+	}
+	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x219) != 0) {
+		sum += 15;
+	}
+	return sum * 0.0125f;
+}
+
 /* Client-only: whether a graveyard (kind 0x1d) has room for another
  * gravedigger; *count gets the current number (discarded). */
 int __cdecl gv_HasGravediggerRoom(unsigned char* building, int* count)

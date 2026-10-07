@@ -927,6 +927,101 @@ void __cdecl ahm_CalcTraitLimits(int level, int* out)
 	}
 }
 
+int __cdecl ahm_CanAffordUpgrade(char* entity, int level, int percent, int count, int* need_rank, int* need_money)
+{
+	int __cdecl gm_SumStoreCount(int store, int season);
+
+	if (level >= 4) {
+		level = 4;
+	}
+	else if (level <= 0) {
+		level = 0;
+	}
+	if (percent >= 100) {
+		percent = 100;
+	}
+	else if (percent <= 0) {
+		percent = 0;
+	}
+	if (count >= 3) {
+		count = 3;
+	}
+	else if (count <= 1) {
+		count = 1;
+	}
+	*need_rank = level + 2;
+	*need_money = (int) ((percent + percent + 500.0f) * (level * 0.25f + 1.0f) * count * 32.0f);
+	if (*(int*) (entity + 0x194) >= *need_rank &&
+	    gm_SumStoreCount(*(int*) (entity + 0x178), g_current_season) >= *need_money) {
+		return 1;
+	}
+	return 0;
+}
+
+void __cdecl ahm_GetLabUpgrades(char* lab, int* furnace, int* tools)
+{
+	*tools = 0;
+	*furnace = 0;
+	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x265)) {
+		*furnace = 2;
+	}
+	else {
+		*furnace = gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x263) != 0;
+	}
+	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x264)) {
+		*tools = 4;
+	}
+	else if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x262)) {
+		*tools = 3;
+	}
+	else if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x25e)) {
+		*tools = 2;
+	}
+	else {
+		*tools = gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x25a) != 0;
+	}
+}
+
+void __cdecl ahm_GetLabRisk(char* lab, float* explode, float* fail)
+{
+	float x;
+	float y;
+
+	x = 0.02f;
+	y = 0.2f;
+	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x25c)) {
+		x = 0.02f - 0.003f;
+		y = 0.17f;
+	}
+	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x25f)) {
+		x -= 0.003f;
+		y -= 0.03f;
+	}
+	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x260)) {
+		x -= 0.004f;
+		y -= 0.04f;
+	}
+	*explode = x;
+	*fail = y;
+}
+
+float __cdecl ahm_GetLabYieldFactor(char* lab)
+{
+	float v;
+
+	v = 1.0f;
+	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x259)) {
+		v = 1.05f;
+	}
+	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x25b)) {
+		v = v + 0.05f;
+	}
+	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x261)) {
+		return v + 0.05f;
+	}
+	return v;
+}
+
 int __cdecl ahm_CountBusyWorkers(char* building)
 {
 	int __cdecl cm_GetBuildingStatCount(unsigned char* building);

@@ -188,6 +188,50 @@ void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 	}
 }
 
+/* Client-only: claims a free, adult resident of `kind` (or of `group`) that
+ * gets on with `who`'s household (discarded). */
+unsigned char* __cdecl sim_ClaimResident(char* who, int kind, int group)
+{
+	int __cdecl gm_EntityClassCheck(int kind);
+	int __cdecl gm_IsInRange(int group);
+	int __cdecl gm_GetRelationship(int a, int b);
+	unsigned char* e;
+	int i;
+	int c;
+
+	if (kind != 0) {
+		for (i = 0; i < 0x300; i++) {
+			e = g_slot_table + i * 0x21c;
+			if (*(unsigned short*) e != 0xffff && !(*(int*) (e + 0x1c8) & 0x2000) && e[2] <= 1 &&
+			    (e[0x165] == kind || e[0x165] == 0) && *(int*) (e + 0x16c) == 0 &&
+			    (float) *(unsigned short*) (e + 0xa) >= *(float*) (e + 0x20) && e[0x164] == group) {
+				c = gm_EntityClassCheck(kind);
+				if ((c == 2 || e[9] == c) &&
+				    (*(unsigned short*) (who + 0x27) == 0xffff ||
+				     gm_GetRelationship(*(unsigned short*) (who + 0x27), i) > -30)) {
+					*(int*) (e + 0x1c8) |= 0x2000;
+					return e;
+				}
+			}
+		}
+		return 0;
+	}
+	if (group == 0) {
+		return 0;
+	}
+	c = gm_IsInRange((unsigned char) group);
+	for (i = 0; i < 0x300; i++) {
+		e = g_slot_table + i * 0x21c;
+		if (*(unsigned short*) e != 0xffff && !(*(int*) (e + 0x1c8) & 0x2000) && e[2] <= 1 && e[0x164] == group &&
+		    *(int*) (e + 0x16c) == 0 && (c == 2 || e[9] == c) &&
+		    (*(unsigned short*) (who + 0x27) == 0xffff || gm_GetRelationship(*(unsigned short*) (who + 0x27), i) > -30)) {
+			*(int*) (e + 0x1c8) |= 0x2000;
+			return e;
+		}
+	}
+	return 0;
+}
+
 /* Starts an entity query filtered by type byte from arg1.
  * Dispatches entity iteration across buildings, citizens, or
  * other entity categories based on the type selector. */
