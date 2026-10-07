@@ -4955,9 +4955,11 @@ Two source facts the order depends on, both measured:
   changes the strength-reduced loop. Float constants in `.rdata` are the users' `__real@4` literal pools
   (ahm_ExAllocAlchemist at 0x100256a0..c8, gv_ExAllocGraveyardWorker's 1000/8/4), placed by
   `common-data-order.txt`; `g_download_state` is one struct (`WHOLE` in the generator), and that store order
-  is what fixes `srv_LoadBuf`. Missing sites went from 473 to 2: `ahm_ExAllocAlchemist`'s
-  `g_citizen_count` read (its schedule needs the read to may-alias `slot`) and `gm_InitObjektHersteller`'s
-  `g_minimum_manufacturer` store (naming it changes `gm_Open`'s code).
+  is what fixes `srv_LoadBuf`. Missing sites went from 473 to 0. The last two needed a spelling
+  change besides the name: `ahm_ExAllocAlchemist` writes the slot's 0xffff through `g_slot_table` so
+  the named `g_citizen_count` read can replace the literal, and `gm_InitObjektHersteller` stores
+  `((int*) g_minimum_manufacturer)[ent_idx]` (the `(int) g_minimum_manufacturer + ent_idx * 4` form
+  changes `gm_Open`'s register use).
 - **TU boundaries from the literal pools.** VC6 emits a TU's string literals after its plain `.data`, so
   plain data after another object's literals starts the next TU. On that evidence `g_alchemy_random_table`
   through `g_chain_handler_table` and `gm_GetFieldByType` are command.c's, `plt_TableLookup` with its pair

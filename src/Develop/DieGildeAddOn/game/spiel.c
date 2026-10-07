@@ -680,7 +680,7 @@ void __cdecl gm_InitObjektHersteller(void)
 					mfr_start += (consec * same_count) / run_length;
 					new_val = *(int*) (ent_idx * 4 + (int) g_minimum_manufacturer);
 					if (mfr_start < new_val) {
-						*(int*) (ent_idx * 4 + 0x101dd8e0) = mfr_start;
+						((int*) g_minimum_manufacturer)[ent_idx] = mfr_start;
 					}
 				}
 
