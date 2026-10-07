@@ -20,7 +20,7 @@ repos:
     # container runtime is unavailable.
     -   id: no-library-code
         name: no reversed library code
-        entry: rebrew lib-match --stock-lib LIBCMT.LIB --allow scripts/library_code_allowlist.txt
+        entry: rebrew library match --stock-lib LIBCMT.LIB
         language: system
         pass_filenames: false
         files: '^src/.*\.c$'
