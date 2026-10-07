@@ -5102,13 +5102,14 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   TCP functions sit in the TU whose winsock strings the server keeps; the timer unit had no path evidence,
   and its storage was offsets into the unnamed `g_gap_10035a10`. Without it Rich counts 37 game C objects like
   the reference (three of them are the generated BSS objects).
-- **Game TUs.** 146 function definitions, each placed after the server function that precedes it in the
+- **Game TUs.** 148 function definitions, each placed after the server function that precedes it in the
   client: `aemter.c` (TL 0x4e8a80..0x4ec810) and `server.c` (0x4e73c0..0x4e7c70) office and stat-dump helpers;
   `friedhof_logic.c` slot helpers (0x4f1790..0x4f1890, 0x4f1a10, 0x4f3800, 0x4f3e60); `plant.c` record lookups
   (0x4bcc20, 0x4bcc50); `sim.c` family, age and directory helpers (0x4ff860, 0x4fffb0, 0x500240, 0x500480,
   0x500660); `alchemistry_logic.c` recipe, avatar and trait helpers (0x4ec8a0..0x4ece30, 0x4eceb0,
-  0x4eefe0..0x4ef0d0, 0x4f0eb0, 0x4f0f60, 0x4f0ff0..0x4f1290, 0x4f13a0, 0x4f1450, 0x4f14c0); 74 `spiel.c`
-  definitions (game-clock, query, store and ranking helpers and four building-upgrade counters); and
+  0x4eefe0..0x4ef0d0, 0x4f0eb0, 0x4f0f60, 0x4f0ff0..0x4f1290, 0x4f13a0, 0x4f1450, 0x4f14c0); 76 `spiel.c`
+  definitions (game-clock, query, store and ranking helpers, four building-upgrade counters, and the item and
+  building type lookups by name, TL 0x501490 and 0x504eb0, which call `strcmpi` by its old name); and
   `loadsave.c`'s relationship-matrix loader (0x524610). 0x500660 calls
   `_findfirst`/`_findnext`/`_findclose`, the same `findfile.obj` as `vfs_MakeDirs`. 0x500480's scan cursor
   (TL 0x773d64) is the last dword of the server's unnamed 0x10035410 block, below `g_next_family_index` as in
@@ -5116,12 +5117,11 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   AssignProductionSlot, cm_GetBuildingStatCount, and the spiel functions that are server functions:
   `gm_InitObjektHersteller`, `gm_ObjectsAvailble`, `gm_ff_Objekt`, `gm_SubObjekt`, `gm_SubObjectNoKill`,
   `gm_FindNextFilteredEntity`, `gm_MapEntityStatRange`, `gm_LookupEntityRecordById`, `gm_EntitySetField`);
-  functions calling `_stricmp`, `_strnicmp` or `_strcmpi` (plant's box cache 0x4bd1e0, spiel 0x501490,
-  0x504eb0), because an underscore-name game reference loads those members in the first library pass, ahead
-  of where the reference has them (the old names do not, see 5e); functions whose storage has no server
-  allocation (aemter 0x4e98d0, alchemistry's card deck and player prototype, sim 0x5007f0..0x500a20, most
-  client-only loaders) and functions reaching them (spiel 0x502780, friedhof 0x4f1a40); and TL 0x522e30, the
-  client's `ls_LoadEntities`.
+  plant's box cache 0x4bd1e0, which calls `_stricmp` and `_strnicmp` (an underscore-name game reference loads
+  those members in the first library pass, ahead of where the reference has them; the old names do not, see
+  5e); functions whose storage has no server allocation (aemter 0x4e98d0, alchemistry's card deck and
+  player prototype, sim 0x5007f0..0x500a20, most client-only loaders) and functions reaching them (spiel
+  0x502780, friedhof 0x4f1a40); and TL 0x522e30, the client's `ls_LoadEntities`.
 - **ICF survivor.** LINK folds the identical `_strncnt` COMDATs of `a_cmp.obj` and `a_map.obj`; the reference
   keeps `a_cmp.obj`'s. LINK 6.00.8447 decides it with MSVCRT `qsort`: COMDAT resolution (0x4627e0) appends
   every executable COMDAT it keeps as a definition to one array, in resolution order (command-line objects,
@@ -5161,8 +5161,8 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   | `.data` differing bytes | 0 | 0 | 0 | 0 |
   | hint/name order diffs | 6 (KERNEL32) | 0 | 0 | 0 |
   | IAT slots off the reference | 53 of 100 | 37 of 100 | 0 of 100 | 0 |
-  | Rich game C / LIBCMT C / alias / imports | 36 / 113 / 1 / 109 | 38 / 116 / 1 / 127 | 38 / 120 / 3 / 126 | 37 / 124 / 6 / 126 |
-  | `.reloc` VirtualSize | 51312 | 59928 | 59844 | 66420 |
+  | Rich game C / LIBCMT C / alias / imports | 36 / 113 / 1 / 109 | 38 / 116 / 1 / 127 | 38 / 120 / 4 / 126 | 37 / 124 / 6 / 126 |
+  | `.reloc` VirtualSize | 51312 | 59928 | 59868 | 66420 |
   | whole file | | | 91 header bytes differ, 8192 bytes short | |
 
   Three of the 38 game C objects are the generated BSS objects, and `unzip.c` is one. `rebrew binary relocs`
@@ -5170,9 +5170,9 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   the 91 differing bytes are all in the first 0x400 (Rich records and the PE fields that follow from the
   `.reloc` reservation), and the raw `.reloc` section is 8192 bytes shorter.
 - **Left:**
-  - `.reloc` reservation: 548 input DIR32 records short of 66420 (the timer's 68 left with it).
-  - Rich: 4 LIBCMT C members and 3 alias objects short; one game C object over, with three generated BSS
+  - `.reloc` reservation: 546 input DIR32 records short of 66420 (the timer's 68 left with it).
+  - Rich: 4 LIBCMT C members and 2 alias objects short; one game C object over, with three generated BSS
     objects counted. Client references still unported: the plant box cache (TL 0x4bd1e0: `stricmp`,
-    `strnicmp`), spiel 0x501490 and 0x504eb0 (`strcmpi`) and 0x50bc10 (`itoa`) are no longer ruled out by
-    load order when they use the old names; each needs its storage mapped first. (The TL rows label 0x66080a
-    `__strlwr`; it is `_strupr`, so its many game callers load no new member.)
+    `strnicmp`) and spiel 0x50bc10 (`itoa`) are no longer ruled out by load order when they use the old
+    names; each needs its storage mapped first. (The TL rows label 0x66080a `__strlwr`; it is `_strupr`, so
+    its many game callers load no new member.)
