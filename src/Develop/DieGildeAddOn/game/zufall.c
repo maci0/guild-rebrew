@@ -43,6 +43,15 @@ float __cdecl gm_RandomQuadratic(void)
 	return (rand_val < g_const_0_0 ? g_const_neg_1_0 : 1.0f) * rand_val * rand_val;
 }
 
+/* Returns gm_RandomFloat01() squared. */
+double __cdecl gm_RandomFloat01Squared(void)
+{
+	double v;
+
+	v = gm_RandomFloat01();
+	return v * v;
+}
+
 void __cdecl srv_SeedRandomWithTime(void)
 {
 	srand(timeGetTime());
