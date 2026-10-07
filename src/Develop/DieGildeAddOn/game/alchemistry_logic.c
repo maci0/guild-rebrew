@@ -140,6 +140,136 @@ int __cdecl ahm_CheckFlag(void* a)
 	return 0;
 }
 
+/* Client-only recipe helpers (the Gold T&L client's alchemistry order).  No
+ * server function calls them, so /OPT:REF discards them; their absolute fixups
+ * still count toward LINK's .reloc reservation. */
+
+float __cdecl ahm_GetRecipeQuality(char* entity, int which)
+{
+	if (ahm_CheckFlag(entity)) {
+		if (which == 0) {
+			return (*(unsigned char**) (*(char**) (entity + 0x16c) + 0x65))[8] * (1.0f / 252.0f);
+		}
+		if (which == 1) {
+			return (*(unsigned char**) (*(char**) (entity + 0x16c) + 0x65))[9] * (1.0f / 252.0f);
+		}
+		if (which == 2) {
+			return (*(unsigned char**) (*(char**) (entity + 0x16c) + 0x65))[0xa] * (1.0f / 252.0f);
+		}
+		if (which == 3) {
+			return (*(unsigned char**) (*(char**) (entity + 0x16c) + 0x65))[0xb] * (1.0f / 252.0f);
+		}
+	}
+	return g_const_neg_1_0;
+}
+
+int* __cdecl ahm_FindRecipeSlotImpl(char* entity, int key);
+
+int* __cdecl ahm_FindRecipeSlot(char* entity, int key)
+{
+	return ahm_FindRecipeSlotImpl(entity, key);
+}
+
+int* __cdecl ahm_FindRecipeSlotImpl(char* entity, int key)
+{
+	char* slots;
+	int i;
+
+	if (ahm_CheckFlag(entity)) {
+		slots = *(char**) (*(char**) (entity + 0x16c) + 0x65);
+		for (i = 0; i < 6; i++) {
+			if (*(int*) (slots + 0xc + i * 8) == key) {
+				return (int*) (slots + 0xc + i * 8);
+			}
+		}
+	}
+	return 0;
+}
+
+int __cdecl ahm_HasFreeRecipeSeat(char* entity)
+{
+	int __cdecl amt_CountTownHallSeats(char* entity);
+	int used;
+
+	if (ahm_CheckFlag(entity) == 0) {
+		return 0;
+	}
+	used = amt_CountTownHallSeats(entity);
+	return (int) (ahm_GetRecipeQuality(entity, 2) * 6.0f) > used;
+}
+
+int __cdecl ahm_GetBrewTime(char* entity, char* recipe)
+{
+	int t;
+
+	t = 0x3840 - (int) ((1.0f - *(float*) (recipe + 4)) * -14400.0f);
+	return t - (int) (ahm_GetRecipeQuality(entity, 0) * t * 0.5f);
+}
+
+int __cdecl ahm_GetBrewTimeTenth(char* entity, char* recipe)
+{
+	return (int) (ahm_GetBrewTime(entity, recipe) * 0.1f);
+}
+
+float __cdecl ahm_GetBrewYield(char* entity, int* recipe_key, int* cap)
+{
+	float quality;
+	float* slot;
+	int n;
+	int m;
+
+	quality = ahm_GetRecipeQuality(entity, 2);
+	slot = (float*) ahm_FindRecipeSlot(entity, *recipe_key);
+	if (slot == 0) {
+		return g_const_0_0;
+	}
+	if (!(slot[1] < 1.0f)) {
+		return g_const_0_0;
+	}
+	if (*cap <= 0) {
+		return g_const_0_0;
+	}
+	n = (int) (ahm_GetBrewTime(entity, (char*) recipe_key) * (1.0f - quality * 0.5f) * (1.0f - slot[1]));
+	if (n <= 0) {
+		return g_const_0_0;
+	}
+	m = *cap < n ? *cap : n;
+	*cap = m;
+	return (float) m / n * (1.0f - slot[1]);
+}
+
+float __cdecl ahm_GetQualityShare(char* entity, int which, int* cap)
+{
+	float q;
+	float d;
+	int n;
+	int m;
+
+	q = ahm_GetRecipeQuality(entity, which);
+	if (q < g_const_0_0 || q >= 1.0f) {
+		return g_const_0_0;
+	}
+	d = 1.0f - q;
+	n = (int) (14400.0f * d);
+	m = *cap < n ? *cap : n;
+	*cap = m;
+	return d * ((float) m / n);
+}
+
+float __cdecl ahm_GetRecipeBonus(char* entity, int key)
+{
+	float* slot;
+
+	slot = (float*) ahm_FindRecipeSlotImpl(entity, key);
+	if (!ahm_CheckFlag(entity)) {
+		return 1.0f;
+	}
+	if (slot == 0) {
+		return 1.0f;
+	}
+	return ahm_GetRecipeQuality(entity, 1) * slot[1] + 1.0f;
+}
+
 
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
@@ -642,6 +772,91 @@ found:
 	return (char*) ((unsigned int) g_alchemy_random_table + 4 + off);
 }
 
+/* Client-only avatar-table helpers (discarded; see above).  The 32 0xf4-byte
+ * avatar records (FourCC key, name, state at +0xf2) start four bytes into
+ * g_alchemy_random_table. */
+
+int __cdecl ahm_CountUnusedAvatars(void)
+{
+	int n;
+	unsigned int i;
+
+	n = 0;
+	for (i = 0; i < 32; i++) {
+		if (g_alchemy_random_table[4 + i * 0xf4 + 0xf2] == 0) {
+			n++;
+		}
+	}
+	return n;
+}
+
+unsigned char* __cdecl ahm_FindAvatar(int key)
+{
+	int i;
+
+	for (i = 0; i < 32; i++) {
+		if (*(int*) (g_alchemy_random_table + 4 + i * 0xf4) == key) {
+			return g_alchemy_random_table + 4 + i * 0xf4;
+		}
+	}
+	return 0;
+}
+
+int __cdecl ahm_fio_LoadAvatars(int file)
+{
+	int __cdecl sprintf(char* buffer, const char* format, ...);
+	unsigned char state;
+	char fourcc[5];
+	unsigned int count;
+	int key;
+	char buf[0x100];
+	unsigned int i;
+	unsigned int k;
+
+	if (file == 0) {
+		return 0;
+	}
+	if (!ls_ReadVfsDataChecked(&count, 4, 1, file)) {
+		return 0;
+	}
+	if (count != 32) {
+		sprintf(buf, "Inconsisten Avatar count: <Expected: %i> <Found: %i>", 32, count);
+	}
+	for (k = 0; k < 32; k++) {
+		g_alchemy_random_table[4 + k * 0xf4 + 0xf2] = 0xff;
+	}
+	for (i = 0; i < count; i++) {
+		if (!ls_ReadVfsDataChecked(&key, 4, 1, file)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(&state, 1, 1, file)) {
+			return 0;
+		}
+		for (k = 0; k < 32; k++) {
+			if (*(int*) (g_alchemy_random_table + 4 + k * 0xf4) == key) {
+				g_alchemy_random_table[4 + k * 0xf4 + 0xf2] = state;
+				break;
+			}
+		}
+		if (k == 32) {
+			fourcc[0] = (char) ((unsigned int) key >> 24);
+			fourcc[1] = (char) ((unsigned int) key >> 16);
+			fourcc[2] = (char) ((unsigned int) key >> 8);
+			fourcc[3] = (char) key;
+			fourcc[4] = 0;
+			sprintf(buf, "Avatar >%s< not found in savegame, initializing to >unused<", fourcc);
+		}
+	}
+	for (k = 0; k < 32; k++) {
+		if (g_alchemy_random_table[4 + k * 0xf4 + 0xf2] == 0xff) {
+			sprintf(buf, "Avatar >%s< not found in savegame, initializing to >unused<",
+			    (char*) (g_alchemy_random_table + 4 + k * 0xf4 + 4));
+			g_alchemy_random_table[4 + k * 0xf4 + 0xf2] = 0;
+		}
+	}
+	return 1;
+}
+
 
 int* __cdecl ahm_LookupEntityInTable(int entity_id)
 {
@@ -654,6 +869,159 @@ int* __cdecl ahm_LookupEntityInTable(int entity_id)
 		}
 	}
 	return (int*) 0;
+}
+
+/* Client-only alchemist trait and worker-pick helpers (discarded; see above). */
+
+float __cdecl ahm_CalcTraitBonus(int level, int percent, int count)
+{
+	float step;
+	float sum;
+	int k;
+
+	if (level >= 4) {
+		level = 4;
+	}
+	else if (level <= 0) {
+		level = 0;
+	}
+	k = level + 1;
+	if (percent >= 100) {
+		percent = 100;
+	}
+	else if (percent <= 0) {
+		percent = 0;
+	}
+	if (count >= 3) {
+		count = 3;
+	}
+	else if (count <= 1) {
+		count = 1;
+	}
+	step = k * (percent * 0.25f + 25.0f) * 0.002f + 0.1f;
+	sum = g_const_0_0;
+	while (count-- > 0) {
+		sum += step;
+		step *= 0.5f;
+	}
+	return sum;
+}
+
+void __cdecl ahm_CalcTraitLimits(int level, int* out)
+{
+	float base;
+	int i;
+
+	if (level >= 4) {
+		level = 4;
+	}
+	else if (level <= 0) {
+		level = 0;
+	}
+	out[0] = level;
+	out[1] = level + 2;
+	base = level * 0.25f + 1.0f;
+	for (i = 1; i <= 3; i++) {
+		out[i + 1] = (int) (500.0f * (i * base) * 32.0f);
+		out[i + 4] = (int) (i * base * 700.0f * 32.0f);
+	}
+}
+
+int __cdecl ahm_CountBusyWorkers(char* building)
+{
+	int __cdecl cm_GetBuildingStatCount(unsigned char* building);
+	int n;
+	int c;
+	char* p;
+
+	n = cm_GetBuildingStatCount((unsigned char*) building);
+	c = 0;
+	if (n == 0) {
+		return 0;
+	}
+	p = *(char**) (*(char**) (building + 0x65) + 0x20);
+	for (; n > 0; n--, p += 0x44) {
+		if (*(int*) p != -1) {
+			c++;
+		}
+	}
+	return c;
+}
+
+int __cdecl ahm_PickBestWorker(char* workers, int n)
+{
+	char* best;
+	int best_sum;
+	int sum;
+	int i;
+	int j;
+
+	best = 0;
+	best_sum = 0;
+	for (i = 0; i < n; i++, workers += 0x44) {
+		if (*(int*) workers == -1) {
+			continue;
+		}
+		sum = 0;
+		for (j = 0; j < 5; j++) {
+			sum += (unsigned char) workers[0x24 + j];
+		}
+		if (best == 0 || sum > best_sum) {
+			best = workers;
+			best_sum = sum;
+		}
+	}
+	return best != 0 ? *(int*) best : -1;
+}
+
+int __cdecl ahm_CompareBestWorkers(char* a, int na, char* b, int nb)
+{
+	char* best_a;
+	char* best_b;
+	int sum_a;
+	int sum_b;
+	int sum;
+	int i;
+	int j;
+
+	best_a = best_b = 0;
+	sum_a = sum_b = 0;
+	for (i = 0; i < na; i++, a += 0x44) {
+		if (*(int*) a == -1) {
+			continue;
+		}
+		sum = 0;
+		for (j = 0; j < 5; j++) {
+			sum += (unsigned char) a[0x24 + j];
+		}
+		if (best_a == 0 || sum > sum_a) {
+			best_a = a;
+			sum_a = sum;
+		}
+	}
+	for (i = 0; i < nb; i++, b += 0x44) {
+		if (*(int*) b == -1) {
+			continue;
+		}
+		sum = 0;
+		for (j = 0; j < 5; j++) {
+			sum += (unsigned char) b[0x24 + j];
+		}
+		if (best_b == 0 || sum > sum_b) {
+			best_b = b;
+			sum_b = sum;
+		}
+	}
+	if (best_a == 0) {
+		return best_b != 0 ? 1 : -2;
+	}
+	if (best_b == 0) {
+		return -1;
+	}
+	if (sum_b > sum_a) {
+		return 1;
+	}
+	return (sum_b >= sum_a) - 1;
 }
 
 /* Queries what building type an alchemy entity belongs to.
