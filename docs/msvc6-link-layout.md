@@ -4978,15 +4978,16 @@ Two source facts the order depends on, both measured:
   `a_str` and `GetCPInfo` before `GetStringTypeA` as in the reference: `.data` is byte-identical. The empty
   `chr.obj` alias that aligns `_RtlUnwind@16` is included from `bss_late.c` (generated), which LINK reads after
   LIBCMT's first pass; listed up front it loads `mbschr.obj` early.
-  The imports load in the reference's hint/name order: `scripts/gen_import_includes.py` forces only the 30
+  The imports load in the reference's hint/name order: `scripts/gen_import_includes.py` forces only the 28
   KERNEL32 imports of the first library pass (the game's), then USER32, WS2_32 (reversed) and WINMM; the CRT's
   imports and RtlUnwind follow naturally. Every DLL's hint/name order then equals the reference's except
   `GetLastError` (load index 42 against 37; no loaded member between `toupper.obj` and `realloc.obj`
-  references it). Raw `.rdata` differs in 371 bytes (was 1768).
+  references it). Raw `.rdata` differs in 242 bytes (was 1768).
 - **Left:**
   - IAT slot order. LINK sorts the `.idata$5` contributions (function imports, dropped ones and null thunks,
     in load order) with the runtime's qsort keyed by DLL name; a Python model of the VC6 qsort over that
-    array reproduces our build's KERNEL32 slots. The reference's permutation needs WS2_32's block at
-    KERNEL32 load index 29 and still misses 42 slots under that model, so its array is not yet recovered.
-    The 137 `.text` bytes that differ are all IAT slot operands.
+    array reproduces our build's KERNEL32 slots exactly. For the reference, a hill-climb over the unknown
+    entries (dropped imports after load index 28, the other DLLs as whole blocks) gets within 8 of 81
+    KERNEL32 slots, not to 0, so the original array holds something this build lacks. The 138 `.text`
+    bytes that differ are all IAT slot operands.
   - `.reloc` reservation (above).

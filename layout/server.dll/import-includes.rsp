@@ -26,8 +26,6 @@
 /INCLUDE:__imp__GetPrivateProfileIntA@16
 /INCLUDE:__imp__SetThreadPriority@8
 /INCLUDE:__imp__GetCurrentThread@0
-/INCLUDE:__imp__GetTimeZoneInformation@4
-/INCLUDE:__imp__GetSystemTime@4
 /INCLUDE:__imp__GetWindowTextA@12
 /INCLUDE:__imp__MessageBoxA@16
 /INCLUDE:__imp__closesocket@4
