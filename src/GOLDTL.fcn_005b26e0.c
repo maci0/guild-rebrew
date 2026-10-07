@@ -3,9 +3,7 @@ extern char g_6b5c60[];
 extern unsigned short g_774970;
 extern char g_7f4ca4[];
 // FUNCTION: GOLD 0x005a9260
-// SIZE: 95
 // FUNCTION: GOLDTL 0x5b26e0
-// SIZE: 95
 
 void __cdecl fcn_0051af00(void*, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);

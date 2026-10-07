@@ -47,8 +47,6 @@ int __cdecl cm_ChkCutsceneReady(char*);
  * cutscene-related commands for entity state transitions
  * during in-game cinematics. */
 
-// FUNCTION: GOLDTL 0x406560
-// SIZE: 87
 void* __cdecl fcn_00402aa0(void*);
 void __cdecl fcn_00435500(void*, void*);
 

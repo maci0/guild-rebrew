@@ -8,9 +8,7 @@ struct stat_4b4c60 {
 // SIZE 0xc
 
 // FUNCTION: GOLD 0x004b4af0
-// SIZE: 341
 // FUNCTION: GOLDTL 0x4b4c60
-// SIZE: 341
 
 int __cdecl fcn_004b4c60(int a1, char* a2)
 {

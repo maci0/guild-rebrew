@@ -4,9 +4,7 @@ extern Offer g_6abb08[];
 // GLOBAL: GOLD 0x62c420
 extern Offer g_6abb08[];
 // FUNCTION: GOLD 0x005ba7b0
-// SIZE: 80
 // FUNCTION: GOLDTL 0x5c6220
-// SIZE: 73
 
 char* __cdecl fcn_005c6220(int key, int* out)
 {

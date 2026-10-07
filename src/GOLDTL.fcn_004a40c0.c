@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x4a4680
-// SIZE: 316
 // FUNCTION: GOLDTL 0x4a40c0
-// SIZE: 316
 
 #pragma pack(push, 1)
 typedef struct Recipe {

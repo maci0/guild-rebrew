@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x545aa0
-// SIZE: 422
 
 // SIZE 0xc
 struct slot {

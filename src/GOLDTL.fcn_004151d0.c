@@ -5,7 +5,6 @@ float* __stdcall fcn_005eb970(float*, const float*, const float*);
 void __cdecl fcn_004519d0(float*, float*);
 
 // FUNCTION: GOLDTL 0x4151d0
-// SIZE: 291
 
 /* Samples a model's current animation blend: interpolated position and the
  * combined rotation angles. */

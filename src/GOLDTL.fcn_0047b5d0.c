@@ -10,7 +10,6 @@ void __cdecl fcn_0047ac60(void*, fcn_0047b5d0_list*);
 void __cdecl fcn_0041ddd0(void*);
 
 // FUNCTION: GOLDTL 0x47b5d0
-// SIZE: 69
 
 void __cdecl fcn_0047b5d0(fcn_0047b5d0_list* l)
 {

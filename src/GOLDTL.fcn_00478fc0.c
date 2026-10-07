@@ -31,9 +31,7 @@ void __cdecl fcn_00477500(int, int, int, Spr*);
 void __cdecl fcn_004774f0(int, int, int, Spr*);
 
 // FUNCTION: GOLD 0x47bd60
-// SIZE: 336
 // FUNCTION: GOLDTL 0x00478fc0
-// SIZE: 336
 
 int __cdecl fcn_00478fc0(int x, int y, Surf* s, Spr* spr)
 {

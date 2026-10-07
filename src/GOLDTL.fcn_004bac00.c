@@ -9,9 +9,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 // FUNCTION: GOLD 0x4ba830
-// SIZE: 294
 // FUNCTION: GOLDTL 0x4bac00
-// SIZE: 294
 
 int __cdecl fcn_004bac00(unsigned short* a1, int* a2, float a3)
 {

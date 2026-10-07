@@ -8,9 +8,7 @@ char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
 // FUNCTION: GOLD 0x0040bfc0
-// SIZE: 206
 // FUNCTION: GOLDTL 0x40cee0
-// SIZE: 206
 
 /* PlayCharacterAniSound(): queues a character animation task with a sound;
  * the calling script waits for it when it blocks. */

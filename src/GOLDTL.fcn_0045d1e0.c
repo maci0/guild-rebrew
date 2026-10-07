@@ -26,7 +26,6 @@ extern int g_10405c0;
 Tex* __cdecl fcn_0045c290(int, int);
 
 // FUNCTION: GOLDTL 0x0045d1e0
-// SIZE: 320
 
 Tex* __cdecl fcn_0045d1e0(Tex* src, int color, char recurse)
 {

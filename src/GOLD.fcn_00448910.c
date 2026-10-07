@@ -14,7 +14,6 @@ void __cdecl fcn_0043b920(char* o, float x, float y, float z);
 void __cdecl fcn_0043ca20(char* o);
 
 // FUNCTION: GOLD 0x448910
-// SIZE: 310
 void __cdecl fcn_00448910(void)
 {
 	g_6338c4 = fcn_0043c570(3, s_5fbd8c);

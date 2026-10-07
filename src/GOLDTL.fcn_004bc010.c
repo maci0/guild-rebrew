@@ -11,9 +11,7 @@ extern int g_7728e4;
 extern int g_6b7fac;
 
 // FUNCTION: GOLD 0x004bbb00
-// SIZE: 79
 // FUNCTION: GOLDTL 0x4bc010
-// SIZE: 79
 
 fcn_004bc010_slot* __cdecl fcn_004bc010(void)
 {

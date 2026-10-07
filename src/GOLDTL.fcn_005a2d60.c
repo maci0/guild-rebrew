@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00599b80
-// SIZE: 79
 // FUNCTION: GOLDTL 0x005a2d60
-// SIZE: 79
 
 extern unsigned short g_774970;
 

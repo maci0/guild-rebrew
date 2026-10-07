@@ -10,9 +10,7 @@ void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 // FUNCTION: GOLD 0x4b6480
-// SIZE: 239
 // FUNCTION: GOLDTL 0x004b6650
-// SIZE: 239
 int __cdecl fcn_004b6650(int* a)
 {
 	char buf[0x100];

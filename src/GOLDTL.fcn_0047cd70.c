@@ -19,7 +19,6 @@ void __cdecl fcn_0047cbf0(int x, int y, int tex, void* seq, int frame);
 void __cdecl fcn_0047cba0(int x, int y, int tex, void* seq, int frame);
 
 // FUNCTION: GOLDTL 0x47cd70
-// SIZE: 125
 void __cdecl fcn_0047cd70(int i, int tex)
 {
 	short x;

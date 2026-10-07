@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004f39b0
-// SIZE: 34
 // fcn_004f39b0 — count slots [p]==1 with [p-0xf]==a.
 
 int __cdecl fcn_004f39b0(int a)

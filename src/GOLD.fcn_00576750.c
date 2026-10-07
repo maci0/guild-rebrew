@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00576750
-// SIZE: 32
 // FUNCTION: GOLDTL 0x57ecf0
-// SIZE: 32
 
 // fcn_00576750 — *a in {0x19,0x1b,0x29} ? 0 : 1.
 

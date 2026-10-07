@@ -4,9 +4,7 @@ extern IdGroup g_688118[];
 // GLOBAL: GOLD 0x6094b0
 extern IdGroup g_688118[];
 // FUNCTION: GOLD 0x004c1f90
-// SIZE: 34
 // FUNCTION: GOLDTL 0x4c27f0
-// SIZE: 34
 
 int __cdecl fcn_004c27f0(void)
 {

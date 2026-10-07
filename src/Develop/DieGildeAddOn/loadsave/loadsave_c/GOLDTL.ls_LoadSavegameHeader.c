@@ -22,7 +22,6 @@
  */
 
 // FUNCTION: GOLDTL 0x521eb0
-// SIZE: 1008
 
 #include "../../../Units/Error/error.h"
 #include "../../../Units/m_alloc/m_alloc.h"

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x40ec60
-// SIZE: 52
 
 // fcn_0040dd50 — store floats to globals; fcn_00453890(1); return 1.
 

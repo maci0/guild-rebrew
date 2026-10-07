@@ -14,7 +14,6 @@ typedef struct {
 } fcn_004760c0_obj;
 
 // FUNCTION: GOLDTL 0x4760c0
-// SIZE: 31
 
 int __cdecl fcn_004760c0(fcn_004760c0_obj* o, void* desc)
 {

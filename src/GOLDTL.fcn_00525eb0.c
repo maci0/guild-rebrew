@@ -5,7 +5,6 @@ extern char g_7e2760[];
 // GLOBAL: GOLDTL 0x9ba1c0
 extern char g_9ba1c0[];
 // FUNCTION: GOLDTL 0x525eb0
-// SIZE: 44
 
 #include <string.h>
 

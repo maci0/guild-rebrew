@@ -13,9 +13,7 @@ struct unk_41f7f0 {
 };
 
 // FUNCTION: GOLD 0x423560
-// SIZE: 253
 // FUNCTION: GOLDTL 0x41f7f0
-// SIZE: 253
 
 /* Releases a video's DirectShow interfaces. */
 void __cdecl fcn_0041f7f0(char* v)

@@ -3,9 +3,7 @@ extern char g_869480[0x300][0x300];
 // GLOBAL: GOLD 0x7e5360
 extern char g_869480[0x300][0x300];
 // FUNCTION: GOLD 0x0050c520
-// SIZE: 48
 // FUNCTION: GOLDTL 0x50f950
-// SIZE: 48
 
 int __cdecl fcn_0050f950(int a1, int a2)
 {

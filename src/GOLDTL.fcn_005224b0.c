@@ -1,6 +1,5 @@
 extern unsigned char* g_90e094;
 // FUNCTION: GOLDTL 0x005224b0
-// SIZE: 64
 
 void __cdecl fcn_00510820(char*, char*, int);
 

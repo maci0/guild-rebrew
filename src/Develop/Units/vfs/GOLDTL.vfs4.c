@@ -15,7 +15,6 @@ int __cdecl vfs_FlushAndClose(int);
  * position and returns the byte value, or error on EOF. */
 
 // FUNCTION: GOLDTL 0x430580
-// SIZE: 296
 // CloseVfsStream
 
 

@@ -4,9 +4,7 @@ extern Slot170_7731b8 g_7731b8[8];
 // GLOBAL: GOLD 0x6f1008
 extern Slot170_7731b8 g_7731b8[8];
 // FUNCTION: GOLD 0x004eedd0
-// SIZE: 48
 // FUNCTION: GOLDTL 0x4f0c90
-// SIZE: 48
 
 int __cdecl fcn_004f0c90(int a1)
 {

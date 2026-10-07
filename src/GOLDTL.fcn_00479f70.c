@@ -7,7 +7,6 @@ extern char s_67daa0[];
 char* __cdecl fcn_0041db70(int size, const char* tag);
 
 // FUNCTION: GOLDTL 0x479f70
-// SIZE: 117
 char* __cdecl fcn_00479f70(const char* name)
 {
 	FILE* f;

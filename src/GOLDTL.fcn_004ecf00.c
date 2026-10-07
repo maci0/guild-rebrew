@@ -5,7 +5,6 @@ char* __cdecl fcn_005462a0(void);
 #define MAXV(a, b) ((a) > (b) ? (a) : (b))
 
 // FUNCTION: GOLDTL 0x004ecf00
-// SIZE: 652
 
 /* Finds the first linked object of kind 4, 149, 150 or 151 and reports its
  * progress fraction (clamped to [0, 1]) and, for some kinds, its owner. */

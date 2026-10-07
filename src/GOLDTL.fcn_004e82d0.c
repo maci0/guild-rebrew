@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004e6710
-// SIZE: 133
 // FUNCTION: GOLDTL 0x4e82d0
-// SIZE: 133
 
 typedef struct {
 	unsigned char c0;

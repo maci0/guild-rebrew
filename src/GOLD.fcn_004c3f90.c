@@ -4,9 +4,7 @@ extern unsigned short g_774970;
 // GLOBAL: GOLD 0x6f25b8
 extern unsigned short g_774970;
 // FUNCTION: GOLD 0x004c3f90
-// SIZE: 50
 // FUNCTION: GOLDTL 0x4c4900
-// SIZE: 50
 
 int __cdecl fcn_004c5790(int, void*);
 

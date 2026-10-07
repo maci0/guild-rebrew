@@ -24,9 +24,7 @@ void __cdecl fcn_00426680(int lex, struct tok_428d50* t);
 int __cdecl fcn_00428800(int a);
 
 // FUNCTION: GOLD 0x0042a480
-// SIZE: 404
 // FUNCTION: GOLDTL 0x428d50
-// SIZE: 404
 
 /* Parses an assignment, increment or decrement on a script variable. */
 int __cdecl fcn_00428d50(struct var_428d50* v)

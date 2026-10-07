@@ -1,7 +1,6 @@
 extern float g_6628a8;
 
 // FUNCTION: GOLDTL 0x4356c0
-// SIZE: 69
 char* __cdecl fcn_004356c0(char* a)
 {
 	float best;

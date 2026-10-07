@@ -43,7 +43,6 @@ extern char* g_1015ea0;
 void __cdecl fcn_0046b2b0(int slot);
 
 // FUNCTION: GOLDTL 0x46f2c0
-// SIZE: 201
 int __cdecl fcn_0046f2c0(int win, int keep)
 {
 	int i;

@@ -125,9 +125,7 @@ extern char g_85ab90[];
 // GLOBAL: GOLD 0x7d6a70
 extern char g_85ab90[];
 // FUNCTION: GOLD 0x004ffc40
-// SIZE: 80
 // FUNCTION: GOLDTL 0x5027d0
-// SIZE: 80
 // gm_FindSlotById
 
 

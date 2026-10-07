@@ -22,7 +22,6 @@ extern Page_1038144 g_1038144[];
 extern int g_772534;
 
 // FUNCTION: GOLDTL 0x472510
-// SIZE: 289
 void __cdecl fcn_00472510(int idx, int slot, int a3, int a4, int a5, int a6)
 {
 	fcn_00472510_Win* w;

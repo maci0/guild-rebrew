@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004a8ad0
-// SIZE: 285
 // FUNCTION: GOLDTL 0x4a8bf0
-// SIZE: 285
 
 typedef struct Ent {
 	char pad0[4];

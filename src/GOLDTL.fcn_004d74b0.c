@@ -28,7 +28,6 @@ void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_004e6240(char*, char*, char*, char*);
 
 // FUNCTION: GOLDTL 0x004d74b0
-// SIZE: 801
 // Sends the two parties of a transfer (+0x34, +0x38) their message pair,
 // chosen by the flag byte at +0x7c (1, 2 or 4). With flag 1 set, every
 // listed record (+0x100, -1 = none) must exist and hold a positive total.

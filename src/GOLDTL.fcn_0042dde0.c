@@ -35,9 +35,7 @@ extern g_662318_f g_662318;
 // GLOBAL: GOLD 0x5eb284
 extern g_662318_f g_662318;
 // FUNCTION: GOLD 0x0042e8c0
-// SIZE: 119
 // FUNCTION: GOLDTL 0x42dde0
-// SIZE: 119
 
 void __stdcall fcn_0042dcd0(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
 void __cdecl fcn_0064d3eb(unsigned int);

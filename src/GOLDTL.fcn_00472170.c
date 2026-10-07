@@ -40,7 +40,6 @@ extern char* g_1015ea0;
 extern Win_1015f40 g_1015f40[0x60];
 
 // FUNCTION: GOLDTL 0x472170
-// SIZE: 111
 void __cdecl fcn_00472170(int slot, int flag)
 {
 	Slot* s;

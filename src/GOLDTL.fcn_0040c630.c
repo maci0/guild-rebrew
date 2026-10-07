@@ -6,7 +6,6 @@ extern int g_6b7fac;
  * clock reaches the stored base plus the tick count divided by 14.
  * A count of -1 waits forever. The first entry records the clock. */
 // FUNCTION: GOLDTL 0x40c630
-// SIZE: 130
 
 int __cdecl fcn_0040c630(int* ticks)
 {

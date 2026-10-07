@@ -12,9 +12,7 @@ struct slot_5595e0 {
 };
 
 // FUNCTION: GOLD 0x00551510
-// SIZE: 126
 // FUNCTION: GOLDTL 0x5595e0
-// SIZE: 126
 
 void __cdecl fcn_005595e0(char* o)
 {

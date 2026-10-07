@@ -6,9 +6,7 @@ int __cdecl gm_CheckEntityType(unsigned char* geb);
 int __cdecl fcn_00505340(unsigned char* geb);
 
 // FUNCTION: GOLD 0x501f60
-// SIZE: 181
 // FUNCTION: GOLDTL 0x00504db0
-// SIZE: 181
 unsigned char* __cdecl fcn_00504db0(unsigned char* self, int kind)
 {
 	float best;

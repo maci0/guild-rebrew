@@ -10,7 +10,6 @@ typedef struct {
 // SIZE 0x1c
 
 // FUNCTION: GOLDTL 0x47b9a0
-// SIZE: 65
 
 void __cdecl fcn_0047b9a0(fcn_0047b9a0_vertex* v, unsigned char r, unsigned char g, unsigned char b)
 {

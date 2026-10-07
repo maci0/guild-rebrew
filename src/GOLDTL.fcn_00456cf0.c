@@ -14,7 +14,6 @@ void __cdecl fcn_00456560(void);
 void __cdecl gv_Free3Fields(int* slot);
 
 // FUNCTION: GOLDTL 0x456cf0
-// SIZE: 95
 void __cdecl fcn_00456cf0(void)
 {
 	int a;

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005e4cd0
-// SIZE: 374
 
 extern int g_772514;
 extern char* g_1015ea0;

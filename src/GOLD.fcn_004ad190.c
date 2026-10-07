@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004ad190
-// SIZE: 32
 // fcn_004ad190 — if((unsigned)[0x6f0720]<3) return [0x5edb78 + h*4]; return 0.
 
 int __cdecl fcn_004ad190(void)

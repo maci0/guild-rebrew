@@ -81,3 +81,7 @@ build-*/
 # FLIRT signature packs (vendored, re-downloadable via rebrew flirt --fetch)
 /flirt_sigs/
 references/dxsdk8/
+
+# rebrew link response files and config lock (ephemeral)
+rebrew-rsp-*/
+rebrew-project.toml.lock

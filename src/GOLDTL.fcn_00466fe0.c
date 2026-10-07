@@ -28,7 +28,6 @@ extern char* g_14a5320[];
 int __cdecl fcn_0046b520(char* s, int font);
 
 // FUNCTION: GOLDTL 0x466fe0
-// SIZE: 280
 void __cdecl fcn_00466fe0(int fld, int str)
 {
 	fcn_00466fe0_Fld* f;

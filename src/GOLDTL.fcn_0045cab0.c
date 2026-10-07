@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x45cab0
-// SIZE: 82
 void __cdecl fcn_0045cab0(unsigned char* a, unsigned char* o1, unsigned char* o2)
 {
 	if (a != 0 && o1 != 0 && o2 != 0) {

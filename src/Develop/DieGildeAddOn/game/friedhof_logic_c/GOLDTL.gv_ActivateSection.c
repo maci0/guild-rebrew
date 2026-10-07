@@ -3,9 +3,7 @@
 extern char g_7f4ca0[];
 extern char g_7f4ca0[];
 // FUNCTION: GOLD 0x4f0af0
-// SIZE: 304
 // FUNCTION: GOLDTL 0x4f2c00
-// SIZE: 304
 
 
 #include "rebrew_types.h"

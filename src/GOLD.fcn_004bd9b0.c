@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004bd9b0
-// SIZE: 45
 // FUNCTION: GOLDTL 0x4be250
-// SIZE: 45
 
 // fcn_004bd9b0 — unlink a from 0x38/0x3c chain; free; return 1.
 

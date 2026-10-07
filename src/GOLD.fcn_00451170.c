@@ -1,7 +1,6 @@
 /* GOLD twin of GOLDTL fcn_0044fba0: the count field sits at 0x1e0, not 0x1e4. */
 
 // FUNCTION: GOLD 0x451170
-// SIZE: 203
 
 #include <string.h>
 

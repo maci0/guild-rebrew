@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004be930
-// SIZE: 16
 
 void __cdecl fcn_004be930(char* obj)
 {

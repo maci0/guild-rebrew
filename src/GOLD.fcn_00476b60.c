@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00476b60
-// SIZE: 23
 // fcn_00476b60 — [0xf8a668]=-1; fcn_00410620(); [0x1468410]=0.
 
 void __cdecl fcn_00410620(void);

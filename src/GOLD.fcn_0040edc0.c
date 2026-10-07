@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0040edc0
-// SIZE: 80
 // fcn_0040edc0 — if(fcn_004225e0(*a)){ fcn_00455750(*a); return 0; } log(0x5f2908); return 0.
 
 int __cdecl fcn_004225e0(int);

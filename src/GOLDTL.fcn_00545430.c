@@ -5,9 +5,7 @@ extern ApEvent g_7dcae0[256];
 extern Rec7dc6e0 g_7dc6e0[64];
 
 // FUNCTION: GOLDTL 0x545430
-// SIZE: 221
 // FUNCTION: GOLD 0x0053d710
-// SIZE: 224
 
 #include <string.h>
 

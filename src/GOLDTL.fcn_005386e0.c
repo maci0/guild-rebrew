@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005386e0
-// SIZE: 32
 
 __declspec(dllimport) int __stdcall SystemParametersInfoA(unsigned int, unsigned int, void*, unsigned int);
 

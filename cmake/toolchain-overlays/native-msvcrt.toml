@@ -1,0 +1,11 @@
+# Native runtime for the server's LINK step; its CL profile remains plain SP5.
+# Recipe and download pins: ../rebrew-toolchains/sources.json.
+["msvc-6.0-sp5-crt"]
+image = "rebrew/msvc:6.0-sp5-crt-win32"
+image_entrypoint = "/usr/local/bin/cl"
+binary = "cl"
+runtime = "wine"
+flags_style = "msvc"
+obj_ext = ".obj"
+tool_root = "/opt/msvc6.0-sp5-crt/VC98/Bin"
+description = "Stock MSVC 6.0 SP5 tools with Microsoft MSVCRT 6.0.8797"

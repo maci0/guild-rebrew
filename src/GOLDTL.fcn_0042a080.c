@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x42b720
-// SIZE: 48
 // FUNCTION: GOLDTL 0x42a080
-// SIZE: 48
 
 extern int g_6b7f90;
 void __cdecl fcn_005eaad0(void);

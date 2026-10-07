@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005316a0
-// SIZE: 31
 // fcn_005316a0 — call [0x5eb25c]([0x6f2588]); call [0x5eb218](0x624944, [0x75e140]).
 
 int (__stdcall* f1_5eb25c)(int);

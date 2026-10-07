@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005de62f
-// SIZE: 56
 // fcn_005de62f — init 7 function-pointer globals.
 
 void __cdecl fcn_005de62f(void)

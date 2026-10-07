@@ -8,15 +8,10 @@ extern double g_6640e8;
 extern double g_6640e8;
 extern unsigned char g_773d75;
 // FUNCTION: GOLDTL 0x4b6f00
-// SIZE: 216
 // FUNCTION: GOLDTL 0x4b6ce0
-// SIZE: 216
 // FUNCTION: GOLD 0x4b6d30
-// SIZE: 216
 // FUNCTION: GOLD 0x4b6b10
-// SIZE: 216
 // FUNCTION: GOLD 0x4b6ef0
-// SIZE: 216
 
 #include <string.h>
 

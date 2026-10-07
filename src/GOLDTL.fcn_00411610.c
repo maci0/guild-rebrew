@@ -1,7 +1,5 @@
 // FUNCTION: GOLDTL 0x00411610
-// SIZE: 176
 // FUNCTION: GOLD 0x00410560
-// SIZE: 176
 
 extern unsigned short g_14cf300[];
 

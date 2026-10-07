@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00511840
-// SIZE: 37
 // fcn_00511840 — if([a+0x220] in {3,4,1,0}) a[0x213] |= 4.
 
 void __cdecl fcn_00511840(char* a)

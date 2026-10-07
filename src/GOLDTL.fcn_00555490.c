@@ -8,9 +8,7 @@ struct ent_555490 {
 };
 
 // FUNCTION: GOLD 0x54d430
-// SIZE: 128
 // FUNCTION: GOLDTL 0x555490
-// SIZE: 115
 
 int __cdecl fcn_00555490(char* o, struct ent_555490* tab, int* out)
 {

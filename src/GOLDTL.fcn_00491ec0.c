@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004928f0
-// SIZE: 312
 // FUNCTION: GOLDTL 0x491ec0
-// SIZE: 312
 
 int __cdecl fcn_00507b00(int job);
 float __cdecl fcn_00507f10(char* e, int k);

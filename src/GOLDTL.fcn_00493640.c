@@ -25,9 +25,7 @@ float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl fcn_0042e410(int n);
 
 // FUNCTION: GOLD 0x494010
-// SIZE: 400
 // FUNCTION: GOLDTL 0x00493640
-// SIZE: 400
 int __cdecl fcn_00493640(Plan* p)
 {
 	unsigned int n;

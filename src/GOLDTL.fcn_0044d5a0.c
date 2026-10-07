@@ -10,9 +10,7 @@ int __cdecl fcn_0064eeec(const char* s);
 void* __cdecl fcn_0041db70(int size, char* tag);
 
 // FUNCTION: GOLD 0x0044ece0
-// SIZE: 77
 // FUNCTION: GOLDTL 0x44d5a0
-// SIZE: 77
 void __cdecl fcn_0044d5a0(int unused, char* s)
 {
 	int n;

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4c7310
-// SIZE: 22
 
 int __cdecl amt_ValidateOfficeCandidate(char*);
 

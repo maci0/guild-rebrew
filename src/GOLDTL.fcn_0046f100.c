@@ -17,7 +17,6 @@ extern char* g_1015ea0;
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
 
 // FUNCTION: GOLDTL 0x46f100
-// SIZE: 377
 int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win)
 {
 	fcn_0046f100_Win* w;

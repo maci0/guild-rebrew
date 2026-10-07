@@ -4,7 +4,6 @@ extern char g_1042d00[];
 int __cdecl fcn_0065f2f0(const char* a, const char* b, int n);
 
 // FUNCTION: GOLDTL 0x449b60
-// SIZE: 60
 char* __cdecl fcn_00449b60(const char* name)
 {
 	char* p;

@@ -15,9 +15,7 @@ extern char g_6816dc[];
 fcn_004be1f0_node* __cdecl fcn_0041db70(int, char*);
 
 // FUNCTION: GOLDTL 0x4be1f0
-// SIZE: 81
 // FUNCTION: GOLD 0x004bd950
-// SIZE: 96
 
 fcn_004be1f0_node* __cdecl fcn_004be1f0(fcn_004be1f0_node* head)
 {

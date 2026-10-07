@@ -9,9 +9,7 @@ extern char* g_1007cd4;
 int __cdecl fcn_004a7880(int owner);
 
 // FUNCTION: GOLD 0x004a8520
-// SIZE: 110
 // FUNCTION: GOLDTL 0x4a8640
-// SIZE: 110
 void __cdecl fcn_004a8640(void)
 {
 	int j;

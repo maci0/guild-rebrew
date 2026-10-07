@@ -7,9 +7,7 @@ extern int g_100af80[];
 // GLOBAL: GOLD 0xf86900
 extern int g_100af80[];
 // FUNCTION: GOLD 0x00495790
-// SIZE: 39
 // FUNCTION: GOLDTL 0x495150
-// SIZE: 39
 
 int __cdecl fcn_00495150(int a1)
 {

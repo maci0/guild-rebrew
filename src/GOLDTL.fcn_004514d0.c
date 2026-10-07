@@ -11,9 +11,7 @@ extern char g_6628c8[];
 // GLOBAL: GOLD 0x5eb7a8
 extern char g_6628c8[];
 // FUNCTION: GOLD 0x00453b30
-// SIZE: 38
 // FUNCTION: GOLDTL 0x4514d0
-// SIZE: 38
 float __cdecl fcn_004514d0(int a1, int a2)
 {
 	float value;

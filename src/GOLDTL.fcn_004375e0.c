@@ -6,7 +6,6 @@ void __cdecl fcn_00411520(int, const char*, char*);
 void __cdecl fcn_00411340(int);
 
 // FUNCTION: GOLDTL 0x4375e0
-// SIZE: 301
 
 /* Writes the Direct3D display options to the registry. */
 void __cdecl fcn_004375e0(unsigned char flags, int fill, const char* key)

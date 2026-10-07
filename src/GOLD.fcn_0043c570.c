@@ -8,7 +8,6 @@ void __cdecl fcn_0043ce60(char* o);
 void __cdecl fcn_005de8c0(char* dst, char* src, int n);
 
 // FUNCTION: GOLD 0x43c570
-// SIZE: 252
 char* __cdecl fcn_0043c570(int kind, char* name)
 {
 	char* o;

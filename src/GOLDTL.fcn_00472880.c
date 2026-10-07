@@ -23,7 +23,6 @@ extern int g_1015ea4;
 char* __cdecl fcn_00466190(int idx);
 
 // FUNCTION: GOLDTL 0x472880
-// SIZE: 115
 char* __cdecl fcn_00472880(int idx)
 {
 	if (((VfsEntry*)g_772500)[idx].kind != 7) {

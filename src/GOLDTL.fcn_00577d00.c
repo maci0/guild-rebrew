@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x56f890
-// SIZE: 320
 // FUNCTION: GOLDTL 0x00577d00
-// SIZE: 308
 
 #include <math.h>
 #pragma intrinsic(sqrt)

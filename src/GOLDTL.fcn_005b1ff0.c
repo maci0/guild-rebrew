@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x005a8b70
-// SIZE: 347
 // FUNCTION: GOLDTL 0x005b1ff0
-// SIZE: 347
 
 #include "g_774a78.h"
 

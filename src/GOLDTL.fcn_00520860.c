@@ -2,9 +2,7 @@ extern char g_869480[0x300][0x300];
 extern char g_90e0a0[0x300][0x300];
 
 // FUNCTION: GOLD 0x51b8c0
-// SIZE: 128
 // FUNCTION: GOLDTL 0x520860
-// SIZE: 124
 
 unsigned int __cdecl fcn_00430910(void*, int, int, int);
 

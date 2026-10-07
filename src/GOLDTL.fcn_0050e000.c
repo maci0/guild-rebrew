@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0050ab80
-// SIZE: 368
 // FUNCTION: GOLDTL 0x0050e000
-// SIZE: 368
 
 /* The T&L build of fcn_0050e000 (SERVER 0x10019d30): a missing entity
  * returns 0 without the LogMessageInternal call. */

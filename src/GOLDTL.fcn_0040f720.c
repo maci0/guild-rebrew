@@ -6,7 +6,6 @@ extern int g_6b5cc0;
 void __cdecl fcn_00414d20(int, int, int, int, int, int, int, int);
 
 // FUNCTION: GOLDTL 0x40f720
-// SIZE: 158
 
 /* Script command: forwards its seven arguments to fcn_00414d20, the first
  * divided by 14; while the script is suspended it re-arms itself. */

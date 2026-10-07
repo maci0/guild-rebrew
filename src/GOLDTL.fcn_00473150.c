@@ -4,7 +4,6 @@ void __cdecl fcn_0047ce50(void* p);
 void __cdecl fcn_0041ddd0(void* p);
 
 // FUNCTION: GOLDTL 0x473150
-// SIZE: 62
 void __cdecl fcn_00473150(char* p)
 {
 	int i;

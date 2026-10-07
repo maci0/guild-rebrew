@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x473660
-// SIZE: 23
 
 // fcn_00476b60 — [0x100f1dc]=-1; fcn_00410620(); [0x14cf950]=0.
 

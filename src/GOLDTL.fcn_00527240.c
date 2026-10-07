@@ -10,7 +10,6 @@ extern int g_6a25a0;
 extern int g_6a25a4;
 
 // FUNCTION: GOLDTL 0x527240
-// SIZE: 148
 
 int __cdecl fcn_00527240(int x)
 {

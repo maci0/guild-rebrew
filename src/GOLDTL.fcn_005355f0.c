@@ -5,9 +5,7 @@ extern int g_6a2bfc;
 // GLOBAL: GOLDTL 0x6a2c00
 extern int g_6a2c00;
 // FUNCTION: GOLD 0x0052fac0
-// SIZE: 50
 // FUNCTION: GOLDTL 0x5355f0
-// SIZE: 50
 
 void __cdecl fcn_00471e30(int);
 

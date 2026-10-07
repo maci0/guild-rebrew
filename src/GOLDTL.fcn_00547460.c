@@ -37,7 +37,6 @@ struct s_7f4ca0 {
 extern char g_7f4ca0[];
 
 // FUNCTION: GOLDTL 0x547460
-// SIZE: 141
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_005463a0(int, int, int, ...);

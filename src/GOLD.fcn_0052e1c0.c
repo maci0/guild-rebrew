@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0052e1c0
-// SIZE: 34
 // fcn_0052e1c0 — for p stride 0xc8: if(*p) *(*p + 0x224)=0; *p=0;.
 
 void __cdecl fcn_0052e1c0(void)

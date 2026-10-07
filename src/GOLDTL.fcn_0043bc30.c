@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x43bc30
-// SIZE: 189
 
 // SIZE 0x1
 typedef struct State {

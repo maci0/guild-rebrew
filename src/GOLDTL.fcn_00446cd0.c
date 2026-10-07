@@ -36,7 +36,6 @@ void __cdecl fcn_00401210(void* s, int v);
 void __cdecl CloseVfsStream(void* s);
 
 // FUNCTION: GOLDTL 0x446cd0
-// SIZE: 283
 void __cdecl fcn_00446cd0(char* name, void* stream)
 {
 	void* s;

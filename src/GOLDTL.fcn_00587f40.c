@@ -1,9 +1,7 @@
 // GLOBAL: GOLDTL 0x662d40
 extern float g_662d40[3];
 // FUNCTION: GOLD 0x0057f890
-// SIZE: 73
 // FUNCTION: GOLDTL 0x587f40
-// SIZE: 73
 
 void __cdecl fcn_00455140(int, void*, void*);
 

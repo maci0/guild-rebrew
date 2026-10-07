@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005dea0b
-// SIZE: 45
 // fcn_005dea0b — call [0x62de78] if set; 2 fcn_005deaf3 pairs.
 
 void __cdecl fcn_005deaf3(void*, void*);
@@ -14,7 +13,6 @@ void __cdecl fcn_005dea0b(void)
 }
 
 // FUNCTION: GOLDTL 0x64e63d
-// SIZE: 45
 #include <windows.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"

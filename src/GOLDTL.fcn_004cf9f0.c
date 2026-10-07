@@ -1,7 +1,6 @@
 #include <string.h>
 
 // FUNCTION: GOLDTL 0x4cf9f0
-// SIZE: 11
 
 int __cdecl fcn_004cf9f0(char* p)
 {
@@ -28,9 +27,7 @@ void __cdecl fcn_00442c00(char*, int);
 void __cdecl fcn_00533a40(char*);
 
 // FUNCTION: GOLD 0x004d3390
-// SIZE: 447
 // FUNCTION: GOLDTL 0x004d4790
-// SIZE: 447
 
 int __cdecl fcn_004d4790(char* e)
 {
@@ -72,9 +69,7 @@ extern unsigned short* g_772e9c;
 char __cdecl fcn_00442d50(int, unsigned char);
 
 // FUNCTION: GOLD 0x004d3ae0
-// SIZE: 65
 // FUNCTION: GOLDTL 0x004d4ee0
-// SIZE: 65
 
 void __cdecl fcn_004d4ee0(char* e)
 {

@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0046c250
-// SIZE: 45
 // fcn_0046c250 — set word at base + a*0x2ec + 0x14; call fcn_0046c1c0(a). (b=param4)
 
 int __cdecl fcn_0046c1c0(int);

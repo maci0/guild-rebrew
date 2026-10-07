@@ -1,9 +1,7 @@
 void __cdecl fcn_00455540(void*, float*, float*);
 
 // FUNCTION: GOLD 0x00404c80
-// SIZE: 248
 // FUNCTION: GOLDTL 0x4055a0
-// SIZE: 248
 
 /* Returns the camera offset and rotation for one of the four character
  * views, relative to the character's node. */

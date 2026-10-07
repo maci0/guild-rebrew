@@ -15,9 +15,7 @@ void __cdecl fcn_004f4830(int a, Stat* st);
 int __cdecl fcn_00507b00(int job);
 
 // FUNCTION: GOLD 0x491550
-// SIZE: 144
 // FUNCTION: GOLDTL 0x490b20
-// SIZE: 129
 int __cdecl fcn_00490b20(Ent* e, int a2, int* out)
 {
 	Stat st;

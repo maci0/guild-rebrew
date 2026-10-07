@@ -4,7 +4,6 @@ extern int g_100f804;
 extern int g_67d8d4;
 extern Slot100f200 g_100f200[];
 // FUNCTION: GOLDTL 0x475290
-// SIZE: 80
 
 int __cdecl fcn_00475290(int a, int b, int c, int d, int e)
 {

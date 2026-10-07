@@ -3,7 +3,7 @@
 #
 # The object-level scores are proxies, and round 173 caught them pointing the
 # wrong way four times (two of them the coordinator's): a change that raises
-# `matched` or `aligned` in probe_function.py can still grow the composed
+# `matched` or `aligned` in `rebrew diagnose probe` can still grow the composed
 # image's residue, because the residue is a *positional* byte compare over the
 # whole .text and a size change in one object moves everything after it.  So a
 # candidate is only ever kept after this cycle.
@@ -17,7 +17,7 @@
 # residue table against .scratch/residue_base.log.
 #
 # Re-snapshot the baseline with:
-#   .venv/bin/python scripts/postlink_residual.py --write build/server.dll > .scratch/residue_base.log
+#   .venv/bin/rebrew build residue build/server.dll --new-baseline .scratch/residue_base.json
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
@@ -54,12 +54,12 @@ fi
 # The check lives in rebrew (round 1055 moved it there from a project script), so
 # it is available in every rebrew project.  Refuse to measure a drifted tree.
 if [ -f build/CMakeFiles/server_dll.dir/flags.make ]; then
-    if ! drift=$(rebrew build-check 2>&1); then
+    if ! drift=$(rebrew build check 2>&1); then
         echo "$drift" >&2
         echo "  build.make has been hand-edited, so this script would measure a" >&2
         echo "  build the tree cannot reproduce.  Restore with:" >&2
         echo "    rm -rf build && cmake -B build -S . \\" >&2
-        echo "      --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake \\" >&2
+        echo "      --toolchain cmake/toolchain-msvc-6.0-sp5-docker.cmake \\" >&2
         echo "      -DCMAKE_BUILD_TYPE=Release -DREBREW_DEBUG_INFO=OFF" >&2
         exit 4
     fi
@@ -70,7 +70,7 @@ for f in "$@"; do
     # build.make writes its targets relative to the build directory
     rule="CMakeFiles/server_dll.dir/$rel.obj"
     line=$(grep -A4 "$rule:" build/CMakeFiles/server_dll.dir/build.make \
-           | grep rebrew-cmake-cl | grep -v /FAs | head -1)
+           | grep 'build driver cl' | grep -v /FAs | head -1)
     if [ -z "$line" ]; then
         echo "no compile rule for $rel -- is the tree configured?" >&2
         exit 1
@@ -78,7 +78,7 @@ for f in "$@"; do
     # Compile the live file.  A frozen copy under a dot-prefixed name was tried
     # to defeat the agents' sample-write sweeps and it collapses the composition
     # (`exactly at their reference VA: 0`, residue x12) -- something downstream
-    # in split_link.sh/pad_short_functions.py keys off the object's source path.
+    # in split_link.sh keys off the object's source path.
     # The race is handled socially instead: a file is only measured after its
     # agent says "file frozen".
     cmd=$(echo "$line" \
@@ -108,7 +108,7 @@ if [ -n "$stale" ]; then
     echo "$stale" | sed 's/^/           /' >&2
 fi
 
-# Attribution guard.  postlink_residual attributes differing bytes by reference
+# Attribution guard.  `rebrew build residue` attributes differing bytes by reference
 # VA, and every symbol after a changed object moves, so a per-function delta is
 # attribution ONLY when no other object changed.  Round 179 committed a "-58"
 # that re-measured at "+56" for exactly this reason: another agent's source had
@@ -161,13 +161,12 @@ if [ -n "$placed" ] && [ "$placed" -lt 100 ]; then
     exit 1
 fi
 
-.venv/bin/python -u scripts/postlink_residual.py --write build/server.dll \
-    > .scratch/linktest-residue.log 2>&1
-grep -E "^\.text differing" .scratch/linktest-residue.log
-
 if [ "$NEW_BASE" = 1 ]; then
-    cp .scratch/linktest-residue.log "$BASE"
+    .venv/bin/rebrew build residue build/server.dll --new-baseline "$BASE" \
+        > .scratch/linktest-residue.log 2>&1
     echo "baseline replaced ($BASE)"
 else
-    .venv/bin/python scripts/residue_diff.py "$BASE" .scratch/linktest-residue.log
+    .venv/bin/rebrew build residue build/server.dll --baseline "$BASE" \
+        > .scratch/linktest-residue.log 2>&1
 fi
+grep -E "^\.text differing" .scratch/linktest-residue.log

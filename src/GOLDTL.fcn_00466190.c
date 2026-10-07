@@ -19,9 +19,7 @@ extern int g_772568;
 void __cdecl fcn_004659c0(int idx, int arg);
 
 // FUNCTION: GOLD 0x004690a0
-// SIZE: 204
 // FUNCTION: GOLDTL 0x466190
-// SIZE: 204
 void* __cdecl fcn_00466190(int idx)
 {
 	int j;

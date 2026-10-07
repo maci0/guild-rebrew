@@ -10,7 +10,6 @@ typedef struct Node {
 // SIZE 0x218
 
 // FUNCTION: GOLDTL 0x439ba0
-// SIZE: 87
 void __cdecl fcn_00439ba0(Node* a, Node* b)
 {
 	Node* p;

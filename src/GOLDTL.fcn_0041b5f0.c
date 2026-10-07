@@ -14,7 +14,6 @@ extern char g_6b5df0[];
 void __cdecl fcn_0041d9e0(const char* msg);
 
 // FUNCTION: GOLDTL 0x41b5f0
-// SIZE: 269
 
 /* dd_Line: queues a screen-space line as two vertices. */
 void __cdecl fcn_0041b5f0(int x1, int y1, int x2, int y2, int color)

@@ -20,7 +20,6 @@ extern Pal_1041d20 g_1041d20[6];
 extern char g_1041d80[];
 
 // FUNCTION: GOLDTL 0x00445e40
-// SIZE: 127
 
 void __cdecl fcn_00445e40(int idx)
 {

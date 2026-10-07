@@ -14,7 +14,6 @@ void __cdecl fcn_00472900(void*, int);
 void __cdecl fcn_0046f740(int, int, int, int);
 
 // FUNCTION: GOLDTL 0x4da510
-// SIZE: 374
 
 /* The positional GOLD twin 0x4d8cb0 is NOT the same build: its first 0xcf bytes
  * match, then the a3 branches drop the reference's `movsx eax,dx` truncation

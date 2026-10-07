@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004799d0
-// SIZE: 369
 
 typedef struct Surf004799d0 {
 	char pad0[0x10];

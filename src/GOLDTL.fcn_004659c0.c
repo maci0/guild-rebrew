@@ -29,7 +29,6 @@ char* __cdecl fcn_0047acf0(char* p);
 void __cdecl fcn_0041ddd0(char* p);
 
 // FUNCTION: GOLDTL 0x4659c0
-// SIZE: 470
 int __cdecl fcn_004659c0(int idx, char* path)
 {
 	int i;

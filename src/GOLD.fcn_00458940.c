@@ -2,7 +2,6 @@
  * (GOLDTL: 0x214, bit 0x20). */
 
 // FUNCTION: GOLD 0x458940
-// SIZE: 196
 
 // SIZE 0xc
 typedef struct Vec3 {

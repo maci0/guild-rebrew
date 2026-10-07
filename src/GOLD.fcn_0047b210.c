@@ -23,7 +23,6 @@ Img0047b210* __cdecl fcn_0047a450(int, int, int, int, int, int, short);
 Img0047b210* __cdecl fcn_0047ab20(int, int, int, int, int, int, short);
 
 // FUNCTION: GOLD 0x0047b210
-// SIZE: 295
 
 Img0047b210* __cdecl fcn_0047b210(int a1, int a2, int a3, int a4, Surf0047b210* s, int mode, char alpha)
 {

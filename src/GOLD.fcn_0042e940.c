@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0042e940
-// SIZE: 41
 // fcn_0042e940 — init callback globals + call [0x5eb274].
 
 int (__stdcall* f1_5eb288)(int);

@@ -3,7 +3,6 @@
 extern char* g_1015ea0;
 
 // FUNCTION: GOLDTL 0x468c30
-// SIZE: 145
 void __cdecl fcn_00468c30(int slot, int n, char* out)
 {
 	char buf[0x400];

@@ -3,11 +3,8 @@
  * directory, and installs per-level log file handles. */
 
 // FUNCTION: GOLD 0x004220b0
-// SIZE: 404
 // FUNCTION: GOLDTL 0x41d6b0
-// SIZE: 404
 // InitializeLogAndErrorHandler
-// SIZE: 404
 
 #include <windows.h>
 #include "rebrew_types.h"

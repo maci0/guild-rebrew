@@ -2,9 +2,7 @@ int __cdecl fcn_00479330(char*);
 int __cdecl fcn_00479110(char*);
 
 // FUNCTION: GOLD 0x0047c3c0
-// SIZE: 52
 // FUNCTION: GOLDTL 0x479620
-// SIZE: 52
 
 int __cdecl fcn_00479620(char* p, int mode)
 {

@@ -11,9 +11,7 @@ extern int g_774a14;
 // GLOBAL: GOLD 0x6f265c
 extern int g_774a14;
 // FUNCTION: GOLD 0x00576680
-// SIZE: 73
 // FUNCTION: GOLDTL 0x57ec20
-// SIZE: 73
 
 int __cdecl fcn_0057ec20(int a1)
 {

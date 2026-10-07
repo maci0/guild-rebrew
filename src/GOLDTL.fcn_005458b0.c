@@ -13,7 +13,6 @@ extern s_77e8c0 g_77e8c0[16];
 extern s_1015f4c g_1015f4c[];
 
 // FUNCTION: GOLDTL 0x5458b0
-// SIZE: 115
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_004727a0(int, int);

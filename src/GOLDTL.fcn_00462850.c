@@ -15,7 +15,6 @@ void __cdecl fcn_00462760(char*);
 void __cdecl fcn_004626a0(char*, char*);
 
 // FUNCTION: GOLDTL 0x00462850
-// SIZE: 417
 
 int __cdecl fcn_00462850(int argc, char* argv[])
 {

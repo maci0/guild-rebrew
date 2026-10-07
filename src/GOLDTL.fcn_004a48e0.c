@@ -12,7 +12,6 @@ void __cdecl fcn_00455350(char* src, char* pos, float* out);
 float __cdecl gm_RandomFloat01(void);
 
 // FUNCTION: GOLDTL 0x4a48e0
-// SIZE: 718
 
 /* Picks one entity of the list the key resolves to: the one nearest (with a
  * random weight) to the owner's or the player's reference entity, else a

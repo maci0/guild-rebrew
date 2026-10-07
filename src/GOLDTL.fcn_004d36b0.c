@@ -3,7 +3,6 @@
 int __cdecl fcn_0064f170(int, int, int);
 
 // FUNCTION: GOLDTL 0x4d36b0
-// SIZE: 47
 char __cdecl fcn_004d36b0(int a1)
 {
 	int index;

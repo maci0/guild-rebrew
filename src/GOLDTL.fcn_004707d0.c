@@ -4,7 +4,6 @@ extern Obj_1038140 g_1038140[];
 void __cdecl fcn_0046f540(int id);
 
 // FUNCTION: GOLDTL 0x4707d0
-// SIZE: 72
 void __cdecl fcn_004707d0(int k)
 {
 	int j;

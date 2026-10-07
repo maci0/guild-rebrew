@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0053f100
-// SIZE: 31
 // fcn_0053f100 — for each 0xa4-strided byte: if(--*p==0) *(p-4)=0.
 
 void __cdecl fcn_0053f100(void)

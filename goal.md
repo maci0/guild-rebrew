@@ -15,7 +15,7 @@ This file is the durable copy: if the session goal state is ever lost, re-create
 - **Exploit the GOLD ↔ GOLDTL code overlap.** Both are clients of the same game
   engine: a large share of functions is byte-identical between the two, only at
   different VAs. Every function matched in one client should be transferred to
-  the other via `rebrew cross-import --from <src> --target <dst>` (structural
+  the other via `rebrew source import-related --from <src> --target <dst>` (structural
   match, no recompile), so the shared source file (one marker per target) covers
   both. Never reverse the same function twice in both clients.
 - GOLD remains onboarded and verified, but after the shared-tree buildout it is a
@@ -73,24 +73,28 @@ session end.
   (prior conversion cost ~0x3a84 of `.text` shortfall — recover it with real
   C, not asm).
 - **Never reverse ZLIB or LIBCMT.** Both link in as stock libraries. Before
-  touching any function, run `rebrew lib-match --stock-lib LIBCMT.LIB
+  touching any function, run `rebrew library match --stock-lib LIBCMT.LIB
   --va 0x<VA>`. Anything matching is library code — skip it.
-- **Never patch a `.lib`.** On unwanted library pull-in, displace with a
-  local symbol definition or remove the reference (see `CMakeLists.txt`
-  `_CRT_REGION_KEEP` pattern).
+- **Do not patch a third-party `.lib`.** This covers Microsoft's statically
+  linked CRT (`LIBCMT`) and every other archive the project did not write. A
+  copy with member bytes changed is still a patch. The one exception is clear
+  evidence that the original game authors shipped the same edit. A byte match
+  that only a patched member can produce is not that evidence. On unwanted
+  library pull-in, displace with a local symbol definition or remove the
+  reference (see `CMakeLists.txt` `_CRT_REGION_KEEP` pattern).
 - **`REBREW_DEBUG_INFO=OFF`** for every link check (`/debug` grows `.rdata`
   and breaks postlink layout).
 
 ## Toolchain (always use it)
 
 - `rebrew todo --json` — pick highest-ROI item first.
-- `rebrew lib-match` — library check before reversing (see above).
+- `rebrew library match` — library check before reversing (see above).
 - `rebrew skeleton 0x<VA>` — new function skeletons.
 - `rebrew test <file> --json` / `rebrew test --all --json` — compile + compare.
-- `rebrew diff <file> --json` — byte diff; `rebrew match` / GA only after
+- `rebrew diff <file> --json` — byte diff; `rebrew match run` / GA only after
   the test/diff loop stalls.
 - `rebrew verify --json` / `--full` — bulk check; `rebrew lint --json` —
-  annotation validity; `rebrew data --json` — globals inventory.
+  annotation validity; `rebrew data list --json` — globals inventory.
 - Judge candidates with `scripts/linktest.sh <file.c`, not object scores:
   positional `match_count` and structural `aligned` routinely disagree with
   the link (one hoist: aligned 662 → 665, match 1004 → 947, link +42 worse).
@@ -134,7 +138,7 @@ session end.
 - Globals `g_` prefix, unknown = `g_<hex>`. Strings stay
   `s_<content>_<addr>`. Structs `UPPER_CASE`. Constants
   `prefix_UPPER_SNAKE` (`ob_`, `cmdt_`, `GM_`, `HE_SIM_`).
-- Rename only via `rebrew rename`. Keeps cross-references.
+- Rename only via `rebrew source rename`. Keeps cross-references.
 - Evidence hierarchy: `"<name>(): "` log prefix plus confirmed push of
   the literal is strongest. RevEng attribution alone untrusted (wrong
   twice). `__FILE__` strings reveal module. No attested string means
@@ -223,8 +227,8 @@ returning to reversing. Never work around a toolchain bug in game source.
 Byte match rots fast. Run checks constantly, not just before commits:
 
 - `rebrew lint --json` after every annotation edit. It validates the
-  `// FUNCTION:` identity header and the marker/VA contract. Zero warnings
-  is the only acceptable state; fix new lint hits before testing further.
+  `MODULE.0xVA` row that binds the body. Zero warnings is the only
+  acceptable state; fix new lint hits before testing further.
 - `rebrew test <file> --json` after every source edit; `rebrew test --all
   --json` after any shared-header or cross-TU change, since one header edit
   can demote unrelated functions.
@@ -254,3 +258,18 @@ Byte match rots fast. Run checks constantly, not just before commits:
   game-logic files, gates green on all.
 - Docs current: shapes, allocator, codegen-walls, measure-traps,
   naming, general-knowledge, TODO.
+
+
+## Live handoff
+
+Current working state lives in `.scratch/HANDOFF.md` (gitignored). Update both files each round.
+
+- 2026-10-06: 8 server rows rebound from GOLDTL.cm_* twin files to cm_*.c; verify back to 316/316. Detail in .scratch/HANDOFF.md.
+
+- 2026-10-06 (later): server TUs consolidated to one file per original TU; raw link places every game and compiled-library function at its reference VA. Details: .scratch/HANDOFF.md, docs/naming_conventions.md.
+- 2026-10-06: Error.c inline-literal pilot negative (literals leave plain .data as COMDATs), reverted; see .scratch/HANDOFF.md round 9.
+- 2026-10-06 (round 9b): CRT locale stubs removed (real members linked), rdata_fold.c removed, text equal outside relocs, WS2 thunk order exact, Error.c pool in blob; open: BSS, spiel literals, IAT WS2. See .scratch/HANDOFF.md.
+- 2026-10-06 (round 10): BSS generated in reference order (.data VS equal, 0 displaced), Error.c/spiel literals restored, upstream data placement verdicts; open: IAT RtlUnwind slots, hint/name order, WS2 thunks, lconv bss, .reloc. See .scratch/HANDOFF.md.
+- 2026-10-06 (round 11): absolute data addresses symbolized and dispatch tables name their handlers (missing relocs 473 -> 168, all .text), lint clean, committed on feat/tu-structure-layout (e60fad4b). See .scratch/HANDOFF.md.
+- 2026-10-06 (round 12): missing base relocs 138 -> 2 (loop ends named, float literal pools, download_state struct), CRT inittime/nlsdata3/txtmode load order (.text diff 65, .data 9), .reloc reservation model confirmed. See .scratch/HANDOFF.md.
+- 2026-10-06 (round 13): TU boundaries from literal pools: command data + gm_GetFieldByType into command.c, plant_pairs.c split, aemter/alchemistry/plant/broadcast/vfs strings inlined as literals, winsock strings -> Units/net/net_errors.c (file-name link order). Layout unchanged, verify 316/316. Upstream: rebrew source rehome.

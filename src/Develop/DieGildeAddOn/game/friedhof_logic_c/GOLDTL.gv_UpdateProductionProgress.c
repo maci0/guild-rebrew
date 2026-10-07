@@ -2,7 +2,6 @@
  * building's production time, clamped to [0, 0xff]. */
 
 // FUNCTION: GOLDTL 0x4f2d90
-// SIZE: 240
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"

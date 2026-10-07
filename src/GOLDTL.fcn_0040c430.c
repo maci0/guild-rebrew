@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x40c430
-// SIZE: 32
 
 int __cdecl rand(void);
 

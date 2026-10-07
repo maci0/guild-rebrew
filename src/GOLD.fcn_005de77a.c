@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005de77a
-// SIZE: 10
 
 extern int g_0062e108; /* 0x0062e108 */
 

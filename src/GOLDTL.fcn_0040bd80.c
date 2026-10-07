@@ -3,9 +3,7 @@ extern int g_6b7fac;
 // GLOBAL: GOLD 0x6333cc
 extern int g_6b7fac;
 // FUNCTION: GOLD 0x0040af50
-// SIZE: 58
 // FUNCTION: GOLDTL 0x40bd80
-// SIZE: 58
 
 void __cdecl fcn_004050c0(void*);
 

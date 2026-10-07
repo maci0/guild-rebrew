@@ -26,8 +26,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-// FUNCTION: GOLDTL 0x40fcd0
-// SIZE: 65
 void* __cdecl fcn_0041dd90(int);
 int __cdecl fcn_00452420(int);
 int __cdecl fcn_00425bf0(void*, int, char*);

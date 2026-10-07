@@ -16,7 +16,6 @@ struct slot_4d4640 {
 // SIZE 0x2c
 
 // FUNCTION: GOLDTL 0x4d4640
-// SIZE: 190
 
 void __cdecl fcn_004d4640(char* a1)
 {

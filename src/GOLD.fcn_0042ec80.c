@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0042ec80
-// SIZE: 14
 
 /* Chains the IAT double-reader (0x005eb284) into the RELOC LCG setter.
  * First call goes through the IAT slot: declare via function pointer. */

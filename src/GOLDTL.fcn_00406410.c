@@ -1,3 +1,4 @@
+// SIZE 0x76
 struct anim_406410 {
 	char pad0[0x6c];
 	char started;
@@ -19,7 +20,6 @@ void __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_004050c0(char* ev);
 
 // FUNCTION: GOLDTL 0x406410
-// SIZE: 248
 void __cdecl fcn_00406410(char* ev)
 {
 	char* obj;

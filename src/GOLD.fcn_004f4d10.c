@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004f4d10
-// SIZE: 23
 // FUNCTION: GOLDTL 0x4f7100
-// SIZE: 23
 
 // fcn_004f4d10 — for(i=0;i<0x300;i++) fcn_004f4970(i).
 

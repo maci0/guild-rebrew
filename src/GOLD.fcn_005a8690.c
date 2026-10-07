@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005a8690
-// SIZE: 32
 // fcn_005a8690 — find node [n]==a in 0x48 chain, return n+0xc or 0.
 
 int __cdecl fcn_005a8690(int a)

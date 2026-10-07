@@ -13,9 +13,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 
 // FUNCTION: GOLD 0x004b82c0
-// SIZE: 493
 // FUNCTION: GOLDTL 0x4b8670
-// SIZE: 493
 
 int __cdecl fcn_004b8670(int* a1)
 {

@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x005000c0
-// SIZE: 125
 // FUNCTION: GOLDTL 0x00502f00
-// SIZE: 125
 
 #pragma pack(push, 1)
 typedef struct LinkedNode

@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x576990
-// SIZE: 256
 // FUNCTION: GOLDTL 0x57ef30
-// SIZE: 247
 
 // SIZE 0x10
 struct fsm {

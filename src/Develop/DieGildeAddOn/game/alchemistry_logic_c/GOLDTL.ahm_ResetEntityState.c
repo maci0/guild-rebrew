@@ -16,7 +16,6 @@
  * carries GOLDTL here. */
 
 // FUNCTION: GOLDTL 0x4ec850
-// SIZE: 80
 int __cdecl ahm_CheckFlag(void* a)
 {
 	char* rec;

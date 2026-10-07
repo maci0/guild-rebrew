@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x58fef0
-// SIZE: 157
 // FUNCTION: GOLDTL 0x005987c0
-// SIZE: 157
 
 double __cdecl sqrt(double);
 #pragma intrinsic(sqrt)

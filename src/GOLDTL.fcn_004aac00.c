@@ -11,9 +11,7 @@ void __cdecl fcn_004c6ae0(int id, int k);
 void __cdecl fcn_004c4ef0(char* s);
 
 // FUNCTION: GOLD 0x4aaae0
-// SIZE: 162
 // FUNCTION: GOLDTL 0x4aac00
-// SIZE: 162
 int __cdecl fcn_004aac00(char* a1, int a2, char* x)
 {
 	char msg[0xf8];

@@ -40,9 +40,7 @@ struct static_tree_desc_s {
 // SIZE 0x14
 
 // FUNCTION: GOLD 0x466670
-// SIZE: 528
 // FUNCTION: GOLDTL 0x463290
-// SIZE: 528
 void __cdecl fcn_00463290(deflate_state* s, tree_desc* desc)
 {
 	ct_data* tree = desc->dyn_tree;

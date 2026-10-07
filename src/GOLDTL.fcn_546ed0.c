@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x546ed0
-// SIZE: 31
 
 // fcn_0053f100 — for each 0xa4-strided byte: if(--*p==0) *(p-4)=0.
 

@@ -27,7 +27,6 @@ float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl fcn_0042e410(int n);
 
 // FUNCTION: GOLDTL 0x004a0020
-// SIZE: 675
 int __cdecl fcn_004a0020(fcn_004a0020_Ent* e)
 {
 	float sum;

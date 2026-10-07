@@ -18,7 +18,6 @@ int __cdecl fcn_0050b810(int a, char b);
 int __cdecl fcn_0050dac0(unsigned short);
 
 // FUNCTION: GOLDTL 0x4ab910
-// SIZE: 512
 int __cdecl fcn_004ab910(int a1, unsigned short* a2, int a3, char* a4)
 {
 	int lim;

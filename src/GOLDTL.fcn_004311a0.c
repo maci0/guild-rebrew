@@ -12,9 +12,7 @@ void __cdecl fcn_00438cb0(char* node, float* v);
 #define FRAMES_4311A0(an) (*(struct frame_4311a0**) (*(char**) ((an) + 0x68) + 0x15c))
 
 // FUNCTION: GOLD 0x4315c0
-// SIZE: 390
 // FUNCTION: GOLDTL 0x4311a0
-// SIZE: 390
 void __cdecl fcn_004311a0(char* node, char* an, int from, int to, int flags)
 {
 	float d[4];

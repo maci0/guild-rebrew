@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00482f20
-// SIZE: 715
 // 0x100dc20 is one 0xb00-byte block (owner, light count at +0x18, lights at
 // +0x300); declaring it as one struct makes the light copy reload the count
 // after each store, as the reference does.

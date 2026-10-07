@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00551a20
-// SIZE: 510
 
 #pragma pack(push, 1)
 typedef struct

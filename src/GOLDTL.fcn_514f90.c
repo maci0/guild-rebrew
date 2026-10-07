@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x514f90
-// SIZE: 37
 
 // fcn_00511840 — if([a+0x220] in {3,4,1,0}) a[0x213] |= 4.
 

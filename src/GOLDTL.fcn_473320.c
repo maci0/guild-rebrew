@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x473320
-// SIZE: 52
 
 // fcn_00472a50 — table: if(n && *(int*)n&8) { fcn_00476850(n); *p=0; } else if(n) *(int*)n|=4.
 

@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00596140
-// SIZE: 28
 // fcn_00596140 — repeat fcn_005309d0 until non-zero.
 
 int __cdecl fcn_0052e1c0(void);

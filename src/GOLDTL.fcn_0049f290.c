@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0049f290
-// SIZE: 812
 
 #pragma pack(1)
 typedef struct Rec {

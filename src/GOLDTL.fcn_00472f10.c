@@ -18,7 +18,6 @@ void __cdecl fcn_0047cba0(int x, int y, int surf, int src, int mode);
 void __cdecl fcn_00476060(int surf);
 
 // FUNCTION: GOLDTL 0x472f10
-// SIZE: 142
 void __cdecl fcn_00472f10(int x, int y, int id)
 {
 	fcn_00472f10_Win* w;

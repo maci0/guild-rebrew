@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x476b10
-// SIZE: 349
 
 typedef struct Surf {
 	char pad0[0x10];

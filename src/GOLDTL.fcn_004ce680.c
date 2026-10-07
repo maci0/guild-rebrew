@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004cdac0
-// SIZE: 87
 // FUNCTION: GOLDTL 0x4ce680
-// SIZE: 87
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);

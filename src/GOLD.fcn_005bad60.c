@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005bad60
-// SIZE: 508
 
 #include "client_types.h"
 typedef Btn_776c60 Btn;

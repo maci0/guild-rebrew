@@ -8,7 +8,6 @@ int __cdecl fcn_0050dac0(unsigned short id);
 int __cdecl fcn_0050b710(int a, unsigned char b);
 
 // FUNCTION: GOLDTL 0x493dc0
-// SIZE: 134
 int __cdecl fcn_00493dc0(unsigned short* a, unsigned short* b)
 {
 	int x;

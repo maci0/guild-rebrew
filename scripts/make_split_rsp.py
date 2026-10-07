@@ -34,6 +34,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 #: the hand-reversed LIBCMT bodies the split objects replace
 DROP = (
+    "Develop/DieGildeAddOn/game/game_float_constants.c.obj",
+    "crt_region/locale_time_strings.c.obj", "crt_region/locale_time_table.c.obj",
     "crt_region/initterm.c.obj", "crt_region/dllmain.c.obj",
     "crt_region/mlock.c.obj", "crt_region/sbh_pool.c.obj",
     "crt_region/sbh_aliases.c.obj", "crt_region/crt_heap.c.obj",
@@ -142,7 +144,7 @@ def main() -> int:
             head.append(t)
         elif t.endswith("/data_globals.c.obj"):
             data.append(t)
-        elif t.endswith("/rdata_restore.c.obj") or t.endswith("/data_restore.c.obj"):
+        elif t.endswith("/readonly_strings.c.obj") or t.endswith("/data_restore.c.obj"):
             # Both restore blobs reproduce reference section content that the
             # game objects' own contributions sit in front of, so they belong
             # after the CMake objects and before the split ones -- not in

@@ -17,7 +17,6 @@ unsigned int __cdecl fcn_00401000(void* buf, unsigned int n);
 int __cdecl fcn_0045cb10(int idx, int frame);
 
 // FUNCTION: GOLDTL 0x45cbe0
-// SIZE: 260
 char __cdecl fcn_0045cbe0(char* o, unsigned int t)
 {
 	char* m;

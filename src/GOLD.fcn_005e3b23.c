@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005e3b23
-// SIZE: 45
 // fcn_005e3b23 — set 2 bytes from PE header of module.
 
 void* __stdcall f_5eb120(int);

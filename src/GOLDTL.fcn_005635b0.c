@@ -62,7 +62,6 @@ void __cdecl fcn_00500bb0(Stamp_5635b0*, int, int, int);
 void __cdecl fcn_00546190(Order_5635b0*);
 
 // FUNCTION: GOLDTL 0x5635b0
-// SIZE: 669
 
 /* Order step: from the third try on, sends message 0x6e with a chance
  * scaled by the order's value, then re-arms the order. */

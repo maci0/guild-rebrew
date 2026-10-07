@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0055d770
-// SIZE: 822
 // Transport event step: on the first call starts the transport (flag
 // +0xd0); afterwards, once the carrier arrived (within 100 units of +0xd8)
 // or +0xd4 ran past 6, files the arrival message and schedules the next

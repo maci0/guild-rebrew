@@ -51,7 +51,10 @@
 
 #include "deflate.h"
 
-const char deflate_copyright[] =
+/* Shared writable version string, preceding the static version pointer. */
+char g_zlib_version[] = ZLIB_VERSION;
+
+__declspec(selectany) const char deflate_copyright[] =
    " deflate 1.1.3 Copyright 1995-1998 Jean-loup Gailly ";
 /*
   If you use the zlib library in a product, an acknowledgment is welcome
@@ -123,7 +126,7 @@ typedef struct config_s {
    compress_func func;
 } config;
 
-local const config configuration_table[10] = {
+__declspec(selectany) const config configuration_table[10] = {
 /*      good lazy nice chain */
 /* 0 */ {0,    0,  0,    0, deflate_stored},  /* store only */
 /* 1 */ {4,    4,  8,    4, deflate_fast}, /* maximum speed, no lazy matches */
@@ -216,11 +219,7 @@ int ZEXPORT deflateInit2_(strm, level, method, windowBits, memLevel, strategy,
 {
     deflate_state *s;
     int noheader = 0;
-    /* Named bytes first, then the pointer, in one 12-byte run. A pointer
-     * initialized from the macro emits the pointer section before the
-     * literal, which is the opposite of the reference. */
-    static char my_version_str[8] = {'1', '.', '1', '.', '3', 0, 0, 0};
-    static const char* my_version = my_version_str;
+    static const char* my_version = g_zlib_version;
 
     ushf *overlay;
     /* We overlay pending_buf and d_buf+l_buf. This works since the average

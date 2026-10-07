@@ -105,10 +105,17 @@ def build_object(thunks: list[tuple[str, bytes, int]]) -> bytes:
     symtab += aux
     index = 2                                       # entries used so far
     entry_of = []
-    for _off, sym in relocs:
-        for name, section in (("__imp_" + sym, 0), (sym, 1)):
+    for off, sym in relocs:
+        for name, section, value in (("__imp_" + sym, 0, 0), (sym, 1, off)):
             entry_of.append((name, section, index))
-            symtab += name_bytes(name) + struct.pack("<IhHBB", 0, section, 0x20, 2, 0)
+            # The Value field is the symbol's offset IN ITS SECTION.  It was
+            # hardcoded to 0, so every thunk symbol claimed offset 0 and the
+            # linker could only place one of them -- the map showed
+            # `_sendto@24` and `_closesocket@4` BOTH at 0x1001a160, and two of
+            # the seven socket stubs ended up at the end of .text instead of in
+            # the reference's block.  Undefined symbols (`__imp_`, section 0)
+            # keep 0; defined ones take their real offset.
+            symtab += name_bytes(name) + struct.pack("<IhHBB", value, section, 0x20, 2, 0)
             index += 1
 
     blob = bytes(body) + b"".join(

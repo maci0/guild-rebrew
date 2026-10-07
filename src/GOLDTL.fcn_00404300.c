@@ -6,9 +6,7 @@ int __cdecl fcn_0065f220(const char*, const char*);
 char* __cdecl fcn_0044c620(char*, char*, int);
 
 // FUNCTION: GOLD 0x00403b00
-// SIZE: 262
 // FUNCTION: GOLDTL 0x404300
-// SIZE: 262
 
 /* Loads a character's motion into its motion slot and takes a reference. */
 char* __cdecl fcn_00404300(char* obj, char* name, char slot)

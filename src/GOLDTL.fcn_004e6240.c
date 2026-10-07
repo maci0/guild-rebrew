@@ -7,9 +7,7 @@ char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_004c5580(char*, int, char*);
 
 // FUNCTION: GOLD 0x004e48b0
-// SIZE: 405
 // FUNCTION: GOLDTL 0x4e6240
-// SIZE: 405
 
 void __cdecl fcn_004e6240(int* a1, char* a2, char* text, char* extra)
 {

@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x463100
-// SIZE: 556
 
 /* GOLD twin of gzread (vfs_c/gzread.c): GOLD's CRT keeps errno in a plain
  * global, where GOLDTL and the server call _errno(). */

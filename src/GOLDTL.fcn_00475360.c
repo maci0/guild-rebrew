@@ -19,7 +19,6 @@ typedef struct BmpInfo {
 extern char s_6750e8[];
 
 // FUNCTION: GOLDTL 0x475360
-// SIZE: 132
 int __cdecl fcn_00475360(const char* name)
 {
 	BmpInfo bi;

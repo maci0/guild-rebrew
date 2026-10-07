@@ -12,7 +12,6 @@ extern char* g_1015ea0;
 int __cdecl fcn_004722c0(char* sub);
 
 // FUNCTION: GOLDTL 0x472380
-// SIZE: 389
 void __cdecl fcn_00472380(int id, int a2, int a3, int a4, int a5)
 {
 	fcn_00472380_Ent* e;

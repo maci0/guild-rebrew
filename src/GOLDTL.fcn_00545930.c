@@ -1,8 +1,6 @@
 extern int g_77e8a0;
 // FUNCTION: GOLD 0x0053dc10
-// SIZE: 51
 // FUNCTION: GOLDTL 0x00545930
-// SIZE: 51
 
 typedef struct {
 	int a;

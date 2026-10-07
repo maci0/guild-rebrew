@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00474190
-// SIZE: 66
 
 #include "gold_gui.h"
 

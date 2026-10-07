@@ -21,9 +21,7 @@ struct msg {
 };
 
 // FUNCTION: GOLD 0x00573ff0
-// SIZE: 245
 // FUNCTION: GOLDTL 0x57c530
-// SIZE: 245
 
 #include <string.h>
 

@@ -18,7 +18,6 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 // FUNCTION: GOLDTL 0x4dc230
-// SIZE: 354
 
 int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* a4)
 {

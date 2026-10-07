@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x44d550
-// SIZE: 37
 // Each zero store follows its own add; writing both adds first lets msvc6
 // drop the esi temporary the reference keeps.
 

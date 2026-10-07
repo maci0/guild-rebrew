@@ -14,7 +14,6 @@ int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 
 // FUNCTION: GOLDTL 0x40f3d0
-// SIZE: 36
 
 int __cdecl fcn_0064d470(int, int);
 int __cdecl fcn_00413120(int);

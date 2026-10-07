@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00402090
-// SIZE: 393
 
 extern char g_67515c[];
 char __cdecl fcn_00401590(const char* name, int* width, int* height, int* bpp);

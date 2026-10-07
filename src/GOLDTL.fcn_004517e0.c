@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x453e10
-// SIZE: 83
 // FUNCTION: GOLDTL 0x4517e0
-// SIZE: 83
 // Hermite blend. The parentheses around the first two terms keep c2 from
 // evaluating the third product first.
 

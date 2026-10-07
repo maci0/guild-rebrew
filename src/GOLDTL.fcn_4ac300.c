@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4ac300
-// SIZE: 32
 
 // fcn_004ac1e0 — if((unsigned short)a < 0x33) return 0x664480 + (a&0xffff)*0x30; return 0.
 

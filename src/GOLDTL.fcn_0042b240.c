@@ -1,7 +1,6 @@
 extern int* g_6b7ed0[16];
 extern int* g_6b7f10[16];
 // FUNCTION: GOLDTL 0x42b240
-// SIZE: 59
 
 int __cdecl fcn_0042b240(int id)
 {

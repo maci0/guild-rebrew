@@ -5,7 +5,6 @@ int __cdecl fcn_00468cf0(int x, int y, int a3, int a4);
 void __cdecl fcn_00465eb0(int r, int i);
 
 // FUNCTION: GOLDTL 0x468df0
-// SIZE: 76
 int __cdecl fcn_00468df0(int a1, int a2, int a3, int a4, int i)
 {
 	int r;

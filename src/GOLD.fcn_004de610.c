@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004de610
-// SIZE: 37
 // fcn_004de610 — out = [0x92bcc0 + ([0x6f0db0] % [0x60d350])*4] % a; [0x6f0db0]++; return out.
 
 int __cdecl fcn_004de610(int a)

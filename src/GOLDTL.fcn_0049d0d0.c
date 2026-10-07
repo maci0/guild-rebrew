@@ -14,9 +14,7 @@ typedef struct Msg {
 int __cdecl fcn_004aa240(int a1, int a2, int a3, Msg* a, Msg* b);
 
 // FUNCTION: GOLD 0x0049d690
-// SIZE: 136
 // FUNCTION: GOLDTL 0x49d0d0
-// SIZE: 136
 int __cdecl fcn_0049d0d0(int a1, int a2, int k, Msg* out1, Msg* out2)
 {
 	Msg a;

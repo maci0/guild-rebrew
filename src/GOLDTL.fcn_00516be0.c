@@ -11,7 +11,6 @@ extern float g_67bc1c;
 extern float g_67bc20;
 
 // FUNCTION: GOLDTL 0x516be0
-// SIZE: 111
 
 void __cdecl fcn_00516be0(void)
 {

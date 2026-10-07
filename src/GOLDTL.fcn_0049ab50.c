@@ -29,9 +29,7 @@ void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
 
 // FUNCTION: GOLD 0x0049b110
-// SIZE: 396
 // FUNCTION: GOLDTL 0x0049ab50
-// SIZE: 396
 int __cdecl fcn_0049ab50(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Counts cnt;

@@ -12,9 +12,7 @@ unsigned short __cdecl fcn_0042e410(int n);
 int __cdecl fcn_004a5340(char* e, int n, int* lim, float a4, float r, unsigned short* ids);
 
 // FUNCTION: GOLD 0x004a95d0
-// SIZE: 144
 // FUNCTION: GOLDTL 0x4a96f0
-// SIZE: 144
 int __cdecl fcn_004a96f0(int a1, char* e, int a3, int a4, char* out)
 {
 	int lim;

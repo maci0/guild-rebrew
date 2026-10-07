@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004bdac0
-// SIZE: 30
 // fcn_004bdac0 — if([0x602a70]!=-1) fcn_0046c5f0(h); [0x602a70]=-1.
 
 int __cdecl fcn_0046c5f0(int);

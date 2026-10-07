@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x469610
-// SIZE: 24
 
 // fcn_0046c690 — table entry at 0x102cbc8 + arg*140.
 

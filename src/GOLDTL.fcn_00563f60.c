@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00563f60
-// SIZE: 592
 
 // SIZE 0x7c
 typedef struct Req {

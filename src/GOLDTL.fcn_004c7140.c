@@ -3,9 +3,7 @@ int __cdecl fcn_005015e0(char**, char**, char**, int);
 char* __cdecl fcn_00508e40(int);
 
 // FUNCTION: GOLD 0x4c65b0
-// SIZE: 272
 // FUNCTION: GOLDTL 0x4c7140
-// SIZE: 265
 
 int __cdecl fcn_004c7140(unsigned char* a1)
 {

@@ -2,7 +2,6 @@ extern int g_67a370;
 extern int g_6b8300;
 
 // FUNCTION: GOLDTL 0x514f10
-// SIZE: 120
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);

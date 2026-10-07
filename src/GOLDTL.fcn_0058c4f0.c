@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x58c4f0
-// SIZE: 378
 
 // SIZE 0x2f4
 struct gadget {

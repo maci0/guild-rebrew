@@ -13,7 +13,6 @@ void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00546ef0(int, char*, int, int);
 
 // FUNCTION: GOLDTL 0x556b40
-// SIZE: 742
 void __cdecl fcn_00556b40(char* e)
 {
 	char buf[0x200];

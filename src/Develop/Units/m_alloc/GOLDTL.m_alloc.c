@@ -19,11 +19,8 @@ extern int g_alloc_root_spare;
 extern int g_list_head;
 
 // FUNCTION: GOLD 0x004226a0
-// SIZE: 162
 // FUNCTION: GOLDTL 0x41de50
-// SIZE: 162
 // m_init
-// SIZE: 162
 //
 // RESOLVED (2026-09-10): the zero-fill is the original's hand-written
 // 24-byte block-fill prelude (docs/msvc6-allocator.md Finding 19: byte-

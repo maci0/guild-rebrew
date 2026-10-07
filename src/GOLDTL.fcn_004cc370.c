@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004cb7f0
-// SIZE: 82
 // FUNCTION: GOLDTL 0x4cc370
-// SIZE: 82
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_00505370(char*);

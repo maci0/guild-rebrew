@@ -15,9 +15,7 @@ long __cdecl fcn_0045fa50(void* h);
 long __cdecl fcn_0064e30c(void* h);
 
 // FUNCTION: GOLD 0x431170
-// SIZE: 96
 // FUNCTION: GOLDTL 0x430c50
-// SIZE: 91
 long __cdecl fcn_00430c50(char* a)
 {
 	void* h;

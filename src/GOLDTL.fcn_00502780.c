@@ -1,8 +1,6 @@
 extern char g_85ab90[];
 // FUNCTION: GOLD 0x004ffbf0
-// SIZE: 77
 // FUNCTION: GOLDTL 0x00502780
-// SIZE: 77
 
 float __cdecl fcn_005025a0(int, int);
 

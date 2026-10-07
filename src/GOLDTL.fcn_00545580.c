@@ -7,9 +7,7 @@ extern char g_7dc440[];
 // GLOBAL: GOLD 0x758600
 extern char g_7dc440[];
 // FUNCTION: GOLD 0x0053d860
-// SIZE: 48
 // FUNCTION: GOLDTL 0x545580
-// SIZE: 48
 
 int __cdecl fcn_00545580(int a1, int a2, int a3)
 {

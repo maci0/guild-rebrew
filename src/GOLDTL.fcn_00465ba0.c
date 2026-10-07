@@ -23,7 +23,6 @@ extern char s_6750e8[];
 char* __cdecl fcn_0041db70(int size, const char* tag);
 
 // FUNCTION: GOLDTL 0x465ba0
-// SIZE: 180
 char* __cdecl fcn_00465ba0(int idx, const char* path)
 {
 	char* buf;

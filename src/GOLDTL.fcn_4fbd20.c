@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4fbd20
-// SIZE: 32
 
 // fcn_004f97a0 — a < 5 ? [0x99f580 + a] : 0x7e (both byte returns).
 

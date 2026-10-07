@@ -33,8 +33,6 @@
  * Looks up entity by ID at cmd+0x10 and applies the health
  * delta from the command payload. */
 
-// FUNCTION: GOLDTL 0x406510
-// SIZE: 80
 void* __cdecl fcn_0040c0a0(int);
 
 int __cdecl cm_ExModifyHealth(int cmd, char* name)

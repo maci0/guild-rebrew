@@ -18,9 +18,7 @@ extern char g_office_slots[0x3f0];
 unsigned char *__cdecl fcn_00508e40(int id);
 
 // FUNCTION: GOLD 0x004e6360
-// SIZE: 208
 // FUNCTION: GOLDTL 0x4e7f20
-// SIZE: 208
 
 
 int __cdecl amt_ValidateOfficeCandidate(int* arg1)

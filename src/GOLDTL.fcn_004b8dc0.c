@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x004b8dc0
-// SIZE: 618
 
 #include <string.h>
 

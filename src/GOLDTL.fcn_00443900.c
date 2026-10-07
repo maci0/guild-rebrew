@@ -38,7 +38,6 @@ void __cdecl fcn_004438b0(void);
 void __cdecl fcn_00443030(fcn_00443900_Scene* s);
 
 // FUNCTION: GOLDTL 0x443900
-// SIZE: 507
 char __cdecl fcn_00443900(fcn_00443900_Obj* o, fcn_00443900_Scene* from, fcn_00443900_Scene* to)
 {
 	fcn_00443900_Obj* p;

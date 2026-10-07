@@ -56,7 +56,6 @@ void __cdecl fcn_004760e0(Tex*);
 long __stdcall fcn_006114ff(void*, void*, void*, void*, void*, void*, int, unsigned int);
 
 // FUNCTION: GOLDTL 0x47b640
-// SIZE: 613
 Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
 {
 	TexDesc d;

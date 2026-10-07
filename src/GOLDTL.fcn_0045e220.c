@@ -21,9 +21,7 @@ void __cdecl fcn_0045dea0(z_streamp strm);
 	}
 
 // FUNCTION: GOLD 0x00462060
-// SIZE: 324
 // FUNCTION: GOLDTL 0x45e220
-// SIZE: 324
 block_state __cdecl fcn_0045e220(deflate_state* s, int flush)
 {
 	ulg max_block_size = 0xffff;

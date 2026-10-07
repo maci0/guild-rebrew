@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x004c3a50
-// SIZE: 760
 // Client twin of ahm_GetCommandPayloadSize (SERVER 0x1000c710): payload
 // length by command byte. SIZE covers the 103-entry jump table stored after
 // the code.

@@ -4,9 +4,7 @@ extern HWND g_774940;
 extern char g_6a3448[];
 
 // FUNCTION: GOLD 0x531c00
-// SIZE: 118
 // FUNCTION: GOLDTL 0x538710
-// SIZE: 118
 
 int sprintf(char*, const char*, ...);
 __declspec(dllimport) int __stdcall CreateDirectoryA(const char*, void*);

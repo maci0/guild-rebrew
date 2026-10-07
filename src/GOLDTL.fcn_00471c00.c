@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x471c00
-// SIZE: 128
 // One call after both if/else pairs: msvc6 duplicates the call tail into
 // each arm of the second test, as the reference does.
 

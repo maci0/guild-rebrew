@@ -30,9 +30,7 @@ void __cdecl fcn_00406210(int, void*, int, const char*, int);
 int __cdecl fcn_00408220(float);
 
 // FUNCTION: GOLD 0x40afb0
-// SIZE: 496
 // FUNCTION: GOLDTL 0x40bde0
-// SIZE: 484
 
 /* Allocates the character action queue and registers the action handlers. */
 int __cdecl fcn_0040bde0(void)

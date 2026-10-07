@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x430cb0
-// SIZE: 704
 #include "../../Error/error.h"
 #include "../../m_alloc/m_alloc.h"
 #include "zlib.h"

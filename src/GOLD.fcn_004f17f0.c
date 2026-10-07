@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004f17f0
-// SIZE: 685
 /* Twin of GOLDTL 0x4f3bb0 (loadsave_dump1.c): GOLD takes the slot from
  * field+0x65 instead of allocating it, and passes each worker's entry index
  * computed from its entry pointer instead of reading an index into a pointer. */

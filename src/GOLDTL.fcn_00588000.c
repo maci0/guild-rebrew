@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0057f950
-// SIZE: 512
 // FUNCTION: GOLDTL 0x588000
-// SIZE: 512
 
 // SIZE 0x10
 struct offer {

@@ -7,7 +7,6 @@ extern int g_1042a04;
 // GLOBAL: GOLDTL 0x1052bac
 extern int g_1052bac;
 // FUNCTION: GOLDTL 0x43b320
-// SIZE: 59
 
 void __cdecl fcn_0043ad20(void*, void*);
 void __cdecl fcn_0043b170(void*, void*, int, int);

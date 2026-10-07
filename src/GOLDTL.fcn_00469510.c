@@ -3,9 +3,7 @@ extern char g_102cbc0[];
 // GLOBAL: GOLD 0xfa5aa0
 extern char g_102cbc0[];
 // FUNCTION: GOLD 0x0046c5f0
-// SIZE: 37
 // FUNCTION: GOLDTL 0x469510
-// SIZE: 37
 
 #include <string.h>
 

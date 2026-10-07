@@ -27,7 +27,6 @@ typedef struct Quad {
 extern char s_6750e8[];
 
 // FUNCTION: GOLDTL 0x4753f0
-// SIZE: 178
 void __cdecl fcn_004753f0(const char* name, unsigned char* pal)
 {
 	BmpInfo bi;

@@ -13,21 +13,17 @@ struct internal_state      {int dummy;}; /* for buggy compilers */
 extern void exit OF((int));
 #endif
 
-/* The two empty entries are one string in the reference, at 0x10034620
- * inside the gap blob. A literal here is a different COMDAT and the
- * pointers in raw .data disagree. */
-extern char z_errmsg_empty;
 const char *z_errmsg[10] = {
 "need dictionary",     /* Z_NEED_DICT       2  */
 "stream end",          /* Z_STREAM_END      1  */
-&z_errmsg_empty,       /* Z_OK              0  */
+"",       /* Z_OK              0  */
 "file error",          /* Z_ERRNO         (-1) */
 "stream error",        /* Z_STREAM_ERROR  (-2) */
 "data error",          /* Z_DATA_ERROR    (-3) */
 "insufficient memory", /* Z_MEM_ERROR     (-4) */
 "buffer error",        /* Z_BUF_ERROR     (-5) */
 "incompatible version",/* Z_VERSION_ERROR (-6) */
-&z_errmsg_empty};
+""};
 
 
 /* stripped: not present in original DLL */

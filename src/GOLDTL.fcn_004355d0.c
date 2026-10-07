@@ -14,7 +14,6 @@ typedef struct Ent7c {
 // SIZE 0x7c
 
 // FUNCTION: GOLDTL 0x4355d0
-// SIZE: 95
 void __cdecl fcn_004355d0(char* a, const char* name)
 {
 	int i;

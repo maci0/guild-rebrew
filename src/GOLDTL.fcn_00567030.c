@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x55ed50
-// SIZE: 320
 // FUNCTION: GOLDTL 0x567030
-// SIZE: 313
 
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl fcn_005049a0(char*);

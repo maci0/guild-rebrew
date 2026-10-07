@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0055d610
-// SIZE: 256
 // FUNCTION: GOLDTL 0x565880
-// SIZE: 256
 
 // SIZE 0x2f4
 struct player {

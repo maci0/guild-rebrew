@@ -3,7 +3,6 @@
 uLong __cdecl fcn_0045d3f0(uLong adler, const Bytef* buf, uInt len);
 
 // FUNCTION: GOLDTL 0x45d970
-// SIZE: 247
 int __cdecl fcn_0045d970(z_streamp strm, const Bytef* dictionary, uInt dictLength)
 {
 	deflate_state* s;

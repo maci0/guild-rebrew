@@ -1,7 +1,5 @@
 // FUNCTION: GOLDTL 0x4d1d20
-// SIZE: 22
 // FUNCTION: GOLD 0x004d0cd0
-// SIZE: 22
 // fcn_004d0cd0 — first index holding -1 in the 16-int array, else -1.
 
 int __cdecl fcn_004d0cd0(int* a)

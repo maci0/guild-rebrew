@@ -12,9 +12,7 @@ extern MemBlock* g_6b6f80;
 extern struct MemPool g_14cc5c0;
 
 // FUNCTION: GOLD 0x00422750
-// SIZE: 440
 // FUNCTION: GOLDTL 0x41df00
-// SIZE: 440
 
 /* Reports the memory tracker's pools, and the live blocks of the pools
  * whose name contains filter. */

@@ -4,7 +4,6 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c06;
 
 // FUNCTION: GOLDTL 0x5392a0
-// SIZE: 221
 
 int sprintf(char*, const char*, ...);
 void __cdecl fcn_004432d0(int, int);

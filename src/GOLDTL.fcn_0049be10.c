@@ -15,7 +15,6 @@ float* __cdecl fcn_005c61e0(int id);
 int __cdecl fcn_005dbf10(char* e, Req* r);
 
 // FUNCTION: GOLDTL 0x0049be10
-// SIZE: 399
 int __cdecl fcn_0049be10(char* e, int* p, int* q)
 {
 	float* d;

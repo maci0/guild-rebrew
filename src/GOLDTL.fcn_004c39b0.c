@@ -8,7 +8,6 @@ void __cdecl vfs_WriteUint32LE(int stream, unsigned int value);
 void __cdecl fcn_004192b0(int, int, int, int);
 
 // FUNCTION: GOLDTL 0x4c39b0
-// SIZE: 91
 
 void __cdecl fcn_004c39b0(void)
 {

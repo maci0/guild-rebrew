@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x0040c5a0
-// SIZE: 112
 
 extern char* g_6b7e98;
 char* __cdecl fcn_00426fd0(int id);

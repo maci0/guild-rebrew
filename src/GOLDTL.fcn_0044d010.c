@@ -24,9 +24,7 @@ char* __cdecl fcn_0064d1a0(char* s, int c);
 void __cdecl fcn_0044cbd0(char* name, int flag);
 
 // FUNCTION: GOLD 0x0044e7e0
-// SIZE: 112
 // FUNCTION: GOLDTL 0x44d010
-// SIZE: 112
 void __cdecl fcn_0044d010(void* stream, fcn_0044d010_Ctx* c)
 {
 	char* tok;

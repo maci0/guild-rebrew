@@ -17,9 +17,7 @@ void* __cdecl fcn_0041db70(int size, const char* tag);
 void __cdecl fcn_0041ddd0(void*);
 
 // FUNCTION: GOLD 0x00427570
-// SIZE: 293
 // FUNCTION: GOLDTL 0x425d90
-// SIZE: 293
 
 /* Registers a named script variable bound to a C variable. */
 struct var_425d90* __cdecl fcn_00425d90(char* name, void* ptr, int type)

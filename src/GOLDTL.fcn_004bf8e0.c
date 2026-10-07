@@ -52,7 +52,6 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
 
 // FUNCTION: GOLDTL 0x4bf8e0
-// SIZE: 734
 void __cdecl fcn_004bf8e0(char* p, int arg)
 {
 	int ids[10];

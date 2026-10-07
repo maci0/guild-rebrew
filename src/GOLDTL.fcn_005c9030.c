@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x5bd1b0
-// SIZE: 96
 // FUNCTION: GOLDTL 0x5c9030
-// SIZE: 88
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))

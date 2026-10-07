@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4238d0
-// SIZE: 24
 
 // fcn_00427370 — if(*0x6b7d7c) fcn_0042b780(*0x6b7d7c, arg).
 

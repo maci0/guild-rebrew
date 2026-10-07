@@ -1,9 +1,7 @@
 unsigned short __cdecl fcn_0042e410(unsigned short n);
 
 // FUNCTION: GOLD 0x505be0
-// SIZE: 179
 // FUNCTION: GOLDTL 0x00508c30
-// SIZE: 179
 void __cdecl fcn_00508c30(unsigned char n, unsigned char* arr)
 {
 	unsigned char i;

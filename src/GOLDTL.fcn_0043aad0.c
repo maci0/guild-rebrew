@@ -19,7 +19,6 @@ void __cdecl fcn_00449f90(char* o, int a, char* name);
 void __cdecl fcn_00438ac0(char* o, int a);
 
 // FUNCTION: GOLDTL 0x43aad0
-// SIZE: 292
 char __cdecl fcn_0043aad0(char* o, fcn_0043aad0_Cb* cb)
 {
 	char* ext;

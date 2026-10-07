@@ -8,7 +8,6 @@ void __cdecl fcn_0045bfb0(char* p);
 void __cdecl fcn_0041ddd0(void* p);
 
 // FUNCTION: GOLDTL 0x45c1e0
-// SIZE: 98
 void __cdecl fcn_0045c1e0(void)
 {
 	unsigned int i;

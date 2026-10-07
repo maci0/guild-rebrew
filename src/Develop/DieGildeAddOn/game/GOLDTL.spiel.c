@@ -25,9 +25,7 @@ int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: GOLD 0x0042aef0
-// SIZE: 59
 // FUNCTION: GOLDTL 0x4297c0
-// SIZE: 59
 // gm_ResetAllEntities
 extern char* g_6b7e94;
 extern char* g_6b7e98;

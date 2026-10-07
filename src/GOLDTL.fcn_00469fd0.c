@@ -8,7 +8,6 @@ void __cdecl fcn_0047c9c0(int x, int y, int w, int h, int color, float alpha);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 
 // FUNCTION: GOLDTL 0x469fd0
-// SIZE: 307
 void __cdecl fcn_00469fd0(char* e)
 {
 	char* name;

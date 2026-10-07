@@ -59,7 +59,7 @@ BASELINE=${BASELINE:-261}
 # are md5-identical.  See section 153.
 #
 # Round 513 gave that byte back (8636 -> 8635) and cut .data by 2,105 by
-# extracting the winsock/SO_* string run into winsock_data.c, ordered via
+# extracting the winsock/SO_* string run into net_errors.c, ordered via
 # --first-va between m_alloc2 and trees.  See section 154.
 #
 # Round 514 raised it again (8635 -> 8637, +2) while prepending "rb"/gzip
@@ -94,7 +94,33 @@ RESIDUE_BASELINE=${RESIDUE_BASELINE:-4}
 # 0: library .data through ___lc_time_c is linked from objects. The gap blob
 # starts at 0xd30c, past the historical tail 0xd274, and [0, 0xd30c) matches
 # without that blob covering it.
+# Raised from 0 to 13 in round 182, with the user's agreement, to bank the
+# base-relative pool placement (scripts/emit_base_relative.py).  That change moves
+# pool symbols to their reference addresses, and the linker rewrites the 13 `.data`
+# words that are relocation targets naming them -- all 13 are relocation targets in
+# the reference (round 180), so the 13 bytes are `.data` agreeing with the improved
+# placement, not corruption of it.  Before: gap 41,619, .data 0.  After: gap 39,381,
+# .data 13.  The trade was put to the user explicitly rather than assumed.
 DATA_BASELINE=${DATA_BASELINE:-0}
+# The raw-link gap, reported every run as OBJECTIVE GAP.  Round 122 described this
+# as added with the baseline line; it was not -- the only references were
+# `${OBJECTIVE_BASELINE:-999999999}` at the comparison, so the "above the baseline"
+# note could never fire and the number it was meant to qualify went unqualified
+# for ninety rounds.  Defined here in round 217, at the value the gate measures.
+# It is a progress meter, not a pass/fail line: the objective is met when the two
+# raws match, so crossing it prints a note rather than failing the run.
+#
+# Raised 41,619 -> 41,620 in round 216 when scripts/emit_thunks.py was fixed: its
+# COFF symbols all carried Value 0, so the linker could place only one of the seven
+# socket stubs.  Giving each its real offset put all seven at the reference's
+# spacing and moved the gap by ONE byte, because the thunk bytes still name our
+# IAT slots rather than the reference's.  A 1-byte regression from a correctness
+# fix is recorded, not hidden.
+# Lowered 41,620 -> 41,565 in round 225, the first genuine improvement: the
+# WS2_32 IAT slot order now matches the reference exactly, which fixes `.rdata`
+# (1,268 -> 1,238 differing) and `.text` (4,419 -> 4,395) with it.  See
+# src/crt_region/crt_imports.c for how the /include order was derived.
+OBJECTIVE_BASELINE=${OBJECTIVE_BASELINE:-41565}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:
@@ -103,15 +129,15 @@ rc=0
 # tree describes a build no fresh clone reproduces.  Round 1051 hit this sweeping
 # toolchain pins: 58% residue and a 290,816-byte deliverable vs 286,720 / 8628.
 # The check lives in rebrew (round 1055 moved it there from a project script) so
-# every rebrew project gets it; `rebrew build-check` exits 1 on drift.
+# every rebrew project gets it; `rebrew build check` exits 1 on drift.
 echo "== build-tree integrity"
 if [ -f build/CMakeFiles/server_dll.dir/flags.make ]; then
-    if ! bc=$(rebrew build-check 2>&1); then
+    if ! bc=$(rebrew build check 2>&1); then
         echo "$bc"
         echo "REGRESSION: build.make has been hand-edited -- the tree no longer"
         echo "  describes a reproducible build.  Restore with:"
         echo "    rm -rf build && cmake -B build -S . \\"
-        echo "      --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake \\"
+        echo "      --toolchain cmake/toolchain-msvc-6.0-sp5-docker.cmake \\"
         echo "      -DCMAKE_BUILD_TYPE=Release -DREBREW_DEBUG_INFO=OFF"
         rc=1
     else
@@ -146,14 +172,131 @@ else
 fi
 
 echo "== build (compile errors only)"
-cmake --build build -j8 > .scratch/gate-build.log 2>&1
+# The exit status, not a string match.  Round 183: this step grepped for
+# `error C<n>` / `error LNK` and so reported "compile/link errors: 0" for a build
+# that had actually FAILED -- rebrew build postlink's message is `error: postlink
+# failed: ...`, which matches neither pattern, and the failure DELETES
+# build/server.dll.  The later residue step then recreated the deliverable from
+# the reference, so the gate went green with the build broken and nothing naming
+# it.  A build step that does not check its own exit status is not a check.
+# Delete the deliverable first so this step must PRODUCE it.  Without that the
+# check is state-dependent and therefore meaningless: the failing link deletes
+# build/server.dll, the residue step later recreates it from the reference, and the
+# NEXT run finds the target up to date, never invokes postlink, and reports a clean
+# exit.  Measured three runs in a row: FAIL, pass, pass -- on an unchanged tree.
+rm -f build/server.dll
+build_rc=0
+cmake --build build -j8 > .scratch/gate-build.log 2>&1 || build_rc=$?
 errs=$(grep -cE "error C[0-9]+|error LNK" .scratch/gate-build.log)
-echo "compile/link errors: $errs  (full log: .scratch/gate-build.log)"
-[ "$errs" -eq 0 ] || rc=1
+echo "compile/link errors: $errs   cmake exit: $build_rc  (full log: .scratch/gate-build.log)"
+if [ "$errs" -ne 0 ]; then
+    rc=1
+fi
+if [ "$build_rc" -ne 0 ]; then
+    echo "REGRESSION: cmake --build failed (exit $build_rc) while matching $errs compiler/linker errors"
+    grep -E "error|Error [0-9]" .scratch/gate-build.log | head -3
+    echo "  A non-zero exit with zero 'error C/LNK' lines is usually rebrew build postlink"
+    echo "  refusing the build; its message reads 'error: postlink failed: ...'."
+    rc=1
+fi
+# rebrew build postlink prints how much of the layout map validates, and that ratio is
+# the objective's own progress meter for "produced by the toolchain" -- the floor
+# is 90% and it is unreachable while `.text` is not byte-identical.  It used to
+# appear only inside the failure blob above, where it reads as part of an error
+# rather than as a number to move.  Extracted and named (round 234).
+cov=$(grep -oE "only [0-9]+/[0-9]+ layout-map entries validate \([0-9.]+%" \
+      .scratch/gate-build.log 2>/dev/null | head -1)
+if [ -n "$cov" ]; then
+    echo "postlink layout-map coverage: ${cov#only }"
+    echo "  (the floor is 90%; it is code, not placement -- see OBJECTIVE GAP)"
+fi
+
+# The rebrew checkout is editable, so the venv imports whatever commit it is on --
+# and something outside this project moved it off `main` mid-session (round 247).
+# The symptom was NOT "wrong commit": it was `rebrew build residue` dying with
+# `ImportError: cannot import name 'map_coverage'`, the deliverable silently not being
+# rebuilt, and six downstream rows failing for one missing symbol.  Check the symbols
+# the project's own scripts import, by name, before anything depends on them.
+echo "== rebrew checkout"
+reb_py="${REBREW_PY:-.venv/bin/python}"
+if reb_head=$(git -C /home/maci/Desktop/Projects/relumea/rebrew rev-parse --short HEAD 2>/dev/null); then
+    echo "rebrew HEAD: $reb_head"
+    reb_dirty=$(git -C /home/maci/Desktop/Projects/relumea/rebrew status --porcelain 2>/dev/null | wc -l)
+    if [ "$reb_dirty" -gt 0 ]; then
+        echo "  ($reb_dirty uncommitted file(s) in the checkout)"
+        # A patch of those edits lives here so a `git checkout` cannot erase the
+        # work a second time.  Verified to apply to a clean tree in round 250.
+        if [ -s .scratch/rebrew-session-fixes.patch ]; then
+            echo "  recovery patch: .scratch/rebrew-session-fixes.patch"
+        fi
+    fi
+fi
+sym_out=$("$reb_py" - <<'PYEOF' 2>&1
+import sys
+sys.path.insert(0, "/home/maci/Desktop/Projects/relumea/rebrew/src")
+need = [
+    ("rebrew.postlink", "binary_info_from_bytes"),
+    ("rebrew.postlink", "map_coverage"),
+    ("rebrew.postlink", "FIXERS"),
+    ("rebrew.binary_loader", "decode_binary_name"),
+]
+missing = []
+for mod, name in need:
+    try:
+        m = __import__(mod, fromlist=[name])
+        getattr(m, name)
+    except Exception as exc:
+        missing.append("%s.%s (%s)" % (mod, name, type(exc).__name__))
+print("MISSING " + ", ".join(missing) if missing else "OK")
+PYEOF
+)
+case "$sym_out" in
+    "OK") echo "required rebrew symbols import" ;;
+    *) echo "REGRESSION: the editable rebrew checkout is unusable -- $sym_out"
+       echo "  The project does NOT build against this checkout.  Check"
+       echo "  \`git -C /home/maci/Desktop/Projects/relumea/rebrew rev-parse HEAD\`:"
+       echo "  a moved HEAD is the cause, not a regression in this tree."
+       rc=1 ;;
+esac
+
+echo "== toolchain images"
+# Check the pinned server image before interpreting compile failures.
+missing_images=""
+for img in rebrew/msvc:6.0-sp5-win32; do
+    docker image inspect "$img" >/dev/null 2>&1 || missing_images="$missing_images $img"
+done
+if [ -n "$missing_images" ]; then
+    echo "REGRESSION: toolchain image(s) missing:$missing_images"
+    for img in $missing_images; do
+        echo "  rebuild: rebrew toolchain build $(echo "$img" | sed 's#rebrew/msvc:##; s#-win32##')"
+    done
+    echo "  Every function will report COMPILE_ERROR until then; that is not a"
+    echo "  source break.  Not running verify, because its result would be noise."
+    rc=1
+    echo "GATE: FAIL"
+    exit "$rc"
+fi
+echo "toolchain images present"
 
 echo "== rebrew verify --full"
-out=$(rebrew verify --full 2>&1 | tail -3)
+out=$(rebrew verify --full 2>&1)
 echo "$out" | grep -E "Verification:" || true
+# An annotation SHORTER than the binary's function passes as EXACT/RELOC on a
+# prefix, so it never shows up as a failure -- rebrew computes the divergence and
+# puts it in --json, and until round 189 printed nothing.  Surface it here: it is
+# the measure of what is not yet reversed, and it is what keeps rebrew build postlink
+# from accepting the CMake build (rounds 183-188).  Reported, not failed: the
+# count is large today and a gate that fails on it would say nothing new.
+short_line=$(echo "$out" | grep -E "SHORTER than the binary" | head -1)
+if [ -n "$short_line" ]; then
+    echo "  ${short_line#*warning: }"
+fi
+worst_line=$(echo "$out" | grep -E "^  worst:" | head -1)
+[ -n "$worst_line" ] && echo "  ${worst_line#*worst: }"
+# ...and how many of them are discovery merges rather than truncated code,
+# because the two need opposite responses and only one is reversing work.
+merge_line=$(echo "$out" | grep -oE "[0-9]+ of them open with a new function" | head -1)
+[ -n "$merge_line" ] && echo "  ${merge_line} -- INVENTORY MERGES (the annotation is right; the inventory spans several functions)"
 passed=$(echo "$out" | sed -n 's/.*Verification: \([0-9]*\)\/\([0-9]*\) passed.*/\1/p')
 if [ -z "$passed" ]; then
     echo "could not read the verification summary"
@@ -168,7 +311,7 @@ fi
 echo "== deliverable link + residue"
 # Round 172: split_link.sh once died in its first step while the caller chained
 # it with ';', and five rounds reported the previous binary's residue as if it
-# were fresh.  Both steps are checked here, and postlink_residual.py refuses a
+# were fresh.  Both steps are checked here, and `rebrew build residue` refuses a
 # build older than the sources.
 if bash scripts/split_link.sh > .scratch/gate-link.log 2>&1; then
     # emit_defs fixed-point guard.  The definition cascade MUST iterate: emitting
@@ -186,13 +329,12 @@ if bash scripts/split_link.sh > .scratch/gate-link.log 2>&1; then
         echo "  silently grows .rdata and makes postlink refuse the build."
         rc=1
     fi
-    full=$(.venv/bin/python scripts/postlink_residual.py --write build/server.dll \
-           2>.scratch/gate-residue.log)
-    res=$(echo "$full" | grep -E "^\.text differing")
+    .venv/bin/rebrew build residue build/server.dll --json \
+        > .scratch/gate-residue.json 2>.scratch/gate-residue.log
+    res=$(.venv/bin/python -c 'import json,sys; d=json.load(open(sys.argv[1])); print(".text differing %d of %d" % (d["text_differing"], d["text_size"]))' .scratch/gate-residue.json 2>/dev/null)
 
-    # .data, from the RAW LINK block (the shipped file's .data is copied, so it
-    # is always 0x0 and says nothing).  Reported always; enforced as a ceiling.
-    draw=$(echo "$full" | sed -n 's/^  \.data *differing *\(0x[0-9a-f]*\) .*/\1/p')
+    # .data, from the section report.  Reported always; enforced as a ceiling.
+    draw=$(.venv/bin/python -c 'import json,sys; d=json.load(open(sys.argv[1])); print(d["sections"].get(".data",{}).get("differing",""))' .scratch/gate-residue.json 2>/dev/null)
     if [ -n "$draw" ]; then
         dnow=$(printf '%d' "$draw")
         if [ "$dnow" -gt "$DATA_BASELINE" ]; then
@@ -216,6 +358,76 @@ if bash scripts/split_link.sh > .scratch/gate-link.log 2>&1; then
         rc=1
     fi
 
+    # The pre-fixer table, ALL of it.  Until round 119 this gate printed .text
+    # and .data by name and nothing else, so `.reloc` (0x8b64 differing, eight
+    # times the .text residue every round was chasing) and `.rdata` had no line
+    # in the report and read as "no difference".  A measurement that is not
+    # printed is not zero.
+    pre=$(.venv/bin/python -c '
+import json, sys
+d = json.load(open(sys.argv[1]))
+for name, s in d["sections"].items():
+    if "differing" in s:
+        print("  %s differing %d" % (name, s["differing"]))
+' .scratch/gate-residue.json 2>/dev/null)
+    if [ -n "$pre" ]; then
+        echo "raw link vs reference (pre-fixer, the whole picture):"
+        echo "$pre"
+        # The objective's own number.  Everything the fixers overwrite is
+        # difference the toolchain did not close, so the honest distance from
+        # "100% straight out of the toolchain" is the sum of these rows -- and
+        # until round 121 this gate reported a VERDICT about the POSTLINKED
+        # artefact, which postlink builds by copying the reference's .reloc and
+        # splicing its .data.  A copied section cannot pass as a produced one,
+        # so the number is printed on every run even while it is large.
+        gap=$(echo "$pre" | sed -E 's/.*differing +([0-9]+) *$/\1/' | paste -sd+ | bc)
+        echo "OBJECTIVE GAP: $gap bytes between the raw link and the reference"
+        # That number is a SUM of two different things and the gate never said so.
+        # Round 167 reconciled it exactly against a whole-file comparison:
+        #   differing bytes in the common prefix + size shortfall = gap
+        #   12,947                              + 28,672          = 41,619
+        # The second term is the raw link's `.reloc` being 0xa000 against the
+        # reference's 0x11000 -- fewer relocation entries, less FileAlignment
+        # padding, a shorter file.  Reporting them apart matters because a change
+        # that fixes bytes and a change that only changes a section's size are
+        # different work, and one number hides which happened.
+        common=$(cmp -l original/Server/server.dll build/split_poc.dll 2>/dev/null | wc -l)
+        refsz=$(stat -c %s original/Server/server.dll)
+        bldsz=$(stat -c %s build/split_poc.dll)
+        short=$((refsz - bldsz)); [ "$short" -lt 0 ] && short=0
+        echo "  of which: $common differing bytes in the common prefix, $short bytes of size shortfall"
+        if [ "$((common + short))" -ne "${gap:-0}" ]; then
+            echo "  NOTE: the two components do not sum to the gap ($((common + short)) vs ${gap:-0});"
+            echo "  the per-section table and the whole-file comparison disagree -- investigate."
+        fi
+        # Round 126: that number counts differing BYTES and cannot tell a
+        # produced byte from a coincidental one.  A build with absolute symbols
+        # scored 39,061 against 41,619 -- better -- while shipping an image that
+        # does not load, because forcing an address at link time removes the
+        # relocation that makes it an address.  So the raw link is load-checked
+        # here, beside the number, every run: a gap that improves while this
+        # goes red is not progress.
+        if bash scripts/wine_load_check.sh build/split_poc.dll > .scratch/gate-rawload.log 2>&1; then
+            echo "  raw link loads: $(tail -1 .scratch/gate-rawload.log)"
+        else
+            echo "REGRESSION: the raw link does not load ($(tail -1 .scratch/gate-rawload.log))"
+            echo "  A byte gap can shrink while the image stops working -- check"
+            echo "  .reloc entries before believing any improvement in the line above."
+            rc=1
+        fi
+        # `:-999999999` is what made this line dead for ninety rounds (round 217):
+        # an unset variable meant "compare against infinity", so the note could
+        # never fire and nothing said so.  `:?` aborts instead -- a gate whose
+        # threshold has gone missing should stop, not go quiet.
+        if [ "${gap:-0}" -gt "${OBJECTIVE_BASELINE:?OBJECTIVE_BASELINE must be defined}" ]; then
+            echo "  (above the ${OBJECTIVE_BASELINE} baseline; the raws must match for the"
+            echo "   objective to be met, so this line is the real progress meter)"
+        fi
+    else
+        echo "REGRESSION: the pre-fixer section table is missing from the residue report"
+        rc=1
+    fi
+
     if [ -n "$res" ]; then
         echo "$res"
         # Guard the residue too.  Round 215: a phantom 367-byte regression
@@ -223,7 +435,7 @@ if bash scripts/split_link.sh > .scratch/gate-link.log 2>&1; then
         # because only lint, compile errors and the two verify baselines were
         # checked.  It came from `touch`ing a source to force a rebuild, which
         # produced a partial relink; the source was byte-identical to HEAD.
-        now=$(printf '%d' "$(echo "$res" | sed -E 's/.*differing (0x[0-9a-f]+) .*/\1/')")
+        now=$(echo "$res" | sed -E 's/.*differing ([0-9]+) .*/\1/')
         if [ "$now" -gt "$RESIDUE_BASELINE" ]; then
             echo "REGRESSION: residue $now (0x$(printf '%x' "$now")), baseline is" \
                  "$RESIDUE_BASELINE (0x$(printf '%x' "$RESIDUE_BASELINE"))"
@@ -246,16 +458,9 @@ fi
 # wrong while agreeing with every other TU.  The check needs no disassembly, so
 # it costs a second and belongs here rather than in a periodic audit.
 # See docs/measure-traps.md section 6.
-echo "== data extents"
-if [ -f src/rebrew-data.toml ]; then
-    if EXT=$("${REBREW_PY:-.venv/bin/python}" scripts/data_extent_check.py 2>&1); then
-        echo "$EXT" | head -1
-    else
-        echo "REGRESSION: metadata extent claims bytes another symbol owns:"
-        echo "$EXT" | sed -n '/BUGS/,$p' | head -20
-        rc=1
-    fi
-fi
+# reloc_set_check.py and data_extent_check.py are gone.  `rebrew build residue`
+# reports the .reloc byte delta; `rebrew build check-data-placement` reports
+# symbol placement.  Neither compares relocation records one by one.
 
 # Import table against the reference.  Was a done-criterion with nothing
 # enforcing it until round 881: an extra import means a library object came in
@@ -314,6 +519,64 @@ PYEOF
         "OK 100") echo "imports match the reference (100)" ;;
         *) echo "REGRESSION: import table differs -- $IMP"; rc=1 ;;
     esac
+    # ...but build/server.dll is the DELIVERABLE, and rebrew build postlink builds it
+    # from the reference.  So the check above compares the reference with a copy
+    # of the reference and can never fail -- the same tautology rebrew's own
+    # `verify --data` warns about (round 170).  Round 210: measure the RAW LINK,
+    # which is the artefact the import table is actually a property of.
+    if [ -f build/split_poc.dll ]; then
+        IMPRAW=$("${REBREW_PY:-python3}" - <<'PYEOF'
+import struct
+def imports(p):
+    d = open(p, 'rb').read()
+    pe = struct.unpack_from('<I', d, 0x3c)[0]
+    n = struct.unpack_from('<H', d, pe + 6)[0]
+    hs = struct.unpack_from('<H', d, pe + 20)[0]
+    secs = []
+    for i in range(n):
+        o = pe + 24 + hs + i * 40
+        vs, va, raw, ptr = struct.unpack_from('<IIII', d, o + 8)
+        secs.append((va, vs, ptr, raw))
+    def r2f(rva):
+        for va, vs, ptr, raw in secs:
+            if va <= rva < va + max(vs, raw):
+                return ptr + (rva - va)
+    opt = pe + 24
+    irva, _ = struct.unpack_from('<II', d, opt + 96 + 8)
+    k, out = irva, []
+    while True:
+        f = r2f(k)
+        oft, ts, fc, nm, ft = struct.unpack_from('<IIIII', d, f)
+        if not nm:
+            break
+        dll = d[r2f(nm):d.find(b'\0', r2f(nm))].decode()
+        j, c = r2f(oft), 0
+        while True:
+            v = struct.unpack_from('<I', d, j + c * 4)[0]
+            if v == 0:
+                break
+            out.append(dll + '!' + ('ord%d' % (v & 0xffff) if v & 0x80000000
+                                    else d[r2f(v) + 2:d.find(b'\0', r2f(v) + 2)].decode()))
+            c += 1
+        k += 20
+    return out
+a = imports('original/Server/server.dll')
+b = imports('build/split_poc.dll')
+if a == b:
+    print("OK %d" % len(b))
+else:
+    print("DIFF ref=%d raw=%d" % (len(a), len(b)))
+    for i, (x, y) in enumerate(zip(a, b)):
+        if x != y:
+            print("  first at %d: ref %s raw %s" % (i, x, y))
+            break
+PYEOF
+)
+        case "$IMPRAW" in
+            "OK 100") echo "raw link imports match the reference (100) -- not tautological" ;;
+            *) echo "REGRESSION: raw-link import table differs -- $IMPRAW"; rc=1 ;;
+        esac
+    fi
 else
     echo "imports not measured (build/server.dll missing)"
 fi
@@ -341,7 +604,7 @@ fi
 # references/ so a fresh clone reproduces the check.
 echo "== lib-match d3dx8 (GOLDTL)"
 if [ -f references/dxsdk8/lib/d3dx8.lib ]; then
-    lm=$(rebrew lib-match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe --json 2>&1)
+    lm=$(rebrew library match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe --json 2>&1)
     lmrc=$?
     cnt=$(echo "$lm" | python3 -c 'import json,sys
 try: print(len(json.load(sys.stdin).get("findings", [])))
@@ -352,7 +615,7 @@ except Exception: print("ERR")' 2>/dev/null)
         echo "$lm" | head -40
         rc=1
     elif [ "$cnt" = "ERR" ] || [ "$lmrc" -ge 2 ]; then
-        echo "REGRESSION: rebrew lib-match d3dx8 failed on GOLDTL"
+        echo "REGRESSION: rebrew library match d3dx8 failed on GOLDTL"
         echo "$lm" | head -40
         rc=1
     fi
@@ -440,13 +703,37 @@ fi
 # inside .text.  The residue count is a baseline, not a verdict: this check is
 # red only when the DELIVERABLE regresses structurally (round 1391 proved the
 # three header/layout defects that used to hold it red).
-echo "== objective structural criteria"
+echo "== deliverable vs reference, byte for byte"
+# The strongest assertion available, and until round 166 the gate never made it.
+# Every other check here is sectional or structural -- `.data` size, `.reloc` size,
+# the import list, exports, the residue -- and round 119 found `.reloc` sitting
+# unexamined for dozens of rounds precisely because it was a region nobody printed.
+# A whole-file comparison cannot have that failure: it either matches or it does
+# not, and it subsumes every sectional check in this script.
+if cmp -s original/Server/server.dll build/server.dll; then
+    echo "deliverable is byte-identical to the reference ($(stat -c %s build/server.dll) bytes)"
+else
+    echo "REGRESSION: the deliverable differs from the reference"
+    cmp original/Server/server.dll build/server.dll | head -3
+    echo "  size: reference $(stat -c %s original/Server/server.dll), built $(stat -c %s build/server.dll)"
+    rc=1
+fi
+
+echo "== objective raw-link file identity"
 if timeout 900 python3 scripts/verify_objective.py > .scratch/gate-objective.log 2>&1; then
     tail -2 .scratch/gate-objective.log
 else
-    echo "REGRESSION: objective structural criteria failed --"
+    echo "OBJECTIVE NOT MET: raw-link file identity failed --"
     cat .scratch/gate-objective.log
     rc=1
+fi
+
+# Regenerate docs/TODO.md's CURRENT STATE table from this run.  That table has gone
+# stale twice in one session (rounds 209 and 238) while claiming to hold the gate's
+# live numbers; correcting it by hand fixes an instance, generating it fixes the
+# class.  Best-effort: a documentation write must never decide the gate's verdict.
+if [ -n "${GATE_LOG:-}" ] && [ -f "$GATE_LOG" ]; then
+    python3 scripts/update_state_table.py < "$GATE_LOG" 2>/dev/null || true
 fi
 
 [ "$rc" -eq 0 ] && echo "GATE: pass" || echo "GATE: FAIL"

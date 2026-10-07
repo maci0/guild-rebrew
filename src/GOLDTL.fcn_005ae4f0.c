@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005ae4f0
-// SIZE: 265
 
 #include "client_types.h"
 typedef Loot_7774a0 Loot;

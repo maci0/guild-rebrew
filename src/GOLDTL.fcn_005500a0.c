@@ -4,9 +4,7 @@ extern unsigned char* g_868050;
 extern pos14_7f4c00 g_7f4c00;
 
 // FUNCTION: GOLD 0x00548130
-// SIZE: 173
 // FUNCTION: GOLDTL 0x5500a0
-// SIZE: 173
 
 void __cdecl fcn_005015e0(unsigned char**, int, int, int);
 void __cdecl fcn_00546190(char*);

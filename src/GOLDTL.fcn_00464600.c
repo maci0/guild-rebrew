@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x464600
-// SIZE: 70
 int __cdecl fcn_00464600(const char* fileName1, const char* fileName2)
 {
 	for (;;) {

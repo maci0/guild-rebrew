@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x5dbd80
-// SIZE: 672
 // FUNCTION: GOLDTL 0x005e8870
-// SIZE: 668
 
 typedef struct Vec24 {
 	float v[24];

@@ -11,9 +11,7 @@ extern unsigned int g_9b0820;
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 // FUNCTION: GOLD 0x004e52c0
-// SIZE: 33
 // FUNCTION: GOLDTL 0x4e6c80
-// SIZE: 33
 char* __cdecl fcn_004e6c80(void)
 {
 	char buf[0x40];

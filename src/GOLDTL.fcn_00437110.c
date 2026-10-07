@@ -6,7 +6,6 @@ extern unsigned long g_14ce728;
 int __stdcall fcn_00610011(void* dev, int a, int b, int c, int d, int e, int f, void** out);
 
 // FUNCTION: GOLDTL 0x437110
-// SIZE: 78
 int __cdecl fcn_00437110(int size, int a2, int a3, void** out, unsigned char levels)
 {
 	if (*out != 0) {

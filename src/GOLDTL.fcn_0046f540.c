@@ -22,7 +22,6 @@ extern void** g_772540;
 void __cdecl fcn_0046f4c0(int id);
 
 // FUNCTION: GOLDTL 0x46f540
-// SIZE: 263
 void __cdecl fcn_0046f540(int win)
 {
 	fcn_0046f540_Win* w;

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x53e660
-// SIZE: 307
 
 // SIZE 0x10
 struct vec4 {

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x46f4c0
-// SIZE: 128
 // A do-while (not a for loop) gives the reference's register roles.
 
 #include <string.h>

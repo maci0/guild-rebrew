@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00504290
-// SIZE: 184
 // FUNCTION: GOLDTL 0x005072c0
-// SIZE: 184
 
 int __cdecl fcn_00507b00(int a);
 

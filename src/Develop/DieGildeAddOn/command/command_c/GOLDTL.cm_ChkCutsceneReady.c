@@ -20,10 +20,6 @@ extern int g_99f804[];
 extern int g_9a3804[];
 extern char g_9a3816[];
 
-// FUNCTION: GOLD 0x004f4130
-// SIZE: 128
-// FUNCTION: GOLDTL 0x4f6520
-// SIZE: 128
 // cm_ChkCutsceneReady (real body: table-scan counter)
 
 int __cdecl cm_ChkCutsceneReady(int arg0, int arg2)

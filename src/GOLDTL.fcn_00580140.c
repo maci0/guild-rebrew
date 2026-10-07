@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x577b70
-// SIZE: 336
 // FUNCTION: GOLDTL 0x580140
-// SIZE: 326
 
 // SIZE 0x14
 struct page {

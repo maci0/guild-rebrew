@@ -5,9 +5,7 @@ void __cdecl fcn_0050b750(int amount, unsigned char k);
 void __cdecl fcn_004c51a0(int a, int b, unsigned char k, int amount);
 
 // FUNCTION: GOLD 0x004a7a20
-// SIZE: 149
 // FUNCTION: GOLDTL 0x4a7b40
-// SIZE: 149
 void __cdecl fcn_004a7b40(void)
 {
 	int i;

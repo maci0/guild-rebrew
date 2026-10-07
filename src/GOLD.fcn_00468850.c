@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x468850
-// SIZE: 34
 
 /* GOLD twin of GOLDTL fcn_00465920: 0x2ff slots of 0x2ec bytes here,
  * 0x3ff slots of 0x2f4 bytes in GOLDTL. */

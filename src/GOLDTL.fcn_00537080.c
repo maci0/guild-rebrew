@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x005306a0
-// SIZE: 380
 // FUNCTION: GOLDTL 0x537080
-// SIZE: 380
 
 extern int g_7e4538;
 extern int g_7e453c;

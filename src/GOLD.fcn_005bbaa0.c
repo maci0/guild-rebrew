@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005bbaa0
-// SIZE: 171
 
 extern char* g_f8f080;
 extern short g_f8f39c[];

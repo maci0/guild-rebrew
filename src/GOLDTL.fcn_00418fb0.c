@@ -9,7 +9,6 @@ float __cdecl fcn_00451380(float*, float*);
 void __cdecl fcn_00423850(void*, int);
 
 // FUNCTION: GOLDTL 0x418fb0
-// SIZE: 281
 
 /* Pans a sound source by the angle between the camera's forward axis and
  * the direction to the emitting object. */

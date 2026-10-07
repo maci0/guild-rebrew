@@ -8,7 +8,6 @@ void __cdecl fcn_00455700(int a, int b, fcn_004557c0_Mat* m, fcn_004557c0_Mat* o
 fcn_004557c0_Mat* __stdcall fcn_005eb970(fcn_004557c0_Mat* out, fcn_004557c0_Mat* a, fcn_004557c0_Mat* b);
 
 // FUNCTION: GOLDTL 0x4557c0
-// SIZE: 336
 void __cdecl fcn_004557c0(int a, char* o, int b, fcn_004557c0_Mat* out)
 {
 	fcn_004557c0_Mat id;

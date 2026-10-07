@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x5913a0
-// SIZE: 445
 // FUNCTION: GOLDTL 0x0059a0e0
-// SIZE: 445
 
 extern unsigned short* g_7e431c;
 typedef struct

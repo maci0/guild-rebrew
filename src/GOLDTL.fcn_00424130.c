@@ -7,7 +7,6 @@ char* __cdecl fcn_00423ac0(char* name);
 void __cdecl fcn_0041ddd0(void* p);
 
 // FUNCTION: GOLDTL 0x424130
-// SIZE: 305
 int __cdecl fcn_00424130(char* set, char* name)
 {
 	char* scope;

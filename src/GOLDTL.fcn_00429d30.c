@@ -9,9 +9,7 @@ struct sym_429d30 {
 void __cdecl fcn_0041ddd0(void*);
 
 // FUNCTION: GOLD 0x42b410
-// SIZE: 304
 // FUNCTION: GOLDTL 0x429d30
-// SIZE: 290
 
 /* Frees a script with its symbol data, child scripts and buffers. */
 int __cdecl fcn_00429d30(char* s)

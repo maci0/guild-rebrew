@@ -25,9 +25,7 @@ extern slot_1007ce8 g_1007ce8[];
 int __cdecl fcn_004a7880(int);
 
 // FUNCTION: GOLD 0x004a85e0
-// SIZE: 76
 // FUNCTION: GOLDTL 0x4a8700
-// SIZE: 76
 
 void __cdecl fcn_004a8700(void)
 {

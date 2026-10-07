@@ -14,9 +14,7 @@ struct s_7e43a8 {
 extern Tabs_7e43a8 g_7e43a8;
 
 // FUNCTION: GOLD 0x00520620
-// SIZE: 189
 // FUNCTION: GOLDTL 0x5255b0
-// SIZE: 189
 
 int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
 int __cdecl fcn_005e8d00(int);

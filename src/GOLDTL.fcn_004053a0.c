@@ -5,9 +5,7 @@ int __cdecl fcn_00413190(int);
 void __cdecl fcn_00438b40(char*, float*);
 
 // FUNCTION: GOLD 0x00404a80
-// SIZE: 260
 // FUNCTION: GOLDTL 0x4053a0
-// SIZE: 260
 
 /* Drops an object onto the ground of its map cell; returns the cell type. */
 int __cdecl fcn_004053a0(char* obj, int force)

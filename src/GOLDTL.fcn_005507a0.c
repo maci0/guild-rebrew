@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x5507a0
-// SIZE: 406
 
 // SIZE 0x21c
 struct house {

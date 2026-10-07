@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004ecf10
-// SIZE: 304
 // FUNCTION: GOLDTL 0x004eed10
-// SIZE: 304
 
 /* Save counterpart of ahm_AllocAhmInfo (GOLDTL 0x4eee40). */
 

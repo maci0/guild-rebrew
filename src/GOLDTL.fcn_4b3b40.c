@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x4b3b40
-// SIZE: 22
 
 // fcn_004b39f0 — zeroes 0x1200 bytes at 0x10069a0, returns 1.
 

@@ -33,7 +33,6 @@ int __cdecl fcn_0065f220(const char* a, const char* b);
 extern int g_67ac90;
 
 // FUNCTION: GOLDTL 0x44c940
-// SIZE: 605
 
 /* Reads the Direct3D screen and window options from the registry over the
  * defaults. */

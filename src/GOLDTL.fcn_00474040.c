@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00474040
-// SIZE: 694
 
 typedef struct Glyph {
 	short pad0;

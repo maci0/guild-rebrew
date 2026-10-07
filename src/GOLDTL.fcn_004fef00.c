@@ -2,9 +2,7 @@ extern float g_6628a0;
 extern float g_6628a8;
 
 // FUNCTION: GOLD 0x4fc7a0
-// SIZE: 125
 // FUNCTION: GOLDTL 0x004fef00
-// SIZE: 125
 int __cdecl fcn_004fef00(char* p)
 {
 	float v;

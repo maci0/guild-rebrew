@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00472cd0
-// SIZE: 52
 
 extern char g_00f8f3a0[]; /* 0x00f8f3a0 */
 extern char g_00f8f38c[]; /* 0x00f8f38c */

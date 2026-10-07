@@ -17,7 +17,6 @@ int __cdecl fcn_005c6270(void*, int);
 #define MINV(a, b) ((a) < (b) ? (a) : (b))
 
 // FUNCTION: GOLDTL 0x0049c310
-// SIZE: 633
 int __cdecl fcn_0049c310(int unused, char* e, int busy, char* out, char* kind)
 {
 	int v1;

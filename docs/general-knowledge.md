@@ -62,10 +62,10 @@ this file holds the rest.
   different bodies, and both are called. `0x45e520` (an 832-byte function the shared allocator source
   does not match) has **no callers at all**; `gm_LookupEntityRecordById` sits at `0x4cef30` while
   `cm_ChkEntityLookup` calls the untracked `0x4f48e0`.
-- **CRT copies of LIBCMT keep the compiler that built LIBCMT, not the game's.**
-  `src/Develop/crt_region/initterm.c` (GOLDTL `0x64e761`) is EXACT only under
-  `msvc-6.0-sp6` and is pinned there per-file. Expect more crt_region pins;
-  check them before "fixing" a CRT-region mismatch under the target profile.
+- **LIBCMT objects are library metadata, not project TUs.** GOLDTL `__initterm`
+  (`0x64e761`) and `_munlock` (`0x45ee00`) are `library_goldtl_libcmt.h` rows.
+  Do not rebuild them under the game profile. An old SP6 pin on `__initterm`
+  described the CRT object, not the GOLDTL toolchain.
 - Image base `0x10000000`. Exports: `Init` (0x10009320), `Exit`
   (0x10009350). Imports: exactly 100, inside `.rdata`/`.data` (no `.idata`).
 - `.text` VirtualSize `0x22846`. CRT: LIBCMT static. Compression: zlib
@@ -99,7 +99,7 @@ this file holds the rest.
 ## Deliverable mechanics
 
 - **The shipped `build/server.dll` is not what the linker produces.**
-  `rebrew postlink` writes `.data`, `.rdata`, `.reloc` and the headers from the
+  `rebrew build postlink` writes `.data`, `.rdata`, `.reloc` and the headers from the
   layout package. Shipped: all four `differing 0x0`; **raw link: `.data`
   21,481, `.rdata` 1,268, `.reloc` 7,107, headers 267** = 30,123 bytes the
   fixers overwrite. `.text` is the only section the build must get right.
@@ -163,7 +163,7 @@ documented wall.
 
 Evidence: enumeration of every annotated VA inside each span, with per-function residue measured against
 `original/Server/server.dll` and `build/server.dll`; `grep` of `FUNCTION: SERVER` across `src/server.dll`;
-`rebrew asm` at each VA.
+`rebrew binary asm show` at each VA.
 
 ## The build is bit-reproducible from scratch, and the correct clean recipe is `--target final`
 
@@ -189,7 +189,7 @@ only 4847/7463 layout-map entries validate (64.9%, minimum 90%).
 
 That message describes the **plain CMake link** (`0x221f6`), which is not the deliverable. The deliverable is
 `--target final`, which runs `scripts/split_link.sh` (per-reference-offset composition, LIBCMT placed as
-stock objects) and then `postlink_residual.py`. `rebrew postlink` in the POST_BUILD step refuses a
+stock objects) and then `postlink_residual.py`. `rebrew build postlink` in the POST_BUILD step refuses a
 non-position-aligned `.text`, and the plain CMake link is exactly that: by design.
 
 **Why this is worth recording.** Two properties follow, and both matter for trusting every number this
@@ -329,7 +329,7 @@ zero in a diff-shaped result is never a statement about the whole tree.
 ## Section-by-section parity: the shipped file is byte-identical outside `.text`, BY COPYING, NOT BY COMPILING (round 1089, corrected round 1092)
 
 **Read the raw-link column before drawing any conclusion from this.** The zeros below are produced by
-`rebrew postlink` writing those sections from the layout package (`layout/server.dll/*.hex`), which holds the
+`rebrew build postlink` writing those sections from the layout package (`layout/server.dll/*.hex`), which holds the
 reference's own bytes. They are **not** evidence that the compiler and linker reproduce them. Round 936
 recorded this correctly; the round-1089 version of this entry did not, and is corrected here.
 
@@ -369,7 +369,7 @@ is no additional coverage to be had: the remainder is symbols the file format do
 satisfied. "residue at zero" and "all functions EXACT" are the two clauses that are not, and they are the same
 clause: the 8,628 bytes above.
 
-## Finding code we already reversed in another target: `rebrew cross-import`
+## Finding code we already reversed in another target: `rebrew source import-related`
 
 The three targets share one source tree and one codebase, so most of the work
 is already done somewhere else.  The question "is this GOLDTL function already
@@ -377,7 +377,7 @@ reversed in GOLD or in SERVER, and in which file?" is answered by
 `cross-import` in **report mode** (round 1378):
 
 ```
-rebrew cross-import --from server.dll --target Europa1400Gold_TL.exe \
+rebrew source import-related --from server.dll --target Europa1400Gold_TL.exe \
     --dry-run --candidates-only --json
 ```
 
@@ -424,7 +424,7 @@ binaries were built with the same compiler product and version
 
 | binary | compiler version | code generator | `Rich` record | pp-only `test ah,X` sites |
 |--------|------------------|----------------|---------------|---------------------------|
-| SERVER | cl 12.00.8804 | stock VC6 c2 | **none** (no Rich header) | **0** |
+| SERVER | cl 12.00.8804 | stock VC6 c2 | stock copy: comp_id `0x000a2306`, count 37; configured copy: stripped | **0** |
 | GOLDTL | cl 12.00.8804 | **Processor Pack** c2 13.00.9044 | comp_id `0x00302354`, count 154 | 1011 |
 | GOLD | cl 12.00.8804 | **Processor Pack** c2 13.00.9044 | comp_id `0x00302354`, count 157 | 841 |
 
@@ -436,8 +436,11 @@ Three independent measurements, all agreeing:
    i.e. c2.dll 13.00.9044.0.  Nine VC6 code generators are registered
    (`6.0`, `sp1`-`sp6`, `win9x`, `sp5-pp`) and each stamps a different
    `@comp.id`; only `sp5-pp` uses product `0x0030`.  Both clients' Rich headers
-   carry exactly that record (counts 154/157 objects); SERVER's file has no
-   Rich header at all (minimal 0x80 DOS stub), so nothing is recorded there.
+   carry exactly that record (counts 154/157 objects). Matching local stock
+   SERVER copies carry product 10/build 8966, count 37. The configured project
+   copy has altered headers, including a removed Rich record and minimal
+   0x80 DOS stub; its four section contents are identical to the stock copies.
+   See `msvc6-link-layout.md` section 18 for hashes, paths and all records.
    Do not trust `diec`'s "compiler 13.00.9178" line for these clients: that
    value comes from a non-compiler Rich entry (a statically linked SDK/MSS32
    object); the compiler record is the `0x0030`/9044 one.
@@ -520,7 +523,7 @@ Consequences:
 
 - The SERVER↔client body overlap cannot be byte-identical wherever the changed
   generator touches the code (x87 compare idiom and the scheduling it drags
-  along). `rebrew cross-import --from server.dll` therefore reverts even at
+  along). `rebrew source import-related --from server.dll` therefore reverts even at
   score 100: that is the tool being honest, not a match-quality bug.
 - GOLD and GOLDTL share the generator, so GOLDTL→GOLD marker moves do verify
   (round 1378: GOLD `0x421ed0` from GOLDTL `0x41d4d0`, EXACT).
@@ -616,3 +619,29 @@ What the clients can and cannot give:
    `rebrew todo` offered the `// LIBRARY:` rows in `library_msvc.h` as
    "improve-match" items (11 of the top 20) and listed 20 GOLDTL data symbols
    in the server's todo because one metadata file serves the unified tree.
+
+- Gold and TL rand have different CRT threading variants: native GOLD0x5de784 whole-body matches stock msvc-6.0-sp5-pp LIBC.LIB `_rand`, build\intel\st_obj\rand.obj; native global seed slot0x62e108. LIBCMT whole-body probe misses. TL0x64d3f8 is already identified as LIBCMT `_rand`. Code origin is established; this does not by itself prove an entire runtime selection or linked provider without native link-map evidence. Receipts .scratch/goal-crt-retirement/{gold-rand-libc-library,gold-rand-library,gold-rand-native-asm}.json. Never recreate or patch either runtime body.
+
+- DirectInput device correspondence is evidenced by identical complete GUIDs and native CreateDevice outputs: TL GUID66cc50/GUID_SysMouse (6f1d2b60-d5a0-11cf-bfc7-444553540000) equals unique Gold5eee60; TL pointer14ce8a0 maps to Gold1467360, acquired by Gold410710. TL GUID66cc40/GUID_SysKeyboard (6f1d2b61-d5a0-11cf-bfc7-444553540000) equals unique Gold5eee50; TL pointer14ce90c maps to Gold14673cc, acquired by Gold410740. Gold410770 uses DirectInputCreateA/version700, whereas TL411820 uses DirectInput8Create/version800; root interfaces must remain distinct. Evidence .scratch/goal-forward-ret/input-guid-cross-build.json and gold-input-init-asm.json. The compiler-image DINPUT.H confirms both GUID names and Acquire/Unacquire methods; receipt native-sdk-input-evidence.txt. No storage/type/header changes made from this read-only finding.
+
+- Keyboard buffered-event ABI differs between clients: TL4124b0 calls vtable GetDeviceData(+0x28) with cbObjectData0x14 and a0x18 local frame; unique Gold4112e0 counterpart calls the same device method with cbObjectData0x10 and a0x14 frame. Gold device pointer14673cc matches the GUID-proven keyboard slot. This is a real DirectInput8/7 event-record difference, so an unchanged20-byte event import would alter Gold API behavior. Native receipts .scratch/goal-input-drain/gold-loop-candidates.json, gold-native.json, and .scratch/goal-input-types/drain-native.json.
+
+- TL420b70 clears 0x6a0 bytes at14cbcc0; existing shared updater TL420ba0/Gold424810 bounds the byte index below0x6a and updates four-int rows, choosing columns0/1 or2/3. These independent accesses corroborate106 rows of16 bytes (1696 accessed bytes), not a storage owner. Native clear has one Gold37-byte counterpart4247e0 with table1460b00 and counters633178/633174/633180/63317c. Library probes negative; source reorganization pending. Evidence .scratch/goal-getter-extents/next-{native,counterpart,library,gold-library}.json and src/GOLDTL.fcn_00420ba0.c.
+
+- Client packet statistics columns0/1 track received packets/bytes and2/3 sent packets/bytes: TL4210a0 loads native recv IAT662384 intoESI (calls4210ed/42114a), then calls updater420ba0 with flag1 at421262; send routine421290 passesflag0 at421328. The updater selects0/1 fortrue,2/3 forfalse. Field names remain reconstructed; native semantics are corroborated. Evidence .scratch/goal-net-stats/{packet-directions,update-call-context}.json.
+
+- Native TL4737e0/Gold476c80 count six12-byte rows over72 accessedbytes, checking each firstword against-1. Corresponding table views TL1011980..10119c8 andGoldf8ab80..f8abc8 are positive whole-body matches after masking only start/end operands. Remaining row-word semantics, full backing allocation, subsystem and storage owner are unresolved. Evidence .scratch/goal-vfs-casefold/next-4737e0-native.json andnext-counterparts.json.
+
+- Full native extents identify TL66080a as stock MT _strupr (308bytes, LIBCMT strupr.obj) andGold5eaad6 as stock ST _strupr (158bytes, LIBC strupr.obj). The competing strlwr bodies have7 and4 fixed-byte mismatches. Earlier library-match32-byte prefix candidates and legacy catalog __strlwr labels did not establish the exact member. Evidence .scratch/goal-vfs-casefold/full-runtime-attribution.json, pinned public index_library/match_bytes over stock archives previously validated byCLI.
+
+- Dummy-object loader TL5a3580 invokes native _strupr at66080a (call5a35c2) before formatting dummy_%s; its existing C incorrectly calls _strlwr. Complete stock308-byte attribution distinguishes uppercase from lowercase. Source correction is staged in .scratch/goal-upper-call/candidate.c, not yet applied while VFS repairgate runs. Evidence .scratch/goal-vfs-casefold/other-case-caller-native.json andfull-runtime-attribution.json.
+
+- TL40eca0 and Gold40dd90 have the same complete21-byte wrapper after masking only the call operand, but their native callees differ: TL450a00 is a38-byte counter/callback body and does not read the stack argument; Gold453890 begins with counters and reads byte[esp+4] before branching into a longer body. Same wrapper bytes do not establish unchanged callee semantics or justify importing the38-byte TL callee into Gold. TL source already has a char-width wrapper prototype; Gold scratch byte-width correction matches its21-byte native caller independently. Evidence .scratch/goal-small-extents/next-{gold-40dd90-tl-candidates,gold-453890-native,tl-450a00-native}.json.
+
+- TL67bbdc/Gold5fcc78 form an accessed12-byte, three-float view. Shared updater native operands independently establish member offsets0/4/8; former scalar globals67bbe0/67bbe4 (Gold5fcc7c/5fcc80) are interior aliases. Existing header now supplies inferred VECTOR3 with x/y/z and canonical extern declarations; this names the shared layout, not an original SDK/game type or complete allocation. Another user g_6b86c4 has unresolved semantics, so the shared type is not renamed RGB. TL450b20 passes the first triple as ambient RGB to the material setter. The primary [Wine D3D8 interface header](https://raw.githubusercontent.com/wine-mirror/wine/master/include/d3d8.h) places SetMaterial at vtable index42/offset0xa8, matching native ff91a8000000 at450c5c. Microsoft [D3DMATERIAL8](https://learn.microsoft.com/en-us/previous-versions/ms886288(v=msdn.10)) describes the material colors. Configured SDK8 probe failed C1083 missingd3d8.h; no SDK layout assertion passed. Complete backing extent and storage owners remain unresolved. Receipts .scratch/goal-material-colors/{method-binding,field-alias-bindings,alias-metadata-preview}.json.
+
+- Native literal audits found placeholder strings in TL C bodies despite zero common-prefix differences: TL401470 emits `array count mismatch`, while its native operand points to675058 `bio_rd_array_debug: Tried to load invalid array-sizes...`; TL40cba0 emits `invalid object`, while native675da8 contains `WalkToDummyRotate(): invalid character or dummy`. Masked relocation agreement does not establish literal equality. These bodies require real literal recovery before strict promotion; original-name/source-path evidence must be checked against the native string push. Evidence `.scratch/goal-small-client-helpers/placeholder-string-evidence.json`.
+
+- TL entity-query table pointer: canonical `g_entity_ptr` binds to native `0x0090e094` (four-byte word in `.data` zero-filled virtual tail). Complete native users `gm_SearchStruct` (`0x00504100`, 39 bytes) and `gm_SearchTable67` (`0x00504e70`, 62 bytes), plus existing matched reset/cleanup users, agree. Allocation witness at `0x005010b2-0x005010dc` passes `f3_gm:lpGebaeudeINST`, allocates `0xa900` bytes (256 records of stride `0xa9`), stores the result in that word and zeroes the buffer. This identifies the logical pointer; its native standalone owner or containing allocation remains unresolved. The managed row is declaration-only, with no backing or native link-symbol claim and no new C definition. Evidence: `.scratch/goal-tl-query-bindings/allocation-witness.json`, `extent-audit.json`, `users.json`. Gold independently compiled shared search/reset/cleanup bodies agree on `0x00889f74`; native allocation at `0x004fe5e2-0x004fe60c` passes the same complete label at `0x0061aa00`, allocates/zeroes `0xa900` bytes, and stores/loads that four-byte `.data` virtual-tail word. Gold storage owner/backing remain unresolved. Gold evidence: `.scratch/goal-gold-query-bindings/{extent-audit,allocation-witness,users}.json`.
+
+- TL building-prototype table pointer: canonical `g_entity_type_table` binds native `0x00868050`, a four-byte `.data` virtual-tail word. Native initialization at `0x0050108a-0x005010a3` allocates `0xca78` bytes (88 records, stride `0x24d`) with complete label `f3_gm:lpGebaeudePROT` at `0x00699748`. All aligned canonical users agree; 20-user catalog comparisons preserve compiled bytes and scores. Logical identity is verified; native storage owner/backing remains unresolved. Declaration-only metadata allocates no storage. Evidence: `.scratch/goal-tl-prototype-bindings/{allocation-witness,users,binding-effects,extent-audit}.json`.

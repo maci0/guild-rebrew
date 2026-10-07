@@ -5,9 +5,7 @@ void __cdecl fcn_0041d9e0(char*);
 extern ApEvent g_7dcae0[256];
 
 // FUNCTION: GOLD 0x0053f120
-// SIZE: 137
 // FUNCTION: GOLDTL 0x546ef0
-// SIZE: 137
 
 #include <string.h>
 

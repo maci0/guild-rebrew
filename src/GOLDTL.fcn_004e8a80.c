@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004e6ec0
-// SIZE: 74
 // FUNCTION: GOLDTL 0x4e8a80
-// SIZE: 74
 
 #include "client_types.h"
 typedef Rec18_68da68 Rec18;

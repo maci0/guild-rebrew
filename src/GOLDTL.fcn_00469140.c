@@ -80,7 +80,6 @@ static __inline void fill0(char* dst, int size)
 }
 
 // FUNCTION: GOLDTL 0x00469140
-// SIZE: 378
 
 int __cdecl fcn_00469140(int a1, int a2, int w, int h, char* src)
 {

@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004f3a30
-// SIZE: 266
 // FUNCTION: GOLDTL 0x004f5e20
-// SIZE: 266
 
 #pragma pack(1)
 // SIZE 0x2d

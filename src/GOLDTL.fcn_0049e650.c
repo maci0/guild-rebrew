@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0049ec10
-// SIZE: 245
 // FUNCTION: GOLDTL 0x49e650
-// SIZE: 245
 
 typedef struct Blk24 {
 	int v[6];

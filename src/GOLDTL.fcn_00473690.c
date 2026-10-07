@@ -8,9 +8,7 @@ extern Pair0c_1011980 g_1011980[6];
 extern Pair0c_1011980 g_1011980[6];
 
 // FUNCTION: GOLD 0x00476b80
-// SIZE: 98
 // FUNCTION: GOLDTL 0x473690
-// SIZE: 98
 void __cdecl fcn_00473690(int key, int amt)
 {
 	int i;

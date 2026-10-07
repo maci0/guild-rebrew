@@ -36,9 +36,7 @@ int __cdecl fcn_0042d630(const char* name);
 int __cdecl fcn_0042d6b0(const char* name);
 
 // FUNCTION: GOLD 0x004b1d20
-// SIZE: 286
 // FUNCTION: GOLDTL 0x004b1e60
-// SIZE: 286
 void __cdecl fcn_004b1e60(void)
 {
 	char buf[0x40];

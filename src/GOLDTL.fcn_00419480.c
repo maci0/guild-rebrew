@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00417ec0
-// SIZE: 360
 // FUNCTION: GOLDTL 0x00419480
-// SIZE: 360
 
 #include <math.h>
 

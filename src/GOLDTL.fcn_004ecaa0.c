@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004ead20
-// SIZE: 160
 // FUNCTION: GOLDTL 0x004ecaa0
-// SIZE: 160
 
 __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 

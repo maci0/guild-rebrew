@@ -1,3 +1,4 @@
+// SIZE 0x24c
 typedef struct Kind {
 	unsigned char type;
 	char pad1[0x246];
@@ -14,9 +15,7 @@ int __cdecl fcn_0057c9d0(unsigned char*);
 unsigned short __cdecl fcn_0042e410(unsigned short);
 
 // FUNCTION: GOLD 0x004abac0
-// SIZE: 416
 // FUNCTION: GOLDTL 0x4abbe0
-// SIZE: 416
 
 int __cdecl fcn_004abbe0(int a1, unsigned short* a2, int a3, char* a4)
 {

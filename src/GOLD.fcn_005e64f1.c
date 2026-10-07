@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005e64f1
-// SIZE: 43
 // fcn_005e64f1 — strnlen.
 
 int __cdecl fcn_005e64f1(char* a, int n)

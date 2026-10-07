@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x474780
-// SIZE: 301
 
 typedef struct Spin {
 	char pad0[0x18];

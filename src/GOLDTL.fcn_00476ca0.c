@@ -15,7 +15,6 @@ typedef struct {
 // SIZE 0x3c
 
 // FUNCTION: GOLDTL 0x476ca0
-// SIZE: 82
 
 int __cdecl fcn_00476ca0(int x, int y, short value, fcn_00476ca0_image* img)
 {

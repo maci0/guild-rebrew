@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x449770
-// SIZE: 127
 
 extern char* g_5fb5b0;
 

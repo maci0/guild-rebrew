@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x464500
-// SIZE: 156
 
 #include "zlib.h"
 

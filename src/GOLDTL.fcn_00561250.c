@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00559030
-// SIZE: 38
 // FUNCTION: GOLDTL 0x561250
-// SIZE: 38
 
 #pragma pack(push, 1)
 typedef struct {

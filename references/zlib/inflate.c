@@ -6,6 +6,8 @@
 #include "zutil.h"
 #include "infblock.h"
 
+extern char g_zlib_version[];
+
 struct inflate_blocks_state {int dummy;}; /* for buggy compilers */
 
 typedef enum {
@@ -84,7 +86,7 @@ int w;
 const char *version;
 int stream_size;
 {
-  if (version == Z_NULL || version[0] != ZLIB_VERSION[0] ||
+  if (version == Z_NULL || version[0] != g_zlib_version[0] ||
       stream_size != sizeof(z_stream))
       return Z_VERSION_ERROR;
 

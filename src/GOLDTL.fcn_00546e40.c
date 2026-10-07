@@ -5,7 +5,6 @@ void __cdecl fcn_00546e40(int a1, int a2, char* a3, int a4, void* a5);
 extern Deal g_7d2020[256];
 
 // FUNCTION: GOLDTL 0x546e40
-// SIZE: 131
 
 #include <string.h>
 

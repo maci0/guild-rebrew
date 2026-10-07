@@ -29,14 +29,8 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-// GLOBAL: GOLDTL 0x6b8300
 extern int g_6b8300;
-// GLOBAL: GOLD 0x633738
 extern int g_6b8300;
-// FUNCTION: GOLD 0x0040bf60
-// SIZE: 96
-// FUNCTION: GOLDTL 0x40ce80
-// SIZE: 82
 void* __cdecl fcn_00422460(void*, int);
 void* __cdecl ahm_AllocateEntitySlot(void*, int, int, float);
 

@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x45c250
-// SIZE: 64
 int __cdecl fcn_0045c250(float a, float b, float c, float d)
 {
 	float t;

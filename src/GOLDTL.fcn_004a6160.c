@@ -5,9 +5,7 @@ void __cdecl fcn_00455350(char* obj, char* pos, float* out);
 void __cdecl fcn_00414960(float* n, float* m, char* obj);
 
 // FUNCTION: GOLD 0x004a66f0
-// SIZE: 166
 // FUNCTION: GOLDTL 0x4a6160
-// SIZE: 166
 int __cdecl fcn_004a6160(char* a, float* pa, char* b, float* pb)
 {
 	struct {

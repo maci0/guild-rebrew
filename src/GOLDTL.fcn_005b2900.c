@@ -4,9 +4,7 @@ extern char g_7f4ca4[];
 extern unsigned short g_774970;
 
 // FUNCTION: GOLDTL 0x5b2900
-// SIZE: 256
 // FUNCTION: GOLD 0x5a9480
-// SIZE: 256
 
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);

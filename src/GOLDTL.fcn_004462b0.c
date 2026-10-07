@@ -20,7 +20,6 @@ typedef struct {
 extern char g_1041d6c;
 
 // FUNCTION: GOLDTL 0x004462b0
-// SIZE: 256
 
 char __cdecl fcn_004462b0(Obj* o, int i)
 {

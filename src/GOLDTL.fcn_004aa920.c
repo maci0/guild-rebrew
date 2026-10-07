@@ -7,9 +7,7 @@ float __cdecl fcn_00507e70(short*, char*, int);
 float __cdecl gm_RandomFloat01(void);
 
 // FUNCTION: GOLD 0x4aa800
-// SIZE: 320
 // FUNCTION: GOLDTL 0x4aa920
-// SIZE: 320
 
 int __cdecl fcn_004aa920(short* a1, int a2, char* a3)
 {

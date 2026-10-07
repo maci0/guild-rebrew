@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x005c80f0
-// SIZE: 780
 
 #include <string.h>
 #pragma intrinsic(memset)

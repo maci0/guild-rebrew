@@ -25,7 +25,6 @@ float __cdecl fcn_004e6d20(void);
 int __cdecl fcn_00406340(char*, const char*, int);
 
 // FUNCTION: GOLDTL 0x4e0210
-// SIZE: 735
 
 /* Duel intro: plays the challenger's opening move chosen by the duel kind. */
 void __cdecl fcn_004e0210(char* e, char* foe)

@@ -53,7 +53,6 @@ void __cdecl fcn_004458a0(Ent*, Vec4*, Mat*);
 void __cdecl fcn_00445760(Ent*, Vec4*, Mat*, Slot*, char*);
 
 // FUNCTION: GOLDTL 0x004458e0
-// SIZE: 448
 
 char __cdecl fcn_004458e0(Ent* e, Ent* parent)
 {

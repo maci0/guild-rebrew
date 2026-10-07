@@ -3,9 +3,7 @@
 int __cdecl fcn_004e8240(int, int, int, int, int);
 
 // FUNCTION: GOLD 0x004e6650
-// SIZE: 36
 // FUNCTION: GOLDTL 0x4e8210
-// SIZE: 36
 int __cdecl fcn_004e8210(int a1, int a2, int a3)
 {
 	if (a2 == 0) {

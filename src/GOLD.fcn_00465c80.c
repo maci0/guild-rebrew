@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x00465c80
-// SIZE: 46
 // fcn_00465c80 — 4 pointer stores.
 
 void __cdecl fcn_00465c80(int* a, int* b, int* c, int* d)

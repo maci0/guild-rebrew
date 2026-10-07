@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00424e70
-// SIZE: 183
 // FUNCTION: GOLDTL 0x00421290
-// SIZE: 183
 
 __declspec(dllimport) int __stdcall send(int s, const char* buf, int len, int flags);
 __declspec(dllimport) int __stdcall WSAGetLastError(void);

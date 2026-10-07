@@ -26,7 +26,6 @@ void __cdecl fcn_0045ce90(int anim);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
 // FUNCTION: GOLDTL 0x43f7e0
-// SIZE: 418
 int __cdecl fcn_0043f7e0(fcn_0043f7e0_Floor* o, char* name, int slot)
 {
 	fcn_0043f7e0_Tint tint;

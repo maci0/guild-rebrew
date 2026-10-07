@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x458800
-// SIZE: 247
 /* GOLD twin of GOLDTL fcn_00455140: the parent link sits at 0x1f8, not 0x1fc. */
 // The per-parent temporary is a 16-byte vector; with a 12-byte one or a float
 // array c2 keeps all three results on the x87 stack and drops the frame.

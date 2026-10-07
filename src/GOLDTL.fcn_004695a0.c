@@ -7,9 +7,7 @@ extern Group_102cbc4 g_102cbc4[8];
 void __cdecl fcn_00472380(int id, int on);
 
 // FUNCTION: GOLD 0x0046c620
-// SIZE: 107
 // FUNCTION: GOLDTL 0x4695a0
-// SIZE: 107
 void __cdecl fcn_004695a0(int g, int sel)
 {
 	int i;

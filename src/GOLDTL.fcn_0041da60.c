@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00422330
-// SIZE: 144
 // FUNCTION: GOLDTL 0x0041da60
-// SIZE: 144
 
 #include <stdio.h>
 #include <windows.h>

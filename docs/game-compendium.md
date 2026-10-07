@@ -419,7 +419,7 @@ All 14 `europa1400-community` org repos covered below (round 83 audit; incl.
   `docs/behavioral-verdicts.md` behavior. `docs/msvc6-link-layout.md` layout.
   `docs/TODO.md` session log. `goal.md` durable objective.
 - Community tables use own names/confidence; do not import names without
-  confirmed-push string check (`rebrew asm` + literal push).
+  confirmed-push string check (`rebrew binary asm show` + literal push).
 - Maintenance: annotated counts drift with reversing churn: re-verify with
   `grep -r "FUNCTION: <MARKER> " src --include="*.c" | wc -l` (trailing space;
   bare `GOLD` also matches `GOLDTL`) before citing. Link health swept round 19,

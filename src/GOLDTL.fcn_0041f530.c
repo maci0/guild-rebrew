@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004234a0
-// SIZE: 131
 // FUNCTION: GOLDTL 0x0041f530
-// SIZE: 131
 
 typedef struct Events Events;
 

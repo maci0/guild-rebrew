@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004ec140
-// SIZE: 400
 // FUNCTION: GOLDTL 0x004edec0
-// SIZE: 400
 
 #include "g_772f90.h"
 

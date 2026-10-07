@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x591490
-// SIZE: 1105
 
 // SIZE 0x38
 struct sel {

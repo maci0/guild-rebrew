@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x004f97a0
-// SIZE: 32
 // fcn_004f97a0 — a < 5 ? [0x91b460 + a] : 0x7e (both byte returns).
 
 unsigned char __cdecl fcn_004f97a0(int a)

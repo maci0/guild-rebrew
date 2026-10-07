@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x004cc330
-// SIZE: 83
 // FUNCTION: GOLDTL 0x4cceb0
-// SIZE: 83
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004cfc40(char*, int, int);

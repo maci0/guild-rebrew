@@ -2,7 +2,6 @@ extern unsigned char* g_868050;
 extern char* g_99ec10;
 
 // FUNCTION: GOLDTL 0x510820
-// SIZE: 224
 
 int sprintf(char*, const char*, ...);
 void __cdecl fcn_00442d50(char*, int);

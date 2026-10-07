@@ -6,7 +6,6 @@ extern void** g_1040610[];
 extern unsigned long g_14ce728;
 
 // FUNCTION: GOLDTL 0x456c10
-// SIZE: 72
 void __cdecl fcn_00456c10(void)
 {
 	unsigned int i;

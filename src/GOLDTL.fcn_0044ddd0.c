@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x0044f4a0
-// SIZE: 114
 // FUNCTION: GOLDTL 0x44ddd0
-// SIZE: 114
 
 // SIZE 0x38
 typedef struct Face {

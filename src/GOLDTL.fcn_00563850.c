@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00563850
-// SIZE: 336
 
 #include "client_types.h"
 

@@ -14,7 +14,6 @@ struct ref_fb5761 {
 extern struct ref_fb5761 g_fb5761[0x8000];
 
 // FUNCTION: GOLDTL 0x51e9d0
-// SIZE: 151
 
 void __cdecl fcn_004432d0(int, int);
 

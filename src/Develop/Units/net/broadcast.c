@@ -1,16 +1,5 @@
-// DATA: SERVER 0x10027030
 unsigned int g_broadcast_ff = 0xffffffff;
 
-// DATA: SERVER 0x10027034
-char s_broadcast_path[] = "D:\\Develop\\Units\\net\\broadcast.c";
-
-// DATA: SERVER 0x10027058
-char s_Sending_Broadcast[] = "Sending Broadcast";
-// FUNCTION: GOLDTL 0x5c86b0
-// SIZE: 191
-// FUNCTION: SERVER 0x10001130
-
-// SendBroadcastPacket
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -44,5 +33,5 @@ void __cdecl SendBroadcastPacket(int port, char* buf)
 
 	closesocket(s);
 
-	LogMessageInternal(s_broadcast_path, 0x14f, s_Sending_Broadcast, 1);
+	LogMessageInternal("D:\\Develop\\Units\\net\\broadcast.c", 0x14f, "Sending Broadcast", 1);
 }

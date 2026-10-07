@@ -27,7 +27,6 @@ struct s_1015f4c {
 extern s_1015f4c g_1015f4c[];
 
 // FUNCTION: GOLDTL 0x5340f0
-// SIZE: 100
 
 void __cdecl fcn_005340f0(int i)
 {

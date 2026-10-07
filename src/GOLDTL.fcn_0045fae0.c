@@ -3,9 +3,7 @@ void __cdecl fcn_0045fb30(void* file, unsigned long x);
 int __cdecl fcn_0045f2c0(char* s);
 
 // FUNCTION: GOLD 0x4636c0
-// SIZE: 80
 // FUNCTION: GOLDTL 0x45fae0
-// SIZE: 77
 int __cdecl fcn_0045fae0(char* s)
 {
 	int err;

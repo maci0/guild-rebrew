@@ -1,6 +1,5 @@
 extern char* g_6b7e98;
 // FUNCTION: GOLD 0x40f5d0
-// SIZE: 192
 
 // SIZE 0x2
 typedef struct {

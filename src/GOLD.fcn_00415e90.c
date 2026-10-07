@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x415e90
-// SIZE: 152
 
 #include <string.h>
 

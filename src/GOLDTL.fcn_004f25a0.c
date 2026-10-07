@@ -20,7 +20,6 @@ void __cdecl fcn_005037c0(int, int, int);
 void __cdecl fcn_005b2cb0(char*, void*, void*, int, int, int);
 
 // FUNCTION: GOLDTL 0x004f25a0
-// SIZE: 620
 int __cdecl fcn_004f25a0(char* req)
 {
 	void* entity1;

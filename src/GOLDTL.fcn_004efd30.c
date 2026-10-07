@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x4eded0
-// SIZE: 64
 // FUNCTION: GOLDTL 0x4efd30
-// SIZE: 53
 
 #include "client_types.h"
 extern Slot170_7731b8 g_7731b8[8];

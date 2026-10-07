@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x439690
-// SIZE: 183
 
 // SIZE 0x3dc
 typedef struct Player {

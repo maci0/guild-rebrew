@@ -4,9 +4,7 @@ extern char g_67d4e0[];
 void __cdecl fcn_0041d9e0(const char* msg);
 
 // FUNCTION: GOLD 0x0046cab0
-// SIZE: 90
 // FUNCTION: GOLDTL 0x469960
-// SIZE: 90
 void __cdecl fcn_00469960(int i)
 {
 	char* e;

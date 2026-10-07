@@ -13,7 +13,6 @@ void __cdecl fcn_00426170(int*, int);
 void __cdecl fcn_0041ddd0(void*);
 
 // FUNCTION: GOLDTL 0x4c0a10
-// SIZE: 74
 
 void __cdecl fcn_004c0a10(int* key)
 {

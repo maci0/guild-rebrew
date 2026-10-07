@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x56f570
-// SIZE: 128
 // FUNCTION: GOLDTL 0x5779e0
-// SIZE: 114
 
 float __cdecl fcn_00507f10(void*, int);
 float __cdecl gm_RandomFloat01(void);

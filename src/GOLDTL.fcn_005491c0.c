@@ -21,9 +21,7 @@ struct msg {
 };
 
 // FUNCTION: GOLD 0x00541350
-// SIZE: 121
 // FUNCTION: GOLDTL 0x5491c0
-// SIZE: 121
 
 char* __cdecl fcn_005463a0(int, int, int, ...);
 void __cdecl fcn_00546190(char*);

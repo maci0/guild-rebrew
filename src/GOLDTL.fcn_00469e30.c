@@ -6,7 +6,6 @@ int __cdecl fcn_00466260(int idx, void** out, int* out_idx);
 void __cdecl fcn_00469900(int idx);
 
 // FUNCTION: GOLDTL 0x469e30
-// SIZE: 52
 void __cdecl fcn_00469e30(int idx)
 {
 	if (g_7725a8) {

@@ -12,9 +12,7 @@ struct info_577940 {
 };
 
 // FUNCTION: GOLD 0x0056f4f0
-// SIZE: 124
 // FUNCTION: GOLDTL 0x577940
-// SIZE: 124
 
 void __cdecl fcn_004f4830(int, struct info_577940*);
 

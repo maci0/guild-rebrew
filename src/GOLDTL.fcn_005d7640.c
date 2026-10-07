@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x005cb3a0
-// SIZE: 663
 // FUNCTION: GOLDTL 0x005d7640
-// SIZE: 663
 
 typedef struct Ent {
 	unsigned short id;

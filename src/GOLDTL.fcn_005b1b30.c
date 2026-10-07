@@ -13,7 +13,6 @@ void __cdecl fcn_005b1980(char*, char*);
  * from edx after the call. With only a prototype it reloads from the frame. */
 
 // FUNCTION: GOLDTL 0x005b1b10
-// SIZE: 31
 char* __cdecl fcn_005b1b10(int a1)
 {
 	char* p;
@@ -29,9 +28,7 @@ char* __cdecl fcn_005b1b10(int a1)
 }
 
 // FUNCTION: GOLD 0x005a86b0
-// SIZE: 338
 // FUNCTION: GOLDTL 0x005b1b30
-// SIZE: 338
 /* Both zero-fills are the original's hand-written block-fill prelude; no
  * msvc6 C memset spelling emits it (docs/codegen-walls.md section 6b). */
 char* __cdecl fcn_005b1b30(char* a)

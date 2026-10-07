@@ -7,9 +7,7 @@ extern signed char g_7f3b00[];
 // GLOBAL: GOLD 0x76fa60
 extern signed char g_7f3b00[];
 // FUNCTION: GOLD 0x0050d460
-// SIZE: 37
 // FUNCTION: GOLDTL 0x510900
-// SIZE: 37
 
 char __cdecl fcn_00510900(void)
 {

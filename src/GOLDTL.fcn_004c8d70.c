@@ -2,9 +2,7 @@ int __cdecl fcn_004c4dc0(char*, int);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
 // FUNCTION: GOLD 0x4c81d0
-// SIZE: 110
 // FUNCTION: GOLDTL 0x004c8d70
-// SIZE: 110
 
 int __cdecl fcn_004c8d70(char* m, char* out)
 {

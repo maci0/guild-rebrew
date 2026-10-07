@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00546850
-// SIZE: 746
 
 extern unsigned char g_7766bb;
 extern unsigned short g_774970;

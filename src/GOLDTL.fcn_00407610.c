@@ -5,9 +5,7 @@ int __cdecl fcn_00413190(int);
 void __cdecl fcn_00438b40(char*, float*);
 
 // FUNCTION: GOLD 0x406a70
-// SIZE: 336
 // FUNCTION: GOLDTL 0x407610
-// SIZE: 326
 
 /* Eases a character's height towards the ground of its map cell; returns
  * the cell type. */
@@ -61,7 +59,6 @@ typedef struct PairRun {
 } PairRun;
 
 // FUNCTION: GOLDTL 0x407760
-// SIZE: 159
 
 int __cdecl fcn_00407760(char* flags, PairRun* src, char* dst, char* scale)
 {

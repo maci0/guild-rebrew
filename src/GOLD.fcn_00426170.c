@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x00426170
-// SIZE: 32
 // FUNCTION: GOLDTL 0x4225e0
-// SIZE: 32
 
 // fcn_00426170 — if(b) a[5] |= 0x10; else a[5] &= ~0x10.
 

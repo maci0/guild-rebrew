@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0047ca00
-// SIZE: 37
 // fcn_0047ca00 — r=fcn_0041e670(a,b,c); [0xf8a638] = (r<<16)|r.
 
 int __cdecl fcn_0041e670(int, int, int);

@@ -11,9 +11,7 @@ int __cdecl fcn_0045f9e0(gzFile file);
 int __cdecl gzread(gzFile file, voidp buf, unsigned len);
 
 // FUNCTION: GOLD 0x463490
-// SIZE: 332
 // FUNCTION: GOLDTL 0x45f890
-// SIZE: 332
 z_off_t __cdecl fcn_0045f890(gzFile file, z_off_t offset, int whence)
 {
 	gz_stream* s = (gz_stream*) file;

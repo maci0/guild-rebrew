@@ -24,7 +24,6 @@ short __cdecl fcn_004a82b0(void);
 void __cdecl fcn_004c51a0(int, int, char, int);
 
 // FUNCTION: GOLDTL 0x4a87b0
-// SIZE: 94
 
 void __cdecl fcn_004a87b0(void)
 {

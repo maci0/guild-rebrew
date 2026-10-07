@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x005a8a30
-// SIZE: 32
 // fcn_005a8a30 — p=fcn_005a8690([a+1]); return p ? *(float*)(p+0x38) : *(float*)0x5eb780.
 
 int __cdecl fcn_005a8690(int);

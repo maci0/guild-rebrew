@@ -1,7 +1,5 @@
 // FUNCTION: GOLD 0x424810
-// SIZE: 80
 // FUNCTION: GOLDTL 0x420ba0
-// SIZE: 80
 
 extern int g_14cbcc0[][4];
 

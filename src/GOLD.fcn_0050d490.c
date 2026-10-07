@@ -11,7 +11,6 @@ struct s_fd7c50 {
 extern struct s_fd7c50 g_fd7c50[64];
 
 // FUNCTION: GOLD 0x0050d490
-// SIZE: 182
 /* Twin of GOLDTL 0x510930; the GOLD slot records are 0x3e0 bytes, not 0x3dc. */
 
 void __cdecl fcn_004478e0(int, int);

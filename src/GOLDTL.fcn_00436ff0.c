@@ -29,7 +29,6 @@ long __stdcall fcn_006129e7(void*, void*, unsigned int, unsigned int, unsigned i
 void __cdecl fcn_0041ddd0(void*);
 
 // FUNCTION: GOLDTL 0x436ff0
-// SIZE: 286
 
 /* Loads a texture file through the VFS into a managed Direct3D texture,
  * scaled down by the texture detail shift. */

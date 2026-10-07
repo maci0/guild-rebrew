@@ -1,5 +1,4 @@
 // FUNCTION: GOLDTL 0x00451f80
-// SIZE: 632
 
 typedef struct Mat_451f80 {
 	float m[16];

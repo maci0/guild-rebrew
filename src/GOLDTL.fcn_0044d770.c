@@ -1,9 +1,7 @@
 int __cdecl vfs_ReadData(void*, int, int, void*);
 
 // FUNCTION: GOLD 0x44ee70
-// SIZE: 52
 // FUNCTION: GOLDTL 0x44d770
-// SIZE: 52
 int __cdecl fcn_0044d770(void* h)
 {
 	int c;

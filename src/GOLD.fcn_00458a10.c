@@ -16,7 +16,6 @@ struct Node {
 };
 
 // FUNCTION: GOLD 0x458a10
-// SIZE: 254
 
 void __cdecl fcn_00458a10(Node* n, float* in, float* out)
 {

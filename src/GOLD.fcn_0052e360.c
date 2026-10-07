@@ -1,5 +1,4 @@
 // FUNCTION: GOLD 0x0052e360
-// SIZE: 32
 // fcn_0052e360 — copy string a mirrored into 0x761f40-a; 2 global stores.
 
 void __cdecl fcn_0052e360(char* a)

@@ -26,9 +26,7 @@ static __inline int any_pending(void)
 }
 
 // FUNCTION: GOLD 0x004e2e00
-// SIZE: 82
 // FUNCTION: GOLDTL 0x4e4680
-// SIZE: 82
 
 void __cdecl fcn_004e4680(void)
 {

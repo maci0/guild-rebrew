@@ -24,7 +24,6 @@ typedef struct Bank {
 // SIZE 0x35
 
 // FUNCTION: GOLDTL 0x4799a0
-// SIZE: 119
 void __cdecl fcn_004799a0(Shape* s, Bank* b, int idx)
 {
 	unsigned int* p;

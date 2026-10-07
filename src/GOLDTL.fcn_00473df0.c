@@ -33,7 +33,6 @@ extern Pair0c_1011980 g_1011980[6];
 void* __cdecl fcn_004770a0(TexDesc* d, int fmt);
 
 // FUNCTION: GOLDTL 0x473df0
-// SIZE: 222
 void __cdecl fcn_00473df0(void)
 {
 	TexDesc d;
