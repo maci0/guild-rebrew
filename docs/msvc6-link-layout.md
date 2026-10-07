@@ -4879,15 +4879,11 @@ Two source facts the order depends on, both measured:
 
 ### 5b. Import slots, `.rdata`, and what is left (2026-10-06)
 
-- **IAT order.** `layout/server.dll/import-includes.rsp` (written by `scripts/gen_import_includes.py` from the
-  reference's import table; `src/crt_region/crt_imports.c` supplies only the `@N` decoration and is no longer linked) states the reference's slot order as
-  command-line `/INCLUDE`s ahead of the other includes. Object directives load import members too late: the
-  `/INCLUDE:__CRT_INIT@12` in `native-archive-includes.rsp` pulls `dllcrt0.obj` first and takes slot 0
-  (`InterlockedDecrement`), so the generator swaps that entry with the first one. KERNEL32 slots 0 to 72 then
-  match. `__imp__RtlUnwind@16` stays out of the list: its member also defines the `_RtlUnwind@16` thunk, and
-  loading it early moved the thunk ahead of the WS2_32 thunks (+6 bytes, then +16 from alignment). Its slot
-  lands last in KERNEL32 (reference: slot 73); USER32 now matches and WS2_32 differs (section 5c). `AllocConsole` had no import at all before (`/include` in an object
-  directive was ignored), so the code called `FreeConsole`'s slot; it is now in the rsp.
+- **IAT order.** `layout/server.dll/import-includes.rsp` (written by `scripts/gen_import_includes.py`;
+  `src/crt_region/crt_imports.c` supplies only the `@N` decoration and is not linked) forces the game's
+  KERNEL32 imports and the other DLLs in the reference's hint/name order; section 5d gives the load-order
+  model and what is left of the slot order. `AllocConsole` had no import at all before (`/include` in an
+  object directive was ignored), so the code called `FreeConsole`'s slot; Error.c now calls the APIs by name.
 - **`.rdata`.** `src/crt_region/rdata_restore.c` is no longer linked. Its blob repeated the C objects of
   `readonly_strings.c`, `type_adjustments.c` and `game_float_constants.c` (3272 bytes) and the CRT strings that
   the linked LIBCMT objects supply. `.rdata` is 11905 bytes long, the reference's, and equal except 8 bytes of
@@ -4975,18 +4971,22 @@ Two source facts the order depends on, both measured:
   `extern`s inside the using function do not.
 - **`.reloc` VirtualSize is LINK's reservation**, `12 * N` for N input DIR32 records (section 76). Restoring
   relocations raised it from 49296 to 51288 bytes; the reference's 66420 needs about 1260 more input fixups.
-- **Left, all linker-internal ordering:**
-  - LIBCMT `.bss` member order: `/INCLUDE:___lc_time_intl` and `___lc_id` before `___crtGetStringTypeA`,
-    and `__fmode` after `___crtMessageBoxA`, load inittime, nlsdata3 and txtmode where the reference has them.
-    The reference also has getqloc, initnum, initctyp and initmon (0x3c bytes) before a_str, winsig and
-    inithelp (0x1c) between txtmode and lconv, and w_str, w_loc and a_loc (0xc) between lconv and a_cmp.
-    Those members keep no code, and including one of their functions would keep it, so a_str through a_cmp
-    sit 0x3c to 0x64 low and `__lconv_c` differs in 9 bytes.
-  - IAT: KERNEL32 slots 73 to 80 (`RtlUnwind`, see 5b). The reference's RtlUnwind thunk is the last `.text`
-    item, so its member loaded after all CRT code, yet seven KERNEL32 slots follow it. Leaving those seven
-    out of `import-includes.rsp` does not reproduce that: they still resolve before RtlUnwind's member
-    (RtlUnwind lands at slot 79, `.text` diff 65 -> 87), so the original's library search order differs. The hint/name table records the original load
-    order (game imports, USER32, WINMM, then the CRT's imports as their members load); loading the CRT's
-    imports naturally reproduces it except `GetLastError` and `GetCPInfo`, but the IAT is a sort permutation
-    of the whole load order and then misplaces 67 slots, so the include list stays.
-  - WS2_32 thunk order follows the load order that the IAT needs (see 5c).
+- **Load order of the late CRT members and the imports (2026-10-07).** The original link had no include list
+  past the code members it needed: `setlocal.obj` pulled getqloc, initnum, initctyp and initmon (code
+  discarded, `.bss` kept), and initctyp pulled `a_str.obj`. `native-archive-includes.rsp` therefore stops
+  after `_strpbrk` and LIBCMT's own references load the rest, which places those members' `.bss` before
+  `a_str` and `GetCPInfo` before `GetStringTypeA` as in the reference: `.data` is byte-identical. The empty
+  `chr.obj` alias that aligns `_RtlUnwind@16` is included from `bss_late.c` (generated), which LINK reads after
+  LIBCMT's first pass; listed up front it loads `mbschr.obj` early.
+  The imports load in the reference's hint/name order: `scripts/gen_import_includes.py` forces only the 30
+  KERNEL32 imports of the first library pass (the game's), then USER32, WS2_32 (reversed) and WINMM; the CRT's
+  imports and RtlUnwind follow naturally. Every DLL's hint/name order then equals the reference's except
+  `GetLastError` (load index 42 against 37; no loaded member between `toupper.obj` and `realloc.obj`
+  references it). Raw `.rdata` differs in 371 bytes (was 1768).
+- **Left:**
+  - IAT slot order. LINK sorts the `.idata$5` contributions (function imports, dropped ones and null thunks,
+    in load order) with the runtime's qsort keyed by DLL name; a Python model of the VC6 qsort over that
+    array reproduces our build's KERNEL32 slots. The reference's permutation needs WS2_32's block at
+    KERNEL32 load index 29 and still misses 42 slots under that model, so its array is not yet recovered.
+    The 137 `.text` bytes that differ are all IAT slot operands.
+  - `.reloc` reservation (above).
