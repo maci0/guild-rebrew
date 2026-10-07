@@ -228,31 +228,29 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 
 	memset((void*) (g_slot_table + slot_index * 0x21c), 0, 0x21c);
-	/* The 0xffff store goes through `slot` and the +4 store through the
-	 * symbol: c2 cannot prove the two disjoint, so the +4 store depends on
-	 * this one and lifts its scheduling priority just below the `or eax,-1`,
-	 * giving the reference's `or eax,-1; mov word ptr [esi],0xffff` at
-	 * 0x1000bee6.  `volatile` makes the store a barrier that
-	 * holds the `or` behind it.  The +0x5c fill is a loop, not memset: the
-	 * destination stays its own register, `lea edx,[edx+..]; mov edi,edx`
-	 * as at 0x1000bef4 (shapes 197). */
+	/* The 0xffff and +4 stores go through the symbol.  Through `slot`, c2
+	 * drops the 0xffff store as overwritten by the slot-index store below
+	 * (the named g_citizen_count read between them cannot alias it).  The
+	 * +4 store cannot be proved disjoint from it, which lifts its priority
+	 * just below the `or eax,-1`: `or eax,-1; mov word ptr [esi],0xffff` at
+	 * 0x1000bee6.  The +0x5c fill is a loop, not memset: the destination
+	 * stays its own register, `lea edx,[edx+..]; mov edi,edx` as at
+	 * 0x1000bef4 (shapes 197). */
 	slot = (char*) (g_slot_table + slot_index * 0x21c);
 	minus_one = -1;
-	*(unsigned short*) slot = 0xffff;
+	*(unsigned short*) (g_slot_table + slot_index * 0x21c) = 0xffff;
 	*(int*) (g_slot_table + slot_index * 0x21c + 4) = minus_one;
 	for (i = 0; i < 8; i++)
 		((int*) (g_slot_table + slot_index * 0x21c + 0x5c))[i] = minus_one;
 
 	/* Both counters are read into a local ahead of their stores and written
 	 * back after, which emits the reference's ecx traffic instead of a
-	 * load-inc-store pair.  The citizen count is read through its literal
-	 * address: c2 must assume that read may alias `slot`, so the 0xffff
-	 * store above stays live although the slot-index store now goes through
-	 * `slot`.  Through `slot` that store has no may-alias edges to the later
-	 * slot stores, so its priority drops below the `mov dl,1`, as at
-	 * 0x1000bf09.  Through the symbol it outranks the `1` and issues first. */
+	 * load-inc-store pair.  The slot-index store goes through `slot`: there
+	 * it has no may-alias edges to the later slot stores, so its priority
+	 * drops below the `mov dl,1`, as at 0x1000bf09.  Through the symbol it
+	 * outranks the `1` and issues first. */
 	{
-		int live = *(int*) 0x10035434 + 1;
+		int live = g_citizen_count + 1;
 		int seq;
 		one = 1;
 		*(unsigned short*) slot = (unsigned short) slot_index;

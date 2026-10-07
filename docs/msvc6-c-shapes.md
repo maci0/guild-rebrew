@@ -8577,13 +8577,14 @@ each measured with `scripts/linktest.sh`:
   store's priority between 37 and 41: write it through the slot pointer and the following +4 store
   through the `g_slot_table` symbol, so c2 cannot prove them disjoint and adds an edge (priority 40
   -> 41). A `volatile` store is a barrier (edges to every later root); a plain store with no such
-  edge ranks lowest and issues last. The later slot-index store must go through the symbol too, or
-  the 0xffff store dies as dead.
+  edge ranks lowest and issues last. The 0xffff store and the later slot-index store must not both
+  go through the slot pointer, or the 0xffff store dies as dead.
 
-- **A literal-address read keeps an earlier same-address store alive** when a later store goes
-  through a pointer: c2 must assume the read may see the pointer's target (ahm_ExAllocAlchemist:
-  `live = *(int*) 0x10035434 + 1;` let the slot-index store go through `slot`, -6). The same read
-  can delete a symbol read-modify-write it cannot see as a reader, which changes behaviour.
+- **An overwritten store survives when the two stores spell the address differently.**
+  ahm_ExAllocAlchemist writes 0xffff through `g_slot_table + idx * 0x21c` and the slot index
+  through `slot`, with a named `g_citizen_count` read between: both stores stay. With both through
+  `slot`, c2 drops the first. The earlier workaround, a literal-address read
+  (`*(int*) 0x10035434`) that may alias `slot`, matched too but left the operand unrelocated.
 
 - **A relocation to the wrong symbol is an object mismatch the link hides.** cm_ExSellObjekt
   (0x1000d930) sat at NEAR_MATCHING with 8 differing bytes, the `push imm32` operands at
