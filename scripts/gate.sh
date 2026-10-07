@@ -59,7 +59,7 @@ BASELINE=${BASELINE:-261}
 # are md5-identical.  See section 153.
 #
 # Round 513 gave that byte back (8636 -> 8635) and cut .data by 2,105 by
-# extracting the winsock/SO_* string run into net_errors.c, ordered via
+# extracting the winsock/SO_* string run into net.c, ordered via
 # --first-va between m_alloc2 and trees.  See section 154.
 #
 # Round 514 raised it again (8635 -> 8637, +2) while prepending "rb"/gzip
