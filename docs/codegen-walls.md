@@ -261,7 +261,7 @@ Ordered by what the evidence says is most likely to pay.
 1. **A way to steer the allocator.** This is the dominant obstacle (§1). Nothing in C has been
    found that controls which slot or callee-saved register a live range receives, yet a
    majority of the remaining bytes are exactly that choice. If a technique exists (a
-   compiler extension, a source idiom, or a post-pass), it would unlock many functions at once.
+   compiler extension, a source idiom, or a post-pass), it would close many functions at once.
    **The "source idiom" half is now measured empty**: see §8.
 2. **The original build's exact compiler or flag set.** ~~suggests our `/O2 /Gd` is not
    precisely what produced the reference. `msvc6` SP6 is what is installed; the reference may
@@ -881,9 +881,9 @@ carriers.
 
 The user clarified the asm carve-out: raw asm is permitted where C cannot reach the shape: padding, single
 instructions, the six memset preludes, never whole-function asm. That is a **narrower** permission than
-"write the function in asm", and it is worth testing what it actually unlocks.
+"write the function in asm", and it is worth testing what it actually closes.
 
-**It unlocks nothing among the residue.** The six existing asm sites are inside `srv_InitBuildingTypeTable`,
+**It closes nothing among the residue.** The six existing asm sites are inside `srv_InitBuildingTypeTable`,
 `gm_AllocGebaeude`, `m_AllocTracked`, `m_alloc`, `m_alloc2` and `vfs_ReadData`, and the functions that
 *contain* those sites are already byte-exact. The 8,628 residual bytes live in 19 different functions, and
 none of them is an instruction-shape problem:

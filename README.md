@@ -1,4 +1,4 @@
-# ☕ Guild Rebrew: Europa 1400 Decompilation
+# Guild Rebrew: Europa 1400 Decompilation
 
 Byte-identical C89 source reconstruction of **Europa 1400: The Guild** (`server.dll`).
 
@@ -6,7 +6,7 @@ Uses the [rebrew](../rebrew/) toolchain for compiler-in-the-loop decompilation m
 
 <!-- progress:start -->
 <p align="center">
-  <img src="docs/progress.svg" width="715" alt="Decompilation progress. One block per discovered function, in address order. server.dll 509 of 543 functions. Europa1400Gold_TL.exe 823 of 5012 game functions. Europa1400Gold.exe 350 of 4638 functions.">
+  <img src="docs/progress.svg" width="715" alt="Decompilation progress. One block per discovered function, in address order. server.dll 509 of 543 functions (exact 232, reloc 274, proven 3, near 2, stub 1, size 3, no size 8, unattempted 20). Europa1400Gold_TL.exe 823 of 5012 game functions (exact 226, reloc 597, near 5, stub 26, size 21, library 1323, unattempted 4137). Europa1400Gold.exe 350 of 4638 functions (exact 96, reloc 254, near 22, stub 78, size 1, error 3, unattempted 4184).">
 </p>
 <!-- progress:end -->
 
