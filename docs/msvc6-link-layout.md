@@ -4975,8 +4975,8 @@ Two source facts the order depends on, both measured:
   relocations raised it from 49296 to 51288 bytes; the reference's 66420 needed about 1260 more input fixups (about 1090 after the net.c code below).
 - **Load order of the late CRT members and the imports (2026-10-07).** The original link had no include list
   past the code members it needed: `setlocal.obj` pulled getqloc, initnum, initctyp and initmon (code
-  discarded, `.bss` kept), and initctyp pulled `a_str.obj`. `native-archive-includes.rsp` therefore stops
-  after `_strpbrk` and LIBCMT's own references load the rest, which places those members' `.bss` before
+  discarded, `.bss` kept), and initctyp pulled `a_str.obj`. The include list therefore stops after
+  `_strpbrk` (its entries after `_toupper` are in `bss_head2.c`, 5f) and LIBCMT's own references load the rest, which places those members' `.bss` before
   `a_str` and `GetCPInfo` before `GetStringTypeA` as in the reference: `.data` is byte-identical. The empty
   `chr.obj` alias that aligns `_RtlUnwind@16` is included from `bss_late.c` (generated), which LINK reads after
   LIBCMT's first pass; listed up front it loads `mbschr.obj` early.
@@ -5016,12 +5016,13 @@ server image, and the remaining differences are their fingerprints. The general 
 - **Load position.** A discarded CRT reference loads its member where it is first referenced: `_chmod` or
   `_rmdir` referenced between `toupper.obj` and `realloc.obj` puts `GetLastError` at the reference's load
   index 37 (`.rdata` 242 to 138). That needs the CRT anchors that follow to move from the command-line
-  include list (read before any object) into a later object's `#pragma comment(linker, "/include:...")`.
+  include list (read before any object) into a later object's `#pragma comment(linker, "/include:...")`,
+  done in 5f.
 - **Shown, not adopted.** A synthetic discarded TU (placeholder API calls and CRT references) reproduces
   `.text`, `.rdata`, `.data` and the Rich header byte for byte. It proves the model but invents code, so
   the build instead reconstructs the real client-only functions in the shared files: the client `net.c`
   (WS2_32 connect, select, gethostbyname, ...), the timer unit that also holds `gm_Random*` (WINMM timers;
-  the likely 37th game object), the `.BIN` file search before `vfs.c` (KERNEL32 `FindFirstFileA`, ...) and the
+  the likely 37th game object), the `.BIN` file search in `vfs.c` (KERNEL32 `FindFirstFileA`, ...; 5f) and the
   self-contained client-only functions of the game TUs (about 1000 to 1370 DIR32). Discarded code must still
   link, because LINK resolves references before it discards, so only functions whose callees and globals
   exist in the server belong in the server build.
@@ -5045,3 +5046,50 @@ server image, and the remaining differences are their fingerprints. The general 
   with it the IAT model predicts 72 KERNEL32 slots off. The rest of the client browser (TL
   0x402320..0x402604: close, send, recvfrom search) changes the prediction by one slot (39) and adds
   `recvfrom` and `fprintf.obj`; with no measured support it is not added.
+
+### 5f. The `.BIN` file search is client `vfs.c` code; three of its functions place `GetLastError` (2026-10-07)
+
+- **TU.** The TL client's `.data` holds one literal pool from `0x679e60` to `0x67a0d4`: the gzip magic words
+  (plain data, read by `vfs_ReadData`/`vfs_OpenStream`), then literals in creation order from `vfs:IGetSubDir`
+  (0x42e5a0) through `%i vfs_file(s) were left open!` (0x4310f0). The file search at 0x42f6d0 uses `..` at
+  0x679ee8, between `vfs:FinishedFiles` (0x42ee50) and `vfs_Tfopen` (0x42ff50). The directory tree, the file
+  search, `vfs:Open`, `CloseVfsStream`, `vfs_ReadData`, `vfs_OpenStream` and `vfs_init` (0x431070, which calls
+  the search) are one TU, the server's `vfs.c`. Its `.BIN5`..`.BIN` table is the server's
+  `g_file_extension_names`. The client's unzip functions (0x464600..) are a second TU whose server functions
+  (`vfs_DestroyEntity` = `unzClose`, `vfs_ReadCompressed`, `vfs_CleanupObject`) also sit in our `vfs.c`.
+- **Imports.** 0x42f6d0 calls `FindFirstFileA`, `FindNextFileA`, `FindClose`, `FileTimeToLocalFileTime` and
+  `FileTimeToSystemTime` directly. `findfile.obj` (`_findfirst`/`_findclose`, called by 0x42fcd0) imports the
+  same five plus `GetLastError`.
+- **CRT members.** The unit calls `_strupr` (0x42e520), `_findfirst`/`_findclose`/`_mkdir` (0x42fcd0),
+  `remove` and `memmove` (0x42fe60), `qsort` (0x42ee50), `_getcwd` (`vfs_init`) and `_stricmp` (0x42e4d0,
+  0x42e680, 0x430f70).
+- **Natural load order (measured).** Without an include list LINK loads members in the order of the objects'
+  undefined symbols, and VC6 writes a TU's externals in function order. `stricmp.obj` and `memmove.obj` are
+  assembler members whose code stays even when unreferenced, so their code position is their load position.
+  The reference has `memmove` directly after `toupper` and `_stricmp` late (0x10022cd0, loaded by
+  `getqloc.obj`). The server's `vfs.c` therefore did not reference `_stricmp`, and its other CRT references
+  followed `vfs_OpenStream`'s `toupper`. The client's order (tree code before `vfs_OpenStream`) and every
+  function reaching 0x42e4d0 (including the file search 0x42f6d0) contradict the reference; they are not built.
+- **Built.** `vfs.c` defines, after `vfs_OpenStream`, the three client functions whose callees and globals
+  exist in the server: `vfs_NormalizeCase` (0x42e520, `_strupr` unless `g_vfs_case_sensitive`),
+  `vfs_GetDirPath` (0x42f420) and `vfs_MakeDirs` (0x42fcd0). Compiled from `vfs.c` they match the TL client
+  (RELOC/EXACT/RELOC with `rebrew test -t Europa1400Gold_TL.exe --symbol ... --va ...`). The client's flag at
+  0x6b7fe8 sits between its stream pool and stream count, as the server's 4 bytes at 0x10034674 do between
+  `g_stream_pool` and `g_stream_count`; that row is now `char g_vfs_case_sensitive` plus 3 pad bytes.
+- **Anchors moved.** Object references load after the whole command-line include list, so the anchors from
+  `_memmove` to `_strpbrk` moved from `native-archive-includes.rsp` to `late-archive-includes.txt`, which
+  `scripts/gen_bss_layout.py` writes into `bss_head2.c` as `#pragma comment(linker, "/include:...")`.
+  LINK reads `bss_head2.obj` after `vfs.obj` (only `zutil.obj`, whose `malloc`/`free` are already loaded, lies
+  between), so `strupr.obj`, `findfile.obj` and `mkdir.obj` load between `toupper.obj` and `memmove.obj`. A
+  directive in `vfs.c` itself would not work: LINK takes an object's directives before its symbols.
+- **Result.** Every DLL's hint/name order equals the reference's (`GetLastError` at 37). `.text` differs only
+  in IAT operands (143 bytes, was 138), `.rdata` in 148 bytes (was 242), `.data` in none; all 260 functions
+  keep their VAs. Rich: LIBCMT C members 116 (reference 124), import members 115 (126), game objects 36 (37).
+  `.reloc` VirtualSize 51612 (was 51312; reference 66420): 25 more DIR32 records, one for
+  `vfs_NormalizeCase`'s flag operand and 24 in the three loaded members.
+  IAT slot mismatches stay 53 of 100.
+- **ICF survivor.** Adding `findfile.obj` and `mkdir.obj` without `strupr.obj` changes LINK's choice of
+  surviving `_strncnt` copy (a_cmp to a_map, as in section 57): `.text` grows 16 bytes. So do `mkdir`+`rmdir`,
+  `mkdir`+`unlink` and `findfile`+`unlink`; `findfile` or `mkdir` alone, and `mkdir`+`chmod`, `findfile`+`mkdir`
+  +`strupr` or `+getcwd` do not. The survivor depends on the whole input set, so each added member must be
+  measured.
