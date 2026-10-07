@@ -5069,15 +5069,15 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   function, so the object links last; no path string names it. The range and squared helpers are discarded
   code. The trace unit is not in the server: its initialized pointers to `"*bRaIn DeaD%&"` and
   `"%aRscH Ab :-)"` would keep those strings, and the server has neither.
-- **Timer unit (`Units/timer/timer.c`).** The clients' `tb_*` multimedia-timer unit (TL 0x42dcd0..0x42df70) is
-  a separate TU from the trace unit: its message is a literal, and the trace unit's plain data follows it. Its
-  references load the five WINMM members the server lacks (`timeSetEvent`, `timeBeginPeriod`,
-  `timeGetDevCaps`, `timeKillEvent`, `timeEndPeriod`) and add 68 DIR32 records. Its storage has no attested
-  server owner, so offsets into the unnamed BSS block `g_gap_10035a10` stand in. `tb_Init` calls `srand`
-  (TL 0x42de49, as in Gold), and the reference loads `rand.obj` after `memmove.obj`, so the object is read
-  after `bss_head2.obj`: it links between `bss_head2.c` and `server.c` (`--first-va timer.c`). Read between
-  `net.c` and `trees.c`, where a Units file name sorts, it loads `rand.obj` first and moves the CRT from
-  0x1001b1fb on by 4 bytes (2984 `.text` bytes). Neither its name nor its position has path evidence.
+- **No timer unit.** The clients' `tb_*` multimedia-timer unit (TL 0x42dcd0..0x42df70) is not built. Its
+  five dropped WINMM imports (`timeSetEvent`, `timeBeginPeriod`, `timeGetDevCaps`, `timeKillEvent`,
+  `timeEndPeriod`) cannot coexist with net.c's seven dropped WS2_32 imports. The IAT permutation depends only
+  on the DLL-key sequence of the contribution array, so the model can be inverted per split (below): with the
+  reference's 26 dropped imports (Rich: 126 import members, 100 live), an exact IAT needs w + m = 5 or 7
+  dropped WS2_32 and WINMM imports, also with 1 to 3 dropped USER32 imports; 7 + 5 has no solution. net.c's
+  TCP functions sit in the TU whose winsock strings the server keeps; the timer unit had no path evidence,
+  and its storage was offsets into the unnamed `g_gap_10035a10`. Without it Rich counts 37 game C objects like
+  the reference (three of them are the generated BSS objects).
 - **Game TUs.** 146 function definitions, each placed after the server function that precedes it in the
   client: `aemter.c` (TL 0x4e8a80..0x4ec810) and `server.c` (0x4e73c0..0x4e7c70) office and stat-dump helpers;
   `friedhof_logic.c` slot helpers (0x4f1790..0x4f1890, 0x4f1a10, 0x4f3800, 0x4f3e60); `plant.c` record lookups
@@ -5098,12 +5098,23 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   deck and player prototype, sim 0x5007f0..0x500a20, most client-only loaders) and functions reaching them
   (spiel 0x502780, friedhof 0x4f1a40); and TL 0x522e30, the client's `ls_LoadEntities`.
 - **ICF survivor.** LINK folds the identical `_strncnt` COMDATs of `a_cmp.obj` and `a_map.obj`; the reference
-  keeps `a_cmp.obj`'s. Which copy survives depends on the whole input set: neither COMDAT count nor size
-  predicts it (`findfile.obj` + `mkdir.obj` without `strupr.obj` flip it; the net code and the game-TU code
-  each flipped it on their own branches, and the squared helper alone on the timer branch). With all of the
-  above it keeps `a_map.obj`'s (`.text` VirtualSize +16, 16198 bytes differ); adding the clients' squared
-  helper restores `a_cmp.obj`'s. The helper is real code of the same object, so it is included rather than
-  any real function removed. Each further input must be measured for this.
+  keeps `a_cmp.obj`'s. LINK 6.00.8447 decides it with MSVCRT `qsort`: COMDAT resolution (0x4627e0) appends
+  every executable COMDAT it keeps as a definition to one array, in resolution order (command-line objects,
+  then archive members in load order), before `/OPT:REF` and including code it later discards; 0x433690
+  sorts the array by section size, then relocation count (comparator 0x4337f0), and 0x433fd0 folds each
+  identical later section into the first one of its run. The two `_strncnt` copies have equal keys, so the
+  unstable sort decides from every executable COMDAT's size and relocation count. Adding or removing discarded
+  code, or loading a member in another pass, can flip it. `.scratch/measure/icf_predict.py VERBOSE_LOG
+  BUILD_DIR` rebuilds the array and predicted the survivor in 42 of 42 native links (31 `a_cmp`, 11 `a_map`).
+- **IAT inversion.** The import sort compares only the DLL file name, so the IAT permutation depends only on
+  the array's DLL-key sequence: KERNEL32 x (28 + h), its null thunk, USER32 x 2, null, WS2_32 x (16 + w),
+  null, WINMM x (1 + m), null, KERNEL32 x (53 + t), where h counts dropped KERNEL32 imports of the game's
+  first library pass and t those of the CRT pass. Per split, CP-SAT picks which positions are dropped so that
+  every DLL's live imports, named in hint/name (load) order, land in the reference's slots
+  (`.scratch/measure/iat_cpsat.py`; `iat_gaps.py` enumerates placements, `iat_nearest.py` finds the one
+  nearest a given gap vector, `iat_hyp.py` checks a named array). With h + w + m + t = 26 the exact splits
+  are (h, w + m, t) = (3, 5, 18), (5, 5, 16), (5, 7, 14) and (7, 5, 14). None has h = 0: the original's game
+  objects referenced KERNEL32 functions that `/OPT:REF` dropped.
 - **Measured** (native link of the committed tree against `original/Server/server.dll`; `.scratch` scripts:
   section byte compare, IAT and hint/name compare per DLL, Rich records, link map):
 

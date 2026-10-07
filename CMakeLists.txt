@@ -183,7 +183,6 @@ if(REBREW_BUILD_SERVER)
       --first-va inftrees.c=0x10005d00
       --first-va infutil.c=0x10006440
       --first-va net.c=0x10006c80
-      --first-va timer.c=0x100092e2
       --first-va trees.c=0x10006ec0
       --first-va trees2.c=0x10008800
       --first-va bss_head.c=0x10001000
