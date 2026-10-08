@@ -5085,14 +5085,15 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   0x10034670..0x10034678 and two dwords below them that no relocation in the reference addresses, so they
   are `g_vfs_root` (0x10034668) and `g_vfs_item_pool` (0x1003466c). The flag is set for case-insensitive
   compares (`stricmp`) and clear for upper-casing names before plain compares, despite its name.
-- **minizip is its own TU (`Units/vfs/unzip.c`).** The server's `unzClose`, `unzReadCurrentFile` and
+- **minizip is its own TU (`references/minizip/unzip.c`).** The server's `unzClose`, `unzReadCurrentFile` and
   `unzCloseCurrentFile` (formerly `vfs_DestroyEntity`, `vfs_ReadCompressed`, `vfs_CleanupObject`) compile
   from zlib 1.1.3's stock `contrib/minizip/unzip.c` to the reference bytes, and every other stock function
   matches the TL client, which keeps the unit apart from vfs.c (0x4645a0..0x4657d0). The server's readonly
   data holds the unit's ` unzip 0.15a Copyright 1998 Gilles Vollant ` right before vfs.c's `.BIN` table. The
-  vendored file lists its changes: the 0.15a copyright string (selectany, ordered as before), the client's
-  `unzGetFilePos`/`unzGoToFilePos` (TL 0x465750, 0x465790) appended, SIZE comments. It links between
-  `trees.c` and `vfs.c` and leaves every function VA unchanged; Rich counts one more game C object.
+  file is vendored like zlib (`vendoring.md`): pristine 1.1.3 `contrib/minizip/unzip.c` plus three patches,
+  the 0.15a copyright string (no published source found with it), its selectany form (ordered as before) and the
+  client's `unzGetFilePos`/`unzGoToFilePos` (TL 0x465750, 0x465790) appended. It links between `trees.c` and
+  `vfs.c` and leaves every function VA unchanged; Rich counts one more game C object.
 - **zlib is stock 1.1.3, whole files (round 18).** The vendored files had every function the server does not
   call removed (`#if 0`, "not present in original DLL"), which `/OPT:REF` drops anyway, `gzio.c` was replaced
   by a decompiled copy (`Units/vfs/gz_stream.c`, `vfs_GetByte` for `get_byte` and so on), and `trees.c` was
@@ -5110,6 +5111,10 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   does not keep it, `/VERBOSE` reports it discarded). `compress.c` and `uncompr.c` stay out: they would be
   two more game C objects. The restored code adds 30 DIR32 records; Rich now counts 124 LIBCMT C members
   and 37 game C objects, both equal to the reference.
+  The vendored tree is the pristine 1.1.3 tarball plus four patches (`vendoring.md`). One finding there: the
+  shared `1.1.3` array (patch 0002) stands in for `compress.obj`. Linked stock, `compress.c` is the first object
+  whose code references `ZLIB_VERSION`, so its pooled literal lands exactly at 0x1002706c with stock
+  `deflate.c`; it stays out only because of the Rich count above and the CRT load order it moves.
 - **Late CRT anchors.** Object references load after the whole command-line include list, so the anchors from
   `_memmove` to `_strpbrk` are in `late-archive-includes.txt`, which `scripts/gen_bss_layout.py` writes into
   `bss_head2.c` as `#pragma comment(linker, "/include:...")`. LINK reads `bss_head2.obj` after `vfs.obj`; the

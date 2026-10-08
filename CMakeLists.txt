@@ -82,6 +82,33 @@ endfunction()
 add_c_warning(parentheses)
 
 # ---------------------------------------------------------------------------
+# Vendored libraries (docs/vendoring.md)
+# ---------------------------------------------------------------------------
+
+# references/zlib and references/minizip must equal their pinned pristine
+# upstream plus references/vendor/<name>/*.patch; any drift stops configure.
+if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/python")
+  set(_VENDOR_PYTHON "${PROJECT_SOURCE_DIR}/.venv/bin/python")
+else()
+  find_package(Python3 REQUIRED COMPONENTS Interpreter)
+  set(_VENDOR_PYTHON "${Python3_EXECUTABLE}")
+endif()
+file(GLOB_RECURSE _VENDOR_INPUTS CONFIGURE_DEPENDS
+  "${PROJECT_SOURCE_DIR}/references/vendor/*"
+  "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/*"
+  "${PROJECT_SOURCE_DIR}/references/zlib/*"
+  "${PROJECT_SOURCE_DIR}/references/minizip/*")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+  "${PROJECT_SOURCE_DIR}/scripts/vendor.py" ${_VENDOR_INPUTS})
+execute_process(
+  COMMAND "${_VENDOR_PYTHON}" "${PROJECT_SOURCE_DIR}/scripts/vendor.py" check
+          --root "${PROJECT_SOURCE_DIR}" --stage "${CMAKE_BINARY_DIR}/vendor-stage"
+  RESULT_VARIABLE _VENDOR_RC)
+if(NOT _VENDOR_RC EQUAL 0)
+  message(FATAL_ERROR "Vendored sources differ from pristine upstream + patches")
+endif()
+
+# ---------------------------------------------------------------------------
 # server.dll target
 # ---------------------------------------------------------------------------
 
@@ -148,29 +175,32 @@ if(REBREW_BUILD_SERVER)
   endif()
 
   set(ZLIB_SOURCES
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/adler32.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/compress.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/crc32.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/deflate.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/gzio.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/infblock.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/infcodes.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/inffast.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/inflate.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/inftrees.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/infutil.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/trees.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/uncompr.c"
-    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/zutil.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/adler32.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/compress.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/crc32.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/deflate.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/gzio.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/infblock.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/infcodes.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/inffast.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/inflate.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/inftrees.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/infutil.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/trees.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/uncompr.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib/zutil.c"
   )
+  # minizip's unzip.c, vendored beside zlib (docs/vendoring.md); its rows are
+  # outside src/, so cmake-sources does not list it.
+  set(MINIZIP_SOURCES "${PROJECT_SOURCE_DIR}/references/minizip/unzip.c")
 
 
   # Order objects by original function VA (fixes reccmp "0 aligned"; drops
   # zlib files absent from the original). The --first-va table supplies the
-  # zlib files' first-function VAs (they have no // FUNCTION: markers); the
+  # vendored files' first-function VAs (they have no // FUNCTION: markers); the
   # --exclude list drops files absent from the original server.dll.
   execute_process(
-    COMMAND "${_REBREW_SRC_BIN}" build order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES}
+    COMMAND "${_REBREW_SRC_BIN}" build order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES} ${MINIZIP_SOURCES}
       --marker SERVER
       --first-va adler32.c=0x10001000
       --first-va crc32.c=0x100011f0
@@ -183,6 +213,7 @@ if(REBREW_BUILD_SERVER)
       --first-va infutil.c=0x10006440
       --first-va net.c=0x10006c80
       --first-va trees.c=0x10006ec0
+      --first-va unzip.c=0x10008a50
       --first-va bss_head.c=0x10001000
       --first-va zutil.c=0x100092e0
       --first-va bss_head2.c=0x100092e1

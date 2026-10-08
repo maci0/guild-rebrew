@@ -18,6 +18,7 @@ these files is the value at the time it was written.
 | Running agents, parallel sessions, or the build tooling | `workflow-traps.md` | section number |
 | Needing a fact about the original build, toolchain, or targets | `general-knowledge.md` | topic |
 | Naming a function, global, or source file | `naming_conventions.md` | prefix, source file |
+| Changing vendored zlib or minizip code | `vendoring.md` | patch number |
 | Checking whether a residue function has a known semantic bug | `behavioral-verdicts.md` | function |
 | Looking up game, binary, or community facts | `game-compendium.md` | topic |
 | Picking up open work or reading round history | `TODO.md` (latest `**Round-N:**` note under Continuation notes) | round |

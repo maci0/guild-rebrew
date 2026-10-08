@@ -1,0 +1,164 @@
+readonly tables: selectany so /ORDER can place them
+
+Kind: link-layout stand-in (no compiler flag gives the same result).
+
+The build places the readonly game pools with /ORDER
+(layout/server.dll/common-data-order.txt; docs/msvc6-link-layout.md 30).
+LINK puts ordered COMDATs before every ordinary .rdata contribution, so the
+zlib tables that precede those pools in the reference must be COMDATs too.
+MSVC 6 has no flag that makes data COMDAT (/Gy covers functions, /Gf and /GF
+string literals), so each table becomes a selectany definition. Stock tables
+with their /INCLUDE anchors removed keep every size but move readonly data
+(10735 bytes differ); with no /ORDER at all 6324 bytes differ.
+
+--- a/crc32.c
++++ b/crc32.c
+@@ -65,7 +65,7 @@
+ /* ========================================================================
+  * Table of CRC-32's of all single-byte values (made by make_crc_table)
+  */
+-local const uLongf crc_table[256] = {
++__declspec(selectany) const uLongf crc_table[256] = {
+   0x00000000L, 0x77073096L, 0xee0e612cL, 0x990951baL, 0x076dc419L,
+   0x706af48fL, 0xe963a535L, 0x9e6495a3L, 0x0edb8832L, 0x79dcb8a4L,
+   0xe0d5e91eL, 0x97d2d988L, 0x09b64c2bL, 0x7eb17cbdL, 0xe7b82d07L,
+--- a/deflate.c
++++ b/deflate.c
+@@ -54,7 +54,7 @@
+ /* Shared writable version string, preceding the static version pointer. */
+ char g_zlib_version[] = ZLIB_VERSION;
+ 
+-const char deflate_copyright[] =
++__declspec(selectany) const char deflate_copyright[] =
+    " deflate 1.1.3 Copyright 1995-1998 Jean-loup Gailly ";
+ /*
+   If you use the zlib library in a product, an acknowledgment is welcome
+@@ -126,7 +126,7 @@
+    compress_func func;
+ } config;
+ 
+-local const config configuration_table[10] = {
++__declspec(selectany) const config configuration_table[10] = {
+ /*      good lazy nice chain */
+ /* 0 */ {0,    0,  0,    0, deflate_stored},  /* store only */
+ /* 1 */ {4,    4,  8,    4, deflate_fast}, /* maximum speed, no lazy matches */
+--- a/infblock.c
++++ b/infblock.c
+@@ -16,7 +16,7 @@
+ #define bits word.what.Bits
+ 
+ /* Table for deflate from PKZIP's appnote.txt. */
+-local const uInt border[] = { /* Order of the bit length code lengths */
++__declspec(selectany) const uInt border[] = { /* Order of the bit length code lengths */
+         16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15};
+ 
+ /*
+--- a/inftrees.c
++++ b/inftrees.c
+@@ -10,7 +10,7 @@
+ #  define BUILDFIXED   /* non ANSI compilers may not accept inffixed.h */
+ #endif
+ 
+-const char inflate_copyright[] =
++__declspec(selectany) const char inflate_copyright[] =
+    " inflate 1.1.3 Copyright 1995-1998 Mark Adler ";
+ /*
+   If you use the zlib library in a product, an acknowledgment is welcome
+@@ -38,18 +38,18 @@
+     uIntf * ));         /* space for values */
+ 
+ /* Tables for deflate from PKZIP's appnote.txt. */
+-local const uInt cplens[31] = { /* Copy lengths for literal codes 257..285 */
++__declspec(selectany) const uInt cplens[31] = { /* Copy lengths for literal codes 257..285 */
+         3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31,
+         35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 0, 0};
+         /* see note #13 above about 258 */
+-local const uInt cplext[31] = { /* Extra bits for literal codes 257..285 */
++__declspec(selectany) const uInt cplext[31] = { /* Extra bits for literal codes 257..285 */
+         0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2,
+         3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 112, 112}; /* 112==invalid */
+-local const uInt cpdist[30] = { /* Copy offsets for distance codes 0..29 */
++__declspec(selectany) const uInt cpdist[30] = { /* Copy offsets for distance codes 0..29 */
+         1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193,
+         257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145,
+         8193, 12289, 16385, 24577};
+-local const uInt cpdext[30] = { /* Extra bits for distance codes */
++__declspec(selectany) const uInt cpdext[30] = { /* Extra bits for distance codes */
+         0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6,
+         7, 7, 8, 8, 9, 9, 10, 10, 11, 11,
+         12, 12, 13, 13};
+--- a/trees.c
++++ b/trees.c
+@@ -58,16 +58,16 @@
+ #define REPZ_11_138  18
+ /* repeat a zero length 11-138 times  (7 bits of repeat count) */
+ 
+-local const int extra_lbits[LENGTH_CODES] /* extra bits for each length code */
++__declspec(selectany) const int extra_lbits[LENGTH_CODES] /* extra bits for each length code */
+    = {0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0};
+ 
+-local const int extra_dbits[D_CODES] /* extra bits for each distance code */
++__declspec(selectany) const int extra_dbits[D_CODES] /* extra bits for each distance code */
+    = {0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13};
+ 
+-local const int extra_blbits[BL_CODES]/* extra bits for each bit length code */
++__declspec(selectany) const int extra_blbits[BL_CODES]/* extra bits for each bit length code */
+    = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,7};
+ 
+-local const uch bl_order[BL_CODES]
++__declspec(selectany) const uch bl_order[BL_CODES]
+    = {16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15};
+ /* The lengths of the bit length codes are sent in order of decreasing
+  * probability, to avoid transmitting the lengths for unused bit length codes.
+--- a/trees.h
++++ b/trees.h
+@@ -1,6 +1,6 @@
+ /* header created automatically with -DGEN_TREES_H */
+ 
+-local const ct_data static_ltree[L_CODES+2] = {
++__declspec(selectany) const ct_data static_ltree[L_CODES+2] = {
+ {{ 12},{  8}}, {{140},{  8}}, {{ 76},{  8}}, {{204},{  8}}, {{ 44},{  8}},
+ {{172},{  8}}, {{108},{  8}}, {{236},{  8}}, {{ 28},{  8}}, {{156},{  8}},
+ {{ 92},{  8}}, {{220},{  8}}, {{ 60},{  8}}, {{188},{  8}}, {{124},{  8}},
+@@ -61,7 +61,7 @@
+ {{163},{  8}}, {{ 99},{  8}}, {{227},{  8}}
+ };
+ 
+-local const ct_data static_dtree[D_CODES] = {
++__declspec(selectany) const ct_data static_dtree[D_CODES] = {
+ {{ 0},{ 5}}, {{16},{ 5}}, {{ 8},{ 5}}, {{24},{ 5}}, {{ 4},{ 5}},
+ {{20},{ 5}}, {{12},{ 5}}, {{28},{ 5}}, {{ 2},{ 5}}, {{18},{ 5}},
+ {{10},{ 5}}, {{26},{ 5}}, {{ 6},{ 5}}, {{22},{ 5}}, {{14},{ 5}},
+@@ -70,7 +70,7 @@
+ {{19},{ 5}}, {{11},{ 5}}, {{27},{ 5}}, {{ 7},{ 5}}, {{23},{ 5}}
+ };
+ 
+-const uch _dist_code[DIST_CODE_LEN] = {
++__declspec(selectany) const uch _dist_code[DIST_CODE_LEN] = {
+  0,  1,  2,  3,  4,  4,  5,  5,  6,  6,  6,  6,  7,  7,  7,  7,  8,  8,  8,  8,
+  8,  8,  8,  8,  9,  9,  9,  9,  9,  9,  9,  9, 10, 10, 10, 10, 10, 10, 10, 10,
+ 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+@@ -99,7 +99,7 @@
+ 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29
+ };
+ 
+-const uch _length_code[MAX_MATCH-MIN_MATCH+1]= {
++__declspec(selectany) const uch _length_code[MAX_MATCH-MIN_MATCH+1]= {
+  0,  1,  2,  3,  4,  5,  6,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 12, 12,
+ 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16,
+ 17, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19,
+@@ -115,12 +115,12 @@
+ 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 28
+ };
+ 
+-local const int base_length[LENGTH_CODES] = {
++__declspec(selectany) const int base_length[LENGTH_CODES] = {
+ 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 20, 24, 28, 32, 40, 48, 56,
+ 64, 80, 96, 112, 128, 160, 192, 224, 0
+ };
+ 
+-local const int base_dist[D_CODES] = {
++__declspec(selectany) const int base_dist[D_CODES] = {
+     0,     1,     2,     3,     4,     6,     8,    12,    16,    24,
+    32,    48,    64,    96,   128,   192,   256,   384,   512,   768,
+  1024,  1536,  2048,  3072,  4096,  6144,  8192, 12288, 16384, 24576

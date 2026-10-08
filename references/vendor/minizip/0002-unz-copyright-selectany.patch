@@ -1,0 +1,19 @@
+unz_copyright: selectany so /ORDER can place it
+
+Kind: link-layout stand-in, as zlib 0003.
+
+The reference holds the string right before vfs.c's .BIN table; the build
+places it with layout/server.dll/common-data-order.txt, which only moves
+COMDATs. Stock definition moves 5370 bytes.
+
+--- a/unzip.c
++++ b/unzip.c
+@@ -69,7 +69,7 @@
+ #define SEEK_SET    0
+ #endif
+ 
+-const char unz_copyright[] =
++__declspec(selectany) const char unz_copyright[] =
+    " unzip 0.15a Copyright 1998 Gilles Vollant ";
+ 
+ /* unz_file_info_interntal contain internal info about a file in zipfile*/

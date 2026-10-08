@@ -1,0 +1,27 @@
+unz_copyright: " unzip 0.15a Copyright 1998 Gilles Vollant "
+
+Kind: version string with no located upstream.
+
+The server (0x100252e8, 44 bytes) and both clients hold " unzip 0.15a
+Copyright 1998 Gilles Vollant ". Every function body matches zlib 1.1.3's
+contrib/minizip/unzip.c (1998-06-15), including unzlocal_SearchCentralDir's
+backward scan `for (i=(int)uReadSize-3; (i--)>0;)` (TL 0x4649d2), which the
+earlier standalone unzlb015.zip (1998-03-19, forward scan) lacks; that and
+zlib 1.1.2 to 1.1.4 all say "unzip 0.15". Gilles Vollant's own "0.15a" is
+zip.c only: zlib113dll.zip (1998-07) and zlib113adll.zip /
+buildzlib113adll.zip (2000-07, "copy unzip.c ... from contrib\minizip")
+ship " zip 0.15a" beside " unzip 0.15". No published unzip.c with the 0.15a
+string was found (winimage.com zLibDll, zlib fossils 1.1.1 to 1.2.3,
+GitHub code search).
+
+--- a/unzip.c
++++ b/unzip.c
+@@ -70,7 +70,7 @@
+ #endif
+ 
+ const char unz_copyright[] =
+-   " unzip 0.15 Copyright 1998 Gilles Vollant ";
++   " unzip 0.15a Copyright 1998 Gilles Vollant ";
+ 
+ /* unz_file_info_interntal contain internal info about a file in zipfile*/
+ typedef struct unz_file_info_internal_s
