@@ -5161,8 +5161,8 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   plant's box cache 0x4bd1e0, which calls `_stricmp` and `_strnicmp` (an underscore-name game reference loads
   those members in the first library pass, ahead of where the reference has them; the old names do not, see
   5e); functions whose storage has no server allocation (aemter 0x4e98d0, alchemistry's card deck and
-  player prototype, sim 0x5007f0..0x500a20, most client-only loaders) and functions reaching them (spiel
-  0x502780, friedhof 0x4f1a40); and TL 0x522e30, the client's `ls_LoadEntities`.
+  player prototype, sim 0x5007f0..0x500a20, most client-only loaders) and functions reaching them (friedhof
+  0x4f1a40); and TL 0x522e30, the client's `ls_LoadEntities`. Round 19 ported spiel 0x502780 (below).
 - **ICF survivor.** LINK folds the identical `_strncnt` COMDATs of `a_cmp.obj` and `a_map.obj`; the reference
   keeps `a_cmp.obj`'s. LINK 6.00.8447 decides it with MSVCRT `qsort`: COMDAT resolution (0x4627e0) appends
   every executable COMDAT it keeps as a definition to one array, in resolution order (command-line objects,
@@ -5238,26 +5238,38 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
 - **Measured** (native link of the committed tree against `original/Server/server.dll`; `.scratch/measure`
   scripts: section byte compare, IAT and hint/name compare per DLL, Rich records, link map, ICF predictor):
 
-  | | main f829a810 | round 16 fcfdd827 | round 17 477dc53e | now | reference |
-  |---|---|---|---|---|---|
-  | functions at reference VA | 260 | 260 | 260 | 260 | 260 |
-  | `rebrew verify` | not re-run | 316/316 | 316/316 | 316/316 | |
-  | `.text` differing bytes | 138 | 146 (all IAT operands) | 0 | 0 | 0 |
-  | `.rdata` differing bytes | 242 | 122 | 0 | 0 | 0 |
-  | `.data` differing bytes | 0 | 0 | 0 | 0 | 0 |
-  | hint/name order diffs | 6 (KERNEL32) | 0 | 0 | 0 | 0 |
-  | IAT slots off the reference | 53 of 100 | 37 of 100 | 0 of 100 | 0 of 100 | 0 |
-  | Rich game C / LIBCMT C / alias / imports | 36 / 113 / 1 / 109 | 38 / 116 / 1 / 127 | 38 / 120 / 4 / 126 | 37 / 124 / 6 / 126 | 37 / 124 / 6 / 126 |
-  | `.reloc` VirtualSize | 51312 | 59928 | 59868 | 61476 | 66420 |
-  | header bytes differing (`cmp`, first 0x400) | | | 269 | 6 | |
-  | file size | | | 8192 short | 4096 short | 286720 |
+  | | main f829a810 | round 16 fcfdd827 | round 17 477dc53e | round 18 bd322c10 | now | reference |
+  |---|---|---|---|---|---|---|
+  | functions at reference VA | 260 | 260 | 260 | 260 | 260 | 260 |
+  | `rebrew verify` | not re-run | 316/316 | 316/316 | 316/316 | 316/316 | |
+  | `.text` differing bytes | 138 | 146 (all IAT operands) | 0 | 0 | 0 | 0 |
+  | `.rdata` differing bytes | 242 | 122 | 0 | 0 | 0 | 0 |
+  | `.data` differing bytes | 0 | 0 | 0 | 0 | 0 | 0 |
+  | hint/name order diffs | 6 (KERNEL32) | 0 | 0 | 0 | 0 | 0 |
+  | IAT slots off the reference | 53 of 100 | 37 of 100 | 0 of 100 | 0 of 100 | 0 of 100 | 0 |
+  | Rich game C / LIBCMT C / alias / imports | 36 / 113 / 1 / 109 | 38 / 116 / 1 / 127 | 38 / 120 / 4 / 126 | 37 / 124 / 6 / 126 | 37 / 124 / 6 / 126 | 37 / 124 / 6 / 126 |
+  | `.reloc` VirtualSize | 51312 | 59928 | 59868 | 61476 | 62568 | 66420 |
+  | header bytes differing (`cmp`, first 0x400) | | | 269 | 6 | 6 | |
+  | file size | | | 8192 short | 4096 short | 4096 short | 286720 |
 
   `rebrew binary relocs` reports all 3499 sites and no extra one. Every byte of `.text`, `.rdata` and `.data`
   equals the reference and every Rich record matches; the 6 differing header bytes are the `.reloc` section
   size fields and the image size and checksum that follow from the reservation, and the raw `.reloc`
   section is one page shorter.
-- **Left:** the `.reloc` reservation, 412 input DIR32 records short of 66420 (5123 of 5535). Every other
-  count the image records is now equal. The remaining records belong to discarded server code: client-only
-  functions whose storage is not yet mapped (the alchemistry deck, aemter's office counters, the loadsave
-  writers that read unmapped tables, spiel's BAD set) and the log calls the server's discarded functions
-  made, which no binary shows (see the log macro above).
+- **Round 19 sweep.** Every client-only TL function of the shared TUs is classified in
+  [client-only-sweep.md](client-only-sweep.md) (TL VA, DIR32, ported / ruled out / blocked, reason). New
+  storage proofs: the game clock is the 14-byte block at `g_current_year`; the client's 0x85ab80 tables are
+  the five 0x2a90 season tables at `g_entity_end`/`g_slot_array`; 0x868060.. is `g_city_records`; the
+  client's 0x696540 table is the server's unreferenced `g_spiel_const_table` byte for byte; the broadcast
+  socket is `g_broadcast_ff`. Ported from them: `amt_GetRankLimits`, `ahm_fio_SaveAvatars`, eleven spiel.c
+  helpers (clock, season prices, stat and kind records, building values), `ls_SaveBuildingEntityState`,
+  `ls_SaveTownData` and `CloseBroadcastSocket`; 91 more DIR32 records. `gm_GetGameTime` is defined after
+  `gm_Open`: any function defined before it changes `gm_Open`'s standalone compile (`rebrew verify`), though
+  not the linked image. The client's 88 x 0x18 array at 0x868c40 (TL 0x503a70) has no server allocation:
+  the server's relationship matrix directly follows `g_city_records`. Most remaining client-only code calls
+  the client's command senders (`cm_Request*`, about 100 functions queuing packets the server has no queue
+  for) or engine code and data.
+- **Left:** the `.reloc` reservation, 321 input DIR32 records short of 66420 (5214 of 5535). Every other
+  count the image records is now equal. The remaining records belong to discarded server code: the log
+  calls the server's discarded functions made, which no binary shows (see the log macro above), and server
+  code no client keeps; the sweep finds no further client-only function with absolute fixups that links in the server.
