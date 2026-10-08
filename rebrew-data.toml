@@ -1160,60 +1160,60 @@ measured_at = "2026-10-06T02:28:36+00:00"
 ["SERVER.0x10028b04"]
 name = "s_Memory_Shutdown_Anomaly"
 section = ".data"
-type = "char[]"
-status = "EXACT"
-size = 1
+type = "char[92]"
+size = 92
 storage_kind = "literal"
 link_symbol = "??_C@_0FM@CHNI@?$FL?$CK?$FN?5Memory?9Shutdown?9Anomaly?3?5?$FL?$CK?$FN@"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-08T05:27:35+00:00"
 file = "src/Develop/rebrew_globals.h"
 marker_type = "GLOBAL"
+status = "EXACT"
 
 ["SERVER.0x10028b04".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "47e9158f297dff287a016c473a8f74e93440ce9b5e11ae2b8369f44865b069fa"
-definition_hash = "9cb787d12b9863cdd16fc21ca9638077754e41f59fda08e7cc69c790f5ddb96e"
-measured_at = "2026-10-06T01:18:03+00:00"
+input_hash = "319d312a2cb1468d7a6341c7f711a3a462ceb1b37de4a778b7723e6f278f0732"
+definition_hash = "c836a843d6eb011d320f477d0a96d3291fccfe7d77aae7020987c557c97485a6"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x10028aec"]
 name = "s_Pointer_not_freed"
 section = ".data"
-type = "char[]"
-status = "EXACT"
-size = 1
+type = "char[24]"
+size = 24
 storage_kind = "literal"
 link_symbol = "??_C@_0BI@LPLO@?9?$DO?5Pointer?5not?5freed?3?$CFs?$AA@"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-08T05:27:35+00:00"
 file = "src/Develop/rebrew_globals.h"
 marker_type = "GLOBAL"
+status = "EXACT"
 
 ["SERVER.0x10028aec".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "49a3837f24aaefc3219e59d17cc0d61a6d1296b291e8a0591f9a23caf5537e64"
-definition_hash = "392f966b8049e81f5a945d79b89285ea8b09a713c2db3d889e8342f01e49afb2"
-measured_at = "2026-10-06T01:18:03+00:00"
+input_hash = "9715ddfad60a4787adc7694e4fcf799b4bee84a069a7de77aff7875378b98e72"
+definition_hash = "dfd73a79bbb579aad760a7869fa63db96ad2e539d5278cfc286bf782016c5ee1"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x10028888"]
 name = "s_m_alloc_header"
 section = ".data"
-type = "char[1]"
-status = "EXACT"
-size = 728
+type = "char[35]"
+size = 35
 storage_kind = "literal"
 link_symbol = "??_C@_0CD@IIGO@D?3?2Develop?2Units?2m_alloc?2m_alloc@"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-08T05:27:35+00:00"
 file = "src/Develop/rebrew_globals.h"
 marker_type = "GLOBAL"
+status = "EXACT"
 
 ["SERVER.0x10028888".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "6f74ff5606c7efb68628af81f9c9d0f7a161ddaca49ae1516034606a7d769152"
-definition_hash = "a2e9fd919bbeff80534c97a4b998fba1be621694ec82b2c8e8dadf355698c73b"
-measured_at = "2026-10-06T01:18:03+00:00"
+input_hash = "6acff5afdb573a057a8d20cc94c26983f4f2550b3c450faab01f55948262b478"
+definition_hash = "3ba342a7f682d6e6e7f109093ea5e01394169dc432551374881d621dc01ee7d2"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x10028b78"]
 name = "s_m_pool_get_free_tp_m_pool"
 section = ".data"
@@ -4055,13 +4055,13 @@ definition_hash = "13622d3fdde5fc87fbd641b143d902334253bbb7ee01d70ad13d09e403942
 measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x11766460"]
 name = "__pioinfo"
-type = "int[0x40]"
+type = "void *[0x40]"
 section = ".bss"
 note = "stream group ptr table (0x11766460..0x1176655c, 0x40 entries)"
 size = 256
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "alias"
+updated_at = "2026-10-08T05:27:35+00:00"
+storage_kind = "object"
 link_symbol = "___pioinfo"
 file = "src/crt_region/data_globals.c"
 marker_type = "DATA"
@@ -4070,9 +4070,9 @@ status = "EXACT"
 ["SERVER.0x11766460".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "8d4d5fe54c7b59419357ac87a19f32f41e05b81a96902d98e7e63b6939ba1930"
-definition_hash = "d5ee8743fa21e17f73f9c3d4cefe704c7636c92e0f6bae20f9bdfd374b1648f2"
-measured_at = "2026-10-06T01:18:03+00:00"
+input_hash = "9c33cbd7c271b909689fa3aeeca5fc80122c66a993388f22bf19f8fff54b71a9"
+definition_hash = "084ebea498f7243634df9821564191172a2832430e46d3e385bc7a7d5a95475d"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x11766560"]
 name = "_nhandle"
 type = "int"
@@ -5454,20 +5454,20 @@ measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x1002944c"]
 section = ".data"
 name = "s_gzip_mode_rb"
-type = "char[3]"
-size = 3
+type = "char[4]"
+size = 4
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-status = "EXACT"
+updated_at = "2026-10-08T05:27:35+00:00"
 file = "src/Develop/Units/vfs/vfs.c"
 marker_type = "DATA"
+status = "EXACT"
 
 ["SERVER.0x1002944c".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "44420319174117fc36b13daf2b324af17e97dccd700dada72134612c4c945d25"
-definition_hash = "e0b3465a0e4f5064fd416b88a313f4996c71f0e4a8b239f9da3255aad2df0250"
-measured_at = "2026-10-06T01:18:03+00:00"
+input_hash = "4dcfd9d67464dbfc0f500de94bc66438c3d390bd77e23b0176f6abc4c40df004"
+definition_hash = "5c08be713a8ae39f13ed4f8bcf89d3a6bedf90dd33f2b8db85515f1825c8375c"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x100294a4"]
 section = ".data"
 name = "s_fmt_hex_length"
@@ -6058,37 +6058,37 @@ measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x10029450"]
 section = ".data"
 name = "g_gzip_magic_1f"
-status = "EXACT"
-type = "char[]"
-size = 1
+type = "unsigned int"
+size = 4
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-08T05:27:35+00:00"
 file = "src/Develop/Units/vfs/vfs.c"
 marker_type = "GLOBAL"
+status = "EXACT"
 
 ["SERVER.0x10029450".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "74ca1200579ba24e8103031391887129ceaff6eaeb3c41a3518fb77e2d0ab23a"
-definition_hash = "0e9f220d9793197d0c5ff5f74c6c0b089cae0b984f7e6f4293ed143f1bb74982"
-measured_at = "2026-10-06T01:18:03+00:00"
+input_hash = "08f0097a7ae8d2f4f54f3e2da6b628124a2a6e1f3c90a02ad705ab7ae4c2ac31"
+definition_hash = "25033cbaf58a87cf568d8e7ca552e0a5572463273b940137e1c8e40a3ccb930a"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x10029454"]
 section = ".data"
 name = "g_gzip_magic_8b"
-status = "EXACT"
-type = "char[]"
-size = 1
+type = "unsigned int"
+size = 4
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-08T05:27:35+00:00"
 file = "src/Develop/Units/vfs/vfs.c"
 marker_type = "GLOBAL"
+status = "EXACT"
 
 ["SERVER.0x10029454".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "7b62d9d2aaccc8a52a238b1a7672599a8d2518cfd7e657f78f4b74307e5238ac"
-definition_hash = "457e2e29c9671aa30308d263df2612910174e33340cac411e12631f058a9857d"
-measured_at = "2026-10-06T01:18:03+00:00"
+input_hash = "a10d6a5637145a8f7dc8590d40d0d8ecae6b7e1aec2b3d821379cd3de88fa223"
+definition_hash = "91dbbe371d6c4c3506197a458364b0077e37a415c4e61466ed65ee5959fc6065"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x1002ca54"]
 section = ".data"
 name = "s_cm_ChkChangeBits___Invalid_Id"
@@ -10514,42 +10514,6 @@ writer = "verify"
 input_hash = "9455ddc475129ce979f01e842dff9404fdf5110ee1b3fdffe6d4e66b0b0d4484"
 definition_hash = "b7944d519e9866332fad685d507c4132a71040d6c212417c08390e0a42f47788"
 measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10027035"]
-name = "g_text_before_Sending_Broadcast"
-section = ".data"
-type = "unsigned char[0x23]"
-size = 35
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10027035".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "66fd431b0eda331b6bd9806a3dcc949413f304e94f55d05314c5f85f857d11e4"
-definition_hash = "b0967e59a76efe3bf0c787f82cf34c9d8a36fc0d605231c332eb8524a4d04e0e"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10027059"]
-name = "g_before_g_log_level_table"
-section = ".data"
-type = "unsigned char[0x1f]"
-size = 31
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10027059".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "b3c53acf20bd637f44a3eb8e9b02ead1e424b790c83c03c0fe465f4a62fa95be"
-definition_hash = "89a6d5b8270ffefc3e2b1dba78953e990186970cd9f1b5b7da60500fa0f04c67"
-measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x100270e6"]
 name = "g_before_g_log_default_name"
 section = ".data"
@@ -10569,23 +10533,23 @@ input_hash = "10b01151374f7e268dc9c3aaaa920cf8ace88e2dcc7ed3b6e2c12b16b66aa337"
 definition_hash = "ed0bdd1f2f960bbad76fe5c3f778bb93367825e726fee92b4ddc10ebf7cabfc6"
 measured_at = "2026-10-01T12:33:40+00:00"
 ["SERVER.0x100270f5"]
-name = "g_before_g_crashdump_data"
+name = "g_before_g_file_append_mode"
 section = ".data"
-type = "unsigned char[0xf]"
+type = "unsigned char[0x3]"
 size = 3
-status = "VERIFIED"
 storage_kind = "span"
-updated_by = "data"
-updated_at = "2026-10-03T08:25:08+00:00"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
+status = "VERIFIED"
 
 ["SERVER.0x100270f5".verification]
 status = "VERIFIED"
 writer = "verify"
-input_hash = "00d9818a66a4a07ee24d209c575702f8aeb4cc80dd98ed2f310b28dc001ab98e"
-definition_hash = "a88edf8687369c6984db1697bc0749f228414635bf4f3271f7fdc9c758645c51"
-measured_at = "2026-10-01T12:33:40+00:00"
+input_hash = "48bd436ffef0923eb8201101d4bb51f8036a1dd43fed853980a5262de734d61e"
+definition_hash = "acf2589cde39194d3fef343faa49a74344b5f05d563d34378484ca4aab1a4afa"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x100272f8"]
 name = "g_before_g_crashdump_tail"
 section = ".data"
@@ -10605,24 +10569,6 @@ writer = "verify"
 input_hash = "8003aa700b181e627bec7d5bb0141aca262fc2c9bb9cf6a873a66f0882295016"
 definition_hash = "c332312bdf28cc3b94846cc76c0096e2185654e4a96f4aa8cbd4499ab5f2a33f"
 measured_at = "2026-10-07T10:40:28+00:00"
-["SERVER.0x1002733d"]
-name = "g_before_g_file_write_mode"
-section = ".data"
-type = "unsigned char[0x1b]"
-size = 27
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002733d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "6fb23c5a0eb9a4712860608a025d2bdd9499d8d69b1d29fc6838845bf4ba17eb"
-definition_hash = "9703ace596524b573476a72c6998a09a6fb1d9e4edda1f02621f07aede6fa9a8"
-measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x1002735b"]
 name = "g_text_before_error_log_banner"
 section = ".data"
@@ -10641,691 +10587,25 @@ writer = "verify"
 input_hash = "bdae20ea5bdb1e4d8d5ee7f16a392d9651c2402014e779c87ba2c38c8f16cfa1"
 definition_hash = "e532f906fd52ed47f2ef5882497291179cb9c706e7b53304f0c2b78c468e7cc9"
 measured_at = "2026-10-01T12:33:40+00:00"
-["SERVER.0x1002735d"]
-name = "g_text_before_Error_Handler_closed"
-section = ".data"
-type = "unsigned char[0x4f]"
-size = 79
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002735d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "e92b446b20eb186ad823b116d0eb4ee7ce89b28ea6a7c1cd3becddfb18b0dc12"
-definition_hash = "4efa80efe03e05481df8aa4a19e3346909060270989af0a51742a00ed499b12a"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100273ad"]
-name = "g_text_before_Fatal_Error_Abort_Program"
-section = ".data"
-type = "unsigned char[0x17]"
-size = 23
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100273ad".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "81dec458c094e83a1c814191edf376c18cc872bd4dea5c696141c2865a309b5d"
-definition_hash = "d6a2b47aa360426dafc546b0e0abbd1ed7c49ab5aa3119c6a5ae32f115e7bab5"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100273c5"]
-name = "g_text_before_FATAL_ERROR_s_lu_s"
-section = ".data"
-type = "unsigned char[0x1b]"
-size = 27
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100273c5".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "c7a0f062436e9b93d367d43f88def3245aea38f1713f3985b7144bf661ea143b"
-definition_hash = "3879c7139e63f4abaa871d40a414181cd1743e31f49450334a46dfdd9d7f23bf"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100273e1"]
-name = "g_text_before_ERROR_Handler_has_not_been"
-section = ".data"
-type = "unsigned char[0x1b]"
-size = 27
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100273e1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "1141371fac0ecfc0b72620a615041477fbc10f2f6aee8b1bf142378a41d95424"
-definition_hash = "faeb7004bf64028046c768ea1548f0ef865e1fea245334216e8c5f4b3e616ab1"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100273fd"]
-name = "g_text_before_error_title"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100273fd".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "622b9b7bed2193d07f88b02dfdab36420a8579fb475c92395ae81b5dcae6b60a"
-definition_hash = "248efe6c071b827376a118b7ff3d1be47e19b338b6396c261d26bef31b85ccae"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10027425"]
-name = "g_text_before_message_title"
-section = ".data"
-type = "unsigned char[0x7]"
-size = 7
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10027425".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "1039b59e6dfc083d1987d37b7b5066aa2ad70c6dda5418360ffac5209b4620a2"
-definition_hash = "36f1c56464b3d242784efd91ffb358b731395b06a210ada21ef64d965ff67380"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002742d"]
-name = "g_text_before_MESSAGE_s"
-section = ".data"
-type = "unsigned char[0xb]"
-size = 11
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002742d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "d516280b4f844cf3057b07df707f5df9860395bbcb9af19ef3455c3775078526"
-definition_hash = "ad22133654c49e07e31da50ef872eb823c9b5b0e0a0513b9f8306853113f3147"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10027439"]
-name = "g_text_before_tModule_s_Line_lu_s"
-section = ".data"
-type = "unsigned char[0xf]"
-size = 15
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10027439".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "5a6a12d75c82be79c3258be5d1cb413152ab7698e9e48f4d945c2f28e63fb80a"
-definition_hash = "7d937a8e752c8107ea2a9811253085c4a1b1a9582b470932093ec86281f2f9b7"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10027449"]
-name = "g_text_before_Time_8lu_Module_s_Line"
-section = ".data"
-type = "unsigned char[0x1b]"
-size = 27
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10027449".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "29818e80de4acf4d89cfbbdc8315acc88882e6663a0130ac548c7b58367a5ad9"
-definition_hash = "b0d6321c680806d28dc2c82ed5a969f2773b611405763a91ef60f73aaaaf49ca"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10027465"]
-name = "g_before_gz_magic"
-section = ".data"
-type = "unsigned char[0x23]"
-size = 35
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10027465".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "bb91b73260493236f590de95679e6f11537f2c6d11f6a1b58c8e1ce5ed0e3404"
-definition_hash = "db788c9bbe434c881d778b8a635e07a81ea27671d554eda98ca9e75b8bf17062"
-measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x10027490"]
 name = "g_text_before_m_pool_alloc_tp_m_pool"
 section = ".data"
-type = "unsigned char[0x16d0]"
+type = "unsigned char[0x13f8]"
 size = 5112
-status = "EXACT"
 storage_kind = "literal"
 updated_by = "verify"
-updated_at = "2026-10-07T10:40:28+00:00"
+updated_at = "2026-10-08T05:27:35+00:00"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
 link_symbol = "??_C@_0BK@BNJN@invalid?5bit?5length?5repeat?$AA@"
+status = "EXACT"
 
 ["SERVER.0x10027490".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "8d46afeb2579f042c5620c66f65a5a0e6f047f9fb658f6e255208fd677e317cd"
-definition_hash = "61453769b808f8967af84de73b1856a1aa71f610b3ba5c3e98e71dba5880bdc6"
-measured_at = "2026-10-07T10:40:28+00:00"
-["SERVER.0x10028b61"]
-name = "g_text_before_m_pool_get_free_tp_m_pool"
-section = ".data"
-type = "unsigned char[0x17]"
-size = 23
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028b61".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "008e20fbb353f528ae096f820d59b8123552d805b06235692532d78f2820c624"
-definition_hash = "ef6dd08a9b392bd4eade985a161a97dba2948b4b05d569b05b0b938c56986be2"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10028b79"]
-name = "g_text_before_Unknown_winsock_error_u"
-section = ".data"
-type = "unsigned char[0x63]"
-size = 99
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028b79".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "b1a52f790e39a98fdf62a8bdd0a9692f504551c4ef78a86ca28100abc977ada2"
-definition_hash = "7f50d3551b06cf86e7d14e7256a51219c11892aa22fba910b1cd3eab293a9797"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10028bdd"]
-name = "g_text_before_WSAECONNRESET"
-section = ".data"
-type = "unsigned char[0x1b]"
-size = 27
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028bdd".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "98f8e5fbd40f15c19cde182e44af6aae15cb021b32e0855d7d4aa301e273a313"
-definition_hash = "abba147b94504710a6c7a08d8eb509d0554e3afe47c38b19b24f6fb22a21d918"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10028bf9"]
-name = "g_text_before_WSAETIMEDOUT"
-section = ".data"
-type = "unsigned char[0x12b]"
-size = 299
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028bf9".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "ffdf3305a3cdc823f702eacb23ec1c5b295b1c84c76158304590612d0fe639ec"
-definition_hash = "4cc4c5a2d96acd790787d6028cdccfec9e5358b4797325a80ea3f647959cda7b"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10028d25"]
-name = "g_text_before_WSAECONNABORTED"
-section = ".data"
-type = "unsigned char[0x7b]"
-size = 123
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028d25".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "d2a6256665f51242e284ce508e82b79161e882454945fb8f18570b32be568be8"
-definition_hash = "524108a8b8b746da0448768a13874ee484c1daecc704514ebe252b7f4540f584"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10028da1"]
-name = "g_text_before_WSAEINVAL"
-section = ".data"
-type = "unsigned char[0x9b]"
-size = 155
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028da1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "6eb73f6400efa3e5797d5403983ffcea47e8b4de42ba387984679b37ed196a36"
-definition_hash = "c360af2049da72849e32b0abe53f747d6b2a0e393893ffaf18abfc8b710dba50"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10028e3d"]
-name = "g_text_before_WSAEMSGSIZE"
-section = ".data"
-type = "unsigned char[0xd3]"
-size = 211
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028e3d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "d890207018a338dd17bb6c872d94bc958b89f2bf654aaa2c2fbc1089eccf8dd3"
-definition_hash = "3c37b4d14d54a32fa2a1a4ec3cf9ec90979aa092df50e4a9b58155e4168ac998"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10028f11"]
-name = "g_text_before_WSAEWOULDBLOCK"
-section = ".data"
-type = "unsigned char[0x5b]"
-size = 91
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028f11".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "179148a4e2173a592ac8076797cfd9e99d6ac92d456224fe3d13bff21098ff41"
-definition_hash = "d3b7080b227a32c14d8cbcfff607bceba51030045a8c6ab126906db60f4e771f"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10028f6d"]
-name = "g_text_before_WSAESHUTDOWN"
-section = ".data"
-type = "unsigned char[0x5b]"
-size = 91
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028f6d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "e6611125782c259c20117c56e3fac96d3ea5b3602771fc238e76fe90f3957cb9"
-definition_hash = "47608c8981129f373dbdeaff315b451f97fc55a1a8a4496d7d917b21a208236d"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10028fc9"]
-name = "g_text_before_WSAEOPNOTSUPP"
-section = ".data"
-type = "unsigned char[0x9f]"
-size = 159
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10028fc9".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "eac171eb2b199dd536ff6585734837e3f121367f5f32f5e32ad3afcb4cd08bb8"
-definition_hash = "61c79f4c3ca9c8cd131f7599a73636249bb8413464845fe155dac25547befb33"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029069"]
-name = "g_text_before_WSAENOTSOCK"
-section = ".data"
-type = "unsigned char[0xfb]"
-size = 251
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029069".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "c5bd254f72f96385d29884f5c5f1de94312895008e498693635e11a1b3adaa58"
-definition_hash = "8fe9ee0f600c9900c0a0362ebdb3b4adb4bb5df04b4088dce35df8f41b0941d4"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029165"]
-name = "g_text_before_WSAENETRESET"
-section = ".data"
-type = "unsigned char[0x2f]"
-size = 47
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029165".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "8c28270f9450dfb2c6004d43b1af6db3cbbf7c0246dd6c91f481b2aadddda372"
-definition_hash = "23f160685a2872e3a1404c7fb21e307adb41299c67e5aa283010833bedd6f7f5"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029195"]
-name = "g_text_before_WSAEINPROGRESS"
-section = ".data"
-type = "unsigned char[0x87]"
-size = 135
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029195".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "b31761565fd2ed61f8dc3008a7550eef0b054a5caf367d65c5991c2d1b17d070"
-definition_hash = "939159925a2838cb51663411effbcb096a4949a07d1e5db86345d91d0978cad9"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002921d"]
-name = "g_text_before_WSAEINTR"
-section = ".data"
-type = "unsigned char[0x87]"
-size = 135
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002921d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "1f79b3da2e8fa3213aaac7adb58bcbe2c912441faa5740004995c17fbe9ab954"
-definition_hash = "05192ef2a37ea80b925d26a6993f0b002e5fd2d90dd41746d99692b967048b40"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100292a5"]
-name = "g_text_before_WSAENOTCONN"
-section = ".data"
-type = "unsigned char[0x4b]"
-size = 75
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100292a5".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "1575d85a50f40d972eb9c51a31bbbc50afdbc7a4716d59760ae58224b937071b"
-definition_hash = "05dd1db3376fb28d913f2ba81f0f85e144dffbf0007eaa940d464352d4578871"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100292f1"]
-name = "g_text_before_WSAEFAULT"
-section = ".data"
-type = "unsigned char[0x2b]"
-size = 43
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100292f1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "1d2edbb71aca84ba77b35aaece645c540f9192d09a90f4f0fb9504ff6825587a"
-definition_hash = "be6bfe94053bdf1baaf8cdc8cae79b0c2c91df59433611a3f6b28f57894dec97"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002931d"]
-name = "g_text_before_WSAENETDOWN"
-section = ".data"
-type = "unsigned char[0x63]"
-size = 99
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002931d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "5546569407ab86d0c6f79cde9eaa0159d480c2ea7feb4e8479dd5bb5c9450294"
-definition_hash = "a63292f393cc602848d726e43f867d819b29e6426d7359ad4ff8da9c75d3d8d1"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029381"]
-name = "g_text_before_WSANOTINITIALISED"
-section = ".data"
-type = "unsigned char[0x2f]"
-size = 47
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029381".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "19c449d03b65bbbed0e372ba379084d926e30a20585ff44259a687e30af272a9"
-definition_hash = "9e4fd7b2238b0ae2ae6d152db329c75051cf26abf8c2e39592ea360af9416929"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100293b1"]
-name = "g_text_before_Cant_set_SO_SNDBUF"
-section = ".data"
-type = "unsigned char[0x13]"
-size = 19
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100293b1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "3a5909aba39cf8d31be1d10e0e9ab1deda4e97b9eab4b9f56fcdfd16edc0cae5"
-definition_hash = "941b0720409f0e827182139700e9b3eb8c55adfdb4faa1519a838005a3fc550f"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100293c5"]
-name = "g_text_before_Cant_set_SO_RCVBUF"
-section = ".data"
-type = "unsigned char[0x1f]"
-size = 31
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100293c5".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "1820a4d00a02386c8c46d277d7d6d420617ceb9f26dc15f78f9a8f913f4a22b0"
-definition_hash = "51c41e6d9fc7081e60df05b40b3ec0ddc7d621236412253af78cbe8b38f48a5c"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100293e5"]
-name = "g_text_before_gzip_mode_rb"
-section = ".data"
-type = "unsigned char[0x67]"
-size = 103
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100293e5".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "b4947af462e5e58c0fdb08ab4fe7d0d466da504470f4390cc3f63786f7d0e50a"
-definition_hash = "8f1d30ae6bc1a3af27814c04510b1f403e9b2ef1d39f0516342843215277406d"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029451"]
-name = "g_before_g_gzip_magic_8b"
-section = ".data"
-type = "unsigned char[0x3]"
-size = 3
-status = "VERIFIED"
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029451".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "5ea758deea95386cca8c9a3484aab0b29b12801c1020aab3d10939f7d2dc456b"
-definition_hash = "3f0010cb6832ce6d794baaa78948195f1c2261eee25ed5b01491d4fa8ae50455"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029455"]
-name = "g_text_before_D_Develop_Units_vfs_vfs_c"
-section = ".data"
-type = "unsigned char[0x3]"
-size = 3
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029455".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "cdfac5e6b32acaf959a286a26d2f58bcc965d45e6ff831838134a2648f654227"
-definition_hash = "303617690cf5a26b0fc6f75ea6b4cfe2c29c3de77485546feab0dc0434fc7c85"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029459"]
-name = "g_text_before_vfs_gz_compressed_file_s_i"
-section = ".data"
-type = "unsigned char[0x1b]"
-size = 27
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029459".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "06d509c932cf92d0119216a80b24482e2a3276ce8d5a6bd2c3d33eaf48d5fabe"
-definition_hash = "bdbeb884ee3879b276272c0d7aebcfe494c1cba336c2969f3af91b11dcfe6f64"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029475"]
-name = "g_text_before_fmt_hex_length"
-section = ".data"
-type = "unsigned char[0x2f]"
-size = 47
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029475".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "aebbd9504239193992c9bd747edeb601c57620ce9443acd26dcb6a00db45d941"
-definition_hash = "6c9134bb2f18a1e5ec8158a16abff7dfad6564c79b79da6a1fc8b8c19f858eb9"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100294a5"]
-name = "g_text_before_This_is_Gilde_talking_can_you_h"
-section = ".data"
-type = "unsigned char[0xc7]"
-size = 199
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100294a5".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "81f329e756e2c8a4180305f5f234024b252d03d8689b1bbeac78e8729ef5ebcf"
-definition_hash = "a1ed63720ff0125821237e145515877c03de865fc71e315beaf02a46d7a26b00"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002956d"]
-name = "g_before_g_game_path"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002956d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "c1d639c555f7049832925dc4a19a640bba6eb9a6c24ef80dc382b59ed2cbcf61"
-definition_hash = "bb0258b5620ee312364b9b63050197e73bd315e2c95c611701598e6ce5b2e00c"
-measured_at = "2026-10-06T01:18:03+00:00"
+input_hash = "8756ed8e7a88322bbcead2afbcca4f6998d4a61df499a52382457556e867e1d8"
+definition_hash = "1fa8ce37fb4c99edcfd387328ac289eb84947349410811e81c5b3b9e3768976d"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x100297a0"]
 name = "g_before_g_office_float_table"
 section = ".data"
@@ -11363,762 +10643,6 @@ writer = "verify"
 input_hash = "48e545729342371b3f84bd9ab33b582ef004e73690d6cee5c50323fb771c6c61"
 definition_hash = "5fe53fdd6c1baa5503f1664949f248ed24705fdb8d636dd3210c299ded0c1565"
 measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029c58"]
-name = "g_text_before_amt_cant_load_msetter"
-section = ".data"
-type = "unsigned char[0x320]"
-size = 800
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029c58".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "31352734c723201e98196dc00a97fb3c47ef2d71b72c7403c78208768e14c6bf"
-definition_hash = "3b28692535ffb1ed0323427f8f8dd7e540819bf97567a6ff28f511b47cda2f60"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029f79"]
-name = "g_text_before_amt_cant_load_status"
-section = ".data"
-type = "unsigned char[0x2b]"
-size = 43
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029f79".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "8f4d2d7d531630a34e7682217435c5f8afe9927e50ab7a8ee4dc059db640fc4d"
-definition_hash = "697a47edd1721ab6ed45af92d92a9e0ee5f86f1f2a6078f53974f673a62e5b44"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029fa5"]
-name = "g_text_before_amt_cant_load_pcount"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029fa5".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "83403eeaf2dffb1a1506d53c67083bbb02c30aa3e8fbc5c4dc3b3ce24371d575"
-definition_hash = "8d77cd01cf40af8668666fc3f19b1b33dd5be286fc6479f0435105b7ea9c1bdc"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029fcd"]
-name = "g_text_before_amt_cant_load_mamt"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029fcd".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "1eac5152a7391552a175d8f5acef2ff05a3eabc94d48665a3bcfd054b7957694"
-definition_hash = "0cc486da62378a1907fed725a8a6df4172b1486b68558a1665c1119fe4dbee00"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10029ff5"]
-name = "g_text_before_amt_cant_load_mplayerid"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10029ff5".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "cee975f6d4e0e7470c350677a9540e789f62e6a602aca99486f27343fd0628f1"
-definition_hash = "97e2b59e6a3b9d436615014173bf174041121faf0891a58e27d229d9fd126ecf"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a01d"]
-name = "g_text_before_amt_cant_load_id"
-section = ".data"
-type = "unsigned char[0x2b]"
-size = 43
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a01d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "7c3f756fa697138e1e82bff1d225243f8b95aa3daceb34845b3a08e091a8374c"
-definition_hash = "63fafdbc5c08eb89e9e613c649d327f77c5343b8d4e5e4720533e3536be24a47"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a049"]
-name = "g_text_before_amt_count_mismatch"
-section = ".data"
-type = "unsigned char[0x23]"
-size = 35
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a049".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "88376a992d5e13d927ec5790cdf8c84840f928fee7e13ac1e7d25e0f29f04e2b"
-definition_hash = "bf173b1c505547beebbdb57ab8c2355d586cb9595113deba937ae1f3770f5686"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a06d"]
-name = "g_text_before_D_Develop_DieGildeAddOn_game_ae"
-section = ".data"
-type = "unsigned char[0x33]"
-size = 51
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a06d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "51d8bd9385c9cce9f54d8b39f715fe88783723af93098655ea9465804881d2c0"
-definition_hash = "67b233d51e44b32fd6b492fdd892c3eb8222668e838804719312e94af7cb3ce0"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a0a1"]
-name = "g_text_before_amt_cant_load_count"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a0a1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "2edb22e873e4a362566f963451fef9884daedd908af6c3e6965b91bee5b238fe"
-definition_hash = "b56b37aaa594396541aaf7219ca02033649ba35c8bb5067446f5b8d65c3e32d0"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a0c9"]
-name = "g_before_g_alchemy_one"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a0c9".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "829df5f61588444558b3dc21a4935e7c80f5db325b9ea427151145de913eca16"
-definition_hash = "ffb7fc0e0b07dc45ecbf8f74354d52bb3ee1c76e5dda5bd2001a72b493e53ca2"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a0f9"]
-name = "g_text_before_D_Develop_DieGildeAddOn_game_al"
-section = ".data"
-type = "unsigned char[0x13]"
-size = 19
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a0f9".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "c08a653f5a6901d661c777d296b183b23f8e568cd69c0e45cf63146eb170d602"
-definition_hash = "58b542192ff8cc014443aa6ea1f34070de228a29fbff0d017d6b44e7fe60ad71"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a10d"]
-name = "g_text_before_ahm_ExAllocAlchemist_array_over"
-section = ".data"
-type = "unsigned char[0x33]"
-size = 51
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a10d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "c3e6c4adcbf9a167c983437f4ed691180662ec5d5a782d12ab8cdc49320b3134"
-definition_hash = "668c29bf22c55e5a36f987b14362d584097d97e66f2bcc8438d7cf16ada33e06"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a141"]
-name = "g_text_before_ahm_ExAllocAlchemist_wrong_type"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a141".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "d069734ac95bb969d11aabb96f43500bc72216879ce7e1e8b71b00cec66ad2e7"
-definition_hash = "f4531be9e61f6ff16a86c3ac1d0eac25cdd76e69fd94046075029f40e835e0e4"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a169"]
-name = "g_text_before_ahm_ExAllocAlchemist_cant_find"
-section = ".data"
-type = "unsigned char[0x33]"
-size = 51
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a169".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "829f922595b265e83de0344e769fb100a2459785e32c8b15b1dfe2b6bc6be252"
-definition_hash = "b218e5960e1eccb1222ecee521d75331a63cd9cebfb20fa8433cdceab6ad2ad6"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002a19d"]
-name = "g_before_g_alchemy_random_table"
-section = ".data"
-type = "unsigned char[0x2f]"
-size = 47
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002a19d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "a382a6e4bc2e3059621c6e8bf7e917e88b7911dc5a24bedaaddd438b7ce922c1"
-definition_hash = "5c561e5de43c8488cd86e7f7832cc9fb1e669ef6cba26246bf6d581bad1de607"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002c3fc"]
-name = "g_before_g_chain_handler_table"
-section = ".data"
-type = "unsigned char[0x1a4]"
-size = 420
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002c3fc".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "2cc3ee20d9f358d85f3469404fb7a4b32ecd1d81fb1f2f16ae5f53e085c0535b"
-definition_hash = "4353282a1dade277f41dd47b47ab4dfddaa63fdf15f3e7b5e856fa03cafd73d2"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002c5a4"]
-name = "g_text_before_cm_ChkChangeBits_Invalid_actio"
-section = ".data"
-type = "unsigned char[0x460]"
-size = 1120
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002c5a4".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "cbd8c9c7835ad7b96962c5dbe01d1c27316d8e27efab0af065c6e3eabcb9403c"
-definition_hash = "ae997d78d052d481b56aef52dad2e9b819b8d8c89cde5b6754872fb923dede60"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002ca05"]
-name = "g_text_before_cm_ChkChangeBits_Invalid_Id"
-section = ".data"
-type = "unsigned char[0x4f]"
-size = 79
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002ca05".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "95f93f15d8254d5d1ec09142d75cf741456019e2edcd4b2d2d06321b495f18f6"
-definition_hash = "4ad535f62e01638f65bd20fc275a88e1ac839191fcf1cc7d18e5fcc5a9b98bc5"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002ca55"]
-name = "g_text_before_cm_ChkSetGebBesitzer_Invalid_I"
-section = ".data"
-type = "unsigned char[0x1f]"
-size = 31
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002ca55".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "9107b935f888509c8359cf356ba3a4457d22df7bc2c776f7ecc3c39dd58f65c5"
-definition_hash = "cacf1360dbb4836092f977377ed7fc2719065d475ee1bf640f51d22114e121da"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002ca75"]
-name = "g_text_before_cm_ChkCutsceneReady_failed"
-section = ".data"
-type = "unsigned char[0x33]"
-size = 51
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002ca75".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "863de54712e1b3f2be84e754a7dcbf0c3f299b48de0cfaa93ae51c5b77582b79"
-definition_hash = "13cd6b5c6ed0ee01564e8987085fdbbb9848c5aab9e814c74b6009ceeb298b70"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002caa9"]
-name = "g_text_before_Invalid_Commandtype_in_Execution"
-section = ".data"
-type = "unsigned char[0x23]"
-size = 35
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002caa9".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "ed3a8181bd9e8ca2e8312c48ca475f11e9d6730e83f0185f107d0ca231292660"
-definition_hash = "20f296bd0117176056b0274d0dcd87fcdcf06da60d8284f9ac5e8cbff9fdf503"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002cacd"]
-name = "g_text_before_Invalid_GI_Id_for_cmdt_ALLOC_B"
-section = ".data"
-type = "unsigned char[0x23]"
-size = 35
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002cacd".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "e0f5f3c6cbec375656987988dacffa4fd838242c6f0ea21bf9e662e0ba7ac173"
-definition_hash = "45f9dd088cddab9b038a8d9c56db4da0d37bc9b4622798fd5bdac1daab2ae9ef"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002caf1"]
-name = "g_text_before_gm_AllocGebaeude_failed"
-section = ".data"
-type = "unsigned char[0x43]"
-size = 67
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002caf1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "e8d12e9f73d693135b3c9698ec752ddbf0095432fd1c711b030110311a5608d2"
-definition_hash = "59ad7e0f274f346b511f82c7cff75eeb7b306166e39061434d77a26eef6e5bdc"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002cb35"]
-name = "g_text_before_Invalid_GI_Id_for_cmdt_ALLOC_S"
-section = ".data"
-type = "unsigned char[0x1b]"
-size = 27
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002cb35".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "a8eb0f47b52e46c4c293601c1c9a50c813097ab9c99541e4b55db1a2875f14cf"
-definition_hash = "f8ba379187bf0527a1c5cd1c6497df8594ade8cb1dc86e1126d0f6b85ce32880"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002cb51"]
-name = "g_text_before_cm_ExAllocSpieler_gm_AllocSpie"
-section = ".data"
-type = "unsigned char[0x3b]"
-size = 59
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002cb51".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "1609f9474d64f0848a0394c1907975bb23d1eb0e04f9fceaf62d050160381890"
-definition_hash = "644d9b59af6b9f05a61a820cdc6f40da41c157e40e1939a0a6a23e8d1688319e"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002cb8d"]
-name = "g_text_before_cm_ExChangePlayerIdentity_fail"
-section = ".data"
-type = "unsigned char[0x63]"
-size = 99
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002cb8d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "6c134d7d7676ff5eb9e2a5f254e63934eb4b728b678fa3f9f1f52e612a72daf1"
-definition_hash = "2c5d56c69fb6aae215c1548be7bf1201d669cfc27060b72af5eabce7e728cc3a"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002cbf1"]
-name = "g_text_before_cm_ExChangePlayerIdentity_exec"
-section = ".data"
-type = "unsigned char[0x23]"
-size = 35
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002cbf1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "c105df6ba4b0195f300e4f90cdb343d6ac40a40af2ee9547cb25640d12965102"
-definition_hash = "88418e4c4977fdf2c9baf3f264766d6692a3d3222132fe8d2eee6c08c4e28e70"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002cc15"]
-name = "g_text_before_cm_ExKillSpieler_Could_not_fin"
-section = ".data"
-type = "unsigned char[0x53f]"
-size = 1343
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002cc15".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "933c702162e209c73b54bb94a19a52860d9df89d642c20746b7e4aee81a42596"
-definition_hash = "6c666f268f3395239e1287789517b84a34fb1c4c6fc3117cb0592cbc510be1da"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d155"]
-name = "g_text_before_ex_set_owner_missing_a"
-section = ".data"
-type = "unsigned char[0x53]"
-size = 83
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d155".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "510f962d38aaf31a8021c3194e3ec592ed7f557a1f006cab8fa1a53aadc907a7"
-definition_hash = "f76c194e54eecfcbd27edbb09c0d383d10011d66506c7b9730e00eb34ef310bc"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d1a9"]
-name = "g_text_before_ex_set_owner_missing_b"
-section = ".data"
-type = "unsigned char[0x37]"
-size = 55
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d1a9".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "4e75dcda30c095abec23fa6f74b2a5498c6c92001ad5cb425d554e7c3be49882"
-definition_hash = "841753da80f068252fb00ca092a8741fd1d95442f1ebf802516eb60e7cce3c60"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d1e1"]
-name = "g_text_before_ex_set_owner_missing_c"
-section = ".data"
-type = "unsigned char[0x33]"
-size = 51
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d1e1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "971fd364fbc591fd720b9dd71b96c41569cd3077550cf382c81d2bb996e1eb16"
-definition_hash = "efc2c6c5ebaa6d71c5fb33944472b628abcfb3d067fec06dca03e4dca3ce09da"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d215"]
-name = "g_text_before_cm_ExSetWohnsitz_Residence_is"
-section = ".data"
-type = "unsigned char[0x2b]"
-size = 43
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d215".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "3f2fea6b77ae53f70a623e142969cb14b7cb0f2d3a5b9408f9007cd333dfc6cf"
-definition_hash = "30bee1f87242a1e79d5e2a17071331d3a42fff12bdb5e914ab120457e3264b15"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d241"]
-name = "g_text_before_ex_set_home_missing_a"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d241".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "6efcf801db4357fbd2bfee83910c53172c2872a8ef7c7bf592b95a7cbac9b655"
-definition_hash = "e9daf1b4f19a7fc5673d09c14aaecfc31bd8dd31e82b54be27bc44e2fe0caa87"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d269"]
-name = "g_text_before_ex_set_home_missing_b"
-section = ".data"
-type = "unsigned char[0x2f]"
-size = 47
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d269".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "4537bc8ceb77c7cfd5d57c10d42f36da374546409e10d7f7e661b130735ed4af"
-definition_hash = "bd866d78b60a552b13d112f09f5affd675961b4ec8941462392a7bd6d10c70ce"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d299"]
-name = "g_text_before_cm_ExSetGebUpgrade_already_hi"
-section = ".data"
-type = "unsigned char[0x27]"
-size = 39
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d299".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "ace33b46d89268f2ac96423b681810b98dc813dec0fb94f771d287d2f7f51a8c"
-definition_hash = "ddb97881f6d9ec15989fb247165767bd186e8dd1078dcb6cf5454b628050c9bf"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d2c1"]
-name = "g_text_before_cm_ExSetGebUpgrade_Could_not_f"
-section = ".data"
-type = "unsigned char[0x2b]"
-size = 43
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d2c1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "a42272524b514e07356042ad2fbbc4235fd19a0efa05317df4b74c7af1da9bc9"
-definition_hash = "b18f69eaa55c59c78bdddb675598f3eaaf7e8969666fb15c7da9718e9a573c51"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d2ed"]
-name = "g_text_before_cm_ExEmployWorker_Illegal_gw"
-section = ".data"
-type = "unsigned char[0x2b]"
-size = 43
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d2ed".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "03aeb559c45d1e61d8f957f0a3dbe96813bd6d283db3da853e17bf9676842c3f"
-definition_hash = "baaf6573f0d7c8e4d016c0e050d8e34e4d5b691ee079ccd87506d65baa68fa84"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d319"]
-name = "g_text_before_cm_ExEmployWorker_Illegal_geb"
-section = ".data"
-type = "unsigned char[0x23]"
-size = 35
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d319".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "2b0860c2041bebe718c750fa16a97e4b3a5e6a15e0af0c94eedabddf60bdfb73"
-definition_hash = "6281f25f59f624130b72f82004055706c75f33fb15e5599cc6786b0cbdc4762e"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d33d"]
-name = "g_text_before_cm_ExKillTransporter_invalid_t"
-section = ".data"
-type = "unsigned char[0x97]"
-size = 151
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d33d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "208a943bb989b6eab0939669dfaa402842c388ea4b9211bde45114b6dd0f75e5"
-definition_hash = "a60e27f9ac755b02f326fd12beaa6077ff187813ddde8ba01c3bdf5374cbc452"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d3d5"]
-name = "g_text_before_cm_ExCreateGeb_failed"
-section = ".data"
-type = "unsigned char[0x2b]"
-size = 43
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d3d5".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "4759abafcac138c5ec3f1257f1c1e42d565c245fbbece0474fc672d3a849b232"
-definition_hash = "2ab7f33e666de8cffd5abb4c86b970e480a7d1e16a6c7ee3fce9c058cd590d3e"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d401"]
-name = "g_text_before_cm_ExCreateGeb_Could_not_find"
-section = ".data"
-type = "unsigned char[0x1b]"
-size = 27
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d401".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "017700962bdad35293191502a31bc1bfeb59a66dd16060c0bd2a403405dfbd96"
-definition_hash = "1cbb1a6161da72744c883b1006920702d2cf7f899d24f14d4f1c0366858cf501"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d41d"]
-name = "g_before_g_file_version"
-section = ".data"
-type = "unsigned char[0xcf]"
-size = 207
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d41d".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "e2c6b0d7f0a0654920875e5fef0cee8c1a011dd94f664626205bcdeee16cf2e3"
-definition_hash = "cd62808a087b7965a7b593008b192cba25876b5800b5b6bbbff20fb1eacfa1e8"
-measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x1002d4f9"]
 name = "g_before_g_plant_info_table"
 section = ".data"
@@ -12136,96 +10660,6 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "73116cb354445b85c8f0dd103a97515392c32922cd6539b9f232a187f3f2dd67"
 definition_hash = "9f2db80debd189c77c06186433479d26765302f3c80b9c1c1d0b4f06b4b3592b"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d888"]
-name = "g_text_before_plt_SetPlantMap_Could_not_fin"
-section = ".data"
-type = "unsigned char[0x108]"
-size = 264
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d888".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "798ccbaae2329c9ea3154086acfc3395af9c940fbe184e5a81fb1056d32afbed"
-definition_hash = "d0b3f8e9f47b6f60bafde088217489c9edc2220a87f29a7e25dcce24ce94d3d5"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d991"]
-name = "g_text_before_D_Develop_DieGildeAddOn_auxilla"
-section = ".data"
-type = "unsigned char[0x2f]"
-size = 47
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d991".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "cd76bcf03cd43c2a6ba9e6fbddbafaadbca68f9ac8bb6b1310b430ed0ab3c9cd"
-definition_hash = "7707b4e7dd0a138fa7cf6e959992164c9376ea7c34ef1e844c972c2e8a9ed967"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d9c1"]
-name = "g_text_before_plt_SetPlantMap_Map_is_not_al"
-section = ".data"
-type = "unsigned char[0x2b]"
-size = 43
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d9c1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "3c19a5075cbf86a356a55c8df000cdb42e700c6fa5a959051f94b689a346d301"
-definition_hash = "626883dce36b5adb261d0987032e1211f1394618b2b8bf90b675950f39bc624c"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002d9ed"]
-name = "g_before_g_plant_pair_table"
-section = ".data"
-type = "unsigned char[0x43]"
-size = 67
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002d9ed".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "6ae7ee50dd3797e97bdb900d8421b1c3c2828ebe40635154eb679c430c630cbb"
-definition_hash = "6d51a0e8789fa68e07dc558fcd28b92df8d5fc0db23a521c5c01b8ca27f1718c"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002db90"]
-name = "g_before_g_plant_flag"
-section = ".data"
-type = "unsigned char[0x160]"
-size = 352
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1002db90".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "70e129504e19f8a13c4eb4065d7439ad39f8ad8d5a3c7009f0dcd8ec1a88b659"
-definition_hash = "1e5b1543f2031aa0c07ca35d4aea21305f436a6fb59222d2559abc49df016c1e"
 measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x1002dcf4"]
 name = "g_before_g_spiel_const_table"
@@ -12246,24 +10680,6 @@ writer = "verify"
 input_hash = "c7bc53cdd6d5a0a53f57d3b5ad3cedd5281272b3bd828fb4ef848cc2e37bf8c7"
 definition_hash = "3d79d5b8b3770946a0d92e227ead79b0248b8d2a5757cc3bd342d224a514fa8b"
 measured_at = "2026-10-07T10:40:28+00:00"
-["SERVER.0x100308f4"]
-name = "g_before_g_next_object_id"
-section = ".data"
-type = "unsigned char[0x278]"
-size = 632
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100308f4".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "295a125d83cde2a43a949ce3f231427b38620e57475f3ab5012eee912896c895"
-definition_hash = "200cd19190867f357dd6cd67c156b88dc5d14eff16ad5fdbb97e3d7aadb1d58e"
-measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x10030b85"]
 name = "g_before_g_query_filter_extra1"
 section = ".data"
@@ -12481,24 +10897,6 @@ writer = "verify"
 input_hash = "94137e5906e322f5a756b9e379eed7fdfcdf2f34147412f43c35501fb31d4766"
 definition_hash = "354e22d3ba174bde14e704cd6aece3e26947e5f428f4945f8d8e2a3e7dedc419"
 measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10031b79"]
-name = "g_before_g_block_alloc_threshold"
-section = ".data"
-type = "unsigned char[0x2023]"
-size = 8227
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10031b79".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "02bb105a57f321b46bd43528d151cf3393b99a94ce4f0985406f055451684301"
-definition_hash = "09eeedcab1ee0ce282520e30c9be0d958d6fc4509631680109ede9aaa1603e91"
-measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x10033ba0"]
 name = "g_before_g_rterrlist"
 section = ".data"
@@ -12555,24 +10953,6 @@ writer = "verify"
 input_hash = "d7c0314463a8fca442cb89fd1b0e532b4ff5078a6c5f43b7928e939e27b16887"
 definition_hash = "743f2a9f1cd0a9cfbd2cca9a14c1b02b2162f17a0357b90fd2b71500c3466f76"
 measured_at = "2026-10-08T04:43:15+00:00"
-["SERVER.0x10034671"]
-name = "g_before_g_stream_count"
-section = ".data"
-type = "unsigned char[0x7]"
-size = 7
-status = "VERIFIED"
-updated_by = "data"
-updated_at = "2026-10-03T08:25:08+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10034671".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "b130127d910e4e3013f77f9ee5254c0464e16aa20ba61386b2c32dfa72feddc4"
-definition_hash = "dd074bbbf2026b2c532138b0e94268caed0ca753d56866e0747832946b9d7ad2"
-measured_at = "2026-10-01T12:33:40+00:00"
 ["SERVER.0x10034684"]
 name = "g_gap_10034684"
 section = ".bss"
@@ -12796,24 +11176,6 @@ writer = "verify"
 input_hash = "5d1c3a2370b4403f304643edd1462f90ed5da2f950bd85ff4569d6f54603ea71"
 definition_hash = "ee1c611e346d98d6dd934a763d6295fb8817d3d5690134425123536e0becd2ac"
 measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100252e9"]
-name = "g_before_g_graveyard_const_a"
-section = ".rdata"
-type = "unsigned char[0x397]"
-size = 919
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100252e9".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "f9afebe6c1ae8a2e435d34095937bd5e3f8d8d58309884da4110796ebb97c4d2"
-definition_hash = "d9283519c2f5bf17ffc686d6ed2350fcc1ee539e4b2926095258968dd71a7ed6"
-measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x10025684"]
 name = "g_before_g_const_2"
 section = ".rdata"
@@ -12885,24 +11247,6 @@ writer = "verify"
 input_hash = "df237d8fc0fcec257f0b12dc611ef740606d7e1390443ebd876ac86bd9da07b8"
 definition_hash = "38e509b2590d4e639b98d4dca81c4e440c5a192d17ff17c891ba7fb100fd1dac"
 measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x100257d4"]
-name = "g_before_g_const_one_d"
-section = ".rdata"
-type = "unsigned char[0x4]"
-size = 4
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x100257d4".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "6c130d5451dfe00f48a981104b58a773e0ef1afbc5b152264d0271ef0fd0d0ab"
-definition_hash = "965e4db84a7aef4dda03c492b4af980182c8ce88b81fe4827081cd9518f977b7"
-measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x100257e0"]
 name = "g_interval_values"
 section = ".rdata"
@@ -12956,42 +11300,6 @@ writer = "verify"
 input_hash = "47ffdcf625c4776d2f148ba21f65594d22fbb68300e1adaae88e8f6110a4bd61"
 definition_hash = "a83850998c0c19eb457f5d6117d8a507bf339d240e7dcce4153f3ef83782fbfb"
 measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10025fa4"]
-name = "g_before_g_const_896_0"
-section = ".rdata"
-type = "unsigned char[0x4]"
-size = 4
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10025fa4".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "8651aa9bcc7e9f43eb53b7e76bb08431a8c6c28e80e5abfe8cfa080c85389c59"
-definition_hash = "5425a1a210031b0410413850a96f96452218d85085381d3888dc27674e9eea09"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10025fc0"]
-name = "g_rdata_before_imports"
-section = ".rdata"
-type = "unsigned char[0x648]"
-size = 1608
-status = "VERIFIED"
-updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
-storage_kind = "span"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10025fc0".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "f81199b192e8b447efdd28bbfe440c3f14661ff09d5a555e56226b623b76fbb3"
-definition_hash = "ac85c6fb965ac53b977ed3e1ff22040e717899f0a11650face213ad7d4f53bcd"
-measured_at = "2026-10-06T02:28:37+00:00"
 ["SERVER.0x10026608"]
 name = "g_import_bookkeeping"
 section = ".rdata"
@@ -13010,24 +11318,6 @@ writer = "verify"
 input_hash = "5d94a482f714c21c570948f697afeae0214347932f9a54a25cb4b048b285390d"
 definition_hash = "f6ad3e99e67f4a1f5bc82be0b4cf228bd9f4e44ca946b9a29715066a716c0deb"
 measured_at = "2026-10-08T04:43:15+00:00"
-["SERVER.0x10035000"]
-name = "g_before_g_sequence_counter"
-section = ".bss"
-type = "unsigned char[0x408]"
-size = 1032
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
-status = "VERIFIED"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x10035000".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "196853014f8c6e6749cc0f1c501093697bfc4ac93c67abb3c19c87ad66690346"
-definition_hash = "6d5addcaa2373016889a8a793b21caba9311d7a217fe5001cb00c9d4748f0595"
-measured_at = "2026-10-03T08:55:00+00:00"
 ["SERVER.0x10035410"]
 name = "g_gap_10035410"
 section = ".bss"
@@ -13159,24 +11449,6 @@ writer = "verify"
 input_hash = "61815a4167ff68994d4f86002d4d9517e890f279c91fae43306e1247bc8ab0f8"
 definition_hash = "54b6d58b78a5a57d0e25235f8d18e1c1ab4ef585672b8dc822670bd9fbcbda59"
 measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x1003547c"]
-name = "g_before_osver"
-section = ".bss"
-type = "unsigned char[0x38]"
-size = 56
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
-status = "VERIFIED"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1003547c".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "b0afa6f453aa84fcfb74c8245f5fb32cb9bf486821f22292e230cf8bc5613ed3"
-definition_hash = "a8edc6b4d4d6c52cda3ef4fdcda7e9da4df17ad8774e464ea7aae1ddfb0a486a"
-measured_at = "2026-10-03T08:55:00+00:00"
 ["SERVER.0x100354cc"]
 name = "g_before_envp"
 section = ".bss"
@@ -13342,21 +11614,21 @@ measured_at = "2026-10-03T08:55:00+00:00"
 ["SERVER.0x10035844"]
 name = "g_before_g_current_year"
 section = ".bss"
-type = "unsigned char[0x3c]"
-size = 60
+type = "unsigned char[0x34]"
+size = 52
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
-status = "VERIFIED"
+updated_at = "2026-10-08T05:27:35+00:00"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
+status = "VERIFIED"
 
 ["SERVER.0x10035844".verification]
 status = "VERIFIED"
 writer = "verify"
-input_hash = "8d0225217098e0847831795aa74275e76f838e0040df22696e7ea04c23218293"
-definition_hash = "0485cc6d729219177e17b79001a6f7430552e51e0b7cf6fca20f795e866a31b8"
-measured_at = "2026-10-03T08:55:00+00:00"
+input_hash = "792b7ca42b2b0f556ea32dce826882a30553798a31f05224ac059e7fbf042b2e"
+definition_hash = "10969a37c994febbe6240244816db3b3c75d62b465eb099103a1009f4065132e"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x10035886"]
 name = "g_gap_10035886"
 section = ".bss"
@@ -13395,193 +11667,6 @@ writer = "verify"
 input_hash = "c1a36611a3384923465b2147137b6cc751edf538ea8c4ec25fc6bacc46cab75b"
 definition_hash = "c318224f5a24b4fd4119a4670d7726957199b7b6c04620f9fbf2f2da4a117fee"
 measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x100358a8"]
-name = "g_gap_100358a8"
-section = ".bss"
-type = "char[84]"
-size = 84
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_100358a8"
-status = "EXACT"
-
-["SERVER.0x100358a8".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "192a40ac20e7194caef8e60fc04e93a4015c12f49545a1687b31d5afaaccfe1f"
-definition_hash = "dbb891b6485fbf5ea6e9ae5759000b42012f01fec0d8e1c8dfa3fb0784cca604"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x10035900"]
-name = "g_gap_10035900"
-section = ".bss"
-type = "char[260]"
-size = 260
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_10035900"
-status = "EXACT"
-
-["SERVER.0x10035900".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "d24f4c1785cc7e6102b802eb939c0c876e366716815b64d57d7e281d23768d76"
-definition_hash = "0728d3c4c3fd736447b029a59eb1d2166390be971befa5d917ee2b41953165d6"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x10035a05"]
-name = "g_gap_10035a05"
-section = ".bss"
-type = "char"
-size = 1
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_10035a05"
-status = "EXACT"
-
-["SERVER.0x10035a05".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "9a01c16a64229133ee6167978784a31b21b5b63bf86bc1cbd80fbe3cebac1fe8"
-definition_hash = "9f504967788fe6f3fd07fff89a5898a5698825e715dee9c9cb42c92a12a8492d"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x1003660c"]
-name = "g_before_g_entity_base"
-section = ".bss"
-type = "unsigned char[0x64694]"
-size = 156
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
-status = "VERIFIED"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1003660c".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "10abae5c49ecb0a485009023c3768108ec2ffe71aaa348b96bde726a62782678"
-definition_hash = "6381c1e71c282b2e9536d0736cb4aea204563ad839a158709b1e1b740e8ae84d"
-measured_at = "2026-10-03T08:55:00+00:00"
-["SERVER.0x1009aca1"]
-name = "g_before_g_dynamic_entities"
-section = ".bss"
-type = "unsigned char[0x1]"
-size = 1
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
-status = "VERIFIED"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1009aca1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "ef882b89d5735f3bdadecb257187acdfcc443ce5bfa90212df308a7684d901a7"
-definition_hash = "9ea528052350e4d46dd9cf3d9de0d3e8a91b2a62bc6aaee9cb52276c72331b43"
-measured_at = "2026-10-03T08:55:00+00:00"
-["SERVER.0x1009aca3"]
-name = "g_gap_1009aca3"
-section = ".bss"
-type = "char"
-size = 1
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_1009aca3"
-status = "EXACT"
-
-["SERVER.0x1009aca3".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "018809c3a0386153190662f77100bc1bfbe174eeae9cf98c6c0d85b6b54f88fd"
-definition_hash = "f9c49e9deb59eb25a525df08ed62cfd19d528b922148ecaeeeeda83ee338b6de"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x1009ad00"]
-name = "g_gap_1009ad00"
-section = ".bss"
-type = "char[2656]"
-size = 2656
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_1009ad00"
-status = "EXACT"
-
-["SERVER.0x1009ad00".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "938852f6b252f6722d201edcfd51ee3acc1f984630e5a85a0f339b921dfb71f0"
-definition_hash = "fbf9dcca873f39b754157c28cecd660ed9869aedbf434c3250060b75edc8658d"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x1009b761"]
-name = "g_before_g_player_record_dst"
-section = ".bss"
-type = "unsigned char[0x3]"
-size = 3
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
-status = "VERIFIED"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x1009b761".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "43265d223b48ca39534e662bb8458ed153f7ac2fb158b61a4cab664188d75b9f"
-definition_hash = "327dbd6c70421420a20a425e98f5c2245fb7f0d362b69654799f516d997b0ab1"
-measured_at = "2026-10-03T08:55:00+00:00"
-["SERVER.0x1009b768"]
-name = "g_gap_1009b768"
-section = ".bss"
-type = "char[8]"
-size = 8
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_1009b768"
-status = "EXACT"
-
-["SERVER.0x1009b768".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "52efba4d393106b8572b4a7098fc1b52bd62fbeae2d25e9e6246c1057d301bb7"
-definition_hash = "a743eb72837079c6fc157a0b9deeba7b348ba99b296a3049f481267e58dc4b0a"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x1009b774"]
-name = "g_gap_1009b774"
-section = ".bss"
-type = "char[54460]"
-size = 54460
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_1009b774"
-status = "EXACT"
-
-["SERVER.0x1009b774".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "a36c84083b125bad4e5c346eae517beb7a28b37fa5437e78e31031b7d2cb267f"
-definition_hash = "eaddf3e3f39493793a57b42909ab4f740f86041db9966fe98062c8995e9820aa"
-measured_at = "2026-10-06T05:44:21+00:00"
 ["SERVER.0x100a8c3c"]
 name = "g_gap_100a8c3c"
 section = ".bss"
@@ -13600,44 +11685,6 @@ status = "EXACT"
 writer = "verify"
 input_hash = "1571874812326a330730efabab11d0931be6e45cb65daa249512321a75908837"
 definition_hash = "85de9e2dcecf0558324a0d1d9df23e9e706eecfda0d41b4c53a37e59630e83d5"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x100a8c98"]
-name = "g_gap_100a8c98"
-section = ".bss"
-type = "char[96]"
-size = 96
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_100a8c98"
-status = "EXACT"
-
-["SERVER.0x100a8c98".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "ac0361df481f92d099d12a3f3b6cc706dafa1736496f4aaa07aadefdef30dcbb"
-definition_hash = "6a590fef78d4a351c912e307ac1da417c55b91023c1e34197a26cc311b5e8739"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x100a8cfc"]
-name = "g_gap_100a8cfc"
-section = ".bss"
-type = "char[2852]"
-size = 2852
-storage_kind = "span"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_100a8cfc"
-status = "EXACT"
-
-["SERVER.0x100a8cfc".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "359c0277d75cde0d02270fd0523bed10708403511fc228812542889868e3fa84"
-definition_hash = "748c72ab5939ecd76c92f15b866ec532595d4e64e9f7dde64a593798acbb41a3"
 measured_at = "2026-10-06T05:44:21+00:00"
 ["SERVER.0x101de458"]
 name = "g_gap_101de458"
@@ -13753,25 +11800,6 @@ writer = "verify"
 input_hash = "2fa6c16a37f31c2f27ef57d797a9cd9884802263f58b3a34fa34edbea863839b"
 definition_hash = "3ac60cf3c81b24cfea13fd16562180ec96b7780b83e750afe627cda06e031674"
 measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x117640a8"]
-name = "g_gap_117640a8"
-section = ".bss"
-type = "char[8]"
-size = 8
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-link_symbol = "_g_gap_117640a8"
-status = "EXACT"
-
-["SERVER.0x117640a8".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "ab961b7be539b7a7e775ca775c3558019b14be2b9dd3fbac1034c488d275c960"
-definition_hash = "dc49b808bcc5e18f44f4a1a7e42143cd6cc352dfb89b1c4c69128b7836ffc7f9"
-measured_at = "2026-10-06T05:44:21+00:00"
 ["SERVER.0x117640c8"]
 name = "g_gap_117640c8"
 section = ".bss"
@@ -13791,24 +11819,6 @@ writer = "verify"
 input_hash = "9b6b593eaffb743646cb7d8e85b0c64ad8981146cbb7c66fe23f7b7b5863bdab"
 definition_hash = "b04c2e1eda7e625e6231010fab330f66d8e0b0d84f90b7fd56846eb618909cfc"
 measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x117640e1"]
-name = "g_before_g_owner_window"
-section = ".bss"
-type = "unsigned char[0x1fff]"
-size = 8191
-updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
-storage_kind = "span"
-status = "VERIFIED"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x117640e1".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "691300a1c2f5adff6a2b3692eb8f3e46f26b0dfd989feda40d287f2ee6486dea"
-definition_hash = "ff9497f747fbee25ffbc6ba8606d39c987d3729ec1fa51ead359ab09e13a40a4"
-measured_at = "2026-10-03T08:55:00+00:00"
 ["SERVER.0x117660e4"]
 name = "g_gap_117660e4"
 section = ".bss"
@@ -13828,53 +11838,17 @@ writer = "verify"
 input_hash = "5c2ecb4258264282a983f2747b32db1bb24e3150236ee870c46bbb3bd017031d"
 definition_hash = "f325ac10a70a49850c87c31a998da7e105a95e249962e094e1b0e7c433343371"
 measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x11766200"]
-name = "g_before_g_log_file_handle"
-section = ".bss"
-type = "unsigned char[0x4]"
-size = 4
-updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
-storage_kind = "span"
-status = "VERIFIED"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x11766200".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "8d4f62077e719e36a68fbd33824250ac333a390555e4687686daf680c5da295e"
-definition_hash = "d696c82e2eca0bb4433b8489a193d5049e46525f1e1707ebb93062ecbfbfd2e1"
-measured_at = "2026-10-03T08:55:00+00:00"
-["SERVER.0x11766208"]
-name = "g_before_sbh_pHeaderScan"
-section = ".bss"
-type = "unsigned char[0x230]"
-size = 560
-updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
-storage_kind = "span"
-status = "VERIFIED"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-
-["SERVER.0x11766208".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "6023f4c98e80920ad5ddbf4358fa1463734d38f32ee4711c505696fc77b49a28"
-definition_hash = "ca05c864a123e0428022149edfe96745078077b0cc5f2b2ed5d810b76601b3c9"
-measured_at = "2026-10-03T08:55:00+00:00"
 ["SERVER.0x11766454"]
-name = "g_before_g_stream_group_table"
+name = "g_before_pioinfo"
 section = ".bss"
 type = "unsigned char[0xc]"
 size = 12
 updated_by = "verify"
-updated_at = "2026-10-03T08:55:00+00:00"
+updated_at = "2026-10-08T05:27:35+00:00"
 storage_kind = "span"
-status = "VERIFIED"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
+status = "VERIFIED"
 
 ["SERVER.0x11766454".verification]
 status = "VERIFIED"
@@ -14274,20 +12248,20 @@ name = "g_entity_records"
 size = 4
 note = "Legacy extern retained for VC6 symbol order; view of g_slot_table + 0x16c, one building pointer per 0x21c-byte record, not a contiguous 768-element array."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
-status = "EXACT"
+updated_at = "2026-10-08T05:27:35+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 file = "src/bss_layout/bss_late.c"
 marker_type = "GLOBAL"
-type = "unsigned int[768]"
+type = "unsigned int[1]"
+status = "EXACT"
 
 ["SERVER.0x10035a0c".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "7ac868994d386a300e3c26bcdd7b7a6e90f607666eb37bfdb6b0605c336bfac2"
-definition_hash = "a6d46e2d3f3c34788ed463992acc2bd064bc0f78a08d361b97211f68ba8c74c4"
-measured_at = "2026-10-06T02:28:37+00:00"
+input_hash = "a0b86d113ea785a81a09f704353c7b793e99f052649e81ffef7ef42b7cabc6f6"
+definition_hash = "8c5da2f12722ee6908097829f5bea50d7923811da0d4cf386358fd7b0976a27f"
+measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x100358fc"]
 section = ".bss"
 name = "g_entity_ref_table"
@@ -15023,25 +12997,6 @@ writer = "verify"
 input_hash = "8b9b43d029d3df3598238860eb57883932cbde9bf41fb9260b2977ab3701b24c"
 definition_hash = "b8d88293ec303bf4518a42f4079d10d991d2c8b91d4fcb8926b1541b5cf91f34"
 measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x1002944f"]
-name = "g_alignment_before_vfs_diagnostic"
-type = "unsigned char[1]"
-size = 1
-section = ".data"
-storage_kind = "span"
-file = "src/layout_spans.h"
-marker_type = "GLOBAL"
-note = "One zero byte between the preceding literal and the VFS diagnostic at 0x10029450; inventory view only, no allocation"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-status = "VERIFIED"
-
-["SERVER.0x1002944f".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "0590f60a293c2c37ba496cdea3991472b971356034bd40314182c9b4b1c659af"
-definition_hash = "610053ca9e734635b18be9d8bfd5d537c3264cdb718c4aa719650fe071da2aee"
-measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x1002580c"]
 name = "g_alignment_after_dynasty_initial_trait_offset"
 type = "unsigned char[4]"
@@ -15269,93 +13224,6 @@ note = "Declaration-only client view; storage owner and backing unresolved. Nati
 updated_by = "rename"
 updated_at = "2026-10-04T14:48:58+00:00"
 
-["SERVER.0x100317f9"]
-section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-name = "g_before_locktable"
-type = "unsigned char[0x2b3]"
-status = "VERIFIED"
-
-["SERVER.0x100317f9".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "9ed845da2c88bf3b02478afaacc8fb85c6f4a44b65e1c41849be84a04a93b915"
-definition_hash = "9b208ebf963c72d5e03f4baf8bbd05930f2aa311344a43e7018af9153f3c4b62"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x10033f38"]
-section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-07T10:40:28+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-name = "g_before_g_panic_callback"
-type = "unsigned char[0x6d8]"
-status = "VERIFIED"
-
-["SERVER.0x10033f38".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "26e3c2900a1d789865ec097d48a5ae635afafc624317b0c8a5c6e88ec9e49807"
-definition_hash = "13a4094b70cc3378a994538fa9407dbc9e46678d95f9847b4902693bd21b9400"
-measured_at = "2026-10-07T10:40:28+00:00"
-["SERVER.0x101398a4"]
-section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-file = "src/crt_region/section_spans.c"
-marker_type = "GLOBAL"
-name = "g_before_g_entity_ptr"
-type = "unsigned char[0x1401c]"
-status = "VERIFIED"
-
-["SERVER.0x101398a4".verification]
-status = "VERIFIED"
-writer = "verify"
-input_hash = "f1c124739a438d3c34dd112b43ba122e4c0b880410ae2ae85020bae16f6996e6"
-definition_hash = "e43d526f7bac8feb8ef314f7b9595a249e1795d583c322e1abeac92ee857ab29"
-measured_at = "2026-10-06T01:18:03+00:00"
-["SERVER.0x101de465"]
-section = ".bss"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-name = "g_gap_101de465"
-type = "char"
-size = 1
-storage_kind = "span"
-link_symbol = "_g_gap_101de465"
-status = "EXACT"
-
-["SERVER.0x101de465".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "2876b1edb27d812a4b9afbf5695f17c710f561c7f0b3b6108f6f2c775e63a0e0"
-definition_hash = "96fdc9c12a3cf168e51e8fcd99c0fb6af31a3fe845051549fd586bf67b056d43"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x114ffe24"]
-file = "src/bss_layout/bss_late.c"
-marker_type = "GLOBAL"
-name = "g_gap_114ffe24"
-type = "char[2507360]"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 2507360
-storage_kind = "span"
-link_symbol = "_g_gap_114ffe24"
-status = "EXACT"
-
-["SERVER.0x114ffe24".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "bbf803c74c6f1765c6d2539da6bd66f4a6674b5332a2cd1fc3746f93581da14d"
-definition_hash = "5cc27fff4f1893246f834f566f476dfac3d61bcbbf3b4d1ce67c9ed1b9949491"
-measured_at = "2026-10-06T05:44:21+00:00"
-
 ["SERVER.0x1003461e"]
 name = "g_gap_1003461e"
 updated_by = "verify"
@@ -15572,96 +13440,6 @@ writer = "verify"
 input_hash = "e4df10b1f7def9a00524b9e20cb44dfef5dbc85a603b3b9ffed44f2f41279aa0"
 definition_hash = "8ebbb91c39ed695222fca83ce137f1e48db71372835a6af6e37938c92c77411c"
 measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x10035a06"]
-name = "g_gap_10035a06"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 1
-type = "char"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-link_symbol = "_g_gap_10035a06"
-status = "EXACT"
-
-["SERVER.0x10035a06".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "01fa01396c6e5ef64dbf20cf38140140a8766d056e997fe39712cbeba6ef4f88"
-definition_hash = "f635da78c7e2f0bba2997bdee8dbc408354af42f6630d2f90534303463ea0f91"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x10035a07"]
-name = "g_gap_10035a07"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 1
-type = "char"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-link_symbol = "_g_gap_10035a07"
-status = "EXACT"
-
-["SERVER.0x10035a07".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "44d8e4065ef5dde6cede1b0d25ba59362dac6a81b45e3da1c338ffce4d94022f"
-definition_hash = "43d5bb3564a07493189ecf90a9031c0155063c62553e8b036cbd127ceb334a2c"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x10035a08"]
-name = "g_gap_10035a08"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 4
-type = "char[4]"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-link_symbol = "_g_gap_10035a08"
-status = "EXACT"
-
-["SERVER.0x10035a08".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "9412c13c4b588d437c15a0185cc191629f2ca54e2e6e9a068248b74b99314e77"
-definition_hash = "8418b12594a2426de5967fb6f24951377ffb1519bb2ee6b80145a82159a94117"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x10035a10"]
-name = "g_gap_10035a10"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 414352
-type = "char[414352]"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-link_symbol = "_g_gap_10035a10"
-status = "EXACT"
-
-["SERVER.0x10035a10".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "f2d2109cdd4b6087f20462b3071abd6977addef401212944290a8195deaeee2e"
-definition_hash = "98e5adfd3df1e4a1c0b8e9f34bbba61190d879a3c73c1949182c00025309be4f"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x1009aca4"]
-name = "g_gap_1009aca4"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 88
-type = "char[88]"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-link_symbol = "_g_gap_1009aca4"
-status = "EXACT"
-
-["SERVER.0x1009aca4".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "4c3d102a2035716432d586b1f2b24485ff8bb7d777a8da0caa6694860f5cdecb"
-definition_hash = "e14887cb6679c7f6b7efd7736d5be423d4f262a0072be834a50af63e7ee54bd7"
-measured_at = "2026-10-06T05:44:21+00:00"
 ["SERVER.0x10139884"]
 name = "g_gap_10139884"
 updated_by = "verify"
@@ -15679,60 +13457,6 @@ status = "EXACT"
 writer = "verify"
 input_hash = "78ca9219aec7a84d5286e702e8416484637fd5171f14b311070311aad7159aa4"
 definition_hash = "b224b108106b89aff81028c125038879c2557dad1aa6adbeeb8ef3290782c39d"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x101de466"]
-name = "g_gap_101de466"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 1
-type = "char"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-link_symbol = "_g_gap_101de466"
-status = "EXACT"
-
-["SERVER.0x101de466".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "ce04aaf8254466754f0308afe2d7e46eabc33ec8b115bde68127dd121be0d1b1"
-definition_hash = "94f1cf21d56821edede5ad84c53165a5d69b8d10e56d529ef4e6047586a7462f"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x101de467"]
-name = "g_gap_101de467"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 1
-type = "char"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-link_symbol = "_g_gap_101de467"
-status = "EXACT"
-
-["SERVER.0x101de467".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "e796f6991b7e3d42d5b63ece72d819d25d30f428581211535e032a76fefb8084"
-definition_hash = "8b6779d751c6ece502a7b99cf7e47fa579b9cf7bb935a378207d14b6ae0ccc04"
-measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x101de468"]
-name = "g_gap_101de468"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 244
-type = "char[244]"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-link_symbol = "_g_gap_101de468"
-status = "EXACT"
-
-["SERVER.0x101de468".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "f9e63cfca241445077af62870e38a8f1c8ca0de9a903db472f733b5f1dd1752d"
-definition_hash = "cb6967294ef266ca5b22b9efd313ec8207463efdd24e12bb3fed24c15eb11744"
 measured_at = "2026-10-06T05:44:21+00:00"
 ["SERVER.0x101de598"]
 name = "g_gap_101de598"
@@ -15752,25 +13476,6 @@ writer = "verify"
 input_hash = "cbfcd600ed987b70bd576e4be4e78334cfe8455189d483937b6a9c5e77b53250"
 definition_hash = "a5b40728f40e14119ef1f4837c6807d3b666373c19d542a59057d31f4c8b5c87"
 measured_at = "2026-10-06T05:44:21+00:00"
-["SERVER.0x101deb18"]
-name = "g_gap_101deb18"
-updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
-section = ".bss"
-size = 20058888
-type = "char[20058888]"
-storage_kind = "span"
-file = "src/bss_layout/bss_late.c"
-link_symbol = "_g_gap_101deb18"
-status = "EXACT"
-
-["SERVER.0x101deb18".verification]
-status = "EXACT"
-writer = "verify"
-input_hash = "0b90457e022e5d3f87fcfd5ff6facb76c4b8cc27340ab05b96f6606374ecc4e5"
-definition_hash = "ce3d32744f34c09974cf6ef27ed0978319ef1aa88efb3b6b7d126233ddbf123c"
-measured_at = "2026-10-06T05:44:21+00:00"
-
 ["SERVER.0x10034668"]
 name = "g_vfs_root"
 updated_by = "verify"
@@ -15844,3 +13549,1801 @@ writer = "verify"
 input_hash = "4cbfa722308c40d06de01888b00873bdefa693c6940d38df65654c00f24efa0c"
 definition_hash = "1b8425877a4352f0650b09e753e7be82582d346402b1aae02f6bf5ccbc785bd5"
 measured_at = "2026-10-08T04:50:20+00:00"
+
+["SERVER.0x1002533d"]
+name = "g_before_g_type_adjustments"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".rdata"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002533d".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "b3e2d181a603e23e9fa42cb7b58410412b212b18f65c154aa9dbf4d506814247"
+definition_hash = "9f8d8bdf01aba6f8ee878ecc4097a94146f5c3688ae47d1e2e542adfbe714341"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002559c"]
+name = "g_before_g_type_adjustments_secondary"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x4]"
+size = 4
+section = ".rdata"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002559c".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "21acca2d2ac388e24b38970ebcf542fa4a6e7695fd4ebdcf0af52d52e3df3e5e"
+definition_hash = "ecb5ea7f100d7d12e2e75b78f0805643f7524fd5d124b1675af3d67a07c888a0"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10025fc0"]
+name = "g_before_g_c_locale_time_format"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x508]"
+size = 1288
+section = ".rdata"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10025fc0".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "ac47833826ac2798e54b01bdfc44e51e71adbd30792fd1719f596559a8bb076d"
+definition_hash = "d0628f5f89cb4d06dc2e1dafcd3a8757ff5335ec3026b61e7675f226fff79df9"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100264d0"]
+name = "g_rdata_before_imports"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x138]"
+size = 312
+section = ".rdata"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100264d0".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "c90c63741cd49fc84da43e938353d01c670980936f00011c154220b2ae5d771e"
+definition_hash = "7ca2e6398f9a2323210cba190c289f6ac4bd1c24a8c5024a47091a9ebcee971b"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10027055"]
+name = "g_text_before_Sending_Broadcast"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10027055".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "19bac0d22fe3a624802c3b9ae88f572ff75180468f8fcf973e6dc4dc14824153"
+definition_hash = "a6138b141daee97bbebc0a8be0362cd2717bf9a50216a326ecde2f3d12bd5a24"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002706a"]
+name = "g_before_g_zlib_version"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002706a".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "27d00442be6bee109d2431911ddcfcc2d45f6c0fb88bd60cd534b6735b3c07dc"
+definition_hash = "3dc356feceb5c01ea4d50a146e66e2c327b8da32de208ef527a9ac557f21a1d5"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10027072"]
+name = "g_before_g_log_level_table"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x6]"
+size = 6
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10027072".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "d62dad4aa8a5938a5ed84da32d86ca0124c1f220ff7348d029a71ce418a02777"
+definition_hash = "43d265d3f2dd1726fe15351f18a78ba19833652ddfe9660b13b24a16f1a2fddf"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10027357"]
+name = "g_before_g_file_write_mode"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10027357".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "ab8bdea2fb4c4b331402ce96fb0d085426a8435bbfc1582afca447b75883b908"
+definition_hash = "24d84a01838919a46471fa1592d9f4ae0bc416d49958628b7df3bd7c6a8a7ec4"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100273c3"]
+name = "g_text_before_Fatal_Error_Abort_Program"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100273c3".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "5d97cda6a44e103555fc91d0cd563909bdc9eacfa140a40fb440a4cbf025367e"
+definition_hash = "08d752d69f4d04f863065d3127344dfe1902a3e5ca9c8004b103d1a8ef124a77"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100273fa"]
+name = "g_text_before_ERROR_Handler_has_not_been"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100273fa".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "cfb6f02d57ca06585b67ba16ddd43e5a3f7a25714fa18c1be7c9ce7a79a5117b"
+definition_hash = "97801d41c81bbe5e96bdf88185647e6ae234f8c1a3262a0b8adcb489aab0ec87"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10027422"]
+name = "g_text_before_error_title"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10027422".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "f174bbd2dbec08f29bf29dca142dbb1340103fda18de9bcf0efc375ab71d771c"
+definition_hash = "8f6895e835a70bbe7a20bf3c2a29fb5212ac3897a439c1b2058a99f34468fa31"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002742b"]
+name = "g_text_before_message_title"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002742b".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "c37a91e86f036ebe82ea48858bfcaa8ecc42639c0283c9486807d29c3b03b45a"
+definition_hash = "c9b026af5f1490af08dd28e43c65bfd0996966f468c1a480967cef10ed668a90"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10027435"]
+name = "g_text_before_MESSAGE_s"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10027435".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "0836725a590f127eb0e490d8ef0c78e36b88267e15b816403ed6d6b49e094a93"
+definition_hash = "7072f83333f5e86cfe86624601c0a236f19da1dd1ec5c0e0848a3204c5eeae0d"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10027445"]
+name = "g_text_before_tModule_s_Line_lu_s"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10027445".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "7a448ee25c0122f4cfc947aeb3674e2591ee23a023cbc57511ccc76a0e7bb7bf"
+definition_hash = "47469c44403af19769761607682f8246bb268849b658cbba51e3329d5a39b338"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10027463"]
+name = "g_text_before_Time_8lu_Module_s_Line"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10027463".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "91fa690381d21d26c73b2492dd8b3b2265462da8b0c19a5d7e6047930494e227"
+definition_hash = "87b3919e8c52c2bc4a89d44aa654d93193b743ed0684bb05deb0b7c44d903592"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10028b93"]
+name = "g_text_before_Unknown_winsock_error_u"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x49]"
+size = 73
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10028b93".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "73f8718e6e690651c1ecf6062a70af0b14ef07f7dd64445d3c38d176261fe762"
+definition_hash = "d6089b04a7803e891dcb3a9e92f45315809796a09a14286e561d752fff6fcc2c"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10028d21"]
+name = "g_text_before_WSAETIMEDOUT"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10028d21".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "3bbed7dfb825b8c1cc2a19edacdc2b332e672ee7f42b6e8d6b351cfb74a7d11d"
+definition_hash = "e26dbbafcf7829439951fb483b708b4ba3915fc9ece33936a687ea33db0c49c4"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10028d9d"]
+name = "g_text_before_WSAECONNABORTED"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10028d9d".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "b6e8706c1aa180ff89714a8e381a45b6b33333927f63d725206b3bdcde85c898"
+definition_hash = "e3ce26a48884eaeb5c53ad23107fe279ddf8b386e635a2a2e79bf30b4b17a654"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10028e3b"]
+name = "g_text_before_WSAEINVAL"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10028e3b".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "cf34376dc10b1d274f72b855683ae53558dd887b7a131be77fbfc41989bd6cc4"
+definition_hash = "be915ca3e0810a0ab61bbaaf44502207a2e55e7136ef9118b8e126291f6f4210"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10028f0e"]
+name = "g_text_before_WSAEMSGSIZE"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10028f0e".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "c815bb0a0d53ccefcf969e9d2d4e867f4194fff04c6218317f0613142d96fc89"
+definition_hash = "837c3bdf33073d31aacd98588b7e7e190439437bf179e4adb88d1d1e98810fd9"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10028f6b"]
+name = "g_text_before_WSAEWOULDBLOCK"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10028f6b".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "e447d03d96dcc8a3e0aa4613666d2ba70797c1adeff22d4db789bf5494c53b45"
+definition_hash = "10de21285690134222c18f5e003da43d387b59c90c1bfab12d0d52f8cd1812db"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10028fc7"]
+name = "g_text_before_WSAESHUTDOWN"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10028fc7".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "50867c2ab3d5a24f6bba1c38c50d876b058438455e38b86dd1cb28a4a77982af"
+definition_hash = "39c4d03c93ace16c76b0d5ffb5dbd5918891e6638eb21e149704713088afcff5"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10029066"]
+name = "g_text_before_WSAEOPNOTSUPP"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10029066".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "7fa898c8f10b4ec97992a6f7cb8161846b1fe598b2aab9d9b0dfb4f246ca80db"
+definition_hash = "da05c52a186e4b7bc232cb2b4e58598245f1fecb4a8514b0b2bfc52478062bfe"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10029161"]
+name = "g_text_before_WSAENOTSOCK"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10029161".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "fee1f70f5addc4d879b6542ac0e4b3fc50b328f79d9b02048a1ea60c851ea459"
+definition_hash = "c0c404d0b04743eb8ed7cc86a9df5a9c0c114267c01ce4e41e00d29cbb8ab297"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10029191"]
+name = "g_text_before_WSAENETRESET"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10029191".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "4fd1e598aea02850ca0b7a4649c8fa9396d2b87016758f0798cd9ba04747f8be"
+definition_hash = "1886b831328e10f0107c350118cc72053a376a93699879af9a845c66518fcffb"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10029219"]
+name = "g_text_before_WSAEINPROGRESS"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10029219".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "ac52735ebb7d92fdc163edaa9e08bb8fb070f9291ff741657084d1750c4487c9"
+definition_hash = "54a239fc4a1d5f1ed946cc20552331499c96c768e0c09f204df09640938dd258"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100292a1"]
+name = "g_text_before_WSAEINTR"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100292a1".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "6543928c2e68892ac2ee5b3cea214075ecf3d0ca87f48a940c5538bd8fd43a5f"
+definition_hash = "cde881db29889ad806bc0d9133a6a40585cd634db9bde38cce96f2d4f9f8f87a"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100292ee"]
+name = "g_text_before_WSAENOTCONN"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100292ee".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "cf549c67741f8a1cd62241a1c4bef3abfc0f4ee1206f1003be9040b2f39e0c60"
+definition_hash = "2c69c73ea7912f8085c3811224737fd1e8cdfa647a91272eedde2f6c678aa14b"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002931a"]
+name = "g_text_before_WSAEFAULT"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002931a".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "c6f30636fc7e5c39be7045a37be8980d9a6c1a50804609038636d1d25d1d984a"
+definition_hash = "10856dccaa0599591fd35f00ad46f67fbc9ab690db8fc5b732c2ce884c43ce09"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002937f"]
+name = "g_text_before_WSAENETDOWN"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002937f".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "ad73ed7723af0b8e36201b5738f3d709c5f64ff528c7ba5f82ffcb4c618fc7ac"
+definition_hash = "926d89cdcb6d096b77e8b20d696281413f49512c54291e879dc1eb5ed14d3669"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100293af"]
+name = "g_text_before_WSANOTINITIALISED"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100293af".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "7a816df17200283301092744896c6f9966662e92747dbcbc98f8873d6e862b5f"
+definition_hash = "ea5b09b3723892650619097a66f57322189f2b5a40dafe94e831110e083e1c32"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100293c2"]
+name = "g_text_before_Cant_set_SO_SNDBUF"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100293c2".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "2b394cb8079851fac05debf0217f3a215f5d4ffbd23e48804a0da1b96496a8ca"
+definition_hash = "fef1d0e29e5b768046fa1994c2acda769e3c5145eec75c61a6412489e82d1890"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100293e2"]
+name = "g_text_before_Cant_set_SO_RCVBUF"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100293e2".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "e5b0a847977fbc4d1556446dbe41d07e284957e975421df4659f7e1c2f8d0bbe"
+definition_hash = "48b35f572bcddd8cbbc5e47b63c3c180e65e50cef281b5fa073a6604488be34e"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10029402"]
+name = "g_text_before_gzip_mode_rb"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x4a]"
+size = 74
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10029402".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "6a78018dc81c8c98c0b92568eae29335e3eb703ff580d6e008bf611358011c76"
+definition_hash = "2852cf57aef556af97458816e7e91ae80d410584903961a4e1163bad4c3d7fba"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10029473"]
+name = "g_text_before_vfs_gz_compressed_file_s_i"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10029473".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "1fc9ab33d1fa04faebc2e5816b1496efc6cd51f54539d498c44baf2dbccbf79f"
+definition_hash = "7dd3981e3cb9b733c548df9647a23c15241eda800b1081c534ab5a5fb35ac0e8"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100294a1"]
+name = "g_text_before_fmt_hex_length"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100294a1".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "319e28c705ba54aef34fac8f60aefe025521a5fc5cb583a76a8c1bd5bcd01a14"
+definition_hash = "a245c850d677b07efeb9956f65eff866754c8a81419f94561533968f0355c8be"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100294d2"]
+name = "g_text_before_This_is_Gilde_talking_can_you_h"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x9a]"
+size = 154
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100294d2".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "5cc7f9729976c40bc6debafd75e8e181350004ae05d4833421a738df8c8fcac5"
+definition_hash = "9a3ad9a71703ac6af79cad5f48ca7e6f9c2d10f015cfb70796df1566dcf49c69"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10029fa1"]
+name = "g_text_before_amt_cant_load_status"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10029fa1".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "81ccb22e7f57985c32c725a9318b5cf27bd6653c18e5b5ed16bff73fb9049d97"
+definition_hash = "7dec52e4288d13d0a47b83300edd9128d4bfb3a6d251e2cea78104e23bcac47f"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002a01a"]
+name = "g_text_before_amt_cant_load_mplayerid"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002a01a".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "77e5ce1021b2979012ef640afe157fcbb036cfd01b58df1d9bcf6653939d8c55"
+definition_hash = "07f2d7332d793df66a37e70ca5d9b5bc64e33fdb2d1aa199761191f8ed16c8ea"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002a047"]
+name = "g_text_before_amt_cant_load_id"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002a047".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "1393f3af236a3b60b17995bc2174e56921053aca98dadd60202f2fda33afbe41"
+definition_hash = "489e1436e0c2c074411b5a29238c1e7f771e47e2947594782824ac2aecebb58b"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002a0c7"]
+name = "g_text_before_amt_cant_load_count"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002a0c7".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "de1c07c28db0379bcf2fbd6484af634fb05a30737773a9e20b8553fae8db51fb"
+definition_hash = "1b6edcc4934649e9baa01e2a87e51fb3083318bfd4f4c3b425f77c587fb78c02"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002a0ef"]
+name = "g_before_g_alchemy_one"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002a0ef".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "f5ac891dc2ed430795b1b89f67f94c207cc6d1e80e73cdf791e75c058255524f"
+definition_hash = "0946d1b96351ca3788251d6d2a31481bc83b54c59d51d6ce6cdacdd839ab2828"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002a109"]
+name = "g_text_before_D_Develop_DieGildeAddOn_game_al"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002a109".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "8fd2d8e2f60954fddd616d1b4dca6425e8779d241093d86074d6cbc53fe2116c"
+definition_hash = "2b24b24030d57f2b5f2cdbd93090ab42244acb708be10ba108888fa64192c002"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002a13e"]
+name = "g_text_before_ahm_ExAllocAlchemist_array_over"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002a13e".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "f9c5e698c3626cb3306fdf56d5ddc7325b4350999396af83e9a735e619ad32e3"
+definition_hash = "85219e7a7422c4edd3643b484137feb5e6904f0d44c2e93ecfcf8d806d37564e"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002a19a"]
+name = "g_text_before_ahm_ExAllocAlchemist_cant_find"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002a19a".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "0d97240b01244736f93762603f1c5ade098c75343eda49e585908a8628be69f4"
+definition_hash = "903e076ec48a1710817f396e87f9b3b817c1814f0eaa7714acec855d2425842c"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002a1ca"]
+name = "g_before_g_alchemy_random_table"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002a1ca".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "4bb5eb51902500857d0f9b5724e65f8e81fe62f2e6715ae5215de8e0108a4446"
+definition_hash = "0635b840455ba668420b64e0dd87e59d9be5e04d0fd4c39c6b925e3d64bf6942"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002c748"]
+name = "g_text_before_cm_ChkChangeBits_Invalid_actio"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2bc]"
+size = 700
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002c748".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "2f29513d0cf1bcd81a50d5d2470805194063fc82b09686f0fc13a6741fabf0cc"
+definition_hash = "2dab9b1ea7284141f2cc0829daeb27631aa06d94ca06fffeb2060b0ca074d81c"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002ca53"]
+name = "g_text_before_cm_ChkChangeBits_Invalid_Id"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002ca53".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "446666d064866261ff365f124eb9c29171dd31a074303e04abb124a1b377cf87"
+definition_hash = "c2cdcd18f74bcb3f95b8ac66152850ac6dcc9894e4e0ca888eaefe3125716297"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002ca72"]
+name = "g_text_before_cm_ChkSetGebBesitzer_Invalid_I"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002ca72".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "81c5205ec6534a8ca2d4c669d67c3fd4a6e4f6183a29c7b4c299295c2e3bfa0e"
+definition_hash = "3bf394cb88eb8dc149373f99b97f47b5a13b7c501d7a6383572d3e9c0c9d7035"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002cac9"]
+name = "g_text_before_Invalid_Commandtype_in_Execution"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002cac9".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "52b0b269acee6e6a619b9d0b18ead078fa8f53c1e8d544af0f94f8b3eb2575ca"
+definition_hash = "a6a9a5b4416b6f376e98cd23cbe87de89fd28db371cc7eee40cded094b52bbce"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002caed"]
+name = "g_text_before_Invalid_GI_Id_for_cmdt_ALLOC_B"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002caed".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "a146bf3f1770364f43d83d0b6e4ab8b8559d98a2a69cc40ec4db3aca51b99e60"
+definition_hash = "816c8f58be226dfdf1ad563686acb1048a1076c5421e0f8432671ed6633b7d97"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002cb33"]
+name = "g_text_before_gm_AllocGebaeude_failed"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002cb33".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "e3dbb05b7c57787313c1dd7152ee3066e5c91e6e4c00068c343b22ab9ad2cde2"
+definition_hash = "cd6612af7f8d4b8792586ea98c39c3e0fdffcb812851a7699673403617a91ea4"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002cb4e"]
+name = "g_text_before_Invalid_GI_Id_for_cmdt_ALLOC_S"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002cb4e".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "01ea0c6331b4b00e66d1be857b1c50945a56c0712411be6ec4511d7b11760910"
+definition_hash = "4c0443a4496222032c5a9d33ba78b5c1745015b4007c8332e15934e011bb77a5"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002cb8b"]
+name = "g_text_before_cm_ExAllocSpieler_gm_AllocSpie"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002cb8b".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "258e4adf2bbf72233fccc5e5908429d19388f07862b7f79b0246dfacdb8987cd"
+definition_hash = "a739122543854545297c8075fbdc18eaddf7fe233a9b8a06bf30ad5941d758cc"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002cbb9"]
+name = "g_text_before_cm_ExChangePlayerIdentity_fail"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x37]"
+size = 55
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002cbb9".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "690ddb9ec2004c50ff79ba08f9ee7c2428349e8912b75e3353cb179cc2b77e50"
+definition_hash = "987b209b8e212c965d90f67a89d5bfde57deb883eb57bba9acc7fa91a9a0d0b4"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002cc13"]
+name = "g_text_before_cm_ExChangePlayerIdentity_exec"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002cc13".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "2a62f60e5b8dd8e2cbe40c20241e82cd66a591d19e3a1c89d509d61d62fb3a49"
+definition_hash = "fa8810e60f37f52aeb23bcc0b75b38c89f483f3ac2acf4fa5ad0ea5d0badbbc7"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002cc39"]
+name = "g_text_before_cm_ExKillSpieler_Could_not_fin"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x51b]"
+size = 1307
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002cc39".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "f40d0b0e71c943e0667de8f24eab9ae9a71e3b7d3931b34333241b5545958057"
+definition_hash = "bd15ae543f30459ce496f39167c9ef3236aab48df9267e0c2ce1b7c076ad33c7"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d181"]
+name = "g_text_before_ex_set_owner_missing_a"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x27]"
+size = 39
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d181".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "7dc225da49be8021ea72979fedacc37ff1cc99f84e0f95fb60d6157fa2e2ff75"
+definition_hash = "e278cc4898b2181913f8da00ec6e99e3533ebeb9ca329a1748bb318874b8a83c"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d1dd"]
+name = "g_text_before_ex_set_owner_missing_b"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d1dd".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "3486cbdfea3df155825807dba0810c3c859776af434359264a1a2582a06121ae"
+definition_hash = "dca551a575e4c9613ce46487f28513c62cb4343f03feeccdaf63725de066ae85"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d212"]
+name = "g_text_before_ex_set_owner_missing_c"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d212".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "6470376ec12eecab4a12dbc28ac577d2fd8bd50444a438166c52155da8270031"
+definition_hash = "eb107bb5974b0eda61b783daa7bbeffda3b87953905b2ad20fd8715eca2c75ac"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d23e"]
+name = "g_text_before_cm_ExSetWohnsitz_Residence_is"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d23e".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "7cfa921a6da564958f36914d236552931a8c1a1dc75520f9a84a34c0cdd0a9f0"
+definition_hash = "a3d6bb31b3a6d8a1bf1df49086092395f7c2296303f60307ab32cb159e5ff5ab"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d266"]
+name = "g_text_before_ex_set_home_missing_a"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d266".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "537ce4c222dfcf980745e2f21d6341e0fa768e6f883695da56eee104380d4a21"
+definition_hash = "a334a351f384bedd6793b3e63defb86a0e25df98c2d81d62e548f5835c151620"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d295"]
+name = "g_text_before_ex_set_home_missing_b"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d295".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "5b5742a77bda99255e619573a87c67346ee07a9c512faf5ad2c2d8b87622fbd2"
+definition_hash = "5d8e33a7cf4c347e5eb336a8856cbd0f6e4b99ebf82d188d9a1ff7b2f63b70db"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d2bf"]
+name = "g_text_before_cm_ExSetGebUpgrade_already_hi"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d2bf".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "0666384c44d31fb35fc6c6255784059b249938586e69114f4baf0b8be0b93544"
+definition_hash = "6a9ac4b261b21c69e4e72ee42e70a6d9aa154da79fc4d66620a29f28cdaa70be"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d315"]
+name = "g_text_before_cm_ExEmployWorker_Illegal_gw"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d315".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "0cd4b54c4c0f440cbf3b3565ee7de5de0248a0a754ae44bf66849002fe95ae88"
+definition_hash = "1682c48c0311d00e35d21e44bfb3223ecfae0c0b104cca6b3deab7c0e908e0d7"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d361"]
+name = "g_text_before_cm_ExKillTransporter_invalid_t"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x73]"
+size = 115
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d361".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "b4a3189e5744345b358026c1d290bdeadb3aa0caf5123943ba64657b81a2a7a8"
+definition_hash = "172ac4809b8f33903877f673a318d15a7ba42ddd819752b02579fedda17e87a1"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d3fe"]
+name = "g_text_before_cm_ExCreateGeb_failed"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x2]"
+size = 2
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d3fe".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "6b331fed9b790efb5f7eca8e7b561f039b8ec9faf89269d8c0c9e83b6bc13320"
+definition_hash = "e33d898e2060d41f6e3fc2a9598b93da2044e4c37fa971127a16e52c347d7409"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d419"]
+name = "g_text_before_cm_ExCreateGeb_Could_not_find"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d419".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "062e03a2d72feae50adbe24e16deaf7b5f0949ce2bcc602ae472f450dd3aace0"
+definition_hash = "9adbfa30e9c23515c497b056943eac809ba51292b2a712729683b849dcec91a0"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d444"]
+name = "g_before_g_file_version"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0xa8]"
+size = 168
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d444".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "40f52f6c0aca8d52ba13ec721d49a5cb4e546a29dec9412f0dacb6773d709864"
+definition_hash = "d8d3cf78cbb099f47557a5bdf7dc4dd2a4ec98e235420afaef56051ed0d43808"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d9bd"]
+name = "g_text_before_D_Develop_DieGildeAddOn_auxilla"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d9bd".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "cb6dc84a053599097353073bd0d14b22856bbf8200b88841b0dc7397edcf499c"
+definition_hash = "e6727b54176015608d0962dbd8f41b77a8ef3798a7a9ea70612541396405e9e0"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002d9eb"]
+name = "g_text_before_plt_SetPlantMap_Map_is_not_al"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1]"
+size = 1
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002d9eb".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "ad216f1e1bc74e8449306f0f545cb97a2e8381d10218c768154ea6937480a1cf"
+definition_hash = "b4d8e1dac42f9ca9e3f647d29407385f6df6ef6ab74f6fb69751d61a3ad49fed"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1002da2c"]
+name = "g_before_g_plant_pair_table"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x4]"
+size = 4
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x1002da2c".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "8c2c8563ae13239a5305edd1aef091241e45fb88d9d65d074308c1514546c8e6"
+definition_hash = "f29c3e7e5007b301a3d7328a7e321e19857c35feac763cbba16d73fe522dca5d"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10030b69"]
+name = "g_before_g_next_object_id"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x3]"
+size = 3
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10030b69".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "294f6595506c63176f65be6ae22b439ec0a49fccaceab2f5779790ed857ae265"
+definition_hash = "3abe693032085f3145423aa2e9393e8512e3ba2b025f82c5fd6bd3c80f3b61c4"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10031b79"]
+name = "g_before_old_sbh_p_starting_region"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x201f]"
+size = 8223
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10031b79".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "448bfe2f6abdb7763661b97ef261452195419dbc0fc93d48a21ce355793134fb"
+definition_hash = "700481940a3b2f18101370f8b5439d68a36dcba0de457b8d829ac3633e5e88c7"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10035498"]
+name = "g_before_osver"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1c]"
+size = 28
+section = ".bss"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10035498".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "338edbd30b9ea3d4d9399ffc2fce6f03378774c636c34da05e42714aa59815cb"
+definition_hash = "caadd08ad9264bef8782e7fab932f1e689ea90195d5931c54b465b318a7b731a"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x11766208"]
+name = "g_before_sbh_sizeHeaderList"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x228]"
+size = 552
+section = ".bss"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x11766208".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "ba46a3438bceede3f912cc25479ab109e8e21148f929613af7f0204d1ade4414"
+definition_hash = "a14930da3ae707507afd28df555263327e0d79ccacfee19447769ea8488bfbe4"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100a9810"]
+name = "g_gap_100a9810"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[16]"
+size = 16
+section = ".bss"
+storage_kind = "span"
+file = "src/bss_layout/bss_late.c"
+link_symbol = "_g_gap_100a9810"
+status = "EXACT"
+
+["SERVER.0x100a9810".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "dcf39decf4b396942cb1bb50f6aa03d122c8b22c85487713e7e234e8e235fdb6"
+definition_hash = "5aa797ee75dbd73d45d7ce8409231aa5190aec38d42312305bc881bef52ec5da"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100288ab"]
+name = "g_before_g_default_group_name"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x8d]"
+size = 141
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x100288ab".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "f49778b3ac810bc8e6a848b23ac762e93ef22141d1357881c242332ba9ffda3e"
+definition_hash = "16a69dc0ecb37ea9012158469c0d5bcabcaef8e8e1acfdf8fbf1dfeb0edd6beb"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10028940"]
+name = "g_text_before_Pointer_not_freed"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "unsigned char[0x1ac]"
+size = 428
+section = ".data"
+storage_kind = "span"
+file = "src/crt_region/section_spans.c"
+status = "VERIFIED"
+
+["SERVER.0x10028940".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "a6590d0b9c2d0a1aecd85b4b2d32b08bdea9a174d8f6b9296b59e8589abbed11"
+definition_hash = "5a0e7007df1a2560fc126728857346fcd7021ed2f1ea70e0a13639ceba0503f2"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10034675"]
+name = "g_gap_10034675"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_head2.c"
+storage_kind = "span"
+link_symbol = "_g_gap_10034675"
+status = "EXACT"
+
+["SERVER.0x10034675".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "84cc849e3411e7afc1dedf3b75bf570740b62410181907f8e65cedad87e5fda3"
+definition_hash = "50cdc947fe065038a22e6a8dbfdf83f09712ac2bd2ebd0cf2256ddcfa91b42e4"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10034676"]
+name = "g_gap_10034676"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_head2.c"
+storage_kind = "span"
+link_symbol = "_g_gap_10034676"
+status = "EXACT"
+
+["SERVER.0x10034676".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "9ead6424aa09fa4ffd1a41691bc3dd1b9c69c7726a326f782dc949e71bf10897"
+definition_hash = "0d9e29dac84b683954e64e07624b162ddcd772655867c46afc9f19b5c6c652a5"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10034677"]
+name = "g_gap_10034677"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_head2.c"
+storage_kind = "span"
+link_symbol = "_g_gap_10034677"
+status = "EXACT"
+
+["SERVER.0x10034677".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "57f3808a0e0c4c49eebdd097811cbb2e5ad0f30d0d716590d4c719abc73cfa48"
+definition_hash = "4f08dd9c3ebc47c953626ea10c26b57036bc7b0b08f3466e0d41691191d01943"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100358a8"]
+name = "g_gap_100358a8"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[84]"
+size = 84
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_slot_table"
+link_symbol = "_g_gap_100358a8"
+status = "EXACT"
+
+["SERVER.0x100358a8".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "192a40ac20e7194caef8e60fc04e93a4015c12f49545a1687b31d5afaaccfe1f"
+definition_hash = "dbb891b6485fbf5ea6e9ae5759000b42012f01fec0d8e1c8dfa3fb0784cca604"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10035900"]
+name = "g_gap_10035900"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[260]"
+size = 260
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_slot_table"
+link_symbol = "_g_gap_10035900"
+status = "EXACT"
+
+["SERVER.0x10035900".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "d24f4c1785cc7e6102b802eb939c0c876e366716815b64d57d7e281d23768d76"
+definition_hash = "0728d3c4c3fd736447b029a59eb1d2166390be971befa5d917ee2b41953165d6"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10035a05"]
+name = "g_gap_10035a05"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_slot_table"
+link_symbol = "_g_gap_10035a05"
+status = "EXACT"
+
+["SERVER.0x10035a05".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "665554bf2385687fe24c4c48b5d66241c163eb9cb971b2578c160b07146f7d6f"
+definition_hash = "e077dd8c5f9eb408323ce50185b3d749201d6fcd1c5fef2cbe3fb1409ac054d9"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10035a06"]
+name = "g_gap_10035a06"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_slot_table"
+link_symbol = "_g_gap_10035a06"
+status = "EXACT"
+
+["SERVER.0x10035a06".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "e0f9e08693ea6bbe13443c05c46b787ae7281e598e45e1ed1ba63ee9ef823f3c"
+definition_hash = "1fe7e63c3ed06876c360ffabd7042dbb8204f1c6b28f5cd4d20446b8fcac2ba1"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10035a07"]
+name = "g_gap_10035a07"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_slot_table"
+link_symbol = "_g_gap_10035a07"
+status = "EXACT"
+
+["SERVER.0x10035a07".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "277e12506a71ece90eb6fee176e9068acab28c61cfa83a8805a5fd807a08929d"
+definition_hash = "40388009ab0287ebfca69e362a47cb66855d7ed521352b886faac5070a1f0930"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10035a08"]
+name = "g_gap_10035a08"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[4]"
+size = 4
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_slot_table"
+link_symbol = "_g_gap_10035a08"
+status = "EXACT"
+
+["SERVER.0x10035a08".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "9412c13c4b588d437c15a0185cc191629f2ca54e2e6e9a068248b74b99314e77"
+definition_hash = "8418b12594a2426de5967fb6f24951377ffb1519bb2ee6b80145a82159a94117"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x10035a10"]
+name = "g_gap_10035a10"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[414352]"
+size = 414352
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_slot_table"
+link_symbol = "_g_gap_10035a10"
+status = "EXACT"
+
+["SERVER.0x10035a10".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "f2d2109cdd4b6087f20462b3071abd6977addef401212944290a8195deaeee2e"
+definition_hash = "98e5adfd3df1e4a1c0b8e9f34bbba61190d879a3c73c1949182c00025309be4f"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1009aca3"]
+name = "g_gap_1009aca3"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_entity_base"
+link_symbol = "_g_gap_1009aca3"
+status = "EXACT"
+
+["SERVER.0x1009aca3".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "b394ba5f28a34e80317400bcdf8a15cd18f8a08560f1b0ce59529bb65a4c3c7e"
+definition_hash = "8038f199bd19e1307fa5cbcbc5b8927c33dcfec36441c0c2a963a61edfe31296"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1009aca4"]
+name = "g_gap_1009aca4"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[88]"
+size = 88
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_entity_base"
+link_symbol = "_g_gap_1009aca4"
+status = "EXACT"
+
+["SERVER.0x1009aca4".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "4c3d102a2035716432d586b1f2b24485ff8bb7d777a8da0caa6694860f5cdecb"
+definition_hash = "e14887cb6679c7f6b7efd7736d5be423d4f262a0072be834a50af63e7ee54bd7"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1009ad00"]
+name = "g_gap_1009ad00"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[2656]"
+size = 2656
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_entity_base"
+link_symbol = "_g_gap_1009ad00"
+status = "EXACT"
+
+["SERVER.0x1009ad00".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "938852f6b252f6722d201edcfd51ee3acc1f984630e5a85a0f339b921dfb71f0"
+definition_hash = "fbf9dcca873f39b754157c28cecd660ed9869aedbf434c3250060b75edc8658d"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1009b768"]
+name = "g_gap_1009b768"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[8]"
+size = 8
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_town_records"
+link_symbol = "_g_gap_1009b768"
+status = "EXACT"
+
+["SERVER.0x1009b768".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "52efba4d393106b8572b4a7098fc1b52bd62fbeae2d25e9e6246c1057d301bb7"
+definition_hash = "a743eb72837079c6fc157a0b9deeba7b348ba99b296a3049f481267e58dc4b0a"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x1009b774"]
+name = "g_gap_1009b774"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[54460]"
+size = 54460
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_town_records"
+link_symbol = "_g_gap_1009b774"
+status = "EXACT"
+
+["SERVER.0x1009b774".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "a36c84083b125bad4e5c346eae517beb7a28b37fa5437e78e31031b7d2cb267f"
+definition_hash = "eaddf3e3f39493793a57b42909ab4f740f86041db9966fe98062c8995e9820aa"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100a8c98"]
+name = "g_gap_100a8c98"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[96]"
+size = 96
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_city_records"
+link_symbol = "_g_gap_100a8c98"
+status = "EXACT"
+
+["SERVER.0x100a8c98".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "ac0361df481f92d099d12a3f3b6cc706dafa1736496f4aaa07aadefdef30dcbb"
+definition_hash = "6a590fef78d4a351c912e307ac1da417c55b91023c1e34197a26cc311b5e8739"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x100a8cfc"]
+name = "g_gap_100a8cfc"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[2836]"
+size = 2836
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_city_records"
+link_symbol = "_g_gap_100a8cfc"
+status = "EXACT"
+
+["SERVER.0x100a8cfc".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "5cba154bb2829ee707743d88a09821d09c2d88aaa015fe4cd76c3f9cf53c907f"
+definition_hash = "a622dc2fdda61a43248e06677c74c8592b8c53e0c3fd490077b419985fe26628"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x101de465"]
+name = "g_gap_101de465"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_save_info"
+link_symbol = "_g_gap_101de465"
+status = "EXACT"
+
+["SERVER.0x101de465".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "03f155cfed4c58fbe018aafa1cc3611cecdc96d298bb44099a239b61b9677ac4"
+definition_hash = "010b37875fa3d01059c532460e5b59ef3246175a01ad937ec41e50910d31b425"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x101de466"]
+name = "g_gap_101de466"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_save_info"
+link_symbol = "_g_gap_101de466"
+status = "EXACT"
+
+["SERVER.0x101de466".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "28009bbb677e429feb7d731be6dfffe593abe41e9353a4b51d3ff3a17c738b6c"
+definition_hash = "8a48e4c5432dc43982b082451a8c7fc36024243fc4597b46d23f8b73b188699b"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x101de467"]
+name = "g_gap_101de467"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[1]"
+size = 1
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_save_info"
+link_symbol = "_g_gap_101de467"
+status = "EXACT"
+
+["SERVER.0x101de467".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "88cbf1b2ced3d1a937d474dcec662fc63f72d1c8702690cfc33653db148332c3"
+definition_hash = "1d1520de37a17dec76476b6ceacde65676977a376d46589357d8092d75f0ed32"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x101de468"]
+name = "g_gap_101de468"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[244]"
+size = 244
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_save_info"
+link_symbol = "_g_gap_101de468"
+status = "EXACT"
+
+["SERVER.0x101de468".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "f9e63cfca241445077af62870e38a8f1c8ca0de9a903db472f733b5f1dd1752d"
+definition_hash = "cb6967294ef266ca5b22b9efd313ec8207463efdd24e12bb3fed24c15eb11744"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x101deb18"]
+name = "g_gap_101deb18"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[20058888]"
+size = 20058888
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_connections"
+link_symbol = "_g_gap_101deb18"
+status = "EXACT"
+
+["SERVER.0x101deb18".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "0b90457e022e5d3f87fcfd5ff6facb76c4b8cc27340ab05b96f6606374ecc4e5"
+definition_hash = "ce3d32744f34c09974cf6ef27ed0978319ef1aa88efb3b6b7d126233ddbf123c"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x114ffe24"]
+name = "g_gap_114ffe24"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[2507360]"
+size = 2507360
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_connections"
+link_symbol = "_g_gap_114ffe24"
+status = "EXACT"
+
+["SERVER.0x114ffe24".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "bbf803c74c6f1765c6d2539da6bd66f4a6674b5332a2cd1fc3746f93581da14d"
+definition_hash = "5cc27fff4f1893246f834f566f476dfac3d61bcbbf3b4d1ce67c9ed1b9949491"
+measured_at = "2026-10-08T05:27:35+00:00"
+["SERVER.0x117640a8"]
+name = "g_gap_117640a8"
+updated_by = "verify"
+updated_at = "2026-10-08T05:27:35+00:00"
+type = "char[8]"
+size = 8
+section = ".bss"
+file = "src/bss_layout/bss_late.c"
+storage_kind = "alias"
+backing = "g_alloc_root"
+link_symbol = "_g_gap_117640a8"
+status = "EXACT"
+
+["SERVER.0x117640a8".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "ab961b7be539b7a7e775ca775c3558019b14be2b9dd3fbac1034c488d275c960"
+definition_hash = "dc49b808bcc5e18f44f4a1a7e42143cd6cc352dfb89b1c4c69128b7836ffc7f9"
+measured_at = "2026-10-08T05:27:35+00:00"
