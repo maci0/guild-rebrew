@@ -5231,10 +5231,44 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   registration (TL 0x41db30) calls a client debug-variable unit and its three dwords are absent from the
   server's Error.c storage; TL 0x41ca10 (nearest palette colour) belongs to a client graphics unit. sim's name
   table (client 0x773d3c..0x773d44, read by 0x5007f0..0x500a20) is defined in a client-only TU before
-  sim.c. The alchemistry deck (0x772f78..0x7731b8) and the client's 8 x 0x170 alchemist table stay unmapped:
-  the server's `ahm_LookupEntityInTable` walks a 10 x 0x5c table in command.c's `.data`, so the two builds
-  declare that storage differently. Address brackets between equal-offset anchors are not proof by
+  sim.c. Address brackets between equal-offset anchors are not proof by
   themselves: aemter's TL 0x4e98d0 brackets onto `g_module_path`, which the server uses.
+- **Game `.bss` layout (round 19).** Measured with this toolchain (`.scratch/r19/alchemy-bss/` probes, CL
+  12.00.8966 and LINK 6.00.8447): LINK places every object's ordinary `.bss` section in object order, each at
+  its section alignment, then all COMMON symbols after the last `.bss` contribution (the CRT's included):
+  objects in reverse input order, each object's COMMONs in reverse symbol-table order, 32-byte alignment for
+  COMMONs of 32 bytes or more. Inside one object's `.bss`, CL puts the uninitialized statics first, in an
+  order that ignores declaration and use order (three orders of the same eight statics gave one
+  layout), then the `= 0` definitions in definition order. The section is 8-aligned when it holds a
+  `double` or an array of 0x170-byte structs, 4-aligned for `int`, `short` and `char` arrays. The server's
+  early `.bss` (0x10034610..0x10035497) is this ordinary-section run: Error.c, m_alloc.c and vfs.c have the
+  same internal layout as in the TL client (anchor offsets 0xf97d6c8, 0xf97d6c0, 0xf97c68c), and the run
+  follows the server's object order.
+- **The alchemistry state is not the clients' (round 19).** `g_gap_10034684` (0x10034684..0x10035407, 3460
+  bytes, no server reference) lies between server.c's `g_handler_started` and `g_sequence_counter`
+  (server loadsave.c reads 4 bytes into it and falls back to 1000000; TL 0x521920 does the same with
+  0x773d38). By the layout above it holds the `.bss` of every object between them in link order, which
+  includes `alchemistry_logic.obj` and the next object. In the client these are two objects: the
+  avatar-table unit's plain `.data` (TL 0x68e020..0x68fea0, 7808 bytes) starts after alchemistry's literal
+  `ahm_AllocAhmInfo` and equals server 0x1002a1d0..0x1002c050. Their statics are TL 0x772f78..0x772fe7
+  (112 bytes: a 0x60-byte block that TL 0x4edd30 reads field by field, then four dwords) and
+  0x772fe8..0x773d37 (3408 bytes: a 14-byte copy of the game clock, 56 x 8 bytes, 8 x 0x170 records), ending
+  at `g_sequence_counter` (0x773d38); Europa1400Gold.exe has the same sizes at 0x6f0dc8..0x6f1b87. With both
+  sections 8-aligned they would need 0x10034688..0x10035447, 64 bytes past `g_sequence_counter`, so the
+  server compiled different storage. Its plain data differs too, and LINK never discards plain `.data`:
+  both clients' alchemistry `.data` starts with {1, 3, 7, 11, 13, 17, 19, 21} (TL 0x68dec0, GOLD 0x60f190),
+  read by the deck shuffle TL 0x4ecaa0; the server holds those 32 bytes nowhere, and its alchemistry `.data`
+  starts with 1.0f and 0.5f (0x1002a0f0, `g_alchemy_one`/`g_alchemy_half`), which no server code reads and
+  neither client has there. From `g_sequence_counter` to `g_next_family_index` the clients have 48 bytes
+  (TL 0x773d38..0x773d68, GOLD 0x6f1b88..0x6f1bb8), the server 36. So the server's alchemistry sources
+  differ from both clients' in data and storage, and no image records the server's layout. A 0x168-byte
+  record or a 48-entry array would each fill the gap exactly if no other object has `.bss` there, but no byte
+  selects either, so the deck, player-prototype and alchemist-table code (TL 0x4ec9e0..0x4ecc20,
+  0x4ed240, 0x4ed800, 0x4edce0..0x4ee080, 0x4ef2e0, 0x4ef770, 0x4efc50..0x4efd70, 0x4f0960, 0x4f09c0,
+  0x4f0c90, 0x4f0da0, 0x4f0e40) is not
+  ported. Round 18's reason was a mispairing: the server's `ahm_LookupEntityInTable` is TL 0x4ce590 in the
+  client's command.c span and reads the same 10 x 0x5c table (TL 0x68b400, bytes equal to server
+  0x1002c050); TL 0x4efd30 is a different lookup over the 0x170-byte records.
 - **Measured** (native link of the committed tree against `original/Server/server.dll`; `.scratch/measure`
   scripts: section byte compare, IAT and hint/name compare per DLL, Rich records, link map, ICF predictor):
 
@@ -5258,6 +5292,7 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   section is one page shorter.
 - **Left:** the `.reloc` reservation, 412 input DIR32 records short of 66420 (5123 of 5535). Every other
   count the image records is now equal. The remaining records belong to discarded server code: client-only
-  functions whose storage is not yet mapped (the alchemistry deck, aemter's office counters, the loadsave
-  writers that read unmapped tables, spiel's BAD set) and the log calls the server's discarded functions
-  made, which no binary shows (see the log macro above).
+  functions whose storage is not yet mapped (aemter's office counters, the loadsave
+  writers that read unmapped tables, spiel's BAD set), the log calls the server's discarded functions
+  made, which no binary shows (see the log macro above), and server code that differs from the clients'
+  (the alchemistry state above).
