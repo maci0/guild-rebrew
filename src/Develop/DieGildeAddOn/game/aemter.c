@@ -628,7 +628,7 @@ typedef struct {
 	float score;
 	unsigned char rank;
 	char pad9[3];
-} OfficePick;
+} OFFICE_PICK;
 // SIZE 0xc
 
 int __cdecl amt_GetSlotByRole(int role, OfficeSlot* out)
@@ -756,7 +756,7 @@ int __cdecl amt_ListCouncilSlots(int all, int max, OfficeSlot* out)
 	return n;
 }
 
-int __cdecl amt_RankOpenOffices(unsigned char* who, int n, OfficePick* picks)
+int __cdecl amt_RankOpenOffices(unsigned char* who, int n, OFFICE_PICK* picks)
 {
 	int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out);
 	float score;
@@ -823,7 +823,7 @@ int __cdecl amt_RankOpenOffices(unsigned char* who, int n, OfficePick* picks)
 	return count < n ? count : n;
 }
 
-int __cdecl amt_RankAllOffices(unsigned char* who, int n, OfficePick* picks, int* full_out)
+int __cdecl amt_RankAllOffices(unsigned char* who, int n, OFFICE_PICK* picks, int* full_out)
 {
 	int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out);
 	float score;

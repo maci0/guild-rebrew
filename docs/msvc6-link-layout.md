@@ -5258,12 +5258,12 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   `_strncnt` (the two ports alone flip it to `a_map.obj`, as in round 18). Replace a placeholder when the
   server's real code for that function is known, then re-tune the rest to the count.
 - **More savegame writers (round 19).** The client's SaveGame (TL 0x51e080) calls its writers in the order
-  LoadGame (0x521920) calls the loaders, which pairs them: `ls_SaveBuildings` (0x51ecf0) with
+  LoadGame (0x521920) calls the loaders, which pairs them: `ls_SaveBuildingEntityState` (0x51ecf0) with
   `ls_LoadBuildingEntityState`, `ls_SaveEntities` (0x51f480) with `ls_LoadEntities` (client 0x522e30; the
   GOLDTL row naming 0x51f480 `ls_LoadEntities` is a writer), `ls_SaveTownData` (0x520310) with
   `ls_LoadTownData` (client 0x524040). Storage: `g_entity_ptr` = 0x90e094; the town table at client 0x85ab80
   is `g_entity_end` and the city records at 0x868060 are `g_city_records`, both by offset 0xf840be0, which
-  five aligned loader operands share (0x85ab88, 0x868054, 0x868058, 0x8680a8, 0x868c78). ls_SaveBuildings and
+  five aligned loader operands share (0x85ab88, 0x868054, 0x868058, 0x8680a8, 0x868c78). ls_SaveBuildingEntityState and
   ls_SaveTownData match the client byte for byte. ls_SaveEntities follows the server's loader where the two
   builds differ: the client writes its local player slot (0x774970, no server storage; the server reads that
   field into a local) and writes slot + 0x54 and + 0x18c less 0x59a and 0x639, which its loader adds back and

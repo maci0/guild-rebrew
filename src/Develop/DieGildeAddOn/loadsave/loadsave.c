@@ -493,7 +493,7 @@ int __cdecl ls_SaveObjects(void* file)
 /* Client-only (TL 0x51ecf0, discarded): writes the building table that ls_LoadBuildingEntityState
  * reads back, the plant map, graveyard and alchemist records of special buildings, then the
  * building-site boxes. The client reallocates the box buffer to its own size before writing it. */
-int __cdecl ls_SaveBuildings(void* file)
+int __cdecl ls_SaveBuildingEntityState(void* file)
 {
 	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 	extern int __cdecl gv_fio_SaveGraveyardData(void* stream_ctx, unsigned char* field);
@@ -1017,12 +1017,12 @@ int __cdecl ls_SaveTownData(void* file)
 		int a38;   /* 0x38 */
 		short a3c; /* 0x3c */
 		char pad3e[0x42];
-	} TownRec; /* 0x80 */
+	} TOWN_REC; /* 0x80 */
 
 	typedef struct {
 		int h[4];          /* 0x00 */
-		TownRec rec[0x55]; /* 0x10 */
-	} Town;                /* 0x2a90 */
+		TOWN_REC rec[0x55]; /* 0x10 */
+	} TOWN;                 /* 0x2a90 */
 
 	typedef struct {
 		char name[0x20]; /* 0x000 */
@@ -1063,8 +1063,8 @@ int __cdecl ls_SaveTownData(void* file)
 	} City;           /* 0x2f4 */
 	int count;
 	int j;
-	Town* town;
-	TownRec* rec;
+	TOWN* town;
+	TOWN_REC* rec;
 	City* city;
 
 	count = 0x55;
@@ -1072,7 +1072,7 @@ int __cdecl ls_SaveTownData(void* file)
 		return 0;
 	}
 	for (count = 0; count < 5; count++) {
-		town = &((Town*) g_entity_end)[count];
+		town = &((TOWN*) g_entity_end)[count];
 		if (vfs_fwrite(&town->h[0], 4, 1, file) <= 0) {
 			return 0;
 		}
