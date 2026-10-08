@@ -1569,8 +1569,6 @@ float __cdecl gv_GetUpgradeBonus(char* graveyard)
 	unsigned short* __cdecl gm_ff_Objekt(int container, int arg_count, int first_arg, ...);
 	int sum;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\friedhof_logic.c", __LINE__, "gv_GetUpgradeBonus(): enter", 1);
 	sum = 0;
 	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x1ff) != 0) {
 		sum = 10;

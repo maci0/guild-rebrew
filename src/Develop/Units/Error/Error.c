@@ -788,6 +788,31 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 	exit(0xf);
 }
 
+/* Reports a non-fatal error with its source location; the dialog has no
+ * abort choice.  Client-only code (TL 0x41d950, unreferenced there and
+ * absent from Europa1400Gold.exe): the server calls it nowhere, so
+ * /OPT:REF discards it.  Its storage is this TU's. */
+
+void __cdecl ReportError(char* modulePath, unsigned int lineNumber, char* message)
+{
+	if (g_panic_callback == 0) {
+		MessageBoxA((HWND) 0, "ERROR-Handler has not been started...", "Error!", 0x10030);
+		return;
+	}
+	if (g_log_mode_flags == 0) {
+		return;
+	}
+	if (g_log_mode_flags & 0xf) {
+		sprintf(g_log_message_buffer, "ERROR (%s:%lu):\n%s\n", modulePath, lineNumber, message);
+	}
+	if (g_log_mode_flags & 0xd) {
+		DispatchLogOutput(g_log_message_buffer, g_log_mode_flags, 1);
+	}
+	if (g_log_mode_flags & 2) {
+		MessageBoxA((HWND) g_owner_window, g_log_message_buffer, "Error!", 0x10030);
+	}
+}
+
 /* Reports a non-fatal message through the logging system.
  * Dispatches to DispatchLogOutput with default severity. */
 
@@ -831,5 +856,20 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 			sprintf((char*) &g_log_message_buffer, "tModule '%s':\tLine:%lu:\t%s", module, line, msg);
 		}
 		DispatchLogOutput((char*) &g_log_message_buffer, *(int*) &g_log_mode_flags, severity);
+	}
+}
+
+/* Writes a message to the log outputs as it is, without a source location.
+ * Client-only code (TL 0x41daf0, unreferenced there and absent from
+ * Europa1400Gold.exe), discarded by /OPT:REF like ReportError. */
+
+void __cdecl LogMessage(char* msg)
+{
+	if (g_panic_callback == 0) {
+		MessageBoxA(0, "ERROR-Handler has not been started...", "Error!", 0x10030);
+		return;
+	}
+	if (g_log_mode_flags & 1) {
+		DispatchLogOutput(msg, g_log_mode_flags, 1);
 	}
 }

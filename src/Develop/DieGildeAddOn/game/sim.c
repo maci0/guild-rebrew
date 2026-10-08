@@ -37,8 +37,6 @@ int __cdecl sim_IsUnrelated(unsigned char* entity)
 	int count;
 	unsigned char* e;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\sim.c", __LINE__, "sim_IsUnrelated(): enter", 1);
 	if (entity[2] == 6 || entity[2] == 7) {
 		return 0;
 	}
@@ -65,8 +63,6 @@ int __cdecl sim_IsUnrelated(unsigned char* entity)
 			}
 		}
 	}
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\sim.c", __LINE__, "sim_IsUnrelated(): exit", 1);
 	return 1;
 }
 
@@ -167,8 +163,6 @@ int __cdecl sim_IsUnderage(int slot)
 {
 	unsigned int i;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\sim.c", __LINE__, "sim_IsUnderage(): enter", 1);
 	i = (unsigned int) slot & 0xffff;
 	return *(unsigned short*) (g_slot_table + 0xa + i * 0x21c) < *(float*) (g_slot_table + 0x20 + i * 0x21c);
 }
@@ -299,8 +293,6 @@ char* __cdecl sim_NextServiceBuilding(char* entity, int* id, int* sub)
 	int k;
 	int n;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\sim.c", __LINE__, "sim_NextServiceBuilding(): enter", 1);
 	n = 0xff;
 	if (*(char**) (entity + 0x170) != 0) {
 		query = sim_StartEntityQueryByType(*(unsigned char**) (entity + 0x170));
@@ -365,7 +357,7 @@ error:
 /* Client-only: calls `visit` for every file below `dir` (discarded). */
 void __cdecl sim_WalkDirectory(char* dir, int arg, void (__cdecl* visit)(char* path))
 {
-	struct sim_finddata {
+	struct SIM_FINDDATA {
 		unsigned attrib;
 		long time_create;
 		long time_access;
@@ -373,14 +365,14 @@ void __cdecl sim_WalkDirectory(char* dir, int arg, void (__cdecl* visit)(char* p
 		unsigned long size;
 		char name[260];
 	};
-	long __cdecl _findfirst(const char* spec, struct sim_finddata* data);
-	int __cdecl _findnext(long handle, struct sim_finddata* data);
+	long __cdecl _findfirst(const char* spec, struct SIM_FINDDATA* data);
+	int __cdecl _findnext(long handle, struct SIM_FINDDATA* data);
 	int __cdecl _findclose(long handle);
 	char* __cdecl strcpy(char* dst, const char* src);
 	char* __cdecl strcat(char* dst, const char* src);
 	int __cdecl strcmp(const char* a, const char* b);
 	char path[0x100];
-	struct sim_finddata fd;
+	struct SIM_FINDDATA fd;
 	long h;
 
 	strcpy(path, dir);

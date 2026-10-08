@@ -307,8 +307,6 @@ char __cdecl rd_AddBKBox(char* name)
 		        : ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[2];
 	}
 	g_aux_entity_count++;
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c", __LINE__, "rd_AddBKBox(): exit", 1);
 	return 1;
 }
 

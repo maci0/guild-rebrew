@@ -14,6 +14,7 @@ these files is the value at the time it was written.
 | About to try a spelling that may already be exhausted | `codegen-walls.md` | section number |
 | Reading a score, a residue number, or a tool's verdict | `measure-traps.md` (§1: only the linked residue decides) | section number |
 | Touching link order, `.data`/`.rdata`, imports, or postlink | `msvc6-link-layout.md` | section number |
+| Deciding whether a client-only function belongs in the server build | `client-only-sweep.md` (appendix to `msvc6-link-layout.md` 5f) | TL VA |
 | Running agents, parallel sessions, or the build tooling | `workflow-traps.md` | section number |
 | Needing a fact about the original build, toolchain, or targets | `general-knowledge.md` | topic |
 | Naming a function, global, or source file | `naming_conventions.md` | prefix, source file |

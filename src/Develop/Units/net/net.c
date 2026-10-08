@@ -194,10 +194,10 @@ void __cdecl nt_FormatStats(void)
 	char total[128];
 	unsigned int type;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_FormatStats(): enter", 1);
 	sprintf(total, "Recv: %u Packets w/ %u bytes, Send: %u Packets w/ %u bytes",
 		nt_RecvPackets, nt_RecvBytes, nt_SendPackets, nt_SendBytes);
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, total, 1);
 	for (type = 0; type < 0x6a; type++) {
 		sprintf(line,
 			"%u. Recv: %u Packets (%02f%%) w/ %u bytes (%02f%%), Send: %u Packets (%02f%%) w/ %u bytes (%02f%%)",
@@ -206,6 +206,8 @@ void __cdecl nt_FormatStats(void)
 			nt_CmdStats[type][1], (double) nt_CmdStats[type][1] * 100.0 / (double) nt_RecvBytes,
 			nt_CmdStats[type][2], (double) nt_CmdStats[type][2] * 100.0 / (double) nt_SendPackets,
 			nt_CmdStats[type][3], (double) nt_CmdStats[type][3] * 100.0 / (double) nt_SendBytes);
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, line, 1);
 	}
 }
 
@@ -447,8 +449,6 @@ int __cdecl nt_Recv(void)
 		nt_RecvCmd = 0;
 		nt_RecvDone = 0;
 	}
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Recv(): exit", 1);
 	return 0;
 }
 

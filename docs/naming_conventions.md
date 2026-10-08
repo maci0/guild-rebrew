@@ -751,3 +751,281 @@ prefix or storage owner is inferred. Evidence:
 `.scratch/goal-resolver-consolidation/{identity-consolidation,resolver-native-proof,
 binding-actions}.json`; allocation and physical-view evidence:
 `.scratch/goal-tl-callee-identities/resolver-native-witness.json`.
+
+### Names added in rounds 16-19 (2026-10-08)
+
+The reconstructed client code of rounds 16-19 (msvc6-link-layout 5f) added the names below. Checked against
+every `ident():` / `ident:` string in `Europa1400Gold_TL.exe`, `Europa1400Gold.exe` and `server.dll`
+(`.scratch/measure/attest.py --corpus`), a verbatim search of each name in the three images, and the strings
+each ported TL function addresses (`attest.py docs/client-only-sweep.md original/Europa1400Gold_TL.exe`).
+
+- **Attested, already correct:** `vfs_Tfopen`, `vfs_init` (their own `sprintf` messages), `vfs_fseek`
+  (`Unsupported vfs_fseek(inzip,SEEK_CUR)`), `nt_Recv`, `rd_GetBKSize`, `amt_fio_SaveAemter` (client log
+  strings), the net.c globals `nt_LastRequCount` and `cm_LastSyncCount` (named inside `nt_Recv`'s messages),
+  and the file `Units/net/net.c` (`D:\develop\units\net\net.c` in both clients).
+- **Prefixes:** `srv_` is attested in server.dll (`srv_RecvGame(): Can't load Counter`; `srv_LoadBuf` is also in
+  the image), so the server.c helpers keep it. `nt_` and `rd_` are the clients' attested prefixes of net.c and
+  plant.c's building-site code, the TUs these ports come from. No `tb_` name remains (the timer unit is not
+  built). The vfs strings `vfs:AddFile`, `vfs:FinishedFiles`, `vfs:IGetSubDir` and `vfs:Open` are `m_alloc`
+  block labels, not function names: `vfs_Tfopen` allocates under `vfs:Open`.
+- **Renamed:** `ls_SaveBuildings` to `ls_SaveBuildingEntityState`, the writer of `ls_LoadBuildingEntityState`
+  like the other `ls_Save*`/`ls_Load*` pairs (no row, so an identifier edit: `rebrew source rename` finds no
+  function); local types `OfficePick`, `sim_finddata`, `TownRec`, `Town` to `OFFICE_PICK`, `SIM_FINDDATA`,
+  `TOWN_REC`, `TOWN`.
+- **`zufall.c` (file name inferred).** No `__FILE__` string names the random-helper TU. The original links
+  objects in file-name order (server.c, aemter.c, ... sim.c, spiel.c) and this object links after spiel.c,
+  so its name sorts after `spiel.c`; `zufall.c` (German "chance") meets that and nothing more. The TU has no
+  attested prefix, so by the rule above its functions should be unprefixed (`RandomMod`, `SeedRandom`, ...),
+  but `rebrew source rename` refuses `gm_RandomFloat01`, `gm_RandomQuadratic` and `srv_SeedRandomWithTime`
+  (ambiguous references to independent client symbols in spiel.c, friedhof_logic.c and
+  alchemistry_logic.c) and finds no row for `gm_RandomRange` and `gm_RandomFloat01Squared`, so the set keeps
+  its names until the client symbols are separated: `gm_RandomMod`, `gm_RandomRange`, `gm_RandomFloat01`,
+  `gm_RandomQuadratic`, `gm_RandomFloat01Squared`, `srv_SeedRandomWithTime`, `srv_SeedRandom`, all inferred.
+- **Stand-ins:** `g_gap_10035410` is a 28-byte layout span with no proven owner; `gm_GetSlotBase` reads its
+  first dword (a float scale) and `sim_NextServiceBuilding` its dword at +0x18 (a scan cursor). The two
+  objects keep the span's name until their allocation and extent are known (Global ownership in AGENTS.md).
+  `g_gap_10034684` (5f) is referenced only by docs.
+
+Every other name the rounds added is inferred: module prefix of the TU it sits in plus `VerbNoun`, or the
+unit's own style (`m_` snake case in m_alloc.c, `nt_` globals in net.c, unprefixed in Error.c and
+broadcast.c). TL VA from the sweep table or the definition's comment.
+
+| Name | File | TL VA |
+|---|---|---|
+| `ahm_CalcTraitBonus` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f0eb0 |
+| `ahm_CalcTraitLimits` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f0f60 |
+| `ahm_CanAffordUpgrade` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f0ff0 |
+| `ahm_CompareBestWorkers` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f14c0 |
+| `ahm_CountBusyWorkers` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f13a0 |
+| `ahm_CountUnusedAvatars` | `DieGildeAddOn/game/alchemistry_logic.c` | see source |
+| `ahm_FindAvatar` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4eefe0 |
+| `ahm_FindRecipeSlot` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f0930 |
+| `ahm_FindRecipeSlotImpl` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4ec950 |
+| `ahm_fio_LoadAvatars` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4ef0d0 |
+| `ahm_fio_SaveAhmInfo` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4eed10 |
+| `ahm_fio_SaveAvatars` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4ef040 |
+| `ahm_GetBrewTime` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4eccd0 |
+| `ahm_GetBrewTimeTenth` | `DieGildeAddOn/game/alchemistry_logic.c` | see source |
+| `ahm_GetBrewYield` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4ecd20 |
+| `ahm_GetLabRisk` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f11c0 |
+| `ahm_GetLabUpgrades` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f10d0 |
+| `ahm_GetLabYieldFactor` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f1290 |
+| `ahm_GetQualityShare` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4ece30 |
+| `ahm_GetRecipeBonus` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4eceb0 |
+| `ahm_GetRecipeQuality` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4ec8a0 |
+| `ahm_HasFreeRecipeSeat` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4ec9a0 |
+| `ahm_PickBestWorker` | `DieGildeAddOn/game/alchemistry_logic.c` | 0x4f1450 |
+| `amt_CanUpgradeBuildingTier1` | `DieGildeAddOn/game/aemter.c` | 0x4eb220 |
+| `amt_CanUpgradeBuildingTier2` | `DieGildeAddOn/game/aemter.c` | 0x4eb260 |
+| `amt_CanUpgradeBuildingTier3` | `DieGildeAddOn/game/aemter.c` | 0x4eb320 |
+| `amt_CountTownHallSeats` | `DieGildeAddOn/game/aemter.c` | 0x4ec810 |
+| `amt_ExpandSlots` | `DieGildeAddOn/game/aemter.c` | 0x4e9500 |
+| `amt_FindVacantRoleBelow` | `DieGildeAddOn/game/aemter.c` | 0x4e9530 |
+| `amt_GetGroupVacancyFlags` | `DieGildeAddOn/game/aemter.c` | 0x4ea130 |
+| `amt_GetOfficeAffinity` | `DieGildeAddOnServer/server.c` | 0x4e7c70 |
+| `amt_GetRankLimits` | `DieGildeAddOn/game/aemter.c` | 0x4e9580 |
+| `amt_GetRoleGroup` | `DieGildeAddOn/game/aemter.c` | 0x4e8ad0 |
+| `amt_GetRoleHolder` | `DieGildeAddOn/game/aemter.c` | 0x4e90d0 |
+| `amt_GetRoleLevel` | `DieGildeAddOn/game/aemter.c` | 0x4e99c0 |
+| `amt_GetRoleTemplate` | `DieGildeAddOn/game/aemter.c` | 0x4e8b40 |
+| `amt_GetSlotByRole` | `DieGildeAddOn/game/aemter.c` | 0x4e8a80 |
+| `amt_GetSlotByType` | `DieGildeAddOn/game/aemter.c` | 0x4e8af0 |
+| `amt_GetSuperiorHolder` | `DieGildeAddOn/game/aemter.c` | 0x4e9110 |
+| `amt_GetTownHallHolder` | `DieGildeAddOn/game/aemter.c` | 0x4ec7d0 |
+| `amt_HasCouncilHolder` | `DieGildeAddOn/game/aemter.c` | 0x4ea460 |
+| `amt_HasIdleSuperior` | `DieGildeAddOn/game/aemter.c` | 0x4e9270 |
+| `amt_IsNextRoleStep` | `DieGildeAddOn/game/aemter.c` | 0x4e9180 |
+| `amt_IsPendingAssignment` | `DieGildeAddOn/game/aemter.c` | 0x4ea2b0 |
+| `amt_ListCouncilSlots` | `DieGildeAddOn/game/aemter.c` | 0x4e8cb0 |
+| `amt_ListHeldSlotsOfGroup` | `DieGildeAddOn/game/aemter.c` | 0x4e8c00 |
+| `amt_ListPromotionRoles` | `DieGildeAddOn/game/aemter.c` | 0x4e93d0 |
+| `amt_ListRolesOfLevel` | `DieGildeAddOn/game/aemter.c` | 0x4e9950 |
+| `amt_ListSlotsOfGroup` | `DieGildeAddOn/game/aemter.c` | 0x4e8b80 |
+| `amt_ListSuperiors` | `DieGildeAddOn/game/aemter.c` | 0x4e9310 |
+| `amt_RankAllOffices` | `DieGildeAddOn/game/aemter.c` | 0x4e8ee0 |
+| `amt_RankOpenOffices` | `DieGildeAddOn/game/aemter.c` | 0x4e8d10 |
+| `CloseBroadcastSocket` | `Units/net/broadcast.c` | 0x402320 |
+| `gm_AdvanceGameTime` | `DieGildeAddOn/game/spiel.c` | 0x500de0 |
+| `gm_AmountToUnits` | `DieGildeAddOn/game/spiel.c` | 0x50b710 |
+| `gm_AmountToUnitsById` | `DieGildeAddOn/game/spiel.c` | 0x50b7a0 |
+| `gm_BlendWeights` | `DieGildeAddOn/game/spiel.c` | 0x507ed0 |
+| `gm_CalcFortuneTax` | `DieGildeAddOn/game/spiel.c` | 0x50ddf0 |
+| `gm_CanMarry` | `DieGildeAddOn/game/spiel.c` | 0x509480 |
+| `gm_CollectBuildingResidents` | `DieGildeAddOn/game/spiel.c` | 0x505d00 |
+| `gm_CompareGameTime` | `DieGildeAddOn/game/spiel.c` | 0x500cb0 |
+| `gm_CountChildren` | `DieGildeAddOn/game/spiel.c` | 0x5095d0 |
+| `gm_CountHouseUpgradesA` | `DieGildeAddOn/game/spiel.c` | 0x510400 |
+| `gm_CountHouseUpgradesB` | `DieGildeAddOn/game/spiel.c` | 0x510470 |
+| `gm_CountHouseUpgradesC` | `DieGildeAddOn/game/spiel.c` | 0x510500 |
+| `gm_CountHouseUpgradesD` | `DieGildeAddOn/game/spiel.c` | 0x510550 |
+| `gm_DaytimeMinutesBetween` | `DieGildeAddOn/game/spiel.c` | 0x50cad0 |
+| `gm_EntityHasOffice` | `DieGildeAddOn/game/spiel.c` | 0x506e70 |
+| `gm_EntityHasProfession` | `DieGildeAddOn/game/spiel.c` | see source |
+| `gm_FindBuildingStore` | `DieGildeAddOn/game/spiel.c` | 0x5049a0 |
+| `gm_FindBuildingTypeByName` | `DieGildeAddOn/game/spiel.c` | 0x504eb0 |
+| `gm_FindItemTypeByName` | `DieGildeAddOn/game/spiel.c` | 0x501490 |
+| `gm_FindKind47ByOwner` | `DieGildeAddOn/game/spiel.c` | 0x503e50 |
+| `gm_FindNearestOfKind` | `DieGildeAddOn/game/spiel.c` | 0x504db0 |
+| `gm_FindTavernServing` | `DieGildeAddOn/game/spiel.c` | 0x503d10 |
+| `gm_FormatPrice` | `DieGildeAddOn/game/spiel.c` | 0x50bc10 |
+| `gm_GameTimeMinutesBetween` | `DieGildeAddOn/game/spiel.c` | 0x500d20 |
+| `gm_GetBirthday` | `DieGildeAddOn/game/spiel.c` | 0x509120 |
+| `gm_GetBuildingFoodStock` | `DieGildeAddOn/game/spiel.c` | 0x50ce20 |
+| `gm_GetBuildingLevel` | `DieGildeAddOn/game/spiel.c` | 0x50c4e0 |
+| `gm_GetBuildingStock` | `DieGildeAddOn/game/spiel.c` | 0x50cce0 |
+| `gm_GetBuildingWorth` | `DieGildeAddOn/game/spiel.c` | 0x50c5d0 |
+| `gm_GetCouncilRank` | `DieGildeAddOn/game/spiel.c` | 0x508f80 |
+| `gm_GetEntityAge` | `DieGildeAddOn/game/spiel.c` | 0x508e80 |
+| `gm_GetEntityDate` | `DieGildeAddOn/game/spiel.c` | 0x509050 |
+| `gm_GetEntityMood` | `DieGildeAddOn/game/spiel.c` | 0x50bfe0 |
+| `gm_GetGameTime` | `DieGildeAddOn/game/spiel.c` | 0x500c80 |
+| `gm_GetGuildBuildingKind` | `DieGildeAddOn/game/spiel.c` | 0x506f70 |
+| `gm_GetGuildHall` | `DieGildeAddOn/game/spiel.c` | 0x50e4a0 |
+| `gm_GetHappinessFactor` | `DieGildeAddOn/game/spiel.c` | 0x50bbb0 |
+| `gm_GetItemCategory` | `DieGildeAddOn/game/spiel.c` | 0x5013c0 |
+| `gm_GetItemGuild` | `DieGildeAddOn/game/spiel.c` | 0x507380 |
+| `gm_GetKindRecord` | `DieGildeAddOn/game/spiel.c` | 0x508220 |
+| `gm_GetKindStatRange` | `DieGildeAddOn/game/spiel.c` | 0x507910 |
+| `gm_GetManufacturerRating` | `DieGildeAddOn/game/spiel.c` | 0x50b840 |
+| `gm_GetObjektPrice` | `DieGildeAddOn/game/spiel.c` | 0x502780 |
+| `gm_GetOfficeRank` | `DieGildeAddOn/game/spiel.c` | 0x508eb0 |
+| `gm_GetPackedSeason` | `DieGildeAddOn/game/spiel.c` | 0x500e00 |
+| `gm_GetRangeBuildingKind` | `DieGildeAddOn/game/spiel.c` | 0x507080 |
+| `gm_GetRangeStatId` | `DieGildeAddOn/game/spiel.c` | 0x507400 |
+| `gm_GetRelationship` | `DieGildeAddOn/game/spiel.c` | 0x50f950 |
+| `gm_GetRichestFive` | `DieGildeAddOn/game/spiel.c` | 0x50e670 |
+| `gm_GetSeason` | `DieGildeAddOn/game/spiel.c` | 0x500e20 |
+| `gm_GetSeasonPrice` | `DieGildeAddOn/game/spiel.c` | 0x50bb50 |
+| `gm_GetSeasonTreasury` | `DieGildeAddOn/game/spiel.c` | 0x50d320 |
+| `gm_GetSkillPair` | `DieGildeAddOn/game/spiel.c` | 0x507130 |
+| `gm_GetSlotBase` | `DieGildeAddOn/game/spiel.c` | 0x502450 |
+| `gm_GetSlotPrice` | `DieGildeAddOn/game/spiel.c` | 0x5025a0 |
+| `gm_GetSlotProduction` | `DieGildeAddOn/game/spiel.c` | 0x5024e0 |
+| `gm_GetStatBuildingKind` | `DieGildeAddOn/game/spiel.c` | 0x506fd0 |
+| `gm_GetStatFirstItem` | `DieGildeAddOn/game/spiel.c` | 0x5072c0 |
+| `gm_GetStatRecord` | `DieGildeAddOn/game/spiel.c` | 0x506d50 |
+| `gm_GetStoreItemField` | `DieGildeAddOn/game/spiel.c` | 0x50dfa0 |
+| `gm_GetStoreRoom` | `DieGildeAddOn/game/spiel.c` | 0x50e170 |
+| `gm_GetTileDistance` | `DieGildeAddOn/game/spiel.c` | 0x502820 |
+| `gm_GetTypeGuild` | `DieGildeAddOn/game/spiel.c` | 0x50e520 |
+| `gm_GetTypeProductValue` | `DieGildeAddOn/game/spiel.c` | 0x50d170 |
+| `gm_GetWealthRank` | `DieGildeAddOn/game/spiel.c` | 0x50e600 |
+| `gm_GetWorkshopStock` | `DieGildeAddOn/game/spiel.c` | 0x50de80 |
+| `gm_HasGuildHall` | `DieGildeAddOn/game/spiel.c` | 0x5079f0 |
+| `gm_HasLevelFor` | `DieGildeAddOn/game/spiel.c` | 0x50c550 |
+| `gm_HasNoGuildHouse` | `DieGildeAddOn/game/spiel.c` | 0x510170 |
+| `gm_IsRawItem` | `DieGildeAddOn/game/spiel.c` | 0x5014d0 |
+| `gm_IsWarehouse` | `DieGildeAddOn/game/spiel.c` | 0x505340 |
+| `gm_ListBuildingStores` | `DieGildeAddOn/game/spiel.c` | 0x50be50 |
+| `gm_ListGuildHouses` | `DieGildeAddOn/game/spiel.c` | 0x50c490 |
+| `gm_ListProducts` | `DieGildeAddOn/game/spiel.c` | 0x50bec0 |
+| `gm_ListProductsAfter` | `DieGildeAddOn/game/spiel.c` | 0x50bf30 |
+| `gm_ListTypesOfKind` | `DieGildeAddOn/game/spiel.c` | 0x504ef0 |
+| `gm_MapItemPairRange` | `DieGildeAddOn/game/spiel.c` | 0x507c30 |
+| `gm_NextQueryItemMatch` | `DieGildeAddOn/game/spiel.c` | 0x502a20 |
+| `gm_PackGameTime` | `DieGildeAddOn/game/spiel.c` | 0x500d60 |
+| `gm_RandomFloat01Squared` | `DieGildeAddOn/game/zufall.c` | see source |
+| `gm_RandomRange` | `DieGildeAddOn/game/zufall.c` | see source |
+| `gm_RefreshSeasonSlots` | `DieGildeAddOn/game/spiel.c` | 0x5016f0 |
+| `gm_ResolveEntityRecord` | `DieGildeAddOn/game/spiel.c` | 0x50d430 |
+| `gm_ResolveEntitySlot` | `DieGildeAddOn/game/spiel.c` | 0x50d4f0 |
+| `gm_RingGuildHallBell` | `DieGildeAddOn/game/spiel.c` | 0x507ab0 |
+| `gm_ShuffleBytes` | `DieGildeAddOn/game/spiel.c` | 0x508c30 |
+| `gm_SlotKindIsOneOf` | `DieGildeAddOn/game/spiel.c` | 0x506ee0 |
+| `gm_SumProductPoints` | `DieGildeAddOn/game/spiel.c` | 0x50c710 |
+| `gm_SumSlotTreasury` | `DieGildeAddOn/game/spiel.c` | 0x50d360 |
+| `gm_SumStoreCount` | `DieGildeAddOn/game/spiel.c` | 0x50b810 |
+| `gm_SumTreasury` | `DieGildeAddOn/game/spiel.c` | 0x50d2f0 |
+| `gm_SumTypePoints` | `DieGildeAddOn/game/spiel.c` | 0x50c7d0 |
+| `gm_UnitsToAmount` | `DieGildeAddOn/game/spiel.c` | see source |
+| `gm_UnitsToAmountById` | `DieGildeAddOn/game/spiel.c` | 0x50b780 |
+| `gm_UnpackGameTime` | `DieGildeAddOn/game/spiel.c` | 0x500db0 |
+| `gv_eval_HasWorker` | `DieGildeAddOn/game/friedhof_logic.c` | 0x4f1840 |
+| `gv_eval_HasWorkerId` | `DieGildeAddOn/game/friedhof_logic.c` | 0x4f1890 |
+| `gv_eval_SameField` | `DieGildeAddOn/game/friedhof_logic.c` | 0x4f17f0 |
+| `gv_eval_SameOwner` | `DieGildeAddOn/game/friedhof_logic.c` | 0x4f1820 |
+| `gv_eval_SlotBelegt` | `DieGildeAddOn/game/friedhof_logic.c` | see source |
+| `gv_FindWorkerSlot` | `DieGildeAddOn/game/friedhof_logic.c` | 0x4f1a10 |
+| `gv_fio_SaveGraveyardData` | `DieGildeAddOn/loadsave/loadsave.c` | 0x4f3900 |
+| `gv_GetSlotEntryIndex` | `DieGildeAddOn/game/friedhof_logic.c` | 0x4f1790 |
+| `gv_GetUpgradeBonus` | `DieGildeAddOn/game/friedhof_logic.c` | 0x4f3800 |
+| `gv_HasGravediggerRoom` | `DieGildeAddOn/game/friedhof_logic.c` | 0x4f3e60 |
+| `LogMessage` | `Units/Error/Error.c` | 0x41daf0 |
+| `ls_LoadRelationships` | `DieGildeAddOn/loadsave/loadsave.c` | 0x524610 |
+| `ls_SaveDynamicEntities` | `DieGildeAddOn/loadsave/loadsave.c` | 0x51f170 |
+| `ls_SaveEntities` | `DieGildeAddOn/loadsave/loadsave.c` | 0x51f480 |
+| `ls_SaveObjects` | `DieGildeAddOn/loadsave/loadsave.c` | 0x51ebc0 |
+| `ls_SaveRelationships` | `DieGildeAddOn/loadsave/loadsave.c` | 0x520860 |
+| `ls_SaveTownData` | `DieGildeAddOn/loadsave/loadsave.c` | 0x520310 |
+| `m_is_tracked` | `Units/m_alloc/m_alloc.c` | 0x41dd90 |
+| `m_pool_clear` | `Units/m_alloc/m_alloc.c` | 0x41e440 |
+| `m_pool_first` | `Units/m_alloc/m_alloc.c` | 0x41e3e0 |
+| `m_pool_free_all` | `Units/m_alloc/m_alloc.c` | 0x41e410 |
+| `m_pool_info` | `Units/m_alloc/m_alloc.c` | 0x41e490 |
+| `m_pool_next` | `Units/m_alloc/m_alloc.c` | 0x41e350 |
+| `m_pool_stats` | `Units/m_alloc/m_alloc.c` | 0x41e4d0 |
+| `nt_Connect` | `Units/net/net.c` | 0x420db0 |
+| `nt_CountCmd` | `Units/net/net.c` | 0x420ba0 |
+| `nt_Disconnect` | `Units/net/net.c` | 0x421050 |
+| `nt_FormatStats` | `Units/net/net.c` | 0x420bf0 |
+| `nt_GetLocalIp` | `Units/net/net.c` | 0x420d20 |
+| `nt_LogWinsockError` | `Units/net/net.c` | 0x4208a0 |
+| `nt_ResetStats` | `Units/net/net.c` | 0x420b70 |
+| `nt_Send` | `Units/net/net.c` | 0x421290 |
+| `plt_FindRecordById` | `DieGildeAddOn/auxillary/plant.c` | 0x4bcc50 |
+| `plt_FindRecordByOwner` | `DieGildeAddOn/auxillary/plant.c` | 0x4bcc20 |
+| `rd_AddBKBox` | `DieGildeAddOn/auxillary/plant.c` | 0x4bd1e0 |
+| `ReportError` | `Units/Error/Error.c` | 0x41d950 |
+| `sim_ClaimResident` | `DieGildeAddOn/game/sim.c` | 0x500240 |
+| `sim_IsUnderage` | `DieGildeAddOn/game/sim.c` | 0x4fffb0 |
+| `sim_IsUnrelated` | `DieGildeAddOn/game/sim.c` | 0x4ff860 |
+| `sim_NextServiceBuilding` | `DieGildeAddOn/game/sim.c` | 0x500480 |
+| `sim_WalkDirectory` | `DieGildeAddOn/game/sim.c` | 0x500660 |
+| `srv_FormatStatAttributes` | `DieGildeAddOnServer/server.c` | 0x4e7490 |
+| `srv_FormatStatDumpBegin` | `DieGildeAddOnServer/server.c` | 0x4e73c0 |
+| `srv_FormatStatDumpEnd` | `DieGildeAddOnServer/server.c` | 0x4e77e0 |
+| `srv_FormatStatSkills` | `DieGildeAddOnServer/server.c` | 0x4e7550 |
+| `srv_GetEntityCouncilSlot` | `DieGildeAddOnServer/server.c` | 0x4e7bf0 |
+| `srv_GetEntityOfficeSlot` | `DieGildeAddOnServer/server.c` | 0x4e7b70 |
+| `vfs_AddFile` | `Units/vfs/vfs.c` | see source |
+| `vfs_AddPath` | `Units/vfs/vfs.c` | see source |
+| `vfs_CompareFiles` | `Units/vfs/vfs.c` | see source |
+| `vfs_CompareFilesNoCase` | `Units/vfs/vfs.c` | see source |
+| `vfs_CompareKey` | `Units/vfs/vfs.c` | see source |
+| `vfs_CompareKeyNoCase` | `Units/vfs/vfs.c` | see source |
+| `vfs_CompareNames` | `Units/vfs/vfs.c` | see source |
+| `vfs_exit` | `Units/vfs/vfs.c` | 0x4310f0 |
+| `vfs_fgetc` | `Units/vfs/vfs.c` | 0x430870 |
+| `vfs_fgets` | `Units/vfs/vfs.c` | 0x4308a0 |
+| `vfs_FindDir` | `Units/vfs/vfs.c` | see source |
+| `vfs_FindFile` | `Units/vfs/vfs.c` | see source |
+| `vfs_FinishFiles` | `Units/vfs/vfs.c` | see source |
+| `vfs_ForEachFile` | `Units/vfs/vfs.c` | 0x430f70 |
+| `vfs_FreeDirs` | `Units/vfs/vfs.c` | see source |
+| `vfs_ftell` | `Units/vfs/vfs.c` | 0x430c50 |
+| `vfs_fwrite` | `Units/vfs/vfs.c` | 0x430910 |
+| `vfs_GetDirPath` | `Units/vfs/vfs.c` | see source |
+| `vfs_GetDirPathOf` | `Units/vfs/vfs.c` | see source |
+| `vfs_GetFilePath` | `Units/vfs/vfs.c` | see source |
+| `vfs_GetFilePathOf` | `Units/vfs/vfs.c` | see source |
+| `vfs_GetRelativePath` | `Units/vfs/vfs.c` | see source |
+| `vfs_GetSubDir` | `Units/vfs/vfs.c` | see source |
+| `vfs_LookupPath` | `Units/vfs/vfs.c` | see source |
+| `vfs_MakeDirs` | `Units/vfs/vfs.c` | see source |
+| `vfs_NormalizeCase` | `Units/vfs/vfs.c` | see source |
+| `vfs_RemoveFile` | `Units/vfs/vfs.c` | see source |
+| `vfs_ScanArchive` | `Units/vfs/vfs.c` | see source |
+| `vfs_ScanDir` | `Units/vfs/vfs.c` | see source |
+| `vfs_ToBackslashes` | `Units/vfs/vfs.c` | see source |
+| `vfs_ToSlashes` | `Units/vfs/vfs.c` | see source |
+| `ls_SaveBuildingEntityState` | `DieGildeAddOn/loadsave/loadsave.c` | 0x51ecf0 |
+| globals `g_vfs_root`, `g_vfs_item_pool`, `g_vfs_case_sensitive` | `Units/vfs/vfs.c` | 0x6b7fdc, 0x6b7fe0, 0x6b7fe8 |
+| globals `nt_WsaStarted`, `nt_LocalIp`, `nt_RecvBytes`, `nt_RecvPackets`, `nt_SendBytes`, `nt_SendPackets`, `nt_Socket`, `nt_RecvDone`, `nt_SendDone`, `nt_Closed`, `nt_CmdStats` | `Units/net/net.c` | see source |
+| types `VFS_DIR`, `VFS_FILE`, `VFS_ITEM` | `Units/vfs/vfs.c` | |
+| types `BK_BOX`, `BK_VERTEX`, `BK_GET_VERTICES` | `DieGildeAddOn/auxillary/plant.c` | |
+| types `OFFICE_PICK`, `OFFICE_RANK_LIMITS` | `DieGildeAddOn/game/aemter.c` | |
+| types `STOCK`, `STAT_REC`, `PACKED_TIME`, `KIND_REC`, `SLOT_COPY`; macro `gm_SEASON_TABLES` | `DieGildeAddOn/game/spiel.c` | |
+| types `SIM_FINDDATA` | `DieGildeAddOn/game/sim.c` | |
+| types `TOWN`, `TOWN_REC` | `DieGildeAddOn/loadsave/loadsave.c` | |
+| macros `NT_CMD_LEN`, `NT_CMD_HEADER` | `Units/net/net.c` | |
+| file `Units/vfs/unzip.c` | stock minizip 0.15 (see the TU table above) | |
