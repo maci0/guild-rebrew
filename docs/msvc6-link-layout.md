@@ -5221,24 +5221,25 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   from the clients can prove: the exact `.reloc` reservation needs the server's log calls in discarded code,
   which no image shows. A dangling `sprintf` is not proof of a log call either: the live server
   `gm_KillSpieler` (0x10017fb0) formats two messages into a local buffer and logs neither.
-- **Placeholder log calls (round 19).** A stopgap, requested until real code is found: 211
+- **Placeholder log calls (round 19).** A stopgap, requested until real code is found:
   `LogMessageInternal(path, __LINE__, message, 1)` calls, each marked `/* placeholder: inferred server log
-  call, see msvc6-link-layout 5f */`, in discarded client-only functions. They supply 404 of the 412 missing
-  DIR32 records; `amt_fio_SaveAemter` (TL 0x4ec410, before `amt_fio_LoadAemter`, without log calls) and
+  call, see msvc6-link-layout 5f */`, in discarded client-only functions. The first set had 211 calls for 404
+  of the 412 missing DIR32 records; the consolidated status below gives the current set. `amt_fio_SaveAemter` (TL 0x4ec410, before `amt_fio_LoadAemter`, without log calls) and
   `rd_GetBKSize` (TL 0x4bdf40, after `rd_AddBKBox`), ported in the same change, supply 8. `path` is the
   TU's `__FILE__` string as its live calls spell it; the line argument is the placeholder's own line, since
-  the server's is unknown. The set, `.scratch/measure/placeholder_spec.tsv` (applied to a clean tree by
-  `apply_placeholders.py`), has five tiers, strongest first:
-  - 14 formatted: the client builds a message into a local buffer and drops it (`vfs_AddFile`,
-    `vfs_Tfopen`, `vfs_init`, `rd_GetBKSize`, `nt_Connect` x2, `nt_Recv` x3, `srv_FormatStatDumpBegin`/`End`,
-    `ahm_fio_LoadAvatars` x3); the call logs that buffer.
+  the server's is unknown. The first set is `.scratch/measure/placeholder_spec.tsv` (applied to a clean tree
+  by `apply_placeholders.py`); `rm_placeholders.py ROOT --list` lists the current one and removes calls by
+  message. Tiers, strongest first:
+  - 16 formatted: the client builds a message into a local buffer and drops it (`vfs_AddFile`,
+    `vfs_Tfopen`, `vfs_init`, `rd_GetBKSize`, `nt_Connect` x2, `nt_Recv` x3, `nt_FormatStats` x2,
+    `srv_FormatStatDumpBegin`/`End`, `ahm_fio_LoadAvatars` x3); the call logs that buffer.
   - 53 guard failures: invalid argument, open/read/write failure, overflow, as server `amt_fio_LoadAemter`,
     `gm_SubObjekt` and `ahm_ExAllocAlchemist` log theirs (`ahm_fio_SaveAhmInfo` and `ahm_fio_LoadAvatars`
     per field, `nt_Connect`'s socket setup, `vfs_fwrite`, `vfs_MakeDirs`, spiel lookups).
   - 19 not-found fall-throughs of lookups, as `plt_SetPlantMap` logs before its final return.
-  - 106 entry traces and 19 exit traces (`"<function>(): enter"`/`"exit"`, as `gm_Open` logs), with no
-    evidence beyond the macro's use in sibling functions: they fill the count. The exit traces sit in the 19
-    longest functions.
+  - 67 entry traces (`"<function>(): enter"`, as `gm_Open` logs), with no evidence beyond the macro's use
+    in sibling functions: they fill the count. The first set also had 39 more entry traces and 19 exit
+    traces; real code replaced them (below).
 
   Each call costs one DIR32 for the path and one for a literal message (none for a buffer); in
   `gv_HasGravediggerRoom`, `vfs_MakeDirs` and `vfs_Tfopen` the compiler shares one `push path; call` tail
@@ -5360,7 +5361,7 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
 - **Measured** (native link of the committed tree against `original/Server/server.dll`; `.scratch/measure`
   scripts: section byte compare, IAT and hint/name compare per DLL, Rich records, link map, ICF predictor):
 
-  | | main f829a810 | round 16 fcfdd827 | round 17 477dc53e | round 18 bd322c10 | now (placeholders) | reference |
+  | | main f829a810 | round 16 fcfdd827 | round 17 477dc53e | round 18 bd322c10 | round 19 (placeholders) | reference |
   |---|---|---|---|---|---|---|
   | functions at reference VA | 260 | 260 | 260 | 260 | 260 | 260 |
   | `rebrew verify` | not re-run | 316/316 | 316/316 | 316/316 | 316/316 | |
@@ -5391,7 +5392,19 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   client's command senders (`cm_Request*`, about 100 functions queuing packets the server has no queue for)
   or engine code and data; the sweep finds no further client-only function with absolute fixups that links
   in the server.
-- **Left:** 404 of the 5535 DIR32 records come from placeholder log calls, not recovered code. Their real
+- **Round 19 consolidated (exp/r19-integrate).** Merged: the placeholder set, the client-only sweep, the
+  loadsave writers, the orphan inventory, the unit log-call sites and the alchemistry `.bss` model, one
+  definition per client VA (the loadsave branch's TL 0x51ecf0 and 0x520310, the sweep's TL 0x508220, 0x500c80
+  and 0x402320), plus Error.c's `ReportError` and `LogMessage`. Of the 5535 DIR32 records the reservation
+  counts, 5246 now come from real code (live server code and reconstructed client code) and 289 from 155
+  placeholder calls (16 formatted, 53 guard failures, 19 not-found, 67 entry traces). Without the placeholders
+  `.reloc` VirtualSize is 62952. Round 19's real code added 123: 8 with the placeholder set
+  (`amt_fio_SaveAemter`, `rd_GetBKSize`), 76 from the sweep, 20 from the loadsave writers and 19 from
+  Error.c; each step removed evidence-free traces worth the same count (19 exit traces, 39 entry traces) and
+  `nt_FormatStats`'s entry trace became its two formatted calls. Removal is not 2 records per call everywhere:
+  `rd_AddBKBox`'s exit trace was 3, so it went with Error.c's odd 19. The removed traces were chosen by build so
+  `a_cmp.obj` keeps `_strncnt`; `cmp` against the reference is identical after every merge commit.
+- **Left:** 289 of the 5535 DIR32 records come from placeholder log calls, not recovered code. Their real
   sources are discarded server code: client-only functions whose storage is not yet mapped (aemter's office
   counters, the loadsave writers that read unmapped tables, spiel's BAD set), the log calls the server's
   discarded functions made, which no binary shows (see the log macro above), and server code that differs
