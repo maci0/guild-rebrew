@@ -182741,7 +182741,7 @@ marker_type = "FUNCTION"
 name = "ls_LoadGraveyardData"
 
 ["SERVER.0x10012000".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "537e0e867e4be26a5f541d445a6c32cc7130faea66757325aa2ab46d13216b90"
 reference_size = "728"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -182752,10 +182752,10 @@ module = "SERVER"
 va = "0x10012000"
 context_hash = ""
 defines = "[]"
-input_hash = "9757d728b2e8a956301bd35ef6020f5362fb9d4a452a251cd041469bb687d93e"
+input_hash = "12f71be6eef7216377954f83f362fa798979abc3c330a04415b537f1f4806cad"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x100122e0"]
 size = 346
@@ -182769,7 +182769,7 @@ marker_type = "FUNCTION"
 name = "InitNewDynastyEntity"
 
 ["SERVER.0x100122e0".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "ded5f1884e0e3b8ecbfca060f5c8a0cc92a9608760d428be902df832ba020fd2"
 reference_size = "346"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -182780,10 +182780,10 @@ module = "SERVER"
 va = "0x100122e0"
 context_hash = ""
 defines = "[]"
-input_hash = "84f209aee5c329eabb8458afb48f42026329f9feafe9f46c850ec7ecb29f9e0c"
+input_hash = "417b7b1ada025dd62064f2c335142afc74a6cb893a96a50f0bf3266205cd3ab4"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x10012440"]
 size = 37
@@ -182794,7 +182794,7 @@ marker_type = "FUNCTION"
 name = "ls_ReadVfsDataChecked"
 
 ["SERVER.0x10012440".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "8f6706c8792b78e90974d8948dae03ce22b22fbb7e53488827b9a5fbf692cdbc"
 reference_size = "37"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -182805,10 +182805,10 @@ module = "SERVER"
 va = "0x10012440"
 context_hash = ""
 defines = "[]"
-input_hash = "6ef280b1317de7fcaa65027d8003cfd8beb6883fe92988eefacd5084164ff0c4"
+input_hash = "f6d6dd3e52c5cce00dd3d487e3c32f3745a794c591d9ee3f1502d9961560ce10"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x10012470"]
 size = 857
@@ -182821,7 +182821,7 @@ name = "ls_LoadSavegameHeader"
 note = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stream. Allocates 0xE100 temp buffer, reads format version, player count, map name (32 bytes), timestamps, difficulty, player scores (8 entries for version > 0x10033), savegame description (96 bytes). Returns 1 on success, 0 on read failure."
 
 ["SERVER.0x10012470".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "812d1ad59b761cab85b5c3b9c3c76117962fd81ca95e616defee318f1a31c017"
 reference_size = "857"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -182832,10 +182832,10 @@ module = "SERVER"
 va = "0x10012470"
 context_hash = ""
 defines = "[]"
-input_hash = "247332ff3efa150846e5000644025e9bf67d5957c66dedce7d434742334bd7fd"
+input_hash = "15d59ef1a3c7b0dadc2f43abdb245b008a55b839308d988fd202de1547009640"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x100127d0"]
 size = 282
@@ -182848,7 +182848,7 @@ marker_type = "FUNCTION"
 name = "ls_LoadExistingEntities"
 
 ["SERVER.0x100127d0".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "953441a7a61505fa4980ae6470f357bd3c03986a1b03d27e7d4eb8e2291b0969"
 reference_size = "282"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -182859,10 +182859,10 @@ module = "SERVER"
 va = "0x100127d0"
 context_hash = ""
 defines = "[]"
-input_hash = "a9ff9ef61c28bceaa5f3839946fdc2a25b81598b96234bc69878d46ea547ced6"
+input_hash = "f57f32addf048c77501c31a0e638feaf5b2e15e5083b29abf93c7b56850a78fd"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x100128f0"]
 size = 1463
@@ -182878,7 +182878,7 @@ name = "ls_LoadBuildingEntityState"
 note = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 
 ["SERVER.0x100128f0".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "5ca43c6bc58fabbb2296d80d62ebb45205700587291ad0be3aebf7f3b6f56e92"
 reference_size = "1463"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -182889,10 +182889,10 @@ module = "SERVER"
 va = "0x100128f0"
 context_hash = ""
 defines = "[]"
-input_hash = "179a8c1e349ef56b7779594e63ff24a593faaa61f32c93b855a7cc2963aade3d"
+input_hash = "a56930faa3c38ffb7d337b6154e8592fa3e39cd768155bd4762a9ff4c1dc2332"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x10012eb0"]
 size = 884
@@ -182906,7 +182906,7 @@ marker_type = "FUNCTION"
 name = "ls_LoadDynamicEntities"
 
 ["SERVER.0x10012eb0".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "d264d33de4788c97808303286e9f6799f91d6ca13b2bc0ebd06545ef946b9a10"
 reference_size = "884"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -182917,10 +182917,10 @@ module = "SERVER"
 va = "0x10012eb0"
 context_hash = ""
 defines = "[]"
-input_hash = "ae3a10215cd1a37793c97a325167c6b9874c78dd99b668b6a2163fa6614d0572"
+input_hash = "42cf469be37ffb6b2744056c4e6ce4f000c72f732009a8f0f3e6398033ddc9dd"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x10013230"]
 size = 2268
@@ -182936,7 +182936,7 @@ marker_type = "FUNCTION"
 name = "ls_LoadEntities"
 
 ["SERVER.0x10013230".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "491b1d6197ab9af193a174c46f5d5fcc67a0de0b87e086bd9eaa6c658c511f09"
 reference_size = "2268"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -182947,10 +182947,10 @@ module = "SERVER"
 va = "0x10013230"
 context_hash = ""
 defines = "[]"
-input_hash = "f0295a4aa05d597a31b80deadf690feeb38bd13171c506b6817af5edff0aa48b"
+input_hash = "a0a6f6d443eb66a6d3864c1fd2eec980399269a02871856cec034ebb58c1bd94"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x10013b10"]
 size = 1361
@@ -182965,7 +182965,7 @@ name = "ls_LoadTownData"
 note = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success."
 
 ["SERVER.0x10013b10".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "d4218b3a96e191fb077b0da633653e86ace4e2ccbfe74e95d0ddec47e73fc7b1"
 reference_size = "1361"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -182976,10 +182976,10 @@ module = "SERVER"
 va = "0x10013b10"
 context_hash = ""
 defines = "[]"
-input_hash = "acef6e88fe4d39fe1361ca4568ede9421d66fa605d08cc2a0512cb8f3fa1de34"
+input_hash = "bd72e895cf30ec098e69af44f70af09c12ca2c76596b7d16db0d5ab8b1ae2484"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x10014070"]
 size = 491
@@ -182993,7 +182993,7 @@ marker_type = "FUNCTION"
 name = "ls_ID2Ptr"
 
 ["SERVER.0x10014070".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "6918866bff153861612548330a602ed88f2e2a8506092d2ac23206091febae6b"
 reference_size = "491"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -183004,10 +183004,10 @@ module = "SERVER"
 va = "0x10014070"
 context_hash = ""
 defines = "[]"
-input_hash = "dccdb98916f44a78cb21536c3ea80159ec473c09ff722395b5c155702b6bfa84"
+input_hash = "e8cda12dda69e20b362c719b498f8bbaa26997438736421fb7ea7fe73fc998cf"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x10014260"]
 size = 892
@@ -183021,7 +183021,7 @@ marker_type = "FUNCTION"
 name = "srv_RecvGame"
 
 ["SERVER.0x10014260".verification]
-source_hash = "e4ffd730f83f8c4250ad38338a698ba7330436894c0c935f5c4205b043a0ef69"
+source_hash = "ec34ff5f172425761eb2d0416ecac05f7a02002f80cf81a107555ddde1ad3eba"
 reference_hash = "0466594f1e6cb0876386cad4d1dfbdd935184c4ed18e73d7cbf0814dd5240514"
 reference_size = "892"
 headers_hash = "50549772dde3bd371c96ce4b5f69d5bb76d18e45f201b21e9846eb035955a66a"
@@ -183032,10 +183032,10 @@ module = "SERVER"
 va = "0x10014260"
 context_hash = ""
 defines = "[]"
-input_hash = "e99fcd5016e1681c08bf1af19fa296b2d2ef617211c9e57e2df9d09bb0bdc0d6"
+input_hash = "0754bf4383828a14e0ad91a028d778732507385b202581e1cf038ad2f30282b7"
 writer = "verify"
 status = "RELOC"
-measured_at = "2026-10-08T04:55:37+00:00"
+measured_at = "2026-10-08T04:58:22+00:00"
 
 ["SERVER.0x100145e0"]
 size = 209
