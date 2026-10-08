@@ -1569,6 +1569,8 @@ float __cdecl gv_GetUpgradeBonus(char* graveyard)
 	unsigned short* __cdecl gm_ff_Objekt(int container, int arg_count, int first_arg, ...);
 	int sum;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\friedhof_logic.c", __LINE__, "gv_GetUpgradeBonus(): enter", 1);
 	sum = 0;
 	if (gm_ff_Objekt(*(int*) (graveyard + 0x5d), 2, 6, 0, 0x1ff) != 0) {
 		sum = 10;
@@ -1605,9 +1607,13 @@ int __cdecl gv_HasGravediggerRoom(unsigned char* building, int* count)
 
 	kind = (unsigned char*) (g_entity_type_table + *building * 0x24d);
 	if (kind[0] != 0x1d) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\friedhof_logic.c", __LINE__, "gv_HasGravediggerRoom(): building is no graveyard", 1);
 		return -1;
 	}
 	if (*(int*) (building + 0x65) == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\friedhof_logic.c", __LINE__, "gv_HasGravediggerRoom(): no graveyard data", 1);
 		return -1;
 	}
 	cap = kind[0x232] + kind[0x231];

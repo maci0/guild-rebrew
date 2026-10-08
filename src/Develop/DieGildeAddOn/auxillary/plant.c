@@ -256,6 +256,8 @@ char __cdecl rd_AddBKBox(char* name)
 	char* obj;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c", __LINE__, "rd_AddBKBox(): enter", 1);
 	if (strnicmp(name, "bk_", 3) != 0 && strnicmp(name, "!bk_", 4) != 0) {
 		return 1;
 	}
@@ -305,6 +307,29 @@ char __cdecl rd_AddBKBox(char* name)
 		        : ((BK_BOX*) g_aux_entity_buffer)[g_aux_entity_count].hi[2];
 	}
 	g_aux_entity_count++;
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c", __LINE__, "rd_AddBKBox(): exit", 1);
 	return 1;
+}
+
+/* Returns the cached box of a building site, or 0 (TL 0x4bdf40). */
+BK_BOX* __cdecl rd_GetBKSize(char* name)
+{
+	extern int __cdecl strcmpi(const char* a, const char* b);
+	extern int __cdecl sprintf(char* buf, const char* fmt, ...);
+	extern int g_aux_entity_count;
+	extern int g_aux_entity_buffer;
+	char buf[0x40];
+	int i;
+
+	for (i = 0; i < g_aux_entity_count; i++) {
+		if (strcmpi(name, ((BK_BOX*) g_aux_entity_buffer)[i].name) == 0) {
+			return &((BK_BOX*) g_aux_entity_buffer)[i];
+		}
+	}
+	sprintf(buf, "rd_GetBKSize(): Unbekannter Bauplatz '%s'", name);
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c", __LINE__, buf, 1);
+	return 0;
 }
 

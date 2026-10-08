@@ -164,6 +164,8 @@ void __cdecl nt_LogWinsockError(int err_code)
 /* TL 0x420b70 */
 void __cdecl nt_ResetStats(void)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_ResetStats(): enter", 1);
 	memset(nt_CmdStats, 0, sizeof(nt_CmdStats));
 	nt_RecvPackets = 0;
 	nt_RecvBytes = 0;
@@ -176,6 +178,8 @@ void __cdecl nt_CountCmd(unsigned char* cmd, unsigned int len, char received)
 {
 	int col;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_CountCmd(): enter", 1);
 	if (cmd != 0 && len > *cmd && *cmd < 0x6a) {
 		col = received ? 0 : 2;
 		nt_CmdStats[*cmd][col]++;
@@ -190,6 +194,8 @@ void __cdecl nt_FormatStats(void)
 	char total[128];
 	unsigned int type;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_FormatStats(): enter", 1);
 	sprintf(total, "Recv: %u Packets w/ %u bytes, Send: %u Packets w/ %u bytes",
 		nt_RecvPackets, nt_RecvBytes, nt_SendPackets, nt_SendBytes);
 	for (type = 0; type < 0x6a; type++) {
@@ -210,6 +216,8 @@ char* __cdecl nt_GetLocalIp(void)
 	WSADATA wsa;
 	struct hostent* h;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_GetLocalIp(): enter", 1);
 	if (nt_LocalIp[0] == 0) {
 		if (nt_WsaStarted == 0) {
 			WSAStartup(2, &wsa);
@@ -253,6 +261,8 @@ int __cdecl nt_Connect(char* host, int port)
 	nt_SendDone = 0;
 	nt_Closed = 0;
 	if (host == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Connect(): host == NULL", 1);
 		goto done;
 	}
 	WSAStartup(2, &wsa);
@@ -261,22 +271,32 @@ int __cdecl nt_Connect(char* host, int port)
 	if (s != INVALID_SOCKET) {
 		opt = 1;
 		if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (char*) &opt, 4) == SOCKET_ERROR) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Connect(): setsockopt SO_REUSEADDR failed", 1);
 			goto fail;
 		}
 		opt = 1;
 		if (setsockopt(s, SOL_SOCKET, SO_DONTLINGER, (char*) &opt, 4) == SOCKET_ERROR) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Connect(): setsockopt SO_DONTLINGER failed", 1);
 			goto fail;
 		}
 		opt = 0x40000;
 		if (setsockopt(s, SOL_SOCKET, SO_RCVBUF, (char*) &opt, 4) == SOCKET_ERROR) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Connect(): setsockopt SO_RCVBUF failed", 1);
 			goto fail;
 		}
 		opt = 0x20000;
 		if (setsockopt(s, SOL_SOCKET, SO_SNDBUF, (char*) &opt, 4) == SOCKET_ERROR) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Connect(): setsockopt SO_SNDBUF failed", 1);
 			goto fail;
 		}
 		opt = 1;
 		if (ioctlsocket(s, FIONBIO, (unsigned long*) &opt) == SOCKET_ERROR) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Connect(): ioctlsocket FIONBIO failed", 1);
 			goto fail;
 		}
 		addr.sin_family = AF_INET;
@@ -284,6 +304,8 @@ int __cdecl nt_Connect(char* host, int port)
 		if (addr.sin_addr.s_addr == INADDR_NONE) {
 			h = gethostbyname(host);
 			if (h == 0) {
+				/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+				LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Connect(): Unknown host", 1);
 				goto fail;
 			}
 			addr.sin_addr.s_addr = *(unsigned long*) h->h_addr_list[0];
@@ -318,10 +340,14 @@ connected:
 	len = 4;
 	if (getsockopt(s, SOL_SOCKET, SO_SNDBUF, (char*) &opt, &len) != SOCKET_ERROR) {
 		sprintf(buf, "getsockopt SO_SNDBUF: %d", opt);
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, buf, 1);
 	}
 	len = 4;
 	if (getsockopt(s, SOL_SOCKET, SO_RCVBUF, (char*) &opt, &len) != SOCKET_ERROR) {
 		sprintf(buf, "getsockopt SO_RCVBUF: %d", opt);
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, buf, 1);
 	}
 	nt_Socket = s;
 	res = s;
@@ -332,6 +358,8 @@ done:
 /* TL 0x421050 */
 void __cdecl nt_Disconnect(void)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Disconnect(): enter", 1);
 	if (nt_Socket != INVALID_SOCKET) {
 		shutdown(nt_Socket, 2);
 		closesocket(nt_Socket);
@@ -351,6 +379,8 @@ int __cdecl nt_Recv(void)
 	int n;
 	int err;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Recv(): enter", 1);
 	if (nt_Socket == INVALID_SOCKET) {
 		return 1;
 	}
@@ -398,12 +428,18 @@ int __cdecl nt_Recv(void)
 				sprintf(buf,
 					"nt_Recv(): Received a Command with Count == cm_LastSyncCount, cmd->Count is %li, LastRequCnt is %li",
 					*(int*) (cmd + 8), cm_LastSyncCount);
+				/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+				LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, buf, 1);
 			} else if (cmd[0] == 0x20 && cmd[0x10] == 0xe) {
 				sprintf(buf, "nt_Recv(): Received Sync, cmd->Count is %li, LastRequCnt is %li",
 					*(int*) (cmd + 8), nt_LastRequCount);
+				/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+				LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, buf, 1);
 			} else {
 				sprintf(buf, "nt_Recv(): Lost a Command, cmd->Count is %li, nt_LastRequCount is %li",
 					*(int*) (cmd + 8), nt_LastRequCount);
+				/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+				LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, buf, 1);
 				nt_LastRequCount = *(int*) (cmd + 8);
 			}
 		}
@@ -411,6 +447,8 @@ int __cdecl nt_Recv(void)
 		nt_RecvCmd = 0;
 		nt_RecvDone = 0;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Recv(): exit", 1);
 	return 0;
 }
 
@@ -420,6 +458,8 @@ int __cdecl nt_Send(void)
 	int n;
 	int err;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Send(): enter", 1);
 	if (nt_Socket == INVALID_SOCKET) {
 		return 1;
 	}

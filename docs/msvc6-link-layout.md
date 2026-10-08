@@ -5200,7 +5200,7 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   calls `strnicmp` and `strcmpi`: the client's only `_strnicmp` caller in a server TU, and `strnicmp.obj`
   already loads for `getqloc.obj`, so the old name adds the sixth alias object and nothing else. It needs
   only `realloc` and a call through the 3D object's interface. 34 DIR32 records. Its neighbours call engine
-  code the server lacks; `rd_GetBKSize` (0x4bdf40) is deferred (log macro, below).
+  code the server lacks; `rd_GetBKSize` (0x4bdf40) is built with the placeholders (below).
 - **Savegame writers (round 18).** The client saves; the server only loads. Each writer mirrors a server
   loader field by field and calls `vfs_fwrite`, which is only linkable now: `ls_SaveObjects`,
   `ls_SaveDynamicEntities` and `ls_SaveRelationships` (TL 0x51ebc0, 0x51f170, 0x520860, before
@@ -5217,11 +5217,46 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   client as an unused `sprintf` into a local buffer (client `amt_fio_SaveAemter` 0x4ec410, `rd_GetBKSize`,
   `vfs_Tfopen`, `vfs_init`); a literal message leaves no trace. So a client-only function's server copy can
   hold `LogMessageInternal` calls, two DIR32 records for each literal message and one for each formatted
-  one, that no binary records. The ports carry the client's code only, so `vfs_Tfopen` and `vfs_init` lack
-  the call their server copies made. `amt_fio_SaveAemter` and `rd_GetBKSize` are ported but not committed:
-  with them `_strncnt`'s ICF survivor flips to `a_map.obj` (`.scratch/measure/icf_predict.py --omit`), and
-  their server copies had a log call anyway. This bounds what any reconstruction from the clients can prove:
-  the exact `.reloc` reservation needs the server's log calls in discarded code, which no image shows.
+  one, that no binary records. The ports carry the client's code only. This bounds what any reconstruction
+  from the clients can prove: the exact `.reloc` reservation needs the server's log calls in discarded code,
+  which no image shows. A dangling `sprintf` is not proof of a log call either: the live server
+  `gm_KillSpieler` (0x10017fb0) formats two messages into a local buffer and logs neither.
+- **Placeholder log calls (round 19).** A stopgap, requested until real code is found: 211
+  `LogMessageInternal(path, __LINE__, message, 1)` calls, each marked `/* placeholder: inferred server log
+  call, see msvc6-link-layout 5f */`, in discarded client-only functions. They supply 404 of the 412 missing
+  DIR32 records; `amt_fio_SaveAemter` (TL 0x4ec410, before `amt_fio_LoadAemter`, without log calls) and
+  `rd_GetBKSize` (TL 0x4bdf40, after `rd_AddBKBox`), ported in the same change, supply 8. `path` is the
+  TU's `__FILE__` string as its live calls spell it; the line argument is the placeholder's own line, since
+  the server's is unknown. The set, `.scratch/measure/placeholder_spec.tsv` (applied to a clean tree by
+  `apply_placeholders.py`), has five tiers, strongest first:
+  - 14 formatted: the client builds a message into a local buffer and drops it (`vfs_AddFile`,
+    `vfs_Tfopen`, `vfs_init`, `rd_GetBKSize`, `nt_Connect` x2, `nt_Recv` x3, `srv_FormatStatDumpBegin`/`End`,
+    `ahm_fio_LoadAvatars` x3); the call logs that buffer.
+  - 53 guard failures: invalid argument, open/read/write failure, overflow, as server `amt_fio_LoadAemter`,
+    `gm_SubObjekt` and `ahm_ExAllocAlchemist` log theirs (`ahm_fio_SaveAhmInfo` and `ahm_fio_LoadAvatars`
+    per field, `nt_Connect`'s socket setup, `vfs_fwrite`, `vfs_MakeDirs`, spiel lookups).
+  - 19 not-found fall-throughs of lookups, as `plt_SetPlantMap` logs before its final return.
+  - 106 entry traces and 19 exit traces (`"<function>(): enter"`/`"exit"`, as `gm_Open` logs), with no
+    evidence beyond the macro's use in sibling functions: they fill the count. The exit traces sit in the 19
+    longest functions.
+
+  Each call costs one DIR32 for the path and one for a literal message (none for a buffer); in
+  `gv_HasGravediggerRoom`, `vfs_MakeDirs` and `vfs_Tfopen` the compiler shares one `push path; call` tail
+  between two calls, 4 records fewer (`.scratch/measure/log_relocs.py` counts calls and path records per
+  function). Message literals are `??_C@` COMDATs in `.data`; referenced only from discarded functions they
+  are discarded too, and no `.data` byte changes. The path literal is different, because the TU's live calls
+  keep it, and VC6 emits a literal's COMDAT with the first function that references it. Measured: a call in
+  `ls_SaveObjects` moved loadsave.c's path literal ahead of `ls:tmp`, `AHM_INFO` and `f3g:PlantMap` (122
+  `.data` bytes); calls in `amt_fio_SaveAemter`, directly before `amt_fio_LoadAemter`, reordered
+  `amt_fio_LoadAemter`'s own literals (229 bytes). `.scratch/measure/log_sites.py VERBOSE_LOG BUILD_DIR MAP`
+  lists the discarded functions where no kept literal of the object lies between the function and the path
+  literal; only those carry placeholders, and the build confirms each set. That excludes loadsave.c's
+  savers, aemter's office helpers before `amt_fio_LoadAemter`, the alchemistry recipe helpers, friedhof's
+  slot helpers, plant's record lookups and spiel's game-clock helpers. Under that emission rule the reference
+  also shows that the server's loadsave.c had no log call in any function before `ls_ID2Ptr`. Stock zlib and
+  minizip, and `zufall.c`, which has no path string, get none. The final set keeps `a_cmp.obj`'s
+  `_strncnt` (the two ports alone flip it to `a_map.obj`, as in round 18). Replace a placeholder when the
+  server's real code for that function is known, then re-tune the rest to the count.
 - **Ruled out (round 18).** The four -1 dwords the client's command.c keeps between `g_game_speed_index` and
   the dispatch table (TL 0x68a9d0..0x68a9dc) sit inside plain `.data`, which LINK never discards, and the
   server has none: they and the helpers reading them (TL 0x4c4dc0, 0x4c76c0, 0x4c7870, 0x4cc590) are not in
@@ -5238,26 +5273,24 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
 - **Measured** (native link of the committed tree against `original/Server/server.dll`; `.scratch/measure`
   scripts: section byte compare, IAT and hint/name compare per DLL, Rich records, link map, ICF predictor):
 
-  | | main f829a810 | round 16 fcfdd827 | round 17 477dc53e | now | reference |
-  |---|---|---|---|---|---|
-  | functions at reference VA | 260 | 260 | 260 | 260 | 260 |
-  | `rebrew verify` | not re-run | 316/316 | 316/316 | 316/316 | |
-  | `.text` differing bytes | 138 | 146 (all IAT operands) | 0 | 0 | 0 |
-  | `.rdata` differing bytes | 242 | 122 | 0 | 0 | 0 |
-  | `.data` differing bytes | 0 | 0 | 0 | 0 | 0 |
-  | hint/name order diffs | 6 (KERNEL32) | 0 | 0 | 0 | 0 |
-  | IAT slots off the reference | 53 of 100 | 37 of 100 | 0 of 100 | 0 of 100 | 0 |
-  | Rich game C / LIBCMT C / alias / imports | 36 / 113 / 1 / 109 | 38 / 116 / 1 / 127 | 38 / 120 / 4 / 126 | 37 / 124 / 6 / 126 | 37 / 124 / 6 / 126 |
-  | `.reloc` VirtualSize | 51312 | 59928 | 59868 | 61476 | 66420 |
-  | header bytes differing (`cmp`, first 0x400) | | | 269 | 6 | |
-  | file size | | | 8192 short | 4096 short | 286720 |
+  | | main f829a810 | round 16 fcfdd827 | round 17 477dc53e | round 18 bd322c10 | now (placeholders) | reference |
+  |---|---|---|---|---|---|---|
+  | functions at reference VA | 260 | 260 | 260 | 260 | 260 | 260 |
+  | `rebrew verify` | not re-run | 316/316 | 316/316 | 316/316 | 316/316 | |
+  | `.text` differing bytes | 138 | 146 (all IAT operands) | 0 | 0 | 0 | 0 |
+  | `.rdata` differing bytes | 242 | 122 | 0 | 0 | 0 | 0 |
+  | `.data` differing bytes | 0 | 0 | 0 | 0 | 0 | 0 |
+  | hint/name order diffs | 6 (KERNEL32) | 0 | 0 | 0 | 0 | 0 |
+  | IAT slots off the reference | 53 of 100 | 37 of 100 | 0 of 100 | 0 of 100 | 0 of 100 | 0 |
+  | Rich game C / LIBCMT C / alias / imports | 36 / 113 / 1 / 109 | 38 / 116 / 1 / 127 | 38 / 120 / 4 / 126 | 37 / 124 / 6 / 126 | 37 / 124 / 6 / 126 | 37 / 124 / 6 / 126 |
+  | `.reloc` VirtualSize | 51312 | 59928 | 59868 | 61476 | 66420 | 66420 |
+  | header bytes differing (`cmp`, first 0x400) | | | 269 | 6 | 0 | |
+  | file size | | | 8192 short | 4096 short | 286720 | 286720 |
 
-  `rebrew binary relocs` reports all 3499 sites and no extra one. Every byte of `.text`, `.rdata` and `.data`
-  equals the reference and every Rich record matches; the 6 differing header bytes are the `.reloc` section
-  size fields and the image size and checksum that follow from the reservation, and the raw `.reloc`
-  section is one page shorter.
-- **Left:** the `.reloc` reservation, 412 input DIR32 records short of 66420 (5123 of 5535). Every other
-  count the image records is now equal. The remaining records belong to discarded server code: client-only
-  functions whose storage is not yet mapped (the alchemistry deck, aemter's office counters, the loadsave
-  writers that read unmapped tables, spiel's BAD set) and the log calls the server's discarded functions
-  made, which no binary shows (see the log macro above).
+  `rebrew binary relocs` reports all 3499 sites and no extra one. With the placeholder log calls the linked
+  `server.dll` is byte-identical to the reference (`cmp`).
+- **Left:** 404 of the 5535 DIR32 records come from placeholder log calls, not recovered code. Their real
+  sources are discarded server code: client-only functions whose storage is not yet mapped (the alchemistry
+  deck, aemter's office counters, the loadsave writers that read unmapped tables, spiel's BAD set) and the
+  log calls the server's discarded functions made, which no binary shows (see the log macro above). Each
+  recovered function displaces placeholders and needs the set re-tuned to 66420 with `_strncnt` kept.

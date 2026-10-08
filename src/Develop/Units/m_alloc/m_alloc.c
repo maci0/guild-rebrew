@@ -691,6 +691,8 @@ int __cdecl m_is_tracked(void* ptr)
 	char* entry;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_is_tracked(): enter", 1);
 	if (ptr != 0) {
 		entry = (char*) g_array_ptr;
 		for (i = 0; i < g_array_count; i++) {
@@ -1120,6 +1122,8 @@ void* __cdecl m_pool_next(int* it)
 	int stride;
 	char* slot;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_next(): enter", 1);
 	if (it != 0 && it[0] != 0) {
 		idx = it[1];
 		do {
@@ -1145,11 +1149,15 @@ void* __cdecl m_pool_next(int* it)
 			it[0] = (int) ((struct BlockNode*) it[0])->next;
 		} while (it[0] != 0);
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_next(): exit", 1);
 	return 0;
 }
 
 void* __cdecl m_pool_first(struct BlockNode* head, int* it)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_first(): enter", 1);
 	if (head != 0 && it != 0) {
 		it[0] = (int) head;
 		it[1] = 0;
@@ -1164,6 +1172,8 @@ void __cdecl m_pool_free_all(struct BlockNode** head)
 	struct BlockNode* block;
 	struct BlockNode* next;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_free_all(): enter", 1);
 	if (head == 0) {
 		return;
 	}
@@ -1183,6 +1193,8 @@ int __cdecl m_pool_clear(struct BlockNode** head)
 	int i;
 	char* slot;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_clear(): enter", 1);
 	n = 0;
 	if (head != 0) {
 		block = *head;
@@ -1209,6 +1221,8 @@ void __cdecl m_pool_info(struct BlockNode** head, int* count, int* max, int* siz
 	int b;
 	int c;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_info(): enter", 1);
 	a = 0;
 	b = 0;
 	c = 0;
@@ -1238,6 +1252,8 @@ void __cdecl m_pool_stats(struct BlockNode* block, int* blocks, int* used, int* 
 	int b;
 	unsigned int d;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_stats(): enter", 1);
 	c = 0;
 	a = 0;
 	b = 0;
@@ -1263,4 +1279,6 @@ void __cdecl m_pool_stats(struct BlockNode* block, int* blocks, int* used, int* 
 	if (avg_size != 0) {
 		*avg_size = d;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_stats(): exit", 1);
 }
