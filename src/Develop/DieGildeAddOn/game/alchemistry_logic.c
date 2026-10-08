@@ -270,7 +270,6 @@ float __cdecl ahm_GetRecipeBonus(char* entity, int key)
 	return ahm_GetRecipeQuality(entity, 1) * slot[1] + 1.0f;
 }
 
-
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 
@@ -844,6 +843,32 @@ unsigned char* __cdecl ahm_FindAvatar(int key)
 		}
 	}
 	return 0;
+}
+
+/* Client-only (TL 0x4ef040, discarded): writes the avatar count and each avatar's key and state, the
+ * records ahm_fio_LoadAvatars reads back. */
+int __cdecl ahm_fio_SaveAvatars(void* file)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	unsigned int count;
+	unsigned int i;
+
+	count = 32;
+	if (file == 0) {
+		return 0;
+	}
+	if (!vfs_fwrite(&count, 4, 1, file)) {
+		return 0;
+	}
+	for (i = 0; i < count; i++) {
+		if (!vfs_fwrite(g_alchemy_random_table + 4 + i * 0xf4, 4, 1, file)) {
+			return 0;
+		}
+		if (!vfs_fwrite(g_alchemy_random_table + 4 + i * 0xf4 + 0xf2, 1, 1, file)) {
+			return 0;
+		}
+	}
+	return 1;
 }
 
 int __cdecl ahm_fio_LoadAvatars(int file)

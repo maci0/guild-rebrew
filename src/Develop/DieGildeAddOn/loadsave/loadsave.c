@@ -490,6 +490,158 @@ int __cdecl ls_SaveObjects(void* file)
 	return 1;
 }
 
+/* Client-only (TL 0x51ecf0, discarded): writes the 0x100 buildings ls_LoadBuildingEntityState reads (the
+ * count of used records, each record's fields, a plant map, graveyard slot, alchemist record or the
+ * 0x30-byte office row by kind, the state block at +0x99), then the building-site boxes. The box cache is
+ * the client's 0x10058e0/0x10058e4 (round 18). Like the loader it reallocs the box buffer to the count. */
+int __cdecl ls_SaveBuildingEntityState(void* file)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	extern int __cdecl ahm_fio_SaveAhmInfo(void* file, char* obj);
+	int count;
+	int i;
+	int j;
+	char* rec;
+
+	count = 0;
+	rec = (char*) g_entity_ptr;
+	for (i = 0x100; i != 0; i--) {
+		if (*rec != 0) {
+			count++;
+		}
+		rec += 0xa9;
+	}
+	if (vfs_fwrite(&count, 4, 1, file) <= 0) {
+		return 0;
+	}
+	for (i = 0; i < 0xa900; i += 0xa9) {
+		rec = (char*) g_entity_ptr + i;
+		if (*rec == 0) {
+			continue;
+		}
+		if (vfs_fwrite(rec, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 1, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 5, 0x20, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x25, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x27, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x29, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x2b, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x2f, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x34, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x35, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x39, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x3d, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x41, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x45, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x49, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x4d, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x51, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x55, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x5a, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x5c, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (*rec == 0x1e) {
+			for (j = 0; j < 0x600; j += 0x18) {
+				if (vfs_fwrite(*(char**) (rec + 0x71) + j, 4, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite(*(char**) (rec + 0x71) + j + 4, 4, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite(*(char**) (rec + 0x71) + j + 8, 1, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite(*(char**) (rec + 0x71) + j + 9, 1, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite(*(char**) (rec + 0x71) + j + 0xa, 2, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite(*(char**) (rec + 0x71) + j + 0x10, 4, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite(*(char**) (rec + 0x71) + j + 0xc, 1, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite(*(char**) (rec + 0x71) + j + 0xd, 1, 1, file) <= 0) {
+					return 0;
+				}
+			}
+		}
+		else if (*rec == 0x48 || *rec == 0x49 || *rec == 0x4a) {
+			if (!gv_fio_SaveGraveyardData(file, (unsigned char*) rec)) {
+				return 0;
+			}
+		}
+		else if (*rec == 0x4b || *rec == 0x4c || *rec == 0x4d) {
+			if (!ahm_fio_SaveAhmInfo(file, rec)) {
+				return 0;
+			}
+		}
+		else if (vfs_fwrite(rec + 0x65, 0x30, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x99, 0x10, 1, file) <= 0) {
+			return 0;
+		}
+	}
+	if (vfs_fwrite(&g_aux_entity_count, 4, 1, file) <= 0) {
+		return 0;
+	}
+	g_aux_entity_buffer = (int) realloc((void*) g_aux_entity_buffer, g_aux_entity_count * 0x60);
+	for (i = 0; i < g_aux_entity_count; i++) {
+		if (vfs_fwrite((char*) g_aux_entity_buffer + i * 0x60, 0x40, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_aux_entity_buffer + i * 0x60 + 0x40, 0x10, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((char*) g_aux_entity_buffer + i * 0x60 + 0x50, 0x10, 1, file) <= 0) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 int __cdecl ls_SaveDynamicEntities(void* f)
 {
 	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
@@ -584,6 +736,181 @@ int __cdecl ls_SaveDynamicEntities(void* f)
 			return 0;
 		}
 		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x70, 4, 1, f) <= 0) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
+/* Client-only (TL 0x520310, discarded): writes what ls_LoadTownData reads: the slot count (0x55), then
+ * per season table (g_entity_end, the five 0x2a90 tables) its header and slot fields, then the four
+ * g_city_records. */
+int __cdecl ls_SaveTownData(void* file)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	extern unsigned char g_city_records[];
+	int count;
+	int season;
+	int city;
+	int i;
+	int k;
+	char* hdr;
+	char* slot;
+	char* rec;
+
+	count = 0x55;
+	if (vfs_fwrite(&count, 4, 1, file) <= 0) {
+		return 0;
+	}
+	for (season = 0; season < 5; season++) {
+		hdr = (char*) g_entity_end + season * 0x2a90;
+		if (vfs_fwrite(hdr, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(hdr + 4, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(hdr + 8, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(hdr + 0xc, 4, 1, file) <= 0) {
+			return 0;
+		}
+		for (i = 0; i < 0x55; i++) {
+			slot = hdr + 0x10 + i * 0x80;
+			if (vfs_fwrite(slot, 2, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 4, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 8, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 0xc, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 0x20, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 0x24, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 0x30, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 0x34, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 0x38, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 0x3c, 2, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(slot + 0x2c, 4, 1, file) <= 0) {
+				return 0;
+			}
+		}
+	}
+	for (city = 0; city < 4; city++) {
+		rec = (char*) g_city_records + city * 0x2f4;
+		if (vfs_fwrite(rec, 0x20, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x40, 8, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x48, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x4c, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x50, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x54, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x58, 8, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x60, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x61, 1, 1, file) <= 0) {
+			return 0;
+		}
+		for (k = 0; k < 10; k++) {
+			if (vfs_fwrite(rec + 0x64 + k * 8, 8, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		for (k = 0; k < 10; k++) {
+			if (vfs_fwrite(rec + 0xb4 + k * 8, 8, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(rec + 0x104, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x105, 1, 1, file) <= 0) {
+			return 0;
+		}
+		for (k = 0; k < 4; k++) {
+			if (vfs_fwrite(rec + 0x108 + k * 4, 4, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		for (k = 0; k < 4; k++) {
+			if (vfs_fwrite(rec + 0x118 + k * 4, 4, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(rec + 0x128, 4, 1, file) <= 0) {
+			return 0;
+		}
+		for (k = 0; k < 0xb; k++) {
+			if (vfs_fwrite(rec + 0x12c + k, 1, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(rec + 0x137, 1, 1, file) <= 0) {
+			return 0;
+		}
+		for (k = 0; k < 7; k++) {
+			if (vfs_fwrite(rec + 0x138 + k, 1, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(rec + 0x13f, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x140, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x141, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x142, 1, 1, file) <= 0) {
+			return 0;
+		}
+		for (k = 0; k < 8; k++) {
+			if (vfs_fwrite(rec + 0x144 + k * 0x12, 0x12, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(rec + 0x1d4, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x1d8, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x1dc, 0xd0, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(rec + 0x2ec, 8, 1, file) <= 0) {
 			return 0;
 		}
 	}
