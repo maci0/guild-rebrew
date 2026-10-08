@@ -43,21 +43,19 @@ def main() -> int:
         reloc = "%s / %s" % (m.group(1), m.group(2)) if m else reloc
     gap = grab(log, r"OBJECTIVE GAP: (\d+) bytes")
     decomp = grab(log, r"of which: ([\d,]+ differing bytes in the common prefix, [\d,]+ bytes of size shortfall)")
-    cov = grab(log, r"postlink layout-map coverage: ([0-9/]+ layout-map entries validate \([0-9.]+%)")
     short = grab(log, r"(\d+ function\(s\) are SHORTER than the binary's function \([0-9]+ bytes)")
-    imports = ("matches" if "raw link imports match the reference"
+    imports = ("matches" if "raw link imports match the reference" in log
                else "differs" if "raw-link import table differs" in log else "?")
     build = grab(log, r"cmake exit: (\d+)")
 
     rows = [
         ("verify `passed`", verify, "gate's `BASELINE`"),
-        ("`.text` residue", residue, "gate's `RESIDUE_BASELINE`"),
-        ("raw-link `.data` divergence", data, "gate's `DATA_BASELINE`"),
+        ("`.text` residue", residue, "raw-link file identity"),
+        ("raw-link `.data` divergence", data, "raw-link file identity"),
         ("relocation records missing / extra", reloc, "not measured; reloc_set_check.py removed"),
         ("raw-link import table", imports, "gate, round 210"),
-        ("OBJECTIVE GAP (raw link vs reference)", gap, "gate's `OBJECTIVE_BASELINE`"),
+        ("OBJECTIVE GAP (raw link vs reference)", gap, "raw-link file identity"),
         ("...of which", decomp, "gate's decomposition"),
-        ("postlink layout-map coverage", cov, "gate -- **floor is 90%**"),
         ("annotations shorter than the binary", short, "`rebrew verify --json`"),
         ("`cmake --build` exit", build, "gate's build step"),
     ]
