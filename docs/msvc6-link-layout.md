@@ -4934,7 +4934,9 @@ Two source facts the order depends on, both measured:
   `bss_late.c` from `rebrew-data.toml`: one explicit zero definition per reference row in its declared type,
   in VA order, with `g_gap_<va>` pads where the rows name nothing (alignment, or a variable nobody has named).
   A row that overlaps the next ends where the next starts, so a large object is covered by the symbols that
-  follow it. `bss_head.c` and `bss_head2.c` are command-line objects ordered around zutil.obj, whose empty
+  follow it; a pad stops at every row end, so no pad crosses an allocation boundary. Pads inside an
+  allocation are alias rows backed by it, pads between allocations are spans (docs/data-ownership.md).
+  `bss_head.c` and `bss_head2.c` are command-line objects ordered around zutil.obj, whose empty
   string `""` is a 1-byte `.bss` COMDAT the reference has at 0x10034620. `bss_late.c` is the static library
   `bss_late`, linked after LIBCMT, so LINK loads it after the CRT members and its `.bss` follows theirs. The
   head ends at the last game variable: a 24-byte LIBCMT static block (time.obj) precedes crt0dat in both

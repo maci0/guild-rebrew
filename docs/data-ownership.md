@@ -36,6 +36,30 @@ in byte-matched stock CRT functions. Compiler literals require complete matching
 reference/native bytes. An address coincidence, a similar name, or a declaration
 alone does not establish ownership.
 
+A layout span (`storage_kind = "span"`) covers only bytes no named row covers:
+the hole between two named globals, named `g_before_<next>` (`g_text_before_<text>`
+before a string literal). A span that overlaps a named row is stale; shrink,
+split or drop it when an extent grows, and keep its `extern` view in
+`src/crt_region/section_spans.c` and `src/layout_spans.h` at the row's name and
+size. `rebrew lint` W038 reports any overlap between named rows except alias rows
+with a `backing`.
+
+`scripts/gen_bss_layout.py` tiles each reference allocation that code also
+addresses through interior names (`g_slot_table`, `g_entity_base`,
+`g_town_records`, `g_city_records`, `g_save_info`, `g_connections`,
+`g_alloc_root`): the allocation's own name becomes a small leading definition,
+each interior name its own definition, and `g_gap_<va>` pads fill the rest.
+Code needs the interior names as separate symbols (the compiler's alias
+analysis and store scheduling depend on it), so C cannot define the whole
+allocation at once. The rows record the reference allocation's full extent;
+interior names and pads inside it are `alias` rows backed by it, and pads outside
+any allocation are spans. W037 therefore reports five rows whose leading
+definition is shorter than the allocation (`g_slot_table`, `g_entity_base`,
+`g_city_records`, `g_save_info`, `g_connections`); `g_town_records` and
+`g_alloc_root` are emitted under the names the code uses (`g_entity_end`,
+`g_alloc_root_name`), so W037 finds no definition to compare. These warnings stay
+until Rebrew can record a tiled allocation.
+
 Complete extents include string terminators and all array elements. The audit
 corrected 64 one-byte string records against full source initializers or native
 compiler literals and recorded 48 previously unstored fixed extents. Five struct and function-pointer
