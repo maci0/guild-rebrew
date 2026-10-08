@@ -5261,3 +5261,73 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   functions whose storage is not yet mapped (the alchemistry deck, aemter's office counters, the loadsave
   writers that read unmapped tables, spiel's BAD set) and the log calls the server's discarded functions
   made, which no binary shows (see the log macro above).
+
+### 5g. Orphan data in the reference: what the server image records about its discarded code (2026-10-08)
+
+An initialized object that no relocation in the reference addresses is either an unused global or data whose
+only users the server link discarded. `.scratch/measure/orphans.py IMAGE MAP` takes every link-map symbol in
+the initialized part of `.rdata` and `.data` as one item running to the next symbol and marks it live when a
+HIGHLOW site in `.text`, or in a live item, points into it; `orphan_strings.py IMAGE MAP` does the same for
+each NUL-terminated ASCII string. Both run on `original/Server/server.dll` with this build's map, which is
+valid because the three sections are byte-identical. `xref_bytes.py` finds an item's bytes in the TL client,
+`count_ops.py` counts the client functions' absolute operands into it.
+
+- **No orphan string literals.** All 385 `??_C@` literals (303 in game objects) have a referrer. The game's
+  literals are `/Gf` COMDATs, and LINK discards an unreferenced one with the code that used it:
+  `%i vfs_file(s) were left open!` (`vfs_exit`) and `rd_GetBKSize(): Unbekannter Bauplatz '%s'` are in the TL
+  client, in neither the reference nor this build, and this build discards them with the ported functions
+  while staying byte-identical. A discarded function's log message, format string or `__FILE__` path
+  therefore leaves nothing in the image unless live code uses the same literal. The strings the scan does
+  report are tails of live literals after a non-ASCII byte (`Gebäude...`) and names inside live tables
+  (alchemist records, plant info, Error.c's log file names, indexed from the table base).
+- **Plain data stays.** Initialized globals and `const` tables are not COMDATs, so they survive without
+  users. Their owning TU follows from position: a TU's `.data` is its plain data, then its literals, and the
+  client's `.rdata`, `.data` and code are ordered the same way, so the client copy's neighbours name the TU.
+  An item addressed only through a biased base looks orphaned to the scan: `g_spiel_byte_table`
+  (0x10030b74) is read through 0x10030b6a by `gm_AllocBuildingDefaults` (client bases 0x699361 and 0x699362),
+  so it is live.
+
+| Server VA | Bytes | Item | Owning TU (evidence) | Client users (absolute operands) | DIR32 implied in discarded server code | Status |
+|---|---|---|---|---|---|---|
+| 0x10027030 | 4 | `g_broadcast_ff` = INVALID_SOCKET | broadcast.c (its first `.data`, before the `__FILE__` literal) | TL 0x675170, the client's broadcast socket, then its `WSAStartup failed` message: open 0x402220 (3), close 0x402320 (2), send 0x402340 (1) | at least 1; close compiles to 2 here (WS2 calls go through thunks, REL32) | close ported, deferred (ICF, below); open and send also need the two `sockaddr_in` at TL 0x1552000, which have no server allocation |
+| 0x1002956c | 40 | `This is Gilde talking, can you hear me?` (array) | server.c | none in either client | at least 1 | server-only code; no binary has it |
+| 0x10029698 | 260 | `g_game_path_default` `\project\DieGilde\game\` | server.c | none | at least 1 | server-only |
+| 0x1002979c | 4 | `g_server_flag` = 1 | server.c | none | 0 or more | may be unused |
+| 0x10025340 | 812 | `g_type_adjustments`, its count, `g_type_adjustments_secondary`, its count | server.c `.rdata` (after vfs's `.BIN` table; TL 0x664f38..0x665264 precedes aemter's pool) | TL 0x4e7990 only (7), in the client's server.c span | 7 | blocked: 0x4e7990 calls TL 0x4f4830, whose 29 x 36-byte table (TL 0x68ff68, after friedhof's literals, holding client code pointers) the server lacks, so the server's copy was different code |
+| 0x1002566c | 20 | `g_type_multipliers` | aemter.c `.rdata` (TL 0x665264, before aemter's double) | TL 0x4ec710 (1, aemter), 0x4fcda0 (1, client-only TU) | 1 | blocked: 0x4ec710 also calls 0x4f4830 |
+| 0x100256d8 | 60 | `g_cost_rate_table` | alchemistry_logic.c `.rdata` (TL 0x665288, inside alchemistry's pool) | TL 0x4a6210 (3), 0x4a6550 (2), 0x588aa0 (2), all outside the server TU spans | 0 | an extern table of client-only code; no server code implied |
+| 0x1002573c | 16 | `g_output_adjustments` | friedhof_logic.c `.rdata` (TL 0x6652e8, in friedhof's pool) | TL 0x4f3ef0 (2), the function after friedhof's client span | 2 | blocked: 0x4f3ef0 calls client functions with no server copy (TL 0x4c3ff0..0x4c5530, 0x4f2810..0x4f4440, 0x5b2c60) |
+| 0x100257e0 | 40 | `g_interval_values` | between friedhof's pool and spiel's trait ranges; TU unresolved | TL 0x4f6d60 (1), 0x4ad8c0 (1), client-only TUs | unknown | blocked (both call client UI code) |
+| 0x10029af0 | 200 | `g_office_float_table` | aemter.c (`.data` start after server.c's literals; TL 0x68d9a0) | TL 0x4e7c70 (1) | 1 | ported (`amt_GetOfficeAffinity`) |
+| 0x1002a0f0 | 8 | `g_alchemy_one`, `g_alchemy_half` (1.0f, 0.5f) | alchemistry_logic.c (`.data` start after aemter's literals) | the client's alchemistry `.data` starts with another table (TL 0x68dec0) | at least 1 | server-only; user unknown |
+| 0x1002dcf0 | 4 | `g_plant_flag` = 1 | plant_pairs.c (after the pair table) | TL 0x696438, unreferenced in the client as well | 0 | unused in every build |
+| 0x1002dd48 | 32 | two season hour tables {8, 7, 8, 9}, {20, 21, 20, 19} (float) | spiel.c (`.data` start; TL 0x696540, +0xf997808) | TL 0x50c830 (2) in spiel's span, 17 client-only users | 2 | blocked: 0x50c830 reads the client byte TL 0x7747b0, which no paired function anchors (the nearest operand offset, 0xf8c16c4, ends at TL 0x773da8 and would only bracket it into the unnamed `g_gap_10035a10`) |
+| 0x1002dd68 | 120 | ten {kind, value, size} records | spiel.c (TL 0x696560) | TL 0x508220 (5) | 5 | ported now: `gm_GetKindRecord` |
+| 0x10030eac | 64 | `g_spiel_space_fill` | spiel.c | TL 0x50b710..0x50b7a0 (4) | 4 | ported (round 18) |
+| 0x10025314 | 44 | `g_file_extension_names` | vfs.c | `vfs_ScanDir`, `vfs_AddFile`, `vfs_Tfopen` (7) | 7 | ported (rounds 17, 18) |
+| 0x100252e8, 0x1002469c | 44, 4 | `unz_copyright`, inflate's `mark` | unzip.c, inflate.c | stock `unzOpen`, `inflateSync` | 1 + 1 | stock files built whole |
+| 0x100245a0, 0x100246a0 | 56, 48 | `deflate_copyright`, `inflate_copyright` | deflate.c, inftrees.c | unreferenced in stock zlib too | 0 | |
+
+The remaining unreferenced items are linker or stock data: each DLL's null thunk and import descriptor and the
+hint/name table (addressed through the data directories), the export names, and LIBCMT's `__mnames`,
+`__fltused`, `__ldused`, `__FPmtinit`/`__FPmtterm`, `__amblksiz`, `__pwctype`, the FPE table bounds and
+`__lconv`.
+
+- **What the inventory implies.** Unrepresented records the orphans prove: 7 (server.c type tables), 1
+  (aemter multipliers), 2 (friedhof output adjustments), 2 (spiel hour tables), at least 1 for the broadcast
+  socket and at least 3 for server.c's string, path and flag: about 16 of the 407 still missing. The
+  remaining records come from discarded code that touches only live data or COMDAT literals, which the image
+  cannot show; the log calls of 5f are such code.
+- **Proven but not portable.** Every proven server copy except two calls or reads something the server does
+  not have (TL 0x4f4830's table, client UI code, the client byte 0x7747b0, the broadcast addresses). LINK
+  resolves references before it discards, so the server's copies of those functions were different code;
+  porting the client's would not link, and editing it would invent code.
+- **ICF.** `gm_GetKindRecord` alone keeps `_strncnt` in `a_cmp.obj`. With the broadcast close as well, or
+  with the client's game-clock copy (TL 0x500c80, after `sim_SetSyncParams`, storage `g_current_year` by the
+  0xf840c80 operand offset), the survivor flips to `a_map.obj`
+  (`.scratch/measure/icf_whatif.py --add AFTER:SIZE:NRELOC` tests a synthetic insertion). Both are ready in
+  `.scratch/r19-deferred/orphans_bc_close_gametime.diff` for an integration that restores `a_cmp` with other
+  real code.
+- **Measured** (native link, this branch): `.text`, `.rdata`, `.data`, IAT, hint/name order and Rich equal
+  the reference, `_strncnt` from `a_cmp.obj`, `.reloc` VirtualSize 61536 of 66420 (5128 of 5535 DIR32
+  records, 407 short).
