@@ -40,6 +40,11 @@ int __cdecl gzclose(int);
 extern char g_stream_pool[1];
 #include <string.h>
 
+/* The server's log macro is LogMessageInternal(__FILE__, __LINE__, msg, 1) (vfs_ReadData keeps one at
+ * line 0x5b4); the clients compile it away and keep only the sprintf that formats its message.  The
+ * ported client functions vfs_AddFile, vfs_Tfopen and vfs_init therefore get the call after each such
+ * sprintf whose buffer the client never reads.  Their line numbers are not recorded anywhere: the
+ * values are estimates from vfs_ReadData's offset, and any line of 128 or more encodes the same. */
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl unzReadCurrentFile(int zstrm, char* buf, unsigned int total);
 extern int __cdecl gzread(void* handle, char* buf, unsigned int total);
@@ -410,6 +415,7 @@ void __cdecl vfs_AddFile(char* name, VFS_DIR* dir, VFS_DIR* source, int stamp, i
 				strcat(new_path, g_file_extension_names + archive * 6);
 			}
 			sprintf(msg, "vfs: name collision: \"%s%s\" %s%s", dir_path, name, old_path, new_path);
+			LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x20c, msg, 1);
 			if (offset > it->offset || offset == (unsigned int) -1 || archive < it->archive) {
 				it->offset = offset;
 				it->source = source;
@@ -1109,6 +1115,7 @@ char* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
 			unzClose(zip);
 		not_found:
 			sprintf(entry, "vfs_Tfopen: Could not find \"%s\"!!", path);
+			LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x4c7, entry, 1);
 			return stream;
 		}
 		modes[0] = "rt";
@@ -1753,6 +1760,7 @@ int __cdecl vfs_init(char* name, char flag)
 	g_vfs_root = vfs_ScanDir(name, 0);
 	getcwd(cwd, 0x100);
 	sprintf(buf, "vfs_init: root -> \"%s\" relative to \"%s\"", name, cwd);
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x74b, buf, 1);
 	*(int*) g_vfs_item_pool = 0;
 	return g_vfs_root != 0;
 }

@@ -17,6 +17,10 @@ this file holds the rest.
 
 ## Original build
 
+- **Europa1400Gold_TL.exe was linked with `/DEBUG`, so `/OPT:NOREF`; Europa1400Gold.exe and the server use
+  `/OPT:REF`.** TL carries a PDB path and keeps 298 game-range functions nothing references; Gold has no
+  PDB path and 3 such functions, the server none. A TL TU is the client's whole compile of that file
+  (`docs/msvc6-link-layout.md` 5f, round 19; `.scratch/measure/unref.py`).
 - Compiler: MSVC6. Flags: `/O2 /Gd` default project-wide. Per-file variance
   was swept (codegen-walls §7 item 2, CLOSED): SP6 confirmed **for
   `server.dll`**, flag axis flat, three `sp5-pp` file pins remain. Do not

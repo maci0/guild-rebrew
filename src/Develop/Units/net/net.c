@@ -8,7 +8,13 @@
  * The original links objects in file-name order and this run sits between m_alloc and trees, where net
  * sorts; no function here has a server address, so the TU is still placed by --first-va (CMakeLists.txt).
  * server.c reads the strings by name and must not spell the same text as a literal, or the bytes are
- * emitted twice. */
+ * emitted twice.
+ *
+ * The clients compile the game's log macro away and keep the sprintf that formats its message; the
+ * server expands it to LogMessageInternal(__FILE__, __LINE__, msg, 1).  So each sprintf whose buffer the
+ * client never reads (nt_FormatStats, nt_Connect, nt_Recv) is followed by that call here.  Its line
+ * number is not recorded anywhere: the values are estimates from nt_LogWinsockError's lines, and only
+ * whether a line is below 128 changes the encoding. */
 
 #include "../Error/error.h"
 #include <winsock2.h>
@@ -192,6 +198,7 @@ void __cdecl nt_FormatStats(void)
 
 	sprintf(total, "Recv: %u Packets w/ %u bytes, Send: %u Packets w/ %u bytes",
 		nt_RecvPackets, nt_RecvBytes, nt_SendPackets, nt_SendBytes);
+	LogMessageInternal("D:\\develop\\units\\net\\net.c", 0x74, total, 1);
 	for (type = 0; type < 0x6a; type++) {
 		sprintf(line,
 			"%u. Recv: %u Packets (%02f%%) w/ %u bytes (%02f%%), Send: %u Packets (%02f%%) w/ %u bytes (%02f%%)",
@@ -200,6 +207,7 @@ void __cdecl nt_FormatStats(void)
 			nt_CmdStats[type][1], (double) nt_CmdStats[type][1] * 100.0 / (double) nt_RecvBytes,
 			nt_CmdStats[type][2], (double) nt_CmdStats[type][2] * 100.0 / (double) nt_SendPackets,
 			nt_CmdStats[type][3], (double) nt_CmdStats[type][3] * 100.0 / (double) nt_SendBytes);
+		LogMessageInternal("D:\\develop\\units\\net\\net.c", 0x7d, line, 1);
 	}
 }
 
@@ -318,10 +326,12 @@ connected:
 	len = 4;
 	if (getsockopt(s, SOL_SOCKET, SO_SNDBUF, (char*) &opt, &len) != SOCKET_ERROR) {
 		sprintf(buf, "getsockopt SO_SNDBUF: %d", opt);
+		LogMessageInternal("D:\\develop\\units\\net\\net.c", 0xf2, buf, 1);
 	}
 	len = 4;
 	if (getsockopt(s, SOL_SOCKET, SO_RCVBUF, (char*) &opt, &len) != SOCKET_ERROR) {
 		sprintf(buf, "getsockopt SO_RCVBUF: %d", opt);
+		LogMessageInternal("D:\\develop\\units\\net\\net.c", 0xf6, buf, 1);
 	}
 	nt_Socket = s;
 	res = s;
@@ -398,12 +408,15 @@ int __cdecl nt_Recv(void)
 				sprintf(buf,
 					"nt_Recv(): Received a Command with Count == cm_LastSyncCount, cmd->Count is %li, LastRequCnt is %li",
 					*(int*) (cmd + 8), cm_LastSyncCount);
+				LogMessageInternal("D:\\develop\\units\\net\\net.c", 0x142, buf, 1);
 			} else if (cmd[0] == 0x20 && cmd[0x10] == 0xe) {
 				sprintf(buf, "nt_Recv(): Received Sync, cmd->Count is %li, LastRequCnt is %li",
 					*(int*) (cmd + 8), nt_LastRequCount);
+				LogMessageInternal("D:\\develop\\units\\net\\net.c", 0x145, buf, 1);
 			} else {
 				sprintf(buf, "nt_Recv(): Lost a Command, cmd->Count is %li, nt_LastRequCount is %li",
 					*(int*) (cmd + 8), nt_LastRequCount);
+				LogMessageInternal("D:\\develop\\units\\net\\net.c", 0x148, buf, 1);
 				nt_LastRequCount = *(int*) (cmd + 8);
 			}
 		}

@@ -5235,6 +5235,38 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   the server's `ahm_LookupEntityInTable` walks a 10 x 0x5c table in command.c's `.data`, so the two builds
   declare that storage differently. Address brackets between equal-offset anchors are not proof by
   themselves: aemter's TL 0x4e98d0 brackets onto `g_module_path`, which the server uses.
+- **The TL client keeps every function it compiled (round 19).** It was linked with `/DEBUG` (its PDB path,
+  `...\Release\Europa1400Exp_TL.pdb`, is in the image), which makes `/OPT:NOREF` LINK's default:
+  298 functions in its game range have no call, jump or address reference anywhere in the image, against 3
+  in Europa1400Gold.exe and none in the server, which have no PDB path. So a TL TU is the whole client
+  compile of that file, and a function Europa1400Gold.exe lacks is one no client code calls, not a
+  different source. No unit function is in Europa1400Gold.exe but not in TL.
+- **Units (round 19).** Per unit, against both clients (`.scratch/measure/unit_align.py`):
+  - `m_alloc.c`, `net.c`, `vfs.c`, `unzip.c` and the zlib files: every TL function is built. TL also links
+    zlib's `compress.c` (0x45d520, 0x45d5d0) and `uncompr.c` (0x464500), unreferenced there; adding them
+    to the server would add two game C objects to Rich's 37.
+  - `Error.c`: TL keeps `ReportError` (0x41d950, 14 DIR32) and an unformatted `LogMessage` (0x41daf0, 5
+    DIR32), unreferenced, between `ReportFatalError` and `ReportMessage` and after `LogMessageInternal`.
+    Every operand is server storage or an existing literal and both compile to the TL bytes, but either
+    one flips `_strncnt`'s ICF survivor to `a_map.obj`, so they are not committed
+    (`.scratch/r19-units-deferred/`).
+  - `broadcast.c`: the dword 0xffffffff at the head of the server TU's `.data` is the client's broadcast
+    socket (TL 0x675170, initialised `INVALID_SOCKET` before the TU's literals, tested by every client
+    broadcast function). The client's open (0x402220) and send (0x402340) also use two `sockaddr_in`
+    (TL 0x1552010, 0x1552000) that the server does not allocate: LINK allocates COMMON in reverse input
+    order, so broadcast.obj's would follow Error.c's last game COMMON (`g_log_file_handle`, 0x11766204),
+    which CRT COMMON follows directly, and the TU has no plain `.bss` before Error.c's at 0x10034610. The
+    client's broadcast group was therefore not compiled into the server, and the close function
+    (0x402320), whose only storage is the socket, stays out with it (deferred patch). The receive loop
+    (0x402370) would also add `recvfrom`, an eighth dropped WS2_32 import, for which no IAT split is
+    exact. `SendBroadcastPacket` has no client twin.
+  - Log calls: the server's kept unit functions make 14 log calls the clients do not
+    (`CrashDumpUnhandledExceptionFilter` 4, `m_FreeTracked` 1, `m_ReportGroupInfo` 6,
+    `m_ShutdownAllocator` 1, `vfs_ReadData` 1, `SendBroadcastPacket` 1); only `vfs_ReadData`'s, whose
+    message is formatted, leaves a trace (its `sprintf`) in the clients. The ported `vfs_AddFile`,
+    `vfs_Tfopen`, `vfs_init`, `nt_FormatStats`, `nt_Connect` and `nt_Recv` now make the call after each
+    `sprintf` whose buffer the client never reads (ten calls, 9 DIR32: `nt_Connect`'s two share one path
+    operand); their line numbers are estimates. `.reloc` VirtualSize 61584 (403 DIR32 short).
 - **Measured** (native link of the committed tree against `original/Server/server.dll`; `.scratch/measure`
   scripts: section byte compare, IAT and hint/name compare per DLL, Rich records, link map, ICF predictor):
 
