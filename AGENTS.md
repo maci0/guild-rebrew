@@ -53,6 +53,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew verify --json` | Bulk verify all reversed files |
 | `rebrew lint --json` | Validate annotations and the stores: inline metadata (W019), stale marker VAs (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), data rows whose size disagrees with the owning definition (W037) or overlaps another row (W038), coverage-store hygiene — leftover `coverage.db`/grid JSON/CSV and documents the dashboards cannot serve (W032) |
 | `rebrew data list --json` | Inventory globals in .data/.rdata/.bss |
+| `rebrew data move 0xOLD 0xNEW` | Re-address a data row; drops its verdict, keeps verification history |
 | `rebrew types check` | Check struct layouts |
 | `rebrew types apply` | Rewrite signature types; preview with `--dry-run` |
 | `rebrew orphans list` | List metadata identities whose source is missing |

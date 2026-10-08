@@ -53,12 +53,11 @@ Code needs the interior names as separate symbols (the compiler's alias
 analysis and store scheduling depend on it), so C cannot define the whole
 allocation at once. The rows record the reference allocation's full extent;
 interior names and pads inside it are `alias` rows backed by it, and pads outside
-any allocation are spans. W037 therefore reports five rows whose leading
-definition is shorter than the allocation (`g_slot_table`, `g_entity_base`,
-`g_city_records`, `g_save_info`, `g_connections`); `g_town_records` and
-`g_alloc_root` are emitted under the names the code uses (`g_entity_end`,
-`g_alloc_root_name`), so W037 finds no definition to compare. These warnings stay
-until Rebrew can record a tiled allocation.
+any allocation are spans. W037 measures such a row as its leading definition plus
+the contiguous `alias` rows backed by it in the same file, so a tiling that leaves
+a gap or ends short of the row is reported. `g_town_records` and `g_alloc_root` are
+emitted under the names the code uses (`g_entity_end`, `g_alloc_root_name`), so
+W037 finds no definition to compare.
 
 Complete extents include string terminators and all array elements. The audit
 corrected 64 one-byte string records against full source initializers or native
