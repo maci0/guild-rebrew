@@ -141,16 +141,15 @@ Float-record consolidation LIVE (2026-10-04): source57178 running; baseline acce
 
 | Quantity | Value | Source |
 |---|---|---|
-| verify `passed` | **262/262** | gate's `BASELINE` |
-| `.text` residue | **0** | gate's `RESIDUE_BASELINE` |
-| raw-link `.data` divergence | **0** | gate's `DATA_BASELINE` |
-| relocation records missing / extra | **590 / 96** | `scripts/reloc_set_check.py` |
+| verify `passed` | **316/316** | gate's `BASELINE` |
+| `.text` residue | **0** | raw-link file identity |
+| raw-link `.data` divergence | **0** | raw-link file identity |
+| relocation records missing / extra | **?** | not measured; reloc_set_check.py removed |
 | raw-link import table | **matches** | gate, round 210 |
-| OBJECTIVE GAP (raw link vs reference) | **41565** | gate's `OBJECTIVE_BASELINE` |
-| ...of which | **12893 differing bytes in the common prefix, 28672 bytes of size shortfall** | gate's decomposition |
-| postlink layout-map coverage | **5143/7463 layout-map entries validate (68.9%** | gate -- **floor is 90%** |
-| annotations shorter than the binary | **1 function(s) are SHORTER than the binary's function (17 bytes** | `rebrew verify --json` |
-| `cmake --build` exit | **2** | gate's build step |
+| OBJECTIVE GAP (raw link vs reference) | **0** | raw-link file identity |
+| ...of which | **0 differing bytes in the common prefix, 0 bytes of size shortfall** | gate's decomposition |
+| annotations shorter than the binary | **?** | `rebrew verify --json` |
+| `cmake --build` exit | **0** | gate's build step |
 
 <!-- CURRENT-STATE:END -->
 
