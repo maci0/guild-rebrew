@@ -5161,8 +5161,8 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   plant's box cache 0x4bd1e0, which calls `_stricmp` and `_strnicmp` (an underscore-name game reference loads
   those members in the first library pass, ahead of where the reference has them; the old names do not, see
   5e); functions whose storage has no server allocation (aemter 0x4e98d0, alchemistry's card deck and
-  player prototype, sim 0x5007f0..0x500a20, most client-only loaders) and functions reaching them (spiel
-  0x502780, friedhof 0x4f1a40); and TL 0x522e30, the client's `ls_LoadEntities`.
+  player prototype, sim 0x5007f0..0x500a20, most client-only loaders) and functions reaching them (friedhof
+  0x4f1a40); and TL 0x522e30, the client's `ls_LoadEntities`. Round 19 ported spiel 0x502780 (below).
 - **ICF survivor.** LINK folds the identical `_strncnt` COMDATs of `a_cmp.obj` and `a_map.obj`; the reference
   keeps `a_cmp.obj`'s. LINK 6.00.8447 decides it with MSVCRT `qsort`: COMDAT resolution (0x4627e0) appends
   every executable COMDAT it keeps as a definition to one array, in resolution order (command-line objects,
@@ -5356,6 +5356,21 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
 
   `rebrew binary relocs` reports all 3499 sites and no extra one. With the placeholder log calls the linked
   `server.dll` is byte-identical to the reference (`cmp`).
+- **Round 19 sweep.** Every client-only TL function of the shared TUs is classified in
+  [client-only-sweep.md](client-only-sweep.md) (TL VA, DIR32, ported / ruled out / blocked, reason). New
+  storage proofs: the game clock is the 14-byte block at `g_current_year`; the client's 0x85ab80 tables are
+  the five 0x2a90 season tables at `g_entity_end`/`g_slot_array`; 0x868060.. is `g_city_records`; the
+  client's 0x696540 table is the server's unreferenced `g_spiel_const_table` byte for byte; the broadcast
+  socket is `g_broadcast_ff`. Ported from them: `amt_GetRankLimits`, `ahm_fio_SaveAvatars`, eleven spiel.c
+  helpers (clock, season prices, stat and kind records, building values) and `CloseBroadcastSocket`; the
+  sweep's copies of the building and town writers (TL 0x51ecf0, 0x520310) are replaced by the loadsave
+  ports below, which match the client byte for byte. `gm_GetGameTime` is defined after `gm_Open`: any
+  function defined before it changes `gm_Open`'s standalone compile (`rebrew verify`), though not the
+  linked image. The client's 88 x 0x18 array at 0x868c40 (TL 0x503a70) has no server allocation: the
+  server's relationship matrix directly follows `g_city_records`. Most remaining client-only code calls the
+  client's command senders (`cm_Request*`, about 100 functions queuing packets the server has no queue for)
+  or engine code and data; the sweep finds no further client-only function with absolute fixups that links
+  in the server.
 - **Left:** 404 of the 5535 DIR32 records come from placeholder log calls, not recovered code. Their real
   sources are discarded server code: client-only functions whose storage is not yet mapped (aemter's office
   counters, the loadsave writers that read unmapped tables, spiel's BAD set), the log calls the server's

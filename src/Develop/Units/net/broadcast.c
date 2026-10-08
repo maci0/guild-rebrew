@@ -35,3 +35,17 @@ void __cdecl SendBroadcastPacket(int port, char* buf)
 
 	LogMessageInternal("D:\\Develop\\Units\\net\\broadcast.c", 0x14f, "Sending Broadcast", 1);
 }
+
+/* Client-only (TL 0x402320, discarded): closes the broadcast socket and marks it closed. The socket is
+ * g_broadcast_ff: the client's copy (0x675170) is the same -1 dword at the head of this unit's .data,
+ * before its first string; no server code reads it. */
+void __cdecl CloseBroadcastSocket(void)
+{
+	SOCKET s;
+
+	s = (SOCKET) g_broadcast_ff;
+	if (s != INVALID_SOCKET) {
+		closesocket(s);
+		g_broadcast_ff = (unsigned int) INVALID_SOCKET;
+	}
+}

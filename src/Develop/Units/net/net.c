@@ -449,8 +449,6 @@ int __cdecl nt_Recv(void)
 		nt_RecvCmd = 0;
 		nt_RecvDone = 0;
 	}
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\develop\\units\\net\\net.c", __LINE__, "nt_Recv(): exit", 1);
 	return 0;
 }
 

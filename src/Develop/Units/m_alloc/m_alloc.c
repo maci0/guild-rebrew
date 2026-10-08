@@ -1149,8 +1149,6 @@ void* __cdecl m_pool_next(int* it)
 			it[0] = (int) ((struct BlockNode*) it[0])->next;
 		} while (it[0] != 0);
 	}
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_next(): exit", 1);
 	return 0;
 }
 
@@ -1279,6 +1277,4 @@ void __cdecl m_pool_stats(struct BlockNode* block, int* blocks, int* used, int* 
 	if (avg_size != 0) {
 		*avg_size = d;
 	}
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_stats(): exit", 1);
 }

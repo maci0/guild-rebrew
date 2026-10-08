@@ -460,8 +460,6 @@ void __cdecl vfs_AddFile(char* name, VFS_DIR* dir, VFS_DIR* source, int stamp, i
 	it->archive = archive;
 	it->offset = offset;
 	it->next = 0;
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_AddFile(): exit", 1);
 }
 
 /* Adds a file path below parent: creates the directories of its path, then the file. */
@@ -561,8 +559,6 @@ void __cdecl vfs_FinishFiles(VFS_DIR* dir, char recurse)
 			vfs_FinishFiles(dir->next, 1);
 		}
 	}
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_FinishFiles(): exit", 1);
 }
 
 /* Walks the '/'-separated directory path from dir down its children;
@@ -901,8 +897,6 @@ VFS_DIR* __cdecl vfs_ScanDir(char* path, VFS_DIR* parent)
 	if (parent == 0 && dir != 0) {
 		vfs_FinishFiles(dir, 1);
 	}
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_ScanDir(): exit", 1);
 	return dir;
 }
 
@@ -1626,8 +1620,6 @@ int __cdecl vfs_fseek(char* s, int off, int whence)
 			ReportMessage("Seeking only supported in read-only files");
 		}
 	}
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_fseek(): exit", 1);
 	return r;
 }
 

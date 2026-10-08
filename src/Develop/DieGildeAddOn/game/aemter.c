@@ -1082,6 +1082,85 @@ int __cdecl amt_FindVacantRoleBelow(int role)
 	return role;
 }
 
+/* Client-only (TL 0x4e9580, discarded): the fixed limits of a role's rank (the template's +8 byte,
+ * 1..9); 0 for an unknown role or rank. No server code reads the record. */
+typedef struct {
+	short lo;
+	short hi;
+	int cost_lo;
+	int cost_hi;
+	int a;
+	int b;
+	int c;
+	int d;
+} OFFICE_RANK_LIMITS;
+
+int __cdecl amt_GetRankLimits(int role, OFFICE_RANK_LIMITS* out)
+{
+	OFFICE_ROLE_TEMPLATE tmpl;
+
+	if (amt_GetRoleTemplate(role, &tmpl) == 0) {
+		return 0;
+	}
+	switch ((unsigned char) tmpl.f8) {
+	case 1:
+	case 2:
+		out->lo = 0x10;
+		out->hi = 0x14;
+		out->cost_lo = 0x9c400;
+		out->cost_hi = 0x138800;
+		out->a = 3;
+		out->b = 4;
+		out->c = 2;
+		out->d = 3;
+		return 1;
+	case 3:
+	case 4:
+		out->lo = 0x14;
+		out->hi = 0x18;
+		out->cost_lo = 0x138800;
+		out->cost_hi = 0x1d4c00;
+		out->a = 4;
+		out->b = 5;
+		out->c = 3;
+		out->d = 4;
+		return 1;
+	case 5:
+		out->lo = 0x18;
+		out->hi = 0x1c;
+		out->cost_lo = 0x1d4c00;
+		out->cost_hi = 0x271000;
+		out->a = 5;
+		out->b = 6;
+		out->c = 3;
+		out->d = 4;
+		return 1;
+	case 6:
+		out->lo = 0x18;
+		out->hi = 0x1c;
+		out->cost_lo = 0x222e00;
+		out->cost_hi = 0x30d400;
+		out->a = 6;
+		out->b = 7;
+		out->c = 3;
+		out->d = 5;
+		return 1;
+	case 7:
+	case 8:
+	case 9:
+		out->lo = 0x1c;
+		out->hi = 0x20;
+		out->cost_lo = 0x30d400;
+		out->cost_hi = 0x493e00;
+		out->a = 7;
+		out->b = 8;
+		out->c = 5;
+		out->d = 6;
+		return 1;
+	}
+	return 0;
+}
+
 int __cdecl amt_ListRolesOfLevel(int level, int max, int* out)
 {
 	OFFICE_ROLE_TEMPLATE tmpl;
@@ -1520,8 +1599,6 @@ int __cdecl amt_CountTownHallSeats(char* entity)
 	int i;
 	int n;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", __LINE__, "amt_CountTownHallSeats(): enter", 1);
 	if (ahm_CheckFlag(entity) == 0) {
 		return 0;
 	}
