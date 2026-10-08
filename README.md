@@ -86,7 +86,7 @@ guild-rebrew/
 ├── src/Develop/          # Reversed C, mirrors the original D:\Develop tree (all targets)
 ├── src/GOLD*.fcn_*.c     # Client-only functions with no shared source yet
 ├── original/             # Target binaries (gitignored)
-├── references/zlib/      # Reference source (zlib 1.1.3, submodule)
+├── references/          # Vendored zlib 1.1.3 and minizip: pristine upstream + patches (docs/vendoring.md)
 ├── db/                   # Function inventories (tracked), coverage data (ignored)
 ├── docs/                 # Codegen notes, traps, naming, TODO (map: docs/README.md)
 ├── layout/server.dll/    # Link layout package

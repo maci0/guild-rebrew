@@ -1,0 +1,23 @@
+zcalloc: allocate with malloc(items * size)
+
+Kind: game build change (no upstream release has it).
+
+The reference zcalloc at 0x100092e0 is `mov eax,[esp+8]; imul eax,[esp+0xc];
+push eax; call malloc (LIBCMT, 0x1001a7f7)`. Stock zlib 1.1.3 calls
+calloc(items, size), as do 1.1.2 and 1.1.4 and Gilles Vollant's prebuilt
+zlib113dll.zip static library (its _zcalloc pushes both arguments and calls
+calloc). Building the stock zutil.c loads calloc.obj and moves 26164 bytes.
+zlib 1.2.0 and later compute malloc(items * size) for 32-bit uInt, but no
+release carries that with the 1.1.3 sources and version strings.
+
+--- a/zutil.c
++++ b/zutil.c
+@@ -211,7 +211,7 @@
+     unsigned size;
+ {
+     if (opaque) items += size - size; /* make compiler happy */
+-    return (voidpf)calloc(items, size);
++    return (voidpf)malloc(items * size);
+ }
+ 
+ void  zcfree (opaque, ptr)
