@@ -1020,7 +1020,7 @@ int __cdecl ls_SaveTownData(void* file)
 	} TOWN_REC; /* 0x80 */
 
 	typedef struct {
-		int h[4];          /* 0x00 */
+		int h[4];           /* 0x00 */
 		TOWN_REC rec[0x55]; /* 0x10 */
 	} TOWN;                 /* 0x2a90 */
 
