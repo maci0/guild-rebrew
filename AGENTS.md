@@ -51,7 +51,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew match batch --near-miss --threshold 5` | Batch GA on NEAR_MATCHING functions with small deltas (Δ ≤ threshold) |
 | `rebrew source rename <old> <new>` | Rename function and update cross-references |
 | `rebrew verify --json` | Bulk verify all reversed files |
-| `rebrew lint --json` | Validate annotations and the stores: inline metadata (W019), stale marker VAs (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), coverage-store hygiene — leftover `coverage.db`/grid JSON/CSV and documents the dashboards cannot serve (W032) |
+| `rebrew lint --json` | Validate annotations and the stores: inline metadata (W019), stale marker VAs (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), data rows whose size disagrees with the owning definition (W037) or overlaps another row (W038), coverage-store hygiene — leftover `coverage.db`/grid JSON/CSV and documents the dashboards cannot serve (W032) |
 | `rebrew data list --json` | Inventory globals in .data/.rdata/.bss |
 | `rebrew types check` | Check struct layouts |
 | `rebrew types apply` | Rewrite signature types; preview with `--dry-run` |
@@ -59,6 +59,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew orphans prune` | Remove orphaned metadata through the locked writer; preview with `--dry-run` |
 | `rebrew verify --data --built build/<target>` | Byte-compare built data sections per symbol |
 | `rebrew verify --whole-binary --built build/<target>` | Sections/exports/imports/rsrc/headers + layout freshness |
+| `rebrew verify --text --raw-link --built build/<target>` | Check .text placement; record RELOC functions whose raw-link bytes equal the reference as linked EXACT |
 | `rebrew source graph --format summary` | Dependency graph stats and blockers |
 | `rebrew coverage catalog --json` | Catalog summary (no artifact of its own) |
 | `rebrew coverage build --json` | Write `db/coverage-<target>.toml`, the progress document the dashboards read |
@@ -123,13 +124,25 @@ note   = "inline asm detected"
 > Every write goes through `rebrew.metadata` / `rebrew.data_metadata` (locked + atomic) —
 > hand-edits bypass the lock and get clobbered.
 
-**STATUS values**, strongest claim first: `EXACT` (byte-perfect) > `RELOC` (match after
-masking relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete).  `PROVEN`
+**STATUS values**, strongest claim first: `EXACT` (byte-perfect in the object, or
+in the raw link: linked EXACT) > `RELOC` (match after masking relocations) >
+`NEAR_MATCHING` (close) > `STUB` (incomplete).  `PROVEN`
 (semantically verified) is **not** a byte match and does **not** outrank `EXACT`: it ranks
 **below** `RELOC`. Its proof depends on the modeled inputs, calls, and loop
 bounds; it does not establish identical bytes.  PROVEN is not sticky: the next
 `rebrew test`/`rebrew verify` records the byte result over it, and it must never be counted,
 reported or labelled as byte-matched.
+
+A **linked EXACT** is EXACT earned in the raw link: the function is RELOC in the
+object compare, but the raw linked image places it at its reference VA and its
+bytes there equal the reference with no masking, so the linked bytes are
+identical. `rebrew verify --text --raw-link` records it (the raw link only, never a
+postlinked image; configured `raw_link` counts as the acknowledgement) with the
+image path and SHA-256 in `verification`. Run it after any link that is
+byte-identical to the reference. It stays EXACT while the compile inputs and the
+image hash are unchanged; a rebuilt image with different bytes or an input
+change returns it to RELOC until the next `rebrew verify --text --raw-link`, and any
+real byte difference demotes it as usual.
 
 `origins` records accepted external fields; `verification` records comparison
 inputs and measurement time independently of ordinary `updated_by` /
