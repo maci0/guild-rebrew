@@ -14,7 +14,7 @@
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 void __cdecl gm_InitObjektHersteller(void);
-void __cdecl gm_InitEntitySlots(void);
+void __cdecl gm_KillAllSpieler(void);
 extern unsigned int g_player_record_src;
 extern unsigned int g_player_record_dst;
 extern void __cdecl srv_SeedRandomWithTime(void);
@@ -164,7 +164,7 @@ extern int g_query_limit;
 int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 
-void __cdecl gm_InitEntitySlots(void);
+void __cdecl gm_KillAllSpieler(void);
 
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_LookupEntityRecordById(int);
@@ -216,7 +216,7 @@ extern unsigned char g_stat_table[780];
 extern int g_next_family_index; 
 extern int gm_CurrentHumanFamilyCount; 
 
-double __cdecl gm_CalculateProductionValue(int, unsigned char);
+double __cdecl eval_ObjektPreis2Credits(int, unsigned char);
 int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);
 char* __cdecl gm_FindEntityByOwner(int); 
@@ -291,7 +291,7 @@ extern int g_clock_copy_mid;
 
 extern short g_clock_copy_tail;
 
-/* Indexed as `char g_entity_state_base[]` by cm_ExCreateCitizen.c and
+/* Indexed as `char g_entity_state_base[]` by cm_ExAllocCharacter.c and
    gm_Open.c; metadata records a 2-byte object at 0x100358a2 (round 925). */
 extern char g_entity_state_base[2];
 
@@ -916,7 +916,7 @@ int __cdecl gm_Open(int map_id)
 	 * (859 vs 861 bytes); the reference does not. */
 	((void (__cdecl*)(void)) gm_InitObjektHersteller)();
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x53a, "gm_Open(): gm_KillAllSpieler", 1);
-	gm_InitEntitySlots();
+	gm_KillAllSpieler();
 	LogMessageInternal(
 		"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
 		0x53e,
@@ -1335,7 +1335,7 @@ void __cdecl gm_RefreshSeasonSlots(int season)
 			v = gm_GetSlotBase(season, slot);
 			*(float*) (cell + 0x20) = (float) v;
 		}
-		*(float*) (cell + 0x38) = (float) gm_CalculateProductionValue(*(unsigned short*) cell, 100);
+		*(float*) (cell + 0x38) = (float) eval_ObjektPreis2Credits(*(unsigned short*) cell, 100);
 		*(int*) (cell + 0x24) = *(int*) (cell + 0x20);
 	}
 }
@@ -1418,15 +1418,15 @@ float __cdecl gm_GetSlotPrice(int season, int slot)
 		x *= factor;
 		ratio = x > 0.25 ? x : 0.25;
 		scale = ratio < 5.0 ? ratio : 5.0;
-		x = ((float) gm_CalculateProductionValue(id, 100) * (stock = (float) scale) - last) * 0.4f +
+		x = ((float) eval_ObjektPreis2Credits(id, 100) * (stock = (float) scale) - last) * 0.4f +
 			*(float*) &gm_SEASON_TABLES[season][0x48 + slot * 0x80];
 		if (*(float*) &gm_SEASON_TABLES[season][0x48 + slot * 0x80] <= g_const_0_0) {
-			return (float) gm_CalculateProductionValue(id, 100) < 512.0f ? 512.0f
-																		 : (float) gm_CalculateProductionValue(id, 100);
+			return (float) eval_ObjektPreis2Credits(id, 100) < 512.0f ? 512.0f
+																		 : (float) eval_ObjektPreis2Credits(id, 100);
 		}
 		return (float) x;
 	}
-	return (float) gm_CalculateProductionValue(id, 100);
+	return (float) eval_ObjektPreis2Credits(id, 100);
 }
 
 #undef gm_SEASON_TABLES
@@ -3416,7 +3416,7 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
  * link fields and sets capacity counters. */
 
 
-void __cdecl gm_InitEntitySlots(void)
+void __cdecl gm_KillAllSpieler(void)
 {
 	int i;
 	char* ptr;
@@ -5356,7 +5356,7 @@ float __cdecl gm_GetManufacturerRating(int item)
 }
 
 #pragma optimize("a", on)
-double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
+double __cdecl eval_ObjektPreis2Credits(int entity_index, int param2)
 {
 	char* entity; extern char g_minimum_manufacturer[];
 	char* record;
@@ -5461,7 +5461,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 			slot_p = &slot;
 			slot_v = (volatile int*) &slot;
 			sub = &quot;
-			*sub = gm_CalculateProductionValue(comp, param2);
+			*sub = eval_ObjektPreis2Credits(comp, param2);
 			*slot_p = (int) ingredient_cursor[-4];
 			*sub = *sub * *slot_p;
 			*slot_v = (int) *(unsigned short*) (entity + 0x36);
@@ -5505,7 +5505,7 @@ float __cdecl gm_GetSeasonPrice(int id, unsigned char season)
 			return *(float*) ((char*) &g_slot_array + 0x38 + season * 0x2a90 + i * 0x80);
 		}
 	}
-	return gm_CalculateProductionValue(id, 100);
+	return eval_ObjektPreis2Credits(id, 100);
 }
 
 /* Client-only mood, store and building-level helpers (discarded). */
@@ -5780,7 +5780,7 @@ int __cdecl gm_GetBuildingWorth(unsigned char* building, int* out)
 			if (c < 1) {
 				c = 1;
 			}
-			sum += (float) gm_CalculateProductionValue(*e, 100) * c;
+			sum += (float) eval_ObjektPreis2Credits(*e, 100) * c;
 		}
 	}
 	out[1] = (int) sum;
@@ -6045,7 +6045,7 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 				query_result = gm_ff_Objekt(*(int*) (obj + 0x5d), 1, 0, comp & 0x7fff);
 				if (query_result != NULL) {
 					q_slot = *query_result;
-					total = (int) (gm_CalculateProductionValue(q_slot, *(unsigned char*) ((char*) query_result + 0x12)) + (double) total);
+					total = (int) (eval_ObjektPreis2Credits(q_slot, *(unsigned char*) ((char*) query_result + 0x12)) + (double) total);
 					if (i < 0x3f) {
 						next_comp = *comp_ptr;
 						if (((char*) g_item_def_table)[(next_comp & 0x7fff) * 0x41] != 2 && ((char*) g_item_def_table)[(next_comp & 0x7fff) * 0x41] != 6) {
@@ -6057,7 +6057,7 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 		} else if (query_result != NULL) {
 			sub = gm_ff_Objekt(*(int*) ((char*) query_result + 0x14), 1, 0, comp & 0x7fff);
 			if (sub != NULL) {
-				total = (int) (gm_CalculateProductionValue(*sub, *(unsigned char*) ((char*) sub + 0x12)) + (double) total);
+				total = (int) (eval_ObjektPreis2Credits(*sub, *(unsigned char*) ((char*) sub + 0x12)) + (double) total);
 			}
 			if (i < 0x3f) {
 				next_comp = *comp_ptr;
@@ -6091,7 +6091,7 @@ int __cdecl gm_GetTypeProductValue(int type_index)
 		}
 		item = g_item_def_table + (w & 0x7fff) * 0x40 + (w & 0x7fff);
 		if (w & 0x8000) {
-			total = (int) (gm_CalculateProductionValue(*(unsigned char*) item, 100) + total);
+			total = (int) (eval_ObjektPreis2Credits(*(unsigned char*) item, 100) + total);
 		}
 	}
 	return total;
@@ -6185,7 +6185,7 @@ int __cdecl gm_EntityQuerySum(int arg1)
 		query_result = gm_ff_Objekt(*(int*) ((char*) head + 0x14), 1, 5);
 		if (query_result != NULL) {
 			do {
-				sum = (int) (gm_CalculateProductionValue(*(unsigned short*) query_result, *(unsigned char*) ((char*) query_result + 0x12)) + (double) sum);
+				sum = (int) (eval_ObjektPreis2Credits(*(unsigned short*) query_result, *(unsigned char*) ((char*) query_result + 0x12)) + (double) sum);
 				query_result = gm_NextEntityQueryMatch();
 			} while (query_result != NULL);
 		}
@@ -6421,7 +6421,7 @@ int __cdecl gm_GetWorkshopStock(char* building, void* stock)
 		out->val_sum += *(int*) ((char*) e + 0xe);
 		out->ids[out->n] = *e;
 		out->n++;
-		out->value = (int) (gm_CalculateProductionValue(*e, 100) * *(int*) ((char*) e + 0xe) + out->value);
+		out->value = (int) (eval_ObjektPreis2Credits(*e, 100) * *(int*) ((char*) e + 0xe) + out->value);
 		e = (unsigned short*) gm_NextEntityQueryMatch();
 	}
 	out->store = store;

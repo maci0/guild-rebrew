@@ -24,7 +24,7 @@ int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
 void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
-void __cdecl gm_InitEntitySlots(void);
+void __cdecl gm_KillAllSpieler(void);
 int __cdecl srv_AcceptConnections(void);
 void __cdecl srv_CleanupSockets(void);
 int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
@@ -39,7 +39,7 @@ int __cdecl ProcessSendData(void);
 
 int __cdecl srv_SendPlayerData(unsigned int*);
 
-int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+int __cdecl srv_PutConnSCommand(unsigned int* player, unsigned char* data);
 int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); 
 int ahm_GetCommandPayloadSize(unsigned char* cmd_payload);
 
@@ -157,7 +157,7 @@ __declspec(dllimport) unsigned int __stdcall timeGetTime(void);
 extern void __cdecl srand(unsigned int); /* CRT srand */
 
 /* Command layer (local externs — server.c uses different signatures) */
-int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+int __cdecl srv_PutConnSCommand(unsigned int* player, unsigned char* data);
 int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
 int __cdecl cm_ProcessCommandQueue(void);
 /* Entity lifecycle (local externs) */
@@ -219,7 +219,7 @@ extern void* g_thread_handle;
 #include "rebrew_globals.h"
 
 /* Command layer (local externs — server.header uses different signatures) */
-int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+int __cdecl srv_PutConnSCommand(unsigned int* player, unsigned char* data);
 int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
 int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
 
@@ -420,7 +420,7 @@ send_start_commands:
 			*(unsigned int*) (cmd_buffer_primary + 4) = 0xffffffff;
 			*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
 			cmd_buffer_primary[0x10] = (unsigned char) ((((host_flags_word & 8) != 0) ? 9 : 2));
-			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
+			if (srv_PutConnSCommand(player_slot, cmd_buffer_primary) == -1) {
 				goto cleanup_and_exit;
 			}
 
@@ -431,7 +431,7 @@ send_start_commands:
 			cmd_buffer_primary[0x10] = 7;
 			*(unsigned int*) (cmd_buffer_primary + 0x11) = (unsigned int) i;
 			i = i + 1;
-			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
+			if (srv_PutConnSCommand(player_slot, cmd_buffer_primary) == -1) {
 				goto cleanup_and_exit;
 			}
 		}
@@ -494,7 +494,7 @@ send_start_commands:
 						*(unsigned int*) (cmd_buffer_primary + 4) = *transfer_progress;
 						*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
 						*(unsigned int*) (cmd_buffer_primary + 0x10) = total_size;
-						if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
+						if (srv_PutConnSCommand(player_slot, cmd_buffer_primary) == -1) {
 							goto cleanup_and_exit;
 						}
 						*transfer_progress = 0;
@@ -508,7 +508,7 @@ send_start_commands:
 						*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
 						memcpy(payload_dst, payload_src, 0x80);
 
-						if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) != -1) {
+						if (srv_PutConnSCommand(player_slot, cmd_buffer_primary) != -1) {
 							*transfer_progress = *transfer_progress + 0x80;
 						}
 						else {
@@ -604,7 +604,7 @@ send_start_commands:
 			*(unsigned int*) (cmd_buffer_secondary + 4) = 0xffffffff;
 			*(unsigned int*) (cmd_buffer_secondary + 0xc) = 0;
 			cmd_buffer_secondary[0x10] = 4;
-			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_secondary) == -1) {
+			if (srv_PutConnSCommand(player_slot, cmd_buffer_secondary) == -1) {
 				goto cleanup_and_exit;
 			}
 		}
@@ -648,7 +648,7 @@ send_start_commands:
 			if ((*player_slot != 0) && ((*player_slot & 0x40) != 0)) {
 				LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x2ce, "Usefull Sync", 1);
 				*player_slot = *player_slot & 0xffffffbf;
-				if (cm_QueuePlayerCommand(player_slot, (unsigned char*) ((char*) player_slot + 0x264154)) == -1) {
+				if (srv_PutConnSCommand(player_slot, (unsigned char*) ((char*) player_slot + 0x264154)) == -1) {
 					goto cleanup_and_exit;
 				}
 			}
@@ -707,7 +707,7 @@ send_start_commands:
 				*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
 				*(unsigned int*) (cmd_buffer_primary + 0x18) = sync_p1;
 				*(unsigned short*) (cmd_buffer_primary + 0x1c) = sync_p2;
-				if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
+				if (srv_PutConnSCommand(player_slot, cmd_buffer_primary) == -1) {
 					goto cleanup_and_exit;
 				}
 			}
@@ -731,7 +731,7 @@ send_start_commands:
 					else {
 						*(unsigned int*) (cmd_buffer_secondary + 0x11) = 0;
 					}
-					if (cm_QueuePlayerCommand(player_slot, cmd_buffer_secondary) == -1) {
+					if (srv_PutConnSCommand(player_slot, cmd_buffer_secondary) == -1) {
 						goto cleanup_and_exit;
 					}
 					*(int*) &g_players_synced = 0;
@@ -785,7 +785,7 @@ int __cdecl srv_Init(void)
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x3cd, msg, 1);
 		goto srv_done;
 	}
-	gm_InitEntitySlots();
+	gm_KillAllSpieler();
 	srv_InitBuildingTypeTable();
 	g_net_socket = srv_CreateListenSocket(*(int*) &g_tick_rate);
 	if (g_net_socket == -1) {
@@ -905,7 +905,7 @@ void __cdecl srv_CleanupSockets(void)
 	shutdown(g_net_socket, 2);
 	closesocket(g_net_socket);
 	WSACleanup();
-	gm_InitEntitySlots();
+	gm_KillAllSpieler();
 	gm_ResetAllEntities();
 	gm_CleanupObjectEntities();
 	gm_CleanupAllEntities();
@@ -1232,7 +1232,7 @@ int __cdecl srv_LoadBuf(void)
 						header = (unsigned int*) (pkt - 0x18);
 						conn[0xb] = status;
 						conn[0xc] = (*header & 0x400) ? 1 : 2;
-						if (cm_QueuePlayerCommand(header, pkt) == -1) {
+						if (srv_PutConnSCommand(header, pkt) == -1) {
 							return -1;
 						}
 					}
@@ -1297,7 +1297,7 @@ int __cdecl srv_LoadBuf(void)
 					LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x609, logbuf_hi, 1);
 					*conn = *conn & 0xffffff7f;
 					pktbuf[0] = 2;
-					if (cm_QueuePlayerCommand(conn, pktbuf) == -1) {
+					if (srv_PutConnSCommand(conn, pktbuf) == -1) {
 						return -1;
 					}
 					goto done_inner;
@@ -1340,7 +1340,7 @@ int __cdecl srv_LoadBuf(void)
 		admin_flags = *(unsigned char*) &g_player_slot_overflow;
 		if ((admin_flags & 0x80) != 0) {
 			pktbuf[0] = 2;
-			cm_QueuePlayerCommand((unsigned int*) &g_player_slot_overflow, pktbuf);
+			srv_PutConnSCommand((unsigned int*) &g_player_slot_overflow, pktbuf);
 			cm_ClosePlayerConnection((unsigned int*) &g_player_slot_overflow);
 			goto done;
 		}
@@ -1423,7 +1423,7 @@ int __cdecl srv_QueueCommandForProcessing(unsigned int* player_slot, unsigned ch
 /* Queues a player command for processing. Wraps the command
  * with player slot info and adds to the processing queue. */
 
-int __cdecl cm_QueuePlayerCommand(unsigned int* player_slot, unsigned char* cmd_data)
+int __cdecl srv_PutConnSCommand(unsigned int* player_slot, unsigned char* cmd_data)
 {
 	char* buf;
 	int tail;
@@ -1492,7 +1492,7 @@ void __cdecl list_unlink_relink(char* ctx, char* node)
 
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 int __cdecl ahm_ProcessEntityChain(char* cmd_payload);
-int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+int __cdecl srv_PutConnSCommand(unsigned int* player, unsigned char* data);
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 
 int __cdecl cm_ProcessCommandQueue(void* a)
@@ -1564,7 +1564,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 				t2 = ((unsigned char*) g_connections)[(unsigned int) *(unsigned char*) (pkt + 3) * 0x264264];
 				slot = (char*) g_connections + (unsigned int) *(unsigned char*) (pkt + 3) * 0x264264;
 				if ((t2 & 1) != 0) {
-					if (cm_QueuePlayerCommand((unsigned int*) slot, (unsigned char*) pkt) == -1) {
+					if (srv_PutConnSCommand((unsigned int*) slot, (unsigned char*) pkt) == -1) {
 						return -1;
 					}
 				}
@@ -1574,7 +1574,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 				do {
 					if (i != (int) *(unsigned char*) (pkt + 3) &&
 					    (*(unsigned char*) slot & 1) != 0) {
-						if (cm_QueuePlayerCommand((unsigned int*) slot, (unsigned char*) pkt) == -1) {
+						if (srv_PutConnSCommand((unsigned int*) slot, (unsigned char*) pkt) == -1) {
 							return -1;
 						}
 					}
@@ -1587,7 +1587,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 				if ((*(unsigned char*) &((unsigned int*) g_connections)[(unsigned int) *(unsigned char*) (pkt + 3) * 0x99099] & 1) != 0) {
 					*(unsigned char*) pkt = 2;
 					slot = (char*) &((unsigned int*) g_connections)[(unsigned int) *(unsigned char*) (pkt + 3) * 0x99099];
-					if (cm_QueuePlayerCommand((unsigned int*) slot, (unsigned char*) pkt) == -1) {
+					if (srv_PutConnSCommand((unsigned int*) slot, (unsigned char*) pkt) == -1) {
 						return -1;
 					}
 				}

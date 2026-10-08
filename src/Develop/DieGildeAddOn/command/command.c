@@ -65,7 +65,7 @@ extern char* g_item_def_table;
 
 extern unsigned char g_current_season;
 
-double __cdecl gm_CalculateProductionValue(uint, int);
+double __cdecl eval_ObjektPreis2Credits(uint, int);
 int __cdecl gm_EntityAccumulate(void*);
 
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
@@ -722,7 +722,7 @@ int __cdecl cm_ExAllocSpieler();
 int __cdecl cm_ExAllocClientSpieler();
 int __cdecl cm_ExChangePlayerIdentity();
 int __cdecl cm_ExFree();
-int __cdecl cm_ExTransferCurrency();
+int __cdecl cm_ExMoveCredits();
 int __cdecl cm_ExTransferCurrencyNoKill();
 int __cdecl cm_ExSellObjekt();
 int __cdecl cm_ExProdObjekt();
@@ -735,12 +735,12 @@ int __cdecl cm_ExChangeDesire();
 int __cdecl cm_ExChangeBits();
 int __cdecl cm_ExChangeFloat();
 int __cdecl cm_ExCopyEntityData();
-int __cdecl cm_ChainAssignId();
+int __cdecl cm_ExSetHE();
 int __cdecl cm_ChainNoop();
-int __cdecl cm_ExSetSyncFlags();
+int __cdecl cm_ExSysMessage();
 int __cdecl cm_ExKillSpieler();
-int __cdecl cm_AssignSequenceCounter();
-int __cdecl cm_AssignEntityId();
+int __cdecl cm_ExAddStraftat();
+int __cdecl cm_ExAllocCutscene();
 int __cdecl cm_ExRemoveLinkedObject();
 int __cdecl cm_ChainRecordLookup();
 int __cdecl cm_ExAllocThemaPredigt();
@@ -751,7 +751,7 @@ int __cdecl cm_ExDestroyBuilding();
 int __cdecl cm_ExEmployWorker();
 int __cdecl cm_ExAssignOffice();
 int __cdecl cm_ExExecuteOffice();
-int __cdecl cm_ExCreateCitizen();
+int __cdecl cm_ExAllocCharacter();
 int __cdecl cm_ExKillTransporter();
 int __cdecl cm_ExCondWrite();
 int __cdecl cm_ExCreateGeb();
@@ -760,7 +760,7 @@ int __cdecl cm_ExElectionOrTrade();
 int __cdecl cm_ExJoinLeaveElection();
 int __cdecl cm_ExCondWrite2();
 int __cdecl cm_ChkEntityLookup();
-int __cdecl cm_ExCutsceneUpdate();
+int __cdecl cm_ExCutsceneReady();
 int __cdecl cm_ExModifyHealth();
 int __cdecl cm_ExModifyStamina();
 int __cdecl cm_ExSimCommand();
@@ -831,19 +831,19 @@ int(__cdecl* g_dispatch_table[106])(unsigned char* pkt, int param) = {
     (int(__cdecl*)(unsigned char*, int)) cm_MarkAndReturn, (int(__cdecl*)(unsigned char*, int)) cm_MarkAndReturn,
     (int(__cdecl*)(unsigned char*, int)) cm_ExAllocRaum, (int(__cdecl*)(unsigned char*, int)) cm_ExAllocSpieler,
     (int(__cdecl*)(unsigned char*, int)) cm_ExAllocClientSpieler, (int(__cdecl*)(unsigned char*, int)) cm_ExChangePlayerIdentity,
-    (int(__cdecl*)(unsigned char*, int)) cm_ExFree, (int(__cdecl*)(unsigned char*, int)) cm_ExTransferCurrency,
+    (int(__cdecl*)(unsigned char*, int)) cm_ExFree, (int(__cdecl*)(unsigned char*, int)) cm_ExMoveCredits,
     (int(__cdecl*)(unsigned char*, int)) cm_ExTransferCurrencyNoKill, (int(__cdecl*)(unsigned char*, int)) cm_ExSellObjekt,
     (int(__cdecl*)(unsigned char*, int)) cm_ExProdObjekt, (int(__cdecl*)(unsigned char*, int)) cm_ExMoveObjekt,
     (int(__cdecl*)(unsigned char*, int)) cm_ExClearLagerslot, (int(__cdecl*)(unsigned char*, int)) cm_ExAllocObjekt,
     (int(__cdecl*)(unsigned char*, int)) cm_ExChangeAttribute, (int(__cdecl*)(unsigned char*, int)) cm_ExSetAttribute,
     (int(__cdecl*)(unsigned char*, int)) cm_ExChangeDesire, (int(__cdecl*)(unsigned char*, int)) cm_ExChangeBits,
     (int(__cdecl*)(unsigned char*, int)) cm_ExChangeFloat, (int(__cdecl*)(unsigned char*, int)) cm_ExCopyEntityData,
-    (int(__cdecl*)(unsigned char*, int)) cm_ChainAssignId, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
+    (int(__cdecl*)(unsigned char*, int)) cm_ExSetHE, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
     (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
-    (int(__cdecl*)(unsigned char*, int)) cm_ExSetSyncFlags, (int(__cdecl*)(unsigned char*, int)) cm_ExKillSpieler,
-    (int(__cdecl*)(unsigned char*, int)) cm_AssignSequenceCounter, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
+    (int(__cdecl*)(unsigned char*, int)) cm_ExSysMessage, (int(__cdecl*)(unsigned char*, int)) cm_ExKillSpieler,
+    (int(__cdecl*)(unsigned char*, int)) cm_ExAddStraftat, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
     (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
-    (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_AssignEntityId,
+    (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ExAllocCutscene,
     (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
     (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ExRemoveLinkedObject,
     (int(__cdecl*)(unsigned char*, int)) cm_ChainRecordLookup, (int(__cdecl*)(unsigned char*, int)) cm_ExAllocThemaPredigt,
@@ -860,7 +860,7 @@ int(__cdecl* g_dispatch_table[106])(unsigned char* pkt, int param) = {
     (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
     (int(__cdecl*)(unsigned char*, int)) cm_ExAssignOffice, (int(__cdecl*)(unsigned char*, int)) cm_ExExecuteOffice,
     (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
-    (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ExCreateCitizen,
+    (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ExAllocCharacter,
     (int(__cdecl*)(unsigned char*, int)) cm_ExKillTransporter, (int(__cdecl*)(unsigned char*, int)) cm_ExCondWrite,
     (int(__cdecl*)(unsigned char*, int)) cm_ExCreateGeb, (int(__cdecl*)(unsigned char*, int)) cm_ExCondWrite,
     (int(__cdecl*)(unsigned char*, int)) cm_ExCondWrite, (int(__cdecl*)(unsigned char*, int)) cm_ExCondWrite,
@@ -868,7 +868,7 @@ int(__cdecl* g_dispatch_table[106])(unsigned char* pkt, int param) = {
     (int(__cdecl*)(unsigned char*, int)) cm_InitDefaultResponse, (int(__cdecl*)(unsigned char*, int)) cm_ExElectionOrTrade,
     (int(__cdecl*)(unsigned char*, int)) cm_ExJoinLeaveElection, (int(__cdecl*)(unsigned char*, int)) cm_InitDefaultResponse,
     (int(__cdecl*)(unsigned char*, int)) cm_ExCondWrite2, (int(__cdecl*)(unsigned char*, int)) cm_ChkEntityLookup,
-    (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ExCutsceneUpdate,
+    (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop, (int(__cdecl*)(unsigned char*, int)) cm_ExCutsceneReady,
     (int(__cdecl*)(unsigned char*, int)) cm_ExModifyHealth, (int(__cdecl*)(unsigned char*, int)) cm_ExModifyStamina,
     (int(__cdecl*)(unsigned char*, int)) cm_ExSimCommand, (int(__cdecl*)(unsigned char*, int)) cm_ExModifyStat,
     (int(__cdecl*)(unsigned char*, int)) cm_ExAllocWarEvent, (int(__cdecl*)(unsigned char*, int)) cm_ChainNoop,
@@ -1045,11 +1045,11 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src);
  * slot at offset 0x264200. Writes result status into result[0]. */
 
 
-/* cm_ChainAssignId - proper C */
+/* cm_ExSetHE - proper C */
 
 extern int g_chain_id_start;
 
-/* cm_AssignSequenceCounter - proper C */
+/* cm_ExAddStraftat - proper C */
 
 extern int g_sequence_counter;
 
@@ -1742,7 +1742,7 @@ int __cdecl cm_ExFree(int cmd, char* result)
  * Currency type is indexed from g_entity_slot_table. Returns 1
  * if subtraction fails (insufficient funds). */
 
-int __cdecl cm_ExTransferCurrency(int cmd, char* result)
+int __cdecl cm_ExMoveCredits(int cmd, char* result)
 {
 	void* entity_ptr;
 	int field_result;
@@ -2358,7 +2358,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 			*(int*)(material_iter + 0xe) = 4;
 		}
 	}
-	production_value = (long)(gm_CalculateProductionValue((uint)*(ushort*)(msg + 0x14), 100) * quantity);
+	production_value = (long)(eval_ObjektPreis2Credits((uint)*(ushort*)(msg + 0x14), 100) * quantity);
 	production_cap = gm_EntityAccumulate(lager);
 	if (production_cap != 0) {
 		*(int*)(production_cap + 0x4d) = *(int*)(production_cap + 0x4d) + (int)production_value;
@@ -3236,7 +3236,7 @@ level_done:
  * packet at offset 0x10, then increments the global counter. */
 
 
-int __cdecl cm_ChainAssignId(int cmd, char* result)
+int __cdecl cm_ExSetHE(int cmd, char* result)
 {
 	(void) result;
 
@@ -3248,7 +3248,7 @@ int __cdecl cm_ChainAssignId(int cmd, char* result)
 /* Execution handler: sets synchronization flags on a player slot.
  * Handles three flag types: 0x01 (sets flag 0x20), 0x0e (sets
  * flag 0x40), 0x12 (sets game speed from g_game_speed_table). */
-int __cdecl cm_ExSetSyncFlags(int cmd, char* result)
+int __cdecl cm_ExSysMessage(int cmd, char* result)
 {
 	int speed_index;
 
@@ -3296,7 +3296,7 @@ int __cdecl cm_ExKillSpieler(int cmd)
  * at offset 0x10, then increments the global counter. */
 
 
-int __cdecl cm_AssignSequenceCounter(int cmd, char* result)
+int __cdecl cm_ExAddStraftat(int cmd, char* result)
 {
 	(void) result;
 
@@ -3309,7 +3309,7 @@ int __cdecl cm_AssignSequenceCounter(int cmd, char* result)
  * offset 0x10, records a timestamp at 0x14, then increments the
  * global ID counter. Used when creating new game entities. */
 
-int __cdecl cm_AssignEntityId(int cmd, char* result)
+int __cdecl cm_ExAllocCutscene(int cmd, char* result)
 {
 	DWORD timestamp;
 
@@ -3860,7 +3860,7 @@ int __cdecl cm_ExExecuteOffice(void* cmd, char* result)
 
 /* Round-536: ascending REF VA decl order (R521/R531–R535 mid-pocket lever; 2-string cluster). */
 
-int __cdecl cm_ExCreateCitizen(int cmd, char* result)
+int __cdecl cm_ExAllocCharacter(int cmd, char* result)
 {
 	int field;
 	unsigned int entity;
@@ -4236,7 +4236,7 @@ int __cdecl cm_ChkEntityLookup(int cmd, char* result)
  * cutscene-related commands for entity state transitions
  * during in-game cinematics. */
 
-int __cdecl cm_ExCutsceneUpdate(int cmd, char* result)
+int __cdecl cm_ExCutsceneReady(int cmd, char* result)
 {
 	int readyResult;
 	int entityRecord;

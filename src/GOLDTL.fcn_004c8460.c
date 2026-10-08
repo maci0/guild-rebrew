@@ -5,7 +5,7 @@ extern char* g_item_def_table;
 extern unsigned char g_current_season;
 
 short* __cdecl gm_ResolveParentEntity(short*);
-double __cdecl gm_CalculateProductionValue(uint, int);
+double __cdecl eval_ObjektPreis2Credits(uint, int);
 int __cdecl gm_EntityAccumulate(void*);
 
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
@@ -133,7 +133,7 @@ int __cdecl fcn_004c8460(int msg, char* result)
 			*(int*)(material_iter + 0xe) = 4;
 		}
 	}
-	production_value = (long)(gm_CalculateProductionValue((uint)*(ushort*)(msg + 0x14), 100) * quantity);
+	production_value = (long)(eval_ObjektPreis2Credits((uint)*(ushort*)(msg + 0x14), 100) * quantity);
 	production_cap = gm_EntityAccumulate(lager);
 	if (production_cap != 0) {
 		*(int*)(production_cap + 0x4d) = *(int*)(production_cap + 0x4d) + (int)production_value;

@@ -362,19 +362,19 @@ order below is the table order, not an inference from the C source:
 | id | handler | address | role |
 |---|---|---|---|
 | 0 | `lb_ExPlayerlist` | `0x100145e0` | send the player list |
-| 1 | `lb_SendLobbyConfig` | `0x100146c0` | send lobby configuration |
+| 1 | `lb_ExPlayerReadyStatus` | `0x100146c0` | store a player's ready status (player+0x264210, flag 0x800) |
 | 2 | `lb_ExPlayerHasJoined` | `0x100147b0` | a player joined |
 | 3 | `lb_BroadcastStateChange` | `0x10014a50` | broadcast a state change |
 | 4 | `lb_ExPlayerRecordBroadcast` | `0x10014af0` | distribute one player's record to the others |
 | 5 | `lb_HandleEntitySync` | `0x10014bf0` | entity synchronisation |
 | 6 | `cm_RouteCommand` | `0x10014ca0` | hand off to the `cm_` layer |
 
-The call sites carry the symbol names directly (`call 0x100146c0  ; lb_SendLobbyConfig`), so this table is
-attested rather than reconstructed. Two consequences worth keeping: `lb_` and `cm_` are **one dispatch
-chain**, not independent modules: case 6 crosses into `cm_`, so a `cm_` rename can reach lobby code. And
-`lb_SendLobbyConfig` has no `.c` of its own; it shares `lb_ExPlayerlist.c`. The dispatcher's own log string
-(`0x1002d858`, `"lb_ExLobbyServerCommand: %i"`) confirms the name it prints is the real symbol, which is why
-that row in the attested table reads "already correct".
+The ids and handler addresses come from the jump table; the names do not. `lb_ExPlayerlist`,
+`lb_ExPlayerReadyStatus`, `lb_ExPlayerHasJoined` and the dispatcher `lb_ExLobbyServerCommand` are attested
+by their own log strings (`"Got lb_ExPlayerReadyStatus"` is pushed at `0x1001478a`, the `Got <own name>` form
+`lb_ExPlayerlist` uses); the other three names are inferred. `lb_` and `cm_` are **one dispatch chain**, not
+independent modules: case 6 crosses into `cm_`, so a `cm_` rename can reach lobby code. All seven handlers
+are defined in `command/lobbycommands.c`.
 
 ### Verb Vocabulary
 
@@ -522,7 +522,7 @@ function VA that references it. A string shaped `"<name>(): ..."` or
 Every name below was then **verified against the code**: the function at the
 stated VA is disassembled and confirmed to push the literal address of that
 string. RevEng's attribution alone is not trusted (it wrongly attached
-`_main_:` to `0x100068e0` and `lb_ExPlayerReadyStatus` to `0x100146c0`).
+`_main_:` to `0x100068e0`).
 
 Reproduce:
 
@@ -551,7 +551,7 @@ rebrew binary asm show 0x<VA> --size <size>| grep 'push 0x100[23]'
 | `0x1000f3b0` | `cm_ExSetGebBesitzer` | already correct (round 1108) |
 | `0x1000f590` | `cm_ExSetGebUpgrade` | already correct (round 1108) |
 | `0x1000f730` | `cm_ExEmployWorker` | already correct (round 1108) |
-| `0x1000f980` | `cm_ExAllocCharacter` (log prefix only) | kept as `cm_ExCreateCitizen`; the body logs `"cm_ExAllocCharacter():gm_AllocSpieler() failed"` (`0x1002d364`): log-prefix-only attestation, same standing as `gm_AllocGebaeude` at `0x10017330` |
+| `0x1000f980` | `cm_ExAllocCharacter` | renamed from `cm_ExCreateCitizen`; the body logs `"cm_ExAllocCharacter():gm_AllocSpieler() failed"` (`0x1002d364`) and `"Invalid 'GI_Id' for cmdt_ALLOC_CHARACTER"`, and no other function holds the name |
 | `0x1000fad0` | `cm_ExKillTransporter` | already correct (round 1108) |
 | `0x1000fb30` | `cm_ExCreateGeb` | already correct |
 | `0x10010700` | `gv_eval_SlotFrei` | renamed from `fcn_10010700`; a `FindSlotEntryFiltered` filter callback (address taken by 3 callers, so no `call` reaches it); true when the entry's owner id at +4 is -1 |
@@ -559,6 +559,7 @@ rebrew binary asm show 0x<VA> --size <size>| grep 'push 0x100[23]'
 | `0x10011bf0` | `gv_ExAllocGraveyardWorker` | already correct |
 | `0x10014070` | `ls_ID2Ptr` | already correct |
 | `0x10014260` | `srv_RecvGame` | already correct; the same body also logs `LoadGame():` and `ls_RecvGame():` |
+| `0x100146c0` | `lb_ExPlayerReadyStatus` | renamed from `lb_SendLobbyConfig`; pushes `"Got lb_ExPlayerReadyStatus"` (`0x1002d758`) at `0x1001478a` |
 | `0x100147b0` | `lb_ExPlayerHasJoined` | renamed from `lb_HandleLobbyCommands` |
 | `0x10014af0` | `lb_ExPlayerRecordBroadcast` | renamed from `fcn_10014af0`; the site pushes `__FILE__` = `...\command\lobbycommands.c` and logs `"invalid client state"`; is `case 4` of the `lb_ExLobbyServerCommand` switch |
 | `0x10014db0` | `lb_ExLobbyServerCommand` | already correct |
@@ -1029,3 +1030,26 @@ broadcast.c). TL VA from the sweep table or the definition's comment.
 | types `TOWN`, `TOWN_REC` | `DieGildeAddOn/loadsave/loadsave.c` | |
 | macros `NT_CMD_LEN`, `NT_CMD_HEADER` | `Units/net/net.c` | |
 | file `references/minizip/unzip.c` | minizip 0.15 plus the game's `unzGetFilePos`/`unzGoToFilePos` (`vendoring.md`) | |
+
+### Renames from the identifier audit (2026-10-08)
+
+Older docs (`TODO.md`, `codegen-walls.md`, the `msvc6-*.md` records) keep the names in use when they were
+written. This table maps them to the current names. Evidence and grades are in the inferred-name table
+below; `attested` entries are also in the attested table above.
+
+| Image | VA | Old name | Current name | Grade |
+|---|---|---|---|---|
+| server.dll | `0x100146c0` | `lb_SendLobbyConfig` | `lb_ExPlayerReadyStatus` | attested |
+| server.dll | `0x1000f980` | `cm_ExCreateCitizen` | `cm_ExAllocCharacter` | attested |
+| server.dll | `0x10022107` | `crtLoadWinAPI` | `__crtMessageBoxA` | attested (LIBCMT exports `___crtMessageBoxA`; the `pfnMessageBoxA` rows are its function statics `?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9`) |
+| server.dll | `0x1000a9a0` | `cm_QueuePlayerCommand` | `srv_PutConnSCommand` | strong |
+| server.dll, GOLD `0x00503e80`, TL `0x00506cd0` | `0x100180d0` | `gm_InitEntitySlots` | `gm_KillAllSpieler` | strong |
+| server.dll | `0x10019720` | `gm_CalculateProductionValue` | `eval_ObjektPreis2Credits` | strong |
+| server.dll | `0x1000ef90` | `cm_ChainAssignId` | `cm_ExSetHE` | strong |
+| server.dll | `0x1000efb0` | `cm_ExSetSyncFlags` | `cm_ExSysMessage` | strong |
+| server.dll | `0x1000f080` | `cm_AssignSequenceCounter` | `cm_ExAddStraftat` | strong |
+| server.dll | `0x1000f0a0` | `cm_AssignEntityId` | `cm_ExAllocCutscene` | strong |
+| server.dll | `0x1000d7f0` | `cm_ExTransferCurrency` | `cm_ExMoveCredits` | strong |
+| server.dll | `0x1000ff60` | `cm_ExCutsceneUpdate` | `cm_ExCutsceneReady` | strong |
+| TL | `0x0044c460` | `cm_ExCreateCitizen` (bound to the server body) | `d3_LoadObjectAnim` (own STUB file) | attested |
+| TL | `0x00406560` | `cm_ExCutsceneUpdate` | `CharacterClearSitting` | weak |
