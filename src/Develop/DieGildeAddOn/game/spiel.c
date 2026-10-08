@@ -2993,8 +2993,6 @@ unsigned char* __cdecl gm_FindNearestOfKind(unsigned char* self, int kind)
 	float dz;
 	float d;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindNearestOfKind(): enter", 1);
 	best = 1e8f;
 	found = 0;
 	for (e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
@@ -3063,8 +3061,6 @@ int __cdecl gm_ListTypesOfKind(int kind, int* out)
 	int n;
 	int i;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListTypesOfKind(): enter", 1);
 	n = 0;
 	for (i = 0; i < 0x58; i++) {
 		if ((unsigned char) g_entity_type_table[i * 0x24d] == kind) {
@@ -3077,8 +3073,6 @@ int __cdecl gm_ListTypesOfKind(int kind, int* out)
 
 int __cdecl gm_IsWarehouse(unsigned char* building)
 {
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_IsWarehouse(): enter", 1);
 	return g_entity_type_table[*building * 0x24d] == 10;
 }
 
@@ -3115,8 +3109,6 @@ int __cdecl gm_CollectBuildingResidents(unsigned char* building, unsigned char* 
 	int count;
 	int i;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CollectBuildingResidents(): enter", 1);
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
 	out[0] = 0;
 	for (i = 0; i < 0x18; i++) {
@@ -3520,8 +3512,6 @@ int __cdecl gm_EntityHasOffice(unsigned short slot, int n, ...)
 	int found;
 	int i;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_EntityHasOffice(): enter", 1);
 	found = 0;
 	e = g_slot_table + slot * 0x21c;
 	if (n <= -1) {
@@ -3543,8 +3533,6 @@ int __cdecl gm_EntityHasProfession(unsigned short slot, int n, ...)
 	int found;
 	int i;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_EntityHasProfession(): enter", 1);
 	found = 0;
 	profession = g_slot_table[slot * 0x21c + 0x164];
 	if (n <= -1) {
@@ -3573,8 +3561,6 @@ int __cdecl gm_SlotKindIsOneOf(unsigned short slot, int n, ...)
 	int r;
 	int i;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SlotKindIsOneOf(): enter", 1);
 	r = 0;
 	rec = ((struct SLOT_COPY*) g_slot_table)[slot];
 	if (n <= -1) {
@@ -3698,8 +3684,6 @@ int __cdecl gm_GetRangeBuildingKind(int range)
 
 int __cdecl gm_GetSkillPair(int skill, int* first, int* second)
 {
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetSkillPair(): enter", 1);
 	switch (skill) {
 	case 2:
 		*first = 1;
@@ -3952,8 +3936,6 @@ void __cdecl gm_RingGuildHallBell(int guild)
 	char* __cdecl gm_GetGuildHall(int guild);
 	char* hall;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_RingGuildHallBell(): enter", 1);
 	hall = gm_GetGuildHall(guild);
 	if (guild == 1) {
 		gm_ff_Objekt(*(int*) (hall + 0x5d), 2, 6, 0, 0x115);
@@ -4223,8 +4205,6 @@ int __cdecl gm_GetOppositeStatIndex(int stat_id)
 /* Client-only: blends two weights 60/40 both ways and averages (discarded). */
 float __cdecl gm_BlendWeights(float a, float b)
 {
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_BlendWeights(): enter", 1);
 	return (((a - b * b) * 0.6f + 0.4f) + ((a * a - b) * 0.4f + 0.6f)) * 0.5f;
 }
 

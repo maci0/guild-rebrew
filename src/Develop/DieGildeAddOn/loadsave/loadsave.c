@@ -490,6 +490,158 @@ int __cdecl ls_SaveObjects(void* file)
 	return 1;
 }
 
+/* Client-only (TL 0x51ecf0, discarded): writes the building table that ls_LoadBuildingEntityState
+ * reads back, the plant map, graveyard and alchemist records of special buildings, then the
+ * building-site boxes. The client reallocates the box buffer to its own size before writing it. */
+int __cdecl ls_SaveBuildings(void* file)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	extern int __cdecl gv_fio_SaveGraveyardData(void* stream_ctx, unsigned char* field);
+	extern int __cdecl ahm_fio_SaveAhmInfo(void* file, char* obj);
+	int count;
+	int i;
+	char* esi;
+	int j;
+
+	count = 0;
+	for (i = 0; i < 0x100; i++) {
+		if (g_entity_ptr[i * 0xa9] != 0) {
+			count++;
+		}
+	}
+	if (vfs_fwrite(&count, 4, 1, file) <= 0) {
+		return 0;
+	}
+	for (i = 0; i < 0x100; i++) {
+		esi = (char*) (g_entity_ptr + i * 0xa9);
+		if (esi[0] == 0) {
+			continue;
+		}
+		if (vfs_fwrite(esi, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x01, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x05, 0x20, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x25, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x27, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x29, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x2b, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x2f, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x34, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x35, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x39, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x3d, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x41, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x45, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x49, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x4d, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x51, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x55, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x5a, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(esi + 0x5c, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (esi[0] == 0x1e) {
+			for (j = 0; j < 0x40; j++) {
+				if (vfs_fwrite((void*) (*(int*) (esi + 0x71) + j * 0x18), 4, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite((void*) (*(int*) (esi + 0x71) + j * 0x18 + 4), 4, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite((void*) (*(int*) (esi + 0x71) + j * 0x18 + 8), 1, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite((void*) (*(int*) (esi + 0x71) + j * 0x18 + 9), 1, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite((void*) (*(int*) (esi + 0x71) + j * 0x18 + 0xa), 2, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite((void*) (*(int*) (esi + 0x71) + j * 0x18 + 0x10), 4, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite((void*) (*(int*) (esi + 0x71) + j * 0x18 + 0xc), 1, 1, file) <= 0) {
+					return 0;
+				}
+				if (vfs_fwrite((void*) (*(int*) (esi + 0x71) + j * 0x18 + 0xd), 1, 1, file) <= 0) {
+					return 0;
+				}
+			}
+		}
+		else if (esi[0] == 0x48 || esi[0] == 0x49 || esi[0] == 0x4a) {
+			if (gv_fio_SaveGraveyardData(file, (unsigned char*) esi) == 0) {
+				return 0;
+			}
+		}
+		else if (esi[0] == 0x4b || esi[0] == 0x4c || esi[0] == 0x4d) {
+			if (ahm_fio_SaveAhmInfo(file, esi) == 0) {
+				return 0;
+			}
+		}
+		else {
+			if (vfs_fwrite(esi + 0x65, 0x30, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(esi + 0x99, 0x10, 1, file) <= 0) {
+			return 0;
+		}
+	}
+	if (vfs_fwrite(&g_aux_entity_count, 4, 1, file) <= 0) {
+		return 0;
+	}
+	g_aux_entity_buffer = (int) realloc((void*) g_aux_entity_buffer, g_aux_entity_count * 0x60);
+	for (i = 0; i < g_aux_entity_count; i++) {
+		if (vfs_fwrite((void*) (g_aux_entity_buffer + i * 0x60), 0x40, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((void*) (g_aux_entity_buffer + i * 0x60 + 0x40), 0x10, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite((void*) (g_aux_entity_buffer + i * 0x60 + 0x50), 0x10, 1, file) <= 0) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 int __cdecl ls_SaveDynamicEntities(void* f)
 {
 	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
@@ -584,6 +736,490 @@ int __cdecl ls_SaveDynamicEntities(void* f)
 			return 0;
 		}
 		if (vfs_fwrite((char*) g_entity_base + i * 0xac + 0x70, 4, 1, f) <= 0) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
+/* Client-only (TL 0x51f480, discarded): writes the player slots that ls_LoadEntities reads back, after
+ * the slot count and the ids of the records the header pointers name (-1 for none). Two fields follow
+ * the server's loader, not the client's: the client writes its local player slot (0x774970) first, and
+ * the server reads that field into a local because it has no such variable; and the client writes the
+ * fields at slot + 0x54 and + 0x18c less 0x59a and 0x639, which its loader adds back and the server's
+ * loader does not. */
+int __cdecl ls_SaveEntities(void* file)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	int none;
+	int id;
+	int tmp;
+	int count;
+	char* slot;
+	int i;
+
+	none = -1;
+	if (vfs_fwrite(&none, 2, 1, file) <= 0) {
+		return 0;
+	}
+	count = 0;
+	for (i = 0; i < 0x300; i++) {
+		if (*(unsigned short*) (g_slot_table + i * 0x21c) != 0xffff) {
+			count++;
+		}
+	}
+	if (vfs_fwrite(&count, 4, 1, file) <= 0) {
+		return 0;
+	}
+	if (vfs_fwrite(g_save_header_aux ? (char*) g_save_header_aux + 4 : (char*) &none, 4, 1, file) <= 0) {
+		return 0;
+	}
+	if (vfs_fwrite(g_save_header_aux_b ? (char*) g_save_header_aux_b + 4 : (char*) &none, 4, 1, file) <= 0) {
+		return 0;
+	}
+	for (i = 0; i < 8; i++) {
+		id = -1;
+		if (vfs_fwrite((&g_save_extra_field)[i] ? (char*) (&g_save_extra_field)[i] + 4 : (char*) &id, 4, 1, file) <=
+			0) {
+			return 0;
+		}
+	}
+	for (i = 0; i < 0x300; i++) {
+		slot = (char*) g_slot_table + i * 0x21c;
+		if (*(unsigned short*) slot == 0xffff) {
+			continue;
+		}
+		if (vfs_fwrite(slot, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x20c, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 2, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 4, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 8, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 9, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0xa, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0xc, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0xd, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x10, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x14, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x18, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1c, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x20, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x24, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x28, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x2c, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x30, 0x10, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x40, 0x10, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x50, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x54, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x58, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x5c, 0x20, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x7c, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x80, 5, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x88, 0xa8, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x164, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x165, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x166, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x167, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x168, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x169, 1, 1, file) <= 0) {
+			return 0;
+		}
+		tmp = -1;
+		if (vfs_fwrite(*(char**) (slot + 0x16c) ? *(char**) (slot + 0x16c) + 1 : (char*) &tmp, 4, 1, file) <= 0) {
+			return 0;
+		}
+		tmp = -1;
+		if (vfs_fwrite(*(char**) (slot + 0x170) ? *(char**) (slot + 0x170) + 1 : (char*) &tmp, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x174, 4, 1, file) <= 0) {
+			return 0;
+		}
+		tmp = -1;
+		if (vfs_fwrite(*(char**) (slot + 0x17c) ? *(char**) (slot + 0x17c) + 4 : (char*) &tmp, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x180, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x18c, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x190, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x194, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x198, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x19c, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1a0, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1a4, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1a8, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1ac, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1b0, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1b1, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1b4, 0x10, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1c8, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1cc, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1d0, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1d4, 0x10, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1e4, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1e8, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1ec, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1f0, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1c5, 1, 1, file) <= 0) {
+			return 0;
+		}
+		id = *(int**) (slot + 0x184) ? **(int**) (slot + 0x184) : -1;
+		if (vfs_fwrite(&id, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x1f4, 0x18, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x210, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x214, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x215, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x216, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x217, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(slot + 0x218, 1, 1, file) <= 0) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
+/* Client-only (TL 0x520310, discarded): writes the five town tables and four city records that
+ * ls_LoadTownData reads back, always with 0x55 records per town. */
+int __cdecl ls_SaveTownData(void* file)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	extern unsigned char g_city_records[];
+	typedef struct {
+		short id; /* 0x00 */
+		short pad02;
+		int a04; /* 0x04 */
+		int a08; /* 0x08 */
+		int a0c; /* 0x0c */
+		char pad10[0x10];
+		int a20; /* 0x20 */
+		int a24; /* 0x24 */
+		char pad28[4];
+		int a2c;   /* 0x2c */
+		int a30;   /* 0x30 */
+		int a34;   /* 0x34 */
+		int a38;   /* 0x38 */
+		short a3c; /* 0x3c */
+		char pad3e[0x42];
+	} TownRec; /* 0x80 */
+
+	typedef struct {
+		int h[4];          /* 0x00 */
+		TownRec rec[0x55]; /* 0x10 */
+	} Town;                /* 0x2a90 */
+
+	typedef struct {
+		char name[0x20]; /* 0x000 */
+		char pad20[0x20];
+		char a40[8]; /* 0x040 */
+		char a48;    /* 0x048 */
+		char pad49[3];
+		int a4c;   /* 0x04c */
+		int a50;   /* 0x050 */
+		short a54; /* 0x054 */
+		short pad56;
+		char a58[8]; /* 0x058 */
+		char a60;    /* 0x060 */
+		char a61;    /* 0x061 */
+		char pad62[2];
+		char a64[10][8]; /* 0x064 */
+		char ab4[10][8]; /* 0x0b4 */
+		char a104;       /* 0x104 */
+		char a105;       /* 0x105 */
+		char pad106[2];
+		int a108[4];    /* 0x108 */
+		int a118[4];    /* 0x118 */
+		int a128;       /* 0x128 */
+		char a12c[0xb]; /* 0x12c */
+		char a137;      /* 0x137 */
+		char a138[7];   /* 0x138 */
+		char a13f;      /* 0x13f */
+		char a140;      /* 0x140 */
+		char a141;      /* 0x141 */
+		char a142;      /* 0x142 */
+		char pad143;
+		char a144[8][0x12]; /* 0x144 */
+		int a1d4;           /* 0x1d4 */
+		int a1d8;           /* 0x1d8 */
+		char a1dc[0xd0];    /* 0x1dc */
+		char pad2ac[0x40];
+		char a2ec[8]; /* 0x2ec */
+	} City;           /* 0x2f4 */
+	int count;
+	int j;
+	Town* town;
+	TownRec* rec;
+	City* city;
+
+	count = 0x55;
+	if (vfs_fwrite(&count, 4, 1, file) <= 0) {
+		return 0;
+	}
+	for (count = 0; count < 5; count++) {
+		town = &((Town*) g_entity_end)[count];
+		if (vfs_fwrite(&town->h[0], 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&town->h[1], 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&town->h[2], 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&town->h[3], 4, 1, file) <= 0) {
+			return 0;
+		}
+		for (j = 0; j < 0x55; j++) {
+			rec = &town->rec[j];
+			if (vfs_fwrite(&rec->id, 2, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a04, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a08, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a0c, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a20, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a24, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a30, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a34, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a38, 4, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a3c, 2, 1, file) <= 0) {
+				return 0;
+			}
+			if (vfs_fwrite(&rec->a2c, 4, 1, file) <= 0) {
+				return 0;
+			}
+		}
+	}
+	for (count = 0; count < 4; count++) {
+		city = &((City*) g_city_records)[count];
+		if (vfs_fwrite(city->name, 0x20, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(city->a40, 8, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a48, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a4c, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a50, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a54, 2, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(city->a58, 8, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a60, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a61, 1, 1, file) <= 0) {
+			return 0;
+		}
+		for (j = 0; j < 10; j++) {
+			if (vfs_fwrite(city->a64[j], 8, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		for (j = 0; j < 10; j++) {
+			if (vfs_fwrite(city->ab4[j], 8, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(&city->a104, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a105, 1, 1, file) <= 0) {
+			return 0;
+		}
+		for (j = 0; j < 4; j++) {
+			if (vfs_fwrite(&city->a108[j], 4, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		for (j = 0; j < 4; j++) {
+			if (vfs_fwrite(&city->a118[j], 4, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(&city->a128, 4, 1, file) <= 0) {
+			return 0;
+		}
+		for (j = 0; j < 0xb; j++) {
+			if (vfs_fwrite(&city->a12c[j], 1, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(&city->a137, 1, 1, file) <= 0) {
+			return 0;
+		}
+		for (j = 0; j < 7; j++) {
+			if (vfs_fwrite(&city->a138[j], 1, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(&city->a13f, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a140, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a141, 1, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a142, 1, 1, file) <= 0) {
+			return 0;
+		}
+		for (j = 0; j < 8; j++) {
+			if (vfs_fwrite(city->a144[j], 0x12, 1, file) <= 0) {
+				return 0;
+			}
+		}
+		if (vfs_fwrite(&city->a1d4, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(&city->a1d8, 4, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(city->a1dc, 0xd0, 1, file) <= 0) {
+			return 0;
+		}
+		if (vfs_fwrite(city->a2ec, 8, 1, file) <= 0) {
 			return 0;
 		}
 	}

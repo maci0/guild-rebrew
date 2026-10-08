@@ -5257,6 +5257,25 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   minizip, and `zufall.c`, which has no path string, get none. The final set keeps `a_cmp.obj`'s
   `_strncnt` (the two ports alone flip it to `a_map.obj`, as in round 18). Replace a placeholder when the
   server's real code for that function is known, then re-tune the rest to the count.
+- **More savegame writers (round 19).** The client's SaveGame (TL 0x51e080) calls its writers in the order
+  LoadGame (0x521920) calls the loaders, which pairs them: `ls_SaveBuildings` (0x51ecf0) with
+  `ls_LoadBuildingEntityState`, `ls_SaveEntities` (0x51f480) with `ls_LoadEntities` (client 0x522e30; the
+  GOLDTL row naming 0x51f480 `ls_LoadEntities` is a writer), `ls_SaveTownData` (0x520310) with
+  `ls_LoadTownData` (client 0x524040). Storage: `g_entity_ptr` = 0x90e094; the town table at client 0x85ab80
+  is `g_entity_end` and the city records at 0x868060 are `g_city_records`, both by offset 0xf840be0, which
+  five aligned loader operands share (0x85ab88, 0x868054, 0x868058, 0x8680a8, 0x868c78). ls_SaveBuildings and
+  ls_SaveTownData match the client byte for byte. ls_SaveEntities follows the server's loader where the two
+  builds differ: the client writes its local player slot (0x774970, no server storage; the server reads that
+  field into a local) and writes slot + 0x54 and + 0x18c less 0x59a and 0x639, which its loader adds back and
+  the server's does not. 20 DIR32 records, none with a log call (loadsave.c's path literal starts at
+  `ls_ID2Ptr`); they replace ten entry-trace placeholders. These two copies of TL 0x51ecf0 and 0x520310
+  are the ones built; the sweep's (below) are not.
+- **Ruled out (round 19).** The save header writer (TL 0x51e490) reads the client's local player slot and
+  client-only state (0x6a375c, 0x7746c4..0x7746cc, 0x7f3ac4, 0x7ea3c0, 0x7e2480). The writers whose
+  loaders the server lacks (0x5208e0, 0x520d90, 0x5212c0, 0x521420, 0x521530, 0x521840, 0x51ffc0) write
+  storage with no server address: 0x99ec10 is `g_item_def_table` by 0xf83f840, but 0x99ec14 would then be
+  `g_aux_entity_count`, which the box loader places at client 0x10058e0. 0x51e9d0, 0x51ea70, 0x51eb20,
+  0x5224b0, 0x5224f0 and 0x5222a0 call client engine code.
 - **Ruled out (round 18).** The four -1 dwords the client's command.c keeps between `g_game_speed_index` and
   the dispatch table (TL 0x68a9d0..0x68a9dc) sit inside plain `.data`, which LINK never discards, and the
   server has none: they and the helpers reading them (TL 0x4c4dc0, 0x4c76c0, 0x4c7870, 0x4cc590) are not in
