@@ -5623,8 +5623,6 @@ int __cdecl gm_ListProducts(unsigned char* building, int* out)
 	int i;
 	int item;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListProducts(): enter", 1);
 	n = 0;
 	type = (unsigned char*) g_entity_type_table + *building * 0x24d;
 	for (i = 0; i < 0x40; i++) {
@@ -5650,8 +5648,6 @@ int __cdecl gm_ListProductsAfter(unsigned char* building, unsigned short* key, i
 	int i;
 	int item;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListProductsAfter(): enter", 1);
 	n = 0;
 	type = (unsigned char*) g_entity_type_table + *building * 0x24d;
 	for (i = 0; i < type[0x22]; i++) {
@@ -5683,8 +5679,6 @@ int __cdecl gm_ListProductsAfter(unsigned char* building, unsigned short* key, i
 
 int __cdecl gm_GetEntityMood(char* entity)
 {
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetEntityMood(): enter", 1);
 	return (signed char) entity[0x5c];
 }
 
@@ -5693,8 +5687,6 @@ int __cdecl gm_ListGuildHouses(char* player, void** out)
 	char* house;
 	int n;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListGuildHouses(): enter", 1);
 	n = 0;
 	house = (char*) gm_ff_Objekt(n, 2, 7, 4, 0x1d);
 	while (house != 0 && n < 3) {
@@ -5713,8 +5705,6 @@ int __cdecl gm_GetBuildingLevel(unsigned char* building)
 {
 	unsigned char* type;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetBuildingLevel(): enter", 1);
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
 	switch (type[0]) {
 	case 2:
@@ -5737,8 +5727,6 @@ int __cdecl gm_HasLevelFor(unsigned char* building, unsigned char* other)
 	int need;
 	int level;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_HasLevelFor(): enter", 1);
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
 	level = 0;
 	need = gm_GetBuildingLevel(other);
@@ -5806,8 +5794,6 @@ int __cdecl gm_SumProductPoints(unsigned char* building, int kind, int scaled)
 	int i;
 	int item;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SumProductPoints(): enter", 1);
 	sum = 0;
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
 	for (i = 0; i < 0x40; i++) {
@@ -5828,8 +5814,6 @@ int __cdecl gm_SumTypePoints(int type_index, int kind)
 	int sum;
 	int i;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SumTypePoints(): enter", 1);
 	sum = 0;
 	type = (unsigned char*) g_entity_type_table + type_index * 0x24d;
 	for (i = 0; i < 0x40; i++) {

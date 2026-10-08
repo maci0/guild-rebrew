@@ -5335,17 +5335,18 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
     to the server would add two game C objects to Rich's 37.
   - `Error.c`: TL keeps `ReportError` (0x41d950, 14 DIR32) and an unformatted `LogMessage` (0x41daf0, 5
     DIR32), unreferenced, between `ReportFatalError` and `ReportMessage` and after `LogMessageInternal`.
-    Every operand is server storage or an existing literal and both compile to the TL bytes, but either
-    one flips `_strncnt`'s ICF survivor to `a_map.obj`, so they are not committed
-    (`.scratch/r19-units-deferred/`).
+    Every operand is server storage or an existing literal and both compile to the TL bytes. Either one
+    alone flips `_strncnt`'s ICF survivor to `a_map.obj`; both are built, and their 19 DIR32 replace
+    `rd_AddBKBox`'s exit trace (3 records) and eight entry traces chosen so `a_cmp.obj` keeps it.
   - `broadcast.c`: the dword 0xffffffff at the head of the server TU's `.data` is the client's broadcast
     socket (TL 0x675170, initialised `INVALID_SOCKET` before the TU's literals, tested by every client
     broadcast function). The client's open (0x402220) and send (0x402340) also use two `sockaddr_in`
     (TL 0x1552010, 0x1552000) that the server does not allocate: LINK allocates COMMON in reverse input
     order, so broadcast.obj's would follow Error.c's last game COMMON (`g_log_file_handle`, 0x11766204),
     which CRT COMMON follows directly, and the TU has no plain `.bss` before Error.c's at 0x10034610. The
-    client's broadcast group was therefore not compiled into the server, and the close function
-    (0x402320), whose only storage is the socket, stays out with it (deferred patch). The receive loop
+    client's open and send were therefore not compiled into the server as the client has them. The close
+    (0x402320) needs only the socket, and the socket's -1 dword is in the server with no live user, so
+    discarded server code used it: the close is built (`CloseBroadcastSocket`, the sweep's copy). The receive loop
     (0x402370) would also add `recvfrom`, an eighth dropped WS2_32 import, for which no IAT split is
     exact. `SendBroadcastPacket` has no client twin.
   - Log calls: the server's kept unit functions make 14 log calls the clients do not
