@@ -236,7 +236,7 @@ extern unsigned char g_before_g_rterrlist[0x350];
 
 extern unsigned char g_before_g_panic_callback[0x6d8];
 
-extern unsigned char g_before_g_array_count[0x7];
+extern unsigned char g_before_g_array_count[0x3];
 
 extern unsigned char g_before_g_stream_pool[0x2c];
 
