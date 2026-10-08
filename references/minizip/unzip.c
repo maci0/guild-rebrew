@@ -1,14 +1,3 @@
-/* Vendored from zlib 1.1.3 contrib/minizip/unzip.c (Gilles Vollant's unzip 0.15 beta, Mar 19th, 1998);
- * the game shipped 0.15a ("unzip 0.15a" in the server's and both clients' readonly data). Every stock
- * function compiles to the server's and the TL client's bytes (unzClose, unzReadCurrentFile and
- * unzCloseCurrentFile are live in the server; /OPT:REF discards the rest). The TL client keeps this TU
- * apart from vfs.c (0x4645a0..0x4657d0) and adds two functions after the stock ones.
- * Local changes:
- * - unz_copyright holds the 0.15a string and is selectany, so the readonly order file places it;
- *   defined, the compiler folds unzOpen's first-character check as in the clients.
- * - unzGetFilePos and unzGoToFilePos (TL 0x465750, 0x465790) are appended; they are named after the
- *   later minizip API that does the same.
- * - The three structs carry SIZE comments. */
 /* unzip.c -- IO on .zip files using zlib 
    Version 0.15 beta, Mar 19th, 1998,
 
@@ -84,7 +73,6 @@ __declspec(selectany) const char unz_copyright[] =
    " unzip 0.15a Copyright 1998 Gilles Vollant ";
 
 /* unz_file_info_interntal contain internal info about a file in zipfile*/
-// SIZE 0x4
 typedef struct unz_file_info_internal_s
 {
     uLong offset_curfile;/* relative offset of local header 4 bytes */
@@ -93,7 +81,6 @@ typedef struct unz_file_info_internal_s
 
 /* file_in_zip_read_info_s contain internal information about a file in zipfile,
     when reading and decompress it */
-// SIZE 0x7c
 typedef struct
 {
 	char  *read_buffer;         /* internal buffer for compressed data */
@@ -118,7 +105,6 @@ typedef struct
 
 /* unz_s contain internal information about the zipfile
 */
-// SIZE 0x80
 typedef struct
 {
 	FILE* file;                 /* io structore of the zipfile */

@@ -110,9 +110,9 @@ one file per original translation unit, in the order the linker lays them out (v
 |---|---|---|
 | `0x10001130` | `Units/net/broadcast.c` | 1 |
 | `0x10002640`-`0x10003640` | `Units/Error/Error.c` | 11 |
-| `0x100036d0`-`0x10003cf0` | `references/zlib/gzio.c` | 8 (stock zlib 1.1.3 `gzio.c`; vfs.c calls its `gzread` and `gzclose`) |
+| `0x100036d0`-`0x10003cf0` | `references/zlib/gzio.c` | 8 (zlib 1.1.3 `gzio.c`, vendored per `vendoring.md`; vfs.c calls its `gzread` and `gzclose`) |
 | `0x10006580`-`0x10006e30` | `Units/m_alloc/m_alloc.c` | 7 |
-| `0x10008a50`-`0x10008c80` | `Units/vfs/unzip.c` | 3 (stock minizip 0.15; the name is inferred, no `__FILE__` string) |
+| `0x10008a50`-`0x10008c80` | `references/minizip/unzip.c` | 3 (minizip 0.15 from zlib 1.1.3 contrib, vendored per `vendoring.md`; library code, so outside `src/Develop`; no `__FILE__` string names it) |
 | `0x10008d10`-`0x10009020` | `Units/vfs/vfs.c` | 3 |
 | `0x10009310`-`0x1000b040` | `DieGildeAddOnServer/server.c` | 19 |
 | `0x1000b1c0`-`0x1000baf0` | `DieGildeAddOn/game/aemter.c` | 10 |
@@ -1028,4 +1028,4 @@ broadcast.c). TL VA from the sweep table or the definition's comment.
 | types `SIM_FINDDATA` | `DieGildeAddOn/game/sim.c` | |
 | types `TOWN`, `TOWN_REC` | `DieGildeAddOn/loadsave/loadsave.c` | |
 | macros `NT_CMD_LEN`, `NT_CMD_HEADER` | `Units/net/net.c` | |
-| file `Units/vfs/unzip.c` | stock minizip 0.15 (see the TU table above) | |
+| file `references/minizip/unzip.c` | minizip 0.15 plus the game's `unzGetFilePos`/`unzGoToFilePos` (`vendoring.md`) | |

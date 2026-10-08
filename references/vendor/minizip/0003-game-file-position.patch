@@ -1,0 +1,62 @@
+unzGetFilePos, unzGoToFilePos: game additions
+
+Kind: game code in the vendored file (no upstream release has it).
+
+The TL client keeps this unit apart from vfs.c (0x4645a0..0x4657d0) and has
+two more functions after the stock ones, at 0x465750 and 0x465790; the
+server discards both under /OPT:REF. They read and set unz_s's
+pos_in_central_dir and num_file and call the file's static
+unzlocal_GetCurrentFileInfoInternal, so they can only live in this
+translation unit. Gilles Vollant's unzip 0.15 to 0.18 (1998-2002) have no
+such functions. minizip 1.00 (zlib 1.2.1, 2003) added unzGetFilePos and
+unzGoToFilePos (credited to Ryan Haksi) with a different interface (one
+unz_file_pos struct, no pfile_in_zip_read check, UNZ_END_OF_LIST_OF_FILE),
+so these are not that code; the names are borrowed from it.
+
+--- a/unzip.c
++++ b/unzip.c
+@@ -1292,3 +1292,44 @@
+ 		*(szComment+s->gi.size_comment)='\0';
+ 	return (int)uReadThis;
+ }
++
++/* Stores the central-directory position and index of the current file. */
++extern int ZEXPORT unzGetFilePos (file, pos, num)
++	unzFile file;
++	uLong *pos;
++	uLong *num;
++{
++	unz_s* s;
++	*num=0;
++	*pos=0;
++	s=(unz_s*)file;
++	if ((s!=NULL) && (s->current_file_ok) && (s->pfile_in_zip_read==NULL))
++	{
++		*pos=s->pos_in_central_dir;
++		*num=s->num_file;
++		return UNZ_OK;
++	}
++	return UNZ_PARAMERROR;
++}
++
++/* Makes the file at a position from unzGetFilePos the current file. */
++extern int ZEXPORT unzGoToFilePos (file, pos, num)
++	unzFile file;
++	uLong pos;
++	uLong num;
++{
++	unz_s* s;
++	int err;
++	if ((file==NULL) || (pos==0))
++		return UNZ_PARAMERROR;
++	s=(unz_s*)file;
++	if (s->pfile_in_zip_read!=NULL)
++		return UNZ_PARAMERROR;
++	s->pos_in_central_dir=pos;
++	s->num_file=num;
++	err = unzlocal_GetCurrentFileInfoInternal(file,&s->cur_file_info,
++											  &s->cur_file_info_internal,
++											  NULL,0,NULL,0,NULL,0);
++	s->current_file_ok = (err == UNZ_OK);
++	return err;
++}

@@ -13,6 +13,7 @@ configure unless the compiled tree equals pristine + patches.
 | `references/vendor/<name>/NNNN-*.patch` | One change each: a header with its kind, reason and evidence, then a `-p1` unified diff |
 | `references/vendor/zlib/pristine.sha256` | sha256 of every file in `references/zlib-1.1.3/` (`sha256sum -c` format, root-relative) |
 | `references/zlib/` | Generated: the 25 zlib files the build compiles or includes |
+| `references/minizip/` | Generated: `unzip.c` and `unzip.h`, from `references/zlib-1.1.3/contrib/minizip/` |
 
 The generated trees are committed because the function rows in
 `rebrew-functions.toml` name them (`references/zlib/deflate.c`) and `rebrew verify`
@@ -72,3 +73,38 @@ What was ruled out, by rebuilding with the stock text:
   makes data COMDAT (`/Gy` covers functions, `/Gf`/`/GF` string literals). Stock tables
   move readonly data (10735 bytes; 6324 with no `/ORDER` at all); a stock `mark` moves
   4709 bytes.
+
+## minizip (unzip.c)
+
+Upstream: `contrib/minizip/unzip.c` and `unzip.h` of the same zlib 1.1.3 tarball,
+pinned by the zlib checksum list. That file is Gilles Vollant's unzip 0.15 in its
+1998-06-15 revision: `unzlocal_SearchCentralDir` scans backward
+(`for (i=(int)uReadSize-3; (i--)>0;)`), as the TL client does at 0x4649d2. The
+standalone `unzlb015.zip` (winimage.com, 1998-03-19, sha256
+`54b97df32ed9128b581a6d22d34e4e466096b6cf9333e7906dca5a0220f46eaf`) and zlib 1.1.2's
+copy scan forward, so they match worse. It was `src/Develop/Units/vfs/unzip.c`; it is
+library code, so its three server rows are `LIBRARY` rows bound to
+`references/minizip/unzip.c` (`src/library_minizip.h`, `rebrew library bind-source`).
+
+| Patch | Kind | Change |
+|---|---|---|
+| 0001-unz-copyright-0.15a | version string, no located upstream | `" unzip 0.15a Copyright 1998 Gilles Vollant "`, as in the server and both clients |
+| 0002-unz-copyright-selectany | link-layout stand-in | `unz_copyright` becomes selectany so `/ORDER` places it (stock moves 5370 bytes) |
+| 0003-game-file-position | game code | `unzGetFilePos`/`unzGoToFilePos` appended (TL 0x465750, 0x465790) |
+
+Searched for an upstream 0.15a: winimage.com zLibDll (`unzlb015.zip`, `zlib112dll.zip`,
+`zlib113dll.zip`, `zlib113adll.zip`, `buildzlib113adll.zip`, `unzip16.zip`,
+`unzip17.zip`, `zlib114dll.zip`), zlib fossils 1.1.1 to 1.2.3, and GitHub code
+search. Gilles Vollant's "0.15a" exists only for `zip.c`: `zlib113dll.zip` (1998-07)
+and the 2000 1.1.3a build carry `" zip 0.15a"` beside `" unzip 0.15"`, and the 1.1.3a
+build notes say to take `unzip.c` from `contrib/minizip` unchanged.
+
+The two appended functions are game code kept in this file because they read `unz_s`
+and call the file's static `unzlocal_GetCurrentFileInfoInternal`; the TL client has
+them inside the same unit. No Vollant release from 0.15 to 0.18 (1998-2002) has them.
+minizip 1.00 (zlib 1.2.1, 2003) added functions of the same names, credited to Ryan
+Haksi, with a different interface (`unz_file_pos` struct, `UNZ_END_OF_LIST_OF_FILE`);
+the names here are borrowed from it.
+
+The client targets' two `unzip.c` rows (GOLD, GOLDTL) moved with the file and stay
+`FUNCTION` rows, like the clients' zlib functions.

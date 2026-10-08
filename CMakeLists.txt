@@ -190,14 +190,17 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/references/zlib/uncompr.c"
     "${PROJECT_SOURCE_DIR}/references/zlib/zutil.c"
   )
+  # minizip's unzip.c, vendored beside zlib (docs/vendoring.md); its rows are
+  # outside src/, so cmake-sources does not list it.
+  set(MINIZIP_SOURCES "${PROJECT_SOURCE_DIR}/references/minizip/unzip.c")
 
 
   # Order objects by original function VA (fixes reccmp "0 aligned"; drops
   # zlib files absent from the original). The --first-va table supplies the
-  # zlib files' first-function VAs (they have no // FUNCTION: markers); the
+  # vendored files' first-function VAs (they have no // FUNCTION: markers); the
   # --exclude list drops files absent from the original server.dll.
   execute_process(
-    COMMAND "${_REBREW_SRC_BIN}" build order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES}
+    COMMAND "${_REBREW_SRC_BIN}" build order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES} ${MINIZIP_SOURCES}
       --marker SERVER
       --first-va adler32.c=0x10001000
       --first-va crc32.c=0x100011f0
@@ -210,6 +213,7 @@ if(REBREW_BUILD_SERVER)
       --first-va infutil.c=0x10006440
       --first-va net.c=0x10006c80
       --first-va trees.c=0x10006ec0
+      --first-va unzip.c=0x10008a50
       --first-va bss_head.c=0x10001000
       --first-va zutil.c=0x100092e0
       --first-va bss_head2.c=0x100092e1

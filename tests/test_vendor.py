@@ -108,6 +108,7 @@ class VendorTest(unittest.TestCase):
         result = run(ROOT, "check", self.root / "stage")
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("zlib: 4 patches, check ok", result.stdout)
+        self.assertIn("minizip: 3 patches, check ok", result.stdout)
 
 
 if __name__ == "__main__":
