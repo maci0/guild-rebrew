@@ -4011,6 +4011,29 @@ float __cdecl gm_BlendWeights(float a, float b)
 	return (((a - b * b) * 0.6f + 0.4f) + ((a * a - b) * 0.4f + 0.6f)) * 0.5f;
 }
 
+/* Client-only (TL 0x508220, discarded): copies kind record idx of the ten
+ * {kind, value, size} records that follow the two season hour tables in
+ * g_spiel_const_table (client 0x696560); record 0 when idx >= 10. No live
+ * server function reads those records. */
+int __cdecl gm_GetKindRecord(int idx, void* out)
+{
+	struct KindRecord {
+		int kind;
+		float value;
+		int size;
+	};
+	extern unsigned int g_spiel_const_table[];
+	struct KindRecord* records;
+
+	records = (struct KindRecord*) (g_spiel_const_table + 8);
+	if (idx >= 10) {
+		*(struct KindRecord*) out = records[0];
+		return 0;
+	}
+	*(struct KindRecord*) out = records[idx];
+	return 1;
+}
+
 /* Generates a random stat modifier. Produces a random
  * delta value for stat variation during entity creation
  * or level-up events. */
