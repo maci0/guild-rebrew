@@ -54,9 +54,9 @@ extern void * __sbh_pHeaderList; /* 0x11766444, pool: region descriptor array */
 extern unsigned int g_max_pool_alloc_size; /* 0x11766448, max pool allocation size (allocator mode 3) */
 extern void * _crtheap; /* 0x1176644C, process heap handle */
 extern int __active_heap; /* 0x11766450, allocator mode: 3=pool, 2=block */
-extern int g_stream_group_table[0x40]; /* 0x11766460, stream group ptr table (0x11766460..0x1176655c, 0x40 entries) */
+extern void * __pioinfo[0x40]; /* 0x11766460, LIBCMT COMMON ___pioinfo, 64 ioinfo block pointers */
 extern int __nfile; /* 0x11766560, CRT file-handle count (init 0x20, bounds-checked) */
-extern void ** __pioinfo; /* 0x11766564, per-handle file table - __flsall/_fcloseall walk this */
+extern void ** __piob; /* 0x11766564, LIBCMT COMMON ___piob, per-handle file table - __flsall/_fcloseall walk this */
 extern int __nstream; /* 0x11767580, tracked-block (stream) table count */
 extern void * _acmdln; /* 0x11767584, GetCommandLineA result */
 extern int (__stdcall *g_dllmain_user_handler)(void *, unsigned int, void *); /* 0x11767588, DllMain user handler fnptr */

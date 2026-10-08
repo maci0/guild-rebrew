@@ -71,9 +71,9 @@ void* __sbh_pHeaderList = 0; /* pool: region descriptor array */
 unsigned int g_max_pool_alloc_size;   /* max pool allocation size (mode 3) */
 void* _crtheap;          /* process heap handle */
 int __active_heap;            /* allocator mode: 3=pool, 2=block */
-int g_stream_group_table[0x40];      /* stream group ptr table (0x11766460..0x1176655c) */
+extern void *__pioinfo[0x40]; /* LIBCMT COMMON ___pioinfo, 64 ioinfo block pointers (0x11766460..0x11766560); the CRT owns it */
 int __nfile;            /* current stream count */
-void** __pioinfo;         /* tracked-block (stream) table ptr - __flsall/_fcloseall walk this */
+extern void **__piob;      /* LIBCMT COMMON ___piob (0x11766564), stream table __flsall/_fcloseall walk; the CRT owns it */
 int __nstream;            /* tracked-block table count */
 void* _acmdln;          /* GetCommandLineA result */
 int (__stdcall* g_dllmain_user_handler)(void* hmod, unsigned int reason, void* reserved); /* DllMain user handler */
