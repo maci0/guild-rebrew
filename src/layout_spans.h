@@ -243,7 +243,7 @@ extern unsigned char g_before_lconv_c[0xc];
 
 extern unsigned char g_before_g_panic_callback[0x2c8];
 
-extern unsigned char g_before_g_array_count[0x7];
+extern unsigned char g_before_g_array_count[0x3];
 
 extern unsigned char g_before_g_stream_pool[0x2c];
 

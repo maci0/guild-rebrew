@@ -15807,3 +15807,40 @@ writer = "verify"
 input_hash = "c996e0a32e4c00d7a8e2c2a5379428970783a2c18474f1a93b6900b26c927058"
 definition_hash = "de7d2e0af25ff33480822cc0a6e0880b49387e714c887ebe91d85d1445a9cd64"
 measured_at = "2026-10-08T04:43:15+00:00"
+
+["SERVER.0x10034620"]
+name = "s_empty"
+updated_by = "verify"
+updated_at = "2026-10-08T04:49:20+00:00"
+section = ".data"
+type = "char[]"
+size = 1
+status = "EXACT"
+file = "references/zlib/gzio.c"
+storage_kind = "literal"
+link_symbol = "??_C@_00A@?$AA@"
+
+["SERVER.0x10034620".verification]
+status = "EXACT"
+writer = "verify"
+input_hash = "1a099223c94c37f61f95c7a9c85b7f49a67a99b0bcfdd0d32ad54752ec13a8b3"
+definition_hash = "d60b3f43f9fb000a7f45d011764f9d6afc9def6222b1ddf192f72cf6a0ee84aa"
+measured_at = "2026-10-08T04:49:20+00:00"
+
+["SERVER.0x10034621"]
+name = "g_before_g_array_count"
+updated_by = "verify"
+updated_at = "2026-10-08T04:50:20+00:00"
+section = ".data"
+type = "unsigned char[0x3]"
+size = 3
+status = "VERIFIED"
+file = "src/crt_region/section_spans.c"
+storage_kind = "span"
+
+["SERVER.0x10034621".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "4cbfa722308c40d06de01888b00873bdefa693c6940d38df65654c00f24efa0c"
+definition_hash = "1b8425877a4352f0650b09e753e7be82582d346402b1aae02f6bf5ccbc785bd5"
+measured_at = "2026-10-08T04:50:20+00:00"
