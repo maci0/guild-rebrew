@@ -16,7 +16,7 @@ extern void exit OF((int));
 const char *z_errmsg[10] = {
 "need dictionary",     /* Z_NEED_DICT       2  */
 "stream end",          /* Z_STREAM_END      1  */
-"",       /* Z_OK              0  */
+"",                    /* Z_OK              0  */
 "file error",          /* Z_ERRNO         (-1) */
 "stream error",        /* Z_STREAM_ERROR  (-2) */
 "data error",          /* Z_DATA_ERROR    (-3) */
@@ -30,7 +30,6 @@ const char * ZEXPORT zlibVersion()
 {
     return ZLIB_VERSION;
 }
-
 
 #ifdef DEBUG
 
@@ -55,7 +54,6 @@ const char * ZEXPORT zError(err)
 {
     return ERR_MSG(err);
 }
-
 
 
 #ifndef HAVE_MEMCPY
@@ -212,18 +210,14 @@ voidpf zcalloc (opaque, items, size)
     unsigned items;
     unsigned size;
 {
-    /* The game's zlib build routes zcalloc through the game's malloc
-     * (0x1001a7f7) and zcfree through the game's free (0x1001ab81)
-     * directly, matching the original server.dll bytes. */
-    extern void* __cdecl malloc(unsigned int size);
-    return (voidpf) malloc(items * size);
+    if (opaque) items += size - size; /* make compiler happy */
+    return (voidpf)malloc(items * size);
 }
 
 void  zcfree (opaque, ptr)
     voidpf opaque;
     voidpf ptr;
 {
-    extern void __cdecl free(void*);
     free(ptr);
     if (opaque) return; /* make compiler happy */
 }

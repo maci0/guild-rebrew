@@ -201,7 +201,6 @@ int ZEXPORT deflateInit_(strm, level, version, stream_size)
     /* To do: ignore strm->next_in if we use it as window */
 }
 
-
 /* ========================================================================= */
 int ZEXPORT deflateInit2_(strm, level, method, windowBits, memLevel, strategy,
 		  version, stream_size)
@@ -332,7 +331,6 @@ int ZEXPORT deflateSetDictionary (strm, dictionary, dictLength)
     return Z_OK;
 }
 
-
 /* ========================================================================= */
 int ZEXPORT deflateReset (strm)
     z_streamp strm;
@@ -398,7 +396,6 @@ int ZEXPORT deflateParams(strm, level, strategy)
     s->strategy = strategy;
     return err;
 }
-
 
 /* =========================================================================
  * Put a short in the pending buffer. The 16-bit value is put in MSB order.
@@ -657,7 +654,6 @@ int ZEXPORT deflateCopy (dest, source)
     return Z_OK;
 #endif
 }
-
 
 /* ===========================================================================
  * Read a new buffer from the current input stream, update the adler32
