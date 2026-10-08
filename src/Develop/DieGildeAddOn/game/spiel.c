@@ -1241,6 +1241,8 @@ int __cdecl gm_GetItemCategory(unsigned short* item)
 		}
 		i++;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetItemCategory(): item not found", 1);
 	return 0;
 }
 
@@ -1256,12 +1258,16 @@ int __cdecl gm_FindItemTypeByName(char* name)
 			return i;
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindItemTypeByName(): unknown item", 1);
 	return 0;
 }
 int __cdecl gm_IsRawItem(int item)
 {
 	char kind;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_IsRawItem(): enter", 1);
 	kind = g_item_def_table[item * 0x41];
 	if (kind == 1 || kind == 0x1a || kind == 0xb || kind == 0x1c || kind == 0x1b || kind == 3 || kind == 4) {
 		return 1;
@@ -1278,6 +1284,8 @@ int __cdecl gm_GetSlotProduction(int player, int slot)
 	int sum;
 	int j;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetSlotProduction(): enter", 1);
 	sum = 0;
 	cell = (char*) &g_slot_array + player * 0x2a90 + slot * 0x80;
 	if (cell[0x40] == 0) {
@@ -1324,6 +1332,8 @@ double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
 	double dx;
 	double dy;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetTileDistance(): enter", 1);
 	dx = (double) x1 - (double) x2;
 	dy = (double) y1 - (double) y2;
 	if (dx < 0) {
@@ -1461,6 +1471,8 @@ void* __cdecl gm_NextQueryItemMatch(void)
 
 	match = 0;
 	if (g_item_def_table == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_NextQueryItemMatch(): item table not loaded", 1);
 		return 0;
 	}
 	cur = g_query_cursor;
@@ -1511,6 +1523,8 @@ void* __cdecl gm_NextQueryItemMatch(void)
 		}
 	}
 	if (g_query_count >= g_query_limit) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_NextQueryItemMatch(): query overflow", 1);
 		return 0;
 	}
 	for (;;) {
@@ -2090,6 +2104,8 @@ char* __cdecl gm_FindTavernServing(int item)
 			return (char*) gm_ff_Objekt(*(int*) (list[i] + 0x14), 1, 0, 0x116);
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindTavernServing(): no tavern found", 1);
 	return 0;
 }
 
@@ -2097,6 +2113,8 @@ void* __cdecl gm_FindKind47ByOwner(int owner)
 {
 	void* entry;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindKind47ByOwner(): enter", 1);
 	entry = gm_StartFilteredEntitySearch(1, 0, 0x47);
 	if (entry == 0) {
 		return 0;
@@ -2710,6 +2728,8 @@ void* __cdecl gm_FindBuildingStore(unsigned char* building)
 	int item;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindBuildingStore(): enter", 1);
 	found = 0;
 	category = gm_GetBuildingTypeCategory(building[0]);
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
@@ -2751,6 +2771,8 @@ void* __cdecl gm_FindBuildingStore(unsigned char* building)
 			}
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindBuildingStore(): exit", 1);
 	return found;
 }
 
@@ -2841,6 +2863,8 @@ unsigned char* __cdecl gm_FindNearestOfKind(unsigned char* self, int kind)
 	float dz;
 	float d;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindNearestOfKind(): enter", 1);
 	best = 1e8f;
 	found = 0;
 	for (e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
@@ -2861,6 +2885,8 @@ unsigned char* __cdecl gm_FindNearestOfKind(unsigned char* self, int kind)
 			found = e;
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindNearestOfKind(): exit", 1);
 	return found;
 }
 
@@ -2897,6 +2923,8 @@ int __cdecl gm_FindBuildingTypeByName(char* name)
 			return i;
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindBuildingTypeByName(): unknown building", 1);
 	return 0;
 }
 
@@ -2907,6 +2935,8 @@ int __cdecl gm_ListTypesOfKind(int kind, int* out)
 	int n;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListTypesOfKind(): enter", 1);
 	n = 0;
 	for (i = 0; i < 0x58; i++) {
 		if ((unsigned char) g_entity_type_table[i * 0x24d] == kind) {
@@ -2919,6 +2949,8 @@ int __cdecl gm_ListTypesOfKind(int kind, int* out)
 
 int __cdecl gm_IsWarehouse(unsigned char* building)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_IsWarehouse(): enter", 1);
 	return g_entity_type_table[*building * 0x24d] == 10;
 }
 
@@ -2955,6 +2987,8 @@ int __cdecl gm_CollectBuildingResidents(unsigned char* building, unsigned char* 
 	int count;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CollectBuildingResidents(): enter", 1);
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
 	out[0] = 0;
 	for (i = 0; i < 0x18; i++) {
@@ -2987,6 +3021,8 @@ int __cdecl gm_CollectBuildingResidents(unsigned char* building, unsigned char* 
 		count++;
 	}
 	out[0] = count;
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CollectBuildingResidents(): exit", 1);
 	return count;
 }
 
@@ -3345,6 +3381,8 @@ int __cdecl gm_EntityHasOffice(unsigned short slot, int n, ...)
 	int found;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_EntityHasOffice(): enter", 1);
 	found = 0;
 	e = g_slot_table + slot * 0x21c;
 	if (n <= -1) {
@@ -3366,6 +3404,8 @@ int __cdecl gm_EntityHasProfession(unsigned short slot, int n, ...)
 	int found;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_EntityHasProfession(): enter", 1);
 	found = 0;
 	profession = g_slot_table[slot * 0x21c + 0x164];
 	if (n <= -1) {
@@ -3394,6 +3434,8 @@ int __cdecl gm_SlotKindIsOneOf(unsigned short slot, int n, ...)
 	int r;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SlotKindIsOneOf(): enter", 1);
 	r = 0;
 	rec = ((struct SLOT_COPY*) g_slot_table)[slot];
 	if (n <= -1) {
@@ -3428,6 +3470,8 @@ int __cdecl gm_GetGuildBuildingKind(int guild)
 	case 5:
 		return 0x1a;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetGuildBuildingKind(): kind not found", 1);
 	return 0;
 }
 
@@ -3437,6 +3481,8 @@ int __cdecl gm_GetStatBuildingKind(int stat)
 
 	range = gm_MapEntityStatRange(stat);
 	if (range == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetStatBuildingKind(): range not found", 1);
 		return 0;
 	}
 	switch (range) {
@@ -3469,6 +3515,8 @@ int __cdecl gm_GetStatBuildingKind(int stat)
 	case 16:
 		return 0;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetStatBuildingKind(): kind not found", 1);
 	return 0;
 }
 
@@ -3504,11 +3552,15 @@ int __cdecl gm_GetRangeBuildingKind(int range)
 	case 16:
 		return 0;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetRangeBuildingKind(): kind not found", 1);
 	return 0;
 }
 
 int __cdecl gm_GetSkillPair(int skill, int* first, int* second)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetSkillPair(): enter", 1);
 	switch (skill) {
 	case 2:
 		*first = 1;
@@ -3557,6 +3609,8 @@ int __cdecl gm_GetSkillPair(int skill, int* first, int* second)
 	}
 	*first = 1;
 	*second = 0;
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetSkillPair(): exit", 1);
 	return 1;
 }
 
@@ -3566,6 +3620,8 @@ int __cdecl gm_GetStatFirstItem(int stat)
 
 	range = gm_MapEntityStatRange(stat);
 	if (range == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetStatFirstItem(): range not found", 1);
 		return 0;
 	}
 	switch (range) {
@@ -3600,6 +3656,8 @@ int __cdecl gm_GetStatFirstItem(int stat)
 	case 14:
 		return 0x4e;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetStatFirstItem(): item not found", 1);
 	return 0;
 }
 
@@ -3626,6 +3684,8 @@ int __cdecl gm_GetItemGuild(int item)
 	if (item >= 0xd && item <= 6) {
 		return 6;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetItemGuild(): guild not found", 1);
 	return 0;
 }
 
@@ -3634,6 +3694,8 @@ int __cdecl gm_GetRangeStatId(int range, int level)
 	int d;
 
 	if (range == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetRangeStatId(): range not found", 1);
 		return 0;
 	}
 	d = level - 1;
@@ -3671,6 +3733,8 @@ int __cdecl gm_GetRangeStatId(int range, int level)
 	case 16:
 		return 0;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetRangeStatId(): stat not found", 1);
 	return 0;
 }
 
@@ -3733,6 +3797,8 @@ int __cdecl gm_GetKindStatRange(int kind)
 	case 32:
 		return 0xf;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetKindStatRange(): range not found", 1);
 	return 0;
 }
 
@@ -3741,6 +3807,8 @@ void __cdecl gm_RingGuildHallBell(int guild)
 	char* __cdecl gm_GetGuildHall(int guild);
 	char* hall;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_RingGuildHallBell(): enter", 1);
 	hall = gm_GetGuildHall(guild);
 	if (guild == 1) {
 		gm_ff_Objekt(*(int*) (hall + 0x5d), 2, 6, 0, 0x115);
@@ -3922,6 +3990,8 @@ int __cdecl gm_MapItemPairRange(unsigned int item)
 	case 34:
 		return 0xf;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_MapItemPairRange(): pair not found", 1);
 	return 0;
 }
 
@@ -4008,6 +4078,8 @@ int __cdecl gm_GetOppositeStatIndex(int stat_id)
 /* Client-only: blends two weights 60/40 both ways and averages (discarded). */
 float __cdecl gm_BlendWeights(float a, float b)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_BlendWeights(): enter", 1);
 	return (((a - b * b) * 0.6f + 0.4f) + ((a * a - b) * 0.4f + 0.6f)) * 0.5f;
 }
 
@@ -4061,6 +4133,8 @@ int __cdecl gm_LookupEntityRecordById(int search_id)
 
 float __cdecl gm_GetEntityAge(int slot)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetEntityAge(): enter", 1);
 	return (float) *(unsigned short*) (g_slot_table + 0xa + (slot & 0xffff) * 0x21c);
 }
 
@@ -4072,6 +4146,8 @@ int __cdecl gm_GetOfficeRank(unsigned short slot, int skip_parent)
 	int rank;
 	int up;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetOfficeRank(): enter", 1);
 	if (*(int*) (g_slot_table + 4 + slot * 0x21c) == -1 || g_slot_table[8 + slot * 0x21c] == 0) {
 		return 0;
 	}
@@ -4101,6 +4177,8 @@ int __cdecl gm_GetCouncilRank(unsigned short slot, int skip_parent)
 	int rank;
 	int up;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetCouncilRank(): enter", 1);
 	if (*(int*) (g_slot_table + 4 + slot * 0x21c) == -1 || g_slot_table[8 + slot * 0x21c] == 0) {
 		return 0;
 	}
@@ -4130,6 +4208,8 @@ int __cdecl gm_GetBirthday(char* entity, unsigned char* out)
 	unsigned int seed;
 	int age;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetBirthday(): enter", 1);
 	if (entity[8] != 0) {
 		return 0;
 	}
@@ -4151,6 +4231,8 @@ int __cdecl gm_CanMarry(char* a, char* b)
 	int i;
 	int first;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CanMarry(): enter", 1);
 	age_diff = (unsigned char) b[0x58] - (unsigned char) a[0x58];
 	if (b[8] == 0) {
 		return 0;
@@ -4190,6 +4272,8 @@ int __cdecl gm_CanMarry(char* a, char* b)
 			return 0;
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CanMarry(): exit", 1);
 	return 1;
 }
 
@@ -4225,6 +4309,8 @@ int __cdecl gm_CountChildren(char* entity, int* count_out)
 	int count;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CountChildren(): enter", 1);
 	adult = 0;
 	count = 0;
 	for (i = 0; i < 5; i++) {
@@ -4974,6 +5060,8 @@ int __cdecl gm_AmountToUnits(int amount, unsigned char type)
 {
 	extern int g_spiel_space_fill[16];
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_AmountToUnits(): enter", 1);
 	return (int) ((float) amount / g_spiel_space_fill[*(unsigned short*) &g_entity_slot_table[type * 189] - 61] + 0.5);
 }
 
@@ -4981,6 +5069,8 @@ int __cdecl gm_UnitsToAmount(int units, unsigned char type)
 {
 	extern int g_spiel_space_fill[16];
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_UnitsToAmount(): enter", 1);
 	return units * g_spiel_space_fill[*(unsigned short*) &g_entity_slot_table[type * 189] - 61];
 }
 
@@ -4988,6 +5078,8 @@ int __cdecl gm_UnitsToAmountById(int units, int id)
 {
 	extern int g_spiel_space_fill[16];
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_UnitsToAmountById(): enter", 1);
 	return units * g_spiel_space_fill[id - 61];
 }
 
@@ -4995,6 +5087,8 @@ int __cdecl gm_AmountToUnitsById(int amount, int id)
 {
 	extern int g_spiel_space_fill[16];
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_AmountToUnitsById(): enter", 1);
 	return amount / g_spiel_space_fill[id - 61];
 }
 
@@ -5023,6 +5117,8 @@ int __cdecl gm_SumStoreCount(int store)
 	void* entry;
 	int total;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SumStoreCount(): enter", 1);
 	total = 0;
 	entry = gm_ff_Objekt(store, 1, 4, 9);
 	while (entry != 0) {
@@ -5040,6 +5136,8 @@ float __cdecl gm_GetManufacturerRating(int item)
 	float sum;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetManufacturerRating(): enter", 1);
 	sum = g_const_0_0;
 	type = (unsigned char*) g_entity_type_table + ((int*) g_minimum_manufacturer)[item] * 0x24d;
 	for (i = 0; i < 2; i++) {
@@ -5192,6 +5290,8 @@ float __cdecl gm_GetSeasonPrice(int id, unsigned char season)
 {
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetSeasonPrice(): enter", 1);
 	for (i = 0; i < 0x55; i++) {
 		if (*(unsigned short*) ((char*) &g_slot_array + season * 0x2a90 + i * 0x80) == id) {
 			return *(float*) ((char*) &g_slot_array + 0x38 + season * 0x2a90 + i * 0x80);
@@ -5207,6 +5307,8 @@ float __cdecl gm_GetHappinessFactor(int slot)
 	unsigned char* e;
 	float v;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetHappinessFactor(): enter", 1);
 	e = g_slot_table + slot * 0x21c;
 	if (e == 0) {
 		return 1.0f;
@@ -5231,6 +5333,8 @@ void __cdecl gm_FormatPrice(int amount, unsigned char type, char* out)
 	int i;
 	char* p;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FormatPrice(): enter", 1);
 	units = gm_AmountToUnits(abs(amount), type);
 	if (amount < 0) {
 		if (units != 0) {
@@ -5282,6 +5386,8 @@ void __cdecl gm_FormatPrice(int amount, unsigned char type, char* out)
 		}
 	}
 	sprintf(out, "0%c", 0x11);
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FormatPrice(): exit", 1);
 }
 
 int __cdecl gm_ListBuildingStores(unsigned char* building, void** out)
@@ -5291,6 +5397,8 @@ int __cdecl gm_ListBuildingStores(unsigned char* building, void** out)
 	int n;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListBuildingStores(): enter", 1);
 	n = 0;
 	slot = (unsigned short*) ((unsigned char*) g_entity_type_table + building[0] * 0x24d + 0x23);
 	for (i = 0; i < 0x40 && *slot != 0; i++, slot++) {
@@ -5309,6 +5417,8 @@ int __cdecl gm_ListProducts(unsigned char* building, int* out)
 	int i;
 	int item;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListProducts(): enter", 1);
 	n = 0;
 	type = (unsigned char*) g_entity_type_table + *building * 0x24d;
 	for (i = 0; i < 0x40; i++) {
@@ -5334,6 +5444,8 @@ int __cdecl gm_ListProductsAfter(unsigned char* building, unsigned short* key, i
 	int i;
 	int item;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListProductsAfter(): enter", 1);
 	n = 0;
 	type = (unsigned char*) g_entity_type_table + *building * 0x24d;
 	for (i = 0; i < type[0x22]; i++) {
@@ -5360,11 +5472,15 @@ int __cdecl gm_ListProductsAfter(unsigned char* building, unsigned short* key, i
 			out[n] = item;
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListProductsAfter(): exit", 1);
 	return n;
 }
 
 int __cdecl gm_GetEntityMood(char* entity)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetEntityMood(): enter", 1);
 	return (signed char) entity[0x5c];
 }
 
@@ -5373,6 +5489,8 @@ int __cdecl gm_ListGuildHouses(char* player, void** out)
 	char* house;
 	int n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ListGuildHouses(): enter", 1);
 	n = 0;
 	house = (char*) gm_ff_Objekt(n, 2, 7, 4, 0x1d);
 	while (house != 0 && n < 3) {
@@ -5391,6 +5509,8 @@ int __cdecl gm_GetBuildingLevel(unsigned char* building)
 {
 	unsigned char* type;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetBuildingLevel(): enter", 1);
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
 	switch (type[0]) {
 	case 2:
@@ -5413,6 +5533,8 @@ int __cdecl gm_HasLevelFor(unsigned char* building, unsigned char* other)
 	int need;
 	int level;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_HasLevelFor(): enter", 1);
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
 	level = 0;
 	need = gm_GetBuildingLevel(other);
@@ -5435,6 +5557,8 @@ int __cdecl gm_SumProductPoints(unsigned char* building, int kind, int scaled)
 	int i;
 	int item;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SumProductPoints(): enter", 1);
 	sum = 0;
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
 	for (i = 0; i < 0x40; i++) {
@@ -5455,6 +5579,8 @@ int __cdecl gm_SumTypePoints(int type_index, int kind)
 	int sum;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SumTypePoints(): enter", 1);
 	sum = 0;
 	type = (unsigned char*) g_entity_type_table + type_index * 0x24d;
 	for (i = 0; i < 0x40; i++) {
@@ -5475,6 +5601,8 @@ int __cdecl gm_DaytimeMinutesBetween(char* from, char* to)
 	int days;
 
 	if (gm_CompareGameTime(from, to) > 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_DaytimeMinutesBetween(): from is later than to", 1);
 		return 0;
 	}
 	*(int*) cur = *(int*) from;
@@ -5531,6 +5659,8 @@ int __cdecl gm_GetBuildingStock(char* building, void* stock, int producers)
 	if (store == 0) {
 		store = (char*) gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, 0x116);
 		if (store == 0) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetBuildingStock(): no store", 1);
 			return 0;
 		}
 	}
@@ -5585,6 +5715,8 @@ int __cdecl gm_GetBuildingFoodStock(char* building, void* stock, int producers)
 	if (store == 0) {
 		store = (char*) gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, 0x116);
 		if (store == 0) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetBuildingFoodStock(): no store", 1);
 			return 0;
 		}
 	}
@@ -5732,6 +5864,8 @@ int __cdecl gm_SumTreasury(char* entity)
 	char* r;
 	int sum;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SumTreasury(): enter", 1);
 	sum = 0;
 	r = (char*) gm_ff_Objekt(*(int*) (entity + 0x178), 1, 4, 9);
 	if (r) {
@@ -5748,6 +5882,8 @@ int __cdecl gm_GetSeasonTreasury(char* entity, char season)
 	char* r;
 	int result;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetSeasonTreasury(): enter", 1);
 	result = 0;
 	r = (char*) gm_ff_Objekt(*(int*) (entity + 0x178), 1, result, (int) (unsigned short) g_entity_slot_table[season * 189]);
 	if (r) {
@@ -5764,6 +5900,8 @@ int __cdecl gm_SumSlotTreasury(int slot)
 
 	owner = (char*) gm_LookupEntityRecordById(*(int*) (g_slot_table + 4 + slot * 0x21c));
 	if (owner == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_SumSlotTreasury(): owner not found", 1);
 		return -1;
 	}
 	sum = 0;
@@ -5802,6 +5940,8 @@ short* __cdecl gm_ResolveEntityRecord(short* entity)
 {
 	void* dynamic_ent;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ResolveEntityRecord(): enter", 1);
 	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &entity, *(int*) (entity + 5));
 	if (entity == (short*) 0) {
 		if (dynamic_ent != (void*) 0 && *(unsigned short*) ((char*) dynamic_ent + 0x25) != 0xffff) {
@@ -5843,6 +5983,8 @@ unsigned short __cdecl gm_ResolveEntitySlot(short* entity)
 	if (dynamic_ent != (void*) 0) {
 		return *(unsigned short*) ((char*) dynamic_ent + 0x25);
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_ResolveEntitySlot(): entity not found", 1);
 	return 0xffff;
 }
 
@@ -5964,6 +6106,8 @@ int __cdecl gm_CalcFortuneTax(int fortune, int rate)
 {
 	int tax;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CalcFortuneTax(): enter", 1);
 	tax = 0;
 	if (fortune > g_const_0_0) {
 		if (fortune < 32000) {
@@ -6006,6 +6150,8 @@ int __cdecl gm_GetStoreItemField(char* store, int item)
 
 	entry = (char*) gm_ff_Objekt(*(int*) (store + 0x14), 1, 0, item);
 	if (entry == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetStoreItemField(): entry not found", 1);
 		return 0;
 	}
 	return gm_GetMsgField(store, entry);
@@ -6141,6 +6287,8 @@ int __cdecl gm_GetStoreRoom(char* store, int item, int limit)
 		n++;
 	}
 	if (n >= (unsigned char) store[0x1c]) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetStoreRoom(): index out of range", 1);
 		return 0;
 	}
 	return cap < limit ? cap : limit;
@@ -6238,6 +6386,8 @@ char* __cdecl gm_GetGuildHall(int guild)
 {
 	char* hall;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetGuildHall(): enter", 1);
 	hall = 0;
 	switch (guild) {
 	case 1:
@@ -6267,6 +6417,8 @@ int __cdecl gm_GetTypeGuild(int type_index, int* guild)
 {
 	int found;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetTypeGuild(): enter", 1);
 	found = 1;
 	switch ((unsigned char) g_entity_type_table[type_index * 0x24d]) {
 	case 15:
@@ -6298,6 +6450,8 @@ int __cdecl gm_GetTypeGuild(int type_index, int* guild)
 		found = 0;
 		break;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetTypeGuild(): exit", 1);
 	return found;
 }
 
@@ -6310,6 +6464,8 @@ int __cdecl gm_GetWealthRank(int slot, int extra)
 
 	rank = 1;
 	if (slot < 0 || slot >= 0x300) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetWealthRank(): slot out of range", 1);
 		return 0;
 	}
 	wealth = *(int*) (g_slot_table + 0x1ac + slot * 0x21c) + extra;
@@ -6327,6 +6483,8 @@ void __cdecl gm_GetRichestFive(int* ids, int* wealth)
 	int i;
 	int j;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetRichestFive(): enter", 1);
 	for (i = 0; i < 5; i++) {
 		ids[i] = 0xffff;
 		wealth[i] = 0;
@@ -6350,6 +6508,8 @@ void __cdecl gm_GetRichestFive(int* ids, int* wealth)
 
 int __cdecl gm_GetRelationship(int a, int b)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetRelationship(): enter", 1);
 	if (a == b) {
 		return 0x7f;
 	}
@@ -6361,6 +6521,8 @@ int __cdecl gm_HasNoGuildHouse(char* entity)
 	unsigned char* e;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_HasNoGuildHouse(): enter", 1);
 	if (entity[0x1b1] == 0) {
 		return 0;
 	}
@@ -6403,6 +6565,8 @@ int __cdecl gm_CountHouseUpgradesA(char* house)
 {
 	int n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CountHouseUpgradesA(): enter", 1);
 	n = 1;
 	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x27a) != 0) {
 		n = 2;
@@ -6420,6 +6584,8 @@ int __cdecl gm_CountHouseUpgradesB(char* house)
 {
 	int n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CountHouseUpgradesB(): enter", 1);
 	n = 2;
 	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x274) != 0) {
 		n = 3;
@@ -6440,6 +6606,8 @@ int __cdecl gm_CountHouseUpgradesC(char* house)
 {
 	int n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CountHouseUpgradesC(): enter", 1);
 	n = 1;
 	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x285)) {
 		n = 2;
@@ -6454,6 +6622,8 @@ int __cdecl gm_CountHouseUpgradesD(char* house)
 {
 	int n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_CountHouseUpgradesD(): enter", 1);
 	n = 4;
 	if (gm_ff_Objekt(*(int*) (house + 0x5d), 2, 6, 0, 0x284)) {
 		n = 7;

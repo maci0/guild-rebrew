@@ -135,6 +135,8 @@ void __cdecl vfs_ScanArchive(char* path, VFS_DIR* parent, unsigned int archive);
 /* Compares two VFS names: case-insensitively when g_vfs_case_sensitive is set. */
 int __cdecl vfs_CompareNames(const char* a, const char* b)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_CompareNames(): enter", 1);
 	if (g_vfs_case_sensitive != 0) {
 		return stricmp(a, b);
 	}
@@ -144,6 +146,8 @@ int __cdecl vfs_CompareNames(const char* a, const char* b)
 /* Upper-cases a name unless the file system is case-sensitive. */
 char* __cdecl vfs_NormalizeCase(char* name)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_NormalizeCase(): enter", 1);
 	if (g_vfs_case_sensitive != 0) {
 		return name;
 	}
@@ -155,6 +159,8 @@ void __cdecl vfs_ToSlashes(char* p)
 {
 	int n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_ToSlashes(): enter", 1);
 	if (p == 0) {
 		return;
 	}
@@ -176,6 +182,8 @@ void __cdecl vfs_ToBackslashes(char* p)
 {
 	int n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_ToBackslashes(): enter", 1);
 	if (p == 0) {
 		return;
 	}
@@ -198,6 +206,8 @@ VFS_DIR* __cdecl vfs_GetSubDir(char* name, VFS_DIR* parent)
 	VFS_DIR* p;
 	VFS_DIR* n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_GetSubDir(): enter", 1);
 	if (parent != 0) {
 		for (p = parent->child; p != 0; p = p->next) {
 			if (vfs_CompareNames(name, p->name) == 0) {
@@ -226,12 +236,16 @@ VFS_DIR* __cdecl vfs_GetSubDir(char* name, VFS_DIR* parent)
 /* bsearch comparator: a name against a file entry. */
 int __cdecl vfs_CompareKey(const char* key, const char** file)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_CompareKey(): enter", 1);
 	return strcmp(key, *file);
 }
 
 /* bsearch comparator: a name against a file entry, ignoring case. */
 int __cdecl vfs_CompareKeyNoCase(const char* key, const char** file)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_CompareKeyNoCase(): enter", 1);
 	return stricmp(key, *file);
 }
 
@@ -242,6 +256,8 @@ VFS_FILE* __cdecl vfs_FindFile(const char* name, VFS_DIR* dir, VFS_DIR** found_d
 	VFS_FILE* f;
 
 	if (name == 0 || *name == 0 || dir == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_FindFile(): invalid parameter", 1);
 		return 0;
 	}
 	if (dir->count > 0 && dir->loaded != 0) {
@@ -288,6 +304,8 @@ void __cdecl vfs_AddFile(char* name, VFS_DIR* dir, VFS_DIR* source, int stamp, i
 	char msg[0x400];
 	char dir_path[0x400];
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_AddFile(): enter", 1);
 	prev = 0;
 	if (dir->loaded != 0) {
 		f = vfs_FindFile(name, dir, &found, 0);
@@ -410,6 +428,8 @@ void __cdecl vfs_AddFile(char* name, VFS_DIR* dir, VFS_DIR* source, int stamp, i
 				strcat(new_path, g_file_extension_names + archive * 6);
 			}
 			sprintf(msg, "vfs: name collision: \"%s%s\" %s%s", dir_path, name, old_path, new_path);
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, msg, 1);
 			if (offset > it->offset || offset == (unsigned int) -1 || archive < it->archive) {
 				it->offset = offset;
 				it->source = source;
@@ -440,6 +460,8 @@ void __cdecl vfs_AddFile(char* name, VFS_DIR* dir, VFS_DIR* source, int stamp, i
 	it->archive = archive;
 	it->offset = offset;
 	it->next = 0;
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_AddFile(): exit", 1);
 }
 
 /* Adds a file path below parent: creates the directories of its path, then the file. */
@@ -451,6 +473,8 @@ void __cdecl vfs_AddPath(char* path, VFS_DIR* parent, VFS_DIR* source, int stamp
 	char* p;
 	VFS_DIR* node;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_AddPath(): enter", 1);
 	if (path[strlen(path) - 1] != '/') {
 		node = parent;
 		strcpy(buf, path);
@@ -470,12 +494,16 @@ void __cdecl vfs_AddPath(char* path, VFS_DIR* parent, VFS_DIR* source, int stamp
 /* qsort comparator: orders two file entries by name. */
 int __cdecl vfs_CompareFiles(const char** a, const char** b)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_CompareFiles(): enter", 1);
 	return strcmp(*a, *b);
 }
 
 /* qsort comparator: orders two file entries by name, ignoring case. */
 int __cdecl vfs_CompareFilesNoCase(const void* a, const void* b)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_CompareFilesNoCase(): enter", 1);
 	return stricmp(*(const char**) a, *(const char**) b);
 }
 
@@ -490,6 +518,8 @@ void __cdecl vfs_FinishFiles(VFS_DIR* dir, char recurse)
 	int len;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_FinishFiles(): enter", 1);
 	if (dir->items != 0 && dir->loaded == 0) {
 		len = 0;
 		n = 0;
@@ -531,6 +561,8 @@ void __cdecl vfs_FinishFiles(VFS_DIR* dir, char recurse)
 			vfs_FinishFiles(dir->next, 1);
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_FinishFiles(): exit", 1);
 }
 
 /* Walks the '/'-separated directory path from dir down its children;
@@ -546,6 +578,8 @@ VFS_DIR* __cdecl vfs_FindDir(char* path, VFS_DIR* dir)
 
 	cur = dir;
 	if (path == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_FindDir(): path == NULL", 1);
 		return 0;
 	}
 	if (*path != 0) {
@@ -601,6 +635,8 @@ VFS_FILE* __cdecl vfs_LookupPath(char* path, VFS_DIR* root, VFS_DIR** found_dir)
 		*s = 0;
 		dir = vfs_FindDir(buf, dir);
 		if (dir == 0) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_LookupPath(): directory not found", 1);
 			return 0;
 		}
 	}
@@ -624,6 +660,8 @@ char* __cdecl vfs_GetFilePath(VFS_FILE* file, VFS_DIR* dir, VFS_DIR* stop, char*
 	VFS_DIR* p;
 
 	if (dir == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_GetFilePath(): dir == NULL", 1);
 		return 0;
 	}
 	if (dir != stop) {
@@ -662,6 +700,8 @@ char* __cdecl vfs_GetDirPath(VFS_DIR* dir, VFS_DIR* stop, char* out)
 
 	p = dir;
 	if (p == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_GetDirPath(): dir == NULL", 1);
 		return 0;
 	}
 	strcpy(out, p->name);
@@ -710,6 +750,8 @@ char* __cdecl vfs_GetRelativePath(const char* path, VFS_DIR* dir, char* out)
 			}
 		}
 		if (i != nlen) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_GetRelativePath(): path is outside the root", 1);
 			return 0;
 		}
 		strcpy(tmp, buf + i);
@@ -736,6 +778,8 @@ char* __cdecl vfs_GetDirPathOf(char* path, VFS_DIR* root, VFS_DIR* stop, char* o
 		}
 		return out;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_GetDirPathOf(): directory not found", 1);
 	return 0;
 }
 
@@ -749,6 +793,8 @@ char* __cdecl vfs_GetFilePathOf(char* path, VFS_DIR* root, VFS_DIR* stop, char* 
 		vfs_GetFilePath(f, root, stop, out);
 		return out;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_GetFilePathOf(): file not found", 1);
 	return 0;
 }
 
@@ -772,6 +818,8 @@ VFS_DIR* __cdecl vfs_ScanDir(char* path, VFS_DIR* parent)
 	int i;
 	int n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_ScanDir(): enter", 1);
 	dir = 0;
 	strcpy(dirpath, path);
 	vfs_NormalizeCase(dirpath);
@@ -853,6 +901,8 @@ VFS_DIR* __cdecl vfs_ScanDir(char* path, VFS_DIR* parent)
 	if (parent == 0 && dir != 0) {
 		vfs_FinishFiles(dir, 1);
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_ScanDir(): exit", 1);
 	return dir;
 }
 
@@ -875,6 +925,8 @@ void __cdecl vfs_ScanArchive(char* path, VFS_DIR* parent, unsigned int archive)
 
 	zip = unzOpen(path);
 	if (zip == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_ScanArchive(): Can't open archive", 1);
 		return;
 	}
 	strcpy(buf, path);
@@ -907,6 +959,8 @@ void __cdecl vfs_FreeDirs(VFS_DIR* n)
 	VFS_ITEM* it;
 	VFS_ITEM* nx;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_FreeDirs(): enter", 1);
 	while (n != 0) {
 		it = n->items;
 		next = n->next;
@@ -939,6 +993,8 @@ char __cdecl vfs_MakeDirs(char* path, VFS_DIR* dir)
 	struct _finddata_t fd;
 
 	if (path == 0 || *path == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_MakeDirs(): empty path", 1);
 		return 0;
 	}
 	strcpy(p, path);
@@ -961,6 +1017,8 @@ char __cdecl vfs_MakeDirs(char* path, VFS_DIR* dir)
 			h = _findfirst(cur, &fd);
 			if (h == -1) {
 				if (mkdir(cur) != 0) {
+					/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+					LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_MakeDirs(): Can't create directory", 1);
 					return 0;
 				}
 			} else {
@@ -996,6 +1054,8 @@ char __cdecl vfs_RemoveFile(char* path, VFS_DIR* root)
 			return remove(buf) == 0;
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_RemoveFile(): file not found", 1);
 	return 0;
 }
 
@@ -1030,6 +1090,8 @@ char* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
 
 	stream = 0;
 	if (path == 0 || *path == 0 || mode == 0 || root == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_Tfopen(): invalid parameter", 1);
 		goto done;
 	}
 	read = 1;
@@ -1109,6 +1171,8 @@ char* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
 			unzClose(zip);
 		not_found:
 			sprintf(entry, "vfs_Tfopen: Could not find \"%s\"!!", path);
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, entry, 1);
 			return stream;
 		}
 		modes[0] = "rt";
@@ -1145,6 +1209,8 @@ char* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
 	file = vfs_LookupPath(name, root, &dir);
 	if (file == 0 || file->source != 0) {
 		if (!vfs_MakeDirs(entry, root)) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_Tfopen(): Can't create directories", 1);
 			return 0;
 		}
 		if (file == 0) {
@@ -1170,6 +1236,8 @@ char* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
 		h = fopen(arch, modes[binary]);
 	}
 	if (h == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_Tfopen(): Can't open file for writing", 1);
 		goto done;
 	}
 	stream = (char*) m_PoolAlloc(g_stream_pool, 0x140, 0x10);
@@ -1365,6 +1433,8 @@ int __cdecl vfs_fgetc(char* stream)
 {
 	char c;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_fgetc(): enter", 1);
 	if (vfs_ReadData(&c, 1, 1, stream) == 1) {
 		return c;
 	}
@@ -1378,6 +1448,8 @@ char* __cdecl vfs_fgets(char* buf, int max, char* stream)
 	char* p;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_fgets(): enter", 1);
 	c = vfs_fgetc(stream);
 	if (c == -1) {
 		return 0;
@@ -1410,14 +1482,20 @@ unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream)
 
 	result = -1;
 	if (stream == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_fwrite(): stream == NULL", 1);
 		goto done;
 	}
 	flags = *(unsigned char*) (stream + 0x13c);
 	if (flags & 1) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_fwrite(): stream is read-only", 1);
 		goto done;
 	}
 	h = *(void**) (stream + 0x100);
 	if (h == 0 && !(flags & 0x20)) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_fwrite(): no file handle", 1);
 		goto done;
 	}
 	total = size * count;
@@ -1430,6 +1508,8 @@ unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream)
 		goto done;
 	}
 	if (buf == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_fwrite(): buf == NULL", 1);
 		goto done;
 	}
 	if (mem) {
@@ -1488,6 +1568,8 @@ int __cdecl vfs_fseek(char* s, int off, int whence)
 	int pos;
 	void* buf;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_fseek(): enter", 1);
 	r = -1;
 	if (s != 0 && *(void**) (s + 0x100) != 0 && (s[0x13c] & 0x20) == 0) {
 		if (s[0x13c] & 1) {
@@ -1544,6 +1626,8 @@ int __cdecl vfs_fseek(char* s, int off, int whence)
 			ReportMessage("Seeking only supported in read-only files");
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_fseek(): exit", 1);
 	return r;
 }
 
@@ -1554,6 +1638,8 @@ long __cdecl vfs_ftell(char* a)
 	void* h;
 	long r;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_ftell(): enter", 1);
 	r = -1;
 	if (a != 0) {
 		h = *(void**) (a + 0x100);
@@ -1702,6 +1788,8 @@ char __cdecl vfs_ForEachFile(VFS_DIR* start, char siblings, char* ext, char (__c
 
 	dir = start;
 	if (cb == 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_ForEachFile(): callback == NULL", 1);
 		return 0;
 	}
 	if (dir == 0) {
@@ -1748,11 +1836,15 @@ int __cdecl vfs_init(char* name, char flag)
 	char cwd[0x100];
 	char buf[0x100];
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_init(): enter", 1);
 	g_stream_count = 0;
 	g_vfs_case_sensitive = flag;
 	g_vfs_root = vfs_ScanDir(name, 0);
 	getcwd(cwd, 0x100);
 	sprintf(buf, "vfs_init: root -> \"%s\" relative to \"%s\"", name, cwd);
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, buf, 1);
 	*(int*) g_vfs_item_pool = 0;
 	return g_vfs_root != 0;
 }
@@ -1768,6 +1860,8 @@ void __cdecl vfs_exit(char verbose)
 	char buf[0x100];
 	char* s;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_exit(): enter", 1);
 	if (g_vfs_root != 0) {
 		vfs_FreeDirs(g_vfs_root);
 		g_vfs_root = 0;

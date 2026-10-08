@@ -1351,6 +1351,46 @@ int __cdecl amt_CanUpgradeBuildingTier3(unsigned char* building)
 	return *(int*) (building + 0x194) < 8 ? -2 : 1;
 }
 
+/* Client-only (TL 0x4ec410, discarded): writes the 42 office slots that amt_fio_LoadAemter reads. The
+ * client formats the count message and drops it; its log macro compiles to nothing there. */
+int __cdecl amt_fio_SaveAemter(void* file)
+{
+	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	int count;
+	char msg[0x100];
+	int i;
+
+	count = 0x2a;
+	if (file == 0) {
+		return 0;
+	}
+	if (!vfs_fwrite(&count, 4, 1, file)) {
+		return 0;
+	}
+	sprintf(msg, "amt_fio_SaveAemter(): count is %i", count);
+	for (i = 0; i < 0x2a; i++) {
+		if (!vfs_fwrite(&((OFFICE_SLOT*) g_office_slots)[i].id, 1, 1, file)) {
+			return 0;
+		}
+		if (!vfs_fwrite(&((OFFICE_SLOT*) g_office_slots)[i].mplayerid, 4, 1, file)) {
+			return 0;
+		}
+		if (!vfs_fwrite(&((OFFICE_SLOT*) g_office_slots)[i].mamt, 1, 1, file)) {
+			return 0;
+		}
+		if (!vfs_fwrite(&((OFFICE_SLOT*) g_office_slots)[i].pcount, 4, 1, file)) {
+			return 0;
+		}
+		if (!vfs_fwrite(&((OFFICE_SLOT*) g_office_slots)[i].status, 1, 1, file)) {
+			return 0;
+		}
+		if (!vfs_fwrite(&((OFFICE_SLOT*) g_office_slots)[i].msetter, 4, 1, file)) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 /* Validates if an entity is eligible for an office position.
  * Checks entity type, existing office holdings, and eligibility
  * requirements. Returns 0 on success, non-zero on failure. */
@@ -1468,6 +1508,8 @@ void* __cdecl amt_GetTownHallHolder(unsigned char* building)
 			return gm_LookupEntityRecordById(*office);
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", __LINE__, "amt_GetTownHallHolder(): no town hall office", 1);
 	return 0;
 }
 
@@ -1478,6 +1520,8 @@ int __cdecl amt_CountTownHallSeats(char* entity)
 	int i;
 	int n;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", __LINE__, "amt_CountTownHallSeats(): enter", 1);
 	if (ahm_CheckFlag(entity) == 0) {
 		return 0;
 	}

@@ -726,28 +726,44 @@ int __cdecl ahm_fio_SaveAhmInfo(void* file, char* obj)
 		data = buf;
 	}
 	if (vfs_fwrite(data, 4, 1, file) <= 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_SaveAhmInfo(): Can't save field 0x00", 1);
 		return 0;
 	}
 	if (vfs_fwrite(data + 4, 4, 1, file) <= 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_SaveAhmInfo(): Can't save field 0x04", 1);
 		return 0;
 	}
 	if (vfs_fwrite(data + 8, 1, 1, file) <= 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_SaveAhmInfo(): Can't save field 0x08", 1);
 		return 0;
 	}
 	if (vfs_fwrite(data + 9, 1, 1, file) <= 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_SaveAhmInfo(): Can't save field 0x09", 1);
 		return 0;
 	}
 	if (vfs_fwrite(data + 0xa, 1, 1, file) <= 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_SaveAhmInfo(): Can't save field 0x0a", 1);
 		return 0;
 	}
 	if (vfs_fwrite(data + 0xb, 1, 1, file) <= 0) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_SaveAhmInfo(): Can't save field 0x0b", 1);
 		return 0;
 	}
 	for (i = 0; i < 6; i++) {
 		if (vfs_fwrite(data + 0xc + i * 8, 4, 1, file) <= 0) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_SaveAhmInfo(): Can't save slot id", 1);
 			return 0;
 		}
 		if (vfs_fwrite(data + 0x10 + i * 8, 4, 1, file) <= 0) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_SaveAhmInfo(): Can't save slot value", 1);
 			return 0;
 		}
 	}
@@ -825,6 +841,8 @@ int __cdecl ahm_CountUnusedAvatars(void)
 	int n;
 	unsigned int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_CountUnusedAvatars(): enter", 1);
 	n = 0;
 	for (i = 0; i < 32; i++) {
 		if (g_alchemy_random_table[4 + i * 0xf4 + 0xf2] == 0) {
@@ -843,6 +861,8 @@ unsigned char* __cdecl ahm_FindAvatar(int key)
 			return g_alchemy_random_table + 4 + i * 0xf4;
 		}
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_FindAvatar(): avatar not found", 1);
 	return 0;
 }
 
@@ -861,19 +881,27 @@ int __cdecl ahm_fio_LoadAvatars(int file)
 		return 0;
 	}
 	if (!ls_ReadVfsDataChecked(&count, 4, 1, file)) {
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_LoadAvatars(): Can't load count", 1);
 		return 0;
 	}
 	if (count != 32) {
 		sprintf(buf, "Inconsisten Avatar count: <Expected: %i> <Found: %i>", 32, count);
+		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, buf, 1);
 	}
 	for (k = 0; k < 32; k++) {
 		g_alchemy_random_table[4 + k * 0xf4 + 0xf2] = 0xff;
 	}
 	for (i = 0; i < count; i++) {
 		if (!ls_ReadVfsDataChecked(&key, 4, 1, file)) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_LoadAvatars(): Can't load key", 1);
 			return 0;
 		}
 		if (!ls_ReadVfsDataChecked(&state, 1, 1, file)) {
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_fio_LoadAvatars(): Can't load state", 1);
 			return 0;
 		}
 		for (k = 0; k < 32; k++) {
@@ -889,12 +917,16 @@ int __cdecl ahm_fio_LoadAvatars(int file)
 			fourcc[3] = (char) key;
 			fourcc[4] = 0;
 			sprintf(buf, "Avatar >%s< not found in savegame, initializing to >unused<", fourcc);
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, buf, 1);
 		}
 	}
 	for (k = 0; k < 32; k++) {
 		if (g_alchemy_random_table[4 + k * 0xf4 + 0xf2] == 0xff) {
 			sprintf(buf, "Avatar >%s< not found in savegame, initializing to >unused<",
 			    (char*) (g_alchemy_random_table + 4 + k * 0xf4 + 4));
+			/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, buf, 1);
 			g_alchemy_random_table[4 + k * 0xf4 + 0xf2] = 0;
 		}
 	}
@@ -923,6 +955,8 @@ float __cdecl ahm_CalcTraitBonus(int level, int percent, int count)
 	float sum;
 	int k;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_CalcTraitBonus(): enter", 1);
 	if (level >= 4) {
 		level = 4;
 	}
@@ -948,6 +982,8 @@ float __cdecl ahm_CalcTraitBonus(int level, int percent, int count)
 		sum += step;
 		step *= 0.5f;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_CalcTraitBonus(): exit", 1);
 	return sum;
 }
 
@@ -956,6 +992,8 @@ void __cdecl ahm_CalcTraitLimits(int level, int* out)
 	float base;
 	int i;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_CalcTraitLimits(): enter", 1);
 	if (level >= 4) {
 		level = 4;
 	}
@@ -975,6 +1013,8 @@ int __cdecl ahm_CanAffordUpgrade(char* entity, int level, int percent, int count
 {
 	int __cdecl gm_SumStoreCount(int store, int season);
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_CanAffordUpgrade(): enter", 1);
 	if (level >= 4) {
 		level = 4;
 	}
@@ -1004,6 +1044,8 @@ int __cdecl ahm_CanAffordUpgrade(char* entity, int level, int percent, int count
 
 void __cdecl ahm_GetLabUpgrades(char* lab, int* furnace, int* tools)
 {
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_GetLabUpgrades(): enter", 1);
 	*tools = 0;
 	*furnace = 0;
 	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x265)) {
@@ -1031,6 +1073,8 @@ void __cdecl ahm_GetLabRisk(char* lab, float* explode, float* fail)
 	float x;
 	float y;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_GetLabRisk(): enter", 1);
 	x = 0.02f;
 	y = 0.2f;
 	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x25c)) {
@@ -1053,6 +1097,8 @@ float __cdecl ahm_GetLabYieldFactor(char* lab)
 {
 	float v;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_GetLabYieldFactor(): enter", 1);
 	v = 1.0f;
 	if (gm_ff_Objekt(*(int*) (lab + 0x5d), 2, 6, 0, 0x259)) {
 		v = 1.05f;
@@ -1073,6 +1119,8 @@ int __cdecl ahm_CountBusyWorkers(char* building)
 	int c;
 	char* p;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_CountBusyWorkers(): enter", 1);
 	n = cm_GetBuildingStatCount((unsigned char*) building);
 	c = 0;
 	if (n == 0) {
@@ -1095,6 +1143,8 @@ int __cdecl ahm_PickBestWorker(char* workers, int n)
 	int i;
 	int j;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_PickBestWorker(): enter", 1);
 	best = 0;
 	best_sum = 0;
 	for (i = 0; i < n; i++, workers += 0x44) {
@@ -1123,6 +1173,8 @@ int __cdecl ahm_CompareBestWorkers(char* a, int na, char* b, int nb)
 	int i;
 	int j;
 
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_CompareBestWorkers(): enter", 1);
 	best_a = best_b = 0;
 	sum_a = sum_b = 0;
 	for (i = 0; i < na; i++, a += 0x44) {
@@ -1160,6 +1212,8 @@ int __cdecl ahm_CompareBestWorkers(char* a, int na, char* b, int nb)
 	if (sum_b > sum_a) {
 		return 1;
 	}
+	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", __LINE__, "ahm_CompareBestWorkers(): exit", 1);
 	return (sum_b >= sum_a) - 1;
 }
 
