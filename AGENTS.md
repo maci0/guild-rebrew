@@ -261,5 +261,14 @@ functions, globals, locals, types, constants and file names.
 - Otherwise use the module prefix and `VerbNoun` (`cm_`, `gm_`, `ahm_`, `gv_`, `sim_`,
   `amt_`, `ls_`, `plt_`, `m_`, `vfs_`, ...; `fio_` infix for file I/O). Never invent a
   prefix; units without an attested prefix keep unprefixed descriptive names.
-- Globals `g_`, structs `UPPER_CASE`, constants `prefix_UPPER_SNAKE`.
+- Globals follow the original style shown by the binaries' allocation labels and log
+  strings, not a project `g_` prefix: attested names exactly (`lpGebaeudePROT`,
+  `lpObjekteINST`, `gm_ObjektNr2MinimalHersteller`, `cm_LastSyncCount`); module globals
+  `<module>_CamelCase`; heap table pointers `lp` + German noun (+ `PROT`/`INST`); file
+  statics `s_`; typed pointers `tp_`; packet and struct fields German snake_case
+  (`quell_besitzer_id`). Structs `UPPER_CASE`, constants `prefix_UPPER_SNAKE`.
+- Compiler literals have no source identifier; their data rows use `str_<content>`
+  (strings) and `flt_`/`dbl_<value>` (float pools), never `s_`.
+- Layout spans and gap fillers are rebrew inventory, not original names; they keep
+  their `g_before_*`/`g_gap_*` row names until an owner is proven.
 - Record an unattested name as inferred where its row or doc entry lives.
