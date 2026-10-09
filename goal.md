@@ -25,8 +25,8 @@ This file is the durable copy: if the session goal state is ever lost, re-create
 
 - Reproduce server.dll (PE, x86-32, MSVC6) from C source with 100% byte-identical
   output: every function EXACT, every data byte matching, link producing reference
-  .text VirtualSize 0x22846 with residue at or below RESIDUE_BASELINE and
-  `rebrew verify --full` at or above its BASELINE.
+  .text VirtualSize 0x22846 and raw output identical to the reference, with
+  linked EXACT and data verification retained as supporting checks.
 - Reproduce Europa1400Gold_TL.exe (PE, x86-32, MSVC6) from C source with 100%
   byte-identical output: every function EXACT, every data byte matching. This is
   the active reversing focus.
@@ -36,15 +36,14 @@ This file is the durable copy: if the session goal state is ever lost, re-create
   cross-import; do not reverse it in isolation.
 - Rebuild the unified shared source structure the original devs most likely had:
   one shared source tree serving all three targets, shared game logic lives once
-  with per-build markers (one source file carries one marker per build),
+  with one managed `MODULE.0xVA` identity row per build bound to that source,
   target-specific code stays in target-specific dirs, no duplicated shared
   sources drifting apart; placement follows module prefixes and
   __FILE__/string evidence, recorded in docs/TODO.md session notes.
 - Overlapping functions across targets (same code, different VAs) stay in ONE
-  shared source file with one marker line per target in the same file where
-  rebrew supports it, or one thin file per target that includes the shared body;
+  shared source file with one managed identity row per target;
   the cross-import result must be verified against each destination before STATUS
-  promotion. Cross-target VA-keyed metadata collisions and shared-source marker
+  promotion. Cross-target VA-keyed metadata collisions and shared-source identity
   handling are rebrew multi-target shortcomings to fix upstream (see below), never
   worked around in game source.
 
@@ -99,9 +98,10 @@ session end.
   positional `match_count` and structural `aligned` routinely disagree with
   the link (one hoist: aligned 662 → 665, match 1004 → 947, link +42 worse).
   When rulers disagree, link and measure.
-- Run `scripts/gate.sh` before every commit (lint, compile, verify baseline,
-  residue baseline). Never lower `RESIDUE_BASELINE` or raise `BASELINE`
-  except on a measured improvement.
+- Run `scripts/gate.sh` before every commit: build integrity, clean lint,
+  raw CMake build, linked EXACT, data/import placement, Wine exports and
+  independent whole-file identity. Never weaken its checks or lower a passing
+  verification baseline to conceal a regression.
 
 ## Types and structs
 
@@ -135,9 +135,13 @@ session end.
 - `Error.c` and `broadcast.c` have no prefix. Never invent `err_`/`net_`.
 - `m_alloc` unit is snake_case (`m_alloc`, `m_init`, `m_pool_free`).
   `m_alloc_debug` is a block group name, not a symbol.
-- Globals `g_` prefix, unknown = `g_<hex>`. Strings stay
-  `s_<content>_<addr>`. Structs `UPPER_CASE`. Constants
-  `prefix_UPPER_SNAKE` (`ob_`, `cmdt_`, `GM_`, `HE_SIM_`).
+- Attested globals keep their original spelling. Otherwise follow the owning
+  module's style: `<module>_CamelCase`, heap table pointers `lp` + German noun
+  (`PROT`/`INST`), file statics `s_`, typed pointers `tp_`. Record inferred names.
+  Compiler literals have no original source identifier: inventory rows use
+  `str_<content>`, `flt_` or `dbl_`. Unproven layout spans retain `g_gap_*` and
+  `g_before_*` until their owners are established. Structs `UPPER_CASE`, fields
+  German snake_case, constants `prefix_UPPER_SNAKE` (`ob_`, `cmdt_`, `GM_`, `HE_SIM_`).
 - Rename only via `rebrew source rename`. Keeps cross-references.
 - Evidence hierarchy: `"<name>(): "` log prefix plus confirmed push of
   the literal is strongest. RevEng attribution alone untrusted (wrong
@@ -239,10 +243,9 @@ Byte match rots fast. Run checks constantly, not just before commits:
 - Never hand-edit `src/rebrew-functions.toml` or `src/rebrew-data.toml`.
   They are tool-owned (`test`, `match`, `diff --fix-blocker` write them).
   Manual edits corrupt tool workflow; lint catches the fallout.
-- `scripts/gate.sh` before every commit, no exceptions. It is the four
-  binding checks: lint, compile (`error C####`/`error LNK####` only —
-  postlink failure is expected until position-aligned), verify baseline,
-  residue baseline.
+- `scripts/gate.sh` before every commit, no exceptions. Compile/link failures
+  are failures. The deliverable is the raw CMake DLL, and the gate requires
+  byte identity, linked EXACT, data/import agreement and working Wine exports.
 
 ## Done criteria
 
@@ -281,3 +284,15 @@ Current working state lives in `.scratch/HANDOFF.md` (gitignored). Update both f
 - 2026-10-08 (round 19, placeholder): 211 marked placeholder LogMessageInternal calls in discarded client-only functions (stopgap until real code is found) plus the amt_fio_SaveAemter and rd_GetBKSize ports close the last 412 DIR32 records: .reloc 66420 and server.dll byte-identical to the reference. Placeholders only where the kept file-path literal cannot move. Details: msvc6-link-layout 5f.
 - 2026-10-08 (round 19, integrated on exp/r19-integrate): merged the sweep, loadsave, orphans, units and alchemistry branches (one definition per client VA) plus Error.c's ReportError and LogMessage. Real code supplies 5246 of the 5535 DIR32 records, 155 marked placeholder calls the other 289 (16 formatted, 53 guard, 19 not-found, 67 entry traces; no exit traces left); server.dll still byte-identical, a_cmp keeps _strncnt. Rounds 16-19 names audited (docs/naming_conventions.md, "Names added in rounds 16-19"). Details: msvc6-link-layout 5f.
 - 2026-10-08 (Codex continuation): preserved the already merged byte-match work. Updated the gate to verify CMake's raw DLL, linked EXACT and data placement without the retired split-link/postlink experiment. Gate passes: 316/316 compiled functions EXACT, 652/652 data symbols compared and matched, imports and Wine exports pass, whole file byte-identical. Fixed Rebrew's explicit archive scans accidentally including automatic vendored objects; 11,371 upstream tests pass (50 skipped), Ruff/Mypy and pre-commit pass. Existing rename/BinSync worktrees and unrelated edits were left untouched. Details and merge receipts: .scratch/HANDOFF.md.
+- 2026-10-08 (goal20 resumed): repaired the `unz_copyright` and `crc_table` data rows to name their actual vendored owners through `rebrew data set`; lint remains clean and 652/652 compared data symbols match. Existing original-name changes and save/load identity corrections remain in their worktree. Prepared a disposable Rebrew main + BinSync-fixes integration and narrowly scoped fixes for its outstanding validation failures; focused checks include a successful real BinSync round trip. Git metadata, sibling checkouts and Docker are inaccessible under this session's restricted filesystem/network, so merging and compiler checks remain pending. Receipts and integration patches: `.scratch/HANDOFF.md`.
+- 2026-10-08 (goal20 receipts): the fresh SERVER candidate `.scratch/goal20/codex-states/server` loads in BinSync's own Client with 651 functions, prototypes for all 251 compiled game functions, and 598 typed/sized globals. Old configured state and all pre-existing worktrees are preserved. Full integration suite: 11,383 passed / 58 skipped / 15 failed (14 sandbox restrictions, one existing path-dependent diagnostic assertion reproduced on unchanged main); Ruff/format/Mypy pass. Integration patch is ready for review against Rebrew main 6579338f, but is not merged. Duplicate/incomplete types remain, so Ghidra cleanup and the original-source goal are still open.
+- 2026-10-08 (packed type sync): fixed shared Rebrew layout parsing and BinSync export in the disposable integration checkout: preserve file-local packing, embedded alignment, incomplete-layout boundaries and names expanded through aliases. Fresh candidate `.scratch/goal20/codex-states/server-packed-final` loads through BinSync's Client with all 1,118 struct names retained; EntityQueryRecord/LinkedNode/BuildingDefaults match their proven sizes (0xa9/0x43/0x15) and offsets. Final focused checks: 416 passed / 1 skipped, real Client round trip passed, Ruff/format and Mypy (356 files) pass. Game sources, 651 function artifacts, 598 global artifacts and byte-identical DLL remain unchanged. Refreshed integration/final-fixes patches; remaining integration, compiler and type cleanup work is recorded in `.scratch/HANDOFF.md`.
+- 2026-10-08 (struct extents): fixed BinSync's omitted natural tail padding in the disposable checkout. Complete size and members now reconcile as one definition; old baselines upgrade without losing their last-shared values, and unrepresentable peer size-only edits remain pending with a reason. Fresh `.scratch/goal20/codex-states/server-sized` corrects 20 aggregate sizes with all member definitions, function/global artifacts and the DLL unchanged. All local/remote type projections agree; BinSync Client loads the candidate. Focused checks: 345 passed / 1 skipped; Ruff/format and Mypy pass. The complete integration patch passes a read-only application check against Rebrew main. Real integration and remaining type/source reconstruction work are still pending; details in `.scratch/HANDOFF.md`.
+- 2026-10-08 (extent validation receipt): final revision full suite has 11,395 passing tests / 58 skips / the same 15 previously identified failures (14 sandbox restrictions, one existing path-dependent assertion). No new failures and no checks weakened. The real BinSync round trip preserves padded sizes, while unchanged-source assertions retain the byte-identical DLL. Integration remains pending under the current restrictions.
+- 2026-10-09 (validation and naming follow-up): resolved the path-dependent refactor diagnostic assertion and three uv cache failures; final upstream integration run has 11,399 passing tests / 58 skips / 11 socket-bind denials, with no new failures or weakened checks. Ruff/format/Mypy pass and the refreshed integration patch still passes a read-only application check. Aligned this goal and the naming guide with original global/literal naming, managed identities and the raw-link gate. Type-scope evidence records 159 differing names, 1,034 client-bound exported types and three conflicts with server compile inputs; lexical scope and include/use closure must precede type consolidation. Compiler/integration gates remain pending; receipts and replay instructions are in `.scratch/HANDOFF.md`.
+- 2026-10-09 (alias and scope continuation): traced server source/include conflicts to lexical scopes, preventing an unsafe consolidation of function-local types. Fixed BinSync alias expansion corrupting member identifiers and foreign aliases overriding local aggregate definitions in the disposable integration checkout. Both regressions pass. The final candidate `server-member-types-final` retains all 1,118 structs and all member/aggregate extents, with seven corrected local type spellings; real Client loading, unchanged artifacts and byte-identical DLL checks pass. Broad validation passes all alias checks but exposed a separate PDB parser property failure; state receipts, patches and remaining type/integration limits are in `.scratch/HANDOFF.md`.
+- 2026-10-09 (PDB record boundaries): fixed the newly discovered parser bug dropping a procedure named `S_GPROC32`, plus an unnamed procedure borrowing a data-symbol name. Both deterministic regressions failed first; all 18 PDB/parser/property tests pass, along with Ruff/format/Mypy. Frozen-revision full run: 11,402 passed / 58 skipped / only the 11 previous socket-bind denials. The complete staged patch includes the repair; actual unrestricted validation/integration remains pending. Receipts and replay instructions are in `.scratch/HANDOFF.md`.
+- 2026-10-09 (original-name integration candidate): prepared an isolated current-main + existing name-branch merge, carrying 16 committed name identities, six pending client identity repairs and the two vendor-owner file fixes through locked metadata writers. All historical verdicts/verification remain preserved; the new load row has no byte verdict. Server lint and scaffold checks pass; each client retains four assembly warnings with zero lint errors. Existing server compile inputs match the previously verified name branch, and both existing DLLs remain reference-identical. The candidate itself still needs a compiler gate; Docker access and actual repository integration remain unavailable. Review patch, assertions and full limits are in `.scratch/HANDOFF.md`.
+- 2026-10-09 (assembly warning scope): fixed W020 combining unrelated function/target statuses and blockers in the disposable upstream integration. Eight regressions and all 264 lint tests pass; Ruff/Mypy pass. Candidate lint still has zero errors but now exposes 2 server, 6 GOLDTL and 40 GOLD assembly findings, superseding the previous suppressed warning counts. Every finding is bound to its source definition; the two server findings have no identity or entry in the existing raw map. No source/byte-verdict changes or gate weakening occurred. Broad validation is running; remaining provenance, compiler gates, integrations and the full shared-tree goal stay open. Receipts and continuation details are in `.scratch/HANDOFF.md`.
+- 2026-10-09 (upstream integration): access was restored and the user reiterated that tool problems must be fixed upstream. Merged the pending BinSync branch and all finishing layout/alias/PDB/lint fixes into actual Rebrew main as `551f0d0cc58bbe8da48793ca177a2faa98868695`. The unrestricted suite exposed a further MSVC-mask offset/newline bug; three regressions failed first and the shared upstream parser was repaired. Final full suite: 11,432 passed / 50 skipped / 0 failed; all 18 pre-commit hooks pass. Unrelated dirty main/worktree files remain unchanged. The fresh original-name candidate configured and built successfully with debug info off: 316/316 functions verify, 652/652 data symbols match (409 exactly placed), imports and Wine exports pass, and the raw DLL is byte-identical. Its gate fails only on two assembly provenance warnings in unbound client VFS definitions; do not report it green. Game-name integration and the complete three-target source/type/byte goal remain open. Details and receipts are in `.scratch/HANDOFF.md`.
+- 2026-10-09 (raw-link acknowledgement): fixed the misleading copied-data-section warning upstream and fast-forwarded actual Rebrew main to `98b131135a5f1f0340bb736615facdc394a2f3c9`. Explicit/configured raw links omit the warning; unknown inputs still warn and retain guarded write-back. Three regression cases and all 409 focused tests pass; final full suite has 11,435 passed / 50 skipped / 0 failed, with all 18 pre-commit hooks passing. Unrelated dirty work remains unchanged. Bound the two existing VFS bodies to their proven GOLDTL addresses through locked metadata writers and recorded their exact original aligned-copy sites as assembly provenance; no source or byte verdict was fabricated. Client checks without promotion report size mismatches (1526/1472 and 496/368). The final game candidate gate passes: zero server lint errors/warnings, 316/316 functions, 652/652 data symbols, imports/Wine exports and whole-file raw identity. All-target lint retains six GOLDTL and 40 GOLD assembly warnings with no errors. Actual game integration and the full three-target goal remain open.

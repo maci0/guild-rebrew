@@ -3628,11 +3628,11 @@ name = "unz_copyright"
 status = "EXACT"
 type = "const char[44]"
 size = 44
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-09T01:13:39+00:00"
 storage_kind = "object"
 backing = ""
-file = "src/crt_region/rdata_restore.c"
+file = "references/minizip/unzip.c"
 marker_type = "DATA"
 
 ["SERVER.0x100252e8".verification]
@@ -4975,11 +4975,11 @@ measured_at = "2026-10-06T01:18:03+00:00"
 name = "crc_table"
 section = ".rdata"
 type = "const unsigned long[256]"
-updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_by = "data"
+updated_at = "2026-10-09T01:13:39+00:00"
 size = 1024
 status = "EXACT"
-file = "src/link_stubs.c"
+file = "references/zlib/crc32.c"
 marker_type = "DATA"
 
 ["SERVER.0x100241a0".verification]

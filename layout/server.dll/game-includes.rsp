@@ -17,9 +17,6 @@
 /INCLUDE:_m_ShutdownAllocator
 /INCLUDE:_m_PoolAlloc
 /INCLUDE:_m_pool_free
-/INCLUDE:_unzClose
-/INCLUDE:_unzReadCurrentFile
-/INCLUDE:_unzCloseCurrentFile
 /INCLUDE:_CloseVfsStream
 /INCLUDE:_vfs_ReadData
 /INCLUDE:_vfs_OpenStream
@@ -37,7 +34,7 @@
 /INCLUDE:_srv_LoadBuf
 /INCLUDE:_ProcessSendData
 /INCLUDE:_srv_QueueCommandForProcessing
-/INCLUDE:_cm_QueuePlayerCommand
+/INCLUDE:_srv_PutConnSCommand
 /INCLUDE:_list_unlink_relink
 /INCLUDE:_cm_ProcessCommandQueue
 /INCLUDE:_srv_LogWinsockError
@@ -86,7 +83,7 @@
 /INCLUDE:_cm_ExAllocClientSpieler
 /INCLUDE:_cm_ExChangePlayerIdentity
 /INCLUDE:_cm_ExFree
-/INCLUDE:_cm_ExTransferCurrency
+/INCLUDE:_cm_ExMoveCredits
 /INCLUDE:_cm_ExTransferCurrencyNoKill
 /INCLUDE:_cm_ExSellObjekt
 /INCLUDE:_cm_ExProdObjekt
@@ -99,11 +96,11 @@
 /INCLUDE:_cm_ExChangeBits
 /INCLUDE:_cm_ExChangeFloat
 /INCLUDE:_cm_ExCopyEntityData
-/INCLUDE:_cm_ChainAssignId
-/INCLUDE:_cm_ExSetSyncFlags
+/INCLUDE:_cm_ExSetHE
+/INCLUDE:_cm_ExSysMessage
 /INCLUDE:_cm_ExKillSpieler
-/INCLUDE:_cm_AssignSequenceCounter
-/INCLUDE:_cm_AssignEntityId
+/INCLUDE:_cm_ExAddStraftat
+/INCLUDE:_cm_ExAllocCutscene
 /INCLUDE:_cm_ExRemoveLinkedObject
 /INCLUDE:_cm_ChainRecordLookup
 /INCLUDE:_cm_ExAllocThemaPredigt
@@ -115,7 +112,7 @@
 /INCLUDE:_cm_ExEmployWorker
 /INCLUDE:_cm_ExAssignOffice
 /INCLUDE:_cm_ExExecuteOffice
-/INCLUDE:_cm_ExCreateCitizen
+/INCLUDE:_cm_ExAllocCharacter
 /INCLUDE:_cm_ExKillTransporter
 /INCLUDE:_cm_ExCreateGeb
 /INCLUDE:_cm_ExCondWrite
@@ -124,7 +121,7 @@
 /INCLUDE:_cm_ExJoinLeaveElection
 /INCLUDE:_cm_ExCondWrite2
 /INCLUDE:_cm_ChkEntityLookup
-/INCLUDE:_cm_ExCutsceneUpdate
+/INCLUDE:_cm_ExCutsceneReady
 /INCLUDE:_cm_ExModifyHealth
 /INCLUDE:_cm_ExModifyStamina
 /INCLUDE:_cm_ExSimCommand
@@ -165,7 +162,7 @@
 /INCLUDE:_ls_ID2Ptr
 /INCLUDE:_srv_RecvGame
 /INCLUDE:_lb_ExPlayerlist
-/INCLUDE:_lb_SendLobbyConfig
+/INCLUDE:_lb_ExPlayerReadyStatus
 /INCLUDE:_lb_ExPlayerHasJoined
 /INCLUDE:_lb_BroadcastStateChange
 /INCLUDE:_lb_ExPlayerRecordBroadcast
@@ -221,7 +218,7 @@
 /INCLUDE:_gm_RemoveEntityLink
 /INCLUDE:_gm_InitEntityIfValid
 /INCLUDE:_gm_KillSpieler
-/INCLUDE:_gm_InitEntitySlots
+/INCLUDE:_gm_KillAllSpieler
 /INCLUDE:_gm_IsInRange
 /INCLUDE:_gm_EntityClassCheck
 /INCLUDE:_gm_CheckStatLevel
@@ -233,7 +230,7 @@
 /INCLUDE:_gm_ChangePlayerIdentityImpl
 /INCLUDE:_gm_AllocSpieler
 /INCLUDE:_gm_QueryEntitySum
-/INCLUDE:_gm_CalculateProductionValue
+/INCLUDE:_eval_ObjektPreis2Credits
 /INCLUDE:_gm_SumBuildingProductionValues
 /INCLUDE:_gm_AccumulateTyped2
 /INCLUDE:_gm_EntityQuerySum

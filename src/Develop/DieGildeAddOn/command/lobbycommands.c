@@ -3,7 +3,7 @@ extern char g_connections[];
 #include <string.h>
 #include "command.h"
 #include "../../Units/Error/error.h"
-extern int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+extern int __cdecl srv_PutConnSCommand(unsigned int* player, unsigned char* data);
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 
 // SIZE 0x24
@@ -18,7 +18,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 	if ((*player & 0x6000) != 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x244, "invalid client state", 1);
 		*msg = 2;
-		result = cm_QueuePlayerCommand(player, msg);
+		result = srv_PutConnSCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
 	memset(&list, 0, sizeof(list));
@@ -30,7 +30,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 		list.count++;
 	}
 	memcpy((char*) msg + 0x14, &list, sizeof(list));
-	result = cm_QueuePlayerCommand(player, msg);
+	result = srv_PutConnSCommand(player, msg);
 	if (result == -1) return -1;
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x258, "Got lb_ExPlayerlist", 1);
 	return 0;
@@ -40,7 +40,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 /* Lobby handler: sends the lobby configuration (map, rules,
  * game settings) to a requesting client. */
 
-int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
+int __cdecl lb_ExPlayerReadyStatus(unsigned int* player, unsigned char* msg)
 {
 	int value;
 	int result;
@@ -50,18 +50,18 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 	if ((*player & 0x6000) != 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x264, "invalid client state", 1);
 		*msg = 2;
-		result = cm_QueuePlayerCommand(player, msg);
+		result = srv_PutConnSCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
 	if (*(int *) ((char *) player + 4) != *(int *) (msg + 0x14)) {
 		*msg = 2;
-		result = cm_QueuePlayerCommand(player, msg);
+		result = srv_PutConnSCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
 	if ((unsigned int) *(int *) (msg + 0x18) > 1) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x279, "invalid client data", 1);
 		*msg = 2;
-		result = cm_QueuePlayerCommand(player, msg);
+		result = srv_PutConnSCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
 	value = *(int *) (msg + 0x18);
@@ -74,7 +74,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 	for (conn = (unsigned char*) g_connections; (int) conn < (int) g_connections + 0x1321320; conn += 0x264264) {
 		if ((*(unsigned int *) conn & 1) == 0) continue;
 		if ((*(unsigned int *) conn & 0x200) == 0) continue;
-		result = cm_QueuePlayerCommand((unsigned int*) conn, msg);
+		result = srv_PutConnSCommand((unsigned int*) conn, msg);
 		if (result == -1) return -1;
 	}
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x28c, "Got lb_ExPlayerReadyStatus", 1);
@@ -107,11 +107,11 @@ int __cdecl lb_ExPlayerHasJoined(char* player, char* msg)
 	if ((flags & 0x4000) != 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x29a, "invalid client state", 1);
 		msg[0] = 2;
-		return cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1 ? -1 : 0;
+		return srv_PutConnSCommand((unsigned int*) player, (unsigned char*) msg) == -1 ? -1 : 0;
 	} else if ((flags & 0x2000) == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2a4, "invalid client state", 1);
 		msg[0] = 2;
-		return cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1 ? -1 : 0;
+		return srv_PutConnSCommand((unsigned int*) player, (unsigned char*) msg) == -1 ? -1 : 0;
 	} else {
 		goto join;
 	}
@@ -129,7 +129,7 @@ join:
 	if (count >= g_max_players) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2b1, "Game is full", 1);
 		msg[0] = 2;
-		if (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) {
+		if (srv_PutConnSCommand((unsigned int*) player, (unsigned char*) msg) == -1) {
 			return -1;
 		}
 		cm_ClosePlayerConnection((unsigned int*) player);
@@ -183,7 +183,7 @@ join:
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
 		flags = slot->flags;
 		if ((flags & 1) && (flags & 0x200)) {
-			if (cm_QueuePlayerCommand((unsigned int*) slot, (unsigned char*) msg) == -1) {
+			if (srv_PutConnSCommand((unsigned int*) slot, (unsigned char*) msg) == -1) {
 				return -1;
 			}
 		}
@@ -197,7 +197,7 @@ join:
 
 #include "../../Units/Error/error.h"
 
-int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+int __cdecl srv_PutConnSCommand(unsigned int* player, unsigned char* data);
 
 /* Broadcasts a connection-state change to all active lobby
  * connections. Returns 0 on success, -1 on failure. */
@@ -211,7 +211,7 @@ int __cdecl lb_BroadcastStateChange(unsigned int* a, unsigned int* b, unsigned c
 	if (status & 0x6000) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2fc, "invalid client state", 1);
 		*(unsigned char*) b = 2;
-		return cm_QueuePlayerCommand(a, (unsigned char*) b) == -1 ? -1 : 0;
+		return srv_PutConnSCommand(a, (unsigned char*) b) == -1 ? -1 : 0;
 	}
 
 	*a = status | 0x3000;
@@ -227,7 +227,7 @@ int __cdecl lb_BroadcastStateChange(unsigned int* a, unsigned int* b, unsigned c
 	     conn = (unsigned int*) ((char*) conn + 0x264264)) {
 		status = *conn;
 		if ((status & 1) && (status & 0x200)) {
-			if (cm_QueuePlayerCommand(conn, (unsigned char*) b) == -1) {
+			if (srv_PutConnSCommand(conn, (unsigned char*) b) == -1) {
 				return -1;
 			}
 		}
@@ -245,13 +245,13 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 	if ((*player & 0x6000) != 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x31d, "invalid client state", 1);
 		*msg = 2;
-		result = cm_QueuePlayerCommand(player, msg);
+		result = srv_PutConnSCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
 	rec = msg + 0x14;
 	if (*(int*) (player + 1) != *(int*) rec) {
 		*msg = 2;
-		result = cm_QueuePlayerCommand(player, msg);
+		result = srv_PutConnSCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
 	for (conn = (unsigned char*) g_connections; (int) conn < (int) g_connections + 0x1321320;
@@ -270,7 +270,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 	     conn += 0x264264) {
 		if ((*(unsigned int*) conn & 1) == 0) continue;
 		if ((*(unsigned int*) conn & 0x200) == 0) continue;
-		result = cm_QueuePlayerCommand((unsigned int*) conn, msg);
+		result = srv_PutConnSCommand((unsigned int*) conn, msg);
 		if (result == -1) return -1;
 	}
 	return 0;
@@ -280,7 +280,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 #include <string.h>
 
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
-extern int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+extern int __cdecl srv_PutConnSCommand(unsigned int* player, unsigned char* data);
 
 /* Handles a sync command from a player. If the player's command
  * flags indicate an invalid state, logs it and replies with a
@@ -298,7 +298,7 @@ int __cdecl lb_HandleEntitySync(int player, int msg)
 	if ((*(unsigned int*) player & 0x6000) != 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x354, "invalid client state", 1);
 		*(char*) msg = 2;
-		return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) ? -1 : 0;
+		return (srv_PutConnSCommand((unsigned int*) player, (unsigned char*) msg) == -1) ? -1 : 0;
 	}
 	/* Reading msg into message before the counters emits the target's schedule:
 	 * the reload (`mov edx,[esp+0x14]`) first, then `xor ecx,ecx` and the
@@ -315,13 +315,13 @@ int __cdecl lb_HandleEntitySync(int player, int msg)
 	while (tab < (int) g_connections + 0x1321324) {
 		if (*(int*) tab == eid) {
 			memcpy(dst, (void*) ((int) g_connections + 0x26420c + (unsigned int) i * 0x264264), 0x57);
-			return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) message) == -1) ? -1 : 0;
+			return (srv_PutConnSCommand((unsigned int*) player, (unsigned char*) message) == -1) ? -1 : 0;
 		}
 		tab += 0x264264;
 		i++;
 	}
 	*message = 2;
-	return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) message) == -1) ? -1 : 0;
+	return (srv_PutConnSCommand((unsigned int*) player, (unsigned char*) message) == -1) ? -1 : 0;
 }
 
 int __cdecl cm_RouteCommand(unsigned int* player, unsigned char* msg)
@@ -332,25 +332,25 @@ int __cdecl cm_RouteCommand(unsigned int* player, unsigned char* msg)
 	if ((*player & 0x6000) != 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x37b, "invalid client state", 1);
 		*msg = 2;
-		return (cm_QueuePlayerCommand(player, msg) + 1 == 0) ? -1 : 0;
+		return (srv_PutConnSCommand(player, msg) + 1 == 0) ? -1 : 0;
 	}
 	if (*(unsigned int*) (msg + 0x18) != 0) {
 		for (i = 0, conn = (unsigned int*) (g_connections + 4); (int) conn < (int) g_connections + 0x1321324;
 		     conn = (unsigned int*) ((char*) conn + 0x264264), i++) {
 			if (*conn == *(unsigned int*) (msg + 0x18)) {
-				if (cm_QueuePlayerCommand(
+				if (srv_PutConnSCommand(
 				        (unsigned int*) ((char*) g_connections + i * 0x264264), msg)
 				    == -1)
 					return -1;
 				if (*(unsigned int*) ((char*) g_connections + 4 + i * 0x264264)
 				        != *(unsigned int*) ((char*) player + 4)
-				    && cm_QueuePlayerCommand(player, msg) == -1)
+				    && srv_PutConnSCommand(player, msg) == -1)
 					return -1;
 				return 0;
 			}
 		}
 		*msg = 2;
-		return (cm_QueuePlayerCommand(player, msg) + 1 == 0) ? -1 : 0;
+		return (srv_PutConnSCommand(player, msg) + 1 == 0) ? -1 : 0;
 	}
 	for (conn = (unsigned int*) g_connections; (int) conn < (int) g_connections + 0x1321320;
 	     conn = (unsigned int*) ((char*) conn + 0x264264)) {
@@ -358,7 +358,7 @@ int __cdecl cm_RouteCommand(unsigned int* player, unsigned char* msg)
 			continue;
 		if ((*conn & 0x200) == 0)
 			continue;
-		if (cm_QueuePlayerCommand(conn, msg) == -1)
+		if (srv_PutConnSCommand(conn, msg) == -1)
 			return -1;
 	}
 	return 0;
@@ -380,7 +380,7 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* player, unsigned char* msg)
 	case 0:
 		return lb_ExPlayerlist(player, msg);
 	case 1:
-		return lb_SendLobbyConfig(player, msg);
+		return lb_ExPlayerReadyStatus(player, msg);
 	case 2:
 		return lb_ExPlayerHasJoined(player, msg);
 	case 3:

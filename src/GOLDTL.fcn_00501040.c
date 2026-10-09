@@ -13,7 +13,7 @@ extern unsigned short* g_868054;
 
 void* __cdecl fcn_0041db70(int, char*);
 void __cdecl fcn_00500e40(void);
-void __cdecl gm_InitEntitySlots(void);
+void __cdecl gm_KillAllSpieler(void);
 void __cdecl srv_SeedRandomWithTime(void);
 
 int __cdecl fcn_00501040(char* dir)
@@ -82,7 +82,7 @@ int __cdecl fcn_00501040(char* dir)
 	fread(g_99ec10, 0x41, 0x2dc, f);
 	fclose(f);
 	fcn_00500e40();
-	gm_InitEntitySlots();
+	gm_KillAllSpieler();
 	row = 0;
 	do {
 		count = 0;

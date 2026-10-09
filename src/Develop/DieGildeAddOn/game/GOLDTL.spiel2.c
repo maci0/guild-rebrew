@@ -29,7 +29,7 @@ typedef struct {
 } Record;
 #pragma pack(pop)
 
-void __cdecl gm_InitEntitySlots(void);
+void __cdecl gm_KillAllSpieler(void);
 extern int g_query_limit;
 void __cdecl m_FreeTracked(void*);
 void* __cdecl gm_FindNextFilteredEntity(void);
@@ -102,7 +102,7 @@ extern double g_const_1_over_720; /* 0x10025fa0 */
 extern float g_const_0_0; /* 0x100256cc */
 extern float g_graveyard_const_c; /* 0x100257c8 */
 extern double g_const_half; /* 0x100257d0 */
-double __cdecl gm_CalculateProductionValue(int, int);
+double __cdecl eval_ObjektPreis2Credits(int, int);
 extern unsigned char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);

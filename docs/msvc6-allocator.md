@@ -4404,3 +4404,38 @@ all-target repeat remains required to accept this header repair. Evidence:
 declaration-results}.json and repaired-482f20-test.json. The first descriptive
 rename probe accidentally changed the include extension and failed; corrected
 probe is in header-results.json, not evidence of a compiler error.
+
+## VFS client copy provenance (2026-10-09)
+
+The existing `vfs_AddFile` and `vfs_fwrite` ports in the shared
+`Develop/Units/vfs/vfs.c` now have managed GOLDTL identities at `0x42e740`
+(inventory extent 1472) and `0x430910` (368). The names are inferred from the
+VFS allocation labels and file API. These functions have no server raw-map
+entry; client identity does not establish a server address or a byte match.
+
+The original TL bytes contain the same hand-written aligned-copy prelude at
+`0x42e8f7`, `0x42e949` and `0x4309e9`:
+
+```text
+8d0c7f 83e103 2bd9 7e0c f3a4 8bcb 83e303 c1e902 f3a5 03cb f3a4
+```
+
+This complete sequence is 26 bytes; older descriptions calling it 24 bytes
+are imprecise. It uses the invariant EBX scratch, destination alignment
+idiom and C-operand homing analyzed under “The prelude is hand-written asm”.
+The source uses this sequence at the corresponding two array moves and
+memory-stream write. Stock LIBCMT whole-body probes miss both functions;
+their VFS calls and allocation labels independently identify game code.
+Managed per-function BLOCKER notes record this assembly provenance. They do
+not assert that the surrounding client code matches: register allocation
+and server-only inferred logging still need client verification.
+
+Receipts: `.scratch/goal20/vfs-client-evidence.json`, `vfs-client-binding.json`
+and `vfs-{addfile,fwrite}-{asm,library}.json`. The evidence script checks both
+inventory extents, every prelude, unique source definitions and unchanged
+source bytes. No server identity or STATUS was fabricated to clear lint.
+
+Initial client comparisons (`--no-promote`) confirm unfinished bodies:
+`vfs_AddFile` compiles to 1526 bytes against 1472; `vfs_fwrite` to 496 against
+368. Both report SIZE_MISMATCH, and neither receives a stored byte verdict.
+These results supersede older trial sizes for this exact source/configuration.

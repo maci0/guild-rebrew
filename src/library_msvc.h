@@ -932,7 +932,7 @@
 // SIZE: 28
 
 // LIBRARY: SERVER 0x10022107
-// __crtLoadWinAPI
+// ___crtMessageBoxA
 // SIZE: 137
 
 // LIBRARY: SERVER 0x100223BD

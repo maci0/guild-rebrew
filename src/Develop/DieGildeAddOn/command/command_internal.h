@@ -14,7 +14,7 @@
  * NOTE: game_structs.h provides PlayerSlot with data at offset 8.
  * command/player_slot.h provides player_slot with data at 0x264204
  * (shared by cm_ExAllocRaum.c / cm_ExCreateGeb.c). Files with other
- * layouts (e.g. cm_ExSetSyncFlags.c, flags at offset 0) must keep
+ * layouts (e.g. cm_ExSysMessage.c, flags at offset 0) must keep
  * those local definitions.
  */
 

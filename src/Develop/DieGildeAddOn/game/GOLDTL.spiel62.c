@@ -11,7 +11,7 @@
 
 #pragma intrinsic(memcpy, memset)
 
-void __cdecl gm_InitEntitySlots(void);
+void __cdecl gm_KillAllSpieler(void);
 extern int g_query_limit;
 extern unsigned char g_slot_table[2];
 int __cdecl gm_FreeObjectListRecursive(char**);
