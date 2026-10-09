@@ -70,6 +70,7 @@ diff.json
 tools/ghidra-cli
 rebrew-functions.toml.lock
 rebrew-data.toml.lock
+rebrew-source.toml.lock
 
 # Variant build trees. The one build directory is build/; this only keeps a
 # stray -B build-something from being committed by accident.

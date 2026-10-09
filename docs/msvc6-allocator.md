@@ -934,6 +934,47 @@ byte-matched (SIZE_MISMATCH or only PROVEN).
 
 ### The prelude is hand-written asm, not a compiler expansion (2026-09-04)
 
+#### Reviewed GOLDTL inline helpers (2026-10-09)
+
+Three file-local helpers have no standalone target VA. Their original
+callers contain the same operand-homed assembly macro described below:
+`fill0` and `copy0` are inferred reconstruction names; the evidence attests
+the original macro, not those helper names or a standalone allocation.
+
+| Source definition | Original caller | Prelude site | Operation |
+|---|---|---|---|
+| `src/GOLDTL.fcn_0043f6b0.c:fill0` | `0x0043f6b0` (297 bytes) | `0x0043f76b` | Fill |
+| `src/GOLDTL.fcn_00449ba0.c:copy0` | `0x00449ba0` (528 bytes) | `0x00449c6f` | Copy |
+| `src/GOLDTL.fcn_00469140.c:fill0` | `0x00469140` (378 bytes) | `0x004691f8` | Fill |
+
+The complete prelude is **26 bytes**, starting at `lea ecx,[edi+edi*2]`
+and ending after the final `rep stosb` / `rep movsb`; the older 24-byte label
+is imprecise. The fill pattern
+is `8d0c7f83e1032bd97e0cf3aa8bcb83e303c1e902f3ab03cbf3aa` and the copy
+pattern is `8d0c7f83e1032bd97e0cf3a48bcb83e303c1e902f3a503cbf3a4`.
+Each caller contains exactly one corresponding pattern. Direct checks
+exclude both patterns from the stock `msvc-6.0-sp5-pp` `LIBC.LIB` and
+`LIBCMT.LIB`; whole-caller library matching also returns a miss for each.
+These exclusions corroborate the compiler/operand evidence below rather
+than using a signature miss alone to establish provenance.
+
+`.scratch/goal20/helper-assembly-evidence.json` records instruction contexts,
+reference and archive hashes; `check_helper_assembly.py` asserts the sites,
+lengths and archive exclusions from the saved CLI disassembly/probe receipts.
+The helpers' own evidence belongs in the managed `rebrew-source.toml`, keyed
+by file, C symbol and GOLDTL target with a definition hash. No helper VA or
+byte verdict is invented, and a caller's blocker is not inherited by its
+helper. Current body/target evidence must be reviewed again after changes;
+the historical caller matches are not fresh measurements.
+
+Fresh `rebrew test --no-promote` measurements with the provenance-support
+checkout reproduce all three callers as RELOC: 297/297, 528/528 and 378/378
+bytes respectively, with no mismatches after relocation masking. Receipts
+are `.scratch/goal20/helper-client-test-0043f6b0.json`,
+`helper-client-test-00449ba0.json` and `helper-client-test-00469140.json`.
+These are object comparisons; they do not establish a byte-identical client
+link or promote the helpers to standalone functions.
+
 Measured with `.scratch/mp2/tmpl.py`, `scratch.py`, `libscan.py`:
 
 - **Byte-invariant.** All 725 prelude sites across `server.dll`,

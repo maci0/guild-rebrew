@@ -1,0 +1,13 @@
+format = 1
+
+[definitions."src/GOLDTL.fcn_0043f6b0.c".fill0.GOLDTL]
+source_hash = "c65127ce69a9c50aca16f78ec379d06d164b3d9e5598a47544f5a56ab7e38bbe"
+evidence = "Original 26-byte operand-homed fill macro at 0x0043f76b in GOLDTL caller 0x0043f6b0; both macro patterns absent from stock LIBC.LIB/LIBCMT.LIB and whole caller library probes miss. Evidence: docs/msvc6-allocator.md, Reviewed GOLDTL inline helpers (2026-10-09); .scratch/goal20/helper-assembly-evidence.json."
+
+[definitions."src/GOLDTL.fcn_00449ba0.c".copy0.GOLDTL]
+source_hash = "9748e16ddb0be1862dc54dfa94dbf1b5c07fa32e34e589e26a0fd7f715cb8256"
+evidence = "Original 26-byte operand-homed copy macro at 0x00449c6f in GOLDTL caller 0x00449ba0; both macro patterns absent from stock LIBC.LIB/LIBCMT.LIB and whole caller library probes miss. Evidence: docs/msvc6-allocator.md, Reviewed GOLDTL inline helpers (2026-10-09); .scratch/goal20/helper-assembly-evidence.json."
+
+[definitions."src/GOLDTL.fcn_00469140.c".fill0.GOLDTL]
+source_hash = "c65127ce69a9c50aca16f78ec379d06d164b3d9e5598a47544f5a56ab7e38bbe"
+evidence = "Original 26-byte operand-homed fill macro at 0x004691f8 in GOLDTL caller 0x00469140; both macro patterns absent from stock LIBC.LIB/LIBCMT.LIB and whole caller library probes miss. Evidence: docs/msvc6-allocator.md, Reviewed GOLDTL inline helpers (2026-10-09); .scratch/goal20/helper-assembly-evidence.json."
