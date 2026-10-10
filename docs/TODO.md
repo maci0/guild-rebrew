@@ -50325,3 +50325,32 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   has zero errors and unchanged warnings (SERVER0 / TL2 / GOLD40). Whole-client
   images/data and unrelated stored client measurements remain unverified by
   this focused checkpoint. Receipts: `.scratch/goal20/padded-*`.
+
+
+### 2026-10-10: correct CharacterClearSitting semantics; byte mismatch retained
+
+- Followed the next fresh todo item after the already exhausted4011a0 loop.
+  TL406560's complete native body is87 bytes; its existing stock LIBCMT probe
+  is negative. Helper402aa0 is one RET then15 NOPs; its stock probe also misses,
+  which is not sufficient library-provenance evidence for such a tiny body.
+- Read all source callers of402aa0/435500. Fixed the mismatched void-helper
+  declaration/use and reversed model/name arguments in the one TL source.
+  No duplicate helper, storage, new identity, asm, type or compiler override.
+- All16 branch combinations pass a native32-bit C89 self-check, including
+  sitting/seat/name/no-op paths, other flag bits and seat clearing. Reversed
+  arguments and wrong seat-offset controls fail as expected. The complete
+  compiled COFF call audit resolves both native callees and rejects+4 controls.
+- MSVC6 remains SIZE_MISMATCH98 versus native87. The prior incorrect spelling
+  emitted90. A known empty definition before the caller removes the call and
+  emits69 even with /Ob0 or pragma auto_inline(off); after retains98. Those
+  experiments remain scratch evidence, not production changes. Original
+  register-preservation/TU context is unresolved and recorded through the CLI
+  blocker writer. The extent was not enlarged to hide the mismatch. Shared
+  import correctly refuses the unmatched donor; no GOLD claim was made.
+- Receipts `.scratch/goal20/clear-sitting-{corrected-test,corrected-diff,
+  behavior,call-audit,no-inline-variants,blocker,server-gate,lint}.*`.
+- Final typed-pointer source remains98/87; fresh behavior/call controls pass.
+  Server gate passes316/316, data652/652,100 imports and whole-file raw DLL
+  identity. Final all-target lint has zero errors/unchanged0/2/40 warnings.
+  Pre-commit guard preserves every other client row, SERVER evidence,
+  data, source identity and unrelated worktree/root changes.

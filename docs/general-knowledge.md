@@ -651,3 +651,15 @@ What the clients can and cannot give:
 - TL building-prototype table pointer: canonical `g_entity_type_table` binds native `0x00868050`, a four-byte `.data` virtual-tail word. Native initialization at `0x0050108a-0x005010a3` allocates `0xca78` bytes (88 records, stride `0x24d`) with complete label `f3_gm:lpGebaeudePROT` at `0x00699748`. All aligned canonical users agree; 20-user catalog comparisons preserve compiled bytes and scores. Logical identity is verified; native storage owner/backing remains unresolved. Declaration-only metadata allocates no storage. Evidence: `.scratch/goal-tl-prototype-bindings/{allocation-witness,users,binding-effects,extent-audit}.json`.
 
 - Animation callback TL406410 / GOLD405870 follows the same pointer chain (`obj+0x34`, then `+0x1cc`) but reads its blocking word at TL+0x390 versus GOLD+0x84. The complete 248-byte bodies otherwise agree after nine validated relocations. `REBREW_GOLD` is an inferred build selector, not an attested original macro; it selects only this shared source's `ANIMATION_BLOCK_OFFSET`. The logical member name and full containing layout remain unresolved. Omitting the selector reproduces exactly the two displacement-byte differences at offsets47/48 with no invalid relocations. Evidence `.scratch/goal20/padded-callback-{differences,without-selector}.json` and fresh dual-target callback tests.
+
+
+- TL CharacterClearSitting406560 uses the existing seat at character+0x74
+  after a conditional call to402aa0, whose complete native body is a single RET.
+  It obtains the animation name from seat+0x68 and passes model+0xf4 first,
+  name second, to435500; the model pointer is at entity+0x1ec. It clears the
+  seat pointer and sitting bit0x10, preserving the other flag bits. Four other
+  source users already treat402aa0 as void. The corrected C stops treating its
+  stale EAX as a replacement seat and restores the native argument order.
+  Original helper name/TU context and complete entity/seat types remain unknown.
+  Evidence: `.scratch/goal20/clear-sitting-{original-current,noop-original,
+  behavior,call-audit}.json`.

@@ -76939,29 +76939,31 @@ measured_at = "2026-10-10T15:08:26+00:00"
 ["GOLDTL.0x00406560"]
 size = 87
 status = "SIZE_MISMATCH"
-updated_by = "rename"
-updated_at = "2026-10-09T01:13:34+00:00"
+updated_by = "blocker"
+updated_at = "2026-10-10T15:20:08+00:00"
 file = "src/Develop/DieGildeAddOn/command/command_c/GOLDTL.CharacterClearSitting.c"
 symbol = "_CharacterClearSitting"
 marker_type = "FUNCTION"
 name = "CharacterClearSitting"
+blocker = "Corrected void empty-helper use and model/name argument order; 16 x86_32 C branch cases pass with two negative controls. Byte match remains unresolved: standalone caller emits 98 bytes vs original 87, preserving seat/entity in EDI/EBX rather than original EAX/ECX across empty402aa0. Known empty callee before caller removes the call (69 bytes), including /Ob0 and pragma auto_inline(off); after retains98. No asm/flags/helper source added. See .scratch/goal20/clear-sitting-{corrected-test,behavior,no-inline-variants}.json."
+blocker_delta = 11
 
 ["GOLDTL.0x00406560".verification]
-source_hash = "85cec5d742f0c918760a740c5019c0059ab3f314dadfd759d60df7c99aaed132"
+source_hash = "17a86850596acac4f1dc5f517279c833ae29c01d9c9c13c6b024c43daa95e8ef"
 reference_hash = "c4e8277cb929c9ee0f6506ae9ecff0acf2ca61f9656d4eeece7b47946bb573d7"
 reference_size = "87"
-headers_hash = "bce1a4373680d02729c3299e8b71892836397ce1a319f316d4d08b4f5cee1c5f"
-compiler_hash = "95c975955083074930b80f3f30210b7834f300bb48656040bca1c9e772d68687"
+headers_hash = "89fc70634e48675eb8d1b9aa51fc8aec50d7593c753d6c8a537bf457a3d87f16"
+compiler_hash = "cde4fe8e021d2f5d3b627291263ed17ca987bac6c3583e34b31f3e74321fe4e5"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x406560"
 context_hash = ""
 defines = "[]"
-input_hash = "820706ad471950b453a75f8fcc80e79f744654194b7b87df8234fa91344aa922"
-writer = "verify"
+input_hash = "cce91a359c5d0053338986c3f3eea9cae56f7ec0e868338a0b74b93a9f1cd8d8"
 status = "SIZE_MISMATCH"
-measured_at = "2026-10-06T02:33:03+00:00"
+writer = "test"
+measured_at = "2026-10-10T15:21:52+00:00"
 
 ["GOLDTL.0x004065c0"]
 size = 175

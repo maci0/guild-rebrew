@@ -11377,3 +11377,22 @@ body compatibility for two variadic declarations, not a uniquely recovered
 original prototype. Callers and declarations still require a separate audit.
 Evidence: `.scratch/goal-query-filter-extent/{shared-native-proof,
 shared-two-named-native-proof}.json`. Production source and flags are unchanged.
+
+### Empty helper knowledge changes calls, not just register allocation (2026-10-10)
+
+TL CharacterClearSitting406560 has an 87-byte native body. Correcting its C to
+retain the seat pointer across a void helper and pass model/name in native order
+emits 98 bytes under the processor-pack /O2 /Gd profile, rather than the previous
+incorrect 90-byte body. The original retains EAX/ECX across402aa0, whose complete
+body is one RET; the standalone caller conservatively preserves the seat/entity
+in EDI/EBX. Moving an ordinary empty definition before the caller removes its
+call and emits69 bytes, including with /Ob0 or pragma auto_inline(off). Moving
+it after the caller retains98. These bounded experiments do not establish the
+original declaration/TU/optimization context. No helper body, pragma, inline
+assembly or alternate flags were added to production. Behavior and byte identity
+remain separate: the corrected body passes16 branch cases and rejects reversed
+arguments/wrong-seat-offset controls, but retains SIZE_MISMATCH87 versus98.
+Evidence: `.scratch/goal20/clear-sitting-{legal-variants,no-inline-variants,
+corrected-test,behavior}.json`. Initial legal-variants `size` is the compared
+slice length; full lengths are in its compiler messages and corrected-test
+`obj_size`, not the truncated comparison bytes.
