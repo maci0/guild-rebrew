@@ -1,3 +1,10 @@
+/* Inferred version selector; original animation-block offsets differ. */
+#if defined(REBREW_GOLD)
+#define ANIMATION_BLOCK_OFFSET 0x84
+#else
+#define ANIMATION_BLOCK_OFFSET 0x390
+#endif
+
 // SIZE 0x76
 struct anim_406410 {
 	char pad0[0x6c];
@@ -19,7 +26,6 @@ int __cdecl fcn_00413190(char* p);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_004050c0(char* ev);
 
-// FUNCTION: GOLDTL 0x406410
 void __cdecl fcn_00406410(char* ev)
 {
 	char* obj;
@@ -28,7 +34,7 @@ void __cdecl fcn_00406410(char* ev)
 
 	obj = *(char**) (ev + 0x14);
 	if (*(int*) (ev + 0xc) == 0) {
-		if (ev[0xf0] != 0 && *(int*) (*(char**) (*(char**) (obj + 0x34) + 0x1cc) + 0x390) == 0) {
+		if (ev[0xf0] != 0 && *(int*) (*(char**) (*(char**) (obj + 0x34) + 0x1cc) + ANIMATION_BLOCK_OFFSET) == 0) {
 			*(short*) (obj + 0x8c) |= 2;
 			if (ev[0x18c] & 1) {
 				a = fcn_00404dc0(*(char**) (ev + 0x14), ev + 0xf0, 1);

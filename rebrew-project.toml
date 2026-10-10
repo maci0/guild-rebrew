@@ -98,6 +98,7 @@ D3DX8 = "references/dxsdk8/lib/d3dx8.lib"
 LIBCMT = "LIBCMT.lib"
 
 [targets."Europa1400Gold.exe"]
+defines = ["REBREW_GOLD"]
 # Client (non-TL) build of the same game. Shares game logic with server.dll
 # (DieGildeAddOn) and the TL client; client-only units (ch_, ai_, he_, d2_,
 # d3_, nt_, ob_, gs_, am_) are out of scope for server symbols but in scope

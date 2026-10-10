@@ -712,8 +712,15 @@ checks were not bypassed or relaxed.
 The shared GOLD caller at `0x0040c870` calls GOLD `0x00405970`. Original assembly
 there has the same 75-byte body with the allocator/callback relocations changed,
 then five NOPs. Its discovered 80-byte span scores 94.393546 against the TL donor,
-versus 100 for the actual body. Default shared import declines it; no GOLD builder
-identity or byte verdict is claimed. The extent-scoring issue is recorded upstream.
+versus 100 for the actual body. That preview declined before the upstream extent
+repair. After Rebrew 2613fa04, the reviewed pair imported through the existing
+`--source-va` selector and the shared source verifies GOLD RELOC 75/75; the
+inferred name now also owns GOLD `0x00405970`. Its callback's shared source uses
+an inferred build selector for the native GOLD+0x84 / TL+0x390 blocking-word
+offsets and verifies 248 bytes in each client. No original macro or full member
+layout is attested. The existing shared GOLD caller now verifies RELOC 152/152,
+with its eight following NOPs retained as layout facts. Automatic score/gap
+guards and full compiled-body verification remain unchanged.
 Evidence: `.scratch/goal-builder/xrefs.json`,
 `.scratch/goal20/animation-builder-original-evidence.json`,
 `animation-rename-applied.json`, `animation-binding-applied.json`, and

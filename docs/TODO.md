@@ -50294,3 +50294,34 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   `animation-{builder-tl,caller-d700-tl,caller-d790-tl}-test.json`,
   `animation-binding-{preview,applied}.json` and
   `animation-builder-original-evidence.json`.
+
+### 2026-10-10: bounded padding signatures and shared animation variants
+
+- Fixed Rebrew's import/BinSync signatures upstream in 2613fa04: exclude only
+  proven trailing x86 NOP/int3 padding, retaining reachable NOPs, forward-target
+  return blocks and ambiguous extents. Four cases failed first; 292 focused
+  tests and all 18 hooks pass. Normal full suite: 11,507 passed / 50 skipped /
+  zero failed. The preceding disabled-bytecache run's startup failure remains
+  recorded; no source/test/threshold changed for the successful normal rerun.
+- Refreshed the project's editable CLI from the old rename worktree to actual
+  upstream main, without dependency changes. Ordinary status now uses the
+  corrected library-identity accounting.
+- Reviewed explicit pairs through the existing --source-va selector; automatic
+  runner-up guards remain. The first callback import refused two real field-
+  displacement differences and created no row/verdict. One shared C source now
+  selects GOLD+0x84 / TL+0x390 through an inferred target build define; omission
+  reproduces precisely the two differences. Only this callback uses the define.
+- CLI shared imports verify GOLD callback405870 RELOC248, builder405970
+  RELOC75 and existing caller40c870 RELOC152. Discovery padding remains layout;
+  managed extents follow complete compiled-body verification, with no hand edits.
+  The imports add two identities and promote the caller's prior size mismatch;
+  they reuse the TL source files rather than duplicate bodies.
+- All seven fresh client measurements pass RELOC (TL248/75/138/152 and
+  GOLD248/75/152). The actual-main server gate passes: 316/316 functions,
+  652/652 data comparisons (409 exact placement, zero displaced, 243 unmapped),
+  100 imports, Wine exports and the byte-identical 286,720-byte raw DLL. The
+  pre-commit guard confirms 316 refreshed SERVER compiler fingerprints and
+  preservation of unrelated sources/data/client facts/worktrees. Lint
+  has zero errors and unchanged warnings (SERVER0 / TL2 / GOLD40). Whole-client
+  images/data and unrelated stored client measurements remain unverified by
+  this focused checkpoint. Receipts: `.scratch/goal20/padded-*`.
