@@ -11410,3 +11410,20 @@ Only the ordinary inverted /O2 spelling matches. Float literal payloads0.44f
 and16000.0f, all operands and negative controls independently match both TL
 and GOLD bodies. Evidence `.scratch/goal20/citizenship-{return-layout,
 starter-audit,gold-audit,starter-behavior}.json`;640 C89 cases pass.
+
+### Prototype consolidation can change line constants (2026-10-11)
+
+The shared plant lookup's canonical declaration is `char* __cdecl
+plt_FindPlantInfo(int key)`. Replacing the client unsigned-return declaration
+requires explicit unsigned-char views in the owner-update caller: its comparison
+at record+0x44 must keep zero extension. Replacing declarations in place preserves
+the parent source's line count. Adding the definition's header include as an
+extra line changed real compiled `__LINE__` immediates in rd_AddBKBox/rd_GetBKSize;
+using the existing blank line restores the bytes without a `#line` override.
+MSVC also renumbers `$L`/`$SG` internal symbol names after declaration changes.
+Compare their actual section/value bindings, not just generated spellings:
+12 actual target/flag groups preserve complete COFF code/data section payloads,
+typed relocation sites and98 function measurements with no missing symbol.
+Evidence: `.scratch/goal20/plant-callers-byte-preservation.json` and the earlier
+failed section-difference receipt. The matching table and69-byte lookup body
+were independently audited against all three native binaries.

@@ -10,7 +10,7 @@ typedef struct
 // SIZE 0x18
 
 void __cdecl fcn_00442be0(void* obj);
-unsigned char* __cdecl lb_SearchRecordTable(int id);
+#include "Develop/DieGildeAddOn/auxillary/plant.h"
 void __cdecl fcn_004bd150(fcn_004bceb0_Entry* tab);
 
 // FUNCTION: GOLDTL 0x004bceb0
@@ -28,9 +28,9 @@ void __cdecl fcn_004bceb0(fcn_004bceb0_Entry* tab)
 				tab[i].obj = 0;
 			}
 			id = tab[i].id;
-			r = lb_SearchRecordTable(id);
+			r = (unsigned char*) plt_FindPlantInfo(id);
 			if (r == 0)
-				r = lb_SearchRecordTable(id);
+				r = (unsigned char*) plt_FindPlantInfo(id);
 			c = tab[i].state;
 			if (c < r[0x44])
 				tab[i].state = c + 1;

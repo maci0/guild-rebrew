@@ -3055,3 +3055,21 @@ build selector preserves one shared C body; both complete variants verify at
 248 bytes, and the selector-omission control reproduces exactly those two
 non-relocation differences. Never turn that field difference into padding or a
 masked relocation. Layout evidence belongs in general-knowledge.md.
+
+## A source rename can leave a live linker anchor (2026-10-11)
+
+Renaming the shared plant lookup through Rebrew correctly changed its C
+definition, callers and all three managed identities, but left the tracked
+`layout/server.dll/game-includes.rsp` `/INCLUDE:_lb_SearchRecordTable` anchor.
+The server gate failed with LNK2001 and LINK removed the previous output DLL.
+A previous byte-identical DLL receipt does not establish the current build.
+Repair the shared upstream rename plan, including target attribution, preview
+and rollback, then use explicit reference binding for a linker-only stale name;
+do not introduce a compatibility C alias. Upstream662d7132 now plans exact
+native references in target-scoped INCLUDE/ALTERNATENAME/EXPORT options, preserving
+public export names, decoration and paths. Five regressions failed first;
+196 focused checks, all18 hooks and the corrected full suite11526pass/50skip pass.
+The CLI linker-only repair changes one response line with no C/store changes.
+The new gate passes all316 function checks,652 data comparisons and raw whole-file
+identity. Keep both the failed and passing receipts: `.scratch/goal20/plant-server-gate.log`,
+`plant-server-build-failed.log`, `plant-post-upstream-server-gate.log`.

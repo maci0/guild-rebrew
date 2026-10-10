@@ -169,7 +169,7 @@
 /INCLUDE:_lb_HandleEntitySync
 /INCLUDE:_cm_RouteCommand
 /INCLUDE:_lb_ExLobbyServerCommand
-/INCLUDE:_lb_SearchRecordTable
+/INCLUDE:_plt_FindPlantInfo
 /INCLUDE:_plt_FindRecord
 /INCLUDE:_find_zone_record
 /INCLUDE:_plt_CheckZoneAvailability

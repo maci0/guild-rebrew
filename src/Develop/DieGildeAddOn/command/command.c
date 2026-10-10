@@ -922,7 +922,7 @@ __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
-char* __cdecl lb_SearchRecordTable(unsigned int);
+#include "../auxillary/plant.h"
 int __cdecl plt_CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned int);
 char* __cdecl plt_FindRecord(void*, unsigned int, unsigned int);
 char* __cdecl plt_SetPlantMap(void*, unsigned int, unsigned int, unsigned int, unsigned int);
@@ -3400,7 +3400,7 @@ int __cdecl cm_ChainRecordLookup(int cmd, char* result)
 	*(int*) (cmd + 0x10) = g_dynamic_count;
 	entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x14));
 	if (entity != (void*) 0x0) {
-		rec = lb_SearchRecordTable(*(unsigned short*) (cmd + 0x1a));
+		rec = plt_FindPlantInfo(*(unsigned short*) (cmd + 0x1a));
 
 		if ((rec == (char*) 0x0) || (*(unsigned char*) (cmd + 0x1c) != 0) ||
 			(plt_CheckZoneAvailability(

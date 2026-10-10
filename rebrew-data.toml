@@ -4594,15 +4594,17 @@ input_hash = "ad10186e02f2e814b0c94fea1f7b4b839fdabd5425b1d1abb087eefbb4ed6d88"
 definition_hash = "bbc5b1941760346486b2f62f12a814968d4e7d3a5bd7badd79da1e85cb530e49"
 measured_at = "2026-10-06T01:18:03+00:00"
 ["SERVER.0x1002d878"]
-name = "g_plant_info_table"
+name = "plt_PlantInfo"
 section = ".data"
 type = "PLANT_INFO[4]"
 size = 280
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
-status = "EXACT"
+updated_at = "2026-10-10T16:38:09+00:00"
 file = "src/Develop/DieGildeAddOn/auxillary/plant.c"
 marker_type = "GLOBAL"
+storage_kind = "object"
+note = "Inferred plant subsystem name. One source definition in plant.c; four70-byte records include zero-id terminator. Complete280-byte COFF payload and all lookup operands match this native table; .scratch/goal20/plant-lookup-audit.json. Client raw-link placement not yet verified."
+status = "EXACT"
 
 ["SERVER.0x1002d878".verification]
 status = "EXACT"
@@ -15347,3 +15349,27 @@ writer = "verify"
 input_hash = "ab961b7be539b7a7e775ca775c3558019b14be2b9dd3fbac1034c488d275c960"
 definition_hash = "dc49b808bcc5e18f44f4a1a7e42143cd6cc352dfb89b1c4c69128b7836ffc7f9"
 measured_at = "2026-10-08T05:27:35+00:00"
+
+["GOLDTL.0x006814a8"]
+file = "src/Develop/DieGildeAddOn/auxillary/plant.c"
+marker_type = "GLOBAL"
+name = "plt_PlantInfo"
+type = "PLANT_INFO[4]"
+size = 280
+section = ".data"
+storage_kind = "object"
+note = "Inferred plant subsystem name. One source definition in plant.c; four70-byte records include zero-id terminator. Complete280-byte COFF payload and all lookup operands match this native table; .scratch/goal20/plant-lookup-audit.json. Client raw-link placement not yet verified."
+updated_by = "data"
+updated_at = "2026-10-10T16:04:06+00:00"
+
+["GOLD.0x00602840"]
+file = "src/Develop/DieGildeAddOn/auxillary/plant.c"
+marker_type = "GLOBAL"
+name = "plt_PlantInfo"
+type = "PLANT_INFO[4]"
+size = 280
+section = ".data"
+storage_kind = "object"
+note = "Inferred plant subsystem name. One source definition in plant.c; four70-byte records include zero-id terminator. Complete280-byte COFF payload and all lookup operands match this native table; .scratch/goal20/plant-lookup-audit.json. Client raw-link placement not yet verified."
+updated_by = "data"
+updated_at = "2026-10-10T16:04:06+00:00"

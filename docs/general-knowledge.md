@@ -680,3 +680,15 @@ What the clients can and cannot give:
   body, and both complete float payloads match. This is stronger body evidence
   than masked relocation agreement but does not establish a raw client link.
   Evidence `.scratch/goal20/citizenship-{starter-audit,gold-audit}.json`.
+
+- Shared plant lookup SERVER10014ee0/TL4bcb80/GOLD4bc5a0 has a complete69-byte
+  body followed by11 layout NOPs. Its three native table operands identify
+  SERVER1002d878/TL6814a8/GOLD602840. The initialized table contains TANNE,
+  BUCHE and EICHE plus a zero-id terminator: four70-byte records,280 bytes.
+  All three complete payloads equal the single C definition (SHA256
+  21d9adb5a8c9a11e3be5e349d24035e362575ab1d020d739099ae7cf3d40e3c1).
+  Resolving every COFF operand reproduces all69 native code bytes; wrong+4
+  table bindings reject. This proves each native table binding and full extent,
+  not linked client placement. `plt_FindPlantInfo`/`plt_PlantInfo` are inferred
+  names, and the meanings of f42/f43/f44 remain unresolved. Evidence:
+  `.scratch/goal20/plant-lookup-audit.json`.

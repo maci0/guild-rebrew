@@ -4,7 +4,7 @@ extern int g_6b8010;
 extern unsigned char* g_868050;
 extern signed char g_7f3b00[];
 
-char* __cdecl lb_SearchRecordTable(unsigned int);
+#include "Develop/DieGildeAddOn/auxillary/plant.h"
 int __cdecl plt_CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned int);
 char* __cdecl plt_FindRecord(void*, unsigned int, unsigned int);
 char* __cdecl fcn_004bcda0(void*, unsigned int, unsigned int, unsigned int, unsigned int);
@@ -34,7 +34,7 @@ int __cdecl fcn_004ca0c0(int cmd, char* result)
 		g_7728f8 = *(int*) (cmd + 0x10);
 	entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x14));
 	if (entity != (void*) 0x0) {
-		rec = lb_SearchRecordTable(*(unsigned short*) (cmd + 0x1a));
+		rec = plt_FindPlantInfo(*(unsigned short*) (cmd + 0x1a));
 
 		if ((rec == (char*) 0x0) || (*(unsigned char*) (cmd + 0x1c) != 0) ||
 			(plt_CheckZoneAvailability(

@@ -1101,3 +1101,15 @@ path or module prefix is invented. Both TL499a50 and GOLD49a010 have125-byte
 RELOC verdicts. GOLD initializer4a16f0 independently binds literal600190 to
 the same action/starter. The initializer's reference and four-argument
 declaration are updated; original function-name spelling remains unattested.
+
+Shared plant lookup reconciliation (2026-10-11): `plt_FindPlantInfo` is an
+inferred module/VerbNoun name replacing the unrelated `lb_SearchRecordTable`
+label at SERVER10014ee0, TL4bcb80 and GOLD4bc5a0. The attested `plt_SetPlantMap`
+log and `DieGildeAddOn\\auxillary\\plant.c` path establish the plant subsystem;
+its `PlantInfo not found` wording supports the noun, not the exact helper name.
+`plt_PlantInfo` is likewise an inferred module/CamelCase name for the initialized
+four-record table at SERVER1002d878, TL6814a8 and GOLD602840. All three identities
+bind the same existing definition in `plant.c`, including the zero-id terminator.
+`plant.h` is a reconstructed canonical declaration home, not an attested header
+path. Layout-span names remain inventory names, and the meanings of the table's
+f42/f43/f44 fields remain unresolved. Evidence: `.scratch/goal20/plant-lookup-audit.json`.

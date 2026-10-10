@@ -50414,3 +50414,46 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   the only new identities are the two starters, the only other client
   measurements changed are their shared initializer, and data/other client
   facts/unrelated root files/worktrees remain unchanged.
+
+### 2026-10-11: shared plant lookup and upstream linker rename repair
+
+- Independently proved complete69-byte bodies and11 following layout NOPs at
+  SERVER10014ee0/TL4bcb80/GOLD4bc5a0. The full280-byte initialized table matches
+  native SERVER1002d878/TL6814a8/GOLD602840. All69 resolved instruction bytes
+  agree; wrong+4 table bindings reject. No compared-prefix-only extent claim.
+- CLI renamed the helper/global to inferred plt_FindPlantInfo/plt_PlantInfo;
+  public locked writers corrected only the two client lookup extents80->69 and
+  bound existing single-owner table storage in both clients. Their linked data
+  remains unchecked. PLANT_INFO's f42/f43/f44 meanings remain open.
+- Canonical plant.h replaces four conflicting declarations. Explicit unsigned
+  views preserve the TL owner-update byte comparison. Consuming plant.c's old
+  blank line avoids changing its __LINE__ constants. Whole COFF sections and
+  actual typed relocation graphs preserve12 target/flag groups and98 measured
+  functions, with no missing symbols. Generated $L/$SG names are checked by
+  actual section/value. Fresh lookup tests are RELOC69 in both clients; GOLD's
+  neighboring74/80 and163/176 size mismatches remain unchanged.
+- The first server gate failed on stale /INCLUDE:_lb_SearchRecordTable in the
+  tracked game-includes.rsp and removed its rawDLL. Fixed upstream662d7132,
+  reusing RenamePlan preview/rollback for target-scoped native linker refs.
+  Five regressions failed first;196 focused checks, all18 hooks and the corrected
+  full suite11526pass/50skip/0fail pass. First full run failed only a duplicate
+  changelog heading; moving the entry fixes it with source/tests/limits unchanged.
+- CLI explicit reference binding updates only the one server linker anchor,
+  with no C/store changes. The actual-main gate again passes316/316,652/652 data
+  comparisons(409placed/0displaced/243unmapped),100 imports,Wine exports,alignment
+  and whole raw286720-byte DLL identity. All316 SERVER fingerprints are current.
+- Seven affected client-file verifications refresh24 client records: both
+  lookupsRELOC69, TLownerRELOC104, both chain callersRELOC529. They retain11 TL
+  command mismatches and the GOLD197/208,74/80,163/176 padded extents. The guard
+  confirms no earned match lost, no new function identities, only2 client extent
+  promotions/2 table bindings, and other clients/data/unrelated work preserved.
+  All-target lint has0errors and unchanged0/2/40warnings; coverage all3 regenerated.
+- Evidence: `.scratch/goal20/plant-lookup-audit.json`,
+  `plant-callers-byte-preservation.json`, `plant-post-upstream-server-gate.log`,
+  `plant-integration-check.json`, `plant-fresh-verify-*`, `rename-linker-*`.
+  Fresh TL status3566/4904 matched(282EXACT/3284RELOC),44.4%text; client data/raw
+  images and remaining source/domain types/names are still open. Next native
+  evidence disproves TL4e7600's srv_Init(void) binding: it is a complete90-byte
+  formatter reading an entity and calling sprintf with eight integer fields.
+  Current row is SIZE_MISMATCH, not an earned match; repair separately with
+  native/helper/caller evidence. Do not repeat the exhausted4011a0/Character loops.

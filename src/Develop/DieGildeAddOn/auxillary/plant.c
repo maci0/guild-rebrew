@@ -1,8 +1,8 @@
 #include "../../Units/Error/error.h"
 int __cdecl find_zone_record(char* base, int x, int y);
-
+#include "plant.h"
 /* Plant records (TANNE, BUCHE, EICHE) and a zero-id terminator, walked by
- * lb_SearchRecordTable.  A struct object 8-aligns this TU's .data, which the
+ * plt_FindPlantInfo.  A struct object 8-aligns this TU's .data, which the
  * reference shows (four zero bytes at 0x1002d874). */
 // SIZE 0x46
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 	unsigned short f44;  /* +0x44 */
 } PLANT_INFO;
 
-PLANT_INFO g_plant_info_table[4] = {
+PLANT_INFO plt_PlantInfo[4] = {
 	{ 0x1b7, "TANNE", 3, 1, 4 },
 	{ 0x1b8, "BUCHE", 5, 1, 4 },
 	{ 0x1b9, "EICHE", 5, 2, 8 },
@@ -32,14 +32,14 @@ extern int g_dynamic_count;
  * the zone type matches the requested plant type. */
 
 
-char* __cdecl lb_SearchRecordTable(int key)
+char* __cdecl plt_FindPlantInfo(int key)
 {
 	unsigned int idx;
 
 	idx = 0;
-	while (*(unsigned short*) ((char*) &g_plant_info_table + idx * 0x46) != 0) {
-		if ((int) *(unsigned short*) ((char*) &g_plant_info_table + idx * 0x46) == key)
-			return (char*) &g_plant_info_table + idx * 0x46;
+	while (*(unsigned short*) ((char*) &plt_PlantInfo + idx * 0x46) != 0) {
+		if ((int) *(unsigned short*) ((char*) &plt_PlantInfo + idx * 0x46) == key)
+			return (char*) &plt_PlantInfo + idx * 0x46;
 		idx++;
 	}
 	return 0;
@@ -169,7 +169,7 @@ int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int 
 	int i;
 	unsigned char marker;
 
-	map = (char*) lb_SearchRecordTable(zone_type);
+	map = (char*) plt_FindPlantInfo(zone_type);
 	if (zone_table == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c", 0x83, "plt_SetPlantMap(): Map is not alloced or PlantInfo not found...", 1);
 		return 0;
