@@ -50378,3 +50378,39 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   and unchanged0/2/40 warnings. All three coverage documents regenerated.
   Receipts `.scratch/goal20/probe-selection-*`, `false-chain-row-*`,
   `canonical-chain-*` and `citizenship-*`. Whole-client verification remains open.
+
+### 2026-10-10: recover the Buergerrecht starter once for both clients
+
+- Reordered the mode check in ordinary C, preserving semantics: default
+  processor-pack/O2 now emits the native125-byte TL499a50 body. The initial
+ 145-byte spelling and three/O1 alternatives remain scratch measurements;
+  an explicit goto form is125 but does not match. No asm, flags, padding,
+  replacement helper or artificial float-global definition was added.
+- Full COFF operand/literal audits reproduce all125 native instruction bytes
+  for both TL499a50 and GOLD49a010. The two four-byte float payloads match
+  native0.44f/16000.0f; each wrong+4 operand and altered literal is rejected.
+  This resolves an object at native VAs, not a raw client link or linked EXACT.
+- A32-bit C89 self-check passes640 combinations covering modes, prior output
+  tag/type, unsigned object class, prerequisite bit, negative query result
+  and threshold boundaries. Wrong threshold, signed class and wrong result
+  state controls abort as expected. Failed paths preserve all output bytes;
+  success sets tag0xd/type2/value1 and returns0x19.
+- CLI skeleton created TL identity; public locked writers set the proven125
+  extent and inferred-name note. Fresh TL test earns RELOC125. GOLD native
+  registration4a16f0/name600190 independently proves the same action binding;
+  shared CLI import at score100 earns GOLD49a010 RELOC125 on the same source.
+  Existing catalog bindings supply all globals/callees; no duplicate storage.
+- Explicit CLI reference binding changes the initializer's two name tokens,
+  and its corrected prototype declares all four native arguments. The shared
+  registration body still tests RELOC9106 in both clients. Existing initializer
+  inline assembly/types/other placeholder declarations remain separate work.
+- `PrepareBuergerrecht` and its unplaced `src/GOLDTL.PrepareBuergerrecht.c`
+  path are inferred; no original function-name/module/path claim. Receipts:
+  `.scratch/goal20/citizenship-*`. Client data/raw-link and remaining unified
+  tree/type/name work remain open.
+- Final server gate passes316/316,100 imports,Wine exports and whole raw
+  DLL byte identity. Final lint has zero errors/unchanged0/2/40 warnings;
+  all three coverage documents regenerated. Preservation guard confirms
+  the only new identities are the two starters, the only other client
+  measurements changed are their shared initializer, and data/other client
+  facts/unrelated root files/worktrees remain unchanged.

@@ -390,6 +390,7 @@ Verbs are English. Nouns are German when they name game concepts:
 | Move     | Transfer between containers                       |
 | Sell     | Trade transaction                                 |
 | Create   | Instantiate (buildings, objects)                  |
+| Prepare  | Validate and fill an action's initial state (inferred `PrepareBuergerrecht`) |
 | Employ   | Assign a worker to a building                     |
 | Prod     | Produce (manufacturing)                           |
 | Clear    | Reset / empty a slot                              |
@@ -1092,3 +1093,11 @@ The disproven `ahm_ProcessEntityChain` binding at the starter VA was removed;
 that shared dispatcher remains at TL `0x004c4d30`, GOLD `0x004c43c0` and
 SERVER `0x1000ca00`. Evidence: `.scratch/goal20/citizenship-registration.json`
 and `canonical-chain-measurements.json`.
+
+Recovered as inferred `PrepareBuergerrecht`, an unprefixed English verb with
+the attested German action noun. The one shared body lives provisionally at
+`src/GOLDTL.PrepareBuergerrecht.c`; its original unit is unknown, so no source
+path or module prefix is invented. Both TL499a50 and GOLD49a010 have125-byte
+RELOC verdicts. GOLD initializer4a16f0 independently binds literal600190 to
+the same action/starter. The initializer's reference and four-argument
+declaration are updated; original function-name spelling remains unattested.

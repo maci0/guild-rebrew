@@ -63,7 +63,7 @@ int __cdecl fcn_004994c0(void);
 int __cdecl fcn_004995b0(void);
 int __cdecl fcn_00499640(void);
 int __cdecl fcn_00499950(void);
-int __cdecl fcn_00499a50(void);
+int __cdecl PrepareBuergerrecht(void*, char*, int, char*);
 int __cdecl fcn_00499ad0(void);
 int __cdecl fcn_00499cc0(void);
 int __cdecl fcn_00499db0(void);
@@ -965,7 +965,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x19;
 	strcpy(d.name, "Buergerrecht");
 	d.score = fcn_004a4410;
-	d.start = fcn_00499a50;
+	d.start = PrepareBuergerrecht;
 	d.run = fcn_00499ad0;
 	d.flags = 0x1b;
 	if (fcn_00494ed0(&d, e) == 0) {

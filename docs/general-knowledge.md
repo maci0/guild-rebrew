@@ -671,3 +671,12 @@ What the clients can and cannot give:
   float pools66417c (0.44f) and664340 (16000.0f). This proves the action
   association, not an original C function name or source unit. Evidence:
   `.scratch/goal20/citizenship-registration.json` and `ahm-chain-original.json`.
+
+- GOLD independently registers `Buergerrecht` at initializer4a16f0 with
+  name600190 and starter49a010. Its125-byte starter shares the recovered TL C
+  body; the global byte is6f1bc5, query helper509ee0, and float pools5ecef0/
+  5ed0a8. Managed existing globals/callee aliases map these targets; no new
+  storage is defined. Resolving all four COFF operands reproduces each native
+  body, and both complete float payloads match. This is stronger body evidence
+  than masked relocation agreement but does not establish a raw client link.
+  Evidence `.scratch/goal20/citizenship-{starter-audit,gold-audit}.json`.

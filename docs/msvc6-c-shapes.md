@@ -11396,3 +11396,17 @@ Evidence: `.scratch/goal20/clear-sitting-{legal-variants,no-inline-variants,
 corrected-test,behavior}.json`. Initial legal-variants `size` is the compared
 slice length; full lengths are in its compiler messages and corrected-test
 `obj_size`, not the truncated comparison bytes.
+
+### Mode-check ordering shares failure returns (2026-10-10)
+
+TL Buergerrecht starter499a50 is125 bytes. Testing mode1 first, then an
+`else if (mode != 0)`, produces145 bytes under default processor-pack /O2:
+failure returns are duplicated. Testing `mode != 1` first, rejecting nonzero
+modes inside it and validating the output state in the else branch, produces
+the native early shared return and complete125-byte body. No goto or flag
+override is needed. Explicit shared-failure gotos also produce125 but move
+the return to the end and change branch layout; /O1 variants produce119/121.
+Only the ordinary inverted /O2 spelling matches. Float literal payloads0.44f
+and16000.0f, all operands and negative controls independently match both TL
+and GOLD bodies. Evidence `.scratch/goal20/citizenship-{return-layout,
+starter-audit,gold-audit,starter-behavior}.json`;640 C89 cases pass.
