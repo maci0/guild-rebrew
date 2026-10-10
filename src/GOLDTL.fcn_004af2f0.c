@@ -7,7 +7,7 @@ extern float g_662910;
 extern unsigned char g_773d75;
 
 void* __cdecl fcn_00508e40(int);
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
 int __cdecl fcn_0064eeec(char*);
 int __cdecl fcn_0050b710(int, unsigned char);
@@ -702,7 +702,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	if (fcn_004ae130(w) == 0) {
 		return 0;
 	}
-	r = fcn_0050dac0(w);
+	r = gm_WalkEntityChain(w);
 	n = 0x200;
 	p = buf;
 	/* The original's zero-fill is the 24-byte hand-written block-fill prelude

@@ -1126,3 +1126,13 @@ bind the same existing definition in `plant.c`, including the zero-id terminator
 `plant.h` is a reconstructed canonical declaration home, not an attested header
 path. Layout-span names remain inventory names, and the meanings of the table's
 f42/f43/f44 fields remain unresolved. Evidence: `.scratch/goal20/plant-lookup-audit.json`.
+
+Shared slot-helper reconciliation (2026-10-11): TL50dac0 and GOLD50a640 now
+reuse the existing inferred `gm_WalkEntityChain` name and spiel.c definition
+instead of the numeric `fcn_0050dac0` duplicate. Complete native/body evidence
+proves the shared 124-byte helper, not an original-symbol spelling. The
+unsigned-short formal is supported by both callee and formatter code.
+`spiel.h` is a reconstructed declaration home; no original header path is
+claimed. The 52 caller files retain their existing names and function bodies.
+Evidence: `.scratch/goal20/stat-helper-replay.json` and
+`stat-helper-after-final-prototype/`.

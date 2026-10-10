@@ -3,7 +3,7 @@
 
 void __cdecl fcn_004fd400(short* a, int* b);
 int __cdecl gm_AccumulateTyped2(unsigned short* e);
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 // FUNCTION: GOLD 0x004ac200
 // FUNCTION: GOLDTL 0x4ac320
@@ -16,6 +16,6 @@ int __cdecl fcn_004ac320(unsigned short* e)
 
 	fcn_004fd400(&s, &n);
 	r = gm_AccumulateTyped2(e);
-	x = (int) MINV(MAXV(fcn_0050dac0(*e) * 500.0f / n, 1600.0f), 16000.0f);
+	x = (int) MINV(MAXV(gm_WalkEntityChain(*e) * 500.0f / n, 1600.0f), 16000.0f);
 	return r > x ? x : 0;
 }

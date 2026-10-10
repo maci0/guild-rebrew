@@ -17,7 +17,7 @@ extern float g_665bf0;
 extern double g_664f18;
 
 int __cdecl gm_AccumulateTyped2(Entity*);
-int __cdecl fcn_0050dac0(short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_005c4ec0(int, Entity*, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
@@ -35,7 +35,7 @@ int __cdecl fcn_0050db40(Entity* e, int extra)
 		return 0;
 	}
 	d = -v;
-	d += fcn_0050dac0(e->slot);
+	d += gm_WalkEntityChain(e->slot);
 	if (e->type != 6 && e->type != 7) {
 		if (abs((int) v) / d > g_6628f0) {
 			return 1;

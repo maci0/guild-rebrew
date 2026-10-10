@@ -66,7 +66,7 @@ extern int g_14ce8e0;
 extern int g_14ce8d8;
 extern int g_774654;
 
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_004727a0(int, int);
@@ -92,7 +92,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 	char c;
 	int i;
 
-	n = fcn_0050dac0(e->id) * 0.015f;
+	n = gm_WalkEntityChain(e->id) * 0.015f;
 	dlg = fcn_00470820(0, 0, "privillegien\\CHOOSEPROFESSION2");
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 0);

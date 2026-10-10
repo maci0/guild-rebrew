@@ -4,7 +4,7 @@
 
 extern unsigned char g_773d75;
 
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050b710(int a, unsigned char b);
 
 // FUNCTION: GOLDTL 0x493dc0
@@ -14,8 +14,8 @@ int __cdecl fcn_00493dc0(unsigned short* a, unsigned short* b)
 	int y;
 	double v;
 
-	x = fcn_0050dac0(*a);
-	y = fcn_0050dac0(*b);
+	x = gm_WalkEntityChain(*a);
+	y = gm_WalkEntityChain(*b);
 	v = fcn_0050b710(y, g_773d75) + fcn_0050b710(x, g_773d75);
 	if (10000.0 > v) {
 		v = 10000.0;

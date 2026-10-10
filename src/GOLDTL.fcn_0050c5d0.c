@@ -8,7 +8,7 @@ extern float g_665bf0;
 extern float g_6652c8;
 extern double g_664e60;
 
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 int __cdecl gm_GetMsgField(char* pkt, char* q);
 float __cdecl fcn_0050b980(int id, int pct);
@@ -26,7 +26,7 @@ int __cdecl fcn_0050c5d0(unsigned char* o, int* out)
 	rec = g_868050 + *o * 589;
 	v = g_6628a8;
 	if (*(unsigned short*) (o + 0x27) != 0xffff) {
-		v = (float) fcn_0050dac0(*(unsigned short*) (o + 0x27));
+		v = (float) gm_WalkEntityChain(*(unsigned short*) (o + 0x27));
 		if (g_665bf4 < v) {
 			v = g_665bf4;
 		}

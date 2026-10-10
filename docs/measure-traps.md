@@ -3099,3 +3099,24 @@ all20 resolved operand sites, and wrong-binding controls. The conservative
 linear extent reader stops at an internal jump after89 bytes; that result
 does not establish the iterator's complete body. No instruction or match
 threshold was changed to gain the client matches.
+
+## Retire a shared source only after its last owner moves (2026-10-11)
+
+The numeric slot-helper file carried both TL50dac0 and GOLD50a640 claims.
+Rebrew's shared importer previously deleted the whole file after moving only
+one claim. Upstream 2b46dab0 now considers managed function/data owners, live
+legacy claims, other definitions and actual global storage before retirement.
+It strips only the moved claim, preserves source lines and file-borne comments,
+and backs up the final unowned single-body file. The game replay moves exactly
+the two client rows; the first move preserves the other claim, and the second
+retires the duplicate. Keep the generated backup as recovery evidence.
+
+Source-in-workdir probes exposed a separate compiler wrapper bug: the original
+parent include directory was omitted when source.parent equalled workdir.
+The container's `/work` alias then broke parent-relative includes. Upstream
+3214649a preserves the original authorized include path in that case; MSVC
+fails before the fix and GCC provides a passing control. Both fixes pass their
+focused checks, all 18 hooks and frozen full suites (11,553/11,555 passes,
+50 skips respectively). Evidence: `.scratch/goal20/stat-helper-replay.json`,
+`stat-helper-retirement-full-suite-policy.log` and
+`compiler-source-in-workdir-full-suite.log`.

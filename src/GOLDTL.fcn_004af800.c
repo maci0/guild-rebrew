@@ -20,7 +20,7 @@ Rec21c* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
 void __cdecl fcn_0051af00(void*, int, ...);
 int __cdecl fcn_0064eeec(char*);
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004ae0f0(int);
 unsigned short __cdecl fcn_0042e410(int);
 
@@ -110,7 +110,7 @@ int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
 	}
 	for (i = 0; i < 768; i++) {
 		if (test(i) != 0) {
-			v = fcn_0050dac0((unsigned short) i);
+			v = gm_WalkEntityChain((unsigned short) i);
 			if (v > score[4] && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {
 				score[4] = v;
 				found |= 1;

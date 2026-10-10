@@ -28,7 +28,7 @@ extern char g_7f4ca0[];
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
 char* __cdecl gm_AddObjekt(void);
 Obj* __cdecl fcn_00508e40(int id);
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004e8240(unsigned char a, Obj* o, int b, int c, int d);
 void __cdecl fcn_004ea560(Obj* o, int v);
 void __cdecl fcn_004ea4b0(Obj* o, int v);
@@ -82,13 +82,13 @@ void __cdecl fcn_004ea9a0(void)
 	}
 	cur = 0;
 	if (rec.b != -1 && (cur = fcn_00508e40(rec.b)) != 0) {
-		best_v = fcn_0050dac0(cur->id);
+		best_v = gm_WalkEntityChain(cur->id);
 	} else {
 		best_v = 0;
 	}
 	best = 0;
 	for (j = 0; j < k; j++) {
-		v = fcn_0050dac0(list[j]->id);
+		v = gm_WalkEntityChain(list[j]->id);
 		if (v > best_v) {
 			best = list[j];
 			best_v = v;

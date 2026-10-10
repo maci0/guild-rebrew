@@ -20,7 +20,7 @@ int __cdecl fcn_005ca560(struct sel*);
 void __cdecl fcn_005caaa0(int, int, int, struct sel*);
 float __cdecl fcn_00508e80(unsigned short);
 int __cdecl gm_GetOppositeStatIndex(int);
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 char* __cdecl fcn_00508e40(int);
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
@@ -72,7 +72,7 @@ void __cdecl fcn_00589390(char* w)
 		}
 	}
 	fcn_00519190(0x37, (w[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (w + 0xd));
-	fcn_00519190(0x2e, fcn_0050dac0(*(unsigned short*) w));
+	fcn_00519190(0x2e, gm_WalkEntityChain(*(unsigned short*) w));
 	fcn_00519190(0x2f);
 	q = fcn_00508e40(*(int*) (w + 0x5c));
 	if (q != 0 && *(unsigned char*) (q + 8) > 0) {

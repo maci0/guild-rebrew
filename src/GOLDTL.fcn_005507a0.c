@@ -23,7 +23,7 @@ extern char g_6811b0[];
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_0050fe40(unsigned short, int);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
@@ -40,7 +40,7 @@ void __cdecl fcn_005507a0(char* u)
 		}
 		switch (*(int*) (u + 0x70)) {
 		case 0:
-			v = (int) (fcn_0050dac0(*(unsigned short*) (u + 8)) * g_6652c8);
+			v = (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8);
 			if (*(char**) (u + 0x74) == 0) {
 				fcn_00545670(u, 0, 0, g_6a5a10, 0x5ec);
 			}
@@ -59,7 +59,7 @@ void __cdecl fcn_005507a0(char* u)
 			}
 			if (g_100f1dc == 2) {
 				fcn_004c5150(*(int*) (g_773da8 + 4), ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, g_773d75,
-				    (int) (fcn_0050dac0(*(unsigned short*) (u + 8)) * g_6652c8));
+				    (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8));
 				fcn_0050fe40(*(unsigned short*) (u + 8), 8);
 				fcn_00545780(u);
 				fcn_00546190(u);

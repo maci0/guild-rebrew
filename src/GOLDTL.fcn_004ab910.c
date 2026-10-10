@@ -15,7 +15,7 @@ int __cdecl fcn_00510470(unsigned char*);
 unsigned short __cdecl fcn_0042e410(unsigned short);
 int __cdecl fcn_004a5340(unsigned short* e, int n, int* lim, float a4, float r, unsigned short* ids);
 int __cdecl fcn_0050b810(int a, char b);
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 // FUNCTION: GOLDTL 0x4ab910
 int __cdecl fcn_004ab910(int a1, unsigned short* a2, int a3, char* a4)
@@ -66,7 +66,7 @@ int __cdecl fcn_004ab910(int a1, unsigned short* a2, int a3, char* a4)
 		return 0;
 	p = g_7f4ca0 + id * 540;
 	money = (int) (fcn_0050b810(*(int*) ((char*) a2 + 0x178), (*(char*)&g_773d75)) * 0.25f);
-	fcn_0050dac0(*a2);
+	gm_WalkEntityChain(*a2);
 	for (n = best_v - 1; n > 0; n--) {
 		if (money > (n > 1 ? n : 1) * 32000)
 			break;

@@ -36,7 +36,7 @@ int __cdecl fcn_004c2db0(int, int);
 char* __cdecl fcn_0058e220(char*, char*);
 float __cdecl fcn_004f4770(char*);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00473a90(int, int);
 void __cdecl fcn_00471b60(int);
@@ -75,7 +75,7 @@ void __cdecl fcn_0058e790(char* e, char* res)
 	else {
 		char ev[0xf8];
 
-		amt = MIN(MAX((int) (fcn_0050dac0(g_774970) * g_6628bc), 0x27100), 0xc3500);
+		amt = MIN(MAX((int) (gm_WalkEntityChain(g_774970) * g_6628bc), 0x27100), 0xc3500);
 		fcn_004c5150(((struct house*)g_7f4ca0)[g_774970].handle, -1, g_773d75, amt);
 		memset(ev, 0, sizeof(ev));
 		ev[4] = (char) 0x8e;

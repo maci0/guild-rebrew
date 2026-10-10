@@ -4,7 +4,7 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 int __cdecl fcn_00508eb0(unsigned short, int);
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00508d80(int, int*);
 
 void __cdecl fcn_0054c720(char* e, unsigned short* a, unsigned short* b)
@@ -17,8 +17,8 @@ void __cdecl fcn_0054c720(char* e, unsigned short* a, unsigned short* b)
 	float s;
 
 	half = fcn_00508eb0(*a, 0) / 2;
-	x = MAX(fcn_0050dac0(*a), 32000);
-	y = MAX(fcn_0050dac0(*b), 32000);
+	x = MAX(gm_WalkEntityChain(*a), 32000);
+	y = MAX(gm_WalkEntityChain(*b), 32000);
 	for (i = 0; i < 12; i++) {
 		arr[i] = i + half;
 	}

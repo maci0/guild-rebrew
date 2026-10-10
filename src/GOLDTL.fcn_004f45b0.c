@@ -8,7 +8,7 @@ extern unsigned char g_773d75;
 #define MINV(a, b) (((a) < (b)) ? (a) : (b))
 
 double __cdecl log10(double x);
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050b710(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 
@@ -17,7 +17,7 @@ int __cdecl fcn_004f45b0(unsigned short* e)
 	double x;
 	int pr;
 
-	pr = fcn_0050b710(fcn_0050dac0(*e), g_773d75);
+	pr = fcn_0050b710(gm_WalkEntityChain(*e), g_773d75);
 	x = pr;
 	x = MAXV(MINV(100000.0, x), 10000.0);
 	x = x / (log10(x) + 1.0) * 0.1f;

@@ -720,3 +720,14 @@ What the clients can and cannot give:
   candidate; its current TL binding to the true server `srv_Init` is false.
   Evidence: `.scratch/goal20/stat-formatter-family-native.json`,
   `stat-formatter-c-probe.json`, `stat-formatter-behavior.json`.
+
+- The numeric slot helper TL50dac0/GOLD50a640 now binds the existing
+  `gm_WalkEntityChain(unsigned short)` implementation in spiel.c, shared with
+  SERVER10019be0. Both client bodies match 124 bytes. All 52 referring files
+  use the canonical prototype in reconstructed spiel.h, and the last
+  unowned duplicate source is retired. Complete COFF comparison preserves
+  all 82 caller groups and 108 function bodies; it also preserves both shared
+  client translation units. This changes source ownership, not the matched
+  function totals or client linked-data evidence. Evidence:
+  `.scratch/goal20/stat-helper-replay.json` and
+  `stat-helper-after-final-prototype/`.

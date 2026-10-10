@@ -39,7 +39,7 @@ void __cdecl fcn_00500bb0(Pos55a5*, int, int, int);
 void __cdecl fcn_004c5530(Msg55a5*);
 void __cdecl fcn_00546190(char*);
 float __cdecl fcn_00507f10(char*, int);
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_004fef80(char*);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
@@ -79,7 +79,7 @@ void __cdecl fcn_0055a5b0(char* u)
 		if (*(int*) (u + 0xb0) != 0) {
 			h = g_7f4ca0 + *(unsigned short*) (u + 8) * 0x21c;
 			f = fcn_00507f10(h, 3) > 0.1f ? fcn_00507f10(h, 3) : 0.1f;
-			a = fcn_0050dac0(*(unsigned short*) h);
+			a = gm_WalkEntityChain(*(unsigned short*) h);
 			fcn_004ff210(*(unsigned short*) h, -(int) ((int) fcn_004fef80(h) * ((1.0f - f) * 0.5f)));
 			d = (int) (a * f * 0.06f);
 			fcn_004c51a0(*(int*) (u + 0xac), -1, g_773d75, d);

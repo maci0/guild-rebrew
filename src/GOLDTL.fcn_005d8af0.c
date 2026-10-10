@@ -23,7 +23,7 @@ extern int g_14ce8e0;
 extern int g_774654;
 extern int g_67d370;
 
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_AccumulateTyped2(House*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c6ae0(int, int);
@@ -58,7 +58,7 @@ int __cdecl fcn_005d8af0(House* e)
 		if (*(int*) ((char*) e + 0x194) < 6) {
 			return 0x20;
 		}
-		money = (int) (fcn_0050dac0(e->id) * g_662964);
+		money = (int) (gm_WalkEntityChain(e->id) * g_662964);
 		if (gm_AccumulateTyped2(e) < money) {
 			return 0x20;
 		}
@@ -89,7 +89,7 @@ int __cdecl fcn_005d8af0(House* e)
 		House* h;
 
 		result = 0;
-		money = (int) (fcn_0050dac0(e->id) * g_662964);
+		money = (int) (gm_WalkEntityChain(e->id) * g_662964);
 		dlg = fcn_00470820(0, 0, s_6acdcc);
 		fcn_00473a90(0, 0);
 		fcn_00471b60(dlg);

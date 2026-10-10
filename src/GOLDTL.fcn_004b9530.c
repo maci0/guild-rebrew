@@ -35,7 +35,7 @@ Obj* __cdecl fcn_005462a0(void);
 int __cdecl fcn_005015e0(char** dynamic, char** existing, char** static_ptr, int entity_id);
 int __cdecl gm_CheckEntityType(char*);
 unsigned short __cdecl fcn_0042e410(int);
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -84,7 +84,7 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 		return 0x400;
 	}
 	f = ((fcn_0042e410(2) & 0xffff) + 1.0f) * 0.01f;
-	amount = fcn_0050dac0(e->id) * f;
+	amount = gm_WalkEntityChain(e->id) * f;
 	fcn_004c51a0(-1, cmd->handle, g_773d75, amount);
 	k = fcn_0042e410(n) & 0xffff;
 	o = objs[k];

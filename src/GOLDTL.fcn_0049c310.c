@@ -9,7 +9,7 @@ unsigned short __cdecl fcn_0042e410(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_0050d320(char*, unsigned char);
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_0050f980(int, int, int);
 int __cdecl fcn_005c6270(void*, int);
 
@@ -50,7 +50,7 @@ int __cdecl fcn_0049c310(int unused, char* e, int busy, char* out, char* kind)
 					t = list[fcn_0042e410(n)];
 					if (*(int*) (e + 0x194) < 4) {
 						v3 = fcn_0050d320(e, g_773d75);
-						f1 = fcn_0050dac0(*(unsigned short*) e) * 0.005f;
+						f1 = gm_WalkEntityChain(*(unsigned short*) e) * 0.005f;
 						amt = (int) (v1 * ((200.0f - fcn_0050f980(*(unsigned short*) e,
 							*(unsigned short*) (t + 0x27), 1)) * 0.01f) * f1);
 						amt = (int) MINV(MAXV(amt * 0.01, 3200.0), 320000.0);

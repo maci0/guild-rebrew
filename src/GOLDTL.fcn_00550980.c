@@ -38,7 +38,7 @@ extern int g_100f1dc;
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
@@ -63,7 +63,7 @@ void __cdecl fcn_00550980(char* u)
 	}
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		t = fcn_0050dac0(*(unsigned short*) (u + 8));
+		t = gm_WalkEntityChain(*(unsigned short*) (u + 8));
 		v = (int) (t * 0.05f);
 		*(int*) (u + 0xb0) = v;
 		if (*(char**) (u + 0x74) == 0) {

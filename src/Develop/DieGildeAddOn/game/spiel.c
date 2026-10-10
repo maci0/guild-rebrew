@@ -62,7 +62,7 @@ void __cdecl gm_NoopRet2(void);
 int __cdecl gm_RandomMod(unsigned short n);
 int __cdecl gm_RemoveObjectByType(int a, int b);
 char* __cdecl gm_SearchStruct(void);
-int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
+#include "spiel.h"
 unsigned short* __cdecl gm_ff_Objekt(int container_id, int arg_count, int first_arg, ...);
 
 

@@ -18,7 +18,7 @@ extern float g_6628ac;
 unsigned short __cdecl fcn_0042e410(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl fcn_0050b810(int a, char b);
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 int __cdecl fcn_0048dbc0(char* e, char* a2, char* a3)
 {
@@ -37,8 +37,8 @@ int __cdecl fcn_0048dbc0(char* e, char* a2, char* a3)
 	}
 	t = &((Ent*)g_7f4ca0)[(unsigned short) idx];
 	have = (int) (fcn_0050b810(*(int*) (e + 0x178), (*(char*)&g_773d75)) * g_6628bc);
-	need = fcn_0050dac0(*(unsigned short*) e);
-	need = (int) ((fcn_0050dac0(t->id) + need) * g_6628ac);
+	need = gm_WalkEntityChain(*(unsigned short*) e);
+	need = (int) ((gm_WalkEntityChain(t->id) + need) * g_6628ac);
 	if (have < need) {
 		return 0;
 	}

@@ -14,7 +14,7 @@ typedef struct Share {
 
 extern char g_868060[];
 
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_00502820(int x0, int y0, int x1, int y1);
 unsigned short __cdecl fcn_0042e410(int n);
 
@@ -41,7 +41,7 @@ void __cdecl fcn_004942a0(unsigned short* e, Share* out)
 	table[2][1] = 0;
 	table[2][2] = 4;
 	table[2][3] = 1;
-	total = (int) (fcn_0050dac0(*e) * 0.025f);
+	total = (int) (gm_WalkEntityChain(*e) * 0.025f);
 	max = 0;
 	for (i = 0; i < 3; i++) {
 		dist[i] = fcn_00502820(((Player*)g_868060)[0].x, ((Player*)g_868060)[0].y, ((Player*)g_868060)[i + 1].x, ((Player*)g_868060)[i + 1].y);

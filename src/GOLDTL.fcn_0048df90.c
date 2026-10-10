@@ -7,7 +7,7 @@ typedef struct Ent {
 
 extern unsigned char g_773d75;
 
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050b810(int a, unsigned char b);
 
 // FUNCTION: GOLD 0x0048e9e0
@@ -20,7 +20,7 @@ int __cdecl fcn_0048df90(Ent* e, char* a2, char* a3)
 	int v;
 	int i;
 
-	t = fcn_0050dac0(e->id);
+	t = gm_WalkEntityChain(e->id);
 	m = fcn_0050b810(e->stock, g_773d75);
 	v = (int) (m * 0.25f);
 	thr[0] = (int) (t * 0.01f);

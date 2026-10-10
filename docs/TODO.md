@@ -50498,3 +50498,28 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   Current TL3567/4904(282EXACT/3285RELOC),86 size mismatches,44.4% accountedtext;
   GOLD2050/4597(118EXACT/1932RELOC),438 size mismatches,19.7% accountedtext.
   Their240/199 data rows remain unchecked. Full all3/unified-tree goal stays active.
+
+### 2026-10-11: shared slot-helper consolidation verified
+
+- TL50dac0/GOLD50a640 now bind the existing spiel.c gm_WalkEntityChain body,
+  RELOC 124 in both. The public importer moves exactly two managed identities,
+  keeps the other target's claim after the first move, then retires the final
+  unowned duplicate. The generated source backup is retained outside Git.
+- All 52 caller files now use the canonical narrow prototype in spiel.h.
+  Complete COFF checks preserve 82 groups and 108 function bodies; fresh CLI
+  measurements retain 101 RELOC and seven existing size mismatches. Both
+  complete shared client objects are unchanged. The broader entity.h include
+  changed one caller's scheduling; an added extern changed server gm_Open.
+  Keep the minimal header and original bare int prototype.
+- Both tool defects are fixed on upstream main: shared-import retirement
+  2b46dab0 and source-in-workdir parent includes 3214649a. Focused tests,
+  all 18 hooks and frozen full suites pass (11,553/11,555, each with 50 skips).
+  The final server gate passes all function/data/import/export/file axes;
+  the raw DLL remains byte-identical. Existing lint warnings remain 0/2/40.
+- Next: recover the proven 90-byte statistic formatter, replace TL4e7600's
+  false srv_Init binding and share the body with GOLD4e5af0. Preserve the real
+  server initializer. Its original spelling, return type and source unit
+  remain inferred or unresolved; do not add fake logs to satisfy reservation.
+  Client image/data verification, types/names and placeholder removal remain
+  unfinished. Evidence: stat-helper-integration-check.json, the final caller
+  measurement directory and stat-helper-final-server-gate.log in .scratch/goal20.

@@ -11444,3 +11444,20 @@ width evidence; the existing canonical spiel.c definition already takes an
 unsigned short. Evidence: `.scratch/goal20/stat-formatter-width-control.json`
 and `stat-helper-declarations.json`. No qualifier, assembly or extra flag
 was needed.
+
+## Prototype-only headers preserve MSVC6 translation-unit context (2026-10-11)
+
+Consolidating `gm_WalkEntityChain` into the existing `entity.h` changed the
+call order and scratch argument offsets in GOLDTL493ee0, although six initial
+representative object probes passed. A small `spiel.h` containing only the
+existing unsigned-short prototype preserves all 82 affected target/flag groups
+and 108 complete function bodies. Keep the replaced declaration on the same
+source line; compiler-generated local labels are compared by section/value.
+
+The declaration's storage-class spelling also matters here. Adding `extern`
+to the original bare `int` prototype shrank server `gm_Open` from 861 to 859
+bytes. Restoring the original declaration form restores RELOC 861 without a
+body or flag change. Both complete shared client objects remain unchanged.
+Evidence: `.scratch/goal20/stat-helper-after-final-prototype/`,
+`stat-helper-shared-final-prototype.json`, and
+`stat-helper-server-bare-prototype-test.json`.

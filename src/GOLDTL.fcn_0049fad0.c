@@ -21,7 +21,7 @@ extern unsigned char g_773d75;
 
 unsigned short __cdecl fcn_0042e410(int n);
 int __cdecl fcn_004eb260(char* e);
-int __cdecl fcn_0050dac0(unsigned short id);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050d320(char* e, char k);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl fcn_005015e0(char**, char**, char**, int);
@@ -44,7 +44,7 @@ int __cdecl fcn_0049fad0(int a1, char* e, int a3, char* out)
 	if (fcn_004eb260(e) != 1) {
 		return 0;
 	}
-	v = (int) max(fcn_0050dac0(*(unsigned short*) e) * 0.01f, 160.0f);
+	v = (int) max(gm_WalkEntityChain(*(unsigned short*) e) * 0.01f, 160.0f);
 	if (v > (int) (fcn_0050d320(e, (*(char*)&g_773d75)) * 0.22f)) {
 		return 0;
 	}

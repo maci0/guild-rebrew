@@ -33,7 +33,7 @@ extern int g_14ce8e0;
 extern int g_67d370;
 extern int g_774654;
 
-int __cdecl fcn_0050dac0(unsigned short);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00526010(Ent5aa1*, int, unsigned char);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -56,7 +56,7 @@ int __cdecl fcn_005aa120(int unused, char* p)
 	int t;
 	int w1;
 
-	cost = (int) MAX5AA1(fcn_0050dac0(((Ent5aa1*)g_7f4ca0)[g_774970].id) * g_662910, g_664388);
+	cost = (int) MAX5AA1(gm_WalkEntityChain(((Ent5aa1*)g_7f4ca0)[g_774970].id) * g_662910, g_664388);
 	if (fcn_00526010(&((Ent5aa1*)g_7f4ca0)[g_774970], cost, g_773d75) == 0) {
 		return 0;
 	}
