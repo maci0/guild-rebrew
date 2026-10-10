@@ -3073,3 +3073,29 @@ The CLI linker-only repair changes one response line with no C/store changes.
 The new gate passes all316 function checks,652 data comparisons and raw whole-file
 identity. Keep both the failed and passing receipts: `.scratch/goal20/plant-server-gate.log`,
 `plant-server-build-failed.log`, `plant-post-upstream-server-gate.log`.
+
+## A shared import verdict can carry the wrong identity or inputs (2026-10-11)
+
+The filtered iterator at TL503e80/GOLD501030 has a complete341-byte body and
+11 following alignment NOPs. The original shared importer accepted the
+341-byte retry but recorded reference_size352 and the rejected padded span's
+hash. It also retained the former gm_AddObjekt name beside the correct
+_gm_FindNextFilteredEntity symbol and selected another function's compiler
+flags from spiel.c. A passing RELOC label alone did not prove that these
+records described the measurement actually performed.
+
+Use the selected source module and VA for flags; after verified retargeting,
+replace the destination name and retain the successful body's comparison
+inputs. A source-default flag choice must remove a stale destination override.
+A rejected retarget between managed definitions in the same file must preserve
+the entire previous row and verdict. Keep migration's protection of existing
+names. These are shared upstream importer fixes, not reasons to edit managed
+stores or modify the game body. Evidence: `.scratch/goal20/stat-iterator-tl-import.json`,
+`stat-iterator-gold-import.json`, `stat-import-regressions-before-corrected.log`
+and `stat-import-additional-before.log`.
+
+The complete extent comes from bounded native branch traversal, all341 bytes,
+all20 resolved operand sites, and wrong-binding controls. The conservative
+linear extent reader stops at an internal jump after89 bytes; that result
+does not establish the iterator's complete body. No instruction or match
+threshold was changed to gain the client matches.

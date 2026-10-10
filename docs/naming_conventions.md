@@ -3,6 +3,19 @@
 Reconstructed from debug strings, error messages, and binary analysis of
 `server.dll` and `Europa1400Gold_TL.exe`. Developer: 4HEAD Studios (German).
 
+### Filtered iterator identity correction (2026-10-11)
+
+`gm_FindNextFilteredEntity` is the existing inferred shared name for the
+iterator at SERVER10016f80, GOLDTL503e80 and GOLD501030. The client body is341
+bytes plus11 layout NOPs; all20 relocation sites and all other bytes match
+the existing spiel.c definition in both clients. GOLDTL503e80's former
+`gm_AddObjekt` binding named a different shared function and is disproven.
+The true server `gm_AddObjekt` name remains attested and unchanged. Evidence:
+`.scratch/goal20/stat-shared-iterator-audit.json`. Upstream0fbab4fb fixes the
+shared importer, and the verified replay corrects both client names, symbols,
+flags and341-byte reference hashes through the managed writer. Evidence:
+`.scratch/goal20/stat-iterator-replay.json`.
+
 ## Source Tree Layout
 
 Reconstructed from `__FILE__` debug strings and PDB references embedded in

@@ -50457,3 +50457,44 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   formatter reading an entity and calling sprintf with eight integer fields.
   Current row is SIZE_MISMATCH, not an earned match; repair separately with
   native/helper/caller evidence. Do not repeat the exhausted4011a0/Character loops.
+
+### 2026-10-11: finalize the shared filtered iterator and repair import evidence upstream
+
+- One existing spiel.c body now covers SERVER10016f80, TL503e80 and GOLD501030.
+  The clients match all341 bytes, with11 following alignment NOPs. Bounded
+  native traversal and all20 resolved operand sites prove the extent and code;
+  each wrong+4 binding rejects. The linear reader's89/jmp result is conservative,
+  not a complete-body estimate. No C/header/layout changes were needed.
+- Initial imports exposed stale gm_AddObjekt names, first-function flags and
+  reference_size352/padded hashes beside341-byte verdicts. Independent replay
+  checks also reproduced stale inherited flag overrides and failed managed
+  retargets overwriting an old verdict. Fixed all five cases upstream0fbab4fb.
+  Five initial and two further regressions failed first;370 focused checks,
+  all18 hooks and the final full suite11536pass/50skip/0fail pass. The earlier
+  first-stage11534-pass run preceded two fixes and is not final validation.
+- Replay through the corrected public importer changes exactly the two client
+  rows. Both identities/names are gm_FindNextFilteredEntity, RELOC341, with
+  complete-body reference hashes and inherited /O2 /Gd; stale naked flags are
+  gone. No other client record, source/header/layout or unrelated work changed.
+- Fresh actual-main gate passes316 functions,652 data comparisons,100 imports,
+  Wine exports,alignment and whole286720-byte rawDLL identity. All316 SERVER
+  fingerprints are refreshed. All-target lint has0errors and unchanged0/2/40
+  warnings; all3 coverage documents regenerated. The scoped preservation guard
+  accepts only the two iterator changes, one new GOLD identity and SERVER
+  measurement refreshes. No client linked-data or whole-image claim is made.
+- Native/plain-C scratch proofs establish all90 formatter bytes and its25-byte
+  literal in both clients, with8 behavior cases and wrong-binding/field/order
+  controls. The int-formal control grows it to92 bytes; the narrow unsigned-short
+  declaration is needed. The124-byte numeric slot helper already exists once as
+  gm_WalkEntityChain in spiel.c. Its duplicate still needs removal and52 caller
+  files require a canonical declaration, preserving82 target/flag groups and108
+  measurements. Original formatter name/return type/unit remain inferred or open;
+  the false TL srv_Init binding and placeholder stat/log bodies are not repaired
+  by the scratch proof. Preserve the true server srv_Init.
+- Evidence: `.scratch/goal20/stat-shared-iterator-audit.json`,
+  `stat-iterator-replay.json`, `stat-import-full-suite-final.log`,
+  `stat-iterator-post-upstream-server-gate.log`, `stat-iterator-server-data.log`,
+  `stat-iterator-integration-check.json`, `stat-helper-consolidation-plan.json`.
+  Current TL3567/4904(282EXACT/3285RELOC),86 size mismatches,44.4% accountedtext;
+  GOLD2050/4597(118EXACT/1932RELOC),438 size mismatches,19.7% accountedtext.
+  Their240/199 data rows remain unchecked. Full all3/unified-tree goal stays active.

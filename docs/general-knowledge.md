@@ -692,3 +692,31 @@ What the clients can and cannot give:
   not linked client placement. `plt_FindPlantInfo`/`plt_PlantInfo` are inferred
   names, and the meanings of f42/f43/f44 remain unresolved. Evidence:
   `.scratch/goal20/plant-lookup-audit.json`.
+
+- The native filtered-entity iterator is TL503e80/GOLD501030, not
+  `gm_AddObjekt` as the old TL identity claimed. The existing shared
+  `gm_FindNextFilteredEntity` body in spiel.c compiles to all341 native bytes
+  in both clients, followed by11 alignment NOPs; its SERVER body is346 bytes.
+  A bounded traversal reaches every client instruction and the final return;
+  the conservative linear extent reader stops at an internal jump after89
+  bytes and cannot establish this function's complete extent. All20 COFF
+  relocation sites resolve to the native addresses, and each wrong+4 global
+  binding rejects. TL has all11 global names mapped; GOLD still lacks nine
+  corresponding declaration bindings. These are code/operand proofs, not
+  linked client data verification. Evidence:
+  `.scratch/goal20/stat-shared-iterator-audit.json`.
+
+- TL4e7600/GOLD4e5af0 append eight signed integer fields to a statistic buffer:
+  six values at entity offsets190/194/198/19c/1a0/1a4, followed by the entity
+  accumulation result and slot-wide accumulation result. The only direct
+  caller in each image ignores the formatter's return. Plain C with the
+  existing shared helpers reproduces all90 bytes and the complete25-byte
+  format literal in both clients; wrong+4 controls reject all four operands.
+  The slot helper TL50dac0/GOLD50a640 is already the shared124-byte
+  `gm_WalkEntityChain(unsigned short)` body. The formatter pushes a partial
+  AX load, and the helper compares SI then masks the index to16 bits before
+  addressing its768-entry table. The numeric client helper duplicates that
+  source and still needs consolidation. The formatter remains a scratch
+  candidate; its current TL binding to the true server `srv_Init` is false.
+  Evidence: `.scratch/goal20/stat-formatter-family-native.json`,
+  `stat-formatter-c-probe.json`, `stat-formatter-behavior.json`.

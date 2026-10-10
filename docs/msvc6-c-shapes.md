@@ -11427,3 +11427,20 @@ typed relocation sites and98 function measurements with no missing symbol.
 Evidence: `.scratch/goal20/plant-callers-byte-preservation.json` and the earlier
 failed section-difference receipt. The matching table and69-byte lookup body
 were independently audited against all three native binaries.
+
+## Narrow helper formals control partial-register argument loads (2026-10-11)
+
+The stat formatter at TL4e7600/GOLD4e5af0 calls the slot accumulator with
+`gm_WalkEntityChain(*(unsigned short*)entity)`. Declaring that helper's formal
+as `unsigned short` emits `mov ax,[esi]; push eax` and matches all90 native
+formatter bytes under `/O2 /Gd`. Changing only the formal declaration to
+`int` adds `xor eax,eax` before the word load and grows the body to92 bytes.
+Every other instruction and typed relocation site is unchanged after that
+two-byte shift; resolving the wide variant's operands still fails the native
+comparison. The existing numeric helper's `int raw_idx` definition narrows
+inside its body and matches the124-byte callee, so a callee byte match alone
+does not settle the shared declaration. The caller supplies the missing
+width evidence; the existing canonical spiel.c definition already takes an
+unsigned short. Evidence: `.scratch/goal20/stat-formatter-width-control.json`
+and `stat-helper-declarations.json`. No qualifier, assembly or extra flag
+was needed.
