@@ -50354,3 +50354,27 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   identity. Final all-target lint has zero errors/unchanged0/2/40 warnings.
   Pre-commit guard preserves every other client row, SERVER evidence,
   data, source identity and unrelated worktree/root changes.
+
+### 2026-10-10: honor diagnostic VAs upstream; remove a disproven client binding
+
+- Fixed shared Rebrew annotation selection upstream in 9a2f9bb0. Positional
+  probe499a50 formerly measured the file's first function47ddf0 and falsely
+  reported66/66; the corrected probe measures499a50 and reports10/128 against
+  the unrelated130-byte dispatcher. Missing explicit VAs now fail before
+  compilation or qualifier edits. Seven regressions failed first;152 focused
+  tests, Ruff/Mypy,18 hooks and11,516 full-suite tests pass (50 skipped).
+- Removed only GOLDTL499a50's false ahm_ProcessEntityChain association with
+  the locked public metadata writer, archiving its full prior measurement.
+  Native inventory remains. Shared dispatcher identities TL4c4d30/GOLD4c43c0/
+  SERVER1000ca00 all measure130/130. Every other client row/source/data fact
+  remains unchanged; no earned match was removed or new verdict invented.
+- Native initializer4a1130 binds the literal Buergerrecht at67edf8 and
+  type0x19 to starter499a50 and run499ad0. Complete starter extent is125
+  plus3 layout NOPs; actual float operands are0.44f and16000.0f. A legal-C
+  scratch candidate is145 bytes and is not installed. Original starter name,
+  module/source path and complete domain types are not yet established.
+- Fresh actual-main server gate passes316/316,100 imports,Wine exports and
+  whole-file raw DLL identity286,720 bytes. All-target lint has zero errors
+  and unchanged0/2/40 warnings. All three coverage documents regenerated.
+  Receipts `.scratch/goal20/probe-selection-*`, `false-chain-row-*`,
+  `canonical-chain-*` and `citizenship-*`. Whole-client verification remains open.

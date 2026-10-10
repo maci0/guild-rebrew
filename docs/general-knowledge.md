@@ -663,3 +663,11 @@ What the clients can and cannot give:
   Original helper name/TU context and complete entity/seat types remain unknown.
   Evidence: `.scratch/goal20/clear-sitting-{original-current,noop-original,
   behavior,call-audit}.json`.
+
+- TL initializer4a1130 registers the native action name `Buergerrecht`
+  (literal67edf8) with type0x19, starter499a50 and run499ad0. The starter is
+  a125-byte four-argument handler with3 trailing layout NOPs, not the130-byte
+  `ahm_ProcessEntityChain` dispatcher at4c4d30. Its threshold uses the native
+  float pools66417c (0.44f) and664340 (16000.0f). This proves the action
+  association, not an original C function name or source unit. Evidence:
+  `.scratch/goal20/citizenship-registration.json` and `ahm-chain-original.json`.

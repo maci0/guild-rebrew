@@ -1083,3 +1083,12 @@ below; `attested` entries are also in the attested table above.
 | server.dll | `0x1000ff60` | `cm_ExCutsceneUpdate` | `cm_ExCutsceneReady` | strong |
 | TL | `0x0044c460` | `cm_ExCreateCitizen` (bound to the server body) | `d3_LoadObjectAnim` (own STUB file) | attested |
 | TL | `0x00406560` | `cm_ExCutsceneUpdate` | `CharacterClearSitting` | weak |
+
+Native action-name evidence (2026-10-10): TL initializer `0x004a1130`
+registers literal `Buergerrecht` at `0x0067edf8` with starter `0x00499a50`
+and run handler `0x00499ad0`. This attests the action name only; neither an
+original C function name nor a module prefix/source path is established.
+The disproven `ahm_ProcessEntityChain` binding at the starter VA was removed;
+that shared dispatcher remains at TL `0x004c4d30`, GOLD `0x004c43c0` and
+SERVER `0x1000ca00`. Evidence: `.scratch/goal20/citizenship-registration.json`
+and `canonical-chain-measurements.json`.

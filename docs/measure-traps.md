@@ -8,6 +8,14 @@ in this file.
 Companion reading: `msvc6-c-shapes.md` (front-end shapes), `msvc6-allocator.md`
 (register allocation and slot maps), `TODO.md` (round-by-round history).
 
+- Verify the ruler's reported VA, symbol and extent before accepting its score.
+  A positional `diagnose probe 0x499a50` formerly resolved a shared source but
+  selected its first annotation47ddf0, giving a misleading66/66. Upstream
+  9a2f9bb0 fixes the shared probe/gap/qualifier selector and rejects absent
+  explicit VAs before compilation or source edits. The corrected499a50 probe
+  exposes the unrelated body (10/128); all three canonical dispatcher probes
+  remain130/130. Receipts `.scratch/goal20/probe-selection-*`.
+
 ---
 
 ## 1. Only the linked residue decides
