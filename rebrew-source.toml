@@ -11,3 +11,7 @@ evidence = "Original 26-byte operand-homed copy macro at 0x00449c6f in GOLDTL ca
 [definitions."src/GOLDTL.fcn_00469140.c".fill0.GOLDTL]
 source_hash = "c65127ce69a9c50aca16f78ec379d06d164b3d9e5598a47544f5a56ab7e38bbe"
 evidence = "Original 26-byte operand-homed fill macro at 0x004691f8 in GOLDTL caller 0x00469140; both macro patterns absent from stock LIBC.LIB/LIBCMT.LIB and whole caller library probes miss. Evidence: docs/msvc6-allocator.md, Reviewed GOLDTL inline helpers (2026-10-09); .scratch/goal20/helper-assembly-evidence.json."
+
+[definitions."src/Develop/DieGildeAddOnServer/server.c".srv_InitBuildingTypeTable.GOLDTL]
+source_hash = "f9bfc07619730bf95b80cee49f8901f14b6d4e85fadfc47434c30517a0b99d01"
+evidence = "Reviewed original GOLDTL 0x004e7810: complete 26-byte fill macro at 0x004e7827. Leaf body homes literal 0x3f0 at [ebp-4], reloads EBX, and uses invariant LEA(3*EDI)&3 with three REP passes. Both stock PP LIBC/LIBCMT exclude the pattern; whole-body library match misses. Compiler controls and operand-homing evidence: docs/msvc6-allocator.md, building-table-assembly-evidence.json. Fresh caller measurement RELOC 372/372 is corroboration, not the origin proof."

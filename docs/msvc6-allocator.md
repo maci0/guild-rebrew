@@ -975,6 +975,24 @@ are `.scratch/goal20/helper-client-test-0043f6b0.json`,
 These are object comparisons; they do not establish a byte-identical client
 link or promote the helpers to standalone functions.
 
+#### Reviewed GOLDTL building-table initializer (2026-10-10)
+
+`src/Develop/DieGildeAddOnServer/server.c:srv_InitBuildingTypeTable`
+corresponds to the complete 372-byte GOLDTL body at `0x004e7810`. Its fill
+macro starts at `0x004e7827` and contains the same complete 26-byte fill
+pattern above. The leaf function stores literal `0x3f0` at `[ebp-4]` and
+reloads it into EBX before the macro; the destination is loaded into EDI.
+This operand homing, invariant alignment arithmetic and three REP passes
+agree with the original assembly evidence and compiler controls above.
+Stock PP LIBC and LIBCMT exclude the pattern, and the whole-body probe misses.
+
+`check_building_table_assembly.py` checks the complete body, operand setup,
+pattern and archive exclusions and writes `building-table-assembly-evidence.json`
+under `.scratch/goal20`. Fresh object comparison is RELOC, 372/372 bytes with
+45 relocations; this is corroboration and does not establish a client link.
+The reviewed source evidence is recorded through `source document-assembly`
+for GOLDTL only. The source body and other targets' records are unchanged.
+
 Measured with `.scratch/mp2/tmpl.py`, `scratch.py`, `libscan.py`:
 
 - **Byte-invariant.** All 725 prelude sites across `server.dll`,
