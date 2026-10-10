@@ -3,10 +3,10 @@
 
 extern char* g_6b7ebc;
 extern char* g_6b7e98;
-char* __cdecl fcn_00406510(char* e, int v);
+char* __cdecl CreateAnimationEvent(char* owner, char* name);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040d790(char** a, int* v)
+int __cdecl fcn_0040d790(char** a, char** v)
 {
 	char* r;
 
@@ -20,7 +20,7 @@ int __cdecl fcn_0040d790(char** a, int* v)
 		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "invalid object");
 		return 1;
 	}
-	r = fcn_00406510(*a, *v);
+	r = CreateAnimationEvent(*a, *v);
 	if (r != 0) {
 		*(int*) (r + 0x18c) |= 1;
 	}

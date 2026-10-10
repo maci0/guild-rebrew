@@ -50264,3 +50264,33 @@ actual final ret at code offset266 and MSVC pooled-literal names ??_C@; no C
 workaround was introduced. Receipts `.scratch/goal-query-filter-extent/{acceptance,
 native-proof,shared-native-proof,shared-two-named-native-proof,full-comparison,
 sharing-plan}.json`. Whole-file goal remains active and incomplete.
+
+### 2026-10-10: restored animation builder and explicit reference binding
+
+- Restored the prior successful TL 0x406510 C89 body: allocation failure returns
+  zero; success initializes owner/callback/flags, copies the animation name and
+  returns the allocated task. Fresh comparison is RELOC 75/75, two relocations.
+- Fixed the reconciliation tool upstream in Rebrew 15d99c7f. Explicit
+  `source rename PLACEHOLDER MODULE.0xVA` binds only unbound function references
+  to a unique existing external definition. Normal duplicate guards remain.
+  The shared declarator classifier also distinguishes function-pointer storage
+  from pointer-returning functions. Full suite 11,490 passed / 50 skipped;
+  all 18 all-files hooks pass.
+- CLI renamed only the TL function and file to inferred CreateAnimationEvent,
+  preserving the server health handler. New reference binding changes four
+  tokens in two caller files and no metadata rows. Caller string arguments now
+  have pointer types. Fresh TL callers remain RELOC 138/138 and 152/152.
+- The existing GOLD caller is still SIZE_MISMATCH: its 152-byte object agrees
+  throughout, with ten masked relocations and no byte mismatches, but its recorded
+  span is 160 bytes. The restricted default shared-import preview also refuses;
+  no shortened verdict or threshold override was introduced.
+- GOLD original caller 0x40c870 calls 0x405970. Its builder has the same 75-byte
+  body plus five NOPs; score is 94.393546 over the discovery span versus 100 over
+  the body. Default import refuses; extent-scoring pain/evidence is recorded
+  upstream. No GOLD builder identity or verdict was written, and no threshold
+  or gap was lowered. Callback counterpart separately passes the default preview.
+- This restores an earlier object match and connects source names. It is not
+  linked-client or whole-file progress. Receipts live in `.scratch/goal20/`
+  `animation-{builder-tl,caller-d700-tl,caller-d790-tl}-test.json`,
+  `animation-binding-{preview,applied}.json` and
+  `animation-builder-original-evidence.json`.

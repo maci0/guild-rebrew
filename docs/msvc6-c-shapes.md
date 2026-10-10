@@ -11214,6 +11214,16 @@ to the allocator call REL32. Canonical test and fresh per-file verify pass.
 This is an object-byte finding; it establishes no linked-client or full-file gain.
 
 
+The 2026-10-10 restore and rename retains RELOC 75/75 with two relocations under
+the current upstream compiler fingerprint. The source now names the inferred
+`CreateAnimationEvent`; its two callers are connected through explicit upstream
+reference binding. GOLD's original counterpart at 0x405970 has the same body
+plus five trailing NOPs, which depress the default import score to 94.393546.
+Its actual body scores 100; the extent issue is recorded upstream and no GOLD
+builder row was imported. Receipts: `.scratch/goal20/animation-builder-tl-test.json`
+and `animation-builder-original-evidence.json`.
+
+
 ## 260. Compare operand order in the task-removal owner guard
 
 TL `0x004050c0` tests whether a task is its owner's list head. Writing

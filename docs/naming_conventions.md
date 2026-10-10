@@ -688,22 +688,36 @@ The clients now share one verified setter body with two markers. Evidence:
 `src/GOLDTL.fcn_004192b0.c`, and the two sound-handle caller files.
 
 
-### TL animation builder still has an unrelated command name
+### Animation task builder: inferred CreateAnimationEvent
 
 TL `0x00406510` creates an animation task through `0x0040c0a0`, installs callback
 `0x00406410`, copies its name at `+0xf0`, and returns the task pointer. Caller
 `0x0040d7f7` tests that pointer and sets its `+0x18c` flag. The callback loads
 and starts an animation; this body is unrelated to the server command handler
 also named `cm_ExModifyHealth`. The pointer return and full 75-byte body are
-recovered, and the copied health-handler comment has been removed. Its current
-symbol and command-directory placement remain explicitly untrusted legacy labels.
-A descriptive `CreateAnimationEvent` rename was previewed, but safely rejected:
-`command7.c` and `alchemistry_logic3.c` contain ambiguous references to independent
-same-name server/client symbols. The missing reference-level ownership feature is
-recorded in upstream `docs/IDEAS-GUILD.md`; no manual symbol rename bypasses it.
-Evidence: `.scratch/goal-builder/xrefs.json`, `canonical-test.json`,
-`src/GOLDTL.fcn_00406410.c`, and
-`.scratch/goal-rename/project-builder-preview.json`.
+recovered. The prior matched body was restored and freshly measured RELOC 75/75
+on 2026-10-10. `CreateAnimationEvent` is an inferred descriptive name, without
+an invented module prefix. The CLI renamed only the TL identity and its file;
+the independent server health handler and its callers retain `cm_ExModifyHealth`.
+The command-directory placement remains a legacy reconstruction label, not
+attested original organization.
+
+Two callers used the unbound source name `fcn_00406510`. Rebrew's new explicit
+`source rename fcn_00406510 GOLDTL.0x00406510` binds those declarations and calls
+to the renamed definition, without changing any identity or verification row.
+Their name arguments are now declared as string pointers. The earlier ordinary
+rename rejection remains valid evidence of independent symbols; its duplicate
+checks were not bypassed or relaxed.
+
+The shared GOLD caller at `0x0040c870` calls GOLD `0x00405970`. Original assembly
+there has the same 75-byte body with the allocator/callback relocations changed,
+then five NOPs. Its discovered 80-byte span scores 94.393546 against the TL donor,
+versus 100 for the actual body. Default shared import declines it; no GOLD builder
+identity or byte verdict is claimed. The extent-scoring issue is recorded upstream.
+Evidence: `.scratch/goal-builder/xrefs.json`,
+`.scratch/goal20/animation-builder-original-evidence.json`,
+`animation-rename-applied.json`, `animation-binding-applied.json`, and
+`src/Develop/DieGildeAddOn/command/command_c/GOLDTL.CreateAnimationEvent.c`.
 
 
 ### Attested character sitting queries (2026-10-04)
