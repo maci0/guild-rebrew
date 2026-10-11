@@ -3,6 +3,33 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (AddFile operand controls and diff-size repair, upstream push running):
+  Eighteen actual full-unit C probes preserve the existing attested copy
+  instructions while testing operand scopes, assignment order, local spelling,
+  declaration order, initialization and counter reuse. No candidate matches;
+  the best 1472-byte body still has masked delta243. Three declaration controls,
+  four name controls and one initializer control are byte/operand-identical.
+  No production C, flags, library or storage changes are accepted. TL AddFile
+  stays SIZE_MISMATCH1477/1472. Its existing original assembly is now recorded
+  through document-assembly from compiler controls and stock exclusions,
+  independently of byte agreement. Its managed blocker records the rejected
+  probes. TL lint has zero errors and the same one unrelated spiel.c warning.
+  Rebrew diff had reported clipped candidate_size1472 for the actual1477-byte
+  body. Two regressions fail before the two-line repair; all41 focused diff
+  tests pass after. Real project JSON changes only candidate_size to1477.
+  Packaged matching skill documents prefix clipping and complete-test verdicts.
+  The isolated upstream checkout is /tmp/rebrew-diff-size.IDAwE8Le/rebrew,
+  branch fix/diff-actual-candidate-size, with CI-pinned sibling Resembl3.1.1.
+  Upstream055127e8 is committed:11725 tests pass,52 skip, coverage88%; all
+  local lint/type/generated/hooks/package/reproducibility/provenance checks pass.
+  Packaging was rerun against committed HEAD after the reproducibility gate
+  correctly rejected the uncommitted tree. The push hook repeats the required
+  full suite; PR/CI/merge are pending. The full server gate passes316/316
+  functions,652/652 data and every286720 raw byte. Its scope audit retains all
+  statuses/sizes/flags/data/types and changes only AddFile's blocker; SOURCE adds
+  one reviewed definition. All three-image/shared-source
+  requirements remain unfinished. Receipts: .scratch/goal21/shared-vfs-addfile.
+
 - 2026-10-12 (VFS legacy logs isolated and cleanup shared): all43 existing
   VFS placeholder log calls now use the existing SERVER+legacy-layout guard.
   Historical numeric arguments preserve all37 default SERVER bodies; the real

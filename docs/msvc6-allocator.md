@@ -4559,3 +4559,29 @@ Initial client comparisons (`--no-promote`) confirm unfinished bodies:
 `vfs_AddFile` compiles to 1526 bytes against 1472; `vfs_fwrite` to 496 against
 368. Both report SIZE_MISMATCH, and neither receives a stored byte verdict.
 These results supersede older trial sizes for this exact source/configuration.
+
+## AddFile operand lifetime controls (2026-10-12)
+
+The canonical client body still emits1477 bytes for TL0x42e740's complete1472
+native bytes. Eighteen bounded full-unit probes retain the existing attested
+copy instructions and vary C operand homes/scopes, assignment and declaration
+order, local spelling, initializer spelling and reuse of the dead loop counter.
+Several reach1472 bytes, but the best masked comparison still differs by243;
+none is adopted. Three declaration-order, four name and one initializer control
+produce identical function bytes and typed operands. Do not repeat those probes
+as a new hypothesis. The production C and compiler flags are unchanged.
+
+The two original26-byte copy sequences at0x42e8f7/0x42e949 are now recorded
+through document-assembly in target-scoped SOURCE evidence. Their provenance
+comes from the compiler controls and stock-library exclusions above, independently
+of a complete function match. The blocker retains the actual unresolved result.
+The full server gate still passes316/316 functions,652/652 data comparisons and
+all286720 raw bytes. Receipts: .scratch/goal21/shared-vfs-addfile/negative-controls.json.
+
+Upstream055127e8 corrects diff's candidate_size from the clipped comparison
+buffer to the actual emitted length. The real project JSON changes only1472
+to1477, preserving all instruction comparisons and blocker classifications.
+Two regressions fail before;41 focused and11725 full tests pass after(52 skips,
+88% coverage), with committed-head packaging/reproducibility/provenance checks.
+Its upstream push/CI integration is pending. A size-equal or clean-prefix diff
+alone cannot establish the complete native body or its operand bindings.

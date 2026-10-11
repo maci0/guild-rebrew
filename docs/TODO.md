@@ -1,10 +1,27 @@
-Current reconstruction checkpoint (2026-10-11):
+Current reconstruction checkpoint (2026-10-12):
 
 > Tooling update (October 2026): old split-link, copied-data and duplicate diagnostic
 > scripts cited in historical entries have been retired. Use current `rebrew`
 > commands; see [the tooling audit](tooling-upstream.md) for replacements and the
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
+
+- 2026-10-12 (AddFile controls and trustworthy size reporting):18 actual
+  operand-scope/order/name/declaration/initializer/counter probes are rejected.
+  The best size-equal1472-byte body still has masked delta243; production C
+  remains unchanged and AddFile stays SIZE_MISMATCH1477/1472. Three declaration,
+  four local-name and one initializer controls are byte/operand-identical.
+  CLI document-assembly now binds the existing TL copies' independent original
+  provenance to the current definition; no assembly is added. The managed blocker
+  records the failed hypotheses. Data/types/flags and every previous verdict are
+  unchanged. Full SERVER gate passes316/652 and complete286720-byte raw identity.
+  Upstream055127e8 fixes diff reporting clipped1472 as actual candidate size:
+  two failing-before regressions,41 focused/11725 full passes(52 skips),88% coverage,
+  hooks and committed-head package/reproducibility/provenance checks pass. Its
+  push hook is running; PR/CI/merge are pending. The packaged matching skill now
+  separates prefix comparison from complete-test verdicts. Receipts:
+  .scratch/goal21/shared-vfs-addfile. Full client links/data, remaining library
+  duplicate cleanup and faithful discarded SERVER source remain unfinished.
 
 - 2026-10-12 (shared VFS cleanup and faithful log configuration): all43
   historical VFS placeholders now require SERVER+REBREW_LEGACY_SERVER_LAYOUT;

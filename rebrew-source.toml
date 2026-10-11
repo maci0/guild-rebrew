@@ -43,3 +43,7 @@ evidence = "Original GOLDTL aligned-copy macro at0x4309e9 uses operand homing, i
 [definitions."src/Develop/Units/vfs/vfs.c".vfs_fwrite.GOLD]
 source_hash = "f042aeb30d09e72f5390660ec839872f06219ed4ecd7eddbf4c1d34fa1704f73"
 evidence = "Original GOLD aligned-copy macro at0x430f09 is the same operand-homed copy with invariant EBX scratch, LEA(3*EDI)&3 and three REP passes established by compiler controls and stock CRT exclusions in docs/msvc6-allocator.md and .scratch/goal20/vfs-client-evidence.json. The complete354-byte native CFG and four independently supported library call bindings match with four rejecting controls; fourteen unreachable NOPs are alignment. No assembly was added. Receipt: .scratch/goal21/shared-vfs-freedirs/fwrite-gold-native-proof.json."
+
+[definitions."src/Develop/Units/vfs/vfs.c".vfs_AddFile.GOLDTL]
+source_hash = "869a27d911124b5054615d0d5e6021d727a237910a3e3cc05d4becd934eae340"
+evidence = "Reviewed original GOLDTL 0x42e740: both complete 26-byte aligned-copy sequences at 0x42e8f7 and 0x42e949 use invariant EBX scratch, LEA(3*EDI)&3 and three REP passes with homed C operands. Original assembly is established by compiler controls and stock CRT exclusions in docs/msvc6-allocator.md (The prelude is hand-written asm) and .scratch/goal20/vfs-client-evidence.json. This records the existing assembly only: the complete client body remains SIZE_MISMATCH 1477/1472; no byte match or additional assembly is claimed. Operand lifetime/order probes: .scratch/goal21/shared-vfs-addfile."

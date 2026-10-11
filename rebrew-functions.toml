@@ -188055,10 +188055,10 @@ file = "src/Develop/Units/vfs/vfs.c"
 symbol = "_vfs_AddFile"
 name = "vfs_AddFile"
 marker_type = "FUNCTION"
-updated_by = "verify"
-updated_at = "2026-10-10T21:37:51+00:00"
+updated_by = "blocker"
+updated_at = "2026-10-11T19:40:06+00:00"
 note = "Inferred name from client VFS allocation labels/file API; existing port in the shared original-path TU. Client-only identity: absent from the server raw map; no byte verdict until tested."
-blocker = "Original inline assembly: client copy preludes at 0x42e8f7 and 0x42e949 have the invariant EBX/aligned-copy sequence documented in docs/msvc6-allocator.md (hand-written asm analysis, 2026-09-04). Verified bytes and source binding: .scratch/goal20/vfs-client-evidence.json. Client body/register match remains unverified."
+blocker = "Original aligned-copy assembly at 0x42e8f7 and 0x42e949 is recorded in SOURCE from compiler controls and stock CRT exclusions (docs/msvc6-allocator.md; .scratch/goal20/vfs-client-evidence.json). Current production body remains SIZE_MISMATCH 1477/1472. Eighteen bounded operand lifetime/order/name probes reach 1472 bytes but still differ (best masked delta243); none is adopted. Names and declaration order leave bytes unchanged. Receipt: .scratch/goal21/shared-vfs-addfile."
 status = "SIZE_MISMATCH"
 
 ["GOLDTL.0x0042e740".verification]
