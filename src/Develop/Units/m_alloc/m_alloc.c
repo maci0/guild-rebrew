@@ -695,7 +695,16 @@ extern void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, 
 extern void __cdecl free(void* ptr);
 extern void* __cdecl malloc(unsigned int size);
 
-/* Client-only (TL 0x41dd90, discarded): 1 when ptr is null or a tracked allocation. */
+/* shortcut: legacy global names differ by build; remove these bindings after shared declarations are recovered. */
+#ifdef REBREW_SERVER
+#define m_TRACKED_SLOT_COUNT g_array_count
+#define m_TRACKED_SLOTS g_array_ptr
+#else
+#define m_TRACKED_SLOT_COUNT g_6b6f64
+#define m_TRACKED_SLOTS g_6b6f80
+#endif
+
+/* Returns 1 when ptr is null or a tracked allocation. */
 int __cdecl m_is_tracked(void* ptr)
 {
 	char* entry;
@@ -706,14 +715,14 @@ int __cdecl m_is_tracked(void* ptr)
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 695, "m_is_tracked(): enter", 1);
 #endif
 	if (ptr != 0) {
-		entry = (char*) g_array_ptr;
-		for (i = 0; i < g_array_count; i++) {
+		entry = (char*) m_TRACKED_SLOTS;
+		for (i = 0; i < m_TRACKED_SLOT_COUNT; i++) {
 			if (*(void**) (entry + 8) == ptr) {
 				break;
 			}
 			entry += 0x10;
 		}
-		return i != g_array_count;
+		return i != m_TRACKED_SLOT_COUNT;
 	}
 	return 1;
 }

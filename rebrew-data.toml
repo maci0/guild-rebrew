@@ -16523,7 +16523,7 @@ updated_by = "rehome"
 updated_at = "2026-10-11T05:27:59+00:00"
 
 ["GOLDTL.0x006b6f64"]
-file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0041dd90.c"
+file = "src/Develop/Units/m_alloc/m_alloc.c"
 marker_type = "GLOBAL"
 name = "g_6b6f64"
 type = "int"
@@ -16531,10 +16531,10 @@ size = 4
 section = ".bss"
 note = "Existing extern declaration only, not a source storage-owner claim. Complete native tracking-check operands identify this four-byte scalar/pointer in the PE zero-filled .data tail. Legacy address-derived declaration spelling retained; original name and definition owner remain unresolved. The pointer cell extent is four bytes, not the heap array extent."
 updated_by = "rehome"
-updated_at = "2026-10-11T07:50:27+00:00"
+updated_at = "2026-10-11T09:51:56+00:00"
 
 ["GOLDTL.0x006b6f80"]
-file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0041dd90.c"
+file = "src/Develop/Units/m_alloc/m_alloc.c"
 marker_type = "GLOBAL"
 name = "g_6b6f80"
 type = "MemBlock*"
@@ -16542,10 +16542,10 @@ size = 4
 section = ".bss"
 note = "Existing extern declaration only, not a source storage-owner claim. Complete native tracking-check operands identify this four-byte scalar/pointer in the PE zero-filled .data tail. Legacy address-derived declaration spelling retained; original name and definition owner remain unresolved. The pointer cell extent is four bytes, not the heap array extent."
 updated_by = "rehome"
-updated_at = "2026-10-11T07:50:27+00:00"
+updated_at = "2026-10-11T09:51:56+00:00"
 
 ["GOLD.0x00632384"]
-file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0041dd90.c"
+file = "src/Develop/Units/m_alloc/m_alloc.c"
 marker_type = "GLOBAL"
 name = "g_6b6f64"
 type = "int"
@@ -16553,10 +16553,10 @@ size = 4
 section = ".bss"
 note = "Existing extern declaration only, not a source storage-owner claim. Complete native tracking-check operands identify this four-byte scalar/pointer in the PE zero-filled .data tail. Legacy address-derived declaration spelling retained; original name and definition owner remain unresolved. The pointer cell extent is four bytes, not the heap array extent."
 updated_by = "rehome"
-updated_at = "2026-10-11T07:50:27+00:00"
+updated_at = "2026-10-11T09:51:56+00:00"
 
 ["GOLD.0x006323a0"]
-file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0041dd90.c"
+file = "src/Develop/Units/m_alloc/m_alloc.c"
 marker_type = "GLOBAL"
 name = "g_6b6f80"
 type = "MemBlock*"
@@ -16564,4 +16564,4 @@ size = 4
 section = ".bss"
 note = "Existing extern declaration only, not a source storage-owner claim. Complete native tracking-check operands identify this four-byte scalar/pointer in the PE zero-filled .data tail. Legacy address-derived declaration spelling retained; original name and definition owner remain unresolved. The pointer cell extent is four bytes, not the heap array extent."
 updated_by = "rehome"
-updated_at = "2026-10-11T07:50:27+00:00"
+updated_at = "2026-10-11T09:51:56+00:00"

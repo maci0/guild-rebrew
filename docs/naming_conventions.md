@@ -1538,7 +1538,18 @@ Allocator helper identity checkpoint (2026-10-11): the shared client tracking
 check is TL 0x41dd90 / Gold 0x4225e0 (60 bytes); shared free-all is TL 0x41e410 /
 Gold 0x422c60 (43 bytes). Both client providers now live under Units/m_alloc.
 The existing inferred names m_is_tracked/m_pool_free_all in the table do not
-attest original spellings; numeric source symbols remain pending caller-aware
-canonical naming. The address-derived counter/pointer declarations are likewise
+attest original spellings. The four client identities and their callers now
+bind to those canonical definitions in m_alloc.c through the public tools;
+the two duplicate client helper files have been removed. The address-derived counter/pointer declarations are likewise
 compatibility names. Native identity/operand evidence and metadata extent repair:
 `.scratch/goal21/allocator-client-repair/baseline.json` and `scope-final.json`.
+
+
+Shared allocator helper bindings (2026-10-11): m_TRACKED_SLOT_COUNT and
+m_TRACKED_SLOTS are private build-time aliases for existing server/client
+numeric declarations, not recovered developer names or additional globals.
+One loop retains the native access order and register allocation in both
+clients and both server variants. Six shifted native operand controls reject;
+all four client helper bodies exactly retain 206 bytes. Names, declaration
+ownership and removal of the compatibility bindings remain reconstruction
+work. Evidence: `.scratch/goal21/shared-allocator-helpers/`.

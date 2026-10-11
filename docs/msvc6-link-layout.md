@@ -5697,3 +5697,25 @@ successful Wine loading. Twenty affected client identities freshly pass
 (GOLDTL 13, GOLD 7). All-target lint retains zero errors and the existing
 server/TL/Gold warning counts of 0/2/40. Full client image gates are outside
 this change; `scope-final.json` records the preserved inputs and exact scope.
+
+
+### Shared tracking and pool cleanup helpers (2026-10-11)
+
+The existing client tracking check (TL41dd90/Gold4225e0, 60 bytes) and pool
+cleanup (TL41e410/Gold422c60, 43 bytes) now bind to the canonical m_alloc.c
+implementations. A compile-time count/pointer alias preserves the original
+load order; caching the count in a local was rejected because it changed the
+server register allocation. The aliases create no storage, and the four
+managed extern declaration rows merely follow their source definition file.
+
+Complete native comparisons retain all 206 helper bytes and six typed
+operands; each operand's shifted-binding control rejects. Four allocator
+profiles preserve all 14 bodies, two VFS profiles preserve all 37 bodies, and
+35 caller contexts retain complete COFF code and typed/literal bindings. The
+40 affected existing client matches freshly pass (28 TL / 12 Gold), with no
+new status promotion. The full server gate passes 316/316 functions, 652/652
+data, 100 imports, Wine loading and byte identity of all 286720 raw bytes.
+The inferred names, global spelling bridge, historical server placeholders
+and complete client raw links remain open reconstruction work. No vendor
+or CRT body/archive, layout, link flag or gate was changed. Receipts:
+`.scratch/goal21/shared-allocator-helpers/`.

@@ -13,7 +13,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0041d9e0(char*);
 #include "Develop/Units/m_alloc/m_pool.h"
 
-void __cdecl fcn_0041e410(int*);
+void __cdecl m_pool_free_all(int*);
 int __cdecl CloseVfsStream(int handle);
 
 void __cdecl fcn_004310f0(char verbose)
@@ -39,7 +39,7 @@ void __cdecl fcn_004310f0(char verbose)
 	}
 	g_6b7fec = 0;
 	if ((*(int*)g_6b7fe0) != 0) {
-		fcn_0041e410(&(*(int*)g_6b7fe0));
+		m_pool_free_all(&(*(int*)g_6b7fe0));
 	}
 	g_6b7fe8 = 0;
 }

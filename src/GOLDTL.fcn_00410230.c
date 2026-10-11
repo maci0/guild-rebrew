@@ -1,6 +1,6 @@
 extern char* g_6b7e98;
 
-int __cdecl fcn_0041dd90(char*);
+int __cdecl m_is_tracked(char*);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
 // FUNCTION: GOLDTL 0x410230
@@ -14,7 +14,7 @@ int __cdecl fcn_00410230(char** obj, int* x, int* y, int* z)
 	float vz;
 
 	o = *obj;
-	if (!fcn_0041dd90(o)) {
+	if (!m_is_tracked(o)) {
 		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "SetEmitterVelocity: invalid handle...");
 		return 0;
 	}

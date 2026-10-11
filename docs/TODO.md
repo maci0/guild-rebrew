@@ -1,5 +1,24 @@
 Current reconstruction checkpoint (2026-10-11):
 
+- 2026-10-11 (shared allocator helpers): canonical m_is_tracked and
+  m_pool_free_all now serve both clients. Four function identities and four
+  extern declaration rows move through locked writers; 31 caller files bind
+  through the CLI and two duplicate helper sources are deleted. A private
+  compile-time binding preserves different legacy global spellings without
+  creating storage. Four full native proofs preserve 206 bytes and 6 typed
+  operands, with 6 rejecting shifted-binding controls. Native object checks
+  preserve all 14 allocator bodies in four profiles, 37 VFS bodies in two
+  profiles, and 35 caller contexts. All 40 affected existing client matches
+  freshly pass (28 TL / 12 Gold), preserving every status and game counters
+  251/3583/2081. Full server gate passes 316/316 functions, 652/652 data,
+  100 imports, Wine exports and all 286720 raw reference bytes. All 36 build
+  objects are current; all-target lint retains zero errors and existing
+  0/2/40 warnings. Three coverage documents are refreshed. Original helper
+  names and declaration owners remain unresolved; the bindings are temporary.
+  Root standalone C backlog remains 3832. Full client raw links and faithful
+  discarded-server source recovery remain open. Receipts:
+  .scratch/goal21/shared-allocator-helpers. No push or live sync.
+
 - Shared tracked-free implementation completed. One canonical m_FreeTracked
   definition serves the188-byte server and117-byte client native variants under
   REBREW_SERVER. Two client identities were rehomed and85 caller files bound

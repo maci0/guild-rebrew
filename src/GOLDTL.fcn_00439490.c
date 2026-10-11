@@ -33,7 +33,7 @@ void __cdecl fcn_00459b40(int a);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00452300(void);
 void __cdecl fcn_00434760(char* p, int b);
-void __cdecl fcn_0041e410(int* p);
+void __cdecl m_pool_free_all(int* p);
 void __cdecl fcn_00459bc0(void);
 void __cdecl fcn_00456cf0(void);
 void __cdecl fcn_0043bc20(void);
@@ -101,7 +101,7 @@ void __cdecl fcn_00439490(void)
 	while (g_1042320 != g_1052a40) {
 		fcn_00434760(g_1042320, 1);
 	}
-	fcn_0041e410(&g_6b8064);
+	m_pool_free_all(&g_6b8064);
 	fcn_00459bc0();
 	fcn_00456cf0();
 	fcn_0043bc20();

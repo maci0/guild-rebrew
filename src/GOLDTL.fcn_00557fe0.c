@@ -10,7 +10,7 @@ void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00557f00(char*);
 char* __cdecl fcn_00557f70(char*);
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
-int __cdecl fcn_0041dd90(char*);
+int __cdecl m_is_tracked(char*);
 void __cdecl fcn_00452420(char*);
 void __cdecl fcn_00546190(char*);
 
@@ -37,7 +37,7 @@ void __cdecl fcn_00557fe0(char* u)
 		break;
 	case 1:
 		if (fcn_00500cb0(&g_7f4c00, u + 0xb4) == 1) {
-			if (*(char**) (u + 0xb0) != 0 && fcn_0041dd90(*(char**) (u + 0xb0)) != 0) {
+			if (*(char**) (u + 0xb0) != 0 && m_is_tracked(*(char**) (u + 0xb0)) != 0) {
 				*(int*) (*(char**) (u + 0xb0) + 0x24) = 0;
 			}
 			*(int*) (u + 0x70) = 2;
@@ -53,7 +53,7 @@ void __cdecl fcn_00557fe0(char* u)
 	case -2:
 	case -1:
 		fcn_005015e0(&x, 0, 0, *(int*) (u + 0xac));
-		if (*(char**) (u + 0xb0) != 0 && fcn_0041dd90(*(char**) (u + 0xb0)) != 0) {
+		if (*(char**) (u + 0xb0) != 0 && m_is_tracked(*(char**) (u + 0xb0)) != 0) {
 			t = g_6b8010;
 			fcn_004432d0(0, 1);
 			fcn_00452420(*(char**) (u + 0xb0));

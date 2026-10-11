@@ -26,14 +26,14 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-void* __cdecl fcn_0041dd90(int);
+void* __cdecl m_is_tracked(int);
 int __cdecl fcn_00452420(int);
 int __cdecl fcn_00425bf0(void*, int, char*);
 
 int __cdecl cm_ExKillSpieler(int cmd)
 {
 	void* e;
-	e = fcn_0041dd90(*(int*) cmd);
+	e = m_is_tracked(*(int*) cmd);
 	if (e != 0) {
 		fcn_00452420(*(int*) cmd);
 	} else {

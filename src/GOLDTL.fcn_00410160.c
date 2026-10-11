@@ -1,7 +1,7 @@
 // FUNCTION: GOLDTL 0x00410160
 
 extern char* g_6b7e98;
-int __cdecl fcn_0041dd90(char* p);
+int __cdecl m_is_tracked(char* p);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
 int __cdecl fcn_00410160(char** a, int* x, int* y, int* z)
@@ -12,7 +12,7 @@ int __cdecl fcn_00410160(char** a, int* x, int* y, int* z)
 	float fz;
 
 	e = *a;
-	if (!fcn_0041dd90(e)) {
+	if (!m_is_tracked(e)) {
 		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "invalid object");
 		return 0;
 	}

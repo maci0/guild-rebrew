@@ -1,6 +1,6 @@
 // FUNCTION: GOLDTL 0x4107b0
 
-int __cdecl fcn_0041dd90(void*);
+int __cdecl m_is_tracked(void*);
 void __cdecl fcn_00425bf0(void*, int, char*);
 
 int __cdecl fcn_004107b0(char** a1)
@@ -8,7 +8,7 @@ int __cdecl fcn_004107b0(char** a1)
 	char* p;
 
 	p = *a1;
-	if (fcn_0041dd90(p) == 0) {
+	if (m_is_tracked(p) == 0) {
 		fcn_00425bf0(*(void**) 0x6b7e98, *(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x676cf8);
 		return 0;
 	}
