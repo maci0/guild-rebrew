@@ -6,19 +6,24 @@ Current reconstruction checkpoint (2026-10-11):
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
 
-- 2026-10-12 (PR21 complete and shutdown probe): Rebrew PR21 merged e8054974
+- 2026-10-12 (PR21 complete and shutdown sharing): Rebrew PR21 merged e8054974
   after every CI job passed on0fc33ec5, including both Python versions. Local
   merge ea6c58ef retains inherited IDEAS/uv.lock edits and the tested upstream
   tests; committed tree equals origin/main. Project guidance is refreshed,
   owned temporary worktrees removed and root hooks restored. SERVER verification
-  fingerprint stays current. A fresh checkpoint gate passed: all 316 functions,
-  all 652 data comparisons and the entire 286,720-byte raw server image agree.
-  No C/store/link changes were made.
-  The shared shutdown candidate passes SERVER283 and both clients262 without
-  promotion. Independent SERVER proof passes28 typed operands and16 rejecting
-  controls. Client global-binding proof is pending; source rehome/retirement has
-  not happened. Continue with the old client object and existing helper bindings,
-  then preserve all surrounding bodies/caller and run the full gate.
+  fingerprint stayed current through upstream integration. Shutdown now shares
+  the canonical m_alloc body across SERVER283 and both clients262, with all
+  native operands/literals independently checked against frozen old bindings
+  and existing helper evidence. Both client identities are rehomed through the
+  CLI, the TL caller is bound, and the unowned duplicate file is retired.
+  All52 surrounding allocator bodies and the caller's35 bytes are preserved.
+  Client verification retains24 matches and both existing m_pool_next size
+  mismatches; lint retains0 errors and0/1/38 warnings. The final SERVER gate
+  passes316/316 functions,652/652 data comparisons, full raw286720-byte file
+  identity, Wine loading and library/toolchain checks. Prior verdicts, sizes,
+  flags and storage are retained; all three coverage documents are refreshed.
+  Next recover m_pool_next and
+  continue complete client link/data and faithful discarded-server source work.
   Receipts: .scratch/goal21/{cli-library-upstream,shared-allocator-shutdown}.
   All3 complete images/shared-source fidelity remain the objective.
 

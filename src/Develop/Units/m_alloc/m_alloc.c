@@ -1007,6 +1007,20 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 #endif
 
 
+#ifndef REBREW_SERVER
+extern int g_6b6f7c;
+extern char* g_14cc5e4;
+void __cdecl fcn_0041d9e0(const char*);
+#define g_stat1 g_6b6f68
+#define g_stat2 g_6b6f6c
+#define g_stat3 g_6b6f70
+#define g_stat4 g_6b6f74
+#define g_array_ptr m_TRACKED_SLOTS
+#define g_array_count m_TRACKED_SLOT_COUNT
+#define g_list_head g_14cc5e4
+#define g_alloc_report_groups g_6b6f7c
+#define ReportMessage fcn_0041d9e0
+#endif
 void __cdecl m_ShutdownAllocator(void)
 {
 	char buf[0x400];
@@ -1035,7 +1049,9 @@ void __cdecl m_ShutdownAllocator(void)
 	do {
 		if (*(char**) item != 0) {
 			sprintf(buf, "-> Pointer not freed:%s", *(char**) (item - 4));
+#ifdef REBREW_SERVER
 			LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x203, buf, 1);
+#endif
 			free(*(void**) item);
 			*(char**) item = 0;
 		}
@@ -1057,6 +1073,18 @@ cleanup:
 	free((void*) g_array_ptr);
 	g_array_ptr = 0;
 }
+
+#ifndef REBREW_SERVER
+#undef g_stat1
+#undef g_stat2
+#undef g_stat3
+#undef g_stat4
+#undef g_array_ptr
+#undef g_array_count
+#undef g_list_head
+#undef g_alloc_report_groups
+#undef ReportMessage
+#endif
 
 /* Allocates a block from the packet pool free list. Falls back
  * to HeapAlloc if the pool is exhausted. Thread-safe via

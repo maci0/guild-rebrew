@@ -3,6 +3,41 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (shared allocator shutdown unified): TL0x41e0c0 and GOLD0x422910
+  now use the existing m_ShutdownAllocator body in Develop/Units/m_alloc/m_alloc.c
+  alongside SERVER0x10006c00. Only the native SERVER pointer-leak log is guarded;
+  client aliases refer to existing storage. CLI rehome preserves both identities,
+  and CLI reference binding updates the one TL caller. The unowned 59-line
+  duplicate source is retired after checking function/data/type/provenance scope.
+  Frozen old client bindings reproduce both complete 262-byte bodies, all 26
+  typed operands and two full literals each, with 14 rejecting controls each.
+  Independent allocator/reporter and stock CRT evidence corroborate the shared
+  bindings; numeric global names do not establish storage ownership. SERVER
+  retains all 283 native bytes/28 operands. Actual before/after objects preserve
+  all 52 surrounding allocator bodies across SERVER normal/layout-flag-off and
+  both clients; the TL caller retains all 35 bytes and six native operands.
+  Both client unit checks retain 23 matches plus the caller's match. Their two
+  existing m_pool_next SIZE_MISMATCH verdicts remain unchanged. Lint retains
+  zero errors and 0/1/38 warnings; data/types/assembly evidence are unchanged.
+  The final SERVER gate passes all 316 functions, 652 data comparisons, imports,
+  exports, Wine loading, library exclusions/toolchain checks and all 286,720 raw
+  reference bytes. All 33 changed managed rows are scoped identity/verification
+  updates; every prior verdict, size, compiler flag and storage row is retained.
+  All three coverage documents are refreshed. Game byte-match counts remain
+  SERVER251/TL3585/GOLD2083. Receipts:
+  .scratch/goal21/shared-allocator-shutdown.
+  The first final object run hit Docker's compile timeout under parallel load;
+  the sequential retry passed every object and native check. No new assembly,
+  CRT source, library patch, compiler flag or storage owner is introduced.
+  m_ShutdownAllocator's original spelling remains unproven. Full client raw
+  links/data, original names/owners and faithful discarded SERVER source remain
+  open; the complete three-image/shared-source goal stays active.
+  Next iterator evidence: both native m_pool_next bodies are identical 131-byte
+  functions followed by 13 NOPs; current client objects emit136 bytes without
+  relocations. Their inner-loop shape and register choices differ. Use the
+  existing matching workflow rather than a new sweep script; receipt:
+  next-pool-iterator-analysis.json in the same directory.
+
 - 2026-10-11 (upstream target discovery and library reference binding):
   The remaining local CLI fixes are merged through PR21:
   https://github.com/maci0/rebrew/pull/21. Bare --target/-t lists configured

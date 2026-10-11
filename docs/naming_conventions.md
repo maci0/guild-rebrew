@@ -23,6 +23,20 @@ all185 checked caller operands independently retain their native destination.
 The private40-byte group and16-byte allocation-record layouts are unchanged.
 Receipts: `.scratch/goal21/shared-tracked-alloc`.
 
+### Shared allocator shutdown (2026-10-12)
+
+The inferred `m_ShutdownAllocator` name now covers SERVER0x10006c00,
+TL0x41e0c0 and GOLD0x422910 in the shared m_alloc unit. Its original spelling
+remains unproven. The clients retain the same leak-reporting literals, tracking
+slot cleanup and linked-list traversal; SERVER alone logs the formatted pointer
+leak. The native bodies are 283/262/262 bytes. Client aliases describe existing
+storage without allocating it or establishing an owner; the numeric global and
+callback names remain unresolved. The group next pointer remains at offset36,
+and tracked records remain16 bytes. Complete native operands and literal bytes
+agree with the old client implementation and existing allocator/report bindings.
+The TL shutdown caller retains its native call destination. Evidence:
+`.scratch/goal21/shared-allocator-shutdown`.
+
 ## Shared tracker reporting and group layout (2026-10-11)
 
 The existing inferred `m_ReportGroupInfo` name now covers SERVER0x10006990,
