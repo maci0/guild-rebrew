@@ -3,6 +3,25 @@
 Reconstructed from debug strings, error messages, and binary analysis of
 `server.dll` and `Europa1400Gold_TL.exe`. Developer: 4HEAD Studios (German).
 
+### Shared tracker reporting and group layout (2026-10-11)
+
+The existing inferred `m_ReportGroupInfo` name now covers SERVER0x10006990,
+TL0x41df00 and GOLD0x422750 in the shared m_alloc unit. The SERVER source
+path is attested by its native logging calls; client placement follows the
+identical group traversal, formatting literals and shutdown callers. SERVER
+logs the formatted output; the clients retain the formatting but omit those
+six calls. Its original spelling remains unproven.
+
+`GroupNode` is the single40-byte allocation-group layout for all targets;
+`MemPool` was another name for the same layout. Canonical `size_total`,
+`count_total`, `size_max`, `count_max`, `count` correspond to the former
+`used`, `used_blocks`, `max`, `max_blocks`, `calls` at offsets16/20/24/28/32.
+The names are reconstructed. Name storage is16 bytes and next is at36;
+tracked `MemBlock` records remain16 bytes with group/tag/pointer/size at0/4/8/12.
+Compiler assertions and native bodies establish layout, not original spelling
+or storage ownership. Client stat/global spellings are private scoped aliases
+without allocations. Evidence: `.scratch/goal21/shared-pool-report`.
+
 ### Shared pool deallocation (2026-10-11)
 
 `m_pool_free` is attested by the SERVER fatal diagnostic at0x10006e30.

@@ -1,9 +1,9 @@
 #ifndef GROUP_NODE_H
 #define GROUP_NODE_H
 
-/* Allocation-group list node (SIZE 0x28). Shared by m_AllocTracked.c and
- * m_ReportGroupInfo.c. Do not add to m_alloc.h: that header is included by
- * dozens of TUs that never used this layout. */
+/* Allocation-group node (SIZE 0x28) shared by every tracker build.
+ * Keep this layout private to memory tracking; unrelated translation units
+ * do not use it. */
 // SIZE 0x28
 struct GroupNode {
 	char name[0x10];

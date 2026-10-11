@@ -3,6 +3,30 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-11 (shared memory reporter and group type): TL0x41df00 and
+  GOLD0x422750 now bind the canonical m_ReportGroupInfo. One body serves all
+  three targets; only SERVER emits the six native logging calls. Scoped client
+  tracker aliases reuse existing globals, with no storage or data verdict added.
+  The duplicate64-line client reporter is retired and both shutdown calls use
+  the shared name and pointer prototype. One40-byte GroupNode replaces the
+  equivalent MemPool definition; MemBlock remains16 bytes. Two deallocator
+  field references adopt the canonical labels without changing instructions.
+  Both complete client reporters retain880 native bytes/44 typed operands,
+  complete literals and167 reachable instructions each, with30 rejecting
+  shifted-symbol controls. Both shutdown destinations reject shifted callees.
+  Before/after whole-object checks preserve56 surrounding bodies across the
+  normal server build, a legacy-flag-off compile, both clients and their callers.
+  All13 group/record size/field assertions pass in each target compiler. All21
+  affected existing client matches pass (12TL/9Gold); every status and game
+  counters251/3584/2082 are preserved. Lint retains0 errors and0/1/38 warnings.
+  Full server gate passes316/316 functions,652/652 data, imports/exports/Wine,
+  library/toolchain checks and all286720 raw bytes. Coverage is refreshed for
+  all3 targets; standalone C backlog decreases to3830 and3931 files scan.
+  Original function/type/field names and storage owners remain inferred or
+  unresolved; full client raw links/data, allocator/shutdown integration and
+  faithful discarded-server source remain open. Receipt:
+  .scratch/goal21/shared-pool-report. No game push/live sync.
+
 - 2026-10-11 (shared pool allocator extent): native CFG proves TL0x41e1d0
   and GOLD0x422a20 contain261 bytes,103 reachable instructions and two returns;
   the next11 NOPs are alignment. The existing canonical m_PoolAlloc already

@@ -13,7 +13,7 @@ extern MemBlock* g_6b6f80;
 extern char* g_14cc5e4;
 
 void __cdecl fcn_0041d9e0(const char*);
-void __cdecl fcn_0041df00(int);
+void __cdecl m_ReportGroupInfo(const char*);
 
 // FUNCTION: GOLD 0x00422910
 // FUNCTION: GOLDTL 0x41e0c0
@@ -34,7 +34,7 @@ void __cdecl fcn_0041e0c0(void)
 			fcn_0041d9e0(msg);
 		}
 		if (g_6b6f7c != 0) {
-			fcn_0041df00(0);
+			m_ReportGroupInfo(0);
 		}
 		b = g_6b6f80;
 		for (i = 0; i < g_6b6f64; i++, b++) {

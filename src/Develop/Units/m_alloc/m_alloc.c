@@ -788,9 +788,9 @@ void __cdecl m_FreeTracked(void* ptr)
 	s->ptr = 0;
 	free(ptr);
 	g_6b6f6c--;
-	s->pool->used_blocks--;
+	s->pool->count_total--;
 	g_6b6f68 -= size;
-	s->pool->used -= size;
+	s->pool->size_total -= size;
 #endif
 }
 
@@ -883,6 +883,20 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 #include "group_node.h"
 
 
+/* Client spellings name the same tracker state; these aliases allocate no storage. */
+#ifndef REBREW_SERVER
+extern int g_6b6f70;
+extern int g_6b6f74;
+extern struct GroupNode g_14cc5c0;
+#define g_stat1 g_6b6f68
+#define g_stat2 g_6b6f6c
+#define g_stat3 g_6b6f70
+#define g_stat4 g_6b6f74
+#define g_alloc_root_name g_14cc5c0
+#define g_array_ptr m_TRACKED_SLOTS
+#define g_array_count m_TRACKED_SLOT_COUNT
+#endif
+
 void __cdecl m_ReportGroupInfo(const char* toggle)
 {
 	char buf[0x400];
@@ -899,8 +913,12 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 		sprintf(buf, "[*] Memory-Subsystem-Information: [*]\n--> max_used %i blocks in %i bytes (%ik). %i block(s) left in %i (%ik) bytes.",
 			g_stat4, g_stat3, g_stat3 >> 10, g_stat2, g_stat1, g_stat1 >> 10);
 	}
+#ifdef REBREW_SERVER
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1b5, buf, 1);
+#endif
+#ifdef REBREW_SERVER
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1b6, "---g-r-o-u-p---i-n-f-o-s---", 1);
+#endif
 	node = (struct GroupNode*) &g_alloc_root_name;
 	while (node != 0) {
 		if (toggle != 0 && strstr(node->name, toggle) != 0) {
@@ -923,23 +941,40 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 							buf2, node->size_total, node->size_max, node->size_total >> 10, node->size_max >> 10,
 							node->count_total, node->count_max, node->count);
 					}
+#ifdef REBREW_SERVER
 					LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1cc, buf, 1);
+#endif
 					if (match != 0) {
 						for (i = 0, slot = (char*) g_array_ptr; i < g_array_count; i++, slot += 0x10) {
 							if (*(char**) (slot + 8) != 0 && *(struct GroupNode**) slot == node) {
 								sprintf(buf, "{%s} w/ %i bytes (%ik).", *(char**) (slot + 4), *(int*) (slot + 0xc), *(int*) (slot + 0xc) >> 10);
+#ifdef REBREW_SERVER
 								LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1d5, buf, 1);
+#endif
 							}
 						}
+#ifdef REBREW_SERVER
 						LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1d8, "---g-r-o-u-p---d-o-n-e---", 1);
+#endif
 					}
 				}
 			}
 		}
 		node = node->next;
 	}
+#ifdef REBREW_SERVER
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1dc, "---d-u-m-p---d-o-n-e---", 1);
+#endif
 }
+#ifndef REBREW_SERVER
+#undef g_stat1
+#undef g_stat2
+#undef g_stat3
+#undef g_stat4
+#undef g_alloc_root_name
+#undef g_array_ptr
+#undef g_array_count
+#endif
 
 
 void __cdecl m_ShutdownAllocator(void)
