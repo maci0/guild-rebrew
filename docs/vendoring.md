@@ -52,14 +52,22 @@ The client inventory also binds these verified native bodies to the canonical
 | `gzwrite` | `0x45f630` | `0x463330` | 150 bytes |
 | `gzprintf` | `0x45f6d0` | not established here | 95 bytes |
 | `gzseek` | `0x45f890` | `0x463490` | 332 bytes |
+| `gzrewind` | `0x45f9e0` | `0x4635e0` | 112 bytes |
 
 Unique stock-source matches and complete native-byte/operand controls support
-these bindings. The three duplicate source files are retired; the seek caller
+these bindings. Four duplicate source files are retired; the seek caller
 keeps its compiled bytes and typed operands after binding the canonical name.
 Gold's caller remains a size mismatch (449 compiled bytes versus 464 native).
 The `gzwrite` definition is identical to pristine 1.1.3. These bodies do not
 establish the complete original fork or remove the unresolved patches below.
 Receipts: `.scratch/goal21/zlib-source-ownership/`.
+
+`gzrewind` additionally has four independently supported native call targets,
+four rejecting binding controls per client, complete reachable control flow,
+and 44 preserved surrounding vendor bodies. TL's `rewind` and `fseek` uniquely
+match LIBCMT; Gold's uniquely match single-thread LIBC. Gold's provisional link
+configuration remains unchanged pending broader runtime-provider evidence.
+Receipts: `.scratch/goal21/gzrewind-source-ownership/`.
 
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by

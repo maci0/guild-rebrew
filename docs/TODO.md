@@ -6,6 +6,21 @@ Current reconstruction checkpoint (2026-10-12):
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
 
+- 2026-10-12 (canonical gzrewind provider): TL0x45f9e0 and GOLD0x4635e0
+  bind unchanged gzio.c as LIBRARY. Unique stock candidates, both complete112B
+  native bodies, four independently supported callees/four rejecting controls
+  each and full reachable CFG establish the provider. Actual before/after
+  objects preserve44 surrounding vendor bodies. The unowned copy is
+  retired; no caller, vendor code, flag, storage or assembly changes are added.
+  Fresh CLI measurements remain RELOC112 in both. Gold rewind/fseek uniquely
+  match stock single-thread LIBC; TL matches LIBCMT. The provisional Gold link
+  list remains unchanged pending wider runtime evidence. This is library origin
+  cleanup, not new game reversing. The full SERVER gate passes316/652 and every
+  286720 raw byte. Audit changes exactly two library rows; all statuses, sizes,
+  flags and all data/types/SOURCE bytes are preserved. Receipts:
+  .scratch/goal21/gzrewind-source-ownership. Full client images/data and faithful
+  discarded SERVER source remain unfinished; exact complete zlib fork unresolved.
+
 - 2026-10-12 (canonical zlib providers and upstream rename repairs): five
   previously game-attributed identities now bind unchanged references/zlib/gzio.c
   as LIBRARY: gzwrite150 in both clients, gzprintf95 in TL, gzseek332 in both.
