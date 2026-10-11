@@ -3,6 +3,24 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (TL gzip extent repair): unchanged canonical gzio.c matches
+  TL0x45f380 gzread's complete555-byte body and TL0x45f2c0 destroy's
+  complete177-byte body. The old560/192 extents included five/fifteen
+  unreachable NOPs. Full native-byte comparisons, typed operands, rejecting
+  binding controls and complete reachable control flow establish the extents.
+  `rebrew test --symbol ... --fix-sizes` records both as RELOC, preserving
+  their library origin, source, flags and every other managed row. No C,
+  vendor patch, assembly, storage or compiler setting changes. The full SERVER
+  gate passes316/316 functions,652/652 data, all structural/Wine/library/
+  toolchain checks and every286720 raw byte (SHA3cc2ce90...). All three
+  coverage documents are refreshed; lint retains zero errors and0/1/38
+  warnings. The final audit changes exactly those two TL library rows,
+  preserving all other managed rows/stores and configuration. This repairs
+  library measurements, not game reversing. Gold's MT/ML corpus checks
+  are still running; its configuration and copied gzread remain unchanged.
+  Receipts: .scratch/goal21/gold-crt-provider. Full client images/data and
+  faithful discarded SERVER source remain unfinished.
+
 - 2026-10-12 (canonical gzrewind provider): TL0x45f9e0 and GOLD0x4635e0
   bind unchanged gzio.c as LIBRARY. Unique stock candidates, both complete112B
   native bodies, four independently supported callees/four rejecting controls

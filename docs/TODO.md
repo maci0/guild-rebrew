@@ -1,5 +1,21 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- TL gzip extent repair: canonical `gzread` at `0x45f380` is 555 bytes
+  followed by five unreachable NOPs; canonical `destroy` at `0x45f2c0`
+  is 177 bytes followed by fifteen. Complete native bodies, typed relocation
+  operands, rejecting controls and reachable control flow match unchanged
+  zlib. Rebrew's guarded `test --symbol ... --fix-sizes` records both RELOC.
+  Source, library origin and compiler flags remain unchanged. Full SERVER
+  gate passes316/316 functions,652/652 data and every286720 raw byte,
+  including all structural/Wine/library/toolchain checks. All three coverage
+  documents are refreshed; lint retains zero errors and0/1/38 warnings.
+  Final scope audit changes only these two TL library rows; all other managed
+  rows/stores and configuration are preserved. Gold's MT/ML corpus comparison
+  and runtime correction
+  remain pending; no Gold setting or source has changed. Receipts:
+  `.scratch/goal21/gold-crt-provider/`. These are library measurements,
+  not new game reversing or complete client-image verification.
+
 > Tooling update (October 2026): old split-link, copied-data and duplicate diagnostic
 > scripts cited in historical entries have been retired. Use current `rebrew`
 > commands; see [the tooling audit](tooling-upstream.md) for replacements and the

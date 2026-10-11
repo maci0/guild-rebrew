@@ -69,6 +69,14 @@ match LIBCMT; Gold's uniquely match single-thread LIBC. Gold's provisional link
 configuration remains unchanged pending broader runtime-provider evidence.
 Receipts: `.scratch/goal21/gzrewind-source-ownership/`.
 
+TL's existing canonical `gzread` (`0x45f380`) and `destroy` (`0x45f2c0`)
+also reproduce their complete 555- and 177-byte native bodies. Their previous
+560- and 192-byte measurements included five and fifteen unreachable NOPs.
+Rebrew's guarded size repair records RELOC for both without changing source
+or flags. Full native bytes, typed operands, rejecting binding controls and
+reachable control flow support these extents. Receipts:
+`.scratch/goal21/gold-crt-provider/TL-*-extent-proof.json`.
+
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by
 Gilles Vollant as `zlib113.zip`, same sources with CRLF line ends). The previous
