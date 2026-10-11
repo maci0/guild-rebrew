@@ -14,7 +14,8 @@ default_target = "server.dll"
 shared_dir = "src"
 
 [targets."server.dll"]
-defines = ["REBREW_SERVER"]
+# Temporary historical layout; remove the second define to compile the reconstructed variant.
+defines = ["REBREW_SERVER", "REBREW_LEGACY_SERVER_LAYOUT"]
 # Code generator lock (round 1379): the server's x87 compares are the PLAIN
 # VC6 idiom (`fnstsw ax; test ah,0x40/0x01`, 10 sites in game code, 0
 # Processor-Pack sites binary-wide).  `rebrew toolchain detect --target

@@ -3,6 +3,27 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-11 (user-authorized temporary historical server variant): the user
+  requested `#ifdef` isolation while faithful reconstruction continues. The
+  server alone defines REBREW_LEGACY_SERVER_LAYOUT alongside REBREW_SERVER.
+  Two source files restore the sixteen historical placeholder calls, old
+  affinity expression and absence of the client treasury formatter only under
+  both defines. Disabling the flag preserves all41 reconstructed functions in
+  each of the three native compiler profiles; enabling it preserves all40
+  historical functions, including complete typed relocation/literal contents.
+  The full canonical gate passes:316/316 functions,652/652 data,409 exact
+  placements,100 imports,Wine exports and whole-file identity. Raw286720 bytes
+  equal reference SHA3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+  All36 build objects pass integrity checks. All20 affected client identities
+  freshly pass(TL13/Gold7); all-target lint
+  retains0 errors and existing0/2/40 warnings. Stock CRT archives, reference,
+  layout, linker rules and gate remain unchanged. The guards are reconstruction
+  debt, not proof of original discarded source; the unified original-source and
+  full client-image goals remain open. Remove the second server define and
+  regenerate CMake to select the reconstructed variant. Evidence:
+  .scratch/goal21/legacy-server-ifdef/{variant-proof.json,gate.log,client-verification.json}.
+  No full client gates, push or live sync are part of this change.
+
 - 2026-10-11 (durable type identities and full native D3 byte layouts):
   Human requested both managed type metadata/checks and native layout recovery.
   Upstream main980a49b6 adds locked atomic rebrew-types.toml, types bind with

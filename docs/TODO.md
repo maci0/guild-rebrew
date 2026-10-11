@@ -1,5 +1,20 @@
 Current reconstruction checkpoint (2026-10-11):
 
+- Temporary historical server variant, explicitly authorized by the user:
+  REBREW_LEGACY_SERVER_LAYOUT is enabled only for the server target and guarded
+  together with REBREW_SERVER. The two shared units retain their reconstructed
+  branches. Complete native object checks preserve40 historical functions when
+  enabled and41 reconstructed functions per target profile when disabled.
+  Canonical gate passes:316/316 functions,652/652 data,409 exact placements,
+  matching100 imports,Wine exports and all286720 raw bytes. Reference/raw SHA256
+  is3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+  The16 restored placeholder logs and historical object shape are explicit debt;
+  byte identity does not prove original source fidelity. Remove the second
+  server define in rebrew-project.toml and regenerate CMake to select the
+  reconstructed branch. CRT archives, link rules, layouts, references and gate
+  are unchanged. Receipts:.scratch/goal21/legacy-server-ifdef. The faithful
+  discarded-server-input recovery and full client raw-image goals remain open.
+
 - 2026-10-11 (shared client allocator repairs and source placement):
   The prior turn made evidence progress on the server header, not a repair.
   No new original artifact was supplied. Continued the unified-source objective
@@ -1365,12 +1380,12 @@ Float-record consolidation LIVE (2026-10-04): source57178 running; baseline acce
 | Quantity | Value | Source |
 |---|---|---|
 | verify `passed` | **316/316** | gate's `BASELINE` |
-| `.text` residue | **?** | raw-link file identity |
-| raw-link `.data` divergence | **?** | raw-link file identity |
+| `.text` residue | **0** | raw-link file identity |
+| raw-link `.data` divergence | **0** | raw-link file identity |
 | relocation records missing / extra | **?** | not measured; reloc_set_check.py removed |
 | raw-link import table | **matches** | gate, round 210 |
-| OBJECTIVE GAP (raw link vs reference) | **?** | raw-link file identity |
-| ...of which | **?** | gate's decomposition |
+| OBJECTIVE GAP (raw link vs reference) | **0** | raw-link file identity |
+| ...of which | **0 differing bytes in the common prefix, 0 bytes of size shortfall** | gate's decomposition |
 | annotations shorter than the binary | **?** | `rebrew verify --json` |
 | `cmake --build` exit | **0** | gate's build step |
 

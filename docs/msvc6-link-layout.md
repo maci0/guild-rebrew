@@ -5663,3 +5663,37 @@ PDB or object set is available, per the user's answer. Receipts:
 `.scratch/goal21/last-green-trace/object-dir32-deltas.json` and
 `historical-replay.json`. The user separately requested committing all current
 repository changes; run and report the current gate without weakening it.
+
+### Temporary historical server variant (2026-10-11)
+
+The user explicitly authorized `#ifdef` isolation while faithful reconstruction
+continues. The server target now defines `REBREW_LEGACY_SERVER_LAYOUT` alongside
+`REBREW_SERVER`; both must be defined to select the historical variant. Remove
+the second define in `rebrew-project.toml` and regenerate CMake to compile the
+reconstructed variant. Client target defines are unchanged.
+
+The guards restore the sixteen documented historical placeholder logs in
+`m_alloc.c` and `server.c`, using their historical numeric line arguments. They
+also retain the old DWORD-mask office-affinity expression and omit the recovered
+client treasury formatter from the temporary server object. These are discarded
+server link inputs, not evidence of the original source. The reconstructed
+expressions and formatter remain available when the flag is disabled.
+
+Native MSVC6 compilation checks every function's complete bytes, typed
+relocation bindings and compiler-literal contents: the enabled server variant
+preserves all 40 historical functions; disabling it preserves all 41 current
+functions for each of the three target profiles. The canonical raw link is
+286720 bytes and matches the reference SHA256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+Stock CRT archives, linker rules, reference images and the gate are unchanged.
+
+The guards are reconstruction debt. Whole-file identity establishes the
+temporary build's bytes; it does not establish the placeholder calls' provenance
+or complete the original-source goal. Evidence is under
+`.scratch/goal21/legacy-server-ifdef/`: `variant-proof.json`, `gate.log`, and
+`client-verification.json`. The full server gate passes 316/316 functions and
+652/652 data comparisons, with 409 exact placements, matching 100 imports and
+successful Wine loading. Twenty affected client identities freshly pass
+(GOLDTL 13, GOLD 7). All-target lint retains zero errors and the existing
+server/TL/Gold warning counts of 0/2/40. Full client image gates are outside
+this change; `scope-final.json` records the preserved inputs and exact scope.
