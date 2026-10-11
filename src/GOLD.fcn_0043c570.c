@@ -3,7 +3,7 @@ extern char s_5fb67c[];
 extern char g_633438;
 extern char* g_5fb5b0;
 
-char* __cdecl m_AllocTracked(int size, char* tag);
+char* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_0043ce60(char* o);
 void __cdecl fcn_005de8c0(char* dst, char* src, int n);
 
@@ -12,9 +12,9 @@ char* __cdecl fcn_0043c570(int kind, char* name)
 {
 	char* o;
 
-	o = m_AllocTracked(0x228, s_5fb698);
+	o = m_alloc(0x228, s_5fb698);
 	if (kind >= 5) {
-		*(char**) (o + 0x1e8) = m_AllocTracked(0x1ac, s_5fb67c);
+		*(char**) (o + 0x1e8) = m_alloc(0x1ac, s_5fb67c);
 	}
 	fcn_0043ce60(o);
 	if (kind >= 5) {

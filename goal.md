@@ -3,6 +3,34 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-11 (attested allocator name and provenance-safe rename): the
+  native SERVER diagnostic attests m_alloc(). The shared definition,84 source/
+  header files and SERVER/TL/GOLD identities now use that spelling, with the
+  server link anchor regenerated through the existing project generator.
+  All1942 compiled bodies across137 contexts preserve complete instructions,
+  typed operands and compiler literals after normalizing only the renamed
+  identity. All212 checked allocator operands equal their native targets and
+  reject actually applied shifted bindings. Both client allocators retain544
+  bytes and SERVER retains658. All195 affected client matches pass (122TL/
+  73Gold), and all prior statuses/game counts251/3585/2083 are retained.
+  Lint stays0 errors and0/1/38 warnings. The full server gate passes316/316
+  functions,652/652 data, imports/exports/Wine, libraries/toolchains and every
+  286720 raw reference byte. Coverage is refreshed for all3 targets.
+  The rename exposed an upstream source-provenance gap. Rebrew now carries
+  evidence through definition/file renames and current caller edits; already
+  stale evidence stays stale, corrupt/conflicting stores prevent source edits,
+  and failed provenance writes restore sources/file moves. Packaged agent and
+  workflow guidance explain the behavior. Five cases fail before the fix;
+  173 focused tests and11696 full local tests/52 skips pass, with the coverage
+  gate and all source/package/reproducibility/provenance/SBOM checks and hooks.
+  Upstream PR20 is open with lint/hooks/CLI/package green; Python3.13/3.14
+  CI remains pending. Current game changes use the tested upstream CLI; no
+  manual managed-store repair or local rename workaround is introduced.
+  Original global/type/field names and storage owners, client shutdown
+  integration, both full client raw links/data and faithful discarded-server
+  source remain open. Receipts: .scratch/goal21/allocator-name. No game push
+  or live sync; the complete three-image/shared-tree goal remains active.
+
 - 2026-10-11 (shared tracked allocator): TL0x41db70/GOLD0x4223c0 now
   bind the canonical m_AllocTracked alongside SERVER0x10006580. The common
   body retains the original group search, slot recording and counter updates;

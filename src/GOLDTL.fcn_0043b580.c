@@ -11,7 +11,7 @@ typedef struct Event {
 
 extern char g_67a59c[];
 
-void* __cdecl m_AllocTracked(int, void*);
+void* __cdecl m_alloc(int, void*);
 void __cdecl m_FreeTracked(void*);
 
 char __cdecl fcn_0043b580(char* o, int idx, int id, char* name)
@@ -25,7 +25,7 @@ char __cdecl fcn_0043b580(char* o, int idx, int id, char* name)
 	if (idx != 0) {
 		if (id != 0) {
 			if (*(Event**) (o + 0x1d4) == 0) {
-				*(Event**) (o + 0x1d4) = (Event*) m_AllocTracked(0x39c, g_67a59c);
+				*(Event**) (o + 0x1d4) = (Event*) m_alloc(0x39c, g_67a59c);
 			}
 			(*(Event**) (o + 0x1d4))[idx].name[0x7f] = 0;
 			strncpy((*(Event**) (o + 0x1d4))[idx].name, name, 0x7f);

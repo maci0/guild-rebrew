@@ -3,7 +3,7 @@
 void __cdecl fcn_004011f0(int f, void* x);
 void __cdecl fcn_00430a80(int f, int off, int whence);
 void __cdecl fcn_0041d9e0(const char* msg);
-void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
+void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl fcn_004306b0(void* buf, int size, int count, int f);
 
 int __cdecl fcn_00401500(int f, int count, void** out)
@@ -19,7 +19,7 @@ int __cdecl fcn_00401500(int f, int count, void** out)
 		fcn_0041d9e0("array count mismatch");
 		return 0;
 	}
-	*out = m_AllocTracked(size * count, "array");
+	*out = m_alloc(size * count, "array");
 	fcn_004306b0(*out, count, size, f);
 	return size;
 }

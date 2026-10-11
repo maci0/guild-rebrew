@@ -1270,7 +1270,7 @@ int __cdecl srv_LoadBuf(void)
 						g_download_total_size = total;
 						g_download_received = 0;
 						memset(g_download_slots, 0xff, 32);
-						g_download_buffer = (unsigned int) m_AllocTracked(total, "srv_LoadBuf");
+						g_download_buffer = (unsigned int) m_alloc(total, "srv_LoadBuf");
 					}
 					else if (*(unsigned char*) (conn + 6) == 9) {
 						unsigned int rec;

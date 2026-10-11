@@ -11,7 +11,7 @@ extern char g_678e2c[];
 extern char g_678df0[];
 extern char g_14cbae0[];
 int __cdecl fcn_0042a120(int* h, int a, int b, int c);
-char* __cdecl m_AllocTracked(int size, char* tag);
+char* __cdecl m_alloc(int size, char* tag);
 int __cdecl fcn_0042a510(int h, char* slot);
 long __cdecl fcn_0064e561(long* t);
 void __cdecl fcn_0064d3eb(unsigned int seed);
@@ -36,7 +36,7 @@ int __cdecl fcn_00421fe0(int id, int count, int a, int b, int c)
 		g_6b7d70 = 0x1fffcc;
 	}
 	g_6b7e8c = count;
-	g_6b7e88 = m_AllocTracked(count * 0x30, g_678e2c);
+	g_6b7e88 = m_alloc(count * 0x30, g_678e2c);
 	if (g_6b7e88 != 0) {
 		n = g_6b7e8c * 0x30;
 		__asm {

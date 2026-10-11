@@ -10,7 +10,7 @@ extern int g_1005760;
 void* __cdecl fcn_0042ff50(char*, char*, int);
 void __cdecl fcn_00430a80(void*, int, int);
 int __cdecl fcn_00430c50(void*);
-char* __cdecl m_AllocTracked(int, char*);
+char* __cdecl m_alloc(int, char*);
 void __cdecl CloseVfsStream(void*);
 int __cdecl vfs_ReadData(char*, int, int, void*);
 void __cdecl m_FreeTracked(char*);
@@ -38,7 +38,7 @@ int __cdecl fcn_005259f0(char* path)
 	size = fcn_00430c50(h);
 	total = (size / 128 + 1) * 128;
 	fcn_00430a80(h, 0, 0);
-	buf = m_AllocTracked(total, "ls_SendGame");
+	buf = m_alloc(total, "ls_SendGame");
 	if (buf == 0) {
 		CloseVfsStream(h);
 		return 0;

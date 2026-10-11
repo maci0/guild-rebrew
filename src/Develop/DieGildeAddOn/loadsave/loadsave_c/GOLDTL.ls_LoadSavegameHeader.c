@@ -51,7 +51,7 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 	void* buf;
 	int i;
 
-	buf = m_AllocTracked(0xe100, &s_ls_tmp_1002d4fc);
+	buf = m_alloc(0xe100, &s_ls_tmp_1002d4fc);
 	if (!ls_ReadVfsDataChecked(dest, 4, 1, (void*) stream)) {
 		return 0;
 	}

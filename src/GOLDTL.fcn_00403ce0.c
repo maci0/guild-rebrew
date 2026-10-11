@@ -20,7 +20,7 @@ struct link_403ce0 {
 extern float g_6628a8;
 extern float g_6628b8;
 
-struct link_403ce0* __cdecl m_AllocTracked(int size, const char* tag);
+struct link_403ce0* __cdecl m_alloc(int size, const char* tag);
 void __cdecl fcn_00438b40(struct node_403ce0*, float*);
 void __cdecl fcn_00438cb0(struct node_403ce0*, char*);
 
@@ -33,7 +33,7 @@ struct link_403ce0* __cdecl fcn_00403ce0(char* obj, struct node_403ce0* node)
 	char* n;
 	float pos[4];
 
-	link = m_AllocTracked(0x18, "ch:ch_AttachTransport");
+	link = m_alloc(0x18, "ch:ch_AttachTransport");
 	n = *(char**) (obj + 0x34);
 	pos[0] = (*(float*) (n + 0x19c) + *(float*) (n + 0x18c)) * g_6628a8 - *(float*) (n + 0x1ac) * 70.0f + *(float*) (n + 0x1bc);
 	pos[1] = (*(float*) (n + 0x1a0) + *(float*) (n + 0x190)) * g_6628a8 - *(float*) (n + 0x1b0) * 70.0f + *(float*) (n + 0x1c0);

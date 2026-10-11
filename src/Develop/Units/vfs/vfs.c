@@ -215,7 +215,7 @@ VFS_DIR* __cdecl vfs_GetSubDir(char* name, VFS_DIR* parent)
 			}
 		}
 	}
-	n = (VFS_DIR*) m_AllocTracked(sizeof(VFS_DIR), "vfs:IGetSubDir");
+	n = (VFS_DIR*) m_alloc(sizeof(VFS_DIR), "vfs:IGetSubDir");
 	strcpy(n->name, name);
 	n->loaded = 0;
 	n->parent = parent;
@@ -330,7 +330,7 @@ void __cdecl vfs_AddFile(char* name, VFS_DIR* dir, VFS_DIR* source, int stamp, i
 				for (i = 0; i < dir->count; i++) {
 					len += strlen(dir->files[i].name) + 1;
 				}
-				mem = (VFS_FILE*) m_AllocTracked(len + (dir->count + 1) * sizeof(VFS_FILE), "vfs:AddFile(sorted, insert)");
+				mem = (VFS_FILE*) m_alloc(len + (dir->count + 1) * sizeof(VFS_FILE), "vfs:AddFile(sorted, insert)");
 				names = (char*) (mem + dir->count + 1);
 				for (i = 0; i < dir->count; i++) {
 					strcpy(names, dir->files[i].name);
@@ -382,7 +382,7 @@ void __cdecl vfs_AddFile(char* name, VFS_DIR* dir, VFS_DIR* source, int stamp, i
 				f = (VFS_FILE*) ((char*) mem + off);
 			} else {
 				dir->count = 0;
-				dir->files = (VFS_FILE*) m_AllocTracked(strlen(name) + 1 + sizeof(VFS_FILE), "vfs:AddFile(sorted, first)");
+				dir->files = (VFS_FILE*) m_alloc(strlen(name) + 1 + sizeof(VFS_FILE), "vfs:AddFile(sorted, first)");
 				names = (char*) (dir->files + 1);
 				f = dir->files;
 			}
@@ -526,7 +526,7 @@ void __cdecl vfs_FinishFiles(VFS_DIR* dir, char recurse)
 			len += strlen(e->name) + 1;
 		}
 		dir->count = n;
-		dir->files = (VFS_FILE*) m_AllocTracked(len + n * sizeof(VFS_FILE), "vfs:FinishedFiles");
+		dir->files = (VFS_FILE*) m_alloc(len + n * sizeof(VFS_FILE), "vfs:FinishedFiles");
 		names = (char*) (dir->files + dir->count);
 		for (e = dir->items, i = 0; e != 0; e = next) {
 			strcpy(names, e->name);
@@ -1576,7 +1576,7 @@ int __cdecl vfs_fseek(char* s, int off, int whence)
 							r = 0;
 						} else {
 							off -= pos;
-							buf = m_AllocTracked(off, "vfs:fseek(inzip,SEEK_SET,skip)");
+							buf = m_alloc(off, "vfs:fseek(inzip,SEEK_SET,skip)");
 							if (unzReadCurrentFile(*(int*) (s + 0x100), (char*) buf, off) == off) {
 								r = 0;
 							}
@@ -1585,7 +1585,7 @@ int __cdecl vfs_fseek(char* s, int off, int whence)
 					} else {
 						unzCloseCurrentFile(*(char**) (s + 0x100));
 						if (unzOpenCurrentFile(*(char**) (s + 0x100)) == 0) {
-							buf = m_AllocTracked(off, "vfs:fseek(inzip,SEEK_SET,skip)");
+							buf = m_alloc(off, "vfs:fseek(inzip,SEEK_SET,skip)");
 							if (unzReadCurrentFile(*(int*) (s + 0x100), (char*) buf, off) == off) {
 								r = 0;
 							}
@@ -1597,7 +1597,7 @@ int __cdecl vfs_fseek(char* s, int off, int whence)
 						if (off == 0) {
 							r = 0;
 						} else {
-							buf = m_AllocTracked(off, "vfs:fseek(inzip,SEEK_CUR,skip)");
+							buf = m_alloc(off, "vfs:fseek(inzip,SEEK_CUR,skip)");
 							if (unzReadCurrentFile(*(int*) (s + 0x100), (char*) buf, off) == off) {
 								r = 0;
 							}

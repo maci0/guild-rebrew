@@ -4,7 +4,7 @@ extern char* g_6b7d68;
 extern int g_6b7d6c;
 extern char g_678fd0[];
 void __cdecl fcn_00425810(void);
-char* __cdecl m_AllocTracked(int size, char* tag);
+char* __cdecl m_alloc(int size, char* tag);
 char* __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n);
 
 int __cdecl fcn_00423d50(char* s)
@@ -13,7 +13,7 @@ int __cdecl fcn_00423d50(char* s)
 
 	fcn_00425810();
 	if (g_6b7d68 == 0 && s != 0) {
-		g_6b7d68 = m_AllocTracked(0x40, g_678fd0);
+		g_6b7d68 = m_alloc(0x40, g_678fd0);
 		if (g_6b7d68 != 0) {
 			n = 0x40;
 			__asm {

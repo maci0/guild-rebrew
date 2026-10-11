@@ -3,7 +3,7 @@
 extern char g_67515c[];
 char __cdecl fcn_00401590(const char* name, int* width, int* height, int* bpp);
 char __cdecl fcn_00401650(const char* name, unsigned char* pixels, unsigned char* pal, int flags);
-unsigned char* __cdecl m_AllocTracked(int size, char* tag);
+unsigned char* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 /* Averages the palette colour of an 8-bit image, weighted by pixel count. */
@@ -34,7 +34,7 @@ char __cdecl fcn_00402090(const char* name, unsigned char* out)
 	else {
 		return 0;
 	}
-	pix = m_AllocTracked(n, g_67515c);
+	pix = m_alloc(n, g_67515c);
 	if (fcn_00401650(name, pix, pal, 7)) {
 		{
 			int len;

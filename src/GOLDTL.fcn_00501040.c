@@ -11,7 +11,7 @@ extern unsigned char* g_90e094;
 extern char* g_99ec10;
 extern unsigned short* g_868054;
 
-void* __cdecl m_AllocTracked(int, char*);
+void* __cdecl m_alloc(int, char*);
 void __cdecl fcn_00500e40(void);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl srv_SeedRandomWithTime(void);
@@ -49,11 +49,11 @@ int __cdecl fcn_00501040(char* dir)
 		src += 0xbd;
 		dst += 0xaa4;
 	} while ((int) src < (int) &g_868118 + 0xbd * 4 * 5);
-	(*(char**)&g_868050) = m_AllocTracked(0xca78, "f3_gm:lpGebaeudePROT");
+	(*(char**)&g_868050) = m_alloc(0xca78, "f3_gm:lpGebaeudePROT");
 	if ((*(char**)&g_868050) == 0) {
 		return -1;
 	}
-	g_90e094 = m_AllocTracked(0xa900, "f3_gm:lpGebaeudeINST");
+	g_90e094 = m_alloc(0xa900, "f3_gm:lpGebaeudeINST");
 	memset(g_90e094, 0, 0xa900);
 	if (g_90e094 == 0) {
 		return -2;
@@ -65,11 +65,11 @@ int __cdecl fcn_00501040(char* dir)
 	}
 	fread((*(char**)&g_868050), 0x24d, 0x58, f);
 	fclose(f);
-	g_99ec10 = m_AllocTracked(0xb9dc, "f3_gm:lpObjektePROT");
+	g_99ec10 = m_alloc(0xb9dc, "f3_gm:lpObjektePROT");
 	if (g_99ec10 == 0) {
 		return -4;
 	}
-	g_868054 = m_AllocTracked(0x14f218, "f3_gm:lpObjekteINST");
+	g_868054 = m_alloc(0x14f218, "f3_gm:lpObjekteINST");
 	if (g_868054 == 0) {
 		return -5;
 	}

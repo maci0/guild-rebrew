@@ -292,7 +292,7 @@ extern int g_citizen_count;
 extern unsigned char g_slot_table[2];
 extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
-void* __cdecl m_AllocTracked(unsigned int size, const char* source);
+void* __cdecl m_alloc(unsigned int size, const char* source);
 /* Defined in alchemistry_logic2.c; same literal, same VA. */
 
 /* Allocates a new alchemy entity: resolves the parent building record,
@@ -481,7 +481,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 
 	if (*(int*) ((char*) dynamic + 0x65) == 0) {
-		*(int*) ((char*) dynamic + 0x65) = (int) m_AllocTracked(0x3c, "ahm_AllocAhmInfo");
+		*(int*) ((char*) dynamic + 0x65) = (int) m_alloc(0x3c, "ahm_AllocAhmInfo");
 	}
 
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);
@@ -703,7 +703,7 @@ int __cdecl ahm_FireEntityAndCleanup(int cmd, int* entity_id_ptr, int parent_rec
 }
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
-void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
+void* __cdecl m_alloc(unsigned int allocSize, const char* groupTag);
 
 /* Allocates and initializes the alchemy info structure for
  * a building. Sets up recipe slots and ingredient storage. */
@@ -793,7 +793,7 @@ int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 			return 0;
 	}
 	if (*(int*) (arg2 + 0x65) == 0)
-		*(int*) (arg2 + 0x65) = (int) m_AllocTracked(0x3c, "ahm_AllocAhmInfo");
+		*(int*) (arg2 + 0x65) = (int) m_alloc(0x3c, "ahm_AllocAhmInfo");
 	memcpy((void*) *(int*) (arg2 + 0x65), buf, 0x3c);
 	return 1;
 }

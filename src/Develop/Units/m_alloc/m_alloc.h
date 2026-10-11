@@ -4,7 +4,7 @@
 #include "../../game_common.h"
 
 /* Memory Allocation Functions */
-extern void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
+extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
 
 /* Pool Functions */

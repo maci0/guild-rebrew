@@ -14,8 +14,9 @@ No new storage or assembly is introduced. Scoped client aliases describe the
 existing tracker state; they do not establish global storage owners.
 
 The pre-initialization diagnostic explicitly spells `m_alloc()`. That attests
-the original allocator spelling. `m_AllocTracked` is the current reconstruction
-name; a consistent all-target/caller/header rename remains open. Existing
+the original allocator spelling. The previous reconstruction name
+`m_AllocTracked` is retired: the definition, three target rows,84 source/header
+files and server link anchor now use `m_alloc`. Existing
 `GroupNode`, field labels and numeric global spellings remain inferred or
 unresolved. Both complete client bodies, literals and all25 operands match;
 all185 checked caller operands independently retain their native destination.

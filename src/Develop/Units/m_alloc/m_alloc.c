@@ -35,7 +35,7 @@ extern int g_stat3;
 extern int g_stat4;
 void __cdecl free(void* ptr);
 void __cdecl m_ReportGroupInfo(const char* toggle);
-void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
+void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 void __cdecl m_FreeTracked(void*);
 extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 
@@ -194,7 +194,7 @@ void __cdecl ReportMessage(char* msg); /* Single arg log? */
 void* __cdecl malloc(unsigned int size); /* 0x1001a7f7 - game malloc */
 extern int g_alloc_counter;
 /* g_alloc_root: the reference cannot prove its address nonzero and keeps the loop-head test. */
-void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
+void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 /* Allocates tracked memory. Wraps the CRT allocator with allocation
  * tracking: records the source location string, updates group
  * counters, and maintains the allocation list. */
@@ -523,7 +523,7 @@ extern struct GroupNode g_14cc5c0;
 #define g_stat4 g_6b6f74
 #endif
 
-void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
+void* __cdecl m_alloc(unsigned int size, const char* tag)
 {
 	char name[0x100];
 	char buf[0x10];
@@ -1114,7 +1114,7 @@ void* __cdecl m_PoolAlloc(struct M_POOL_BLOCK** head, int size, int max_items)
 	}
 	block = *head;
 	if (block == 0) {
-		block = (struct M_POOL_BLOCK*) m_AllocTracked(asize * max_items + 0x10, "m:pool_get_free(tp_m_pool)");
+		block = (struct M_POOL_BLOCK*) m_alloc(asize * max_items + 0x10, "m:pool_get_free(tp_m_pool)");
 		*head = block;
 		block->count = 0;
 		block->max = max_items;
@@ -1125,7 +1125,7 @@ void* __cdecl m_PoolAlloc(struct M_POOL_BLOCK** head, int size, int max_items)
 			block = block->next;
 		}
 		if (block == 0) {
-			block = (struct M_POOL_BLOCK*) m_AllocTracked(asize * max_items + 0x10, "m:pool_alloc(tp_m_pool)");
+			block = (struct M_POOL_BLOCK*) m_alloc(asize * max_items + 0x10, "m:pool_alloc(tp_m_pool)");
 			block->count = 0;
 			block->max = max_items;
 			block->size = asize;

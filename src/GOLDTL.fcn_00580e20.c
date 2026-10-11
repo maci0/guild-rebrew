@@ -46,7 +46,7 @@ extern char g_6a8760[];
 extern char g_6a8448[];
 extern int g_7749fc;
 int __cdecl fcn_004c3100(char*, int);
-int* __cdecl m_AllocTracked(int size, char* tag);
+int* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00580cf0(int*);
 void __cdecl fcn_0057ecf0(void);
 void __cdecl fcn_0057ef30(void);
@@ -58,7 +58,7 @@ int* __cdecl fcn_00580e20(void)
 	int* p;
 
 	first = 0;
-	p = m_AllocTracked(0x74, g_6a8760);
+	p = m_alloc(0x74, g_6a8760);
 	if (p == 0) {
 		goto fail;
 	}
@@ -105,7 +105,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x1b] = 0;
 	p[0x1c] = 0;
 	first = p;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a874c);
+	p[0x1c] = (int) m_alloc(0x74, g_6a874c);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}
@@ -154,7 +154,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x1a] = 0;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a8728);
+	p[0x1c] = (int) m_alloc(0x74, g_6a8728);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}
@@ -206,7 +206,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x14] = 0;
 	p[0x15] = 0;
 	p[0x1c] = 0;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a86d8);
+	p[0x1c] = (int) m_alloc(0x74, g_6a86d8);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}
@@ -258,7 +258,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x14] = 0;
 	p[0x15] = 0;
 	p[0x1c] = 0;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a8678);
+	p[0x1c] = (int) m_alloc(0x74, g_6a8678);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}
@@ -307,7 +307,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x1a] = 7;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a8618);
+	p[0x1c] = (int) m_alloc(0x74, g_6a8618);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}
@@ -354,7 +354,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x1a] = 7;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a85b8);
+	p[0x1c] = (int) m_alloc(0x74, g_6a85b8);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}
@@ -403,7 +403,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x1a] = 0x17;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a8590);
+	p[0x1c] = (int) m_alloc(0x74, g_6a8590);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}
@@ -452,7 +452,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x1a] = 0x817;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a8540);
+	p[0x1c] = (int) m_alloc(0x74, g_6a8540);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}
@@ -501,7 +501,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x1a] = 0x1817;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a84ec);
+	p[0x1c] = (int) m_alloc(0x74, g_6a84ec);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}
@@ -550,7 +550,7 @@ int* __cdecl fcn_00580e20(void)
 	p[0x1a] = 0x1837;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	p[0x1c] = (int) m_AllocTracked(0x74, g_6a849c);
+	p[0x1c] = (int) m_alloc(0x74, g_6a849c);
 	if (p[0x1c] == 0) {
 		goto fail;
 	}

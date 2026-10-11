@@ -13,7 +13,7 @@ extern void* g_1041d04;
 extern char g_67bc38[];
 extern char g_67bc28[];
 
-void* __cdecl m_AllocTracked(int, void*);
+void* __cdecl m_alloc(int, void*);
 
 void __cdecl fcn_00450a30(int nlist, int nactive)
 {
@@ -25,8 +25,8 @@ void __cdecl fcn_00450a30(int nlist, int nactive)
 	}
 	g_6b86fc = nactive;
 	g_6b8700 = 0;
-	g_6b870c = m_AllocTracked(nactive * 12, g_67bc38);
+	g_6b870c = m_alloc(nactive * 12, g_67bc38);
 	g_6b8704 = nlist;
 	g_6b8708 = 0;
-	g_1041d04 = m_AllocTracked(nlist * 12, g_67bc28);
+	g_1041d04 = m_alloc(nlist * 12, g_67bc28);
 }

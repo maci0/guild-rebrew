@@ -56,7 +56,7 @@ extern char g_677618[];
 extern char g_677604[];
 extern char g_6775f4[];
 
-void* __cdecl m_AllocTracked(int size, char* tag);
+void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 int __cdecl fcn_0045c5b0(char* name, LoadFlags flags, int a3, int a4);
 void __cdecl fcn_0045ce90(int h);
@@ -70,7 +70,7 @@ Snow* __cdecl fcn_00416060(int count)
 	LoadFlags flags;
 	LoadFlags* fill;
 
-	s = (Snow*) m_AllocTracked(0x94, g_677618);
+	s = (Snow*) m_alloc(0x94, g_677618);
 	i = 0;
 	if (s == 0) {
 		return 0;
@@ -113,7 +113,7 @@ Snow* __cdecl fcn_00416060(int count)
 	if (count < 1) {
 		count = 1;
 	}
-	s->flakes = (Flake*) m_AllocTracked(count * sizeof(Flake), g_677604);
+	s->flakes = (Flake*) m_alloc(count * sizeof(Flake), g_677604);
 	if (s->flakes == 0) {
 		m_FreeTracked(s);
 		return 0;

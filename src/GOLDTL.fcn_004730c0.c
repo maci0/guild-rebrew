@@ -16,7 +16,7 @@ extern char* g_1015ec0[];
 extern int g_6b7fb8;
 extern char s_67d8b0[];
 
-void* __cdecl m_AllocTracked(int size, const char* tag);
+void* __cdecl m_alloc(int size, const char* tag);
 void* __cdecl fcn_0047ce00(int name, int a2);
 
 // FUNCTION: GOLDTL 0x4730c0
@@ -33,7 +33,7 @@ Sprite* __cdecl fcn_004730c0(int a1, int a2, int a3, int a4, int a5, int a6, int
 	if (i >= 0x20) {
 		return 0;
 	}
-	p = (Sprite*) m_AllocTracked(100, s_67d8b0);
+	p = (Sprite*) m_alloc(100, s_67d8b0);
 	p->a1 = a1;
 	p->a2 = a2;
 	p->a3 = a3;

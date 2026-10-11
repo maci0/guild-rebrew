@@ -12,7 +12,7 @@ struct fcn_004be1f0_node {
 
 extern char g_6816dc[];
 
-fcn_004be1f0_node* __cdecl m_AllocTracked(int, char*);
+fcn_004be1f0_node* __cdecl m_alloc(int, char*);
 
 // FUNCTION: GOLDTL 0x4be1f0
 // FUNCTION: GOLD 0x004bd950
@@ -32,7 +32,7 @@ fcn_004be1f0_node* __cdecl fcn_004be1f0(fcn_004be1f0_node* head)
 	}
 	if (head != 0 && n >= 8)
 		return 0;
-	q = m_AllocTracked(0x40, g_6816dc);
+	q = m_alloc(0x40, g_6816dc);
 	memset(q, 0, sizeof(*q));
 	if (last != 0)
 		last->next = q;

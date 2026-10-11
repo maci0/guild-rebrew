@@ -26,7 +26,7 @@ typedef struct {
 
 extern char g_6b5c60[];
 
-void* __cdecl m_AllocTracked(int size, const char* tag);
+void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00401210(void* s, char v);
 void __cdecl fcn_00401230(void* s, void* str);
@@ -49,7 +49,7 @@ void __cdecl fcn_004469e0(void* s, char* o)
 	if (o[0x7da4] != 0) {
 		fcn_00401360(s, *(int*) o);
 		fcn_00401430(s, *(int*) o, *(int*) o, *(void**) (o + 0x10));
-		buf = m_AllocTracked(*(int*) o * *(int*) o * 4, "!d3:LOfs");
+		buf = m_alloc(*(int*) o * *(int*) o * 4, "!d3:LOfs");
 		fcn_00401430(s, *(int*) o * 4, *(int*) o, buf);
 		m_FreeTracked(buf);
 		fcn_00401210(s, *(int*) (o + 0x18) != 0);

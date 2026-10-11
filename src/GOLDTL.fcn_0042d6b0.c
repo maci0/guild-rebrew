@@ -20,7 +20,7 @@ int __cdecl fcn_0042ff50(const char* name, const char* mode, int ctx);
 void __cdecl fcn_00430a80(int f, int off, int whence);
 void __cdecl fcn_004306b0(void* buf, int size, int count, int f);
 void __cdecl fcn_00430580(int f);
-int* __cdecl m_AllocTracked(int size, const char* tag);
+int* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 // FUNCTION: GOLD 0x42e360
@@ -50,7 +50,7 @@ int __cdecl fcn_0042d6b0(const char* name)
 	fcn_004306b0(&n, 4, 1, f);
 	fcn_004306b0(&((TextBank_42d6b0*)g_149d120)[idx].first, 4, 1, f);
 	fcn_004306b0(&((TextBank_42d6b0*)g_149d120)[idx].count, 4, 1, f);
-	ofs = m_AllocTracked(n * 4, "txt_txt:txt_ReloadTextFile:PointerTable");
+	ofs = m_alloc(n * 4, "txt_txt:txt_ReloadTextFile:PointerTable");
 	fcn_004306b0(ofs, n * 4, 1, f);
 	for (i = 0; i < n; i++) {
 		fcn_004306b0(g_1053000[((TextBank_42d6b0*)g_149d120)[idx].first + i], 0x50, 1, f);
@@ -59,7 +59,7 @@ int __cdecl fcn_0042d6b0(const char* name)
 		fcn_004306b0(&g_11bb000[((TextBank_42d6b0*)g_149d120)[idx].first + i], 1, 1, f);
 	}
 	fcn_004306b0(&size, 4, 1, f);
-	((TextBank_42d6b0*)g_149d120)[idx].text = (char*) m_AllocTracked(size, "txt_txt:txt_ReloadTextFile:Pointer");
+	((TextBank_42d6b0*)g_149d120)[idx].text = (char*) m_alloc(size, "txt_txt:txt_ReloadTextFile:Pointer");
 	fcn_004306b0(((TextBank_42d6b0*)g_149d120)[idx].text, size, 1, f);
 	for (i = 0; i < n; i++) {
 		g_14a5320[((TextBank_42d6b0*)g_149d120)[idx].first + i] = ((TextBank_42d6b0*)g_149d120)[idx].text + ofs[i];

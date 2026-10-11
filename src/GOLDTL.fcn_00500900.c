@@ -14,7 +14,7 @@ extern char g_696528[];
 extern char g_6750e8[];
 extern char g_67d940[];
 
-char* __cdecl m_AllocTracked(int size, char* tag);
+char* __cdecl m_alloc(int size, char* tag);
 
 void __cdecl fcn_00500900(void)
 {
@@ -35,7 +35,7 @@ void __cdecl fcn_00500900(void)
 		} while (!feof(f));
 		fclose(f);
 	}
-	g_773d44 = m_AllocTracked(g_773d40 * 48, g_67d940);
+	g_773d44 = m_alloc(g_773d40 * 48, g_67d940);
 	g_773d40 = 0;
 	f = fopen(path, g_6750e8);
 	if (f != 0) {

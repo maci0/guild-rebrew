@@ -4,7 +4,7 @@ extern struct Node* g_774a78;
 extern char s_6ab3f4[];
 
 char* __cdecl fcn_005b1aa0(char*);
-char* __cdecl m_AllocTracked(int, char*);
+char* __cdecl m_alloc(int, char*);
 int __cdecl fcn_0064d3f8(void);
 void __cdecl fcn_005b1980(char*, char*);
 
@@ -40,7 +40,7 @@ char* __cdecl fcn_005b1b30(char* a)
 		if (fcn_005b1aa0(a) == 0) {
 			return 0;
 		}
-		p = m_AllocTracked(0x4c, s_6ab3f4);
+		p = m_alloc(0x4c, s_6ab3f4);
 		if (p != 0) {
 			int n;
 
@@ -78,7 +78,7 @@ char* __cdecl fcn_005b1b30(char* a)
 		if (fcn_005b1aa0(a) == 0) {
 			return 0;
 		}
-		p = m_AllocTracked(0x4c, s_6ab3f4);
+		p = m_alloc(0x4c, s_6ab3f4);
 		if (p == 0) {
 			return 0;
 		}

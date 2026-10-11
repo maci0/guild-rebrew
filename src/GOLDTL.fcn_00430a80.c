@@ -4,7 +4,7 @@ int __cdecl fcn_00465540(void* z);
 void __cdecl fcn_00465630(void* z);
 int __cdecl fcn_00465020(void* z);
 int __cdecl fcn_00465350(void* z, void* buf, int len);
-void* __cdecl m_AllocTracked(int size, const char* tag);
+void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_0041d9e0(const char* msg);
 int __cdecl fcn_0045f890(void* gz, int off, int whence);
@@ -31,7 +31,7 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 							r = 0;
 						} else {
 							off -= pos;
-							buf = m_AllocTracked(off, "vfs:fseek(inzip,SEEK_SET,skip)");
+							buf = m_alloc(off, "vfs:fseek(inzip,SEEK_SET,skip)");
 							if (fcn_00465350(*(void**) (s + 0x100), buf, off) == off) {
 								r = 0;
 							}
@@ -40,7 +40,7 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 					} else {
 						fcn_00465630(*(void**) (s + 0x100));
 						if (fcn_00465020(*(void**) (s + 0x100)) == 0) {
-							buf = m_AllocTracked(off, "vfs:fseek(inzip,SEEK_SET,skip)");
+							buf = m_alloc(off, "vfs:fseek(inzip,SEEK_SET,skip)");
 							if (fcn_00465350(*(void**) (s + 0x100), buf, off) == off) {
 								r = 0;
 							}
@@ -52,7 +52,7 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 						if (off == 0) {
 							r = 0;
 						} else {
-							buf = m_AllocTracked(off, "vfs:fseek(inzip,SEEK_CUR,skip)");
+							buf = m_alloc(off, "vfs:fseek(inzip,SEEK_CUR,skip)");
 							if (fcn_00465350(*(void**) (s + 0x100), buf, off) == off) {
 								r = 0;
 							}

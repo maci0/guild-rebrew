@@ -10,7 +10,7 @@
 /INCLUDE:_ReportFatalError
 /INCLUDE:_ReportMessage
 /INCLUDE:_LogMessageInternal
-/INCLUDE:_m_AllocTracked
+/INCLUDE:_m_alloc
 /INCLUDE:_m_FreeTracked
 /INCLUDE:_m_init
 /INCLUDE:_m_ReportGroupInfo

@@ -1,4 +1,4 @@
-void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
+void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl fcn_0043f640(char* cell, int a, unsigned char b);
 void __cdecl fcn_0043c2c0(void* g);
 
@@ -60,12 +60,12 @@ void __cdecl fcn_0043f6b0(Grid* g)
 	int j;
 
 	g->x8034 = 0xff;
-	g->div0 = m_AllocTracked(g->n * g->n, "d3_fl:Divide0");
-	g->div1 = m_AllocTracked(g->n * g->n >> 2, "d3_fl:Divide1");
-	g->div2 = m_AllocTracked(g->n * g->n >> 4, "d3_fl:Divide2");
-	g->light = m_AllocTracked(g->n * g->n, "d3_fl:Light");
+	g->div0 = m_alloc(g->n * g->n, "d3_fl:Divide0");
+	g->div1 = m_alloc(g->n * g->n >> 2, "d3_fl:Divide1");
+	g->div2 = m_alloc(g->n * g->n >> 4, "d3_fl:Divide2");
+	g->light = m_alloc(g->n * g->n, "d3_fl:Light");
 	if (g->uvs == 0) {
-		g->uvs = m_AllocTracked(g->n * g->n * 8, "d3fl:TexUVs");
+		g->uvs = m_alloc(g->n * g->n * 8, "d3fl:TexUVs");
 	}
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {

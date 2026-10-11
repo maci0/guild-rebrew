@@ -131,7 +131,7 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 void* __cdecl memset(void* dest, int c, unsigned int size);
-void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
+void* __cdecl m_alloc(unsigned int size, const char* tag);
 int __cdecl gv_AllocGraveyardField(char* geb);
 void __cdecl gv_SpawnEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
@@ -870,12 +870,12 @@ int __cdecl gm_Open(int map_id)
 	} while ((int) src_player_ptr < (int) ((char*) &g_player_record_src + 0xec4));
 	/* 0x100311f0 is "gm_Open(): Geb\344ude" (Latin-1 a-umlaut, byte 0xe4). */
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e3, "gm_Open(): Geb\344ude", 1);
-	g_entity_type_table = (char*) m_AllocTracked(0xca78, "f3_gm:lpGebaeudePROT");
+	g_entity_type_table = (char*) m_alloc(0xca78, "f3_gm:lpGebaeudePROT");
 	if (g_entity_type_table == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e8, "Memory could not be allocated!", 1);
 		return -1;
 	}
-	g_entity_ptr = (unsigned char*) m_AllocTracked(0xa900, "f3_gm:lpGebaeudeINST");
+	g_entity_ptr = (unsigned char*) m_alloc(0xa900, "f3_gm:lpGebaeudeINST");
 	memset((void*) g_entity_ptr, 0, 0xa900);
 	if (g_entity_ptr == 0) {
 		return -2;
@@ -888,11 +888,11 @@ int __cdecl gm_Open(int map_id)
 	}
 	fread((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
 	fclose(file_handle);
-	g_item_def_table = (char*) m_AllocTracked(0xb9dc, "f3_gm:lpObjektePROT");
+	g_item_def_table = (char*) m_alloc(0xb9dc, "f3_gm:lpObjektePROT");
 	if (g_item_def_table == 0) {
 		return -4;
 	}
-	g_query_base = (unsigned short*) m_AllocTracked(0x14f218, "f3_gm:lpObjekteINST");
+	g_query_base = (unsigned short*) m_alloc(0x14f218, "f3_gm:lpObjekteINST");
 	if (g_query_base == 0) {
 		return -5;
 	}
@@ -2793,7 +2793,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		 * reloads `mov ecx,[esi+0x71]` because the intervening char store may
 		 * alias the field.  Keeping a second copy in `s.record` was an extra
 		 * store plus three extra reloads. */
-		*(int*) (geb + 0x71) = (int) m_AllocTracked(0x600, "f3_gm:PlantMap");
+		*(int*) (geb + 0x71) = (int) m_alloc(0x600, "f3_gm:PlantMap");
 		/* 0x40 entries of 0x18 bytes, indexed: c2 strength-reduces the index
 		 * and emits the reference's `[eax+edx-0xb]` operand order. */
 		for (geb_type = 0; geb_type < 0x40; geb_type++) {
@@ -2836,7 +2836,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	case 0x4c:
 	case 0x4d:
 		{
-			char* rec = (char*) m_AllocTracked(0x3c, "AHM_INFO");
+			char* rec = (char*) m_alloc(0x3c, "AHM_INFO");
 			*(int*) (geb + 0x65) = (int) rec;
 			*(int*) rec = -1;
 		}
