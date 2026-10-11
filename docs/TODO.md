@@ -6,6 +6,24 @@ Current reconstruction checkpoint (2026-10-11):
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
 
+- 2026-10-12 (shared VFS shutdown): TL0x4310f0 and GOLD0x431510 now use
+  canonical vfs_exit in Develop/Units/vfs/vfs.c; its spelling remains inferred.
+  Both complete172-byte native bodies pass with16 typed operands, full31-byte
+  literals and13 rejecting binding controls each. All146 surrounding VFS bodies
+  are unchanged across the two SERVER configurations and both clients. The TL
+  caller keeps35 bytes/six operands after CLI binding and its char declaration
+  repair. CLI rehome removes the unowned45-line duplicate. Client storage is
+  only declared, with no new owner, assembly, library edit or compiler flag.
+  Only this entry log is SERVER-guarded; its historical line1856 preserves the
+  prior object. Its provenance and other VFS placeholders remain unproven.
+  Client checks retain both old VFS size mismatches and all prior verdicts.
+  Lint retains0 errors and0/1/38 warnings. The final SERVER gate passes316/316
+  functions,652/652 data and every286720 raw byte, plus all structural/Wine/
+  library/toolchain checks. All three coverage documents are refreshed.
+  Receipts: .scratch/goal21/shared-vfs-exit; next-directory-cleanup.json records
+  both native120-byte cleanup bodies against the current145-byte canonical one.
+  Full client links/data and faithful discarded SERVER source remain open.
+
 - 2026-10-12 (iterator controls and qualifier tool): m_pool_next still misses
   its identical131-byte client bodies by5 bytes; quick flags, six fixed flag
   controls and ten C/type/control-flow forms do not match. Keep the current
@@ -16,12 +34,13 @@ Current reconstruction checkpoint (2026-10-11):
   checkpoint gate passes316/316 functions,652/652 data comparisons and complete
   raw server identity, plus Wine and library/toolchain checks. Full pr-check
   passes11721 tests/52 skips at88% coverage and all package checks; required
-  push tests pass. PR22 is open at https://github.com/maci0/rebrew/pull/22.
-  CI runs on34ebe5f7; goal.md records the checkout and live watch handle22504.
-  All three coverage documents are refreshed; every other managed row/store
-  and all project C remain unchanged. Upstream main is not yet changed.
-  Continue those checks and upstream integration, then the full native/source
-  goal; do not add volatile reads, register hints or flags from failed probes.
+  push tests pass. PR22 merged ac3a3e58 after every CI job passed on34ebe5f7.
+  Local integration a74d7821 preserves inherited IDEAS/uv.lock and human Resembl
+  bytes; its committed tree equals origin/main. The matching skill is refreshed,
+  scaffold drift is zero, both owned worktrees are removed and root hooks restored.
+  Watch22504 is terminal. The fresh integration gate again passes316/652 and
+  raw file identity; compiler fingerprint497d9355 is recorded for all316 SERVER
+  rows. Continue the full native/source goal; do not adopt failed iterator probes.
 
 - 2026-10-12 (PR21 complete and shutdown sharing): Rebrew PR21 merged e8054974
   after every CI job passed on0fc33ec5, including both Python versions. Local

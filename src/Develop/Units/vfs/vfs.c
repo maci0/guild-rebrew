@@ -1841,8 +1841,25 @@ int __cdecl vfs_init(char* name, char flag)
 	return g_vfs_root != 0;
 }
 #include "../m_alloc/m_pool.h"
-/* Client-only (TL client 0x4310f0, discarded): unmounts the file system and closes the streams left open;
- * verbose reports how many were. */
+/* Inferred shutdown name; closes mounted directories and remaining streams.
+ * The SERVER link discards this body. */
+/* Existing client storage and native callees; these declarations allocate nothing. */
+#ifndef REBREW_SERVER
+extern VFS_DIR* g_6b7fdc;
+extern int g_6b7fec;
+extern char g_6b7fe4[];
+extern char g_6b7fe0[];
+extern char g_6b7fe8;
+void __cdecl fcn_0042fc50(VFS_DIR*);
+void __cdecl fcn_0041d9e0(char*);
+#define g_vfs_root g_6b7fdc
+#define g_stream_count g_6b7fec
+#define g_stream_pool g_6b7fe4
+#define g_vfs_item_pool g_6b7fe0
+#define g_vfs_case_sensitive g_6b7fe8
+#define vfs_FreeDirs fcn_0042fc50
+#define ReportMessage fcn_0041d9e0
+#endif
 void __cdecl vfs_exit(char verbose)
 {
 
@@ -1852,8 +1869,10 @@ void __cdecl vfs_exit(char verbose)
 	char buf[0x100];
 	char* s;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", __LINE__, "vfs_exit(): enter", 1);
+	/* Placeholder: historical line 1856 preserves SERVER layout; native provenance is unproven. */
+#ifdef REBREW_SERVER
+	LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 1856, "vfs_exit(): enter", 1);
+#endif
 	if (g_vfs_root != 0) {
 		vfs_FreeDirs(g_vfs_root);
 		g_vfs_root = 0;
@@ -1875,3 +1894,13 @@ void __cdecl vfs_exit(char verbose)
 	}
 	g_vfs_case_sensitive = 0;
 }
+
+#ifndef REBREW_SERVER
+#undef g_vfs_root
+#undef g_stream_count
+#undef g_stream_pool
+#undef g_vfs_item_pool
+#undef g_vfs_case_sensitive
+#undef vfs_FreeDirs
+#undef ReportMessage
+#endif

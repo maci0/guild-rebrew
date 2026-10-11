@@ -1271,7 +1271,7 @@ broadcast.c). TL VA from the sweep table or the definition's comment.
 | `vfs_CompareKey` | `Units/vfs/vfs.c` | see source |
 | `vfs_CompareKeyNoCase` | `Units/vfs/vfs.c` | see source |
 | `vfs_CompareNames` | `Units/vfs/vfs.c` | see source |
-| `vfs_exit` | `Units/vfs/vfs.c` | 0x4310f0 |
+| `vfs_exit` (inferred) | `Units/vfs/vfs.c` | TL 0x4310f0 / GOLD 0x431510 |
 | `vfs_fgetc` | `Units/vfs/vfs.c` | 0x430870 |
 | `vfs_fgets` | `Units/vfs/vfs.c` | 0x4308a0 |
 | `vfs_FindDir` | `Units/vfs/vfs.c` | see source |

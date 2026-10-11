@@ -3,6 +3,37 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (shared VFS shutdown): TL0x4310f0 and GOLD0x431510 now bind
+  the existing vfs_exit body in Develop/Units/vfs/vfs.c. Its name remains
+  inferred. Scoped client declarations refer to existing storage and native
+  callees; they allocate nothing. Only this body's historical placeholder entry
+  log is guarded for SERVER, with its previous line1856 frozen to preserve the
+  measured object. That log's native provenance remains unproven; other VFS
+  placeholder logs remain reconstruction debt, including in layout-flag-off
+  builds. No new assembly, storage, compiler flags or library edits are added.
+  Frozen old bindings reproduce both complete172-byte native bodies,16 typed
+  operands,53 reachable instructions and the full31-byte format literal each.
+  All13 actually shifted bindings fail each comparison. The final objects
+  preserve146 surrounding VFS bodies across SERVER normal/layout-flag-off and
+  both clients. The TL caller retains all35 bytes and six native operands after
+  reference binding and correcting its verbose parameter declaration to char.
+  There are149 freshly compiled bodies in the candidate/final checks; the two
+  retired baseline bodies retained in the receipts are evidence, not recompiles.
+  Both identities are rehomed through the CLI; the unowned45-line duplicate is
+  retired. Both client shutdowns and the caller freshly pass RELOC. TL's two
+  existing VFS size mismatches remain1526/1472 and496/368. All-target lint retains
+  zero errors and0/1/38 warnings. The full SERVER gate passes316 functions,
+  652 data comparisons, imports/exports/headers/relocations/Wine/library/toolchain
+  checks and complete286720-byte raw identity. All three coverage documents
+  are refreshed. The full-store audit scopes321 changed rows to316 SERVER
+  fingerprint/measurement refreshes and five affected client rows. Data/types/
+  source-provenance stores and every prior verdict, size and flag are retained.
+  Receipts: .scratch/goal21/shared-vfs-exit.
+  Next directory-cleanup evidence records both existing120-byte native bodies
+  against the current145-byte canonical body, which still contains an inferred
+  entry log. Preserve all later compiler-sensitive line values during any merge.
+  The complete three-image/shared-source goal remains active.
+
 - 2026-10-12 (pool iterator controls and qualifier-tool repair): both native
   m_pool_next bodies remain identical 131-byte functions plus 13 alignment NOPs;
   the current Processor Pack body is136 bytes with no relocations. The built-in
@@ -29,15 +60,16 @@ This file is the durable copy: if the session goal state is ever lost, re-create
   pr-check passes11721 tests/52 skips/126 warnings at88% coverage, source/hook
   checks and all package/parity/install/reproducibility/provenance/SBOM checks.
   The required pre-push full suite passed; both exec52385 and34838 are terminal.
-  PR22 is open at https://github.com/maci0/rebrew/pull/22 on exact remote
-  head34ebe5f71e9ebef245c128f6a75432f59caded2e. Package and CLI checks pass;
-  lint, hooks and both Python jobs are running. CI watch exec22504 is live;
-  revalidate that handle before any restart. Upstream main is unchanged.
-  Require every CI job on34ebe5f7, merge and
-  integrate while preserving the inherited edits, refresh the packaged matching
-  skill here, reverify the new compiler fingerprint, and remove both owned
-  worktrees/restoring root hooks. The complete three-image/shared-source goal,
-  client links/data, iterator match and faithful discarded SERVER code stay open.
+  PR22 merged as ac3a3e58595aec25620fa061a7e8cf1d0a065ffd after every CI
+  job passed on34ebe5f7, including Python3.13/3.14. Local integration a74d7821
+  has the same committed tree as origin/main. The inherited IDEAS/uv.lock bytes
+  and human Resembl3.2 checkout are preserved. The matching skill is refreshed;
+  scaffold drift is zero. Both owned worktrees are removed, root hooks restored,
+  and CI watch22504 is terminal. The final SERVER gate after integration passes
+  all316 functions,652 data comparisons and all286720 reference bytes with
+  compiler fingerprint497d935587b55b1df947479b7d089a1eff9da97556d95e05b58cc7c542c1a8d0.
+  No release assets or PyPI publication changed. Full client links/data, iterator
+  matching and faithful discarded SERVER source remain open.
 
 - 2026-10-12 (shared allocator shutdown unified): TL0x41e0c0 and GOLD0x422910
   now use the existing m_ShutdownAllocator body in Develop/Units/m_alloc/m_alloc.c
