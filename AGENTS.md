@@ -174,6 +174,10 @@ image hash are unchanged; a rebuilt image with different bytes or an input
 change returns it to RELOC until the next `rebrew verify --text --raw-link`, and any
 real byte difference demotes it as usual.
 
+`rebrew source rename` carries reviewed assembly provenance with definitions and
+file moves, refreshing only records current before the rename. Stale evidence
+stays stale. Reverify byte matches after renaming.
+
 `origins` records accepted external fields; `verification` records comparison
 inputs and measurement time independently of ordinary `updated_by` /
 `updated_at` edits. Re-run verification after source/header/compiler changes.

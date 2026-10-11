@@ -23,9 +23,11 @@ This file is the durable copy: if the session goal state is ever lost, re-create
   workflow guidance explain the behavior. Five cases fail before the fix;
   173 focused tests and11696 full local tests/52 skips pass, with the coverage
   gate and all source/package/reproducibility/provenance/SBOM checks and hooks.
-  Upstream PR20 is open with lint/hooks/CLI/package green; Python3.13/3.14
-  CI remains pending. Current game changes use the tested upstream CLI; no
-  manual managed-store repair or local rename workaround is introduced.
+  Upstream PR20 merged3a588ce9; every CI job, including Python3.13/3.14,
+  passed. Integrated locally with the inherited IDEAS/uv.lock edits preserved;
+  the changelog merge keeps all existing entries. Project agent guidance is
+  refreshed from the merged template. No manual managed-store repair or local
+  rename workaround is introduced.
   Original global/type/field names and storage owners, client shutdown
   integration, both full client raw links/data and faithful discarded-server
   source remain open. Receipts: .scratch/goal21/allocator-name. No game push
