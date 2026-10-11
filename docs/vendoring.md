@@ -44,6 +44,23 @@ the output tree, and rebuild.
 
 ## zlib 1.1.3
 
+The client inventory also binds these verified native bodies to the canonical
+`references/zlib/gzio.c`, rather than maintaining separate game-source copies:
+
+| Function | TL VA | Gold VA | Complete body |
+|---|---|---|---|
+| `gzwrite` | `0x45f630` | `0x463330` | 150 bytes |
+| `gzprintf` | `0x45f6d0` | not established here | 95 bytes |
+| `gzseek` | `0x45f890` | `0x463490` | 332 bytes |
+
+Unique stock-source matches and complete native-byte/operand controls support
+these bindings. The three duplicate source files are retired; the seek caller
+keeps its compiled bytes and typed operands after binding the canonical name.
+Gold's caller remains a size mismatch (449 compiled bytes versus 464 native).
+The `gzwrite` definition is identical to pristine 1.1.3. These bodies do not
+establish the complete original fork or remove the unresolved patches below.
+Receipts: `.scratch/goal21/zlib-source-ownership/`.
+
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by
 Gilles Vollant as `zlib113.zip`, same sources with CRLF line ends). The previous

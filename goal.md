@@ -3,6 +3,31 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (canonical zlib providers and upstream rename repairs): five
+  previously game-attributed identities now bind unchanged references/zlib/gzio.c
+  as LIBRARY: gzwrite150 in both clients, gzprintf95 in TL, gzseek332 in both.
+  Unique stock-source candidates and complete native-byte/operand controls
+  establish the providers. Three unowned copies are retired. The seek caller's
+  complete449-byte objects and23 typed operands in each client are unchanged
+  except the gzseek symbol spelling. TL stays RELOC449; Gold stays honestly
+  SIZE_MISMATCH449/464. No vendor patch, new assembly, storage or flag is added.
+  PR24 (bound sources outside reversed_dir) and PR25 (exported K&R names) are
+  merged upstream. Their full gates pass11733 and11743 tests,52 skips,88%
+  coverage, packages/reproducibility/provenance, push hooks and all seven CI
+  checks. Parser repair has six failing-before cases and290 focused passes;
+  typedef/member collision guards remain intact. ROOTf3fffedc integrates both,
+  preserving private IDEAS/uv.lock. Scaffold drift is zero; project rules remain.
+  The fresh full SERVER gate passes316/316 functions,652/652 data comparisons,
+  imports/exports/headers/relocations/layout/Wine/toolchain checks and every
+  286720 raw byte (SHA3cc2ce90...). All three coverage documents are refreshed.
+  Game match counts are251/3583/2082; library attribution is not reversing.
+  Scope audit: seven client rows and316 SERVER input refreshes; all statuses,
+  sizes/flags and data/types/SOURCE stay unchanged. Lint is zero errors with
+  the existing0/1/38 warnings. Receipts: .scratch/goal21/zlib-source-ownership.
+  Full client images/data, Gold seek's body gap, remaining library copies and
+  faithful discarded SERVER source remain unfinished. The five bodies do not
+  establish the entire original zlib fork or remove the unresolved vendor patches.
+
 - 2026-10-12 (AddFile operand controls and diff-size repair, upstream push running):
   Eighteen actual full-unit C probes preserve the existing attested copy
   instructions while testing operand scopes, assignment order, local spelling,

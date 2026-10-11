@@ -7,7 +7,7 @@ int __cdecl fcn_00465350(void* z, void* buf, int len);
 void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_0041d9e0(const char* msg);
-int __cdecl fcn_0045f890(void* gz, int off, int whence);
+int __cdecl gzseek(void* gz, int off, int whence);
 
 // FUNCTION: GOLD 0x430fa0
 // FUNCTION: GOLDTL 0x430a80
@@ -65,7 +65,7 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 					fcn_0041d9e0("Unsupported vfs_fseek(inzip,SEEK_END)");
 				}
 			} else if (s[0x13c] & 8) {
-				r = fcn_0045f890(*(void**) (s + 0x100), off, whence);
+				r = gzseek(*(void**) (s + 0x100), off, whence);
 				r = r != -1 ? 0 : -1;
 			} else {
 				r = fseek(*(FILE**) (s + 0x100), off, whence);

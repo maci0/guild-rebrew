@@ -61,3 +61,12 @@ binary-specific scratch proofs from missing reusable capabilities, and requires
 caller migration and duplicate removal when work moves upstream. Generated copies
 here are refreshed with `rebrew init --refresh-agents`; the naming rules below the
 project-rules marker are preserved. Archived scratch proof receipts stay intact.
+
+Upstream [PR #24](https://github.com/maci0/rebrew/pull/24) extends rename
+planning to explicitly bound compiled library sources outside `reversed_dir`,
+including other targets' providers in collision checks.
+[PR #25](https://github.com/maci0/rebrew/pull/25) fixes exported K&R names through
+the shared tree-sitter resolver while preserving typedef and member guards.
+These repairs let the existing CLI bind the verified zlib calls without changing
+vendor C or adding a local rename tool. The packaged workflow reference covers
+the outside-tree provider binding; refreshed project skills have zero drift.
