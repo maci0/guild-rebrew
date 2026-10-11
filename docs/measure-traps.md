@@ -8,6 +8,16 @@ in this file.
 Companion reading: `msvc6-c-shapes.md` (front-end shapes), `msvc6-allocator.md`
 (register allocation and slot maps), `TODO.md` (round-by-round history).
 
+- A discovery region can include alignment beyond the actual function.
+  TL0x41e1d0/GOLD0x422a20 m_PoolAlloc is261 bytes,103 reachable instructions
+  and two returns, followed by11 NOPs. Complete CFG and fully bound operands
+  prove the extent; a chosen prefix length or first return does not.
+  `rebrew test --size 261` measures and persists the corrected extent through
+  the locked writer. Catalog rows retain the272-byte discovery region and
+  hash its code without padding; status counts261 body bytes plus11 padding
+  bytes. Keep those scopes distinct. Evidence:
+  `.scratch/goal21/pool-alloc-upstream/native-proof.json` and `status.json`.
+
 - Verify the ruler's reported VA, symbol and extent before accepting its score.
   A positional `diagnose probe 0x499a50` formerly resolved a shared source but
   selected its first annotation47ddf0, giving a misleading66/66. Upstream

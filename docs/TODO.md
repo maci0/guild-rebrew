@@ -6,6 +6,29 @@ Current reconstruction checkpoint (2026-10-11):
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
 
+- 2026-10-11 (shared pool allocator extent): native CFG proves TL0x41e1d0
+  and GOLD0x422a20 contain261 bytes,103 reachable instructions and two returns;
+  the next11 NOPs are alignment. The existing canonical m_PoolAlloc already
+  matches both complete bodies, including four typed operands and two full
+  literals per client, with three rejecting shifted-symbol controls each.
+  `rebrew test --size 261` records fresh RELOC261/261 through the managed writer;
+  no C, headers, assembly, flags, storage or library bytes change. Existing fill
+  assembly evidence is recorded separately with the native34-byte operand-homed
+  macro and prior compiler/stock-library controls. Game match counts become
+  SERVER251/TL3584/GOLD2082; all-target lint has0 errors and0/1/38 warnings.
+  Coverage is refreshed for all3 targets: catalog regions retain272 discovery
+  bytes, while code hashes exclude11 NOPs and status accounts261 body bytes.
+  The full server gate passes316/316 functions,652/652 data, Wine/library and
+  toolchain checks, and every286720 raw reference byte. Data/type stores and
+  all other function statuses remain unchanged. Original names/fields/owners,
+  full client raw links and faithful discarded-server source remain open.
+  Upstream PR19 fixes diff/GA losing shared-root headers in temporary compiles;
+  merged3d271d64, integrated locally with inherited edits preserved. Both MSVC
+  and GCC regressions fail before the fix;175 focused tests,11689 full local
+  tests/52 skips at88% coverage, all local checks/hooks and both Python CI jobs
+  pass. Temporary validation checkouts are removed and root hooks restored.
+  Receipts: .scratch/goal21/pool-alloc-upstream. No game push/live sync.
+
 - 2026-10-11 (shared pool deallocator): TL0x41e2e0/GOLD0x422b30 now bind
   the canonical m_pool_free in Develop/Units/m_alloc/m_alloc.c. Only the two
   fatal diagnostics are SERVER-specific; the common bounds, slot accounting
