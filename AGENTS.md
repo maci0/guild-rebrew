@@ -218,6 +218,11 @@ library-derived code. It does not choose the provider.
 When both a source and a map entry exist, the source wins. Keep compiled
 library results separate from game reversing progress.
 
+Bind placeholder calls to an existing function or header-owned `LIBRARY` identity
+with `rebrew source rename PLACEHOLDER MODULE.0xVA --dry-run`, then apply after
+reviewing the preview. Name binding preserves the destination identity/verdict;
+establish its build provider separately through source, archive and raw-map evidence.
+
 - **Link stock libraries. Never patch a `.lib`.** When a library object drags
   in something the reference does not have (an extra import, duplicate data),
   displace it with a local definition of the symbols it provides, or change

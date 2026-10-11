@@ -3,6 +3,36 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-11 (upstream target discovery and library reference binding):
+  The remaining local CLI fixes are submitted as draft PR21:
+  https://github.com/maci0/rebrew/pull/21. Bare --target/-t lists configured
+  targets without running the command; status explains stored data verdicts.
+  Explicit placeholder binding accepts managed LIBRARY identities in headers,
+  retaining destination identities/verdicts and rejecting affected-file conflicts.
+  Seven regression cases fail on upstream;405 focused and43 boundary tests pass.
+  Full pr-check passes11714 tests/52 skips at88% coverage, all hooks, source and
+  packaging checks. Guidance follow-up0fc33ec5 updates the packaged agent
+  template, workflow reference and CLI docs;174 scaffold/workflow/binding tests
+  and rebuilt package/parity/install/reproducibility/provenance/SBOM checks pass.
+  Project agent/skill copies are refreshed. The full SERVER gate again passes
+  316 functions/652 data comparisons and all286720 raw bytes. Only316 SERVER
+  tool fingerprints/measurement times refresh; identities, sizes, statuses,
+  source/header/reference inputs and both client stores are unchanged. All3
+  coverage documents are refreshed; inherited upstream IDEAS/uv.lock edits
+  remain byte-identical. No game source or library bytes changed.
+  PR21 is not merged: remote headc0de16f0 contains the functional fix; the
+  guidance push is running its required full test hook in exec session8639.
+  Revalidate that same handle before any restart. Then confirm remote head
+  0fc33ec5, update the PR body/ready state, wait for every CI job on that head,
+  merge, integrate locally while preserving inherited edits, confirm the
+  compiler hash still720b06bb3e273ca06402aeaecba151248c385765c518061079a9c0e49ff3ad91,
+  and remove the owned temporary worktrees after completion. Checkout:
+  /tmp/rebrew-rename-provenance.20698znm/rebrew. Receipts:
+  .scratch/goal21/cli-library-upstream. Client shutdown sharing, both complete
+  client raw images/data and faithful discarded SERVER source remain open.
+  There is one original server.dll; layout-flag builds are reconstruction
+  configurations. Full three-image/shared-source goal stays active.
+
 - 2026-10-11 (attested allocator name and provenance-safe rename): the
   native SERVER diagnostic attests m_alloc(). The shared definition,84 source/
   header files and SERVER/TL/GOLD identities now use that spelling, with the

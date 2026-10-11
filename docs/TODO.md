@@ -6,6 +6,22 @@ Current reconstruction checkpoint (2026-10-11):
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
 
+- 2026-10-11 (CLI/workflow fixes submitted upstream): draft Rebrew PR21
+  https://github.com/maci0/rebrew/pull/21 contains target discovery, data-status
+  explanation and library-reference binding. Seven baseline regressions fail;
+  11714 full tests/52 skips pass at88% coverage with full local release checks.
+  Follow-up0fc33ec5 documents binding/provider checks in the agent template,
+  workflow reference and CLI docs;174 scoped checks and final package checks
+  pass. Project agent/skills and all3 coverage documents are refreshed.
+  SERVER gate passes316/316 functions,652/652 data and raw286720-byte identity.
+  Only316 SERVER measurement fingerprints/times change; source inputs,
+  identities, sizes, statuses and both client stores are unchanged.
+  Final push hook is still running; PR21 remains draft/unmerged. Finish the
+  push/CI/merge/integration before returning to client shutdown sharing.
+  Inherited upstream edits are preserved. Receipts:
+  .scratch/goal21/cli-library-upstream. The full client images and faithful
+  discarded SERVER source remain open; no game push/live sync.
+
 - 2026-10-11 (attested allocator name and provenance-safe rename): the
   native SERVER diagnostic attests m_alloc(). The shared definition,84 source/
   header files and SERVER/TL/GOLD identities now use that spelling, with the
