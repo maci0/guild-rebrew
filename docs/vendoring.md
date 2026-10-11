@@ -145,3 +145,35 @@ revision. The exact modified distribution remains unidentified. No vendor
 source, patch body, generated file, archive, compiler flag or link rule was
 changed by this audit. Download hashes, source comparisons, binary literals and
 author build notes are recorded in `.scratch/goal21/vendor-version-audit/`.
+
+
+## Workaround removal probes (2026-10-11)
+
+Fresh isolated MSVC 6 builds tested removal against the current 286720-byte
+raw reference. Production sources, objects, link inputs and image were held
+unchanged; these are counterfactual links, not accepted release builds.
+
+| Candidate | Differing bytes | Finding |
+|---|---:|---|
+| Stock version literals instead of zlib 0002 | 17 | Function addresses, imports and section sizes stay unchanged; literal/pointer order differs |
+| Stock literals plus stock `compress.c` | 16663 | Literal placement is correct, but one extra compiler object and CRT placement differ |
+| Same, with the extension table owned by VFS rather than its standalone source | 16579 | Original compiler-object counts are restored, but 97 symbols still move; `.text` grows 16 bytes and `.reloc` grows 12 bytes |
+| Ordinary read-only storage, removing zlib 0003/0004, minizip 0002 and `/ORDER` | 6123 | Original section sizes and compiler-object counts remain, but game pools, library tables and CRT read-only data move |
+
+The last probe also removes selectany from the three game read-only scaffold
+units, the `mark` anchor and the 15 external anchors for tables restored to
+private stock storage. Of its differences, 5339 are in `.rdata`, 275 in
+`.text`, 62 in `.data` and 445 in `.reloc`. All four successful links retain
+the reference's import identities, IAT addresses and hints. This rules out
+extra imports as their cause; matching section sizes or compiler-object counts
+alone does not establish a correct link.
+
+Moving the extension table to its using module is a plausible ownership repair,
+but it does not by itself establish the original object composition. Adding
+stock `compress.c` still changes CRT placement even though its compressor bodies
+are discarded. These candidates therefore cannot replace the current patches
+while preserving raw identity. No new dummy code, archive edits or postlink
+byte fixes were introduced. The remaining removal work is to recover the
+original read-only owners and object composition, alongside discarded server
+source. Recipes, maps, logs, complete byte comparisons and preserved-input
+hashes are in `.scratch/goal21/vendor-workaround-removal/`.

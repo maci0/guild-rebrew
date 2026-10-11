@@ -3,6 +3,27 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-11 (vendor removal probes and target status): four fresh isolated
+  native links test stock version literals, stock compress.c, VFS ownership,
+  and ordinary read-only storage without /ORDER. They differ by 17, 16663,
+  16579 and 6123 bytes respectively. VFS ownership restores the original Rich
+  compiler-object counts, but does not restore CRT placement. Natural readonly
+  storage preserves section sizes and counts but moves pools and tables. All
+  import identities, IAT slots and hints stay equal; production inputs and
+  raw server identity stay intact. No patch was removed and no archive,
+  compiler flag, canonical link rule or postlink bytes changed. Recovering
+  original read-only owners and discarded-source composition remains required.
+  Receipts: .scratch/goal21/vendor-workaround-removal.
+  User's TL data status is accurate: all 283 visible rows are unchecked,
+  initialized-data verification is 0/335380 bytes, and no TL raw build is
+  available for comparison. Upstream local commit 27544cea makes a bare
+  shared --target/-t list configured targets without command execution, honors
+  --root/JSON, preserves default/named selection and target-creation options,
+  and explains unverified data in status. 303 focused tests and applicable
+  hooks pass; inherited upstream uv.lock/IDEAS diffs are unchanged. Receipts:
+  .scratch/goal21/target-status-{tests,hooks,commit}.log. No push/live sync.
+  All-three-image and faithful unified-source goals remain open.
+
 - 2026-10-11 (shared allocator helpers): canonical m_is_tracked and
   m_pool_free_all now serve both clients. Four function identities and four
   extern declaration rows move through locked writers; 31 caller files bind
