@@ -10,7 +10,7 @@ struct Node {
 };
 
 extern Node* g_6b6f84;
-void __cdecl fcn_0064dfda(void* p);
+void __cdecl free(void* p);
 
 void __cdecl fcn_0041f940(Node* n)
 {
@@ -30,5 +30,5 @@ void __cdecl fcn_0041f940(Node* n)
 	} else {
 		g_6b6f84 = 0;
 	}
-	fcn_0064dfda(n);
+	free(n);
 }

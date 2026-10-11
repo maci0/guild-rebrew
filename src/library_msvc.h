@@ -982,3 +982,7 @@
 
 // LIBRARY: SERVER 0x1001A643
 // __cinit (crt0dat.obj .text, static: absent from the archive symbol index; mapped by scripts/map_libcmt.py)
+
+/* Gold uses the stock single-threaded free.obj body; raw-map provider pending. */
+// LIBRARY: GOLD 0x005dec24
+// _free

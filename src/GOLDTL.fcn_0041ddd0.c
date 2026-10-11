@@ -8,7 +8,7 @@ extern int g_6b6f64;
 extern MemBlock* g_6b6f80;
 extern int g_6b6f6c;
 extern int g_6b6f68;
-void __cdecl fcn_0064dfda(void* p);
+void __cdecl free(void* p);
 
 void __cdecl fcn_0041ddd0(void* p)
 {
@@ -32,7 +32,7 @@ void __cdecl fcn_0041ddd0(void* p)
 	}
 	size = s->size;
 	s->ptr = 0;
-	fcn_0064dfda(p);
+	free(p);
 	g_6b6f6c--;
 	s->pool->used_blocks--;
 	g_6b6f68 -= size;

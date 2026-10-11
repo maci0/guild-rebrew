@@ -72,7 +72,7 @@
 // ___RTCastToVoid
 
 // LIBRARY: GOLDTL 0x0064dfda
-// ___RTCastToVoid
+// _free
 
 // LIBRARY: GOLDTL 0x0064e0c3
 // _malloc

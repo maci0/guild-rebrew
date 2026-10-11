@@ -1,5 +1,20 @@
 Current reconstruction checkpoint (2026-10-11):
 
+- Stock CRT deallocator binding prerequisite completed. Full archive bodies
+  identify TL64dfda as233-byte LIBCMT free and Gold5dec24 as105-byte LIBC free;
+  the old TL RTCastToVoid prefix label is corrected and Gold's identity added.
+  Three shared client sources call free directly through the stock library.
+  Six full native caller proofs cover734 bytes and62 typed operands, including
+  26 CRT calls; all6 freshly verify. Server raw bytes remain reference-identical
+  and the full gate passes316/316 functions and652/652 data. Upstream df26aadd
+  supports binding to library identities, with133 focused checks, all hooks and
+  isolated pinned full suite11655pass/52skip. Existing dependency edits are
+  preserved; no library implementation/storage/archive change was introduced.
+  Next: merge the client117-byte and server188-byte tracked-free implementations
+  into their shared unit while preserving native build differences. Validate
+  Gold's complete CRT member selection before its full client raw link.
+  Receipts:.scratch/goal21/stock-free-binding; full client image goals remain open.
+
 - Temporary historical server variant, explicitly authorized by the user:
   REBREW_LEGACY_SERVER_LAYOUT is enabled only for the server target and guarded
   together with REBREW_SERVER. The two shared units retain their reconstructed

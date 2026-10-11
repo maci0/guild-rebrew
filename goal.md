@@ -3,6 +3,28 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-11 (stock CRT deallocator binding prerequisite): complete stock
+  archive comparisons uniquely identify client free: TL64dfda is233 bytes
+  from multithreaded LIBCMT; Gold5dec24 is105 bytes from single-threaded LIBC.
+  Corrected TL's ambiguous RTCastToVoid label and added Gold's library identity
+  through locked writers. Three shared client sources now call free directly;
+  no CRT implementation, data storage or archive patch was added. Six whole
+  native proofs preserve734 bytes and62 typed operands, including26 free calls,
+  with rejecting wrong-target controls. All6 callers freshly verify under2.25.0;
+  game match counts remain SERVER251/TL3583/Gold2081. The server full gate passes
+  316/316 functions,652/652 data,100 imports,Wine exports and raw identity.
+  Upstream df26aadd lets source rename bind placeholders to managed library
+  headers and scopes destination conflicts to affected files.133 focused checks,
+  all hooks and an isolated pinned-dependency suite11655pass/52skip/119warnings
+  pass. Seven initial environment/packaging failures reproduce on unmodified
+  cfd6f58a; the local tool checkout was fast-forwarded to published2.25.0 before
+  applying the fix. Inherited uv.lock/IDEAS edits and the existing Resembl
+  checkout are preserved. Full client raw links and original-source fidelity
+  remain open. Next: consolidate the actual117-byte client tracked-free body
+  with the188-byte server body, retaining native logging/underflow differences.
+  Gold's provisional runtime link selection needs other-member evidence before
+  its raw link. Receipts:.scratch/goal21/stock-free-binding. No push/live sync.
+
 - 2026-10-11 (user-authorized temporary historical server variant): the user
   requested `#ifdef` isolation while faithful reconstruction continues. The
   server alone defines REBREW_LEGACY_SERVER_LAYOUT alongside REBREW_SERVER.

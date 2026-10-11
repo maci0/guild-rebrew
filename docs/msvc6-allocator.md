@@ -2297,6 +2297,33 @@ equivalence, 2+2 states).  The earlier exact-bytes `_emit` fence that
 reached EXACT 472/472 was reverted (goal constraint: inline asm only for
 1-5 byte padding), so the symbolic-proof path stands.
 
+## Client tracked-free CRT binding (2026-10-11)
+
+The shared client tracked-free helper at TL `0x0041ddd0` / Gold `0x00422620`
+calls stock CRT `free`, not a game helper. Complete stock archive bodies identify
+TL `0x0064dfda` as the 233-byte multithreaded `LIBCMT.LIB:free.obj` body and
+Gold `0x005dec24` as the 105-byte single-threaded `LIBC.LIB:free.obj` body. Both
+matches are unique over the complete archive body, with rejecting fixed-byte
+controls. TL's old `___RTCastToVoid` annotation came from an ambiguous short
+comparison and is corrected. Gold's corresponding library identity is added.
+These are library-origin findings; the actual archive provider still requires
+each client's future raw link map. Gold's provisional `LIBCMT` link list needs
+review against the other CRT members before selecting its complete runtime.
+
+The three shared client sources for tracked-free, octree cleanup and list-node
+removal now call `free` directly. Six complete native caller comparisons cover
+734 bytes and 62 typed relocation operands, including 26 CRT calls. Binding
+`free` four bytes away rejects every caller. Before/after complete COFF contexts
+preserve function bytes, relocation identities and literal contents. All six
+identities freshly verify without changing their byte-match status. No CRT C
+implementation, storage allocation or archive patch is introduced.
+
+The server's 188-byte tracked-free helper includes invalid-pointer logging and
+underflow reporting; the clients' 117-byte helper does not. The shared-source
+consolidation must retain those native build differences. The client helper is
+still in its existing file pending that consolidation. Evidence:
+`.scratch/goal21/stock-free-binding/{stock-free-proof.json,caller-before.json,caller-after.json,client-verification.json}`.
+
 ## Finding 20: m_FreeTracked (0x10006820): transient-register alternation (185/188)
 
 The reference's post-`free` block alternates edx/ecx for the four global
