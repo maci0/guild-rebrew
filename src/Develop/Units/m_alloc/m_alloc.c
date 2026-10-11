@@ -1137,13 +1137,17 @@ void __cdecl m_pool_free(int* pool, int* block)
 
 	slot = (int*) ((char*) block - 4);
 	if (slot == 0 || *slot == 0) {
+#ifdef REBREW_SERVER
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid pool-entry (or overwritten void*)!");
+#endif
 		return;
 	}
 	blk = (int*) *slot;
 	if ((unsigned int) (char*) block < (unsigned int) ((char*) blk + 0x10) ||
 	    (unsigned int) (char*) block >= (unsigned int) ((char*) blk + 0x10 + blk[2] * blk[1])) {
+#ifdef REBREW_SERVER
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid pool-entry (or overwritten void*)!");
+#endif
 		return;
 	}
 	*slot = 0;

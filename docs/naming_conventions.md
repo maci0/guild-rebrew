@@ -3,6 +3,18 @@
 Reconstructed from debug strings, error messages, and binary analysis of
 `server.dll` and `Europa1400Gold_TL.exe`. Developer: 4HEAD Studios (German).
 
+### Shared pool deallocation (2026-10-11)
+
+`m_pool_free` is attested by the SERVER fatal diagnostic at0x10006e30.
+The corresponding TL0x41e2e0/GOLD0x422b30 names and unit placement remain
+inferred from the same16-byte pool-block layout, slot/bounds/unlink logic and
+calls to the shared tracking deallocator. One canonical definition now serves
+all three targets; only SERVER reports invalid entries. The complete112-byte
+client bodies retain both native call operands, while the137-byte server body
+and every caller remain unchanged. The duplicate client `Chunk` definition is
+retired with its source. Existing `M_POOL_BLOCK` field names and global owners
+remain provisional. Evidence: `.scratch/goal21/shared-pool-free`.
+
 ### Native MSX and D3 unit placement (2026-10-11)
 
 TL420840 directly references the attested `D:\develop\units\Msx\msx.c` path.
@@ -1549,7 +1561,8 @@ Shared allocator helper bindings (2026-10-11): m_TRACKED_SLOT_COUNT and
 m_TRACKED_SLOTS are private build-time aliases for existing server/client
 numeric declarations, not recovered developer names or additional globals.
 One loop retains the native access order and register allocation in both
-clients and both server variants. Six shifted native operand controls reject;
+clients, the normal server build and a legacy-flag-off compile. Six shifted
+native operand controls reject;
 all four client helper bodies exactly retain 206 bytes. Names, declaration
 ownership and removal of the compatibility bindings remain reconstruction
 work. Evidence: `.scratch/goal21/shared-allocator-helpers/`.

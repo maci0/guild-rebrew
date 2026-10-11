@@ -3,11 +3,48 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-11 (shared pool deallocator): TL0x41e2e0/GOLD0x422b30 now bind
+  the canonical m_pool_free in Develop/Units/m_alloc/m_alloc.c. Only the two
+  fatal diagnostics are SERVER-specific; the common bounds, slot accounting
+  and unlink logic are unchanged. The duplicate 51-line client source and its
+  private Chunk definition are retired; six caller files use the shared name.
+  Both complete 112-byte client bodies match native bytes with all four call
+  operands bound, and reject shifted-callee controls. Surrounding allocator
+  bodies and 11 caller contexts retain their instructions, typed operands and
+  compiler literals; all 14 native caller operands independently retain their
+  targets. All 25 affected existing client matches pass (15 TL / 10 Gold).
+  The normal server gate passes 316/316 functions, 652/652 data and all 286720
+  raw bytes, plus Wine exports, library and toolchain checks. The experimental
+  legacy-flag-off compile is a check of our source, not another original server.
+  All statuses, data/types/provenance, flags, layout and stock libraries are
+  preserved; coverage is refreshed for all three targets. The standalone C
+  backlog decreases to 3831. Client names and storage owners remain inferred
+  or unresolved; full client raw links and faithful discarded-server source
+  remain open. Receipts: .scratch/goal21/shared-pool-free. No push/live sync.
+
+- 2026-10-11 (upstream tooling and workflow cleanup): upstream PR18 is merged
+  as f81f6828. Generic pinned-source vendoring lives in `rebrew library vendor`;
+  CMake uses it, 37 duplicate/obsolete scripts are retired, and nine project
+  helpers remain. The packaged AGENTS template and workflow/data skills now
+  route work to existing commands/public APIs before adding helpers; project
+  copies are refreshed with local naming rules retained. Game commit e6135bc9
+  records cleanup and fresh SERVER verification. All11687 local upstream tests,
+  88% coverage, both Python CI jobs and packaging/provenance/reproducibility
+  checks pass; all11 project tests and the complete server gate pass. The raw
+  server remains identical at286720 bytes, with316 functions and652 data rows.
+  Temporary validation worktrees are removed; inherited upstream edits survive.
+  Archived scratch receipts are retained, not replayed. There is one original
+  server.dll: references below to server "variants" mean reconstruction compile
+  settings with the temporary REBREW_LEGACY_SERVER_LAYOUT flag on/off, not two
+  original server builds. Faithful discarded source and both complete client
+  raw links remain open. Receipts: .scratch/upstream-tooling.
+
 - 2026-10-11 (shared allocator initializer): TL 0x41de50 and Gold 0x4226a0 now
   bind to the existing canonical m_init in Develop/Units/m_alloc/m_alloc.c.
   The duplicate 96-line client file is removed; canonical C and all caller
   declarations/bodies are unchanged. Six native comparisons (old/shared clients
-  and both server profiles) preserve 972 bytes and 108 explicit operands,
+  plus the normal server build and a legacy-flag-off compile) preserve 972 bytes
+  and 108 explicit operands,
   rejecting 98 shifted-binding controls. Each distinct native body is 162 bytes
   with 18 relocations; the original 26-byte operand-homed fill macro remains.
   Both client identities freshly verify 162/162 from the canonical source.
@@ -74,7 +111,8 @@ This file is the durable copy: if the session goal state is ever lost, re-create
   files bind to the shared symbol through the CLI, and the duplicate source is
   retired.115 caller contexts preserve26641 bytes/1535 typed operands; four
   distinct native compiler/define contexts preserve the other13 allocator
-  bodies and both server variants. Two fully bound client bodies retain234
+  bodies in the normal server build and a legacy-flag-off compile. Two fully
+  bound client bodies retain234
   native bytes/18 typed operands, with12 rejecting wrong-binding controls.
   All115 affected client identities freshly verify(88TL/27Gold), preserving
   every existing status and game match counts251/3583/2081. All-target lint
@@ -268,10 +306,11 @@ session end.
   the test/diff loop stalls.
 - `rebrew verify --json` / `--full` — bulk check; `rebrew lint --json` —
   annotation validity; `rebrew data list --json` — globals inventory.
-- Judge candidates with `scripts/linktest.sh <file.c`, not object scores:
+- Judge candidates with an isolated raw native link and the full gate, not object scores:
   positional `match_count` and structural `aligned` routinely disagree with
   the link (one hoist: aligned 662 → 665, match 1004 → 947, link +42 worse).
-  When rulers disagree, link and measure.
+  When rulers disagree, link and measure. The historical `linktest.sh` is retired;
+  use current build/placement CLI commands and public APIs (docs/tooling-upstream.md).
 - Run `scripts/gate.sh` before every commit: build integrity, clean lint,
   raw CMake build, linked EXACT, data/import placement, Wine exports and
   independent whole-file identity. Never weaken its checks or lower a passing

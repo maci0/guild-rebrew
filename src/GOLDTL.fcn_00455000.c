@@ -19,7 +19,7 @@ typedef struct Cell {
 extern char g_6b89a0[];
 extern char g_6b89a4[];
 
-void __cdecl fcn_0041e2e0(void*, void*);
+void __cdecl m_pool_free(void*, void*);
 
 char __cdecl fcn_00455000(char* e, Cell* c)
 {
@@ -47,13 +47,13 @@ char __cdecl fcn_00455000(char* e, Cell* c)
 		c->tail = prev;
 	}
 	c->count--;
-	fcn_0041e2e0(g_6b89a4, l);
+	m_pool_free(g_6b89a4, l);
 	for (i = 0; i < 4; i++) {
 		ch = c->child[i];
 		if (ch != 0) {
 			fcn_00455000(e, ch);
 			if (ch->count == 0) {
-				fcn_0041e2e0(g_6b89a0, ch);
+				m_pool_free(g_6b89a0, ch);
 				c->child[i] = 0;
 			}
 		}

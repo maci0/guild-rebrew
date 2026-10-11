@@ -6,11 +6,31 @@ Current reconstruction checkpoint (2026-10-11):
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
 
+- 2026-10-11 (shared pool deallocator): TL0x41e2e0/GOLD0x422b30 now bind
+  the canonical m_pool_free in Develop/Units/m_alloc/m_alloc.c. Only the two
+  fatal diagnostics are SERVER-specific; the common bounds, slot accounting
+  and unlink logic are unchanged. The duplicate 51-line client source and its
+  private Chunk definition are retired; six caller files use the shared name.
+  Both complete 112-byte client bodies match native bytes with all four call
+  operands bound, and reject shifted-callee controls. Surrounding allocator
+  bodies and 11 caller contexts retain their instructions, typed operands and
+  compiler literals; all 14 native caller operands independently retain their
+  targets. All 25 affected existing client matches pass (15 TL / 10 Gold).
+  The normal server gate passes 316/316 functions, 652/652 data and all 286720
+  raw bytes, plus Wine exports, library and toolchain checks. The experimental
+  legacy-flag-off compile is a check of our source, not another original server.
+  All statuses, data/types/provenance, flags, layout and stock libraries are
+  preserved; coverage is refreshed for all three targets. The standalone C
+  backlog decreases to 3831. Client names and storage owners remain inferred
+  or unresolved; full client raw links and faithful discarded-server source
+  remain open. Receipts: .scratch/goal21/shared-pool-free. No push/live sync.
+
 - 2026-10-11 (shared allocator initializer): TL 0x41de50 and Gold 0x4226a0 now
   bind to the existing canonical m_init in Develop/Units/m_alloc/m_alloc.c.
   The duplicate 96-line client file is removed; canonical C and all caller
   declarations/bodies are unchanged. Six native comparisons (old/shared clients
-  and both server profiles) preserve 972 bytes and 108 explicit operands,
+  plus the normal server build and a legacy-flag-off compile) preserve 972 bytes
+  and 108 explicit operands,
   rejecting 98 shifted-binding controls. Each distinct native body is 162 bytes
   with 18 relocations; the original 26-byte operand-homed fill macro remains.
   Both client identities freshly verify 162/162 from the canonical source.
@@ -57,7 +77,8 @@ Current reconstruction checkpoint (2026-10-11):
   matches freshly verify(88TL/27Gold), retaining251/3583/2081 game matches.
   Both client bodies match
   all native bytes/18 operands, with12 rejecting wrong-binding controls; the
-  other13 allocator bodies and both server variants are preserved. Full server
+  other13 allocator bodies are preserved in the normal server build and a
+  legacy-flag-off compile. Full server
   gate passes316/316 functions,652/652 data,100 imports,Wine exports and raw
   whole-file identity. Existing data/type/source stores and stock libraries are
   untouched. Root standalone C backlog3832(down1). The shared name is inferred,

@@ -10,7 +10,7 @@ typedef struct Link {
 extern char g_6b89a0[];
 
 void* __cdecl fcn_0041e1d0(void*, int, int);
-void __cdecl fcn_0041e2e0(void*, void*);
+void __cdecl m_pool_free(void*, void*);
 char __cdecl fcn_004545c0(char*, char*);
 
 char* __cdecl fcn_00454630(char* src, float* lo, float* hi)
@@ -27,7 +27,7 @@ char* __cdecl fcn_00454630(char* src, float* lo, float* hi)
 		}
 	}
 	if (*(int*) (ctx + 0x30) == 0) {
-		fcn_0041e2e0(g_6b89a0, ctx);
+		m_pool_free(g_6b89a0, ctx);
 		return 0;
 	}
 	return ctx;

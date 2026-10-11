@@ -15,7 +15,7 @@ typedef struct Node {
 
 extern char g_6b7fe0[];
 
-void __cdecl fcn_0041e2e0(void*, void*);
+void __cdecl m_pool_free(void*, void*);
 void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_0042fc50(Node* n)
@@ -29,7 +29,7 @@ void __cdecl fcn_0042fc50(Node* n)
 		next = n->next;
 		while (it != 0) {
 			nx = *(char**) (it + 0x114);
-			fcn_0041e2e0(g_6b7fe0, it);
+			m_pool_free(g_6b7fe0, it);
 			it = nx;
 		}
 		if (n->data != 0) {

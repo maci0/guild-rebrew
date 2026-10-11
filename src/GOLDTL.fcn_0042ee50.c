@@ -15,7 +15,7 @@ extern char g_6b7fe0[];
 extern char g_6b7fe8;
 
 struct file_42ee50* __cdecl fcn_0041db70(int size, const char* tag);
-void __cdecl fcn_0041e2e0(char*, char*);
+void __cdecl m_pool_free(char*, char*);
 int __cdecl fcn_0042ee30(const void*, const void*);
 int __cdecl fcn_0042edf0(const void*, const void*);
 
@@ -54,7 +54,7 @@ void __cdecl fcn_0042ee50(char* dir, char recurse)
 			i++;
 			names += strlen(e) + 1;
 			next = *(char**) (e + 0x114);
-			fcn_0041e2e0(g_6b7fe0, e);
+			m_pool_free(g_6b7fe0, e);
 		}
 		*(char**) (dir + 0x114) = 0;
 		if (g_6b7fe8 != 0) {
