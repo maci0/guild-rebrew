@@ -8,7 +8,7 @@ extern char s_6ab408[];
 
 void __cdecl fcn_005b1ef0(void);
 int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
-char* __cdecl fcn_0041db70(int, char*);
+char* __cdecl m_AllocTracked(int, char*);
 
 /* The record zero-fill is the original's hand-written block-fill prelude;
  * no msvc6 C memset spelling emits it (docs/codegen-walls.md section 6b). */
@@ -27,7 +27,7 @@ int __cdecl fcn_005b1ff0(int fh)
 		char* p;
 		int n;
 
-		p = fcn_0041db70(0x4c, s_6ab408);
+		p = m_AllocTracked(0x4c, s_6ab408);
 		if (p == 0) {
 			goto fail;
 		}

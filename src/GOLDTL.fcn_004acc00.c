@@ -25,7 +25,7 @@ extern char g_67fbe8[];
 int __cdecl fcn_0042ff50(const char* name, const char* mode, int ctx);
 unsigned int __cdecl vfs_ReadData(void* buf, int size, int count, int stream);
 int __cdecl CloseVfsStream(int stream);
-void* __cdecl fcn_0041db70(int size, char* tag);
+void* __cdecl m_AllocTracked(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 #define HISTORICAL_MAGIC 0x68466153
@@ -63,11 +63,11 @@ int __cdecl fcn_004acc00(Table* t)
 		m_FreeTracked(t->first);
 		t->first = 0;
 	}
-	t->second = (Rec*) fcn_0041db70(t->n_second * sizeof(Rec), g_67fbe8);
+	t->second = (Rec*) m_AllocTracked(t->n_second * sizeof(Rec), g_67fbe8);
 	if (t->second == 0) {
 		goto fail_close;
 	}
-	t->first = (Rec*) fcn_0041db70(t->n_first * sizeof(Rec), g_67fbe8);
+	t->first = (Rec*) m_AllocTracked(t->n_first * sizeof(Rec), g_67fbe8);
 	if (t->first == 0) {
 		goto fail_close;
 	}

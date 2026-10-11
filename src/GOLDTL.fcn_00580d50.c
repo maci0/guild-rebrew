@@ -6,7 +6,7 @@ extern char g_6a840c[];
 extern char g_6a83f8[];
 extern int g_7749f8[];
 
-int* __cdecl fcn_0041db70(int size, char* tag);
+int* __cdecl m_AllocTracked(int size, char* tag);
 void __cdecl fcn_00580cf0(int);
 int __cdecl fcn_004c3100(char*, int);
 
@@ -17,7 +17,7 @@ int* __cdecl fcn_00580d50(void)
 	char* fdest;
 	int flen;
 
-	p = fcn_0041db70(0x74, g_6a8428);
+	p = m_AllocTracked(0x74, g_6a8428);
 	fdest = (char*) p;
 	if (p == 0) {
 		fcn_00580cf0(0);

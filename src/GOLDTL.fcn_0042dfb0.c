@@ -4,7 +4,7 @@ extern char* g_6b7fd4;
 extern char g_679e54[];
 extern char* g_679e2c;
 extern char* g_679e30;
-char* __cdecl fcn_0041db70(int size, char* tag);
+char* __cdecl m_AllocTracked(int size, char* tag);
 char* __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n);
 
 // FUNCTION: GOLD 0x42ea90
@@ -25,7 +25,7 @@ int __cdecl fcn_0042dfb0(unsigned short count)
 	if (g_6b7fd8 != 0) {
 		return -2;
 	}
-	g_6b7fd8 = fcn_0041db70(count * 0x84, g_679e54);
+	g_6b7fd8 = m_AllocTracked(count * 0x84, g_679e54);
 	if (g_6b7fd8 == 0) {
 		return -3;
 	}

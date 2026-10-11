@@ -3,7 +3,26 @@
 Reconstructed from debug strings, error messages, and binary analysis of
 `server.dll` and `Europa1400Gold_TL.exe`. Developer: 4HEAD Studios (German).
 
-### Shared tracker reporting and group layout (2026-10-11)
+### Shared tracked allocator and attested spelling (2026-10-11)
+
+SERVER0x10006580 (658 bytes), GOLDTL0x41db70 and GOLD0x4223c0
+(544 bytes each) share the canonical memory-allocation implementation in
+`Develop/Units/m_alloc/m_alloc.c`. The unit path is attested by SERVER's
+`__FILE__` strings; common native grouping, tracking and literal bytes support
+client placement in that unit. SERVER alone contains the three fatal diagnostics.
+No new storage or assembly is introduced. Scoped client aliases describe the
+existing tracker state; they do not establish global storage owners.
+
+The pre-initialization diagnostic explicitly spells `m_alloc()`. That attests
+the original allocator spelling. `m_AllocTracked` is the current reconstruction
+name; a consistent all-target/caller/header rename remains open. Existing
+`GroupNode`, field labels and numeric global spellings remain inferred or
+unresolved. Both complete client bodies, literals and all25 operands match;
+all185 checked caller operands independently retain their native destination.
+The private40-byte group and16-byte allocation-record layouts are unchanged.
+Receipts: `.scratch/goal21/shared-tracked-alloc`.
+
+## Shared tracker reporting and group layout (2026-10-11)
 
 The existing inferred `m_ReportGroupInfo` name now covers SERVER0x10006990,
 TL0x41df00 and GOLD0x422750 in the shared m_alloc unit. The SERVER source

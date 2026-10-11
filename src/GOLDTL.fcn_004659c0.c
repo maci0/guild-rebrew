@@ -23,7 +23,7 @@ extern char s_67d410[];
 extern char s_67d3d4[];
 
 int __cdecl fcn_00465850(void);
-char* __cdecl fcn_0041db70(int size, char* tag);
+char* __cdecl m_AllocTracked(int size, char* tag);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 char* __cdecl fcn_0047acf0(char* p);
 void __cdecl m_FreeTracked(char* p);
@@ -42,7 +42,7 @@ int __cdecl fcn_004659c0(int idx, char* path)
 				break;
 			}
 		}
-		((fcn_004659c0_Def*)g_772500)[idx].data = fcn_0041db70(((fcn_004659c0_Def*)g_772500)[idx].size, s_67d410);
+		((fcn_004659c0_Def*)g_772500)[idx].data = m_AllocTracked(((fcn_004659c0_Def*)g_772500)[idx].size, s_67d410);
 		if (((fcn_004659c0_Def*)g_772500)[idx].data == 0) {
 			sprintf(buf, s_67d3d4, idx, &((fcn_004659c0_Def*)g_772500)[idx]);
 			return 0;

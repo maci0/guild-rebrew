@@ -6,7 +6,7 @@ extern char g_67bd1c[];
 extern char g_67bd08[];
 extern char g_67bcf4[];
 
-void* __cdecl fcn_0041db70(int, void*);
+void* __cdecl m_AllocTracked(int, void*);
 void __cdecl fcn_0045b290(char*, int);
 
 char* __cdecl fcn_0045b700(int a1, int n, int a3)
@@ -14,12 +14,12 @@ char* __cdecl fcn_0045b700(int a1, int n, int a3)
 	char* g = 0;
 
 	if (n != 0) {
-		g = (char*) fcn_0041db70(0x34, g_67bd1c);
+		g = (char*) m_AllocTracked(0x34, g_67bd1c);
 		*(int*) (g + 0x30) = a3;
 		*(int*) (g + 0x20) = abs(n);
-		*(void**) (g + 0x28) = fcn_0041db70(abs(n) * abs(n), g_67bd08);
+		*(void**) (g + 0x28) = m_AllocTracked(abs(n) * abs(n), g_67bd08);
 		if (n > 0) {
-			*(void**) (g + 0x24) = fcn_0041db70(*(int*) (g + 0x20) * *(int*) (g + 0x20) * 0x1c, g_67bcf4);
+			*(void**) (g + 0x24) = m_AllocTracked(*(int*) (g + 0x20) * *(int*) (g + 0x20) * 0x1c, g_67bcf4);
 		} else {
 			*(void**) (g + 0x24) = 0;
 		}

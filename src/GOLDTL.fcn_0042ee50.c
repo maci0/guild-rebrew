@@ -14,7 +14,7 @@ struct file_42ee50 {
 extern char g_6b7fe0[];
 extern char g_6b7fe8;
 
-struct file_42ee50* __cdecl fcn_0041db70(int size, const char* tag);
+struct file_42ee50* __cdecl m_AllocTracked(int size, const char* tag);
 void __cdecl m_pool_free(char*, char*);
 int __cdecl fcn_0042ee30(const void*, const void*);
 int __cdecl fcn_0042edf0(const void*, const void*);
@@ -41,7 +41,7 @@ void __cdecl fcn_0042ee50(char* dir, char recurse)
 			len += strlen(e) + 1;
 		}
 		*(int*) (dir + 0x100) = n;
-		*(struct file_42ee50**) (dir + 0x104) = fcn_0041db70(len + n * sizeof(struct file_42ee50), "vfs:FinishedFiles");
+		*(struct file_42ee50**) (dir + 0x104) = m_AllocTracked(len + n * sizeof(struct file_42ee50), "vfs:FinishedFiles");
 		names = (char*) (*(struct file_42ee50**) (dir + 0x104) + *(int*) (dir + 0x100));
 		for (e = *(char**) (dir + 0x114), i = 0; e != 0; e = next) {
 			strcpy(names, e);

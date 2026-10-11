@@ -21,7 +21,7 @@ extern char s_67d420[];
 
 void __cdecl fcn_0041d9e0(const char* msg);
 int __cdecl fcn_00469890(void);
-int __cdecl fcn_0041db70(int size, char* tag);
+int __cdecl m_AllocTracked(int size, char* tag);
 int __cdecl fcn_0046b520(char* s, int font);
 char* __cdecl fcn_00466190(int id);
 void __cdecl fcn_0046f650(int slot, fcn_0046fac0_Win* parent);
@@ -41,7 +41,7 @@ int __cdecl fcn_0046fac0(int x, int y, char* text, int win)
 		return -1;
 	}
 	id = fcn_00469890();
-	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x88 / 4] = fcn_0041db70(0x101, g_67d5bc);
+	((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x88 / 4] = m_AllocTracked(0x101, g_67d5bc);
 	if (((fcn_0046fac0_Ent*)g_1015ea0)[id].i[0x88 / 4] == 0) {
 		return -1;
 	}

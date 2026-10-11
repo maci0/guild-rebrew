@@ -41,7 +41,7 @@ void *__cdecl fcn_0042ff50(char *, char *, int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 void __cdecl fcn_0041d9e0(char *);
 int __cdecl CloseVfsStream(void *);
-char *__cdecl fcn_0041db70(int, char *);
+char *__cdecl m_AllocTracked(int, char *);
 int __cdecl vfs_ReadData(char *, int, int, void *);
 int __cdecl fcn_00426ac0(char *, char *, int *);
 void __cdecl m_FreeTracked(void *);
@@ -74,8 +74,8 @@ Script *__cdecl fcn_00426d50(char *name)
 	}
 	g_14cb430 = i;
 	sc = &((Script*)g_6b7e94)[i];
-	tmp = fcn_0041db70(0xfa01, "ect_LoadScript:tmp");
-	out = fcn_0041db70(0xfa01, "ect_LoadScript:output");
+	tmp = m_AllocTracked(0xfa01, "ect_LoadScript:tmp");
+	out = m_AllocTracked(0xfa01, "ect_LoadScript:output");
 	memset(out, 0, 0xfa01);
 	memset(tmp, 0, 0xfa01);
 	vfs_ReadData(tmp, 0xfa00, 1, f);
@@ -86,9 +86,9 @@ Script *__cdecl fcn_00426d50(char *name)
 			break;
 		}
 	}
-	sc->debug = (int *) fcn_0041db70(sc->ndebug * 4, "evt:debuginfo");
+	sc->debug = (int *) m_AllocTracked(sc->ndebug * 4, "evt:debuginfo");
 	memcpy(sc->debug, g_14c93a0, sc->ndebug * 4);
-	sc->src = fcn_0041db70(len + 1, "evt_LoadScript:sc->SourceCode");
+	sc->src = m_AllocTracked(len + 1, "evt_LoadScript:sc->SourceCode");
 	sc->srclen = len + 1;
 	sc->f114 = 0;
 	sc->f110 = 0;
@@ -102,7 +102,7 @@ Script *__cdecl fcn_00426d50(char *name)
 	if (out != 0) {
 		m_FreeTracked(out);
 	}
-	sc->sp = sc->stack = fcn_0041db70(0x400, "evt:stack");
+	sc->sp = sc->stack = m_AllocTracked(0x400, "evt:stack");
 	sc->fc90 = g_6b8010;
 	sc->f104 = g_6791c8;
 	sc->fc60 = 0;

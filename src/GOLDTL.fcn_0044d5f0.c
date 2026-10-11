@@ -7,7 +7,7 @@ extern char g_662d18[];
 
 char* __cdecl fcn_0064f026(char* s, const char* delim);
 int __cdecl fcn_0064eeec(const char* s);
-void* __cdecl fcn_0041db70(int size, char* tag);
+void* __cdecl m_AllocTracked(int size, char* tag);
 
 // FUNCTION: GOLD 0x0044ed30
 // FUNCTION: GOLDTL 0x44d5f0
@@ -20,6 +20,6 @@ void __cdecl fcn_0044d5f0(int unused, char* s)
 	if (n > 0 && *(void**) (s + 0x20) == 0) {
 		*(int*) (s + 0x18) = 0;
 		*(int*) (s + 0x1c) = 0;
-		*(void**) (s + 0x20) = fcn_0041db70(0xe0000, g_67b63c);
+		*(void**) (s + 0x20) = m_AllocTracked(0xe0000, g_67b63c);
 	}
 }

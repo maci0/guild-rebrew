@@ -20,7 +20,7 @@ extern char g_102d040[];
 extern char s_67d410[];
 extern char s_6750e8[];
 
-char* __cdecl fcn_0041db70(int size, const char* tag);
+char* __cdecl m_AllocTracked(int size, const char* tag);
 
 // FUNCTION: GOLDTL 0x465ba0
 char* __cdecl fcn_00465ba0(int idx, const char* path)
@@ -30,7 +30,7 @@ char* __cdecl fcn_00465ba0(int idx, const char* path)
 	if (((VfsEntry*)g_772500)[idx].flags & 2) {
 		idx += g_772510;
 	}
-	buf = fcn_0041db70(((VfsEntry*)g_772500)[idx].size, s_67d410);
+	buf = m_AllocTracked(((VfsEntry*)g_772500)[idx].size, s_67d410);
 	if (path) {
 		g_772564 = fopen(path, s_6750e8);
 	} else {

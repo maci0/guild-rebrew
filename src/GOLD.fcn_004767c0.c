@@ -19,7 +19,7 @@ extern int g_6b7fb8;
 // GLOBAL: GOLD 0x5feb8c
 extern char s_67d8b0[];
 
-void* __cdecl fcn_004223c0(int size, const char* tag);
+void* __cdecl m_AllocTracked(int size, const char* tag);
 void* __cdecl fcn_00448200(int name, int a2);
 
 // FUNCTION: GOLD 0x004767c0
@@ -38,7 +38,7 @@ Sprite* __cdecl fcn_004767c0(int a1, int a2, int a3, int a4, int a5, int a6, int
 	if (i >= 0x20) {
 		return 0;
 	}
-	p = (Sprite*) fcn_004223c0(100, s_67d8b0);
+	p = (Sprite*) m_AllocTracked(100, s_67d8b0);
 	p->a1 = a1;
 	p->a2 = a2;
 	p->a3 = a3;

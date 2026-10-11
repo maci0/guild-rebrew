@@ -71,7 +71,7 @@ void __cdecl fcn_0044a390(Obj44a770* m);
 void __cdecl fcn_0044a290(Obj44a770* m);
 int __cdecl fcn_0044aec0(Obj44a770* m);
 void __cdecl fcn_0044a9f0(Obj44a770* m);
-void* __cdecl fcn_0041db70(int size, char* tag);
+void* __cdecl m_AllocTracked(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 Plane44a770* __stdcall D3DXPlaneFromPoints(Plane44a770* out, Vec3a770* a, Vec3a770* b, Vec3a770* c);
 Plane44a770* __stdcall D3DXPlaneNormalize(Plane44a770* out, Plane44a770* in);
@@ -111,7 +111,7 @@ void __cdecl fcn_0044a770(Obj44a770* m, char normals)
 			break;
 		}
 	}
-	m->texmat = (Mat44a770**) fcn_0041db70(m->ntex * 4, "d3io:StockObjectTextures");
+	m->texmat = (Mat44a770**) m_AllocTracked(m->ntex * 4, "d3io:StockObjectTextures");
 	for (i = 0; i < m->ntex; i++) {
 		for (j = 0; j < m->nfaces; j++) {
 			if (m->faces[j].tex == i && m->faces[j].mat >= 0) {
@@ -120,8 +120,8 @@ void __cdecl fcn_0044a770(Obj44a770* m, char normals)
 			}
 		}
 	}
-	m->facemat = (int*) fcn_0041db70(m->nfaces * 4, "d3io:StockObjectMaterials");
-	m->uvs = (Uv44a770*) fcn_0041db70(m->nfaces * 24, "d3io:StockObjectUVs");
+	m->facemat = (int*) m_AllocTracked(m->nfaces * 4, "d3io:StockObjectMaterials");
+	m->uvs = (Uv44a770*) m_AllocTracked(m->nfaces * 24, "d3io:StockObjectUVs");
 	for (i = 0; i < m->nfaces; i++) {
 		m->facemat[i] = m->faces[i].tex;
 		for (k = 0; k < 6; k++) {

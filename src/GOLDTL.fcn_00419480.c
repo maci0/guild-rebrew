@@ -8,7 +8,7 @@ extern float* g_6b5d0c;
 extern char* g_6b5d10;
 extern char* g_6b5d14;
 extern char g_67779c[];
-void* __cdecl fcn_0041db70(int size, char* tag);
+void* __cdecl m_AllocTracked(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 int __cdecl fcn_00419480(unsigned short n)
@@ -25,9 +25,9 @@ int __cdecl fcn_00419480(unsigned short n)
 		g_6b5d18 = n;
 		cnt = n;
 		size = n * 4;
-		g_6b5d0c = (float*) fcn_0041db70(size, g_67779c);
+		g_6b5d0c = (float*) m_AllocTracked(size, g_67779c);
 		if (g_6b5d0c != 0) {
-			g_6b5d10 = (char*) fcn_0041db70(size, g_67779c);
+			g_6b5d10 = (char*) m_AllocTracked(size, g_67779c);
 			if (g_6b5d10 != 0) {
 				len = size;
 				__asm {
@@ -47,7 +47,7 @@ int __cdecl fcn_00419480(unsigned short n)
 					add ecx, ebx
 					rep stosb
 				}
-				g_6b5d14 = (char*) fcn_0041db70(size, g_67779c);
+				g_6b5d14 = (char*) m_AllocTracked(size, g_67779c);
 				if (g_6b5d14 != 0) {
 					a = 0;
 					step = 6.2831855f / (float) cnt;

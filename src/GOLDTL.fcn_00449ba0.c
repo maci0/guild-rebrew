@@ -53,7 +53,7 @@ typedef struct {
 } Ent;
 
 Mesh* __cdecl fcn_00449b60(int);
-void* __cdecl fcn_0041db70(unsigned int, const char*);
+void* __cdecl m_AllocTracked(unsigned int, const char*);
 void __cdecl fcn_0045c310(int, int);
 void* __cdecl fcn_004382e0(Ent*);
 
@@ -107,7 +107,7 @@ void __cdecl fcn_00449ba0(Ent* e, Obj* o, int id)
 	o->mesh = m;
 	o->b4a0 = 0;
 	o->b4a1 = 0;
-	o->cur = fcn_0041db70(m->count * 8, "d3_io:CurTexSet");
+	o->cur = m_AllocTracked(m->count * 8, "d3_io:CurTexSet");
 	for (i = 0; i < m->count; i++) {
 		o->cur[i] = m->tex[i];
 		if (o->cur[i] != 0) {

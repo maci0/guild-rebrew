@@ -10,7 +10,7 @@ extern char g_679564[];
 extern char g_679554[];
 extern char g_679540[];
 
-void* __cdecl fcn_0041db70(int size, char* tag);
+void* __cdecl m_AllocTracked(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00426680(int, int*);
 int __cdecl fcn_00427830(char* g, int v);
@@ -26,12 +26,12 @@ int __cdecl fcn_00427f00(char* g)
 	int depth;
 
 	depth = 0;
-	a = (int*) fcn_0041db70(0x5300, g_6795b4);
-	b = (int*) fcn_0041db70(0x1800, g_6795a8);
+	a = (int*) m_AllocTracked(0x5300, g_6795b4);
+	b = (int*) m_AllocTracked(0x1800, g_6795a8);
 	*a = 0;
 	*b = 0;
-	*(void**) (g + 0x108) = fcn_0041db70(0x1800, g_6795a8);
-	*(void**) (g + 0x10c) = fcn_0041db70(0x5300, g_6795b4);
+	*(void**) (g + 0x108) = m_AllocTracked(0x1800, g_6795a8);
+	*(void**) (g + 0x10c) = m_AllocTracked(0x5300, g_6795b4);
 	saved = g_6b7e98;
 	g_6b7e98 = g;
 	*(int*) (g + 0x118) = *(int*) (g + 0x11c);
@@ -88,7 +88,7 @@ int __cdecl fcn_00427f00(char* g)
 		memcpy(b, *(void**) (g + 0x108), *(int*) (g + 0x114) * 0x30);
 		m_FreeTracked(*(void**) (g + 0x108));
 		*(void**) (g + 0x108) = 0;
-		*(void**) (g + 0x108) = fcn_0041db70(*(int*) (g + 0x114) * 0x30, g_679554);
+		*(void**) (g + 0x108) = m_AllocTracked(*(int*) (g + 0x114) * 0x30, g_679554);
 		memcpy(*(void**) (g + 0x108), b, *(int*) (g + 0x114) * 0x30);
 	} else {
 		m_FreeTracked(*(void**) (g + 0x108));
@@ -98,7 +98,7 @@ int __cdecl fcn_00427f00(char* g)
 		memcpy(a, *(void**) (g + 0x10c), *(int*) (g + 0x110) * 0x14c);
 		m_FreeTracked(*(void**) (g + 0x10c));
 		*(void**) (g + 0x10c) = 0;
-		*(void**) (g + 0x10c) = fcn_0041db70(*(int*) (g + 0x110) * 0x14c, g_679540);
+		*(void**) (g + 0x10c) = m_AllocTracked(*(int*) (g + 0x110) * 0x14c, g_679540);
 		memcpy(*(void**) (g + 0x10c), a, *(int*) (g + 0x110) * 0x14c);
 	} else {
 		m_FreeTracked(*(void**) (g + 0x10c));

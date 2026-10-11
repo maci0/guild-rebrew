@@ -7,7 +7,7 @@ extern char g_6750e8[];
 extern char g_6a23b0[];
 
 int __cdecl fcn_0042ff50(char*, char*, int);
-unsigned char* __cdecl fcn_0041db70(int, char*);
+unsigned char* __cdecl m_AllocTracked(int, char*);
 int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
 unsigned short __cdecl fcn_0041bac0(unsigned char, unsigned char, unsigned char);
 void __cdecl m_FreeTracked(void*);
@@ -24,7 +24,7 @@ void __cdecl fcn_005e3fa0(char* name)
 	n = 0;
 	fh = fcn_0042ff50(name, g_6750e8, g_6b7fdc);
 	if (fh != 0) {
-		buf = fcn_0041db70(0xe100, g_6a23b0);
+		buf = m_AllocTracked(0xe100, g_6a23b0);
 		ls_ReadVfsDataChecked(buf, 0xe100, 1, fh);
 		for (y = 0; y < 120; y++) {
 			for (x = 0; x < 160; x++) {

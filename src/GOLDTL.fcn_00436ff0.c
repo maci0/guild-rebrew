@@ -19,7 +19,7 @@ extern int g_6b7fdc;
 extern unsigned char g_6b7ff8;
 extern void* g_6b5de0;
 
-char* __cdecl fcn_0041db70(int size, const char* tag);
+char* __cdecl m_AllocTracked(int size, const char* tag);
 void* __cdecl fcn_0042ff50(char*, char*, int);
 int __cdecl fcn_004306b0(void*, int, int, void*);
 void __cdecl fcn_00430580(void*);
@@ -45,7 +45,7 @@ void __cdecl fcn_00436ff0(char* name, int format, struct unk_436ff0** tex, unsig
 		*tex = 0;
 	}
 	size = width * height * 4 + 0x1036;
-	buf = fcn_0041db70(size, "d3d:LoadTexture");
+	buf = m_AllocTracked(size, "d3d:LoadTexture");
 	f = fcn_0042ff50(name, "rb", g_6b7fdc);
 	if (f != 0) {
 		read = fcn_004306b0(buf, size, 1, f);

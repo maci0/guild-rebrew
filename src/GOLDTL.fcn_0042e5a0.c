@@ -18,7 +18,7 @@ typedef struct Node {
 extern char g_679e68[];
 
 int __cdecl fcn_0042e4d0(char*, Node*);
-void* __cdecl fcn_0041db70(int, void*);
+void* __cdecl m_AllocTracked(int, void*);
 
 Node* __cdecl fcn_0042e5a0(char* name, Node* parent)
 {
@@ -32,7 +32,7 @@ Node* __cdecl fcn_0042e5a0(char* name, Node* parent)
 			}
 		}
 	}
-	n = (Node*) fcn_0041db70(0x11c, g_679e68);
+	n = (Node*) m_AllocTracked(0x11c, g_679e68);
 	strcpy(n->name, name);
 	n->flag = 0;
 	n->parent = parent;

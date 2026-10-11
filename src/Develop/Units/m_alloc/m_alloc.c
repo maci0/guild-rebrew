@@ -1,4 +1,4 @@
-/* shortcut: historical discarded inputs preserve server layout; retire this variant as original inputs are recovered. */
+/* shortcut: historical discarded inputs preserve server layout; retire these calls as original inputs are recovered. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -39,9 +39,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 void __cdecl m_FreeTracked(void*);
 extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 
-/* Allocates tracked memory. Wraps HeapAlloc with allocation
- * tracking: records source location string, updates group
- * counters, and maintains the allocation list. */
+/* Allocates memory through malloc and records its group and source tag. */
 
 
 /* Five truncated stub arrays used to live here -- s_m_alloc_header,
@@ -510,6 +508,21 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // SIZE 0x28
 #include "group_node.h"
 
+/* Client bindings refer to existing tracker storage. */
+#ifndef REBREW_SERVER
+extern int g_6b6f70;
+extern int g_6b6f74;
+extern struct GroupNode g_14cc5c0;
+#define g_array_ptr g_6b6f80
+#define g_array_count g_6b6f64
+#define g_alloc_counter g_6b6f78
+#define g_alloc_root_name g_14cc5c0
+#define g_stat1 g_6b6f68
+#define g_stat2 g_6b6f6c
+#define g_stat3 g_6b6f70
+#define g_stat4 g_6b6f74
+#endif
+
 void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 {
 	char name[0x100];
@@ -526,7 +539,9 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	void* cur;
 
 	if (g_array_ptr == 0) {
+#ifdef REBREW_SERVER
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x93, "m_alloc() called without prior call to m_init()!");
+#endif
 		return 0;
 	}
 	if (size == 0) {
@@ -588,7 +603,9 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	mem = malloc(sz);
 	if (mem == 0) {
 		sprintf(buf, "Out of Memory Error: Malloc - Failed %s for %u bytes", tag, size);
+#ifdef REBREW_SERVER
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0xcd, buf);
+#endif
 		return 0;
 	}
 	{
@@ -665,10 +682,23 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			node->count_max = node->count_total;
 		}
 	} else {
+#ifdef REBREW_SERVER
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0xf0, "No more free memory slots...\nCall m_init() with more slots!");
+#endif
 	}
 	return mem;
 }
+
+#ifndef REBREW_SERVER
+#undef g_array_ptr
+#undef g_array_count
+#undef g_alloc_counter
+#undef g_alloc_root_name
+#undef g_stat1
+#undef g_stat2
+#undef g_stat3
+#undef g_stat4
+#endif
 
 
 #include "rebrew_types.h"

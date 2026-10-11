@@ -25,7 +25,7 @@ int __cdecl fcn_0040b7f0();
 int __cdecl fcn_0040ba00();
 int __cdecl fcn_0040ba30();
 int __cdecl fcn_0040bd80();
-char* __cdecl fcn_0041db70(int, const char*);
+char* __cdecl m_AllocTracked(int, const char*);
 void __cdecl fcn_00406210(int, void*, int, const char*, int);
 int __cdecl fcn_00408220(float);
 
@@ -35,7 +35,7 @@ int __cdecl fcn_00408220(float);
 /* Allocates the character action queue and registers the action handlers. */
 int __cdecl fcn_0040bde0(void)
 {
-	g_6b5c20 = fcn_0041db70(0xc5440, "ch:Open:ActionQueue");
+	g_6b5c20 = m_AllocTracked(0xc5440, "ch:Open:ActionQueue");
 	if (g_6b5c20 == 0) {
 		return 0;
 	}

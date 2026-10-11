@@ -6,6 +6,33 @@ Current reconstruction checkpoint (2026-10-11):
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
 
+- 2026-10-11 (shared tracked allocator): TL0x41db70/GOLD0x4223c0 now
+  bind the canonical m_AllocTracked alongside SERVER0x10006580. The common
+  body retains the original group search, slot recording and counter updates;
+  only SERVER emits its three native fatal diagnostics. Scoped client aliases
+  refer to existing globals and allocate no storage. Both complete544-byte
+  client bodies match1088 native bytes,50 typed operands, two full literals
+  each and211 reachable instructions each, with30 rejecting symbol controls.
+  No assembly was added: the existing34-byte operand-homed fill macro is
+  attested separately through compiler controls and stock-library exclusions.
+  All74 caller files bind the shared name through source rename. Before/after
+  objects preserve103 caller bodies across101 contexts and54 surrounding
+  allocator bodies across the normal server compile, a legacy-flag-off compile
+  and both clients. All185 current caller operands equal their native targets
+  and reject actually applied shifted bindings. One incomplete one-argument
+  prototype is corrected to the canonical two-argument signature without
+  changing its135 bytes. All117 affected client matches pass (80TL/37Gold);
+  two are newly measured RELOC544 identities, with existing statuses retained.
+  Game match counts are SERVER251/TL3585/GOLD2083. Lint retains0 errors and
+  0/1/38 warnings. Full server gate passes316/316 functions,652/652 data,
+  imports/exports/Wine, libraries/toolchains and all286720 raw reference bytes.
+  Coverage is refreshed for all3 targets; no extra standalone source was added.
+  SERVER's diagnostic attests m_alloc(); m_AllocTracked remains a reconstruction
+  name pending consistent all-target/caller/header renaming. Global/type/field
+  names and storage owners remain inferred or unresolved. Client shutdown
+  integration, full client raw links/data and faithful discarded-server source
+  remain open. Receipts: .scratch/goal21/shared-tracked-alloc. No push/live sync.
+
 - 2026-10-11 (shared memory reporter and group type): TL0x41df00 and
   GOLD0x422750 now bind the canonical m_ReportGroupInfo. One body serves all
   three targets; only SERVER emits the six native logging calls. Scoped client

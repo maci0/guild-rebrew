@@ -25,7 +25,7 @@ typedef struct Obj {
 } Obj;
 // SIZE 0x228
 
-void* __cdecl fcn_0041db70(int size, char* tag);
+void* __cdecl m_AllocTracked(int size, char* tag);
 void __cdecl fcn_00439e70(Obj* o);
 void __cdecl fcn_00439fa0(Obj* o);
 void __cdecl fcn_00438b40(Obj* o, V8* v);
@@ -41,9 +41,9 @@ Obj* __cdecl fcn_0043a140(Obj* src)
 
 	r = 0;
 	if (src) {
-	o = fcn_0041db70(0x228, "d3:CloneObject");
+	o = m_AllocTracked(0x228, "d3:CloneObject");
 	if (*(int*) ((char*) src + 0x218) >= 5) {
-		o->light = fcn_0041db70(0x1ac, "d3:CloneObject(lightinfo)");
+		o->light = m_AllocTracked(0x1ac, "d3:CloneObject(lightinfo)");
 	}
 	fcn_00439e70(o);
 	strcpy(o->name, src->name);

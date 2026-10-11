@@ -9,7 +9,7 @@ extern unsigned int g_1005820;
 // FUNCTION: GOLD 0x004c6a90
 // FUNCTION: GOLDTL 0x4c7630
 
-int __cdecl fcn_0041db70(int, char*);
+int __cdecl m_AllocTracked(int, char*);
 
 int __cdecl fcn_004c7630(void* a1, char* a2)
 {
@@ -17,7 +17,7 @@ int __cdecl fcn_004c7630(void* a1, char* a2)
 
 	n = *(int*) ((char*) a1 + 0x10);
 	g_aed328 = n;
-	g_fb5740 = (char*) fcn_0041db70(n, g_68aec4);
+	g_fb5740 = (char*) m_AllocTracked(n, g_68aec4);
 	g_1005820 = 0;
 	if (a2 != 0) {
 		*a2 = 1;

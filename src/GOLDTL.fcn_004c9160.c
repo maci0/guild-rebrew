@@ -14,7 +14,7 @@ extern int g_7749d0;
 char *__cdecl fcn_00508e40(int);
 int __cdecl fcn_0057de80(int);
 char *__cdecl fcn_00545fe0(Msg *);
-char *__cdecl fcn_0041db70(int, char *);
+char *__cdecl m_AllocTracked(int, char *);
 
 int __cdecl fcn_004c9160(char *a1, char *a2)
 {
@@ -50,12 +50,12 @@ int __cdecl fcn_004c9160(char *a1, char *a2)
 	if (*w == 0x11) {
 		if (w[0xf0] & 0x10) {
 			s2 = g_aed438 + strlen(g_aed438) + 1;
-			*(char **) (w + 0x7c) = fcn_0041db70(strlen(s2) + strlen(g_aed438) + 2, "messagebox");
+			*(char **) (w + 0x7c) = m_AllocTracked(strlen(s2) + strlen(g_aed438) + 2, "messagebox");
 			strcpy(*(char **) (w + 0x7c), g_aed438);
 			strcpy(*(char **) (w + 0x7c) + strlen(g_aed438) + 1, s2);
 			*(int *) (w + 0x80) = strlen(s2) + strlen(g_aed438) + 2;
 		} else {
-			*(char **) (w + 0x7c) = fcn_0041db70(strlen(g_aed438) + 1, "messagebox");
+			*(char **) (w + 0x7c) = m_AllocTracked(strlen(g_aed438) + 1, "messagebox");
 			strcpy(*(char **) (w + 0x7c), g_aed438);
 			*(int *) (w + 0x80) = strlen(*(char **) (w + 0x7c)) + 1;
 		}
