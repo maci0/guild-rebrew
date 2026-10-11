@@ -6,6 +6,23 @@ Current reconstruction checkpoint (2026-10-11):
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
 
+- 2026-10-12 (iterator controls and qualifier tool): m_pool_next still misses
+  its identical131-byte client bodies by5 bytes; quick flags, six fixed flag
+  controls and ten C/type/control-flow forms do not match. Keep the current
+  source; both delta5 blocker notes point to .scratch/goal21/pool-iterator.
+  The qualifier preview's invalid return/goto candidates are fixed upstream
+  in34ebe5f7, including dry-run help and matching skill guidance. Five cases
+  fail first;34 focused tests and the real project preview pass after. The
+  checkpoint gate passes316/316 functions,652/652 data comparisons and complete
+  raw server identity, plus Wine and library/toolchain checks. Full pr-check
+  passes11721 tests/52 skips at88% coverage and all package checks; required
+  push tests pass. PR22 is open at https://github.com/maci0/rebrew/pull/22.
+  CI runs on34ebe5f7; goal.md records the checkout and live watch handle22504.
+  All three coverage documents are refreshed; every other managed row/store
+  and all project C remain unchanged. Upstream main is not yet changed.
+  Continue those checks and upstream integration, then the full native/source
+  goal; do not add volatile reads, register hints or flags from failed probes.
+
 - 2026-10-12 (PR21 complete and shutdown sharing): Rebrew PR21 merged e8054974
   after every CI job passed on0fc33ec5, including both Python versions. Local
   merge ea6c58ef retains inherited IDEAS/uv.lock edits and the tested upstream

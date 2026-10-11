@@ -3,6 +3,42 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (pool iterator controls and qualifier-tool repair): both native
+  m_pool_next bodies remain identical 131-byte functions plus 13 alignment NOPs;
+  the current Processor Pack body is136 bytes with no relocations. The built-in
+  quick flag sweep finds no exact result. Six fixed optimization/alias flag
+  probes and ten bounded C forms (loop back-edge/break/return, volatile read,
+  arithmetic spelling, register hints and typed iterator views) also miss.
+  These are rejected probes, not new source or flags. Project C, sizes, statuses,
+  types, globals and assembly evidence remain unchanged. Exactly two managed
+  blocker notes are refreshed through the CLI with delta5 and these receipts:
+  .scratch/goal21/pool-iterator.
+  The built-in qualifier preview incorrectly classified return0/return-name
+  and goto as declarations, proposing invalid volatile statements. Upstream
+  fix34ebe5f71e9ebef245c128f6a75432f59caded2e filters those keywords, retains
+  typedef names with those prefixes, and corrects the help/skill dry-run claim:
+  dry-run lists candidates without compiling. Five regressions fail before;
+  all34 focused tests pass after. A real project preview now lists only its
+  three locals and preserves the source. The fix is committed in the owned
+  checkout /tmp/rebrew-qualifier.VJsa9RNR/rebrew with sibling Resembl pinned to
+  CI's3.1.1 commit6f94aad3; the human3.2 checkout and inherited upstream
+  IDEAS/uv.lock bytes are preserved. The fresh project checkpoint gate passes
+  all316 functions,652 data comparisons, Wine/import/header/library/toolchain
+  checks and all286720 raw bytes. All three coverage documents are refreshed;
+  the full-store audit confirms only the two blocker notes changed. Full
+  pr-check passes11721 tests/52 skips/126 warnings at88% coverage, source/hook
+  checks and all package/parity/install/reproducibility/provenance/SBOM checks.
+  The required pre-push full suite passed; both exec52385 and34838 are terminal.
+  PR22 is open at https://github.com/maci0/rebrew/pull/22 on exact remote
+  head34ebe5f71e9ebef245c128f6a75432f59caded2e. Package and CLI checks pass;
+  lint, hooks and both Python jobs are running. CI watch exec22504 is live;
+  revalidate that handle before any restart. Upstream main is unchanged.
+  Require every CI job on34ebe5f7, merge and
+  integrate while preserving the inherited edits, refresh the packaged matching
+  skill here, reverify the new compiler fingerprint, and remove both owned
+  worktrees/restoring root hooks. The complete three-image/shared-source goal,
+  client links/data, iterator match and faithful discarded SERVER code stay open.
+
 - 2026-10-12 (shared allocator shutdown unified): TL0x41e0c0 and GOLD0x422910
   now use the existing m_ShutdownAllocator body in Develop/Units/m_alloc/m_alloc.c
   alongside SERVER0x10006c00. Only the native SERVER pointer-leak log is guarded;

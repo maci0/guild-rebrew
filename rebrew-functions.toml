@@ -188299,11 +188299,12 @@ file = "src/Develop/Units/m_alloc/m_alloc.c"
 symbol = "_m_pool_next"
 name = "m_pool_next"
 marker_type = "FUNCTION"
-updated_by = "rename"
-updated_at = "2026-10-10T21:32:03+00:00"
-blocker = "Loop rotation/register allocation: shared C136 versus native131; saved bounded controls rejected."
+updated_by = "blocker"
+updated_at = "2026-10-11T17:45:30+00:00"
+blocker = "Loop shape and register allocation: native 131 bytes plus 13 NOPs; current PP /O2 body 136 bytes. Quick flag sweep and bounded C/type/control-flow probes do not match; receipts .scratch/goal21/pool-iterator."
 note = "Existing name and m_alloc unit placement are inferred. Complete native control-flow extent established independently; trailing NOPs are alignment. Shared no-log C compiles to 136 bytes versus native 131; this is explicitly unmatched. Native first and exit caller destinations identify this routine. The iterator is three 32-bit words; existing names and M_POOL_BLOCK fields remain reconstructed. No assembler, target-specific flags, storage or byte-match claim. M_POOL_BLOCK is an inferred canonical tag for the native16-byte block layout."
 status = "SIZE_MISMATCH"
+blocker_delta = 5
 
 ["GOLDTL.0x0041e350".verification]
 source_hash = "b2ac58cdf573902f056cb2b4f1d40151779498359b0f13ff8e3b019da6d6c0a8"
@@ -188327,11 +188328,12 @@ file = "src/Develop/Units/m_alloc/m_alloc.c"
 symbol = "_m_pool_next"
 name = "m_pool_next"
 marker_type = "FUNCTION"
-updated_by = "rename"
-updated_at = "2026-10-10T21:32:10+00:00"
-blocker = "Loop rotation/register allocation: shared C136 versus native131; saved bounded controls rejected."
+updated_by = "blocker"
+updated_at = "2026-10-11T17:46:57+00:00"
+blocker = "Loop shape and register allocation: native 131 bytes plus 13 NOPs; current PP /O2 body 136 bytes. Quick flag sweep and bounded C/type/control-flow probes do not match; receipts .scratch/goal21/pool-iterator."
 note = "Existing name and m_alloc unit placement are inferred. Complete native control-flow extent established independently; trailing NOPs are alignment. Shared no-log C compiles to 136 bytes versus native 131; this is explicitly unmatched. Native first and exit caller destinations identify this routine. The iterator is three 32-bit words; existing names and M_POOL_BLOCK fields remain reconstructed. No assembler, target-specific flags, storage or byte-match claim. M_POOL_BLOCK is an inferred canonical tag for the native16-byte block layout."
 status = "SIZE_MISMATCH"
+blocker_delta = 5
 
 ["GOLD.0x00422ba0".verification]
 source_hash = "b2ac58cdf573902f056cb2b4f1d40151779498359b0f13ff8e3b019da6d6c0a8"
