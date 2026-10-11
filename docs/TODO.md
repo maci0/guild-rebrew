@@ -1,5 +1,29 @@
 Current reconstruction checkpoint (2026-10-11):
 
+- 2026-10-11 (shared allocator initializer): TL 0x41de50 and Gold 0x4226a0 now
+  bind to the existing canonical m_init in Develop/Units/m_alloc/m_alloc.c.
+  The duplicate 96-line client file is removed; canonical C and all caller
+  declarations/bodies are unchanged. Six native comparisons (old/shared clients
+  and both server profiles) preserve 972 bytes and 108 explicit operands,
+  rejecting 98 shifted-binding controls. Each distinct native body is 162 bytes
+  with 18 relocations; the original 26-byte operand-homed fill macro remains.
+  Both client identities freshly verify 162/162 from the canonical source.
+  Gold's existing native macro provenance is recorded through the source CLI;
+  warnings improve from 40 to 39, with SERVER/TL unchanged at 0/2 and zero errors.
+  Fixed the server initializer's stale deallocator description through the
+  locked metadata writer. Stock archive probes identify Gold 0x5dec8d as the
+  18-byte malloc wrapper and complete TL malloc's size; both LIBC and LIBCMT
+  match the Gold wrapper, so archive selection remains unresolved. No CRT body,
+  new assembly, global storage or data verdict was added. All existing game
+  match counts 251/3583/2081 are retained; Gold's library inventory gains one
+  correctly attributed wrapper. Full server gate passes 316/316 functions,
+  652/652 data, 100 imports, Wine exports and 286720-byte raw reference identity.
+  Data/type stores, canonical sources, flags, layout, references, stock archives
+  and inherited upstream edits are unchanged. Receipts:
+  .scratch/goal21/shared-allocator-init. Full client raw links, original global
+  owners/names and faithful discarded-server source remain open. No push/live
+  sync; the complete three-image/shared-tree goal remains active.
+
 - 2026-10-11 (shared allocator helpers): canonical m_is_tracked and
   m_pool_free_all now serve both clients. Four function identities and four
   extern declaration rows move through locked writers; 31 caller files bind
