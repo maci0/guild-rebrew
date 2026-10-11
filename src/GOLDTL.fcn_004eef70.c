@@ -6,7 +6,7 @@
 extern Entry68e020 g_68e020[32];
 extern double g_662a20;
 
-unsigned short __cdecl fcn_0042e410(unsigned short n);
+unsigned short __cdecl gm_RandomMod(unsigned short n);
 
 char* __cdecl fcn_004eef70(void)
 {
@@ -16,7 +16,7 @@ char* __cdecl fcn_004eef70(void)
 	float* cursor;
 	int n;
 
-	idx = fcn_0042e410(0x20);
+	idx = gm_RandomMod(0x20);
 	counter = 0x20;
 	while (counter != 0) {
 		if (((char*) g_68e020)[0xf2 + idx * 244] == 0) {

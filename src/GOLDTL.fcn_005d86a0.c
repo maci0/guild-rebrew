@@ -20,7 +20,7 @@ extern int g_14ce8e0;
 extern int g_774654;
 extern int g_67d370;
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 unsigned char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c6ae0(int, int);
@@ -53,8 +53,8 @@ int __cdecl fcn_005d86a0(unsigned char* e, unsigned char* a2)
 	int id;
 
 	if (e[2] != 6) {
-		a = fcn_0042e410(0x28) + 0xf;
-		b = fcn_0042e410(0x28) + 0xf;
+		a = gm_RandomMod(0x28) + 0xf;
+		b = gm_RandomMod(0x28) + 0xf;
 		if (*(int*) (e + 0x194) < 3) {
 			return 0x20;
 		}
@@ -106,8 +106,8 @@ int __cdecl fcn_005d86a0(unsigned char* e, unsigned char* a2)
 		if (g_100f1dc != -1) {
 			if (g_67d370 == ok) {
 				if (fcn_00525f60(e, 3)) {
-					a = fcn_0042e410(0x28) + 0xf;
-					b = fcn_0042e410(0x28) + 0xf;
+					a = gm_RandomMod(0x28) + 0xf;
+					b = gm_RandomMod(0x28) + 0xf;
 					fcn_004c54c0(*(int*) (o1 + 4), *(int*) (o2 + 4), a, 1);
 					fcn_004c54c0(*(int*) (o2 + 4), *(int*) (o1 + 4), b, 1);
 					fcn_004c6ae0(*(int*) (e + 4), -3);

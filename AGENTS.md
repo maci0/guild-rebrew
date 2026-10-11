@@ -49,7 +49,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew match run <file> --json` | Run GA matching engine on one function |
 | `rebrew match batch --json` | Batch GA on all STUB functions |
 | `rebrew match batch --near-miss --threshold 5` | Batch GA on NEAR_MATCHING functions with small deltas (Δ ≤ threshold) |
-| `rebrew source rename <old> <new>` | Rename function and update cross-references |
+| `rebrew source rename <old> <new>` | Rename a function, global (`--data`), type (`--type`) or member (`--field`) everywhere; `MODULE.0xVA` picks one identity, `--all-modules` renames shared rows |
 | `rebrew verify --json` | Bulk verify all reversed files |
 | `rebrew lint --json` | Validate annotations and the stores: inline metadata (W019), stale marker VAs (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), data rows whose size disagrees with the owning definition (W037) or overlaps another row (W038), coverage-store hygiene — leftover `coverage.db`/grid JSON/CSV and documents the dashboards cannot serve (W032) |
 | `rebrew data list --json` | Inventory globals in .data/.rdata/.bss |
@@ -151,6 +151,17 @@ inputs and measurement time independently of ordinary `updated_by` /
 These facts survive removal of derived coverage and compile caches.
 
 `CFLAGS` is optional — falls back to the target default from `rebrew-project.toml`.
+
+
+Types use stable IDs in managed `rebrew-types.toml`, not instance VAs. Definitions
+belong in the owning subsystem header or private C file. `rebrew types bind ID
+FILE C_NAME --size N --native-size N --evidence TEXT` compiles target sizeof and
+optional `--field member=offset` assertions before writing (locked + atomic;
+never hand-edit this store). Keep C size separate from native allocation/stride
+extent. `rebrew types check --compile` checks current layouts; W031 reports stale
+bindings. Review changed evidence and rebind the same ID after edits or moves.
+Heap instances use allocation/use sites; static instances keep their data VAs.
+Current D3 definitions: `src/Develop/Units/d3/d3_object.h`.
 
 ## Compiler Constraints (msvc-6.0-sp5)
 

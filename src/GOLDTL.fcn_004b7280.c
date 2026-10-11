@@ -4,7 +4,7 @@
 extern unsigned char g_773d75;
 
 void* __cdecl fcn_00508e40(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int  __cdecl fcn_005c6270(void*, int);
 void __cdecl fcn_004b73a0(void*);
@@ -31,7 +31,7 @@ int __cdecl fcn_004b7280(void* a1)
 		fcn_004b73a0(p);
 		return 0x400;
 	}
-	v = fcn_0042e410(3);
+	v = gm_RandomMod(3);
 	d = (double) v + 1.0;
 	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
 	    0.01);

@@ -14,7 +14,7 @@ extern int g_67a370;
 
 int __cdecl fcn_004bc9c0(char*, pickctx*);
 void __cdecl fcn_004379a0(int, int, int, int(__cdecl*)(char*, pickctx*), pickctx*);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 char* __cdecl fcn_004bca30(char* name)
 {
@@ -25,5 +25,5 @@ char* __cdecl fcn_004bca30(char* name)
 	fcn_004379a0(g_67a370, 0, 0x380, fcn_004bc9c0, &c);
 	if (c.n == 0)
 		return 0;
-	return c.list[fcn_0042e410(c.n)];
+	return c.list[gm_RandomMod(c.n)];
 }

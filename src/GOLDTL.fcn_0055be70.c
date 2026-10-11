@@ -20,7 +20,7 @@ char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5ed0(int, char*, int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
@@ -73,7 +73,7 @@ int __cdecl fcn_0055be70(struct search* s)
 				fcn_004c5ed0(((int*) (found + 0xc4))[j], "gestik/herranwinken", 2);
 			}
 			fcn_004c5da0(((int*) (found + 0xc4))[j], *(int*) (s->who + 1), -1, 0, 1, "Detected");
-			fcn_004c5ed0(((int*) (found + 0xc4))[j], "gestik/abfaellig", fcn_0042e410(2) + 1);
+			fcn_004c5ed0(((int*) (found + 0xc4))[j], "gestik/abfaellig", gm_RandomMod(2) + 1);
 		}
 	}
 	*(int*) (found + 0xd4) = *(int*) (s->house + 4);

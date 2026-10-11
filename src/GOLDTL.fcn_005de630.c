@@ -33,7 +33,7 @@ extern int g_664398[];
 
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
 unsigned char* __cdecl fcn_00508e40(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -69,8 +69,8 @@ int __cdecl fcn_005de630(House* obj, int* arg)
 			return 0;
 		}
 	}
-	start = fcn_0042e410(0x300);
-	step = g_664398[fcn_0042e410(0x10)];
+	start = gm_RandomMod(0x300);
+	step = g_664398[gm_RandomMod(0x10)];
 	n = 3;
 	do {
 		if (((House*)g_7f4ca0)[start].id != 0xffff && ((House*)g_7f4ca0)[start].b166 && &((House*)g_7f4ca0)[start] != obj &&
@@ -81,9 +81,9 @@ int __cdecl fcn_005de630(House* obj, int* arg)
 		start = (start + step) % 0x300;
 	} while (n != 0);
 	for (i = 0; i < 3; i++) {
-		fcn_004c54c0(e->f4, picks[i]->f4, fcn_0042e410(0x20) + 0x14, 1);
+		fcn_004c54c0(e->f4, picks[i]->f4, gm_RandomMod(0x20) + 0x14, 1);
 	}
-	fcn_004ff210(e->id, -0x32 - fcn_0042e410(0x40));
+	fcn_004ff210(e->id, -0x32 - gm_RandomMod(0x40));
 	if (e->b2 == 6 || e->b2 == 7) {
 		fcn_0051af00(text, 0x100d, picks[0]->id, picks[0]->id, picks[1]->id, picks[2]->id);
 		fcn_00545d40(e->f4, -1, text, 1, 0x5fb, 0);

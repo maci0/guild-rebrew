@@ -1,7 +1,7 @@
 // FUNCTION: GOLDTL 0x4b7a60
 
 void* __cdecl fcn_00508e40(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int  __cdecl fcn_005c6270(void*, int);
 void __cdecl fcn_0051af00(void*, int, int);
@@ -23,7 +23,7 @@ int __cdecl fcn_004b7a60(void* a1)
 	if (fcn_005c6270(p, 0x290) != 0) {
 		return 0x400;
 	}
-	v = fcn_0042e410(2);
+	v = gm_RandomMod(2);
 	d = (double) v + *(double*) 0x6629c8;
 	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
 	    *(double*) 0x6640e8);

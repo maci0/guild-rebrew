@@ -28,7 +28,7 @@ int __cdecl fcn_004c5620(int a1, char* e);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_00546ef0(int, char*, int, int);
-char* __cdecl fcn_00509570(char* p);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_005dcf40(fcn_00551a20_Ent* e, int v);
 
 void __cdecl fcn_00551a20(char* t)
@@ -58,7 +58,7 @@ void __cdecl fcn_00551a20(char* t)
 		}
 		fcn_0051af00(buf, 0x1a9f, e->id);
 		fcn_00545d40(*(int*) (p + 4), *(int*) (p + 4), buf, 0, 0x5f4, 0);
-		q = fcn_00509570(p);
+		q = (char*) gm_GetEntityTableEntry((char*) (p));
 		if (q != 0) {
 			(*(int*) (q + 0x64))++;
 		}

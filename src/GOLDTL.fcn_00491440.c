@@ -1,7 +1,7 @@
 // FUNCTION: GOLD 0x00491e70
 // FUNCTION: GOLDTL 0x491440
 
-int __cdecl fcn_00507b00(int job);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004f4830(int idx, void* dst);
 
 int __cdecl fcn_00491440(char* e, int unused, int* out)
@@ -15,7 +15,7 @@ int __cdecl fcn_00491440(char* e, int unused, int* out)
 	float z;
 	int job;
 
-	job = fcn_00507b00(*(unsigned char*) (e + 0x164));
+	job = gm_MapEntityStatRange(*(unsigned char*) (e + 0x164));
 	a = *(float*) (e + 0xd0) - 2.0;
 	b = *(float*) (e + 0xdc) - 2.0;
 	m = a > b ? a : b;

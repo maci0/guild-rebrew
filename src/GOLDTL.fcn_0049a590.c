@@ -24,7 +24,7 @@ typedef struct Counts {
 	int free;
 } Counts;
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
 
@@ -48,7 +48,7 @@ int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		fcn_004a51d0(e, 2, slot, &cnt);
 		if ((cnt.total != 6 || cnt.free != 0) && cnt.blocked != 2) {
 			if (cnt.total < 6 && cnt.free == 0) {
-				i = fcn_0042e410(2);
+				i = gm_RandomMod(2);
 				while (slot[i].a != 0) {
 					i = (i + 1) % 2;
 				}
@@ -67,7 +67,7 @@ int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				return r;
 			}
 			if (cnt.free != 0) {
-				i = fcn_0042e410(2);
+				i = gm_RandomMod(2);
 				while (slot[i].a < 1) {
 					i = (i + 1) % 2;
 				}

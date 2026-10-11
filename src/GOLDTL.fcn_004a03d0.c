@@ -1,5 +1,5 @@
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 int __cdecl fcn_004a4550(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
@@ -28,7 +28,7 @@ int __cdecl fcn_004a03d0(float* o1, float* o2, int a3, char* e, int a5, int a6, 
 	if (!g) {
 		return 0;
 	}
-	if (g[0x5c] < fcn_0042e410(0x10) + 0x32) {
+	if (g[0x5c] < gm_RandomMod(0x10) + 0x32) {
 		fcn_004a4550(o1, o2, a3, e, a5, a6, a7);
 		*o1 = *o1 * 3.0f;
 		*o2 = *o2 * 3.0f;

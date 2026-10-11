@@ -1840,13 +1840,13 @@ int __cdecl vfs_init(char* name, char flag)
 	*(int*) g_vfs_item_pool = 0;
 	return g_vfs_root != 0;
 }
-
+#include "../m_alloc/m_pool.h"
 /* Client-only (TL client 0x4310f0, discarded): unmounts the file system and closes the streams left open;
  * verbose reports how many were. */
 void __cdecl vfs_exit(char verbose)
 {
-	extern void* __cdecl m_pool_first(void* head, int* it);
-	extern void* __cdecl m_pool_next(int* it);
+
+
 	extern void __cdecl m_pool_free_all(void* head);
 	int it[3];
 	char buf[0x100];
@@ -1863,7 +1863,7 @@ void __cdecl vfs_exit(char verbose)
 		ReportMessage(buf);
 	}
 	if (*(void**) g_stream_pool != 0) {
-		s = (char*) m_pool_first(*(void**) g_stream_pool, it);
+		s = (char*) m_pool_first((struct M_POOL_BLOCK*) *(void**) g_stream_pool, it);
 		while (s != 0) {
 			CloseVfsStream(s);
 			s = (char*) m_pool_next(it);

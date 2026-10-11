@@ -23,7 +23,7 @@ struct house {
 extern char g_7f4ca0[];
 
 int __cdecl fcn_004e8b40(int, rec18*);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004ec2d0(struct house*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -40,11 +40,11 @@ void __cdecl fcn_0057c020(struct house* a, struct house* b)
 	int id;
 
 	if (fcn_004e8b40(b->job, &r) != 0 && (p = r.id) != 0) {
-		fcn_004ec2d0(b, p, -20 - fcn_0042e410(0x10));
+		fcn_004ec2d0(b, p, -20 - gm_RandomMod(0x10));
 	} else if (b->type != 6 && b->type != 7 && b->type != 5) {
-		fcn_004ec2d0(b, fcn_0042e410(3) + 1, fcn_0042e410(0x10) + 0x14);
+		fcn_004ec2d0(b, gm_RandomMod(3) + 1, gm_RandomMod(0x10) + 0x14);
 	} else {
-		d = -20 - fcn_0042e410(0x10);
+		d = -20 - gm_RandomMod(0x10);
 		for (i = 0; i < 768; i++) {
 			if (i != b->id && (((struct house*)g_7f4ca0)[i].type == 6 || ((struct house*)g_7f4ca0)[i].type == 7 || ((struct house*)g_7f4ca0)[i].type == 5)) {
 				fcn_004c54c0(b->owner, ((struct house*)g_7f4ca0)[i].owner, d, 1);

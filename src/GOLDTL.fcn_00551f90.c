@@ -55,7 +55,7 @@ extern unsigned char* g_868050;
 extern int g_6643d8[];
 extern char g_7f4ca0[];
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5620(int, Order_551f90*);
 void __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, const char*);
@@ -74,12 +74,12 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 
 	o->stamp = (*(Stamp_551f90*)&g_7f4c00);
 	n = 0x100;
-	i = fcn_0042e410(0x100);
+	i = gm_RandomMod(0x100);
 	do {
 		p = &((Player_551f90*)g_90e094)[i];
 		if (((Kind_551f90*)g_868050)[p->kind].type == 7) {
-			o->rnd = fcn_0042e410(0x100);
-			o->value = g_6643d8[fcn_0042e410(0x10)];
+			o->rnd = gm_RandomMod(0x100);
+			o->value = g_6643d8[gm_RandomMod(0x10)];
 			n = sizeof(m);
 			fill = m;
 			/* align-up block fill: no msvc6 C spelling emits it

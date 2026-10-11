@@ -20,7 +20,7 @@ extern char g_6a33a4[];
 
 void __cdecl fcn_00415d70(int);
 void __cdecl fcn_00416a20(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
 void __cdecl fcn_00418710(void);
 void __cdecl fcn_004186d0(int, int);
@@ -34,9 +34,9 @@ void __cdecl fcn_00537080(void)
 		fcn_00416a20(g_7e453c);
 	}
 	if (g_7e4408[(unsigned short) (*(int*)&g_7f4c04)] != 0) {
-		if (fcn_0042e410(300) == 0 || (g_7e4408[(unsigned short) (*(int*)&g_7f4c04)] == 3 && fcn_0042e410(100) == 0)) {
+		if (gm_RandomMod(300) == 0 || (g_7e4408[(unsigned short) (*(int*)&g_7f4c04)] == 3 && gm_RandomMod(100) == 0)) {
 			g_7e4468 = g_6b7fac;
-			g_7e446c = fcn_0042e410(8) + 8;
+			g_7e446c = gm_RandomMod(8) + 8;
 			fcn_004234e0(g_7747c0, g_6a33a4, 1, 0x3f, (int) (g_699b0c * g_664e80), 0, 0);
 		}
 	}
@@ -44,7 +44,7 @@ void __cdecl fcn_00537080(void)
 		if ((unsigned short) (*(int*)&g_7f4c04) >= 0xb && (unsigned short) (*(int*)&g_7f4c04) <= 0x11 && g_7e43a4[(unsigned short) (*(int*)&g_7f4c04)] != 0
 		    && g_7e43a4[(unsigned short) (*(int*)&g_7f4c04) + 1] == 0
 		    && g_7f4c06 > 0x1e) {
-			if (fcn_0042e410(0x80) > 0x60 && (*(int*)&g_6b5cf8) == 0) {
+			if (gm_RandomMod(0x80) > 0x60 && (*(int*)&g_6b5cf8) == 0) {
 				fcn_00418710();
 			}
 			g_6a2c24 = (unsigned short) (*(int*)&g_7f4c04);

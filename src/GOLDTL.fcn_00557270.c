@@ -7,7 +7,7 @@ extern int g_6643d8[];
 extern char* g_aed32c;
 extern char g_67ec2c[];
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl fcn_005462a0(void);
@@ -31,9 +31,9 @@ void __cdecl fcn_00557270(char* u)
 		return;
 	}
 	*(int*) (u + 0xac) = -1;
-	*(int*) (u + 0xc4) = fcn_0042e410(0x100);
-	*(int*) (u + 0xc8) = g_6643d8[fcn_0042e410(0x10)];
-	*(int*) (u + 0xbc) = fcn_0042e410(4) + 5;
+	*(int*) (u + 0xc4) = gm_RandomMod(0x100);
+	*(int*) (u + 0xc8) = g_6643d8[gm_RandomMod(0x10)];
+	*(int*) (u + 0xbc) = gm_RandomMod(4) + 5;
 	*(int*) (u + 0xc0) = 0;
 	*(int*) (u + 0xb8) = -1;
 	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;

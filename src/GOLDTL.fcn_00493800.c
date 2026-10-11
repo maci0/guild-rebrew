@@ -1,6 +1,6 @@
 unsigned short* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 
 // FUNCTION: GOLD 0x4941d0
 // FUNCTION: GOLDTL 0x493800
@@ -26,5 +26,5 @@ int __cdecl fcn_00493800(char* p)
 	if (d2 - d1 > 20.0f) {
 		return 0;
 	}
-	return fcn_0042e410(2);
+	return gm_RandomMod(2);
 }

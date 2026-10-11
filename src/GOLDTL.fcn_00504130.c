@@ -16,7 +16,7 @@ extern char g_7f4ca0[];
 void __cdecl fcn_005b1c90(int h);
 void __cdecl fcn_0041ddd0(void* p);
 void __cdecl gv_FreeFieldAllocs(int* slot);
-int __cdecl gm_FreeObjectListRecursive(char** list);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 int __cdecl fcn_00504130(unsigned char* o)
 {
@@ -61,7 +61,7 @@ int __cdecl fcn_00504130(unsigned char* o)
 		}
 	}
 	if (*(char**) (o + 0x5d) != 0) {
-		gm_FreeObjectListRecursive((char**) (o + 0x5d));
+		gm_FreeObjectListRecursive((struct LinkedNode**) (o + 0x5d));
 	}
 	*o = 0;
 	return 0;

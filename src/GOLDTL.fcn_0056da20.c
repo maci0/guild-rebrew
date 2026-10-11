@@ -9,7 +9,7 @@ extern Tabs_7e43a8 g_7e43a8;
 extern unsigned short g_7f4c04;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_0050ff70(char* o, int delta);
 void __cdecl fcn_00546190(char* p);
 
@@ -35,7 +35,7 @@ void __cdecl fcn_0056da20(char* p)
 				if (((int*) (p + 0xac))[i] != -1) {
 					e = gm_StartFilteredEntitySearch(1, 1, ((int*) (p + 0xac))[i]);
 					if (e != 0) {
-						d = fcn_0042e410(5) + 5;
+						d = gm_RandomMod(5) + 5;
 						fcn_0050ff70(e, -d);
 					}
 				}

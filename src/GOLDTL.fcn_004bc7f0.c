@@ -7,7 +7,7 @@ char* __cdecl fcn_00503fe0(int, ...);
 char* __cdecl fcn_00503e80(void);
 int __cdecl fcn_00505370(char*);
 int __cdecl fcn_00505340(char*);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00455350(char*, char*, float*);
 
@@ -23,7 +23,7 @@ int __cdecl fcn_004bc7f0(float* out)
 		if (fcn_00505370(e) == 0 && fcn_00505340(e) == 0 && *(int*) (e + 0x61) != 0)
 			list[n++] = e;
 	}
-	e = list[fcn_0042e410(n)];
+	e = list[gm_RandomMod(n)];
 	r = fcn_00445600(*(int*) (e + 0x61), 0x300, 0, g_68149c);
 	if (r != 0) {
 		fcn_00455350(r, r + 0x4c, out);

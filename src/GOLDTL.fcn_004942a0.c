@@ -16,7 +16,7 @@ extern char g_868060[];
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_00502820(int x0, int y0, int x1, int y1);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 
 // FUNCTION: GOLD 0x4948e0
 // FUNCTION: GOLDTL 0x004942a0
@@ -49,7 +49,7 @@ void __cdecl fcn_004942a0(unsigned short* e, Share* out)
 			max = dist[i];
 		}
 		out[i].kind = table[i][0];
-		out[i].goal = table[i][1 + fcn_0042e410(3)];
+		out[i].goal = table[i][1 + gm_RandomMod(3)];
 	}
 	inv = 1.0f / max;
 	for (i = 0; i < 3; i++) {

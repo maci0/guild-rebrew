@@ -1,8 +1,6 @@
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
+
 extern void* g_14d0020[];
-// GLOBAL: GOLDTL 0x67a370
-extern int g_67a370;
-// FUNCTION: GOLD 0x4027b0
-// FUNCTION: GOLDTL 0x402ff0
 
 void __cdecl fcn_00438c40(int, void*);
 

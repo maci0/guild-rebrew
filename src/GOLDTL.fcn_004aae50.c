@@ -1,9 +1,9 @@
 int __cdecl fcn_004e8af0(int, void*);
 char* __cdecl fcn_00508e40(int);
-int __cdecl fcn_004e7c70(char*, int, float*);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 double __cdecl fcn_0050f980(int, int, int);
 int __cdecl fcn_005c6270(void*, int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 
 struct info_4aae50 {
 	int pad0[2];
@@ -34,7 +34,7 @@ int __cdecl fcn_004aae50(int a1, unsigned short* a2, int* a3, int* a4)
 	for (i = 0; i < 4; i++) {
 		e = fcn_00508e40(a3[i]);
 		ents[i] = e;
-		if (e != 0 && fcn_004e7c70(e, info.kind, &bonus) != 0) {
+		if (e != 0 && amt_GetOfficeAffinity((unsigned char*) e, info.kind, &bonus) != 0) {
 			score[i] = fcn_0050f980(*(unsigned short*) e, *a2, 1) + bonus;
 			if (fcn_005c6270(e, 0x2be) != 0)
 				score[i] += 0.2f;
@@ -61,7 +61,7 @@ int __cdecl fcn_004aae50(int a1, unsigned short* a2, int* a3, int* a4)
 	if (tie == 0)
 		return *(int*) (ents[idx] + 4);
 	idx = -1;
-	i = fcn_0042e410(4);
+	i = gm_RandomMod(4);
 	for (k = 4; k != 0; k--, i = (i + 1) % 4) {
 		if (score[i] == best && ents[i] != 0) {
 			idx = i;

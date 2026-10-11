@@ -20,7 +20,7 @@ int __cdecl fcn_004e8b40(int idx, Rec18* out);
 int __cdecl fcn_004e8c00(int k, int max, Rec18* out);
 Ent* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 
 // FUNCTION: GOLD 0x4a0410
 // FUNCTION: GOLDTL 0x0049fe50
@@ -63,13 +63,13 @@ int __cdecl fcn_0049fe50(Ent* e)
 		}
 	}
 	for (i = 6; i != 0; i--) {
-		a = fcn_0042e410(3);
-		b = fcn_0042e410(3);
+		a = gm_RandomMod(3);
+		b = gm_RandomMod(3);
 		t = ord[a];
 		ord[a] = ord[b];
 		ord[b] = t;
-		a = fcn_0042e410(3) + 3;
-		b = fcn_0042e410(3) + 3;
+		a = gm_RandomMod(3) + 3;
+		b = gm_RandomMod(3) + 3;
 		t = ord[a];
 		ord[a] = ord[b];
 		ord[b] = t;

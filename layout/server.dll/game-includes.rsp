@@ -194,7 +194,7 @@
 /INCLUDE:_gm_ff_Objekt
 /INCLUDE:_gm_AllocateObjectSlot
 /INCLUDE:_gm_RemoveObjectByType
-/INCLUDE:_gm_NoopRet2
+/INCLUDE:_gm_ClearObjektResources
 /INCLUDE:_gm_RemoveLinkedNodeById
 /INCLUDE:_gm_FreeObjectListRecursive
 /INCLUDE:_gm_AllocObjekt

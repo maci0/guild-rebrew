@@ -12,7 +12,7 @@ typedef struct
 extern float g_6628a8;
 
 int __cdecl fcn_00508220(int k, S0c* s);
-unsigned short __cdecl fcn_0042e410(unsigned short n);
+unsigned short __cdecl gm_RandomMod(unsigned short n);
 void __cdecl fcn_004c4510(char* p, int id);
 void __cdecl fcn_004c4570(int a, int b, int c, int* v);
 void __cdecl fcn_004c5360(void);
@@ -32,7 +32,7 @@ float __cdecl fcn_00508490(char* p)
 	if (!fcn_00508220(1, &s)) {
 		return g_6628a8;
 	}
-	r = fcn_0042e410((unsigned short) s.c);
+	r = gm_RandomMod((unsigned short) s.c);
 	if (r == 0) {
 		return g_6628a8;
 	}

@@ -15,7 +15,7 @@ extern float g_662da8;
 extern float g_6628bc;
 extern float g_6628ac;
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl fcn_0050b810(int a, char b);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -32,7 +32,7 @@ int __cdecl fcn_0048dbc0(char* e, char* a2, char* a3)
 		return 0;
 	}
 	mask = 0xf00500;
-	if (fcn_004a5340(e, 1, &mask, 0, fcn_0042e410(0x20) + g_662da8, &idx) == 0) {
+	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + g_662da8, &idx) == 0) {
 		return 0;
 	}
 	t = &((Ent*)g_7f4ca0)[(unsigned short) idx];

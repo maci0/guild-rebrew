@@ -34,7 +34,7 @@ struct Task {
 };
 
 Task* __cdecl fcn_0040c0a0(char* e);
-void __cdecl fcn_004068e0(Task* t);
+void __cdecl ch_TakingObject(Task* t);
 int __cdecl fcn_004050c0(Task* t);
 
 int __cdecl fcn_00406a10(char* e, const char* name, char* src, int param)
@@ -49,7 +49,7 @@ int __cdecl fcn_00406a10(char* e, const char* name, char* src, int param)
 		t->owner = e;
 		t->param = param;
 		t->state = 0;
-		t->run = fcn_004068e0;
+		t->run = ch_TakingObject;
 		t->kind = 0x31;
 		t->next = 0;
 		t->flags = 0;

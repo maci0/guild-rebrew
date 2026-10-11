@@ -7,7 +7,7 @@ extern char* g_773d78;
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00597ff0(int, char*);
 int __cdecl fcn_00598150(char*, char**);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 float __cdecl gm_RandomFloat01(void);
 
@@ -39,7 +39,7 @@ char* __cdecl fcn_004a48e0(char* u, int key)
 		memset(list, 0, sizeof(list));
 		n = fcn_00598150(text, list);
 		if (n != 0) {
-			if (*(char**) (u + 0x170) != 0 && *(char**) (*(char**) (u + 0x170) + 0x61) != 0 && fcn_0042e410(3) != 0) {
+			if (*(char**) (u + 0x170) != 0 && *(char**) (*(char**) (u + 0x170) + 0x61) != 0 && gm_RandomMod(3) != 0) {
 				ref = *(char**) (*(char**) (u + 0x170) + 0x61);
 				fcn_00455350(ref, ref + 0x4c, p1);
 				found = 0;
@@ -82,7 +82,7 @@ char* __cdecl fcn_004a48e0(char* u, int key)
 				return found;
 			}
 			cnt = n;
-			i = fcn_0042e410(n);
+			i = gm_RandomMod(n);
 			do {
 				if (list[i] != 0) {
 					fcn_004432d0(saved, 1);

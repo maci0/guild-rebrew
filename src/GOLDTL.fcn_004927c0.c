@@ -22,7 +22,7 @@ extern unsigned char g_773d75;
 extern unsigned char g_772628[];
 
 double __cdecl log10(double x);
-char* __cdecl fcn_00509570(unsigned char* e);
+
 int __cdecl fcn_00492590(int kind);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050b710(int a, unsigned char k);
@@ -38,7 +38,7 @@ int __cdecl fcn_004927c0(unsigned char* e, Deal* o, int kind)
 	int pr;
 	double x;
 
-	d = fcn_00509570(e);
+	d = (char*) gm_GetEntityTableEntry((char*) (e));
 	if (e == 0 || e[2] != 6 || o == 0) {
 		return 0;
 	}

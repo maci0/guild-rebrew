@@ -18,7 +18,7 @@ extern unsigned char g_773d75;
 extern unsigned char* g_90e094;
 extern unsigned char* g_868050;
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl fcn_0050e4a0(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int a, unsigned char b);
@@ -51,14 +51,14 @@ int __cdecl fcn_0049e1e0(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	}
 	a1 = fcn_00502cd0(*(int*) (q + 0x5d), 2, 6, 0, 0x115);
 	val = fcn_0050b810(*(int*) (a1 + 0x14), g_773d75);
-	if (val < (fcn_0042e410(3000) + 1000) * 32) {
+	if (val < (gm_RandomMod(3000) + 1000) * 32) {
 		return 0;
 	}
 	rec = g_90e094;
 	for (a3 = 0; a3 < 0x100; a3++) {
 		if (rec[0] != 0 && g_868050[rec[0] * 0x24d] == 3 && !(rec[0x5a] & 4)) {
 			lvl = rec[0x5c];
-			if (lvl < fcn_0042e410(0x40) + 0x25) {
+			if (lvl < gm_RandomMod(0x40) + 0x25) {
 				Blk24 b1;
 				Blk24 b2;
 
@@ -97,7 +97,7 @@ int __cdecl fcn_0049e1e0(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 		}
 		rec += 0xa9;
 	}
-	if (fcn_0042e410(8) != 0) {
+	if (gm_RandomMod(8) != 0) {
 		return 0;
 	}
 	if (n[0] != 0 && fr[0] != 0) {

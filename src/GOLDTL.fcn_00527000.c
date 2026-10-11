@@ -7,7 +7,7 @@ extern Slot7f4ca2 g_7f4ca2[768];
 // FUNCTION: GOLD 0x522080
 // FUNCTION: GOLDTL 0x527000
 
-int __cdecl fcn_00507b00(int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 int __cdecl fcn_00527000(void)
 {
@@ -22,7 +22,7 @@ int __cdecl fcn_00527000(void)
 				break;
 			}
 		}
-		k = fcn_00507b00(g_7f4ca2[i].b);
+		k = gm_MapEntityStatRange(g_7f4ca2[i].b);
 		if (k == 1 || k == 2 || k == 10) {
 			r = 0x534;
 		} else if (k == 3 || k == 4) {

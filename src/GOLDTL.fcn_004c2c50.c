@@ -1,17 +1,16 @@
+#include "client_sound.h"
+#include "Develop/Units/Msx/msx.h"
+
 // FUNCTION: GOLD 0x004c23f0
 // FUNCTION: GOLDTL 0x4c2c50
 
 extern int g_774930;
 extern float g_6819b0;
 extern float g_6628a8;
-extern int g_772d1c;
-extern int g_772d24;
 extern int g_772d28;
 extern int g_772d10;
 extern int g_772d14;
 
-void __cdecl fcn_00420120(int, int);
-int __cdecl fcn_0041fd70(char*, int);
 void __cdecl fcn_004c2d90(float, int);
 
 void __cdecl fcn_004c2c50(char* snd)

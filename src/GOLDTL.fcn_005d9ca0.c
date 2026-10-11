@@ -37,7 +37,7 @@ extern char* g_773db0;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_AddObjekt(void);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004a57a0(Ent*, int, int, unsigned short*, int, float, int*);
 void __cdecl fcn_004c5530(Msg*);
 
@@ -84,7 +84,7 @@ int __cdecl fcn_005d9ca0(Ent* ent, Ent* other, int count, int flag)
 			}
 		}
 		if (msg.who[0] == -1) {
-			if ((short) fcn_0042e410(2)) {
+			if ((short) gm_RandomMod(2)) {
 				msg.who[0] = ((Ent*)g_773dac)->handle;
 				ids[1] = ((Ent*)g_773dac)->id;
 			} else {

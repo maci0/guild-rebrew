@@ -1,7 +1,7 @@
 extern int g_67a370;
 
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 char __cdecl fcn_00407e30(char*, float*, float*, int, int, int*, int*, int, int);
 void __cdecl fcn_0045b920(char*, int, int, int);
 
@@ -23,8 +23,8 @@ int __cdecl fcn_00405c70(float* pos, int marker)
 		return 0;
 	}
 	fcn_0045b990(map, pos, &col, &row, &height);
-	x = fcn_0042e410(10) + col - 4;
-	y = fcn_0042e410(10) + row - 4;
+	x = gm_RandomMod(10) + col - 4;
+	y = gm_RandomMod(10) + row - 4;
 	if (*(int*) (map + 0x20) - 2 < x) {
 		x = *(int*) (map + 0x20) - 2;
 	}

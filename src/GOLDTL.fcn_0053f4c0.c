@@ -35,7 +35,7 @@ extern int g_772514;
 
 void __cdecl fcn_0046b4f0(void);
 void __cdecl fcn_00537320(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00469e30(int);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -52,7 +52,7 @@ void __cdecl fcn_0053f4c0(void)
 	g_7725c8 = 1;
 	fcn_0046b4f0();
 	fcn_00537320(0x24087);
-	fcn_00469e30(fcn_0042e410(2) == 1 ? 0x78e : 0x791);
+	fcn_00469e30(gm_RandomMod(2) == 1 ? 0x78e : 0x791);
 	g_1040480 = -1;
 	g_1040488 = -1;
 	g_1040484 = -1;

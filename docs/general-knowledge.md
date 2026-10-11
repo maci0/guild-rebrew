@@ -716,8 +716,10 @@ What the clients can and cannot give:
   `gm_WalkEntityChain(unsigned short)` body. The formatter pushes a partial
   AX load, and the helper compares SI then masks the index to16 bits before
   addressing its768-entry table. The numeric client helper duplicates that
-  source and still needs consolidation. The formatter remains a scratch
-  candidate; its current TL binding to the true server `srv_Init` is false.
+  source; the later consolidation receipt below supersedes that duplicate.
+  The formatter is now recovered in shared server.c as the inferred
+  `srv_FormatStatTreasury`, RELOC90 in both clients. Its false TL `srv_Init`
+  binding was corrected without changing the true server initializer.
   Evidence: `.scratch/goal20/stat-formatter-family-native.json`,
   `stat-formatter-c-probe.json`, `stat-formatter-behavior.json`.
 
@@ -731,3 +733,152 @@ What the clients can and cannot give:
   function totals or client linked-data evidence. Evidence:
   `.scratch/goal20/stat-helper-replay.json` and
   `stat-helper-after-final-prototype/`.
+
+- Full bounded control-flow traversal of the six statistic formatters in
+  both clients establishes complete bodies of 159/179/68/87/90/147 bytes,
+  followed only by alignment NOPs. The first and last bodies contain internal
+  jumps; the conservative linear reader's earlier 19/57-byte results are
+  partial extents. The attributes format literal contains six floating-point
+  conversions, but the native call passes five float-to-double arguments,
+  one int and one signed short. Preserve this original mismatch when
+  reconstructing bytes; changing the int to a float would change the native
+  call sequence. Both the native operands and every literal byte are compared.
+  Evidence: `.scratch/goal20/stat-family-full-bounds.json` and
+  `stat-attributes-skills-probe/receipt.json`.
+
+- The remaining statistic formats are complete 37-byte identity, 13-byte
+  four-string category, and 6-byte relationship literals in native .data in
+  both clients. TL68d934's old .rdata annotation was wrong and is now repaired
+  to a complete 13-byte .data compiler-literal row.
+  The indexed table TL14a5c6c/GOLD143ab0c supplies the four `%s` arguments;
+  its entries are pointer-sized, not an established integer array. It lies
+  in the zero-filled virtual tail, so the shipped image does not provide its
+  runtime strings or establish its full extent or storage owner. Do not
+  allocate a replacement table from its extern-only declaration. Evidence:
+  `.scratch/goal20/stat-remaining-data-evidence.json`.
+
+- The fourth statistic formatter reads the entity's four office-role bytes
+  at +0x166..+0x169 and formats their string-table entries. The fields' use in
+  aemter.c establishes the office interpretation; the original formatter name
+  and source placement are still inferred. One reconstructed aemter.h supplies
+  the pointer declaration to the shared formatter and existing UI reader.
+  Neither the header nor the two declaration-only alias rows defines storage
+  or claims a complete table extent. LINK resolves even this discarded body's
+  undefined table reference: compiling it into server.c failed with LNK2001.
+  The recovered body now lives once in a client-only server_stats.c selected
+  by the two client identities. That placement is inferred, and no replacement
+  table or preprocessor guard is used to make the server link. Evidence:
+  `.scratch/goal20/stat-offices-probe/receipt.json` and
+  `stat-offices-recovery/receipt.json`, `stat-offices-server-gate.log` and
+  `stat-offices-client-unit.json`.
+
+- The current inferred name `gm_LookupEntityRecordById` is ambiguous across
+  the reconstructed client tree. The shared server helper's complete 56-byte
+  body searches 768 records and matches TL508e40/GOLD505df0 after resolving
+  the ID field as slot-table +4. TL4cef30's separate body searches only 32
+  records at9b4a40..9b8dc0. Its current inferred name does not make those
+  different storage domains interchangeable. Reconcile native call destinations
+  before renaming callers; the shared helper's missing client ID-field rows
+  must describe interior views, not new allocations. Evidence:
+  `.scratch/goal20/stat-record-lookup-probe/receipt.json` and
+  `src/Develop/DieGildeAddOn/game/GOLDTL.spiel62.c`.
+
+- TL's statistic dump begin/end routines at4e73c0/4e77e0 each contain one
+  sprintf call and return after34 bytes, followed by14 alignment NOPs.
+  Their complete54/52-byte literals match the reconstructed messages, but
+  there are no native log calls supporting server.c's four placeholder calls.
+  The year operand is TL7f4c00, the first four bytes of the existing packed
+  calendar view. Its inferred shared scalar spelling `_g_current_year` now
+  resolves through the view's recorded native link symbol without replacing
+  its analysis label or allocating storage. A full Gold .text scan finds neither complete masked code pattern,
+  and the Gold file contains neither delimiter literal. No Gold counterpart
+  is established; applying the adjacent six-formatter VA shift is wrong
+  (the guessed end address is an existing building-table initializer).
+  The four placeholder calls are removed; both complete shared bodies verify
+  as RELOC34, and the final unowned numeric duplicates are retired. The
+  complete54/52-byte .data formats are compiler-literal rows, not new storage
+  or linked-client data verdicts. Independent production-object comparisons
+  validate every operand/literal byte and reject wrong bindings;79 surrounding
+  bodies and typed operands remain unchanged across affected builds. The
+  backing calendar allocation's full extent and owner remain unresolved.
+  Evidence: `.scratch/goal20/stat-dump-delimiters-native.json`,
+  `stat-delimiters-final-native.json`, `stat-delimiters-final-objects/` and
+  `stat-delimiters-retirement.json`.
+
+- Rebrew's shared relocation catalog must index a data row's exact native
+  `link_symbol` as well as its analysis label within the selected target.
+  Ignoring the native spelling forced valid field views/compiler literals to
+  remain unknown to comparisons. Upstream080277bb fixes the common builder;
+  four regressions fail before,97 focused tests, all18 hooks and the frozen
+  full suite(11567passed/50skipped) pass. The project's three-target audit
+  finds no native-spelling conflicts or catalog disagreements. Existing
+  unknown-address policy is unchanged. Evidence:
+  `.scratch/goal20/native-data-catalog-integration.json`.
+
+- The native office queries contain no log calls. Slot queries copy two
+  24-byte rows; affinity reads unsigned-byte rank at template+8 and a
+  7x7 float matrix. TL extents121/124/193 and Gold121/193 are complete;
+  no Gold council counterpart is established. Its neighboring Gold address
+  is affinity, so a family-wide VA shift would bind the wrong function.
+  All960 role-template and196 matrix initializer bytes equal the server's
+  aemter.c data. Client rows remain declaration-only aliases, not new storage
+  or linked verification. The slot declaration alone does not prove its full
+  backing extent. Evidence: .scratch/goal20/office-query-integration-before/
+  data-evidence.json and office-query-final-objects-refresh/{18,19}.json.
+
+- A completely superseded multi-body source needs evidence for every body,
+  owner and reference before deletion. The importer's intentional single-body
+  restriction does not authorize deleting helpers or storage. This explicit
+  query-unit edit separately checks both old bodies and all five target claims
+  against native bytes, retains backups and leaves the automatic guard intact.
+  The missing automation is recorded upstream as7ff37e19. Evidence:
+  .scratch/goal20/office-query-duplicate-retirement/receipt.json.
+
+- The first statistic formatter's invalid-class fallback points exactly240
+  bytes beyond the guarded10x24 class-name view in both clients. Its neighbor
+  is TL's Begin statistic delimiter, but Gold's first-formatter format string.
+  Equal code does not imply equal neighboring string contents. The next shared
+  source probe should preserve the table-relative address; the complete backing
+  extent and original source expression are unproven. Do not introduce a
+  common inline fallback literal or a new allocation. Evidence:
+  .scratch/goal20/stat-identity-provider-evidence.json and
+  stat-identity-fallback-view.json. All5 indexed name-pointer tables are in each
+  client's zero-filled virtual tail; their complete extents/owners are unresolved.
+
+- The first formatter now uses one shared `srv_FormatStatIdentity` body at
+  TL4e73f0/Gold4e58e0: both complete159-byte native bodies, every operand and
+  the37-byte format match, with wrong-address controls. The fallback retains
+  the class-table+240 view. Gold's native year operand is770ae0, not770b60;
+  a declaration-only four-byte `g_current_year` view binds it. Seven existing
+  Gold target/flag groups have no current-year operand in their bound bodies.
+  The broader legacy `g_7f4c00` users/catalog remain unchanged. No backing
+  owner, full table extent, new storage or linked data verdict is inferred.
+  All85 surrounding bodies/typed operands and21 affected client checks pass.
+  Evidence: .scratch/goal20/stat-identity-shared-probe/receipt.json,
+  stat-identity-final-objects/ and stat-identity-binding-before/receipt.json.
+
+- Pool helpers TL41e440/41e490/41e4d0 have complete69/61/93-byte bodies,
+  followed by11/3/3 NOPs. They contain no calls or relocations. Their existing
+  shared m_alloc.c definitions now match every native byte after removal of
+  three unsupported entry logs. Clear returns the sum of occupied slots and
+  resets each block's used count and every slot's leading occupied word;
+  it does not erase slot payloads. Info reports only the first block. Stats
+  sums blocks/used/capacity and averages stride per block, not per slot.
+  All33 surrounding bodies and typed operands remain unchanged across the
+  server/TL/Gold compiler contexts. No header, caller or allocation changed.
+  Evidence: .scratch/goal20/pool-clear-info-stats-objects/ and
+  pool-clear-info-stats-recovery/receipt.json.
+
+- The bounded pool iterator is131 bytes plus13 NOPs in both clients
+  (TL41e350/Gold422ba0). First is39+9 (TL41e3e0/Gold422c30), and free-all
+  is43+5 (TL41e410/Gold422c60). First/free-all have exactly one native call,
+  to their iterator and tracked-free body respectively. The no-log shared
+  first/free-all bodies reproduce every native byte and operand in both
+  clients; their production consolidation remains pending. Gold's first
+  stored48-byte span includes9 NOPs. The current no-log iterator compiles
+  to136 bytes, with loop rotation/register differences; it is not matched.
+  Nine C spellings, four targeted optimization controls, two state-type
+  controls, two CPU controls and three induction controls are saved rejected
+  evidence, not native-body or original-type claims. No asm or guessed
+  storage binding was introduced. Evidence: .scratch/goal20/pool-shared-frontier-probe/
+  and pool-next-{c-shapes,flag-controls,state-controls,induction-controls}/.

@@ -2,7 +2,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl fcn_00505340(unsigned char*);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00455350(int, int, void*);
 int __cdecl fcn_00451840(void*, void*, float);
 
@@ -37,7 +37,7 @@ void __cdecl fcn_004bc090(char* a1)
 		if (gm_CheckEntityType(it) == 0 && fcn_00505340(it) == 0 && *(int*) (it + 0x61) != 0)
 			ents[n++] = it;
 	}
-	chosen = ents[fcn_0042e410(n)];
+	chosen = ents[gm_RandomMod(n)];
 	fcn_00455350(*(int*) (chosen + 0x61), *(int*) (chosen + 0x61) + 0x4c, &pa);
 	cnt = 0;
 	for (i = 0; i < n; i++) {

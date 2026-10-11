@@ -2,7 +2,7 @@
 
 unsigned short* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(void*, int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004bac00(unsigned short*, int*, float);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_0051af00(void*, int, ...);
@@ -19,7 +19,7 @@ int __cdecl fcn_004bad30(int* a1)
 	unsigned short* e;
 	char* s;
 
-	f = (fcn_0042e410(0xd) + 13.0) * 0.01;
+	f = (gm_RandomMod(0xd) + 13.0) * 0.01;
 	e = fcn_00508e40(a1[0]);
 	if (e == 0)
 		return 1;

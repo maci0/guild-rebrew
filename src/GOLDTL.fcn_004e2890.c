@@ -18,7 +18,7 @@ int __cdecl fcn_004e4470(char*);
 int __cdecl fcn_004e4d00(int, int, int);
 int __cdecl fcn_004e6cb0(int);
 void __cdecl fcn_004e4b40(int, int, char*, int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_004727a0(int, int);
@@ -82,7 +82,7 @@ void __cdecl fcn_004e2890(char* m)
 		}
 		if (fcn_004e4d00(1000, 0, 0) == 0) {
 			for (n = fcn_004e6cb0(4) + 2; n > 0; n--)
-				fcn_004e4b40(-8, snd, "_GEBURT_GESCHREI", fcn_004e6cb0(5), fcn_0042e410(0x800) + 1000);
+				fcn_004e4b40(-8, snd, "_GEBURT_GESCHREI", fcn_004e6cb0(5), gm_RandomMod(0x800) + 1000);
 			fcn_004e4d00(7000, 0, 0);
 		}
 	}

@@ -46,7 +46,7 @@ int __cdecl fcn_004e8b40(int idx, Rec* out);
 int __cdecl fcn_004e8b80(int kind, int max, Rec* out);
 Ent* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 
 int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 {
@@ -103,7 +103,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 	for (i = n; i < 6; i++) {
 		list[i] = 0;
 	}
-	i = fcn_0042e410(6);
+	i = gm_RandomMod(6);
 	for (t = 6; t != 0; i = (i + 1) % 6) {
 		if (list[i] != 0 && h != list[i]->h && fcn_0050f980(list[i]->id, e->id, 1) < 33.0f &&
 			recs[i].x10 == 1) {
@@ -123,7 +123,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 	if (e->x130 != 7) {
 		return 0;
 	}
-	i = fcn_0042e410(6);
+	i = gm_RandomMod(6);
 	for (t = 6; t != 0; i = (i + 1) % 6) {
 		p = list[i];
 		if (p != 0 && h != p->h) {
@@ -132,7 +132,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 			}
 			if (other.x8 > info.x8 && recs[i].x10 == 1) {
 				d = fcn_0050f980(p->id, e->id, 1);
-				if (fcn_0042e410(0x20) + 40.0f > d) {
+				if (gm_RandomMod(0x20) + 40.0f > d) {
 					found = list[i];
 					break;
 				}

@@ -14,7 +14,7 @@ typedef struct Ent {
 // SIZE 0x165
 
 void __cdecl fcn_004f4830(int a, Stat* st);
-int __cdecl fcn_00507b00(int job);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 #define MAXF(a, b) (((a) > (b)) ? (a) : (b))
 #define MINF(a, b) (((a) < (b)) ? (a) : (b))

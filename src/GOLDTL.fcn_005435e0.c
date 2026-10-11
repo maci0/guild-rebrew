@@ -58,7 +58,7 @@ int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
 Figure* __cdecl fcn_004c4480(int);
 int __cdecl fcn_004c4fc0(int, int, int, short, int, unsigned char, int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004fda30(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -85,8 +85,8 @@ void __cdecl fcn_005435e0(void)
 	}
 	p = fcn_004c4480(h);
 	fcn_004c44a0();
-	h = fcn_004c4fc0(9, -1, -1, fcn_0042e410(4) + 0x20, -1, (*(Setup*)g_7e23e0).child_look, 0, 1);
-	i = fcn_004c4fc0(9, -1, -1, fcn_0042e410(4) + 0x20, -1, (*(Setup*)g_7e23e0).spouse_look, 0, 0);
+	h = fcn_004c4fc0(9, -1, -1, gm_RandomMod(4) + 0x20, -1, (*(Setup*)g_7e23e0).child_look, 0, 1);
+	i = fcn_004c4fc0(9, -1, -1, gm_RandomMod(4) + 0x20, -1, (*(Setup*)g_7e23e0).spouse_look, 0, 0);
 	fcn_004c44b0();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
@@ -97,12 +97,12 @@ void __cdecl fcn_005435e0(void)
 	child->look = p->look;
 	child->home = p->home;
 	child->parent = p->id;
-	strcpy(child->name, g_14a60d0[fcn_0042e410(0x70)]);
+	strcpy(child->name, g_14a60d0[gm_RandomMod(0x70)]);
 	fcn_004fda30(child->slot);
 	spouse->look = p->look;
 	spouse->home = p->home;
 	spouse->parent = p->id;
-	strcpy(spouse->name, g_14a5dbc[fcn_0042e410(0xbf)]);
+	strcpy(spouse->name, g_14a5dbc[gm_RandomMod(0xbf)]);
 	fcn_004fda30(spouse->slot);
 	child->spouse = spouse->id;
 	spouse->spouse = child->id;
@@ -118,8 +118,8 @@ void __cdecl fcn_005435e0(void)
 	fcn_004c54c0(child->id, p->id, 0x7f, 0);
 	fcn_004c54c0(spouse->id, child->id, 0x7f, 0);
 	fcn_004c54c0(child->id, spouse->id, 0x7f, 0);
-	fcn_004c5150(spouse->id, -1, (*(char*)&g_773d75), (fcn_0042e410(0x200) + 0x1f4) << 5);
-	fcn_004c5150(child->id, -1, (*(char*)&g_773d75), (fcn_0042e410(0x200) + 0x1f4) << 5);
+	fcn_004c5150(spouse->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
+	fcn_004c5150(child->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
 	if (g_6a3440 > -1) {
 		fcn_004b3e10(p->id, (*(Setup*)g_7e23e0).dynasty, 0);
 	}

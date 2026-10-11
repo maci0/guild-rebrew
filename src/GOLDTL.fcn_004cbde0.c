@@ -11,7 +11,7 @@ extern int g_14cbca0;
 extern int g_699364;
 
 int __cdecl rand(void);
-void __cdecl fcn_0042e4c0(int);
+void __cdecl srv_SeedRandom(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl fcn_00508e40(int);
 char* __cdecl sim_CreateCitizen(char, uint, int, uchar, uchar, ushort*);
@@ -42,7 +42,7 @@ int __cdecl fcn_004cbde0(int cmd, char* result)
 		g_699364 = *(int*) (cmd + 0x1f);
 	else
 		*(int*) (cmd + 0x23) = rand();
-	fcn_0042e4c0(*(int*) (cmd + 0x23));
+	srv_SeedRandom(*(int*) (cmd + 0x23));
 	building_entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building_entity == (ushort*) 0)
 		return 1;

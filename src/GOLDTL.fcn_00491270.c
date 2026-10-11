@@ -12,12 +12,12 @@ typedef struct Ent {
 // SIZE 0x165
 
 void __cdecl fcn_004f4830(int a, Stat* st);
-int __cdecl fcn_00507b00(int job);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 
 // FUNCTION: GOLD 0x00491ca0
 // FUNCTION: GOLDTL 0x491270
@@ -27,7 +27,7 @@ int __cdecl fcn_00491270(Ent* e, int a2, int* out)
 	int r;
 	int d;
 
-	r = fcn_00507b00(e->job);
+	r = gm_MapEntityStatRange(e->job);
 	if ((*(int*)&g_7f4c00) < 4) {
 		return 0;
 	}
@@ -35,12 +35,12 @@ int __cdecl fcn_00491270(Ent* e, int a2, int* out)
 	d = st.v[2] - st.v[1];
 	if (r == 9) {
 		if (st.v[6] < (int) (d * 0.55f + st.v[1])) {
-			*out = st.v[2] - fcn_0042e410(6);
+			*out = st.v[2] - gm_RandomMod(6);
 			return 1;
 		}
 	} else {
 		if (st.v[6] > (int) (d * 0.45f + st.v[1])) {
-			*out = st.v[1] + fcn_0042e410(6);
+			*out = st.v[1] + gm_RandomMod(6);
 			return 1;
 		}
 	}

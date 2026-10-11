@@ -5,7 +5,7 @@ extern int g_774654;
 extern int g_14ce8e0;
 
 void __cdecl fcn_004c6ae0(int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_005d9000(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00473a90(int, int);
@@ -26,7 +26,7 @@ int __cdecl fcn_005d96d0(char* e)
 			return 0x20;
 		}
 		fcn_004c6ae0(*(int*) (e + 4), -4);
-		fcn_005d9000(e, fcn_0042e410(6));
+		fcn_005d9000(e, gm_RandomMod(6));
 		return 0x10;
 	}
 	if (e[2] == 6) {
@@ -42,7 +42,7 @@ int __cdecl fcn_005d96d0(char* e)
 				if (g_100f1dc == 2) {
 					if (fcn_00525f60(e, 4) != 0) {
 						fcn_004c6ae0(*(int*) (e + 4), -4);
-						fcn_005d9000(e, fcn_0042e410(6));
+						fcn_005d9000(e, gm_RandomMod(6));
 						r = 1;
 						g_774654 = 1;
 					}

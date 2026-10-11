@@ -34,7 +34,7 @@ struct Task {
 };
 
 Task* __cdecl fcn_0040c0a0(char* e);
-void __cdecl fcn_00406b50(Task* t);
+void __cdecl ch_DroppingObject(Task* t);
 
 int __cdecl fcn_00406d10(char* e, const char* name, const char* name2, int param)
 {
@@ -47,7 +47,7 @@ int __cdecl fcn_00406d10(char* e, const char* name, const char* name2, int param
 	t->owner = e;
 	t->param = param;
 	t->state = 0;
-	t->run = fcn_00406b50;
+	t->run = ch_DroppingObject;
 	t->kind = 0x32;
 	t->next = 0;
 	t->flags = 0;

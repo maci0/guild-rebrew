@@ -35,7 +35,8 @@ typedef struct GuiEnt {
 	int f4c;
 	char pad50[0x74 - 0x50];
 	short font;
-	char pad76[0x7c - 0x76];
+	char pad76[0x78 - 0x76];
+	int bild_offset;
 	char* buf;
 	union {
 		char text[0x1c0 - 0x80];

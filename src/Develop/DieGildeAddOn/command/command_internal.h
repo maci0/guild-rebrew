@@ -51,7 +51,7 @@ extern int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 extern void __cdecl gm_RemoveEntityLink(int);
 extern int __cdecl gm_CheckInventoryCapacity(char*, unsigned int, int);
 extern int __cdecl gm_GetMsgField(int, int);
-extern short* __cdecl gm_GetEntityTableEntry(char*);
+#include "../game/spiel.h"
 extern void* __cdecl gm_FindRecordById(int);
 
 /* CRT / thread */

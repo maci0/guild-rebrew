@@ -13,7 +13,7 @@ extern char g_68bd2c[];
 extern char g_68bd14[];
 extern char g_68bcec[];
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c2c50(char*);
 void __cdecl fcn_00536bb0(void);
 void __cdecl fcn_0052a960(char*);
@@ -28,7 +28,7 @@ void __cdecl fcn_004d2e60(void)
 
 	g_7725c8 = 1;
 	if (g_774930 != 0) {
-		r = fcn_0042e410(100);
+		r = gm_RandomMod(100);
 		if (r < 20)
 			fcn_004c2c50(g_68bd68);
 		else if (r < 40)

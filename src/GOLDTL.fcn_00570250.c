@@ -19,7 +19,7 @@ extern unsigned short g_774970;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00546190(char*);
 
@@ -38,7 +38,7 @@ void __cdecl fcn_00570250(char* u)
 				*(int*) (u + 0x70) = 1;
 			}
 			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), fcn_0042e410(4) + 8, 0, 0);
+			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), gm_RandomMod(4) + 8, 0, 0);
 		} else {
 			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 1, 0, 0);

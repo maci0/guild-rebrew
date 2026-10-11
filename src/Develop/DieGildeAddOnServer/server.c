@@ -1745,19 +1745,19 @@ void __cdecl srv_FormatStatDumpBegin(void)
 {
 	char buf[0x400];
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", __LINE__, "srv_FormatStatDumpBegin(): enter", 1);
+
+
 	sprintf(buf, "++++++++++ Begin statistic dump in round %i +++++++++", g_current_year);
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", __LINE__, buf, 1);
+
+
 }
 
 void __cdecl srv_FormatStatAttributes(char* entity, char* out)
 {
 	unsigned int f;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", __LINE__, "srv_FormatStatAttributes(): enter", 1);
+
+
 	sprintf(out, "%5.2f\t %5.2f\t %5.2f\t %5.2f\t %5.2f\t %5.2f\t %i\t", *(float*) (entity + 0x10),
 	    *(float*) (entity + 0x14), *(float*) (entity + 0x18), *(float*) (entity + 0x1c),
 	    *(float*) (entity + 0x20), *(int*) (entity + 0x24), *(short*) (entity + 0x28));
@@ -1769,8 +1769,8 @@ void __cdecl srv_FormatStatAttributes(char* entity, char* out)
 
 void __cdecl srv_FormatStatSkills(unsigned char* entity, char* out)
 {
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", __LINE__, "srv_FormatStatSkills(): enter", 1);
+
+
 	sprintf(out, "%i\t%i\t%i\t%i\t%i\t", entity[0x80], entity[0x81], entity[0x82], entity[0x83], entity[0x84]);
 }
 
@@ -1778,11 +1778,11 @@ void __cdecl srv_FormatStatDumpEnd(void)
 {
 	char buf[0x400];
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", __LINE__, "srv_FormatStatDumpEnd(): enter", 1);
+
+
 	sprintf(buf, "++++++++++ End statistic dump in round %i +++++++++", g_current_year);
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", __LINE__, buf, 1);
+
+
 }
 
 /* Initializes the building type lookup table (42 entries, 0x18 bytes
@@ -2122,8 +2122,8 @@ int __cdecl srv_GetEntityOfficeSlot(unsigned char* entity, void* role_out, void*
 
 	found = 0;
 	if (entity == 0 || *(unsigned short*) entity == 0xffff || entity[0x166] == 0) {
-		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", __LINE__, "srv_GetEntityOfficeSlot(): invalid entity", 1);
+
+
 		return 0;
 	}
 	key = *(int*) (entity + 4);
@@ -2150,8 +2150,8 @@ int __cdecl srv_GetEntityCouncilSlot(unsigned char* entity, void* role_out, void
 
 	found = 0;
 	if (entity == 0 || *(unsigned short*) entity == 0xffff || entity[0x169] == 0) {
-		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", __LINE__, "srv_GetEntityCouncilSlot(): invalid entity", 1);
+
+
 		return 0;
 	}
 	key = *(int*) (entity + 4);
@@ -2172,19 +2172,34 @@ int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out)
 	extern float g_office_float_table[7][7];
 
 	if (entity == 0 || *(unsigned short*) entity == 0xffff || role == 0 || role >= 30) {
-		/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", __LINE__, "amt_GetOfficeAffinity(): invalid entity or role", 1);
+
+
 		return 0;
 	}
 	if (entity[0x166] >= 30 || entity[0x167] >= 30) {
 		return 0;
 	}
-	if ((g_office_role_templates[entity[0x167]][2] & 0xff) + 1 < (g_office_role_templates[role][2] & 0xff)) {
+	if (((unsigned char*) g_office_role_templates[entity[0x167]])[8] + 1 < ((unsigned char*) g_office_role_templates[role])[8]) {
 		return 0;
 	}
-	if ((g_office_role_templates[entity[0x166]][2] & 0xff) >= (g_office_role_templates[role][2] & 0xff)) {
+	if (((unsigned char*) g_office_role_templates[entity[0x166]])[8] >= ((unsigned char*) g_office_role_templates[role])[8]) {
 		return 0;
 	}
 	*out = g_office_float_table[g_office_role_templates[entity[0x166]][1]][g_office_role_templates[role][1]];
 	return 1;
+}
+
+#include "../DieGildeAddOn/game/spiel.h"
+#include "server_stats.h"
+
+/* Name and unit inferred from the adjacent client statistic formatters. */
+void __cdecl srv_FormatStatTreasury(unsigned short* entity, char* out)
+{
+	int __cdecl gm_AccumulateTyped2(char* entity);
+
+	sprintf(out, "%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t",
+	    *(int*) ((char*) entity + 0x190), *(int*) ((char*) entity + 0x194),
+	    *(int*) ((char*) entity + 0x198), *(int*) ((char*) entity + 0x19c),
+	    *(int*) ((char*) entity + 0x1a0), *(int*) ((char*) entity + 0x1a4),
+	    gm_AccumulateTyped2((char*) entity), gm_WalkEntityChain(*entity));
 }

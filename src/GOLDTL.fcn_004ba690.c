@@ -15,7 +15,7 @@ unsigned short* __cdecl fcn_00508e40(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_00504bd0(int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c6ba0(int, int, int);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -46,7 +46,7 @@ int __cdecl fcn_004ba690(int* a1)
 	}
 	if (n == 0)
 		return 0x400;
-	chosen = ents[fcn_0042e410(n)];
+	chosen = ents[gm_RandomMod(n)];
 	for (i = 0; i < 768; i++) {
 		if (((Ent*)g_7f4ca0)[i].kind == 1 && ((Ent*)g_7f4ca0)[i].owner == chosen) {
 			rec = (char*) &((Ent*)g_7f4ca0)[i];
@@ -59,7 +59,7 @@ int __cdecl fcn_004ba690(int* a1)
 	if (amount <= 0)
 		return 0x400;
 	fcn_004c6ba0(*(int*) (rec + 4), 1,
-	    (char) (amount < fcn_0042e410(10) + 5 ? amount : fcn_0042e410(10) + 5));
+	    (char) (amount < gm_RandomMod(10) + 5 ? amount : gm_RandomMod(10) + 5));
 	fcn_0051af00(buf, *(unsigned short*) (a1 + 1) + 0x12e7, 0x16b8, *(unsigned short*) rec, chosen);
 	fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;

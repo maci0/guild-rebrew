@@ -25,7 +25,7 @@ extern Rec* g_90e094;
 extern int g_6643d8[];
 extern int g_7f4ca4[];
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01(void);
 char* __cdecl fcn_00502cd0(int id, int a, int b, int c, int d);
 unsigned short* __cdecl fcn_00508e40(int id);
@@ -50,7 +50,7 @@ int __cdecl fcn_0049f290(int busy, unsigned short* self, int pending, Act* out)
 	Rec* e;
 	char* r;
 
-	step = g_6643d8[fcn_0042e410(0x10)];
+	step = g_6643d8[gm_RandomMod(0x10)];
 	sel = -1;
 	if ((*(int*) ((char*) self + 0x1c8) & 0x2000000) != 0) {
 		return 0;
@@ -63,7 +63,7 @@ int __cdecl fcn_0049f290(int busy, unsigned short* self, int pending, Act* out)
 	}
 	n = 0x100;
 	count = 0;
-	idx = fcn_0042e410(n);
+	idx = gm_RandomMod(n);
 	while (count < 4 && n != 0) {
 		e = &g_90e094[idx];
 		if (e->type == 0x37 && e->owner != 0xffff && e->owner != *self) {
@@ -106,7 +106,7 @@ int __cdecl fcn_0049f290(int busy, unsigned short* self, int pending, Act* out)
 			}
 			p++;
 		}
-		if (cnt == 0 && fcn_0042e410(4) == 0) {
+		if (cnt == 0 && gm_RandomMod(4) == 0) {
 			out->code = 4;
 			out->a = cand[sel]->id;
 			out->b = 0x6c656176;
@@ -124,7 +124,7 @@ int __cdecl fcn_0049f290(int busy, unsigned short* self, int pending, Act* out)
 		}
 		return 0;
 	}
-	idx = fcn_0042e410(count);
+	idx = gm_RandomMod(count);
 	sel = -1;
 	for (k = 0; k < count; k++) {
 		if (flag[idx] == 1) {

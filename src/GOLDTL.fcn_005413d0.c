@@ -41,7 +41,7 @@ extern char* g_14a5dbc[];
 extern char* g_14a60d0[];
 
 void __cdecl fcn_00546190(unit_77e980*);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004e6200(int, struct building*);
 void __cdecl fcn_004e6b10(int);
 
@@ -107,9 +107,9 @@ void __cdecl fcn_005413d0(int idx)
 		}
 		h->type = 5;
 		if (h->female == 0) {
-			strcpy(h->name, g_14a5dbc[fcn_0042e410(0xbf)]);
+			strcpy(h->name, g_14a5dbc[gm_RandomMod(0xbf)]);
 		} else {
-			strcpy(h->name, g_14a60d0[fcn_0042e410(0x70)]);
+			strcpy(h->name, g_14a60d0[gm_RandomMod(0x70)]);
 		}
 		h->serial = g_773d68;
 		memset(h->slots, 0xff, sizeof(h->slots));

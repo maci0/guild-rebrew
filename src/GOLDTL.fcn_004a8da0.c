@@ -8,7 +8,7 @@ typedef struct Ent {
 
 extern char g_7f4ca0[];
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(int a, int n, int* lim, int a4, float r, unsigned short* ids);
 
 // FUNCTION: GOLD 0x004a8c80
@@ -20,7 +20,7 @@ int __cdecl fcn_004a8da0(int a1, int a2, int a3, int a4, char* out)
 
 	lim[0] = 0xf00500;
 	lim[1] = 0xf00500;
-	if (!fcn_004a5340(a2, 2, lim, 0, (float) fcn_0042e410(0x40), ids)) {
+	if (!fcn_004a5340(a2, 2, lim, 0, (float) gm_RandomMod(0x40), ids)) {
 		return 0;
 	}
 	out[0] = 7;

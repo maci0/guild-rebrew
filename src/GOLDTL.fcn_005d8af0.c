@@ -27,7 +27,7 @@ extern int g_67d370;
 int __cdecl gm_AccumulateTyped2(House*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c6ae0(int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c4510(House*, int);
 void __cdecl fcn_004c4570(int, int, int, unsigned int*);
 void __cdecl fcn_004c5360(void);
@@ -67,7 +67,7 @@ int __cdecl fcn_005d8af0(House* e)
 		for (i = 0; i < 768; i++) {
 			if (((House*)g_7f4ca0)[i].id != 0xffff && ((House*)g_7f4ca0)[i].b2 < 10 && ((House*)g_7f4ca0)[i].b2 != 6 && ((House*)g_7f4ca0)[i].b2 != 7 &&
 				((House*)g_7f4ca0)[i].bc != e->bc) {
-				if ((unsigned char) rank > fcn_0042e410(0x7e) + ((House*)g_7f4ca0)[i].b84) {
+				if ((unsigned char) rank > gm_RandomMod(0x7e) + ((House*)g_7f4ca0)[i].b84) {
 					fcn_004c4510(&((House*)g_7f4ca0)[i], ((House*)g_7f4ca0)[i].f4);
 					fcn_004c4570(1, 1, 0xc, &who);
 					fcn_004c5360();
@@ -111,7 +111,7 @@ int __cdecl fcn_005d8af0(House* e)
 							h = &((House*)g_7f4ca0)[i];
 							/* the redundant b2 test keeps the loop pointer on b2, as in the original */
 							if (h->id != 0xffff && h->b2 < 10 && h->b2 <= 10 && h->bc != e->bc) {
-								if (rank > fcn_0042e410(0x7e) + h->b84) {
+								if (rank > gm_RandomMod(0x7e) + h->b84) {
 									n++;
 									fcn_004c4510(h, h->f4);
 									fcn_004c4570(1, 1, 0xc, &who);

@@ -6,7 +6,7 @@
 extern int g_772fe0;
 extern Rec772fe4* g_772fe4;
 
-unsigned short __cdecl fcn_0042e410(unsigned short n);
+unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_004ec9a0(int p);
 int __cdecl fcn_004ec950(int p, int id);
 
@@ -17,11 +17,11 @@ Rec772fe4* __cdecl fcn_004ecc20(int p)
 	int n;
 
 	if (fcn_004ec9a0(p)) {
-		step = fcn_0042e410((unsigned short) g_772fe0) + 1;
+		step = gm_RandomMod((unsigned short) g_772fe0) + 1;
 		while (step % g_772fe0 == 0) {
 			step++;
 		}
-		idx = fcn_0042e410((unsigned short) g_772fe0);
+		idx = gm_RandomMod((unsigned short) g_772fe0);
 		n = g_772fe0;
 		while (n != 0) {
 			if (!fcn_004ec950(p, g_772fe4[idx].key)) {

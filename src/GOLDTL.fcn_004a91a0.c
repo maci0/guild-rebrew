@@ -1,4 +1,4 @@
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
 char* __cdecl fcn_00508e40(int id);
 
@@ -14,7 +14,7 @@ int __cdecl fcn_004a91a0(int a1, char* e, int a3, int a4, char* out)
 	int thr;
 	char* p;
 
-	thr = fcn_0042e410(4) + 2;
+	thr = gm_RandomMod(4) + 2;
 	if (e[0x166] == 0xd) {
 		return 0;
 	}

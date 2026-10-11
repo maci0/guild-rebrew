@@ -6,7 +6,7 @@ extern char g_6a9694[];
 
 void __cdecl fcn_0046f2c0(int, int);
 int __cdecl fcn_00519190(char*, ...);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_0046f740(int, int, int, int);
 
 void __cdecl fcn_005a0a40(int a)
@@ -21,7 +21,7 @@ void __cdecl fcn_005a0a40(int a)
 	x = 0x1c;
 	y = 0x1d;
 	while (i < 3) {
-		fcn_0046f740(x, y, fcn_0042e410(6) + 0x75b, g_772514);
+		fcn_0046f740(x, y, gm_RandomMod(6) + 0x75b, g_772514);
 		i++;
 		if (i % 8 == 0) {
 			x = 0;

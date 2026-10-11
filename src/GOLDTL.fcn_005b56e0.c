@@ -6,7 +6,7 @@
 extern Offer g_6abb08[];
 extern int g_6ac240;
 
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 
 unsigned short __cdecl fcn_005b56e0(int lo, int hi)
 {
@@ -15,7 +15,7 @@ unsigned short __cdecl fcn_005b56e0(int lo, int hi)
 	int k;
 	Offer* o;
 
-	r = fcn_0042e410((unsigned short) g_6ac240);
+	r = gm_RandomMod((unsigned short) g_6ac240);
 	n = g_6ac240;
 	k = n;
 	while (k != 0) {

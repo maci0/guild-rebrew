@@ -43,7 +43,7 @@ int __cdecl fcn_004f4830(int idx, void* dst);
 char* __cdecl fcn_0050e4a0(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c6ae0(int, int);
 
 // FUNCTION: GOLDTL 0x4fcda0
@@ -107,7 +107,7 @@ int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
 				g_773d48++;
 			}
 			if (((Ent*) g_7f4ca0)[id].type == 3) {
-				amount = (fcn_0042e410((unsigned short) (q.x8 + 2)) + q.x8) * 6400;
+				amount = (gm_RandomMod((unsigned short) (q.x8 + 2)) + q.x8) * 6400;
 				fcn_004c51a0(((Ent*) g_7f4ca0)[id].owner, -1, 0, amount);
 				fcn_004c6ae0(((Ent*) g_7f4ca0)[id].owner, q.x8);
 				g_773d48 += 2;

@@ -7,7 +7,7 @@ extern char s_67fb2c[];
 
 char* __cdecl fcn_00508e40(int id);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c4ef0(char* s);
@@ -35,7 +35,7 @@ int __cdecl fcn_004aaa60(char* a1, int a2, char* x)
 	*(int*) (msg + 0x5c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x60) = g_7f4c08;
 	*(short*) (msg + 0x64) = g_7f4c0c;
-	msg[0x6d] = (char) fcn_0042e410(0x1d);
+	msg[0x6d] = (char) gm_RandomMod(0x1d);
 	*(int*) (msg + 0x68) = *(int*) (p + 4);
 	fcn_004c4eb0(s_67fb2c);
 	fcn_004c5530(msg);

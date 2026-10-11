@@ -17,7 +17,7 @@ typedef struct
 extern int g_772514;
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_14aadc8;
-extern int g_14a5c6c[];
+#include "Develop/DieGildeAddOn/game/aemter.h"
 
 int __cdecl fcn_005cc240(int, int, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
@@ -43,7 +43,7 @@ int __cdecl fcn_005ccad0(int a1, int a2, int a3, unsigned int n, Item* items)
 	for (i = 0; i < n; i++) {
 		if (items[i].x34 != cat) {
 			cat = items[i].x34;
-			fcn_005c9090(g_14a5c6c[cat], half, pos, half * 2, 0x55);
+			fcn_005c9090((int) g_14a5c6c[cat], half, pos, half * 2, 0x55);
 			pos += 0x19;
 		}
 		items[i].x10 = 0x4b;

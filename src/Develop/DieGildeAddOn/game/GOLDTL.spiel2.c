@@ -41,8 +41,8 @@ char* __cdecl gm_AllocObjekt(int, int, int);
 extern char* g_array_base;
 extern unsigned char g_slot_table[2];
 void __cdecl free_node(char*);
-int __cdecl gm_FreeObjectListRecursive(char**);
-void __cdecl gm_NoopRet2(void);
+#include "spiel.h"
+
 char* __cdecl gm_AllocateObjectSlot(void);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 short* __cdecl gm_ResolveParentEntity(short*);
@@ -84,8 +84,8 @@ extern int g_dynasty_generation_counter;
 extern unsigned char g_entity_base[1];
 extern int g_entity_end;
 int __cdecl gm_GetBuildingTypeCategory(int btype);
-int __cdecl gm_MapEntityStatRange(int);
-short* __cdecl gm_GetEntityTableEntry(char*);
+
+
 int __cdecl gm_RandomMod(unsigned short range);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int);

@@ -14,6 +14,7 @@ default_target = "server.dll"
 shared_dir = "src"
 
 [targets."server.dll"]
+defines = ["REBREW_SERVER"]
 # Code generator lock (round 1379): the server's x87 compares are the PLAIN
 # VC6 idiom (`fnstsw ax; test ah,0x40/0x01`, 10 sites in game code, 0
 # Processor-Pack sites binary-wide).  `rebrew toolchain detect --target
@@ -96,6 +97,7 @@ MSS32 = "MSS32.lib"
 MSVCRT = ""
 D3DX8 = "references/dxsdk8/lib/d3dx8.lib"
 LIBCMT = "LIBCMT.lib"
+WINMM = "WINMM.lib"
 
 [targets."Europa1400Gold.exe"]
 defines = ["REBREW_GOLD"]
@@ -126,6 +128,7 @@ CTLFWR32 = "CTLFWR32.lib"
 MSS32 = "MSS32.lib"
 MSVCRT = ""
 LIBCMT = "LIBCMT.lib"
+WINMM = "WINMM.lib"
 [compiler]
 profile = "msvc-6.0-sp5"
 # Docker-only toolchain: CL.EXE runs inside rebrew/msvc:6.0-sp5-win32 (the

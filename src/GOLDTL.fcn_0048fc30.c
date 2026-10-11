@@ -17,7 +17,7 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl fcn_005015e0(char**, char**, char**, int);
@@ -66,7 +66,7 @@ int __cdecl fcn_0048fc30(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	res[1] = fcn_0048f710(e, q, &b1[1], &b2[1]);
 	res[2] = fcn_0048f8f0(e, q, &b1[2], &b2[2]);
 	res[3] = fcn_0048fb10(e, q, &b1[3], &b2[3]);
-	k = fcn_0042e410(4);
+	k = gm_RandomMod(4);
 	for (n = 4; n != 0;) {
 		if (res[k] != 0) {
 			*o1 = b1[k];

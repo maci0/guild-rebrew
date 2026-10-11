@@ -44,7 +44,7 @@ void __cdecl fcn_004727a0(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_005782f0(struct house*, int);
 int __cdecl fcn_00519190();
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_004c5530(char* msg);
@@ -98,13 +98,13 @@ void __cdecl fcn_0058e790(char* e, char* res)
 	g_100f1dc = -1;
 	fcn_004727a0(h, 1);
 	if (mode == 0) {
-		fcn_004c30a0(t, 0, g_6a9828, fcn_0042e410(8), 0xfa);
+		fcn_004c30a0(t, 0, g_6a9828, gm_RandomMod(8), 0xfa);
 		fcn_00519190(0x40f1, 0x40cc, amt);
 	}
 	else {
 		char ev[0xf8];
 
-		fcn_004c30a0(t, 0, g_6a9814, fcn_0042e410(8), 0xfa);
+		fcn_004c30a0(t, 0, g_6a9814, gm_RandomMod(8), 0xfa);
 		fcn_00519190(0x40d3, 0x40cc);
 	}
 	do {

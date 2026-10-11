@@ -31,7 +31,7 @@ void __cdecl fcn_00473a90(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
@@ -75,7 +75,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 	do {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (chance >= fcn_0042e410(8)) {
+				if (chance >= gm_RandomMod(8)) {
 					pos = g_7f4c00;
 					fcn_00500bb0(&pos, 0x60, 0, 0);
 					memset(&m, 0, sizeof(m));

@@ -691,8 +691,8 @@ int __cdecl m_is_tracked(void* ptr)
 	char* entry;
 	int i;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_is_tracked(): enter", 1);
+
+
 	if (ptr != 0) {
 		entry = (char*) g_array_ptr;
 		for (i = 0; i < g_array_count; i++) {
@@ -951,11 +951,11 @@ cleanup:
 
 
 // SIZE 0x10
-struct BlockNode {
+struct M_POOL_BLOCK {
 	int count;
 	int max;
 	int size;
-	struct BlockNode* next;
+	struct M_POOL_BLOCK* next;
 };
 
 /* The target keeps a frame pointer here (push ebp / mov ebp,esp) and homes the
@@ -983,10 +983,10 @@ struct BlockNode {
  * length (239, obj 264), unsigned length (245), the two homes swapped (241),
  * and an arithmetic no-op on the length (245). */
 #pragma optimize("y", off)
-void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
+void* __cdecl m_PoolAlloc(struct M_POOL_BLOCK** head, int size, int max_items)
 {
 	int asize;
-	struct BlockNode* block;
+	struct M_POOL_BLOCK* block;
 	int i;
 	char* slot;
 
@@ -999,7 +999,7 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 	}
 	block = *head;
 	if (block == 0) {
-		block = (struct BlockNode*) m_AllocTracked(asize * max_items + 0x10, "m:pool_get_free(tp_m_pool)");
+		block = (struct M_POOL_BLOCK*) m_AllocTracked(asize * max_items + 0x10, "m:pool_get_free(tp_m_pool)");
 		*head = block;
 		block->count = 0;
 		block->max = max_items;
@@ -1010,7 +1010,7 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 			block = block->next;
 		}
 		if (block == 0) {
-			block = (struct BlockNode*) m_AllocTracked(asize * max_items + 0x10, "m:pool_alloc(tp_m_pool)");
+			block = (struct M_POOL_BLOCK*) m_AllocTracked(asize * max_items + 0x10, "m:pool_alloc(tp_m_pool)");
 			block->count = 0;
 			block->max = max_items;
 			block->size = asize;
@@ -1115,21 +1115,21 @@ void __cdecl m_pool_free(int* pool, int* block)
 
 /* Client-only pool helpers (TL 0x41e350..0x41e4d0, after m_pool_free; discarded). An iterator is
  * three ints: the current block, the next slot index in it, and the block's used slots left. */
-
+#include "m_pool.h"
 void* __cdecl m_pool_next(int* it)
 {
 	int idx;
 	int stride;
 	char* slot;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_next(): enter", 1);
+
+
 	if (it != 0 && it[0] != 0) {
 		idx = it[1];
 		do {
-			stride = ((struct BlockNode*) it[0])->size;
+			stride = ((struct M_POOL_BLOCK*) it[0])->size;
 			if (it[2] == 0) {
-				it[2] = ((struct BlockNode*) it[0])->count;
+				it[2] = ((struct M_POOL_BLOCK*) it[0])->count;
 			}
 			slot = (char*) it[0] + 0x10 + idx * stride;
 			if (it[2] > 0) {
@@ -1139,23 +1139,23 @@ void* __cdecl m_pool_next(int* it)
 				}
 				if (--it[2] <= 0) {
 					it[1] = 0;
-					it[0] = (int) ((struct BlockNode*) it[0])->next;
+					it[0] = (int) ((struct M_POOL_BLOCK*) it[0])->next;
 					it[2] = 0;
 				} else {
 					it[1] = idx + 1;
 				}
 				return slot + 4;
 			}
-			it[0] = (int) ((struct BlockNode*) it[0])->next;
+			it[0] = (int) ((struct M_POOL_BLOCK*) it[0])->next;
 		} while (it[0] != 0);
 	}
 	return 0;
 }
 
-void* __cdecl m_pool_first(struct BlockNode* head, int* it)
+void* __cdecl m_pool_first(struct M_POOL_BLOCK* head, int* it)
 {
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_first(): enter", 1);
+
+
 	if (head != 0 && it != 0) {
 		it[0] = (int) head;
 		it[1] = 0;
@@ -1165,13 +1165,13 @@ void* __cdecl m_pool_first(struct BlockNode* head, int* it)
 	return 0;
 }
 
-void __cdecl m_pool_free_all(struct BlockNode** head)
+void __cdecl m_pool_free_all(struct M_POOL_BLOCK** head)
 {
-	struct BlockNode* block;
-	struct BlockNode* next;
+	struct M_POOL_BLOCK* block;
+	struct M_POOL_BLOCK* next;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_free_all(): enter", 1);
+
+
 	if (head == 0) {
 		return;
 	}
@@ -1184,15 +1184,15 @@ void __cdecl m_pool_free_all(struct BlockNode** head)
 	*head = 0;
 }
 
-int __cdecl m_pool_clear(struct BlockNode** head)
+int __cdecl m_pool_clear(struct M_POOL_BLOCK** head)
 {
 	int n;
-	struct BlockNode* block;
+	struct M_POOL_BLOCK* block;
 	int i;
 	char* slot;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_clear(): enter", 1);
+
+
 	n = 0;
 	if (head != 0) {
 		block = *head;
@@ -1212,15 +1212,15 @@ int __cdecl m_pool_clear(struct BlockNode** head)
 	return n;
 }
 
-void __cdecl m_pool_info(struct BlockNode** head, int* count, int* max, int* size)
+void __cdecl m_pool_info(struct M_POOL_BLOCK** head, int* count, int* max, int* size)
 {
-	struct BlockNode* block;
+	struct M_POOL_BLOCK* block;
 	int a;
 	int b;
 	int c;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_info(): enter", 1);
+
+
 	a = 0;
 	b = 0;
 	c = 0;
@@ -1243,15 +1243,15 @@ void __cdecl m_pool_info(struct BlockNode** head, int* count, int* max, int* siz
 	}
 }
 
-void __cdecl m_pool_stats(struct BlockNode* block, int* blocks, int* used, int* slots, unsigned int* avg_size)
+void __cdecl m_pool_stats(struct M_POOL_BLOCK* block, int* blocks, int* used, int* slots, unsigned int* avg_size)
 {
 	int c;
 	int a;
 	int b;
 	unsigned int d;
 
-	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
-	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", __LINE__, "m_pool_stats(): enter", 1);
+
+
 	c = 0;
 	a = 0;
 	b = 0;

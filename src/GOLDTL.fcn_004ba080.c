@@ -47,7 +47,7 @@ int __cdecl fcn_005c6270(void*, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_00504bd0(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -94,7 +94,7 @@ int __cdecl fcn_004ba080(Req* r)
 		return 0x400;
 	}
 	m = 0;
-	p1 = list[fcn_0042e410(n)];
+	p1 = list[gm_RandomMod(n)];
 	for (i = 0; i < 768; i++) {
 		if (m >= 6) {
 			break;
@@ -105,13 +105,13 @@ int __cdecl fcn_004ba080(Req* r)
 		}
 	}
 	if (m > 2) {
-		p2 = list[fcn_0042e410(m)];
+		p2 = list[gm_RandomMod(m)];
 	}
 	if (p1 == 0 || p2 == 0) {
 		return 0x400;
 	}
 	dist = fcn_0050f980(*(unsigned short*) o, *(unsigned short*) p2, 1);
-	if (!((float) fcn_0042e410(50) > dist)) {
+	if (!((float) gm_RandomMod(50) > dist)) {
 		return 0x400;
 	}
 	fcn_0051af00(buf, r->x4 + 0x12e7, (p2[9] ? 0x230 : 0x20d) + *(unsigned char*) (p2 + 0x165),

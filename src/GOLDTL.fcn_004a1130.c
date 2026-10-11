@@ -115,7 +115,7 @@ int __cdecl fcn_0049d180(void);
 int __cdecl fcn_0049d200(void);
 int __cdecl fcn_0049d220(void);
 int __cdecl fcn_0049d300(void);
-int __cdecl fcn_0049d640(void);
+#include "client_actions.h"
 int __cdecl fcn_0049d7c0(void);
 int __cdecl fcn_0049d920(void);
 int __cdecl fcn_0049d930(void);
@@ -1714,7 +1714,7 @@ int __cdecl fcn_004a1130(char* e)
 	strcpy(d.name, "Buergermeister");
 	d.score = fcn_0049d220;
 	d.start = fcn_0049d300;
-	d.run = fcn_0049d640;
+	d.run = RunBuergermeister;
 	d.flags = 0x39;
 	if (fcn_00494ed0(&d, e) == 0) {
 		return 0;

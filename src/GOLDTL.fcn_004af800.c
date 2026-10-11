@@ -22,7 +22,7 @@ void __cdecl fcn_0051af00(void*, int, ...);
 int __cdecl fcn_0064eeec(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004ae0f0(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 int __cdecl fcn_004ae130(unsigned short a1);
 int __cdecl fcn_004ae1c0(int a1);
@@ -131,7 +131,7 @@ int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
 	if (found == 0) {
 		return 0;
 	}
-	r = &((Rec21c*)g_7f4ca0)[ids[(unsigned short) fcn_0042e410(5)]];
+	r = &((Rec21c*)g_7f4ca0)[ids[(unsigned short) gm_RandomMod(5)]];
 	if (mode == 0) {
 		pairs[idx * 2 + 1] = r->key;
 	}

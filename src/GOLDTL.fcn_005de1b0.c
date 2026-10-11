@@ -45,7 +45,7 @@ Unit* __cdecl fcn_005bdc30(int, Req*, char*, int, int);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
 unsigned char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005015e0(Unit**, int, int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 float __cdecl gm_RandomFloat01(void);
 float __cdecl fcn_004ff210(int, int);
@@ -92,7 +92,7 @@ int __cdecl fcn_005de1b0(unsigned char* obj, int* arg)
 			return 0;
 		}
 	}
-	fcn_004c54c0(*(unsigned short*) e, ((House*)g_7f4ca0)[q->w27].f4, -20 - fcn_0042e410(0x20), 1);
+	fcn_004c54c0(*(unsigned short*) e, ((House*)g_7f4ca0)[q->w27].f4, -20 - gm_RandomMod(0x20), 1);
 	for (i = 0; i < 768; i++) {
 		if (((House*)g_7f4ca0)[i].b2 == 0 && ((House*)g_7f4ca0)[i].f16c == q) {
 			fcn_004ff210(i, (int) -((gm_RandomFloat01() * 0.2f + 0.1f) * ((House*)g_7f4ca0)[i].f1c));

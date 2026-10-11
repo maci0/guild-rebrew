@@ -24,9 +24,12 @@ typedef struct SOUND_SOURCE {
 
 extern int g_677680;
 extern SOUND_SOURCE* g_6b5d08;
+extern Chan_14cc460* g_772efc;
+extern Chan_14cc460* g_772d1c;
+extern Chan_14cc460* g_772d20;
+extern Chan_14cc460* g_772d24;
 
 /* Read-only eight-byte scale view; native storage owner is unresolved. */
-extern const double g_662b40;
 extern const double g_662b40;
 
 void __cdecl fcn_00426170(int* voice, int enabled);
@@ -35,5 +38,9 @@ SOUND_SOURCE* __cdecl fcn_00418c80(char* voice, char* objekt, int volume, float 
 void __cdecl fcn_00418d70(SOUND_SOURCE* source);
 void __cdecl fcn_00418fb0(SOUND_SOURCE* source);
 void __cdecl fcn_004190d0(SOUND_SOURCE* source);
+
+int __cdecl fcn_004193f0(char* obj, void* label, int mode, float amount);
+
+void __cdecl PlayEntitySound(char* cmd);
 
 #endif

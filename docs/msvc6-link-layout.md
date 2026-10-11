@@ -5179,6 +5179,47 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   unstable sort decides from every executable COMDAT's size and relocation count. Adding or removing discarded
   code, or loading a member in another pass, can flip it. `.scratch/measure/icf_predict.py VERBOSE_LOG
   BUILD_DIR` rebuilds the array and predicted the survivor in 42 of 42 native links (31 `a_cmp`, 11 `a_map`).
+- **Faithful statistic recovery (2026-10-11, pending layout).** Adding the
+  independently matched 90-byte treasury formatter changes the discarded
+  COMDAT array and the native raw link keeps `a_map.obj`'s `_strncnt` at
+  `0x1001f855`. Removing the unsupported attributes and skills entry logs
+  yields exact 179/68-byte client bodies and preserves 77 surrounding body
+  measurements, but the survivor stays `a_map`. Current `.text` VirtualSize
+  is141398 against141382; `.reloc` is66384 against66420. The latter is5532
+  DIR32 reservations against5535: the treasury format adds one literal
+  reference and removing the two literal entry logs removes four. The raw
+  DLL still differs in16579 bytes. This is unresolved source/link input debt,
+  not permission to recreate guessed logging or add padding. Evidence:
+  `.scratch/goal20/stat-pair-link-audit.json`, `stat-pair-final-objects/` and
+  `stat-pair-final-native.json`. These pending measurements supersede the
+  earlier placeholder-assisted identity checkpoint for the current tree.
+- **Office-statistic client unit (2026-10-11).** The independently matched
+  87-byte office formatter's role-name table has no verified server storage
+  provider. Adding the body to server.c failed LINK with LNK2001 even though
+  the function is otherwise discarded. It now lives once in server_stats.c,
+  selected only by its two client identities. That source-unit choice is
+  inferred; it does not prove the original placement or authorize a replacement
+  array, target guard or library patch. Restoring the original server.c input
+  restores a successful raw link with the same16579 residual differences,
+  .text+16/.reloc-36; all316 functions,648/652 data,100 imports and Wine exports
+  pass. Evidence: `.scratch/goal20/stat-offices-server-gate.log`,
+  `stat-offices-client-unit.json`, `stat-offices-client-unit-server-gate.log`
+  and `stat-offices-scope-check.json`.
+- **Faithful delimiter recovery (2026-10-11).** Removing the four unsupported
+  begin/end log calls produces the complete34-byte native TL bodies and
+  preserves79 surrounding body/operand measurements. These two routines
+  contain exactly one sprintf each; Gold supplies no established counterpart.
+  The new raw link retains the same a_map.obj `_strncnt` survivor and16579
+  differing bytes. Its.text VirtualSize stays141398 versus141382, while.reloc
+  is now66312 versus66420:5526 DIR32 reservations versus5535. The six removed
+  absolute log operands explain the72-byte reservation decrease; the live
+  function checks(316/316), data result(648/652),100 imports and Wine exports
+  remain unchanged. This supersedes the earlier.reloc-36 current-tree figure.
+  Source/link arrangement and missing genuine discarded inputs remain open;
+  restoring guessed logs or adding layout padding would falsify the source.
+  Evidence: `.scratch/goal20/stat-delimiters-server-gate.log`,
+  `stat-delimiters-final-objects/`, `stat-delimiters-final-native.json` and
+  `stat-delimiters-scope-check.json`.
 - **IAT inversion.** The import sort compares only the DLL file name, so the IAT permutation depends only on
   the array's DLL-key sequence: KERNEL32 x (28 + h), its null thunk, USER32 x 2, null, WS2_32 x (16 + w),
   null, WINMM x (1 + m), null, KERNEL32 x (53 + t), where h counts dropped KERNEL32 imports of the game's
@@ -5483,3 +5524,142 @@ hint/name table (addressed through the data directories), the export names, and 
   sweep's copies of all three (5f) are the ones used. Alone, the close or the clock copy flips `_strncnt` to
   `a_map.obj` (`.scratch/measure/icf_whatif.py --add AFTER:SIZE:NRELOC` tests a synthetic insertion); in
   the integrated tree the placeholder set is re-tuned so `a_cmp.obj` keeps it (5f).
+
+## 88. Faithful office-query guards remove discarded relocation reservations
+
+Three inferred guard logs in server.c have no calls in any established native
+counterpart. Their removal preserves source line counts and all89 surrounding
+compiled bodies/typed operands. Slot/council bodies are121/124 bytes; affinity
+is193 bytes and reads a rank byte, rather than a DWORD mask. All5 complete
+client bodies and native operands match; Gold's old208 span included15 NOPs.
+Removing the two fully superseded numeric source units preserves all other
+owners and prevents unowned client input from entering the build fallback.
+
+The raw server gate is still not byte-identical: 2 differing bytes,
+.text VirtualSize141382 versus141382
+(+0), .reloc66240 versus66420
+(-180). No compensating padding, fake logs, library edits or linker
+flag tuning is introduced. Client-table alias cataloging allocates no storage.
+The reference LIBCMT:a_cmp.obj survivor is restored and all652 data comparisons
+pass (409 exact placements). An independent whole-file audit proves that only
+header offsets0x260/0x261 differ: .reloc VirtualSize0x102c0 versus0x10374.
+All section raw bytes and every other header byte are identical. This replaces
+the earlier a_map survivor, four data drifts and16579-difference evidence.
+The earlier placeholder-assisted layout recipes remain historical; this
+checkpoint does not establish original discarded TU arrangement or client
+storage ownership. Evidence: `.scratch/goal20/office-query-server-gate.log`,
+`office-query-scope-final.json` and `office-query-duplicate-retirement/receipt.json`.
+
+Identity formatter consolidation (2026-10-11) leaves the raw server image
+unchanged: SHA25641942164041aab05dce0818fdd34ee0d66732d6556b2e8e02f7f3f448fe7eb86.
+The new shared client-only body has no SERVER identity or replacement storage.
+Its superseded single-body numeric unit is retired through the public verified
+importer after both client comparisons pass. Independent whole-file checking
+still finds only offsets0x260/0x261, the .reloc VirtualSize short180; every
+section raw byte and every other header byte match. No extra relocation
+reservation, header patch or library modification is introduced. Evidence:
+`.scratch/goal20/stat-identity-raw-server-audit.json` and
+`stat-identity-retirement.json`.
+
+Pool helper source reconciliation (2026-10-11) supersedes the180-byte
+reservation shortfall above. Removing three unsupported entry logs preserves
+all live section bytes but removes six discarded-input DIR32 records.
+Raw SHA256 fdda79d8280e7a4ad2a31c65c9d5df66a5655a7fd85fe829174277bd1840203d;
+only offsets0x260/0x261 differ, .reloc VirtualSize66168 versus66420 (short252).
+All316 function checks and652 data comparisons pass, with409 exact placements.
+The pre-change frozen verbose link measured5520 actual DIR32 inputs versus
+5535 implied by the reference; this is not a fresh post-change census.
+143 unsupported placeholder calls remain. Recover original source inputs
+and translation-unit boundaries from evidence rather than filling the
+reservation with invented code. The wider pool iterator remains unmatched.
+Evidence: `.scratch/goal20/server-relocation-frontier/receipt.json` and
+`pool-clear-info-stats-raw-server-audit.json`.
+
+## 89. Allocator source correction restores stock CRT selection and server data
+
+The canonical gate's four data drifts were caused by the stock CRT selection
+changing after earlier source integration. Two unsupported allocator entry log
+calls remained in m_is_tracked and m_pool_free_all. Neither native client helper
+contains them; complete 60-byte and 43-byte bodies agree in both clients, with
+all six typed operands checked and six wrong-binding controls rejected. These
+are game helpers, not CRT implementations. Removing the calls preserves every
+source line number and all 12 surrounding complete allocator bodies/operands
+in the plain server and both Processor-Pack client builds.
+
+A frozen control link reproduces all 16,580 previous raw differences. The
+source-only candidate and canonical CMake build select stock LIBCMT:a_cmp.obj
+for _strncnt at 0x1002350a. No CRT source, archive member, linker flag/order,
+reference, object byte or PE header was patched. All 652/652 data comparisons
+now pass, with 409 exact placements; all 316/316 function checks pass, as do
+100 imports and Wine exports. The independent raw audit shows every section
+byte and other header byte identical to the reference. Only offsets 0x260 and
+0x261 differ: .reloc VirtualSize 66,072 versus 66,420 (short 348). Raw SHA256:
+2583c710fc60a11cb707fe5dab606d66d8419c67237a9f926a5f1fef75f38680.
+The gate remains FAIL on whole-file identity. Recover original discarded
+inputs and translation-unit boundaries from evidence; do not compensate with
+invented logs, CRT bodies or relocation reservations.
+
+Evidence: `.scratch/goal21/server-data-fix/server-gate-after.log`,
+`raw-audit.json`, `body-proof.json`, `client-body-proof.json`, and
+`scope-final.json`. This checkpoint supersedes the four-drift/raw-image
+measurements recorded after the earlier pool source integration.
+
+Current-input census follow-up (2026-10-11): the frozen exact canonical link
+contains 5,506 actual DIR32/import-thunk records, versus 5,535 required by the
+reference reservation. All 3,499 emitted nonzero relocation sites/types are
+identical to the reference. LIBCMT/OLDNAMES inputs used by the census match the
+actual pinned Docker archive hashes. The 29-record deficit is discarded-input
+debt; no missing runtime relocation is demonstrated. Sibling shape scans remain
+advisory, and stricter managed-identity filtering exposes false heuristic pair
+attributions rather than proving another original server input. No repair is
+landed. Evidence: `.scratch/goal21/server-header-fix/investigation.json` and
+`current-input-census.json`.
+
+### Current-input and additional-build audit (2026-10-11)
+
+An isolated relink of the **current** 36 CMake objects, response files and stock
+archives reproduces raw SHA256
+`2583c710fc60a11cb707fe5dab606d66d8419c67237a9f926a5f1fef75f38680`.
+Its fresh verbose trace independently confirms 5506 input DIR32 reservations
+versus the reference's 5535; no owner's DIR32 count differs from the earlier
+census. Whole-file comparison still differs only at 0x260/0x261.
+
+A selected-name search outside the relumea tree found original German Gold
+(`b341730b...`) and older base server builds, plus copies and rebuilt artifacts.
+The zero-byte `reguild/original/server.obj` and reimplementation PDBs are not
+original link inputs. German Gold discovery and an advisory masked native
+comparison provide additional candidates, but establish no missing discarded
+English Gold body or log call. Similarity is not a source/provider proof.
+The search excluded caches/build/scratch, did not follow symlinks and had
+unreadable paths; it is not exhaustive. No production source, managed store,
+layout, configuration or archive changed. The full gate was not rerun because
+its inputs are unchanged; its terminal 316/316 and 652/652 results remain
+applicable, with whole-file identity failing. Evidence:
+`.scratch/goal21/server-header-current/receipt.json`, `control-link.log`,
+`current-input-census.json`, `server-artifact-hashes.json`, and
+`german-english-comparison.json`. The two-byte repair remains open; do not
+replace missing authentic inputs with manufactured DIR32 reservations.
+
+### Previous 100% build reproduced (2026-10-11)
+
+The earlier whole-file PASS is reproducible, not merely a stored verdict.
+Compiling `m_alloc.c` and `server.c` from commit
+`383252b5bb709da9928dbdb67bdd56b18ccda0b1` with the current native compiler
+and substituting those two objects into an isolated copy of the current link
+inputs yields all 286720 reference bytes exactly: SHA256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+No production source, object, image, archive or layout was replaced.
+
+Complete object DIR32 counts localize the current 29-record shortfall:
+`m_alloc.c` 117 to103 (-14), `server.c`393 to378 (-15). Seven allocator
+placeholder logs remove14 records; nine server placeholder logs remove16
+records, while the recovered treasury formatter adds one. The other changed
+objects have no net reservation difference in the independently reproduced
+current5506-record census. Thus restoring the old source recreates byte identity,
+but also restores16 explicitly documented placeholder calls; that replay does
+not prove those calls belonged to the original developers' source. Native
+fidelity remains the unresolved requirement. No additional original source,
+PDB or object set is available, per the user's answer. Receipts:
+`.scratch/goal21/last-green-trace/object-dir32-deltas.json` and
+`historical-replay.json`. The user separately requested committing all current
+repository changes; run and report the current gate without weakening it.

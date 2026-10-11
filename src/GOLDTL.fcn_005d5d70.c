@@ -45,7 +45,7 @@ void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 void __cdecl fcn_005c9220(int*);
 int __cdecl fcn_00525f60(House*, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
@@ -94,8 +94,8 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 				if (fcn_00525f60(&((House*)g_7f4ca0)[g_774970], 2)) {
 					struct msg m;
 
-					a = fcn_0042e410(9) + 0x1d76;
-					b = fcn_0042e410(9) + 0x1d6d;
+					a = gm_RandomMod(9) + 0x1d76;
+					b = gm_RandomMod(9) + 0x1d6d;
 					memset(&m, 0, sizeof(m));
 					m.f8 = ((House*)g_7f4ca0)[g_774970].f4;
 					m.pos = g_7f4c00;

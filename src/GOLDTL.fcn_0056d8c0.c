@@ -10,7 +10,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 char* __cdecl gm_AddObjekt(void);
 int __cdecl gm_CheckEntityType(char*);
 int __cdecl fcn_00505340(char*);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_00451840(char*, char*, float);
 
 void __cdecl fcn_0056d8c0(char* u)
@@ -31,7 +31,7 @@ void __cdecl fcn_0056d8c0(char* u)
 	}
 	memset(u + 0xb0, 0xff, 0x3c);
 	if (*(int*) (u + 0xac) == -1) {
-		p = list[fcn_0042e410(n)];
+		p = list[gm_RandomMod(n)];
 		*(int*) (u + 0xac) = *(int*) (p + 1);
 	} else {
 		p = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0xac));

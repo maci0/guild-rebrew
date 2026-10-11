@@ -33,7 +33,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 
 int __cdecl fcn_004ecf00(char*, int*, int*, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c5530(Msg*);
 
 int __cdecl fcn_00585760(char* e, int* list, int idx)
@@ -56,7 +56,7 @@ int __cdecl fcn_00585760(char* e, int* list, int idx)
 	msg.flag = 1;
 	msg.v5c = list[idx * 2 + 3];
 	msg.v58 = list[0];
-	msg.v68 = fcn_0042e410(0x5a0) + 1000;
+	msg.v68 = gm_RandomMod(0x5a0) + 1000;
 	fcn_004c5530(&msg);
 	return 1;
 }

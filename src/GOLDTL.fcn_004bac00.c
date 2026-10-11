@@ -3,7 +3,7 @@ extern unsigned char g_773d75;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_00504bd0(int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
@@ -33,7 +33,7 @@ int __cdecl fcn_004bac00(unsigned short* a1, int* a2, float a3)
 	if (n == 0)
 		goto fail;
 	m = 0;
-	c = arr[fcn_0042e410(n)];
+	c = arr[gm_RandomMod(n)];
 	*a2 = *(int*) (c + 1);
 	q = fcn_00502cd0(*(int*) (c + 0x5d), 2, 6, 0, 0x2a);
 	if (q == 0)

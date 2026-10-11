@@ -11,7 +11,7 @@ typedef struct
 extern unsigned char* g_868050;
 
 int __cdecl fcn_004f1320(unsigned char* e);
-unsigned short __cdecl fcn_0042e410(unsigned short n);
+unsigned short __cdecl gm_RandomMod(unsigned short n);
 
 Rec44* __cdecl fcn_004f1a40(unsigned char* e)
 {
@@ -26,7 +26,7 @@ Rec44* __cdecl fcn_004f1a40(unsigned char* e)
 	d = *(char**) (e + 0x65);
 	if (ent[0] == 0x1d && ent[0x247] >= 1 && ent[0x247] <= 3) {
 		n = fcn_004f1320(e);
-		idx = fcn_0042e410((unsigned short) n);
+		idx = gm_RandomMod((unsigned short) n);
 		k = n;
 		if (k != 0) {
 			recs = *(Rec44**) (d + 0x20);

@@ -33,7 +33,7 @@ typedef struct Game {
 } Game;
 
 extern int g_6b7fb8;
-extern int g_772efc;
+#include "client_sound.h"
 extern int g_772e94;
 extern int g_772ea4;
 extern int g_772ea8;
@@ -49,10 +49,10 @@ extern unsigned short* g_772f24;
 extern int g_68b79c;
 extern char g_9b0e20[];
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004d1a80(void);
 void __cdecl fcn_004d7e50(int);
-int __cdecl fcn_00420780(const char* name, int a);
+#include "Develop/Units/Msx/msx.h"
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00405540(Obj*, int);
 void __cdecl fcn_00533a40(char*);
@@ -72,7 +72,7 @@ void __cdecl fcn_004d9f20(int arg)
 	int i;
 
 	last = (*(volatile unsigned int*)&g_6b7fb8) - 0x15e;
-	r = fcn_0042e410(100);
+	r = gm_RandomMod(100);
 	fcn_004d1a80();
 	fcn_004d7e50(arg);
 	g_772efc = 0;

@@ -6,7 +6,7 @@ int __cdecl fcn_005049c0(int*);
 int __cdecl fcn_004937f0(int*);
 int __cdecl fcn_00493800(int*);
 void __cdecl fcn_004c54c0(int, int, int, int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_00493a30(char*, int*);
 int __cdecl fcn_00493ce0(char*, int*);
 
@@ -42,7 +42,7 @@ void __cdecl fcn_004dfba0(char* a1, int* ev)
 		break;
 	case 6:
 		if (*(int*) (a1 + 0x10) == ev[6])
-			*(int*) (a1 + 0x94) = fcn_0042e410(2);
+			*(int*) (a1 + 0x94) = gm_RandomMod(2);
 		break;
 	case 4:
 		if (*(int*) (a1 + 0x10) == ev[7] || *(int*) (a1 + 0x10) == ev[8] || *(int*) (a1 + 0x10) == ev[9]) {

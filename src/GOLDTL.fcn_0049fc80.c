@@ -18,7 +18,7 @@ typedef struct Rec18 {
 extern char g_7f4ca0[];
 
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
-int __cdecl fcn_004e7b70(Ent* t, Rec18* a, Rec18* b);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl fcn_004e9310(int k, int max, Ent** out);
 float __cdecl fcn_0050f980(int a, int b, int c);
 int __cdecl fcn_004a5340(Ent* e, int a, int* b, int c, float r, int* out);
@@ -42,7 +42,7 @@ Ent* __cdecl fcn_0049fc80(Ent* e)
 		fcn_004e8b40(e->x167, &q);
 		for (i = 0; i < 768; i++) {
 			t = &((Ent*)g_7f4ca0)[i];
-			if (t->x166 != 0 && fcn_004e7b70(t, &q, &r) != 0 && q.x8 <= 1) {
+			if (t->x166 != 0 && srv_GetEntityOfficeSlot((unsigned char*) t, &q, &r) != 0 && q.x8 <= 1) {
 				if (best == 0) {
 					best = t;
 					bd = fcn_0050f980(e->id, t->id, 1);

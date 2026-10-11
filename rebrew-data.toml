@@ -6798,16 +6798,24 @@ type = "char[]"
 ["GOLDTL.0x014cc360"]
 name = "g_14cc360"
 section = ".data"
-file = "src/GOLD.fcn_00478860.c"
+file = "src/Develop/Units/Msx/msx.h"
 marker_type = "GLOBAL"
 type = "char[]"
+storage_kind = "alias"
+note = "Native MSX path-buffer view used by TL420760 setter and TL41fe10 start helper. Complete extent and allocation owner unresolved; declaration only."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:46:54+00:00"
 
 ["GOLD.0x00f8aae0"]
-name = "g_14cc360"
+name = "g_f8aae0"
 section = ".data"
 file = "src/GOLD.fcn_00478860.c"
 marker_type = "GLOBAL"
 type = "char[]"
+storage_kind = "alias"
+note = "Unassigned native game string-buffer view used by GOLD478860. Previously mispaired with TL420760 music-path buffer. Original name, complete extent and allocation owner unresolved; declaration only."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:46:54+00:00"
 
 ["GOLDTL.0x010058a0"]
 name = "g_10058a0"
@@ -6950,11 +6958,16 @@ name = "g_67db54"
 type = "float"
 
 ["GOLDTL.0x007f4c00"]
-section = ".rdata"
+section = ".data"
 file = "src/GOLDTL.fcn_004c5700.c"
 marker_type = "GLOBAL"
 name = "g_7f4c00"
 type = "pos14_7f4c00"
+updated_by = "data"
+updated_at = "2026-10-10T20:08:04+00:00"
+storage_kind = "alias"
+link_symbol = "_g_current_year"
+note = "Declaration-only packed calendar view; native delimiter operands read its first four bytes as an integer year. _g_current_year is the inferred shared C scalar-view spelling, independently resolved against native operands; not another allocation. The existing 14-byte declaration does not establish the complete backing extent or storage owner; both remain unresolved."
 
 ["GOLDTL.0x0068ae64"]
 section = ".data"
@@ -7224,10 +7237,15 @@ section = ".rdata"
 
 ["GOLDTL.0x01015ea0"]
 section = ".data"
-file = "src/GOLDTL.fcn_00469110.c"
+file = "src/Develop/Units/d2.v1/d2_gui.h"
 marker_type = "GLOBAL"
 name = "g_1015ea0"
 type = "char *"
+size = 4
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
 
 ["GOLDTL.0x00f8f080"]
 section = ".data"
@@ -7237,6 +7255,15 @@ section = ".data"
 
 ["GOLD.0x00f8f080"]
 section = ".data"
+name = "g_00f8f080"
+type = "GuiEnt *"
+size = 4
+file = "src/Develop/Units/d2.v1/d2_gui.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
 
 ["GOLDTL.0x006641a4"]
 section = ".data"
@@ -7530,10 +7557,15 @@ type = "int"
 
 ["GOLDTL.0x006b7e98"]
 section = ".data"
-file = "src/GOLDTL.fcn_0040dad0.c"
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
 marker_type = "GLOBAL"
 name = "g_6b7e98"
 type = "char *"
+size = 4
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
 
 ["GOLDTL.0x006332b8"]
 section = ".data"
@@ -7543,10 +7575,15 @@ section = ".data"
 
 ["GOLD.0x006332b8"]
 section = ".data"
-file = "src/GOLDTL.fcn_0040dad0.c"
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
 marker_type = "GLOBAL"
 name = "g_6b7e98"
 type = "char *"
+size = 4
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
 
 ["GOLDTL.0x006761a4"]
 section = ".data"
@@ -7634,6 +7671,11 @@ file = "src/GOLDTL.fcn_004e8af0.c"
 marker_type = "GLOBAL"
 name = "g_9a9220"
 type = "Rec18_68da68[42]"
+storage_kind = "alias"
+link_symbol = "_g_office_slots"
+note = "Existing declaration-only client slot-table view. Native query operands independently bind the shared _g_office_slots spelling; complete backing allocation and client storage owner are not established by the 42-row declaration. No replacement storage or linked verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:34:46+00:00"
 
 ["GOLDTL.0x00925120"]
 section = ".data"
@@ -7647,6 +7689,11 @@ file = "src/GOLDTL.fcn_004e8af0.c"
 marker_type = "GLOBAL"
 name = "g_9a9220"
 type = "Rec18_68da68[42]"
+storage_kind = "alias"
+link_symbol = "_g_office_slots"
+note = "Existing declaration-only client slot-table view. Native query operands independently bind the shared _g_office_slots spelling; complete backing allocation and client storage owner are not established by the 42-row declaration. No replacement storage or linked verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:34:46+00:00"
 
 ["GOLDTL.0x009a9610"]
 section = ".data"
@@ -7685,17 +7732,21 @@ section = ".data"
 
 ["GOLD.0x00633738"]
 section = ".data"
-file = "src/Develop/DieGildeAddOn/command/command_c/GOLDTL.cm_ChkSetGebBesitzer.c"
+file = "src/Develop/DieGildeAddOn/game/PlayEntitySound.c"
 marker_type = "GLOBAL"
 name = "g_6b8300"
 type = "int"
+updated_by = "rehome"
+updated_at = "2026-10-11T05:09:11+00:00"
 
 ["GOLDTL.0x006b8300"]
 section = ".data"
-file = "src/Develop/DieGildeAddOn/command/command_c/GOLDTL.cm_ChkSetGebBesitzer.c"
+file = "src/Develop/DieGildeAddOn/game/PlayEntitySound.c"
 marker_type = "GLOBAL"
 name = "g_6b8300"
 type = "int"
+updated_by = "rehome"
+updated_at = "2026-10-11T05:09:11+00:00"
 
 ["GOLDTL.0x00633738"]
 section = ".data"
@@ -7925,9 +7976,29 @@ section = ".data"
 
 ["GOLD.0x006326d4"]
 section = ".data"
+name = "g_6b72b4"
+type = "char[]"
+size = 1
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+backing = "g_6b71b0"
+note = "First track active byte at table-view offset0x104; non-owning one-byte view, no new allocation or byte verdict. The table view does not establish the ultimate allocation owner."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:29:36+00:00"
 
 ["GOLDTL.0x006b72b4"]
 section = ".data"
+name = "g_6b72b4"
+type = "char[]"
+size = 1
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+backing = "g_6b71b0"
+note = "First track active byte at table-view offset0x104; non-owning one-byte view, no new allocation or byte verdict. The table view does not establish the ultimate allocation owner."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:29:36+00:00"
 
 ["GOLDTL.0x006326d4"]
 section = ".data"
@@ -8115,10 +8186,15 @@ section = ".data"
 
 ["GOLDTL.0x0067a370"]
 section = ".data"
-file = "src/GOLDTL.fcn_00402ff0.c"
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
 marker_type = "GLOBAL"
 name = "g_67a370"
 type = "int"
+size = 4
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict. Integer C view of the current-universe pointer slot retained for compiler-sensitive legacy callers."
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
 
 ["GOLDTL.0x0067536c"]
 section = ".rdata"
@@ -8178,17 +8254,27 @@ section = ".data"
 
 ["GOLDTL.0x014a5c6c"]
 section = ".data"
-file = "src/GOLDTL.fcn_004e75a0.c"
+file = "src/Develop/DieGildeAddOn/game/aemter.h"
 marker_type = "GLOBAL"
 name = "g_14a5c6c"
-type = "int[]"
+type = "char*[]"
+storage_kind = "alias"
+updated_by = "data"
+updated_at = "2026-10-10T19:43:10+00:00"
+note = "Declaration-only string-pointer table view in the zero-filled virtual .data tail; indexing office-role bytes and UI labels proves four-byte pointer entries. Storage owner, backing allocation and complete extent remain unresolved; no storage emitted. The aemter.h declaration home is reconstructed, not an attested original header."
 
 ["GOLDTL.0x0068d934"]
-section = ".rdata"
-file = "src/GOLDTL.fcn_004e75a0.c"
-marker_type = "GLOBAL"
-name = "g_68d934"
-type = "char[]"
+section = ".data"
+file = "src/Develop/DieGildeAddOnServer/server_stats.c"
+marker_type = "STRING"
+name = "str_s_tab_s_tab_s_tab_s_tab"
+type = "const char[13]"
+updated_by = "data"
+updated_at = "2026-10-10T19:47:52+00:00"
+storage_kind = "literal"
+size = 13
+link_symbol = "??_C@_0N@GACI@?$CFs?7?$CFs?7?$CFs?7?$CFs?7?$AA@"
+note = "Inferred content label for the complete NUL-inclusive four-string statistic format; compiler literal, not another allocation. Both native operands and all 13 bytes checked."
 
 ["GOLDTL.0x010405e0"]
 section = ".data"
@@ -8218,10 +8304,16 @@ section = ".data"
 
 ["GOLDTL.0x0068d924"]
 section = ".data"
-file = "src/GOLDTL.fcn_004e7550.c"
-marker_type = "GLOBAL"
-name = "g_68d924"
-type = "char[]"
+file = "src/Develop/DieGildeAddOnServer/server.c"
+marker_type = "STRING"
+name = "str_i_tab_i_tab_i_tab_i_tab_i_tab"
+type = "const char[16]"
+updated_by = "data"
+updated_at = "2026-10-10T19:19:52+00:00"
+storage_kind = "literal"
+size = 16
+link_symbol = "??_C@_0BA@FBGN@?$CFi?7?$CFi?7?$CFi?7?$CFi?7?$CFi?7?$AA@"
+note = "Inferred content label for the complete NUL-inclusive five-integer statistic format; compiler literal emitted by srv_FormatStatSkills, not a standalone C global. Both client native operands and all 16 bytes independently compared."
 
 ["GOLDTL.0x01041d04"]
 section = ".data"
@@ -8607,17 +8699,27 @@ type = "char[]"
 
 ["GOLDTL.0x00773d75"]
 section = ".data"
-file = "src/GOLDTL.fcn_005b24b0.c"
+file = "src/client_actions.h"
 marker_type = "GLOBAL"
 name = "g_773d75"
 type = "unsigned char"
+size = 1
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
 
 ["GOLD.0x006f1bc5"]
 section = ".data"
-file = "src/GOLDTL.fcn_005b24b0.c"
+file = "src/client_actions.h"
 marker_type = "GLOBAL"
 name = "g_773d75"
 type = "unsigned char"
+size = 1
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
 
 ["GOLDTL.0x00868060"]
 section = ".data"
@@ -8890,38 +8992,63 @@ type = "char[]"
 
 ["GOLD.0x006332dc"]
 section = ".data"
-file = "src/GOLD.fcn_0040c4f0.c"
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
 marker_type = "GLOBAL"
 name = "g_6b7ebc"
 type = "char *"
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
+size = 4
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict."
 
 ["GOLD.0x005f8430"]
 section = ".data"
-file = "src/GOLD.fcn_0040c4f0.c"
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
 marker_type = "GLOBAL"
 name = "g_6791c8"
 type = "int"
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
+size = 4
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict."
 
 ["GOLD.0x005ebba4"]
 section = ".rdata"
-file = "src/GOLD.fcn_004033c0.c"
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
 marker_type = "GLOBAL"
 name = "g_662d70"
 type = "float[4]"
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
+size = 16
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict. Existing float[4] declaration is also passed as a sixteen-byte vec4 view elsewhere; scene translation consumes its first three words."
 
 ["GOLD.0x005f122c"]
 section = ".data"
-file = "src/GOLD.fcn_004033c0.c"
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
 marker_type = "GLOBAL"
 name = "g_6752a4"
 type = "unsigned char"
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
+size = 1
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict."
 
 ["GOLD.0x005fb5b0"]
 section = ".data"
-file = "src/GOLD.fcn_004033c0.c"
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
 marker_type = "GLOBAL"
 name = "g_67a370"
 type = "int"
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
+size = 4
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict. Integer C view of the current-universe pointer slot retained for compiler-sensitive legacy callers."
 
 ["GOLD.0x005ebb74"]
 section = ".rdata"
@@ -10506,7 +10633,7 @@ size = 48
 status = "VERIFIED"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-11T07:26:52+00:00"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
 
@@ -10515,7 +10642,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "9455ddc475129ce979f01e842dff9404fdf5110ee1b3fdffe6d4e66b0b0d4484"
 definition_hash = "b7944d519e9866332fad685d507c4132a71040d6c212417c08390e0a42f47788"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-11T07:26:52+00:00"
 ["SERVER.0x100270e6"]
 name = "g_before_g_log_default_name"
 section = ".data"
@@ -10906,7 +11033,7 @@ type = "unsigned char[0x350]"
 size = 848
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-11T07:26:52+00:00"
 storage_kind = "span"
 file = "src/crt_region/section_spans.c"
 marker_type = "GLOBAL"
@@ -10916,7 +11043,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "650b1a245b004ae9f45890e5138555333070f83f5ca2f1f13396fb5bf22370d2"
 definition_hash = "512ce2bc88df350d5abeb7b27d675b061e5376e41ef6a705a79f0f7f7276c960"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-11T07:26:52+00:00"
 ["SERVER.0x1003461d"]
 name = "g_gap_1003461d"
 section = ".bss"
@@ -13589,7 +13716,7 @@ measured_at = "2026-10-08T05:27:35+00:00"
 ["SERVER.0x10025fc0"]
 name = "g_before_g_c_locale_time_format"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-11T07:26:52+00:00"
 type = "unsigned char[0x508]"
 size = 1288
 section = ".rdata"
@@ -13602,11 +13729,11 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "ac47833826ac2798e54b01bdfc44e51e71adbd30792fd1719f596559a8bb076d"
 definition_hash = "d0628f5f89cb4d06dc2e1dafcd3a8757ff5335ec3026b61e7675f226fff79df9"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-11T07:26:52+00:00"
 ["SERVER.0x100264d0"]
 name = "g_rdata_before_imports"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-11T07:26:52+00:00"
 type = "unsigned char[0x138]"
 size = 312
 section = ".rdata"
@@ -13619,7 +13746,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "c90c63741cd49fc84da43e938353d01c670980936f00011c154220b2ae5d771e"
 definition_hash = "7ca2e6398f9a2323210cba190c289f6ac4bd1c24a8c5024a47091a9ebcee971b"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-11T07:26:52+00:00"
 ["SERVER.0x10027055"]
 name = "g_text_before_Sending_Broadcast"
 updated_by = "verify"
@@ -15373,3 +15500,1068 @@ storage_kind = "object"
 note = "Inferred plant subsystem name. One source definition in plant.c; four70-byte records include zero-id terminator. Complete280-byte COFF payload and all lookup operands match this native table; .scratch/goal20/plant-lookup-audit.json. Client raw-link placement not yet verified."
 updated_by = "data"
 updated_at = "2026-10-10T16:04:06+00:00"
+
+["GOLD.0x0143ab0c"]
+name = "g_14a5c6c"
+updated_by = "data"
+updated_at = "2026-10-10T19:43:23+00:00"
+storage_kind = "alias"
+type = "char*[]"
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/aemter.h"
+marker_type = "GLOBAL"
+note = "Declaration-only string-pointer table view in the zero-filled virtual .data tail; indexing office-role bytes and UI labels proves four-byte pointer entries. Storage owner, backing allocation and complete extent remain unresolved; no storage emitted. The aemter.h declaration home is reconstructed, not an attested original header."
+
+["GOLDTL.0x0068d870"]
+name = "str_begin_statistic_dump_round"
+updated_by = "data"
+updated_at = "2026-10-10T20:08:22+00:00"
+storage_kind = "literal"
+size = 54
+type = "const char[54]"
+section = ".data"
+file = "src/Develop/DieGildeAddOnServer/server.c"
+marker_type = "STRING"
+link_symbol = "??_C@_0DG@HHIF@?$CL?$CL?$CL?$CL?$CL?$CL?$CL?$CL?$CL?$CL?5Begin?5statistic?5dump?5@"
+note = "Inferred content label for the complete NUL-inclusive statistic delimiter compiler literal. All bytes and the compiled native operand checked; inventory only, no additional storage. Other existing declarations/users are not owners."
+
+["GOLDTL.0x0068d968"]
+name = "str_end_statistic_dump_round"
+updated_by = "data"
+updated_at = "2026-10-10T20:08:40+00:00"
+storage_kind = "literal"
+size = 52
+type = "const char[52]"
+section = ".data"
+file = "src/Develop/DieGildeAddOnServer/server.c"
+marker_type = "STRING"
+link_symbol = "??_C@_0DE@GCKE@?$CL?$CL?$CL?$CL?$CL?$CL?$CL?$CL?$CL?$CL?5End?5statistic?5dump?5in@"
+note = "Inferred content label for the complete NUL-inclusive statistic delimiter compiler literal. All bytes and the compiled native operand checked; inventory only, no additional storage. Other existing declarations/users are not owners."
+
+["GOLDTL.0x0068da68"]
+name = "g_68da68"
+type = "int[40][6]"
+size = 960
+section = ".data"
+file = "src/Develop/DieGildeAddOnServer/server.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+link_symbol = "_g_office_role_templates"
+note = "Inferred legacy declaration label and shared link spelling. Complete initializer span equals the existing server aemter.c table and native query operands agree. Declaration-only client view: no additional allocation, client owner/backing and linked verdict remain unverified. Rank reads use the low byte at template+8."
+updated_by = "rename"
+updated_at = "2026-10-10T20:34:46+00:00"
+
+["GOLDTL.0x0068d9a0"]
+name = "g_68d9a0"
+type = "float[7][7]"
+size = 196
+section = ".data"
+file = "src/Develop/DieGildeAddOnServer/server.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+link_symbol = "_g_office_float_table"
+note = "Inferred legacy declaration label and shared link spelling. Complete initializer span equals the existing server aemter.c table and native query operands agree. Declaration-only client view: no additional allocation, client owner/backing and linked verdict remain unverified. Rank reads use the low byte at template+8."
+updated_by = "rename"
+updated_at = "2026-10-10T20:34:46+00:00"
+
+["GOLD.0x0060ed38"]
+name = "g_68da68"
+type = "int[40][6]"
+size = 960
+section = ".data"
+file = "src/Develop/DieGildeAddOnServer/server.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+link_symbol = "_g_office_role_templates"
+note = "Inferred legacy declaration label and shared link spelling. Complete initializer span equals the existing server aemter.c table and native query operands agree. Declaration-only client view: no additional allocation, client owner/backing and linked verdict remain unverified. Rank reads use the low byte at template+8."
+updated_by = "rename"
+updated_at = "2026-10-10T20:34:46+00:00"
+
+["GOLD.0x0060ec70"]
+name = "g_68d9a0"
+type = "float[7][7]"
+size = 196
+section = ".data"
+file = "src/Develop/DieGildeAddOnServer/server.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+link_symbol = "_g_office_float_table"
+note = "Inferred legacy declaration label and shared link spelling. Complete initializer span equals the existing server aemter.c table and native query operands agree. Declaration-only client view: no additional allocation, client owner/backing and linked verdict remain unverified. Rank reads use the low byte at template+8."
+updated_by = "rename"
+updated_at = "2026-10-10T20:34:46+00:00"
+
+["GOLDTL.0x0068d780"]
+name = "g_68d780"
+type = "char[][24]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_68d780"
+note = "Inferred existing declaration label for a class-name view. Native code guards ten ordinary 24-byte rows and uses base+240 as fallback. Its neighboring string differs between clients. Complete backing allocation extent and original source expression remain unproven. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLDTL.0x014a6544"]
+name = "g_14a6544"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a6544"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLDTL.0x014a6538"]
+name = "g_14a6538"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a6538"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLDTL.0x014a5770"]
+name = "g_14a5770"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a5770"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLDTL.0x014a57e0"]
+name = "g_14a57e0"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a57e0"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLDTL.0x014a5b54"]
+name = "g_14a5b54"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a5b54"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLDTL.0x0068d8a8"]
+name = "str_stat_identity_columns"
+type = "const char[37]"
+size = 37
+file = "src/Develop/DieGildeAddOnServer/server_stats.c"
+marker_type = "STRING"
+section = ".data"
+storage_kind = "literal"
+link_symbol = "??_C@_0CF@BELO@?$CFi?7?$CFi?7?$CFi?7?$CFs?7?$CFs?7?$CFi?7?$CFs?7?$CFi?7?$CFs?7?$CFs?7?$CFs@"
+note = "Inferred content label for the complete NUL-inclusive 37-byte statistic compiler format. All bytes and the native operand checked. In Gold this is also the class-table+240 neighbor, which is a view rather than another allocation. No separate fallback object or linked data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLD.0x0060eac0"]
+name = "g_68d780"
+type = "char[][24]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_68d780"
+note = "Inferred existing declaration label for a class-name view. Native code guards ten ordinary 24-byte rows and uses base+240 as fallback. Its neighboring string differs between clients. Complete backing allocation extent and original source expression remain unproven. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLD.0x0143b3e4"]
+name = "g_14a6544"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a6544"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLD.0x0143b3d8"]
+name = "g_14a6538"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a6538"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLD.0x0143a610"]
+name = "g_14a5770"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a5770"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLD.0x0143a680"]
+name = "g_14a57e0"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a57e0"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLD.0x0143a9f4"]
+name = "g_14a5b54"
+type = "char*[]"
+file = "src/Develop/DieGildeAddOnServer/server_stats.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_14a5b54"
+note = "Inferred existing declaration label for runtime name pointers. The verified native indexed operand establishes pointer-sized entries in the zero-filled virtual tail, not complete array extent or storage owner. Declaration only; no additional allocation, backing owner or linked-client data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLD.0x0060ebb0"]
+name = "str_stat_identity_columns"
+type = "const char[37]"
+size = 37
+file = "src/Develop/DieGildeAddOnServer/server_stats.c"
+marker_type = "STRING"
+section = ".data"
+storage_kind = "literal"
+link_symbol = "??_C@_0CF@BELO@?$CFi?7?$CFi?7?$CFi?7?$CFs?7?$CFs?7?$CFi?7?$CFs?7?$CFi?7?$CFs?7?$CFs?7?$CFs@"
+note = "Inferred content label for the complete NUL-inclusive 37-byte statistic compiler format. All bytes and the native operand checked. In Gold this is also the class-table+240 neighbor, which is a view rather than another allocation. No separate fallback object or linked data verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLD.0x00770ae0"]
+name = "g_current_year"
+type = "int"
+file = "src/Develop/rebrew_globals.h"
+size = 4
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+link_symbol = "_g_current_year"
+note = "Inferred shared C scalar spelling for the native four-byte year view used by the first statistic formatter. Exact native operand is 0x770ae0; guessed 0x770b60 was rejected before any store write. Four is the measured view size, not the complete backing allocation. Owner/full calendar extent remain unproven. The broader legacy g_7f4c00 spelling is not added or changed. Seven selected Gold target/flag groups have no current-year operand in their existing bound functions. No new allocation or linked verdict."
+updated_by = "rename"
+updated_at = "2026-10-10T20:55:14+00:00"
+
+["GOLDTL.0x007f4e04"]
+name = "g_entity_type_bytes"
+type = "unsigned char[1]"
+size = 1
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/entity.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+backing = "g_slot_table"
+note = "Declaration-only byte view of g_slot_table+0x164, native record stride540 (0x21c). Canonical inherited inferred name. No additional allocation; backing storage owner remains unresolved. Full caller operands verified in .scratch/goal20/stat-level-extent/proof-complete.json."
+updated_by = "data"
+updated_at = "2026-10-11T01:21:43+00:00"
+
+["GOLDTL.0x0085a0a0"]
+name = "g_entity_base"
+type = "unsigned char[2752]"
+size = 2752
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/entity.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Declaration-only accessed view: native table-entry helper checks index0..15 and returns base+index*172, covering2752 accessed bytes. Inherited inferred name; complete backing allocation and its storage owner remain unresolved. No new C storage. Evidence .scratch/goal20/stat-level-extent/proof-complete.json."
+updated_by = "data"
+updated_at = "2026-10-11T01:21:43+00:00"
+
+["GOLD.0x00770ce4"]
+name = "g_entity_type_bytes"
+type = "unsigned char[1]"
+size = 1
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/entity.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+backing = "g_slot_table"
+note = "Declaration-only byte view of g_slot_table+0x164, native record stride540 (0x21c). Canonical inherited inferred name. No additional allocation; backing storage owner remains unresolved. Full caller operands verified in .scratch/goal20/stat-level-extent/proof-complete.json."
+updated_by = "data"
+updated_at = "2026-10-11T01:21:43+00:00"
+
+["GOLD.0x007d5f80"]
+name = "g_entity_base"
+type = "unsigned char[2752]"
+size = 2752
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/entity.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Declaration-only accessed view: native table-entry helper checks index0..15 and returns base+index*172, covering2752 accessed bytes. Inherited inferred name; complete backing allocation and its storage owner remain unresolved. No new C storage. Evidence .scratch/goal20/stat-level-extent/proof-complete.json."
+updated_by = "data"
+updated_at = "2026-10-11T01:21:43+00:00"
+
+["GOLDTL.0x00675314"]
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
+marker_type = "GLOBAL"
+name = "ch_MorphFrameValue"
+type = "int"
+size = 4
+section = ".data"
+storage_kind = "alias"
+note = "Inferred field-value name; four-byte accessed view used by ch_FinishAni at animation+0x3c. Reference bytes ffffffff. Complete backing allocation, source storage owner and original name unknown; this extern declaration allocates no storage and earns no data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T05:09:22+00:00"
+
+["GOLD.0x005f129c"]
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
+marker_type = "GLOBAL"
+name = "ch_MorphFrameValue"
+type = "int"
+size = 4
+section = ".data"
+storage_kind = "alias"
+note = "Inferred field-value name; four-byte accessed view used by ch_FinishAni at animation+0x3c. Reference bytes ffffffff. Complete backing allocation, source storage owner and original name unknown; this extern declaration allocates no storage and earns no data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T05:09:22+00:00"
+
+["GOLDTL.0x00772500"]
+name = "g_772500"
+type = "char *"
+size = 4
+section = ".data"
+file = "src/Develop/Units/d2.v1/d2_gui.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
+
+["GOLDTL.0x00772568"]
+name = "g_772568"
+type = "int"
+size = 4
+section = ".data"
+file = "src/Develop/Units/d2.v1/d2_gui.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
+
+["GOLDTL.0x01040490"]
+name = "g_1040490"
+type = "int"
+size = 4
+section = ".data"
+file = "src/Develop/Units/d2.v1/d2_gui.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
+
+["GOLDTL.0x01040494"]
+name = "g_1040494"
+type = "int"
+size = 4
+section = ".data"
+file = "src/Develop/Units/d2.v1/d2_gui.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
+
+["GOLD.0x006ed918"]
+name = "g_772500"
+type = "char *"
+size = 4
+section = ".data"
+file = "src/Develop/Units/d2.v1/d2_gui.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
+
+["GOLD.0x006ed98c"]
+name = "g_772568"
+type = "int"
+size = 4
+section = ".data"
+file = "src/Develop/Units/d2.v1/d2_gui.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
+
+["GOLD.0x00fb9070"]
+name = "g_00fb9070"
+type = "short"
+size = 2
+section = ".data"
+file = "src/Develop/Units/d2.v1/d2_gui.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
+
+["GOLD.0x00fb9072"]
+name = "g_00fb9072"
+type = "short"
+size = 2
+section = ".data"
+file = "src/Develop/Units/d2.v1/d2_gui.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:11:11+00:00"
+
+["GOLDTL.0x007f4c04"]
+name = "g_7f4c04"
+type = "int"
+size = 4
+section = ".data"
+file = "src/client_actions.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved. Accessed calendar slice at 0x7f4c00+0x4, extent4; existing base/year view preserved. Relationship to that declaration view is known, but no complete allocation is inferred or named as owner."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLDTL.0x007f4c08"]
+name = "g_7f4c08"
+type = "int"
+size = 4
+section = ".data"
+file = "src/client_actions.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved. Accessed calendar slice at 0x7f4c00+0x8, extent4; existing base/year view preserved. Relationship to that declaration view is known, but no complete allocation is inferred or named as owner."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLDTL.0x007f4c0c"]
+name = "g_7f4c0c"
+type = "short"
+size = 2
+section = ".data"
+file = "src/client_actions.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved. Accessed calendar slice at 0x7f4c00+0xc, extent2; existing base/year view preserved. Relationship to that declaration view is known, but no complete allocation is inferred or named as owner."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLDTL.0x00773da8"]
+name = "g_773da8"
+type = "char *"
+size = 4
+section = ".data"
+file = "src/client_actions.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLDTL.0x0067eaf8"]
+name = "str_upgr_arbeiter_unterk"
+type = "char[21]"
+size = 21
+section = ".data"
+file = "src/RunBuergermeister.c"
+marker_type = "GLOBAL"
+storage_kind = "literal"
+note = "Compiler literal content label, not a source identifier or separate C global. Exact native bytes and complete used literal extent agree with the emitted COFF constant; no data verdict or independent storage owner claimed. Source uses the string/0.3f literal; final link pooling/provider remains unverified."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLDTL.0x0066414c"]
+name = "flt_0_3"
+type = "float"
+size = 4
+section = ".rdata"
+file = "src/RunBuergermeister.c"
+marker_type = "GLOBAL"
+storage_kind = "literal"
+note = "Compiler literal content label, not a source identifier or separate C global. Exact native bytes and complete used literal extent agree with the emitted COFF constant; no data verdict or independent storage owner claimed. Source uses the string/0.3f literal; final link pooling/provider remains unverified."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLDTL.0x0067eae4"]
+name = "str_bau_arbeiter_unterk"
+type = "char[20]"
+size = 20
+section = ".data"
+file = "src/RunBuergermeister.c"
+marker_type = "GLOBAL"
+storage_kind = "literal"
+note = "Compiler literal content label, not a source identifier or separate C global. Exact native bytes and complete used literal extent agree with the emitted COFF constant; no data verdict or independent storage owner claimed. Source uses the string/0.3f literal; final link pooling/provider remains unverified."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLD.0x00770ae4"]
+name = "g_7f4c04"
+type = "int"
+size = 4
+section = ".data"
+file = "src/client_actions.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved. Accessed calendar slice at 0x770ae0+0x4, extent4; existing base/year view preserved. Relationship to that declaration view is known, but no complete allocation is inferred or named as owner."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLD.0x00770ae8"]
+name = "g_7f4c08"
+type = "int"
+size = 4
+section = ".data"
+file = "src/client_actions.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved. Accessed calendar slice at 0x770ae0+0x8, extent4; existing base/year view preserved. Relationship to that declaration view is known, but no complete allocation is inferred or named as owner."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLD.0x00770aec"]
+name = "g_7f4c0c"
+type = "short"
+size = 2
+section = ".data"
+file = "src/client_actions.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved. Accessed calendar slice at 0x770ae0+0xc, extent2; existing base/year view preserved. Relationship to that declaration view is known, but no complete allocation is inferred or named as owner."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLD.0x006f1bf8"]
+name = "g_773da8"
+type = "char *"
+size = 4
+section = ".data"
+file = "src/client_actions.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLD.0x005ffe90"]
+name = "str_upgr_arbeiter_unterk"
+type = "char[21]"
+size = 21
+section = ".data"
+file = "src/RunBuergermeister.c"
+marker_type = "GLOBAL"
+storage_kind = "literal"
+note = "Compiler literal content label, not a source identifier or separate C global. Exact native bytes and complete used literal extent agree with the emitted COFF constant; no data verdict or independent storage owner claimed. Source uses the string/0.3f literal; final link pooling/provider remains unverified."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLD.0x005ebb30"]
+name = "flt_0_3"
+type = "float"
+size = 4
+section = ".rdata"
+file = "src/RunBuergermeister.c"
+marker_type = "GLOBAL"
+storage_kind = "literal"
+note = "Compiler literal content label, not a source identifier or separate C global. Exact native bytes and complete used literal extent agree with the emitted COFF constant; no data verdict or independent storage owner claimed. Source uses the string/0.3f literal; final link pooling/provider remains unverified."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLD.0x005ffe7c"]
+name = "str_bau_arbeiter_unterk"
+type = "char[20]"
+size = 20
+section = ".data"
+file = "src/RunBuergermeister.c"
+marker_type = "GLOBAL"
+storage_kind = "literal"
+note = "Compiler literal content label, not a source identifier or separate C global. Exact native bytes and complete used literal extent agree with the emitted COFF constant; no data verdict or independent storage owner claimed. Source uses the string/0.3f literal; final link pooling/provider remains unverified."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:02:50+00:00"
+
+["GOLD.0x00633418"]
+name = "d3d_Device"
+type = "void *"
+file = "src/Develop/Units/d3/d3_d3d.h"
+storage_kind = "alias"
+size = 4
+section = ".data"
+marker_type = "GLOBAL"
+note = "Declaration-only native4-byte accessed view; no storage definition or data verification. Complete allocation owner and interface type unresolved. Device name attested in native diagnostic; LastResult name inferred."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:18:17+00:00"
+
+["GOLD.0x014661a4"]
+name = "d3d_LastResult"
+type = "int"
+file = "src/Develop/Units/d3/d3_d3d.h"
+storage_kind = "alias"
+size = 4
+section = ".data"
+marker_type = "GLOBAL"
+note = "Declaration-only native4-byte accessed view; no storage definition or data verification. Complete allocation owner and interface type unresolved. Device name attested in native diagnostic; LastResult name inferred."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:18:17+00:00"
+
+["GOLD.0x005f944c"]
+name = "str_D_develop_Units_d3_d3_d3d_c"
+type = "char[]"
+file = "src/Develop/Units/d3/d3_d3d.c"
+storage_kind = "literal"
+size = 29
+section = ".data"
+marker_type = "GLOBAL"
+note = "Exact complete compiler string literal, no independent C global or data verification claim. Original unit/expression content attested."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:18:17+00:00"
+
+["GOLD.0x005faf08"]
+name = "str_d3d_Device_EndScene"
+type = "char[]"
+file = "src/Develop/Units/d3/d3_d3d.c"
+storage_kind = "literal"
+size = 41
+section = ".data"
+marker_type = "GLOBAL"
+note = "Exact complete compiler string literal, no independent C global or data verification claim. Original unit/expression content attested."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:18:17+00:00"
+
+["GOLDTL.0x006b71a4"]
+name = "g_6b71a4"
+type = "int"
+size = 4
+section = ".data"
+storage_kind = "alias"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLDTL.0x006b71a8"]
+name = "g_6b71a8"
+type = "int"
+size = 4
+section = ".data"
+storage_kind = "alias"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLDTL.0x014cc5a0"]
+name = "g_14cc5a0"
+type = "CRITICAL_SECTION"
+size = 24
+section = ".data"
+storage_kind = "alias"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLDTL.0x00772efc"]
+name = "g_772efc"
+type = "Chan_14cc460 *"
+size = 4
+section = ".data"
+storage_kind = "alias"
+file = "src/client_sound.h"
+marker_type = "GLOBAL"
+note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLDTL.0x00662070"]
+name = "__imp__LeaveCriticalSection@4"
+type = "void *"
+size = 4
+section = ".rdata"
+storage_kind = "import"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "SDK imported critical-section API; native import name, IAT VA and emitted decorated operand independently verified. Slot storage belongs to the linker/loader, not this header."
+link_symbol = "__imp__LeaveCriticalSection@4"
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLDTL.0x00662074"]
+name = "__imp__EnterCriticalSection@4"
+type = "void *"
+size = 4
+section = ".rdata"
+storage_kind = "import"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "SDK imported critical-section API; native import name, IAT VA and emitted decorated operand independently verified. Slot storage belongs to the linker/loader, not this header."
+link_symbol = "__imp__EnterCriticalSection@4"
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLDTL.0x00678200"]
+name = "str_D_develop_units_Msx_msx_c"
+type = "char[]"
+size = 27
+section = ".data"
+storage_kind = "literal"
+file = "src/Develop/Units/Msx/msx.c"
+marker_type = "GLOBAL"
+note = "Exact complete compiler string literal; original expression/path attested. No separate C global, independent allocation owner or data verification claimed."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:46:45+00:00"
+
+["GOLDTL.0x006781ec"]
+name = "str_hTrack_bAmbient"
+type = "char[]"
+size = 17
+section = ".data"
+storage_kind = "literal"
+file = "src/Develop/Units/Msx/msx.c"
+marker_type = "GLOBAL"
+note = "Exact complete compiler string literal; original expression/path attested. No separate C global, independent allocation owner or data verification claimed."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:46:45+00:00"
+
+["GOLD.0x006325c4"]
+name = "g_6b71a4"
+type = "int"
+size = 4
+section = ".data"
+storage_kind = "alias"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLD.0x006325c8"]
+name = "g_6b71a8"
+type = "int"
+size = 4
+section = ".data"
+storage_kind = "alias"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLD.0x014613e0"]
+name = "g_14cc5a0"
+type = "CRITICAL_SECTION"
+size = 24
+section = ".data"
+storage_kind = "alias"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLD.0x006f0d4c"]
+name = "g_772efc"
+type = "Chan_14cc460 *"
+size = 4
+section = ".data"
+storage_kind = "alias"
+file = "src/client_sound.h"
+marker_type = "GLOBAL"
+note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLD.0x005eb060"]
+name = "__imp__LeaveCriticalSection@4"
+type = "void *"
+size = 4
+section = ".rdata"
+storage_kind = "import"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "SDK imported critical-section API; native import name, IAT VA and emitted decorated operand independently verified. Slot storage belongs to the linker/loader, not this header."
+link_symbol = "__imp__LeaveCriticalSection@4"
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLD.0x005eb064"]
+name = "__imp__EnterCriticalSection@4"
+type = "void *"
+size = 4
+section = ".rdata"
+storage_kind = "import"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+note = "SDK imported critical-section API; native import name, IAT VA and emitted decorated operand independently verified. Slot storage belongs to the linker/loader, not this header."
+link_symbol = "__imp__EnterCriticalSection@4"
+updated_by = "rehome"
+updated_at = "2026-10-11T03:30:28+00:00"
+
+["GOLD.0x005f7558"]
+name = "str_D_develop_units_Msx_msx_c"
+type = "char[]"
+size = 27
+section = ".data"
+storage_kind = "literal"
+file = "src/Develop/Units/Msx/msx.c"
+marker_type = "GLOBAL"
+note = "Exact complete compiler string literal; original expression/path attested. No separate C global, independent allocation owner or data verification claimed."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:46:45+00:00"
+
+["GOLD.0x005f7544"]
+name = "str_hTrack_bAmbient"
+type = "char[]"
+size = 17
+section = ".data"
+storage_kind = "literal"
+file = "src/Develop/Units/Msx/msx.c"
+marker_type = "GLOBAL"
+note = "Exact complete compiler string literal; original expression/path attested. No separate C global, independent allocation owner or data verification claimed."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:46:45+00:00"
+
+["GOLDTL.0x006b71b0"]
+name = "g_6b71b0"
+type = "Chan_14cc460[10]"
+size = 2960
+section = ".data"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Native accessed track view. Ten-record table extent follows native296-byte stride and bound; dummy record extent follows native acquisition pointer and296-byte clear. Backing allocation and original storage owner remain unresolved. Declaration only; no new storage or data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:58:04+00:00"
+
+["GOLDTL.0x014cc460"]
+name = "g_14cc460"
+type = "Chan_14cc460"
+size = 296
+section = ".data"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Native accessed track view. Ten-record table extent follows native296-byte stride and bound; dummy record extent follows native acquisition pointer and296-byte clear. Backing allocation and original storage owner remain unresolved. Declaration only; no new storage or data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:58:04+00:00"
+
+["GOLD.0x006325d0"]
+name = "g_6b71b0"
+type = "Chan_14cc460[10]"
+size = 2960
+section = ".data"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Native accessed track view. Ten-record table extent follows native296-byte stride and bound; dummy record extent follows native acquisition pointer and296-byte clear. Backing allocation and original storage owner remain unresolved. Declaration only; no new storage or data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:58:04+00:00"
+
+["GOLD.0x014612a0"]
+name = "g_14cc460"
+type = "Chan_14cc460"
+size = 296
+section = ".data"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Native accessed track view. Ten-record table extent follows native296-byte stride and bound; dummy record extent follows native acquisition pointer and296-byte clear. Backing allocation and original storage owner remain unresolved. Declaration only; no new storage or data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T03:58:04+00:00"
+
+["GOLDTL.0x00772d1c"]
+name = "g_772d1c"
+type = "Chan_14cc460*"
+size = 4
+section = ".data"
+file = "src/client_sound.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Native four-byte track-pointer slot view. Acquisition result is stored here and passed to MSX track APIs; all known users share the canonical declaration. Inferred name; storage owner and backing allocation unresolved. Declaration only; no new storage or data byte verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:29:36+00:00"
+
+["GOLDTL.0x00772d24"]
+name = "g_772d24"
+type = "Chan_14cc460*"
+size = 4
+section = ".data"
+file = "src/client_sound.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Native four-byte track-pointer slot view. Acquisition result is stored here and passed to MSX track APIs; all known users share the canonical declaration. Inferred name; storage owner and backing allocation unresolved. Declaration only; no new storage or data byte verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:29:36+00:00"
+
+["GOLDTL.0x00772d20"]
+name = "g_772d20"
+type = "Chan_14cc460*"
+size = 4
+section = ".data"
+file = "src/client_sound.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Native four-byte track-pointer slot view. Acquisition result is stored here and passed to MSX track APIs; all known users share the canonical declaration. Inferred name; storage owner and backing allocation unresolved. Declaration only; no new storage or data byte verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:29:36+00:00"
+
+["GOLD.0x006f0b6c"]
+name = "g_772d1c"
+type = "Chan_14cc460*"
+size = 4
+section = ".data"
+file = "src/client_sound.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Native four-byte track-pointer slot view. Acquisition result is stored here and passed to MSX track APIs; all known users share the canonical declaration. Inferred name; storage owner and backing allocation unresolved. Declaration only; no new storage or data byte verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:29:36+00:00"
+
+["GOLD.0x006f0b74"]
+name = "g_772d24"
+type = "Chan_14cc460*"
+size = 4
+section = ".data"
+file = "src/client_sound.h"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Native four-byte track-pointer slot view. Acquisition result is stored here and passed to MSX track APIs; all known users share the canonical declaration. Inferred name; storage owner and backing allocation unresolved. Declaration only; no new storage or data byte verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:29:36+00:00"
+
+["GOLD.0x014611a0"]
+name = "g_14cc360"
+type = "char[]"
+file = "src/Develop/Units/Msx/msx.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+note = "Native MSX path-buffer view used by GOLD4243d0 setter and GOLD423b30 start helper. Does not alias the unrelated f8aae0 game buffer. Complete extent and allocation owner unresolved; declaration only."
+updated_by = "rehome"
+updated_at = "2026-10-11T04:46:54+00:00"
+
+["GOLDTL.0x00662d70"]
+name = "g_662d70"
+type = "float[4]"
+size = 16
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
+marker_type = "GLOBAL"
+section = ".rdata"
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict. Existing float[4] declaration is also passed as a sixteen-byte vec4 view elsewhere; scene translation consumes its first three words."
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
+
+["GOLDTL.0x006752a4"]
+name = "g_6752a4"
+type = "unsigned char"
+size = 1
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
+
+["GOLDTL.0x006b7ebc"]
+name = "g_6b7ebc"
+type = "char *"
+size = 4
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
+
+["GOLDTL.0x006791c8"]
+name = "g_6791c8"
+type = "int"
+size = 4
+file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
+marker_type = "GLOBAL"
+section = ".data"
+storage_kind = "alias"
+note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict."
+updated_by = "rehome"
+updated_at = "2026-10-11T05:27:59+00:00"
+
+["GOLDTL.0x006b6f64"]
+file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0041dd90.c"
+marker_type = "GLOBAL"
+name = "g_6b6f64"
+type = "int"
+size = 4
+section = ".bss"
+note = "Existing extern declaration only, not a source storage-owner claim. Complete native tracking-check operands identify this four-byte scalar/pointer in the PE zero-filled .data tail. Legacy address-derived declaration spelling retained; original name and definition owner remain unresolved. The pointer cell extent is four bytes, not the heap array extent."
+updated_by = "rehome"
+updated_at = "2026-10-11T07:50:27+00:00"
+
+["GOLDTL.0x006b6f80"]
+file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0041dd90.c"
+marker_type = "GLOBAL"
+name = "g_6b6f80"
+type = "MemBlock*"
+size = 4
+section = ".bss"
+note = "Existing extern declaration only, not a source storage-owner claim. Complete native tracking-check operands identify this four-byte scalar/pointer in the PE zero-filled .data tail. Legacy address-derived declaration spelling retained; original name and definition owner remain unresolved. The pointer cell extent is four bytes, not the heap array extent."
+updated_by = "rehome"
+updated_at = "2026-10-11T07:50:27+00:00"
+
+["GOLD.0x00632384"]
+file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0041dd90.c"
+marker_type = "GLOBAL"
+name = "g_6b6f64"
+type = "int"
+size = 4
+section = ".bss"
+note = "Existing extern declaration only, not a source storage-owner claim. Complete native tracking-check operands identify this four-byte scalar/pointer in the PE zero-filled .data tail. Legacy address-derived declaration spelling retained; original name and definition owner remain unresolved. The pointer cell extent is four bytes, not the heap array extent."
+updated_by = "rehome"
+updated_at = "2026-10-11T07:50:27+00:00"
+
+["GOLD.0x006323a0"]
+file = "src/Develop/Units/m_alloc/GOLDTL.fcn_0041dd90.c"
+marker_type = "GLOBAL"
+name = "g_6b6f80"
+type = "MemBlock*"
+size = 4
+section = ".bss"
+note = "Existing extern declaration only, not a source storage-owner claim. Complete native tracking-check operands identify this four-byte scalar/pointer in the PE zero-filled .data tail. Legacy address-derived declaration spelling retained; original name and definition owner remain unresolved. The pointer cell extent is four bytes, not the heap array extent."
+updated_by = "rehome"
+updated_at = "2026-10-11T07:50:27+00:00"

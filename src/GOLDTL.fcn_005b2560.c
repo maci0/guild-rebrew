@@ -2,7 +2,7 @@ extern char g_774a80[];
 // FUNCTION: GOLD 0x005a90e0
 // FUNCTION: GOLDTL 0x5b2560
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
@@ -13,9 +13,9 @@ void __cdecl fcn_005b2560(void* a1, void* a2)
 
 	t = *(char*) ((char*) a2 + 2);
 	if (t == 6 || t == 7) {
-		fcn_0051af00(buf, fcn_0042e410(3) + 0x1340, *(unsigned short*) a1);
+		fcn_0051af00(buf, gm_RandomMod(3) + 0x1340, *(unsigned short*) a1);
 		fcn_0051af00(g_774a80, 0x1339, *(unsigned short*) a1,
-		    fcn_0042e410(3) +
+		    gm_RandomMod(3) +
 		        (*(char*) ((char*) a2 + 9) != 0 ? 0x133d : 0x133a),
 		    *(unsigned short*) a2, buf);
 		fcn_00545d40(*(int*) ((char*) a2 + 4), -1, g_774a80, 1, 0x5ec, 0);

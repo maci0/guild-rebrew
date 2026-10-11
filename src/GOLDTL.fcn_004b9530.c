@@ -34,7 +34,7 @@ Obj* __cdecl fcn_005463a0(int a, int b, int c);
 Obj* __cdecl fcn_005462a0(void);
 int __cdecl fcn_005015e0(char** dynamic, char** existing, char** static_ptr, int entity_id);
 int __cdecl gm_CheckEntityType(char*);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -83,10 +83,10 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 	if (n == 0) {
 		return 0x400;
 	}
-	f = ((fcn_0042e410(2) & 0xffff) + 1.0f) * 0.01f;
+	f = ((gm_RandomMod(2) & 0xffff) + 1.0f) * 0.01f;
 	amount = gm_WalkEntityChain(e->id) * f;
 	fcn_004c51a0(-1, cmd->handle, g_773d75, amount);
-	k = fcn_0042e410(n) & 0xffff;
+	k = gm_RandomMod(n) & 0xffff;
 	o = objs[k];
 	house = houses[k];
 	fcn_005015e0(&shop, 0, 0, o->work);

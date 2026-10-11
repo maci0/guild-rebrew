@@ -1,7 +1,7 @@
 // FUNCTION: GOLD 0x00505d30
 // FUNCTION: GOLDTL 0x00508d80
 
-unsigned short __cdecl fcn_0042e410(unsigned short n);
+unsigned short __cdecl gm_RandomMod(unsigned short n);
 
 void __cdecl fcn_00508d80(unsigned int n, int* arr)
 {
@@ -22,8 +22,8 @@ void __cdecl fcn_00508d80(unsigned int n, int* arr)
 	cnt = (n >> 1) + c;
 	j = 0;
 	while (j < cnt) {
-		a = fcn_0042e410((unsigned short) n);
-		b = fcn_0042e410((unsigned short) n);
+		a = gm_RandomMod((unsigned short) n);
+		b = gm_RandomMod((unsigned short) n);
 		if (a != b) {
 			t = arr[a];
 			arr[a] = arr[b];

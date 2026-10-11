@@ -12,7 +12,7 @@ extern unsigned char* g_90e094;
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0057c9d0(unsigned char*);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 
 // FUNCTION: GOLD 0x004abac0
 // FUNCTION: GOLDTL 0x4abbe0
@@ -67,7 +67,7 @@ int __cdecl fcn_004abbe0(int a1, unsigned short* a2, int a3, char* a4)
 	} else if (best >= 4) {
 		best = 4;
 	}
-	r = fcn_0042e410(best);
+	r = gm_RandomMod(best);
 	if (r < 4)
 		t = 2;
 	else

@@ -17,7 +17,7 @@ typedef struct {
 extern char g_85ab90[];
 extern unsigned char g_773d75;
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl fcn_0050b980(int id, int pct);
 void __cdecl fcn_004c61d0(Offer* o, char who);
 
@@ -28,15 +28,15 @@ void __cdecl fcn_00501fe0(void)
 	int n;
 	int r;
 
-	if (fcn_0042e410(2) == 0) {
+	if (gm_RandomMod(2) == 0) {
 		return;
 	}
-	for (n = fcn_0042e410(2); n > 0; n--) {
-		r = fcn_0042e410(0x54);
+	for (n = gm_RandomMod(2); n > 0; n--) {
+		r = gm_RandomMod(0x54);
 		row = (Offer*) (g_85ab90 + g_773d75 * 0x2a90 + r * 0x80);
 		if (row->id != 0 && row->active != 0) {
 			copy = *row;
-			if (fcn_0042e410(1) != 0) {
+			if (gm_RandomMod(1) != 0) {
 				copy.price = copy.base * 1.5;
 				copy.value = fcn_0050b980(row->id, 100) * 1.5;
 			} else {

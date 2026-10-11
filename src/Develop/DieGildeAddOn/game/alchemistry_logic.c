@@ -3,7 +3,7 @@
 #include "rebrew_globals.h"
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
-
+#include "alchemistry_logic.h"
 #include "entity.h"
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);

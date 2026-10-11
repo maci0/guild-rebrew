@@ -38,7 +38,7 @@ void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_004be280(Node_4bf8e0*);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004bfc70(int);
 void __cdecl fcn_004be360(void);
 Node_4bf8e0* __cdecl fcn_004be1f0(Node_4bf8e0*);
@@ -87,7 +87,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 		fcn_0046f9b0(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
 		if (g_100f1dc != -1 && g_67d370 == clear) {
 			if (g_772908 != 0) {
-				fcn_004be280(g_772908);
+				fcn_004be280((char*) g_772908);
 			}
 			for (i = 0; i < 8; i++) {
 				if (g_10058a0[i].id != -1) {

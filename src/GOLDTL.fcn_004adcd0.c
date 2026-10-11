@@ -58,7 +58,7 @@ extern pos14_7f4c00 g_7f4c00;
 
 void __cdecl fcn_004e8700(int);
 void __cdecl fcn_004e8730(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_005037c0(int a, int b, int c);
 char* __cdecl fcn_004ad130(int, int*);
 void __cdecl fcn_0051af00(void*, int, ...);
@@ -87,7 +87,7 @@ void __cdecl fcn_004adcd0(int mode, int unused, unsigned short owner, Guild4adc*
 	g->bc = 0;
 	for (i = 0; i < 0x300; i++) {
 		for (j = 0; j < 0x300; j++) {
-			g_869480[i][j] = fcn_0042e410(0x40) - 0x20;
+			g_869480[i][j] = gm_RandomMod(0x40) - 0x20;
 			g_90e0a0[i][j] = 0;
 		}
 	}
@@ -105,7 +105,7 @@ void __cdecl fcn_004adcd0(int mode, int unused, unsigned short owner, Guild4adc*
 	g->f10 = 330.0f;
 	g->f18 = 1000.0f;
 	for (i = 0; i < 5; i++) {
-		g->b80[i] = (unsigned char) (fcn_0042e410(0x2a) + 210.0f);
+		g->b80[i] = (unsigned char) (gm_RandomMod(0x2a) + 210.0f);
 	}
 	g->bd = 9;
 	fcn_005037c0(g->handle, *(unsigned short*) (g_8680b4 + g_773d75 * 0x2f4), 16000000);

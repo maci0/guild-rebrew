@@ -1,7 +1,7 @@
 // FUNCTION: GOLD 0x004f8700
 // FUNCTION: GOLDTL 0x004faaf0
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
 char* __cdecl gm_AddObjekt(void);
 
@@ -50,17 +50,17 @@ int __cdecl fcn_004faaf0(char* o)
 	}
 	while (n < 16 && tries != 0) {
 		tries--;
-		t = types[fcn_0042e410(4) * 5 + fcn_0042e410(5)];
+		t = types[gm_RandomMod(4) * 5 + gm_RandomMod(5)];
 		k = 0;
 		for (e = gm_StartFilteredEntitySearch(1, 5, t); e != 0 && k < 3; e = gm_AddObjekt()) {
 			if (n >= 16) {
 				break;
 			}
-			if (fcn_0042e410(4) < 3) {
+			if (gm_RandomMod(4) < 3) {
 				cand[n++] = *(int*) (e + 1);
 				k++;
 			}
 		}
 	}
-	return cand[fcn_0042e410(n)];
+	return cand[gm_RandomMod(n)];
 }

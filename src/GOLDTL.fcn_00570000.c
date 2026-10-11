@@ -18,14 +18,14 @@ extern char g_7f4ca0[];
 // FUNCTION: GOLD 0x00567c50
 // FUNCTION: GOLDTL 0x570000
 
-int __cdecl fcn_00507b00(int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_0056fe60(char*);
 
 void __cdecl fcn_00570000(char* o)
 {
 	int k;
 
-	k = fcn_00507b00(((struct s_7f4ca0*)g_7f4ca0)[g_774970].b164);
+	k = gm_MapEntityStatRange(((struct s_7f4ca0*)g_7f4ca0)[g_774970].b164);
 	if (k == 1 || k == 2 || k == 3) {
 		fcn_0056fe60("help_events_hw");
 	} else if (k == 5 || k == 6) {

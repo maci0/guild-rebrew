@@ -16,7 +16,7 @@ extern char g_7f4ca0[];
 extern unsigned short g_7f4c04;
 extern unsigned char* g_868050;
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004f36f0(char* o);
 
 void __cdecl fcn_00487360(char* e)
@@ -54,7 +54,7 @@ void __cdecl fcn_00487360(char* e)
 		if (e[0x1c8] & 8) {
 			return;
 		}
-		if (fcn_0042e410(0x48) < (0x12 - n) * 2) {
+		if (gm_RandomMod(0x48) < (0x12 - n) * 2) {
 			return;
 		}
 	}

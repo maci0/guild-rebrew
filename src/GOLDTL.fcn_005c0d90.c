@@ -35,7 +35,7 @@ int __cdecl fcn_00519190(int, ...);
 void __cdecl fcn_005c9220(int*);
 int __cdecl fcn_005373e0(void*, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_00471e30(int);
 
@@ -106,7 +106,7 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 				*(int*) (ev + 0x5c) = (*(int*)&g_7f4c04);
 				*(int*) (ev + 0x60) = g_7f4c08;
 				*(short*) (ev + 0x64) = g_7f4c0c;
-				ev[0x6d] = (char) fcn_0042e410(0x1d);
+				ev[0x6d] = (char) gm_RandomMod(0x1d);
 				*(int*) (ev + 0x68) = *(int*) (obj + 2);
 				fcn_004c5530(ev);
 				res = 1;

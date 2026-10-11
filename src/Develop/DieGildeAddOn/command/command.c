@@ -1035,7 +1035,7 @@ void __cdecl ahm_SearchAndSet(void*, void*);
 void __cdecl ahm_ApplyColorComponent(void*, void*);
 void __cdecl ahm_FireEntityAndCleanup(void*, void*, void*);
 void __cdecl ahm_ClampFloatValue(void*, void*);
-void __cdecl ahm_SlotClearMatch(void*, void*, void*);
+#include "../game/alchemistry_logic.h"
 int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src); 
 
 /* Execution handler: creates a new citizen (Buerger) entity.

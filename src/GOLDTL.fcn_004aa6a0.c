@@ -10,7 +10,7 @@ typedef struct Ent {
 
 extern char g_7f4ca0[];
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, int* out);
 int __cdecl fcn_0055c140(char* e, Ent* t, int* cnt);
 int __cdecl fcn_00579640(Ent* t, char* e);
@@ -27,7 +27,7 @@ int __cdecl fcn_004aa6a0(char* e, char* a2, char* out)
 		return 0;
 	}
 	mask = 0xf00500;
-	if (fcn_004a5340(e, 1, &mask, 0, fcn_0042e410(0x40), &idx) == 0) {
+	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
 		return 0;
 	}
 	if (fcn_0055c140(e, &((Ent*)g_7f4ca0)[(unsigned short) idx], &cnt) == 0) {

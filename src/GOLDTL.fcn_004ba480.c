@@ -23,7 +23,7 @@ unsigned short* __cdecl fcn_00508e40(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_00504bd0(int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 float __cdecl fcn_0050f980(int, int, int);
 char* __cdecl fcn_005049a0(unsigned char*);
 void __cdecl fcn_004c5530(void*);
@@ -60,8 +60,8 @@ int __cdecl fcn_004ba480(int* a1)
 	if (n == 0)
 		goto fail;
 	cnt = 0;
-	lim = fcn_0042e410(0x14) + 0x19;
-	chosen = ents[fcn_0042e410(n)];
+	lim = gm_RandomMod(0x14) + 0x19;
+	chosen = ents[gm_RandomMod(n)];
 	kind = &((Kind*)g_868050)[chosen[0]];
 	for (i = 0; i < 768; i++) {
 		rec = g_7f4ca0 + i * 540;

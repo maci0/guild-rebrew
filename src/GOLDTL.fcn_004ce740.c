@@ -5,7 +5,7 @@ extern char* g_aed32c;
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
 extern char g_7f4ca0[];
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004ce6e0(void*);
 void __cdecl fcn_004c4510(void*, int);
 void __cdecl fcn_004c4670(int, int, int, char*);
@@ -37,7 +37,7 @@ char __cdecl fcn_004ce740(int a1)
 		return 0;
 	}
 	c0 = *(signed char*) ((char*) a1 + 0x1c5);
-	if (fcn_0042e410(10) < (unsigned short) (unsigned char) c0) {
+	if (gm_RandomMod(10) < (unsigned short) (unsigned char) c0) {
 		c = -c0;
 		fcn_004ce6e0((void*) a1);
 		fcn_004c4510((void*) a1, *(int*) ((char*) a1 + 4));

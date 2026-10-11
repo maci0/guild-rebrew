@@ -24,7 +24,7 @@ int __cdecl fcn_004e8b40(int idx, fcn_004a0020_Rec* out);
 int __cdecl fcn_004e8c00(int k, int max, fcn_004a0020_Rec* out);
 fcn_004a0020_Ent* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 
 // FUNCTION: GOLDTL 0x004a0020
 int __cdecl fcn_004a0020(fcn_004a0020_Ent* e)
@@ -70,13 +70,13 @@ int __cdecl fcn_004a0020(fcn_004a0020_Ent* e)
 		}
 	}
 	for (i = 6; i != 0; i--) {
-		a = fcn_0042e410(3);
-		b = fcn_0042e410(3);
+		a = gm_RandomMod(3);
+		b = gm_RandomMod(3);
 		t = ord[a];
 		ord[a] = ord[b];
 		ord[b] = t;
-		a = fcn_0042e410(3) + 3;
-		b = fcn_0042e410(3) + 3;
+		a = gm_RandomMod(3) + 3;
+		b = gm_RandomMod(3) + 3;
 		t = ord[a];
 		ord[a] = ord[b];
 		ord[b] = t;

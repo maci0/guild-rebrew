@@ -12,7 +12,7 @@ struct list_55d630 {
 
 void __cdecl fcn_004379a0(int, char*, int, void*, struct list_55d630*);
 char __cdecl fcn_0055d5e0(char*, struct list_55d630*);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 char* __cdecl fcn_0055d630(char* o)
 {
@@ -32,5 +32,5 @@ char* __cdecl fcn_0055d630(char* o)
 	if (l.n == 0) {
 		return 0;
 	}
-	return l.a[fcn_0042e410(l.n)];
+	return l.a[gm_RandomMod(l.n)];
 }

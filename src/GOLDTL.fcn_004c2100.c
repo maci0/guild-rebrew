@@ -1,3 +1,6 @@
+#include "client_sound.h"
+#include "Develop/Units/Msx/msx.h"
+
 #include <string.h>
 
 // SIZE 0x24c
@@ -22,15 +25,12 @@ extern Tpl_4c2100 g_6819b8[];
 extern char g_772c10[];
 extern char s_68a14c[];
 extern char s_68a130[];
-extern int g_772d1c;
-extern int g_772d20;
 
 int __cdecl fcn_00500e20(int*);
 int __cdecl fcn_004c27f0(void);
 int __cdecl fcn_004c2820(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-unsigned short __cdecl fcn_0042e410(int);
-int __cdecl fcn_0041fd70(char*, int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 // FUNCTION: GOLDTL 0x4c2100
@@ -47,7 +47,7 @@ void __cdecl fcn_004c2100(void)
 	char* name;
 	Tpl_4c2100* p;
 	int k;
-	int x;
+	Chan_14cc460* track;
 
 	e = (unsigned char*) g_7746c4;
 	if (e == 0) {
@@ -92,9 +92,8 @@ void __cdecl fcn_004c2100(void)
 		if (g_688118[n].ids[j] == 0) {
 			g_688118[n].score += 0x14;
 		}
-		x = fcn_0041fd70(name, 0);
-		g_772d1c = x;
-		g_772d20 = x;
+		track = fcn_0041fd70(name, 0);
+		g_772d1c = g_772d20 = track;
 		fcn_0064d41a(g_772c10, s_68a14c, name);
 		return;
 	}
@@ -109,7 +108,7 @@ void __cdecl fcn_004c2100(void)
 					break;
 				}
 			}
-			s = p->names[fcn_0042e410(c)];
+			s = p->names[gm_RandomMod(c)];
 			if (strlen(s) == 0) {
 				return;
 			}
@@ -124,9 +123,8 @@ void __cdecl fcn_004c2100(void)
 			if (g_688118[n].ids[j] == 0) {
 				g_688118[n].score += 0x14;
 			}
-			x = fcn_0041fd70(name, 0);
-			g_772d1c = x;
-			g_772d20 = x;
+			track = fcn_0041fd70(name, 0);
+			g_772d1c = g_772d20 = track;
 			fcn_0064d41a(g_772c10, s_68a130, name);
 			return;
 		}

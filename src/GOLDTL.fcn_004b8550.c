@@ -6,7 +6,7 @@ extern char g_7f4ca0[];
 void* __cdecl fcn_00508e40(int);
 int  __cdecl fcn_005c6270(void*, int);
 int  __cdecl fcn_004a55c0(void*, int, int*, float, float, unsigned short*);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_0051af00(void*, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
@@ -35,7 +35,7 @@ int __cdecl fcn_004b8550(void* a1)
 		return 0x400;
 	}
 	e = (void*) (g_7f4ca0 + 540 * w1);
-	n = 2 * fcn_0042e410(8) + 4;
+	n = 2 * gm_RandomMod(8) + 4;
 	fcn_004c54c0(*(int*) ((char*) p + 4), *(int*) ((char*) e + 4), -n, 1);
 	fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7,
 	    *(unsigned short*) e, *(unsigned short*) e);

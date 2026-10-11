@@ -9,7 +9,7 @@ void __cdecl fcn_0051af00(void*, int, ...);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_004c5150(int, int, char, int);
-char* __cdecl fcn_00509570(unsigned short*);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_00546190(char*);
 
@@ -34,7 +34,7 @@ void __cdecl fcn_005a4360(char* e, char* s)
 	}
 	slot = g_7f4ca0 + *(unsigned short*) (e + 0x27) * 540;
 	fcn_004c5150(*(int*) (e + 1), *(int*) (s + 0xb0), (*(char*)&g_773d75), *(int*) (s + 0xb4));
-	p = fcn_00509570(g);
+	p = (char*) gm_GetEntityTableEntry((char*) (g));
 	if (p != 0) {
 		*(int*) (p + 0x48) += *(int*) (s + 0xb4);
 	}

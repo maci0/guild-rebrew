@@ -15,7 +15,7 @@ extern int g_699364;
 extern char g_68a9d0[];
 extern int(__stdcall* g_662318)(void);
 
-void __cdecl fcn_0042e4c0(int);
+void __cdecl srv_SeedRandom(int);
 int __cdecl fcn_004c4dc0(unsigned char*, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned short __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
@@ -42,7 +42,7 @@ int __cdecl fcn_004cc590(unsigned char* a1, char* a2)
 		a2[1] = 1;
 		*(int*) (a2 + 6) = 0;
 	}
-	fcn_0042e4c0(*(int*) (a1 + 0x22));
+	srv_SeedRandom(*(int*) (a1 + 0x22));
 	if (*(int*) (a1 + 0x17) == -1) {
 		e = 0;
 	} else {

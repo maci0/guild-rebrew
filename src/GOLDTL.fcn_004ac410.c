@@ -4,11 +4,11 @@ extern char g_7f4ca0[];
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int* __cdecl fcn_004ac1e0(int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c4510(void*, int);
 void __cdecl fcn_004c4670(int, int, short, char*);
 void __cdecl fcn_004c5360(void);
-int __cdecl fcn_00507b00(int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004c54c0(int, int, int, int);
 
 // FUNCTION: GOLD 0x004ac2f0
@@ -27,7 +27,7 @@ void __cdecl fcn_004ac410(unsigned char* a1, int a2, int a3)
 	if (p == 0)
 		return;
 	if (p[0] == 0 && *(unsigned short*) (p + 1) <= 4) {
-		c = fcn_0042e410(8) + 8;
+		c = gm_RandomMod(8) + 8;
 		c = c < 252.0f - a1[*(unsigned short*) (p + 1) + 0x80] ? c : 252.0f - a1[*(unsigned short*) (p + 1) + 0x80];
 		fcn_004c4510(a1, *(int*) (a1 + 4));
 		fcn_004c4670(1, 1, *(unsigned short*) (p + 1) + 0x80, &c);
@@ -38,8 +38,8 @@ void __cdecl fcn_004ac410(unsigned char* a1, int a2, int a3)
 		for (i = 0; i < 768; i++) {
 			rec = g_7f4ca0 + i * 540;
 			if (*(int*) (rec + 4) != *(int*) (a1 + 4)
-			    && fcn_00507b00(*(unsigned char*) (rec + 0x164)) == *(unsigned short*) (p + 1))
-				fcn_004c54c0(*(int*) (a1 + 4), *(int*) (rec + 4), fcn_0042e410(4) + 3, 0);
+			    && gm_MapEntityStatRange(*(unsigned char*) (rec + 0x164)) == *(unsigned short*) (p + 1))
+				fcn_004c54c0(*(int*) (a1 + 4), *(int*) (rec + 4), gm_RandomMod(4) + 3, 0);
 		}
 	}
 }

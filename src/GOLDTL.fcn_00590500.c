@@ -10,7 +10,7 @@ extern char* g_7e4260[32];
 extern char s_6a99c4[];
 
 double __cdecl gm_RandomFloat01(void);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00426fd0(char*);
 void __cdecl fcn_00428340(int, int, int, int, int);
 
@@ -48,9 +48,9 @@ void __cdecl fcn_00590500(void)
 	if (n == 0) {
 		return;
 	}
-	e1 = list[fcn_0042e410(n)];
+	e1 = list[gm_RandomMod(n)];
 	if (n > 1) {
-		k = fcn_0042e410(n);
+		k = gm_RandomMod(n);
 		e2 = list[k];
 		if (e2 == e1) {
 			e2 = list[(k + 1) % n];

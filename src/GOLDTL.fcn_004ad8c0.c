@@ -21,7 +21,7 @@ extern unsigned char g_773d75;
 
 void __cdecl fcn_00508d80(int, int *);
 int __cdecl fcn_0064d228(void);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507400(int, int);
 int __cdecl gm_IsInRange(int);
 int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
@@ -99,8 +99,8 @@ void __cdecl fcn_004ad8c0(void)
 	fcn_00508d80(15, ids);
 	for (j = 0, k = 0; j < 3; j++) {
 		for (cnt = (int) score[j]; cnt < 2; cnt++) {
-			x = fcn_00507400(ids[k++], (unsigned short) fcn_0042e410(3) + 4);
-			h = fcn_004c4fc0(3, -1, -1, fcn_0042e410(8) + 0x19, -1, x, 0, gm_IsInRange(x));
+			x = fcn_00507400(ids[k++], (unsigned short) gm_RandomMod(3) + 4);
+			h = fcn_004c4fc0(3, -1, -1, gm_RandomMod(8) + 0x19, -1, x, 0, gm_IsInRange(x));
 			if (h != -1) {
 				do {
 					if (fcn_004c4450(h) != 0) {
@@ -123,7 +123,7 @@ void __cdecl fcn_004ad8c0(void)
 			fcn_004c5360();
 			mask = g_664e1c[j];
 			if (j == 2) {
-				mask |= g_664e1c[(unsigned short) fcn_0042e410(j)];
+				mask |= g_664e1c[(unsigned short) gm_RandomMod(j)];
 			}
 			fcn_004c5420(*(int *) (o + 4), 0x1cc, 4, mask, 0);
 		}

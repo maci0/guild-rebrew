@@ -12,7 +12,7 @@ typedef struct Ent {
 // SIZE 0x165
 
 void __cdecl fcn_004f4830(int a, Stat* st);
-int __cdecl fcn_00507b00(int job);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 #define MAXV(a, b) (((a) > (b)) ? (a) : (b))
 #define MINV(a, b) (((a) < (b)) ? (a) : (b))
@@ -27,7 +27,7 @@ int __cdecl fcn_00491000(Ent* e, int a2, int* out)
 	int x;
 	int c;
 
-	r = fcn_00507b00(e->job);
+	r = gm_MapEntityStatRange(e->job);
 	fcn_004f4830(0xb, &st);
 	d = st.v[2] - st.v[1];
 	if (r == 7) {

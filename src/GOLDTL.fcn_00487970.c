@@ -27,7 +27,7 @@ extern short g_7f4c0c;
 extern unsigned char g_773d75;
 extern char g_67e33c[];
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
 char* __cdecl fcn_005462a0(void);
 void __cdecl fcn_004c4eb0(char* s);
@@ -57,7 +57,7 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	if (*(int*) (e + 0x1c8) & 8) {
 		return;
 	}
-	if (fcn_0042e410(100) < chance) {
+	if (gm_RandomMod(100) < chance) {
 		return;
 	}
 	x = *(unsigned char*) (src + 0x1c);

@@ -1,7 +1,7 @@
 // FUNCTION: GOLD 0x0050e5a0
 // FUNCTION: GOLDTL 0x511b70
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004e8af0(char, char*);
 int __cdecl fcn_004e99c0(int);
 
@@ -27,7 +27,7 @@ void __cdecl fcn_00511b70(int n, int* dst, int* src)
 	t[12] = 0x58;
 	t[13] = 0x51;
 	t[14] = 0x2d;
-	j = fcn_0042e410(15);
+	j = gm_RandomMod(15);
 	for (i = 0; i < n; i++) {
 		fcn_004e8af0((char) src[i], buf);
 		dst[i] = t[j] - fcn_004e99c0((unsigned char) buf[8]) / 2;

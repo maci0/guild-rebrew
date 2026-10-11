@@ -67,7 +67,7 @@ extern float g_67a964;
 extern char g_6b859b;
 
 int __cdecl fcn_00500e20(char*);
-View* __cdecl fcn_00509570(Entity*);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00438b40(Camera*, char*);
 void __cdecl fcn_0052ac60(float);
 void __cdecl fcn_00438cb0(Camera*, char*);
@@ -94,7 +94,7 @@ void __cdecl fcn_00516f60(void)
 	if (g_6b8010 != 0) {
 		return;
 	}
-	v = fcn_00509570(&((Entity*)g_7f4ca0)[g_774970]);
+	v = (View*) gm_GetEntityTableEntry((char*) (&((Entity*)g_7f4ca0)[g_774970]));
 	if (v != 0 && v->zoom != -1.0f) {
 		fcn_00438b40(((Camera*)g_6b8014), v->pos);
 		fcn_0052ac60(v->zoom);

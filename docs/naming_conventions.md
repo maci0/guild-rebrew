@@ -3,6 +3,142 @@
 Reconstructed from debug strings, error messages, and binary analysis of
 `server.dll` and `Europa1400Gold_TL.exe`. Developer: 4HEAD Studios (German).
 
+### Native MSX and D3 unit placement (2026-10-11)
+
+TL420840 directly references the attested `D:\develop\units\Msx\msx.c` path.
+Thirteen channel functions share the same native critical section; their placement
+under `Develop/Units/Msx` is inferred from this subsystem affinity. Their original
+function spellings and the other functions' exact original units remain unknown.
+Both TL420840 and GOLD4244b0 also attest `hTrack->bAmbient`. The canonical 296-byte
+`Chan_14cc460` view now uses the attested `bAmbient` spelling at offset0x106.
+Its type name and the other field spellings remain provisional. Eleven verified MSX bodies now share
+`msx.c`; helper placement is inferred from their channel calls and state. Their
+address-based function names and the complete allocation owners remain unresolved.
+Evidence: `.scratch/goal20/msx-shared-unit/scope-final.json`.
+`FindTrackByName` (TL4205e0/GOLD424250) and `FindFreeTrack`
+(TL420690/GOLD424300) are inferred descriptive names. No MSX function prefix is
+attested, so these names remain unprefixed. Their shared ten-record table is an
+accessed view; its original global name and allocation owner are unknown.
+Evidence: `.scratch/goal20/msx-track-table/scope-final.json` and
+`.scratch/goal20/msx-track-type/scope-final.json`.
+`SetTrackPath` (TL420760/GOLD4243d0) is also inferred and unprefixed. Its former
+GOLD478860 pairing was false: that function copies into a separate game buffer.
+The unassigned `g_f8aae0` keeps a provisional VA label until its original role/name
+is established; it does not name the MSX path buffer. Evidence:
+`.scratch/goal20/msx-start-volume/scope-final.json`.
+GOLD438780 directly references `D:\develop\Units\d3\d3_d3d.c` and the expression
+`d3d_Device->lpVtbl->EndScene(d3d_Device)`. `d3d_Device` is therefore attested;
+`d3d_LastResult` is inferred. The interface's complete type and the accessed views'
+allocation owners remain unresolved. The original function name is unknown.
+Evidence: `.scratch/goal20/native-unit-map/direct-path-evidence.json` and
+`.scratch/goal20/native-unit-batch/native-msx-affinity.json`.
+
+### Shared worker-housing action (2026-10-11)
+
+`RunBuergermeister` is inferred from the native `Buergermeister` run registration
+at TL49d640/GOLD49dc00. The action name is attested; the original function and unit
+spelling are unknown. `client_actions.h` declares the recovered three-argument ABI
+and existing helper's returned filtered pointer. Calendar scalars remain accessed
+views; complete backing allocation and cross-TU declaration consolidation are pending.
+Evidence: `.scratch/goal20/mayor-worker-housing/scope-final.json`.
+
+### Shared GUI image update (2026-10-11)
+
+`d2_SetElementImage` at TL466330/GOLD469240 and the `d2_gui.c` unit are inferred.
+The attested `d2_` UI prefix, indexed GUI records, release/load/acquire callbacks,
+signed resource dimensions and GUI callers establish the role, not original spelling.
+The false client `cm_ExAllocThemaPredigt` binding is removed; the SERVER handler stays
+unchanged. Shared C preserves TL756-byte/32-bit fields and GOLD748-byte/16-bit fields,
+including GOLD's unchanged-resource guard. `bild_offset` names the proven integer
+view at TL+88/GOLD+78; inherited legacy GuiEnt field names remain unresolved. The
+ten global aliases reuse existing C spellings as declaration-only accessed views:
+original names, allocation identity, complete backing extents and owners remain
+unproven. `d2_gui.h` is a reconstructed declaration home. No storage is allocated.
+The TL routing caller is independent70-byte4bfbc0, outside the matched dialog body.
+Evidence: `.scratch/goal20/ui-resource-bind/scope-final.json`.
+
+### Shared floor-water region fill (2026-10-11)
+
+`d3_FillWaterRegion` at TL43bf60/GOLD440170 is inferred. The attested `d3_`
+renderer prefix and the caller's `d3_fl:Water` allocation labels support its
+module/role; original spelling and `d3_floor.c` unit placement remain unproven.
+The unrelated client `cm_ExAllocRaum` binding is removed; that attested SERVER
+handler stays unchanged. The268-byte helper operates on square byte grids and
+retains all six full-width arguments, interpreting region values by low byte.
+The original valid-coordinate/distinct-color preconditions remain unchanged.
+Evidence: `.scratch/goal20/grid-flood-fill/scope-final.json`.
+
+### Shared motion completion identity (2026-10-11)
+
+`ch_FinishAni` at TL404410/GOLD403c10 is inferred from the native motion
+cleanup and morph continuation flow; original name/unit remain unproven.
+The neighboring `ch_CheckAniMorph` logs belong to TL4045c0. The false client
+`cm_ExClearLagerslot` binding is removed; the attested SERVER handler remains.
+The shared options view preserves native partial initialization, with a
+continuation field at TL+0x318 / GOLD+0x10. `ch_MorphFrameValue` is inferred
+for the accessed4-byte value written to animation+0x3c. Its two alias rows
+allocate no storage and establish neither complete backing objects nor owners.
+Evidence: `.scratch/goal20/character-motion-clear/scope-final.json`.
+
+### TL model-motion preloader identity (2026-10-11)
+
+`ch_PreloadModelMotions` at TL404ca0 is inferred from the existing attested
+character module prefix and native model-name/motion loop. Its original spelling
+and compilation-unit path remain unproven. The former `cm_ExAllocSpieler` binding
+was unrelated; that attested SERVER handler remains unchanged. The existing
+motion-loader file owns the reconstructed283-byte helper and12-byte options
+view. Its two absolute0x34 reads are native, with no direct callers or absolute
+function-pointer references found. No storage owner or GOLD counterpart inferred.
+Evidence: `.scratch/goal20/alloc-spieler-client/scope-final.json`.
+
+### Recovered character queries and sound constructor (2026-10-11)
+
+`CharacterSitting` TL40df00 and `CharacterSitsDown` TL40e110 retain their
+attested spellings and saved implementations; their shared bit query remains
+unmatched. `fcn_004050c0`, `fcn_00405540` and `fcn_00418c80` remain unnamed
+pending original-module and naming evidence. This recovery restores their
+exact previously verified source versions, including the constructor's
+existing SOUND_SOURCE view; it establishes no new names or storage owners.
+The TL constructor again matches150 bytes with all6 operands independently
+bound. Its stock CRT call is strncpy64d530. GOLD's constructor field offset
+difference remains unbound; do not import the TL constructor unchanged.
+Evidence: `.scratch/goal20/missing-character-bindings/scope-final.json`.
+
+### Parent resolver and getter extents (2026-10-11)
+
+`gm_ResolveParentEntity` (SERVER10019ae0/TL50d490/GOLD50a050) and
+`gm_GetEntityType` (SERVER10019b40/TL50d530/GOLD50a0b0) retain inherited
+inferred names. Complete client extents are82 and62 bytes, excluding14
+and2 external NOPs. The resolver uses the id at input+0x0a, returns its
+static record if present, otherwise follows dynamic+0x27 into g_slot_table;
+missing records or link0xffff return null. The getter returns the static
+record's first word, otherwise dynamic+0x27, otherwise0xffff. A domain
+claim of type/class is unproven; canonical entity_index naming does not
+establish this helper's original name. No new storage was introduced.
+Evidence: `.scratch/goal20/parent-type-extents/scope-final.json`.
+
+### Shared stat/group and table-entry helpers (2026-10-11)
+
+`gm_CheckStatLevel`, `gm_MapEntityStatRange` and `gm_GetEntityTableEntry`
+retain their inherited inferred names. This work establishes shared identities,
+not their original spellings: SERVER100181a0/TL5074e0/GOLD5044b0;
+SERVER10018200/TL507b00/GOLD504ad0; SERVER100184e0/TL509570/GOLD506430.
+The first returns the occupation code when its group equals the requested
+stat id, otherwise a byte at table-entry+0x74+id, or zero for no entry. It does
+not test a threshold. The mapper groups codes0..94; code82 and out-of-range
+codes return zero. Its complete291 bytes include both compiler tables; the
+retired client clone's304-byte extent also included13 external NOPs.
+The table-entry helper selects a172-byte record for kinds5/6/7 with flag0x8000
+and low-four-bit index0..15. Both client implementations remain near matches
+with11 register/scheduling differences. Canonical prototypes and caller casts
+preserve the existing reconstructed views; original domain types remain open.
+Client `g_entity_type_bytes` is a declaration-only view at `g_slot_table+0x164`.
+Client `g_entity_base` describes the accessed2752-byte table view. These inherit
+server analysis names and allocate no storage; complete backing objects and
+storage owners remain unresolved. VC6 requires the owning spiel.c's early
+prototype order; its header omits repeat stat declarations in that TU.
+Evidence: `.scratch/goal20/stat-level-extent/scope-final.json`.
+
 ### Filtered iterator identity correction (2026-10-11)
 
 `gm_FindNextFilteredEntity` is the existing inferred shared name for the
@@ -15,6 +151,32 @@ The true server `gm_AddObjekt` name remains attested and unchanged. Evidence:
 shared importer, and the verified replay corrects both client names, symbols,
 flags and341-byte reference hashes through the managed writer. Evidence:
 `.scratch/goal20/stat-iterator-replay.json`.
+
+### Entity-class embedded switch extents (2026-10-11)
+
+The existing shared `gm_EntityClassCheck` retains its name and C definition.
+GOLDTL506e20 and GOLD503f50 have70-byte complete extents:34 bytes of reachable
+code,2 internal alignment bytes, an8-byte branch table, and a26-byte case map.
+The following10 NOPs are external alignment. Compiler-generated table labels
+are private views inside the owning function; the extent repair creates no
+named global or storage owner. All26 cases/default and8 local DIR32 targets
+are validated through upstream strict operand proof. Evidence:
+`.scratch/goal20/entity-class-extent/scope-final.json`.
+
+### Shared object resource cleanup (2026-10-11)
+
+`gm_ClearObjektResources` is inferred, not attested. The existing spiel.c now
+owns SERVER10016670 (one-byte empty body), GOLDTL502ec0 and GOLD500080
+(client54-byte body). The clients inspect the object prototype category0x1d,
+release the pointer chain at node+0x29 via fcn_004be280, and clear that field.
+The recursive list helper at SERVER10016710, GOLDTL502f80 and GOLD500140 calls
+the correct edition body. Clients have66-byte recursion plus14 alignment NOPs.
+The existing g_99ec10 declaration and client resource-chain callee remain
+aliases/users; this consolidation creates no data allocation or owner claim.
+The helper's original unit/name and domain types remain unproven. The canonical
+spiel.h declaration uses the existing reconstructed LinkedNode; VC6 requires
+its early recursive declaration and the expanded header after gm_Open in the
+shared unit. Evidence: `.scratch/goal20/recursive-object-list/scope-final.json`.
 
 ## Source Tree Layout
 
@@ -280,8 +442,8 @@ file-I/O loader.
 The client binaries share the game logic (`cm_`, `gm_`, `amt_`, `ls_`, `gv_`,
 `ahm_`) but add engine subsystems that never appear in `server.dll`. These
 prefixes are attested by log strings in `Europa1400Gold_TL.exe` and
-`Europa1400Gold.exe` and are **out of scope for this repo's decompilation
-target**; they are recorded so names are not invented twice.
+`Europa1400Gold.exe`. Both clients are targets of the current reconstruction;
+shared client subsystems should use one source tree and these original prefixes.
 
 | Prefix  | Module            | Domain                                   |
 |---------|-------------------|------------------------------------------|
@@ -713,8 +875,10 @@ recovered. The prior matched body was restored and freshly measured RELOC 75/75
 on 2026-10-10. `CreateAnimationEvent` is an inferred descriptive name, without
 an invented module prefix. The CLI renamed only the TL identity and its file;
 the independent server health handler and its callers retain `cm_ExModifyHealth`.
-The command-directory placement remains a legacy reconstruction label, not
-attested original organization.
+The former command-directory placement was a legacy reconstruction label.
+The shared builder now lives in `Develop/DieGildeAddOn/game/CreateAnimationEvent.c`,
+with the other character task sources. That placement follows native task affinity;
+its exact original compilation unit remains unknown.
 
 Two callers used the unbound source name `fcn_00406510`. Rebrew's new explicit
 `source rename fcn_00406510 GOLDTL.0x00406510` binds those declarations and calls
@@ -738,7 +902,7 @@ guards and full compiled-body verification remain unchanged.
 Evidence: `.scratch/goal-builder/xrefs.json`,
 `.scratch/goal20/animation-builder-original-evidence.json`,
 `animation-rename-applied.json`, `animation-binding-applied.json`, and
-`src/Develop/DieGildeAddOn/command/command_c/GOLDTL.CreateAnimationEvent.c`.
+`src/Develop/DieGildeAddOn/game/CreateAnimationEvent.c`.
 
 
 ### Attested character sitting queries (2026-10-04)
@@ -1136,3 +1300,242 @@ unsigned-short formal is supported by both callee and formatter code.
 claimed. The 52 caller files retain their existing names and function bodies.
 Evidence: `.scratch/goal20/stat-helper-replay.json` and
 `stat-helper-after-final-prototype/`.
+
+Shared statistic formatter reconciliation (2026-10-11): the inferred names
+`srv_FormatStatAttributes` (TL4e7490/GOLD4e5980), `srv_FormatStatSkills`
+(TL4e7550/GOLD4e5a40) and `srv_FormatStatTreasury` (TL4e7600/GOLD4e5af0)
+identify three adjacent members of the client statistic family. Both clients
+now use the same server.c bodies; exact original names and the client-only
+source-unit placement remain inferred. `server_stats.h` is a reconstructed
+canonical declaration home, not an attested original path. The treasury row
+formerly called `srv_Init` was false; the independent SERVER10009d30 initializer
+keeps its name and body. `str_i_tab_i_tab_i_tab_i_tab_i_tab` is a compiler-literal
+content label for the complete 16-byte five-integer skills format at TL68d924,
+not a source identifier or another allocation. Evidence:
+`.scratch/goal20/stat-pair-gold-import.json`, `stat-treasury-identity-repair.json`
+and `stat-skills-literal-repair.json`.
+
+Office statistic recovery (2026-10-11): `srv_FormatStatAemter`
+(TL4e75a0/GOLD4e5a90, 87 bytes) is inferred from its four office-role fields
+and neighboring statistic formatters. It now shares the server_stats.c body and
+server_stats.h prototype. `aemter.h` is a reconstructed declaration home for
+the role-label pointers, not evidence of their original storage owner or an
+attested header path. The unresolved table keeps its existing inventory label
+`g_14a5c6c` until ownership/name evidence is recovered.
+`str_s_tab_s_tab_s_tab_s_tab` labels the complete 13-byte compiler format at
+TL68d934; it is not a source identifier. The separate client-only unit placement
+is inferred: a direct server.c inclusion failed LINK because the table has no
+verified server provider. This result does not establish its original source
+unit or authorize a server allocation. Evidence:
+`.scratch/goal20/stat-offices-probe/receipt.json` and
+`stat-offices-gold-import.json`.
+
+Statistic delimiter reconciliation (2026-10-11): the existing inferred names
+`srv_FormatStatDumpBegin` (TL4e73c0) and `srv_FormatStatDumpEnd` (TL4e77e0)
+now identify the shared34-byte server.c bodies. Their original names/source
+placement remain inferred; no Gold counterpart is established. The complete
+formats atTL68d870/68d968 use compiler-literal content labels
+`str_begin_statistic_dump_round`/`str_end_statistic_dump_round`, not source
+identifiers. The existing packed calendar analysis label `g_7f4c00` is retained:
+its `_g_current_year` link spelling describes the first-four-byte scalar view
+used by these bodies. That existing shared C spelling is inferred, not an
+original symbol or a second allocation. The backing owner and complete extent
+remain unresolved. Evidence: `.scratch/goal20/stat-delimiters-probe-final/receipt.json`
+and `stat-delimiters-final-native.json`.
+
+Office-query reconciliation (2026-10-11): existing inferred names
+`srv_GetEntityOfficeSlot` (TL4e7b70/Gold4e6030),
+`srv_GetEntityCouncilSlot` (TL4e7bf0 only), and `amt_GetOfficeAffinity`
+(TL4e7c70/Gold4e60b0) identify one shared server.c body each. Neither the
+names, original parameter domain types nor their original unit placement
+are attested by these byte matches. `aemter.h` holds their canonical current
+prototypes; the void* row outputs retain the reconstructed ABI pending type
+recovery. Existing client declaration labels g_9a9220/g_68da68/g_68d9a0
+remain analysis labels. Verified native link spellings bind the shared office
+tables without creating allocation owners. No Gold council name/VA is invented.
+Evidence: `.scratch/goal20/office-query-scope-final.json`.
+
+Identity-statistic reconciliation (2026-10-11): `srv_FormatStatIdentity`
+(TL4e73f0/Gold4e58e0,159 bytes) is inferred from the first statistic columns,
+not an attested original symbol. Its shared body and prototype now live in
+the reconstructed client-only server_stats.c/server_stats.h. The old numeric
+single-body unit is retired after both target verifications. Existing class
+and runtime-name declaration labels remain analysis names with unresolved
+allocation owners/extents. `str_stat_identity_columns` is a content label
+for the37-byte compiler literal, not a source identifier. The existing C
+spelling `g_current_year` binds Gold's native scalar view at770ae0; the
+broader `g_7f4c00` inventory is unchanged. No SERVER counterpart is claimed.
+Evidence: `.scratch/goal20/stat-identity-shared-probe/receipt.json` and
+`stat-identity-retirement.json`.
+
+Pool helper reconciliation (2026-10-11): TL41e440/41e490/41e4d0 now use
+the existing inferred names `m_pool_clear`, `m_pool_info`, `m_pool_stats`
+and their single shared m_alloc.c definitions, replacing the corresponding
+numeric-source owners. These are source/naming consolidations of existing
+EXACT functions, not new original-symbol attestations. No caller or header
+declaration needs changing: the superseded symbols had no source users.
+Block layout/field names remain reconstructed; no Gold identity or allocation
+owner is inferred. The first/free-all and iterator family retains its saved
+native proof and blocker pending the wider declaration/caller reconciliation.
+Evidence: `.scratch/goal20/pool-clear-info-stats-retirement.json`.
+
+### Random unit ownership reconciliation (2026-10-11)
+
+The earlier random-modulo consolidation's source bindings became stale after
+later tree changes. SERVER1001a0d0, TL42e410 and Gold42ec00 now all name the
+unchanged `DieGildeAddOn/game/zufall.c` definition. Seven TL and six Gold
+helpers share that unit; eight duplicate sources are retired. The existing
+gm_/srv_ spellings and `zufall.c` remain inferred, with no original-symbol or
+file-name attestation. Canonical declarations and caller prototype narrowing
+remain open; the caller bindings preserve existing types. No Gold range
+counterpart is established, so no Gold range address is invented. TL42e430 has a complete
+22-byte native range body, ten alignment NOPs and a verified call to TL42e410.
+Evidence: `.scratch/goal20/random-consolidation/scope-final.json` and
+`.scratch/goal20/random-unit-probe/native-proof-catalog-corrected.json`.
+
+### Alchemy helper declaration reconciliation (2026-10-11)
+
+`ahm_SlotClearMatch` retains its existing inferred name and shared definition.
+The reconstructed `alchemistry_logic.h` supplies its canonical current
+`int(char*, char*, char*)` prototype to that definition and command.c;
+the original header name and domain parameter types are not attested.
+All three native bodies return zero/one. Twelve compiler contexts and 642
+body/typed-operand measurements preserve the existing bytes and callers.
+The separate client sound wrapper's use of `ahm_AllocateEntitySlot` is a false
+binding to a four-argument sound helper; the genuine SERVER three-argument
+alchemy name must remain separate until the client identity is repaired.
+Evidence: `.scratch/goal20/ahm-prototype-contexts/scope-final.json` and
+`next-sound-binding-audit.json`.
+
+### Client animation sound identities (2026-10-11)
+
+`PlayCharacterAniSound` is attested by the diagnostic owned by the complete
+206-byte native TL40cee0/GOLD40bfc0 function; the compiler literal bytes and
+all relocated operands were verified. Its shared reconstructed file is
+`src/PlayCharacterAniSound.c`; the original compilation-unit path is unproven.
+The registered callback at TL40ce80/GOLD40bf60 is now inferred
+`PlayEntitySound`, shared in the correspondingly named reconstructed file.
+It creates a voice and starts a positional sound with range3000/1000 and
+volume127. Its previous `cm_ChkSetGebBesitzer` name and copied SERVER validator
+comment were false. Likewise its four-argument sound callee is the existing
+`fcn_004193f0`, unrelated to SERVER's three-argument `ahm_AllocateEntitySlot`.
+The genuine SERVER command names and dispatch table are preserved.
+`client_sound.h` provides both canonical current prototypes. Native numeric
+sound data views still lack proven original identifiers/storage owners; no
+new allocations are inferred from the declaration-file move. The voice-start
+callee remains source-unbound, and GOLD's pan helper has a distinct matrix
+call ABI, so neither a complete shared pan alias nor full client link is claimed.
+Evidence: `.scratch/goal20/sound-wrapper/scope-final.json`.
+
+### Shared table-search helper (2026-10-11)
+
+`FindTableEntryIndex` at TL44d7b0/GOLD44eeb0 is an inferred descriptive name
+without an invented module prefix. Both complete38-byte native functions are
+identical and use the existing TL C body in `src/FindTableEntryIndex.c`.
+The original function/unit names, table domain and unused original parameters
+remain unproven; the two used arguments are the target value and a caller-supplied
+row table. The loop advances12 bytes per row, examines at most64 rows, stops at
+0x28, and returns0x27 when missing. It checks equality before the terminator,
+so a target value0x28 can return that row's index. No storage owner or array
+allocation is inferred. The malformed GOLD placeholder's absolute-address
+assumption and discarded first argument were false. Managed identity, the
+verified shared import and both complete objects establish EXACT bytes.
+Evidence: `.scratch/goal20/table-search-repair/scope-final.json`.
+
+### Alchemy flag helper ownership (2026-10-11)
+
+`ahm_CheckFlag` remains an inferred name. SERVER1000bda0, TL4ec850 and
+GOLD4eaad0 share the unchanged `DieGildeAddOn/game/alchemistry_logic.c`
+definition; the misleading TL `ahm_ResetEntityState.c` clone is retired.
+The real reset helpers remain distinct. Both native client bodies are70 bytes
+plus10 alignment NOPs. Clone/owner bytes and the typed table operand agree
+in both client contexts, but11 native scheduling differences remain; this
+consolidation does not establish client byte matching. Existing pointer/data
+rows remain aliases/declarations with unresolved client backing storage;
+no new allocation or original domain parameter type is inferred.
+Evidence: `.scratch/goal20/ahm-flag-ownership/scope-final.json`.
+
+
+### Character source placement (2026-10-11)
+
+Seventeen existing character sources and the canonical `ch_motion.h` now live in
+`Develop/DieGildeAddOn/game/`. Native character diagnostics, motion resource paths
+and task callbacks support the subsystem grouping, not exact original filenames.
+The attested `CharacterSitting` / `CharacterSitsDown` names and incomplete bodies
+are preserved. `PlayCharacterAniSound` retains its attested spelling; inferred
+helper names retain their recorded provenance. Several still-addressed functions
+have directly attested diagnostic names and await a caller-aware rename pass.
+Scene-transfer and take-object wrappers now use one shared body each in
+`game/character.c`, preserving their different native field locations through
+partial build-specific views. Evidence and 34-body preservation receipts:
+`.scratch/goal20/character-placement/`.
+
+
+### Shared character scene and script identities (2026-10-11)
+
+`ch_MoveCharacter2Universe` (TL403bc0/GOLD4033c0) and `TakeObjectScript`
+(TL40d410/GOLD40c4f0) are directly attested by diagnostic strings in both native
+bodies. Their shared `character.c` compilation unit is inferred. The recovered
+universe parameter is a pointer. The former `CHARACTER_SCENE_NODE_VIEW` and
+`CHARACTER_DUMMY_VIEW` have been replaced by `D3_OBJECT`,
+`D3_OBJECT_DRAW_DATA` and `D3_DRAW_PART` in the inferred `d3_object.h` header.
+These names and their fields are inferred; complete native byte extents are
+proven while unknown semantic fields remain byte regions. The former `eltern`
+at +0x1cc was a mistaken parent interpretation and is now `kontext`.
+`eltern` denotes the native tree parent at TL+0x1fc/GOLD+0x1f8.
+`darstellungsflag` remains a neutral inferred bit name. The scene flag's exact renderer role is
+unproven, so the former provisional `lit` label is replaced by a neutral name.
+The six globals retain provisional legacy spellings in their canonical declaration
+home; their original identifiers and allocation owners remain unknown. Conditional
+helper aliases preserve independent native providers rather than inventing shared
+identities. Strict full-body/operand and 141,320-case behavior evidence:
+`.scratch/goal20/character-shared-pairs/`.
+
+### Attested character function renames (2026-10-11)
+
+These shared client definitions now use their original diagnostic spellings.
+Each name has a direct native `push` of its diagnostic in both complete bodies;
+the source declarations, callers and callback self-references were renamed together
+through `rebrew source rename --all-modules`. Exact original compilation-unit
+filenames, remaining local/type names and storage owners are still unresolved.
+
+| Attested name | GOLDTL VA | GOLD VA | Standing |
+| --- | --- | --- | --- |
+| `ch_AttachMotion` | `0x404150` | `0x403950` | Renamed from `fcn_00404150`. |
+| `ch_TakingObject` | `0x4068e0` | `0x405d40` | Renamed from `fcn_004068e0`. |
+| `ch_DroppingObject` | `0x406b50` | `0x405fb0` | Renamed from `fcn_00406b50`. |
+| `CreateCharacterAtDummy` | `0x40c9b0` | `0x40ba90` | Renamed from `fcn_0040c9b0`; preserve the unprefixed original. |
+| `PlayCharacterAniScript` | `0x40cff0` | `0x40c0d0` | Renamed from `fcn_0040cff0`. |
+| `PlayCharacterAniScriptInt` | `0x40d130` | `0x40c210` | Renamed from `fcn_0040d130`. |
+| `SetCharacterCamera` | `0x40d8c0` | `0x40c9a0` | Renamed from `fcn_0040d8c0`. |
+
+The integer script wrapper's own invalid-character diagnostic attests
+`PlayCharacterAniScriptInt`; its other error message retains the original copied
+`PlayCharacterAniScript` spelling. Neither diagnostic was edited. Instruction VAs,
+literal VAs, complete native hashes and stock-library exclusions are recorded in
+`.scratch/goal21/continuation/names-scope.json`. Compiler bodies and typed operands
+are compared with only the seven symbol spellings normalized.
+
+
+### Native D3 layout identities (2026-10-11)
+
+Stable IDs `d3.object`, `d3.object_draw_data`, `d3.draw_part` live in managed
+`rebrew-types.toml`; C type and header names follow the attested d3 subsystem
+but their original spellings are unproven. Native allocation sizes are 0x228
+for the scene object in both clients, TL0x1640/GOLD0x970 for draw data.
+Four draw slots have TL0x4a4/GOLD0x198 stride. `teile`, `teile_anzahl`,
+`zeichendaten`, `kontext`, `eltern`, `kinder`, `naechstes`, and `voriges`
+are inferred German field spellings; unknown regions retain `unbekannt_*` names.
+The `name` pointer is an accessed string prefix of a resource context, not a
+claim that its backing allocation is a standalone C string.
+Evidence: `.scratch/goal20/type-identity-layouts/native-evidence.json` and
+`layout-bindings.json` (native extents plus target compiler sizeof/offsetof).
+
+Allocator helper identity checkpoint (2026-10-11): the shared client tracking
+check is TL 0x41dd90 / Gold 0x4225e0 (60 bytes); shared free-all is TL 0x41e410 /
+Gold 0x422c60 (43 bytes). Both client providers now live under Units/m_alloc.
+The existing inferred names m_is_tracked/m_pool_free_all in the table do not
+attest original spellings; numeric source symbols remain pending caller-aware
+canonical naming. The address-derived counter/pointer declarations are likewise
+compatibility names. Native identity/operand evidence and metadata extent repair:
+`.scratch/goal21/allocator-client-repair/baseline.json` and `scope-final.json`.

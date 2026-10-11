@@ -14,7 +14,7 @@ extern char g_7f4ca0[];
 extern char* g_77261c;
 extern float g_664154;
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 typedef struct F8 {
 	int mask;
 	int b;
@@ -41,7 +41,7 @@ int __cdecl fcn_004a8ed0(char* a1, char* e, char* a3, char* a4, char* out)
 	if (g_77261c != 0) {
 		fcn_004a5e60(g_77261c, 4, f, 0, 100.0f, &found);
 	}
-	if (found == -1 && fcn_004a5e60(e, 6, f, 0, fcn_0042e410(0x20) + g_664154, &found) == 0) {
+	if (found == -1 && fcn_004a5e60(e, 6, f, 0, gm_RandomMod(0x20) + g_664154, &found) == 0) {
 		return 0;
 	}
 	q = gm_StartFilteredEntitySearch(1, 1, found);
@@ -49,7 +49,7 @@ int __cdecl fcn_004a8ed0(char* a1, char* e, char* a3, char* a4, char* out)
 		return 0;
 	}
 	t = 0;
-	i = fcn_0042e410(0x300);
+	i = gm_RandomMod(0x300);
 	for (n = 0x300; n != 0;) {
 		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].owner == q && ((Ent*)g_7f4ca0)[i].x2 == 0) {
 			t = &((Ent*)g_7f4ca0)[i];

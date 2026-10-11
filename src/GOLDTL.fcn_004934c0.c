@@ -1,4 +1,4 @@
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl fcn_00508e40(int id);
 void __cdecl fcn_004c4510(char* p, int n);
 void __cdecl fcn_004c4570(int a, int b, int off, int* v);
@@ -30,7 +30,7 @@ char* __cdecl fcn_004934c0(char* e)
 		}
 	}
 	if (n != 0) {
-		pick = list[fcn_0042e410(n)];
+		pick = list[gm_RandomMod(n)];
 	}
 	if (e[2] == 5) {
 		if (pick != 0) {

@@ -24,7 +24,7 @@ typedef struct {
 extern int g_664398[];
 extern char g_7f4ca0[];
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508f80(unsigned short, int);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, Query* q, int c);
 float __cdecl fcn_0050f980(int, int, int);
@@ -46,7 +46,7 @@ unsigned int __cdecl fcn_004a5960(unsigned short* e, unsigned int max, int a2, f
 	unsigned char t;
 	unsigned char job;
 
-	step = g_664398[fcn_0042e410(0x10)];
+	step = g_664398[gm_RandomMod(0x10)];
 	ranged = 0;
 	memset(&q, 0, sizeof(q));
 	memset(q.name, 0xff, sizeof(q.name));
@@ -58,7 +58,7 @@ unsigned int __cdecl fcn_004a5960(unsigned short* e, unsigned int max, int a2, f
 	a2 = fcn_00508f80(*e, 0);
 	tries = 0x300;
 	cnt = 0;
-	i = fcn_0042e410(0x300);
+	i = gm_RandomMod(0x300);
 	while (cnt < max && tries != 0) {
 		t = ((Entity_4a5960*)g_7f4ca0)[i].type;
 		if (t != 8 && t != 7 && t != 5 && t != 9 && t != 0x14) {
@@ -74,7 +74,7 @@ unsigned int __cdecl fcn_004a5960(unsigned short* e, unsigned int max, int a2, f
 		i = (step + i) % 0x300;
 	}
 	tries = 0x300;
-	i = fcn_0042e410(0x300);
+	i = gm_RandomMod(0x300);
 	while (cnt < max && tries != 0) {
 		t = ((Entity_4a5960*)g_7f4ca0)[i].type;
 		if (t != 8 && t != 7 && t != 5 && t != 9 && t != 0x14) {

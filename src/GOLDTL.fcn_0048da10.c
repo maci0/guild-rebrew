@@ -13,7 +13,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
 int __cdecl fcn_00577850(int id);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_0048dbc0(char* e, Msg* a, Msg* b);
 int __cdecl fcn_0048dcd0(char* e, Msg* a, Msg* b);
 int __cdecl fcn_0048ddd0(char* e, Msg* a, Msg* b);
@@ -53,7 +53,7 @@ int __cdecl fcn_0048da10(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	if (fcn_00577850(*(int*) (t + 1)) != 0) {
 		return 0;
 	}
-	switch (fcn_0042e410(4)) {
+	switch (gm_RandomMod(4)) {
 	case 0:
 		r = fcn_0048dbc0(e, &a, &b);
 		break;

@@ -1,7 +1,7 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
 extern char g_7f4ca0[];
 
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004a54a0(short*, int, int, unsigned short*, float, float, unsigned short*);
 float __cdecl fcn_00507e70(short*, char*, int);
 float __cdecl gm_RandomFloat01(void);
@@ -23,7 +23,7 @@ int __cdecl fcn_004aa920(short* a1, int a2, char* a3)
 	if (*(int*) ((char*) a1 + 0x194) < 3)
 		return 0;
 	ids[0] = *a1;
-	if (fcn_004a54a0(a1, 0xf00500, 4, ids, 0.0f, fcn_0042e410(0x10) + 33.0, &src) == 0)
+	if (fcn_004a54a0(a1, 0xf00500, 4, ids, 0.0f, gm_RandomMod(0x10) + 33.0, &src) == 0)
 		return 0;
 	ids[1] = src;
 	if (fcn_004a54a0(a1, 0xf00500, 4, ids, 50.0f, 100.0f, &dst) == 0)

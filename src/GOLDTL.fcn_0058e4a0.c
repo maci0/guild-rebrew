@@ -1,7 +1,7 @@
 // FUNCTION: GOLD 0x00585f00
 // FUNCTION: GOLDTL 0x0058e4a0
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 void __cdecl fcn_0058e4a0(int n, int* a, int* b, int base)
 {
@@ -9,7 +9,7 @@ void __cdecl fcn_0058e4a0(int n, int* a, int* b, int base)
 	int v;
 
 	for (i = 0; i < n; i += 2) {
-		v = fcn_0042e410(3);
+		v = gm_RandomMod(3);
 		b[i] = v;
 		b[i + 1] = v;
 		a[i] = v + base;

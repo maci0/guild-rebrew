@@ -33,7 +33,7 @@ extern char g_7f4ca0[];
 
 void __cdecl fcn_00546190(char* s);
 void __cdecl fcn_0051af00(char* buf, char* fmt, ...);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_005547c0(Player* p);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_0050c710(Home* h, int a, int b);
@@ -78,8 +78,8 @@ void __cdecl fcn_00554820(char* s)
 		steps[13] = 0x2fb;
 		steps[14] = 0x2fd;
 		steps[15] = 0x2ff;
-		*(int*) (s + 0xb0) = steps[fcn_0042e410(16)];
-		*(int*) (s + 0xac) = fcn_0042e410(0x300);
+		*(int*) (s + 0xb0) = steps[gm_RandomMod(16)];
+		*(int*) (s + 0xac) = gm_RandomMod(0x300);
 	}
 	if (*(int*) (s + 0x70) != 0) {
 		return;
@@ -94,7 +94,7 @@ void __cdecl fcn_00554820(char* s)
 			x = r * 0.0125f;
 			if (25.0f - 20.0f * x > f) {
 				y = MINV(MAXV(2.0f - x, 0.0f), 2.0f);
-				f = fcn_004ff210(idx, -50 - fcn_0042e410((int) (y * 255.0f + 1.0f)));
+				f = fcn_004ff210(idx, -50 - gm_RandomMod((int) (y * 255.0f + 1.0f)));
 				fcn_00549580(s, p, &((Player*) g_7f4ca0)[((Player*) g_7f4ca0)[idx].home->x27], ((Player*) g_7f4ca0)[idx].home, f, 0);
 			}
 		}

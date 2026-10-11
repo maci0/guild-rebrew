@@ -31,7 +31,7 @@ void __cdecl fcn_005340f0(int);
 void __cdecl fcn_004c58b0(int, int);
 void __cdecl fcn_005782f0(struct house*, int);
 int __cdecl fcn_00519190();
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -73,15 +73,15 @@ void __cdecl fcn_0058e510(char* e, char* res)
 		}
 		fcn_005782f0(&((struct house*)g_7f4ca0)[g_774970], 1);
 		fcn_00519190(0x40ef, 0x40cc, *p);
-		fcn_004c30a0(t, 0, "GEIST_KOMMT", fcn_0042e410(8), 0xfa);
+		fcn_004c30a0(t, 0, "GEIST_KOMMT", gm_RandomMod(8), 0xfa);
 	} else if (b == 1) {
-		v = (fcn_0042e410(0x200) + 0x200) << 5;
+		v = (gm_RandomMod(0x200) + 0x200) << 5;
 		fcn_004c5150(((struct house*)g_7f4ca0)[g_774970].handle, -1, g_773d75, v);
 		fcn_00519190(0x40f0, 0x40cc, v);
-		fcn_004c30a0(t, 0, "GEIST_KOMMT", fcn_0042e410(8), 0xfa);
+		fcn_004c30a0(t, 0, "GEIST_KOMMT", gm_RandomMod(8), 0xfa);
 	} else {
 		fcn_00519190(0x40d3, 0x40cc);
-		fcn_004c30a0(t, 0, "GEIST_KOMMT_NICHT", fcn_0042e410(8), 0xfa);
+		fcn_004c30a0(t, 0, "GEIST_KOMMT_NICHT", gm_RandomMod(8), 0xfa);
 	}
 	do {
 		if (g_14ce8e0 != 0) {

@@ -7,7 +7,7 @@ char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
 int __cdecl fcn_005015e0(char**, char**, char**, int);
 int __cdecl gm_CheckEntityType(char*);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
@@ -48,8 +48,8 @@ int __cdecl fcn_004b9e60(int* a1)
 	}
 	if (n == 0)
 		return 0x400;
-	cnt = fcn_0042e410(3) + 2;
-	r = fcn_0042e410(n);
+	cnt = gm_RandomMod(3) + 2;
+	r = gm_RandomMod(n);
 	s = ss[r];
 	y = ys[r];
 	fcn_005015e0(&x2, 0, 0, *(int*) (s + 0xb0));

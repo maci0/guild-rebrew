@@ -31,7 +31,7 @@ unsigned char* __cdecl fcn_00508e40(int id);
 int __cdecl fcn_0047d220(unsigned char* p);
 void __cdecl fcn_004942a0(char* e, Share* out);
 Rec6 __cdecl fcn_00506d50(int idx);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_0050d320(char* e, unsigned char b);
 
 /* r[] is block-scoped so it shares the slot of the Rec6 return temporary.
@@ -82,7 +82,7 @@ int __cdecl fcn_004a0e20(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 		for (i = 0; i < 3; i++) {
 			r[i] = best[0x80 + sh[i].kind] / MAXV((float) s.c[sh[i].kind], 1.0f) + best[0x80 + sh[i].goal] / MAXV((float) s.c[sh[i].goal], 1.0f);
 		}
-		if (fcn_0042e410(2) != 0) {
+		if (gm_RandomMod(2) != 0) {
 			k = r[0] > r[1] ? 0 : 1;
 			if (!(r[k] > r[2])) {
 				k = 2;

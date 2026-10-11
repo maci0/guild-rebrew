@@ -11,7 +11,7 @@ typedef struct Rec {
 extern char* g_99ec10;
 extern unsigned char g_773d75;
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 unsigned char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(void*, int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
@@ -35,7 +35,7 @@ int __cdecl fcn_004bb0b0(int* a1)
 	if (p == 0) {
 		return 1;
 	}
-	if (fcn_0042e410(0x100) < p[0x82]) {
+	if (gm_RandomMod(0x100) < p[0x82]) {
 		return 0x400;
 	}
 	if (fcn_005c6270(p, 0x290) != 0) {
@@ -52,7 +52,7 @@ int __cdecl fcn_004bb0b0(int* a1)
 	if (n == 0) {
 		return 0x400;
 	}
-	e = found[fcn_0042e410(n)];
+	e = found[gm_RandomMod(n)];
 	fcn_004c51f0(-1, *(int*) (p + 4), *e, 1, g_773d75, 0);
 	fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, *e * 2 + 0x9a8);
 	fcn_00545d40(*(int*) (p + 4), *(int*) (p + 4), buf, 0x100 < strlen(buf), 0x603, 0);

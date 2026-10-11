@@ -19,7 +19,7 @@ extern char g_6b5c60[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl fcn_005049a0(char*);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_00526920(char*, int, char*);
@@ -53,16 +53,16 @@ void __cdecl fcn_005703b0(char* u)
 		}
 		list[n++] = g_773d78;
 		if (n != 0) {
-			p = list[fcn_0042e410(n)];
-			if (fcn_0042e410(4) != 0 && p != g_773d78 && ((e = fcn_005049a0(p)) != 0 || (e = gm_SetupEntityQuery(p)) != 0)) {
+			p = list[gm_RandomMod(n)];
+			if (gm_RandomMod(4) != 0 && p != g_773d78 && ((e = fcn_005049a0(p)) != 0 || (e = gm_SetupEntityQuery(p)) != 0)) {
 				fcn_00526920(p, *(int*) (e + 2), g_6b5c60);
 			} else {
 				fcn_00526920(p, -1, g_6b5c60);
 			}
 		}
 		*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
-		*(short*) (u + 0x56) += fcn_0042e410(2);
-		*(int*) (u + 0x58) = fcn_0042e410(0x3c);
+		*(short*) (u + 0x56) += gm_RandomMod(2);
+		*(int*) (u + 0x58) = gm_RandomMod(0x3c);
 		break;
 	case 2:
 		((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].type = 6;

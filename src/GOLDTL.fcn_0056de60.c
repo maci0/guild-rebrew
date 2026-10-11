@@ -9,7 +9,7 @@ extern pos14_7f4c00 g_7f4c00;
 void __cdecl fcn_00546190(char*);
 unsigned char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_004c6090(unsigned char*, int, int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507400(int, int);
 int __cdecl fcn_004c4fc0(int, int, int, short, int, int, int, int);
 
@@ -37,8 +37,8 @@ void __cdecl fcn_0056de60(char* o)
 		}
 		*(int*) (o + 0xac) = fcn_004c6090(r, 1, t[0x230], k);
 	} else {
-		x = fcn_00507400(fcn_0042e410(12) + 1, 1);
-		*(int*) (o + 0xac) = fcn_004c4fc0(2, -1, -1, fcn_0042e410(5) + 0x16, -1, x, 0, 2);
+		x = fcn_00507400(gm_RandomMod(12) + 1, 1);
+		*(int*) (o + 0xac) = fcn_004c4fc0(2, -1, -1, gm_RandomMod(5) + 0x16, -1, x, 0, 2);
 	}
 	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
 }

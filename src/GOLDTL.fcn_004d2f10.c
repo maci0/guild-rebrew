@@ -1,12 +1,12 @@
 // FUNCTION: GOLD 0x004d1eb0
 // FUNCTION: GOLDTL 0x4d2f10
 
-extern int g_772efc;
+#include "client_sound.h"
 extern int g_7e46ac;
 extern int g_7725c8;
 extern char g_68bd78[];
 
-void __cdecl fcn_00420840(int);
+#include "Develop/Units/Msx/msx.h"
 char* __cdecl fcn_00426fd0(char*);
 void __cdecl fcn_00428230(char*);
 void __cdecl fcn_004cfa00(int);

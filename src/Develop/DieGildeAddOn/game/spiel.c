@@ -58,11 +58,11 @@ int __cdecl gm_CheckEntityType(unsigned char* entity_ptr);
 int __cdecl gm_FreeObjectListRecursive(LinkedNode** head);
 int __cdecl gm_GetBuildingTypeCategory(int arg1);
 short* __cdecl gm_GetEntityTableEntry(char* param);
-void __cdecl gm_NoopRet2(void);
+
 int __cdecl gm_RandomMod(unsigned short n);
 int __cdecl gm_RemoveObjectByType(int a, int b);
 char* __cdecl gm_SearchStruct(void);
-#include "spiel.h"
+#define SPIEL_EARLY_STAT_DECLARATIONS /* Preserve the original VC6 declaration order. */
 unsigned short* __cdecl gm_ff_Objekt(int container_id, int arg_count, int first_arg, ...);
 
 
@@ -954,7 +954,7 @@ int __cdecl gm_Open(int map_id)
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x588, "gm_Open(): exit", 1);
 	return 0;
 }
-
+#include "spiel.h"
 /* Client-only (TL 0x500c80, discarded): copies the game clock. The clock is the 14-byte block at
  * g_current_year, which gm_AllocGebaeude copies whole; the client keeps the same block at 0x7f4c00.
  * The client has it before gm_CompareGameTime; defined before gm_Open, any function changes gm_Open's
@@ -1007,7 +1007,7 @@ void __cdecl gm_CleanupObjectEntities(void)
 			if (list_head != NULL) {
 				gm_RemoveObjectByType((void**) list_head, *(unsigned short*) ((char*) g_query_base + i * 0x43));
 			} else {
-				gm_NoopRet2((char*) g_query_base + i * 0x43);
+				gm_ClearObjektResources((LinkedNode*) ((char*) g_query_base + i * 0x43));
 				*(unsigned short*) ((char*) g_query_base + i * 0x43) = 0;
 				g_query_limit--;
 			}
@@ -1134,10 +1134,10 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
  * not a pointer load), 0x55 slots of 0x80 bytes per season.  Every walk is
  * a counted index loop; msvc6 strength-reduces them into the reference's
  * down-counters and pointer walks, and the ids walk folds its first
- * `ids[i] != 0` test into the reference's `mov eax,0x92` head.  The dead
- * `query = 0` orders the frame: without it `slots` and `query` swap their
- * [esp+0x10]/[esp+0x14] homes (consistent with c2 placing equal-weight
- * slots in first-reference order, docs/msvc6-allocator.md "Frame slots").
+ * `ids[i] != 0` test into the reference's `mov eax,0x92` head.  With the
+ * canonical node cleanup declarations, `slots` and `query` have the native
+ * [esp+0x10]/[esp+0x14] homes without a dummy query initialization.
+ * First-reference order matters; see docs/msvc6-allocator.md "Frame slots".
  * The previous body spelled the walks as cursors and sat at 25 linked
  * bytes of ebx/edi role swap. */
 
@@ -1171,7 +1171,7 @@ void __cdecl gm_ObjectsAvailble(int season)
 		return;
 	}
 
-	query = 0;
+
 	slots = (char*) &g_slot_array + season * 0x2a90;
 	if (season != g_current_season) {
 		return;
@@ -1873,7 +1873,7 @@ int __cdecl gm_RemoveObjectByType(int a, int b)
 
 	if (node->children != NULL)
 		gm_FreeObjectListRecursive(&node->children);
-	gm_NoopRet2(node);
+	gm_ClearObjektResources(node);
 	if (index == 0)
 		*head = node->next;
 	else
@@ -1883,16 +1883,16 @@ int __cdecl gm_RemoveObjectByType(int a, int b)
 	return 0;
 }
 
-/* gm_NoopRet2 — stub that does nothing (target is a bare `ret`). */
-
-
-void __cdecl gm_NoopRet2(void)
+void __cdecl gm_ClearObjektResources(LinkedNode* node)
 {
+#ifndef REBREW_SERVER
+    if ((g_99ec10 + node->type * 64)[node->type] == 0x1d && *(int*) ((char*) node + 0x29) != 0) {
+        fcn_004be280(*(char**) ((char*) node + 0x29));
+        *(int*) ((char*) node + 0x29) = 0;
+    }
+#endif
 }
-
-/* Removes the node whose id equals b from the list headed by *a.
- * Returns 0 on success, -1 if the list is empty, -2 if the id is
- * not found. Also decrements the global query limit counter. */
+/* Removes an id, decrements the query count; returns -1 for empty, -2 for missing. */
 int __cdecl gm_RemoveLinkedNodeById(int a, int b, int c)
 {
 	LinkedNode** head;
@@ -1917,7 +1917,7 @@ int __cdecl gm_RemoveLinkedNodeById(int a, int b, int c)
 
 	if (node->children != NULL)
 		gm_FreeObjectListRecursive(&node->children);
-	gm_NoopRet2(node);
+	gm_ClearObjektResources(node);
 	if (index == 0)
 		*head = node->next;
 	else
@@ -1940,7 +1940,7 @@ int __cdecl gm_FreeObjectListRecursive(LinkedNode** head)
 		*head = node->next;
 		if (node->children != NULL)
 			gm_FreeObjectListRecursive((LinkedNode**) &node->children);
-		gm_NoopRet2(node);
+		gm_ClearObjektResources(node);
 		node = *head;
 	} while (node != NULL);
 	return 0;
@@ -2525,7 +2525,7 @@ cleanup_loop:
 		entity_scan = entity_scan + 0x87;
 	} while ((int) entity_scan < (int) ((char*) &g_entity_records + 0x65400));
 	if (*(int*) (building + 0x5d) != 0) {
-		gm_FreeObjectListRecursive((char**) (building + 0x5d));
+		gm_FreeObjectListRecursive((LinkedNode**) (building + 0x5d));
 	}
 	*building = 0;
 	return 0;
@@ -3378,7 +3378,7 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 		gm_InitEntityIfValid((short*) entity);
 		entity[2] = 0xf;
 	}
-	gm_FreeObjectListRecursive((char**) (entity + 0x178));
+	gm_FreeObjectListRecursive((LinkedNode**) (entity + 0x178));
 	if (arg2 != 0) {
 		if (*(unsigned short*) entity != 0xffff) {
 			g_citizen_count--;
@@ -3859,8 +3859,8 @@ int __cdecl gm_GetRangeStatId(int range, int level)
 	return 0;
 }
 
-/* Checks if an entity's stat is at or above a threshold.
- * Used for skill/ability requirement checks. */
+/* Returns the occupation code when its group matches stat_id.
+ * Otherwise reads the group byte from the table entry, or returns zero. */
 
 
 
@@ -3945,8 +3945,8 @@ void __cdecl gm_RingGuildHallBell(int guild)
 	}
 }
 
-/* Maps and clamps an entity stat value to a valid range.
- * Applies min/max bounds and any stat modifiers. */
+/* Maps an occupation code to its group.
+ * Codes 0 and 82, and out-of-range codes, return zero. */
 
 
 int __cdecl gm_MapEntityStatRange(int stat_id)
@@ -4485,8 +4485,8 @@ int __cdecl gm_CanMarry(char* a, char* b)
 	return 1;
 }
 
-/* Gets a pointer to an entity's type table entry.
- * Indexes into g_entity_type_table by the entity's type byte. */
+/* Resolves a flagged kind 5, 6 or 7 entity to a table entry.
+ * The low four bits at offset 0x50 select a 172-byte record. */
 
 
 short* __cdecl gm_GetEntityTableEntry(char* param)
@@ -6210,8 +6210,8 @@ short* __cdecl gm_ResolveEntityRecord(short* entity)
 	return entity;
 }
 
-/* Resolves a parent entity reference. Follows entity chain
- * links to find the parent. Returns parent pointer. */
+/* Resolves the id at input+0x0a to a static record or its dynamic link.
+ * A missing record or link index 0xffff returns null. */
 
 
 short* __cdecl gm_ResolveParentEntity(short* entity)
@@ -6246,8 +6246,8 @@ unsigned short __cdecl gm_ResolveEntitySlot(short* entity)
 	return 0xffff;
 }
 
-/* Gets the type (class) of an entity as an unsigned short.
- * Reads from the entity's type field. */
+/* Returns the resolved static record's first word or dynamic+0x27.
+ * Returns 0xffff when both resolver outputs are null. */
 
 
 unsigned short __cdecl gm_GetEntityType(short* entity)

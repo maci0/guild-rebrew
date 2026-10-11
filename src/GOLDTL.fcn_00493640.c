@@ -22,7 +22,7 @@ typedef struct Unit {
 unsigned int __cdecl fcn_004938c0(Plan* p);
 Unit* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 
 // FUNCTION: GOLD 0x494010
 // FUNCTION: GOLDTL 0x00493640
@@ -65,5 +65,5 @@ int __cdecl fcn_00493640(Plan* p)
 	if (d1 * 1.1f > d2 * 0.9f && d1 < d2) {
 		return 0;
 	}
-	return fcn_0042e410(2);
+	return gm_RandomMod(2);
 }

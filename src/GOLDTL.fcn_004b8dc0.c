@@ -16,7 +16,7 @@ char *__cdecl fcn_005462a0(void);
 char *__cdecl gm_FindRecordById(int);
 void __cdecl fcn_005015e0(char **, int, int, int);
 int __cdecl gm_CheckEntityType(char *);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0064d228(void);
 void __cdecl fcn_004c4510(char *, int);
 void __cdecl fcn_004c4570(int, int, int, char *);
@@ -63,12 +63,12 @@ int __cdecl fcn_004b8dc0(int *msg)
 	if (n == 0) {
 		return 0x400;
 	}
-	k = fcn_0042e410(n);
+	k = gm_RandomMod(n);
 	e = ents[k];
 	r = recs[k];
 	fcn_005015e0(&b, 0, 0, *(int *) (e + 0xb0));
 	fcn_005015e0(&a, 0, 0, *(int *) (e + 0xb4));
-	val = (char) (*(unsigned char *) (r + 0x12) * ((fcn_0042e410(0x23) + 0x3c) * 0.01f));
+	val = (char) (*(unsigned char *) (r + 0x12) * ((gm_RandomMod(0x23) + 0x3c) * 0.01f));
 	fcn_004c4510(r, *(int *) (r + 2));
 	fcn_004c4570(1, 1, 0x12, &val);
 	fcn_004c5360();

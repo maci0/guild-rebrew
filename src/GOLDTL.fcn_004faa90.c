@@ -3,7 +3,7 @@
 
 extern char g_1043370[];
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_0045b920(char*, int, int, int);
 
 void __cdecl fcn_004faa90(int x, int y, int c)
@@ -15,7 +15,7 @@ void __cdecl fcn_004faa90(int x, int y, int c)
 
 	g = (*(char**)g_1043370);
 	d = *(int*) (g + 0x20) / 8;
-	a = fcn_0042e410(d) + d * x;
-	b = fcn_0042e410(d) + d * y;
+	a = gm_RandomMod(d) + d * x;
+	b = gm_RandomMod(d) + d * y;
 	fcn_0045b920(g, a, b, c);
 }

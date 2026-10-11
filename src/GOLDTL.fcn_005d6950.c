@@ -29,7 +29,7 @@ extern char s_6accdc[];
 
 int __cdecl fcn_004e8b40(int, Info*);
 unsigned char* __cdecl fcn_00508e40(int);
-int __cdecl fcn_004e7b70(unsigned char*, Info*, Info*);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004e81c0(unsigned char*, unsigned char*);
 int __cdecl fcn_004c5420(int, int, int, int, int);
@@ -73,7 +73,7 @@ int __cdecl fcn_005d6950(unsigned char* e, int* o)
 		if (q == 0) {
 			return 0x60;
 		}
-		if (!fcn_004e7b70(q, &x, &y)) {
+		if (!srv_GetEntityOfficeSlot(q, &x, &y)) {
 			return 0x60;
 		}
 		if (info.f4 != x.f4) {
@@ -100,7 +100,7 @@ int __cdecl fcn_005d6950(unsigned char* e, int* o)
 	fcn_0051af00(text2, 0x1d99);
 	g = fcn_005cadc0(info.f4, &req, text1, text2, 0);
 	if (g != 0) {
-		if (!fcn_004e7b70((unsigned char*) g, &y, &x)) {
+		if (!srv_GetEntityOfficeSlot((unsigned char*) g, &y, &x)) {
 			return 0x60;
 		}
 		if (x.b10 != 1) {

@@ -50,7 +50,7 @@ extern char* g_14a62d8[];
 extern char* g_14a5dbc[];
 extern char* g_14a60d0[];
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004fdec0(char* name);
 int __cdecl fcn_0050b810(int a, unsigned char b);
 int __cdecl fcn_0050b710(int a, unsigned char b);
@@ -76,7 +76,7 @@ int __cdecl fcn_004a6bb0(char* owner, Game* game)
 	money = fcn_0050b710(fcn_0050b810(*(int*) (owner + 0x178), g_773d75), g_773d75);
 	d = MAXV(10000.0, money);
 	((Game*) g_1007cd4)->pot = fcn_0050b750((int) (d / (log10(d) + 1.0) * 0.1f), g_773d75);
-	((Game*) g_1007cd4)->limit = ((Game*) g_1007cd4)->pot / (fcn_0042e410(3) + 7);
+	((Game*) g_1007cd4)->limit = ((Game*) g_1007cd4)->pot / (gm_RandomMod(3) + 7);
 	((Game*) g_1007cd4)->stake = ((Game*) g_1007cd4)->limit;
 	((Game*) g_1007cd4)->fb8 = 4;
 	for (i = 0; i < 6; i++) {
@@ -90,13 +90,13 @@ int __cdecl fcn_004a6bb0(char* owner, Game* game)
 		if (i != 0) {
 			p->kind = g_1007e60[0].kind == 0;
 		} else {
-			p->kind = (char) fcn_0042e410(2);
+			p->kind = (char) gm_RandomMod(2);
 		}
-		p->level = (char) fcn_0042e410(4) + 1;
-		strncpy(p->first, g_14a62d8[fcn_0042e410(0x95)], 0xf);
+		p->level = (char) gm_RandomMod(4) + 1;
+		strncpy(p->first, g_14a62d8[gm_RandomMod(0x95)], 0xf);
 		if (p->kind == 0) {
-			strncpy(p->name, g_14a5dbc[fcn_0042e410(0xbf)], 0xf);
-			switch (fcn_0042e410(4)) {
+			strncpy(p->name, g_14a5dbc[gm_RandomMod(0xbf)], 0xf);
+			switch (gm_RandomMod(4)) {
 			case 0:
 				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buerger_MANN") + 0x639;
 				break;
@@ -111,8 +111,8 @@ int __cdecl fcn_004a6bb0(char* owner, Game* game)
 				break;
 			}
 		} else {
-			strncpy(p->name, g_14a60d0[fcn_0042e410(0x70)], 0xf);
-			switch (fcn_0042e410(4)) {
+			strncpy(p->name, g_14a60d0[gm_RandomMod(0x70)], 0xf);
+			switch (gm_RandomMod(4)) {
 			case 0:
 				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buergerin_frau") + 0x639;
 				break;

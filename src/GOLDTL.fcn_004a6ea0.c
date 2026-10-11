@@ -32,7 +32,7 @@ typedef struct {
 #include "client_types.h"
 extern Card_1007ce0 g_1007ce0[24];
 
-int __cdecl fcn_0042e410(int id);
+int __cdecl gm_RandomMod(int id);
 
 int __cdecl fcn_004a6ea0(State* s)
 {
@@ -46,7 +46,7 @@ int __cdecl fcn_004a6ea0(State* s)
 	*((unsigned char*) s + 0xb5) = 0;
 	*(int*) ((char*) s + 0xa0) = 0;
 	s->f0 = 0;
-	*(int*) ((char*) s + 0xb0) = (unsigned short) fcn_0042e410(3);
+	*(int*) ((char*) s + 0xb0) = (unsigned short) gm_RandomMod(3);
 	*(int*) ((char*) s + 0xbc) = 0;
 	for (i = 0; i < 24; i++) {
 		((Slot10*)g_1007ce0)[i].c = 3;
@@ -59,7 +59,7 @@ int __cdecl fcn_004a6ea0(State* s)
 		s->recs[i].f14 = 0;
 		s->recs[i].f24 = 0;
 		s->recs[i].f1c = -1;
-		s->recs[i].f18 = (unsigned short) fcn_0042e410(5) == 1;
+		s->recs[i].f18 = (unsigned short) gm_RandomMod(5) == 1;
 		s->recs[i].f24 = 0;
 		s->recs[i].f20 = -1;
 	}

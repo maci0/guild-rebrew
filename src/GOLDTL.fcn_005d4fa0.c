@@ -16,7 +16,7 @@ extern int g_67d370;
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004c6ae0(int, int);
 int __cdecl fcn_004c5420(int, int, int, int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c5150(int, int, char, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl fcn_00508890(unsigned char*);
@@ -57,7 +57,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 		money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * g_6628ac);
 		fcn_004c6ae0(*(int*) (e + 4), -2);
 		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
-		if (fcn_0042e410(2)) {
+		if (gm_RandomMod(2)) {
 			fcn_004c5150(-1, *(int*) (e + 4), g_773d75, money);
 			fcn_004ff210(*(unsigned short*) e, half);
 			fcn_00508890(e);
@@ -79,7 +79,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 				if (fcn_00525f60(e, 2) && fcn_00526010(e, money, g_773d75)) {
 					fcn_004c6ae0(*(int*) (e + 4), -2);
 					fcn_0051af00(text, 0x1d3c);
-					if (fcn_0042e410(2)) {
+					if (gm_RandomMod(2)) {
 						fcn_0051af00(tmp, s_679060, 0x1d3d);
 						strcat(text, tmp);
 						fcn_004c5150(-1, *(int*) (e + 4), g_773d75, money);

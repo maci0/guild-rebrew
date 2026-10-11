@@ -8,7 +8,7 @@ extern int g_7728c4;
 
 int __cdecl fcn_004e8a80(int, int*);
 char* __cdecl fcn_004ad130(int, int*);
-char* __cdecl fcn_0042e410(int);
+char* __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c4fc0(int, int, int, char*, int, int, int, int);
 
 void __cdecl fcn_004ad1c0(void)
@@ -27,11 +27,11 @@ void __cdecl fcn_004ad1c0(void)
 	if (a[1] == -1 && g_7728cc != -1) {
 		p = fcn_004ad130(g_7728cc, &kind);
 		if (p != 0 && *(int*) (p + 4) <= limit)
-			fcn_004c4fc0(0x15, g_7728cc, -1, fcn_0042e410(8) + 0x19, -1, 0, 0, 0);
+			fcn_004c4fc0(0x15, g_7728cc, -1, gm_RandomMod(8) + 0x19, -1, 0, 0, 0);
 	}
 	if (b[1] == -1 && g_7728c4 != -1) {
 		p = fcn_004ad130(g_7728c4, &kind);
 		if (p != 0 && *(int*) (p + 4) <= limit)
-			fcn_004c4fc0(0x16, g_7728c4, -1, fcn_0042e410(8) + 0x19, -1, 0, 0, 0);
+			fcn_004c4fc0(0x16, g_7728c4, -1, gm_RandomMod(8) + 0x19, -1, 0, 0, 0);
 	}
 }

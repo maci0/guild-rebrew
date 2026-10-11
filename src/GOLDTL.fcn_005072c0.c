@@ -1,13 +1,13 @@
 // FUNCTION: GOLD 0x00504290
 // FUNCTION: GOLDTL 0x005072c0
 
-int __cdecl fcn_00507b00(int a);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 int __cdecl fcn_005072c0(int a)
 {
 	int k;
 
-	k = fcn_00507b00(a);
+	k = gm_MapEntityStatRange(a);
 	if (k == 0) {
 		return 0;
 	}

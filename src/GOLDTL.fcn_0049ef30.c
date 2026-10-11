@@ -1,5 +1,5 @@
 int __cdecl fcn_00507d10(int job);
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 int __cdecl fcn_004a4550(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
@@ -18,7 +18,7 @@ int __cdecl fcn_0049ef30(float* o1, float* o2, int a3, char* e, int skip, int a6
 		n = fcn_00507d10(*(unsigned char*) (e + 0x164));
 		if (n >= 3) {
 			if (n < 6) {
-				if (fcn_0042e410(n - 1)) {
+				if (gm_RandomMod(n - 1)) {
 					return fcn_004a4410(o1, o2, a3, e, 0, a6, a7);
 				}
 			} else {

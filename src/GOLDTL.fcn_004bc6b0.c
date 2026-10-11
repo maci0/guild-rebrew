@@ -2,7 +2,7 @@
 
 extern int g_67a370;
 
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_00406340(char*, char*, int);
 int __cdecl fcn_004bc8a0(int*, int, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
@@ -24,15 +24,15 @@ void __cdecl fcn_004bc6b0(char** a1)
 
 	if (*(int*) (a1[0] + 0x128) != 0)
 		return;
-	if (fcn_0042e410(0x64) > 0x14) {
-		if (fcn_0042e410(0x64) > 0x32)
-			fcn_00406340(a1[0], "bewegung/stehen", fcn_0042e410(3) + 1);
+	if (gm_RandomMod(0x64) > 0x14) {
+		if (gm_RandomMod(0x64) > 0x32)
+			fcn_00406340(a1[0], "bewegung/stehen", gm_RandomMod(3) + 1);
 		else
-			fcn_00406340(a1[0], "bewegung/fressen", fcn_0042e410(3) + 1);
+			fcn_00406340(a1[0], "bewegung/fressen", gm_RandomMod(3) + 1);
 		return;
 	}
 	g = *(int*) (((char*)g_67a370) + 0xb0);
-	n = fcn_0042e410(3) + 1;
+	n = gm_RandomMod(3) + 1;
 	n = fcn_004bc8a0((int*) (a1 + 4), n, pts[0]);
 	if (n <= 0)
 		return;

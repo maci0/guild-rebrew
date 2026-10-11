@@ -11,7 +11,7 @@ extern double g_6640e8;
 
 #include <string.h>
 
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 void* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(void*, int);
 int __cdecl fcn_004bac00(void*, int*, float);
@@ -33,7 +33,7 @@ int __cdecl fcn_004baf60(void* a1)
 	int r;
 	unsigned int len;
 
-	n = fcn_0042e410(0x14) & 0xffff;
+	n = gm_RandomMod(0x14) & 0xffff;
 	f = (float) (((double) n + g_664e78) * g_6640e8);
 	p = fcn_00508e40(*(int*) a1);
 	if (p == 0) {

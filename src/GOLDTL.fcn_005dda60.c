@@ -16,7 +16,7 @@ typedef struct Ent {
 
 extern char g_7f4ca0[];
 
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -35,7 +35,7 @@ int __cdecl fcn_005dda60(Ent* ent, int* arg)
 	int i;
 
 	arg[4] = 1;
-	r = fcn_0042e410(0x300) & 0xffff;
+	r = gm_RandomMod(0x300) & 0xffff;
 	n = 0x300;
 	while (n != 0) {
 		if (r != ent->id && ((Ent*)g_7f4ca0)[r].id != 0xffff && ((Ent*)g_7f4ca0)[r].kind < 10 &&
@@ -46,7 +46,7 @@ int __cdecl fcn_005dda60(Ent* ent, int* arg)
 		n--;
 		r = (r + 1) % 0x300;
 	}
-	r = fcn_0042e410(0x300) & 0xffff;
+	r = gm_RandomMod(0x300) & 0xffff;
 	m = 0x300;
 	while (m != 0) {
 		if (r != ent->id && r != picks[0]->id && ((Ent*)g_7f4ca0)[r].id != 0xffff &&
@@ -57,7 +57,7 @@ int __cdecl fcn_005dda60(Ent* ent, int* arg)
 		m--;
 		r = (r + 7) % 0x300;
 	}
-	r = fcn_0042e410(0x300) & 0xffff;
+	r = gm_RandomMod(0x300) & 0xffff;
 	m = 0x300;
 	while (m != 0) {
 		if (r != ent->id && r != picks[0]->id && r != picks[1]->id && ((Ent*)g_7f4ca0)[r].id != 0xffff &&

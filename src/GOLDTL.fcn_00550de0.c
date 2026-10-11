@@ -25,7 +25,7 @@ extern unsigned char g_773d75;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_00504bd0(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl fcn_00502cd0();
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(char*, char*);
@@ -68,7 +68,7 @@ void __cdecl fcn_00550de0(char* e)
 				}
 			}
 			if (n != 0) {
-				sel = list[fcn_0042e410(n)];
+				sel = list[gm_RandomMod(n)];
 				if (sel != 0) {
 					r = fcn_00502cd0(*(int*) (sel + 0x5d), 2, 6, 0, 0x2a);
 					if (r == 0) {

@@ -13,7 +13,7 @@ void __cdecl fcn_00546190(char*);
 void __cdecl fcn_00545780(char*);
 char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_00507d10(int);
-int __cdecl fcn_00507b00(int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00422700(char*);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
 int __cdecl fcn_00519190(int, ...);
@@ -43,7 +43,7 @@ void __cdecl fcn_00565100(char* u)
 		if (h != 0) {
 			lvl = fcn_00507d10(*(unsigned char*) (h + 0x164)) + 1;
 			text = h[9] ? 0x15ab : 0x159b;
-			n = fcn_00507b00(*(unsigned char*) (h + 0x164));
+			n = gm_MapEntityStatRange(*(unsigned char*) (h + 0x164));
 			if (h[9] == 0) {
 				if (n <= 0xc) {
 					r = fcn_00422700("BERUF_TRAINING_SPIELER_MAENNLICH");

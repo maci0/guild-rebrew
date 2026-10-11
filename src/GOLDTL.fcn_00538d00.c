@@ -1,3 +1,5 @@
+#include "Develop/Units/Msx/msx.h"
+
 // FUNCTION: GOLDTL 0x00538d00
 
 #include <stdio.h>
@@ -63,7 +65,6 @@ void __cdecl fcn_004226b0(char*);
 int __cdecl fcn_00422dc0(char*, int);
 void __cdecl fcn_0053f7b0(char*);
 void __cdecl fcn_0041fad0(int, int, int);
-void __cdecl fcn_00420760(char*);
 void __cdecl fcn_005e2590(void);
 void __cdecl fcn_00525eb0(void);
 void __cdecl fcn_00510900(void);
@@ -145,7 +146,7 @@ int __cdecl fcn_00538d00(void)
 	if (g_774930 != 0) {
 		fcn_0041fad0(2, 0x10, 44100);
 		sprintf(path, "%smsx\\", g_6a3550);
-		fcn_00420760(path);
+		SetTrackPath(path);
 	}
 	fcn_005e2590();
 	fcn_00525eb0();

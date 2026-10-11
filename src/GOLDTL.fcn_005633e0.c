@@ -26,7 +26,7 @@ extern unsigned char g_773d75;
 extern char g_6b5c60[];
 extern char g_6a65a4[];
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -47,7 +47,7 @@ void __cdecl fcn_005633e0(char* u)
 
 	h = 0;
 	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
-	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), fcn_0042e410(3) + 4, 0, 0);
+	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), gm_RandomMod(3) + 4, 0, 0);
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0xac));
 	if (e != 0) {
 		gd = &((struct good*)g_868050)[*e];

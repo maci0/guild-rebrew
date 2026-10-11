@@ -32,7 +32,7 @@ typedef struct {
 extern char g_7f4ca0[];
 
 int __cdecl fcn_004ae0f0(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 // FUNCTION: GOLD 0x004adff0
 // FUNCTION: GOLDTL 0x4ae130
@@ -267,7 +267,7 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 	}
 	if (sel == 0) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (fcn_004ae130((unsigned short) j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
@@ -279,7 +279,7 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 		} while (left != 0);
 	} else if (sel == 1) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (fcn_004ae1c0(j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
@@ -292,7 +292,7 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 	} else {
 		found = 0;
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (found == 0 && fcn_004ae1c0(j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
@@ -372,7 +372,7 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 	}
 	if (sel == 0) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (((Rec21c*)g_7f4ca0)[j].side == 1 && fcn_004ae130((unsigned short) j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
@@ -386,7 +386,7 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 		} while (left != 0);
 	} else if (sel == 1) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (((Rec21c*)g_7f4ca0)[j].side == 1 && fcn_004ae1c0(j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
@@ -401,7 +401,7 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 	} else {
 		found = 0;
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (((Rec21c*)g_7f4ca0)[j].side == 1) {
@@ -488,7 +488,7 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 	}
 	if (sel == 0) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (((Rec21c*)g_7f4ca0)[j].side == 0 && fcn_004ae130((unsigned short) j) != 0
@@ -503,7 +503,7 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 		} while (left != 0);
 	} else if (sel == 1) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (((Rec21c*)g_7f4ca0)[j].side == 0 && fcn_004ae1c0(j) != 0
@@ -519,7 +519,7 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 	} else {
 		found = 0;
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (((Rec21c*)g_7f4ca0)[j].side == 0) {
@@ -610,7 +610,7 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 	}
 	if (sel == 0) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (fcn_004ae130((unsigned short) j) != 0
@@ -625,7 +625,7 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 		} while (left != 0);
 	} else if (sel == 1) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (fcn_004ae1c0(j) != 0
@@ -641,7 +641,7 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 	} else {
 		found = 0;
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (found == 0 && fcn_004ae1c0(j) != 0
@@ -787,7 +787,7 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 	}
 	if (sel == 0) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (fcn_004ae130((unsigned short) j) != 0
@@ -801,7 +801,7 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 		} while (left != 0);
 	} else if (sel == 1) {
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (fcn_004ae1c0(j) != 0
@@ -816,7 +816,7 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 	} else {
 		found = 0;
 		r = 0;
-		j = fcn_0042e410(0x300);
+		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (found == 0 && fcn_004ae1c0(j) != 0
@@ -905,8 +905,8 @@ int __cdecl fcn_004afd70(int mode, int* pairs, int idx, char* text, void* out)
 		steps[1] = 5;
 		steps[2] = 7;
 		steps[3] = 11;
-		step = steps[fcn_0042e410(4)];
-		i = fcn_0042e410(0x300);
+		step = steps[gm_RandomMod(4)];
+		i = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
 			if (fcn_004ae210(i) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {

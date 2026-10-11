@@ -43,7 +43,7 @@ void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00526010(Ent5a92*, int, unsigned char);
 int __cdecl fcn_005809f0(void);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(Stamp5a92*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c51a0(int, int, int, int);
@@ -122,7 +122,7 @@ void __cdecl fcn_005a92c0(char* p)
 				if (fcn_005809f0() == 0) {
 					fcn_00500bb0((Stamp5a92*) (msg + 0x28), 0, 5, 0);
 				} else {
-					fcn_00500bb0((Stamp5a92*) (msg + 0x28), fcn_0042e410(3) + 1, 0, 0);
+					fcn_00500bb0((Stamp5a92*) (msg + 0x28), gm_RandomMod(3) + 1, 0, 0);
 				}
 				st = *(Stamp5a92*) (msg + 0x28);
 				msg[0x58] = 2;

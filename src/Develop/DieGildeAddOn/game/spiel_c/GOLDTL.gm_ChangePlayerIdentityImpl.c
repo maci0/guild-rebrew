@@ -56,8 +56,8 @@ void __cdecl gm_AssignBuildingOwner(char*, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
-int __cdecl gm_MapEntityStatRange(int);
-char* __cdecl gm_GetEntityTableEntry(char*);
+#include "../spiel.h"
+
 void __cdecl gm_AddObjekt(int, int, int);
 void __cdecl gm_KillSpieler(int, int);
 void __cdecl amt_ClearEntityLinks(char*);
@@ -126,7 +126,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 
 	range = gm_MapEntityStatRange(to_ent[0x164] & 0xff);
 	if (range != 0) {
-		stat_ent = gm_GetEntityTableEntry(from_ent);
+		stat_ent = (char*) gm_GetEntityTableEntry(from_ent);
 		if (stat_ent != NULL) {
 			level = gm_CheckStatLevel(*(unsigned short*) from_ent, range);
 			if (level != 0) {

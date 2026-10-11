@@ -1,7 +1,30 @@
+void __cdecl fcn_004355d0(char*, const char*);
+void __cdecl fcn_00435630(char*, char*, char);
+
 void __cdecl fcn_00455540(void*, float*, float*);
 
-// FUNCTION: GOLD 0x00404c80
-// FUNCTION: GOLDTL 0x4055a0
+void __cdecl fcn_00405540(char* object, int enabled)
+{
+    char* animation;
+    char* motion;
+    char* node;
+
+    if (*(void**) (object + 0x128) != 0) {
+        animation = *(char**) (object + 0x70);
+        if (animation != 0) {
+            motion = *(char**) (animation + 0x68);
+            node = *(char**) (*(char**) (object + 0x34) + 0x1ec);
+            if (enabled != 0) {
+                fcn_004355d0(node + 0xf4, motion);
+                object[0x8c] |= 4;
+            } else {
+                fcn_00435630(node + 0xf4, motion, 1);
+                object[0x8c] &= 0xfb;
+            }
+        }
+    }
+}
+
 
 /* Returns the camera offset and rotation for one of the four character
  * views, relative to the character's node. */

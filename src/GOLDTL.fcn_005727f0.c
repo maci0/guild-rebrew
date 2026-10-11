@@ -29,7 +29,7 @@ extern unsigned char g_773d75;
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_005015e0(char**, int, int, int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
@@ -62,7 +62,7 @@ void __cdecl fcn_005727f0(char* e)
 			return;
 		}
 		p = &((struct rec*)g_99ec10)[*(unsigned short*) (e + 0xac)];
-		amt = (fcn_0042e410((unsigned short) (p->level * 40)) + p->level * 40)
+		amt = (gm_RandomMod((unsigned short) (p->level * 40)) + p->level * 40)
 		    * (*(int*) (e + 0x18) + *(int*) (e + 0x14));
 		fcn_004c51f0(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, g_773d75, 0);
 		fcn_0051af00(buf, 0x1bb8, *(unsigned short*) (e + 0xac) * 2 + 0x9a8, x, amt);

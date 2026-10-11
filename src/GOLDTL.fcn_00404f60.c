@@ -1,4 +1,4 @@
-char* __cdecl fcn_00404150(char* obj, int kind);
+char* __cdecl ch_AttachMotion(char* obj, int kind);
 void __cdecl fcn_004311a0(char* node, char* an, int from, int to, int flags);
 void __cdecl fcn_00435500(char* o, char* name);
 
@@ -21,7 +21,7 @@ int __cdecl fcn_00404f60(char* ev)
 	an = *(char**) (obj + 0x70);
 	if (an == 0) {
 		if (*(int*) (ev + 0xc) == 0) {
-			*(char**) (obj + 0x70) = fcn_00404150(obj, (unsigned char) ev[9]);
+			*(char**) (obj + 0x70) = ch_AttachMotion(obj, (unsigned char) ev[9]);
 byte_ret:
 			return (unsigned char) ev[0x10];
 		}

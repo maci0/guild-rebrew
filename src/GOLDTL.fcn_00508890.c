@@ -1,7 +1,7 @@
 // FUNCTION: GOLD 0x00505840
 // FUNCTION: GOLDTL 0x00508890
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004c4510(char* p, int n);
 void __cdecl fcn_004c4570(int a, int b, int off, unsigned int* v);
 void __cdecl fcn_004c5360(void);
@@ -49,7 +49,7 @@ int __cdecl fcn_00508890(char* o)
 	if ((*(unsigned int*) (o + 0x2c) & 0x1e000000) > 0) {
 		has[7] = 1;
 	}
-	i = fcn_0042e410(8);
+	i = gm_RandomMod(8);
 	idx = -1;
 	for (k = 8; k != 0;) {
 		if (has[i] == 1) {

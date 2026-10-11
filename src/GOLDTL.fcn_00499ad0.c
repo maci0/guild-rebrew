@@ -48,7 +48,7 @@ void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(Time499a*, int, int, int);
 void __cdecl fcn_004c5530(Msg499a*);
 
@@ -78,7 +78,7 @@ int __cdecl fcn_00499ad0(char* e)
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);
 	st = (*(Time499a*)&g_7f4c00);
-	fcn_00500bb0(&st, fcn_0042e410(4) + 1, fcn_0042e410(8) * 7, 0);
+	fcn_00500bb0(&st, gm_RandomMod(4) + 1, gm_RandomMod(8) * 7, 0);
 	if (e[2] == 5) {
 		i = 0;
 		for (k = 0; k < 768; k++) {

@@ -20,7 +20,7 @@ int __cdecl fcn_0050f950(int, int);
 char* __cdecl fcn_00502cd0();
 char* __cdecl fcn_005049a0(char*);
 char* __cdecl gm_NextEntityQueryMatch(void);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -68,7 +68,7 @@ void __cdecl fcn_00566950(char* e)
 			list[n++] = c;
 		}
 		if (n != 0) {
-			sel = list[fcn_0042e410(n)];
+			sel = list[gm_RandomMod(n)];
 			if (sel != 0) {
 				amt = (int) fcn_0050bb50(*(unsigned short*) sel, g_773d75);
 				fcn_004c51f0(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);

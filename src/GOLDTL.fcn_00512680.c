@@ -9,7 +9,7 @@ unsigned char* __cdecl gm_AddObjekt(void);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl fcn_00502fe0(int, int, int);
 void __cdecl fcn_004c51f0(int, int, int, int, char, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 void __cdecl fcn_00512680(void)
 {
@@ -67,7 +67,7 @@ void __cdecl fcn_00512680(void)
 				} else {
 					fcn_004c51f0(*(int*) (a + 2), -1, ids[i], 2 - (i != 0), (*(char*)&g_773d75), 0);
 					if (i == 0) {
-						fcn_004c51f0(*(int*) (b + 2), -1, ids[0], fcn_0042e410(0x14) + 0x14, (*(char*)&g_773d75), 0);
+						fcn_004c51f0(*(int*) (b + 2), -1, ids[0], gm_RandomMod(0x14) + 0x14, (*(char*)&g_773d75), 0);
 					}
 				}
 				switch (ids[i]) {

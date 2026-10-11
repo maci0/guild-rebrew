@@ -12,7 +12,7 @@ typedef struct Ent {
 // SIZE 0x165
 
 void __cdecl fcn_004f4830(int a, Stat* st);
-int __cdecl fcn_00507b00(int job);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 // FUNCTION: GOLD 0x491550
 // FUNCTION: GOLDTL 0x490b20
@@ -29,7 +29,7 @@ int __cdecl fcn_00490b20(Ent* e, int a2, int* out)
 	} else {
 		v = 4;
 	}
-	r = fcn_00507b00(e->job);
+	r = gm_MapEntityStatRange(e->job);
 	if ((r == 8 || r == 9) && v > 1) {
 		v = 1;
 	}

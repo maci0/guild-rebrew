@@ -7,7 +7,7 @@ int __cdecl fcn_005c6270(void*, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_00504bd0(int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -46,7 +46,7 @@ int __cdecl fcn_004b8860(int* a1)
 	if (n == 0)
 		return 0x400;
 	m = 0;
-	chosen = ents[fcn_0042e410(n)];
+	chosen = ents[gm_RandomMod(n)];
 	for (i = 0; i < 768; i++) {
 		if (m >= 6)
 			break;
@@ -56,15 +56,15 @@ int __cdecl fcn_004b8860(int* a1)
 			ents[m++] = rec;
 	}
 	if (m > 2) {
-		r = fcn_0042e410(m);
+		r = gm_RandomMod(m);
 		sel = ents[r];
-		r2 = fcn_0042e410(m);
+		r2 = gm_RandomMod(m);
 		while (r2 == r)
-			r2 = fcn_0042e410(m);
+			r2 = gm_RandomMod(m);
 	}
 	if (chosen == 0 || sel == 0)
 		return 0x400;
-	if (fcn_0042e410(2) != 0) {
+	if (gm_RandomMod(2) != 0) {
 		fcn_0051af00(buf, *(unsigned short*) (a1 + 1) + 0x12e7, chosen,
 		    (sel[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (sel + 0x165),
 		    *(unsigned short*) sel, *(unsigned short*) sel);

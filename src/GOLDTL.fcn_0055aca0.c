@@ -38,7 +38,7 @@ void __cdecl fcn_00500bb0(Time *, int, int, int);
 int __cdecl fcn_004c5620(int, Ent *);
 int __cdecl fcn_004e9530(int);
 int __cdecl fcn_004e9730(int);
-short __cdecl fcn_0042e410(int);
+short __cdecl gm_RandomMod(int);
 
 void __cdecl fcn_0055aca0(Ent *e)
 {
@@ -82,7 +82,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 			return;
 		}
 		e->b4 = fcn_004e9730(e->ac);
-		e->b8 = fcn_0042e410(3) ? fcn_004e9730(e->ac) : -1;
+		e->b8 = gm_RandomMod(3) ? fcn_004e9730(e->ac) : -1;
 		break;
 	case 1:
 		n = 0;

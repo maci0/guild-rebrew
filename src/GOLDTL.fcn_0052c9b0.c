@@ -51,7 +51,7 @@ extern int g_6772c0;
 int __cdecl fcn_0052b720(void);
 void __cdecl fcn_0052c060(void);
 void __cdecl fcn_0052ad70(void);
-char* __cdecl fcn_00509570(Rec* r);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004125c0(int a, int b);
 
 int __cdecl fcn_0052c9b0(void)
@@ -70,7 +70,7 @@ int __cdecl fcn_0052c9b0(void)
 				fcn_0052ad70();
 			}
 			if (g_774668 != 0 && g_774650 == g_774658 && (*(int*)&g_7746c4) == 0 && (*(int*)&g_7746c8) == 0) {
-				p = fcn_00509570(&((Rec*)g_7f4ca0)[g_774970]);
+				p = (char*) gm_GetEntityTableEntry((char*) (&((Rec*)g_7f4ca0)[g_774970]));
 				if (p != 0) {
 					*(int*) (p + 0x8c) = ((View*)g_6b8014)->x;
 					*(int*) (p + 0x90) = ((View*)g_6b8014)->y;

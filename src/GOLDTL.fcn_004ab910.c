@@ -12,7 +12,7 @@ extern unsigned char g_773d75;
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00510470(unsigned char*);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004a5340(unsigned short* e, int n, int* lim, float a4, float r, unsigned short* ids);
 int __cdecl fcn_0050b810(int a, char b);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -62,7 +62,7 @@ int __cdecl fcn_004ab910(int a1, unsigned short* a2, int a3, char* a4)
 	if (best == 0 || best_v == 0)
 		return 0;
 	lim = 0xf00500;
-	if (fcn_004a5340(a2, 1, &lim, 0.0f, fcn_0042e410(0x20) + 25.0f, &id) == 0)
+	if (fcn_004a5340(a2, 1, &lim, 0.0f, gm_RandomMod(0x20) + 25.0f, &id) == 0)
 		return 0;
 	p = g_7f4ca0 + id * 540;
 	money = (int) (fcn_0050b810(*(int*) ((char*) a2 + 0x178), (*(char*)&g_773d75)) * 0.25f);
@@ -73,7 +73,7 @@ int __cdecl fcn_004ab910(int a1, unsigned short* a2, int a3, char* a4)
 	}
 	if (n == 0)
 		return 0;
-	n = fcn_0042e410(n + 1);
+	n = gm_RandomMod(n + 1);
 	*(int*) (a4 + 4) = *(int*) (p + 4);
 	*(int*) (a4 + 0x10) = (n > 1 ? n : 1) * 32;
 	*(int*) (a4 + 0xc) = n;

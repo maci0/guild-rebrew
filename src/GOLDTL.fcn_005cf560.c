@@ -21,7 +21,7 @@ extern unsigned char* g_868050;
 extern unsigned short g_774970;
 
 void* __cdecl fcn_0050dc90(unsigned char*);
-int __cdecl fcn_00507b00(int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 char* __cdecl fcn_005462a0(void);
@@ -55,7 +55,7 @@ void __cdecl fcn_005cf560(unsigned char* obj)
 	}
 	else {
 		mode = 0x20;
-		lvl = gm_CheckStatLevel(g_774970, fcn_00507b00(t->lv[0]));
+		lvl = gm_CheckStatLevel(g_774970, gm_MapEntityStatRange(t->lv[0]));
 		if (lvl != 0) {
 			for (i = 0; i < 6; i++) {
 				if (lvl == t->lv[i]) {

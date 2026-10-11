@@ -1,12 +1,12 @@
-int __cdecl fcn_00507b00(int);
-unsigned short __cdecl fcn_0042e410(int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
+unsigned short __cdecl gm_RandomMod(int);
 
 // FUNCTION: GOLD 0x4a8ee0
 // FUNCTION: GOLDTL 0x4a9000
 
 int __cdecl fcn_004a9000(int a, char* e)
 {
-	if (fcn_00507b00(*(unsigned char*) (e + 0x164)) == 7 && fcn_0042e410(3) != 0)
+	if (gm_MapEntityStatRange(*(unsigned char*) (e + 0x164)) == 7 && gm_RandomMod(3) != 0)
 		return 1;
-	return fcn_0042e410(4) == 0;
+	return gm_RandomMod(4) == 0;
 }

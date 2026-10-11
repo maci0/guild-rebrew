@@ -30,7 +30,7 @@ typedef struct {
 extern Rec18_68da68 g_9a9220[42];
 extern Rec18_68da68 g_68da68[];
 
-int __cdecl fcn_004e7c70(char*, int, float*);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 
 // FUNCTION: GOLD 0x004e7320
 // FUNCTION: GOLDTL 0x004e8ee0
@@ -79,7 +79,7 @@ int __cdecl fcn_004e8ee0(char* who, int n, Pick* picks, int* full_out)
 		if (((Slot*)g_9a9220)[i].state != 3)
 			continue;
 		t = ((Slot*)g_9a9220)[i].type;
-		if (fcn_004e7c70(who, t, &score) == 0)
+		if (amt_GetOfficeAffinity((unsigned char*) who, t, &score) == 0)
 			continue;
 		if (((Slot*)g_9a9220)[i].count >= 4) {
 			full = 1;

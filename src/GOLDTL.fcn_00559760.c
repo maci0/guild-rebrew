@@ -33,7 +33,7 @@ int __cdecl fcn_004a5e60(struct house*, int, F8, int, float, int*);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_005015e0(int*, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5d60(int, int, int);
 
 int __cdecl fcn_00559760(char* s, int n, int m)
@@ -89,7 +89,7 @@ int __cdecl fcn_00559760(char* s, int n, int m)
 		if (h->flag != 0) {
 			s[9] = 0x29;
 		}
-		s[0xa] = (char) g_6643d8[fcn_0042e410(0x10)];
+		s[0xa] = (char) g_6643d8[gm_RandomMod(0x10)];
 		s[0xb] = (char) idx;
 		s[0xc] = -1;
 		return fcn_004c5d60(h->handle, tgt, -1);

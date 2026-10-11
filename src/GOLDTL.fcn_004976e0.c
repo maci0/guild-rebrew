@@ -2,7 +2,7 @@ extern unsigned char* g_90e094;
 extern unsigned char* g_868050;
 extern unsigned char g_773d75;
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0050d320(char*, unsigned char);
 int __cdecl fcn_004a48a0(char*, int);
 
@@ -20,7 +20,7 @@ int __cdecl fcn_004976e0(int unused, char* e, int unused2, char* out, char* out2
 	float amt;
 
 	if (out[0] == 0) {
-		minv = fcn_0042e410(0x24) + 0x23;
+		minv = gm_RandomMod(0x24) + 0x23;
 		best = 0;
 		p = ((char*)g_90e094);
 		for (i = 0; i < 0x100; i++) {

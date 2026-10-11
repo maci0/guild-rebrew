@@ -32,7 +32,7 @@ extern float g_6629c0;
 extern float g_6628cc;
 extern float g_6628a0;
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void* __cdecl fcn_005463a0(int, ...);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_004f4830(int, struct stats*);
@@ -56,7 +56,7 @@ void __cdecl fcn_00548d50(void)
 	if (g_7f4c00.a < 8) {
 		return;
 	}
-	if (fcn_0042e410(4) != 0) {
+	if (gm_RandomMod(4) != 0) {
 		return;
 	}
 	if (fcn_005463a0(1, 0, 0x67) != 0) {
@@ -78,7 +78,7 @@ void __cdecl fcn_00548d50(void)
 	if (n == 0) {
 		return;
 	}
-	idx = fcn_0042e410(n);
+	idx = gm_RandomMod(n);
 	fcn_004f4830(7, &info);
 	pick = cand[idx];
 	amount = (int) ((*(int*) (pick + 0x65) + *(int*) (pick + 0x69)) * (((5 - info.level) * g_662a3c + g_6629c0) * g_6628cc));

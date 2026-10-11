@@ -9,7 +9,7 @@
 
 extern char g_7f4ca0[];
 
-int __cdecl fcn_0042e410(unsigned short range);
+int __cdecl gm_RandomMod(unsigned short range);
 int __cdecl fcn_0050a7e0(int a, int b, int c, int d, int e, int f, int g, int h);
 
 unsigned short __cdecl fcn_004ffd90(unsigned int param)
@@ -34,7 +34,7 @@ unsigned short __cdecl fcn_004ffd90(unsigned int param)
 	weights[5] = 0;
 	i = 0x300;
 	for (; j < 0x10; j++) {
-		rnd = fcn_0042e410(i);
+		rnd = gm_RandomMod(i);
 		parentA = rnd;
 		off = SIM_ENT_OFF(rnd);
 		if (*(unsigned short*) &((unsigned char*)g_7f4ca0)[off] == 0xffff) {
@@ -50,7 +50,7 @@ unsigned short __cdecl fcn_004ffd90(unsigned int param)
 					count++;
 				}
 			}
-			if ((int) ((fcn_0042e410(0x100) & 0xffff) + 1) < weights[count]) {
+			if ((int) ((gm_RandomMod(0x100) & 0xffff) + 1) < weights[count]) {
 				goto done1;
 			}
 		} else {
@@ -63,7 +63,7 @@ done1:
 	}
 
 	for (j = 0; j < 0x10; j++) {
-		rnd = fcn_0042e410(i);
+		rnd = gm_RandomMod(i);
 		parentB = rnd;
 		off = SIM_ENT_OFF(rnd);
 		if (*(unsigned short*) &((unsigned char*)g_7f4ca0)[off] == 0xffff) {
@@ -79,7 +79,7 @@ done1:
 					count++;
 				}
 			}
-			if ((int) ((fcn_0042e410(0x100) & 0xffff) + 1) < weights[count]) {
+			if ((int) ((gm_RandomMod(0x100) & 0xffff) + 1) < weights[count]) {
 				goto done2;
 			}
 		} else {

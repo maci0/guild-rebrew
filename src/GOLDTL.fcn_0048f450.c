@@ -13,7 +13,7 @@ typedef struct Ent {
 
 extern char g_7f4ca0[];
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 
 // FUNCTION: GOLD 0x48fea0
 // FUNCTION: GOLDTL 0x48f450
@@ -36,5 +36,5 @@ Ent* __cdecl fcn_0048f450(int owner)
 	if (n < 2) {
 		return 0;
 	}
-	return &((Ent*)g_7f4ca0)[list[fcn_0042e410(n)]];
+	return &((Ent*)g_7f4ca0)[list[gm_RandomMod(n)]];
 }

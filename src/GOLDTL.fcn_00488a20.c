@@ -21,7 +21,7 @@ typedef struct Ent {
 
 extern char g_7f4ca0[];
 
-unsigned short __cdecl fcn_0042e410(int n);
+unsigned short __cdecl gm_RandomMod(int n);
 
 // FUNCTION: GOLD 0x489470
 // FUNCTION: GOLDTL 0x00488a20
@@ -43,10 +43,10 @@ int __cdecl fcn_00488a20(Ent* e)
 			}
 		}
 	}
-	if (found && fcn_0042e410(0x80) < 0x60) {
+	if (found && gm_RandomMod(0x80) < 0x60) {
 		return 0;
 	}
-	if (!found && (((Ent*)g_7f4ca0)[i].b81 < 252.0f || ((Ent*)g_7f4ca0)[i].b82 < 252.0f || ((Ent*)g_7f4ca0)[i].b84 < 252.0f) && fcn_0042e410(0x80) > 0x20) {
+	if (!found && (((Ent*)g_7f4ca0)[i].b81 < 252.0f || ((Ent*)g_7f4ca0)[i].b82 < 252.0f || ((Ent*)g_7f4ca0)[i].b84 < 252.0f) && gm_RandomMod(0x80) > 0x20) {
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {

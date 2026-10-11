@@ -51,7 +51,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern unsigned char* g_868050;
 extern char g_7f4ca0[];
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4450(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_0050cf50(char*, int);
@@ -105,7 +105,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 				v = fcn_0050cf50(p, p[0x5c]);
 				d = v + 256.0f;
 				f = o->value / d;
-				if (fcn_0042e410(100) > f * 50.0f) {
+				if (gm_RandomMod(100) > f * 50.0f) {
 					memset(m, 0, sizeof(m));
 					m[4] = 0x6e;
 					*(int*) (m + 0xc) = -1;
@@ -123,7 +123,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 next:
 		o->tries = o->tries + 1;
 		o->stamp = (*(Stamp_5635b0*)&g_7f4c00);
-		fcn_00500bb0(&o->stamp, fcn_0042e410(3) + 4, 0, 0);
+		fcn_00500bb0(&o->stamp, gm_RandomMod(3) + 4, 0, 0);
 		return;
 	case -2:
 	case -1:

@@ -1,4 +1,4 @@
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 // SIZE 0x24
 struct info_577940 {
@@ -28,7 +28,7 @@ int __cdecl fcn_00577940(int x)
 	j = 2;
 	do {
 		j--;
-		s = fcn_0042e410(0x1d);
+		s = gm_RandomMod(0x1d);
 		n = 0x1d;
 		do {
 			fcn_004f4830(s, &info);

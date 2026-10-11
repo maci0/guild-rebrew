@@ -11,8 +11,8 @@ extern char g_67a0b8[];
 void __cdecl fcn_0042fc50(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0041d9e0(char*);
-int __cdecl fcn_0041e3e0(int, void*);
-int __cdecl fcn_0041e350(void*);
+#include "Develop/Units/m_alloc/m_pool.h"
+
 void __cdecl fcn_0041e410(int*);
 int __cdecl CloseVfsStream(int handle);
 
@@ -31,10 +31,10 @@ void __cdecl fcn_004310f0(char verbose)
 		fcn_0041d9e0(buf);
 	}
 	if (g_6b7fe4 != 0) {
-		s = fcn_0041e3e0(g_6b7fe4, it);
+		s = (int) m_pool_first((struct M_POOL_BLOCK*) g_6b7fe4, it);
 		while (s != 0) {
 			CloseVfsStream(s);
-			s = fcn_0041e350(it);
+			s = (int) m_pool_next(it);
 		}
 	}
 	g_6b7fec = 0;

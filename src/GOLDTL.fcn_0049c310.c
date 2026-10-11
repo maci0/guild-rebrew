@@ -5,7 +5,7 @@ extern unsigned char g_773d75;
 
 int __cdecl fcn_004f5dd0(int);
 int __cdecl fcn_004f5da0(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_0050d320(char*, unsigned char);
@@ -34,7 +34,7 @@ int __cdecl fcn_0049c310(int unused, char* e, int busy, char* out, char* kind)
 	    (*(unsigned int*) (e + 4) & 7) == ((*(int*)&g_7f4c04) & 0xffff) % 8) {
 		v1 = fcn_004f5dd0(*(int*) (e + 4));
 		v2 = fcn_004f5da0(*(int*) (e + 4));
-		if (fcn_0042e410(8) + 8 <= v1) {
+		if (gm_RandomMod(8) + 8 <= v1) {
 			n = 0;
 			p = gm_StartFilteredEntitySearch(1, 5, 7);
 			if (p != 0) {
@@ -47,7 +47,7 @@ int __cdecl fcn_0049c310(int unused, char* e, int busy, char* out, char* kind)
 					p = gm_AddObjekt();
 				} while (p != 0);
 				if (n != 0) {
-					t = list[fcn_0042e410(n)];
+					t = list[gm_RandomMod(n)];
 					if (*(int*) (e + 0x194) < 4) {
 						v3 = fcn_0050d320(e, g_773d75);
 						f1 = gm_WalkEntityChain(*(unsigned short*) e) * 0.005f;

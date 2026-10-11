@@ -64,7 +64,7 @@ float __cdecl fcn_00413d10(Vec3* p);
 void __cdecl fcn_00433780(View* v);
 void __cdecl fcn_00438b40(View* v, Vec3* p);
 void __cdecl fcn_00438cb0(View* v, Vec3* r);
-Save* __cdecl fcn_00509570(House* h);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 
 void __cdecl fcn_0052cf20(Ent* e)
 {
@@ -121,7 +121,7 @@ void __cdecl fcn_0052cf20(Ent* e)
 	g_7e3a40[2] = q.z;
 	fcn_00438b40((View*)g_6b8014, (Vec3*) &q);
 	fcn_00438cb0((View*)g_6b8014, &rot);
-	s = fcn_00509570(&((House*)g_7f4ca0)[g_774970]);
+	s = (Save*) gm_GetEntityTableEntry((char*) (&((House*)g_7f4ca0)[g_774970]));
 	if (s != 0) {
 		*(int*) &s->pos.x = *(int*) &q.x;
 		*(int*) &s->pos.y = *(int*) &q.y;

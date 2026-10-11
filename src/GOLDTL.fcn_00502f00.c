@@ -16,8 +16,8 @@ typedef struct LinkedNode
 
 extern int g_773d8c;
 
-void __cdecl fcn_00502f80(void* children);
-void __cdecl fcn_00502ec0(void* node);
+#include "Develop/DieGildeAddOn/game/spiel.h"
+
 
 int __cdecl fcn_00502f00(int a, int b, int c)
 {
@@ -42,8 +42,8 @@ int __cdecl fcn_00502f00(int a, int b, int c)
 		return -2;
 
 	if (node->children != 0)
-		fcn_00502f80(&node->children);
-	fcn_00502ec0(node);
+		gm_FreeObjectListRecursive(&node->children);
+	gm_ClearObjektResources(node);
 	if (index == 0)
 		*head = node->next;
 	else

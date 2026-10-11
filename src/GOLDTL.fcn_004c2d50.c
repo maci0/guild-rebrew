@@ -1,9 +1,9 @@
+#include "client_sound.h"
+
 extern int g_772d14;
 extern int g_772d10;
 extern int g_772d28;
 extern int g_774930;
-extern int g_772d1c;
-extern int g_772d24;
 
 void __cdecl fcn_004c2d90(float, int);
 

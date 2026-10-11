@@ -2,7 +2,7 @@
 
 unsigned short* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(void*, int);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005100f0(int, int);
@@ -16,7 +16,7 @@ int __cdecl fcn_004b8c20(int* a1)
 	unsigned short* e;
 	int n;
 
-	n = fcn_0042e410(3) + 2;
+	n = gm_RandomMod(3) + 2;
 	e = fcn_00508e40(a1[0]);
 	if (e == 0)
 		return 1;

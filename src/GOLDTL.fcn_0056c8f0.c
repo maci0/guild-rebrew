@@ -9,7 +9,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AddObjekt(void);
 int __cdecl gm_CheckEntityType(char*);
 int __cdecl fcn_00505340(char*);
-unsigned short __cdecl fcn_0042e410(unsigned short);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00455350(char*, char*, float*);
 int __cdecl fcn_00451840(float*, float*, float);
 
@@ -37,7 +37,7 @@ void __cdecl fcn_0056c8f0(char* u)
 		((int*) (u + 0xb0))[i] = -1;
 	}
 	if (*(int*) (u + 0xac) == -1) {
-		pick = list[fcn_0042e410(n)];
+		pick = list[gm_RandomMod(n)];
 		*(int*) (u + 0xac) = *(int*) (pick + 1);
 	} else {
 		pick = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0xac));
@@ -53,11 +53,11 @@ void __cdecl fcn_0056c8f0(char* u)
 	*(int*) (u + 0xec) = *(int*) (pick + 1);
 	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
 	if (*(unsigned short*) (u + 0x56) > 0x14) {
-		*(unsigned short*) (u + 0x56) = fcn_0042e410(10) + 8;
+		*(unsigned short*) (u + 0x56) = gm_RandomMod(10) + 8;
 		(*(int*) (u + 0x52))++;
 	}
 	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
 	if (*(unsigned short*) (u + 0x56) < 7) {
-		*(unsigned short*) (u + 0x56) = fcn_0042e410(10) + 8;
+		*(unsigned short*) (u + 0x56) = gm_RandomMod(10) + 8;
 	}
 }

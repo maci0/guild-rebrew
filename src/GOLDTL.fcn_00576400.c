@@ -1,4 +1,4 @@
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
@@ -21,7 +21,7 @@ void __cdecl fcn_00576400(char* o)
 		((pos14_7f4c00*) (o + 0x52))->a++;
 		*(short*) (o + 0x56) = 0xd;
 	} else if (*(unsigned short*) (o + 0x56) < 9) {
-		*(short*) (o + 0x56) = fcn_0042e410(8) + 9;
+		*(short*) (o + 0x56) = gm_RandomMod(8) + 9;
 	}
 	*(int*) (o + 0xac) = 0;
 	*(int*) (o + 0xb0) = -1;

@@ -50,7 +50,7 @@ int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c5530(struct msg*);
 
 int __cdecl fcn_005865f0(char* e, int* who, int kind)
@@ -99,7 +99,7 @@ int __cdecl fcn_005865f0(char* e, int* who, int kind)
 				m.target = *(int*) (e + 1);
 				m.when = g_7f4c00;
 				m.who = *who;
-				m.delay = fcn_0042e410(0x5a0) + 1000;
+				m.delay = gm_RandomMod(0x5a0) + 1000;
 				m.other = kind;
 				fcn_004c5530(&m);
 				g_774654 = 1;

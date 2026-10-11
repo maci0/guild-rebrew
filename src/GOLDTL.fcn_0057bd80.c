@@ -18,7 +18,7 @@ void __cdecl fcn_00546190(char*);
 void __cdecl fcn_0057c630(struct house*, int);
 void __cdecl fcn_0057bed0(struct house*, char*, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 
 void __cdecl fcn_0057bd80(char* u)
 {
@@ -45,7 +45,7 @@ void __cdecl fcn_0057bd80(char* u)
 			fcn_0057bed0(h, h2, *(int*) (u + 0xac));
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0x18, 0, 0);
 			*(short*) (u + 0x56) = 6;
-			*(int*) (u + 0x58) = fcn_0042e410(4) * 15 + 5;
+			*(int*) (u + 0x58) = gm_RandomMod(4) * 15 + 5;
 			*(int*) (u + 0x84) = fcn_004c5620(1, u);
 			break;
 		case 1:

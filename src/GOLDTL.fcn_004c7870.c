@@ -4,10 +4,10 @@ extern char g_68a9d0[];
 extern char g_7f4ca0[];
 
 int __cdecl rand(void);
-void __cdecl fcn_0042e4c0(int);
+void __cdecl srv_SeedRandom(int);
 unsigned short __cdecl fcn_0050a7e0(unsigned int, int, int, unsigned short, int, unsigned int, unsigned int, unsigned int);
 char* __cdecl strncpy(char*, const char*, unsigned int);
-short* __cdecl fcn_00509570(char*);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 char* __cdecl fcn_00508e40(int);
 
 // FUNCTION: GOLD 0x004c6cd0
@@ -28,7 +28,7 @@ int __cdecl fcn_004c7870(int cmd, char* result)
 			g_699364 = *(int*) (c + 0x10);
 		else
 			*(int*) (c + 0x45) = rand();
-		fcn_0042e4c0(*(int*) (c + 0x22));
+		srv_SeedRandom(*(int*) (c + 0x22));
 		if (result)
 			kind = 6;
 		else
@@ -45,7 +45,7 @@ int __cdecl fcn_004c7870(int cmd, char* result)
 	off = entity * 0x21c;
 	(*(int*)g_68a9d0) = *(int*) (g_7f4ca0 + off + 4);
 	strncpy(g_7f4ca0 + off + 0x30, (char*) cmd + 0x25, 0x10);
-	entry = fcn_00509570(g_7f4ca0 + off);
+	entry = gm_GetEntityTableEntry((char*) (g_7f4ca0 + off));
 	if (entry != 0) {
 		*(unsigned short*) entry = *(unsigned short*) (g_7f4ca0 + off + 0x50);
 		strncpy((char*) entry + 2, (char*) cmd + 0x35, 0x10);

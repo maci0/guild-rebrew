@@ -1,7 +1,7 @@
 // FUNCTION: GOLD 0x5740f0
 // FUNCTION: GOLDTL 0x57c630
 
-unsigned short __cdecl fcn_0042e410(int);
+unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
@@ -13,13 +13,13 @@ void __cdecl fcn_0057c630(char* o, int lvl)
 	int n;
 
 	if (lvl < 2) {
-		n = fcn_0042e410(2) + 2;
+		n = gm_RandomMod(2) + 2;
 	} else if (lvl == 2) {
-		n = fcn_0042e410(2) + 3;
+		n = gm_RandomMod(2) + 3;
 	} else if (lvl == 3) {
-		n = fcn_0042e410(lvl) + lvl;
+		n = gm_RandomMod(lvl) + lvl;
 	} else {
-		n = fcn_0042e410(4);
+		n = gm_RandomMod(4);
 		if (lvl == 4) {
 			n += 3;
 		} else {

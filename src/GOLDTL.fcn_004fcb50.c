@@ -3,7 +3,7 @@
 extern char g_7f4ca0[];
 
 int __cdecl fcn_004fffb0(unsigned short id);
-int __cdecl fcn_00507b00(int k);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004eb180(int k);
 void __cdecl fcn_004fc600(unsigned short id, int* out, int c);
 void __cdecl fcn_004fc700(unsigned short id, int* out, int c);
@@ -28,7 +28,7 @@ int __cdecl fcn_004fcb50(unsigned short id, int* out, int c)
 	if (fcn_004fffb0(id) != 0) {
 		return 0;
 	}
-	if (fcn_004eb180(fcn_00507b00(*(unsigned char*) (g_7f4ca0 + o + 0x164))) != 0) {
+	if (fcn_004eb180(gm_MapEntityStatRange(*(unsigned char*) (g_7f4ca0 + o + 0x164))) != 0) {
 		fcn_004fc700(id, out, c);
 	} else {
 		fcn_004fc600(id, out, c);
