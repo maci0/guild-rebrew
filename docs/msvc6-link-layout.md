@@ -5670,13 +5670,16 @@ PDB or object set is available, per the user's answer. Receipts:
 `historical-replay.json`. The user separately requested committing all current
 repository changes; run and report the current gate without weakening it.
 
-### Temporary historical server variant (2026-10-11)
+### Temporary server layout configuration (2026-10-11)
+
+There is only one original `server.dll`. The configurations below are builds
+of our reconstruction, not distinct original server binaries.
 
 The user explicitly authorized `#ifdef` isolation while faithful reconstruction
 continues. The server target now defines `REBREW_LEGACY_SERVER_LAYOUT` alongside
-`REBREW_SERVER`; both must be defined to select the historical variant. Remove
+`REBREW_SERVER`; both must be defined to enable the temporary layout workaround. Remove
 the second define in `rebrew-project.toml` and regenerate CMake to compile the
-reconstructed variant. Client target defines are unchanged.
+reconstruction without that workaround. Client target defines are unchanged.
 
 The guards restore the sixteen documented historical placeholder logs in
 `m_alloc.c` and `server.c`, using their historical numeric line arguments. They
@@ -5686,7 +5689,7 @@ server link inputs, not evidence of the original source. The reconstructed
 expressions and formatter remain available when the flag is disabled.
 
 Native MSVC6 compilation checks every function's complete bytes, typed
-relocation bindings and compiler-literal contents: the enabled server variant
+relocation bindings and compiler-literal contents: the configuration with the flag
 preserves all 40 historical functions; disabling it preserves all 41 current
 functions for each of the three target profiles. The canonical raw link is
 286720 bytes and matches the reference SHA256

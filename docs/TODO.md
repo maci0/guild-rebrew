@@ -206,7 +206,7 @@ Current reconstruction checkpoint (2026-10-11):
   Gold's complete CRT member selection before its full client raw link.
   Receipts:.scratch/goal21/stock-free-binding; full client image goals remain open.
 
-- Temporary historical server variant, explicitly authorized by the user:
+- Temporary server layout configuration, explicitly authorized by the user:
   REBREW_LEGACY_SERVER_LAYOUT is enabled only for the server target and guarded
   together with REBREW_SERVER. The two shared units retain their reconstructed
   branches. Complete native object checks preserve40 historical functions when
@@ -217,7 +217,8 @@ Current reconstruction checkpoint (2026-10-11):
   The16 restored placeholder logs and historical object shape are explicit debt;
   byte identity does not prove original source fidelity. Remove the second
   server define in rebrew-project.toml and regenerate CMake to select the
-  reconstructed branch. CRT archives, link rules, layouts, references and gate
+  reconstruction without the temporary layout workaround. There is only one
+  original server.dll. CRT archives, link rules, layouts, references and gate
   are unchanged. Receipts:.scratch/goal21/legacy-server-ifdef. The faithful
   discarded-server-input recovery and full client raw-image goals remain open.
 

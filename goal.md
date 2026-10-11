@@ -251,7 +251,7 @@ This file is the durable copy: if the session goal state is ever lost, re-create
   Gold's provisional runtime link selection needs other-member evidence before
   its raw link. Receipts:.scratch/goal21/stock-free-binding. No push/live sync.
 
-- 2026-10-11 (user-authorized temporary historical server variant): the user
+- 2026-10-11 (user-authorized temporary server layout configuration): the user
   requested `#ifdef` isolation while faithful reconstruction continues. The
   server alone defines REBREW_LEGACY_SERVER_LAYOUT alongside REBREW_SERVER.
   Two source files restore the sixteen historical placeholder calls, old
@@ -268,7 +268,9 @@ This file is the durable copy: if the session goal state is ever lost, re-create
   layout, linker rules and gate remain unchanged. The guards are reconstruction
   debt, not proof of original discarded source; the unified original-source and
   full client-image goals remain open. Remove the second server define and
-  regenerate CMake to select the reconstructed variant. Evidence:
+  regenerate CMake to compile without the temporary layout workaround. There
+  is only one original server.dll; these are reconstruction build settings.
+  Evidence:
   .scratch/goal21/legacy-server-ifdef/{variant-proof.json,gate.log,client-verification.json}.
   No full client gates, push or live sync are part of this change.
 

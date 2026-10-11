@@ -2336,8 +2336,9 @@ The shared implementation name is inferred, not an attested original spelling.
 Both client bodies equal all 117 native bytes with actual bindings, including
 18 typed operands. Moving each of their six distinct bindings by four bytes
 rejects the comparison (12 negative controls). All 14 allocator functions are
-checked under four distinct compiler/define contexts: historical server,
-reconstructed server, TL and Gold. Both server bodies and the other 13 allocator
+checked under four distinct compiler/define contexts: server with the temporary
+layout flag, server without it, TL and Gold. There is only one original server
+binary. Both server compilation results and the other 13 allocator
 functions retain their complete bytes, typed operands and literal contents.
 
 The public rehome writer binds the two client identities to this definition.
