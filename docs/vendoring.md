@@ -51,14 +51,14 @@ an inline data marker and two redundant `extern` lines changed no byte and were 
 
 | Patch | Kind | Change |
 |---|---|---|
-| 0001-zcalloc-malloc | game build change | `zcalloc` returns `malloc(items * size)`; the reference calls LIBCMT `malloc` with an `imul` |
+| 0001-zcalloc-malloc | native allocator difference; source provenance unresolved | `zcalloc` returns `malloc(items * size)`; the reference calls LIBCMT `malloc` with an `imul` |
 | 0002-shared-version-string | link-composition stand-in | `deflate.c` defines `char g_zlib_version[]` before `my_version`; `inflate.c` compares against it |
 | 0003-selectany-readonly-tables | link-layout stand-in | 17 readonly tables and both copyright strings become `__declspec(selectany)` |
 | 0004-inflatesync-mark-selectany | link-layout stand-in | `inflateSync`'s block-scope `mark[4]` becomes a file-scope selectany object |
 
 What was ruled out, by rebuilding with the stock text:
 
-- **No upstream has 0001.** zlib 1.1.2, 1.1.3 and 1.1.4 and Gilles Vollant's prebuilt
+- **The checked 1.1.x releases do not have 0001.** zlib 1.1.2, 1.1.3 and 1.1.4 and Gilles Vollant's prebuilt
   `zlib113dll.zip` all call `calloc(items, size)`. zlib 1.2.0+ computes
   `malloc(items * size)`, but with 1.2 sources. Stock `zutil.c` moves 26164 bytes.
 - **0002 is a link-order effect.** `/O2` implies `/Gf`, so the stock literal is already one
@@ -90,21 +90,58 @@ library code, so its three server rows are `LIBRARY` rows bound to
 |---|---|---|
 | 0001-unz-copyright-0.15a | version string, no located upstream | `" unzip 0.15a Copyright 1998 Gilles Vollant "`, as in the server and both clients |
 | 0002-unz-copyright-selectany | link-layout stand-in | `unz_copyright` becomes selectany so `/ORDER` places it (stock moves 5370 bytes) |
-| 0003-game-file-position | game code | `unzGetFilePos`/`unzGoToFilePos` appended (TL 0x465750, 0x465790) |
+| 0003-game-file-position | native extensions; authorship unresolved | `unzGetFilePos`/`unzGoToFilePos` appended (TL 0x465750, 0x465790) |
 
 Searched for an upstream 0.15a: winimage.com zLibDll (`unzlb015.zip`, `zlib112dll.zip`,
 `zlib113dll.zip`, `zlib113adll.zip`, `buildzlib113adll.zip`, `unzip16.zip`,
 `unzip17.zip`, `zlib114dll.zip`), zlib fossils 1.1.1 to 1.2.3, and GitHub code
-search. Gilles Vollant's "0.15a" exists only for `zip.c`: `zlib113dll.zip` (1998-07)
+search. In those checked archives, Gilles Vollant's "0.15a" labels only `zip.c`: `zlib113dll.zip` (1998-07)
 and the 2000 1.1.3a build carry `" zip 0.15a"` beside `" unzip 0.15"`, and the 1.1.3a
 build notes say to take `unzip.c` from `contrib/minizip` unchanged.
 
-The two appended functions are game code kept in this file because they read `unz_s`
+The two appended functions are native extensions kept in this file because they read `unz_s`
 and call the file's static `unzlocal_GetCurrentFileInfoInternal`; the TL client has
-them inside the same unit. No Vollant release from 0.15 to 0.18 (1998-2002) has them.
+them inside the same unit. None of the checked Vollant releases from 0.15 to 0.18 (1998-2002) has them.
 minizip 1.00 (zlib 1.2.1, 2003) added functions of the same names, credited to Ryan
 Haksi, with a different interface (`unz_file_pos` struct, `UNZ_END_OF_LIST_OF_FILE`);
-the names here are borrowed from it.
+the names here are borrowed from it. Their absence from the checked published
+releases does not establish that the game developers authored them; an unpublished
+or third-party fork remains possible.
 
 The client targets' two `unzip.c` rows (GOLD, GOLDTL) moved with the file and stay
 `FUNCTION` rows, like the clients' zlib functions.
+
+
+## Version and patch audit (2026-10-11)
+
+Four of the seven patches compensate for the current reconstruction's link
+composition or readonly placement: zlib 0002/0003/0004 and minizip 0002. They
+remain required by the measured current link, but are not evidence that the
+original developers changed those library sources. Recovering the original
+object composition and data placement is the route to removing them.
+
+The other three preserve observed native differences: zlib's malloc-based
+allocator, minizip's `unzip 0.15a` literal, and the client's two file-position
+extensions. The bytes establish those differences; they do not establish who
+made them or which source distribution contained them.
+
+Fresh downloads from the authors confirm that the pristine 1.1.3 source matches
+[the official release](https://zlib.net/fossils/zlib-1.1.3.tar.gz). It contains
+backward-scanning unzip 0.15, without the two file-position helpers. The checked
+1.1.2/1.1.3/1.1.4 sources use calloc; 1.2.0 uses malloc on 32-bit systems but
+retains unzip 0.15 without these helpers. 1.2.1 adds helpers with a different
+interface, and labels unzip 1.00.
+
+Gilles Vollant's [1.1.3a build archive](https://www.winimage.com/zLibDll/buildzlib113adll.zip)
+(SHA256 `cfa8689ed5b97c916f5ec2c1107750ea17a0bdc909e430e59dec17454172526f`)
+contains zip 0.15a and directs the builder to copy unzip.c unchanged from the
+standard distribution. Both checked 1.1.3 and 1.1.3a binary archives contain
+`zip 0.15a` alongside `unzip 0.15`, so the DLL distribution's suffix does not
+identify the game's `unzip 0.15a` variant. An exact-literal GitHub code search
+returned no results; that is a search limitation, not proof that no fork exists.
+
+The strongest identified base remains zlib 1.1.3 with the June 1998 minizip
+revision. The exact modified distribution remains unidentified. No vendor
+source, patch body, generated file, archive, compiler flag or link rule was
+changed by this audit. Download hashes, source comparisons, binary literals and
+author build notes are recorded in `.scratch/goal21/vendor-version-audit/`.
