@@ -36,7 +36,7 @@ void __cdecl fcn_00471340(int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_0046b2b0(int h);
 void __cdecl fcn_00436f70(int v);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_004234e0(int h, char* s, int a, int b, int c, int d, int e);
 
 void __cdecl fcn_00534f30(Pager* p)
@@ -75,7 +75,7 @@ void __cdecl fcn_00534f30(Pager* p)
 		if (p->sound != 0) {
 			fcn_00436f70(1);
 		}
-		fcn_0041ddd0(p);
+		m_FreeTracked(p);
 		fcn_004234e0(g_7747c4, g_6a3194, 1, 0x3f, 0x7f, 0, 0);
 	}
 }

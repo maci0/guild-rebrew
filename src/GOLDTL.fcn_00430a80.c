@@ -5,7 +5,7 @@ void __cdecl fcn_00465630(void* z);
 int __cdecl fcn_00465020(void* z);
 int __cdecl fcn_00465350(void* z, void* buf, int len);
 void* __cdecl fcn_0041db70(int size, const char* tag);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_0041d9e0(const char* msg);
 int __cdecl fcn_0045f890(void* gz, int off, int whence);
 
@@ -35,7 +35,7 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 							if (fcn_00465350(*(void**) (s + 0x100), buf, off) == off) {
 								r = 0;
 							}
-							fcn_0041ddd0(buf);
+							m_FreeTracked(buf);
 						}
 					} else {
 						fcn_00465630(*(void**) (s + 0x100));
@@ -44,7 +44,7 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 							if (fcn_00465350(*(void**) (s + 0x100), buf, off) == off) {
 								r = 0;
 							}
-							fcn_0041ddd0(buf);
+							m_FreeTracked(buf);
 						}
 					}
 				} else if (whence == 1) {
@@ -56,7 +56,7 @@ int __cdecl fcn_00430a80(char* s, int off, int whence)
 							if (fcn_00465350(*(void**) (s + 0x100), buf, off) == off) {
 								r = 0;
 							}
-							fcn_0041ddd0(buf);
+							m_FreeTracked(buf);
 						}
 					} else {
 						fcn_0041d9e0("Unsupported vfs_fseek(inzip,SEEK_CUR)");

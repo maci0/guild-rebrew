@@ -1,5 +1,23 @@
 Current reconstruction checkpoint (2026-10-11):
 
+- Shared tracked-free implementation completed. One canonical m_FreeTracked
+  definition serves the188-byte server and117-byte client native variants under
+  REBREW_SERVER. Two client identities were rehomed and85 caller files bound
+  through the public tools; their prototypes stay unchanged.115 native caller
+  contexts preserve26641 bytes and1535 typed operands. All115 affected client
+  matches freshly verify(88TL/27Gold), retaining251/3583/2081 game matches.
+  Both client bodies match
+  all native bytes/18 operands, with12 rejecting wrong-binding controls; the
+  other13 allocator bodies and both server variants are preserved. Full server
+  gate passes316/316 functions,652/652 data,100 imports,Wine exports and raw
+  whole-file identity. Existing data/type/source stores and stock libraries are
+  untouched. Root standalone C backlog3832(down1). The shared name is inferred,
+  and temporary discarded-server placeholders remain explicit debt. Full client
+  links and original-source fidelity remain open. Receipts:
+  .scratch/goal21/shared-tracked-free. Continue shared allocator/helper recovery
+  with actual native differences; review Gold's complete CRT provider selection
+  before its raw link.
+
 - Stock CRT deallocator binding prerequisite completed. Full archive bodies
   identify TL64dfda as233-byte LIBCMT free and Gold5dec24 as105-byte LIBC free;
   the old TL RTCastToVoid prefix label is corrected and Gold's identity added.
@@ -10,8 +28,7 @@ Current reconstruction checkpoint (2026-10-11):
   supports binding to library identities, with133 focused checks, all hooks and
   isolated pinned full suite11655pass/52skip. Existing dependency edits are
   preserved; no library implementation/storage/archive change was introduced.
-  Next: merge the client117-byte and server188-byte tracked-free implementations
-  into their shared unit while preserving native build differences. Validate
+  The shared tracked-free merge is recorded above. Validate
   Gold's complete CRT member selection before its full client raw link.
   Receipts:.scratch/goal21/stock-free-binding; full client image goals remain open.
 

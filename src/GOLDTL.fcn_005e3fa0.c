@@ -10,7 +10,7 @@ int __cdecl fcn_0042ff50(char*, char*, int);
 unsigned char* __cdecl fcn_0041db70(int, char*);
 int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
 unsigned short __cdecl fcn_0041bac0(unsigned char, unsigned char, unsigned char);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 void __cdecl CloseVfsStream(int);
 
 void __cdecl fcn_005e3fa0(char* name)
@@ -33,7 +33,7 @@ void __cdecl fcn_005e3fa0(char* name)
 			}
 		}
 		if (buf != 0) {
-			fcn_0041ddd0(buf);
+			m_FreeTracked(buf);
 		}
 		CloseVfsStream(fh);
 	}

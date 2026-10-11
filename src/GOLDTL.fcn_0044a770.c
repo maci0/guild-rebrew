@@ -72,7 +72,7 @@ void __cdecl fcn_0044a290(Obj44a770* m);
 int __cdecl fcn_0044aec0(Obj44a770* m);
 void __cdecl fcn_0044a9f0(Obj44a770* m);
 void* __cdecl fcn_0041db70(int size, char* tag);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 Plane44a770* __stdcall D3DXPlaneFromPoints(Plane44a770* out, Vec3a770* a, Vec3a770* b, Vec3a770* c);
 Plane44a770* __stdcall D3DXPlaneNormalize(Plane44a770* out, Plane44a770* in);
 
@@ -128,8 +128,8 @@ void __cdecl fcn_0044a770(Obj44a770* m, char normals)
 			m->uvs[i].uv[k] = m->faces[i].uv.uv[k];
 		}
 	}
-	fcn_0041ddd0(m->verts);
+	m_FreeTracked(m->verts);
 	m->verts = 0;
-	fcn_0041ddd0(m->faces);
+	m_FreeTracked(m->faces);
 	m->faces = 0;
 }

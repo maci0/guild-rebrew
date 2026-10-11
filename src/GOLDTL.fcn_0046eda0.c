@@ -78,7 +78,7 @@ extern char* g_772500;
 extern int g_1040490;
 extern int g_1040494;
 
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 fcn_0046eda0_Surf* __cdecl fcn_004770a0(fcn_0046eda0_Desc* d, int kind);
 void __cdecl fcn_00476620(int a1, int a2, int w, int h, fcn_0046eda0_Surf* src, int a6, int a7, fcn_0046eda0_Surf* dst);
 void __cdecl fcn_00475f80(fcn_0046eda0_Surf* s);
@@ -112,11 +112,11 @@ void __cdecl fcn_0046eda0(int w, int h, int win)
 		}
 	}
 	if (p->buf30 != 0) {
-		fcn_0041ddd0(p->buf30);
+		m_FreeTracked(p->buf30);
 		p->buf30 = 0;
 	}
 	if (p->buf34 != 0) {
-		fcn_0041ddd0(p->buf34);
+		m_FreeTracked(p->buf34);
 		p->buf34 = 0;
 	}
 	if (p->surf != 0) {

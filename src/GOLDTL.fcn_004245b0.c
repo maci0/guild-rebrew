@@ -3,7 +3,7 @@
 extern char* g_6b7d68;
 extern int g_6b7d6c;
 
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 
 // FUNCTION: GOLDTL 0x4245b0
 int __cdecl fcn_004245b0(char* name)
@@ -25,7 +25,7 @@ int __cdecl fcn_004245b0(char* name)
 						*(char**) (g_6b7d68 + 0x38) = *(char**) (e + 0x104);
 					}
 					*(int*) (g_6b7d68 + 0x34) -= *(int*) (e + 0x100);
-					fcn_0041ddd0(e);
+					m_FreeTracked(e);
 					g_6b7d6c++;
 					break;
 				}
@@ -36,7 +36,7 @@ int __cdecl fcn_004245b0(char* name)
 			while (e != 0) {
 				next = *(char**) (e + 0x104);
 				*(int*) (g_6b7d68 + 0x34) -= *(int*) (e + 0x100);
-				fcn_0041ddd0(e);
+				m_FreeTracked(e);
 				g_6b7d6c++;
 				e = next;
 			}

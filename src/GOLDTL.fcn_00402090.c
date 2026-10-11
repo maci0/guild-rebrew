@@ -4,7 +4,7 @@ extern char g_67515c[];
 char __cdecl fcn_00401590(const char* name, int* width, int* height, int* bpp);
 char __cdecl fcn_00401650(const char* name, unsigned char* pixels, unsigned char* pal, int flags);
 unsigned char* __cdecl fcn_0041db70(int size, char* tag);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 
 /* Averages the palette colour of an 8-bit image, weighted by pixel count. */
 char __cdecl fcn_00402090(const char* name, unsigned char* out)
@@ -77,6 +77,6 @@ char __cdecl fcn_00402090(const char* name, unsigned char* out)
 		out[0] = (unsigned char) sum[2];
 		r = 1;
 	}
-	fcn_0041ddd0(pix);
+	m_FreeTracked(pix);
 	return r;
 }

@@ -64,7 +64,7 @@ void __cdecl fcn_0047a710(int, int, char*, Surface*);
 void __cdecl fcn_00476060(Surface*);
 int __cdecl fcn_0047b640(int, int, int, int, Surface*, int);
 void __cdecl fcn_00475f80(Surface*);
-void __cdecl fcn_0041ddd0(char*);
+void __cdecl m_FreeTracked(char*);
 void __cdecl fcn_00476970(Surface*);
 int __cdecl fcn_00469c30(int, int, int);
 void __cdecl fcn_00472170(int, int);
@@ -120,7 +120,7 @@ void __cdecl fcn_00526db0(char* name)
 		g_77467c = fcn_0047b640(g_6a24d8[g_77534c], 0, 0x288, 0x40, s, 0);
 		fcn_00475f80(s);
 	}
-	fcn_0041ddd0(data);
+	m_FreeTracked(data);
 	memset(g_7ea380, 0xff, sizeof(g_7ea380));
 	(*(char**)&g_6a25ac) = name;
 	(*(Rect*)&g_1040480) = (*(Rect*)&g_6a3764);

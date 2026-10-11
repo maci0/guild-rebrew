@@ -28,7 +28,7 @@ extern int g_7749d4;
 extern int g_7749d8;
 extern int g_7dc424;
 
-void __cdecl fcn_0041ddd0(int);
+void __cdecl m_FreeTracked(int);
 void __cdecl fcn_00545780(struct unit*);
 
 void __cdecl fcn_00546190(struct unit* u)
@@ -40,7 +40,7 @@ void __cdecl fcn_00546190(struct unit* u)
 		return;
 	}
 	if (u->sound != 0) {
-		fcn_0041ddd0(u->sound);
+		m_FreeTracked(u->sound);
 		u->sound = 0;
 	}
 	if (u->flags & 8) {

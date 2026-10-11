@@ -1,7 +1,7 @@
 // FUNCTION: GOLDTL 0x439d80
 
 void __cdecl fcn_00439c90(char*);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_00439d80(char* o)
 {
@@ -13,7 +13,7 @@ void __cdecl fcn_00439d80(char* o)
 		}
 		fcn_00439c90(*(char**) (o + 0x1ec) + 0xee0);
 		*(unsigned char*) (*(char**) (o + 0x1ec) + 0x163c) = 0;
-		fcn_0041ddd0(*(char**) (o + 0x1ec));
+		m_FreeTracked(*(char**) (o + 0x1ec));
 		*(char**) (o + 0x1ec) = 0;
 	}
 	*(int*) (o + 0x1cc) = 0;

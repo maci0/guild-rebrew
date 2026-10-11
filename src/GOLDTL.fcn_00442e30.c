@@ -57,7 +57,7 @@ void __cdecl fcn_004398d0(void*);
 void __cdecl fcn_00452420(void*);
 void __cdecl fcn_0043bcf0(int);
 void __cdecl fcn_00459b40(int);
-void __cdecl fcn_0041ddd0(int);
+void __cdecl m_FreeTracked(int);
 void __cdecl fcn_00444040(void);
 
 // FUNCTION: GOLDTL 0x00442e30
@@ -83,7 +83,7 @@ void __cdecl fcn_00442e30(void)
 		g_6b89c0 = 0;
 	}
 	if (((Cfg*)g_67a370)->x3c8 != 0) {
-		fcn_0041ddd0(((Cfg*)g_67a370)->x3c8);
+		m_FreeTracked(((Cfg*)g_67a370)->x3c8);
 		((Cfg*)g_67a370)->x3c8 = 0;
 	}
 	(*(void**)&g_1043254) = &(*(char*)g_1042340);

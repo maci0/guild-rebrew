@@ -2319,10 +2319,43 @@ identities freshly verify without changing their byte-match status. No CRT C
 implementation, storage allocation or archive patch is introduced.
 
 The server's 188-byte tracked-free helper includes invalid-pointer logging and
-underflow reporting; the clients' 117-byte helper does not. The shared-source
-consolidation must retain those native build differences. The client helper is
-still in its existing file pending that consolidation. Evidence:
+underflow reporting; the clients' 117-byte helper does not. Evidence for this
+stock-library binding prerequisite:
 `.scratch/goal21/stock-free-binding/{stock-free-proof.json,caller-before.json,caller-after.json,client-verification.json}`.
+
+## Shared tracked-free implementation (2026-10-11)
+
+One `m_FreeTracked` definition in `Develop/Units/m_alloc/m_alloc.c` now serves
+SERVER `0x10006820`, TL `0x0041ddd0` and Gold `0x00422620`. `REBREW_SERVER`
+selects the existing server body; the client branch retains the typed tracking
+loop and silently returns when the pointer is absent. Both branches call stock
+CRT `free`. The server-only invalid-pointer log and fatal underflow report are
+preserved, including when the temporary historical-layout define is disabled.
+The shared implementation name is inferred, not an attested original spelling.
+
+Both client bodies equal all 117 native bytes with actual bindings, including
+18 typed operands. Moving each of their six distinct bindings by four bytes
+rejects the comparison (12 negative controls). All 14 allocator functions are
+checked under four distinct compiler/define contexts: historical server,
+reconstructed server, TL and Gold. Both server bodies and the other 13 allocator
+functions retain their complete bytes, typed operands and literal contents.
+
+The public rehome writer binds the two client identities to this definition.
+Reference binding changes only the identifier in 85 caller files, preserving
+their compiler-sensitive prototypes. All 115 native caller contexts preserve
+26,641 bytes and 1,535 typed operands. All 115 affected client identities
+freshly verify (88 TL, 27 Gold), retaining every existing byte-match status.
+The old standalone tracked-free source
+is retired. No global storage, CRT source, archive, compiler flag, layout or
+link rule is changed; the existing numeric client declarations remain views
+whose storage ownership and original spellings need separate recovery.
+
+The full server gate passes 316/316 functions and 652/652 data comparisons.
+Its 286,720 raw bytes remain reference-identical, SHA-256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+Full client image identity and faithful discarded server inputs remain open.
+Evidence: `.scratch/goal21/shared-tracked-free/` (whole-object comparisons,
+native operand controls, public binding previews and final gate).
 
 ## Finding 20: m_FreeTracked (0x10006820): transient-register alternation (185/188)
 

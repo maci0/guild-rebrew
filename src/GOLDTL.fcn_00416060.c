@@ -57,7 +57,7 @@ extern char g_677604[];
 extern char g_6775f4[];
 
 void* __cdecl fcn_0041db70(int size, char* tag);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 int __cdecl fcn_0045c5b0(char* name, LoadFlags flags, int a3, int a4);
 void __cdecl fcn_0045ce90(int h);
 
@@ -115,7 +115,7 @@ Snow* __cdecl fcn_00416060(int count)
 	}
 	s->flakes = (Flake*) fcn_0041db70(count * sizeof(Flake), g_677604);
 	if (s->flakes == 0) {
-		fcn_0041ddd0(s);
+		m_FreeTracked(s);
 		return 0;
 	}
 	f = s->flakes;

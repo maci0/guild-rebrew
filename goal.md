@@ -3,6 +3,26 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-11 (shared tracked-free implementation): one canonical m_FreeTracked
+  definition now serves the native188-byte SERVER and117-byte TL/Gold bodies
+  using REBREW_SERVER. Invalid-pointer and underflow reporting remain server
+  specific. Two client identities are rehomed through locked writers,85 caller
+  files bind to the shared symbol through the CLI, and the duplicate source is
+  retired.115 caller contexts preserve26641 bytes/1535 typed operands; four
+  distinct native compiler/define contexts preserve the other13 allocator
+  bodies and both server variants. Two fully bound client bodies retain234
+  native bytes/18 typed operands, with12 rejecting wrong-binding controls.
+  All115 affected client identities freshly verify(88TL/27Gold), preserving
+  every existing status and game match counts251/3583/2081. All-target lint
+  retains0 errors with existing0/2/40warnings. All3 coverage docs are refreshed.
+  Canonical server gate passes316/316 functions,652/652 data,100 imports,Wine
+  exports and raw286720-byte identity(SHA3cc2ce90...). The common implementation
+  name remains inferred; numeric global declarations create no new storage.
+  Root standalone C backlog3832(down1). The temporary historical server guard,
+  faithful discarded-source recovery, client raw links and broader unified-tree
+  goal remain open. Receipts:.scratch/goal21/shared-tracked-free. No push/live
+  sync or full client image gate is part of this change.
+
 - 2026-10-11 (stock CRT deallocator binding prerequisite): complete stock
   archive comparisons uniquely identify client free: TL64dfda is233 bytes
   from multithreaded LIBCMT; Gold5dec24 is105 bytes from single-threaded LIBC.

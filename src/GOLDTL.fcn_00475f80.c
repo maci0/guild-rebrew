@@ -18,7 +18,7 @@ typedef struct {
 } fcn_00475f80_obj;
 
 int __cdecl fcn_00476060(fcn_00475f80_obj*);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 // FUNCTION: GOLDTL 0x475f80
 
@@ -34,6 +34,6 @@ int __cdecl fcn_00475f80(fcn_00475f80_obj* o)
 		if (o->f20 != 0)
 			o->f20->vtbl->release(o->f20);
 	}
-	fcn_0041ddd0(o);
+	m_FreeTracked(o);
 	return 1;
 }

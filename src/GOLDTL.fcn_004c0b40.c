@@ -18,7 +18,7 @@ void __cdecl fcn_004c2d90(float, int);
 int __cdecl fcn_00423670(char**, int, int);
 int __cdecl fcn_00423460(char**);
 void __cdecl fcn_00426170(char**, int);
-void __cdecl fcn_0041ddd0(struct snd_4c0b40*);
+void __cdecl m_FreeTracked(struct snd_4c0b40*);
 
 // FUNCTION: GOLD 0x004c02e0
 // FUNCTION: GOLDTL 0x4c0b40
@@ -60,14 +60,14 @@ void __cdecl fcn_004c0b40(void)
 		return;
 	next = (*(struct snd_4c0b40**)&g_772d34)->next;
 	fcn_00426170((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
-	fcn_0041ddd0((*(struct snd_4c0b40**)&g_772d34));
+	m_FreeTracked((*(struct snd_4c0b40**)&g_772d34));
 	(*(struct snd_4c0b40**)&g_772d34) = next;
 	g_772d38 = now;
 	if (next != 0 && next->voice != 0 && next->voice[1] != 0 && g_772d2c != 0
 	    && fcn_0064d470(next->voice[1] + 4, "MausclickLinks") != 0) {
 		next = (*(struct snd_4c0b40**)&g_772d34)->next;
 		fcn_00426170((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
-		fcn_0041ddd0((*(struct snd_4c0b40**)&g_772d34));
+		m_FreeTracked((*(struct snd_4c0b40**)&g_772d34));
 		(*(struct snd_4c0b40**)&g_772d34) = next;
 		fcn_004c2d90(1.0f, 0x7d0);
 		g_772d2c = 0;

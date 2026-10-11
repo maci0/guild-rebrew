@@ -24,7 +24,7 @@ void __cdecl fcn_00434760(int, int);
 void __cdecl fcn_00413120(void*);
 void __cdecl fcn_00402aa0(char*);
 struct anim_409ae0* __cdecl fcn_00404dc0(char*, const char*, int);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_004050c0(char*);
 
 // FUNCTION: GOLD 0x00408cb0
@@ -62,7 +62,7 @@ int __cdecl fcn_00409ae0(char* ev, char* step)
 			(*(char**) (ev + 0x14))[0x8c] |= 8;
 		}
 		if (*(void**) (ev + 0xf4) != 0) {
-			fcn_0041ddd0(*(void**) (ev + 0xf4));
+			m_FreeTracked(*(void**) (ev + 0xf4));
 			*(void**) (ev + 0xf4) = 0;
 		}
 		fcn_004050c0(ev);

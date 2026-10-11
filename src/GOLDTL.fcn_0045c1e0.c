@@ -5,7 +5,7 @@ extern int g_10405c4;
 extern int g_67bd2c;
 
 void __cdecl fcn_0045bfb0(char* p);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 
 // FUNCTION: GOLDTL 0x45c1e0
 void __cdecl fcn_0045c1e0(void)
@@ -19,7 +19,7 @@ void __cdecl fcn_0045c1e0(void)
 			fcn_0045bfb0(p);
 		}
 	}
-	fcn_0041ddd0(g_104049c);
+	m_FreeTracked(g_104049c);
 	g_104049c = 0;
 	g_10405cc = 0;
 	g_10405c4 = 0;

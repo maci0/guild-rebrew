@@ -4,7 +4,7 @@
  * and the next link n+0x28 (GOLDTL 0x20). */
 
 void __cdecl fcn_0045fbb0(int);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_0045d7f0(char* owner, char* n)
 {
@@ -25,5 +25,5 @@ void __cdecl fcn_0045d7f0(char* owner, char* n)
 		}
 	}
 	fcn_0045fbb0(*(int*) (n + 0x1c));
-	fcn_0041ddd0(n);
+	m_FreeTracked(n);
 }

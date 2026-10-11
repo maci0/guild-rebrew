@@ -10,7 +10,7 @@ struct fcn_004c0a10_node {
 extern char* g_772d34;
 
 void __cdecl fcn_00426170(int*, int);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 // FUNCTION: GOLDTL 0x4c0a10
 
@@ -27,7 +27,7 @@ void __cdecl fcn_004c0a10(int* key)
 			else
 				(*(fcn_004c0a10_node**)&g_772d34) = p->next;
 			fcn_00426170(p->f0, 0);
-			fcn_0041ddd0(p);
+			m_FreeTracked(p);
 			return;
 		}
 		prev = p;

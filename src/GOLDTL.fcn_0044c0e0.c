@@ -7,7 +7,7 @@ extern char g_1042d00[];
 char* __cdecl fcn_00449ac0(char* s, char* sub);
 void __cdecl fcn_0044b340(char* name, int* a, int* b, int* c);
 char* __cdecl fcn_0044b480(char* buf, char* name, int a, int b, int c);
-void __cdecl fcn_0041ddd0(int p);
+void __cdecl m_FreeTracked(int p);
 void __cdecl fcn_0044a120(void);
 void __cdecl fcn_00455910(void);
 void __cdecl fcn_0044c0c0(void);
@@ -38,13 +38,13 @@ char* __cdecl fcn_0044c0e0(char* path, char* name)
 		r = fcn_0044b480(buf, name, x, b, c);
 		if (r != 0) {
 			if (x != 0 && *(int*) (r + 0x200) != x) {
-				fcn_0041ddd0(x);
+				m_FreeTracked(x);
 			}
 			*(void**) (r + 0x1ec) = (void*) fcn_0044a120;
 			*(void**) (r + 0x1f0) = (void*) fcn_00455910;
 			*(void**) (r + 0x1f4) = (void*) fcn_0044c0c0;
 		} else if (x != 0) {
-			fcn_0041ddd0(x);
+			m_FreeTracked(x);
 		}
 		if (r != 0) {
 			*(char**) (r + 0x1fc) = g_1042efc;

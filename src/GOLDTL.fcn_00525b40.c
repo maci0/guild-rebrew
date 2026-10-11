@@ -34,7 +34,7 @@ extern char g_7f4ca0[];
 void __cdecl fcn_005356e0(void);
 void __cdecl fcn_00535960(void);
 int __cdecl vfs_OpenStream(char*, unsigned int, char*);
-void __cdecl fcn_0041ddd0(char*);
+void __cdecl m_FreeTracked(char*);
 int __cdecl CloseVfsStream(int);
 int __cdecl ls_LoadSavegameHeader(int, int*);
 int __cdecl ls_ReadVfsDataChecked(void* out, int size, int count, int f);
@@ -59,7 +59,7 @@ int __cdecl fcn_00525b40(void)
 	}
 	f = vfs_OpenStream(g_fb5740, g_aed328, "rb");
 	if (f == 0) {
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
@@ -67,7 +67,7 @@ int __cdecl fcn_00525b40(void)
 	ls_LoadSavegameHeader(f, hdr);
 	if (!(hdr[1] & 2) || hdr[0] > 0x1005a) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
@@ -80,7 +80,7 @@ int __cdecl fcn_00525b40(void)
 	    || ls_ReadVfsDataChecked(&g_773d6c, 4, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&g_773d70, 4, 1, f) == 0) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
@@ -97,25 +97,25 @@ int __cdecl fcn_00525b40(void)
 	}
 	if (ls_LoadExistingEntities(f) == 0) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
 	if (fcn_00522510(f) == 0) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
 	if (ls_LoadDynamicEntities(f) == 0) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
 	if (fcn_00522e30(f) == 0) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
@@ -126,30 +126,30 @@ int __cdecl fcn_00525b40(void)
 	}
 	if (fcn_00524040(f) == 0) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
 	if (g_6a23ac >= 0x10045 && fcn_004ec520(f, g_6a23ac) == 0) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
 	if (!(hdr[1] & 4) && fcn_005222a0(f) == 0) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
 	if (fcn_00525670() == 0) {
 		CloseVfsStream(f);
-		fcn_0041ddd0(g_fb5740);
+		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
 	CloseVfsStream(f);
-	fcn_0041ddd0(g_fb5740);
+	m_FreeTracked(g_fb5740);
 	g_fb5740 = 0;
 	return 1;
 }

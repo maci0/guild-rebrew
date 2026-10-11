@@ -26,7 +26,7 @@ void __cdecl fcn_00430580(void*);
 void __cdecl fcn_0041d9e0(char*);
 long __stdcall fcn_006129e7(void*, void*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, int, int,
     unsigned long, unsigned long, unsigned long, void*, void*, struct unk_436ff0**);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 // FUNCTION: GOLDTL 0x436ff0
 
@@ -57,5 +57,5 @@ void __cdecl fcn_00436ff0(char* name, int format, struct unk_436ff0** tex, unsig
 	}
 	fcn_006129e7(g_6b5de0, buf, read, width >> (unsigned char) (*(unsigned int*)&g_6b7ff8), height >> (unsigned char) (*(unsigned int*)&g_6b7ff8), mips, 0,
 	    format, 1, 0xffffffff, 0xffffffff, 0xff000000, 0, 0, tex);
-	fcn_0041ddd0(buf);
+	m_FreeTracked(buf);
 }

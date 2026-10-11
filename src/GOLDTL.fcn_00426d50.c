@@ -44,7 +44,7 @@ int __cdecl CloseVfsStream(void *);
 char *__cdecl fcn_0041db70(int, char *);
 int __cdecl vfs_ReadData(char *, int, int, void *);
 int __cdecl fcn_00426ac0(char *, char *, int *);
-void __cdecl fcn_0041ddd0(void *);
+void __cdecl m_FreeTracked(void *);
 
 Script *__cdecl fcn_00426d50(char *name)
 {
@@ -97,10 +97,10 @@ Script *__cdecl fcn_00426d50(char *name)
 	strcpy(sc->name, name + strlen(g_6790c8));
 	memset(sc->vars, 0, sizeof(sc->vars));
 	if (tmp != 0) {
-		fcn_0041ddd0(tmp);
+		m_FreeTracked(tmp);
 	}
 	if (out != 0) {
-		fcn_0041ddd0(out);
+		m_FreeTracked(out);
 	}
 	sc->sp = sc->stack = fcn_0041db70(0x400, "evt:stack");
 	sc->fc90 = g_6b8010;

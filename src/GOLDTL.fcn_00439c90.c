@@ -18,7 +18,7 @@ typedef void (__cdecl* fcn_00439c90_f)(char*);
 
 void __cdecl fcn_0043a3f0(int, char*, Col);
 void __cdecl fcn_0045bfb0(int);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_00434760(char*, int);
 
 void __cdecl fcn_00439c90(char* o)
@@ -43,7 +43,7 @@ void __cdecl fcn_00439c90(char* o)
 				}
 			}
 		}
-		fcn_0041ddd0(*(int**) (o + 0x31c));
+		m_FreeTracked(*(int**) (o + 0x31c));
 		*(int**) (o + 0x31c) = 0;
 	}
 	if (*(char**) (o + 0x318) != 0) {

@@ -1,5 +1,5 @@
 
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_0041e410(char** head)
 {
@@ -12,7 +12,7 @@ void __cdecl fcn_0041e410(char** head)
 	n = *head;
 	while (n != 0) {
 		next = *(char**) (n + 0xc);
-		fcn_0041ddd0(n);
+		m_FreeTracked(n);
 		n = next;
 	}
 	*head = 0;

@@ -11,7 +11,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern int g_77259c;
 
 void __cdecl fcn_0046b2b0(int id);
-void __cdecl fcn_0041ddd0(int p);
+void __cdecl m_FreeTracked(int p);
 void __cdecl fcn_00475f80(int surf);
 void __cdecl fcn_0047ce50(int tex);
 void __cdecl fcn_00469960(int id);
@@ -32,7 +32,7 @@ int __cdecl fcn_0046f390(int win)
 		fcn_0046b2b0(*(int*) w->i[0x28 / 4]);
 	}
 	if (w->i[0x28 / 4] != 0) {
-		fcn_0041ddd0(w->i[0x28 / 4]);
+		m_FreeTracked(w->i[0x28 / 4]);
 		w->i[0x28 / 4] = 0;
 	}
 	if (w->i[0x30 / 4] != 0) {
@@ -51,7 +51,7 @@ int __cdecl fcn_0046f390(int win)
 		fcn_00469960(w->i[0x398 / 4]);
 	}
 	if (w->i[0x3c / 4] != 0) {
-		fcn_0041ddd0(w->i[0x3c / 4]);
+		m_FreeTracked(w->i[0x3c / 4]);
 		w->i[0x3c / 4] = 0;
 	}
 	memset(w, 0, sizeof(fcn_0046f390_Win));

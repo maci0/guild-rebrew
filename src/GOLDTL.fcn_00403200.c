@@ -7,7 +7,7 @@ extern char g_67534c[];
 #include <string.h>
 
 void* __cdecl fcn_0041db70(int, char*);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_0041d9e0(char*);
 
 void* __cdecl fcn_00403200(void)
@@ -26,7 +26,7 @@ void* __cdecl fcn_00403200(void)
 		*(int*) p = i;
 		return p;
 	}
-	fcn_0041ddd0(p);
+	m_FreeTracked(p);
 	fcn_0041d9e0(g_67534c);
 	return 0;
 }

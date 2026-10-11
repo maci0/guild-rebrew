@@ -13,7 +13,7 @@ int __cdecl fcn_00430c50(void*);
 char* __cdecl fcn_0041db70(int, char*);
 void __cdecl CloseVfsStream(void*);
 int __cdecl vfs_ReadData(char*, int, int, void*);
-void __cdecl fcn_0041ddd0(char*);
+void __cdecl m_FreeTracked(char*);
 void __cdecl fcn_004c4e40(int);
 int __cdecl fcn_004c4e70(char*);
 void __cdecl fcn_005356e0(void);
@@ -44,7 +44,7 @@ int __cdecl fcn_005259f0(char* path)
 		return 0;
 	}
 	if (vfs_ReadData(buf, size, 1, h) == -1) {
-		fcn_0041ddd0(buf);
+		m_FreeTracked(buf);
 		CloseVfsStream(h);
 		return 0;
 	}
@@ -66,7 +66,7 @@ int __cdecl fcn_005259f0(char* path)
 		fcn_005356e0();
 		fcn_00535960();
 	}
-	fcn_0041ddd0(buf);
+	m_FreeTracked(buf);
 	CloseVfsStream(h);
 	return 1;
 }

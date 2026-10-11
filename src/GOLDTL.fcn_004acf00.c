@@ -10,18 +10,18 @@ extern int g_7728c8;
 extern int g_7728cc;
 extern int g_7728d0;
 
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 // FUNCTION: GOLDTL 0x4acf00
 
 int __cdecl fcn_004acf00(void)
 {
 	if (g_67fbb4 != 0) {
-		fcn_0041ddd0(g_67fbb4);
+		m_FreeTracked(g_67fbb4);
 		g_67fbb4 = 0;
 	}
 	if (g_67fbb0 != 0) {
-		fcn_0041ddd0(g_67fbb0);
+		m_FreeTracked(g_67fbb0);
 		g_67fbb0 = 0;
 	}
 	g_67fba8 = 0;

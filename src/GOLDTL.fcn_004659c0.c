@@ -26,7 +26,7 @@ int __cdecl fcn_00465850(void);
 char* __cdecl fcn_0041db70(int size, char* tag);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 char* __cdecl fcn_0047acf0(char* p);
-void __cdecl fcn_0041ddd0(char* p);
+void __cdecl m_FreeTracked(char* p);
 
 // FUNCTION: GOLDTL 0x4659c0
 int __cdecl fcn_004659c0(int idx, char* path)
@@ -67,7 +67,7 @@ int __cdecl fcn_004659c0(int idx, char* path)
 			}
 			old = ((fcn_004659c0_Def*)g_772500)[idx].data;
 			((fcn_004659c0_Def*)g_772500)[idx].data = fcn_0047acf0(old);
-			fcn_0041ddd0(old);
+			m_FreeTracked(old);
 			g_67dabc = save;
 		}
 		g_772508 += ((fcn_004659c0_Def*)g_772500)[idx].size;

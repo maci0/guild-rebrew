@@ -11,7 +11,7 @@ int __cdecl fcn_0042ff50(char*, char*, int);
 unsigned char* __cdecl fcn_0041db70(int, char*);
 void __cdecl fcn_0041bb70(int, unsigned char*, unsigned char*, unsigned char*);
 int __cdecl fcn_00430910(void*, int, int, int);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 void __cdecl CloseVfsStream(int);
 
 void __cdecl fcn_005e3ed0(int a1, char* name)
@@ -36,7 +36,7 @@ void __cdecl fcn_005e3ed0(int a1, char* name)
 		}
 		fcn_00430910(buf, 0xe100, 1, fh);
 		if (buf != 0) {
-			fcn_0041ddd0(buf);
+			m_FreeTracked(buf);
 		}
 		CloseVfsStream(fh);
 	}

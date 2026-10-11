@@ -8,7 +8,7 @@ extern char g_10432c0[];
 extern char g_1040640[];
 
 void __cdecl fcn_004432d0(int a, int b);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00452420(char* p);
 void __cdecl fcn_00433780(char* obj);
 void __cdecl fcn_00439b30(char* obj);
@@ -45,7 +45,7 @@ void __cdecl fcn_004398d0(char* obj)
 		(**(dispose_fn_4398d0**) (obj + 0x1ec))(obj);
 	}
 	if (*(void**) (obj + 0x1d4) != 0) {
-		fcn_0041ddd0(*(void**) (obj + 0x1d4));
+		m_FreeTracked(*(void**) (obj + 0x1d4));
 		*(void**) (obj + 0x1d4) = 0;
 	}
 	if (*(int*) (obj + 0x218) == 1 && *(int*) (obj + 0x21c) != 1) {
@@ -70,7 +70,7 @@ void __cdecl fcn_004398d0(char* obj)
 		fcn_00456b80(obj);
 	}
 	if (*(void**) (obj + 0x1e8) != 0) {
-		fcn_0041ddd0(*(void**) (obj + 0x1e8));
+		m_FreeTracked(*(void**) (obj + 0x1e8));
 		*(void**) (obj + 0x1e8) = 0;
 	}
 	if (*(char**) (obj + 0x200) != 0) {
@@ -81,7 +81,7 @@ void __cdecl fcn_004398d0(char* obj)
 	}
 	fcn_00418f90(*(int*) (obj + 0x210));
 	fcn_00439d80(obj);
-	fcn_0041ddd0(obj);
+	m_FreeTracked(obj);
 	if (idx != -1) {
 		fcn_004432d0(saved, 1);
 	}

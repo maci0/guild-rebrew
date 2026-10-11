@@ -795,6 +795,9 @@ modules. Its recovered names are lower snake case:
 - `m_init`: sets the slot count and allocates the slot table;
   `m_alloc` refuses to run before it.
 - `m_pool_free`: pool release.
+- `m_FreeTracked`: our inferred implementation name, now shared by SERVER,
+  TL and Gold. Its 188-byte server and 117-byte client bodies differ in native
+  error reporting; the original function spelling is not attested.
 - `m_alloc_debug`: not a function: a block group name written by `sprintf`,
   so it must not be turned into a symbol.
 

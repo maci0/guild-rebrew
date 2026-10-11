@@ -14,7 +14,7 @@ extern void* g_6b5c5c;
 extern char* g_6b5c20;
 extern void* g_14d0020[];
 void __cdecl fcn_00408240(void* p);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_004030e0(char* e);
 
 void __cdecl fcn_0040bfd0(void)
@@ -30,7 +30,7 @@ void __cdecl fcn_0040bfd0(void)
 		for (i = 0; i < 2000; i++) {
 			if ((*(Slot**)&g_6b5c20)[i].kind == 0x2d && (*(Slot**)&g_6b5c20)[i].data != 0) {
 				d = &(*(Slot**)&g_6b5c20)[i].data;
-				fcn_0041ddd0(*d);
+				m_FreeTracked(*d);
 				*d = 0;
 			}
 		}
@@ -43,7 +43,7 @@ void __cdecl fcn_0040bfd0(void)
 		p++;
 	} while ((int) p < (int) &((char**)g_14d0020)[0x300]);
 	if ((*(Slot**)&g_6b5c20) != 0) {
-		fcn_0041ddd0((*(Slot**)&g_6b5c20));
+		m_FreeTracked((*(Slot**)&g_6b5c20));
 		(*(Slot**)&g_6b5c20) = 0;
 	}
 }

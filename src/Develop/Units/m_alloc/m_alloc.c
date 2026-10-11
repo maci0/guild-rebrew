@@ -5,6 +5,15 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+#ifndef REBREW_SERVER
+#include "memtrack.h"
+extern int g_6b6f78;
+extern int g_6b6f64;
+extern MemBlock* g_6b6f80;
+extern int g_6b6f6c;
+extern int g_6b6f68;
+#endif
+
 #pragma intrinsic(memset, strcmp, strcpy)
 
 extern int g_alloc_root_name; /* 0x117640a0 */
@@ -711,6 +720,7 @@ int __cdecl m_is_tracked(void* ptr)
 
 void __cdecl m_FreeTracked(void* ptr)
 {
+#ifdef REBREW_SERVER
 	char* pool;
 	int i;
 	int count;
@@ -745,6 +755,34 @@ void __cdecl m_FreeTracked(void* ptr)
 	if (g_stat1 < 0) {
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x17a, "Memory-Underflow Error");
 	}
+#else
+	MemBlock* s;
+	int i;
+	int size;
+
+	if (ptr == 0) {
+		return;
+	}
+
+	s = g_6b6f80;
+	g_6b6f78--;
+	for (i = 0; i < g_6b6f64; i++) {
+		if (s->ptr == ptr) {
+			break;
+		}
+		s++;
+	}
+	if (i == g_6b6f64) {
+		return;
+	}
+	size = s->size;
+	s->ptr = 0;
+	free(ptr);
+	g_6b6f6c--;
+	s->pool->used_blocks--;
+	g_6b6f68 -= size;
+	s->pool->used -= size;
+#endif
 }
 
 //

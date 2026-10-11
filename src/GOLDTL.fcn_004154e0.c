@@ -1,6 +1,6 @@
 // FUNCTION: GOLDTL 0x4154e0
 
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_004154e0(char* p)
 {
@@ -8,8 +8,8 @@ void __cdecl fcn_004154e0(char* p)
 		return;
 	}
 	if (*(int*) (p + 0x10) != 0) {
-		fcn_0041ddd0(*(int*) (p + 0x10));
+		m_FreeTracked(*(int*) (p + 0x10));
 		*(int*) (p + 0x10) = 0;
 	}
-	fcn_0041ddd0(p);
+	m_FreeTracked(p);
 }

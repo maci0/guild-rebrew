@@ -27,7 +27,7 @@ typedef struct Node {
 Entry* __cdecl fcn_0042f120(int, int, Node**);
 void __cdecl fcn_0042f240(Entry*, Node*, int, char*);
 void __cdecl fcn_0042e570(char*);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 int __cdecl fcn_0064f6bb(char*);
 
 char __cdecl fcn_0042fe60(int a1, int a2)
@@ -44,7 +44,7 @@ char __cdecl fcn_0042fe60(int a1, int a2)
 			fcn_0042f240(e, d, 0, buf);
 			fcn_0042e570(buf);
 			if (--d->count == 0) {
-				fcn_0041ddd0(d->data);
+				m_FreeTracked(d->data);
 				d->data = 0;
 			} else {
 				memmove(e, e + 1, (d->count - (e - d->data)) * sizeof(Entry));

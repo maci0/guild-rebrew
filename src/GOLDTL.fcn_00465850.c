@@ -17,7 +17,7 @@ extern int g_772508;
 extern int g_6b7fac;
 
 void __cdecl fcn_0047b5d0(void* p);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 
 // FUNCTION: GOLDTL 0x465850
 int __cdecl fcn_00465850(void)
@@ -41,7 +41,7 @@ int __cdecl fcn_00465850(void)
 	if (((VfsEntry*)g_772500)[best].kind < 0x10) {
 		fcn_0047b5d0(((VfsEntry*)g_772500)[best].data);
 	} else {
-		fcn_0041ddd0(((VfsEntry*)g_772500)[best].data);
+		m_FreeTracked(((VfsEntry*)g_772500)[best].data);
 		((VfsEntry*)g_772500)[best].data = 0;
 	}
 	((VfsEntry*)g_772500)[best].data = 0;

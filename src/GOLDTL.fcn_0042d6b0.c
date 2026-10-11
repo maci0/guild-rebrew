@@ -21,7 +21,7 @@ void __cdecl fcn_00430a80(int f, int off, int whence);
 void __cdecl fcn_004306b0(void* buf, int size, int count, int f);
 void __cdecl fcn_00430580(int f);
 int* __cdecl fcn_0041db70(int size, const char* tag);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 
 // FUNCTION: GOLD 0x42e360
 // FUNCTION: GOLDTL 0x42d6b0
@@ -65,6 +65,6 @@ int __cdecl fcn_0042d6b0(const char* name)
 		g_14a5320[((TextBank_42d6b0*)g_149d120)[idx].first + i] = ((TextBank_42d6b0*)g_149d120)[idx].text + ofs[i];
 	}
 	fcn_00430580(f);
-	fcn_0041ddd0(ofs);
+	m_FreeTracked(ofs);
 	return 1;
 }

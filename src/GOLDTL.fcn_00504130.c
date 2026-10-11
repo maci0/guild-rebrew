@@ -14,7 +14,7 @@ typedef struct {
 extern char g_7f4ca0[];
 
 void __cdecl fcn_005b1c90(int h);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl gv_FreeFieldAllocs(int* slot);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
@@ -34,7 +34,7 @@ int __cdecl fcn_00504130(unsigned char* o)
 	switch (*o) {
 	case 0x1e:
 		if (*(void**) (o + 0x71) != 0) {
-			fcn_0041ddd0(*(void**) (o + 0x71));
+			m_FreeTracked(*(void**) (o + 0x71));
 			*(void**) (o + 0x71) = 0;
 		}
 		*(void**) (o + 0x71) = 0;
@@ -48,7 +48,7 @@ int __cdecl fcn_00504130(unsigned char* o)
 	case 0x4b:
 	case 0x4c:
 	case 0x4d:
-		fcn_0041ddd0(*(void**) (o + 0x65));
+		m_FreeTracked(*(void**) (o + 0x65));
 		*(void**) (o + 0x65) = 0;
 		break;
 	}

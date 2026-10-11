@@ -8,7 +8,7 @@ int __cdecl fcn_00413190(int);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00442be0(void*);
 void __cdecl fcn_00403df0(char*);
-void __cdecl fcn_0041ddd0(char*);
+void __cdecl m_FreeTracked(char*);
 
 // FUNCTION: GOLD 0x004028a0
 // FUNCTION: GOLDTL 0x4030e0
@@ -53,7 +53,7 @@ int __cdecl fcn_004030e0(char* obj)
 			if (*(int*) (obj + 0x124) != 0) {
 				fcn_00403df0(obj);
 			}
-			fcn_0041ddd0(obj);
+			m_FreeTracked(obj);
 			return 1;
 		}
 	}

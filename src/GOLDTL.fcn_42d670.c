@@ -6,7 +6,7 @@ extern int g_149d188[];
 // FUNCTION: GOLDTL 0x42d670
 
 int __cdecl fcn_0042d630(int);
-int __cdecl fcn_0041ddd0(int);
+int __cdecl m_FreeTracked(int);
 
 void __cdecl fcn_0042d670(int a)
 {
@@ -17,6 +17,6 @@ void __cdecl fcn_0042d670(int a)
 		return;
 	}
 	x = g_149d188[i * 29];
-	fcn_0041ddd0(x);
+	m_FreeTracked(x);
 	g_149d188[i * 29] = 0;
 }

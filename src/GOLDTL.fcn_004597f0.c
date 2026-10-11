@@ -1,7 +1,7 @@
 // FUNCTION: GOLDTL 0x4597f0
 
 void __cdecl fcn_0045bfb0(int);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_004597f0(char* owner, char* n)
 {
@@ -22,5 +22,5 @@ void __cdecl fcn_004597f0(char* owner, char* n)
 		}
 	}
 	fcn_0045bfb0(*(int*) (n + 0x1c));
-	fcn_0041ddd0(n);
+	m_FreeTracked(n);
 }

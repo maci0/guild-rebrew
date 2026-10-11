@@ -3,7 +3,7 @@
 
 #include "g_774a78.h"
 
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 extern struct Node* g_774a78;
 
@@ -27,6 +27,6 @@ int __cdecl fcn_005b1c90(int id)
 	} else {
 		g_774a78 = n->next;
 	}
-	fcn_0041ddd0(n);
+	m_FreeTracked(n);
 	return 0;
 }

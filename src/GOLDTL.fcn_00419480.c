@@ -9,7 +9,7 @@ extern char* g_6b5d10;
 extern char* g_6b5d14;
 extern char g_67779c[];
 void* __cdecl fcn_0041db70(int size, char* tag);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 
 int __cdecl fcn_00419480(unsigned short n)
 {
@@ -75,14 +75,14 @@ int __cdecl fcn_00419480(unsigned short n)
 					}
 					return 1;
 				}
-				fcn_0041ddd0(g_6b5d10);
+				m_FreeTracked(g_6b5d10);
 				g_6b5d10 = 0;
-				fcn_0041ddd0(g_6b5d0c);
+				m_FreeTracked(g_6b5d0c);
 				g_6b5d10 = 0;
 				g_6b5d0c = 0;
 				return 0;
 			}
-			fcn_0041ddd0(g_6b5d0c);
+			m_FreeTracked(g_6b5d0c);
 			g_6b5d0c = 0;
 		}
 	}

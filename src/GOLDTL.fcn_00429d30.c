@@ -6,7 +6,7 @@ struct sym_429d30 {
 	void* data;
 };
 
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 // FUNCTION: GOLD 0x42b410
 // FUNCTION: GOLDTL 0x429d30
@@ -23,7 +23,7 @@ int __cdecl fcn_00429d30(char* s)
 	if (*(struct sym_429d30**) (s + 0x108) != 0) {
 		for (i = 0; i < *(int*) (s + 0x114); i++) {
 			if ((*(struct sym_429d30**) (s + 0x108))[i].data != 0) {
-				fcn_0041ddd0((*(struct sym_429d30**) (s + 0x108))[i].data);
+				m_FreeTracked((*(struct sym_429d30**) (s + 0x108))[i].data);
 				(*(struct sym_429d30**) (s + 0x108))[i].data = 0;
 				(*(struct sym_429d30**) (s + 0x108))[i].data = 0;
 			}
@@ -38,23 +38,23 @@ int __cdecl fcn_00429d30(char* s)
 		child++;
 	}
 	if (*(void**) (s + 0x108) != 0) {
-		fcn_0041ddd0(*(void**) (s + 0x108));
+		m_FreeTracked(*(void**) (s + 0x108));
 		*(void**) (s + 0x108) = 0;
 	}
 	if (*(void**) (s + 0x10c) != 0) {
-		fcn_0041ddd0(*(void**) (s + 0x10c));
+		m_FreeTracked(*(void**) (s + 0x10c));
 		*(void**) (s + 0x10c) = 0;
 	}
 	if (*(void**) (s + 0x11c) != 0) {
-		fcn_0041ddd0(*(void**) (s + 0x11c));
+		m_FreeTracked(*(void**) (s + 0x11c));
 		*(void**) (s + 0x11c) = 0;
 	}
 	if (*(void**) (s + 0xc30) != 0) {
-		fcn_0041ddd0(*(void**) (s + 0xc30));
+		m_FreeTracked(*(void**) (s + 0xc30));
 		*(void**) (s + 0xc30) = 0;
 	}
 	if (*(void**) (s + 0xc34) != 0) {
-		fcn_0041ddd0(*(void**) (s + 0xc34));
+		m_FreeTracked(*(void**) (s + 0xc34));
 		*(void**) (s + 0xc34) = 0;
 	}
 	memset(s, 0, 0xc98);

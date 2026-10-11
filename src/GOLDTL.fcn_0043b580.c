@@ -12,7 +12,7 @@ typedef struct Event {
 extern char g_67a59c[];
 
 void* __cdecl fcn_0041db70(int, void*);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 char __cdecl fcn_0043b580(char* o, int idx, int id, char* name)
 {
@@ -42,7 +42,7 @@ char __cdecl fcn_0043b580(char* o, int idx, int id, char* name)
 					}
 				}
 				if (i == 7) {
-					fcn_0041ddd0(*(Event**) (o + 0x1d4));
+					m_FreeTracked(*(Event**) (o + 0x1d4));
 					*(Event**) (o + 0x1d4) = 0;
 				}
 			}

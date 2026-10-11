@@ -11,7 +11,7 @@ extern char g_679554[];
 extern char g_679540[];
 
 void* __cdecl fcn_0041db70(int size, char* tag);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00426680(int, int*);
 int __cdecl fcn_00427830(char* g, int v);
 void __cdecl fcn_00427480(void);
@@ -39,11 +39,11 @@ int __cdecl fcn_00427f00(char* g)
 		fcn_00426680(*(int*) (g_6b7e98 + 0x118), tok);
 		if (tok[0] == 8 && depth == 0) {
 			if (fcn_00427830(g, tok[1]) == 0) {
-				fcn_0041ddd0(a);
-				fcn_0041ddd0(b);
-				fcn_0041ddd0(*(void**) (g + 0x108));
+				m_FreeTracked(a);
+				m_FreeTracked(b);
+				m_FreeTracked(*(void**) (g + 0x108));
 				*(void**) (g + 0x108) = 0;
-				fcn_0041ddd0(*(void**) (g + 0x10c));
+				m_FreeTracked(*(void**) (g + 0x10c));
 				*(void**) (g + 0x10c) = 0;
 				return 0;
 			}
@@ -58,11 +58,11 @@ int __cdecl fcn_00427f00(char* g)
 		}
 		if (depth < 0) {
 			fcn_00425bf0(g, *(int*) (g + 0x118), g_679564);
-			fcn_0041ddd0(a);
-			fcn_0041ddd0(b);
-			fcn_0041ddd0(*(void**) (g + 0x108));
+			m_FreeTracked(a);
+			m_FreeTracked(b);
+			m_FreeTracked(*(void**) (g + 0x108));
 			*(void**) (g + 0x108) = 0;
-			fcn_0041ddd0(*(void**) (g + 0x10c));
+			m_FreeTracked(*(void**) (g + 0x10c));
 			*(void**) (g + 0x10c) = 0;
 			return 0;
 		}
@@ -76,36 +76,36 @@ int __cdecl fcn_00427f00(char* g)
 	}
 	if (depth != 0) {
 		fcn_00425bf0(g, 0, g_679584);
-		fcn_0041ddd0(a);
-		fcn_0041ddd0(b);
-		fcn_0041ddd0(*(void**) (g + 0x108));
+		m_FreeTracked(a);
+		m_FreeTracked(b);
+		m_FreeTracked(*(void**) (g + 0x108));
 		*(void**) (g + 0x108) = 0;
-		fcn_0041ddd0(*(void**) (g + 0x10c));
+		m_FreeTracked(*(void**) (g + 0x10c));
 		*(void**) (g + 0x10c) = 0;
 		return 0;
 	}
 	if (*(int*) (g + 0x114) != 0) {
 		memcpy(b, *(void**) (g + 0x108), *(int*) (g + 0x114) * 0x30);
-		fcn_0041ddd0(*(void**) (g + 0x108));
+		m_FreeTracked(*(void**) (g + 0x108));
 		*(void**) (g + 0x108) = 0;
 		*(void**) (g + 0x108) = fcn_0041db70(*(int*) (g + 0x114) * 0x30, g_679554);
 		memcpy(*(void**) (g + 0x108), b, *(int*) (g + 0x114) * 0x30);
 	} else {
-		fcn_0041ddd0(*(void**) (g + 0x108));
+		m_FreeTracked(*(void**) (g + 0x108));
 		*(void**) (g + 0x108) = 0;
 	}
 	if (*(int*) (g + 0x110) != 0) {
 		memcpy(a, *(void**) (g + 0x10c), *(int*) (g + 0x110) * 0x14c);
-		fcn_0041ddd0(*(void**) (g + 0x10c));
+		m_FreeTracked(*(void**) (g + 0x10c));
 		*(void**) (g + 0x10c) = 0;
 		*(void**) (g + 0x10c) = fcn_0041db70(*(int*) (g + 0x110) * 0x14c, g_679540);
 		memcpy(*(void**) (g + 0x10c), a, *(int*) (g + 0x110) * 0x14c);
 	} else {
-		fcn_0041ddd0(*(void**) (g + 0x10c));
+		m_FreeTracked(*(void**) (g + 0x10c));
 		*(void**) (g + 0x10c) = 0;
 	}
 	g_6b7e98 = saved;
-	fcn_0041ddd0(a);
-	fcn_0041ddd0(b);
+	m_FreeTracked(a);
+	m_FreeTracked(b);
 	return 1;
 }

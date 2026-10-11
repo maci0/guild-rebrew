@@ -18,7 +18,7 @@ extern int g_772610;
 extern int g_77260c;
 
 void __cdecl fcn_00475f80(Item* p);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 
 // FUNCTION: GOLDTL 0x47ac60
 void __cdecl fcn_0047ac60(Group* g)
@@ -33,9 +33,9 @@ void __cdecl fcn_0047ac60(Group* g)
 			g_77260c--;
 		}
 	}
-	fcn_0041ddd0(g->extra);
+	m_FreeTracked(g->extra);
 	g->extra = 0;
-	fcn_0041ddd0(g->items);
+	m_FreeTracked(g->items);
 	g->items = 0;
-	fcn_0041ddd0(g);
+	m_FreeTracked(g);
 }

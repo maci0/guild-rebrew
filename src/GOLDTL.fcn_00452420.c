@@ -4,7 +4,7 @@ extern int g_67a370;
 
 void __cdecl fcn_004523a0(char*);
 void __cdecl fcn_0045bfb0(int);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_00452420(char* o)
 {
@@ -26,11 +26,11 @@ void __cdecl fcn_00452420(char* o)
 	if (*(int*) (o + 0xdc) != 0) {
 		fcn_0045bfb0(*(int*) (o + 0xdc));
 	}
-	fcn_0041ddd0(*(void**) (o + 0x28));
+	m_FreeTracked(*(void**) (o + 0x28));
 	*(void**) (o + 0x28) = 0;
-	fcn_0041ddd0(*(void**) (o + 0x2c));
+	m_FreeTracked(*(void**) (o + 0x2c));
 	*(void**) (o + 0x2c) = 0;
-	fcn_0041ddd0(*(void**) (o + 0x30));
+	m_FreeTracked(*(void**) (o + 0x30));
 	*(void**) (o + 0x30) = 0;
-	fcn_0041ddd0(o);
+	m_FreeTracked(o);
 }

@@ -14,7 +14,7 @@ extern int g_14cb8e4;
 extern unsigned int g_14cb8e8;
 
 void* __cdecl fcn_0041db70(int size, const char* tag);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 
 // FUNCTION: GOLD 0x00427570
 // FUNCTION: GOLDTL 0x425d90
@@ -28,7 +28,7 @@ struct var_425d90* __cdecl fcn_00425d90(char* name, void* ptr, int type)
 		vars = fcn_0041db70((g_14cb8e4 + 0x10) * sizeof(struct var_425d90), "evt:t");
 		if ((*(struct var_425d90**)&g_14cb8e0) != 0) {
 			memcpy(vars, (*(struct var_425d90**)&g_14cb8e0), g_14cb8e4 * sizeof(struct var_425d90));
-			fcn_0041ddd0((*(struct var_425d90**)&g_14cb8e0));
+			m_FreeTracked((*(struct var_425d90**)&g_14cb8e0));
 		}
 		(*(struct var_425d90**)&g_14cb8e0) = vars;
 		g_14cb8e8 += 0x300;

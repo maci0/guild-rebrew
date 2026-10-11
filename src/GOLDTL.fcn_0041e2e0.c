@@ -11,7 +11,7 @@ struct Chunk {
 	Chunk* next;
 };
 
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 
 void __cdecl fcn_0041e2e0(Chunk** head, char* p)
 {
@@ -39,7 +39,7 @@ void __cdecl fcn_0041e2e0(Chunk** head, char* p)
 	}
 	if (c == *head) {
 		*head = c->next;
-		fcn_0041ddd0(c);
+		m_FreeTracked(c);
 		return;
 	}
 	prev = *head;
@@ -47,5 +47,5 @@ void __cdecl fcn_0041e2e0(Chunk** head, char* p)
 		prev = prev->next;
 	}
 	prev->next = c->next;
-	fcn_0041ddd0(c);
+	m_FreeTracked(c);
 }
