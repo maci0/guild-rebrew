@@ -1,5 +1,11 @@
 Current reconstruction checkpoint (2026-10-11):
 
+> Tooling update (October 2026): old split-link, copied-data and duplicate diagnostic
+> scripts cited in historical entries have been retired. Use current `rebrew`
+> commands; see [the tooling audit](tooling-upstream.md) for replacements and the
+> project-specific tools that remain. Preserve these entries as evidence, not as
+> instructions to recreate obsolete helpers.
+
 - 2026-10-11 (shared allocator initializer): TL 0x41de50 and Gold 0x4226a0 now
   bind to the existing canonical m_init in Develop/Units/m_alloc/m_alloc.c.
   The duplicate 96-line client file is removed; canonical C and all caller

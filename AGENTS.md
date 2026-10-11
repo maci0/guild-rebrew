@@ -29,6 +29,27 @@ Check library attribution before implementing a function. Use `rebrew library sc
 when available. A signature miss is inconclusive. Library bytes contribute to
 accounted `.text`, but library functions do not count as reversing progress.
 
+## Choose Existing Tools Before Writing Scripts
+
+Start with `rebrew --help`, the relevant command group's `--help`, and the
+matching skill. Use the commands below before implementing another inventory,
+PE/COFF parser, relocation comparison, metadata writer or layout verifier.
+For the task-to-command map and public API escape hatch, read
+`.agents/skills/rebrew-workflow/references/tool-selection.md`.
+
+- Run the existing CLI with `--json`; consume its results instead of scraping
+  terminal tables or maintaining a second coverage/metadata store.
+- For composition the CLI does not expose, reuse public Rebrew APIs. Binary
+  parsing uses the existing loaders/LIEF, C parsing the existing AST helpers,
+  and managed-store edits the locked metadata writers.
+- A binary-specific experiment may live in ignored scratch with its inputs,
+  command and result. Keep target VAs and acceptance criteria in the project;
+  do not turn the experiment into another permanent CLI or generated store.
+- When a repeated operation is a reusable missing capability, implement it in
+  upstream Rebrew with tests and migrate its callers when that work is within
+  the task's scope. Remove the local duplicate; update the packaged template
+  or skill when discovery failed. Publishing still needs user authorization.
+
 ## CLI Tools
 
 Invoke all tools through the single `rebrew <command>` CLI. Names such as
@@ -54,7 +75,8 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew lint --json` | Validate annotations and the stores: inline metadata (W019), stale marker VAs (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), data rows whose size disagrees with the owning definition (W037) or overlaps another row (W038), coverage-store hygiene — leftover `coverage.db`/grid JSON/CSV and documents the dashboards cannot serve (W032) |
 | `rebrew data list --json` | Inventory globals in .data/.rdata/.bss |
 | `rebrew data move 0xOLD 0xNEW` | Re-address a data row; drops its verdict, keeps verification history |
-| `rebrew types check` | Check struct layouts |
+| `rebrew types check` | Check layouts and stale type bindings; `--compile` repeats target sizeof/offsetof assertions |
+| `rebrew types bind ID FILE C_NAME --size N --native-size N --evidence TEXT` | Register or refresh a stable type ID and target layout in managed `rebrew-types.toml` |
 | `rebrew types apply` | Rewrite signature types; preview with `--dry-run` |
 | `rebrew orphans list` | List metadata identities whose source is missing |
 | `rebrew orphans prune` | Remove orphaned metadata through the locked writer; preview with `--dry-run` |
@@ -65,6 +87,13 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew coverage catalog --json` | Catalog summary (no artifact of its own) |
 | `rebrew coverage build --json` | Write `db/coverage-<target>.toml`, the progress document the dashboards read |
 | `rebrew status --json` | Separate file agreement, accounted .text, and stored data verification; counts and bytes reconcile |
+| `rebrew library inspect <archive> --defines <symbol>` | Find native archive members and their code/data definitions |
+| `rebrew library vendor <manifest>...` | Verify pristine source pins plus patches; `--sync` regenerates outputs |
+| `rebrew binary relocs --json` | Compare reference/raw-link relocation sites, symbols and targets |
+| `rebrew source symbolize <file> --dry-run` | Preview replacing raw data-address casts with verified named globals |
+| `rebrew build check-data-placement --json` | Compare linked data symbol addresses against managed rows |
+| `rebrew build check-text-placement --json` | Compare linked function placement against reference identities |
+| `rebrew build round-trip --dry-run --json` | Resolve object operands and compare complete compiled bodies in a copy of the reference |
 | `rebrew library scan-signatures --json` | FLIRT scan for known library functions |
 | `rebrew binary extract list --json` | List uncovered function candidates |
 | `rebrew binary extract show 0x<VA> --json` | Inspect one function candidate |
@@ -152,16 +181,13 @@ These facts survive removal of derived coverage and compile caches.
 
 `CFLAGS` is optional — falls back to the target default from `rebrew-project.toml`.
 
-
-Types use stable IDs in managed `rebrew-types.toml`, not instance VAs. Definitions
-belong in the owning subsystem header or private C file. `rebrew types bind ID
-FILE C_NAME --size N --native-size N --evidence TEXT` compiles target sizeof and
-optional `--field member=offset` assertions before writing (locked + atomic;
-never hand-edit this store). Keep C size separate from native allocation/stride
-extent. `rebrew types check --compile` checks current layouts; W031 reports stale
-bindings. Review changed evidence and rebind the same ID after edits or moves.
-Heap instances use allocation/use sites; static instances keep their data VAs.
-Current D3 definitions: `src/Develop/Units/d3/d3_object.h`.
+Types have stable IDs rather than instance VAs. Put definitions in the owning
+subsystem header or private C file and bind them with `rebrew types bind`.
+Keep C size separate from evidenced native allocation/stride extent; unknown
+semantic fields can remain byte regions. `rebrew-types.toml` is CLI/API-managed
+(locked + atomic), never hand-edited. After a rename, move or layout/context
+change, review the native evidence and rebind the same ID. Heap instances are
+identified by allocation/use sites; static instances keep their data VAs.
 
 ## Compiler Constraints (msvc-6.0-sp5)
 
@@ -284,3 +310,9 @@ functions, globals, locals, types, constants and file names.
 - Layout spans and gap fillers are rebrew inventory, not original names; they keep
   their `g_before_*`/`g_gap_*` row names until an owner is proven.
 - Record an unattested name as inferred where its row or doc entry lives.
+
+## Project type definitions
+
+Current D3 definitions: `src/Develop/Units/d3/d3_object.h`. Keep bindings on stable
+IDs in managed `rebrew-types.toml`; source/header edits require reviewing the
+native evidence and rebinding those IDs through `rebrew types bind`.

@@ -52,7 +52,7 @@ def main() -> int:
         ("verify `passed`", verify, "gate's `BASELINE`"),
         ("`.text` residue", residue, "raw-link file identity"),
         ("raw-link `.data` divergence", data, "raw-link file identity"),
-        ("relocation records missing / extra", reloc, "not measured; reloc_set_check.py removed"),
+        ("relocation records missing / extra", reloc, "`rebrew verify --whole-binary`"),
         ("raw-link import table", imports, "gate, round 210"),
         ("OBJECTIVE GAP (raw link vs reference)", gap, "raw-link file identity"),
         ("...of which", decomp, "gate's decomposition"),

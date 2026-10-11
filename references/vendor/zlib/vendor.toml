@@ -1,5 +1,5 @@
 # zlib 1.1.3: the release tarball unpacked into `pristine`, plus local patches.
-# scripts/vendor.py rebuilds `output` from them; CMake runs its check at configure.
+# rebrew library vendor --sync rebuilds `output` from them; CMake runs its check at configure.
 # Provenance, patch reasons and the update procedure: docs/vendoring.md.
 name = "zlib"
 version = "1.1.3"

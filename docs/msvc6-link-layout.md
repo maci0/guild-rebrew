@@ -1,5 +1,11 @@
 # MSVC 6.0 LINK / PE layout: what decides the bytes outside `.text`
 
+> Tooling update (October 2026): old split-link, copied-data and duplicate diagnostic
+> scripts cited in historical entries have been retired. Use current `rebrew`
+> commands; see [the tooling audit](tooling-upstream.md) for replacements and the
+> project-specific tools that remain. Preserve these entries as evidence, not as
+> instructions to recreate obsolete helpers.
+
 `rebrew test` and `docs/msvc6-c-shapes.md` cover function code generation.
 This companion records native storage, alignment, imports, and PE layout.
 New findings name their compiler/linker profile and saved evidence; distinguish
@@ -4952,7 +4958,7 @@ Two source facts the order depends on, both measured:
   `common-data-order.txt`). Changing either alone swaps two reload blocks at the function tail; both together
   match.
 - **Base relocations.** Every absolute address the reference relocates must be a symbol in the source.
-  `scripts/symbolize_addresses.py` rewrites `(T*) 0xVA` casts (also `&row + offset`); loops need both ends
+  `rebrew source symbolize FILE --target server.dll` rewrites `(T*) 0xVA` casts (also `&row + offset`); loops need both ends
   named (`p < (int) sym + extent`), with the original's signed or unsigned compare: naming only the start
   changes the strength-reduced loop. Float constants in `.rdata` are the users' `__real@4` literal pools
   (ahm_ExAllocAlchemist at 0x100256a0..c8, gv_ExAllocGraveyardWorker's 1000/8/4), placed by

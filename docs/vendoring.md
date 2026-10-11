@@ -21,12 +21,12 @@ compiles those files directly. Never edit them by hand.
 
 ## Mechanism
 
-`scripts/vendor.py check` (run by CMake at configure, `CMakeLists.txt` "Vendored
+`rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml` (run by CMake at configure, `CMakeLists.txt` "Vendored
 libraries") does, per manifest:
 
 1. Every file under the pristine directory is listed in the checksum file with a
    matching sha256, and every output file comes from a pinned pristine file.
-2. Copies the listed files into `build/vendor-stage/<name>` and applies the patches in
+2. Copies the listed files into a temporary staging directory and applies the patches in
    order with GNU `patch -p1 --fuzz=0`; a hunk that does not apply exactly fails.
 3. Requires the output tree to hold exactly the listed files, byte-identical to the
    staged result.
@@ -34,10 +34,12 @@ libraries") does, per manifest:
 Any failure prints the file and stops configure with `Vendored sources differ from
 pristine upstream + patches`. Every pristine, patch, manifest and output file is a
 configure dependency, so an edit re-runs the check on the next build.
-`tests/test_vendor.py` covers each failure.
+Upstream Rebrew’s `tests/test_vendor.py` covers reproduction and failure cases.
+The command validates and stages every manifest before sync changes any output;
+paths must stay inside the root, with no symlinks or overlap between outputs and inputs.
 
 To change vendored code: edit or add a patch, list it in `vendor.toml`, then run
-`.venv/bin/python scripts/vendor.py sync --stage .scratch/vendor-stage` to regenerate
+`rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml --sync` to regenerate
 the output tree, and rebuild.
 
 ## zlib 1.1.3

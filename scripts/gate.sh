@@ -49,27 +49,21 @@ else
 fi
 
 echo "== rebrew lint"
-# Round 907: this check printed lint's output but never tested it, so it could
-# not fail the gate.  Proven inert: a deliberately broken FUNCTION identity
-# header produced "1 warnings" here and the gate still reported pass on every
-# other axis.  The objective is explicit that "zero warnings is the only
-# acceptable state", so the count is now read and enforced.  Lint exits 0 even
-# with warnings, so the exit code alone is not enough -- parse the summary.
-lint_out=$(rebrew lint 2>&1 | tail -1)
-echo "$lint_out"
-lint_bad=$(echo "$lint_out" | sed -n 's/.*: [0-9]* passed, \([0-9]*\) errors, \([0-9]*\) warnings.*/\1 \2/p')
-if [ -z "$lint_bad" ]; then
-    echo "could not read the lint summary"
+# Warnings are fatal for this project; lint's ordinary exit contract covers errors.
+if ! rebrew lint --json > .scratch/gate-lint.json; then
     rc=1
-else
-    lint_errs=${lint_bad% *}
-    lint_warns=${lint_bad#* }
-    if [ "$lint_errs" -ne 0 ] || [ "$lint_warns" -ne 0 ]; then
-        echo "REGRESSION: lint $lint_errs errors, $lint_warns warnings (both must be 0)"
-        rc=1
-    else
-        echo "lint clean: 0 errors, 0 warnings"
-    fi
+fi
+if ! python3 - .scratch/gate-lint.json <<'PYEOF'
+import json, sys
+with open(sys.argv[1]) as handle:
+    report = json.load(handle)
+print("lint: %d passed, %d errors, %d warnings" %
+      (report["passed"], report["errors"], report["warnings"]))
+raise SystemExit(bool(report["errors"] or report["warnings"]))
+PYEOF
+then
+    echo "REGRESSION: lint errors or warnings (both must be 0)"
+    rc=1
 fi
 
 echo "== build raw server.dll"
@@ -87,54 +81,6 @@ if [ "$build_rc" -ne 0 ]; then
     grep -E "error|Error [0-9]" .scratch/gate-build.log | head -3
     rc=1
 fi
-# The rebrew checkout is editable, so the venv imports whatever commit it is on --
-# and something outside this project moved it off `main` mid-session (round 247).
-# The symptom was NOT "wrong commit": it was `rebrew build residue` dying with
-# `ImportError: cannot import name 'map_coverage'`, the deliverable silently not being
-# rebuilt, and six downstream rows failing for one missing symbol.  Check the symbols
-# the project's own scripts import, by name, before anything depends on them.
-echo "== rebrew checkout"
-reb_py="${REBREW_PY:-.venv/bin/python}"
-if reb_head=$(git -C /home/maci/Desktop/Projects/relumea/rebrew rev-parse --short HEAD 2>/dev/null); then
-    echo "rebrew HEAD: $reb_head"
-    reb_dirty=$(git -C /home/maci/Desktop/Projects/relumea/rebrew status --porcelain 2>/dev/null | wc -l)
-    if [ "$reb_dirty" -gt 0 ]; then
-        echo "  ($reb_dirty uncommitted file(s) in the checkout)"
-        # A patch of those edits lives here so a `git checkout` cannot erase the
-        # work a second time.  Verified to apply to a clean tree in round 250.
-        if [ -s .scratch/rebrew-session-fixes.patch ]; then
-            echo "  recovery patch: .scratch/rebrew-session-fixes.patch"
-        fi
-    fi
-fi
-sym_out=$("$reb_py" - <<'PYEOF' 2>&1
-import sys
-sys.path.insert(0, "/home/maci/Desktop/Projects/relumea/rebrew/src")
-need = [
-    ("rebrew.postlink", "binary_info_from_bytes"),
-    ("rebrew.postlink", "map_coverage"),
-    ("rebrew.postlink", "FIXERS"),
-    ("rebrew.binary_loader", "decode_binary_name"),
-]
-missing = []
-for mod, name in need:
-    try:
-        m = __import__(mod, fromlist=[name])
-        getattr(m, name)
-    except Exception as exc:
-        missing.append("%s.%s (%s)" % (mod, name, type(exc).__name__))
-print("MISSING " + ", ".join(missing) if missing else "OK")
-PYEOF
-)
-case "$sym_out" in
-    "OK") echo "required rebrew symbols import" ;;
-    *) echo "REGRESSION: the editable rebrew checkout is unusable -- $sym_out"
-       echo "  The project does NOT build against this checkout.  Check"
-       echo "  \`git -C /home/maci/Desktop/Projects/relumea/rebrew rev-parse HEAD\`:"
-       echo "  a moved HEAD is the cause, not a regression in this tree."
-       rc=1 ;;
-esac
-
 echo "== toolchain images"
 # Check the pinned server image before interpreting compile failures.
 if ! docker image inspect rebrew/msvc:6.0-sp5-win32 >/dev/null 2>&1; then
@@ -148,104 +94,37 @@ if ! docker image inspect rebrew/msvc:6.0-sp5-win32 >/dev/null 2>&1; then
 fi
 echo "toolchain images present"
 
-echo "== rebrew verify --full --text --raw-link"
-if ! out=$(rebrew verify --full --text --raw-link --built build/server.dll 2>&1); then
-    echo "$out"
-    echo "REGRESSION: function verification failed"
+echo "== rebrew function, data and whole-binary verification"
+# One upstream report supplies function/data verdicts and all structural checks.
+# Whole-file equality also checks the physical order of import slots and names.
+if ! rebrew verify --full --text --raw-link --data --whole-binary \
+        --built build/server.dll --json > .scratch/gate-verify.json; then
+    echo "REGRESSION: upstream verification failed (see .scratch/gate-verify.json)"
     rc=1
 fi
-echo "$out" | grep -E "Verification:" || true
-# An annotation SHORTER than the binary's function passes as EXACT/RELOC on a
-# prefix, so it never shows up as a failure -- rebrew computes the divergence and
-# puts it in --json, and until round 189 printed nothing.  Surface it here: it is
-# the measure of what is not yet reversed.  Reported, not failed: the
-# count is large today and a gate that fails on it would say nothing new.
-short_line=$(echo "$out" | grep -E "SHORTER than the binary" | head -1)
-if [ -n "$short_line" ]; then
-    echo "  ${short_line#*warning: }"
-fi
-worst_line=$(echo "$out" | grep -E "^  worst:" | head -1)
-[ -n "$worst_line" ] && echo "  ${worst_line#*worst: }"
-# ...and how many of them are discovery merges rather than truncated code,
-# because the two need opposite responses and only one is reversing work.
-merge_line=$(echo "$out" | grep -oE "[0-9]+ of them open with a new function" | head -1)
-[ -n "$merge_line" ] && echo "  ${merge_line} -- INVENTORY MERGES (the annotation is right; the inventory spans several functions)"
-passed=$(echo "$out" | sed -n 's/.*Verification: \([0-9]*\)\/\([0-9]*\) passed.*/\1/p')
-if [ -z "$passed" ]; then
-    echo "could not read the verification summary"
-    rc=1
-elif [ "$passed" -lt "$BASELINE" ]; then
-    echo "REGRESSION: $passed passed, baseline is $BASELINE"
-    rc=1
-else
-    echo "baseline $BASELINE held"
-fi
-
-echo "== raw-link data verification"
-if rebrew verify --data --built build/server.dll > .scratch/gate-data.log 2>&1; then
-    tail -5 .scratch/gate-data.log
-else
-    cat .scratch/gate-data.log
-    rc=1
-fi
-
-# Compare the imports of the raw CMake output, including their order.
-echo "== import table"
-if [ -f build/server.dll ]; then
-    IMP=$("${REBREW_PY:-python3}" - <<'PYEOF'
-import struct, sys
-def imports(p):
-    d = open(p, 'rb').read()
-    pe = struct.unpack_from('<I', d, 0x3c)[0]
-    n = struct.unpack_from('<H', d, pe + 6)[0]
-    hs = struct.unpack_from('<H', d, pe + 20)[0]
-    secs = []
-    for i in range(n):
-        o = pe + 24 + hs + i * 40
-        vs, va, raw, ptr = struct.unpack_from('<IIII', d, o + 8)
-        secs.append((va, vs, ptr, raw))
-    def r2f(rva):
-        for va, vs, ptr, raw in secs:
-            if va <= rva < va + max(vs, raw):
-                return ptr + (rva - va)
-    opt = pe + 24
-    irva, _ = struct.unpack_from('<II', d, opt + 96 + 8)
-    k, out = irva, []
-    while True:
-        f = r2f(k)
-        oft, ts, fc, nm, ft = struct.unpack_from('<IIIII', d, f)
-        if not nm:
-            break
-        dll = d[r2f(nm):d.find(b'\0', r2f(nm))].decode()
-        j, c = r2f(oft), 0
-        while True:
-            v = struct.unpack_from('<I', d, j + c * 4)[0]
-            if v == 0:
-                break
-            out.append(dll + '!' + ('ord%d' % (v & 0xffff) if v & 0x80000000
-                                    else d[r2f(v) + 2:d.find(b'\0', r2f(v) + 2)].decode()))
-            c += 1
-        k += 20
-    return out
-a = imports('original/Server/server.dll')
-b = imports('build/server.dll')
-if a == b:
-    print("OK %d" % len(b))
-else:
-    print("DIFF ref=%d bld=%d" % (len(a), len(b)))
-    for x, y in zip(a, b):
-        if x != y:
-            print("  first: ref %s bld %s" % (x, y))
-            break
+if ! python3 - .scratch/gate-verify.json "$BASELINE" <<'PYEOF'
+import json, sys
+with open(sys.argv[1]) as handle:
+    report = json.load(handle)
+summary = report["summary"]
+print("Verification: %d/%d passed" % (summary["passed"], summary["total"]))
+print("baseline %s: %d passed" % (sys.argv[2], summary["passed"]))
+data = report["data"]
+print("data: %d/%d matched" % (data["matched"], data["compared"]))
+whole = report["whole_binary"]
+for name in ("file", "sections", "exports", "imports", "relocations", "rsrc", "headers", "layout"):
+    print("whole-binary %s: %s" % (name, whole[name]["match"]))
+print("missing %d, extra %d -- baseline 0/0" %
+      (len(whole["relocations"]["missing"]), len(whole["relocations"]["added"])))
+if whole["file"]["match"] and whole["imports"]["match"]:
+    print("raw link imports match the reference (whole-file bytes identical)")
+raise SystemExit(not (summary["passed"] >= int(sys.argv[2])
+                     and summary["failed"] == 0
+                     and not data["mismatched"] and not data["missing"]
+                     and whole["match"] and whole["layout"]["match"]))
 PYEOF
-)
-    case "$IMP" in
-        "OK "*) echo "raw link imports match the reference (${IMP#OK })" ;;
-        *) echo "REGRESSION: raw-link import table differs -- $IMP"; rc=1 ;;
-    esac
-
-else
-    echo "imports not measured (build/server.dll missing)"
+then
+    echo "REGRESSION: verification report does not meet project criteria"
     rc=1
 fi
 

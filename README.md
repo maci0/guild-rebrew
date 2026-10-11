@@ -1,5 +1,10 @@
 # Guild Rebrew: Europa 1400 Decompilation
 
+Use Rebrew's current CLI and shipped skills for inventories, source edits and
+verification. [Tooling and upstream changes](docs/tooling-upstream.md) lists the
+remaining project-specific scripts and replacements for retired experiments.
+The vendor build check requires upstream Rebrew with `rebrew library vendor`.
+
 Byte-identical C89 source reconstruction of **Europa 1400: The Guild** (`server.dll`).
 
 Uses the [rebrew](../rebrew/) toolchain for compiler-in-the-loop decompilation matching with MSVC6 in Docker.

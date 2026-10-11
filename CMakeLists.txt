@@ -87,11 +87,10 @@ add_c_warning(parentheses)
 
 # references/zlib and references/minizip must equal their pinned pristine
 # upstream plus references/vendor/<name>/*.patch; any drift stops configure.
-if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/python")
-  set(_VENDOR_PYTHON "${PROJECT_SOURCE_DIR}/.venv/bin/python")
+if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
+  set(_VENDOR_REBREW "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
 else()
-  find_package(Python3 REQUIRED COMPONENTS Interpreter)
-  set(_VENDOR_PYTHON "${Python3_EXECUTABLE}")
+  find_program(_VENDOR_REBREW rebrew REQUIRED)
 endif()
 file(GLOB_RECURSE _VENDOR_INPUTS CONFIGURE_DEPENDS
   "${PROJECT_SOURCE_DIR}/references/vendor/*"
@@ -99,10 +98,11 @@ file(GLOB_RECURSE _VENDOR_INPUTS CONFIGURE_DEPENDS
   "${PROJECT_SOURCE_DIR}/references/zlib/*"
   "${PROJECT_SOURCE_DIR}/references/minizip/*")
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
-  "${PROJECT_SOURCE_DIR}/scripts/vendor.py" ${_VENDOR_INPUTS})
+  ${_VENDOR_INPUTS})
 execute_process(
-  COMMAND "${_VENDOR_PYTHON}" "${PROJECT_SOURCE_DIR}/scripts/vendor.py" check
-          --root "${PROJECT_SOURCE_DIR}" --stage "${CMAKE_BINARY_DIR}/vendor-stage"
+  COMMAND "${_VENDOR_REBREW}" library vendor
+          references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml
+          --root "${PROJECT_SOURCE_DIR}"
   RESULT_VARIABLE _VENDOR_RC)
 if(NOT _VENDOR_RC EQUAL 0)
   message(FATAL_ERROR "Vendored sources differ from pristine upstream + patches")
