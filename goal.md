@@ -4,7 +4,7 @@ Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
 - 2026-10-11 (upstream target discovery and library reference binding):
-  The remaining local CLI fixes are submitted as draft PR21:
+  The remaining local CLI fixes are merged through PR21:
   https://github.com/maci0/rebrew/pull/21. Bare --target/-t lists configured
   targets without running the command; status explains stored data verdicts.
   Explicit placeholder binding accepts managed LIBRARY identities in headers,
@@ -20,18 +20,42 @@ This file is the durable copy: if the session goal state is ever lost, re-create
   source/header/reference inputs and both client stores are unchanged. All3
   coverage documents are refreshed; inherited upstream IDEAS/uv.lock edits
   remain byte-identical. No game source or library bytes changed.
-  PR21 is not merged: remote headc0de16f0 contains the functional fix; the
-  guidance push is running its required full test hook in exec session8639.
-  Revalidate that same handle before any restart. Then confirm remote head
-  0fc33ec5, update the PR body/ready state, wait for every CI job on that head,
-  merge, integrate locally while preserving inherited edits, confirm the
-  compiler hash still720b06bb3e273ca06402aeaecba151248c385765c518061079a9c0e49ff3ad91,
-  and remove the owned temporary worktrees after completion. Checkout:
-  /tmp/rebrew-rename-provenance.20698znm/rebrew. Receipts:
+  PR21 merged as e805497455c285a80c26ea9d13b295aacc6cd85d after all CI jobs
+  passed on final head0fc33ec5, including Python3.13/3.14. Both required
+  pre-push suites passed. Local integration ea6c58ef preserves the inherited
+  IDEAS/uv.lock bytes and resolves the two test conflicts to the tested upstream
+  versions; the committed local tree equals origin/main. Agent/skills are
+  refreshed again, root hooks restored, and both owned temporary worktrees
+  removed. Compiler hash remains
+  720b06bb3e273ca06402aeaecba151248c385765c518061079a9c0e49ff3ad91,
+  so the recorded SERVER measurements remain current. No live push/CI handles
+  remain from this PR. Receipts:
   .scratch/goal21/cli-library-upstream. Client shutdown sharing, both complete
   client raw images/data and faithful discarded SERVER source remain open.
   There is one original server.dll; layout-flag builds are reconstruction
   configurations. Full three-image/shared-source goal stays active.
+
+- 2026-10-12 (shared allocator shutdown probe): a scratch candidate retains the
+  existing SERVER C body and guards only its native pointer-leak log. Scoped
+  client aliases allocate no storage. All3 CLI probes pass without promotion:
+  SERVER283/28 operands and TL/GOLD262/26 operands each. Independent SERVER
+  binding/literal proof reproduces283 native bytes and rejects16 shifted
+  bindings. Independent client proof remains unfinished: the default name map
+  correctly excludes unverified library identifications, and the tracker
+  externs have no stored address mapping. Do not claim unmasked client proof or
+  move/promote the source yet. Next: freeze the old client object's bindings,
+  corroborate them with existing allocator/reporter proofs, compare all new
+  operands/literals and apply rejecting controls, preserve surrounding bodies
+  and the one shared caller, then rehome both rows and retire the old source.
+  Candidate uses the supported CLI/public compile, COFF, library and relocation
+  APIs; no new project tool or assembly was added. Scratch header-context and
+  base-flags-only compile failures are setup failures, not rejected C shapes.
+  Stock formatter evidence also supports Gold's single-threaded LIBC selection;
+  see docs/msvc6-link-layout.md. Full Gold member/link validation remains open.
+  Receipts: .scratch/goal21/shared-allocator-shutdown. Game source, stores,
+  compiler flags, link configuration and raw SERVER image are unchanged.
+  The fresh checkpoint gate passed all 316 functions and 652 data comparisons;
+  all 286,720 raw server bytes equal the one original server.dll.
 
 - 2026-10-11 (attested allocator name and provenance-safe rename): the
   native SERVER diagnostic attests m_alloc(). The shared definition,84 source/

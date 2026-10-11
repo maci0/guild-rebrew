@@ -5670,6 +5670,24 @@ PDB or object set is available, per the user's answer. Receipts:
 `historical-replay.json`. The user separately requested committing all current
 repository changes; run and report the current gate without weakening it.
 
+### Gold formatter archive evidence (2026-10-12)
+
+The allocator shutdown probe's Gold formatter call goes to `0x005de7a2`.
+The native parent matches stock `sprintf.obj`'s 82 bytes outside its relocation
+slots. Stock `swprintf.obj` is 111 bytes; a leading-body match alone cannot name
+the function. The parent calls the narrow `__output` at `0x005e1210`, whose full
+stock body matches, and `__flsbuf` at `0x005e1c1d`.
+
+Both edges match the SP5 Processor Pack image's single-threaded `LIBC.LIB`;
+the flush helper does not match that image's `LIBCMT.LIB`. This corroborates
+the earlier unique 105-byte `free.obj` match from LIBC (the MT body is 233 bytes).
+It supplies three more supported members for the provisional Gold runtime
+selection. The configured link list still names LIBCMT; complete member/import/
+data selection and the Gold raw link must be established before changing it.
+No CRT implementation or archive is edited. Evidence:
+`.scratch/goal21/shared-allocator-shutdown/{narrow-formatters,gold-libc-edges}.json`
+and `.scratch/goal21/stock-free-binding/stock-free-proof.json`.
+
 ### Temporary server layout configuration (2026-10-11)
 
 There is only one original `server.dll`. The configurations below are builds
