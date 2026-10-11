@@ -6,6 +6,29 @@ Current reconstruction checkpoint (2026-10-11):
 > project-specific tools that remain. Preserve these entries as evidence, not as
 > instructions to recreate obsolete helpers.
 
+- 2026-10-12 (shared VFS cleanup and faithful log configuration): all43
+  historical VFS placeholders now require SERVER+REBREW_LEGACY_SERVER_LAYOUT;
+  their measured arguments retain all37 default bodies and full raw server
+  identity. The real gzip diagnostic is unchanged. Both clients and the flag-off
+  build omit these unproven calls; total guarded logs across the three units59.
+  vfs_FreeDirs shares both120-byte native bodies, five operands and four rejecting
+  controls each; its unowned45-line duplicate is retired. Both172-byte shutdowns
+  still match. vfs_fwrite now matches354 native bytes in TL0x430910 and GOLD0x430e30,
+  with four supported call bindings/controls and14 unreachable alignment NOPs.
+  CLI extent repair and score100 shared import preserve the original unit path.
+  Existing original-copy assembly evidence is recorded per target, with no new
+  assembly. TL's incorrect stock fread identity at0x64ed28 is corrected to fwrite
+  using its unique __fwrite_lk child; runtime bytes and fread callers are untouched.
+  TL AddFile remains SIZE_MISMATCH1477/1472; game counts251/3586/2084. Lint keeps
+  zero errors and0/1/38 warnings. The full SERVER gate passes316/652 and every
+  286720 raw byte; all three coverage documents are refreshed. Scope audit:
+  ten existing rows/one new row, two new SOURCE evidence records, no data/types
+  changes. Receipts: .scratch/goal21/shared-vfs-freedirs.
+  Next resolve AddFile's real five-byte body gap and reconcile stock/source
+  gzwrite origins/providers. Native-callee wrapper resolution is recorded as an
+  upstream feature gap. Full client links/data and discarded SERVER fidelity
+  remain open; temporary logs have no original-source provenance.
+
 - 2026-10-12 (shared VFS shutdown): TL0x4310f0 and GOLD0x431510 now use
   canonical vfs_exit in Develop/Units/vfs/vfs.c; its spelling remains inferred.
   Both complete172-byte native bodies pass with16 typed operands, full31-byte

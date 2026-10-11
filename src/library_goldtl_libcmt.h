@@ -147,7 +147,7 @@
 // _fscanf
 
 // LIBRARY: GOLDTL 0x0064ed28
-// _fread
+// _fwrite
 
 // LIBRARY: GOLDTL 0x0064ed57
 // __fwrite_lk

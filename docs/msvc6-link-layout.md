@@ -5699,17 +5699,26 @@ continues. The server target now defines `REBREW_LEGACY_SERVER_LAYOUT` alongside
 the second define in `rebrew-project.toml` and regenerate CMake to compile the
 reconstruction without that workaround. Client target defines are unchanged.
 
-The guards restore the sixteen documented historical placeholder logs in
-`m_alloc.c` and `server.c`, using their historical numeric line arguments. They
+The guards retain sixteen documented historical placeholder logs in
+`m_alloc.c` and `server.c`, plus the43 existing VFS placeholders isolated on
+2026-10-12 (59 total), using their measured historical numeric arguments. VFS
+uses one conditional logging macro; its flag-off/client expansion evaluates no
+arguments and emits no call. The real gzip diagnostic remains an ordinary call.
+All37 default VFS bodies preserve complete bytes, typed bindings and literal
+contents. Flag-off/client changes are confined to the34 affected functions;
+cleanup and write bodies independently match the original clients. These logs
+remain reconstruction debt and are not attested original diagnostics. The guards
 also retain the old DWORD-mask office-affinity expression and omit the recovered
 client treasury formatter from the temporary server object. These are discarded
 server link inputs, not evidence of the original source. The reconstructed
 expressions and formatter remain available when the flag is disabled.
 
-Native MSVC6 compilation checks every function's complete bytes, typed
-relocation bindings and compiler-literal contents: the configuration with the flag
-preserves all 40 historical functions; disabling it preserves all 41 current
-functions for each of the three target profiles. The canonical raw link is
+The initial m_alloc/server isolation checked every function's complete bytes,
+typed relocation bindings and compiler-literal contents: with the flag it
+preserved40 historical functions, while disabling it preserved41 current
+functions per target profile. The later VFS checks preserve all37 default
+functions while intentionally removing only its unproven diagnostics from the
+other configurations. Receipts: `.scratch/goal21/shared-vfs-freedirs`. The canonical raw link is
 286720 bytes and matches the reference SHA256
 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
 Stock CRT archives, linker rules, reference images and the gate are unchanged.

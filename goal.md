@@ -3,6 +3,51 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (VFS legacy logs isolated and cleanup shared): all43 existing
+  VFS placeholder log calls now use the existing SERVER+legacy-layout guard.
+  Historical numeric arguments preserve all37 default SERVER bodies; the real
+  gzip diagnostic at line0x5b4 is unchanged. Layout-flag-off and client builds
+  omit the unproven calls. Changes in34 bodies per configuration are scoped to
+  those logged functions and the verified cleanup/shutdown bindings; the three
+  mapped native SERVER bodies remain unchanged. No new assembly, compiler flag,
+  library edit or storage owner is introduced. There are now59 historical logs
+  behind the flag across m_alloc/server/VFS; their provenance remains unproven.
+  TL0x42fc50 and GOLD0x430260 now share vfs_FreeDirs. Frozen old operands prove
+  both complete120-byte bodies/five operands/41 reachable instructions, with four
+  rejecting binding controls each. The unowned45-line duplicate Node/body is
+  retired through CLI rehome and a complete ownership audit. Shutdown still
+  matches both172-byte bodies,16 operands and full literals after calling the
+  canonical cleanup directly instead of its numeric placeholder.
+  Removing fake write diagnostics exposes vfs_fwrite's complete354-byte native
+  body in TL0x430910, followed by14 unreachable NOPs. Rebrew fix-sizes repairs
+  the old368-byte extent; the full134-instruction CFG and four native library
+  call bindings match with four rejecting controls. Stock/source probes identify
+  deflate,crc32,gzwrite and fwrite. The TL CRT wrapper was mislabeled fread:
+  both wrapper templates match, but its unique __fwrite_lk child and all47 wrapper
+  bytes/three rejecting controls establish fwrite. The managed identity and
+  header comment are corrected without changing runtime code or fread callers.
+  The shared import into GOLD0x430e30 scores100 and preserves the original unit
+  path; its complete354 bytes/four independently supported calls/134 instructions
+  and14 trailing NOPs are verified too. Positive evidence for the existing copy
+  assembly is recorded through document-assembly for both targets, independently
+  of byte agreement; no assembly is added. TL's old write blocker is cleared.
+  Client unit checks retain all cleanup/shutdown matches and both new write
+  matches. TL vfs_AddFile remains honestly SIZE_MISMATCH1477/1472, improved from
+  1526/1472; no flags or false verdict are accepted. Counts are251/3586/2084.
+  Lint retains0 errors and0/1/38 warnings. The full SERVER gate passes316/316
+  functions,652/652 data comparisons, all structural/import/Wine/library/toolchain
+  checks and all286720 raw bytes. All three coverage documents are refreshed.
+  The final audit scopes10 existing changed rows and one new Gold write row;
+  only the two write assembly-evidence records are added to SOURCE. Data/types
+  and every other prior verdict, size, compiler flag and provenance record stay
+  unchanged. Receipts: .scratch/goal21/shared-vfs-freedirs.
+  Native-callee resolution for ambiguous archive wrappers is recorded upstream
+  as a reusable feature gap in local upstream commit e08fe178 (not pushed).
+  Only that append was staged; existing private IDEAS content and uv.lock are
+  preserved. Zlib probes also expose legacy gzwrite game identities requiring
+  provider/origin cleanup, rather than new reversing. Full client images/data,
+  AddFile matching and faithful discarded SERVER source remain unfinished.
+
 - 2026-10-12 (shared VFS shutdown): TL0x4310f0 and GOLD0x431510 now bind
   the existing vfs_exit body in Develop/Units/vfs/vfs.c. Its name remains
   inferred. Scoped client declarations refer to existing storage and native

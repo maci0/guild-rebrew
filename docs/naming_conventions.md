@@ -1278,9 +1278,9 @@ broadcast.c). TL VA from the sweep table or the definition's comment.
 | `vfs_FindFile` | `Units/vfs/vfs.c` | see source |
 | `vfs_FinishFiles` | `Units/vfs/vfs.c` | see source |
 | `vfs_ForEachFile` | `Units/vfs/vfs.c` | 0x430f70 |
-| `vfs_FreeDirs` | `Units/vfs/vfs.c` | see source |
+| `vfs_FreeDirs` (inferred) | `Units/vfs/vfs.c` | TL 0x42fc50 / GOLD 0x430260 |
 | `vfs_ftell` | `Units/vfs/vfs.c` | 0x430c50 |
-| `vfs_fwrite` | `Units/vfs/vfs.c` | 0x430910 |
+| `vfs_fwrite` (inferred) | `Units/vfs/vfs.c` | TL 0x430910 / GOLD 0x430e30 |
 | `vfs_GetDirPath` | `Units/vfs/vfs.c` | see source |
 | `vfs_GetDirPathOf` | `Units/vfs/vfs.c` | see source |
 | `vfs_GetFilePath` | `Units/vfs/vfs.c` | see source |
