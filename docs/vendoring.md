@@ -55,9 +55,10 @@ The client inventory also binds these verified native bodies to the canonical
 | `gzrewind` | `0x45f9e0` | `0x4635e0` | 112 bytes |
 | `gzread` | `0x45f380` | `0x463100` | 555 bytes TL, 556 Gold |
 | `getLong` | `0x45fa90` | `0x463670` | 65 bytes |
+| `destroy` | `0x45f2c0` | `0x463050` | 177 bytes TL, 176 Gold |
 
 Unique stock-source matches and complete native-byte/operand controls support
-these bindings. Four duplicate source files are retired; the seek caller
+these bindings. Verified duplicate source files are retired; the seek caller
 keeps its compiled bytes and typed operands after binding the canonical name.
 Gold's caller remains a size mismatch (449 compiled bytes versus 464 native).
 The `gzwrite` definition is identical to pristine 1.1.3. These bodies do not
@@ -101,6 +102,14 @@ retired without changing callers, flags, vendor source or data. Before/after
 objects preserve all 44 surrounding vendor bodies. Fresh measurements are
 RELOC65 in both; this is library attribution, not game reversing. Receipts:
 `.scratch/goal21/gz-getlong-source-ownership/`.
+
+Gold's private `destroy` now uses canonical `gzio.c`, retiring the copied
+`vfs_CloseStream` stand-in and its manual errno declaration. Complete native
+176-byte/9-operand/71-instruction checks and five rejecting bindings match;
+indexing the Gold objects plus stock LIBC supports all eight direct calls.
+The fresh result is RELOC176, with all 22 surrounding vendor bodies unchanged.
+No caller, vendor source, flags, data or storage changes are introduced.
+Receipts: `.scratch/goal21/gz-destroy-source-ownership/`.
 
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by

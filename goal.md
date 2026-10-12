@@ -3,6 +3,22 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (canonical Gold gzip cleanup): GOLD463050 binds unchanged
+  gzio.c private destroy as LIBRARY, replacing the unowned vfs_CloseStream
+  copy and its manual errno declaration. Fresh old/canonical objects match
+  all176 native bytes,9 typed operands,5 rejecting bindings and71 reachable
+  instructions. The built-in resolver supports all8 direct calls with the
+  Gold library objects and stock LIBC. All22 surrounding vendor bodies remain
+  identical; the fresh CLI result is RELOC176. Exactly one library identity
+  changes; every status/size/flag, other identity and data/types/SOURCE is
+  preserved. No caller, vendor source, storage or assembly changes. All three
+  coverage documents are refreshed; lint retains0 errors and0/1/38 warnings.
+  Full SERVER gate passes316/652, all structural/Wine/library/toolchain axes
+  and every286720 raw byte. This is library-origin cleanup, not game reversing.
+  Remaining copied gzip helpers, complete vendor fork, client raw images/data
+  and faithful discarded SERVER source remain unfinished. Receipts:
+  .scratch/goal21/gz-destroy-source-ownership.
+
 - 2026-10-12 (canonical gzip integer reader): TL45fa90 and GOLD463670
   bind unchanged gzio.c's getLong as LIBRARY. Both complete65-byte bodies,
   four typed calls to independently supported get_byte, one rejecting binding

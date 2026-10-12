@@ -1,5 +1,17 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- Gold private gzip cleanup at463050 uses canonical gzio.c destroy as LIBRARY.
+  Complete176-byte native bodies,9 operands,5 rejecting bindings and71 reachable
+  instructions match; the built-in resolver supports all8 direct calls when
+  indexed with Gold objects and stock LIBC. The copied vfs_CloseStream/errno
+  stand-in is retired after the owner/caller audit; all22 vendor bodies and
+  every verdict/size/flag/data/type/SOURCE fact remain unchanged. Fresh CLI
+  result is RELOC176. All3 coverage documents are refreshed; lint retains
+  0 errors0/1/38 warnings. Full SERVER gate passes316/652, all structural/Wine/
+  library/toolchain checks and every286720 raw byte. Remaining gzip copies
+  and full client/source fidelity work stay open. Receipts:
+  `.scratch/goal21/gz-destroy-source-ownership/`.
+
 - Canonical gzip integer reader: both65-byte getLong identities bind unchanged
   gzio.c as LIBRARY after complete native-byte, operand and reachable-flow
   checks. All four native get_byte calls are supported by the built-in resolver
