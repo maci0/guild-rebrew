@@ -1,10 +1,16 @@
+void __cdecl fcn_00438b40(char*, int*);
+void __cdecl fcn_004053a0(void*, int);
+void __cdecl fcn_00403e20(void*, int);
+void __cdecl fcn_004033e0(void*);
+#ifdef REBREW_GOLD
+void __cdecl fcn_00453270(char*);
+#endif
 #include <stdio.h>
 #include <string.h>
 #include "ch_motion.h"
 
 #include "../../Units/d3/d3_object.h"
 
-/* These helpers have no shared managed definition for both native builds yet. */
 #ifdef REBREW_GOLD
 #define fcn_00443900 fcn_00447fd0
 #define fcn_00413190 fcn_00411be0
@@ -19,6 +25,30 @@ void __cdecl fcn_00402aa0(char*);
 void __cdecl fcn_0040cfb0();
 char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
+
+extern void* g_14d0020[];
+
+void __cdecl ch_SetPosition(char* a1, float* a2, int flag)
+{
+	fcn_00438b40(*(char**) (a1 + 0x34), (int*) a2);
+#ifdef REBREW_GOLD
+	if (flag != 0) {
+		fcn_00453270(*(char**) (a1 + 0x34));
+	}
+#endif
+	fcn_004053a0(a1, 0);
+	if (*(int*) ((char*) a1 + 0x124) != 0) {
+		fcn_00403e20(a1, 0);
+#ifdef REBREW_GOLD
+		if (flag != 0) {
+			fcn_00453270(**(char***) (a1 + 0x124));
+		}
+#endif
+	}
+	if (*(int*) ((char*) a1 + 0x22c) != 0) {
+		fcn_004033e0(a1);
+	}
+}
 
 int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe)
 {
@@ -82,4 +112,37 @@ int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy, uns
 		*(int (__cdecl**)()) (g_6b7e98 + 0xc60) = (int (__cdecl*)()) TakeObjectScript;
 	}
 	return 0;
+}
+
+void __cdecl ch_UpdatePendingPositions(void)
+{
+	char** p;
+	char* obj;
+	char* task;
+	float position[4];
+	float value;
+
+	p = (char**) g_14d0020;
+	do {
+		obj = *p;
+		if (obj != 0 && (obj[0x8c] & 1) != 0
+		    && *(int*) (obj + 0x88) == g_67a370) {
+			value = *(float*) (*(char**) (obj + 0x34) + 0x4c);
+			position[0] = value + *(float*) (obj + 0x54);
+			value = *(float*) (*(char**) (obj + 0x34) + 0x50);
+			position[1] = value + *(float*) (obj + 0x58);
+			value = *(float*) (*(char**) (obj + 0x34) + 0x54);
+			position[2] = value + *(float*) (obj + 0x5c);
+			task = *(char**) (obj + 0x128);
+			if (task != 0) {
+				if (task[9] != '-') {
+					ch_SetPosition(obj, position, 0);
+				}
+			} else {
+				ch_SetPosition(obj, position, 0);
+			}
+			obj[0x8c] &= ~1;
+		}
+		p++;
+	} while ((int) p < (int) ((char**) g_14d0020 + 0x300));
 }

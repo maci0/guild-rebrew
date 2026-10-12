@@ -1,10 +1,10 @@
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 // FUNCTION: GOLD 0x0040cf10
 // FUNCTION: GOLDTL 0x0040de40
 
 extern float g_662d40[3];
 extern char* g_6b7e98;
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
-void __cdecl fcn_00402ab0(char* obj, float* v, int flag);
 void __cdecl fcn_00455140(char* src, float* v, float* out);
 float __cdecl fcn_00451380(float* a, float* b);
 void __cdecl fcn_00438cb0(int h, float* v);
@@ -21,7 +21,7 @@ int __cdecl fcn_0040de40(char** a, char** b)
 		return 1;
 	}
 	fcn_00455350(*b, *b + 0x4c, p);
-	fcn_00402ab0(*a, p, 1);
+	ch_SetPosition(*a, p, 1);
 	v[0] = 0.0f;
 	v[1] = 0.0f;
 	v[2] = 0.0f;

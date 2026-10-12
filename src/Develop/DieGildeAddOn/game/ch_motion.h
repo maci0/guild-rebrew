@@ -14,6 +14,9 @@ extern char* g_6b7ebc;
 extern char* g_6b7e98;
 extern int g_6791c8;
 
+void __cdecl ch_SetPosition(char* obj, float* position, int flag);
+void __cdecl ch_UpdatePendingPositions(void);
+
 int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe);
 int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy,
     unsigned char* level, char** func);

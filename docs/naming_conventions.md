@@ -1619,3 +1619,17 @@ native operand controls reject;
 all four client helper bodies exactly retain 206 bytes. Names, declaration
 ownership and removal of the compatibility bindings remain reconstruction
 work. Evidence: `.scratch/goal21/shared-allocator-helpers/`.
+
+### Deferred character position updates (2026-10-12)
+
+`ch_UpdatePendingPositions` (TL403040/Gold402800) and `ch_SetPosition`
+(TL402ab0/Gold4025c0) are inferred from their complete native bodies, not attested
+strings. The update loop visits 768 character slots, checks the dirty position
+bit and active universe, adds local offsets to the model position, respects the
+task marker and clears the dirty bit. One shared loop matches all 149 bytes in
+both clients. The setter takes a character, float vector and flag; Gold uses the
+flag for two extra model updates, while TL ignores it. Those conditional calls
+match the 118-byte Gold and 72-byte TL bodies. Both functions belong to the shared
+`game/character.c`; declarations are canonical in `ch_motion.h`. The address-named
+character table stays a declaration without a new storage-owner claim. Receipts:
+`.scratch/goal21/character-pending-positions/`.

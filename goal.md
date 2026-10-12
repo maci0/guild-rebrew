@@ -3,6 +3,22 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (shared deferred character positions): revalidated clean1510060e.
+  New inferred ch_UpdatePendingPositions source matches full149-byte TL403040;
+  scalar float temporary earns original x87 order with default flags. Builtin
+  related importer scores100 for Gold402800, shares the source and verifies
+  RELOC149; complete typed operands/rejecting controls/CFG independently agree.
+  Native parent exposes three setter arguments. TL402ab0 ignores third flag;
+  Gold4025c0/118 adds two flag-controlled model calls. One conditional shared
+  ch_SetPosition body matches72TL/118Gold, retires standalone source and corrects
+  pointer/vector declarations. Both inferred names use canonical ch_motion.h;
+  CLI rename covers all modules, with18 complete bodies/typed operands preserved
+  across12 contexts. Existing five baseline bodies stay unchanged; all8 shared
+  functions pass fresh RELOC. No flags/asm/storage/type workaround or extra data
+  verdict is introduced. Full server gate316/652/every raw byte passes. Complete
+  three-image/shared-source goal remains unfinished. Receipts:
+  .scratch/goal21/character-pending-positions.
+
 - 2026-10-12 (upstream pointer-returning K&R inventory fix): PR28 merged
   as3588ddd6f19a9804922c993aab1ba312bf479f55 after full local makepr-check
   (11776 passed/51 skipped,88% coverage; hooks, lint/types, package parity,

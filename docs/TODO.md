@@ -1,5 +1,15 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- Shared deferred character positions now match TL403040/Gold402800,149 bytes
+  each; builtin related import scores100 and destination independently verifies.
+  Setter ch_SetPosition is one shared three-argument body: TL72/Gold118, with
+  evidenced Gold-only flag calls. It retires the standalone copied helper. All8
+  shared bodies pass RELOC;18 full bodies/typed operands across12 rename/header
+  build contexts stay unchanged. No flags, asm, storage or type workaround.
+  Names are inferred; canonical declarations live in ch_motion.h. Full server
+  gate passes316/652/raw identity. Client raw images/data and remaining source
+  fidelity remain open. Receipts: `.scratch/goal21/character-pending-positions/`.
+
 - Upstream PR28 is merged and installed: pointer-returning K&R definitions
   now appear in function inventories, including gzgets/gzerror. All24 compiler
   functions match the parsed unique names. Full local/push/CI gates pass; private
