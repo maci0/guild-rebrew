@@ -109,3 +109,41 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.draw_part".GOLD.offsets]
 name = 16
+
+[types."d3.animation-options".GOLDTL]
+file = "src/Develop/Units/d3/d3_animation.h"
+symbol = "D3_ANIMATION_OPTIONS"
+size = 12
+native_size = 12
+extent = "allocation"
+evidence = "TL ch_Updatelowpoly 0x403700 allocates and copies three DWORDs as the by-value animation options argument at call 0x403729; existing ch_AttachMotion and preload callers use the same twelve-byte bitfield layout. Names are inferred."
+cflags = "/O2 /Gd"
+source_hash = "e35a46bc649c1c8c8da4271f3d249f1b5b06e42837ee3f44bb3be5a2bfe829cd"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "a3fc0ca67a565ad476a03f1ac4a382285300222afcaf59feee19e78df15495bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."d3.animation-options".GOLDTL.offsets]
+mode = 0
+layer = 1
+pad2 = 2
+pad8 = 9
+
+[types."d3.animation-options".GOLD]
+file = "src/Develop/Units/d3/d3_animation.h"
+symbol = "D3_ANIMATION_OPTIONS"
+size = 12
+native_size = 12
+extent = "allocation"
+evidence = "Shared with the verified Gold ch_AttachMotion and motion-preload callers: three DWORDs copied as the by-value animation options argument. The complete surrounding Gold COFF bodies are checked against the prior definitions; names are inferred."
+cflags = "/O2 /Gd"
+source_hash = "e35a46bc649c1c8c8da4271f3d249f1b5b06e42837ee3f44bb3be5a2bfe829cd"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "2a7db1959c941783ee249b1b7bc77906350a1316f64ca32fd301bff0f2d659b3"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."d3.animation-options".GOLD.offsets]
+mode = 0
+layer = 1
+pad2 = 2
+pad8 = 9

@@ -2,24 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 
-// SIZE 0xc
-struct animopt_404a00 {
-	unsigned char mode;
-	unsigned char layer;
-	unsigned char pad2[2];
-	unsigned int loop : 1;
-	unsigned int reverse : 1;
-	unsigned int pad4 : 30;
-	unsigned char blend : 1;
-	unsigned char queue : 1;
-	unsigned char pad8[3];
-};
+#include "../../Units/d3/d3_animation.h"
 
 int __cdecl fcn_0065f220(const char*, const char*);
 void __cdecl fcn_0042e540(char*);
 int __cdecl fcn_00433ba0(char*);
 void __cdecl fcn_0044c620(char*, char*, char);
-char* __cdecl fcn_00434970(char*, char*, struct animopt_404a00);
+char* __cdecl fcn_00434970(char*, char*, D3_ANIMATION_OPTIONS);
 void __cdecl fcn_00435500(char*, char*);
 
 
@@ -31,7 +20,7 @@ void __cdecl fcn_00404a00(char* obj, int n, ...)
 	va_list ap;
 	char* name;
 	char looped;
-	struct animopt_404a00 opt;
+	D3_ANIMATION_OPTIONS opt;
 	char ani[0x100];
 	char path[0x100];
 
@@ -71,7 +60,7 @@ void __cdecl ch_PreloadModelMotions(char* model, int n, ...)
     int i;
     va_list ap;
     char* name;
-    struct animopt_404a00 opt;
+    D3_ANIMATION_OPTIONS opt;
     char ani[0x100];
     char path[0x100];
 
@@ -117,7 +106,7 @@ void __cdecl ch_FinishAni(char* obj)
     char* node;
     char* ani;
     char* stream;
-    struct animopt_404a00 opt;
+    D3_ANIMATION_OPTIONS opt;
     char name[0x60];
 
     node = *(char**) (obj + 0x34);

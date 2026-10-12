@@ -1,3 +1,5 @@
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
+
 // FUNCTION: GOLD 0x00402af0
 // FUNCTION: GOLDTL 0x00403330
 
@@ -9,7 +11,6 @@ void __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_00413120(int h);
 void __cdecl fcn_00442be0(int h);
 void __cdecl fcn_00403870(char* e);
-void __cdecl fcn_004033e0(char* e);
 
 void __cdecl fcn_00403330(unsigned char mode)
 {
@@ -31,7 +32,7 @@ void __cdecl fcn_00403330(unsigned char mode)
 				}
 			} else if ((mode == 0 || mode == 1) && *(int*) (e + 0x22c) == 0) {
 				fcn_00403870(e);
-				fcn_004033e0(e);
+				ch_Updatelowpoly(e);
 			}
 		}
 		p++;

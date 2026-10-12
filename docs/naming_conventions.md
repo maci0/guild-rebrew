@@ -1648,3 +1648,28 @@ bytes agree in each client. The10 previous surrounding bodies remain unchanged.
 Declarations are canonical in `ch_motion.h`; native callee spellings, field
 names and storage ownership remain unresolved. Receipts:
 `.scratch/goal21/character-pending-positions/attachment/`.
+
+### Low-polygon character updates and animation options (2026-10-12)
+
+The native TL diagnostic attests the exact spelling `ch_Updatelowpoly()` at
+TL4033e0. Its partial C reconstruction now lives in shared `game/character.c`,
+and four callers use the canonical declaration in `ch_motion.h`. The native
+body is1156 bytes; the inventory's1168-byte span includes12 alignment bytes.
+The current default-flags object emits1150 bytes and remains SIZE_MISMATCH.
+Detailed/low-polygon block ordering and pointer reuse still need matching; no
+complete byte-match, proof, Gold counterpart binding or new data verdict is
+claimed. The stock CRT supplies strstr/sprintf.
+
+The two identical private animation-option definitions are replaced by one
+inferred `D3_ANIMATION_OPTIONS` in `Units/d3/d3_animation.h`. Both client
+compilers check sizeof12 and offsets mode0/layer1/pad2=2/pad8=9; native calls
+pass three DWORDs by value. All eight old animation bodies and typed operands,
+and all24 surrounding bodies across12 contexts, are unchanged. The type and
+field spellings remain inferred; this argument layout allocates no global
+storage. Receipts: `.scratch/goal21/character-lowpoly/`.
+
+Broader checks also confirm that Gold40cba0/40cf10 already matched their full
+55/183-byte bodies: both catalog sizes included nine trailing alignment NOPs.
+All13 typed operands and rejecting bindings agree. Corrected size metadata
+removes those pre-existing SIZE_MISMATCH verdicts without changing their C or
+introducing a new function identity.

@@ -3,6 +3,30 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (lowpoly source and canonical animation argument): clean5c246c1e
+  revalidated. TL4033e0 attests original spelling ch_Updatelowpoly. Partial C
+  now lives in character.c with canonical four caller declarations; native body
+  is1156 bytes plus12 alignment bytes. Default flags emit1150, still explicitly
+  SIZE_MISMATCH with recorded block-order/pointer-reuse blocker. No full-body
+  byte proof, Gold row or additional data verdict is claimed. Two duplicate
+  option types become one inferred D3_ANIMATION_OPTIONS, sizeof12 and non-bit
+  member offsets checked by both compilers; eight animation and all24 surrounding
+  bodies/typed operands remain unchanged. Broader header checks confirm two
+  pre-existing Gold catalog sizes include nine NOPs each:40cba0/55,40cf10/183.
+  All13 operands/rejecting controls/full native bodies agree; corrected CLI sizes
+  remove these mismatches without C changes. Further matching/Gold transfer remain
+  open. Builtin in-place climb found no winning swaps; dry-run fails on staging
+  relative includes, an upstream fix to pursue rather than a project tool.
+  Current client stored data verdicts remain0/284 TL and0/243 Gold; initialized
+  byte inventories leave333066/278184 untracked. Full linked client data/image
+  verification, vendor patches and faithful discarded server source remain open.
+  All22 remaining annotated source checks pass after the padding repairs;
+  existing10 shared character bodies pass, while the new TL helper remains
+  unmatched. Both type-check runs pass; client lint retains0 errors/1TL/38Gold
+  warnings and coverage is refreshed. Adding the header refreshes server input
+  receipts; the full gate passes316/652/all axes and raw286720-byte identity.
+  Receipts: .scratch/goal21/character-lowpoly.
+
 - 2026-10-12 (shared attached character model positioning): clean4b90ed12
   revalidated. One inferred ch_UpdateAttachedModelPosition body matches complete
   TL403e20/Gold403620,801 bytes each, using default flags. Builtin related import

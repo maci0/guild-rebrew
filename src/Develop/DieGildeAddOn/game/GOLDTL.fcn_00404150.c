@@ -7,18 +7,7 @@ struct kind_404150 {
 	char name[0x47];
 };
 
-// SIZE 0xc
-struct animopt_404150 {
-	unsigned char mode;
-	unsigned char layer;
-	unsigned char pad2[2];
-	unsigned int loop : 1;
-	unsigned int reverse : 1;
-	unsigned int pad4 : 30;
-	unsigned char blend : 1;
-	unsigned char queue : 1;
-	unsigned char pad8[3];
-};
+#include "../../Units/d3/d3_animation.h"
 
 #include "../../../client_types.h"
 extern Entry_14d0c40 g_14d0c40[];
@@ -27,7 +16,7 @@ extern int g_675318;
 void __cdecl fcn_0042e540(char*);
 int __cdecl fcn_00433ba0(char*);
 void __cdecl fcn_0044c620(char*, char*, int);
-char* __cdecl fcn_00434970(char*, char*, struct animopt_404150);
+char* __cdecl fcn_00434970(char*, char*, D3_ANIMATION_OPTIONS);
 int __cdecl fcn_00413190(int);
 
 // FUNCTION: GOLD 0x00403950
@@ -36,7 +25,7 @@ int __cdecl fcn_00413190(int);
 /* Attaches the named motion of a character kind to an object. */
 char* __cdecl ch_AttachMotion(char* obj, int kind)
 {
-	struct animopt_404150 opt;
+	D3_ANIMATION_OPTIONS opt;
 	char* anim;
 	char ani[0x110];
 	char path[0x110];

@@ -1,5 +1,33 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- Native TL4033e0 attests ch_Updatelowpoly. Partial source is consolidated in
+  character.c with canonical callers, but still emits1150/1156 bytes and remains
+  SIZE_MISMATCH. Resolve detailed/lowpoly trace order and pointer reuse; only
+  then transfer the confirmed Gold402ba0 counterpart. No byte-match claim.
+  D3_ANIMATION_OPTIONS replaces two duplicate definitions, with compiler-checked
+  sizeof12/member offsets in both clients and all24 surrounding bodies/operands
+  preserved. Broader header checks expose two pre-existing Gold size errors:
+  helpers40cba0/55 and40cf10/183 each end in nine alignment NOPs. Full native
+  bodies/13 typed operands/rejecting controls independently agree; CLI sizes
+  are corrected without changing their C. All22 affected source checks pass;
+  the new TL helper remains unmatched. Full server gate316/652/raw identity
+  and both type checks pass; client lint remains0 errors/1TL/38Gold warnings.
+  Receipts: `.scratch/goal21/character-lowpoly/`.
+
+- Client data remains unverified: current status reports0/284 TL and0/243 Gold
+  stored verdicts. TL has2314 unchecked initialized bytes and333066 untracked
+  bytes; Gold has1888 unchecked and278184 untracked. These are inventory and
+  verification gaps, not measured drift. Establish real storage owners, complete
+  extents and linked client images before recording verdicts. Server data remains
+  652/652 matched. Status receipts are in the lowpoly scratch directory.
+
+- Upstream matching gap found during this reconstruction: climb --dry-run moves
+  the source into .rebrew/climb and loses its original relative-include search
+  directory, so a source that rebrew test compiles fails the dry-run baseline.
+  In-place climb compiles and restores the same source (no winning moves).
+  Fix staged compilation to preserve the original include context upstream;
+  also label aligned scores as scores rather than matched-byte counts.
+
 - Shared attached character model positioning now matches all801 bytes in
   TL403e20/Gold403620. One body and canonical unsigned-byte force declaration
   replace the two caller-local prototypes. All17 operands,14 rejecting controls,
