@@ -23,10 +23,13 @@ This file is the durable copy: if the session goal state is ever lost, re-create
   returns to zero errors and0/1/38 warnings. Audit scopes six client rows and
   316 SERVER measurement refreshes; all statuses/sizes/flags, other function
   rows, data and SOURCE are preserved. Upstream native-callee matching is
-  committed as f840368c, PR26 awaiting two Python CI jobs; full local release
+  merged by PR26 as01649b1a with all seven CI checks successful; full local release
   gates pass11760 tests/52 skips, packaging, reproducibility, provenance and
   required hooks. Its128 focused checks and real fwrite control pass; templates
-  and skills document the built-in path. Remaining copied gzip helpers have
+  and skills document the built-in path. Local Rebrew is updated, private
+  IDEAS/uv.lock and project Naming rules preserved, hooks restored and owned
+  checkouts retired. Scaffold drift is zero and the final merged-tooling
+  SERVER gate passes all axes with unchanged raw bytes. Remaining gzip helpers have
   canonical native proofs but still need cleanup. Full client raw images/data,
   exact complete vendor fork and faithful discarded SERVER source remain open.
   Receipts: .scratch/goal21/gold-crt-provider.

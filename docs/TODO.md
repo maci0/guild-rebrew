@@ -16,8 +16,12 @@ Current reconstruction checkpoint (2026-10-12):
   Audit preserves all verdicts/sizes/flags, data/SOURCE and other function rows;
   six client rows and316 SERVER measurement refreshes are scoped. Upstream
   PR26 adds conservative native-callee evidence and workflow/template guidance:
-  full local release gates11760 pass52 skip,128 focused passes; CI/merge pending.
-  Next: finish PR26/integration, then retire verified gzip-family copies through
+  full local release gates11760 pass52 skip,128 focused passes; all seven CI
+  checks pass and PR26 is merged as01649b1a. Actual Rebrew is updated with
+  private files preserved, normal hooks restored and owned checkouts removed.
+  Agent guidance is refreshed with Naming rules intact and zero scaffold drift;
+  the final merged-tooling SERVER gate again passes every axis and raw byte.
+  Next: retire verified gzip-family copies through
   complete caller/data ownership audits. Full client images/data, remaining
   vendor patches and faithful discarded SERVER source remain unfinished.
   Receipts: `.scratch/goal21/gold-crt-provider/`.

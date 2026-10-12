@@ -28,6 +28,11 @@ Check library attribution before implementing a function. Use `rebrew library sc
 `rebrew library crt-match`, and whole-body `rebrew library match` against the linked archive
 when available. A signature miss is inconclusive. Library bytes contribute to
 accounted `.text`, but library functions do not count as reversing progress.
+Masked wrappers can share bytes with unrelated code. Use
+`rebrew library match --va 0x<VA> --resolve-callees --json` with the same
+archive/build database to check known direct callees. Inspect `callee_resolution`;
+unresolved edges and aliases remain candidates, and a match does not establish
+the actual linked provider without a raw link map.
 
 ## Choose Existing Tools Before Writing Scripts
 
