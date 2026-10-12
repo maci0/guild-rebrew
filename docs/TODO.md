@@ -1,13 +1,22 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- TL uses pristine zlib 1.1.3 minigzip.c for six verified library functions,
+  replacing five copied files and identifying the missing192-byte gz_compress.
+  All1229 native function bytes, typed bindings and15 complete literals agree;
+  all six fresh tests pass RELOC. Stock CRT exit is noreturn; three dead main
+  epilogue bytes still match exactly. The sample owns COMMON4 prog in virtual
+  .data at0x1040498; built-data verification and raw client links remain pending.
+  Gold has no matching sample-specific strings in the bounded search, so no
+  counterpart is claimed. Full SERVER gate passes316/652 and every raw byte;
+  all3 coverage documents refreshed, with client lint unchanged at1/38 warnings
+  and0 errors. Receipts: `.scratch/goal21/minigzip-source-ownership/`.
+
 - TL97-byte gzsetparams uses canonical gzio.c after complete native-byte/
   operand/flow checks; the built-in resolver supports both stock/source callees.
   The unowned copy is retired, all22 vendor bodies and existing verdicts/sizes/
   flags/other stores preserved, fresh RELOC97. All3 coverage refreshed; lint
   0 errors0/1/38 warnings. Full SERVER gate passes316/652 and every raw byte.
-  Pristine minigzip file_compress/file_uncompress have complete native matches
-  in a read-only probe; main is rejected. Keep those copies/provider scope
-  pending further checks, rather than infer a complete sample source match.
+  The initial minigzip CFG rejection is resolved in the checkpoint above.
   Full client/source fidelity work remains open. Receipts:
   `.scratch/goal21/gzsetparams-source-ownership/`.
 

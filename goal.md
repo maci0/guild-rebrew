@@ -3,6 +3,26 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (pristine minigzip sample source): after revalidating the clean
+  b9205a11 tree, six complete TL native bodies match unchanged zlib1.1.3
+  minigzip.c: error37, gz_compress192, gz_uncompress173, file_compress177,
+  file_uncompress233 and main417. Five existing bodies/typed operands remain
+  unchanged; all15 complete literals match143 native bytes. The earlier CFG
+  rejection was a helper limitation: verified stock LIBCMT exit does not return,
+  and main has three dead compiler pop bytes which also match exactly. Five
+  copies are retired; six identities now use canonical LIBRARY source, including
+  one newly cataloged function. Fresh CLI tests pass six RELOC. COMMON4 prog
+  has one real source owner at0x1040498 in zero-filled virtual .data, without
+  a fabricated data verdict. Gold sample-string search is empty; the related
+  importer correctly excludes library donors, so no Gold counterpart is claimed.
+  No compiler, vendor, archive or assembly workaround is introduced. Full client
+  images/data, remaining vendor patches and faithful discarded SERVER source
+  remain unfinished. Full SERVER gate passes316/652 and raw identity; client
+  lint retains0 errors and1TL/38Gold warnings. All3 coverage documents refreshed;
+  scope audit confirms only six function identities and one new unverified data
+  object changed, with flags/types/vendor/other rows untouched. Receipts:
+  .scratch/goal21/minigzip-source-ownership.
+
 - 2026-10-12 (canonical gzip parameter setter): TL45f0a0 binds unchanged
   gzio.c gzsetparams as LIBRARY. Complete97 native bytes,2 typed calls with
   independently supported fwrite/deflateParams,2 rejecting bindings and34

@@ -16571,3 +16571,16 @@ section = ".bss"
 note = "Existing extern declaration only, not a source storage-owner claim. Complete native tracking-check operands identify this four-byte scalar/pointer in the PE zero-filled .data tail. Legacy address-derived declaration spelling retained; original name and definition owner remain unresolved. The pointer cell extent is four bytes, not the heap array extent."
 updated_by = "rehome"
 updated_at = "2026-10-11T09:51:56+00:00"
+
+["GOLDTL.0x01040498"]
+name = "prog"
+type = "char *"
+size = 4
+section = ".data"
+file = "references/zlib-1.1.3/minigzip.c"
+marker_type = "GLOBAL"
+storage_kind = "object"
+link_symbol = "_prog"
+note = "Pristine minigzip.c char *prog is COMMON4 in its x86 COFF; six complete native function relocations establish VA 0x01040498. Uninitialized object lies wholly in zero-filled virtual .data tail. One source definition; raw client link and built-data verification pending."
+updated_by = "data"
+updated_at = "2026-10-12T02:46:18+00:00"

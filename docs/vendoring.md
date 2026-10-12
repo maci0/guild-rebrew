@@ -133,10 +133,25 @@ TL `gzsetparams` also uses unchanged `gzio.c`. Its complete 97 native bytes,
 two typed calls and rejecting controls, and all 34 reachable instructions match;
 the built-in resolver supports `fwrite` and `deflateParams`. Its unowned copy
 is retired, all 22 vendor bodies are preserved, and the fresh result is RELOC97.
-No corresponding Gold identity is asserted. A read-only pristine `minigzip.c`
-probe matches the complete native `file_compress` and `file_uncompress` bodies,
-but rejects `main`; those sample-code copies remain pending further evidence.
-Receipts: `.scratch/goal21/gzsetparams-source-ownership/`.
+No corresponding Gold identity is asserted. Receipts:
+`.scratch/goal21/gzsetparams-source-ownership/`.
+
+TL also contains the unchanged zlib 1.1.3 `minigzip.c` sample. Its six complete
+native bodies (37/192/173/177/233/417 bytes) and every typed relocation match;
+fifteen complete compiler literals match their 143 native bytes. Five copied
+sources are retired and the previously uncataloged `gz_compress` gains a
+verified source identity. All six freshly pass RELOC; these are library bytes,
+not game reversing. The sample owns `char *prog` at TL 0x01040498: COMMON4 in
+the source COFF and wholly in the PE zero-filled virtual `.data` tail. Its
+managed row records the one source owner, with no built-data verdict.
+
+The earlier `main` probe failed because the scratch CFG helper assumed that
+`exit` returns. Stock LIBCMT independently identifies native 0x64e66a as `_exit`
+and supports its `_doexit` call. Accounting for that noreturn contract leaves
+three unreachable compiler `pop` instructions, which still match the original
+bytes exactly. No code, compiler flag or vendor patch is needed. Gold lacks
+the sample-specific strings searched here; no Gold counterpart or raw client
+link/provider is claimed. Receipts: `.scratch/goal21/minigzip-source-ownership/`.
 
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by
