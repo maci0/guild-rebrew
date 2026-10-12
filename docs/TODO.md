@@ -1,5 +1,16 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- TL97-byte gzsetparams uses canonical gzio.c after complete native-byte/
+  operand/flow checks; the built-in resolver supports both stock/source callees.
+  The unowned copy is retired, all22 vendor bodies and existing verdicts/sizes/
+  flags/other stores preserved, fresh RELOC97. All3 coverage refreshed; lint
+  0 errors0/1/38 warnings. Full SERVER gate passes316/652 and every raw byte.
+  Pristine minigzip file_compress/file_uncompress have complete native matches
+  in a read-only probe; main is rejected. Keep those copies/provider scope
+  pending further checks, rather than infer a complete sample source match.
+  Full client/source fidelity work remains open. Receipts:
+  `.scratch/goal21/gzsetparams-source-ownership/`.
+
 - Gzip opener dependency cleanup binds nine complete native profiles to
   canonical gzio.c, adding two Gold private library identities and correcting
   TL's stale CRT wrapper name. Six copied files are retired as a dependency

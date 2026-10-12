@@ -61,6 +61,7 @@ The client inventory also binds these verified native bodies to the canonical
 | `check_header` | `0x45f110` | `0x462ea0` | 294 bytes |
 | `get_byte` | `0x45f240` | `0x462fd0` | 114 bytes TL, 113 Gold |
 | `gzdopen` | `0x45f060` | not established here | 59 bytes |
+| `gzsetparams` | `0x45f0a0` | not established here | 97 bytes |
 
 Unique stock-source matches and complete native-byte/operand controls support
 these bindings. Verified duplicate source files are retired; the seek caller
@@ -127,6 +128,15 @@ functions freshly pass RELOC. The descriptor format `<fd:%d>` including NUL
 is an eight-byte compiler literal in native `.data`, not a named allocation;
 its managed row records the canonical source and actual compiler symbol without
 assigning a data-byte verdict. Receipts: `.scratch/goal21/gz-open-family/`.
+
+TL `gzsetparams` also uses unchanged `gzio.c`. Its complete 97 native bytes,
+two typed calls and rejecting controls, and all 34 reachable instructions match;
+the built-in resolver supports `fwrite` and `deflateParams`. Its unowned copy
+is retired, all 22 vendor bodies are preserved, and the fresh result is RELOC97.
+No corresponding Gold identity is asserted. A read-only pristine `minigzip.c`
+probe matches the complete native `file_compress` and `file_uncompress` bodies,
+but rejects `main`; those sample-code copies remain pending further evidence.
+Receipts: `.scratch/goal21/gzsetparams-source-ownership/`.
 
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by

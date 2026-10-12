@@ -3,6 +3,21 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (canonical gzip parameter setter): TL45f0a0 binds unchanged
+  gzio.c gzsetparams as LIBRARY. Complete97 native bytes,2 typed calls with
+  independently supported fwrite/deflateParams,2 rejecting bindings and34
+  reachable instructions match. The unowned copy is retired; all22 vendor
+  bodies remain unchanged and the fresh CLI result is RELOC97. Exactly one
+  identity changes; all statuses/sizes/flags and other stores are preserved.
+  All3 coverage documents refreshed; lint retains0 errors0/1/38 warnings.
+  Full SERVER gate passes316/652, every structural/Wine/library/toolchain
+  check and every286720 raw byte. No Gold counterpart is claimed. A read-only
+  pristine minigzip probe matches complete file_compress/file_uncompress
+  native bodies but rejects main; source/provider changes for those copies
+  remain pending. Library attribution is not game reversing. Client raw
+  images/data, vendor fork/patches and faithful discarded SERVER code remain
+  unfinished. Receipts: .scratch/goal21/gzsetparams-source-ownership.
+
 - 2026-10-12 (canonical gzip opener dependency group): nine native profiles
   bind unchanged gzio.c: both public gzopen21, private gz_open566TL/565Gold,
   check_header294, get_byte114TL/113Gold and TLgzdopen59. Two Gold private
