@@ -173,7 +173,9 @@ archive, compiler, data-store or type-store change is needed. Gold `gzflush`,
 byte comparison and the full server gate remains green. The definition
 inventory misses pointer-returning exported K&R `gzgets` and `gzerror`; all four
 bodies are independently extracted and compared through Rebrew’s COFF API, so this
-parser gap does not weaken the 48-body preservation check.
+parser gap does not weaken the 48-body preservation check. Upstream PR28 fixes
+the inventory; the installed parser now finds all 24 unique compiled functions
+without the extra COFF extraction needed by that earlier receipt.
 
 TL’s remaining character/string wrappers also use canonical `gzio.c`: `gzgetc`
 39, `gzgets` 79, `gzputc` 47 and `gzputs` 34 bytes. Their complete 199 native

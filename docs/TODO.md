@@ -1,5 +1,13 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- Upstream PR28 is merged and installed: pointer-returning K&R definitions
+  now appear in function inventories, including gzgets/gzerror. All24 compiler
+  functions match the parsed unique names. Full local/push/CI gates pass; private
+  Rebrew edits/hooks are preserved, scaffold drift0 and owned checkouts absent.
+  Post-install SERVER gate passes316/652/all raw bytes; TL lint remains0/1.
+  Full client raw images/data and faithful discarded server code remain open.
+  Receipts: `.scratch/goal21/gz-close-family/upstream-*`.
+
 - All24 TL functions emitted from canonical gzio.c now have source bindings.
   Final helpers gzgetc39/gzgets79/gzputc47/gzputs34 match199 complete native
   bytes with independently supported read/write calls and rejecting controls.
@@ -21,8 +29,8 @@ Current reconstruction checkpoint (2026-10-12):
   remaining vendor patches and faithful discarded server source remain open.
   All34 bound gzip bodies freshly pass; full server gate316/652/raw identity
   passes. Lint remains0 errors with1TL/38Gold warnings; all3 coverage refreshed.
-  Upstream follow-up: definition inventory misses pointer-returning exported
-  K&R gzgets/gzerror; direct COFF checks cover all four bodies here.
+  The pointer-returning K&R inventory gap is fixed upstream in PR28; direct
+  COFF checks still preserve the original four-body verification receipt.
   Receipts: `.scratch/goal21/gz-close-family/`.
 
 - TL uses pristine zlib 1.1.3 minigzip.c for six verified library functions,

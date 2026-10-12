@@ -3,6 +3,21 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (upstream pointer-returning K&R inventory fix): PR28 merged
+  as3588ddd6f19a9804922c993aab1ba312bf479f55 after full local makepr-check
+  (11776 passed/51 skipped,88% coverage; hooks, lint/types, package parity,
+  smoke, reproducibility, provenance/SBOM) and required push/CI gates. AST-only
+  recovery finds pointer-returning K&R definitions, including export macros,
+  multiple pointer levels and conditionals; prototype/comment controls pass.
+  Installed Root matches all24 actual compiled gzio function symbols, including
+  previously missed gzgets/gzerror. Existing repo-rename changelog names the two
+  constants required by its public-surface guard; no constant behavior changed
+  in this fix. Root private IDEAS/uv.lock edits and hook settings preserved;
+  owned temporary checkouts absent and scaffold drift0. No new release or game
+  push. Full three-image/shared-source goal remains unfinished. Receipts:
+  .scratch/goal21/gz-close-family/upstream-*. Post-install SERVER gate passes
+  316/652/all axes/every raw byte; TL lint retains0 errors/1 warning.
+
 - 2026-10-12 (canonical gzip character/string helpers): clean9f79c058
   revalidated; TLgzgetc45f5b0/39, gzgets45f5e0/79, gzputc45f730/47 and
   gzputs45f760/34 bind unchanged gzio.c after all199 native bytes,4 typed
