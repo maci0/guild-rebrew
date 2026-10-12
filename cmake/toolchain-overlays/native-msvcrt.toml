@@ -1,5 +1,5 @@
 # Native runtime for the server's LINK step; its CL profile remains plain SP5.
-# Recipe and download pins: ../rebrew-toolchains/sources.json.
+# Recipe and download pins: ../recompile-toolchains/sources.json.
 ["msvc-6.0-sp5-crt"]
 image = "rebrew/msvc:6.0-sp5-crt-win32"
 image_entrypoint = "/usr/local/bin/cl"

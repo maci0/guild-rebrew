@@ -10713,7 +10713,7 @@ ordering. Link-layout73 records the actual comparator, the complete-file gain
 and the fields that regress. No source, object, archive or executable is patched.
 
 The reproducible experimental image uses the existing recipe generator in
-`../rebrew-toolchains`. The project opts in through the existing TOML overlay
+`../recompile-toolchains`. The project opts in through the existing TOML overlay
 at `cmake/toolchain-overlays/native-msvcrt.toml`; profile names containing dots
 must be quoted TOML keys. The installed pinned Rebrew wheel resolves the
 profile without a new registry implementation. The production recipe remains
