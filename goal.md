@@ -3,6 +3,22 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (canonical gzip integer reader): TL45fa90 and GOLD463670
+  bind unchanged gzio.c's getLong as LIBRARY. Both complete65-byte bodies,
+  four typed calls to independently supported get_byte, one rejecting binding
+  control and25 reachable instructions match. The built-in native-callee
+  resolver supports all four edges when supplied the correct client objects;
+  the server MT object correctly contradicts Gold's ML callee. Four actual
+  before objects and two after objects preserve all44 vendor bodies. The
+  unowned shared copy is retired with no external caller edits. Fresh results
+  remain RELOC65, all statuses/sizes/flags and data/types/SOURCE are preserved.
+  All three coverage documents are refreshed; lint remains0 errors and0/1/38
+  warnings. Full SERVER gate passes316/652, all structural/Wine/library/
+  toolchain checks and every286720 raw byte. This is library-origin cleanup,
+  not new game reversing. Other copied gzip functions, client raw images/data,
+  complete vendor fork and faithful discarded SERVER code remain unfinished.
+  Receipts: .scratch/goal21/gz-getlong-source-ownership.
+
 - 2026-10-12 (Gold CRT and recovered shared setter): Gold uses `/ML` and
   stock LIBC, supported by native CRT entry points and complete canonical
   gzip bodies. Server/TL effective configurations remain unchanged. The

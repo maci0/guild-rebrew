@@ -1,5 +1,18 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- Canonical gzip integer reader: both65-byte getLong identities bind unchanged
+  gzio.c as LIBRARY after complete native-byte, operand and reachable-flow
+  checks. All four native get_byte calls are supported by the built-in resolver
+  with each client's actual object; the server MT object fails Gold's ML callee
+  check correctly. The unowned shared copy is retired without caller changes;
+  all44 vendor bodies, every stored verdict/size/flag and data/types/SOURCE are
+  preserved. Fresh CLI results remain RELOC65; all3 coverage documents are
+  refreshed and lint stays0 errors0/1/38 warnings. Full SERVER gate passes
+  316/652 and every286720 raw byte plus all structural/Wine/library/toolchain
+  checks. Library origin is not new game reversing. Remaining copied gzip
+  helpers and full client/source fidelity work stay open. Receipts:
+  `.scratch/goal21/gz-getlong-source-ownership/`.
+
 - Gold CRT correction and shared setter recovery: `/ML`/LIBC is supported by
   native runtime members and canonical gzip. Full MT/ML corpus comparison
   preserves all byte matches across2535 VAs and13 duplicate exclusions;

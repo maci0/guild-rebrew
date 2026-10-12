@@ -54,6 +54,7 @@ The client inventory also binds these verified native bodies to the canonical
 | `gzseek` | `0x45f890` | `0x463490` | 332 bytes |
 | `gzrewind` | `0x45f9e0` | `0x4635e0` | 112 bytes |
 | `gzread` | `0x45f380` | `0x463100` | 555 bytes TL, 556 Gold |
+| `getLong` | `0x45fa90` | `0x463670` | 65 bytes |
 
 Unique stock-source matches and complete native-byte/operand controls support
 these bindings. Four duplicate source files are retired; the seek caller
@@ -90,6 +91,16 @@ have verified canonical candidates but still await ownership/caller cleanup.
 Neither these facts nor the version literal establish the entire original fork
 or remove the unresolved patches below. Receipts:
 `.scratch/goal21/gold-crt-provider/`.
+
+Both clients' little-endian `getLong` now bind canonical `gzio.c`. Complete
+65-byte bodies, four typed calls to independently supported `get_byte`,
+rejecting binding controls and all 25 reachable instructions match. Native
+callee resolution must use each client's compiled object: the server's `/MT`
+object correctly fails Gold's `/ML` callee check. The unowned shared copy is
+retired without changing callers, flags, vendor source or data. Before/after
+objects preserve all 44 surrounding vendor bodies. Fresh measurements are
+RELOC65 in both; this is library attribution, not game reversing. Receipts:
+`.scratch/goal21/gz-getlong-source-ownership/`.
 
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by
