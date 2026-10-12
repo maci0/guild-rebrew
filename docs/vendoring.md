@@ -175,6 +175,17 @@ inventory misses pointer-returning exported K&R `gzgets` and `gzerror`; all four
 bodies are independently extracted and compared through Rebrew’s COFF API, so this
 parser gap does not weaken the 48-body preservation check.
 
+TL’s remaining character/string wrappers also use canonical `gzio.c`: `gzgetc`
+39, `gzgets` 79, `gzputc` 47 and `gzputs` 34 bytes. Their complete 199 native
+bytes, typed operands, rejecting controls and full CFGs match; the built-in
+resolver independently supports every read/write callee. Two copied files are
+retired with their complete compiled bodies unchanged, and two formerly
+unbound functions gain source identities. This completes TL’s bindings for
+all 24 functions emitted by this source file. No Gold counterpart, new raw
+client provider or extra accounted byte total is claimed. No vendor, archive,
+compiler, data or type change is introduced. Receipts:
+`.scratch/goal21/gz-character-helpers/`.
+
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by
 Gilles Vollant as `zlib113.zip`, same sources with CRLF line ends). The previous

@@ -1,5 +1,15 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- All24 TL functions emitted from canonical gzio.c now have source bindings.
+  Final helpers gzgetc39/gzgets79/gzputc47/gzputs34 match199 complete native
+  bytes with independently supported read/write calls and rejecting controls.
+  Two copied files retire without changing their compiled bodies; two unbound
+  source identities are added. No compiler/vendor/data/type workaround or Gold
+  counterpart is introduced. Full client raw builds/data and remaining source
+  fidelity work stay open. Fresh tests pass all24 TL gzip bodies; lint retains
+  0 errors/1 warning, TL coverage refreshed and full SERVER gate316/652/raw
+  identity passes. Receipts: `.scratch/goal21/gz-character-helpers/`.
+
 - Gzip close/flush helpers now bind canonical gzio.c in11 native profiles.
   Eight existing compiled bodies and all48 surrounding vendor bodies stay
   unchanged; three newly source-bound helpers cover57 bytes. Five copies and

@@ -3,6 +3,21 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (canonical gzip character/string helpers): clean9f79c058
+  revalidated; TLgzgetc45f5b0/39, gzgets45f5e0/79, gzputc45f730/47 and
+  gzputs45f760/34 bind unchanged gzio.c after all199 native bytes,4 typed
+  operands/rejecting bindings and full CFGs match. Built-in library matching
+  independently supports all read/write callees. Two copied bodies/typed
+  operands stay unchanged and their files retire; two new source identities
+  are added. All24 functions emitted by gzio.c are now bound for TL; no Gold
+  counterpart or extra accounted bytes are claimed. Compiler/vendor/archive/
+  data/types remain untouched. Full client images/data, remaining vendor
+  patches and faithful discarded server source stay unfinished. Receipts:
+  .scratch/goal21/gz-character-helpers. Fresh tests pass all24 TL gzip bodies,
+  lint remains0 errors/1 warning, TL coverage refreshed and full SERVER gate
+  passes316/652/all axes/every raw byte. Scope audit confirms only four library
+  identities and derived verification changed; all other stores/flags preserved.
+
 - 2026-10-12 (canonical gzip close/flush group): revalidated clean aa4ea761.
   Eleven native profiles use unchanged gzio.c: both do_flush180, putLong43,
   gzclose77 and gztell18, plus TLgzflush49, gzeof21 and gzerror234. All940
