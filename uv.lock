@@ -393,7 +393,7 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.8" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pyunicorn", specifier = ">=0.9.0" },
-    { name = "rebrew", editable = "../rebrew" },
+    { name = "rebrew", editable = "../relumea/repos/rebrew" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.3" },
 ]
 provides-extras = ["dev"]
@@ -1140,7 +1140,7 @@ wheels = [
 
 [[package]]
 name = "rebrew"
-source = { editable = "../rebrew" }
+source = { editable = "../relumea/repos/rebrew" }
 dependencies = [
     { name = "capstone" },
     { name = "click" },
@@ -1195,7 +1195,7 @@ dev = [
 m2c = [{ name = "m2c", git = "https://github.com/matt-kempster/m2c.git?rev=aa869da289a565c68f701e734bd74606f1bd5ed4" }]
 similarity = [
     { name = "rapidfuzz", specifier = ">=3.14.6,<4" },
-    { name = "resembl", directory = "../resembl" },
+    { name = "resembl", directory = "../relumea/repos/resembl" },
 ]
 
 [[package]]

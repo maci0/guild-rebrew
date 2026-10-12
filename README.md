@@ -7,7 +7,7 @@ The vendor build check requires upstream Rebrew with `rebrew library vendor`.
 
 Byte-identical C89 source reconstruction of **Europa 1400: The Guild** (`server.dll`).
 
-Uses the [rebrew](../rebrew/) toolchain for compiler-in-the-loop decompilation matching with MSVC6 in Docker.
+Uses the [rebrew](../relumea/repos/rebrew/) toolchain for compiler-in-the-loop decompilation matching with MSVC6 in Docker.
 
 <!-- progress:start -->
 <p align="center">

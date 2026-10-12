@@ -26,7 +26,7 @@ package = false
 override-dependencies = ["capstone>=5.0.8"]
 
 [tool.uv.sources]
-rebrew = { path = "../rebrew", editable = true }
+rebrew = { path = "../relumea/repos/rebrew", editable = true }
 
 [tool.ruff]
 target-version = "py313"
