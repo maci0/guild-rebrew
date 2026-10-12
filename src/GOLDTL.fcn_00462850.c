@@ -7,7 +7,6 @@
 
 extern char* g_1040498;
 
-gzFile __cdecl fcn_0045f060(int, const char*);
 void __cdecl fcn_00462500(const char*);
 void __cdecl fcn_004625f0(gzFile, FILE*);
 void __cdecl fcn_00462530(FILE*, gzFile);
@@ -44,12 +43,12 @@ int __cdecl fcn_00462850(int argc, char* argv[])
 		setmode(fileno(stdin), O_BINARY);
 		setmode(fileno(stdout), O_BINARY);
 		if (uncompr) {
-			file = fcn_0045f060(fileno(stdin), "rb");
+			file = gzdopen(fileno(stdin), "rb");
 			if (file == NULL)
 				fcn_00462500("can't gzdopen stdin");
 			fcn_004625f0(file, stdout);
 		} else {
-			file = fcn_0045f060(fileno(stdout), outmode);
+			file = gzdopen(fileno(stdout), outmode);
 			if (file == NULL)
 				fcn_00462500("can't gzdopen stdout");
 			fcn_00462530(stdin, file);

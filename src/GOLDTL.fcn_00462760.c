@@ -8,7 +8,6 @@
 
 extern char* g_1040498;
 
-gzFile __cdecl fcn_0045ee00(const char*, const char*);
 void __cdecl fcn_004625f0(gzFile, FILE*);
 
 void __cdecl fcn_00462760(char* file)
@@ -31,7 +30,7 @@ void __cdecl fcn_00462760(char* file)
 		infile = buf;
 		strcat(infile, ".gz");
 	}
-	in = fcn_0045ee00(infile, "rb");
+	in = gzopen(infile, "rb");
 	if (in == NULL) {
 		fprintf(stderr, "%s: can't gzopen %s\n", g_1040498, infile);
 		exit(1);

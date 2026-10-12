@@ -56,6 +56,11 @@ The client inventory also binds these verified native bodies to the canonical
 | `gzread` | `0x45f380` | `0x463100` | 555 bytes TL, 556 Gold |
 | `getLong` | `0x45fa90` | `0x463670` | 65 bytes |
 | `destroy` | `0x45f2c0` | `0x463050` | 177 bytes TL, 176 Gold |
+| `gzopen` | `0x45ee00` | `0x462c40` | 21 bytes |
+| `gz_open` | `0x45ee20` | `0x462c60` | 566 bytes TL, 565 Gold |
+| `check_header` | `0x45f110` | `0x462ea0` | 294 bytes |
+| `get_byte` | `0x45f240` | `0x462fd0` | 114 bytes TL, 113 Gold |
+| `gzdopen` | `0x45f060` | not established here | 59 bytes |
 
 Unique stock-source matches and complete native-byte/operand controls support
 these bindings. Verified duplicate source files are retired; the seek caller
@@ -110,6 +115,18 @@ indexing the Gold objects plus stock LIBC supports all eight direct calls.
 The fresh result is RELOC176, with all 22 surrounding vendor bodies unchanged.
 No caller, vendor source, flags, data or storage changes are introduced.
 Receipts: `.scratch/goal21/gz-destroy-source-ownership/`.
+
+The opener/helper dependency group now binds canonical source together. Six
+copied files are retired, including the mislabeled CRT `mlock.c` gzip wrapper.
+Three callers use the public interfaces from `zlib.h`; their complete 177-,
+233- and 417-byte bodies and typed operands remain unchanged. All 44 vendor
+bodies in both clients are preserved. Gold's old header extent included ten
+unreachable NOPs; guarded repair records RELOC294. Two previously unbound Gold
+private functions now have verified library identities. All 22 bound gzip
+functions freshly pass RELOC. The descriptor format `<fd:%d>` including NUL
+is an eight-byte compiler literal in native `.data`, not a named allocation;
+its managed row records the canonical source and actual compiler symbol without
+assigning a data-byte verdict. Receipts: `.scratch/goal21/gz-open-family/`.
 
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by

@@ -1,5 +1,21 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- Gzip opener dependency cleanup binds nine complete native profiles to
+  canonical gzio.c, adding two Gold private library identities and correcting
+  TL's stale CRT wrapper name. Six copied files are retired as a dependency
+  group. Three public-interface callers retain all177/233/417 object bytes and
+  typed operands; all44 vendor bodies remain unchanged. All22 bound functions
+  freshly pass RELOC; Gold's header extent repairs304->294 after ten unreachable
+  NOPs. The native eight-byte descriptor literal has canonical source/link
+  metadata without new storage or a false data verdict. Types/SOURCE/config,
+  all other verdicts/sizes/flags are preserved. Full SERVER gate passes316/652
+  and every286720 raw byte, plus all structural/Wine/library/toolchain checks.
+  Initial skill-drift gate failure is fixed by regeneration with Naming rules
+  preserved and zero scaffold drift; all3 coverage documents refreshed and
+  lint restored to0 errors0/1/38 warnings. No vendor patch/assembly/flag changes.
+  Remaining library copies and full client/source fidelity work stay open.
+  Receipts: `.scratch/goal21/gz-open-family/`.
+
 - Gold private gzip cleanup at463050 uses canonical gzio.c destroy as LIBRARY.
   Complete176-byte native bodies,9 operands,5 rejecting bindings and71 reachable
   instructions match; the built-in resolver supports all8 direct calls when

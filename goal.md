@@ -3,6 +3,28 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (canonical gzip opener dependency group): nine native profiles
+  bind unchanged gzio.c: both public gzopen21, private gz_open566TL/565Gold,
+  check_header294, get_byte114TL/113Gold and TLgzdopen59. Two Gold private
+  identities were previously unbound. Six copied files, including the stale
+  CRT mlock wrapper, are retired after caller/storage audits. Three callers
+  use canonical header declarations; complete177/233/417-byte objects and
+  typed operands remain unchanged. All44 vendor bodies are preserved. All22
+  bound gzip functions freshly pass RELOC; guarded Gold header repair removes
+  ten unreachable NOPs from its old304-byte extent. One descriptor-format row
+  becomes a complete8-byte compiler literal with canonical source/link symbol;
+  no new allocation or data verdict is created. Other statuses/sizes/flags and
+  types/SOURCE/config are preserved. Scope is seven existing library identities,
+  two new ones, three callers, other library measurement refreshes and316
+  SERVER input refreshes. Full SERVER gate passes316/652, all structural/Wine/
+  library/toolchain checks and every286720 raw byte. Initial gate failed only
+  generated skill drift; refresh preserves Naming rules, clears scaffold drift,
+  and the unchanged gate passes. All3 coverage documents are rebuilt; lint
+  returns to0 errors0/1/38 warnings. No vendor patch, new assembly or flags.
+  Library attribution is not game reversing. Remaining gzip copies, vendor
+  fork/patches, client raw images/data and faithful discarded SERVER source
+  remain unfinished. Receipts: .scratch/goal21/gz-open-family.
+
 - 2026-10-12 (canonical Gold gzip cleanup): GOLD463050 binds unchanged
   gzio.c private destroy as LIBRARY, replacing the unowned vfs_CloseStream
   copy and its manual errno declaration. Fresh old/canonical objects match

@@ -8622,10 +8622,16 @@ type = "int"
 
 ["GOLDTL.0x0067bd90"]
 section = ".data"
-file = "src/GOLDTL.fcn_0045f060.c"
-marker_type = "GLOBAL"
-name = "g_67bd90"
-type = "char[]"
+file = "references/zlib/gzio.c"
+marker_type = "STRING"
+name = "str_fd_d"
+type = "char[8]"
+updated_by = "data"
+updated_at = "2026-10-12T02:04:41+00:00"
+size = 8
+storage_kind = "literal"
+link_symbol = "??_C@_07GLHK@?$DMfd?3?$CFd?$DO?$AA@"
+note = "Compiler-generated descriptor format <fd:%d> including NUL: eight native .data bytes equal the canonical gzdopen COFF literal. No standalone C identifier or copied allocation; raw client data verification remains pending."
 
 ["GOLDTL.0x010161d0"]
 section = ".data"
