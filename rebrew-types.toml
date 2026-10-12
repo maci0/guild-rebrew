@@ -32,7 +32,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "2205d82cebad8d28ebd00e94ff6e007b8baa32a72294f3211e262e681dec40af"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "2518b7167b67d45854071f62e3458df5ffd09cffd2daffa9b33e1dd19437d98e"
+context_hash = "2a7db1959c941783ee249b1b7bc77906350a1316f64ca32fd301bff0f2d659b3"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object".GOLD.offsets]
@@ -71,7 +71,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "2205d82cebad8d28ebd00e94ff6e007b8baa32a72294f3211e262e681dec40af"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "2518b7167b67d45854071f62e3458df5ffd09cffd2daffa9b33e1dd19437d98e"
+context_hash = "2a7db1959c941783ee249b1b7bc77906350a1316f64ca32fd301bff0f2d659b3"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object_draw_data".GOLD.offsets]
@@ -104,7 +104,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "2205d82cebad8d28ebd00e94ff6e007b8baa32a72294f3211e262e681dec40af"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "2518b7167b67d45854071f62e3458df5ffd09cffd2daffa9b33e1dd19437d98e"
+context_hash = "2a7db1959c941783ee249b1b7bc77906350a1316f64ca32fd301bff0f2d659b3"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.draw_part".GOLD.offsets]

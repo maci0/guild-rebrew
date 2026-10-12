@@ -1,5 +1,27 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- Gold CRT correction and shared setter recovery: `/ML`/LIBC is supported by
+  native runtime members and canonical gzip. Full MT/ML corpus comparison
+  preserves all byte matches across2535 VAs and13 duplicate exclusions;
+  one existing inflate-blocks mismatch moves delta12->20 without promotion.
+  Gold gzread uses unchanged gzio.c and freshly matches556/556, retiring its
+  errno workaround. The unowned CRT heap-finder and incorrect three-argument
+  setter copies are retired. The restored shared SetSoundControlValue matches
+  both44-byte native bodies. Its three callers freshly pass91/56/56; complete
+  objects and typed operands are unchanged after CLI reference binding.
+  Gold D3 sizeof/offsetof checks rebind only three compiler contexts; native
+  geometry and evidence stay unchanged. Full SERVER gate passes316/652 and
+  every286720 raw byte, plus all structural/Wine/library/toolchain checks.
+  All three coverage documents are refreshed; lint is0 errors and0/1/38 warnings.
+  Audit preserves all verdicts/sizes/flags, data/SOURCE and other function rows;
+  six client rows and316 SERVER measurement refreshes are scoped. Upstream
+  PR26 adds conservative native-callee evidence and workflow/template guidance:
+  full local release gates11760 pass52 skip,128 focused passes; CI/merge pending.
+  Next: finish PR26/integration, then retire verified gzip-family copies through
+  complete caller/data ownership audits. Full client images/data, remaining
+  vendor patches and faithful discarded SERVER source remain unfinished.
+  Receipts: `.scratch/goal21/gold-crt-provider/`.
+
 - TL gzip extent repair: canonical `gzread` at `0x45f380` is 555 bytes
   followed by five unreachable NOPs; canonical `destroy` at `0x45f2c0`
   is 177 bytes followed by fifteen. Complete native bodies, typed relocation

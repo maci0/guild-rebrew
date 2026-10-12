@@ -53,6 +53,7 @@ The client inventory also binds these verified native bodies to the canonical
 | `gzprintf` | `0x45f6d0` | not established here | 95 bytes |
 | `gzseek` | `0x45f890` | `0x463490` | 332 bytes |
 | `gzrewind` | `0x45f9e0` | `0x4635e0` | 112 bytes |
+| `gzread` | `0x45f380` | `0x463100` | 555 bytes TL, 556 Gold |
 
 Unique stock-source matches and complete native-byte/operand controls support
 these bindings. Four duplicate source files are retired; the seek caller
@@ -65,8 +66,11 @@ Receipts: `.scratch/goal21/zlib-source-ownership/`.
 `gzrewind` additionally has four independently supported native call targets,
 four rejecting binding controls per client, complete reachable control flow,
 and 44 preserved surrounding vendor bodies. TL's `rewind` and `fseek` uniquely
-match LIBCMT; Gold's uniquely match single-thread LIBC. Gold's provisional link
-configuration remains unchanged pending broader runtime-provider evidence.
+match LIBCMT; Gold's uniquely match single-thread LIBC. Further full-body
+`free`, `fread` and `fwrite` evidence, stock `crt0dat.obj`'s errno definition,
+and the complete native gzip bodies establish Gold's `/ML` and `LIBC` settings.
+The public malloc wrapper matches both runtimes and does not distinguish them.
+Server and TL retain `/MT` and `LIBCMT`. Gold's raw link remains unbuilt.
 Receipts: `.scratch/goal21/gzrewind-source-ownership/`.
 
 TL's existing canonical `gzread` (`0x45f380`) and `destroy` (`0x45f2c0`)
@@ -76,6 +80,16 @@ Rebrew's guarded size repair records RELOC for both without changing source
 or flags. Full native bytes, typed operands, rejecting binding controls and
 reachable control flow support these extents. Receipts:
 `.scratch/goal21/gold-crt-provider/TL-*-extent-proof.json`.
+
+Gold `gzread` now uses unchanged canonical `gzio.c` under `/ML`, replacing
+the copy that manually declared the CRT errno global. Its complete 556 native
+bytes, 11 typed operands, seven rejecting binding controls and 205 reachable
+instructions match; the fresh CLI result is RELOC556. Native openers in both
+clients pass the complete `1.1.3` version literal. Other copied gzip functions
+have verified canonical candidates but still await ownership/caller cleanup.
+Neither these facts nor the version literal establish the entire original fork
+or remove the unresolved patches below. Receipts:
+`.scratch/goal21/gold-crt-provider/`.
 
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by

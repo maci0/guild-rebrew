@@ -6,6 +6,17 @@ original build environment, project organization, game-domain facts,
 toolchain observations. Naming evidence stays in `naming_conventions.md`;
 this file holds the rest.
 
+- Gold's CRT uses the single-thread `LIBC` runtime. Its native `free`, `fread`,
+  `fwrite`, `fseek` and `rewind` bodies and canonical gzip's direct errno access
+  support `/ML`; stock `crt0dat.obj` defines errno. Server and TL
+  use `/MT` and `LIBCMT`. The malloc wrapper matches both and is inconclusive.
+  A controlled corpus comparison measures the same 2,535 functions and 13
+  duplicate exclusions with no lost byte matches; one existing inflate-blocks
+  size mismatch has delta12 under MT and delta20 under ML. No flag workaround
+  is accepted for it. These are runtime-selection facts, not verification of
+  either client's raw image or data. Receipts:
+  `.scratch/goal21/gold-crt-provider/{corpus-comparison,effective-config-after}.json`.
+
 ## Original project
 
 - Developer: 4HEAD Studios (German). Verbs English, game nouns German.

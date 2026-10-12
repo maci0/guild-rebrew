@@ -3,6 +3,34 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (Gold CRT and recovered shared setter): Gold uses `/ML` and
+  stock LIBC, supported by native CRT entry points and complete canonical
+  gzip bodies. Server/TL effective configurations remain unchanged. The
+  controlled full corpus compares the same2535 VAs and13 duplicate exclusions:
+  no byte match is lost; one existing inflate-blocks mismatch has delta12
+  under MT and20 under ML and remains unresolved. Canonical Gold gzread freshly
+  matches556/556; its manual errno copy is retired. The unowned, uncompilable
+  CRT heap-finder copy is retired, retaining its existing library identity.
+  The previously verified shared sound setter is restored under its managed
+  name and freshly matches44/44 in both clients. Three caller bindings use the
+  canonical name; all complete91/56/56-byte objects and typed operands are
+  preserved. The unowned wrong three-argument setter copy is retired. No
+  vendor patch, assembly or storage is added. Three Gold D3 bindings pass
+  sizeof/offsetof under ML; only compiler contexts change, with layouts and
+  native evidence preserved. Full SERVER gate passes316/316 functions,
+  652/652 data, every structural/Wine/library/toolchain check and every286720
+  raw byte (SHA3cc2ce90...). All three coverage documents are refreshed; lint
+  returns to zero errors and0/1/38 warnings. Audit scopes six client rows and
+  316 SERVER measurement refreshes; all statuses/sizes/flags, other function
+  rows, data and SOURCE are preserved. Upstream native-callee matching is
+  committed as f840368c, PR26 awaiting two Python CI jobs; full local release
+  gates pass11760 tests/52 skips, packaging, reproducibility, provenance and
+  required hooks. Its128 focused checks and real fwrite control pass; templates
+  and skills document the built-in path. Remaining copied gzip helpers have
+  canonical native proofs but still need cleanup. Full client raw images/data,
+  exact complete vendor fork and faithful discarded SERVER source remain open.
+  Receipts: .scratch/goal21/gold-crt-provider.
+
 - 2026-10-12 (TL gzip extent repair): unchanged canonical gzio.c matches
   TL0x45f380 gzread's complete555-byte body and TL0x45f2c0 destroy's
   complete177-byte body. The old560/192 extents included five/fifteen
