@@ -3,6 +3,27 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (canonical gzip close/flush group): revalidated clean aa4ea761.
+  Eleven native profiles use unchanged gzio.c: both do_flush180, putLong43,
+  gzclose77 and gztell18, plus TLgzflush49, gzeof21 and gzerror234. All940
+  native bytes,26 typed operands and21 rejecting controls agree; two complete
+  compiler literals match. Eight existing bodies and all48 surrounding vendor
+  bodies stay unchanged. Three new source bindings cover57 bytes. Gold close
+  includes three alignment NOPs after its77-byte body; targeted CLI fix-sizes
+  records RELOC77. Five copies and the unused reconstructed private gz_stream
+  header are retired. The copied undeclared ALLOC is replaced by canonical
+  malloc at its independently supported native address; empty zstrerror is
+  stock behavior without HAVE_STRERROR, requiring no patch. No Gold gzflush,
+  gzeof or gzerror counterpart is claimed. No source, compiler, archive, data
+  or type workaround is introduced. Full client images/data, remaining vendor
+  patches and faithful discarded server code remain unfinished. Fresh tests
+  pass all34 bound gzip bodies (TLgzeof EXACT21, others RELOC), full server gate
+  passes316/652 and every raw byte; lint remains0 errors and1TL/38Gold warnings.
+  All3 coverage documents refreshed. Rebrew misses pointer-returning K&R
+  gzgets/gzerror in its definition inventory; all four complete COFF bodies are
+  explicitly checked, raising preserved source bodies to48. Fix this parser gap upstream
+  next. Receipts: .scratch/goal21/gz-close-family.
+
 - 2026-10-12 (pristine minigzip sample source): after revalidating the clean
   b9205a11 tree, six complete TL native bodies match unchanged zlib1.1.3
   minigzip.c: error37, gz_compress192, gz_uncompress173, file_compress177,

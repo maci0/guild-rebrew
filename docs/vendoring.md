@@ -153,6 +153,28 @@ bytes exactly. No code, compiler flag or vendor patch is needed. Gold lacks
 the sample-specific strings searched here; no Gold counterpart or raw client
 link/provider is claimed. Receipts: `.scratch/goal21/minigzip-source-ownership/`.
 
+The close/flush dependency group also uses canonical `gzio.c`: both private
+`do_flush`, `putLong`, public `gzclose` and `gztell`, plus TL `gzflush`, `gzeof`
+and `gzerror`. Eleven complete native profiles total 940 bytes; all 26 typed
+operands and 21 rejecting bindings agree. Eight existing compiled bodies are
+preserved, alongside all 48 surrounding vendor bodies. Three previously unbound
+helpers bind 57 bytes to canonical source. Gold `gzclose` is 77 bytes followed by
+three alignment NOPs; the guarded CLI repair removes those NOPs from its old
+80-byte extent. Five copies and their unused reconstructed `gz_stream` header
+are retired, leaving the original private definition in `gzio.c`.
+
+The copied `gzerror` called an undeclared `ALLOC`; canonical source expands it
+to `malloc` at the same verified native address. Its empty error string is also
+stock behavior with `HAVE_STRERROR` unset. The complete one-byte zero compiler
+literal and three-byte colon-space literal match the native data. No vendor,
+archive, compiler, data-store or type-store change is needed. Gold `gzflush`,
+`gzeof` and `gzerror` are not asserted by this scope. Receipts:
+`.scratch/goal21/gz-close-family/`. All 34 bound gzip functions freshly pass
+byte comparison and the full server gate remains green. The definition
+inventory misses pointer-returning exported K&R `gzgets` and `gzerror`; all four
+bodies are independently extracted and compared through Rebrew’s COFF API, so this
+parser gap does not weaken the 48-body preservation check.
+
 Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
 `cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by
 Gilles Vollant as `zlib113.zip`, same sources with CRLF line ends). The previous

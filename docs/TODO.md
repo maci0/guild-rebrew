@@ -1,5 +1,20 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- Gzip close/flush helpers now bind canonical gzio.c in11 native profiles.
+  Eight existing compiled bodies and all48 surrounding vendor bodies stay
+  unchanged; three newly source-bound helpers cover57 bytes. Five copies and
+  their unused private-struct header are retired. Gold gzclose is77 bytes plus
+  three NOPs, repaired through guarded CLI size verification. Canonical gzerror
+  uses real malloc instead of the copied undeclared ALLOC; stock zstrerror
+  already supplies the empty string. Native function bytes940, typed operands26,
+  rejecting bindings21 and two complete literals agree. Raw client links/data,
+  remaining vendor patches and faithful discarded server source remain open.
+  All34 bound gzip bodies freshly pass; full server gate316/652/raw identity
+  passes. Lint remains0 errors with1TL/38Gold warnings; all3 coverage refreshed.
+  Upstream follow-up: definition inventory misses pointer-returning exported
+  K&R gzgets/gzerror; direct COFF checks cover all four bodies here.
+  Receipts: `.scratch/goal21/gz-close-family/`.
+
 - TL uses pristine zlib 1.1.3 minigzip.c for six verified library functions,
   replacing five copied files and identifying the missing192-byte gz_compress.
   All1229 native function bytes, typed bindings and15 complete literals agree;
