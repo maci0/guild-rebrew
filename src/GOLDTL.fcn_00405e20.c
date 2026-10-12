@@ -24,7 +24,7 @@ char* __cdecl fcn_00402610(char* obj);
 void __cdecl fcn_00405c70(char* src, float* dst);
 char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* height);
 char* __cdecl fcn_0040c120(char* e, int kind, int a, int b, int c);
-void __cdecl fcn_00403e20(char* e, int a);
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_004033e0(char* e);
 char* __cdecl fcn_00404dc0(char* e, char* name, int flag);
 void __cdecl fcn_0041d9e0(const char* msg);
@@ -83,7 +83,7 @@ int __cdecl fcn_00405e20(void)
 			*(*p + 0x8c) &= 0xf7;
 		}
 		if (*(int*) (*p + 0x124) != 0) {
-			fcn_00403e20(*p, 0);
+			ch_UpdateAttachedModelPosition(*p, 0);
 		}
 		if (*(int*) (*p + 0x22c) != 0) {
 			fcn_004033e0(*p);

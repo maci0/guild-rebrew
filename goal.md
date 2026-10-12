@@ -3,6 +3,22 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-12 (shared attached character model positioning): clean4b90ed12
+  revalidated. One inferred ch_UpdateAttachedModelPosition body matches complete
+  TL403e20/Gold403620,801 bytes each, using default flags. Builtin related import
+  scores100 and destination verifies RELOC. All17 typed operands,14 rejecting
+  controls,244 reachable instructions and24 complete literal bytes agree per
+  client. Shared character.c and canonical ch_motion.h retain all10 earlier
+  bodies/typed operands; no compiler/asm/storage/type workaround. The unsigned
+  byte force parameter and unordered x87 height comparison follow the native
+  code; existing zero-initialized global reads stay intact. Fresh shared tests
+  pass all10 bodies; TLcaller753 matches completely. Client lint remains0 errors
+  and1TL/38Gold warnings; both coverage documents refreshed. Full server gate
+  passes316/652/all axes and raw286720-byte identity. Larger setter
+  dependency4033e0/402ba0, client raw images/data, vendor patches and faithful
+  discarded server source remain unfinished. Receipts:
+  .scratch/goal21/character-pending-positions/attachment.
+
 - 2026-10-12 (shared deferred character positions): revalidated clean1510060e.
   New inferred ch_UpdatePendingPositions source matches full149-byte TL403040;
   scalar float temporary earns original x87 order with default flags. Builtin

@@ -16,6 +16,7 @@ extern int g_6791c8;
 
 void __cdecl ch_SetPosition(char* obj, float* position, int flag);
 void __cdecl ch_UpdatePendingPositions(void);
+void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force);
 
 int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe);
 int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy,

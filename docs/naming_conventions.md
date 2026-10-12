@@ -1633,3 +1633,18 @@ match the 118-byte Gold and 72-byte TL bodies. Both functions belong to the shar
 `game/character.c`; declarations are canonical in `ch_motion.h`. The address-named
 character table stays a declaration without a new storage-owner claim. Receipts:
 `.scratch/goal21/character-pending-positions/`.
+
+### Attached character model positions (2026-10-12)
+
+`ch_UpdateAttachedModelPosition` is inferred from TL403e20/Gold403620, not
+attested by a string. One shared 801-byte body in `game/character.c` updates the
+model referenced through character offset0x124, its orientation and terrain
+height, then caches the main model position. Its second argument is read as an
+unsigned byte. The native x87 comparison accepts unordered height differences;
+the C condition preserves that behavior. The zero-initialized float is an
+existing global read, not a new constant or storage definition. The complete
+bodies, all17 typed operands,14 rejecting binding controls and all24 literal
+bytes agree in each client. The10 previous surrounding bodies remain unchanged.
+Declarations are canonical in `ch_motion.h`; native callee spellings, field
+names and storage ownership remain unresolved. Receipts:
+`.scratch/goal21/character-pending-positions/attachment/`.

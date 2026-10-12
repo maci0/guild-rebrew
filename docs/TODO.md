@@ -1,5 +1,17 @@
 Current reconstruction checkpoint (2026-10-12):
 
+- Shared attached character model positioning now matches all801 bytes in
+  TL403e20/Gold403620. One body and canonical unsigned-byte force declaration
+  replace the two caller-local prototypes. All17 operands,14 rejecting controls,
+  full244-instruction CFG and24 literal bytes agree per client;10 prior complete
+  bodies/typed operands are preserved. No compiler, assembly, storage or type
+  workaround. Original name and field/storage ownership remain unproven. The
+  larger TL4033e0/Gold402ba0 setter dependency still needs source. Full server
+  gate passes316/652/all axes and raw identity; all10 shared client bodies and
+  the753-byte TLcaller freshly match. Client lint remains0 errors/1TL/38Gold
+  warnings and both coverage documents are refreshed. Receipts:
+  `.scratch/goal21/character-pending-positions/attachment/`.
+
 - Shared deferred character positions now match TL403040/Gold402800,149 bytes
   each; builtin related import scores100 and destination independently verifies.
   Setter ch_SetPosition is one shared three-argument body: TL72/Gold118, with
