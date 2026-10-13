@@ -156,7 +156,7 @@ note   = "inline asm detected"
 > exclusively by Rebrew CLI tools (`rebrew test`/`verify`/`prove` for STATUS;
 > `rebrew blocker set/clear`, `rebrew diff --fix-blocker`, `rebrew diagnose near --fix-blocker`,
 > `rebrew source document-unmatched` for BLOCKER; `rebrew data set` for globals).
-> Every write goes through `rebrew.metadata` / `rebrew.data_metadata` (locked + atomic) —
+> Every write goes through `rebrew.metadata.functions` / `rebrew.metadata.data` (locked + atomic) —
 > hand-edits bypass the lock and get clobbered.
 
 **STATUS values**, strongest claim first: `EXACT` (byte-perfect in the object, or

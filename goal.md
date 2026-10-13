@@ -3,6 +3,36 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-14 (upstream staged matching repair and workspace cleanup): local
+  Rebrew main72a13100 merges the complete release-review history and fixes
+  source-relative headers in climb previews and qualifier candidates through
+  the existing compiler include/mount/cache path. Aligned output now reports
+  a weighted score rather than matched bytes. Four regression cases fail before
+  the include repair; both objectives reject the old output schema. Focused
+  matching142 and merged packaging67 pass. Broad validation11814pass/60skip,
+  coverage88%, static checks, wheel/sdist parity, installed-wheel smoke,
+  committed reproducibility, provenance and115-component SBOM pass; final
+  revision push hook passes and main72a13100 is pushed. Both MSVC6 images are
+  rebuilt and pass golden smoke; the configured CRT overlay is rebuilt too.
+  Real TL4033e0 preview compiles without changing its source or earning a match.
+  Fresh character checks retain all10 shared byte matches and the existing
+  TL1150/1156 SIZE_MISMATCH. Eight type bindings pass both compilers; only
+  context fingerprints change. Server gate passes316/652/all axes and every
+  raw286720 byte, SHA3cc2ce90. Exactly327 function receipts refresh, with
+  identities/statuses/sizes/flags and game C/data/provenance/config preserved.
+  Old relocated builds/probes are archived and removed; five stale Rebrew
+  worktrees, the stale clone, obsolete symlink and four integrated branches
+  are removed after verified recovery archives/bundles. The archived review
+  process was idle and is stopped; new in-progress cleanup-containment work
+  remains separate. All three coverage documents are regenerated. Client lint
+  retains0 errors/1TL/38Gold warnings. Game origin prose changes are merged,
+  retaining the current1.2.0 version and relocated dependency path. Game
+  merge includes the verified workspace receipts. Full client images/data,
+  remaining vendor patches and faithful discarded server source stay open;
+  the full three-image/shared-tree goal remains ACTIVE. Receipts:
+  .scratch/goal22/tooling and upstream .scratch/goal22; recovery manifest:
+  /home/maci/.local/state/rebrew-cleanup/20261014-goal22/manifest.json.
+
 - 2026-10-12 (lowpoly source and canonical animation argument): clean5c246c1e
   revalidated. TL4033e0 attests original spelling ch_Updatelowpoly. Partial C
   now lives in character.c with canonical four caller declarations; native body

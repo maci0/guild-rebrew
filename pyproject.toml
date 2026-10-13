@@ -1,7 +1,7 @@
 [project]
 name = "guild-rebrew"
 version = "1.2.0"
-description = "Europa 1400 (The Guild) decompilation project — byte-identical C89 source reconstruction"
+description = "Europa 1400 (The Guild) decompilation project: byte-identical C89 source reconstruction"
 requires-python = ">=3.13"
 dependencies = [
     "angr>=9.2.204",
@@ -22,7 +22,7 @@ dev = [
 package = false
 # angr (<=9.3.1) pins capstone==5.0.6, which conflicts with rebrew's
 # capstone>=5.0.8 (PYSEC-2026-3544 advisory fix).  capstone 5.0.9 is
-# backward-compatible with angr's usage — force the newer version.
+# backward-compatible with angr's usage, so force the newer version.
 override-dependencies = ["capstone>=5.0.8"]
 
 [tool.uv.sources]

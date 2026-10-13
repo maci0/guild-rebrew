@@ -10,7 +10,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "2205d82cebad8d28ebd00e94ff6e007b8baa32a72294f3211e262e681dec40af"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "a3fc0ca67a565ad476a03f1ac4a382285300222afcaf59feee19e78df15495bb"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object".GOLDTL.offsets]
@@ -32,7 +32,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "2205d82cebad8d28ebd00e94ff6e007b8baa32a72294f3211e262e681dec40af"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "2a7db1959c941783ee249b1b7bc77906350a1316f64ca32fd301bff0f2d659b3"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object".GOLD.offsets]
@@ -53,7 +53,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "2205d82cebad8d28ebd00e94ff6e007b8baa32a72294f3211e262e681dec40af"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "a3fc0ca67a565ad476a03f1ac4a382285300222afcaf59feee19e78df15495bb"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object_draw_data".GOLDTL.offsets]
@@ -71,7 +71,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "2205d82cebad8d28ebd00e94ff6e007b8baa32a72294f3211e262e681dec40af"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "2a7db1959c941783ee249b1b7bc77906350a1316f64ca32fd301bff0f2d659b3"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object_draw_data".GOLD.offsets]
@@ -88,7 +88,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "2205d82cebad8d28ebd00e94ff6e007b8baa32a72294f3211e262e681dec40af"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "a3fc0ca67a565ad476a03f1ac4a382285300222afcaf59feee19e78df15495bb"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.draw_part".GOLDTL.offsets]
@@ -104,12 +104,11 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "2205d82cebad8d28ebd00e94ff6e007b8baa32a72294f3211e262e681dec40af"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "2a7db1959c941783ee249b1b7bc77906350a1316f64ca32fd301bff0f2d659b3"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.draw_part".GOLD.offsets]
 name = 16
-
 [types."d3.animation-options".GOLDTL]
 file = "src/Develop/Units/d3/d3_animation.h"
 symbol = "D3_ANIMATION_OPTIONS"
@@ -120,7 +119,7 @@ evidence = "TL ch_Updatelowpoly 0x403700 allocates and copies three DWORDs as th
 cflags = "/O2 /Gd"
 source_hash = "e35a46bc649c1c8c8da4271f3d249f1b5b06e42837ee3f44bb3be5a2bfe829cd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "a3fc0ca67a565ad476a03f1ac4a382285300222afcaf59feee19e78df15495bb"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.animation-options".GOLDTL.offsets]
@@ -139,7 +138,7 @@ evidence = "Shared with the verified Gold ch_AttachMotion and motion-preload cal
 cflags = "/O2 /Gd"
 source_hash = "e35a46bc649c1c8c8da4271f3d249f1b5b06e42837ee3f44bb3be5a2bfe829cd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "2a7db1959c941783ee249b1b7bc77906350a1316f64ca32fd301bff0f2d659b3"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.animation-options".GOLD.offsets]

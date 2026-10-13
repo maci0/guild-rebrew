@@ -1,3 +1,24 @@
+Workspace/tooling checkpoint (2026-10-14):
+
+- Rebrew main72a13100 integrates the release-review worktree, preserves staged
+  source-relative headers in climb/qualifier candidates, and labels aligned
+  scores correctly. Full suite11814pass/60skip plus focused matching142 and
+  packaging67 pass; committed package parity/reproducibility/provenance/SBOM
+  checks pass. The final full-suite push hook passes and main72a13100 is pushed.
+- Docker cache recovery rebuilds plain SP5, Processor Pack and the configured
+  native CRT overlay. Both shipped images pass golden smoke. Regenerated CMake
+  paths and the final server gate preserve every286720 raw byte,316 functions
+  and652 data symbols. Eight client type bindings refresh only their compiler
+  context hashes; all10 shared character byte matches remain, while the TL
+  lowpoly helper stays1150/1156 SIZE_MISMATCH. No game C or storage changes.
+- Five stale upstream worktrees plus the old clone/symlink and relocated game
+  build/probe files are archived and removed. Four integrated branches retire;
+  the archived review process was confirmed idle and stopped. New in-progress
+  cleanup-containment work remains. Recovery:
+  /home/maci/.local/state/rebrew-cleanup/20261014-goal22/manifest.json.
+  Current receipts: .scratch/goal22/tooling. Complete client images, vendor
+  patch recovery and faithful discarded server source remain unfinished.
+
 Current reconstruction checkpoint (2026-10-12):
 
 - Native TL4033e0 attests ch_Updatelowpoly. Partial source is consolidated in
@@ -21,12 +42,12 @@ Current reconstruction checkpoint (2026-10-12):
   extents and linked client images before recording verdicts. Server data remains
   652/652 matched. Status receipts are in the lowpoly scratch directory.
 
-- Upstream matching gap found during this reconstruction: climb --dry-run moves
-  the source into .rebrew/climb and loses its original relative-include search
-  directory, so a source that rebrew test compiles fails the dry-run baseline.
-  In-place climb compiles and restores the same source (no winning moves).
-  Fix staged compilation to preserve the original include context upstream;
-  also label aligned scores as scores rather than matched-byte counts.
+- The staged matching gap is repaired upstream: climb previews and qualifier
+  candidates preserve the original source directory through the compiler
+  include/mount/cache path. Aligned climb output now labels its weighted score
+  correctly. The real TL4033e0 preview compiles and leaves character.c unchanged;
+  this tooling repair does not close the existing1150/1156 native-body gap.
+  Receipts: `.scratch/goal22/tooling/climb-{before,final}.json`.
 
 - Shared attached character model positioning now matches all801 bytes in
   TL403e20/Gold403620. One body and canonical unsigned-byte force declaration
@@ -11780,8 +11801,8 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   `.text` band `0x5e0000–0x64ffff` (+embedded zlib stub `_gzeof` at
   `0x45fa70`, `inflate_blocks_sync_point` at `0x460a40`). `lib_match` now
   returns 0 findings on GOLDTL with `--lib references/dxsdk8/lib/d3dx8.lib`.
-- **Resolved:** deleted the mislabeled `src/Europa1400Gold_TL.exe/m_AllocTracked.c`
- , the real `m_AllocTracked` is shared-tree server `0x10006580`, which TL's
+- **Resolved:** deleted the mislabeled `src/Europa1400Gold_TL.exe/m_AllocTracked.c`,
+  the real `m_AllocTracked` is shared-tree server `0x10006580`, which TL's
   callers (`ls_LoadSavegameHeader.c`) already resolve by name.
 - **Gate:** added a `lib-match d3dx8 (GOLDTL)` step to `scripts/gate.sh` that
   fails on any new GOLDTL function colliding with a `d3dx8.lib` body; vendored
@@ -13331,8 +13352,8 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   fxch placed + compare unfolded, 255 at obj 397; `volatile` -> compare sunk past `fmulp`, 387; commuted
   multiply -> byte-identical). The other seven each state their cluster and rejected variants.
 - **`gm_CalculateProductionValue` was the round's best candidate and is the instructive case**: 127
-  instructions on **both** sides, five differing bytes, first divergence a two-instruction transposition
- , exactly the shape a round hopes to fix. It is the *fourth* independent wall in the same file, and
+  instructions on **both** sides, five differing bytes, first divergence a two-instruction transposition,
+  exactly the shape a round hopes to fix. It is the *fourth* independent wall in the same file, and
   the header records why. Re-deriving it would have cost a round to reach a documented answer.
 - **Recorded as `codegen-walls.md` §11** so the next round does not re-walk the tail: the small
   carriers are explored-and-closed, the band is worth 327 bytes, and the only carriers worth a round
@@ -13668,8 +13689,8 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   signals:**
   - **The linked image is the wrong ruler.** Decoding a function's `size` from the reference's VA
     in `build/server.dll` reads the wrong bytes whenever our object placed that body at a
-    different internal offset. It reported `gm_AllocSpieler` at 1,014 instructions and **52 calls**
-   , the object holds **55**, the reference's own number, so §104 was right and my ruler was
+    different internal offset. It reported `gm_AllocSpieler` at 1,014 instructions and **52 calls**,
+    the object holds **55**, the reference's own number, so §104 was right and my ruler was
     wrong. Alignment now comes from `build/split_poc.map` (exact, regenerated every link).
   - **Trailing section bytes decode as instructions.** The reference's `0x09` filler reads as
     `or dword ptr [ecx], ecx`, 50 of them after `CrashDumpUnhandledExceptionFilter`'s jump
@@ -14440,8 +14461,8 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 **Round-899: re-opened the data lane and found five names the source had already earned, three were placeholders, two were misspelled strings.**
 
 - **Tried:** re-testing my own "data lane is exhausted" conclusion instead of re-citing it for a
-  fourth round. The narrow version was right, `verify --data` reports `mismatched []`, `missing []`
- , but I had been reading the 84 `.idata` entries as the *whole* remainder. The metadata actually
+  fourth round. The narrow version was right, `verify --data` reports `mismatched []`, `missing []`,
+  but I had been reading the 84 `.idata` entries as the *whole* remainder. The metadata actually
   holds **73 UNCHECKED `.data` entries** as well.
 - **Split them by the section geometry rather than by name.** All 73 sit above `.data`'s
   `rawsize 0xe000` boundary (`0x10035000`), i.e. in the zero-fill tail, and `pefile` returns **no
@@ -16341,8 +16362,8 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   directly instead: bytes attributable to an `[esp+disp8]` slot offset are **54 of 8,634
   (0.6%)**. The frequent pattern was the most *visible* one, not the bulk. Same error §4
   records, one level down.
-- **Also checked and negative:** the `CrashDump` frame is not recoverable by slot chasing
- , only 10 of its 595 mismatching instructions differ *solely* by `[esp+N]`; the other
+- **Also checked and negative:** the `CrashDump` frame is not recoverable by slot chasing,
+  only 10 of its 595 mismatching instructions differ *solely* by `[esp+N]`; the other
   585 are scheduling. Consistent with the file header's spill-count conclusion.
 - **Byte-histogram cross-check:** built vs reference `.text` byte frequencies differ by at
   most 61 in 141,382 bytes (`0x10` 4,789 vs 4,728). No missing or invented instruction
@@ -16588,8 +16609,8 @@ deliverable pipeline, not to the source, and needs an explicit decision.
   verify 281/264 held.
 - **Next:** do not re-probe these 18 by spelling. Either measure a
   *post-pass* idea against the linked residue, or work the objective's other
-  clauses, the import table (100/100 already matching) and Wine load/exports
- , and treat residue 8634 as the documented floor of the current toolchain.
+  clauses, the import table (100/100 already matching) and Wine load/exports,
+  and treat residue 8634 as the documented floor of the current toolchain.
 
 **Round-833 (types): one landed, one reverted. RESIDUE 8634 / DATA 21,836 HOLD.**
 (Numbering note: an earlier and unrelated Round-521 exists further down this
@@ -16651,8 +16672,8 @@ uncommitted R593--R832 stack recorded by Round-832.)
   `// DATA: SERVER 0x1002b600`). The broadcast strings are *present and correct*
   in BLD, at file `0x30a34` instead of `0x27034`, a clean `+0x9a00` displacement.
 - **Why this is not a defect and not actionable:** `data_restore.c` is
-  auto-generated by `rebrew build layout --data-gap` and is a **length-only pad**
-  — postlink blits the reference `.data` over it wholesale, so its content never
+  auto-generated by `rebrew build layout --data-gap` and is a **length-only pad**,
+  postlink blits the reference `.data` over it wholesale, so its content never
   ships (`msvc6-c-shapes.md` §151; already recorded rounds 450/547). The pad is
   doing its job: raw `.data` rsz reaches `0xe000`.
 - **The decisive reading** (`postlink_residual.py`, one block, both rulers):
@@ -20440,8 +20461,8 @@ All held.**
 
 **Round-683 (data pass): verification round. No source change.**
 
-- **Tried:** `rebrew test --all`: 281 passed / 2 failed, byte 264
- , identical to baseline. Hunted: `SaveHeaderTail` users (only
+- **Tried:** `rebrew test --all`: 281 passed / 2 failed, byte 264,
+  identical to baseline. Hunted: `SaveHeaderTail` users (only
   `ls_LoadSavegameHeader.c` + stubs via header, complete);
   `rebrew_globals.h` incomplete `struct SaveHeaderTail` (header
   is auto-generated DO NOT EDIT, regen would wipe any include,
@@ -20636,8 +20657,8 @@ conflicts. No source change.**
 stay local. No source change.**
 
 - **Tried:** struct-tag dup scan found `LinkedNode` defined in
-  both `gm_RemoveLinkedNodeById.c` and `gm_RemoveObjectByType.c`
- , but layouts differ (first: `short active`+`int id`@0x00–0x05;
+  both `gm_RemoveLinkedNodeById.c` and `gm_RemoveObjectByType.c`,
+  but layouts differ (first: `short active`+`int id`@0x00–0x05;
   second: `unsigned short id`@0x00 + wider pad). Same tag,
   different layouts = must NOT lift/merge (would create a 10th
   shape conflict). Both correctly TU-local. (`gz_stream`/
@@ -21453,8 +21474,8 @@ HOLD.**
 
 - **Tried:** eighteenth command.h orphan (`cm_ExKillTransporter`,
   verified zero mentions in all 4 includers). Dropped one line.
-  Also probed `cm_QueuePlayerCommand`: 13 mentions in includers
- , LIVE, kept. Decl-only change, no emit.
+  Also probed `cm_QueuePlayerCommand`: 13 mentions in includers,
+  LIVE, kept. Decl-only change, no emit.
 - **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
   EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
   `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
@@ -23610,8 +23631,8 @@ ONE row's fact, not the tree's. Residue 8,652.**
   downstream symptoms.
 - **Only CrashDump is actually different**: reference `sub esp,0x280` with
   **2** pushes (ebp/esi) against our `sub esp,0x284` with **3**
-  (ebx/ebp/esi). On the other three rows the prologues are **byte-identical**
- , gv_ExAllocGraveyardWorker matches exactly, including the distinctive
+  (ebx/ebp/esi). On the other three rows the prologues are **byte-identical**,
+  gv_ExAllocGraveyardWorker matches exactly, including the distinctive
   deferral of `push edi` to +0x0a; cm_ExCopyEntityData for 17 bytes;
   ahm_ExAllocAlchemist for 23.
 - **So §81's frame rule is real but LOCAL**, and had been generalised into a
@@ -23963,8 +23984,8 @@ sweep. Residue 8,652.**
 - **A delegated lane scripted that rule as an alignment oracle** (LCS of
   reference vs our instructions; a def inside an `equal` block is already
   positioned correctly) and swept three rows: **cm_ExSellObjekt has 14
-  long-span callee-saved defs and every zero-call one is already aligned**
- , that row has no lever, do not re-derive it. **ls_LoadBuildingEntityState
+  long-span callee-saved defs and every zero-call one is already aligned**,
+  that row has no lever, do not re-derive it. **ls_LoadBuildingEntityState
   has one real divergence and it is MIRRORED**: the reference computes
   `current_index = 0` LATE, we compute it early; sinking it to match cost
   60 bytes (820 -> 760).
@@ -24028,8 +24049,8 @@ a REAL gain that CANNOT SHIP. Residue 8,664.**
 - **The file is safe**: all three file-mates stay RELOC-perfect under sp5-pp
   (272/272, 186/186, 211/211), so switching this one file costs nothing
   inside it. (Toolchain is per-file, like CFLAGS, §12.)
-- **But it cannot be adopted project-wide**: sp5-pp is much worse elsewhere
- , CalculateProductionValue 391→**236**, m_AllocTracked 566→**266** (obj
+- **But it cannot be adopted project-wide**: sp5-pp is much worse elsewhere,
+  CalculateProductionValue 391→**236**, m_AllocTracked 566→**266** (obj
   658→634), ReadCompressed 468→461. The nine MSVC6 images are three
   generators (§92) and sp5-pp is its own.
 - **And a per-function pin never reaches the link.** `rebrew build cmake-flags`
@@ -24527,8 +24548,8 @@ immediately on both rows tried. Residue 8,664.**
   SHAPE. `rebrew match run`'s GA mode mutates source, so it tests exactly that,
   and it was unusable until the round-457 timeout fix.
 - Two rows, 12 generations, pop 16, `--mutation-focus auto`:
-  **m_AllocTracked** best 147,228.92 with **11 of 12 generations stagnant**
- , and that is **4x WORSE** than the flag-sweep baseline of 34,500, i.e.
+  **m_AllocTracked** best 147,228.92 with **11 of 12 generations stagnant**,
+  and that is **4x WORSE** than the flag-sweep baseline of 34,500, i.e.
   every mutation it kept was harmful. **vfs_ReadCompressed** best 35,900
   with 11 of 12 stagnant, exactly the unmutated baseline, never beaten.
 - **The one surviving mutation is provably a no-op**: the GA turned
@@ -24557,8 +24578,8 @@ Residue 8,664.**
   (3,849,233), CrashDump (2,224,586), cm_ExSellObjekt (1,301,503),
   vfs_ReadCompressed (35,900), m_AllocTracked (34,500).
 - **Verified the flags genuinely vary**, 20 distinct flag strings per row
-  (`/G3`, `/G3 /Gd`, `/G3 /Gd /Oy`, `/G3 /Gd /Oy /Op`, `/G3 /Gd /Oy-`, ...)
- , so this is real inertness, not a scoring artefact.
+  (`/G3`, `/G3 /Gd`, `/G3 /Gd /Oy`, `/G3 /Gd /Oy /Op`, `/G3 /Gd /Oy-`, ...),
+  so this is real inertness, not a scoring artefact.
 - **Checked it is not an artefact of the narrow tier.** `targeted` covers
   `/G?`, `/Gd`, `/Op`, `/Oy`, `/Oy-`; re-swept m_AllocTracked at `thorough`,
   which reaches `/GX`, `/Gs`, `/ML`, `/Ob?`, `/Zp?`, **still 1 distinct
@@ -25059,8 +25080,8 @@ positives; PROVEN no longer inflates the headline. Residue 8,666.**
   asserts every `rebrew/msvc:6.0*` image has a spec. Upstream `26cccb1`.
 - **Then the sweep disproved the premise I registered it on.** Over all 19
   rows (171 runs, comparing full mismatch LISTS not counts) win9x is
-  **byte-identical to base/sp1/sp2/sp3 on all 19** and beats sp6 on none
- , 18 ties, 1 loss. I verified the mechanism myself: **win9x ships
+  **byte-identical to base/sp1/sp2/sp3 on all 19** and beats sp6 on none,
+  18 ties, 1 loss. I verified the mechanism myself: **win9x ships
   `CL.EXE` byte-identical to sp3** (md5 `6e3f639e` both, vs sp6
   `5a4ec02b`), i.e. the same 12.00.8168 frontend; the differing C2.DLL md5
   is a repackaged build of the same generator.
@@ -25072,8 +25093,8 @@ positives; PROVEN no longer inflates the headline. Residue 8,666.**
   independently reproduced every §91 figure exactly.
 - **cm_ProcessCommandQueue upgraded from exhaustion-wall to
   PROVEN-UNREACHABLE.** All 15 bytes are one fault: the join block at
-  0x3f that msvc6 deletes because **the test is provably-true dead code**
- , both predecessors enter with ebx nonzero (arm5 from the while guard;
+  0x3f that msvc6 deletes because **the test is provably-true dead code**,
+  both predecessors enter with ebx nonzero (arm5 from the while guard;
   arm6 is reached only because the test was nonzero, and its backward
   `jne` fires before the `xor ebx,ebx` at 0x6a). C cannot request a test
   whose operand the compiler proves nonzero. Byte-neutral (14 vs 14), so
@@ -25245,8 +25266,8 @@ decisions; a silent-divergence rebrew bug fixed. Residue 8,666.**
 both retired. An audit artifact corrected. Residue 8,666.**
 
 - **Corrected a contradiction in last round's audit.** It reported four
-  functions as having ZERO structural diffs while carrying linked residue
- , impossible, since residue IS differing bytes. Invoking `rebrew diff`
+  functions as having ZERO structural diffs while carrying linked residue,
+  impossible, since residue IS differing bytes. Invoking `rebrew diff`
   directly: gm_ObjectsAvailble 18, srv_LoadBuf 25, vfs_ReadCompressed 11,
   cm_ExProdObjekt 5. The `--fix-blocker` deletion risk is real in
   principle and the `blocker set` advice stands, but no row is actually
@@ -25271,8 +25292,8 @@ both retired. An audit artifact corrected. Residue 8,666.**
   reduce to THREE walls: the clamp order (§85, the pinned value is the
   constant 0x4000, no definition site to move, and every alternative
   clamp shape is spent with two span-violating), the accumulator
-  direction (-44 when split), and ONE scheduling fact behind seven diffs
- , the reference sinks `add esp,0x14` four instructions later, so it
+  direction (-44 when split), and ONE scheduling fact behind seven diffs,
+  the reference sinks `add esp,0x14` four instructions later, so it
   reads at pre-cleanup [esp+0x24]/[esp+0x28] where we read post-cleanup
   [esp+0x14]/[esp+0x10], the pairs differing by exactly the cleanup.
   Hoisting the reads below the crc32 call is **byte-identical** to
@@ -25989,8 +26010,8 @@ corrective.**
   (0x236b unchanged). Upstream still needs a compat shim or migration.
 - ExSell season-multi: hoisted/factored products all -90. Spieler
   sympathy math: cast-drop/temps/swap all neutral, store-swap -2/-5.
-  LEAD: reference uses `fimul` at 0x10018f4c; no tried shape emits it
- , follow-up lane should target fimul emission specifically.
+  LEAD: reference uses `fimul` at 0x10018f4c; no tried shape emits it,
+  follow-up lane should target fimul emission specifically.
 - Residue baseline unchanged: **9,067**.
 
 **Round-407 (2026-09-13): codegen knowledge mined (user request).**
@@ -28099,8 +28120,8 @@ deliverable agree.
 
 **Two more closed, with walls measured rather than assumed:**
 
-- `gm_FindNextFilteredEntity` (226): the reference keeps **five `ret` sites and merges none**
- , three byte-identical short epilogues and two byte-identical long ones, while our `/O2`
+- `gm_FindNextFilteredEntity` (226): the reference keeps **five `ret` sites and merges none**,
+  three byte-identical short epilogues and two byte-identical long ones, while our `/O2`
   object keeps two with five `rel32` branches into one.  The exit paths are byte-identical in
   the reference, so the cross-jump is **not** downstream of any shape difference: it is an
   unconditional merge our compiler performs.  Proven by a 352-byte standalone reproducer that
@@ -44040,8 +44061,8 @@ instruction in the wrong place" question.
   NEAR Δ11, remaining 4 structural diffs are a `pop esi` scheduling wall (target interleaves
   `pop esi` before `jne`, `xor eax,eax` early). Split-if and &&-chain spellings both worse (48/72);
   reverted to `return *(int*)(rec+0x65)!=0` (59/70 best). Wall, not leak.
-- **fcn_004edcd0 (Δ5):** Arg+3 tail-jump forwarder into 0x501490. Target `add eax,3; mov [esp+4],eax; jmp`
- , no C emits tail-jmp (`[esp+4]` store + jmp). Documented wall, parked.
+- **fcn_004edcd0 (Δ5):** Arg+3 tail-jump forwarder into 0x501490. Target `add eax,3; mov [esp+4],eax; jmp`,
+  no C emits tail-jmp (`[esp+4]` store + jmp). Documented wall, parked.
 - TL verify steady **passed 19** (RELOC 13). Server gate 281/283, lint 0.
 
 ### Round 1159 / session R17 (GOLDTL)
@@ -45518,8 +45539,8 @@ instruction in the wrong place" question.
   - **`fcn_00401210` / `fcn_00401260` / `fcn_00401360`** (23 B each): `fcn_00430910(&b, N, 1, a)` with
     N = 1, 4, 4. The `lea ecx,[esp+8]` in the prologue is the *second* parameter's **address**, so each
     wrapper takes two parameters and passes `&b`. All three RELOC 23/23.
-  - **`fcn_00401280`** (43 B): `fcn_004011d0(a1, a2); fcn_004011d0(a1, a2+4); fcn_004011d0(a1, a2+8);`
-   , `a2` is a `char*` (`lea eax,[esi+4]`). RELOC 43/43.
+  - **`fcn_00401280`** (43 B): `fcn_004011d0(a1, a2); fcn_004011d0(a1, a2+4); fcn_004011d0(a1, a2+8);`,
+    `a2` is a `char*` (`lea eax,[esi+4]`). RELOC 43/43.
   - **`fcn_004012f0`** (45 B): `fcn_00401260(a1, a2[0..2])` with `a2` an `int*` (loads `[esi]`,
     `[esi+4]`, `[esi+8]`). RELOC 45/45.
   - **`fcn_00403300`** (48 B): table search over `g_14d0020[0..0x2ff]`, returning the entry whose
@@ -45875,8 +45896,8 @@ instruction in the wrong place" question.
   function EXACT. Same idiom in `fcn_00422aa0` (parked, below).
 - **Shared-return tails want `result` assigned only on the success path.** `fcn_00424760`/`fcn_00424810`
   (`if (p) { n = p->f38|f3c; if (n) { call; ... } }` returning the node) only match with
-  `result = 0; if (p != 0) { n = ...; if (n != 0) { call(a1, n, a2); result = n; } } return result;`
- , the `result = n` inside the inner `if` is what makes both guards jump *forward* to one
+  `result = 0; if (p != 0) { n = ...; if (n != 0) { call(a1, n, a2); result = n; } } return result;`,
+  the `result = n` inside the inner `if` is what makes both guards jump *forward* to one
   `mov eax,esi; ret` tail, with `pop esi` shared. Assigning `result = n` after the inner `if`, or using
   `if (n) { call } return n;`, flips a guard to `jne` over an inline return.
 - **Parked:** `fcn_00424840` (39 B) and `fcn_00424790` (42 B), the same three-argument shape over
@@ -46340,8 +46361,8 @@ instruction in the wrong place" question.
 ### Round 1332 / session R305 (GOLDTL +3, thirty-third batch: `g_774a14` state predicates)
 - Three more, all EXACT: `fcn_0057ecc0` (40/40), `fcn_0057ec20` (73/73), `fcn_005809a0` (43/43).
 - **`g_774a14` guards a state-predicate family.** `fcn_0057ecc0` is
-  `if (g_774a14 == 0) return 1; p = *(int**)0x665f08; if (p[0xf] == 2 || *p == 5) return 0; return 1;`
- , the `||` over the two `cmp/je` pairs is what the reference has (a `&&` spelling inverts one of
+  `if (g_774a14 == 0) return 1; p = *(int**)0x665f08; if (p[0xf] == 2 || *p == 5) return 0; return 1;`,
+  the `||` over the two `cmp/je` pairs is what the reference has (a `&&` spelling inverts one of
   them). `fcn_0057ec20` extends the same head with `p = p[6]; if (p == 0) return 1;
   if (g_6b7fc0 != 0) return 0; return (*(int*)((char*)p + 0x68) & a1) != 0;` and
   `fcn_005809a0` is `if (g_774a14 == 0) return -4; p->f1c = a1; (*(int**)0x665f08)->f20 = -1;
@@ -46400,8 +46421,8 @@ instruction in the wrong place" question.
   above the first `test` and misses (47/71); the nested positive form gives the reference's
   `test esi,esi; je <tail>` chain.
 - **Parked:** `fcn_0044d390`/`fcn_0044d500`/`fcn_0044d5a0`/`fcn_0044d5f0` (same `0x662d18` head but with
-  loops and nested branches) and `fcn_004b3d40` (`g_10069a8 = 0; sim_SetSyncParams(&g_10069a8, 0, 0, 0);`
- , the reference schedules the four pushes *above* the three global stores).
+  loops and nested branches) and `fcn_004b3d40` (`g_10069a8 = 0; sim_SetSyncParams(&g_10069a8, 0, 0, 0);`,
+  the reference schedules the four pushes *above* the three global stores).
 - **Measured:** GOLDTL 512 -> **517** byte-matched (exact 168, reloc 349, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1000/1000 (0 warnings).
 
@@ -46466,8 +46487,8 @@ instruction in the wrong place" question.
   `lea eax,[ecx+ecx*2]` (3i) → `lea eax,[eax*8+eax]` (27i) → `shl 3` (216i) → `sub ecx` (215i) →
   `lea eax,[eax*4+disp]` (860i): the source's `i * 860` reproduces it once the *constant* is right.
 - **Chain walk returning an interior pointer:** `fcn_005b1b10` is
-  `p = g_774a78; while (p) { if (*(int*)p == a1) return p + 0xc; p = *(char**)(p + 0x48); } return 0;`
- , the trailing pointer bump is part of the return, not a field read.
+  `p = g_774a78; while (p) { if (*(int*)p == a1) return p + 0xc; p = *(char**)(p + 0x48); } return 0;`,
+  the trailing pointer bump is part of the return, not a field read.
 - **Byte tests chain with `&&`:** `fcn_004c75b0` is `c = *p; if (c != 0 && c != 5 && c != 6 && c != 7)
   return 1; if (out) *out = 1; return 0;`, four `cmp/je` to one shared tail.
 - **`obj_size` again:** four of the six were declared with the listing's byte count and had to be
@@ -47331,8 +47352,8 @@ instruction in the wrong place" question.
   against the byte (`mov dl,[eax]; cmp edx,esi`), and the reference parks that key in `esi` (pushing it)
   while MSVC keeps it in a volatile register, so the prologue (`push esi; mov esi,[esp+8]; xor ecx,ecx;
   mov eax,0x9a9228`) never matches.
-- **Also parked this round:** `fcn_00505370` (80B, the 0x868050 `base+b` probe with a 7-way byte compare
- , same base+b addressing wall as `fcn_00505340`), `fcn_0050bec0` (100B, loop over the same table).
+- **Also parked this round:** `fcn_00505370` (80B, the 0x868050 `base+b` probe with a 7-way byte compare,
+  same base+b addressing wall as `fcn_00505340`), `fcn_0050bec0` (100B, loop over the same table).
 - **Measured:** GOLDTL 606 -> **607** byte-matched (exact 247, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213;
   zero demotions/losses, lint 1089/1089 (0 warnings).
@@ -49467,8 +49488,8 @@ Two findings worth keeping:
 * **The last call takes no arguments.**  `fcn_00532ef0` (0x532ef0) reads a global,
   never `[esp+4]`; declaring it `void f(...)` and calling `f()` is what makes MSVC
   emit `jmp fcn_00532ef0` after the frame restore.  Called as `f(a1)` the compiler
-  keeps `a1` in a callee-saved register and emits `push reg / call / add esp,4 / ret`
- , 34 bytes' worth of difference, and it also adds a `push esi` to the prologue.
+  keeps `a1` in a callee-saved register and emits `push reg / call / add esp,4 / ret`,
+  34 bytes' worth of difference, and it also adds a `push esi` to the prologue.
   A zero-argument call in tail position is the reachable tail-call shape.
 * The frame then reproduces **exactly** (sub esp,0x90; the 0x14-dword `rep stosd`
   at `[esp+4]` after `push edi`; `buf` at `[esp+0x54]` after the push); the struct
