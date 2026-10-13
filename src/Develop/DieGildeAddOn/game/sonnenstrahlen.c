@@ -62,3 +62,13 @@ char* __cdecl CreateSonnenstrahlen(void)
 	fcn_00418860(g_6b5cf8);
 	return g_6b5cf8;
 }
+
+void __cdecl StopSonnenstrahlen(char* objekt, int phase)
+{
+    int zeit;
+
+    zeit = g_6b7fac;
+    SonnenstrahlenAktiv = -1;
+    SonnenstrahlenStartZeit = zeit;
+    SonnenstrahlenPhase = phase;
+}

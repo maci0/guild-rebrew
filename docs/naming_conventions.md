@@ -1,3 +1,18 @@
+### Shared solar-effect stop (2026-10-14)
+
+The inferred `StopSonnenstrahlen` covers TL0x4186d0 and Gold0x417150,
+31 bytes each. It belongs beside the existing creation/reset bodies in the
+shared solar-effect unit. The weather caller supplies an object pointer and
+phase1; the native helper ignores the first argument and stores the second,
+sets active state to-1 and resets the clock. The Gold one-argument stub is
+retired. No original spelling or filename is attested. Fresh CLI discovery
+supplies the missing TL inventory entry; all prior inventory rows are preserved.
+The shared header declares the two-argument interface. Both weather callers
+retain their complete380-byte COFF bodies and35 typed operands after binding
+and declaration repairs. All six solar-effect bodies and32 rejecting symbol
+controls are verified in `.scratch/goal22/reconstruction/solar-stop-native-proofs.json`.
+No storage, flags or assembly are added; client raw links remain unverified.
+
 ### Shared Sonnenstrahlen creation and reset (2026-10-14)
 
 The newly inferred `CreateSonnenstrahlen` covers TL0x418710 and GOLD0x417190,

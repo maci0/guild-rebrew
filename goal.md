@@ -3,6 +3,19 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-14 (shared solar-effect stop): fresh CLI discovery identifies the
+  missing TL4186d0/31 leaf; only that inventory entry is added. Shared inferred
+  StopSonnenstrahlen corrects Gold417150's ignored first argument and explicit
+  second phase argument. Related import scores100 and verifies RELOC31, retiring
+  the old stub. All six solar-effect bodies total546 native bytes; every operand,
+  complete literals and32 wrong-binding controls agree. Both weather callers
+  preserve complete380-byte COFF bodies and35 operands across interface/name
+  repairs. No storage/flags/assembly added. Full corpus checks complete:316/316 SERVER,3598/3694 TL and2097/2541 Gold
+  match, with0 compile errors and0 former-match regressions. Existing client
+  failures remain explicit. Server gate passes every raw byte; all3 lint/data
+  scans are clean. Complete client images/vendor patches and faithful discarded
+  server source remain unfinished. Receipts: .scratch/goal22/reconstruction.
+
 - 2026-10-14 (all-target lint/data and shared solar effect): all three targets
   now report0 lint errors/warnings and0 data conflicts. Upstream global scans
   respect migrated function/data identities, avoiding foreign storage owners.

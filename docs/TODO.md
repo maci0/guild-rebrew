@@ -1,3 +1,31 @@
+Solar-effect stop reconstruction (2026-10-14):
+
+- Fresh Rebrew discovery supplies TL4186d0/31, absent from the old inventory.
+  Only this reviewed leaf is added; no old inventory row changes. Native RET
+  ends byte31, followed by one external alignment NOP. Library probes miss.
+- The inferred StopSonnenstrahlen shares the solar-effect unit and canonical
+  header with creation/reset. The first object argument is ignored; phase is
+  the second argument. Gold417150's wrong one-argument stub retires through
+  related import (score100, RELOC31). Existing Gold inventory/metadata already
+  have31-byte extent and do not need a size correction.
+- All six solar-effect bodies total546 native bytes, with every typed operand,
+  complete strings and32 rejecting symbol controls checked independently.
+  Both existing weather callers preserve complete380-byte bodies and35 typed
+  operands across binding/prototype repairs. No storage, flags or assembly added.
+- The prior4042b0 candidate was already retired in Round149 despite fresh TODO
+  listing it as start-function. A new stub/probe was removed through the locked
+  metadata API; no production body or verdict is retained for that exhausted wall.
+- Required all-target corpus test completes:316/316 SERVER,3598/3694 TL
+  and2097/2541 Gold match;0 compile failures and0 former-match regressions.
+  Two existing3-byte placeholders now classify STUB; one legacy initterm C
+  reimplementation is still mismatched (native26 bytes match stock CRT).
+  Client unfinished bodies remain failures, not new matches.
+  The server gate passes every raw byte,
+  all3 targets have0 lint findings and both clients have0 data conflicts.
+  Independent weather-call edges resolve to the verified stop VA in each
+  client and reject a wrong binding. No game commit yet.
+  Receipts: .scratch/goal22/reconstruction/stop-* and solar-stop-*.
+
 All-target lint/data checkpoint (2026-10-14):
 
 - Rebrew main d3953e79 contains the migrated-file target-scope repair.
