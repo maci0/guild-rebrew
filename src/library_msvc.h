@@ -1,3 +1,8 @@
+/* CRT initialization is stock crt0dat.obj code. _cinit is external;
+ * _initterm is private to that member and has no game-callable declaration.
+ * Managed sizes are45 and26. Complete native code/operand checks and the
+ * raw server.map identify LIBCMT:crt0dat.obj; see docs/TODO.md. */
+
 #if 0
 // MSVC CRT library symbols for SERVER (matchable by PDB name)
 // These functions come from LIBCMT.lib (static CRT, /MT)
@@ -576,7 +581,7 @@
 // SIZE: 9
 
 // LIBRARY: SERVER 0x1001A758
-// _initterm
+// __initterm
 // SIZE: 26
 
 // LIBRARY: SERVER 0x1001A772
@@ -981,7 +986,7 @@
 #endif
 
 // LIBRARY: SERVER 0x1001A643
-// __cinit (crt0dat.obj .text, static: absent from the archive symbol index; mapped by scripts/map_libcmt.py)
+// __cinit
 
 /* Gold uses the stock single-threaded free.obj body; raw-map provider pending. */
 // LIBRARY: GOLD 0x005dec24

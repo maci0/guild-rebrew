@@ -1,3 +1,36 @@
+## CRT initialization ownership cleanup (2026-10-14)
+
+- Whole compatible stock crt0dat.obj components reproduce all213 native bytes:
+  server1001a643/45+1001a758/26, TL64e63d/45+64e761/26, and
+  Gold5dea0b/45+5deaf3/26. All21 typed operands and18 wrong-symbol controls
+  pass. _cinit is an external archive definition; _initterm is STATIC, so a
+  game-callable extern would misrepresent its linkage. Server raw map names
+  LIBCMT:crt0dat.obj; client selected archive/provider remains unverified.
+- Retired copied CRT code in Develop/crt_region/initterm.c,
+  GOLD.fcn_005deaf3.c and GOLD.fcn_005dea0b.c. All six managed identities now
+  use canonical C/native names _cinit/__cinit and _initterm/__initterm and
+  header-owned LIBRARY origins. Server _cinit's stale24-byte extent and a
+  comment embedded in its symbol are corrected to the complete45-byte body.
+  Historical comparison receipts remain; no new match status is assigned.
+- Rebrew source-owned library aliases incorrectly collided with the selected
+  function identity during rename. Upstream14b30bd5 fixes that guard while
+  preserving real duplicate protection. Four regressions fail before and pass
+  after;173 focused checks, full11843/43skip and all packaging gates pass.
+  Primary integration178 checks pass with existing private edits preserved.
+- Native proof/commands: .scratch/goal22/reconstruction/prove-crt-init-stock.py
+  and crt-init-stock-native-proof.json. Standalone _cinit matching is correctly
+  rejected by the thin-wrapper guard (17 fixed bytes of45); whole-component
+  callee/operand evidence supplies the identification without weakening it.
+- Full all-target corpus finishes with0 compile errors and0 retained-body match
+  regressions:316/316 server,3597/3692 TL,2096/2539 Gold. Each client retires
+  one matched _cinit45 and one unmatched _initterm26 C copy; those bytes are
+  library code, not game progress. Final server gate passes316 functions,
+  652 data checks, imports/exports and all286720 raw bytes, SHA3cc2ce90.
+  All3 lint/data scans report0 errors/warnings/conflicts/duplicate definitions.
+  All unrelated metadata identities, sizes and flags are unchanged; refreshed
+  input/measurement receipts remain. Complete clients and faithful discarded
+  server source are unfinished. Solar updater still627/626 in scratch.
+
 Solar-effect stop reconstruction (2026-10-14):
 
 - Fresh Rebrew discovery supplies TL4186d0/31, absent from the old inventory.

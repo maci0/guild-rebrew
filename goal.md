@@ -3,6 +3,22 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-14 (stock CRT initialization ownership): all213 native bytes of
+  _cinit45/private _initterm26 components match stock crt0dat.obj across3
+  targets, with21 typed operands and18 rejecting controls. Server raw map
+  confirms LIBCMT:crt0dat.obj; actual client provider remains unverified.
+  Three copied CRT C files retire; six header-owned LIBRARY identities use
+  actual native names and extents, including server's stale24→45 correction.
+  No public extern for the private helper or new match verdict is introduced.
+  Rebrew14b30bd5 fixes selected-function library aliases in rename; four red
+  regressions,173 focused,11843 full/43skip and all packaging/hooks pass;
+  primary integration178 passes. Full game corpus has0 compile errors and
+  0 retained-match regressions (316/316 server,3597/3692 TL,2096/2539 Gold).
+  One matched and one unmatched CRT source per client leave game accounting.
+  Final gate preserves all652 data checks and every286720 raw server byte;
+  all3 lint/data-conflict checks are clean. Full3-image/shared-source objective
+  remains unfinished. Receipts .scratch/goal22/reconstruction/crt-init-*.
+
 - 2026-10-14 (shared solar-effect stop): fresh CLI discovery identifies the
   missing TL4186d0/31 leaf; only that inventory entry is added. Shared inferred
   StopSonnenstrahlen corrects Gold417150's ignored first argument and explicit

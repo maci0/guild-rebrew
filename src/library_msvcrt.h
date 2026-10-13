@@ -1,3 +1,7 @@
+/* Managed _cinit/_initterm identities match compatible stock crt0dat.obj
+ * (45/26 bytes). The loop is private to that member; no public declaration
+ * is needed. Actual client raw-link provider selection remains unverified. */
+
 // LIBRARY: GOLD 0x005de5f0
 // _strrchr
 
