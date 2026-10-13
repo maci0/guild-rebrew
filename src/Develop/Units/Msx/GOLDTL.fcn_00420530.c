@@ -6,7 +6,7 @@ extern int g_6b71a4;
 extern float g_678150;
 extern float g_678154;
 extern float g_678158;
-extern int g_67815c;
+extern unsigned int g_67815c;
 extern int g_678160;
 extern int g_6b7190;
 extern int g_6b7fac;

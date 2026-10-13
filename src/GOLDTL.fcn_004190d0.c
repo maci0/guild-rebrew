@@ -1,7 +1,7 @@
 #include <math.h>
 #include "client_sound.h"
 
-extern int g_6b8014;
+extern char* g_6b8014;
 void __cdecl fcn_00455350(char*, char*, float*);
 void __cdecl fcn_00423890(char*, int);
 int __cdecl fcn_00423460(char*);

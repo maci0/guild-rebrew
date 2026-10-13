@@ -23,7 +23,8 @@ typedef struct {
 	char path[0x107];
 } FileSlot;
 
-extern int g_6b7fdc;
+typedef struct VFS_DIR VFS_DIR;
+extern VFS_DIR* g_6b7fdc;
 
 DirList* __cdecl fcn_0042f010(char*, int);
 
@@ -36,7 +37,7 @@ int __cdecl fcn_005dfa40(char* dir, char* ext, FileSlot* out)
 	DirEntry* e;
 	char* p;
 
-	list = fcn_0042f010(dir, g_6b7fdc);
+	list = fcn_0042f010(dir, (int) g_6b7fdc);
 	if (list == 0) {
 		return 0;
 	}

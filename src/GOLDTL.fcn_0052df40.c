@@ -1,3 +1,4 @@
+#include "client_types.h"
 // SIZE 0x3cc
 typedef struct {
 	char pad0[0xc];
@@ -26,7 +27,7 @@ typedef struct {
 extern int g_6a25b8;
 extern int g_6a25bc;
 extern int g_6a25c0;
-extern int g_6a25c4;
+extern int g_6a25c4[4];
 extern int g_6a25e4;
 extern int g_6a25ec;
 extern int g_1040494;
@@ -35,11 +36,11 @@ extern char g_6a2f30[];
 extern char g_6a2f24[];
 extern char g_6a2f18[];
 extern int g_772514;
-extern Slot_52df40 g_1015f40[];
+extern Win_1015f40 g_1015f40[0x60];
 extern Ctl_52df40* g_1015ea0;
 extern House_52df40 g_7f4ca0[];
 extern Dyn_52df40 g_868060[];
-extern unsigned short* g_773da8;
+extern char* g_773da8;
 extern unsigned char* g_868050;
 extern unsigned short g_774970;
 extern unsigned char* g_7746c8;
@@ -84,9 +85,9 @@ void __cdecl fcn_0052df40(unsigned char* s)
 		fcn_00519190(g_6a2f24, 0x870, &g_868060[*(int*) (s + 0x65)]);
 	}
 	fcn_004727a0(g_6a25b8, 0);
-	g_6a25bc = fcn_0046f740((g_1015f40[g_772514].width - 0x30) >> 1, 0x48, *s + 0x427, g_772514);
+	g_6a25bc = fcn_0046f740((((Slot_52df40*) g_1015f40)[g_772514].width - 0x30) >> 1, 0x48, *s + 0x427, g_772514);
 	g_1015ea0[g_6a25bc].shown = 1;
-	if (*(unsigned short*) (s + 0x27) != 0xffff && *(unsigned short*) (s + 0x27) != *g_773da8) {
+	if (*(unsigned short*) (s + 0x27) != 0xffff && *(unsigned short*) (s + 0x27) != *(unsigned short*) g_773da8) {
 		g_1015ea0[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (s + 0x27)];
 	}
 	if (*s == 0x47 || *s == 0x1d || *s == 0x57) {
@@ -98,7 +99,7 @@ void __cdecl fcn_0052df40(unsigned char* s)
 	if ((s[0x5a] & 1) != 0 || *s == 0x47 || *s == 0x1d || *s == 0x57) {
 		g_6a25ec = -1;
 		g_6a25e4 = -1;
-		g_6a25c4 = -1;
+		g_6a25c4[0] = -1;
 		return;
 	}
 	kind = fcn_00504bd0(*s);
@@ -113,9 +114,9 @@ void __cdecl fcn_0052df40(unsigned char* s)
 		if (g_7746c8 == 0) {
 			g_6a25e4 = fcn_0052dee0(0, 0xa6, (int) g_6a2f18);
 		}
-		g_6a25c4 = -1;
+		g_6a25c4[0] = -1;
 		return;
 	}
-	g_6a25c4 = -1;
+	g_6a25c4[0] = -1;
 	g_6a25e4 = -1;
 }

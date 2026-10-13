@@ -1,3 +1,37 @@
+All-target lint/data checkpoint (2026-10-14):
+
+- Rebrew main d3953e79 contains the migrated-file target-scope repair.
+  Focused414 and full11816 tests pass, with60 skips; coverage and
+  packaging/reproducibility/provenance/SBOM checks pass.
+- All three targets report zero lint errors and warnings and no data type
+  conflicts. Rebrew now retains target scope for migrated function/data files;
+  server-only storage no longer appears as client storage. Regression coverage
+  includes both managed stores, shared files, library files and foreign owners.
+- Thirty-one source units use consistent declarations and explicit local views.
+  Complete COFF code and typed relocation graphs for105 functions in52 target/unit
+  pairs are preserved. Native path setup writes prove four-byte globals at
+  TL0x678c08/0x678c0c; narrow readers keep explicit byte/word views. No new
+  storage or client linked-data verdict is introduced. Both client type checks
+  pass1020 structures with no findings.
+- Gold's38 assembly warnings receive target-specific source provenance only
+  after checking the original26-byte fill/copy macros or three native INT3
+  traps. The unresolved TL building constructor lacks that macro: its shared
+  assembly is now restricted to REBREW_SERVER, with an explicit unresolved
+  client blocker and C fill. No client assembly provenance or byte match is
+  invented. Receipts: .scratch/goal22/reconstruction.
+- Shared CreateSonnenstrahlen211 and StartSonnenstrahlen31 now reproduce both
+  clients: four complete bodies/484 bytes, every typed operand and24 rejecting
+  symbol controls. Full compiler strings match; object pointer and state rows
+  remain declaration views with unresolved backing ownership. The existing
+  weather callers preserve complete380-byte COFF bodies and35 operands each.
+  Complete client links and faithful discarded server source remain unfinished.
+
+- Fresh public-verifier checks cover238 affected functions:101/101 server,
+  61/80 TL and46/57 Gold match. The30 existing client mismatches remain;
+  no matched function regresses and no compilation fails. All3 lint/data
+  conflict scans remain clean. The superseded pre-edit full-corpus run was
+  interrupted and is not counted as validation.
+
 Workspace/tooling checkpoint (2026-10-14):
 
 - Rebrew main72a13100 integrates the release-review worktree, preserves staged

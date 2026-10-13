@@ -45,7 +45,7 @@ __declspec(dllimport) int __stdcall shutdown(unsigned int s, int how);
 __declspec(dllimport) int __stdcall closesocket(unsigned int s);
 
 extern int g_14cbca0;
-extern int g_14cbca4;
+extern char* g_14cbca4;
 extern unsigned char* g_14cbca8;
 extern unsigned short g_14cbcac;
 extern unsigned short g_14cbcae;

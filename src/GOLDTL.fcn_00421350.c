@@ -1,6 +1,6 @@
 extern int g_6b7d64;
-extern unsigned char g_678c08;
-extern unsigned short g_678c0c;
+extern int g_678c08;
+extern int g_678c0c;
 
 // SIZE 0xc
 struct path_421350 {
@@ -35,8 +35,8 @@ unsigned short __cdecl fcn_00421350(struct path_421350* path, char* map, int x0,
 		r = fcn_00421890(map, x0, y0, x1, y1, flags);
 		if (r != 0xffff) {
 			for (c = r; path->n < path->max && c != 0xffff; c = (*(struct cell_421350**) (map + 0x24))[c].prev) {
-				path->cells[path->n * 2] = g_678c08 & (unsigned char) c;
-				path->cells[path->n * 2 + 1] = (unsigned char) (c >> g_678c0c);
+				path->cells[path->n * 2] = *(unsigned char*) &g_678c08 & (unsigned char) c;
+				path->cells[path->n * 2 + 1] = (unsigned char) (c >> *(unsigned short*) &g_678c0c);
 				path->n++;
 			}
 		}
@@ -44,8 +44,8 @@ unsigned short __cdecl fcn_00421350(struct path_421350* path, char* map, int x0,
 		r = fcn_004214c0(map, x0, y0, x1, y1, flags);
 		if (r != 0xffff) {
 			for (c = r; path->n < path->max && c != 0xffff; c = (*(struct cell_421350**) (map + 0x24))[c].prev) {
-				path->cells[path->n * 2] = g_678c08 & (unsigned char) c;
-				path->cells[path->n * 2 + 1] = (unsigned char) (c >> g_678c0c);
+				path->cells[path->n * 2] = *(unsigned char*) &g_678c08 & (unsigned char) c;
+				path->cells[path->n * 2 + 1] = (unsigned char) (c >> *(unsigned short*) &g_678c0c);
 				path->n++;
 			}
 		}

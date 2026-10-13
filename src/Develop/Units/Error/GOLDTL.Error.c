@@ -22,7 +22,7 @@
 
 /* rebrew_globals.h declares the SERVER-sized tables, so this twin declares
  * only what it needs itself. */
-extern int g_log_buffer;
+extern char g_log_buffer[256];
 extern int g_log_file_handle;
 
 void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);

@@ -22,7 +22,7 @@ void __cdecl fcn_00415d70(int);
 void __cdecl fcn_00416a20(int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
-void __cdecl fcn_00418710(void);
+#include "Develop/DieGildeAddOn/game/sonnenstrahlen.h"
 void __cdecl fcn_004186d0(int, int);
 
 void __cdecl fcn_00537080(void)
@@ -45,7 +45,7 @@ void __cdecl fcn_00537080(void)
 		    && g_7e43a4[(unsigned short) (*(int*)&g_7f4c04) + 1] == 0
 		    && g_7f4c06 > 0x1e) {
 			if (gm_RandomMod(0x80) > 0x60 && (*(int*)&g_6b5cf8) == 0) {
-				fcn_00418710();
+				CreateSonnenstrahlen();
 			}
 			g_6a2c24 = (unsigned short) (*(int*)&g_7f4c04);
 		}

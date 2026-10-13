@@ -35,7 +35,8 @@ extern char g_7f4ca0[];
 extern char g_7e2480[];
 extern char g_774980;
 extern char g_773de8;
-extern int g_6b7fdc;
+typedef struct VFS_DIR VFS_DIR;
+extern VFS_DIR* g_6b7fdc;
 extern unsigned short g_774970;
 extern char g_6b5c60[];
 
@@ -78,12 +79,12 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 		g_773de8 = g_774980;
 		fcn_005e3fa0("Gamedata/cities/standard.scr");
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
-		f = fcn_0042ff50(path, "wb", g_6b7fdc);
+		f = fcn_0042ff50(path, "wb", (int) g_6b7fdc);
 		if (f != 0) {
 			fcn_0051e490(f, 5);
 			CloseVfsStream(f);
 		}
-		f = fcn_0042ff50(path, "rb", g_6b7fdc);
+		f = fcn_0042ff50(path, "rb", (int) g_6b7fdc);
 		if (f != 0) {
 			ls_LoadSavegameHeader(f, hdr);
 			crc = fcn_00401000((unsigned char*) hdr, 0x78);

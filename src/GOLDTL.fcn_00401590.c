@@ -18,7 +18,8 @@ typedef struct {
 	unsigned int biClrImportant;
 } BmpInfoHeader;
 
-extern int g_6b7fdc;
+typedef struct VFS_DIR VFS_DIR;
+extern VFS_DIR* g_6b7fdc;
 int __cdecl fcn_0042ff50(const char* name, const char* mode, int ctx);
 void __cdecl fcn_00430a80(int f, int off, int whence);
 void __cdecl fcn_004306b0(void* buf, int size, int count, int f);
@@ -31,7 +32,7 @@ char __cdecl fcn_00401590(const char* name, int* width, int* height, int* bpp)
 	int f;
 
 	result = 0;
-	f = fcn_0042ff50(name, "rb", g_6b7fdc);
+	f = fcn_0042ff50(name, "rb", (int) g_6b7fdc);
 	if (f != 0) {
 		fcn_00430a80(f, 0xe, 0);
 		fcn_004306b0(&bih, 1, 0x28, f);

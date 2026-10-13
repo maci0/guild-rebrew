@@ -54,8 +54,8 @@ struct Device {
 };
 
 extern int g_6b8014;
-extern Mat g_1040cc0;
-extern Mat g_1040c80;
+extern float g_1040cc0[16];
+extern float g_1040c80[16];
 extern void* g_6b5de0;
 extern int g_67a370;
 extern char g_6b8000;
@@ -89,9 +89,9 @@ void __cdecl fcn_00451df0(Ent* e)
 	fcn_005ebea2(&m, 0, &e->xf->b);
 	fcn_005ebbb9(&m, &m);
 	fcn_005ee04a(&p, &e->inst->model->plane, &m);
-	fcn_005ed45f(&g_1040cc0, &p);
-	fcn_005ebea2(&g_1040c80, 0, &g_1040cc0);
-	fcn_005ebbb9(&g_1040c80, &g_1040c80);
+	fcn_005ed45f((Mat*) g_1040cc0, &p);
+	fcn_005ebea2((Mat*) g_1040c80, 0, (Mat*) g_1040cc0);
+	fcn_005ebbb9((Mat*) g_1040c80, (Mat*) g_1040c80);
 	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x16, 2);
 	g_6b8000 = 1;
 	fcn_004379a0(g_67a370, 0, 0x40, fcn_00451f80, &big);

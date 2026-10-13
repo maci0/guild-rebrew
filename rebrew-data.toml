@@ -7759,14 +7759,18 @@ section = ".data"
 file = "src/GOLDTL.fcn_00439c60.c"
 marker_type = "GLOBAL"
 name = "g_6b8014"
-type = "int"
+type = "char*"
+updated_by = "data"
+updated_at = "2026-10-13T19:43:15+00:00"
 
 ["GOLDTL.0x006b8014"]
 section = ".data"
 file = "src/GOLDTL.fcn_00439c60.c"
 marker_type = "GLOBAL"
 name = "g_6b8014"
-type = "int"
+type = "char*"
+updated_by = "data"
+updated_at = "2026-10-13T19:43:14+00:00"
 
 ["GOLDTL.0x00fc2dec"]
 section = ".data"
@@ -16584,3 +16588,119 @@ link_symbol = "_prog"
 note = "Pristine minigzip.c char *prog is COMMON4 in its x86 COFF; six complete native function relocations establish VA 0x01040498. Uninitialized object lies wholly in zero-filled virtual .data tail. One source definition; raw client link and built-data verification pending."
 updated_by = "data"
 updated_at = "2026-10-12T02:46:18+00:00"
+
+["GOLDTL.0x006b5cf8"]
+name = "g_6b5cf8"
+type = "char*"
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Inferred scalar access view only; four-byte native access in TL4186f0/418710. Backing allocation, complete extent and storage owner unresolved. Declaration only; no storage or data verdict."
+
+["GOLDTL.0x006b5cfc"]
+name = "SonnenstrahlenAktiv"
+type = "int"
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Inferred scalar access view only; four-byte native access in TL4186f0/418710. Backing allocation, complete extent and storage owner unresolved. Declaration only; no storage or data verdict."
+
+["GOLDTL.0x0067754c"]
+name = "SonnenstrahlenStartZeit"
+type = "int"
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Inferred scalar access view only; four-byte native access in TL4186f0/418710. Backing allocation, complete extent and storage owner unresolved. Declaration only; no storage or data verdict."
+
+["GOLDTL.0x006b5d00"]
+name = "SonnenstrahlenPhase"
+type = "int"
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Inferred scalar access view only; four-byte native access in TL4186f0/418710. Backing allocation, complete extent and storage owner unresolved. Declaration only; no storage or data verdict."
+
+["GOLDTL.0x00677664"]
+name = "str_sonnenstrahlen"
+type = "char[15]"
+size = 15
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "STRING"
+storage_kind = "literal"
+link_symbol = "??_C@_0P@IFCJ@sonnenstrahlen?$AA@"
+note = "Complete compiler literal including NUL independently equals reference bytes and typed constructor operand; compiler-owned source literal, no copied storage or linked data verdict."
+
+["GOLDTL.0x00677674"]
+name = "str_pLicht"
+type = "char[7]"
+size = 7
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "STRING"
+storage_kind = "literal"
+link_symbol = "??_C@_06PAAK@pLicht?$AA@"
+note = "Complete compiler literal including NUL independently equals reference bytes and typed constructor operand; compiler-owned source literal, no copied storage or linked data verdict."
+
+["GOLD.0x00631120"]
+name = "g_6b5cf8"
+type = "char*"
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Inferred scalar access view; native four-byte access at Gold417170/417190. Backing allocation, complete extent and storage owner unresolved. Declaration only; no storage or data verdict."
+
+["GOLD.0x00631124"]
+name = "SonnenstrahlenAktiv"
+type = "int"
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Inferred scalar access view; native four-byte access at Gold417170/417190. Backing allocation, complete extent and storage owner unresolved. Declaration only; no storage or data verdict."
+
+["GOLD.0x005f345c"]
+name = "SonnenstrahlenStartZeit"
+type = "int"
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Inferred scalar access view; native four-byte access at Gold417170/417190. Backing allocation, complete extent and storage owner unresolved. Declaration only; no storage or data verdict."
+
+["GOLD.0x00631128"]
+name = "SonnenstrahlenPhase"
+type = "int"
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "GLOBAL"
+storage_kind = "alias"
+note = "Inferred scalar access view; native four-byte access at Gold417170/417190. Backing allocation, complete extent and storage owner unresolved. Declaration only; no storage or data verdict."
+
+["GOLD.0x005f3884"]
+name = "str_sonnenstrahlen"
+type = "char[15]"
+size = 15
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "STRING"
+storage_kind = "literal"
+link_symbol = "??_C@_0P@IFCJ@sonnenstrahlen?$AA@"
+note = "Complete compiler literal including NUL matches native bytes and constructor operand; source compiler owns literal, no copied storage or linked data verdict."
+
+["GOLD.0x005f3894"]
+name = "str_pLicht"
+type = "char[7]"
+size = 7
+section = ".data"
+file = "src/Develop/DieGildeAddOn/game/sonnenstrahlen.c"
+marker_type = "STRING"
+storage_kind = "literal"
+link_symbol = "??_C@_06PAAK@pLicht?$AA@"
+note = "Complete compiler literal including NUL matches native bytes and constructor operand; source compiler owns literal, no copied storage or linked data verdict."

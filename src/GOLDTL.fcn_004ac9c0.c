@@ -1,4 +1,5 @@
-extern int g_6b7fdc;
+typedef struct VFS_DIR VFS_DIR;
+extern VFS_DIR* g_6b7fdc;
 
 void* __cdecl fcn_0042ff50(char*, char*, int);
 unsigned int __cdecl fcn_00430910(void*, int, int, void*);
@@ -31,7 +32,7 @@ int __cdecl fcn_004ac9c0(struct hist_4ac9c0* h)
 	int i;
 
 	magic = 0x68466153;
-	f = fcn_0042ff50("/gamedata/ai/historical.dfn", "wb", g_6b7fdc);
+	f = fcn_0042ff50("/gamedata/ai/historical.dfn", "wb", (int) g_6b7fdc);
 	if (f == 0)
 		goto out;
 	if (fcn_00430910(&magic, 4, 1, f) <= 0)

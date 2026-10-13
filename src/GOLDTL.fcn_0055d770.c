@@ -25,10 +25,10 @@ typedef struct Handler {
 } Handler;
 // SIZE 8
 
-extern Level* g_868050;
+extern unsigned char* g_868050;
 extern int g_6b8010;
 extern Slot21c g_7f4ca0[];
-extern Handler g_7e35c0[];
+extern int g_7e35c0[];
 extern int g_774650;
 extern char* g_7746c4;
 extern unsigned short* g_7746cc;
@@ -67,7 +67,7 @@ void __cdecl fcn_0055d770(char* e)
 	s44 = gm_StartFilteredEntitySearch(1, 0, 0x44);
 	gm_StartFilteredEntitySearch(1, 0, 0x45);
 	b = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
-	lv = &g_868050[*(unsigned char*) b];
+	lv = (Level*) (g_868050 + *(unsigned char*) b * sizeof(Level));
 	c = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb4));
 	saved = g_6b8010;
 	r = gm_FindRecordById(*(int*) (e + 0xac));
@@ -101,7 +101,7 @@ void __cdecl fcn_0055d770(char* e)
 			}
 			k = g_7f4ca0[*(unsigned short*) (e + 8)].kind;
 			if (k == 6 || k == 7) {
-				if (g_7e35c0[g_774650].fn == fcn_005ba910) {
+				if (((Handler*) g_7e35c0)[g_774650].fn == fcn_005ba910) {
 					if (g_7746c4 == c) {
 						goto done;
 					}

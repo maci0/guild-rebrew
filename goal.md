@@ -3,6 +3,25 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-14 (all-target lint/data and shared solar effect): all three targets
+  now report0 lint errors/warnings and0 data conflicts. Upstream global scans
+  respect migrated function/data identities, avoiding foreign storage owners.
+  Upstream main d3953e79 contains the repair;414 focused and full11816 tests
+  pass,60 skipped. Static, coverage and reproducible packaging gates pass.
+  Thirty-one source units unify declaration types with explicit local access views;
+  105 complete functions across52 target/unit pairs preserve code and typed
+  operand graphs. Both client type checks pass1020 structures. Gold's38 assembly
+  warnings are reviewed against native macros/INT3 and recorded through
+  source provenance. TL's unmatched building constructor uses C fill; the shared
+  assembly is SERVER-only, with no invented client origin claim. Shared inferred
+  CreateSonnenstrahlen211 and StartSonnenstrahlen31 earn four fresh RELOC object
+  matches/484 complete native bytes, including full operand bindings and24
+  rejecting controls. The complete380-byte weather callers preserve35 operands
+  each. New scalar/pointer rows are declaration views, with backing/full extent
+  unresolved; complete compiler strings allocate no copied storage. Receipts:
+  .scratch/goal22/reconstruction. Complete client images, vendor patch recovery
+  and faithful discarded server source remain unfinished.
+
 - 2026-10-14 (upstream staged matching repair and workspace cleanup): local
   Rebrew main72a13100 merges the complete release-review history and fixes
   source-relative headers in climb previews and qualifier candidates through

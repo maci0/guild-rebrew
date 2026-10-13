@@ -48,8 +48,8 @@ extern int g_6b8064;
 extern Node_451f80* g_6b8068;
 extern int g_1052bac;
 extern int g_1042a08;
-extern Mat_451f80 g_1040c80;
-extern Mat_451f80 g_1040cc0;
+extern float g_1040c80[16];
+extern float g_1040cc0[16];
 
 Mesh_451f80* __cdecl fcn_00436930(char* o, float* r);
 void __cdecl fcn_00438100(char* e, char* cam, int force);
@@ -114,7 +114,7 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 					}
 				} else {
 					if (!set) {
-						fcn_00450e90(f, g, o + 0x280, &g_1040cc0, &g_1040c80);
+						fcn_00450e90(f, g, o + 0x280, (Mat_451f80*) g_1040cc0, (Mat_451f80*) g_1040c80);
 						g_6b5de0->vtbl->SetTransform(g_6b5de0, 0x100, *(char**) (e + 0x1ec) + 0x15fc);
 						set = 1;
 					}

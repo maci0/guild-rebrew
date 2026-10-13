@@ -4,7 +4,8 @@
 #include <windows.h>
 
 extern char g_6a24d0[];
-extern int g_6b7fdc;
+typedef struct VFS_DIR VFS_DIR;
+extern VFS_DIR* g_6b7fdc;
 extern int g_1005760;
 
 void* __cdecl fcn_0042ff50(char*, char*, int);
@@ -30,7 +31,7 @@ int __cdecl fcn_005259f0(char* path)
 	int sent;
 
 	n = 0;
-	h = fcn_0042ff50(path, g_6a24d0, g_6b7fdc);
+	h = fcn_0042ff50(path, g_6a24d0, (int) g_6b7fdc);
 	if (h == 0) {
 		return 0;
 	}

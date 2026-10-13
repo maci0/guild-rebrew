@@ -1,7 +1,7 @@
 // GLOBAL: GOLDTL 0x6b8014
-extern int g_6b8014;
+extern char* g_6b8014;
 // GLOBAL: GOLD 0xfc2dec
-extern int g_6b8014;
+extern char* g_6b8014;
 // FUNCTION: GOLD 0x0043cbe0
 // FUNCTION: GOLDTL 0x439c60
 

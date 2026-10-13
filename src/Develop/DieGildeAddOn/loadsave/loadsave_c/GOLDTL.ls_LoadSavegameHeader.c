@@ -44,7 +44,7 @@ struct SaveHeaderTail {
 	char c;
 };
 #pragma pack()
-extern struct SaveHeaderTail g_save_header_tail; /* 0x1002d4f0 */
+extern char g_save_header_tail[]; /* 0x1002d4f0 */
 
 int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 {
@@ -153,7 +153,7 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 		}
 	}
 	else {
-		*(struct SaveHeaderTail*) (dest + 0x9c) = g_save_header_tail;
+		*(struct SaveHeaderTail*) (dest + 0x9c) = *(struct SaveHeaderTail*) g_save_header_tail;
 	}
 	return 1;
 }

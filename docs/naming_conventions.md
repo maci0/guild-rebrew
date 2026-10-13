@@ -1,3 +1,26 @@
+### Shared Sonnenstrahlen creation and reset (2026-10-14)
+
+The newly inferred `CreateSonnenstrahlen` covers TL0x418710 and GOLD0x417190,
+211 native bytes each. `StartSonnenstrahlen` replaces TLfcn_004186f0 and
+GOLDfcn_00417170 at0x4186f0/0x417170,31 bytes each. Both live once in the
+inferred `Develop/DieGildeAddOn/game/sonnenstrahlen.c` unit. No original
+function spelling or unit path is attested: resource literals `pLicht` and
+`sonnenstrahlen`, the shared scene creation calls and the existing weather
+caller establish purpose and affinity. No new module prefix is invented.
+
+`SonnenstrahlenAktiv`, `SonnenstrahlenStartZeit` and `SonnenstrahlenPhase`
+are inferred scalar access names. Their rows and the existing object-pointer
+spelling describe declaration views; backing allocations, complete extents
+and storage owners remain unresolved. No storage is allocated. The constructors
+share logic with verified per-client flag offsets and masks. Their literal
+rows record complete compiler-owned strings and provide no linked data verdict.
+The canonical interface returns the constructed scene object; the reset accepts
+an unused object argument, matching the native constructor's push. Both old
+reset copies retire. Complete bodies, every typed operand and rejecting bindings
+are checked in `.scratch/goal22/reconstruction/production-native-proofs.json`;
+the existing weather caller's complete body and operand graph are preserved
+in both clients by `caller-preservation.json` in that directory.
+
 # Original Developer Naming Conventions
 
 Reconstructed from debug strings, error messages, and binary analysis of

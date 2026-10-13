@@ -9,6 +9,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #include "server_internal.h"
+#include "../game_structs.h"
 
 extern unsigned char g_host_flags; /* 0x101de464 */
 #include "../download_state.h"
@@ -1491,7 +1492,7 @@ void __cdecl list_unlink_relink(char* ctx, char* node)
 
 #include "server_internal.h"
 
-extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
+extern int (__cdecl* g_dispatch_table[106])(unsigned char*, int); /* 0x1002c3f8 */
 int __cdecl ahm_ProcessEntityChain(char* cmd_payload);
 int __cdecl srv_PutConnSCommand(unsigned int* player, unsigned char* data);
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
@@ -2128,7 +2129,7 @@ int __cdecl srv_GetEntityOfficeSlot(unsigned char* entity, void* role_out, void*
 	typedef struct {
 		int v[6];
 	} Row24;
-	extern int g_office_role_templates[40][6];
+	extern OFFICE_ROLE_TEMPLATE g_office_role_templates[40];
 	int found;
 	int i;
 	int key;
@@ -2146,7 +2147,7 @@ int __cdecl srv_GetEntityOfficeSlot(unsigned char* entity, void* role_out, void*
 		if (key == ((Row24*) g_office_slots)[i].v[1]) {
 			found = 1;
 			*(Row24*) slot_out = ((Row24*) g_office_slots)[i];
-			*(Row24*) role_out = *(Row24*) g_office_role_templates[(unsigned char) ((Row24*) g_office_slots)[i].v[2]];
+			*(Row24*) role_out = *(Row24*) ((int (*)[6]) g_office_role_templates)[(unsigned char) ((Row24*) g_office_slots)[i].v[2]];
 			break;
 		}
 	}
@@ -2158,7 +2159,7 @@ int __cdecl srv_GetEntityCouncilSlot(unsigned char* entity, void* role_out, void
 	typedef struct {
 		int v[6];
 	} Row24;
-	extern int g_office_role_templates[40][6];
+	extern OFFICE_ROLE_TEMPLATE g_office_role_templates[40];
 	int found;
 	int i;
 	int key;
@@ -2176,7 +2177,7 @@ int __cdecl srv_GetEntityCouncilSlot(unsigned char* entity, void* role_out, void
 		if (key == ((Row24*) g_office_slots)[i].v[1]) {
 			found = 1;
 			*(Row24*) slot_out = ((Row24*) g_office_slots)[i];
-			*(Row24*) role_out = *(Row24*) g_office_role_templates[(unsigned char) ((Row24*) g_office_slots)[i].v[2]];
+			*(Row24*) role_out = *(Row24*) ((int (*)[6]) g_office_role_templates)[(unsigned char) ((Row24*) g_office_slots)[i].v[2]];
 			break;
 		}
 	}
@@ -2185,7 +2186,7 @@ int __cdecl srv_GetEntityCouncilSlot(unsigned char* entity, void* role_out, void
 
 int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out)
 {
-	extern int g_office_role_templates[40][6];
+	extern OFFICE_ROLE_TEMPLATE g_office_role_templates[40];
 	extern float g_office_float_table[7][7];
 
 	if (entity == 0 || *(unsigned short*) entity == 0xffff || role == 0 || role >= 30) {
@@ -2199,21 +2200,21 @@ int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out)
 		return 0;
 	}
 #if defined(REBREW_SERVER) && defined(REBREW_LEGACY_SERVER_LAYOUT)
-	if ((g_office_role_templates[entity[0x167]][2] & 0xff) + 1 < (g_office_role_templates[role][2] & 0xff)) {
+	if ((((int (*)[6]) g_office_role_templates)[entity[0x167]][2] & 0xff) + 1 < (((int (*)[6]) g_office_role_templates)[role][2] & 0xff)) {
 		return 0;
 	}
-	if ((g_office_role_templates[entity[0x166]][2] & 0xff) >= (g_office_role_templates[role][2] & 0xff)) {
+	if ((((int (*)[6]) g_office_role_templates)[entity[0x166]][2] & 0xff) >= (((int (*)[6]) g_office_role_templates)[role][2] & 0xff)) {
 		return 0;
 	}
 #else
-	if (((unsigned char*) g_office_role_templates[entity[0x167]])[8] + 1 < ((unsigned char*) g_office_role_templates[role])[8]) {
+	if (((unsigned char*) ((int (*)[6]) g_office_role_templates)[entity[0x167]])[8] + 1 < ((unsigned char*) ((int (*)[6]) g_office_role_templates)[role])[8]) {
 		return 0;
 	}
-	if (((unsigned char*) g_office_role_templates[entity[0x166]])[8] >= ((unsigned char*) g_office_role_templates[role])[8]) {
+	if (((unsigned char*) ((int (*)[6]) g_office_role_templates)[entity[0x166]])[8] >= ((unsigned char*) ((int (*)[6]) g_office_role_templates)[role])[8]) {
 		return 0;
 	}
 #endif
-	*out = g_office_float_table[g_office_role_templates[entity[0x166]][1]][g_office_role_templates[role][1]];
+	*out = g_office_float_table[((int (*)[6]) g_office_role_templates)[entity[0x166]][1]][((int (*)[6]) g_office_role_templates)[role][1]];
 	return 1;
 }
 

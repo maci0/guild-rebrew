@@ -2,7 +2,8 @@
 // FUNCTION: GOLDTL 0x005e3fa0
 
 extern unsigned short g_7ea3c0[];
-extern int g_6b7fdc;
+typedef struct VFS_DIR VFS_DIR;
+extern VFS_DIR* g_6b7fdc;
 extern char g_6750e8[];
 extern char g_6a23b0[];
 
@@ -22,7 +23,7 @@ void __cdecl fcn_005e3fa0(char* name)
 	int y;
 
 	n = 0;
-	fh = fcn_0042ff50(name, g_6750e8, g_6b7fdc);
+	fh = fcn_0042ff50(name, g_6750e8, (int) g_6b7fdc);
 	if (fh != 0) {
 		buf = m_alloc(0xe100, g_6a23b0);
 		ls_ReadVfsDataChecked(buf, 0xe100, 1, fh);

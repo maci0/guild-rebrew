@@ -2675,6 +2675,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	/* The original's fill here is the 24-byte hand-written block-fill prelude
 	 * (docs/msvc6-allocator.md Finding 19); no msvc6 C memset spelling emits
 	 * it.  Reproduced as a block-fill with ordinary named operands. */
+#ifdef REBREW_SERVER
 	__asm {
 		mov edi, s.dest
 		mov ebx, geb_type
@@ -2692,6 +2693,9 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		add ecx, ebx
 		rep stosb
 	}
+#else
+	memset(s.dest, 0, geb_type);
+#endif
 	/* component loop: counter reuses geb_type (ebp+8) */
 	{
 		/* The target walks a pointer (`lea edi,[record+0x23]`, `add edi,2`

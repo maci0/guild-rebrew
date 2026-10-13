@@ -9,13 +9,13 @@ typedef struct {
 	unsigned int color;
 	float u;
 	float v;
-} Vtx47bf;
+} Vtx;
 
 // SIZE 0xac
 typedef struct {
-	Vtx47bf v[6];
+	Vtx v[6];
 	int tex;
-} Quad47bf;
+} Quad;
 
 // SIZE 0x10
 typedef struct {
@@ -31,13 +31,13 @@ extern int g_7725f8;
 extern int g_7725fc;
 extern int g_67d964;
 extern int g_67d968;
-extern Quad47bf g_1552020[0x400];
+extern Quad g_1552020[0x400];
 
 void __cdecl fcn_0047c560(int a, int b, int c);
-int __cdecl fcn_0047b8b0(int x, int y, int w, int h, Quad47bf* q);
-void __cdecl fcn_0047b9a0(Quad47bf* q, unsigned char r, unsigned char g, unsigned char b);
+int __cdecl fcn_0047b8b0(int x, int y, int w, int h, Quad* q);
+void __cdecl fcn_0047b9a0(Quad* q, unsigned char r, unsigned char g, unsigned char b);
 
-Quad47bf* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
+Quad* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
 {
 	int cw;
 	int ch;
@@ -52,7 +52,7 @@ Quad47bf* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* sr
 	float t;
 	int i;
 	int n;
-	Quad47bf* q;
+	Quad* q;
 
 	fu = 0.0f;
 	fv = 0.0f;

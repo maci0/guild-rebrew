@@ -13,7 +13,8 @@ extern char g_149d120[][0x74];
 extern char g_1053000[][0x50];
 extern int g_11bb000[];
 extern char* g_14a5320[];
-extern int g_6b7fdc;
+typedef struct VFS_DIR VFS_DIR;
+extern VFS_DIR* g_6b7fdc;
 
 int __cdecl fcn_0042d630(const char* name);
 int __cdecl fcn_0042ff50(const char* name, const char* mode, int ctx);
@@ -42,7 +43,7 @@ int __cdecl fcn_0042d6b0(const char* name)
 		return 0;
 	}
 	sprintf(path, "textbin_%s\\%s.res", "german", ((TextBank_42d6b0*)g_149d120)[idx].name);
-	f = fcn_0042ff50(path, "rb", g_6b7fdc);
+	f = fcn_0042ff50(path, "rb", (int) g_6b7fdc);
 	if (f == 0) {
 		return 0;
 	}

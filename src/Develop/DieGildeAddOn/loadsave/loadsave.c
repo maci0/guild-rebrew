@@ -1,6 +1,6 @@
 extern char g_save_session_state[];
 extern char g_saved_dynasty_field[];
-extern char g_next_object_id[];
+extern int g_next_object_id;
 extern char s_gzip_mode_rb[];
 extern char g_dynasty_initial_trait_offset[];
 #include "../game/entity.h"

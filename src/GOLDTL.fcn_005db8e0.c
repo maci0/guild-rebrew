@@ -1,3 +1,4 @@
+#include "client_types.h"
 // FUNCTION: GOLDTL 0x005db8e0
 
 // SIZE 0xf8
@@ -55,9 +56,9 @@ typedef struct Font {
 	short w;
 } Font;
 
-extern Win g_1015f40[];
+extern Win_1015f40 g_1015f40[0x60];
 extern Slot* g_1015ea0;
-extern Font* g_772500;
+extern char* g_772500;
 extern int g_772514;
 extern char* g_14a5adc[15];
 extern int g_7e46ac;
@@ -96,9 +97,9 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 	dlg = fcn_00470820(0, 0, "privillegien\\CHOOSEPROFESSION2");
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 0);
-	colw = (g_1015f40[g_772514].w - 0x40) / 5;
-	rowh = (g_1015f40[g_772514].h - 0x84) / 3;
-	x0 = (colw - g_772500->w) / 2;
+	colw = (((Win*) g_1015f40)[g_772514].w - 0x40) / 5;
+	rowh = (((Win*) g_1015f40)[g_772514].h - 0x84) / 3;
+	x0 = (colw - ((Font*) g_772500)->w) / 2;
 	fcn_00519190(0x1a9a, (p->female != 0) + 0x1aa0, p->id, n);
 	for (i = 1; i <= 15; i++) {
 		id = fcn_0046f740((i - 1) % 5 * colw + x0 + 0x20, (i - 1) / 5 * rowh + x0 + 0x64, i - 1 + 0x5a2, g_772514);

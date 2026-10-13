@@ -34,8 +34,8 @@ struct pos14 {
 
 extern struct pos14 g_7f4c00;
 extern int g_7749ec;
-extern Bld* g_90e094;
-extern Level* g_868050;
+extern unsigned char* g_90e094;
+extern unsigned char* g_868050;
 
 int __cdecl fcn_00558370(char* e);
 void __cdecl fcn_00546190(char* e);
@@ -116,9 +116,9 @@ void __cdecl fcn_00558e80(char* e)
 			n = 0x100;
 			idx = *(int*) (e + 0xb8);
 			do {
-				p = &g_90e094[idx];
+				p = (Bld*) (g_90e094 + idx * sizeof(Bld));
 				lo = 0;
-				q = &g_868050[p->kind];
+				q = (Level*) (g_868050 + p->kind * sizeof(Level));
 				k = q->kind;
 				hi = 0;
 				if (k > 0x1f) {

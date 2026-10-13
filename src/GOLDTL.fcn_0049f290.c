@@ -21,7 +21,7 @@ typedef struct Act {
 } Act;
 // SIZE 0xc
 
-extern Rec* g_90e094;
+extern unsigned char* g_90e094;
 extern int g_6643d8[];
 extern int g_7f4ca4[];
 
@@ -65,7 +65,7 @@ int __cdecl fcn_0049f290(int busy, unsigned short* self, int pending, Act* out)
 	count = 0;
 	idx = gm_RandomMod(n);
 	while (count < 4 && n != 0) {
-		e = &g_90e094[idx];
+		e = (Rec*) (g_90e094 + idx * sizeof(Rec));
 		if (e->type == 0x37 && e->owner != 0xffff && e->owner != *self) {
 			r = fcn_00502cd0(e->x5d, 2, 6, 0, 0x12d);
 			if (r != 0) {

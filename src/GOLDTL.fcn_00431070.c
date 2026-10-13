@@ -3,7 +3,8 @@
 
 extern int g_6b7fec;
 extern char g_6b7fe8;
-extern int g_6b7fdc;
+typedef struct VFS_DIR VFS_DIR;
+extern VFS_DIR* g_6b7fdc;
 extern char g_6b7fe0[];
 extern char g_67a090[];
 
@@ -18,7 +19,7 @@ int __cdecl fcn_00431070(char* name, char flag)
 
 	g_6b7fec = 0;
 	g_6b7fe8 = flag;
-	g_6b7fdc = fcn_0042f6d0(name, 0);
+	g_6b7fdc = (VFS_DIR*) fcn_0042f6d0(name, 0);
 	fcn_0066096a(cwd, 0x100);
 	fcn_0064d41a(buf, g_67a090, name, cwd);
 	(*(int*)g_6b7fe0) = 0;

@@ -1,4 +1,4 @@
-extern char g_connections[];
+extern unsigned char g_connections[0x264264];
 #include <stdio.h>
 #include <string.h>
 #include "command.h"
