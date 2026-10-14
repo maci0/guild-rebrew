@@ -53252,8 +53252,8 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   0/0 and all data inventories have no type conflicts or duplicate definitions.
   Client data/images and disposal provider implementations remain unfinished.
 - Upstream2ed6b113 records canonical signature/header/caller repair as a
-  follow-up to the existing return-contract audit gap; commit checks pass and
-  required push checks run. Scoped scratch AST edits use the public MSVC-aware
+  follow-up to the existing return-contract audit gap; required commit checks
+  and the full push suite pass, and it is pushed. Scoped scratch AST edits use the public MSVC-aware
   parser; the first unmasked-parser attempt failed compilation and is retained
   in candidate/ receipts. Corrected candidate2 passes all current scope checks.
 - Receipts: .scratch/goal39/{wrapper-native-proof,scope-audit-current,preservation}.json,

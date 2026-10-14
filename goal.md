@@ -201,8 +201,8 @@ fresh full server gate passes; all-target lint/data conflict checks stay clean.
 Name and d3_object.c placement are inferred. Separate disposal providers and
 both full client images remain open. Receipts: .scratch/goal39/preservation.json,
 wrapper-native-proof.json,scope-audit-current.json andgate-wrapper.log.
-Upstream2ed6b113 records contract/header/caller reconciliation; its full push
-checks are running. A typed unlink candidate is EXACT154 in both clients but
+Upstream2ed6b113 records contract/header/caller reconciliation; required commit
+checks and the full push suite pass, and it is pushed. A typed unlink candidate is EXACT154 in both clients but
 remains unadopted in scratch.
 
 Next: adopt the typed unlink helper with its callers verified, unify the
