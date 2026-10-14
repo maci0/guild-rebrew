@@ -1059,6 +1059,9 @@ session end.
 
 ## Toolchain (always use it)
 
+- Use Kuna alongside the other available decompiler backends. Compare its
+  seeds with native control flow and operand evidence, then reconstruct C89
+  and compile/byte-verify before claiming a match.
 - `rebrew todo --json` — pick highest-ROI item first.
 - `rebrew library match` — library check before reversing (see above).
 - `rebrew skeleton 0x<VA>` — new function skeletons.

@@ -1,3 +1,32 @@
+## Kuna callback seeds and upstream release integration (2026-10-14)
+
+- User requested Kuna alongside other backends. Kuna 1.160 returns the complete
+  production callback in default, reliable and aggressive modes: 21,684,
+  21,685 and 22,166 characters. Each parses without recovery as one C function.
+  The 3,816-byte native body/table extent remains the independent reference.
+- Rebrew rejects these bodies because they exceed the shared 8,000-character
+  GA seed budget. Corrected the misleading diagnostic upstream with a red
+  regression; 594 focused skeleton/seed/package/component checks pass.
+  Separate full-decompiler and GA budgets are recorded in IDEAS-GUILD.md.
+  The gate remains enforced; pseudo-types, inferred pointer/float casts and
+  source semantics still need C89 reconstruction and native verification.
+- Integrated the reviewed 2.27.1 cleanup-containment release with the later
+  discovery/Rizin repairs and feature notes in upstream main 3725e5af.
+  A concurrent v2.27.1 tag caused the earlier documentation push's single
+  missing-changelog test failure (11,917 passed); integration preserves both
+  the dated release notes and later unreleased fixes. The combined source's
+  full push hook passes; main 3725e5af is pushed and its remote hash verified.
+  Wheel/sdist parity, installed-wheel smoke, committed reproducibility,
+  provenance and the 116-component SBOM pass. The release commit's CI is green.
+  Archived Git bundles and removed the three remaining inactive upstream
+  worktrees/branches after confirming no process used them. Both repositories
+  now have only main worktrees; unrelated private game changes are preserved.
+- No callback source or new byte-match verdict is claimed. Goal.md records
+  the requested backend preference. The current-tool server gate passes
+  316 functions and 652 data checks; all 286,720 raw file bytes remain identical.
+  Receipts: .scratch/goal23/production-callback/kuna-review.json and the three
+  Kuna seeds, upstream-kuna-diagnostic-{red,focused}.log, upstream-merged-*.
+
 ## Production callback discovery repair (2026-10-14)
 
 - Diagnosed why fresh discovery missed he_RunProduktion: its ret/prologue
