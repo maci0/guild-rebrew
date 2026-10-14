@@ -1,11 +1,10 @@
-// FUNCTION: GOLDTL 0x4737c0
+#include "client_types.h"
 
-void __cdecl fcn_004737c0(void)
+void __cdecl ResetDisplayCounters(void)
 {
-	int a;
-
-	for (a = 0x1011980; a < 0x10119c8; a += 0xc) {
-		*(int*) (a + 4) = 0;
-		*(int*) a = -1;
-	}
+    int i;
+    for (i = 0; i < 6; i++) {
+        DisplayCounters[i].val = 0;
+        DisplayCounters[i].key = -1;
+    }
 }

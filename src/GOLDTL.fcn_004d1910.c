@@ -1,3 +1,4 @@
+#include "client_types.h"
 struct ent_4d1910 {
 	int f0;
 	char* obj;
@@ -9,7 +10,7 @@ struct ent_4d1910 {
 extern struct ent_4d1910 g_9b4bc0[32];
 
 void __cdecl fcn_00414be0(char*, int, int, int);
-void __cdecl fcn_004737c0(void);
+
 void __cdecl fcn_004cfa80(void);
 void __cdecl fcn_004d0050(void);
 
@@ -26,7 +27,7 @@ void __cdecl fcn_004d1910(void)
 		    && (*(unsigned char*) (*(char**) (g_9b4bc0[i].obj + 0x34) + 0x215) & 0x80) == 0x80)
 			fcn_00414be0(*(char**) (g_9b4bc0[i].obj + 0x34), 0, 0, 0);
 	}
-	fcn_004737c0();
+	ResetDisplayCounters();
 	fcn_004cfa80();
 	fcn_004d0050();
 }

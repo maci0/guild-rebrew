@@ -29,12 +29,12 @@ void __cdecl fcn_00473a90(int, int);
 void __cdecl fcn_005c5da0(int, int, int, unsigned short, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005c5e70(void);
-int __cdecl fcn_004737e0(void);
+
 int __cdecl fcn_005c61e0(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005c6540(char*);
 void __cdecl fcn_00472380(int, int, int, int);
-void __cdecl fcn_004737c0(void);
+
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_00471f80(int);
 void __cdecl fcn_005c61c0(void);
@@ -64,14 +64,14 @@ void __cdecl fcn_005bad60(void)
 	if (fcn_005373e0((void*) fcn_005bad60, 0x657c7) != 0) {
 		do {
 			fcn_005c5e70();
-			if (g_100f1dc != -1 || fcn_004737e0() != 0) {
+			if (g_100f1dc != -1 || CountDisplayCounters() != 0) {
 				for (i = 0; i < 6; i++) {
 					if (g_776c60[i].item != 0 && g_67d370 == g_776c60[i].btn) {
 						if (fcn_005c61e0(*(unsigned short*) g_776c60[i].item) != 0) {
 							fcn_00471af0(dlg, 0);
 							fcn_005c6540(g_776c60[i].item);
 							fcn_00472380(g_776c60[i].btn, 0, 0x3e7, 0);
-							fcn_004737c0();
+							ResetDisplayCounters();
 							fcn_00471af0(dlg, 1);
 						}
 						else {
@@ -81,13 +81,13 @@ void __cdecl fcn_005bad60(void)
 				}
 			}
 			if (g_14ce8e0 != 0) {
-				if (fcn_004737e0() != 0) {
+				if (CountDisplayCounters() != 0) {
 					for (i = 0; i < 6; i++) {
 						if (g_776c60[i].item != 0 && fcn_00471f80(g_776c60[i].btn) != 0) {
 							fcn_00472380(g_776c60[i].btn, 0, 0x3e7, 0);
 						}
 					}
-					fcn_004737c0();
+					ResetDisplayCounters();
 				}
 				else {
 					g_774654 = 1;

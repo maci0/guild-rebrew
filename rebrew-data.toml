@@ -9707,11 +9707,11 @@ type = "char[]"
 
 ["GOLDTL.0x01011980"]
 section = ".bss"
-updated_by = "data"
-updated_at = "2026-10-04T01:41:07+00:00"
+updated_by = "rename"
+updated_at = "2026-10-14T00:32:11+00:00"
 file = "src/client_types.h"
 marker_type = "GLOBAL"
-name = "g_1011980"
+name = "DisplayCounters"
 type = "DISPLAY_COUNTER[6]"
 
 ["GOLDTL.0x01008524"]
@@ -9730,11 +9730,11 @@ type = "int[]"
 
 ["GOLD.0x00f8ab80"]
 section = ".bss"
-updated_by = "data"
-updated_at = "2026-10-04T01:41:08+00:00"
+updated_by = "rename"
+updated_at = "2026-10-14T00:32:11+00:00"
 file = "src/client_types.h"
 marker_type = "GLOBAL"
-name = "g_1011980"
+name = "DisplayCounters"
 type = "DISPLAY_COUNTER[6]"
 
 ["GOLD.0x00f83ea4"]

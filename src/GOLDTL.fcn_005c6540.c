@@ -59,7 +59,7 @@ int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00471f80(int);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_00472380(int, int, int, int);
-void __cdecl fcn_004737c0(void);
+
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005dbf10(Ent* e, Req* r);
@@ -108,7 +108,7 @@ int __cdecl fcn_005c6540(unsigned short* item)
 								fcn_00472380(((Btn*)g_776c60)[i].btn, 0, 0x3e7, 0);
 							}
 						}
-						fcn_004737c0();
+						ResetDisplayCounters();
 					}
 					fcn_00471af0(dlg, 1);
 					buy = 0;

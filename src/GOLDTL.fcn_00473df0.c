@@ -28,7 +28,7 @@ extern void* g_100f8a0;
 extern TexSlot g_100f860[3];
 extern TexSlot g_100f840;
 #include "client_types.h"
-extern Pair0c_1011980 g_1011980[6];
+
 
 void* __cdecl fcn_004770a0(TexDesc* d, int fmt);
 
@@ -59,7 +59,7 @@ void __cdecl fcn_00473df0(void)
 	d.h = 0x100;
 	g_100f840.tex = fcn_004770a0(&d, 3);
 	for (i = 0; i < 6; i++) {
-		((Tag*)g_1011980)[i].id = -1;
-		((Tag*)g_1011980)[i].val = 0;
+		((Tag*)DisplayCounters)[i].id = -1;
+		((Tag*)DisplayCounters)[i].val = 0;
 	}
 }

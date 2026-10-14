@@ -1,3 +1,63 @@
+## TL unassigned .text triage (2026-10-14)
+
+- `no function` is separate from the 1,219 known game functions without source.
+  A read-only composition of Rebrew's loaders, inventory/scoping and clipping
+  APIs reconciles exactly to status: 420 nonempty ranges, 97,581 bytes, plus
+  33,554 bytes of edge fill. These are unassigned bytes, not 420 proven functions.
+- Prioritize 0x00571870..0x00572757 (3,815 bytes): substantial stack frame,
+  ordinary calls, matching epilogue and a callback-address reference from
+  0x00575746. The tail contains apparent address-table data after the return;
+  review control flow and table extent before registering a complete function.
+  Other large ranges start at 0x00561380 and 0x0056ee80. A range starting at
+  0x00660ace begins with three six-byte indirect jump stubs and then other code;
+  classify individual extents and providers rather than assigning one function.
+- Fresh `rebrew binary functions` output stays in scratch: 8,507 candidates.
+  It detects 0x00561380, but misses the callback at 0x00571870. Review candidates
+  against native references and existing identities before importing them;
+  do not overwrite the curated inventory or manufacture matching verdicts.
+- Ranked gap reporting with exact status reconciliation is recorded upstream
+  in docs/IDEAS-GUILD.md. Receipts and exact read-only composition:
+  .scratch/goal23/pool-unification/text-gaps.json, inspect-text-gaps.py,
+  fresh-tl-functions.json and gap-571870-{asm,tail,complete,xrefs}.json.
+
+## Shared display-counter reconstruction (2026-10-14)
+
+- Replaced the two stale raw-address helper bodies with ordinary six-element
+  array loops using DISPLAY_COUNTER and the shared DisplayCounters declaration.
+  ResetDisplayCounters and CountDisplayCounters now compile from one definition
+  per helper into both clients. Retired the separate Gold copies after complete
+  27/25-byte checks and stock-library exclusions.
+- All 104 native bytes and eight table operands agree across both clients;
+  deliberately wrong table bindings reject. All 18 affected caller bodies and
+  operand graphs preserve 3,761 bytes. Native call checks independently validate
+  21 operands in 11 callers, with wrong-callee controls.
+- Existing client_types.h owns the declaration and prototypes, replacing
+  14 function declarations, six table declarations and two stale GLOBAL markers.
+  Stable client.display_counter bindings verify sizeof/native stride 12 and
+  offsets 0/4/8 under both compilers. The final four bytes stay uninterpreted;
+  no storage owner or new data-byte verdict is invented. Names and the original
+  subsystem remain inferred.
+- Fixed the own-row rename collision directly upstream as 0ab6875a. Two cases
+  fail before the repair; 160 focused and 11,847 full tests pass (43 skipped).
+  Different identities and the data/function namespace remain protected.
+  Static, package parity, installed-wheel smoke, committed reproducibility,
+  provenance, SBOM and normal push hooks pass. The missing source/managed-name
+  drift audit is recorded in upstream docs/IDEAS-GUILD.md.
+- goal.md and the preserved project section of AGENTS.md explicitly require
+  feature gaps in upstream docs/IDEAS-GUILD.md and bugs fixed directly upstream
+  with regression tests and a green suite before reversing.
+- Full corpus preserves every previous match: server 316/316, TL 3597/3692,
+  Gold 2096/2539, with zero compile errors or missing files. All-target lint
+  and data-conflict scans are clean; both client type checks compile 1,020
+  structures without findings. The raw server gate passes 316 functions and
+  652 data checks; all 286,720 file bytes remain identical. Coverage documents
+  are refreshed for all three targets. Gold duplicate VAs drop from nine to
+  seven. Four helpers now correctly report object RELOC with typed table
+  operands; complete resolved native-byte proofs remain exact.
+  This consolidation earns no additional matched game bytes. Complete client
+  images/data and faithful discarded server sources remain unfinished.
+  Receipts and replay: .scratch/goal23/pool-unification/.
+
 ## Shared entity lookup definitions and declarations (2026-10-14)
 
 - Removed the stale GOLDTL.fcn_005015e0.c and GOLDTL.fcn_00504bd0.c copies.

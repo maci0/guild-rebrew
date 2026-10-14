@@ -303,6 +303,21 @@ watch loops or publish to external services only when requested.
 
 <!-- rebrew: project rules below, kept by --refresh-agents -->
 
+## Upstream Rebrew feature gaps and bugs
+
+- Submit every upstream feature gap to `docs/IDEAS-GUILD.md` in the upstream
+  Rebrew checkout when encountered. Include the concrete problem, proposed
+  capability and evidence or replay command. This applies to all Rebrew tooling,
+  including multi-target workflows.
+- Fix upstream Rebrew bugs directly in the upstream checkout. Add a regression
+  test that reproduces the bug and verify the repaired upstream suite before
+  returning to reversing. A project-local workaround or backlog entry does not
+  satisfy a bug fix.
+- The current upstream checkout is
+  `/home/maci/Desktop/Projects/relumea/repos/rebrew`; use its
+  `docs/IDEAS-GUILD.md` for feature gaps. Keep project-specific native evidence
+  here and reusable tooling repairs upstream.
+
 ## Naming
 
 Every name follows the original developers' schema in `docs/naming_conventions.md`:

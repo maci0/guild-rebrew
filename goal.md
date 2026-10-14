@@ -3,6 +3,30 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-14 (shared display-counter reconstruction): actual C is restored to
+  the canonical identities already in the store. Ordinary six-element array
+  loops replace raw-address bodies and serve both clients; separate Gold
+  copies retire. All 104 native bytes, eight table operands and rejecting
+  wrong-table controls agree. All 18 caller bodies/graphs preserve 3,761 bytes;
+  21 native call operands are independently validated. The inferred
+  DISPLAY_COUNTER/DisplayCounters interface uses existing client_types.h;
+  size/stride 12 and offsets 0/4/8 are bound for both clients, with the final
+  four bytes uninterpreted and storage owner unresolved. Fourteen function
+  declarations and six table declarations consolidate. Own-row rename
+  collision is fixed upstream in pushed 0ab6875a: two red regression cases,
+  160 focused, 11,847 full/43 skipped and package/static/push gates pass.
+  Source/managed-name drift audit is recorded in upstream docs/IDEAS-GUILD.md.
+  Both goal.md and AGENTS.md now explicitly require that feature backlog and
+  direct upstream bug fixes. Full corpus preserves all prior matches:
+  server316/316, TL3597/3692 and Gold2096/2539, with zero compile errors or
+  missing files. All-target lint/data-conflict scans and both compiled client
+  type checks are clean. Final raw server gate passes316 functions/652 data
+  checks and preserves every286720 file byte. All three coverage documents
+  refresh; Gold duplicate VAs9→7. Four helpers correctly become object RELOC
+  with typed operands, retaining complete resolved native-byte agreement.
+  No additional matched-byte or data verdict is claimed. Full three-image/
+  shared-source goal remains unfinished. Receipts: .scratch/goal23/pool-unification/.
+
 - 2026-10-14 (shared entity lookup ownership): two stale client copies retire
   in favor of the existing shared spiel.c definitions. Five complete bodies
   preserve 995 native bytes across three targets. The shared typed interface
@@ -1143,16 +1167,20 @@ Probes go in `.scratch/`, never in the tree.
 - Retired levers stay retired (TU theory, partition search, flag sweeps,
   outline, cross-compiler, statics, SEH). Re-probe only with new evidence.
 
-## `rebrew` bugs
+## Upstream Rebrew feature gaps and bugs
 
-Bugs encountered in `rebrew` itself get fixed in the `rebrew` checkout
-(layout rename compat, merge-sweep, case-label registry, atomic writes,
-verify-cache guards — precedent exists), with its suite green before
-returning to reversing. Never work around a toolchain bug in game source.
-
-- Missing features go in the rebrew ideas file
-  (`docs/IDEAS-GUILD.md` in the rebrew checkout): pain, proposed feature,
-  evidence pointer. Append on encounter, not at session end.
+- **Submit every upstream feature gap to the upstream Rebrew checkout's
+  `docs/IDEAS-GUILD.md` document.** Record the concrete problem, proposed
+  capability and evidence or replay command when the gap is encountered.
+  This applies to all Rebrew tooling, including multi-target workflows.
+- **Fix upstream Rebrew bugs directly in the upstream Rebrew checkout.**
+  Add a regression test that reproduces the bug and verify the repaired
+  upstream suite before returning to reversing. A project-local workaround
+  or a backlog entry does not satisfy a bug fix.
+- The current upstream checkout is
+  `/home/maci/Desktop/Projects/relumea/repos/rebrew`; the feature-gap document
+  is its `docs/IDEAS-GUILD.md`. Keep project-specific native evidence here
+  and reusable tooling repairs upstream.
 
 ## Continuous hygiene (lint, verify, test)
 

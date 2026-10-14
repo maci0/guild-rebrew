@@ -42,7 +42,7 @@ extern char* g_7725c0;
 extern Anim_100e7a0 g_100e7a0[0x30];
 extern int g_67d378;
 extern int g_67d398;
-extern Pair0c_1011980 g_1011980[6];
+
 extern char* g_772500;
 extern int g_67d3ac;
 extern int g_1015ea4;
@@ -95,7 +95,7 @@ void __cdecl fcn_00473800(Ctx* c, int x, int y)
 	fcn_00472880(g_67d398 + 1);
 	k = 0;
 	for (i = 0; i < 6; i++) {
-		p = &((Item*)g_1011980)[i];
+		p = &((Item*)DisplayCounters)[i];
 		if (p->id != -1) {
 			px = x + ((Cls*)g_772500)[g_67d3ac].x50 + k % 3 * 0x1a;
 			py = (g_1015ea4 + 0x1a) * (k / 3) + y;

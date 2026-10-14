@@ -1031,7 +1031,20 @@ were read directly at the pushed VAs.
 
 ### Inferred display-counter names (2026-10-04)
 
-ResetDisplayCounters (TL4737c0/Gold476c60) and CountDisplayCounters (TL4737e0/Gold476c80) are descriptive names, renamed through Rebrew CLI. DISPLAY_COUNTER names the shared12-byte record by native TL473800 renderer/update use: six IDs select icons and each displayed value is formatted; reset writes ID-1/value0 and count counts nonfree IDs. The final four bytes remain uninterpreted, not declared padding. These are inferred domain names, not recovered original symbols or source-path attestation. Existing client_types.h remains the canonical home because the original subsystem/header is unproved. See .scratch/goal-display-counters/{table-operands,canonical-bindings,rename-reset-tl,rename-count-tl}.json.
+ResetDisplayCounters (TL4737c0/Gold476c60) and CountDisplayCounters
+(TL4737e0/Gold476c80) are inferred descriptive names. The shared 12-byte
+DISPLAY_COUNTER record follows the six-slot native renderer/update table:
+key/ID at offset 0, value at 4 and four uninterpreted bytes at 8. DisplayCounters
+is the inferred table name; its storage owner remains unresolved. These are
+not recovered original names or source-path attestations. Existing client_types.h
+remains the canonical home because the original subsystem/header is unproved.
+
+On 2026-10-14 the actual legacy C is repaired to agree with its already-named
+managed identities. Both clients now use ordinary typed six-element loops;
+separate Gold copies retire. Stable client.display_counter bindings verify
+12-byte size/stride and offsets 0/4/8 in both compilers. Complete native helper
+and caller proofs: .scratch/goal23/pool-unification/. Original semantic evidence:
+.scratch/goal-display-counters/table-operands.json.
 
 - Inferred shared type `VECTOR3` replaces address-derived `Vec3_67bbdc`: three floats,12-byte view with offsets0/4/8, reused by seven client sources. TL67bbdc/Gold5fcc78 includes ambient RGB use; TL6b86c4 semantics remain unresolved. No original-name or source-path attestation. Evidence `.scratch/goal-material-colors/field-alias-bindings.json`; original allocation ownership remains unresolved.
 

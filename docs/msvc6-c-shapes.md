@@ -11489,3 +11489,19 @@ compatible implementation declarations; caller consolidation still uses the
 shared interface. The narrow 137-caller preservation did not prove the whole unit.
 Evidence: spiel-unification/server-gm-open-restored.json and the initial/full
 corpus reports. No source body, flag or assembly workaround was adopted.
+
+
+## Six-element array loops reduce to native display-counter address loops (2026-10-14)
+
+Ordinary signed-int index loops over six DISPLAY_COUNTER records reproduce the
+complete 27-byte reset and 25-byte count bodies in both clients. VC6 strength
+reduces the index to a pointer advancing by 12 bytes, with a signed comparison
+against the table plus 72. Reset stores value 0 before ID -1; count increments
+for IDs other than -1. Explicit integer address iteration is unnecessary.
+
+The global declaration supplies two DIR32 operands per body, for the base and
+end. Complete relocation application gives all 104 native bytes; a table base
+shifted by four fails. The final four record bytes stay an uninterpreted byte
+region. All 18 affected caller bodies and typed operand graphs remain unchanged.
+No flags or assembly are added. Evidence: .scratch/goal23/pool-unification/
+production-native-proof.json, index-native-proof.json and users-{before,after}.json.

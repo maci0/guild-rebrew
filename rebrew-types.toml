@@ -146,3 +146,39 @@ mode = 0
 layer = 1
 pad2 = 2
 pad8 = 9
+
+[types."client.display_counter".GOLDTL]
+file = "src/client_types.h"
+symbol = "DISPLAY_COUNTER"
+size = 12
+native_size = 12
+extent = "stride"
+evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain an uninterpreted byte region. Complete native helper and rejecting wrong-table proofs: .scratch/goal23/pool-unification/production-native-proof.json. Names and original subsystem inferred; storage owner unresolved."
+cflags = "/O2 /Gd"
+source_hash = "b591c34dbc8999f3a3fc6c83eb761110a225adbc5647841cc1e717808e0692ab"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."client.display_counter".GOLDTL.offsets]
+key = 0
+val = 4
+unknown_08 = 8
+
+[types."client.display_counter".GOLD]
+file = "src/client_types.h"
+symbol = "DISPLAY_COUNTER"
+size = 12
+native_size = 12
+extent = "stride"
+evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain an uninterpreted byte region. Complete native helper and rejecting wrong-table proofs: .scratch/goal23/pool-unification/production-native-proof.json. Names and original subsystem inferred; storage owner unresolved."
+cflags = "/O2 /Gd"
+source_hash = "b591c34dbc8999f3a3fc6c83eb761110a225adbc5647841cc1e717808e0692ab"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."client.display_counter".GOLD.offsets]
+key = 0
+val = 4
+unknown_08 = 8

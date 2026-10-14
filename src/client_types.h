@@ -64,12 +64,16 @@ typedef struct {
 	char padd[7];
 } Anim_100e7a0;
 
-/* g_1011980 */
+/* DisplayCounters */
 typedef struct {
 	int key;
 	int val;
-	int pad;
-} Pair0c_1011980;
+	unsigned char unknown_08[4];
+} DISPLAY_COUNTER;
+
+extern DISPLAY_COUNTER DisplayCounters[6];
+void __cdecl ResetDisplayCounters(void);
+int __cdecl CountDisplayCounters(void);
 
 /* g_1015f40 */
 typedef struct {
