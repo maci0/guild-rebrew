@@ -1,7 +1,7 @@
 #include <string.h>
 #pragma intrinsic(memset)
 
-// FUNCTION: GOLDTL 0x591c30
+/* ADDRESS: GOLDTL 0x00591c30 */
 
 void __cdecl fcn_00591c30(char* p)
 {
@@ -20,8 +20,8 @@ typedef struct {
 #include "client_types.h"
 extern Slot_779d00 g_779d00[];
 
-// FUNCTION: GOLD 0x5896e0
-// FUNCTION: GOLDTL 0x00591c40
+/* ADDRESS: GOLD 0x005896e0 */
+/* ADDRESS: GOLDTL 0x00591c40 */
 
 void __cdecl fcn_00591c40(void)
 {

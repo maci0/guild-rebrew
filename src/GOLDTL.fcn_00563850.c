@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00563850
+
 
 #include "client_types.h"
 

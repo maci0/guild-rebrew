@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005a89a0
+
 // fcn_005a89a0 — if(e=fcn_005a8600(*(int*)(a+1))) fcn_005a8500(a, e).
 
 int __cdecl fcn_005a8600(int);

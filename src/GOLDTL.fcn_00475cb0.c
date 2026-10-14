@@ -38,7 +38,7 @@ typedef struct Rgb {
 } Rgb;
 // SIZE 0x3
 
-// FUNCTION: GOLDTL 0x00475cb0
+/* ADDRESS: GOLDTL 0x00475cb0 */
 
 /* Writes a top-down 24-bit BMP from w*h RGB pixels (rows of at most 1024).
  * The inventory entry also holds a second function at 0x475e20 (279 bytes). */

@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004c3850
-// FUNCTION: GOLDTL 0x4c41c0
+
+
 
 #pragma pack(1)
 typedef struct node99 {

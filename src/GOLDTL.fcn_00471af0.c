@@ -26,7 +26,7 @@ typedef struct Slot {
 extern Obj_1038140 g_1038140[];
 extern char* g_1015ea0;
 
-// FUNCTION: GOLDTL 0x471af0
+/* ADDRESS: GOLDTL 0x00471af0 */
 void __cdecl fcn_00471af0(int k, int flag)
 {
 	Obj* o;

@@ -1,8 +1,8 @@
 extern void* g_14d0020[];
 extern char g_67536c[];
-// GLOBAL: GOLDTL 0x67534c
+/* ADDRESS: GOLDTL 0x0067534c */
 extern char g_67534c[];
-// FUNCTION: GOLDTL 0x403200
+
 
 #include <string.h>
 

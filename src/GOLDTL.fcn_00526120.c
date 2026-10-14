@@ -44,7 +44,7 @@ void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
 
-// FUNCTION: GOLDTL 0x00526120
+/* ADDRESS: GOLDTL 0x00526120 */
 
 /* Modal message box: flags pick the layout (2, 0x10, 0x20, 0x100), 8 the
  * wait value, 0x80 a progress bar, 4 closes after 0x1f4 ticks of g_6b7fac,

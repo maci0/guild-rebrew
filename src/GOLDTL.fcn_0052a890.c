@@ -12,8 +12,8 @@ struct hm_6a2900 {
 
 extern struct hm_6a2900 g_6a2900[5];
 
-// FUNCTION: GOLD 0x525a40
-// FUNCTION: GOLDTL 0x52a890
+
+
 
 int __cdecl fcn_00500e20(int);
 

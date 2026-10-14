@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005de784
+/* ADDRESS: GOLD 0x005de784 */
 // fcn_005de784 — LCG: state = state*0x343fd + 0x269ec3; return (state>>0x10) & 0x7fff.
 
 int __cdecl fcn_005de784(void)

@@ -8,8 +8,8 @@ extern short g_7f4c0c;
 
 void __cdecl fcn_004c5530(char* msg);
 
-// FUNCTION: GOLD 0x004900b0
-// FUNCTION: GOLDTL 0x48f660
+/* ADDRESS: GOLD 0x004900b0 */
+/* ADDRESS: GOLDTL 0x0048f660 */
 int __cdecl fcn_0048f660(char* a1, char* a2, int a3, char* p)
 {
 	char msg[0xf8];

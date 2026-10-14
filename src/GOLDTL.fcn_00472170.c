@@ -39,7 +39,7 @@ extern char* g_1015ea0;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 
-// FUNCTION: GOLDTL 0x472170
+/* ADDRESS: GOLDTL 0x00472170 */
 void __cdecl fcn_00472170(int slot, int flag)
 {
 	Slot* s;

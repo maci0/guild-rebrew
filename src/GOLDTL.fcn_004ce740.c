@@ -1,6 +1,6 @@
-// GLOBAL: GOLDTL 0xaed32c
+/* ADDRESS: GOLDTL 0x00aed32c */
 extern char* g_aed32c;
-// GLOBAL: GOLD 0xa68d2c
+/* ADDRESS: GOLD 0x00a68d2c */
 extern char* g_aed32c;
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
 extern char g_7f4ca0[];
@@ -15,8 +15,8 @@ void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-// FUNCTION: GOLDTL 0x4ce740
-// FUNCTION: GOLD 0x4cdb80
+/* ADDRESS: GOLDTL 0x004ce740 */
+/* ADDRESS: GOLD 0x004cdb80 */
 
 char __cdecl fcn_004ce740(int a1)
 {

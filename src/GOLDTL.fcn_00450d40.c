@@ -12,7 +12,7 @@ unsigned char __cdecl fcn_00438450(char* o);
 void __cdecl fcn_00455280(char* o, int a, float* v, char* m);
 void __cdecl fcn_00455450(char* o, int a, char* v, char* m);
 
-// FUNCTION: GOLDTL 0x450d40
+/* ADDRESS: GOLDTL 0x00450d40 */
 char __cdecl fcn_00450d40(char* o, int a)
 {
 	if (*(int*) (o + 0x218) == 4) {

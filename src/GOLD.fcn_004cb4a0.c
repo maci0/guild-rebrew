@@ -10,7 +10,7 @@ char* __cdecl fcn_00446e10(int, float*, float*, char*);
 void __cdecl fcn_00447190(char*);
 void __cdecl fcn_00453270(char*);
 
-// FUNCTION: GOLD 0x004cb4a0
+/* ADDRESS: GOLD 0x004cb4a0 */
 
 int __cdecl fcn_004cb4a0(char* cmd, char* result)
 {

@@ -21,7 +21,7 @@ extern char* g_1015ea0;
 extern Page_1038144 g_1038144[];
 extern int g_772534;
 
-// FUNCTION: GOLDTL 0x472510
+/* ADDRESS: GOLDTL 0x00472510 */
 void __cdecl fcn_00472510(int idx, int slot, int a3, int a4, int a5, int a6)
 {
 	fcn_00472510_Win* w;

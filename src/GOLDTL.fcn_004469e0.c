@@ -38,7 +38,7 @@ void __cdecl fcn_00401430(void* s, int a, int b, void* data);
 
 #define PART(i) ((*(Part_4469e0**) (o + 0x7da0))[i])
 
-// FUNCTION: GOLDTL 0x4469e0
+/* ADDRESS: GOLDTL 0x004469e0 */
 
 void __cdecl fcn_004469e0(void* s, char* o)
 {

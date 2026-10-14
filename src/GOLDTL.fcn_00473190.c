@@ -19,7 +19,7 @@ struct Fade {
 void __cdecl fcn_0047c9c0(int, int, int, int, int, float);
 void __cdecl fcn_00473150(Fade*);
 
-// FUNCTION: GOLDTL 0x00473190
+/* ADDRESS: GOLDTL 0x00473190 */
 
 void __cdecl fcn_00473190(Fade* t)
 {

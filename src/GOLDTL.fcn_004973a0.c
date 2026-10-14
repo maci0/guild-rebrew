@@ -20,8 +20,8 @@ float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
-// FUNCTION: GOLD 0x004979c0
-// FUNCTION: GOLDTL 0x004973a0
+/* ADDRESS: GOLD 0x004979c0 */
+/* ADDRESS: GOLDTL 0x004973a0 */
 int __cdecl fcn_004973a0(int a1, Msg* m, Msg* ev)
 {
 	char* r;

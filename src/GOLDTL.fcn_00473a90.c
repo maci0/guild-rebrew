@@ -7,8 +7,8 @@ void* __cdecl fcn_00466190(int idx);
 void __cdecl fcn_0047a2b0(int h);
 int __cdecl fcn_0047a200(short x, short y, void* img, int a4);
 
-// FUNCTION: GOLD 0x00476f70
-// FUNCTION: GOLDTL 0x473a90
+/* ADDRESS: GOLD 0x00476f70 */
+/* ADDRESS: GOLDTL 0x00473a90 */
 void __cdecl fcn_00473a90(int a1, int idx)
 {
 	if (idx) {

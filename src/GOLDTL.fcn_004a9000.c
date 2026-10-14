@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 unsigned short __cdecl gm_RandomMod(int);
 
-// FUNCTION: GOLD 0x4a8ee0
-// FUNCTION: GOLDTL 0x4a9000
+/* ADDRESS: GOLD 0x004a8ee0 */
+/* ADDRESS: GOLDTL 0x004a9000 */
 
 int __cdecl fcn_004a9000(int a, char* e)
 {

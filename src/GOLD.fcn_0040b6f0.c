@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0040b6f0
+
 // fcn_0040b6f0 — calls fcn_00429e90(*arg).
 
 int __cdecl fcn_00429e90(int);

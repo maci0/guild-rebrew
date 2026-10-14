@@ -14,8 +14,8 @@ long __cdecl fcn_00465540(void* h);
 long __cdecl fcn_0045fa50(void* h);
 long __cdecl fcn_0064e30c(void* h);
 
-// FUNCTION: GOLD 0x431170
-// FUNCTION: GOLDTL 0x430c50
+/* ADDRESS: GOLD 0x00431170 */
+/* ADDRESS: GOLDTL 0x00430c50 */
 long __cdecl fcn_00430c50(char* a)
 {
 	void* h;

@@ -12,8 +12,8 @@ struct rgba_00557f70 {
 void __cdecl fcn_00417180(int, char*, int, struct rgba_00557f70, float*, int, int, float, float,
                           float, float, float);
 
-// FUNCTION: GOLD 0x0054fec0
-// FUNCTION: GOLDTL 0x557f70
+/* ADDRESS: GOLD 0x0054fec0 */
+/* ADDRESS: GOLDTL 0x00557f70 */
 
 void __cdecl fcn_00557f70(char* o)
 {

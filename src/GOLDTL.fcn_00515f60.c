@@ -1,8 +1,8 @@
 extern float g_699b0c;
 extern int g_773de4;
 extern int g_7f3e20[];
-// FUNCTION: GOLD 0x00512820
-// FUNCTION: GOLDTL 0x00515f60
+
+
 
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
 

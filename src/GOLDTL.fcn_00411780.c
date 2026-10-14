@@ -1,7 +1,7 @@
-// GLOBAL: GOLD 0x5f3244
+/* ADDRESS: GOLD 0x005f3244 */
 extern char g_6772c8[];
-// FUNCTION: GOLD 0x004106d0
-// FUNCTION: GOLDTL 0x411780
+
+
 
 #include <windows.h>
 

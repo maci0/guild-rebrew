@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00404b90
-// FUNCTION: GOLDTL 0x004054b0
+
+
 
 typedef struct Task Task;
 // SIZE 0x18

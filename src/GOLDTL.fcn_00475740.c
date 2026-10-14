@@ -4,7 +4,7 @@ unsigned int __cdecl fcn_00475360(void*);
 void* __cdecl m_alloc(unsigned int, char*);
 void __cdecl fcn_004754b0(void*, void*, int);
 
-// FUNCTION: GOLDTL 0x475740
+/* ADDRESS: GOLDTL 0x00475740 */
 
 void* __cdecl fcn_00475740(void* src)
 {

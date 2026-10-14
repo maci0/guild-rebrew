@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005490e0
+
 
 extern unsigned short g_774970;
 extern char g_7f4ca4[];

@@ -18,7 +18,7 @@ typedef struct Run {
 	unsigned char rgb[1];
 } Run;
 
-// FUNCTION: GOLDTL 0x47a710
+/* ADDRESS: GOLDTL 0x0047a710 */
 int __cdecl fcn_0047a710(int x, int y, char* hdr, Surface* s)
 {
 	int* runs;

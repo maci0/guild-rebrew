@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0046df7e
+/* ADDRESS: GOLD 0x0046df7e */
 int __cdecl fcn_0046df7e(void)
 {
     /* TODO: Implement based on Ghidra decompilation */

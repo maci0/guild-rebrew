@@ -26,8 +26,8 @@ extern TexSlot g_100f840;
 
 void __cdecl fcn_00475f80(void* p);
 
-// FUNCTION: GOLD 0x00477410
-// FUNCTION: GOLDTL 0x473ed0
+/* ADDRESS: GOLD 0x00477410 */
+/* ADDRESS: GOLDTL 0x00473ed0 */
 void __cdecl fcn_00473ed0(void)
 {
 	int i;

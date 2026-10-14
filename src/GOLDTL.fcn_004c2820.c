@@ -2,8 +2,8 @@
 
 extern IdGroup g_688118[];
 
-// FUNCTION: GOLD 0x004c1fc0
-// FUNCTION: GOLDTL 0x4c2820
+/* ADDRESS: GOLD 0x004c1fc0 */
+/* ADDRESS: GOLDTL 0x004c2820 */
 
 int __cdecl fcn_004c2820(int key)
 {

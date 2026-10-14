@@ -2,8 +2,8 @@ int __cdecl fcn_004ab0d0(char* e, char* a, char* b);
 int __cdecl fcn_004ab3e0(char* e, char* a, char* b);
 void __cdecl fcn_004c5420(int id, int a2, int a3, int a4, int a5);
 
-// FUNCTION: GOLD 0x0049ee20
-// FUNCTION: GOLDTL 0x49e860
+/* ADDRESS: GOLD 0x0049ee20 */
+/* ADDRESS: GOLDTL 0x0049e860 */
 int __cdecl fcn_0049e860(char* e, char* a, char* b)
 {
 	if (a[0] == 4 && b[0] == 1) {

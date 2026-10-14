@@ -14,8 +14,8 @@ extern char g_6816dc[];
 
 fcn_004be1f0_node* __cdecl m_alloc(int, char*);
 
-// FUNCTION: GOLDTL 0x4be1f0
-// FUNCTION: GOLD 0x004bd950
+/* ADDRESS: GOLDTL 0x004be1f0 */
+/* ADDRESS: GOLD 0x004bd950 */
 
 fcn_004be1f0_node* __cdecl fcn_004be1f0(fcn_004be1f0_node* head)
 {

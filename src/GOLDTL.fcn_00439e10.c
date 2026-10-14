@@ -11,7 +11,7 @@ typedef struct Ent7c {
 } Ent7c;
 // SIZE 0x7c
 
-// FUNCTION: GOLDTL 0x439e10
+/* ADDRESS: GOLDTL 0x00439e10 */
 void __cdecl fcn_00439e10(char* a, int v)
 {
 	int i;

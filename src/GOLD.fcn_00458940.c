@@ -1,7 +1,7 @@
 /* GOLD twin of GOLDTL fcn_00455280: the flag byte is 0x210 and the bit is 0x80
  * (GOLDTL: 0x214, bit 0x20). */
 
-// FUNCTION: GOLD 0x458940
+
 
 // SIZE 0xc
 typedef struct Vec3 {

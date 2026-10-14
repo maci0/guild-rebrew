@@ -9,7 +9,7 @@ typedef struct {
 } fcn_0047b9a0_vertex;
 // SIZE 0x1c
 
-// FUNCTION: GOLDTL 0x47b9a0
+/* ADDRESS: GOLDTL 0x0047b9a0 */
 
 void __cdecl fcn_0047b9a0(fcn_0047b9a0_vertex* v, unsigned char r, unsigned char g, unsigned char b)
 {

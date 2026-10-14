@@ -12,7 +12,7 @@ struct CamPad131e0 {
 
 /* Camera position plus the view matrix at +0x18c applied to
  * (scale, scale, -amount), with scale = -amount * the float at 0x6628a8. */
-// FUNCTION: GOLDTL 0x4131e0
+/* ADDRESS: GOLDTL 0x004131e0 */
 
 void __cdecl fcn_004131e0(float* out, float amount)
 {

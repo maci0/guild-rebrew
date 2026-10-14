@@ -1,10 +1,10 @@
 #include "client_types.h"
-// GLOBAL: GOLDTL 0x9a9220
+/* ADDRESS: GOLDTL 0x009a9220 */
 extern Rec18_68da68 g_9a9220[42];
-// GLOBAL: GOLD 0x925120
+/* ADDRESS: GOLD 0x00925120 */
 extern Rec18_68da68 g_9a9220[42];
-// FUNCTION: GOLD 0x004e6f30
-// FUNCTION: GOLDTL 0x4e8af0
+
+
 
 #include <string.h>
 

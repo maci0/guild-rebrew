@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00468610
+/* ADDRESS: GOLD 0x00468610 */
 // fcn_00468610 — if(!a || !a[0x7c/4]) return -102; return *(int*)(a[0x7c/4]+0x18).
 
 int __cdecl fcn_00468610(char* a)

@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004cdb20
-// FUNCTION: GOLDTL 0x4ce6e0
+
+
 
 extern unsigned char g_773d75;
 

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x004a0e20
+
 
 typedef struct Blk24 {
 	unsigned char kind;

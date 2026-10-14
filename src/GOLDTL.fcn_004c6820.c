@@ -1,6 +1,6 @@
 extern int* g_772f40;
-// FUNCTION: GOLD 0x004c5ca0
-// FUNCTION: GOLDTL 0x4c6820
+
+
 
 #include <string.h>
 

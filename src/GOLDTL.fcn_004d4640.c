@@ -15,7 +15,7 @@ struct slot_4d4640 {
 };
 // SIZE 0x2c
 
-// FUNCTION: GOLDTL 0x4d4640
+/* ADDRESS: GOLDTL 0x004d4640 */
 
 void __cdecl fcn_004d4640(char* a1)
 {

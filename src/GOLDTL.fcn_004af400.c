@@ -1,9 +1,9 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004af2f0.c. */
 extern float g_662910;
 
-// GLOBAL: GOLDTL 0x99ec10
+/* ADDRESS: GOLDTL 0x0099ec10 */
 extern char* g_99ec10;
-// GLOBAL: GOLD 0x91aaf0
+/* ADDRESS: GOLD 0x0091aaf0 */
 extern char* g_99ec10;
 
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
@@ -19,8 +19,8 @@ int __cdecl fcn_0064eeec(char*);
 int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl fcn_0051af00(void*, int, ...);
 
-// FUNCTION: GOLDTL 0x4af400
-// FUNCTION: GOLD 0x4af2c0
+
+
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x20c) and
  * addresses the 0x200 scratch buffer off ebp; section 13 of

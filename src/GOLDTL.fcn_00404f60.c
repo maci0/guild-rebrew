@@ -8,7 +8,7 @@ void __cdecl fcn_00435500(char* o, char* name);
  * into its own local and branches to the byte return on the nonzero
  * side: that is what keeps the null test, the far jne back to the byte
  * return, and a separate copy of the -1 epilogue. */
-// FUNCTION: GOLDTL 0x404f60
+/* ADDRESS: GOLDTL 0x00404f60 */
 
 int __cdecl fcn_00404f60(char* ev)
 {

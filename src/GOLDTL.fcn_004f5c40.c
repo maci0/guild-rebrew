@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4f5c40
+
 
 #include "client_types.h"
 #pragma pack(push, 1)

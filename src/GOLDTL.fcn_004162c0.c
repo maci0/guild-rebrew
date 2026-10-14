@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4162c0
+
 
 void __cdecl fcn_0045bfb0(int);
 void __cdecl m_FreeTracked(void*);

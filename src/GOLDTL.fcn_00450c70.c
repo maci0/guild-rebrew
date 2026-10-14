@@ -4,7 +4,7 @@ extern void* g_6b5de0;
 extern int g_6b86fc;
 extern void* g_6b870c;
 
-// FUNCTION: GOLDTL 0x450c70
+/* ADDRESS: GOLDTL 0x00450c70 */
 void __cdecl fcn_00450c70(void)
 {
 	int i;

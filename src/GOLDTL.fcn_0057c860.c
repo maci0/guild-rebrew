@@ -3,8 +3,8 @@ void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
 extern pos14_7f4c00 g_7f4c00;
 
-// FUNCTION: GOLD 0x00574320
-// FUNCTION: GOLDTL 0x57c860
+/* ADDRESS: GOLD 0x00574320 */
+/* ADDRESS: GOLDTL 0x0057c860 */
 
 void __cdecl fcn_0057c860(char* o)
 {

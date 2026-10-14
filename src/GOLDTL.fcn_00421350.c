@@ -18,8 +18,8 @@ struct cell_421350 {
 unsigned short __cdecl fcn_00421890(char*, int, int, int, int, int);
 unsigned short __cdecl fcn_004214c0(char*, int, int, int, int, int);
 
-// FUNCTION: GOLD 0x424f30
-// FUNCTION: GOLDTL 0x421350
+/* ADDRESS: GOLD 0x00424f30 */
+/* ADDRESS: GOLDTL 0x00421350 */
 
 /* Finds a path on a map and unrolls it into the caller's cell list. */
 unsigned short __cdecl fcn_00421350(struct path_421350* path, char* map, int x0, int y0, int x1, int y1, int flags)

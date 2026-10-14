@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0050cfd0
-// FUNCTION: GOLDTL 0x510470
+
+
 
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 

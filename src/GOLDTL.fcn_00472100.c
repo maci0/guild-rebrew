@@ -43,7 +43,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern Obj_1038140 g_1038140[];
 extern int g_772534;
 
-// FUNCTION: GOLDTL 0x472100
+/* ADDRESS: GOLDTL 0x00472100 */
 char* __cdecl fcn_00472100(int j, int i)
 {
 	Win* w;

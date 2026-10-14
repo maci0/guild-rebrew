@@ -1,5 +1,5 @@
-// FUNCTION: GOLDTL 0x44cba0
-// FUNCTION: GOLD 0x0044e570
+/* ADDRESS: GOLDTL 0x0044cba0 */
+/* ADDRESS: GOLD 0x0044e570 */
 // fcn_0044e570 — (popcount32(a) == 1).
 
 unsigned char __cdecl fcn_0044e570(int a)
@@ -14,8 +14,8 @@ unsigned char __cdecl fcn_0044e570(int a)
 	return n == 1;
 }
 
-// FUNCTION: GOLD 0x44e5a0
-// FUNCTION: GOLDTL 0x44cbd0
+
+
 // Lives in fcn_0044e570's file on purpose: with the callee defined in the same
 // TU, c2 knows the size check writes no memory and keeps h in edi across it.
 // ok is volatile: the reference stores the flag although nothing reads it.

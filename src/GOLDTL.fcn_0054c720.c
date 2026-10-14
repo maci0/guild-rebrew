@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005447a0
-// FUNCTION: GOLDTL 0x54c720
+
+
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 

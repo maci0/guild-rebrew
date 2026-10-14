@@ -21,7 +21,7 @@
  * trailing char to 12 bytes and costs 2 bytes (855/857).
  */
 
-// FUNCTION: GOLDTL 0x521eb0
+
 
 #include "../../../Units/Error/error.h"
 #include "../../../Units/m_alloc/m_alloc.h"

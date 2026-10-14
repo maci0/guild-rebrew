@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00474190
+
 
 #include "gold_gui.h"
 

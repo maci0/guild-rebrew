@@ -17,8 +17,8 @@ typedef struct BmpInfo {
 
 extern char s_6750e8[];
 
-// FUNCTION: GOLD 0x478970
-// FUNCTION: GOLDTL 0x475830
+/* ADDRESS: GOLD 0x00478970 */
+/* ADDRESS: GOLDTL 0x00475830 */
 int __cdecl fcn_00475830(const char* name)
 {
 	BmpInfo bi;

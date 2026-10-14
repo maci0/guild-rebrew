@@ -60,7 +60,7 @@ void __cdecl fcn_00472380(int h, int a, int b, int c);
 unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 
-// FUNCTION: GOLDTL 0x52df40
+/* ADDRESS: GOLDTL 0x0052df40 */
 void __cdecl fcn_0052df40(unsigned char* s)
 {
 	char name[128];

@@ -6,7 +6,7 @@ typedef struct {
 
 int __cdecl fcn_0047bdd0(int, int, int, float, unsigned char, unsigned char, unsigned char);
 
-// FUNCTION: GOLDTL 0x47cc40
+/* ADDRESS: GOLDTL 0x0047cc40 */
 
 int __cdecl fcn_0047cc40(int a1, int a2, int a3, fcn_0047cc40_set* s, int idx, float scale)
 {

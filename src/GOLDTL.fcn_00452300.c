@@ -7,7 +7,7 @@ extern unsigned long g_14ce728;
 
 void __cdecl fcn_00452420(char* p);
 
-// FUNCTION: GOLDTL 0x452300
+/* ADDRESS: GOLDTL 0x00452300 */
 void __cdecl fcn_00452300(void)
 {
 	while (g_1040c74 != g_1040640) {

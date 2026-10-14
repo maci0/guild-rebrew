@@ -55,7 +55,7 @@ extern int g_6b7d40;
 void __cdecl fcn_00420b70(void);
 void __cdecl fcn_004208a0(int err);
 
-// FUNCTION: GOLDTL 0x420db0
+/* ADDRESS: GOLDTL 0x00420db0 */
 
 /* Opens a non-blocking TCP connection to host:port, waiting up to 16
  * half-second select rounds; returns the socket or -1. */

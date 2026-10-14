@@ -24,7 +24,7 @@ void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
-// FUNCTION: GOLDTL 0x4c0460
+/* ADDRESS: GOLDTL 0x004c0460 */
 void __cdecl fcn_004c0460(char* e, char who)
 {
 	int* p;

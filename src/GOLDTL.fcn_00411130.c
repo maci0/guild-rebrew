@@ -20,7 +20,7 @@ int __cdecl fcn_004110e0();
 void __cdecl fcn_00429ed0(const char*, void*, ...);
 void __cdecl fcn_00425d90(const char*, void*, ...);
 
-// FUNCTION: GOLDTL 0x411130
+/* ADDRESS: GOLDTL 0x00411130 */
 
 /* Registers the sound script commands and constants. */
 void __cdecl fcn_00411130(void)

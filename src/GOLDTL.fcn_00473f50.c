@@ -14,8 +14,8 @@ typedef struct Spin {
 
 int __cdecl fcn_004722c0(Spin* p);
 
-// FUNCTION: GOLD 0x477490
-// FUNCTION: GOLDTL 0x473f50
+/* ADDRESS: GOLD 0x00477490 */
+/* ADDRESS: GOLDTL 0x00473f50 */
 void __cdecl fcn_00473f50(Spin* p, int v, int a3, int a4)
 {
 	int step;

@@ -7,7 +7,7 @@ struct fcn_00473700_slot {
 
 #include "client_types.h"
 
-// FUNCTION: GOLDTL 0x473700
+/* ADDRESS: GOLDTL 0x00473700 */
 
 void __cdecl fcn_00473700(int key, int n)
 {

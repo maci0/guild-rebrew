@@ -7,7 +7,7 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d, void* e)
  * overwrites those slots, and the second probe still needs the
  * originals. p5 stays in eax; p6 and p4 are read after it so they
  * land in esi and edi. */
-// FUNCTION: GOLDTL 0x413c40
+/* ADDRESS: GOLDTL 0x00413c40 */
 
 int __cdecl fcn_00413c40(void* obj, float* outA, float* outB, float* p4, float* p5, float* p6, float* p7)
 {

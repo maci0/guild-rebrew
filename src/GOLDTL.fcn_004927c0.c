@@ -29,8 +29,8 @@ int __cdecl fcn_0050b710(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 float __cdecl gm_RandomFloat01(void);
 
-// FUNCTION: GOLD 0x004931f0
-// FUNCTION: GOLDTL 0x004927c0
+/* ADDRESS: GOLD 0x004931f0 */
+/* ADDRESS: GOLDTL 0x004927c0 */
 int __cdecl fcn_004927c0(unsigned char* e, Deal* o, int kind)
 {
 	char* d;

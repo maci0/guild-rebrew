@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x46ca50
-// FUNCTION: GOLDTL 0x469900
+
+
 // The volatile read of g_6b7fac orders it after the reload of g_772500, as
 // in the reference.
 

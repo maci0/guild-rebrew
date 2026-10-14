@@ -1,7 +1,7 @@
 extern int g_7728e0;
 
-// FUNCTION: GOLD 0x004bb7d0
-// FUNCTION: GOLDTL 0x4bbce0
+/* ADDRESS: GOLD 0x004bb7d0 */
+/* ADDRESS: GOLDTL 0x004bbce0 */
 
 unsigned int __cdecl fcn_004bbce0(unsigned int n)
 {

@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x449770
+
 
 extern char* g_5fb5b0;
 

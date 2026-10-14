@@ -6,8 +6,8 @@ int __cdecl fcn_004a54a0(short*, int, int, unsigned short*, float, float, unsign
 float __cdecl fcn_00507e70(short*, char*, int);
 float __cdecl gm_RandomFloat01(void);
 
-// FUNCTION: GOLD 0x4aa800
-// FUNCTION: GOLDTL 0x4aa920
+/* ADDRESS: GOLD 0x004aa800 */
+/* ADDRESS: GOLDTL 0x004aa920 */
 
 int __cdecl fcn_004aa920(short* a1, int a2, char* a3)
 {

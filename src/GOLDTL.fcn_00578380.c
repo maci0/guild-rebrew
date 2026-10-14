@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0056fee0
-// FUNCTION: GOLDTL 0x578380
+
+
 
 // SIZE 0x21c
 struct house {

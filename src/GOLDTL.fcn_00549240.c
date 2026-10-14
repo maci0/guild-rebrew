@@ -29,8 +29,8 @@ struct s_7f4ca0 {
 
 extern char g_7f4ca0[];
 
-// FUNCTION: GOLD 0x005413d0
-// FUNCTION: GOLDTL 0x549240
+
+
 
 char* __cdecl fcn_005463a0(int, int, int, ...);
 void __cdecl fcn_00546190(char*);

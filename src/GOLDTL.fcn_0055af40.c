@@ -1,8 +1,8 @@
 extern char g_774964;
 extern int g_774954;
 
-// FUNCTION: GOLD 0x00552e10
-// FUNCTION: GOLDTL 0x55af40
+
+
 
 void __cdecl fcn_005800b0(void);
 void __cdecl fcn_005809d0(void);

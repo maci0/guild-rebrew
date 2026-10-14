@@ -3,8 +3,8 @@ extern pos14_7f4c00 g_7f4c00;
 
 unsigned short __cdecl gm_RandomMod(int);
 
-// FUNCTION: GOLD 0x004a9150
-// FUNCTION: GOLDTL 0x4a9270
+/* ADDRESS: GOLD 0x004a9150 */
+/* ADDRESS: GOLDTL 0x004a9270 */
 
 int __cdecl fcn_004a9270(int a, char* e)
 {

@@ -6,8 +6,8 @@ extern int g_6816d8;
 int __cdecl fcn_004693b0(int, int);
 void __cdecl fcn_00469470(int, int);
 
-// FUNCTION: GOLD 0x4bdae0
-// FUNCTION: GOLDTL 0x4be380
+/* ADDRESS: GOLD 0x004bdae0 */
+/* ADDRESS: GOLDTL 0x004be380 */
 
 void __cdecl fcn_004be380(void)
 {

@@ -72,7 +72,7 @@ static __inline float v3len(Vec57aa* v)
 	return l;
 }
 
-// FUNCTION: GOLDTL 0x57aab0
+/* ADDRESS: GOLDTL 0x0057aab0 */
 void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 {
 	float range;

@@ -67,8 +67,8 @@ int __cdecl fcn_00464870(FILE* fin, uLong* pX);
 int __cdecl fcn_004647e0(FILE* fin, uLong* pX);
 int __cdecl fcn_00464e60(unzFile file);
 
-// FUNCTION: GOLD 0x00467830
-// FUNCTION: GOLDTL 0x464650
+/* ADDRESS: GOLD 0x00467830 */
+/* ADDRESS: GOLDTL 0x00464650 */
 unzFile __cdecl fcn_00464650(const char* path)
 {
 	unz_s us;

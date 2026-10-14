@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004cc330
-// FUNCTION: GOLDTL 0x4cceb0
+
+
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004cfc40(char*, int, int);

@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00453980
+/* ADDRESS: GOLD 0x00453980 */
 // fcn_00453980 — zero five globals.
 
 void __cdecl fcn_00453980(void)

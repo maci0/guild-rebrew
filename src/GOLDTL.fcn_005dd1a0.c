@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005d0c70
-// FUNCTION: GOLDTL 0x005dd1a0
+
+
 
 #include <string.h>
 

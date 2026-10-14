@@ -41,7 +41,7 @@ void __cdecl fcn_0045c1e0(void);
 void __cdecl fcn_00450ad0(void);
 void __cdecl fcn_00436fc0(void);
 
-// FUNCTION: GOLDTL 0x439490
+/* ADDRESS: GOLDTL 0x00439490 */
 void __cdecl fcn_00439490(void)
 {
 	int saved;

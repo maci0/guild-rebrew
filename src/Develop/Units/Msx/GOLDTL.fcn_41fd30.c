@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x41fd30
+
 
 int __cdecl fcn_0042a0e0(int, int);
 

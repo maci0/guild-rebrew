@@ -6,8 +6,8 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_004c5580(char*, int, char*);
 
-// FUNCTION: GOLD 0x004e48b0
-// FUNCTION: GOLDTL 0x4e6240
+/* ADDRESS: GOLD 0x004e48b0 */
+/* ADDRESS: GOLDTL 0x004e6240 */
 
 void __cdecl fcn_004e6240(int* a1, char* a2, char* text, char* extra)
 {

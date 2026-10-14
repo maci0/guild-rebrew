@@ -1,6 +1,6 @@
 extern char g_7f4ca4[];
-// FUNCTION: GOLDTL 0x508e40
-// FUNCTION: GOLD 0x505df0
+/* ADDRESS: GOLDTL 0x00508e40 */
+/* ADDRESS: GOLD 0x00505df0 */
 
 char* __cdecl fcn_00508e40(int a1)
 {

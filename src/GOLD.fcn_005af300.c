@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005af300
+
 /* Lua getupvalue-style forwarder: f(obj, 2). Callee at 0x005af320. */
 void __cdecl fcn_005af320(void* obj, int n);
 

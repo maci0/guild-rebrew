@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0043e900
-// FUNCTION: GOLDTL 0x43b740
+
+
 
 // SIZE 0x84
 typedef struct Event {

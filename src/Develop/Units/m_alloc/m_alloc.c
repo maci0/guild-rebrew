@@ -299,7 +299,7 @@ void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 //     frame and 80 matched bytes in the first place.
 // Everything below is the pre-round-87 history; its measurements were all taken
 // against the old 0x120 frame.
-// NOTE: best config found - 212/658 instr bytes matched (obj 624 vs target 658).
+
 // The target homes three values in the ebp frame: the group node at [ebp-4],
 // the allocation size at [ebp-8], and buf at [ebp-0x18].  The `node_slot` alias on
 // `node` supplies the search-loop spill, the matching `prev_slot` alias on `prev`
@@ -457,7 +457,7 @@ void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 // size_total/size_max update 229, and hoisting `count_max` above the
 // count_total increment 230.  CFLAGS sweep (/O2, /Ox, /G5, /G6, /Ob2, with and
 // without /Oy-) is flat at 230.
-// STATUS: PROVEN (rebrew prove, 2026-08-27) - semantically equivalent; not a
+
 // byte match.  Residual against the target's 249 instructions: 131 aligned
 // identical, 42 instructions blocked by the zero register (the target's
 // `xor ebx,ebx` plus its `cmp reg,ebx` and `mov [..],bl` users, mutually

@@ -26,7 +26,7 @@ int __cdecl fcn_00469890(void);
 int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_0046f650(int slot, fcn_0046fdf0_Win* parent);
 
-// FUNCTION: GOLDTL 0x46fdf0
+/* ADDRESS: GOLDTL 0x0046fdf0 */
 int __cdecl fcn_0046fdf0(int x, int y, char* text, int win)
 {
 	fcn_0046fdf0_Win* w;

@@ -17,7 +17,7 @@ extern char* g_99ec10;
 extern Seg g_100b0c0[];
 extern entry_100d0c0 g_100d0c0[];
 
-// FUNCTION: GOLDTL 0x487d80
+/* ADDRESS: GOLDTL 0x00487d80 */
 void __cdecl fcn_00487d80(int* ca, int* cb, Node* n)
 {
 	int i;

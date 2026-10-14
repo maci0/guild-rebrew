@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00534210
+
 // Draws a two-colour bar: the current value (fcn_00507e30) against the
 // stored one at p[idx + 0x80], one segment image per 21 units and a half
 // segment for an odd count. Values within 1% draw as one plain bar. When

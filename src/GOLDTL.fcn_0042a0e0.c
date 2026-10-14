@@ -1,10 +1,10 @@
 typedef void (__stdcall* g_6623b0_f)(int, int);
-// GLOBAL: GOLDTL 0x6623b0
+/* ADDRESS: GOLDTL 0x006623b0 */
 extern g_6623b0_f g_6623b0;
-// GLOBAL: GOLD 0x5eb320
+/* ADDRESS: GOLD 0x005eb320 */
 extern g_6623b0_f g_6623b0;
-// FUNCTION: GOLD 0x0042b780
-// FUNCTION: GOLDTL 0x42a0e0
+
+
 
 int __cdecl fcn_0042b120(int);
 

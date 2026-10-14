@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0044f7a0
+
 // fcn_0044f7a0 — fcn_00430bd0(&a, 4, 1, a).
 
 int __cdecl fcn_00430bd0(void*, int, int, int);

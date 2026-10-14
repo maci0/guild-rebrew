@@ -11,8 +11,8 @@ void __cdecl fcn_004c5360(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004c54c0(int, int, int, int);
 
-// FUNCTION: GOLD 0x004ac2f0
-// FUNCTION: GOLDTL 0x4ac410
+/* ADDRESS: GOLD 0x004ac2f0 */
+/* ADDRESS: GOLDTL 0x004ac410 */
 
 void __cdecl fcn_004ac410(unsigned char* a1, int a2, int a3)
 {

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x459a90
+
 
 typedef int (__stdcall* f)(void*);
 

@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005a8490
-// FUNCTION: GOLDTL 0x5b1910
+/* ADDRESS: GOLD 0x005a8490 */
+/* ADDRESS: GOLDTL 0x005b1910 */
 
 float __cdecl fcn_005b1910(int* rng)
 {

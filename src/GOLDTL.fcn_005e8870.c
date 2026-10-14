@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x5dbd80
-// FUNCTION: GOLDTL 0x005e8870
+
+
 
 typedef struct Vec24 {
 	float v[24];

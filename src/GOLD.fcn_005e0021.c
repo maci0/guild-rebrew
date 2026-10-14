@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005e0021
+/* ADDRESS: GOLD 0x005e0021 */
 // fcn_005e0021 — swap n bytes between a and b.
 
 void __cdecl fcn_005e0021(char* a, char* b, int n)

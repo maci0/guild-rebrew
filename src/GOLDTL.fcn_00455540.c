@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x458c00
-// FUNCTION: GOLDTL 0x455540
+
+
 
 // SIZE 0xc
 typedef struct Vec3 {

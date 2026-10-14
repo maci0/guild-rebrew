@@ -15,8 +15,8 @@ struct host_57eba0 {
 
 extern int* g_665f08;
 
-// FUNCTION: GOLD 0x576600
-// FUNCTION: GOLDTL 0x57eba0
+/* ADDRESS: GOLD 0x00576600 */
+/* ADDRESS: GOLDTL 0x0057eba0 */
 
 int __cdecl fcn_0057eba0(int a, int b, int c, int d)
 {

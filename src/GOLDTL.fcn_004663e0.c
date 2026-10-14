@@ -31,7 +31,7 @@ void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_00472880(int font);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 
-// FUNCTION: GOLDTL 0x4663e0
+/* ADDRESS: GOLDTL 0x004663e0 */
 void __cdecl fcn_004663e0(char* f, int surf)
 {
 	fcn_004663e0_Ent* e;

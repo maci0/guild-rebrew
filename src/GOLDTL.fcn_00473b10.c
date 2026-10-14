@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00473b10
+
 
 typedef struct Win {
 	int id;

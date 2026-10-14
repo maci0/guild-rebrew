@@ -5,8 +5,8 @@ char* __cdecl fcn_00433ba0(char*);
 int __cdecl fcn_0065f220(const char*, const char*);
 char* __cdecl fcn_0044c620(char*, char*, int);
 
-// FUNCTION: GOLD 0x00403b00
-// FUNCTION: GOLDTL 0x404300
+/* ADDRESS: GOLD 0x00403b00 */
+/* ADDRESS: GOLDTL 0x00404300 */
 
 /* Loads a character's motion into its motion slot and takes a reference. */
 char* __cdecl fcn_00404300(char* obj, char* name, char slot)

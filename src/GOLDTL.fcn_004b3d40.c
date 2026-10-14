@@ -2,7 +2,7 @@ extern char g_10069a0[];
 extern int g_10069a4;
 extern int g_10069a8;
 extern char g_10069c0;
-// FUNCTION: GOLDTL 0x4b3d40
+
 
 void __cdecl sim_SetSyncParams(void*, int, int, int);
 

@@ -11,8 +11,8 @@ struct slot_5595e0 {
 	int pad;
 };
 
-// FUNCTION: GOLD 0x00551510
-// FUNCTION: GOLDTL 0x5595e0
+/* ADDRESS: GOLD 0x00551510 */
+/* ADDRESS: GOLDTL 0x005595e0 */
 
 void __cdecl fcn_005595e0(char* o)
 {

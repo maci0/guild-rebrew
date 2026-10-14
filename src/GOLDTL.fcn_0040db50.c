@@ -1,7 +1,7 @@
-// GLOBAL: GOLD 0x5f216c
+/* ADDRESS: GOLD 0x005f216c */
 extern char g_6761ec[];
-// FUNCTION: GOLD 0x0040cc20
-// FUNCTION: GOLDTL 0x40db50
+
+
 
 void __cdecl fcn_004050c0(int);
 extern char* g_6b7e98;

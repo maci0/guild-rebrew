@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004ef740
-// FUNCTION: GOLDTL 0x4f1820
+/* ADDRESS: GOLD 0x004ef740 */
+/* ADDRESS: GOLDTL 0x004f1820 */
 
 // fcn_004ef740 — a->[1] == b->[1] (b at [esp+4]).
 

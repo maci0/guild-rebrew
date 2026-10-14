@@ -23,8 +23,8 @@ struct script_427b40 {
 	int result;
 };
 
-// FUNCTION: GOLD 0x004292b0
-// FUNCTION: GOLDTL 0x427b40
+/* ADDRESS: GOLD 0x004292b0 */
+/* ADDRESS: GOLDTL 0x00427b40 */
 
 /* Returns from the current script function to its caller frame; returns 0
  * when the outermost frame ended. */

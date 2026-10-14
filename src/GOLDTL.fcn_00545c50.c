@@ -11,8 +11,8 @@ struct ev_545c50 {
 
 extern unsigned char** g_7749e4;
 
-// FUNCTION: GOLD 0x53df10
-// FUNCTION: GOLDTL 0x545c50
+
+
 
 void __cdecl fcn_00472380(int, int);
 void __cdecl fcn_00471af0(int, int);

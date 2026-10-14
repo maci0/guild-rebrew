@@ -19,7 +19,7 @@ typedef Obj_1038140 Obj;
 extern Win_1015f40 g_1015f40[0x60];
 extern Obj_1038140 g_1038140[];
 
-// FUNCTION: GOLDTL 0x472250
+/* ADDRESS: GOLDTL 0x00472250 */
 int __cdecl fcn_00472250(int k, int i, int j)
 {
 	Win* w;

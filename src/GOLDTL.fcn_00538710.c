@@ -3,8 +3,8 @@ typedef void* HWND;
 extern HWND g_774940;
 extern char g_6a3448[];
 
-// FUNCTION: GOLD 0x531c00
-// FUNCTION: GOLDTL 0x538710
+
+
 
 int sprintf(char*, const char*, ...);
 __declspec(dllimport) int __stdcall CreateDirectoryA(const char*, void*);

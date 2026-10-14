@@ -25,7 +25,7 @@ extern char g_1005780;
 extern int g_1005768;
 extern int g_1005760;
 
-// FUNCTION: GOLDTL 0x4c3e30
+/* ADDRESS: GOLDTL 0x004c3e30 */
 
 void __cdecl fcn_004c3e30(void)
 {

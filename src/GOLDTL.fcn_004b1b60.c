@@ -19,8 +19,8 @@ extern char* g_773da8;
 int __cdecl fcn_004b3010(int pos, int k, Val* v, char* buf);
 void __cdecl fcn_004c5530(char* msg);
 
-// FUNCTION: GOLD 0x4b1a20
-// FUNCTION: GOLDTL 0x004b1b60
+/* ADDRESS: GOLD 0x004b1a20 */
+/* ADDRESS: GOLDTL 0x004b1b60 */
 int __cdecl fcn_004b1b60(void)
 {
 	char msg[0xf8];

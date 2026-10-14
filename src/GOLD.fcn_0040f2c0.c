@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x40f2c0
+
 
 int __cdecl m_is_tracked(void*);
 void __cdecl fcn_004273d0(void*, int, char*);

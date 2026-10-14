@@ -1,5 +1,5 @@
 extern char* g_6b7e98;
-// FUNCTION: GOLD 0x40f250
+
 
 int __cdecl m_is_tracked(char* p);
 void __cdecl fcn_004273d0(char* g, int h, const char* msg);

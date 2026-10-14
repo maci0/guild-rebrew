@@ -8,8 +8,8 @@ typedef struct TmUnz {
 } TmUnz;
 // SIZE 0x18
 
-// FUNCTION: GOLD 0x467fd0
-// FUNCTION: GOLDTL 0x464e10
+/* ADDRESS: GOLD 0x00467fd0 */
+/* ADDRESS: GOLDTL 0x00464e10 */
 void __cdecl fcn_00464e10(unsigned long ulDosDate, TmUnz* ptm)
 {
 	unsigned long uDate;

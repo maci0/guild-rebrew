@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00495760
+/* ADDRESS: GOLD 0x00495760 */
 // fcn_00495760 — store into array 0xf86900 at index [0xf83ea4], bump counter.
 
 int __cdecl fcn_00495760(int a)

@@ -8,8 +8,8 @@ extern char* g_1007cd4;
 
 unsigned short __cdecl gm_RandomMod(int n);
 
-// FUNCTION: GOLD 0x004a7760
-// FUNCTION: GOLDTL 0x4a7880
+/* ADDRESS: GOLD 0x004a7760 */
+/* ADDRESS: GOLDTL 0x004a7880 */
 int __cdecl fcn_004a7880(int owner)
 {
 	int i;

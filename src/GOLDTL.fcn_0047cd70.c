@@ -18,7 +18,7 @@ extern Anim_100e7a0 g_100e7a0[0x30];
 void __cdecl fcn_0047cbf0(int x, int y, int tex, void* seq, int frame);
 void __cdecl fcn_0047cba0(int x, int y, int tex, void* seq, int frame);
 
-// FUNCTION: GOLDTL 0x47cd70
+/* ADDRESS: GOLDTL 0x0047cd70 */
 void __cdecl fcn_0047cd70(int i, int tex)
 {
 	short x;

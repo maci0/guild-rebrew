@@ -31,7 +31,7 @@ void __cdecl fcn_00438920(float, float, int);
 void __cdecl fcn_00447110(void*, int, int, int);
 void __cdecl CloseVfsStream(void*);
 
-// FUNCTION: GOLDTL 0x00446df0
+/* ADDRESS: GOLDTL 0x00446df0 */
 
 void __cdecl fcn_00446df0(const char* name, void* stream)
 {

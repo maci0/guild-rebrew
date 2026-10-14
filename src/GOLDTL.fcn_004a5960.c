@@ -29,7 +29,7 @@ int __cdecl fcn_00508f80(unsigned short, int);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, Query* q, int c);
 float __cdecl fcn_0050f980(int, int, int);
 
-// FUNCTION: GOLDTL 0x4a5960
+/* ADDRESS: GOLDTL 0x004a5960 */
 
 /* Collects up to max entities near e's level into out, walking the entity
  * table from a random start with a random stride: first those with a job

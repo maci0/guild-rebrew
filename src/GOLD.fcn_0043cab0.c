@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x43cab0
+
 
 extern char* g_fc2dec;
 

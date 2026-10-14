@@ -10,7 +10,7 @@ extern float g_67bc14;
 extern float g_67bc1c;
 extern float g_67bc20;
 
-// FUNCTION: GOLDTL 0x516be0
+/* ADDRESS: GOLDTL 0x00516be0 */
 
 void __cdecl fcn_00516be0(void)
 {

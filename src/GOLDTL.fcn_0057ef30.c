@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x576990
-// FUNCTION: GOLDTL 0x57ef30
+
+
 
 // SIZE 0x10
 struct fsm {

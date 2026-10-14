@@ -1,8 +1,8 @@
 #include "client_sound.h"
 #include "Develop/Units/Msx/msx.h"
 
-// FUNCTION: GOLD 0x004c23f0
-// FUNCTION: GOLDTL 0x4c2c50
+
+
 
 extern int g_774930;
 extern float g_6819b0;

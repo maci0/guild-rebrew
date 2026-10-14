@@ -15,8 +15,8 @@ int __cdecl sprintf(char* buf, const char* fmt, ...);
 int __cdecl atoi(const char* s);
 void __cdecl fcn_004b2020(int n);
 
-// FUNCTION: GOLD 0x004b2380
-// FUNCTION: GOLDTL 0x004b24c0
+/* ADDRESS: GOLD 0x004b2380 */
+/* ADDRESS: GOLDTL 0x004b24c0 */
 Slot* __cdecl fcn_004b24c0(int id)
 {
 	char buf[0x17d0];

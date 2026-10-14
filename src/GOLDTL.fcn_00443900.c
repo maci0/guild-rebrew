@@ -37,7 +37,7 @@ void __cdecl fcn_004379a0(fcn_00443900_Scene* s, fcn_00443900_Obj* o, int mask, 
 void __cdecl fcn_004438b0(void);
 void __cdecl fcn_00443030(fcn_00443900_Scene* s);
 
-// FUNCTION: GOLDTL 0x443900
+/* ADDRESS: GOLDTL 0x00443900 */
 char __cdecl fcn_00443900(fcn_00443900_Obj* o, fcn_00443900_Scene* from, fcn_00443900_Scene* to)
 {
 	fcn_00443900_Obj* p;

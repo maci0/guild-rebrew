@@ -16,7 +16,7 @@ typedef struct {
 fcn_00476a00_res* __cdecl fcn_004770a0(fcn_00476a00_req*, int);
 void __cdecl fcn_00476620(int, int, int, int, fcn_00476a00_req*, int, int, fcn_00476a00_res*);
 
-// FUNCTION: GOLDTL 0x476a00
+/* ADDRESS: GOLDTL 0x00476a00 */
 
 fcn_00476a00_res* __cdecl fcn_00476a00(fcn_00476a00_req* req)
 {

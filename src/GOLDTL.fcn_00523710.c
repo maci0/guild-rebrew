@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x51e780
-// FUNCTION: GOLDTL 0x00523710
+
+
 
 // SIZE 0x228
 typedef struct {

@@ -1,6 +1,6 @@
 extern char* g_1015ea0;
 
-// FUNCTION: GOLDTL 0x472640
+/* ADDRESS: GOLDTL 0x00472640 */
 void __cdecl fcn_00472640(int i, int flag)
 {
 	int v;

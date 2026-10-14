@@ -1,7 +1,7 @@
 #include <string.h>
 
-// FUNCTION: GOLD 0x42c430
-// FUNCTION: GOLDTL 0x42b790
+/* ADDRESS: GOLD 0x0042c430 */
+/* ADDRESS: GOLDTL 0x0042b790 */
 char* __cdecl fcn_0042b790(char* s)
 {
 	unsigned int i;

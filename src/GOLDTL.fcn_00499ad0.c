@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x499ad0
+
 
 #pragma pack(push, 2)
 // SIZE 0xe

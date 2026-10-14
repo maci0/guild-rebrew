@@ -6,7 +6,7 @@ extern char g_7e23e8;
 extern char g_7e23e9;
 extern char g_7e23e3;
 
-// FUNCTION: GOLDTL 0x5144a0
+
 
 #include <string.h>
 

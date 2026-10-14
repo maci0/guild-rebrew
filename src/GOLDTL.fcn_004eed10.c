@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004ecf10
-// FUNCTION: GOLDTL 0x004eed10
+
+
 
 /* Save counterpart of ahm_AllocAhmInfo (GOLDTL 0x4eee40). */
 

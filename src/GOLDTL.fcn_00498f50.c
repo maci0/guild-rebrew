@@ -2,8 +2,8 @@
 
 int __cdecl fcn_004fa5b0(int a1, char* a2, int a3);
 
-// FUNCTION: GOLD 0x499510
-// FUNCTION: GOLDTL 0x498f50
+/* ADDRESS: GOLD 0x00499510 */
+/* ADDRESS: GOLDTL 0x00498f50 */
 
 int __cdecl fcn_00498f50(int busy, char* name)
 {

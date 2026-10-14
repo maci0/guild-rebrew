@@ -28,21 +28,21 @@ extern int g_current_year; /* 0x10035880, gm_NextEntityQueryMatch.c */
 extern int g_citizen_count; /* 0x10035434, gm_NextEntityQueryMatch.c */
 extern unsigned char g_current_season; /* 0x10035439 */
 
-// DATA: SERVER 0x100256cc
+/* ADDRESS: SERVER 0x100256cc */
 extern const float g_const_0_0;
-// DATA: SERVER 0x100257c8
+/* ADDRESS: SERVER 0x100257c8 */
 extern float g_graveyard_const_c;
-// DATA: SERVER 0x100257d0
+/* ADDRESS: SERVER 0x100257d0 */
 extern double g_const_half;
-// DATA: SERVER 0x10025fa0
+/* ADDRESS: SERVER 0x10025fa0 */
 extern double g_const_1_over_720;
-// DATA: SERVER 0x10025fa8
+/* ADDRESS: SERVER 0x10025fa8 */
 extern float g_const_896_0;
-// DATA: SERVER 0x10025fac
+/* ADDRESS: SERVER 0x10025fac */
 extern float g_const_0_06875;
-// DATA: SERVER 0x10025fb0
+/* ADDRESS: SERVER 0x10025fb0 */
 extern float g_const_2_2;
-// DATA: SERVER 0x10025fb4
+/* ADDRESS: SERVER 0x10025fb4 */
 extern float g_const_1_5;
 
 #endif /* GAME_DATA_H */

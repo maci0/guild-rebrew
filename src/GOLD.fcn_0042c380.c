@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0042c380
+/* ADDRESS: GOLD 0x0042c380 */
 // fcn_0042c380 — count non-zero ints at 0x6332f0 (16 entries).
 
 int __cdecl fcn_0042c380(void)

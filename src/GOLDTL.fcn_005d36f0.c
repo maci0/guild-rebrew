@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005c7420
-// FUNCTION: GOLDTL 0x005d36f0
+
+
 
 #include "client_types.h"
 typedef Pt5d36_99ec2c Pt5d36;

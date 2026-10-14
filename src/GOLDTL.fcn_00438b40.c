@@ -6,8 +6,8 @@ void __cdecl fcn_00438ac0(char* p, int a);
 void __cdecl fcn_00437ac0(int list, char* p, int mask, void(__cdecl* fn)(void));
 void __cdecl fcn_00456df0(void);
 
-// FUNCTION: GOLD 0x0043b790
-// FUNCTION: GOLDTL 0x438b40
+/* ADDRESS: GOLD 0x0043b790 */
+/* ADDRESS: GOLDTL 0x00438b40 */
 void __cdecl fcn_00438b40(char* p, int* v)
 {
 	if (p == ((char*)g_6b8014)) {

@@ -6,8 +6,8 @@ extern int g_7766a8;
 extern int g_6a3774;
 extern pos14_7f4c00 g_7e1f70;
 
-// FUNCTION: GOLDTL 0x538060
-// FUNCTION: GOLD 0x005315f0
+
+
 
 void __cdecl fcn_00500bb0(char*, int, int, int);
 

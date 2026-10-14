@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4a7240
+
 
 typedef struct Card {
 	int v;

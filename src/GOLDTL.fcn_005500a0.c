@@ -4,8 +4,8 @@ extern unsigned char* g_868050;
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-// FUNCTION: GOLD 0x00548130
-// FUNCTION: GOLDTL 0x5500a0
+
+
 
 
 void __cdecl fcn_00546190(char*);

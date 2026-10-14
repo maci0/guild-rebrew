@@ -1,7 +1,7 @@
 extern unsigned char* g_868050;
 
-// FUNCTION: GOLD 0x0050dba0
-// FUNCTION: GOLDTL 0x511040
+
+
 
 #include <string.h>
 

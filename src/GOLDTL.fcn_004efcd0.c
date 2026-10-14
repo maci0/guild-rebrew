@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004ede70
-// FUNCTION: GOLDTL 0x4efcd0
+
+
 
 #include "client_types.h"
 typedef Slot170_7731b8 Slot170;

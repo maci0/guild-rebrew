@@ -23,7 +23,7 @@ extern char* g_1015ea0;
 void* __cdecl fcn_0047bf80(int x, int y, int w, int h, int a5, Rect4* r);
 void __cdecl fcn_0047b9a0(void* p, int r, int g, int b);
 
-// FUNCTION: GOLDTL 0x469320
+/* ADDRESS: GOLDTL 0x00469320 */
 void __cdecl fcn_00469320(int slot)
 {
 	Rect4 rc;

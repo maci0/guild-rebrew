@@ -18,8 +18,8 @@ struct msg_4ab3e0 {
 };
 // SIZE 0x14
 
-// FUNCTION: GOLD 0x004ab2c0
-// FUNCTION: GOLDTL 0x4ab3e0
+/* ADDRESS: GOLD 0x004ab2c0 */
+/* ADDRESS: GOLDTL 0x004ab3e0 */
 
 int __cdecl fcn_004ab3e0(char* a1, char* a2, char* a3)
 {

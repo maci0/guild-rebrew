@@ -2,3029 +2,3029 @@
 // Auto-generated (see .scratch/gen_d3dx8_library.py) -- the linker supplies
 // these bytes, so they are not worth reversing.
 
-// LIBRARY: D3DX8 0x0045d3f0
+
 // _adler32
 
-// LIBRARY: D3DX8 0x0045d600
+
 // _crc32
 
-// LIBRARY: D3DX8 0x0045d770
+
 // _deflateInit2_
 
-// LIBRARY: D3DX8 0x0045da70
+
 // _deflateReset
 
-// LIBRARY: D3DX8 0x0045de70
+
 // _putShortMSB
 
-// LIBRARY: D3DX8 0x0045dea0
+
 // _flush_pending
 
-// LIBRARY: D3DX8 0x0045df20
+
 // _deflateEnd
 
-// LIBRARY: D3DX8 0x0045e370
+
 // _fill_window
 
-// LIBRARY: D3DX8 0x0045e4a0
+
 // _read_buf
 
-// LIBRARY: D3DX8 0x0045e860
+
 // _longest_match
 
-// LIBRARY: D3DX8 0x0045fa70
+
 // _gzeof
 
-// LIBRARY: D3DX8 0x0045fc50
+
 // _inflate_blocks_reset
 
-// LIBRARY: D3DX8 0x0045fcd0
+
 // _inflate_blocks_new
 
-// LIBRARY: D3DX8 0x004609c0
+
 // _inflate_blocks_free
 
-// LIBRARY: D3DX8 0x00460a40
+
 // ?inflate_blocks_sync_point@D3DX@@YAHPAUinflate_blocks_state@1@@Z
 
-// LIBRARY: D3DX8 0x00460a50
+
 // _inflate_codes_new
 
-// LIBRARY: D3DX8 0x00460a90
+
 // _inflate_codes
 
-// LIBRARY: D3DX8 0x00461190
+
 // _inflate_codes_free
 
-// LIBRARY: D3DX8 0x004611b0
+
 // _inflate_fast
 
-// LIBRARY: D3DX8 0x00461510
+
 // _inflateReset
 
-// LIBRARY: D3DX8 0x00461560
+
 // _inflateEnd
 
-// LIBRARY: D3DX8 0x004615b0
+
 // _inflateInit2_
 
-// LIBRARY: D3DX8 0x00461ca0
+
 // _inflate_trees_bits
 
-// LIBRARY: D3DX8 0x00462200
+
 // _inflate_trees_dynamic
 
-// LIBRARY: D3DX8 0x00462390
+
 // _inflate_trees_fixed
 
-// LIBRARY: D3DX8 0x004623c0
+
 // _inflate_flush
 
-// LIBRARY: D3DX8 0x00462a80
+
 // _init_block
 
-// LIBRARY: D3DX8 0x00462da0
+
 // __tr_flush_block
 
-// LIBRARY: D3DX8 0x004631b0
+
 // _pqdownheap
 
-// LIBRARY: D3DX8 0x00463520
+
 // _build_bl_tree
 
-// LIBRARY: D3DX8 0x00463590
+
 // _scan_tree
 
-// LIBRARY: D3DX8 0x004642b0
+
 // _set_data_type
 
-// LIBRARY: D3DX8 0x00464460
+
 // _copy_block
 
-// LIBRARY: D3DX8 0x00465820
+
 // _zcalloc
 
-// LIBRARY: D3DX8 0x00465840
+
 // _zcfree
 
-// LIBRARY: D3DX8 0x005eac1c
+
 // ?WithinEpsilon@@YAHMM@Z
 
-// LIBRARY: D3DX8 0x005eac6f
+
 // ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eac9f
+
 // ?c_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005ead2d
+
 // ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005ead5d
+
 // ?c_D3DXVec2CatmullRom@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eae0c
+
 // ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x005eae41
+
 // ?c_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x005eaeda
+
 // ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eaf15
+
 // ?c_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eafca
+
 // ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eaffa
+
 // ?c_D3DXVec2CatmullRom@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eb0d9
+
 // ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x005eb111
+
 // ?c_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x005eb18d
+
 // ?c_D3DXVec3Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR3@@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005eb256
+
 // ?c_D3DXVec3TransformNormal@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005eb369
+
 // ?c_D3DXVec4Cross@@YGPAUD3DXVECTOR4@@PAU1@PBU1@11@Z
 
-// LIBRARY: D3DX8 0x005eb47c
+
 // ??KD3DXVECTOR3@@QBE?AU0@M@Z
 
-// LIBRARY: D3DX8 0x005eb4b7
+
 // ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eb507
+
 // ?c_D3DXVec4Hermite@@YGPAUD3DXVECTOR4@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eb5d8
+
 // ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eb608
+
 // ?c_D3DXVec4CatmullRom@@YGPAUD3DXVECTOR4@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005eb6fb
+
 // ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x005eb730
+
 // ?c_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x005eb7e7
+
 // ?c_D3DXVec4Transform@@YGPAUD3DXVECTOR4@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005eb899
+
 // ?c_D3DXMatrixfDeterminant@@YGMPBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005eb976
+
 // ?c_D3DXMatrixMultiply@@YGPAUD3DXMATRIX@@PAU1@PBU1@1@Z
 
-// LIBRARY: D3DX8 0x005ebc3f
+
 // ?c_D3DXMatrixMultiply@@YGPAUD3DXMATRIX@@PAU1@PBU1@1@Z
 
-// LIBRARY: D3DX8 0x005ebea8
+
 // ?c_D3DXMatrixInverse@@YGPAUD3DXMATRIX@@PAU1@PAMPBU1@@Z
 
-// LIBRARY: D3DX8 0x005ec2d9
+
 // ??DD3DXQUATERNION@@QBE?AU0@M@Z
 
-// LIBRARY: D3DX8 0x005ec4b9
+
 // ?c_D3DXMatrixRotationX@@YGPAUD3DXMATRIX@@PAU1@M@Z
 
-// LIBRARY: D3DX8 0x005ec555
+
 // ?c_D3DXMatrixRotationY@@YGPAUD3DXMATRIX@@PAU1@M@Z
 
-// LIBRARY: D3DX8 0x005ec5f2
+
 // ?c_D3DXMatrixRotationX@@YGPAUD3DXMATRIX@@PAU1@M@Z
 
-// LIBRARY: D3DX8 0x005ec694
+
 // ?c_D3DXMatrixRotationAxis@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXVECTOR3@@M@Z
 
-// LIBRARY: D3DX8 0x005ec7a9
+
 // ?c_D3DXMatrixRotationQuaternion@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXQUATERNION@@@Z
 
-// LIBRARY: D3DX8 0x005ec93e
+
 // ?c_D3DXMatrixAffineTransformation@@YGPAUD3DXMATRIX@@PAU1@MPBUD3DXVECTOR3@@PBUD3DXQUATERNION@@1@Z
 
-// LIBRARY: D3DX8 0x005eca41
+
 // ?D3DXVec3Cross@@YAPAUD3DXVECTOR3@@PAU1@PBU1@1@Z
 
-// LIBRARY: D3DX8 0x005ecab2
+
 // _D3DXMatrixLookAtRH@16
 
-// LIBRARY: D3DX8 0x005ecbfa
+
 // _D3DXMatrixLookAtLH@16
 
-// LIBRARY: D3DX8 0x005ecd42
+
 // ?D3DXVec3Lerp@@YAPAUD3DXVECTOR3@@PAU1@PBU1@1M@Z
 
-// LIBRARY: D3DX8 0x005ecda7
+
 // _D3DXMatrixPerspectiveRH@20
 
-// LIBRARY: D3DX8 0x005ece13
+
 // _D3DXMatrixPerspectiveLH@20
 
-// LIBRARY: D3DX8 0x005ece7f
+
 // _D3DXMatrixPerspectiveFovRH@20
 
-// LIBRARY: D3DX8 0x005ecf13
+
 // _D3DXMatrixPerspectiveFovRH@20
 
-// LIBRARY: D3DX8 0x005ecffb
+
 // _D3DXMatrixPerspectiveOffCenterRH@28
 
-// LIBRARY: D3DX8 0x005ed098
+
 // _D3DXMatrixPerspectiveOffCenterLH@28
 
-// LIBRARY: D3DX8 0x005ed18c
+
 // _D3DXMatrixOrthoRH@20
 
-// LIBRARY: D3DX8 0x005ed248
+
 // _D3DXMatrixOrthoRH@20
 
-// LIBRARY: D3DX8 0x005ed2f9
+
 // _D3DXMatrixOrthoOffCenterRH@28
 
-// LIBRARY: D3DX8 0x005ed39b
+
 // _D3DXMatrixOrthoOffCenterRH@28
 
-// LIBRARY: D3DX8 0x005ed478
+
 // ?c_D3DXQuaternionToAxisAngle@@YGXPBUD3DXQUATERNION@@PAUD3DXVECTOR3@@PAM@Z
 
-// LIBRARY: D3DX8 0x005ed528
+
 // ?c_D3DXQuaternionRotationMatrix@@YGPAUD3DXQUATERNION@@PAU1@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005ed682
+
 // ?c_D3DXQuaternionRotationAxis@@YGPAUD3DXQUATERNION@@PAU1@PBUD3DXVECTOR3@@M@Z
 
-// LIBRARY: D3DX8 0x005ed712
+
 // ?c_D3DXQuaternionRotationYawPitchRoll@@YGPAUD3DXQUATERNION@@PAU1@MMM@Z
 
-// LIBRARY: D3DX8 0x005ed8a7
+
 // ?c_D3DXQuaternionNormalize@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x005ed973
+
 // ?c_D3DXQuaternionInverse@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x005eda3a
+
 // ?c_D3DXQuaternionLn@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x005edacb
+
 // ?c_D3DXQuaternionExp@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x005edb90
+
 // ?c_D3DXQuaternionSlerp@@YGPAUD3DXQUATERNION@@PAU1@PBU1@1M@Z
 
-// LIBRARY: D3DX8 0x005edc73
+
 // ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005edca3
+
 // ?c_D3DXQuaternionSquad@@YGPAUD3DXQUATERNION@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x005edd11
+
 // ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x005edd46
+
 // ?c_D3DXQuaternionBaryCentric@@YGPAUD3DXQUATERNION@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x005edde4
+
 // ?c_D3DXPlaneNormalize@@YGPAUD3DXPLANE@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x005ede9b
+
 // ?c_D3DXPlaneIntersectLine@@YGPAUD3DXVECTOR3@@PAU1@PBUD3DXPLANE@@PBU1@2@Z
 
-// LIBRARY: D3DX8 0x005edf9b
+
 // ?c_D3DXPlaneFromPoints@@YGPAUD3DXPLANE@@PAU1@PBUD3DXVECTOR3@@11@Z
 
-// LIBRARY: D3DX8 0x005ee050
+
 // ?c_D3DXPlaneTransform@@YGPAUD3DXPLANE@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005ee0ef
+
 // _D3DXColorAdjustSaturation@12
 
-// LIBRARY: D3DX8 0x005ee147
+
 // _D3DXColorAdjustContrast@12
 
-// LIBRARY: D3DX8 0x005ee190
+
 // _D3DXFresnelTerm@8
 
-// LIBRARY: D3DX8 0x005ee25e
+
 // ?c_D3DXVec2Normalize@@YGPAUD3DXVECTOR2@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x005ee2eb
+
 // ?c_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005ee356
+
 // ?c_D3DXVec2TransformCoord@@YGPAUD3DXVECTOR2@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005ee3d6
+
 // ?c_D3DXVec2TransformNormal@@YGPAUD3DXVECTOR2@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005ee412
+
 // ?c_D3DXVec3Normalize@@YGPAUD3DXVECTOR3@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x005ee4b2
+
 // ?c_D3DXVec3TransformCoord@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x005ee571
+
 // ?c_D3DXVec3Project@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBU_D3DVIEWPORT8@@PBUD3DXMATRIX@@33@Z
 
-// LIBRARY: D3DX8 0x005ee6fe
+
 // ?c_D3DXVec3Unproject@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBU_D3DVIEWPORT8@@PBUD3DXMATRIX@@33@Z
 
-// LIBRARY: D3DX8 0x005ee8a4
+
 // ?c_D3DXQuaternionNormalize@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x005ee95d
+
 // ??DD3DXQUATERNION@@QBE?AU0@ABU0@@Z
 
-// LIBRARY: D3DX8 0x005ee984
+
 // ?c_D3DXMatrixRotationYawPitchRoll@@YGPAUD3DXMATRIX@@PAU1@MMM@Z
 
-// LIBRARY: D3DX8 0x005ee9bd
+
 // ?c_D3DXMatrixTransformation@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXVECTOR3@@PBUD3DXQUATERNION@@1121@Z
 
-// LIBRARY: D3DX8 0x005eec71
+
 // ?c_D3DXMatrixShadow@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXVECTOR4@@PBUD3DXPLANE@@@Z
 
-// LIBRARY: D3DX8 0x005eed4b
+
 // ?c_D3DXMatrixReflect@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXPLANE@@@Z
 
-// LIBRARY: D3DX8 0x005ef1e4
+
 // ??_GCD3DXFont@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x005ef200
+
 // ??_GCD3DXFont@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x005ef21c
+
 // ??_GCD3DXFont@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x005ef238
+
 // ??_GCD3DXFont@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x005ef52a
+
 // _D3DXGetErrorStringA@12
 
-// LIBRARY: D3DX8 0x005ef799
+
 // _D3DXGetErrorStringW@12
 
-// LIBRARY: D3DX8 0x005ef7f4
+
 // _D3DXCreateFontIndirect@12
 
-// LIBRARY: D3DX8 0x005ef863
+
 // _D3DXCreateSprite@8
 
-// LIBRARY: D3DX8 0x005ef8cf
+
 // _D3DXCreateRenderToSurface@28
 
-// LIBRARY: D3DX8 0x005ef9c9
+
 // _D3DXCreateFont@12
 
-// LIBRARY: D3DX8 0x005efa18
+
 // ?SwapFaceNeighbors@@YAXIIPAK@Z
 
-// LIBRARY: D3DX8 0x005efa4c
+
 // ?RemapFaceNeighbors@@YAXIPAIPAK@Z
 
-// LIBRARY: D3DX8 0x005efa7d
+
 // ?ReorderNeighborData@@YAJPAIPAKK@Z
 
-// LIBRARY: D3DX8 0x005efb8c
+
 // ?And@CD3DXBitField256@@QAEXAAV1@0@Z
 
-// LIBRARY: D3DX8 0x005efc20
+
 // ?Count@CD3DXBitField256@@QAEKXZ
 
-// LIBRARY: D3DX8 0x005efc51
+
 // ??1CBone@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005efc70
+
 // ?GreedyTSP@@YAJPAUSBoneCombinationNode@@PAPAU1@PAK2@Z
 
-// LIBRARY: D3DX8 0x005efd8a
+
 // _D3DXCreateBuffer@8
 
-// LIBRARY: D3DX8 0x005efddd
+
 // ??0D3DXCOLOR@@QAE@K@Z
 
-// LIBRARY: D3DX8 0x005efe32
+
 // _D3DXGetFVFVertexSize@4
 
-// LIBRARY: D3DX8 0x005f006e
+
 // ?GenerateWedgeList@@YAJPAKKPAH0@Z
 
-// LIBRARY: D3DX8 0x005f00cd
+
 // ?BFloatsEqual@@YAHMMM@Z
 
-// LIBRARY: D3DX8 0x005f02e6
+
 // ?CbTexCoordSize@DXCrackFVF@@QAEKK@Z
 
-// LIBRARY: D3DX8 0x005f030a
+
 // ?GetTexCoordSizes@DXCrackFVF@@QAEXPAK@Z
 
-// LIBRARY: D3DX8 0x005f0359
+
 // ??1?$GXTri3Mesh@I$0A@$0?0@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005f04b4
+
 // ?QueryInterface@?$GXTri3Mesh@I$0A@$0?0@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x005f054a
+
 // ?CloneMesh@?$GXTri3Mesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005f0610
+
 // ??1?$GXTri3Mesh@I$0A@$0?0@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005f076b
+
 // ?QueryInterface@?$GXTri3Mesh@I$0A@$0?0@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x005f0801
+
 // ?CloneMesh@?$GXTri3Mesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005f08c7
+
 // ?CalcSplitMeshSizes@?$@G$00$0PPPP@@@YAJPAGKKKPAK111G@Z
 
-// LIBRARY: D3DX8 0x005f09c4
+
 // ?CalcSplitMeshSizes@?$@I$0A@$0?0@@YAJPAIKKKPAK111I@Z
 
-// LIBRARY: D3DX8 0x005f0db4
+
 // ??_H@YGXPAXIHP6EPAX0@Z@Z
 
-// LIBRARY: D3DX8 0x005f0dd6
+
 // ??_ECBone@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x005f0f7e
+
 // ??0?$CFaceListIter@G$00$0PPPP@@@QAE@PAV?$GXTri3Mesh@G$00$0PPPP@@@@Z
 
-// LIBRARY: D3DX8 0x005f0fc3
+
 // ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJK@Z
 
-// LIBRARY: D3DX8 0x005f1153
+
 // ?FindWedge@?$GXTri3Mesh@I$0A@$0?0@@ABEIPAII@Z
 
-// LIBRARY: D3DX8 0x005f117c
+
 // ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJK@Z
 
-// LIBRARY: D3DX8 0x005f130c
+
 // ?FindWedge@?$GXTri3Mesh@G$00$0PPPP@@@ABEIPAGI@Z
 
-// LIBRARY: D3DX8 0x005f1340
+
 // ?ResizeDynamicArray@@YAHPAPAV?$NeighborInfo@I@@IIPAI@Z
 
-// LIBRARY: D3DX8 0x005f1438
+
 // ?ResizeDynamicArray@@YAHPAPAKIIPAI@Z
 
-// LIBRARY: D3DX8 0x005f14c2
+
 // ?ResizeDynamicArray@@YAHPAPAGIIPAI@Z
 
-// LIBRARY: D3DX8 0x005f1549
+
 // ?ResizeDynamicArray@@YAHPAPAKIIPAI@Z
 
-// LIBRARY: D3DX8 0x005f15d3
+
 // ?FindEdge@@YAIPAII@Z
 
-// LIBRARY: D3DX8 0x005f15e9
+
 // ?ResizeDynamicArray@@YAHPAPAV?$NeighborInfo@G@@IIPAI@Z
 
-// LIBRARY: D3DX8 0x005f16df
+
 // ?FindEdge@@YAIPAGG@Z
 
-// LIBRARY: D3DX8 0x005f16f7
+
 // ?GenerateWedgeList@?$GXSimplifyMesh@I$0A@$0?0@@AAEJXZ
 
-// LIBRARY: D3DX8 0x005f1956
+
 // ?SetupWeightInfo@?$GXSimplifyMesh@I$0A@$0?0@@AAEJQAU_D3DXATTRIBUTEWEIGHTS@@PBM1KPAE@Z
 
-// LIBRARY: D3DX8 0x005f1d8f
+
 // ?GenerateWedgeList@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
 
-// LIBRARY: D3DX8 0x005f2006
+
 // ?SetupWeightInfo@?$GXSimplifyMesh@I$0A@$0?0@@AAEJQAU_D3DXATTRIBUTEWEIGHTS@@PBM1KPAE@Z
 
-// LIBRARY: D3DX8 0x005f243f
+
 // ??_ECQuadric@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x005f2483
+
 // ??0?$CFaceListIter@I$0A@$0?0@@QAE@IIPAV?$GXTri3Mesh@I$0A@$0?0@@E@Z
 
-// LIBRARY: D3DX8 0x005f24e6
+
 // ??0?$CFaceListIter@G$00$0PPPP@@@QAE@GGPAV?$GXTri3Mesh@G$00$0PPPP@@@E@Z
 
-// LIBRARY: D3DX8 0x005f25bd
+
 // ?Compact@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI00@Z
 
-// LIBRARY: D3DX8 0x005f2675
+
 // ?VertexOptimize@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI0@Z
 
-// LIBRARY: D3DX8 0x005f26db
+
 // ?CollectAttributeIds@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAPAKPAK@Z
 
-// LIBRARY: D3DX8 0x005f2809
+
 // ?FindPoint@?$GXTri3Mesh@I$0A@$0?0@@ABEIPAII@Z
 
-// LIBRARY: D3DX8 0x005f2854
+
 // ?Compact@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI00@Z
 
-// LIBRARY: D3DX8 0x005f293a
+
 // ?VertexOptimize@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI0@Z
 
-// LIBRARY: D3DX8 0x005f29bc
+
 // ?CollectAttributeIds@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAPAKPAK@Z
 
-// LIBRARY: D3DX8 0x005f2aec
+
 // ?FindPoint@?$GXTri3Mesh@G$00$0PPPP@@@ABEIPAGI@Z
 
-// LIBRARY: D3DX8 0x005f2b3f
+
 // ?MoveToCCWFace@?$CFaceListIter@I$0A@$0?0@@QAE_NXZ
 
-// LIBRARY: D3DX8 0x005f2c0e
+
 // ?MoveToCCWFace@?$CFaceListIter@G$00$0PPPP@@@QAE_NXZ
 
-// LIBRARY: D3DX8 0x005f2d0c
+
 // ?Init@?$CSimplificationHeap@I@@QAEJI@Z
 
-// LIBRARY: D3DX8 0x005f2d46
+
 // ?Switch@?$CSimplificationHeap@I@@AAEXII@Z
 
-// LIBRARY: D3DX8 0x005f2d7f
+
 // ?BInArray@@YA_NQAIII@Z
 
-// LIBRARY: D3DX8 0x005f2da1
+
 // ?AddToDynamicArray@@YAHPAPAIABIPAI2@Z
 
-// LIBRARY: D3DX8 0x005f2e3f
+
 // ?Init@?$CSimplificationHeap@I@@QAEJI@Z
 
-// LIBRARY: D3DX8 0x005f2e79
+
 // ?Switch@?$CSimplificationHeap@G@@AAEXII@Z
 
-// LIBRARY: D3DX8 0x005f2eb2
+
 // ?BInArray@@YA_NQAGIG@Z
 
-// LIBRARY: D3DX8 0x005f2ed6
+
 // ?AddToDynamicArray@@YAHPAPAIABIPAI2@Z
 
-// LIBRARY: D3DX8 0x005f2f99
+
 // ?RemapVertex@?$GXTri3Mesh@I$0A@$0?0@@AAEXIPAI@Z
 
-// LIBRARY: D3DX8 0x005f2fb7
+
 // ?RemapFace@?$GXTri3Mesh@I$0A@$0?0@@AAEXIPAI0@Z
 
-// LIBRARY: D3DX8 0x005f300e
+
 // ?SwapVertex@?$GXTri3Mesh@I$0A@$0?0@@AAEXIIPAE@Z
 
-// LIBRARY: D3DX8 0x005f30a8
+
 // ?SwapFace@?$GXTri3Mesh@I$0A@$0?0@@AAEXII@Z
 
-// LIBRARY: D3DX8 0x005f317b
+
 // ?AddToDynamicArray@@YAHPAPAIABIPAI2@Z
 
-// LIBRARY: D3DX8 0x005f3219
+
 // ??0?$CMeshStatus@I$0A@$0?0@@QAE@PAV?$GXTri3Mesh@I$0A@$0?0@@PAV?$NeighborInfo@I@@I@Z
 
-// LIBRARY: D3DX8 0x005f323a
+
 // ??1?$CMeshStatus@I$0A@$0?0@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005f3251
+
 // ?FindEdge@@YAIPAII@Z
 
-// LIBRARY: D3DX8 0x005f3267
+
 // ?RemapVertex@?$GXTri3Mesh@G$00$0PPPP@@@AAEXIPAI@Z
 
-// LIBRARY: D3DX8 0x005f3288
+
 // ?RemapFace@?$GXTri3Mesh@G$00$0PPPP@@@AAEXIPAI0@Z
 
-// LIBRARY: D3DX8 0x005f32ec
+
 // ?SwapVertex@?$GXTri3Mesh@G$00$0PPPP@@@AAEXIIPAE@Z
 
-// LIBRARY: D3DX8 0x005f3389
+
 // ?SwapFace@?$GXTri3Mesh@G$00$0PPPP@@@AAEXII@Z
 
-// LIBRARY: D3DX8 0x005f3465
+
 // ??0?$CMeshStatus@G$00$0PPPP@@@QAE@PAV?$GXTri3Mesh@G$00$0PPPP@@@PAV?$NeighborInfo@G@@G@Z
 
-// LIBRARY: D3DX8 0x005f3488
+
 // ??1?$CMeshStatus@G$00$0PPPP@@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005f349f
+
 // ?DGenerateBorderError@?$GXSimplifyMesh@I$0A@$0?0@@AAENIIPAUD3DXVECTOR3@@PAE@Z
 
-// LIBRARY: D3DX8 0x005f3622
+
 // ?DGenerateBorderError@?$GXSimplifyMesh@G$00$0PPPP@@@AAENGGPAUD3DXVECTOR3@@PAE@Z
 
-// LIBRARY: D3DX8 0x005f380c
+
 // ?IFindInitialFace@?$CMeshStatus@G$00$0PPPP@@@QAEGXZ
 
-// LIBRARY: D3DX8 0x005f386a
+
 // ?Init@?$CIndexQueue@I$0?0@@QAEJXZ
 
-// LIBRARY: D3DX8 0x005f38b1
+
 // ?BElementPresent@?$CIndexQueue@I$0?0@@QAE_NI@Z
 
-// LIBRARY: D3DX8 0x005f38d8
+
 // ?InsertElement@?$CIndexQueue@I$0?0@@QAEXI@Z
 
-// LIBRARY: D3DX8 0x005f390c
+
 // ?Init@?$CIndexQueue@G$0PPPP@@@QAEJXZ
 
-// LIBRARY: D3DX8 0x005f3954
+
 // ?BElementPresent@?$CIndexQueue@G$0PPPP@@@QAE_NG@Z
 
-// LIBRARY: D3DX8 0x005f397c
+
 // ?InsertElement@?$CIndexQueue@G$0PPPP@@@QAEXG@Z
 
-// LIBRARY: D3DX8 0x005f39a2
+
 // ?ClwFaceCorner@?$GXTri3Mesh@I$0A@$0?0@@AAE?AUSFaceCorner@@AAU2@@Z
 
-// LIBRARY: D3DX8 0x005f39c2
+
 // ?CcwCorner@?$GXTri3Mesh@I$0A@$0?0@@AAE?AUSFaceCorner@@AAU2@PAV?$CMeshStatus@I$0A@$0?0@@@Z
 
-// LIBRARY: D3DX8 0x005f3a0d
+
 // ?ClwFaceCorner@?$GXTri3Mesh@I$0A@$0?0@@AAE?AUSFaceCorner@@AAU2@@Z
 
-// LIBRARY: D3DX8 0x005f3a2d
+
 // ?CcwCorner@?$GXTri3Mesh@G$00$0PPPP@@@AAE?AUSFaceCorner@@AAU2@PAV?$CMeshStatus@G$00$0PPPP@@@@Z
 
-// LIBRARY: D3DX8 0x005f3b18
+
 // ?RemoveElement@?$CMeshStatus@I$0A@$0?0@@AAEXI@Z
 
-// LIBRARY: D3DX8 0x005f3b7f
+
 // ?PrependElement@?$CMeshStatus@I$0A@$0?0@@AAEXI@Z
 
-// LIBRARY: D3DX8 0x005f3bbe
+
 // ?DecrementCount@?$CMeshStatus@I$0A@$0?0@@AAEXI@Z
 
-// LIBRARY: D3DX8 0x005f3c59
+
 // ?RemoveElement@?$CMeshStatus@G$00$0PPPP@@@AAEXG@Z
 
-// LIBRARY: D3DX8 0x005f3cdd
+
 // ?PrependElement@?$CMeshStatus@G$00$0PPPP@@@AAEXG@Z
 
-// LIBRARY: D3DX8 0x005f3d29
+
 // ?DecrementCount@?$CMeshStatus@G$00$0PPPP@@@AAEXG@Z
 
-// LIBRARY: D3DX8 0x005f3d5a
+
 // ??0SVertexCopyContext@@QAE@KK@Z
 
-// LIBRARY: D3DX8 0x005f4132
+
 // ??1CPMSharedData@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005f414f
+
 // ?IntersectTriUnbounded@@YAXPAUD3DXVECTOR3@@0000PAM11@Z
 
-// LIBRARY: D3DX8 0x005f42da
+
 // _D3DXComputeBoundingSphere@20
 
-// LIBRARY: D3DX8 0x005f43f0
+
 // _D3DXComputeBoundingBox@20
 
-// LIBRARY: D3DX8 0x005f4c86
+
 // _D3DXWeldVertices@24
 
-// LIBRARY: D3DX8 0x005f4fab
+
 // ??1?$CD3DXSkinMesh@I$0A@$0?0@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005f501e
+
 // ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x005f51ac
+
 // ?SetBoneInfluence@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKKPBKPBM@Z
 
-// LIBRARY: D3DX8 0x005f52f2
+
 // ?GetMaxVertexInfluences@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJPAK@Z
 
-// LIBRARY: D3DX8 0x005f572e
+
 // ?GetMaxFaceInfluences@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJPAK@Z
 
-// LIBRARY: D3DX8 0x005f587f
+
 // ?CalcVertexSkinData@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJXZ
 
-// LIBRARY: D3DX8 0x005f5ac6
+
 // ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@K@Z
 
-// LIBRARY: D3DX8 0x005f5afa
+
 // ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PAVCBone@@K@Z
 
-// LIBRARY: D3DX8 0x005f5b11
+
 // ??1?$CD3DXSkinMesh@I$0A@$0?0@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005f5b84
+
 // ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x005f5d12
+
 // ?SetBoneInfluence@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKKPBKPBM@Z
 
-// LIBRARY: D3DX8 0x005f5e58
+
 // ?GetMaxVertexInfluences@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJPAK@Z
 
-// LIBRARY: D3DX8 0x005f6294
+
 // ?GetMaxFaceInfluences@?$CD3DXSkinMesh@G$00$0PPPP@@@UAGJPAK@Z
 
-// LIBRARY: D3DX8 0x005f63e5
+
 // ?CalcVertexSkinData@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJXZ
 
-// LIBRARY: D3DX8 0x005f662c
+
 // ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@K@Z
 
-// LIBRARY: D3DX8 0x005f6660
+
 // ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PAVCBone@@K@Z
 
-// LIBRARY: D3DX8 0x005f6677
+
 // ?DrawSubset@?$GXTri3Mesh@I$0A@$0?0@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x005f6ff5
+
 // ?Resize@?$GXTri3Mesh@I$0A@$0?0@@QAEJII@Z
 
-// LIBRARY: D3DX8 0x005f74c4
+
 // ?BValid@?$GXTri3Mesh@I$0A@$0?0@@EAE_NPAV?$GXTri3Face@I@@@Z
 
-// LIBRARY: D3DX8 0x005f769d
+
 // ?BValidAttributeGroups@?$GXTri3Mesh@I$0A@$0?0@@AAE_NPAV?$GXTri3Face@I@@@Z
 
-// LIBRARY: D3DX8 0x005f76f7
+
 // ?DrawSubset@?$GXTri3Mesh@G$00$0PPPP@@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x005f7c6a
+
 // ?Resize@?$GXTri3Mesh@G$00$0PPPP@@@QAEJII@Z
 
-// LIBRARY: D3DX8 0x005f811e
+
 // ?BValid@?$GXTri3Mesh@G$00$0PPPP@@@EAE_NPAV?$GXTri3Face@G@@@Z
 
-// LIBRARY: D3DX8 0x005f8329
+
 // ?BValidAttributeGroups@?$GXTri3Mesh@I$0A@$0?0@@AAE_NPAV?$GXTri3Face@I@@@Z
 
-// LIBRARY: D3DX8 0x005f8383
+
 // ?LoadFromData@?$GXHalfEdgePMesh@G$00$0PPPP@@@QAEJPAUID3DXMesh@@PAKPAEK@Z
 
-// LIBRARY: D3DX8 0x005f8903
+
 // ?LoadFromData@?$GXHalfEdgePMesh@G$00$0PPPP@@@QAEJPAUID3DXMesh@@PAKPAEK@Z
 
-// LIBRARY: D3DX8 0x005f8e74
+
 // ?Init@?$CFaceListIter@I$0A@$0?0@@QAEXIIE@Z
 
-// LIBRARY: D3DX8 0x005f8ed2
+
 // ?Init@?$CFaceListIter@G$00$0PPPP@@@QAEXGGE@Z
 
-// LIBRARY: D3DX8 0x005f8f40
+
 // ?CopyMesh@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV1@@Z
 
-// LIBRARY: D3DX8 0x005f9145
+
 // ?CopyMesh@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV1@@Z
 
-// LIBRARY: D3DX8 0x005f934b
+
 // ?GetNextFace@?$CFaceListIter@I$0A@$0?0@@QAEIXZ
 
-// LIBRARY: D3DX8 0x005f940e
+
 // ?GetNextFace@?$CFaceListIter@G$00$0PPPP@@@QAEGXZ
 
-// LIBRARY: D3DX8 0x005f9642
+
 // ?ComputePointReps@?$GXSimplifyMesh@I$0A@$0?0@@AAEJXZ
 
-// LIBRARY: D3DX8 0x005f987c
+
 // ?ComputePointReps@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
 
-// LIBRARY: D3DX8 0x005f996c
+
 // ?AttributeSort@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI00H@Z
 
-// LIBRARY: D3DX8 0x005f9d3d
+
 // ?SplitSharedVertices@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAPAKPAI@Z
 
-// LIBRARY: D3DX8 0x005f9f90
+
 // ?ReorderVertexData@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAIPAE@Z
 
-// LIBRARY: D3DX8 0x005fa0b7
+
 // ?ReorderFaceData@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI0@Z
 
-// LIBRARY: D3DX8 0x005fa198
+
 // ?AddVertex@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAEI@Z
 
-// LIBRARY: D3DX8 0x005fa317
+
 // ?AttributeSort@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI00H@Z
 
-// LIBRARY: D3DX8 0x005fa710
+
 // ?SplitSharedVertices@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAPAKPAI@Z
 
-// LIBRARY: D3DX8 0x005fa980
+
 // ?ReorderVertexData@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAIPAE@Z
 
-// LIBRARY: D3DX8 0x005faac5
+
 // ?ReorderFaceData@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI0@Z
 
-// LIBRARY: D3DX8 0x005fb381
+
 // ?Adjust@?$CSimplificationHeap@I@@AAEXI_N0@Z
 
-// LIBRARY: D3DX8 0x005fba38
+
 // ?Adjust@?$CSimplificationHeap@G@@AAEXI_N0@Z
 
-// LIBRARY: D3DX8 0x005fbb0b
+
 // ?AccessVertex@?$CSimVertexCache@I$0?0@@QAEXIAA_N@Z
 
-// LIBRARY: D3DX8 0x005fbb45
+
 // ?AccessVertex@?$CSimVertexCache@I$0?0@@QAEXIAA_N@Z
 
-// LIBRARY: D3DX8 0x005fbb6d
+
 // ?Init@?$CMeshStatus@I$0A@$0?0@@QAEJII_N@Z
 
-// LIBRARY: D3DX8 0x005fbc59
+
 // ?MarkAsProcessed@?$CMeshStatus@I$0A@$0?0@@QAEXI@Z
 
-// LIBRARY: D3DX8 0x005fbcbe
+
 // ?IFindNextFace@?$CMeshStatus@I$0A@$0?0@@QAEII@Z
 
-// LIBRARY: D3DX8 0x005fbd99
+
 // ?Init@?$CMeshStatus@G$00$0PPPP@@@QAEJGG_N@Z
 
-// LIBRARY: D3DX8 0x005fbe95
+
 // ?MarkAsProcessed@?$CMeshStatus@G$00$0PPPP@@@QAEXG@Z
 
-// LIBRARY: D3DX8 0x005fbf10
+
 // ?IFindNextFace@?$CMeshStatus@G$00$0PPPP@@@QAEGG@Z
 
-// LIBRARY: D3DX8 0x005fc008
+
 // ??_GCD3DXFont@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x005fc138
+
 // ??0?$GXTri3Mesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
 
-// LIBRARY: D3DX8 0x005fc982
+
 // ?IndexedHeapSort@@YAXPAKPAMK@Z
 
-// LIBRARY: D3DX8 0x005fcab0
+
 // ?VertexHashAdd@@YAHPAUD3DXVECTOR3@@KPAPAUSVertexHashEntry@@PAU2@KPAK3PAV?$GXTri3Face@I@@33@Z
 
-// LIBRARY: D3DX8 0x005fcb73
+
 // ??0?$GXTri3Mesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
 
-// LIBRARY: D3DX8 0x005fce9c
+
 // ?CloneHelper16@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV1@@Z
 
-// LIBRARY: D3DX8 0x005fd059
+
 // ?CloneHelper32@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV?$GXTri3Mesh@I$0A@$0?0@@@Z
 
-// LIBRARY: D3DX8 0x005fd228
+
 // ?CloneVertexBuffer@?$GXTri3Mesh@G$00$0PPPP@@@AAEJKPAUIDirect3DVertexBuffer8@@@Z
 
-// LIBRARY: D3DX8 0x005fd9ef
+
 // ?VertexHashAdd@@YAHPAUD3DXVECTOR3@@KPAPAUSVertexHashEntry@@PAU2@KPAK3PAV?$GXTri3Face@G@@33@Z
 
-// LIBRARY: D3DX8 0x005fdabb
+
 // ??0?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@PAUIDirect3DDevice8@@KK@Z
 
-// LIBRARY: D3DX8 0x005fdca9
+
 // ?QueryInterface@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x005fdd01
+
 // ?CloneMeshFVF@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005fdd76
+
 // ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005fddb0
+
 // ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005fe1b2
+
 // ?TrimByFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
 
-// LIBRARY: D3DX8 0x005fe293
+
 // ?TrimByVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
 
-// LIBRARY: D3DX8 0x005fe5e2
+
 // ??1?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005fe645
+
 // ??0?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@PAUIDirect3DDevice8@@KK@Z
 
-// LIBRARY: D3DX8 0x005fe832
+
 // ?QueryInterface@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x005fe88a
+
 // ?CloneMeshFVF@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005fe8ff
+
 // ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005fe939
+
 // ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005fed3a
+
 // ?TrimByFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
 
-// LIBRARY: D3DX8 0x005fee1b
+
 // ?TrimByVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
 
-// LIBRARY: D3DX8 0x005ff15e
+
 // ??1?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@XZ
 
-// LIBRARY: D3DX8 0x005ff60d
+
 // ?CloneHelper16@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV?$GXTri3Mesh@G$00$0PPPP@@@@Z
 
-// LIBRARY: D3DX8 0x005ff7dd
+
 // ?CloneHelper32@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV1@@Z
 
-// LIBRARY: D3DX8 0x005ff990
+
 // ?CloneVertexBuffer@?$GXTri3Mesh@G$00$0PPPP@@@AAEJKPAUIDirect3DVertexBuffer8@@@Z
 
-// LIBRARY: D3DX8 0x005ffa65
+
 // ??0?$GXSimplifyMesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
 
-// LIBRARY: D3DX8 0x005ffbbc
+
 // ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x005ffc1d
+
 // ?CloneMeshFVF@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKKPAUIDirect3DDevice8@@PAK1PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005ffdb0
+
 // ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005ffdf0
+
 // ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x005ffea7
+
 // ??0?$GXSimplifyMesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
 
-// LIBRARY: D3DX8 0x005ffffe
+
 // ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x0060005f
+
 // ?CloneMeshFVF@?$GXSimplifyMesh@G$00$0PPPP@@@UAGJKKPAUIDirect3DDevice8@@PAK1PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x00600202
+
 // ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x00600242
+
 // ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x006002f9
+
 // ?DefragmentWedges@?$GXSimplifyMesh@I$0A@$0?0@@AAEJXZ
 
-// LIBRARY: D3DX8 0x006008f0
+
 // ?PeiExtractMin@?$CSimplificationHeap@I@@QAEPAV?$CEdgeInfo@I@@XZ
 
-// LIBRARY: D3DX8 0x00600930
+
 // ?DefragmentWedges@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
 
-// LIBRARY: D3DX8 0x00600f9f
+
 // ?PeiExtractMin@?$CSimplificationHeap@G@@QAEPAV?$CEdgeInfo@G@@XZ
 
-// LIBRARY: D3DX8 0x00600fdf
+
 // ?Add@?$CSimplificationHeap@I@@QAEJPAV?$CEdgeInfo@I@@@Z
 
-// LIBRARY: D3DX8 0x00601095
+
 // ?Add@?$CSimplificationHeap@G@@QAEJPAV?$CEdgeInfo@G@@@Z
 
-// LIBRARY: D3DX8 0x0060114f
+
 // ?SGIStripReorder@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV?$CMeshStatus@I$0A@$0?0@@PAI1@Z
 
-// LIBRARY: D3DX8 0x00601225
+
 // ?VCacheStripReorder@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV?$CMeshStatus@I$0A@$0?0@@PAI1K@Z
 
-// LIBRARY: D3DX8 0x00601522
+
 // ?SGIStripReorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV?$CMeshStatus@G$00$0PPPP@@@PAI1@Z
 
-// LIBRARY: D3DX8 0x00601618
+
 // ?VCacheStripReorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV?$CMeshStatus@G$00$0PPPP@@@PAI1K@Z
 
-// LIBRARY: D3DX8 0x00601a9b
+
 // _D3DXCreateMeshFVF@24
 
-// LIBRARY: D3DX8 0x00601b86
+
 // ?D3DXCreatePMeshFromData@@YGJPAUID3DXMesh@@KPAKPAEKPAPAUID3DXPMesh@@@Z
 
-// LIBRARY: D3DX8 0x0060223c
+
 // ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJKKKKKPAUIDirect3DDevice8@@@Z
 
-// LIBRARY: D3DX8 0x006022c0
+
 // ?Init@?$CD3DXSkinMesh@G$00$0PPPP@@@QAEJKKKKKPAUIDirect3DDevice8@@@Z
 
-// LIBRARY: D3DX8 0x0060295d
+
 // ?SetNumFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x00602a4c
+
 // ?UndoVSplit@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
 
-// LIBRARY: D3DX8 0x00602c59
+
 // ?GatherECollapseInfo@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
 
-// LIBRARY: D3DX8 0x00602e7a
+
 // ?ApplyVSplit@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
 
-// LIBRARY: D3DX8 0x006030db
+
 // ?GatherVSplitInfo@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
 
-// LIBRARY: D3DX8 0x006035f5
+
 // ?GetNextWedge@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEGI@Z
 
-// LIBRARY: D3DX8 0x00603616
+
 // ?SetNumVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x00603b19
+
 // ?Reorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAII0I@Z
 
-// LIBRARY: D3DX8 0x00603b91
+
 // ?SetNumFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x00603c80
+
 // ?UndoVSplit@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
 
-// LIBRARY: D3DX8 0x00603e4e
+
 // ?GatherECollapseInfo@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
 
-// LIBRARY: D3DX8 0x00604043
+
 // ?ApplyVSplit@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
 
-// LIBRARY: D3DX8 0x00604251
+
 // ?GatherVSplitInfo@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
 
-// LIBRARY: D3DX8 0x0060470d
+
 // ?GetNextWedge@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEII@Z
 
-// LIBRARY: D3DX8 0x0060472f
+
 // ?SetNumVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x00604c28
+
 // ?Reorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAII0I@Z
 
-// LIBRARY: D3DX8 0x006063d8
+
 // ?StripReorder@?$GXTri3Mesh@I$0A@$0?0@@AAEJKPAI0PBK@Z
 
-// LIBRARY: D3DX8 0x006066d8
+
 // ?StripReorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJKPAI0PBK@Z
 
-// LIBRARY: D3DX8 0x00606a7d
+
 // _D3DXCreateMesh@24
 
-// LIBRARY: D3DX8 0x00607ac3
+
 // _D3DXCreateSkinMesh@28
 
-// LIBRARY: D3DX8 0x00607f31
+
 // ?OptimizeBaseLOD@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPAK@Z
 
-// LIBRARY: D3DX8 0x006081de
+
 // ?OptimizeBaseLOD@?$GXHalfEdgePMesh@I$0A@$0?0@@UAGJKPAK@Z
 
-// LIBRARY: D3DX8 0x0060846d
+
 // ?SetupSimplification@?$GXSimplifyMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PBKQAU_D3DXATTRIBUTEWEIGHTS@@PBM@Z
 
-// LIBRARY: D3DX8 0x006088ef
+
 // ?SetupSimplification@?$GXSimplifyMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PBKQAU_D3DXATTRIBUTEWEIGHTS@@PBM@Z
 
-// LIBRARY: D3DX8 0x00608d75
+
 // _D3DXCreateSPMesh@20
 
-// LIBRARY: D3DX8 0x0060900d
+
 // ?GenerateSkinnedMesh@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKMQAKPAK1PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x0060a05c
+
 // ?IsSubset@CD3DXBitField256@@QAEHAAV1@@Z
 
-// LIBRARY: D3DX8 0x0060a0db
+
 // ?CalcNumAttributes@?$CD3DXSkinMesh@I$0A@$0?0@@QAEXPAK0@Z
 
-// LIBRARY: D3DX8 0x0060a8eb
+
 // ?Or@CD3DXBitField256@@QAEXAAV1@0@Z
 
-// LIBRARY: D3DX8 0x0060aacc
+
 // ?GenerateSkinnedMesh@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKMQAKPAK1PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z
 
-// LIBRARY: D3DX8 0x0060bb1d
+
 // ?CalcNumAttributes@?$CD3DXSkinMesh@I$0A@$0?0@@QAEXPAK0@Z
 
-// LIBRARY: D3DX8 0x0060c4bd
+
 // ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x0060c585
+
 // ?CollapseEdge@?$GXSimplifyMesh@I$0A@$0?0@@AAEJPAV?$CEdgeInfo@I@@PAE@Z
 
-// LIBRARY: D3DX8 0x0060c658
+
 // ?GatherEdgeCollapseData@?$GXSimplifyMesh@I$0A@$0?0@@AAEJAAU?$SEdgeCollapseContext@I@@PAV?$CEdgeInfo@I@@PAE@Z
 
-// LIBRARY: D3DX8 0x0060ce39
+
 // ?BValidEdgeCollapse@?$GXSimplifyMesh@I$0A@$0?0@@AAE_NAAU?$SEdgeCollapseContext@I@@PAE@Z
 
-// LIBRARY: D3DX8 0x0060d503
+
 // ?PerformEdgeCollapse@?$GXSimplifyMesh@I$0A@$0?0@@AAEJAAU?$SEdgeCollapseContext@I@@PAE@Z
 
-// LIBRARY: D3DX8 0x0060d83a
+
 // ?MarkAsUnused@?$GXTri3Mesh@I$0A@$0?0@@AAEXI@Z
 
-// LIBRARY: D3DX8 0x0060d90e
+
 // ?Delete@?$CSimplificationHeap@I@@QAEJPAV?$CEdgeInfo@I@@@Z
 
-// LIBRARY: D3DX8 0x0060db4e
+
 // ?Update@?$CSimplificationHeap@I@@QAEJPAV?$CEdgeInfo@I@@@Z
 
-// LIBRARY: D3DX8 0x0060db71
+
 // ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x0060dc39
+
 // ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x0060dd01
+
 // ?CollapseEdge@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJPAV?$CEdgeInfo@G@@PAE@Z
 
-// LIBRARY: D3DX8 0x0060ddcd
+
 // ?GatherEdgeCollapseData@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJAAU?$SEdgeCollapseContext@G@@PAV?$CEdgeInfo@G@@PAE@Z
 
-// LIBRARY: D3DX8 0x0060e6ac
+
 // ?BValidEdgeCollapse@?$GXSimplifyMesh@G$00$0PPPP@@@AAE_NAAU?$SEdgeCollapseContext@G@@PAE@Z
 
-// LIBRARY: D3DX8 0x0060ee68
+
 // ?PerformEdgeCollapse@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJAAU?$SEdgeCollapseContext@G@@PAE@Z
 
-// LIBRARY: D3DX8 0x0060f224
+
 // ?MarkAsUnused@?$GXTri3Mesh@G$00$0PPPP@@@AAEXG@Z
 
-// LIBRARY: D3DX8 0x0060f319
+
 // ?Delete@?$CSimplificationHeap@G@@QAEJPAV?$CEdgeInfo@G@@@Z
 
-// LIBRARY: D3DX8 0x0060f49e
+
 // ?RecalcEdgeQEMS_Plane@?$GXSimplifyMesh@G$00$0PPPP@@@AAEXGGPAE@Z
 
-// LIBRARY: D3DX8 0x0060f59f
+
 // ?Update@?$CSimplificationHeap@G@@QAEJPAV?$CEdgeInfo@G@@@Z
 
-// LIBRARY: D3DX8 0x0060f5c2
+
 // ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
 
-// LIBRARY: D3DX8 0x0060f68a
+
 // ?D3DXGetFormatInfo@@YAPBU_D3DXFORMAT_INFO@@W4_D3DFORMAT@@@Z
 
-// LIBRARY: D3DX8 0x0060f6ae
+
 // ?D3DXScoreFormat@@YAIPBU_D3DXFORMAT_INFO@@0@Z
 
-// LIBRARY: D3DX8 0x0060f723
+
 // ?D3DXFindClosestFormat@@YA?AW4_D3DFORMAT@@PBW41@PBUtagPALETTEENTRY@@PBU_D3DXFORMAT_INFO@@@Z
 
-// LIBRARY: D3DX8 0x0060f873
+
 // ?D3DXFindClosestExternalFormat@@YA?AW4_D3DFORMAT@@W41@@Z
 
-// LIBRARY: D3DX8 0x0060f8a4
+
 // _D3DXGetImageInfoFromFileInMemory@12
 
-// LIBRARY: D3DX8 0x0060f8dc
+
 // _D3DXLoadSurfaceFromMemory@40
 
-// LIBRARY: D3DX8 0x0060f9bb
+
 // ?SaveSurfaceToFile@@YAJPBXW4_D3DXIMAGE_FILEFORMAT@@PAUIDirect3DSurface8@@PBUtagPALETTEENTRY@@PBUtagRECT@@H@Z
 
-// LIBRARY: D3DX8 0x0060fa6b
+
 // _D3DXSaveSurfaceToFileA@20
 
-// LIBRARY: D3DX8 0x0060fa8b
+
 // _D3DXSaveSurfaceToFileW@20
 
-// LIBRARY: D3DX8 0x0060faab
+
 // _D3DXLoadVolumeFromMemory@44
 
-// LIBRARY: D3DX8 0x0060fb7e
+
 // ?SaveVolumeToFile@@YAJPBXW4_D3DXIMAGE_FILEFORMAT@@PAUIDirect3DVolume8@@PBUtagPALETTEENTRY@@PBU_D3DBOX@@H@Z
 
-// LIBRARY: D3DX8 0x0060fc2e
+
 // _D3DXSaveSurfaceToFileA@20
 
-// LIBRARY: D3DX8 0x0060fc4e
+
 // _D3DXSaveSurfaceToFileW@20
 
-// LIBRARY: D3DX8 0x00610011
+
 // _D3DXCreateTexture@32
 
-// LIBRARY: D3DX8 0x00610077
+
 // _D3DXCreateCubeTexture@28
 
-// LIBRARY: D3DX8 0x006100d6
+
 // _D3DXCreateVolumeTexture@36
 
-// LIBRARY: D3DX8 0x00610143
+
 // ??_ECD3DXParameter@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x0061018e
+
 // ??_ECD3DXLockVolume@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x00610afa
+
 // ?EvalColor@@YAMPAUD3DXCOLOR@@K@Z
 
-// LIBRARY: D3DX8 0x00611341
+
 // _D3DXGetImageInfoFromFileA@8
 
-// LIBRARY: D3DX8 0x00611380
+
 // _D3DXGetImageInfoFromFileW@8
 
-// LIBRARY: D3DX8 0x006113bf
+
 // _D3DXGetImageInfoFromResourceA@12
 
-// LIBRARY: D3DX8 0x00611403
+
 // _D3DXGetImageInfoFromResourceW@12
 
-// LIBRARY: D3DX8 0x00611447
+
 // _D3DXLoadSurfaceFromFileInMemory@36
 
-// LIBRARY: D3DX8 0x006114ff
+
 // _D3DXLoadSurfaceFromSurface@32
 
-// LIBRARY: D3DX8 0x006116a5
+
 // _D3DXLoadVolumeFromFileInMemory@36
 
-// LIBRARY: D3DX8 0x00611761
+
 // _D3DXLoadVolumeFromVolume@32
 
-// LIBRARY: D3DX8 0x006117e7
+
 // ?SaveTextureToFile@@YAJPBXW4_D3DXIMAGE_FILEFORMAT@@PAUIDirect3DBaseTexture8@@PBUtagPALETTEENTRY@@H@Z
 
-// LIBRARY: D3DX8 0x00611be1
+
 // _D3DXFilterTexture@16
 
-// LIBRARY: D3DX8 0x006120d8
+
 // _D3DXLoadSurfaceFromFileA@32
 
-// LIBRARY: D3DX8 0x00612129
+
 // _D3DXLoadSurfaceFromFileW@32
 
-// LIBRARY: D3DX8 0x0061217a
+
 // _D3DXLoadSurfaceFromResourceA@36
 
-// LIBRARY: D3DX8 0x006121d0
+
 // _D3DXLoadSurfaceFromResourceW@36
 
-// LIBRARY: D3DX8 0x00612226
+
 // _D3DXLoadSurfaceFromFileA@32
 
-// LIBRARY: D3DX8 0x00612277
+
 // _D3DXLoadSurfaceFromFileW@32
 
-// LIBRARY: D3DX8 0x006122c8
+
 // _D3DXLoadSurfaceFromResourceA@36
 
-// LIBRARY: D3DX8 0x0061231e
+
 // _D3DXLoadSurfaceFromResourceW@36
 
-// LIBRARY: D3DX8 0x00612374
+
 // ?CreateTextureFromFileInMemoryEx@@YAJPAUIDirect3DDevice8@@PBXIIIIIKW4_D3DFORMAT@@W4_D3DPOOL@@KKKPAU_D3DXIMAGE_INFO@@PAUtagPALETTEENTRY@@W4_D3DRESOURCETYPE@@PAPAUIDirect3DBaseTexture8@@@Z
 
-// LIBRARY: D3DX8 0x006129e7
+
 // _D3DXCreateTextureFromFileInMemoryEx@60
 
-// LIBRARY: D3DX8 0x00612a27
+
 // _D3DXCreateCubeTextureFromFileInMemoryEx@56
 
-// LIBRARY: D3DX8 0x00612a67
+
 // _D3DXCreateVolumeTextureFromFileInMemoryEx@64
 
-// LIBRARY: D3DX8 0x00612aa8
+
 // _D3DXCreateTextureFromFileExA@56
 
-// LIBRARY: D3DX8 0x00612b0b
+
 // _D3DXCreateTextureFromFileExW@56
 
-// LIBRARY: D3DX8 0x00612b6e
+
 // _D3DXCreateTextureFromResourceExA@60
 
-// LIBRARY: D3DX8 0x00612bd6
+
 // _D3DXCreateTextureFromResourceExW@60
 
-// LIBRARY: D3DX8 0x00612c6e
+
 // _D3DXCreateCubeTextureFromFileExA@52
 
-// LIBRARY: D3DX8 0x00612cce
+
 // _D3DXCreateCubeTextureFromFileExW@52
 
-// LIBRARY: D3DX8 0x00612d2e
+
 // _D3DXCreateCubeTextureFromResourceExA@56
 
-// LIBRARY: D3DX8 0x00612d93
+
 // _D3DXCreateTextureFromResourceExW@60
 
-// LIBRARY: D3DX8 0x00612e28
+
 // _D3DXCreateVolumeTextureFromFileExA@60
 
-// LIBRARY: D3DX8 0x00612e8e
+
 // _D3DXCreateVolumeTextureFromFileExW@60
 
-// LIBRARY: D3DX8 0x00612ef4
+
 // _D3DXCreateVolumeTextureFromResourceExA@64
 
-// LIBRARY: D3DX8 0x00612f5f
+
 // _D3DXCreateTextureFromResourceExW@60
 
-// LIBRARY: D3DX8 0x006131cd
+
 // ?GetD3DRegValue@@YAHKPADPAXK@Z
 
-// LIBRARY: D3DX8 0x00613229
+
 // ?_asm_isMMX@@YAHXZ
 
-// LIBRARY: D3DX8 0x0061331f
+
 // ?IsIntelSSEProcessor@@YAKXZ
 
-// LIBRARY: D3DX8 0x00613679
+
 // ?DrawTextA@CD3DXFont@@UAGHPBDHPAUtagRECT@@KK@Z
 
-// LIBRARY: D3DX8 0x0061369f
+
 // ?DrawTextW@CD3DXFont@@UAGHPBGHPAUtagRECT@@KK@Z
 
-// LIBRARY: D3DX8 0x006136e6
+
 // ?QueryInterface@CD3DXFont@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x00613742
+
 // ??0CD3DXFont@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0061375d
+
 // ??1CD3DXSprite@@QAE@XZ
 
-// LIBRARY: D3DX8 0x006137aa
+
 // ?Initialize@CD3DXSprite@@QAEJPAUIDirect3DDevice8@@@Z
 
-// LIBRARY: D3DX8 0x006138c7
+
 // ?QueryInterface@CD3DXFont@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x00613d5f
+
 // ?Draw@CD3DXSprite@@UAGJPAUIDirect3DTexture8@@PBUtagRECT@@PBUD3DXVECTOR2@@2M2K@Z
 
-// LIBRARY: D3DX8 0x00614209
+
 // ??0CD3DXSprite@@QAE@XZ
 
-// LIBRARY: D3DX8 0x00614227
+
 // ?Init@CD3DXRenderToSurface@@QAEJPAUIDirect3DDevice8@@IIW4_D3DFORMAT@@H1@Z
 
-// LIBRARY: D3DX8 0x0061451e
+
 // ?EndScene@CD3DXRenderToSurface@@UAGJXZ
 
-// LIBRARY: D3DX8 0x006145d6
+
 // ?OnLostDevice@CD3DXRenderToSurface@@UAGJXZ
 
-// LIBRARY: D3DX8 0x00614654
+
 // ??1CD3DXRenderToSurface@@QAE@XZ
 
-// LIBRARY: D3DX8 0x00614676
+
 // ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x006146bd
+
 // ??0CD3DXRenderToSurface@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0061495f
+
 // ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x00614e91
+
 // ?D3DXVec2Lerp@@YAPAUD3DXVECTOR2@@PAU1@PBU1@1M@Z
 
-// LIBRARY: D3DX8 0x00614ebc
+
 // ??1CD3DXRenderToSurface@@QAE@XZ
 
-// LIBRARY: D3DX8 0x006165dd
+
 // ??0CD3DXFile@@QAE@XZ
 
-// LIBRARY: D3DX8 0x006165ef
+
 // ?Open@CD3DXFile@@QAEJPBXH@Z
 
-// LIBRARY: D3DX8 0x006166ff
+
 // ?Create@CD3DXFile@@QAEJPBXH@Z
 
-// LIBRARY: D3DX8 0x0061680a
+
 // ??1CD3DXFile@@QAE@XZ
 
-// LIBRARY: D3DX8 0x00616815
+
 // ??0CD3DXAssembler@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0061719a
+
 // ?DecodeMask@CD3DXAssembler@@QAEKPAD@Z
 
-// LIBRARY: D3DX8 0x00617243
+
 // ?DecodeSwizzle@CD3DXAssembler@@QAEKPAD@Z
 
-// LIBRARY: D3DX8 0x00617685
+
 // ?SetConstant@CD3DXAssembler@@QAEXKPAUD3DXVECTOR4@@@Z
 
-// LIBRARY: D3DX8 0x006187ca
+
 // ?d3dxasm_parse@@YAHXZ
 
-// LIBRARY: D3DX8 0x00619146
+
 // ??0CD3DXResource@@QAE@XZ
 
-// LIBRARY: D3DX8 0x00619153
+
 // ??1CD3DXResource@@QAE@XZ
 
-// LIBRARY: D3DX8 0x00619161
+
 // ?Close@CD3DXResource@@QAEJXZ
 
-// LIBRARY: D3DX8 0x00619180
+
 // ?Open@CD3DXResource@@QAEJPAUHINSTANCE__@@PBXHH@Z
 
-// LIBRARY: D3DX8 0x0061920e
+
 // ??1CD3DXBuffer@@UAE@XZ
 
-// LIBRARY: D3DX8 0x00619223
+
 // ?Init@CD3DXBuffer@@UAEJK@Z
 
-// LIBRARY: D3DX8 0x0061936b
+
 // ?AddString@CD3DXStringBuffer@@QAEJPAD@Z
 
-// LIBRARY: D3DX8 0x00619497
+
 // ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
 
-// LIBRARY: D3DX8 0x0061953b
+
 // ?D3DXCreateStringBuffer@@YAJKPAPAVCD3DXStringBuffer@@@Z
 
-// LIBRARY: D3DX8 0x0061958c
+
 // ?D3DXCreateBufferA16@@YAJKPAPAUID3DXBuffer@@@Z
 
-// LIBRARY: D3DX8 0x00619687
+
 // ??0SStringList@@QAE@PADPAU0@@Z
 
-// LIBRARY: D3DX8 0x006196a7
+
 // ??_GCD3DXFont@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x006196c3
+
 // ?AddMaterial@@YAJPAUIDirectXFileSaveObject@@PBUD3DXMATERIAL@@KPAUSStringList@@PAUIDirectXFileData@@@Z
 
-// LIBRARY: D3DX8 0x00619a23
+
 // ?AddFaceMaterials@@YAJPAUIDirectXFileSaveObject@@PAKKPBUD3DXMATERIAL@@KKPAUSStringList@@PAUIDirectXFileData@@@Z
 
-// LIBRARY: D3DX8 0x00619c44
+
 // ??1SStringList@@QAE@XZ
 
-// LIBRARY: D3DX8 0x00619c5f
+
 // ?AddNormals@@YAJPAUIDirectXFileSaveObject@@PAEKPAGPAKKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
 
-// LIBRARY: D3DX8 0x00619d92
+
 // ?AddTextureCoordinates@@YAJPAUIDirectXFileSaveObject@@PAEKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
 
-// LIBRARY: D3DX8 0x00619e55
+
 // ?AddVertexColors@@YAJPAUIDirectXFileSaveObject@@PAEKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
 
-// LIBRARY: D3DX8 0x00619f77
+
 // ?AddOtherFVFData@@YAJPAUIDirectXFileSaveObject@@PAEKKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
 
-// LIBRARY: D3DX8 0x0061a174
+
 // ?D3DXSaveMeshToXofEx@@YGJPAUIDirectXFileSaveObject@@PAUID3DXMesh@@PBKQAUD3DXMATERIAL@@KKPAEKPAPAUIDirectXFileData@@PAUSStringList@@@Z
 
-// LIBRARY: D3DX8 0x0061a5c3
+
 // ?D3DXSaveMeshToXEx@@YGJPADPAUID3DXMesh@@PBKQAUD3DXMATERIAL@@KKPAEK@Z
 
-// LIBRARY: D3DX8 0x0061a770
+
 // _D3DXSaveMeshToX@24
 
-// LIBRARY: D3DX8 0x0061a7e9
+
 // ?DwCombineFVFs@@YAKKK@Z
 
-// LIBRARY: D3DX8 0x0061a861
+
 // ?D3DXMergeMeshes@@YAJPAUID3DXMesh@@PAKPAUID3DXBuffer@@K012KPAUIDirect3DDevice8@@PAPAU1@PAPAU2@51@Z
 
-// LIBRARY: D3DX8 0x0061bfbb
+
 // _D3DXLoadMeshFromXof@28
 
-// LIBRARY: D3DX8 0x0061bfe4
+
 // _D3DXCreatePMeshFromStream@24
 
-// LIBRARY: D3DX8 0x0061c368
+
 // ?LoadMeshes@@YAJPAUIDirectXFileData@@AAUD3DXMATRIX@@KPAUIDirect3DDevice8@@PAPAUID3DXMesh@@PAPAUID3DXBuffer@@4PAK@Z
 
-// LIBRARY: D3DX8 0x0061cf57
+
 // ??0COrbitVertexIter@@QAE@PBKPAXI@Z
 
-// LIBRARY: D3DX8 0x0061cf84
+
 // ?FindWedge@COrbitVertexIter@@QAEKKK@Z
 
-// LIBRARY: D3DX8 0x0061cfed
+
 // ?GetNextFace@COrbitVertexIter@@QAEKXZ
 
-// LIBRARY: D3DX8 0x0061d0a8
+
 // ?MoveToCCWFace@COrbitVertexIter@@QAEHXZ
 
-// LIBRARY: D3DX8 0x0061d185
+
 // ?OutputError@@YAXPAVCD3DXSzStack@@PADZZ
 
-// LIBRARY: D3DX8 0x0061d237
+
 // ?ValidateIndices@?$@G$00$0PPPP@@@YAJPAGPBKKKPAVCD3DXSzStack@@@Z
 
-// LIBRARY: D3DX8 0x0061d38b
+
 // ?ValidateIndices@?$@I$0A@$0?0@@YAJPAIPBKKKPAVCD3DXSzStack@@@Z
 
-// LIBRARY: D3DX8 0x0061d4d3
+
 // ?Init@COrbitVertexIter@@QAEXKKE@Z
 
-// LIBRARY: D3DX8 0x0061d52a
+
 // ?BreakBowTies@@YAJPAUID3DXMesh@@PBKPAPAU1@PAVCD3DXSzStack@@@Z
 
-// LIBRARY: D3DX8 0x0061da61
+
 // _D3DXCleanMesh@20
 
-// LIBRARY: D3DX8 0x0061db0c
+
 // ?D3DXValidMeshEx@?$@I$0A@$0?0@@YAJPAUID3DXMesh@@PBKPAPAUID3DXBuffer@@I@Z
 
-// LIBRARY: D3DX8 0x0061de31
+
 // ?D3DXValidMeshEx@?$@G$00$0PPPP@@@YAJPAUID3DXMesh@@PBKPAPAUID3DXBuffer@@G@Z
 
-// LIBRARY: D3DX8 0x0061e15d
+
 // _D3DXValidMesh@12
 
-// LIBRARY: D3DX8 0x0061e196
+
 // ??0CD3DXImage@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0061e1af
+
 // ??1CD3DXImage@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0061e208
+
 // ??_GCD3DXFont@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x0061e224
+
 // ?Initialize@CD3DXImage@@QAEJPAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x0061e2e7
+
 // ?LoadDIB@CD3DXImage@@AAEJPBXK@Z
 
-// LIBRARY: D3DX8 0x0061e9fd
+
 // ?SaveDIB@CD3DXImage@@AAEJPAXH@Z
 
-// LIBRARY: D3DX8 0x0061ed43
+
 // ?LoadJPG@CD3DXImage@@AAEJPBXK@Z
 
-// LIBRARY: D3DX8 0x0061efb3
+
 // ?LoadTGA@CD3DXImage@@AAEJPBXK@Z
 
-// LIBRARY: D3DX8 0x0061f45a
+
 // ?LoadPPM@CD3DXImage@@AAEJPBXK@Z
 
-// LIBRARY: D3DX8 0x0061f730
+
 // ?LoadPNG@CD3DXImage@@AAEJPBXK@Z
 
-// LIBRARY: D3DX8 0x0061fcc6
+
 // ?LoadDDS@CD3DXImage@@AAEJPBXK@Z
 
-// LIBRARY: D3DX8 0x00620007
+
 // ?SaveDDS@CD3DXImage@@AAEJPAX@Z
 
-// LIBRARY: D3DX8 0x006202af
+
 // ?Save@CD3DXImage@@QAEJPBXW4_D3DXIMAGE_FILEFORMAT@@H@Z
 
-// LIBRARY: D3DX8 0x00620578
+
 // ?LoadBMP@CD3DXImage@@AAEJPBXK@Z
 
-// LIBRARY: D3DX8 0x006205a8
+
 // ?Load@CD3DXImage@@QAEJPBXKPAU_D3DXIMAGE_INFO@@H@Z
 
-// LIBRARY: D3DX8 0x0062077d
+
 // ??0CD3DXBlt@@QAE@XZ
 
-// LIBRARY: D3DX8 0x006207cc
+
 // ?TF_SetupTriangle@@YAPAEIIH@Z
 
-// LIBRARY: D3DX8 0x00620a89
+
 // ??_ETF_Row@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x00620ad5
+
 // ?BltTriangle3D@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00620f49
+
 // ?BltSame_DXTn@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x006210dd
+
 // ?c_BoxFilter2D_A8R8G8B8@@YAJPAI0IIII@Z
 
-// LIBRARY: D3DX8 0x00621203
+
 // ?BltBox2D_A8R8G8B8@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621234
+
 // ?c_BoxFilter2D_X8R8G8B8@@YAJPAI0IIII@Z
 
-// LIBRARY: D3DX8 0x0062131c
+
 // ?mmx_BoxFilter2D_A8R8G8B8@@YAJPAI0IIII@Z
 
-// LIBRARY: D3DX8 0x00621496
+
 // ??DD3DXQUATERNION@@QBE?AU0@M@Z
 
-// LIBRARY: D3DX8 0x006214f1
+
 // ?BltBox2D_A8R8G8B8@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621522
+
 // ?BltBox2D_R5G6B5@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621672
+
 // ?BltBox2D_X1R5G5B5@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621796
+
 // ?BltBox2D_A1R5G5B5@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x006218e5
+
 // ?BltBox2D_A4R4G4B4@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621a38
+
 // ?BltBox2D_R3G3B2@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621b77
+
 // ?BltBox2D_A8@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621c12
+
 // ?BltBox2D_A8R3G3B2@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621d5e
+
 // ?BltBox2D_X4R4G4B4@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621e8b
+
 // ?BltBox2D_A8L8@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00621fd7
+
 // ?BltBox2D_R3G3B2@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00622158
+
 // ?BltSame@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00622290
+
 // ?BltCopy@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00622381
+
 // ?BltNone@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00622583
+
 // ?BltPoint@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00622787
+
 // ?BltBox2D@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00622baa
+
 // ?BltBox3D@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x0062303c
+
 // ?LF_SetupLinear@@YAPAEIIH@Z
 
-// LIBRARY: D3DX8 0x0062313c
+
 // ?BltLinear2D@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00623522
+
 // ?BltLinear3D@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00623c53
+
 // ?BltTriangle2D@CD3DXBlt@@IAEJXZ
 
-// LIBRARY: D3DX8 0x00623ff5
+
 // ?Blt@CD3DXBlt@@QAEJPAUD3DX_BLT@@0K@Z
 
-// LIBRARY: D3DX8 0x0062410f
+
 // ??0CD3DXDwStack@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0062411f
+
 // ?Unlock@CD3DXLockSurface@@QAEJXZ
 
-// LIBRARY: D3DX8 0x0062418e
+
 // ?Unlock@CD3DXLockVolume@@QAEJXZ
 
-// LIBRARY: D3DX8 0x0062491c
+
 // ??1CD3DXCodec@@UAE@XZ
 
-// LIBRARY: D3DX8 0x00624935
+
 // ?Convert@CD3DXCodec@@IAEPAUD3DXCOLOR@@PAU2@@Z
 
-// LIBRARY: D3DX8 0x00624c99
+
 // ??1CD3DXCodecDXT@@UAE@XZ
 
-// LIBRARY: D3DX8 0x00625133
+
 // ?F2IBegin@@YAXXZ
 
-// LIBRARY: D3DX8 0x00625175
+
 // ??0CD3DXCodec@@IAE@PAUD3DX_BLT@@IK@Z
 
-// LIBRARY: D3DX8 0x006253dd
+
 // ?ConvertFrom@CD3DXCodec@@QAEJPAV1@@Z
 
-// LIBRARY: D3DX8 0x00625458
+
 // ?QuantizeColorKey@CD3DXCodec@@MAEXXZ
 
-// LIBRARY: D3DX8 0x00625524
+
 // ?ColorKey@CD3DXCodec@@IAEXPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00625594
+
 // ?Encode@CD3DXCodec_R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00625680
+
 // ?Encode@CD3DXCodec_A8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006257a3
+
 // ?Encode@CD3DXCodec_X8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006258a4
+
 // ?Encode@CD3DXCodec_R5G6B5@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006259a5
+
 // ?Encode@CD3DXCodec_X1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00625aa6
+
 // ?Encode@CD3DXCodec_A1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00625bc3
+
 // ?Encode@CD3DXCodec_A4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00625ce6
+
 // ?Encode@CD3DXCodec_R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00625de4
+
 // ?Encode@CD3DXCodec_A8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00625e8d
+
 // ?Encode@CD3DXCodec_A8R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00625fb0
+
 // ?Encode@CD3DXCodec_X4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006260b1
+
 // ?Encode@CD3DXCodec_A2B10G10R10@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006261d4
+
 // ?Encode@CD3DXCodec_G16R16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006262a4
+
 // ?Encode@CD3DXCodec_A8P8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006263bc
+
 // ?Encode@CD3DXCodec_P8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626481
+
 // ?Encode@CD3DXCodec_L8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626546
+
 // ?Encode@CD3DXCodec_A8L8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x0062663c
+
 // ?Encode@CD3DXCodec_A4L4@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626727
+
 // ?Encode@CD3DXCodec_V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006267fc
+
 // ?Encode@CD3DXCodec_L6V5U5@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626901
+
 // ?Encode@CD3DXCodec_X8L8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626a0c
+
 // ?Encode@CD3DXCodec_Q8W8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626b46
+
 // ?Encode@CD3DXCodec_V16U16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626c1c
+
 // ?Encode@CD3DXCodec_W11V11U10@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626d26
+
 // ?Encode@CD3DXCodec_A2W10V10U10@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626e5c
+
 // ?Encode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626f23
+
 // ?Encode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00626fea
+
 // ?Encode@CD3DXCodec_D3DX_A16L16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006270d8
+
 // ?Encode@CD3DXCodec_D3DX_R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006271c7
+
 // ?Encode@CD3DXCodec_D3DX_A16R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627323
+
 // ?Decode@CD3DXCodec_R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006273af
+
 // ?Decode@CD3DXCodec_A8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627455
+
 // ?Decode@CD3DXCodec_X8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006274f1
+
 // ?Decode@CD3DXCodec_R5G6B5@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627596
+
 // ?Decode@CD3DXCodec_X1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627638
+
 // ?Decode@CD3DXCodec_A1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006276e8
+
 // ?Decode@CD3DXCodec_A4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627797
+
 // ?Decode@CD3DXCodec_A2B10G10R10@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x0062786d
+
 // ?Decode@CD3DXCodec_G16R16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006278ff
+
 // ?Decode@CD3DXCodec_R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006279a1
+
 // ?Decode@CD3DXCodec_A8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627a13
+
 // ?Decode@CD3DXCodec_A8R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627ac5
+
 // ?Decode@CD3DXCodec_X4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627b64
+
 // ?Decode@CD3DXCodec_A8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627c4f
+
 // ?Decode@CD3DXCodec_L8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627cbd
+
 // ?Decode@CD3DXCodec_A8L8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627d46
+
 // ?Decode@CD3DXCodec_A4L4@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627dcf
+
 // ?Decode@CD3DXCodec_V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627e51
+
 // ?Decode@CD3DXCodec_L6V5U5@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627f02
+
 // ?Decode@CD3DXCodec_X8L8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00627f93
+
 // ?Decode@CD3DXCodec_Q8W8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x0062802a
+
 // ?Decode@CD3DXCodec_V16U16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006280ad
+
 // ?Decode@CD3DXCodec_W11V11U10@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00628167
+
 // ?Decode@CD3DXCodec_A2W10V10U10@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x0062823a
+
 // ?Decode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006282aa
+
 // ?Decode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x0062831a
+
 // ?Decode@CD3DXCodec_D3DX_A16L16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006283a8
+
 // ?Decode@CD3DXCodec_D3DX_R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00628434
+
 // ?Decode@CD3DXCodec_D3DX_A16R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00628514
+
 // ??0CD3DXCodec_R8G8B8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628530
+
 // ??0CD3DXCodecYUV@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628649
+
 // ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628686
+
 // ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006286c3
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006286df
+
 // ?Commit@CD3DXCodecYUV@@QAEJXZ
 
-// LIBRARY: D3DX8 0x006288ec
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628929
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628966
+
 // ?Fetch@CD3DXCodecYUV@@QAEJIIH@Z
 
-// LIBRARY: D3DX8 0x00628c37
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628c74
+
 // ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628cb1
+
 // ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628cee
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628d2b
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628d68
+
 // ?Encode@CD3DXCodecYUV@@UAEXIIPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00628df5
+
 // ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628ea1
+
 // ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00628ede
+
 // ??0CD3DXCodecDXT@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006290d0
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x0062910d
+
 // ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x0062914a
+
 // ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629187
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006291e0
+
 // ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x0062921d
+
 // ?QuantizeColorKey@CD3DXCodecDXT@@MAEXXZ
 
-// LIBRARY: D3DX8 0x0062931e
+
 // ??0CD3DXCodec_V8U8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x0062935b
+
 // ??0CD3DXCodec_V8U8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629398
+
 // ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006293d5
+
 // ??0CD3DXCodec_Q8W8V8U8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629412
+
 // ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x0062944f
+
 // ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x0062948c
+
 // ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006294c9
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629506
+
 // ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006297ec
+
 // ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629829
+
 // ??0CD3DXCodec_D3DX_R16G16B16@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629866
+
 // ??0CD3DXCodec_D3DX_A16R16G16B16@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006298a3
+
 // ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006298dc
+
 // ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629915
+
 // ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x0062994e
+
 // ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629987
+
 // ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x006299c0
+
 // ??1CD3DXCodecYUV@@UAE@XZ
 
-// LIBRARY: D3DX8 0x00629a09
+
 // ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629a21
+
 // ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x00629a39
+
 // ?Create@CD3DXCodec@@SAPAV1@PAUD3DX_BLT@@@Z
 
-// LIBRARY: D3DX8 0x0062a200
+
 // ?sse_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
 
-// LIBRARY: D3DX8 0x0062a310
+
 // ?sse_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
 
-// LIBRARY: D3DX8 0x0062a420
+
 // ?get_feature_flags@@YAIXZ
 
-// LIBRARY: D3DX8 0x0062a4f5
+
 // ?x3d_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
 
-// LIBRARY: D3DX8 0x0062a981
+
 // ?x86_D3DXVec3Normalize@@YGPAUD3DXVECTOR3@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x0062aa4b
+
 // ?x86_D3DXMatrixMultiply@@YGPAUD3DXMATRIX@@PAU1@PBU1@1@Z
 
-// LIBRARY: D3DX8 0x0062abbc
+
 // ?x86_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
 
-// LIBRARY: D3DX8 0x0062abf8
+
 // ??0CD3DXText@@IAE@XZ
 
-// LIBRARY: D3DX8 0x0062ad3f
+
 // ??_GCD3DXFont@@QAEPAXI@Z
 
-// LIBRARY: D3DX8 0x0062af70
+
 // ?Release@CD3DXText@@QAEXXZ
 
-// LIBRARY: D3DX8 0x0062b645
+
 // ??0CD3DXDwStack@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0062b655
+
 // ??1CD3DXDwStack@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0062b663
+
 // ?Push@CD3DXDwStack@@QAEJK@Z
 
-// LIBRARY: D3DX8 0x0062b6d1
+
 // ?Pop@CD3DXDwStack@@QAEJPAK@Z
 
-// LIBRARY: D3DX8 0x0062b705
+
 // ?GetLastError@CD3DXDwStack@@QAEJXZ
 
-// LIBRARY: D3DX8 0x0062b70d
+
 // ??0CD3DXSzStack@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0062b720
+
 // ??1CD3DXSzStack@@QAE@XZ
 
-// LIBRARY: D3DX8 0x0062b751
+
 // ?Push@CD3DXSzStack@@QAEJPAD@Z
 
-// LIBRARY: D3DX8 0x0062b804
+
 // ?Pop@CD3DXDwStack@@QAEJPAK@Z
 
-// LIBRARY: D3DX8 0x0062b838
+
 // ?GetLastError@CD3DXDwStack@@QAEJXZ
 
-// LIBRARY: D3DX8 0x0062b840
+
 // ?GenerateStringBuffer@CD3DXSzStack@@QAEJPAPAUID3DXBuffer@@@Z
 
-// LIBRARY: D3DX8 0x0062b953
+
 // ?FindPoint@@YAKPAKKPAUSLoadVertex@@@Z
 
-// LIBRARY: D3DX8 0x0062bb34
+
 // ?CreateMaterialBuffer@@YAJPAUD3DXMATERIAL@@KPAPAUID3DXBuffer@@@Z
 
-// LIBRARY: D3DX8 0x0062bc2d
+
 // ?MergeMaterialBuffers@@YAJPAUID3DXBuffer@@K0KPAPAU1@@Z
 
-// LIBRARY: D3DX8 0x0062bd41
+
 // ?SetTex1@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR2@@@Z
 
-// LIBRARY: D3DX8 0x0062bd8e
+
 // ?InitVertices@@YAJAAPAUSLoadVertex@@K@Z
 
-// LIBRARY: D3DX8 0x0062bea7
+
 // ?InitFaces@@YAJAAPAUSLoadedFace@@K@Z
 
-// LIBRARY: D3DX8 0x0062bf25
+
 // ?BEqualWedges@@YA_NAAUSLoadVertex@@0@Z
 
-// LIBRARY: D3DX8 0x0062bfa9
+
 // ?AddToDynamicArray@@YAHPAPAUSLoadVertex@@ABU1@PAK2@Z
 
-// LIBRARY: D3DX8 0x0062c0cd
+
 // ?SetVertexColor@@YAJPAUSLoadedFace@@KAAUD3DXCOLOR@@PAPAUSLoadVertex@@PAK3@Z
 
-// LIBRARY: D3DX8 0x0062c1f9
+
 // ?SetVertexAttributes@@YAJPAUSLoadedFace@@KPAUD3DXVECTOR3@@PAUD3DXVECTOR2@@PAPAUSLoadVertex@@PAK4@Z
 
-// LIBRARY: D3DX8 0x0062c368
+
 // ?SetSmoothingGroup@@YAJPAUSLoadedFace@@KGAAUD3DXVECTOR3@@PAPAUSLoadVertex@@PAK3@Z
 
-// LIBRARY: D3DX8 0x0062c4c9
+
 // ?InitCorners@@YAJAAPAUSCorner@@K@Z
 
-// LIBRARY: D3DX8 0x0062cdcf
+
 // _jpeg_CreateDecompress
 
-// LIBRARY: D3DX8 0x0062ce99
+
 // _jpeg_set_marker_processor
 
-// LIBRARY: D3DX8 0x0062cef6
+
 // ?default_decompress_parms@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062d069
+
 // _jpeg_consume_input
 
-// LIBRARY: D3DX8 0x0062d173
+
 // _jpeg_finish_decompress
 
-// LIBRARY: D3DX8 0x0062d21a
+
 // _jpeg_read_header
 
-// LIBRARY: D3DX8 0x0062d27d
+
 // ?output_pass_setup@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062d326
+
 // _jpeg_read_scanlines
 
-// LIBRARY: D3DX8 0x0062d51e
+
 // _jpeg_start_decompress
 
-// LIBRARY: D3DX8 0x0062d5df
+
 // ?get_soi@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062d66d
+
 // ?get_sof@D3DX@@YAEPAUjpeg_decompress_struct@1@EE@Z
 
-// LIBRARY: D3DX8 0x0062d968
+
 // ?get_sos@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062dc1a
+
 // ?get_app0@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062de56
+
 // ?get_app14@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062dfd0
+
 // ?get_dac@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062e127
+
 // ?get_dht@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062e3bb
+
 // ?get_dqt@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062e5e4
+
 // ?get_dri@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062e6bb
+
 // ?skip_variable@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062e757
+
 // ?next_marker@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062e82e
+
 // ?first_marker@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062ec1f
+
 // ?reset_marker_reader@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062ec49
+
 // ?jinit_marker_reader@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0062ece1
+
 // ?d3dx_jpeg_output_message@@YAXPAUjpeg_common_struct@D3DX@@@Z
 
-// LIBRARY: D3DX8 0x0062edd7
+
 // _jpeg_std_error
 
-// LIBRARY: D3DX8 0x0062ee23
+
 // ?png_format_buffer@D3DX@@YAXPAUpng_struct_def@1@PADPBD@Z
 
-// LIBRARY: D3DX8 0x0062eeb7
+
 // _png_set_error_fn
 
-// LIBRARY: D3DX8 0x0062eed9
+
 // _png_error
 
-// LIBRARY: D3DX8 0x0062ef0c
+
 // _png_chunk_error
 
-// LIBRARY: D3DX8 0x0062ef31
+
 // _png_chunk_error
 
-// LIBRARY: D3DX8 0x0062ef56
+
 // _png_create_read_struct
 
-// LIBRARY: D3DX8 0x0062f059
+
 // _png_read_init
 
-// LIBRARY: D3DX8 0x0062f119
+
 // _png_read_info
 
-// LIBRARY: D3DX8 0x0062f28c
+
 // _png_read_update_info
 
-// LIBRARY: D3DX8 0x0062f2be
+
 // _png_read_row
 
-// LIBRARY: D3DX8 0x0062f665
+
 // _png_read_rows
 
-// LIBRARY: D3DX8 0x0062f6df
+
 // _png_read_image
 
-// LIBRARY: D3DX8 0x0062f72c
+
 // _png_read_end
 
-// LIBRARY: D3DX8 0x0062f82c
+
 // _png_read_destroy
 
-// LIBRARY: D3DX8 0x0062f95e
+
 // _png_destroy_read_struct
 
-// LIBRARY: D3DX8 0x0062f9df
+
 // _png_get_valid
 
-// LIBRARY: D3DX8 0x0062f9f9
+
 // _png_get_rowbytes
 
-// LIBRARY: D3DX8 0x0062fa0f
+
 // _png_get_channels
 
-// LIBRARY: D3DX8 0x0062fa3b
+
 // _png_get_gAMA
 
-// LIBRARY: D3DX8 0x0062fa64
+
 // _png_get_sRGB
 
-// LIBRARY: D3DX8 0x0062fa8f
+
 // _png_get_IHDR
 
-// LIBRARY: D3DX8 0x0062fb60
+
 // _png_get_PLTE
 
-// LIBRARY: D3DX8 0x0062fb93
+
 // _png_get_tRNS
 
-// LIBRARY: D3DX8 0x0062fbfa
+
 // _png_set_bgr
 
-// LIBRARY: D3DX8 0x0062fc03
+
 // _png_set_swap
 
-// LIBRARY: D3DX8 0x0062fc15
+
 // _png_set_packing
 
-// LIBRARY: D3DX8 0x0062fc47
+
 // _png_set_interlace_handling
 
-// LIBRARY: D3DX8 0x0062fc60
+
 // _png_set_filler
 
-// LIBRARY: D3DX8 0x0062fcad
+
 // _png_do_swap
 
-// LIBRARY: D3DX8 0x0062fcda
+
 // _png_do_bgr
 
-// LIBRARY: D3DX8 0x0062fe21
+
 // _png_set_dither
 
-// LIBRARY: D3DX8 0x00630474
+
 // _png_set_gamma
 
-// LIBRARY: D3DX8 0x006304bc
+
 // _png_set_expand
 
-// LIBRARY: D3DX8 0x006304c5
+
 // _png_set_expand
 
-// LIBRARY: D3DX8 0x006304ce
+
 // _png_read_transform_info
 
-// LIBRARY: D3DX8 0x006305b9
+
 // _png_do_unpack
 
-// LIBRARY: D3DX8 0x006306c9
+
 // _png_do_unshift
 
-// LIBRARY: D3DX8 0x00630840
+
 // _png_do_chop
 
-// LIBRARY: D3DX8 0x00630884
+
 // _png_do_read_filler
 
-// LIBRARY: D3DX8 0x00630b1c
+
 // _png_do_gamma
 
-// LIBRARY: D3DX8 0x00630e6a
+
 // _png_do_expand_palette
 
-// LIBRARY: D3DX8 0x00631072
+
 // _png_do_expand
 
-// LIBRARY: D3DX8 0x006313c4
+
 // _png_do_dither
 
-// LIBRARY: D3DX8 0x006314d2
+
 // _png_build_gamma_table
 
-// LIBRARY: D3DX8 0x006317db
+
 // _png_init_read_transformations
 
-// LIBRARY: D3DX8 0x006318ee
+
 // _png_do_read_transformations
 
-// LIBRARY: D3DX8 0x00631aa6
+
 // _png_set_gAMA
 
-// LIBRARY: D3DX8 0x00631ac1
+
 // _png_set_IHDR
 
-// LIBRARY: D3DX8 0x00631b62
+
 // _png_set_PLTE
 
-// LIBRARY: D3DX8 0x00631b86
+
 // _png_set_sRGB
 
-// LIBRARY: D3DX8 0x00631ba1
+
 // _png_set_sRGB_gAMA_and_cHRM
 
-// LIBRARY: D3DX8 0x00631bda
+
 // _png_set_tRNS
 
-// LIBRARY: D3DX8 0x00631c34
+
 // _png_read_data
 
-// LIBRARY: D3DX8 0x00631c5c
+
 // _png_set_read_fn
 
-// LIBRARY: D3DX8 0x00631cce
+
 // _png_sig_cmp
 
-// LIBRARY: D3DX8 0x00631d2e
+
 // _png_zalloc
 
-// LIBRARY: D3DX8 0x00631d86
+
 // _png_reset_crc
 
-// LIBRARY: D3DX8 0x00631deb
+
 // _png_info_destroy
 
-// LIBRARY: D3DX8 0x00631e08
+
 // _png_create_info_struct
 
-// LIBRARY: D3DX8 0x00631e54
+
 // ?Decode565@@YAXPAUD3DXCOLOR@@G@Z
 
-// LIBRARY: D3DX8 0x00631ea0
+
 // ?DecodePremult@@YAJPAUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00631f1e
+
 // ?EncodePremult@@YAJPAUD3DXCOLOR@@PBU1@@Z
 
-// LIBRARY: D3DX8 0x00631f4e
+
 // ?D3DXColorLerp@@YAPAUD3DXCOLOR@@PAU1@PBU1@1M@Z
 
-// LIBRARY: D3DX8 0x00631f94
+
 // ?F2IBegin@@YAXXZ
 
-// LIBRARY: D3DX8 0x00631fd6
+
 // ?Encode565@@YAGPBUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x006320d0
+
 // ?OptimizeAlpha@@YAXPAM0PBMI@Z
 
-// LIBRARY: D3DX8 0x006323d5
+
 // ?OptimizeRGB@@YAXPAUD3DXCOLOR@@0PBU1@I@Z
 
-// LIBRARY: D3DX8 0x00632940
+
 // ?EncodeDXT1@@YAJPAEPBUD3DXCOLOR@@H@Z
 
-// LIBRARY: D3DX8 0x00633144
+
 // ?D3DXDecodeDXT1@@YAJPAUD3DXCOLOR@@PBE@Z
 
-// LIBRARY: D3DX8 0x00633282
+
 // ?D3DXDecodeDXT3@@YAJPAUD3DXCOLOR@@PBE@Z
 
-// LIBRARY: D3DX8 0x00633459
+
 // ?D3DXEncodeDXT3@@YAJPAEPBUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x0063356d
+
 // ?D3DXEncodeDXT5@@YAJPAEPBUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00633a05
+
 // ?D3DXEncodeDXT2@@YAJPAEPBUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00633a39
+
 // ?D3DXEncodeDXT2@@YAJPAEPBUD3DXCOLOR@@@Z
 
-// LIBRARY: D3DX8 0x00633a70
+
 // ?sse_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x00633ab0
+
 // ?sse_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x00633b10
+
 // ?sse_D3DXVec2TransformNormal@@YGPAUD3DXVECTOR2@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x00634700
+
 // ?sse_D3DXVec4Normalize@@YGPAUD3DXVECTOR4@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x006348b0
+
 // ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x00634970
+
 // ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x00634a00
+
 // ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x00634ab0
+
 // ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x00634b70
+
 // ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x00634c10
+
 // ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
 
-// LIBRARY: D3DX8 0x00634ca0
+
 // ?sse_D3DXVec3BaryCentric@@YGPAUD3DXVECTOR3@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x00634d00
+
 // ?sse_D3DXVec3BaryCentric@@YGPAUD3DXVECTOR3@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x00634d50
+
 // ?sse_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
 
-// LIBRARY: D3DX8 0x00634db0
+
 // ?sse_D3DXPlaneIntersectLine@@YGPAUD3DXVECTOR3@@PAU1@PBUD3DXPLANE@@PBU1@2@Z
 
-// LIBRARY: D3DX8 0x00635330
+
 // ?sse_D3DXQuaternionMultiply@@YGPAUD3DXQUATERNION@@PAU1@PBU1@1@Z
 
-// LIBRARY: D3DX8 0x006353c0
+
 // ?sse_D3DXVec4Normalize@@YGPAUD3DXVECTOR4@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x0063726b
+
 // ?x3d_D3DXQuaternionSlerp@@YGPAUD3DXQUATERNION@@PAU1@PBU1@1M@Z
 
-// LIBRARY: D3DX8 0x00637713
+
 // ?x3d_D3DXQuaternionSquadSetup@@YGXPAUD3DXQUATERNION@@00PBU1@111@Z
 
-// LIBRARY: D3DX8 0x0063c660
+
 // ?x3d_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x0063d688
+
 // ?x3d_D3DXPlaneNormalize@@YGPAUD3DXPLANE@@PAU1@PBU1@@Z
 
-// LIBRARY: D3DX8 0x0063d82b
+
 // ?jdiv_round_up@D3DX@@YAJJJ@Z
 
-// LIBRARY: D3DX8 0x0063d83b
+
 // ?jround_up@D3DX@@YAJJJ@Z
 
-// LIBRARY: D3DX8 0x0063d853
+
 // ?jcopy_sample_rows@D3DX@@YAXPAPAEH0HHI@Z
 
-// LIBRARY: D3DX8 0x0063d89a
+
 // ?jcopy_block_row@D3DX@@YAXPAY0EA@F0I@Z
 
-// LIBRARY: D3DX8 0x0063d8bc
+
 // ?jzero_far@D3DX@@YAXPAXI@Z
 
-// LIBRARY: D3DX8 0x0063d8d7
+
 // ?IsMMX@D3DX@@YAHXZ
 
-// LIBRARY: D3DX8 0x0063d909
+
 // ?initial_setup@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063dac4
+
 // ?per_scan_setup@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063dc3a
+
 // ?latch_quant_tables@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063dccc
+
 // ?start_input_pass@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063dde1
+
 // ?jinit_input_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063de22
+
 // ?out_of_memory@D3DX@@YAXPAUjpeg_common_struct@1@H@Z
 
-// LIBRARY: D3DX8 0x0063de37
+
 // ?alloc_small@D3DX@@YAPAXPAUjpeg_common_struct@1@HI@Z
 
-// LIBRARY: D3DX8 0x0063df33
+
 // ?alloc_large@D3DX@@YAPAXPAUjpeg_common_struct@1@HI@Z
 
-// LIBRARY: D3DX8 0x0063dfc1
+
 // ?alloc_sarray@D3DX@@YAPAPAEPAUjpeg_common_struct@1@HII@Z
 
-// LIBRARY: D3DX8 0x0063e053
+
 // ?alloc_barray@D3DX@@YAPAPAY0EA@FPAUjpeg_common_struct@1@HII@Z
 
-// LIBRARY: D3DX8 0x0063e0f1
+
 // ?request_virt_sarray@D3DX@@YAPAUjvirt_sarray_control@1@PAUjpeg_common_struct@1@HEIII@Z
 
-// LIBRARY: D3DX8 0x0063e152
+
 // ?request_virt_barray@D3DX@@YAPAUjvirt_barray_control@1@PAUjpeg_common_struct@1@HEIII@Z
 
-// LIBRARY: D3DX8 0x0063e1b3
+
 // ?realize_virt_arrays@D3DX@@YAXPAUjpeg_common_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063e332
+
 // ?do_sarray_io@D3DX@@YAXPAUjpeg_common_struct@1@PAUjvirt_sarray_control@1@E@Z
 
-// LIBRARY: D3DX8 0x0063e3ba
+
 // ?do_barray_io@D3DX@@YAXPAUjpeg_common_struct@1@PAUjvirt_barray_control@1@E@Z
 
-// LIBRARY: D3DX8 0x0063e445
+
 // ?access_virt_sarray@D3DX@@YAPAPAEPAUjpeg_common_struct@1@PAUjvirt_sarray_control@1@IIE@Z
 
-// LIBRARY: D3DX8 0x0063e563
+
 // ?access_virt_barray@D3DX@@YAPAPAY0EA@FPAUjpeg_common_struct@1@PAUjvirt_barray_control@1@IIE@Z
 
-// LIBRARY: D3DX8 0x0063e686
+
 // ?free_pool@D3DX@@YAXPAUjpeg_common_struct@1@H@Z
 
-// LIBRARY: D3DX8 0x0063e797
+
 // ?jinit_memory_mgr@D3DX@@YAXPAUjpeg_common_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063e84b
+
 // _jpeg_abort
 
-// LIBRARY: D3DX8 0x0063e86d
+
 // _jpeg_destroy
 
-// LIBRARY: D3DX8 0x0063e888
+
 // _jpeg_alloc_quant_table
 
-// LIBRARY: D3DX8 0x0063e8a4
+
 // _jpeg_alloc_huff_table
 
-// LIBRARY: D3DX8 0x0063e8c0
+
 // ?use_merged_upsample@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063e931
+
 // _jpeg_calc_output_dimensions
 
-// LIBRARY: D3DX8 0x0063eb20
+
 // ?prepare_range_limit_table@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063eb8f
+
 // ?master_selection@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063eeed
+
 // ?jinit_master_decompress@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0063ef1d
+
 // _inflateReset
 
-// LIBRARY: D3DX8 0x0063ef5c
+
 // _inflateEnd
 
-// LIBRARY: D3DX8 0x0063ef9a
+
 // _inflateInit2_
 
-// LIBRARY: D3DX8 0x0063f07f
+
 // _inflateInit_
 
-// LIBRARY: D3DX8 0x0063f096
+
 // _inflate
 
-// LIBRARY: D3DX8 0x0063f3fd
+
 // _inflateSetDictionary
 
-// LIBRARY: D3DX8 0x0063f476
+
 // _inflateSync
 
-// LIBRARY: D3DX8 0x0063f546
+
 // _png_create_struct
 
-// LIBRARY: D3DX8 0x0063f588
+
 // _png_destroy_struct
 
-// LIBRARY: D3DX8 0x0063f595
+
 // _png_malloc
 
-// LIBRARY: D3DX8 0x0063f5cb
+
 // _png_free
 
-// LIBRARY: D3DX8 0x0063f5e4
+
 // _png_memcpy_check
 
-// LIBRARY: D3DX8 0x0063f607
+
 // _png_memset_check
 
-// LIBRARY: D3DX8 0x0063f638
+
 // _png_get_uint_32
 
-// LIBRARY: D3DX8 0x0063f66e
+
 // _png_crc_read
 
-// LIBRARY: D3DX8 0x0063f688
+
 // _png_crc_error
 
-// LIBRARY: D3DX8 0x0063f6e6
+
 // _png_check_chunk_name
 
-// LIBRARY: D3DX8 0x0063f748
+
 // _png_combine_row
 
-// LIBRARY: D3DX8 0x0063f95e
+
 // _png_do_read_interlace
 
-// LIBRARY: D3DX8 0x0063fc27
+
 // _png_read_filter_row
 
-// LIBRARY: D3DX8 0x0063fda2
+
 // _png_read_start_row
 
-// LIBRARY: D3DX8 0x0063ff3e
+
 // _png_crc_finish
 
-// LIBRARY: D3DX8 0x0063ffca
+
 // _png_handle_IHDR
 
-// LIBRARY: D3DX8 0x006401c0
+
 // _png_handle_PLTE
 
-// LIBRARY: D3DX8 0x006402ea
+
 // _png_handle_IEND
 
-// LIBRARY: D3DX8 0x00640334
+
 // _png_handle_gAMA
 
-// LIBRARY: D3DX8 0x0064043f
+
 // _png_handle_sRGB
 
-// LIBRARY: D3DX8 0x0064052e
+
 // _png_handle_tRNS
 
-// LIBRARY: D3DX8 0x006406e5
+
 // _png_handle_unknown
 
-// LIBRARY: D3DX8 0x0064072f
+
 // _png_read_finish_row
 
-// LIBRARY: D3DX8 0x00640959
+
 // _crc32
 
-// LIBRARY: D3DX8 0x00640a70
+
 // ?sse_D3DXVec3TransformNormal@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
 
-// LIBRARY: D3DX8 0x00640c20
+
 // ?acos2_ss@@YAXMPAM@Z
 
-// LIBRARY: D3DX8 0x00640d30
+
 // ?sse_sin4@@YG_K_K@Z
 
-// LIBRARY: D3DX8 0x00640eb0
+
 // ?sse_sincos@@YG_K_K@Z
 
-// LIBRARY: D3DX8 0x00641040
+
 // ?sse_SinCos4@@YAXQBMQAM1@Z
 
-// LIBRARY: D3DX8 0x00641230
+
 // ?sse2_atan2@@YA_KQBM0@Z
 
-// LIBRARY: D3DX8 0x00641810
+
 // ?sse_SinCos4@@YAXQBMQAM1@Z
 
-// LIBRARY: D3DX8 0x00641980
+
 // _a_atan
 
-// LIBRARY: D3DX8 0x00641a40
+
 // _a_atan2
 
-// LIBRARY: D3DX8 0x00641b40
+
 // _a_acos
 
-// LIBRARY: D3DX8 0x00641d40
+
 // _a_log
 
-// LIBRARY: D3DX8 0x00642120
+
 // _a_cos
 
-// LIBRARY: D3DX8 0x00642240
+
 // _a_cos
 
-// LIBRARY: D3DX8 0x00642638
+
 // ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
 
-// LIBRARY: D3DX8 0x00642643
+
 // ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
 
-// LIBRARY: D3DX8 0x0064264e
+
 // ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
 
-// LIBRARY: D3DX8 0x00642659
+
 // ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
 
-// LIBRARY: D3DX8 0x00642669
+
 // ?jpeg_open_backing_store@D3DX@@YAXPAUjpeg_common_struct@1@PAUbacking_store_struct@1@J@Z
 
-// LIBRARY: D3DX8 0x00642681
+
 // ?alloc_funny_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00642729
+
 // ?make_funny_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0064285a
+
 // ?set_wraparound_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0064292e
+
 // ?set_bottom_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x006429c4
+
 // ?process_data_simple_main@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAEPAII@Z
 
-// LIBRARY: D3DX8 0x00642a2c
+
 // ?process_data_context_main@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAEPAII@Z
 
-// LIBRARY: D3DX8 0x00642bbf
+
 // ?jinit_d_main_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
 
-// LIBRARY: D3DX8 0x00642c92
+
 // ?start_iMCU_row@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00642ce1
+
 // ?decompress_onepass@D3DX@@YAHPAUjpeg_decompress_struct@1@PAPAPAE@Z
 
-// LIBRARY: D3DX8 0x00642ebe
+
 // ?consume_data@D3DX@@YAHPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0064305d
+
 // ?decompress_data@D3DX@@YAHPAUjpeg_decompress_struct@1@PAPAPAE@Z
 
-// LIBRARY: D3DX8 0x006431c3
+
 // ?smoothing_ok@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x006437fe
+
 // ?jinit_d_coef_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
 
-// LIBRARY: D3DX8 0x006438f6
+
 // ?jpeg_make_d_derived_tbl@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUJHUFF_TBL@1@PAPAUd_derived_tbl@1@@Z
 
-// LIBRARY: D3DX8 0x00643aa0
+
 // ?jpeg_fill_bit_buffer@D3DX@@YAEPAUbitread_working_state@1@JHH@Z
 
-// LIBRARY: D3DX8 0x00643b8a
+
 // ?jpeg_huff_decode@D3DX@@YAHPAUbitread_working_state@1@JHPAUd_derived_tbl@1@H@Z
 
-// LIBRARY: D3DX8 0x00643c74
+
 // ?process_restart@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00643cd2
+
 // ?decode_mcu@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
 
-// LIBRARY: D3DX8 0x0064409f
+
 // ?start_pass_huff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x006441ce
+
 // ?jinit_huff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00644208
+
 // ?process_restart@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00644263
+
 // ?decode_mcu_DC_first@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
 
-// LIBRARY: D3DX8 0x00644460
+
 // ?decode_mcu_AC_first@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
 
-// LIBRARY: D3DX8 0x00644689
+
 // ?decode_mcu_DC_refine@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
 
-// LIBRARY: D3DX8 0x0064476b
+
 // ?decode_mcu_AC_refine@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
 
-// LIBRARY: D3DX8 0x00644ad9
+
 // ?start_pass_phuff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00644d7c
+
 // ?jinit_phuff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00644ddd
+
 // ?start_pass@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00644f94
+
 // ?jinit_inverse_dct@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00645008
+
 // ?post_process_1pass@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
 
-// LIBRARY: D3DX8 0x0064506d
+
 // ?post_process_prepass@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
 
-// LIBRARY: D3DX8 0x006450fd
+
 // ?post_process_2pass@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
 
-// LIBRARY: D3DX8 0x0064522f
+
 // ?jinit_d_post_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
 
-// LIBRARY: D3DX8 0x006452cc
+
 // ?sep_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
 
-// LIBRARY: D3DX8 0x006453a5
+
 // ?int_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
 
-// LIBRARY: D3DX8 0x00645482
+
 // ?h2v1_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
 
-// LIBRARY: D3DX8 0x006454d9
+
 // ?h2v2_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
 
-// LIBRARY: D3DX8 0x00645543
+
 // ?h2v1_fancy_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
 
-// LIBRARY: D3DX8 0x006455e7
+
 // ?h2v2_fancy_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
 
-// LIBRARY: D3DX8 0x006456ee
+
 // ?jinit_upsampler@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x006458af
+
 // ?build_ycc_rgb_table@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0064595f
+
 // ?null_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
 
-// LIBRARY: D3DX8 0x006459ca
+
 // ?grayscale_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
 
-// LIBRARY: D3DX8 0x006459ed
+
 // ?ycck_cmyk_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
 
-// LIBRARY: D3DX8 0x00645b20
+
 // ?MYCbCr2RGB@D3DX@@YAXHPAE000@Z
 
-// LIBRARY: D3DX8 0x00645c5c
+
 // ?MYCbCrA2RGBA@D3DX@@YAXHPAE0000@Z
 
-// LIBRARY: D3DX8 0x00645d8a
+
 // ?MYCbCrA2RGBALegacy@D3DX@@YAXHPAE0000@Z
 
-// LIBRARY: D3DX8 0x00645ec6
+
 // ?ycc_rgb_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
 
-// LIBRARY: D3DX8 0x006460e4
+
 // ?jinit_color_deconverter@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00646205
+
 // ?build_ycc_rgb_table@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x006462ca
+
 // ?merged_2v_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
 
-// LIBRARY: D3DX8 0x00646370
+
 // ?merged_1v_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
 
-// LIBRARY: D3DX8 0x006463a1
+
 // ?h2v1_merged_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAE@Z
 
-// LIBRARY: D3DX8 0x006464f7
+
 // ?h2v2_merged_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAE@Z
 
-// LIBRARY: D3DX8 0x006466dd
+
 // ?jinit_merged_upsampler@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00646752
+
 // ?prescan_quantize@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
 
-// LIBRARY: D3DX8 0x0064680a
+
 // ?update_box@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUbox@1@@Z
 
-// LIBRARY: D3DX8 0x00646b42
+
 // ?median_cut@D3DX@@YAHPAUjpeg_decompress_struct@1@PAUbox@1@HH@Z
 
-// LIBRARY: D3DX8 0x00646c95
+
 // ?compute_color@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUbox@1@H@Z
 
-// LIBRARY: D3DX8 0x00646dcd
+
 // ?select_colors@D3DX@@YAXPAUjpeg_decompress_struct@1@H@Z
 
-// LIBRARY: D3DX8 0x00646e5a
+
 // ?find_nearby_colors@D3DX@@YAHPAUjpeg_decompress_struct@1@HHHQAE@Z
 
-// LIBRARY: D3DX8 0x00646fda
+
 // ?find_best_colors@D3DX@@YAXPAUjpeg_decompress_struct@1@HHHHQAE1@Z
 
-// LIBRARY: D3DX8 0x006470f4
+
 // ?fill_inverse_cmap@D3DX@@YAXPAUjpeg_decompress_struct@1@HHH@Z
 
-// LIBRARY: D3DX8 0x006471c4
+
 // ?pass2_no_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
 
-// LIBRARY: D3DX8 0x0064726d
+
 // ?pass2_fs_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
 
-// LIBRARY: D3DX8 0x006474db
+
 // ?init_error_limit@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x0064758e
+
 // ?start_pass_2_quant@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
 
-// LIBRARY: D3DX8 0x0064769f
+
 // ?jinit_2pass_quantizer@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x006477b2
+
 // ?select_ncolors@D3DX@@YAHPAUjpeg_decompress_struct@1@QAH@Z
 
-// LIBRARY: D3DX8 0x006478a9
+
 // ?create_colormap@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x006479d6
+
 // ?create_colorindex@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00647b01
+
 // ?make_odither_array@D3DX@@YAPAY0BA@HPAUjpeg_decompress_struct@1@H@Z
 
-// LIBRARY: D3DX8 0x00647b63
+
 // ?create_odither_tables@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00647c28
+
 // ?color_quantize@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
 
-// LIBRARY: D3DX8 0x00647cb0
+
 // ?color_quantize3@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
 
-// LIBRARY: D3DX8 0x00647d3d
+
 // ?quantize_ord_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
 
-// LIBRARY: D3DX8 0x00647e28
+
 // ?quantize3_ord_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
 
-// LIBRARY: D3DX8 0x00647f27
+
 // ?quantize_fs_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
 
-// LIBRARY: D3DX8 0x006480ab
+
 // ?alloc_fs_workspace@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x006481c0
+
 // ?jinit_1pass_quantizer@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
 
-// LIBRARY: D3DX8 0x00648247
+
 // ?inflate_blocks_reset@D3DX@@YAXPAUinflate_blocks_state@1@PAUz_stream_s@1@PAK@Z
 
-// LIBRARY: D3DX8 0x006482b2
+
 // ?inflate_blocks_new@D3DX@@YAPAUinflate_blocks_state@1@PAUz_stream_s@1@P6AKKPBEI@ZI@Z
 
-// LIBRARY: D3DX8 0x0064833f
+
 // ?inflate_blocks@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@H@Z
 
-// LIBRARY: D3DX8 0x00648ada
+
 // ?inflate_blocks_free@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@@Z
 
-// LIBRARY: D3DX8 0x00648b0e
+
 // ?inflate_set_dictionary@D3DX@@YAXPAUinflate_blocks_state@1@PBEI@Z
 
-// LIBRARY: D3DX8 0x00648b3f
+
 // ?inflate_blocks_sync_point@D3DX@@YAHPAUinflate_blocks_state@1@@Z
 
-// LIBRARY: D3DX8 0x00648b4c
+
 // _adler32
 
-// LIBRARY: D3DX8 0x00648c97
+
 // ?jpeg_idct_4x4@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
 
-// LIBRARY: D3DX8 0x00648fac
+
 // ?jpeg_idct_2x2@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
 
-// LIBRARY: D3DX8 0x0064916a
+
 // ?jpeg_idct_1x1@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
 
-// LIBRARY: D3DX8 0x006491a7
+
 // ?jpeg_idct_islow@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
 
-// LIBRARY: D3DX8 0x006491f3
+
 // ?jpeg_idct_ifast@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
 
-// LIBRARY: D3DX8 0x0064923f
+
 // ?jpeg_idct_float@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
 
-// LIBRARY: D3DX8 0x00649620
+
 // ?inflate_codes_new@D3DX@@YAPAUinflate_codes_state@1@IIPAUinflate_huft_s@1@0PAUz_stream_s@1@@Z
 
-// LIBRARY: D3DX8 0x00649654
+
 // ?inflate_codes@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@H@Z
 
-// LIBRARY: D3DX8 0x00649bb8
+
 // ?inflate_codes_free@D3DX@@YAXPAUinflate_codes_state@1@PAUz_stream_s@1@@Z
 
-// LIBRARY: D3DX8 0x00649bc9
+
 // ?huft_build@D3DX@@YAHPAIIIPBI1PAPAUinflate_huft_s@1@0PAU21@00@Z
 
-// LIBRARY: D3DX8 0x00649f4e
+
 // ?inflate_trees_bits@D3DX@@YAHPAI0PAPAUinflate_huft_s@1@PAU21@PAUz_stream_s@1@@Z
 
-// LIBRARY: D3DX8 0x00649fcd
+
 // ?inflate_trees_dynamic@D3DX@@YAHIIPAI00PAPAUinflate_huft_s@1@1PAU21@PAUz_stream_s@1@@Z
 
-// LIBRARY: D3DX8 0x0064a0d0
+
 // ?inflate_trees_fixed@D3DX@@YAHPAI0PAPAUinflate_huft_s@1@1PAUz_stream_s@1@@Z
 
-// LIBRARY: D3DX8 0x0064a0ff
+
 // ?inflate_flush@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@H@Z
 
-// LIBRARY: D3DX8 0x0064a214
+
 // ?pidct8x8llm@D3DX@@YAXPAF00PAPAEIPAE@Z
 
-// LIBRARY: D3DX8 0x0064a676
+
 // ?midct8x8llm@D3DX@@YAXPAF00PAPAEIPAE@Z
 
-// LIBRARY: D3DX8 0x0064ad2e
+
 // ?pidct8x8aan@D3DX@@YAXPAF00PAPAEIPAE@Z
 
-// LIBRARY: D3DX8 0x0064b089
+
 // ?midct8x8aan@D3DX@@YAXPAF00PAPAEIPAE@Z
 
-// LIBRARY: D3DX8 0x0064be5c
+
 // ?inflate_fast@D3DX@@YAHIIPAUinflate_huft_s@1@0PAUinflate_blocks_state@1@PAUz_stream_s@1@@Z

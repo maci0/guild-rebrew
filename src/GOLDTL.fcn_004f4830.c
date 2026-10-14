@@ -1,9 +1,9 @@
-// GLOBAL: GOLDTL 0x68ff68
+/* ADDRESS: GOLDTL 0x0068ff68 */
 extern char g_68ff68[];
-// GLOBAL: GOLD 0x611238
+/* ADDRESS: GOLD 0x00611238 */
 extern char g_68ff68[];
-// FUNCTION: GOLD 0x004f2720
-// FUNCTION: GOLDTL 0x4f4830
+
+
 
 #include <string.h>
 
@@ -25,8 +25,8 @@ char* __cdecl fcn_00508e40(int id);
 void __cdecl fcn_004f5110(char* buf, int k);
 void __cdecl fcn_005b26e0(char* o, char* buf);
 
-// FUNCTION: GOLD 0x4f27d0
-// FUNCTION: GOLDTL 0x004f48e0
+/* ADDRESS: GOLD 0x004f27d0 */
+/* ADDRESS: GOLDTL 0x004f48e0 */
 int __cdecl fcn_004f48e0(char* s)
 {
 	int rec[9];
@@ -49,8 +49,8 @@ int __cdecl fcn_004f48e0(char* s)
 
 extern char g_9a3825[];
 
-// FUNCTION: GOLD 0x4f39e0
-// FUNCTION: GOLDTL 0x004f5dd0
+/* ADDRESS: GOLD 0x004f39e0 */
+/* ADDRESS: GOLDTL 0x004f5dd0 */
 
 int __cdecl fcn_004f5dd0(int a)
 {

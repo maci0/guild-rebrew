@@ -23,8 +23,8 @@ int __cdecl fcn_004e9310(int k, int max, Ent** out);
 float __cdecl fcn_0050f980(int a, int b, int c);
 int __cdecl fcn_004a5340(Ent* e, int a, int* b, int c, float r, int* out);
 
-// FUNCTION: GOLD 0x4a0240
-// FUNCTION: GOLDTL 0x0049fc80
+/* ADDRESS: GOLD 0x004a0240 */
+/* ADDRESS: GOLDTL 0x0049fc80 */
 Ent* __cdecl fcn_0049fc80(Ent* e)
 {
 	Ent* list[5];

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x508e80
+/* ADDRESS: GOLDTL 0x00508e80 */
 
 // fcn_00505e30 — float of short [0x7f4caa + (a&0xffff)*540].
 

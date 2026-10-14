@@ -9,7 +9,7 @@ extern int g_6a2594;
 extern int g_6a25a0;
 extern int g_6a25a4;
 
-// FUNCTION: GOLDTL 0x527240
+/* ADDRESS: GOLDTL 0x00527240 */
 
 int __cdecl fcn_00527240(int x)
 {

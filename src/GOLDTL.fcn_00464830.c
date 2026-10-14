@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-// FUNCTION: GOLD 0x00467a10
-// FUNCTION: GOLDTL 0x464830
+/* ADDRESS: GOLD 0x00467a10 */
+/* ADDRESS: GOLDTL 0x00464830 */
 int __cdecl fcn_00464830(FILE* fin, int* pi)
 {
 	unsigned char c;

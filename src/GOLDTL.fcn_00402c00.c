@@ -1,6 +1,6 @@
 extern void* g_14d0020[];
 extern char g_10432c0[];
-// FUNCTION: GOLDTL 0x402c00
+
 
 int __cdecl fcn_00451840(void*, int, int);
 

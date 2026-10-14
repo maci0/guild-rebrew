@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
-// FUNCTION: GOLD 0x004c9c80
-// FUNCTION: GOLDTL 0x4ca830
+
+
 
 extern char g_68b0d8[];
 

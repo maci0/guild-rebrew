@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLD 0x00543a10
-// FUNCTION: GOLDTL 0x0054b940
+
+
 
 #include <string.h>
 

@@ -1,10 +1,10 @@
 extern char g_7f4ca4[];
-// GLOBAL: GOLDTL 0x774970
+/* ADDRESS: GOLDTL 0x00774970 */
 extern unsigned short g_774970;
-// GLOBAL: GOLD 0x6f25b8
+/* ADDRESS: GOLD 0x006f25b8 */
 extern unsigned short g_774970;
-// FUNCTION: GOLD 0x004c3f90
-// FUNCTION: GOLDTL 0x4c4900
+
+
 
 int __cdecl fcn_004c5790(int, void*);
 

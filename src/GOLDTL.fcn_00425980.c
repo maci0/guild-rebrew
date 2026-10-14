@@ -9,7 +9,7 @@ char* __cdecl fcn_004247c0(char* dir, char* dst, int n);
 char* __cdecl fcn_00424840(char* p, char* dst, int n);
 int __cdecl fcn_00423920(char* name);
 
-// FUNCTION: GOLDTL 0x00425980
+/* ADDRESS: GOLDTL 0x00425980 */
 
 /* Loads every sample of the bank, substituting the language for "%lang". */
 int __cdecl fcn_00425980(char* lang)

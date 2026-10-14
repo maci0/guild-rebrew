@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00405c00
+
 
 extern char g_1043370[];
 char __cdecl fcn_0045b990(int rec, int key, int* a, int* b, int* c);

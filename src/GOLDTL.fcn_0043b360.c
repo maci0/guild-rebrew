@@ -33,7 +33,7 @@ void __cdecl fcn_00459a10(int a);
 void __cdecl fcn_00456c80(void);
 void __cdecl fcn_00450a00(int a);
 
-// FUNCTION: GOLDTL 0x43b360
+/* ADDRESS: GOLDTL 0x0043b360 */
 char __cdecl fcn_0043b360(void)
 {
 	char* o;

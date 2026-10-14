@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 extern int g_7746f8;
-// FUNCTION: GOLD 0x00522f00
-// FUNCTION: GOLDTL 0x00527f10
+
+
 
 
 int __cdecl fcn_0050e520(int, int*);

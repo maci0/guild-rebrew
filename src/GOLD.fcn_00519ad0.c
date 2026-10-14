@@ -13,7 +13,7 @@ struct ref_f31161 {
 
 extern struct ref_f31161 g_f31161[0x8000];
 
-// FUNCTION: GOLD 0x00519ad0
+
 /* Twin of GOLDTL 0x51ea70; the back-pointer field sits at 0x200 in GOLD, 0x204 in GOLDTL. */
 
 void __cdecl fcn_004478e0(int, int);

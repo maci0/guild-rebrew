@@ -13,7 +13,7 @@ struct Node {
 	Node* parent;
 };
 
-// FUNCTION: GOLDTL 0x00455350
+/* ADDRESS: GOLDTL 0x00455350 */
 
 void __cdecl fcn_00455350(Node* n, float* in, float* out)
 {

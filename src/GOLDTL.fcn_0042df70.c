@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0042ea50
-// FUNCTION: GOLDTL 0x42df70
+
+
 
 extern int g_1052c60[0x60];
 

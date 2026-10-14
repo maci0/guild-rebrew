@@ -1,6 +1,6 @@
 #include "Develop/Units/Msx/msx.h"
 
-// FUNCTION: GOLDTL 0x00538d00
+
 
 #include <stdio.h>
 

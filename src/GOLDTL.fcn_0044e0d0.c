@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x44e0d0
+
 
 int __cdecl vfs_ReadData(void*, int, int, void*);
 

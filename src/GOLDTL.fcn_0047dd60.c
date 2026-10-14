@@ -12,8 +12,8 @@ extern int g_14cbca0;
 extern unsigned int g_14cbcb4;
 extern unsigned char g_6a375c;
 
-// FUNCTION: GOLD 0x47e8a0
-// FUNCTION: GOLDTL 0x47dd60
+/* ADDRESS: GOLD 0x0047e8a0 */
+/* ADDRESS: GOLDTL 0x0047dd60 */
 int __cdecl fcn_0047dd60(char* e)
 {
 	char* p;

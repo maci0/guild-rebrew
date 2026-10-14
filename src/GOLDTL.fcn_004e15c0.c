@@ -17,7 +17,7 @@ int __cdecl fcn_004e6e20(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-// FUNCTION: GOLDTL 0x4e15c0
+/* ADDRESS: GOLDTL 0x004e15c0 */
 
 void __cdecl fcn_004e15c0(char* a1)
 {

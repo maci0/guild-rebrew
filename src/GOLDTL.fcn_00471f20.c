@@ -4,7 +4,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern Obj_1038140 g_1038140[];
 extern int g_772534;
 
-// FUNCTION: GOLDTL 0x471f20
+/* ADDRESS: GOLDTL 0x00471f20 */
 char* __cdecl fcn_00471f20(int j, int k)
 {
 	char* m;

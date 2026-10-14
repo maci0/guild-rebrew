@@ -21,7 +21,7 @@ void __cdecl fcn_004efcd0(void);
 void __cdecl fcn_0040bfd0(void);
 void __cdecl fcn_004c3ed0(void);
 
-// FUNCTION: GOLDTL 0x005381a0
+/* ADDRESS: GOLDTL 0x005381a0 */
 
 /* The inventory entry also holds two more functions:
  * 0x538220 (47 bytes) and the window procedure at 0x538250. */

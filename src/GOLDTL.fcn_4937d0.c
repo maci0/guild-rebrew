@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4937d0
+
 
 int __cdecl gm_RandomMod(int);
 

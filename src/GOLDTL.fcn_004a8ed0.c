@@ -25,8 +25,8 @@ int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 
 
-// FUNCTION: GOLD 0x4a8db0
-// FUNCTION: GOLDTL 0x4a8ed0
+/* ADDRESS: GOLD 0x004a8db0 */
+/* ADDRESS: GOLDTL 0x004a8ed0 */
 int __cdecl fcn_004a8ed0(char* a1, char* e, char* a3, char* a4, char* out)
 {
 	int found;

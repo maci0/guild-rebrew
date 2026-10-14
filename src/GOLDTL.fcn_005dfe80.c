@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005dfe80
+
 
 typedef struct IdList {
 	char pad0[0x28];

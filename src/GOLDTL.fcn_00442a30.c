@@ -43,7 +43,7 @@ Tex* __cdecl fcn_0045c5b0(Cell*, int, int, int);
 void __cdecl fcn_0045ce90(Tex*);
 void __cdecl fcn_0045bfb0(Tex*);
 
-// FUNCTION: GOLDTL 0x00442a30
+/* ADDRESS: GOLDTL 0x00442a30 */
 
 char __cdecl fcn_00442a30(Ent* e, Obj* o, unsigned char lod, char refresh)
 {

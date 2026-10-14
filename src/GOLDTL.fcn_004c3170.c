@@ -8,7 +8,7 @@ extern int g_772e7c;
 
 int __cdecl fcn_004c3100(char*, int);
 
-// FUNCTION: GOLDTL 0x4c3170
+/* ADDRESS: GOLDTL 0x004c3170 */
 
 /* Loads the worker comment and greeting sound banks for the building type
  * of the given building. */

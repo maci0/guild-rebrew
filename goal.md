@@ -129,21 +129,61 @@ hypotheses remain in scratch and have not replaced the project candidate.
 Receipts: `.scratch/goal26/production/`, with prior evidence in
 `.scratch/goal25/production/` and `.scratch/docker-diagnostics/`.
 
-The final known-binding corpus retains server316/316,TL3597/3693 and
-Gold2096/2540, with no compile/missing-file failures or prior-match regressions.
-Seven contradictory old RELOC claims were repaired: a record-field selector,
-wrong floating-point constants/native coefficient grouping, and a tooltip self
-callback name collision. Eleven complete bodies, 90 typed operands and 24 literal
-values agree independently with their references. Inline helper organization is
-inferred; seven existing Gold duplicate-identity warnings remain unresolved.
-All-target lint and data-conflict scans are clean. Rebrew literal/trusted-library
-binding gaps are recorded upstream in docs/IDEAS-GUILD.md, be2a7bb5.
+The last completed pre-migration known-binding corpus retains server316/316,
+TL3597/3693 and Gold2096/2540. Seven contradictory old RELOC claims were repaired:
+a record-field selector, wrong floating-point constants/native coefficient
+grouping, and a tooltip self callback name collision. Eleven complete bodies,
+90 typed operands and 24 literal values agree independently with their references.
+Inline helper organization remains inferred. Literal/trusted-library binding gaps
+are recorded upstream in docs/IDEAS-GUILD.md, be2a7bb5.
 
-Next: inspect remaining callback differences against native source evidence and
-resolve its types/prototypes and full event extent. Resolve the duplicate Gold
-providers without masking divergent source. Preserve the server gate while recovering
-genuine discarded shared source. Complete both client raw links and data ownership
-verification; do not replace those requirements with fixture or object scores.
+The completed Rebrew 3 source-format migration is present but uncommitted here.
+Upstream d37f4a07 fixes managed duplicate-provider selection consistently in both
+batch verification and single-file call catalogs, and locates metadata-only
+function definitions accurately for lint. Its frozen full suite passes 11,727
+tests with 36 skips; a clean-checkout full push hook also passes. All stale
+upstream worktrees are audited, archived and removed; both repositories retain
+only main. Performance work is committed as 81a9ecbf and 6101d33c. Upstream
+6e8dbd5e repairs source splitting around dispatch initializers and callback tables,
+reusing the shared declarator classifier and retaining one storage owner. The
+combined suite passes 11,758 tests with 36 skips; commit and full push hooks pass,
+and remote main contains 6e8dbd5e. A token audit confirms that all 3,836 migrated
+C/header files retain their non-comment tokens, and all 8,376 function identities,
+bindings and extents survive the migration. Spaces on otherwise empty lines are
+removed in 2,650 files without changing line counts.
+
+Accurate lint initially exposes 62 source-order findings in 11 units. Ordering
+character.c, msx.c and server_stats.c by all their target contexts reduces lint
+to 38 warnings, including a newly exposed missing blocker. Their 37 previously
+matched client bodies retain RELOC; the existing ch_Updatelowpoly size mismatch
+remains. Five units have conflicting server/client orders, so a one-target sort
+is insufficient. All three data-conflict inventories report zero conflicts and
+duplicate definitions. Both compiler images pass reproducibility smoke checks.
+The completed migration comparison has 27 Docker timeout errors and five prior
+match regressions: stale raw Gold addresses in two providers and three ambiguous
+callee/self bindings. Correct Gold candidate sources already exist, but the
+managed rows selected the shared TL-address bodies. Do not restore stale verdicts.
+Evidence: .scratch/goal27/.
+
+The user requests a checkpoint commit of the current code before the remaining
+repairs finish. This checkpoint is not a clean-lint or passing-gate claim. The
+fresh gate is running; unfinished warnings, provider/binding regressions and
+toolchain timeouts remain explicit below.
+
+Next: finish the additional upstream include-path repair before further source
+splits. Extracting cm_ExProdObjekt preserves its two identities but exposes a
+second split bug: copied local includes no longer resolve from command_c. An
+actual compiler reports C1083; the shared AST-selected include rebasing fix has
+175 focused tests passing and its full suite is running. The generated artifact
+now uses that API to repair its six local header paths; its comparison is running.
+Then resolve every remaining order and
+the five provider/binding regressions, retry timed-out compiles and run the fresh
+server gate before committing the migration. All five selected split previews
+succeed after the first upstream repair. Preserve one
+shared definition and storage owner, and retain genuinely different Gold bodies.
+Then resolve the callback's remaining types/prototypes, full event extent and
+native layout; recover genuine discarded server source and complete both client
+raw links/data verification. Fixture or object scores cannot replace those checks.
 
 ## History
 

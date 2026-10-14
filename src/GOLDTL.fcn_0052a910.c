@@ -1,8 +1,8 @@
 extern double g_6653f0;
 extern double g_664e60;
 extern double g_665de0;
-// FUNCTION: GOLD 0x525ac0
-// FUNCTION: GOLDTL 0x0052a910
+
+
 
 double __cdecl gm_RandomFloat01(void);
 

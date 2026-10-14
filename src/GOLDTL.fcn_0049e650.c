@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0049ec10
-// FUNCTION: GOLDTL 0x49e650
+
+
 
 typedef struct Blk24 {
 	int v[6];

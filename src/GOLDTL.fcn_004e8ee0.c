@@ -32,8 +32,8 @@ extern Rec18_68da68 g_68da68[];
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
 
-// FUNCTION: GOLD 0x004e7320
-// FUNCTION: GOLDTL 0x004e8ee0
+/* ADDRESS: GOLD 0x004e7320 */
+/* ADDRESS: GOLDTL 0x004e8ee0 */
 
 int __cdecl fcn_004e8ee0(char* who, int n, Pick* picks, int* full_out)
 {

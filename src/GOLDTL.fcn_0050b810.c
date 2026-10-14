@@ -3,7 +3,7 @@
 void* __cdecl fcn_00502cd0(int, int, int, int);
 void* __cdecl fcn_00502850(void);
 
-// FUNCTION: GOLDTL 0x50b810
+/* ADDRESS: GOLDTL 0x0050b810 */
 int __cdecl fcn_0050b810(int a1)
 {
 	void* entry;

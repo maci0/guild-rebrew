@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLD 0x00548e00
-// FUNCTION: GOLDTL 0x550de0
+
+
 
 // SIZE 0x21c
 struct house {

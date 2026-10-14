@@ -33,7 +33,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
-// FUNCTION: GOLDTL 0x4c2100
+/* ADDRESS: GOLDTL 0x004c2100 */
 void __cdecl fcn_004c2100(void)
 {
 	unsigned char* e;

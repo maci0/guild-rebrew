@@ -10,8 +10,8 @@ void __cdecl fcn_0042ed00(char*, void*, void*, unsigned long, unsigned long, int
 int __cdecl fcn_00464eb0(void*);
 void __cdecl fcn_00464a30(void*);
 
-// FUNCTION: GOLD 0x00430130
-// FUNCTION: GOLDTL 0x42fb20
+/* ADDRESS: GOLD 0x00430130 */
+/* ADDRESS: GOLDTL 0x0042fb20 */
 
 /* Mounts every entry of a zip archive under a directory named after the
  * archive. */

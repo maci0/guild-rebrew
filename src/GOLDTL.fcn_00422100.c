@@ -1,8 +1,8 @@
-// GLOBAL: GOLD 0x6332a8
+/* ADDRESS: GOLD 0x006332a8 */
 extern char* g_6b7e88;
 extern int g_6b7d7c;
-// FUNCTION: GOLD 0x00425ce0
-// FUNCTION: GOLDTL 0x422100
+
+
 
 void __cdecl fcn_004232f0(void);
 void __cdecl m_FreeTracked(int);

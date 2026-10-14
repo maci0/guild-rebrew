@@ -7,8 +7,8 @@ typedef DISPLAY_COUNTER Pair0c;
 
 
 
-// FUNCTION: GOLD 0x00476b80
-// FUNCTION: GOLDTL 0x473690
+/* ADDRESS: GOLD 0x00476b80 */
+/* ADDRESS: GOLDTL 0x00473690 */
 void __cdecl fcn_00473690(int key, int amt)
 {
 	int i;

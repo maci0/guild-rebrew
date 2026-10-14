@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00407690
+
 // fcn_00407690 — e = fcn_004223c0(0x14, 0x5f1a48); e[0x10]=a.
 
 void* __cdecl m_alloc(int, int);

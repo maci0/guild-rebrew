@@ -24,8 +24,8 @@ extern slot_1007ce8 g_1007ce8[];
 
 int __cdecl fcn_004a7880(int);
 
-// FUNCTION: GOLD 0x004a8590
-// FUNCTION: GOLDTL 0x4a86b0
+/* ADDRESS: GOLD 0x004a8590 */
+/* ADDRESS: GOLDTL 0x004a86b0 */
 
 void __cdecl fcn_004a86b0(void)
 {

@@ -1,8 +1,8 @@
 extern float g_662d34;
 extern float g_6628d8;
 extern float g_6628cc;
-// FUNCTION: GOLD 0x504e80
-// FUNCTION: GOLDTL 0x507ed0
+/* ADDRESS: GOLD 0x00504e80 */
+/* ADDRESS: GOLDTL 0x00507ed0 */
 
 float __cdecl fcn_00507ed0(float a, float b)
 {

@@ -2,8 +2,8 @@
 
 extern char g_7f4ca0[];
 extern char g_7f4ca0[];
-// FUNCTION: GOLD 0x4f0af0
-// FUNCTION: GOLDTL 0x4f2c00
+
+
 
 
 #include "rebrew_types.h"

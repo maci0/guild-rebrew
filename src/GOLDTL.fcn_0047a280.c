@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x47a280
+/* ADDRESS: GOLDTL 0x0047a280 */
 
 void __cdecl fcn_0047a280(unsigned short a1, unsigned short a2, int a3)
 {

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x475fd0
+
 // The len/count stores written once per arm; msvc6 merges the tails from
 // the data store onward.
 

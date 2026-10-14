@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x5913a0
-// FUNCTION: GOLDTL 0x0059a0e0
+
+
 
 extern unsigned short* g_7e431c;
 typedef struct

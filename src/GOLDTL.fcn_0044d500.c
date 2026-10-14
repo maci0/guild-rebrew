@@ -11,8 +11,8 @@ extern char g_662d18[];
 char* __cdecl fcn_0064f026(char* s, const char* delim);
 int __cdecl fcn_0064eeec(const char* s);
 
-// FUNCTION: GOLD 0x0044ec70
-// FUNCTION: GOLDTL 0x44d500
+/* ADDRESS: GOLD 0x0044ec70 */
+/* ADDRESS: GOLDTL 0x0044d500 */
 void __cdecl fcn_0044d500(int unused, char* s)
 {
 	char* t;

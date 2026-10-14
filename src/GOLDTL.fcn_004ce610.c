@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x4cda50
-// FUNCTION: GOLDTL 0x4ce610
+
+
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 unsigned short* __cdecl fcn_00502850(void);

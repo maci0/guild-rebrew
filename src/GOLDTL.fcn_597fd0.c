@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x597fd0
+
 
 // fcn_0058f700 — do r = fcn_005309d0(0x58f700, 0x67fff); while (r != 0).
 

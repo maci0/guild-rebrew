@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00402ac0
+
 // fcn_00402ac0 — find node with [n+0x34]==a in 0x1468ae0 table.
 
 int __cdecl fcn_00402ac0(int a)

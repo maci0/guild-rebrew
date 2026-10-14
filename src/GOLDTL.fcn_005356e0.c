@@ -4,7 +4,7 @@ typedef void* HWND;
 extern HWND g_774940;
 extern int g_77496c;
 
-// FUNCTION: GOLDTL 0x5356e0
+
 
 __declspec(dllimport) int __stdcall PeekMessageA(void*, HWND, unsigned int, unsigned int, unsigned int);
 __declspec(dllimport) int __stdcall GetMessageA(void*, HWND, unsigned int, unsigned int);

@@ -17,7 +17,7 @@ int __cdecl fcn_004a5340(unsigned short* e, int n, int* lim, float a4, float r, 
 int __cdecl fcn_0050b810(int a, char b);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-// FUNCTION: GOLDTL 0x4ab910
+/* ADDRESS: GOLDTL 0x004ab910 */
 int __cdecl fcn_004ab910(int a1, unsigned short* a2, int a3, char* a4)
 {
 	int lim;

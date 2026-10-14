@@ -20,7 +20,7 @@ extern signed char g_772510;
 int __cdecl fcn_00466190(int);
 int __cdecl fcn_0047cba0(int, int, int, int, int);
 
-// FUNCTION: GOLDTL 0x00469ea0
+/* ADDRESS: GOLDTL 0x00469ea0 */
 
 int __cdecl fcn_00469ea0(int a1, int a2, int idx, int a4)
 {

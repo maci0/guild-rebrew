@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00410430
+
 
 /* Import-thunk forwarder: pushes its arg straight into the IAT slot
  * at 0x005eb008. Declared via function pointer so the call emits

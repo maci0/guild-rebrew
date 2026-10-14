@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x538790
+
 
 void __cdecl fcn_0042de60(void);
 void __cdecl vfs_exit(char);

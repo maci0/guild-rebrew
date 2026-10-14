@@ -2,7 +2,7 @@
 
 extern char* g_1015ea0;
 
-// FUNCTION: GOLDTL 0x468c30
+/* ADDRESS: GOLDTL 0x00468c30 */
 void __cdecl fcn_00468c30(int slot, int n, char* out)
 {
 	char buf[0x400];

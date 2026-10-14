@@ -1,6 +1,6 @@
-// FUNCTION: GOLD 0x00401040
-// FUNCTION: GOLDTL 0x401040
-// SIZE: 67
+
+
+
 
 char* __cdecl strchr(const char*, int);
 

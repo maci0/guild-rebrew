@@ -8,8 +8,8 @@ struct msgbuf_4c4570 {
 extern unsigned char g_aed224;
 extern char* g_aed32c;
 
-// FUNCTION: GOLD 0x004c3c00
-// FUNCTION: GOLDTL 0x4c4570
+/* ADDRESS: GOLD 0x004c3c00 */
+/* ADDRESS: GOLDTL 0x004c4570 */
 
 int __cdecl fcn_004c4570(unsigned char size, unsigned char count, unsigned short off, char* src)
 {

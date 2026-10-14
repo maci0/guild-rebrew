@@ -25,7 +25,7 @@ int __cdecl fcn_0045c5b0(char* name, fcn_0043f7e0_Tint tint, int a, int b);
 void __cdecl fcn_0045ce90(int anim);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
-// FUNCTION: GOLDTL 0x43f7e0
+/* ADDRESS: GOLDTL 0x0043f7e0 */
 int __cdecl fcn_0043f7e0(fcn_0043f7e0_Floor* o, char* name, int slot)
 {
 	fcn_0043f7e0_Tint tint;

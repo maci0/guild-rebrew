@@ -83,7 +83,7 @@ fcn_0046eda0_Surf* __cdecl fcn_004770a0(fcn_0046eda0_Desc* d, int kind);
 void __cdecl fcn_00476620(int a1, int a2, int w, int h, fcn_0046eda0_Surf* src, int a6, int a7, fcn_0046eda0_Surf* dst);
 void __cdecl fcn_00475f80(fcn_0046eda0_Surf* s);
 
-// FUNCTION: GOLDTL 0x0046eda0
+/* ADDRESS: GOLDTL 0x0046eda0 */
 void __cdecl fcn_0046eda0(int w, int h, int win)
 {
 	fcn_0046eda0_Desc d;

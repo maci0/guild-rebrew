@@ -16,8 +16,8 @@ extern unsigned int g_14cb8e8;
 void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void*);
 
-// FUNCTION: GOLD 0x00427570
-// FUNCTION: GOLDTL 0x425d90
+/* ADDRESS: GOLD 0x00427570 */
+/* ADDRESS: GOLDTL 0x00425d90 */
 
 /* Registers a named script variable bound to a C variable. */
 struct var_425d90* __cdecl fcn_00425d90(char* name, void* ptr, int type)

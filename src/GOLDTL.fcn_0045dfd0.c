@@ -2,7 +2,7 @@
 
 int __cdecl fcn_0045df20(z_streamp strm);
 
-// FUNCTION: GOLDTL 0x45dfd0
+/* ADDRESS: GOLDTL 0x0045dfd0 */
 int __cdecl fcn_0045dfd0(z_streamp dest, z_streamp source)
 {
 	deflate_state* ds;

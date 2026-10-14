@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005d7470
-// FUNCTION: GOLDTL 0x005e3fa0
+
+
 
 extern unsigned short g_7ea3c0[];
 typedef struct VFS_DIR VFS_DIR;

@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00509eb0
-// FUNCTION: GOLDTL 0x0050d2f0
+
+
 
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);

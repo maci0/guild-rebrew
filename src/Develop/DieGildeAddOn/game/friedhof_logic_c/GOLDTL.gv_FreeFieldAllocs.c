@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004f0180
-// FUNCTION: GOLDTL 0x4f2290
+
+
 
 extern void __cdecl m_FreeTracked(void* ptr);
 

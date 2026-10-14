@@ -4,8 +4,8 @@ void __cdecl fcn_004432d0(int mode, int a2);
 void __cdecl fcn_00455350(char* obj, char* pos, float* out);
 void __cdecl fcn_00414960(float* n, float* m, char* obj);
 
-// FUNCTION: GOLD 0x004a66f0
-// FUNCTION: GOLDTL 0x4a6160
+/* ADDRESS: GOLD 0x004a66f0 */
+/* ADDRESS: GOLDTL 0x004a6160 */
 int __cdecl fcn_004a6160(char* a, float* pa, char* b, float* pb)
 {
 	struct {

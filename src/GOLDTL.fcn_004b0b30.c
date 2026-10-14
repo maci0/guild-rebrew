@@ -16,8 +16,8 @@ struct range_4b0b30 {
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-// FUNCTION: GOLD 0x004b09f0
-// FUNCTION: GOLDTL 0x4b0b30
+/* ADDRESS: GOLD 0x004b09f0 */
+/* ADDRESS: GOLDTL 0x004b0b30 */
 
 int __cdecl fcn_004b0b30(int a1, int a2, char* a3)
 {

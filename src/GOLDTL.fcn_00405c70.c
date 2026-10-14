@@ -5,8 +5,8 @@ unsigned short __cdecl gm_RandomMod(int);
 char __cdecl fcn_00407e30(char*, float*, float*, int, int, int*, int*, int, int);
 void __cdecl fcn_0045b920(char*, int, int, int);
 
-// FUNCTION: GOLD 0x00405160
-// FUNCTION: GOLDTL 0x405c70
+/* ADDRESS: GOLD 0x00405160 */
+/* ADDRESS: GOLDTL 0x00405c70 */
 
 /* Places a marker on a free cell near a position of the current room map. */
 int __cdecl fcn_00405c70(float* pos, int marker)

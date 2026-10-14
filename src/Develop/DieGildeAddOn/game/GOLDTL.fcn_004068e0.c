@@ -6,8 +6,8 @@ void __cdecl fcn_004050c0(char*);
 int __cdecl fcn_004042b0(char*);
 void __cdecl fcn_004045c0(char*);
 
-// FUNCTION: GOLD 0x00405d40
-// FUNCTION: GOLDTL 0x4068e0
+/* ADDRESS: GOLD 0x00405d40 */
+/* ADDRESS: GOLDTL 0x004068e0 */
 
 /* Steps a play-motion event: loads the motion on the first step, fires the
  * follow-up command at its trigger frame and finishes once it has run out. */

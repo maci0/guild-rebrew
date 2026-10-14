@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4c7310
+
 
 int __cdecl amt_ValidateOfficeCandidate(char*);
 

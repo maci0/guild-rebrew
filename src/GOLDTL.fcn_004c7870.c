@@ -10,8 +10,8 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 char* __cdecl fcn_00508e40(int);
 
-// FUNCTION: GOLD 0x004c6cd0
-// FUNCTION: GOLDTL 0x004c7870
+/* ADDRESS: GOLD 0x004c6cd0 */
+/* ADDRESS: GOLDTL 0x004c7870 */
 
 int __cdecl fcn_004c7870(int cmd, char* result)
 {

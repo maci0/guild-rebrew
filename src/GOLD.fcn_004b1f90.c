@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x004b1f90
+
 
 extern unsigned char g_006f0724; /* 0x006f0724 */
 

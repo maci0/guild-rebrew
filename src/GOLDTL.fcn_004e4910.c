@@ -19,8 +19,8 @@ void __cdecl gv_Free3Fields(int);
 void __cdecl fcn_00433780(int);
 void __cdecl fcn_00442e30(void);
 
-// FUNCTION: GOLDTL 0x4e4910
-// FUNCTION: GOLD 0x004e30c0
+/* ADDRESS: GOLDTL 0x004e4910 */
+/* ADDRESS: GOLD 0x004e30c0 */
 
 void __cdecl fcn_004e4910(void)
 {

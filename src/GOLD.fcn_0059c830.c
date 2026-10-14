@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0059c830
-// FUNCTION: GOLDTL 0x5a59b0
+/* ADDRESS: GOLD 0x0059c830 */
+/* ADDRESS: GOLDTL 0x005a59b0 */
 
 // fcn_0059c830 — count non-(-1) of 16 entries (stride 0x1c).
 

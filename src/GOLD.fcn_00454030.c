@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00454030
+/* ADDRESS: GOLD 0x00454030 */
 // fcn_00454030 — copy 4x4 matrix (src stride 0x10).
 
 void __cdecl fcn_00454030(int* out, int* src)

@@ -4,7 +4,7 @@ extern char g_1052a40[];
 void __cdecl fcn_00459be0(int a);
 int __cdecl fcn_00459cd0(char* p);
 
-// FUNCTION: GOLDTL 0x45a1c0
+/* ADDRESS: GOLDTL 0x0045a1c0 */
 int __cdecl fcn_0045a1c0(void)
 {
 	int n;

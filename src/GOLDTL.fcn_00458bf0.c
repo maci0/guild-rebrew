@@ -45,7 +45,7 @@ Mat* __stdcall fcn_005eb970(Mat*, Mat*, Mat*);
 void __cdecl fcn_004372d0(int, int, int, int, int);
 void __cdecl fcn_00458d20(Ent*);
 
-// FUNCTION: GOLDTL 0x00458bf0
+/* ADDRESS: GOLDTL 0x00458bf0 */
 
 void __cdecl fcn_00458bf0(Ent* n)
 {

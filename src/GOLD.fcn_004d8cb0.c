@@ -9,7 +9,7 @@ void* __cdecl fcn_00473640(int, int, char*, int);
 void __cdecl fcn_004760a0(void*, int);
 void __cdecl fcn_004731c0(int, int, int, int);
 
-// FUNCTION: GOLD 0x004d8cb0
+/* ADDRESS: GOLD 0x004d8cb0 */
 /* Twin of GOLDTL 0x4da510 without its (short) truncation of the x argument. */
 
 void __cdecl fcn_004d8cb0(int a1, int a2, int a3)

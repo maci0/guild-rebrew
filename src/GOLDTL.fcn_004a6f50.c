@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x4a74e0
-// FUNCTION: GOLDTL 0x4a6f50
+
+
 
 typedef struct Seq {
 	int state;

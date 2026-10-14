@@ -29,7 +29,7 @@ typedef struct
 void __cdecl fcn_00438d70(char* o, int a, int b, int c);
 void __cdecl fcn_00438ba0(char* o, int a, int b, int c);
 
-// FUNCTION: GOLDTL 0x439e70
+/* ADDRESS: GOLDTL 0x00439e70 */
 void __cdecl fcn_00439e70(char* o)
 {
 	int i;

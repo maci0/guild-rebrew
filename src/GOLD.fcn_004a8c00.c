@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x004a8c00
+/* ADDRESS: GOLD 0x004a8c00 */
 // fcn_004a8c00 — no-op.
 
 void __cdecl fcn_004a8c00(void)

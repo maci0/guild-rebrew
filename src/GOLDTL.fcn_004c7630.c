@@ -1,13 +1,13 @@
-// GLOBAL: GOLDTL 0x68aec4
+/* ADDRESS: GOLDTL 0x0068aec4 */
 extern char g_68aec4[];
-// GLOBAL: GOLDTL 0xaed328
+/* ADDRESS: GOLDTL 0x00aed328 */
 extern unsigned int g_aed328;
-// GLOBAL: GOLDTL 0xfb5740
+/* ADDRESS: GOLDTL 0x00fb5740 */
 extern char* g_fb5740;
-// GLOBAL: GOLDTL 0x1005820
+/* ADDRESS: GOLDTL 0x01005820 */
 extern unsigned int g_1005820;
-// FUNCTION: GOLD 0x004c6a90
-// FUNCTION: GOLDTL 0x4c7630
+
+
 
 int __cdecl m_alloc(int, char*);
 

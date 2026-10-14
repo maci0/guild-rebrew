@@ -13,9 +13,10 @@ reproduce its slots.
 import re
 from pathlib import Path
 
-import pefile
+import lief
 
-REFERENCE = "original/Server/server.dll"
+from rebrew.config import load_config
+
 SOURCE = "src/crt_region/crt_imports.c"
 # KERNEL32 imports forced in the reference's load order: Error.c's twenty, the first of the game's library
 # pass. The game objects' own references load the rest of that pass in object order (vfs.c's discarded file
@@ -38,11 +39,27 @@ def main() -> None:
         m[1].split("@")[0]: m[1]
         for m in re.finditer(r'/include:__imp__([^"]+)"', (root / SOURCE).read_text())
     }
-    pe = pefile.PE(str(root / REFERENCE))
+    cfg = load_config(root, target="server.dll")
+    pe = lief.PE.parse(str(cfg.target_binary))
+    if pe is None:
+        raise SystemExit(f"cannot parse {cfg.target_binary}")
+    # Proven WinSock ordinal spellings in this server's import recipe.
+    ordinals = {1: "accept", 2: "bind", 3: "closesocket", 8: "htonl", 9: "htons",
+                10: "ioctlsocket", 13: "listen", 16: "recv", 19: "send",
+                20: "sendto", 21: "setsockopt", 22: "shutdown", 23: "socket",
+                111: "WSAGetLastError", 115: "WSAStartup", 116: "WSACleanup"}
     load_order: dict[str, list[str]] = {}
-    for entry in pe.DIRECTORY_ENTRY_IMPORT:
-        rows = sorted(enumerate(entry.imports), key=lambda p: (p[1].hint_name_table_rva or 0, p[0]))
-        load_order[entry.dll.decode().upper()] = [imp.name.decode() for _, imp in rows]
+    for entry in pe.imports:
+        rows = sorted(enumerate(entry.entries), key=lambda p: (0 if p[1].is_ordinal else p[1].data, p[0]))
+        names = []
+        for _, imp in rows:
+            if imp.is_ordinal:
+                if entry.name.upper() != "WS2_32.DLL" or imp.ordinal not in ordinals:
+                    raise SystemExit(f"unsupported ordinal {entry.name}!{imp.ordinal}")
+                names.append(ordinals[imp.ordinal])
+            else:
+                names.append(imp.name)
+        load_order[entry.name.upper()] = names
     ordered = (
         load_order["KERNEL32.DLL"][:GAME_KERNEL32_IMPORTS]
         + load_order["USER32.DLL"]

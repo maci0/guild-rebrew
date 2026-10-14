@@ -5,8 +5,8 @@ typedef struct Stat {
 
 void __cdecl fcn_004f4830(int a, Stat* buf);
 
-// FUNCTION: GOLD 0x4911f0
-// FUNCTION: GOLDTL 0x4907c0
+/* ADDRESS: GOLD 0x004911f0 */
+/* ADDRESS: GOLDTL 0x004907c0 */
 int __cdecl fcn_004907c0(char* e, int a2, int* out)
 {
 	Stat st;

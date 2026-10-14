@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004c6750
-// FUNCTION: GOLDTL 0x4c72e0
+
+
 
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 

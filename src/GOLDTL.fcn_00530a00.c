@@ -10,8 +10,8 @@ struct s_7f4ca0 {
 extern char g_7f4ca0[];
 extern char* g_7e4260[32];
 
-// FUNCTION: GOLD 0x0052b2d0
-// FUNCTION: GOLDTL 0x530a00
+
+
 
 #include <string.h>
 

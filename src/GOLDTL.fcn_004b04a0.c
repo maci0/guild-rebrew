@@ -5,8 +5,8 @@ int __cdecl fcn_0064eeec(char*);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl fcn_004c51a0(int, int, int, int);
 
-// FUNCTION: GOLD 0x004b0360
-// FUNCTION: GOLDTL 0x4b04a0
+/* ADDRESS: GOLD 0x004b0360 */
+/* ADDRESS: GOLDTL 0x004b04a0 */
 
 int __cdecl fcn_004b04a0(int* a1, int a2, char* a3)
 {

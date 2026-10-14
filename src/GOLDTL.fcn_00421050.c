@@ -1,17 +1,17 @@
-// GLOBAL: GOLD 0x1460ae0
+/* ADDRESS: GOLD 0x01460ae0 */
 extern int g_14cbca0;
-// GLOBAL: GOLD 0x1460af0
+/* ADDRESS: GOLD 0x01460af0 */
 extern int g_14cbcb0;
-// GLOBAL: GOLD 0x633160
+/* ADDRESS: GOLD 0x00633160 */
 extern int g_6b7d40;
-// GLOBAL: GOLD 0x5eb2c8
+/* ADDRESS: GOLD 0x005eb2c8 */
 extern void (__stdcall *g_662374)(int, int);
-// GLOBAL: GOLD 0x5eb2b0
+/* ADDRESS: GOLD 0x005eb2b0 */
 extern void (__stdcall *g_66234c)(int);
-// GLOBAL: GOLD 0x5eb2b8
+/* ADDRESS: GOLD 0x005eb2b8 */
 extern void (__stdcall *g_662360)(void);
-// FUNCTION: GOLD 0x00424c30
-// FUNCTION: GOLDTL 0x421050
+/* ADDRESS: GOLD 0x00424c30 */
+/* ADDRESS: GOLDTL 0x00421050 */
 
 void __cdecl fcn_00421050(void)
 {

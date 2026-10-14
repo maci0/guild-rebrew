@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004fc820
-// FUNCTION: GOLDTL 0x004fef80
+
+
 
 typedef struct
 {
@@ -41,8 +41,8 @@ float __cdecl fcn_004fef80(Obj28* p)
 	return v > g_662950 ? v : g_662950;
 }
 
-// FUNCTION: GOLD 0x004fc890
-// FUNCTION: GOLDTL 0x4feff0
+
+
 
 typedef struct
 {
@@ -79,8 +79,8 @@ float __cdecl fcn_004feff0(Bar24* a1)
 
 extern float g_6628a8;
 
-// FUNCTION: GOLD 0x4fc8e0
-// FUNCTION: GOLDTL 0x004ff040
+/* ADDRESS: GOLD 0x004fc8e0 */
+/* ADDRESS: GOLDTL 0x004ff040 */
 
 float __cdecl fcn_004ff040(Bar24* a1)
 {
@@ -95,7 +95,7 @@ float __cdecl fcn_004ff040(Bar24* a1)
 
 extern char g_7f4ca0[];
 
-// FUNCTION: GOLDTL 0x004ff080
+/* ADDRESS: GOLDTL 0x004ff080 */
 
 /* Named float addends: the two rounding stores die late and leave the
  * reference's fxch; fxch before faddp. */

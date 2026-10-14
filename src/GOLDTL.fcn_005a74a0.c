@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLD 0x59e360
-// FUNCTION: GOLDTL 0x005a74a0
+
+
 
 #include <string.h>
 #pragma intrinsic(strcpy, strcat)

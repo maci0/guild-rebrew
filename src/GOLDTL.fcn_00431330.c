@@ -11,7 +11,7 @@ void __cdecl fcn_00438b40(char* node, float* v);
 
 #define FRAMES_431330(an) (*(struct frame_431330**) (*(char**) ((an) + 0x68) + 0x15c))
 
-// FUNCTION: GOLDTL 0x431330
+/* ADDRESS: GOLDTL 0x00431330 */
 void __cdecl fcn_00431330(char* node, char* an, int t, int key, int flags)
 {
 	int cur;

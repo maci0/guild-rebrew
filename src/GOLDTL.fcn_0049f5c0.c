@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0049fb80
-// FUNCTION: GOLDTL 0x49f5c0
+
+
 
 typedef struct Small3i {
 	int code;

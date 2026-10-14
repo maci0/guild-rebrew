@@ -6,7 +6,7 @@ struct list_55d630 {
 	int n;
 };
 
-// FUNCTION: GOLDTL 0x55d630
+
 
 #include <string.h>
 

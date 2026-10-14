@@ -6,7 +6,7 @@ extern int g_67a370;
 #include "client_types.h"
 extern s_7e46c0 g_7e46c0[32];
 
-// FUNCTION: GOLDTL 0x532900
+
 
 void __cdecl fcn_00472880(int);
 char __cdecl fcn_00443e10(char*, int*);

@@ -3,8 +3,8 @@ extern char g_679060[];
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_005da820(char*, int*);
 
-// FUNCTION: GOLD 0x004f75e0
-// FUNCTION: GOLDTL 0x004f99d0
+/* ADDRESS: GOLD 0x004f75e0 */
+/* ADDRESS: GOLDTL 0x004f99d0 */
 
 int __cdecl fcn_004f99d0(char* e, int* s)
 {

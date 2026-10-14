@@ -5,8 +5,8 @@ extern char* g_6b7e98;
 void __cdecl fcn_00425bf0(char*, int, const char*);
 void __cdecl fcn_004056a0(char*, int);
 
-// FUNCTION: GOLD 0x40c9a0
-// FUNCTION: GOLDTL 0x40d8c0
+/* ADDRESS: GOLD 0x0040c9a0 */
+/* ADDRESS: GOLDTL 0x0040d8c0 */
 
 /* SetCharacterCamera(): puts the camera into one of the character views. */
 int __cdecl SetCharacterCamera(char** ch, char** view)

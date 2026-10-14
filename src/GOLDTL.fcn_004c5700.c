@@ -1,8 +1,8 @@
 #include "client_types.h"
-// GLOBAL: GOLDTL 0x7f4c00
+/* ADDRESS: GOLDTL 0x007f4c00 */
 extern pos14_7f4c00 g_7f4c00;
-// FUNCTION: GOLD 0x004c4d40
-// FUNCTION: GOLDTL 0x4c5700
+
+
 
 int __cdecl fcn_004c4330(void*);
 

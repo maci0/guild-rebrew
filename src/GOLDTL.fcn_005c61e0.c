@@ -1,6 +1,6 @@
 #include "g_6abb08.h"
-// FUNCTION: GOLD 0x005ba770
-// FUNCTION: GOLDTL 0x5c61e0
+
+
 
 extern Offer g_6abb08[];
 

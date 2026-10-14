@@ -7,7 +7,7 @@ extern int g_6772bc;
 extern int g_6772c0;
 extern int g_1040494;
 extern int g_1040490;
-// FUNCTION: GOLDTL 0x00525ef0
+
 
 void __cdecl fcn_00473a90(int, int);
 

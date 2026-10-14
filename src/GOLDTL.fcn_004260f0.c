@@ -10,8 +10,8 @@ extern char* g_6b7eb8;
 extern void* g_14cb8e0;
 extern int g_14cb8e4;
 
-// FUNCTION: GOLD 0x4278d0
-// FUNCTION: GOLDTL 0x4260f0
+/* ADDRESS: GOLD 0x004278d0 */
+/* ADDRESS: GOLDTL 0x004260f0 */
 void* __cdecl fcn_004260f0(char* ctx, char* name)
 {
 	char* scope;

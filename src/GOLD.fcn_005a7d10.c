@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005a7d10
+
 
 extern short g_14ce8c0;
 extern short g_14ce8c2;

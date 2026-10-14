@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005e3e60
+
 
 extern unsigned short g_7ea3c0[];
 

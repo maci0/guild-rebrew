@@ -31,8 +31,8 @@ typedef struct Actor {
 
 extern char g_1008540[];
 
-// FUNCTION: GOLD 0x004a4ae0
-// FUNCTION: GOLDTL 0x004a4550
+/* ADDRESS: GOLD 0x004a4ae0 */
+/* ADDRESS: GOLDTL 0x004a4550 */
 int __cdecl fcn_004a4550(float* s1, float* s2, int idx, Actor* e)
 {
 	Deal* t;

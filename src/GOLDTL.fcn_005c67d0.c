@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005c67d0
+
 
 #include "client_types.h"
 typedef Btn_776c60 Btn;

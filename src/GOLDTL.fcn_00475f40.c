@@ -6,7 +6,7 @@ typedef struct {
 } fcn_00475f40_image;
 // SIZE 0x20
 
-// FUNCTION: GOLDTL 0x475f40
+/* ADDRESS: GOLDTL 0x00475f40 */
 
 void __cdecl fcn_00475f40(int a1, int a2, int w, int h, int a5, int a6, int a7, fcn_00475f40_image* img)
 {

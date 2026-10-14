@@ -1,7 +1,7 @@
 extern char* g_6b7e98;
-// GLOBAL: GOLD 0x5f2ba4
+/* ADDRESS: GOLD 0x005f2ba4 */
 extern char g_676c24[];
-// FUNCTION: GOLD 0x40f6f0
+
 
 // SIZE 0xcd
 typedef struct {

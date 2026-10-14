@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00507f10
+
 
 #define MIN(a, b) ((b) < (a) ? (b) : (a))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))

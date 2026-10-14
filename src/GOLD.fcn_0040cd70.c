@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0040cd70
+/* ADDRESS: GOLD 0x0040cd70 */
 // fcn_0040cd70 — count nodes with [n+0x88]==[0x5fb5b0].
 
 int __cdecl fcn_0040cd70(void)

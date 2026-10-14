@@ -36,7 +36,7 @@ void __cdecl fcn_00471e30(int);
 
 typedef struct { char pad[0x48]; int x48; int x4c; } S58;
 
-// FUNCTION: GOLDTL 0x0058e220
+/* ADDRESS: GOLDTL 0x0058e220 */
 int __cdecl fcn_0058e220(int a1, S58* a2)
 {
 	int h;

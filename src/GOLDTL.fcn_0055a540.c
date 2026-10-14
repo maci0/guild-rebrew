@@ -3,8 +3,8 @@ unsigned short __cdecl gm_RandomMod(int);
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-// FUNCTION: GOLD 0x00552450
-// FUNCTION: GOLDTL 0x55a540
+/* ADDRESS: GOLD 0x00552450 */
+/* ADDRESS: GOLDTL 0x0055a540 */
 
 void __cdecl fcn_0055a540(char* o)
 {

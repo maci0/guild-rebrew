@@ -1,10 +1,10 @@
 /* Owned (GOLDTL) by src/GOLDTL.fcn_004da4d0.c. */
 extern int g_772514;
-// GLOBAL: GOLDTL 0x772f1c
+/* ADDRESS: GOLDTL 0x00772f1c */
 extern int g_772f1c;
-// GLOBAL: GOLDTL 0x772f18
+/* ADDRESS: GOLDTL 0x00772f18 */
 extern int g_772f18;
-// GLOBAL: GOLDTL 0x772f20
+/* ADDRESS: GOLDTL 0x00772f20 */
 extern int g_772f20;
 
 void __cdecl fcn_0046f2c0(int, int);
@@ -13,7 +13,7 @@ void* __cdecl fcn_0046fac0(int, int, char*, int);
 void __cdecl fcn_00472900(void*, int);
 void __cdecl fcn_0046f740(int, int, int, int);
 
-// FUNCTION: GOLDTL 0x4da510
+/* ADDRESS: GOLDTL 0x004da510 */
 
 /* The positional GOLD twin 0x4d8cb0 is NOT the same build: its first 0xcf bytes
  * match, then the a3 branches drop the reference's `movsx eax,dx` truncation

@@ -13,8 +13,8 @@ extern Rec18_68da68 g_9a9220[42];
 char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_005b2900(char*, char*, char*);
 
-// FUNCTION: GOLD 0x004e6c50
-// FUNCTION: GOLDTL 0x4e8810
+/* ADDRESS: GOLD 0x004e6c50 */
+/* ADDRESS: GOLDTL 0x004e8810 */
 
 int __cdecl fcn_004e8810(unsigned char* a1)
 {

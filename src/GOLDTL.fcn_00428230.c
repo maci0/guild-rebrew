@@ -16,8 +16,8 @@ int __cdecl fcn_004262b0(char*, const char*);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 void __cdecl fcn_00427c40(char*, int);
 
-// FUNCTION: GOLD 0x004299a0
-// FUNCTION: GOLDTL 0x428230
+/* ADDRESS: GOLD 0x004299a0 */
+/* ADDRESS: GOLDTL 0x00428230 */
 
 /* Starts a loaded script at its main entry point and logs the start. */
 int __cdecl fcn_00428230(char* script)

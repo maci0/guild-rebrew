@@ -8,8 +8,8 @@ struct stat_4b4dc0 {
 };
 // SIZE 0xc
 
-// FUNCTION: GOLD 0x004b4c50
-// FUNCTION: GOLDTL 0x4b4dc0
+/* ADDRESS: GOLD 0x004b4c50 */
+/* ADDRESS: GOLDTL 0x004b4dc0 */
 
 int __cdecl fcn_004b4dc0(int a0, int a1, char* a2)
 {

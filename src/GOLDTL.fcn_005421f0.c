@@ -20,8 +20,8 @@ struct s_7f4ca0 {
 
 extern char g_7f4ca0[];
 
-// FUNCTION: GOLD 0x0053a6b0
-// FUNCTION: GOLDTL 0x5421f0
+
+
 
 int __cdecl fcn_0050db40(struct s_7f4ca0*, int);
 float __cdecl fcn_004ff210(unsigned short, int);

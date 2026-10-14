@@ -1,8 +1,8 @@
 extern float g_6628a0;
 extern float g_6628a8;
 
-// FUNCTION: GOLD 0x4fc7a0
-// FUNCTION: GOLDTL 0x004fef00
+/* ADDRESS: GOLD 0x004fc7a0 */
+/* ADDRESS: GOLDTL 0x004fef00 */
 int __cdecl fcn_004fef00(char* p)
 {
 	float v;

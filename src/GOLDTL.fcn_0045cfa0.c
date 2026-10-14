@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x45cfa0
+
 // total = 0 is assigned twice: the reference stores the zero both before
 // and after the callback test.
 

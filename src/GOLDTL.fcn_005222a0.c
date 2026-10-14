@@ -13,7 +13,7 @@ extern char g_1043370[];
 extern char g_699b08;
 extern int g_67a370;
 
-// FUNCTION: GOLDTL 0x5222a0
+
 
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_004437a0(int);

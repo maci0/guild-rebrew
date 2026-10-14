@@ -78,7 +78,7 @@ void __cdecl fcn_00459b80(void);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, unsigned int, unsigned int);
 void __cdecl fcn_00452280(void);
 
-// FUNCTION: GOLDTL 0x00439020
+/* ADDRESS: GOLDTL 0x00439020 */
 char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 {
 	unsigned int n;

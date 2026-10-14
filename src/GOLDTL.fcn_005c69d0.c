@@ -1,10 +1,10 @@
 #include "client_types.h"
-// GLOBAL: GOLDTL 0x7774a0
+/* ADDRESS: GOLDTL 0x007774a0 */
 extern Loot_7774a0 g_7774a0[32];
-// GLOBAL: GOLD 0x6f3880
+/* ADDRESS: GOLD 0x006f3880 */
 extern Loot_7774a0 g_7774a0[32];
-// FUNCTION: GOLD 0x005baf60
-// FUNCTION: GOLDTL 0x5c69d0
+
+
 
 // SIZE 0x40
 typedef struct {

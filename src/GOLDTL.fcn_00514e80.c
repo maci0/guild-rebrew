@@ -1,6 +1,6 @@
 extern unsigned char* g_868050;
 
-// FUNCTION: GOLDTL 0x514e80
+
 
 #include <string.h>
 

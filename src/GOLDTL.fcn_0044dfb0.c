@@ -1,7 +1,7 @@
 void __cdecl fcn_004011f0(void* a, int* b);
 void* __cdecl m_alloc(int size, char* tag);
 
-// FUNCTION: GOLDTL 0x44dfb0
+/* ADDRESS: GOLDTL 0x0044dfb0 */
 void __cdecl fcn_0044dfb0(void* a, char* s)
 {
 	int* n;

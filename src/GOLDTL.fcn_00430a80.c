@@ -9,8 +9,8 @@ void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_0041d9e0(const char* msg);
 int __cdecl gzseek(void* gz, int off, int whence);
 
-// FUNCTION: GOLD 0x430fa0
-// FUNCTION: GOLDTL 0x430a80
+/* ADDRESS: GOLD 0x00430fa0 */
+/* ADDRESS: GOLDTL 0x00430a80 */
 
 /* vfs_fseek: seeks a plain, gzip or zip-member stream; zip members seek forward by reading. */
 int __cdecl fcn_00430a80(char* s, int off, int whence)

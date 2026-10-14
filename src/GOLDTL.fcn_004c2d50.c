@@ -7,7 +7,7 @@ extern int g_774930;
 
 void __cdecl fcn_004c2d90(float, int);
 
-// FUNCTION: GOLDTL 0x4c2d50
+/* ADDRESS: GOLDTL 0x004c2d50 */
 
 void __cdecl fcn_004c2d50(void)
 {

@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLD 0x557010
-// FUNCTION: GOLDTL 0x55f1f0
+
+
 
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;

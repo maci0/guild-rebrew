@@ -4,7 +4,7 @@ extern unsigned long g_14ce728;
 
 void __cdecl fcn_0045ce90(char* a);
 
-// FUNCTION: GOLDTL 0x45d040
+/* ADDRESS: GOLDTL 0x0045d040 */
 char __cdecl fcn_0045d040(char* a)
 {
 	void** t;

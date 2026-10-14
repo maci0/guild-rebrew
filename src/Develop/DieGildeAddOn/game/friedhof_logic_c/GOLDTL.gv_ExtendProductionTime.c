@@ -1,6 +1,6 @@
 /* gv_ExtendProductionTime - proper C */
 
-// FUNCTION: GOLDTL 0x4f2880
+
 
 
 #include "rebrew_types.h"

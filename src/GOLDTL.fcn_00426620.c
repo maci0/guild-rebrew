@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x427e00
-// FUNCTION: GOLDTL 0x426620
+/* ADDRESS: GOLD 0x00427e00 */
+/* ADDRESS: GOLDTL 0x00426620 */
 
 char* __cdecl fcn_00426620(char* s, int unused, char* end)
 {

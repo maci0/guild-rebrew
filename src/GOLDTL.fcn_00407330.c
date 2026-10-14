@@ -12,7 +12,7 @@ void __cdecl fcn_004379a0(char*, int, int, void*, Picks*);
 int __cdecl fcn_00406ee0(char*, Picks*);
 int __cdecl fcn_00404e40(unsigned short);
 
-// FUNCTION: GOLDTL 0x00407330
+/* ADDRESS: GOLDTL 0x00407330 */
 
 /* Fills p through the fcn_00406ee0 scene callback and returns a random
  * entry, or 0 when p.count is 0. The inventory entry also holds a second

@@ -5,8 +5,8 @@ void __cdecl fcn_004c6a00(void* msg);
 
 extern pos14_7f4c00 g_7f4c00;
 
-// FUNCTION: GOLD 0x004f9190
-// FUNCTION: GOLDTL 0x004fb650
+/* ADDRESS: GOLD 0x004f9190 */
+/* ADDRESS: GOLDTL 0x004fb650 */
 void __cdecl fcn_004fb650(int a1, int a2, int a3, int a4)
 {
 	int buf[10];
@@ -49,7 +49,7 @@ void __cdecl fcn_004fb650(int a1, int a2, int a3, int a4)
 	fcn_004c6a00(buf);
 }
 
-// FUNCTION: GOLDTL 0x004fb6e0
+/* ADDRESS: GOLDTL 0x004fb6e0 */
 void __cdecl fcn_004fb6e0(void)
 {
 	int buf[10];
@@ -84,7 +84,7 @@ void __cdecl fcn_004fb6e0(void)
 	fcn_004c6a00(buf);
 }
 
-// FUNCTION: GOLDTL 0x004fb740
+/* ADDRESS: GOLDTL 0x004fb740 */
 void __cdecl fcn_004fb740(void)
 {
 	int buf[10];
@@ -119,8 +119,8 @@ void __cdecl fcn_004fb740(void)
 	fcn_004c6a00(buf);
 }
 
-// FUNCTION: GOLD 0x4f9710
-// FUNCTION: GOLDTL 0x004fbc90
+/* ADDRESS: GOLD 0x004f9710 */
+/* ADDRESS: GOLDTL 0x004fbc90 */
 int __cdecl fcn_004fbc90(unsigned int* msg)
 {
 	int len;

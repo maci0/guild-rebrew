@@ -1,8 +1,8 @@
-// GLOBAL: GOLDTL 0x662a48
+/* ADDRESS: GOLDTL 0x00662a48 */
 extern double g_662a48;
 extern double g_6640e8;
 extern unsigned char g_773d75;
-// FUNCTION: GOLDTL 0x4b6fe0
+
 
 #include <string.h>
 

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// FUNCTION: GOLDTL 0x465590
+/* ADDRESS: GOLDTL 0x00465590 */
 int __cdecl fcn_00465590(char* s, void* buf, unsigned int len)
 {
 	char* p;

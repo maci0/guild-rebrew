@@ -15,8 +15,8 @@ extern char g_7f4ca0[];
 
 unsigned short __cdecl gm_RandomMod(int n);
 
-// FUNCTION: GOLD 0x48fea0
-// FUNCTION: GOLDTL 0x48f450
+/* ADDRESS: GOLD 0x0048fea0 */
+/* ADDRESS: GOLDTL 0x0048f450 */
 Ent* __cdecl fcn_0048f450(int owner)
 {
 	unsigned short list[8];

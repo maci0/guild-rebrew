@@ -10,7 +10,7 @@ struct s_1043370 {
 
 extern char g_1043370[];
 
-// FUNCTION: GOLDTL 0x510930
+
 
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00454560(int);

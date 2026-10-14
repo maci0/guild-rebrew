@@ -37,7 +37,7 @@ extern float g_67a2a8;
 
 float* __stdcall fcn_005ecf13(float*, float, float, float, float);
 
-// FUNCTION: GOLDTL 0x436df0
+/* ADDRESS: GOLDTL 0x00436df0 */
 
 /* Sets the viewport and the perspective projection, skipping whichever of
  * the two did not change since the last call. */

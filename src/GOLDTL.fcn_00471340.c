@@ -3,7 +3,7 @@ extern Obj_1038140 g_1038140[];
 
 void __cdecl fcn_004767f0(int a, int b, int c, int d, int e, int f, int g, int h);
 
-// FUNCTION: GOLDTL 0x471340
+/* ADDRESS: GOLDTL 0x00471340 */
 void __cdecl fcn_00471340(int k)
 {
 	char* base;

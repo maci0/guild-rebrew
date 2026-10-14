@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x45daf0
+
 
 #include "deflate.h"
 

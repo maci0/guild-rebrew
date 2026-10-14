@@ -15,8 +15,8 @@ extern void* g_6b7e9c;
 void __cdecl fcn_0041d9e0(const char*);
 int __cdecl fcn_00429e60(const char*);
 
-// FUNCTION: GOLD 0x42b5b0
-// FUNCTION: GOLDTL 0x429ed0
+/* ADDRESS: GOLD 0x0042b5b0 */
+/* ADDRESS: GOLDTL 0x00429ed0 */
 
 /* evt_ImportCommand: registers a script command with its argument types. */
 int __cdecl fcn_00429ed0(const char* name, void* fn, int flags, int nargs, ...)

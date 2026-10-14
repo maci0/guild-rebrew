@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4f5810
+/* ADDRESS: GOLDTL 0x004f5810 */
 
 // fcn_004f36e0 — first table (stride 0x2d) index equal to a, else -1.
 

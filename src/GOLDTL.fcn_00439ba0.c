@@ -9,7 +9,7 @@ typedef struct Node {
 } Node;
 // SIZE 0x218
 
-// FUNCTION: GOLDTL 0x439ba0
+/* ADDRESS: GOLDTL 0x00439ba0 */
 void __cdecl fcn_00439ba0(Node* a, Node* b)
 {
 	Node* p;

@@ -1,7 +1,7 @@
 /* gv_UpdateProductionProgress - advances a production slot's progress by the
  * building's production time, clamped to [0, 0xff]. */
 
-// FUNCTION: GOLDTL 0x4f2d90
+
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"

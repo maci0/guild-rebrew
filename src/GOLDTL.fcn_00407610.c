@@ -4,8 +4,8 @@ void __cdecl fcn_00441720(int, float*, int, int*, int*, float*);
 int __cdecl fcn_00413190(int);
 void __cdecl fcn_00438b40(char*, float*);
 
-// FUNCTION: GOLD 0x406a70
-// FUNCTION: GOLDTL 0x407610
+/* ADDRESS: GOLD 0x00406a70 */
+/* ADDRESS: GOLDTL 0x00407610 */
 
 /* Eases a character's height towards the ground of its map cell; returns
  * the cell type. */
@@ -58,7 +58,7 @@ typedef struct PairRun {
 	unsigned char* bytes;
 } PairRun;
 
-// FUNCTION: GOLDTL 0x407760
+/* ADDRESS: GOLDTL 0x00407760 */
 
 int __cdecl fcn_00407760(char* flags, PairRun* src, char* dst, char* scale)
 {

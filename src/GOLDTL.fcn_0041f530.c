@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004234a0
-// FUNCTION: GOLDTL 0x0041f530
+
+
 
 typedef struct Events Events;
 

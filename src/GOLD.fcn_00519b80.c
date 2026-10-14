@@ -1,7 +1,7 @@
 extern int g_633444;
 extern char* g_889f74;
 
-// FUNCTION: GOLD 0x00519b80
+
 /* Twin of GOLDTL 0x51eb20; the back-pointer field sits at 0x200 in GOLD, 0x204 in GOLDTL. */
 
 void __cdecl fcn_004478e0(int, int);

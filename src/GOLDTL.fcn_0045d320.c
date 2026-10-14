@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x45d320
+
 
 // SIZE 0x70
 typedef struct Tex {

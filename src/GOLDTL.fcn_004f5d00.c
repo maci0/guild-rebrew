@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004f3910
-// FUNCTION: GOLDTL 0x004f5d00
+
+
 
 #include "client_types.h"
 #pragma pack(push, 1)

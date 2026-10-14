@@ -32,7 +32,7 @@ void __cdecl fcn_00438b40(Obj* o, V8* v);
 void __cdecl fcn_00438cb0(Obj* o, V6* v);
 void __cdecl fcn_00449f90(Obj* o, int a, int id);
 
-// FUNCTION: GOLDTL 0x43a140
+/* ADDRESS: GOLDTL 0x0043a140 */
 Obj* __cdecl fcn_0043a140(Obj* src)
 {
 	Obj* o;

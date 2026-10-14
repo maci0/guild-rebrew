@@ -57,8 +57,8 @@ static __inline void send_hit(int id)
 	fcn_004c5530(&s);
 }
 
-// FUNCTION: GOLD 0x5d2870
-// FUNCTION: GOLDTL 0x005deda0
+/* ADDRESS: GOLD 0x005d2870 */
+/* ADDRESS: GOLDTL 0x005deda0 */
 
 int __cdecl fcn_005deda0(char* e, char* a2)
 {

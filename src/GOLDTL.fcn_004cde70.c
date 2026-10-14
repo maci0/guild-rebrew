@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004cd2f0
-// FUNCTION: GOLDTL 0x4cde70
+
+
 
 char* __cdecl fcn_00501510(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"

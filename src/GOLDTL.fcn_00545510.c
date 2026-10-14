@@ -1,8 +1,8 @@
 extern int g_7749d4;
 #include "client_types.h"
 extern unit_77e980 g_77e980[1024];
-// FUNCTION: GOLD 0x53d7f0
-// FUNCTION: GOLDTL 0x00545510
+
+
 
 void __cdecl fcn_00546190(char*);
 

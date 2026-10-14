@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x45cdf0
+/* ADDRESS: GOLD 0x0045cdf0 */
 /* GOLD twin of GOLDTL fcn_00456df0: entity slots at 0x754, 0x80 bytes each
  * (GOLDTL 0x1384, 0x9c); flag bit 4 of byte 0x211 (GOLDTL bit 1 of 0x215). */
 void __cdecl fcn_0045cdf0(char* a)

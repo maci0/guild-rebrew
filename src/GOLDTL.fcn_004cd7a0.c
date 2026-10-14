@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x4ccc20
-// FUNCTION: GOLDTL 0x4cd7a0
+
+
 
 #define MINF(a, b) ((a) < (b) ? (a) : (b))
 #define MAXF(a, b) ((a) > (b) ? (a) : (b))

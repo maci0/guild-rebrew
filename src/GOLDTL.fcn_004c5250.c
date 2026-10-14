@@ -1,6 +1,6 @@
 #include "client_packet_queue.h"
-// FUNCTION: GOLD 0x004c48e0
-// FUNCTION: GOLDTL 0x4c5250
+/* ADDRESS: GOLD 0x004c48e0 */
+/* ADDRESS: GOLDTL 0x004c5250 */
 
 
 

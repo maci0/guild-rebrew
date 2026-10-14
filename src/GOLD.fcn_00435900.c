@@ -1,6 +1,6 @@
 extern float g_5eb788;
 
-// FUNCTION: GOLD 0x435900
+/* ADDRESS: GOLD 0x00435900 */
 char* __cdecl fcn_00435900(char* a)
 {
 	float best;

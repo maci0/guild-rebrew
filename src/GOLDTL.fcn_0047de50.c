@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLDTL 0x47de50
+
 
 #include <stdio.h>
 

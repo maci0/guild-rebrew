@@ -3,8 +3,8 @@ int __cdecl fcn_0048e230(int a1, char* p, int a3);
 int __cdecl fcn_0048e360(int a1, char* p, int a3);
 int __cdecl fcn_0048e4b0(int a1, char* p, int a3);
 
-// FUNCTION: GOLDTL 0x48e050
-// FUNCTION: GOLD 0x0048eaa0
+/* ADDRESS: GOLDTL 0x0048e050 */
+/* ADDRESS: GOLD 0x0048eaa0 */
 int __cdecl fcn_0048e050(int a1, char* p, int a3)
 {
 	switch (*(int*) (p + 0x10)) {

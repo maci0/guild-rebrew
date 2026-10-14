@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x455700
+
 
 float* __stdcall fcn_005eb970(float*, float*, float*);
 

@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004012e0
-// FUNCTION: GOLDTL 0x401320
+
+
 // Client twin of GOLD's fcn_00401320 (0x401320, 23 B): the client calls
 // fcn_00401260 on four consecutive ints; GOLD calls fcn_00430e30 once.
 

@@ -7,7 +7,7 @@ extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
 int __cdecl fcn_00475be0(char* sub);
 
-// FUNCTION: GOLD 0x00475ca0
+/* ADDRESS: GOLD 0x00475ca0 */
 void __cdecl fcn_00475ca0(int id, int a2, int a3, int a4, int a5)
 {
 	GuiEnt* e;

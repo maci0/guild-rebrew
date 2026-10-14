@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0043b920
+
 // fcn_0043b920 — { int x[3]; x[0]=p2; x[1]=p3; x[2]=p4; fcn_0043b860(p1, x); }.
 
 int __cdecl fcn_0043b860(int, int*);

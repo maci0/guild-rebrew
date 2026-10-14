@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004fe330
-// FUNCTION: GOLDTL 0x500e00
+/* ADDRESS: GOLD 0x004fe330 */
+/* ADDRESS: GOLDTL 0x00500e00 */
 
 // fcn_004fe330 — (short)a[1] % 4.
 

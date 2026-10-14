@@ -2,7 +2,7 @@ extern int g_6b7fac;
 
 void __cdecl fcn_00438ac0(char* p, int a);
 
-// FUNCTION: GOLDTL 0x43ac80
+/* ADDRESS: GOLDTL 0x0043ac80 */
 char __cdecl fcn_0043ac80(char* a, char on)
 {
 	if (on) {

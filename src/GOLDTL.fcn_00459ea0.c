@@ -3,7 +3,7 @@ int __cdecl fcn_00459c70(char* a);
 int __cdecl fcn_00459cd0(char* a);
 int __cdecl fcn_00459d00(char* a, int b);
 
-// FUNCTION: GOLDTL 0x00459ea0
+/* ADDRESS: GOLDTL 0x00459ea0 */
 
 /* Sums into *size the bytes the parts of o selected by flags occupy. */
 unsigned char __cdecl fcn_00459ea0(char* o, unsigned int flags, int* size)

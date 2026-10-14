@@ -13,7 +13,7 @@ typedef struct Node {
 void __cdecl fcn_0043cb20(Node* a, Node* b);
 void __cdecl fcn_0043ca20(Node* b);
 
-// FUNCTION: GOLD 0x43cb80
+/* ADDRESS: GOLD 0x0043cb80 */
 void __cdecl fcn_0043cb80(Node* a, Node* b)
 {
 	b->root = a == 0;

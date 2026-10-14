@@ -19,8 +19,8 @@ void __cdecl fcn_004f4830(int a, Stat* st);
 #define MAXF(a, b) (((a) > (b)) ? (a) : (b))
 #define MINF(a, b) (((a) < (b)) ? (a) : (b))
 
-// FUNCTION: GOLD 0x00491be0
-// FUNCTION: GOLDTL 0x4911b0
+/* ADDRESS: GOLD 0x00491be0 */
+/* ADDRESS: GOLDTL 0x004911b0 */
 int __cdecl fcn_004911b0(Ent* e, int a2, int* out)
 {
 	Stat st;

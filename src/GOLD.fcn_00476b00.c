@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00476b00
+
 // fcn_00476b00 — for table: if(*p) fcn_00476890(*p, [0x6ed924]).
 
 int __cdecl fcn_00476890(int, int);

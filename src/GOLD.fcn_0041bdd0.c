@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0041bdd0
+/* ADDRESS: GOLD 0x0041bdd0 */
 // fcn_0041bdd0 — if(dep || obj) 1; r=vfn; return r<=0?1:0.
 
 int __cdecl fcn_0041bdd0(void)

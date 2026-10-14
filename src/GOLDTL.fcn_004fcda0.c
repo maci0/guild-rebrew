@@ -46,7 +46,7 @@ void __cdecl fcn_004c51a0(int, int, char, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c6ae0(int, int);
 
-// FUNCTION: GOLDTL 0x4fcda0
+/* ADDRESS: GOLDTL 0x004fcda0 */
 int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
 {
 	Rec18 q;

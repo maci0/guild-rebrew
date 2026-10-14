@@ -68,7 +68,7 @@ Plane* __stdcall fcn_005ed45f(void*, Plane*);
 void __cdecl fcn_004379a0(int, int, int, void (__cdecl*)(void), void*);
 void __cdecl fcn_00451f80(void);
 
-// FUNCTION: GOLDTL 0x00451df0
+/* ADDRESS: GOLDTL 0x00451df0 */
 
 void __cdecl fcn_00451df0(Ent* e)
 {

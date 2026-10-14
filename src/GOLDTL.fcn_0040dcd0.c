@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0040cda0
-// FUNCTION: GOLDTL 0x0040dcd0
+
+
 
 extern char* g_6b7e98;
 float __cdecl fcn_00444700(int h, char* pos);

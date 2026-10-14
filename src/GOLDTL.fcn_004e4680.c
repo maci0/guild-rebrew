@@ -25,8 +25,8 @@ static __inline int any_pending(void)
 	return 0;
 }
 
-// FUNCTION: GOLD 0x004e2e00
-// FUNCTION: GOLDTL 0x4e4680
+/* ADDRESS: GOLD 0x004e2e00 */
+/* ADDRESS: GOLDTL 0x004e4680 */
 
 void __cdecl fcn_004e4680(void)
 {

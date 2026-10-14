@@ -35,7 +35,7 @@ extern int g_67d96c;
 
 void __cdecl fcn_00478d50(int x, int y, Tex* t, char* sh);
 
-// FUNCTION: GOLDTL 0x479b70
+/* ADDRESS: GOLDTL 0x00479b70 */
 int __cdecl fcn_00479b70(int x, int y, Tex* t, Bank* b, int idx)
 {
 	char msg[0x80];

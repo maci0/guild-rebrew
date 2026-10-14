@@ -12,7 +12,7 @@ typedef struct Bits8 {
 
 extern char* g_104049c;
 
-// FUNCTION: GOLDTL 0x459d00
+/* ADDRESS: GOLDTL 0x00459d00 */
 int __cdecl fcn_00459d00(char* a)
 {
 	int r;

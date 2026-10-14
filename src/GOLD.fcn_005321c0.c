@@ -1,6 +1,6 @@
 #include "Develop/Units/Msx/msx.h"
 
-// FUNCTION: GOLD 0x005321c0
+
 
 #include <stdio.h>
 

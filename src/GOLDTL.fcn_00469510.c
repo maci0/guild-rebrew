@@ -1,9 +1,9 @@
-// GLOBAL: GOLDTL 0x102cbc0
+/* ADDRESS: GOLDTL 0x0102cbc0 */
 extern char g_102cbc0[];
-// GLOBAL: GOLD 0xfa5aa0
+/* ADDRESS: GOLD 0x00fa5aa0 */
 extern char g_102cbc0[];
-// FUNCTION: GOLD 0x0046c5f0
-// FUNCTION: GOLDTL 0x469510
+
+
 
 #include <string.h>
 

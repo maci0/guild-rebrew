@@ -1,7 +1,7 @@
 #include <string.h>
 
-// FUNCTION: GOLD 0x427c70
-// FUNCTION: GOLDTL 0x426490
+/* ADDRESS: GOLD 0x00427c70 */
+/* ADDRESS: GOLDTL 0x00426490 */
 
 /* Classifies a script type keyword (up to the first blank or ')'). */
 int __cdecl fcn_00426490(const char* s)

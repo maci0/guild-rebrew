@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLD 0x5bc8e0
-// FUNCTION: GOLDTL 0x005c8770
+
+
 
 typedef struct
 {

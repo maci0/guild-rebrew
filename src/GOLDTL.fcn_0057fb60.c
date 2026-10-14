@@ -1,9 +1,9 @@
-// GLOBAL: GOLDTL 0x7746cc
+/* ADDRESS: GOLDTL 0x007746cc */
 extern char* g_7746cc;
-// GLOBAL: GOLD 0x6f2310
+/* ADDRESS: GOLD 0x006f2310 */
 extern char* g_7746cc;
-// FUNCTION: GOLD 0x00577590
-// FUNCTION: GOLDTL 0x57fb60
+
+
 
 extern int* g_665f08;
 

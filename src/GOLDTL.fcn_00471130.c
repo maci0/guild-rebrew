@@ -1,7 +1,7 @@
 int __cdecl fcn_00470820(int a, int b, int c);
 void __cdecl fcn_00471d80(int r, int n);
 
-// FUNCTION: GOLDTL 0x471130
+/* ADDRESS: GOLDTL 0x00471130 */
 int __cdecl fcn_00471130(short a, short b, int c)
 {
 	int r;

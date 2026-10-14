@@ -11,7 +11,7 @@ struct s_fd7ba0 {
 
 extern struct s_fd7ba0 g_fd7ba0[];
 
-// FUNCTION: GOLD 0x00511e90
+
 /* Twin of GOLDTL 0x5155e0; the GOLD slot records are 0x3e0 bytes, not 0x3dc. */
 
 #include <string.h>

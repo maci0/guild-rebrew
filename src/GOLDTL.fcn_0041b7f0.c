@@ -1,8 +1,8 @@
-// GLOBAL: GOLDTL 0x6b5de0
+/* ADDRESS: GOLDTL 0x006b5de0 */
 extern void* g_6b5de0;
-// GLOBAL: GOLDTL 0x14ce820
+/* ADDRESS: GOLDTL 0x014ce820 */
 extern char g_14ce820[];
-// FUNCTION: GOLDTL 0x41b7f0
+
 
 typedef struct
 {

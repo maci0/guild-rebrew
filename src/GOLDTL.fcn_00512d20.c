@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLD 0x0050f750
-// FUNCTION: GOLDTL 0x00512d20
+
+
 
 #pragma pack(push, 1)
 // SIZE 0x29

@@ -46,7 +46,7 @@ When dealing with older compilers (like MSVC6), code must map directly to compil
 - Logic structure (`if/else` flow, loop choice) dictates the machine code generation directly, requiring rigid adherence over modern "clean code" stylistic preferences.
 
 ## 14. Continuous Linting and Validation
-Run `rebrew lint` after source/metadata changes and `rebrew test` / `rebrew verify` after changes to compilation inputs. Identity is a `MODULE.0xVA` row (`file` plus a kind). An unmigrated file may still carry an inline marker; do not restore markers to pure-C migrated files, and do not write new ones. STATUS, SIZE, CFLAGS, and other volatile fields are metadata-owned. `// SOURCE: naked` stays source-owned. See the annotation and metadata references for the exact field rules.
+Run `rebrew lint` after source/metadata changes and `rebrew test` / `rebrew verify` after changes to compilation inputs. Optional ADDRESS anchors bind the next C declaration. All identity and state, including reconstruction source, live in format-2 dedicated metadata. Old source blocks and older formats are rejected.
 
 ## 15. Full-Binary Scope (Beyond `.text`)
 A faithful decompilation requires coverage of the *entire* binary, not just executable code. The `.data`, `.rdata`, and `.bss` sections contain globals, dispatch tables, vtables, string tables, and const arrays that are equally critical for correctness. Tools must inventory and cross-reference data-section artifacts (`rebrew data list`), detect dispatch tables / vtables by scanning for contiguous function-pointer arrays, and flag type conflicts across files. Report file agreement, accounted `.text`, and initialized-data verdict bytes with their own denominators. Data buckets must be disjoint even for overlapping symbols. `.bss` has no file-backed bytes; show its symbol/virtual-layout progress separately.
@@ -55,7 +55,7 @@ A faithful decompilation requires coverage of the *entire* binary, not just exec
 Many `NEAR_MATCHING` functions differ from the target by only a handful of bytes: an operand swap, branch inversion, or register allocation jitter. The system must be able to batch-process these near-miss cases unattended (`rebrew match batch --near-miss --threshold N`), sorted by byte delta so the easiest wins come first. Trivial NEAR_MATCHING→RELOC promotions then happen without a person, who works only on the functions that need one.
 
 ## 17. Source / Metadata Separation
-Volatile metadata lives in `rebrew-functions.toml` and `rebrew-data.toml` at `cfg.metadata_dir`, shared across targets. CLI writers preserve stable `(module, VA)` identity and validate against the shared schemas. Never manually edit these managed stores or write STATUS in C. SIZE and CFLAGS are metadata-owned. `rebrew source migrate-markers` moves function identity into `rebrew-functions.toml` and data identity into `rebrew-data.toml`, and leaves pure C. New writers do the same. External field origins and verification inputs/measurement time are durable canonical facts, separate from ordinary edit stamps and regenerable coverage/cache files.
+Metadata lives in `rebrew-functions.toml`, `rebrew-data.toml` and `rebrew-source.toml` at `cfg.metadata_dir`, shared across targets. CLI writers preserve `(module, VA)` identity and validate the current schema. Never manually edit managed stores or write STATUS in C. `rebrew source register` records address-bound identities while preserving existing fields. External origins and verification evidence remain separate from edit stamps and caches.
 
 ## Atomicity
 

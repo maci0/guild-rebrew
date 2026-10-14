@@ -22,7 +22,7 @@ extern char s_6750e8[];
 
 char* __cdecl m_alloc(int size, const char* tag);
 
-// FUNCTION: GOLDTL 0x465ba0
+/* ADDRESS: GOLDTL 0x00465ba0 */
 char* __cdecl fcn_00465ba0(int idx, const char* path)
 {
 	char* buf;

@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x446910
+
 
 // SIZE 0x14
 typedef struct Run {

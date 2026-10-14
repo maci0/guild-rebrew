@@ -5,8 +5,8 @@ void __cdecl fcn_004fd400(short* a, int* b);
 int __cdecl gm_AccumulateTyped2(unsigned short* e);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-// FUNCTION: GOLD 0x004ac200
-// FUNCTION: GOLDTL 0x4ac320
+/* ADDRESS: GOLD 0x004ac200 */
+/* ADDRESS: GOLDTL 0x004ac320 */
 int __cdecl fcn_004ac320(unsigned short* e)
 {
 	short s;

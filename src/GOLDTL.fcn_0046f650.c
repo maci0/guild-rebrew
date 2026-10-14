@@ -31,7 +31,7 @@ extern char s_67d59c[];
 
 void __cdecl fcn_0041d9e0(const char* msg);
 
-// FUNCTION: GOLDTL 0x46f650
+/* ADDRESS: GOLDTL 0x0046f650 */
 void __cdecl fcn_0046f650(int slot, char* parent)
 {
 	int i;

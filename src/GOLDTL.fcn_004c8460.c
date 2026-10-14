@@ -15,8 +15,8 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 extern int g_14cbca0;
 extern int g_699364;
 
-// FUNCTION: GOLD 0x4c78c0
-// FUNCTION: GOLDTL 0x004c8460
+/* ADDRESS: GOLD 0x004c78c0 */
+/* ADDRESS: GOLDTL 0x004c8460 */
 
 int __cdecl fcn_004c8460(int msg, char* result)
 {

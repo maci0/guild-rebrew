@@ -46,7 +46,7 @@ int __cdecl fcn_00465950(char* name);
 int __cdecl fcn_00469890(void);
 int __cdecl fcn_0046b520(char* s, int font);
 
-// FUNCTION: GOLDTL 0x467240
+/* ADDRESS: GOLDTL 0x00467240 */
 int __cdecl fcn_00467240(int x, int y, int w, int h, unsigned char flags)
 {
 	int i;

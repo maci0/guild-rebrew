@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00422c90
-// FUNCTION: GOLDTL 0x0041e530
+
+
 
 __declspec(dllimport) long __stdcall DefWindowProcA(void* hwnd, unsigned int msg, unsigned int wp, long lp);
 __declspec(dllimport) int __stdcall DestroyWindow(void* hwnd);

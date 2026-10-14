@@ -5,8 +5,8 @@ extern float g_10404c4[15];
 extern float g_1040584[15];
 extern float g_1040504[15];
 
-// FUNCTION: GOLD 0x460ca0
-// FUNCTION: GOLDTL 0x0045ccf0
+/* ADDRESS: GOLD 0x00460ca0 */
+/* ADDRESS: GOLDTL 0x0045ccf0 */
 
 void __cdecl fcn_0045ccf0(unsigned int now)
 {

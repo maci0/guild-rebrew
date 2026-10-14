@@ -1,6 +1,6 @@
 #include "client_sound.h"
 
-// FUNCTION: GOLDTL 0x00558e80
+
 // Plague event ("Sensenmann") state step: plays the plague track, then walks
 // the event state at +0x70 (0 = pick the next target building, 2 = act on
 // it). The target search tries up to 256 slots of the 0x90e094 table,

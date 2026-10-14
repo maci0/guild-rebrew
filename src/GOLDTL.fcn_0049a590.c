@@ -28,7 +28,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
 
-// FUNCTION: GOLDTL 0x0049a590
+/* ADDRESS: GOLDTL 0x0049a590 */
 int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Counts cnt;

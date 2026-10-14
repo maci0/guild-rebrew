@@ -40,8 +40,8 @@ extern int g_6b7fac;
 
 V4* __cdecl fcn_005e8850(void);
 
-// FUNCTION: GOLD 0x005dc2f0
-// FUNCTION: GOLDTL 0x005e8de0
+/* ADDRESS: GOLD 0x005dc2f0 */
+/* ADDRESS: GOLDTL 0x005e8de0 */
 
 int __cdecl fcn_005e8de0(float a, float b, float* out)
 {
@@ -59,8 +59,8 @@ int __cdecl fcn_005e8de0(float a, float b, float* out)
 	return 1;
 }
 
-// FUNCTION: GOLD 0x5dc390
-// FUNCTION: GOLDTL 0x005e8e80
+/* ADDRESS: GOLD 0x005dc390 */
+/* ADDRESS: GOLDTL 0x005e8e80 */
 
 int __cdecl fcn_005e8e80(Particle* o, V3* pos, V3* dir, float speed, float b, float a)
 {

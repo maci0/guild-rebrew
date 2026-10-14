@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x44e110
+
 
 // SIZE 0x58
 typedef struct Bone {

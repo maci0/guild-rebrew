@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00531bb0
-// FUNCTION: GOLDTL 0x538680
+
+
 
 __declspec(dllimport) void* __stdcall CreateMutexA(void*, int, const char*);
 __declspec(dllimport) unsigned long __stdcall GetLastError(void);

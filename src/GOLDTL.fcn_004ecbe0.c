@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004eae60
-// FUNCTION: GOLDTL 0x4ecbe0
+
+
 
 #include "g_772f90.h"
 

@@ -8,8 +8,8 @@ struct internal_state {int dummy;};
 #define bits word.what.Bits
 #define BMAX 15
 
-// FUNCTION: GOLD 0x465640
-// FUNCTION: GOLDTL 0x00461d50
+/* ADDRESS: GOLD 0x00465640 */
+/* ADDRESS: GOLDTL 0x00461d50 */
 
 int fcn_00461d50(b, n, s, d, e, t, m, hp, hn, v)
 uIntf *b;               /* code lengths in bits (all assumed <= BMAX) */

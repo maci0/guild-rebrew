@@ -13,7 +13,7 @@ extern unsigned char g_773d75;
 
 void __cdecl fcn_004c51a0(int, int, char, int);
 
-// FUNCTION: GOLDTL 0x4a8770
+/* ADDRESS: GOLDTL 0x004a8770 */
 
 void __cdecl fcn_004a8770(void)
 {

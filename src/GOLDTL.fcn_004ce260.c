@@ -1,7 +1,7 @@
-// GLOBAL: GOLDTL 0x9badd0
+/* ADDRESS: GOLDTL 0x009badd0 */
 extern int g_9badd0;
-// FUNCTION: GOLD 0x004cd6a0
-// FUNCTION: GOLDTL 0x4ce260
+
+
 
 #include <string.h>
 

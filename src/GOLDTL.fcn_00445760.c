@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x445760
+
 // The x/y rows group their first two products in parentheses and the z row
 // does not; that grouping is what places each faddp as in the reference.
 

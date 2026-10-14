@@ -12,8 +12,8 @@ typedef struct Kind4f3e60 {
 extern unsigned char* g_868050;
 extern char g_7f4ca0[];
 
-// FUNCTION: GOLD 0x4f1d50
-// FUNCTION: GOLDTL 0x004f3e60
+/* ADDRESS: GOLD 0x004f1d50 */
+/* ADDRESS: GOLDTL 0x004f3e60 */
 int __cdecl fcn_004f3e60(unsigned char* s, int* count)
 {
 	Kind4f3e60* k;

@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x004941c0
+
 /* Calls fcn_0042ec00(7), masks result to 16 bits. */
 int __cdecl gm_RandomMod(int n);
 

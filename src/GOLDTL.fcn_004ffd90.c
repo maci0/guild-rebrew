@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x4fd5c0
-// FUNCTION: GOLDTL 0x004ffd90
+
+
 
 /* The T&L build of fcn_004ffd90 (SERVER 0x100151e0). The
  * Processor Pack code generator needs the weight test spelled as

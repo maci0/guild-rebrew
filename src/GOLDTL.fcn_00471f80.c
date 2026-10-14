@@ -23,7 +23,7 @@ typedef struct Slot {
 
 extern char* g_1015ea0;
 
-// FUNCTION: GOLDTL 0x471f80
+/* ADDRESS: GOLDTL 0x00471f80 */
 int __cdecl fcn_00471f80(int slot)
 {
 	Slot* s;

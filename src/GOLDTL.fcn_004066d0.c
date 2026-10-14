@@ -18,7 +18,7 @@ void __cdecl fcn_00455350(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 char* __cdecl fcn_004051d0(char*, char*, int, ...);
 
-// FUNCTION: GOLDTL 0x4066d0
+/* ADDRESS: GOLDTL 0x004066d0 */
 
 /* Steps a change-room event: puts the character's exit object into the new
  * room and queues the walk-in events. */

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x425940
+/* ADDRESS: GOLDTL 0x00425940 */
 
 int __cdecl fcn_00425940(void)
 {

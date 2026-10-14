@@ -5,8 +5,8 @@ char __cdecl fcn_004545c0(void* p, int* n);
 void __cdecl fcn_004379a0(int list, int a, int mask, char(__cdecl* fn)(void*, int*), int* arg);
 void __cdecl fcn_00454850(int* n, int a, int b, int c);
 
-// FUNCTION: GOLD 0x004587a0
-// FUNCTION: GOLDTL 0x4550e0
+/* ADDRESS: GOLD 0x004587a0 */
+/* ADDRESS: GOLDTL 0x004550e0 */
 void __cdecl fcn_004550e0(int a1, int* n)
 {
 	int i;

@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLDTL 0x0050d4f0
+/* ADDRESS: GOLDTL 0x0050d4f0 */
 
 
 

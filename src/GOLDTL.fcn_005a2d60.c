@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00599b80
-// FUNCTION: GOLDTL 0x005a2d60
+
+
 
 extern unsigned short g_774970;
 

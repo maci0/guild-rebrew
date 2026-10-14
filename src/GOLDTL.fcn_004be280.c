@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004bd9e0
-// FUNCTION: GOLDTL 0x4be280
+
+
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl m_FreeTracked(void*);
 

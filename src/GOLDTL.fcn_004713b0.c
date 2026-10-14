@@ -22,7 +22,7 @@ char* __cdecl fcn_0045bde0(char* name);
 void __cdecl fcn_0045d090(char* p, int a);
 void __cdecl fcn_004767f0(int a, int b, int c, int d, int e, int f, int g, int h);
 
-// FUNCTION: GOLDTL 0x4713b0
+/* ADDRESS: GOLDTL 0x004713b0 */
 void __cdecl fcn_004713b0(int k, char* a, char* b)
 {
 	Obj* o;

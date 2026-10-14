@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005cda10
-// FUNCTION: GOLDTL 0x005d9ca0
+
+
 
 typedef struct Msg {
 	int pad0;

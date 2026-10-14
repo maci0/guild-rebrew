@@ -21,8 +21,8 @@ void __cdecl fcn_004c4eb0(char*);
 int __cdecl fcn_004c6aa0(Msg*);
 void __cdecl fcn_004c4ef0(char*);
 
-// FUNCTION: GOLD 0x004e4b50
-// FUNCTION: GOLDTL 0x004e64e0
+/* ADDRESS: GOLD 0x004e4b50 */
+/* ADDRESS: GOLDTL 0x004e64e0 */
 
 int __cdecl fcn_004e64e0(int* c)
 {

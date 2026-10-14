@@ -18,7 +18,7 @@ extern int g_772568;
 
 void __cdecl fcn_004659c0(int idx, int arg);
 
-// FUNCTION: GOLDTL 0x466260
+/* ADDRESS: GOLDTL 0x00466260 */
 int __cdecl fcn_00466260(int idx, void** out, int* out_idx)
 {
 	int j;

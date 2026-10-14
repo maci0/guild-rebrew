@@ -1,5 +1,5 @@
 #include "client_types.h"
-// FUNCTION: GOLDTL 0x005db8e0
+
 
 // SIZE 0xf8
 struct msg {

@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLD 0x56f890
-// FUNCTION: GOLDTL 0x00577d00
+
+
 
 #include <math.h>
 #pragma intrinsic(sqrt)

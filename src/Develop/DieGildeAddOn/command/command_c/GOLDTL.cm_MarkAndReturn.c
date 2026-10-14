@@ -21,7 +21,7 @@
  * passes an extra arg and the body tests both — `if (a) return 0;
  * return b == 0`. Shared name, per-build body: this file carries the GOLDTL
  * marker only. */
-// BLOCKER: none — implemented, pending test promotion
+
 int __cdecl cm_MarkAndReturn(int cmd, int dummy, char* result)
 {
 	if (cmd != 0) {

@@ -43,7 +43,7 @@ void __cdecl fcn_004c4510(fcn_0047da10_Ent* e, int h);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 
-// FUNCTION: GOLDTL 0x0047da10
+/* ADDRESS: GOLDTL 0x0047da10 */
 void __cdecl fcn_0047da10(void)
 {
 	float f;

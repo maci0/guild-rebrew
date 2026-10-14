@@ -2,7 +2,7 @@ extern short g_7725c4;
 extern int g_772570;
 extern int g_772574;
 
-// FUNCTION: GOLDTL 0x526b70
+/* ADDRESS: GOLDTL 0x00526b70 */
 
 void __cdecl fcn_00526b70(void)
 {

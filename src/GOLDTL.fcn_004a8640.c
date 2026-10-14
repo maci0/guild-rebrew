@@ -8,8 +8,8 @@ extern char* g_1007cd4;
 
 int __cdecl fcn_004a7880(int owner);
 
-// FUNCTION: GOLD 0x004a8520
-// FUNCTION: GOLDTL 0x4a8640
+/* ADDRESS: GOLD 0x004a8520 */
+/* ADDRESS: GOLDTL 0x004a8640 */
 void __cdecl fcn_004a8640(void)
 {
 	int j;

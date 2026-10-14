@@ -18,8 +18,8 @@ extern char g_868060[];
 float __cdecl fcn_00502820(int x0, int y0, int x1, int y1);
 unsigned short __cdecl gm_RandomMod(int n);
 
-// FUNCTION: GOLD 0x4948e0
-// FUNCTION: GOLDTL 0x004942a0
+/* ADDRESS: GOLD 0x004948e0 */
+/* ADDRESS: GOLDTL 0x004942a0 */
 void __cdecl fcn_004942a0(unsigned short* e, Share* out)
 {
 	int total;

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x0041f4c0
+
 
 typedef struct Snd Snd;
 

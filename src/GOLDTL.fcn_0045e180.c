@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00461fc0
-// FUNCTION: GOLDTL 0x45e180
+
+
 
 #include "deflate.h"
 

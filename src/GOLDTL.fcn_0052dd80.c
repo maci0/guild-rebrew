@@ -7,7 +7,7 @@ struct list_52dd80 {
 	char* a[32];
 };
 
-// FUNCTION: GOLDTL 0x52dd80
+
 
 #include <string.h>
 

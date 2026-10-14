@@ -5,8 +5,8 @@ unsigned char* __cdecl gm_AddObjekt(void);
 int __cdecl gm_CheckEntityType(unsigned char* geb);
 int __cdecl fcn_00505340(unsigned char* geb);
 
-// FUNCTION: GOLD 0x501f60
-// FUNCTION: GOLDTL 0x00504db0
+/* ADDRESS: GOLD 0x00501f60 */
+/* ADDRESS: GOLDTL 0x00504db0 */
 unsigned char* __cdecl fcn_00504db0(unsigned char* self, int kind)
 {
 	float best;

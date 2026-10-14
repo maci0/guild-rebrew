@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x004799d0
+
 
 typedef struct Surf004799d0 {
 	char pad0[0x10];

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4ad2b0
+/* ADDRESS: GOLDTL 0x004ad2b0 */
 
 // fcn_004ad190 — if((unsigned)[0x7728d0]<3) return [0x664e10 + h*4]; return 0.
 

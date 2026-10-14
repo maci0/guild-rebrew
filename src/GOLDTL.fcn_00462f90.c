@@ -23,8 +23,8 @@ void __cdecl fcn_004634a0(ct_data* tree, int max_code, ushf* bl_count);
 		fcn_004631b0(s, tree, SMALLEST); \
 	}
 
-// FUNCTION: GOLD 0x00466370
-// FUNCTION: GOLDTL 0x462f90
+/* ADDRESS: GOLD 0x00466370 */
+/* ADDRESS: GOLDTL 0x00462f90 */
 void __cdecl fcn_00462f90(deflate_state* s, tree_desc* desc)
 {
 	ct_data* tree = desc->dyn_tree;

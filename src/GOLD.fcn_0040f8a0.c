@@ -1,7 +1,7 @@
 extern char* g_6b7e98;
-// GLOBAL: GOLD 0x5f2c78
+/* ADDRESS: GOLD 0x005f2c78 */
 extern char g_676cf8[];
-// FUNCTION: GOLD 0x40f8a0
+
 
 int __cdecl m_is_tracked(void*);
 void __cdecl fcn_00425bf0(void*, int, char*);

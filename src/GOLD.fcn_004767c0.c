@@ -12,17 +12,17 @@ typedef struct Sprite {
 } Sprite;
 // SIZE 0x64
 
-// GLOBAL: GOLD 0xf8f0a0
+/* ADDRESS: GOLD 0x00f8f0a0 */
 extern char* g_1015ec0[];
-// GLOBAL: GOLD 0x6333d8
+/* ADDRESS: GOLD 0x006333d8 */
 extern int g_6b7fb8;
-// GLOBAL: GOLD 0x5feb8c
+/* ADDRESS: GOLD 0x005feb8c */
 extern char s_67d8b0[];
 
 void* __cdecl m_alloc(int size, const char* tag);
 void* __cdecl fcn_00448200(int name, int a2);
 
-// FUNCTION: GOLD 0x004767c0
+/* ADDRESS: GOLD 0x004767c0 */
 /* GOLD twin of GOLDTL fcn_004730c0: passes 1, not 0, as the second
  * argument of the texture load. */
 Sprite* __cdecl fcn_004767c0(int a1, int a2, int a3, int a4, int a5, int a6, int a7)

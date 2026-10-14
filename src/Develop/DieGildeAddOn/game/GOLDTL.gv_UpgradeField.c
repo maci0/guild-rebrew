@@ -1,8 +1,8 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-// FUNCTION: GOLD 0x004eff50
-// FUNCTION: GOLDTL 0x4f2060
+
+
 
 int __cdecl gv_AllocGraveyardField(unsigned char* field);
 void __cdecl gv_FreeFieldAllocs(int* slot);

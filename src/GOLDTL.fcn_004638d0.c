@@ -32,8 +32,8 @@
 
 #define send_code(s, c, tree) send_bits(s, tree[c].Code, tree[c].Len)
 
-// FUNCTION: GOLD 0x466cb0
-// FUNCTION: GOLDTL 0x004638d0
+/* ADDRESS: GOLD 0x00466cb0 */
+/* ADDRESS: GOLDTL 0x004638d0 */
 
 void fcn_004638d0(s, tree, max_code)
     deflate_state *s;

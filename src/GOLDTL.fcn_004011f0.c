@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x004011f0
+
 // GOLDTL body differs from GOLD: passes `x` by VALUE (mov, not lea) and
 // the second arg is 4, not 1.  GOLD is `(&x, 1, 1, a)` — per-target divergence,
 // so a thin GOLDTL file rather than a shared body.

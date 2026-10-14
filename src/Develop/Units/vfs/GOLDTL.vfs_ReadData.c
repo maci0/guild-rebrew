@@ -1,4 +1,4 @@
-// CFLAGS: /O2 /Gd /Oy-
+
 /* vfs_ReadData — VFS stream read (0x10008E40). Reads from a memory buffer
  * (flags & 0x20: cursor at stream+0x100, flushed via inflate when
  * flags & 8), a gzip-in-zip payload (flags & 0x10 → unzReadCurrentFile), a
@@ -314,7 +314,7 @@
  * `[edi+0x104]` addressing the target uses, and the esi/edi tie is unmoved.
  */
 
-// FUNCTION: GOLDTL 0x4306b0
+
 // vfs_ReadData
 
 #include <string.h>

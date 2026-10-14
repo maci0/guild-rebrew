@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x55a3d0
+
 
 // SIZE 0x2f4
 

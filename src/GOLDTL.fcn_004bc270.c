@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004bbd60
-// FUNCTION: GOLDTL 0x4bc270
+
+
 
 typedef struct {
 	char* obj;

@@ -1,10 +1,10 @@
-// GLOBAL: GOLD 0x633dfc
+/* ADDRESS: GOLD 0x00633dfc */
 extern int* g_6b89e8;
-// GLOBAL: GOLD 0x633dd8
+/* ADDRESS: GOLD 0x00633dd8 */
 extern int g_6b89c4[8];
-// GLOBAL: GOLD 0x5fcfa0
+/* ADDRESS: GOLD 0x005fcfa0 */
 extern char g_662dc8[15][9];
-// FUNCTION: GOLD 0x0045db30
+
 /* GOLD twin of GOLDTL fcn_0045a2e0: the name strings sit at img + 0x1a64
  * instead of 0x7e24. */
 

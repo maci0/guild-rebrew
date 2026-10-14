@@ -3,8 +3,8 @@
 void* __cdecl fcn_004cef30(int);
 void __cdecl fcn_00406120(int);
 
-// FUNCTION: GOLD 0x004d6f60
-// FUNCTION: GOLDTL 0x4d85c0
+/* ADDRESS: GOLD 0x004d6f60 */
+/* ADDRESS: GOLDTL 0x004d85c0 */
 void __cdecl fcn_004d85c0(int* a1)
 {
 	void* record;

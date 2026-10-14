@@ -15,7 +15,7 @@ int __cdecl fcn_00469890(void);
 int __cdecl m_alloc(int, char*);
 int __cdecl fcn_0046b520(char*, int);
 
-// FUNCTION: GOLDTL 0x46fcd0
+/* ADDRESS: GOLDTL 0x0046fcd0 */
 int __cdecl fcn_0046fcd0(int a1, int a2, char* name)
 {
 	int idx;

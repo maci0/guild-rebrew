@@ -35,7 +35,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
-// FUNCTION: GOLDTL 0x554b90
+/* ADDRESS: GOLDTL 0x00554b90 */
 void __cdecl fcn_00554b90(char* e)
 {
 	int n;

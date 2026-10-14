@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004cced0
-// FUNCTION: GOLDTL 0x4cda50
+
+
 
 // fcn_004cced0 — set b header; r=fcn_004f0ed0(a+0x10); if(b&&!r) b[0]=1.
 

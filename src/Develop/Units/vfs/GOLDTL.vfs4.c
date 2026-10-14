@@ -14,7 +14,7 @@ int __cdecl vfs_FlushAndClose(int);
 /* Reads a single byte from a VFS stream. Advances the read
  * position and returns the byte value, or error on EOF. */
 
-// FUNCTION: GOLDTL 0x430580
+
 // CloseVfsStream
 
 

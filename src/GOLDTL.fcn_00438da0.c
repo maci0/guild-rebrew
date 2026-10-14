@@ -24,7 +24,7 @@ void __cdecl fcn_00437bc0(void);
 void __cdecl fcn_00436df0(float fov, float aspect, float width, float height, float x, float y, float znear, float zfar);
 void __cdecl fcn_00438af0(unsigned char);
 
-// FUNCTION: GOLDTL 0x438da0
+/* ADDRESS: GOLDTL 0x00438da0 */
 
 /* Sets the 3D viewport (size, origin, depth range, view distance, screen
  * mode) and rebuilds the projection when anything changed. */

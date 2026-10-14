@@ -2,16 +2,16 @@
 
 float __cdecl fcn_00451380(int, int);
 
-// GLOBAL: GOLDTL 0x6628f8
+/* ADDRESS: GOLDTL 0x006628f8 */
 extern char g_6628f8[];
-// GLOBAL: GOLD 0x5eb7d8
+/* ADDRESS: GOLD 0x005eb7d8 */
 extern char g_6628f8[];
-// GLOBAL: GOLDTL 0x6628c8
+/* ADDRESS: GOLDTL 0x006628c8 */
 extern char g_6628c8[];
-// GLOBAL: GOLD 0x5eb7a8
+/* ADDRESS: GOLD 0x005eb7a8 */
 extern char g_6628c8[];
-// FUNCTION: GOLD 0x00453b30
-// FUNCTION: GOLDTL 0x4514d0
+/* ADDRESS: GOLD 0x00453b30 */
+/* ADDRESS: GOLDTL 0x004514d0 */
 float __cdecl fcn_004514d0(int a1, int a2)
 {
 	float value;

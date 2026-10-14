@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005a84e0
+/* ADDRESS: GOLD 0x005a84e0 */
 // fcn_005a84e0 — recursively free a[0x48] then a.
 
 int __cdecl fcn_005a84e0(char* a)

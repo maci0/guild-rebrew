@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00448630
-// FUNCTION: GOLDTL 0x443bf0
+
+
 
 // SIZE 0x8
 typedef struct Hit {

@@ -1,6 +1,6 @@
 void __cdecl fcn_0043a3f0(char* a, char* e, int v);
 
-// FUNCTION: GOLDTL 0x43a540
+/* ADDRESS: GOLDTL 0x0043a540 */
 char __cdecl fcn_0043a540(char* a, int* v)
 {
 	unsigned int i;

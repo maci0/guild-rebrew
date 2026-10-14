@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4117c0
+
 
 typedef int (__stdcall* fcn_004117c0_m)(int*);
 

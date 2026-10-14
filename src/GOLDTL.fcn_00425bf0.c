@@ -11,8 +11,8 @@ extern char* g_6b7e98;
 extern int g_6b7eb0;
 extern void* g_14cb8f0;
 
-// FUNCTION: GOLD 0x004273d0
-// FUNCTION: GOLDTL 0x425bf0
+/* ADDRESS: GOLD 0x004273d0 */
+/* ADDRESS: GOLDTL 0x00425bf0 */
 
 /* Reports a script error: logs the message with its source line. */
 void __cdecl fcn_00425bf0(char* s, unsigned int pos, const char* msg)

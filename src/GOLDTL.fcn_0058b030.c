@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x58b030
+
 
 // SIZE 0x2f4
 struct gadget {

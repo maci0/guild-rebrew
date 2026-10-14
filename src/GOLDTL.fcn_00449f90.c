@@ -19,7 +19,7 @@ void __cdecl fcn_00439fa0(char* o);
 void __cdecl fcn_00449ba0(char* o, void* part, char* name);
 char __cdecl fcn_00449db0(char* a, int b, int mode, char* key, char* val);
 
-// FUNCTION: GOLDTL 0x449f90
+/* ADDRESS: GOLDTL 0x00449f90 */
 void __cdecl fcn_00449f90(char* o, void* part, char* name)
 {
 	int i;

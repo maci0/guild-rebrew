@@ -1,8 +1,8 @@
 #include "client_types.h"
 extern cell10_fb5760 g_fb5760[0x8000];
 
-// FUNCTION: GOLD 0x4c3b10
-// FUNCTION: GOLDTL 0x4c4480
+/* ADDRESS: GOLD 0x004c3b10 */
+/* ADDRESS: GOLDTL 0x004c4480 */
 
 int __cdecl fcn_004c4480(int i)
 {

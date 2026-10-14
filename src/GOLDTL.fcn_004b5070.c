@@ -42,8 +42,8 @@ int __cdecl fcn_004b4ec0(char* t, Spec* s);
 int __cdecl fcn_004b4f00(char* t, Spec* s);
 int __cdecl fcn_004b5020(char* t, Spec* s);
 
-// FUNCTION: GOLD 0x4b4f00
-// FUNCTION: GOLDTL 0x004b5070
+/* ADDRESS: GOLD 0x004b4f00 */
+/* ADDRESS: GOLDTL 0x004b5070 */
 int __cdecl fcn_004b5070(Cmd* c)
 {
 	Spec* s;

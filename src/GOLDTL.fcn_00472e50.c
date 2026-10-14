@@ -5,7 +5,7 @@ extern int g_772514;
 void __cdecl fcn_0041d9e0(const char* msg);
 void __cdecl fcn_00476970(int a);
 
-// FUNCTION: GOLDTL 0x472e50
+/* ADDRESS: GOLDTL 0x00472e50 */
 void __cdecl fcn_00472e50(void)
 {
 	char* m;

@@ -1,9 +1,9 @@
-// GLOBAL: GOLDTL 0x690478
+/* ADDRESS: GOLDTL 0x00690478 */
 extern char g_690478[];
-// GLOBAL: GOLD 0x611748
+/* ADDRESS: GOLD 0x00611748 */
 extern char g_690478[];
-// FUNCTION: GOLD 0x004f81c0
-// FUNCTION: GOLDTL 0x4fa5b0
+
+
 
 typedef int (__cdecl* fcn_004fa5b0_fn)(char*, int);
 

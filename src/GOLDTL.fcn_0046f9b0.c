@@ -12,7 +12,7 @@ int __cdecl fcn_0046b520(char* s, int font);
 int __cdecl fcn_00472050(int slot, int* w, int* h);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
-// FUNCTION: GOLDTL 0x46f9b0
+/* ADDRESS: GOLDTL 0x0046f9b0 */
 void __cdecl fcn_0046f9b0(int idx, char* text)
 {
 	fcn_0046f9b0_Ent* e;

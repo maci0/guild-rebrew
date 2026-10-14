@@ -5,7 +5,7 @@ char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* heig
  * returns the zero accumulator without the final scale.
  * col sits under height. Both arms read acc through a volatile so the
  * load is hoisted to just after the lookup call. */
-// FUNCTION: GOLDTL 0x413d10
+/* ADDRESS: GOLDTL 0x00413d10 */
 
 float __cdecl fcn_00413d10(float* pos)
 {

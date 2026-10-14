@@ -4,8 +4,8 @@ extern Named24 g_67a470[8];
 
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
-// FUNCTION: GOLD 0x0043e6c0
-// FUNCTION: GOLDTL 0x43b500
+/* ADDRESS: GOLD 0x0043e6c0 */
+/* ADDRESS: GOLDTL 0x0043b500 */
 int __cdecl fcn_0043b500(const char* name)
 {
 	unsigned int i;

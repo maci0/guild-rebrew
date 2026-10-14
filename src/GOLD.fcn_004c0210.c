@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x004c0210
+/* ADDRESS: GOLD 0x004c0210 */
 // fcn_004c0210 — walk 0xc chain to last node.
 
 int __cdecl fcn_004c0210(void)

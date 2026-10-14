@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005d7cf0
+
 
 typedef struct Player {
 	char pad0[0xa];

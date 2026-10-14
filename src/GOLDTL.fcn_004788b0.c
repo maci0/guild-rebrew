@@ -21,7 +21,7 @@ Img* __cdecl fcn_00478400(int, int, int, int, int, int, int);
 Img* __cdecl fcn_00477ae0(int, int, int, int, int, int, int);
 Img* __cdecl fcn_004781e0(int, int, int, int, int, int, int);
 
-// FUNCTION: GOLDTL 0x004788b0
+/* ADDRESS: GOLDTL 0x004788b0 */
 
 Img* __cdecl fcn_004788b0(int a1, int a2, int a3, int a4, Surf* s, int mode, char alpha)
 {

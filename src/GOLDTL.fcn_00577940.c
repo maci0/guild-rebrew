@@ -11,8 +11,8 @@ struct info_577940 {
 	char pad3[8];
 };
 
-// FUNCTION: GOLD 0x0056f4f0
-// FUNCTION: GOLDTL 0x577940
+
+
 
 void __cdecl fcn_004f4830(int, struct info_577940*);
 

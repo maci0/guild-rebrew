@@ -1,7 +1,7 @@
 int __cdecl vfs_ReadData(void*, int, int, void*);
 
-// FUNCTION: GOLD 0x44ee70
-// FUNCTION: GOLDTL 0x44d770
+/* ADDRESS: GOLD 0x0044ee70 */
+/* ADDRESS: GOLDTL 0x0044d770 */
 int __cdecl fcn_0044d770(void* h)
 {
 	int c;

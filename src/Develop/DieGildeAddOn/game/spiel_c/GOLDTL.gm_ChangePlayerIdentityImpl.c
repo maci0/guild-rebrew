@@ -41,7 +41,7 @@
  * [esp+0x30] with two arguments already pushed), not the to_id parameter.
  */
 
-// FUNCTION: GOLDTL 0x513d40
+
 
 #include <stdlib.h>
 #include <string.h>

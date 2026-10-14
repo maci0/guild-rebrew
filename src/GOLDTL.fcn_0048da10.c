@@ -19,8 +19,8 @@ int __cdecl fcn_0048dcd0(char* e, Msg* a, Msg* b);
 int __cdecl fcn_0048ddd0(char* e, Msg* a, Msg* b);
 int __cdecl fcn_0048df90(char* e, Msg* a, Msg* b);
 
-// FUNCTION: GOLD 0x0048e460
-// FUNCTION: GOLDTL 0x0048da10
+/* ADDRESS: GOLD 0x0048e460 */
+/* ADDRESS: GOLDTL 0x0048da10 */
 int __cdecl fcn_0048da10(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Msg a;

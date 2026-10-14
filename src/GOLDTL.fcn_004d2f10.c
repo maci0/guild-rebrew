@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004d1eb0
-// FUNCTION: GOLDTL 0x4d2f10
+
+
 
 #include "client_sound.h"
 extern int g_7e46ac;

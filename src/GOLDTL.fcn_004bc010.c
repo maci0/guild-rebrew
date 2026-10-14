@@ -10,8 +10,8 @@ extern fcn_004bc010_slot* g_7728e8;
 extern int g_7728e4;
 extern int g_6b7fac;
 
-// FUNCTION: GOLD 0x004bbb00
-// FUNCTION: GOLDTL 0x4bc010
+/* ADDRESS: GOLD 0x004bbb00 */
+/* ADDRESS: GOLDTL 0x004bc010 */
 
 fcn_004bc010_slot* __cdecl fcn_004bc010(void)
 {

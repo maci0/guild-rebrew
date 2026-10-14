@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00526bf0
+
 
 typedef struct Device Device;
 

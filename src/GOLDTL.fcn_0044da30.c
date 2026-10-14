@@ -17,8 +17,8 @@ typedef struct
 
 void __cdecl fcn_00401180(void* stream, void* dst);
 
-// FUNCTION: GOLD 0x0044f100
-// FUNCTION: GOLDTL 0x44da30
+/* ADDRESS: GOLD 0x0044f100 */
+/* ADDRESS: GOLDTL 0x0044da30 */
 void __cdecl fcn_0044da30(void* stream, fcn_0044da30_Ctx* c)
 {
 	fcn_00401180(stream, &c->recs[c->n].fc0);

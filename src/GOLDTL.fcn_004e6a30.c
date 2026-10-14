@@ -1,9 +1,9 @@
-// GLOBAL: GOLDTL 0x9a9660
+/* ADDRESS: GOLDTL 0x009a9660 */
 extern char g_9a9660[];
-// GLOBAL: GOLD 0x925520
+/* ADDRESS: GOLD 0x00925520 */
 extern char g_9a9660[];
-// FUNCTION: GOLD 0x004e50a0
-// FUNCTION: GOLDTL 0x4e6a30
+/* ADDRESS: GOLD 0x004e50a0 */
+/* ADDRESS: GOLDTL 0x004e6a30 */
 
 char* __cdecl fcn_004e6a30(int a1)
 {

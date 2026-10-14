@@ -4,7 +4,7 @@ void* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00459a10(char* p);
 void __cdecl fcn_00459710(char* p, int a);
 
-// FUNCTION: GOLDTL 0x459ae0
+/* ADDRESS: GOLDTL 0x00459ae0 */
 char* __cdecl fcn_00459ae0(int a, int b, int c)
 {
 	char* p;

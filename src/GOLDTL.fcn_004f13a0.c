@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004ef440
-// FUNCTION: GOLDTL 0x4f13a0
+
+
 
 int __cdecl cm_GetBuildingStatCount(char*);
 

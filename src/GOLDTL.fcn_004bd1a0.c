@@ -8,8 +8,8 @@ typedef struct {
 
 void __cdecl fcn_00442d50(void*, int);
 
-// FUNCTION: GOLD 0x004bcbe0
-// FUNCTION: GOLDTL 0x4bd1a0
+/* ADDRESS: GOLD 0x004bcbe0 */
+/* ADDRESS: GOLDTL 0x004bd1a0 */
 
 void __cdecl fcn_004bd1a0(fcn_004bd1a0_entry* tab)
 {

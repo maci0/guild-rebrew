@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x43b8f0
+
 
 typedef struct IUnk IUnk;
 // SIZE 0xc

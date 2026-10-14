@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char* g_868050;
 extern char* g_99ec10;
 
-// FUNCTION: GOLDTL 0x0050bec0
+/* ADDRESS: GOLDTL 0x0050bec0 */
 int __cdecl fcn_0050bec0(unsigned char* s, int* out)
 {
 	Kind50bec0* k;
@@ -41,8 +41,8 @@ int __cdecl fcn_0050bec0(unsigned char* s, int* out)
 	return n;
 }
 
-// FUNCTION: GOLD 0x508cf0
-// FUNCTION: GOLDTL 0x0050bf30
+/* ADDRESS: GOLD 0x00508cf0 */
+/* ADDRESS: GOLDTL 0x0050bf30 */
 int __cdecl fcn_0050bf30(unsigned char* s, unsigned short* key, int* out)
 {
 	Kind50bec0* k;

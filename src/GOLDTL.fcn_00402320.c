@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x402320
+
 
 extern int (__stdcall *g_66234c)(int);
 

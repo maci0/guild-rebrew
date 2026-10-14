@@ -12,7 +12,7 @@ extern char* g_772d34;
 void __cdecl fcn_00426170(int*, int);
 void __cdecl m_FreeTracked(void*);
 
-// FUNCTION: GOLDTL 0x4c0a10
+/* ADDRESS: GOLDTL 0x004c0a10 */
 
 void __cdecl fcn_004c0a10(int* key)
 {

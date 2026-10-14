@@ -11,8 +11,8 @@ float __cdecl fcn_00451380(float*, float*);
 void __cdecl fcn_00438cb0(void*, float*);
 void __cdecl fcn_00438b40(void*, float*);
 
-// FUNCTION: GOLD 0x0040ba90
-// FUNCTION: GOLDTL 0x40c9b0
+/* ADDRESS: GOLD 0x0040ba90 */
+/* ADDRESS: GOLDTL 0x0040c9b0 */
 
 /* CreateCharacterAtDummy(): loads a character at a dummy object, facing
  * along the dummy's forward axis. */

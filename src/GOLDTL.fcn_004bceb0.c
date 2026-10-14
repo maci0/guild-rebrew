@@ -13,7 +13,7 @@ void __cdecl fcn_00442be0(void* obj);
 #include "Develop/DieGildeAddOn/auxillary/plant.h"
 void __cdecl fcn_004bd150(fcn_004bceb0_Entry* tab);
 
-// FUNCTION: GOLDTL 0x004bceb0
+/* ADDRESS: GOLDTL 0x004bceb0 */
 void __cdecl fcn_004bceb0(fcn_004bceb0_Entry* tab)
 {
 	unsigned char* r;

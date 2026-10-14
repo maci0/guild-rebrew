@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x45d7f0
+
 
 /* GOLD twin of GOLDTL fcn_004597f0: the list head is owner+0xac0 (GOLDTL 0x24)
  * and the next link n+0x28 (GOLDTL 0x20). */

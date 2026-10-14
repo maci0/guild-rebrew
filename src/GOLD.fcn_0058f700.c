@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0058f700
+
 // fcn_0058f700 — do r = fcn_005309d0(0x58f700, 0x67fff); while (r != 0).
 
 int __cdecl fcn_005309d0(void*, int);

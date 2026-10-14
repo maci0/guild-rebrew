@@ -15,7 +15,7 @@ int __cdecl fcn_004113d0(int h, const char* name, char* out);
 void __cdecl fcn_00411340(int h);
 int __cdecl _strcmpi(const char* a, const char* b);
 
-// FUNCTION: GOLDTL 0x437710
+/* ADDRESS: GOLDTL 0x00437710 */
 
 /* Reads the Direct3D display options from the registry over the defaults. */
 char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* def)

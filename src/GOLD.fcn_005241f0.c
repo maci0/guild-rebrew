@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005241f0
-// FUNCTION: GOLDTL 0x5290b0
+/* ADDRESS: GOLD 0x005241f0 */
+/* ADDRESS: GOLDTL 0x005290b0 */
 
 // fcn_005241f0 — count != -1 in 8 ints at a+0x8c.
 

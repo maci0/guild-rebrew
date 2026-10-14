@@ -27,7 +27,7 @@ struct track_416240 {
 	int count;
 };
 
-// FUNCTION: GOLD 0x416240
+/* ADDRESS: GOLD 0x00416240 */
 int __cdecl fcn_00416240(struct track_416240* tr, unsigned int t)
 {
 	struct key_416240* k;

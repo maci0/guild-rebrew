@@ -11,8 +11,8 @@ typedef struct {
 
 extern char g_1007bc0[];
 
-// FUNCTION: GOLD 0x004adfb0
-// FUNCTION: GOLDTL 0x4ae0f0
+/* ADDRESS: GOLD 0x004adfb0 */
+/* ADDRESS: GOLDTL 0x004ae0f0 */
 
 int __cdecl fcn_004ae0f0(int id)
 {

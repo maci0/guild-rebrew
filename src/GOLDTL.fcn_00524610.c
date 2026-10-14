@@ -2,8 +2,8 @@ extern int g_6a23ac;
 extern char g_869480[0x300][0x300];
 extern char g_90e0a0[0x300][0x300];
 
-// FUNCTION: GOLD 0x0051f680
-// FUNCTION: GOLDTL 0x524610
+
+
 
 int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
 

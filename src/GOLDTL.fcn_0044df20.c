@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x44df20
+
 
 typedef struct S0044df20 {
 	int pad0[5];

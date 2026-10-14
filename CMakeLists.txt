@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 
 # MSVC runtime library flags are selected by an abstraction
 cmake_policy(SET CMP0091 NEW)
@@ -123,8 +123,8 @@ if(REBREW_BUILD_SERVER)
   # split_link.sh died at exit 157, and the fix was a re-configure.
   #
   # Unified tree: game logic shared by all three binaries lives once in
-  # src/ (one // FUNCTION: marker per target). The source list is
-  # marker-selected (rebrew cmake-sources), not globbed: a GOLD/GOLDTL-only
+  # src/ (target identities live in the metadata stores). The source list is
+  # metadata-selected (rebrew build cmake-sources), not globbed: a GOLD/GOLDTL-only
   # TU linked into server.dll is a composition break (foreign bytes at best,
   # duplicate symbols at worst).
   if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
@@ -220,6 +220,7 @@ if(REBREW_BUILD_SERVER)
       --first-va spiel_data.c=0x100156b0
       --first-va gzio.c=0x100036d0
       --exclude compress.c --exclude uncompr.c
+    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
     OUTPUT_VARIABLE ORDERED_SOURCES
     OUTPUT_STRIP_TRAILING_WHITESPACE
     RESULT_VARIABLE ORDER_RC)
@@ -252,25 +253,25 @@ if(REBREW_BUILD_SERVER)
 
   if(MSVC_FOR_DECOMP)
     # Native LIB owns the export timestamp; native LINK owns the COFF timestamp.
-    if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/python")
-      set(_SERVER_TIMESTAMP_PYTHON "${PROJECT_SOURCE_DIR}/.venv/bin/python")
-    else()
-      find_package(Python3 REQUIRED COMPONENTS Interpreter)
-      set(_SERVER_TIMESTAMP_PYTHON "${Python3_EXECUTABLE}")
-    endif()
     set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
-      "${PROJECT_SOURCE_DIR}/scripts/native_timestamps.py"
       "${PROJECT_SOURCE_DIR}/rebrew-project.toml")
     execute_process(
-      COMMAND "${_SERVER_TIMESTAMP_PYTHON}" "${PROJECT_SOURCE_DIR}/scripts/native_timestamps.py"
+      COMMAND "${_REBREW_SRC_BIN}" binary pe --target server.dll --json
+      WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
       RESULT_VARIABLE _SERVER_TIMESTAMP_RC OUTPUT_VARIABLE _SERVER_TIMESTAMPS
       OUTPUT_STRIP_TRAILING_WHITESPACE)
     if(NOT _SERVER_TIMESTAMP_RC EQUAL 0)
       message(FATAL_ERROR "Cannot read native server build timestamps")
     endif()
-    list(GET _SERVER_TIMESTAMPS 0 _SERVER_LINK_EPOCH)
-    list(GET _SERVER_TIMESTAMPS 1 _SERVER_EXPORT_EPOCH)
-    list(GET _SERVER_TIMESTAMPS 2 _SERVER_REFERENCE)
+    string(JSON _SERVER_LINK_EPOCH GET "${_SERVER_TIMESTAMPS}" timestamp)
+    string(JSON _SERVER_EXPORT_EPOCH GET "${_SERVER_TIMESTAMPS}" export_timestamp)
+    string(JSON _SERVER_REFERENCE GET "${_SERVER_TIMESTAMPS}" binary)
+    foreach(_epoch IN ITEMS _SERVER_LINK_EPOCH _SERVER_EXPORT_EPOCH)
+      if(NOT "${${_epoch}}" MATCHES "^[0-9]+$" OR "${${_epoch}}" GREATER 2147483647)
+        message(FATAL_ERROR "Native Wine clock requires ${_epoch} in 0..2147483647")
+      endif()
+    endforeach()
+    string(REPLACE ";" "\\;" _SERVER_REFERENCE "${_SERVER_REFERENCE}")
     set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${_SERVER_REFERENCE}")
     set(_SERVER_EXPORT_DIR "${CMAKE_CURRENT_BINARY_DIR}/native-export")
     set(_SERVER_EXP "${_SERVER_EXPORT_DIR}/server.exp")
@@ -285,7 +286,6 @@ if(REBREW_BUILD_SERVER)
         ${_SERVER_ARCHIVE_COMMAND} /nologo /MACHINE:IX86
         "/DEF:${PROJECT_SOURCE_DIR}/src/server.def" "/OUT:${_SERVER_EXPORT_DIR}/server.lib"
       DEPENDS "${PROJECT_SOURCE_DIR}/src/server.def" "${_SERVER_REFERENCE}"
-        "${PROJECT_SOURCE_DIR}/scripts/native_timestamps.py"
         "${PROJECT_SOURCE_DIR}/rebrew-project.toml"
       VERBATIM)
     set_source_files_properties("${_SERVER_EXP}" PROPERTIES GENERATED TRUE EXTERNAL_OBJECT TRUE)

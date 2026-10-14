@@ -1,16 +1,16 @@
 extern char g_774a80[];
-// GLOBAL: GOLD 0x6f26c8
+/* ADDRESS: GOLD 0x006f26c8 */
 extern char g_774a80[];
-// GLOBAL: GOLDTL 0x773d75
+/* ADDRESS: GOLDTL 0x00773d75 */
 extern unsigned char g_773d75;
-// GLOBAL: GOLD 0x6f1bc5
+/* ADDRESS: GOLD 0x006f1bc5 */
 extern unsigned char g_773d75;
-// GLOBAL: GOLDTL 0x868060
+/* ADDRESS: GOLDTL 0x00868060 */
 extern char g_868060[];
-// GLOBAL: GOLD 0x7e3f40
+/* ADDRESS: GOLD 0x007e3f40 */
 extern char g_868060[];
-// FUNCTION: GOLDTL 0x5b24b0
-// FUNCTION: GOLD 0x5a9030
+
+
 
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);

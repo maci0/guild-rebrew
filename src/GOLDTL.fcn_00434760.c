@@ -6,8 +6,8 @@ unsigned int __cdecl fcn_004346f0(char*);
 char __cdecl fcn_004348f0(unsigned int, unsigned int);
 void __cdecl m_FreeTracked(void*);
 
-// FUNCTION: GOLD 0x00434b70
-// FUNCTION: GOLDTL 0x434760
+/* ADDRESS: GOLD 0x00434b70 */
+/* ADDRESS: GOLDTL 0x00434760 */
 
 /* Drops a reference to an animation; an unreferenced one stays cached
  * while the cache has room, otherwise it is unlinked and freed. */

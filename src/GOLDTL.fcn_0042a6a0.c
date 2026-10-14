@@ -1,14 +1,14 @@
 typedef void (__stdcall* g_6623bc_f)(int);
-// GLOBAL: GOLDTL 0x6b7f10
+/* ADDRESS: GOLDTL 0x006b7f10 */
 extern int* g_6b7f10[16];
-// GLOBAL: GOLD 0x633330
+/* ADDRESS: GOLD 0x00633330 */
 extern int* g_6b7f10[16];
-// GLOBAL: GOLDTL 0x6623bc
+/* ADDRESS: GOLDTL 0x006623bc */
 extern g_6623bc_f g_6623bc;
-// GLOBAL: GOLD 0x5eb35c
+/* ADDRESS: GOLD 0x005eb35c */
 extern g_6623bc_f g_6623bc;
-// FUNCTION: GOLD 0x0042bc40
-// FUNCTION: GOLDTL 0x42a6a0
+
+
 
 extern int g_6b7f90;
 extern int* g_6b7ed0[16];

@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004f3b40
-// FUNCTION: GOLDTL 0x004f5f30
+
+
 
 #pragma pack(1)
 // SIZE 0x2d

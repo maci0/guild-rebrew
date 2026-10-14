@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x408220
+
 
 void* __cdecl m_alloc(int, void*);
 

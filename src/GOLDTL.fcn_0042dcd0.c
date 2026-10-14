@@ -24,8 +24,8 @@ typedef void (__stdcall* timecb_42dcd0)(unsigned int, unsigned int, unsigned lon
 
 __declspec(dllimport) unsigned int __stdcall timeSetEvent(unsigned int, unsigned int, timecb_42dcd0, unsigned long, unsigned int);
 
-// FUNCTION: GOLD 0x0042e7b0
-// FUNCTION: GOLDTL 0x42dcd0
+/* ADDRESS: GOLD 0x0042e7b0 */
+/* ADDRESS: GOLDTL 0x0042dcd0 */
 
 /* Multimedia timer tick: runs the periodic callbacks and re-arms the
  * one-shot timer. */

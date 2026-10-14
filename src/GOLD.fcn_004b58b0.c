@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x004b58b0
+
 
 extern char g_6024c8[];
 extern char g_6024c4[];

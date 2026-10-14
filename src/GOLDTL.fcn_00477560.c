@@ -1,6 +1,6 @@
 #include <string.h>
 
-// FUNCTION: GOLDTL 0x477560
+/* ADDRESS: GOLDTL 0x00477560 */
 
 void __cdecl fcn_00477560(const void* src, char* hdr)
 {

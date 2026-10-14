@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4508a0
+
 // m is a double compared as !(m > *p): that spelling loads the float first and
 // copies m (fld/fld st(1)/fcompp) with the and eax,0x4100 mask, as in the reference.
 

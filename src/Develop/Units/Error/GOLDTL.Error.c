@@ -27,12 +27,12 @@ extern int g_log_file_handle;
 
 void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
 
-// DATA: GOLDTL 0x677918
+/* ADDRESS: GOLDTL 0x00677918 */
 int g_log_level_table[12] = {
     0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x100, 0x200, 0x400, 0x800,
 };
 
-// DATA: GOLDTL 0x677948
+/* ADDRESS: GOLDTL 0x00677948 */
 char g_log_format_table[384] = {
     '_', 'e', 'r', 'r', 'o', 'r', '.', 'l', 'o', 'g', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -60,18 +60,18 @@ char g_log_format_table[384] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
-// DATA: GOLDTL 0x677ac8
+/* ADDRESS: GOLDTL 0x00677ac8 */
 char g_log_newline[2] = { 0x0a, 0x00, };
 
-// DATA: GOLDTL 0x677acc
+/* ADDRESS: GOLDTL 0x00677acc */
 char g_log_default_name[12] = {
     '_', 'e', 'r', 'r', 'o', 'r', '.', 'l', 'o', 'g', 0x00, 0x00,
 };
 
 /* Dispatches a log message to the configured output handlers
  * (file, debugger, etc.). Routes based on severity level. */
-// FUNCTION: GOLD 0x004214a0
-// FUNCTION: GOLDTL 0x41caa0
+/* ADDRESS: GOLD 0x004214a0 */
+/* ADDRESS: GOLDTL 0x0041caa0 */
 // DispatchLogOutput
 
 void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)

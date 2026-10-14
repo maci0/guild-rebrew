@@ -24,7 +24,7 @@ float __cdecl fcn_00507f10(char*, int);
 float __cdecl fcn_004e6d20(void);
 int __cdecl fcn_00406340(char*, const char*, int);
 
-// FUNCTION: GOLDTL 0x4e0210
+/* ADDRESS: GOLDTL 0x004e0210 */
 
 /* Duel intro: plays the challenger's opening move chosen by the duel kind. */
 void __cdecl fcn_004e0210(char* e, char* foe)

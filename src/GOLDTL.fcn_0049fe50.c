@@ -22,8 +22,8 @@ Ent* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
 
-// FUNCTION: GOLD 0x4a0410
-// FUNCTION: GOLDTL 0x0049fe50
+/* ADDRESS: GOLD 0x004a0410 */
+/* ADDRESS: GOLDTL 0x0049fe50 */
 int __cdecl fcn_0049fe50(Ent* e)
 {
 	float sum;

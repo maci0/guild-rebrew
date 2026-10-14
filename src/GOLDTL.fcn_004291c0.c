@@ -46,7 +46,7 @@ void __cdecl fcn_00428d50(int);
 void __cdecl fcn_00427c40(char*, int);
 int __cdecl fcn_00425fe0(char*, int);
 
-// FUNCTION: GOLDTL 0x004291c0
+/* ADDRESS: GOLDTL 0x004291c0 */
 
 /* Runs script statements until a block end (keyword 10), token type 12, or
  * the running flag at g+0x124 clears. */

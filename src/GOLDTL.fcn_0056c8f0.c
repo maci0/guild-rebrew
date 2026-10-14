@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00564580
-// FUNCTION: GOLDTL 0x56c8f0
+
+
 
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;

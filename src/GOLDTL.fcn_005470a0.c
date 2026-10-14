@@ -35,8 +35,8 @@ struct s_7f4ca0 {
 
 extern char g_7f4ca0[];
 
-// FUNCTION: GOLD 0x0053f2d0
-// FUNCTION: GOLDTL 0x5470a0
+
+
 
 #include <string.h>
 

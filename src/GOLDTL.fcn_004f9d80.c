@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004f7990
-// FUNCTION: GOLDTL 0x004f9d80
+
+
 
 extern char g_679060[];
 

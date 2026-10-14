@@ -15,8 +15,8 @@ struct s_7f4ca0 {
 
 extern char g_7f4ca0[];
 
-// FUNCTION: GOLD 0x00567c50
-// FUNCTION: GOLDTL 0x570000
+
+
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_0056fe60(char*);

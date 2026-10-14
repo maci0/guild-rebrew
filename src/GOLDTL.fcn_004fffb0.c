@@ -1,13 +1,13 @@
-// GLOBAL: GOLDTL 0x7f4caa
+/* ADDRESS: GOLDTL 0x007f4caa */
 extern char g_7f4caa[];
-// GLOBAL: GOLD 0x770b8a
+/* ADDRESS: GOLD 0x00770b8a */
 extern char g_7f4caa[];
-// GLOBAL: GOLDTL 0x7f4cc0
+/* ADDRESS: GOLDTL 0x007f4cc0 */
 extern char g_7f4cc0[];
-// GLOBAL: GOLD 0x770ba0
+/* ADDRESS: GOLD 0x00770ba0 */
 extern char g_7f4cc0[];
-// FUNCTION: GOLD 0x004fd7e0
-// FUNCTION: GOLDTL 0x4fffb0
+/* ADDRESS: GOLD 0x004fd7e0 */
+/* ADDRESS: GOLDTL 0x004fffb0 */
 
 int __cdecl fcn_004fffb0(int a1)
 {

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00451f80
+
 
 typedef struct Mat_451f80 {
 	float m[16];

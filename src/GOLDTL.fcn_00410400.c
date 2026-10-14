@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00410400
+
 
 extern char* g_6b7e98;
 int __cdecl m_is_tracked(char* p);

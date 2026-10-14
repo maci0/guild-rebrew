@@ -17,7 +17,7 @@ int __cdecl fcn_004aacb0(unsigned short*, unsigned short*, unsigned short*, int*
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-// FUNCTION: GOLDTL 0x4dc230
+/* ADDRESS: GOLDTL 0x004dc230 */
 
 int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* a4)
 {

@@ -2,8 +2,8 @@
 
 int __cdecl fcn_00464830(FILE* fin, int* pi);
 
-// FUNCTION: GOLD 0x00467a50
-// FUNCTION: GOLDTL 0x464870
+/* ADDRESS: GOLD 0x00467a50 */
+/* ADDRESS: GOLDTL 0x00464870 */
 int __cdecl fcn_00464870(FILE* fin, unsigned long* pX)
 {
 	unsigned long x;

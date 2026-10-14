@@ -29,7 +29,7 @@ struct track_417bf0 {
 	float volume;
 };
 
-// FUNCTION: GOLDTL 0x417bf0
+/* ADDRESS: GOLDTL 0x00417bf0 */
 int __cdecl fcn_00417bf0(struct track_417bf0* tr, unsigned int t)
 {
 	struct key_417bf0* k;

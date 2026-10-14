@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005bcb10
+
 
 typedef struct {
 	int btn;

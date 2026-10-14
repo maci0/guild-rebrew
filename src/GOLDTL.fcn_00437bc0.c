@@ -13,7 +13,7 @@ extern float g_10425a0[20];
 
 void __cdecl fcn_00451900(float* a, float* m);
 
-// FUNCTION: GOLDTL 0x437bc0
+/* ADDRESS: GOLDTL 0x00437bc0 */
 
 /* Rebuilds the view frustum: the four side planes from the half-angles of
  * the viewport, the corner rays and the near and far planes. */

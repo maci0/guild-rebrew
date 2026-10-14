@@ -1,7 +1,7 @@
 extern char* g_772500;
 extern int g_772514;
 
-// FUNCTION: GOLDTL 0x534160
+
 
 void __cdecl fcn_0046f740(int, int, int, int);
 

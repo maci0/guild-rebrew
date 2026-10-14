@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x460120
+
 
 /* GOLD twin of GOLDTL fcn_0045c290: the texture slot is 0x80 bytes here,
  * 0x70 in GOLDTL. */

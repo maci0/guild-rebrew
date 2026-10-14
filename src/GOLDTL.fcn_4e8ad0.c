@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4e8ad0
+/* ADDRESS: GOLDTL 0x004e8ad0 */
 
 // fcn_004e6f10 — a < 0x28 ? [0x68da6c + a*0x18] : 0.
 

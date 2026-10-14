@@ -28,7 +28,7 @@ extern void** g_772540;
 extern int g_67d388;
 extern int g_67d370;
 
-// FUNCTION: GOLDTL 0x46b140
+/* ADDRESS: GOLDTL 0x0046b140 */
 int __cdecl fcn_0046b140(int x, int y)
 {
 	int i;

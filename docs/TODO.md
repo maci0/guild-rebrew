@@ -1,3 +1,71 @@
+## Provider selection and Rebrew 3 validation (2026-10-14)
+
+- At the user's explicit request, checkpoint the current migration, cleanup and
+  reviewed ordering work before the remaining repairs finish. The fresh gate is
+  running, and this commit does not claim clean lint or a passing raw-image gate.
+  The extracted command artifact's six local include paths are repaired through
+  the upstream API; its comparison is running. Continue the outstanding checks
+  and source repairs after the checkpoint.
+- Upstream d37f4a07 makes batch provider selection and single-file call catalogs
+  prefer the same managed file, symbol and kind. Two rejecting catalog tests
+  reproduce stale duplicate names before the fix. Function-order lint now uses
+  actual C definition locations alongside optional ADDRESS anchors; ascending
+  and descending mixed-source tests reproduce the prior incorrect check.
+- Frozen full suite: 11,727 passed, 36 skipped, zero failures. Static checks and
+  commit hooks pass. A first push hook collected another session's untracked
+  performance tests while stashing that implementation; a clean temporary
+  checkout's full hook passes and remote main is d37f4a07. The checkout is removed;
+  unrelated upstream performance changes remain untouched.
+- At the user's merge/commit request, audited all remaining upstream worktrees.
+  Address-format changes have 256 current-main and20 historical-main file matches,
+  with no unique changes. Performance changes have54 current-main matches; its
+  two remaining documents are older wording fully retained or expanded on main.
+  Performance commit81a9ecbf already contains the implementation. No process has
+  a cwd in the stale worktrees. Archived source/evidence snapshots under
+  .scratch/goal27/worktree-snapshots, removed all three stale checkouts and deleted
+  both already-merged branches. Subsequent source-scan work is committed as
+  6101d33c after its isolated gates. Both repositories now retain only main.
+- Upstream 6e8dbd5e fixes split dependency scans polluted by unrelated dispatch
+  initializers, and prevents callback tables from being copied as prototypes.
+  Shared declarator classification replaces the duplicate split parser. Four
+  rejecting regression cases reproduce the errors; the selected command split
+  preview now succeeds and preserves both target identities. The combined suite
+  passes 11,758 tests with 36 skips. Full commit hooks, including all configured
+  mypy targets, pass; full push hooks pass and remote main contains 6e8dbd5e.
+  A new test's Any-typed fixture was
+  corrected to pytest.MonkeyPatch after the commit hook caught it.
+- The user confirms the local source-format migration is complete. Corrected
+  lint reveals 62 source-order findings in 11 units. Native target-order graphs
+  have cycles in command.c, alchemistry_logic.c, friedhof_logic.c, spiel.c and
+  loadsave.c. All five selected shared-definition split previews now succeed.
+  Three units are reordered using all target rows and preserve complete bodies;
+  both client contexts retain 37 RELOC matches, with the existing lowpoly size
+  mismatch unchanged. Their all-target test envelopes also return a no-identity
+  error for server; eligible-target selection is recorded upstream as a gap.
+  Lint falls to 38 warnings. A token audit over
+  all 3,836 migrated C/header files finds no non-comment token changes; the
+  migration's whitespace-only marker remnants are cleaned in 2,650 files without
+  changing line counts. All 8,376 pre-reorganization function bindings/extents
+  are unchanged. Extracting cm_ExProdObjekt through the CLI retargets both rows,
+  but its copied includes expose C1083. The additional upstream repair shares
+  AST-selected include rebasing with merge, covers bare sibling and parent paths,
+  and leaves comments, strings and unresolved/system includes untouched. Focused
+  175 passed, one skipped; full suite is running before repairing the artifact.
+  Reorder constraints and managed-name blocker lookup gaps are recorded upstream.
+- Missing blocker explanations for TL4c4b00,44c460 and4f2fe0 are saved through
+  address-selected CLI writes. All three data conflict scans report zero conflicts
+  and multiple definitions. Plain SP5 and Processor Pack SP5 smoke checks pass.
+- The all-target migration corpus finishes with server300/316 (16 timeouts),
+  TL3585/3693 (11 timeouts) and Gold2094/2540 (no compile errors). Five prior match
+  regressions remain beyond the 27 timeouts: TL4dfba0's ambiguous random-helper
+  call; Gold40dd50/4247e0's selected shared sources use TL raw addresses despite
+  correct existing Gold candidates; Gold5a5ec0/5a60b0's self/callback name collides
+  with an independent Gold Lua wrapper. These are not clean-build receipts or a
+  fresh server gate. The migration remains uncommitted pending ordering repairs and
+  valid build checks. Full three-image/source-fidelity completion remains open.
+  Receipts: .scratch/goal27/; upstream test/hook logs use rebrew-goal27 in /tmp
+  and /dev/shm. Preserve accepted native evidence and version-specific bodies.
+
 ## Strict operand policy exposes masked source errors (2026-10-14)
 
 - The first full corpus under check_known_bindings passes server316/316,

@@ -20,8 +20,8 @@ struct msg {
 	char pad5[0x9b];
 };
 
-// FUNCTION: GOLD 0x00541350
-// FUNCTION: GOLDTL 0x5491c0
+
+
 
 char* __cdecl fcn_005463a0(int, int, int, ...);
 void __cdecl fcn_00546190(char*);

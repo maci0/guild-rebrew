@@ -3,8 +3,8 @@ extern unsigned char* g_868050;
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-// FUNCTION: GOLD 0x00565af0
-// FUNCTION: GOLDTL 0x56de60
+
+
 
 void __cdecl fcn_00546190(char*);
 unsigned char* __cdecl gm_SearchTable67(int);

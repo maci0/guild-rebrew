@@ -5,8 +5,8 @@ extern Slot7f4ca2 g_7f4ca2[768];
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 char* __cdecl gm_AddObjekt(void);
 
-// FUNCTION: GOLD 0x4b4eb0
-// FUNCTION: GOLDTL 0x4b5020
+/* ADDRESS: GOLD 0x004b4eb0 */
+/* ADDRESS: GOLDTL 0x004b5020 */
 
 int __cdecl fcn_004b5020(void)
 {

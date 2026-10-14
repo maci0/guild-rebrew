@@ -7,8 +7,8 @@ struct ent_555490 {
 	int b;
 };
 
-// FUNCTION: GOLD 0x54d430
-// FUNCTION: GOLDTL 0x555490
+/* ADDRESS: GOLD 0x0054d430 */
+/* ADDRESS: GOLDTL 0x00555490 */
 
 int __cdecl fcn_00555490(char* o, struct ent_555490* tab, int* out)
 {

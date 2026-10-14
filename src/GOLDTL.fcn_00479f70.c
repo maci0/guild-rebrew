@@ -6,7 +6,7 @@ extern char s_67daa0[];
 
 char* __cdecl m_alloc(int size, const char* tag);
 
-// FUNCTION: GOLDTL 0x479f70
+/* ADDRESS: GOLDTL 0x00479f70 */
 char* __cdecl fcn_00479f70(const char* name)
 {
 	FILE* f;

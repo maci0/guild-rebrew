@@ -34,8 +34,8 @@ extern int g_6b5c24;
 void __cdecl fcn_0043a3f0(char* node, char* m, Key4_4027b0 k);
 void __cdecl fcn_00402a00(char* obj, int shown);
 
-// FUNCTION: GOLD 0x4022e0
-// FUNCTION: GOLDTL 0x4027b0
+/* ADDRESS: GOLD 0x004022e0 */
+/* ADDRESS: GOLDTL 0x004027b0 */
 
 /* Steps every running fade: writes the alpha key and ends the fade at 0 or 255. */
 void __cdecl fcn_004027b0(void)

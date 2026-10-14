@@ -20,8 +20,8 @@ int __cdecl fcn_00423460(char**);
 void __cdecl fcn_00426170(char**, int);
 void __cdecl m_FreeTracked(struct snd_4c0b40*);
 
-// FUNCTION: GOLD 0x004c02e0
-// FUNCTION: GOLDTL 0x4c0b40
+/* ADDRESS: GOLD 0x004c02e0 */
+/* ADDRESS: GOLDTL 0x004c0b40 */
 
 void __cdecl fcn_004c0b40(void)
 {

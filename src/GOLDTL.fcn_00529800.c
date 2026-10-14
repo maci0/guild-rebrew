@@ -5,8 +5,8 @@ int* __cdecl fcn_004ce610(char*);
 #include "client_types.h"
 extern s_7e2ac0 g_7e2ac0[48];
 
-// FUNCTION: GOLD 0x00524940
-// FUNCTION: GOLDTL 0x529800
+/* ADDRESS: GOLD 0x00524940 */
+/* ADDRESS: GOLDTL 0x00529800 */
 
 
 int __cdecl fcn_00529800(char* a, int* out)

@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0040abd0
-// FUNCTION: GOLDTL 0x40ba00
+
+
 
 // fcn_0040abd0 — if(!a[0xc]) { fcn_00402480(a[0x14], a[0x30]); fcn_004047a0(a); }.
 

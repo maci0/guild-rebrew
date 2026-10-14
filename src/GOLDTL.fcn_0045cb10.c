@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x45cb10
+
 
 // SIZE 0x4
 typedef struct Col {

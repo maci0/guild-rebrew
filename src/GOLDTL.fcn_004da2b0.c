@@ -10,7 +10,7 @@ int __cdecl fcn_004e6cb0(int);
 char* __cdecl fcn_004e4a80(char*, float*);
 void __cdecl fcn_00402b00(char*, char*);
 
-// FUNCTION: GOLDTL 0x4da2b0
+/* ADDRESS: GOLDTL 0x004da2b0 */
 
 char* __cdecl fcn_004da2b0(unsigned short* a1, char* prefix, int idx)
 {

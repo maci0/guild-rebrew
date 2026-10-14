@@ -1,22 +1,22 @@
 #include "client_types.h"
-// GLOBAL: GOLDTL 0x779d00
+/* ADDRESS: GOLDTL 0x00779d00 */
 extern Slot_779d00 g_779d00[];
-// GLOBAL: GOLD 0x6f5ec0
+/* ADDRESS: GOLD 0x006f5ec0 */
 extern Slot_779d00 g_779d00[];
-// GLOBAL: GOLDTL 0x7e2700
+/* ADDRESS: GOLDTL 0x007e2700 */
 extern int g_7e2700;
-// GLOBAL: GOLD 0x75e8c0
+/* ADDRESS: GOLD 0x0075e8c0 */
 extern int g_7e2700;
-// GLOBAL: GOLDTL 0x14cf72a
+/* ADDRESS: GOLDTL 0x014cf72a */
 extern char g_14cf72a[];
-// GLOBAL: GOLD 0x14681ea
+/* ADDRESS: GOLD 0x014681ea */
 extern char g_14cf72a[];
-// GLOBAL: GOLDTL 0x14cf950
+/* ADDRESS: GOLDTL 0x014cf950 */
 extern char g_14cf950;
-// GLOBAL: GOLD 0x1468410
+/* ADDRESS: GOLD 0x01468410 */
 extern char g_14cf950;
-// FUNCTION: GOLD 0x00589f60
-// FUNCTION: GOLDTL 0x592470
+
+
 
 void __cdecl fcn_00591ea0(void);
 void __cdecl fcn_00591d00(void);

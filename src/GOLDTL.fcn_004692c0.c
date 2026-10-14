@@ -4,7 +4,7 @@ extern Win_1015f40 g_1015f40[0x60];
 int __cdecl fcn_00469140(int x, int y, int a3, int a4, int a5);
 void __cdecl fcn_00465eb0(int r, int i);
 
-// FUNCTION: GOLDTL 0x4692c0
+/* ADDRESS: GOLDTL 0x004692c0 */
 int __cdecl fcn_004692c0(int a1, int a2, int a3, int a4, int a5, int i)
 {
 	int r;

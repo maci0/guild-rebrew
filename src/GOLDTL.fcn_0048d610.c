@@ -15,8 +15,8 @@ extern int g_772624;
 
 int __cdecl gm_StartFilteredEntitySearch(int a, int b, int c, int d, int id);
 
-// FUNCTION: GOLD 0x0048e060
-// FUNCTION: GOLDTL 0x48d610
+/* ADDRESS: GOLD 0x0048e060 */
+/* ADDRESS: GOLDTL 0x0048d610 */
 int __cdecl fcn_0048d610(Ent* e, int* out)
 {
 	int i;

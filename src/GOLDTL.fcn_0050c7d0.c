@@ -1,6 +1,6 @@
 extern unsigned char* g_868050;
-// FUNCTION: GOLD 0x005093d0
-// FUNCTION: GOLDTL 0x0050c7d0
+/* ADDRESS: GOLD 0x005093d0 */
+/* ADDRESS: GOLDTL 0x0050c7d0 */
 
 int __cdecl fcn_0050c7d0(int idx, int type)
 {

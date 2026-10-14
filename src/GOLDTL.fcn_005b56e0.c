@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005aa060
-// FUNCTION: GOLDTL 0x005b56e0
+
+
 
 #include "g_6abb08.h"
 

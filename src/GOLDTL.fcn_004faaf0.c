@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004f8700
-// FUNCTION: GOLDTL 0x004faaf0
+
+
 
 unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);

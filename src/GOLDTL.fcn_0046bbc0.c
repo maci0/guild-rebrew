@@ -16,7 +16,7 @@ void __cdecl fcn_0047ccd0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047cbf0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
 
-// FUNCTION: GOLDTL 0x46bbc0
+/* ADDRESS: GOLDTL 0x0046bbc0 */
 void __cdecl fcn_0046bbc0(int x, int y, int surf, char* text, unsigned char flags)
 {
 	int x0;

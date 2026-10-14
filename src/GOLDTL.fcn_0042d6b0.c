@@ -24,8 +24,8 @@ void __cdecl fcn_00430580(int f);
 int* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 
-// FUNCTION: GOLD 0x42e360
-// FUNCTION: GOLDTL 0x42d6b0
+/* ADDRESS: GOLD 0x0042e360 */
+/* ADDRESS: GOLDTL 0x0042d6b0 */
 
 /* Reloads a text bank from its language resource file. */
 int __cdecl fcn_0042d6b0(const char* name)

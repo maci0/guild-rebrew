@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4f0900
+
 // fcn_004eea70 twin — same shape as fcn_004eea70 (GOLDTL 0x4f08d0 / GOLD
 // 0x4eea70) but the leading constant is 0x6454436e instead of 0x6154436e.
 

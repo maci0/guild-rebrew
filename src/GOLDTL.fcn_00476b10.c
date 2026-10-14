@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x476b10
+
 
 typedef struct Surf {
 	char pad0[0x10];

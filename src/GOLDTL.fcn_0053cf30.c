@@ -6,7 +6,7 @@ extern int g_774654;
 extern int g_14ce8e0;
 extern int g_7e242c;
 
-// FUNCTION: GOLDTL 0x53cf30
+
 
 __declspec(dllimport) unsigned int __stdcall timeGetTime(void);
 int __cdecl fcn_004b3db0(int);

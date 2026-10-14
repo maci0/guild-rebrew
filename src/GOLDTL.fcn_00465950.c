@@ -2,8 +2,8 @@
 
 extern char* g_772500;
 
-// FUNCTION: GOLD 0x00468880
-// FUNCTION: GOLDTL 0x465950
+/* ADDRESS: GOLD 0x00468880 */
+/* ADDRESS: GOLDTL 0x00465950 */
 int __cdecl fcn_00465950(const char* name)
 {
 	int i;

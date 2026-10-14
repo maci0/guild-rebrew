@@ -9,7 +9,7 @@ typedef struct Vtx {
 } Vtx;
 // SIZE 0x1c
 
-// FUNCTION: GOLDTL 0x47b8b0
+/* ADDRESS: GOLDTL 0x0047b8b0 */
 int __cdecl fcn_0047b8b0(int x, int y, int w, int h, Vtx* v)
 {
 	v[0].x = (x - 0.5f);

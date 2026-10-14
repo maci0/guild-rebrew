@@ -3,8 +3,8 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 int __cdecl fcn_004a4550(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
-// FUNCTION: GOLDTL 0x4a03d0
-// FUNCTION: GOLD 0x004a0990
+/* ADDRESS: GOLDTL 0x004a03d0 */
+/* ADDRESS: GOLD 0x004a0990 */
 int __cdecl fcn_004a03d0(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7)
 {
 	unsigned char c;

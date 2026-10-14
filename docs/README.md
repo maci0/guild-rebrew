@@ -29,11 +29,11 @@ Look it up first; the entries are keyed by address, and a keyword grep only
 finds what you already know the words for:
 
 ```sh
-python3 scripts/whathas.py 0x<VA>              # every doc entry citing this VA
-python3 scripts/whathas.py 0x<VA> --window 64  # widen the band
+rebrew source findings 0x<VA> --json             # every doc entry citing this VA
+rebrew source findings 0x<VA> --window 64 --json # widen the band
 ```
 
-`whathas.py` searches `msvc6-c-shapes.md`, `msvc6-allocator.md`,
+`rebrew source findings` searches the Markdown documents under `docs/`, including `msvc6-c-shapes.md`, `msvc6-allocator.md`,
 `codegen-walls.md`, `measure-traps.md`, `workflow-traps.md`, and `TODO.md`.
 
 ## Conventions
@@ -41,7 +41,7 @@ python3 scripts/whathas.py 0x<VA> --window 64  # widen the band
 - `msvc6-c-shapes.md` is levers that work, `codegen-walls.md` is levers
   measured not to exist, `measure-traps.md` is instruments that lie. A new
   finding goes in exactly one of them; cross-link instead of copying.
-- Section numbers are cited across files, by `whathas.py` output, and in
+- Section numbers are cited across files, by `rebrew source findings` output, and in
   source headers. Append new sections with the next free number; never
   renumber or reuse one.
 - Server addresses are `0x100xxxxx`; client addresses (`0x4xxxxx` to

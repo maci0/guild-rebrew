@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004e6600
-// FUNCTION: GOLDTL 0x4e81c0
+
+
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl fcn_004e8240(int, int, int, int, int);

@@ -1,6 +1,6 @@
 extern int* g_6b7ed0[16];
 extern int* g_6b7f50[16];
-// FUNCTION: GOLDTL 0x42b280
+/* ADDRESS: GOLDTL 0x0042b280 */
 
 int __cdecl fcn_0042b280(int id)
 {

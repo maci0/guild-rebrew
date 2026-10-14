@@ -1,5 +1,5 @@
 extern int g_6b8014;
-// FUNCTION: GOLDTL 0x0052d7c0
+/* ADDRESS: GOLDTL 0x0052d7c0 */
 
 void __cdecl fcn_0052d7c0(int* src)
 {

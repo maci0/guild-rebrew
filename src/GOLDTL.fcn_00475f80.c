@@ -20,7 +20,7 @@ typedef struct {
 int __cdecl fcn_00476060(fcn_00475f80_obj*);
 void __cdecl m_FreeTracked(void*);
 
-// FUNCTION: GOLDTL 0x475f80
+/* ADDRESS: GOLDTL 0x00475f80 */
 
 int __cdecl fcn_00475f80(fcn_00475f80_obj* o)
 {

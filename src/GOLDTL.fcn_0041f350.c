@@ -35,8 +35,8 @@ __declspec(dllimport) void __stdcall Sleep(unsigned long);
 
 char* __cdecl fcn_0041f9b0(int);
 
-// FUNCTION: GOLD 0x00423390
-// FUNCTION: GOLDTL 0x41f350
+/* ADDRESS: GOLD 0x00423390 */
+/* ADDRESS: GOLDTL 0x0041f350 */
 
 /* Shows a video window topmost and starts playback; a modal video pumps
  * messages until its window closes. */

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x53f4c0
+
 
 // SIZE 0x2bc
 struct dlgslot {

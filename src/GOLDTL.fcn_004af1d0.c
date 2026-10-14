@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLDTL 0x4af1d0
-// FUNCTION: GOLD 0x4af090
+
+
 
 /* Callees of this translation unit; see src/GOLDTL.fcn_004af2f0.c, the
  * sibling in the same address family. */

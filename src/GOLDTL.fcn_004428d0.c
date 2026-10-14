@@ -6,7 +6,7 @@ typedef struct Nibbles {
 
 void __cdecl fcn_0043ef20(char* a);
 
-// FUNCTION: GOLDTL 0x4428d0
+/* ADDRESS: GOLDTL 0x004428d0 */
 void __cdecl fcn_004428d0(char* a, unsigned char v, char update)
 {
 	if (((Nibbles*) (a + 0x8037))->lo != v) {

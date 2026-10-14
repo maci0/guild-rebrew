@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x5c6680
-// FUNCTION: GOLDTL 0x005d2950
+
+
 
 int __cdecl abs(int);
 #pragma intrinsic(abs)

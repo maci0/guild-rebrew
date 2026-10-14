@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLDTL 0x4c8a30
+
 
 int __cdecl fcn_004c4dc0(unsigned char* msg, int serial);
 

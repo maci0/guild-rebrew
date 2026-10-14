@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00479f00
+
 // fcn_00479f00 — memmove(obj + [obj+0x2a], obj, [obj+0xa]*4).
 
 #include <string.h>

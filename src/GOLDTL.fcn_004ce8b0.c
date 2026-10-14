@@ -2,8 +2,8 @@ float __cdecl fcn_00507f10(char*, int);
 int* __cdecl fcn_004ce610(char*);
 float __cdecl fcn_004ff040(char*);
 
-// FUNCTION: GOLD 0x004cdcf0
-// FUNCTION: GOLDTL 0x004ce8b0
+/* ADDRESS: GOLD 0x004cdcf0 */
+/* ADDRESS: GOLDTL 0x004ce8b0 */
 
 float __cdecl fcn_004ce8b0(char* e)
 {

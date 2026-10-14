@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4e59c0
+
 
 extern void* g_14d0020[];
 

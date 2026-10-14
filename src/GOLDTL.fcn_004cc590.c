@@ -24,8 +24,8 @@ void __cdecl fcn_004fe470(int, int, int, int, int);
 char* __cdecl fcn_00502fe0(int, int, int);
 void __cdecl fcn_004ce9e0(struct rec_4cc590*);
 
-// FUNCTION: GOLD 0x004cba10
-// FUNCTION: GOLDTL 0x4cc590
+/* ADDRESS: GOLD 0x004cba10 */
+/* ADDRESS: GOLDTL 0x004cc590 */
 
 int __cdecl fcn_004cc590(unsigned char* a1, char* a2)
 {

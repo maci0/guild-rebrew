@@ -3,8 +3,8 @@ char* __cdecl fcn_0048f450(char* owner);
 int __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
 unsigned short __cdecl gm_RandomMod(int n);
 
-// FUNCTION: GOLD 0x00490560
-// FUNCTION: GOLDTL 0x48fb10
+/* ADDRESS: GOLD 0x00490560 */
+/* ADDRESS: GOLDTL 0x0048fb10 */
 int __cdecl fcn_0048fb10(int a1, char* e, char* r, char* out)
 {
 	char* c;

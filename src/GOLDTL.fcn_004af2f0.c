@@ -1,6 +1,6 @@
-// GLOBAL: GOLDTL 0x662910
+/* ADDRESS: GOLDTL 0x00662910 */
 extern float g_662910;
-// GLOBAL: GOLD 0x5eb7f0
+/* ADDRESS: GOLD 0x005eb7f0 */
 extern float g_662910;
 
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
@@ -34,8 +34,8 @@ extern char g_7f4ca0[];
 int __cdecl fcn_004ae0f0(int);
 unsigned short __cdecl gm_RandomMod(int);
 
-// FUNCTION: GOLD 0x004adff0
-// FUNCTION: GOLDTL 0x4ae130
+/* ADDRESS: GOLD 0x004adff0 */
+/* ADDRESS: GOLDTL 0x004ae130 */
 
 /* The original translation unit held this callee in the same file as
  * fcn_004af2f0, and msvc6's same-TU callee analysis is what keeps `w` in edx
@@ -54,8 +54,8 @@ int __cdecl fcn_004ae130(unsigned short a1)
 	return 0;
 }
 
-// FUNCTION: GOLD 0x004ae080
-// FUNCTION: GOLDTL 0x4ae1c0
+/* ADDRESS: GOLD 0x004ae080 */
+/* ADDRESS: GOLDTL 0x004ae1c0 */
 
 int __cdecl fcn_004ae1c0(int a1)
 {
@@ -77,8 +77,8 @@ int __cdecl fcn_004ae1c0(int a1)
 	return 0;
 }
 
-// FUNCTION: GOLD 0x004ae0d0
-// FUNCTION: GOLDTL 0x4ae210
+/* ADDRESS: GOLD 0x004ae0d0 */
+/* ADDRESS: GOLDTL 0x004ae210 */
 
 int __cdecl fcn_004ae210(int a1)
 {
@@ -98,8 +98,8 @@ int __cdecl fcn_004ae210(int a1)
 	return 0;
 }
 
-// FUNCTION: GOLD 0x004ae160
-// FUNCTION: GOLDTL 0x4ae2a0
+
+
 
 #pragma optimize("y", off)
 int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
@@ -157,8 +157,8 @@ int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
 }
 #pragma optimize("", on)
 
-// FUNCTION: GOLD 0x004ae280
-// FUNCTION: GOLDTL 0x4ae3c0
+
+
 
 #pragma optimize("y", off)
 int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
@@ -216,8 +216,8 @@ int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
 }
 #pragma optimize("", on)
 
-// FUNCTION: GOLD 0x4ae3a0
-// FUNCTION: GOLDTL 0x4ae4e0
+
+
 
 #pragma optimize("y", off)
 int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
@@ -320,8 +320,8 @@ send:
 }
 #pragma optimize("", on)
 
-// FUNCTION: GOLD 0x004ae600
-// FUNCTION: GOLDTL 0x4ae740
+
+
 
 #pragma optimize("y", off)
 int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
@@ -436,8 +436,8 @@ send:
 }
 #pragma optimize("", on)
 
-// FUNCTION: GOLD 0x004ae900
-// FUNCTION: GOLDTL 0x4aea40
+
+
 
 #pragma optimize("y", off)
 int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
@@ -555,8 +555,8 @@ send:
 }
 #pragma optimize("", on)
 
-// FUNCTION: GOLD 0x004aec00
-// FUNCTION: GOLDTL 0x4aed40
+
+
 
 #pragma optimize("y", off)
 int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
@@ -675,8 +675,8 @@ send:
 }
 #pragma optimize("", on)
 
-// FUNCTION: GOLDTL 0x4af2f0
-// FUNCTION: GOLD 0x4af1b0
+
+
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x200) and
  * addresses the 0x200 scratch buffer off ebp; section 13 of
@@ -735,8 +735,8 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	return 1;
 }
 
-// FUNCTION: GOLD 0x4af3f0
-// FUNCTION: GOLDTL 0x4af530
+
+
 
 #pragma optimize("y", off)
 int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
@@ -849,8 +849,8 @@ send:
 }
 #pragma optimize("", on)
 
-// FUNCTION: GOLD 0x004afc30
-// FUNCTION: GOLDTL 0x4afd70
+
+
 
 #pragma optimize("y", off)
 int __cdecl fcn_004afd70(int mode, int* pairs, int idx, char* text, void* out)
@@ -974,7 +974,7 @@ void __cdecl fcn_004c5980(Msg*);
 /* In this file for the same reason as fcn_004af2f0: with the bodies of
  * fcn_004ae130/1c0/210 in view, c2 keeps the zero in edx across the first
  * call; declared from another file the object is 16 bytes longer. */
-// FUNCTION: GOLDTL 0x4b0780
+/* ADDRESS: GOLDTL 0x004b0780 */
 int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
 {
 	int n;

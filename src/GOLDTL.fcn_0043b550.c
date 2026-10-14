@@ -1,10 +1,10 @@
 #include "g_67a470.h"
-// GLOBAL: GOLDTL 0x67a470
+/* ADDRESS: GOLDTL 0x0067a470 */
 extern Named24 g_67a470[8];
-// GLOBAL: GOLD 0x5fb800
+/* ADDRESS: GOLD 0x005fb800 */
 extern Named24 g_67a470[8];
-// FUNCTION: GOLD 0x0043e710
-// FUNCTION: GOLDTL 0x43b550
+/* ADDRESS: GOLD 0x0043e710 */
+/* ADDRESS: GOLDTL 0x0043b550 */
 
 char* __cdecl fcn_0043b550(int a1)
 {

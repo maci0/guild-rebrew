@@ -2,8 +2,8 @@
  * settings, installs the crash-dump filter, resolves the log file
  * directory, and installs per-level log file handles. */
 
-// FUNCTION: GOLD 0x004220b0
-// FUNCTION: GOLDTL 0x41d6b0
+
+
 // InitializeLogAndErrorHandler
 
 #include <windows.h>

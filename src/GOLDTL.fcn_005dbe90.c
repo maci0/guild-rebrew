@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005dbe90
+
 
 extern int g_100f1dc;
 extern int g_14ce8e0;

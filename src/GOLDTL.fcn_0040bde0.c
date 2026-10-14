@@ -29,8 +29,8 @@ char* __cdecl m_alloc(int, const char*);
 void __cdecl fcn_00406210(int, void*, int, const char*, int);
 int __cdecl fcn_00408220(float);
 
-// FUNCTION: GOLD 0x40afb0
-// FUNCTION: GOLDTL 0x40bde0
+/* ADDRESS: GOLD 0x0040afb0 */
+/* ADDRESS: GOLDTL 0x0040bde0 */
 
 /* Allocates the character action queue and registers the action handlers. */
 int __cdecl fcn_0040bde0(void)

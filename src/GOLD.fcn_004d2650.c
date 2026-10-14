@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x4d2650
+
 // fcn_004d2650 — if(!fcn_005dfc90(a,0x60cba8,0xa)) add a to list; return 1.
 
 int __cdecl fcn_005dfc90(void*, int, int);

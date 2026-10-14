@@ -16,7 +16,7 @@ void __cdecl fcn_00475f80(int surf);
 void __cdecl fcn_0047ce50(int tex);
 void __cdecl fcn_00469960(int id);
 
-// FUNCTION: GOLDTL 0x46f390
+/* ADDRESS: GOLDTL 0x0046f390 */
 int __cdecl fcn_0046f390(int win)
 {
 	fcn_0046f390_Win* w;

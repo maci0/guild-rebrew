@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0053dd50
+
 
 // SIZE 0xc
 struct slot {

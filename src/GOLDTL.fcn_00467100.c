@@ -26,7 +26,7 @@ extern char* g_1015ea0;
 
 int __cdecl fcn_0046b520(char* s, int font);
 
-// FUNCTION: GOLDTL 0x467100
+/* ADDRESS: GOLDTL 0x00467100 */
 void __cdecl fcn_00467100(int fld, char* text)
 {
 	fcn_00467100_Fld* f;

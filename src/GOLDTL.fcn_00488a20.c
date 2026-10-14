@@ -23,8 +23,8 @@ extern char g_7f4ca0[];
 
 unsigned short __cdecl gm_RandomMod(int n);
 
-// FUNCTION: GOLD 0x489470
-// FUNCTION: GOLDTL 0x00488a20
+/* ADDRESS: GOLD 0x00489470 */
+/* ADDRESS: GOLDTL 0x00488a20 */
 int __cdecl fcn_00488a20(Ent* e)
 {
 	int found;

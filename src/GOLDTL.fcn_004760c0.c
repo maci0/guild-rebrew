@@ -13,7 +13,7 @@ typedef struct {
 	fcn_004760c0_com* f20;
 } fcn_004760c0_obj;
 
-// FUNCTION: GOLDTL 0x4760c0
+/* ADDRESS: GOLDTL 0x004760c0 */
 
 int __cdecl fcn_004760c0(fcn_004760c0_obj* o, void* desc)
 {

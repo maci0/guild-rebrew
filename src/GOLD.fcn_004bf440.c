@@ -16,7 +16,7 @@ struct panel_4bf440 {
 };
 // SIZE 0x27a8
 
-// FUNCTION: GOLD 0x004bf440
+/* ADDRESS: GOLD 0x004bf440 */
 
 void __cdecl fcn_004bf440(char* list, struct panel_4bf440* panel)
 {

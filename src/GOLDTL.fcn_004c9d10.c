@@ -16,8 +16,8 @@ extern int g_6b7fac;
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
-// FUNCTION: GOLD 0x004c9170
-// FUNCTION: GOLDTL 0x4c9d10
+/* ADDRESS: GOLD 0x004c9170 */
+/* ADDRESS: GOLDTL 0x004c9d10 */
 
 int __cdecl fcn_004c9d10(char* a1, char* a2)
 {

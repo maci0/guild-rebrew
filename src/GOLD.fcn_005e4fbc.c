@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005e4fbc
+
 // fcn_005e4fbc — if([a+0xc]&0x83 && &8){ fcn_005dec24(a[8]); a[0xc]&=~0xfbf7; a[0]=0; a[4]=0; a[8]=0; }.
 
 int __cdecl fcn_005dec24(int);

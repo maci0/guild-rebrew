@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005ada30
+
 
 #include <string.h>
 #pragma intrinsic(memset)

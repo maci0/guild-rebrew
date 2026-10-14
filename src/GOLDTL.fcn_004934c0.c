@@ -4,8 +4,8 @@ void __cdecl fcn_004c4510(char* p, int n);
 void __cdecl fcn_004c4570(int a, int b, int off, int* v);
 void __cdecl fcn_004c5360(void);
 
-// FUNCTION: GOLD 0x00493e90
-// FUNCTION: GOLDTL 0x004934c0
+/* ADDRESS: GOLD 0x00493e90 */
+/* ADDRESS: GOLDTL 0x004934c0 */
 char* __cdecl fcn_004934c0(char* e)
 {
 	char* pick;

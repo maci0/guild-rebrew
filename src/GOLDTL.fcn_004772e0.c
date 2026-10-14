@@ -15,7 +15,7 @@ typedef struct {
 int __cdecl fcn_00475fd0(Surf*);
 void __cdecl fcn_00476060(Surf*);
 
-// FUNCTION: GOLDTL 0x004772e0
+/* ADDRESS: GOLDTL 0x004772e0 */
 
 void __cdecl fcn_004772e0(int x, int y, int w, int h, Surf* s)
 {

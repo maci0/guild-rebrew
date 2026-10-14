@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00556e30
+
 
 typedef struct {
 	short w[7];

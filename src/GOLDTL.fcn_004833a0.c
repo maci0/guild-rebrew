@@ -19,8 +19,8 @@ extern unsigned short g_7f4c04;
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_005904a0(Ent* e, int a2);
 
-// FUNCTION: GOLD 0x483ed0
-// FUNCTION: GOLDTL 0x4833a0
+/* ADDRESS: GOLD 0x00483ed0 */
+/* ADDRESS: GOLDTL 0x004833a0 */
 void __cdecl fcn_004833a0(Ent* e)
 {
 	Ent* found;

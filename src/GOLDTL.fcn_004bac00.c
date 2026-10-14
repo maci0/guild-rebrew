@@ -9,8 +9,8 @@ char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
-// FUNCTION: GOLD 0x4ba830
-// FUNCTION: GOLDTL 0x4bac00
+/* ADDRESS: GOLD 0x004ba830 */
+/* ADDRESS: GOLDTL 0x004bac00 */
 
 int __cdecl fcn_004bac00(unsigned short* a1, int* a2, float a3)
 {

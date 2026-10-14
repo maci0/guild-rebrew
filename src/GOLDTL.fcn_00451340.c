@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x4539a0
-// FUNCTION: GOLDTL 0x451340
+/* ADDRESS: GOLD 0x004539a0 */
+/* ADDRESS: GOLDTL 0x00451340 */
 
 void __cdecl fcn_00451340(float* a1, float* a2, float t, float* a4)
 {

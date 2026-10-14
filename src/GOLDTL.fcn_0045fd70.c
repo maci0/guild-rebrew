@@ -62,8 +62,8 @@ extern const uInt g_67d0b0[];
  */
 
 
-// FUNCTION: GOLD 0x463860
-// FUNCTION: GOLDTL 0x0045fd70
+/* ADDRESS: GOLD 0x00463860 */
+/* ADDRESS: GOLDTL 0x0045fd70 */
 
 int fcn_0045fd70(s, z, r)
 inflate_blocks_statef *s;

@@ -19,8 +19,8 @@ void __cdecl m_pool_free(char*, char*);
 int __cdecl fcn_0042ee30(const void*, const void*);
 int __cdecl fcn_0042edf0(const void*, const void*);
 
-// FUNCTION: GOLD 0x42f620
-// FUNCTION: GOLDTL 0x42ee50
+/* ADDRESS: GOLD 0x0042f620 */
+/* ADDRESS: GOLDTL 0x0042ee50 */
 
 /* Turns a VFS directory's list of added files into its sorted file array,
  * then does the same for the subdirectories and following siblings. */

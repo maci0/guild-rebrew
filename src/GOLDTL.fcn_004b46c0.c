@@ -3,8 +3,8 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050b710(int, char);
 
-// FUNCTION: GOLD 0x004b4550
-// FUNCTION: GOLDTL 0x4b46c0
+/* ADDRESS: GOLD 0x004b4550 */
+/* ADDRESS: GOLDTL 0x004b46c0 */
 
 int __cdecl fcn_004b46c0(int id, char* thr)
 {

@@ -7,8 +7,8 @@ unsigned int __cdecl fcn_004e6cb0(int n);
 int __cdecl fcn_00442910(int a, char* pos, float* rot, char* name);
 int __cdecl fcn_00412f10(int h, char* name, int k);
 
-// FUNCTION: GOLD 0x004de4b0
-// FUNCTION: GOLDTL 0x004dfd10
+/* ADDRESS: GOLD 0x004de4b0 */
+/* ADDRESS: GOLDTL 0x004dfd10 */
 int __cdecl fcn_004dfd10(char* e)
 {
 	float rot[3];

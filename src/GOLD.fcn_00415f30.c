@@ -29,7 +29,7 @@ struct track_415f30 {
 	float volume;
 };
 
-// FUNCTION: GOLD 0x415f30
+/* ADDRESS: GOLD 0x00415f30 */
 int __cdecl fcn_00415f30(struct track_415f30* tr, unsigned int t)
 {
 	struct key_415f30* k;

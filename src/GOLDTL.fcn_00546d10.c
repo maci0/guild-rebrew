@@ -14,8 +14,8 @@ struct s_77e980 {
 
 extern unit_77e980 g_77e980[1024];
 
-// FUNCTION: GOLD 0x53efd0
-// FUNCTION: GOLDTL 0x546d10
+
+
 
 void __cdecl fcn_00546b40(void);
 void __cdecl fcn_00546850(struct s_77e980*);

@@ -12,8 +12,8 @@ struct unk_41f7f0 {
 	struct unkvtbl_41f7f0* vtbl;
 };
 
-// FUNCTION: GOLD 0x423560
-// FUNCTION: GOLDTL 0x41f7f0
+/* ADDRESS: GOLD 0x00423560 */
+/* ADDRESS: GOLDTL 0x0041f7f0 */
 
 /* Releases a video's DirectShow interfaces. */
 void __cdecl fcn_0041f7f0(char* v)

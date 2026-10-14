@@ -14,8 +14,8 @@ typedef struct Ent {
 void __cdecl fcn_004f4830(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-// FUNCTION: GOLD 0x491550
-// FUNCTION: GOLDTL 0x490b20
+/* ADDRESS: GOLD 0x00491550 */
+/* ADDRESS: GOLDTL 0x00490b20 */
 int __cdecl fcn_00490b20(Ent* e, int a2, int* out)
 {
 	Stat st;

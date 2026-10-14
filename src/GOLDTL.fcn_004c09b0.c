@@ -14,8 +14,8 @@ void __cdecl fcn_004c2d90(float, int);
 void __cdecl fcn_00426170(int*, int);
 void __cdecl m_FreeTracked(void*);
 
-// FUNCTION: GOLD 0x004c01b0
-// FUNCTION: GOLDTL 0x4c09b0
+/* ADDRESS: GOLD 0x004c01b0 */
+/* ADDRESS: GOLDTL 0x004c09b0 */
 
 void __cdecl fcn_004c09b0(void)
 {

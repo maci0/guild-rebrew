@@ -1,8 +1,8 @@
 extern int g_774650;
 extern int g_774654;
 extern int g_7e35c0[];
-// FUNCTION: GOLD 0x0052fb80
-// FUNCTION: GOLDTL 0x005356b0
+/* ADDRESS: GOLD 0x0052fb80 */
+/* ADDRESS: GOLDTL 0x005356b0 */
 
 void __cdecl fcn_005356b0(int v)
 {

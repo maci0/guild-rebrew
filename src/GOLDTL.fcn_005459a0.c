@@ -14,7 +14,7 @@ extern s_77e8c0 g_77e8c0[16];
 
 extern s_1015f4c g_1015f4c[];
 
-// FUNCTION: GOLDTL 0x5459a0
+
 
 void __cdecl fcn_004727a0(int, int);
 void __cdecl fcn_00469c40(int, int, int);

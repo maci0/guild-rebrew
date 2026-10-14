@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x5b1a80
+/* ADDRESS: GOLDTL 0x005b1a80 */
 
 char* __cdecl fcn_005b1a80(int key)
 {
@@ -16,7 +16,7 @@ char* __cdecl fcn_005b1a80(int key)
 
 void __cdecl fcn_005b1980(int a, char* o);
 
-// FUNCTION: GOLDTL 0x005b1e20
+/* ADDRESS: GOLDTL 0x005b1e20 */
 
 void __cdecl fcn_005b1e20(char* p)
 {
@@ -31,8 +31,8 @@ void __cdecl fcn_005b1e20(char* p)
 float __cdecl fcn_005b1910(char* o);
 extern float g_662cf8;
 
-// FUNCTION: GOLD 0x005a89c0
-// FUNCTION: GOLDTL 0x005b1e40
+/* ADDRESS: GOLD 0x005a89c0 */
+/* ADDRESS: GOLDTL 0x005b1e40 */
 
 int __cdecl fcn_005b1e40(char* p)
 {

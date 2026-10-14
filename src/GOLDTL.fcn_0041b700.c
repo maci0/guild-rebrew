@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x0041b700
+
 
 typedef struct Vb Vb;
 

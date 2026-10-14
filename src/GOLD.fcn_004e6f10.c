@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x004e6f10
+/* ADDRESS: GOLD 0x004e6f10 */
 // fcn_004e6f10 — a < 0x28 ? [0x60ed3c + a*0x18] : 0.
 
 int __cdecl fcn_004e6f10(int a)

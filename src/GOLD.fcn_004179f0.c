@@ -8,7 +8,7 @@ void __cdecl fcn_00458a10(char*, char*, float*);
 float __cdecl fcn_004539e0(float*, float*);
 void __cdecl fcn_004272f0(void*, int);
 
-// FUNCTION: GOLD 0x4179f0
+/* ADDRESS: GOLD 0x004179f0 */
 
 /* Pans a sound source by the angle between the camera's forward axis and
  * the direction to the emitting object. */

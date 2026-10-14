@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4124b0
+
 
 typedef struct DevData DevData;
 

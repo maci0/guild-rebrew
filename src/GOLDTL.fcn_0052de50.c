@@ -10,8 +10,8 @@ struct s_7f4ca0 {
 extern char g_7f4ca0[];
 extern char* g_773da8;
 
-// FUNCTION: GOLD 0x005287b0
-// FUNCTION: GOLDTL 0x52de50
+
+
 
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);

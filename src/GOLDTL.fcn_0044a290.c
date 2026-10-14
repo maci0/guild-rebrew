@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x44a290
+
 
 // SIZE 0xc
 typedef struct Vec3 {

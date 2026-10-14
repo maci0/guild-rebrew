@@ -3,8 +3,8 @@ char* __cdecl fcn_0049fc80(char* e);
 int __cdecl fcn_0049fe50(char* e);
 int __cdecl fcn_004a0020(char* e);
 
-// FUNCTION: GOLD 0x004a0890
-// FUNCTION: GOLDTL 0x4a02d0
+/* ADDRESS: GOLD 0x004a0890 */
+/* ADDRESS: GOLDTL 0x004a02d0 */
 int __cdecl fcn_004a02d0(int a1, char* e, int a3, char* out)
 {
 	char c;

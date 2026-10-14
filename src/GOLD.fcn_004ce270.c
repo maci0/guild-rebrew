@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004ce270
-// FUNCTION: GOLDTL 0x4cf0f0
+/* ADDRESS: GOLD 0x004ce270 */
+/* ADDRESS: GOLDTL 0x004cf0f0 */
 
 // fcn_004ce270 — a[0x16c/4] != b[0x16c/4].
 

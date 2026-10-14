@@ -5,7 +5,7 @@ typedef int(__stdcall* Fn4)(void* self, int a, int b, int c);
 extern void* g_6b5de0;
 extern unsigned char g_6b7ffd;
 
-// FUNCTION: GOLDTL 0x437270
+/* ADDRESS: GOLDTL 0x00437270 */
 void __cdecl fcn_00437270(void)
 {
 	((Fn3) ((void**) *((void**)g_6b5de0))[0xc8 / 4])(((void**)g_6b5de0), 0x1c, 0);

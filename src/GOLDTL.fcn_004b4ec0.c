@@ -1,7 +1,7 @@
 void __cdecl fcn_004b5440(int, float*);
 
-// FUNCTION: GOLD 0x004b4d50
-// FUNCTION: GOLDTL 0x4b4ec0
+/* ADDRESS: GOLD 0x004b4d50 */
+/* ADDRESS: GOLDTL 0x004b4ec0 */
 
 int __cdecl fcn_004b4ec0(int a, char* e)
 {

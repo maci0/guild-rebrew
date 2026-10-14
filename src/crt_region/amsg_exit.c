@@ -1,4 +1,4 @@
-// SUPPORT: SERVER reversed mirror of stock LIBCMT amsg/crt0msg code, compiled to keep crt0msg.obj out of the link (its runtime-error strings duplicate rdata_restore.c). the strcat mirror (0x1001f8e0) is asm in the CRT and cannot match in pure C; this file is scaffolding, not reversed game code
+
 #include <windows.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"

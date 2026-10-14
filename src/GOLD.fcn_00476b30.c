@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00476b30
+
 // fcn_00476b30 — clear node table 0xf8f0a0..0xf8f120.
 
 int __cdecl fcn_00476850(int);

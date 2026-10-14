@@ -5,7 +5,7 @@ extern unsigned int g_104061c;
 extern void** g_1040610[];
 extern unsigned long g_14ce728;
 
-// FUNCTION: GOLDTL 0x456c10
+/* ADDRESS: GOLDTL 0x00456c10 */
 void __cdecl fcn_00456c10(void)
 {
 	unsigned int i;

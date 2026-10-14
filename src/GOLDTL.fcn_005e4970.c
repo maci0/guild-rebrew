@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005e4970
+
 
 typedef struct Player {
 	char pad0[0x10];

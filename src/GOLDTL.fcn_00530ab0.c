@@ -12,8 +12,8 @@ struct s_7e2ac0 {
 #include "client_types.h"
 extern s_7e2ac0 g_7e2ac0[48];
 
-// FUNCTION: GOLD 0x0052b380
-// FUNCTION: GOLDTL 0x530ab0
+
+
 
 #include <string.h>
 

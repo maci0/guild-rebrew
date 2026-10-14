@@ -23,8 +23,8 @@ char* __cdecl fcn_0064f026(char* s, char* delim);
 char* __cdecl fcn_0064d1a0(char* s, int c);
 void __cdecl fcn_0044cbd0(char* name, int flag);
 
-// FUNCTION: GOLD 0x0044e7e0
-// FUNCTION: GOLDTL 0x44d010
+/* ADDRESS: GOLD 0x0044e7e0 */
+/* ADDRESS: GOLDTL 0x0044d010 */
 void __cdecl fcn_0044d010(void* stream, fcn_0044d010_Ctx* c)
 {
 	char* tok;

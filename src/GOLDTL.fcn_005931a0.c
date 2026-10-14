@@ -1,11 +1,11 @@
-// GLOBAL: GOLDTL 0x6a9b9c
+/* ADDRESS: GOLDTL 0x006a9b9c */
 extern int g_6a9b9c;
-// GLOBAL: GOLD 0x62aa88
+/* ADDRESS: GOLD 0x0062aa88 */
 extern int g_6a9b9c;
-// GLOBAL: GOLD 0x6ed938
+/* ADDRESS: GOLD 0x006ed938 */
 extern int g_772514;
-// FUNCTION: GOLD 0x0058aca0
-// FUNCTION: GOLDTL 0x5931a0
+
+
 
 void __cdecl fcn_004727a0(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);

@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x004be930
+/* ADDRESS: GOLD 0x004be930 */
 
 void __cdecl fcn_004be930(char* obj)
 {

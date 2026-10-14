@@ -1,6 +1,6 @@
-// GLOBAL: GOLD 0x5ebb74
+/* ADDRESS: GOLD 0x005ebb74 */
 extern float g_662d40[3];
-// FUNCTION: GOLD 0x40aaf0
+
 
 char* __cdecl fcn_00402140(char* p);
 void __cdecl fcn_00458a10(char* src, char* pos, float* out);

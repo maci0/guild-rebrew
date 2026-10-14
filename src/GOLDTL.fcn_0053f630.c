@@ -1,7 +1,7 @@
 extern int g_7e1d40;
 
-// FUNCTION: GOLD 0x00537d50
-// FUNCTION: GOLDTL 0x53f630
+
+
 
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00472250(int, int, int);

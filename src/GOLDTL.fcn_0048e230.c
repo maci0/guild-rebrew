@@ -20,8 +20,8 @@ typedef struct F8 {
 
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
-// FUNCTION: GOLD 0x0048ec80
-// FUNCTION: GOLDTL 0x48e230
+/* ADDRESS: GOLD 0x0048ec80 */
+/* ADDRESS: GOLDTL 0x0048e230 */
 int __cdecl fcn_0048e230(char* a1, char* a2, char* a3)
 {
 	int found;

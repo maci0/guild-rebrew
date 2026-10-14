@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x461e60
+/* ADDRESS: GOLD 0x00461e60 */
 // fcn_00461e60 — write LE 16-bit to [a+8][a+0x14].
 
 void __cdecl fcn_00461e60(char* a, int v)

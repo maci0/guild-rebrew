@@ -1,7 +1,7 @@
 extern char* g_14a5320[];
 
-// FUNCTION: GOLD 0x00514310
-// FUNCTION: GOLDTL 0x517b10
+
+
 
 #include <string.h>
 

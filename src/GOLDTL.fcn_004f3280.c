@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004f1170
-// FUNCTION: GOLDTL 0x004f3280
+
+
 
 #pragma pack(push, 1)
 typedef struct

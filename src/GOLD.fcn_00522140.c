@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00522140
+
 /* Twin of GOLDTL 0x5270c0; the GOLD slot records are 0x3c4 bytes, not 0x3cc. */
 
 // SIZE 0x3c4

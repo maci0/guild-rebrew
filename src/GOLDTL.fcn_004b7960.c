@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4b7960
+
 
 void* __cdecl fcn_00508e40(int);
 unsigned short __cdecl gm_RandomMod(int);

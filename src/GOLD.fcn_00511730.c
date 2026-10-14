@@ -1,6 +1,6 @@
 extern unsigned char* g_7e3f30;
 
-// FUNCTION: GOLD 0x00511730
+
 /* Twin of GOLDTL 0x514e80; GOLD keeps the flag byte at 0x212 and uses bits 2/3, not 0/1. */
 
 #include <string.h>

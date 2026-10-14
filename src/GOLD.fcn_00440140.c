@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00440140
+/* ADDRESS: GOLD 0x00440140 */
 void __cdecl fcn_00440140(char* a)
 {
 	int i;

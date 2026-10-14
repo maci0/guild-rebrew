@@ -11,7 +11,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 float __cdecl gm_RandomFloat01(void);
 
-// FUNCTION: GOLDTL 0x4a48e0
+/* ADDRESS: GOLDTL 0x004a48e0 */
 
 /* Picks one entity of the list the key resolves to: the one nearest (with a
  * random weight) to the owner's or the player's reference entity, else a

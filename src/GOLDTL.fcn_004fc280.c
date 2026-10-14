@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4fc280
+
 
 extern float g_773d4c;
 extern float g_773d58;

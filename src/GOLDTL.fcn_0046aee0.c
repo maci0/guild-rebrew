@@ -51,7 +51,7 @@ extern int g_67d370;
 void __cdecl fcn_0046ac40(int x, int y);
 int __cdecl fcn_0046acf0(int x, int y);
 
-// FUNCTION: GOLDTL 0x46aee0
+/* ADDRESS: GOLDTL 0x0046aee0 */
 int __cdecl fcn_0046aee0(int x, int y)
 {
 	int i;

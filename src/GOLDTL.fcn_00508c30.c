@@ -1,7 +1,7 @@
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
-// FUNCTION: GOLD 0x505be0
-// FUNCTION: GOLDTL 0x00508c30
+/* ADDRESS: GOLD 0x00505be0 */
+/* ADDRESS: GOLDTL 0x00508c30 */
 void __cdecl fcn_00508c30(unsigned char n, unsigned char* arr)
 {
 	unsigned char i;

@@ -27,8 +27,8 @@ struct anim_409ae0* __cdecl fcn_00404dc0(char*, const char*, int);
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_004050c0(char*);
 
-// FUNCTION: GOLD 0x00408cb0
-// FUNCTION: GOLDTL 0x409ae0
+/* ADDRESS: GOLD 0x00408cb0 */
+/* ADDRESS: GOLDTL 0x00409ae0 */
 
 /* Starts a walk event: removes a pending morph, attaches the walk (or cart
  * pulling) motion and scales its speed to the event's step time. */

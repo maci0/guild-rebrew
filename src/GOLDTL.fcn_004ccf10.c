@@ -8,8 +8,8 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_005b2220(char*, char*, void*, int);
 
-// FUNCTION: GOLD 0x4cc390
-// FUNCTION: GOLDTL 0x004ccf10
+/* ADDRESS: GOLD 0x004cc390 */
+/* ADDRESS: GOLDTL 0x004ccf10 */
 
 int __cdecl fcn_004ccf10(int cmd, char* result)
 {

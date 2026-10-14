@@ -25,7 +25,7 @@ void __cdecl fcn_004c5530(void*);
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-// FUNCTION: GOLDTL 0x4b0e80
+/* ADDRESS: GOLDTL 0x004b0e80 */
 
 int __cdecl fcn_004b0e80(int a1, int a2, char* a3)
 {

@@ -2,40 +2,40 @@ typedef unsigned int (__stdcall* g_662324_f)(void*, unsigned int);
 typedef unsigned int (__stdcall* g_662320_f)(unsigned int);
 typedef int (__stdcall* g_66231c_f)(unsigned int, unsigned int, void*, unsigned long, unsigned int);
 typedef unsigned int (__stdcall* g_662318_f)(void);
-// GLOBAL: GOLDTL 0x1052c48
+/* ADDRESS: GOLDTL 0x01052c48 */
 extern unsigned int g_1052c48[2];
-// GLOBAL: GOLD 0xfe7a80
+/* ADDRESS: GOLD 0x00fe7a80 */
 extern unsigned int g_1052c48[2];
-// GLOBAL: GOLDTL 0x1052c50
+/* ADDRESS: GOLDTL 0x01052c50 */
 extern unsigned int g_1052c50;
-// GLOBAL: GOLD 0xfe7a88
+/* ADDRESS: GOLD 0x00fe7a88 */
 extern unsigned int g_1052c50;
-// GLOBAL: GOLDTL 0x6b7fc4
+/* ADDRESS: GOLDTL 0x006b7fc4 */
 extern int g_6b7fc4;
-// GLOBAL: GOLD 0x6333e4
+/* ADDRESS: GOLD 0x006333e4 */
 extern int g_6b7fc4;
-// GLOBAL: GOLDTL 0x6b7fa8
+/* ADDRESS: GOLDTL 0x006b7fa8 */
 extern int g_6b7fa8;
-// GLOBAL: GOLD 0x6333c8
+/* ADDRESS: GOLD 0x006333c8 */
 extern int g_6b7fa8;
-// GLOBAL: GOLDTL 0x662324
+/* ADDRESS: GOLDTL 0x00662324 */
 extern g_662324_f g_662324;
-// GLOBAL: GOLD 0x5eb278
+/* ADDRESS: GOLD 0x005eb278 */
 extern g_662324_f g_662324;
-// GLOBAL: GOLDTL 0x662320
+/* ADDRESS: GOLDTL 0x00662320 */
 extern g_662320_f g_662320;
-// GLOBAL: GOLD 0x5eb27c
+/* ADDRESS: GOLD 0x005eb27c */
 extern g_662320_f g_662320;
-// GLOBAL: GOLDTL 0x66231c
+/* ADDRESS: GOLDTL 0x0066231c */
 extern g_66231c_f g_66231c;
-// GLOBAL: GOLD 0x5eb280
+/* ADDRESS: GOLD 0x005eb280 */
 extern g_66231c_f g_66231c;
-// GLOBAL: GOLDTL 0x662318
+/* ADDRESS: GOLDTL 0x00662318 */
 extern g_662318_f g_662318;
-// GLOBAL: GOLD 0x5eb284
+/* ADDRESS: GOLD 0x005eb284 */
 extern g_662318_f g_662318;
-// FUNCTION: GOLD 0x0042e8c0
-// FUNCTION: GOLDTL 0x42dde0
+
+
 
 void __stdcall fcn_0042dcd0(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
 void __cdecl fcn_0064d3eb(unsigned int);

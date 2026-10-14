@@ -9,8 +9,8 @@ char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 void __cdecl fcn_0041d9e0(const char*);
 
-// FUNCTION: GOLD 0x0040c210
-// FUNCTION: GOLDTL 0x40d130
+/* ADDRESS: GOLD 0x0040c210 */
+/* ADDRESS: GOLDTL 0x0040d130 */
 
 /* PlayCharacterAniScriptInt(): like PlayCharacterAniScript() with an
  * integer parameter handed to the script. */

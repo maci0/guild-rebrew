@@ -38,8 +38,8 @@ extern double g_665b80;
 extern double g_662908;
 extern double g_665b78;
 
-// FUNCTION: GOLD 0x4ff8c0
-// FUNCTION: GOLDTL 0x00502450
+/* ADDRESS: GOLD 0x004ff8c0 */
+/* ADDRESS: GOLDTL 0x00502450 */
 int __cdecl fcn_00502450(int a, int b)
 {
 	unsigned short w;
@@ -62,8 +62,8 @@ extern double g_662908;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_AddObjekt(void);
 
-// FUNCTION: GOLD 0x4ff950
-// FUNCTION: GOLDTL 0x005024e0
+/* ADDRESS: GOLD 0x004ff950 */
+/* ADDRESS: GOLDTL 0x005024e0 */
 int __cdecl fcn_005024e0(int a, int b)
 {
 	char* c;

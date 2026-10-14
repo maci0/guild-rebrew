@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x423f20
+
 
 #include <string.h>
 

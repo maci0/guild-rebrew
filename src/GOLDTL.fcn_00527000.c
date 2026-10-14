@@ -4,8 +4,8 @@ extern char g_776708;
 
 extern Slot7f4ca2 g_7f4ca2[768];
 
-// FUNCTION: GOLD 0x522080
-// FUNCTION: GOLDTL 0x527000
+
+
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 

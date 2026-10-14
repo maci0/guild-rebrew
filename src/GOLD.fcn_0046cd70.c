@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0046cd70
+
 
 int __cdecl fcn_0046cb10(short, short, int);
 

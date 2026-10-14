@@ -1,10 +1,10 @@
 #include "g_688118.h"
-// GLOBAL: GOLDTL 0x688118
+/* ADDRESS: GOLDTL 0x00688118 */
 extern IdGroup g_688118[];
-// GLOBAL: GOLD 0x6094b0
+/* ADDRESS: GOLD 0x006094b0 */
 extern IdGroup g_688118[];
-// FUNCTION: GOLD 0x004c1f90
-// FUNCTION: GOLDTL 0x4c27f0
+/* ADDRESS: GOLD 0x004c1f90 */
+/* ADDRESS: GOLDTL 0x004c27f0 */
 
 int __cdecl fcn_004c27f0(void)
 {

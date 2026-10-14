@@ -46,7 +46,7 @@ extern int g_14ce86c;
 int __cdecl fcn_00470820(int a, int b, int c);
 int __cdecl fcn_004770a0(fcn_00471170_Desc* d, int flags);
 
-// FUNCTION: GOLDTL 0x471170
+/* ADDRESS: GOLDTL 0x00471170 */
 int __cdecl fcn_00471170(int a, int b, int c)
 {
 	int id;

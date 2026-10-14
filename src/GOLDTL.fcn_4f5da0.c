@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x4f5da0
+/* ADDRESS: GOLDTL 0x004f5da0 */
 
 // fcn_004f39b0 — count slots [p]==1 with [p-0xf]==a.
 

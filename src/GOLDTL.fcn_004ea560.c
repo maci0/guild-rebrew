@@ -1,7 +1,7 @@
 extern char g_6b5c60[];
 extern char g_7f4ca4[];
-// FUNCTION: GOLDTL 0x4ea560
-// FUNCTION: GOLD 0x4e87e0
+
+
 
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);

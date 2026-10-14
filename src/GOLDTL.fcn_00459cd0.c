@@ -1,6 +1,6 @@
 int __cdecl fcn_004346f0(char* a);
 
-// FUNCTION: GOLDTL 0x459cd0
+/* ADDRESS: GOLDTL 0x00459cd0 */
 int __cdecl fcn_00459cd0(char* a)
 {
 	int r;

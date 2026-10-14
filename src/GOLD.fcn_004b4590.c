@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004b4590
-// FUNCTION: GOLDTL 0x4b4700
+
+
 
 // fcn_004b4590 — fcn_00504ce0(a[0x164]) >= b[0x14].
 

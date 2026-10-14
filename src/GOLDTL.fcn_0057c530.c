@@ -20,8 +20,8 @@ struct msg {
 	char pad5[0x9b];
 };
 
-// FUNCTION: GOLD 0x00573ff0
-// FUNCTION: GOLDTL 0x57c530
+
+
 
 #include <string.h>
 

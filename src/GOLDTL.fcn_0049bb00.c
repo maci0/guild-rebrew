@@ -7,8 +7,8 @@ void __cdecl fcn_004f4830(int a, Stat* st);
 int __cdecl fcn_004a4680(float* o1, float* o2, int a3, char* e, Stat* st);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, char* p);
 
-// FUNCTION: GOLD 0x0049c0c0
-// FUNCTION: GOLDTL 0x49bb00
+/* ADDRESS: GOLD 0x0049c0c0 */
+/* ADDRESS: GOLDTL 0x0049bb00 */
 int __cdecl fcn_0049bb00(float* o1, float* o2, int a3, char* e, int a5, int a6, char* p)
 {
 	Stat st;

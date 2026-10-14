@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00474040
+
 
 typedef struct Glyph {
 	short pad0;

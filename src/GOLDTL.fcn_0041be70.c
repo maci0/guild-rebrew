@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00420870
-// FUNCTION: GOLDTL 0x0041be70
+
+
 
 #include "octree.h"
 

@@ -38,8 +38,8 @@ struct internal_state {
 #define NEEDBYTE {if(z->avail_in==0)return r;r=f;}
 #define NEXTBYTE (z->avail_in--,z->total_in++,*z->next_in++)
 
-// FUNCTION: GOLD 0x465160
-// FUNCTION: GOLDTL 0x004616e0
+/* ADDRESS: GOLD 0x00465160 */
+/* ADDRESS: GOLDTL 0x004616e0 */
 
 int __cdecl fcn_004616e0(z_streamp z, int f)
 {

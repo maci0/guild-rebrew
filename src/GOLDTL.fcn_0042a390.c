@@ -1,10 +1,10 @@
 typedef int (__stdcall* g_662454_f)(int);
-// GLOBAL: GOLDTL 0x662454
+/* ADDRESS: GOLDTL 0x00662454 */
 extern g_662454_f g_662454;
-// GLOBAL: GOLD 0x5eb310
+/* ADDRESS: GOLD 0x005eb310 */
 extern g_662454_f g_662454;
-// FUNCTION: GOLD 0x0042ba30
-// FUNCTION: GOLDTL 0x42a390
+
+
 
 extern int g_6b7f90;
 

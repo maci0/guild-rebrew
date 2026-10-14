@@ -7,7 +7,7 @@ extern int g_67bd2c;
 void __cdecl fcn_0045bfb0(char* p);
 void __cdecl m_FreeTracked(void* p);
 
-// FUNCTION: GOLDTL 0x45c1e0
+/* ADDRESS: GOLDTL 0x0045c1e0 */
 void __cdecl fcn_0045c1e0(void)
 {
 	unsigned int i;

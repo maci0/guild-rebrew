@@ -1,6 +1,6 @@
 extern char g_6b5c60[];
 
-// FUNCTION: GOLDTL 0x5351e0
+
 
 void __cdecl fcn_004712d0(int, char*, char*);
 

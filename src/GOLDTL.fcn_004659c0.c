@@ -28,7 +28,7 @@ int __cdecl fcn_0065f220(const char* a, const char* b);
 char* __cdecl fcn_0047acf0(char* p);
 void __cdecl m_FreeTracked(char* p);
 
-// FUNCTION: GOLDTL 0x4659c0
+/* ADDRESS: GOLDTL 0x004659c0 */
 int __cdecl fcn_004659c0(int idx, char* path)
 {
 	int i;

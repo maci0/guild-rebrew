@@ -1,6 +1,6 @@
 extern int g_67a370;
 
-// FUNCTION: GOLDTL 0x514d80
+
 
 #include <string.h>
 

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x50b7a0
+/* ADDRESS: GOLDTL 0x0050b7a0 */
 
 // fcn_00508640 — (param1) / table[param2].
 

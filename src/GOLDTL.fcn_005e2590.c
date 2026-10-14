@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x5d6060
-// FUNCTION: GOLDTL 0x005e2590
+
+
 
 #define RED(c) ((unsigned char) (c))
 #define GREEN(c) ((unsigned char) (((unsigned short) (c)) >> 8))

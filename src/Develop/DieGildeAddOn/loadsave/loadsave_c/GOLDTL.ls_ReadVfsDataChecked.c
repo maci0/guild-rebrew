@@ -1,7 +1,7 @@
 /* ls_ReadVfsDataChecked — wrapper around vfs_ReadData, nonzero on success. */
 
-// FUNCTION: GOLD 0x0051c950
-// FUNCTION: GOLDTL 0x5218f0
+
+
 
 int __cdecl vfs_ReadData(void*, int, int, void*);
 

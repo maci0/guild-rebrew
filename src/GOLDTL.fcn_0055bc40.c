@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x553b00
-// FUNCTION: GOLDTL 0x55bc40
+
+
 
 // SIZE 0x1
 struct bits {

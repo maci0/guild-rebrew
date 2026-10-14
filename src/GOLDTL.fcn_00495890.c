@@ -14,8 +14,8 @@ void __cdecl fcn_004c4510(Ent* e, int h);
 void __cdecl fcn_004c4570(int a, int b, int c, int* flags);
 void __cdecl fcn_004c5360(void);
 
-// FUNCTION: GOLD 0x495ed0
-// FUNCTION: GOLDTL 0x495890
+/* ADDRESS: GOLD 0x00495ed0 */
+/* ADDRESS: GOLDTL 0x00495890 */
 void __cdecl fcn_00495890(void)
 {
 	int flags;

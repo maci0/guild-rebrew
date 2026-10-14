@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x461b10
+
 
 #include "zutil.h"
 #include "infblock.h"

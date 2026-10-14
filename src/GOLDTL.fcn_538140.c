@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x538140
+
 
 // fcn_005316a0 — call [0x6622cc]([0x774940]); call [0x662280](0x6a37fc, [0x7e1f80]).
 

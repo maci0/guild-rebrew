@@ -8,7 +8,7 @@ typedef struct Vert {
 } Vert;
 // SIZE 0x18
 
-// FUNCTION: GOLDTL 0x0044f8e0
+/* ADDRESS: GOLDTL 0x0044f8e0 */
 
 /* Stores the bounding radius of o's vertices at 0x1d4 and appends the eight
  * corners of their bounding box after the last vertex. */

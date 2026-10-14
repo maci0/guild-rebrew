@@ -3,7 +3,7 @@ int __cdecl fcn_0044d770(void* h);
 void __cdecl fcn_004011f0(void* a, void* b);
 void __cdecl fcn_0044d7e0(void* h, char* tab, int n, int a);
 
-// FUNCTION: GOLDTL 0x44e190
+/* ADDRESS: GOLDTL 0x0044e190 */
 void __cdecl fcn_0044e190(int magic, int a2)
 {
 	void* h;

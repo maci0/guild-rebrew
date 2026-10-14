@@ -1,7 +1,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
-// FUNCTION: GOLD 0x00512870
-// FUNCTION: GOLDTL 0x00515fb0
+
+
 
 void __cdecl fcn_00500e20(char*);
 int __cdecl fcn_00505370(unsigned char*);

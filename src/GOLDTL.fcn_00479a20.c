@@ -23,7 +23,7 @@ typedef struct Bank {
 } Bank;
 // SIZE 0x35
 
-// FUNCTION: GOLDTL 0x479a20
+/* ADDRESS: GOLDTL 0x00479a20 */
 int __cdecl fcn_00479a20(Bank* b, int idx)
 {
 	unsigned int* po;

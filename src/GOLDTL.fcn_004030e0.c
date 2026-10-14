@@ -10,8 +10,8 @@ void __cdecl fcn_00442be0(void*);
 void __cdecl fcn_00403df0(char*);
 void __cdecl m_FreeTracked(char*);
 
-// FUNCTION: GOLD 0x004028a0
-// FUNCTION: GOLDTL 0x4030e0
+/* ADDRESS: GOLD 0x004028a0 */
+/* ADDRESS: GOLDTL 0x004030e0 */
 
 /* Removes an object from the live-object table and releases its scene
  * nodes. */

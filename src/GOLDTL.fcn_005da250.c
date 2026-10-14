@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005da250
+
 
 // SIZE 0x38
 typedef struct Row {

@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0052e890
+
 
 // SIZE 0x3c4
 typedef struct {

@@ -3,7 +3,7 @@ extern char* g_1015ec0[];
 void __cdecl fcn_0047ce50(void* p);
 void __cdecl m_FreeTracked(void* p);
 
-// FUNCTION: GOLDTL 0x473150
+/* ADDRESS: GOLDTL 0x00473150 */
 void __cdecl fcn_00473150(char* p)
 {
 	int i;

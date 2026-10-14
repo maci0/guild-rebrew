@@ -4,7 +4,7 @@ extern Mult664260 g_664260[7];
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-// FUNCTION: GOLDTL 0x493ee0
+/* ADDRESS: GOLDTL 0x00493ee0 */
 int __cdecl fcn_00493ee0(unsigned short* a, unsigned short* b, int key)
 {
 	int v;

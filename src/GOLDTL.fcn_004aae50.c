@@ -12,8 +12,8 @@ struct info_4aae50 {
 };
 // SIZE 0x18
 
-// FUNCTION: GOLD 0x004aad30
-// FUNCTION: GOLDTL 0x4aae50
+/* ADDRESS: GOLD 0x004aad30 */
+/* ADDRESS: GOLDTL 0x004aae50 */
 
 int __cdecl fcn_004aae50(int a1, unsigned short* a2, int* a3, int* a4)
 {

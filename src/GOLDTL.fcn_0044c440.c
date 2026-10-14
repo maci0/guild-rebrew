@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x44c440
+
 
 void __cdecl gv_SpawnEntities(void*);
 

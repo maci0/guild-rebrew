@@ -16,7 +16,7 @@ void __cdecl fcn_0047ce50(void* tex);
 void* __cdecl fcn_0047ce00(const char* name, int a2);
 void __cdecl fcn_0041d9e0(const char* msg);
 
-// FUNCTION: GOLDTL 0x46e7a0
+/* ADDRESS: GOLDTL 0x0046e7a0 */
 void __cdecl fcn_0046e7a0(const char* name, int win)
 {
 	char msg[0x400];

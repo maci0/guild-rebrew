@@ -7,7 +7,7 @@ int __cdecl fcn_00469ed0(int, int, int, int, int);
 void __cdecl fcn_004760a0(int, int);
 int __cdecl fcn_005de7a2(char*, char*, ...);
 
-// FUNCTION: GOLD 0x004be790
+/* ADDRESS: GOLD 0x004be790 */
 
 int __cdecl fcn_004be790(unsigned short* a1, int a2, int a3, int col, int x, int y, int layer, int* out)
 {

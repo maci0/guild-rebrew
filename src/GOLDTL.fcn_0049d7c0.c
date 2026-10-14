@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-// FUNCTION: GOLD 0x0049dd80
-// FUNCTION: GOLDTL 0x49d7c0
+
+
 
 typedef struct Blk24 {
 	unsigned char kind;

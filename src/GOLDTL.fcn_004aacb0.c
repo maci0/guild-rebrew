@@ -3,8 +3,8 @@ float __cdecl fcn_00507f10(unsigned short*, int);
 int __cdecl fcn_005c6270(void*, int);
 int __cdecl abs(int);
 
-// FUNCTION: GOLD 0x004aab90
-// FUNCTION: GOLDTL 0x4aacb0
+/* ADDRESS: GOLD 0x004aab90 */
+/* ADDRESS: GOLDTL 0x004aacb0 */
 
 int __cdecl fcn_004aacb0(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* a4)
 {

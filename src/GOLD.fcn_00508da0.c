@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00508da0
-// FUNCTION: GOLDTL 0x50bfe0
+/* ADDRESS: GOLD 0x00508da0 */
+/* ADDRESS: GOLDTL 0x0050bfe0 */
 
 // fcn_00508da0 — signed byte read at arg+0x5c.
 

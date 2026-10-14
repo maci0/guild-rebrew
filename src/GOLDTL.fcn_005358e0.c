@@ -1,7 +1,7 @@
 extern int g_68bfb8;
 
-// FUNCTION: GOLD 0x0052fdb0
-// FUNCTION: GOLDTL 0x5358e0
+
+
 
 #include <string.h>
 

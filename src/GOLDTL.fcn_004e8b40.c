@@ -1,7 +1,7 @@
 #include <string.h>
 
-// FUNCTION: GOLDTL 0x4e8b40
-// FUNCTION: GOLD 0x004e6f80
+
+
 
 #include "client_types.h"
 typedef Rec18_68da68 Rec18;
@@ -22,7 +22,7 @@ int __cdecl fcn_004e8b40(int idx, Rec18* out)
 extern int g_9a9620[10];
 extern char g_7f4ca0[];
 
-// FUNCTION: GOLDTL 0x004e98d0
+/* ADDRESS: GOLDTL 0x004e98d0 */
 int* __cdecl fcn_004e98d0(void)
 {
 	Rec18 r;
@@ -46,7 +46,7 @@ int* __cdecl fcn_004e98d0(void)
 
 extern Rec18 g_9a9228[];
 
-// FUNCTION: GOLDTL 0x004e9950
+/* ADDRESS: GOLDTL 0x004e9950 */
 int __cdecl fcn_004e9950(int type, int max, int* out)
 {
 	Rec18 r;

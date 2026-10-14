@@ -8,8 +8,8 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-// FUNCTION: GOLD 0x004baf30
-// FUNCTION: GOLDTL 0x4bb320
+/* ADDRESS: GOLD 0x004baf30 */
+/* ADDRESS: GOLDTL 0x004bb320 */
 
 int __cdecl fcn_004bb320(int* a1)
 {

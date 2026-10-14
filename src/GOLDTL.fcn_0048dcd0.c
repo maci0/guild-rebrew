@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0048e720
-// FUNCTION: GOLDTL 0x48dcd0
+
+
 
 typedef struct Ent {
 	char pad0[4];

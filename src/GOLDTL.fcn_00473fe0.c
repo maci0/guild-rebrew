@@ -5,7 +5,7 @@ extern int g_100f1d8;
 extern int g_100f1e0;
 extern int g_6772c0;
 extern int g_6b5c84;
-// FUNCTION: GOLDTL 0x473fe0
+/* ADDRESS: GOLDTL 0x00473fe0 */
 
 void __cdecl fcn_00473fe0(void)
 {

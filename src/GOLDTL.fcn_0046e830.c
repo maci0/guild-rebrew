@@ -16,7 +16,7 @@ extern char* g_1015ea0;
 
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 
-// FUNCTION: GOLDTL 0x46e830
+/* ADDRESS: GOLDTL 0x0046e830 */
 void __cdecl fcn_0046e830(int x, int y, int win, int target, int id)
 {
 	int wo;

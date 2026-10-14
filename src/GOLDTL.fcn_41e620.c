@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x41e620
+/* ADDRESS: GOLDTL 0x0041e620 */
 
 // fcn_00422d60 — call [0x662470](0); set 2 fields; return 1.
 

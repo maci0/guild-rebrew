@@ -2,8 +2,8 @@
 
 extern Mult664260 g_664260[7];
 
-// FUNCTION: GOLD 0x004948b0
-// FUNCTION: GOLDTL 0x493f50
+/* ADDRESS: GOLD 0x004948b0 */
+/* ADDRESS: GOLDTL 0x00493f50 */
 
 Mult664260* __cdecl fcn_00493f50(int key)
 {

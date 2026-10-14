@@ -15,8 +15,8 @@ struct s_1041d80 {
 
 extern char g_1041d80[];
 
-// FUNCTION: GOLD 0x00525980
-// FUNCTION: GOLDTL 0x52a7d0
+
+
 
 void __cdecl fcn_004379a0(char*, int, int, void*, void*);
 char __cdecl fcn_0052a320(char*);

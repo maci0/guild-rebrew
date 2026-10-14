@@ -8,8 +8,8 @@ struct sym_429d30 {
 
 void __cdecl m_FreeTracked(void*);
 
-// FUNCTION: GOLD 0x42b410
-// FUNCTION: GOLDTL 0x429d30
+/* ADDRESS: GOLD 0x0042b410 */
+/* ADDRESS: GOLDTL 0x00429d30 */
 
 /* Frees a script with its symbol data, child scripts and buffers. */
 int __cdecl fcn_00429d30(char* s)

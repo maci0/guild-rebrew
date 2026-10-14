@@ -9,7 +9,7 @@ int __cdecl fcn_00465950(const char* name);
 char* __cdecl fcn_00466190(int idx);
 void __cdecl fcn_00473800(int a, int x, int y, int w, int h);
 
-// FUNCTION: GOLDTL 0x473a10
+/* ADDRESS: GOLDTL 0x00473a10 */
 int __cdecl fcn_00473a10(int x, int y)
 {
 	int px;

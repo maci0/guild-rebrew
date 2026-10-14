@@ -1,9 +1,9 @@
-// GLOBAL: GOLDTL 0x774964
+/* ADDRESS: GOLDTL 0x00774964 */
 extern char g_774964;
-// GLOBAL: GOLD 0x6f25ac
+/* ADDRESS: GOLD 0x006f25ac */
 extern char g_774964;
-// FUNCTION: GOLD 0x005d7530
-// FUNCTION: GOLDTL 0x5e4060
+
+
 
 extern char g_7f4ca0[];
 

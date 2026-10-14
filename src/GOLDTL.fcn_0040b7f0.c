@@ -11,8 +11,8 @@ void __cdecl fcn_00455350(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 char* __cdecl fcn_004051d0(char*, char*, int, ...);
 
-// FUNCTION: GOLD 0x0040a9c0
-// FUNCTION: GOLDTL 0x40b7f0
+/* ADDRESS: GOLD 0x0040a9c0 */
+/* ADDRESS: GOLDTL 0x0040b7f0 */
 
 /* Steps a walk-to-exit event: queues a walk to the room's exit cell. */
 void __cdecl fcn_0040b7f0(char* ev)

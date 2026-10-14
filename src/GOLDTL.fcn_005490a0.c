@@ -8,7 +8,7 @@ void __cdecl fcn_005474f0(void);
 void __cdecl fcn_00548f00(void);
 void __cdecl fcn_005473a0(void);
 
-// FUNCTION: GOLDTL 0x5490a0
+/* ADDRESS: GOLDTL 0x005490a0 */
 void __cdecl fcn_005490a0(void)
 {
 	fcn_005471c0();

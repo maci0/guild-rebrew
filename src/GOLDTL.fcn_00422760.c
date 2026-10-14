@@ -8,14 +8,14 @@ typedef struct {
 } T422760;
 
 #include "client_types.h"
-// GLOBAL: GOLD 0x1460a20
+/* ADDRESS: GOLD 0x01460a20 */
 extern Voice_14cbbe0 g_14cbbe0;
 extern char* g_6b7e88;
-// GLOBAL: GOLD 0x6332ac
+/* ADDRESS: GOLD 0x006332ac */
 extern int g_6b7e8c;
 
-// FUNCTION: GOLD 0x004262f0
-// FUNCTION: GOLDTL 0x422760
+/* ADDRESS: GOLD 0x004262f0 */
+/* ADDRESS: GOLDTL 0x00422760 */
 
 T422760* __cdecl fcn_00422760(int key, int* idx)
 {

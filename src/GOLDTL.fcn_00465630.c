@@ -2,8 +2,8 @@
 
 int __cdecl fcn_00461560(void* z);
 
-// FUNCTION: GOLD 0x00468630
-// FUNCTION: GOLDTL 0x465630
+/* ADDRESS: GOLD 0x00468630 */
+/* ADDRESS: GOLDTL 0x00465630 */
 int __cdecl fcn_00465630(char* s)
 {
 	int err = 0;

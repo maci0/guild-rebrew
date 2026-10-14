@@ -38,8 +38,8 @@ void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 #define FRAME_427070 (*(struct frame_427070**) (g_6b7e98 + 0xc28))
 #define LEX_427070 (*(int*) (g_6b7e98 + 0x118))
 
-// FUNCTION: GOLD 0x004287e0
-// FUNCTION: GOLDTL 0x427070
+/* ADDRESS: GOLD 0x004287e0 */
+/* ADDRESS: GOLDTL 0x00427070 */
 
 /* Parses a while head: evaluates the condition and pushes a loop level. */
 int __cdecl fcn_00427070(void)

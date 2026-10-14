@@ -11,7 +11,7 @@ struct s_10432c0 {
 
 extern char g_10432c0[];
 
-// FUNCTION: GOLDTL 0x5155e0
+
 
 #include <string.h>
 

@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005cd430
+
 
 extern int g_100f1dc;
 extern int g_774654;

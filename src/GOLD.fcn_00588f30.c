@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x588f30
+
 
 // SIZE 0x38
 struct sel {

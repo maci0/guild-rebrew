@@ -13,7 +13,7 @@ struct fcn_0047c520_dev {
 extern int g_772618;
 extern void* g_6b5de0;
 
-// FUNCTION: GOLDTL 0x47c520
+/* ADDRESS: GOLDTL 0x0047c520 */
 
 void __cdecl fcn_0047c520(void)
 {

@@ -11,7 +11,7 @@ char __cdecl fcn_0041b3a0(char*, unsigned long*);
 char __cdecl fcn_0041b470(char*, int*);
 void __cdecl fcn_00411340(int);
 
-// FUNCTION: GOLDTL 0x41b290
+/* ADDRESS: GOLDTL 0x0041b290 */
 
 /* Reads the saved display adapter and mode from the registry; returns 1
  * when both are still available. */

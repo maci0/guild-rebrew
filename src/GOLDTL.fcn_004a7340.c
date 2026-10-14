@@ -4,7 +4,7 @@ typedef Card_1007ce0 Card;
 
 extern Card_1007ce0 g_1007ce0[24];
 
-// FUNCTION: GOLDTL 0x4a7340
+/* ADDRESS: GOLDTL 0x004a7340 */
 int __cdecl fcn_004a7340(int* h, int* out, int a3)
 {
 	int s;

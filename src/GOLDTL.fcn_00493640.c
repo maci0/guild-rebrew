@@ -24,8 +24,8 @@ Unit* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
 
-// FUNCTION: GOLD 0x494010
-// FUNCTION: GOLDTL 0x00493640
+/* ADDRESS: GOLD 0x00494010 */
+/* ADDRESS: GOLDTL 0x00493640 */
 int __cdecl fcn_00493640(Plan* p)
 {
 	unsigned int n;

@@ -8,8 +8,8 @@ typedef struct Tag {
 #include "client_types.h"
 
 
-// FUNCTION: GOLD 0x00476bf0
-// FUNCTION: GOLDTL 0x473750
+/* ADDRESS: GOLD 0x00476bf0 */
+/* ADDRESS: GOLDTL 0x00473750 */
 void __cdecl fcn_00473750(int id, int val)
 {
 	int i;

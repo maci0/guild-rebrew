@@ -1,7 +1,7 @@
 extern char g_774a80[];
-// GLOBAL: GOLDTL 0x6ab4d4
+/* ADDRESS: GOLDTL 0x006ab4d4 */
 extern char g_6ab4d4[];
-// FUNCTION: GOLDTL 0x5b2f60
+
 
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_0051af00(void*, int, int);

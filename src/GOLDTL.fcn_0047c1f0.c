@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x0047c1f0
+
 
 typedef struct Vtx {
 	float x;

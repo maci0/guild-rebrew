@@ -5,7 +5,7 @@ int __cdecl fcn_0064e1fd(void*);
 
 extern char g_6790b0[];
 
-// FUNCTION: GOLDTL 0x479ff0
+/* ADDRESS: GOLDTL 0x00479ff0 */
 
 int __cdecl fcn_00479ff0(const char* name, char* data)
 {

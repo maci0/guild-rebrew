@@ -1,5 +1,5 @@
 #include "client_types.h"
-// FUNCTION: GOLDTL 0x40c120
+
 
 #include <stdarg.h>
 

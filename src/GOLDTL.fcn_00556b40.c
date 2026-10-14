@@ -12,7 +12,7 @@ int __cdecl fcn_004c4450(int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00546ef0(int, char*, int, int);
 
-// FUNCTION: GOLDTL 0x556b40
+/* ADDRESS: GOLDTL 0x00556b40 */
 void __cdecl fcn_00556b40(char* e)
 {
 	char buf[0x200];

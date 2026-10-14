@@ -1,8 +1,8 @@
 extern char g_774a80[];
 extern char g_6ab430[];
 extern char g_7f4ca0[];
-// FUNCTION: GOLD 0x005a9310
-// FUNCTION: GOLDTL 0x5b2790
+
+
 
 unsigned short __cdecl gm_RandomMod(int);
 int  __cdecl fcn_0064d41a(char*, char*, int);

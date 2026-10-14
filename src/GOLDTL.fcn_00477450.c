@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x477450
+
 
 void __stdcall fcn_005ef8cf(int, int, int, int, int, int, int);
 

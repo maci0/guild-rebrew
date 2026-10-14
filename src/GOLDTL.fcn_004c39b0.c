@@ -7,7 +7,7 @@ int __cdecl fcn_00418c80(int, int, int, float);
 void __cdecl SetSoundControlValue(int stream, unsigned int value);
 void __cdecl fcn_004192b0(int, int, int, int);
 
-// FUNCTION: GOLDTL 0x4c39b0
+/* ADDRESS: GOLDTL 0x004c39b0 */
 
 void __cdecl fcn_004c39b0(void)
 {

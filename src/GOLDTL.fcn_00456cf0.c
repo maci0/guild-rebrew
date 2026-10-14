@@ -13,7 +13,7 @@ extern int* g_6b89e4;
 void __cdecl fcn_00456560(void);
 void __cdecl gv_Free3Fields(int* slot);
 
-// FUNCTION: GOLDTL 0x456cf0
+/* ADDRESS: GOLDTL 0x00456cf0 */
 void __cdecl fcn_00456cf0(void)
 {
 	int a;

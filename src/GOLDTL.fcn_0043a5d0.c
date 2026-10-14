@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x43a5d0
+
 
 typedef float* (__cdecl* fcn_0043a5d0_f)(char*, char*, char*);
 

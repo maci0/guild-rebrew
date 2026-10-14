@@ -19,7 +19,7 @@ extern unsigned long g_14ce728;
 
 void __cdecl fcn_0041b7c0(void);
 
-// FUNCTION: GOLDTL 0x41b4b0
+/* ADDRESS: GOLDTL 0x0041b4b0 */
 
 /* Releases the Direct3D sprite, device and interface objects. */
 void __cdecl fcn_0041b4b0(void)

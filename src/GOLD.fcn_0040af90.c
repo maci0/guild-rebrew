@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x0040af90
+/* ADDRESS: GOLD 0x0040af90 */
 // fcn_0040af90 — resets four globals.
 
 void __cdecl fcn_0040af90(void)

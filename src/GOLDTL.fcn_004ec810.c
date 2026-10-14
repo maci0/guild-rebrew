@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x4eaa90
-// FUNCTION: GOLDTL 0x4ec810
+
+
 
 int __cdecl ahm_CheckFlag(void*);
 

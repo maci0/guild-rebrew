@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x4644f0
+
 
 typedef struct {
 	char pad20[0x20];

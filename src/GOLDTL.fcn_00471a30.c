@@ -37,7 +37,7 @@ extern Obj_1038140 g_1038140[];
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 
-// FUNCTION: GOLDTL 0x471a30
+/* ADDRESS: GOLDTL 0x00471a30 */
 void __cdecl fcn_00471a30(int k, int flag)
 {
 	Obj* o;

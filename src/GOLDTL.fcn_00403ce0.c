@@ -24,7 +24,7 @@ struct link_403ce0* __cdecl m_alloc(int size, const char* tag);
 void __cdecl fcn_00438b40(struct node_403ce0*, float*);
 void __cdecl fcn_00438cb0(struct node_403ce0*, char*);
 
-// FUNCTION: GOLDTL 0x403ce0
+/* ADDRESS: GOLDTL 0x00403ce0 */
 
 /* Attaches a transport node to an object at the object's anchor point. */
 struct link_403ce0* __cdecl fcn_00403ce0(char* obj, struct node_403ce0* node)

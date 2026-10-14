@@ -1,10 +1,10 @@
 #include "g_6abb08.h"
-// GLOBAL: GOLDTL 0x6abb08
+/* ADDRESS: GOLDTL 0x006abb08 */
 extern Offer g_6abb08[];
-// GLOBAL: GOLD 0x62c420
+/* ADDRESS: GOLD 0x0062c420 */
 extern Offer g_6abb08[];
-// FUNCTION: GOLD 0x005ba7b0
-// FUNCTION: GOLDTL 0x5c6220
+/* ADDRESS: GOLD 0x005ba7b0 */
+/* ADDRESS: GOLDTL 0x005c6220 */
 
 char* __cdecl fcn_005c6220(int key, int* out)
 {

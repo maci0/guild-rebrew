@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00420530
+
 
 #include <windows.h>
 

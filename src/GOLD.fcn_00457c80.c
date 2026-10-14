@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x457c80
+
 
 /* GOLD twin of GOLDTL fcn_004545c0: the enable field is 0x104 (GOLDTL 0x40c)
  * and the flag is bit 4 of byte 0x213 (GOLDTL: bit 1 of 0x217). */

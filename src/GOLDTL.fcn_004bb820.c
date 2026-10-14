@@ -6,8 +6,8 @@ int __cdecl fcn_005086f0(unsigned short*);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
-// FUNCTION: GOLD 0x004bb430
-// FUNCTION: GOLDTL 0x004bb820
+/* ADDRESS: GOLD 0x004bb430 */
+/* ADDRESS: GOLDTL 0x004bb820 */
 
 int __cdecl fcn_004bb820(int* a1)
 {

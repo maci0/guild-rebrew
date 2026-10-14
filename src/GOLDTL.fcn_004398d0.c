@@ -18,7 +18,7 @@ void __cdecl fcn_00456b80(char* obj);
 void __cdecl fcn_00418f90(int a);
 void __cdecl fcn_00439d80(char* obj);
 
-// FUNCTION: GOLDTL 0x4398d0
+/* ADDRESS: GOLDTL 0x004398d0 */
 
 /* Disposes a scene object and its children, switching to its universe first. */
 void __cdecl fcn_004398d0(char* obj)

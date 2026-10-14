@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x457cf0
-// FUNCTION: GOLDTL 0x454630
+
+
 
 // SIZE 0x8
 typedef struct Link {

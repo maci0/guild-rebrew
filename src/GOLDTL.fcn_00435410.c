@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00435410
+
 
 typedef struct Mesh435410 Mesh435410;
 

@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005cc990
+
 
 #include "client_types.h"
 typedef Win_1015f40 Win;

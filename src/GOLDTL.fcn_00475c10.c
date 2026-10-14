@@ -20,7 +20,7 @@ void __cdecl fcn_00475fd0(void* t);
 void __cdecl fcn_00475a00(const char* name, void* t);
 void __cdecl fcn_00476060(void* t);
 
-// FUNCTION: GOLDTL 0x475c10
+/* ADDRESS: GOLDTL 0x00475c10 */
 void* __cdecl fcn_00475c10(const char* name)
 {
 	TexDesc d;

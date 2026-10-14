@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x41d850
+
 
 void __cdecl DispatchLogOutput(char*, int, int);
 

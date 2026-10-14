@@ -11,8 +11,8 @@ typedef struct {
 
 extern char g_1007bc0[];
 
-// FUNCTION: GOLD 0x4b1ee0
-// FUNCTION: GOLDTL 0x4b2020
+/* ADDRESS: GOLD 0x004b1ee0 */
+/* ADDRESS: GOLDTL 0x004b2020 */
 
 int __cdecl fcn_004b2020(unsigned short g)
 {

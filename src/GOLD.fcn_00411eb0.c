@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x411eb0
+
 
 #include <math.h>
 

@@ -12,7 +12,7 @@ typedef struct {
 char* __cdecl fcn_004010b0(void*);
 int __cdecl fcn_0044cd20(char*, Entry*, int);
 
-// FUNCTION: GOLDTL 0x0044cdb0
+/* ADDRESS: GOLDTL 0x0044cdb0 */
 
 void __cdecl fcn_0044cdb0(void* s, Entry* tbl, int arg, int user)
 {

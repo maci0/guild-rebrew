@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005729b0
-// FUNCTION: GOLDTL 0x57ae50
+
+
 
 /* 'sPgf': tag the effect object with its owner id */
 #define FX_MAGIC 0x66675073

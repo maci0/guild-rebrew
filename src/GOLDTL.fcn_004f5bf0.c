@@ -1,6 +1,6 @@
 extern char g_9a3825[];
 
-// FUNCTION: GOLDTL 0x004f5bf0
+/* ADDRESS: GOLDTL 0x004f5bf0 */
 int __cdecl fcn_004f5bf0(unsigned int key, int start)
 {
 	int r;

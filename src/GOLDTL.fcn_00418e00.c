@@ -22,7 +22,7 @@ void __cdecl fcn_00418fb0(struct snd_418e00*);
 int __cdecl fcn_00423460(char*);
 void __cdecl fcn_00418d70(struct snd_418e00*);
 
-// FUNCTION: GOLDTL 0x418e00
+/* ADDRESS: GOLDTL 0x00418e00 */
 
 /* Updates the positional sound sources: silences the ones outside the
  * current room, pans the others and releases finished voices. */

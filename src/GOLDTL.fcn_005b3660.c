@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x005b3660
+
 
 typedef struct
 {

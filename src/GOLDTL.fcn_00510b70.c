@@ -1,5 +1,5 @@
 extern int g_67a370;
-// FUNCTION: GOLDTL 0x00510b70
+
 
 int __cdecl sprintf(char*, const char*, ...);
 char __cdecl fcn_00448360(char*, int, int);

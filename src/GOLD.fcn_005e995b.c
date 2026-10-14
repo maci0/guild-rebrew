@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005e995b
+
 // fcn_005e995b — memset 0x14eac20 (0x100) + zero 3 globals + 3 stosd at 0x14eab10.
 
 #include <string.h>

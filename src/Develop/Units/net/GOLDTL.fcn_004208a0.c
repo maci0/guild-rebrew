@@ -4,7 +4,7 @@
 
 void __cdecl fcn_0041da60(char* module, unsigned int line, char* msg, int severity);
 
-// FUNCTION: GOLDTL 0x4208a0
+/* ADDRESS: GOLDTL 0x004208a0 */
 
 /* Logs a readable text for a winsock error code (twin of the server's
  * srv_LogWinsockError). */

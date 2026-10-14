@@ -1,8 +1,8 @@
 void __cdecl fcn_004011a0(void* a, char* buf);
 char* __cdecl fcn_0064d1a0(char* s, int c);
 
-// FUNCTION: GOLD 0x44efd0
-// FUNCTION: GOLDTL 0x44d900
+/* ADDRESS: GOLD 0x0044efd0 */
+/* ADDRESS: GOLDTL 0x0044d900 */
 void __cdecl fcn_0044d900(void* a, char* s)
 {
 	char buf[0x100];

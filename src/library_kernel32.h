@@ -1,9 +1,9 @@
-// LIBRARY: GOLD 0x005e98f8
+
 // GetOEMCP
 
-// LIBRARY: GOLD 0x005e990d
+
 // GetACP
 
-// LIBRARY: GOLD 0x005eaad0
+
 // RtlUnwind
 

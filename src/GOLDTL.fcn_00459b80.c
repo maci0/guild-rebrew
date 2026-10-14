@@ -1,6 +1,6 @@
-// GLOBAL: GOLDTL 0x10405e0
+/* ADDRESS: GOLDTL 0x010405e0 */
 extern int g_10405e0[];
-// FUNCTION: GOLDTL 0x459b80
+/* ADDRESS: GOLDTL 0x00459b80 */
 
 void __cdecl fcn_00459b80(void)
 {

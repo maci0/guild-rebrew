@@ -41,7 +41,7 @@ extern int g_1015eac;
 
 void __cdecl fcn_00469c40(int x, int y, int slot);
 
-// FUNCTION: GOLDTL 0x471b60
+/* ADDRESS: GOLDTL 0x00471b60 */
 void __cdecl fcn_00471b60(int k)
 {
 	Obj* o;

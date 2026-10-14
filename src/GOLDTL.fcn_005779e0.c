@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x56f570
-// FUNCTION: GOLDTL 0x5779e0
+
+
 
 float __cdecl fcn_00507f10(void*, int);
 float __cdecl gm_RandomFloat01(void);

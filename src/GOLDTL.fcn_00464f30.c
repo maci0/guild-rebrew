@@ -5,7 +5,7 @@ int __cdecl fcn_00464eb0(char* s);
 int __cdecl fcn_00464a90(char* file, void* info, char* name, unsigned long nsize, void* extra, unsigned long esize, char* comment, unsigned long csize);
 int __cdecl fcn_004645a0(const char* a, const char* b, int cs);
 
-// FUNCTION: GOLDTL 0x464f30
+/* ADDRESS: GOLDTL 0x00464f30 */
 int __cdecl fcn_00464f30(char* s, const char* name, int cs)
 {
 	int err;

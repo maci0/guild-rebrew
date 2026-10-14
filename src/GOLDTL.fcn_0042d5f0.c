@@ -4,8 +4,8 @@ extern char g_149d120[][0x74];
 
 void __cdecl m_FreeTracked(void* p);
 
-// FUNCTION: GOLD 0x0042e2a0
-// FUNCTION: GOLDTL 0x42d5f0
+/* ADDRESS: GOLD 0x0042e2a0 */
+/* ADDRESS: GOLDTL 0x0042d5f0 */
 void __cdecl fcn_0042d5f0(void)
 {
 	int i;

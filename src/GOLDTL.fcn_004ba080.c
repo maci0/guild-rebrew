@@ -54,7 +54,7 @@ void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_004c5530(Packet*);
 
-// FUNCTION: GOLDTL 0x004ba080
+/* ADDRESS: GOLDTL 0x004ba080 */
 int __cdecl fcn_004ba080(Req* r)
 {
 	char* o;

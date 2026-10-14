@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x578110
-// FUNCTION: GOLDTL 0x5806d0
+
+
 
 // SIZE 0x10
 struct step {

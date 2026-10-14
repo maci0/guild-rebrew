@@ -30,8 +30,8 @@ void __cdecl fcn_0047a320(int, int, int, Spr*);
 void __cdecl fcn_00477500(int, int, int, Spr*);
 void __cdecl fcn_004774f0(int, int, int, Spr*);
 
-// FUNCTION: GOLD 0x47bd60
-// FUNCTION: GOLDTL 0x00478fc0
+/* ADDRESS: GOLD 0x0047bd60 */
+/* ADDRESS: GOLDTL 0x00478fc0 */
 
 int __cdecl fcn_00478fc0(int x, int y, Surf* s, Spr* spr)
 {

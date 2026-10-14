@@ -1,8 +1,8 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004f7890.c. */
 extern char g_679060[];
 
-// FUNCTION: GOLDTL 0x4f7cd0
-// FUNCTION: GOLD 0x4f58e0
+
+
 
 void __cdecl fcn_0051af00(void*, int, int);
 void __cdecl fcn_004fa5f0(void*, int, int);

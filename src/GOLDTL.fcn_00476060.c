@@ -22,7 +22,7 @@ typedef struct {
 	int f3c;
 } fcn_00476060_obj;
 
-// FUNCTION: GOLDTL 0x476060
+/* ADDRESS: GOLDTL 0x00476060 */
 
 int __cdecl fcn_00476060(fcn_00476060_obj* o)
 {

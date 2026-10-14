@@ -2,7 +2,7 @@ double __cdecl fcn_00507f10(int, int);
 /* declared float here: the float return is what gives fcomp m32 against p */
 float __cdecl gm_RandomFloat01(void);
 
-// FUNCTION: GOLDTL 0x4931a0
+/* ADDRESS: GOLDTL 0x004931a0 */
 
 int __cdecl fcn_004931a0(int a, int b)
 {

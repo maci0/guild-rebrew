@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0052b4c0
-// FUNCTION: GOLDTL 0x530bf0
+
+
 
 int sprintf(char*, const char*, ...);
 char* __cdecl fcn_00426fd0(int);

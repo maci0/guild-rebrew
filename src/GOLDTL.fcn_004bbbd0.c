@@ -12,8 +12,8 @@ extern fcn_004bbbd0_handler g_6811b8[];
 
 char* __cdecl fcn_00508e40(int);
 
-// FUNCTION: GOLD 0x4bb6c0
-// FUNCTION: GOLDTL 0x4bbbd0
+/* ADDRESS: GOLD 0x004bb6c0 */
+/* ADDRESS: GOLDTL 0x004bbbd0 */
 
 int __cdecl fcn_004bbbd0(fcn_004bbbd0_msg* m)
 {

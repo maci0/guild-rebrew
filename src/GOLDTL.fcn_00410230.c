@@ -3,7 +3,7 @@ extern char* g_6b7e98;
 int __cdecl m_is_tracked(char*);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
-// FUNCTION: GOLDTL 0x410230
+/* ADDRESS: GOLDTL 0x00410230 */
 
 /* SetEmitterVelocity: sets a particle emitter's velocity in hundredths. */
 int __cdecl fcn_00410230(char** obj, int* x, int* y, int* z)

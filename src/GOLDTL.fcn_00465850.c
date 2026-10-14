@@ -19,7 +19,7 @@ extern int g_6b7fac;
 void __cdecl fcn_0047b5d0(void* p);
 void __cdecl m_FreeTracked(void* p);
 
-// FUNCTION: GOLDTL 0x465850
+/* ADDRESS: GOLDTL 0x00465850 */
 int __cdecl fcn_00465850(void)
 {
 	int i;

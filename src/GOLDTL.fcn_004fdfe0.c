@@ -28,7 +28,7 @@ int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 HeadSet* __cdecl fcn_004fda30(int id);
 
-// FUNCTION: GOLDTL 0x004fdfe0
+/* ADDRESS: GOLDTL 0x004fdfe0 */
 void __cdecl fcn_004fdfe0(Figure* f)
 {
 	char icon[0x80];

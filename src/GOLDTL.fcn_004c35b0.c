@@ -9,8 +9,8 @@ extern char g_7f4ca0[];
 
 void __cdecl fcn_004c3540(fcn_004c35b0_slot*);
 
-// FUNCTION: GOLD 0x004c2ce0
-// FUNCTION: GOLDTL 0x4c35b0
+/* ADDRESS: GOLD 0x004c2ce0 */
+/* ADDRESS: GOLDTL 0x004c35b0 */
 
 void __cdecl fcn_004c35b0(void)
 {

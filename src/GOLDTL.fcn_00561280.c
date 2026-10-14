@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00559060
-// FUNCTION: GOLDTL 0x00561280
+
+
 
 typedef struct {
 	short w[7];

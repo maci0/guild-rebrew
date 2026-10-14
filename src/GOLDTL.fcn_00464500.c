@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x464500
+
 
 #include "zlib.h"
 

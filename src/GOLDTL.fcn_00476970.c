@@ -49,7 +49,7 @@ typedef struct Tex {
 int __cdecl fcn_00475fd0(Tex* t);
 void __cdecl fcn_00476060(Tex* t);
 
-// FUNCTION: GOLDTL 0x476970
+/* ADDRESS: GOLDTL 0x00476970 */
 int __cdecl fcn_00476970(Tex* t)
 {
 	int was;

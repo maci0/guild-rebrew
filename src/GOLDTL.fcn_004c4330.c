@@ -32,8 +32,8 @@ extern cell10_fb5760 g_fb5760[0x8000];
 unsigned short __cdecl fcn_004c3a50(pkt99*);
 int __cdecl fcn_004c4090(void);
 
-// FUNCTION: GOLD 0x4c39c0
-// FUNCTION: GOLDTL 0x4c4330
+/* ADDRESS: GOLD 0x004c39c0 */
+/* ADDRESS: GOLDTL 0x004c4330 */
 
 int __cdecl fcn_004c4330(pkt99* a1)
 {

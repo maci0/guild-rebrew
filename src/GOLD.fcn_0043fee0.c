@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x43fee0
+
 // The b + (a + s) grouping keeps s on the FPU stack across both compares.
 
 // SIZE 0x1

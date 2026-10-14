@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0053f210
-// FUNCTION: GOLDTL 0x00546fe0
+
+
 
 #include "he_tables.h"
 

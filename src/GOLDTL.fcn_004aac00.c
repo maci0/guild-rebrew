@@ -10,8 +10,8 @@ void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c6ae0(int id, int k);
 void __cdecl fcn_004c4ef0(char* s);
 
-// FUNCTION: GOLD 0x4aaae0
-// FUNCTION: GOLDTL 0x4aac00
+/* ADDRESS: GOLD 0x004aaae0 */
+/* ADDRESS: GOLDTL 0x004aac00 */
 int __cdecl fcn_004aac00(char* a1, int a2, char* x)
 {
 	char msg[0xf8];

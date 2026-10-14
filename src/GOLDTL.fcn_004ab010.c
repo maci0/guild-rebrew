@@ -12,8 +12,8 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 int __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
 
-// FUNCTION: GOLD 0x004aaef0
-// FUNCTION: GOLDTL 0x4ab010
+/* ADDRESS: GOLD 0x004aaef0 */
+/* ADDRESS: GOLDTL 0x004ab010 */
 int __cdecl fcn_004ab010(unsigned short* e, char* o1, char* o2)
 {
 	char* s;

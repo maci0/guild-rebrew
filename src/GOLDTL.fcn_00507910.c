@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005048e0
-// FUNCTION: GOLDTL 0x00507910
+/* ADDRESS: GOLD 0x005048e0 */
+/* ADDRESS: GOLDTL 0x00507910 */
 
 int __cdecl fcn_00507910(int k)
 {
@@ -48,8 +48,8 @@ extern unsigned char* g_868050;
 
 float __cdecl fcn_0050b8d0(unsigned char* p, int k, int a, int b);
 
-// FUNCTION: GOLD 0x0050cd40
-// FUNCTION: GOLDTL 0x005101e0
+/* ADDRESS: GOLD 0x0050cd40 */
+/* ADDRESS: GOLDTL 0x005101e0 */
 
 /* Lives in this file because it must see fcn_00507910 above it: msvc6 then
  * knows the callee leaves edx alone and keeps k there across the call. */

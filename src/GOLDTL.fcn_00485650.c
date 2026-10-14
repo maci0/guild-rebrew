@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00485650
+
 // Collects the goods ids of the two id lists (0x100e760, 0x100e720) into the
 // segment table, then adds each production record's stock to the matching
 // segments. The second list prices its entries by the first list's id at the

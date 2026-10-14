@@ -14,8 +14,8 @@ unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 float* __cdecl fcn_005c61e0(int id);
 int __cdecl fcn_005dbf10(char* e, Req* r);
 
-// FUNCTION: GOLD 0x0049b6e0
-// FUNCTION: GOLDTL 0x49b120
+/* ADDRESS: GOLD 0x0049b6e0 */
+/* ADDRESS: GOLDTL 0x0049b120 */
 int __cdecl fcn_0049b120(char* e, int* p, int* q)
 {
 	float* d;

@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x00404e40
-// FUNCTION: GOLDTL 0x4058d0
+
+
 
 // fcn_00404e40 — eax=0; if(si) eax = fcn_005de784() % (si&0xffff); return eax.
 

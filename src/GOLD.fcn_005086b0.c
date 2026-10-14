@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005086b0
+
 // fcn_005086b0 — sum [n+0xe] over iteration.
 
 int __cdecl fcn_004ffe90(int, int, int, int);

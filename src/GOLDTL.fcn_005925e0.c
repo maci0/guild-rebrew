@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0058a0d0
-// FUNCTION: GOLDTL 0x5925e0
+
+
 
 #include "client_types.h"
 extern Slot_779d00 g_779d00[];

@@ -3,8 +3,8 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004be340(char*);
 unsigned int __cdecl fcn_00430910(void*, int, int, void*);
 
-// FUNCTION: GOLD 0x004bff40
-// FUNCTION: GOLDTL 0x4c0740
+/* ADDRESS: GOLD 0x004bff40 */
+/* ADDRESS: GOLDTL 0x004c0740 */
 
 int __cdecl fcn_004c0740(void* stream)
 {

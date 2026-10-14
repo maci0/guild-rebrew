@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x47c5d0
-// FUNCTION: GOLDTL 0x479890
+
+
 
 #include <string.h>
 
@@ -39,8 +39,8 @@ typedef struct Bank {
 extern char s_67d8bc[];
 extern char g_100eb80[];
 
-// FUNCTION: GOLDTL 0x4798c0
-// FUNCTION: GOLD 0x47c600
+/* ADDRESS: GOLDTL 0x004798c0 */
+/* ADDRESS: GOLD 0x0047c600 */
 
 /* fcn_00479890 must stay in this file: msvc6's same-TU callee analysis sees
  * that it leaves edx alone, so `b` stays in edx across the call. */

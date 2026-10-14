@@ -8,8 +8,8 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
-// FUNCTION: GOLD 0x004ba960
-// FUNCTION: GOLDTL 0x4bad30
+/* ADDRESS: GOLD 0x004ba960 */
+/* ADDRESS: GOLDTL 0x004bad30 */
 
 int __cdecl fcn_004bad30(int* a1)
 {

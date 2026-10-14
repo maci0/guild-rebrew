@@ -19,8 +19,8 @@ extern pos14_7f4c00 g_7f4c00;
 
 unsigned short __cdecl gm_RandomMod(int n);
 
-// FUNCTION: GOLD 0x00491ca0
-// FUNCTION: GOLDTL 0x491270
+/* ADDRESS: GOLD 0x00491ca0 */
+/* ADDRESS: GOLDTL 0x00491270 */
 int __cdecl fcn_00491270(Ent* e, int a2, int* out)
 {
 	Stat st;

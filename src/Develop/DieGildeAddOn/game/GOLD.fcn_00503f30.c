@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00503f30
+
 // fcn_00503f30 — r=fcn_00504ad0(a); return (r in [0xa,0xe]) ? 0 : 2.
 
 #include "spiel.h"
@@ -13,7 +13,7 @@ int __cdecl fcn_00503f30(int a)
 	return 2;
 }
 
-// FUNCTION: GOLDTL 0x506df0
+/* ADDRESS: GOLDTL 0x00506df0 */
 // gm_IsInRange
 
 
@@ -28,7 +28,7 @@ int __cdecl gm_IsInRange(int x)
 	return 2;
 }
 
-// FUNCTION: GOLDTL 0x506e10
+/* ADDRESS: GOLDTL 0x00506e10 */
 int __cdecl fcn_00506e10(void)
 {
 	return 2;

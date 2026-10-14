@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x005de62f
+/* ADDRESS: GOLD 0x005de62f */
 // fcn_005de62f — init 7 function-pointer globals.
 
 void __cdecl fcn_005de62f(void)

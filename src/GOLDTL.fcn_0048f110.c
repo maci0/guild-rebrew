@@ -24,8 +24,8 @@ int __cdecl fcn_0048eaa0(void);
 int __cdecl fcn_0048eba0(void);
 int __cdecl fcn_0048ef30(void);
 
-// FUNCTION: GOLD 0x48fb60
-// FUNCTION: GOLDTL 0x0048f110
+/* ADDRESS: GOLD 0x0048fb60 */
+/* ADDRESS: GOLDTL 0x0048f110 */
 int __cdecl fcn_0048f110(char* e)
 {
 	Deed d;

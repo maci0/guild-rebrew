@@ -3,8 +3,8 @@ extern unsigned char g_773d75;
 float __cdecl fcn_0050bb50(int, char);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
-// FUNCTION: GOLD 0x0049c870
-// FUNCTION: GOLDTL 0x49c2b0
+/* ADDRESS: GOLD 0x0049c870 */
+/* ADDRESS: GOLDTL 0x0049c2b0 */
 
 int __cdecl fcn_0049c2b0(int* a, char* e, int* b)
 {

@@ -5,7 +5,7 @@ extern int g_7e1d40;
 extern int g_77250c;
 extern int g_7725c8;
 
-// FUNCTION: GOLDTL 0x53f720
+
 
 void __cdecl fcn_0042def0(void*);
 void __cdecl fcn_0053f4b0(void);

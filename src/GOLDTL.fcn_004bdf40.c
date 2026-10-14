@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004bd6a0
-// FUNCTION: GOLDTL 0x4bdf40
+
+
 
 extern int g_10058e0;
 typedef struct BoxRec BoxRec;

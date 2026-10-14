@@ -11,8 +11,8 @@ extern char g_7f4ca0[];
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(int a, int n, int* lim, int a4, float r, unsigned short* ids);
 
-// FUNCTION: GOLD 0x004a8c80
-// FUNCTION: GOLDTL 0x4a8da0
+/* ADDRESS: GOLD 0x004a8c80 */
+/* ADDRESS: GOLDTL 0x004a8da0 */
 int __cdecl fcn_004a8da0(int a1, int a2, int a3, int a4, char* out)
 {
 	unsigned short ids[2];

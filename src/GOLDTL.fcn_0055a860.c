@@ -3,8 +3,8 @@ void __cdecl fcn_00546190(char*);
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-// FUNCTION: GOLD 0x00552770
-// FUNCTION: GOLDTL 0x55a860
+
+
 
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);

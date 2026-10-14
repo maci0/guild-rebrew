@@ -21,8 +21,8 @@ struct date_4bb640 {
 };
 // SIZE 0xc
 
-// FUNCTION: GOLD 0x4bb250
-// FUNCTION: GOLDTL 0x4bb640
+/* ADDRESS: GOLD 0x004bb250 */
+/* ADDRESS: GOLDTL 0x004bb640 */
 
 int __cdecl fcn_004bb640(int* a1)
 {

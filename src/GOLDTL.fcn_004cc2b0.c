@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004cb730
-// FUNCTION: GOLDTL 0x4cc2b0
+
+
 
 typedef struct {
 	unsigned short id;

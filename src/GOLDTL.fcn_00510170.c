@@ -1,8 +1,8 @@
 extern unsigned char* g_90e094;
 extern unsigned char* g_868050;
 
-// FUNCTION: GOLD 0x0050ccd0
-// FUNCTION: GOLDTL 0x510170
+/* ADDRESS: GOLD 0x0050ccd0 */
+/* ADDRESS: GOLDTL 0x00510170 */
 
 int __cdecl fcn_00510170(char* a)
 {

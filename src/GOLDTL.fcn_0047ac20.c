@@ -17,7 +17,7 @@ typedef struct {
 } fcn_0047ac20_list;
 // SIZE 0x1c
 
-// FUNCTION: GOLDTL 0x47ac20
+/* ADDRESS: GOLDTL 0x0047ac20 */
 
 void __cdecl fcn_0047ac20(fcn_0047ac20_node* n, fcn_0047ac20_list* l)
 {

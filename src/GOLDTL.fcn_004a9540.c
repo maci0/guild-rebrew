@@ -12,8 +12,8 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int n, int* lim, float a4, float r, unsigned short* ids);
 int __cdecl fcn_0055c0f0(char* e, Ent* t);
 
-// FUNCTION: GOLD 0x004a9420
-// FUNCTION: GOLDTL 0x4a9540
+/* ADDRESS: GOLD 0x004a9420 */
+/* ADDRESS: GOLDTL 0x004a9540 */
 int __cdecl fcn_004a9540(int a1, char* e, int a3, int a4, char* out)
 {
 	int lim;

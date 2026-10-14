@@ -20,7 +20,7 @@ typedef struct Key4 {
 
 void __cdecl fcn_0045d1e0(unsigned char* a, Key4 k, char c);
 
-// FUNCTION: GOLDTL 0x45d3b0
+/* ADDRESS: GOLDTL 0x0045d3b0 */
 void __cdecl fcn_0045d3b0(unsigned char* a, Key4 k, char c)
 {
 	if (a[0x58] >= 0xff && !((Bits8*) (a + 0x5a))->b0 && (k.id != 0xff || k.f.b0)) {

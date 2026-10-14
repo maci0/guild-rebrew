@@ -28,8 +28,8 @@ struct blend_4357b0 {
 	char pad6e[2];
 };
 
-// FUNCTION: GOLD 0x459190
-// FUNCTION: GOLDTL 0x4357b0
+/* ADDRESS: GOLD 0x00459190 */
+/* ADDRESS: GOLDTL 0x004357b0 */
 void __cdecl fcn_004357b0(struct blend_4357b0* b, float* w0, float* w1)
 {
 	struct anim_4357b0* an;

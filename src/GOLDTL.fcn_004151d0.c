@@ -4,7 +4,7 @@ void __cdecl fcn_00451900(float*, float*);
 float* __stdcall fcn_005eb970(float*, const float*, const float*);
 void __cdecl fcn_004519d0(float*, float*);
 
-// FUNCTION: GOLDTL 0x4151d0
+/* ADDRESS: GOLDTL 0x004151d0 */
 
 /* Samples a model's current animation blend: interpolated position and the
  * combined rotation angles. */

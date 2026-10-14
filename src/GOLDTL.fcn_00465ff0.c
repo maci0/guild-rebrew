@@ -13,7 +13,7 @@ extern int g_7725f8;
 extern int g_7725fc;
 extern DirtyRect* g_772588;
 
-// FUNCTION: GOLDTL 0x465ff0
+/* ADDRESS: GOLDTL 0x00465ff0 */
 void __cdecl fcn_00465ff0(int x, int y, int w, int h, char* owner)
 {
 	int i;

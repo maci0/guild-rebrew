@@ -22,8 +22,8 @@ struct hist_4ac9c0 {
 };
 // SIZE 0x10
 
-// FUNCTION: GOLDTL 0x4ac9c0
-// FUNCTION: GOLD 0x004ac8a0
+/* ADDRESS: GOLDTL 0x004ac9c0 */
+/* ADDRESS: GOLD 0x004ac8a0 */
 
 int __cdecl fcn_004ac9c0(struct hist_4ac9c0* h)
 {

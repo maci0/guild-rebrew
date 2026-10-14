@@ -13,8 +13,8 @@ struct s_7e43a8 {
 #include "client_types.h"
 extern Tabs_7e43a8 g_7e43a8;
 
-// FUNCTION: GOLD 0x00520620
-// FUNCTION: GOLDTL 0x5255b0
+
+
 
 int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
 int __cdecl fcn_005e8d00(int);

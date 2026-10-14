@@ -26,7 +26,7 @@ __declspec(dllimport) int __stdcall GetClientRect(void*, struct rect_41f670*);
 
 char* __cdecl fcn_0041f9b0(int);
 
-// FUNCTION: GOLDTL 0x41f670
+/* ADDRESS: GOLDTL 0x0041f670 */
 
 /* Fits a video into its window: stretched to the window width keeping the
  * aspect ratio, or centred at its own size. */

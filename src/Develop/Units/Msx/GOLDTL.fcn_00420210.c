@@ -1,4 +1,4 @@
-// FUNCTION: GOLDTL 0x00420210
+
 
 #include "msx.h"
 

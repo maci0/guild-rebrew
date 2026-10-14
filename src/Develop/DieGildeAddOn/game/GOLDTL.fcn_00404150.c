@@ -19,8 +19,8 @@ void __cdecl fcn_0044c620(char*, char*, int);
 char* __cdecl fcn_00434970(char*, char*, D3_ANIMATION_OPTIONS);
 int __cdecl fcn_00413190(int);
 
-// FUNCTION: GOLD 0x00403950
-// FUNCTION: GOLDTL 0x404150
+/* ADDRESS: GOLD 0x00403950 */
+/* ADDRESS: GOLDTL 0x00404150 */
 
 /* Attaches the named motion of a character kind to an object. */
 char* __cdecl ch_AttachMotion(char* obj, int kind)

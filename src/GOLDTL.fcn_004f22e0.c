@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x004f01d0
-// FUNCTION: GOLDTL 0x4f22e0
+
+
 
 #pragma pack(push, 1)
 

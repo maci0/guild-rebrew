@@ -8,7 +8,7 @@ extern int g_1015ea8;
 extern int g_1040490;
 extern int g_1040494;
 
-// FUNCTION: GOLDTL 0x537320
+/* ADDRESS: GOLDTL 0x00537320 */
 
 void __cdecl fcn_00537320(int flags)
 {

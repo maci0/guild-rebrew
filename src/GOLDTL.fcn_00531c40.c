@@ -11,8 +11,8 @@ struct s_7e6060 {
 
 extern struct s_7e6060 g_7e6060[64];
 
-// FUNCTION: GOLD 0x0052c510
-// FUNCTION: GOLDTL 0x531c40
+
+
 
 #include <string.h>
 

@@ -66,7 +66,7 @@ Ent* __cdecl fcn_00439750(int, const char*);
 void __cdecl fcn_00438b40(Ent*, Vec3*);
 void __cdecl fcn_00438cb0(Ent*, Vec3*);
 
-// FUNCTION: GOLDTL 0x00443030
+/* ADDRESS: GOLDTL 0x00443030 */
 
 char __cdecl fcn_00443030(Level* lv)
 {

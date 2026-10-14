@@ -1,7 +1,7 @@
 int __cdecl fcn_00464ad0(char* file, void* info, void* internal, char* name, unsigned long nsize, void* extra, unsigned long esize, char* comment, unsigned long csize);
 
-// FUNCTION: GOLD 0x00468020
-// FUNCTION: GOLDTL 0x464e60
+/* ADDRESS: GOLD 0x00468020 */
+/* ADDRESS: GOLDTL 0x00464e60 */
 int __cdecl fcn_00464e60(char* s)
 {
 	int err;

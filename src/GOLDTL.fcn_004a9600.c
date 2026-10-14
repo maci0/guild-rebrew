@@ -15,8 +15,8 @@ int __cdecl fcn_004a5340(char* e, int n, int* lim, float a4, float r, unsigned s
 float __cdecl fcn_00507e70(char* e, Ent* t, int k);
 float __cdecl gm_RandomFloat01(void);
 
-// FUNCTION: GOLDTL 0x4a9600
-// FUNCTION: GOLD 0x004a94e0
+/* ADDRESS: GOLDTL 0x004a9600 */
+/* ADDRESS: GOLD 0x004a94e0 */
 int __cdecl fcn_004a9600(int a1, char* e, int a3, int a4, char* out)
 {
 	int lim;

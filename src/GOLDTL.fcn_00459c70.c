@@ -10,7 +10,7 @@ typedef struct Bits8 {
 } Bits8;
 // SIZE 0x1
 
-// FUNCTION: GOLDTL 0x459c70
+/* ADDRESS: GOLDTL 0x00459c70 */
 int __cdecl fcn_00459c70(char* a)
 {
 	int r;

@@ -1,4 +1,4 @@
-// FUNCTION: GOLD 0x00525260
+
 /* Twin of GOLDTL 0x52a0c0; GOLD has 0x2ec-byte entities (fields 0x10 lower), 0x3c4-byte slots and a 16-bit base value at 0xfb9072. */
 
 // SIZE 0x3c4

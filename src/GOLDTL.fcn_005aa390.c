@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x005a1060
-// FUNCTION: GOLDTL 0x005aa390
+
+
 
 typedef struct {
 	char b[0x21c];

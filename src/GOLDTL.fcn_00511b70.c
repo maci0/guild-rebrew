@@ -1,5 +1,5 @@
-// FUNCTION: GOLD 0x0050e5a0
-// FUNCTION: GOLDTL 0x511b70
+
+
 
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004e8af0(char, char*);
