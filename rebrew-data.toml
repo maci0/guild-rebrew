@@ -1183,13 +1183,16 @@ updated_by = "rehome"
 updated_at = "2026-10-11T03:18:17+00:00"
 
 ["GOLD.0x00633738"]
-file = "src/Develop/DieGildeAddOn/game/PlayEntitySound.c"
+file = "src/client_lighting.h"
 name = "g_6b8300"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "rehome"
-updated_at = "2026-10-11T05:09:11+00:00"
+updated_by = "data"
+updated_at = "2026-10-14T16:42:06+00:00"
+storage_kind = "alias"
+size = 4
+note = "Terrain pointer integer transport declaration view, 4-byte C access width. Native helper/slot references and rejecting operand controls establish these accesses; complete backing allocation and storage owner remain unknown. Extern only in canonical client_lighting.h. PE zero-filled .data tail, not initialized file bytes; no data verdict. Names and interface are inferred."
 
 ["GOLD.0x00633dd8"]
 file = "src/GOLD.fcn_0045db30.c"
@@ -3737,13 +3740,16 @@ updated_by = "data"
 updated_at = "2026-10-13T19:43:14+00:00"
 
 ["GOLDTL.0x006b8300"]
-file = "src/Develop/DieGildeAddOn/game/PlayEntitySound.c"
+file = "src/client_lighting.h"
 name = "g_6b8300"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "rehome"
-updated_at = "2026-10-11T05:09:11+00:00"
+updated_by = "data"
+updated_at = "2026-10-14T16:42:06+00:00"
+storage_kind = "alias"
+size = 4
+note = "Terrain pointer integer transport declaration view, 4-byte C access width. Native helper/slot references and rejecting operand controls establish these accesses; complete backing allocation and storage owner remain unknown. Extern only in canonical client_lighting.h. PE zero-filled .data tail, not initialized file bytes; no data verdict. Names and interface are inferred."
 
 ["GOLDTL.0x006b86c4"]
 file = "src/client_types.h"
@@ -3752,11 +3758,16 @@ kind = "GLOBAL"
 type = "VECTOR3"
 
 ["GOLDTL.0x006b86d4"]
-file = "src/GOLDTL.fcn_00450ad0.c"
+file = "src/client_lighting.h"
 name = "g_6b86d4"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
+updated_by = "data"
+updated_at = "2026-10-14T16:42:06+00:00"
+storage_kind = "alias"
+size = 4
+note = "Counter declaration view, 4-byte C access width. Native helper/slot references and rejecting operand controls establish these accesses; complete backing allocation and storage owner remain unknown. Extern only in canonical client_lighting.h. PE zero-filled .data tail, not initialized file bytes; no data verdict. Names and interface are inferred."
 
 ["GOLDTL.0x006b86fc"]
 file = "src/GOLDTL.fcn_00450ad0.c"
@@ -17467,3 +17478,51 @@ writer = "verify"
 input_hash = "8be22ef656aac6ce61ece995dce01176f1a69bf23268918fc580953f758d4768"
 definition_hash = "f5d740b0d2e24e9e58347c6926d456fc472bceeb2d9f1b93b0f2df9f4575583c"
 measured_at = "2026-10-05T01:32:06+00:00"
+
+["GOLD.0x00633b04"]
+file = "src/client_lighting.h"
+name = "g_6b86d4"
+kind = "GLOBAL"
+type = "int"
+storage_kind = "alias"
+size = 4
+section = ".data"
+note = "Counter declaration view, 4-byte C access width. Native helper/slot references and rejecting operand controls establish these accesses; complete backing allocation and storage owner remain unknown. Extern only in canonical client_lighting.h. PE zero-filled .data tail, not initialized file bytes; no data verdict. Names and interface are inferred."
+updated_by = "data"
+updated_at = "2026-10-14T16:42:06+00:00"
+
+["GOLD.0x00633b10"]
+file = "src/client_lighting.h"
+name = "LightingUpdateCount"
+kind = "GLOBAL"
+type = "int"
+storage_kind = "alias"
+size = 4
+section = ".data"
+note = "Lighting update counter declaration view, 4-byte C access width. Native helper/slot references and rejecting operand controls establish these accesses; complete backing allocation and storage owner remain unknown. Extern only in canonical client_lighting.h. PE zero-filled .data tail, not initialized file bytes; no data verdict. Names and interface are inferred."
+updated_by = "data"
+updated_at = "2026-10-14T16:42:06+00:00"
+
+["GOLD.0x00633b14"]
+file = "src/client_lighting.h"
+name = "LightingUpdatePending"
+kind = "GLOBAL"
+type = "unsigned char"
+storage_kind = "alias"
+size = 1
+section = ".data"
+note = "Lighting update pending byte declaration view, 1-byte C access width. Native helper/slot references and rejecting operand controls establish these accesses; complete backing allocation and storage owner remain unknown. Extern only in canonical client_lighting.h. PE zero-filled .data tail, not initialized file bytes; no data verdict. Names and interface are inferred."
+updated_by = "data"
+updated_at = "2026-10-14T16:42:06+00:00"
+
+["GOLD.0x00633438"]
+file = "src/client_lighting.h"
+name = "g_633438"
+kind = "GLOBAL"
+type = "char"
+storage_kind = "alias"
+size = 1
+section = ".data"
+note = "Existing byte flag declaration view, 1-byte C access width. Native helper/slot references and rejecting operand controls establish these accesses; complete backing allocation and storage owner remain unknown. Extern only in canonical client_lighting.h. PE zero-filled .data tail, not initialized file bytes; no data verdict. Names and interface are inferred."
+updated_by = "data"
+updated_at = "2026-10-14T16:42:06+00:00"

@@ -1,6 +1,6 @@
 #include "../../../client_sound.h"
 
-extern int g_6b8300;
+#include "../../../client_lighting.h"
 Voice_14cbbe0* __cdecl fcn_00422460(int a, int b);
 
 void __cdecl PlayEntitySound(char* cmd)

@@ -10,8 +10,7 @@ extern void* g_6b870c;
 extern int g_6b8700;
 /* ADDRESS: GOLDTL 0x006b86fc */
 extern int g_6b86fc;
-/* ADDRESS: GOLDTL 0x006b86d4 */
-extern int g_6b86d4;
+#include "client_lighting.h"
 
 
 void __cdecl m_FreeTracked(int);

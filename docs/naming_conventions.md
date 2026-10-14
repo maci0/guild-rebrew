@@ -1,3 +1,22 @@
+### Shared scene lighting refresh (2026-10-15)
+
+`UpdateSceneLighting` is an inferred name for TL0x450a00 and Gold0x453890.
+Neither its original spelling nor a function prefix or enclosing source unit is
+attested. The shared definition retains both clients' counter/terrain work;
+Gold alone has the native byte-flag branches that clear node caches or rebuild
+mesh lighting. The inferred `client_lighting.h` owns the canonical declaration,
+not storage. TL ignores the argument; Gold reads its low byte and compares it
+unsigned. Original parameter spelling remains unknown.
+
+`LightingUpdateCount` and `LightingUpdatePending` are inferred access names.
+Existing numeric global spellings and the existing signed-byte flag declaration
+are preserved. Seven managed declaration views describe four-byte or one-byte
+accesses in the PE's zero-filled `.data` tails. Backing allocations and storage
+owners remain unresolved; no globals, padding or initialized data are emitted.
+The complete 38/128-byte native bodies and twenty operands pass with fourteen
+rejecting bindings in `.scratch/goal31/integrated-helper-native-proof.json`.
+These results do not establish client raw-link providers or image identity.
+
 ### Shared solar-effect stop (2026-10-14)
 
 The inferred `StopSonnenstrahlen` covers TL0x4186d0 and Gold0x417150,
@@ -8,7 +27,7 @@ sets active state to-1 and resets the clock. The Gold one-argument stub is
 retired. No original spelling or filename is attested. Fresh CLI discovery
 supplies the missing TL inventory entry; all prior inventory rows are preserved.
 The shared header declares the two-argument interface. Both weather callers
-retain their complete380-byte COFF bodies and35 typed operands after binding
+retain their complete 380-byte COFF bodies and35 typed operands after binding
 and declaration repairs. All six solar-effect bodies and32 rejecting symbol
 controls are verified in `.scratch/goal22/reconstruction/solar-stop-native-proofs.json`.
 No storage, flags or assembly are added; client raw links remain unverified.
@@ -1573,7 +1592,7 @@ Evidence: `.scratch/goal20/sound-wrapper/scope-final.json`.
 ### Shared table-search helper (2026-10-11)
 
 `FindTableEntryIndex` at TL44d7b0/GOLD44eeb0 is an inferred descriptive name
-without an invented module prefix. Both complete38-byte native functions are
+without an invented module prefix. Both complete 38-byte native functions are
 identical and use the existing TL C body in `src/FindTableEntryIndex.c`.
 The original function/unit names, table domain and unused original parameters
 remain unproven; the two used arguments are the target value and a caller-supplied

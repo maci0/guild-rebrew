@@ -1,9 +1,9 @@
 
 
-int __cdecl fcn_00450a00(char);
+#include "client_lighting.h"
 
 int __cdecl fcn_0040eca0(char* p)
 {
-	fcn_00450a00(*p);
+	UpdateSceneLighting(*p);
 	return 1;
 }

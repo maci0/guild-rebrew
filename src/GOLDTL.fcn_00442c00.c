@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-void __cdecl fcn_00450a00(int);
+#include "client_lighting.h"
 
 char __cdecl fcn_00442c00(char* o, char on)
 {
@@ -17,7 +17,7 @@ char __cdecl fcn_00442c00(char* o, char on)
 					strcpy(o, buf);
 				}
 				if (*(int*) (o + 0x21c) == 5 || *(int*) (o + 0x21c) == 6) {
-					fcn_00450a00(0);
+					UpdateSceneLighting(0);
 				}
 				*(int*) (o + 0x218) = *(int*) (o + 0x21c);
 			}

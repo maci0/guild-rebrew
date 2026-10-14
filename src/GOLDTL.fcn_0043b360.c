@@ -31,7 +31,7 @@ void __cdecl fcn_00452360(void);
 void __cdecl fcn_0043b990(int a);
 void __cdecl fcn_00459a10(int a);
 void __cdecl fcn_00456c80(void);
-void __cdecl fcn_00450a00(int a);
+#include "client_lighting.h"
 
 /* ADDRESS: GOLDTL 0x0043b360 */
 char __cdecl fcn_0043b360(void)
@@ -89,7 +89,7 @@ char __cdecl fcn_0043b360(void)
 				fcn_004432d0(i, 1);
 				if (g_6b8300 != 0) {
 					fcn_0043b990(g_6b8300);
-					fcn_00450a00(1);
+					UpdateSceneLighting(1);
 				}
 				if (g_6b89c0 != 0) {
 					fcn_00459a10(g_6b89c0);
@@ -97,7 +97,7 @@ char __cdecl fcn_0043b360(void)
 			}
 		}
 		fcn_004432d0(saved, 1);
-		fcn_00450a00(1);
+		UpdateSceneLighting(1);
 		r = 1;
 	}
 	return r;
