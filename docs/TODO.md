@@ -53229,7 +53229,7 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   is0 errors/0 warnings; all three data inventories have no type conflicts or
   duplicate definitions. These facts do not verify full client data or images.
 - Upstreamb1a5de80 records the missing all-target data inventory command;
-  commit checks pass and required push checks are running. Receipts:
+  required commit checks and the full push suite pass, and it is pushed. Receipts:
   .scratch/goal38/{destroy-native-proof,comparison-preservation,preservation}.json,
   gate-destroy-final.log,lint-final.json anddata-*-final.json. Helper unification,
   original source fidelity and both raw clients remain unfinished.

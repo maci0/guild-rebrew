@@ -187,7 +187,8 @@ duplicate definitions. Client helper providers and full client data verification
 remain open. Name and local spelling are inferred. Receipts:
 .scratch/goal38/destroy-native-proof.json,comparison-preservation.json,
 preservation.json andgate-destroy-final.log. Upstreamb1a5de80 records the
-missing all-target data inventory command; its push checks are running.
+missing all-target data inventory command; required commit/full push checks pass
+and it is pushed.
 
 Next: unify the evidenced query, child-removal and building-cleanup helpers,
 repair the Gold resource destructor's byte return, and get direct native
