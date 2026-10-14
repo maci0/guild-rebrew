@@ -1,3 +1,31 @@
+## Full data ownership and slot-helper extent repair (2026-10-15)
+
+- Upstream cedb8d4f fixes metadata-only foreign definitions in mixed-target
+  sources. Migrated rows had line0 and lost their target scope. Per-declarator
+  filtering preserves shared externs, other declarations on the same line and
+  genuine duplicate owners; excluded initializer uses also stay excluded.
+  Three storage-scope regressions fail before and pass after,354 focused checks
+  pass, and required full-suite commit/push checks pass. Remote main contains it.
+- Five TL reports were foreign server logging/gzip definitions. The remaining
+  year report was real: two unused four-byte COMMON definitions in spiel2/spiel62,
+  despite their canonical extern header. Removed both. The before/after COFF
+  audit preserves all three complete72/72/56-byte bodies and typed relocations
+  while removing every unused year COMMON. Client calendar owner/full extent
+  remain unproven; server storage is unchanged. No replacement storage is added.
+- Gold gm_FindSlotById4ffc40 had an80-byte extent containing eight alignment NOPs.
+  Complete native code ends at RET4ffc87;4ffc88..4ffc8f is padding before4ffc90.
+  Both typed DIR32 table operands resolve to7d6a70, all72 native bytes agree,
+  and wrong-table+4 rejects. Corrected extent through the locked writer;
+  the actual verifier records RELOC72. TL retains RELOC72 and EXACT56.
+  Names/unit and table ownership remain inferred/unresolved; no client raw-link claim.
+- Full inventories now report zero type conflicts and zero multiple definitions
+  in every target (data entries664/295/260). The fresh server gate retains
+  all316 function matches,652 data matches, identical286720 raw bytes, imports,
+  relocations, library/profile checks and Wine. Only31 existing W030 warnings
+  fail the gate. Receipts/replay: .scratch/goal33/year-object-audit.py,
+  year-objects-{before,after}.json, gold-find-slot-native-proof.json,
+  year-spiel2-gold-final-test.json, data-*-final.json and gate-year-cleanup.log.
+
 ## Object-transform animation reconstruction (2026-10-15)
 
 - TL412d30 is now inferred StartObjectTransformAnimation: a real C89 definition

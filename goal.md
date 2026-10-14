@@ -147,9 +147,11 @@ registration and shared-definition renaming use Rebrew's managed writers/CLI.
 The obsolete TL setter include override is removed; inherited flags are unchanged.
 Three audited, unbound Gold duplicates are retired after canonical-provider tests;
 backups/receipts remain under .scratch/goal31/retired-duplicate-sources/.
-Conflict-filtered data scans had no type conflicts (664/293/260 rows); they did
-not prove definition ownership clean. The current full TL scan reports six
-existing multiple-definition cases requiring target/provider/scope triage.
+Conflict-filtered data scans did not prove definition ownership clean. The six
+later full TL reports are resolved: five were foreign definitions losing scope
+after metadata migration, and two unused year definitions caused the sixth.
+Current full inventories have zero type conflicts and zero multiple definitions
+in all three targets (664/295/260 data entries).
 Current lint has zero errors and 31 W030 findings in command.c,
 alchemistry_logic.c, friedhof_logic.c, spiel.c and loadsave.c. Native source-unit
 and ordering evidence is required; keep the attested server composition intact.
@@ -208,16 +210,28 @@ Receipts: .scratch/goal32/integrated-transition-test.json, transition-trace-proo
 transition-extents.json and frame/flags-type-bind.json. The locked UEFI1.11 source
 build repairs angr's import; pyproject.toml prevents the broken CPython3.10 wheel
 from returning under3.13. Upstream ae530804 records the call-input proof gap;
-its full-suite push check is running (session94348, upstream-call-gap-push.log).
+its required full-suite push checks pass and the commit is on remote main.
 All ten existing TL users pass fresh comparisons without lost byte matches.
 The terminal new server gate passes316 functions,652 data comparisons, full
 raw identity and Wine/library/profile checks; only the31 ordering warnings fail.
 Receipts: .scratch/goal32/transition-users-audit.json and gate-transition.log.
 
-Next: resolve the six full data definition reports, distinguish target-selected
-definitions from genuine duplicate storage, and complete source-unit/type/data
-evidence and raw-link providers;
-recover genuine discarded server inputs and client code, and build both raw clients.
+Upstream cedb8d4f restores migrated data-definition scope in mixed-target sources.
+Three failing-before regressions and354 focused checks pass; full commit/push
+checks pass and remote main contains the fix. Five foreign server logging/gzip
+owners no longer appear in TL. The two remaining unused client year COMMON
+definitions are removed, preserving all three complete72/72/56-byte object bodies
+and relocations. The canonical extern and unresolved calendar backing remain.
+Gold4ffc40's former80-byte size included eight alignment NOPs. Its complete
+72-byte body and two known table operands pass, wrong-table+4 rejects, and the
+verifier records RELOC72; no original-unit/table-owner/raw-client claim follows.
+The fresh server gate retains full raw identity,316 functions,652 data checks,
+Wine/library/profile checks; only31 order warnings fail. Receipts:
+.scratch/goal33/year-objects-*.json, gold-find-slot-native-proof.json,
+year-spiel2-gold-final-test.json, data-*-final.json and gate-year-cleanup.log.
+
+Next: complete source-unit/type/data evidence and raw-link providers, recover
+genuine discarded server inputs and client code, and build both raw clients.
 Keep the original completion criteria and the goal active.
 
 ## History

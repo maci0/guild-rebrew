@@ -47,7 +47,6 @@ char* __cdecl gm_AllocateObjectSlot(void);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 short* __cdecl gm_ResolveParentEntity(short*);
 extern int g_next_object_id; /* defined in spiel.c */
-int g_current_year;
 extern char s_gm_AddObjekt____obj____ob_NULL_10031390[];
 extern char s_gm_AddObjekt____Parent_not_found_10031358[];
 extern unsigned char* g_EntityListStart;
@@ -144,7 +143,6 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 /* Returns the next matching entity from an active query.
  * Advances the query iterator and returns the next entity
  * that matches the query criteria. */
-
 
 
 
