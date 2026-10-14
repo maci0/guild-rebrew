@@ -190,8 +190,23 @@ preservation.json andgate-destroy-final.log. Upstreamb1a5de80 records the
 missing all-target data inventory command; required commit/full push checks pass
 and it is pushed.
 
-Next: unify the evidenced query, child-removal and building-cleanup helpers,
-repair the Gold resource destructor's byte return, and get direct native
+Scene-object destruction now shares one char(D3_OBJECT*) C89 definition and
+header declaration at TL442be0 / Gold447190. All31 affected contexts compile;
+the other115 comparisons retain their byte results and existing binding proofs,
+and nine Gold call sites now validate. Gold's32-byte wrapper improves from
+SIZE_MISMATCH to RELOC; all6020 earlier strong statuses remain, for6021 total.
+Both complete native bodies and four wrong-callee controls pass. Six D3 type
+bindings retain the original sizes/extents/offsets after compiler checks. The
+fresh full server gate passes; all-target lint/data conflict checks stay clean.
+Name and d3_object.c placement are inferred. Separate disposal providers and
+both full client images remain open. Receipts: .scratch/goal39/preservation.json,
+wrapper-native-proof.json,scope-audit-current.json andgate-wrapper.log.
+Upstream2ed6b113 records contract/header/caller reconciliation; its full push
+checks are running. A typed unlink candidate is EXACT154 in both clients but
+remains unadopted in scratch.
+
+Next: adopt the typed unlink helper with its callers verified, unify the
+evidenced query, child-removal and building-cleanup helpers, and get direct native
 unit/caller evidence for the distant ahm_ResetEntityState. Keep the attested cm_ExProdObjekt TU: its
 previous split changed30085 raw bytes and drifted32 data rows. Recover genuine
 discarded server inputs, finish source-unit/type/data/provider evidence and

@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 extern int g_67a370;
 
 
@@ -12,7 +13,7 @@ struct list_514d80 {
 
 void __cdecl fcn_004379a0(int, int, int, void*, struct list_514d80*);
 void __cdecl fcn_004458e0(char*, int);
-void __cdecl fcn_00442be0(char*);
+
 char __cdecl fcn_00514d30(char*, struct list_514d80*);
 
 void __cdecl fcn_00514d80(int x)
@@ -31,6 +32,6 @@ void __cdecl fcn_00514d80(int x)
 				fcn_004458e0(o, x);
 			}
 		}
-		fcn_00442be0(l.a[i]);
+		d3_DestroyObject((D3_OBJECT*) (l.a[i]));
 	}
 }

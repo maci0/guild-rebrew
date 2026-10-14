@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 #include <string.h>
 
 extern int g_6b8010;
@@ -7,7 +8,7 @@ char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_00413190(int);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
-void __cdecl fcn_00442be0(char*);
+
 
 /* ADDRESS: GOLDTL 0x004cc030 */
 
@@ -41,7 +42,7 @@ int __cdecl fcn_004cc030(char* cmd, char* result)
 	if (n != 0) {
 		strcpy(n, *(char**) (*(char**) (o + 0x184) + 0x34));
 		strcpy(*(char**) (o + 0x184) + 8, cmd + 0x14);
-		fcn_00442be0(*(char**) (*(char**) (o + 0x184) + 0x34));
+		d3_DestroyObject((D3_OBJECT*) (*(char**) (*(char**) (o + 0x184) + 0x34)));
 		*(char**) (*(char**) (o + 0x184) + 0x34) = n;
 		*(int*) (*(char**) (*(char**) (o + 0x184) + 0x34) + 0x204) = keep;
 		*(int*) (*(char**) (*(char**) (o + 0x184) + 0x34) + 0x48) = 0x3000000;

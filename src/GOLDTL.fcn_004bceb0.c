@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 typedef struct
 {
 	char pad0[0xa];
@@ -9,7 +10,7 @@ typedef struct
 } fcn_004bceb0_Entry;
 // SIZE 0x18
 
-void __cdecl fcn_00442be0(void* obj);
+
 #include "Develop/DieGildeAddOn/auxillary/plant.h"
 void __cdecl fcn_004bd150(fcn_004bceb0_Entry* tab);
 
@@ -24,7 +25,7 @@ void __cdecl fcn_004bceb0(fcn_004bceb0_Entry* tab)
 	for (i = 0; i < 64; i++) {
 		if (tab[i].state != -1) {
 			if (tab[i].obj != 0) {
-				fcn_00442be0(tab[i].obj);
+				d3_DestroyObject((D3_OBJECT*) (tab[i].obj));
 				tab[i].obj = 0;
 			}
 			id = tab[i].id;

@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 
 
@@ -9,7 +10,7 @@ extern int g_6b5c34;
 int __cdecl fcn_00413190(int p);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_00413120(int h);
-void __cdecl fcn_00442be0(int h);
+
 void __cdecl fcn_00403870(char* e);
 
 void __cdecl fcn_00403330(unsigned char mode)
@@ -27,7 +28,7 @@ void __cdecl fcn_00403330(unsigned char mode)
 			if (mode == 2) {
 				if (*(int*) (e + 0x22c) != 0) {
 					fcn_00413120(*(int*) (e + 0x22c));
-					fcn_00442be0(*(int*) (e + 0x22c));
+					d3_DestroyObject((D3_OBJECT*) (*(int*) (e + 0x22c)));
 					*(int*) (e + 0x22c) = 0;
 				}
 			} else if ((mode == 0 || mode == 1) && *(int*) (e + 0x22c) == 0) {

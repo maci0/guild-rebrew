@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 extern int g_14cbca0;
 extern int g_7728f8;
 extern int g_6b8010;
@@ -10,7 +11,7 @@ char* __cdecl plt_FindRecord(void*, unsigned int, unsigned int);
 char* __cdecl fcn_004bcda0(void*, unsigned int, unsigned int, unsigned int, unsigned int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_00442be0(void*);
+
 void __cdecl fcn_004bcf20(char*, int);
 
 /* ADDRESS: GOLD 0x004c9520 */
@@ -64,7 +65,7 @@ int __cdecl fcn_004ca0c0(int cmd, char* result)
 			);
 			if (found != (char*) 0x0 && *(int*) (found + 0x10) == *(int*) (cmd + 0x1d)) {
 				fcn_004432d0(g_7f3b00[g_868050[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
-				fcn_00442be0(*(void**) (found + 0x14));
+				d3_DestroyObject((D3_OBJECT*) (*(void**) (found + 0x14)));
 				*(void**) (found + 0x14) = 0;
 				fcn_004bcf20(found, 0);
 				*(int*) (found + 0x10) = -1;

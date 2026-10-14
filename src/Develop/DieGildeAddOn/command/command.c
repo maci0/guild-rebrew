@@ -3734,11 +3734,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl fcn_00506300(char*);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_004550b0(int, int*);
-#ifdef REBREW_GOLD
-int __cdecl fcn_00447190(int);
-#else
-char __cdecl fcn_00442be0(void*);
-#endif
+#include "../../Units/d3/d3_object.h"
 void* __cdecl fcn_00426cc0(int);
 int __cdecl fcn_00428720(char*);
 int __cdecl fcn_00504130(unsigned char*);
@@ -3806,11 +3802,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 	if (g_773dd8 != 0) {
 		fcn_004550b0(*(int*) ((char*) building + 0x61), (int*) g_773dd8);
 	}
-#ifdef REBREW_GOLD
-	fcn_00447190(*(int*) ((char*) building + 0x61));
-#else
-	fcn_00442be0(*(void**) ((char*) building + 0x61));
-#endif
+	d3_DestroyObject((D3_OBJECT*) (*(void**) ((char*) building + 0x61)));
 	if (*(int*) ((char*) building + 0x95) != -1) {
 		handle = fcn_00426cc0(*(int*) ((char*) building + 0x95));
 		if (handle != 0) {

@@ -1130,6 +1130,29 @@ and caller proofs: .scratch/goal23/pool-unification/. Original semantic evidence
 This is a semantic shared-name choice anchored in the existing server reconstruction, not an original-symbol or log-string attestation. The existing `int __cdecl gm_RandomMod(unsigned short n)` C form produces all32 native bytes in each image, including a typed call to that image's stock `rand`. It does not prove unique original signedness or parameter spelling. Caller prototype narrowing remains unresolved; the rename preserves caller declaration types. Evidence: .scratch/goal-random-helper/consolidation/native-shared-body-audit.json and consolidation-scope-check.json. Full-tree verification63165 is accepted: all existing matches retained and the TL helper added. Five prior mismatches have stricter deltas under the newly bound call catalog; before/after compiled bytes are identical.
 
 
+### Shared scene-object destruction (2026-10-15)
+
+`d3_DestroyObject` is inferred from the wrapper's unlink/dispose behavior and
+the existing D3 object layout evidence. It names TL `0x442be0` and Gold
+`0x447190`; neither native body contains a name or source-path string. The
+`d3_object.c` placement is inferred beside the existing object header. The
+callee's `d3_DisposeObject(): invalid universe by object %s` string attests
+the inner disposal helper, not the wrapper name.
+
+One C89 definition returns a byte and takes `D3_OBJECT*`, with a single header
+declaration reused by every reconstructed caller. Native TL calls `43a0a0` /
+`4398d0`; Gold calls `43d0e0` / `43c7a0`. These providers remain separate:
+TL disposal is450 bytes and Gold disposal637. The caller byte proof does not
+establish their provider implementations or original parameter spelling.
+
+Both complete32-byte wrappers and their call operands agree; four shifted-call
+controls reject. Across31 target/source contexts, the other115 comparisons
+preserve their byte results and existing binding proofs; nine Gold call sites
+gain a native address proof. All six D3 layouts retain their evidenced sizes,
+extents and offsets after compiler rechecks. Receipts:
+`.scratch/goal39/wrapper-native-proof.json`, `scope-audit-current.json`,
+`d3-types-before.json` and `type-*.json`.
+
 ### Shared building destruction (2026-10-15)
 
 `cm_ExDestroyBuilding` is an inferred command-handler name, shared by SERVER
@@ -1148,7 +1171,8 @@ the other descriptive locals are inferred.
 
 Client query, child-removal and cleanup helpers keep their existing numeric
 bindings because their definitions are not yet unified with the server helpers.
-Gold resource destruction selects its own `fcn_00447190` identity. Full client
+Resource destruction now uses shared `d3_DestroyObject`, whose Gold identity
+is `0x447190` (formerly `fcn_00447190`). Full client
 caller bodies and independently reviewed operands agree, but this does not
 verify the helper providers or complete client images. Receipts:
 `.scratch/goal38/destroy-native-proof.json` and `comparison-preservation.json`.

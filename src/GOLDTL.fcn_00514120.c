@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 
 
 
@@ -44,7 +45,7 @@ void __cdecl srv_LogWinsockError(void);
 void __cdecl fcn_004f6740(void);
 int __cdecl fcn_0051e070(void);
 void* __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_00442be0(void*);
+
 void __cdecl fcn_00437ac0(int, int, int, void*);
 void __cdecl fcn_005109f0(void);
 void __cdecl fcn_005105a0(void);
@@ -92,7 +93,7 @@ int __cdecl fcn_00514120(char* map)
 		folder = fcn_00445600(0, 0x100, 0, "ordner_CITIES_INT");
 	}
 	if (folder != 0) {
-		fcn_00442be0(folder);
+		d3_DestroyObject((D3_OBJECT*) (folder));
 	}
 	fcn_00437ac0(g_67a370, 0, 0x140, fcn_005109f0);
 	fcn_00437ac0(g_67a370, 0, 0x40, fcn_005105a0);

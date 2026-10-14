@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 
 
 typedef struct {
@@ -22,7 +23,7 @@ char* __cdecl fcn_00445600(int, int, int, char*);
 char* __cdecl fcn_00442910(int, float*, char*, char*);
 void __cdecl fcn_00412f10(char*, char*, int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_00442be0(char*);
+
 
 void __cdecl fcn_005d04c0(void)
 {
@@ -69,6 +70,6 @@ void __cdecl fcn_005d04c0(void)
 		}
 	}
 	for (i = 0; i < 4; i++) {
-		fcn_00442be0(objs[i]);
+		d3_DestroyObject((D3_OBJECT*) (objs[i]));
 	}
 }

@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 extern void* g_14d0020[];
 extern int g_67a370;
 extern int g_6b8010;
@@ -6,7 +7,7 @@ void __cdecl fcn_00405130(char*);
 void __cdecl fcn_00404560(char*);
 int __cdecl fcn_00413190(int);
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_00442be0(void*);
+
 void __cdecl fcn_00403df0(char*);
 void __cdecl m_FreeTracked(char*);
 
@@ -38,13 +39,13 @@ int __cdecl fcn_004030e0(char* obj)
 				if (*(void (__cdecl**)(char*)) (obj + 0x228) != 0) {
 					(*(void (__cdecl**)(char*)) (obj + 0x228))(obj);
 				}
-				fcn_00442be0(*(void**) (obj + 0x34));
+				d3_DestroyObject((D3_OBJECT*) (*(void**) (obj + 0x34)));
 				*(int*) (obj + 0x34) = 0;
 				if (*(void***) (obj + 0x124) != 0 && **(void***) (obj + 0x124) != 0) {
-					fcn_00442be0(**(void***) (obj + 0x124));
+					d3_DestroyObject((D3_OBJECT*) (**(void***) (obj + 0x124)));
 				}
 				if (*(void**) (obj + 0x22c) != 0) {
-					fcn_00442be0(*(void**) (obj + 0x22c));
+					d3_DestroyObject((D3_OBJECT*) (*(void**) (obj + 0x22c)));
 				}
 				if (saved != -1) {
 					fcn_004432d0(saved, 1);

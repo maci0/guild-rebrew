@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 #include "client_sound.h"
 
 
@@ -46,7 +47,7 @@ int __cdecl fcn_005589d0(char* e);
 void __cdecl fcn_005b2880(void);
 int __cdecl fcn_00558680(char* e);
 int __cdecl fcn_00558b70(char* e);
-void __cdecl fcn_00442be0(int h);
+
 void __cdecl fcn_0051af00(char*, char*, ...);
 
 void __cdecl fcn_00558e80(char* e)
@@ -63,7 +64,7 @@ void __cdecl fcn_00558e80(char* e)
 
 	if (*(int*) (e + 0x70) == -2 || *(int*) (e + 0x70) == -1) {
 		if (*(int*) (e + 0xc8) != 0) {
-			fcn_00442be0(*(int*) (e + 0xc8));
+			d3_DestroyObject((D3_OBJECT*) (*(int*) (e + 0xc8)));
 		}
 		if (g_7749ec != 0) {
 			fcn_004e4eb0();

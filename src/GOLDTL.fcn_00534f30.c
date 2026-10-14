@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 
 
 // SIZE 0x274
@@ -31,7 +32,7 @@ extern char g_6a3194[];
 
 void __cdecl fcn_00413120(char* o);
 void __cdecl fcn_00442c00(char* o, int v);
-void __cdecl fcn_00442be0(char* o);
+
 void __cdecl fcn_00471340(int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_0046b2b0(int h);
@@ -59,7 +60,7 @@ void __cdecl fcn_00534f30(Pager* p)
 					}
 				}
 			}
-			fcn_00442be0(p->obj);
+			d3_DestroyObject((D3_OBJECT*) (p->obj));
 			p->obj = p->next;
 		}
 		for (i = 0; i < p->count; i++) {

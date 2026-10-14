@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 
 
 
@@ -9,7 +10,7 @@ extern int g_6b8010;
 extern Slot170_7731b8 g_7731b8[8];
 
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_00442be0(int);
+
 
 void __cdecl fcn_004efcd0(void)
 {
@@ -22,7 +23,7 @@ void __cdecl fcn_004efcd0(void)
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 3; j++) {
 			if (g_7731b8[i].h[j] != 0) {
-				fcn_00442be0(g_7731b8[i].h[j]);
+				d3_DestroyObject((D3_OBJECT*) (g_7731b8[i].h[j]));
 				g_7731b8[i].h[j] = 0;
 			}
 		}

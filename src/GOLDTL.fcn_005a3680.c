@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 
 
 
@@ -21,7 +22,7 @@ char* __cdecl fcn_00443bf0(float, float, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 void __cdecl fcn_005a31b0(char*, int);
-void __cdecl fcn_00442be0(char*);
+
 void __cdecl fcn_00533880(void);
 void __cdecl fcn_00532ef0(void);
 
@@ -70,7 +71,7 @@ void __cdecl fcn_005a3680(void)
 	fcn_005338a0();
 	for (i = 0; i < 3; i++) {
 		if (items[i] != 0) {
-			fcn_00442be0(items[i]);
+			d3_DestroyObject((D3_OBJECT*) (items[i]));
 		}
 	}
 	fcn_00533880();

@@ -53233,3 +53233,30 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   .scratch/goal38/{destroy-native-proof,comparison-preservation,preservation}.json,
   gate-destroy-final.log,lint-final.json anddata-*-final.json. Helper unification,
   original source fidelity and both raw clients remain unfinished.
+
+### 2026-10-15: reconcile shared D3 destruction contracts
+
+- TL442be0 and Gold447190 now select one inferred d3_DestroyObject definition
+  in inferred d3_object.c, with a shared char(D3_OBJECT*) declaration. Old
+  numeric identities/references move through rename/rehome/bind CLI writers;
+  the unowned Gold duplicate is removed. The inner d3_DisposeObject log does
+  not attest the wrapper name or source unit.
+- Caller declarations consistently use the existing object header; explicit
+  pointer conversions preserve native argument bits. All31 target/source
+  contexts compile, and the other115 comparisons preserve byte results and
+  earlier binding proofs. Nine Gold call sites gain bound native operands.
+  Both complete32-byte wrappers and four wrong-callee controls pass. Gold's
+  old wide return is repaired; all6020 earlier strong statuses stay, plus one
+  new Gold RELOC32, for6021. Six stable D3 type IDs retain sizeof/extents/offsets.
+- Full server gate passes with286720 raw bytes identical; all-target lint is
+  0/0 and all data inventories have no type conflicts or duplicate definitions.
+  Client data/images and disposal provider implementations remain unfinished.
+- Upstream2ed6b113 records canonical signature/header/caller repair as a
+  follow-up to the existing return-contract audit gap; commit checks pass and
+  required push checks run. Scoped scratch AST edits use the public MSVC-aware
+  parser; the first unmasked-parser attempt failed compilation and is retained
+  in candidate/ receipts. Corrected candidate2 passes all current scope checks.
+- Receipts: .scratch/goal39/{wrapper-native-proof,scope-audit-current,preservation}.json,
+  gate-wrapper.log,lint-final.json,data-*-final.json andtype-*.json. Next typed
+  unlink probe is EXACT154 for TL43a0a0 and Gold43d0e0, with no relocations;
+  it remains unadopted and requires caller/provider checks before integration.
