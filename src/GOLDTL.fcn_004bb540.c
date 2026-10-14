@@ -1,6 +1,3 @@
-/* Owned (both targets) by src/GOLDTL.fcn_004b6f00.c. */
-extern double g_6629c8;
-extern double g_6640e8;
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
 extern unsigned char g_773d75;
 
@@ -33,9 +30,9 @@ int __cdecl fcn_004bb540(void* a1)
 		return 0x400;
 	}
 	n = gm_RandomMod(4) & 0xffff;
-	d = (double) n + g_6629c8;
+	d = (double) n + 1.0;
 	n = gm_WalkEntityChain(*(short*) p);
-	r = (int) (((double) n * d) * g_6640e8);
+	r = (int) (((double) n * d) * 0.01);
 	fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r);
 	len = strlen(buf);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,

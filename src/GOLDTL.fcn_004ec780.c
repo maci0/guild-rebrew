@@ -14,7 +14,7 @@ void __cdecl fcn_004ec780(int type)
 	int i;
 
 	for (i = 0; i < 30; i++) {
-		if (g_9a9220[i].id == type) {
+		if (g_9a9220[i].type == type) {
 			fcn_004e8240(g_9a9220[i].id, 0, 0, 3, 0xff);
 			return;
 		}

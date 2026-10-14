@@ -31,7 +31,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00525ef0(void);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_00589390(char* w)
+void __cdecl ShowPersonTooltip(char* w)
 {
 	int h;
 	struct sel info;
@@ -112,7 +112,7 @@ void __cdecl fcn_00589390(char* w)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_00589390, 0x677c7) != 0);
+	} while (fcn_005373e0(ShowPersonTooltip, 0x677c7) != 0);
 	fcn_00525ef0();
 	fcn_00471e30(h);
 }

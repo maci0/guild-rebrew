@@ -1,3 +1,106 @@
+## Strict operand policy exposes masked source errors (2026-10-14)
+
+- The first full corpus under check_known_bindings passes server316/316,
+  TL3596/3693 and Gold2090/2540. It has no compile/missing-file failures,
+  but exposes seven prior RELOC claims with contradictory resolved operands.
+  The new callback adds one SIZE_MISMATCH per client. The seven contradictions
+  are source errors/identity collisions, not permission to weaken the policy.
+- TL0x004ec780/Gold0x004eaa00 selects byte +8(type) of each 24-byte record,
+  then passes byte +0(id). The source incorrectly selected id. The repaired
+  shared C restores both complete65-byte bodies and all four typed operands.
+- Compiler literals are values, not declarations owned by a source file.
+  Gold0x004bb150 and0x00508a50 use1.0; their previous shared extern resolved
+  to a2.0 pool. Ordinary C literals now preserve both target bodies, including
+  the age-factor thresholds1.0f/42.0f and double1/1008 coefficients. No storage
+  definition or managed data extent is added or moved.
+- The transfer template grouped distinct native formulas. TL0x004b6ce0 and
+  0x004b6f00 use(1.0,0.01); Gold0x004b6b10 uses(1.0,0.01),0x004b6d30 uses
+  (2.0,0.01), and0x004b6ef0 uses(2.0,1/120). There are now distinct public
+  definitions and one private inline body. Helper organization/name remain
+  inferred; it emits no out-of-line helper or new target body. The existing
+  REBREW_GOLD selection represents the evidenced version difference.
+- Gold0x00589390 had the same placeholder symbol as independent Gold0x00580d10,
+  causing its self callback to bind to the wrong function. CLI rename changes
+  only its definition and self-reference to inferred ShowPersonTooltip. The823
+  native bytes retain RELOC with its self operand now VALIDATED; both independent
+  57-byte definitions remain unchanged. Other unresolved callees stay explicit.
+- Complete native comparisons of the selector, literal repairs and five transfer
+  definitions establish11 bodies/1856 bytes,90 typed operands and24 literal
+  value checks. Each rejects a deliberately displaced binding. Stock ftol and
+  strlen bodies match LIBCMT(TL)/LIBC(Gold); this does not establish a client
+  raw-link provider. No function is claimed linked EXACT or data VERIFIED.
+  Receipts: .scratch/goal26/production/repaired-operands.json and library reports.
+- Opt-in compiler-literal content checks and explicit evidence for reviewed
+  library bindings are recorded upstream in docs/IDEAS-GUILD.md,be2a7bb5.
+  Final corpus restores server316/316,TL3597/3693,Gold2096/2540 with no
+  compile/missing-file failures or prior-match regressions. All-target lint and
+  data-conflict scans are clean. The final server gate passes all286720 bytes.
+  Seven existing Gold duplicate-identity warnings remain explicit; this corpus
+  covers the selected providers, not the discarded alternate definitions. The
+  full original-source/three-image goal remains unfinished. Original event types, discarded-server input sources,
+  raw client links/data and helper source organization remain open.
+
+## Production callback native behavior recheck (2026-10-14)
+
+- Docker access succeeds in this session. The actual pinned MSVC object is
+  relocated into ignored fixture memory using LIEF and Rebrew's typed relocation
+  API. The reference callback remains unchanged; 31 external helper entry points
+  use the same bounded models. All 456 runs agree on event bytes, complete strings
+  and ordered helper traces, reaching all 66 native call sites per client. Gold's
+  independently compiled callback code, relocations and constant sections agree
+  with TL's. This is concrete bounded behavior evidence, not a game link or byte
+  match verdict. No diagnostic host compiler substitutes for the MSVC callback.
+- New helper models mutate the building owner during notification preparation.
+  Four red runs exposed a cached owner read. Both C notification paths now reload
+  the owner after the helper, as the native instructions do. Two exact-zero
+  production cases per client then exposed strict-negative thresholds. Native
+  x87 status masking tests C0/C3 with 0x41; production and replenishment use <=0.
+  Both conditions are repaired. Red results and actual-MSVC green results remain
+  in .scratch/goal26/production/ and .scratch/goal25/production/.
+- Bound the initializer reference to he_RunProduktion through source rename.
+  Both full 450-byte caller bodies retain RELOC before and after the rename.
+  The current callback emits 4016 bytes against the unchanged 3816-byte native
+  extent and remains SIZE_MISMATCH. Event allocation, original prototypes/types
+  and source placement remain unresolved. Branch/stack-layout hypotheses stay in
+  scratch; their scores do not justify inventing source padding or narrowing.
+- Fresh server gate passes every 286720 raw file byte, data/import placement and
+  Wine export checks. It does not establish original discarded-source fidelity
+  or client full-image completion. The complete three-image goal remains active.
+  All-target corpus revalidation is complete; the later operand-repair entry
+  gives current counts and remaining duplicate-provider limits.
+  Receipts: .scratch/goal26/production/.
+
+## Shared production callback candidate (2026-10-14)
+
+- Wrote one complete C89 candidate, src/he_RunProduktion.c, for TL0x00571870
+  and Gold0x005694b0. Both managed identities retain the reviewed3816-byte
+  extent and have no invented status/verdict. The source uses existing game
+  declarations, actual integer/float return widths, unsigned recipe amounts,
+  separate worker-count/time locals, and distinct notification paths.
+  The original event type, full allocation, prototypes and file path remain
+  reconstruction questions; field views and local names are inferred.
+- Paired native bodies contain1151 code instructions and31 distinct helper
+  targets. Bounded differential fixtures execute the unchanged reference
+  callback with modeled external helpers. With the evidenced literal/store
+  precision model, all192 runs (96 per client) agree on every event snapshot
+  byte, ordered helper-call trace and complete notification string. All66
+  native call sites are reached. Six rejecting controls expose float recipe
+  reinterpretation, discarded queue IDs and12-byte time copies. The initial
+  diagnostic precision differences are retained; mechanism/limits live in
+  docs/measure-traps.md. This is not exhaustive proof or MSVC byte agreement.
+- i386 C89 syntax checks pass with existing client_types.h pragma-stack
+  warnings. All-target Rebrew lint and data-conflict scans are clean.
+  Enabled check_known_bindings in all three target tables as required by
+  the updated instructions. Existing function rows/verdicts are unchanged;
+  the stricter policy still needs a real compiler/corpus check.
+- Both pinned MSVC tests stop at Docker preflight: Docker is installed but
+  /var/run/docker.sock access is denied in the current execution profile.
+  No host Wine/compiler replacement is used for a Rebrew verdict. The
+  initializer binding preview changes only two identifiers in
+  GOLDTL.fcn_00575710.c; application and both caller checks are deferred.
+  Full gate/commit/push remain pending. No source byte-match or data verdict
+  is claimed. Receipts: .scratch/goal25/production/.
+
 ## Production packet return contracts (2026-10-14)
 
 - Kuna's production callback calls TL 0x004c51f0 / Gold 0x004c4880 and stores

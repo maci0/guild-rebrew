@@ -8,6 +8,79 @@ in this file.
 Companion reading: `msvc6-c-shapes.md` (front-end shapes), `msvc6-allocator.md`
 (register allocation and slot maps), `TODO.md` (round-by-round history).
 
+### Diagnostic compilers can change floating-point observations (2026-10-14)
+
+The shared production callback candidate was compared with the original x86
+callback using identical, modeled external helpers. Both native bodies have
+1,151 code instructions and 66 helper-call sites. The fixtures compare every
+byte of the event snapshot, the ordered helper-call trace and complete
+notification strings; they
+do not mask floating-point fields or verify the external helpers themselves.
+
+Clang's x87 diagnostic build retained an intermediate across repeated
+replenishment, differing by one float ULP at offsets 0xb4/0xb8 in case31.
+GCC with standard assignment precision fixed that observation, but its extended
+evaluation of `1.3f` differed in case92. The native TL instruction at0x5722ef
+multiplies by the four-byte pool value at0x66419c, bits0x3fa66666. Native
+replenishment adds the unsigned recipe amount to the stored float, writes both
+progress fields, then reloads the stored float for the loop condition.
+
+The project C was not changed to satisfy those diagnostic compilers. A separate
+ignored test copy spells its float literals as their exact float32 values and
+uses standard assignment precision to model the observed literal/store widths.
+Its192 runs (96 fixtures per client) agree on event bytes and call traces,
+covering all66 native call sites. Controls that reinterpret the unsigned recipe
+as a float, discard the returned queue ID, or copy12 rather than14 time bytes
+are rejected in both clients. These are bounded observations under the stated
+helper/precision model, not exhaustive semantic proof or MSVC byte agreement.
+Do not add volatile fields or change game flags solely to fix another compiler's
+observations. Actual MSVC tests and caller binding are still required.
+
+Receipts: `.scratch/goal25/production/precision-model.json`,
+`fixture-precision-model-v1-results.json`, `rejecting-controls.json`, and
+`fixture-input-hashes.json`. The failed direct and unnormalized diagnostic
+attempts remain recorded alongside the successful model.
+
+### A literal-value change can retain function RELOC (2026-10-14)
+
+A rejecting source control changes Gold0x004b6b10's increment from1.0 to2.0.
+The current CLI still reports RELOC216/216: the COFF __real@ relocation remains
+unresolved and masks the changed pool address. Independent literal-byte checking
+rejects object0000000000000040 against native000000000000f03f at0x005eb8a8.
+Function-byte agreement does not establish the values of referenced data, even
+when the data is a compiler literal. Preserve this distinction in progress and
+source-sharing decisions. Inspect every differing native constant before grouping
+same-shaped bodies under one C definition. The repaired transfer variants have
+24 literal checks across11 complete bodies, not new raw-link data verdicts.
+
+The reusable content/trust capability is recorded in upstream IDEAS-GUILD.md.
+Replay evidence: `.scratch/goal26/production/wrong-transfer-literal-test.json`,
+`wrong-transfer-literal-rejected.json` and `repaired-operands.json`.
+
+### Actual compiler fixtures need input and boundary controls (2026-10-14)
+
+Once Docker access returned, the actual pinned MSVC callback object replaced the
+host-compiler diagnostic candidate in the bounded fixtures. LIEF loads the COFF
+sections and Rebrew applies typed relocations to reviewed native helper/global
+bindings. Constant sections come from the actual object. External helper entry
+points still use models, so this is neither a raw game link nor an exhaustive
+proof. Independently compiled TL and Gold callback bytes, typed relocations and
+constant sections agree. All 456 runs reach the same 66 native call sites per
+client and agree on event bytes, complete strings and ordered helper traces.
+
+The previous 192 fixtures missed two source errors. Letting the notification
+helper mutate the building owner exposed stale owner reads; reaching exactly zero
+production progress exposed `<0` where native x87 tests C0/C3 with mask0x41 and
+uses `<=0`. Each pair of new cases rejects the earlier MSVC object in both
+clients. The source now reloads the owner and preserves inclusive thresholds.
+The current full compile is still SIZE_MISMATCH, 4016 versus3816 bytes. Do not
+infer exhaustive equivalence from the expanded fixture count or describe its
+modeled helpers as verified original callees.
+
+Receipts: `.scratch/goal26/production/paired-msvc-objects.json`,
+`msvc-v1-owner-mutation-red.json`, `msvc-fixture-bindings.json`, and the actual
+MSVC fixture result files under `.scratch/goal25/production/`.
+
 - A discovery region can include alignment beyond the actual function.
   TL0x41e1d0/GOLD0x422a20 m_PoolAlloc is261 bytes,103 reachable instructions
   and two returns, followed by11 NOPs. Complete CFG and fully bound operands

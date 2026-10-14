@@ -14,6 +14,7 @@ default_target = "server.dll"
 shared_dir = "src"
 
 [targets."server.dll"]
+check_known_bindings = true
 # Temporary historical layout; remove the second define to compile the reconstructed variant.
 defines = ["REBREW_SERVER", "REBREW_LEGACY_SERVER_LAYOUT"]
 # Code generator lock (round 1379): the server's x87 compares are the PLAIN
@@ -61,6 +62,7 @@ MSVCRT = ""
 
 
 [targets."Europa1400Gold_TL.exe"]
+check_known_bindings = true
 # Code generator lock (round 1379): same compiler VERSION as the server
 # (cl 12.00.8804), different CODE GENERATOR.  Game code only (the D3DX8 band is
 # excluded via external_ranges below): 832 Processor-Pack x87 compares
@@ -101,6 +103,7 @@ LIBCMT = "LIBCMT.lib"
 WINMM = "WINMM.lib"
 
 [targets."Europa1400Gold.exe"]
+check_known_bindings = true
 defines = ["REBREW_GOLD"]
 # Client (non-TL) build of the same game. Shares game logic with server.dll
 # (DieGildeAddOn) and the TL client; client-only units (ch_, ai_, he_, d2_,

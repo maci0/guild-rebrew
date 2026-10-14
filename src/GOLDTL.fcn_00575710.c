@@ -12,7 +12,7 @@ void __cdecl fcn_00530ab0(int, char*, int, int, int);
 void __cdecl fcn_00571140(char*);
 void __cdecl fcn_00571240(char*);
 void __cdecl fcn_00571720(char*);
-void __cdecl fcn_00571870(char*);
+void __cdecl he_RunProduktion(char*);
 void __cdecl fcn_00572760(char*);
 void __cdecl fcn_00572770(char*);
 void __cdecl fcn_00572780(char*);
@@ -40,7 +40,7 @@ int __cdecl fcn_00575710(void)
 		return 1;
 	}
 	fcn_00530ab0(3, g_6a7e04, 1, 0x501, 0xac);
-	if (fcn_00545580(4, fcn_00571720, fcn_00571870) != 0) {
+	if (fcn_00545580(4, fcn_00571720, he_RunProduktion) != 0) {
 		return 1;
 	}
 	fcn_00530ab0(4, g_6a7df8, 1, 0x4ff, 0xac);

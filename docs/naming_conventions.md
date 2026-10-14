@@ -890,7 +890,7 @@ parent's log prefix.
 
 | TL VA | Gold VA | Attested name | Standing |
 | --- | --- | --- | --- |
-| `0x00571870` | `0x005694b0` | `he_RunProduktion` | Reviewed inventory entries; C body remains unreconstructed |
+| `0x00571870` | `0x005694b0` | `he_RunProduktion` | Shared C89 candidate in `src/he_RunProduktion.c`; MSVC byte verification pending |
 
 Both bodies push `"he_RunProduktion(): geb:%G"`: TL instruction
 `0x005718b1` references literal `0x006a7c78`, and Gold instruction
@@ -901,6 +901,14 @@ following NOPs. This does not establish a source file, header, storage owner
 or byte-match verdict. Existing numeric callback declarations remain until
 implementation and verified name binding. Native receipts:
 `.scratch/goal23/production-callback/{name-proof,extent-proof}.json`.
+
+The reconstructed file path, locals and field meanings are inferred. The
+original event type and complete allocation remain unresolved; the C currently
+uses explicit byte-offset views. Only the function name is attested. Numeric
+initializer references have a reviewed rename preview but remain unchanged
+until both client compilations can be checked. Bounded behavior fixtures do
+not establish original prototypes or a byte-match verdict. Current receipts:
+`.scratch/goal25/production/`.
 
 ### Module case: `m_alloc` is snake_case
 
@@ -1740,3 +1748,16 @@ Broader checks also confirm that Gold40cba0/40cf10 already matched their full
 All13 typed operands and rejecting bindings agree. Corrected size metadata
 removes those pre-existing SIZE_MISMATCH verdicts without changing their C or
 introducing a new function identity.
+
+
+### Person tooltip callback identity collision (2026-10-14)
+
+Gold0x00589390 now uses inferred `ShowPersonTooltip`, from its native
+`ToolTip\\ToolTip_Personen` key and person-statistic rendering. Neither the
+function spelling nor original source path is attested. The separate
+Gold0x00580d10/TL0x00589390 function retains its own definition. A shared
+placeholder name had redirected the tooltip self callback to that function.
+The private `RandomMoneyTransfer` inline helper in GOLDTL.fcn_004b6f00.c is
+also inferred organization; its five native entries/coefficient variants are
+recorded in TODO.md and independently checked. No original helper identity is
+claimed, and no out-of-line helper is emitted.
