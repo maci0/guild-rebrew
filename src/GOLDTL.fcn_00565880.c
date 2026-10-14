@@ -24,7 +24,7 @@ extern unsigned char g_773d75;
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_00546190(char*);
 
 void __cdecl fcn_00565880(char* u)

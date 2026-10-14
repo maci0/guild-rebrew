@@ -24,7 +24,7 @@ unsigned short __cdecl fcn_005b56e0(int, int);
 void __cdecl fcn_004a51d0(char*, int, struct offer*, struct level*);
 float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 void __cdecl fcn_0057dc30(char* h)
 {

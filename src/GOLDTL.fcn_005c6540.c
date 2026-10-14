@@ -57,7 +57,7 @@ void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00471f80(int);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_00472380(int, int, int, int);
 
 int __cdecl fcn_005373e0(void*, int);

@@ -22,7 +22,7 @@ char* __cdecl fcn_005049a0(char*);
 char* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00546190(char*);

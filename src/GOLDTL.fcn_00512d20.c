@@ -46,7 +46,7 @@ extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 
 
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004f36f0(Player*);

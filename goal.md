@@ -25,6 +25,28 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-14 (production packet return repair): native production callback
+  consumes EAX from wrappers incorrectly reconstructed as void. Both wrappers
+  now return the existing queue ID, and caller declarations return int. Four
+  complete native bodies preserve 318 bytes with resolved queue operands and
+  rejecting wrong-queue controls. All 55 affected complete bodies preserve
+  21,023 bytes and 1,066 typed operands. The queue's opaque declaration is
+  shared with its existing packed definition; no storage, flags, identities
+  or assembly change. A wide-int parameter consolidation changed 49 caller
+  bodies and was removed: original parameter types remain unresolved, and
+  their existing byte-sensitive declarations are retained. Cross-TU contract
+  auditing is recorded/pushed upstream in docs/IDEAS-GUILD.md, 0c0a5c48;
+  its full push hook passes. Native FILD and four-byte 0.9 pool evidence
+  correct Kuna's inferred integer/float/string casts. The callback's faithful
+  complete C body and both full raw client links remain unfinished.
+  Full corpus retains server316/316, TL3597/3692 and Gold2096/2539 matches,
+  with no compile errors, missing files or prior-match regressions. All-target
+  lint/data-conflict checks are clean. Final server gate passes316 functions,
+  652 data checks and all286720 raw file bytes; imports/layout/load checks
+  pass. Upstream 0c0a5c48 remote hash and CI38502159765 are verified green.
+  Only verification measurements change in managed function rows.
+  Receipts: .scratch/goal24/production/.
+
 - 2026-10-14 (shared display-counter reconstruction): actual C is restored to
   the canonical identities already in the store. Ordinary six-element array
   loops replace raw-address bodies and serve both clients; separate Gold

@@ -2,7 +2,7 @@ extern unsigned char g_773d75;
 
 char* __cdecl gm_SearchTable67(int id);
 float __cdecl fcn_0050bb50(int id, unsigned char k);
-void __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char k, int n);
+int __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char k, int n);
 
 // FUNCTION: GOLD 0x00497c70
 // FUNCTION: GOLDTL 0x497670

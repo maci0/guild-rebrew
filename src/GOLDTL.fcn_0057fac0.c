@@ -7,7 +7,7 @@ extern unsigned char g_773d75;
 
 char* __cdecl fcn_00503d10(int);
 void __cdecl fcn_004c51a0(int, int, int, int);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
 void __cdecl fcn_0057fac0(int a)
 {

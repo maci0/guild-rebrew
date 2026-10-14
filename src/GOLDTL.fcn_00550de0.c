@@ -31,7 +31,7 @@ char* __cdecl fcn_00502cd0();
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);

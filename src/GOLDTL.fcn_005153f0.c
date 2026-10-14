@@ -40,7 +40,7 @@ void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5f60(int, int, int);
 int __cdecl fcn_004c6090(Player*, int, int, int);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
 void __cdecl fcn_005153f0(void)
 {

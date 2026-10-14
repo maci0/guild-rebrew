@@ -6,7 +6,7 @@ extern char* g_aed32c;
 
 int __cdecl fcn_004d0cd0(int* a);
 void __cdecl fcn_004ce6e0(char* u);
-void __cdecl fcn_004c51f0(int a, int b, int c, int d, char e, int f);
+int __cdecl fcn_004c51f0(int a, int b, int c, int d, char e, int f);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
 void __cdecl fcn_004c4510(char* u, int h);
 int __cdecl fcn_004c4570(unsigned char size, unsigned char count, unsigned short off, unsigned char* src);

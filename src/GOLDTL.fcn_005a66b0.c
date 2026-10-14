@@ -30,7 +30,7 @@ void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_00508620(int, int);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_00471e30(int);
 

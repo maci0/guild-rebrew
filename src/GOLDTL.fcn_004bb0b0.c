@@ -16,7 +16,7 @@ unsigned char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(void*, int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 

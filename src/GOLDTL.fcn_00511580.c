@@ -38,7 +38,7 @@ void __cdecl ls_ID2Ptr(void);
 Figure* __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
 void __cdecl fcn_00511580(void)
 {

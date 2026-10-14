@@ -9,7 +9,7 @@ char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_004ae130(unsigned short);
 int __cdecl fcn_0064fcaf(char*);
 int __cdecl fcn_00501490(char*);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 int __cdecl fcn_004b1dd0(char* tbl, int idx, char* arg)
 {

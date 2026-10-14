@@ -7,7 +7,7 @@ unsigned char* __cdecl gm_AddObjekt(void);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 // FUNCTION: GOLD 0x4ba830
 // FUNCTION: GOLDTL 0x4bac00

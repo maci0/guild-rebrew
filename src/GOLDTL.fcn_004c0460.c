@@ -22,7 +22,7 @@ int __cdecl fcn_0050d320(char*, char);
 void __cdecl fcn_00517b10(char*, char*);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
 // FUNCTION: GOLDTL 0x4c0460
 void __cdecl fcn_004c0460(char* e, char who)

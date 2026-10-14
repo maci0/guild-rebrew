@@ -31,7 +31,7 @@ extern unsigned char g_773d75;
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00529160(char*, int, int, int);

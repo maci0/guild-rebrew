@@ -1,3 +1,4 @@
+#include "client_packet_queue.h"
 #pragma pack(1)
 typedef struct pkt99 {
 	unsigned char type;

@@ -6,7 +6,7 @@ extern unsigned char g_773d75;
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004ce590(int);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
 void __cdecl fcn_004ce6e0(char* a1)
 {

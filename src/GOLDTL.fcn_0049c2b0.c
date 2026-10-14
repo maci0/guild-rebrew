@@ -1,7 +1,7 @@
 extern unsigned char g_773d75;
 
 float __cdecl fcn_0050bb50(int, char);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
 // FUNCTION: GOLD 0x0049c870
 // FUNCTION: GOLDTL 0x49c2b0

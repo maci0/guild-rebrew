@@ -8,7 +8,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl fcn_00502fe0(int, int, int);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 void __cdecl fcn_00512680(void)

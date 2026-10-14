@@ -45,7 +45,7 @@ void __cdecl fcn_00473a90(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_004727a0(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_005782f0(struct house*, int);
 int __cdecl fcn_00519190();
 unsigned short __cdecl gm_RandomMod(int);

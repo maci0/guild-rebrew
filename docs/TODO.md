@@ -1,3 +1,31 @@
+## Production packet return contracts (2026-10-14)
+
+- Kuna's production callback calls TL 0x004c51f0 / Gold 0x004c4880 and stores
+  the returned queue ID. Native instructions independently confirm EAX is
+  consumed; the queue routine already returns an ID or -1. Both packet wrappers
+  now return that value explicitly, and their caller declarations return int.
+  One opaque queue declaration is shared with its existing packed definition;
+  no new storage, compiler flags, assembly or managed identities are introduced.
+- Complete native wrapper comparisons cover four bodies / 318 bytes, binding
+  the queue calls separately for both clients. Wrong-queue controls are rejected.
+  All 55 affected complete bodies preserve 21,023 bytes and 1,066 typed operands.
+- Parameter types are still a reconstruction gap: existing callers use different
+  signed/unsigned byte declarations. A trial wide-int interface changed 49
+  complete caller bodies and was removed. This return-only repair preserves
+  those parameter declarations pending native/source evidence; their consistency
+  is not claimed. A cross-TU contract audit is recorded and pushed directly in
+  upstream docs/IDEAS-GUILD.md (0c0a5c48).
+- Native floating-point evidence must override Kuna's inferred casts: the
+  production helper's integer result uses FILD, and address 0x00664090 holds a
+  four-byte 0.9 float, despite the seed treating it as string-byte access.
+  The production callback's full C body remains unreconstructed; no new
+  byte-match or data verdict is claimed. Full corpus retains all prior matches:
+  server 316/316, TL 3597/3692 and Gold 2096/2539; no compile errors or missing
+  files. All-target lint and data-conflict scans are clean. The final server
+  gate passes 316 functions, 652 data checks and every 286,720 raw file byte.
+  Upstream 0c0a5c48 remote hash and green CI run 38502159765 are verified.
+  Receipts: .scratch/goal24/production/.
+
 ## Kuna callback seeds and upstream release integration (2026-10-14)
 
 - User requested Kuna alongside other backends. Kuna 1.160 returns the complete

@@ -34,7 +34,7 @@ Shop* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004c4510(Shop*, int);
 void __cdecl fcn_004c4570(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 Estate* __cdecl gm_AddObjekt(void);
 
 void __cdecl fcn_00512910(void)
