@@ -1,5 +1,6 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004c4dc0(void*, int);
-int __cdecl fcn_005015e0(void*, void*, void*, int);
+
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_00502e30(char*, int);
 
@@ -12,7 +13,7 @@ int __cdecl fcn_004c8920(char* a1, char* a2)
 	char* e;
 
 	*(int*) (a1 + 0x10) = fcn_004c4dc0(a1, *(int*) (a1 + 0x10));
-	if (fcn_005015e0(0, &f, 0, *(int*) (a1 + 0x10)) == 0)
+	if (gm_ResolveEntityById(0, (void**) (&f), 0, *(int*) (a1 + 0x10)) == 0)
 		return 1;
 	if (*(short*) f != 0x2a && *(short*) f != 0x116)
 		return 1;

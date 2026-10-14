@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 typedef struct Rec {
 	unsigned short id;
 	unsigned char type;
@@ -12,7 +13,7 @@ typedef struct Rec {
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 
-int __cdecl fcn_005015e0(char**, char**, char**, int);
+
 float __cdecl fcn_00507f10(char* e, int k);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c51a0(int, int, char, int);
@@ -37,7 +38,7 @@ int __cdecl fcn_004eb780(char* e, int* msg)
 	if (msg[0] != 2) {
 		return 0;
 	}
-	fcn_005015e0(&h, 0, 0, msg[1]);
+	gm_ResolveEntityById((void**) (&h), 0, 0, msg[1]);
 	if (h == 0) {
 		return 0;
 	}

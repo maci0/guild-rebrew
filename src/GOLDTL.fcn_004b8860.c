@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 #include <string.h>
 
 extern char g_7f4ca0[];
@@ -6,7 +7,7 @@ unsigned short* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(void*, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
-int __cdecl fcn_00504bd0(int);
+
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -39,7 +40,7 @@ int __cdecl fcn_004b8860(int* a1)
 	if (fcn_005c6270(e, 0x290) != 0)
 		return 0x400;
 	for (it = gm_StartFilteredEntitySearch(1, 3, *e); it != 0 && n < 8; it = gm_AddObjekt()) {
-		k = fcn_00504bd0(it[0]);
+		k = gm_GetBuildingTypeCategory(it[0]);
 		if (k == 1 || k == 2)
 			ents[n++] = (char*) it;
 	}

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x48fc30
 
 typedef struct Blk24 {
@@ -20,7 +21,7 @@ typedef struct F8 {
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
-int __cdecl fcn_005015e0(char**, char**, char**, int);
+
 int __cdecl fcn_0048f4f0(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl fcn_0048f710(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2);
@@ -58,7 +59,7 @@ int __cdecl fcn_0048fc30(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	if (fcn_004a5e60(e, 4, f, 0, 100.0f, &found) == 0) {
 		return 0;
 	}
-	fcn_005015e0(&q, 0, 0, found);
+	gm_ResolveEntityById((void**) (&q), 0, 0, found);
 	if (q == 0) {
 		return 0;
 	}

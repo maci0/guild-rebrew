@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 typedef struct Msg {
 	unsigned char type;
 	char pad[3];
@@ -15,7 +16,7 @@ char* __cdecl gm_FindRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00508e40(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_005015e0(char**, char**, char**, int);
+
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
@@ -56,7 +57,7 @@ int __cdecl fcn_004973a0(int a1, Msg* m, Msg* ev)
 	}
 	if (m->d == 0x39) {
 		n = (int) fcn_0050bb50(m->a, g_773d75);
-		fcn_005015e0(0, &home, 0, m->c);
+		gm_ResolveEntityById(0, (void**) (&home), 0, m->c);
 		if (home == 0) {
 			return 0;
 		}

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x00543a10
 // FUNCTION: GOLDTL 0x0054b940
 
@@ -77,7 +78,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 extern char g_6b5c60[];
 
-void __cdecl fcn_005015e0(Player**, int, int, int);
+
 Group* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_004c5620(int, Order*);
 Entity* __cdecl fcn_00508e40(int);
@@ -111,7 +112,7 @@ void __cdecl fcn_0054b940(Order* o)
 	if (o->flags & 4) {
 		return;
 	}
-	fcn_005015e0(&pl, 0, 0, o->owner);
+	gm_ResolveEntityById((void**) (&pl), 0, 0, o->owner);
 	if (pl != 0) {
 		g = fcn_00502cd0(pl->home, 1, 0, 0x17);
 		if (g == 0) {

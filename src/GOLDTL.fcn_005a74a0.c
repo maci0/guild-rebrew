@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x59e360
 // FUNCTION: GOLDTL 0x005a74a0
 
@@ -19,7 +20,7 @@ extern char* g_14ad474;
 extern unsigned short g_7f4c04;
 extern int g_7e2700;
 
-int __cdecl fcn_00504bd0(int);
+
 int __cdecl fcn_00506380(int id, unsigned char* store, int a, int b);
 int __cdecl fcn_005a7400(unsigned char* p, int* lo, int* hi);
 void __cdecl fcn_0051af00(void*, int, ...);
@@ -39,7 +40,7 @@ int __cdecl fcn_005a74a0(unsigned char* p)
 	unsigned short own;
 
 	tbl = g_868050 + p[0] * 0x24d;
-	kind = fcn_00504bd0(p[0]);
+	kind = gm_GetBuildingTypeCategory(p[0]);
 	r = fcn_00506380(g_774970, p, 0, 0);
 	if ((*(unsigned short*) (p + 0x5a) & 0x400) != 0) {
 		return 0;

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x47de50
 
 #include <stdio.h>
@@ -59,7 +60,7 @@ extern unsigned char* g_868050;
 
 int __cdecl fcn_0047dd60(Master47de*);
 int __cdecl gm_AccumulateTyped2(void*);
-int __cdecl fcn_00504bd0(int);
+
 void __cdecl fcn_0047f6b0(Master47de*);
 void __cdecl fcn_00480330(Master47de*);
 void __cdecl fcn_004813b0(Master47de*);
@@ -99,7 +100,7 @@ void __cdecl fcn_0047de50(Master47de* m)
 		g_100dc2c = &((Ent47de*)g_7f4ca0)[m->bld->owner];
 		g_100dc30 = m->budget;
 	}
-	if (fcn_00504bd0(m->bld->office) == 1 || fcn_00504bd0(m->bld->office) == 4) {
+	if (gm_GetBuildingTypeCategory(m->bld->office) == 1 || gm_GetBuildingTypeCategory(m->bld->office) == 4) {
 		k = ((Office47de*)g_868050)[m->bld->office].kind;
 		if (k == 0xe || k == 8 || k == 0x20) {
 			fcn_0047ebc0(m);
@@ -110,7 +111,7 @@ void __cdecl fcn_0047de50(Master47de* m)
 		} else {
 			fcn_0047e270(m);
 		}
-	} else if (fcn_00504bd0(m->bld->office) == 2) {
+	} else if (gm_GetBuildingTypeCategory(m->bld->office) == 2) {
 		fcn_0047f6b0(m);
 	} else {
 		k = ((Office47de*)g_868050)[m->bld->office].kind;

@@ -45,7 +45,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
-int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+
 extern int g_entity_id_counter;
 
 
@@ -56,6 +56,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3);
 char* __cdecl gm_AllocRaum(char* geb, int obj_id);
 int __cdecl gm_CheckEntityType(unsigned char* entity_ptr);
 int __cdecl gm_FreeObjectListRecursive(LinkedNode** head);
+/* Keep the original declaration position in the shared implementation. */
 int __cdecl gm_GetBuildingTypeCategory(int arg1);
 short* __cdecl gm_GetEntityTableEntry(char* param);
 
@@ -91,12 +92,12 @@ extern int g_query_limit;
 extern int g_query_limit;      
 extern int g_next_object_id;   
 
-int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+
 char* __cdecl gm_AllocateObjectSlot(void);
 short* __cdecl gm_ResolveParentEntity(short*);
 int __cdecl sprintf(char* buffer, const char* format, ...); 
 
-int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+
 
 extern unsigned char* g_query_filter_base; 
 

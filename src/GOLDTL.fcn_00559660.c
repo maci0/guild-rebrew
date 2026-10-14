@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x00551590
 // FUNCTION: GOLDTL 0x559660
 
@@ -22,7 +23,7 @@ struct obj {
 extern unsigned short g_7f4c04;
 
 struct obj* __cdecl fcn_00508e40(int);
-void __cdecl fcn_005015e0(int*, int, int, int);
+
 int __cdecl fcn_00529670(struct obj*, int);
 void __cdecl fcn_004c6a40(int);
 void __cdecl fcn_004c5c80(int);
@@ -38,7 +39,7 @@ int __cdecl fcn_00559660(struct slot* s)
 		if (o == 0) {
 			goto clear;
 		}
-		fcn_005015e0(&r, 0, 0, s->item);
+		gm_ResolveEntityById((void**) (&r), 0, 0, s->item);
 		if (r == 0) {
 			if (o->shown != 0) {
 				fcn_004c6a40(s->id);

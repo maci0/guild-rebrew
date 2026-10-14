@@ -24,7 +24,7 @@ int __cdecl fcn_004eb260(char* e);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050d320(char* e, char k);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
-int __cdecl fcn_005015e0(char**, char**, char**, int);
+
 
 int __cdecl fcn_0049fad0(int a1, char* e, int a3, char* out)
 {
@@ -53,7 +53,7 @@ int __cdecl fcn_0049fad0(int a1, char* e, int a3, char* out)
 	if (fcn_004a5e60(e, 6, f, 0, (float) (gm_RandomMod(0x20) + 0x20), &found) == 0) {
 		return 0;
 	}
-	fcn_005015e0(&q, 0, 0, found);
+	gm_ResolveEntityById((void**) (&q), 0, 0, found);
 	if (q == 0) {
 		return 0;
 	}

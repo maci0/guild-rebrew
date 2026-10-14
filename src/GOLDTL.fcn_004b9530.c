@@ -32,7 +32,7 @@ Ent* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(Ent*, int);
 Obj* __cdecl fcn_005463a0(int a, int b, int c);
 Obj* __cdecl fcn_005462a0(void);
-int __cdecl fcn_005015e0(char** dynamic, char** existing, char** static_ptr, int entity_id);
+
 int __cdecl gm_CheckEntityType(char*);
 unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -67,10 +67,10 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 		if (n >= 8) {
 			break;
 		}
-		fcn_005015e0(0, &house, 0, o->home);
+		gm_ResolveEntityById(0, (void**) (&house), 0, o->home);
 		if (house != 0 && *(int*) (house + 0xa) == e->id) {
-			fcn_005015e0(&work, 0, 0, o->shop);
-			fcn_005015e0(&shop, 0, 0, o->work);
+			gm_ResolveEntityById((void**) (&work), 0, 0, o->shop);
+			gm_ResolveEntityById((void**) (&shop), 0, 0, o->work);
 			if ((work != 0 && gm_CheckEntityType(work) != 0) || (shop != 0 && gm_CheckEntityType(shop) != 0)) {
 				if ((shop != 0 && work != 0 && *shop == 'G') || *work == 'G') {
 					objs[n] = o;
@@ -89,8 +89,8 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 	k = gm_RandomMod(n) & 0xffff;
 	o = objs[k];
 	house = houses[k];
-	fcn_005015e0(&shop, 0, 0, o->work);
-	fcn_005015e0(&work, 0, 0, o->shop);
+	gm_ResolveEntityById((void**) (&shop), 0, 0, o->work);
+	gm_ResolveEntityById((void**) (&work), 0, 0, o->shop);
 	if (shop != 0 && work != 0) {
 		if (*shop == 'G') {
 			fcn_0051af00(text, cmd->text + 0x12e7, ((Player*)g_868060)[0].name);

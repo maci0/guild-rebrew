@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x4c8050
 // FUNCTION: GOLDTL 0x4c8bf0
 
@@ -12,7 +13,7 @@ typedef struct {
 // SIZE 0xc
 
 int __cdecl fcn_004c4dc0(char*, int);
-int __cdecl fcn_005015e0(char**, char**, char**, int);
+
 
 int __cdecl fcn_004c8bf0(char* x, char* out)
 {
@@ -22,7 +23,7 @@ int __cdecl fcn_004c8bf0(char* x, char* out)
 	unsigned int i;
 
 	*(int*) (x + 0x10) = fcn_004c4dc0(x, *(int*) (x + 0x10));
-	if (fcn_005015e0(0, 0, &e, *(int*) (x + 0x10)) == 0)
+	if (gm_ResolveEntityById(0, 0, (void**) (&e), *(int*) (x + 0x10)) == 0)
 		return 1;
 	q = (unsigned char*) x + 0x15;
 	for (i = 0; i < (unsigned char) x[0x14]; i++) {

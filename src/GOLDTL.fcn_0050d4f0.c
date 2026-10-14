@@ -1,12 +1,13 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x0050d4f0
 
-int __cdecl fcn_005015e0(void**, void**, void**, int);
+
 
 unsigned short __cdecl fcn_0050d4f0(short* entity)
 {
 	void* dynamic_ent;
 
-	fcn_005015e0(&dynamic_ent, (void**) 0, (void**) &entity, *(int*) (entity + 5));
+	gm_ResolveEntityById((void**) (&dynamic_ent), (void**) 0, (void**) &entity, *(int*) (entity + 5));
 	if (entity != (short*) 0) {
 		return *entity;
 	}

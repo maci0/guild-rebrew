@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x5589d0
 
 // SIZE 0x10
@@ -12,7 +13,7 @@ extern int g_6b8010;
 extern float g_665ea0;
 
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_005015e0(char**, int*, int*, int);
+
 void __cdecl fcn_00455350(char*, char*, struct vec4*);
 float __cdecl fcn_004514d0(struct vec4*, char*);
 
@@ -29,7 +30,7 @@ int __cdecl fcn_005589d0(char* u)
 	fcn_004432d0(0, 1);
 	c = *(char**) (u + 0xc8);
 	if (c != 0 && *(char**) (c + 0x1cc) != 0 && *(char**) (*(char**) (c + 0x1cc) + 0x318) != 0) {
-		fcn_005015e0(&x, 0, 0, *(int*) (u + 0xb4));
+		gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (u + 0xb4));
 		if (x != 0 && *(char**) (x + 0x61) != 0 && *(char**) (*(char**) (x + 0x61) + 0x1cc) != 0
 		    && *(char**) (*(char**) (*(char**) (x + 0x61) + 0x1cc) + 0x318) != 0) {
 			fcn_00455350(*(char**) (x + 0x61), *(char**) (x + 0x61) + 0x4c, &a);

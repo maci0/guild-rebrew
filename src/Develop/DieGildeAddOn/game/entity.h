@@ -94,7 +94,9 @@ typedef struct EntityStruct {
 } EntityStruct;
 
 /* ID and Pointer Resolution */
+/* Preserve this interface's original declaration context. */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+
 
 /* State Reset */
 extern void __cdecl gm_ResetAllEntities(void);

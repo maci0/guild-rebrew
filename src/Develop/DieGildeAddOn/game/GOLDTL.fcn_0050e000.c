@@ -1,3 +1,4 @@
+#include "spiel.h"
 // FUNCTION: GOLD 0x0050ab80
 // FUNCTION: GOLDTL 0x0050e000
 
@@ -9,7 +10,7 @@
 extern char* g_99ec10;
 
 void* __cdecl gm_EntityAccumulate(void* pkt);
-int __cdecl fcn_00504bd0(int type);
+
 int __cdecl fcn_0050dfd0(char* pkt, int item_id);
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 int __cdecl gm_GetMsgField(char* pkt, char* q);
@@ -33,7 +34,7 @@ int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 	if (ent == NULL) {
 		return 0;
 	}
-	is_cat2 = (fcn_00504bd0((unsigned char) *ent) == 2);
+	is_cat2 = (gm_GetBuildingTypeCategory((unsigned char) *ent) == 2);
 	size = fcn_0050dfd0(pkt, item_id);
 	query_result = fcn_00502cd0(*(int*) (pkt + 0x14), 1, 0, item_id);
 	if (query_result != NULL) {

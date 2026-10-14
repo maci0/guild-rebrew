@@ -1,9 +1,10 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x4af1d0
 // FUNCTION: GOLD 0x4af090
 
 /* Callees of this translation unit; see src/GOLDTL.fcn_004af2f0.c, the
  * sibling in the same address family. */
-void __cdecl fcn_005015e0(int*, int*, int*, int);
+
 void* __cdecl fcn_00503fe0(int, int, int);
 void* __cdecl fcn_00503e80(void);
 int __cdecl fcn_0050cf50(void*, int);
@@ -24,7 +25,7 @@ int __cdecl fcn_004af1d0(int a1, int a2, int a3, char* a4, int a5)
 	if (a1 == 2)
 		return 0;
 	if (a1 == 1) {
-		fcn_005015e0(&v, 0, 0, *(int*) ((char*) a2 + a3 * 8 + 4));
+		gm_ResolveEntityById((void**) (&v), 0, 0, *(int*) ((char*) a2 + a3 * 8 + 4));
 		if (v == 0)
 			return 0;
 	} else {

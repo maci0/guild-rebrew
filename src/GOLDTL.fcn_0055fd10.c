@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // SIZE 0xe
 
 // SIZE 0x21c
@@ -17,7 +18,7 @@ extern unsigned char* g_868050;
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_005015e0(char**, char**, char**, int);
+
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
@@ -51,7 +52,7 @@ void __cdecl fcn_0055fd10(char* u)
 		if (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &g_7f4c00) >= 0) {
 			return;
 		}
-		fcn_005015e0(0, &h, 0, *(int*) (u + 0xac));
+		gm_ResolveEntityById(0, (void**) (&h), 0, *(int*) (u + 0xac));
 		if (h == 0) {
 			goto kill;
 		}

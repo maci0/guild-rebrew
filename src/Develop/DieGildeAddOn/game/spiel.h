@@ -16,4 +16,8 @@ int __cdecl gm_MapEntityStatRange(int stat_id);
 short* __cdecl gm_GetEntityTableEntry(char* entity);
 #endif
 
+/* Shared entity lookup and type classification. */
+int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+int __cdecl gm_GetBuildingTypeCategory(int type);
+
 #endif

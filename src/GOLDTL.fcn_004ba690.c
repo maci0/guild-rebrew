@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 #include <string.h>
 
 typedef struct {
@@ -14,7 +15,7 @@ extern char g_7f4ca0[];
 unsigned short* __cdecl fcn_00508e40(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
-int __cdecl fcn_00504bd0(int);
+
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c6ba0(int, int, int);
 void __cdecl fcn_0051af00(void*, int, ...);
@@ -41,7 +42,7 @@ int __cdecl fcn_004ba690(int* a1)
 	if (e == 0)
 		return 1;
 	for (it = gm_StartFilteredEntitySearch(1, 3, *e); it != 0 && n < 8; it = gm_AddObjekt()) {
-		if (fcn_00504bd0(it[0]) == 1)
+		if (gm_GetBuildingTypeCategory(it[0]) == 1)
 			ents[n++] = (char*) it;
 	}
 	if (n == 0)

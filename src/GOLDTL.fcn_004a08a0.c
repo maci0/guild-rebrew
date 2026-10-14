@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x004a0e60
 // FUNCTION: GOLDTL 0x4a08a0
 
@@ -12,7 +13,7 @@ extern unsigned char g_773d75;
 extern float g_66414c;
 extern char g_67eb84[];
 
-int __cdecl fcn_005015e0(char**, char**, char**, int);
+
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 int __cdecl fcn_0050d170(int k);
@@ -26,7 +27,7 @@ int __cdecl fcn_004a08a0(char* a1, char* a2, char* a3)
 	char msg[0xf8];
 
 	if (*a2 == 1 && *a3 == 0x12 && *(unsigned int*) (a3 + 8) > 0) {
-		fcn_005015e0(0, &p, 0, *(int*) (a2 + 4));
+		gm_ResolveEntityById(0, (void**) (&p), 0, *(int*) (a2 + 4));
 		if (p == 0) {
 			return 0;
 		}
@@ -34,11 +35,11 @@ int __cdecl fcn_004a08a0(char* a1, char* a2, char* a3)
 		return 0x39;
 	}
 	if (*a2 == 4 && *a3 == 1) {
-		fcn_005015e0(&q, 0, 0, *(int*) (a2 + 0xc));
+		gm_ResolveEntityById((void**) (&q), 0, 0, *(int*) (a2 + 0xc));
 		if (q == 0) {
 			return 0;
 		}
-		fcn_005015e0(0, &p, 0, *(int*) (a3 + 4));
+		gm_ResolveEntityById(0, (void**) (&p), 0, *(int*) (a3 + 4));
 		if (p == 0) {
 			return 0;
 		}

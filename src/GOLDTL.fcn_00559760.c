@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x551690
 // FUNCTION: GOLDTL 0x559760
 
@@ -31,7 +32,7 @@ extern int g_6643d8[];
 int __cdecl fcn_004a55c0(struct house*, int, int*, float, float, unsigned short*);
 int __cdecl fcn_004a5e60(struct house*, int, F8, int, float, int*);
 double __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_005015e0(int*, int, int, int);
+
 void __cdecl fcn_004c5420(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5d60(int, int, int);
@@ -78,7 +79,7 @@ int __cdecl fcn_00559760(char* s, int n, int m)
 	if (!(gm_RandomFloat01() > n * 0.1f)) {
 		goto fail;
 	}
-	fcn_005015e0(&n, 0, 0, tgt);
+	gm_ResolveEntityById((void**) (&n), 0, 0, tgt);
 	if (n != 0) {
 		idx = (n - (*(int*)&g_90e094)) / 0xa9;
 		fcn_004c5420(h->handle, 0x1c8, 4, 0x40000000, 0);

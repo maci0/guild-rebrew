@@ -3,6 +3,23 @@
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 
+- 2026-10-14 (shared entity lookup ownership): two stale client copies retire
+  in favor of the existing shared spiel.c definitions. Five complete bodies
+  preserve 995 native bytes across three targets. The shared typed interface
+  replaces 81 redundant declarations; all 137 caller bodies and operand graphs
+  remain unchanged, and 194 native call operands resolve to the helpers.
+  Original declaration positions preserve the 639-byte client dialog and
+  861-byte server gm_Open bodies. No new byte-match progress is claimed.
+  Full corpus preserves every prior match: server 316/316, TL 3597/3692,
+  Gold 2096/2539, with no compile errors or missing files. All-target lint
+  and data-conflict checks are clean. Final gate passes 316 functions and
+  652 data checks, preserving every one of the 286,720 raw server file bytes.
+  Coverage reports are refreshed for all three targets; 14 obsolete merged
+  local branches retire. Function identities, extents, flags and verdicts
+  are unchanged; only required verification receipts are refreshed.
+  Full three-image/shared-source objective remains unfinished. Receipts:
+  .scratch/goal22/spiel-unification/.
+
 - 2026-10-14 (stock CRT initialization ownership): all213 native bytes of
   _cinit45/private _initterm26 components match stock crt0dat.obj across3
   targets, with21 typed operands and18 rejecting controls. Server raw map

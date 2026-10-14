@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x004f53a0
 
 /* Same by-value request struct as fcn_004f5300: caller 0x4f56b0 copies 0x2d bytes. */
@@ -8,7 +9,7 @@ typedef struct tag_req_2d_c {
 
 unsigned char* __cdecl fcn_00508e40(int);
 void __cdecl fcn_0051af00(void*, int, ...);
-void __cdecl fcn_005015e0(char** out, int a2, int a3, int id);
+
 int __cdecl fcn_0051e070(void);
 
 int __cdecl fcn_004f53a0(void* a1, req_2d_c s, int b)
@@ -19,7 +20,7 @@ int __cdecl fcn_004f53a0(void* a1, req_2d_c s, int b)
 	unsigned char* p;
 	int v = (b <= 1);
 
-	fcn_005015e0(&nm, 0, 0, *(int*) ((char*) &s + 0x21));
+	gm_ResolveEntityById((void**) (&nm), 0, 0, *(int*) ((char*) &s + 0x21));
 	if (nm != 0) {
 		fcn_0051af00(name, (int) "%1G", nm);
 	}

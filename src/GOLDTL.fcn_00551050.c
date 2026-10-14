@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x551050
 
 // SIZE 0x21c
@@ -13,7 +14,7 @@ extern char g_7f4ca0[];
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, unsigned short);
 unsigned char* __cdecl gm_AddObjekt(void);
-int __cdecl fcn_00504bd0(int);
+
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_0050ff70(unsigned char*, int);
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -33,7 +34,7 @@ void __cdecl fcn_00551050(char* u)
 			return;
 		}
 		for (e = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) (u + 8)); e != 0 && n < 16; e = gm_AddObjekt()) {
-			if (fcn_00504bd0(*e) == 6) {
+			if (gm_GetBuildingTypeCategory(*e) == 6) {
 				cand[n++] = e;
 			}
 		}

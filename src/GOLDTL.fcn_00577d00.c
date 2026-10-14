@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x56f890
 // FUNCTION: GOLDTL 0x00577d00
 
@@ -6,7 +7,7 @@
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
-void __cdecl fcn_005015e0(char**, char**, char**, int);
+
 
 char* __cdecl fcn_00577d00(char* who, char* self, int skip)
 {
@@ -38,7 +39,7 @@ char* __cdecl fcn_00577d00(char* who, char* self, int skip)
 	e = fcn_005463a0(1, 0, 0x18);
 	while (e != 0) {
 		if (*(int*) (e + 0x70) != -1 && *(int*) (e + 0x70) != -2 && skip != *(int*) (e + 4) && *(int*) (e + 0xc4) == *(int*) (who + 4)) {
-			fcn_005015e0(&r, 0, 0, *(int*) (e + 0xb4));
+			gm_ResolveEntityById((void**) (&r), 0, 0, *(int*) (e + 0xb4));
 			if (r != 0) {
 				m = *(char**) (r + 0x61);
 				t = *(float*) (m + 0x4c);

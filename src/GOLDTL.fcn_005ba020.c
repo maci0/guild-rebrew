@@ -1,9 +1,10 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x005aea30
 // FUNCTION: GOLDTL 0x005ba020
 
 void __cdecl fcn_00455350(int, int, float*);
 int __cdecl fcn_00451840(int, float*, float);
-int __cdecl fcn_005015e0(char**, char**, int*, int);
+
 
 int __cdecl fcn_005ba020(char* a1, char* a2)
 {
@@ -26,7 +27,7 @@ int __cdecl fcn_005ba020(char* a1, char* a2)
 	}
 	id = *(int*) (a2 + 6);
 	while (id != -1) {
-		if (fcn_005015e0(&owner, &next, &last, id) == 0) {
+		if (gm_ResolveEntityById((void**) (&owner), (void**) (&next), (void**) (&last), id) == 0) {
 			return 0;
 		}
 		if (owner != 0) {

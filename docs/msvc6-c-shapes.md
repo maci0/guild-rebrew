@@ -11461,3 +11461,31 @@ body or flag change. Both complete shared client objects remain unchanged.
 Evidence: `.scratch/goal20/stat-helper-after-final-prototype/`,
 `stat-helper-shared-final-prototype.json`, and
 `stat-helper-server-bare-prototype-test.json`.
+
+
+## Shared prototype position preserves commutative integer register roles (2026-10-14)
+
+TL5c95d0 has a complete 639-byte dialog body. Replacing its incorrect void
+category declaration with the shared integer-returning prototype at the top
+of the file changes three bytes around the st[4]+st[5] sum: ECX/EDX load
+roles and LEA base/index order. Moving the owning spiel.h include to the
+original declaration position preserves all 639 bytes with the original sum
+expressions unchanged. Correct return type and ordinary flags remain in use.
+
+An explicit discarded-result cast leaves the LEA difference. A separately
+computed scalar sum can also reproduce the body, but the accepted header
+position requires no extra local or expression changes. All 137 surrounding
+caller bodies and their typed operand graphs are unchanged, and all 194
+placeholder call operands independently resolve to the native helpers.
+Evidence: .scratch/goal22/spiel-unification/caller-order-probes*.json,
+users-{before,after}.json and matched/unmatched native-call receipts.
+
+
+The required full corpus exposed a separate implementation-context regression:
+importing the broader spiel.h into entity.h shrank server gm_Open from 861 to 859.
+The preexisting extern resolver declaration in entity.h and bare category
+prototype at its original spiel.c position restore all 861 bytes. Retain these
+compatible implementation declarations; caller consolidation still uses the
+shared interface. The narrow 137-caller preservation did not prove the whole unit.
+Evidence: spiel-unification/server-gm-open-restored.json and the initial/full
+corpus reports. No source body, flag or assembly workaround was adopted.

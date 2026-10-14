@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x00562190
 
 #include <string.h>
@@ -27,7 +28,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
-void __cdecl fcn_005015e0(char**, int, int, int);
+
 int __cdecl fcn_004a5e60(House* h, int kind, __int64 f, int c, float r, int* out);
 int __cdecl fcn_004fa5b0(int k, House* h, Query* q);
 void __cdecl fcn_004c4eb0(char* s);
@@ -74,10 +75,10 @@ void __cdecl fcn_00562190(char* u)
 			count++;
 		}
 	}
-	fcn_005015e0(&o, 0, 0, *(int*) (u + 0xac));
+	gm_ResolveEntityById((void**) (&o), 0, 0, *(int*) (u + 0xac));
 	if (o == 0) {
 		fcn_004a5e60(&((House*)g_7f4ca0)[*(unsigned short*) (u + 8)], 6, g_666018, 0, 100.0f, (int*) (u + 0xac));
-		fcn_005015e0(&o, 0, 0, *(int*) (u + 0xac));
+		gm_ResolveEntityById((void**) (&o), 0, 0, *(int*) (u + 0xac));
 		if (o == 0) {
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 			return;

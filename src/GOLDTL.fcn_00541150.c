@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x00541150
 
 #pragma pack(push, 1)
@@ -32,7 +33,7 @@ extern int g_774654;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_004727a0(int, int);
-int __cdecl fcn_00504bd0(int);
+
 int __cdecl fcn_0050c1b0(Player*, int, int*);
 void __cdecl fcn_00519190(char*, ...);
 int __cdecl fcn_005373e0(void*, int);
@@ -49,7 +50,7 @@ void __cdecl fcn_00541150(Player* p)
 	fcn_00471b60(box);
 	fcn_004727a0(box, 1);
 	((Dialog*)g_77255c)->style = 0x55;
-	fcn_00504bd0(p->office);
+	gm_GetBuildingTypeCategory(p->office);
 	if (fcn_0050c1b0(p, (unsigned short) (*(int*)&g_774970), st) != 0) {
 		if (p->name[0] != 0) {
 			fcn_00519190("$A$Z%1s >%s<$2A", p->office * 14 + 0x48e, p->name);

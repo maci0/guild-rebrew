@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x00548e00
 // FUNCTION: GOLDTL 0x550de0
 
@@ -24,7 +25,7 @@ extern unsigned char g_773d75;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
-int __cdecl fcn_00504bd0(int);
+
 unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl fcn_00502cd0();
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -63,7 +64,7 @@ void __cdecl fcn_00550de0(char* e)
 					break;
 				}
 				p = &((struct good*)g_868050)[*c];
-				if (fcn_00504bd0(*c) == 1 || p->kind == 9) {
+				if (gm_GetBuildingTypeCategory(*c) == 1 || p->kind == 9) {
 					list[n++] = c;
 				}
 			}

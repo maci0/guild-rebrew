@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x0054ff30
 // FUNCTION: GOLDTL 0x557fe0
 
@@ -5,7 +6,7 @@
 extern pos14_7f4c00 g_7f4c00;
 extern int g_6b8010;
 
-void __cdecl fcn_005015e0(char**, int*, int*, int);
+
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00557f00(char*);
 char* __cdecl fcn_00557f70(char*);
@@ -21,7 +22,7 @@ void __cdecl fcn_00557fe0(char* u)
 
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		fcn_005015e0(&x, 0, 0, *(int*) (u + 0xac));
+		gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (u + 0xac));
 		if (x == 0 || *(char**) (x + 0x61) == 0) {
 			goto kill;
 		}
@@ -52,7 +53,7 @@ void __cdecl fcn_00557fe0(char* u)
 		break;
 	case -2:
 	case -1:
-		fcn_005015e0(&x, 0, 0, *(int*) (u + 0xac));
+		gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (u + 0xac));
 		if (*(char**) (u + 0xb0) != 0 && m_is_tracked(*(char**) (u + 0xb0)) != 0) {
 			t = g_6b8010;
 			fcn_004432d0(0, 1);

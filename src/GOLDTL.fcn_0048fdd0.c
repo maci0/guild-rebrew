@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 typedef struct Msg {
 	unsigned char type;
 	char pad[3];
@@ -9,7 +10,7 @@ typedef struct Msg {
 } Msg;
 // SIZE 0x18
 
-void __cdecl fcn_005015e0(char** out, int a2, int a3, int id);
+
 int __cdecl fcn_0048f660(char* e, char* home, Msg* m, Msg* out);
 int __cdecl fcn_0048f850(char* e, char* home, Msg* m, Msg* out);
 int __cdecl fcn_0048fa60(char* e, char* home, Msg* m, Msg* out);
@@ -22,7 +23,7 @@ int __cdecl fcn_0048fdd0(char* e, Msg* m, Msg* out)
 	{
 		char* home;
 
-		fcn_005015e0(&home, 0, 0, m->c);
+		gm_ResolveEntityById((void**) (&home), 0, 0, m->c);
 		if (home != 0) {
 			switch (m->d) {
 			case 0:

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 #include <string.h>
 
 typedef struct Req {
@@ -46,7 +47,7 @@ char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_005c6270(void*, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
-int __cdecl fcn_00504bd0(int);
+
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
@@ -84,7 +85,7 @@ int __cdecl fcn_004ba080(Req* r)
 		if (n >= 8) {
 			break;
 		}
-		if (fcn_00504bd0(*(unsigned char*) e) == 1) {
+		if (gm_GetBuildingTypeCategory(*(unsigned char*) e) == 1) {
 			list[n] = e;
 			n++;
 		}

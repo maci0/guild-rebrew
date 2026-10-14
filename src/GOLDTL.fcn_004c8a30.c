@@ -1,7 +1,8 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x4c8a30
 
 int __cdecl fcn_004c4dc0(unsigned char* msg, int serial);
-int __cdecl fcn_005015e0(char**, char**, char**, int);
+
 
 int __cdecl fcn_004c8a30(unsigned char* msg, char* done)
 {
@@ -21,7 +22,7 @@ int __cdecl fcn_004c8a30(unsigned char* msg, char* done)
 	{
 		char* x;
 
-		if (fcn_005015e0(&x, &a, &b, v) == 0) {
+		if (gm_ResolveEntityById((void**) (&x), (void**) (&a), (void**) (&b), v) == 0) {
 			return 1;
 		}
 		*(int*) (msg + 0x10) = v;

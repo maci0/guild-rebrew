@@ -1,3 +1,35 @@
+## Shared entity lookup definitions and declarations (2026-10-14)
+
+- Removed the stale GOLDTL.fcn_005015e0.c and GOLDTL.fcn_00504bd0.c copies.
+  Shared spiel.c owns gm_ResolveEntityById and gm_GetBuildingTypeCategory.
+  The resolver preserves 211 complete bytes per target; category preserves
+  181 per client, including its 13 typed jump-table/global operands. Both
+  retired copies matched the complete native bodies before removal.
+- Bound 57 resolver and 21 category user files through explicit destination
+  identities. The existing spiel.h replaces 81 redundant declarations with
+  the proper return and parameter types. Explicit output-pointer views
+  preserve each caller's storage. Two original declarations remain in the
+  implementation to preserve its compiler-sensitive declaration context.
+- All 137 caller bodies and typed operand graphs are unchanged. Native
+  direct-call checks validate 183 operands in matched callers and 11 in
+  previously unmatched callers; wrong-callee controls reject.
+- The original header position preserves the 639-byte TL dialog body.
+  Retaining the original declarations in entity.h and spiel.c restores
+  gm_Open's complete 861-byte server body after the full corpus exposed a
+  regression. No assembly, compiler flags or source-body workaround was added.
+- Full corpus preserves all previous matches: server 316/316, TL 3597/3692,
+  Gold 2096/2539, with no compile errors or missing files. Duplicate VAs drop
+  from 2 to 0 in TL and from 11 to 9 in Gold. Every target has zero lint
+  errors/warnings and zero data conflicts/multiple definitions.
+- Final raw server gate passes 316/316 functions and 652/652 data checks;
+  every one of the 286,720 raw file bytes matches the reference. Imports,
+  exports, layout, relocations and load checks pass. Coverage reports are
+  refreshed for all three targets. Removed 14 obsolete merged local branches;
+  the project has only its main worktree. Receipts and replay:
+  .scratch/goal22/spiel-unification. This consolidation adds no new
+  byte-matched progress claim. Complete client images/data and faithful
+  discarded server source remain unfinished.
+
 ## CRT initialization ownership cleanup (2026-10-14)
 
 - Whole compatible stock crt0dat.obj components reproduce all213 native bytes:
@@ -2044,7 +2076,7 @@ Float-record consolidation LIVE (2026-10-04): source57178 running; baseline acce
 | verify `passed` | **316/316** | gate's `BASELINE` |
 | `.text` residue | **0** | raw-link file identity |
 | raw-link `.data` divergence | **0** | raw-link file identity |
-| relocation records missing / extra | **?** | not measured; reloc_set_check.py removed |
+| relocation records missing / extra | **0 / 0** | `rebrew verify --whole-binary` |
 | raw-link import table | **matches** | gate, round 210 |
 | OBJECTIVE GAP (raw link vs reference) | **0** | raw-link file identity |
 | ...of which | **0 differing bytes in the common prefix, 0 bytes of size shortfall** | gate's decomposition |

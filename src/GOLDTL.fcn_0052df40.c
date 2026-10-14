@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 #include "client_types.h"
 // SIZE 0x3cc
 typedef struct {
@@ -55,7 +56,7 @@ void __cdecl fcn_00519190(char* fmt, ...);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int h, int a, int b, int c);
-int __cdecl fcn_00504bd0(int);
+
 unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 
@@ -102,7 +103,7 @@ void __cdecl fcn_0052df40(unsigned char* s)
 		g_6a25c4[0] = -1;
 		return;
 	}
-	kind = fcn_00504bd0(*s);
+	kind = gm_GetBuildingTypeCategory(*s);
 	t = g_868050 + *s * 0x24d;
 	r = fcn_00506380(g_774970, s, 0, 0);
 	if (*(unsigned short*) (s + 0x27) == g_774970 || *(unsigned short*) (s + 0x25) == g_774970 || (r & 0x10) != 0) {

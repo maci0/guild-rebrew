@@ -1,9 +1,10 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 #include <string.h>
 
 unsigned short* __cdecl fcn_00508e40(int);
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
-int __cdecl fcn_005015e0(char**, char**, char**, int);
+
 int __cdecl gm_CheckEntityType(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0051af00(void*, int, ...);
@@ -31,10 +32,10 @@ int __cdecl fcn_004b99e0(int* a1)
 	if (e == 0)
 		return 1;
 	for (s = fcn_005463a0(1, 0, 0xf); s != 0 && n < 8; s = fcn_005462a0()) {
-		fcn_005015e0(0, &y, 0, *(int*) (s + 0xac));
+		gm_ResolveEntityById(0, (void**) (&y), 0, *(int*) (s + 0xac));
 		if (y != 0 && *(int*) (y + 0xa) == *e) {
-			fcn_005015e0(&x1, 0, 0, *(int*) (s + 0xb4));
-			fcn_005015e0(&x2, 0, 0, *(int*) (s + 0xb0));
+			gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));
+			gm_ResolveEntityById((void**) (&x2), 0, 0, *(int*) (s + 0xb0));
 			if ((x1 != 0 && gm_CheckEntityType(x1) != 0) || (x2 != 0 && gm_CheckEntityType(x2) != 0)) {
 				if (*x2 != 'G' || *x1 != 'G') {
 					ss[n] = s;
@@ -50,8 +51,8 @@ int __cdecl fcn_004b99e0(int* a1)
 	r = gm_RandomMod(n);
 	s = ss[r];
 	y = ys[r];
-	fcn_005015e0(&x2, 0, 0, *(int*) (s + 0xb0));
-	fcn_005015e0(&x1, 0, 0, *(int*) (s + 0xb4));
+	gm_ResolveEntityById((void**) (&x2), 0, 0, *(int*) (s + 0xb0));
+	gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));
 	if (x2 != 0 && x1 != 0) {
 		fcn_0051af00(buf, *(unsigned short*) (a1 + 1) + 0x12e7, x2, x1, cnt);
 		fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x5ef, 0);

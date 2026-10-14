@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLD 0x004f8590
 // FUNCTION: GOLDTL 0x004fa980
 
@@ -15,7 +16,7 @@ typedef Cell_99ef80 Cell;
 extern Cell_99ef80 g_99ef80[9][8];
 
 void __cdecl fcn_004f4830(int kind, Offer* o);
-void __cdecl fcn_005015e0(char** out, int a, int b, int key);
+
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004fa6f0(char* pos, int* x, int* y);
 
@@ -31,7 +32,7 @@ void __cdecl fcn_004fa980(int key, unsigned char kind)
 	int j;
 
 	fcn_004f4830(kind, &offer);
-	fcn_005015e0(&p, 0, 0, key);
+	gm_ResolveEntityById((void**) (&p), 0, 0, key);
 	x = gm_RandomMod(8);
 	y = gm_RandomMod(8);
 	if (p != 0 && *(char**) (p + 0x61) != 0) {

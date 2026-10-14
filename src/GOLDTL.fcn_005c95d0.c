@@ -22,7 +22,9 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
-void __cdecl fcn_00504bd0(int);
+/* Preserve the original declaration order for native register allocation. */
+#include "Develop/DieGildeAddOn/game/spiel.h"
+
 void __cdecl fcn_0050c1b0(unsigned char*, int, int*);
 int __cdecl fcn_0050bfe0(unsigned char*);
 int __cdecl fcn_005373e0(void*, int);
@@ -39,7 +41,7 @@ void __cdecl fcn_005c95d0(unsigned char* a)
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 1);
 	*(int*) (g_77255c + 0x28c) = 0x56;
-	fcn_00504bd0(a[0]);
+	gm_GetBuildingTypeCategory(a[0]);
 	fcn_0050c1b0(a, g_774970, st);
 	if (a[5] != 0) {
 		fcn_00519190((int) s_6a4310, a[0] * 14 + 0x48e, a + 5);

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 /* Hires a production worker like the server's gv_HireProductionWorker, and
  * also notifies the owning player when that player is of kind 6. */
 
@@ -11,7 +12,7 @@ extern char g_8680b4[];
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-int __cdecl fcn_005015e0(void**, void**, void**, int);
+
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);
 int __cdecl fcn_004f1840(void*, int*);
@@ -31,7 +32,7 @@ int __cdecl fcn_004f25a0(char* req)
 	int j;
 	int off;
 
-	fcn_005015e0(&entity1, 0, 0, *(int*) (req + 8));
+	gm_ResolveEntityById((void**) (&entity1), 0, 0, *(int*) (req + 8));
 	if (entity1 == 0 || *(unsigned short*) ((char*) entity1 + 0x27) == 0xffff ||
 	    g_7f4ca0 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c == g_773da8) {
 		return -1;
@@ -47,7 +48,7 @@ int __cdecl fcn_004f25a0(char* req)
 	if (!gv_CheckSlotActive(workers, *(int*) (req + 0xc))) {
 		return -4;
 	}
-	fcn_005015e0(0, 0, &entity2, *(int*) (req + 4));
+	gm_ResolveEntityById(0, 0, (void**) (&entity2), *(int*) (req + 4));
 	if (entity2 == 0) {
 		return -6;
 	}

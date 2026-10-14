@@ -1,8 +1,9 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 extern unsigned char g_773d75;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
-int __cdecl fcn_00504bd0(int);
+
 unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -26,7 +27,7 @@ int __cdecl fcn_004bac00(unsigned short* a1, int* a2, float a3)
 
 	n = 0;
 	for (it = gm_StartFilteredEntitySearch(1, 3, *a1); it != 0 && n < 8; it = gm_AddObjekt()) {
-		k = fcn_00504bd0(it[0]);
+		k = gm_GetBuildingTypeCategory(it[0]);
 		if (k == 1 || k == 2)
 			arr[n++] = (char*) it;
 	}

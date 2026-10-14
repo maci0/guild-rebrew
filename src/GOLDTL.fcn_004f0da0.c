@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/spiel.h"
 // FUNCTION: GOLDTL 0x004f0da0
 
 typedef struct
@@ -27,7 +28,7 @@ typedef struct
 extern Slot170_7731b8 g_7731b8[8];
 extern unsigned char* g_868050;
 
-void __cdecl fcn_005015e0(unsigned char** out, int a, int b, int id);
+
 void __cdecl fcn_004f0930(int id);
 
 void __cdecl fcn_004f0da0(void)
@@ -37,7 +38,7 @@ void __cdecl fcn_004f0da0(void)
 
 	for (i = 0; i < 8; i++) {
 		if (((Slot170*)g_7731b8)[i].id != -1) {
-			fcn_005015e0(&r, 0, 0, ((Slot170*)g_7731b8)[i].id);
+			gm_ResolveEntityById((void**) (&r), 0, 0, ((Slot170*)g_7731b8)[i].id);
 			if ((r == 0 && ((Slot170*)g_7731b8)[i].flags == 0) || (g_868050[*r * 0x24d] != 0x1e && ((Slot170*)g_7731b8)[i].flags == 0)) {
 				fcn_004f0930(((Slot170*)g_7731b8)[i].id);
 			}
