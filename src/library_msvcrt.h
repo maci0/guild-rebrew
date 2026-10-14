@@ -57,7 +57,9 @@
 // _strlen
 
 
-// __un_inc
+/* __un_inc is private STATIC code in stock input.obj (Gold 0x005e3a71).
+ * Complete 23-byte native proof includes __ungetc_lk at 0x005e899f.
+ * This identification supplies no extern or verified client raw-link provider. */
 
 
 // _memset

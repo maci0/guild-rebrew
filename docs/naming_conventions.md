@@ -1,3 +1,12 @@
+### Private CRT input helper (2026-10-15)
+
+Gold 0x005e3a71 is the attested private `_un_inc` (`__un_inc` in COFF),
+not an inferred game function. Pristine Processor Pack `input.obj` has STATIC
+linkage and reproduces all 23 bytes with its `__ungetc_lk` operand bound to
+0x005e899f; a wrong-callee control rejects. Its managed LIBRARY identity lives
+in `library_msvcrt.h` without a public declaration. The incorrect copied body
+is retired. No client raw-link provider is claimed by this identification.
+
 ### Shared scene lighting refresh (2026-10-15)
 
 `UpdateSceneLighting` is an inferred name for TL0x450a00 and Gold0x453890.

@@ -23,13 +23,32 @@
   __ungetc_lk at 5e899f. Both successive push [esp+8] instructions pass distinct
   original arguments because the first push changes ESP; the copied b,b C is
   incorrect. No external __un_inc definition is exported, and no project caller
-  references the C copy. Reconcile header/library-member evidence and retire that
-  false provider without inventing an exported symbol or patching CRT archives.
+  references the C copy. The false provider is retired; the locked identity now
+  records the attested _un_inc/__un_inc in library_msvcrt.h without an extern.
+  A fresh complete 23-byte stock-object proof and wrong-callee control pass;
+  LIEF confirms STATIC linkage. Historical comparison evidence and all unrelated
+  rows are preserved. Selected client raw-link provider remains unverified.
   Receipts: gold-library-wrapper-match.json, gold-un-inc-archive.json and
-  gold-un-inc-native.json. Library results remain outside game progress.
+  gold-un-inc-native.json, gold-un-inc-native-proof.json and
+  retired-duplicate-sources/gold-un-inc-retirement.json. Library results remain
+  outside game progress.
+- Cleanup validation: the provider audit selects 14 compiled Gold library sources
+  and exactly one header identity for _un_inc, with provider unresolved. All-target
+  lint has zero errors and the same 31 W030 warnings. Fresh server gate passes
+  316/316 game functions, 65/65 compiled libraries, 652/652 data comparisons,
+  complete raw-file identity, imports/relocations and Wine checks; only known lint
+  warnings fail. All three coverage documents are regenerated. Receipts:
+  gold-un-inc-provider-audit.json, lint-crt-retirement.json, gate-crt-retirement.log
+  and coverage-crt-{server,tl,gold}.json under .scratch/goal31/.
 - Upstream 5f730512 records separate library comparison diagnostics and atomic
-  non-verdict data-view edit gaps. Commit hooks pass; required full-suite push
-  hook is running (session 69529; .scratch/goal31/upstream-feedback-push.log).
+  non-verdict data-view edit gaps. Required full-suite push hooks pass; remote
+  main contains the commit. Receipt: .scratch/goal31/upstream-feedback-push.log.
+- Rechecked TL406120 against its prior Round 982 evidence. Kuna confirms the
+  task-chain walk but leaves the EDX value unresolved across 4050c0; it supplies
+  no new compilation-context solution. No source or match is promoted and the
+  exhausted local/flag probes are not repeated. Fresh native/dossier/library
+  receipts and the Kuna seed are .scratch/goal31/tl-406120-*. The 465820/465840
+  uncovered candidates already have D3DX zcalloc/zcfree evidence, not new game work.
 
 ## Terminal corpus and stale verification cleanup (2026-10-15)
 

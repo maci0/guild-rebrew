@@ -112,7 +112,8 @@ reconstruction of discarded server inputs remain open. Existing inferred server
 link inputs do not establish original source merely because the raw DLL matches.
 
 Guild checkpoints e24b9311 (Rebrew 3 migration), 86560789 (raw server/provider
-repairs) and 14b5140d (CLI guidance) are committed and pushed. The migration audit
+repairs), 14b5140d (CLI guidance) and de00f948 (shared lighting) are committed
+and pushed. The migration audit
 preserves all 8,376 identities/bindings/extents and non-comment tokens in 3,836
 C/header files. cm_ExProdObjekt is restored to its attested command.c position:
 its isolated object matched, but splitting it changed 30,085 raw bytes and drifted
@@ -125,7 +126,7 @@ Gold 2098/2540. No checkpoint EXACT/RELOC identity is lost, and all 3,973 source
 configuration inputs stay unchanged during that run. Receipts:
 .scratch/goal29/corpus-current.json and .scratch/goal31/terminal-corpus-audit.json.
 All three coverage documents were regenerated before the new helper integration.
-Gold compiled libraries are 14/15; existing library 5e3a71 is SIZE_MISMATCH.
+Gold compiled libraries were 14/15; the incorrect 5e3a71 C copy is now retired.
 Function/object comparisons do not establish client raw-file or data identity.
 
 The shared UpdateSceneLighting integration now uses one C89 definition for
@@ -168,24 +169,32 @@ Focused suites 65/66 and required full commit/push hooks pass; canonical/remote
 main contain a705f40d. Its completed checkout and the stale, clean 3babd2d4 baseline
 checkout are removed after process/file-reference audits. Both repositories now
 retain only main. New library-result and atomic-view-edit CLI gaps are committed
-as 5f730512 in upstream docs/IDEAS-GUILD.md with passing commit hooks; its required
-full-suite push check is running (session 69529, .scratch/goal31/upstream-feedback-push.log).
+as 5f730512 in upstream docs/IDEAS-GUILD.md. Its required full-suite push hooks
+pass and remote main contains the commit (.scratch/goal31/upstream-feedback-push.log).
 
 The library mismatch is the static __un_inc helper in pristine input.obj; stock
 body matching and the __ungetc_lk callee at 5e899f are supported. The project C copy
-passes the wrong duplicated argument and has no project callers. Archive inspection
-finds no external __un_inc definition. Reconcile its header-owned identification
-and stock input.obj provider without inventing an external symbol or patching the
-archive; no client raw map exists yet. Receipts: gold-library-wrapper-match.json
-and gold-un-inc-archive.json under .scratch/goal31/.
+passes the wrong duplicated argument and has no project callers. It is retired;
+the locked identity records attested _un_inc/__un_inc in library_msvcrt.h without
+an extern. LIEF confirms STATIC linkage. Complete 23-byte native relocation proof
+and a rejecting wrong-callee control pass. Historical comparison evidence and all
+unrelated managed rows are preserved. No client raw map/provider is claimed.
+Receipts: gold-un-inc-native-proof.json and
+retired-duplicate-sources/gold-un-inc-retirement.json under .scratch/goal31/.
+Provider audit selects 14 compiled Gold library sources and exactly one helper
+header identity with provider unresolved. Fresh all-target lint retains zero
+errors and 31 warnings. The terminal cleanup gate passes all 316 game functions,
+65 compiled libraries, 652 data comparisons, complete raw-file identity and Wine
+checks; only known lint warnings fail. Coverage is regenerated for all targets.
+Receipts: .scratch/goal31/gold-un-inc-provider-audit.json,
+lint-crt-retirement.json, gate-crt-retirement.log and coverage-crt-*.json.
 
 Shared he_RunProduktion still emits 4,016 vs 3,816 bytes in both clients. Its 456
 bounded runs reach all 66 call sites but do not prove exhaustive behavior or byte
 identity. The two 450-byte initializer matches remain; native types/event extent
 and original placement are unresolved. Preserve prior goal23–goal26 evidence.
 
-Next: commit/push the reviewed reconstruction checkpoint with pending lint explicit.
-Resolve the stock helper provider and remaining source-unit/type/data evidence,
+Next: resolve remaining source-unit/type/data evidence and selected raw-link providers,
 recover genuine discarded server inputs and client code, and build both raw clients.
 Keep the original completion criteria and the goal active.
 

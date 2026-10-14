@@ -75025,12 +75025,13 @@ measured_at = "2026-10-14T16:23:16+00:00"
 ["GOLD.0x005e3a71"]
 size = 23
 status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-10-04T07:59:21+00:00"
-file = "src/GOLD.fcn_005e3a71.c"
-symbol = "_fcn_005e3a71"
+updated_by = "data"
+updated_at = "2026-10-14T17:25:53+00:00"
+file = "src/library_msvcrt.h"
+symbol = "__un_inc"
 kind = "LIBRARY"
-name = "fcn_005e3a71"
+name = "_un_inc"
+note = "Private STATIC __un_inc in pristine Processor Pack LIBCMT input.obj: complete 23-byte native proof with __ungetc_lk at 0x5e899f and a rejecting wrong-callee control. No project callers; incorrect copied C body retired. Header records ancestry only, not an external declaration or selected client raw-link provider. Historical C comparison verdict remains historical. Proof: .scratch/goal31/gold-un-inc-native-proof.json"
 
 ["GOLD.0x005e3a71".verification]
 source_hash = "1e9b47dc46838cba4ef3a5888cb6d00f78f1a89a491e79b716758055a05524c0"
