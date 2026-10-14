@@ -86812,12 +86812,9 @@ measured_at = "2026-10-14T15:26:15+00:00"
 size = 784
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-10-05T20:26:19+00:00"
-file = "src/Develop/DieGildeAddOn/game/spiel.c"
-symbol = "_gm_ChangePlayerIdentityImpl"
-kind = "FUNCTION"
-name = "gm_ChangePlayerIdentityImpl"
+updated_by = "data"
+updated_at = "2026-10-14T19:34:29+00:00"
+note = "Incorrect legacy source binding retired; actual native routine remains unreversed. Native has no arguments and advances animation/timer records with callbacks. It is not the three-argument player-identity and relationship migration routine. The separate TL0x513d40 source candidate remains untouched and needs independent identity review. Historical comparison is retained, not a current source claim. Native Kuna receipt: .scratch/goal34/tl-422150-kuna.c"
 
 ["GOLDTL.0x00422150".verification]
 source_hash = "cd28f75ab098e69a4bbac7f1c8df0f52c2cc102ebd7d262602110683205e2357"
@@ -96914,12 +96911,9 @@ measured_at = "2026-10-14T15:26:15+00:00"
 ["GOLDTL.0x0044a120"]
 size = 361
 status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-10-04T07:56:38+00:00"
-file = "src/Develop/DieGildeAddOn/game/friedhof_logic.c"
-symbol = "_gv_SpawnEntities"
-kind = "FUNCTION"
-name = "gv_SpawnEntities"
+updated_by = "data"
+updated_at = "2026-10-14T19:34:11+00:00"
+note = "Incorrect legacy source binding retired; actual native routine remains unreversed. Native takes one graphics-object pointer, decrements reference count at+0x1e0, unlinks it and frees resources/COM interfaces. It does not spawn graveyard entities from a count argument. Historical comparison is retained, not a current source claim. Native Kuna receipt: .scratch/goal34/tl-44a120-kuna.c"
 
 ["GOLDTL.0x0044a120".verification]
 source_hash = "629d539d52988b2a5821f1a43d3795dd1948096068e8a3c5d08a82773b6223c9"
@@ -118240,12 +118234,9 @@ measured_at = "2026-10-14T15:26:16+00:00"
 ["GOLDTL.0x004b0220"]
 size = 448
 status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
-file = "src/Develop/DieGildeAddOn/command/command.c"
-symbol = "_cm_ExModifyStat"
-kind = "FUNCTION"
-name = "cm_ExModifyStat"
+updated_by = "data"
+updated_at = "2026-10-14T19:33:49+00:00"
+note = "Incorrect legacy source binding retired; actual native routine remains unreversed. Native takes three arguments and parses dash-prefixed text with string comparison and atoi; it does not modify an entity statistic from the one-argument command packet. Historical comparison is retained, not a current source claim. Native Kuna receipt: .scratch/goal34/tl-4b0220-kuna.c"
 
 ["GOLDTL.0x004b0220".verification]
 source_hash = "81f56f0af7fd60ee71f464854311c386b8b4238c14e89e66a2258ea4033419df"
@@ -123624,12 +123615,9 @@ measured_at = "2026-10-14T15:26:16+00:00"
 size = 960
 cflags = "/Ox /Gd"
 status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-10-04T07:56:38+00:00"
-file = "src/Develop/DieGildeAddOn/command/command.c"
-symbol = "_cm_ExProdObjekt"
-kind = "FUNCTION"
-name = "cm_ExProdObjekt"
+updated_by = "data"
+updated_at = "2026-10-14T19:33:25+00:00"
+note = "Incorrect legacy source binding retired; actual native routine remains unreversed. Native has no packet arguments: it aggregates city/vote records and selects localized announcement messages. It neither consumes a production command nor updates inventories. Historical comparison is retained, not a current source claim. Native Kuna receipt: .scratch/goal34/tl-4c35f0-kuna.c"
 
 ["GOLDTL.0x004c35f0".verification]
 source_hash = "81f56f0af7fd60ee71f464854311c386b8b4238c14e89e66a2258ea4033419df"
@@ -160704,12 +160692,9 @@ measured_at = "2026-10-14T15:26:17+00:00"
 ["GOLDTL.0x0057c7b0"]
 size = 176
 status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-10-04T07:56:39+00:00"
-file = "src/Develop/DieGildeAddOn/command/command.c"
-symbol = "_cm_ExDestroyBuilding"
-kind = "FUNCTION"
-name = "cm_ExDestroyBuilding"
+updated_by = "data"
+updated_at = "2026-10-14T19:24:09+00:00"
+note = "Incorrect legacy source binding retired; native function remains unreversed. Native one-argument daily entity update uses entity+0x70 and +/- transfers; it is not the command destructor. The real two-argument destructor is TL0x4cbc90 / Gold0x4cb100 with existing matched source. Historical comparison evidence is retained, not a current source claim. Receipts: .scratch/goal34/"
 
 ["GOLDTL.0x0057c7b0".verification]
 source_hash = "81f56f0af7fd60ee71f464854311c386b8b4238c14e89e66a2258ea4033419df"
@@ -165168,13 +165153,9 @@ measured_at = "2026-10-14T15:26:17+00:00"
 ["GOLDTL.0x005974e0"]
 size = 1113
 status = "SIZE_MISMATCH"
-blocker = "Client constructor remains SIZE_MISMATCH; the aligned-fill assembly in the shared definition is SERVER-only under REBREW_SERVER. Native TL body has no such macro. No original client assembly is claimed; client fill uses C memset."
-updated_by = "blocker"
-updated_at = "2026-10-13T19:36:13+00:00"
-file = "src/Develop/DieGildeAddOn/game/spiel.c"
-symbol = "_gm_AllocGebaeude"
-kind = "FUNCTION"
-name = "gm_AllocGebaeude"
+updated_by = "data"
+updated_at = "2026-10-14T19:24:26+00:00"
+note = "Incorrect legacy source binding retired; native function remains unreversed. Native routine builds a 68-word option table and updates sixteen 56-byte UI rows; it does not allocate a building. The real factory is TL0x5043d0, identified by the type table, gm_SearchStruct, building field initialization and f3_gm:PlantMap/AHM_INFO allocation labels. Historical comparison evidence is retained, not a current source claim. Receipts: .scratch/goal34/"
 
 ["GOLDTL.0x005974e0".verification]
 source_hash = "cd28f75ab098e69a4bbac7f1c8df0f52c2cc102ebd7d262602110683205e2357"
@@ -172793,12 +172774,9 @@ measured_at = "2026-10-14T15:26:17+00:00"
 ["GOLDTL.0x005d6030"]
 size = 416
 status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-10-04T07:56:40+00:00"
-file = "src/Develop/DieGildeAddOn/loadsave/loadsave.c"
-symbol = "_InitNewDynastyEntity"
-kind = "FUNCTION"
-name = "InitNewDynastyEntity"
+updated_by = "data"
+updated_at = "2026-10-14T19:24:43+00:00"
+note = "Incorrect legacy source binding retired; native function remains unreversed. Native two-argument GUI/command callback returns action codes and opens dialogs; it is not the four-argument dynasty initializer. The real initializer is TL0x4adcd0, already matched, with flags0x1000/0x2000, two relationship matrices, field initialization and client naming/notification tail. Historical comparison evidence is retained, not a current source claim. Receipts: .scratch/goal34/"
 
 ["GOLDTL.0x005d6030".verification]
 source_hash = "fe1524d998744f36bcbcd860e5c44dea784eadd1df9171ac91dd7bd4dc747f8b"
@@ -189407,3 +189385,10 @@ input_hash = "9c6eb55bee394eade7f038a12247e34522daaeae8958013e8a10ff7609532f79"
 status = "NEAR_MATCHING"
 writer = "test"
 measured_at = "2026-10-14T17:59:18+00:00"
+
+["GOLDTL.0x005043d0"]
+size = 1488
+name = "gm_AllocGebaeude"
+updated_by = "data"
+updated_at = "2026-10-14T19:38:58+00:00"
+note = "Identified building factory from native type table0x868050, gm_SearchStruct0x504100, building field/owner initialization and f3_gm:PlantMap/AHM_INFO labels. The shared server reconstruction seed compiled to1050 bytes versus the complete1488-byte native client extent; the trial is historical, not a current source-provider claim. The seed assembly is guarded by REBREW_SERVER and the client branch uses C memset. Native client code still requires real C reconstruction and original unit confirmation. Complete native inventory extent1488 includes switch regions. .scratch/goal34/tl-building-true-kuna.c and tl-building-true-dossier.json"

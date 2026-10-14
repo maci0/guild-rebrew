@@ -152,9 +152,11 @@ later full TL reports are resolved: five were foreign definitions losing scope
 after metadata migration, and two unused year definitions caused the sixth.
 Current full inventories have zero type conflicts and zero multiple definitions
 in all three targets (664/295/260 data entries).
-Current lint has zero errors and 31 W030 findings in command.c,
-alchemistry_logic.c, friedhof_logic.c, spiel.c and loadsave.c. Native source-unit
-and ordering evidence is required; keep the attested server composition intact.
+Current lint has zero errors and two W030 findings in alchemistry_logic.c,
+for the shared command-chain handler's client identities. Seven incorrect TL
+source bindings are retired after native review; their inventory entries,
+extents and historical comparisons remain. Keep the attested server composition
+intact while resolving the remaining source-unit evidence.
 
 The new server gate found the documented upstream CLI migration in the local
 CMake call: order-sources --marker is now --module, with an explicit server target.
@@ -229,6 +231,24 @@ The fresh server gate retains full raw identity,316 functions,652 data checks,
 Wine/library/profile checks; only31 order warnings fail. Receipts:
 .scratch/goal33/year-objects-*.json, gold-find-slot-native-proof.json,
 year-spiel2-gold-final-test.json, data-*-final.json and gate-year-cleanup.log.
+
+Native review with Kuna rejects TL57c7b0 as cm_ExDestroyBuilding, TL5974e0 as
+gm_AllocGebaeude, TL5d6030 as InitNewDynastyEntity, TL4c35f0 as cm_ExProdObjekt,
+TL4b0220 as cm_ExModifyStat, TL44a120 as gv_SpawnEntities and TL422150 as
+gm_ChangePlayerIdentityImpl. These are different operations and argument shapes;
+unbinding them does not reverse the native routines or remove inventory. All
+existing EXACT/RELOC source claims remain. Actual destructor TL4cbc90/Gold4cb100
+and dynasty initializer TL4adcd0 already have matched client bodies; their shared
+source organization remains open. Factory TL5043d0 is identified, but has no
+source provider: the shared seed emits1050 versus1488 native bytes. Its SERVER
+assembly is conditional and absent from the client branch. Receipts:
+.scratch/goal34/identity-retirement.json, additional-identity-retirement.json,
+building-correct-seed-test.json and lint-commit.json.
+The fresh gate still matches all286720 server bytes and passes function/data,
+Wine/library/profile checks; lint alone fails. The gate ran before the last four
+retirements; the subsequent lint scan confirms the two remaining warnings.
+No C bodies, headers or compiler inputs changed in this checkpoint. Upstream
+f0dfff6b records the missing safe binding-retirement CLI capability.
 
 Next: complete source-unit/type/data evidence and raw-link providers, recover
 genuine discarded server inputs and client code, and build both raw clients.

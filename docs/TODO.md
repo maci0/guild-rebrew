@@ -53141,3 +53141,21 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   Client image/data verification, types/names and placeholder removal remain
   unfinished. Evidence: stat-helper-integration-check.json, the final caller
   measurement directory and stat-helper-final-server-gate.log in .scratch/goal20.
+
+### 2026-10-15: retire seven incorrect TL source bindings
+
+- Native Kuna review establishes unrelated operations and argument shapes at
+  TL57c7b0,5974e0,5d6030,4c35f0,4b0220,44a120 and422150. Locked writers remove
+  their false source/name claims; inventory, extents and comparison history stay.
+- Actual destruction TL4cbc90/Gold4cb100 and initialization TL4adcd0 already
+  have matched bodies. Factory TL5043d0 is identified but remains without source:
+  the shared seed is1050/1488 bytes. SERVER-only assembly is guarded; TL uses C.
+- No source/header/compiler inputs or prior EXACT/RELOC bindings change. Fresh
+  all-target lint has zero errors and two command-chain placement warnings.
+  The terminal server gate preserves full286720-byte raw identity and passes
+  function/data/Wine checks; lint alone fails. The final lint scan follows the
+  last four retirements, which occurred after that gate started.
+- Upstream f0dfff6b records the missing safe detach/rebind CLI capability.
+  Native receipts and history-preservation checks live under .scratch/goal34/.
+  Shared source placement, original names, complete client images/data and the
+  full source-fidelity objective remain unfinished.
