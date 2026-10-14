@@ -1132,6 +1132,21 @@ This is a semantic shared-name choice anchored in the existing server reconstruc
 
 ### Shared scene-object destruction (2026-10-15)
 
+`d3_UnlinkObject` is inferred from the native parent/sibling updates and flag
+clear at TL `0x43a0a0` and Gold `0x43d0e0`. One typed definition now uses the
+verified D3 object layout for both clients; the header supplies each target's
+field offsets. It preserves the original store order and introduces no null
+guard. The old `Ent` type in caller TL `0x4458e0` remains a partial view; the
+call casts it to the canonical object type without changing its byte accesses.
+The name and placement in `d3_object.c` remain inferred.
+
+Both complete unlink bodies are unmasked EXACT for154 bytes. Opposite object
+layouts reject, and both32-byte destruction wrappers retain their complete
+native bodies and call destinations. The unlink provider is now source-owned
+for both targets, including the previously unsourced Gold leaf. Inner disposal
+still differs and remains separate. Evidence:
+`.scratch/goal40/native-proof.json` and `scope-preservation.json`.
+
 `d3_DestroyObject` is inferred from the wrapper's unlink/dispose behavior and
 the existing D3 object layout evidence. It names TL `0x442be0` and Gold
 `0x447190`; neither native body contains a name or source-path string. The
@@ -1141,7 +1156,8 @@ the inner disposal helper, not the wrapper name.
 
 One C89 definition returns a byte and takes `D3_OBJECT*`, with a single header
 declaration reused by every reconstructed caller. Native TL calls `43a0a0` /
-`4398d0`; Gold calls `43d0e0` / `43c7a0`. These providers remain separate:
+`4398d0`; Gold calls `43d0e0` / `43c7a0`. Unlink now has a shared typed provider;
+the disposal providers remain separate:
 TL disposal is450 bytes and Gold disposal637. The caller byte proof does not
 establish their provider implementations or original parameter spelling.
 

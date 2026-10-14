@@ -53260,3 +53260,28 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   gate-wrapper.log,lint-final.json,data-*-final.json andtype-*.json. Next typed
   unlink probe is EXACT154 for TL43a0a0 and Gold43d0e0, with no relocations;
   it remains unadopted and requires caller/provider checks before integration.
+
+### 2026-10-15: integrate typed scene-tree unlinking
+
+- TL43a0a0 and previously unsourced Gold43d0e0 now use one inferred
+  d3_UnlinkObject definition in the inferred object unit. Canonical D3_OBJECT
+  fields supply the different native offsets; the same C89 body is unmasked
+  EXACT154 in each client. Original store order and null behavior remain.
+- The additional caller TL4458e0 casts its existing partial object view to the
+  canonical type. The old standalone TL definition is removed after checking
+  function/data owners. Gold's identity is registered through the locked writer
+  and its verdict comes from CLI compilation, not a manual status write.
+- Both complete destruction wrappers remain32 bytes. Two wrong-layout and four
+  wrong-callee controls reject. All118 prior function comparisons preserve byte
+  results and prior binding proofs; Gold's wrapper gains a native source-provider
+  binding. All6021 prior strong statuses stay, plus Gold EXACT154, for6022.
+  Six D3 sizeof/extents/offsets are unchanged after compiler-backed rebinds.
+- Full server gate passes with286720 raw bytes identical. All-target lint is0/0;
+  data inventories show no type conflicts or duplicate definitions. Receipts:
+  .scratch/goal40/{native-proof,scope-preservation,preservation}.json,
+  gate-unlink.log,lint-final.json,data-*-final.json andtype-*.json.
+- Rebrew's Kuna backend saves native disposal seeds for TL4398d0 / Gold43c7a0;
+  direct Kuna lacked its spec setup, while the configured CLI succeeds. The
+  Gold seed shows additional selected-object and draw-buffer cleanup; all such
+  differences still need native operands and complete-body verification before
+  consolidation. Full client images/data and original source fidelity remain open.

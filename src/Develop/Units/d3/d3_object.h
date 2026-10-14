@@ -64,6 +64,7 @@ typedef struct D3_OBJECT {
     int unbekannt_224;
 } D3_OBJECT;
 
+void __cdecl d3_UnlinkObject(D3_OBJECT* object);
 char __cdecl d3_DestroyObject(D3_OBJECT* object);
 
 #endif

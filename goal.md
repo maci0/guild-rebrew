@@ -202,11 +202,25 @@ Name and d3_object.c placement are inferred. Separate disposal providers and
 both full client images remain open. Receipts: .scratch/goal39/preservation.json,
 wrapper-native-proof.json,scope-audit-current.json andgate-wrapper.log.
 Upstream2ed6b113 records contract/header/caller reconciliation; required commit
-checks and the full push suite pass, and it is pushed. A typed unlink candidate is EXACT154 in both clients but
-remains unadopted in scratch.
+checks and the full push suite pass, and it is pushed.
 
-Next: adopt the typed unlink helper with its callers verified, unify the
-evidenced query, child-removal and building-cleanup helpers, and get direct native
+The typed unlink helper is now integrated in the same object unit at TL43a0a0
+and Gold43d0e0. One void(D3_OBJECT*) body is unmasked EXACT for154 bytes in
+both clients, using the header's target-specific field offsets. It preserves
+native store order and null behavior. Both destruction wrappers remain32 bytes;
+two opposite-layout and four wrong-callee controls reject. All118 previous
+scope comparisons retain their byte results and binding proofs; Gold gains
+its first source provider for the leaf. All6021 previous strong statuses stay,
+for6022 total. Six type layouts, all-target lint and data inventories remain
+clean, and the fresh server gate preserves all286720 raw bytes. Names and
+placement remain inferred. Receipts: .scratch/goal40/native-proof.json,
+scope-preservation.json,preservation.json andgate-unlink.log. Kuna disposal
+seeds are saved through the configured Rebrew backend; the450/637-byte disposal
+implementations and full client images remain open.
+
+Next: reconcile the native disposal differences using those seeds and native
+operands, unify the evidenced query, child-removal and building-cleanup helpers,
+and get direct native
 unit/caller evidence for the distant ahm_ResetEntityState. Keep the attested cm_ExProdObjekt TU: its
 previous split changed30085 raw bytes and drifted32 data rows. Recover genuine
 discarded server inputs, finish source-unit/type/data/provider evidence and
