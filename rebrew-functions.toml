@@ -23832,7 +23832,7 @@ kind = "FUNCTION"
 name = "ahm_ResetEntityState"
 
 ["GOLD.0x0047e930".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "aebad3a8b58612911a063e4c4e43c985bd7a0632ed33ab74a7a47b1aa9f7a51a"
 reference_size = "66"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -23843,10 +23843,10 @@ module = "GOLD"
 va = "0x47e930"
 context_hash = ""
 defines = "[\"REBREW_GOLD\"]"
-input_hash = "9d046f360ec858073eae7561ad95028331e5858bf0e1deb857f1842ca2da1d8d"
+input_hash = "bf9276d191695d1acd5025e20b20d065b5bbc26a6d3bef8efe77ec2f73c80eaf"
 status = "EXACT"
 writer = "test"
-measured_at = "2026-10-14T20:21:36+00:00"
+measured_at = "2026-10-14T21:11:08+00:00"
 
 ["GOLD.0x0047ec10"]
 size = 315
@@ -44618,7 +44618,7 @@ name = "ahm_CheckFlag"
 kind = "FUNCTION"
 
 ["GOLD.0x004eaad0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "bbe4265988f46a6760033804cfef51be1371a52c9e232a1bf308189f5031e321"
 reference_size = "70"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -44629,10 +44629,10 @@ module = "GOLD"
 va = "0x4eaad0"
 context_hash = ""
 defines = "[\"REBREW_GOLD\"]"
-input_hash = "dde08e42263f3e894a413311cddd14f58bcd1d8400af1fa0ce6d9b31fb41fed6"
+input_hash = "9594bf404dc9446b57e93b916c7c650fd488dbf654eedfe51d66ea8c323932d3"
 status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-10-14T20:22:24+00:00"
+measured_at = "2026-10-14T21:11:24+00:00"
 
 ["GOLD.0x004eab20"]
 size = 176
@@ -45185,7 +45185,7 @@ kind = "FUNCTION"
 name = "ahm_ApplyColorComponent"
 
 ["GOLD.0x004eca00".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "ad60c7da93fb196b7c5f38957d65eb2107b7f76dbe55e39797d80fcfe04ccde9"
 reference_size = "160"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -45196,10 +45196,10 @@ module = "GOLD"
 va = "0x4eca00"
 context_hash = ""
 defines = "[\"REBREW_GOLD\"]"
-input_hash = "b2f87eb915faddfeea3782aee0aabc7159f2eacc0408473a30be599324394a98"
+input_hash = "dc65b140659b2433ef5053d54509105616515822dd596123a1167159459aca98"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-10-14T20:23:08+00:00"
+measured_at = "2026-10-14T21:11:41+00:00"
 
 ["GOLD.0x004ecaa0"]
 size = 138
@@ -45267,7 +45267,7 @@ kind = "FUNCTION"
 name = "ahm_SlotClearMatch"
 
 ["GOLD.0x004ecbc0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "06f4910d5708b52c8d1ced56f6d0e8574ae52267593e9e17bae74e7b52c97fbb"
 reference_size = "110"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -45278,10 +45278,10 @@ module = "GOLD"
 va = "0x4ecbc0"
 context_hash = ""
 defines = "[\"REBREW_GOLD\"]"
-input_hash = "7741bb76bb8114e17379a1617397fd4db8561b46cb562dd060ba0891dfd44617"
+input_hash = "a68b2b65f7208fc08d5fb5eb1b8e99cb5bc014c6b54119b27da6707df435efaa"
 status = "RELOC"
 writer = "test"
-measured_at = "2026-10-14T20:23:54+00:00"
+measured_at = "2026-10-14T21:12:00+00:00"
 
 ["GOLD.0x004ecd10"]
 size = 64
@@ -45429,7 +45429,7 @@ kind = "FUNCTION"
 name = "ahm_AllocAhmInfo"
 
 ["GOLD.0x004ed040".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "a4e0a28292431dd47a8726627bde20bf4761719fbc00b688f3222f3ab2f01413"
 reference_size = "304"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -45440,10 +45440,10 @@ module = "GOLD"
 va = "0x4ed040"
 context_hash = ""
 defines = "[\"REBREW_GOLD\"]"
-input_hash = "37fe802e8517c0325609351f4e38f2ad8a6930fb2bc5447b90cd2fb15f70b2e8"
+input_hash = "02cd4e8682cef03b17bcc037c079455ca84daca15e6eefff1780dfffd6177b76"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-10-14T20:24:46+00:00"
+measured_at = "2026-10-14T21:12:19+00:00"
 
 ["GOLD.0x004ed170"]
 size = 112
@@ -110438,7 +110438,7 @@ kind = "FUNCTION"
 name = "ahm_ResetEntityState"
 
 ["GOLDTL.0x0047ddf0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "aebad3a8b58612911a063e4c4e43c985bd7a0632ed33ab74a7a47b1aa9f7a51a"
 reference_size = "66"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -110449,10 +110449,10 @@ module = "GOLDTL"
 va = "0x47ddf0"
 context_hash = ""
 defines = "[]"
-input_hash = "7a316f1dc936253ee7b7b2c2ab889e6d6591a4380f37bab6b131852a7cf43a90"
+input_hash = "05ae774bbdd19147bada59fa074528f95d1d9830efbedbb3e66e0a36012b2093"
 status = "EXACT"
 writer = "test"
-measured_at = "2026-10-14T20:21:51+00:00"
+measured_at = "2026-10-14T21:11:15+00:00"
 
 ["GOLDTL.0x0047de50"]
 size = 654
@@ -135636,7 +135636,7 @@ kind = "FUNCTION"
 name = "ahm_CheckFlag"
 
 ["GOLDTL.0x004ec850".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "3c6a340f8ae7873aef849c86d04b666b8a6bff59db8f804ef395c8bb0743ee85"
 reference_size = "70"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -135647,10 +135647,10 @@ module = "GOLDTL"
 va = "0x4ec850"
 context_hash = ""
 defines = "[]"
-input_hash = "6e59bc310e4deb35d1f8e502db87573263d345620651677416b46abbee651ca6"
+input_hash = "deefd01be046740ce889aecfb6a3cd2f4903b3e89ab48f3bc9d9f2ea46964534"
 status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-10-14T20:22:41+00:00"
+measured_at = "2026-10-14T21:11:32+00:00"
 
 ["GOLDTL.0x004ec8a0"]
 size = 173
@@ -136259,7 +136259,7 @@ kind = "FUNCTION"
 name = "ahm_ExAllocAlchemist"
 
 ["GOLDTL.0x004ee290".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "1865e26ca3c1fe6a24154ab41f81a1e83a30718c9bed6ec1b844521f55b96912"
 reference_size = "1088"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -136270,10 +136270,10 @@ module = "GOLDTL"
 va = "0x4ee290"
 context_hash = ""
 defines = "[]"
-input_hash = "f700315a835b5ffe6366a6d0f9ab88857edcdc411b1b5c512f2a0acc867d8327"
+input_hash = "60a5295703897a7f35f844d913fd879a8fa57b8450515185bb7ab8a5d9150be9"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-10-14T20:23:27+00:00"
+measured_at = "2026-10-14T21:11:51+00:00"
 
 ["GOLDTL.0x004ee6d0"]
 size = 181
@@ -136313,7 +136313,7 @@ kind = "FUNCTION"
 name = "ahm_ApplyColorComponent"
 
 ["GOLDTL.0x004ee790".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "3c29a6c48e08aab8f2d81b948a54bfbbf21af1a6ad07057b4718ac9c7b9d1c73"
 reference_size = "160"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -136324,10 +136324,10 @@ module = "GOLDTL"
 va = "0x4ee790"
 context_hash = ""
 defines = "[]"
-input_hash = "6ab6f512bb8415003aeacbdbcb77d651e56566e8a2652c472c76e7e38d6f19b9"
+input_hash = "26f71581e3463de790fa7f8fef7a6b330a2e746fe73e357ddda6641e8c4b0deb"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-10-14T20:24:12+00:00"
+measured_at = "2026-10-14T21:12:09+00:00"
 
 ["GOLDTL.0x004ee830"]
 size = 138
@@ -136422,7 +136422,7 @@ kind = "FUNCTION"
 name = "ahm_SlotClearMatch"
 
 ["GOLDTL.0x004ee9c0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "7fdec7d92ba2a5d2c7d4ee8219b8e7abf511a104b8324902b4d4ab74935d96f3"
 reference_size = "110"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -136433,10 +136433,10 @@ module = "GOLDTL"
 va = "0x4ee9c0"
 context_hash = ""
 defines = "[]"
-input_hash = "2b8421a4dd1f50b8be59527363d1d59746ed868bde7c378cf2e6bac32253c843"
+input_hash = "3b328d28fd24fecb5af211fbe3b5b5e8172210b8c056dfa8004e611bf645da77"
 status = "RELOC"
 writer = "test"
-measured_at = "2026-10-14T20:25:04+00:00"
+measured_at = "2026-10-14T21:12:28+00:00"
 
 ["GOLDTL.0x004eeb10"]
 size = 51
@@ -136584,7 +136584,7 @@ kind = "FUNCTION"
 name = "ahm_AllocAhmInfo"
 
 ["GOLDTL.0x004eee40".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "d7a96818d6f9beac2d701dfd2e7a6f98d9dd73289d09f286c5cce7286990c201"
 reference_size = "304"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -136595,10 +136595,10 @@ module = "GOLDTL"
 va = "0x4eee40"
 context_hash = ""
 defines = "[]"
-input_hash = "9f7155893e5c2fac411873735f29aed17e89ec104e9220706524684cc6adab23"
+input_hash = "9855807a00da07d6bbc3a3e65b968d6334de08bbb207858bb445751dd2d75f26"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-10-14T20:25:31+00:00"
+measured_at = "2026-10-14T21:12:37+00:00"
 
 ["GOLDTL.0x004eef70"]
 size = 109
@@ -181626,7 +181626,7 @@ kind = "FUNCTION"
 name = "ahm_ResetEntityState"
 
 ["SERVER.0x1000bd50".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "aebad3a8b58612911a063e4c4e43c985bd7a0632ed33ab74a7a47b1aa9f7a51a"
 reference_size = "66"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181637,24 +181637,24 @@ module = "SERVER"
 va = "0x1000bd50"
 context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
-input_hash = "0f943bc2d4c628493862488edf797e787ab9a724d60218ef6fa101219f902d1f"
+input_hash = "e6f3625d273d7492c7d17c595ff61c501e12393dca86f728e68f58aaee52c3f3"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:21:19+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000bda0"]
 size = 70
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_CheckFlag"
 kind = "FUNCTION"
 name = "ahm_CheckFlag"
 
 ["SERVER.0x1000bda0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "3be945f40ede178214afd7a611300885b5dcee8b5c045d4828c9b7b10db10b87"
 reference_size = "70"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181667,10 +181667,10 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "31a084db1787c8a51ecdc0c6d8e5dc8bd632f9be88850310db1e7c28142adae2"
+input_hash = "a2b054ae1b91125792fba444b3a3e2a091c28dae1bb35395a9bd93182925c052"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:22:08+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000bdf0"]
 size = 1002
@@ -181679,14 +181679,14 @@ status = "EXACT"
 note = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_ExAllocAlchemist"
 kind = "FUNCTION"
 name = "ahm_ExAllocAlchemist"
 
 ["SERVER.0x1000bdf0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "6817d18f579fb6bca88f7be15cc27d4136e4b26216a8ed8904a6a933cdd54f58"
 reference_size = "1002"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181699,24 +181699,24 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "c70f469613bff7ca68b3b5a52f0304b3421b462e9a2a9a1fffa0a9ec21931a64"
+input_hash = "09246742ffa5a3fb19db17f3a5f370215a8e50284264254e139ec5bf52c7bb32"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:23:00+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c1e0"]
 size = 148
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_ApplyColorComponent"
 kind = "FUNCTION"
 name = "ahm_ApplyColorComponent"
 
 ["SERVER.0x1000c1e0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "8e0f12428d2018c46683089d388ab5accc75aa579f7f9358581f81355700ee38"
 reference_size = "148"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181729,23 +181729,23 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "13b00ed63e0149946b19370dfde462be9cb414c3dca6163bdffa4c4a8179299f"
+input_hash = "f10a7955d0c45b2212c640784bdbc4f48c2c5976d990829f00837aa8803cf2c5"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:23:45+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c280"]
 size = 130
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_AllocateEntitySlot"
 kind = "FUNCTION"
 name = "ahm_AllocateEntitySlot"
 
 ["SERVER.0x1000c280".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "a6ae744a915f458bce000f7097f47e34a53884facc7d5dc5d5a193e9e685a290"
 reference_size = "130"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181758,23 +181758,23 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "96679f7e32ac27bf2f7867e41e3231ad0beb9b675e37d1e41c5592b98cf2ec9e"
+input_hash = "0983a5e29e770383c71cf58e0180d4901e79a02b9714226078773b377402065d"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:24:36+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c310"]
 size = 110
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_SlotClearMatch"
 kind = "FUNCTION"
 name = "ahm_SlotClearMatch"
 
 ["SERVER.0x1000c310".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "f83721487f53c055b20d3e6cb4ac005fe33513d04c80d15c2154b63a0659dec7"
 reference_size = "110"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181787,10 +181787,10 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "5df05da8989ef3a73ac4301eff0122a50707c44b405c922cb343049b8e15e6e9"
+input_hash = "63a146a21ce20ad97ac53ed811ef732a2c28ed18fa7a34982849a44e484ce66a"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:25:22+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c380"]
 size = 51
@@ -181801,7 +181801,7 @@ kind = "FUNCTION"
 name = "ahm_SearchAndSet"
 
 ["SERVER.0x1000c380".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "b99793951f35e53c06b6f110ae3612d8d9db65fbb1666f045eb56772688f907b"
 reference_size = "51"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181812,24 +181812,24 @@ module = "SERVER"
 va = "0x1000c380"
 context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
-input_hash = "10348e6767c4ac139b2045ab2be707eb067005891caf500ec0c1b5830dc221d1"
+input_hash = "a1d6fc0cefa492f6bb140228d087c1ea60c144b2d036c100a724c9d6a6ceca7b"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:25:51+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000c3c0"]
 size = 83
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_ClampFloatValue"
 kind = "FUNCTION"
 name = "ahm_ClampFloatValue"
 
 ["SERVER.0x1000c3c0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "05ede26f8560a5355311db727b817720471f8326e69ca42747705b4289b2076f"
 reference_size = "83"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181842,23 +181842,23 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "da8f5307b2af712e1c2a266a4c74e7c3e837ff4726e3451776a740bb85de00a4"
+input_hash = "2377e4b5ce13960c3ab073a7506601a3abbc98ab1e942fc15a8398345af1773a"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:26:12+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c420"]
 size = 166
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_FireEntityAndCleanup"
 kind = "FUNCTION"
 name = "ahm_FireEntityAndCleanup"
 
 ["SERVER.0x1000c420".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "09962a3a767cbfb762df4c8c6e01ba623a3a2ec63ca6717abe5993b6cb3e8e70"
 reference_size = "166"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181871,23 +181871,23 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "734920cd7fbd541b6dc7c7af823165aafd9520f434fd08ab979eda1296c10298"
+input_hash = "d0722c2352abfef4a0f579ac77ab275ae981be0654e67a40e62b86d078b0672b"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:26:31+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c4d0"]
 size = 295
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_AllocAhmInfo"
 kind = "FUNCTION"
 name = "ahm_AllocAhmInfo"
 
 ["SERVER.0x1000c4d0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "21c6b1696a20dc5f2de2b84270d6904e7dc2fbaf774405966adc094c6fb42458"
 reference_size = "295"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181900,23 +181900,23 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "9aa812eaa1f203d86c76e7ff0db27d2b27fd27ea2944d0d0dfd63d25df580997"
+input_hash = "673bef903f103153de79c5e06bf27f3c6b89deaf0d02c219b69eceaaead8e4d1"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:26:50+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c600"]
 size = 109
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_InitRandomEntity"
 kind = "FUNCTION"
 name = "ahm_InitRandomEntity"
 
 ["SERVER.0x1000c600".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "ef1ed6639d43c89c2d6cf82c18bcdd10effbc220b4ba7915f557de71dc6b0039"
 reference_size = "109"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181929,24 +181929,24 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "5cf7f8857aa44bdefb084780f9dfb5fc5fc32c971be63b1a40137580f8196296"
+input_hash = "8472b9b63507f6d0b988dfddbf83fdc0cb9a1224d80fe23dd5d2342e25ae55ef"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:27:08+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c670"]
 size = 45
 status = "EXACT"
 ghidra = "find_by_id"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_LookupEntityInTable"
 kind = "FUNCTION"
 name = "ahm_LookupEntityInTable"
 
 ["SERVER.0x1000c670".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "1a5091e64794136e91b20110bda69d22d21b86e3a1a8c4020d04f7cf26ef1b80"
 reference_size = "45"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181959,23 +181959,23 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "6b2418b7df8ab2ff34a60252943fff371872f05ee1d0be0e751875f40a3678b7"
+input_hash = "c1d36dee1382aaa4fd69544dbc79799e67864319f7e061317105e4ed739909bd"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:27:25+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c6a0"]
 size = 102
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_QueryEntityBuildingType"
 kind = "FUNCTION"
 name = "ahm_QueryEntityBuildingType"
 
 ["SERVER.0x1000c6a0".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "6fca31225e1bbf409f7a0175f9e201c8f11f287460182d85f84438c9d3e0705e"
 reference_size = "102"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -181988,24 +181988,24 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "e436001f2b52b24fa52242f84f865b5735fe3c533bfdf34a873d36bd1aa821b3"
+input_hash = "b942eabb82adbd5bbe27a29be1684e6a0c18bd9bf71859c80e70e5a7d6021422"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:27:45+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000c710"]
 size = 752
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-14T20:16:38+00:00"
+updated_at = "2026-10-14T21:00:46+00:00"
 file = "src/Develop/DieGildeAddOn/game/alchemistry_logic.c"
 symbol = "_ahm_GetCommandPayloadSize"
 kind = "FUNCTION"
 name = "ahm_GetCommandPayloadSize"
 
 ["SERVER.0x1000c710".verification]
-source_hash = "c1d1ef3b4bafe41d9fd71551a3cb2b3616ac1d07fc65e8d02a3ae9ba4fac4e49"
+source_hash = "8a729711856ec31c61dec8a89a4f176fa0fe21d54a97c78547b020a3308b740e"
 reference_hash = "4882195b7acff368923d753e602cc44d0a044100d927ddb55a03702bae09ad6d"
 reference_size = "752"
 headers_hash = "9ccac25448b500510717e8305b1a12af680e6fb8f79e468b8fe2aaec232f9a9e"
@@ -182018,10 +182018,10 @@ context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "93ab735d4e0fcf49592f541610dd76d5280f8d50a5851b4827a9130428fd77cf"
+input_hash = "76023ac1ea06e336f091c347d2d1025a564dc7377413f6e86d7e7288df04be08"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:28:06+00:00"
+writer = "verify"
+measured_at = "2026-10-14T21:00:46+00:00"
 
 ["SERVER.0x1000ca00"]
 size = 130
@@ -182051,9 +182051,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "10de0d4d8703a26de35d2f5e887377770d134137aead46073a41077018fab5a7"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:21:12+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000ca90"]
 size = 130
@@ -182080,9 +182080,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "7229ae549d88a2110784a6c98e8785d7e90c51d29219f1c24b8594f1de73fe4a"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:21:59+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000cb20"]
 size = 171
@@ -182110,9 +182110,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "1e69410a4e70246808f702e2e23739273970d8bf84c4df93b364e0a88a8bb708"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:22:50+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000cbd0"]
 size = 517
@@ -182139,9 +182139,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "2d81d0be2c7d10a2ec66940a623fcbabd6a10978fdde84c6cc4b69d413aff5ac"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:23:36+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000cde0"]
 size = 331
@@ -182168,9 +182168,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "cc69bed7243cec690ece77eac55bf9030175ce1b2226e336896bbff027a85b50"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:24:24+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000cf30"]
 size = 162
@@ -182197,9 +182197,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "e57c09882d8272fc8944fc6ec468c009d2dfe1a806d350ec82502ed5305236eb"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:25:13+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000cfe0"]
 size = 64
@@ -182226,9 +182226,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "4a6bb18232c99555921c3f3a0002665547aa27207ff5b80ff2c31355263cd0a1"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:25:41+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d020"]
 size = 22
@@ -182255,9 +182255,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "2b442b4abdc6fb658a9076c9f4ca9e3331ebd0d058e21a687c27da028e65507d"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:26:01+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d040"]
 size = 22
@@ -182284,9 +182284,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "a8096742112c599146e753e3d75b360d8ddd271214ad62706cabf3090172f49e"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:26:22+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d060"]
 size = 169
@@ -182313,9 +182313,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "974dea19265cfe28815c04230e470a66b142b4cca8a85b5869beeae268fdf9e1"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:26:41+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d110"]
 size = 333
@@ -182342,9 +182342,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "485b1e47ce5d9dfed7b8f754cc3f4bbc9aa5171a8ecb62c1530f77fb5b11b231"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:26:59+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d260"]
 size = 120
@@ -182371,9 +182371,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "85e815036783c42a27fadc8175c13f5d39cb396862c9ae0d47d43efe6ce256a4"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:27:16+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d2e0"]
 size = 77
@@ -182400,9 +182400,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "53e66c6156d95493a35872d65455e91533fdabaf02f1f363f9f940051cb31a93"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:27:34+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d330"]
 size = 14
@@ -182427,9 +182427,9 @@ va = "0x1000d330"
 context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 input_hash = "11632a4f4e1124cd477b605ed574f908277724e5f2f79fa77e2a618e7ae01b6f"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:27:57+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d340"]
 size = 6
@@ -182452,9 +182452,9 @@ va = "0x1000d340"
 context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 input_hash = "e402e10055600a0fd4f98d227d8ccf152b07dc9c6c358b172151133625215204"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:28:16+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d350"]
 size = 267
@@ -182481,9 +182481,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "180e5f4485de31fa38cdb923c1b15fcdcfc1fbea6907d00a73e0ded1d94da8ba"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:28:26+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d460"]
 size = 267
@@ -182510,9 +182510,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "687e1d0e9f7cd8d3a3ac55833f95b20e7afd5e5fdcc2ca672632f5f4cc0e92ea"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:28:37+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d570"]
 size = 361
@@ -182547,9 +182547,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "95c5349769cb178ca5580807efff5e47f8756f5dfb1351a0e74b974351fbaeae"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:28:48+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d6e0"]
 size = 78
@@ -182576,9 +182576,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "e2adf75c70ea3793983e434750d7e18bb71be1f929bd362974a44769fbc93d4d"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:28:59+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d730"]
 size = 180
@@ -182605,9 +182605,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "34ea3c0dfc4d91e2f533d872f1e890ad6bda34f82e78a757131d28a3b3fffddf"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:29:09+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d7f0"]
 size = 164
@@ -182634,9 +182634,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "1d1f0f42e7aded5899273d8d6210f94f5b8f9813b33ab198ac6efdc50cf662f9"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:29:19+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d8a0"]
 size = 142
@@ -182663,9 +182663,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "1cba65a877e692fdc1a03bca0b59c860b81f9ce9ffaf8a271ba17f79a533f389"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:29:29+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000d930"]
 size = 2057
@@ -182692,9 +182692,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "a060338175b211711f6a446ba06a7b7a3cc79cd694bdec5c6d4c0fde5ee3805f"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:29:38+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000e140"]
 size = 993
@@ -182721,9 +182721,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "cbc52d5ad56047862c04109d1f1e5d1595004401499df0c66e4558300de2a883"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:29:47+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000e530"]
 size = 346
@@ -182751,9 +182751,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "4460dcd7d3ecb4b4e7582622d4176a1283828cb8728d52f8365582157f1c3eb8"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:29:56+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000e690"]
 size = 191
@@ -182781,9 +182781,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "1946344ace8eb23e1832fe7f835a3635879f7c9b23234bc0d0c0ee580d72a449"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:30:05+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000e750"]
 size = 123
@@ -182810,9 +182810,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "0ebe750be1ce9356dd7558deb5f7db9dcdf1d37c86541065dc3dbfe5978dc0eb"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:30:14+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000e7d0"]
 size = 242
@@ -182840,9 +182840,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "283f96f00aa9ce4a422574a685fd28740a2b91c6d55a4f2a4257794f4a3e1820"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:30:24+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000e8d0"]
 size = 239
@@ -182870,9 +182870,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "cfa422b44b3832071e7dc36ac7f3ad5f8e6d844340d4597b915bc1f271fd0a12"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:30:33+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000e9c0"]
 size = 214
@@ -182899,9 +182899,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "2b4645d5842f2c7b12bfc963e94e1770e8b676e3098e685cc1dfe77163b57d37"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:30:41+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000eaa0"]
 size = 208
@@ -182928,9 +182928,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "a6506938f17508643ffcb3263aa70e12449558f88d8f83b055516efe0285adde"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:30:51+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000eb70"]
 size = 135
@@ -182958,9 +182958,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "99c6538b9c93bfef89194264aed9fca5e4125d42e5b0f4011469b25adfd44f33"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:30:59+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000ec00"]
 size = 901
@@ -182995,9 +182995,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "feb0ec061227294ca935f259c743771bbc42c4b0f5263b5214eef8fb2c4d875b"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:31:08+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000ef90"]
 size = 26
@@ -183024,9 +183024,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "b42a3a66cc036cb871196ae280687f49f9405c258389e77f11bfde69c874d8e2"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:31:18+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000efb0"]
 size = 122
@@ -183053,9 +183053,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "7de96ab02c2d1631941cfd713973fb82d828e3cc97c51aaa87beb4868933f081"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:31:27+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f030"]
 size = 72
@@ -183082,9 +183082,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "1a8da7a0d058d9b3fcb6945551be88feb115daebab968bb1d8407ff565a04de9"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:31:36+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f080"]
 size = 26
@@ -183111,9 +183111,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "6117cdfb4b15f2068ef03e8964ee20b42ed9434ff39af078b56a3379fce237ef"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:31:45+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f0a0"]
 size = 37
@@ -183140,9 +183140,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "2b51d6253d01bd2d64ce9bb0387c6b27ff2f2692aba17b6111aada122cafafe7"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:31:55+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f0d0"]
 size = 197
@@ -183170,9 +183170,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "719f5adc6661d693befcc6db870c7aa73106757ee5fdd456ae8ffa537dd4e837"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:32:05+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f1a0"]
 size = 327
@@ -183199,9 +183199,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "6faeedf0f77c68a117cc2c7ac399f010c41664471a08acd5bcaaeb542b54b376"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:32:15+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f2f0"]
 size = 172
@@ -183228,9 +183228,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "364868c2f8ab57517e364828d51e1fa0297332346b9f19a8678de4f876d6faaa"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:32:24+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f3a0"]
 size = 3
@@ -183253,9 +183253,9 @@ va = "0x1000f3a0"
 context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 input_hash = "6482277ae7ce77befb6e01ac791b223b1a139a38e9500c9c9a83108b83909254"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:32:33+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f3b0"]
 size = 206
@@ -183282,9 +183282,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "7e57f4b617aa3b30619d68457a55a4a8e82cd9aee7aa8c732ee3b65251b3f3cb"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:32:42+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f480"]
 size = 271
@@ -183311,9 +183311,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "9ea813b287fca669d4539eeea8b89b948c6ed982077ce7ed544a368dcf9437d8"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:32:50+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f590"]
 size = 237
@@ -183340,9 +183340,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "d0ebd853eb24abdf83994b51fda66b45d43e5f102432c387d159dabf65a1f7d4"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:32:59+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f680"]
 size = 171
@@ -183369,9 +183369,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "a58dba1b0fb1d2d36f341e5264ed8129a719955f28fd36006e5e9ac62f5ea5fa"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:33:09+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f730"]
 size = 515
@@ -183398,9 +183398,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "0ba67e5e764f290c1318432ee8979fb173942c050066f65467c99064cbce9274"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:33:19+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f940"]
 size = 22
@@ -183427,9 +183427,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "1a06cf2163542aaa1322848f267521bd49ce1c655846fff8fb662d55e832fa49"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:33:29+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f960"]
 size = 22
@@ -183456,9 +183456,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "d3b83e7690671c8308d448fc2baf703a36a06f3976ddaa52cac0a3920e3de063"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:33:38+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000f980"]
 size = 335
@@ -183485,9 +183485,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "8d70d2133873378b2041229e5a427358f10dc57e1492cdabc6c1888dfce40451"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:33:46+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000fad0"]
 size = 85
@@ -183514,9 +183514,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "93eb0b3fe8db342314cf29cbb3dac9f23d8fd3cdef8708ceb2524ae6134b7cb7"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:33:56+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000fb30"]
 size = 153
@@ -183543,9 +183543,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "55468ad1939557b1a4d4682a3e12a7125a1f4cdd2a54b0e432b73bed6eb42501"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:34:06+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000fbd0"]
 size = 22
@@ -183568,9 +183568,9 @@ va = "0x1000fbd0"
 context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 input_hash = "e6060b2b7c94efbd25c5e87081c4eaff8393d67d19189cf3c415952f92aa7413"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:34:15+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000fbf0"]
 size = 25
@@ -183593,9 +183593,9 @@ va = "0x1000fbf0"
 context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 input_hash = "c4a324c96433025d182eb4d76da48df0bfb9f1173bf79050e4edbfab3b491031"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:34:24+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000fc10"]
 size = 308
@@ -183622,9 +183622,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "1a8ee5137a6dcd582bb47bfed3e504339905ddc99dc4487f8573ce84732eb34c"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:34:33+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000fd50"]
 size = 445
@@ -183652,9 +183652,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "3019511580f8e3e5ab570a32a84eca6b10c6608c7ec5d61cc2b57ba04893cbad"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:34:43+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000ff10"]
 size = 22
@@ -183677,9 +183677,9 @@ va = "0x1000ff10"
 context_hash = ""
 defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 input_hash = "84858e7ada91fe5c39a77d4fac07ba35328f15b5eee2aeaf86c4e3062a437422"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:34:52+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000ff30"]
 size = 41
@@ -183706,9 +183706,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "0588b5b71a13d3884b74556d1176c29222c6da1162a922d8502de60704a604a4"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:35:07+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000ff60"]
 size = 82
@@ -183735,9 +183735,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "8025194b851a23c155b0861ba58c5267619d36774faf982220124deebc836024"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:35:19+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x1000ffc0"]
 size = 70
@@ -183764,9 +183764,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "b221100e1a35f4cbebbdd8a54aa2e99b9e3437b4ecb16f0e23d798e3b25d3930"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:35:30+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x10010010"]
 size = 110
@@ -183793,9 +183793,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "2f474a83f5b9f802a7134a61e4a0c242e1a8fb623c9825258e06079e4f9d3832"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:35:41+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x10010080"]
 size = 22
@@ -183822,9 +183822,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "4109b2d4df93c5c71c6e79a81daddf139bfbf66edfe16509399a221a7da1cb83"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:35:50+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x100100a0"]
 size = 159
@@ -183852,9 +183852,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "83cb73c0c7accb581fd0a7b3b5367d51acfbecadcd1686a96d06daf87e862b35"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:35:59+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x10010140"]
 size = 280
@@ -183881,9 +183881,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "1c6d5daea26417105b377387b85c8d923c4e8f4bd755d9380693b831b03a2d0d"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:36:09+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x10010260"]
 size = 144
@@ -183910,9 +183910,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "d7f9f4785dc254a43776e9c15ce1cd260126392f8307cf47687e33dbadd7062f"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:36:18+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x100102f0"]
 size = 17
@@ -183939,9 +183939,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "e9414cbefe6c2614b638cd9584c6e74c8ad6e838bec30bea91df6648ddf53958"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:36:27+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x10010310"]
 size = 52
@@ -183968,9 +183968,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "50ba8469981346b955ac658d9e6fec232f06e92fa4f9f05dbbdf00efc30b405a"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:36:37+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x10010350"]
 size = 52
@@ -183997,9 +183997,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "6b163f2fdf745113c2a17efe79318fb99596ff625053d6cf4c4a87f23363c861"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:36:46+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x10010390"]
 size = 262
@@ -184026,9 +184026,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "f6cb5a6257dd08297670310cfeae2da763dac24fb17c65fd4e8faaa25852bf73"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:36:56+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x100104a0"]
 size = 135
@@ -184056,9 +184056,9 @@ defines = "[\"REBREW_LEGACY_SERVER_LAYOUT\",\"REBREW_SERVER\"]"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "3abf45e1672891ea046405869fdcd39a0e7d51dee88b04967a99f64b2d57b52a"
+writer = "verify"
 status = "EXACT"
-writer = "test"
-measured_at = "2026-10-14T20:37:07+00:00"
+measured_at = "2026-10-14T21:00:35+00:00"
 
 ["SERVER.0x10010530"]
 size = 113

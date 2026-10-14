@@ -3203,3 +3203,17 @@ focused checks, all 18 hooks and frozen full suites (11,553/11,555 passes,
 50 skips respectively). Evidence: `.scratch/goal20/stat-helper-replay.json`,
 `stat-helper-retirement-full-suite-policy.log` and
 `compiler-source-in-workdir-full-suite.log`.
+
+### Discovery overlap can hide an already-correct source extent (2026-10-15)
+
+TL4186c0 had a47-byte inventory span but its source correctly compared the
+complete five-byte tail jump. The next31-byte body was swallowed by the stale
+span. TL571720 similarly retained4160 bytes despite a complete335-byte source,
+covering the following production callback. Source verification alone does not
+repair the discovery inventory; CU clustering correctly refuses such overlaps.
+Use native control-flow/padding/next-entry evidence and the verified complete
+body before curating a selected row. Preserve every unrelated identity and name.
+A new7503-row discovery snapshot was not installed over the6337-row catalog.
+Both selected repairs use the existing emitter utility and retain native
+receipts under .scratch/goal37/. Neither early returns nor a near compiler
+match justify truncating a function, switch region or callback.

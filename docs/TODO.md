@@ -53184,3 +53184,25 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
 - Receipts: .scratch/goal35/cleanup-preservation.json, upstream-*-push.log and
   orphans-prune-repaired.json; .scratch/goal36/move-comparison-audit.json,
   chain-native-proof.json, lint-chain-move.json and gate-chain-move.log.
+
+### 2026-10-15: remove stale declarations and inventory overlaps
+
+- Remove the two unused dispatch_fn typedefs and the unused table extern from
+  alchemistry_logic.c after the shared chain move. All25 comparisons retain
+  verdicts, sizes, match counts, mismatches and relocations. Full server gate
+  passes with all286720 raw bytes unchanged and zero lint warnings.
+- Correct TL4186c0 inventory47 to5: an external tail jump is followed only by
+  eleven NOPs before the next independent31-byte function. Correct TL571720
+  inventory4160 to335: return57186e, padding57186f, callback571870. Existing
+  source sizes5/335 were already right; fresh comparisons remain RELOC.
+- Preserve all6337 names/identities and all6020 strong source claims. A fresh
+  scan has7503 candidates and stays in scratch. Only the two proven rows are
+  edited with the discovery emitter's atomic-write utility; no complete-body
+  extent is shortened at an early return and no callback bytes are dropped.
+- recommend now runs; its largest groups contain thousands of functions and
+  remain insufficient evidence for native unit moves. The reviewed inventory
+  edit workflow gap is committed upstream asf03077b5, push checks pending.
+- Receipts: .scratch/goal37/alchemy-*-clean.json, gate-alchemy-cleanup.log,
+  inventory-*-repair.json, tail-current-test.json, helper-current-test.json,
+  recommend-repaired.json and preservation.json. Building-destructor shared C
+  is being reviewed without edits; raw client images and full fidelity stay open.

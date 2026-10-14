@@ -161,9 +161,22 @@ cases are not a byte/exhaustive proof, and its callee/original unit remain open
 (.scratch/goal32). Shared he_RunProduktion remains4016/3816 in both clients;
 its456 bounded runs and66 reached call sites do not establish byte identity.
 
-Next: measure removal of unused alchemy declarations, review the distant
-ahm_ResetEntityState placement through existing CU recommendations, and unify
-the evidenced client command bodies. Keep the attested cm_ExProdObjekt TU: its
+The two unused dispatch typedefs and unused table declaration are removed from
+alchemistry_logic.c. All25 current comparisons retain their results; a fresh
+full server gate still passes. Two stale TL inventory extents are corrected:
+4186c0 from47 to5 (external tail jump plus eleven padding NOPs), and571720
+from4160 to335 (complete verified body ending immediately before the production
+callback). All6337 inventory identities and6020 strong claims remain. Existing
+5/335-byte source comparisons pass; their metadata sizes were already correct.
+CU recommendations now run, but their largest groups contain thousands of
+functions and do not establish ahm_ResetEntityState ownership. Do not apply
+those bulk merge suggestions as native source evidence. Receipts:
+.scratch/goal37/preservation.json,inventory-*-repair.json,recommend-summary.json
+andgate-alchemy-cleanup.log. The selected inventory-edit CLI gap is recorded
+as upstreamf03077b5; its required push checks are running.
+
+Next: get direct native unit/caller evidence for the distant
+ahm_ResetEntityState and unify the evidenced client command bodies. Keep the attested cm_ExProdObjekt TU: its
 previous split changed30085 raw bytes and drifted32 data rows. Recover genuine
 discarded server inputs, finish source-unit/type/data/provider evidence and
 client code, and build both raw clients. Keep the original goal active.

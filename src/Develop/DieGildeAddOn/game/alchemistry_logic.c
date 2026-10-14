@@ -6,7 +6,6 @@
 #include "alchemistry_logic.h"
 #include "entity.h"
 
-typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
 int __cdecl gm_RandomMod(int range);
 void __cdecl gm_AddObjekt(int p1, int p2, int p3);
@@ -47,7 +46,6 @@ float g_alchemy_half = 0.5f;
 
 extern unsigned char g_alchemy_random_table[];
 extern int g_alchemy_entity_table[];
-extern dispatch_fn g_chain_handler_table[];
 
 int* __cdecl ahm_LookupEntityInTable(int);
 
@@ -278,7 +276,6 @@ float __cdecl ahm_GetRecipeBonus(char* entity, int key)
 #include "rebrew_globals.h"
 #include "entity.h"
 
-typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
 int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 int __cdecl gm_RandomMod(int range);
