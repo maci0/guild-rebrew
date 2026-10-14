@@ -5755,3 +5755,32 @@ The inferred names, global spelling bridge, historical server placeholders
 and complete client raw links remain open reconstruction work. No vendor
 or CRT body/archive, layout, link flag or gate was changed. Receipts:
 `.scratch/goal21/shared-allocator-helpers/`.
+
+### Shared command-chain placement (2026-10-15)
+
+The single ahm_ProcessEntityChain definition and its private packed ChainNode
+move from the end of alchemistry_logic.c to command.c, before gm_GetFieldByType.
+The table stays at its existing definition position; one private forward
+declaration permits the indexed call. Existing name, flags, headers and other
+bodies stay. The name and this ownership inference remain unattested. In both
+clients the native handler sits with command dispatch, far before the alchemy
+run; server placement is the boundary between the two reconstructed objects.
+The current map attributes SERVER1000ca00 to command.c.obj and preserves the
+following gm_GetFieldByType at1000ca90; it is not an original linker map.
+
+All102 before/after comparisons across the two units and three targets retain
+identical verdicts, sizes, match counts, mismatches and typed operand records,
+except compiler-local label numbering. All91 byte matches remain. Each complete
+130-byte chain body agrees after resolving its sole DIR32 operand at+33 to the
+native table: SERVER1002c5a0, TL68ab88, Gold60bf20. A table+4 control rejects in
+each target. This proves those operands, not the client table's source provider
+or full linked data. The full Docker server gate passes with316 game functions,
+652 data comparisons, imports/relocations/Wine checks and all286720 raw bytes
+identical. All-target lint now has zero errors and zero warnings. No new object,
+link flag, library patch, padding or byte repair was introduced.
+
+Receipts: .scratch/goal36/move-comparison-audit.json, chain-native-proof.json,
+lint-chain-move.json, rehome-*.json and gate-chain-move.log. The unused alchemy
+table declaration and dispatch typedefs need a separately measured cleanup.
+Client cm_ExecCommand still lives separately; this move does not establish the
+complete client command unit or finish either raw client image.

@@ -53159,3 +53159,28 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   Native receipts and history-preservation checks live under .scratch/goal34/.
   Shared source placement, original names, complete client images/data and the
   full source-fidelity objective remain unfinished.
+
+### 2026-10-15: command-chain move clears all-target lint
+
+- Both read-only reviews confirm the seven retired TL bindings are unrelated
+  routines. Four stale SERVER comparison rows at client VAs are selectively
+  dropped after proving they fall outside every server section; two retired
+  source bindings lose obsolete flags. All6020 strong rows and data stay.
+- Upstream6173db1d rejects malformed remote compile URLs (12 new failing-before
+  cases,83 focused passes);7e82dbcd preserves VERIFIED data during default
+  orphan pruning (two failing-before cases,324 focused passes). Required commit
+  checks and full push suites pass; both commits are pushed. The repaired project
+  prune preview protects all46 earned data rows and selects nothing. The
+  source-unit outlier audit gap is recorded in upstream IDEAS-GUILD.md.
+- The single130-byte command-chain body moves before gm_GetFieldByType in
+  command.c, with its packed private type and an extern for the existing table.
+  Three CLI rehomes preserve identities/history. All102 affected comparisons
+  retain their results and all91 byte matches. All three complete native bodies
+  and table operands pass; shifted-table controls reject.
+- The full server gate passes with286720 raw bytes identical. All-target lint
+  is0 errors/0 warnings. Unit ownership and name remain inferred; unused
+  alchemy declarations, shared client command composition, original discarded
+  server inputs, complete data ownership and both raw clients remain open.
+- Receipts: .scratch/goal35/cleanup-preservation.json, upstream-*-push.log and
+  orphans-prune-repaired.json; .scratch/goal36/move-comparison-audit.json,
+  chain-native-proof.json, lint-chain-move.json and gate-chain-move.log.

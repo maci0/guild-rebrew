@@ -434,14 +434,21 @@ one file per original translation unit, in the order the linker lays them out (v
 | `0x10008d10`-`0x10009020` | `Units/vfs/vfs.c` | 3 |
 | `0x10009310`-`0x1000b040` | `DieGildeAddOnServer/server.c` | 19 |
 | `0x1000b1c0`-`0x1000baf0` | `DieGildeAddOn/game/aemter.c` | 10 |
-| `0x1000bd50`-`0x1000ca90` | `DieGildeAddOn/game/alchemistry_logic.c` | 16 |
-| `0x1000cb20`-`0x100104a0` | `DieGildeAddOn/command/command.c` | 68 |
+| `0x1000bd50`-`0x1000c710` | `DieGildeAddOn/game/alchemistry_logic.c` | 14 |
+| `0x1000ca00`-`0x100104a0` | `DieGildeAddOn/command/command.c` | 70 |
 | `0x10010530`-`0x10011bf0` | `DieGildeAddOn/game/friedhof_logic.c` | 17 |
 | `0x10012000`-`0x10014260` | `DieGildeAddOn/loadsave/loadsave.c` | 11 |
 | `0x100145e0`-`0x10014db0` | `DieGildeAddOn/command/lobbycommands.c` | 8 |
 | `0x10014ee0`-`0x100151b0` | `DieGildeAddOn/auxillary/plant.c` | 6 |
 | `0x100151e0`-`0x10015690` | `DieGildeAddOn/game/sim.c` | 6 |
 | `0x100156c0`-`0x1001a110` | `DieGildeAddOn/game/spiel.c` | 66 |
+
+The chain dispatcher at SERVER `0x1000ca00` / TL `0x4c4d30` / Gold `0x4c43c0`
+now precedes `gm_GetFieldByType` in `command.c`. Its placement is inferred from
+native ordering, the caller and the command-owned dispatch table; the body has
+no direct `__FILE__` reference. `ahm_ProcessEntityChain` remains an inferred name.
+Complete comparisons and the unchanged raw server validate the move without
+establishing original spelling or proving all client unit boundaries.
 
 The `__LINE__` values the code passes to `LogMessageInternal` rise with the VA inside each file, so the
 linked order is the source order. The client targets still keep divergent twins as `GOLDTL.<name>.c`

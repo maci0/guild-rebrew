@@ -2628,3 +2628,271 @@ Current working state lives in `.scratch/HANDOFF.md` (gitignored). Update both f
 - 2026-10-09 (inline-helper evidence): implemented and merged source-definition assembly provenance upstream as `734babb2c90e19f79896e14966c194a50bf816c1`; actual Rebrew main is `0b7793f873c4fc105bef44e1d0066eece383333d` after its lock-file documentation follow-up. The new managed `rebrew-source.toml` binds file, C symbol, target and current definition hash without inventing a VA or byte verdict. W020 accepts only that definition's reviewed evidence; W031 surfaces invalid/stale records and E023 remains enforced. Also fixed root source trees adopting metadata outside their project. Final upstream suite: 11,463 passed / 50 skipped / 0 failed; all 18 hooks pass. Reviewed three original GOLDTL fill/copy sites, excluded the stock CRT archives and freshly measured their callers as RELOC (297/297, 528/528, 378/378); source and stored client verdicts are unchanged. All-target lint has zero errors, with SERVER 0 / GOLDTL 3 / GOLD 40 warnings. The actual server gate passes: 316/316 functions, 652/652 data symbols (409 placed), 100 imports, Wine exports and raw DLL whole-file identity. All 316 SERVER measurements use compiler identity `cf2ca90d7b8a5eeab070ccc555e033d31dc7a93124b87ea0016c19a6b7f6e145`, with unrelated work and all original source/identity/status/client/data facts preserved. Client byte identity, mapped assembly review, CRT identity cleanup, types/names and placeholder removal remain open; this does not complete the full goal.
 - 2026-10-10 (library identity precedence and recovered client fixes): fixed partial library-header migration dropping managed identities and declaration headers masking explicit compiled-source bindings upstream; actual Rebrew main is `5794ceb976c19515a8f03813e1db6452dabd4b26`. Both regressions failed first; 496 focused tests and all hooks pass. Full suite: 11,463 passed / 50 skipped, with two packaging failures caused by the agent's offline cache missing pinned setuptools; both pass on the unchanged tree after fetching the dependency (11,465 passing cases across the runs). The stock GOLDTL initterm loop is visible as library code again; its client provider/native identity still needs reconciliation. Restored the earlier successful buffer-reader variants at GOLDTL 0x4013b0/0x4013f0, freshly RELOC 60/60 each; sanitized behavior checks retain the original stream handle. Restored the missing NUL-inclusive write loop with legal pointer arithmetic, but it remains SIZE_MISMATCH (36/34); no GA rerun or byte-match claim. Reviewed original srv_InitBuildingTypeTable fill at 0x4e7827 and recorded GOLDTL-only source evidence; its caller freshly matches RELOC 372/372, and GOLDTL lint has two remaining assembly warnings. Actual-main gate passes: 316/316 functions, 652/652 data symbols, all 100 imports, Wine exports and byte-identical raw server.dll. SERVER measurements use compiler identity `2a445d2674b16a2d3c9a15205a4f0a164391e2fdbf6d67808f6be54384769a75`; preservation checks pass and all three coverage documents are regenerated. The full client/source/type/placeholder goal remains open; receipts are in `.scratch/HANDOFF.md`.
 - 2026-10-10 (animation reference binding): fixed the reconciliation gap upstream as `15d99c7f341fc5c8bb8648dd10bf6b8386991f2f`. Explicit `source rename PLACEHOLDER MODULE.0xVA` binds unbound references to a unique existing external definition without mutating identity/verdict rows or relaxing ordinary duplicate guards. Also corrected function-pointer declarator classification. Full suite 11,490 passed / 50 skipped / 0 failed; all 18 all-files hooks pass. Restored the prior successful TL animation builder and renamed only its identity/file to inferred CreateAnimationEvent, preserving the independent server health handler. Bound two numeric-placeholder callers and corrected their string-pointer declarations. Fresh TL results are RELOC 75/75, 138/138 and 152/152. GOLD's existing caller still has SIZE_MISMATCH (152-byte matching object, 160-byte span); default shared imports decline its padded span and the GOLD builder's 75-byte body plus five NOPs. Recorded the complete-extent/signature issue upstream; no threshold override or new GOLD builder verdict. Actual-main server gate passes all axes and the raw DLL remains byte-identical; all 316 SERVER measurements use compiler identity `4c19857593eaaf6b1c3a6aece59d4d90f57bb0b2e967916eb80c9949f63ed4df`. Preservation guard passes. Stored GOLDTL status is 3,564/4,904 game functions object-matched (282 EXACT / 3,282 RELOC), with 44.4% of .text accounted including library code and padding; client whole-file/data identity remains unverified. Continue the upstream extent repair, then client sharing/matching, types, ownership and placeholders. Full goal remains active and incomplete; detailed receipts and next pointers are in `.scratch/HANDOFF.md`.
+
+
+## Snapshot before command-chain placement — 2026-10-15
+
+Historical full goal snapshot SHA-256: `0e762693dc9c3f858e148e0b59daad9a589f9ceb82c4bb257ecdc145d7f0a3c3`.
+
+# Goal: one faithful source tree, three byte-identical binaries
+
+Reconstruct the shared C source tree the original developers most likely used,
+and build `server.dll`, `Europa1400Gold_TL.exe` and `Europa1400Gold.exe` with
+100% raw-file byte identity to their references. Both source fidelity and binary
+identity are required. A matching binary assembled from fabricated source does
+not complete this goal.
+
+This is the durable objective for `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631`.
+If session goal state is lost, restore the objective from this file. Read
+[AGENTS.md](AGENTS.md) for project rules and the relevant Rebrew skill before work.
+
+## Priority and scope
+
+1. Preserve and complete `server.dll`, including faithful reconstruction of
+   discarded original source that affects link inputs and relocation reservations.
+2. Reverse `Europa1400Gold_TL.exe` as the primary client workstream.
+3. Validate `Europa1400Gold.exe` from the same source tree and verified related
+   imports. Reverse unique Gold code when needed; do not reconstruct shared logic twice.
+
+Keep one definition of shared game logic, with one managed identity per target.
+Use target-specific code only where native evidence supports a difference.
+Source placement and headers follow attested `__FILE__` paths, module conventions
+and actual cross-TU use. Mark inferred names, layouts and organization explicitly.
+
+## Completion criteria
+
+All criteria must hold against current source, headers, compiler inputs and images:
+
+- All three targets build reproducibly from the unified tree using their pinned
+  toolchains. The raw linked files equal their references byte for byte, including
+  headers, sections, imports, exports, resources and relocations. Postlink repairs
+  cannot substitute for raw-link identity.
+- Every reconstructed game function is EXACT in its object or verified as linked
+  EXACT in the raw image. Library code/provider evidence is accounted separately.
+  Every data byte and symbol placement is verified; unresolved owners stay explicit.
+- The server passes `scripts/gate.sh`, including raw-file identity, linked EXACT,
+  data/import placement and Wine load/export checks for `Init` and `Exit`.
+  Its `.text` VirtualSize is `0x22846` and its import table matches all 100 entries.
+- Both clients pass equivalent full-image checks against their own references.
+  The current server gate alone does not establish client completion.
+- Shared logic has no drifting duplicate bodies. Types, declarations, storage
+  owners and native operands are reconciled across targets. No fabricated logs,
+  placeholder calls, padding or fixups remain to manufacture agreement.
+- All-target lint has zero errors and warnings, required checks pass, and the
+  naming, native evidence and continuation documents are current.
+
+Object RELOC, NEAR_MATCHING, PROVEN, bounded fixtures, coverage percentages and
+historical green builds do not establish completion. Report file agreement,
+accounted text, game reversing progress and stored data verification separately.
+
+## Non-negotiable constraints
+
+- C89 under MSVC6. No naked functions, `_emit` or inline assembly unless positive
+  native evidence establishes original assembly at that site. A difficult match
+  is insufficient evidence. Preserve reviewed assembly provenance where applicable.
+- Run CL/LINK/LIB inside the configured Docker images: plain SP5 for the server,
+  Processor Pack SP5 for both clients. Use the project's pinned environment;
+  set `REBREW_DEBUG_INFO=OFF` for link checks. No host Wine/compiler fallback.
+- Check library attribution before implementing a function. Reuse linked stock
+  CRT and available library sources/providers; do not reimplement stock library
+  code as game progress or patch third-party archives to force a match. Any
+  evidenced original vendor changes must be pinned and reproducible.
+- Preserve one storage owner per global and canonical subsystem declarations.
+  Interior views, compiler literals, layout spans and imports are distinct facts.
+  Never infer allocation ownership from an extern, address proximity or coverage row.
+- Follow [naming_conventions.md](docs/naming_conventions.md). Attested spelling
+  wins, including original errors. Use established module prefixes and record
+  inferred names. Rename through `rebrew source rename`.
+- Keep shared types in their owning headers; preserve byte-sensitive declaration
+  order. Bind stable type IDs through `rebrew types bind`, separating C layout
+  from evidenced allocation/stride extent. Resolve duplicate-symbol findings.
+- Never hand-edit managed function, data, type or source-evidence stores. Use
+  Rebrew CLI/locked APIs. Preserve unrelated changes and prior verified matches.
+- Never weaken a gate, baseline, extent or binding policy to hide a regression.
+  Do not restore invented logging calls or relocation reservations to recover bytes.
+
+## Work loop
+
+1. Read `rebrew todo --json` for the selected target and address-keyed findings
+   before repeating experiments. Check existing CLI help/tools before writing helpers.
+2. Check libraries, native bodies, callees and operands. Compare available
+   decompiler seeds, including Kuna, against native evidence; then write real C.
+3. Test/diff after source changes. Verify related imports against each destination
+   before promotion. Use matching searches only after ordinary edits stall.
+4. Reverify affected callers and all target contexts after shared-header, type,
+   ownership or declaration changes. Known-binding checks remain enabled.
+5. When matching measures disagree, compile an isolated raw native link and measure
+   the complete image. Run `scripts/gate.sh` before every commit. Client changes
+   also require client-specific validation. Keep failed checks visible.
+6. Refresh coverage through `rebrew coverage build`; never maintain a second
+   progress store. Record only current evidence and concise next steps here.
+
+Use the existing evidence homes: names in `docs/naming_conventions.md`; C shapes,
+allocation and exhausted levers in their respective codegen documents; measurement
+and process traps in `docs/measure-traps.md` and `docs/workflow-traps.md`; session
+attempts and receipts in `docs/TODO.md`. Probes belong in ignored `.scratch/`.
+Do not rerun exhausted probes without new evidence.
+
+Fix Rebrew bugs in `/home/maci/Desktop/Projects/relumea/repos/rebrew` with a
+reproducing regression test and a passing upstream suite before returning to
+reversing. Record every missing capability immediately in that checkout's
+`docs/IDEAS-GUILD.md` with the problem, proposed capability and replay evidence.
+Keep binary-specific evidence in this project. Publishing and live sync require
+explicit authorization; this file does not grant it.
+
+## Current continuation — 2026-10-15
+
+The full source-fidelity/three-image objective is unfinished. Both client raw
+links, complete data ownership/verification, unknown code ranges and faithful
+reconstruction of discarded server inputs remain open. Existing inferred server
+link inputs do not establish original source merely because the raw DLL matches.
+
+Guild checkpoints e24b9311 (Rebrew 3 migration), 86560789 (raw server/provider
+repairs), 14b5140d (CLI guidance) and de00f948 (shared lighting) are committed
+and pushed. The migration audit
+preserves all 8,376 identities/bindings/extents and non-comment tokens in 3,836
+C/header files. cm_ExProdObjekt is restored to its attested command.c position:
+its isolated object matched, but splitting it changed 30,085 raw bytes and drifted
+32 data rows. Do not split an attested TU merely to quiet conflicting target order.
+Six acyclic units have reviewed definition orders and retain their tested bodies.
+
+The complete frozen baseline corpus is terminal with zero game compiler errors,
+clearing the earlier 27 timeouts. Byte matches: server 316/316, TL 3597/3693 and
+Gold 2098/2540. No checkpoint EXACT/RELOC identity is lost, and all 3,973 source/
+configuration inputs stay unchanged during that run. Receipts:
+.scratch/goal29/corpus-current.json and .scratch/goal31/terminal-corpus-audit.json.
+All three coverage documents were regenerated before the new helper integration.
+Gold compiled libraries were 14/15; the incorrect 5e3a71 C copy is now retired.
+Function/object comparisons do not establish client raw-file or data identity.
+
+The shared UpdateSceneLighting integration now uses one C89 definition for
+TL450a00/Gold453890, with only Gold's evidenced flag-dependent branches. Its
+original spelling, prefix and unit remain unattested; client_lighting.h is an
+inferred canonical interface. Fresh complete native proof retains all 38/128
+bytes and twenty operands; fourteen wrong bindings reject. Seventeen current
+target/source comparisons pass, including all changed helper users, the reset
+and the sound caller. All thirteen named helper transfers validate their native
+targets. The byte-width interface retains the TL implementation's ignored flag.
+Receipts: .scratch/goal31/integrated-helper-native-proof.json,
+lighting-users-test-summary.json and integrated-caller-bindings.json.
+
+Seven locked declaration-view updates describe four-byte or one-byte accesses
+in zero-filled .data tails. They allocate no storage; backing extents and owners
+remain unknown. The existing signed-byte flag is retained. Both scalar/header
+registration and shared-definition renaming use Rebrew's managed writers/CLI.
+The obsolete TL setter include override is removed; inherited flags are unchanged.
+Three audited, unbound Gold duplicates are retired after canonical-provider tests;
+backups/receipts remain under .scratch/goal31/retired-duplicate-sources/.
+Conflict-filtered data scans did not prove definition ownership clean. The six
+later full TL reports are resolved: five were foreign definitions losing scope
+after metadata migration, and two unused year definitions caused the sixth.
+Current full inventories have zero type conflicts and zero multiple definitions
+in all three targets (664/295/260 data entries).
+Current lint has zero errors and two W030 findings in alchemistry_logic.c,
+for the shared command-chain handler's client identities. Seven incorrect TL
+source bindings are retired after native review; their inventory entries,
+extents and historical comparisons remain. Keep the attested server composition
+intact while resolving the remaining source-unit evidence.
+
+The new server gate found the documented upstream CLI migration in the local
+CMake call: order-sources --marker is now --module, with an explicit server target.
+That call is repaired. The raw rebuild has zero compiler/linker errors and again
+equals all 286,720 reference bytes. The fresh full gate is terminal: all 316
+functions, 652 data comparisons, raw structure/file identity and Wine checks pass.
+Only the 31 known order warnings fail. Receipt:
+.scratch/goal31/gate-lighting-restored.log. Coverage is regenerated for the
+integrated tree (.scratch/goal31/coverage-lighting-{server,tl,gold}.json).
+
+Upstream provider/split/header/parser repairs d37f4a07, 6e8dbd5e, 2468a895 and
+4650b824 are pushed. Gap notes 4567bc35 and the CLI merge 7b0eb0e4 are integrated.
+Dossier fixes bee8ada8/a705f40d retain known extents after early returns and exclude
+internal jumps from callees while preserving recursion/external tail calls.
+Focused suites 65/66 and required full commit/push hooks pass; canonical/remote
+main contain a705f40d. Its completed checkout and the stale, clean 3babd2d4 baseline
+checkout are removed after process/file-reference audits. Both repositories now
+retain only main. New library-result and atomic-view-edit CLI gaps are committed
+as 5f730512 in upstream docs/IDEAS-GUILD.md. Its required full-suite push hooks
+pass and remote main contains the commit (.scratch/goal31/upstream-feedback-push.log).
+
+The library mismatch is the static __un_inc helper in pristine input.obj; stock
+body matching and the __ungetc_lk callee at 5e899f are supported. The project C copy
+passes the wrong duplicated argument and has no project callers. It is retired;
+the locked identity records attested _un_inc/__un_inc in library_msvcrt.h without
+an extern. LIEF confirms STATIC linkage. Complete 23-byte native relocation proof
+and a rejecting wrong-callee control pass. Historical comparison evidence and all
+unrelated managed rows are preserved. No client raw map/provider is claimed.
+Receipts: gold-un-inc-native-proof.json and
+retired-duplicate-sources/gold-un-inc-retirement.json under .scratch/goal31/.
+Provider audit selects 14 compiled Gold library sources and exactly one helper
+header identity with provider unresolved. Fresh all-target lint retains zero
+errors and 31 warnings. The terminal cleanup gate passes all 316 game functions,
+65 compiled libraries, 652 data comparisons, complete raw-file identity and Wine
+checks; only known lint warnings fail. Coverage is regenerated for all targets.
+Receipts: .scratch/goal31/gold-un-inc-provider-audit.json,
+lint-crt-retirement.json, gate-crt-retirement.log and coverage-crt-*.json.
+
+Shared he_RunProduktion still emits 4,016 vs 3,816 bytes in both clients. Its 456
+bounded runs reach all 66 call sites but do not prove exhaustive behavior or byte
+identity. The two 450-byte initializer matches remain; native types/event extent
+and original placement are unresolved. Preserve prior goal23–goal26 evidence.
+
+TL412d30 now has a real inferred StartObjectTransformAnimation definition,
+NEAR_MATCHING230/280 with its native 188-byte frame. Five data operands validate;
+callee4339e0 and the Gold counterpart remain unresolved. Its two88-byte frames
+and twelve by-value option bytes remain partly initialized. Current-source
+angr/VEX comparison passes96 bounded cases including64 call paths and callee
+player-pointer changes; wrong-position control rejects. This is no exhaustive
+or byte proof. Private frame/flag type bindings and two initialized-data declaration
+views are recorded through managed writers. Native owners/original unit are unknown.
+Receipts: .scratch/goal32/integrated-transition-test.json, transition-trace-proof.json,
+transition-extents.json and frame/flags-type-bind.json. The locked UEFI1.11 source
+build repairs angr's import; pyproject.toml prevents the broken CPython3.10 wheel
+from returning under3.13. Upstream ae530804 records the call-input proof gap;
+its required full-suite push checks pass and the commit is on remote main.
+All ten existing TL users pass fresh comparisons without lost byte matches.
+The terminal new server gate passes316 functions,652 data comparisons, full
+raw identity and Wine/library/profile checks; only the31 ordering warnings fail.
+Receipts: .scratch/goal32/transition-users-audit.json and gate-transition.log.
+
+Upstream cedb8d4f restores migrated data-definition scope in mixed-target sources.
+Three failing-before regressions and354 focused checks pass; full commit/push
+checks pass and remote main contains the fix. Five foreign server logging/gzip
+owners no longer appear in TL. The two remaining unused client year COMMON
+definitions are removed, preserving all three complete72/72/56-byte object bodies
+and relocations. The canonical extern and unresolved calendar backing remain.
+Gold4ffc40's former80-byte size included eight alignment NOPs. Its complete
+72-byte body and two known table operands pass, wrong-table+4 rejects, and the
+verifier records RELOC72; no original-unit/table-owner/raw-client claim follows.
+The fresh server gate retains full raw identity,316 functions,652 data checks,
+Wine/library/profile checks; only31 order warnings fail. Receipts:
+.scratch/goal33/year-objects-*.json, gold-find-slot-native-proof.json,
+year-spiel2-gold-final-test.json, data-*-final.json and gate-year-cleanup.log.
+
+Native review with Kuna rejects TL57c7b0 as cm_ExDestroyBuilding, TL5974e0 as
+gm_AllocGebaeude, TL5d6030 as InitNewDynastyEntity, TL4c35f0 as cm_ExProdObjekt,
+TL4b0220 as cm_ExModifyStat, TL44a120 as gv_SpawnEntities and TL422150 as
+gm_ChangePlayerIdentityImpl. These are different operations and argument shapes;
+unbinding them does not reverse the native routines or remove inventory. All
+existing EXACT/RELOC source claims remain. Actual destructor TL4cbc90/Gold4cb100
+and dynasty initializer TL4adcd0 already have matched client bodies; their shared
+source organization remains open. Factory TL5043d0 is identified, but has no
+source provider: the shared seed emits1050 versus1488 native bytes. Its SERVER
+assembly is conditional and absent from the client branch. Receipts:
+.scratch/goal34/identity-retirement.json, additional-identity-retirement.json,
+building-correct-seed-test.json and lint-commit.json.
+The fresh gate still matches all286720 server bytes and passes function/data,
+Wine/library/profile checks; lint alone fails. The gate ran before the last four
+retirements; the subsequent lint scan confirms the two remaining warnings.
+No C bodies, headers or compiler inputs changed in this checkpoint. Upstream
+f0dfff6b records the missing safe binding-retirement CLI capability.
+
+Next: complete source-unit/type/data evidence and raw-link providers, recover
+genuine discarded server inputs and client code, and build both raw clients.
+Keep the original completion criteria and the goal active.
+
+## History
+
+[Archived checkpoints](docs/goal-history.md) preserve the previous goal file in
+full. They are historical evidence, not current status or instructions. Keep this
+file concise: replace the current continuation when it changes; write detailed
+chronology to `docs/TODO.md` and evidence to its owning document.

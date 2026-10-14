@@ -106,153 +106,67 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-15
 
-The full source-fidelity/three-image objective is unfinished. Both client raw
-links, complete data ownership/verification, unknown code ranges and faithful
-reconstruction of discarded server inputs remain open. Existing inferred server
-link inputs do not establish original source merely because the raw DLL matches.
+The full source-fidelity/three-image objective is unfinished. Both raw clients,
+complete data ownership/verification, unknown code ranges and faithful recovery
+of discarded server inputs remain open. Inferred server inputs do not become
+original source merely because the raw DLL matches.
 
-Guild checkpoints e24b9311 (Rebrew 3 migration), 86560789 (raw server/provider
-repairs), 14b5140d (CLI guidance) and de00f948 (shared lighting) are committed
-and pushed. The migration audit
-preserves all 8,376 identities/bindings/extents and non-comment tokens in 3,836
-C/header files. cm_ExProdObjekt is restored to its attested command.c position:
-its isolated object matched, but splitting it changed 30,085 raw bytes and drifted
-32 data rows. Do not split an attested TU merely to quiet conflicting target order.
-Six acyclic units have reviewed definition orders and retain their tested bodies.
+The fresh server gate passes: all286720 raw bytes equal the reference,316 game
+functions and652 data comparisons pass, and library/import/relocation/Wine
+checks pass. The plain server and Processor Pack client images are present.
+All-target lint now has zero errors and zero warnings. The single130-byte
+ahm_ProcessEntityChain body and its packed private type now precede
+gm_GetFieldByType in command.c; all three identities follow via CLI rehome.
+The table keeps its storage position. Ownership and name remain inferred,
+with no direct native source-path reference in the body.
 
-The complete frozen baseline corpus is terminal with zero game compiler errors,
-clearing the earlier 27 timeouts. Byte matches: server 316/316, TL 3597/3693 and
-Gold 2098/2540. No checkpoint EXACT/RELOC identity is lost, and all 3,973 source/
-configuration inputs stay unchanged during that run. Receipts:
-.scratch/goal29/corpus-current.json and .scratch/goal31/terminal-corpus-audit.json.
-All three coverage documents were regenerated before the new helper integration.
-Gold compiled libraries were 14/15; the incorrect 5e3a71 C copy is now retired.
-Function/object comparisons do not establish client raw-file or data identity.
+All102 comparisons across command/alchemy and the three targets preserve
+their results, including91 byte matches; only compiler-local labels renumber.
+All three complete chain bodies agree after resolving their sole operand at+33
+to SERVER1002c5a0,TL68ab88,Gold60bf20; shifted-table controls reject. This
+verifies the operands, not full client linked data or its provider. Receipts:
+.scratch/goal36/move-comparison-audit.json,chain-native-proof.json,
+lint-chain-move.json andgate-chain-move.log. The server map preserves the
+ca00/ca90 sequence with the chain now in command.c.obj; it is a reconstructed map.
 
-The shared UpdateSceneLighting integration now uses one C89 definition for
-TL450a00/Gold453890, with only Gold's evidenced flag-dependent branches. Its
-original spelling, prefix and unit remain unattested; client_lighting.h is an
-inferred canonical interface. Fresh complete native proof retains all 38/128
-bytes and twenty operands; fourteen wrong bindings reject. Seventeen current
-target/source comparisons pass, including all changed helper users, the reset
-and the sound caller. All thirteen named helper transfers validate their native
-targets. The byte-width interface retains the TL implementation's ignored flag.
-Receipts: .scratch/goal31/integrated-helper-native-proof.json,
-lighting-users-test-summary.json and integrated-caller-bindings.json.
+Seven false TL source bindings are retired after native Kuna review:
+57c7b0,5974e0,5d6030,4c35f0,4b0220,44a120,422150. Their native inventory,
+extents and failed-comparison history remain. Actual client destruction
+TL4cbc90/Gold4cb100 and dynasty initialization TL4adcd0 already have matched
+bodies but are not yet unified with the server variants. Factory TL5043d0 is
+identified without a source provider: the server seed emits1050 versus1488
+native bytes. Its SERVER assembly is guarded; the client branch uses C memset.
+Four stale SERVER failure rows outside the image and two retired-source flag
+overrides are removed; all6020 prior strong claims remain and data is untouched.
+Receipts: .scratch/goal34/identity-retirement.json andadditional-identity-retirement.json;
+.scratch/goal35/cleanup-preservation.json andforeign-server-orphans-before.json.
 
-Seven locked declaration-view updates describe four-byte or one-byte accesses
-in zero-filled .data tails. They allocate no storage; backing extents and owners
-remain unknown. The existing signed-byte flag is retained. Both scalar/header
-registration and shared-definition renaming use Rebrew's managed writers/CLI.
-The obsolete TL setter include override is removed; inherited flags are unchanged.
-Three audited, unbound Gold duplicates are retired after canonical-provider tests;
-backups/receipts remain under .scratch/goal31/retired-duplicate-sources/.
-Conflict-filtered data scans did not prove definition ownership clean. The six
-later full TL reports are resolved: five were foreign definitions losing scope
-after metadata migration, and two unused year definitions caused the sixth.
-Current full inventories have zero type conflicts and zero multiple definitions
-in all three targets (664/295/260 data entries).
-Current lint has zero errors and two W030 findings in alchemistry_logic.c,
-for the shared command-chain handler's client identities. Seven incorrect TL
-source bindings are retired after native review; their inventory entries,
-extents and historical comparisons remain. Keep the attested server composition
-intact while resolving the remaining source-unit evidence.
+Upstream provider/header/parser/dossier and mixed-target data-scope repairs are
+committed and pushed. Latest6173db1d converts malformed remote compile URLs
+to typed failures (12 failing-before cases,83 focused passes);7e82dbcd protects
+VERIFIED data during orphan cleanup (two failing-before cases,324 focused
+passes). Required commit checks and full push suites pass. Default project prune
+protects all46 earned data rows and selects nothing. Both repos retain only main.
+Upstream IDEAS-GUILD.md records safe identity retirement and source-unit audits.
 
-The new server gate found the documented upstream CLI migration in the local
-CMake call: order-sources --marker is now --module, with an explicit server target.
-That call is repaired. The raw rebuild has zero compiler/linker errors and again
-equals all 286,720 reference bytes. The fresh full gate is terminal: all 316
-functions, 652 data comparisons, raw structure/file identity and Wine checks pass.
-Only the 31 known order warnings fail. Receipt:
-.scratch/goal31/gate-lighting-restored.log. Coverage is regenerated for the
-integrated tree (.scratch/goal31/coverage-lighting-{server,tl,gold}.json).
+Preserve earlier verified integrations and evidence: shared lighting with17
+current comparisons and native operand controls (.scratch/goal31); pristine
+stock __un_inc attribution and retirement of its incorrect C copy; unused year
+COMMON removal with all three72/72/56-byte bodies intact, and corrected Gold
+gm_FindSlotById extent72 (.scratch/goal33). The full frozen baseline corpus has
+zero game compiler errors and no lost checkpoint matches; it is historical,
+not proof of complete client images (.scratch/goal29/corpus-current.json).
+TL412d30 StartObjectTransformAnimation remains NEAR230/280:96 bounded VEX
+cases are not a byte/exhaustive proof, and its callee/original unit remain open
+(.scratch/goal32). Shared he_RunProduktion remains4016/3816 in both clients;
+its456 bounded runs and66 reached call sites do not establish byte identity.
 
-Upstream provider/split/header/parser repairs d37f4a07, 6e8dbd5e, 2468a895 and
-4650b824 are pushed. Gap notes 4567bc35 and the CLI merge 7b0eb0e4 are integrated.
-Dossier fixes bee8ada8/a705f40d retain known extents after early returns and exclude
-internal jumps from callees while preserving recursion/external tail calls.
-Focused suites 65/66 and required full commit/push hooks pass; canonical/remote
-main contain a705f40d. Its completed checkout and the stale, clean 3babd2d4 baseline
-checkout are removed after process/file-reference audits. Both repositories now
-retain only main. New library-result and atomic-view-edit CLI gaps are committed
-as 5f730512 in upstream docs/IDEAS-GUILD.md. Its required full-suite push hooks
-pass and remote main contains the commit (.scratch/goal31/upstream-feedback-push.log).
-
-The library mismatch is the static __un_inc helper in pristine input.obj; stock
-body matching and the __ungetc_lk callee at 5e899f are supported. The project C copy
-passes the wrong duplicated argument and has no project callers. It is retired;
-the locked identity records attested _un_inc/__un_inc in library_msvcrt.h without
-an extern. LIEF confirms STATIC linkage. Complete 23-byte native relocation proof
-and a rejecting wrong-callee control pass. Historical comparison evidence and all
-unrelated managed rows are preserved. No client raw map/provider is claimed.
-Receipts: gold-un-inc-native-proof.json and
-retired-duplicate-sources/gold-un-inc-retirement.json under .scratch/goal31/.
-Provider audit selects 14 compiled Gold library sources and exactly one helper
-header identity with provider unresolved. Fresh all-target lint retains zero
-errors and 31 warnings. The terminal cleanup gate passes all 316 game functions,
-65 compiled libraries, 652 data comparisons, complete raw-file identity and Wine
-checks; only known lint warnings fail. Coverage is regenerated for all targets.
-Receipts: .scratch/goal31/gold-un-inc-provider-audit.json,
-lint-crt-retirement.json, gate-crt-retirement.log and coverage-crt-*.json.
-
-Shared he_RunProduktion still emits 4,016 vs 3,816 bytes in both clients. Its 456
-bounded runs reach all 66 call sites but do not prove exhaustive behavior or byte
-identity. The two 450-byte initializer matches remain; native types/event extent
-and original placement are unresolved. Preserve prior goal23–goal26 evidence.
-
-TL412d30 now has a real inferred StartObjectTransformAnimation definition,
-NEAR_MATCHING230/280 with its native 188-byte frame. Five data operands validate;
-callee4339e0 and the Gold counterpart remain unresolved. Its two88-byte frames
-and twelve by-value option bytes remain partly initialized. Current-source
-angr/VEX comparison passes96 bounded cases including64 call paths and callee
-player-pointer changes; wrong-position control rejects. This is no exhaustive
-or byte proof. Private frame/flag type bindings and two initialized-data declaration
-views are recorded through managed writers. Native owners/original unit are unknown.
-Receipts: .scratch/goal32/integrated-transition-test.json, transition-trace-proof.json,
-transition-extents.json and frame/flags-type-bind.json. The locked UEFI1.11 source
-build repairs angr's import; pyproject.toml prevents the broken CPython3.10 wheel
-from returning under3.13. Upstream ae530804 records the call-input proof gap;
-its required full-suite push checks pass and the commit is on remote main.
-All ten existing TL users pass fresh comparisons without lost byte matches.
-The terminal new server gate passes316 functions,652 data comparisons, full
-raw identity and Wine/library/profile checks; only the31 ordering warnings fail.
-Receipts: .scratch/goal32/transition-users-audit.json and gate-transition.log.
-
-Upstream cedb8d4f restores migrated data-definition scope in mixed-target sources.
-Three failing-before regressions and354 focused checks pass; full commit/push
-checks pass and remote main contains the fix. Five foreign server logging/gzip
-owners no longer appear in TL. The two remaining unused client year COMMON
-definitions are removed, preserving all three complete72/72/56-byte object bodies
-and relocations. The canonical extern and unresolved calendar backing remain.
-Gold4ffc40's former80-byte size included eight alignment NOPs. Its complete
-72-byte body and two known table operands pass, wrong-table+4 rejects, and the
-verifier records RELOC72; no original-unit/table-owner/raw-client claim follows.
-The fresh server gate retains full raw identity,316 functions,652 data checks,
-Wine/library/profile checks; only31 order warnings fail. Receipts:
-.scratch/goal33/year-objects-*.json, gold-find-slot-native-proof.json,
-year-spiel2-gold-final-test.json, data-*-final.json and gate-year-cleanup.log.
-
-Native review with Kuna rejects TL57c7b0 as cm_ExDestroyBuilding, TL5974e0 as
-gm_AllocGebaeude, TL5d6030 as InitNewDynastyEntity, TL4c35f0 as cm_ExProdObjekt,
-TL4b0220 as cm_ExModifyStat, TL44a120 as gv_SpawnEntities and TL422150 as
-gm_ChangePlayerIdentityImpl. These are different operations and argument shapes;
-unbinding them does not reverse the native routines or remove inventory. All
-existing EXACT/RELOC source claims remain. Actual destructor TL4cbc90/Gold4cb100
-and dynasty initializer TL4adcd0 already have matched client bodies; their shared
-source organization remains open. Factory TL5043d0 is identified, but has no
-source provider: the shared seed emits1050 versus1488 native bytes. Its SERVER
-assembly is conditional and absent from the client branch. Receipts:
-.scratch/goal34/identity-retirement.json, additional-identity-retirement.json,
-building-correct-seed-test.json and lint-commit.json.
-The fresh gate still matches all286720 server bytes and passes function/data,
-Wine/library/profile checks; lint alone fails. The gate ran before the last four
-retirements; the subsequent lint scan confirms the two remaining warnings.
-No C bodies, headers or compiler inputs changed in this checkpoint. Upstream
-f0dfff6b records the missing safe binding-retirement CLI capability.
-
-Next: complete source-unit/type/data evidence and raw-link providers, recover
-genuine discarded server inputs and client code, and build both raw clients.
-Keep the original completion criteria and the goal active.
+Next: measure removal of unused alchemy declarations, review the distant
+ahm_ResetEntityState placement through existing CU recommendations, and unify
+the evidenced client command bodies. Keep the attested cm_ExProdObjekt TU: its
+previous split changed30085 raw bytes and drifted32 data rows. Recover genuine
+discarded server inputs, finish source-unit/type/data/provider evidence and
+client code, and build both raw clients. Keep the original goal active.
 
 ## History
 
