@@ -1,5 +1,27 @@
 # Goal — 100% Byte-Identical server.dll, Europa1400Gold_TL.exe, AND Europa1400Gold.exe Recompilation with a rebuilt unified source tree matching what the original devs most likely had.
 
+- 2026-10-14 (production callback discovery): fixed Rebrew's recovered start
+  address directly upstream: ret/prologue recognition skipped padding but
+  emitted its start as an identity. b45088e8 corrects the actual prologue VA;
+  three red cases, 50 discovery / 244 related checks and 11,914 full tests / 43 skipped
+  pass with 88% coverage. A separate Rizin database-file/zero-exit-error bug is
+  fixed in 6a9a95f6: three red cases, radare2 control and 107 backend checks pass;
+  normal full push hooks are green. Both commits are merged/pushed and their
+  static/package/reproducibility/provenance/SBOM checks pass; own fix worktrees
+  retire. Reviewed native he_RunProduktion entries now cover 3,816 bytes each
+  in TL 0x571870 / Gold 0x5694b0, including complete switch tables and excluding eight
+  external NOPs. Native strings and paired initializer slots establish identity;
+  no source, owner or byte-match verdict is invented. TL unassigned text
+  97,581→93,766, with this callback now known but still without C. The remaining
+  Ghidra plugin stack-symbol failure is explicit; structured diagnostics are
+  recorded in upstream IDEAS-GUILD. All-target lint/data checks are clean;
+  the final server gate passes 316 functions / 652 data checks and every
+  286,720 raw file byte. All three coverage documents refresh. Existing
+  identities, extents, flags and statuses remain unchanged; only required
+  server verification measurements update.
+  Full three-image/shared-source objective remains unfinished. Receipts:
+  .scratch/goal23/production-callback/.
+
 Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
 

@@ -886,6 +886,22 @@ string. `0x100174d0` is the caller (`call 0x10017330` at `0x1001787f`), so it
 keeps the name; `0x10017330` is its static defaults helper that reuses the
 parent's log prefix.
 
+### Client production callback (2026-10-14)
+
+| TL VA | Gold VA | Attested name | Standing |
+| --- | --- | --- | --- |
+| `0x00571870` | `0x005694b0` | `he_RunProduktion` | Reviewed inventory entries; C body remains unreconstructed |
+
+Both bodies push `"he_RunProduktion(): geb:%G"`: TL instruction
+`0x005718b1` references literal `0x006a7c78`, and Gold instruction
+`0x005694f1` references `0x00628c28`. Their shared initializer places each
+entry in the same production callback slot. The complete native extent is
+3,816 bytes per client, including the five-entry switch table and excluding
+following NOPs. This does not establish a source file, header, storage owner
+or byte-match verdict. Existing numeric callback declarations remain until
+implementation and verified name binding. Native receipts:
+`.scratch/goal23/production-callback/{name-proof,extent-proof}.json`.
+
 ### Module case: `m_alloc` is snake_case
 
 The `Units/m_alloc` unit does not use the `m_VerbNoun` CamelCase of the game

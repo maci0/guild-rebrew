@@ -1,3 +1,45 @@
+## Production callback discovery repair (2026-10-14)
+
+- Diagnosed why fresh discovery missed he_RunProduktion: its ret/prologue
+  boundary recognizer skipped fill, but emitted the return-end VA as the next
+  identity. It reported TL 0x0057186f instead of the actual 0x00571870.
+  Upstream b45088e8 returns the actual prologue VA and preserves known starts.
+  Three cases fail before repair; expanded padding/known-start/negative controls
+  pass. Discovery 50 and related verification/package 244 checks pass;
+  the full suite passes 11,914 tests/43 skips with 88% coverage. Real discovery
+  now finds the production and other large callbacks at their correct starts.
+- Fixed a separate backend bug directly upstream as 6a9a95f6: Rizin requires a
+  project database file, while radare2 uses a directory. Save/load now use the
+  proper path, and zero-exit database error text is rejected rather than C.
+  Three regressions fail before repair, with a passing radare2 control;
+  backend 107 checks pass/one skip. Both source commits are merged/pushed,
+  normal full push hooks and all 18 all-files checks pass. Wheel/sdist parity,
+  installed-wheel smoke, committed reproducibility, provenance and 116-component
+  SBOM pass for both commits. Finished fix worktrees and branches are removed.
+- Registered only the two reviewed he_RunProduktion entries: TL 0x00571870 and
+  Gold 0x005694b0. Native log spelling and the same initializer callback slot
+  establish identity. Each extent is 3,816 bytes: 3,793 code, three internal
+  alignment bytes and 20 bytes of switch table. All five table destinations
+  lie in the body; eight following NOPs are external. Existing curated entries
+  are unchanged. Whole stock LIBCMT checks miss in both clients; no library
+  provider claim is made from that negative result.
+- TL unassigned text falls 97,581→93,766 bytes. The newly tracked callback
+  remains without source, so no additional matched-byte verdict is claimed.
+  Padding falls by one byte because a pointer's high zero byte now belongs
+  to the complete table extent rather than edge-fill estimation.
+- Correct Rizin persistence loads the real 32,878,102-byte analysis database.
+  The external Ghidra plugin still rejects an inferred var_1h symbol; native
+  control-flow/table evidence stands independently. Blind variable-removal
+  probes failed and created no source. A structured backend diagnostic trace
+  is recorded in upstream docs/IDEAS-GUILD.md; that plugin failure is unresolved.
+- All-target lint and data-conflict scans are clean. The final server gate
+  passes 316 functions and 652 data checks; all 286,720 raw file bytes remain
+  identical. Coverage documents are refreshed for all three targets. Existing
+  function identities, extents, flags and statuses remain unchanged; only
+  required server verification measurements are refreshed.
+  Complete callback C, both client raw images/data and faithful discarded
+  server source remain unfinished. Receipts: .scratch/goal23/production-callback/.
+
 ## TL unassigned .text triage (2026-10-14)
 
 - `no function` is separate from the 1,219 known game functions without source.
