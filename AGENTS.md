@@ -63,7 +63,11 @@ Invoke all tools through the single `rebrew <command>` CLI. Names such as
 `rebrew build objdiff-driver <target> <base-object>`. Place compiler flags after `--`
 so Rebrew passes them through unchanged. Regenerate old CMake/objdiff configs
 when updating Rebrew; no separate `rebrew-*` executables are installed.
-Use `--json` for structured output (preferred for agents).
+Use `--json` for structured output (preferred for agents). Run `rebrew -h` or
+`rebrew <domain> <operation> -h` to discover commands. Project options select
+the root/target, Output options control JSON/previews/files, and Global options
+control verbosity/version. Read each operation's help for its write behavior;
+`--dry-run` is offered only where supported.
 
 | Command | Use |
 |---------|-----|
@@ -83,7 +87,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew match batch --near-miss --threshold 5` | Batch GA on NEAR_MATCHING functions with small deltas (Δ ≤ threshold) |
 | `rebrew source rename <old> <new>` | Rename a function, global (`--data`), type (`--type`) or member (`--field`) everywhere; `MODULE.0xVA` picks one identity, `--shared-definition` acknowledges only rows for the selected definition; `--all-modules` also selects independent definitions |
 | `rebrew verify --json` | Bulk verify all reversed files |
-| `rebrew lint --json` | Validate annotations and the stores: invalid source tags (E024), stale addresses (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), data rows whose size disagrees with the owning definition (W037) or overlaps another row (W038), coverage-store hygiene — leftover `coverage.db`/grid JSON/CSV and documents the dashboards cannot serve (W032) |
+| `rebrew lint --json` | Validate source bindings and the stores: invalid source tags (E024), stale addresses (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), data rows whose size disagrees with the owning definition (W037) or overlaps another row (W038), coverage-store hygiene — leftover `coverage.db`/grid JSON/CSV and documents the dashboards cannot serve (W032) |
 | `rebrew data list --json` | Inventory globals in .data/.rdata/.bss |
 | `rebrew data move 0xOLD 0xNEW` | Re-address a data row; drops its verdict, keeps verification history |
 | `rebrew types check` | Check layouts and stale type bindings; `--compile` repeats target sizeof/offsetof assertions |
@@ -99,7 +103,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew coverage build --json` | Write `db/coverage-<target>.toml`, the progress document the dashboards read |
 | `rebrew status --json` | Separate file agreement, accounted .text, and stored data verification; counts and bytes reconcile |
 | `rebrew library inspect <archive> --defines <symbol>` | Find native archive members and their code/data definitions |
-| `rebrew library vendor <manifest>...` | Verify pristine source pins plus patches; `--sync` regenerates outputs |
+| `rebrew library vendor <manifest>...` | Verify pristine source pins plus patches; `--apply` regenerates outputs |
 | `rebrew binary relocs --json` | Compare reference/raw-link relocation sites, symbols and targets |
 | `rebrew source symbolize <file> --dry-run` | Preview replacing raw data-address casts with verified named globals |
 | `rebrew build check-data-placement --json` | Compare linked data symbol addresses against managed rows |
@@ -110,7 +114,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew binary extract show 0x<VA> --json` | Inspect one function candidate |
 | `rebrew binary extract batch <count>` | Write selected function artifacts |
 | `rebrew binary asm show 0x<VA> --size 128 --json` | Quick offline disassembly |
-| `rebrew sync push --state-dir <dir>` | Push annotations to the BinSync state dir |
+| `rebrew sync push --state-dir <dir>` | Export names, types, and metadata fields to the BinSync state dir |
 | `rebrew sync summary --state-dir <dir> --json` | Preview what would be synced |
 
 ## Source Addresses and Metadata

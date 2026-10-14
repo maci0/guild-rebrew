@@ -11,7 +11,7 @@ source of general Rebrew features.
 
 The reusable missing feature was pristine-plus-patches source vendoring. It now
 lives in `rebrew library vendor MANIFEST...`, with check as the default and explicit
-`--sync` to regenerate. CMake passes our two manifests and retains all vendor-file
+`--apply` to regenerate. CMake passes our two manifests and retains all vendor-file
 configure dependencies. The local implementation and tests were removed; upstream
 owns the reproduction and failure tests. See [vendoring](vendoring.md).
 

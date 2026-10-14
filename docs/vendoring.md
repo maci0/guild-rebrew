@@ -39,7 +39,7 @@ The command validates and stages every manifest before sync changes any output;
 paths must stay inside the root, with no symlinks or overlap between outputs and inputs.
 
 To change vendored code: edit or add a patch, list it in `vendor.toml`, then run
-`rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml --sync` to regenerate
+`rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml --apply` to regenerate
 the output tree, and rebuild.
 
 ## zlib 1.1.3

@@ -117,9 +117,9 @@ if(REBREW_BUILD_SERVER)
   # CMake expands the glob once at configure time, so renaming or adding a source
   # leaves build.make, objects1.rsp and link.txt pointing at a .obj that no
   # longer compiles. The build then fails with no obvious cause while
-  # `rebrew build-check` still reports clean, because that check compares flags
+  # `rebrew build check` still reports clean, because that check compares flags
   # on the objects CMake already listed -- it cannot see an object that should
-  # have left the list. Measured in round 1080: `rebrew rename` renamed a .c,
+  # have left the list. Measured in round 1080: `rebrew source rename` renamed a .c,
   # split_link.sh died at exit 157, and the fix was a re-configure.
   #
   # Unified tree: game logic shared by all three binaries lives once in
@@ -197,7 +197,7 @@ if(REBREW_BUILD_SERVER)
 
   # Order objects by original function VA (fixes reccmp "0 aligned"; drops
   # zlib files absent from the original). The --first-va table supplies the
-  # vendored files' first-function VAs (they have no // FUNCTION: markers); the
+  # vendored files' first-function VAs (pristine vendor C remains unchanged); the
   # --exclude list drops files absent from the original server.dll.
   execute_process(
     COMMAND "${_REBREW_SRC_BIN}" build order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES} ${MINIZIP_SOURCES}
