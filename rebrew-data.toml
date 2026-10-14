@@ -591,6 +591,8 @@ kind = "GLOBAL"
 type = "VECTOR3"
 section = ".data"
 note = "Accessed three-float view (12 bytes). Complete backing allocation extent and storage owner unresolved; extern declaration only."
+updated_by = "rename"
+updated_at = "2026-10-14T12:47:38+00:00"
 
 ["GOLD.0x005fcc7c"]
 name = "g_67bbe0"
@@ -2932,6 +2934,8 @@ kind = "GLOBAL"
 type = "VECTOR3"
 section = ".data"
 note = "Accessed three-float view (12 bytes). Complete backing allocation extent and storage owner unresolved; extern declaration only."
+updated_by = "rename"
+updated_at = "2026-10-14T12:47:38+00:00"
 
 ["GOLDTL.0x0067bbe0"]
 name = "g_67bbe0"
@@ -8138,7 +8142,7 @@ size = 1288
 section = ".rdata"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-11T07:26:52+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10025fc0".verification]
@@ -8146,7 +8150,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "ac47833826ac2798e54b01bdfc44e51e71adbd30792fd1719f596559a8bb076d"
 definition_hash = "d0628f5f89cb4d06dc2e1dafcd3a8757ff5335ec3026b61e7675f226fff79df9"
-measured_at = "2026-10-11T07:26:52+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x100264c8"]
 file = "src/Develop/crt_globals.h"
@@ -8177,7 +8181,7 @@ size = 312
 section = ".rdata"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-11T07:26:52+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100264d0".verification]
@@ -8185,7 +8189,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "c90c63741cd49fc84da43e938353d01c670980936f00011c154220b2ae5d771e"
 definition_hash = "7ca2e6398f9a2323210cba190c289f6ac4bd1c24a8c5024a47091a9ebcee971b"
-measured_at = "2026-10-11T07:26:52+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x10026608"]
 file = "src/crt_region/section_spans.c"
@@ -8216,14 +8220,14 @@ section = ".data"
 status = "VERIFIED"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-11T07:26:52+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x10027000".verification]
 status = "VERIFIED"
 writer = "verify"
 input_hash = "9455ddc475129ce979f01e842dff9404fdf5110ee1b3fdffe6d4e66b0b0d4484"
 definition_hash = "b7944d519e9866332fad685d507c4132a71040d6c212417c08390e0a42f47788"
-measured_at = "2026-10-11T07:26:52+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x10027030"]
 file = "src/Develop/Units/net/broadcast.c"
@@ -10924,15 +10928,15 @@ type = "handler_func[]"
 size = 424
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T08:54:56+00:00"
+updated_by = "verify"
+updated_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002c3f8".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "e366c2fa6daa22a79511669072b79766fbe9ff5564e71d97e10be529d7bd36ff"
 definition_hash = "7e40ef1a0e1452edf4ebff566b7f28ea65c1bba9f9e1865ac9ce721bd4b397ae"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002c5a0"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -10942,15 +10946,15 @@ type = "dispatch_fn[]"
 size = 424
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T08:54:56+00:00"
+updated_by = "verify"
+updated_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002c5a0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "0847fdfec42b7471fcb084a1d4a90e860d4a16a0f74279f058fb72401490ac32"
 definition_hash = "6e576a4eadeb7b118646f7e57de8854a7bff2fcc9045858afe5e11a32056d55f"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002c748"]
 file = "src/crt_region/section_spans.c"
@@ -11371,7 +11375,7 @@ size = 1307
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002cc39".verification]
@@ -11379,7 +11383,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "f40d0b0e71c943e0667de8f24eab9ae9a71e3b7d3931b34333241b5545958057"
 definition_hash = "bd15ae543f30459ce496f39167c9ef3236aab48df9267e0c2ce1b7c076ad33c7"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d154"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11390,7 +11394,7 @@ size = 45
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0CN@CMMF@cm_ExKillSpieler?$CI?$CJ?3Could?5not?5fin@"
 
@@ -11399,7 +11403,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "36d6cb5724f207613f57d4bbac06cf3a08935d308d3264c59948a293c1513c2d"
 definition_hash = "40bfe43640fd66633f556c34d4123e44a8adefb3cf486cef709b36ff1827355e"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d181"]
 file = "src/crt_region/section_spans.c"
@@ -11410,7 +11414,7 @@ size = 39
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d181".verification]
@@ -11418,7 +11422,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "7dc225da49be8021ea72979fedacc37ff1cc99f84e0f95fb60d6157fa2e2ff75"
 definition_hash = "e278cc4898b2181913f8da00ec6e99e3533ebeb9ca329a1748bb318874b8a83c"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d1a8"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11429,7 +11433,7 @@ size = 53
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0DF@LMGL@cm_ExSetGebBesitzer?$CI?$CJ?3?5Could?5not@"
 
@@ -11438,7 +11442,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "6da12f8f19f42f67b4dfc849b8d319dda6633ea9199b36fbf01086884c3eabd6"
 definition_hash = "6bd127d1036e5ba0f6e86ebe86ccb634748b10918e0735475e3d51887d8904e1"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d1dd"]
 file = "src/crt_region/section_spans.c"
@@ -11449,7 +11453,7 @@ size = 3
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d1dd".verification]
@@ -11457,7 +11461,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "3486cbdfea3df155825807dba0810c3c859776af434359264a1a2582a06121ae"
 definition_hash = "dca551a575e4c9613ce46487f28513c62cb4343f03feeccdaf63725de066ae85"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d1e0"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11468,7 +11472,7 @@ size = 50
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0DC@FMCG@cm_ExSetGebBesitzer?$CI?$CJ?3?5Could?5not@"
 
@@ -11477,7 +11481,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "a7f727a90f0a2c9f6759072b014cb8e3233267b9c9c1145fe7c1b4e031174ca2"
 definition_hash = "8470e0c72441fa68184fd3271163a524408225255b54663d96197dc4b4db35ee"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d212"]
 file = "src/crt_region/section_spans.c"
@@ -11488,7 +11492,7 @@ size = 2
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d212".verification]
@@ -11496,7 +11500,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "6470376ec12eecab4a12dbc28ac577d2fd8bd50444a438166c52155da8270031"
 definition_hash = "eb107bb5974b0eda61b783daa7bbeffda3b87953905b2ad20fd8715eca2c75ac"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d214"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11507,7 +11511,7 @@ size = 42
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0CK@KOFO@cm_ExSetGebBesitzer?$CI?$CJ?3?5Could?5not@"
 
@@ -11516,7 +11520,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "9fdea0a4fbe52f39f17ddc0c84ba917e0c1d3f94173b97aef4c03ad161c44de9"
 definition_hash = "3920b43f37a190a666c528d2862140abacbd7b9b24ac8d1194fffc0b9828cf95"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d23e"]
 file = "src/crt_region/section_spans.c"
@@ -11527,7 +11531,7 @@ size = 2
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d23e".verification]
@@ -11535,7 +11539,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "7cfa921a6da564958f36914d236552931a8c1a1dc75520f9a84a34c0cdd0a9f0"
 definition_hash = "a3d6bb31b3a6d8a1bf1df49086092395f7c2296303f60307ab32cb159e5ff5ab"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d240"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11546,7 +11550,7 @@ size = 38
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0CG@JGMF@cm_ExSetWohnsitz?$CI?$CJ?3?5Residence?5is@"
 
@@ -11555,7 +11559,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d5f69a9414e0610517e406c63c37ed9c190753ab96af287a2dbc5e74b3b815ef"
 definition_hash = "5b2e8a0bd4f3904999a08b64198f2cfd3e970b42044a7a306cb2301911f1d4bb"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d266"]
 file = "src/crt_region/section_spans.c"
@@ -11566,7 +11570,7 @@ size = 2
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d266".verification]
@@ -11574,7 +11578,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "537ce4c222dfcf980745e2f21d6341e0fa768e6f883695da56eee104380d4a21"
 definition_hash = "a334a351f384bedd6793b3e63defb86a0e25df98c2d81d62e548f5835c151620"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d268"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11585,7 +11589,7 @@ size = 45
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0CN@BLAL@cm_ExSetWohnsitz?$CI?$CJ?3?5Could?5not?5fi@"
 
@@ -11594,7 +11598,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "ae6aead4a1a88ee356a07a56af83546b50de678e619b12ded362f41f7746c4d9"
 definition_hash = "85da7bc0b60a3986c33917b85f55bc708ef0db644b3534e7eb1a136b6b5a844d"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d295"]
 file = "src/crt_region/section_spans.c"
@@ -11605,7 +11609,7 @@ size = 3
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d295".verification]
@@ -11613,7 +11617,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "5b5742a77bda99255e619573a87c67346ee07a9c512faf5ad2c2d8b87622fbd2"
 definition_hash = "5d8e33a7cf4c347e5eb336a8856cbd0f6e4b99ebf82d188d9a1ff7b2f63b70db"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d298"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11626,14 +11630,14 @@ status = "EXACT"
 storage_kind = "literal"
 link_symbol = "??_C@_0CH@GPOH@cm_ExSetWohnsitz?$CI?$CJ?3?5Could?5not?5fi@"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d298".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "d83ffeb33b2ba99f4d3c794618da7f4343443b74e8d0647f405a4c88b09a263f"
 definition_hash = "b184c038c2789b1f138d0b144d6a15f5e2a44d83e00a39ce4ebdf9585d1283cb"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d2bf"]
 file = "src/crt_region/section_spans.c"
@@ -11644,7 +11648,7 @@ size = 1
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d2bf".verification]
@@ -11652,7 +11656,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "0666384c44d31fb35fc6c6255784059b249938586e69114f4baf0b8be0b93544"
 definition_hash = "6a9ac4b261b21c69e4e72ee42e70a6d9aa154da79fc4d66620a29f28cdaa70be"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d2c0"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11663,7 +11667,7 @@ size = 44
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0CM@IEDE@cm_ExSetGebUpgrade?$CI?$CJ?3?5already?5hi@"
 
@@ -11672,7 +11676,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "fd6515bc6d4eabd7070d6cf3b251e56c7d696ae6ddeda618b2576020374a935f"
 definition_hash = "d18b40af870258b23880bc7f951c4fdffea1f56a6d2206345dbde31cde0cd91f"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d2ec"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11683,7 +11687,7 @@ size = 41
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0CJ@OHO@cm_ExSetGebUpgrade?$CI?$CJ?3?5Could?5not?5@"
 
@@ -11692,7 +11696,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "33f823640783b60bc6c2eebf4540e1ce64958b78bbe380a12f034de3e507a6af"
 definition_hash = "d0b9aeed6a2e6c995af6dce09b528931c59958a72471835fa917430bcb6b0dda"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d315"]
 file = "src/crt_region/section_spans.c"
@@ -11703,7 +11707,7 @@ size = 3
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d315".verification]
@@ -11711,7 +11715,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "0cd4b54c4c0f440cbf3b3565ee7de5de0248a0a754ae44bf66849002fe95ae88"
 definition_hash = "1682c48c0311d00e35d21e44bfb3223ecfae0c0b104cca6b3deab7c0e908e0d7"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d318"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11722,7 +11726,7 @@ size = 36
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0CE@MFFA@cm_ExEmployWorker?$CI?$CJ?3?5Illegal?5gw_@"
 
@@ -11731,7 +11735,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "2a733800840321d8c6a6a1b9ee1a3a345a29f446e4f59c21af7ccfb9605ef418"
 definition_hash = "57353b1321f96abed538c7e8b5e86e0ea022667e8aed4abf4411a6e4c4e07fe8"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d33c"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11742,7 +11746,7 @@ size = 37
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0CF@KJEG@cm_ExEmployWorker?$CI?$CJ?3?5Illegal?5geb@"
 
@@ -11751,7 +11755,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "2a6ab63ca4fbf45b1e4df0788015c26f01107edbd9415b55c0ee53ad3608502f"
 definition_hash = "61ad52f6848f215d31522caa9d323c16f8473fc94c6e98ef3c0d5d1663c53fe4"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d361"]
 file = "src/crt_region/section_spans.c"
@@ -11762,7 +11766,7 @@ size = 115
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d361".verification]
@@ -11770,7 +11774,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "b4a3189e5744345b358026c1d290bdeadb3aa0caf5123943ba64657b81a2a7a8"
 definition_hash = "172ac4809b8f33903877f673a318d15a7ba42ddd819752b02579fedda17e87a1"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d3d4"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11781,7 +11785,7 @@ size = 42
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0CK@NEMP@cm_ExKillTransporter?$CI?$CJ?3?5invalid?5@"
 
@@ -11790,7 +11794,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "2084c0f6b9ccb63e0337d6218a7c994aa972ddc10dbe9dc0260b27f701d1aff1"
 definition_hash = "b5ed98c6e1bd743300a4bf556aebb563a0ab886fb5a8cbe2d0c12a71e590ba1a"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d3fe"]
 file = "src/crt_region/section_spans.c"
@@ -11801,7 +11805,7 @@ size = 2
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d3fe".verification]
@@ -11809,7 +11813,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "6b331fed9b790efb5f7eca8e7b561f039b8ec9faf89269d8c0c9e83b6bc13320"
 definition_hash = "e33d898e2060d41f6e3fc2a9598b93da2044e4c37fa971127a16e52c347d7409"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d400"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11820,7 +11824,7 @@ size = 25
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0BJ@MDND@cm_ExCreateGeb?$CI?$CJ?3?5failed?$AA@"
 
@@ -11829,7 +11833,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "ec6064b3505192de4fcb93cbe677702d3c2ce902299deefe23ad87d92fe326d4"
 definition_hash = "9839f0e8a7d2d7eee040feb994ebba2a931cb5042df1c0ff65627cb147dc6bd6"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d419"]
 file = "src/crt_region/section_spans.c"
@@ -11840,7 +11844,7 @@ size = 3
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1002d419".verification]
@@ -11848,7 +11852,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "062e03a2d72feae50adbe24e16deaf7b5f0949ce2bcc602ae472f450dd3aace0"
 definition_hash = "9adbfa30e9c23515c497b056943eac809ba51292b2a712729683b849dcec91a0"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d41c"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
@@ -11861,14 +11865,14 @@ status = "EXACT"
 storage_kind = "literal"
 link_symbol = "??_C@_0CI@LLJB@cm_ExCreateGeb?$CI?$CJ?3?5Could?5not?5find@"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d41c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "e3552813609b816d0689328e96ef194a141141814f464034247ae3f54fc6c782"
 definition_hash = "81efcd900d26523a4aca21b19ee2dae075d1c3157bb6d4be26473605667c2b95"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x1002d444"]
 file = "src/crt_region/section_spans.c"
@@ -13003,7 +13007,7 @@ size = 848
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-11T07:26:52+00:00"
+updated_at = "2026-10-14T12:33:31+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10033ba0".verification]
@@ -13011,7 +13015,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "650b1a245b004ae9f45890e5138555333070f83f5ca2f1f13396fb5bf22370d2"
 definition_hash = "512ce2bc88df350d5abeb7b27d675b061e5376e41ef6a705a79f0f7f7276c960"
-measured_at = "2026-10-11T07:26:52+00:00"
+measured_at = "2026-10-14T12:33:31+00:00"
 
 ["SERVER.0x10033ef0"]
 file = "src/crt_region/data_globals.c"

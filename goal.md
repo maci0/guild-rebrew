@@ -106,84 +106,88 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-14
 
-The three-image/source-fidelity goal is unfinished. A fresh server gate passes
-all 286,720 raw file bytes, data/import placement and Wine exports, but faithful
-discarded-server source and complete client raw links remain open. The passing
-server image does not establish original-source fidelity or client completion.
+The full source-fidelity/three-image objective is unfinished. Client raw links,
+complete data verification, unknown function ranges and faithful discarded-server
+source remain open. The historical server layout still contains explicitly
+inferred discarded inputs; raw equality alone does not prove original source.
 
-`src/he_RunProduktion.c` is one complete shared candidate for TL `0x00571870`
-and Gold `0x005694b0`, with reviewed native extents of 3,816 bytes. The actual
-Docker/MSVC object agrees with reference callbacks in 456 bounded runs, comparing
-event bytes, ordered helper traces and complete strings, and reaches all 66 native
-call sites per client. These model external helpers; they do not establish
-exhaustive equivalence or byte identity. New rejecting cases exposed stale owner
-reads after a helper and incorrect strict-negative production thresholds. The C
-now reloads the owner and uses the native inclusive zero thresholds. Original
-event allocation, types/prototypes and source placement remain unresolved.
+Checkpoint e24b9311 is committed and pushed: Rebrew 3 metadata/source migration,
+obsolete adapter removal, whitespace cleanup and the first reviewed order edits.
+The pre-reorganization audit preserves all 8,376 function identities/bindings/
+extents and every non-comment token in 3,836 migrated C/header files.
 
-Docker access now succeeds in the reversing session. Current callback tests emit
-4,016 bytes for both clients and report SIZE_MISMATCH against 3,816 expected bytes.
-The initializer reference is bound to `he_RunProduktion`; both complete 450-byte
-caller bodies retain RELOC before and after the rename. Native-layout source
-hypotheses remain in scratch and have not replaced the project candidate.
-Receipts: `.scratch/goal26/production/`, with prior evidence in
-`.scratch/goal25/production/` and `.scratch/docker-diagnostics/`.
+Extracting cm_ExProdObjekt preserved its complete 993-byte object match but broke
+raw server layout: 30,085 file differences, 16 extra virtual text bytes and 32
+DRIFT data rows. The identical body and both identities are restored to command.c
+through the locked metadata API. The rebuilt raw file again equals all 286,720
+reference bytes; all 316 functions and 652 data comparisons pass, with zero
+relocation differences and Wine exports/load passing. The gate still fails lint.
+Do not split an attested TU merely to remove a conflicting target-order warning.
 
-The last completed pre-migration known-binding corpus retains server316/316,
-TL3597/3693 and Gold2096/2540. Seven contradictory old RELOC claims were repaired:
-a record-field selector, wrong floating-point constants/native coefficient
-grouping, and a tooltip self callback name collision. Eleven complete bodies,
-90 typed operands and 24 literal values agree independently with their references.
-Inline helper organization remains inferred. Literal/trusted-library binding gaps
-are recorded upstream in docs/IDEAS-GUILD.md, be2a7bb5.
+Six acyclic units now have reviewed order changes: character.c, msx.c,
+server_stats.c, sonnenstrahlen.c, GOLDTL.fcn_00404a00.c and server.c. The first three
+retain 36 client matches and the existing lowpoly mismatch. The latter three
+retain 45 complete function comparisons across their actual target contexts.
+Source-body audits preserve every complete definition. A new full server gate
+finishes after those changes: raw identity, 316 functions, 652 data rows and Wine
+checks pass. Only lint fails (32 warnings: 31 order findings plus scaffold drift).
+Receipt: .scratch/goal28/gate-final-current.log.
 
-The completed Rebrew 3 source-format migration is present but uncommitted here.
-Upstream d37f4a07 fixes managed duplicate-provider selection consistently in both
-batch verification and single-file call catalogs, and locates metadata-only
-function definitions accurately for lint. Its frozen full suite passes 11,727
-tests with 36 skips; a clean-checkout full push hook also passes. All stale
-upstream worktrees are audited, archived and removed; both repositories retain
-only main. Performance work is committed as 81a9ecbf and 6101d33c. Upstream
-6e8dbd5e repairs source splitting around dispatch initializers and callback tables,
-reusing the shared declarator classifier and retaining one storage owner. The
-combined suite passes 11,758 tests with 36 skips; commit and full push hooks pass,
-and remote main contains 6e8dbd5e. A token audit confirms that all 3,836 migrated
-C/header files retain their non-comment tokens, and all 8,376 function identities,
-bindings and extents survive the migration. Spaces on otherwise empty lines are
-removed in 2,650 files without changing line counts.
+All five additional migration regressions are repaired. Two shared providers now
+use canonical network declarations and the three-float view rather than TL raw
+addresses; Gold validates all eight data operands. TL retains its two matches.
+The ambiguous random-helper call and production dialog self/callback pointers
+are explicitly bound to the correct identities. IsRandomSecondChoice and
+ConfirmProductionSelection are inferred names; independent Boolean/Lua functions
+are preserved. The random helper accepts the observed unused event argument and
+retains its complete 18-byte match. Current helper/caller receipts are in
+.scratch/goal28/. VECTOR3 restores the already documented canonical type name;
+the DISPLAY_COUNTER stable ID is rechecked/rebound after header changes. These
+are accessed views, not newly established storage owners.
 
-Accurate lint initially exposes 62 source-order findings in 11 units. Ordering
-character.c, msx.c and server_stats.c by all their target contexts reduces lint
-to 38 warnings, including a newly exposed missing blocker. Their 37 previously
-matched client bodies retain RELOC; the existing ch_Updatelowpoly size mismatch
-remains. Five units have conflicting server/client orders, so a one-target sort
-is insufficient. All three data-conflict inventories report zero conflicts and
-duplicate definitions. Both compiler images pass reproducibility smoke checks.
-The completed migration comparison has 27 Docker timeout errors and five prior
-match regressions: stale raw Gold addresses in two providers and three ambiguous
-callee/self bindings. Correct Gold candidate sources already exist, but the
-managed rows selected the shared TL-address bodies. Do not restore stale verdicts.
-Evidence: .scratch/goal27/.
+Upstream d37f4a07 repairs provider selection and metadata-only lint locations;
+6e8dbd5e repairs split dependencies/callback-table ownership; 2468a895 repairs
+quoted-header rebasing. Upstream 4650b824 repairs conditional brace fragments that
+swallowed following function definitions and corrupted scope inventories. Its
+isolated full suite passes 11,800 tests with 36 skips, 332 focused tests and full
+commit/push hooks. Remote main contains it. The canonical checkout has a separate
+live CLI refactor; preserve its changes. The temporary rebrew-goal28-parser-check
+worktree supplied frozen tooling while those measurements ran; all finished and
+the checkout is removed. Both repositories again retain only main. New feature gaps and TU-regression evidence are recorded
+in upstream docs/IDEAS-GUILD.md; that latest documentation edit is pending commit.
 
-The user requests a checkpoint commit of the current code before the remaining
-repairs finish. This checkpoint is not a clean-lint or passing-gate claim. The
-fresh gate is running; unfinished warnings, provider/binding regressions and
-toolchain timeouts remain explicit below.
+Current unresolved lint is concentrated in five units with conflicting target
+orders: command.c, alchemistry_logic.c, friedhof_logic.c, spiel.c and loadsave.c.
+Last frozen lint has 31 W030 findings plus one generated instruction drift
+warning. The display-counter rebind clears its stale-evidence warning. Refresh instructions from the validated
+upstream once the live CLI refactor is stable, preserving the local rules. Data
+conflict scans finish with zero conflicts and duplicate definitions in all three
+targets (664/293/256 managed data rows). Retry the earlier
+27 compiler timeouts and reverify the header/type dependents before a clean
+corpus claim. A passing object report is not a passing client raw link.
 
-Next: finish the additional upstream include-path repair before further source
-splits. Extracting cm_ExProdObjekt preserves its two identities but exposes a
-second split bug: copied local includes no longer resolve from command_c. An
-actual compiler reports C1083; the shared AST-selected include rebasing fix has
-175 focused tests passing and its full suite is running. The generated artifact
-now uses that API to repair its six local header paths; its comparison is running.
-Then resolve every remaining order and
-the five provider/binding regressions, retry timed-out compiles and run the fresh
-server gate before committing the migration. All five selected split previews
-succeed after the first upstream repair. Preserve one
-shared definition and storage owner, and retain genuinely different Gold bodies.
-Then resolve the callback's remaining types/prototypes, full event extent and
-native layout; recover genuine discarded server source and complete both client
-raw links/data verification. Fixture or object scores cannot replace those checks.
+Independent operand reconstruction now reproduces three complete native bodies:
+the two network reset implementations and TL's random-choice helper (92 bytes).
+Every one of the eleven deliberately displaced bindings rejects equality.
+Receipt: .scratch/goal29/bound-bodies/results.json. The float setter still has an
+unresolved call and is excluded from that complete-operand claim. A fresh frozen
+all-target corpus check is running with four compiler jobs; its 3,973 source and
+configuration input hashes are unchanged. Do not describe it as finished until
+.scratch/goal29/corpus-current.json contains its terminal report.
+
+The complete shared he_RunProduktion candidate remains SIZE_MISMATCH (4,016 vs
+3,816 bytes) in both clients. Its 456 bounded native/model runs reach all 66 call
+sites but do not establish exhaustive equivalence or byte identity. Original
+event allocation, types/prototypes and native source placement remain unresolved;
+the two 450-byte initializer bodies retain RELOC. Preserve the prior evidence in
+.scratch/goal23/ through goal26 and the respective codegen documents.
+
+Next: verify all changed type/header
+users and complete operand proofs with rejecting controls, and refresh coverage.
+Resolve remaining native source-unit/order conflicts without changing attested
+server composition. Then recover the production callback's native types/layout,
+genuine discarded server inputs, client-only code and both full raw client links.
+Keep the goal active until the original completion criteria all hold.
 
 ## History
 

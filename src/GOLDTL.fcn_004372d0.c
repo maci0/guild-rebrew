@@ -15,7 +15,7 @@ struct IDev {
 
 #include "client_types.h"
 extern void* g_6b5de0;
-extern Vec3_67bbdc g_67bbdc;
+extern VECTOR3 g_67bbdc;
 extern float g_1052bd8;
 extern int g_1052bdc;
 extern char g_1052c40;

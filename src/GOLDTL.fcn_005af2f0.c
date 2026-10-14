@@ -55,7 +55,8 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
-int __cdecl fcn_005af2f0(int unused, char* a)
+/* Inferred name from the selection dialog and production-command packet. */
+int __cdecl ConfirmProductionSelection(int unused, char* a)
 {
 	int btn1;
 	Packet pkt;
@@ -121,7 +122,7 @@ int __cdecl fcn_005af2f0(int unused, char* a)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005af2f0, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) ConfirmProductionSelection, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 	return 1;

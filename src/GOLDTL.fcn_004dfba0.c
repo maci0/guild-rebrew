@@ -2,7 +2,7 @@ extern unsigned short* g_772f24;
 
 char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_00493640(int*);
-int __cdecl fcn_005049c0(int*);
+int __cdecl IsRandomSecondChoice(int*);
 int __cdecl fcn_004937f0(int*);
 int __cdecl fcn_00493800(int*);
 void __cdecl fcn_004c54c0(int, int, int, int);
@@ -27,7 +27,7 @@ void __cdecl fcn_004dfba0(char* a1, int* ev)
 		break;
 	case 1:
 		if (*(int*) (a1 + 0x10) == ev[5])
-			*(int*) (a1 + 0x94) = fcn_005049c0(ev);
+			*(int*) (a1 + 0x94) = IsRandomSecondChoice(ev);
 		break;
 	case 2:
 		if (*(int*) (a1 + 0x10) == ev[5])

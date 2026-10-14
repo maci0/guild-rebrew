@@ -1,10 +1,63 @@
+## Native operand controls and repair checkpoint (2026-10-14)
+
+- Independently resolve COFF operands from the managed catalog and compare the
+  complete network reset bodies in both clients plus TL's random-choice helper:
+  three bodies, 92 bytes, eleven wrong-binding controls all reject equality.
+  Receipt: .scratch/goal29/bound-bodies/results.json. The float setter's unresolved
+  call excludes it from this complete-operand claim; no raw-client image claim.
+- The frozen full-corpus check is still running with four compiler jobs. All
+  3,973 source/configuration input hashes remain unchanged. The current store
+  preserves every checkpoint EXACT/RELOC identity, but the terminal corpus report
+  remains pending. Record results from .scratch/goal29/corpus-current.json when
+  finished. Checkpoint the tested repairs at the user's request without declaring
+  clean lint or goal completion; the fresh gate log is
+  .scratch/goal29/gate-before-commit.log.
+
+## Conditional-source repair and native provider reconciliation (2026-10-14)
+
+- Restored cm_ExProdObjekt to attested command.c with its identical body and locked
+  identity writes after a raw-link regression: 30,085 bytes differed despite all
+  object matches. Restoration recovers all 286,720 bytes, 316 function matches,
+  652 data comparisons, zero relocation drift and Wine load/exports. Lint remains
+  failing; the new gate also finishes with every raw-image/function/data/Wine check
+  passing and only lint failing (31 W030 findings plus scaffold drift). Receipt:
+  .scratch/goal28/gate-final-current.log.
+- Three further acyclic units are ordered: sun effects, model motions and server
+  statistics. Complete definition bodies are unchanged; all 45 actual-target
+  comparisons pass. Five cyclic units still need native source-unit evidence.
+- Five prior-match regressions are repaired using canonical named data views and
+  address-selected call/self/callback bindings. Both Gold raw-address errors now
+  validate all eight data operands. Independent Boolean/Lua definitions remain.
+  Inferred names IsRandomSecondChoice and ConfirmProductionSelection are used;
+  temporary reference names are gone. The observed unused helper argument retains
+  all 18 bytes. VECTOR3 canonical naming is restored; DISPLAY_COUNTER evidence and
+  compiler offsets are rebound without changing its native stride or claiming an
+  allocation owner. Dependent source/header verification remains to be completed.
+- Upstream 4650b824 repairs conditional brace fragments in definition inventories,
+  source slices and variable scopes. It retains all structural alternatives,
+  original byte/line coordinates and conditional transform guards. Frozen full
+  suite 11,800 passed/36 skipped; focused 332 passed/one skipped; commit and full
+  push hooks pass, and remote main is verified. Live unrelated CLI refactoring is
+  preserved. The frozen measurements finish, and rebrew-goal28-parser-check is removed.
+  Both repositories retain only main. All three data conflict scans are clean
+  (664/293/256 managed rows, no conflicts or duplicate definitions).
+- Additional feature gaps are recorded upstream: eligible-target file checks,
+  raw-TU effects of splitting, native-reference selection for ambiguous renames,
+  and symbolizing evidenced views before a raw link exists. Documentation changes
+  await commit. Evidence and active receipts: .scratch/goal28/; test/hook logs use
+  rebrew-goal28 under /tmp and /dev/shm. The full three-image/source-fidelity goal
+  is unachieved; neither this checkpoint nor object matches establish completion.
+
 ## Provider selection and Rebrew 3 validation (2026-10-14)
 
-- At the user's explicit request, checkpoint the current migration, cleanup and
-  reviewed ordering work before the remaining repairs finish. The fresh gate is
+- At the user's explicit request, checkpoint e24b9311 is committed and pushed:
+  3,855 files, current migration, cleanup and
+  reviewed ordering work before the remaining repairs finish. Current lint has
+  37 warnings, no errors. The server build has no compile/link errors; the gate is
   running, and this commit does not claim clean lint or a passing raw-image gate.
   The extracted command artifact's six local include paths are repaired through
-  the upstream API; its comparison is running. Continue the outstanding checks
+  the upstream API; its complete server body retains RELOC (993 bytes), and TL
+  retains its pre-existing SIZE_MISMATCH. Continue the outstanding checks
   and source repairs after the checkpoint.
 - Upstream d37f4a07 makes batch provider selection and single-file call catalogs
   prefer the same managed file, symbol and kind. Two rejecting catalog tests
@@ -39,7 +92,7 @@
   have cycles in command.c, alchemistry_logic.c, friedhof_logic.c, spiel.c and
   loadsave.c. All five selected shared-definition split previews now succeed.
   Three units are reordered using all target rows and preserve complete bodies;
-  both client contexts retain 37 RELOC matches, with the existing lowpoly size
+  both client contexts retain 36 RELOC matches, with the existing lowpoly size
   mismatch unchanged. Their all-target test envelopes also return a no-identity
   error for server; eligible-target selection is recorded upstream as a gap.
   Lint falls to 38 warnings. A token audit over
@@ -50,7 +103,9 @@
   but its copied includes expose C1083. The additional upstream repair shares
   AST-selected include rebasing with merge, covers bare sibling and parent paths,
   and leaves comments, strings and unresolved/system includes untouched. Focused
-  175 passed, one skipped; full suite is running before repairing the artifact.
+  175 passed, one skipped; full suite passes 11,761 with 36 skips. Upstream
+  2468a895 is committed with passing hooks. Its push hook is running in the clean
+  temporary rebrew-goal27-include-push checkout; remove that checkout afterward.
   Reorder constraints and managed-name blocker lookup gaps are recorded upstream.
 - Missing blocker explanations for TL4c4b00,44c460 and4f2fe0 are saved through
   address-selected CLI writes. All three data conflict scans report zero conflicts

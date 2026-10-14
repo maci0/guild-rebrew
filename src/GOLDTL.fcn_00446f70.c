@@ -1,6 +1,6 @@
 // SIZE 0xc
 #include "client_types.h"
-typedef Vec3_67bbdc Vec3;
+typedef VECTOR3 Vec3;
 
 // SIZE 0xc
 typedef struct {
@@ -26,8 +26,8 @@ typedef struct {
 
 extern int g_6b7fdc;
 extern int g_6b8484;
-extern Vec3_67bbdc g_67bbdc;
-extern Vec3_67bbdc g_6b86c4;
+extern VECTOR3 g_67bbdc;
+extern VECTOR3 g_6b86c4;
 extern int g_67a370;
 extern int g_6b805c;
 extern float g_10425fc;

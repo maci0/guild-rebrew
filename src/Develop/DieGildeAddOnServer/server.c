@@ -1784,6 +1784,22 @@ void __cdecl srv_FormatStatSkills(unsigned char* entity, char* out)
 	sprintf(out, "%i\t%i\t%i\t%i\t%i\t", entity[0x80], entity[0x81], entity[0x82], entity[0x83], entity[0x84]);
 }
 
+#if !(defined(REBREW_SERVER) && defined(REBREW_LEGACY_SERVER_LAYOUT))
+#include "../DieGildeAddOn/game/spiel.h"
+#include "server_stats.h"
+/* Name and unit inferred from the adjacent client statistic formatters. */
+void __cdecl srv_FormatStatTreasury(unsigned short* entity, char* out)
+{
+	int __cdecl gm_AccumulateTyped2(char* entity);
+
+	sprintf(out, "%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t",
+	    *(int*) ((char*) entity + 0x190), *(int*) ((char*) entity + 0x194),
+	    *(int*) ((char*) entity + 0x198), *(int*) ((char*) entity + 0x19c),
+	    *(int*) ((char*) entity + 0x1a0), *(int*) ((char*) entity + 0x1a4),
+	    gm_AccumulateTyped2((char*) entity), gm_WalkEntityChain(*entity));
+}
+#endif
+
 void __cdecl srv_FormatStatDumpEnd(void)
 {
 	char buf[0x400];
@@ -2217,20 +2233,3 @@ int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out)
 	*out = g_office_float_table[((int (*)[6]) g_office_role_templates)[entity[0x166]][1]][((int (*)[6]) g_office_role_templates)[role][1]];
 	return 1;
 }
-
-#include "../DieGildeAddOn/game/spiel.h"
-#include "server_stats.h"
-
-#if !(defined(REBREW_SERVER) && defined(REBREW_LEGACY_SERVER_LAYOUT))
-/* Name and unit inferred from the adjacent client statistic formatters. */
-void __cdecl srv_FormatStatTreasury(unsigned short* entity, char* out)
-{
-	int __cdecl gm_AccumulateTyped2(char* entity);
-
-	sprintf(out, "%i\t%i\t%i\t%i\t%i\t%i\t%i\t%i\t",
-	    *(int*) ((char*) entity + 0x190), *(int*) ((char*) entity + 0x194),
-	    *(int*) ((char*) entity + 0x198), *(int*) ((char*) entity + 0x19c),
-	    *(int*) ((char*) entity + 0x1a0), *(int*) ((char*) entity + 0x1a4),
-	    gm_AccumulateTyped2((char*) entity), gm_WalkEntityChain(*entity));
-}
-#endif

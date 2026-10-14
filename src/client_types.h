@@ -213,7 +213,10 @@ typedef struct {
 	float x;
 	float y;
 	float z;
-} Vec3_67bbdc;
+} VECTOR3;
+
+/* Three-float view; complete allocation and storage owner remain unresolved. */
+extern VECTOR3 g_67bbdc;
 
 /* g_68da68, g_9a9220 */
 typedef struct {

@@ -6,13 +6,8 @@
 #ifndef CLIENT_NET_STATS_H
 #define CLIENT_NET_STATS_H
 extern int g_14cbcc0[0x6a][4];
-extern int g_14cbcc0[0x6a][4];
-extern int g_6b7d58;
 extern int g_6b7d58;
 extern int g_6b7d54;
-extern int g_6b7d54;
 extern int g_6b7d60;
-extern int g_6b7d60;
-extern int g_6b7d5c;
 extern int g_6b7d5c;
 #endif

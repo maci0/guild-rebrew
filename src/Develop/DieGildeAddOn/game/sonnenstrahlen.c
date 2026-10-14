@@ -12,6 +12,20 @@ extern int SonnenstrahlenStartZeit;
 extern int SonnenstrahlenPhase;
 char* __cdecl fcn_00445600(char*, int, char*, char*);
 char* __cdecl fcn_00442910(char*, float*, float*, char*);
+void __cdecl StopSonnenstrahlen(char* objekt, int phase)
+{
+    int zeit;
+
+    zeit = g_6b7fac;
+    SonnenstrahlenAktiv = -1;
+    SonnenstrahlenStartZeit = zeit;
+    SonnenstrahlenPhase = phase;
+}
+void __cdecl fcn_00418860(char*);
+
+extern char* g_6b8014;
+extern char* g_6b5cf8;
+
 void __cdecl StartSonnenstrahlen(char* unused)
 {
 	int value;
@@ -20,10 +34,6 @@ void __cdecl StartSonnenstrahlen(char* unused)
 	SonnenstrahlenStartZeit = value;
 	SonnenstrahlenPhase = 0;
 }
-void __cdecl fcn_00418860(char*);
-
-extern char* g_6b8014;
-extern char* g_6b5cf8;
 
 char* __cdecl CreateSonnenstrahlen(void)
 {
@@ -61,14 +71,4 @@ char* __cdecl CreateSonnenstrahlen(void)
 	StartSonnenstrahlen(g_6b5cf8);
 	fcn_00418860(g_6b5cf8);
 	return g_6b5cf8;
-}
-
-void __cdecl StopSonnenstrahlen(char* objekt, int phase)
-{
-    int zeit;
-
-    zeit = g_6b7fac;
-    SonnenstrahlenAktiv = -1;
-    SonnenstrahlenStartZeit = zeit;
-    SonnenstrahlenPhase = phase;
 }

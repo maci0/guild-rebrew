@@ -1,6 +1,6 @@
 // SIZE 0xc
 #include "client_types.h"
-typedef Vec3_67bbdc Vec3;
+typedef VECTOR3 Vec3;
 
 // SIZE 0xc
 typedef Pal_1041d20 Pal;
@@ -39,8 +39,8 @@ extern char g_1040640[];
 extern int g_6b8300;
 extern int g_6b89c0;
 extern int g_67a370;
-extern Vec3_67bbdc g_6b86c4;
-extern Vec3_67bbdc g_67bbdc;
+extern VECTOR3 g_6b86c4;
+extern VECTOR3 g_67bbdc;
 extern Pal_1041d20 g_1041d20[6];
 extern char g_1041d80[];
 extern int g_6b8484;
