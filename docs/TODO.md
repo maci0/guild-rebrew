@@ -1,3 +1,44 @@
+## Object-transform animation reconstruction (2026-10-15)
+
+- TL412d30 is now inferred StartObjectTransformAnimation: a real C89 definition
+  builds two 88-byte records and twelve by-value options bytes, matching the
+  native 188-byte frame. Both records remain partly initialized as in the binary.
+  Native allocation labels identify the callee's object-animation service;
+  Kuna omits the stack-record work, so native writes supply the reconstruction.
+  The original function name/unit and Gold counterpart remain unestablished.
+- The complete body is 280 bytes, through RET412e47. Eight subsequent NOPs are
+  alignment before 412e50, separately evidenced rather than accepted as code.
+  Current test is NEAR_MATCHING230/280, with five data operands validated and the
+  unreconstructed callee still unresolved in the catalog. Two statement-climb
+  passes and a quick flag sweep do not close the scheduling/register differences.
+  No flag override, assembly or byte-match claim is added.
+- Current-source bounded angr/VEX checks compare return values, all three globals,
+  twelve by-value flag bytes and both complete 88-byte records in96 cases
+  (64 call paths), including callee changes to the active-player pointer. A wrong
+  position argument rejects. One modeled cdecl callee and seeded indeterminate
+  stack bytes limit the evidence; this is neither exhaustive nor a byte proof.
+  Receipt: .scratch/goal32/transition-trace-proof.json; replay:
+  uv run --frozen python .scratch/goal32/compare-transition-traces.py.
+- Private frame/flag layouts are compiler-checked and bound to stable type IDs.
+  Two four-byte declaration views occupy initialized .data with zero reference
+  bytes; neither establishes allocation ownership or verified linked data.
+  All-target lint retains0 errors/31 W030 warnings. Full data inventories have
+  no type conflicts, but TL reports6 existing multiple-definition cases for year,
+  logging tables and a gzip static. Earlier conflict-filtered scans did not prove
+  definition ownership clean; these reports need target/provider/scope triage.
+- The locked UEFI1.11 abi3 wheel contains a CPython3.10-named extension and breaks
+  angr import under3.13. Building its locked source fixes the real import;
+  pyproject.toml records no-binary-package so synchronization reproduces the repair.
+  Receipts: repair-uefi-source.log and the final integrated-transition trace log.
+- Upstream ae530804 records the modeled call-input comparison feature gap in
+  docs/IDEAS-GUILD.md. Commit hooks pass; required full-suite push checks are
+  running (.scratch/goal32/upstream-call-gap-push.log, session94348).
+- All ten existing TL users of the two newly cataloged globals pass fresh
+  comparisons; no prior byte match is lost. The terminal server gate passes
+  all316 functions, all652 data comparisons, identical286720 raw bytes, imports,
+  relocations, library/profile checks and Wine. Only31 existing W030 warnings
+  fail it. Receipts: transition-users-audit.json and gate-transition.log in goal32.
+
 ## Shared lighting integration and current server gate (2026-10-15)
 
 - One registered C89 UpdateSceneLighting definition serves TL450a00/Gold453890.

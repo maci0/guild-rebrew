@@ -147,8 +147,10 @@ registration and shared-definition renaming use Rebrew's managed writers/CLI.
 The obsolete TL setter include override is removed; inherited flags are unchanged.
 Three audited, unbound Gold duplicates are retired after canonical-provider tests;
 backups/receipts remain under .scratch/goal31/retired-duplicate-sources/.
-Data scans report no conflicts or duplicate definitions in all three targets
-(664/293/260 rows). Current lint has zero errors and 31 W030 findings in command.c,
+Conflict-filtered data scans had no type conflicts (664/293/260 rows); they did
+not prove definition ownership clean. The current full TL scan reports six
+existing multiple-definition cases requiring target/provider/scope triage.
+Current lint has zero errors and 31 W030 findings in command.c,
 alchemistry_logic.c, friedhof_logic.c, spiel.c and loadsave.c. Native source-unit
 and ordering evidence is required; keep the attested server composition intact.
 
@@ -194,7 +196,27 @@ bounded runs reach all 66 call sites but do not prove exhaustive behavior or byt
 identity. The two 450-byte initializer matches remain; native types/event extent
 and original placement are unresolved. Preserve prior goal23–goal26 evidence.
 
-Next: resolve remaining source-unit/type/data evidence and selected raw-link providers,
+TL412d30 now has a real inferred StartObjectTransformAnimation definition,
+NEAR_MATCHING230/280 with its native 188-byte frame. Five data operands validate;
+callee4339e0 and the Gold counterpart remain unresolved. Its two88-byte frames
+and twelve by-value option bytes remain partly initialized. Current-source
+angr/VEX comparison passes96 bounded cases including64 call paths and callee
+player-pointer changes; wrong-position control rejects. This is no exhaustive
+or byte proof. Private frame/flag type bindings and two initialized-data declaration
+views are recorded through managed writers. Native owners/original unit are unknown.
+Receipts: .scratch/goal32/integrated-transition-test.json, transition-trace-proof.json,
+transition-extents.json and frame/flags-type-bind.json. The locked UEFI1.11 source
+build repairs angr's import; pyproject.toml prevents the broken CPython3.10 wheel
+from returning under3.13. Upstream ae530804 records the call-input proof gap;
+its full-suite push check is running (session94348, upstream-call-gap-push.log).
+All ten existing TL users pass fresh comparisons without lost byte matches.
+The terminal new server gate passes316 functions,652 data comparisons, full
+raw identity and Wine/library/profile checks; only the31 ordering warnings fail.
+Receipts: .scratch/goal32/transition-users-audit.json and gate-transition.log.
+
+Next: resolve the six full data definition reports, distinguish target-selected
+definitions from genuine duplicate storage, and complete source-unit/type/data
+evidence and raw-link providers;
 recover genuine discarded server inputs and client code, and build both raw clients.
 Keep the original completion criteria and the goal active.
 

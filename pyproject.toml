@@ -20,6 +20,9 @@ dev = [
 
 [tool.uv]
 package = false
+# The 1.11 abi3 wheel contains a CPython 3.10-only compressor extension.
+# Build the locked source for our interpreter so angr's loader can import it.
+no-binary-package = ["uefi-firmware"]
 # angr (<=9.3.1) pins capstone==5.0.6, which conflicts with rebrew's
 # capstone>=5.0.8 (PYSEC-2026-3544 advisory fix).  capstone 5.0.9 is
 # backward-compatible with angr's usage, so force the newer version.

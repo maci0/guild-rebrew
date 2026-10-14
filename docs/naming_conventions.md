@@ -1,3 +1,15 @@
+### Object-transform animation wrapper (2026-10-15)
+
+`StartObjectTransformAnimation` is inferred for TL0x00412d30. No original spelling,
+prefix, source unit or Gold counterpart is established. Its private source unit
+and `D3_OBJ_ANIM_FLAGS`/`D3_OBJ_ANIM_FRAME` names are inferred. Native allocation
+labels attest the called service's `d3_int:CreateObjAnim` and frame-data purpose.
+The frame stride is88 bytes; options occupy12 bytes by value. Unknown fields and
+bits retain `unbekannt_*`/bit-position names and are not given invented meanings.
+The numeric global spellings predate this reconstruction and are retained as
+declaration views. Their storage owners remain unknown. The helper is a near
+match with bounded call-input evidence, not a byte match or original-unit proof.
+
 ### Private CRT input helper (2026-10-15)
 
 Gold 0x005e3a71 is the attested private `_un_inc` (`__un_inc` in COFF),

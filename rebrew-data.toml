@@ -17526,3 +17526,27 @@ section = ".data"
 note = "Existing byte flag declaration view, 1-byte C access width. Native helper/slot references and rejecting operand controls establish these accesses; complete backing allocation and storage owner remain unknown. Extern only in canonical client_lighting.h. PE zero-filled .data tail, not initialized file bytes; no data verdict. Names and interface are inferred."
 updated_by = "data"
 updated_at = "2026-10-14T16:42:06+00:00"
+
+["GOLDTL.0x006b5cbc"]
+file = "src/StartObjectTransformAnimation.c"
+name = "g_6b5cbc"
+kind = "GLOBAL"
+type = "int"
+size = 4
+section = ".data"
+storage_kind = "alias"
+note = "Four-byte declaration view accessed by TL object-animation callers in initialized .data; reference bytes are zero. No allocation, storage owner or complete backing extent established. Existing numeric name retained; inferred meaning pending. Function comparisons do not verify data."
+updated_by = "data"
+updated_at = "2026-10-14T17:59:48+00:00"
+
+["GOLDTL.0x006b5cc0"]
+file = "src/StartObjectTransformAnimation.c"
+name = "g_6b5cc0"
+kind = "GLOBAL"
+type = "int"
+size = 4
+section = ".data"
+storage_kind = "alias"
+note = "Four-byte declaration view accessed by TL object-animation callers in initialized .data; reference bytes are zero. No allocation, storage owner or complete backing extent established. Existing numeric name retained; inferred meaning pending. Function comparisons do not verify data."
+updated_by = "data"
+updated_at = "2026-10-14T17:59:48+00:00"
