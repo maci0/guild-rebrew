@@ -1130,6 +1130,29 @@ and caller proofs: .scratch/goal23/pool-unification/. Original semantic evidence
 This is a semantic shared-name choice anchored in the existing server reconstruction, not an original-symbol or log-string attestation. The existing `int __cdecl gm_RandomMod(unsigned short n)` C form produces all32 native bytes in each image, including a typed call to that image's stock `rand`. It does not prove unique original signedness or parameter spelling. Caller prototype narrowing remains unresolved; the rename preserves caller declaration types. Evidence: .scratch/goal-random-helper/consolidation/native-shared-body-audit.json and consolidation-scope-check.json. Full-tree verification63165 is accepted: all existing matches retained and the TL helper added. Five prior mismatches have stricter deltas under the newly bound call catalog; before/after compiled bytes are identical.
 
 
+### Shared building destruction (2026-10-15)
+
+`cm_ExDestroyBuilding` is an inferred command-handler name, shared by SERVER
+`0x1000f680`, GOLDTL `0x4cbc90` and GOLD `0x4cb100`. Native command tables
+select these handlers at index `0x3b`; the client handlers previously used the
+numeric name `fcn_004cbc90`. The server diagnostic names `cm_ExSetGebUpgrade`
+instead, an apparent native copy-paste error preserved literally with line
+`0x4c32`. It does not attest the reconstructed destructor name.
+
+The common definition in `command.c` shares building lookup, child traversal,
+clearing the `+0x16c` field of 768 records at stride `0x21c`, and the reply tail.
+Client guards preserve rendering and handle teardown; the server keeps its
+missing-building log. The field view uses the existing `g_slot_table` backing
+object in all targets and introduces no storage definition. `saved_mode` and
+the other descriptive locals are inferred.
+
+Client query, child-removal and cleanup helpers keep their existing numeric
+bindings because their definitions are not yet unified with the server helpers.
+Gold resource destruction selects its own `fcn_00447190` identity. Full client
+caller bodies and independently reviewed operands agree, but this does not
+verify the helper providers or complete client images. Receipts:
+`.scratch/goal38/destroy-native-proof.json` and `comparison-preservation.json`.
+
 ### Existing resolver name shared across builds (2026-10-04)
 
 The existing descriptive SERVER name `gm_ResolveEntityById` now identifies the

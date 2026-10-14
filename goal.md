@@ -132,8 +132,8 @@ ca00/ca90 sequence with the chain now in command.c.obj; it is a reconstructed ma
 Seven false TL source bindings are retired after native Kuna review:
 57c7b0,5974e0,5d6030,4c35f0,4b0220,44a120,422150. Their native inventory,
 extents and failed-comparison history remain. Actual client destruction
-TL4cbc90/Gold4cb100 and dynasty initialization TL4adcd0 already have matched
-bodies but are not yet unified with the server variants. Factory TL5043d0 is
+TL4cbc90/Gold4cb100 now shares the server command.c definition. Dynasty
+initialization TL4adcd0 has a matched body but remains separate. Factory TL5043d0 is
 identified without a source provider: the server seed emits1050 versus1488
 native bytes. Its SERVER assembly is guarded; the client branch uses C memset.
 Four stale SERVER failure rows outside the image and two retired-source flag
@@ -173,10 +173,25 @@ functions and do not establish ahm_ResetEntityState ownership. Do not apply
 those bulk merge suggestions as native source evidence. Receipts:
 .scratch/goal37/preservation.json,inventory-*-repair.json,recommend-summary.json
 andgate-alchemy-cleanup.log. The selected inventory-edit CLI gap is recorded
-as upstreamf03077b5; its required push checks are running.
+as upstreamf03077b5; its required commit and full push checks pass, and it is pushed.
 
-Next: get direct native unit/caller evidence for the distant
-ahm_ResetEntityState and unify the evidenced client command bodies. Keep the attested cm_ExProdObjekt TU: its
+The building destructor now has one C89 body at SERVER1000f680,
+TL4cbc90 and Gold4cb100, preserving native client renderer extras and server
+logging. It uses the same backing-object field view in all three targets.
+Both complete265-byte client bodies match with all34 operand sites resolved;
+30 shifted-destination controls reject. All79 command comparisons retain
+their byte results, including75 byte matches, and all6020 strong statuses stay.
+The unowned numeric duplicate is removed. The final full server gate passes;
+all-target lint is0/0 and all three data inventories have no type conflicts or
+duplicate definitions. Client helper providers and full client data verification
+remain open. Name and local spelling are inferred. Receipts:
+.scratch/goal38/destroy-native-proof.json,comparison-preservation.json,
+preservation.json andgate-destroy-final.log. Upstreamb1a5de80 records the
+missing all-target data inventory command; its push checks are running.
+
+Next: unify the evidenced query, child-removal and building-cleanup helpers,
+repair the Gold resource destructor's byte return, and get direct native
+unit/caller evidence for the distant ahm_ResetEntityState. Keep the attested cm_ExProdObjekt TU: its
 previous split changed30085 raw bytes and drifted32 data rows. Recover genuine
 discarded server inputs, finish source-unit/type/data/provider evidence and
 client code, and build both raw clients. Keep the original goal active.

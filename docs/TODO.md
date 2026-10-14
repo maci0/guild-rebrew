@@ -53201,8 +53201,35 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   extent is shortened at an early return and no callback bytes are dropped.
 - recommend now runs; its largest groups contain thousands of functions and
   remain insufficient evidence for native unit moves. The reviewed inventory
-  edit workflow gap is committed upstream asf03077b5, push checks pending.
+  edit workflow gap is committed and pushed upstream asf03077b5; required
+  commit checks and the full push suite pass.
 - Receipts: .scratch/goal37/alchemy-*-clean.json, gate-alchemy-cleanup.log,
   inventory-*-repair.json, tail-current-test.json, helper-current-test.json,
   recommend-repaired.json and preservation.json. Building-destructor shared C
   is being reviewed without edits; raw client images and full fidelity stay open.
+
+### 2026-10-15: share building destruction across three targets
+
+- Native command-table index0x3b pairs SERVER1000f680, TL4cbc90 and
+  Gold4cb100. One command.c definition shares lookup, child traversal,
+  clearing768 strided fields and replies; guards preserve native logging and
+  client renderer/handle teardown. No whole algorithm is duplicated.
+- All targets use the existing g_slot_table backing object at field+0x16c
+  through exclusive end+0x6556c. No storage or header definition changes.
+  Numeric client query/removal/cleanup providers remain separate; Gold resource
+  teardown uses its actual fcn_00447190 identity. Declarations follow existing
+  provider signatures. Name and descriptive locals remain inferred.
+- Full265-byte bodies in both clients agree after resolving all34 operand
+  sites independently;30 wrong-destination controls reject. All79 command
+  comparisons preserve byte results, including75 byte matches. All6020 prior
+  EXACT/RELOC statuses remain; both client identities follow through CLI rehome.
+  The old unowned GOLDTL.fcn_004cbc90.c is removed after owner/reference checks.
+- Final server gate passes with286720 raw bytes identical,316 game functions,
+  652 data comparisons,100 imports and relocation/Wine checks. All-target lint
+  is0 errors/0 warnings; all three data inventories have no type conflicts or
+  duplicate definitions. These facts do not verify full client data or images.
+- Upstreamb1a5de80 records the missing all-target data inventory command;
+  commit checks pass and required push checks are running. Receipts:
+  .scratch/goal38/{destroy-native-proof,comparison-preservation,preservation}.json,
+  gate-destroy-final.log,lint-final.json anddata-*-final.json. Helper unification,
+  original source fidelity and both raw clients remain unfinished.

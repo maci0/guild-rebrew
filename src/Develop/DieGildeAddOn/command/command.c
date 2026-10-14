@@ -3725,40 +3725,106 @@ int __cdecl cm_ExSetGebUpgrade(int cmd, char* result)
  * building by ID, calls gm_CleanupBuildingEntity to deallocate
  * contents, and removes it from the game world. */
 
+#ifndef REBREW_SERVER
+extern int g_6b8010;
+extern char* g_7e2aa0;
+extern int g_773dd8;
+void __cdecl fcn_00530510(void);
+unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+void __cdecl fcn_00506300(char*);
+void __cdecl fcn_004432d0(int, int);
+void __cdecl fcn_004550b0(int, int*);
+#ifdef REBREW_GOLD
+int __cdecl fcn_00447190(int);
+#else
+char __cdecl fcn_00442be0(void*);
+#endif
+void* __cdecl fcn_00426cc0(int);
+int __cdecl fcn_00428720(char*);
+int __cdecl fcn_00504130(unsigned char*);
+#endif
+
 int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 {
+#ifndef REBREW_SERVER
+	int saved_mode;
+#endif
 	ushort* building;
 	ushort* match;
 	int* slot_scan;
+#ifndef REBREW_SERVER
+	void* handle;
+
+	saved_mode = g_6b8010;
+#endif
 
 	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building == (ushort*) 0x0) {
+#ifdef REBREW_SERVER
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x4c32,
 			"cm_ExSetGebUpgrade(): Could not find geb",
 			1
 		);
+#endif
 		return 1;
 	}
 
+#ifndef REBREW_SERVER
+	if ((char*) building == g_7e2aa0) {
+		fcn_00530510();
+	}
+#endif
+
+#ifdef REBREW_SERVER
 	match = gm_ff_Objekt(0, 2, 7, 4, 0x1d);
+#else
+	match = fcn_00502cd0(0, 2, 7, 4, 0x1d);
+#endif
 	while (match != (ushort*) 0x0) {
 		if (*(int*) (match + 0xe) == *(int*) ((int) building + 1)) {
+#ifdef REBREW_SERVER
 			gm_RemoveEntityLink((int) match);
+#else
+			fcn_00506300((char*) match);
+#endif
 		}
 		match = gm_NextEntityQueryMatch();
 	}
 
-	slot_scan = &g_entity_records;
+	slot_scan = (int*) (g_slot_table + 0x16c);
 	do {
 		if ((ushort*) *slot_scan == building) {
 			*slot_scan = 0;
 		}
 		slot_scan = slot_scan + 0x87;
-	} while ((int) slot_scan < (int) ((char*) &g_entity_records + 0x65400));
+	} while ((int) slot_scan < (int) (g_slot_table + 0x6556c));
 
+#ifndef REBREW_SERVER
+	fcn_004432d0(0, 1);
+	if (g_773dd8 != 0) {
+		fcn_004550b0(*(int*) ((char*) building + 0x61), (int*) g_773dd8);
+	}
+#ifdef REBREW_GOLD
+	fcn_00447190(*(int*) ((char*) building + 0x61));
+#else
+	fcn_00442be0(*(void**) ((char*) building + 0x61));
+#endif
+	if (*(int*) ((char*) building + 0x95) != -1) {
+		handle = fcn_00426cc0(*(int*) ((char*) building + 0x95));
+		if (handle != 0) {
+			fcn_00428720((char*) handle);
+		}
+		*(int*) ((char*) building + 0x95) = -1;
+	}
+	fcn_004432d0(saved_mode, 1);
+#endif
+#ifdef REBREW_SERVER
 	gm_CleanupBuildingEntity((uchar*) building);
+#else
+	fcn_00504130((uchar*) building);
+#endif
 
 	if (result != (char*) 0x0) {
 		*result = '\x02';
