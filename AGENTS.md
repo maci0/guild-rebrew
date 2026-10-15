@@ -4,8 +4,8 @@
 
 ## Project
 
-- **Target**: `server.dll` (pe, x86_32)
-- **Compiler**: msvc-6.0-sp5 (`docker image rebrew/msvc:6.0-sp5-win32`)
+- **Target**: `Europa1400Gold_TL.exe` (pe, x86_32)
+- **Compiler**: msvc-6.0-sp5-pp (`docker image rebrew/msvc:6.0-sp5-pp-win32`)
 - **Language**: C89 — follow compiler constraints below
 - **Config**: `rebrew-project.toml` (all tools read from here)
 - **Function inventory**: `src/<target>/function_structure.json` (`[{va, size, name}]`
@@ -19,7 +19,7 @@
 1. rebrew todo --json                          # get highest ROI action items
 2. rebrew library match --lib <runtime>.LIB --va 0x<VA>   # is it already in a library?
 3. rebrew skeleton 0x<VA>                      # only for an inventory VA without source
-4. rebrew test src/server.dll/<func>.c --json  # compile + compare
+4. rebrew test src/Europa1400Gold_TL.exe/<func>.c --json  # compile + compare
 5. # iterate code until STATUS: EXACT or RELOC
 6. rebrew test --all --json                    # batch promote all ready functions
 ```
@@ -122,7 +122,7 @@ control verbosity/version. Read each operation's help for its write behavior;
 C source may carry an optional address immediately above a definition or variable:
 
 ```c
-/* ADDRESS: server.dll 0x10001234 */
+/* ADDRESS: Europa1400Gold_TL.exe 0x10001234 */
 void __cdecl function_name(void)
 {
     /* stub */
@@ -199,7 +199,17 @@ semantic fields can remain byte regions. `rebrew-types.toml` is CLI/API-managed
 change, review the native evidence and rebind the same ID. Heap instances are
 identified by allocation/use sites; static instances keep their data VAs.
 
-## Compiler Constraints (msvc-6.0-sp5)
+
+Local compiler execution is selected with `[compiler] execution_backend =
+"docker" | "podman" | "unshare"` (per-target compiler overrides apply).
+The default uses `REBREW_CONTAINER_RUNTIME`, normally Docker. `unshare` is an
+experimental opt-in for trusted 32-bit MSVC/Wine images on unprivileged Linux
+x86_64; it still uses the immutable toolchain image filesystem, with no host Wine
+fallback. `rebrew verify --experimental-unshare` selects it for one run.
+See the [toolchain guide](https://github.com/maci0/rebrew/blob/main/docs/TOOLCHAIN.md#experimental-unshare-backend)
+for prerequisites, cleanup and isolation limits.
+
+## Compiler Constraints (msvc-6.0-sp5-pp)
 
 - **C89 only**: no `for(int i=...)`, declare all variables at block top
 - **Comments in code**: use `/* */` (C89). Do not add a `// FUNCTION:` line; identity is a `MODULE.0xVA` row

@@ -1087,3 +1087,16 @@ The project default target is independent. With TL selected, the server's old
 and `final` target also implicitly selected TL for a server DLL. These calls now
 select `server.dll` explicitly. Changing the interactive default must not change
 server build inputs or select a different reference for its verification.
+
+
+### Same-target names need reviewed reference ownership (2026-10-16)
+
+Two independent definitions can share a C name even within one target. Select
+the definition by MODULE.0xVA and preview `source rename --shared-definition`
+with a `--reference-owner FILE=MODULE.0xVA` for every ambiguous reference file.
+Review the exact inputs and apply with `--expected-digest`; a file with mixed
+ownership remains unsupported. Whole-file ownership is a source claim, not
+native call proof. Decode actual target destinations and reverify all bound
+contexts; never recover a rejected verdict by suppressing known-binding checks.
+Goal53 retains both algorithms and all four logical-reset reference files,
+recovering TL 0x5392a0 only after its actual 0x5012b0 callee is unambiguous.

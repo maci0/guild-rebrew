@@ -54291,3 +54291,43 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   full-suite/push logs are in its .scratch/crun-prototype. Guild has only main and
   no loose files. The active upstream experimental-unshare worktree is preserved;
   it is another session's uncommitted work. Production remains Docker.
+
+### Goal53 — distinguish active-context processing from logical reset (2026-10-16)
+
+- Renamed only TL `0x4297c0` / Gold `0x42aef0` to inferred ProcessActiveContexts
+  through the supported shared-definition writer and reviewed file-level owners.
+  Both 59-byte bodies retain all four native operands. Kuna/native evidence for
+  the processing helper excludes an entity-table reset. Original TU placement
+  and identifier remain inferred; no new module prefix is invented.
+- Retained the real gm_ResetAllEntities in spiel.c at SERVER 10015cb0 / TL 5012b0 / 
+  Gold 4fe7f0. entity.h, loadsave.c, server.c and TL 5392a0's source stay byte-for-byte
+  unchanged. Both bound server calls and the TL call have decoded native operand
+  proof to the logical reset. Unbound target contexts gain no provider claim.
+- Before/after complete comparisons cover 339 bytes. The wrong context-walker operand
+  and all per-symbol +4 controls reject. Caller operands without managed bindings
+  remain explicit native comparison hypotheses; no client raw-link claim.
+- TL 5392a0 earns fresh RELOC221 after resolving the ambiguity. All 8,388 old IDs,
+  histories and 6,034 old strong verdicts survive. This recovers rejected evidence;
+  no new game function body or new TL reconstruction is claimed.
+- Upstream c8ee8d12 adds guarded reference-owner previews/apply; 712ad9e0 fixes
+  refresh --dry-run writing files; 43802a3b fixes scaffold lint rendering the first
+  target instead of the configured default. New regressions first fail, then pass;
+  429 focused tests plus one skip and the final mandatory full suite pass.
+  The commits are merged/pushed to main with all 23 other-session files retained
+  unstaged. No other session's work is stashed, committed or discarded.
+- Final all-target lint 0/0; type checks 1,021 each with no findings; data conflict/
+  duplicate-definition counts 0 across targets. Generated guidance is refreshed;
+  project rules are exactly preserved. Real dry-run replay leaves 24 files and
+  mtimes unchanged. Main/PP Docker images work; no toolchain rebuild was needed.
+- Final server gate passes 316 functions / 652 data checks, complete 286,720-byte raw
+  identity, sections/imports/exports/relocations/layout and Wine loading/exports.
+  The initial run failed only for scaffold drift; its log is retained separately.
+- TL game bytes 692,752 (+221 recovered), libraries 390,163, padding 33,587; accounted
+  1116502/2491370 (44.8%). Gold game 377,902, accounted 20.4%, unchanged. Neither
+  client raw image nor initialized-data verification is complete.
+- Removed the merged local feature worktree and an old empty .gauntlet/scratch-l4
+  directory tree. No evidence files or active upstream accounting edits removed.
+  Receipts: .scratch/goal53/{native-proof-before,native-proof-after,reference-
+  ownership-proof,rename-final-preview,rename-applied,preservation,lint-all-final,
+  data-all,types-*,status-final,refresh-real-replay}.json and server-gate-final.log.
+  Upstream .scratch/goal53-upstream retains full regression/push and merge receipts.

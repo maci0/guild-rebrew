@@ -1934,3 +1934,21 @@ inferred; char* model/resource and float* position are reconstructed access
 contracts, not recovered original typedef spellings. The allocation factory and
 conditional forwarder retain their provisional fcn names. Native word consumer
 40342a independently supports a 16-bit model flag view at+8c.
+
+### Active-context processing (2026-10-16)
+
+`ProcessActiveContexts` is inferred for TL `0x4297c0` / Gold `0x42aef0`.
+Both 59-byte bodies walk 128 records at stride `0xc98`, process records whose
+byte `+0x124` has bit 0 set, and clear the current-context pointer afterwards.
+The processing callee saves/restores execution and rendering context and runs
+the context's operation loop; it does not reset the game's entity table. Kuna
+and native receipts are retained in `.scratch/goal53`. No original module prefix
+or source-unit path is attested, so the unprefixed name and existing placement
+in `game/GOLDTL.spiel.c` remain inferred.
+
+The independent logical reset retains `gm_ResetAllEntities` at SERVER
+`0x10015cb0`, TL `0x5012b0` and Gold `0x4fe7f0`. Native calls from the two bound
+server callers and TL `0x5392a0` reach that definition. The shared header and
+all three physical caller files keep their reset declarations/calls unchanged.
+Reviewed file-level ownership authorizes the selected-definition rename; it
+does not establish providers for unbound contexts or client raw-link identity.

@@ -26,11 +26,11 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 
 
-// gm_ResetAllEntities
+/* Inferred execution-context role/name; original source-unit ownership unresolved. */
 extern char* g_6b7e94;
 extern char* g_6b7e98;
 extern void __cdecl fcn_00429670(unsigned char*);
-void __cdecl gm_ResetAllEntities(void)
+void __cdecl ProcessActiveContexts(void)
 {
 	int i;
 	unsigned char* e;
@@ -43,4 +43,3 @@ void __cdecl gm_ResetAllEntities(void)
 	}
 	(*(unsigned char**)&g_6b7e98) = 0;
 }
-
