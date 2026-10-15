@@ -111,7 +111,7 @@ The full goal remains unfinished: both raw client images, full initialized-data
 verification and ownership, unresolved code ranges, shared source contracts and
 faithful recovery of discarded server inputs remain open. Prioritize new TL
 matched bytes and proven library gaps; report cleanup and validation separately.
-The latest complete server gate, `.scratch/goal45/gate-final.log`, passes all286720 raw
+The latest complete server gate, `.scratch/goal45/gate-post-upstream-fixtures.log`, passes all286720 raw
 bytes,316/316 game and652/652 data comparisons, imports, relocations, toolchain
 alignment and Wine. Both compiler images exist. All-target lint is0/0; fresh
 three-target data inventories have no type conflicts or duplicate definitions.
@@ -164,17 +164,33 @@ reproducer fails on43fe499a and passes the fix in both strict modes. Independent
 same-named client definitions still need reviewed source/caller reconciliation;
 the supported rename refuses ambiguous references without writes. The missing
 explicit reference-ownership capability is recorded upstream in b1a24da3.
-Full upstream validation exposed additional source-root and assembly-artifact
-migration regressions. Repairs ae85d71c/f7ef0a45 pass241 focused tests and all
-commit hooks in the isolated upstream worktree. They are integrated into upstream
-main as94c9e0f9/07f17aaa; the affected product/test files are identical to the tested
-branch. The full suite is running in.scratch/goal45/upstream-full-suite-fixed.log;
-publication remains pending. This run has reached about two-thirds complete and
-exposed additional objdiff-project failures, currently under investigation.
-Do not claim upstream validation complete or resume game source promotion before
-that suite passes. Guild server validation remains green. Completed old test
-worktrees and two unused generated Wine prefixes were removed; native evidence,
-sources and Docker images remain.
+Source-root and assembly-artifact repairs ae85d71c/f7ef0a45 pass 241 focused
+checks and all commit hooks; upstream main includes them as 94c9e0f9/07f17aaa.
+The complete f7ef0a45 suite then finished with 62 failures, 12,118 passes and 36
+skips. Remaining failures included obsolete root-aware mocks, strict binding/path
+expectations, removed incidental imports and a real forced-merge rerun bug.
+
+The isolated upstream branch is now based on fd044c32, with b1ef8377/d5d15c7c
+repairing fixtures/API migration notes and merge validation. Forced reruns accept
+retained input anchors only for the selected prior output and matching identity;
+other-owner conflicts still reject before writes. All commit hooks pass, 588
+focused tests pass with three skips, and all 73 merge tests pass. The unpatched-code
+regression uses an explicit pytest source path: the default test configuration
+otherwise silently imports the patched tree. The complete fresh suite is running
+in.scratch/goal45/upstream-full-suite-final.log against committed tree
+62250045bf93f12b92ce54d69f063c978f634092. Do not claim a green full suite or resume
+game source promotion until its terminal result is checked. Both latest repairs are integrated into upstream main as f78478af/37637773;
+publication remains pending. Their product and test files equal the tested branch.
+Current-main coverage-project, packaging and API checks also pass: 121 tests,
+three skips. The complete repaired-tree suite remains live and has passed its
+previously failing groups through the public API check.
+
+Guild checkpoint 44098478 is committed and pushed; it adds the two library origins
+and native boundary repairs, with no new game bytes. The completed old validation
+worktree was removed after integration and a process-use check. One private
+upstream validation worktree remains active. Guild server validation remains
+green; fresh all-target lint also passes with zero errors and warnings
+(.scratch/goal45/lint-all-post-upstream.json). Full reconstruction is unfinished.
 
 ## History
 

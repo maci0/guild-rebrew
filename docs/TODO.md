@@ -53586,3 +53586,35 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   are added. Current scaffold check and all-target lint pass. The repaired
   upstream suite reached about66% before reporting objdiff-project failures;
   further upstream diagnosis is in progress, not a passing full-suite claim.
+
+- Follow-up complete upstream run at f7ef0a45:62 failed,12118 passed,36 skipped
+  (upstream-full-suite-fixed.log). Do not describe this historical run as green.
+  Rebased isolated repairs onto fd044c32. b1ef8377 repairs objdiff mocks and exact
+  public API migration notes; d5d15c7c repairs the remaining root/path/anchor
+  fixtures and the genuine source merge --force rerun failure. All hooks pass;
+  588 focused tests pass/3 skip and all73 merge tests pass. Regression control
+  retains other-owner rejection and unchanged inputs/output. The before proof
+  is upstream-merge-before-canonical.log with explicit pytest pythonpath; the
+  earlier before.log imported patched source and is invalid as baseline proof.
+- Fresh full upstream suite is live in upstream-full-suite-final.log against
+  d5d15c7c tree62250045bf93f12b92ce54d69f063c978f634092. Its result, upstream
+  integration/publication and final validation remain pending. Guild44098478 is
+  pushed and its final gate/lint/data receipts remain valid. The completed old
+  private validation worktree and branch were removed after terminal/process
+  checks and integrated-code comparison. The current isolated worktree remains
+  live; preserve its untracked .venv symlink until commit hooks finish.
+
+- Both current repairs are integrated upstream as f78478af/37637773. Direct
+  comparison of all changed product/test files with d5d15c7c is empty. Upstream
+  main also contains62dc0d5a (epoch config timestamps); its affected tests and
+  package/public-surface gates are being checked separately. New all-target Guild
+  lint passes:3879/3879 files for each target, zero errors and warnings, recorded
+  in lint-all-post-upstream.json. Full upstream rerun and fresh server gate remain
+  live; preserve those process handles and wait for terminal results.
+
+- Fresh gate-post-upstream-fixtures.log is terminal PASS: all286720 raw bytes
+  equal, function/data/whole-image verification and Wine pass. Post-run audit
+  preserves all8381 identities and6024 strong statuses, with no identity/status/
+  size changes and byte-identical data/type stores. Only verification evidence
+  refreshes. Current-main additional tests pass121/3 skip. Full repaired-tree
+  suite remains live at78% with no reported failures; do not call it complete.
