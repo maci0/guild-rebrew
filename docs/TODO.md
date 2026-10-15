@@ -54299,7 +54299,7 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   Both 59-byte bodies retain all four native operands. Kuna/native evidence for
   the processing helper excludes an entity-table reset. Original TU placement
   and identifier remain inferred; no new module prefix is invented.
-- Retained the real gm_ResetAllEntities in spiel.c at SERVER 10015cb0 / TL 5012b0 / 
+- Retained the real gm_ResetAllEntities in spiel.c at SERVER 10015cb0 / TL 5012b0 /
   Gold 4fe7f0. entity.h, loadsave.c, server.c and TL 5392a0's source stay byte-for-byte
   unchanged. Both bound server calls and the TL call have decoded native operand
   proof to the logical reset. Unbound target contexts gain no provider claim.
