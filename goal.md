@@ -170,27 +170,51 @@ The complete f7ef0a45 suite then finished with 62 failures, 12,118 passes and 36
 skips. Remaining failures included obsolete root-aware mocks, strict binding/path
 expectations, removed incidental imports and a real forced-merge rerun bug.
 
-The isolated upstream branch is now based on fd044c32, with b1ef8377/d5d15c7c
-repairing fixtures/API migration notes and merge validation. Forced reruns accept
-retained input anchors only for the selected prior output and matching identity;
-other-owner conflicts still reject before writes. All commit hooks pass, 588
-focused tests pass with three skips, and all 73 merge tests pass. The unpatched-code
-regression uses an explicit pytest source path: the default test configuration
-otherwise silently imports the patched tree. The complete fresh suite is running
-in.scratch/goal45/upstream-full-suite-final.log against committed tree
-62250045bf93f12b92ce54d69f063c978f634092. Do not claim a green full suite or resume
-game source promotion until its terminal result is checked. Both latest repairs are integrated into upstream main as f78478af/37637773;
-publication remains pending. Their product and test files equal the tested branch.
-Current-main coverage-project, packaging and API checks also pass: 121 tests,
-three skips. The complete repaired-tree suite remains live and has passed its
-previously failing groups through the public API check.
+The repaired upstream full suite is terminal PASS:12,250 passed/36 skipped
+against d5d15c7c tree62250045bf93f12b92ce54d69f063c978f634092
+(.scratch/goal45/upstream-full-suite-final.log). Both repairs are integrated as
+f78478af/37637773; the changed product/test files equal the tested branch.
+Current-main coverage-project, packaging and API checks also pass121/3 skip.
+Both private upstream validation worktrees and branches were removed after
+integration, direct file comparisons and process-use checks. Preserve the separate
+active upstream release worktree/session.
 
-Guild checkpoint 44098478 is committed and pushed; it adds the two library origins
-and native boundary repairs, with no new game bytes. The completed old validation
-worktree was removed after integration and a process-use check. One private
-upstream validation worktree remains active. Guild server validation remains
-green; fresh all-target lint also passes with zero errors and warnings
-(.scratch/goal45/lint-all-post-upstream.json). Full reconstruction is unfinished.
+Guild d31f0323 is committed and pushed. The subsequent upstream main push exited1:
+all12,252 tests passed/36 skipped, but the pytest hook reported that files changed
+during its run and blocked publication. This is a hook failure, not a failed test
+or demonstrated transport error. The terminal evidence was sent to the upstream
+session; do not start competing pushes. Its4.1.0 release work is independent.
+
+New byte-focused TL triage is in.scratch/goal46. The intentionally capped
+start-function lane returns only50 entries even with--limit3000; the complete-lane
+feature gap is recorded in upstream docs/IDEAS-GUILD.md. Native extract inventory
+provides larger candidates without maintaining a second coverage store.
+
+TL4eba60 and Gold4e9ce0 are complete2,148-byte native counterparts:646
+instructions,1,800 identical fixed bytes and87 corresponding address operands,
+followed by12 alignment NOPs each (office-native-counterpart.json). A shared
+ordinary-C office-action candidate is in ignored scratch only. Initial2,080-byte
+output improved after preserving the cached second participant across both
+relationship calls and the full-width255 flag argument. The best scratch shape emits2,103 bytes against2,148; loop/input-view
+experiments remain measurements, not source adoption or new coverage. Native
+floating arithmetic and the six24-byte output records replace Kuna's omitted
+FPU expression and artificial split stack arrays. Before adoption, reconcile
+helper and caller contracts, resolve every operand/literal, and verify both
+clients without changing prior matches. No new game bytes are claimed.
+
+TL502fe0 also shares gm_AllocObjekt's server algorithm, but adds substantial
+client rendering work and intersects the unfinished camera interfaces. Kuna
+misses its indirect-switch bodies. The shared server seed emits1,371 bytes
+against2,016 native bytes and is not a valid client provider. Keep that trial
+separate; do not copy the incomplete seed or claim a client match.
+
+The full goal remains ACTIVE. Current client raw images, initialized-data bytes,
+shared interfaces and source ownership remain incomplete. Fresh goal46 gate-checkpoint.log passes raw server identity and all required
+checks. Fresh all-target lint is0/0 and data conflict/duplicate-definition counts
+are zero. The audit preserves all8,381 rows and6,024 strong statuses. Changed
+compiler evidence invalidated275 linked verdicts, which the same raw image then
+re-earned as EXACT; their prior history is retained. Production C and data/type
+stores are unchanged. See.scratch/goal46/scope-audit.json.
 
 ## History
 

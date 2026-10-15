@@ -53618,3 +53618,45 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   size changes and byte-identical data/type stores. Only verification evidence
   refreshes. Current-main additional tests pass121/3 skip. Full repaired-tree
   suite remains live at78% with no reported failures; do not call it complete.
+
+
+### Goal46 — large client bodies and terminal upstream validation
+
+- Correct the preceding live-run checkpoint: upstream-full-suite-final.log is
+  terminal PASS,12250 passed/36 skipped, at committed d5d15c7c/tree62250045.
+  The two integrated repairs equal the tested sources. Both own upstream
+  worktrees/branches were removed after terminal/process checks; their canonical
+  environment remains intact. Guild d31f0323 was pushed successfully.
+- The later main push80328 exited1. All12252 tests passed/36 skipped, but pytest's
+  pre-push hook reported files modified during the run; all other hooks passed.
+  See.scratch/goal45/upstream-main-push.log. Terminal evidence was sent to the
+  upstream session; its separate release push must not be interrupted or raced.
+- todo--category start-function--limit3000 still returns50 entries; the intentional
+  collection cap is a feature gap recorded upstream in docs/IDEAS-GUILD.md, with
+  replay and proposed complete/paged byte-focused triage. Existing binary extract
+  list supplies the larger native candidates for this session.
+- TL4eba60/Gold4e9ce0 have646 native instructions and complete2148-byte bodies,
+  with1800 identical fixed bytes and87 corresponding address operands. Both have
+  twelve trailing alignment NOPs. Receipt:office-native-counterpart.json in
+  .scratch/goal46. This is native counterpart evidence, not compiled-source proof.
+- The ignored office-actions C experiment preserves native floating arithmetic,
+  complete six-record output storage and both cached participant IDs across the
+  relationship calls. Initial2080B output is not a match. Best measured shape is2103B/2148 native,
+  with906 masked agreement bytes, not new coverage. Subsequent source shapes
+  are retained separately with no-promote JSON receipts; source/recipe and the
+  exact first differences are in.scratch/goal46/README.md. Outstanding helper/caller
+  contracts include the incorrectly zero-argument cost wrapper, the localized
+  variadic formatter, office record views and the skill-query object view.
+  No production C, managed identity or coverage is changed by these measurements.
+- TL502fe0 is a separate2016-byte gm_AllocObjekt counterpart candidate. The
+  unchanged shared server definition emits1371B/192 matching in the explicit TL
+  no-promote baseline. Native client cart rendering and indirect switch cases
+  must be recovered; Kuna's jump-as-call omissions are not valid source.
+
+- Fresh goal46 gate-checkpoint.log is terminal PASS:286720 raw bytes identical,
+  all316 game/652 data comparisons and complete required server checks pass.
+  All-target lint is0/0 across3879 files each; data-conflicts-all.json reports
+  zero type conflicts and duplicate definitions in allthree targets. Scope audit
+  preserves8381 rows and6024 strong statuses, with production C and data/types
+  byte-identical. Updated compiler evidence reverified275 linked EXACT rows;
+  their EXACT→RELOC→EXACT history is appended, with all prior history preserved.
