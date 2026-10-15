@@ -1,5 +1,5 @@
 double __cdecl fcn_0050f980(int, int, int);
-float __cdecl fcn_00507f10(unsigned short*, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_005c6270(void*, int);
 int __cdecl abs(int);
 
@@ -21,9 +21,9 @@ int __cdecl fcn_004aacb0(unsigned short* a1, unsigned short* a2, unsigned short*
 	if (a1 == a2)
 		return 1;
 	d2 = fcn_0050f980(*a2, *a1, 1);
-	q2 = fcn_00507f10(a2, 4);
+	q2 = fcn_00507f10((char*) a2, 4);
 	d3 = fcn_0050f980(*a3, *a1, 1);
-	q3 = fcn_00507f10(a3, 4);
+	q3 = fcn_00507f10((char*) a3, 4);
 	s2 = q2 * 0.34 + d2 * 0.66;
 	s3 = q3 * 0.34 + d3 * 0.66;
 	if (fcn_005c6270(a2, 0x2be) != 0)

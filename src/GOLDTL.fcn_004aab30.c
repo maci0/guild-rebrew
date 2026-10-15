@@ -1,7 +1,7 @@
 extern char s_67fb40[];
 
 char* __cdecl fcn_00508e40(int id);
-float __cdecl fcn_00507e70(char* e, char* t, int k);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c5530(char* msg);

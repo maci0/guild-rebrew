@@ -38,7 +38,7 @@ int __cdecl fcn_00519190();
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl fcn_005373e0(void*, int);
-float __cdecl fcn_00507f10(struct house*, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_0058ff60(char*, struct house*, int);
 void __cdecl fcn_00471e30(int);
@@ -99,17 +99,17 @@ void __cdecl fcn_00590070(char* who)
 			}
 		}
 		if (hh != 0) {
-			if (fcn_00507f10(hh, 1) >= 1.0) {
+			if (fcn_00507f10((char*) hh, 1) >= 1.0) {
 				fcn_00472640(b1, 0);
 			} else {
 				fcn_00472640(b1, 1);
 			}
-			if (fcn_00507f10(hh, 2) >= 1.0) {
+			if (fcn_00507f10((char*) hh, 2) >= 1.0) {
 				fcn_00472640(b2, 0);
 			} else {
 				fcn_00472640(b2, 1);
 			}
-			if (fcn_00507f10(hh, 4) >= 1.0) {
+			if (fcn_00507f10((char*) hh, 4) >= 1.0) {
 				fcn_00472640(b4, 0);
 			} else {
 				fcn_00472640(b4, 1);

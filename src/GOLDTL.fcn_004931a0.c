@@ -1,10 +1,10 @@
-double __cdecl fcn_00507f10(int, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 /* declared float here: the float return is what gives fcomp m32 against p */
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004931a0 */
 
-int __cdecl fcn_004931a0(int a, int b)
+int __cdecl fcn_004931a0(char* a, char* b)
 {
 	double da;
 	float p;

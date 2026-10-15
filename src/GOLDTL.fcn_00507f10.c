@@ -29,13 +29,19 @@ Mod* __cdecl fcn_005462a0(void);
 int __cdecl fcn_005c6270(void*, int);
 int __cdecl fcn_00577ab0(Unit*);
 
-float __cdecl fcn_00507f10(Unit* u, int idx)
+#include "Develop/DieGildeAddOn/game/spiel.h"
+
+/* ADDRESS: GOLDTL 0x00507f10 */
+/* ADDRESS: GOLD 0x00504ec0 */
+float __cdecl fcn_00507f10(char* entity, int idx)
 {
+	Unit* u;
 	float r;
 	float add;
 	float sub;
 	Mod* m;
 
+	u = (Unit*) entity;
 	sub = 0.0f;
 	if (u == 0 || idx >= 5) {
 		return -1.0f;

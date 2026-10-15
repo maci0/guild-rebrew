@@ -20,7 +20,7 @@ int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_005c6270(char*, int);
-float __cdecl fcn_00507f10(struct house*, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_00507ed0(float, float);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_00500cb0(char*, pos14_7f4c00*);
@@ -63,7 +63,7 @@ void __cdecl fcn_0054c500(char* e)
 	while (*(int*) (e + 0xcc) != 0 && i < 16) {
 		if (((struct house*)g_7f4ca0)[idx].id != 0xffff && ((struct house*)g_7f4ca0)[idx].handle != *(int*) (e + 0xbc) && ((struct house*)g_7f4ca0)[idx].type < 10
 		    && ((struct house*)g_7f4ca0)[idx].level > 0) {
-			f = -fcn_00507ed0(*(float*) (e + 0xd0), fcn_00507f10(&((struct house*)g_7f4ca0)[idx], 4));
+			f = -fcn_00507ed0(*(float*) (e + 0xd0), fcn_00507f10((char*) &((struct house*)g_7f4ca0)[idx], 4));
 			v = (int) (f * 10.0f + 1.0f) * mult;
 			fcn_004c54c0(*(int*) (e + 0xbc), ((struct house*)g_7f4ca0)[idx].handle, v, 1);
 		}

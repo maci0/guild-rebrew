@@ -3393,3 +3393,76 @@ data inventories have zero type conflicts or duplicate definitions in all three
 targets. Next: continue the remaining office helper/caller contracts and
 byte-focused TL reconstruction. This validated repair preserves existing bytes;
 it does not establish full project-wide contracts or raw client identity.
+
+
+## 2026-10-15 — checkpoint07299374 and skill-contract handoff
+
+## Current continuation — 2026-10-15
+
+The full goal is ACTIVE and incomplete. Both raw client images, complete client
+initialized-data verification and storage ownership, source contracts, unresolved
+code ranges and faithful discarded server inputs remain open. Server byte
+identity alone does not establish complete source fidelity or client completion.
+
+Docker works and both pinned compiler images pass smoke checks; no rebuild is
+needed. Previous checkpoint91f7c87b is pushed. Current bounded work and final
+validation are recorded in `.scratch/goal48` and docs/TODO.md.
+
+The office-slot repair uses the existing OFFICE_SLOT in game_structs.h and the
+canonical game/aemter.h list-helper declaration. Twelve existing providers/callers
+now share the 24-byte slot view. Role-template records remain distinct; their
+DWORD at +16 must not become the slot's byte status. Removed two unsupported
+volatile ID views without changing their 381-byte bodies. Storage definitions,
+original identities and translation-unit organization are unchanged. The existing
+unbound amt_ListSlotsOfGroup duplicate cannot be merged until source-organize
+preflight and client raw baselines are resolved.
+
+Stable type ID amt.office_slot has three compiler-checked target bindings:
+size/stride24 and field offsets0/4/8/12/16/20. This proves a record stride,
+not a table allocation or owner. A wrong +9 role offset fails compilation;
+uncompiled dry-run previews alone are not rejecting evidence.
+
+Six Gold source matches had padded native extents. Reviewed executable sizes are
+4a0240:450,4aad30:446,4e8c20:414,4ea5c0:200,5ce940:337,5ceaa0:1021.
+Their remaining44 bytes are separately accounted alignment NOPs. Preserve
+inventory extent_history and status history. Complete body/operand checks and
+wrong-symbol controls are in gold-boundary-proof.json/padded-cases-proof.json;
+unbound native bases are comparison inputs, never accepted provider identities.
+Literal audits additionally exposed a real reconstruction error: shared score
+helper004aae50 used approximately -206 billion instead of the native -10.0f in
+both clients. The one-line correction passes both literal audits. Instruction
+RELOC alone had hidden the error; it never verified literal data or placement.
+
+TL remains691,975 matched game bytes,390,163 library bytes/1,468 library
+functions, and1,115,705/2,491,370 accounted text bytes (44.7%). Gold boundary
+corrections recognize2,868 existing game bytes and44 padding bytes; they add no
+new TL bytes. The completed7,102,296-signature audit and prior D3DX/CRT evidence
+are in the history/TODO; do not repeat without new inputs. Actual client
+raw-link providers remain explicit where unresolved.
+
+The complete SDK/include-context audit and all-target type-check CLI remain
+upstream feature gaps. Upstream e79dba09 records the latter and is pushed after
+mandatory hooks/full tests. Do not bypass reconciliation guards or describe
+zero selected-name findings as whole-project contract closure. SDK contexts
+remain unknown, including32 TL/27 Gold selected OFFICE_SLOT typedef contexts;
+the static contract command exits1 despite zero reported contradictions. All
+input hashes are current. Compiler comparisons cover all59 selected bindings:
+32 TL and27 Gold pass. All8,381 identities and6,024 prior strong statuses remain;
+six reviewed Gold bodies add RELOC. Existing data/source stores and old type
+bindings are unchanged. All-target lint passes3,879 files each with zero errors
+and warnings; data inventories have zero conflicts/duplicate definitions. The
+fresh gate-final.log passes all286,720 raw server bytes and required checks.
+Full client data, layout and ownership are still unverified.
+
+The large office-action pair TL4eba60/Gold4e9ce0 remains unadopted:2,148 native
+bytes,87 operands, and a2,131-byte match with17 nonoperand differences. The
+proper OFFICE_SLOT/canonical-header probe leaves the same17 differences.
+Remaining skill-helper contracts and four office callers need reconciliation.
+Preserve the algorithm and exhausted trials; no padding, assembly, declaration
+sweeps or invented target divergence.
+
+Queue loader5252d0/520340 remains a733/735-byte source-shape gap. Camera/list/
+position/rotation/disposal work remains partial; Goldfb9900 has one record with
+unresolved extent/owner. Earlier chain/building/allocation evidence is in TODO.
+Next: continue remaining office contracts and byte-focused TL reconstruction.
+The full original scope continues.

@@ -14602,8 +14602,17 @@
   },
   {
     "va": 5262848,
-    "size": 120,
-    "name": "fcn.00504e00"
+    "size": 29,
+    "name": "fcn.00504e00",
+    "extent_history": [
+      {
+        "old_size": 120,
+        "new_size": 29,
+        "reason": "Gold discovery merged two functions. The existing matched 29-byte integer skill wrapper ends with the tail jump at504e18 to5de668; three NOPs follow. The distinct paired skill wrapper starts504e20 and returns504e77 (88 bytes), independently matched in full with typed operands, constants and rejecting controls in .scratch/goal49/wrapper-proof.json. Removed bytes are 3 alignment bytes plus a separate 88-byte function, not all padding. Source extent for the first function is already29.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T12:38:30.544181+00:00"
+      }
+    ]
   },
   {
     "va": 5262976,

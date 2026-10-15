@@ -38,7 +38,6 @@ extern char g_6b5c60[];
 void __cdecl fcn_00500bb0(Pos55a5*, int, int, int);
 void __cdecl fcn_004c5530(Msg55a5*);
 void __cdecl fcn_00546190(char*);
-float __cdecl fcn_00507f10(char*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_004fef80(char*);
 float __cdecl fcn_004ff210(unsigned short, int);

@@ -11,7 +11,6 @@ extern double g_662b20;
 char* __cdecl fcn_00508e40(int);
 
 int __cdecl fcn_0050c710(int, int, int);
-float __cdecl fcn_00507f10(char*, int);
 float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl fcn_005b5660(int, unsigned short*);
 

@@ -14,7 +14,6 @@ extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 
 
-float __cdecl fcn_00507f10(char* e, int k);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c54c0(int, int, int, int);

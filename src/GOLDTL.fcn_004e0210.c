@@ -20,7 +20,7 @@ int __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_004e4c90(int);
 char* __cdecl fcn_0040c230(char*, void*, int, int, int);
 void __cdecl fcn_004dff50(void);
-float __cdecl fcn_00507f10(char*, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_004e6d20(void);
 int __cdecl fcn_00406340(char*, const char*, int);
 

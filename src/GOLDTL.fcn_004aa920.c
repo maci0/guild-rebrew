@@ -3,7 +3,7 @@ extern char g_7f4ca0[];
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004a54a0(short*, int, int, unsigned short*, float, float, unsigned short*);
-float __cdecl fcn_00507e70(short*, char*, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLD 0x004aa800 */
@@ -30,7 +30,7 @@ int __cdecl fcn_004aa920(short* a1, int a2, char* a3)
 		return 0;
 	a3[0] = 7;
 	*(int*) (a3 + 4) = *(int*) (g_7f4ca0 + src * 540 + 4);
-	f = fcn_00507e70(a1, g_7f4ca0 + src * 540, 4);
+	f = fcn_00507e70((char*) a1, g_7f4ca0 + src * 540, 4);
 	if (!(gm_RandomFloat01() + f >= 1.0f))
 		return 0;
 	*(int*) (a3 + 8) = *(int*) (g_7f4ca0 + dst * 540 + 4);

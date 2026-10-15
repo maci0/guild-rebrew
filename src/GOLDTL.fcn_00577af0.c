@@ -31,7 +31,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_00577ab0(struct house*);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
-float __cdecl fcn_00507f10(struct house*, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
@@ -50,13 +50,13 @@ int __cdecl fcn_00577af0(int id, struct house* me)
 		e = gm_StartFilteredEntitySearch(1, 1, id);
 		if (e != 0) {
 			h = &((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
-			a = fcn_00507f10(h, 2);
-			b = fcn_00507f10(me, 2);
+			a = fcn_00507f10((char*) h, 2);
+			b = fcn_00507f10((char*) me, 2);
 			if (a - b * 0.5f + gm_RandomFloat01() * 0.5 < 0.8) {
 				goto refuse;
 			}
-			a = fcn_00507f10(h, 3);
-			b = fcn_00507f10(me, 3);
+			a = fcn_00507f10((char*) h, 3);
+			b = fcn_00507f10((char*) me, 3);
 			if (a - b * 0.5f + gm_RandomFloat01() * 0.5 < 0.7) {
 refuse:
 				fcn_0051af00(text, 0x4032, me->id, me->id);

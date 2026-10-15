@@ -58,7 +58,7 @@ extern Ent47de* g_100dc2c;
 extern int g_100dc30;
 extern unsigned char* g_868050;
 
-int __cdecl fcn_0047dd60(Master47de*);
+int __cdecl gm_CanEvaluateMaster(char*);
 int __cdecl gm_AccumulateTyped2(void*);
 
 void __cdecl fcn_0047f6b0(Master47de*);
@@ -80,7 +80,7 @@ void __cdecl fcn_0047de50(Master47de* m)
 	if ((*(Time47de*)&g_7f4c00).hour < 6 || ((*(Time47de*)&g_7f4c00).hour == 6 && (*(Time47de*)&g_7f4c00).min < 30)) {
 		return;
 	}
-	if (fcn_0047dd60(m) == 0) {
+	if (gm_CanEvaluateMaster((char*) m) == 0) {
 		return;
 	}
 	if (!(m->flags & 1)) {

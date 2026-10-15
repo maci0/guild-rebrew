@@ -53969,3 +53969,138 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   slot-contracts-stable.json and slot-contract-summary.json.
 - Guild and upstream each have only their main worktree; no stale worktree
   remains to merge/remove. Preserve current ignored native proof receipts.
+
+
+## 2026-10-15 — Goal49 skill-query contracts and shared Gold counterparts
+
+- Before source edits, capture196 existing spiel.h/query/wrapper source contexts
+  through the public batch verifier. Baseline has518 bindings: SERVER82 pass,
+  TL235 pass/12 old mismatches, Gold160 pass/29 old mismatches. The scope includes
+  canonical-header users beyond direct callers. Receipts:goal49/source-scope.json,
+  verify-scope.py, scope-before.json. Native xrefs enumerate67 TL/64 Gold refs;
+  unimplemented native callers are not claimed as reconstructed source contracts.
+- Existing spiel.h owns the entity byte-pointer/integer-index contracts for
+  507f10,507e30 and507e70. Query/paired wrapper return float; scalar wrapper
+  returns int. Remove31 contradictory local declarations and repair connected
+  wrapper signatures/calls. House/word-array consumers use explicit pointer
+  views; entity pointers no longer travel through int in these wrappers.
+  Query's existing private Unit view and all layouts remain unchanged.
+- The87-byte4931a0 caller previously declared a double result. It retains its
+  explicit double local with the canonical float-return API, matching all87
+  native bytes. ST0 flow supports this consistent reconstructed contract but
+  cannot uniquely recover original C spelling. Float-pointer-provider and
+  float-caller controls preserve784/87 bytes. No new vector/record abstraction.
+- Rebrew's Kuna backend works; the standalone Kuna invocation could not load
+  this PE directly. Native instructions correct its inferred float index and
+  jump-as-call switch. `binary switches` proves cases0..4 and their matching
+  offsets in each client; retain the entire table in the784-byte function
+  extent. Last RET is at+762, one NOP at+763, table at+764 through+783.
+- Shared query TL507f10/Gold504ec0 has complete784-byte native agreement in
+  each target,29 operand sites per body,40 wrong-symbol rejecting controls and
+  17 complete matching compiler literal occurrences per target. Native-base
+  hypotheses for unresolved symbols are comparison inputs, not new library
+  identities, storage owners or selected raw-link providers. Complete proof
+  and source/header/reference hashes:skill-proof.py/json.
+- Five additional wrapper/caller bodies total321 resolved bytes: scalar29 in
+  both clients, paired88 in both clients and TL4931a0 87. All compiler literals
+  pass, with18 wrong-symbol controls. Receipt:wrapper-proof.py/json. An initial
+  scratch loop accidentally reused the function-symbol variable for an operand;
+  literal audit correctly rejected a nondefined symbol. Fixed the scratch
+  variable, reran all five checks; no upstream bug or permissive fallback.
+- Gold504ec0 and504e20 now bind the existing shared query/paired source through
+  source register, then earn fresh RELOC784/88. No cloned implementations.
+  Preserve existing Gold scalar504e00's29-byte source match. Discovery had
+  merged that tail-call wrapper, three alignment NOPs and the following88-byte
+  function into a120-byte native inventory entry. Complete disassembly and
+  object proof establish the split. Digest-guarded repair changes only504e00
+  native extent120→29 and appends history; the second function has its own
+  managed source identity. Removed91 bytes are not91 bytes of padding.
+  Receipts:skill/wrapper-register-*, wrapper-extent-*, skill-wrappers-gold-native.
+- Unconditional client prototypes in spiel.h caused a genuine server regression:
+  gm_ObjectsAvailble10015f70 changed four bytes, with315/316 functions passing
+  and all data/import/relocation checks still green. Never accept that partial
+  gate. Save gate-before-client-guard.log and gate-header-regression.json.
+  Limit these declarations to the header's existing nonserver convention;
+  the714-byte object returns to RELOC714/714. Fresh gate-final.log is terminal
+  PASS: all286,720 raw bytes equal,316/316 game/652/652 data, imports,
+  relocations, Wine load/exports and configured compiler/alignment checks pass.
+  This is inferred header organization, not claimed original preprocessor text.
+- The first broad after-check also refused transient EXACT→RELOC when header
+  changes invalidated linked evidence. Fresh raw-link verification restores
+  evidence; do not weaken the status comparison to accept the downgrade.
+- A strict field-by-field comparison catches changed MSVC `$L<number>` names
+  after canonical declarations alter compiler numbering. Names are not stable
+  native identities. Preserve every other operand field and prove each changed
+  local target in a strong match from current COFF/LIEF section/offset/addend
+  against the native operand. Weak bodies retain their prior unresolved claims;
+  no label normalization earns a new verdict. Receipt:local-label-proof.json.
+- Missing reviewed native-entry insertion is recorded upstream in IDEAS-GUILD
+  at da4e8139. The supported extent writer correctly rejects a new504e20 start;
+  no inventory hand-edit or full heuristic rediscovery was substituted. The
+  second function's accepted source identity is separate from native discovery.
+- The repository-wide preservation audit additionally catches one historical
+  RELOC already failing in the before baseline: TL47de50 is654B with four
+  ambiguous-call bytes because two different functions share fcn_0047dd60.
+  Native call47de7e→47dd60 selects the137B master eligibility helper, not the
+  32B kind2/3/4/5 predicate at TL47d220/Gold47dd60. Preserve both identities.
+- Use existing tools to resolve the collision without bypassing rename guards:
+  give the reviewed sole caller an unbound temporary placeholder; preview/apply
+  `source rename GOLDTL.0x0047dd60 gm_CanEvaluateMaster --shared-definition
+  --file GOLDTL.fcn_0047dd60.c`; then preview/apply reference binding from that
+  placeholder to GOLDTL.0x0047dd60. The first preview explicitly excludes the
+  independent predicate's two rows; the second changes only the two caller
+  identifier sites and preserves destination identity. No file is hidden,
+  no all-modules rename, no hand-edited metadata, and no placeholder remains.
+  The initially attempted direct pre-naming correctly failed the destination
+  collision guard. Receipts:master-rename-*, master-bind-*.
+- The inferred gm_CanEvaluateMaster name is recorded in naming_conventions.md;
+  keep its char-pointer return-int interface consistent in the sole caller,
+  converting the existing private Master pointer view directly. This is source
+  identity repair, not new TL algorithm coverage. The current code must earn
+  all three fresh comparisons and pass the repository-wide preservation audit.
+- Final master proof covers both137B providers and the654B caller:928 complete
+  resolved bytes,35 rejecting symbol controls and complete compiler literal
+  checks. Caller now earns RELOC654/654 through the fresh comparison; historical
+  RELOC→NEAR→RELOC measurements remain in history. Reuse of the supported
+  placeholder-to-identity flow resolves this selected case; the broader explicit
+  reference-ownership feature proposal remains separate. Receipt:master-proof,
+  master-promote, master-caller-test. No source reorganization/file move.
+- Final combined scope is197 C files and522 target bindings: SERVER82/82 pass,
+  TL237 pass/11 existing mismatches, Gold163 pass/29 existing mismatches.
+  All482 current strong results pass. The40 remaining weak bodies remain weak.
+  Gold he_RunProduktion5694b0 gets a newly visible CONFLICT at+1755 when the
+  real skill-query destination is bound. Strict delta3501→3504 reflects three
+  formerly masked bytes, not changed instructions. A read-only historical-map
+  control reproduces old3501/13.4958%; actual comparison keeps3504/13.4172% and
+  the conflict. It was never promoted. Receipt:weak-binding-control.json.
+- Compiler-only label numbering changes at strong sites are checked through
+  current COFF/LIEF section offsets and native operands; old weak/OUT_OF_EXTENT
+  operands remain unresolved or out of extent. The review does not silently
+  normalize a native identity or award a match. Scope-combined.json joins the
+  completed broad comparison and the three later identity-repair measurements.
+- Final preservation.json retains8,381 identities plus two new Gold source
+  identities, all6,030 prior strong statuses and all prior history. Only two
+  reviewed name/symbol pairs change. Data/type/source ownership stores are
+  byte-identical; native inventory changes only504e00's reviewed boundary.
+  Current-input-audit.json checks all522 stored source/reference hashes and
+  statuses against current files. Native proof source/header hashes are current.
+- Final gate-final-after-master.log is terminal PASS, all286,720 raw server bytes
+  identical and all required checks green. All-target lint passes3,879 files
+  each with zero errors/warnings. Data inventories have zero conflicts or
+  duplicate definitions. All three type-binding checks are clean.
+- Stable contract audits for query/scalar/paired/master have zero selected-name
+  contradictions and zero selected-name unknowns, with current input hashes.
+  They still exit1 for122 server/904 TL/614 Gold unknown SDK/context cases.
+  Sites in a conditional header are raw-source observations, not evidence that
+  server compilation includes those client declarations. No complete project
+  contract, raw-client data or placement claim. Receipts:contracts-*-stable.json,
+  contract-summary.json, lint/data/types/status-stable.json.
+- Gold gains872 matched game bytes; accounted text409,222→410,094. TL remains
+  691,975 matched game bytes and1,115,705 accounted text bytes (44.7%). Restore
+  the pre-existing caller's valid binding without claiming new TL reconstruction.
+  Upstream da4e8139 is pushed, mandatory hooks/full pytest suite passed; no
+  upstream runtime change or publication was needed.
+- Next primary byte work is TL502fe0's2,016-byte object allocator. Start from
+  the saved Goal46 native counterpart/Kuna evidence and recover real client
+  rendering/switch work; do not repeat its failed1,371-byte server seed or
+  exhausted office compiler-shape trials.

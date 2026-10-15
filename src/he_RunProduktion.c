@@ -24,7 +24,6 @@ int __cdecl fcn_0050c710(unsigned char* objekt, int art, int modus);
 void __cdecl fcn_004c54c0(int besitzer, int objekt, int menge, int modus);
 char* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_004ff040(void* objekt);
-float __cdecl fcn_00507f10(void* objekt, int art);
 float __cdecl fcn_004eceb0(char* objekt, int ware);
 int __cdecl fcn_005c6270(char* objekt, int id);
 int __cdecl fcn_005c62c0(char* objekt, int id);

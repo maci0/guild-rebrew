@@ -112,68 +112,90 @@ initialized-data verification and storage ownership, source contracts, unresolve
 code ranges and faithful discarded server inputs remain open. Server byte
 identity alone does not establish complete source fidelity or client completion.
 
-Docker works and both pinned compiler images pass smoke checks; no rebuild is
-needed. Previous checkpoint91f7c87b is pushed. Current bounded work and final
-validation are recorded in `.scratch/goal48` and docs/TODO.md.
+Previous checkpoint07299374 is pushed. Docker works with both pinned images.
+Goal48 repaired office-slot contracts, preserved all6,024 earlier strong statuses,
+recognized2,868 existing Gold game bytes/44 padding bytes and corrected the
+shared best-score literal to native -10.0f. Receipts/details are in docs/TODO.md.
 
-The office-slot repair uses the existing OFFICE_SLOT in game_structs.h and the
-canonical game/aemter.h list-helper declaration. Twelve existing providers/callers
-now share the 24-byte slot view. Role-template records remain distinct; their
-DWORD at +16 must not become the slot's byte status. Removed two unsupported
-volatile ID views without changing their 381-byte bodies. Storage definitions,
-original identities and translation-unit organization are unchanged. The existing
-unbound amt_ListSlotsOfGroup duplicate cannot be merged until source-organize
-preflight and client raw baselines are resolved.
+Current Goal49 work repairs the skill-query API and its connected wrappers:
 
-Stable type ID amt.office_slot has three compiler-checked target bindings:
-size/stride24 and field offsets0/4/8/12/16/20. This proves a record stride,
-not a table allocation or owner. A wrong +9 role offset fails compilation;
-uncompiled dry-run previews alone are not rejecting evidence.
+- Existing spiel.h owns reconstructed char-pointer/integer-index contracts;
+  the query/paired wrapper return float and the scalar wrapper returns integer.
+  Removed31 contradictory local declarations and integer pointer transport in
+  connected wrappers/callers. Private record views remain private. Original
+  spelling is unproved; equal x86 widths alone do not justify integer pointers.
+- The native query is784 bytes in both clients, including its five-entry embedded
+  switch table. Complete object/native comparison and17 literal occurrences per
+  target pass, with40 wrong-symbol controls. Kuna's seed misreads the integer
+  index and switch as floating values/indirect calls; native instructions win.
+- Gold504ec0 now shares the existing507f10 source. Gold504e20 shares the existing
+  507e70 paired wrapper,88 bytes. Five additional wrapper/caller bodies total321
+  resolved bytes with18 wrong-symbol controls. The87-byte caller keeps its
+  explicit double local while using the canonical float-return declaration.
+- Gold discovery had merged two functions into504e00's120-byte entry. The first
+  ends with a29-byte tail-call body, then three NOPs; the next starts504e20 and
+  returns504e77. Digest-guarded repair preserves native extent history and the
+  first source's existing29-byte match. Removed bytes are not all padding.
+- Adding client declarations unconditionally to spiel.h perturbed four native
+  server bytes in gm_ObjectsAvailble10015f70. The failed full gate is retained.
+  The header's existing server/client declaration convention now excludes these
+  client APIs from server contexts; the714-byte object matches again. The fresh
+  full raw-image gate passes all286,720 bytes and all required checks. Broad
+  preservation checks also pass for the final repaired state.
 
-Six Gold source matches had padded native extents. Reviewed executable sizes are
-4a0240:450,4aad30:446,4e8c20:414,4ea5c0:200,5ce940:337,5ceaa0:1021.
-Their remaining44 bytes are separately accounted alignment NOPs. Preserve
-inventory extent_history and status history. Complete body/operand checks and
-wrong-symbol controls are in gold-boundary-proof.json/padded-cases-proof.json;
-unbound native bases are comparison inputs, never accepted provider identities.
-Literal audits additionally exposed a real reconstruction error: shared score
-helper004aae50 used approximately -206 billion instead of the native -10.0f in
-both clients. The one-line correction passes both literal audits. Instruction
-RELOC alone had hidden the error; it never verified literal data or placement.
+Baseline comparison covers196 source contexts and518 existing target bindings:
+82 server matches,235 TL matches/12 old mismatches,160 Gold matches/29 old
+mismatches. The final comparison preserves strong matches and explicitly records
+the new Gold callee evidence. One already weak production body exposes three previously
+masked conflicting bytes; the historical-map control reproduces the old score
+without promoting it or weakening the actual binding policy.
+The final combined scope adds the existing master helper and covers197 C files,
+522 bindings:82 server pass,237 TL pass/11 weak,163 Gold pass/29 weak. Final
+repository audit preserves all8,381 prior identities and6,030 strong statuses,
+adds two Gold identities/872 bytes, and keeps data/type/source stores unchanged.
+All522 source/reference hashes and stored statuses are current. All-target lint
+passes3,879 files each with zero errors/warnings; data conflicts/duplicate
+owners and type-binding findings are zero. Gold accounted text is410,094 bytes.
+
+Final audit also repaired a pre-existing ambiguous fcn_0047dd60 spelling. The
+sole master caller's native47de7e→47dd60 operand identifies the137-byte helper,
+not the32-byte kind predicate. Supported rename/reference binding now calls the
+inferred gm_CanEvaluateMaster; all three affected bodies pass928 resolved bytes
+with35 rejecting controls and complete literals. Original source file and all
+native identities remain. The654-byte caller's valid RELOC is freshly restored;
+its earlier failing measurement is kept. See naming_conventions.md and TODO.
+
+Receipts/scripts are in `.scratch/goal49`. Do not reinterpret temporary linked
+EXACT invalidation after header changes as permanent completion or restore it
+without fresh raw-link evidence.
 
 TL remains691,975 matched game bytes,390,163 library bytes/1,468 library
-functions, and1,115,705/2,491,370 accounted text bytes (44.7%). Gold boundary
-corrections recognize2,868 existing game bytes and44 padding bytes; they add no
-new TL bytes. The completed7,102,296-signature audit and prior D3DX/CRT evidence
-are in the history/TODO; do not repeat without new inputs. Actual client
-raw-link providers remain explicit where unresolved.
-
-The complete SDK/include-context audit and all-target type-check CLI remain
-upstream feature gaps. Upstream e79dba09 records the latter and is pushed after
-mandatory hooks/full tests. Do not bypass reconciliation guards or describe
-zero selected-name findings as whole-project contract closure. SDK contexts
-remain unknown, including32 TL/27 Gold selected OFFICE_SLOT typedef contexts;
-the static contract command exits1 despite zero reported contradictions. All
-input hashes are current. Compiler comparisons cover all59 selected bindings:
-32 TL and27 Gold pass. All8,381 identities and6,024 prior strong statuses remain;
-six reviewed Gold bodies add RELOC. Existing data/source stores and old type
-bindings are unchanged. All-target lint passes3,879 files each with zero errors
-and warnings; data inventories have zero conflicts/duplicate definitions. The
-fresh gate-final.log passes all286,720 raw server bytes and required checks.
-Full client data, layout and ownership are still unverified.
+functions, and1,115,705/2,491,370 accounted text bytes (44.7%). This contract and
+Gold counterpart work adds no new TL algorithm. The7,102,296-signature audit and
+prior D3DX/CRT evidence are in history/TODO; do not repeat without new inputs.
+Actual client raw-link providers remain explicit where unresolved.
 
 The large office-action pair TL4eba60/Gold4e9ce0 remains unadopted:2,148 native
-bytes,87 operands, and a2,131-byte match with17 nonoperand differences. The
-proper OFFICE_SLOT/canonical-header probe leaves the same17 differences.
-Remaining skill-helper contracts and four office callers need reconciliation.
+bytes,87 operands, and a2,131-byte match with17 nonoperand differences. Slot and
+skill API work closes parts of its source-contract problem; the formatter's
+ID-or-pointer format word and four office callers still need native review.
 Preserve the algorithm and exhausted trials; no padding, assembly, declaration
-sweeps or invented target divergence.
+sweeps or invented target divergence. The native format parser is not a CRT printf.
 
-Queue loader5252d0/520340 remains a733/735-byte source-shape gap. Camera/list/
-position/rotation/disposal work remains partial; Goldfb9900 has one record with
-unresolved extent/owner. Earlier chain/building/allocation evidence is in TODO.
-Next: continue remaining office contracts and byte-focused TL reconstruction.
-The full original scope continues.
+Complete SDK/include-context and all-target type-check CLI support remain upstream
+feature gaps (upstream e79dba09). Final named contract audits have zero selected
+contradictions/unknowns and current hashes, but exit1 for122 server/904 TL/614
+Gold other unknown SDK contexts. Do not bypass reconciliation guards or claim
+whole-project closure. Queue loader5252d0/520340 remains a733/735-byte source-shape gap. Camera/list/position/
+rotation/disposal work is partial; Goldfb9900 has unresolved record extent/owner.
+Reviewed native-entry insertion is a separate upstream gap recorded in
+IDEAS-GUILD at da4e8139; current tooling cannot add discovery start504e20.
+The accepted source identity is retained; do not hand-edit native inventory.
+Upstream da4e8139 is pushed after mandatory hooks/full tests. Next prioritize
+the2,016-byte TL502fe0 object-allocation body. Prior native/Kuna/server comparison is in Goal46; recover
+its real rendering additions and switch arms rather than repeat the failed
+1,371-byte server-only seed or exhausted office-shape trials. Formatter and
+remaining office contracts remain open. The full original objective continues.
 
 ## History
 

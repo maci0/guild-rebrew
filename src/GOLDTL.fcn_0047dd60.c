@@ -14,7 +14,7 @@ extern unsigned char g_6a375c;
 
 /* ADDRESS: GOLD 0x0047e8a0 */
 /* ADDRESS: GOLDTL 0x0047dd60 */
-int __cdecl fcn_0047dd60(char* e)
+int __cdecl gm_CanEvaluateMaster(char* e)
 {
 	char* p;
 	unsigned short idx;

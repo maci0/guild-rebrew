@@ -1906,3 +1906,20 @@ selector prototype; it allocates no storage. The native diagnostic is
 d3_object.c is inferred. Both112-byte native bodies remove the object's list
 links, clear the selected camera for kind3 and clear flags0 bit1. This is a
 different operation from the established hierarchy unlink helper.
+
+
+### Master-evaluation eligibility (2026-10-15)
+
+`gm_CanEvaluateMaster` is inferred for TL0047dd60 / Gold0047e8a0. Its137-byte
+body checks entity kinds1/2, nonzero +164, a home pointer at+16c and its valid
+slot, excludes home kind7, then applies the evidenced global scheduling filter.
+TL0047de50 calls it at0047de7e before the native master-evaluation diagnostics
+(`Evaluation von Meister %s in %s beginnt...`). The original identifier and
+translation-unit home are unproved; the existing standalone source file stays.
+
+This is distinct from the32-byte kind2/3/4/5 predicate at TL0047d220 /
+Gold0047dd60, which retains its provisional `fcn_0047dd60` spelling. The old
+shared spelling caused an ambiguous native binding; it did not establish that
+the two algorithms were one function. Rename and reference binding use the
+managed CLI after direct native destination review. Goal49/master-proof.json
+records complete object/operand/literal checks.

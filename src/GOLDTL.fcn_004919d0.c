@@ -2,7 +2,6 @@
 
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
-float __cdecl fcn_00507f10(char* e, int k);
 unsigned char __cdecl fcn_004f97a0(int a);
 int __cdecl fcn_004f4830(int idx, void* dst);
 

@@ -2,7 +2,7 @@
 
 
 int __cdecl fcn_00577940(int);
-float __cdecl fcn_00507f10(char*, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 

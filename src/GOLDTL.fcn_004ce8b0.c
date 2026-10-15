@@ -1,4 +1,4 @@
-float __cdecl fcn_00507f10(char*, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int* __cdecl fcn_004ce610(char*);
 float __cdecl fcn_004ff040(char*);
 

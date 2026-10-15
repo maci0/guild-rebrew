@@ -54,7 +54,7 @@ char** __cdecl fcn_004ce610(char* x);
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 void __cdecl fcn_00472680(int id, int a2);
 int __cdecl fcn_0046fac0(int x, int y, char* text, int win);
-int __cdecl fcn_00507e30(int a, int b);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
 void __cdecl fcn_004d0a20(void);
 
@@ -101,7 +101,7 @@ void __cdecl fcn_004d0c70(void)
 			((Slot*)g_1015ea0)[g_9b4840[k].text].color = 0x54;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].h = 0x80;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].centered = 1;
-			v = fcn_00507e30((int) u, 3);
+			v = fcn_00507e30((char*) u, 3);
 			fcn_00534160(0x24, 0x41, v, 0x4df);
 			k++;
 		}

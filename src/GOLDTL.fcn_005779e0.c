@@ -1,7 +1,7 @@
 
 
 
-float __cdecl fcn_00507f10(void*, int);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
 float __cdecl fcn_004ff210(unsigned short, int);
 

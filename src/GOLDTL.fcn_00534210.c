@@ -17,7 +17,7 @@ typedef struct BarImg {
 extern char* g_772500;
 extern int g_772514;
 
-int __cdecl fcn_00507e30(char* p, int idx);
+#include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 
 void __cdecl fcn_00534210(int x, int y, char* p, int idx, int bar)
