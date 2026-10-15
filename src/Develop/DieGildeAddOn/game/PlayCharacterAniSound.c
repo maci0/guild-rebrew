@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/ch_script.h"
 #include <string.h>
 
 extern char* g_6b7ebc;

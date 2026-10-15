@@ -10,7 +10,7 @@ typedef struct {
 } Bits;
 
 extern char* g_6b7e98;
-int __cdecl m_is_tracked(char* p);
+#include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
 int __cdecl fcn_00410660(char** a, unsigned char* k)

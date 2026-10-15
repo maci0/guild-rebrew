@@ -1,6 +1,6 @@
 extern char* g_6b7e98;
 
-int __cdecl m_is_tracked(char*);
+#include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
 /* ADDRESS: GOLDTL 0x00410230 */

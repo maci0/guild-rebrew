@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_004355d0(char*, const char*);
 void __cdecl fcn_00435630(char*, char*, char);
 

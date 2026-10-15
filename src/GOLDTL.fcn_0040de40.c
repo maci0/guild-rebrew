@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/ch_script.h"
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 
 

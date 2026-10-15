@@ -20,12 +20,16 @@ void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force);
 void __cdecl ch_Updatelowpoly(char* obj);
 
 int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe);
-int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy,
-    unsigned char* level, char** func);
+
 
 /* Reconstructed model byte view and floating-point position contracts. */
 int __cdecl ch_CreateMesh(char* model, char* resource, float* position);
 char* __cdecl fcn_00403b90(char* resource, float* position);
 char* __cdecl fcn_004e4a80(char* resource, float* position);
+
+/* Character camera adapters use a game-object byte view and float vectors. */
+void __cdecl fcn_004055a0(char* object, int view, float* position, float* rotation);
+void __cdecl fcn_004056a0(char* object, int view);
+void __cdecl fcn_004056f0(char* object, int view, int mode);
 
 #endif

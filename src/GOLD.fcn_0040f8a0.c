@@ -3,7 +3,7 @@ extern char* g_6b7e98;
 extern char g_676cf8[];
 
 
-int __cdecl m_is_tracked(void*);
+#include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00425bf0(void*, int, char*);
 
 int __cdecl fcn_0040f8a0(char** a1)

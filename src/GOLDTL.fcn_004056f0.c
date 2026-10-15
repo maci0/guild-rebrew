@@ -4,11 +4,11 @@
 #include "Develop/Units/d3/d3_camera.h"
 extern int g_6b5cbc;
 extern int g_6b5cc0;
-void __cdecl fcn_004055a0(int, int, float*, float*);
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00412cf0(char*, float*, float*, int, int);
 
-void __cdecl fcn_004056f0(int a1, int a2, int a3)
+void __cdecl fcn_004056f0(char* a1, int a2, int a3)
 {
 	float a[3];
 	float b[4];

@@ -26,7 +26,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-void* __cdecl m_is_tracked(int);
+#include "Develop/Units/m_alloc/m_alloc_checks.h"
 int __cdecl fcn_00452420(int);
 int __cdecl fcn_00425bf0(void*, int, char*);
 

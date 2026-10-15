@@ -1,6 +1,6 @@
 
 
-int __cdecl m_is_tracked(void*);
+#include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_004273d0(void*, int, char*);
 
 int __cdecl fcn_0040f2c0(char** a1, int* a2, int* a3, int* a4)

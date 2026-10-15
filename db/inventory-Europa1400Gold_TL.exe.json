@@ -837,8 +837,31 @@
   },
   {
     "va": 4246224,
-    "size": 208,
-    "name": "fcn.0040cad0"
+    "size": 15,
+    "name": "fcn.0040cad0",
+    "extent_history": [
+      {
+        "old_size": 208,
+        "new_size": 15,
+        "reason": "Goal56 complete old native providers15/190/84 and new callback bodies185/218/3. Old discovery spans at40cad0/40d8c0 swallow following callbacks; repair them together with admission. Fresh min1 discovery independently finds40dac0. Remaining gaps are actual NOP alignment. Source identities/verdicts unchanged.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T19:41:09.327313+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4246240,
+    "size": 185,
+    "name": "fcn.0040cae0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 185,
+        "reason": "Goal56 complete old native providers15/190/84 and new callback bodies185/218/3. Old discovery spans at40cad0/40d8c0 swallow following callbacks; repair them together with admission. Fresh min1 discovery independently finds40dac0. Remaining gaps are actual NOP alignment. Source identities/verdicts unchanged.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T19:41:09.329650+00:00"
+      }
+    ]
   },
   {
     "va": 4246432,
@@ -937,13 +960,59 @@
   },
   {
     "va": 4249792,
-    "size": 416,
-    "name": "fcn.0040d8c0"
+    "size": 190,
+    "name": "fcn.0040d8c0",
+    "extent_history": [
+      {
+        "old_size": 416,
+        "new_size": 190,
+        "reason": "Goal56 complete old native providers15/190/84 and new callback bodies185/218/3. Old discovery spans at40cad0/40d8c0 swallow following callbacks; repair them together with admission. Fresh min1 discovery independently finds40dac0. Remaining gaps are actual NOP alignment. Source identities/verdicts unchanged.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T19:41:09.329656+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4249984,
+    "size": 218,
+    "name": "fcn.0040d980",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 218,
+        "reason": "Goal56 complete old native providers15/190/84 and new callback bodies185/218/3. Old discovery spans at40cad0/40d8c0 swallow following callbacks; repair them together with admission. Fresh min1 discovery independently finds40dac0. Remaining gaps are actual NOP alignment. Source identities/verdicts unchanged.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T19:41:09.331975+00:00"
+      }
+    ]
   },
   {
     "va": 4250208,
-    "size": 96,
-    "name": "fcn.0040da60"
+    "size": 84,
+    "name": "fcn.0040da60",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 84,
+        "reason": "Goal56 complete old native providers15/190/84 and new callback bodies185/218/3. Old discovery spans at40cad0/40d8c0 swallow following callbacks; repair them together with admission. Fresh min1 discovery independently finds40dac0. Remaining gaps are actual NOP alignment. Source identities/verdicts unchanged.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T19:41:09.331988+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4250304,
+    "size": 3,
+    "name": "fcn.0040dac0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3,
+        "reason": "Goal56 complete old native providers15/190/84 and new callback bodies185/218/3. Old discovery spans at40cad0/40d8c0 swallow following callbacks; repair them together with admission. Fresh min1 discovery independently finds40dac0. Remaining gaps are actual NOP alignment. Source identities/verdicts unchanged.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T19:41:09.334322+00:00"
+      }
+    ]
   },
   {
     "va": 4250320,

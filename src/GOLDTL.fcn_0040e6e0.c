@@ -12,7 +12,7 @@ typedef struct {
 } Query;
 
 extern int g_67a370;
-int __cdecl m_is_tracked(int p);
+#include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_004379a0(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
 void __cdecl fcn_0040e610(void);
 

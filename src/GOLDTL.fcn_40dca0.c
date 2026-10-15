@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/ch_script.h"
 /* ADDRESS: GOLDTL 0x0040dca0 */
 
 // fcn_0040cd70 — count nodes with [n+0x88]==[0x67a370].

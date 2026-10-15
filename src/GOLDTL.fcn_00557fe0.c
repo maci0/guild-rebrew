@@ -11,7 +11,7 @@ void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00557f00(char*);
 char* __cdecl fcn_00557f70(char*);
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
-int __cdecl m_is_tracked(char*);
+#include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00452420(char*);
 void __cdecl fcn_00546190(char*);
 

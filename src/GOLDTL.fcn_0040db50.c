@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/ch_script.h"
 /* ADDRESS: GOLD 0x005f216c */
 extern char g_6761ec[];
 

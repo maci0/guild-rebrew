@@ -54439,3 +54439,64 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   the completed documentation worktree/branch is removed. Both repositories
   retain only main. All23 unrelated upstream accounting edits remain unstaged
   and untouched.
+
+### Goal56 — shared character script registration (2026-10-16)
+
+- Added one shared C89 registration body TL40e1a0/Gold40d270, RELOC1033 each,
+  preserving all41 command strings, flags and typed VM argument recipes.
+  New WalkToDummy TL40cae0/Gold40bbc0 is RELOC185 each; the TL PreloadSitMesh
+  callback40dac0 is EXACT3. Names and inferred source placement are documented.
+  MoveCharacterCamera TL40d980/Gold40ca60 is retained honestly at221/native218,
+  with blockers and four ordinary-C shape measurements; no flag/assembly repair.
+- New ch_script.h reconciles41 callback declarations with their providers.
+  Verified-dummy callbacks now forward int* to the actual char*-returning
+  range provider; camera adapters use object pointers and float buffers of the
+  same observed stack sizes. The allocator's int(void*) membership declaration
+  is shared by its provider and29 previous declaration TUs. This package closes
+  only the selected46-name contract surface; broad D3/vector contracts remain.
+- Complete production proof covers five strong bodies,2439bytes,270 operands,
+  180 rejecting controls, all41 registration literals per client and each walk
+  diagnostic. Unresolved operands are explicit comparison hypotheses. Gold's
+  PreloadSitMesh points to49dee0, an existing Lua LIBRARY identity; retain it
+  unchanged rather than manufacture a game alias/provider from three bytes.
+  The logical-callback/native-address collision gap is upstream IDEAS55b4f436.
+- Reviewed native inventory admission is now upstream:843d70a2, help/summary
+  repair72a19318 and release-surface note af9b30c2. The new explicit
+  binary repair-extents --add-missing path is digest-guarded, locked and atomic;
+  default missing-VA refusal, overlap/code bounds and old-row preservation have
+  regression tests. Same-batch predecessor repairs admit swallowed callbacks.
+  Seven new tests failed first; final focused run75pass/1skip and mandatory full
+  push suite pass. The digest now binds requests/reason/policy: regenerate old
+  previews after upgrading. Failed help/public-surface gates remain in receipts.
+- TL discovery repairs:40cad0 208->15,40d8c0 416->190,40da60 96->84; admit
+  40cae0:185,40d980:218,40dac0:3. Gold repairs40bbb0 208->15,40c9a0 416->190,
+  40cb40 96->84; admit40bbc0:185,40ca60:218. NOP gaps remain native alignment.
+  Fresh min-size1 discovery independently finds the three-byte stub; do not
+  replace the complete reviewed inventory with discovery output.
+- All8394 previous identities and6040 strong statuses survive; totals8401/6045.
+  Existing identity fields, native row order/history, data/types/source/config
+  and compiler inputs survive. New matched game bytes: TL+1221 ->695536;
+  Gold+1218 ->380797. Libraries390163/9732 and padding33605/23492 unchanged.
+  Accounted text: TL1119304/2491370 (CLI44.9%), Gold414021/2006532 (CLI20.6%).
+  Library/padding accounting is separate from the newly matched game bytes.
+- All-target lint0/0, data0conflicts/duplicate owners, type checks1020structs
+  with no findings. The selected46 contracts have zero findings; the full
+  audit still reports258/1489/973 findings and304/4085/2600 unknowns across
+  server/TL/Gold. Do not claim those broader findings were all pre-existing:
+  there was no full before-audit. Both clients still have no verified raw image
+  or initialized-data bytes. Server gate retains all286720 identical raw bytes,
+  316functions/652data and import/export/relocation/layout/Wine checks.
+- The upstream CLI update invalidated the earlier compiler-logic fingerprints;
+  affected contexts and server gate are rerun under final tooling. Keep earlier
+  receipts separate from final ones. An initial real Docker allocator timeout
+  failed before promotion; a fresh actual SERVER10006820 comparison passed.
+  A guessed10007750 health probe is compile-only, not allocator/native proof.
+- Receipts/replays: .scratch/goal56/{native-proof,preservation,contract-summary,
+  contracts-focused,scope-final-promote,lint-final,data-final,status-final,
+  types-*}.json, guarded inventory previews/applies, native/Kuna/library and
+  failed/accepted C shapes, server-gate.log. Separation402d00 stays scratch;
+  see C-shape notes before repeating its720/745-vs744 experiments.
+  Upstream55b4f436..af9b30c2 is merged/pushed with full gates; completed owned
+  worktrees/branches are removed. Both repositories retain only main. All23
+  unrelated upstream accounting edits remain unstaged with reversible merge
+  preservation receipts; do not commit or discard them.

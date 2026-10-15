@@ -1,3 +1,4 @@
+#include "m_alloc_checks.h"
 /* shortcut: historical discarded inputs preserve server layout; retire these calls as original inputs are recovered. */
 #include <stdio.h>
 #include <stdlib.h>

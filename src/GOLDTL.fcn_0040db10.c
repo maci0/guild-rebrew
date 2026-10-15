@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/ch_script.h"
 extern char* g_6b7e98;
 /* ADDRESS: GOLDTL 0x006761c8 */
 extern char g_6761c8[];

@@ -738,8 +738,31 @@
   },
   {
     "va": 4242352,
-    "size": 208,
-    "name": "fcn.0040bbb0"
+    "size": 15,
+    "name": "fcn.0040bbb0",
+    "extent_history": [
+      {
+        "old_size": 208,
+        "new_size": 15,
+        "reason": "Goal56 paired complete old native providers15/190/84 and new callback bodies185/218. Repair merged predecessor discovery spans together with callback admission; trailing gaps are NOP alignment. Gold49dee0 keeps its existing Lua identity and unresolved logical-game-stub relationship.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T19:41:10.286717+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4242368,
+    "size": 185,
+    "name": "fcn.0040bbc0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 185,
+        "reason": "Goal56 paired complete old native providers15/190/84 and new callback bodies185/218. Repair merged predecessor discovery spans together with callback admission; trailing gaps are NOP alignment. Gold49dee0 keeps its existing Lua identity and unresolved logical-game-stub relationship.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T19:41:10.288502+00:00"
+      }
+    ]
   },
   {
     "va": 4242560,
@@ -838,13 +861,45 @@
   },
   {
     "va": 4245920,
-    "size": 416,
-    "name": "fcn.0040c9a0"
+    "size": 190,
+    "name": "fcn.0040c9a0",
+    "extent_history": [
+      {
+        "old_size": 416,
+        "new_size": 190,
+        "reason": "Goal56 paired complete old native providers15/190/84 and new callback bodies185/218. Repair merged predecessor discovery spans together with callback admission; trailing gaps are NOP alignment. Gold49dee0 keeps its existing Lua identity and unresolved logical-game-stub relationship.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T19:41:10.288508+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4246112,
+    "size": 218,
+    "name": "fcn.0040ca60",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 218,
+        "reason": "Goal56 paired complete old native providers15/190/84 and new callback bodies185/218. Repair merged predecessor discovery spans together with callback admission; trailing gaps are NOP alignment. Gold49dee0 keeps its existing Lua identity and unresolved logical-game-stub relationship.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T19:41:10.290307+00:00"
+      }
+    ]
   },
   {
     "va": 4246336,
-    "size": 96,
-    "name": "fcn.0040cb40"
+    "size": 84,
+    "name": "fcn.0040cb40",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 84,
+        "reason": "Goal56 paired complete old native providers15/190/84 and new callback bodies185/218. Repair merged predecessor discovery spans together with callback admission; trailing gaps are NOP alignment. Gold49dee0 keeps its existing Lua identity and unresolved logical-game-stub relationship.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T19:41:10.290311+00:00"
+      }
+    ]
   },
   {
     "va": 4246432,

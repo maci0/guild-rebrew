@@ -11631,3 +11631,31 @@ it into two rows changes the filter. No flags, padding, assembly or fabricated
 locals are needed. Source spelling is inferred from full native agreement,
 not uniquely recovered. .scratch/goal55/{first-tl,implicit-tl,implicit-gold,
 native-proof}.json preserve the failed and accepted measurements.
+
+### Character camera script exits and separation probe (2026-10-16)
+
+TL `0x40d980` / Gold `0x40ca60` each contain 218 executable bytes.
+The adopted ordinary-C `MoveCharacterCamera` emits 221 bytes in each client;
+its mismatch remains recorded. Preserve the null-character diagnostic/return1,
+four ordered string cases, selector values0..3, dereferenced mode, and return0
+for every valid-character path, including an unrecognized name. Initial,
+cached-object and cached-name forms emit221; a positive continuation emits225.
+The remaining difference concerns entry/register saves and exit layout; those
+observations do not uniquely establish the original source spelling.
+
+Bounded read-only controls on the complete new script unit: `/O1 /Gd` emits
+Walk159, camera166 and registration882, losing the established185/1033 shapes;
+`/O2 /Gd /G5` is neutral; `/O2 /Gd /G6` emits Walk187 and leaves camera221.
+Keep the configured `/O2 /Gd`. No CFLAGS/STATUS promotion comes from these
+controls, and no assembly, invented locals or padding is justified. The
+registration and walk bodies match in both production contexts, while the
+Gold three-byte stub operand remains an explicit comparison hypothesis.
+
+Unadopted TL `0x402d00` separation recon: native744 bytes, first C720,
+reloaded/reused-counter C745. Native multiplies in z*z+y*y+x*x order, reads a
+word flag and repeats task45 tests, including an unreachable100-radius case.
+Kuna's order must not replace those instructions. Register/frame/flag-load
+shape and an unexplained16-byte stack allocation remain unresolved. Do not
+invent a float[4] view, padding, volatile access or assembly. A signature miss
+is inconclusive; Gold's fixed-prefix hit at57f3a0 does not prove a counterpart.
+Receipts/seeds live in `.scratch/goal56/separation*` and the native402d00 body.

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/ch_script.h"
 
 
 void __cdecl fcn_00407800(int, int, int);

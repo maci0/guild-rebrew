@@ -1993,3 +1993,27 @@ Both target layouts are compiler-checked under stable ID ch.dummy_picks.
 The native concatenated `dummy_AUSGANGdummy_LAUFEN1` filter is preserved as one
 entry; a missing comma in the original source is plausible, not established.
 Receipts: .scratch/goal55/native-proof.json and the native/Kuna caller bodies.
+
+### Character script registration and adapters (2026-10-16)
+
+`ch_RegisterScriptCommands` is an inferred name for TL `0x40e1a0` / Gold
+`0x40d270`. The 41 native registration names and argument recipes correspond;
+the new `game/ch_script.c` and `ch_script.h` homes follow subsystem use, not an
+attested original source path. Existing provider names stay unchanged. Native
+registration strings do not automatically attest the C callback identifiers.
+
+`WalkToDummy` (TL `0x40cae0`, Gold `0x40bbc0`) and `MoveCharacterCamera`
+(TL `0x40d980`, Gold `0x40ca60`) are attested by their native diagnostics.
+The three-byte TL `0x40dac0` retains its provisional name: its registration
+attests the command `PreloadSitMesh`, not a unique original C identifier or
+formal signature. One unused object-pointer argument is inferred from its VM
+recipe. Gold's recipe points to `0x49dee0`, already attributed to Lua's
+`default_panic`; identical three-byte bodies do not establish folding, shared
+source identity or the linked provider. That LIBRARY row is preserved.
+
+`ch_script.h` holds canonical declarations for the participating callbacks;
+`ch_motion.h` retains object-byte-view/float-vector camera adapters. The narrow
+`m_alloc_checks.h` declaration home is inferred and exposes the existing
+`int m_is_tracked(void*)` provider contract without claiming a pointee layout.
+No new storage or native type allocation is inferred. Full native/object and
+operand/literal evidence is in `.scratch/goal56/native-proof.json`.

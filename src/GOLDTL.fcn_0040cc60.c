@@ -1,12 +1,13 @@
+#include "Develop/DieGildeAddOn/game/ch_script.h"
 
 
 extern char* g_6b7ebc;
 extern char* g_6b7e98;
-int __cdecl fcn_0040dbb0(char** b, int c);
+
 void __cdecl fcn_0040b920(char* a, char* b);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040cc60(char** a, char** b, int c)
+int __cdecl fcn_0040cc60(char** a, char** b, int* c)
 {
 	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) fcn_0040cc60) {
 		if (*(int*) (*a + 0x128) != 0) {
