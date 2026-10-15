@@ -42,11 +42,11 @@ typedef struct {
 	int nargs;
 } Entry;
 
-extern Entry_14d0c40 g_14d0c40[];
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 Task* __cdecl fcn_0040c0a0(char* e);
 void __cdecl fcn_004079d0(Task* t);
-void __cdecl fcn_00405180(char* e, Task* t);
-int __cdecl fcn_004050c0(Task* t);
+
+
 
 /* Build a task for kind and copy the trailing stack dwords into its
  * params. i is the copy counter, so i = -1 reuses ecx (or ecx,-1) for
@@ -97,6 +97,6 @@ Task* __cdecl fcn_0040c120(char* e, int kind, ...)
 	}
 	return t;
 drop:
-	fcn_004050c0(t);
+	fcn_004050c0((char*) (t));
 	return 0;
 }

@@ -34,16 +34,16 @@ struct Task {
 	char pad191[3];
 };
 
-Task* __cdecl fcn_00405080(void);
-void __cdecl fcn_0041d9e0(const char* msg);
-void __cdecl fcn_00405180(char* e, Task* t);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
+#include "Develop/Units/Error/error_message.h"
+
 
 Task* __cdecl fcn_0040c0a0(char* e)
 {
 	Task* t;
 	Task* p;
 
-	t = fcn_00405080();
+	t = (Task*) ch_GetFreeQueueEntry();
 	if (t == 0) {
 		fcn_0041d9e0("no free task slot");
 		return 0;

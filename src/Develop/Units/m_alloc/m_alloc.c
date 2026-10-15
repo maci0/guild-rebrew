@@ -1010,7 +1010,7 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 #ifndef REBREW_SERVER
 extern int g_6b6f7c;
 extern char* g_14cc5e4;
-void __cdecl fcn_0041d9e0(const char*);
+#include "Develop/Units/Error/error_message.h"
 #define g_stat1 g_6b6f68
 #define g_stat2 g_6b6f6c
 #define g_stat3 g_6b6f70

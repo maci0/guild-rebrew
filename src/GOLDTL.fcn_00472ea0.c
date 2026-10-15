@@ -36,7 +36,7 @@ extern int g_772514;
 extern char s_67d844[];
 extern char s_67d818[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_004772e0(int a, int b, int c, int d, int e);
 
 /* ADDRESS: GOLDTL 0x00472ea0 */

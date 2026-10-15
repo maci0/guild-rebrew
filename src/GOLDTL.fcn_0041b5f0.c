@@ -11,7 +11,7 @@ struct vertex_41b5f0 {
 
 extern char g_6b5df0[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 /* ADDRESS: GOLDTL 0x0041b5f0 */
 

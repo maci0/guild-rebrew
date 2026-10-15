@@ -7,8 +7,8 @@
 #include "client_types.h"
 typedef Entry_14d0c40 Entry;
 
-extern Entry_14d0c40 g_14d0c40[];
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
+#include "Develop/Units/Error/error_message.h"
 
 int __cdecl fcn_00406210(int idx, int handler, unsigned char kind, const char* name, int param)
 {

@@ -23,7 +23,7 @@ extern int g_772514;
 extern char* g_77255c;
 extern char s_67d7d0[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 /* ADDRESS: GOLDTL 0x004727a0 */
 int __cdecl fcn_004727a0(int k, int i)

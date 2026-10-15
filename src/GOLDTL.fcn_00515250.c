@@ -25,7 +25,7 @@ extern char* g_773db4[];
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_005016c0(void);
 void __cdecl fcn_005016f0(int);
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_00515010(void);
 void __cdecl fcn_00510100(void);
 

@@ -2,7 +2,7 @@
 
 
 void __cdecl m_FreeTracked(int);
-void __cdecl fcn_004050c0(void*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 int __cdecl fcn_00405130(void* a1)
 {

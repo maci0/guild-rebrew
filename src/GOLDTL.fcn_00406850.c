@@ -34,7 +34,7 @@ struct Task {
 
 Task* __cdecl fcn_0040c0a0(char* e);
 void __cdecl fcn_004066d0(Task* t);
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 Task* __cdecl fcn_00406850(char* e, const char* name, const char* name2, int a, int b, int c)
 {

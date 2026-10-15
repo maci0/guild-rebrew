@@ -300,8 +300,17 @@
   },
   {
     "va": 4212640,
-    "size": 112,
-    "name": "fcn.004047a0"
+    "size": 110,
+    "name": "fcn.004047a0",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 110,
+        "reason": "Native delete body is byte-identical to TL110 and ends 0x40480d before 2 NOPs. Shared message object matches all119 native bytes through 0x422326 before 9 NOPs. Goal54 complete native/object evidence.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T18:08:24.878714+00:00"
+      }
+    ]
   },
   {
     "va": 4212752,
@@ -315,8 +324,17 @@
   },
   {
     "va": 4212912,
-    "size": 464,
-    "name": "fcn.004048b0"
+    "size": 456,
+    "name": "fcn.004048b0",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 456,
+        "reason": "Complete native return at 0x404a77; 0x404a78-0x404a7f are eight trailing NOPs before the next function. Goal54 native and C object receipts cover all 456 executable bytes.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T17:41:39.270003+00:00"
+      }
+    ]
   },
   {
     "va": 4213376,
@@ -2250,8 +2268,17 @@
   },
   {
     "va": 4334256,
-    "size": 128,
-    "name": "fcn.004222b0"
+    "size": 119,
+    "name": "fcn.004222b0",
+    "extent_history": [
+      {
+        "old_size": 128,
+        "new_size": 119,
+        "reason": "Native delete body is byte-identical to TL110 and ends 0x40480d before 2 NOPs. Shared message object matches all119 native bytes through 0x422326 before 9 NOPs. Goal54 complete native/object evidence.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T18:08:24.878735+00:00"
+      }
+    ]
   },
   {
     "va": 4334384,

@@ -10,7 +10,7 @@ struct kind_404150 {
 #include "../../Units/d3/d3_animation.h"
 
 #include "../../../client_types.h"
-extern Entry_14d0c40 g_14d0c40[];
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 extern int g_675318;
 
 void __cdecl fcn_0042e540(char*);

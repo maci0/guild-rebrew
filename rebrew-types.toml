@@ -324,3 +324,75 @@ mamt = 8
 pcount = 12
 status = 16
 msetter = 20
+
+[types."ch.action_queue_slot".GOLDTL]
+file = "src/Develop/DieGildeAddOn/game/ch_queue.h"
+symbol = "CH_QUEUE_SLOT"
+size = 404
+native_size = 404
+extent = "stride"
+evidence = "Native free-slot helpers TL405080/Gold404760 scan 2000 records with stride 0x194; paired startup allocates 0xc5440 = 2000 x 0x194. This is an inferred occupancy-word plus opaque payload access view, not the original full action typedef."
+cflags = "/O2 /Gd"
+source_hash = "2a5bb3e885b5405690fb573f5c1c0d4c04b94bcaf775c0ac34140cf66bd3ab19"
+headers_hash = "c3d9a54c4220d4ba228afdb7ed615f55c52c07635de1c4203e18f1e76dd1709c"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."ch.action_queue_slot".GOLDTL.offsets]
+belegt = 0
+unbekannt_004 = 4
+
+[types."ch.action_queue_slot".GOLD]
+file = "src/Develop/DieGildeAddOn/game/ch_queue.h"
+symbol = "CH_QUEUE_SLOT"
+size = 404
+native_size = 404
+extent = "stride"
+evidence = "Native free-slot helpers TL405080/Gold404760 scan 2000 records with stride 0x194; paired startup allocates 0xc5440 = 2000 x 0x194. This is an inferred occupancy-word plus opaque payload access view, not the original full action typedef."
+cflags = "/O2 /Gd"
+source_hash = "2a5bb3e885b5405690fb573f5c1c0d4c04b94bcaf775c0ac34140cf66bd3ab19"
+headers_hash = "c3d9a54c4220d4ba228afdb7ed615f55c52c07635de1c4203e18f1e76dd1709c"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."ch.action_queue_slot".GOLD.offsets]
+belegt = 0
+unbekannt_004 = 4
+
+[types."ch.action_dispatch_entry".GOLDTL]
+file = "src/client_types.h"
+symbol = "Entry_14d0c40"
+size = 76
+native_size = 76
+extent = "stride"
+evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature."
+cflags = "/O2 /Gd"
+source_hash = "25b599de5795adc1c03f7a0ca235d6db4edc8cef6b6fd90e15ef4ecde94b5774"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."ch.action_dispatch_entry".GOLDTL.offsets]
+handler = 0
+kind = 4
+name = 5
+param = 72
+
+[types."ch.action_dispatch_entry".GOLD]
+file = "src/client_types.h"
+symbol = "Entry_14d0c40"
+size = 76
+native_size = 76
+extent = "stride"
+evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature."
+cflags = "/O2 /Gd"
+source_hash = "25b599de5795adc1c03f7a0ca235d6db4edc8cef6b6fd90e15ef4ecde94b5774"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."ch.action_dispatch_entry".GOLD.offsets]
+handler = 0
+kind = 4
+name = 5
+param = 72

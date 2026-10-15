@@ -9,7 +9,7 @@ struct I41b5b0 {
 extern int g_6777ac;
 extern void* g_6b5df4;
 extern char g_6b5df0[];
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 
 void __cdecl fcn_0041b5b0(void)
 {

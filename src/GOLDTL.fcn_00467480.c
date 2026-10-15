@@ -22,7 +22,7 @@ extern char* g_1015ea0;
 extern Tex_102d278 g_102d278[];
 extern char s_67d420[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00467240(int x, int y, int a3, int a4, int a5);
 void __cdecl fcn_0046f650(int slot, fcn_00467480_Win* parent);
 

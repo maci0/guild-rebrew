@@ -9,7 +9,7 @@ char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_00526920(char*, int, char*);
 

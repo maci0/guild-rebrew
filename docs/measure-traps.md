@@ -3280,3 +3280,18 @@ Both source bodies still exist and retain their own byte-match evidence. Do not
 repair the aggregate count by restoring an old verdict or masking the ambiguity.
 The ownership-aware selected-definition rename remains an upstream feature gap;
 its fail-closed preview and before/after diagnostics are in .scratch/goal52.
+
+## Registration, extents and type counts are separate measurements (2026-10-16)
+
+`source register` binds a declaration but does not invent its native SIZE.
+Goal54's first new-row batch correctly reports MISSING_SIZE; reviewed complete
+native bodies are promoted with explicit `test --size`, separately from inventory
+boundary repairs. Preserve trailing NOPs as alignment rather than extending C
+bodies: insertion is TL461/Gold456, delete110 and message119. The six reviewed
+inventory repairs preserve names, row counts and extent history.
+
+`types check` counts structs found in C source contexts, not all bound header
+types. Moving the getter's private occupancy view to ch_queue.h reduces that
+reported count from 1,021 to 1,020. Four compiler-checked stable bindings verify
+the two shared header layouts for both clients; every previous binding survives.
+Neither a source-count change nor a matching object establishes storage ownership.

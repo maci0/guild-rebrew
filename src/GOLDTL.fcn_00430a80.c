@@ -6,7 +6,7 @@ int __cdecl fcn_00465020(void* z);
 int __cdecl fcn_00465350(void* z, void* buf, int len);
 void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 int __cdecl gzseek(void* gz, int off, int whence);
 
 /* ADDRESS: GOLD 0x00430fa0 */

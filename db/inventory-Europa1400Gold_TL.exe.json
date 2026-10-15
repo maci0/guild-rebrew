@@ -355,8 +355,17 @@
   },
   {
     "va": 4214976,
-    "size": 112,
-    "name": "fcn.004050c0"
+    "size": 110,
+    "name": "fcn.004050c0",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 110,
+        "reason": "Complete native bodies end at 0x40512d and 0x41da56; following 2/9 NOPs are alignment. Existing managed extents already cover these 110/119 bytes; Goal54 native and object receipts preserve them.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T18:08:23.423428+00:00"
+      }
+    ]
   },
   {
     "va": 4215088,
@@ -370,8 +379,17 @@
   },
   {
     "va": 4215248,
-    "size": 464,
-    "name": "fcn.004051d0"
+    "size": 461,
+    "name": "fcn.004051d0",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 461,
+        "reason": "Complete native return at 0x40539c; 0x40539d-0x40539f are three trailing NOPs before the next function. Goal54 native and C object receipts cover all 461 executable bytes.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T17:41:38.816213+00:00"
+      }
+    ]
   },
   {
     "va": 4215712,
@@ -2105,8 +2123,17 @@
   },
   {
     "va": 4315616,
-    "size": 128,
-    "name": "fcn.0041d9e0"
+    "size": 119,
+    "name": "fcn.0041d9e0",
+    "extent_history": [
+      {
+        "old_size": 128,
+        "new_size": 119,
+        "reason": "Complete native bodies end at 0x40512d and 0x41da56; following 2/9 NOPs are alignment. Existing managed extents already cover these 110/119 bytes; Goal54 native and object receipts preserve them.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T18:08:23.423443+00:00"
+      }
+    ]
   },
   {
     "va": 4315744,

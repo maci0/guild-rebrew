@@ -458,6 +458,96 @@ cache_position:
 	*(int*) (*(char**) (obj + 0x124) + 12) = *(int*) (model + 0x54);
 }
 
+#ifndef REBREW_SERVER
+#include <stdarg.h>
+#include "ch_queue.h"
+#include "Develop/Units/Error/error_message.h"
+
+#ifdef REBREW_GOLD
+#define ch_UNIVERSE_STRIDE 0x3e0
+#else
+#define ch_UNIVERSE_STRIDE 0x3dc
+#endif
+
+/* Original character.c placement is inferred from the ch_ subsystem. */
+/* ADDRESS: GOLDTL 0x004051d0 */
+/* ADDRESS: GOLD 0x004048b0 */
+char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
+{
+    /* Native initializes this fallback value only for an unregistered kind. */
+    int original_kind;
+    char* action;
+    char* previous;
+    int i;
+    va_list arguments;
+
+    if (position == 0) {
+        return 0;
+    }
+    if (g_14d0c40[kind].handler == 0) {
+        original_kind = kind;
+        kind = 0;
+    }
+    action = (char*) ch_GetFreeQueueEntry();
+    if (action == 0) {
+        fcn_0041d9e0("ch_InsertAction(): Could not ch_GetFreeQueueEntry()");
+        return 0;
+    }
+    previous = *(char**) (position + 0x24);
+    *(char**) (position + 0x24) = action;
+    *(char**) (action + 0x24) = previous;
+    *(char**) (action + 0x28) = position;
+    if (previous != 0) {
+        *(char**) (previous + 0x28) = action;
+    } else {
+        *(char**) (*(char**) (position + 0x14) + 0x128) = action;
+    }
+    *(int*) action = g_14d0c40[kind].handler;
+    *(char**) (action + 0x14) = object;
+    action[9] = (char) kind;
+    *(int*) (action + 0xc) = 0;
+    va_start(arguments, kind);
+    for (i = 0; i < g_14d0c40[(unsigned char) action[9]].param; i++) {
+        ((int*) (action + 0x30))[i] = va_arg(arguments, int);
+    }
+    va_end(arguments);
+    if (kind == 0x33) {
+        i = -1;
+        if ((*(int*) (action + 0x30) == 0 && *(int*) (action + 0x34) != i) ||
+            (*(int*) (action + 0x30) != 0 && *(int*) (action + 0x34) == i)) {
+            fcn_0041d9e0("ch_InsertAction(): move2universe: invalid combination of ids and universeindex");
+            fcn_004050c0(action);
+            return 0;
+        }
+    } else if (kind == 0x2d) {
+        int x;
+        int y;
+        int universe;
+
+        if ((x = *(int*) (action + 0x30)) < 0 || x > 256 ||
+            (y = *(int*) (action + 0x34)) < 0 || y > 256 ||
+            (universe = *(int*) (action + 0x38)) < 0 || universe > 64 ||
+            g_10432c0[universe * ch_UNIVERSE_STRIDE + 0x3d5] != 0) {
+            fcn_004050c0(action);
+            return 0;
+        }
+        if (*(int*) (*(char**) (object + 0x88) + 0xb0) != 0 &&
+            (x > *(int*) (g_10432c0 + universe * ch_UNIVERSE_STRIDE + 0xb4) ||
+             y > *(int*) (g_10432c0 + universe * ch_UNIVERSE_STRIDE + 0xb4))) {
+            fcn_004050c0(position);
+            return 0;
+        }
+    } else if (kind == 0) {
+        *(int*) (action + 0x30) = original_kind;
+    }
+    action[0x10] = 0;
+    fcn_00405180(object, action);
+    return action;
+}
+
+#undef ch_UNIVERSE_STRIDE
+#endif
+
 int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy, unsigned char* level, char** func)
 {
 	char* task;

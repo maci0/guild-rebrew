@@ -1952,3 +1952,27 @@ server callers and TL `0x5392a0` reach that definition. The shared header and
 all three physical caller files keep their reset declarations/calls unchanged.
 Reviewed file-level ownership authorizes the selected-definition rename; it
 does not establish providers for unbound contexts or client raw-link identity.
+
+### Character action insertion and queue access (2026-10-16)
+
+`ch_InsertAction` at TL `0x4051d0` / Gold `0x4048b0` and
+`ch_GetFreeQueueEntry` at TL `0x405080` / Gold `0x404760` are attested by
+the native `ch_InsertAction(): Could not ch_GetFreeQueueEntry()` diagnostic.
+One ordinary-C insertion body matches 461/456 executable bytes; native callers
+establish three fixed arguments followed by integer varargs. Kuna's fourth
+fixed parameter is not supported. The insertion's character.c placement and
+the new ch_queue.h declaration home remain inferred from subsystem use.
+
+`CH_QUEUE_SLOT` is an inferred occupancy-word view with opaque remaining bytes,
+not the recovered complete action type. Native allocation/iteration establishes
+2,000 slots at stride 0x194. Existing `Entry_14d0c40` models the 0x4c dispatch
+stride and observed offsets; its handler remains an opaque DWORD, without a
+reconciled callback contract. TL `0x14d0c40` / Gold `0x1469700` are 64-entry,
+0x1300-byte tables in the zero-filled virtual .data tail. Their canonical extern
+declaration establishes no storage owner or raw-link provider.
+
+The provisional message name `fcn_0041d9e0` now also identifies Gold `0x4222b0`;
+both 119-byte bodies agree. error_message.h is an inferred narrow declaration
+home. `const char*` expresses the observed read-only message contract, not an
+attested original qualifier. The wider Error API and helper names remain open.
+Complete native/object, literal and operand receipts are in .scratch/goal54.

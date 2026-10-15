@@ -42,7 +42,7 @@ extern unsigned int g_67a0d8;
 
 void __cdecl fcn_0042bf20(char*, int);
 int __cdecl fcn_0042bd20(char*);
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_004b2070(void);
 void __cdecl fcn_0046b4f0(void);
 int __cdecl fcn_00470820(int, int, char*);

@@ -33,7 +33,7 @@ struct Task {
 extern float g_6628a8;
 void __cdecl fcn_00404300(char* e, char* name, int n);
 int __cdecl fcn_004042b0(char* e);
-int __cdecl fcn_004050c0(Task* t);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl fcn_004045c0(char* e);
 
 void __cdecl fcn_00406280(Task* t)
@@ -56,7 +56,7 @@ void __cdecl fcn_00406280(Task* t)
 			*(unsigned short*) (e + 0x8c) &= ~2;
 		}
 		if (fcn_004042b0(e)) {
-			fcn_004050c0(t);
+			fcn_004050c0((char*) (t));
 			fcn_004045c0(e);
 		}
 	}

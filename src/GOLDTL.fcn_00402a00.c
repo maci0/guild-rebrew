@@ -5,7 +5,7 @@
 extern char g_675328[];
 void __cdecl fcn_00442d50(void* p, int on);
 void __cdecl fcn_00442c00(void* p, int on);
-void __cdecl fcn_0041d9e0(char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 void __cdecl fcn_00402a00(char* e, int on)
 {

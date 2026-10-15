@@ -17,7 +17,7 @@ extern Group_102cbc4 g_102cbc4[8];
 extern char* g_1015ea0;
 extern char s_67d4b0[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 /* ADDRESS: GOLDTL 0x004693b0 */
 int __cdecl fcn_004693b0(int n, ...)

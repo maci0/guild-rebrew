@@ -4,12 +4,12 @@ extern int g_6b8010;
 
 char* __cdecl fcn_00402610(char*);
 int __cdecl fcn_00413190(int);
-void __cdecl fcn_004050c0(char*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00407330(void);
 void __cdecl fcn_00455350(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
-char* __cdecl fcn_004051d0(char*, char*, int, ...);
+
 
 /* ADDRESS: GOLD 0x0040a9c0 */
 /* ADDRESS: GOLDTL 0x0040b7f0 */
@@ -42,7 +42,7 @@ void __cdecl fcn_0040b7f0(char* ev)
 	if (door != 0 && map != 0) {
 		fcn_00455350(door, door + 0x4c, pos);
 		if (fcn_0045b990(map, pos, &col, &row, &height)) {
-			walk = fcn_004051d0(*(char**) (ev + 0x14), ev, 0x2d, col, row, room);
+			walk = ch_InsertAction(*(char**) (ev + 0x14), ev, 0x2d, col, row, room);
 			*(int*) (walk + 0x160) |= 0x10;
 			*(float*) (walk + 0x144) = pos[0];
 			*(float*) (walk + 0x148) = pos[1];

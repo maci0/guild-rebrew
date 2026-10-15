@@ -54331,3 +54331,61 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   ownership-proof,rename-final-preview,rename-applied,preservation,lint-all-final,
   data-all,types-*,status-final,refresh-real-replay}.json and server-gate-final.log.
   Upstream .scratch/goal53-upstream retains full regression/push and merge receipts.
+
+### Goal54 — shared character action insertion (2026-10-16)
+
+- Reconstructed attested ch_InsertAction as one ordinary C89 definition in
+  character.c: TL4051d0 RELOC461 and Gold4048b0 RELOC456. Placement is inferred;
+  library scans against 7,102,296 signatures miss, while native diagnostics and
+  complete Kuna/native comparisons establish the game algorithm. Kuna's extra
+  fixed parameter is rejected by actual stack/caller use. Retain native mutation,
+  validation and failure order, including deleting the position in the final
+  bounds-failure path. Only the evidenced universe stride differs by target.
+- Adopted attested ch_GetFreeQueueEntry through the managed shared rename, with
+  canonical queue declarations and an inferred occupancy-only CH_QUEUE_SLOT view.
+  Corrected conflicting delete/checker declarations and integer pointer transport
+  in 40db50; typed payload callers explicitly use the established byte view.
+  Existing getter bodies remain RELOC64. No payload or callback layout is invented.
+- Bound the existing shared message source to Gold4222b0, earning RELOC119.
+  Its 49 local declarations now share the one-argument read-only void contract
+  in a narrow inferred Error header; all 58 calls discard the result. Broader
+  Error declarations remain unreconciled. Gold4047a0 is positively paired with
+  TL4050c0 but remains NEAR_MATCHING98/110 with the existing memset scheduling
+  debt; its new source binding contributes no matched bytes.
+- Registered two dispatch-table data rows, each 64*0x4c, with full native extent
+  and zero-filled section evidence. The header is extern-only; storage ownership
+  and linked providers remain unresolved. Used the existing universe backing
+  object for +b4/+3d5 views, avoiding a duplicate allocation for its +b0 interior.
+  Added four compiler-checked bindings for queue-slot and dispatch-entry strides.
+- Complete production proofs cover six bodies, 1,283 bytes and 60 operand sites,
+  including full literal extents/import names. Forty wrong-operand controls reject.
+  Supporting unresolved native destinations remain explicit hypotheses; there is
+  no client raw-link/provider or callback-contract completion claim.
+- Expanded verification covers 162 target contexts: 147 pass and 15 remain weak,
+  including the newly bound Gold delete. All 144 previous strong contexts in this
+  surface pass. All 8,388 old identities and 6,035 old strong statuses survive;
+  current totals are 8,392 identities and 6,038 strong statuses. Old data/type
+  records and histories survive. Six inventory extent repairs remove only
+  trailing NOPs from function extents, preserving the separate alignment bytes.
+- Final lint is 0 errors/0 warnings for all targets. Data has zero conflicts or
+  duplicate storage definitions. Type checks report 1,020 C-source structs and
+  no findings; the moved header view is covered by its stable type bindings.
+  Five focused contract audits have zero findings and current hashes for 3,981
+  inputs, with SDK/include unknowns 122/904/616. No whole-project closure claim.
+- The server gate passes 316 function and 652 data checks, all 286,720 raw bytes,
+  imports/exports/relocations/layout and Wine loading/exports. Raw SHA-256 remains
+  3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+  Initial Docker startup stalls also affected /bin/true; a later startup probe
+  completed in 0.672s and both actual compiles passed. No image rebuild, daemon
+  changes or host compiler fallback was needed. Failed/timed-out logs are retained.
+- Matched game gains: TL +461 to 693,213; Gold +575 to 378,477. Libraries stay
+  390,163/9,742; padding is 33,590/23,490. Accounted text is TL1,116,966/2,491,370
+  (44.8%), Gold411,709/2,006,532 (20.5%). Both clients still have zero verified
+  initialized-data bytes and no verified raw image. No library progress claimed.
+- Receipts/replays: .scratch/goal54/{native-proof,preservation,delete-native-pair,
+  scope-promote,contract-summary,lint-final,data-final,status-final,types-*}.json;
+  Kuna/native/library inputs, guarded rename/register/extent previews and applies,
+  compiler-checked type receipts, Docker events and server-gate.log. The source
+  organization review is retained; complete client PE comparisons remain open.
+  Both repositories have only main worktrees. Another session's 23 upstream
+  accounting edits remain unstaged and untouched; no new upstream bug identified.

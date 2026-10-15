@@ -17,7 +17,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
 extern int g_772558;
 
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_00475fd0(void*);
 int __cdecl fcn_00476b10(int x, int y, unsigned char r, unsigned char g, unsigned char b, void* s);
 void __cdecl fcn_00476060(void*);

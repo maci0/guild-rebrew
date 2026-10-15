@@ -17550,3 +17550,27 @@ storage_kind = "alias"
 note = "Four-byte declaration view accessed by TL object-animation callers in initialized .data; reference bytes are zero. No allocation, storage owner or complete backing extent established. Existing numeric name retained; inferred meaning pending. Function comparisons do not verify data."
 updated_by = "data"
 updated_at = "2026-10-14T17:59:48+00:00"
+
+["GOLDTL.0x014d0c40"]
+file = "src/Develop/DieGildeAddOn/game/ch_queue.h"
+name = "g_14d0c40"
+kind = "GLOBAL"
+type = "Entry_14d0c40[64]"
+storage_kind = "object"
+size = 4864
+section = ".data"
+note = "64 x 0x4c action dispatch table; native 0x40bdfd/0x40be04/0x40be09 clear 0x4c0 DWORDs and setter 0x406210 bounds index at 0x3f. Zero-filled virtual .data tail. Extern-only header: source owner and raw-link provider unresolved. Handler retains existing opaque DWORD access view, not a reconciled callback signature."
+updated_by = "data"
+updated_at = "2026-10-15T17:44:43+00:00"
+
+["GOLD.0x01469700"]
+file = "src/Develop/DieGildeAddOn/game/ch_queue.h"
+name = "g_14d0c40"
+kind = "GLOBAL"
+type = "Entry_14d0c40[64]"
+storage_kind = "object"
+size = 4864
+section = ".data"
+note = "64 x 0x4c action dispatch table; native 0x40afcd/0x40afd4/0x40afd9 clear 0x4c0 DWORDs and paired setter 0x405670. Zero-filled virtual .data tail. Extern-only header: source owner and raw-link provider unresolved. Handler retains existing opaque DWORD access view, not a reconciled callback signature."
+updated_by = "data"
+updated_at = "2026-10-15T17:46:47+00:00"

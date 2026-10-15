@@ -41,7 +41,7 @@ extern char s_67d47c[];
 extern char s_67d474[];
 extern char s_67d46c[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00465950(char* name);
 int __cdecl fcn_00469890(void);
 int __cdecl fcn_0046b520(char* s, int font);

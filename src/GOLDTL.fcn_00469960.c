@@ -1,7 +1,7 @@
 extern char* g_772500;
 extern char g_67d4e0[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 /* ADDRESS: GOLD 0x0046cab0 */
 /* ADDRESS: GOLDTL 0x00469960 */

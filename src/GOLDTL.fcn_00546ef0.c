@@ -1,6 +1,6 @@
 #include "he_tables.h"
 
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 
 extern ApEvent g_7dcae0[256];
 

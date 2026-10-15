@@ -24,7 +24,7 @@ void __cdecl fcn_00436a00(int h, struct anim_406410* a, int n);
 int __cdecl fcn_00404f60(char* ev);
 int __cdecl fcn_00413190(char* p);
 void __cdecl fcn_004432d0(int a, int b);
-void __cdecl fcn_004050c0(char* ev);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 void __cdecl fcn_00406410(char* ev)
 {

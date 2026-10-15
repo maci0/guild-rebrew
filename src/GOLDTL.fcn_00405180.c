@@ -1,6 +1,7 @@
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
+
 /* ADDRESS: GOLD 0x00404860 */
 /* ADDRESS: GOLDTL 0x00405180 */
-
 void __cdecl fcn_00405180(void* a1, void* a2)
 {
 	void* p;

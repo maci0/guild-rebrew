@@ -1864,7 +1864,7 @@ extern VFS_DIR* g_6b7fdc;
 extern int g_6b7fec;
 extern char g_6b7fe4[];
 extern char g_6b7fe8;
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 #define g_vfs_root g_6b7fdc
 #define g_stream_count g_6b7fec
 #define g_stream_pool g_6b7fe4

@@ -26,7 +26,7 @@ char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* heig
 char* __cdecl fcn_0040c120(char* e, int kind, int a, int b, int c);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 char* __cdecl fcn_00404dc0(char* e, char* name, int flag);
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_004027b0(void);
 
 int __cdecl fcn_00405e20(void)

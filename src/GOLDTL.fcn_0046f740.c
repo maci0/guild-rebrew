@@ -33,7 +33,7 @@ typedef struct Win {
 extern Win_1015f40 g_1015f40[0x60];
 extern char s_67d420[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00469c30(int x, int y, int a3);
 void __cdecl fcn_00465eb0(int id, int win);
 

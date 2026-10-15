@@ -24,7 +24,7 @@ void __cdecl fcn_00413120(void*);
 void __cdecl fcn_00402aa0(char*);
 struct anim_409ae0* __cdecl fcn_00404dc0(char*, const char*, int);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_004050c0(char*);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLD 0x00408cb0 */
 /* ADDRESS: GOLDTL 0x00409ae0 */

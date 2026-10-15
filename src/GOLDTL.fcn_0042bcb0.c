@@ -6,7 +6,7 @@ extern int g_6b7f98;
 extern char g_67998c[];
 extern char g_679964[];
 int __cdecl fcn_0064f170(const char* a, const char* b, unsigned int n);
-void __cdecl fcn_0041d9e0(char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 void __cdecl fcn_0042bcb0(char* s)
 {

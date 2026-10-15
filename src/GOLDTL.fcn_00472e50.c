@@ -2,7 +2,7 @@
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_772514;
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_00476970(int a);
 
 /* ADDRESS: GOLDTL 0x00472e50 */

@@ -2,7 +2,7 @@
 
 void __cdecl fcn_004011f0(int f, void* x);
 void __cdecl fcn_00430a80(int f, int off, int whence);
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl fcn_004306b0(void* buf, int size, int count, int f);
 

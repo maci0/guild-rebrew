@@ -10,7 +10,7 @@ typedef struct {
 
 extern int g_1052c60[0x60];
 extern char g_679e00[];
-void __cdecl fcn_0041d9e0(char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 int __cdecl fcn_0042de90(int a, int b)
 {

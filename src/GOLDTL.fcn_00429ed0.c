@@ -12,7 +12,7 @@ struct cmd_429ed0 {
 
 extern void* g_6b7e9c;
 
-void __cdecl fcn_0041d9e0(const char*);
+#include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00429e60(const char*);
 
 /* ADDRESS: GOLD 0x0042b5b0 */

@@ -8,7 +8,7 @@ extern char g_67534c[];
 
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 
 void* __cdecl fcn_00403200(void)
 {

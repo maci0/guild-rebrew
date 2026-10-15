@@ -4,7 +4,7 @@
 extern char g_68b2d8[];
 
 unsigned short* __cdecl fcn_00508e40(int);
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_00529160(int, int, int, int);
 
 int __cdecl fcn_004cc4c0(char* x, char* out)

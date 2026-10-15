@@ -38,7 +38,7 @@ struct Device {
 extern int g_6777ac;
 extern void* g_6b5de0;
 extern void* g_6b5df4;
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 void __cdecl fcn_0041b700(void)
 {

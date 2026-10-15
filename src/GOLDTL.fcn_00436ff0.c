@@ -23,7 +23,7 @@ char* __cdecl m_alloc(int size, const char* tag);
 void* __cdecl fcn_0042ff50(char*, char*, int);
 int __cdecl fcn_004306b0(void*, int, int, void*);
 void __cdecl fcn_00430580(void*);
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 long __stdcall fcn_006129e7(void*, void*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, int, int,
     unsigned long, unsigned long, unsigned long, void*, void*, struct unk_436ff0**);
 void __cdecl m_FreeTracked(void*);

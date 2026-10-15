@@ -7,7 +7,7 @@ extern char g_68ae64[];
 
 void __cdecl fcn_004c4330(void*);
 
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 
 void __cdecl fcn_004c5c00(int a1, int a2, int a3, char* a4)
 {

@@ -43,7 +43,7 @@ typedef struct {
 } Entry;
 
 #include "client_types.h"
-extern Entry_14d0c40 g_14d0c40[];
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 Task* __cdecl fcn_0040c0a0(char* e);
 void __cdecl fcn_004079d0(Task* t);
 

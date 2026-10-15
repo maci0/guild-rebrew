@@ -11,7 +11,7 @@ extern int g_772568;
 extern char s_67d890[];
 extern char s_67d868[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00466190(int id);
 void __cdecl fcn_00475fd0(int surf);
 void __cdecl fcn_0047cba0(int x, int y, int surf, int src, int mode);

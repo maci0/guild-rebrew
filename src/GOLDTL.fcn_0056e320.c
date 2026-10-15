@@ -12,7 +12,7 @@ struct pos14 {
 #pragma pack()
 
 char* __cdecl fcn_00508e40(int);
-void __cdecl fcn_0041d9e0(char*);
+#include "Develop/Units/Error/error_message.h"
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
 void __cdecl fcn_00546190(char*);

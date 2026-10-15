@@ -21,7 +21,7 @@ extern int g_1040494;
 extern int g_67d398;
 extern char s_67d420[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00469890(void);
 int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_0046f650(int slot, fcn_0046fdf0_Win* parent);

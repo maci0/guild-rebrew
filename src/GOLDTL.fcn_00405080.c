@@ -1,29 +1,27 @@
 #include <string.h>
 
 
-// SIZE 0x194
-typedef struct {
-	int used;
-	char pad[0x190];
-} T405080;
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 extern char* g_6b5c20;
 
-T405080* __cdecl fcn_00405080(void)
+CH_QUEUE_SLOT* __cdecl ch_GetFreeQueueEntry(void)
 {
 	int i;
 
 	for (i = 0; i < 2000;) {
-		if (((T405080*)g_6b5c20)[i++].used == 0) {
+		if (((CH_QUEUE_SLOT*)g_6b5c20)[i++].belegt == 0) {
 			break;
 		}
 	}
 	if (i >= 2000) {
 		return 0;
 	}
-	return &((T405080*)g_6b5c20)[i - 1];
+	return &((CH_QUEUE_SLOT*)g_6b5c20)[i - 1];
 }
 
+/* ADDRESS: GOLDTL 0x004050c0 */
+/* ADDRESS: GOLD 0x004047a0 */
 int __cdecl fcn_004050c0(char* task)
 {
     char* next;

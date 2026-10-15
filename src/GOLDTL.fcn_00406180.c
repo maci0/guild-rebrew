@@ -29,7 +29,7 @@ struct Task {
 	char pad191[3];
 };
 
-int __cdecl fcn_004050c0(Task* t);
+#include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl fcn_00435500(int a, int b);
 void __cdecl fcn_00406560(char* e);
 
@@ -46,7 +46,7 @@ int __cdecl fcn_00406180(char* e)
 	}
 	t->b190 = 1;
 	while (t->next != 0) {
-		fcn_004050c0(t->next);
+		fcn_004050c0((char*) (t->next));
 	}
 	if (t->kind == 0x2e) {
 		if (*(int*) (e + 0x70) != 0) {
@@ -54,7 +54,7 @@ int __cdecl fcn_00406180(char* e)
 				     *(int*) (*(char**) (e + 0x70) + 0x68));
 			*(int*) (e + 0x70) = 0;
 		}
-		fcn_004050c0(t);
+		fcn_004050c0((char*) (t));
 	}
 	if ((*(unsigned char*) (e + 0x8c) & 0x10) != 0) {
 		fcn_00406560(e);

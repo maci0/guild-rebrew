@@ -39,7 +39,7 @@ extern char g_6790c8[];
 
 void *__cdecl fcn_0042ff50(char *, char *, int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
-void __cdecl fcn_0041d9e0(char *);
+#include "Develop/Units/Error/error_message.h"
 int __cdecl CloseVfsStream(void *);
 char *__cdecl m_alloc(int, char *);
 int __cdecl vfs_ReadData(char *, int, int, void *);

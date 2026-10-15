@@ -29,7 +29,7 @@ extern char* g_1015ea0;
 extern void** g_772540;
 extern char s_67d59c[];
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 
 /* ADDRESS: GOLDTL 0x0046f650 */
 void __cdecl fcn_0046f650(int slot, char* parent)

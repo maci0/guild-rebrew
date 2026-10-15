@@ -23,7 +23,7 @@ struct msg {
 	char pad9d[0x5b];
 };
 
-void __cdecl fcn_0041d9e0(const char* msg);
+#include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_004c5580(struct msg*, int, char*);
 
 int __cdecl fcn_00545e80(int id, int arg, char* text1, unsigned char flags, int value, int x, int y, char* name, char* text2)
