@@ -107,6 +107,40 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-15
 
+Docker and Git access are restored after the session permission change. Both
+pinned compiler images are present; rebuilding is unnecessary. The earlier
+three-turn environment block is historical. The fresh server gate finishes
+exit0/PASS in `gate-access-restored.log`:286,720 raw bytes identical,316/316 game
+and652/652 data checks, imports, relocations, Wine and compiler alignment pass. Native
+message-chain investigation is recorded below. Resolve the include closures,
+reconcile the packet-wrapper/queue and message-helper contracts, verify all
+affected client contexts and the server gate, then commit and push the reviewed
+changes. The full objective remains unchanged and incomplete.
+
+Latest resumed checks: `lint-resume-all.json` passes all3,879 files in each
+target with zero errors/warnings; `data-conflicts-resume-all.json` reports zero
+type conflicts and duplicate definitions in all three targets. Function contract
+audits separately confirm incompatible office/helper declarations; lint and data
+checks do not establish those contracts. Their source inventory and native message
+helper receipt are in `.scratch/goal46`. Complete the reviewed canonical interfaces
+and verify every affected target context before adopting the office body.
+
+Message-chain native closure now covers129/36/79/71-byte pairs (630 bytes across
+the clients). The wrappers preserve full-width ID/flag arguments; their helper
+uses low bytes for lookup/packet fields. A further return/prototype mismatch in
+the packet wrapper must be reconciled with existing `client_packet_queue.h`
+before the helper contract is closed. The wrapper copies15 payload bytes while
+the helper initializes11; preserve native behavior. The reconciliation preview
+refuses unresolved include contexts without edits. Receipts and exact next scope
+are in docs/TODO.md and `.scratch/goal46/office-message-native-contract.json`.
+
+The interrupted `gate-office-evidence.log` has no terminal PASS and is historical.
+The restored-access scope audit preserves all8,381 identities,6,024 strong
+statuses and prior history. Only316 server verification records and275 associated
+history/timestamp records refresh; data/type/source stores and production C are
+unchanged. Both compiler smoke checks and fresh client71/129-byte baseline
+comparisons pass. The full goal remains unfinished.
+
 The full goal remains unfinished: both raw client images, full initialized-data
 verification and ownership, unresolved code ranges, shared source contracts and
 faithful recovery of discarded server inputs remain open. Prioritize new TL
@@ -200,8 +234,8 @@ instructions,1,800 identical fixed bytes and87 corresponding address operands,
 followed by12 alignment NOPs each (office-native-counterpart.json). A shared
 ordinary-C office-action candidate is in ignored scratch only. Initial2,080-byte
 output improved after preserving the cached second participant across both
-relationship calls and the full-width255 flag argument. The best scratch shape emits2,103 bytes against2,148; loop/input-view
-experiments remain measurements, not source adoption or new coverage. Native
+relationship calls and the full-width255 flag argument. The frozen first candidate emits2,103 bytes against2,148; the later direct
+membership-dispatch candidate below improves this without source adoption. Native
 floating arithmetic and the six24-byte output records replace Kuna's omitted
 FPU expression and artificial split stack arrays. Before adoption, reconcile
 helper and caller contracts, resolve every operand/literal, and verify both
@@ -213,7 +247,7 @@ misses its indirect-switch bodies. The shared server seed emits1,371 bytes
 against2,016 native bytes and is not a valid client provider. Keep that trial
 separate; do not copy the incomplete seed or claim a client match.
 
-The full goal remains ACTIVE. Client raw images, initialized-data bytes, shared
+The full goal remains unfinished. Client raw images, initialized-data bytes, shared
 interfaces and source ownership remain incomplete. Checkpoint45d69dae passed
 raw server identity, all-target lint0/0 and zero data conflicts/duplicate
 allocations. Its audit preserved8,381 rows and6,024 strong statuses. A compiler
@@ -241,9 +275,31 @@ all8,381 identities,6,024 strong statuses and prior history; only verification
 evidence and the three selected source files change. Data/type stores and native identities remain unchanged. This repairs
 source fidelity, with zero new matched game bytes.
 
-The larger office candidate remains unadopted. Two read-only committee reviews
-are examining its45-byte layout gap; quota-limited alternate providers were
-replaced. Keep the best scratch body stable until their evidence-backed plan.
+The larger office candidate remains unadopted. Both independent reviews accounted
+for the old 45-byte deficit: register lifetimes and folded notification/return
+tails, with no missing gameplay operation. Directly dispatching a membership hit
+from the search restores the native layout and all87 operand sites. The new best
+scratch source is.scratch/goal46/office-direct-membership.c. Both client tests
+report NEAR_MATCHING,2,131/2,148 bytes, with the same17 differing bytes. These are
+six stack-slot displacements and instruction ordering in one outer-loop latch;
+the comparison and control-flow edges match. No coverage is credited.
+
+The explicit native-address proof resolves all87 operand sites/348 operand bytes
+in each client;40 wrong-symbol controls introduce operand conflicts beyond those
+17 nonoperand differences (office-near-operands.json). Both literal audits verify
+all15 complete float/double occurrences. This is bounded object/native evidence,
+not registered bindings, reconciled source contracts, linked providers or raw
+client image identity. Stock CRT scans locate __ftol candidates in the expected
+LIBCMT/LIBC archives; provider resolution remains explicitly unresolved.
+
+Explicit notification returns do not improve the old2,103-byte shape. Moving the
+outer increment to the body, a guarded do/while, and canonical record/action-view
+probes leave the new17-byte residue unchanged. An explicit outer cursor regresses.
+Keep the algorithms and their arithmetic intact; do not repeat these trials or
+invent padding, assembly or volatile accesses. Remaining work is canonical
+helper/caller contracts and evidence-led compiler/source-context work. The actual
+three-file forwarding repair is committed and pushed as73cbbe63. Both clients
+retain its matches; gate-forwarding.log and lint-forwarding-all.json pass.
 
 ## History
 

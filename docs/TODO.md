@@ -53694,3 +53694,143 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   again passes3879 files each,0errors/0warnings. Scope audit preserves8381 rows,
   6024 strong statuses and all prior history; only three selected C files and
   verification evidence change. Data/type stores remain byte-identical.
+
+
+### Goal46 — office layout breakthrough
+
+- Forwarding code checkpoint73cbbe63 is pushed and clean: three existing C files,
+  six complete native bodies/176 resolved bytes, eight rejecting controls. No
+  new game bytes were credited. Both independent read-only reviews accept the
+  forwarding evidence and retain uncertainty about original return spellings.
+- The reviewers independently account for the old45-byte deficit. Native/candidate
+  region deltas:0..743 identical lengths; case32 arithmetic+22; its notifications
+  -24; paired-loop region+12; final notification/return tails-55. This is register
+  allocation and common-tail folding, not missing gameplay behavior. Their two
+  proposed measurements were independent of the exhausted loop/alias trials.
+- Explicit notification returns still emit2103B (904 masked agreement). Direct
+  membership dispatch emits2148B with87 operands and2131 matching bytes in BOTH
+  clients. The residual17 bytes are six exchanged outer/inner cursor stack-slot
+  displacements and reordered independent updates in the18-byte loop latch.
+  The identical comparison/backedge starts at offsets1559/1561. Preserve both
+  participant IDs across the two calls. This remains NEAR_MATCHING, not byte match.
+- The native-address probe resolves all87 operands/348 bytes in both clients.
+  Forty wrong-symbol controls add operand conflicts outside the existing17-byte
+  residue. Both complete literal audits pass15 occurrences. Receipts are
+  office-near-operands.json and office-direct-membership-literals{,-gold}.json.
+  These do not establish source-interface reconciliation, registered identities,
+  client raw links or providers. __ftol stock candidates exist in the appropriate
+  archives; library callee/provider resolution remains unresolved.
+- Follow-up counter-at-bottom and guarded-do source forms canonicalize to the
+  same17 differences. The explicit outer cursor regresses to2144B. Existing
+  canonical24-byte record and8-byte action-view probes still yield the17-byte
+  residue. The canonical-record scratch compile needs an explicit/I<project>/src;
+  its first missing-include failure was a probe setup error, not a product bug.
+- New best source:ignored.scratch/goal46/office-direct-membership.c; frozen prior
+  source office-actions.c remains2103B for replay. Full current evidence and
+  remaining integration scope are in that scratch directory. No office source
+  or new native identity has been adopted, and no new game bytes are claimed.
+
+### Goal46 — resumed contract audit and validation limits
+
+- Fresh `lint --all-targets --json` passes3,879/3,879 files per target, with
+  zero errors/warnings (`lint-resume-all.json`). Fresh `data list --conflicts
+  --all-targets --json` reports zero conflicts and multiple definitions in all
+  three targets (`data-conflicts-resume-all.json`). These checks do not verify
+  initialized client data bytes or reconcile function declarations.
+- `types contracts --name fcn_004eba60 --all-targets --json` confirms the TL
+  callers disagree on both pointer arguments. Gold exposes only one parsed
+  declaration, so absence of a reported Gold disagreement is not complete
+  source closure. The helper `fcn_004e8240` has six mismatch categories in both
+  clients, including pointer/integer transport, flag widths and return type.
+  Both commands exit1 and leave verdicts unchanged; unresolved include contexts
+  remain explicit. Receipts:`contracts-office{,-helper}-all.json`.
+- The other two selected contract audits also finish with exit1 and unchanged
+  verdicts. Record helper004e8b80 disagrees on its output pointer view in12 TL/9
+  Gold contexts. Skill helper00507f10 disagrees on pointer/integer transport and
+  float/double return in27 TL contexts;20 Gold contexts disagree on pointer
+  transport/views. Receipts:`contracts-office-{record,skill}-all.json`. Keep
+  unresolved include contexts visible; do not count matching x86 widths or
+  matching bytes as compatible C interfaces.
+- The source inventory covers4 office callers,11 message-helper files,12 record
+  helper files and27 skill-helper files, including providers. Preserve all target
+  bindings, not only the TL filename context. Inventory:
+  `.scratch/goal46/office-contract-source-inventory.txt`. The message helper's
+  complete129-byte native receipt confirms nullable pointer arguments read at+4,
+  byte flag loads/stores, and an integer failure/tail-call result. It does not
+  establish whether original flag parameters were char or int. Preserve the
+  office caller's native full-width255 argument when reconciling those contracts.
+- Existing compiler notes document unused prototypes changing spill-slot colors
+  without a body-size change (`msvc6-allocator.md`, shared-sound observation).
+  This supports source-context investigation, not arbitrary declaration sweeps.
+  The already-finished plain-SP5 control emits2,117 bytes/250 agreement and is
+  rejected; retain the pinned Processor Pack client compiler.
+- Docker access is denied by the current session environment. Git metadata and
+  upstream paths are read-only. No fresh compile/link, upstream edit, commit or
+  push can be completed here. The interrupted office-evidence gate is incomplete;
+  preserve its log and the last completed forwarding gate separately. Production
+  C, managed stores and prior matched-byte credit remain unchanged.
+
+### Goal46 — message contract native closure
+
+- Complete native checks now cover helper129, direct forwarder36, entity-pair
+  forwarder79 and packet wrapper71 in BOTH clients:630 bytes against the actual
+  reference images, with all seven corresponding operand sites checked per
+  target. Fixed bytes agree for all four pairs. Replay:
+  `.venv/bin/python .scratch/goal46/office-message-native-contract.py`;
+  receipt:`office-message-native-contract.json`. This is native counterpart
+  evidence only, not compilation, a source verdict or a raw-link provider claim.
+- TL4e8210/Gold4e6650 forward the first argument and final flag through full
+  DWORD loads/pushes. The native helper reads only the first argument's low byte
+  for lookup and stores byte flags in its packet. Do not turn those forwarding
+  parameters into byte types merely because the packet fields are bytes: that
+  can add narrowing instructions. Integer parameters with explicit byte access
+  in the helper are a candidate to measure, not recovered original declarations.
+- The return/provider contract reaches one layer further than the initial
+  inventory: helper004e8240 declares004c63a0 as int(char*), but its actual
+  71-byte definition is void(Packed15*) and declares queue004c4330 as void(void*).
+  Canonical client_packet_queue.h already declares the queue as int(pkt99*).
+  Native TL4c63a0/Gold4c58e0 call their respective queues and return without
+  replacing EAX; helper success forwards that result, failure establishes-1.
+  Reconcile this chain before treating the office helper's return as closed.
+- The packet wrapper copies exactly15 bytes to payload+0x10. Its helper prepares
+  an id byte, two entity-id DWORDs and two flags:11 written bytes in a16-byte
+  local. Preserve the native remaining-byte behavior; do not zero or invent
+  semantic fields in order to make a tidier packet type. Both nullable entity
+  arguments are dereferenced at+4 only when nonzero.
+- The supported reconciliation preview refuses incomplete source/include
+  contexts (exit2), with no writes:office-message-reconcile-preview.json. The
+  attempted unsigned-char-id proposal is superseded by the native full-width
+  forwarding evidence above; it is not an approved canonical signature. Missing
+  CRT/SDK include closures remain unresolved. Do not bypass the writer's guard.
+- The first native-pair self-check rejected a mistyped expected Gold slot-helper
+  destination4e5fb0. The fresh receipt establishes4e6030; the corrected check
+  passes. This was a probe-input correction, not a binary or Rebrew bug.
+- Execution is blocked after three consecutive goal turns with Docker socket
+  denial and read-only Git/upstream access. The final audit rechecked the actual
+  Docker error, reconciliation exit2, unchanged code checkpoint73cbbe63 and the
+  incomplete office-evidence gate. No new compiler or linked-image result is
+  claimed. Resume from the packet-wrapper/queue contract, then message helper,
+  all affected caller/target verification and the office body. Restore complete
+  include/toolchain access before reconciliation; run the required fresh gate
+  before committing/pushing. The full three-binary goal remains incomplete.
+
+### Goal46 — Docker access restored
+
+- The session permission change restores Docker and Git access. Both pinned
+  images are present (server73839754f0b0, client26514f1867f8); neither needs a
+  rebuild. Both `toolchain smoke` probes finish exit0/OK against recorded hashes.
+  Receipts:`toolchain-{server,client}-access-restored.json`.
+- Fresh no-promote source-target comparisons retain RELOC71 for the packet
+  wrapper and RELOC129 for the message helper in both clients, with every known
+  operand validated. Receipts:`office-{packet,helper}-access-restored.json`.
+  These establish current byte comparisons, not repaired C contracts or new
+  coverage. Both source files are unchanged.
+- The new server gate finishes exit0/PASS in `gate-access-restored.log`:
+  286,720 raw bytes identical;316/316 game,652/652 data, imports, relocations,
+  Wine and compiler alignment pass. The prior interrupted gate is historical.
+  Scope audit preserves8,381 identities,6,024 strong statuses and prior history;
+  only316 server verification records and275 history/timestamp records refresh.
+  Data/type/source stores and production C are unchanged. Receipt:
+  `access-restored-scope-audit.json`. The Docker SDK declaration
+  context feature gap is now recorded upstream in `docs/IDEAS-GUILD.md`; unrelated
+  upstream CLI work is preserved.
