@@ -149,7 +149,8 @@ The existing shared protection helper TL41d500/Gold421f00 retains RELOC235 in
 both fresh client CLI tests. Its five trailing NOPs are alignment, not body.
 All pre-existing8379 identities and6024 strong statuses must remain preserved;
 this checkpoint adds only two origin-only library identities and two selected
-native boundary repairs. No game C/header or data/type-store edits are intended.
+native boundary repairs. Data/type-store ownership and extents remain unchanged; the separately reviewed
+client forwarding repair below changes three existing C bodies without new coverage.
 
 The camera interface migration remains partial. Shared list removal112, selector42
 and motion54 retain their bounded native proofs. Reviewed float position/rotation
@@ -183,7 +184,11 @@ Guild d31f0323 is committed and pushed. The subsequent upstream main push exited
 all12,252 tests passed/36 skipped, but the pytest hook reported that files changed
 during its run and blocked publication. This is a hook failure, not a failed test
 or demonstrated transport error. The terminal evidence was sent to the upstream
-session; do not start competing pushes. Its4.1.0 release work is independent.
+session; do not start competing pushes. The upstream session subsequently published Rebrew4.1.0 and Recoverage8.0.0,
+with both CI suites passing and release assets equal to CI artifacts. Rebrew
+passed12,252 tests; Recoverage passed2,292 backend and24 browser tests. Both
+projects are pushed to main; no PyPI publication. These supersede the earlier
+publication-pending checkpoint.
 
 New byte-focused TL triage is in.scratch/goal46. The intentionally capped
 start-function lane returns only50 entries even with--limit3000; the complete-lane
@@ -208,13 +213,37 @@ misses its indirect-switch bodies. The shared server seed emits1,371 bytes
 against2,016 native bytes and is not a valid client provider. Keep that trial
 separate; do not copy the incomplete seed or claim a client match.
 
-The full goal remains ACTIVE. Current client raw images, initialized-data bytes,
-shared interfaces and source ownership remain incomplete. Fresh goal46 gate-checkpoint.log passes raw server identity and all required
-checks. Fresh all-target lint is0/0 and data conflict/duplicate-definition counts
-are zero. The audit preserves all8,381 rows and6,024 strong statuses. Changed
-compiler evidence invalidated275 linked verdicts, which the same raw image then
-re-earned as EXACT; their prior history is retained. Production C and data/type
-stores are unchanged. See.scratch/goal46/scope-audit.json.
+The full goal remains ACTIVE. Client raw images, initialized-data bytes, shared
+interfaces and source ownership remain incomplete. Checkpoint45d69dae passed
+raw server identity, all-target lint0/0 and zero data conflicts/duplicate
+allocations. Its audit preserved8,381 rows and6,024 strong statuses. A compiler
+evidence refresh re-earned275 linked EXACT results without losing their history.
+
+The prerequisite forwarding contract is repaired in three existing shared C files.
+GOLDTL.fcn_005100f0.c explicitly forwards both integer arguments instead of
+relying on an accidental tail jump from void(void). GOLDTL.fcn_0057dd40.c uses
+the same void byte-pointer interface as its sole native caller, which discards
+EAX. The old reconstructed return propagation did not establish a native return
+contract. Other wrapper callers already use void(int,int). The50-byte destination
+GOLDTL.fcn_004c6ae0.c now uses the existing canonical client_packet_queue.h
+interface and a typed view of its packet buffer, replacing an incompatible local
+queue declaration. These reconstructed access/return contracts are not attested
+original spellings.
+
+All three bodies retain complete5/33/50-byte matches in both clients. The full
+operand-resolved proof covers176 bytes and eight wrong-callee controls reject
+(forward-native-proof.json). The unchanged135-byte caller also retains both
+matches. Named contract audits find no contradictions; the target-wide audits
+exit1 for unresolved SDK/include closures and are not wholly green checks. Fresh
+all-target lint is0/0. The fresh server gate passes in gate-forwarding.log, including raw286,720-byte
+identity and all316 game/652 data checks. The forwarding scope audit preserves
+all8,381 identities,6,024 strong statuses and prior history; only verification
+evidence and the three selected source files change. Data/type stores and native identities remain unchanged. This repairs
+source fidelity, with zero new matched game bytes.
+
+The larger office candidate remains unadopted. Two read-only committee reviews
+are examining its45-byte layout gap; quota-limited alternate providers were
+replaced. Keep the best scratch body stable until their evidence-backed plan.
 
 ## History
 

@@ -53660,3 +53660,37 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   preserves8381 rows and6024 strong statuses, with production C and data/types
   byte-identical. Updated compiler evidence reverified275 linked EXACT rows;
   their EXACT→RELOC→EXACT history is appended, with all prior history preserved.
+
+
+- Upstream session confirms Rebrew4.1.0 and Recoverage8.0.0 published on GitHub,
+  both projects pushed to main and both CI suites green. Rebrew12252 tests/89%
+  coverage; Recoverage2292 backend/24 browser tests. Release assets match CI
+  artifacts; no PyPI publication. The earlier blocked push is historical.
+- Corrected the shared five-byte005100f0/Gold50cc50 forwarding definition from
+  void(void) to void(int,int), passing both native arguments to004c6ae0/4c5f60.
+  Corrected0057dd40/Gold575800 to void(char*) and removed its fabricated source
+  result propagation. Native sole caller57dbff discards EAX, and its existing
+  declaration is void(char*); other wrapper callers already declare void(int,int).
+  Byte width equality alone did not justify the former contradictory interfaces.
+- Both changed bodies retain RELOC5/33 in both clients. Complete operand-resolved
+  native proof passes all76 bytes, with six rejecting callee controls. Unchanged
+  destination/caller retain RELOC50/135 in both clients. Receipts:forward-*-after
+  JSONs and forward-native-proof.json in.scratch/goal46. No new matched game bytes.
+- Two read-only committee members review the separate2148B office body and its
+  remaining45B compiler-layout gap. Opus/Gemini alternate-provider attempts hit
+  quota immediately; replacement is a second Codex reviewer. No project writes
+  are authorized for those reviews. Keep office-actions.c stable until consensus.
+
+- The50-byte destination now includes existing client_packet_queue.h and passes
+  its native packet buffer through that canonical struct view, replacing its
+  incompatible local void(void*) queue declaration. Fresh complete native proof
+  now covers six bodies/176 bytes with eight rejecting controls; no raw client
+  link or provider claim. Selected wrapper/event contracts have zero findings in
+  both clients. Target-wide contract commands exit1 due to unresolved unrelated
+  SDK/include closures; these are not claimed as complete passing audits.
+
+- Final forwarding gate is terminal PASS (gate-forwarding.log):286720 raw bytes,
+  all316 game/652 data checks and whole-image/Wine checks. New all-target lint
+  again passes3879 files each,0errors/0warnings. Scope audit preserves8381 rows,
+  6024 strong statuses and all prior history; only three selected C files and
+  verification evidence change. Data/type stores remain byte-identical.
