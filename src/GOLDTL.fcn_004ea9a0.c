@@ -29,7 +29,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
 char* __cdecl gm_AddObjekt(void);
 Obj* __cdecl fcn_00508e40(int id);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004e8240(unsigned char a, Obj* o, int b, int c, int d);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_004ea560(Obj* o, int v);
 void __cdecl fcn_004ea4b0(Obj* o, int v);
 
@@ -96,11 +96,11 @@ void __cdecl fcn_004ea9a0(void)
 	}
 	if (best != 0 && best != cur) {
 		if (cur != 0) {
-			fcn_004e8240(rec.a, best, 0, 1, 0xff);
+			fcn_004e8240(rec.a, (unsigned char*) best, 0, 1, 0xff);
 			fcn_004ea560(cur, 0x22);
 			fcn_004ea4b0(best, 0x22);
 		} else {
-			fcn_004e8240(rec.a, best, 0, 1, 0xff);
+			fcn_004e8240(rec.a, (unsigned char*) best, 0, 1, 0xff);
 			fcn_004ea4b0(best, 0x22);
 		}
 	}

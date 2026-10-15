@@ -21,7 +21,7 @@ void __cdecl fcn_00471b60(int);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_004e8240(int, int, int, int, int);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 

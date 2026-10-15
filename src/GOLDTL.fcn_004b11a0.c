@@ -10,7 +10,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char* g_773da8;
 
 int __cdecl fcn_004e8a80(int, void*);
-void __cdecl fcn_004e8240(int, int, int, int, int);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl fcn_0064eeec(char*);
 void __cdecl fcn_004c5530(void*);
 

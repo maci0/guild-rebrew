@@ -31,7 +31,7 @@ extern int g_67d370;
 
 unsigned char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_004e8a80(int, Info*);
-void __cdecl fcn_004e8240(int, int, int, int, int);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);

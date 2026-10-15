@@ -17,8 +17,9 @@ typedef struct {
 extern Rec18_68da68 g_9a9220[42];
 
 int __cdecl fcn_004c63a0(char*);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 
-int __cdecl fcn_004e8240(unsigned char id, char* ea, char* eb, char x1, char x2)
+int __cdecl fcn_004e8240(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2)
 {
 	char m[0x10];
 	int a;

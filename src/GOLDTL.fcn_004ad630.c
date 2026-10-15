@@ -7,7 +7,7 @@ extern int g_664e0c[];
 
 int __cdecl fcn_004e8a80(int id, int* out);
 int __cdecl fcn_00508e40(int h);
-void __cdecl fcn_004e8240(int h, int a, int b, int c, int d);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 
 void __cdecl fcn_004ad630(void)
 {

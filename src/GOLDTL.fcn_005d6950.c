@@ -31,7 +31,6 @@ int __cdecl fcn_004e8b40(int, Info*);
 unsigned char* __cdecl fcn_00508e40(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004e81c0(unsigned char*, unsigned char*);
 int __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_004c4ef0(char*);

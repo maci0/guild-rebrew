@@ -7,7 +7,7 @@ typedef Rec18_68da68 Rec18;
 
 extern Rec18_68da68 g_9a9220[42];
 
-void __cdecl fcn_004e8240(unsigned char, int, int, int, int);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 
 void __cdecl fcn_004ec780(int type)
 {

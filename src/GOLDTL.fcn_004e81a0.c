@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_004e8240(int, int, int, int, int);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 
 void __cdecl fcn_004e81a0(int a1)
 {

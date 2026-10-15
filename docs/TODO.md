@@ -53834,3 +53834,65 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   `access-restored-scope-audit.json`. The Docker SDK declaration
   context feature gap is now recorded upstream in `docs/IDEAS-GUILD.md`; unrelated
   upstream CLI work is preserved.
+
+### Goal47 — shared office-message contracts
+
+- Packet wrapper004c63a0/Gold4c58e0 now explicitly returns the canonical queue
+  result and takes the same char-pointer view as its sole caller. The existing
+  client_packet_queue.h replaces its incompatible local void queue declaration.
+  Both complete71-byte bodies remain RELOC; wrong queue/command controls reject.
+- Canonical declarations in existing game/aemter.h now cover004e8240 and004e81c0.
+  The helper uses an unsigned-char ID, entity byte pointers and integer flags;
+  the paired/direct forwarders carry entity pointers without integer parameter
+  transport. Known consumers use the canonical integer result even when ignored.
+  Thirteen C files and one header change. These are reconstructed access
+  contracts, not recovered original spellings or storage/layout changes.
+- The first all-caller baseline rejected an integer ID: the helper itself still
+  matched129, but callers004ea9a0/004ec780 grew414/65 to430/67. The unsigned-char
+  ID restores both. Inlined-header controls reproduce both outcomes, separating
+  width effects from header placement. Flags remain integers. DWORD forwarding
+  alone did not establish the ID type; the upstream idea document is corrected.
+- Exact before/after comparisons cover20 source files and40 target bindings.
+  All byte counts, mismatches and typed operand evidence are identical:35 matches
+  and five existing Gold SIZE_MISMATCH results. No new coverage is claimed.
+  Receipts:goal47/source-scope-comparison.json, scope-before/, scope-after/.
+- The reviewed batch verifier refreshes all40 records through Rebrew public
+  prepare_entries/run_verification/apply_status_updates APIs and checks the
+  stored comparison inputs afterward. TL21/21 pass; Gold14 pass and the same
+  five mismatch. The per-file CLI promotion launcher was stopped for repeated
+  metadata-store overhead; its four current children drained normally. No
+  process or write was abandoned mid-update. Receipt:batch-verification.json;
+  replay:verify-source-scope.py. This is a scoped experiment, not a second store.
+- Complete resolved proof covers packet71/helper129/pair79/direct36 in both
+  clients, plus TL-only fixed forwarder25: nine bodies/655 bytes,15 operands,
+  13 rejecting wrong-symbol controls. No raw client link/provider claim.
+  Replay:message-chain-proof.py; receipt:message-chain-proof.json.
+- Preserve the native15-byte packet copy and the helper's11 written bytes in a
+  16-byte local. Do not invent initialization or fields for trailing bytes.
+  The existing private packed type, data/type bindings and storage owners stay
+  unchanged. The source fix does not merge/split translation units.
+- Using the canonical office header in the larger office-action scratch source
+  still produces2,131/2,148 with the same17-byte residue in both clients. Do not
+  repeat this context trial or adopt the unclosed record/skill helper contracts.
+  Receipts:office-header-{tl,gold}.json. The packet-family repair is independent
+  of that unadopted body and earns no new game bytes.
+- The first packet audit correctly rejected inputs changing while the promoting
+  comparison ran. Intermediate named audits later found zero selected-name
+  contradictions but still reported unrelated SDK unknowns. Repeat audits only
+  after final verification writes finish; do not call exit1 a full green audit.
+- Packet-only gate-packet-contract.log and final shared-header
+  gate-office-contract-final.log are terminal PASS. The final gate retains all
+  286,720 raw server bytes,316/316 game,652/652 data, imports, relocations, Wine
+  and compiler alignment. All-target lint passes3,879 files each with zero
+  errors/warnings; all-target data inventories have zero conflicts/multiple
+  definitions. Preservation audit retains8,381 identities,6,024 strong statuses
+  and prior history. Only356 verification records plus275 server history/
+  timestamp records refresh; data/type/source stores remain byte-identical.
+  Upstream e28c814f corrects the scalar-width evidence and is pushed after all
+  hooks, including the full suite. Final stable audits find zero selected-name
+  contradictions for helper004e8240, paired forwarder004e81c0 and packet004c63a0.
+  Helper/pair have20 TL/18 Gold parsed sites; packet has2/2. All input hashes and
+  native-proof source/header hashes are current. Commands still exit1 due to
+  unrelated unknown SDK contexts (122 server,881 TL,595 Gold); do not report
+  whole-project contract success. Receipts:stable-contract-audit-summary.json
+  and the three final contract JSONs. The full original scope remains incomplete.
