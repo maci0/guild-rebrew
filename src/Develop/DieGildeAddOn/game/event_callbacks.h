@@ -13,6 +13,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action);
 
 /* Existing event helpers use word and unsigned-byte access views. */
 void __cdecl fcn_004e5a00(int* event);
+void __cdecl fcn_004e4f10(int* event);
 int __cdecl fcn_004e64e0(int* event);
 int __cdecl fcn_004e6200(int participant, unsigned char* event);
 int __cdecl cut_CheckMaster(int* event);

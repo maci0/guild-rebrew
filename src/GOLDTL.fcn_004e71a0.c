@@ -11,7 +11,6 @@ extern char g_9a9660[];
 
 
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
-void __cdecl fcn_004e4f10(int);
 void __cdecl fcn_004d77e0(void);
 void __cdecl fcn_004da170(void);
 void __cdecl fcn_004da690(void);

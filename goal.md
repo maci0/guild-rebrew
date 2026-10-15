@@ -107,58 +107,63 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-16
 
-The full goal remains ACTIVE and incomplete. Goal58 reconstructs one shared
-court decision callback TL4df1b0/Gold4dd960, covering seven native action cases.
-Its two-argument declaration is canonical in event_callbacks.h. Native name/TU
-ownership remain unproved. Correct source explicitly sequences OWN query before
-OTHER. Gold preserves its two measured differences: alternate choice0 versus TL2,
-and signed16-bit window width at+8 versus TL32-bit +12.
+The full goal remains ACTIVE and incomplete. Goal59 reconstructs the shared
+participant reset TL `4e4f10` / Gold `4e36a0` as one ordinary C89 body. Its
+nullable `int*` argument is declared in existing `event_callbacks.h`; the
+registrar's incompatible integer declaration is removed. Name, source home and
+local access views remain inferred. No storage, new layouts, assembly, flags or
+alias globals are introduced.
 
-The production byte compare remains STUB (TL2536) / SIZE_MISMATCH
-(Gold2532/native2528), with blockers retained. All372 bounded native/C x86/VEX
-service-trace cases pass, including default tags, participant gates, selectors,
-timeouts and buttons. This is not universal equivalence, PROVEN or raw-link
-proof. The byte-near scratch2531/2536 and2523/2528 expressions are rejected:
-they reverse stateful query calls. Physical case order and six scheduling bytes
-are resolved. The remaining two-byte ECX copy is not fixed by the measured
-arithmetic/temporary forms or final comma-expression control. Stop that family
-without new native/TU evidence; never restore the incorrectly ordered expression.
+Both native and compiled bodies are 162 bytes, but the source remains
+NEAR_MATCHING in both targets. Eleven fully resolved byte differences come from
+the compiler's cursor at table+4 versus native table+8 and corresponding store
+encodings/end addend. Effective field-store order stays 0,8,4,12. Seven bounded
+native/C x86/VEX cases per target compare the entire table, canaries and unchanged
+event, including null, counts 0/1/2/16 and mixed IDs; wrong bindings are rejected.
+This does not establish a byte match, universal equivalence or raw-link provider.
+Pointer/address/record cursors, counted/do loops, store ordering and chained
+assignments were measured. Do not repeat that family without new native/TU evidence.
 
-Two native entries are admitted at2536/2528 through reviewed digests. Native
-code, seven-entry switch tables, next prologues and all branch destinations are
-checked independently. All8404 old identities/6048 strong statuses survive;
-totals8406/6048. All26 old strong affected contexts pass, and the old TL transfer
-callback remains799/native801 with identical compiled bytes/fixups. Two existing
-validator-field type bindings are refreshed with unchanged20-byte layout.
-No storage, type layouts, compiler flags, assembly or filler is introduced.
+Native inventories incorrectly merged this separately called helper into its
+predecessor. Reviewed CLI previews/digests repair the predecessor from 242 to its
+already matched 65 bytes and admit the helper at 162 in each target. All 8406
+previous identities and 6048 strong statuses survive; totals are 8408/6048.
+All 28 old strong affected contexts pass. The old transfer callback remains weak;
+the Goal58 court callback is unchanged, and all 372 bounded cases pass again.
+Two existing validator-field type bindings are refreshed without layout changes.
 
-There are ZERO new matched game bytes in this checkpoint: TL697456,
-Gold383347. Libraries390163/9732 stay unchanged. Padding33615/23499 includes
-1/2 newly classified existing alignment bytes. Accounted text1121234/2491370
-(CLI45.0%) and416578/2006532 (CLI20.7%); no-function103160/75531.
-Keep source/discovery work separate from game byte gains. All-target lint0/0,
-data0conflicts/duplicate owners and type checks1020structs/0findings hold.
-Selected15 contracts are clean; broader findings258/1479/968 and unknowns
-305/4082/2607 remain across server/TL/Gold. Both client raw images and
-initialized-data verification remain open.
+There are ZERO new matched game bytes: TL 697456, Gold 383347. Libraries
+390163/9732 and padding 33615/23499 are unchanged. Accounted text remains
+1121234/2491370 (45.0%) and 416578/2006532 (20.7%). Separate native entries reduce
+no-function bytes to 102998/75369; that is discovery/source progress. All-target
+lint is 0/0; data has zero type conflicts/duplicate owners; type checks have
+1020 structs and no findings. Selected 17 contracts are clean; broader findings
+258/1479/968 and unknowns 305/4082/2607 remain across server/TL/Gold. Both client
+raw links and initialized-data verification remain open.
 
-Fresh Docker server gate preserves316function/652data matches, imports/exports/
-resources/relocations/layout/Wine and all286720 identical raw bytes, SHA-256
+Fresh Docker server gate passes with all 286720 raw bytes identical, SHA-256
 3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
-Current receipts/replays are .scratch/goal58/{decision-boundaries,decision-traces,
-query-order-control,preservation,contracts-focused,contracts-final-all,
-scope-promote,lint-final,data-final,status-final,types-*}.json and server-gate.log.
-Read docs/TODO.md Goal58 and C-shape notes before retrying. No upstream change
-this turn; upstream8e897442 remains pushed. Preserve all23 foreign upstream WIP.
+Current receipts/replays are in `.scratch/goal59`: reset-proof.py/reset-effects.json,
+reset-native-proof.json, reset-byte-residue.json, inventory previews/applies,
+contracts-final-all.json, scope-promote.json, lint-current.json, data-final.json,
+status-final.json, types-*.json and server-gate.log. Setup errors and failed probes
+are retained. Upstream 8e897442 and all 23 unrelated WIP files remain untouched.
 
-Next inspect larger unmatched client bodies through todo/native/library evidence;
-the unreconstructed event runner4e5a00 has saved native/Kuna inputs. Existing
-TL364-byte third-slot provider4dfba0 has Gold counterpart4de340, but helper twins,
-global binding and prototype/provider contracts need reconciliation before import.
-Keep Goal57 validators and Goal56 character work intact. Do not repeat exhausted
-camera221/218, separation720/745-vs744, office17-byte, queue733/735 or low-poly
-LOD probes without new evidence. Broader callback/D3 contracts, Goldfb9900
-ownership, client raw builds and faithful discarded server inputs remain open.
+The next larger body is event runner TL `4e5a00` / Gold `4e4060`, complete extents
+2033/2063, not the old truncated 2016-byte slice. Native callers establish the
+pair. Gold differs in signed-short viewport dimensions and a 0x2ec scene-table
+stride with 768 entries versus TL 0x2f4 with 1024; enabled/temporary fields are
+Gold +0x18/+0x38 versus TL +0x20/+0x48. Preserve these differences when sharing.
+Kuna omits an unreachable native branch computing `(flags == 0) & 2`.
+An isolated ordinary-C `skip && !event[0x26] & 2` probe emits that test under the
+pinned compiler. This supports a source-shape hypothesis, not recovered spelling.
+See docs/TODO.md Goal59 and the saved complete native/Kuna bodies before adoption.
+
+Preserve Goal58's OWN-before-OTHER query sequencing. Do not adopt its rejected
+near expression or retry exhausted arithmetic/placement probes. The existing
+TL third-slot provider `4dfba0` has Gold counterpart `4de340`, but helper/global
+contracts remain open. Broader callback/D3 contracts, Gold fb9900 ownership,
+client raw builds and faithful discarded server inputs remain open.
 
 ## History
 

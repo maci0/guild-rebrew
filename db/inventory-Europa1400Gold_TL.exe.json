@@ -13427,8 +13427,31 @@
   },
   {
     "va": 5131968,
-    "size": 242,
-    "name": "fcn.004e4ec0"
+    "size": 65,
+    "name": "fcn.004e4ec0",
+    "extent_history": [
+      {
+        "old_size": 242,
+        "new_size": 65,
+        "reason": "Reviewed Goal59 reset-native-proof.json: preceding managed RELOC tail-call body is65 bytes, then15 NOPs. Reset4e4f10 is a separately called complete162-byte body ending RET4e4fb1, then14 NOPs and next4e4fc0. All branches and three native table operands independently checked against paired Gold4e36a0. Source matching remains unfinished.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T22:53:08.063185+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5132048,
+    "size": 162,
+    "name": "fcn.004e4f10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 162,
+        "reason": "Reviewed Goal59 reset-native-proof.json: preceding managed RELOC tail-call body is65 bytes, then15 NOPs. Reset4e4f10 is a separately called complete162-byte body ending RET4e4fb1, then14 NOPs and next4e4fc0. All branches and three native table operands independently checked against paired Gold4e36a0. Source matching remains unfinished.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T22:53:08.065558+00:00"
+      }
+    ]
   },
   {
     "va": 5132224,

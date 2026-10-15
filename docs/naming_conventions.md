@@ -2065,3 +2065,18 @@ Gold's alternate choice is 0 versus TL's 2; Gold reads a signed word at window+8
 versus TL's dword at +12. The window remains a byte-access view with no invented
 layout or allocation owner. Native boundaries, dispatch/operand evidence and
 bounded execution inputs are retained in `.scratch/goal58`.
+
+
+### Goal59 — inferred participant-reset callback
+
+`fcn_004e4f10` is the existing provisional label for TL `4e4f10`, paired with
+Gold `4e36a0` by complete native bodies and direct callers. Its standalone file,
+local names and word/byte access views are inferred. The native registrar passes
+NULL; the runner passes an event pointer. Both paths support the canonical
+nullable `int*` declaration in `event_callbacks.h`, without recovering an original
+record typedef or C identifier.
+
+The declaration of `g_9b0e20` remains the existing `char[]` view. Native strides,
+field offsets and 16 outer reset iterations do not establish a storage owner or
+the full allocation extent. No inferred interior alias or new allocation is
+created to match the compiler's cursor choice. Receipts are in `.scratch/goal59`.

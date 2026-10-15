@@ -54631,3 +54631,65 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   Do not duplicate that TL source or mistake unresolved masked operands for a
   selected Gold build provider. For larger primary-client work, inspect the
   unreconstructed event runner4e5a00 from the existing native/Kuna evidence.
+
+### Goal59 — participant reset and event-runner prerequisites (2026-10-16)
+
+- Reconstructed TL `4e4f10` / Gold `4e36a0` in one C89 definition,
+  `src/GOLDTL.fcn_004e4f10.c`. The nullable event pointer is canonical in
+  `event_callbacks.h`; the registrar no longer declares it with an integer
+  argument. The provisional name/home and byte/word access views are inferred.
+  Existing `g_9b0e20` declarations remain compatible; no allocation, new data row,
+  speculative type, assembly, flags or alias storage is introduced.
+- Native inventories had merged this helper into the preceding function, whose
+  inventory extent was 242 although its existing matched source extent is 65.
+  Complete native bodies, branch starts, direct callers, tail jump, 15 preceding
+  NOPs and 14 following NOPs establish separate 65/162-byte entries. Guarded CLI
+  repairs preserve the predecessor's source/verification and admit the helper.
+  The two client reset bodies differ only at three table-address operands.
+- Both compiled bodies have 162 bytes but remain NEAR_MATCHING. After resolving
+  all operands, differences are at 9,34,36,37,38,39,42,53,123,130,143 in both
+  targets. The compiler walks table+4; native walks table+8. Store encodings and
+  the end addend differ, while effective field-store order remains 0,8,4,12.
+  The known-binding checker correctly refuses byte-match promotion.
+- Seven native/C VEX cases per target compare every table byte, both boundary
+  canaries and the unchanged event. They cover null, non-type-3 events,
+  participant counts 0/1/2/16 and mixed/all-active IDs. Wrong table bindings fail.
+  This is bounded execution evidence, not universal equivalence, PROVEN or linked
+  provider proof. Preserve the repeated inner reset inside all 16 outer passes:
+  it can observe IDs that later outer iterations have not initialized yet.
+- Source probes cover byte/word/address and typed-record views, counted/do loops,
+  store ordering and chained assignments. Typed indexed outer iteration removes
+  an extra two-byte cursor adjustment but does not recover native addressing.
+  Do not introduce an interior alias, qualifiers or assembly just to force it.
+- All 8406 prior identities and 6048 strong statuses survive; totals 8408/6048.
+  All 28 previously strong affected contexts pass (TL 15, Gold 13). The old
+  transfer/court weak bodies remain weak. All 372 court native/C cases pass again
+  against the current header. Two existing validator bindings retain their
+  20-byte stride and offsets, with refreshed evidence/header hashes.
+- Fresh Docker server gate passes: all 286720 raw bytes, 316 functions and
+  652 data records, imports/exports/resources/relocations/layout and load checks.
+  SHA-256 remains `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+  All-target lint is clean; data has no conflicts/duplicate definitions; all
+  three type checks report 1020 structs and zero findings. Selected 17 contracts
+  are clean, with 3988 current input hashes. Broader findings/unknowns remain
+  server 258/305, TL 1479/4082 and Gold 968/2607.
+- Zero new matched game bytes: TL 697456 and Gold 383347; accounted text stays
+  45.0%/20.7%, with libraries and padding unchanged. No-function bytes decrease
+  by 162 per client to 102998/75369. Source/discovery work is separate from byte
+  progress. Client raw links and initialized-data proof remain open.
+- Larger runner preflight: native callers pair TL `4e5a00` with Gold `4e4060`.
+  Complete extents are 2033/2063 bytes; the earlier TL 2016-byte slice truncates
+  the tail. Gold has signed-short viewport dimensions and a 0x2ec scene-table
+  stride/count 768 with fields +0x18/+0x38; TL uses 0x2f4/count 1024 and
+  +0x20/+0x48. These are native-supported differences, not uniform layouts.
+  Kuna removes the unreachable test `(flags == 0) & 2`; an isolated pinned
+  compiler probe of `skip && !event[0x26] & 2` emits that redundant test.
+  This is a source-shape hypothesis, not proof of original spelling or a
+  decompiler correctness bug. First-slot callback and scene-table contracts still
+  need reconciliation before the full runner can be adopted faithfully.
+- Receipts and replays live in `.scratch/goal59`, including reset-proof.py,
+  reset-effects.json, reset-byte-residue.json, native proof, guarded inventory
+  plans, scope/contracts/lint/data/status/types and server-gate.log. Failed source
+  probes and setup errors are retained; no upstream repair was needed. Preserve
+  all 23 unrelated upstream changes. Continue with runner contracts/native
+  evidence; do not restart the exhausted reset cursor family without new evidence.

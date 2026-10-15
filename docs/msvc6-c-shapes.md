@@ -11745,3 +11745,46 @@ query-order-control,decision-production-*,decision-outer-comma-*}.json` and thei
 scripts/logs. Complete literal checking on the rejected aligned candidate finds
 seven operand sites for two strings. Its relocated code differs at721/729/732/
 740/747; that independent control is not proof of production raw-link providers.
+
+
+### Goal59: participant-reset cursor bias and unreachable runner test
+
+TL `4e4f10` and Gold `4e36a0` have complete 162-byte native bodies, differing only
+at three DIR32 table operands. Their preceding 65-byte tail-call bodies and the
+15/14-byte alignment gaps delimit them independently. Inventory repair is separate
+from source matching and preserves the preceding RELOC identities.
+
+The shared source emits 162 bytes but walks the participant table from +4;
+native walks from +8. Both write fields in order 0,8,4,12, then the event's ID and
+later flag byte. The compiler's addressing bias changes instruction lengths for
+the middle stores and the signed end-pointer operand. With all operands applied,
+both targets differ at offsets 9,34,36,37,38,39,42,53,123,130,143. These are not
+unresolved external calls: all three COFF fixups refer to the known table backing.
+The binding checker correctly refuses promotion. Equal size is insufficient.
+
+Byte/word/address cursor and private typed-record experiments, counted/do loops,
+store ordering and chained assignments did not close the residue. Indexed outer
+iteration removes an extra two-byte cursor adjustment. Keep the shared ordinary-C
+body and explicit blocker; do not invent an alias global, qualifiers or assembly
+to force the bias. No original declaration order or record spelling is proved.
+
+Seven bounded native/C VEX cases per target compare all table bytes and canaries,
+and preserve the event input. Counts 0/1/2/16, null, mixed/all-active IDs and a
+non-type-3 path pass; a four-byte wrong table binding fails. Preserve the repeated
+inner reset within each outer pass: IDs for later rows may still have their
+previous values. This is bounded evidence, not a universal proof or byte verdict.
+
+For the larger runner, TL `4e5a00` ends at RET `4e61f0` (2033 bytes), Gold
+`4e4060` at RET `4e486e` (2063). The earlier 2016-byte TL slice was truncated.
+Kuna removes native's unreachable `(flags == 0) & 2` branch. An isolated ordinary
+C89 `if (skip && !event[0x26] & 2) return;` under the pinned Processor Pack emits
+TEST/SETE/TEST-bit-2/JNE. It is a plausible source-shape explanation, not recovered
+spelling; the original source/TU remains unproved. This is not a decompiler bug.
+
+The runner cannot simply reuse TL's layouts in Gold. Native Gold sign-extends
+viewport dimensions from adjacent words; TL reads dwords. The scene-table loop
+uses Gold stride 0x2ec, count 768 and fields +0x18/+0x38 versus TL stride 0x2f4,
+count 1024 and fields +0x20/+0x48. Callback and scene-table contracts need review
+before adopting one shared runner. Receipts/replays: `.scratch/goal59/reset-proof.py`,
+`reset-effects.json`, `reset-byte-residue.json`, `runner-*-body.asm`, Kuna outputs
+and `runner-condition-result.json`. No raw-link client/provider claim is made.
