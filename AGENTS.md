@@ -326,6 +326,25 @@ verdict. Generic setters cannot edit `binding_history`. Historical ADDRESS
 comments cannot reactivate retired claims. Use `rebrew binary repair-extents`
 for reviewed selected native inventory boundaries, separately from source SIZE.
 
+Compiler literal contents can be checked with `rebrew data audit-literals` using
+a complete i386 COFF function extent. Content agreement does not establish layout
+or storage ownership. `rebrew library review-native --dry-run` requires strict
+complete object/operand/literal proof before an exact library callee name enters
+the resolver. Reviewed native identity is separate from provider attribution.
+
+`rebrew types contracts --all-targets` audits source contracts separately from
+byte matches, including unmarked globals, return uses and per-context typedefs.
+`rebrew types reconcile --dry-run` previews a reviewed canonical header signature
+and all affected caller/target contexts. Preserve game/CRT header ownership and
+compiler-sensitive declaration order. Review exact inputs, apply with the digest,
+then verify affected definitions and callers; no source edit earns STATUS.
+
+Before merging or splitting source, use `rebrew source organize review` to inspect
+all-target providers, original TU context, storage instances and native-order
+cycles. Preserve raw baselines, rebuild every affected target, and compare complete
+PE artifacts with `rebrew source organize check`. A common source order or matching
+objects does not verify linked placement/data; these checks never earn STATUS.
+
 <!-- rebrew: project rules below, kept by --refresh-agents -->
 
 ## Upstream Rebrew feature gaps and bugs
