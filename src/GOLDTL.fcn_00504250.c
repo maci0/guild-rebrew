@@ -10,7 +10,7 @@ typedef Rec15_699058 Rec15;
 extern Rec15_699058 g_699058[37];
 
 char* __cdecl fcn_00502cd0(int list, int a, int b, int c, ...);
-char* __cdecl fcn_00502fe0(int a, int b, int c);
+char* __cdecl gm_AllocObjekt(int a, int b, int c);
 
 void __cdecl fcn_00504250(unsigned char* e)
 {
@@ -22,14 +22,14 @@ void __cdecl fcn_00504250(unsigned char* e)
 		if (e[0] == g_699058[i].k) {
 			o = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0xff);
 			if (o == 0) {
-				o = fcn_00502fe0(*(int*) (e + 1), 0xff, 1);
+				o = gm_AllocObjekt(*(int*) (e + 1), 0xff, 1);
 				if (o == 0) {
 					continue;
 				}
 			}
 			for (j = 0; j < 10; j++) {
 				if (g_699058[i].ids[j] != 0 && !fcn_00502cd0(*(int*) (o + 0x14), 1, 0, g_699058[i].ids[j])) {
-					fcn_00502fe0(*(int*) (o + 2), g_699058[i].ids[j], 2);
+					gm_AllocObjekt(*(int*) (o + 2), g_699058[i].ids[j], 2);
 				}
 			}
 		}

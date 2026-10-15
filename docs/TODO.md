@@ -54104,3 +54104,73 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   the saved Goal46 native counterpart/Kuna evidence and recover real client
   rendering/switch work; do not repeat its failed1,371-byte server seed or
   exhausted office compiler-shape trials.
+
+
+## Shared object allocator and native cart renderer (Goal50,2026-10-15)
+
+- Recovered TL 0x502fe0/Gold 0x500190 in the existing server gm_AllocObjekt definition
+  at game/spiel.c, rather than adding a second algorithm. Native client additions
+  save/select/restore the universe, resolve transporter position, choose worker
+  or horse animation resources, create/attach the cart scene, select its texture
+  level and update ownership. Retain repeated type checks and model stores in
+  native order; do not invent null guards or change failed-allocation behavior.
+  Server diagnostics retain their literal strings, paths, line numbers and sites.
+- Kuna's Goal46 seed drops both indirect switch arms. The native selector maps
+  recover b8,12c,12d,134/135/136,15e,174/176,24b/256/266;160 has a direct branch.
+  Both native bodies have 487 instructions/1,556 executable bytes, then six DWORDs,
+  167 selector bytes, one alignment byte, three DWORDs and 243 selector bytes.
+  Full extent 2,003 ends5037b3/500963; thirteen NOPs precede5037c0/500970.
+  native-layout-proof.py asserts tables, maps, destinations and alignment for
+  both references. Digest-guarded repair-extents preserves prior2,016 boundaries.
+- Production-context C compares 1,771/2,003 TL and 1,777/2,003 Gold, NEAR_MATCHING.
+  No newly byte-matched client game bytes. At offset 1,299 the native loads/adds AL,
+  explicitly TESTs AL, stores the byte and reloads its containing stack word for
+  the uchar argument. Candidate loads/adds CL and reuses ADD flags: one byte less.
+  The late instruction stream shifts; table alignment hides this in total size.
+  Do not turn equal symbol size, library/padding accounting or literal contents
+  into a complete byte/operand/provider claim. Blockers retain the open work.
+- Nine placeholder users are bound to the native allocator identity by source
+  rename's reference-binding mode. The three void* return declarations become
+  the same char* contract as the provider; no new wrapper or pointer/int cast.
+  Existing int-return wrappers and client renderer private types/arguments need
+  their own native contract review. Client counter/field globals remain unbound
+  where no reviewed data row/provider exists. No storage or data verdict is added.
+- Full-function compiler-literal audits pass in both targets; code has 64 COFF
+  operand sites. This does not resolve the later shifted operands. Canonical
+  D3_OBJECT supplies native client flag/layout differences without duplicated
+  bodies. Local names and client source placement remain reconstructed/inferred.
+- The initial all-target caller scope covers 14 C files. All 211 existing strong
+  bindings pass; results are 133 server pass, 42 TL pass/9 weak and 36 Gold pass/8
+  weak, including the two new near matches. Final current-input promotion preserves those same results across 228
+  bindings. Old weak bodies remain weak.
+- Initial integrated gate is terminal PASS: all 286,720 raw bytes identical,
+  function/data/import/relocation/Wine/toolchain checks pass. All-target lint
+  has 0 errors/warnings; data has 0 conflicts/multiple definitions; all three type
+  binding checks have0 findings. Docker daemon/images work; plainSP5 smoke passes.
+  Only main worktrees exist and git clean --dry-run has no candidates.
+- Upstream f94f3866 records physical-slot versus logical-selector analysis as a
+  feature gap in docs/IDEAS-GUILD.md; mandatory commit/push full tests pass and
+  origin/main contains it. No upstream runtime bug was found or worked around.
+- Receipts/replays: .scratch/goal50/native-layout-proof.py, switch-maps.json,
+  alloc-{tl/gold}-native evidence, {tl,gold,server}-integrated.json,
+  literal-audit.json, alloc-bind-{preview,applied}.json, scope-{after,promote}.json,
+  gate-integrated.log, lint/data/types/alloc-contracts reports and upstream-push.log.
+
+- Final validation: gate-final.log is terminal PASS, whole raw server file
+  identical (286,720 bytes), all required function/data/import/relocation/Wine
+  checks green. Both pinned toolchain compiler smokes pass. Final lint has zero
+  errors/warnings in every target; data has zero conflicts/duplicate definitions;
+  all three type-binding audits have zero findings. Preservation retains all
+  8,383 prior identities and all 6,032 strong statuses, complete prior histories,
+  and unchanged data/type/source stores. All 228 affected bindings have current
+  source hashes; both allocator identities remain NEAR_MATCHING.
+- Allocator-name contract audit has zero findings and current input hashes.
+  Exit1 remains for the existing 122 server/904 TL/614 Gold unknown SDK/include
+  contexts; no whole-project contract closure claim. An earlier concurrent audit
+  correctly rejected changing metadata inputs; the final audit runs after writers
+  finish. Receipts: alloc-contracts-stable.json and contract-summary.json.
+- Final TL matched game bytes remain 691,975; library bytes remain 390,163.
+  Padding is 33,580, accounted text 1,115,718/2,491,370 (44.7%). Gold accounted
+  text is 410,107. Each target gains only 13 evidenced padding bytes from the
+  boundary repair; neither gains new matched game bytes. Native code, literals,
+  library provenance, raw providers and data proof remain separate facts.

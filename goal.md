@@ -108,94 +108,64 @@ explicit authorization; this file does not grant it.
 ## Current continuation — 2026-10-15
 
 The full goal is ACTIVE and incomplete. Both raw client images, complete client
-initialized-data verification and storage ownership, source contracts, unresolved
-code ranges and faithful discarded server inputs remain open. Server byte
-identity alone does not establish complete source fidelity or client completion.
+initialized-data verification/ownership, source contracts, unresolved code ranges
+and faithful discarded server inputs remain open. Preserve every prior match.
 
-Previous checkpoint07299374 is pushed. Docker works with both pinned images.
-Goal48 repaired office-slot contracts, preserved all6,024 earlier strong statuses,
-recognized2,868 existing Gold game bytes/44 padding bytes and corrected the
-shared best-score literal to native -10.0f. Receipts/details are in docs/TODO.md.
+Checkpoint4917aafe is pushed. Its skill-contract and master-binding repairs retain
+all 6,030 previous strong statuses and add 872 Gold game bytes. TL stays691,975
+matched game bytes. Detailed Goal49 receipts are in TODO and the archived goal.
 
-Current Goal49 work repairs the skill-query API and its connected wrappers:
+Goal50 reconstructs the client cart-rendering path in the existing shared
+`gm_AllocObjekt` definition in game/spiel.c:
 
-- Existing spiel.h owns reconstructed char-pointer/integer-index contracts;
-  the query/paired wrapper return float and the scalar wrapper returns integer.
-  Removed31 contradictory local declarations and integer pointer transport in
-  connected wrappers/callers. Private record views remain private. Original
-  spelling is unproved; equal x86 widths alone do not justify integer pointers.
-- The native query is784 bytes in both clients, including its five-entry embedded
-  switch table. Complete object/native comparison and17 literal occurrences per
-  target pass, with40 wrong-symbol controls. Kuna's seed misreads the integer
-  index and switch as floating values/indirect calls; native instructions win.
-- Gold504ec0 now shares the existing507f10 source. Gold504e20 shares the existing
-  507e70 paired wrapper,88 bytes. Five additional wrapper/caller bodies total321
-  resolved bytes with18 wrong-symbol controls. The87-byte caller keeps its
-  explicit double local while using the canonical float-return declaration.
-- Gold discovery had merged two functions into504e00's120-byte entry. The first
-  ends with a29-byte tail-call body, then three NOPs; the next starts504e20 and
-  returns504e77. Digest-guarded repair preserves native extent history and the
-  first source's existing29-byte match. Removed bytes are not all padding.
-- Adding client declarations unconditionally to spiel.h perturbed four native
-  server bytes in gm_ObjectsAvailble10015f70. The failed full gate is retained.
-  The header's existing server/client declaration convention now excludes these
-  client APIs from server contexts; the714-byte object matches again. The fresh
-  full raw-image gate passes all286,720 bytes and all required checks. Broad
-  preservation checks also pass for the final repaired state.
+- SERVER 0x10016760 retains its 1,379-byte match. TL 0x502fe0 and Gold 0x500190 each have
+  a 2,003-byte native body, including two dispatch tables and their selector maps.
+  Thirteen external NOPs follow each body. Digest-guarded inventory repairs
+  preserve the old 2,016-byte extents in history; no executable bytes are discarded.
+- Native evidence supplies the renderer calls and both switch arms omitted by
+  Kuna. Shared hierarchy, slot initialization, parent walking, recursive child
+  creation and return remain one algorithm. Guards reflect native server logging
+  and client rendering differences. No assembly, padding or flag overrides added.
+- Client source is NEAR_MATCHING: TL 1,771/2,003 and Gold 1,777/2,003 under strict
+  known-binding checks. The remaining LOD byte ADD/TEST shape emits one fewer
+  instruction byte, shifting late code; table alignment keeps symbol size equal.
+  This is no new matched game coverage. Unresolved operands/providers and
+  renderer declaration contracts remain explicit; matching literals prove contents,
+  not placement or ownership. See .scratch/goal50 and docs/msvc6-c-shapes.md.
+- Nine former fcn_00502fe0 callers now use gm_AllocObjekt through the supported
+  reference-binding writer. Their declarations consistently return char*. Existing
+  pointer-through-integer wrapper returns and broader renderer contracts still
+  need native review; this checkpoint does not claim their complete repair.
 
-Baseline comparison covers196 source contexts and518 existing target bindings:
-82 server matches,235 TL matches/12 old mismatches,160 Gold matches/29 old
-mismatches. The final comparison preserves strong matches and explicitly records
-the new Gold callee evidence. One already weak production body exposes three previously
-masked conflicting bytes; the historical-map control reproduces the old score
-without promoting it or weakening the actual binding policy.
-The final combined scope adds the existing master helper and covers197 C files,
-522 bindings:82 server pass,237 TL pass/11 weak,163 Gold pass/29 weak. Final
-repository audit preserves all8,381 prior identities and6,030 strong statuses,
-adds two Gold identities/872 bytes, and keeps data/type/source stores unchanged.
-All522 source/reference hashes and stored statuses are current. All-target lint
-passes3,879 files each with zero errors/warnings; data conflicts/duplicate
-owners and type-binding findings are zero. Gold accounted text is410,094 bytes.
+The final current-input server gate passes all 286,720 raw bytes and required
+checks. All 8,383 prior identities and 6,032 strong statuses remain unchanged;
+228 affected bindings have current source hashes. Both new client identities
+remain NEAR_MATCHING. All-target lint, data conflicts/duplicate definitions and
+type-binding checks are clean. The allocator-name audit has zero findings but
+retains the existing 122/904/614 unknown SDK/include contexts, so it does not
+prove complete source-contract closure. See docs/TODO.md.
+No toolchain rebuild is needed: Docker access, pinned images and the plain-SP5 and Processor Pack
+compiler smokes pass. Only main worktrees remain; no untracked cleanup candidates.
+Keep ignored native receipts as evidence.
 
-Final audit also repaired a pre-existing ambiguous fcn_0047dd60 spelling. The
-sole master caller's native47de7e→47dd60 operand identifies the137-byte helper,
-not the32-byte kind predicate. Supported rename/reference binding now calls the
-inferred gm_CanEvaluateMaster; all three affected bodies pass928 resolved bytes
-with35 rejecting controls and complete literals. Original source file and all
-native identities remain. The654-byte caller's valid RELOC is freshly restored;
-its earlier failing measurement is kept. See naming_conventions.md and TODO.
+The upstream switch command currently exposes physical jump-table slots without
+recovering the preceding bounded byte selector/bias. The concrete two-stage
+switch feature gap is recorded in upstream IDEAS-GUILD.md at f94f3866, pushed after
+mandatory full tests. It is not a runtime bug or a project-local parser replacement.
+The earlier native-entry insertion and SDK/include-context gaps remain recorded.
 
-Receipts/scripts are in `.scratch/goal49`. Do not reinterpret temporary linked
-EXACT invalidation after header changes as permanent completion or restore it
-without fresh raw-link evidence.
+Next: reconcile the allocator's renderer declarations/providers, complete operand
+proof and close the measured LOD source shape without changing semantics or
+sweeping declarations. Start from the full spiel.c context; isolated probes lose
+native register/global-cache behavior. Do not repeat the exhausted byte-assignment
+or promotion probes without new evidence. Keep the remaining client raw links and
+initialized data/ownership work in scope. Large unmatched native bodies remain
+necessary for material TL byte gains; library/padding accounting stays separate.
 
-TL remains691,975 matched game bytes,390,163 library bytes/1,468 library
-functions, and1,115,705/2,491,370 accounted text bytes (44.7%). This contract and
-Gold counterpart work adds no new TL algorithm. The7,102,296-signature audit and
-prior D3DX/CRT evidence are in history/TODO; do not repeat without new inputs.
-Actual client raw-link providers remain explicit where unresolved.
-
-The large office-action pair TL4eba60/Gold4e9ce0 remains unadopted:2,148 native
-bytes,87 operands, and a2,131-byte match with17 nonoperand differences. Slot and
-skill API work closes parts of its source-contract problem; the formatter's
-ID-or-pointer format word and four office callers still need native review.
-Preserve the algorithm and exhausted trials; no padding, assembly, declaration
-sweeps or invented target divergence. The native format parser is not a CRT printf.
-
-Complete SDK/include-context and all-target type-check CLI support remain upstream
-feature gaps (upstream e79dba09). Final named contract audits have zero selected
-contradictions/unknowns and current hashes, but exit1 for122 server/904 TL/614
-Gold other unknown SDK contexts. Do not bypass reconciliation guards or claim
-whole-project closure. Queue loader5252d0/520340 remains a733/735-byte source-shape gap. Camera/list/position/
-rotation/disposal work is partial; Goldfb9900 has unresolved record extent/owner.
-Reviewed native-entry insertion is a separate upstream gap recorded in
-IDEAS-GUILD at da4e8139; current tooling cannot add discovery start504e20.
-The accepted source identity is retained; do not hand-edit native inventory.
-Upstream da4e8139 is pushed after mandatory hooks/full tests. Next prioritize
-the2,016-byte TL502fe0 object-allocation body. Prior native/Kuna/server comparison is in Goal46; recover
-its real rendering additions and switch arms rather than repeat the failed
-1,371-byte server-only seed or exhausted office-shape trials. Formatter and
-remaining office contracts remain open. The full original objective continues.
+The office pair TL 0x4eba60/Gold 0x4e9ce0 remains unadopted: 2,148 native bytes and17
+nonoperand differences in the saved candidate. Queue loader 0x5252d0/0x520340 remains
+733/735 bytes. Camera/list/position/rotation/disposal work is partial; Gold 0xfb9900
+has unresolved extent/owner. Retain prior native evidence and exhausted probes.
 
 ## History
 

@@ -1949,6 +1949,25 @@ int __cdecl gm_FreeObjectListRecursive(LinkedNode** head)
 
 /* 0x1001a299 */
 
+#ifndef REBREW_SERVER
+#include "../../Units/d3/d3_object.h"
+extern int g_6b8010;
+int __cdecl fcn_005155e0(unsigned char*);
+void __cdecl fcn_004432d0(int, int);
+char* __cdecl fcn_00445600(char*, int, char*, char*);
+void __cdecl fcn_00455350(char*, float*, float*);
+char* __cdecl fcn_00403b90(char*, float*);
+void __cdecl fcn_00404a00(char*, int, ...);
+void __cdecl fcn_00510820(char*, unsigned char*, int);
+D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
+void* __cdecl fcn_00403ce0(char*, D3_OBJECT*);
+char __cdecl fcn_00442a30(D3_OBJECT*, void*, unsigned char, char);
+void __cdecl fcn_00402a00(char*, int);
+#endif
+
+/* ADDRESS: SERVER 0x10016760 */
+/* ADDRESS: GOLDTL 0x00502fe0 */
+/* ADDRESS: GOLD 0x00500190 */
 char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 {
 	void* dynamic;
@@ -1963,21 +1982,47 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 	char* extra;
 	char* child;
 	int walk_id;
+#ifndef REBREW_SERVER
+	float position[4];
+	float rotation[3];
+	char* model;
+	char* found;
+	char* owner_entity;
+	D3_OBJECT* scene;
+	int universe;
+	int saved_mode;
+	int owner_ref;
+	int choice;
+	unsigned char lod;
+#endif
 
-	last = NULL;
-	slot = NULL;
 	existing = NULL;
 	dynamic = NULL;
 	static_ptr = NULL;
+	last = NULL;
+	slot = NULL;
+#ifndef REBREW_SERVER
+	position[0] = 0.0f;
+	position[1] = 0.0f;
+	position[2] = 0.0f;
+	position[3] = 0.0f;
+	rotation[0] = 0.0f;
+	rotation[1] = 0.0f;
+	rotation[2] = 0.0f;
+#endif
 	if (g_item_def_table == NULL) {
 		return NULL;
 	}
 	if (parent_id == -1) {
+#ifdef REBREW_SERVER
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcb2, "gm_AllocObjekt(): Versuch Objekt au\337erhalb einer Hirachie zu erzeugen", 1);
+#endif
 		return NULL;
 	}
 	if (gm_ResolveEntityById(&dynamic, &existing, &static_ptr, parent_id) == 0) {
+#ifdef REBREW_SERVER
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcb8, "gm_AllocObjekt(): Parent not found", 1);
+#endif
 		return NULL;
 	}
 	if (dynamic != NULL) {
@@ -1998,14 +2043,18 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 			}
 			slot = gm_AllocateObjectSlot();
 			if (slot == NULL) {
+#ifdef REBREW_SERVER
 				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcd4, "gm_AllocObjekt(): Kein Platz mehr", 1);
+#endif
 				return NULL;
 			}
 			*(char**) (last + 0x3f) = slot;
 		} else {
 			slot = gm_AllocateObjectSlot();
 			if (slot == NULL) {
+#ifdef REBREW_SERVER
 				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcdd, "gm_AllocObjekt(): Kein Platz mehr", 1);
+#endif
 				return NULL;
 			}
 			*(char**) head = slot;
@@ -2015,7 +2064,9 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 	entry = g_item_def_table + (type << 6) + type;
 	*(unsigned short*) slot = (unsigned short) type;
 	sprintf(buffer, "----->ObjID= %i ObjProt= %i", g_next_object_id, type & 0xffff);
+#ifdef REBREW_SERVER
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcee, buffer, 8);
+#endif
 	*(int*) (slot + 2) = g_next_object_id;
 	g_next_object_id++;
 	if (dynamic != NULL) {
@@ -2070,7 +2121,9 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 			if (existing != NULL) {
 				walk_id = *(int*) ((char*) existing + 6);
 			} else if (static_ptr != NULL) {
+#ifdef REBREW_SERVER
 				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xd3d, "gm_AllocObjekt(): Karren in Spieler erzeugt?!?", 1);
+#endif
 			}
 		}
 		slot[0x28] = 0;
@@ -2081,8 +2134,85 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 			*(int*) extra = -1;
 		}
 		child = gm_AllocObjekt(*(int*) (slot + 2), 0x1dd, 1);
+#ifndef REBREW_SERVER
+		universe = 0;
+#endif
 		*(int*) (child + 0xe) = (int) *(unsigned short*) slot - 0x133;
 		child[0x1c] = (char) (*slot - 0x33);
+#ifndef REBREW_SERVER
+		existing = gm_StartFilteredEntitySearch(1, 1, parent_id);
+		if (existing != NULL && gm_CheckEntityType((unsigned char*) existing) != 0)
+			universe = fcn_005155e0((unsigned char*) existing);
+		saved_mode = g_6b8010;
+		fcn_004432d0(universe, 1);
+		if (gm_CheckEntityType((unsigned char*) existing) != 0)
+			found = fcn_00445600(NULL, 0x100, NULL, "dummy_TRANSPORTER");
+		else
+			found = fcn_00445600(*(char**) ((char*) existing + 0x61), 0x100, NULL, "dummy_TRANSPORTER");
+		if (found != NULL) {
+			fcn_00455350(found, (float*) (found + 0x4c), position);
+		} else if (*(char**) ((char*) existing + 0x61) != NULL) {
+			position[0] = *(float*) (*(char**) ((char*) existing + 0x61) + 0x4c);
+			position[1] = *(float*) (*(char**) ((char*) existing + 0x61) + 0x50);
+			position[2] = *(float*) (*(char**) ((char*) existing + 0x61) + 0x54);
+		} else {
+			position[0] = 0.0f;
+			position[1] = 0.0f;
+			position[2] = 0.0f;
+		}
+		if (type != 0x136) {
+			choice = (unsigned short) gm_RandomMod(3);
+			if (choice == 0)
+				model = fcn_00403b90("arbeiter_KARREN", position);
+			else if (choice == 1)
+				model = fcn_00403b90("holzfaeller_KARREN", position);
+			else
+				model = fcn_00403b90("handwerker_KARREN", position);
+		} else {
+			model = fcn_00403b90("pferd_PFERD", position);
+		}
+		*(char**) (slot + 0x3b) = model;
+		fcn_00404a00(model, 1, "bewegung/karren_ziehen");
+		fcn_00510820(*(char**) (model + 0x34), (unsigned char*) slot, 1);
+		sprintf(*(char**) (model + 0x34), "sp_%i", *(int*) (slot + 2));
+		scene = NULL;
+		if (type == 0x134)
+			scene = fcn_00442910(NULL, position, rotation, "ob_KARREN_klein");
+		else if (type == 0x135)
+			scene = fcn_00442910(NULL, position, rotation, "ob_KARREN_mittel");
+		else if (type == 0x136)
+			scene = fcn_00442910(NULL, position, rotation, "ob_KARREN_GROSS");
+		if (scene != NULL) {
+			scene->flags2 = (scene->flags2 & ~2) | 1;
+			scene->flags0 &= ~0x80;
+			fcn_00403ce0(model, scene);
+			owner_entity = (char*) static_ptr;
+			if (owner_entity == NULL && dynamic != NULL && *(unsigned short*) ((char*) dynamic + 0x27) != 0xffff)
+				owner_entity = g_slot_table + *(unsigned short*) ((char*) dynamic + 0x27) * 0x21c;
+			if (owner_entity != NULL && *(int*) (owner_entity + 0x54) != 0 &&
+				(owner_entity[2] == 5 || owner_entity[2] == 6 || owner_entity[2] == 7)) {
+				lod = (unsigned char) (owner_entity[0x54] + 0x67);
+				if (lod != 0)
+					fcn_00442a30(scene, scene->kontext, lod, 1);
+			}
+			scene->unbekannt_224 = 1;
+			fcn_00510820((char*) scene, (unsigned char*) slot, 1);
+		}
+		if (existing != NULL && gm_CheckEntityType((unsigned char*) existing) == 0) {
+			fcn_00402a00(model, 0);
+			*(int*) (model + 0x30) = -1;
+			*(int*) (model + 0x2c) = -1;
+		} else if (existing != NULL && gm_CheckEntityType((unsigned char*) existing) != 0) {
+			owner_ref = *(int*) ((char*) existing + 1);
+			*(int*) (model + 0x30) = -1;
+			*(int*) (model + 0x2c) = owner_ref;
+		} else {
+			*(int*) (model + 0x30) = -1;
+			*(int*) (model + 0x2c) = -1;
+		}
+		*(int*) (slot + 0x24) = 0;
+		fcn_004432d0(saved_mode, 1);
+#endif
 		break;
 	case 0x15e:
 	case 0x160:

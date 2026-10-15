@@ -10,7 +10,7 @@ extern char g_68a9d8[];
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
-char* __cdecl fcn_00502fe0(int, int, int);
+char* __cdecl gm_AllocObjekt(int, int, int);
 
 /* ADDRESS: GOLD 0x004ccce0 */
 /* ADDRESS: GOLDTL 0x004cd860 */
@@ -38,7 +38,7 @@ int __cdecl fcn_004cd860(char* a1, char* a2)
 		if (*(int*) (q + 0x2a) == *(int*) (e1 + 1))
 			goto found;
 	}
-	q = fcn_00502fe0(*(int*) (e2 + 1), 0xca, 1);
+	q = gm_AllocObjekt(*(int*) (e2 + 1), 0xca, 1);
 	if (q == 0)
 		return 1;
 	(*(int*)g_68a9d8) = *(int*) (q + 2);

@@ -14307,8 +14307,17 @@
   },
   {
     "va": 5243280,
-    "size": 2016,
-    "name": "fcn.00500190"
+    "size": 2003,
+    "name": "fcn.00500190",
+    "extent_history": [
+      {
+        "old_size": 2016,
+        "new_size": 2003,
+        "reason": "Complete native counterpart: RET at 0x5007a3; two dispatch tables and bounded selector maps end at 0x500963; 13 following NOPs precede 0x500970. See .scratch/goal50/alloc-gold-native.json and switch-map proof.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T13:59:16.204354+00:00"
+      }
+    ]
   },
   {
     "va": 5245296,

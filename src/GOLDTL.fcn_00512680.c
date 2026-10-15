@@ -7,7 +7,7 @@ extern unsigned char g_773d75;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-char* __cdecl fcn_00502fe0(int, int, int);
+char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 unsigned short __cdecl gm_RandomMod(int);
 
@@ -34,10 +34,10 @@ void __cdecl fcn_00512680(void)
 			a = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xff);
 			b = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xfe);
 			if (a == 0) {
-				a = fcn_00502fe0(*(int*) (s + 1), 0xff, 1);
+				a = gm_AllocObjekt(*(int*) (s + 1), 0xff, 1);
 			}
 			if (b == 0) {
-				b = fcn_00502fe0(*(int*) (s + 1), 0xfe, 1);
+				b = gm_AllocObjekt(*(int*) (s + 1), 0xfe, 1);
 			}
 			memset(ids, 0, sizeof(ids));
 			switch (kind) {

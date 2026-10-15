@@ -15541,8 +15541,17 @@
   },
   {
     "va": 5255136,
-    "size": 2016,
-    "name": "fcn.00502fe0"
+    "size": 2003,
+    "name": "fcn.00502fe0",
+    "extent_history": [
+      {
+        "old_size": 2016,
+        "new_size": 2003,
+        "reason": "Complete native allocator: RET at 0x5035f3; six-entry dispatch table, bounded 167-byte selector map, three-entry table and 243-byte selector map end at 0x5037b3; 13 following NOPs precede 0x5037c0. See .scratch/goal50/switch-maps.json and Goal46 native disassembly.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T13:59:15.423823+00:00"
+      }
+    ]
   },
   {
     "va": 5257152,

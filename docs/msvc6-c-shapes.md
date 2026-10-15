@@ -11547,3 +11547,36 @@ opposite-layout and wrong-flag controls reject. The existing137-byte draw-data
 cleanup,154-byte unlink and32-byte destruction bodies remain complete.
 Receipts: .scratch/goal42/{production-native-proof,negative-controls,
 draw-cleanup-native-proof,object-native-proof}.json andtype-*.json.
+
+
+## Full spiel.c context and allocator byte-condition residue (2026-10-15)
+
+TL gm_AllocObjekt502fe0/Gold 0x500190 includes renderer work and embedded two-stage
+switch maps; its native extent is2,003, not the discovery extent2,016 that includes
+thirteen trailing NOPs. Kuna misses the indirect switch arms. The server-only seed
+cannot reconstruct the client body.
+
+The same ordinary C compiled alone matched only 585 bytes; replacing the existing
+function in the full spiel.c context matched 1,409. Surrounding definitions affect
+VC6 register/global caching. Initial pointer-zero order, universe initialization
+before child-field writes, an integer random selector narrowed from unsigned short,
+duplicated native parent-choice calls and repeated native model tails increase
+agreement to 1,771 TL/1,777 Gold. Preserve actual call/load/store ordering; do not
+manufacture a cached global or target-only source shape to tune the isolated body.
+
+Remaining residue starts at byte 1,299. Native uses MOV AL,[owner+54], ADD AL,67,
+TEST AL,AL, MOV stack-byte,AL, then JE. Candidate uses CL and ADD's flags, omitting
+TEST; its longer ADD encoding leaves the executable stream one byte shorter.
+Both total symbol extents stay 2,003 because following tables are aligned. Late
+branch displacements/operands and table targets expose the difference.
+
+Measured without improvement: separate versus conditional byte assignment,
+implicit narrowing, signed versus unsigned byte, reading/narrowing the DWORD,
+compound byte addition and the canonical unsigned-byte pointer view.
+Computing/assigning only on the nonzero path changes
+frame size and worsens the match; promoting the narrowed local to int also loses
+the native frame. Do not repeat these probes or a declaration/qualifier sweep
+without new native/compiler evidence. No assembly, padding or flag change adopted.
+Receipts: .scratch/goal50/alloc-*.{c,json}, full-unit, native-layout-proof.json and
+literal-audit.json. New production source remains honestly NEAR_MATCHING; complete
+operand bindings, renderer contracts and raw client providers remain open.

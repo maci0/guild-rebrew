@@ -21,7 +21,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned short __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
 char* __cdecl gm_FindRecordById(int);
 void __cdecl fcn_004fe470(int, int, int, int, int);
-char* __cdecl fcn_00502fe0(int, int, int);
+char* __cdecl gm_AllocObjekt(int, int, int);
 void __cdecl fcn_004ce9e0(struct rec_4cc590*);
 
 /* ADDRESS: GOLD 0x004cba10 */
@@ -61,7 +61,7 @@ int __cdecl fcn_004cc590(unsigned char* a1, char* a2)
 	((struct rec_4cc590*)g_7f4ca0)[id].owner = 0;
 	((struct rec_4cc590*)g_7f4ca0)[id].kind = 0xd;
 	if (a1[0x21] != 0) {
-		fcn_00502fe0(((struct rec_4cc590*)g_7f4ca0)[id].id, a1[0x21], 1);
+		gm_AllocObjekt(((struct rec_4cc590*)g_7f4ca0)[id].id, a1[0x21], 1);
 		fcn_004ce9e0(&((struct rec_4cc590*)g_7f4ca0)[id]);
 	}
 	(*(int*)g_68a9d0) = ((struct rec_4cc590*)g_7f4ca0)[id].id;

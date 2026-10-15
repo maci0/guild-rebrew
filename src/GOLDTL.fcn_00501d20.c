@@ -8,7 +8,7 @@ void* __cdecl gm_AddObjekt(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-char* __cdecl fcn_00502fe0(int, int, int);
+char* __cdecl gm_AllocObjekt(int, int, int);
 
 /* ADDRESS: GOLDTL 0x00501d20 */
 void __cdecl fcn_00501d20(int season)
@@ -75,7 +75,7 @@ void __cdecl fcn_00501d20(int season)
 			result = fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
 			if (*(int*) (slots + i * 0x80 + 4) != 0) {
 				if (fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, *(unsigned short*) (slots + i * 0x80)) == 0) {
-					fcn_00502fe0(*(int*) ((char*) result + 2), *(unsigned short*) (slots + i * 0x80), 1);
+					gm_AllocObjekt(*(int*) ((char*) result + 2), *(unsigned short*) (slots + i * 0x80), 1);
 				}
 			}
 		}

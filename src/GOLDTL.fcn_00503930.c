@@ -6,7 +6,7 @@ extern char g_6997e8[];
 
 
 void* __cdecl fcn_00502cd0(int list, int a, int b, int c);
-void* __cdecl fcn_00502fe0(int a, int b, int c);
+char* __cdecl gm_AllocObjekt(int a, int b, int c);
 int __cdecl fcn_00502e30(char* list, int b);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 
@@ -32,7 +32,7 @@ int __cdecl fcn_00503930(int a, int b, int c)
 	}
 	r = fcn_00502cd0(*(int*) list_head, 1, 0, b);
 	if (r == 0) {
-		r = fcn_00502fe0(a, b, 1);
+		r = gm_AllocObjekt(a, b, 1);
 		*(int*) (r + 0xe) = 0;
 	}
 	*(int*) (r + 0xe) -= c;

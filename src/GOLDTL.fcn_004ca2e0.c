@@ -8,7 +8,7 @@ extern int g_699364;
 extern char g_68a9d8[];
 
 int __cdecl fcn_004c4dc0(char*, int);
-char* __cdecl fcn_00502fe0(int, int, int);
+char* __cdecl gm_AllocObjekt(int, int, int);
 
 int __cdecl fcn_004ca2e0(char* x, char* out)
 {
@@ -18,7 +18,7 @@ int __cdecl fcn_004ca2e0(char* x, char* out)
 	if (g_14cbca0 != -1)
 		g_699364 = *(int*) (x + 0x10);
 	*(int*) (x + 0x14) = fcn_004c4dc0(x, *(int*) (x + 0x14));
-	obj = fcn_00502fe0(*(int*) (x + 0x14), 0x1b5, 1);
+	obj = gm_AllocObjekt(*(int*) (x + 0x14), 0x1b5, 1);
 	if (obj == 0)
 		return 1;
 	(*(int*)g_68a9d8) = *(int*) (obj + 2);
