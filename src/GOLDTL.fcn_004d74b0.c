@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
 #include <string.h>
 
 typedef struct Stats {

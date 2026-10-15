@@ -12084,8 +12084,17 @@
   },
   {
     "va": 5091200,
-    "size": 13616,
-    "name": "fcn.004daf80"
+    "size": 1920,
+    "name": "fcn.004daf80",
+    "extent_history": [
+      {
+        "old_size": 13616,
+        "new_size": 1920,
+        "reason": "Goal57 complete paired validator callback ends with its seven native switch entries before next Gold prologue4db700. Shared ordinary C matches1920 bytes. Old span includes separate later court functions; no new source or verdict from this extent repair.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T20:41:04.541110+00:00"
+      }
+    ]
   },
   {
     "va": 5104816,

@@ -2017,3 +2017,33 @@ source identity or the linked provider. That LIBRARY row is preserved.
 `int m_is_tracked(void*)` provider contract without claiming a pointee layout.
 No new storage or native type allocation is inferred. Full native/object and
 operand/literal evidence is in `.scratch/goal56/native-proof.json`.
+
+
+### Event validators and master checking (2026-10-16)
+
+TL `0x4dc7d0` / Gold `0x4daf80` retain provisional `fcn_004dc7d0`:
+registration and the actual indirect consumer establish their validator role,
+but no original identifier or source path is attested. One shared ordinary-C
+body serves both clients. The standalone source home and narrow
+`game/event_callbacks.h` declaration home are inferred.
+
+`cut_CheckMaster` is attested by both native diagnostics inside TL `0x4e63e0`
+/ Gold `0x4e4a50`, including `cut_CheckMaster(): invalid master for id %i`.
+The managed shared rename preserves the existing filename and both 241-byte
+bodies. Original TU ownership remains unestablished. Complete strings, native
+references and the supported rename preview are retained in `.scratch/goal57`.
+
+`EVENT_CHECK` is an inferred `int (__cdecl*)(char*)` access contract: native
+code passes one event pointer and tests full EAX. Eight fourth-slot callbacks,
+the setter and their actual consumer share it. The first three registry slots
+currently expose address storage only; their callable signatures remain open.
+The event helpers retain their established word or unsigned-byte access views,
+with explicit reviewed conversions from private event views at callers.
+
+The existing provisional `g_9b0840` identifies TL `0x9b0840` / Gold `0x92c500`.
+The consumer's former unbound `g_9b0850` spelling was a base+16 field view,
+not a separate allocation. Its private `Kind` view is bound under stable ID
+`event.validator_view`: 20-byte stride, callback at offset zero, sixteen bytes
+opaque. Native registry entries begin sixteen bytes before that view. The
+canonical header declares the backing bytes without defining storage or
+claiming their full extent or owner. Proof: `.scratch/goal57/native-proof.json`.

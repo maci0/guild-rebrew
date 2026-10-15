@@ -1,4 +1,4 @@
-int __cdecl fcn_004e6200(int, int*);
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
 char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl fcn_004c6d70(int*, char*);
@@ -8,7 +8,7 @@ void __cdecl fcn_00535960(void);
 /* ADDRESS: GOLD 0x004e4a50 */
 /* ADDRESS: GOLDTL 0x004e63e0 */
 
-int __cdecl fcn_004e63e0(int* a1)
+int __cdecl cut_CheckMaster(int* a1)
 {
 	int flag;
 	char buf[0x80];
@@ -16,7 +16,7 @@ int __cdecl fcn_004e63e0(int* a1)
 	int i;
 	int r;
 
-	if (fcn_004e6200(a1[3], a1) == 0) {
+	if (fcn_004e6200(a1[3], (unsigned char*) a1) == 0) {
 		flag = 1;
 		e = fcn_00508e40(a1[3]);
 		fcn_0064d41a(buf, "cut_CheckMaster(): invalid master for id %i", a1[0]);

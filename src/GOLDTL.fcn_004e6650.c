@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
 
 
 #pragma pack(push, 2)
@@ -28,13 +29,12 @@ typedef struct {
 // SIZE 0x114
 
 typedef struct {
-	int (__cdecl *fn)(Ent *);
+	EVENT_CHECK fn;
 	char pad4[0x10];
 } Kind;
 // SIZE 0x14
 
 extern char g_9a9660[];
-extern Kind g_9b0850[];
 extern char g_7f4ca4[];
 extern unsigned short g_774970;
 extern int g_77494c;
@@ -45,12 +45,11 @@ extern int g_7e2700;
 
 void __cdecl fcn_00500bb0(Time *, int, int, int);
 int __cdecl fcn_00500cb0(Time *, Time *);
-int __cdecl fcn_004e64e0(Ent *);
 void __cdecl fcn_004c6a70(int);
-int __cdecl fcn_004e6200(int, Ent *);
 void __cdecl fcn_004e6b10(int);
-void __cdecl fcn_004e5a00(Ent *);
 
+/* ADDRESS: GOLDTL 0x004e6650 */
+/* ADDRESS: GOLD 0x004e4cc0 */
 int __cdecl fcn_004e6650(void)
 {
 	Time t;
@@ -66,7 +65,7 @@ int __cdecl fcn_004e6650(void)
 			}
 			if (*(int *) (g_7f4ca4 + g_774970 * 0x21c) == ((Ent*)g_9a9660)[i].key && ((Ent*)g_9a9660)[i].busy == 0 &&
 			    fcn_00500cb0(&(*(Time*)&g_7f4c00), &t) > 0) {
-				r = fcn_004e64e0(&((Ent*)g_9a9660)[i]);
+				r = fcn_004e64e0((int*) &((Ent*)g_9a9660)[i]);
 				if (r == -1) {
 					fcn_00500bb0(&((Ent*)g_9a9660)[i].t, 0, 5, 0);
 					if (((Ent*)g_9a9660)[i].t.hour >= 22) {
@@ -81,16 +80,16 @@ int __cdecl fcn_004e6650(void)
 					}
 					continue;
 				}
-				if (g_9b0850[((Ent*)g_9a9660)[i].type].fn != 0 && g_9b0850[((Ent*)g_9a9660)[i].type].fn(&((Ent*)g_9a9660)[i]) == 0) {
+				if (((Kind*) (g_9b0840 + 0x10))[((Ent*)g_9a9660)[i].type].fn != 0 && ((Kind*) (g_9b0840 + 0x10))[((Ent*)g_9a9660)[i].type].fn((char*) &((Ent*)g_9a9660)[i]) == 0) {
 					fcn_004c6a70(((Ent*)g_9a9660)[i].id);
 					continue;
 				}
 			}
-			if (g_9b0850[((Ent*)g_9a9660)[i].type].fn == 0 && fcn_00500cb0(&(*(Time*)&g_7f4c00), &((Ent*)g_9a9660)[i].t) > 0) {
+			if (((Kind*) (g_9b0840 + 0x10))[((Ent*)g_9a9660)[i].type].fn == 0 && fcn_00500cb0(&(*(Time*)&g_7f4c00), &((Ent*)g_9a9660)[i].t) > 0) {
 				((Ent*)g_9a9660)[i].done = 1;
 			}
 			if (fcn_00500cb0(&(*(Time*)&g_7f4c00), &((Ent*)g_9a9660)[i].t) > 0 && ((Ent*)g_9a9660)[i].done == 0) {
-				if (fcn_004e6200(*(int *) (g_7f4ca4 + g_774970 * 0x21c), &((Ent*)g_9a9660)[i]) != 0 &&
+				if (fcn_004e6200(*(int *) (g_7f4ca4 + g_774970 * 0x21c), (unsigned char*) &((Ent*)g_9a9660)[i]) != 0 &&
 				    (((Ent*)g_9a9660)[i].flags & 0x80) != 0) {
 					if (*(int *) (g_7f4ca4 + g_774970 * 0x21c + 0x208) == ((Ent*)g_9a9660)[i].id) {
 						((Ent*)g_9a9660)[i].done = 1;
@@ -104,7 +103,7 @@ int __cdecl fcn_004e6650(void)
 			}
 			if (fcn_00500cb0(&(*(Time*)&g_7f4c00), &t) > 0 && ((Ent*)g_9a9660)[i].done != 0) {
 				g_7e2700 = 0;
-				fcn_004e5a00(&((Ent*)g_9a9660)[i]);
+				fcn_004e5a00((int*) &((Ent*)g_9a9660)[i]);
 				fcn_004e6b10(((Ent*)g_9a9660)[i].id);
 			}
 		}

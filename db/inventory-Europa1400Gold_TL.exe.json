@@ -13124,8 +13124,17 @@
   },
   {
     "va": 5097424,
-    "size": 13264,
-    "name": "fcn.004dc7d0"
+    "size": 1920,
+    "name": "fcn.004dc7d0",
+    "extent_history": [
+      {
+        "old_size": 13264,
+        "new_size": 1920,
+        "reason": "Goal57 complete callback ends after RET at4dcf33 and seven native switch entries4dcf34..4dcf4f. Next prologue is4dcf50. Shared ordinary C matches1920 bytes; preserve subsequent court code as unassigned, not alignment or progress.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T20:41:04.067960+00:00"
+      }
+    ]
   },
   {
     "va": 5110688,

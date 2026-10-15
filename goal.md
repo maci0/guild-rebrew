@@ -107,67 +107,60 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-16
 
-The full goal remains ACTIVE and incomplete. Preserve earlier character,
-loader, animation, allocator, action and logical-reset work. Both client raw
-images/data ownership, broader contracts and faithful discarded-server inputs
-remain open. Read docs/TODO.md Goal56 for the bounded integration and receipts.
+The full goal remains ACTIVE and incomplete. Goal57 integrates one shared event
+validator TL4dc7d0/Gold4daf80 (RELOC1920 each) and independently verifies the
+Gold4e4cc0 event consumer (RELOC630; TL4e6650 retained). New game matches are
+TL+1920 ->697456 and Gold+2550 ->383347. Libraries remain390163/9732; native
+alignment is33614/23497. Accounted text: TL1121233/2491370 (CLI45.0%),
+Gold416576/2006532 (CLI20.7%). Read docs/TODO.md Goal57 for detailed evidence.
 
-Goal56 adds shared character-script registration (TL40e1a0/Gold40d270,
-RELOC1033 each), WalkToDummy (TL40cae0/Gold40bbc0,RELOC185 each) and the TL
-three-byte PreloadSitMesh callback40dac0 (EXACT3). One C89 definition per
-logical function serves both clients. The registration home/name is inferred;
-the walk and camera names are native diagnostics. MoveCharacterCamera remains
-SIZE_MISMATCH at221/native218 in both clients; its blockers, failed source
-shapes and read-only flag controls are preserved. No production flags changed.
+The narrow inferred event_callbacks.h reconciles the eight fourth-slot validator
+contracts, setter, consumer and connected event helper pointer views. Native
+logging attests cut_CheckMaster (TL4e63e0/Gold4e4a50, RELOC241 each); supported
+rename retains the existing filename and does not establish original TU ownership.
+The private stable event.validator_view records a20-byte strided field view;
+the backing table's full extent/owner and first three callback-slot contracts
+remain unresolved. No new storage, flags, assembly or filler was introduced.
 
-Canonical script callback, camera adapter and allocator-membership declarations
-are reconciled over the participating46 names. Full native proof covers five
-strong production bodies,2439bytes,270 operand sites and180 rejecting controls.
-The Gold PreloadSitMesh destination49dee0 remains Lua LIBRARY default_panic;
-three-byte equality cannot establish folding/provider identity. Its unresolved
-registrar operand is a comparison hypothesis, not a new managed game binding.
-No fabricated storage, type layout, assembly or padding was introduced.
+Two native discovery extents were repaired from13264/13616 to1920; subsequent
+independent code remains unassigned, with only evidenced alignment counted.
+All8401 previous identities/6045 strong verdicts survive, totals8404/6048.
+All23 existing strong affected contexts survive. The TL transfer callback stays
+799/native801 with all old compiled bytes/fixups preserved. Complete proof is
+10bodies/6412bytes/306operands/148rejecting controls, including16 independently
+bound local/table operands. Unbound externs remain comparison hypotheses.
 
-Upstream55b4f436 records that logical callback/address distinction in IDEAS.
-843d70a2 adds explicit reviewed missing-function admission with atomic/digest
-checks and regression tests;72a19318 repairs help/summary integration;
-af9b30c2 documents the public-surface/digest change. Full upstream push gate
-passes. Main contains those commits locally/remotely; completed owned worktrees
-are removed. All23 unrelated upstream accounting edits remain unstaged and
-preserved, including reversible merges of the overlapping docs. Do not discard
-or commit that work. Project rules already require upstream fixes and IDEAS.
+Upstream8e897442 fixes function-pointer typedef contract resolution and named
+record aliases retaining pointer/function declarators. Thirteen new regression
+cases,186 focused tests and the full mandatory push suite pass. It is merged
+and pushed; owned worktree/branch removed. Both repositories retain only main.
+All23 unrelated upstream accounting edits remain unstaged and byte-preserved,
+with reversible CHANGELOG merge receipts. Do not discard or commit that work.
 
-Six reviewed predecessor extent repairs admit five real native callbacks,
-including the three-byte stub missed by default discovery. All8394 old source
-identities and6040 strong statuses survive; current totals8401/6045. Data, types,
-source/config stores and compiler inputs are unchanged. Native row order,
-fields and history survive. Every affected target context is remeasured with
-the final upstream tooling; the server gate restores linked EXACT afterward.
+Final all-target lint0/0, data0conflicts/duplicate owners, three type checks
+1020structs/0findings. Selected14 contract names have zero findings/unknowns
+with3986 current input hashes. Broad audit findings258/1479/968 and unknowns
+305/4081/2606 remain across server/TL/Gold. No new finding names appear against
+the Goal56 report, whose audit logic differs; this is not global contract closure.
+Both clients still lack raw-image and initialized-data verification.
 
-New matched game bytes: TL+1221 ->695536, Gold+1218 ->380797. Libraries
-390163/9732 and padding33605/23492 are unchanged. Accounted text is
-TL1119304/2491370 (CLI44.9%), Gold414021/2006532 (CLI20.6%). This is progress
-in matched game bytes, separate from libraries, cleanup and validation.
-All-target lint0/0, data0conflicts/duplicate owners, all three type checks
-1020structs/0findings. Selected46 contracts have zero findings with current
-input hashes; broader contracts retain258/1489/973 findings and304/4085/2600
-unknowns across server/TL/Gold. That broader audit has no full before-baseline.
-Both clients still have zero verified initialized-data bytes and no raw image.
-
-The server gate passes316function/652data checks and all286720 raw bytes
-(SHA-2563cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1),
-plus import/export/relocation/layout and Wine load/export checks. Actual Docker
-compilation works; the initial allocator timeout is retained as failed evidence.
-Current receipts/replays are .scratch/goal56/native-proof, preservation,
-contract-summary/contracts-focused, final scope/lint/data/type/status, guarded
-inventory plans, native/Kuna/library inputs and server-gate.log.
+Fresh Docker server gate passes316function/652data checks, imports/exports/
+relocations/layout/Wine and all286720 raw bytes, SHA-256
+3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+Final source/header/tool fingerprints are remeasured after the upstream fix.
+Receipts/replays are .scratch/goal57/{native-proof,preservation,contract-summary,
+contracts-focused,scope-promote,lint-final,data-final,status-final,types-*}.json,
+guarded inventory/data/type/rename plans, native/Kuna/library/formatter inputs,
+transfer-preservation.json and server-gate.log. Scratch is ignored evidence,
+not a second managed inventory.
 
 Next select larger unmatched client bodies through todo/native/library evidence.
-TL402d00 separation probes720/745 versus native744 stay scratch; read the
-address-keyed C-shape notes before retrying. Do not repeat exhausted camera
-221/218, low-poly allocator LOD, office17-byte or queue733/735 probes without
-new evidence. Camera/list/disposal contracts, Goldfb9900 ownership/extent,
-client raw builds and discarded server inputs remain open.
+Check callback consumers before generalizing the first three event-slot signatures.
+Preserve Goal56 character work and the unchanged MoveCharacterCamera221/218
+blocker. Do not retry exhausted separation720/745-vs744, office17-byte, queue
+733/735 or low-poly LOD probes without new evidence. Camera/list/disposal
+contracts, Goldfb9900 ownership, client raw builds and discarded server inputs
+remain open. Keep upstream bug fixes and feature-gap recording in AGENTS.md.
 
 ## History
 

@@ -430,3 +430,37 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 [types."ch.dummy_picks".GOLD.offsets]
 item = 0
 count = 128
+
+[types."event.validator_view".GOLDTL]
+file = "src/GOLDTL.fcn_004e6650.c"
+symbol = "Kind"
+size = 20
+native_size = 20
+extent = "stride"
+evidence = "Inferred private strided validator-field view at registry+16; native20-byte stride, full EAX result and one event pointer. Remaining16 bytes opaque. Complete paired630-byte consumers and1920-byte validators match; this view is not an allocation or owner."
+cflags = "/O2 /Gd"
+source_hash = "51163a856bbdf8c72b62f59effd3f40fb23a9a02654473b59df1132ca743ef0d"
+headers_hash = "0df0a52fdc086260ad586a53994eefe76a9253c5475386651136c725e12d9c9e"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."event.validator_view".GOLDTL.offsets]
+fn = 0
+pad4 = 4
+
+[types."event.validator_view".GOLD]
+file = "src/GOLDTL.fcn_004e6650.c"
+symbol = "Kind"
+size = 20
+native_size = 20
+extent = "stride"
+evidence = "Inferred private strided validator-field view at registry+16; native20-byte stride, full EAX result and one event pointer. Remaining16 bytes opaque. Complete paired630-byte consumers and1920-byte validators match; this view is not an allocation or owner."
+cflags = "/O2 /Gd"
+source_hash = "51163a856bbdf8c72b62f59effd3f40fb23a9a02654473b59df1132ca743ef0d"
+headers_hash = "0df0a52fdc086260ad586a53994eefe76a9253c5475386651136c725e12d9c9e"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."event.validator_view".GOLD.offsets]
+fn = 0
+pad4 = 4

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
 
 
 #include <string.h>
@@ -34,8 +35,9 @@ void __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 
-int __cdecl fcn_004e1330(Cmd* cmd)
+int __cdecl fcn_004e1330(char* event)
 {
+	Cmd* cmd;
 	char buf[0x200];
 	Ent* a;
 	Ent* b;
@@ -43,6 +45,7 @@ int __cdecl fcn_004e1330(Cmd* cmd)
 	int n;
 	int result;
 
+	cmd = (Cmd*) event;
 	result = 0;
 	a = fcn_00508e40(cmd->a);
 	b = fcn_00508e40(cmd->b);

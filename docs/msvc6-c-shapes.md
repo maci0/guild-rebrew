@@ -11659,3 +11659,44 @@ shape and an unexplained16-byte stack allocation remain unresolved. Do not
 invent a float[4] view, padding, volatile access or assembly. A signature miss
 is inconclusive; Gold's fixed-prefix hit at57f3a0 does not prove a counterpart.
 Receipts/seeds live in `.scratch/goal56/separation*` and the native402d00 body.
+
+
+### Six-participant event validator (2026-10-16)
+
+TL `0x4dc7d0` / Gold `0x4daf80` match one ordinary-C body at 1,920 bytes each
+under the configured Processor Pack `/O2 /Gd`. That complete extent includes
+the seven-entry indexed switch table: TL code returns at `4dcf33`, table bytes
+are `4dcf34..4dcf4f`, and the next function begins at `4dcf50`. Gold's next
+function begins at `4db700`. The old discovery extents, 13,264 and 13,616,
+swallowed subsequent independent functions; their released bytes remain
+unassigned code, with only evidenced NOP alignment counted as padding.
+
+Keep all six participant lookups unconditional. Only the sixth validation is
+conditional on count >= 6. Preserve null/type-15/inactive checks, busy/query
+ordering, and the native second-participant path's reuse of the FIRST
+participant's busy flag and ID. Both fourth and fifth validation failures select
+error 4. The success path uses ordinary `strcat` with 64- and 512-byte local
+buffers; the seven-case failure dispatch needs no flags, assembly or filler.
+Kuna is a useful control-flow seed; native loads and operands decide these
+otherwise surprising details. The first isolated C candidate already matched.
+
+The formatter's second word is a tagged ID/address contract. Native code
+compares it with signed `0x4800`; smaller values select localization IDs,
+otherwise it is a format pointer. Its EBP+0x10 vararg start proves two fixed
+arguments. `(int) "%s"` represents that evidenced boundary and produces the
+correct per-target three-byte compiler literal (TL `679060`, Gold `5f8318`).
+Do not retain a raw TL address or adopt Kuna's inferred six-fixed-argument
+prototype from its aligned-frame decompilation.
+
+The paired 630-byte event consumers resolve their two actual registry field
+operands to backing+16. Three syntactic field references emit two operands;
+the initial load is reused at the indirect call. Complete production proof
+covers ten bodies, 6,412 bytes, 306 operand sites, 16 independently checked
+local/table operands and 148 wrong-address rejecting controls. Unbound externs
+remain explicit comparison hypotheses; this is not client raw-provider proof.
+
+The old TL `4d74b0` transfer callback still emits 799 versus native 801 bytes.
+Its declaration reconciliation preserves all 799 old compiled bytes and every
+fixup. Do not claim the unchanged weak result as a new match. Receipts and
+replays: `.scratch/goal57/{native-proof,transfer-preservation}.json`, native/Kuna
+inputs, formatter evidence and the complete production comparison logs.

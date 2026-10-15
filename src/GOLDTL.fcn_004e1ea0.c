@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
 /* ADDRESS: GOLDTL 0x0068cfc0 */
 extern char g_68cfc0[];
 /* ADDRESS: GOLD 0x0060e340 */
@@ -18,7 +19,7 @@ void __cdecl fcn_004e6240(void*, void*, char*, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-int __cdecl fcn_004e1ea0(void* a1)
+int __cdecl fcn_004e1ea0(char* a1)
 {
 	char buf[0x200];
 	void* e1;

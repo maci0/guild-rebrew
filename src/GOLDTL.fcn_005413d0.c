@@ -42,7 +42,7 @@ extern char* g_14a60d0[];
 
 void __cdecl fcn_00546190(unit_77e980*);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004e6200(int, struct building*);
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
 void __cdecl fcn_004e6b10(int);
 
 void __cdecl fcn_005413d0(int idx)
@@ -115,7 +115,7 @@ void __cdecl fcn_005413d0(int idx)
 		memset(h->slots, 0xff, sizeof(h->slots));
 		g_773d68++;
 		for (j = 0; j < 96; j++) {
-			if (((struct building*)g_9a9660)[j].used != 0 && fcn_004e6200(h->owner, &((struct building*)g_9a9660)[j]) != 0) {
+			if (((struct building*)g_9a9660)[j].used != 0 && fcn_004e6200(h->owner, (unsigned char*) &((struct building*)g_9a9660)[j]) != 0) {
 				if (((struct building*)g_9a9660)[j].kind == 3 || ((struct building*)g_9a9660)[j].kind == 5 || ((struct building*)g_9a9660)[j].kind == 4
 				    || ((struct building*)g_9a9660)[j].kind == 6 || ((struct building*)g_9a9660)[j].kind == 9 || ((struct building*)g_9a9660)[j].kind == 7) {
 					fcn_004e6b10(((struct building*)g_9a9660)[j].handle);

@@ -5,8 +5,7 @@ extern char g_7f4ca4[];
 extern char* g_aed32c;
 
 int* __cdecl fcn_004e68d0(void);
-int __cdecl fcn_004e6200(int, int*);
-void __cdecl fcn_004e5a00(int*);
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
 void __cdecl fcn_004e6b10(int);
 void __cdecl fcn_004c4510(char*, int);
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
@@ -22,7 +21,7 @@ char __cdecl fcn_004e6910(int idx)
 	saved = *(int*) (g_7f4ca4 + idx * 0x21c + 0x208);
 	p = fcn_004e68d0();
 	while (p != 0) {
-		if (fcn_004e6200(*(int*) (g_7f4ca4 + idx * 0x21c), p) != 0) {
+		if (fcn_004e6200(*(int*) (g_7f4ca4 + idx * 0x21c), (unsigned char*) p) != 0) {
 			*(int*) (g_7f4ca4 + idx * 0x21c + 0x208) = *p;
 			fcn_004e5a00(p);
 			*(int*) (g_7f4ca4 + idx * 0x21c + 0x208) = -1;

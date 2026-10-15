@@ -54500,3 +54500,69 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   worktrees/branches are removed. Both repositories retain only main. All23
   unrelated upstream accounting edits remain unstaged with reversible merge
   preservation receipts; do not commit or discard them.
+
+
+### Goal57 — shared event validation and callback contracts (2026-10-16)
+
+- Added one shared ordinary-C validator TL4dc7d0/Gold4daf80, RELOC1920 each,
+  including its seven-entry switch table. Native/Kuna/caller/library evidence
+  precedes adoption. Preserve the unusual first-participant reuse in the second
+  check, all six unconditional lookups and tagged ID/format-pointer boundary.
+  Names and source/header placement remain explicitly inferred.
+- Reconciled the eight fourth-slot validator contracts as int(char*) through
+  EVENT_CHECK, their registry setter and actual indirect consumer. The latter
+  adds independently verified Gold4e4cc0, RELOC630; existing TL4e6650 stays
+  RELOC630. Replace the unbound field-view spelling with canonical backing+16;
+  both native operands per target are validated. The first three callback slots
+  remain address-storage views, with callable contracts unresolved.
+- Canonicalized the connected helper pointer views in every participating
+  provider/caller. Native diagnostics attest cut_CheckMaster; the managed shared
+  rename keeps TL4e63e0/Gold4e4a50 RELOC241 and their original filename.
+  Two extern data declaration homes move to the narrow header; no storage or
+  full allocation extent is invented. Private Kind keeps its 20-byte field-view
+  stride under stable event.validator_view bindings in both clients.
+- Fixed upstream callback typedef auditing directly in Rebrew, 8e897442.
+  AST composition now resolves named function-pointer parameters and nested
+  aliases without parameter-name mismatches, preserving ABI/return/pointee/
+  variadic distinctions. A reproduced named-record alias bug also dropped
+  pointer/function declarators; replacing only the record specifier fixes it.
+  Thirteen new regression cases, 186 focused tests and the mandatory full
+  pre-push suite pass. Unsupported/conditional contracts remain explicit unknowns.
+  IDEAS-GUILD records the encountered gap and resolution; no local parser added.
+- Final affected comparisons with final upstream tooling: TL14pass/1weak,
+  Gold12pass/0weak; all23 pre-existing strong contexts survive. The old TL
+  transfer callback remains799/native801, with every old compiled byte/fixup
+  unchanged. Complete production proof covers10bodies/6412bytes/306operands,
+  16 independently bound local/table operands and148 rejecting controls.
+  Unresolved external destinations stay comparison hypotheses, not providers.
+- Only two reviewed native extents change: TL4dc7d0 13264->1920 and Gold4daf80
+  13616->1920. Subsequent swallowed functions remain unassigned code, not game
+  progress or invented padding. All8401 old identities and6045 strong verdicts
+  survive; totals8404/6048. Previous inventory order/history, type bindings,
+  source/config/compiler inputs and all other data rows survive.
+- Newly matched game bytes: TL+1920 ->697456, Gold+2550 ->383347. Libraries
+  remain390163/9732. Evidenced alignment exposed by the repaired boundaries adds
+  only9/5 padding bytes, now33614/23497. Accounted text is TL1121233/2491370
+  (CLI45.0%), Gold416576/2006532 (CLI20.7%). Newly unassigned spans affect the
+  no-function bucket without erasing code; account game/library/padding separately.
+- Final all-target lint0errors/0warnings; data0type conflicts/duplicate owners;
+  all three type checks1020structs/0findings. Selected14 contract names have
+  zero findings/unknowns, with3986 current input hashes. Broader findings remain
+  258/1479/968 and unknowns305/4081/2606 (server/TL/Gold). The Goal56 before
+  report used older audit logic; no new finding names appear, but counts alone
+  cannot establish universal source-contract closure. Client raw links and
+  initialized-data verification remain open.
+- Fresh Docker server gate passes316functions/652data checks, import/export/
+  relocation/layout/Wine and all286720 raw reference bytes, SHA-256
+  3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+  Earlier pre-upstream receipts remain distinct; final source and upstream
+  comparison fingerprints are remeasured. Failed setup/extent controls remain
+  in scratch rather than hidden by the final green result.
+- Receipts/replays: .scratch/goal57/{native-proof,preservation,contract-summary,
+  contracts-focused,scope-promote,lint-final,data-final,status-final,types-*}.json,
+  native/Kuna/library/formatter inputs, guarded extent/data/type/rename plans,
+  transfer-preservation.json and server-gate.log. Upstream8e897442 is merged
+  and pushed after full gates; completed owned worktree/branch removed. Both
+  repositories retain only main. All23 unrelated upstream accounting edits are
+  preserved unstaged, including reversible CHANGELOG merging; do not discard
+  or commit them. The full three-image/source-fidelity goal remains ACTIVE.

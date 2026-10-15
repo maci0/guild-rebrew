@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
 #include <string.h>
 
 // SIZE 0x40
@@ -16,7 +17,6 @@ char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_004c5a20(int, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_004e63e0(int*);
 void __cdecl fcn_004c4eb0(char*);
 int __cdecl fcn_004c6aa0(Msg*);
 void __cdecl fcn_004c4ef0(char*);
@@ -57,7 +57,7 @@ int __cdecl fcn_004e64e0(int* c)
 			}
 		}
 	}
-	if (fcn_004e63e0(c) == 0)
+	if (cut_CheckMaster(c) == 0)
 		return -1;
 	m.who = c[0];
 	m.ids = *(Ids*) (c + 13);

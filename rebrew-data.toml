@@ -1853,11 +1853,14 @@ type = "unsigned int"
 section = ".data"
 
 ["GOLD.0x0092c500"]
-file = "src/GOLDTL.fcn_004e7160.c"
+file = "src/Develop/DieGildeAddOn/game/event_callbacks.h"
 name = "g_9b0840"
 kind = "GLOBAL"
 type = "char[]"
 section = ".data"
+note = "Inferred canonical extern declaration only. Native registry writes 12 entries at20-byte stride. Validator field is base+16+20*kind and is called with one event pointer, testing full EAX. Complete allocation extent and storage owner remain unresolved; no separate field-view allocation."
+updated_by = "data"
+updated_at = "2026-10-15T20:42:15+00:00"
 
 ["GOLD.0x0092cae0"]
 file = "src/GOLDTL.fcn_004e6a70.c"
@@ -4479,11 +4482,14 @@ type = "unsigned int"
 section = ".data"
 
 ["GOLDTL.0x009b0840"]
-file = "src/GOLDTL.fcn_004e7160.c"
+file = "src/Develop/DieGildeAddOn/game/event_callbacks.h"
 name = "g_9b0840"
 kind = "GLOBAL"
 type = "char[]"
 section = ".data"
+note = "Inferred canonical extern declaration only. Native registry writes 12 entries at20-byte stride. Validator field is base+16+20*kind and is called with one event pointer, testing full EAX. Complete allocation extent and storage owner remain unresolved; no separate g_9b0850 allocation."
+updated_by = "data"
+updated_at = "2026-10-15T20:42:13+00:00"
 
 ["GOLDTL.0x009b0e20"]
 file = "src/GOLDTL.fcn_004e6a70.c"

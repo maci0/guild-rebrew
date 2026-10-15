@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
 char* __cdecl fcn_00508e40(int);
 float __cdecl fcn_004fef80(char*);
 
