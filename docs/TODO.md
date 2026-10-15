@@ -53385,7 +53385,7 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   those contracts as measured batches when needed for disposal integration.
 - Coverage arithmetic reconciles: both user reports contain691740 matched game
   bytes and3567 matched functions. The seven-byte account increase is padding;
-  both percentages round to44.7. Libraries already contribute388403 bytes,
+  both percentages display44.7. Libraries already contribute388403 bytes,
   including1008 D3DX8 functions. Library origin remains separate from selected
   raw-link providers and game reversing progress.
 - The full shared FLIRT audit loads7102296 signatures, including D3DX8; its
@@ -53421,3 +53421,47 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   directx-all-whole-body-audit.json, library-plane-proof.json,
   library-plane-boundary-native.json andstatus-{before,after}-library-credit.json.
   The full7102296-signature scan is still running and must be triaged separately.
+
+### 2026-10-15: full shared-signature audit and missing CRT copy bodies
+
+- The original full scan remained unfinished after30 minutes. Read-only sampling
+  places491/500 samples in growing-list membership at flirt.py647. Upstream
+  32e846cc uses a set for duplicate checks while preserving ordered output.
+  Two regression modes fail before with2498500 comparisons for2000 names;
+  both pass after. All119 focused tests pass, and the real3849-signature DirectX
+  scan preserves its JSON exactly (43 ordinary/590 ambiguous). Required upstream
+  commit/full-suite/push checks pass. The fix and earlier discovery note1ab2818e
+  are published; temporary upstream worktrees/branches are removed, and unrelated
+  upstream changes are preserved, including the concurrent changelog contents.
+- The repaired full7102296-signature scan finishes in89.4 seconds with1967
+  ordinary hits/4679 ambiguous addresses. Most extra labels are weak Delphi,
+  Linux or generic patterns. Complete D3DX archive checks at5802 uncredited
+  candidate starts produce four further hits, all with unresolved template
+  aliases. They remain candidates, without arbitrary names or duplicate credit.
+- CRT CopyUp/LeadUp hits identify interior code in two entire821-byte native
+  routines at TL64d740 and658030. Each stock LIBCMT memcpy.obj/memmove.obj has one
+  external entry in its821-byte code section; all46 relocations target labels
+  within that section. Relocating each stock candidate reproduces every byte of
+  each native body. Every shifted internal binding and altered fixed-byte
+  control rejects. This establishes CRT origin while leaving the memcpy/memmove
+  names and selected raw-link providers unresolved. Labels/tables are not new
+  functions. Both address-only library rows use provisional names and preserve
+  that uncertainty; no stock API symbol, C body or game STATUS is invented.
+- The existing TL41a2c0 caller remains RELOC184/184 with unchanged operand
+  evidence. Its API-name binding stays unresolved. All8376 original identities,
+  native extents and6022 strong statuses remain; three new library identities
+  are added across this audit. Library totals become1466/390101 bytes. Total
+  newly accounted library bytes are1698 (56 D3DX +1642 CRT), with zero newly
+  matched game bytes. Text account1115402/2491370 is44.7706%; the CLI deliberately
+  truncates to one decimal and therefore still displays44.7.
+- The fresh pinned gate-after-flirt.log passes full286720-byte server identity,
+  all316 game/652 data checks, imports, relocations, toolchains and Wine. Source
+  inputs are unchanged. All-target lint is0/0, and the unchanged-source data
+  inventories have zero conflicts/duplicate definitions. Zlib origin and weak hits remain
+  review work, without bulk promotion from signature names.
+- Receipts: .scratch/goal43/flirt-profile.raw, flirt-fixed-time.json,
+  flirt-output-preservation.json, library-full-shared-scan.json,
+  full-directx-whole-body-audit.json, crt-copy-full-proof.json,
+  crt-copy-caller.json, status-final-tl.json, scope-preservation.json and
+  gate-after-flirt.log. Upstream regression/commit/push logs are under
+  /tmp/rebrew-flirt-dedup-*. Full client raw images and the main goal remain open.

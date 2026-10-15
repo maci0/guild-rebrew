@@ -149,12 +149,31 @@ contained691740 matched game bytes/3567 functions; their seven-byte account
 increase was padding. The library audit adds one target-scoped56-byte identity,
 c_D3DXPlaneFromPointNormal at TL5edf50: its entire body equals stock D3DX8 without
 masking, and altered-byte/shifted-start controls reject. Actual raw-link provider
-selection remains unresolved. Library totals are1464 functions/388459 bytes;
-accounted text is1113760/2491370 bytes, still44.7% when rounded. Most other focused
-DirectX hits already lie inside credited library spans and must not be counted
-twice. The full shared7102296-signature scan is still running; its candidates
-need archive/callee and span checks before classification. The shared/local
-signature discovery gap is recorded in upstream docs/IDEAS-GUILD.md.
+selection remains unresolved. The full shared7102296-signature scan now finishes
+in89.4 seconds after upstream32e846cc fixes quadratic name deduplication. Both
+regression modes fail before;119 focused tests, real DirectX output preservation
+and the required full upstream suite pass. The fix and signature discovery note
+are pushed upstream, and their temporary worktrees are removed.
+
+Full scan output has1967 ordinary hits and4679 ambiguous addresses, dominated by
+weak cross-library patterns. Most focused DirectX hits already lie in credited
+library spans; four additional complete D3DX matches retain unresolved template
+aliases and are not assigned arbitrary names. Two missing CRT copy bodies at
+TL64d740/658030 are each821 bytes. Both stock memcpy.obj and memmove.obj reproduce
+each entire body with all46 internal fixups resolved and every wrong-binding
+control rejected. Their CRT origin is recorded with provisional address-only
+names; API aliases and raw-link providers remain unresolved. Internal labels and
+tables are not extra functions. The existing caller retains its full184-byte
+RELOC result; its unresolved API binding remains explicit.
+
+The library audit adds1698 accounted bytes in total:1466 library functions and
+390101 library bytes, with1115402/2491370 text bytes accounted (44.7706%). The CLI
+truncates percentages to one decimal, so it still displays44.7%. No new matched
+game bytes are claimed. All8376 original identities/extents and6022 strong
+statuses remain; three new target-scoped library identities are added. Receipts
+are in.scratch/goal43/. The shared/local signature discovery gap is recorded in
+upstream docs/IDEAS-GUILD.md. Remaining source-backed zlib origin/provenance and
+other weak signature candidates need review before any further reclassification.
 
 The camera/client interface migration is deliberately unfinished. Reviewed
 float-pointer position/rotation candidates match83/184 bytes in scratch; do not
