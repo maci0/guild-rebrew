@@ -3255,3 +3255,14 @@ That result does not justify adding C statements, changing the managed extent
 or inventing padding. The float-pointer candidates remain unadopted; production
 integration and their connected declaration repairs still require measurement.
 Receipts: .scratch/goal43/vector-rotation-retry.json andvector_00438cb0.c.
+
+
+## Inspect each target's fixed bytes before a shared drift point (2026-10-15)
+
+Goal50's allocator review incorrectly treated Gold's mismatch as only the later
+LOD instruction drift. Five earlier fixed bytes were wrong member offsets/masks:
+Gold uses+212:~8/4 and clears bit1 of+211; TL uses+216:~2/1 and clears bit7 of+214.
+Compare every earlier member displacement/immediate against that target's native
+body. These are not relocations. Shared source or equal symbol size cannot prove
+shared bit positions. Goal51 corrects the source; both complete 38-byte flag windows
+match and the actual old Gold object rejects. See allocator-flags-proof.json.

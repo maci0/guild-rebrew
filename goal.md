@@ -107,65 +107,64 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-15
 
-The full goal is ACTIVE and incomplete. Both raw client images, complete client
-initialized-data verification/ownership, source contracts, unresolved code ranges
-and faithful discarded server inputs remain open. Preserve every prior match.
+The full goal remains ACTIVE and incomplete. Both raw client images, complete
+client data verification/ownership, source contracts, unresolved code and faithful
+discarded server inputs remain open. Preserve all prior native identities/matches.
+Checkpoint815573c6 is pushed; Goal50's allocator source is retained and corrected.
 
-Checkpoint4917aafe is pushed. Its skill-contract and master-binding repairs retain
-all 6,030 previous strong statuses and add 872 Gold game bytes. TL stays691,975
-matched game bytes. Detailed Goal49 receipts are in TODO and the archived goal.
+Goal51 reconstructs the attested `ch_CreateMesh` in shared game/character.c:
 
-Goal50 reconstructs the client cart-rendering path in the existing shared
-`gm_AllocObjekt` definition in game/spiel.c:
+- TL 0x403880 matches all 777 bytes and Gold 0x403070 all 787 bytes. Complete COFF
+  relocation application covers all 61 operand sites, 45 wrong-symbol controls
+  reject, and compiler literals pass. Unresolved native bases remain comparison
+  hypotheses; this does not establish raw-link providers or literal placement.
+- One ordinary C89 body preserves string parsing, scene creation, model state,
+  animal handling, animation calls and optional low-poly updates. Gold's extra
+  scene call and moved flag masks follow native evidence. Character-unit placement
+  and local/byte-view spellings remain inferred; the function name is attested.
+- Native word loads support the model flags’ 16-bit access view at +0x8c. Updating
+  that word with 0x1000 emits the exact native byte OR; a signed-char update does
+  not. No padding, assembly, flag or identifier/declaration sweep is added.
+- Factory/caller declarations now use resource char* and float* positions through
+  ch_motion.h. Repaired the argument-dropping forwarding prototype and the scalar
+  component wrapper's integer float transport. Related private object views remain
+  private. Other renderer/camera contracts and SDK/include contexts remain open.
+- Reviewed native extents 777/787 exclude seven/thirteen external NOPs, with old
+  784/800 extents retained in inventory history. No executable bytes are discarded.
 
-- SERVER 0x10016760 retains its 1,379-byte match. TL 0x502fe0 and Gold 0x500190 each have
-  a 2,003-byte native body, including two dispatch tables and their selector maps.
-  Thirteen external NOPs follow each body. Digest-guarded inventory repairs
-  preserve the old 2,016-byte extents in history; no executable bytes are discarded.
-- Native evidence supplies the renderer calls and both switch arms omitted by
-  Kuna. Shared hierarchy, slot initialization, parent walking, recursive child
-  creation and return remain one algorithm. Guards reflect native server logging
-  and client rendering differences. No assembly, padding or flag overrides added.
-- Client source is NEAR_MATCHING: TL 1,771/2,003 and Gold 1,777/2,003 under strict
-  known-binding checks. The remaining LOD byte ADD/TEST shape emits one fewer
-  instruction byte, shifting late code; table alignment keeps symbol size equal.
-  This is no new matched game coverage. Unresolved operands/providers and
-  renderer declaration contracts remain explicit; matching literals prove contents,
-  not placement or ownership. See .scratch/goal50 and docs/msvc6-c-shapes.md.
-- Nine former fcn_00502fe0 callers now use gm_AllocObjekt through the supported
-  reference-binding writer. Their declarations consistently return char*. Existing
-  pointer-through-integer wrapper returns and broader renderer contracts still
-  need native review; this checkpoint does not claim their complete repair.
+The previous allocator integration incorrectly copied TL scene masks into Gold.
+Gold needs flags2 at+212 masked with~8/4 and bit1 of+211 cleared; TL needs+216
+masked with~2/1 and bit7 of+214 cleared. Corrected C matches both complete 38-byte
+native flag windows; the old Gold object rejects. The allocator stays NEAR_MATCHING
+(TL 1771/2003, Gold 1782/2003) with the separate LOD ADD/TEST/code-placement gap.
+Do not reinterpret the old score or archive's only-LOD wording as semantic proof.
 
-The final current-input server gate passes all 286,720 raw bytes and required
-checks. All 8,383 prior identities and 6,032 strong statuses remain unchanged;
-228 affected bindings have current source hashes. Both new client identities
-remain NEAR_MATCHING. All-target lint, data conflicts/duplicate definitions and
-type-binding checks are clean. The allocator-name audit has zero findings but
-retains the existing 122/904/614 unknown SDK/include contexts, so it does not
-prove complete source-contract closure. See docs/TODO.md.
-No toolchain rebuild is needed: Docker access, pinned images and the plain-SP5 and Processor Pack
-compiler smokes pass. Only main worktrees remain; no untracked cleanup candidates.
-Keep ignored native receipts as evidence.
+Final validation preserves all 8,385 prior identities and 6,032 strong statuses,
+adds two constructor matches, and checks 184 affected target bindings with current
+inputs (63 server pass, 58 TL pass/7 weak, 50 Gold pass/6 weak). All-target lint,
+data conflict/duplicate-owner inventories and type bindings are clean. The fresh
+server gate passes all 286,720 raw bytes, imports/relocations/data and Wine checks.
+Named contract audits have zero findings and current hashes, but exit1 for the
+existing 122/904/614 SDK/include-context unknowns; no whole-project closure claim.
 
-The upstream switch command currently exposes physical jump-table slots without
-recovering the preceding bounded byte selector/bias. The concrete two-stage
-switch feature gap is recorded in upstream IDEAS-GUILD.md at f94f3866, pushed after
-mandatory full tests. It is not a runtime bug or a project-local parser replacement.
-The earlier native-entry insertion and SDK/include-context gaps remain recorded.
+TL gains 777 matched game bytes: 692,752 total. Libraries remain 390,163 bytes;
+padding 33,587; accounted text 1,116,502/2,491,370 (44.8%). Gold gains 787 game bytes;
+accounted text 410,907/2,006,532 (20.4%). Padding gains 7/13 are separate from game
+progress. Neither client has a verified raw image. Receipts/replays: .scratch/goal51.
 
-Next: reconcile the allocator's renderer declarations/providers, complete operand
-proof and close the measured LOD source shape without changing semantics or
-sweeping declarations. Start from the full spiel.c context; isolated probes lose
-native register/global-cache behavior. Do not repeat the exhausted byte-assignment
-or promotion probes without new evidence. Keep the remaining client raw links and
-initialized data/ownership work in scope. Large unmatched native bodies remain
-necessary for material TL byte gains; library/padding accounting stays separate.
+Upstream 744ec69f records bounded FLIRT progress output in IDEAS-GUILD.md and is
+pushed after mandatory full tests. Existing two-stage switch, native-entry and
+SDK/include-context gaps remain recorded. No upstream runtime bug is worked around.
+Docker/toolchain images remain usable; only main worktrees and no loose files.
 
-The office pair TL 0x4eba60/Gold 0x4e9ce0 remains unadopted: 2,148 native bytes and17
-nonoperand differences in the saved candidate. Queue loader 0x5252d0/0x520340 remains
-733/735 bytes. Camera/list/position/rotation/disposal work is partial; Gold 0xfb9900
-has unresolved extent/owner. Retain prior native evidence and exhausted probes.
+Next: inspect TL 0x404b60’s 305-byte model service, already a constructor callee,
+using library/native/Kuna evidence before implementation. Keep the constructor's
+unresolved providers explicit. Continue renderer contracts and the allocator LOD
+shape from saved evidence; do not repeat exhausted byte/declaration probes.
+The office pair 0x4eba60/0x4e9ce0 remains 2148 bytes with 17 nonoperand differences in
+its saved candidate. Queue loader 0x5252d0/0x520340 remains 733/735. Camera/list/position/
+rotation/disposal work is partial; Gold 0xfb9900 extent/owner remains unresolved.
+The full three-target source and raw-file objective continues.
 
 ## History
 

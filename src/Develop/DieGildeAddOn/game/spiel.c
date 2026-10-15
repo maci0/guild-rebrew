@@ -1956,7 +1956,7 @@ int __cdecl fcn_005155e0(unsigned char*);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
 void __cdecl fcn_00455350(char*, float*, float*);
-char* __cdecl fcn_00403b90(char*, float*);
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00404a00(char*, int, ...);
 void __cdecl fcn_00510820(char*, unsigned char*, int);
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
@@ -2183,8 +2183,13 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 		else if (type == 0x136)
 			scene = fcn_00442910(NULL, position, rotation, "ob_KARREN_GROSS");
 		if (scene != NULL) {
+#ifdef REBREW_GOLD
+			scene->flags2 = (scene->flags2 & ~8) | 4;
+			scene->rest &= ~2;
+#else
 			scene->flags2 = (scene->flags2 & ~2) | 1;
 			scene->flags0 &= ~0x80;
+#endif
 			fcn_00403ce0(model, scene);
 			owner_entity = (char*) static_ptr;
 			if (owner_entity == NULL && dynamic != NULL && *(unsigned short*) ((char*) dynamic + 0x27) != 0xffff)

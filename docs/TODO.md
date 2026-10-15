@@ -54174,3 +54174,65 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   text is 410,107. Each target gains only 13 evidenced padding bytes from the
   boundary repair; neither gains new matched game bytes. Native code, literals,
   library provenance, raw providers and data proof remain separate facts.
+
+
+## Character mesh constructor and Gold allocator flags (Goal51,2026-10-15)
+
+- Added one ch_CreateMesh definition to existing game/character.c, between
+  ch_Updatelowpoly and ch_MoveCharacter2Universe in native order. Its name is
+  attested by TL 0x675444/Gold 0x5f13cc error text; placement/local/type spellings
+  remain inferred. TL 0x403880 is 777 executable bytes, Gold 0x403070 is 787. Gold has
+  one extra scene call and different flag positions; the shared C retains them.
+- Full COFF relocation application matches both complete bodies, including all
+  30/31 operand sites and literal contents. All22/23 wrong-symbol controls reject.
+  Native bases unavailable to the registry are explicit comparison hypotheses,
+  not proven linked providers. No raw-client placement/data ownership claim.
+  FLIRT checks 7,102,296 signatures with zero hits for the TL entry; the game
+  attribution rests on native behavior/diagnostics, not the signature miss.
+- An initial signed-char flag OR made the last update seven bytes too long.
+  Independent native consumer 0x40342a loads WORD[model+8c]; the existing 16-bit
+  access view with |=0x1000 reproduces the native byte OR and complete body.
+  Four rotation words stay zeroed; resource strings are copied/parsed in native
+  order; animal tests are strstr, not strcmp. Do not add logging to the failure
+  sprintf or initialize the scalar wrapper's unwritten fourth vector component.
+- Canonical ch_motion.h owns initializer/factory/forwarder contracts. Factory
+  resources and positions are char*/float*, model returns char*, and the initializer
+  returns full-width int. Fixed the forwarding source that declared no arguments
+  while its caller passed both; preserved its native conditional tail jump.
+  Corrected scalar float component transport and the private Figure* caller view.
+  No unrelated callee contract or full camera reconciliation is claimed. SDK
+  context gaps still prevent automatic types reconcile; reviewed C edits and
+  complete affected-target comparisons remain explicit.
+- Found a real Goal50 reconstruction error: the Gold allocator used TL flag masks.
+  Gold uses+212: (flags&~8)|4 and clears bit1 of+211; TL uses+216:(flags&~2)|1
+  and clears bit7 of+214. Corrected through the canonical Gold rest-bit view and
+  target mask selection. Both compiled38-byte flag windows equal native bytes;
+  the actual old Gold object rejects. This supersedes Goal50's only-LOD inference.
+  Full allocator remains NEAR: 1771/2003 TL, 1782/2003 Gold. The late one-byte
+  ADD/TEST placement residue and unresolved operands/providers remain open.
+- Digest-guarded native boundary repairs preserve 784→777 TL and 800→787 Gold
+  history. RET403b88/403382 is followed by seven/thirteen NOPs before the next
+  entry403b90/403390. Padding stays separate; no instruction bytes are dropped.
+- Scope covers 25 C sources/184 target bindings: 63 server pass, 58 TL pass/7 weak,
+  50 Gold pass/6 weak. All 169 earlier strong bindings in this scope pass; the
+  complete store audit retains 8,385 prior identities and all 6,032 strong statuses,
+  adds two RELOC identities and preserves history/data/type/source stores.
+  Named factory/initializer contract audits have zero findings/current hashes;
+  exit1 remains for existing 122 server/904 TL/614 Gold SDK/include unknowns.
+- Fresh full gate-final.log is PASS, all 286,720 raw server bytes equal the reference,
+  including required function/data/import/relocation/Wine checks. Lint is 0/0 in
+  all targets; data conflicts/multiple definitions and type-binding findings are 0.
+  TL gains 777 matched game bytes (692,752 total), plus 7 padding; accounted text
+  becomes 1,116,502/2,491,370 (44.8%). Gold gains 787 game bytes plus 13 padding,
+  accounted 410,907 (20.4%). Library coverage is unchanged; no raw client proof.
+- Upstream 744ec69f records bounded FLIRT loading output in IDEAS-GUILD.md.
+  Commit/push hooks and mandatory full tests pass; origin/main contains it.
+  The per-file console progress from the huge database obscures useful diagnostics;
+  signature results are unchanged. No upstream runtime patch or local workaround.
+- Receipts/replays: .scratch/goal51/{constructor-proof,allocator-flags-proof,
+  preservation}.py/json, model-{init,flags}-native evidence, component-wrapper-native,
+  factory-forward-native, source-scope/scope-promote, contract-summary,
+  lint/data/types/status-stable, extent-*-{preview,applied}, gate-final.log and
+  upstream-push.log. Next native service: TL 0x404b60, 305 discovery bytes, with the
+  constructor's Gold 0x404360 operand as counterpart evidence. Check libraries and
+  Kuna/native bodies before source adoption; keep current provider uncertainty.

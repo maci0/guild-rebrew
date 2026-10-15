@@ -24,9 +24,9 @@ typedef struct Figure {
 extern float g_662d40[3];
 extern int g_14abee0[];
 
-char* __cdecl fcn_00445600(int, int, int, int);
-void __cdecl fcn_00455350(char*, char*, float*);
-Figure* __cdecl fcn_00403b90(int, float*);
+char* __cdecl fcn_00445600(char*, int, char*, char*);
+void __cdecl fcn_00455350(char*, float*, float*);
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00455140(char*, char*, float*);
 float __cdecl fcn_00451380(char*, float*);
 void __cdecl fcn_00438cb0(Model*, float*);
@@ -35,7 +35,7 @@ void __cdecl fcn_00438ac0(Model*, int);
 void __cdecl fcn_00404a00(Figure*, int, char*);
 void __cdecl fcn_005338d0(Model*, int, int);
 
-Figure* __cdecl fcn_0053b090(int res, int kind, int anim)
+Figure* __cdecl fcn_0053b090(char* res, char* kind, int anim)
 {
 	float box[4];
 	char* h;
@@ -45,8 +45,8 @@ Figure* __cdecl fcn_0053b090(int res, int kind, int anim)
 	if (h == 0) {
 		return 0;
 	}
-	fcn_00455350(h, h + 0x4c, box);
-	f = fcn_00403b90(kind, box);
+	fcn_00455350(h, (float*) (h + 0x4c), box);
+	f = (Figure*) fcn_00403b90(kind, box);
 	if (f != 0) {
 		float pos[3];
 		float at[3];

@@ -2,12 +2,12 @@
 
 
 extern char* g_6b7e98;
-char* __cdecl fcn_00403b90(int id, int* v);
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-char* __cdecl fcn_0040c930(int* a, int* b, int* c, int* d)
+char* __cdecl fcn_0040c930(char** a, float* b, float* c, float* d)
 {
-	int v[4];
+	float v[4];
 	char* o;
 
 	v[0] = *b;

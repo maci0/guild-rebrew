@@ -11580,3 +11580,17 @@ without new native/compiler evidence. No assembly, padding or flag change adopte
 Receipts: .scratch/goal50/alloc-*.{c,json}, full-unit, native-layout-proof.json and
 literal-audit.json. New production source remains honestly NEAR_MATCHING; complete
 operand bindings, renderer contracts and raw client providers remain open.
+
+
+## Character model flag word emits the native high-byte OR (2026-10-15)
+
+In ch_CreateMesh TL 0x403880/Gold 0x403070, `model[0x8d] |=0x10` through signed char*
+produces a seven-byte excess from load/OR/store. The native consumer 0x40342a loads
+WORD[model+8c]; `*(unsigned short*)(model+0x8c) |=0x1000` emits the native direct
+byte OR. This is a supported word-access view, not proof of an original typedef.
+The complete ordinary-C bodies then match 777/787 bytes with 61 operands and 45
+rejecting symbol controls. Four explicit float zeros and ordinary strcpy/strchr/
+strstr preserve native copy loops and branch order. Gold's extra scene call adds
+nine bytes; its moved display bit needs SHL rather than TL's ADD, adding one.
+No assembly, padding, new flag override or declaration sweep. Production context,
+literals and rejecting controls: .scratch/goal51/constructor-proof.json.

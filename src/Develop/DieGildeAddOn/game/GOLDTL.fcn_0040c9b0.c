@@ -5,7 +5,7 @@ extern float g_662d40[3];
 
 void __cdecl fcn_00425bf0(char*, int, const char*);
 void __cdecl fcn_00455350(char*, char*, float*);
-char* __cdecl fcn_00403b90(char*, float*);
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
 void __cdecl fcn_00438cb0(void*, float*);

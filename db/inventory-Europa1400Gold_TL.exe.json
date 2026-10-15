@@ -256,8 +256,17 @@
   },
   {
     "va": 4208768,
-    "size": 784,
-    "name": "fcn.00403880"
+    "size": 777,
+    "name": "fcn.00403880",
+    "extent_history": [
+      {
+        "old_size": 784,
+        "new_size": 777,
+        "reason": "Complete native ch_CreateMesh ends with RET at0x403b88; seven NOPs precede0x403b90. Complete777-byte source/native comparison, all30 COFF operands,22 wrong-binding controls and literals pass; .scratch/goal51/constructor-proof.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T14:32:54.946545+00:00"
+      }
+    ]
   },
   {
     "va": 4209552,

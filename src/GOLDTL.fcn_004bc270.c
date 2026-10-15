@@ -13,7 +13,7 @@ typedef struct {
 extern char g_6813e8[];
 
 int __cdecl fcn_004bc7f0(float*);
-char* __cdecl fcn_00403b90(char*, float*);
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_0040c120(char*, int, int);
 
 void __cdecl fcn_004bc270(slot1c* s)

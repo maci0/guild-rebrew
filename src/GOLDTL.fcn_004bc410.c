@@ -5,7 +5,7 @@ extern char g_6812d0[][32];
 int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl fcn_004bca30(char*);
 void __cdecl fcn_00455350(char*, char*, float*);
-char* __cdecl fcn_00403b90(char*, float*);
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 char* __cdecl fcn_0040c120(char*, int, int);
 
 /* ADDRESS: GOLD 0x004bbf00 */

@@ -23,4 +23,9 @@ int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe);
 int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy,
     unsigned char* level, char** func);
 
+/* Reconstructed model byte view and floating-point position contracts. */
+int __cdecl ch_CreateMesh(char* model, char* resource, float* position);
+char* __cdecl fcn_00403b90(char* resource, float* position);
+char* __cdecl fcn_004e4a80(char* resource, float* position);
+
 #endif

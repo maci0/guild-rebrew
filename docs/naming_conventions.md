@@ -1923,3 +1923,14 @@ shared spelling caused an ambiguous native binding; it did not establish that
 the two algorithms were one function. Rename and reference binding use the
 managed CLI after direct native destination review. Goal49/master-proof.json
 records complete object/operand/literal checks.
+
+
+### Character mesh constructor (2026-10-15)
+
+`ch_CreateMesh` at TL0x403880/Gold0x403070 is attested by the native
+`ch_CreateMesh(): Could not load 3D-Character: %s` diagnostic. Complete ordinary-C
+bodies match 777/787 bytes. Its existing character.c placement and local names are
+inferred; char* model/resource and float* position are reconstructed access
+contracts, not recovered original typedef spellings. The allocation factory and
+conditional forwarder retain their provisional fcn names. Native word consumer
+40342a independently supports a 16-bit model flag view at+8c.

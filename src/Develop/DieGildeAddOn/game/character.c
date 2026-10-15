@@ -243,6 +243,101 @@ void __cdecl ch_Updatelowpoly(char* obj)
 	}
 }
 
+extern char g_6b5c60[];
+D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
+void __cdecl fcn_00438ac0(char*, int);
+void __cdecl fcn_00404a00(char*, int, ...);
+void __cdecl fcn_00404b60(char*, int, ...);
+
+/* ADDRESS: GOLDTL 0x00403880 */
+/* ADDRESS: GOLD 0x00403070 */
+int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
+{
+    float rotation[4];
+    char name[0x100];
+    char buffer[0x200];
+    char* part;
+    char* end;
+
+    rotation[0] = 0.0f;
+    rotation[1] = 0.0f;
+    rotation[2] = 0.0f;
+    rotation[3] = 0.0f;
+    if (model == NULL)
+        return 0;
+    *(D3_OBJECT**) (model + 0x34) = fcn_00442910(NULL, position, rotation, resource);
+    *(int*) (model + 0x28) = -1;
+    if (*(D3_OBJECT**) (model + 0x34) == NULL) {
+        sprintf(buffer, "ch_CreateMesh(): Could not load 3D-Character: %s", resource);
+        return 0;
+    }
+    strcpy(name, resource);
+    part = strchr(name, '_');
+    if (part != NULL) {
+        part++;
+        end = strchr(part, '_');
+        if (end != NULL)
+            *end = 0;
+        strcpy(model + 0x130, part);
+        *(part - 1) = 0;
+        strcpy(model + 0x170, name);
+    } else {
+        model[0x130] = g_6b5c60[0];
+    }
+    *(int*) (model + 0x88) = g_67a370;
+#ifdef REBREW_GOLD
+    (*(D3_OBJECT**) (model + 0x34))->flags2 |= 0x0c;
+    (*(D3_OBJECT**) (model + 0x34))->rest &= ~2;
+#else
+    (*(D3_OBJECT**) (model + 0x34))->flags2 |= 3;
+    (*(D3_OBJECT**) (model + 0x34))->flags0 &= ~0x80;
+#endif
+    (*(D3_OBJECT**) (model + 0x34))->unbekannt_220 = 2;
+    (*(D3_OBJECT**) (model + 0x34))->unbekannt_224 = 1;
+#ifdef REBREW_GOLD
+    (*(D3_OBJECT**) (model + 0x34))->flags3 &= ~4;
+    *(float*) ((char*) (*(D3_OBJECT**) (model + 0x34))->zeichendaten + 0x958) = 1.8f;
+#else
+    (*(D3_OBJECT**) (model + 0x34))->flags3 &= ~1;
+    *(float*) ((char*) (*(D3_OBJECT**) (model + 0x34))->zeichendaten + 0x15f8) = 1.8f;
+#endif
+    *(float*) (model + 0x1a0) = 1.0f;
+    *(int*) (model + 0x2c) = -1;
+    *(int*) (model + 0x30) = -1;
+    strcpy(model + 8, resource);
+    (*(D3_OBJECT**) (model + 0x34))->zusatz_flag = 1;
+    if (fcn_00413190(*(void**) (model + 0x88)) == 0)
+        (*(D3_OBJECT**) (model + 0x34))->darstellungsflag = g_6752a4;
+    else
+        (*(D3_OBJECT**) (model + 0x34))->darstellungsflag = 0;
+    *(int*) ((char*) *(D3_OBJECT**) (model + 0x34) + 0x48) = 0x3000000;
+    fcn_004053a0(model, 0);
+#ifdef REBREW_GOLD
+    fcn_00453270(*(char**) (model + 0x34));
+#endif
+    fcn_00438ac0(*(char**) (model + 0x34), 1);
+    *(int*) (model + 4) = 1;
+    if (strstr(model + 8, "RATTE") || strstr(model + 8, "HUND") ||
+        strstr(model + 8, "KATZE") || strstr(model + 8, "PFERD")) {
+        *(int*) (model + 4) = 2;
+        if (strstr(model + 8, "RATTE")) {
+            (*(D3_OBJECT**) (model + 0x34))->darstellungsflag = 0;
+            (*(D3_OBJECT**) (model + 0x34))->zusatz_flag = 0;
+        }
+        if (strstr(model + 8, "PFERD")) {
+            *(int*) (model + 4) |= 8;
+            (*(D3_OBJECT**) (model + 0x34))->darstellungsflag = 0;
+        }
+    }
+    fcn_00404a00(model, 2, "bewegung/gehen", "stehen/stehen_newnoise");
+    if (g_6b5c34 != 0 && *(int*) (model + 0x22c) != 0) {
+        fcn_00404b60(model, 1, "gehen");
+        ch_Updatelowpoly(model);
+    }
+    *(unsigned short*) (model + 0x8c) |= 0x1000;
+    return 1;
+}
+
 int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe)
 {
 	char buf[0x100];

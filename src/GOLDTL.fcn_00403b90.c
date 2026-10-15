@@ -1,16 +1,16 @@
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 
 
 
 void* __cdecl fcn_00403200(void);
-int __cdecl fcn_00403880(void*, int, int);
 void __cdecl fcn_004030e0(void*);
 
-void* __cdecl fcn_00403b90(int a1, int a2)
+char* __cdecl fcn_00403b90(char* a1, float* a2)
 {
-	void* p;
+	char* p;
 
 	p = fcn_00403200();
-	if (fcn_00403880(p, a1, a2) == 0) {
+	if (ch_CreateMesh(p, a1, a2) == 0) {
 		fcn_004030e0(p);
 		return 0;
 	}

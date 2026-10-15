@@ -7,7 +7,7 @@ char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00455350(char*, char*, float*);
 char* __cdecl fcn_004fda30(int);
 int __cdecl fcn_004e6cb0(int);
-char* __cdecl fcn_004e4a80(char*, float*);
+#include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00402b00(char*, char*);
 
 /* ADDRESS: GOLDTL 0x004da2b0 */
