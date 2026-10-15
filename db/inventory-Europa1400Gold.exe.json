@@ -8356,8 +8356,17 @@
   },
   {
     "va": 4850240,
-    "size": 464,
-    "name": "fcn.004a0240"
+    "size": 450,
+    "name": "fcn.004a0240",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 450,
+        "reason": "Complete executable bodies end at RET; remaining 14/2/8/15/3 bytes are alignment NOPs with no internal branch targets. Full object/native comparison, consistent native operand bases, rejecting symbol controls and complete compiler literal audits are recorded in .scratch/goal48/padded-cases-proof.json. Unbound bases are comparison hypotheses, not provider claims.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T12:17:25.538005+00:00"
+      }
+    ]
   },
   {
     "va": 4850704,
@@ -8811,8 +8820,17 @@
   },
   {
     "va": 4894000,
-    "size": 448,
-    "name": "fcn.004aad30"
+    "size": 446,
+    "name": "fcn.004aad30",
+    "extent_history": [
+      {
+        "old_size": 448,
+        "new_size": 446,
+        "reason": "Complete executable bodies end at RET; remaining 14/2/8/15/3 bytes are alignment NOPs with no internal branch targets. Full object/native comparison, consistent native operand bases, rejecting symbol controls and complete compiler literal audits are recorded in .scratch/goal48/padded-cases-proof.json. Unbound bases are comparison hypotheses, not provider claims.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T12:17:25.538022+00:00"
+      }
+    ]
   },
   {
     "va": 4894448,
@@ -12641,8 +12659,17 @@
   },
   {
     "va": 5147680,
-    "size": 416,
-    "name": "fcn.004e8c20"
+    "size": 414,
+    "name": "fcn.004e8c20",
+    "extent_history": [
+      {
+        "old_size": 416,
+        "new_size": 414,
+        "reason": "Complete native Gold body ends with RET at4e8dbd;4e8dbe/bf are two NOPs before next inventory entry4e8dc0. No internal branch enters the NOPs. Current shared C emits414 bytes; complete resolved proof and rejecting controls in .scratch/goal48/gold-boundary-proof.json. Preserve padding separately and source SIZE separately.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T11:43:33.339955+00:00"
+      }
+    ]
   },
   {
     "va": 5148096,
@@ -12691,8 +12718,17 @@
   },
   {
     "va": 5154240,
-    "size": 208,
-    "name": "fcn.004ea5c0"
+    "size": 200,
+    "name": "fcn.004ea5c0",
+    "extent_history": [
+      {
+        "old_size": 208,
+        "new_size": 200,
+        "reason": "Complete executable bodies end at RET; remaining 14/2/8/15/3 bytes are alignment NOPs with no internal branch targets. Full object/native comparison, consistent native operand bases, rejecting symbol controls and complete compiler literal audits are recorded in .scratch/goal48/padded-cases-proof.json. Unbound bases are comparison hypotheses, not provider claims.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T12:17:25.538026+00:00"
+      }
+    ]
   },
   {
     "va": 5154448,
@@ -21286,13 +21322,31 @@
   },
   {
     "va": 6089024,
-    "size": 352,
-    "name": "fcn.005ce940"
+    "size": 337,
+    "name": "fcn.005ce940",
+    "extent_history": [
+      {
+        "old_size": 352,
+        "new_size": 337,
+        "reason": "Complete executable bodies end at RET; remaining 14/2/8/15/3 bytes are alignment NOPs with no internal branch targets. Full object/native comparison, consistent native operand bases, rejecting symbol controls and complete compiler literal audits are recorded in .scratch/goal48/padded-cases-proof.json. Unbound bases are comparison hypotheses, not provider claims.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T12:17:25.538029+00:00"
+      }
+    ]
   },
   {
     "va": 6089376,
-    "size": 1024,
-    "name": "fcn.005ceaa0"
+    "size": 1021,
+    "name": "fcn.005ceaa0",
+    "extent_history": [
+      {
+        "old_size": 1024,
+        "new_size": 1021,
+        "reason": "Complete executable bodies end at RET; remaining 14/2/8/15/3 bytes are alignment NOPs with no internal branch targets. Full object/native comparison, consistent native operand bases, rejecting symbol controls and complete compiler literal audits are recorded in .scratch/goal48/padded-cases-proof.json. Unbound bases are comparison hypotheses, not provider claims.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T12:17:25.538032+00:00"
+      }
+    ]
   },
   {
     "va": 6090400,

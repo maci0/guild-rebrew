@@ -11,7 +11,7 @@ typedef struct {
 // SIZE 0x18
 
 int __cdecl fcn_004e8b40(int, rec18*);
-int __cdecl fcn_004e8b80(int, int, rec18*);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 
 /* ADDRESS: GOLD 0x004e7770 */
 /* ADDRESS: GOLDTL 0x004e93d0 */
@@ -22,7 +22,7 @@ int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out)
 	int i;
 	int n;
 	rec18 r;
-	rec18 arr[6];
+	OFFICE_SLOT arr[6];
 	int cnt;
 	int id;
 	int v;
@@ -42,8 +42,8 @@ int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out)
 	for (i = 0; i < n; i++) {
 		if (cnt >= max)
 			break;
-		if ((unsigned char) arr[i].f10 == 3) {
-			id = arr[i].kind;
+		if (arr[i].status == 3) {
+			id = arr[i].mamt;
 			fcn_004e8b40(id, &r);
 			v = r.kind;
 			if (v % 3 == 0) {

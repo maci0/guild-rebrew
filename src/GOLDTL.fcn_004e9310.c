@@ -24,14 +24,14 @@ typedef struct {
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 int __cdecl fcn_004e8b40(int, rec18*);
-int __cdecl fcn_004e8b80(int, int, rec18*);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 unsigned char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_004e9180(unsigned char*, int);
 
 int __cdecl fcn_004e9310(int k, int max, unsigned char** out)
 {
 	rec18 a;
-	rec18 list[6];
+	OFFICE_SLOT list[6];
 	int n;
 	int i;
 	int cnt;
@@ -45,7 +45,7 @@ int __cdecl fcn_004e9310(int k, int max, unsigned char** out)
 	n = MIN(n, max);
 	cnt = 0;
 	for (i = 0; i < n; i++) {
-		e = fcn_00508e40(list[i].id);
+		e = fcn_00508e40(list[i].mplayerid);
 		if (e != 0 && fcn_004e9180(e, k) != 0)
 			out[cnt++] = e;
 	}

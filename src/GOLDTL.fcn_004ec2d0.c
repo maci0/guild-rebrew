@@ -1,20 +1,12 @@
 
 
 
-typedef struct
-{
-	int x0;
-	int id;
-	char pad[0x10];
-} Rec18;
-// SIZE 0x18
-
-int __cdecl fcn_004e8b80(int kind, int max, Rec18* out);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 
 void __cdecl fcn_004ec2d0(char* p, int kind, int arg)
 {
-	Rec18 recs[6];
+	OFFICE_SLOT recs[6];
 	int n;
 	int i;
 
@@ -23,8 +15,8 @@ void __cdecl fcn_004ec2d0(char* p, int kind, int arg)
 	}
 	n = fcn_004e8b80(kind, 6, recs);
 	for (i = 0; i < n; i++) {
-		if (recs[i].id != *(int*) (p + 4) && recs[i].id != -1) {
-			fcn_004c54c0(*(int*) (p + 4), recs[i].id, arg, 1);
+		if (recs[i].mplayerid != *(int*) (p + 4) && recs[i].mplayerid != -1) {
+			fcn_004c54c0(*(int*) (p + 4), recs[i].mplayerid, arg, 1);
 		}
 	}
 }

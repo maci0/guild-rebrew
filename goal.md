@@ -112,70 +112,68 @@ initialized-data verification and storage ownership, source contracts, unresolve
 code ranges and faithful discarded server inputs remain open. Server byte
 identity alone does not establish complete source fidelity or client completion.
 
-Docker access is restored and both pinned compiler images pass smoke checks;
-no rebuild was needed. Checkpoint29e8451d is pushed. Its fresh gate passes all
-286,720 raw server bytes,316/316 game and652/652 data comparisons, imports,
-relocations, Wine and compiler alignment. The final gate for the new source
-repair also finishes exit0/PASS in `.scratch/goal47/gate-office-contract-final.log`.
+Docker works and both pinned compiler images pass smoke checks; no rebuild is
+needed. Previous checkpoint91f7c87b is pushed. Current bounded work and final
+validation are recorded in `.scratch/goal48` and docs/TODO.md.
 
-The current office-message contract repair changes existing providers and
-callers, with no new coverage credit:
+The office-slot repair uses the existing OFFICE_SLOT in game_structs.h and the
+canonical game/aemter.h list-helper declaration. Twelve existing providers/callers
+now share the 24-byte slot view. Role-template records remain distinct; their
+DWORD at +16 must not become the slot's byte status. Removed two unsupported
+volatile ID views without changing their 381-byte bodies. Storage definitions,
+original identities and translation-unit organization are unchanged. The existing
+unbound amt_ListSlotsOfGroup duplicate cannot be merged until source-organize
+preflight and client raw baselines are resolved.
 
-- Packet wrapper004c63a0 now returns the canonical queue's integer result and
-  accepts the same byte-pointer view as its sole caller. It uses the existing
-  `client_packet_queue.h`, preserving the exact15-byte payload copy. The helper
-  still writes11 bytes in its16-byte local; unknown trailing bytes are preserved.
-- Existing `game/aemter.h` owns the reconstructed message-helper and paired
-  forwarding declarations. The measured helper contract is an unsigned-char ID,
-  unsigned-char entity pointers, integer flags and an integer result. Removed
-  contradictory local prototypes; forwarded pointers no longer pass as integers
-  in the repaired wrappers. Original declaration spellings remain unproved.
-- All40 bindings across20 affected sources retain identical byte metrics and
-  operand checks:35 matches and five pre-existing Gold SIZE_MISMATCH results.
-  The batch verifier refreshes all40 records:21 TL matches;14 Gold matches and
-  the same five mismatches. Native proof covers nine complete bodies/655 resolved
-  bytes, with13 rejecting symbol controls. Data/type/source ownership stores and
-  native identities remain unchanged. The preservation audit retains all8,381
-  identities,6,024 strong statuses and prior history;356 verification records
-  refresh with275 server history/timestamp records. Receipts are in `.scratch/goal47`.
-- An integer ID matched the helper locally but grew two callers414/65 to430/67
-  bytes. The unsigned-char ID restores both. DWORD argument pushes alone do not
-  prove C width; the flag arguments remain integers. Do not repeat that trial.
+Stable type ID amt.office_slot has three compiler-checked target bindings:
+size/stride24 and field offsets0/4/8/12/16/20. This proves a record stride,
+not a table allocation or owner. A wrong +9 role offset fails compilation;
+uncompiled dry-run previews alone are not rejecting evidence.
 
-The complete SDK/include-context capability remains an upstream feature gap.
-The reconciliation writer still fails closed on unresolved contexts. Audit
-results must distinguish selected contract findings from unknown project-wide
-SDK closures. Final stable audits find zero selected-name contradictions for the
-helper, paired forwarder and packet wrapper, with all recorded inputs current.
-They still exit1 because122 server/881 TL/595 Gold contexts remain unknown.
-Upstream correction e28c814f is committed and pushed; mandatory hooks, including
-the full test suite, pass.
-Do not bypass a writer guard or claim complete project-wide contract closure.
+Six Gold source matches had padded native extents. Reviewed executable sizes are
+4a0240:450,4aad30:446,4e8c20:414,4ea5c0:200,5ce940:337,5ceaa0:1021.
+Their remaining44 bytes are separately accounted alignment NOPs. Preserve
+inventory extent_history and status history. Complete body/operand checks and
+wrong-symbol controls are in gold-boundary-proof.json/padded-cases-proof.json;
+unbound native bases are comparison inputs, never accepted provider identities.
+Literal audits additionally exposed a real reconstruction error: shared score
+helper004aae50 used approximately -206 billion instead of the native -10.0f in
+both clients. The one-line correction passes both literal audits. Instruction
+RELOC alone had hidden the error; it never verified literal data or placement.
 
 TL remains691,975 matched game bytes,390,163 library bytes/1,468 library
-functions, and1,115,705/2,491,370 accounted text bytes (44.7%). The completed
-7,102,296-signature audit and prior D3DX/CRT evidence are in the history and
-TODO documents; do not repeat them without new inputs. Library aliases and
-actual client raw-link providers remain explicit where unresolved.
+functions, and1,115,705/2,491,370 accounted text bytes (44.7%). Gold boundary
+corrections recognize2,868 existing game bytes and44 padding bytes; they add no
+new TL bytes. The completed7,102,296-signature audit and prior D3DX/CRT evidence
+are in the history/TODO; do not repeat without new inputs. Actual client
+raw-link providers remain explicit where unresolved.
+
+The complete SDK/include-context audit and all-target type-check CLI remain
+upstream feature gaps. Upstream e79dba09 records the latter and is pushed after
+mandatory hooks/full tests. Do not bypass reconciliation guards or describe
+zero selected-name findings as whole-project contract closure. SDK contexts
+remain unknown, including32 TL/27 Gold selected OFFICE_SLOT typedef contexts;
+the static contract command exits1 despite zero reported contradictions. All
+input hashes are current. Compiler comparisons cover all59 selected bindings:
+32 TL and27 Gold pass. All8,381 identities and6,024 prior strong statuses remain;
+six reviewed Gold bodies add RELOC. Existing data/source stores and old type
+bindings are unchanged. All-target lint passes3,879 files each with zero errors
+and warnings; data inventories have zero conflicts/duplicate definitions. The
+fresh gate-final.log passes all286,720 raw server bytes and required checks.
+Full client data, layout and ownership are still unverified.
 
 The large office-action pair TL4eba60/Gold4e9ce0 remains unadopted:2,148 native
-bytes,87 operands, and a2,131-byte match with17 nonoperand differences. Complete
-native-address/literal evidence exists, but record/skill helper contracts and
-the four office callers still need reconciliation. The canonical office-header
-probe leaves the same17 differences. Preserve the algorithm and recorded
-exhausted trials; no padding, assembly or invented target divergence.
+bytes,87 operands, and a2,131-byte match with17 nonoperand differences. The
+proper OFFICE_SLOT/canonical-header probe leaves the same17 differences.
+Remaining skill-helper contracts and four office callers need reconciliation.
+Preserve the algorithm and exhausted trials; no padding, assembly, declaration
+sweeps or invented target divergence.
 
-Queue loader5252d0/520340 remains a733/735-byte source-shape gap with complete
-counterpart evidence. Camera/list/position/rotation/disposal work remains
-partial; Goldfb9900 has one record with unresolved extent/owner. Earlier chain,
-building and allocation evidence remains in docs/TODO.md. These are unfinished
-workstreams, not accepted source or raw-client proofs.
-
-All-target lint passes3,879 files per target with zero errors/warnings. Fresh
-data inventories have zero type conflicts or duplicate definitions in all three
-targets. Next: continue the remaining office helper/caller contracts and
-byte-focused TL reconstruction. This validated repair preserves existing bytes;
-it does not establish full project-wide contracts or raw client identity.
+Queue loader5252d0/520340 remains a733/735-byte source-shape gap. Camera/list/
+position/rotation/disposal work remains partial; Goldfb9900 has one record with
+unresolved extent/owner. Earlier chain/building/allocation evidence is in TODO.
+Next: continue remaining office contracts and byte-focused TL reconstruction.
+The full original scope continues.
 
 ## History
 

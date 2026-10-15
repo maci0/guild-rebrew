@@ -53896,3 +53896,76 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   unrelated unknown SDK contexts (122 server,881 TL,595 Gold); do not report
   whole-project contract success. Receipts:stable-contract-audit-summary.json
   and the three final contract JSONs. The full original scope remains incomplete.
+
+
+## 2026-10-15 — Goal48 office-slot contracts and Gold extent corrections
+
+- Reuse existing `OFFICE_SLOT` from `game_structs.h` and declare the list helper
+  once in `game/aemter.h`. Twelve providers/callers now agree on the 24-byte
+  output record. Role templates stay separate: their +16 field is a DWORD,
+  whereas slot status is a byte. No global definition or ownership changes.
+- Two 381-byte candidate selectors no longer use unsupported volatile ID fields
+  or locals. Both clients preserve their complete code metrics. The helper itself
+  has complete114-byte native agreement in each client, two bound table operands
+  each and four rejecting controls. Receipt:goal48/helper-proof.json.
+- New stable type ID `amt.office_slot` binds the existing definition in all three
+  modules, with compiled sizeof24 and offsets0/4/8/12/16/20. Native extent is a
+  record stride, not table ownership. Wrong role offset9 fails the compiler;
+  the uncompiled preview alone did not reject it. Receipts:type-{server,tl,gold},
+  type-wrong-offset-compiled-control.json and types-all-targets.json.
+- Source organization remains unchanged. The pre-existing unbound
+  `amt_ListSlotsOfGroup` in aemter.c cannot be renamed/merged blindly: official
+  organize review reports unsafe providers/context and missing raw client
+  baselines. Receipt:record-helper-organize-review.json.
+- A literal audit caught a real shared reconstruction bug in004aae50: the source
+  initialized its best score to approximately -206 billion, but both natives use
+  float -10.0. Corrected to `-10.0f`; all three literal occurrences now agree in
+  each client. The old object is a rejecting value control. RELOC instruction
+  masking had hidden the bad value; literal agreement still proves neither
+  placement nor storage ownership. Receipts:bad-score-before.obj,
+  bad-score-tl-before.json, score-literal-tl-after.json and
+  padding-0x4aad30/literal-audit.json. No new library/provider claims.
+- Six old Gold SIZE_MISMATCH results were padded extents. Complete executable
+  body / removed NOP byte counts are:4a0240 450/14,4aad30 446/2,
+  4e8c20 414/2,4ea5c0 200/8,5ce940 337/15,5ceaa0 1021/3.
+  Native RETs, complete decoded bodies and no internal branches into those NOPs
+  establish the boundaries. Digest-guarded `binary repair-extents` preserves
+  inventory history; SIZE updates use the metadata writer and statuses earn
+  fresh comparison results. Never shorten extents merely because C is shorter.
+- Complete resolved-body experiments cover2,868 Gold executable bytes; compiler
+  literals pass separately. Each symbol has a rejecting shifted-address control.
+  Unknown native bases are explicit comparison hypotheses with cross-site
+  consistency, not registered identities or actual linked providers. Receipts:
+  gold-boundary-proof.json, padded-cases-proof.json, *-extents-{preview,applied}.
+- These repairs recognize2,868 existing Gold game bytes plus44 padding bytes.
+  They add no newly reconstructed TL bytes. TL still has691,975 matched game
+  bytes and44.7% accounted text. Do not present cleanup or boundary corrections
+  as a new TL algorithm. The large proper-OFFICE_SLOT probe still has the same
+  17 differing bytes; do not repeat it. Receipt:office-slot-{tl,gold}.json.
+- Fresh gate-final.log is terminal PASS: all286,720 raw server bytes equal,
+  with316/316 game and652/652 data comparisons, imports, relocations,
+  compiler images/alignment, Wine load and exports. Docker works; no image
+  rebuild needed. No production source changed after that gate.
+- Upstream e79dba09 records missing all-target type-layout CLI support and is
+  pushed after mandatory hooks/full tests. Compiler-literal checking already
+  exists upstream and correctly rejected the bad value; no workaround was added.
+- Final reviewed batch comparison covers31 source files/59 target bindings:
+  TL32/32 and Gold27/27 pass. It permits only six explicitly reviewed Gold
+  extent promotions and the proven literal-symbol correction; all other byte
+  metrics and operand evidence must equal the before baseline. Verification
+  records refresh through the official batch owner. Receipts:
+  verify-scope-final.py, scope-final-promote.json.
+- Final lint-stable.json passes3,879 files per target, zero errors/warnings.
+  data-stable.json has zero conflicts/duplicate definitions for every target.
+  Preservation-final.json retains8,381 identities and all6,024 prior strong
+  statuses, adds exactly six reviewed Gold RELOC bodies, and preserves old type
+  bindings/data/source stores. Inventory changes are only those six sizes plus
+  retained extent_history. Gold accounted text rises406,310 to409,222.
+- Static contract audit has zero reported contradictions, but exits1 with
+  122/936/641 unknown contexts (server/TL/Gold), including32 TL/27 Gold selected
+  OFFICE_SLOT typedef contexts behind incomplete SDK/include closure. All input
+  hashes are current. Compiler layout/59-body checks succeed independently;
+  this is not complete source-contract audit closure. Receipts:
+  slot-contracts-stable.json and slot-contract-summary.json.
+- Guild and upstream each have only their main worktree; no stale worktree
+  remains to merge/remove. Preserve current ignored native proof receipts.

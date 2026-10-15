@@ -21,12 +21,12 @@ typedef struct {
 } tbl18;
 // SIZE 0x18
 
-int __cdecl fcn_004e8b80(int, int, rec18*);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 unsigned char* __cdecl fcn_00508e40(int);
 
 int __cdecl fcn_004ea2b0(int kind, char* x)
 {
-	rec18 list[6];
+	OFFICE_SLOT list[6];
 	int n;
 	int i;
 	unsigned char* a;
@@ -40,7 +40,7 @@ int __cdecl fcn_004ea2b0(int kind, char* x)
 	if (a == 0 || a[8] <= 0 || a[0x1b1] != 0 || b == 0 || b[8] <= 0)
 		return 0;
 	for (i = 0; i < n; i++) {
-		if (list[i].id == *(int*) (x + 0x14))
+		if (list[i].mplayerid == *(int*) (x + 0x14))
 			return 1;
 	}
 	return 0;

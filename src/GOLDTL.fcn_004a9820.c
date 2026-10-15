@@ -3,24 +3,17 @@
 
 #include <string.h>
 
-typedef struct Rec18 {
-	int a;
-	volatile int id;
-	char pad8[0x18 - 8];
-} Rec18;
-// SIZE 0x18
-
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004e8b80(int kind, int max, Rec18* out);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 char* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 
 int __cdecl fcn_004a9820(char* a1, char* e, char* a3, char* a4, char* out)
 {
-	volatile int id;
+	int id;
 	float d;
 	char* cands[6];
-	Rec18 recs[6];
+	OFFICE_SLOT recs[6];
 	int n;
 	int i;
 	int k;
@@ -42,7 +35,7 @@ int __cdecl fcn_004a9820(char* a1, char* e, char* a3, char* a4, char* out)
 	}
 	n = fcn_004e8b80(4, 6, recs);
 	for (i = 0; i < n; i++) {
-		cands[i] = fcn_00508e40(recs[i].id);
+		cands[i] = fcn_00508e40(recs[i].mplayerid);
 	}
 	for (i = n; i < 6; i++) {
 		cands[i] = 0;

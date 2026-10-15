@@ -44,7 +44,7 @@ int __cdecl fcn_004aae50(int a1, unsigned short* a2, int* a3, int* a4)
 			score[i] = -1000.0f;
 		}
 	}
-	best = -206158529088.0;
+	best = -10.0f;
 	tie = 0;
 	idx = -1;
 	for (i = 0; i < 4; i++) {

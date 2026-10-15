@@ -3318,3 +3318,78 @@ invent padding, assembly or volatile accesses. Remaining work is canonical
 helper/caller contracts and evidence-led compiler/source-context work. The actual
 three-file forwarding repair is committed and pushed as73cbbe63. Both clients
 retain its matches; gate-forwarding.log and lint-forwarding-all.json pass.
+
+
+## 2026-10-15 — checkpoint91f7c87b and office-slot handoff
+
+## Current continuation — 2026-10-15
+
+The full goal is ACTIVE and incomplete. Both raw client images, complete client
+initialized-data verification and storage ownership, source contracts, unresolved
+code ranges and faithful discarded server inputs remain open. Server byte
+identity alone does not establish complete source fidelity or client completion.
+
+Docker access is restored and both pinned compiler images pass smoke checks;
+no rebuild was needed. Checkpoint29e8451d is pushed. Its fresh gate passes all
+286,720 raw server bytes,316/316 game and652/652 data comparisons, imports,
+relocations, Wine and compiler alignment. The final gate for the new source
+repair also finishes exit0/PASS in `.scratch/goal47/gate-office-contract-final.log`.
+
+The current office-message contract repair changes existing providers and
+callers, with no new coverage credit:
+
+- Packet wrapper004c63a0 now returns the canonical queue's integer result and
+  accepts the same byte-pointer view as its sole caller. It uses the existing
+  `client_packet_queue.h`, preserving the exact15-byte payload copy. The helper
+  still writes11 bytes in its16-byte local; unknown trailing bytes are preserved.
+- Existing `game/aemter.h` owns the reconstructed message-helper and paired
+  forwarding declarations. The measured helper contract is an unsigned-char ID,
+  unsigned-char entity pointers, integer flags and an integer result. Removed
+  contradictory local prototypes; forwarded pointers no longer pass as integers
+  in the repaired wrappers. Original declaration spellings remain unproved.
+- All40 bindings across20 affected sources retain identical byte metrics and
+  operand checks:35 matches and five pre-existing Gold SIZE_MISMATCH results.
+  The batch verifier refreshes all40 records:21 TL matches;14 Gold matches and
+  the same five mismatches. Native proof covers nine complete bodies/655 resolved
+  bytes, with13 rejecting symbol controls. Data/type/source ownership stores and
+  native identities remain unchanged. The preservation audit retains all8,381
+  identities,6,024 strong statuses and prior history;356 verification records
+  refresh with275 server history/timestamp records. Receipts are in `.scratch/goal47`.
+- An integer ID matched the helper locally but grew two callers414/65 to430/67
+  bytes. The unsigned-char ID restores both. DWORD argument pushes alone do not
+  prove C width; the flag arguments remain integers. Do not repeat that trial.
+
+The complete SDK/include-context capability remains an upstream feature gap.
+The reconciliation writer still fails closed on unresolved contexts. Audit
+results must distinguish selected contract findings from unknown project-wide
+SDK closures. Final stable audits find zero selected-name contradictions for the
+helper, paired forwarder and packet wrapper, with all recorded inputs current.
+They still exit1 because122 server/881 TL/595 Gold contexts remain unknown.
+Upstream correction e28c814f is committed and pushed; mandatory hooks, including
+the full test suite, pass.
+Do not bypass a writer guard or claim complete project-wide contract closure.
+
+TL remains691,975 matched game bytes,390,163 library bytes/1,468 library
+functions, and1,115,705/2,491,370 accounted text bytes (44.7%). The completed
+7,102,296-signature audit and prior D3DX/CRT evidence are in the history and
+TODO documents; do not repeat them without new inputs. Library aliases and
+actual client raw-link providers remain explicit where unresolved.
+
+The large office-action pair TL4eba60/Gold4e9ce0 remains unadopted:2,148 native
+bytes,87 operands, and a2,131-byte match with17 nonoperand differences. Complete
+native-address/literal evidence exists, but record/skill helper contracts and
+the four office callers still need reconciliation. The canonical office-header
+probe leaves the same17 differences. Preserve the algorithm and recorded
+exhausted trials; no padding, assembly or invented target divergence.
+
+Queue loader5252d0/520340 remains a733/735-byte source-shape gap with complete
+counterpart evidence. Camera/list/position/rotation/disposal work remains
+partial; Goldfb9900 has one record with unresolved extent/owner. Earlier chain,
+building and allocation evidence remains in docs/TODO.md. These are unfinished
+workstreams, not accepted source or raw-client proofs.
+
+All-target lint passes3,879 files per target with zero errors/warnings. Fresh
+data inventories have zero type conflicts or duplicate definitions in all three
+targets. Next: continue the remaining office helper/caller contracts and
+byte-focused TL reconstruction. This validated repair preserves existing bytes;
+it does not establish full project-wide contracts or raw client identity.

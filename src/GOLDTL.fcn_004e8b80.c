@@ -1,31 +1,12 @@
 
 
 
-typedef struct {
-	unsigned char c0;
-	char pad1[3];
-	int id;
-	unsigned char kind;
-	char pad9[3];
-	int fc;
-	unsigned char f10;
-	char pad11[3];
-	int f14;
-} rec18;
-// SIZE 0x18
-
-typedef struct {
-	int a;
-	int id;
-	char pad8[0x10];
-} tbl18;
-// SIZE 0x18
-
 #include "client_types.h"
+#include "Develop/DieGildeAddOn/game/aemter.h"
 extern Rec18_68da68 g_9a9220[42];
 extern Rec18_68da68 g_68da68[];
 
-int __cdecl fcn_004e8b80(int kind, int max, rec18* out)
+int __cdecl fcn_004e8b80(int kind, int max, OFFICE_SLOT* out)
 {
 	int n;
 	int i;
@@ -41,8 +22,8 @@ int __cdecl fcn_004e8b80(int kind, int max, rec18* out)
 		return 0;
 	n = 0;
 	for (i = start - 1; i >= 0 && n < max; i--) {
-		if (((tbl18*)g_68da68)[((rec18*)g_9a9220)[i].kind].id == kind)
-			out[n++] = ((rec18*)g_9a9220)[i];
+		if (((OFFICE_ROLE_TEMPLATE*)g_68da68)[((OFFICE_SLOT*)g_9a9220)[i].mamt].f4 == kind)
+			out[n++] = ((OFFICE_SLOT*)g_9a9220)[i];
 	}
 	return n;
 }

@@ -43,7 +43,7 @@ typedef struct {
 // SIZE 0x8
 
 int __cdecl fcn_004e8b40(int idx, Rec* out);
-int __cdecl fcn_004e8b80(int kind, int max, Rec* out);
+#include "Develop/DieGildeAddOn/game/aemter.h"
 Ent* __cdecl fcn_00508e40(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -62,7 +62,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 	Ent* list[6];
 	Rec info;
 	Rec other;
-	Rec recs[6];
+	OFFICE_SLOT recs[6];
 
 	found = 0;
 	if (req->kind == 1) {
@@ -87,9 +87,9 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 	}
 	n = fcn_004e8b80(info.id, 6, recs);
 	for (i = 0, cnt = 0; i < n; i++) {
-		if (recs[i].x10 == 2) {
+		if (recs[i].status == 2) {
 			cnt++;
-			if (recs[i].id == h) {
+			if (recs[i].mplayerid == h) {
 				return 0;
 			}
 		}
@@ -98,7 +98,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 		return 0;
 	}
 	for (i = 0; i < n; i++) {
-		list[i] = fcn_00508e40(recs[i].id);
+		list[i] = fcn_00508e40(recs[i].mplayerid);
 	}
 	for (i = n; i < 6; i++) {
 		list[i] = 0;
@@ -106,7 +106,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 	i = gm_RandomMod(6);
 	for (t = 6; t != 0; i = (i + 1) % 6) {
 		if (list[i] != 0 && h != list[i]->h && fcn_0050f980(list[i]->id, e->id, 1) < 33.0f &&
-			recs[i].x10 == 1) {
+			recs[i].status == 1) {
 			found = list[i];
 			break;
 		}
@@ -130,7 +130,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 			if (fcn_004e8b40(p->x166, &other) == 0) {
 				return 0;
 			}
-			if (other.x8 > info.x8 && recs[i].x10 == 1) {
+			if (other.x8 > info.x8 && recs[i].status == 1) {
 				d = fcn_0050f980(p->id, e->id, 1);
 				if (gm_RandomMod(0x20) + 40.0f > d) {
 					found = list[i];
