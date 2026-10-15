@@ -19,7 +19,7 @@ typedef void (__cdecl* fcn_00439c90_f)(char*);
 void __cdecl fcn_0043a3f0(int, char*, Col);
 void __cdecl fcn_0045bfb0(int);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_00434760(char*, int);
+#include "Develop/Units/d3/d3_animation.h"
 
 void __cdecl fcn_00439c90(char* o)
 {

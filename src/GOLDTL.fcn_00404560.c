@@ -5,13 +5,12 @@ extern char g_67553c[];
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00435500(char*, char*);
-int __cdecl fcn_00433ba0(char*);
-void __cdecl fcn_00434760(int, int);
+#include "Develop/Units/d3/d3_animation.h"
 
 void __cdecl fcn_00404560(char* p)
 {
 	char buf[0x60];
-	int x;
+	char* x;
 
 	if (*(int*) (p + 0x7c) != 0) {
 		fcn_0064d41a(buf, g_67553c, p);

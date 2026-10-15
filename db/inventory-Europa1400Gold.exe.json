@@ -4565,8 +4565,17 @@
   },
   {
     "va": 4514976,
-    "size": 208,
-    "name": "fcn.0044e4a0"
+    "size": 207,
+    "name": "fcn.0044e4a0",
+    "extent_history": [
+      {
+        "old_size": 208,
+        "new_size": 207,
+        "reason": "Complete Gold counterpart ends with RET at 0x44e56e, followed by one NOP and the next inventoried function at 0x44e570. Its shared ordinary C body matches all 207 executable bytes and eight relocation sites; .scratch/goal52/loader-native-proof.json. Alignment stays separate.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T15:28:24.816229+00:00"
+      }
+    ]
   },
   {
     "va": 4515184,

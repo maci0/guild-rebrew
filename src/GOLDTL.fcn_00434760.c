@@ -6,6 +6,8 @@ unsigned int __cdecl fcn_004346f0(char*);
 char __cdecl fcn_004348f0(unsigned int, unsigned int);
 void __cdecl m_FreeTracked(void*);
 
+#include "Develop/Units/d3/d3_animation.h"
+
 /* ADDRESS: GOLD 0x00434b70 */
 /* ADDRESS: GOLDTL 0x00434760 */
 

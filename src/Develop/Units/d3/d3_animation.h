@@ -14,4 +14,10 @@ typedef struct D3_ANIMATION_OPTIONS {
 	unsigned char pad8[3];
 } D3_ANIMATION_OPTIONS;
 
+/* Reconstructed animation byte views; no allocation ownership is implied. */
+char* __cdecl fcn_00433ba0(const char* name);
+char* __cdecl fcn_0044c620(char* path, char* name, char loop);
+char* __cdecl fcn_0044e1e0(char* path, char* name, char loop);
+void __cdecl fcn_00434760(char* animation, char force);
+
 #endif

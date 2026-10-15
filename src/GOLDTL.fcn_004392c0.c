@@ -28,7 +28,7 @@ void __cdecl fcn_00459b40(int a);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00452300(void);
 void __cdecl fcn_00452280(void);
-void __cdecl fcn_00434760(char* p, int b);
+#include "Develop/Units/d3/d3_animation.h"
 void __cdecl fcn_0045c110(void);
 
 /* ADDRESS: GOLDTL 0x004392c0 */

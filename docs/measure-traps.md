@@ -3266,3 +3266,17 @@ Compare every earlier member displacement/immediate against that target's native
 body. These are not relocations. Shared source or equal symbol size cannot prove
 shared bit positions. Goal51 corrects the source; both complete 38-byte flag windows
 match and the actual old Gold object rejects. See allocator-flags-proof.json.
+
+## A masked diff can conceal an ambiguous call binding (2026-10-15)
+
+Fresh TL verification demotes `0x5392a0` from RELOC to NEAR_MATCHING: its 221-byte
+object has one ambiguous `_gm_ResetAllEntities` operand at `+0x88`. Independent
+definitions at TL `0x4297c0` and `0x5012b0` share that spelling; the native call goes
+to `0x5012b0`. The old diff returned exit 0 with no structural differences because its compile path discarded
+typed relocations and never supplied invalid bindings to the display engine.
+Upstream `627b68e9` preserves those records and applies the same comparison policy:
+the real replay now shows one XX, exits 1 and records an invalid-binding blocker.
+Both source bodies still exist and retain their own byte-match evidence. Do not
+repair the aggregate count by restoring an old verdict or masking the ambiguity.
+The ownership-aware selected-definition rename remains an upstream feature gap;
+its fail-closed preview and before/after diagnostics are in .scratch/goal52.

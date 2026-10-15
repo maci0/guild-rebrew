@@ -6,7 +6,7 @@ extern char g_1052a40[];
 extern int g_6b8008;
 
 int __cdecl fcn_004346f0(char*);
-void __cdecl fcn_00434760(char*, int);
+#include "Develop/Units/d3/d3_animation.h"
 
 char __cdecl fcn_004348f0(int need, int have)
 {

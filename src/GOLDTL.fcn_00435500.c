@@ -12,7 +12,7 @@ typedef struct Slot {
 	int rest[27];
 } Slot;
 
-void __cdecl fcn_00434760(char*, int);
+#include "Develop/Units/d3/d3_animation.h"
 void __cdecl fcn_004315c0(int);
 void __cdecl fcn_004316c0(int);
 

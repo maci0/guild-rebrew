@@ -497,6 +497,7 @@ if(MSVC_FOR_DECOMP AND TARGET server_dll)
                "${PROJECT_SOURCE_DIR}/rebrew-functions.toml")
   execute_process(
     COMMAND "${REBREW_BIN}" build cmake-flags
+            --target server.dll
             --sources-file "${_rebrew_sources_txt}"
             --output "${_rebrew_cflags_cmake}"
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
@@ -540,7 +541,7 @@ endif()
 # The deliverable is the raw toolchain output; verification reports remaining differences.
 if(MSVC_FOR_DECOMP AND TARGET server_dll)
   add_custom_target(final
-    COMMAND "${_REBREW_SRC_BIN}" verify --whole-binary --built "$<TARGET_FILE:server_dll>" --json
+    COMMAND "${_REBREW_SRC_BIN}" verify --whole-binary --built "$<TARGET_FILE:server_dll>" --json --target server.dll
     DEPENDS server_dll
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
     COMMENT "Verify raw server.dll against the reference"

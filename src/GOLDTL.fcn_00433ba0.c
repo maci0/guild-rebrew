@@ -3,6 +3,8 @@ extern char g_1052a40[];
 
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
+#include "Develop/Units/d3/d3_animation.h"
+
 /* ADDRESS: GOLD 0x00433f40 */
 /* ADDRESS: GOLDTL 0x00433ba0 */
 char* __cdecl fcn_00433ba0(const char* name)

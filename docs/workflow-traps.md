@@ -1070,3 +1070,20 @@ Ask *what libraries this binary actually linked*, not "is it LIBCMT?". TL's requ
 DX, skip". The import table (pefile) shows which DLLs are imported, but static-link library code is invisible
 to imports: you must look for it in `.text` by its strings (here the `D3DXERR_*` / `D3DX8 shader assembler`
 strings in `.text` at `0x4b5xxx`) and byte-match the bodies.
+
+## 28. Pin both the CMake toolchain and the verification target (2026-10-15)
+
+A generated toolchain used to advertise the requested profile but invoke bare
+`rebrew build driver` commands. The driver then selected the environment or root
+compiler profile instead. Upstream a2b40b43 pins all three generated tool commands;
+a later per-file pin overrides the generated default, and neither marker reaches
+CL/LINK/LIB. Make/Ninja integration tests and driver precedence tests reproduce the
+old failures. Regenerate the toolchain files and configure with `cmake --fresh`:
+CMake's existing `CMakeCCompiler.cmake` can retain the old compiler arguments after
+an ordinary reconfigure.
+
+The project default target is independent. With TL selected, the server's old
+`cmake-flags` call resolved client rows and rejected mixed flags; the server gate
+and `final` target also implicitly selected TL for a server DLL. These calls now
+select `server.dll` explicitly. Changing the interactive default must not change
+server build inputs or select a different reference for its verification.

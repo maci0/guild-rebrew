@@ -50,7 +50,7 @@ fi
 
 echo "== rebrew lint"
 # Warnings are fatal for this project; lint's ordinary exit contract covers errors.
-if ! rebrew lint --json > .scratch/gate-lint.json; then
+if ! rebrew lint --json --target server.dll > .scratch/gate-lint.json; then
     rc=1
 fi
 if ! python3 - .scratch/gate-lint.json <<'PYEOF'
@@ -98,7 +98,7 @@ echo "== rebrew function, data and whole-binary verification"
 # One upstream report supplies function/data verdicts and all structural checks.
 # Whole-file equality also checks the physical order of import slots and names.
 if ! rebrew verify --full --text --raw-link --data --whole-binary \
-        --built build/server.dll --json > .scratch/gate-verify.json; then
+        --built build/server.dll --json --target server.dll > .scratch/gate-verify.json; then
     echo "REGRESSION: upstream verification failed (see .scratch/gate-verify.json)"
     rc=1
 fi

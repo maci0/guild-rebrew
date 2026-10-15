@@ -11594,3 +11594,25 @@ strstr preserve native copy loops and branch order. Gold's extra scene call adds
 nine bytes; its moved display bit needs SHL rather than TL's ADD, adding one.
 No assembly, padding, new flag override or declaration sweep. Production context,
 literals and rejecting controls: .scratch/goal51/constructor-proof.json.
+
+## A forwarded stack DWORD does not establish an int parameter (2026-10-15)
+
+The animation wrapper TL `0x44c620` / Gold `0x44e4a0` forwards its third stack slot
+with a DWORD load/push. Its consumer TL `0x44e1e0` nevertheless reads only the low
+byte at `0x44e309` and stores it into animation `+0x169` at `0x44e32d`. Kuna
+independently recovers a char third argument. Caller TL `0x404a00` stores its looping flag as a byte, then
+pushes the surrounding stack word; the upper bits are not a full-width contract.
+Gold's core at `0x44f8b0` makes the same byte load at `0x44f9d9` and store at
+`0x44f9fd`; its Kuna seed also retains a char third argument. The bounded native
+flag window validates this access, without claiming a complete core-body match.
+
+Use a canonical char loop flag through the loader, its core declaration and the
+`0x418b40` forwarding wrapper. Declaring int changed the ordinary preload caller from
+342 to 340 bytes; the reviewed char contract restores all 342 bytes in both clients
+and preserves the 207/108-byte wrappers. Animation names and lookup results remain
+pointers. This is evidence from the call chain, not a type chosen from match score.
+Source spellings remain inferred. The shared 207-byte loader passes eight operand
+sites and seven rejecting symbol controls per target; unbound destinations remain
+native comparison hypotheses, without a raw-link provider claim. Receipts are in
+.scratch/goal52/{loader-core-inventory-native,loader-core-kuna,preloaders-char-loop,
+loader-wrapper-char-loop,loader-native-proof}.json.

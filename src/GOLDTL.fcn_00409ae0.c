@@ -19,8 +19,7 @@ struct anim_409ae0 {
 extern char g_6b5c28;
 
 void __cdecl fcn_00435500(char*, char*);
-int __cdecl fcn_00433ba0(char*);
-void __cdecl fcn_00434760(int, int);
+#include "Develop/Units/d3/d3_animation.h"
 void __cdecl fcn_00413120(void*);
 void __cdecl fcn_00402aa0(char*);
 struct anim_409ae0* __cdecl fcn_00404dc0(char*, const char*, int);
@@ -36,7 +35,7 @@ int __cdecl fcn_00409ae0(char* ev, char* step)
 {
 	char* obj;
 	float scale;
-	int morph;
+	char* morph;
 	char name[0x60];
 
 	obj = *(char**) (ev + 0x14);

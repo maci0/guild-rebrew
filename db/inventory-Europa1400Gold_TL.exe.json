@@ -4905,8 +4905,17 @@
   },
   {
     "va": 4507168,
-    "size": 800,
-    "name": "fcn.0044c620"
+    "size": 207,
+    "name": "fcn.0044c620",
+    "extent_history": [
+      {
+        "old_size": 800,
+        "new_size": 207,
+        "reason": "Complete native animation loader ends with RET at 0x44c6ee, followed by one NOP and a distinct function at 0x44c6f0. The old 800-byte discovery extent swallowed later code; the existing managed source extent has always been 207. Complete TL/Gold COFF comparisons and eight relocation sites: .scratch/goal52/loader-native-proof.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T15:28:24.312414+00:00"
+      }
+    ]
   },
   {
     "va": 4507968,

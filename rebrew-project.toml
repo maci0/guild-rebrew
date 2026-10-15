@@ -2,7 +2,7 @@
 name = "Europa 1400: The Guild"
 jobs = 8
 output_dir = "output"
-default_target = "server.dll"
+default_target = "Europa1400Gold_TL.exe"
 # Unified source tree: src/Develop mirrors D:\Develop. Every target scans
 # the whole tree; dedicated MODULE.0xVA metadata rows select each target's
 # definitions (rebrew ADR-030). Divergent twins sit side by side as

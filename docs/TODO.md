@@ -54236,3 +54236,58 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   upstream-push.log. Next native service: TL 0x404b60, 305 discovery bytes, with the
   constructor's Gold 0x404360 operand as counterpart evidence. Check libraries and
   Kuna/native bodies before source adoption; keep current provider uncertainty.
+
+
+### 2026-10-16 — Goal52: animation contracts and upstream build/diagnostic repairs
+
+- Added the Gold identity at `0x44e4a0` for the existing TL `0x44c620` animation loader.
+  One ordinary C body matches 207 bytes in each target; eight operand sites and
+  seven rejecting symbol controls per target. Unbound global/callee destinations
+  remain native comparison hypotheses, without a raw-link provider claim.
+- Canonical animation APIs carry name/result pointers and byte loop/force flags.
+  TL `0x44e309` / Gold `0x44f9d9` copy the third argument's low byte into animation `+0x169`;
+  both Kuna seeds agree. A full-width forwarding load did not prove int. The
+  reviewed char contract restores both 342-byte preloaders and preserves 207/108
+  wrapper bytes. All 39 affected bindings are current: 38 pass and the existing
+  TL ch_Updatelowpoly remains SIZE_MISMATCH; 37 previous strong matches survive.
+- All 8,387 old identities/history remain, with one reviewed fresh rejection:
+  TL `0x5392a0` loses 221 matched bytes because gm_ResetAllEntities resolves to two
+  independent same-target providers. Its native call goes to `0x5012b0`, not `0x4297c0`.
+  Both providers retain source and byte-match evidence. The ownership-aware
+  rename preview correctly refuses to guess common-header/caller ownership;
+  that missing capability is submitted to upstream docs/IDEAS-GUILD.md.
+- Fixed three upstream bugs directly with regression tests: a2b40b43 pins the
+  generated CMake compiler/linker/librarian while allowing later file overrides;
+  627b68e9 preserves typed matcher operands and makes diff reject ambiguous/wrong
+  bindings with XX and exit 1; 257398f1 checks compiler-prefix arguments against the
+  active CMake compiler record. Altered defaults and appended overrides still
+  fail. The required Breaking entry names the removed incidental parser import.
+  Mandatory full suite, mypy and contributor hooks pass; all commits are pushed.
+- Kept the interactive default at TL and selected server.dll explicitly for the
+  server's flags, final target and gate. Regenerated toolchain files; fresh main
+  and independent Docker builds equal all 286,720 reference bytes. The final
+  server gate passes 316 functions, 652 data checks, full file/import/relocation/
+  layout verification and Wine load/export checks. No host compiler fallback.
+- Reviewed native inventory boundaries: TL 800 / Gold 208 become 207 bytes, followed
+  by one NOP. The TL discovery had swallowed later functions; their bytes are
+  unaccounted code, not invented padding. History is retained through the writer.
+- All-target lint 0/0; all three type checks report 1,021 definitions and no findings.
+  Data has 0 type conflicts and 0 duplicate definitions across targets. Four named
+  contract audits have 0 findings/current hashes, with 122/904/615 SDK/include
+  unknowns; the extra Gold context is the newly adopted loader. Data/source stores
+  are unchanged. No full client data or source-contract completion is claimed.
+- TL: 692,531 matched game bytes (-221 fresh rejected bytes), 390,163 library bytes,
+  33,587 padding; accounted 1,116,281 (44.8%). Gold: +207 game bytes to 377,902,
+  libraries 9,742, padding 23,471; accounted 411,115 (20.4%). Neither client has a
+  verified raw link; initialized-data verification remains 0. No new TL match.
+- The TL `0x404b60` / Gold `0x404360` 305-byte low-poly motion candidate remains scratch only.
+  The 7,102,296-pattern miss is inconclusive; native/Kuna bodies establish the
+  resource algorithm. Saved 304/306/307-byte probes differ in options/lookup
+  scheduling. No fabricated parameter types, padding, assembly or source promotion.
+- Receipts/replays: .scratch/goal52/{loader-native-proof,scope-promote,preservation,
+  contract-summary,status-stable,lint-all,data-all,types-*}.json; loader-core native/
+  Kuna evidence, inventory repair previews/digests, external `0x5392a0` test/diff and
+  rename refusal; server-gate-accepted.log and cmake-reproducibility.json. Upstream
+  full-suite/push logs are in its .scratch/crun-prototype. Guild has only main and
+  no loose files. The active upstream experimental-unshare worktree is preserved;
+  it is another session's uncommitted work. Production remains Docker.

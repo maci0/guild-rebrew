@@ -1,9 +1,8 @@
 #include <stdio.h>
 
 void __cdecl fcn_0042e540(char*);
-char* __cdecl fcn_00433ba0(char*);
+#include "Develop/Units/d3/d3_animation.h"
 int __cdecl fcn_0065f220(const char*, const char*);
-char* __cdecl fcn_0044c620(char*, char*, int);
 
 /* ADDRESS: GOLD 0x00403b00 */
 /* ADDRESS: GOLDTL 0x00404300 */

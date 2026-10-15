@@ -4,9 +4,9 @@
 
 extern char* g_1052ba4;
 extern char g_1052a40[];
-char* __cdecl fcn_0044e1e0(char* name, int a, int b);
+#include "Develop/Units/d3/d3_animation.h"
 
-char* __cdecl fcn_00418b40(const char* name, int a, int b)
+char* __cdecl fcn_00418b40(const char* name, char* a, char b)
 {
 	char buf[0x100];
 	char* o;
