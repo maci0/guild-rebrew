@@ -3232,3 +3232,15 @@ An empty historical xref result at such a store is not absence evidence.
 Replay through the pinned environment:
 `uv run --frozen rebrew binary xrefs 0x5107f0 --json -t Europa1400Gold_TL.exe`
 and the Gold counterpart at0x50d350. Receipts: `.scratch/goal41/upstream/`.
+
+### A probe object name can be a Windows device name (2026-10-15)
+
+The auxiliary-record probe requested `aux.obj` and VC6 returned C1083 while
+opening its output. AUX is a reserved Windows device basename, including with
+an extension. Changing the experiment's output to `auxslots.obj` succeeds;
+no source, compiler flags or native extent changed. Earlier independent CLI
+attempts timed out at60 seconds under host load. The isolated public-API proof
+used a180-second execution budget and kept those failed receipts. Neither
+failure was a measured byte mismatch or a reason to alter STATUS.
+Receipts: .scratch/goal42/prove-reserved-name.log,candidate-*.json and
+prove-candidate.log.

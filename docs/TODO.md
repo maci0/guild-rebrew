@@ -53320,3 +53320,32 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   scope-preservation,preservation}.json,gate-pinned.log,lint-final.json,
   data-*-final.json and.scratch/goal41/upstream/. Full client images and original
   source fidelity remain unfinished.
+
+### 2026-10-15: unify typed auxiliary-record cleanup
+
+- TL456b80 / Gold45ccc0 now select one inferred d3_CleanupObjectAuxSlots body
+  in the inferred object unit. Each complete133-byte body resolves its per-record
+  call; both shifted callees, opposite layouts and wrong-flag controls reject.
+  Providers remain separate: TL456b10 includes COM cleanup, Gold45cc80 is unsourced.
+- Native draw constructors244/292 bytes establish four records with0x9c/0x80
+  strides at0x1384/0x754 inside allocations0x1640/0x970. The canonical header
+  exposes inferred stride views and the cleanup bit, preserving darstellungsflag
+  and total byte widths. Unknown words retain unknown semantics; no independent
+  allocation or new storage is claimed. Six prior stable layouts preserve sizes,
+  complete extents and offsets; both new stride layouts pass compiler checks.
+- All131 affected comparisons retain byte results and prior binding proofs;
+  all6022 prior strong statuses and the identity set remain. Both137-byte draw
+  cleanup,154-byte unlink and32-byte destruction bodies retain full native bytes
+  and rejecting controls. Source order remains native. Old numeric cleanup files
+  are removed only after locked rehome and owner checks; two callers use the
+  canonical declaration. Lint/data checks remain clean; the fresh pinned server
+  gate passes all286720 raw bytes,316 game and652 data checks plus imports,
+  relocation, toolchain and Wine checks. Full client images remain unfinished.
+- The next112-byte list-removal pair has one unadopted typed scratch candidate.
+  Both complete bodies and all12 global/private-table operands agree; ten wrong
+  global/local-label controls reject. The canonical g_6b8014 rows already bind
+  TL6b8014/Goldfc2dec. Consolidate declarations/users and preserve native globals
+  before adoption; do not substitute the separate hierarchy unlink helper.
+- Receipts: .scratch/goal42/{production-native-proof,negative-controls,
+  draw-cleanup-native-proof,object-native-proof,scope-preservation,preservation,
+  remove-list-native-proof}.json,gate.log,type-*.json andfailed probe receipts.

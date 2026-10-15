@@ -1881,3 +1881,14 @@ nor placement in `Units/d3/d3_object.c` is attested. Both identities select one
 definition and the canonical object/draw-data types. Their draw-part cleanup
 callees remain separately named native providers; Gold43cc90 is unsourced.
 No shared callee identity or storage owner is inferred from this consolidation.
+
+### Scene-object auxiliary records and cleanup (2026-10-15)
+
+`d3_CleanupObjectAuxSlots` is inferred for TL456b80 / Gold45ccc0; placement
+in d3_object.c is also inferred. One definition walks the four auxiliary records
+inside draw data. `D3_OBJECT_AUX_SLOT`, `zusatz` and `zusatz_flag` are inferred
+names for the evidenced stride views and controlling bit. Unknown word fields
+remain access views, without claims about their original semantic types.
+The `objekt` pointer is compared with the disposal object's callback context.
+Per-record cleanup remains separately identified at TL456b10 / Gold45cc80;
+Gold's63-byte body is unsourced, and TL's112-byte body has additional COM cleanup.

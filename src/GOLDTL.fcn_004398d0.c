@@ -15,7 +15,7 @@ void __cdecl fcn_00433780(char* obj);
 void __cdecl fcn_00439b30(char* obj);
 void __cdecl fcn_00456d50(void);
 void __cdecl fcn_004379a0(char* u, int b, int c, void (__cdecl* cb)(void), char* obj);
-void __cdecl fcn_00456b80(char* obj);
+
 void __cdecl fcn_00418f90(int a);
 
 
@@ -68,7 +68,7 @@ void __cdecl fcn_004398d0(char* obj)
 		fcn_004379a0(u, 0, 0xc0, fcn_00456d50, obj);
 	}
 	if (*(unsigned char*) (obj + 0x215) & 1) {
-		fcn_00456b80(obj);
+		d3_CleanupObjectAuxSlots((D3_OBJECT*) (obj));
 	}
 	if (*(void**) (obj + 0x1e8) != 0) {
 		m_FreeTracked(*(void**) (obj + 0x1e8));

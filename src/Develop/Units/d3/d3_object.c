@@ -73,3 +73,29 @@ char __cdecl d3_DestroyObject(D3_OBJECT* object)
 	}
 	return 0;
 }
+
+/* Inferred auxiliary cleanup; per-record providers retain their native identities. */
+#ifdef REBREW_GOLD
+void __cdecl fcn_0045cc80(char*);
+#else
+void __cdecl fcn_00456b10(char*);
+#endif
+void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object)
+{
+    int i;
+    if (object->zusatz_flag && object->zeichendaten != 0) {
+        for (i = 0; i < 4; i++) {
+            if (object->zeichendaten->zusatz[i].unbekannt_000 != 0) {
+#ifdef REBREW_GOLD
+                fcn_0045cc80((char*) &object->zeichendaten->zusatz[i]);
+#else
+                fcn_00456b10((char*) &object->zeichendaten->zusatz[i]);
+#endif
+                object->zeichendaten->zusatz[i].objekt = 0;
+                object->zeichendaten->zusatz[i].unbekannt_a = 0;
+                object->zeichendaten->zusatz[i].unbekannt_b = 0;
+                object->zeichendaten->zusatz[i].unbekannt_c = 0;
+            }
+        }
+    }
+}

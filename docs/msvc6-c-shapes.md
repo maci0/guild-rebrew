@@ -11523,3 +11523,27 @@ Four shifted-callee controls reject. Both154-byte unlink helpers and32-byte
 destruction wrappers retain their complete bodies and rejecting controls.
 No flags, assembly, padding or storage are added. Receipts:
 `.scratch/goal41/cleanup/{production-native-proof,object-native-proof}.json`.
+
+## Auxiliary-record cleanup shares one typed 133-byte algorithm (2026-10-15)
+
+TL456b80 / Gold45ccc0 use four records at draw offsets0x1384/0x754 with
+strides0x9c/0x80. The full244/292-byte native draw constructors establish those
+bounds within allocations0x1640/0x970. These are array stride views, not separate
+allocations. Record+8 TL /+4 Gold holds the object compared by the154-byte
+cleanup callback; the following pointer is dereferenced by per-record cleanup.
+Other exposed words remain inferred access views with unknown semantic types.
+
+A common `zusatz_flag` occupies the bit immediately below `darstellungsflag`.
+TL replaces its one-bit rest; Gold reduces rest from3 to2, preserving eight
+bits and the existing flag. Native constructor stores and paired cleanup bodies
+confirm masks1/4. Both target compilers retain all six prior sizeof/extents and
+bound offsets; two new stride bindings assert each record's size and fields.
+
+Keep the four-element signed-int loop, nonzero first-word test, cleanup call,
+object-pointer clear and three word clears in that order. Reload draw data after
+the call. Explicit guards retain native per-record providers456b10/45cc80.
+Full relocation application reproduces all133 bytes per target; wrong-callee,
+opposite-layout and wrong-flag controls reject. The existing137-byte draw-data
+cleanup,154-byte unlink and32-byte destruction bodies remain complete.
+Receipts: .scratch/goal42/{production-native-proof,negative-controls,
+draw-cleanup-native-proof,object-native-proof}.json andtype-*.json.

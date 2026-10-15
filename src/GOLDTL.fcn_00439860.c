@@ -3,7 +3,7 @@
 
 void __cdecl fcn_004379a0(int, int, int, void*, char*);
 void __cdecl fcn_00456d50(void);
-void __cdecl fcn_00456b80(char*);
+
 
 
 void __cdecl fcn_00439860(char* o)
@@ -21,7 +21,7 @@ void __cdecl fcn_00439860(char* o)
 		fcn_004379a0(h, 0, 0x40, fcn_00456d50, o);
 	}
 	if ((o[0x215] & 1) != 0) {
-		fcn_00456b80(o);
+		d3_CleanupObjectAuxSlots((D3_OBJECT*) (o));
 	}
 	d3_CleanupObjectDrawData((D3_OBJECT*) (o));
 }

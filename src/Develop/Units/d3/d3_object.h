@@ -14,13 +14,33 @@ typedef struct D3_DRAW_PART {
 #endif
 } D3_DRAW_PART;
 
+/* Inferred auxiliary record view; native constructors establish four strides. */
+typedef struct D3_OBJECT_AUX_SLOT {
+    int unbekannt_000;
+#ifndef REBREW_GOLD
+    int unbekannt_004;
+#endif
+    struct D3_OBJECT* objekt;
+    void* unbekannt_nach_objekt;
+    char unbekannt_nach_zeiger[0x0c];
+    int unbekannt_a;
+    int unbekannt_b;
+    int unbekannt_c;
+#ifdef REBREW_GOLD
+    char unbekannt_ende[0x80 - 0x24];
+#else
+    char unbekannt_ende[0x9c - 0x28];
+#endif
+} D3_OBJECT_AUX_SLOT;
+
 typedef struct D3_OBJECT_DRAW_DATA {
     char unbekannt_000[0xf4];
     D3_DRAW_PART teile[4];
+    D3_OBJECT_AUX_SLOT zusatz[4];
 #ifdef REBREW_GOLD
-    char unbekannt_754[0x96c - 0x754];
+    char unbekannt_954[0x96c - 0x954];
 #else
-    char unbekannt_1384[0x163c - 0x1384];
+    char unbekannt_15f4[0x163c - 0x15f4];
 #endif
     unsigned char teile_anzahl;
     unsigned char flags;
@@ -43,10 +63,9 @@ typedef struct D3_OBJECT {
     char unbekannt_nach_kinder[0x10];
     unsigned char flags0;
 #ifdef REBREW_GOLD
-    unsigned char rest : 3;
-#else
-    unsigned char rest : 1;
+    unsigned char rest : 2;
 #endif
+    unsigned char zusatz_flag : 1;
     unsigned char darstellungsflag : 1;
 #ifdef REBREW_GOLD
     unsigned char rest2 : 4;
@@ -67,5 +86,6 @@ typedef struct D3_OBJECT {
 void __cdecl d3_UnlinkObject(D3_OBJECT* object);
 char __cdecl d3_DestroyObject(D3_OBJECT* object);
 void __cdecl d3_CleanupObjectDrawData(D3_OBJECT* object);
+void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object);
 
 #endif
