@@ -1,3 +1,4 @@
+#include "Develop/Units/d3/d3_object.h"
 #include <stdio.h>
 
 typedef void (__cdecl* dispose_fn_4398d0)(char* obj);
@@ -16,7 +17,7 @@ void __cdecl fcn_00456d50(void);
 void __cdecl fcn_004379a0(char* u, int b, int c, void (__cdecl* cb)(void), char* obj);
 void __cdecl fcn_00456b80(char* obj);
 void __cdecl fcn_00418f90(int a);
-void __cdecl fcn_00439d80(char* obj);
+
 
 /* ADDRESS: GOLDTL 0x004398d0 */
 
@@ -80,7 +81,7 @@ void __cdecl fcn_004398d0(char* obj)
 		fcn_004398d0(*(char**) (obj + 0x1f4));
 	}
 	fcn_00418f90(*(int*) (obj + 0x210));
-	fcn_00439d80(obj);
+	d3_CleanupObjectDrawData((D3_OBJECT*) (obj));
 	m_FreeTracked(obj);
 	if (idx != -1) {
 		fcn_004432d0(saved, 1);

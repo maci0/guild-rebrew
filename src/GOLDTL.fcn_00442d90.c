@@ -1,8 +1,9 @@
+#include "Develop/Units/d3/d3_object.h"
 
 
 void __cdecl fcn_004398d0(char*);
 char* __cdecl fcn_00437890(char*);
-void __cdecl fcn_00439d80(char*);
+
 void __cdecl fcn_0044c200(int, int);
 void __cdecl fcn_00449f90(char*, int, int);
 void __cdecl fcn_0045cfa0(int);
@@ -25,7 +26,7 @@ char __cdecl fcn_00442d90(char* o, int a2)
 		fcn_004398d0(p);
 		*(char**) (o + 0x1f4) = n;
 	}
-	fcn_00439d80(o);
+	d3_CleanupObjectDrawData((D3_OBJECT*) (o));
 	fcn_0044c200(a2, a2);
 	fcn_00449f90(o, 0, a2);
 	fcn_0045cfa0(0);

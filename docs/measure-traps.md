@@ -3217,3 +3217,18 @@ A new7503-row discovery snapshot was not installed over the6337-row catalog.
 Both selected repairs use the existing emitter utility and retain native
 receipts under .scratch/goal37/. Neither early returns nor a near compiler
 match justify truncating a function, switch region or callback.
+
+### Immediate callback stores were missing from upstream xrefs (2026-10-15)
+
+`binary xrefs` returned zero for callbacks TL5107f0 and Gold50d350 despite
+native stores at5108f7/50d457. The shared instruction classifier handled
+`mov reg, immediate` but omitted `mov [memory], immediate`, including absolute
+store destinations. Upstreamf2dbe476 fixes section, function and reachable-code
+scans to retain both operands when applicable. Native replay now finds both
+assignments; two regression cases failed before,112 focused tests and12032
+full-suite tests pass afterward. Scalar values outside the image are excluded.
+An empty historical xref result at such a store is not absence evidence.
+
+Replay through the pinned environment:
+`uv run --frozen rebrew binary xrefs 0x5107f0 --json -t Europa1400Gold_TL.exe`
+and the Gold counterpart at0x50d350. Receipts: `.scratch/goal41/upstream/`.

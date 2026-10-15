@@ -1871,3 +1871,13 @@ The private `RandomMoneyTransfer` inline helper in GOLDTL.fcn_004b6f00.c is
 also inferred organization; its five native entries/coefficient variants are
 recorded in TODO.md and independently checked. No original helper identity is
 claimed, and no out-of-line helper is emitted.
+
+### Scene-object draw-data cleanup (2026-10-15)
+
+`d3_CleanupObjectDrawData` is an inferred name for TL439d80 / Gold43cd80.
+The native bodies clean the counted draw parts, always clean part three, free
+the draw-data allocation and clear the object's context. Neither the spelling
+nor placement in `Units/d3/d3_object.c` is attested. Both identities select one
+definition and the canonical object/draw-data types. Their draw-part cleanup
+callees remain separately named native providers; Gold43cc90 is unsourced.
+No shared callee identity or storage owner is inferred from this consolidation.

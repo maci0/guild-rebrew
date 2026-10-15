@@ -11505,3 +11505,21 @@ shifted by four fails. The final four record bytes stay an uninterpreted byte
 region. All 18 affected caller bodies and typed operand graphs remain unchanged.
 No flags or assembly are added. Evidence: .scratch/goal23/pool-unification/
 production-native-proof.json, index-native-proof.json and users-{before,after}.json.
+
+## Typed scene draw-data cleanup preserves both 137-byte bodies (2026-10-15)
+
+An ordinary signed-int loop over `object->zeichendaten->teile[i]` reproduces
+TL439d80 and Gold43cd80. The bound draw-part strides are4a4/198 and the count
+bytes are163c/96c. Keep the unconditional cleanup of `teile[3]` after the loop,
+then clear the count, free and clear draw data, and finally clear `kontext`.
+The context clear also runs when draw data is null. Do not cache the draw-data
+pointer or count across cleanup calls, or suppress the final part-three call
+when the loop already visited it.
+
+Explicit target guards retain the distinct draw-part destinations439c90/43cc90;
+the existing shared `m_FreeTracked` supplies41ddd0/422620. Full relocation
+application reproduces all137 bytes per target and all six operand sites.
+Four shifted-callee controls reject. Both154-byte unlink helpers and32-byte
+destruction wrappers retain their complete bodies and rejecting controls.
+No flags, assembly, padding or storage are added. Receipts:
+`.scratch/goal41/cleanup/{production-native-proof,object-native-proof}.json`.

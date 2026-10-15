@@ -53285,3 +53285,38 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   Gold seed shows additional selected-object and draw-buffer cleanup; all such
   differences still need native operands and complete-body verification before
   consolidation. Full client images/data and original source fidelity remain open.
+
+### 2026-10-15: unify typed scene draw-data cleanup
+
+- One inferred d3_CleanupObjectDrawData definition now provides TL439d80 and
+  Gold43cd80. It preserves counted part cleanup, unconditional part three,
+  count/pointer clears and final context clearing. Canonical D3 types and
+  m_alloc.h supply declarations; actual draw-part providers remain separate.
+  The shared unit follows native VA order. No flags, assembly or storage added.
+- Both complete137-byte bodies resolve all six operand sites; four wrong-callee
+  controls reject. Both EXACT154 unlink bodies and RELOC32 destruction wrappers
+  retain their full bytes and layout/callee controls. All129 scoped comparisons
+  preserve prior byte results/binding proofs; Gold gains its tracked-free binding.
+  All6022 prior strong statuses and all identities remain. All six D3 type
+  bindings keep native sizes/extents/offsets after compiler checks.
+- Old standalone cleanup files are removed after locked rehome and owner checks.
+  Three TL callers use the canonical declaration and explicit object-view casts.
+  All-target lint0/0 and all three data inventories have zero conflicts/duplicates.
+  The final gate uses the pinned environment and passes raw server identity,
+  316 game/652 data checks, imports, relocations, toolchains and Wine. The initial
+  gate's two source-order warnings and their failed receipt remain visible.
+- Upstreamf2dbe476 repairs missing immediate-to-memory xrefs directly upstream:
+  two failures before,112 focused passes,12032 full-suite passes. Native callback
+  assignment replays now produce the correct references. Required commit checks
+  pass; full-suite push checks are required before reporting publication.
+- Disposal candidates cover450/637 bytes but stay in scratch. Native evidence
+  contradicts their three-extern Gold state model: fb9900 is one record with
+  accesses through+28 and an unknown full extent/owner. Gold draw+968 is a context
+  pointer. Callback assignment/provider and cleanup-bit evidence now support
+  conservative typed fields; remaining helper twins, declarations, native
+  operands and client raw links still need completion. Detailed reviews are
+  saved in .scratch/goal41/committee-*.md; active continuation in goal.md.
+- Receipts: .scratch/goal41/cleanup/{production-native-proof,object-native-proof,
+  scope-preservation,preservation}.json,gate-pinned.log,lint-final.json,
+  data-*-final.json and.scratch/goal41/upstream/. Full client images and original
+  source fidelity remain unfinished.

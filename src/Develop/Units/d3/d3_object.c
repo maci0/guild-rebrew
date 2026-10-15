@@ -1,10 +1,42 @@
 #include "d3_object.h"
+#include "../m_alloc/m_alloc.h"
+
+#ifdef REBREW_GOLD
+void __cdecl fcn_0043cc90(char*);
+#else
+void __cdecl fcn_00439c90(char*);
+#endif
 
 #ifdef REBREW_GOLD
 int __cdecl fcn_0043c7a0(int);
 #else
 void __cdecl fcn_004398d0(char*);
 #endif
+
+/* Inferred name and placement; native draw-part providers remain separate. */
+void __cdecl d3_CleanupObjectDrawData(D3_OBJECT* object)
+{
+	int i;
+
+	if (object->zeichendaten != 0) {
+		for (i = 0; i < object->zeichendaten->teile_anzahl; i++) {
+#ifdef REBREW_GOLD
+			fcn_0043cc90((char*) &object->zeichendaten->teile[i]);
+#else
+			fcn_00439c90((char*) &object->zeichendaten->teile[i]);
+#endif
+		}
+#ifdef REBREW_GOLD
+		fcn_0043cc90((char*) &object->zeichendaten->teile[3]);
+#else
+		fcn_00439c90((char*) &object->zeichendaten->teile[3]);
+#endif
+		object->zeichendaten->teile_anzahl = 0;
+		m_FreeTracked(object->zeichendaten);
+		object->zeichendaten = 0;
+	}
+	object->kontext = 0;
+}
 
 void __cdecl d3_UnlinkObject(D3_OBJECT* object)
 {

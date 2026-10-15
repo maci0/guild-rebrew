@@ -86,7 +86,7 @@ accounted text, game reversing progress and stored data verification separately.
 4. Reverify affected callers and all target contexts after shared-header, type,
    ownership or declaration changes. Known-binding checks remain enabled.
 5. When matching measures disagree, compile an isolated raw native link and measure
-   the complete image. Run `scripts/gate.sh` before every commit. Client changes
+   the complete image. Run `uv run --frozen scripts/gate.sh` before every commit. Client changes
    also require client-specific validation. Keep failed checks visible.
 6. Refresh coverage through `rebrew coverage build`; never maintain a second
    progress store. Record only current evidence and concise next steps here.
@@ -106,125 +106,60 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-15
 
-The full source-fidelity/three-image objective is unfinished. Both raw clients,
-complete data ownership/verification, unknown code ranges and faithful recovery
-of discarded server inputs remain open. Inferred server inputs do not become
-original source merely because the raw DLL matches.
+The full source-fidelity/three-image goal remains unfinished. Both raw client
+images, complete data ownership/verification, unknown code ranges and faithful
+recovery of discarded server inputs remain open. Historical byte matches do
+not establish original source or complete client images.
 
-The fresh server gate passes: all286720 raw bytes equal the reference,316 game
-functions and652 data comparisons pass, and library/import/relocation/Wine
-checks pass. The plain server and Processor Pack client images are present.
-All-target lint now has zero errors and zero warnings. The single130-byte
-ahm_ProcessEntityChain body and its packed private type now precede
-gm_GetFieldByType in command.c; all three identities follow via CLI rehome.
-The table keeps its storage position. Ownership and name remain inferred,
-with no direct native source-path reference in the body.
+The fresh pinned gate (`REBREW_DEBUG_INFO=OFF uv run --frozen scripts/gate.sh`)
+passes: all286720 raw server bytes equal the reference,316 game functions and652
+data comparisons pass, with import, relocation, toolchain and Wine checks.
+The plain server and Processor Pack client images are present. All-target lint
+is0/0; all three data inventories have zero conflicts and duplicate definitions.
 
-All102 comparisons across command/alchemy and the three targets preserve
-their results, including91 byte matches; only compiler-local labels renumber.
-All three complete chain bodies agree after resolving their sole operand at+33
-to SERVER1002c5a0,TL68ab88,Gold60bf20; shifted-table controls reject. This
-verifies the operands, not full client linked data or its provider. Receipts:
-.scratch/goal36/move-comparison-audit.json,chain-native-proof.json,
-lint-chain-move.json andgate-chain-move.log. The server map preserves the
-ca00/ca90 sequence with the chain now in command.c.obj; it is a reconstructed map.
+Scene destruction and unlinking remain shared: both wrappers are32 bytes and
+both unlink helpers are unmasked EXACT154. Draw-data cleanup TL439d80/Gold43cd80
+now shares one C89 d3_CleanupObjectDrawData definition using the canonical types
+and allocator header. Both full137-byte bodies and all six operands agree;
+four shifted-callee controls reject. Keep the counted loop, unconditional
+part-three cleanup, pointer/count reloads across calls and final context clear.
+The source follows native VA order. Name and unit placement remain inferred;
+draw-part providers439c90/43cc90 remain separate and Gold43cc90 is unsourced.
+The two unowned standalone cleanup sources are retired through reviewed rehome.
 
-Seven false TL source bindings are retired after native Kuna review:
-57c7b0,5974e0,5d6030,4c35f0,4b0220,44a120,422150. Their native inventory,
-extents and failed-comparison history remain. Actual client destruction
-TL4cbc90/Gold4cb100 now shares the server command.c definition. Dynasty
-initialization TL4adcd0 has a matched body but remains separate. Factory TL5043d0 is
-identified without a source provider: the server seed emits1050 versus1488
-native bytes. Its SERVER assembly is guarded; the client branch uses C memset.
-Four stale SERVER failure rows outside the image and two retired-source flag
-overrides are removed; all6020 prior strong claims remain and data is untouched.
-Receipts: .scratch/goal34/identity-retirement.json andadditional-identity-retirement.json;
-.scratch/goal35/cleanup-preservation.json andforeign-server-orphans-before.json.
+All129 affected comparisons preserve byte results and prior binding proofs;
+Gold cleanup gains a tracked-free binding. All6022 previous strong statuses and
+the identity set remain. Six D3 compiler-backed sizes, extents and offsets are
+unchanged. Receipts: .scratch/goal41/cleanup/{production-native-proof,
+object-native-proof,scope-preservation,preservation}.json,gate-pinned.log,
+lint-final.json,data-*-final.json andtype receipts in .scratch/goal41/.
 
-Upstream provider/header/parser/dossier and mixed-target data-scope repairs are
-committed and pushed. Latest6173db1d converts malformed remote compile URLs
-to typed failures (12 failing-before cases,83 focused passes);7e82dbcd protects
-VERIFIED data during orphan cleanup (two failing-before cases,324 focused
-passes). Required commit checks and full push suites pass. Default project prune
-protects all46 earned data rows and selects nothing. Both repos retain only main.
-Upstream IDEAS-GUILD.md records safe identity retirement and source-unit audits.
+Upstreamf2dbe476 fixes missing mov-to-memory immediate references in section,
+function and reachable-code scans. Two regression cases fail before;112 focused
+and12032 full-suite tests pass afterward. Native xrefs now find callback stores
+TL5108f7->5107f0 and Gold50d457->50d350. Required commit checks pass. Feature gaps
+remain in upstream docs/IDEAS-GUILD.md; bugs must be fixed directly upstream.
+Receipts: .scratch/goal41/upstream/.
 
-Preserve earlier verified integrations and evidence: shared lighting with17
-current comparisons and native operand controls (.scratch/goal31); pristine
-stock __un_inc attribution and retirement of its incorrect C copy; unused year
-COMMON removal with all three72/72/56-byte bodies intact, and corrected Gold
-gm_FindSlotById extent72 (.scratch/goal33). The full frozen baseline corpus has
-zero game compiler errors and no lost checkpoint matches; it is historical,
-not proof of complete client images (.scratch/goal29/corpus-current.json).
-TL412d30 StartObjectTransformAnimation remains NEAR230/280:96 bounded VEX
-cases are not a byte/exhaustive proof, and its callee/original unit remain open
-(.scratch/goal32). Shared he_RunProduktion remains4016/3816 in both clients;
-its456 bounded runs and66 reached call sites do not establish byte identity.
+Next: finish the remaining evidenced D3 helper twins and reconcile their
+contracts/providers before integrating d3_DisposeObject. The attested disposal
+name has a void(D3_OBJECT*) contract; its placement is inferred. Scratch bodies
+match full450/637 bytes but are not adopted: their three separate Gold globals
+contradict native evidence for one fb9900 record. Use an extern prefix view with
+no allocation or complete-extent claim; full owner/extent remain unknown.
+Gold draw-data+968 caches kontext and is pointer-valued. Constructor, assignment
+and callback evidence supports draw-data offset0 as a nullable one-object void
+callback, and a cleanup bit immediately below darstellungsflag. Preserve total
+bit widths and all existing layouts. Reconcile assignment/caller declarations
+and prove all native operands before adoption. Reviews and exact evidence are
+saved in .scratch/goal41/committee-*.md andHANDOFF.md.
 
-The two unused dispatch typedefs and unused table declaration are removed from
-alchemistry_logic.c. All25 current comparisons retain their results; a fresh
-full server gate still passes. Two stale TL inventory extents are corrected:
-4186c0 from47 to5 (external tail jump plus eleven padding NOPs), and571720
-from4160 to335 (complete verified body ending immediately before the production
-callback). All6337 inventory identities and6020 strong claims remain. Existing
-5/335-byte source comparisons pass; their metadata sizes were already correct.
-CU recommendations now run, but their largest groups contain thousands of
-functions and do not establish ahm_ResetEntityState ownership. Do not apply
-those bulk merge suggestions as native source evidence. Receipts:
-.scratch/goal37/preservation.json,inventory-*-repair.json,recommend-summary.json
-andgate-alchemy-cleanup.log. The selected inventory-edit CLI gap is recorded
-as upstreamf03077b5; its required commit and full push checks pass, and it is pushed.
-
-The building destructor now has one C89 body at SERVER1000f680,
-TL4cbc90 and Gold4cb100, preserving native client renderer extras and server
-logging. It uses the same backing-object field view in all three targets.
-Both complete265-byte client bodies match with all34 operand sites resolved;
-30 shifted-destination controls reject. All79 command comparisons retain
-their byte results, including75 byte matches, and all6020 strong statuses stay.
-The unowned numeric duplicate is removed. The final full server gate passes;
-all-target lint is0/0 and all three data inventories have no type conflicts or
-duplicate definitions. Client helper providers and full client data verification
-remain open. Name and local spelling are inferred. Receipts:
-.scratch/goal38/destroy-native-proof.json,comparison-preservation.json,
-preservation.json andgate-destroy-final.log. Upstreamb1a5de80 records the
-missing all-target data inventory command; required commit/full push checks pass
-and it is pushed.
-
-Scene-object destruction now shares one char(D3_OBJECT*) C89 definition and
-header declaration at TL442be0 / Gold447190. All31 affected contexts compile;
-the other115 comparisons retain their byte results and existing binding proofs,
-and nine Gold call sites now validate. Gold's32-byte wrapper improves from
-SIZE_MISMATCH to RELOC; all6020 earlier strong statuses remain, for6021 total.
-Both complete native bodies and four wrong-callee controls pass. Six D3 type
-bindings retain the original sizes/extents/offsets after compiler checks. The
-fresh full server gate passes; all-target lint/data conflict checks stay clean.
-Name and d3_object.c placement are inferred. Separate disposal providers and
-both full client images remain open. Receipts: .scratch/goal39/preservation.json,
-wrapper-native-proof.json,scope-audit-current.json andgate-wrapper.log.
-Upstream2ed6b113 records contract/header/caller reconciliation; required commit
-checks and the full push suite pass, and it is pushed.
-
-The typed unlink helper is now integrated in the same object unit at TL43a0a0
-and Gold43d0e0. One void(D3_OBJECT*) body is unmasked EXACT for154 bytes in
-both clients, using the header's target-specific field offsets. It preserves
-native store order and null behavior. Both destruction wrappers remain32 bytes;
-two opposite-layout and four wrong-callee controls reject. All118 previous
-scope comparisons retain their byte results and binding proofs; Gold gains
-its first source provider for the leaf. All6021 previous strong statuses stay,
-for6022 total. Six type layouts, all-target lint and data inventories remain
-clean, and the fresh server gate preserves all286720 raw bytes. Names and
-placement remain inferred. Receipts: .scratch/goal40/native-proof.json,
-scope-preservation.json,preservation.json andgate-unlink.log. Kuna disposal
-seeds are saved through the configured Rebrew backend; the450/637-byte disposal
-implementations and full client images remain open.
-
-Next: reconcile the native disposal differences using those seeds and native
-operands, unify the evidenced query, child-removal and building-cleanup helpers,
-and get direct native
-unit/caller evidence for the distant ahm_ResetEntityState. Keep the attested cm_ExProdObjekt TU: its
-previous split changed30085 raw bytes and drifted32 data rows. Recover genuine
-discarded server inputs, finish source-unit/type/data/provider evidence and
-client code, and build both raw clients. Keep the original goal active.
+Preserve prior chain, building destructor, lighting, display-counter and inventory
+repairs; detailed checkpoints are in docs/goal-history.md anddocs/TODO.md. Do not
+repeat exhausted animation/production probes without new evidence. Keep the
+attested cm_ExProdObjekt unit: its earlier split changed30085 raw bytes and32
+data rows. Continue native source-unit/type/data/provider work and both raw
+client builds; the server gate alone cannot complete this goal.
 
 ## History
 
