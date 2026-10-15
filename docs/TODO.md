@@ -53349,3 +53349,75 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
 - Receipts: .scratch/goal42/{production-native-proof,negative-controls,
   draw-cleanup-native-proof,object-native-proof,scope-preservation,preservation,
   remove-list-native-proof}.json,gate.log,type-*.json andfailed probe receipts.
+
+### 2026-10-15: camera declaration and shared scene-list checkpoint
+
+- One inferred d3_camera.h now declares the existing TL6b8014/Goldfc2dec slot
+  as a pointer. Its former integer declarations, pointer-slot punning and four
+  raw-address camera loads are replaced. The camera selector and motion wrapper
+  use pointer inputs; the motion vectors carry floats to the native nine-argument
+  service. Its established integer return is retained. Selected Gold placeholders
+  bind existing identities through reviewed CLI renames.
+- The two112-byte list-removal bodies now select one typed definition before
+  draw-data cleanup in d3_object.c. Locked rehome preserves both identities and
+  extents; the two unowned standalone files are removed. Both complete bodies,
+  all12 global/private-label sites and ten rejecting controls pass. The selector
+  and motion bodies pass complete42/54-byte comparisons in both clients with
+  operand checks and rejecting controls. Existing133/137/154/32-byte scene
+  helpers retain their independent full-body proofs.
+- The camera diagnostic now equals all53 native bytes including NUL in each
+  client. This proves literal content, not raw placement or the sprintf provider.
+  The embedded position wrapper4526d0 now forwards its missing second argument;
+  its complete23-byte result remains RELOC.
+- All262 measured comparisons preserve byte results and every prior bound
+  operand; eight sites gain resolved native bindings. All8376 identities, native
+  extents and6022 prior EXACT/RELOC statuses remain. Ten reviewed type bindings
+  retain established layouts after compiler checks. All-target lint is0/0;
+  data inventories report zero conflicts and duplicate definitions. The fresh
+  pinned server gate passes all286720 bytes and316 game/652 data comparisons,
+  imports, relocations and Wine. Final101 TL/51 Gold verifier results preserve
+  candidate statuses and operand evidence; verdicts are refreshed in batches.
+- This is a bounded declaration/source checkpoint, adding **zero newly matched
+  TL bytes**. The position/rotation vector, scalar-wrapper, constructor and
+  resource-name contracts still contain legacy disagreements. The reviewed
+  float candidates match83/184 bytes in scratch; they are not integrated and
+  the full camera/client contract must not be described as repaired. Continue
+  those contracts as measured batches when needed for disposal integration.
+- Coverage arithmetic reconciles: both user reports contain691740 matched game
+  bytes and3567 matched functions. The seven-byte account increase is padding;
+  both percentages round to44.7. Libraries already contribute388403 bytes,
+  including1008 D3DX8 functions. Library origin remains separate from selected
+  raw-link providers and game reversing progress.
+- The full shared FLIRT audit loads7102296 signatures, including D3DX8; its
+  results still need triage. A read-only D3DX8 archive comparison finds no
+  additional reversed functions supplied by that archive. Local identify's790
+  candidates are dominated by generic short signatures/import thunks and are
+  not bulk-adopted. The local/shared signature discovery gap is recorded in
+  upstream IDEAS-GUILD.md, alongside the global declaration audit gap.
+- Receipts: .scratch/goal43/{scope-preservation,list-production-native-proof,
+  camera-set-production-native-proof,camera-motion-production-native-proof,
+  camera-literal-proof,aux-production-native-proof,draw-cleanup-native-proof,
+  object-native-proof}.json, type-*.json, lint-latest.json, data-*-draft.json,
+  d3dx8-archive-audit.json, library-*-scan.* and promoted/. Full client images,
+  data ownership and the source-fidelity goal remain unfinished.
+
+### 2026-10-15: DirectX library coverage audit
+
+- The focused shared DirectX sets contain3849 signatures and yield43 ordinary
+  hits plus590 ambiguous addresses. Fourteen previously unannotated starts have
+  whole archive-body candidates. Most are inside already credited library spans;
+  short template aliases and exception patterns are not promoted as unique names.
+- TL5edf50 is a separate56-byte c_D3DXPlaneFromPointNormal body immediately after
+  the six-byte import thunk5edf4a. Every byte equals stock d3dxmath.obj without
+  relocation masking. Altering a fixed byte or shifting the native start rejects.
+  The locked writer records a GOLDTL LIBRARY identity with its complete extent;
+  no C body, game verdict, shared Gold address or linked provider is invented.
+- This adds56 library/accounted bytes:1464 library functions,388459 library bytes,
+  1113760/2491370 accounted bytes. Game byte matches remain691740. All prior
+  identities/extents and6022 strong statuses are preserved. Splitting the broad
+  discovery span also exposes13 previously swallowed bytes as unattributed;
+  they are not silently credited as padding or code.
+- Receipts: .scratch/goal43/library-directx-focused.json,
+  directx-all-whole-body-audit.json, library-plane-proof.json,
+  library-plane-boundary-native.json andstatus-{before,after}-library-credit.json.
+  The full7102296-signature scan is still running and must be triaged separately.

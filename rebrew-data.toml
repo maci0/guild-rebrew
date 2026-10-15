@@ -2034,13 +2034,13 @@ updated_by = "rehome"
 updated_at = "2026-10-11T03:11:11+00:00"
 
 ["GOLD.0x00fc2dec"]
-file = "src/GOLDTL.fcn_00439c60.c"
+file = "src/Develop/Units/d3/d3_camera.h"
 name = "g_6b8014"
 kind = "GLOBAL"
 type = "char*"
 section = ".data"
 updated_by = "data"
-updated_at = "2026-10-13T19:43:15+00:00"
+updated_at = "2026-10-15T01:22:36+00:00"
 
 ["GOLD.0x00fd7ba0"]
 file = "src/GOLD.fcn_00411be0.c"
@@ -3731,13 +3731,13 @@ type = "int"
 section = ".data"
 
 ["GOLDTL.0x006b8014"]
-file = "src/GOLDTL.fcn_00439c60.c"
+file = "src/Develop/Units/d3/d3_camera.h"
 name = "g_6b8014"
 kind = "GLOBAL"
 type = "char*"
 section = ".data"
 updated_by = "data"
-updated_at = "2026-10-13T19:43:14+00:00"
+updated_at = "2026-10-15T01:22:34+00:00"
 
 ["GOLDTL.0x006b8300"]
 file = "src/client_lighting.h"

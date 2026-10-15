@@ -7,7 +7,7 @@ extern char* g_6b7e98;
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 void __cdecl fcn_00455140(char* src, float* v, float* out);
 float __cdecl fcn_00451380(float* a, float* b);
-void __cdecl fcn_00438cb0(int h, float* v);
+void __cdecl fcn_00438cb0(char* h, float* v);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
 int __cdecl fcn_0040de40(char** a, char** b)

@@ -20,7 +20,7 @@ typedef struct Cell {
 	char pad2[5];
 } Cell;
 
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern void* g_6b5de0;
 extern int g_6b7fac;
 

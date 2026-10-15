@@ -1,7 +1,6 @@
 [project]
 name = "Europa 1400: The Guild"
 jobs = 8
-db_dir = "db"
 output_dir = "output"
 default_target = "server.dll"
 # Unified source tree: src/Develop mirrors D:\Develop. Every target scans

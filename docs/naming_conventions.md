@@ -1892,3 +1892,17 @@ remain access views, without claims about their original semantic types.
 The `objekt` pointer is compared with the disposal object's callback context.
 Per-record cleanup remains separately identified at TL456b10 / Gold45cc80;
 Gold's63-byte body is unsourced, and TL's112-byte body has additional COM cleanup.
+
+### Camera slot and scene-list removal (2026-10-15)
+
+`g_6b8014` remains a provisional identifier for the pointer at TL6b8014 /
+Goldfc2dec. Native selection and camera positioning establish its camera role,
+but not an original global name, storage owner or complete allocation extent.
+The inferred d3_camera.h supplies one `char*` byte-access declaration and the
+selector prototype; it allocates no storage. The native diagnostic is
+`SetCameraToDummy(): Could not find Cameradummy '%s'!` in both clients.
+
+`d3_RemoveObjectFromList` is inferred for TL439b30 / Gold43cab0. Placement in
+d3_object.c is inferred. Both112-byte native bodies remove the object's list
+links, clear the selected camera for kind3 and clear flags0 bit1. This is a
+different operation from the established hierarchy unlink helper.

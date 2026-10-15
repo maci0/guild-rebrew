@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_00438b40(int, void*);
+void __cdecl fcn_00438b40(char*, void*);
 
 void __cdecl fcn_00438ba0(int a1, int a2, int a3, int a4)
 {

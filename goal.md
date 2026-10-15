@@ -88,8 +88,9 @@ accounted text, game reversing progress and stored data verification separately.
 5. When matching measures disagree, compile an isolated raw native link and measure
    the complete image. Run `uv run --frozen scripts/gate.sh` before every commit. Client changes
    also require client-specific validation. Keep failed checks visible.
-6. Refresh coverage through `rebrew coverage build`; never maintain a second
-   progress store. Record only current evidence and concise next steps here.
+6. Read current coverage through `rebrew status` and the live coverage view.
+   Use `rebrew coverage export` for an explicit offline snapshot; never maintain
+   a second progress store. Record current evidence and concise next steps here.
 
 Use the existing evidence homes: names in `docs/naming_conventions.md`; C shapes,
 allocation and exhausted levers in their respective codegen documents; measurement
@@ -108,75 +109,62 @@ explicit authorization; this file does not grant it.
 
 The full source-fidelity/three-image goal remains unfinished. Both raw client
 images, complete data ownership/verification, unknown code ranges and faithful
-recovery of discarded server inputs remain open. Historical byte matches do
-not establish original source or complete client images.
+recovery of discarded server inputs remain open. The next coverage work should
+prioritize newly matched TL bytes and proven library gaps; source consolidation
+and validation must be reported separately from coverage gains.
 
-The fresh pinned gate (`REBREW_DEBUG_INFO=OFF uv run --frozen scripts/gate.sh`)
-passes: all286720 raw server bytes equal the reference,316 game functions and652
-data comparisons pass, with import, relocation, toolchain and Wine checks.
-The plain server and Processor Pack client images are present. All-target lint
-is0/0; all three data inventories have zero conflicts and duplicate definitions.
+The fresh pinned server gate passes (.scratch/goal43/gate-refreshed.log): all
+286720 raw bytes equal the reference, with316 game/652 data comparisons, imports,
+relocations, toolchain and Wine checks. Both required compiler images are present.
+All-target lint is0/0. All three data inventories report zero type conflicts and
+duplicate definitions. Earlier gate failures from generated skill drift remain
+recorded; refreshed instructions pass without weakening the gate.
 
-Scene destruction and unlinking remain shared: both wrappers are32 bytes and
-both unlink helpers are unmasked EXACT154. Draw-data cleanup TL439d80/Gold43cd80
-now shares one C89 d3_CleanupObjectDrawData definition using the canonical types
-and allocator header. Both full137-byte bodies and all six operands agree;
-four shifted-callee controls reject. Keep the counted loop, unconditional
-part-three cleanup, pointer/count reloads across calls and final context clear.
-The source follows native VA order. Name and unit placement remain inferred;
-draw-part providers439c90/43cc90 remain separate and Gold43cc90 is unsourced.
-The two unowned standalone cleanup sources are retired through reviewed rehome.
+TL439b30 / Gold43cab0 now share one inferred d3_RemoveObjectFromList definition
+before draw-data cleanup in d3_object.c. Both complete112-byte bodies and all12
+operand sites agree; ten wrong-binding controls reject. The two standalone
+providers are retired after locked rehome and owner checks. Existing133-byte
+auxiliary cleanup,137-byte draw cleanup,154-byte hierarchy unlink and32-byte
+destruction helpers retain their full native proofs and rejecting controls.
+Their names/placement remain inferred; separate callees/providers stay explicit.
 
-All129 affected comparisons preserve byte results and prior binding proofs;
-Gold cleanup gains a tracked-free binding. All6022 previous strong statuses and
-the identity set remain. Six D3 compiler-backed sizes, extents and offsets are
-unchanged. Receipts: .scratch/goal41/cleanup/{production-native-proof,
-object-native-proof,scope-preservation,preservation}.json,gate-pinned.log,
-lint-final.json,data-*-final.json andtype receipts in .scratch/goal41/.
+A narrow inferred d3_camera.h now supplies the canonical pointer declaration for
+TL6b8014 / Goldfc2dec and the selector. No storage owner or complete allocation
+is inferred. Integer slot declarations, slot punning and four raw loads are
+removed. Selector42/motion54 match completely in both clients with operand and
+negative checks. The motion inputs carry floats, and the actual service's integer
+return remains. Both native camera diagnostics match all53 bytes including NUL.
+The embedded position wrapper4526d0 forwards its missing second argument and
+retains its full23-byte RELOC result.
 
-Auxiliary-record cleanup TL456b80/Gold45ccc0 now shares one typed133-byte
-algorithm. Native draw constructors establish four0x9c/0x80 strides inside the
-existing allocations; D3_OBJECT_AUX_SLOT is bound as a stride view. Its unknown
-words remain access views, without semantic type or independent allocation
-claims. The common zusatz_flag preserves native masks1/4 below unchanged
-darstellungsflag. All six prior sizes/extents/offsets and two new stride layouts
-pass compiler checks. Both full bodies, both call operands, opposite-layout,
-wrong-flag and shifted-callee controls agree/reject as expected. All131 affected
-comparisons preserve prior byte results and binding proofs;6022 strong statuses
-remain. Lint/data checks are clean and the fresh pinned server gate passes.
-Receipts: .scratch/goal42/{production-native-proof,negative-controls,
-scope-preservation,preservation}.json,draw-cleanup-native-proof.json,
-object-native-proof.json,gate.log andtype-*.json.
+All262 scoped comparisons preserve byte results and prior bound operands; eight
+sites gain resolved bindings. Final public-verifier batches refresh101 TL and51
+Gold verdicts with the same statuses and operand evidence. All8376 pre-existing
+identities, native extents and6022 prior EXACT/RELOC statuses remain. Ten reviewed
+type bindings preserve established layouts after compiler checks. Receipts and
+remaining contract details are in docs/TODO.md and.scratch/goal43/.
 
-Upstreamf2dbe476 fixes missing mov-to-memory immediate references in section,
-function and reachable-code scans. Two regression cases fail before;112 focused
-and12032 full-suite tests pass afterward. Native xrefs now find callback stores
-TL5108f7->5107f0 and Gold50d457->50d350. Required commit checks pass. Feature gaps
-remain in upstream docs/IDEAS-GUILD.md; bugs must be fixed directly upstream.
-Receipts: .scratch/goal41/upstream/.
+This checkpoint adds zero newly matched TL game bytes. The two user reports both
+contained691740 matched game bytes/3567 functions; their seven-byte account
+increase was padding. The library audit adds one target-scoped56-byte identity,
+c_D3DXPlaneFromPointNormal at TL5edf50: its entire body equals stock D3DX8 without
+masking, and altered-byte/shifted-start controls reject. Actual raw-link provider
+selection remains unresolved. Library totals are1464 functions/388459 bytes;
+accounted text is1113760/2491370 bytes, still44.7% when rounded. Most other focused
+DirectX hits already lie inside credited library spans and must not be counted
+twice. The full shared7102296-signature scan is still running; its candidates
+need archive/callee and span checks before classification. The shared/local
+signature discovery gap is recorded in upstream docs/IDEAS-GUILD.md.
 
-Next: integrate the evidenced112-byte list-removal pair, then reconcile the
-traversal twins and remaining contracts/providers before d3_DisposeObject. The
-unadopted list-removal candidate already matches both complete bodies with all12
-global/table operands resolved and ten wrong-binding controls rejected
-(.scratch/goal42/remove-list-native-proof.json). The attested disposal
-name has a void(D3_OBJECT*) contract; its placement is inferred. Scratch bodies
-match full450/637 bytes but are not adopted: their three separate Gold globals
-contradict native evidence for one fb9900 record. Use an extern prefix view with
-no allocation or complete-extent claim; full owner/extent remain unknown.
-Gold draw-data+968 caches kontext and is pointer-valued. Constructor, assignment
-and callback evidence supports draw-data offset0 as a nullable one-object void
-callback, while the cleanup bit and auxiliary strides are now modeled. Preserve total
-bit widths and all existing layouts. Reconcile assignment/caller declarations
-and prove all native operands before adoption. Reviews and exact evidence are
-saved in .scratch/goal41/committee-*.md andHANDOFF.md.
-
-Preserve prior chain, building destructor, lighting, display-counter and inventory
-repairs; detailed checkpoints are in docs/goal-history.md anddocs/TODO.md. Do not
-repeat exhausted animation/production probes without new evidence. Keep the
-attested cm_ExProdObjekt unit: its earlier split changed30085 raw bytes and32
-data rows. Continue native source-unit/type/data/provider work and both raw
-client builds; the server gate alone cannot complete this goal.
+The camera/client interface migration is deliberately unfinished. Reviewed
+float-pointer position/rotation candidates match83/184 bytes in scratch; do not
+mistake rotation's eight alignment NOPs for missing executable code. Scalar
+wrappers, constructor/resource-name transports and connected declarations still
+need measured reconciliation. Traversal and disposal integration remain open.
+Do not describe byte agreement as complete C contract repair. Disposal's Gold
+fb9900 state is one record with unknown full extent/owner, not three allocations.
+Prior chain, building, lighting and inventory evidence remains in docs/TODO.md
+anddocs/goal-history.md. Do not repeat exhausted probes without new evidence.
 
 ## History
 

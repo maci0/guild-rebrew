@@ -2,9 +2,9 @@
 
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 int __cdecl fcn_004488e0(char* name, int a, int b);
-void __cdecl fcn_00438b40(int h, float* pos);
+void __cdecl fcn_00438b40(char* h, float* pos);
 void __cdecl fcn_00455240(char* src, float* out);
-void __cdecl fcn_00438cb0(int h, float* v);
+void __cdecl fcn_00438cb0(char* h, float* v);
 
 int __cdecl fcn_0040e8b0(char** name, char** a)
 {

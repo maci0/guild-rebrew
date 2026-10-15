@@ -5,7 +5,7 @@
 #define MAXV(a, b) ((a) > (b) ? (a) : (b))
 #define MINV(a, b) ((b) < (a) ? (b) : (a))
 
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern float g_662d40[3];
 extern float g_6a2558;
 extern float g_6a2560;

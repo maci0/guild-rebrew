@@ -5,7 +5,7 @@ extern char* g_7746c4;
 extern int g_774650;
 extern int g_774658;
 extern int g_774654;
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern int g_774688;
 extern int g_77468c;
 extern int g_7747c8;
@@ -15,8 +15,8 @@ extern char g_6a30d4[];
 
 short* __cdecl fcn_00502cd0(int, int, int, int);
 short* __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_00438b40(int, char*);
-void __cdecl fcn_00438cb0(int, char*);
+void __cdecl fcn_00438b40(char*, char*);
+void __cdecl fcn_00438cb0(char*, char*);
 void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
 
 void __cdecl fcn_005a7320(int n, short v)

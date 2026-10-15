@@ -55,7 +55,7 @@ typedef struct {
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 extern int g_6b8010;
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern unsigned short g_774970;
 extern char g_773dd4;
 extern int g_67a370;

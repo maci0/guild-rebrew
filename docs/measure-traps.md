@@ -3244,3 +3244,14 @@ used a180-second execution budget and kept those failed receipts. Neither
 failure was a measured byte mismatch or a reason to alter STATUS.
 Receipts: .scratch/goal42/prove-reserved-name.log,candidate-*.json and
 prove-candidate.log.
+
+### Keep rotation's executable extent separate from alignment (2026-10-15)
+
+TL438cb0 and Gold43b860 each contain184 executable bytes, followed by eight
+NOPs before the next function. The existing managed extents are184. An isolated
+probe without a managed identity used the192-byte discovery span and reported
+SIZE_MISMATCH despite matching all184 emitted bytes and all eight operands.
+That result does not justify adding C statements, changing the managed extent
+or inventing padding. The float-pointer candidates remain unadopted; production
+integration and their connected declaration repairs still require measurement.
+Receipts: .scratch/goal43/vector-rotation-retry.json andvector_00438cb0.c.

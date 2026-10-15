@@ -1,7 +1,7 @@
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 
 
-void __cdecl fcn_004557c0(void*, int, int, void*);
+void __cdecl fcn_004557c0(void*, char*, int, void*);
 void __cdecl fcn_004519d0(void*, int);
 
 void __cdecl fcn_00455240(void* a1, int a2)

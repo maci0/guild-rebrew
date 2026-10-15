@@ -51,7 +51,7 @@ typedef struct {
 } LoadFlags;
 
 extern int g_6b7fac;
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern char g_677618[];
 extern char g_677604[];
 extern char g_6775f4[];

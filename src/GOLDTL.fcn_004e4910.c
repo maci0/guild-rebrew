@@ -4,7 +4,7 @@ extern int g_68bfc4;
 extern int g_67a370;
 extern int g_6791d0;
 extern int g_68bfb8;
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern int g_6b5cc0;
 extern int g_6b5cbc;
 
@@ -16,7 +16,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_004e4640(void);
 void __cdecl fcn_004e4680(void);
 void __cdecl gv_Free3Fields(int);
-void __cdecl fcn_00433780(int);
+void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00442e30(void);
 
 /* ADDRESS: GOLDTL 0x004e4910 */

@@ -1,16 +1,16 @@
 
 
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern char g_1042340[];
 extern char* g_1042538;
 extern int g_67a370;
 
-void __cdecl fcn_00439c60(char*);
+
 void __cdecl fcn_00438cb0(char*, char*);
 
 void __cdecl fcn_00439aa0(char* o)
 {
-	if (*(int*) (o + 0x218) == 3 && (*(char**)&g_6b8014) == 0) {
+	if (*(int*) (o + 0x218) == 3 && g_6b8014 == 0) {
 		fcn_00439c60(o);
 		fcn_00438cb0(o, o + 0x84);
 	}

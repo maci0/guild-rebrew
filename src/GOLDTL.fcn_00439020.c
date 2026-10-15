@@ -39,7 +39,7 @@ extern char g_1042340[];
 extern unsigned int g_14ce7e0;
 extern char* g_1043254;
 extern char* g_1042538;
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern char* g_1042c38;
 extern char g_1042d00[];
 extern int g_1042ef8;

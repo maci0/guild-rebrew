@@ -14,7 +14,7 @@ extern int g_6b5cbc;
 extern float g_14ce880[3];
 extern float g_7e3a40[3];
 extern float g_7e3a50[3];
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern int g_774650;
 extern int g_774654;
 extern int g_774658;

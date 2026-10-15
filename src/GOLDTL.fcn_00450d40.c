@@ -9,11 +9,11 @@ extern int g_6b86f4;
 extern float g_662d40[3];
 
 unsigned char __cdecl fcn_00438450(char* o);
-void __cdecl fcn_00455280(char* o, int a, float* v, char* m);
-void __cdecl fcn_00455450(char* o, int a, char* v, char* m);
+void __cdecl fcn_00455280(char* o, char* a, float* v, char* m);
+void __cdecl fcn_00455450(char* o, char* a, char* v, char* m);
 
 /* ADDRESS: GOLDTL 0x00450d40 */
-char __cdecl fcn_00450d40(char* o, int a)
+char __cdecl fcn_00450d40(char* o, char* a)
 {
 	if (*(int*) (o + 0x218) == 4) {
 		if (!(fcn_00438450(o) & 0x40)) {

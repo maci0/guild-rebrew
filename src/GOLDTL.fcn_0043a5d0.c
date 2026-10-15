@@ -2,9 +2,9 @@
 
 typedef float* (__cdecl* fcn_0043a5d0_f)(char*, char*, char*);
 
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 
-void __cdecl fcn_00438100(char*, int, int);
+void __cdecl fcn_00438100(char*, char*, int);
 
 char __cdecl fcn_0043a5d0(char* o, float* bb)
 {

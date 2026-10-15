@@ -4,8 +4,8 @@
 #define MIN(a, b) ((a) > (b) ? (b) : (a))
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 
-extern int g_6b8014;
-void __cdecl fcn_00438100(char* e, int cam, int f);
+#include "Develop/Units/d3/d3_camera.h"
+void __cdecl fcn_00438100(char* e, char* cam, int f);
 char* __cdecl fcn_00455910(char* e, int h, char* p);
 
 int __cdecl fcn_004133e0(char* e, float* lo, float* hi)

@@ -17,7 +17,7 @@ typedef struct {
 	char pad0[0x21c];
 } Rec;
 
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern int g_6b7fc0;
 extern int g_7e4300;
 extern int g_6a99e8;

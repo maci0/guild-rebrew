@@ -6,7 +6,7 @@ extern float g_662d40[3];
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 void __cdecl fcn_00455140(char* src, float* v, float* out);
 float __cdecl fcn_00451380(float* a, float* b);
-void __cdecl fcn_00438cb0(int h, float* v);
+void __cdecl fcn_00438cb0(char* h, float* v);
 
 void __cdecl fcn_00402b00(char* obj, char* src)
 {

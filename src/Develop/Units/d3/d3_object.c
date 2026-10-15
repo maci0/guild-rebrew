@@ -1,5 +1,6 @@
 #include "d3_object.h"
 #include "../m_alloc/m_alloc.h"
+#include "d3_camera.h"
 
 #ifdef REBREW_GOLD
 void __cdecl fcn_0043cc90(char*);
@@ -12,6 +13,28 @@ int __cdecl fcn_0043c7a0(int);
 #else
 void __cdecl fcn_004398d0(char*);
 #endif
+
+/* Inferred name and placement; this removes a list node, not its hierarchy. */
+void __cdecl d3_RemoveObjectFromList(D3_OBJECT* object)
+{
+    switch (object->art) {
+    case 3:
+        if (g_6b8014 == (char*) object) {
+            g_6b8014 = 0;
+        }
+    case 1:
+    case 2:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+        object->naechstes->voriges = object->voriges;
+        object->voriges->naechstes = object->naechstes;
+        break;
+    }
+    object->flags0 &= ~2;
+}
 
 /* Inferred name and placement; native draw-part providers remain separate. */
 void __cdecl d3_CleanupObjectDrawData(D3_OBJECT* object)

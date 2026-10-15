@@ -2,10 +2,10 @@
 
 extern int g_6b5cc0;
 extern int g_6b5cbc;
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern char* g_6b5cf8;
 extern int g_67a370;
-void __cdecl fcn_00433780(int);
+void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00418860(char*);
 
 void __cdecl fcn_00413380(void)

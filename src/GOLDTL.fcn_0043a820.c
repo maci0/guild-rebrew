@@ -45,10 +45,10 @@ struct Obj043a820 {
 };
 
 
-void __cdecl fcn_00455450(Obj043a820* o, int arg, int* p, Vec043a820* out);
-void __cdecl fcn_00438100(Obj043a820* o, int arg, int z);
+void __cdecl fcn_00455450(Obj043a820* o, char* arg, int* p, Vec043a820* out);
+void __cdecl fcn_00438100(Obj043a820* o, char* arg, int z);
 
-char __cdecl fcn_0043a820(Obj043a820* o, int arg, Vec043a820* out, float* radius)
+char __cdecl fcn_0043a820(Obj043a820* o, char* arg, Vec043a820* out, float* radius)
 {
 	Ctx043a820* ctx;
 	Box043a820* b;

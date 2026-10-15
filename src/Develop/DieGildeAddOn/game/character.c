@@ -37,7 +37,7 @@ extern float g_6628a8;
 #include "../../Units/d3/d3_animation.h"
 
 extern int g_6b5c34;
-extern char* g_6b8014;
+#include "../../Units/d3/d3_camera.h"
 extern int g_67530c;
 extern int g_675310;
 extern char g_10432c0[];

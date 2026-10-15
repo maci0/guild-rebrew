@@ -84,6 +84,7 @@ typedef struct D3_OBJECT {
 } D3_OBJECT;
 
 void __cdecl d3_UnlinkObject(D3_OBJECT* object);
+void __cdecl d3_RemoveObjectFromList(D3_OBJECT* object);
 char __cdecl d3_DestroyObject(D3_OBJECT* object);
 void __cdecl d3_CleanupObjectDrawData(D3_OBJECT* object);
 void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object);

@@ -2,8 +2,8 @@
 
 
 void __cdecl fcn_00445760(int, int, int, void*, void*);
-void __cdecl fcn_00438b40(int, void*);
-void __cdecl fcn_00438cb0(int, void*);
+void __cdecl fcn_00438b40(char*, void*);
+void __cdecl fcn_00438cb0(char*, void*);
 
 void __cdecl fcn_004458a0(int a1, int a2, int a3)
 {

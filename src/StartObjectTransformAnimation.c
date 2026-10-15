@@ -27,7 +27,7 @@ typedef struct {
 extern int g_6b5cbc;
 /* ADDRESS: GOLDTL 0x006b5cc0 */
 extern int g_6b5cc0;
-extern char* g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 int __cdecl fcn_004339e0(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
 
 /* ADDRESS: GOLDTL 0x00412d30 */

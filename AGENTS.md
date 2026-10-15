@@ -87,7 +87,7 @@ control verbosity/version. Read each operation's help for its write behavior;
 | `rebrew match batch --near-miss --threshold 5` | Batch GA on NEAR_MATCHING functions with small deltas (Δ ≤ threshold) |
 | `rebrew source rename <old> <new>` | Rename a function, global (`--data`), type (`--type`) or member (`--field`) everywhere; `MODULE.0xVA` picks one identity, `--shared-definition` acknowledges only rows for the selected definition; `--all-modules` also selects independent definitions |
 | `rebrew verify --json` | Bulk verify all reversed files |
-| `rebrew lint --json` | Validate source bindings and the stores: invalid source tags (E024), stale addresses (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), data rows whose size disagrees with the owning definition (W037) or overlaps another row (W038), coverage-store hygiene — leftover `coverage.db`/grid JSON/CSV and documents the dashboards cannot serve (W032) |
+| `rebrew lint --json` | Validate source bindings and the stores: invalid source tags (E024), stale addresses (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), data rows whose size disagrees with the owning definition (W037) or overlaps another row (W038) |
 | `rebrew data list --json` | Inventory globals in .data/.rdata/.bss |
 | `rebrew data move 0xOLD 0xNEW` | Re-address a data row; drops its verdict, keeps verification history |
 | `rebrew types check` | Check layouts and stale type bindings; `--compile` repeats target sizeof/offsetof assertions |
@@ -100,7 +100,7 @@ control verbosity/version. Read each operation's help for its write behavior;
 | `rebrew verify --text --raw-link --built build/<target>` | Check .text placement; record RELOC functions whose raw-link bytes equal the reference as linked EXACT |
 | `rebrew source graph --format summary` | Dependency graph stats and blockers |
 | `rebrew coverage catalog --json` | Catalog summary (no artifact of its own) |
-| `rebrew coverage build --json` | Write `db/coverage-<target>.toml`, the progress document the dashboards read |
+| `rebrew coverage export --output snapshots/ --json` | Export optional portable snapshots for offline viewing |
 | `rebrew status --json` | Separate file agreement, accounted .text, and stored data verification; counts and bytes reconcile |
 | `rebrew library inspect <archive> --defines <symbol>` | Find native archive members and their code/data definitions |
 | `rebrew library vendor <manifest>...` | Verify pristine source pins plus patches; `--apply` regenerates outputs |
@@ -144,12 +144,13 @@ Metadata-only bindings remain valid without address comments. Never hand-edit
 stores or STATUS; use the locked metadata owner APIs and comparison commands.
 
 > [!NOTE]
-> **Progress lives in build output, not in the tree.** `rebrew coverage build` writes one
-> clear-text `db/coverage-<target>.toml` per target (functions, globals, verify rows,
-> status history); the dashboards and the sibling `recovery` UI read those documents and
-> nothing else. They are gitignored build output — regenerate them, never hand-edit them —
-> and an older `db/coverage.db`, `db/data_<target>.json` or `db/*.csv` is stale: no reader
-> globs it any more, so delete it (`rebrew lint` warns, W032).
+> **Dashboards read the project directly.** Run `rebrew coverage serve` or
+> `recoverage serve` inside the project. Their views come from canonical metadata,
+> binaries, sources and inventory; no generated coverage directory is required.
+> `rebrew coverage export --output snapshots/` creates optional portable snapshots.
+> Status transitions live in function metadata. Before retiring old exports, preview
+> and run `rebrew coverage import-history --snapshots db/ --dry-run`, then repeat
+> without `--dry-run`. Keep configured inventory files even if they live under `db/`.
 
 > [!CAUTION]
 > **Never manually edit `rebrew-functions.toml` or `rebrew-data.toml`.** They are managed

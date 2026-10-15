@@ -1,4 +1,4 @@
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 /* ADDRESS: GOLDTL 0x0052d7c0 */
 
 void __cdecl fcn_0052d7c0(int* src)

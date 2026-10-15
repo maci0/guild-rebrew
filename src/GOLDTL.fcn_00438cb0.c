@@ -2,7 +2,7 @@
 
 
 extern int g_67a370;
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 
 void __cdecl fcn_00438ac0(char*, int);
 void __cdecl fcn_00438af0(unsigned char);

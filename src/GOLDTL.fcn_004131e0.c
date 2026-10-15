@@ -1,4 +1,4 @@
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 
 float* __stdcall fcn_005ebbb9(float* out, const float* in);
 

@@ -1,6 +1,6 @@
 
 
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern float g_1052bc0;
 extern float g_1052bc8;
 extern float g_10432a4;

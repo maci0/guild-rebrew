@@ -25,7 +25,7 @@ typedef struct {
 } View;
 
 extern int g_6b8010;
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern float g_774690;
 extern float g_774694;
 extern float g_6a2558;
@@ -52,22 +52,22 @@ void __cdecl fcn_0052ac60(float t)
 	if (g_6b8010 == 0) {
 		g_774690 = t;
 		g_774694 = t;
-		h = fcn_00413d10(&(*(View**)&g_6b8014)->pos);
-		p.x = (*(View**)&g_6b8014)->pos.x;
-		p.y = (*(View**)&g_6b8014)->pos.y;
-		p.z = (*(View**)&g_6b8014)->pos.z;
+		h = fcn_00413d10(&((View*)g_6b8014)->pos);
+		p.x = ((View*)g_6b8014)->pos.x;
+		p.y = ((View*)g_6b8014)->pos.y;
+		p.z = ((View*)g_6b8014)->pos.z;
 		p.y = (g_6a2560 - g_6a2558) * g_774690 + g_6a2558 + h;
-		fcn_00438b40((*(View**)&g_6b8014), &p);
-		r.x = (*(View**)&g_6b8014)->rot.x;
-		r.y = (*(View**)&g_6b8014)->rot.y;
-		r.z = (*(View**)&g_6b8014)->rot.z;
+		fcn_00438b40(((View*)g_6b8014), &p);
+		r.x = ((View*)g_6b8014)->rot.x;
+		r.y = ((View*)g_6b8014)->rot.y;
+		r.z = ((View*)g_6b8014)->rot.z;
 		r.x = (g_6a2564 - g_6a255c) * g_774694 + g_6a255c;
-		fcn_00438cb0((*(View**)&g_6b8014), &r);
-		(*(float*)g_7e3a50) = (*(View**)&g_6b8014)->rot.x;
-		g_7e3a54 = (*(View**)&g_6b8014)->rot.y;
-		g_7e3a58 = (*(View**)&g_6b8014)->rot.z;
-		(*(float*)g_7e3a40) = (*(View**)&g_6b8014)->pos.x;
-		g_7e3a44 = (*(View**)&g_6b8014)->pos.y;
-		g_7e3a48 = (*(View**)&g_6b8014)->pos.z;
+		fcn_00438cb0(((View*)g_6b8014), &r);
+		(*(float*)g_7e3a50) = ((View*)g_6b8014)->rot.x;
+		g_7e3a54 = ((View*)g_6b8014)->rot.y;
+		g_7e3a58 = ((View*)g_6b8014)->rot.z;
+		(*(float*)g_7e3a40) = ((View*)g_6b8014)->pos.x;
+		g_7e3a44 = ((View*)g_6b8014)->pos.y;
+		g_7e3a48 = ((View*)g_6b8014)->pos.z;
 	}
 }

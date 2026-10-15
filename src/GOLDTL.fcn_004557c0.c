@@ -4,11 +4,11 @@ typedef struct
 } fcn_004557c0_Mat;
 // SIZE 0x40
 
-void __cdecl fcn_00455700(int a, int b, fcn_004557c0_Mat* m, fcn_004557c0_Mat* out);
+void __cdecl fcn_00455700(char* a, int b, fcn_004557c0_Mat* m, fcn_004557c0_Mat* out);
 fcn_004557c0_Mat* __stdcall fcn_005eb970(fcn_004557c0_Mat* out, fcn_004557c0_Mat* a, fcn_004557c0_Mat* b);
 
 /* ADDRESS: GOLDTL 0x004557c0 */
-void __cdecl fcn_004557c0(int a, char* o, int b, fcn_004557c0_Mat* out)
+void __cdecl fcn_004557c0(char* a, char* o, int b, fcn_004557c0_Mat* out)
 {
 	fcn_004557c0_Mat id;
 	fcn_004557c0_Mat tmp;

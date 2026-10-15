@@ -19,7 +19,7 @@ typedef struct Obj0445760 {
 } Obj0445760;
 
 void __cdecl fcn_004519d0(void* a, int b);
-void __cdecl fcn_004557c0(Obj0445760* o, int a, int b, Mat0445760* out);
+void __cdecl fcn_004557c0(Obj0445760* o, char* a, int b, Mat0445760* out);
 Mat0445760* __stdcall fcn_005ebea2(Mat0445760* out, float* det, Mat0445760* in);
 Mat0445760* __stdcall fcn_005ebbb9(Mat0445760* out, Mat0445760* in);
 void* __stdcall fcn_005eb970(void* out, void* in, Mat0445760* m);

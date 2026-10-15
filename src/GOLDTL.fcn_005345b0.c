@@ -40,12 +40,12 @@ extern int g_1042578;
 extern int g_104257c;
 extern unsigned short g_774970;
 extern int g_67a370;
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern char g_1052be0[];
 extern float g_1052c00[16];
 
 int __cdecl fcn_00506380(int, int, int, char*);
-void __cdecl fcn_00438100(char*, int, int);
+void __cdecl fcn_00438100(char*, char*, int);
 Vec3* __stdcall fcn_005eb2e4(Vec3*, Vec3*, char*, Mat4*, Mat4*, Mat4*);
 
 void __cdecl fcn_005345b0(void)

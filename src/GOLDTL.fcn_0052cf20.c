@@ -43,7 +43,7 @@ typedef struct House {
 } House;
 // SIZE 0x21c
 
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern float g_662d40[3];
 extern float g_774690;
 extern float g_6a2558;

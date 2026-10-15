@@ -53,14 +53,14 @@ struct Device {
 	DeviceVtbl* vtbl;
 };
 
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern float g_1040cc0[16];
 extern float g_1040c80[16];
 extern void* g_6b5de0;
 extern int g_67a370;
 extern char g_6b8000;
 
-void __cdecl fcn_00438100(Ent*, int, int);
+void __cdecl fcn_00438100(Ent*, char*, int);
 Mat* __stdcall fcn_005ebea2(Mat*, float*, Mat*);
 Mat* __stdcall fcn_005ebbb9(Mat*, Mat*);
 Plane* __stdcall fcn_005ee04a(Plane*, Plane*, Mat*);

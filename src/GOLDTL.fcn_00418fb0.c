@@ -1,6 +1,6 @@
 #include <math.h>
 
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern float g_662d40[3];
 
 float* __stdcall fcn_005ebbb9(float*, const float*);

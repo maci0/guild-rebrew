@@ -1,4 +1,4 @@
-extern int g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 #include <math.h>
 
 extern float g_662d40[3];

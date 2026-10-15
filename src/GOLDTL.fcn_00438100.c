@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_004557c0(char* obj, int a, int b, char* m);
+void __cdecl fcn_004557c0(char* obj, char* a, int b, char* m);
 float* __stdcall fcn_005eb970(float* out, const float* a, const float* b);
 
 void __cdecl fcn_00438100(char* obj, char* cam, char force)

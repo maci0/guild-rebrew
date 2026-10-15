@@ -46,7 +46,7 @@ struct Ent {
 int __cdecl fcn_00445600(Ent*, int, Ent*, int);
 void __cdecl fcn_00455350(Ent*, void*, Vec4*);
 void __cdecl fcn_00438cb0(Ent*, void*);
-void __cdecl fcn_004557c0(Ent*, int, int, Mat*);
+void __cdecl fcn_004557c0(Ent*, char*, int, Mat*);
 
 void __cdecl fcn_00439aa0(Ent*);
 void __cdecl fcn_00439c00(Ent*, Ent*);

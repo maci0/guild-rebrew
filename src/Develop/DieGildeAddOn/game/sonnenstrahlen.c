@@ -23,7 +23,7 @@ void __cdecl StopSonnenstrahlen(char* objekt, int phase)
 }
 void __cdecl fcn_00418860(char*);
 
-extern char* g_6b8014;
+#include "../../Units/d3/d3_camera.h"
 extern char* g_6b5cf8;
 
 void __cdecl StartSonnenstrahlen(char* unused)

@@ -5,7 +5,7 @@
 extern float g_10432a4;
 extern float g_1042584;
 
-char __cdecl fcn_0043a820(char*, int, float*, float*);
+char __cdecl fcn_0043a820(char*, char*, float*, float*);
 
 char __cdecl fcn_00443b00(char* e, char* ctx)
 {
@@ -22,13 +22,13 @@ char __cdecl fcn_00443b00(char* e, char* ctx)
 		return 1;
 	}
 	d = *(char**) (e + 0x1ec);
-	if (d != 0 && (d[0x163d] & 0x40) != 0 && *(int*) (d + 4) == *(int*) (ctx + 0x48)) {
+	if (d != 0 && (d[0x163d] & 0x40) != 0 && *(char**) (d + 4) == *(char**) (ctx + 0x48)) {
 		return 1;
 	}
 	if (*(int*) (e + 0x218) == 4 && d == 0) {
 		return 1;
 	}
-	if (fcn_0043a820(e, *(int*) (ctx + 0x48), v, &w)) {
+	if (fcn_0043a820(e, *(char**) (ctx + 0x48), v, &w)) {
 		inv = 1.0f / v[2];
 		slot = (float*) (ctx + *(int*) (e + 0x218) * 8);
 		w = g_10432a4 * inv * w;

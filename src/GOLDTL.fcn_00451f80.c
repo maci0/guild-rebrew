@@ -42,7 +42,7 @@ typedef struct Node_451f80 {
 } Node_451f80;
 // SIZE 0x2c
 
-extern char* g_6b8014;
+#include "Develop/Units/d3/d3_camera.h"
 extern Dev_451f80* g_6b5de0;
 extern int g_6b8064;
 extern Node_451f80* g_6b8068;
