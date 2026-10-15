@@ -319,6 +319,13 @@ legacy interpreter probes, stand-in dependencies and obsolete host tool links.
 Keep local rules in the preserved project-rules section before refreshing
 generated instructions (see the init skill).
 
+Reviewed source claim changes use `rebrew source binding retire` / `rebind`.
+Preview with `--dry-run --json`, then guard apply with `--expected-digest`.
+Native extent and historical evidence survive; replacement source earns a fresh
+verdict. Generic setters cannot edit `binding_history`. Historical ADDRESS
+comments cannot reactivate retired claims. Use `rebrew binary repair-extents`
+for reviewed selected native inventory boundaries, separately from source SIZE.
+
 <!-- rebrew: project rules below, kept by --refresh-agents -->
 
 ## Upstream Rebrew feature gaps and bugs

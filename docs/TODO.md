@@ -53465,3 +53465,36 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   crt-copy-caller.json, status-final-tl.json, scope-preservation.json and
   gate-after-flirt.log. Upstream regression/commit/push logs are under
   /tmp/rebrew-flirt-dedup-*. Full client raw images and the main goal remain open.
+
+### 2026-10-15: protection-helper extent correction and queue-loader probe
+
+- The existing shared protection helper at TL41d500 / Gold421f00 already emits
+  the complete235-byte native body. Its old240-byte SIZE included five trailing
+  alignment NOPs. Supported test --fix-sizes records RELOC235 in both targets.
+  Independent full-body relocation resolves all seven operands per target,
+  including the actual VirtualQuery import and private switch-table labels;
+  every individually shifted binding rejects. No C body or padding is added.
+- This recovers235 matched TL game bytes and235 Gold bytes. All8379 identities
+  and6022 prior strong statuses survive; strong statuses become6024. Only the
+  two reviewed extents change; data/type stores and source bodies are unchanged.
+  The server gate also refreshes316 verification records after upstream compiler
+  fingerprint changes; native identities, source hashes and final statuses remain.
+  TL matched game bytes become691975; accounted text is1115642/2491370,
+  still displayed44.7%. Library totals remain1466 functions/390101 bytes.
+- Unregistered TL5252d0 is a735-byte queue deserializer followed by one NOP.
+  Kuna/native analysis establishes packed153-byte nodes, index-to-pointer link
+  conversion, ten-byte status cells and the signed version threshold1003c.
+  Ordinary C candidates remain scratch-only: indexed/typed variants emit735
+  bytes but do not match the native induction base or failure-join placement.
+  The completed192-combination quick flag sweep finds no exact result and
+  reports flag_sensitive=false. Do not repeat those shapes/flags without new
+  evidence. Pool/head declarations, native unit placement and a Gold counterpart
+  still need reconciliation before any source registration or progress claim.
+- Receipts: .scratch/goal44/protection-full-proof.json, protect-{tl,gold}-fixed.json,
+  scope-preservation.json, load-queues-native.json, load-flags-quick.json and
+  load-probe/report.json. These object proofs do not establish raw client links.
+- Final gate-refreshed.log passes full286720-byte server identity,316/316 game
+  and652/652 data comparisons, imports, relocations, toolchains and Wine. Fresh
+  all-target lint is0/0; all three data inventories have zero type conflicts and
+  duplicate definitions. The first gate failed only generated-instruction drift;
+  supported init --refresh-agents repairs it without weakening the gate.

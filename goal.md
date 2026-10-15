@@ -185,6 +185,20 @@ fb9900 state is one record with unknown full extent/owner, not three allocations
 Prior chain, building, lighting and inventory evidence remains in docs/TODO.md
 anddocs/goal-history.md. Do not repeat exhausted probes without new evidence.
 
+The next extent audit recovers the existing235-byte protection helper in both
+clients: TL41d500 / Gold421f00 had included five trailing alignment NOPs in SIZE.
+Supported tests now record RELOC; complete unmasked operand resolution and
+rejecting controls independently pass. All8379 identities and6022 prior strong
+statuses remain; strong statuses become6024. Newly matched game bytes are235
+per client, with no new C implementation. TL game matches total691975 bytes;
+accounted text becomes1115642/2491370 and still displays44.7%. Data/type stores
+are unchanged. The larger735-byte TL5252d0 queue-loader experiment remains
+unmatched, unregistered scratch work; its completed quick flag sweep finds no
+exact result. Details and exhausted variants are in docs/TODO.md.
+The fresh .scratch/goal44/gate-refreshed.log passes full server identity,
+316/316 game and652/652 data checks. All-target lint is0/0 and all three data
+inventories have no type conflicts or duplicate definitions.
+
 ## History
 
 [Archived checkpoints](docs/goal-history.md) preserve the previous goal file in
