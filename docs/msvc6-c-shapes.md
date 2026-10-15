@@ -11700,3 +11700,48 @@ Its declaration reconciliation preserves all 799 old compiled bytes and every
 fixup. Do not claim the unchanged weak result as a new match. Receipts and
 replays: `.scratch/goal57/{native-proof,transfer-preservation}.json`, native/Kuna
 inputs, formatter evidence and the complete production comparison logs.
+
+
+### Court decision source and stateful sum (2026-10-16)
+
+TL `0x4df1b0` / Gold `0x4dd960` are complete native 2,536-/2,528-byte bodies,
+including seven-entry switch tables. Their physical case order is 0,1,2,3,6,4,5.
+Numeric source ordering initially emitted2,556 TL bytes and changed shared exits;
+following the actual native order removes that mismatch. Moving `i = 0` before
+the case-5 text-ID assignment closes six scheduling bytes at2121..2126. No
+further scheduling experiment is warranted without new evidence.
+
+The five-byte-near scratch expression is INCORRECT: it evaluates the OTHER
+entity query before OWN, whereas native code evaluates OWN then OTHER. Both
+queries use gm_WalkEntityChain, which changes shared query/iterator state.
+C89 does not sequence the operands of addition. Reversing or parenthesizing the
+combined calls did not enforce ordering in the measured compiler. The native
+stateful control with IDs17/29 observes native trace17,29 versus candidate29,17
+and different final query state. Never adopt that candidate or report its
+2531/2536 TL and2523/2528 Gold byte scores as a faithful implementation.
+
+The adopted ordinary C explicitly sequences the queries before division by2000.
+Native saves the first result in EBP and adds the second directly into EBP;
+current correct C copies the second result to ECX and adds/multiplies there,
+adding two executable bytes. Alignment absorbs the size in TL; Gold grows four
+bytes overall. The internal compiler cause and original C spelling remain
+unproved. Extra temporaries, +=, reversed saved-value sums, combined-call forms,
+positive/guarded exits, loop-result locals and one outer-comma control are
+measured and retired. No flag/declaration sweep, assembly, padding or speculative
+provider readdressing is justified. Original TU context remains open.
+
+All seven action cases retain their different participant tests/defaults, timeout
+before input handling, case-3 notification, case-2 unmatched-button waiting and
+case-5 unconditional exit-flag store after a valid input. Disabling a case-5
+button does not erase its saved handle. Complete native/C x86/VEX traces pass
+186 bounded service-mock cases per client, including unsupported tags -1/7,
+matching/nonmatching participants, five input selectors, timeout paths and all
+three case-5 buttons. This is bounded evidence, not universal equivalence or a
+byte verdict. The production compare remains STUB (TL2536) / SIZE_MISMATCH
+(Gold2532/native2528). Keep its explicit blocker and correctly ordered source.
+
+Receipts/replays: `.scratch/goal58/{decision-boundaries,decision-traces,
+query-order-control,decision-production-*,decision-outer-comma-*}.json` and their
+scripts/logs. Complete literal checking on the rejected aligned candidate finds
+seven operand sites for two strings. Its relocated code differs at721/729/732/
+740/747; that independent control is not proof of production raw-link providers.

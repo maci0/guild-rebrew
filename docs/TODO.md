@@ -54566,3 +54566,68 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   repositories retain only main. All23 unrelated upstream accounting edits are
   preserved unstaged, including reversible CHANGELOG merging; do not discard
   or commit them. The full three-image/source-fidelity goal remains ACTIVE.
+
+
+### Goal58 — faithful court decisions, matching unfinished (2026-10-16)
+
+- Reconstructed the seven-case court decision callback as one shared C89 body,
+  TL4df1b0/Gold4dd960. The actual second-slot dispatcher passes participant/action
+  pointers; the canonical two-argument declaration replaces the registrar's
+  incorrect void(void). Names and standalone source placement remain inferred.
+  Gold-only expressions preserve choice0 versus TL2 and signed16-bit window+8
+  versus TL's32-bit +12. No new types, storage, compiler flags or assembly.
+- The production source preserves OWN query before OTHER, then signed sum/2000
+  before rate multiplication. Both real query calls change global iterator state.
+  All372 bounded native/C x86/VEX service-trace cases pass (186 per client),
+  covering all seven cases, default tags -1/7, participant gates, five selectors,
+  timers and button/disable paths. Full call arguments/order, result/float fields,
+  exit flag and final query state agree within the fixture. This is not universal
+  equivalence, PROVEN, client raw-link proof or new matched-byte coverage.
+- Rejected scratch near variants reach2531/2536 and2523/2528 by reversing those
+  stateful calls. An independent native control with IDs17/29 demonstrates the
+  wrong call order and final query state. Source with explicit sequencing emits
+  an extra two-byte ECX copy before the sum/divide. Native case order0,1,2,3,6,4,5
+  and final-loop initialization scheduling are now understood. Bounded source
+  shapes and the final outer-comma control do not fix the remaining allocation.
+  Stop this arithmetic search without new evidence; preserve the correctly
+  ordered source and explicit STUB/SIZE_MISMATCH blockers.
+- Admitted two missed native entries through digest-guarded CLI plans: TL2536
+  includes finalRET4dfb78/internal3-byte alignment/table4dfb7c..4dfb97, then8NOPs
+  before4dfba0. Gold2528 includes RET4de322/internalNOP/table4de324..4de33f,
+  next4de340. Every direct branch lands on an instruction start; registry fields
+  independently identify both entries. Old inventory rows/order/history survive.
+- All8404 previous identities and6048 byte-matched statuses survive; totals
+  8406/6048. All26 old strong affected contexts reverify; the old transfer callback
+  still emits799/native801, preserving every compiled byte/fixup with the new
+  header. Existing20-byte validator-field types are re-reviewed/rebound in both
+  clients; their layout and storage relationship are unchanged. Data/source/config
+  stores and AGENTS.md are unchanged.
+- No newly matched game bytes: TL697456, Gold383347; libraries390163/9732 stay
+  unchanged. Boundary admission exposes1/2 additional existing padding bytes,
+  now33615/23499. Accounted text1121234/2491370 (CLI45.0%) and416578/2006532
+  (CLI20.7%). No-function bytes103160/75531. Discovery/source progress and these
+  alignment bytes must not be presented as newly matched gameplay code.
+- Final all-target lint0/0 and data0type conflicts/duplicate owners; all three
+  type checks1020structs/0findings. Selected15 contract names have no findings or
+  unknowns; broader findings258/1479/968 and unknowns305/4082/2607 remain. The
+  first full audit preceded verification/blocker writes and has a stale function-
+  store fingerprint; contracts-final-all.json is the final current-input audit.
+- Fresh Docker server gate passes316functions/652data, imports/exports/resources/
+  relocations/layout/Wine, and all286720 raw reference bytes, SHA-256
+  3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+  Both client raw images/data ownership verification and broader source fidelity
+  remain open. No upstream tooling change or release is part of this checkpoint;
+  all23 foreign upstream edits remain preserved and unstaged.
+- Native boundary, complete-scope/preservation, type/data/lint/status/contract and
+  bounded-trace evidence lives in .scratch/goal58. Failed setup/candidate logs
+  remain distinct from final reports. Native and Kuna seeds, full signature miss,
+  original-code controls and compiler receipts are retained. Read-only review
+  agrees on rejection of the byte-near expression and stopping the exhausted
+  arithmetic family; no original source spelling is established.
+- A later import candidate is the already-matched TL364-byte third-slot callback
+  4dfba0, whose native Gold counterpart is4de340. A scratch Gold object matches364
+  masked bytes, but bool/random helper providers, active-participant global binding
+  and existing pointer/prototype conflicts must be reconciled before adoption.
+  Do not duplicate that TL source or mistake unresolved masked operands for a
+  selected Gold build provider. For larger primary-client work, inspect the
+  unreconstructed event runner4e5a00 from the existing native/Kuna evidence.

@@ -12097,6 +12097,20 @@
     ]
   },
   {
+    "va": 5101920,
+    "size": 2528,
+    "name": "fcn.004dd960",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2528,
+        "reason": "Goal58 native second-slot registry callback. Complete code through RET4de322, one internal NOP and seven switch entries4de324..4de33f; next prologue4de340. All branch destinations are within the complete native body; physical case order0,1,2,3,6,4,5. Native signed16-bit window width and choice0 differ from TL. Source candidate remains unpromoted; no byte-match or provider claim. See .scratch/goal58/decision-boundaries.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T22:26:47.239326+00:00"
+      }
+    ]
+  },
+  {
     "va": 5104816,
     "size": 117,
     "name": "fcn.004de4b0"

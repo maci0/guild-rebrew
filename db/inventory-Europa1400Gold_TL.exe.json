@@ -13137,6 +13137,20 @@
     ]
   },
   {
+    "va": 5108144,
+    "size": 2536,
+    "name": "fcn.004df1b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2536,
+        "reason": "Goal58 native second-slot registry callback. Complete code through RET4dfb78, three-byte internal alignment and seven switch entries4dfb7c..4dfb97; eight external NOPs precede next prologue4dfba0. All branch destinations are within the complete native body; physical case order0,1,2,3,6,4,5. Source candidate remains unpromoted; no byte-match or provider claim. See .scratch/goal58/decision-boundaries.json and query-order-control.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T22:26:46.785838+00:00"
+      }
+    ]
+  },
+  {
     "va": 5110688,
     "size": 368,
     "name": "fcn.004dfba0"

@@ -18,7 +18,6 @@ void __cdecl fcn_004da690(void);
 void __cdecl fcn_004dc5f0(void);
 void __cdecl fcn_004dc6e0(void);
 void __cdecl fcn_004dcf50(void);
-void __cdecl fcn_004df1b0(void);
 void __cdecl fcn_004dfba0(void);
 void __cdecl fcn_004e0620(void);
 void __cdecl fcn_004e1890(void);

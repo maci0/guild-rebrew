@@ -2047,3 +2047,21 @@ not a separate allocation. Its private `Kind` view is bound under stable ID
 opaque. Native registry entries begin sixteen bytes before that view. The
 canonical header declares the backing bytes without defining storage or
 claiming their full extent or owner. Proof: `.scratch/goal57/native-proof.json`.
+
+
+### Court decision callback (2026-10-16)
+
+TL `0x4df1b0` / Gold `0x4dd960` retain provisional `fcn_004df1b0` and one
+shared definition in the inferred standalone source home. The registry's second
+slot and its actual dispatcher establish two arguments: a participant-context
+byte view and a word-access action view. Original identifiers, record names and
+TU ownership are unproved. The native asset strings `cutscenes\prozess` and
+`cutscenes\folterwahl` name resources, not the original C function or file.
+
+The canonical declaration is in existing `game/event_callbacks.h`. Other phase
+callbacks still need contract reconciliation. Private `cut_SECOND_CHOICE` and
+`cut_WINDOW_WIDTH` are inferred expressions for two measured target differences:
+Gold's alternate choice is 0 versus TL's 2; Gold reads a signed word at window+8
+versus TL's dword at +12. The window remains a byte-access view with no invented
+layout or allocation owner. Native boundaries, dispatch/operand evidence and
+bounded execution inputs are retained in `.scratch/goal58`.

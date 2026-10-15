@@ -8,6 +8,9 @@ typedef int (__cdecl* EVENT_CHECK)(char* event);
 void __cdecl fcn_004e7160(int kind, void* first, void* second, void* third,
     EVENT_CHECK check, unsigned char flag);
 
+/* Reconstructed court decision callback; other phase-slot contracts remain open. */
+void __cdecl fcn_004df1b0(char* participant, int* action);
+
 /* Existing event helpers use word and unsigned-byte access views. */
 void __cdecl fcn_004e5a00(int* event);
 int __cdecl fcn_004e64e0(int* event);
