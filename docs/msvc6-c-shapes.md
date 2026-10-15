@@ -11616,3 +11616,18 @@ sites and seven rejecting symbol controls per target; unbound destinations remai
 native comparison hypotheses, without a raw-link provider claim. Receipts are in
 .scratch/goal52/{loader-core-inventory-native,loader-core-kuna,preloaders-char-loop,
 loader-wrapper-char-loop,loader-native-proof}.json.
+
+## Implicit final row in a local string matrix (2026-10-16)
+
+TL406ee0 / Gold406340 initialize 15 rows of 64 bytes, then scan all fifteen.
+Fourteen observed string literals initialize the first fourteen rows; ordinary
+aggregate zero-initialization supplies the last row. The first C candidate used
+an explicit final `""`, which emitted 1,117 bytes and an extra literal operand.
+Omitting that initializer emits the native 1,102 bytes in both production
+contexts: the final row uses one 16-DWORD clear with no empty-string copy.
+All 58 literal operand sites per target validate their complete fourteen literal
+extents. Keep the concatenated AUSGANG/LAUFEN1 string as one native entry; splitting
+it into two rows changes the filter. No flags, padding, assembly or fabricated
+locals are needed. Source spelling is inferred from full native agreement,
+not uniquely recovered. .scratch/goal55/{first-tl,implicit-tl,implicit-gold,
+native-proof}.json preserve the failed and accepted measurements.

@@ -396,3 +396,37 @@ handler = 0
 kind = 4
 name = 5
 param = 72
+
+[types."ch.dummy_picks".GOLDTL]
+file = "src/GOLDTL.fcn_00407330.c"
+symbol = "CH_DUMMY_PICKS"
+size = 132
+native_size = 132
+extent = "allocation"
+evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation."
+cflags = "/O2 /Gd"
+source_hash = "e7cc5d9978c44511bf8cecc66df776da46705004e67a9d643570b345a086af7b"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."ch.dummy_picks".GOLDTL.offsets]
+item = 0
+count = 128
+
+[types."ch.dummy_picks".GOLD]
+file = "src/GOLDTL.fcn_00407330.c"
+symbol = "CH_DUMMY_PICKS"
+size = 132
+native_size = 132
+extent = "allocation"
+evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation."
+cflags = "/O2 /Gd"
+source_hash = "e7cc5d9978c44511bf8cecc66df776da46705004e67a9d643570b345a086af7b"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."ch.dummy_picks".GOLD.offsets]
+item = 0
+count = 128

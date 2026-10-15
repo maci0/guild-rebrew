@@ -21968,8 +21968,17 @@
   },
   {
     "va": 6154240,
-    "size": 138,
-    "name": "fcn.005de800"
+    "size": 128,
+    "name": "fcn.005de800",
+    "extent_history": [
+      {
+        "old_size": 138,
+        "new_size": 128,
+        "reason": "Goal55 stock strstr.obj has 128 executable bytes through 0x5de87f. Following 10 bytes are a separate mov-edx/jump stub, not part of strstr and not padding. Full stock-object and strchr internal-entry proof retained.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-15T18:51:51.881751+00:00"
+      }
+    ]
   },
   {
     "va": 6154378,

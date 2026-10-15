@@ -1976,3 +1976,20 @@ both 119-byte bodies agree. error_message.h is an inferred narrow declaration
 home. `const char*` expresses the observed read-only message contract, not an
 attested original qualifier. The wider Error API and helper names remain open.
 Complete native/object, literal and operand receipts are in .scratch/goal54.
+
+### Scene dummy selection callback (2026-10-16)
+
+TL `0x406ee0` / Gold `0x406340` retain the provisional `fcn_00406ee0` name:
+no original identifier or source-unit path is attested. One shared definition
+is retained beside the existing TL selection caller in GOLDTL.fcn_00407330.c;
+that source-unit home is inferred. Each complete 1,102-byte body initializes a
+15-by-64 local name filter, appends the first matching object pointer to the
+caller's result and returns the signed count comparison with 32.
+
+`CH_DUMMY_PICKS` is an inferred private result view, renamed from Picks through
+the type writer. The callers' 0x84-byte stack frames, callback stores at
+base+4*count and count at +0x80 support 32 pointer slots plus an integer count.
+Both target layouts are compiler-checked under stable ID ch.dummy_picks.
+The native concatenated `dummy_AUSGANGdummy_LAUFEN1` filter is preserved as one
+entry; a missing comma in the original source is plausible, not established.
+Receipts: .scratch/goal55/native-proof.json and the native/Kuna caller bodies.

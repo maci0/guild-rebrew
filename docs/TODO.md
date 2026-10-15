@@ -54389,3 +54389,53 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   organization review is retained; complete client PE comparisons remain open.
   Both repositories have only main worktrees. Another session's 23 upstream
   accounting edits remain unstaged and untouched; no new upstream bug identified.
+
+### Goal55 — shared scene dummy filter (2026-10-16)
+
+- Added one C89 fcn_00406ee0 definition for TL406ee0/Gold406340, RELOC1102 each.
+  Its original name/unit remain unproved; keep the existing selection caller's
+  source home. FLIRT's 7,102,296 patterns miss; complete native/Kuna bodies show
+  a local 15*64 name matrix and signed count<32 result, with the first matching
+  object appended once. Preserve the combined AUSGANG/LAUFEN1 literal and the
+  implicit zero final row. The explicit-empty-row candidate emits 1117 bytes;
+  omitting that initializer matches all 1102 in both clients without flags/asm.
+- Renamed private Picks to inferred CH_DUMMY_PICKS through the type writer and
+  bound stable ID ch.dummy_picks in both targets: 0x84-byte stack result, item0,
+  count+80. The existing TL wrapper remains RELOC96. The native Gold wrapper
+  matches in scratch but is not adopted: its scene-service provider names and
+  broader traversal/callback contracts still need reconciliation.
+- Complete production proof covers 2300 bytes, 122 operand sites and 34 rejecting
+  controls. Both callbacks' 58 literal sites validate fourteen complete strings.
+  Separate stock-object evidence checks each client's full strstr128 and strchr188
+  including the +6 internal entry, with two wrong-entry controls. This supports
+  CRT semantics; it grants neither strict resolver trust nor a linked provider.
+- Recorded the explicit internal-archive-entry review capability in upstream
+  docs/IDEAS-GUILD.md, cdc0a00f. Existing strict review remains fail-closed: stock
+  strchr marks both its entry and the internal label as COFF functions. No fake
+  standalone alias body, metadata trust, patched archive or library status added.
+- Repaired two discovery extents through reviewed digests: TL4079d0 960->30
+  ends before two NOPs and a new prologue; Gold strstr5de800 138->128 excludes a
+  separate ten-byte mov/jump stub. Preserve subsequent code as unassigned; it
+  is not invented padding or new game progress. All other inventory rows/history
+  survive. Library metadata, including Gold strstr, remains unchanged.
+- All 8392 previous identities and 6038 strong statuses survive; current totals
+  are 8394/6040. Data, source/config stores and every previous type binding survive.
+  All-target lint is 0/0; type checks report 1020 structs with zero findings; data
+  has zero conflicts/duplicate owners. The focused callback contract audit has
+  zero findings and 3981 current input hashes, with SDK/include unknowns122/904/617.
+  These are bounded checks, not closure of the broad scene API or all contracts.
+- Server gate passes 316 functions/652 data checks, all286720 raw reference bytes,
+  import/export/relocation/layout and Wine checks. Matched game bytes rise by1102
+  each: TL694315, Gold379579. Libraries390163/9732 (Gold-10 extent correction),
+  padding33605/23492. Accounted text TL1118083/2491370=44.8782%, Gold412803/2006532
+  =20.5730%; CLI truncates to44.8/20.5. Padding/library accounting stays separate
+  from game gains. Both client raw images/data verification remain open.
+- Receipts/replays: .scratch/goal55/{native-proof,strstr-native-library-proof,
+  preservation,contract-summary,lint-final,data-final,status-final,types-*}.json;
+  native/Kuna/xrefs, archive members/inspection, failed and accepted C shapes,
+  type/compiler and guarded extent receipts, server-gate.log. The source-order
+  review is retained; complete client PE comparisons remain unavailable.
+  Upstream cdc0a00f is merged/pushed after its mandatory full-suite hook passes;
+  the completed documentation worktree/branch is removed. Both repositories
+  retain only main. All23 unrelated upstream accounting edits remain unstaged
+  and untouched.

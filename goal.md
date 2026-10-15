@@ -107,71 +107,69 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-16
 
-The full goal remains ACTIVE and incomplete. Preserve all previous character,
-animation, loader, allocator and logical-reset work. Both raw client images,
-complete client data/ownership, broader source contracts and faithful discarded
-server inputs remain open.
+The full goal remains ACTIVE and incomplete. Preserve all earlier character,
+animation, loader, allocator, logical-reset and action-insertion work. Both raw
+client images, initialized-data verification/ownership, broader source contracts
+and faithful discarded-server inputs remain open.
 
-Goal54 adds one shared ordinary-C ch_InsertAction: TL4051d0 RELOC461 and
-Gold4048b0 RELOC456. The diagnostic attests both this name and the getter's
-ch_GetFreeQueueEntry name; character.c/header placement remains inferred.
-Native callers establish three fixed arguments and integer varargs, rejecting
-Kuna's spurious fourth parameter. Handler/owner assignment and short-circuit
-load order preserve complete native bytes; only the evidenced universe stride
-varies. The existing universe allocation supplies its interior field views.
+Goal55 adds one shared ordinary-C dummy-selection callback, provisional
+fcn_00406ee0: TL406ee0 and Gold406340 each earn RELOC1102. Its original identifier
+and unit remain unproved; the definition stays beside its existing selection
+caller. Native/Kuna evidence establishes a local 15*64 matrix, fourteen literal
+filters and an implicit zero final row. Preserve the combined
+`dummy_AUSGANGdummy_LAUFEN1` entry. An explicit empty fifteenth string emits1117
+bytes; implicit initialization matches all1102 without flags, assembly or padding.
+The private inferred CH_DUMMY_PICKS result view replaces Picks through the type
+writer; stable ch.dummy_picks bindings check the 0x84 allocation and count+80 in
+both targets. The old TL wrapper stays RELOC96. The native Gold wrapper matches
+in scratch but is unadopted until its scene-service/provider contracts reconcile.
 
-Queue declarations now share actual provider signatures, including pointer
-transport formerly held as int in 40db50. The occupancy-only CH_QUEUE_SLOT and
-existing dispatch-entry layout gain four compiler-checked stable bindings;
-payload and callback contracts remain open. Two dispatch data rows describe
-64*0x4c bytes in each client's zero-filled .data tail. Their header is extern-only:
-no source storage owner or linked provider is established. The shared read-only
-message provider also matches Gold4222b0 RELOC119; its narrow Error header
-reconciles 49 declarations without claiming the broader Error API. Gold4047a0
-is paired with TL's delete but remains NEAR_MATCHING98/110 and adds no matched
-bytes. Six inventory repairs exclude only evidenced trailing alignment NOPs.
+Three complete production objects cover2300 bytes and122 operand sites, with34
+rejecting controls. All58 literal sites per callback validate the full fourteen
+strings. Supporting stock-object proof checks both clients' strstr128 and
+strchr188, including the +6 internal entry and two wrong-entry controls. It does
+not grant strict resolver trust or actual raw-map/archive provider attribution.
+Upstream cdc0a00f records explicit internal-entry review in docs/IDEAS-GUILD.md;
+its mandatory full-suite push hook passes, and it is merged/pushed to main.
+Existing fail-closed behavior stays intact. The completed documentation worktree
+is removed; both repositories retain only main. All23 unrelated upstream accounting
+edits remain unstaged and untouched; do not commit or discard them.
 
-All 8,388 old identities and 6,035 strong statuses survive; current totals are
-8,392/6,038. All old data/type bindings and history survive. Expanded verification
-covers 162 target contexts: 147 pass, 15 remain weak. All 144 previous strong
-contexts in that surface pass. Six complete production-object proofs cover
-1,283 bytes and 60 operand sites; 40 rejecting controls fail as intended.
-Literal extents and actual import names are checked. Unresolved supporting
-operands remain explicit native comparison hypotheses, not client provider proof.
+Reviewed inventory repairs change only TL4079d0 from960 to30, ending at its RET
+before two NOPs/new prologue, and Gold strstr5de800 from138 to128, excluding a
+separate ten-byte stub. Retain subsequent bytes as unassigned native code, never
+invented padding or new game progress. Library metadata and statuses are unchanged.
+All8392 previous identities and6038 strong verdicts survive; totals are8394/6040.
+Data and source/config stores are unchanged, all old type bindings survive, and
+both new type bindings are compiler-checked. The source organization review is
+retained; complete client PE placement comparisons remain unavailable.
 
-TL gains 461 matched game bytes to 693,213; Gold gains 575 to 378,477.
-Libraries remain 390,163/9,742, padding 33,590/23,490. Accounted text is
-TL1,116,966/2,491,370 (44.8%), Gold411,709/2,006,532 (20.5%). Both clients
-still have zero verified initialized-data bytes and no verified raw image.
-All-target lint is 0/0; data conflict/duplicate-definition counts are zero.
-Type checks report 1,020 C-source structs with zero findings; moving a private
-view to a bound header explains the count change. Five focused contract audits
-have zero findings and current hashes, with 122/904/616 SDK/include unknowns.
-The existing upstream SDK-context feature gap remains open; guards are preserved.
+New matched game bytes are1102 per client: TL694315, Gold379579. Library bytes
+are390163/9732 (Gold-10 from the corrected extent), padding33605/23492.
+Accounted text is TL1118083/2491370=44.8782%, Gold412803/2006532=20.5730%;
+the CLI truncates these to44.8/20.5. Both clients still have zero verified
+initialized-data bytes and no verified raw image. All-target lint is0/0, data
+conflict/duplicate-definition counts are zero, and all three type checks report
+1020 structs with zero findings. The focused callback contract audit has zero
+findings and3981 current input hashes, with122/904/617 SDK/include unknowns.
+The broader traversal/callback API is explicitly unreconciled.
 
-The final server gate passes 316 function/652 data checks and complete raw
-286,720-byte identity (SHA-256 3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1),
-plus imports/exports/relocations/layout and Wine load/export checks. Both Docker
-images work. Initial transient container-start stalls also affected /bin/true;
-a later 0.672s startup and actual client compiles pass. No image rebuild, daemon
-change or host fallback. No upstream bug was identified in this package.
+The final server gate passes316 function/652 data checks and every286720 raw
+reference byte (SHA-256 3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1),
+plus import/export/relocation/layout and Wine loading/export checks. Docker-only
+compilation works; compiler/config inputs and reference images are unchanged.
+Receipts and replays: .scratch/goal55/native-proof, supporting CRT proof,
+preservation, contract-summary, final lint/data/type/status, guarded extent/type
+writer results, native/Kuna/library inputs and server-gate.log. Failed measurements
+remain separate. Keep the stock CRT members unmodified and library work distinct
+from game reversing gains.
 
-Receipts/replays live in .scratch/goal54: native-proof, preservation, scoped
-verification, stable contract audits/summary, lint/data/type/status, reviewed
-writer previews/digests, native/Kuna/library inputs and server-gate.log. Retain
-failed measurements separately. Source organization review is recorded, but
-client raw artifacts are still unavailable for complete placement/PE checks.
-Both repositories have only main worktrees. Upstream remains at 43802a3b;
-another session's 23 uncommitted accounting files remain unstaged and untouched.
-Do not commit or discard them. Project rules already require bugs fixed directly
-upstream and every feature gap recorded in its docs/IDEAS-GUILD.md.
-
-Next use todo to select larger unmatched client bodies, checking libraries and
-Kuna/native operands first. Avoid exhausted low-poly motion/allocator LOD probes,
-office's 17-byte residue and queue733/735 experiments without new evidence.
-Camera/list/disposal contracts, Gold0xfb9900 ownership/extent and the dispatch
-callback contracts remain open. Cleanup, library attribution and validation are
-not newly matched game bytes.
+Next select larger unmatched client bodies through todo/native/library evidence.
+The corrected4079d0 extent exposes unassigned follow-on code: Kuna4079f0 and the
+old complete960-byte disassembly are saved for recon; no new implementation was
+started. Do not repeat exhausted low-poly motion/allocator LOD, office17-byte or
+queue733/735 probes without new evidence. Camera/list/disposal contracts, Gold
+fb9900 ownership/extent, client raw builds and discarded server inputs remain open.
 
 ## History
 
