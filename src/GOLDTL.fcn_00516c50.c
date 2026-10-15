@@ -41,7 +41,7 @@ void __cdecl fcn_004379a0(int, int, int, void*, Player*);
 void __cdecl fcn_005165f0(void);
 void __cdecl fcn_00516de0(int, char);
 void __cdecl fcn_00516040(void);
-void __cdecl fcn_00443230(int);
+#include "Develop/Units/d3/d3_d3d.h"
 void __cdecl fcn_0052a7d0(void);
 
 void __cdecl fcn_00516c50(Player* p, void* unit)

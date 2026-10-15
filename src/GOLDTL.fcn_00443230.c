@@ -12,9 +12,9 @@ extern unsigned int g_10404a0;
 extern int g_67a370;
 
 void __cdecl fcn_00437ac0(int, int, int, void*);
-void __cdecl fcn_00443270(void);
+#include "Develop/Units/d3/d3_d3d.h"
 
-void __cdecl fcn_00443230(void)
+void __cdecl fcn_00443230(int flag)
 {
 	unsigned int i;
 

@@ -11788,3 +11788,62 @@ count 1024 and fields +0x20/+0x48. Callback and scene-table contracts need revie
 before adopting one shared runner. Receipts/replays: `.scratch/goal59/reset-proof.py`,
 `reset-effects.json`, `reset-byte-residue.json`, `runner-*-body.asm`, Kuna outputs
 and `runner-condition-result.json`. No raw-link client/provider claim is made.
+
+
+### Goal60: one texture loop, two native backends
+
+The shared object-texture callback matches TL `443270` (89 bytes) and Gold
+`447800` (86 bytes). It accepts one object byte pointer, then uses canonical
+`D3_OBJECT::kontext`. Both bodies guard the context and its owner, cache the signed
+count, and walk a table of texture pointers. Each texture is guarded, as are its
+resource pointer and already-processed flag. Null/negative/zero cases do not call
+services. Do not turn this into a table of pointer-to-pointer entries.
+
+The native-supported differences are:
+
+| View | TL | Gold |
+| --- | --- | --- |
+| Context owner / table | +318 / +31c | +10 / +14 |
+| Owner count | +1e4 | +1e0 |
+| Texture resource / flags | +50 / +54 | +64 / +68 |
+| Processed bit | 40 | 80 |
+| Resource operation | one-argument stdcall virtual slot 9 | cdecl precache helper |
+
+After the resource call, both natives reload `table[i]` before setting the bit.
+The helper can replace the table entry, so caching the original texture for the
+final write is incorrect. Eighteen bounded native/C VEX cases include replacement,
+null fields, signed counts and already-set flags. The complete TL body has no
+fixups; Gold's sole REL32 operand resolves to `4360e0`, with a rejecting +4 control.
+These checks do not establish the actual client raw-link provider/placement.
+
+Gold's 117-byte helper is reconstructed as inferred `d3d_PrecacheTexture` in the
+attested `d3_d3d.c`. It sets texture stage zero, records the HRESULT and logs
+failures, then reloads the device and draws the precache triangle, again recording
+and logging the result. A SetTexture failure does not suppress DrawPrimitive.
+Preserve the native path, line values 167/168 and complete diagnostic expressions.
+All 117 bytes and 11 operands agree after resolution; four literal sites for three
+complete strings pass an independent content audit. Wrong bindings and a wrong
+literal are rejected. Eight bounded service/error cases include device replacement.
+The old 44-byte EndScene body, fixups and literals remain unchanged in this TU.
+No buffer storage or raw-data bytes are manufactured.
+
+The runner itself has a complete unadopted C candidate. Default builds emit
+2023/2054 bytes against native 2033/2063. An isolated frame-pointer diagnostic emits
+2007/2034; it does not justify a production pragma or recover the original TU
+options. The runner still has provisional/incompatible service declarations,
+including callback/packet pointer transport and lighting views. Do not promote it
+from a size comparison or the decompiler seed. Its native branch/layout facts from
+Goal59 remain authoritative; preserve both participant scans and stateful effects.
+
+The first registry slot now uses `EVENT_RUN` consistently. Existing 674/165-byte
+providers and registrar/setter match in both targets. The 165-byte provider retains a private word view of the event pointer, with no
+integer transport. TL's refresh provider now declares its natively supplied, unused int
+argument; all existing callers use the canonical header. Gold's different refresh
+body remains unadopted.
+
+Replays/receipts are in `.scratch/goal60`: texture-proof.py/json, precache-proof.py/
+json, event-abi.py/json, guarded inventory repair, scope, contracts, data/lint/types,
+current server gate and old court/reset traces. Failed scratch drafts/setup errors
+are retained separately. `types bind` currently supports records, so callback
+pointer-width assertions do not create a managed type identity. The feature gap is
+recorded upstream in `docs/IDEAS-GUILD.md` (4d52a5b4), without a wrapper struct.

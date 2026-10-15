@@ -107,63 +107,74 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-16
 
-The full goal remains ACTIVE and incomplete. Goal59 reconstructs the shared
-participant reset TL `4e4f10` / Gold `4e36a0` as one ordinary C89 body. Its
-nullable `int*` argument is declared in existing `event_callbacks.h`; the
-registrar's incompatible integer declaration is removed. Name, source home and
-local access views remain inferred. No storage, new layouts, assembly, flags or
-alias globals are introduced.
+The full goal remains ACTIVE and incomplete. Goal60 adds a shared texture callback
+TL `443270` / Gold `447800`: EXACT 89 and RELOC 86. Its context/texture offsets,
+processed bits and resource calls vary only where native evidence supports it.
+The table entry is reloaded after a resource call before the processed bit is set.
+Complete code/operand checks and 18 bounded cases include table replacement.
 
-Both native and compiled bodies are 162 bytes, but the source remains
-NEAR_MATCHING in both targets. Eleven fully resolved byte differences come from
-the compiler's cursor at table+4 versus native table+8 and corresponding store
-encodings/end addend. Effective field-store order stays 0,8,4,12. Seven bounded
-native/C x86/VEX cases per target compare the entire table, canaries and unchanged
-event, including null, counts 0/1/2/16 and mixed IDs; wrong bindings are rejected.
-This does not establish a byte match, universal equivalence or raw-link provider.
-Pointer/address/record cursors, counted/do loops, store ordering and chained
-assignments were measured. Do not repeat that family without new native/TU evidence.
+Gold's 117-byte `4360e0` provider is reconstructed in attested `d3_d3d.c` as
+inferred `d3d_PrecacheTexture`, RELOC 117. Native HRESULT stores, both error logs,
+device reload and draw arguments agree. Full code, all 11 operands and four
+literal sites/three complete strings pass strict comparison and rejecting
+controls. Eight bounded resource/error cases pass; the old EndScene retains its
+44 bytes, fixups and literals. These checks do not verify a client raw link.
 
-Native inventories incorrectly merged this separately called helper into its
-predecessor. Reviewed CLI previews/digests repair the predecessor from 242 to its
-already matched 65 bytes and admit the helper at 162 in each target. All 8406
-previous identities and 6048 strong statuses survive; totals are 8408/6048.
-All 28 old strong affected contexts pass. The old transfer callback remains weak;
-the Goal58 court callback is unchanged, and all 372 bounded cases pass again.
-Two existing validator-field type bindings are refreshed without layout changes.
+The name `d3d_PrecacheBuffer` is attested. Its new unsized header declaration and
+alias row allocate no storage; complete extent, vertex type and owner remain open.
+First registry callbacks now use inferred `EVENT_RUN(char*)`, void cdecl, with
+canonical provider/registrar/setter declarations. Two actual providers retain
+674/165-byte matches per target. Ten first-phase providers and both other phase
+contracts remain open. TL's refresh declaration now accepts its native unused int
+argument; Gold's different 113-byte implementation remains unadopted.
 
-There are ZERO new matched game bytes: TL 697456, Gold 383347. Libraries
-390163/9732 and padding 33615/23499 are unchanged. Accounted text remains
-1121234/2491370 (45.0%) and 416578/2006532 (20.7%). Separate native entries reduce
-no-function bytes to 102998/75369; that is discovery/source progress. All-target
-lint is 0/0; data has zero type conflicts/duplicate owners; type checks have
-1020 structs and no findings. Selected 17 contracts are clean; broader findings
-258/1479/968 and unknowns 305/4082/2607 remain across server/TL/Gold. Both client
-raw links and initialized-data verification remain open.
+All 8408 previous identities/6048 strong statuses survive; totals 8411/6051.
+All 38 old strong affected contexts pass, plus the three new matches. Two old
+validator bindings retain their 20-byte layouts. The old transfer's 799 bytes/
+fixups survive; all 372 court and 14 reset cases pass with the current event header.
+All-target lint has no errors/warnings, data has no conflicts/duplicate owners,
+and type checks have 1020 structs and no findings. Broader contracts still have
+findings/unknowns server 258/305, TL 1476/4082 and Gold 966/2607. All 33 selected
+contracts are clean and all 3989 audit input hashes are current.
 
-Fresh Docker server gate passes with all 286720 raw bytes identical, SHA-256
+New game byte gains are TL +89 / Gold +203; totals 697545/383550. Library bytes
+390163/9732 and padding 33615/23499 are unchanged. Accounted text is
+1121323/2491370 (45.0%) and 416781/2006532 (20.7%); no-function 102909/75369.
+TL's merged inventory extent is repaired from 160 to its already matched 62,
+with separate 89-byte callback and existing alignment. No source verdict is earned
+from discovery. Both client raw builds and initialized-data verification remain open.
+
+Fresh Docker server gate passes with all 286720 raw bytes identical, 316 function/
+652 data matches, imports/exports/resources/relocations/layout/load checks. SHA-256
 3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
-Current receipts/replays are in `.scratch/goal59`: reset-proof.py/reset-effects.json,
-reset-native-proof.json, reset-byte-residue.json, inventory previews/applies,
-contracts-final-all.json, scope-promote.json, lint-current.json, data-final.json,
-status-final.json, types-*.json and server-gate.log. Setup errors and failed probes
-are retained. Upstream 8e897442 and all 23 unrelated WIP files remain untouched.
+Current receipts/replays are in `.scratch/goal60`: texture-proof.py/json,
+precache-proof.py/json, event-abi.py/json, scope-promote.json, current contract/data/
+lint/status/type reports, source-unit review and server-gate-current.log. Setup
+errors and rejected drafts are retained separately. See docs/TODO.md Goal60 and
+C-shape/naming notes before repeating work.
 
-The next larger body is event runner TL `4e5a00` / Gold `4e4060`, complete extents
-2033/2063, not the old truncated 2016-byte slice. Native callers establish the
-pair. Gold differs in signed-short viewport dimensions and a 0x2ec scene-table
-stride with 768 entries versus TL 0x2f4 with 1024; enabled/temporary fields are
-Gold +0x18/+0x38 versus TL +0x20/+0x48. Preserve these differences when sharing.
-Kuna omits an unreachable native branch computing `(flags == 0) & 2`.
-An isolated ordinary-C `skip && !event[0x26] & 2` probe emits that test under the
-pinned compiler. This supports a source-shape hypothesis, not recovered spelling.
-See docs/TODO.md Goal59 and the saved complete native/Kuna bodies before adoption.
+Upstream main/origin is 4d52a5b4, documenting the non-record typedef binding gap in
+`docs/IDEAS-GUILD.md`. Its mandatory full suite passed in an isolated worktree,
+which was merged and removed. All 23 unrelated upstream files preserve their
+hashes. `types bind` still accepts only record definitions: target compiler width
+assertions and source-contract audit do not create a managed callback identity.
+Do not fabricate a wrapper struct or manually write one.
 
-Preserve Goal58's OWN-before-OTHER query sequencing. Do not adopt its rejected
-near expression or retry exhausted arithmetic/placement probes. The existing
-TL third-slot provider `4dfba0` has Gold counterpart `4de340`, but helper/global
-contracts remain open. Broader callback/D3 contracts, Gold fb9900 ownership,
-client raw builds and faithful discarded server inputs remain open.
+Continue the larger runner TL `4e5a00` / Gold `4e4060`, native 2033/2063.
+The complete unadopted candidate `.scratch/goal60/runner.c` preserves both scans,
+stateful effects and native target layouts. Default builds emit 2023/2054;
+frame diagnostics 2007/2034. Those measurements do not justify adopting a pragma.
+Service contracts remain incompatible/provisional, particularly packet bases,
+callback registration and lighting. Reconcile them before adopting the body,
+then remeasure full operands/literals and native behavior. Preserve Gold's signed
+viewport words and GUI stride/count 0x2ec/768 versus TL 0x2f4/1024. Original source
+spelling/TU options remain unproved; no new runner verdict was registered.
+
+Preserve Goal58 OWN-before-OTHER sequencing and Goal59 reset behavior. Do not retry
+exhausted arithmetic/cursor, queue/office/camera families without new native/TU
+evidence. Client raw builds, data ownership/layout, broad source contracts and
+faithful discarded server inputs remain open. Completion still requires every
+criterion above, including reproducible raw-file identity for all three targets.
 
 ## History
 

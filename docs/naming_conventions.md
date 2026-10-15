@@ -2080,3 +2080,30 @@ The declaration of `g_9b0e20` remains the existing `char[]` view. Native strides
 field offsets and 16 outer reset iterations do not establish a storage owner or
 the full allocation extent. No inferred interior alias or new allocation is
 created to match the compiler's cursor choice. Receipts are in `.scratch/goal59`.
+
+
+### Goal60 — texture precaching and the first event phase
+
+The name `d3d_PrecacheBuffer` is attested in Gold's native DrawPrimitive
+expression. Its declaration belongs in the reconstructed `d3_d3d.h`; the native
+source path is `D:\develop\Units\d3\d3_d3d.c`. The buffer's vertex type,
+complete allocation extent and storage owner remain unproved. Its unsized extern
+and alias row do not allocate storage or verify bytes.
+
+`d3d_PrecacheTexture` is an inferred function name for Gold `4360e0`, chosen from
+the attested buffer name and its SetTexture/DrawPrimitive behavior. The supported
+writer renamed its earlier `fcn_004360e0` spelling everywhere. Parameter `t`
+appears in the native SetTexture diagnostic. The source unit is attested; neither
+the inferred function identifier nor the original opaque interface spelling is.
+
+`fcn_00443270` remains a provisional name/home for TL `443270` / Gold `447800`.
+One loop processes object-context texture entries, with native-supported offsets,
+flag bits and backend calls. Private `d3_*_OFFSET`/`d3_FLAG_BIT` expressions and
+byte-access context views are inferred, without claiming complete record types.
+The existing canonical `D3_OBJECT` supplies the evidenced `kontext` member.
+
+`EVENT_RUN` is an inferred first-phase call contract, void cdecl with one event
+byte pointer. The native runner and two existing providers support it; source-less
+providers and original typedef names remain open. Canonical declarations live in
+`event_callbacks.h`; second and third phase slots retain their separate open
+contracts. Evidence and compiler-width assertions are in `.scratch/goal60`.

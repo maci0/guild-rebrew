@@ -25,7 +25,7 @@ void __cdecl fcn_004428d0(char*, int, int);
 void __cdecl fcn_00476970(int);
 int __cdecl fcn_00500e20(int*);
 void __cdecl fcn_0052a7d0(void);
-void __cdecl fcn_00443230(int);
+#include "Develop/Units/d3/d3_d3d.h"
 void __cdecl fcn_00473150(int);
 void __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 

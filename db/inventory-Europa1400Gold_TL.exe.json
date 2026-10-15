@@ -4675,8 +4675,31 @@
   },
   {
     "va": 4469296,
-    "size": 160,
-    "name": "fcn.00443230"
+    "size": 62,
+    "name": "fcn.00443230",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 62,
+        "reason": "Reviewed Goal60: existing matched refresh body443230 is62 bytes, followed by2 NOPs. Native traversal callback443270 has complete89-byte body ending RET4432c8, seven NOPs then4432d0. Its ordinary C emits all89 bytes exactly; paired Gold447800 is86 bytes with measured layout/backend differences. Original160-byte inventory row conflated both functions and alignment. Source identities/verdicts are separate.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T23:30:41.019173+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4469360,
+    "size": 89,
+    "name": "fcn.00443270",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 89,
+        "reason": "Reviewed Goal60: existing matched refresh body443230 is62 bytes, followed by2 NOPs. Native traversal callback443270 has complete89-byte body ending RET4432c8, seven NOPs then4432d0. Its ordinary C emits all89 bytes exactly; paired Gold447800 is86 bytes with measured layout/backend differences. Original160-byte inventory row conflated both functions and alignment. Source identities/verdicts are separate.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T23:30:41.021580+00:00"
+      }
+    ]
   },
   {
     "va": 4469456,

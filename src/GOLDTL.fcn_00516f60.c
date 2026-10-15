@@ -82,7 +82,7 @@ void __cdecl fcn_00516be0(void);
 void __cdecl fcn_00516040(void);
 void __cdecl fcn_00516de0(int, int);
 void __cdecl fcn_0052a960(char*);
-void __cdecl fcn_00443230(int);
+#include "Develop/Units/d3/d3_d3d.h"
 
 void __cdecl fcn_00516f60(void)
 {

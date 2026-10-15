@@ -37,6 +37,8 @@ void __cdecl fcn_004e4b00(int);
 void __cdecl fcn_004e4910(void);
 void __cdecl fcn_004e4eb0(void);
 
+#include "Develop/DieGildeAddOn/game/event_callbacks.h"
+
 /* ADDRESS: GOLD 0x004e0f70 */
 /* ADDRESS: GOLDTL 0x004e2890 */
 

@@ -54693,3 +54693,73 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   probes and setup errors are retained; no upstream repair was needed. Preserve
   all 23 unrelated upstream changes. Continue with runner contracts/native
   evidence; do not restart the exhausted reset cursor family without new evidence.
+
+
+### Goal60 — typed first phase and matched texture precaching (2026-10-16)
+
+- Added one shared callback at TL `443270` / Gold `447800`: EXACT 89 and RELOC 86.
+  Complete native/COFF equality includes Gold's one call operand and a rejecting
+  wrong destination. The context/texture fields remain narrow inferred byte views;
+  canonical `D3_OBJECT` supplies the object member. The final table entry reload
+  after the resource call is mandatory. Eighteen bounded VEX cases cover nulls,
+  signed counts, missing resources, already-set flags and entry replacement.
+- Reconstructed Gold `4360e0` in the attested `d3_d3d.c` as inferred
+  `d3d_PrecacheTexture`, RELOC 117. Native SetTexture and DrawPrimitive operations,
+  HRESULT stores, device reload and exact diagnostics are preserved. Full code,
+  all 11 operands and four literal sites/three complete strings agree; wrong
+  bindings and literal contents fail. Eight bounded service/error cases pass.
+  Existing EndScene retains all 44 bytes, fixups and literals in the same unit.
+- `d3d_PrecacheBuffer` is attested by the native expression. Added one unsized
+  declaration-only alias row/header anchor at Gold `fe7a20`, in the zero-filled
+  virtual tail. Full buffer extent, vertex type and allocation owner remain
+  unresolved; no storage definition or data-verification credit is introduced.
+  The helper's inferred name was applied through the supported source writer.
+- Reconciled the first registry slot to inferred `EVENT_RUN(char*)`, returning
+  void with cdecl ABI. Setter stores a function pointer; registrar passes typed
+  first callbacks and uses canonical prototypes. Two existing providers remain
+  RELOC 674/165 in both targets. The word-view provider uses a reviewed pointer
+  view, without integer transport. The native runner pushes one argument and
+  ignores the result; actual target compilers confirm both callback widths are 4.
+  Ten source-less first-phase bodies and both other phase contracts remain open.
+- Repaired the refresh argument contract: TL's definition now accepts the
+  natively supplied int flag, which TL ignores. Its three callers share the
+  existing D3 backend header. Gold's native 113-byte refresh body reads the low
+  byte and adds device/scene operations; it is not yet bound to this source.
+- TL's inventory conflated the old refresh and new callback: repaired 160 to its
+  already matched 62 bytes, admitted 89 after two NOPs, and retained seven NOPs
+  before the next function. Reviewed CLI digest guards preserve all old evidence.
+  Gold's callback/helper inventory extents already existed and are unchanged.
+- New game byte matches: TL +89 and Gold +203. Totals 697545/383550; libraries
+  390163/9732 and padding 33615/23499 are unchanged. Accounted text is
+  1121323/2491370 (45.0%) and 416781/2006532 (20.7%). No-function is 102909/75369.
+  Report these byte gains even though rounded display percentages stay flat.
+- All 8408 prior identities/6048 strong statuses survive; totals 8411/6051.
+  All 38 old strong affected contexts pass, plus the three new matches. Old
+  transfer bytes/fixups remain unchanged; 372 court and 14 reset cases pass with
+  the current event header. Validator bindings retain their 20-byte layouts.
+  Fresh server gate passes all 286720 raw bytes, 316 functions and 652 data
+  records, imports/exports/resources/relocations/layout/load checks, with SHA
+  `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+- All-target lint and data conflict/duplicate-owner checks are clean; all target
+  type checks report 1020 structs with no findings. Current source-contract audit
+  still has broad findings/unknowns server 258/305, TL 1476/4082, Gold 966/2607.
+  All 33 selected contracts are clean and all 3989 audit input hashes are current.
+  Client raw builds, buffer ownership and initialized-data verification remain open.
+- A complete runner candidate is saved at `.scratch/goal60/runner.c`, not adopted.
+  It uses the actual D2 GUI type and target counts/layouts, both participant scans,
+  and the redundant native test. Default 2023/2054 and frame-diagnostic 2007/2034
+  builds do not match native 2033/2063. Service prototypes still conflict with
+  existing pointer/integer transports. Close those contracts before adoption;
+  do not apply the diagnostic pragma as a source-fidelity fix.
+- Upstream `types bind` rejects a non-record callback typedef. Recorded the gap,
+  replay and compiler-backed alias proposal in `docs/IDEAS-GUILD.md`, committed/
+  pushed as 4d52a5b4. Full mandatory upstream test hook passed in an isolated
+  worktree; main was fast-forwarded and that worktree/branch removed. All 23
+  unrelated canonical upstream files preserve their hashes. No managed callback
+  type identity or substitute wrapper struct was invented; C89 compiler width
+  checks and source-contract audit are separate evidence.
+- Receipts/replays are under `.scratch/goal60`; final current-input reports use
+  `*-current*` names. Keep failed probes/setup logs visible. Next continue runner
+  service contracts, including packet bases/callback registration and lighting,
+  then measure the complete body against both native targets. Earlier exhausted
+  court/reset/queue/office shape families remain closed without new evidence.
