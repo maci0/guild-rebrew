@@ -53498,3 +53498,91 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   all-target lint is0/0; all three data inventories have zero type conflicts and
   duplicate definitions. The first gate failed only generated-instruction drift;
   supported init --refresh-agents repairs it without weakening the gate.
+
+### 2026-10-15: shared queue-loader evidence, D3DX boundaries and tooling validation
+
+- TL5252d0 and Gold520340 contain the same complete735-byte queue-loader
+  instruction/control-flow template:261 instructions,575 fixed bytes and40
+  mapped native operand sites. All shifted-operand controls reject. Both end
+  with a full-width Boolean result and have one following alignment NOP.
+  This establishes a counterpart, not a compiled-C or raw-provider verdict.
+- Direct array member access fixes the link-field induction base at+91.
+  Orienting the signed version selection as >=1003c ?32768:8192 reproduces
+  the native setl/dec/and/add encoding. The best ordinary C emits733 bytes,
+  with573 fully resolved bytes equal and first difference at offset345.
+  Loops2/3 merge failure at a late return instead of native52535c; shortening
+  one branch by4 and adding a late2-byte XOR explains the length difference.
+  All incoming native early-failure paths already have EAX zero. This is
+  return-block merging/placement evidence, not a different error contract.
+- Exhausted bounded variants: direct/typed accesses, early/late shared labels,
+  positive loop bodies, scalar-result capture, byte result, break/index checks,
+  short-circuit final reads, head-only/full nested success continuations,
+  guarded counted do/while loops separately/together, captured loop-read status
+  and real loadsave.c inclusion. No full match; no loader identity or source
+  provider registered. Keep immediate read/link conversion, all32768 status
+  initializations at offsets0/2/6, both version reads and the pre-read reset.
+  Receipts: .scratch/goal45/shape-summary.json, native-counterpart-proof.json,
+  loader-caller-return.json and per-shape probe directories. Do not repeat
+  these families or the prior192-combination flag sweep without new evidence.
+- Two previously uncredited DirectX bodies at TL5f0e50/5f0eb0 equal complete
+  stock D3DX8 createmesh.obj functions,31 bytes each, without relocations.
+  Fixed-byte and shifted-start controls reject; neither overlaps prior library
+  credit. Both template aliases remain unresolved. The locked writer adds only
+  provisional address-named LIBRARY rows, without exact SDK symbol/provider
+  claims. Supported repair-extents changes only native discovery96/41 to31/31
+  through ret8, retaining boundary history and all unrelated inventory entries.
+  Without that repair the deliberate larger-library-span rule credited137
+  bytes; the corrected gain is62 library bytes plus one padding byte. The
+  remaining74 bytes are unattributed. This was a merged discovery span, not
+  a reason to weaken upstream coverage rules or their regression test.
+- TL totals:1468 library functions/390163 bytes;691975 matched game bytes;
+  1115705/2491370 accounted text. Zero newly matched game bytes this turn.
+  Proof: d3dx-lock-full-proof.json, library-extents-{preview,applied}.json,
+  status-tl-corrected.json and native boundary disassembly in.scratch/goal45/.
+- A read-only71-row size-mismatch audit initially failed in catalog setup on
+  independent same-named functions. No byte verdict was measured or promoted.
+  Native TL47de50 calls137-byte TL47dd60; a different32-byte predicate at
+  TL47d220/Gold47dd60 shares its C symbol. Supported rename preview refuses
+  the ambiguous caller without writes. Other duplicate-symbol groups remain
+  source-fidelity work. The explicit reference-ownership gap is integrated in
+  upstream b1a24da3; no caller was guessed or renamed locally.
+- Upstream319071e0 confines ambiguity to operands that use it. A public-API
+  reproducer fails on43fe499a with CatalogScanError and passes the fix in both
+  strict modes, retaining four rejecting ambiguous-operand controls. Fresh CLI
+  tests preserve the235-byte protection helper in both clients. The full
+  isolated upstream suite exposed additional CLI/artifact migration failures;
+  source-root fallback and canonical literal-audit help pass177 focused tests.
+  Remaining repairs and full-suite validation are still in progress. The old
+  ImportError-only before-test attempt is not behavioral regression evidence;
+  use upstream-reproducer-{before,after}.log instead.
+- The fresh guild gate.log passes286720-byte raw server identity,316/316 game
+  and652/652 data checks, imports, relocations, toolchains and Wine. All-target
+  lint is0/0; current three-target data inventories have zero conflicts or
+  duplicate definitions. No game C/header or data/type-store edits are intended.
+- Isolated upstream repairs: ae85d71c preserves optional source-root configs
+  (new root-less cases fail before; explicit-root cases pass) and fixes canonical
+  VA help;177 focused cases pass. f7ef0a45 records provider replacement history
+  for inline-C artifacts, leaves former anchors inactive and preserves LIBRARY
+  origin;64 focused cases pass. All commit hooks pass. The original interrupted
+  suite had17 failures/2127 passes; the complete repaired suite is now running
+  in upstream-full-suite-fixed.log. No full-suite or upstream-push success yet.
+- The shared editable environment was restored to the canonical upstream path
+  after detecting uv hook resynchronization; own hooks now use UV_NO_SYNC=1 and
+  explicit isolated PYTHONPATH. Disabling mypy cache writes resolved its observed
+  filesystem reservation stall without disabling type checks. Completed private
+  regression/doc worktrees were removed. Two obsolete generated Wine prefixes
+  under.scratch/native-import-writer were removed after a no-use process check;
+  their sources, receipts and the compiler Docker images remain.
+- Both upstream repairs are integrated as94c9e0f9/07f17aaa. The affected product
+  and test files are byte-identical to the isolated branch. The artifact fix's
+  stable patch ID differs only because its changelog context includes other
+  upstream work; direct file comparison proves the implementation/test match.
+  The repaired full suite has passed the previously failing CLI group and
+  remains live. Upstream origin/main is still32e846cc at this checkpoint;
+  integration is complete, publication/full-suite validation are not yet claimed.
+- Final gate-final.log passes raw server identity and all316/652 comparisons.
+  The post-gate audit preserves all8379 prior identities,6024 strong statuses,
+  and byte-identical data/type stores; only two origin-only LIBRARY identities
+  are added. Current scaffold check and all-target lint pass. The repaired
+  upstream suite reached about66% before reporting objdiff-project failures;
+  further upstream diagnosis is in progress, not a passing full-suite claim.

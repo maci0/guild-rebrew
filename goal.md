@@ -107,97 +107,74 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-15
 
-The full source-fidelity/three-image goal remains unfinished. Both raw client
-images, complete data ownership/verification, unknown code ranges and faithful
-recovery of discarded server inputs remain open. The next coverage work should
-prioritize newly matched TL bytes and proven library gaps; source consolidation
-and validation must be reported separately from coverage gains.
+The full goal remains unfinished: both raw client images, full initialized-data
+verification and ownership, unresolved code ranges, shared source contracts and
+faithful recovery of discarded server inputs remain open. Prioritize new TL
+matched bytes and proven library gaps; report cleanup and validation separately.
+The latest complete server gate, `.scratch/goal45/gate-final.log`, passes all286720 raw
+bytes,316/316 game and652/652 data comparisons, imports, relocations, toolchain
+alignment and Wine. Both compiler images exist. All-target lint is0/0; fresh
+three-target data inventories have no type conflicts or duplicate definitions.
 
-The fresh pinned server gate passes (.scratch/goal43/gate-refreshed.log): all
-286720 raw bytes equal the reference, with316 game/652 data comparisons, imports,
-relocations, toolchain and Wine checks. Both required compiler images are present.
-All-target lint is0/0. All three data inventories report zero type conflicts and
-duplicate definitions. Earlier gate failures from generated skill drift remain
-recorded; refreshed instructions pass without weakening the gate.
+TL currently has691975 matched game bytes,390163 library bytes/1468 library
+functions and1115705/2491370 accounted text bytes (display44.7%). This turn adds
+62 library bytes and one separately classified padding byte, with zero newly
+matched game bytes. TL5f0e50/5f0eb0 each equal a complete31-byte stock D3DX8
+createmesh.obj body without fixups; altered-byte and shifted-start controls reject.
+Their two template aliases stay unresolved, with provisional address-only names
+and no selected raw-link provider claim. Supported native extent repairs reduce
+merged discovery entries96/41 to31/31 with boundary history. The remaining75
+bytes are not library credit:74 stay unattributed and one is padding.
 
-TL439b30 / Gold43cab0 now share one inferred d3_RemoveObjectFromList definition
-before draw-data cleanup in d3_object.c. Both complete112-byte bodies and all12
-operand sites agree; ten wrong-binding controls reject. The two standalone
-providers are retired after locked rehome and owner checks. Existing133-byte
-auxiliary cleanup,137-byte draw cleanup,154-byte hierarchy unlink and32-byte
-destruction helpers retain their full native proofs and rejecting controls.
-Their names/placement remain inferred; separate callees/providers stay explicit.
+The previous full shared7102296-signature audit is complete; upstream32e846cc
+fixes its quadratic deduplication. Earlier library gains total1698 bytes (56 D3DX
+and two821-byte CRT copy bodies). Internal labels/tables are not functions;
+memcpy/memmove aliases and actual client providers remain unresolved. Receipts
+and complete prior continuation are archived in docs/goal-history.md.
 
-A narrow inferred d3_camera.h now supplies the canonical pointer declaration for
-TL6b8014 / Goldfc2dec and the selector. No storage owner or complete allocation
-is inferred. Integer slot declarations, slot punning and four raw loads are
-removed. Selector42/motion54 match completely in both clients with operand and
-negative checks. The motion inputs carry floats, and the actual service's integer
-return remains. Both native camera diagnostics match all53 bytes including NUL.
-The embedded position wrapper4526d0 forwards its missing second argument and
-retains its full23-byte RELOC result.
+Queue loader TL5252d0 has a native Gold counterpart at520340: both735-byte
+bodies contain261 identical instruction/control-flow positions,575 fixed bytes
+and40 mapped native operand sites. Every shifted operand control rejects. One
+shared algorithm is supported, including the signed version threshold and the
+same failure behavior. The best ordinary-C scratch candidate emits733 bytes;
+573 bytes agree after complete operand resolution, with its first mismatch at
+branch displacement offset345. Native loop failures join an early zero return;
+the candidate merges later failures at a late return. Direct array access and
+version orientation are settled; the bounded loop, continuation and failure-exit
+variants do not fix placement. No new loader identity, padding, assembly or fake
+semantic divergence is registered. Details/exhausted trials: docs/TODO.md and
+.scratch/goal45/shape-summary.json.
 
-All262 scoped comparisons preserve byte results and prior bound operands; eight
-sites gain resolved bindings. Final public-verifier batches refresh101 TL and51
-Gold verdicts with the same statuses and operand evidence. All8376 pre-existing
-identities, native extents and6022 prior EXACT/RELOC statuses remain. Ten reviewed
-type bindings preserve established layouts after compiler checks. Receipts and
-remaining contract details are in docs/TODO.md and.scratch/goal43/.
+The existing shared protection helper TL41d500/Gold421f00 retains RELOC235 in
+both fresh client CLI tests. Its five trailing NOPs are alignment, not body.
+All pre-existing8379 identities and6024 strong statuses must remain preserved;
+this checkpoint adds only two origin-only library identities and two selected
+native boundary repairs. No game C/header or data/type-store edits are intended.
 
-This checkpoint adds zero newly matched TL game bytes. The two user reports both
-contained691740 matched game bytes/3567 functions; their seven-byte account
-increase was padding. The library audit adds one target-scoped56-byte identity,
-c_D3DXPlaneFromPointNormal at TL5edf50: its entire body equals stock D3DX8 without
-masking, and altered-byte/shifted-start controls reject. Actual raw-link provider
-selection remains unresolved. The full shared7102296-signature scan now finishes
-in89.4 seconds after upstream32e846cc fixes quadratic name deduplication. Both
-regression modes fail before;119 focused tests, real DirectX output preservation
-and the required full upstream suite pass. The fix and signature discovery note
-are pushed upstream, and their temporary worktrees are removed.
+The camera interface migration remains partial. Shared list removal112, selector42
+and motion54 retain their bounded native proofs. Reviewed float position/rotation
+candidates83/184, their scalar wrappers, disposal and connected declaration work
+remain unfinished. Goldfb9900 is one record with unknown full extent/owner.
+Prior chain/building/lighting/inventory evidence remains in docs/TODO.md; do not
+repeat exhausted probes without new evidence.
 
-Full scan output has1967 ordinary hits and4679 ambiguous addresses, dominated by
-weak cross-library patterns. Most focused DirectX hits already lie in credited
-library spans; four additional complete D3DX matches retain unresolved template
-aliases and are not assigned arbitrary names. Two missing CRT copy bodies at
-TL64d740/658030 are each821 bytes. Both stock memcpy.obj and memmove.obj reproduce
-each entire body with all46 internal fixups resolved and every wrong-binding
-control rejected. Their CRT origin is recorded with provisional address-only
-names; API aliases and raw-link providers remain unresolved. Internal labels and
-tables are not extra functions. The existing caller retains its full184-byte
-RELOC result; its unresolved API binding remains explicit.
-
-The library audit adds1698 accounted bytes in total:1466 library functions and
-390101 library bytes, with1115402/2491370 text bytes accounted (44.7706%). The CLI
-truncates percentages to one decimal, so it still displays44.7%. No new matched
-game bytes are claimed. All8376 original identities/extents and6022 strong
-statuses remain; three new target-scoped library identities are added. Receipts
-are in.scratch/goal43/. The shared/local signature discovery gap is recorded in
-upstream docs/IDEAS-GUILD.md. Remaining source-backed zlib origin/provenance and
-other weak signature candidates need review before any further reclassification.
-
-The camera/client interface migration is deliberately unfinished. Reviewed
-float-pointer position/rotation candidates match83/184 bytes in scratch; do not
-mistake rotation's eight alignment NOPs for missing executable code. Scalar
-wrappers, constructor/resource-name transports and connected declarations still
-need measured reconciliation. Traversal and disposal integration remain open.
-Do not describe byte agreement as complete C contract repair. Disposal's Gold
-fb9900 state is one record with unknown full extent/owner, not three allocations.
-Prior chain, building, lighting and inventory evidence remains in docs/TODO.md
-anddocs/goal-history.md. Do not repeat exhausted probes without new evidence.
-
-The next extent audit recovers the existing235-byte protection helper in both
-clients: TL41d500 / Gold421f00 had included five trailing alignment NOPs in SIZE.
-Supported tests now record RELOC; complete unmasked operand resolution and
-rejecting controls independently pass. All8379 identities and6022 prior strong
-statuses remain; strong statuses become6024. Newly matched game bytes are235
-per client, with no new C implementation. TL game matches total691975 bytes;
-accounted text becomes1115642/2491370 and still displays44.7%. Data/type stores
-are unchanged. The larger735-byte TL5252d0 queue-loader experiment remains
-unmatched, unregistered scratch work; its completed quick flag sweep finds no
-exact result. Details and exhausted variants are in docs/TODO.md.
-The fresh .scratch/goal44/gate-refreshed.log passes full server identity,
-316/316 game and652/652 data checks. All-target lint is0/0 and all three data
-inventories have no type conflicts or duplicate definitions.
+Upstream319071e0 fixes a global catalog failure: unrelated comparisons proceed
+while ambiguous native operands still fail closed. The original public-API
+reproducer fails on43fe499a and passes the fix in both strict modes. Independent
+same-named client definitions still need reviewed source/caller reconciliation;
+the supported rename refuses ambiguous references without writes. The missing
+explicit reference-ownership capability is recorded upstream in b1a24da3.
+Full upstream validation exposed additional source-root and assembly-artifact
+migration regressions. Repairs ae85d71c/f7ef0a45 pass241 focused tests and all
+commit hooks in the isolated upstream worktree. They are integrated into upstream
+main as94c9e0f9/07f17aaa; the affected product/test files are identical to the tested
+branch. The full suite is running in.scratch/goal45/upstream-full-suite-fixed.log;
+publication remains pending. This run has reached about two-thirds complete and
+exposed additional objdiff-project failures, currently under investigation.
+Do not claim upstream validation complete or resume game source promotion before
+that suite passes. Guild server validation remains green. Completed old test
+worktrees and two unused generated Wine prefixes were removed; native evidence,
+sources and Docker images remain.
 
 ## History
 

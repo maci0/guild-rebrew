@@ -24331,13 +24331,31 @@
   },
   {
     "va": 6229584,
-    "size": 96,
-    "name": "fcn.005f0e50"
+    "size": 31,
+    "name": "fcn.005f0e50",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 31,
+        "reason": "Complete stock D3DX8 createmesh.obj bodies reproduce all 31 native bytes through ret 8 without fixups; following methods start at 5f0e6f and 5f0ecf. Template aliases and raw-link provider unresolved. Full proof and rejecting controls: .scratch/goal45/d3dx-lock-full-proof.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T03:52:23.423847+00:00"
+      }
+    ]
   },
   {
     "va": 6229680,
-    "size": 41,
-    "name": "fcn.005f0eb0"
+    "size": 31,
+    "name": "fcn.005f0eb0",
+    "extent_history": [
+      {
+        "old_size": 41,
+        "new_size": 31,
+        "reason": "Complete stock D3DX8 createmesh.obj bodies reproduce all 31 native bytes through ret 8 without fixups; following methods start at 5f0e6f and 5f0ecf. Template aliases and raw-link provider unresolved. Full proof and rejecting controls: .scratch/goal45/d3dx-lock-full-proof.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-15T03:52:23.423871+00:00"
+      }
+    ]
   },
   {
     "va": 6229721,
