@@ -1,10 +1,4 @@
-/* Inferred 84-byte placement result. Same view as the adopted search callback. */
-typedef struct LC_GEBAEUDE_BAUPLATZ {
-	char name[0x40];
-	float position[3];
-	char unbekannt_4c[4];
-	char* node;
-} LC_GEBAEUDE_BAUPLATZ;
+#include "client_placement.h"
 
 extern int g_6b8010;
 extern int g_633444;
@@ -29,9 +23,6 @@ char __cdecl fcn_004379a0(char*, char*, unsigned int, char (__cdecl*)(char*, voi
 #define lc_WalkScene fcn_004379a0
 #define lc_SavedRender g_6b8010
 #endif
-int __cdecl fcn_00597ff0(int, char*);
-char __cdecl fcn_00598550(char*, void*);
-
 int __cdecl fcn_005985f0(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj)
 {
 	char buf[0x100];

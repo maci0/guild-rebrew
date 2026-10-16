@@ -1,13 +1,6 @@
 #include <string.h>
 #include "client_scene_transform.h"
-
-/* Inferred local view of the 84-byte placement result. */
-typedef struct LC_GEBAEUDE_BAUPLATZ {
-	char name[0x40];
-	float position[3];
-	char unbekannt_4c[4];
-	char* node;
-} LC_GEBAEUDE_BAUPLATZ;
+#include "client_placement.h"
 
 #ifdef REBREW_GOLD
 void __cdecl fcn_00458a10(char* object, float* position, float* result);

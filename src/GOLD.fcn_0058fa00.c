@@ -1,10 +1,5 @@
 #include "Develop/Units/d3/d3_object.h"
-
-/* 32 object pointers plus a count. Native clear is 132 bytes. */
-typedef struct LC_OBJECT_LIST {
-	char* objects[32];
-	int count;
-} LC_OBJECT_LIST;
+#include "client_placement.h"
 
 int __cdecl fcn_0064d470(char*, void*);
 

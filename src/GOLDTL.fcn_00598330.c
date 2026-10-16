@@ -1,21 +1,14 @@
 #include <string.h>
-
-/* 32 object pointers plus a count. Native clear is 132 bytes. */
-typedef struct LC_OBJECT_LIST {
-	char* objects[32];
-	int count;
-} LC_OBJECT_LIST;
+#include "client_placement.h"
 
 extern int g_67a370;
 extern int g_776664;
 
 #ifdef REBREW_GOLD
-char __cdecl fcn_0058fa00(char*, void*);
 char __cdecl fcn_00438d40(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
 #define lc_Collect fcn_0058fa00
 #define lc_WalkScene fcn_00438d40
 #else
-char __cdecl fcn_005982d0(char*, void*);
 char __cdecl fcn_004379a0(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
 #define lc_Collect fcn_005982d0
 #define lc_WalkScene fcn_004379a0
