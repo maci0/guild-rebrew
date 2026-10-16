@@ -55046,3 +55046,60 @@ receipts are upstream-push*.log and upstream-focused-after-rebase.log in Goal63.
   definitions. Fresh server gate PASS:286720 raw bytes identical, matching data,
   imports/relocations/layout, successful Wine load/export checks. Participant's
   wording-only comment cleanup is independently replayed against current source.
+
+## Goal67 — animation callback and larger native pairs, 2026-10-16
+
+- Adopted shared AttachAnimLooped TL40eff0 / Gold40e0e0:454 executable bytes per
+  target, all15operands/3literaluses and25rejecting controls. No compiler override
+  or assembly. Ten following NOPs stay outside the source extent in each retained
+  464-byte inventory span. Eighteen bounded cases/client (72 native/compiled runs)
+  check waiting slots/null draw, exact12-byte options for full kind0/1/2/257,
+  lookup/load/attach order, diagnostic, callback writes, null object/context,
+  stale callbacks and all three path/name buffers. Actual native67-byte401040
+  helper is included, with only strchr modeled. Wrong-slotbase/two-slot controls
+  reject. This is bounded service modeling, not real renderer execution.
+- Canonical12-byte attachment-service prototype moved to d3_animation.h; three
+  identical local declarations removed. The unchanged d3.animation-options stable
+  ID was rebound for both targets. All41 old target contexts across15files preserve
+  complete code/fixups/literals, including weak TL ch_Updatelowpoly. All24 parsed
+  function-definition spans are unchanged. Current scoped verification passes40old
+  strong contexts plus2new; the one preexisting weak result remains unchanged.
+  All6063 previous EXACT/RELOC statuses retain their exact value. No data/storage
+  definitions or new helper provider are claimed.
+- Native cutscene first190-byte handler has an allocator-zero path that rejoins
+  a byte read at address8, confirmed in both targets. Preserve that quirk; do not
+  insert the adjacent handler's graceful return or silently equate its entire
+  client algorithm with SERVER's37-byte ID/timestamp handler.
+- cm_ExCreateGeb TL4cc820 / Gold4cbca0 has a complete shared838-byte scratch match,
+ 44operands,8literals,81rejecting controls per target. It is NOT adopted: canonical
+  allocator prototypes conflict (command.c byte/ushort vs spiel.c int/int).
+  Compatible int/int caller emits842 bytes; narrowing the existing factory fails
+  its independently attested assembly operand. Native factory consumes low8/low16
+  inputs then reuses full argument slots as counters; original formal spelling
+  remains unresolved. Also close84-byte placement views,132-byte callback context,
+  iterator/callback/provider pairings and Gold twins before integration. Do not
+  preserve contradictory declarations merely to count838 new bytes.
+- amt_ExecGebaeudeBauen TL4a4d90 / Gold4a5320: native543+1NOP; scratch527 after four
+  bounded source-shape families. Two merged early-failure epilogues account14of16
+  deficit. Providers/callers still transport scene, VFS and packet pointers asint.
+  No promotion or broad sweep. Native1915-byte ls_LoadCharacter pair is also
+  established; its1904-byte source remains experimental, with action-loop/contract
+  debt and strrchr (LAST underscore) semantics recorded in the network report.
+  CHARACTER allocation0x244 differs from Figure's0x228 accessed view; do not confuse
+  it with the D3 object allocation. Native helper515540 / Gold511df0 is a new
+  separate151-byte inventory lead, not existing5153f0's provider.
+- TL no-source1212→1211 and1207266→1206802bytes. New matched game bytes454 per
+  client; the ten additional accounted bytes are alignment. Current accounted
+  text1123524/2491370 is45.096633...%; status deliberately floors one decimal to
+  45.0%, so the unchanged displayed percentage is not lost byte progress. Keep
+  library/padding accounting separate from newly reconstructed game bytes.
+- Receipts: .scratch/goal67/attach-loop/{proof.json,proof-REPORT.md,effects.json},
+  animation-preservation/{report.md,preservation.json},create-building/report.md,
+  build-action/REPORT.md,load-character reports,first-command-null-path.json,
+  scope-promote.json,preservation.json,lint.json,data.json,status.json,server-gate.log.
+  Client full raw-file/data/provider/placement and global ownership proofs remain
+  open. The complete goal.md objective stays active.
+- Final all-target lint has zero errors/warnings and data zero conflicts/duplicate
+  definitions. Fresh server gate PASS: all286720 raw bytes identical, data/imports/
+  relocations/layout match, Wine load/exports succeed. All6063 prior strong
+  statuses retain their exact value after the gate; client full links remain open.

@@ -50,7 +50,6 @@ int __cdecl fcn_00451840(float*, float*, float);
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl fcn_00438cb0(char*, float*);
 void __cdecl fcn_0042e540(char*);
-char* __cdecl fcn_00434970(char*, char*, D3_ANIMATION_OPTIONS);
 int __cdecl fcn_00413120(char*);
 
 

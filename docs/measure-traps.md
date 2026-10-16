@@ -3295,3 +3295,15 @@ types. Moving the getter's private occupancy view to ch_queue.h reduces that
 reported count from 1,021 to 1,020. Four compiler-checked stable bindings verify
 the two shared header layouts for both clients; every previous binding survives.
 Neither a source-count change nor a matching object establishes storage ownership.
+
+## Native cutscene allocation failure rejoins a pointer read (Goal67)
+
+The 190-byte command at TL4c9e20 / Gold4c9280 has a surprising native zero-result
+path. After its allocation call, zero EAX branches to entry+0xb7 (`mov ebx,1`),
+then entry+0xbc jumps to entry+0x6e (`cmp byte ptr [eax+8],5`). EAX is still zero,
+so the first joined access reads address8. There is no graceful failure return
+on that path. Do not import the adjacent111-byte handler's null guard or merge
+this body into the SERVER37-byte ID/timestamp handler without native evidence.
+Both targets' instruction assertions are in
+`.scratch/goal67/first-command-null-path.json`. This establishes the native path,
+not arbitrary-runtime memory safety or a compiled source/provider identity.

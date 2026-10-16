@@ -2309,3 +2309,40 @@ Complete native operands, literals and rejecting controls are in
 `.scratch/goal66/method-production-proof.json`, `commands-production-proof.json`
 and the independent parallel reports. These object proofs do not establish
 client raw-link provider selection, placement or full-image identity.
+
+## AttachAnimLooped (Goal67, 2026-10-16)
+
+The script diagnostic attests `AttachAnimLooped` at TL40eff0 / Gold40e0e0.
+The shared C89 body has 454 executable bytes followed by ten alignment NOPs;
+its 464-byte native inventory spans are retained. The source filename and
+placement with the other character script callbacks are inferred.
+
+Arguments are a character-pointer slot, animation-name-pointer slot and full
+integer kind pointer. The resumed path reads the object before any null-object
+check, then tests three nullable draw-data pointer cells at stride0x7c. Their
+first offsets are TL0x484 / Gold0x178; these measured byte views do not claim
+complete slot records, backing allocations or a universal context layout.
+A nonempty cell reschedules this callback; null draw or three empty cells return0.
+
+The fresh path appends `.baf`, copies the path to a name buffer and runs existing
+401040 on that name. Its returned basename is copied into an otherwise unused
+third buffer. Preserve this copy and the helper's first-separator/first-dot
+behavior. Lookup uses the mutated name, loading uses the original path,
+and attachment uses object+0x1cc. A loader failure does not suppress attachment.
+Attachment failure invokes the original script diagnostic; no new logger is added.
+
+Existing `D3_ANIMATION_OPTIONS` remains twelve bytes passed by value. Native sets
+mode to low8(kind), layer to16 only when the FULL integer kind equals1, loop to1,
+reverse to0 and queue to1; all remaining bits/padding are zero. Canonical helper
+434970 / Gold435550 consumes context,name and those three DWORDs and returns a
+slot pointer. Its prototype is now in d3_animation.h, replacing three identical
+local declarations. That native ABI proof does not create a source/link provider.
+The existing stable type ID was rebound without changing its layout.
+
+Complete two-target native proofs cover fifteen operands, three literal uses and
+25 rejecting controls per target. Independent preservation checks cover all41 old
+contexts across fifteen existing files, including the weak TL ch_Updatelowpoly;
+all compiled code, fixups, literals and function-definition hashes stay unchanged.
+Receipts: `.scratch/goal67/attach-loop/{proof.json,effects.json}` and
+`.scratch/goal67/animation-preservation/preservation.json`. No storage, assembly,
+compiler override or raw client-link identity is claimed.

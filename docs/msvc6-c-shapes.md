@@ -11951,3 +11951,33 @@ A positive `if (p != 0)` copy/store region followed by `return p` preserves its
 those two shapes are rejected. No extra flags, volatile or assembly are needed.
 See `.scratch/goal66/method-production-proof.json`, `commands-production-proof.json`
 and the independent method/command preservation reports.
+
+## Script animation options ordering (Goal67, 2026-10-16)
+
+TL40eff0 / Gold40e0e0 (`AttachAnimLooped`) match 454 complete executable bytes
+under default Processor Pack flags. The twelve-byte by-value options record
+uses the existing D3_ANIMATION_OPTIONS type. Measured source order is:
+
+```c
+memset(&options, 0, sizeof(options));
+*(int*) &options = 0;
+options.queue = 1;
+options.layer = *kind == 1 ? 0x10 : 0;
+options.mode = (unsigned char) *kind;
+options.reverse = 0;
+options.loop = 1;
+```
+
+Moving the repeated first-word zero after queue delayed its store and selected
+EAX instead of ECX. Putting mode before layer swapped the kind-byte/mask register
+lifetimes. Early reverse/loop writes added two bytes; the final order matches
+all native instructions and operands. These spellings are inferred, not recovered
+original text. Do not add flags, volatile, assembly or arbitrary local-order sweeps.
+
+The indexed name copy must preserve the cached byte through increment/test.
+An explicit do-loop with a byte temporary matches; testing source[i-1] after
+increment forces a redundant reload, while the initial for-condition assignment
+places its updates differently. The otherwise unused resolved-name buffer and
+copy are native and must remain. All bounded shapes/results are retained under
+`.scratch/goal67/attach-loop`; both production targets pass complete operand and
+literal proofs. Wider callback/context/storage contracts remain separate.

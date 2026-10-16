@@ -6,7 +6,6 @@
 
 int __cdecl fcn_0065f220(const char*, const char*);
 void __cdecl fcn_0042e540(char*);
-char* __cdecl fcn_00434970(char*, char*, D3_ANIMATION_OPTIONS);
 void __cdecl fcn_00435500(char*, char*);
 
 
