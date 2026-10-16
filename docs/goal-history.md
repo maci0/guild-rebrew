@@ -5619,3 +5619,56 @@ timer-loop or Goal62 runner searches without new evidence. Preserve OWN-before-
 OTHER stateful query order. Prior packet-pointer checkpoint2eaccc18, timer and
 mapping evidence remain in docs/TODO.md and their scratch receipts. Every goal
 completion criterion above still applies.
+
+
+## Before Goal66 integration — 2026-10-16
+
+## Current continuation — 2026-10-16
+
+The full goal remains ACTIVE and incomplete. Latest user priority is the1213
+TL no-source functions. Parallel work is explicitly authorized: commands own
+TL4c9a10/4c9e20 family, actions own55ffe0/512b40, networking owns4210a0/494ed0.
+Their candidates and reports are isolated in .scratch/parallel-no-source; only
+reviewed source/operand/provider evidence may be integrated. Root owns managed
+writes and final checks. Preserve source sharing and all prior strong matches.
+
+Goal65 adds inferred SaveBMP8 at TL401d10: complete441 executable bytes, all
+eight operands, exact wbn literal, thirteen rejecting controls and seven NOPs
+pass. The448-byte inventory span remains. Eight native and compiled cases each
+agree with independently packed BMP header/palette/row bytes, including odd
+width without padding, null/custom palettes, zero/negative heights, open failure
+and ignored write failures. The private fill0 reuses the independently attested
+original aligned-fill macro; fresh native sites and stock-archive exclusions
+support managed helper provenance. Its name and source placement are inferred.
+SDK BMP types introduce no new project type or storage. New TL game bytes441;
+Gold0. Broader legacy VFS global/prototype/provider contracts remain open.
+
+SaveBMP24 TL401ed0 / Gold401b90 is paired439 code bytes plus9 NOPs. Its447-byte
+scratch body passes twelve bounded output checks, including exact44-byte info
+blocks and BGR conversion; it remains unadopted and unmatched. Do not resume its
+bounded header/indexed-loop shape trials without new evidence. Receipts live
+in .scratch/goal65/indexed and bmp24. Lint/data are clean for every target; a
+fresh server gate passes with all 286720 raw bytes identical, matching data,
+imports, relocations and layout, and successful Wine load/export checks.
+
+Goal64 committed0e32efdc adds one shared485-byte quad sampler in both clients
+and the79-byte Gold projection counterpart, with complete operand/literal proof
+and rejecting controls. All eight earlier affected strong contexts pass and one
+weak102-byte context retains its exact prior output. client_scene_transform.h
+holds the narrowed object/float access contract; broader455350/scene contracts
+remain open. Preserve native double0.9 sampling bias and distinct plane sentinels.
+
+Goal63's65 native-only mappings cover55 TL functions/150636 inventory bytes
+plus ten large Gold counterparts. They do not earn source providers or byte
+verdicts. Reuse saved7.1M FLIRT results and diagnostic/Kuna/native dossiers rather
+than repeating scans. Prefix fortify/check-fail hits were rejected; DirectX
+attribution still needs whole-body operands and raw-map provider evidence.
+
+Continue tractable mapped no-source bodies. rd_AllBauplatzToSupermap remains
+scratch-only260/123matching; record/array,Op/O1,G3/G6 probes do not justify new
+flags. Its wrapper needs enum pointer/count repair: fourteen native callers
+consume count despite existing void providers. Preserve null holes. Gold callback
+58f780's250+6 extent is a review lead only. Do not resume exhausted court/queue/
+office/camera/timer/runner families without new evidence; retain OWN-before-OTHER
+stateful query order. Both full client raw-file/data proofs and linked providers
+remain open. Every goal completion criterion above still applies.

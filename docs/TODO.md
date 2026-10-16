@@ -54999,3 +54999,50 @@ receipts are upstream-push*.log and upstream-focused-after-rebase.log in Goal63.
   lint.json, data.json and server-gate.log. The command/action/network passes
   run independently under .scratch/parallel-no-source; review their full native
   operand/provider evidence and integration scope before applying results.
+
+## Goal66 — parallel no-source integration, 2026-10-16
+
+- Integrated one shared am_RegisterMethod definition,579 bytes per client, with
+  complete27-operand/seven-literal-use proof and41 rejecting controls per target.
+  Default flags plus narrow inferred pragma function(memcpy) preserve the explicit
+  native copy. Stable am.effect/am.method stride bindings pass native/compiler
+  layout checks. Four prior caller files use one header; all eight contexts keep
+  code/fixups/literals, and all72 existing Gold assembly-macro sites were rechecked
+  before refreshing the four original-assembly evidence records. No assembly was
+  added and callback invocation contracts remain opaque.
+- Native cutscene inventory384-byte spans split through reviewed repair-extents
+  into independent190/111/70-byte entries, retaining history and2/1/10 NOPs outside
+  executable bodies. New inferred cm_ExCreateCutsceneEntry111 and
+  cm_ExAddCutsceneParticipant70 match both clients completely with all operands,
+  literal contents and rejecting controls. Do not conflate the111-byte reused
+  cm_ExAllocCutscene diagnostic with the server handler at dispatch index0x27:
+  server indices0x28/0x29 are cm_ChainNoop. The old190-byte association remains
+  explicitly inferred, without source/status/provider. Seven existing packet/
+  allocator contexts retain identical output after incomplete-buffer declaration
+  and pointer-return repairs. No complete payload/global allocation or owner is
+  invented.
+- Newly matched game code: TL760 and Gold760 bytes, excluding padding, library
+  attribution, native-only names and previously matched allocator bytes. All6057
+  earlier EXACT/RELOC rows retain their exact status. TL no-source1213→1212 and
+ 1208039→1207266 bytes: two previously hidden native entries increase the catalog
+  count while gaining source immediately. The extra13-byte reduction is separated
+  native padding, not new matched code.
+- Upstream native-only rename refusal previously emitted a misleading path error.
+  Fixed directly upstream as e1230fc7, eight regressions,127 rename tests,12392 full
+  suite passes/48 skips, all checks and mandatory push hook pass. Canonical main
+  and origin/main agree; isolated fix worktree/branch removed. Refusal still
+  preserves identity and creates no provider; reviewed definitions must register
+  before placeholder references can bind through supported source rename.
+- Warehouse TL55ffe0/Gold557dc0, init_Betrieb512b40/50f570, gfx546720/53e9e0,
+  crime4c9a10/4c8e70 and nt_Recv4210a0/424c80 remain scratch, unmatched. The parallel
+  reports record native pairings and bounded failed shapes. Do not resume open
+  searches without new evidence or change discarded server inputs to adopt clients.
+- Receipts: .scratch/goal66/{method-production-proof.json,commands-production-proof.json,
+  commands-preservation-review.md,method-review/FINAL.md,scope-promote.json,
+  preservation.json,lint.json,data.json,status.json,server-gate.log}; upstream logs
+  remain in .scratch/parallel-no-source/network. Client full raw-link/provider/
+  placement/data and unresolved global ownership proofs remain open.
+- Final all-target lint: zero errors/warnings; data: zero conflicts/duplicate
+  definitions. Fresh server gate PASS:286720 raw bytes identical, matching data,
+  imports/relocations/layout, successful Wine load/export checks. Participant's
+  wording-only comment cleanup is independently replayed against current source.

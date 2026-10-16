@@ -11209,8 +11209,45 @@
   },
   {
     "va": 5018240,
-    "size": 384,
-    "name": "fcn.004c9280"
+    "size": 190,
+    "name": "fcn.004c9280",
+    "extent_history": [
+      {
+        "old_size": 384,
+        "new_size": 190,
+        "reason": "Independent native entries, terminal instructions, command-table pointers and TL twins; .scratch/parallel-no-source/commands/entry-proof.json and dispatch-index-proof.json. No source or provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T02:42:55.668999+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5018432,
+    "size": 111,
+    "name": "fcn.004c9340",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 111,
+        "reason": "Independent native entries, terminal instructions, command-table pointers and TL twins; .scratch/parallel-no-source/commands/entry-proof.json and dispatch-index-proof.json. No source or provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T02:42:55.670767+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5018544,
+    "size": 70,
+    "name": "fcn.004c93b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 70,
+        "reason": "Independent native entries, terminal instructions, command-table pointers and TL twins; .scratch/parallel-no-source/commands/entry-proof.json and dispatch-index-proof.json. No source or provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T02:42:55.672547+00:00"
+      }
+    ]
   },
   {
     "va": 5018624,

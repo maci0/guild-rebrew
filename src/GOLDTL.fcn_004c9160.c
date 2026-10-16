@@ -6,7 +6,7 @@
 typedef Msg_aed340 Msg;
 // SIZE 0xf8
 
-extern Msg_aed340 g_aed340;
+#include "client_packet_queue.h"
 extern char g_aed438[];
 extern int g_14cbca0;
 extern int g_7749d0;
@@ -23,7 +23,7 @@ int __cdecl fcn_004c9160(char *a1, char *a2)
 	char *w;
 	char *s2;
 
-	m = g_aed340;
+	m = *(Msg*) g_aed340;
 	o = fcn_00508e40(m.who);
 	if (g_14cbca0 != -1) {
 		if (m.flags & 1) {

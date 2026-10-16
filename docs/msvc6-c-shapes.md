@@ -11928,3 +11928,26 @@ existing weak contexts retain their previous compiled bytes, fixups and literals
 their weak verdicts are not promoted. No flags, assembly, new storage or source
 reorganization was introduced. Replays: `.scratch/goal62/packet-proof.py`,
 `weak-preservation.py` and `verify-scope.py` with their JSON receipts.
+
+## Method registration's explicit memcpy (Goal66, 2026-10-16)
+
+TL494ed0 / Gold495510 share579 executable bytes. The native body calls memcpy
+for32 bytes from method+0x30 to+0x50, then uses a37-DWORD REP MOVSD for the final
+0x94-byte registry assignment. Default Processor Pack `/O2 /Gd` plus the narrow
+`#pragma function(memcpy)` preserves both operations. `/Oi-` also matches, but
+is broader than the evidenced requirement and is not adopted. The exact pragma
+spelling is inferred; the explicit native call is established. Both production
+contexts pass complete resolved-byte/literal proofs and rejecting controls.
+
+The effect type is an unsigned byte. Native loads it into a cleared full-width
+register before comparing with-1; do not change its signedness, compare with0xff
+or remove the apparent defective test. Four prior callers now use the inferred
+shared AM_METHOD layout without changing their compiled bytes, fixups or literals.
+Both effect and method sizes are native strides, not allocation claims.
+
+The cutscene allocation helper TL4e6ae0 / Gold4e5150 returns its allocated pointer.
+A positive `if (p != 0)` copy/store region followed by `return p` preserves its
+46-byte body. Early null return and returning memcpy's result emit47 bytes;
+those two shapes are rejected. No extra flags, volatile or assembly are needed.
+See `.scratch/goal66/method-production-proof.json`, `commands-production-proof.json`
+and the independent method/command preservation reports.

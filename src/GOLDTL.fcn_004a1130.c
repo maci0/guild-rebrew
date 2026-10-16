@@ -1,17 +1,7 @@
 #include <string.h>
 
-typedef struct Deed {
-	unsigned char type;
-	char name[0x23];
-	void* score;
-	void* start;
-	void* run;
-	char pad30[0x60];
-	int flags;
-} Deed;
-// SIZE 0x94
+#include "client_method_registry.h"
 
-int __cdecl fcn_00494ed0(Deed* d, char* e);
 int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e);
 int __cdecl fcn_00495960(void);
 int __cdecl fcn_00495980(void);
@@ -153,7 +143,7 @@ int __cdecl fcn_004a1080(void);
 /* ADDRESS: GOLDTL 0x004a1130 */
 int __cdecl fcn_004a1130(char* e)
 {
-	Deed d;
+	AM_METHOD d;
 
 	{
 		char* p;
@@ -186,7 +176,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_004959f0;
 	d.run = fcn_00495a10;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -220,7 +210,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00495a20;
 	d.run = fcn_00495a40;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -254,7 +244,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00495a50;
 	d.run = fcn_00495a70;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -288,7 +278,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00495a80;
 	d.run = fcn_00495f80;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -322,7 +312,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00495fe0;
 	d.run = fcn_00496480;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -356,7 +346,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00495960;
 	d.run = fcn_00495980;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -390,7 +380,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00495990;
 	d.run = fcn_004959b0;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -424,7 +414,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_004959c0;
 	d.run = fcn_004959e0;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -458,7 +448,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00496810;
 	d.run = fcn_00496ca0;
 	d.flags = 0x19;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -492,7 +482,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00496e60;
 	d.run = fcn_00497000;
 	d.flags = 0x1b;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -526,7 +516,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00497030;
 	d.run = fcn_004973a0;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -560,7 +550,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_004974c0;
 	d.run = fcn_004974d0;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -594,7 +584,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_004974e0;
 	d.run = fcn_00497670;
 	d.flags = 0xff;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -628,7 +618,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_004976e0;
 	d.run = fcn_004978d0;
 	d.flags = 0xff;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -662,7 +652,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00497990;
 	d.run = fcn_00497e60;
 	d.flags = 0x3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -696,7 +686,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00497ec0;
 	d.run = fcn_00498470;
 	d.flags = 0x3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -730,7 +720,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00498570;
 	d.run = fcn_00498660;
 	d.flags = 0x3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -764,7 +754,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00498670;
 	d.run = fcn_00498c90;
 	d.flags = 0x3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -798,7 +788,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00498e00;
 	d.run = fcn_00498e10;
 	d.flags = 0x3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -832,7 +822,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00498e20;
 	d.run = fcn_00498f40;
 	d.flags = 0x3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -866,7 +856,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00498f50;
 	d.run = fcn_00498fb0;
 	d.flags = 0x3b;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -900,7 +890,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00499090;
 	d.run = fcn_004994c0;
 	d.flags = 0x1c3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -934,7 +924,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00499640;
 	d.run = fcn_00499950;
 	d.flags = 0x1c9;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -968,7 +958,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = PrepareBuergerrecht;
 	d.run = fcn_00499ad0;
 	d.flags = 0x1b;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1002,7 +992,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00499cc0;
 	d.run = fcn_00499db0;
 	d.flags = 0x1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1036,7 +1026,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_00499dc0;
 	d.run = fcn_00499fe0;
 	d.flags = 0x3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1070,7 +1060,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049a0c0;
 	d.run = fcn_0049a4b0;
 	d.flags = 0x19;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1104,7 +1094,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049a590;
 	d.run = fcn_0049a7b0;
 	d.flags = 0x39;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1138,7 +1128,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049a880;
 	d.run = fcn_0049aa80;
 	d.flags = 0x3b;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1172,7 +1162,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049ab50;
 	d.run = fcn_0049ace0;
 	d.flags = 0x3f;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1206,7 +1196,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049adb0;
 	d.run = fcn_0049b120;
 	d.flags = 0x17;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1240,7 +1230,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049b1f0;
 	d.run = fcn_0049b680;
 	d.flags = 0xc9;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1274,7 +1264,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049b7c0;
 	d.run = fcn_0049ba30;
 	d.flags = 0x39;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1308,7 +1298,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049bba0;
 	d.run = fcn_0049bbc0;
 	d.flags = 0xff;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1342,7 +1332,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049bdf0;
 	d.run = fcn_0049be10;
 	d.flags = 0xff;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1376,7 +1366,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049bfa0;
 	d.run = fcn_0049c130;
 	d.flags = 0x69;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1410,7 +1400,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049c1c0;
 	d.run = fcn_0049c2b0;
 	d.flags = 0xff;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1444,7 +1434,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049c310;
 	d.run = fcn_0049c590;
 	d.flags = 0x39;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1478,7 +1468,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049c760;
 	d.run = fcn_0049c7e0;
 	d.flags = 0xff;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1512,7 +1502,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049c880;
 	d.run = fcn_0049ca60;
 	d.flags = 0x5d;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1546,7 +1536,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049cb20;
 	d.run = fcn_0049ccb0;
 	d.flags = 0x5d;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1580,7 +1570,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049cd00;
 	d.run = fcn_0049ce90;
 	d.flags = 0x39;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1614,7 +1604,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049cf80;
 	d.run = fcn_0049d010;
 	d.flags = 0xc9;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1648,7 +1638,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049d0d0;
 	d.run = fcn_0049d160;
 	d.flags = 0xc9;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1682,7 +1672,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049d180;
 	d.run = fcn_0049d200;
 	d.flags = 0xff;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1716,7 +1706,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049d300;
 	d.run = RunBuergermeister;
 	d.flags = 0x39;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1750,7 +1740,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049e1e0;
 	d.run = fcn_0049e4d0;
 	d.flags = 0x3b;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1784,7 +1774,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049d7c0;
 	d.run = fcn_0049d920;
 	d.flags = 0x39;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1818,7 +1808,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049d930;
 	d.run = fcn_0049dc70;
 	d.flags = 0x39;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1852,7 +1842,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049dd90;
 	d.run = fcn_0049e0c0;
 	d.flags = 0x39;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1886,7 +1876,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049e750;
 	d.run = fcn_0049e860;
 	d.flags = 0x69;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1920,7 +1910,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049e900;
 	d.run = fcn_0049edb0;
 	d.flags = 0x7;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1954,7 +1944,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049f000;
 	d.run = fcn_0049f230;
 	d.flags = 0x7;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -1988,7 +1978,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049f290;
 	d.run = fcn_0049f5c0;
 	d.flags = 0x19;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -2022,7 +2012,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049f6d0;
 	d.run = fcn_0049fa80;
 	d.flags = 0x3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -2056,7 +2046,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_0049fad0;
 	d.run = fcn_0049fc30;
 	d.flags = 0x43;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -2090,7 +2080,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_004a02d0;
 	d.run = fcn_004a0380;
 	d.flags = 0x4b;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -2124,7 +2114,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_004a04b0;
 	d.run = fcn_004a08a0;
 	d.flags = 0x1b;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -2158,7 +2148,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_004a0bb0;
 	d.run = fcn_004a0da0;
 	d.flags = 0x1f;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -2192,5 +2182,5 @@ int __cdecl fcn_004a1130(char* e)
 	d.start = fcn_004a0e20;
 	d.run = fcn_004a1080;
 	d.flags = 0x13;
-	return fcn_00494ed0(&d, e) != 0;
+	return am_RegisterMethod(&d, e) != 0;
 }

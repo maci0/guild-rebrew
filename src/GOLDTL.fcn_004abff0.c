@@ -1,17 +1,7 @@
 #include <string.h>
 
-typedef struct Deed {
-	unsigned char type;
-	char name[0x23];
-	void* score;
-	void* start;
-	void* run;
-	char pad30[0x60];
-	int flags;
-} Deed;
-// SIZE 0x94
+#include "client_method_registry.h"
 
-int __cdecl fcn_00494ed0(Deed* d, char* e);
 int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e);
 int __cdecl fcn_004ab500(void);
 int __cdecl fcn_004ab7d0(void);
@@ -26,7 +16,7 @@ int __cdecl fcn_004abf80(void);
 /* ADDRESS: GOLDTL 0x004abff0 */
 int __cdecl fcn_004abff0(char* e)
 {
-	Deed d;
+	AM_METHOD d;
 
 	{
 		char* p;
@@ -59,7 +49,7 @@ int __cdecl fcn_004abff0(char* e)
 	d.start = fcn_004ab500;
 	d.run = fcn_004ab7d0;
 	d.flags = 0x1c3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -93,7 +83,7 @@ int __cdecl fcn_004abff0(char* e)
 	d.start = fcn_004ab910;
 	d.run = fcn_004abb10;
 	d.flags = 0x1c3;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -127,7 +117,7 @@ int __cdecl fcn_004abff0(char* e)
 	d.start = fcn_004abbe0;
 	d.run = fcn_004abd80;
 	d.flags = 1;
-	if (fcn_00494ed0(&d, e) == 0) {
+	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
 	}
 	{
@@ -161,5 +151,5 @@ int __cdecl fcn_004abff0(char* e)
 	d.start = fcn_004abe20;
 	d.run = fcn_004abf80;
 	d.flags = 3;
-	return fcn_00494ed0(&d, e) != 0;
+	return am_RegisterMethod(&d, e) != 0;
 }

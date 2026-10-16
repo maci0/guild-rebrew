@@ -17659,3 +17659,93 @@ section = ".data"
 note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
 updated_by = "data"
 updated_at = "2026-10-16T00:09:02+00:00"
+
+["GOLDTL.0x01008420"]
+type = "char[]"
+name = "g_1008420"
+section = ".data"
+file = "src/GOLDTL.am_RegisterMethod.c"
+kind = "GLOBAL"
+note = "Inferred byte/record access view used by am_RegisterMethod; declaration only. Complete extent, backing allocation and storage owner unresolved. Goal66 native operand proof; no storage or allocation claim."
+updated_by = "data"
+updated_at = "2026-10-16T02:41:07+00:00"
+
+["GOLDTL.0x01008540"]
+type = "AM_METHOD[]"
+name = "g_1008540"
+section = ".data"
+file = "src/GOLDTL.am_RegisterMethod.c"
+kind = "GLOBAL"
+note = "Inferred byte/record access view used by am_RegisterMethod; declaration only. Complete extent, backing allocation and storage owner unresolved. Goal66 native operand proof; no storage or allocation claim."
+updated_by = "data"
+updated_at = "2026-10-16T02:41:07+00:00"
+
+["GOLD.0x00f83da0"]
+type = "char[]"
+name = "g_1008420"
+section = ".data"
+file = "src/GOLDTL.am_RegisterMethod.c"
+kind = "GLOBAL"
+note = "Inferred byte/record access view used by am_RegisterMethod; declaration only. Complete extent, backing allocation and storage owner unresolved. Goal66 native operand proof; no storage or allocation claim."
+updated_by = "data"
+updated_at = "2026-10-16T02:41:19+00:00"
+
+["GOLD.0x00f83ec0"]
+type = "AM_METHOD[]"
+name = "g_1008540"
+section = ".data"
+file = "src/GOLDTL.am_RegisterMethod.c"
+kind = "GLOBAL"
+note = "Inferred byte/record access view used by am_RegisterMethod; declaration only. Complete extent, backing allocation and storage owner unresolved. Goal66 native operand proof; no storage or allocation claim."
+updated_by = "data"
+updated_at = "2026-10-16T02:41:19+00:00"
+
+["GOLD.0x00631090"]
+type = "char[]"
+name = "g_6b5c60"
+section = ".data"
+file = "src/GOLDTL.am_RegisterMethod.c"
+kind = "GLOBAL"
+note = "Inferred byte/record access view used by am_RegisterMethod; declaration only. Complete extent, backing allocation and storage owner unresolved. Goal66 native operand proof; no storage or allocation claim."
+updated_by = "data"
+updated_at = "2026-10-16T02:41:19+00:00"
+
+["GOLDTL.0x00aed340"]
+file = "src/client_packet_queue.h"
+name = "g_aed340"
+kind = "GLOBAL"
+type = "unsigned char[]"
+section = ".data"
+note = "Incomplete assembled incoming bytebuffer declaration;248/276/860-byte consumer views do not establish full allocation. Separate from outgoing g_aed32c. Owner/full extent/backing unresolved; Goal66 native reassembly and operand proof."
+updated_by = "data"
+updated_at = "2026-10-16T02:43:52+00:00"
+
+["GOLD.0x00a68d40"]
+file = "src/client_packet_queue.h"
+name = "g_aed340"
+kind = "GLOBAL"
+type = "unsigned char[]"
+section = ".data"
+note = "Incomplete assembled incoming bytebuffer declaration;248/276/860-byte consumer views do not establish full allocation. Separate from outgoing g_aed32c. Owner/full extent/backing unresolved; Goal66 native reassembly and operand proof."
+updated_by = "data"
+updated_at = "2026-10-16T02:43:55+00:00"
+
+["GOLDTL.0x007747b0"]
+type = "unsigned char"
+name = "g_7747b0"
+section = ".data"
+file = "src/GOLDTL.cm_ExCreateCutsceneEntry.c"
+kind = "GLOBAL"
+note = "Existing provisional byte access view, inferred client flags role. This handler tests mask 0x04; other consumers access wider views. No complete allocation or storage-owner claim. Goal66 full native operand proof."
+updated_by = "data"
+updated_at = "2026-10-16T02:46:40+00:00"
+
+["GOLD.0x006f23f8"]
+type = "unsigned char"
+name = "g_7747b0"
+section = ".data"
+file = "src/GOLDTL.cm_ExCreateCutsceneEntry.c"
+kind = "GLOBAL"
+note = "Existing provisional byte access view, inferred client flags role. This handler tests mask 0x04; other consumers access wider views. No complete allocation or storage-owner claim. Goal66 full native operand proof."
+updated_by = "data"
+updated_at = "2026-10-16T02:46:41+00:00"

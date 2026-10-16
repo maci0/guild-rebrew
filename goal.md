@@ -107,53 +107,57 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-16
 
-The full goal remains ACTIVE and incomplete. Latest user priority is the1213
-TL no-source functions. Parallel work is explicitly authorized: commands own
-TL4c9a10/4c9e20 family, actions own55ffe0/512b40, networking owns4210a0/494ed0.
-Their candidates and reports are isolated in .scratch/parallel-no-source; only
-reviewed source/operand/provider evidence may be integrated. Root owns managed
-writes and final checks. Preserve source sharing and all prior strong matches.
+The full goal remains ACTIVE and incomplete. Goal66 completes the first parallel
+no-source integration batch. New shared bodies am_RegisterMethod579,
+cm_ExCreateCutsceneEntry111 and cm_ExAddCutsceneParticipant70 add760 matched game
+bytes to EACH client, with complete operands/literals and rejecting controls.
+All6057 prior strong statuses are unchanged. Nineteen affected contexts pass
+fresh verification; independent preservation covers all15 old contexts, including
+all72 original Gold assembly-macro sites. No assembly was added.
 
-Goal65 adds inferred SaveBMP8 at TL401d10: complete441 executable bytes, all
-eight operands, exact wbn literal, thirteen rejecting controls and seven NOPs
-pass. The448-byte inventory span remains. Eight native and compiled cases each
-agree with independently packed BMP header/palette/row bytes, including odd
-width without padding, null/custom palettes, zero/negative heights, open failure
-and ignored write failures. The private fill0 reuses the independently attested
-original aligned-fill macro; fresh native sites and stock-archive exclusions
-support managed helper provenance. Its name and source placement are inferred.
-SDK BMP types introduce no new project type or storage. New TL game bytes441;
-Gold0. Broader legacy VFS global/prototype/provider contracts remain open.
+TL no-source is now1212 /1207266bytes, from1213 /1208039. Two previously hidden
+entries were added to each native inventory while gaining source;13 bytes formerly
+inside a384-byte span are now correctly separate padding. Count/catalog repairs
+are distinct from the760 newly matched executable bytes. TL accounted text45.0%
+still includes libraries/padding; full client raw links are not established.
 
-SaveBMP24 TL401ed0 / Gold401b90 is paired439 code bytes plus9 NOPs. Its447-byte
-scratch body passes twelve bounded output checks, including exact44-byte info
-blocks and BGR conversion; it remains unadopted and unmatched. Do not resume its
-bounded header/indexed-loop shape trials without new evidence. Receipts live
-in .scratch/goal65/indexed and bmp24. Lint/data are clean for every target; a
-fresh server gate passes with all 286720 raw bytes identical, matching data,
-imports, relocations and layout, and successful Wine load/export checks.
+The old client cutscene384-byte spans are independently dispatched190/111/70-byte
+functions with2/1/10 NOPs. Diagnostic reuse does not prove unique names: the first
+entry pairs with SERVER cm_ExAllocCutscene at command index0x27; SERVER0x28/0x29
+are cm_ChainNoop. Keep the two new names inferred and separate from SERVER. The
+old190-byte name remains a provisional counterpart association, with Goal63's
+nearest-diagnostic attribution explicitly superseded. Incoming g_aed340 is an
+incomplete bytebuffer, separate from outgoing g_aed32c; no owner/full extent or
+allocation is invented. The pointer-return allocator repair preserves46bytes.
 
-Goal64 committed0e32efdc adds one shared485-byte quad sampler in both clients
-and the79-byte Gold projection counterpart, with complete operand/literal proof
-and rejecting controls. All eight earlier affected strong contexts pass and one
-weak102-byte context retains its exact prior output. client_scene_transform.h
-holds the narrowed object/float access contract; broader455350/scene contracts
-remain open. Preserve native double0.9 sampling bias and distinct plane sentinels.
+The method header records inferred AM_EFFECT/AM_METHOD layouts and native strides
+8/0x94, not allocations. Preserve the unsigned-byte/full-width-1 comparison,
+profile-mode-only second argument and opaque callback slots. The narrow inferred
+pragma function(memcpy), with default flags, retains the evidenced explicit32-byte
+copy before the37-DWORD registry assignment. All four old caller definitions and
+four existing Gold assembly-provenance records are current. Registry/filename/
+flag storage owners, complete extents and linked providers remain unresolved.
 
-Goal63's65 native-only mappings cover55 TL functions/150636 inventory bytes
-plus ten large Gold counterparts. They do not earn source providers or byte
-verdicts. Reuse saved7.1M FLIRT results and diagnostic/Kuna/native dossiers rather
-than repeating scans. Prefix fortify/check-fail hits were rejected; DirectX
-attribution still needs whole-body operands and raw-map provider evidence.
+All-target lint has zero errors/warnings and data zero conflicts/duplicate owners.
+A fresh server gate passes: all286720 raw bytes identical, matching data, imports,
+relocations and layout, with Wine load/export checks. Upstream diagnostic bug fix
+e1230fc7 is committed/pushed,12392 tests pass/48 skip and mandatory push gates
+pass; canonical checkout is clean and the isolated fix worktree removed.
 
-Continue tractable mapped no-source bodies. rd_AllBauplatzToSupermap remains
-scratch-only260/123matching; record/array,Op/O1,G3/G6 probes do not justify new
-flags. Its wrapper needs enum pointer/count repair: fourteen native callers
-consume count despite existing void providers. Preserve null holes. Gold callback
-58f780's250+6 extent is a review lead only. Do not resume exhausted court/queue/
-office/camera/timer/runner families without new evidence; retain OWN-before-OTHER
-stateful query order. Both full client raw-file/data proofs and linked providers
-remain open. Every goal completion criterion above still applies.
+Parallel unmatched action/network/crime candidates remain scratch-only. Do not
+restart exhausted warehouse/init_Betrieb/gfx/nt_Recv/crime shapes without new
+evidence; preserve discarded server inputs. Reports and replay proofs are in
+.scratch/parallel-no-source and .scratch/goal66; detailed findings/next leads live
+in docs/TODO.md and docs/naming_conventions.md. Reuse Goal63's65 native-only
+mappings,7.1M FLIRT results and Kuna/native dossiers rather than repeating scans.
+DirectX attribution still requires complete native/provider proof.
+
+Continue tractable mapped no-source bodies, prioritizing larger executable byte
+gains. Goal65 SaveBMP8 adds441TL bytes; paired SaveBMP24 remains unmatched439/447
+with bounded output checks. Do not resume exhausted court/queue/office/camera/
+timer/runner families without new evidence; keep OWN-before-OTHER query order.
+Both clients' full raw-file/data/provider proofs and broader source contracts
+remain open. Every completion criterion above still applies.
 
 ## History
 

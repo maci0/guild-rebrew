@@ -10,7 +10,7 @@ struct cut_4c9d10 {
 
 extern char g_9b0e20[];
 #include "client_types.h"
-extern Msg_aed340 g_aed340;
+#include "client_packet_queue.h"
 extern int* g_772f40;
 extern int g_6b7fac;
 
@@ -27,7 +27,7 @@ int __cdecl fcn_004c9d10(char* a1, char* a2)
 	for (i = 0; i < 16; i++) {
 		if (((struct cut_4c9d10*)g_9b0e20)[i].id == *(int*) (a1 + 0x10)) {
 			if (g_772f40 != 0 && *g_772f40 == *(int*) (a1 + 0x14)) {
-				((struct cut_4c9d10*)g_9b0e20)[i] = (*(struct cut_4c9d10*)&g_aed340);
+				((struct cut_4c9d10*)g_9b0e20)[i] = (*(struct cut_4c9d10*) g_aed340);
 				((struct cut_4c9d10*)g_9b0e20)[i].fc = 0;
 				fcn_0064d41a(buf, "cm_ExSendCutInfo: PlayerId:%i Valid:%i  Ready:%i  Time:%i",
 				    ((struct cut_4c9d10*)g_9b0e20)[i].id, ((struct cut_4c9d10*)g_9b0e20)[i].ready, ((struct cut_4c9d10*)g_9b0e20)[i].time, g_6b7fac);

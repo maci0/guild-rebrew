@@ -500,3 +500,84 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 funktion = 0
 periode = 4
 pausiert = 8
+
+[types."am.effect".GOLDTL]
+file = "src/client_method_registry.h"
+symbol = "AM_EFFECT"
+size = 8
+native_size = 8
+extent = "stride"
+evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json."
+cflags = "/O2 /Gd"
+source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."am.effect".GOLDTL.offsets]
+type = 0
+value = 4
+
+[types."am.effect".GOLD]
+file = "src/client_method_registry.h"
+symbol = "AM_EFFECT"
+size = 8
+native_size = 8
+extent = "stride"
+evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json."
+cflags = "/O2 /Gd"
+source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."am.effect".GOLD.offsets]
+type = 0
+value = 4
+[types."am.method".GOLDTL]
+file = "src/client_method_registry.h"
+symbol = "AM_METHOD"
+size = 148
+native_size = 148
+extent = "stride"
+evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json."
+cflags = "/O2 /Gd"
+source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."am.method".GOLDTL.offsets]
+type = 0
+name = 1
+score = 36
+start = 40
+run = 44
+effects = 48
+saved_effects = 80
+other_effects = 112
+flags = 144
+
+[types."am.method".GOLD]
+file = "src/client_method_registry.h"
+symbol = "AM_METHOD"
+size = 148
+native_size = 148
+extent = "stride"
+evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json."
+cflags = "/O2 /Gd"
+source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."am.method".GOLD.offsets]
+type = 0
+name = 1
+score = 36
+start = 40
+run = 44
+effects = 48
+saved_effects = 80
+other_effects = 112
+flags = 144
