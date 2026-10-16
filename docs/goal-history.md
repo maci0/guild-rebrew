@@ -5491,3 +5491,69 @@ client raw builds and faithful discarded server inputs remain open.
 full. They are historical evidence, not current status or instructions. Keep this
 file concise: replace the current continuation when it changes; write detailed
 chronology to `docs/TODO.md` and evidence to its owning document.
+
+
+## Goal63 continuation archived 2026-10-16
+
+
+The full goal remains ACTIVE and incomplete. Latest user priority is the TL
+no-source inventory: map evidenced roles/names/counterparts and then reconstruct
+real shared C bodies. Do not resume exhausted contract/shape searches merely to
+keep busy. A parallel native-mapping pass was explicitly authorized and completed.
+
+Goal63 maps 55 previously source-less TL functions covering 150636 native inventory
+bytes, with ten large-body Gold counterpart identities. Public locked
+`record_function_rows` added 65 name/size/note-only rows. No file/symbol/provider,
+STATUS, data storage or native extent was invented. All 8413 previous rows were
+unchanged by publication; all earlier strong verdicts remain. Original identifiers
+are retained only where native diagnostics and Kuna/native behavior agree.
+Copied/ambiguous diagnostics retain provisional address names and explicit notes.
+See docs/naming_conventions.md (Goal63) for every selected address and anchor.
+
+Large mapped bodies include the trade/transport and personnel panels, three
+localized text expansions, GUI markup rendering, council elections, master
+trading, localized resource compilation, economic command selection, terrain
+blend construction and tutorial chapter3 initialization. The other pass maps
+character animation/path behavior, command handlers, AI roles, loading, transport,
+credit, market supervision and building placement. Gold diagnostic candidates
+outside the ten reviewed large-body pairings remain candidates. No server pairing
+is claimed. No new matched source bytes are earned by this mapping.
+
+The complete FLIRT scan loaded 7102296 signatures; 1967 candidates and 4679 skipped
+ambiguous sites are inspection results. Five selected fortify/check-fail prefix
+hits are rejected, not promoted to library origin. Stock LIBCMT whole-body checks
+reject the twelve largest selected bodies and the four initial main-pass bodies;
+a miss does not exclude other archives. DirectX/provider attribution still needs
+whole-body/operand and raw-map evidence.
+
+Prior source checkpoint 2eaccc18 repairs the packet-base pointer contracts across
+43 files: both 90-byte providers and all six operands match; 68 old strong target
+contexts pass, six old weak contexts preserve their exact prior compiled output,
+and bounded resolver/native cases pass. It adds zero matched bytes. Timer, texture,
+court and reset evidence remains in docs/TODO.md and earlier scratch receipts.
+
+Continue from the mapped no-source bodies. Prefer a tractable real shared body
+with bounded native operands and clean caller contracts; inspect complete native
+instructions and Kuna before adoption. ch_AttachAni at TL404dc0 / Gold4044a0 has
+an uninitialized empty-name native path. BMP24 TL401ed0 writes a 44-byte info block
+and uses pixel offset0x3a. Preserve those findings; do not silently substitute a
+cleaner algorithm and call it faithful. Original TU/headers/owners remain inferred
+unless independently established.
+
+The older runner TL4e5a00 / Gold4e4060 remains unadopted at 2023/2054 against native
+2033/2063. Resource, lighting and provider contracts remain open. Preserve its
+participant scans, stateful calls, Gold signed viewport words and GUI strides;
+previous /Oy- diagnostics do not justify production flags. Preserve Goal58
+OWN-before-OTHER sequencing and Goal59 reset behavior. Do not repeat exhausted
+arithmetic/cursor, queue/office/camera or timer-loop probes without new evidence.
+
+Goal63 receipts are under `.scratch/goal63`: main-map-plan.json,
+reviewed-map-rows.json, mapping-preservation.json, full diagnostic string/xref and
+Kuna/native dossiers, map-no-source/report.md and mapping-report.json, plus current
+lint/data/status/server-gate results. Both client raw-file/data verification,
+broad source contracts and discarded original server inputs remain open.
+Upstream anonymous-record/typedef audit gaps are already recorded in
+`docs/IDEAS-GUILD.md`. Goal63 also reproduces and fixes the upstream dossier bug
+that hid native-only metadata names/notes; the regression retains target scoping
+and no source-status claim. Its upstream full suite and push must pass before
+returning to reconstruction. Preserve foreign upstream work. Every completion criterion above still applies.

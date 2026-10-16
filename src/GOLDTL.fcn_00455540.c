@@ -1,25 +1,21 @@
 
 
 
-// SIZE 0xc
-typedef struct Vec3 {
-	float x;
-	float y;
-	float z;
-} Vec3;
+#include "client_scene_transform.h"
 
-void __cdecl fcn_00455350(char*, Vec3*, Vec3*);
+struct Node;
+void __cdecl fcn_00455350(struct Node*, float*, float*);
 
-void __cdecl fcn_00455540(char* o, Vec3* v, Vec3* out)
+void __cdecl fcn_00455540(char* o, float* v, float* out)
 {
 	float t[4];
 	float a;
 	float b;
 	float c;
 
-	a = v->x + *(float*) (o + 0x6c);
-	b = v->y + *(float*) (o + 0x70);
-	c = v->z + *(float*) (o + 0x74);
+	a = v[0] + *(float*) (o + 0x6c);
+	b = v[1] + *(float*) (o + 0x70);
+	c = v[2] + *(float*) (o + 0x74);
 	t[0] = a * *(float*) (o + 0x18c) + b * *(float*) (o + 0x19c) + c * *(float*) (o + 0x1ac);
 	t[1] = a * *(float*) (o + 0x190) + b * *(float*) (o + 0x1a0) + c * *(float*) (o + 0x1b0);
 	t[2] = a * *(float*) (o + 0x194) + b * *(float*) (o + 0x1a4) + c * *(float*) (o + 0x1b4);
@@ -29,5 +25,5 @@ void __cdecl fcn_00455540(char* o, Vec3* v, Vec3* out)
 	t[0] += *(float*) (o + 0x4c);
 	t[1] += *(float*) (o + 0x50);
 	t[2] += *(float*) (o + 0x54);
-	fcn_00455350(o, (Vec3*) t, out);
+	fcn_00455350((struct Node*) o, t, out);
 }

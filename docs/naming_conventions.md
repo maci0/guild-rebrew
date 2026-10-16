@@ -2221,3 +2221,26 @@ The full FLIRT scan loaded 7102296 signatures and reported 1967 candidates (4679
 BMP native details matter for future source: TL `401d10` writes indexed/grayscale BGR0 palette data and bottom-up rows without row padding. TL `401ed0` / Gold `401b90` carry the `!bmp:SaveBMP24(temp_row)` label; TL writes a 44-byte info block and pixel offset `0x3a`. `SaveBMP24` is attested, but no guessed 8-bit counterpart name or Gold address is registered. TL `404dc0` / Gold `4044a0` attest `ch_AttachAni`; the empty-name native branch consumes an uninitialized stack slot. Do not silently initialize it while claiming source fidelity.
 
 Receipts and replay inputs are under `.scratch/goal63`: `main-map-plan.json`, `reviewed-map-rows.json`, `mapping-preservation.json`, per-VA native/Kuna dossiers, diagnostic strings with xrefs, and `map-no-source/report.md` plus `mapping-report.json`. Replay through `rebrew binary function VA`, `binary asm show VA --size INVENTORY_SPAN`, `decompile VA --decompiler kuna`, `binary strings --filter REGEX --xref`, and `library match --stock-lib LIBCMT.LIB --va VA --resolve-callees`, selecting the target explicitly. Managed name/size/note rows were written through `record_function_rows`; no source files, type/data stores or inventory extents changed.
+
+### Goal64 — shared supermap sampling
+
+`rd_FillSupermapQuad` at TL `0x004be000` / Gold `0x004bd760` is an
+**inferred** role name, following the adjacent attested
+`rd_AllBauplatzToSupermap` caller. Its provisional standalone source placement
+does not establish an original TU. One C89 body samples a projected quadrilateral
+into independently selected byte and 28-byte record planes. Both complete
+485-byte bodies match, including all ten address operands, the native double
+`0.9` sampling bias and float `1.0` normalization constant. Eleven following NOPs
+are alignment. Low-byte `0xff` skips byte writes; full-width integer `255` skips
+record writes. No clipping or allocation ownership is inferred.
+
+Projection TL `0x004bdfb0` / Gold `0x004bd710` retains its provisional identifier
+and now shares the existing body with four observed map-field offsets guarded
+for Gold (`50/60/58/78` versus `90/a0/98/b8`). Executable extents are 67/79;
+13/1 following NOPs remain alignment. The inferred declaration home
+`src/client_scene_transform.h` reconciles its object/vector pointer contract
+with the shared transform provider and all current C callers. No original
+vector typedef, backing-map allocation extent or client linked provider is claimed.
+
+Native/compiled operand receipts and rejecting controls are in
+`.scratch/goal64/quad/production-proof.json` and `projection-proof.json`.

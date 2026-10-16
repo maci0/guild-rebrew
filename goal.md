@@ -108,66 +108,62 @@ explicit authorization; this file does not grant it.
 ## Current continuation — 2026-10-16
 
 The full goal remains ACTIVE and incomplete. Latest user priority is the TL
-no-source inventory: map evidenced roles/names/counterparts and then reconstruct
-real shared C bodies. Do not resume exhausted contract/shape searches merely to
-keep busy. A parallel native-mapping pass was explicitly authorized and completed.
+no-source inventory: map evidenced roles/names/counterparts and reconstruct real
+shared C bodies. A parallel native-mapping/reconstruction pass was explicitly
+authorized. Prefer new source bodies over repeated exhausted shape searches.
 
-Goal63 maps 55 previously source-less TL functions covering 150636 native inventory
-bytes, with ten large-body Gold counterpart identities. Public locked
-`record_function_rows` added 65 name/size/note-only rows. No file/symbol/provider,
-STATUS, data storage or native extent was invented. All 8413 previous rows were
-unchanged by publication; all earlier strong verdicts remain. Original identifiers
-are retained only where native diagnostics and Kuna/native behavior agree.
-Copied/ambiguous diagnostics retain provisional address names and explicit notes.
-See docs/naming_conventions.md (Goal63) for every selected address and anchor.
+Goal64 adds inferred rd_FillSupermapQuad at TL4be000 / Gold4bd760: one ordinary
+C89 definition matches all485 native executable bytes per client, all ten
+operands and four literal uses. Thirteen rejecting controls per target pass.
+The native sampling bias is double0.9; complete literal auditing rejected an
+initial0.5 draft despite masked instruction agreement. Eleven following NOPs
+remain alignment. Byte255 and integer255 independently skip their respective
+planes; original unchecked sampling and write order remain. Source placement
+and role name are inferred, backing-map ownership unproven. No new storage or
+speculative map/vector type is created.
 
-Large mapped bodies include the trade/transport and personnel panels, three
-localized text expansions, GUI markup rendering, council elections, master
-trading, localized resource compilation, economic command selection, terrain
-blend construction and tutorial chapter3 initialization. The other pass maps
-character animation/path behavior, command handlers, AI roles, loading, transport,
-credit, market supervision and building placement. Gold diagnostic candidates
-outside the ten reviewed large-body pairings remain candidates. No server pairing
-is claimed. No new matched source bytes are earned by this mapping.
+Gold4bd710 now shares the existing TL4bdfb0 projection body, with four evidenced
+map offsets guarded for Gold. Complete67/79-byte bodies and callee operands
+match; wrong-callee controls reject. client_scene_transform.h reconciles its
+object/float-vector access contracts across the provider and current C callers.
+All eight old strong contexts pass; the existing weak102-byte context retains
+identical code, fixups and literals. Broader455350/scene contracts remain open.
+Newly matched game bytes are TL485 and Gold564. Earlier native-only mappings,
+libraries and alignment are separate from that gain.
 
-The complete FLIRT scan loaded 7102296 signatures; 1967 candidates and 4679 skipped
-ambiguous sites are inspection results. Five selected fortify/check-fail prefix
-hits are rejected, not promoted to library origin. Stock LIBCMT whole-body checks
-reject the twelve largest selected bodies and the four initial main-pass bodies;
-a miss does not exclude other archives. DirectX/provider attribution still needs
-whole-body/operand and raw-map evidence.
+Goal63's65 native-only name/size/note identities remain:55 TL functions covering
+150636 inventory bytes and ten large Gold counterparts. None claims a source
+provider or byte verdict. The7.1M-signature FLIRT scan remains inspection-only;
+selected fortify/check-fail prefix hits are rejected, and DirectX/provider
+attribution still requires whole-body/operand/raw-map evidence. See the Goal63
+naming table and saved dossiers rather than repeating the scan.
 
-Prior source checkpoint 2eaccc18 repairs the packet-base pointer contracts across
-43 files: both 90-byte providers and all six operands match; 68 old strong target
-contexts pass, six old weak contexts preserve their exact prior compiled output,
-and bounded resolver/native cases pass. It adds zero matched bytes. Timer, texture,
-court and reset evidence remains in docs/TODO.md and earlier scratch receipts.
+Next: continue tractable mapped no-source bodies. rd_AllBauplatzToSupermap's
+260-byte shared algorithm remains scratch-only at123 matching bytes; array/
+record shapes, Op/O1 and G3/G6 probes do not justify production flags. Its direct
+wrapper needs pointer/count contracts first: both existing enum providers are
+void, while all fourteen native callers consume their count. Preserve the
+returned slot count including null holes. Gold callback58f780 ends after250
+code bytes plus6 NOPs; stored256 is only a future selected-extent review lead.
+Do not promote it from counterpart evidence alone. Full review is under
+.scratch/goal64/review; compiled proofs under quad/production-proof.json and
+projection-proof.json. Main-body failed probes are retained for bounded reuse.
 
-Continue from the mapped no-source bodies. Prefer a tractable real shared body
-with bounded native operands and clean caller contracts; inspect complete native
-instructions and Kuna before adoption. ch_AttachAni at TL404dc0 / Gold4044a0 has
-an uninitialized empty-name native path. BMP24 TL401ed0 writes a 44-byte info block
-and uses pixel offset0x3a. Preserve those findings; do not silently substitute a
-cleaner algorithm and call it faithful. Original TU/headers/owners remain inferred
-unless independently established.
+All-target lint has zero errors/warnings and data has zero conflicts/multiple
+definitions. The fresh server gate passes: all286720 raw bytes are identical,
+imports/data/relocations/layout and Wine load/exports pass, and code generators
+remain aligned. All8478 earlier identities/extents and6053 strong statuses are
+preserved. Current accounted TL text is1121839/2491370 bytes; native game-byte
+gain is485 and TL no-source count is1214. Both complete client raw-file/data proofs
+and linked helper providers remain open. No upstream tooling defect was
+established in Goal64. Actual bugs still require upstream fixes and regression
+checks; missing capabilities belong in upstream docs/IDEAS-GUILD.md.
 
-The older runner TL4e5a00 / Gold4e4060 remains unadopted at 2023/2054 against native
-2033/2063. Resource, lighting and provider contracts remain open. Preserve its
-participant scans, stateful calls, Gold signed viewport words and GUI strides;
-previous /Oy- diagnostics do not justify production flags. Preserve Goal58
-OWN-before-OTHER sequencing and Goal59 reset behavior. Do not repeat exhausted
-arithmetic/cursor, queue/office/camera or timer-loop probes without new evidence.
-
-Goal63 receipts are under `.scratch/goal63`: main-map-plan.json,
-reviewed-map-rows.json, mapping-preservation.json, full diagnostic string/xref and
-Kuna/native dossiers, map-no-source/report.md and mapping-report.json, plus current
-lint/data/status/server-gate results. Both client raw-file/data verification,
-broad source contracts and discarded original server inputs remain open.
-Upstream anonymous-record/typedef audit gaps are already recorded in
-`docs/IDEAS-GUILD.md`. Goal63 also reproduces and fixes the upstream dossier bug
-that hid native-only metadata names/notes; the regression retains target scoping
-and no source-status claim. Its upstream full suite and push must pass before
-returning to reconstruction. Preserve foreign upstream work. Every completion criterion above still applies.
+Do not resume exhausted Goal58/59 court arithmetic/cursor, queue/office/camera,
+timer-loop or Goal62 runner searches without new evidence. Preserve OWN-before-
+OTHER stateful query order. Prior packet-pointer checkpoint2eaccc18, timer and
+mapping evidence remain in docs/TODO.md and their scratch receipts. Every goal
+completion criterion above still applies.
 
 ## History
 

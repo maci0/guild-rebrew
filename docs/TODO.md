@@ -54924,3 +54924,44 @@ not on main. Integration retains that clean, tagged release (6e6059ef) and its
 progress-accounting parent (8fc2090b), then applies the dossier fix (6c70aa41).
 The mandatory full-suite pre-push gate remains required for publishing the fix;
 receipts are upstream-push*.log and upstream-focused-after-rebase.log in Goal63.
+
+## Goal64 — first shared C from the mapped supermap family (2026-10-16)
+
+- Added inferred `rd_FillSupermapQuad`, TL4be000 / Gold4bd760, as one ordinary
+  C89 body. Each target matches all485 executable bytes, ten resolved operands
+  and four literal uses; thirteen wrong-binding controls reject per target.
+  The native sampling bias is double0.9, not conventional0.5. Initial masked
+  agreement hid that draft error; complete literal-content auditing caught it
+  before source adoption. Distinct outer/inner normalization locals recover
+  the native x87 lifetime. Eleven alignment NOPs remain separately evidenced.
+- Added the previously sourceless Gold4bd710 projection counterpart to the
+  existing TL4bdfb0 body, with only the four native layout offsets guarded.
+  Complete67/79-byte operands match and wrong-callee controls reject. No fake
+  vector typedef or map storage definition was introduced. The inferred
+  client_scene_transform.h reconciles float/object pointers in the provider,
+  all its C callers, and the zero-position wrapper. Eight existing strong
+  contexts pass; the one existing weak context preserves its entire102-byte
+  code, relocations and literals. Broader legacy455350/scene contracts remain open.
+- Newly matched game bytes: TL485; Gold564 (485+79). Library identification and
+  earlier native-only mapping earn no new reversing bytes. No prior source
+  identity, extent or strong status is retired; three source identities are added.
+- The caller rd_AllBauplatzToSupermap remains scratch-only. Its native pair is
+  260 executable bytes plus12 NOPs, with eight mapped address operands. The
+  complete ordinary-C algorithm currently emits260 but only123 bytes agree;
+  float-copy instruction selection/scheduling remains. Record/array shapes,
+  /Op, /O1 and G3/G6 checks did not justify a production flag override. Do not
+  repeat these without new evidence. Its wrapper also needs a faithful enum
+  count/pointer contract before adoption: all fourteen native enum callers
+  consume the count, despite both existing source providers returning void.
+  Gold callback58f780 is250 executable bytes plus6 NOPs, not stored256; this
+  is evidence for a selected future extent review, not an earned verdict.
+- All-target lint is clean, all-target data reports zero conflicts/duplicate
+  definitions, and the fresh server gate passes with286720 raw bytes identical,
+  correct imports/data/relocations/layout, Wine exports and compiler profiles.
+  All8478 previous identities/extents and6053 strong statuses remain. TL now has
+  1214 no-source functions; accounted text is1121839/2491370 bytes.
+- Receipts/replay: .scratch/goal64/quad/production-proof.py/json,
+  quad/production-review.md, projection-proof.py/json, scope-promote.json,
+  weak-preservation.py/json, review/report.md, lint.json, data.json,
+  coverage-delta.json, preservation.json and server-gate.log. Both client raw
+  links, linked helper-provider selection and backing-map ownership remain open.

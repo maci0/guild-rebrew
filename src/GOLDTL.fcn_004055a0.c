@@ -2,7 +2,7 @@
 void __cdecl fcn_004355d0(char*, const char*);
 void __cdecl fcn_00435630(char*, char*, char);
 
-void __cdecl fcn_00455540(void*, float*, float*);
+#include "client_scene_transform.h"
 
 void __cdecl fcn_00405540(char* object, int enabled)
 {
@@ -71,7 +71,7 @@ void __cdecl fcn_004055a0(char* obj, int view, float* pos, float* rot)
 	if (obj[0x8c] & 0x10) {
 		pos[1] = (float) (pos[1] - 15.0);
 	}
-	fcn_00455540(*(void**) (obj + 0x34), pos, pos);
+	fcn_00455540(*(char**) (obj + 0x34), pos, pos);
 	rot[0] = *(float*) (*(char**) (obj + 0x34) + 0x84) + rot[0];
 	rot[1] = *(float*) (*(char**) (obj + 0x34) + 0x88) + rot[1];
 	rot[2] = *(float*) (*(char**) (obj + 0x34) + 0x8c) + rot[2];

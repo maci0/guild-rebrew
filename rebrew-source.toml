@@ -220,3 +220,6 @@ purpose = "Retained Gold-only source candidate; canonical function identity is o
 
 [files."src/GOLD.fcn_00402ac0.c".GOLD]
 purpose = "Retained Gold-only source candidate; canonical function identity is owned by GOLDTL.fcn_00403300.c."
+
+[files."src/client_scene_transform.h".GOLDTL]
+purpose = "Canonical client scene-transform pointer declarations; inferred header placement"
