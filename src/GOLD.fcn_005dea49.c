@@ -1,9 +1,15 @@
-
-// fcn_005dea49 — fcn_005dea5a(1, 0, arg).
-
 int __cdecl fcn_005dea5a(int, int, int);
 
-int __cdecl fcn_005dea49(int a)
+/* ADDRESS: GOLD 0x005dea49 */
+int __declspec(naked) __cdecl fcn_005dea49(int a)
 {
-	return fcn_005dea5a(1, 0, a);
+	(void) a;
+	__asm {
+		push 0
+		push 1
+		push dword ptr [esp+0Ch]
+		call fcn_005dea5a
+		add esp, 0Ch
+		ret
+	}
 }

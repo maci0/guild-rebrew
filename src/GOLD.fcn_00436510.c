@@ -1,7 +1,18 @@
+void __cdecl fcn_00418e90(int, int, int);
+
 /* ADDRESS: GOLD 0x00436510 */
-int __cdecl fcn_00436510(void)
+void __cdecl fcn_00436510(int a, int b, unsigned int c)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00436510 */
-    return 0;
+	void *obj;
+	int result;
+
+	(void)a;
+	if (c > 2) {
+		obj = *(void **)0x633418;
+		result = ((int (__stdcall *)(void *, int, int, int, unsigned int, int))(*(void ***)obj)[0x70 / 4])(
+			obj, 4, 0x1c4, b, c, 0x1c);
+		*(int *)0x14661a4 = result;
+		if (result)
+			fcn_00418e90(0x5f944c, 0x1f0, 0x5f98c8);
+	}
 }

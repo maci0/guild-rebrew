@@ -1168,8 +1168,17 @@
   },
   {
     "va": 4255248,
-    "size": 144,
-    "name": "fcn.0040ee10"
+    "size": 137,
+    "name": "fcn.0040ee10",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 137,
+        "reason": "ret at 0x40ee98 then seven 0x90 bytes through 0x40ee9f; next function starts at 0x40eea0",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T08:51:35.304903+00:00"
+      }
+    ]
   },
   {
     "va": 4255392,
@@ -15983,8 +15992,17 @@
   },
   {
     "va": 5376608,
-    "size": 336,
-    "name": "fcn.00520a60"
+    "size": 332,
+    "name": "fcn.00520a60",
+    "extent_history": [
+      {
+        "old_size": 336,
+        "new_size": 332,
+        "reason": "ret at 0x520bab then four 0x90 bytes through 0x520baf; next function starts at 0x520bb0",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T08:51:57.062105+00:00"
+      }
+    ]
   },
   {
     "va": 5376944,
@@ -19806,8 +19824,17 @@
   },
   {
     "va": 5831968,
-    "size": 256,
-    "name": "fcn.0058fd20"
+    "size": 247,
+    "name": "fcn.0058fd20",
+    "extent_history": [
+      {
+        "old_size": 256,
+        "new_size": 247,
+        "reason": "Gold placement ends at ret 0x58fe16. Bytes 0x58fe17-0x58fe1f are nine NOPs. Next inventory entry starts at 0x58fe20. Executable body is 247 bytes, matching TL 0x5985f0.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T08:42:07.289029+00:00"
+      }
+    ]
   },
   {
     "va": 5832224,
@@ -19861,8 +19888,17 @@
   },
   {
     "va": 5839792,
-    "size": 288,
-    "name": "fcn.00591bb0"
+    "size": 278,
+    "name": "fcn.00591bb0",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 278,
+        "reason": "ret at 0x591cc5 then ten 0x90 bytes through 0x591ccf; next function starts at 0x591cd0",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T08:52:12.552020+00:00"
+      }
+    ]
   },
   {
     "va": 5840080,

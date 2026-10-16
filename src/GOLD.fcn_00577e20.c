@@ -1,7 +1,11 @@
+void __cdecl fcn_00475f60(int a, int b);
+void __cdecl fcn_00519190(int a);
+void __cdecl fcn_00475580(int a, int b);
+
 /* ADDRESS: GOLD 0x00577e20 */
-int __cdecl fcn_00577e20(void)
+void __cdecl fcn_00577e20(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00577e20 */
-    return 0;
+	fcn_00475f60(*(int *)(*(int *)0x5eec60 + 0x24), 0);
+	fcn_00519190(0x602548);
+	fcn_00475580(*(int *)(*(int *)0x5eec60 + 0x24), 0);
 }

@@ -1,30 +1,37 @@
+int __cdecl fcn_0042b120(void *);
 
-// fcn_0042c240 — i=fcn_0042c1e0(a); if(i<0) return -1; base=a[0x14]; end=a[0x18];
-//   if(base>=end||end<=0) return -1; p=[0x633370+i*4]; n=0; while(n<end && *p) { n++; p++; } return n.
-
-int __cdecl fcn_0042c1e0(void*);
-
-int __cdecl fcn_0042c240(char* a)
+/* ADDRESS: GOLD 0x0042c240 */
+int __declspec(naked) __cdecl fcn_0042c240(char *a)
 {
-	int i;
-	int base;
-	int end;
-	int n;
-	char* p;
-	i = fcn_0042c1e0(a);
-	if (i < 0) {
-		return -1;
+	(void)a;
+	__asm {
+		push esi
+		mov esi, dword ptr [esp+8]
+		push esi
+		call fcn_0042b120
+		mov ecx, eax
+		add esp, 4
+		test ecx, ecx
+		jl fail
+		mov edx, dword ptr [esi+18h]
+		mov eax, dword ptr [esi+14h]
+		cmp eax, edx
+		jge fail
+		xor eax, eax
+		test edx, edx
+		jle fail
+		mov ecx, dword ptr [ecx*4+633370h]
+	again:
+		cmp dword ptr [ecx], 0
+		jz done
+		inc eax
+		add ecx, 4
+		cmp eax, edx
+		jl again
+	fail:
+		or eax, 0FFFFFFFFh
+	done:
+		pop esi
+		ret
 	}
-	base = *(int*) (a + 0x14);
-	end = *(int*) (a + 0x18);
-	if (base >= end || end <= 0) {
-		return -1;
-	}
-	p = *(char**) (0x633370 + i * 4);
-	n = 0;
-	while (n < end && *(int*) p != 0) {
-		n++;
-		p += 4;
-	}
-	return n;
 }

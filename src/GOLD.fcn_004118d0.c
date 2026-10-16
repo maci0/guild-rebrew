@@ -1,14 +1,13 @@
+extern int g_6b5cc4;
 
-// fcn_004118d0 — if(!f(a,a)){ [0x6310ec]=a; return 0; } return 1. (a=param2)
+int __cdecl _strcmpi(char*, char*);
 
-int __cdecl fcn_005eab80(int, int);
-
-int __cdecl fcn_004118d0(int u, int a)
+/* ADDRESS: GOLD 0x004118d0 */
+unsigned char __cdecl fcn_004118d0(int u, int a)
 {
-	(void) u;
-	if (fcn_005eab80(a, a) != 0) {
-		return 1;
+	if (_strcmpi((char*) u, (char*) a) == 0) {
+		g_6b5cc4 = u;
+		return 0;
 	}
-	*(int*) 0x6310ec = a;
-	return 0;
+	return 1;
 }

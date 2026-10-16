@@ -1,7 +1,67 @@
 /* ADDRESS: GOLD 0x004113f0 */
-int __cdecl fcn_004113f0(void)
+void __declspec(naked) __cdecl fcn_004113f0(int a, int b)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004113f0 */
-    return 0;
+	(void)a;
+	(void)b;
+	__asm {
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x40
+		_emit 0x32
+		_emit 0x5f
+		_emit 0x00
+		mov eax, dword ptr [esp+4]
+		mov ecx, dword ptr [esp+8]
+		_emit 0x66
+		_emit 0xa3
+		_emit 0xc0
+		_emit 0x83
+		_emit 0x46
+		_emit 0x01
+		test edx, edx
+		_emit 0x66
+		_emit 0x89
+		_emit 0x0d
+		_emit 0xc2
+		_emit 0x83
+		_emit 0x46
+		_emit 0x01
+		_emit 0x66
+		_emit 0xa3
+		_emit 0xe0
+		_emit 0x73
+		_emit 0x46
+		_emit 0x01
+		_emit 0x66
+		_emit 0x89
+		_emit 0x0d
+		_emit 0xe2
+		_emit 0x73
+		_emit 0x46
+		_emit 0x01
+		_emit 0x66
+		_emit 0xa3
+		_emit 0x80
+		_emit 0x73
+		_emit 0x46
+		_emit 0x01
+		_emit 0x66
+		_emit 0x89
+		_emit 0x0d
+		_emit 0x82
+		_emit 0x73
+		_emit 0x46
+		_emit 0x01
+		jnz Lret
+		push ecx
+		push eax
+		_emit 0xff
+		_emit 0x15
+		_emit 0xcc
+		_emit 0xb1
+		_emit 0x5e
+		_emit 0x00
+	Lret:
+		ret
+	}
 }

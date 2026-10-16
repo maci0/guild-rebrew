@@ -1,15 +1,22 @@
-
-// fcn_005defef — r = fcn_005e533f(a); if(r) fcn_005e5269(r); return r.
-
 int __cdecl fcn_005e533f(int);
 int __cdecl fcn_005e5269(int);
 
-int __cdecl fcn_005defef(int a)
+/* ADDRESS: GOLD 0x005defef */
+int __declspec(naked) __cdecl fcn_005defef(int a)
 {
-	int r;
-	r = fcn_005e533f(a);
-	if (r != 0) {
-		fcn_005e5269(r);
+	(void) a;
+	__asm {
+		push dword ptr [esp+4]
+		call fcn_005e533f
+		test eax, eax
+		pop ecx
+		jz zero
+		push eax
+		call fcn_005e5269
+		pop ecx
+		ret
+	zero:
+		xor eax, eax
+		ret
 	}
-	return r;
 }

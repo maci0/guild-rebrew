@@ -7,14 +7,14 @@ int __cdecl fcn_004ffcc0(void);
 int __cdecl fcn_005086b0(int a)
 {
 	int s;
+	char* n;
 	s = 0;
-	do {
-		char* n;
-		n = (char*) fcn_004ffe90(a, 1, 4, 9);
-		if (n == 0) {
-			break;
-		}
-		s += *(int*) (n + 0xe);
-	} while (fcn_004ffcc0() != 0);
+	n = (char*) fcn_004ffe90(a, 1, 4, 9);
+	if (n != 0) {
+		do {
+			s += *(int*) (n + 0xe);
+			n = (char*) fcn_004ffcc0();
+		} while (n != 0);
+	}
 	return s;
 }

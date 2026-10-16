@@ -1,18 +1,17 @@
+int __cdecl m_is_tracked(void *);
+void __cdecl fcn_00455750(int);
+void __cdecl fcn_00425bf0(int, int, int);
 
-// fcn_0040edc0 — if(fcn_004225e0(*a)){ fcn_00455750(*a); return 0; } log(0x5f2908); return 0.
-
-int __cdecl fcn_004225e0(int);
-int __cdecl fcn_00455750(int);
-int __cdecl fcn_004273d0(int, int, int);
-
-int __cdecl fcn_0040edc0(int u, void* a)
+/* ADDRESS: GOLD 0x0040edc0 */
+int __cdecl fcn_0040edc0(int *p)
 {
-	int e;
-	e = *(int*) a;
-	if (fcn_004225e0(e) != 0) {
-		fcn_00455750(e);
+	int g;
+
+	if (m_is_tracked((void *)*p) != 0) {
+		fcn_00455750(*p);
 		return 0;
 	}
-	fcn_004273d0(*(int*) 0x6332b8, *(int*) (*(int*) 0x6332b8 + 0x118), 0x5f2908);
+	g = *(int *)0x6332b8;
+	fcn_00425bf0(g, *(int *)(g + 0x118), 0x5f2908);
 	return 0;
 }

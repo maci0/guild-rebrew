@@ -1,7 +1,24 @@
+void __cdecl m_FreeTracked(int);
+
 /* ADDRESS: GOLD 0x004175c0 */
-int __cdecl fcn_004175c0(void)
+void __cdecl fcn_004175c0(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004175c0 */
-    return 0;
+	int p;
+
+	for (p = 0x14661e4; p < 0x1466640; p += 0x7c) {
+		m_FreeTracked(*(int *)p);
+		*(int *)p = 0;
+	}
+	for (p = 0x1466ac4; p < 0x1466f20; p += 0x7c) {
+		m_FreeTracked(*(int *)p);
+		*(int *)p = 0;
+	}
+	for (p = 0x1466f24; p < 0x1467380; p += 0x7c) {
+		m_FreeTracked(*(int *)p);
+		*(int *)p = 0;
+	}
+	for (p = 0x1466664; p < 0x1466ac0; p += 0x7c) {
+		m_FreeTracked(*(int *)p);
+		*(int *)p = 0;
+	}
 }

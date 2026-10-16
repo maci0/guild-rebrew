@@ -1,12 +1,17 @@
+typedef struct {
+	int key;
+	char pad4[0x28];
+} Entry2c;
+
+extern Entry2c* g_600f48;
+extern Entry2c* g_600f4c;
+extern int g_6f0714;
+extern int g_6f071c;
+
 /* ADDRESS: GOLD 0x004acdc0 */
-// fcn_004acdc0 — copy derefs of two globals. Reg-rotation: target p->eax/q->edx; local form scores 17/27.
 
 void __cdecl fcn_004acdc0(void)
 {
-	int* p;
-	int* q;
-	p = *(int**) 0x600f48;
-	q = *(int**) 0x600f4c;
-	*(int*) 0x6f0714 = *p;
-	*(int*) 0x6f071c = *q;
+	g_6f0714 = g_600f48->key;
+	g_6f071c = g_600f4c->key;
 }

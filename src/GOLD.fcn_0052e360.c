@@ -4,11 +4,15 @@
 void __cdecl fcn_0052e360(char* a)
 {
 	char* p;
-	char* q;
+	int off;
+	char c;
+
 	p = a;
-	q = (char*) (0x761f40 - (int) a);
+	off = 0x761f40 - (int) a;
 	do {
-		*q++ = *p;
-	} while (*p++ != 0);
+		c = *p;
+		p[off] = c;
+		p++;
+	} while (c != 0);
 	*(int*) 0x6237cc = *(int*) 0x6333cc;
 }

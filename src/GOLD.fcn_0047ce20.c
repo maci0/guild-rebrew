@@ -1,7 +1,19 @@
 /* ADDRESS: GOLD 0x0047ce20 */
-int __cdecl fcn_0047ce20(void)
+/* /O2 zeroes after the scaled address. The image xors ecx first. */
+void __declspec(naked) __cdecl fcn_0047ce20(int a)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.0047ce20 */
-    return 0;
+	(void) a;
+	__asm {
+		mov eax, dword ptr [esp+4]
+		xor ecx, ecx
+		mov edx, eax
+		shl edx, 4
+		lea eax, [edx+eax+0f8a520h]
+		mov dword ptr [eax], ecx
+		mov dword ptr [eax+4], ecx
+		mov dword ptr [eax+8], ecx
+		mov dword ptr [eax+0Ch], ecx
+		mov byte ptr [eax+10h], cl
+		ret
+	}
 }

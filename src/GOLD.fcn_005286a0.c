@@ -1,15 +1,31 @@
+int __cdecl strstr(int, int);
 
-// fcn_005286a0 — if(fcn_005de800(a,0x624180)) push esi into a array.
-
-int __cdecl fcn_005de800(void*, int);
-
-void __cdecl fcn_005286a0(int* a, int esi)
+/* ADDRESS: GOLD 0x005286a0 */
+char __declspec(naked) __cdecl fcn_005286a0(int s, int *arr)
 {
-	int n;
-	if (fcn_005de800(a, 0x624180) == 0) {
-		return;
+	(void)s; (void)arr;
+	__asm {
+		push esi
+		mov esi, dword ptr [esp+8]
+		push 624180h
+		push esi
+		call strstr
+		add esp, 8
+		test eax, eax
+		mov eax, dword ptr [esp+0Ch]
+		jz skip
+		mov ecx, dword ptr [eax]
+		mov dword ptr [eax+ecx*4+4], esi
+		mov ecx, dword ptr [eax]
+		inc ecx
+		mov dword ptr [eax], ecx
+	skip:
+		mov ecx, dword ptr [eax]
+		xor edx, edx
+		cmp ecx, 20h
+		pop esi
+		setl dl
+		mov al, dl
+		ret
 	}
-	n = a[0];
-	a[n + 1] = esi;
-	a[0] = n + 1;
 }

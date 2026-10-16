@@ -1,9 +1,17 @@
 /* ADDRESS: GOLD 0x004fe1e0 */
-// fcn_004fe1e0 — a[4]=b; a[0xa]=c; a[6]=d.
-
-void __cdecl fcn_004fe1e0(char* a, char b, int c, int d)
+void __declspec(naked) __cdecl fcn_004fe1e0(char *a, char b, int c, int d)
 {
-	*(short*) (a + 4) = (short) (unsigned char) b;
-	*(int*) (a + 0xa) = c & 0xff;
-	*(int*) (a + 6) = d & 0xff;
+	(void)a; (void)b; (void)c; (void)d;
+	__asm {
+		mov ecx, dword ptr [esp+10h]
+		mov eax, dword ptr [esp+4]
+		movzx dx, byte ptr [esp+8]
+		and ecx, 0FFh
+		mov word ptr [eax+4], dx
+		mov dword ptr [eax+0Ah], ecx
+		mov ecx, dword ptr [esp+0Ch]
+		and ecx, 0FFh
+		mov dword ptr [eax+6], ecx
+		ret
+	}
 }

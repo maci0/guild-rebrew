@@ -1,13 +1,14 @@
 /* ADDRESS: GOLD 0x004bda60 */
-// fcn_004bda60 — count nodes from a to b (by 0x3c chain), else 0.
 
-int __cdecl fcn_004bda60(char* a, char* b)
+int __cdecl fcn_004bda60(char* p, char* target)
 {
-	int c;
-	c = 0;
-	while (a != 0 && a != b) {
-		c++;
-		a = *(char**) (a + 0x3c);
+	int n;
+
+	for (n = 0; p != 0; n++) {
+		if (target == p) {
+			return n;
+		}
+		p = *(char**) (p + 0x3c);
 	}
-	return c;
+	return n;
 }

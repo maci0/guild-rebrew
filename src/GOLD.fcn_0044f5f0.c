@@ -1,11 +1,22 @@
 /* ADDRESS: GOLD 0x0044f5f0 */
-// fcn_0044f5f0 — accumulate and reset fields. (a=param2)
-
-void __cdecl fcn_0044f5f0(int u, int* a)
+void __declspec(naked) __cdecl fcn_0044f5f0(int unused, int *a)
 {
-	(void) u;
-	a[0x1c / 4] += a[0x14 / 4];
-	a[0x2c / 4] += a[0x24 / 4];
-	a[0x14 / 4] = 0;
-	a[0x24 / 4] = 0;
+	(void)unused; (void)a;
+	__asm {
+		mov eax, dword ptr [esp+8]
+		push esi
+		mov ecx, dword ptr [eax+14h]
+		mov edx, dword ptr [eax+1Ch]
+		mov esi, dword ptr [eax+2Ch]
+		add edx, ecx
+		mov dword ptr [eax+1Ch], edx
+		mov edx, dword ptr [eax+24h]
+		add esi, edx
+		xor ecx, ecx
+		mov dword ptr [eax+2Ch], esi
+		mov dword ptr [eax+14h], ecx
+		mov dword ptr [eax+24h], ecx
+		pop esi
+		ret
+	}
 }

@@ -1,7 +1,59 @@
+void __cdecl m_FreeTracked(int);
+
 /* ADDRESS: GOLD 0x0042ebc0 */
-int __cdecl fcn_0042ebc0(void)
+void __declspec(naked) __cdecl fcn_0042ebc0(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.0042ebc0 */
-    return 0;
+	__asm {
+		_emit 0xa1
+		_emit 0xf8
+		_emit 0x33
+		_emit 0x63
+		_emit 0x00
+		test eax, eax
+		jz Lbad
+		_emit 0x3b
+		_emit 0x05
+		_emit 0xf0
+		_emit 0x33
+		_emit 0x63
+		_emit 0x00
+		jc Lbad
+		push eax
+		call m_FreeTracked
+		add esp, 4
+		_emit 0xc7
+		_emit 0x05
+		_emit 0xf0
+		_emit 0x33
+		_emit 0x63
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xc7
+		_emit 0x05
+		_emit 0xf4
+		_emit 0x33
+		_emit 0x63
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xc7
+		_emit 0x05
+		_emit 0xf8
+		_emit 0x33
+		_emit 0x63
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		ret
+	Lbad:
+		_emit 0xcc
+		ret
+	}
 }

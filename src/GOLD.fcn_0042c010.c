@@ -1,7 +1,20 @@
+int __cdecl fcn_0042c2c0(int);
+typedef void (__stdcall *F)(int, int);
+
 /* ADDRESS: GOLD 0x0042c010 */
-int __cdecl fcn_0042c010(void)
+int __cdecl fcn_0042c010(int a1, int a2)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.0042c010 */
-    return 0;
+	int r;
+
+	r = 0;
+	if (*(int *)0x6333b0 != 0) {
+		if (fcn_0042c2c0(a1) >= 0) {
+			(*(F *)0x5eb338)(a1, a2);
+		} else {
+			r = -1;
+		}
+	} else {
+		r = -1;
+	}
+	return r;
 }

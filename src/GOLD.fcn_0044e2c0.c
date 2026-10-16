@@ -1,7 +1,8 @@
+void __cdecl fcn_0044cd40(int);
+
 /* ADDRESS: GOLD 0x0044e2c0 */
-int __cdecl fcn_0044e2c0(void)
+void __cdecl fcn_0044e2c0(int a)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.0044e2c0 */
-    return 0;
+	if (a != 0 && *(int*) (a + 0x1dc) > 0)
+		fcn_0044cd40(a);
 }

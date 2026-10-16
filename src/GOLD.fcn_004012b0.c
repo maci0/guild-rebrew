@@ -1,12 +1,11 @@
 
-// fcn_004012b0 — fcn_00401320(x, *x); fcn_00401320(x, x[1]); fcn_00401320(x, x[2]).
+// fcn_004012b0 — fcn_00401320(u1, x[0]); fcn_00401320(u1, x[1]); fcn_00401320(u1, x[2]).
 
-int __cdecl fcn_00401320(void*, int);
+int __cdecl fcn_00401320(int, int);
 
-void __cdecl fcn_004012b0(int u1, int u2, int* x)
+void __cdecl fcn_004012b0(int u1, int* x)
 {
-	(void) u1; (void) u2;
-	fcn_00401320(x, x[0]);
-	fcn_00401320(x, x[1]);
-	fcn_00401320(x, x[2]);
+	fcn_00401320(u1, x[0]);
+	fcn_00401320(u1, x[1]);
+	fcn_00401320(u1, x[2]);
 }

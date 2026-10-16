@@ -1,7 +1,32 @@
+typedef struct Inner5cc80 {
+	int f0;
+	int f4;
+	int f8;
+	int fc;
+} Inner5cc80;
+
+typedef struct Holder5cc80 {
+	int p;
+	int pad;
+	Inner5cc80* n;
+} Holder5cc80;
+
+void __cdecl fcn_0045fbb0(int);
+
 /* ADDRESS: GOLD 0x0045cc80 */
-int __cdecl fcn_0045cc80(void)
+void __cdecl fcn_0045cc80(Holder5cc80* h)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.0045cc80 */
-    return 0;
+	Inner5cc80* n;
+
+	if (h->p != 0) {
+		n = h->n;
+		if (n != 0) {
+			n->f4 = 0;
+			n->f0 = 0;
+			n->fc = 0;
+		}
+		fcn_0045fbb0(h->p);
+		h->p = 0;
+		h->n = 0;
+	}
 }

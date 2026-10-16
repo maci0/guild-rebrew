@@ -5,7 +5,5 @@ int __cdecl gm_RandomMod(int);
 
 int __cdecl fcn_004941a0(void)
 {
-	int r;
-	r = gm_RandomMod(2) & 0xffff;
-	return r != 0;
+	return (short) gm_RandomMod(2) != 0;
 }

@@ -368,6 +368,12 @@ endif()
 # ---------------------------------------------------------------------------
 
 if(REBREW_BUILD_GOLDTL)
+  # No recovered SDK archive matches the reference's Miles 6.1c import hints.
+  message(FATAL_ERROR
+    "Gold TL linking is blocked: the original Miles 6.1c mss32.lib has not "
+    "been verified. Do not substitute the 6.0 archive, OpenMiles, or the "
+    "mislabeled 7.2g SDK. See references/mss-6.1c/README.md.")
+
   # Same rule as server.dll: marker-selected, never globbed.
   if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
     set(_REBREW_GOLDTL_BIN "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
@@ -460,6 +466,23 @@ if (MSVC_FOR_DECOMP)
   endif()
 endif()
 
+# Client links use the same header roots and explicit runtime as verification.
+if(MSVC_FOR_DECOMP)
+  foreach(_client europa1400gold europa1400gold_tl)
+    if(TARGET ${_client})
+      target_include_directories(${_client} PRIVATE
+        "${PROJECT_SOURCE_DIR}/src/Develop"
+        "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3")
+      set_property(TARGET ${_client} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded")
+      if(REBREW_ALLOW_NAKED)
+        target_compile_definitions(${_client} PRIVATE REBREW_ALLOW_NAKED=1)
+      endif()
+      target_link_options(${_client} PRIVATE
+        "/MAP:${CMAKE_CURRENT_BINARY_DIR}/$<TARGET_FILE_BASE_NAME:${_client}>.map")
+    endif()
+  endforeach()
+endif()
+
 # ---------------------------------------------------------------------------
 # Per-file CFLAGS come from rebrew-functions.toml, not from the sources
 # ---------------------------------------------------------------------------
@@ -475,16 +498,16 @@ endif()
 # use and writes the table; this file only consumes it.  The metadata is a
 # configure dependency, so editing it reconfigures the build instead of
 # silently reusing baked COMPILE_FLAGS.
-if(MSVC_FOR_DECOMP AND TARGET server_dll)
+function(rebrew_apply_cflags target_name source_list suffix)
   if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
     set(REBREW_BIN "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
   else()
     find_program(REBREW_BIN rebrew REQUIRED)
   endif()
-  set(_rebrew_sources_txt "${CMAKE_BINARY_DIR}/rebrew-sources.txt")
-  set(_rebrew_cflags_cmake "${CMAKE_BINARY_DIR}/rebrew-cflags.cmake")
+  set(_rebrew_sources_txt "${CMAKE_BINARY_DIR}/rebrew-sources${suffix}.txt")
+  set(_rebrew_cflags_cmake "${CMAKE_BINARY_DIR}/rebrew-cflags${suffix}.cmake")
   file(WRITE "${_rebrew_sources_txt}" "")
-  foreach(_src IN LISTS SERVER_SOURCES)
+  foreach(_src IN LISTS ${source_list})
     if(NOT IS_ABSOLUTE "${_src}")
       set(_abs "${PROJECT_SOURCE_DIR}/${_src}")
     else()
@@ -497,7 +520,7 @@ if(MSVC_FOR_DECOMP AND TARGET server_dll)
                "${PROJECT_SOURCE_DIR}/rebrew-functions.toml")
   execute_process(
     COMMAND "${REBREW_BIN}" build cmake-flags
-            --target server.dll
+            --target "${target_name}"
             --sources-file "${_rebrew_sources_txt}"
             --output "${_rebrew_cflags_cmake}"
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
@@ -509,7 +532,19 @@ if(MSVC_FOR_DECOMP AND TARGET server_dll)
       "compiles with one flag set; split the file or align the metadata.")
   endif()
   include("${_rebrew_cflags_cmake}")
-  message(STATUS "rebrew: per-file CFLAGS resolved from src/rebrew-functions.toml")
+  message(STATUS "rebrew: ${target_name} per-file CFLAGS resolved from metadata")
+endfunction()
+
+if(MSVC_FOR_DECOMP)
+  if(TARGET server_dll)
+    rebrew_apply_cflags("server.dll" SERVER_SOURCES "")
+  endif()
+  if(TARGET europa1400gold)
+    rebrew_apply_cflags("Europa1400Gold.exe" GOLD_SOURCES "-gold")
+  endif()
+  if(TARGET europa1400gold_tl)
+    rebrew_apply_cflags("Europa1400Gold_TL.exe" GOLDTL_SOURCES "-goldtl")
+  endif()
 endif()
 
 # ---------------------------------------------------------------------------

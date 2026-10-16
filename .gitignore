@@ -83,6 +83,8 @@ build-*/
 # FLIRT signature packs (vendored, re-downloadable via rebrew flirt --fetch)
 /flirt_sigs/
 references/dxsdk8/
+/references/mss-6.0/*.lib
+/references/mss-6.1c/*.lib
 
 # rebrew link response files and config lock (ephemeral)
 rebrew-rsp-*/

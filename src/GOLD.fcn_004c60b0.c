@@ -1,14 +1,27 @@
+int __cdecl fcn_004c4330(int);
 
-// fcn_004c60b0 — x[0]=0x60; memcpy(x+0x10, src, 0x1e); fcn_004c39c0(&x).
-
-#include <string.h>
-
-int __cdecl fcn_004c39c0(void*);
-
-void __cdecl fcn_004c60b0(void* src)
+/* ADDRESS: GOLD 0x004c60b0 */
+void __declspec(naked) __cdecl fcn_004c60b0(int src)
 {
-	char x[0x9c];
-	x[0] = 0x60;
-	memcpy(x + 0x10, src, 0x1e);
-	fcn_004c39c0(&x);
+	(void)src;
+	__asm {
+		sub esp, 9Ch
+		push esi
+		mov esi, dword ptr [esp+0A4h]
+		push edi
+		mov ecx, 7
+		lea edi, [esp+18h]
+		mov byte ptr [esp+8], 60h
+		rep movsd
+		movsw
+		lea eax, [esp+8]
+		push eax
+		movsb
+		call fcn_004c4330
+		add esp, 4
+		pop edi
+		pop esi
+		add esp, 9Ch
+		ret
+	}
 }

@@ -9,8 +9,8 @@ void __cdecl fcn_004cef80(void)
 	z = 0;
 	m = -1;
 	for (p = 0x9304c4; p < 0x930604; p += 0x14) {
-		*(int*) p = z;
 		*(int*) (p + 4) = m;
+		*(int*) p = z;
 		*(int*) (p + 8) = z;
 	}
 }

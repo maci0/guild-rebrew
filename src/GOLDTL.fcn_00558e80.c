@@ -56,9 +56,8 @@ void __cdecl EvtSensenmann(char* e)
 	char buf[0x200];
 	int r;
 	int idx;
-	int lo;
-	int hi;
-	unsigned char k;
+	unsigned int lo;
+	unsigned int hi;
 	Bld* p;
 	Level* q;
 
@@ -117,15 +116,14 @@ void __cdecl EvtSensenmann(char* e)
 			n = 0x100;
 			idx = *(int*) (e + 0xb8);
 			do {
-				p = (Bld*) (g_90e094 + idx * sizeof(Bld));
 				lo = 0;
-				q = (Level*) (g_868050 + p->kind * sizeof(Level));
-				k = q->kind;
+				p = &((Bld*) g_90e094)[idx];
+				q = &((Level*) g_868050)[p->kind];
 				hi = 0;
-				if (k > 0x1f) {
-					hi = 1 << (k - 0x20);
+				if (q->kind > 0x1f) {
+					hi = 1 << (q->kind - 0x20);
 				} else {
-					lo = 1 << k;
+					lo = 1 << q->kind;
 				}
 				if (p->x27 != 0xffff && ((lo & 0x807c4110) || (hi & 1))) {
 					break;

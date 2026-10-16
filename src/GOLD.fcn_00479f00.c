@@ -1,9 +1,9 @@
 
-// fcn_00479f00 — memmove(obj + [obj+0x2a], obj, [obj+0xa]*4).
-
 #include <string.h>
+#pragma intrinsic(memcpy)
 
-void __cdecl fcn_00479f00(char* obj)
+/* ADDRESS: GOLD 0x00479f00 */
+void __cdecl fcn_00479f00(char* src, char* obj)
 {
-	memmove(obj + *(char*) (obj + 0x2a), obj, (unsigned int) *(unsigned short*) (obj + 0xa) * 4);
+	memcpy(obj + *(int*) (obj + 0x2a), src, (unsigned int) (*(unsigned short*) (obj + 0xa)) * 4);
 }

@@ -1,7 +1,6 @@
 /* ADDRESS: GOLD 0x00464c30 */
-int __cdecl fcn_00464c30(void)
+void __cdecl fcn_00464c30(int a, int* obj)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00464c30 */
-    return 0;
+	((void (__cdecl*)(int, int)) *(void**) ((char*) obj + 0x24))(
+		*(int*) ((char*) obj + 0x28), a);
 }

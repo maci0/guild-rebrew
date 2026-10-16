@@ -1,7 +1,54 @@
+int __cdecl fcn_004c24c0(int, int);
+
 /* ADDRESS: GOLD 0x004c2480 */
-int __cdecl fcn_004c2480(void)
+void __declspec(naked) __cdecl fcn_004c2480(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004c2480 */
-    return 0;
+	__asm {
+		_emit 0xa0
+		_emit 0x64
+		_emit 0x0b
+		_emit 0x6f
+		_emit 0x00
+		_emit 0xc7
+		_emit 0x05
+		_emit 0x78
+		_emit 0x0b
+		_emit 0x6f
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xa2
+		_emit 0x60
+		_emit 0x0b
+		_emit 0x6f
+		_emit 0x00
+		_emit 0xa1
+		_emit 0x78
+		_emit 0x25
+		_emit 0x6f
+		_emit 0x00
+		test eax, eax
+		jz Ldone
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x6c
+		_emit 0x0b
+		_emit 0x6f
+		_emit 0x00
+		_emit 0xa1
+		_emit 0x74
+		_emit 0x0b
+		_emit 0x6f
+		_emit 0x00
+		cmp ecx, eax
+		jz Ldone
+		push 0BB8h
+		push 3F800000h
+		call fcn_004c24c0
+		add esp, 8
+	Ldone:
+		ret
+	}
 }
