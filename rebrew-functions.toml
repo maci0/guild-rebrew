@@ -25630,10 +25630,10 @@ new_status = "RELOC"
 changed_at = "2026-10-16T17:37:30.261517+00:00"
 updated_by = "verify"
 ["GOLD.0x0047e830"]
-size = 112
+size = 106
 status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-10-03T20:03:38+00:00"
+updated_by = "cross-import"
+updated_at = "2026-10-16T17:39:05+00:00"
 file = "src/GOLDTL.fcn_0047dcf0.c"
 symbol = "_fcn_0047dcf0"
 kind = "FUNCTION"

@@ -18,7 +18,7 @@ extern int g_6b8010;
 char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl fcn_005462a0(void);
 void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
-int __cdecl fcn_00597ff0(int, char*);
+#include "client_placement.h"
 int __cdecl fcn_00598150(char*, char*);
 int __cdecl fcn_005987c0(char*, char*);
 void __cdecl fcn_004432d0(int, int);

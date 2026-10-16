@@ -637,6 +637,24 @@ position = 64
 unbekannt_4c = 76
 node = 80
 
+[types."lc.gebaeude-bauplatz-result".GOLD]
+file = "src/client_placement.h"
+symbol = "LC_GEBAEUDE_BAUPLATZ"
+size = 84
+native_size = 84
+extent = "allocation"
+evidence = "Inferred stack result: TL4cc9da-4cc9e8 / Gold4cbe5a-4cbe68 clears 21 DWORDs; placement providers 5985f0/58fd20 and callbacks 598550/58fc80 access name+0, position+40, node+50. Complete native evidence .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim."
+cflags = "/O2 /Gd"
+source_hash = "cbb92d8b39281167e2c0dc676c5e05911dbaafa5f1fbab9f5131dd7e604ebb32"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."lc.gebaeude-bauplatz-result".GOLD.offsets]
+name = 0
+position = 64
+unbekannt_4c = 76
+node = 80
 [types."d3.object-selection-list32".GOLDTL]
 file = "src/client_placement.h"
 symbol = "LC_OBJECT_LIST"
@@ -651,5 +669,22 @@ context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object-selection-list32".GOLDTL.offsets]
+objects = 0
+count = 128
+
+[types."d3.object-selection-list32".GOLD]
+file = "src/client_placement.h"
+symbol = "LC_OBJECT_LIST"
+size = 132
+native_size = 132
+extent = "allocation"
+evidence = "Inferred stack list: cm_ExCreateGeb clears 33 DWORDs (TL4cca7c-4cca87 / Gold4cbefc-4cbf07); collectors 5982d0/58fa00 append 4-byte object pointers and use count+80; callers 598330/58fa60 clear 132 bytes. .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim."
+cflags = "/O2 /Gd"
+source_hash = "cbb92d8b39281167e2c0dc676c5e05911dbaafa5f1fbab9f5131dd7e604ebb32"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."d3.object-selection-list32".GOLD.offsets]
 objects = 0
 count = 128

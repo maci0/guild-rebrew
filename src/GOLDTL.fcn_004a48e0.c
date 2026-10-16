@@ -5,7 +5,7 @@ extern int g_6b8010;
 extern char* g_773d78;
 
 void __cdecl fcn_004432d0(int, int);
-int __cdecl fcn_00597ff0(int, char*);
+#include "client_placement.h"
 int __cdecl fcn_00598150(char*, char**);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);

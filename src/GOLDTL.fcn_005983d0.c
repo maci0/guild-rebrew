@@ -6,7 +6,7 @@ void __cdecl fcn_00455350(char* src, char* pos, float* out);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
 #include "client_scene_transform.h"
-void __cdecl fcn_00598330(char*, int);
+#include "client_placement.h"
 
 void __cdecl fcn_005983d0(char* e)
 {
