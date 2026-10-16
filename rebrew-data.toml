@@ -1925,11 +1925,13 @@ type = "char[]"
 section = ".data"
 
 ["GOLD.0x00a68d2c"]
-file = "src/GOLDTL.fcn_004ce740.c"
+file = "src/client_packet_builder.h"
 name = "g_aed32c"
 kind = "GLOBAL"
 type = "char *"
 section = ".data"
+updated_by = "data"
+updated_at = "2026-10-16T00:39:17+00:00"
 
 ["GOLD.0x00f812a0"]
 file = "src/GOLD.fcn_004bf3e0.c"
@@ -4539,11 +4541,13 @@ type = "unsigned int"
 section = ".data"
 
 ["GOLDTL.0x00aed32c"]
-file = "src/GOLDTL.fcn_004ce740.c"
+file = "src/client_packet_builder.h"
 name = "g_aed32c"
 kind = "GLOBAL"
 type = "char *"
 section = ".data"
+updated_by = "data"
+updated_at = "2026-10-16T00:39:14+00:00"
 
 ["GOLDTL.0x00f8a668"]
 section = ".data"

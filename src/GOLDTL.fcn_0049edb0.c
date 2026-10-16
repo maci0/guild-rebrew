@@ -18,7 +18,7 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern unsigned char g_773d75;
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 extern char g_67eb48[];
 
 
@@ -26,7 +26,7 @@ void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 void __cdecl fcn_004c5150(int a, int b, char c, int n);
 void __cdecl fcn_004c5530(char* msg);
-void __cdecl fcn_004c4510(char* p, int id);
+
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 
@@ -61,7 +61,7 @@ int __cdecl fcn_0049edb0(char* a1, char* a2, char* a3)
 			fcn_004c5530(msg);
 			if (p2 != 0) {
 				fcn_004c4510(p2, *(int*) (p2 + 1));
-				fcn_004c4670(4, 1, (int) p2 - (*(int*)&g_aed32c) + 0x39, &v);
+				fcn_004c4670(4, 1, p2 - g_aed32c + 0x39, &v);
 				fcn_004c5360();
 			}
 			fcn_004c4ef0(g_67eb48);

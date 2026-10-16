@@ -54826,3 +54826,50 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   pointer and reserves 0x240. Size proximity is misleading. Original TU/options
   need evidence; no /Oy- pragma adopted. Next packet-base review must handle its
   90-byte shared provider, all callers and pointer-valued resolver outputs.
+
+### Goal62 — packet-base pointer contracts across existing callers (2026-10-16)
+
+- Adopted the ordinary-C packet-base repair at TL `4c4510` / Gold `4c3ba0`.
+  Its base is a byte pointer, and all three resolver outputs are `void*` locals.
+  The compiler reuses the dead ID argument slot; source-level pointer writes
+  through an integer address are removed. Complete 90-byte bodies and all six
+  operands match per client, with eight rejecting wrong-binding controls.
+- New inferred `client_packet_builder.h` supplies the provider prototype and the
+  existing `g_aed32c` extern to all 42 provider/caller files plus its additional
+  consumer. Both data rows move their declaration home through reviewed, guarded
+  `data set`; names, addresses, types, native extent and unresolved owner are
+  preserved. No storage, aliases, inventory rows or data verdicts are added.
+- Reviewed private object/word views convert explicitly to byte access. Relative
+  offsets keep their existing narrowing. Integer aliases of the base pointer
+  are removed, including the one incompatible `extern int`. Related selected
+  pointer stores use their declared byte-pointer type. `fcn_004ce740` now accepts
+  the native incoming pointer and preserves all 366 old object bytes and fixups
+  per client. Its four native calls per target remain in source-less callers.
+- Sixteen bounded VEX cases check resolver failure/success, full-width nonzero
+  results, output writes, zero/negative IDs and side effects. Packet clearing and
+  count reset occur before the call. The supplied base is stored on success;
+  resolver outputs are not substituted for it. Failure preserves resolver mutations.
+- All 68 old strong contexts pass; all six old weak contexts retain their exact
+  previous compiled bytes/fixups/literals and weak verdicts. All 8413 identities/
+  6053 strong statuses survive. The server gate again passes full 286720-byte raw
+  identity, 316 functions/652 data records and imports/exports/resources/relocations/
+  layout/Wine/DirectX checks, with unchanged SHA
+  `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+- All-target lint has zero errors/warnings, data has zero conflicts/duplicate
+  definitions, and all three type checks have 1018 structs and zero findings.
+  The three selected contracts are clean; all 3993 audit input hashes are current.
+  Broad findings/unknowns remain server 258/305, TL 1471/4085, Gold 963/2609.
+  Previously recorded anonymous/non-record typedef gaps remain open.
+- Zero newly matched game bytes: TL 697576 / Gold 383581. Accounted text stays
+  1121354/2491370 (45.0%) and 416812/2006532 (20.7%); libraries 390163/9732,
+  padding 33615/23499 and no-function 102878/75338 are unchanged. This closes a
+  source-fidelity prerequisite for the larger runner, not a coverage increase.
+- The runner draft uses the canonical header and still emits 2023/2054 against
+  native 2033/2063. It remains unadopted; resource/lighting contracts, missing
+  providers and original frame/TU evidence are open. Do not retry closed shape
+  families or introduce frame pragmas from size proximity.
+- Receipts/replays: `.scratch/goal62/packet-proof.py/json`, `weak-preservation.py/json`,
+  `verify-scope.py`/`scope-promote.json`, current contracts/lint/data/types/status,
+  native xrefs, guarded data plans and server-gate-current.log. `types reconcile`
+  conservatively refused incomplete include contexts as previously documented;
+  no new Rebrew bug or feature gap was established. Active upstream work is untouched.

@@ -11,13 +11,13 @@ struct house {
 };
 
 extern char g_7f4ca0[];
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 
 char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_0050f950(int, int);
 void __cdecl fcn_004c6430(int, int, int);
 void __cdecl fcn_004c6650(int);
-void __cdecl fcn_004c4510(char*, int);
+
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c53a0(void);
 int __cdecl fcn_00500480(char*, int*, int*);

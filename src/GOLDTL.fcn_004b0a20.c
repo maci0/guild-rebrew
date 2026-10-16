@@ -1,6 +1,6 @@
 char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_0064eeec(char*);
-void __cdecl fcn_004c4510(void*, int);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4670(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
 

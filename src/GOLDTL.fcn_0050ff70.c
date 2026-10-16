@@ -6,7 +6,7 @@ extern unsigned char* g_868050;
 extern char g_699adc[];
 extern char g_699af0[];
 
-void __cdecl fcn_004c4510(char* o, int h);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4670(int a, int b, int off, char* v);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_0051af00(char* buf, int id, ...);

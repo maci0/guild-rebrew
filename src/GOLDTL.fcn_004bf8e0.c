@@ -25,7 +25,7 @@ extern Node_4bf8e0* g_772908;
 extern IdSlot10058a0 g_10058a0[8];
 extern int g_772900;
 extern int g_6816d8;
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -44,7 +44,7 @@ void __cdecl fcn_004be360(void);
 Node_4bf8e0* __cdecl fcn_004be1f0(Node_4bf8e0*);
 void __cdecl fcn_004be3d0(int, char*, Node_4bf8e0*, Node_4bf8e0*);
 void __cdecl fcn_004695a0(int, int);
-void __cdecl fcn_004c4510(char*, int);
+
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c53a0(void);
 int __cdecl fcn_00471f80(int);

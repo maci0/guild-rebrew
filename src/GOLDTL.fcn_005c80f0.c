@@ -27,7 +27,7 @@ extern unsigned short g_774970;
 extern int g_772514;
 extern int g_100f1dc;
 extern int g_774654;
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 extern char g_6ac80c[];
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -41,7 +41,7 @@ void __cdecl fcn_00469470(int g, int id);
 void __cdecl fcn_00472640(int i, int flag);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00525ef0(void);
-void __cdecl fcn_004c4510(House5c80* p, int n);
+
 int __cdecl fcn_004c4700(int type, int count, int off, char* data);
 int __cdecl fcn_004c53a0(void);
 int __cdecl fcn_004c4450(int);
@@ -111,7 +111,7 @@ void __cdecl fcn_005c80f0(void)
 			me_h = &((House5c80*)g_7f4ca0)[g_774970];
 			district = g_102cbc4[grp].sel + DISTRICT0;
 			found = 0;
-			fcn_004c4510(me_h, me_h->handle);
+			fcn_004c4510((char*) me_h, me_h->handle);
 			fcn_004c4700(4, 1, (char*) me_h - g_aed32c + 0x54, (char*) &district);
 			r = fcn_004c53a0();
 			while (fcn_004c4450(r) == 0) {

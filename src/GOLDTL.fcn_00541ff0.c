@@ -40,7 +40,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 
-void __cdecl fcn_004c4510(Entity*, int);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl gm_GetOppositeStatIndex(int);
@@ -66,7 +66,7 @@ void __cdecl fcn_00541ff0(int index)
 		one = 1;
 		if (((Entity*)g_7f4ca0)[index].apprentice != 0 || ((Entity*)g_7f4ca0)[index].type == 5 || ((Entity*)g_7f4ca0)[index].type == 1
 			|| ((Entity*)g_7f4ca0)[index].type == 2 || ((Entity*)g_7f4ca0)[index].type == 4) {
-			fcn_004c4510(e, e->id);
+			fcn_004c4510((char*) e, e->id);
 			fcn_004c4670(4, 1, 0x174, &one);
 			fcn_004c5360();
 		}
@@ -96,7 +96,7 @@ void __cdecl fcn_00541ff0(int index)
 
 		e = &((Entity*)g_7f4ca0)[index];
 		flag = 1;
-		fcn_004c4510(e, e->id);
+		fcn_004c4510((char*) e, e->id);
 		fcn_004c4670(4, 1, 0x174, &flag);
 		fcn_004c5360();
 	}

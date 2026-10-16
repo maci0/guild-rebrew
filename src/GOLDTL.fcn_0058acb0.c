@@ -27,7 +27,7 @@ int __cdecl fcn_00519190();
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00525f60(struct house*, int);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_004c4510(char*, int);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int, int, int, int*);
 int __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c4450(int);

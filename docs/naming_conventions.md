@@ -2130,3 +2130,21 @@ Former `g_525e90` was a mistaken data identity at executable TL `525e90`.
 Registration now passes the existing `void fcn_00525e90(void)` provider. Its
 23-byte function identity survives; the false `.rdata` row is retired through
 the locked data writer. Receipts and the old row are in `.scratch/goal61`.
+
+### Goal62 — packet-base byte-access contract
+
+`client_packet_builder.h` is an inferred declaration home, not an attested original
+header or storage owner. The existing provisional `fcn_004c4510` names TL `4c4510`
+and Gold `4c3ba0`; its base argument and `g_aed32c` use a byte-pointer access view.
+The function initializes a packet for an integer entity ID and retains that base
+when the canonical resolver succeeds. Neither the function spelling nor the
+original pointee typedef is recovered. Existing private record views are retained
+at callers with explicit conversions to byte access, without integer transport.
+
+The numeric global label and target addresses are unchanged. Its two data rows
+now point to the canonical extern; complete allocation ownership and client raw
+data remain unverified. `fcn_004ce740` also has a pointer-valued incoming argument,
+as established by its native dereferences. Its four native call sites per client
+have no reconstructed source providers yet; changing the definition does not
+complete those callers. Receipts and the 43-file existing source scope are in
+`.scratch/goal62`.

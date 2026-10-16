@@ -5,7 +5,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern int g_6643d8[];
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 extern char g_67ec2c[];
 
 unsigned short __cdecl gm_RandomMod(int);
@@ -14,7 +14,7 @@ char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl fcn_005462a0(void);
 
 char* __cdecl fcn_00502cd0(int, int, ...);
-void __cdecl fcn_004c4510(char*, int);
+
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c4eb0(char* s);

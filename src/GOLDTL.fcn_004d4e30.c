@@ -1,9 +1,9 @@
 extern unsigned short* g_772f24;
 extern int g_68b79c;
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 
 char* __cdecl fcn_004ce680(char* o);
-void __cdecl fcn_004c4510(char* q, int k);
+
 void __cdecl fcn_004c4670(int a, int b, int c, int* d);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004cf450(char* pos, int a, int b);

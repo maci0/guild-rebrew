@@ -5,7 +5,7 @@ void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int* __cdecl fcn_004ac1e0(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_004c4510(void*, int);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4670(int, int, short, char*);
 void __cdecl fcn_004c5360(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -29,7 +29,7 @@ void __cdecl fcn_004ac410(unsigned char* a1, int a2, int a3)
 	if (p[0] == 0 && *(unsigned short*) (p + 1) <= 4) {
 		c = gm_RandomMod(8) + 8;
 		c = c < 252.0f - a1[*(unsigned short*) (p + 1) + 0x80] ? c : 252.0f - a1[*(unsigned short*) (p + 1) + 0x80];
-		fcn_004c4510(a1, *(int*) (a1 + 4));
+		fcn_004c4510((char*) a1, *(int*) (a1 + 4));
 		fcn_004c4670(1, 1, *(unsigned short*) (p + 1) + 0x80, &c);
 		fcn_004c5360();
 		return;

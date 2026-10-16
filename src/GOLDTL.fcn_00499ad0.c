@@ -44,7 +44,7 @@ extern unsigned char g_6a375c;
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, ...);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
-void __cdecl fcn_004c4510(char*, int);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);

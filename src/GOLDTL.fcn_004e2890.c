@@ -8,7 +8,7 @@ extern int g_7747f0;
 extern int g_772f54;
 
 char* __cdecl fcn_00508e40(int);
-void __cdecl fcn_004c4510(char*, int);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004e4ae0(char*, int);

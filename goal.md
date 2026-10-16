@@ -107,74 +107,74 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-16
 
-The full goal remains ACTIVE and incomplete. Goal61 adds the shared cutscene clock
-TL `4e4a60` / Gold `4e3210`, RELOC 31 each. Its signed pre-increment comparison
-sets the flag, then increments the counter. `game/cutscene_clock.h` centralizes
-three existing scalar views without allocating storage or claiming an owner.
-Both inventories formerly folded the callback and one NOP into the already
-matched 336-byte predecessor; digest-guarded repairs preserve that body and admit
-the separate callback. The prior 23-byte `fcn_00525e90` provider survives; its
-incorrect data identity is retired through the locked writer.
+The full goal remains ACTIVE and incomplete. Goal62 repairs the packet-base
+contract at TL `4c4510` / Gold `4c3ba0`: a byte-pointer base, integer entity ID
+and three typed resolver outputs. Both complete 90-byte bodies and all six
+operands match; eight wrong-binding controls reject. MSVC6 reuses the dead ID
+argument slot for the output local itself. No pointer is written through an
+integer's address in source.
 
-The periodic timer controls and every existing caller now share the inferred
-`client_timer.h`. `TIMER_CALLBACK` is void cdecl(void); the canonical 12-byte slot
-has `funktion`, unsigned `periode` and integer `pausiert` at 0/4/8. Stable type ID
-`client.timer_callback_slot` is compiler-checked for both clients. The 32-slot,
-384-byte table is a declaration view with unresolved storage owner. Preserve
-native full-table overwrite, null callback and zero-period behavior. These are
-game semantics, not Rebrew defects to repair.
+The inferred `client_packet_builder.h` reaches all 42 provider/caller source files
+plus the additional base-pointer consumer. Existing private object views convert
+to byte access; relative offsets retain their narrowing. The global's integer
+aliases and incompatible declaration are removed. Both existing `g_aed32c` rows
+move their declaration home through the guarded writer, preserving names, VAs,
+types and unresolved owner. No storage, data verdict or native inventory is added.
+The pointer-valued `fcn_004ce740` consumer retains all 366 old object bytes and
+fixups per target. Its four native calls per client have source-less callers.
 
-Four controls (88/49/49/49) and the new clock match complete native bytes with
-all 20 operand sites per target resolved; 18 wrong-binding controls reject.
-Fifty bounded VEX cases pass. Dispatcher preserves its previous 262 object bytes
-and all 28 fixups per target; older unresolved operands/IAT policy remain separate.
-All 28 prior strong selected contexts and both new matches pass. All 8411 prior
-identities/6051 strong statuses survive; totals are 8413/6053. Earlier Goal60
-texture, first-phase, refresh and buffer evidence remains in docs/TODO.md and
-`.scratch/goal60`; no earlier source/ownership claim was silently completed.
+Sixteen bounded native/compiled cases pass, including failures, resolver output
+writes, full-width results and side effects. Clearing/reset precede resolution;
+success stores the original supplied base, not a returned object pointer. All
+68 previously strong selected contexts pass. Six existing weak contexts preserve
+their exact old compiled bytes/fixups/literals and weak verdicts. All 8413 prior
+identities/6053 strong statuses survive unchanged. Earlier timer, texture, event
+phase, court and reset evidence remains in docs/TODO.md and prior scratch receipts.
 
-Fresh Docker server gate passes: all 286720 raw bytes identical, 316 functions,
-652 data records, imports/exports/resources/relocations/layout/load checks. SHA
+Fresh Docker server gate passes all 286720 raw bytes, 316 functions/652 data
+records, imports/exports/resources/relocations/layout/Wine/DirectX checks. SHA
 3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
 All-target lint has zero errors/warnings; data has no type conflicts/duplicate
-owners; all three type checks have 1018 structs and no findings. Eleven selected
-contracts are clean and all 3992 audit input hashes are current. Broader findings/
-unknowns remain server 258/305, TL 1473/4093 and Gold 964/2613. Seventeen unknowns
-are the auditor's intentionally unsupported anonymous slot typedef, not type
-conflicts. Compiler layout and native bytes are independent evidence. The precise
-feature gap/replay/proposal is recorded upstream in docs/IDEAS-GUILD.md, commit
-23b81d46; no invented source tag or local auditor workaround was introduced.
-The previous non-record typedef binding gap (4d52a5b4) also remains unimplemented.
+owners; all three type checks have 1018 structs and no findings. Selected packet
+provider/consumer/global contracts are clean and all 3993 audit input hashes are
+current. Broad findings/unknowns remain server 258/305, TL 1471/4085, Gold 963/2609.
+Anonymous slot-typedef audit support and non-record typedef binding remain the
+upstream feature gaps recorded in docs/IDEAS-GUILD.md (23b81d46/4d52a5b4). No new
+Rebrew bug or feature gap was established; active upstream work remains untouched.
 
-Actual new game byte matches: TL +31 / Gold +31; totals 697576/383581. Library
-390163/9732 and padding 33615/23499 are unchanged. Accounted text is
-1121354/2491370 (45.0%) and 416812/2006532 (20.7%); no-function 102878/75338.
-Display rounding hides the small gains. Both client raw builds and initialized-
-data verification remain open; library accounting and source cleanup are separate
-from newly matched game bytes.
+This turn adds no matched game bytes. TL remains 697576, Gold 383581. Library
+390163/9732, padding 33615/23499 and no-function 102878/75338 are unchanged.
+Accounted text remains 1121354/2491370 (45.0%) and 416812/2006532 (20.7%). This
+contract repair advances source fidelity, not reversing-byte coverage. Both client
+raw builds and initialized-data verification remain open.
 
-Continue the larger runner TL `4e5a00` / Gold `4e4060`, native 2033/2063.
-Unadopted `.scratch/goal61/runner.c` uses the canonical timer/clock headers and
-still emits 2023/2054. Native uses a 0x248-byte EBP frame; the default TL candidate
-omits the frame pointer and reserves 0x240. This is not a local ten-byte patch.
-The previous /Oy- diagnostics do not recover original TU options or justify a
-production pragma. Keep service contracts/native source evidence ahead of shape
-search. Packet-base `4c4510`/Gold `4c3ba0` has 90-byte matched bodies but transports
-pointers through integers, including a resolver output over its ID argument.
-Review its complete caller surface and canonical resolver before repairing it.
-Resource identifiers, lighting and missing providers remain separate open roots.
-Misaligned-size operand-conflict counts are not callee-identity proof.
+Prioritize the TL no-source inventory next, per the latest user direction: map
+evidenced roles, names and counterpart functions, check library attribution, then
+add real shared C bodies where justified. Track mapped native bytes separately
+from newly matched source bytes. A parallel mapping agent is authorized.
 
-Preserve both participant scans, stateful calls, Gold signed viewport words and
-GUI stride/count 0x2ec/768 versus TL 0x2f4/1024. Keep Goal58 OWN-before-OTHER
-sequencing and Goal59 reset behavior. Do not repeat exhausted arithmetic/cursor,
-queue/office/camera or timer-loop probes without new native/TU evidence.
+Preserve the larger runner TL `4e5a00` / Gold `4e4060`, native 2033/2063, for later.
+Unadopted `.scratch/goal62/runner.c` uses the canonical packet, timer and clock
+headers and still emits 2023/2054. Resource identifiers (`4730c0` and callees),
+lighting (`6b8300`) and missing provider contracts remain open. Native uses an
+EBP frame of 0x248; the default TL candidate omits it and reserves 0x240. This
+is not a ten-byte local patch. Previous /Oy- diagnostics do not recover original
+TU options or justify a production pragma. Keep actual native operands and
+source/TU evidence ahead of shape search; misaligned-size binding conflicts are
+not callee-identity proof.
 
-Current receipts/replays are in `.scratch/goal61`: timer-proof.py/json, guarded
-inventory/data plans, current type bindings, verify-scope.py/scope-promote.json,
-contracts/data/lint/status/types, runner measurements and server-gate-current.log.
-The interrupted contract audit correctly refused changing inputs; failed source
-probes remain visible. No upstream bug was established. Client data/storage,
+Preserve both participant scans, stateful calls, native redundant tests, Gold
+signed viewport words and GUI stride/count 0x2ec/768 versus TL 0x2f4/1024.
+Preserve Goal58 OWN-before-OTHER sequencing and Goal59 reset behavior. Do not
+repeat exhausted arithmetic/cursor, queue/office/camera or timer-loop probes
+without new native/TU evidence. Original identifiers, allocation owners and source
+placements remain inferred wherever the evidence has not established them.
+
+Current receipts/replays are under `.scratch/goal62`: packet-proof.py/json,
+weak-preservation.py/json, verify-scope.py/scope-promote.json, current lint/data/
+contracts/types/status, native xrefs, guarded data plans, runner measurements and
+server-gate-current.log. The canonical writer's refusal of incomplete include
+contexts is retained, without a local tooling workaround. Client data/storage,
 broad source contracts and faithful discarded server inputs remain open. Every
 completion criterion above still applies.
 

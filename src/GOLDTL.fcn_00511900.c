@@ -12,7 +12,7 @@ typedef struct {
 extern int g_7e1fa0[];
 extern unsigned char g_773d75;
 extern int g_7747f8;
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c44a0(void);
@@ -25,7 +25,7 @@ int __cdecl fcn_004c4fc0(int, int, int, short, int, int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl fcn_004c5150(int, int, char, int);
 Figure* __cdecl fcn_004c4480(int);
-void __cdecl fcn_004c4510(Figure*, int);
+
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c53a0(void);
 
@@ -85,7 +85,7 @@ void __cdecl fcn_00511900(int count, int size, int* faces)
 	for (i = 0; i < count; i++) {
 		p = fcn_004c4480(ids[i]);
 		if (g_7e1fa0[i] != 2) {
-			fcn_004c4510(p, p->id);
+			fcn_004c4510((char*) p, p->id);
 			for (j = 0; j < 5; j++) {
 				unsigned char b;
 

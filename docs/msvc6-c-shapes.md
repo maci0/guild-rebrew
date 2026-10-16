@@ -11894,3 +11894,37 @@ counts on these differently sized bodies are not reliable callee diagnoses;
 continue from actual native operands and providers. Packet-base, resource and
 lighting contracts remain open. Receipts/replays: `.scratch/goal61/timer-proof.py`,
 `timer-proof.json`, inventory plans, scoped verification and `runner-measure.py`.
+
+### Goal62 — resolver output locals can reuse a dead ID argument
+
+TL `4c4510` / Gold `4c3ba0` initialize the 0x7c-byte packet view, reset its byte
+count, call `gm_ResolveEntityById` and store the original base argument only on
+nonzero return. Both native bodies are 90 bytes. The previous reconstruction
+passed three pointer outputs through integer variables, including the address of
+the integer ID argument. Do not infer that this alias cast was original source.
+
+Ordinary C with a byte-pointer base and three `void*` output locals emits all 90
+native bytes and six operands in both targets.
+MSVC6 reuses the dead ID argument's stack slot for that third local itself.
+The source does not need to write a pointer through the address of an integer.
+Resolver destinations are independently checked: TL `5015e0`, Gold `4fea50`.
+The initial scratch Gold destination guess was wrong and remains a failed receipt;
+the strict proof uses the native call and existing matched resolver identity.
+
+Keep packet clearing and count reset before resolution, including on failure.
+Do not replace the retained base with one of the resolver's returned pointers.
+Sixteen bounded native/compiled cases cover returns 0/1/2/3, a full-width nonzero
+result, output writes, negative/zero IDs and resolver side effects. Failure keeps
+any resolver mutations; success overwrites only the base with the original argument.
+Eight wrong-binding controls reject. These are bounded effects, not universal
+semantic proofs or client raw-link/data-owner evidence.
+
+The canonical byte-access interface reaches all 42 provider/caller source files
+and the additional base-pointer consumer. Existing private object layouts remain
+private; offsets are byte-pointer differences with their existing narrowing.
+The pointer-valued `fcn_004ce740` consumer preserves its complete 366-byte object
+and fixups per client. All 68 old strong target contexts still match. All six
+existing weak contexts retain their previous compiled bytes, fixups and literals;
+their weak verdicts are not promoted. No flags, assembly, new storage or source
+reorganization was introduced. Replays: `.scratch/goal62/packet-proof.py`,
+`weak-preservation.py` and `verify-scope.py` with their JSON receipts.

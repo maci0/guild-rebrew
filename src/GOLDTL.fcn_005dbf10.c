@@ -31,7 +31,7 @@ typedef struct Desc {
 } Desc;
 // SIZE 0x18
 
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern unsigned short g_7f4c04;
@@ -43,7 +43,7 @@ Desc* __cdecl fcn_005c61e0(int);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_0057e880(int, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c4510(unsigned short*, int);
+
 int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
@@ -94,14 +94,14 @@ int __cdecl fcn_005dbf10(Ent* ent, Cmd* cmd)
 			vc = d->value;
 			v8 = 1;
 			one = 1;
-			fcn_004c4510(cmd->rec, *(int*) (cmd->rec + 1));
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x1c), &vc);
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x21), &v8);
-			fcn_004c4570(1, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x20), &one);
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x2d), &(*(int*)&g_7f4c00));
-			fcn_004c4570(2, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x31), &(*(short*)&g_7f4c04));
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x33), &g_7f4c06);
-			fcn_004c4570(4, 1, (unsigned short) ((int) cmd->rec - (*(int*)&g_aed32c) + 0x37), &g_7f4c0a);
+			fcn_004c4510((char*) cmd->rec, *(int*) (cmd->rec + 1));
+			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x1c), &vc);
+			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x21), &v8);
+			fcn_004c4570(1, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x20), &one);
+			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x2d), &(*(int*)&g_7f4c00));
+			fcn_004c4570(2, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x31), &(*(short*)&g_7f4c04));
+			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x33), &g_7f4c06);
+			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x37), &g_7f4c0a);
 			fcn_004c5360();
 		}
 		if (d->value == 0) {

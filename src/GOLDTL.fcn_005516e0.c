@@ -28,7 +28,7 @@ int __cdecl fcn_004c4450(int id);
 void __cdecl fcn_00546190(char* t);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00507130(int k, int* a, int* b);
-void __cdecl fcn_004c4510(fcn_005516e0_Ent* e, int h);
+#include "client_packet_builder.h"
 int __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004c4670(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
@@ -63,7 +63,7 @@ void __cdecl fcn_005516e0(char* t)
 	case 1:
 		e = &((fcn_005516e0_Ent*)g_7f4ca0)[*(unsigned short*) (t + 8)];
 		fcn_00507130(gm_MapEntityStatRange(*(unsigned char*) (t + 0xb0)), &a, &b);
-		fcn_004c4510(e, e->h);
+		fcn_004c4510((char*) e, e->h);
 		c = gm_RandomMod(0x10) + 0x10;
 		fcn_004c4670(1, 1, a + 0x80, &c);
 		c = gm_RandomMod(0x10) + 0x10;

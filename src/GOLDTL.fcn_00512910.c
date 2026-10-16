@@ -26,12 +26,12 @@ typedef struct {
 } Variant;
 
 extern char g_868060[];
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 extern unsigned char g_773d75;
 
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 Shop* __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_004c4510(Shop*, int);
+
 void __cdecl fcn_004c4570(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
@@ -60,7 +60,7 @@ void __cdecl fcn_00512910(void)
 					count++;
 				}
 			}
-			fcn_004c4510(w, w->id);
+			fcn_004c4510((char*) w, w->id);
 			fcn_004c4570(1, 1, (char*) w - g_aed32c + 0x1c, &count);
 			count = 4;
 			fcn_004c4570(4, 1, (char*) w - g_aed32c + 0xe, &count);
@@ -82,7 +82,7 @@ void __cdecl fcn_00512910(void)
 					count++;
 				}
 			}
-			fcn_004c4510(w, w->id);
+			fcn_004c4510((char*) w, w->id);
 			fcn_004c4570(1, 1, (char*) w - g_aed32c + 0x1c, &count);
 			count = 4;
 			fcn_004c4570(4, 1, (char*) w - g_aed32c + 0xe, &count);

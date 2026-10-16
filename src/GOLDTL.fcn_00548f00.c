@@ -11,7 +11,7 @@ struct house {
 };
 
 extern char g_7f4ca0[];
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 extern char g_6a58c0[];
 extern char g_6b5c60[];
 
@@ -19,7 +19,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AddObjekt(void);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_004c4510(char*, int);
+
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 

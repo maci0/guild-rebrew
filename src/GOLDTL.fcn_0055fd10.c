@@ -13,14 +13,14 @@ struct house {
 extern char g_7f4ca0[];
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 extern unsigned char* g_868050;
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
-void __cdecl fcn_004c4510(char*, int);
+
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 char* __cdecl fcn_0050dc90(unsigned char*);

@@ -39,7 +39,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00489920(fcn_0047da10_Ent* e);
 void __cdecl fcn_0047d810(fcn_0047da10_Ent* e);
 int __cdecl fcn_0047dca0(fcn_0047da10_Ent* e);
-void __cdecl fcn_004c4510(fcn_0047da10_Ent* e, int h);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 
@@ -91,7 +91,7 @@ void __cdecl fcn_0047da10(void)
 				int v;
 
 				v = -e->gold - (int) (e->gold * -0.89f);
-				fcn_004c4510(e, e->h);
+				fcn_004c4510((char*) e, e->h);
 				fcn_004c4670(4, 1, 0x24, &v);
 				fcn_004c5360();
 			}

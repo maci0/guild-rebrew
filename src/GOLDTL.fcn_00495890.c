@@ -10,7 +10,7 @@ typedef struct Ent {
 extern char g_7f4ca0[];
 
 unsigned short __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004c4510(Ent* e, int h);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int a, int b, int c, int* flags);
 void __cdecl fcn_004c5360(void);
 
@@ -30,7 +30,7 @@ void __cdecl fcn_00495890(void)
 		flags |= gm_RandomMod(3) ? 4 : 0;
 		flags |= gm_RandomMod(3) ? 8 : 0;
 		flags |= gm_RandomMod(2) ? 0x10 : 0;
-		fcn_004c4510(&((Ent*)g_7f4ca0)[i], ((Ent*)g_7f4ca0)[i].handle);
+		fcn_004c4510((char*) &((Ent*)g_7f4ca0)[i], ((Ent*)g_7f4ca0)[i].handle);
 		fcn_004c4570(4, 1, 0x1e8, &flags);
 		fcn_004c5360();
 	}

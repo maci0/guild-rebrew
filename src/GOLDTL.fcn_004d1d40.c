@@ -2,13 +2,13 @@
 
 extern char* g_773db4[];
 extern unsigned char g_773d75;
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 
 int __cdecl fcn_004d0cd0(int* a);
 void __cdecl fcn_004ce6e0(char* u);
 int __cdecl fcn_004c51f0(int a, int b, int c, int d, char e, int f);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
-void __cdecl fcn_004c4510(char* u, int h);
+
 int __cdecl fcn_004c4570(unsigned char size, unsigned char count, unsigned short off, unsigned char* src);
 void __cdecl fcn_004c5360(void);
 
@@ -30,7 +30,7 @@ void __cdecl fcn_004d1d40(char* obj, unsigned char mode)
 		fcn_004ff210(*(unsigned short*) g_773db4[i], -*(int*) (g_773db4[i] + 0x24));
 		v = 0xa8;
 		fcn_004c4510(g_773db4[i], *(int*) (g_773db4[i] + 4));
-		fcn_004c4570(1, 1, (unsigned short) ((int) g_773db4[i] - (*(int*)&g_aed32c) + 0x83), &v);
+		fcn_004c4570(1, 1, (unsigned short) (g_773db4[i] - g_aed32c + 0x83), &v);
 		fcn_004c5360();
 		i = fcn_004d0cd0((int*) (obj + 0x80));
 		*(int*) (obj + 0x80 + i * 4) = *(int*) (g_773db4[i] + 4);
@@ -39,7 +39,7 @@ void __cdecl fcn_004d1d40(char* obj, unsigned char mode)
 		fcn_004ff210(*(unsigned short*) g_773db4[i], -*(int*) (g_773db4[i] + 0x24));
 		v = 0xa8;
 		fcn_004c4510(g_773db4[i], *(int*) (g_773db4[i] + 4));
-		fcn_004c4570(1, 1, (unsigned short) ((int) g_773db4[i] - (*(int*)&g_aed32c) + 0x83), &v);
+		fcn_004c4570(1, 1, (unsigned short) (g_773db4[i] - g_aed32c + 0x83), &v);
 		fcn_004c5360();
 	}
 	else if (mode == 2 || mode == 3) {
@@ -50,7 +50,7 @@ void __cdecl fcn_004d1d40(char* obj, unsigned char mode)
 		fcn_004ff210(*(unsigned short*) g_773db4[i], -*(int*) (g_773db4[i] + 0x24));
 		v = 0xd2;
 		fcn_004c4510(g_773db4[i], *(int*) (g_773db4[i] + 4));
-		fcn_004c4570(1, 1, (unsigned short) ((int) g_773db4[i] - (*(int*)&g_aed32c) + 0x83), &v);
+		fcn_004c4570(1, 1, (unsigned short) (g_773db4[i] - g_aed32c + 0x83), &v);
 		fcn_004c5360();
 		i = fcn_004d0cd0((int*) (obj + 0x80));
 		*(int*) (obj + 0x80 + i * 4) = *(int*) (g_773db4[i] + 4);
@@ -59,7 +59,7 @@ void __cdecl fcn_004d1d40(char* obj, unsigned char mode)
 		fcn_004ff210(*(unsigned short*) g_773db4[i], -*(int*) (g_773db4[i] + 0x24));
 		v = 0xd2;
 		fcn_004c4510(g_773db4[i], *(int*) (g_773db4[i] + 4));
-		fcn_004c4570(1, 1, (unsigned short) ((int) g_773db4[i] - (*(int*)&g_aed32c) + 0x83), &v);
+		fcn_004c4570(1, 1, (unsigned short) (g_773db4[i] - g_aed32c + 0x83), &v);
 		fcn_004c5360();
 	}
 }

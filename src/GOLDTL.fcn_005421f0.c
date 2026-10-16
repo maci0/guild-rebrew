@@ -1,4 +1,4 @@
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 
 void __cdecl fcn_00541ff0(int);
 
@@ -25,7 +25,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_0050db40(struct s_7f4ca0*, int);
 float __cdecl fcn_004ff210(unsigned short, int);
-void __cdecl fcn_004c4510(struct s_7f4ca0*, int);
+
 void __cdecl fcn_004c4670(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
 
@@ -48,7 +48,7 @@ void __cdecl fcn_005421f0(void)
 			}
 			if (r->b1b1 > 0) {
 				c = -1;
-				fcn_004c4510(r, r->f4);
+				fcn_004c4510((char*) r, r->f4);
 				fcn_004c4670(1, 1, k - g_aed32c + 0x1af, &c);
 				fcn_004c5360();
 			}

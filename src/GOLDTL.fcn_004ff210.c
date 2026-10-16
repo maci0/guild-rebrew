@@ -23,7 +23,7 @@ typedef struct
 } fcn_004ff210_Ent;
 
 extern char g_7f4ca0[];
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 #pragma pack(2)
 typedef struct
 {
@@ -38,7 +38,7 @@ typedef struct
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 
-void __cdecl fcn_004c4510(fcn_004ff210_Ent* e, int h);
+
 int __cdecl fcn_004c4700(unsigned char type, unsigned char count, short id, char* data);
 void __cdecl fcn_004c53a0(void);
 void __cdecl fcn_004c5530(char* msg);
@@ -62,7 +62,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 		res = res > 0.0 ? res : 0.0;
 		if (res <= 0.0) {
 			dead = 0;
-			fcn_004c4510(e, e->h);
+			fcn_004c4510((char*) e, e->h);
 			fcn_004c4700(1, 1, (short) ((char*) e - g_aed32c + 8), &dead);
 			fcn_004c53a0();
 			memset(msg, 0, sizeof(msg));
@@ -75,7 +75,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			fcn_004c5530(msg);
 			return 0.0f;
 		}
-		fcn_004c4510(e, e->h);
+		fcn_004c4510((char*) e, e->h);
 		fcn_004c4670(4, 1, 0x24, &delta);
 		fcn_004c5360();
 		return res;
@@ -88,7 +88,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 		res += d;
 		if (res <= 0.0) {
 			dead = 0;
-			fcn_004c4510(e, e->h);
+			fcn_004c4510((char*) e, e->h);
 			fcn_004c4700(1, 1, (short) ((char*) e - g_aed32c + 8), &dead);
 			fcn_004c53a0();
 			memset(msg, 0, sizeof(msg));

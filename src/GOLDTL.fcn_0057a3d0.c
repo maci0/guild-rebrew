@@ -21,7 +21,7 @@ struct pos14 {
 
 extern struct pos14 g_7f4c00;
 extern struct house g_7f4ca0[];
-extern int g_aed32c;
+#include "client_packet_builder.h"
 extern char g_6b5c60[];
 
 char* __cdecl fcn_00508e40(int id);
@@ -29,7 +29,7 @@ int __cdecl fcn_00500cb0(struct pos14*, struct pos14*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_0050c710(char*, int, int);
 int __cdecl fcn_0050c830(struct pos14*, struct pos14*, char*);
-void __cdecl fcn_004c4510(char* p, int id);
+
 void __cdecl fcn_004c4670(int, int, short, unsigned char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
@@ -73,7 +73,7 @@ void __cdecl fcn_0057a3d0(char* e)
 				add = (unsigned char) (252.0f - *p);
 			}
 			fcn_004c4510(who, *(int*) (who + 4));
-			fcn_004c4670(1, 1, (short) ((int) who - g_aed32c + *(int*) (e + 0xb0) + 0x80), &add);
+			fcn_004c4670(1, 1, (short) (who - g_aed32c + *(int*) (e + 0xb0) + 0x80), &add);
 			fcn_004c5360();
 			*(struct pos14*) (e + 0x52) = g_7f4c00;
 			*(struct pos14*) (e + 0x60) = g_7f4c00;

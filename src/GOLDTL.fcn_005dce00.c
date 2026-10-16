@@ -15,12 +15,12 @@ typedef struct Ent {
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 
 void __cdecl fcn_0051af00(char*, int);
 int __cdecl fcn_005bdc30(int, int*, char*, int, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-void __cdecl fcn_004c4510(int, int);
+
 int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 
@@ -58,8 +58,8 @@ int __cdecl fcn_005dce00(char* cmd, char* arg)
 	for (i = 0; i < 768; i++) {
 		if (((Ent*)g_7f4ca0)[i].owner == obj) {
 			val = ((Ent*)g_7f4ca0)[i].level % 2 + ((Ent*)g_7f4ca0)[i].level / 2;
-			fcn_004c4510((int) &((Ent*)g_7f4ca0)[i], ((Ent*)g_7f4ca0)[i].f4);
-			fcn_004c4570(1, 1, (unsigned short) ((int) &((Ent*)g_7f4ca0)[i].level - (*(int*)&g_aed32c)), &val);
+			fcn_004c4510((char*) &((Ent*)g_7f4ca0)[i], ((Ent*)g_7f4ca0)[i].f4);
+			fcn_004c4570(1, 1, (unsigned short) ((char*) &((Ent*)g_7f4ca0)[i].level - g_aed32c), &val);
 			fcn_004c5360();
 		}
 	}

@@ -31,11 +31,11 @@ typedef struct {
 extern char g_7f4ca0[];
 extern unsigned char* g_90e094;
 extern unsigned char* g_868050;
-extern char* g_aed32c;
+#include "client_packet_builder.h"
 extern unsigned char g_773d75;
 
 
-void __cdecl fcn_004c4510(void*, int);
+
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5f60(int, int, int);
@@ -66,7 +66,7 @@ void __cdecl fcn_005153f0(void)
 			if (((Office*)g_868050)[p->office].kind != 0xb) {
 				int value = 0xfa00;
 
-				fcn_004c4510(p, p->id);
+				fcn_004c4510((char*) p, p->id);
 				fcn_004c4570(4, 1, (char*) p - g_aed32c + 0x39, &value);
 				fcn_004c5360();
 				fcn_004c5f60(p->id, e->id, e->id);

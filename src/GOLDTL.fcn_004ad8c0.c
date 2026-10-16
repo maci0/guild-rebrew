@@ -30,7 +30,7 @@ void __cdecl fcn_00535960(void);
 float __cdecl gm_RandomFloat01(void);
 char *__cdecl fcn_004c4480(int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
-void __cdecl fcn_004c4510(char *, int);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int, int, int, int *);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);

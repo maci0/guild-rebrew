@@ -19,7 +19,7 @@ char *__cdecl gm_FindRecordById(int);
 int __cdecl gm_CheckEntityType(char *);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0064d228(void);
-void __cdecl fcn_004c4510(char *, int);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int, int, int, char *);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_0051af00(char *, int, ...);

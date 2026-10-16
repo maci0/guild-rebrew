@@ -1,6 +1,6 @@
 unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl fcn_00508e40(int id);
-void __cdecl fcn_004c4510(char* p, int n);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int a, int b, int off, int* v);
 void __cdecl fcn_004c5360(void);
 

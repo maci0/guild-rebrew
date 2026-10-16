@@ -1,4 +1,4 @@
-void __cdecl fcn_004c4510(char* p, int id);
+#include "client_packet_builder.h"
 void __cdecl fcn_004c4700(int a, int b, int c, int* d);
 void __cdecl fcn_004c53a0(void);
 
