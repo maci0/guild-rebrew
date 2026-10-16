@@ -53420,7 +53420,7 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
 - Receipts: .scratch/goal43/library-directx-focused.json,
   directx-all-whole-body-audit.json, library-plane-proof.json,
   library-plane-boundary-native.json andstatus-{before,after}-library-credit.json.
-  The full7102296-signature scan is still running and must be triaged separately.
+  The full 7102296-signature scan is still running and must be triaged separately.
 
 ### 2026-10-15: full shared-signature audit and missing CRT copy bodies
 
@@ -53433,7 +53433,7 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   commit/full-suite/push checks pass. The fix and earlier discovery note1ab2818e
   are published; temporary upstream worktrees/branches are removed, and unrelated
   upstream changes are preserved, including the concurrent changelog contents.
-- The repaired full7102296-signature scan finishes in89.4 seconds with1967
+- The repaired full 7102296-signature scan finishes in89.4 seconds with1967
   ordinary hits/4679 ambiguous addresses. Most extra labels are weak Delphi,
   Linux or generic patterns. Complete D3DX archive checks at5802 uncredited
   candidate starts produce four further hits, all with unresolved template
@@ -54873,3 +54873,54 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   native xrefs, guarded data plans and server-gate-current.log. `types reconcile`
   conservatively refused incomplete include contexts as previously documented;
   no new Rebrew bug or feature gap was established. Active upstream work is untouched.
+
+
+## No-source native mapping (Goal63, 2026-10-16)
+
+User reprioritized the 1215 TL source-less bodies and authorized a parallel
+mapping pass. Published 55 native role/name mappings spanning 150636 inventoried
+TL bytes; ten reviewed large-body Gold pairings add ten counterpart rows. The
+public locked function writer adds 65 name/size/note-only rows, with every one
+of the preceding 8413 rows unchanged at publication. No source provider, status,
+storage allocation or executable extent is claimed. No matched bytes are added;
+the no-source count is expected to remain unchanged until actual C is adopted.
+
+The selected maps and exact native string-reference addresses are in
+docs/naming_conventions.md (Goal63). Twelve largest selected bodies cover 83096
+inventory bytes; the second pass covers 67540. Diagnostics and native/Kuna review
+support 36 original identifiers; ambiguous/shared labels remain address names.
+Repeated io_Text, long-distance trade, MASTER and mixed building-upgrade logs
+are not treated as unique names. Candidate Gold diagnostic owners are separated
+from the ten large-body pairings reviewed with complete native/Kuna behavior.
+
+The full 7102296-signature FLIRT run reports 1967 candidates and 4679 skipped
+ambiguous offsets. Five selected fortify/check-fail prefix hits are rejected;
+no selected function is reclassified as library code from these hits. Whole-body
+stock LIBCMT matching rejects all twelve large bodies and the four initial
+second-pass bodies; misses remain inconclusive for other archives.
+
+Native pitfalls retained: ch_AttachAni's empty-name path uses an uninitialized
+stack local; BMP24 writes 44 info bytes and offset0x3a, not the conventional 40.
+No unreviewed decompiler seed was installed as production C. Goal62 packet
+contract checkpoint 2eaccc18 is committed and pushed, with all scope and server
+gates passed. Next work is real C for suitable mapped bodies, preserving shared
+logic and native edge behavior. The older runner remains deferred.
+
+Receipts/replays: .scratch/goal63/main-map-plan.py/json/log, integrate-map.py,
+reviewed-map-rows.json, mapping-preservation.json, per-VA dossiers/Kuna/native
+reads, diagnostic strings/xrefs, map-no-source/report.md and mapping-report.json.
+
+Validation: all-target lint has zero errors/warnings, all-target data has zero
+type conflicts/duplicate definitions, and the fresh server gate passes complete
+raw-file identity. Both client coverage accounts and all old metadata rows remain
+unchanged. No new source match is claimed.
+
+The live dossier replay exposed an upstream bug: a native-only managed name/note
+was ignored until a source binding existed. The isolated upstream repair has a
+reproducing regression, target/caller/callee scope checks, and a historical-status
+control. Eighteen focused tests pass. The first full suite passed 12377 tests but
+failed its changelog/tag check because the already-tagged 4.3.0 release branch was
+not on main. Integration retains that clean, tagged release (6e6059ef) and its
+progress-accounting parent (8fc2090b), then applies the dossier fix (6c70aa41).
+The mandatory full-suite pre-push gate remains required for publishing the fix;
+receipts are upstream-push*.log and upstream-focused-after-rebase.log in Goal63.

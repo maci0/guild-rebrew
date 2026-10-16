@@ -281522,3 +281522,328 @@ input_hash = "ffe71880d00b203e9ca568ecf6cf3f434ff1dfc7a8ead5935445302863f103ae"
 writer = "verify"
 status = "RELOC"
 measured_at = "2026-10-16T00:11:21+00:00"
+
+["GOLDTL.0x004045c0"]
+size = 1088
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Checks and completes character animation morph transitions. Evidence: 0x4049da -> 0x675548: ch_CheckAniMorph(): Could not attach CurrentAnimStream: %s; 0x40486f -> 0x675598: ch_CheckAniMorph(): huston we got a problem.... Gold diagnostic candidates 0x00403dc0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ch_CheckAniMorph"
+
+["GOLDTL.0x00404dc0"]
+size = 416
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Builds character animation resource/name strings, loads if absent, attaches a stream and sets frame state. Empty-name path reads an uninitialized native stack local; preserve that finding during reconstruction. Evidence: 0x404ef7 -> 0x6755c8: ch_AttachAni(): Could not attach ani: %s. Gold diagnostic candidates 0x004044a0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ch_AttachAni"
+
+["GOLDTL.0x0040a200"]
+size = 1024
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Updates path-following rotation and checks its arrival threshold. Evidence: 0x40a5db -> 0x675b18: ch_WalkOnPathRotation(): Have missed my treshhold... %s [%f %f]. Gold diagnostic candidates 0x004093d0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ch_WalkOnPathRotation"
+
+["GOLDTL.0x0040a600"]
+size = 4400
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Advances character path-following, animation and arrival/action state. Evidence: 0x40b633 -> 0x675b58: ch_WalkOnPath(): Have missed my treshhold... %s [%f %f]. Gold diagnostic candidates 0x004097d0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ch_WalkOnPath"
+
+["GOLDTL.0x0040eff0"]
+size = 464
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Script adapter loads and attaches a named animation with loop options. Evidence: 0x40f17e -> 0x6768ec: AttachAnimLooped(): Could not find animation-file.... Gold diagnostic candidates 0x0040e0e0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "AttachAnimLooped"
+
+["GOLDTL.0x004210a0"]
+size = 496
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Accumulates socket packet fragments, checks command/sync counts and dispatches complete packets. Evidence: 0x421236 -> 0x678b18: nt_Recv(): Lost a Command, cmd->Count is %li, nt_LastRequCount is %li; 0x421218 -> 0x678b60: nt_Recv(): Received Sync, cmd->Count is %li, LastRequCnt is %li. Gold diagnostic candidates 0x00424c80; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "nt_Recv"
+
+["GOLDTL.0x0044e1e0"]
+size = 3840
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Loads chunked binary animation streams, including vertices, UV faces and frame terminators. Evidence: 0x44e93e -> 0x67b8e8: Expected EXP_EOCHUNK in d3_LoadBinaryAnimStream(): EndOfFrameLoop; 0x44e76f -> 0x67b92c: Expected EXP_DONE in d3_LoadBinaryAnimStream(): ReadUVFaces. Gold diagnostic candidates 0x0044f8b0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "d3_LoadBinaryAnimStream"
+
+["GOLDTL.0x00480330"]
+size = 2352
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Updates guard-master patrol and subordinate actions. Evidence: 0x480ad0 -> 0x67dd1c: ai_CalcMeisterWache(): Meister %s patroulliert im Umland; 0x480a08 -> 0x67dd58: ai_CalcMeisterWache() : gm_GetGebaeudeHauptraum() failed !!!. Gold diagnostic candidates 0x00480e60,0x00482ef0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ai_CalcMeisterWache"
+
+["GOLDTL.0x00480c60"]
+size = 1872
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Selects and schedules attack or espionage actions. Evidence: 0x481380 -> 0x67dec0: ai_CalcAngriff(): Meister %s hat schon eine Spionage bei '%s' laufen; 0x481370 -> 0x67df08: ai_CalcAngriff(): Meister %s hat aber noch eine Spionage bei '%s' nicht beendet. Gold diagnostic candidates 0x00481790; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ai_CalcAngriff"
+
+["GOLDTL.0x004813b0"]
+size = 4112
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Updates thief-master burglary and espionage actions. Evidence: 0x482272 -> 0x67dfe8: ai_CalcMeisterDiebe(): Meister %s m; 0x4820ea -> 0x67e020: ai_CalcMeisterDiebe(): Meister %s entf. Gold diagnostic candidates 0x00481ee0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ai_CalcMeisterDiebe"
+
+["GOLDTL.0x004823c0"]
+size = 1952
+note = "Goal63 native mapping. Role mapping only; original identifier unresolved. AI action routine reuses an ai_CalcMeisterWache failure diagnostic. That copied string does not establish its own name. Evidence: 0x48293b -> 0x67dd58: ai_CalcMeisterWache() : gm_GetGebaeudeHauptraum() failed !!!. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_004823c0"
+
+["GOLDTL.0x00489250"]
+size = 1744
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Collects and redirects transporters, with once-per-check state. Evidence: 0x489661 -> 0x67e3a8: ai_MeisterCollectTrans(): Um %li:%li Uhr zus; 0x489762 -> 0x67e3a8: ai_MeisterCollectTrans(): Um %li:%li Uhr zus. Gold diagnostic candidates 0x00489ca0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ai_MeisterCollectTrans"
+
+["GOLDTL.0x0048b220"]
+size = 4993
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. General master trade/unload decisions. Its own diagnostics distinguish it from ai_MeisterTrade despite one reused message. Evidence: 0x48c1df -> 0x67e4e8: ai_MeisterTrade(): Fake-Verkauf in \"%s\" von %li Einheiten %s, weil kein Marktlager; 0x48bd1e -> 0x67e750: ai_MeisterTradeAllgemein(): Fake-Verkauf aus Auto in \"%s\" von %li Einheiten %s. Gold diagnostic candidates 0x0048bc70; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ai_MeisterTradeAllgemein"
+
+["GOLDTL.0x0048c5b0"]
+size = 2048
+note = "Goal63 native mapping. Role mapping only; original identifier unresolved. Long-distance trading branch sharing ai_MeisterTradeFernEinkauf diagnostics with 0x48cdb0. Individual original name unresolved. Evidence: 0x48c81c -> 0x67e8c0: ai_MeisterTradeFernEinkauf(): Fake-Verkauf aus Auto in \"%s\" von %li Einheiten %s; 0x48c7b6 -> 0x67e918: ai_MeisterTradeFernEinkauf(): Von Auto in \"%s\" %li Einheiten %s entladen. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_0048c5b0"
+
+["GOLDTL.0x0048cdb0"]
+size = 2144
+note = "Goal63 native mapping. Role mapping only; original identifier unresolved. Second long-distance trading branch sharing ai_MeisterTradeFernEinkauf diagnostics with 0x48c5b0. Individual original name unresolved. Evidence: 0x48d014 -> 0x67e8c0: ai_MeisterTradeFernEinkauf(): Fake-Verkauf aus Auto in \"%s\" von %li Einheiten %s; 0x48cfae -> 0x67e918: ai_MeisterTradeFernEinkauf(): Von Auto in \"%s\" %li Einheiten %s entladen. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_0048cdb0"
+
+["GOLDTL.0x00494ed0"]
+size = 579
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Loads and registers an action method and its effects from profile fields. Evidence: 0x495099 -> 0x67ea30: am_RegisterMethod(): Methode '%s' hat keinerlei Auswirkungen!!!. Gold diagnostic candidates 0x00495510; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "am_RegisterMethod"
+
+["GOLDTL.0x004a4d90"]
+size = 544
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Executes a building-construction action using the building prototype/model group. Evidence: 0x4a4f96 -> 0x67f074: amt_ExecGebaeudeBauen(): Keine Group f. Gold diagnostic candidates 0x004a5320; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "amt_ExecGebaeudeBauen"
+
+["GOLDTL.0x004bdda0"]
+size = 272
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Projects the four building-site corners into supermap coordinates. Evidence: 0x4bddbd -> 0x681674: rd_AllBauplatzToSupermap(): Unbekannter Bauplatz '%s'. Gold diagnostic candidates 0x004bd500; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "rd_AllBauplatzToSupermap"
+
+["GOLDTL.0x004c9a10"]
+size = 544
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Allocates and fills a crime record, assigns its counter and reports the result. Evidence: 0x4c9a9b -> 0x68afc8: cm_ExAddStraftat(): Executed---- st_id = %i, taeter = %i, opfer = %i. Gold diagnostic candidates 0x004c8e70; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "cm_ExAddStraftat"
+
+["GOLDTL.0x004c9e20"]
+size = 384
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Allocates a cutscene queue entry from a copied command payload and builds a reply. Evidence: 0x4c9f0b -> 0x68b0a8: cm_ExAllocCutscene(): Cutscene-Queue is full!. Gold diagnostic candidates 0x004c9280; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "cm_ExAllocCutscene"
+
+["GOLDTL.0x004ca970"]
+size = 2784
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Moves a character into a building/room/universe, with explicit invalid-room diagnostics. Evidence: 0x4cb094 -> 0x68b108: cm_ExChrGotoBuilding(): Could not find universe...; 0x4cb044 -> 0x68b13c: cm_ExChrGotoBuilding(): invalid room-id (raum==NULL). Gold diagnostic candidates 0x004c9dc0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "cm_ExChrGotoBuilding"
+
+["GOLDTL.0x004cb7f0"]
+size = 1184
+note = "Goal63 native mapping. Role mapping only; original identifier unresolved. Building upgrade command. Both cm_ExGebUpgrade and cm_ExSetGebUpgrade occur in its diagnostics; exact original name unresolved. Evidence: 0x4cba31 -> 0x68b240: cm_ExGebUpgrade(): Could not load 3D-Object-Group '%s'...; 0x4cb869 -> 0x68b2ac: cm_ExSetGebUpgrade(): already highest level. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_004cb7f0"
+
+["GOLDTL.0x004cc820"]
+size = 848
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Creates a building instance and its 3D model group, replacing prior scene objects. Evidence: 0x4ccb14 -> 0x68b304: cm_ExCreateGeb(): could not lc_GetGebaeudeBauplatz()...; 0x4ccaee -> 0x68b33c: cm_ExCreateGeb(): killing objectname: %s. Gold diagnostic candidates 0x004cbca0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "cm_ExCreateGeb"
+
+["GOLDTL.0x004e0620"]
+size = 3344
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Duel cutscene state and character creation/update. Evidence: 0x4e130f -> 0x68cc70: cut_MainDuell(): Could not create character. Gold diagnostic candidates 0x004ded10; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "cut_MainDuell"
+
+["GOLDTL.0x004eab40"]
+size = 1184
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Computes guild/office candidates for the selected office type; preserve the attested lowercase spelling. Evidence: 0x4eaeaf -> 0x68de2c: amt_calc_zuenfte(): could not find a free place.... Gold diagnostic candidates 0x004e8dc0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "amt_calc_zuenfte"
+
+["GOLDTL.0x00512b40"]
+size = 480
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Initializes business stock/cost state; emits the zero-cost diagnostic. Evidence: 0x512d11 -> 0x6a1cf0: init_Betrieb(): costs are zero. Gold diagnostic candidates 0x0050f570; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "init_Betrieb"
+
+["GOLDTL.0x005238c0"]
+size = 1920
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Loads character tables and converts persisted action/stock identifiers back to pointers. Evidence: 0x523fbf -> 0x6a23e0: ls_LoadCharacter(): invalid next or prev-action pointer for action-type:%i; 0x523f0a -> 0x6a2430: ls_LoadCharacter(): invalid stockptr for action-type:%i (character perhaps created by script!). Gold diagnostic candidates 0x0051e930; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ls_LoadCharacter"
+
+["GOLDTL.0x005305d0"]
+size = 1069
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Updates scene-view selection and quick-jump contact objects. Evidence: 0x5306ac -> 0x6a301c: sv_HandleObjects(): Could not find QuickJump.ContactName: %s; 0x530722 -> 0x6a301c: sv_HandleObjects(): Could not find QuickJump.ContactName: %s. Gold diagnostic candidates 0x0052aea0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "sv_HandleObjects"
+
+["GOLDTL.0x005373e0"]
+size = 3200
+note = "Goal63 native mapping. Role mapping only; original identifier unresolved. UI master registration/dispatch routine. Generic MASTER diagnostic alone does not establish a unique original identifier. Evidence: 0x537542 -> 0x6a33f4: MASTER(): Function already registrated!. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_005373e0"
+
+["GOLDTL.0x0053fc80"]
+size = 916
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Starts a new round and updates participating entities and notifications. Evidence: 0x53fcb8 -> 0x6a42d0: main_RundenBeginn(): init round no %i. Gold diagnostic candidates 0x005383a0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "main_RundenBeginn"
+
+["GOLDTL.0x005462a0"]
+size = 256
+note = "Goal63 native mapping. Role mapping only; original identifier unresolved. Iterates action records with type/owner filtering. he_fn_Handlung diagnostic retained as evidence, not adopted as a proven function name. Evidence: 0x5462d4 -> 0x6a5784: he_fn_Handlung(): invalid Handlungen_LAST. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_005462a0"
+
+["GOLDTL.0x00546720"]
+size = 181
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Allocates a graphics-info slot, creates its parent resource and restores rendering mode. Evidence: 0x546789 -> 0x6a57b0: he_CreateGfxInfo(): invalid parent :%s. Gold diagnostic candidates 0x0053e9e0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "he_CreateGfxInfo"
+
+["GOLDTL.0x0055d0d0"]
+size = 1296
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Initializes a transport action, endpoints, routing and optional escort selection. Evidence: 0x55d520 -> 0x6a62a8: he_AllocTransport(): master choose eskorte type %i; 0x55d3f2 -> 0x6a62dc: he_AllocTransport(): Start and goal are the same!. Gold diagnostic candidates 0x00554f00; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "he_AllocTransport"
+
+["GOLDTL.0x0055df80"]
+size = 1312
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Advances a transport between cities and issues character travel actions. Evidence: 0x55e45c -> 0x6a6380: he_TransportStadtStadt(): character-action not attached but target should be reached : %s. Gold diagnostic candidates 0x00555db0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "he_TransportStadtStadt"
+
+["GOLDTL.0x0055ffe0"]
+size = 512
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Timed warehouse-expansion action updates storage size and sends completion notification. Evidence: 0x5601a8 -> 0x6a64e0: he_RunLagerErweitern():Wrong LagerID.... Gold diagnostic candidates 0x00557dc0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "he_RunLagerErweitern"
+
+["GOLDTL.0x00564b90"]
+size = 1024
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Advances a credit/loan action and its repayment/default notifications. Evidence: 0x564df3 -> 0x6a6620: he_RunKredit(): Could not find GebaeudeId '%i'. Gold diagnostic candidates 0x0055c950; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "he_RunKredit"
+
+["GOLDTL.0x00568060"]
+size = 3472
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Runs market supervision and goods/warehouse balancing. Evidence: 0x5681e9 -> 0x6a6920: he_RunMarktSupervisor(): Could not find markt-lager:%s. Gold diagnostic candidates 0x0055fd80; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "he_RunMarktSupervisor"
+
+["GOLDTL.0x005988b0"]
+size = 2720
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Chooses, loads and orients a 3D group for a building site. Evidence: 0x59926a -> 0x6aa1e8: lc_GebaeudeAusrichten(): Could not load 3D-Object-Group '%s'...; 0x598b0e -> 0x6aa240: lc_GebaeudeAusrichten(): Could not find any 3D-Object-Group fitting this building.... Gold diagnostic candidates 0x0058ffe0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "lc_GebaeudeAusrichten"
+
+["GOLDTL.0x005ba0e0"]
+size = 1648
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Initializes warehouse-origin transport UI/action using the selected storage ID. Evidence: 0x5ba143 -> 0x6ac37c: ob_TransportFromLager(): Could not find lager by id.... Gold diagnostic candidates 0x005aeaf0; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ob_TransportFromLager"
+
+["GOLDTL.0x005c5310"]
+size = 1664
+note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed against native/Kuna. Handles planting UI/state and loads planting scene groups. Evidence: 0x5c58c8 -> 0x6ac6c4: ob_HandleBepflanzung(): Could not load 3D-Objekt-roup '%s'.... Gold diagnostic candidates 0x005b9880; shared-body/provider proof remains open. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ob_HandleBepflanzung"
+
+["GOLDTL.0x00401d10"]
+size = 448
+note = "Goal63 native mapping. Role mapping only; original identifier unresolved. Writes an 8-bit indexed BMP: BM header, 256 BGR0 palette entries (grayscale when palette is null), bottom-up rows; does not add row padding. Evidence: Complete native disassembly and Kuna: .scratch/goal63/00401d10-{asm,kuna}.json. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_00401d10"
+
+["GOLDTL.0x00401ed0"]
+size = 448
+note = "Goal63 native mapping. Role mapping only; original identifier unresolved. SaveBMP24 is attested by the temp-row allocation label. Writes a 24-bit BMP, swapping RGB to BGR in a temporary row, bottom-up. Native writes a 44-byte info block and uses pixel offset 0x3a; do not silently replace it with a standard 40-byte header. Evidence: Complete native disassembly and Kuna: .scratch/goal63/00401ed0-{asm,kuna}.json. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_00401ed0"
+
+["GOLDTL.0x00405760"]
+size = 362
+note = "Goal63 native mapping. Role mapping only; original identifier unresolved. Updates a pending target displacement from character +0x114 and model position/offset; normalizes/scales the step, decrements the +0x110 byte, then clears state at tolerance0.4. Evidence: Complete native disassembly and Kuna: .scratch/goal63/00405760-{asm,kuna}.json. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_00405760"
+
+["GOLDTL.0x005ba910"]
+size = 11948
+note = "Goal63 native mapping. Trade/transport inventory panel controller. Creates the panel\\infopanel_marktstand UI, builds sixteen per-entity rows, refreshes inventories and selected goods, and issues packet-builder commands. Modes 2/4 are forwarded by existing wrappers at TL5ba8f0/5ba900. Evidence: 0x5baa7b -> panel\\infopanel_marktstand. retain fcn_005ba910; role mapping only. Gold counterpart GOLD.0x005af320, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.770286 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_005ba910"
+
+["GOLD.0x005af320"]
+size = 11961
+note = "Goal63 native role counterpart of GOLDTL.0x005ba910. Trade/transport inventory panel controller. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.770286 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "fcn_005ba910"
+
+["GOLDTL.0x005b6300"]
+size = 9648
+note = "Goal63 native mapping. Personnel/mercenary book controller. Selects Personalbuch or Soeldnerbuch templates, creates and updates per-entity personnel rows, processes pay_meister/pay_worker controls, then destroys temporary GUI state. Evidence: 0x5b63c1 -> Buch\\Personalbuch_1_Diebesgilde. retain fcn_005b6300; role mapping only. Gold counterpart GOLD.0x005aacd0, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.93022 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_005b6300"
+
+["GOLD.0x005aacd0"]
+size = 9680
+note = "Goal63 native role counterpart of GOLDTL.0x005b6300. Personnel/mercenary book controller. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.93022 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "fcn_005b6300"
+
+["GOLDTL.0x00519190"]
+size = 7536
+note = "Goal63 native mapping. io_Text-family GUI text expansion and append. Resolves a text ID or literal, expands percent/dollar/brace markup in a 0x17d0-scale temporary buffer, appends to the selected text-box storage and schedules redraw. Exact original identifier is not unique from the repeated io_Text diagnostics. Evidence: 0x519ce3 -> io_Text(): too many icons before redraw!. retain fcn_00519190; role mapping only. Gold counterpart GOLD.0x00515990, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.793176 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_00519190"
+
+["GOLD.0x00515990"]
+size = 7536
+note = "Goal63 native role counterpart of GOLDTL.0x00519190. io_Text-family GUI text expansion and append. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.793176 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "fcn_00519190"
+
+["GOLDTL.0x004da690"]
+size = 7057
+note = "Goal63 native mapping. Council election/removal session cutscene controller. Coordinates Sitzung scene creation, AMTSWAHL/ABSETZUNG script resources, chamber votes and result scenes. The six location-specific Sitzung scenes and create/exit cutscenes provide a specific role. Evidence: 0x4dac50 -> cutscenes\\sitzung_main. retain fcn_004da690; role mapping only. Gold counterpart GOLD.0x004d8e20, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.906471 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_004da690"
+
+["GOLD.0x004d8e20"]
+size = 7089
+note = "Goal63 native role counterpart of GOLDTL.0x004da690. Council election/removal session cutscene controller. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.906471 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "fcn_004da690"
+
+["GOLDTL.0x0051af00"]
+size = 6464
+note = "Goal63 native mapping. io_Text-family buffer expansion. Expands the same percent/dollar/brace localized-text grammar, but copies the resulting string to an output buffer instead of appending to GUI text storage. Shared diagnostics attest the family, not a unique bare function name. Evidence: 0x51c68a -> io_Text(): Missing Random-Text (e.g. {r1}).... retain fcn_0051af00; role mapping only. Gold counterpart GOLD.0x00517700, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.916985 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_0051af00"
+
+["GOLD.0x00517700"]
+size = 6464
+note = "Goal63 native role counterpart of GOLDTL.0x0051af00. io_Text-family buffer expansion. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.916985 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "fcn_0051af00"
+
+["GOLDTL.0x0046c5a0"]
+size = 6080
+note = "Goal63 native mapping. GUI text-box markup layout/render pass. Consumes the text-box string at slot+0x3c with stride0x3cc; selects _FONT, handles text parameters and _BUTTON_RED, advances drawing positions and stores measured content height. Evidence: 0x46d525 -> Unknown textparameter: %%%c. retain fcn_0046c5a0; role mapping only. Gold counterpart GOLD.0x0046fb90, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.358964 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_0046c5a0"
+
+["GOLD.0x0046fb90"]
+size = 6176
+note = "Goal63 native role counterpart of GOLDTL.0x0046c5a0. GUI text-box markup layout/render pass. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.358964 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "fcn_0046c5a0"
+
+["GOLDTL.0x00489a70"]
+size = 6064
+note = "Goal63 native mapping. Master-worker inventory trading. Evaluates inventory/transport stock, capacity and prices; transfers or sells goods and logs auto/warehouse/fake-sale cases. Special type0x116 delegates to TL48b220. That helper also reuses ai_MeisterTrade diagnostics, so preserve its separately attested ai_MeisterTradeAllgemein name. Evidence: 0x48a24f -> ai_MeisterTrade(): Von Auto in \"%s\" %li Einheiten %s entladen. native diagnostic; see shared-diagnostic caveat. Gold counterpart GOLD.0x0048a4c0, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 100.0 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "ai_MeisterTrade"
+
+["GOLD.0x0048a4c0"]
+size = 6064
+note = "Goal63 native role counterpart of GOLDTL.0x00489a70. Master-worker inventory trading. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 100.0 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "ai_MeisterTrade"
+
+["GOLDTL.0x0051c840"]
+size = 6048
+note = "Goal63 native mapping. io_Text-family player-name/template text append. Uses the same localized markup grammar and GUI append/redraw state, plus Spielername and a local XXXXXXXXX template/packed record. Native caller/prototype remain unestablished; Kuna loses the input register/stack relationship. No Gold counterpart was established. Evidence: 0x51d2a3 -> io_Text(): too many icons before redraw!. retain fcn_0051c840; role mapping only. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_0051c840"
+
+["GOLDTL.0x0042bf20"]
+size = 5840
+note = "Goal63 native mapping. Localized text resource compiler/loader. Initializes text tables, parses include/define/headerfile/outputpath directives, validates comment/string syntax and writes compiled resources/headers. Both txt_OpenText diagnostics and an inconsistent txt_TextOpen diagnostic occur inside this body. Evidence: 0x42d039 -> txt_OpenText(): %s compiled!. native diagnostic; see shared-diagnostic caveat. Gold counterpart GOLD.0x0042cbc0, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.754145 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "txt_OpenText"
+
+["GOLD.0x0042cbc0"]
+size = 5856
+note = "Goal63 native role counterpart of GOLDTL.0x0042bf20. Localized text resource compiler/loader. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.754145 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "txt_OpenText"
+
+["GOLDTL.0x00547770"]
+size = 5600
+note = "Goal63 native mapping. Building-mix driven economic command selection. Counts256 building records by type and ownership, selects among world-counter modulo5 cases, uses randomized thresholds to choose goods/building actions, creates/polls requests and serializes commands through4c4510/4c4570. Exact subsystem prefix and original identifier are unresolved. Evidence: complete native/Kuna state and command-flow review. retain fcn_00547770; role mapping only. Gold counterpart GOLD.0x0053f910, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 100.0 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_00547770"
+
+["GOLD.0x0053f910"]
+size = 5600
+note = "Goal63 native role counterpart of GOLDTL.0x00547770. Building-mix driven economic command selection. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 100.0 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "fcn_00547770"
+
+["GOLDTL.0x0043c640"]
+size = 5419
+note = "Goal63 native mapping. Terrain material/blend mesh construction. Derives per-cell material/overdraw maps; allocates MaterialSubMap, OverDrawSubMap, BestOverDrawSubMap and VertexSubMap; builds indexed blend/unique vertex groups across8x8 regions; frees scratch allocations. Gold has no matching blend-allocation strings; structural best440360 is only91.0 and is not a counterpart claim. Evidence: 0x43d474 -> d3fl:BlendAttributes. retain fcn_0043c640; role mapping only. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_0043c640"
+
+["GOLDTL.0x00581e20"]
+size = 5392
+note = "Goal63 native mapping. Tutorial chapter3 task-graph construction. Allocates linked0x74-byte task records for CHAPTER_3_INTRO and steps1..10/outro, assigns callbacks and loads TUTORIAL_CHAPTER_3.sbf. On allocation failure it calls580cf0 on the partial chain. First allocation label FTInitChapter2Intro is inconsistent with the chapter3 graph and must not be copied as this function name. Evidence: 0x581e90 -> CHAPTER_3_INTRO. retain fcn_00581e20; role mapping only. Gold counterpart GOLD.0x00579830, supported by native/Kuna role comparison and diagnostic/resource anchors; structural score 99.997555 is supporting evidence, not bound-operand proof. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
+name = "fcn_00581e20"
+
+["GOLD.0x00579830"]
+size = 5392
+note = "Goal63 native role counterpart of GOLDTL.0x00581e20. Tutorial chapter3 task-graph construction. Native/Kuna and diagnostic/resource anchors support this pairing; structural score 99.997555 alone does not establish it. Original source/provider/operand proof remains open. See docs/naming_conventions.md (Goal63). No source binding or verification status is claimed; SIZE preserves the native inventory span."
+name = "fcn_00581e20"

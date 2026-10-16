@@ -107,76 +107,67 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-16
 
-The full goal remains ACTIVE and incomplete. Goal62 repairs the packet-base
-contract at TL `4c4510` / Gold `4c3ba0`: a byte-pointer base, integer entity ID
-and three typed resolver outputs. Both complete 90-byte bodies and all six
-operands match; eight wrong-binding controls reject. MSVC6 reuses the dead ID
-argument slot for the output local itself. No pointer is written through an
-integer's address in source.
+The full goal remains ACTIVE and incomplete. Latest user priority is the TL
+no-source inventory: map evidenced roles/names/counterparts and then reconstruct
+real shared C bodies. Do not resume exhausted contract/shape searches merely to
+keep busy. A parallel native-mapping pass was explicitly authorized and completed.
 
-The inferred `client_packet_builder.h` reaches all 42 provider/caller source files
-plus the additional base-pointer consumer. Existing private object views convert
-to byte access; relative offsets retain their narrowing. The global's integer
-aliases and incompatible declaration are removed. Both existing `g_aed32c` rows
-move their declaration home through the guarded writer, preserving names, VAs,
-types and unresolved owner. No storage, data verdict or native inventory is added.
-The pointer-valued `fcn_004ce740` consumer retains all 366 old object bytes and
-fixups per target. Its four native calls per client have source-less callers.
+Goal63 maps 55 previously source-less TL functions covering 150636 native inventory
+bytes, with ten large-body Gold counterpart identities. Public locked
+`record_function_rows` added 65 name/size/note-only rows. No file/symbol/provider,
+STATUS, data storage or native extent was invented. All 8413 previous rows were
+unchanged by publication; all earlier strong verdicts remain. Original identifiers
+are retained only where native diagnostics and Kuna/native behavior agree.
+Copied/ambiguous diagnostics retain provisional address names and explicit notes.
+See docs/naming_conventions.md (Goal63) for every selected address and anchor.
 
-Sixteen bounded native/compiled cases pass, including failures, resolver output
-writes, full-width results and side effects. Clearing/reset precede resolution;
-success stores the original supplied base, not a returned object pointer. All
-68 previously strong selected contexts pass. Six existing weak contexts preserve
-their exact old compiled bytes/fixups/literals and weak verdicts. All 8413 prior
-identities/6053 strong statuses survive unchanged. Earlier timer, texture, event
-phase, court and reset evidence remains in docs/TODO.md and prior scratch receipts.
+Large mapped bodies include the trade/transport and personnel panels, three
+localized text expansions, GUI markup rendering, council elections, master
+trading, localized resource compilation, economic command selection, terrain
+blend construction and tutorial chapter3 initialization. The other pass maps
+character animation/path behavior, command handlers, AI roles, loading, transport,
+credit, market supervision and building placement. Gold diagnostic candidates
+outside the ten reviewed large-body pairings remain candidates. No server pairing
+is claimed. No new matched source bytes are earned by this mapping.
 
-Fresh Docker server gate passes all 286720 raw bytes, 316 functions/652 data
-records, imports/exports/resources/relocations/layout/Wine/DirectX checks. SHA
-3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
-All-target lint has zero errors/warnings; data has no type conflicts/duplicate
-owners; all three type checks have 1018 structs and no findings. Selected packet
-provider/consumer/global contracts are clean and all 3993 audit input hashes are
-current. Broad findings/unknowns remain server 258/305, TL 1471/4085, Gold 963/2609.
-Anonymous slot-typedef audit support and non-record typedef binding remain the
-upstream feature gaps recorded in docs/IDEAS-GUILD.md (23b81d46/4d52a5b4). No new
-Rebrew bug or feature gap was established; active upstream work remains untouched.
+The complete FLIRT scan loaded 7102296 signatures; 1967 candidates and 4679 skipped
+ambiguous sites are inspection results. Five selected fortify/check-fail prefix
+hits are rejected, not promoted to library origin. Stock LIBCMT whole-body checks
+reject the twelve largest selected bodies and the four initial main-pass bodies;
+a miss does not exclude other archives. DirectX/provider attribution still needs
+whole-body/operand and raw-map evidence.
 
-This turn adds no matched game bytes. TL remains 697576, Gold 383581. Library
-390163/9732, padding 33615/23499 and no-function 102878/75338 are unchanged.
-Accounted text remains 1121354/2491370 (45.0%) and 416812/2006532 (20.7%). This
-contract repair advances source fidelity, not reversing-byte coverage. Both client
-raw builds and initialized-data verification remain open.
+Prior source checkpoint 2eaccc18 repairs the packet-base pointer contracts across
+43 files: both 90-byte providers and all six operands match; 68 old strong target
+contexts pass, six old weak contexts preserve their exact prior compiled output,
+and bounded resolver/native cases pass. It adds zero matched bytes. Timer, texture,
+court and reset evidence remains in docs/TODO.md and earlier scratch receipts.
 
-Prioritize the TL no-source inventory next, per the latest user direction: map
-evidenced roles, names and counterpart functions, check library attribution, then
-add real shared C bodies where justified. Track mapped native bytes separately
-from newly matched source bytes. A parallel mapping agent is authorized.
+Continue from the mapped no-source bodies. Prefer a tractable real shared body
+with bounded native operands and clean caller contracts; inspect complete native
+instructions and Kuna before adoption. ch_AttachAni at TL404dc0 / Gold4044a0 has
+an uninitialized empty-name native path. BMP24 TL401ed0 writes a 44-byte info block
+and uses pixel offset0x3a. Preserve those findings; do not silently substitute a
+cleaner algorithm and call it faithful. Original TU/headers/owners remain inferred
+unless independently established.
 
-Preserve the larger runner TL `4e5a00` / Gold `4e4060`, native 2033/2063, for later.
-Unadopted `.scratch/goal62/runner.c` uses the canonical packet, timer and clock
-headers and still emits 2023/2054. Resource identifiers (`4730c0` and callees),
-lighting (`6b8300`) and missing provider contracts remain open. Native uses an
-EBP frame of 0x248; the default TL candidate omits it and reserves 0x240. This
-is not a ten-byte local patch. Previous /Oy- diagnostics do not recover original
-TU options or justify a production pragma. Keep actual native operands and
-source/TU evidence ahead of shape search; misaligned-size binding conflicts are
-not callee-identity proof.
+The older runner TL4e5a00 / Gold4e4060 remains unadopted at 2023/2054 against native
+2033/2063. Resource, lighting and provider contracts remain open. Preserve its
+participant scans, stateful calls, Gold signed viewport words and GUI strides;
+previous /Oy- diagnostics do not justify production flags. Preserve Goal58
+OWN-before-OTHER sequencing and Goal59 reset behavior. Do not repeat exhausted
+arithmetic/cursor, queue/office/camera or timer-loop probes without new evidence.
 
-Preserve both participant scans, stateful calls, native redundant tests, Gold
-signed viewport words and GUI stride/count 0x2ec/768 versus TL 0x2f4/1024.
-Preserve Goal58 OWN-before-OTHER sequencing and Goal59 reset behavior. Do not
-repeat exhausted arithmetic/cursor, queue/office/camera or timer-loop probes
-without new native/TU evidence. Original identifiers, allocation owners and source
-placements remain inferred wherever the evidence has not established them.
-
-Current receipts/replays are under `.scratch/goal62`: packet-proof.py/json,
-weak-preservation.py/json, verify-scope.py/scope-promote.json, current lint/data/
-contracts/types/status, native xrefs, guarded data plans, runner measurements and
-server-gate-current.log. The canonical writer's refusal of incomplete include
-contexts is retained, without a local tooling workaround. Client data/storage,
-broad source contracts and faithful discarded server inputs remain open. Every
-completion criterion above still applies.
+Goal63 receipts are under `.scratch/goal63`: main-map-plan.json,
+reviewed-map-rows.json, mapping-preservation.json, full diagnostic string/xref and
+Kuna/native dossiers, map-no-source/report.md and mapping-report.json, plus current
+lint/data/status/server-gate results. Both client raw-file/data verification,
+broad source contracts and discarded original server inputs remain open.
+Upstream anonymous-record/typedef audit gaps are already recorded in
+`docs/IDEAS-GUILD.md`. Goal63 also reproduces and fixes the upstream dossier bug
+that hid native-only metadata names/notes; the regression retains target scoping
+and no source-status claim. Its upstream full suite and push must pass before
+returning to reconstruction. Preserve foreign upstream work. Every completion criterion above still applies.
 
 ## History
 
