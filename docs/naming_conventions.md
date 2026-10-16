@@ -2346,3 +2346,26 @@ all compiled code, fixups, literals and function-definition hashes stay unchange
 Receipts: `.scratch/goal67/attach-loop/{proof.json,effects.json}` and
 `.scratch/goal67/animation-preservation/preservation.json`. No storage, assembly,
 compiler override or raw client-link identity is claimed.
+
+## Object-universe mapping helper (Goal68, 2026-10-16)
+
+TL515540 / Gold511df0 is a separate151/146-byte helper, provisionally named
+`fcn_00515540`. Original identifier and source placement remain inferred. It maps
+an object's unsigned-short type through a signed-byte table, initializes a
+selected object or allocates a free universe index, then marks the row used and
+copies the prototype name. Preserve the signed final reload, including after
+the selected-object initializer changes object type or mapping. Allocation -1
+returns immediately without mutation; no bounds, rollback or new failure
+behavior has been invented.
+
+Private `D3_UNIVERSE_VIEW` records only inferred row strides3dcTL/3e0Gold and
+used byte+3d5. Its opaque prefix is not a recovered string capacity; neither
+that view nor the shared game_data.h prototype-table extern claims allocation
+or storage ownership. Stable type ID is d3.universe-view. Initializer510c90 /
+50d7f0 has no adopted C/raw-link provider.
+
+The old496-byte discovery spans at5153f0 /511ca0 split into336+160 through
+reviewed inventory repair. Existing331-byte source extents and historical
+reference hashes remain intact, with five NOPs before the admitted helper.
+Trailing9TL/14Gold NOPs stay separate from its executable source extent. Complete
+proofs and bounded effects: .scratch/goal68/helper-proof.

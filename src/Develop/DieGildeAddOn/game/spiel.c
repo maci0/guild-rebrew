@@ -2744,9 +2744,10 @@ void __cdecl gm_SetBuildingWorkerLimits(unsigned char* building)
 }
 
 #pragma optimize("y", off)
-char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
+char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 {
 	char* geb;
+	int count;
 	/* 0x410-byte locals block: 0x400 log buffer + 4 pointer/int slots. */
 	// SIZE 0x410
 	struct {
@@ -2806,7 +2807,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	*(int*) (geb + 0xa5) = -1;
 	*(int*) (geb + 0x99) |= 1;
 	/* target: mov [ebp+8],0x30; lea eax,[esi+0x65]; mov [ebp-0x10],eax; stos */
-	geb_type = 0x30;
+	count = 0x30;
 	s.dest = geb + 0x65;
 	/* The original's fill here is the 24-byte hand-written block-fill prelude
 	 * (docs/msvc6-allocator.md Finding 19); no msvc6 C memset spelling emits
@@ -2814,7 +2815,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 #ifdef REBREW_SERVER
 	__asm {
 		mov edi, s.dest
-		mov ebx, geb_type
+		mov ebx, count
 		xor eax, eax
 		lea ecx, [edi+edi*2]
 		and ecx, 3
@@ -2830,9 +2831,9 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		rep stosb
 	}
 #else
-	memset(s.dest, 0, geb_type);
+	memset(s.dest, 0, count);
 #endif
-	/* component loop: counter reuses geb_type (ebp+8) */
+	/* The full-width count reuses the dead input argument slot. */
 	{
 		/* The target walks a pointer (`lea edi,[record+0x23]`, `add edi,2`
 		 * in the for-increment) rather than indexing by the counter, and it
@@ -2841,9 +2842,9 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		 * the pointer. */
 		unsigned short* rec;
 
-		geb_type = 0;
+		count = 0;
 		rec = (unsigned short*) (s.record + 0x23);
-		for (; geb_type < 0x40; geb_type++, rec++) {
+		for (; count < 0x40; count++, rec++) {
 			unsigned short comp = *rec;
 			char* comp_rec;
 			unsigned char comp_type;
@@ -2936,9 +2937,9 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		*(int*) (geb + 0x71) = (int) m_alloc(0x600, "f3_gm:PlantMap");
 		/* 0x40 entries of 0x18 bytes, indexed: c2 strength-reduces the index
 		 * and emits the reference's `[eax+edx-0xb]` operand order. */
-		for (geb_type = 0; geb_type < 0x40; geb_type++) {
-			*((char*) *(int*) (geb + 0x71) + geb_type * 0x18 + 0xd) = (char) 0xff;
-			*(int*) ((char*) *(int*) (geb + 0x71) + geb_type * 0x18 + 0x14) = 0;
+		for (count = 0; count < 0x40; count++) {
+			*((char*) *(int*) (geb + 0x71) + count * 0x18 + 0xd) = (char) 0xff;
+			*(int*) ((char*) *(int*) (geb + 0x71) + count * 0x18 + 0x14) = 0;
 		}
 		/* fall through into 0x1f/0x20 stores */
 	case 0x1f:

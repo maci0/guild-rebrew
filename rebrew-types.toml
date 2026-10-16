@@ -581,3 +581,39 @@ effects = 48
 saved_effects = 80
 other_effects = 112
 flags = 144
+
+[types."d3.universe-view".GOLDTL]
+file = "src/GOLDTL.fcn_00515540.c"
+symbol = "D3_UNIVERSE_VIEW"
+size = 988
+native_size = 988
+extent = "stride"
+evidence = "Native helper515540TL/511df0Gold scales a free index by3dc/3e0, stores byte1 at row+3d5, copies prototype string to row base. Private inferred opaque byte view: no string capacity, original typedef, full table allocation or storage owner claimed. Complete native and rejecting proofs .scratch/goal67/load-character/helper-proof.json; production .scratch/goal68/helper-proof."
+cflags = "/O2 /Gd"
+source_hash = "35a1fd5b04d8819e889a3c8d277dd8f66edb25231f97a51ada51028631b51a6d"
+headers_hash = "4bf62d49f24dadb12bd6c70e27557456026394cdf59b8607946208babf84e393"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."d3.universe-view".GOLDTL.offsets]
+unbekannt_000 = 0
+verwendet = 981
+unbekannt_3d6 = 982
+
+[types."d3.universe-view".GOLD]
+file = "src/GOLDTL.fcn_00515540.c"
+symbol = "D3_UNIVERSE_VIEW"
+size = 992
+native_size = 992
+extent = "stride"
+evidence = "Native helper515540TL/511df0Gold scales a free index by3dc/3e0, stores byte1 at row+3d5, copies prototype string to row base. Private inferred opaque byte view: no string capacity, original typedef, full table allocation or storage owner claimed. Complete native and rejecting proofs .scratch/goal67/load-character/helper-proof.json; production .scratch/goal68/helper-proof."
+cflags = "/O2 /Gd"
+source_hash = "35a1fd5b04d8819e889a3c8d277dd8f66edb25231f97a51ada51028631b51a6d"
+headers_hash = "4bf62d49f24dadb12bd6c70e27557456026394cdf59b8607946208babf84e393"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."d3.universe-view".GOLD.offsets]
+unbekannt_000 = 0
+verwendet = 981
+unbekannt_3d6 = 982

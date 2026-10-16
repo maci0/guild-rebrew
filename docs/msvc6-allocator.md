@@ -4585,3 +4585,31 @@ Two regressions fail before;41 focused and11725 full tests pass after(52 skips,
 88% coverage), with committed-head packaging/reproducibility/provenance checks.
 Its upstream push/CI integration is pending. A size-equal or clean-prefix diff
 alone cannot establish the complete native body or its operand bindings.
+
+## Narrow factory inputs and a reused count slot (Goal68, 2026-10-16)
+
+The native building factory's DWORD stores to its incoming argument slot do not
+establish a full-width semantic input. SERVER `gm_AllocGebaeude` consumes the
+low byte of building type and low ushort of owner. The later slot holds a
+full-width fill/loop count after the type has been saved elsewhere.
+
+Its canonical definition now agrees with command.c's existing unsigned-char /
+unsigned-short declaration and uses a separate ordinary `int count`. VC6 reuses
+the dead type argument slot for that count without casts, volatile additions or
+new flags. Narrowing the old body while continuing to reuse its parameter failed
+C2443; that failure was not evidence against narrow inputs. Original formal and
+counter spelling remain inferred.
+
+The existing SERVER-only aligned-fill assembly is retained, with only its named
+count operand changed. The complete prelude at10017611 is26bytes; older24-byte
+descriptions are imprecise. Positive original-macro evidence is the cross-site
+compiler/control analysis above and codegen-walls6b, independently of this match.
+A new target-scoped source evidence record documents that retained macro; no
+client assembly or factory provider is asserted.
+
+All1078 factory bytes,49operand destinations,6literal uses,44-byte jump table and
+74-byte index map agree. All127 old spiel.c contexts preserve complete code,
+fixup destinations and literals, including11weak bodies; all43private field
+declarations are unchanged. Generated local-label names change but their actual
+function-relative destinations do not. Receipts: .scratch/goal68/factory-production
+and factory-review. A compatible contract is not a new client factory provider.

@@ -16862,8 +16862,31 @@
   },
   {
     "va": 5329904,
-    "size": 496,
-    "name": "fcn.005153f0"
+    "size": 336,
+    "name": "fcn.005153f0",
+    "extent_history": [
+      {
+        "old_size": 496,
+        "new_size": 336,
+        "reason": "Two complete independent native returns,5 preceding and9 following NOPs;515540 is a separately called151-byte helper. Preserve existing331-byte source/hash. See .scratch/goal67/load-character/helper-admission-evidence.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T03:24:24.392570+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5330240,
+    "size": 160,
+    "name": "fcn.00515540",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 160,
+        "reason": "Two complete independent native returns,5 preceding and9 following NOPs;515540 is a separately called151-byte helper. Preserve existing331-byte source/hash. See .scratch/goal67/load-character/helper-admission-evidence.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T03:24:24.394852+00:00"
+      }
+    ]
   },
   {
     "va": 5330400,

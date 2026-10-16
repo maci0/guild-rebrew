@@ -55103,3 +55103,58 @@ receipts are upstream-push*.log and upstream-focused-after-rebase.log in Goal63.
   definitions. Fresh server gate PASS: all286720 raw bytes identical, data/imports/
   relocations/layout match, Wine load/exports succeed. All6063 prior strong
   statuses retain their exact value after the gate; client full links remain open.
+
+
+## Goal68 — universe helper and factory contract repair, 2026-10-16
+
+- Adopted shared151TL/146Gold-byte object-universe helper515540 /511df0. All ten
+  operands resolve; six wrong-symbol and ten wrong-site controls reject per
+  client. Six bounded cases/client produce24native/compiled executions with
+  exact return/mutation/write-order/canary agreement, including signed -2 cache,
+  allocation -1 and initializer-driven type/map change followed by fresh reload.
+  Actual helper services, arbitrary bounds and string capacity remain unproved.
+- Reviewed discovery repair splits old496-byte spans at5153f0 /511ca0 into336+160,
+  preserving both preceding331-byte source matches/reference hashes and all
+  native bytes. New source extents151/146 exclude9/14NOPs. Five caller contexts
+  validate all six helper edges; the pre-existing Gold4fbd10 mismatch stays weak.
+  Private d3.universe-view type records strides3dc/3e0 and used+3d5 only. The
+  shared game_data.h extern creates no storage/provider. Names/placement inferred.
+- Fixed canonical factory definition to unsignedchar/unsignedshort plus an
+  independent int count. Old wide form and failed direct narrowing had conflated
+  semantic input with compiler reuse of a dead argument slot. This minimal C
+  repair preserves all1078SERVER bytes,49operand destinations,6literaluses and
+  internal tables, all127old spiel.c contexts including11weak and all43private
+  field declarations. All named factory contracts now agree; broader unresolved
+  contracts are not claimed clean. Existing SERVER fill assembly is unchanged
+  except its named count operand; a new source record cites independent original
+  macro evidence, not byte agreement alone. No new client factory provider.
+- Scope verification:133SERVER passes,36TLpasses/9existingweak,30Goldpasses/
+  7existingweak. New matched game code is151TL/146Gold; factory repair adds zero.
+  TL no-source stays1211/1206802 because a hidden helper becomes a new catalog
+  row with source immediately. Accounted1123675/2491370=45.1026945...%, displayed
+  45.1%; padding/library attribution remains separate from game bytes.
+- Next package:838-byte shared create-building scratch command; factory contract
+  is closed but placement/callback/iterator/provider contracts remain open.
+  Newly measured callback598550/58fc80 matches148bytes plus12NOPs; preserve its
+  insensitive bk_ acceptance followed by sensitive strstr. No production
+  callback/command adoption is claimed from these scratch results.
+- Receipts: .scratch/goal68/{helper-proof/REPORT.md,helper-proof/helper-proof.json,
+  helper-proof/effects/results.json,helper-proof/callers-admission.json,
+  factory-production/proof.json,factory-review/review.json,scope-promote.json,
+  factory-contracts.json,lint.json,data.json,placement-contracts}.
+- Both client type checks repeat compiled sizeof/offsetof assertions with no
+  findings. The already-present removal of the legacy inline SERVER layout
+  mirror was independently reviewed: public configuration is unchanged and the
+  standalone layout package plus linker manifest retain all geometry, exports
+  and100imports (including16WS2ordinal aliases). No current consumer reads the
+  redundant inline mirror; its writer is unknown. Receipt:
+  .scratch/goal68/config-investigation/report.md. Retention is reviewed cleanup,
+  not an attributed Rebrew bug fix.
+- Final preservation: all6065old strong statuses retain their exact value and
+  every prior weak status is unchanged; only the new151/146-byte helper rows gain
+  RELOC. Final all-target lint has zero errors/warnings, data zero conflicts/
+  duplicate definitions. Both client compiled type checks have zero findings.
+  Fresh SERVER gate PASS:316/316functions,652/652data comparisons, all286720raw
+  bytes identical, matching imports/relocations/layout, Wine load/exports pass.
+  Complete client raw-file/provider/data/storage proofs remain open. Final
+  receipts: preservation.json,lint-final.json,status.json,server-gate.log.

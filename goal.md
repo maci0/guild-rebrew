@@ -107,64 +107,65 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-16
 
-The full goal remains ACTIVE and incomplete. Goal67 adds shared AttachAnimLooped
-at TL40eff0 / Gold40e0e0: 454 executable game bytes per client, followed by ten
-alignment NOPs in each retained 464-byte native span. Complete proofs validate
-all fifteen operands, three literal uses and 25 rejecting controls per target.
-Eighteen bounded cases per client (72 native/compiled executions) assert exact
-options, waiting slots, paths, service order, diagnostics and callback writes.
-Real renderer execution and arbitrary input safety are not established.
+The full goal remains ACTIVE and incomplete. Goal68 admits and reconstructs one
+shared object-universe mapping helper, TL515540 / Gold511df0, adding151/146
+matched executable game bytes. Complete proofs validate all10operands and16
+rejecting controls per target. Six bounded cases/client (24 native/compiled
+executions) preserve signed cached values, allocator failure without mutation,
+map→used→name write order and fresh object-type/map reload after the selected
+initializer. The initializer/allocator services are modeled, not real execution.
 
-The native callback reads three nullable draw-data pointer cells at stride0x7c,
-first offset0x484 TL /0x178 Gold. Preserve the resumed-path null-object behavior,
-the otherwise unused resolved-name copy, and full-kind==1 test before narrowing
-mode. The existing D3_ANIMATION_OPTIONS layout remains twelve bytes by value;
-its stable ID was rebound after moving the attachment-service prototype to
-canonical d3_animation.h. All41 old contexts across fifteen files preserve full
-code/fixups/literals, including the existing weak TL ch_Updatelowpoly. All6063
-prior strong statuses retain their exact value. No assembly, storage or compiler
-flags were added. Helper434970 /435550 source/link providers remain unresolved.
+Reviewed inventory repair splits each preceding496-byte interval into336+160.
+Both old331-byte matches and historical reference hashes survive, with five
+NOPs before the helper; its trailing9TL/14Gold NOPs remain separate. All six
+helper-call edges across five existing caller contexts validate; Gold4fbd10
+retains its existing SIZE_MISMATCH. The private d3.universe-view stable type
+records only row strides3dcTL/3e0Gold and used byte+3d5, not string capacity,
+complete allocation or storage ownership. game_data.h owns the compatible
+prototype-table pointer declaration; no storage or initializer provider is added.
+Helper name and source placement remain inferred.
 
-TL no-source is1211 /1206802bytes, down from1212 /1207266. Newly matched game
-code is454 per client; ten additional accounted bytes are alignment. Accounted
-TL text1123524/2491370 =45.096633...%; the deliberate floor-to-one-decimal display
-remains45.0%. This includes libraries and padding, independently of game progress.
-All-target lint is clean, data has zero conflicts/duplicate owners, and a fresh
-server gate passes with all286720 raw bytes identical, matching data/imports/
-relocations/layout and successful Wine load/export checks.
+The canonical gm_AllocGebaeude definition now agrees with command.c's narrow
+unsigned-char / unsigned-short inputs. A separate full-width int count naturally
+reuses the dead input argument slot under VC6. The previous C2443 narrowing
+failure came from continuing to use a byte parameter as the assembly's DWORD
+count; it did not establish wide semantic inputs. All1078 factory bytes,
+49operand destinations,6literal uses and both internal tables agree, while all
+127 old spiel.c contexts preserve complete code/fixups/literals, including11weak
+bodies. All43private field declarations stay unchanged. The existing SERVER-only
+original fill macro is retained and newly documented from independent cross-site
+compiler controls; no new assembly, flags or client factory provider is claimed.
 
-Larger parallel work remains distinct from adopted progress. cm_ExCreateGeb
-TL4cc820 /Gold4cbca0 has a full838-byte scratch match with44operands, eight literals
-and81 rejecting controls per target. Do not adopt it with contradictory factory
-prototypes: command.c declares byte/ushort but spiel.c defines int/int and reuses
-full argument slots in the independently attested macro. Compatible int/int
-caller emits842; narrowing the factory unchanged fails its assembly operand.
-Native low8/low16 consumption does not uniquely recover original formal spelling.
-Resolve allocator, placement-result/callback/iterator contracts and Gold twins
-before sharing the server's lookup/allocation/reply tail with client scene work.
+TL no-source remains1211 /1206802bytes because the admitted helper was previously
+hidden rather than a separate no-source row. Newly matched game code is151TL /
+146Gold; the factory repair adds zero matched bytes. TL accounted text is now
+1123675/2491370 =45.1026945...%, displayed45.1%; libraries/padding are separate
+from this new game-byte progress. Scope verification preserves all prior strong
+matches. All6065 prior strong statuses retain their exact value; all prior weak
+statuses are unchanged. All-target lint/data checks are clean; both client type
+checks compile without findings. The fresh SERVER gate passes316/316 functions,
+652/652data comparisons and all286720raw bytes, with matching imports/relocations/
+layout and successful Wine load/exports. Client full links remain unverified.
 
-amt_ExecGebaeudeBauen remains543native/527compiled after bounded trials;
-ls_LoadCharacter remains1915native/1904compiled with strrchr last-underscore
-semantics and pointer/layout debt. CHARACTER allocation0x244 differs from Figure's
-0x228 accessed view and from the D3 allocation. Newly found helper515540 /Gold511df0
-has151/146 executable bytes plus9/14 NOPs, currently swallowed by preceding
-5153f0/511ca0 inventory spans496; preserve their existing331-byte matches when
-reviewing admission. Initial helper source matches but needs full proof, canonical
-global views and source/type/provider review before integration. Keep all scratch
-results separate from STATUS; reports are in .scratch/goal67.
+The next package is cm_ExCreateGeb TL4cc820 /Gold4cbca0: a full838-byte scratch
+match,44operands,eight literals,81rejecting controls per client. Factory signature
+debt is closed, but placement-result/callback/iterator contracts, helper providers
+and Gold twins still require reconciliation before adoption. A newly measured
+placement callback598550 /58fc80 matches148bytes per client, separate from12NOPs;
+case-insensitive bk_ acceptance followed by case-sensitive strstr is native
+behavior. Keep that scratch result separate from STATUS until its callers/types
+are integrated. Reports: .scratch/goal68/{factory-production,factory-review,
+helper-proof,placement-contracts}.
 
-The first190-byte cutscene command has an allocator-zero path that reaches a read
-at address8 in BOTH clients. Do not add a graceful failure return or conflate it
-with the adjacent111-byte handler or SERVER37-byte ID/timestamp function. Prior
-Goal66 adds760 bytes per client; Goal65 SaveBMP8 adds441 TL. All corresponding
-proofs and earlier findings remain in docs/TODO.md and docs/naming_conventions.md.
-
-Continue tractable no-source bodies and the new helper admission, reusing Goal63
-mapping/FLIRT/Kuna/native evidence. Do not restart exhausted court/queue/office/
-camera/timer/runner or recent bounded families without new evidence; preserve
-OWN-before-OTHER query order and discarded server inputs. Both clients' complete
-raw-file/data/provider proofs and broader source contracts remain open. Every
-completion criterion above still applies.
+Do not restart exhausted court/queue/office/camera/timer/runner or recent bounded
+families without new evidence. OWN-before-OTHER query order, discarded server
+inputs and the first cutscene command's allocator-zero read at address8 remain
+required native behavior. AttachAnimLooped adds454bytes/client in Goal67;
+Goal66 adds760/client. amt_ExecGebaeudeBauen remains543native/527compiled and
+ls_LoadCharacter1915/1904 with strrchr last-underscore semantics and pointer debt.
+CHARACTER allocation0x244 differs from Figure's0x228 accessed view and from D3.
+Both clients' complete raw-file/data/provider/storage proofs and broader source
+contracts remain open. Every completion criterion above still applies.
 
 ## History
 

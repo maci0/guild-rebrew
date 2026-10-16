@@ -5728,3 +5728,67 @@ with bounded output checks. Do not resume exhausted court/queue/office/camera/
 timer/runner families without new evidence; keep OWN-before-OTHER query order.
 Both clients' full raw-file/data/provider proofs and broader source contracts
 remain open. Every completion criterion above still applies.
+
+
+## Before Goal68 integration — 2026-10-16
+
+## Current continuation — 2026-10-16
+
+The full goal remains ACTIVE and incomplete. Goal67 adds shared AttachAnimLooped
+at TL40eff0 / Gold40e0e0: 454 executable game bytes per client, followed by ten
+alignment NOPs in each retained 464-byte native span. Complete proofs validate
+all fifteen operands, three literal uses and 25 rejecting controls per target.
+Eighteen bounded cases per client (72 native/compiled executions) assert exact
+options, waiting slots, paths, service order, diagnostics and callback writes.
+Real renderer execution and arbitrary input safety are not established.
+
+The native callback reads three nullable draw-data pointer cells at stride0x7c,
+first offset0x484 TL /0x178 Gold. Preserve the resumed-path null-object behavior,
+the otherwise unused resolved-name copy, and full-kind==1 test before narrowing
+mode. The existing D3_ANIMATION_OPTIONS layout remains twelve bytes by value;
+its stable ID was rebound after moving the attachment-service prototype to
+canonical d3_animation.h. All41 old contexts across fifteen files preserve full
+code/fixups/literals, including the existing weak TL ch_Updatelowpoly. All6063
+prior strong statuses retain their exact value. No assembly, storage or compiler
+flags were added. Helper434970 /435550 source/link providers remain unresolved.
+
+TL no-source is1211 /1206802bytes, down from1212 /1207266. Newly matched game
+code is454 per client; ten additional accounted bytes are alignment. Accounted
+TL text1123524/2491370 =45.096633...%; the deliberate floor-to-one-decimal display
+remains45.0%. This includes libraries and padding, independently of game progress.
+All-target lint is clean, data has zero conflicts/duplicate owners, and a fresh
+server gate passes with all286720 raw bytes identical, matching data/imports/
+relocations/layout and successful Wine load/export checks.
+
+Larger parallel work remains distinct from adopted progress. cm_ExCreateGeb
+TL4cc820 /Gold4cbca0 has a full838-byte scratch match with44operands, eight literals
+and81 rejecting controls per target. Do not adopt it with contradictory factory
+prototypes: command.c declares byte/ushort but spiel.c defines int/int and reuses
+full argument slots in the independently attested macro. Compatible int/int
+caller emits842; narrowing the factory unchanged fails its assembly operand.
+Native low8/low16 consumption does not uniquely recover original formal spelling.
+Resolve allocator, placement-result/callback/iterator contracts and Gold twins
+before sharing the server's lookup/allocation/reply tail with client scene work.
+
+amt_ExecGebaeudeBauen remains543native/527compiled after bounded trials;
+ls_LoadCharacter remains1915native/1904compiled with strrchr last-underscore
+semantics and pointer/layout debt. CHARACTER allocation0x244 differs from Figure's
+0x228 accessed view and from the D3 allocation. Newly found helper515540 /Gold511df0
+has151/146 executable bytes plus9/14 NOPs, currently swallowed by preceding
+5153f0/511ca0 inventory spans496; preserve their existing331-byte matches when
+reviewing admission. Initial helper source matches but needs full proof, canonical
+global views and source/type/provider review before integration. Keep all scratch
+results separate from STATUS; reports are in .scratch/goal67.
+
+The first190-byte cutscene command has an allocator-zero path that reaches a read
+at address8 in BOTH clients. Do not add a graceful failure return or conflate it
+with the adjacent111-byte handler or SERVER37-byte ID/timestamp function. Prior
+Goal66 adds760 bytes per client; Goal65 SaveBMP8 adds441 TL. All corresponding
+proofs and earlier findings remain in docs/TODO.md and docs/naming_conventions.md.
+
+Continue tractable no-source bodies and the new helper admission, reusing Goal63
+mapping/FLIRT/Kuna/native evidence. Do not restart exhausted court/queue/office/
+camera/timer/runner or recent bounded families without new evidence; preserve
+OWN-before-OTHER query order and discarded server inputs. Both clients' complete
+raw-file/data/provider proofs and broader source contracts remain open. Every
+completion criterion above still applies.

@@ -22,6 +22,9 @@
 #ifndef GAME_DATA_H
 #define GAME_DATA_H
 
+/* Shared prototype-table pointer; declaration only, not a new allocation. */
+extern char* g_item_def_table;
+
 extern int g_query_limit; /* 0x10035450, gm_NextEntityQueryMatch.c */
 extern int g_next_object_id; /* 0x10030b6c, spiel_data.c */
 extern int g_current_year; /* 0x10035880, gm_NextEntityQueryMatch.c */
