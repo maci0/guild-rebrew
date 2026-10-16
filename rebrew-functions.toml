@@ -285024,10 +285024,32 @@ note = "Goal63 native mapping. Attested diagnostic identifier; role confirmed ag
 name = "ob_HandleBepflanzung"
 
 ["GOLDTL.0x00401d10"]
-size = 448
-note = "Goal63 native mapping. Role mapping only; original identifier unresolved. Writes an 8-bit indexed BMP: BM header, 256 BGR0 palette entries (grayscale when palette is null), bottom-up rows; does not add row padding. Evidence: Complete native disassembly and Kuna: .scratch/goal63/00401d10-{asm,kuna}.json. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."
-name = "fcn_00401d10"
+size = 441
+note = "Goal65: inferred SaveBMP8 name and provisional standalone placement; complete indexed-BMP writer, not library code. 441 executable bytes plus7 alignment NOPs; native inventory span448 remains. Original aligned-fill macro is supported by operand homing, compiler controls and stock CRT pattern exclusions in docs/msvc6-allocator.md; helper-specific evidence is in rebrew-source.toml. Full native operand/literal and bounded effect receipts: .scratch/goal65/indexed. Gold counterpart, legacy VFS global/prototype reconciliation and client raw-link providers remain unverified."
+name = "SaveBMP8"
+file = "src/GOLDTL.SaveBMP8.c"
+kind = "FUNCTION"
+symbol = "_SaveBMP8"
+updated_by = "test"
+updated_at = "2026-10-16T02:11:32+00:00"
+status = "RELOC"
 
+["GOLDTL.0x00401d10".verification]
+source_hash = "b9a45bb974a4e41666b90b2916c0fe72015564ca5a9de1590f9ca6291062f896"
+reference_hash = "170baee1ee23d8ae6cb6a808de2b6e32c97b662d91c09197f543eff2681b12b1"
+reference_size = "441"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "eceb26749efb6dcb9fa993b7ff05c5cf5c64f0caff510a021017715caa3cb352"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x401d10"
+context_hash = ""
+defines = "[]"
+input_hash = "c7961bd5b1b1885948465a4a06c848c634b6769eb76eb069feaa850a5701cfe4"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-10-16T02:11:32+00:00"
 ["GOLDTL.0x00401ed0"]
 size = 448
 note = "Goal63 native mapping. Role mapping only; original identifier unresolved. SaveBMP24 is attested by the temp-row allocation label. Writes a 24-bit BMP, swapping RGB to BGR in a temporary row, bottom-up. Native writes a 44-byte info block and uses pixel offset 0x3a; do not silently replace it with a standard 40-byte header. Evidence: Complete native disassembly and Kuna: .scratch/goal63/00401ed0-{asm,kuna}.json. See docs/naming_conventions.md (Goal63). No source provider, compilation verdict, storage owner or executable extent is claimed; SIZE retains the native inventory span."

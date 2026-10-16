@@ -54965,3 +54965,37 @@ receipts are upstream-push*.log and upstream-focused-after-rebase.log in Goal63.
   weak-preservation.py/json, review/report.md, lint.json, data.json,
   coverage-delta.json, preservation.json and server-gate.log. Both client raw
   links, linked helper-provider selection and backing-map ownership remain open.
+
+## Goal65 — indexed BMP writer and parallel no-source work (2026-10-16)
+
+- Added inferred SaveBMP8 at TL401d10 as a complete441-byte C89 body with the
+  independently reviewed original inline zero-fill macro. All eight operands,
+  exact wbn literal, thirteen rejecting controls and seven alignment NOPs pass.
+  SDK BITMAPFILEHEADER14/BITMAPINFOHEADER40 are used directly. Native palette
+  order, bottom-up rows without padding and ignored write failures remain.
+- Native/compiled VEX output checks pass for eight independently specified cases
+  each: grayscale/custom palette, odd width, zero width/height, negative height,
+  open failure and ignored write failure. These bounded stubbed-VFS checks add
+  evidence beyond a masked body comparison; no real-client link/VFS claim is made.
+- Count assignment before pointer homing recovers the original fill setup.
+  Natural indexed descending rows, positive open continuation and height*width
+  expression orientation recover the complete native loop/register allocation.
+  No flag override, fabricated storage, vector type or guessed zero-fill origin
+  was added. The native inventory remains448; source extent441 excludes seven NOPs.
+- SaveBMP24 TL401ed0 / Gold401b90 is now independently paired439 code bytes plus
+  nine NOPs and ten operand sites. Its best faithful447-byte scratch draft passes
+  twelve bounded native/compiled/expected-output cases, including the complete
+  44-byte BITMAPINFO, RGB-to-BGR rows, zero dimensions and failure behavior.
+  It stays unadopted: limited WinSDK/header/loop shapes did not close the byte gap.
+- New matched game bytes here: TL441, Gold0. SaveBMP8's name and source placement
+  are inferred. Its correct pointer-valued declarations do not close the broader
+  legacy VFS global/prototype/provider contracts. No Gold8-bit source is claimed.
+- All-target lint is clean and data reports zero conflicts/duplicate definitions.
+  The fresh server gate passes with all 286720 raw bytes identical, complete
+  data/import/relocation/layout agreement and successful Wine load/exports.
+  All 6056 previous strong statuses remain; TL no-source count is 1213.
+- Receipts: .scratch/goal65/indexed/{proof.py,production-proof.json,
+  assembly-proof.json,effects.py,effects.json,promote.json}, bmp24/report.md,
+  lint.json, data.json and server-gate.log. The command/action/network passes
+  run independently under .scratch/parallel-no-source; review their full native
+  operand/provider evidence and integration scope before applying results.

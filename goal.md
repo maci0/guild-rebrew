@@ -107,63 +107,53 @@ explicit authorization; this file does not grant it.
 
 ## Current continuation — 2026-10-16
 
-The full goal remains ACTIVE and incomplete. Latest user priority is the TL
-no-source inventory: map evidenced roles/names/counterparts and reconstruct real
-shared C bodies. A parallel native-mapping/reconstruction pass was explicitly
-authorized. Prefer new source bodies over repeated exhausted shape searches.
+The full goal remains ACTIVE and incomplete. Latest user priority is the1213
+TL no-source functions. Parallel work is explicitly authorized: commands own
+TL4c9a10/4c9e20 family, actions own55ffe0/512b40, networking owns4210a0/494ed0.
+Their candidates and reports are isolated in .scratch/parallel-no-source; only
+reviewed source/operand/provider evidence may be integrated. Root owns managed
+writes and final checks. Preserve source sharing and all prior strong matches.
 
-Goal64 adds inferred rd_FillSupermapQuad at TL4be000 / Gold4bd760: one ordinary
-C89 definition matches all485 native executable bytes per client, all ten
-operands and four literal uses. Thirteen rejecting controls per target pass.
-The native sampling bias is double0.9; complete literal auditing rejected an
-initial0.5 draft despite masked instruction agreement. Eleven following NOPs
-remain alignment. Byte255 and integer255 independently skip their respective
-planes; original unchecked sampling and write order remain. Source placement
-and role name are inferred, backing-map ownership unproven. No new storage or
-speculative map/vector type is created.
+Goal65 adds inferred SaveBMP8 at TL401d10: complete441 executable bytes, all
+eight operands, exact wbn literal, thirteen rejecting controls and seven NOPs
+pass. The448-byte inventory span remains. Eight native and compiled cases each
+agree with independently packed BMP header/palette/row bytes, including odd
+width without padding, null/custom palettes, zero/negative heights, open failure
+and ignored write failures. The private fill0 reuses the independently attested
+original aligned-fill macro; fresh native sites and stock-archive exclusions
+support managed helper provenance. Its name and source placement are inferred.
+SDK BMP types introduce no new project type or storage. New TL game bytes441;
+Gold0. Broader legacy VFS global/prototype/provider contracts remain open.
 
-Gold4bd710 now shares the existing TL4bdfb0 projection body, with four evidenced
-map offsets guarded for Gold. Complete67/79-byte bodies and callee operands
-match; wrong-callee controls reject. client_scene_transform.h reconciles its
-object/float-vector access contracts across the provider and current C callers.
-All eight old strong contexts pass; the existing weak102-byte context retains
-identical code, fixups and literals. Broader455350/scene contracts remain open.
-Newly matched game bytes are TL485 and Gold564. Earlier native-only mappings,
-libraries and alignment are separate from that gain.
+SaveBMP24 TL401ed0 / Gold401b90 is paired439 code bytes plus9 NOPs. Its447-byte
+scratch body passes twelve bounded output checks, including exact44-byte info
+blocks and BGR conversion; it remains unadopted and unmatched. Do not resume its
+bounded header/indexed-loop shape trials without new evidence. Receipts live
+in .scratch/goal65/indexed and bmp24. Lint/data are clean for every target; a
+fresh server gate passes with all 286720 raw bytes identical, matching data,
+imports, relocations and layout, and successful Wine load/export checks.
 
-Goal63's65 native-only name/size/note identities remain:55 TL functions covering
-150636 inventory bytes and ten large Gold counterparts. None claims a source
-provider or byte verdict. The7.1M-signature FLIRT scan remains inspection-only;
-selected fortify/check-fail prefix hits are rejected, and DirectX/provider
-attribution still requires whole-body/operand/raw-map evidence. See the Goal63
-naming table and saved dossiers rather than repeating the scan.
+Goal64 committed0e32efdc adds one shared485-byte quad sampler in both clients
+and the79-byte Gold projection counterpart, with complete operand/literal proof
+and rejecting controls. All eight earlier affected strong contexts pass and one
+weak102-byte context retains its exact prior output. client_scene_transform.h
+holds the narrowed object/float access contract; broader455350/scene contracts
+remain open. Preserve native double0.9 sampling bias and distinct plane sentinels.
 
-Next: continue tractable mapped no-source bodies. rd_AllBauplatzToSupermap's
-260-byte shared algorithm remains scratch-only at123 matching bytes; array/
-record shapes, Op/O1 and G3/G6 probes do not justify production flags. Its direct
-wrapper needs pointer/count contracts first: both existing enum providers are
-void, while all fourteen native callers consume their count. Preserve the
-returned slot count including null holes. Gold callback58f780 ends after250
-code bytes plus6 NOPs; stored256 is only a future selected-extent review lead.
-Do not promote it from counterpart evidence alone. Full review is under
-.scratch/goal64/review; compiled proofs under quad/production-proof.json and
-projection-proof.json. Main-body failed probes are retained for bounded reuse.
+Goal63's65 native-only mappings cover55 TL functions/150636 inventory bytes
+plus ten large Gold counterparts. They do not earn source providers or byte
+verdicts. Reuse saved7.1M FLIRT results and diagnostic/Kuna/native dossiers rather
+than repeating scans. Prefix fortify/check-fail hits were rejected; DirectX
+attribution still needs whole-body operands and raw-map provider evidence.
 
-All-target lint has zero errors/warnings and data has zero conflicts/multiple
-definitions. The fresh server gate passes: all286720 raw bytes are identical,
-imports/data/relocations/layout and Wine load/exports pass, and code generators
-remain aligned. All8478 earlier identities/extents and6053 strong statuses are
-preserved. Current accounted TL text is1121839/2491370 bytes; native game-byte
-gain is485 and TL no-source count is1214. Both complete client raw-file/data proofs
-and linked helper providers remain open. No upstream tooling defect was
-established in Goal64. Actual bugs still require upstream fixes and regression
-checks; missing capabilities belong in upstream docs/IDEAS-GUILD.md.
-
-Do not resume exhausted Goal58/59 court arithmetic/cursor, queue/office/camera,
-timer-loop or Goal62 runner searches without new evidence. Preserve OWN-before-
-OTHER stateful query order. Prior packet-pointer checkpoint2eaccc18, timer and
-mapping evidence remain in docs/TODO.md and their scratch receipts. Every goal
-completion criterion above still applies.
+Continue tractable mapped no-source bodies. rd_AllBauplatzToSupermap remains
+scratch-only260/123matching; record/array,Op/O1,G3/G6 probes do not justify new
+flags. Its wrapper needs enum pointer/count repair: fourteen native callers
+consume count despite existing void providers. Preserve null holes. Gold callback
+58f780's250+6 extent is a review lead only. Do not resume exhausted court/queue/
+office/camera/timer/runner families without new evidence; retain OWN-before-OTHER
+stateful query order. Both full client raw-file/data proofs and linked providers
+remain open. Every goal completion criterion above still applies.
 
 ## History
 

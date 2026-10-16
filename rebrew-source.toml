@@ -200,6 +200,9 @@ evidence = "Reviewed original GOLD 0x5a8b70: complete 26-byte aligned fill/copy 
 source_hash = "d1b67381490d6e7294c8fbe3c1a47fc8609459dc0fd7a2fe4dfc1eaa04307f2b"
 evidence = "Reviewed original GOLD 0x5d84b0: complete 26-byte aligned fill/copy macro at 0x5d8516. Existing source uses operand homing, EBX scratch, invariant LEA(3*EDI)&3 and three REP passes. Original macro provenance is established by the compiler controls and stock LIBC/LIBCMT exclusions in docs/msvc6-allocator.md, The prelude is hand-written asm, and docs/codegen-walls.md section6b. Native macro bytes independently rechecked for this target; no assembly was added and no whole-function byte verdict is inferred."
 
+[definitions."src/GOLDTL.SaveBMP8.c".fill0.GOLDTL]
+source_hash = "a96490e1058a711b6647278271f4d5385cd8816a4a35d68f4f6b795fab9927c1"
+evidence = "Reviewed original GOLDTL0x401d10: two complete26-byte aligned-fill preludes at0x401d31 and0x401d60, each with homed C pointer/count loads, invariant EBX scratch, LEA(3*EDI)&3 and three REP passes. They are the original handwritten macro established by compiler controls, operand-homing evidence and stock PP LIBC/LIBCMT pattern exclusions in docs/msvc6-allocator.md (The prelude is hand-written asm). Fresh sites/archive hashes and excluding controls: .scratch/goal65/indexed/assembly-proof.json. The existing reviewed fill0 implementation is reused; its identifier and local placement are inferred. A matching caller corroborates but does not establish assembly provenance."
 [files."src/crt_region/amsg_exit.c".SERVER]
 purpose = "reversed mirror of stock LIBCMT amsg/crt0msg code, compiled to keep crt0msg.obj out of the link (its runtime-error strings duplicate rdata_restore.c). the strcat mirror (0x1001f8e0) is asm in the CRT and cannot match in pure C; this file is scaffolding, not reversed game code"
 

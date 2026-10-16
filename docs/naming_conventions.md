@@ -2244,3 +2244,28 @@ vector typedef, backing-map allocation extent or client linked provider is claim
 
 Native/compiled operand receipts and rejecting controls are in
 `.scratch/goal64/quad/production-proof.json` and `projection-proof.json`.
+
+### Goal65 — indexed BMP output
+
+`SaveBMP8` at TL `0x00401d10` is an **inferred** sibling name to attested
+`SaveBMP24`, not a recovered identifier. Its standalone source filename is also
+provisional. The complete441-byte writer is matched with all eight address
+operands and the `wbn` mode literal; seven following NOPs are alignment within
+its retained448-byte inventory span. It writes a14-byte BITMAPFILEHEADER,
+40-byte BITMAPINFOHEADER,256 BGR0 entries and bottom-up unpadded rows. A null
+palette selects grayscale. Write failures are ignored as in the native body.
+
+The two26-byte zero-fill preludes are the original operand-homed handwritten
+macro documented in docs/msvc6-allocator.md. Reuse is justified by that independent
+compiler/provenance evidence and fresh native-site/stock-archive exclusions,
+not by a difficult C match. The private `fill0` name is inferred; target-scoped
+managed source evidence records its definition. Stock Windows SDK BMP types are
+used without inventing local layouts or storage. VFS backing ownership/provider
+and broader legacy VFS declarations remain open. A fixed-prefix miss in Gold
+is not evidence that no differently compiled counterpart exists.
+
+Production replay: `.scratch/goal65/indexed/proof.py`, `production-proof.json`,
+`assembly-proof.json` and `effects.py/json`. Eight bounded native/compiled cases
+verify exact headers, grayscale/custom palettes, odd widths without padding,
+zero/negative heights, open failure and ignored write failure against independently
+packed bytes. Real VFS execution and arbitrary-input safety are not established.

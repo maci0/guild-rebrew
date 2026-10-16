@@ -5557,3 +5557,65 @@ Upstream anonymous-record/typedef audit gaps are already recorded in
 that hid native-only metadata names/notes; the regression retains target scoping
 and no source-status claim. Its upstream full suite and push must pass before
 returning to reconstruction. Preserve foreign upstream work. Every completion criterion above still applies.
+
+
+## Goal64 continuation archived 2026-10-16
+
+
+The full goal remains ACTIVE and incomplete. Latest user priority is the TL
+no-source inventory: map evidenced roles/names/counterparts and reconstruct real
+shared C bodies. A parallel native-mapping/reconstruction pass was explicitly
+authorized. Prefer new source bodies over repeated exhausted shape searches.
+
+Goal64 adds inferred rd_FillSupermapQuad at TL4be000 / Gold4bd760: one ordinary
+C89 definition matches all485 native executable bytes per client, all ten
+operands and four literal uses. Thirteen rejecting controls per target pass.
+The native sampling bias is double0.9; complete literal auditing rejected an
+initial0.5 draft despite masked instruction agreement. Eleven following NOPs
+remain alignment. Byte255 and integer255 independently skip their respective
+planes; original unchecked sampling and write order remain. Source placement
+and role name are inferred, backing-map ownership unproven. No new storage or
+speculative map/vector type is created.
+
+Gold4bd710 now shares the existing TL4bdfb0 projection body, with four evidenced
+map offsets guarded for Gold. Complete67/79-byte bodies and callee operands
+match; wrong-callee controls reject. client_scene_transform.h reconciles its
+object/float-vector access contracts across the provider and current C callers.
+All eight old strong contexts pass; the existing weak102-byte context retains
+identical code, fixups and literals. Broader455350/scene contracts remain open.
+Newly matched game bytes are TL485 and Gold564. Earlier native-only mappings,
+libraries and alignment are separate from that gain.
+
+Goal63's65 native-only name/size/note identities remain:55 TL functions covering
+150636 inventory bytes and ten large Gold counterparts. None claims a source
+provider or byte verdict. The7.1M-signature FLIRT scan remains inspection-only;
+selected fortify/check-fail prefix hits are rejected, and DirectX/provider
+attribution still requires whole-body/operand/raw-map evidence. See the Goal63
+naming table and saved dossiers rather than repeating the scan.
+
+Next: continue tractable mapped no-source bodies. rd_AllBauplatzToSupermap's
+260-byte shared algorithm remains scratch-only at123 matching bytes; array/
+record shapes, Op/O1 and G3/G6 probes do not justify production flags. Its direct
+wrapper needs pointer/count contracts first: both existing enum providers are
+void, while all fourteen native callers consume their count. Preserve the
+returned slot count including null holes. Gold callback58f780 ends after250
+code bytes plus6 NOPs; stored256 is only a future selected-extent review lead.
+Do not promote it from counterpart evidence alone. Full review is under
+.scratch/goal64/review; compiled proofs under quad/production-proof.json and
+projection-proof.json. Main-body failed probes are retained for bounded reuse.
+
+All-target lint has zero errors/warnings and data has zero conflicts/multiple
+definitions. The fresh server gate passes: all286720 raw bytes are identical,
+imports/data/relocations/layout and Wine load/exports pass, and code generators
+remain aligned. All8478 earlier identities/extents and6053 strong statuses are
+preserved. Current accounted TL text is1121839/2491370 bytes; native game-byte
+gain is485 and TL no-source count is1214. Both complete client raw-file/data proofs
+and linked helper providers remain open. No upstream tooling defect was
+established in Goal64. Actual bugs still require upstream fixes and regression
+checks; missing capabilities belong in upstream docs/IDEAS-GUILD.md.
+
+Do not resume exhausted Goal58/59 court arithmetic/cursor, queue/office/camera,
+timer-loop or Goal62 runner searches without new evidence. Preserve OWN-before-
+OTHER stateful query order. Prior packet-pointer checkpoint2eaccc18, timer and
+mapping evidence remain in docs/TODO.md and their scratch receipts. Every goal
+completion criterion above still applies.
