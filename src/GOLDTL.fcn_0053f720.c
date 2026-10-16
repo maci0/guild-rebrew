@@ -7,7 +7,7 @@ extern int g_7725c8;
 
 
 
-void __cdecl fcn_0042def0(void*);
+#include "client_timer.h"
 void __cdecl fcn_0053f4b0(void);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -25,7 +25,7 @@ void __cdecl fcn_0053f720(void)
 	if (g_14cbca0 == -1) {
 		flags = 0x24086;
 	}
-	fcn_0042def0((void*) fcn_0053f4b0);
+	fcn_0042def0(fcn_0053f4b0);
 	p = fcn_004730c0(0, 0, g_1040494, g_1040490, "BLACK", 0x1e, 1);
 	while ((*p & 4) == 0) {
 		fcn_005373e0(0, flags);

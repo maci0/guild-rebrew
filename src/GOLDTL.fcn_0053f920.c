@@ -26,8 +26,7 @@ extern unsigned char* g_7746c8;
 
 void __cdecl fcn_00545430(void);
 void __cdecl fcn_00538060(void);
-void __cdecl fcn_0042de90(void*, int);
-void __cdecl fcn_0042df30(void*, int);
+#include "client_timer.h"
 void __cdecl fcn_00546ed0(void);
 void __cdecl fcn_004f6740(void);
 void __cdecl fcn_004fa690(void);

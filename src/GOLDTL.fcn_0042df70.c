@@ -1,16 +1,14 @@
+#include "client_timer.h"
 
-
-
-extern int g_1052c60[0x60];
-
-int __cdecl fcn_0042df70(int a1)
+int __cdecl fcn_0042df70(TIMER_CALLBACK a1)
 {
 	int i;
-	int a;
+	TIMER_CALLBACK_SLOT* a;
 
-	for (i = 0, a = (int) g_1052c60; a < (int) (g_1052c60 + 0x60); a += 0xc, i++) {
-		if (*(int*) a == a1) {
-			return (g_1052c60 + 2)[i * 3] != 0;
+	/* Native uses a signed address comparison; the cursor stays a pointer. */
+	for (i = 0, a = g_1052c60; (int) a < (int) (g_1052c60 + 32); a++, i++) {
+		if (a->funktion == a1) {
+			return g_1052c60[i].pausiert != 0;
 		}
 	}
 	return 0;

@@ -12277,8 +12277,31 @@
   },
   {
     "va": 5124288,
-    "size": 368,
-    "name": "fcn.004e30c0"
+    "size": 336,
+    "name": "fcn.004e30c0",
+    "extent_history": [
+      {
+        "old_size": 368,
+        "new_size": 336,
+        "reason": "The existing matched 336-byte fcn_004e4910 counterpart ends at 4e320f. Native callback 4e3210 has a separate ret at 4e322e followed by one NOP; complete bodies and runner registration establish the boundary.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T00:07:03.526576+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5124624,
+    "size": 31,
+    "name": "fcn.004e3210",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 31,
+        "reason": "The existing matched 336-byte fcn_004e4910 counterpart ends at 4e320f. Native callback 4e3210 has a separate ret at 4e322e followed by one NOP; complete bodies and runner registration establish the boundary.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T00:07:03.528324+00:00"
+      }
+    ]
   },
   {
     "va": 5124656,

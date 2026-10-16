@@ -14,11 +14,9 @@ typedef struct {
 } ent2c;
 // SIZE 0x2c
 
-extern int g_772f34;
-extern int g_772f30;
+#include "Develop/DieGildeAddOn/game/cutscene_clock.h"
 extern int g_68bfbc;
 extern int g_68b7a4;
-extern int g_772f38;
 extern int g_772ea4;
 extern int g_100f1dc;
 extern int g_67d370;

@@ -44,7 +44,7 @@ void __cdecl fcn_00471c00(int, int);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_0046ac30(void);
-void __cdecl fcn_0042de90(void (__cdecl*)(void), int);
+#include "client_timer.h"
 void __cdecl fcn_0053f4b0(void);
 
 void __cdecl fcn_0053f4c0(void)

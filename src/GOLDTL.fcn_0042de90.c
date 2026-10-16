@@ -1,31 +1,21 @@
-
-
-
-// SIZE 0xc
-typedef struct {
-	int a;
-	int b;
-	int c;
-} E42de90;
-
-extern int g_1052c60[0x60];
+#include "client_timer.h"
 extern char g_679e00[];
 #include "Develop/Units/Error/error_message.h"
 
-int __cdecl fcn_0042de90(int a, int b)
+int __cdecl fcn_0042de90(TIMER_CALLBACK a, unsigned int b)
 {
 	int i;
 
 	i = 0;
-	while (((E42de90*)g_1052c60)[i++].a != 0 && i < 32) {
+	while (g_1052c60[i++].funktion != 0 && i < 32) {
 	}
 	if (i > 32) {
 		fcn_0041d9e0(g_679e00);
 		return 0;
 	}
 	i--;
-	((E42de90*)g_1052c60)[i].a = a;
-	((E42de90*)g_1052c60)[i].b = b;
-	((E42de90*)g_1052c60)[i].c = 0;
+	g_1052c60[i].funktion = a;
+	g_1052c60[i].periode = b;
+	g_1052c60[i].pausiert = 0;
 	return 1;
 }

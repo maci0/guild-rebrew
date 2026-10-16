@@ -2067,11 +2067,14 @@ type = "unsigned int"
 section = ".data"
 
 ["GOLD.0x00fe7aa0"]
-file = "src/GOLDTL.fcn_0042def0.c"
+file = "src/client_timer.h"
 name = "g_1052c60"
 kind = "GLOBAL"
-type = "int[0x60]"
+type = "TIMER_CALLBACK_SLOT[32]"
 section = ".data"
+size = 384
+updated_by = "data"
+updated_at = "2026-10-16T00:05:36+00:00"
 
 ["GOLD.0x0100f1dc"]
 section = ".data"
@@ -2312,14 +2315,6 @@ name = "g_4f1890"
 kind = "GLOBAL"
 type = "char[]"
 size = 52
-section = ".rdata"
-
-["GOLDTL.0x00525e90"]
-file = "src/GOLDTL.fcn_00525eb0.c"
-name = "g_525e90"
-kind = "GLOBAL"
-type = "char[]"
-size = 23
 section = ".rdata"
 
 ["GOLDTL.0x005eb788"]
@@ -4766,11 +4761,14 @@ type = "unsigned int"
 section = ".data"
 
 ["GOLDTL.0x01052c60"]
-file = "src/GOLDTL.fcn_0042def0.c"
+file = "src/client_timer.h"
 name = "g_1052c60"
 kind = "GLOBAL"
-type = "int[0x60]"
+type = "TIMER_CALLBACK_SLOT[32]"
 section = ".data"
+size = 384
+updated_by = "data"
+updated_at = "2026-10-16T00:05:34+00:00"
 
 ["GOLDTL.0x0149d188"]
 file = "src/GOLDTL.fcn_42d670.c"
@@ -17591,3 +17589,69 @@ section = ".data"
 note = "Name d3d_PrecacheBuffer attested in native d3_d3d.c DrawPrimitive diagnostic. Declaration-only address view passed to DrawPrimitive; complete allocation extent, vertex declaration and storage owner unresolved. No storage or initialized-data verification is claimed."
 updated_by = "data"
 updated_at = "2026-10-15T23:38:34+00:00"
+
+["GOLDTL.0x00772f30"]
+file = "src/Develop/DieGildeAddOn/game/cutscene_clock.h"
+name = "g_772f30"
+kind = "DATA"
+type = "int"
+storage_kind = "alias"
+section = ".data"
+note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
+updated_by = "data"
+updated_at = "2026-10-16T00:08:59+00:00"
+
+["GOLD.0x006f0d80"]
+file = "src/Develop/DieGildeAddOn/game/cutscene_clock.h"
+name = "g_772f30"
+kind = "DATA"
+type = "int"
+storage_kind = "alias"
+section = ".data"
+note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
+updated_by = "data"
+updated_at = "2026-10-16T00:09:02+00:00"
+
+["GOLDTL.0x00772f34"]
+file = "src/Develop/DieGildeAddOn/game/cutscene_clock.h"
+name = "g_772f34"
+kind = "DATA"
+type = "int"
+storage_kind = "alias"
+section = ".data"
+note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
+updated_by = "data"
+updated_at = "2026-10-16T00:08:59+00:00"
+
+["GOLD.0x006f0d84"]
+file = "src/Develop/DieGildeAddOn/game/cutscene_clock.h"
+name = "g_772f34"
+kind = "DATA"
+type = "int"
+storage_kind = "alias"
+section = ".data"
+note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
+updated_by = "data"
+updated_at = "2026-10-16T00:09:02+00:00"
+
+["GOLDTL.0x00772f38"]
+file = "src/Develop/DieGildeAddOn/game/cutscene_clock.h"
+name = "g_772f38"
+kind = "DATA"
+type = "int"
+storage_kind = "alias"
+section = ".data"
+note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
+updated_by = "data"
+updated_at = "2026-10-16T00:08:59+00:00"
+
+["GOLD.0x006f0d88"]
+file = "src/Develop/DieGildeAddOn/game/cutscene_clock.h"
+name = "g_772f38"
+kind = "DATA"
+type = "int"
+storage_kind = "alias"
+section = ".data"
+note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
+updated_by = "data"
+updated_at = "2026-10-16T00:09:02+00:00"

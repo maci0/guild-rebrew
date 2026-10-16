@@ -3,7 +3,7 @@
 
 extern int g_772f3c;
 extern int g_68bfb8;
-extern int g_772f30;
+#include "Develop/DieGildeAddOn/game/cutscene_clock.h"
 extern int g_774654;
 extern int* g_772f40;
 

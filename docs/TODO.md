@@ -54763,3 +54763,66 @@ sharing-plan}.json`. Whole-file goal remains active and incomplete.
   service contracts, including packet bases/callback registration and lighting,
   then measure the complete body against both native targets. Earlier exhausted
   court/reset/queue/office shape families remain closed without new evidence.
+
+### Goal61 — periodic callback contracts and cutscene clock (2026-10-16)
+
+- Reconstructed one shared 31-byte clock callback at TL `4e4a60` / Gold
+  `4e3210`, RELOC in both. Native signed comparison sets the flag before the
+  counter increment. Kuna confirms the operation order. FLIRT found no match
+  in 7,102,296 loaded signatures; a signature miss alone is inconclusive, while
+  the runner registration and shared game globals establish the caller context.
+- Canonical inferred `client_timer.h` replaces integer/object-pointer callback
+  transport in registration, removal, pause/query and every existing caller.
+  `TIMER_CALLBACK` is void cdecl(void). The 12-byte slot has `funktion`, unsigned
+  `periode` and integer `pausiert` at 0/4/8. All five table users share its type;
+  the stable layout ID `client.timer_callback_slot` is compiler-checked for both
+  clients. German field names were applied through supported source renames.
+- Strict native/COFF checks cover 88/49/49/49-byte controls and the new 31-byte
+  callback, all 20 operand sites per target, with 18 wrong-binding controls.
+  Dispatcher retains all 262 previous object bytes and 28 fixups per target;
+  its older unresolved bindings/IAT policy are not promoted into bound proof.
+  Fifty bounded VEX cases check controls and clock edges. The native full-table
+  overwrite, null-callback lookup, zero period, duplicate selection and pre-increment
+  comparison are preserved. No assembly, compiler flags or gameplay fixes added.
+- Retired false data identity `GOLDTL.0x525e90` through the locked data API. It
+  described a 23-byte `.rdata` array at executable code. The caller now passes the
+  existing matched `fcn_00525e90(void)` provider, preserving its function identity.
+  The previous data row and rationale are retained in the scratch receipt.
+- Both inventories conflated the 336-byte predecessor with the clock and one
+  NOP. Reviewed digest-guarded repairs retain the old matched body, admit the
+  separate 31-byte callback and preserve alignment. Six new scalar declaration
+  views have no storage definitions or initialized-data verdicts. The timer's
+  384-byte table view remains declaration-only with unknown storage owner.
+- `game/cutscene_clock.h` centralizes its three existing scalar access views and
+  callback prototype. The runner scratch candidate uses both canonical headers;
+  its default sizes remain 2023/2054 against native 2033/2063, so it is unadopted.
+  Remaining packet-base, resource and lighting contracts need native/provider
+  review. Misaligned-size operand-conflict counts are not callee-identity proof.
+- Receipts/replays: `.scratch/goal61/timer-proof.py/json`, guarded inventory/data
+  plans, type bindings, `verify-scope.py`, source-contract/data/lint/type/status
+  reports, `runner.c`/`runner-measure.py` and server gate. Signed-distance/count
+  loop probes and the interrupted contract audit remain visible; none is an
+  upstream bug. Do not repeat these source-shape probes without new evidence.
+- All 8411 prior identities/6051 strong statuses survive; totals 8413/6053.
+  Selected verification passes 18 TL/12 Gold contexts, including the two new
+  matches and 28 prior strong contexts. All-target lint has zero errors/warnings;
+  data has zero conflicts/duplicate definitions; all three type checks report
+  1018 structs and no findings. Server gate again passes all 286720 raw bytes,
+  316 functions/652 data records and imports/exports/resources/relocations/layout/
+  Wine checks. Its SHA-256 remains
+  `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+- New matched game bytes are TL +31 / Gold +31; totals 697576/383581. Libraries
+  390163/9732 and padding 33615/23499 are unchanged. Accounted text is
+  1121354/2491370 (45.0%) and 416812/2006532 (20.7%), no-function 102878/75338.
+  Both client raw images and initialized data remain unverified.
+- All eleven selected function/scalar contracts are clean. Broad findings/unknowns
+  are server 258/305, TL 1473/4093 and Gold 964/2613, with 3992 current input
+  hashes. Seventeen unknowns intentionally retain the anonymous slot typedef;
+  the auditor supports named records but does not establish anonymous identity.
+  Recorded its concrete replay/evidence and proposed same-header/independent-record
+  controls upstream in docs/IDEAS-GUILD.md, commit 23b81d46. No new source tag or
+  local auditor workaround was invented merely to remove these unknowns.
+- Native runner uses an EBP frame of 0x248; default TL candidate omits the frame
+  pointer and reserves 0x240. Size proximity is misleading. Original TU/options
+  need evidence; no /Oy- pragma adopted. Next packet-base review must handle its
+  90-byte shared provider, all callers and pointer-valued resolver outputs.

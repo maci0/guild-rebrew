@@ -2107,3 +2107,26 @@ byte pointer. The native runner and two existing providers support it; source-le
 providers and original typedef names remain open. Canonical declarations live in
 `event_callbacks.h`; second and third phase slots retain their separate open
 contracts. Evidence and compiler-width assertions are in `.scratch/goal60`.
+
+### Goal61 — periodic timer and cutscene clock contracts
+
+`client_timer.h`, `TIMER_CALLBACK` and `TIMER_CALLBACK_SLOT` are inferred names
+and organization. Native TL `42dcd0` / Gold `42e7b0` invoke a no-argument cdecl
+callback, ignore its result, divide the unsigned tick count by the slot's period,
+and skip paused slots. The German member names `funktion`, `periode` and
+`pausiert` describe offsets 0/4/8; their original spelling is unknown. Compiler
+checks bind the 12-byte stride under stable ID `client.timer_callback_slot`.
+The existing provisional `g_1052c60` denotes a 32-slot declaration view, not a
+new allocation or an established storage owner.
+
+The separate native cutscene clock callback TL `4e4a60` / Gold `4e3210` retains
+provisional `fcn_004e4a60` and its standalone source home. Its original identifier
+and unit are unproved. `game/cutscene_clock.h` is an inferred declaration home;
+the existing numeric globals retain their scalar access names. Native signed
+comparison precedes the counter increment. No complete backing allocation or
+storage owner is inferred from the three adjacent scalar accesses.
+
+Former `g_525e90` was a mistaken data identity at executable TL `525e90`.
+Registration now passes the existing `void fcn_00525e90(void)` provider. Its
+23-byte function identity survives; the false `.rdata` row is retired through
+the locked data writer. Receipts and the old row are in `.scratch/goal61`.

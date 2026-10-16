@@ -1,6 +1,6 @@
 
 
-extern int g_772f30;
+#include "Develop/DieGildeAddOn/game/cutscene_clock.h"
 extern int g_14ce8e0;
 extern int g_774654;
 

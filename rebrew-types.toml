@@ -464,3 +464,39 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 [types."event.validator_view".GOLD.offsets]
 fn = 0
 pad4 = 4
+
+[types."client.timer_callback_slot".GOLDTL]
+file = "src/client_timer.h"
+symbol = "TIMER_CALLBACK_SLOT"
+size = 12
+native_size = 12
+extent = "stride"
+evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride12/end+384: no-argument cdecl callback +0, unsigned divisor +4 and pause integer +8. German field names and header inferred; storage owner unresolved."
+cflags = "/O2 /Gd"
+source_hash = "ca46306599cfb28e5143f2e3560fc37debb487e4bc3db8f089107ebbb62ecfdb"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."client.timer_callback_slot".GOLDTL.offsets]
+funktion = 0
+periode = 4
+pausiert = 8
+
+[types."client.timer_callback_slot".GOLD]
+file = "src/client_timer.h"
+symbol = "TIMER_CALLBACK_SLOT"
+size = 12
+native_size = 12
+extent = "stride"
+evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride12/end+384: no-argument cdecl callback +0, unsigned divisor +4 and pause integer +8. German field names and header inferred; storage owner unresolved."
+cflags = "/O2 /Gd"
+source_hash = "ca46306599cfb28e5143f2e3560fc37debb487e4bc3db8f089107ebbb62ecfdb"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."client.timer_callback_slot".GOLD.offsets]
+funktion = 0
+periode = 4
+pausiert = 8

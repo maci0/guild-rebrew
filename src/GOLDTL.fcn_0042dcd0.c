@@ -1,15 +1,9 @@
 extern int g_6b7fbc;
 
-// SIZE 0xc
-struct tick_42dcd0 {
-	void (__cdecl* fn)(void);
-	unsigned int period;
-	int paused;
-};
+#include "client_timer.h"
 
 extern int g_6b7fb8;
 extern int g_6b7fc0;
-extern int g_1052c60[0x60];
 extern int g_6b7fac;
 extern volatile int g_6b7fb0;
 extern volatile int g_6b7fb4;
@@ -40,9 +34,9 @@ void __stdcall fcn_0042dcd0(unsigned int id, unsigned int msg, unsigned long use
 	(*(volatile int*)&g_6b7fb8)++;
 	if ((*(volatile int*)&g_6b7fc0) == 0) {
 		for (i = 0; i < 32; i++) {
-			if (((struct tick_42dcd0*)g_1052c60)[i].fn != 0 && (*(volatile unsigned int*)&g_6b7fac) % ((struct tick_42dcd0*)g_1052c60)[i].period == 0
-			    && ((struct tick_42dcd0*)g_1052c60)[i].paused == 0) {
-				((struct tick_42dcd0*)g_1052c60)[i].fn();
+			if (g_1052c60[i].funktion != 0 && (*(volatile unsigned int*)&g_6b7fac) % g_1052c60[i].periode == 0
+			    && g_1052c60[i].pausiert == 0) {
+				g_1052c60[i].funktion();
 			}
 		}
 		if ((*(volatile unsigned int*)&g_6b7fac) % 3 == 0) {

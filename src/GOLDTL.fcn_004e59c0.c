@@ -3,7 +3,7 @@
 extern void* g_14d0020[];
 
 void __cdecl fcn_00538060(void);
-int __cdecl fcn_0042df30(void (__cdecl*)(void), int);
+#include "client_timer.h"
 void __cdecl fcn_00405540(char*, int);
 
 void __cdecl fcn_004e59c0(void)

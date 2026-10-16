@@ -11847,3 +11847,50 @@ current server gate and old court/reset traces. Failed scratch drafts/setup erro
 are retained separately. `types bind` currently supports records, so callback
 pointer-width assertions do not create a managed type identity. The feature gap is
 recorded upstream in `docs/IDEAS-GUILD.md` (4d52a5b4), without a wrapper struct.
+
+### Goal61 — typed periodic callbacks without changing timer behavior
+
+The five timer functions share a 32-slot table with a 12-byte stride. A slot
+contains a no-argument cdecl function pointer, an unsigned period and a pause
+integer at offsets 0/4/8. The timer dispatcher uses unsigned division and calls
+the selected function without arguments. Registry control APIs return a full
+integer Boolean. Do not transport callbacks through integers, object pointers,
+or data arrays. Their existing providers and callers now share `client_timer.h`.
+
+Removal, pause and query retain pointer cursors. Native compares table addresses
+as signed integers. An ordinary pointer comparison changes `jl` to `jb`; a signed
+byte-distance condition expands these bodies from 49 to 57 bytes, and an indexed
+count condition emits 47 bytes with a different allocation. The chosen explicit
+signed comparison preserves all 49 bytes while keeping the cursor and callback
+storage typed. This is a reconstructed expression, not recovered source spelling.
+No compiler flags or assembly were added. These isolated probes are closed unless
+new source/TU evidence appears.
+
+Preserve the native registry's edge behavior. Its `i > 32` failure is unreachable
+under the bounded scan; a full table overwrites the last slot and returns 1.
+Registration permits a null callback and a zero period. Removal/pause/query with
+a null callback select the first empty slot. Do not silently repair these game
+semantics while reconstructing types. Fifty bounded native/compiled VEX cases
+cover the controls and signed cutscene clock, including full/duplicate/empty
+tables and comparison before increment. They are not universal semantic proofs.
+
+Four control bodies (88/49/49/49) and the 31-byte clock callback match complete
+native bytes with all 20 operand sites per target resolved. Eighteen rejecting
+wrong-binding controls pass across both targets. The existing 262-byte dispatcher
+and all 28 fixups remain identical to the previous object; its older unresolved
+operands and IAT policy remain separate from complete bound evidence.
+
+Discovery previously folded the clock and one NOP into its 336-byte predecessor.
+The two inventories are repaired through digest-guarded CLI previews, preserving
+the old matched predecessor and admitting the separate 31-byte body. The clock
+sets its flag from the signed pre-increment comparison, then increments the count.
+Kuna independently confirms the operation order; native `setg` establishes the
+comparison signedness. No storage, initialized-data verdict or raw-link proof is
+created by the new scalar declarations.
+
+The runner candidate now includes the canonical timer/clock headers but remains
+2023/2054 bytes against native 2033/2063. It is not adopted. Operand conflict
+counts on these differently sized bodies are not reliable callee diagnoses;
+continue from actual native operands and providers. Packet-base, resource and
+lighting contracts remain open. Receipts/replays: `.scratch/goal61/timer-proof.py`,
+`timer-proof.json`, inventory plans, scoped verification and `runner-measure.py`.
