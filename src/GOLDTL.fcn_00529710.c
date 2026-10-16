@@ -6,7 +6,7 @@ extern char g_10432c0[];
 
 char* __cdecl fcn_00445600(char*, int, int, char*);
 void __cdecl fcn_00455350(char*, char*, float*);
-int __cdecl fcn_00451840(char*, float*, float);
+#include "client_scene_transform.h"
 
 int __cdecl fcn_00529710(char* a, unsigned char* b)
 {
@@ -32,7 +32,7 @@ int __cdecl fcn_00529710(char* a, unsigned char* b)
 				fcn_00455350(*(char**) (b + 0x61), *(char**) (b + 0x61) + 0x4c, pos);
 				r = 3250.0f;
 			}
-			if (fcn_00451840(*(char**) (d + 0x34) + 0x4c, pos, r) != 0) {
+			if (fcn_00451840((float*) (*(char**) (d + 0x34) + 0x4c), pos, r) != 0) {
 				return 1;
 			}
 		}

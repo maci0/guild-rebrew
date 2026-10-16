@@ -18,7 +18,7 @@ void __cdecl fcn_004c2c50(char*);
 void __cdecl fcn_00536bb0(void);
 void __cdecl fcn_0052a960(char*);
 char* __cdecl fcn_00426fd0(char*);
-void __cdecl fcn_00428230(char*);
+void __cdecl evt_RunScript(char*);
 void __cdecl fcn_004cfa00(int);
 
 void __cdecl fcn_004d2e60(void)
@@ -45,7 +45,7 @@ void __cdecl fcn_004d2e60(void)
 	fcn_0052a960(((char*)&g_7f4c00));
 	p = fcn_00426fd0(g_68bcec);
 	if (p != 0) {
-		fcn_00428230(p);
+		evt_RunScript(p);
 		fcn_004cfa00(*(int*) (p + 0x100));
 	}
 	g_7725c8 = 0;

@@ -1,8 +1,8 @@
 # Vendored libraries
 
-server.dll links zlib 1.1.3 and minizip's unzip.c from source. Each is vendored as the
-unmodified upstream release plus a list of local patches, and the build refuses to
-configure unless the compiled tree equals pristine + patches.
+The build compiles zlib 1.1.3 and minizip from pinned pristine sources plus
+ordered patches. CMake refuses configuration if generated sources differ.
+Never edit a generated tree or stock archive by hand.
 
 ## Layout
 
@@ -15,37 +15,28 @@ configure unless the compiled tree equals pristine + patches.
 | `references/zlib/` | Generated: the 25 zlib files the build compiles or includes |
 | `references/minizip/` | Generated: `unzip.c` and `unzip.h`, from `references/zlib-1.1.3/contrib/minizip/` |
 
-The generated trees are committed because the function rows in
-`rebrew-functions.toml` name them (`references/zlib/deflate.c`) and `rebrew verify`
-compiles those files directly. Never edit them by hand.
+Generated trees are tracked because managed function bindings compile them
+directly. Manifests pin inputs, checksums, outputs and patch order.
 
 ## Mechanism
 
-`rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml` (run by CMake at configure, `CMakeLists.txt` "Vendored
-libraries") does, per manifest:
+```sh
+uv run --frozen rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml
+# After editing a patch and its manifest:
+uv run --frozen rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml --apply
+```
 
-1. Every file under the pristine directory is listed in the checksum file with a
-   matching sha256, and every output file comes from a pinned pristine file.
-2. Copies the listed files into a temporary staging directory and applies the patches in
-   order with GNU `patch -p1 --fuzz=0`; a hunk that does not apply exactly fails.
-3. Requires the output tree to hold exactly the listed files, byte-identical to the
-   staged result.
-
-Any failure prints the file and stops configure with `Vendored sources differ from
-pristine upstream + patches`. Every pristine, patch, manifest and output file is a
-configure dependency, so an edit re-runs the check on the next build.
-Upstream Rebrew’s `tests/test_vendor.py` covers reproduction and failure cases.
-The command validates and stages every manifest before sync changes any output;
-paths must stay inside the root, with no symlinks or overlap between outputs and inputs.
-
-To change vendored code: edit or add a patch, list it in `vendor.toml`, then run
-`rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml --apply` to regenerate
-the output tree, and rebuild.
+Check is the default. Rebrew verifies every pristine checksum, stages all
+manifests, applies GNU `patch -p1 --fuzz=0`, then compares the exact output file
+set/bytes. Paths cannot escape the root, use symlinks or overlap inputs/outputs.
+All inputs/outputs are CMake configure dependencies. Upstream `test_vendor.py`
+owns reproduction/failure tests; rebuild after regeneration.
 
 ## zlib 1.1.3
 
-The client inventory also binds these verified native bodies to the canonical
-`references/zlib/gzio.c`, rather than maintaining separate game-source copies:
+[Official tarball](https://zlib.net/fossils/zlib-1.1.3.tar.gz), SHA-256:
+`cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4`.
+Canonical `references/zlib/gzio.c` replaces copied client bodies:
 
 | Function | TL VA | Gold VA | Complete body |
 |---|---|---|---|
@@ -63,137 +54,36 @@ The client inventory also binds these verified native bodies to the canonical
 | `gzdopen` | `0x45f060` | not established here | 59 bytes |
 | `gzsetparams` | `0x45f0a0` | not established here | 97 bytes |
 
-Unique stock-source matches and complete native-byte/operand controls support
-these bindings. Verified duplicate source files are retired; the seek caller
-keeps its compiled bytes and typed operands after binding the canonical name.
-Gold's caller remains a size mismatch (449 compiled bytes versus 464 native).
-The `gzwrite` definition is identical to pristine 1.1.3. These bodies do not
-establish the complete original fork or remove the unresolved patches below.
-Receipts: `.scratch/goal21/zlib-source-ownership/`.
+Complete native code, typed operands, reachable control flow, literal checks
+and wrong-binding controls support these identities. Library attribution is
+separate from a selected raw-link provider and game progress. Gold uses `/ML` /
+LIBC; server/TL use `/MT` / LIBCMT. The malloc wrapper alone is inconclusive;
+`free`, `fread`, `fwrite`, `fseek`, `rewind` and direct errno access distinguish
+Gold. Check callees using the destination client's object.
 
-`gzrewind` additionally has four independently supported native call targets,
-four rejecting binding controls per client, complete reachable control flow,
-and 44 preserved surrounding vendor bodies. TL's `rewind` and `fseek` uniquely
-match LIBCMT; Gold's uniquely match single-thread LIBC. Further full-body
-`free`, `fread` and `fwrite` evidence, stock `crt0dat.obj`'s errno definition,
-and the complete native gzip bodies establish Gold's `/ML` and `LIBC` settings.
-The public malloc wrapper matches both runtimes and does not distinguish them.
-Server and TL retain `/MT` and `LIBCMT`. Gold's raw link remains unbuilt.
-Receipts: `.scratch/goal21/gzrewind-source-ownership/`.
+Additional canonical groups and receipts under `.scratch/goal21/`:
 
-TL's existing canonical `gzread` (`0x45f380`) and `destroy` (`0x45f2c0`)
-also reproduce their complete 555- and 177-byte native bodies. Their previous
-560- and 192-byte measurements included five and fifteen unreachable NOPs.
-Rebrew's guarded size repair records RELOC for both without changing source
-or flags. Full native bytes, typed operands, rejecting binding controls and
-reachable control flow support these extents. Receipts:
-`.scratch/goal21/gold-crt-provider/TL-*-extent-proof.json`.
+| Group | Recorded result / receipt directory |
+| --- | --- |
+| Write/printf/seek | Complete bodies; seek caller preserved at 449 bytes, still mismatched against Gold's 464. `zlib-source-ownership/` |
+| Rewind | Four independent callee bindings and rejecting controls/client; 44 surrounding bodies preserved. `gzrewind-source-ownership/` |
+| Read/destroy/runtime | TL excludes five/15 trailing NOPs; Gold read 556 bytes. `gold-crt-provider/` |
+| `getLong` | 65 bytes, four `get_byte` calls/client. `gz-getlong-source-ownership/` |
+| Gold `destroy` | 176 bytes/nine operands; eight callees supported by LIBC. `gz-destroy-source-ownership/` |
+| Open family | Canonical public prototypes; Gold header excludes ten NOPs. `<fd:%d>` is an eight-byte compiler literal. `gz-open-family/` |
+| TL `gzsetparams` | 97 bytes with supported `fwrite`/`deflateParams`. `gzsetparams-source-ownership/` |
+| Close/flush | Both `do_flush`, `putLong`, `gzclose`, `gztell`; TL `gzflush`/`gzeof`/`gzerror`. Eleven profiles, 940 bytes/26 operands; Gold close excludes three NOPs. `gz-close-family/` |
+| TL character wrappers | `gzgetc`/`gzgets`/`gzputc`/`gzputs`: 39/79/47/34 bytes; completes all 24 functions emitted by this TU. `gz-character-helpers/` |
+| TL `minigzip.c` | Six bodies 37/192/173/177/233/417 bytes and 143 literal bytes. Source owns COMMON4 `prog` at `0x1040498`; no linked-data verdict. `minigzip-source-ownership/` |
 
-Gold `gzread` now uses unchanged canonical `gzio.c` under `/ML`, replacing
-the copy that manually declared the CRT errno global. Its complete 556 native
-bytes, 11 typed operands, seven rejecting binding controls and 205 reachable
-instructions match; the fresh CLI result is RELOC556. Native openers in both
-clients pass the complete `1.1.3` version literal. Other copied gzip functions
-have verified canonical candidates but still await ownership/caller cleanup.
-Neither these facts nor the version literal establish the entire original fork
-or remove the unresolved patches below. Receipts:
-`.scratch/goal21/gold-crt-provider/`.
+Canonical `gzerror` expands `ALLOC` to native `malloc`; its empty and colon-space
+literals match with `HAVE_STRERROR` unset. Gold flush/eof/error counterparts are
+not asserted by this scope. Upstream PR28 fixed exported K&R pointer-return
+inventory for `gzgets`/`gzerror`; older preservation receipts used direct COFF
+extraction. TL `minigzip`'s CFG must model native `_exit` at `0x64e66a` as
+noreturn; three unreachable compiler pops still belong to the byte extent.
 
-Both clients' little-endian `getLong` now bind canonical `gzio.c`. Complete
-65-byte bodies, four typed calls to independently supported `get_byte`,
-rejecting binding controls and all 25 reachable instructions match. Native
-callee resolution must use each client's compiled object: the server's `/MT`
-object correctly fails Gold's `/ML` callee check. The unowned shared copy is
-retired without changing callers, flags, vendor source or data. Before/after
-objects preserve all 44 surrounding vendor bodies. Fresh measurements are
-RELOC65 in both; this is library attribution, not game reversing. Receipts:
-`.scratch/goal21/gz-getlong-source-ownership/`.
-
-Gold's private `destroy` now uses canonical `gzio.c`, retiring the copied
-`vfs_CloseStream` stand-in and its manual errno declaration. Complete native
-176-byte/9-operand/71-instruction checks and five rejecting bindings match;
-indexing the Gold objects plus stock LIBC supports all eight direct calls.
-The fresh result is RELOC176, with all 22 surrounding vendor bodies unchanged.
-No caller, vendor source, flags, data or storage changes are introduced.
-Receipts: `.scratch/goal21/gz-destroy-source-ownership/`.
-
-The opener/helper dependency group now binds canonical source together. Six
-copied files are retired, including the mislabeled CRT `mlock.c` gzip wrapper.
-Three callers use the public interfaces from `zlib.h`; their complete 177-,
-233- and 417-byte bodies and typed operands remain unchanged. All 44 vendor
-bodies in both clients are preserved. Gold's old header extent included ten
-unreachable NOPs; guarded repair records RELOC294. Two previously unbound Gold
-private functions now have verified library identities. All 22 bound gzip
-functions freshly pass RELOC. The descriptor format `<fd:%d>` including NUL
-is an eight-byte compiler literal in native `.data`, not a named allocation;
-its managed row records the canonical source and actual compiler symbol without
-assigning a data-byte verdict. Receipts: `.scratch/goal21/gz-open-family/`.
-
-TL `gzsetparams` also uses unchanged `gzio.c`. Its complete 97 native bytes,
-two typed calls and rejecting controls, and all 34 reachable instructions match;
-the built-in resolver supports `fwrite` and `deflateParams`. Its unowned copy
-is retired, all 22 vendor bodies are preserved, and the fresh result is RELOC97.
-No corresponding Gold identity is asserted. Receipts:
-`.scratch/goal21/gzsetparams-source-ownership/`.
-
-TL also contains the unchanged zlib 1.1.3 `minigzip.c` sample. Its six complete
-native bodies (37/192/173/177/233/417 bytes) and every typed relocation match;
-fifteen complete compiler literals match their 143 native bytes. Five copied
-sources are retired and the previously uncataloged `gz_compress` gains a
-verified source identity. All six freshly pass RELOC; these are library bytes,
-not game reversing. The sample owns `char *prog` at TL 0x01040498: COMMON4 in
-the source COFF and wholly in the PE zero-filled virtual `.data` tail. Its
-managed row records the one source owner, with no built-data verdict.
-
-The earlier `main` probe failed because the scratch CFG helper assumed that
-`exit` returns. Stock LIBCMT independently identifies native 0x64e66a as `_exit`
-and supports its `_doexit` call. Accounting for that noreturn contract leaves
-three unreachable compiler `pop` instructions, which still match the original
-bytes exactly. No code, compiler flag or vendor patch is needed. Gold lacks
-the sample-specific strings searched here; no Gold counterpart or raw client
-link/provider is claimed. Receipts: `.scratch/goal21/minigzip-source-ownership/`.
-
-The close/flush dependency group also uses canonical `gzio.c`: both private
-`do_flush`, `putLong`, public `gzclose` and `gztell`, plus TL `gzflush`, `gzeof`
-and `gzerror`. Eleven complete native profiles total 940 bytes; all 26 typed
-operands and 21 rejecting bindings agree. Eight existing compiled bodies are
-preserved, alongside all 48 surrounding vendor bodies. Three previously unbound
-helpers bind 57 bytes to canonical source. Gold `gzclose` is 77 bytes followed by
-three alignment NOPs; the guarded CLI repair removes those NOPs from its old
-80-byte extent. Five copies and their unused reconstructed `gz_stream` header
-are retired, leaving the original private definition in `gzio.c`.
-
-The copied `gzerror` called an undeclared `ALLOC`; canonical source expands it
-to `malloc` at the same verified native address. Its empty error string is also
-stock behavior with `HAVE_STRERROR` unset. The complete one-byte zero compiler
-literal and three-byte colon-space literal match the native data. No vendor,
-archive, compiler, data-store or type-store change is needed. Gold `gzflush`,
-`gzeof` and `gzerror` are not asserted by this scope. Receipts:
-`.scratch/goal21/gz-close-family/`. All 34 bound gzip functions freshly pass
-byte comparison and the full server gate remains green. The definition
-inventory misses pointer-returning exported K&R `gzgets` and `gzerror`; all four
-bodies are independently extracted and compared through Rebrew’s COFF API, so this
-parser gap does not weaken the 48-body preservation check. Upstream PR28 fixes
-the inventory; the installed parser now finds all 24 unique compiled functions
-without the extra COFF extraction needed by that earlier receipt.
-
-TL’s remaining character/string wrappers also use canonical `gzio.c`: `gzgetc`
-39, `gzgets` 79, `gzputc` 47 and `gzputs` 34 bytes. Their complete 199 native
-bytes, typed operands, rejecting controls and full CFGs match; the built-in
-resolver independently supports every read/write callee. Two copied files are
-retired with their complete compiled bodies unchanged, and two formerly
-unbound functions gain source identities. This completes TL’s bindings for
-all 24 functions emitted by this source file. No Gold counterpart, new raw
-client provider or extra accounted byte total is claimed. No vendor, archive,
-compiler, data or type change is introduced. Receipts:
-`.scratch/goal21/gz-character-helpers/`.
-
-Upstream: <https://zlib.net/fossils/zlib-1.1.3.tar.gz>, sha256
-`cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4` (also published by
-Gilles Vollant as `zlib113.zip`, same sources with CRLF line ends). The previous
-in-place copy differed from the tarball in eight files (`crc32.c`, `deflate.c`,
-`infblock.c`, `inflate.c`, `inftrees.c`, `trees.c`, `trees.h`, `zutil.c`); whitespace,
-an inline data marker and two redundant `extern` lines changed no byte and were dropped.
+The exact original fork remains unidentified. Current patches:
 
 | Patch | Kind | Change |
 |---|---|---|
@@ -202,35 +92,20 @@ an inline data marker and two redundant `extern` lines changed no byte and were 
 | 0003-selectany-readonly-tables | link-layout stand-in | 17 readonly tables and both copyright strings become `__declspec(selectany)` |
 | 0004-inflatesync-mark-selectany | link-layout stand-in | `inflateSync`'s block-scope `mark[4]` becomes a file-scope selectany object |
 
-What was ruled out, by rebuilding with the stock text:
-
-- **The checked 1.1.x releases do not have 0001.** zlib 1.1.2, 1.1.3 and 1.1.4 and Gilles Vollant's prebuilt
-  `zlib113dll.zip` all call `calloc(items, size)`. zlib 1.2.0+ computes
-  `malloc(items * size)`, but with 1.2 sources. Stock `zutil.c` moves 26164 bytes.
-- **0002 is a link-order effect.** `/O2` implies `/Gf`, so the stock literal is already one
-  pooled `.data` COMDAT and stock code is byte-identical; only the literal and the
-  pointer swap (17 bytes). Linking stock `compress.c` (which the TL client links) places
-  the literal exactly at `0x1002706c`, because `compress.obj` is the first object in link
-  order whose code references `ZLIB_VERSION`. It is left out because it adds a game C
-  object to the Rich header and moves the CRT member load order (16663 bytes differ).
-- **0003 and 0004 follow from `/ORDER`.** The build places readonly game pools with
-  `/ORDER` (msvc6-link-layout 30), which puts ordered COMDATs ahead of all ordinary
-  `.rdata`, so the zlib tables before them must be COMDATs too. MSVC 6 has no flag that
-  makes data COMDAT (`/Gy` covers functions, `/Gf`/`/GF` string literals). Stock tables
-  move readonly data (10735 bytes; 6324 with no `/ORDER` at all); a stock `mark` moves
-  4709 bytes.
+The checked 1.1.2/1.1.3/1.1.4 sources and Vollant's `zlib113dll.zip` call calloc;
+1.2.0 uses malloc but is a different base. Stock version literals already pool
+under `/O2` (`/Gf`); patch 0002 compensates for order, not code generation.
+Stock `compress.c` places the literal at `0x1002706c` but changes compiler-object
+and CRT composition. `/ORDER` places COMDATs before ordinary readonly data;
+MSVC6 has no general data-COMDAT flag (`/Gy` is functions), motivating 0003/0004.
 
 ## minizip (unzip.c)
 
-Upstream: `contrib/minizip/unzip.c` and `unzip.h` of the same zlib 1.1.3 tarball,
-pinned by the zlib checksum list. That file is Gilles Vollant's unzip 0.15 in its
-1998-06-15 revision: `unzlocal_SearchCentralDir` scans backward
-(`for (i=(int)uReadSize-3; (i--)>0;)`), as the TL client does at 0x4649d2. The
-standalone `unzlb015.zip` (winimage.com, 1998-03-19, sha256
-`54b97df32ed9128b581a6d22d34e4e466096b6cf9333e7906dca5a0220f46eaf`) and zlib 1.1.2's
-copy scan forward, so they match worse. It was `src/Develop/Units/vfs/unzip.c`; it is
-library code, so its three server rows are `LIBRARY` rows bound to
-`references/minizip/unzip.c` (`src/library_minizip.h`, `rebrew library bind-source`).
+Base: the tarball's June 15, 1998 unzip 0.15. Its backward central-directory
+scan matches TL `0x4649d2`; the March `unzlb015.zip` and zlib 1.1.2 scan forward.
+The March archive SHA-256 is
+`54b97df32ed9128b581a6d22d34e4e466096b6cf9333e7906dca5a0220f46eaf`.
+Canonical source is `references/minizip/unzip.c`.
 
 | Patch | Kind | Change |
 |---|---|---|
@@ -238,66 +113,28 @@ library code, so its three server rows are `LIBRARY` rows bound to
 | 0002-unz-copyright-selectany | link-layout stand-in | `unz_copyright` becomes selectany so `/ORDER` places it (stock moves 5370 bytes) |
 | 0003-game-file-position | native extensions; authorship unresolved | `unzGetFilePos`/`unzGoToFilePos` appended (TL 0x465750, 0x465790) |
 
-Searched for an upstream 0.15a: winimage.com zLibDll (`unzlb015.zip`, `zlib112dll.zip`,
-`zlib113dll.zip`, `zlib113adll.zip`, `buildzlib113adll.zip`, `unzip16.zip`,
-`unzip17.zip`, `zlib114dll.zip`), zlib fossils 1.1.1 to 1.2.3, and GitHub code
-search. In those checked archives, Gilles Vollant's "0.15a" labels only `zip.c`: `zlib113dll.zip` (1998-07)
-and the 2000 1.1.3a build carry `" zip 0.15a"` beside `" unzip 0.15"`, and the 1.1.3a
-build notes say to take `unzip.c` from `contrib/minizip` unchanged.
-
-The two appended functions are native extensions kept in this file because they read `unz_s`
-and call the file's static `unzlocal_GetCurrentFileInfoInternal`; the TL client has
-them inside the same unit. None of the checked Vollant releases from 0.15 to 0.18 (1998-2002) has them.
-minizip 1.00 (zlib 1.2.1, 2003) added functions of the same names, credited to Ryan
-Haksi, with a different interface (`unz_file_pos` struct, `UNZ_END_OF_LIST_OF_FILE`);
-the names here are borrowed from it. Their absence from the checked published
-releases does not establish that the game developers authored them; an unpublished
-or third-party fork remains possible.
-
-The client targets' two `unzip.c` rows (GOLD, GOLDTL) moved with the file and stay
-`FUNCTION` rows, like the clients' zlib functions.
-
+The appended helpers access private `unz_s` and its static reader; native TL
+places them in the same unit. Checked Vollant 0.15–0.18 releases lack them.
+Minizip 1.00 later uses the same names with a different API; those names are
+borrowed, and authorship of the game's extensions remains unresolved.
 
 ## Version and patch audit (2026-10-11)
 
-Four of the seven patches compensate for the current reconstruction's link
-composition or readonly placement: zlib 0002/0003/0004 and minizip 0002. They
-remain required by the measured current link, but are not evidence that the
-original developers changed those library sources. Recovering the original
-object composition and data placement is the route to removing them.
+Four patches are reconstruction stand-ins: zlib 0002/0003/0004 and minizip 0002.
+The other three preserve native allocator, version-literal and file-position
+extensions, without proving author or original distribution.
 
-The other three preserve observed native differences: zlib's malloc-based
-allocator, minizip's `unzip 0.15a` literal, and the client's two file-position
-extensions. The bytes establish those differences; they do not establish who
-made them or which source distribution contained them.
-
-Fresh downloads from the authors confirm that the pristine 1.1.3 source matches
-[the official release](https://zlib.net/fossils/zlib-1.1.3.tar.gz). It contains
-backward-scanning unzip 0.15, without the two file-position helpers. The checked
-1.1.2/1.1.3/1.1.4 sources use calloc; 1.2.0 uses malloc on 32-bit systems but
-retains unzip 0.15 without these helpers. 1.2.1 adds helpers with a different
-interface, and labels unzip 1.00.
-
-Gilles Vollant's [1.1.3a build archive](https://www.winimage.com/zLibDll/buildzlib113adll.zip)
-(SHA256 `cfa8689ed5b97c916f5ec2c1107750ea17a0bdc909e430e59dec17454172526f`)
-contains zip 0.15a and directs the builder to copy unzip.c unchanged from the
-standard distribution. Both checked 1.1.3 and 1.1.3a binary archives contain
-`zip 0.15a` alongside `unzip 0.15`, so the DLL distribution's suffix does not
-identify the game's `unzip 0.15a` variant. An exact-literal GitHub code search
-returned no results; that is a search limitation, not proof that no fork exists.
-
-The strongest identified base remains zlib 1.1.3 with the June 1998 minizip
-revision. The exact modified distribution remains unidentified. No vendor
-source, patch body, generated file, archive, compiler flag or link rule was
-changed by this audit. Download hashes, source comparisons, binary literals and
-author build notes are recorded in `.scratch/goal21/vendor-version-audit/`.
-
+Checked fossils 1.1.1–1.2.3, Vollant DLL/build archives and an exact-literal GitHub
+search did not locate this `unzip 0.15a` fork. Vollant's
+[1.1.3a build](https://www.winimage.com/zLibDll/buildzlib113adll.zip), SHA-256
+`cfa8689ed5b97c916f5ec2c1107750ea17a0bdc909e430e59dec17454172526f`, labels
+zip 0.15a but directs copying ordinary unzip 0.15 unchanged. Search misses do
+not establish that no other fork exists. Receipt:
+`.scratch/goal21/vendor-version-audit/`.
 
 ## Workaround removal probes (2026-10-11)
 
-Fresh isolated MSVC 6 builds tested removal against the current 286720-byte
-raw reference. Production sources, objects, link inputs and image were held
-unchanged; these are counterfactual links, not accepted release builds.
+Isolated counterfactual links; production inputs/image were preserved:
 
 | Candidate | Differing bytes | Finding |
 |---|---:|---|
@@ -306,20 +143,10 @@ unchanged; these are counterfactual links, not accepted release builds.
 | Same, with the extension table owned by VFS rather than its standalone source | 16579 | Original compiler-object counts are restored, but 97 symbols still move; `.text` grows 16 bytes and `.reloc` grows 12 bytes |
 | Ordinary read-only storage, removing zlib 0003/0004, minizip 0002 and `/ORDER` | 6123 | Original section sizes and compiler-object counts remain, but game pools, library tables and CRT read-only data move |
 
-The last probe also removes selectany from the three game read-only scaffold
-units, the `mark` anchor and the 15 external anchors for tables restored to
-private stock storage. Of its differences, 5339 are in `.rdata`, 275 in
-`.text`, 62 in `.data` and 445 in `.reloc`. All four successful links retain
-the reference's import identities, IAT addresses and hints. This rules out
-extra imports as their cause; matching section sizes or compiler-object counts
-alone does not establish a correct link.
-
-Moving the extension table to its using module is a plausible ownership repair,
-but it does not by itself establish the original object composition. Adding
-stock `compress.c` still changes CRT placement even though its compressor bodies
-are discarded. These candidates therefore cannot replace the current patches
-while preserving raw identity. No new dummy code, archive edits or postlink
-byte fixes were introduced. The remaining removal work is to recover the
-original read-only owners and object composition, alongside discarded server
-source. Recipes, maps, logs, complete byte comparisons and preserved-input
-hashes are in `.scratch/goal21/vendor-workaround-removal/`.
+The ordinary-readonly probe differs at 5,339 `.rdata`, 275 `.text`, 62 `.data`
+and 445 `.reloc` bytes. All four successful links retain import identities,
+IAT addresses and hints. Correct sizes or object counts alone do not establish
+native composition. Recover original readonly ownership and discarded inputs
+before removing the patches. Recipes, complete comparisons, maps and hashes:
+`.scratch/goal21/vendor-workaround-removal/`. Full audits remain in the
+[historical archive](goal-history.md#full-notebooks).

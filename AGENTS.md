@@ -119,10 +119,15 @@ control verbosity/version. Read each operation's help for its write behavior;
 
 ## Source Addresses and Metadata
 
+`[targets.<name>].module` names the target namespace in `MODULE.0xVA` keys.
+Keep its value stable. Use `rebrew cfg set module NAME` to edit it; the former
+`marker` key is rejected. A metadata `kind` classifies a function or data row;
+an `ADDRESS` comment only anchors that identity to the following declaration.
+
 C source may carry an optional address immediately above a definition or variable:
 
 ```c
-/* ADDRESS: Europa1400Gold_TL.exe 0x10001234 */
+/* ADDRESS: GOLDTL 0x10001234 */
 void __cdecl function_name(void)
 {
     /* stub */
@@ -135,7 +140,7 @@ All state and identity live in format-2 metadata: `rebrew-functions.toml`,
 `rebrew-data.toml`, and `rebrew-source.toml`. The identity field is `kind`.
 `source = "naked"`, STRUCT/CALLERS information and support file purposes are
 metadata-only. Old inline blocks and earlier metadata formats are rejected;
-there is no compatibility parser or marker migration command.
+there is no compatibility parser or migration reader.
 
 Use `rebrew source register --dry-run` to preview declaration-bound identities,
 then register them without `--dry-run`. Registration preserves existing state.

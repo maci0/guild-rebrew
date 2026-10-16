@@ -263,7 +263,9 @@ file = "src/GOLDTL.fcn_004b6f00.c"
 name = "g_6640e8"
 kind = "GLOBAL"
 type = "double"
-section = ".text"
+section = ".rdata"
+updated_by = "data"
+updated_at = "2026-10-16T04:32:32+00:00"
 
 ["GOLD.0x005ecf1c"]
 file = "src/GOLDTL.fcn_00492950.c"
@@ -2310,14 +2312,6 @@ name = "g_1552000"
 kind = "GLOBAL"
 type = "struct sin_402220"
 section = ".data"
-
-["GOLDTL.0x004f1890"]
-file = "src/GOLDTL.fcn_004f1a10.c"
-name = "g_4f1890"
-kind = "GLOBAL"
-type = "char[]"
-size = 52
-section = ".rdata"
 
 ["GOLDTL.0x005eb788"]
 section = ".data"
@@ -17749,3 +17743,135 @@ kind = "GLOBAL"
 note = "Existing provisional byte access view, inferred client flags role. This handler tests mask 0x04; other consumers access wider views. No complete allocation or storage-owner claim. Goal66 full native operand proof."
 updated_by = "data"
 updated_at = "2026-10-16T02:46:41+00:00"
+
+["GOLDTL.0x004e1e84"]
+storage_kind = "span"
+type = "unsigned int[5]"
+name = "switch_table_004e1e84"
+size = 20
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x004e1b00, dispatched at 0x004e1de1; 5 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x0055f580"]
+storage_kind = "span"
+type = "unsigned int[4]"
+name = "switch_table_0055f580"
+size = 16
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x0055f300, dispatched at 0x0055f327; 4 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x0055fcb8"]
+storage_kind = "span"
+type = "unsigned int[4]"
+name = "switch_table_0055fcb8"
+size = 16
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x0055f300, dispatched at 0x0055f5ff; 4 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x00560d18"]
+storage_kind = "span"
+type = "unsigned int[4]"
+name = "switch_table_00560d18"
+size = 16
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x005609c0, dispatched at 0x005609e0; 4 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x00562158"]
+storage_kind = "span"
+type = "unsigned int[11]"
+name = "switch_table_00562158"
+size = 44
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x00561380, dispatched at 0x005613be; 11 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x00566f8c"]
+storage_kind = "span"
+type = "unsigned int[5]"
+name = "switch_table_00566f8c"
+size = 20
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x00566d00, dispatched at 0x00566d79; 5 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x00569f58"]
+storage_kind = "span"
+type = "unsigned int[6]"
+name = "switch_table_00569f58"
+size = 24
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x00569a90, dispatched at 0x00569b16; 6 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x0056b668"]
+storage_kind = "span"
+type = "unsigned int[5]"
+name = "switch_table_0056b668"
+size = 20
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x0056aef0, dispatched at 0x0056af1a; 5 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x0056c8c4"]
+storage_kind = "span"
+type = "unsigned int[8]"
+name = "switch_table_0056c8c4"
+size = 32
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x0056bfd0, dispatched at 0x0056bffe; 8 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x0056e8b8"]
+storage_kind = "span"
+type = "unsigned int[10]"
+name = "switch_table_0056e8b8"
+size = 40
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x0056e3c0, dispatched at 0x0056e457; 10 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x0056fc44"]
+storage_kind = "span"
+type = "unsigned int[8]"
+name = "switch_table_0056fc44"
+size = 32
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x0056ee80, dispatched at 0x0056ef34; 8 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"
+
+["GOLDTL.0x00578df0"]
+storage_kind = "span"
+type = "unsigned int[5]"
+name = "switch_table_00578df0"
+size = 20
+section = ".text"
+kind = "DATA"
+note = "Inferred compiler jump table for native function 0x00578a10, dispatched at 0x00578a4f; 5 bounded four-byte case pointers. Layout view within the function, no independent allocation or source identifier."
+updated_by = "data"
+updated_at = "2026-10-16T06:27:20+00:00"

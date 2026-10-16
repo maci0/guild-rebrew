@@ -15,12 +15,14 @@ struct Node {
 
 /* ADDRESS: GOLDTL 0x00455350 */
 
-void __cdecl fcn_00455350(Node* n, float* in, float* out)
+void __cdecl fcn_00455350(char* object, float* in, float* out)
 {
+	Node* n;
 	float x;
 	float y;
 	float z;
 
+	n = (Node*) object;
 	out[0] = n->pos[0] + in[0];
 	out[1] = n->pos[1] + in[1];
 	out[2] = n->pos[2] + in[2];

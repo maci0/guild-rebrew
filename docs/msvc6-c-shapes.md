@@ -1,34 +1,15 @@
-# MSVC 6.0: C source shapes that decide the emitted bytes
+# MSVC 6.0: C shapes
 
-Catalogue of measured source-level patterns against the original `server.dll`,
-including successful rewrites and rejected variants. Record each new discovery
-here with the target and VA, compiler profile and flags, C spelling, emitted
-instruction difference, complete-body result, and evidence location. Separate
-observed output from explanations that have not been demonstrated.
-
-The current server build uses plain MSVC 6.0 SP5 and stock libraries. New native
-results below compare ordinary toolchain output; historical postlink results
-are identified as such and do not establish whole-file identity. Processor Pack
-client results, including §202, have a different code generator.
-
-Companion docs: `msvc6-allocator.md` covers register allocation decisions;
-this file covers declaration types, operand forms, statement order, and loop
-shape. Both are empirical, derived from compile-and-compare against the
-target, not from documentation.
-
-Verify any change with `rebrew diff <file>` and `rebrew test <file>`. A `**`
-match code marks a genuine structural difference; `~~` is relocation-only and
-counts as a match. Object scores are not the ship ruler: see §19 / §118 and
-`scripts/linktest.sh`. PROVEN is not a byte match: see §93.
-
-**Look the address up first:** `python3 scripts/whathas.py 0x<VA>`.
+Measured C spellings, keyed by original section number and native address.
+Server uses plain SP5; clients use SP5 Processor Pack. Historical scores and
+retired split-link probes do not establish current status or raw-file identity.
+Keep successful shapes here, register allocation in [allocator](msvc6-allocator.md),
+failed levers in [walls](codegen-walls.md), and ruler caveats in
+[measurement](measure-traps.md). Full original prose is [archived](goal-history.md#full-notebooks).
 
 ## Index by symptom
 
-Sections are numbered in the order they were written, not by topic, and a few
-sit out of order in the file (19a after 20, 61a before 61, 117 before 116, 161
-before 160). There are no sections 166 to 172. Find the section by what the
-diff shows, then read it; many sections belong to more than one row.
+Numbers reflect discovery order, with gaps and addenda; do not renumber.
 
 | What the diff shows | Sections |
 |---|---|
@@ -57,32 +38,19 @@ diff shows, then read it; many sections belong to more than one row.
 | Summaries of what the residue is | 50, 92, 139, 141 |
 | Per-function case notes (`gm_AllocSpieler`, `CrashDump`, `ServerMainThread`, `srv_LoadBuf`) | 81, 109, 110, 116, 117, 120, 126, 127, 140, 159, 185, 186, 187, 188, 196, 197, 198, 199 |
 
-Walls (spellings exhausted without a match) are in `codegen-walls.md`; method
-traps in `measure-traps.md`; linker and PE layout in `msvc6-link-layout.md`.
-
 ## How to probe a hypothesis
 
-Ship path (the compile that actually links):
-
 ```sh
-python3 scripts/whathas.py 0x<VA>
-python3 scripts/probe_function.py --va 0x<VA> --file <file.c>
-bash scripts/linktest.sh <file.c>
+uv run --frozen rebrew source findings 0x<VA> --json
+uv run --frozen rebrew binary asm show 0x<VA> --size N --json
+uv run --frozen rebrew diff FILE --json
+uv run --frozen rebrew test FILE --json
 ```
 
-Never add a `// CFLAGS:` header (per-file, not per-function, §12). Isolated
-`.scratch` probes are for *mechanism* only and miss TU flags and CMake
-toolchain pins (`measure-traps.md` §5):
-
-```sh
-cd .scratch
-rebrew-cmake-cl /nologo /c /MT /O2 /Gd probe.c
-objdump -d probe.obj
-```
-
-Ground truth for a target comes from `rebrew binary asm show <VA> --size N --json`.
-
----
+Read source notes too. Use current CLI help for preview/write behavior and keep
+mechanism probes in `.scratch/`, compiled by the pinned Docker toolchain.
+Compare complete bodies, operands and literals; rebuild affected target images
+for link/layout claims. Record inputs, observed output, limits and receipt once.
 
 ## 1. Global array element type sets the addressing scale
 
@@ -139,8 +107,8 @@ that already match.
 
 ## 3. Uninitialized locals from decompilation
 
-A local read before assignment is always a decompiler artifact. The original
-disassembly shows what the value should have been. Two shapes seen:
+In these two cases a missing initialization was a decompiler artifact. Check
+the native path before repairing one: the binary can also read indeterminate data.
 
 A loop pointer never given its base. The target opens with
 `mov edx, g_entity_base` before the fill loop:

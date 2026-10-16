@@ -53,7 +53,7 @@ extern int g_67a380;
 extern int g_6b8010;
 extern char g_10432c0[];
 
-void __cdecl fcn_004398d0(void*);
+void __cdecl d3_DisposeObject(void*);
 void __cdecl fcn_00452420(void*);
 void __cdecl fcn_0043bcf0(int);
 void __cdecl fcn_00459b40(int);
@@ -69,7 +69,7 @@ void __cdecl fcn_00442e30(void)
 	int n;
 
 	while ((*(void**)&g_1043254) != &(*(char*)g_1042340)) {
-		fcn_004398d0((*(void**)&g_1043254));
+		d3_DisposeObject((*(void**)&g_1043254));
 	}
 	while (((void*)g_1040c74) != &(*(char*)g_1040640)) {
 		fcn_00452420(((void*)g_1040c74));

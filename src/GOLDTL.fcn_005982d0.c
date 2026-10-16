@@ -1,17 +1,23 @@
+#include "Develop/Units/d3/d3_object.h"
 
+/* 32 object pointers plus a count. Native clear is 132 bytes. */
+typedef struct LC_OBJECT_LIST {
+	char* objects[32];
+	int count;
+} LC_OBJECT_LIST;
 
 int __cdecl fcn_0064d470(char*, void*);
 
-char __cdecl fcn_005982d0(char* obj, char* list)
+char __cdecl fcn_005982d0(char* obj, void* list)
 {
-	char* p;
+	D3_OBJECT* parent;
 
 	if (fcn_0064d470(obj, (void*) 0x68d6f8) != 0) {
-		p = *(char**) (obj + 0x1fc);
-		if (p == 0 || *(int*) (p + 0x220) != 1) {
-			((char**) list)[*(int*) (list + 0x80)] = obj;
-			*(int*) (list + 0x80) = *(int*) (list + 0x80) + 1;
+		parent = ((D3_OBJECT*) obj)->eltern;
+		if (parent == 0 || parent->unbekannt_220 != 1) {
+			((LC_OBJECT_LIST*) list)->objects[((LC_OBJECT_LIST*) list)->count] = obj;
+			((LC_OBJECT_LIST*) list)->count = ((LC_OBJECT_LIST*) list)->count + 1;
 		}
 	}
-	return *(int*) (list + 0x80) < 0x20;
+	return ((LC_OBJECT_LIST*) list)->count < 0x20;
 }

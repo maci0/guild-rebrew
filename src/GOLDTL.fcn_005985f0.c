@@ -1,28 +1,38 @@
-
-
-
-typedef struct
-{
-	int x0;
-	char pad4[0x3c];
-	float v[3];
-	int x4c;
-	int x50;
-} Out;
-// SIZE 0x54
+/* Inferred 84-byte placement result. Same view as the adopted search callback. */
+typedef struct LC_GEBAEUDE_BAUPLATZ {
+	char name[0x40];
+	float position[3];
+	char unbekannt_4c[4];
+	char* node;
+} LC_GEBAEUDE_BAUPLATZ;
 
 extern int g_6b8010;
+extern int g_633444;
 extern int g_67a370;
 extern char s_6aa1b4[];
 
 int __cdecl sprintf(char*, const char*, ...);
+#ifdef REBREW_GOLD
+void __cdecl fcn_004478e0(int, int);
+void __cdecl fcn_00458a10(char*, float*, float*);
+char __cdecl fcn_00438d40(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
+#define lc_RenderState fcn_004478e0
+#define lc_ScenePoint fcn_00458a10
+#define lc_WalkScene fcn_00438d40
+#define lc_SavedRender g_633444
+#else
 void __cdecl fcn_004432d0(int, int);
-int __cdecl fcn_00597ff0(int, Out*);
-void __cdecl fcn_00455350(char*, char*, float*);
-void __cdecl fcn_004379a0(int, int, int, void*, Out*);
-void __cdecl fcn_00598550(void);
+void __cdecl fcn_00455350(char*, float*, float*);
+char __cdecl fcn_004379a0(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
+#define lc_RenderState fcn_004432d0
+#define lc_ScenePoint fcn_00455350
+#define lc_WalkScene fcn_004379a0
+#define lc_SavedRender g_6b8010
+#endif
+int __cdecl fcn_00597ff0(int, char*);
+char __cdecl fcn_00598550(char*, void*);
 
-int __cdecl fcn_005985f0(Out* out, unsigned char* obj)
+int __cdecl fcn_005985f0(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj)
 {
 	char buf[0x100];
 	int old;
@@ -30,21 +40,21 @@ int __cdecl fcn_005985f0(Out* out, unsigned char* obj)
 	if (*(char**) (obj + 0x61) == 0) {
 		return 0;
 	}
-	old = g_6b8010;
-	fcn_004432d0(0, 1);
-	out->x0 = 0;
-	if (fcn_00597ff0(obj[0], out) == 0) {
-		fcn_004432d0(old, 1);
+	old = lc_SavedRender;
+	lc_RenderState(0, 1);
+	*(int*) out->name = 0;
+	if (fcn_00597ff0(obj[0], out->name) == 0) {
+		lc_RenderState(old, 1);
 		return 0;
 	}
-	fcn_00455350(*(char**) (obj + 0x61), *(char**) (obj + 0x61) + 0x4c, out->v);
-	sprintf(buf, s_6aa1b4, out->v[0], out->v[1], out->v[2]);
-	out->x50 = 0;
-	fcn_004379a0(g_67a370, 0, 0x180, (void*) fcn_00598550, out);
-	if (out->x50 == 0) {
-		fcn_004432d0(old, 1);
+	lc_ScenePoint(*(char**) (obj + 0x61), (float*) (*(char**) (obj + 0x61) + 0x4c), out->position);
+	sprintf(buf, s_6aa1b4, out->position[0], out->position[1], out->position[2]);
+	out->node = 0;
+	lc_WalkScene((char*) g_67a370, 0, 0x180, fcn_00598550, out);
+	if (out->node == 0) {
+		lc_RenderState(old, 1);
 		return 0;
 	}
-	fcn_004432d0(old, 1);
+	lc_RenderState(old, 1);
 	return 1;
 }

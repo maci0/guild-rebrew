@@ -22,7 +22,7 @@ void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_SearchTable67(int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00546190(char*);
 
 void __cdecl fcn_0056dc30(char* u)
@@ -60,7 +60,7 @@ void __cdecl fcn_0056dc30(char* u)
 		}
 		fcn_00529160(b, 0, *(unsigned short*) h, 0);
 		fcn_0051af00(text, 0x1a18, b, *(unsigned short*) h);
-		fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, 0x5f2, *(int*) (u + 0x10), -1, 0,
+		he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, 0x5f2, *(int*) (u + 0x10), -1, 0,
 		    "_NACHRICHTEN_HS_80");
 		fcn_00546190(u);
 		return;

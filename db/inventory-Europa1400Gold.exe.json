@@ -1068,8 +1068,38 @@
   },
   {
     "va": 4251056,
-    "size": 128,
-    "name": "fcn.0040ddb0"
+    "size": 64,
+    "name": "fcn.0040ddb0",
+    "extent_history": [
+      {
+        "old_size": 128,
+        "new_size": 64,
+        "reason": "Reviewed independent Gold UI entries with fresh frames, independent external/self callback xrefs and restored-stack terminal tails to0x52d7d0 orRET; bounded localbranches and completebytehashes. Preserve5253=912+1120+2768+453. Separately preserve128=64+64 at0x40ddb0/0x40ddf0; old64byte matchedhash unchanged, newecmd_LoadScene body55+9NOP has exact diagnostic and loadercall. Evidence .scratch/goal71/boundary-ui/gold-boundary-manifest.json and .scratch/goal71/scene-loader/boundary-review.json. Nativeinventory only; no source/status changes.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:29:56.302057+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4251120,
+    "size": 55,
+    "name": "fcn.0040ddf0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 64,
+        "reason": "Reviewed independent Gold UI entries with fresh frames, independent external/self callback xrefs and restored-stack terminal tails to0x52d7d0 orRET; bounded localbranches and completebytehashes. Preserve5253=912+1120+2768+453. Separately preserve128=64+64 at0x40ddb0/0x40ddf0; old64byte matchedhash unchanged, newecmd_LoadScene body55+9NOP has exact diagnostic and loadercall. Evidence .scratch/goal71/boundary-ui/gold-boundary-manifest.json and .scratch/goal71/scene-loader/boundary-review.json. Nativeinventory only; no source/status changes.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:29:56.303924+00:00"
+      },
+      {
+        "old_size": 64,
+        "new_size": 55,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:37:01.568988+00:00"
+      }
+    ]
   },
   {
     "va": 4251184,
@@ -4547,13 +4577,31 @@
   },
   {
     "va": 4500400,
-    "size": 3440,
-    "name": "fcn.0044abb0"
+    "size": 3432,
+    "name": "fcn.0044abb0",
+    "extent_history": [
+      {
+        "old_size": 3440,
+        "new_size": 3432,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:47:57.331453+00:00"
+      }
+    ]
   },
   {
     "va": 4503840,
-    "size": 1344,
-    "name": "fcn.0044b920"
+    "size": 1330,
+    "name": "fcn.0044b920",
+    "extent_history": [
+      {
+        "old_size": 1344,
+        "new_size": 1330,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:47:57.331498+00:00"
+      }
+    ]
   },
   {
     "va": 4505184,
@@ -11996,8 +12044,17 @@
   },
   {
     "va": 5066096,
-    "size": 4928,
-    "name": "fcn.004d4d70"
+    "size": 4915,
+    "name": "fcn.004d4d70",
+    "extent_history": [
+      {
+        "old_size": 4928,
+        "new_size": 4915,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:47:57.331503+00:00"
+      }
+    ]
   },
   {
     "va": 5071024,
@@ -12061,8 +12118,17 @@
   },
   {
     "va": 5076640,
-    "size": 4640,
-    "name": "fcn.004d76a0"
+    "size": 4632,
+    "name": "fcn.004d76a0",
+    "extent_history": [
+      {
+        "old_size": 4640,
+        "new_size": 4632,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:47:57.331507+00:00"
+      }
+    ]
   },
   {
     "va": 5081280,
@@ -14567,8 +14633,17 @@
   },
   {
     "va": 5247376,
-    "size": 288,
-    "name": "fcn.00501190"
+    "size": 284,
+    "name": "fcn.00501190",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 284,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:47:57.331511+00:00"
+      }
+    ]
   },
   {
     "va": 5247664,
@@ -15684,8 +15759,17 @@
   },
   {
     "va": 5338880,
-    "size": 6464,
-    "name": "fcn.00517700"
+    "size": 6455,
+    "name": "fcn.00517700",
+    "extent_history": [
+      {
+        "old_size": 6464,
+        "new_size": 6455,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:47:57.331517+00:00"
+      }
+    ]
   },
   {
     "va": 5345344,
@@ -19694,8 +19778,31 @@
   },
   {
     "va": 5831744,
-    "size": 224,
-    "name": "fcn.0058fc40"
+    "size": 62,
+    "name": "fcn.0058fc40",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 62,
+        "reason": "Split the 224-byte inventory span at the existing RELOC 62-byte fcn_00598510 Gold ret. The following function is the 148-byte placement-search callback, then 12 alignment NOPs before 0x58fd20.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T05:20:02.968261+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5831808,
+    "size": 148,
+    "name": "fcn.0058fc80",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 148,
+        "reason": "Split the 224-byte inventory span at the existing RELOC 62-byte fcn_00598510 Gold ret. The following function is the 148-byte placement-search callback, then 12 alignment NOPs before 0x58fd20.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T05:20:02.970002+00:00"
+      }
+    ]
   },
   {
     "va": 5831968,
@@ -20764,8 +20871,38 @@
   },
   {
     "va": 5952160,
-    "size": 5152,
-    "name": "fcn.005ad2a0"
+    "size": 4336,
+    "name": "fcn.005ad2a0",
+    "extent_history": [
+      {
+        "old_size": 5152,
+        "new_size": 4336,
+        "reason": "Reviewed Gold personnel-dialog span 5152=4336+816. First body ends restored-stack tail jump 0x5ae37d to 0x52d7d0 followed by14NOPs; separate entry0x5ae390 has a fresh frame, independent caller/callback references,808code bytes plus8NOPs. Complete branch and byte hashes, no pre-existing source/status claims: .scratch/goal70/no-source-large/gold-boundary-manifest.json and gold-boundaries.py.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:17:23.372262+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5956496,
+    "size": 808,
+    "name": "fcn.005ae390",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 816,
+        "reason": "Reviewed Gold personnel-dialog span 5152=4336+816. First body ends restored-stack tail jump 0x5ae37d to 0x52d7d0 followed by14NOPs; separate entry0x5ae390 has a fresh frame, independent caller/callback references,808code bytes plus8NOPs. Complete branch and byte hashes, no pre-existing source/status claims: .scratch/goal70/no-source-large/gold-boundary-manifest.json and gold-boundaries.py.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:17:23.373937+00:00"
+      },
+      {
+        "old_size": 816,
+        "new_size": 808,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:37:01.569004+00:00"
+      }
+    ]
   },
   {
     "va": 5957312,
@@ -20889,8 +21026,80 @@
   },
   {
     "va": 5986272,
-    "size": 5253,
-    "name": "fcn.005b57e0"
+    "size": 900,
+    "name": "fcn.005b57e0",
+    "extent_history": [
+      {
+        "old_size": 5253,
+        "new_size": 912,
+        "reason": "Reviewed independent Gold UI entries with fresh frames, independent external/self callback xrefs and restored-stack terminal tails to0x52d7d0 orRET; bounded localbranches and completebytehashes. Preserve5253=912+1120+2768+453. Separately preserve128=64+64 at0x40ddb0/0x40ddf0; old64byte matchedhash unchanged, newecmd_LoadScene body55+9NOP has exact diagnostic and loadercall. Evidence .scratch/goal71/boundary-ui/gold-boundary-manifest.json and .scratch/goal71/scene-loader/boundary-review.json. Nativeinventory only; no source/status changes.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:29:56.303928+00:00"
+      },
+      {
+        "old_size": 912,
+        "new_size": 900,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:37:01.569008+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5987184,
+    "size": 1106,
+    "name": "fcn.005b5b70",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1120,
+        "reason": "Reviewed independent Gold UI entries with fresh frames, independent external/self callback xrefs and restored-stack terminal tails to0x52d7d0 orRET; bounded localbranches and completebytehashes. Preserve5253=912+1120+2768+453. Separately preserve128=64+64 at0x40ddb0/0x40ddf0; old64byte matchedhash unchanged, newecmd_LoadScene body55+9NOP has exact diagnostic and loadercall. Evidence .scratch/goal71/boundary-ui/gold-boundary-manifest.json and .scratch/goal71/scene-loader/boundary-review.json. Nativeinventory only; no source/status changes.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:29:56.306638+00:00"
+      },
+      {
+        "old_size": 1120,
+        "new_size": 1106,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:37:01.569010+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5988304,
+    "size": 2753,
+    "name": "fcn.005b5fd0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2768,
+        "reason": "Reviewed independent Gold UI entries with fresh frames, independent external/self callback xrefs and restored-stack terminal tails to0x52d7d0 orRET; bounded localbranches and completebytehashes. Preserve5253=912+1120+2768+453. Separately preserve128=64+64 at0x40ddb0/0x40ddf0; old64byte matchedhash unchanged, newecmd_LoadScene body55+9NOP has exact diagnostic and loadercall. Evidence .scratch/goal71/boundary-ui/gold-boundary-manifest.json and .scratch/goal71/scene-loader/boundary-review.json. Nativeinventory only; no source/status changes.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:29:56.309281+00:00"
+      },
+      {
+        "old_size": 2768,
+        "new_size": 2753,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:37:01.569013+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5991072,
+    "size": 453,
+    "name": "fcn.005b6aa0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 453,
+        "reason": "Reviewed independent Gold UI entries with fresh frames, independent external/self callback xrefs and restored-stack terminal tails to0x52d7d0 orRET; bounded localbranches and completebytehashes. Preserve5253=912+1120+2768+453. Separately preserve128=64+64 at0x40ddb0/0x40ddf0; old64byte matchedhash unchanged, newecmd_LoadScene body55+9NOP has exact diagnostic and loadercall. Evidence .scratch/goal71/boundary-ui/gold-boundary-manifest.json and .scratch/goal71/scene-loader/boundary-review.json. Nativeinventory only; no source/status changes.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:29:56.311051+00:00"
+      }
+    ]
   },
   {
     "va": 5991536,
@@ -20939,8 +21148,17 @@
   },
   {
     "va": 6001712,
-    "size": 1104,
-    "name": "fcn.005b9430"
+    "size": 1095,
+    "name": "fcn.005b9430",
+    "extent_history": [
+      {
+        "old_size": 1104,
+        "new_size": 1095,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T04:47:57.331522+00:00"
+      }
+    ]
   },
   {
     "va": 6002816,

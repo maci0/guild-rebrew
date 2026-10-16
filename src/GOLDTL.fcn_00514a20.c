@@ -21,11 +21,11 @@ extern int g_7725c8;
 void __cdecl fcn_00514570(char* s);
 void __cdecl fcn_005356e0(void);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_005259f0(char* s);
+int __cdecl ls_SendGame(char* s);
 void __cdecl fcn_004c5790(int kind, Msg* m);
 void __cdecl fcn_00521920(char* s, int n);
 void __cdecl fcn_00535770(int v);
-void __cdecl fcn_00515250(void);
+void __cdecl init_LocalData(void);
 
 int __cdecl fcn_00514a20(char* name)
 {
@@ -45,7 +45,7 @@ int __cdecl fcn_00514a20(char* name)
 	if (g_77494c & 1) {
 		sprintf(save, g_6a1e8c, name);
 		fcn_00514570(g_14ac5f0);
-		if (fcn_005259f0(save) == 0) {
+		if (ls_SendGame(save) == 0) {
 			return 1;
 		}
 		if (g_77494c & 1) {
@@ -60,7 +60,7 @@ int __cdecl fcn_00514a20(char* name)
 	fcn_00521920(path, 5);
 	fcn_00535770(0x24087);
 	fcn_00514570(g_14ac5fc);
-	fcn_00515250();
+	init_LocalData();
 	g_7725c8 = 0;
 	return 0;
 }

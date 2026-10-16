@@ -65,7 +65,7 @@ int __cdecl fcn_004e6650(void)
 			}
 			if (*(int *) (g_7f4ca4 + g_774970 * 0x21c) == ((Ent*)g_9a9660)[i].key && ((Ent*)g_9a9660)[i].busy == 0 &&
 			    fcn_00500cb0(&(*(Time*)&g_7f4c00), &t) > 0) {
-				r = fcn_004e64e0((int*) &((Ent*)g_9a9660)[i]);
+				r = cut_CutsceneReady((int*) &((Ent*)g_9a9660)[i]);
 				if (r == -1) {
 					fcn_00500bb0(&((Ent*)g_9a9660)[i].t, 0, 5, 0);
 					if (((Ent*)g_9a9660)[i].t.hour >= 22) {

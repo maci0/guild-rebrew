@@ -1,12 +1,10 @@
 # Client-only functions of the shared TUs: round-19 sweep
 
-Appendix to `msvc6-link-layout.md` section 5f. Every function the Gold T&L client (TL) keeps in the spans of
-the TUs the server shares (client TU map: Error.c, m_alloc.c, vfs.c, broadcast.c, plant.c, command.c,
-server.c, aemter.c, alchemistry_logic.c, friedhof_logic.c, sim.c, spiel.c, loadsave.c) is listed with the
-decision whether the server's copy of the file can have held it. A function belongs in the server build only
-if it links there: every callee exists in the server (a server function, an already ported one, or a CRT
-member the server already loads in that pass) and every absolute data operand has a proven server
-allocation. Client copies of server functions are counted per TU, not listed.
+Historical appendix to [link layout](msvc6-link-layout.md) §5f. The table records
+TL bodies in shared TU spans and whether the measured server build could retain
+them: every callee and absolute data operand needs a real server provider or
+allocation. It is not a current work queue or permission to infer storage from
+neighboring addresses. Source/metadata and [TODO.md](TODO.md) own current state.
 
 ## Method
 

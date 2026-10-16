@@ -13,7 +13,7 @@ int __cdecl fcn_004bc8a0(int, int, float (*)[4]);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 char* __cdecl fcn_0040c120(char*, int, int, int, int);
 
-void __cdecl fcn_00549360(char* u, int where)
+void __cdecl he_CharacterBehavior(char* u, int where)
 {
 	int* p;
 	int n;

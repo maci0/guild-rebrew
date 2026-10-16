@@ -83,7 +83,7 @@ Figure* __cdecl fcn_0050dc90(Estate*);
 int __cdecl fcn_00413190(int);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00402aa0(Model*);
-void __cdecl fcn_00442a30(Model*, int, int, int);
+void __cdecl SelectTextureSet(Model*, int, int, int);
 void __cdecl fcn_0052dd80(Estate*);
 void __cdecl fcn_0052d9d0(Estate*);
 
@@ -151,7 +151,7 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 			if (m->body->visible == 0) {
 				fcn_00402aa0(m);
 			}
-			fcn_00442a30(*m->parts, (*m->parts)->visible, sc, 1);
+			SelectTextureSet(*m->parts, (*m->parts)->visible, sc, 1);
 			fcn_004432d0(saved, 1);
 		}
 		q++;

@@ -40,7 +40,7 @@ void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 float __cdecl fcn_0050fdb0(int, int, char*);
 
-void __cdecl fcn_00571720(char* e)
+void __cdecl he_AllocProduktion(char* e)
 {
 	char buf[0x200];
 	char* g;

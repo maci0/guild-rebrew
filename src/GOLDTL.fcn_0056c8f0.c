@@ -11,7 +11,7 @@ int __cdecl gm_CheckEntityType(char*);
 int __cdecl fcn_00505340(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00455350(char*, char*, float*);
-int __cdecl fcn_00451840(float*, float*, float);
+#include "client_scene_transform.h"
 
 void __cdecl fcn_0056c8f0(char* u)
 {

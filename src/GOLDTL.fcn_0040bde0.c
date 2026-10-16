@@ -11,7 +11,7 @@ extern char g_6b5c60[];
 int __cdecl fcn_00406280();
 int __cdecl fcn_00406410();
 int __cdecl fcn_004065c0();
-int __cdecl fcn_004066d0();
+int __cdecl UsingGate();
 int __cdecl ch_TakingObject();
 int __cdecl ch_DroppingObject();
 int __cdecl fcn_00406db0();
@@ -58,7 +58,7 @@ int __cdecl fcn_0040bde0(void)
 	fcn_00406210(55, fcn_0040ba00, 1, &(*(char*)g_6b5c60), 1);
 	fcn_00406210(56, fcn_0040ba30, 1, &(*(char*)g_6b5c60), 1);
 	fcn_00406210(59, fcn_0040bd80, 1, &(*(char*)g_6b5c60), 1);
-	fcn_00406210(52, fcn_004066d0, 1, &(*(char*)g_6b5c60), 5);
+	fcn_00406210(52, UsingGate, 1, &(*(char*)g_6b5c60), 5);
 	memset(g_1551f40, 0, sizeof(g_1551f40));
 	(*(int*)&g_6b5c5c) = fcn_00408220(60.0f);
 	return 1;

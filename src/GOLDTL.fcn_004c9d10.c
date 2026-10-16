@@ -19,7 +19,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 /* ADDRESS: GOLD 0x004c9170 */
 /* ADDRESS: GOLDTL 0x004c9d10 */
 
-int __cdecl fcn_004c9d10(char* a1, char* a2)
+int __cdecl cm_ExSendCutInfo(char* a1, char* a2)
 {
 	char buf[0x100];
 	int i;

@@ -1,26 +1,14 @@
-# MSVC 6.0 (12.00) register allocation: empirical findings
+# MSVC 6.0 register allocation
 
-Reverse-engineering notes on how the MSVC 6.0 (CL 12.00) code generator
-assigns `eax/ecx/edx` vs the callee-saved `ebx/esi/edi`, derived from
-minimal probe functions compiled against the real toolchain
-(`rebrew/msvc:6.0-sp6-win32`, wine) and byte-compared with the original
-`server.dll` (target `gm_ff_Objekt` 0x10016460, `gm_NextEntityQueryMatch`
-0x10016290 and friends).
-
-**Read this first.** Findings 1–8e and the "Practical recipe" below are
-`gm_ff_Objekt` lab notes. Current GRA policy is `codegen-walls.md` §1 plus
-Findings 52–65: callee-saved *homes* are not a C knob. Function status is
-`src/rebrew-functions.toml`, not a "fenced-naked" sentence later in this
-file. There are no Findings 9–11.
+Empirical findings from complete native/object comparisons. Early Findings 1–8e
+are `gm_ff_Objekt` lab notes, not a general guarantee that C controls register
+homes. Read [walls §1](codegen-walls.md) and Findings 52–65 before reopening
+callee-saved or slot-map probes. Status belongs in managed metadata.
 
 ## Index
 
-Findings are numbered in the order they were written. Per-function case
-notes (the `## <function> (0x<VA>)` sections between "Open questions" and
-"Session findings") are keyed by address: find them with
-`python3 scripts/whathas.py 0x<VA>`. Some functions have two notes
-(`gm_RandomStatModifier`, `ahm_InitRandomEntity`,
-`sim_StartEntityQueryByType`); read both.
+Original finding numbers are stable; 9–11 are absent. Per-function notes are
+address-keyed. Query `rebrew source findings` and inspect the source header.
 
 | Topic | Findings |
 |---|---|
@@ -39,28 +27,14 @@ notes (the `## <function> (0x<VA>)` sections between "Open questions" and
 | Addressing-mode base/index roles | 13, 29, 30, 34 |
 | Object size, COMDAT placement, relocation accounting (not allocation, kept here for history) | 15, 56, 57, 58, 59 |
 
-There are no Findings 9 to 11.
-
-This complements the rebrew package doc `docs/codegen/msvc/msvc-6.md`
-(not in this workspace). This file documents the *allocation decisions*
-that pick registers.
-
 ## Methodology
 
-Ship path:
-
-```sh
-python3 scripts/whathas.py 0x<VA>
-python3 scripts/probe_function.py --va 0x<VA> --file <file.c>
-bash scripts/linktest.sh <file.c>
-```
-
-Isolated mechanism probes go in `.scratch/` via `rebrew-cmake-cl` on PATH
-(same wrapper CMake uses). Do not copy onto `build/_v.c` or hardcode
-`/home/maci/.local/bin`. Image is SP6 (`12.00.8804`); notes that say
-"8168 will not reproduce" describe a different backend.
-
-Reference bytes come from `rebrew binary asm show 0x10016460 --size 200 --json`.
+Use `uv run --frozen rebrew source findings 0x<VA> --json`, then native assembly,
+`diff` and `test`. Keep isolated probes in `.scratch/` and use the selected
+Docker compiler. The current server is plain SP5; clients use Processor Pack.
+Earlier SP6 experiments retain their original compiler context. Measure the
+complete linked image for layout claims; [tooling](tooling-upstream.md) replaces
+retired probe wrappers. Full original notes are [archived](goal-history.md#full-notebooks).
 
 ## Register set & baseline (from rebrew docs)
 
@@ -2133,7 +2107,7 @@ first ``// FUNCTION:`` VA.  Consequences:
   and plant.c's find_zone_record).  A naked ``_emit`` placeholder for the hole
   must stay in the file (in VA order) or every later function shifts.
 - Duplicate VA coverage across files (e.g. defining 0x10014f80 in two files)
-  breaks the layout silently: check ``// FUNCTION:`` markers before adding.
+  breaks the layout silently: check dedicated metadata bindings before adding.
 
 **Amended (2026 campaign): the 16-byte pad hides the real body length.**  A
 COMDAT is padded to a 16-byte multiple, so several different real body lengths

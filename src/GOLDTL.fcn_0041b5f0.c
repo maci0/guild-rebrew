@@ -16,7 +16,7 @@ extern char g_6b5df0[];
 /* ADDRESS: GOLDTL 0x0041b5f0 */
 
 /* dd_Line: queues a screen-space line as two vertices. */
-void __cdecl fcn_0041b5f0(int x1, int y1, int x2, int y2, int color)
+void __cdecl dd_Line(int x1, int y1, int x2, int y2, int color)
 {
 	if (g_6777ac == -1) {
 		fcn_0041d9e0("dd_Line called w/o dd_BeginLines!");

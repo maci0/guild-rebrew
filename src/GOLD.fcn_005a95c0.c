@@ -1,0 +1,7 @@
+/* ADDRESS: GOLD 0x005a95c0 */
+int __cdecl fcn_005a95c0(void)
+{
+    /* TODO: Implement based on Ghidra decompilation */
+    /* Ghidra name: fcn.005a95c0 */
+    return 0;
+}

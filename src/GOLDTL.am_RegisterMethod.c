@@ -9,7 +9,7 @@
 extern char g_1008420[];
 extern char g_6b5c60[];
 extern AM_METHOD g_1008540[];
-int __cdecl fcn_004a4200(char* name);
+int __cdecl amt_GetDesireByName(char* name);
 /* ADDRESS: GOLDTL 0x00494ed0 */
 /* ADDRESS: GOLD 0x00495510 */
 int __cdecl am_RegisterMethod(AM_METHOD* d, char* ini)
@@ -25,14 +25,14 @@ int __cdecl am_RegisterMethod(AM_METHOD* d, char* ini)
    for(i=0;i<4;i++) {
     sprintf(key,"ShortDesire%li",i+1);
     if(GetPrivateProfileStringA(name,key,g_6b5c60,value,128,g_1008420)) {
-     d->effects[i].type=fcn_004a4200(value);
+     d->effects[i].type=amt_GetDesireByName(value);
      sprintf(key,"ShortChange%li",i+1);
      GetPrivateProfileStringA(name,key,g_6b5c60,value,128,g_1008420);
      d->effects[i].value=(float)atof(value);
     } else {d->effects[i].type=0xff;d->effects[i].value=0;}
     sprintf(key,"LongDesire%li",i+1);
     if(GetPrivateProfileStringA(name,key,g_6b5c60,value,128,g_1008420)) {
-     d->other_effects[i].type=fcn_004a4200(value);
+     d->other_effects[i].type=amt_GetDesireByName(value);
      sprintf(key,"LongChange%li",i+1);
      GetPrivateProfileStringA(name,key,g_6b5c60,value,128,g_1008420);
      d->other_effects[i].value=(float)atof(value);

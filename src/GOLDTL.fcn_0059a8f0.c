@@ -13,7 +13,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_00526920(char*, int, char*);
 
-void __cdecl fcn_0059a8f0(void)
+void __cdecl lc_PlayerInJail(void)
 {
 	char* p;
 	char* e;

@@ -17,7 +17,7 @@ char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
 void __cdecl fcn_00546190(char*);
 
-void __cdecl fcn_0056e320(char* e)
+void __cdecl he_AllocKillPlayer(char* e)
 {
 	char* o;
 

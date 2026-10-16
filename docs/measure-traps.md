@@ -1,12 +1,13 @@
-# Measure traps: the method's own failure modes
+# Measurement traps
 
-These cost as much as the codegen walls, and most of them were learned by being burned.
-For what the compiler itself blocks, see `codegen-walls.md`. Live residue /
-verify / `.data` numbers are `scripts/gate.sh` defaults, not a figure later
-in this file.
+What a check actually measures, and how it can mislead. Historical scores,
+counts and postlink successes are checkpoint evidence, not current state.
+Use complete native bodies, resolved operands/literals, current input hashes
+and the full raw-file gate for the corresponding claims.
 
-Companion reading: `msvc6-c-shapes.md` (front-end shapes), `msvc6-allocator.md`
-(register allocation and slot maps), `TODO.md` (round-by-round history).
+Related: [C shapes](msvc6-c-shapes.md), [allocator](msvc6-allocator.md),
+[walls](codegen-walls.md), [current work](TODO.md). Original section numbers
+are retained; full prose and retired commands are [archived](goal-history.md#full-notebooks).
 
 ### Diagnostic compilers can change floating-point observations (2026-10-14)
 

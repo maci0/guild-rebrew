@@ -9,7 +9,7 @@ extern ApEvent g_7dcae0[256];
 
 #include <string.h>
 
-ApEvent* __cdecl fcn_00546ef0(int a, char* name, int b, int c)
+ApEvent* __cdecl he_RegisterApEvent(int a, char* name, int b, int c)
 {
 	int i;
 	ApEvent* r;

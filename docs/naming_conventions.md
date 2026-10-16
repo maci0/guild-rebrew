@@ -1,3 +1,17 @@
+# Original Developer Naming Conventions
+
+Attested diagnostic/path spellings win, including original errors. Otherwise
+use an evidenced module prefix and VerbNoun; units without a prefix stay
+unprefixed. Globals follow original module/German pointer conventions, not a
+new `g_` scheme. Mark inferred names and keep compiler literals separate from
+named source storage. Rename through Rebrew, then verify affected targets.
+
+Rules: [prefixes](#module-prefix-system), [functions](#function-naming),
+[variables](#variable-naming), [types](#struct-naming),
+[constants](#enum--constant-naming). The ledger below preserves native addresses,
+attestation limits and receipts; a descriptive role is not automatically an
+original identifier. [Source layout](source-layout.md) owns placement guidance.
+
 ### Object-transform animation wrapper (2026-10-15)
 
 `StartObjectTransformAnimation` is inferred for TL0x00412d30. No original spelling,
@@ -75,11 +89,6 @@ reset copies retire. Complete bodies, every typed operand and rejecting bindings
 are checked in `.scratch/goal22/reconstruction/production-native-proofs.json`;
 the existing weather caller's complete body and operand graph are preserved
 in both clients by `caller-preservation.json` in that directory.
-
-# Original Developer Naming Conventions
-
-Reconstructed from debug strings, error messages, and binary analysis of
-`server.dll` and `Europa1400Gold_TL.exe`. Developer: 4HEAD Studios (German).
 
 ### Shared tracked allocator and attested spelling (2026-10-11)
 
@@ -2161,7 +2170,7 @@ The large-body Gold pairings have complete native/Kuna role review and resource/
 | TL VA | Inventory span | Attested name | Native role | Gold counterpart/candidate | Native anchor |
 |---|---:|---|---|---|---|
 | `0x00401d10` | 448 | `unresolved` | Writes an 8-bit indexed BMP: BM header, 256 BGR0 palette entries (grayscale when palette is null), bottom-up rows; does not add row padding. | unresolved | Complete native disassembly and Kuna: .scratch/goal63/00401d10-{asm,kuna}.json |
-| `0x00401ed0` | 448 | `unresolved` | SaveBMP24 is attested by the temp-row allocation label. Writes a 24-bit BMP, swapping RGB to BGR in a temporary row, bottom-up. Native writes a 44-byte info block and uses pixel offset 0x3a; do not silently replace it with a standard 40-byte header. | unresolved | Complete native disassembly and Kuna: .scratch/goal63/00401ed0-{asm,kuna}.json |
+| `0x00401ed0` | 448 | `unresolved` | SaveBMP24 is an inferred function name from the temp-row allocation label; an original function identifier is not independently attested. Writes a 24-bit BMP, swapping RGB to BGR in a temporary row, bottom-up. Native writes a 44-byte info block and uses pixel offset 0x3a; do not silently replace it with a standard 40-byte header. | unresolved | Complete native disassembly and Kuna: .scratch/goal63/00401ed0-{asm,kuna}.json |
 | `0x004045c0` | 1088 | `ch_CheckAniMorph` | Checks and completes character animation morph transitions. | 0x00403dc0 | 0x4049da -> 0x675548: ch_CheckAniMorph(): Could not attach CurrentAnimStream: %s; 0x40486f -> 0x675598: ch_CheckAniMorph(): huston we got a problem... |
 | `0x00404dc0` | 416 | `ch_AttachAni` | Builds character animation resource/name strings, loads if absent, attaches a stream and sets frame state. Empty-name path reads an uninitialized native stack local; preserve that finding during reconstruction. | 0x004044a0 | 0x404ef7 -> 0x6755c8: ch_AttachAni(): Could not attach ani: %s |
 | `0x00405760` | 362 | `unresolved` | Updates a pending target displacement from character +0x114 and model position/offset; normalizes/scales the step, decrements the +0x110 byte, then clears state at tolerance0.4. | unresolved | Complete native disassembly and Kuna: .scratch/goal63/00405760-{asm,kuna}.json |
@@ -2218,7 +2227,7 @@ The large-body Gold pairings have complete native/Kuna role review and resource/
 
 The full FLIRT scan loaded 7102296 signatures and reported 1967 candidates (4679 ambiguous sites skipped). None of the selected bodies earns library attribution from that scan: the five selected `___chk_fail`/`___fortify_fail` hits cover only prefixes of game-specific bodies. All twelve large bodies and the four initial main-pass bodies also reject stock LIBCMT whole-body matches with callee resolution. Misses do not exclude other archives.
 
-BMP native details matter for future source: TL `401d10` writes indexed/grayscale BGR0 palette data and bottom-up rows without row padding. TL `401ed0` / Gold `401b90` carry the `!bmp:SaveBMP24(temp_row)` label; TL writes a 44-byte info block and pixel offset `0x3a`. `SaveBMP24` is attested, but no guessed 8-bit counterpart name or Gold address is registered. TL `404dc0` / Gold `4044a0` attest `ch_AttachAni`; the empty-name native branch consumes an uninitialized stack slot. Do not silently initialize it while claiming source fidelity.
+BMP native details matter for future source: TL `401d10` writes indexed/grayscale BGR0 palette data and bottom-up rows without row padding. TL `401ed0` / Gold `401b90` carry the `!bmp:SaveBMP24(temp_row)` label; TL writes a 44-byte info block and pixel offset `0x3a`. `SaveBMP24` is a label-derived inferred function name. Goal69 registers the independently reviewed Gold pair as native-only; this creates no source or matched-byte claim. TL `404dc0` / Gold `4044a0` attest `ch_AttachAni`; the empty-name native branch consumes an uninitialized stack slot. Do not silently initialize it while claiming source fidelity.
 
 Receipts and replay inputs are under `.scratch/goal63`: `main-map-plan.json`, `reviewed-map-rows.json`, `mapping-preservation.json`, per-VA native/Kuna dossiers, diagnostic strings with xrefs, and `map-no-source/report.md` plus `mapping-report.json`. Replay through `rebrew binary function VA`, `binary asm show VA --size INVENTORY_SPAN`, `decompile VA --decompiler kuna`, `binary strings --filter REGEX --xref`, and `library match --stock-lib LIBCMT.LIB --va VA --resolve-callees`, selecting the target explicitly. Managed name/size/note rows were written through `record_function_rows`; no source files, type/data stores or inventory extents changed.
 
@@ -2247,7 +2256,7 @@ Native/compiled operand receipts and rejecting controls are in
 
 ### Goal65 — indexed BMP output
 
-`SaveBMP8` at TL `0x00401d10` is an **inferred** sibling name to attested
+`SaveBMP8` at TL `0x00401d10` is an **inferred** sibling name to the label-derived
 `SaveBMP24`, not a recovered identifier. Its standalone source filename is also
 provisional. The complete441-byte writer is matched with all eight address
 operands and the `wbn` mode literal; seven following NOPs are alignment within
@@ -2369,3 +2378,120 @@ reviewed inventory repair. Existing331-byte source extents and historical
 reference hashes remain intact, with five NOPs before the admitted helper.
 Trailing9TL/14Gold NOPs stay separate from its executable source extent. Complete
 proofs and bounded effects: .scratch/goal68/helper-proof.
+
+## init_LoadObjektScene (native identification, Goal69)
+
+Original diagnostic `init_LoadObjektScene:Could not find a free universe...`
+attests the initializer at TL510c90 /Gold50d7f0. The native-only rows record that
+name and complete940/938-byte extents; they create no C source, linker provider,
+comparison status or recovered original signature. All twelve known direct
+callers discard EAX; void(int) is a supported future contract, not uniquely
+recovered source spelling. Source-unit ownership remains unknown.
+
+Both bodies have32correspondingCFG blocks and80pairedaddress sites. Gold adds
+call46e980 and signed-short loading coordinates. Preserve allocation-1 continuing
+through the diagnostic, scene-load failure without universe restoration, live
+mapping/resource reloads and conditional timer restoration. The768slot objects
+are character/controller views, distinct from scene D3_OBJECT nodes. Hidden
+caller entries4e4230 /4e2910 are separate from existing165-byte matches.
+
+Evidence:.scratch/goal68/init-scene/REPORT.md and native-dossier.json;
+registration:.scratch/goal69/native-initializer-registration.json. Library misses
+are inconclusive alone; the diagnostic and universe/character operations establish
+application provenance. Native naming is separate from reconstructed game bytes.
+
+### SaveBMP24 native mapping correction (Goal69)
+
+TL401ed0 /Gold401b90 have complete439-byte bodies plus9alignment NOPs in
+unchanged448-byte inventory spans. Both native-only rows now use the inferred
+name SaveBMP24, derived from !bmp:SaveBMP24(temp_row). Direct label PUSH sites
+401fbb /401c7b and the full BMP algorithm support the role; the allocation label
+does not independently attest the original function identifier. This supersedes
+earlier attested-name wording, including the sibling discussion above.
+
+The pair agrees at399fixed bytes and ten corresponding address operands. Gold's
+direct caller589f34 confirms its actual entry. Preserve the14-byte file header,
+44-byte info block,pixel offset0x3a,RGB-to-BGR temp-row conversion and bottom-up
+writes. No C symbol, source, status, selected provider or extent changed.
+Evidence:.scratch/goal69/native-names/{manifest.json,review.md,registration.json}.
+
+## Native role mapping and Gold action identities (Goal70)
+
+Retain address names for six newly mapped TL entries: personnel book `0x5b88b0`,
+progress renderer `0x467920`, family tree `0x5d0660`, universe selection
+`0x4432d0`, scene loader `0x448360` and scene-map rebuild `0x45b290`.
+These roles are inferred from complete native behavior and resource references;
+no original function identifier, source path or provider is established.
+
+Gold diagnostics independently attest `he_AllocTransport` at `0x554f00`,
+`he_TransportStadtStadt` at `0x555db0`, `he_RunKredit` at `0x55c950`,
+`he_RunMarktSupervisor` at `0x55fd80` and `main_RundenBeginn` at `0x5383a0`.
+Their TL names were already mapped in Goal63. Across all five pairs, 7,973
+executable bytes agree after substituting 339 corresponding address fields;
+231 internal edges retain their offsets. This is native correspondence, not
+compiled-source or callee-provider verification. All eleven admitted rows remain
+without source, symbol, status or verification claims.
+
+Boundary repairs separately expose TL `0x5c1490`, `0x5c18e0`, `0x5c23b0`,
+`0x5b9980` and Gold `0x5ae390`. Their original names remain unknown. The repaired
+spans preserve every prior byte and do not affect an existing source/status row.
+Receipts: `.scratch/goal70/no-source-{large,resources,actions}/REPORT.md` and
+`preservation.json`. FLIRT misses remain inconclusive; no library classification
+is assigned from a miss or a partial failure-helper signature.
+
+## Separated UI entries and ecmd_LoadScene (Goal71)
+
+TL `0x5c1110` is the pamphlet noticeboard with four action rows; poem/audio
+resources belong to separate `0x5c1490`. TL `0x5c18e0` handles residence feast
+configuration/invitations, `0x5c23b0` confirms building sales and `0x5b9980`
+acquires transport carts. Keep address names: these roles do not attest original
+C identifiers. Gold counterparts are respectively `0x5b57e0`, `0x5b5b70`,
+`0x5b5fd0`, `0x5b6aa0` and `0x5ae390`. Complete per-body resources, callers,
+extents and counterpart limits are in `.scratch/goal71/boundary-ui/REPORT.md`.
+
+The exact `ecmd_LoadScene: Could not find scene on disk...` diagnostic and
+single-purpose native behavior attest `ecmd_LoadScene` at TL `0x40ed00` and
+Gold `0x40ddf0`. Each 55-byte entry follows a separate 64-byte matched function;
+its nine trailing NOPs are alignment. It reads the filename from its argument,
+calls the loader with NULL stream/callback, tests AL, diagnoses failure and
+returns full-width one. C argument spelling, TU placement and providers remain
+unresolved. Native-only rows earn no source or match verdict. Evidence:
+`.scratch/goal71/scene-loader/boundary-review.json` and `REPORT.md`.
+
+Sale-loop source must retain the same-iteration confirmation after setting exit
+state for invalidity. Its lookup uses cached entry ID, but packet construction
+reloads live building `+1`. `_ftol` consumes implicit x87 values; Kuna's apparent
+integer arguments are wrong. Full native suffix controls and limits are in
+`.scratch/goal71/sale/loop-effects.json`; this is not a compiled-source proof.
+
+## Large functions and scene/credit dependencies (Goal72)
+
+Keep address names for combat results TL `0x4d6170` / Gold `0x4d4d70`, combat
+task progression `0x4d8d00` / `0x4d76a0`, and round/day refresh `0x540020` /
+`0x538740`. Complete native behavior, resources and callers support these roles
+and pairings, without original names, source placement or provider claims.
+TL `0x432410` is a 111-byte name lookup; independent callback `0x432480` is
+4,850 bytes. Their original names remain unknown.
+
+The direct unknown-type diagnostic and recursive scene-reader behavior attest
+`rd_object` at TL `0x447110` / Gold `0x44abb0`. Terrain readers TL `0x447e30` /
+Gold `0x44b920` retain address names: `d3_int_io:FloorWaterRegions` is an
+allocation label, not a function identifier. Both readers borrow their streams.
+Gold `0x401380` corresponds to TL `0x401500`; TL's same address is unrelated.
+
+Credit recovery TL `0x5c4ec0` / Gold `0x5b9430` retains address names; module
+ownership and the original identifier are unproven. Gold `0x501190` inherits
+the canonical descriptive name `gm_StartFilteredEntitySearch` from its complete
+native TL `0x503fe0` counterpart. This is native identity mapping, not adoption
+of spiel.c's emitted candidate definition or an attested original spelling.
+
+Retain both `fcn_0051af00` formatter names. TL siblings `0x519190`, `0x51af00`
+and `0x51c840` reference the same `io_Text` diagnostic; the output-buffer role
+does not uniquely establish the bare function name. Complete formatter extent
+is 6,455 bytes, retaining 6,282 code bytes, two alignment bytes, an 88-byte
+jump table and an 83-byte selector table. Shared diagnostics and masked FLIRT
+prefixes do not establish unique identities or selected library providers.
+
+Evidence: `.scratch/goal72/{large,credit-deps,scene-deps}/REPORT.md`, native
+manifests, caller matrices and replay proofs. All admissions are native-only;
+no source, symbol, match verdict or provider is earned by mapping.

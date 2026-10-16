@@ -1,4 +1,5 @@
 #include <math.h>
+#include "client_scene_transform.h"
 
 /* ADDRESS: GOLD 0x00453e70 */
 /* ADDRESS: GOLDTL 0x00451840 */

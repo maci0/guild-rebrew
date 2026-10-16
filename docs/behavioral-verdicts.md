@@ -1,16 +1,10 @@
-# Behavioral verdicts: residue functions
+# Historical behavioral reviews
 
-Every function carrying linked `.text` residue has an explicit behavioral
-verdict as of rounds 288–297. Method: independent instruction-level review
-of the C source against the reference disassembly (`rebrew binary asm show` +
-`rebrew diff --json`), hunting wrong constants/offsets/call args/loop
-bounds/branch outcomes; register allocation, scheduling, spill slots and
-other documented codegen walls ignored. Reviews were read-only except
-where a fix is noted as landed.
-
-"Clean" means no behavioral divergence found in the reviewed regions.
-PROVEN functions additionally carry symbolic EAX-equivalence; the reviews
-below cover what the prover pattern-misses (store values, struct fields).
+Rounds 288–297 reviewed the nineteen then-residue regions against native
+instructions: constants, offsets, arguments, gates, bounds and stores. “Clean”
+means no behavioral divergence found in that reviewed region; it is not a byte
+match or exhaustive proof. PROVEN has its own modeled-input/call/bound limits.
+Current verdicts belong in metadata, current work in [TODO.md](TODO.md).
 
 | Function | VA | Residue | Verdict | Round |
 |---|---|---|---|---|
@@ -34,6 +28,7 @@ below cover what the prover pattern-misses (store values, struct fields).
 | cm_ProcessCommandQueue | 0x1000aac0 | 15 | Clean. Join fold taken-edge-identical. | 296 |
 | (outside functions) | 0x100092bc | 7 | OpenVfsStream +1-shifted jump table (net effect). | 287 |
 
-Score: clean-or-documented 19/19. Live-semantics work remaining: none;
-the two Spieler bugs are recorded with revisit conditions; everything else
-is codegen-shaped residue under documented walls.
+
+All nineteen regions were reviewed or documented. Two `gm_AllocSpieler`
+differences remained recorded with revisit conditions; one CrashDump gate bug
+was fixed. Residue and byte-count figures above are historical measurements.

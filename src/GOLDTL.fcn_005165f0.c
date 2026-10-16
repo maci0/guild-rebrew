@@ -5,7 +5,7 @@ extern unsigned char* g_868050;
 
 #include <string.h>
 
-void __cdecl fcn_00442a30(char*, int, int, int);
+void __cdecl SelectTextureSet(char*, int, int, int);
 
 char __cdecl fcn_005165f0(char* o, unsigned char* e)
 {
@@ -26,7 +26,7 @@ char __cdecl fcn_005165f0(char* o, unsigned char* e)
 	if (strncmp(o, "pfl_", 4) != 0 && strncmp(o, "vg_", 3) != 0 &&
 	    strncmp(o, "!vg_", 4) != 0) {
 		for (i = 0; i <= n; i++) {
-			fcn_00442a30(o, *(int*) (o + 0x1cc), i, 1);
+			SelectTextureSet(o, *(int*) (o + 0x1cc), i, 1);
 		}
 	}
 	return 1;

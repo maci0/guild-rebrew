@@ -17,7 +17,7 @@ char* __cdecl fcn_0040c120(char*, int, int);
 
 /* ADDRESS: GOLDTL 0x004ca3d0 */
 
-int __cdecl fcn_004ca3d0(char* a1, char* a2)
+int __cdecl cm_ExChrWalkToDummy(char* a1, char* a2)
 {
 	int saved;
 	char buf[0x80];

@@ -59,7 +59,7 @@ Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 Unit* __cdecl fcn_00508e40(int);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c5f60(int, int, int);
@@ -82,7 +82,7 @@ void __cdecl fcn_00505e20(int search, int buyer, int price, Order* o, int notify
 	fcn_004c4eb0("buy_building");
 	if (s->slot != 0xffff) {
 		fcn_0051af00(msg, 0x17e6, s, u->slot, price);
-		fcn_00545e80(((Entity*)g_7f4ca0)[s->slot].id, -1, msg, 0, 0x5ff, s->id, -1, 0, "_NACHRICHTEN_HS_30");
+		he_MessageBoxQuickjump(((Entity*)g_7f4ca0)[s->slot].id, -1, msg, 0, 0x5ff, s->id, -1, 0, "_NACHRICHTEN_HS_30");
 		fcn_004c51a0(((Entity*)g_7f4ca0)[s->slot].id, buyer, (*(char*)&g_773d75), price);
 		fcn_004c5f60(s->id, u->id, u->id);
 		if (notify != 0 && office->kind == 2) {

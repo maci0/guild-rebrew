@@ -8,7 +8,7 @@ extern char g_68bd78[];
 
 #include "Develop/Units/Msx/msx.h"
 char* __cdecl fcn_00426fd0(char*);
-void __cdecl fcn_00428230(char*);
+void __cdecl evt_RunScript(char*);
 void __cdecl fcn_004cfa00(int);
 
 void __cdecl fcn_004d2f10(void)
@@ -22,7 +22,7 @@ void __cdecl fcn_004d2f10(void)
 	g_7725c8 = 1;
 	p = fcn_00426fd0(g_68bd78);
 	if (p != 0) {
-		fcn_00428230(p);
+		evt_RunScript(p);
 		fcn_004cfa00(*(int*) (p + 0x100));
 	}
 	g_7725c8 = 0;

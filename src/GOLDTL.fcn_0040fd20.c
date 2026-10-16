@@ -10,7 +10,7 @@ void __cdecl fcn_00438b40(char* h, char* pos);
 void __cdecl fcn_00438cb0(char* h, char* rot);
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040fd20(char** name)
+int __cdecl SetCameraToDummy(char** name)
 {
 	char buf[0x80];
 	char* o;

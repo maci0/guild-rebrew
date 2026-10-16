@@ -132,8 +132,9 @@ evidence = "Reviewed original GOLD 0x4b1a20: complete 26-byte aligned fill/copy 
 source_hash = "de090241fe3667a720f7b371389bafda772a1629996a1a7948ff3094a370a88a"
 evidence = "Reviewed original GOLD 0x4b1d20: complete 26-byte aligned fill/copy macro at 0x4b1e11. Existing source uses operand homing, EBX scratch, invariant LEA(3*EDI)&3 and three REP passes. Original macro provenance is established by the compiler controls and stock LIBC/LIBCMT exclusions in docs/msvc6-allocator.md, The prelude is hand-written asm, and docs/codegen-walls.md section6b. Native macro bytes independently rechecked for this target; no assembly was added and no whole-function byte verdict is inferred."
 
-[definitions."src/GOLDTL.fcn_004b24c0.c".fcn_004b24c0.GOLD]
-source_hash = "2b16055f61bbfb623d8d74e65ef970021fdfd5c5e99edb5d0959dce3951516db"
+
+[definitions."src/GOLDTL.fcn_004b24c0.c".hst_ParseCommandline_1st_Pass.GOLD]
+source_hash = "4c6ba0fe838d56555575929da47cba5d45b175f95823e3a1292ead0ffafedbd8"
 evidence = "Reviewed original GOLD 0x4b2380: complete 26-byte aligned fill/copy macro at 0x4b23b7, 0x4b23e9. Existing source uses operand homing, EBX scratch, invariant LEA(3*EDI)&3 and three REP passes. Original macro provenance is established by the compiler controls and stock LIBC/LIBCMT exclusions in docs/msvc6-allocator.md, The prelude is hand-written asm, and docs/codegen-walls.md section6b. Native macro bytes independently rechecked for this target; no assembly was added and no whole-function byte verdict is inferred."
 
 [definitions."src/GOLDTL.fcn_004e8d10.c".fcn_004e8d10.GOLD]

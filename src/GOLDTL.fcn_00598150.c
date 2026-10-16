@@ -11,7 +11,7 @@ char __cdecl fcn_00598050(char* e, char* pfx);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
-int __cdecl fcn_00451840(char* a, char* b, float range);
+#include "client_scene_transform.h"
 
 void __cdecl fcn_00598150(int a1, char** list)
 {
@@ -39,7 +39,7 @@ void __cdecl fcn_00598150(int a1, char** list)
 				q = *(char**) (p + 0x61);
 				if (q != 0) {
 					fcn_00455350(q, q + 0x4c, pb);
-					if (fcn_00451840((char*) pb, (char*) pa, 100.0f)) {
+					if (fcn_00451840(pb, pa, 100.0f)) {
 						g_779148[i] = 0;
 						break;
 					}
@@ -55,7 +55,7 @@ void __cdecl fcn_00598150(int a1, char** list)
 					q = *(char**) (p + 0x61);
 					if (q != 0) {
 						fcn_00455350(q, q + 0x4c, pb);
-						if (fcn_00451840((char*) pb, (char*) pa, 100.0f)) {
+						if (fcn_00451840(pb, pa, 100.0f)) {
 							g_779148[i] = 0;
 							goto next;
 						}

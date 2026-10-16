@@ -1961,7 +1961,7 @@ void __cdecl fcn_00404a00(char*, int, ...);
 void __cdecl fcn_00510820(char*, unsigned char*, int);
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
 void* __cdecl fcn_00403ce0(char*, D3_OBJECT*);
-char __cdecl fcn_00442a30(D3_OBJECT*, void*, unsigned char, char);
+char __cdecl SelectTextureSet(D3_OBJECT*, void*, unsigned char, char);
 void __cdecl fcn_00402a00(char*, int);
 #endif
 
@@ -2198,7 +2198,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 				(owner_entity[2] == 5 || owner_entity[2] == 6 || owner_entity[2] == 7)) {
 				lod = (unsigned char) (owner_entity[0x54] + 0x67);
 				if (lod != 0)
-					fcn_00442a30(scene, scene->kontext, lod, 1);
+					SelectTextureSet(scene, scene->kontext, lod, 1);
 			}
 			scene->unbekannt_224 = 1;
 			fcn_00510820((char*) scene, (unsigned char*) slot, 1);

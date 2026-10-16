@@ -24,7 +24,7 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00546190(char*);
 
 void __cdecl fcn_00566950(char* e)
@@ -73,7 +73,7 @@ void __cdecl fcn_00566950(char* e)
 				amt = (int) fcn_0050bb50(*(unsigned short*) sel, g_773d75);
 				fcn_004c51f0(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
 				fcn_0051af00(buf, 0x1bb9, *(int*) (o + 0x16c), *(unsigned short*) sel * 2 + 0x9a8, amt);
-				fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, -1, buf, 0, 0x5f2, *(int*) (p + 1),
+				he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, -1, buf, 0, 0x5f2, *(int*) (p + 1),
 				    *(int*) (q + 2), 0, "_NACHRICHTEN_HS_09");
 			}
 		}

@@ -25,7 +25,7 @@ void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00546190(char*);
 
-void __cdecl fcn_00573c00(char* u)
+void __cdecl he_AllocGebaeudeBauen(char* u)
 {
 	char text[0x80];
 	char list[0x400];

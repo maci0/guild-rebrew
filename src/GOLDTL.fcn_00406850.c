@@ -33,7 +33,7 @@ struct Task {
 };
 
 Task* __cdecl fcn_0040c0a0(char* e);
-void __cdecl fcn_004066d0(Task* t);
+void __cdecl UsingGate(Task* t);
 #include "Develop/Units/Error/error_message.h"
 
 Task* __cdecl fcn_00406850(char* e, const char* name, const char* name2, int a, int b, int c)
@@ -44,7 +44,7 @@ Task* __cdecl fcn_00406850(char* e, const char* name, const char* name2, int a, 
 	if (t == 0) {
 		return 0;
 	}
-	t->run = fcn_004066d0;
+	t->run = UsingGate;
 	t->kind = 0x34;
 	strcpy(t->name, name);
 	strcpy(t->name2, name2);

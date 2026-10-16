@@ -1,7 +1,6 @@
 [project]
 name = "Europa 1400: The Guild"
 jobs = 8
-output_dir = "output"
 default_target = "Europa1400Gold_TL.exe"
 # Unified source tree: src/Develop mirrors D:\Develop. Every target scans
 # the whole tree; dedicated MODULE.0xVA metadata rows select each target's
@@ -36,7 +35,7 @@ binary = "original/Server/server.dll"
 raw_link = "build/server.dll"
 format = "pe"
 arch = "x86_32"
-marker = "SERVER"
+module = "SERVER"
 reversed_dir = "src"
 inventory_file = "db/inventory-server.dll.json"
 bin_dir = "bin/server.dll"
@@ -82,9 +81,7 @@ arch = "x86_32"
 reversed_dir = "src"
 inventory_file = "db/inventory-Europa1400Gold_TL.exe.json"
 bin_dir = "bin/Europa1400Gold_TL.exe"
-source_ext = ".c"
-origins = ["GAME"]
-marker = "GOLDTL"
+module = "GOLDTL"
 # Provisional link list — measured import/static names for the identified
 # external modules; adjust when the TL link lands (REBREW_EXTERNAL_LIBS).
 [targets."Europa1400Gold_TL.exe".external_libs]
@@ -108,7 +105,7 @@ defines = ["REBREW_GOLD"]
 # (DieGildeAddOn) and the TL client; client-only units (ch_, ai_, he_, d2_,
 # d3_, nt_, ob_, gs_, am_) are out of scope for server symbols but in scope
 # here. Marker GOLD distinguishes its annotations from SERVER/GOLDTL.
-marker = "GOLD"
+module = "GOLD"
 # Same code generator as TL; native CRT entry points and gzip errno access
 # identify the single-thread runtime. Keep this override local to Gold.
 compiler = { profile = "msvc-6.0-sp5-pp", base_cflags = '/nologo /c /ML /D "_WIN32_WINNT=0x0400" /Ireferences/zlib-1.1.3' }
@@ -118,8 +115,6 @@ arch = "x86_32"
 reversed_dir = "src"
 inventory_file = "db/inventory-Europa1400Gold.exe.json"
 bin_dir = "bin/Europa1400Gold.exe"
-source_ext = ".c"
-origins = ["GAME"]
 # Provisional link list — identified external modules; adjust when the
 # GOLD link lands (REBREW_EXTERNAL_LIBS).
 [targets."Europa1400Gold.exe".external_libs]
@@ -143,11 +138,3 @@ includes = "src/Develop"
 libs = ""
 cflags = "/O2 /Gd"
 base_cflags = "/nologo /c /MT /D \"_WIN32_WINNT=0x0400\" /Ireferences/zlib-1.1.3"
-timeout = 60
-
-[compiler.cflags_presets]
-MSVCRT = "/O1"
-ZLIB = "/O2"
-
-[targets."server.dll".crt_sources]
-MSVCRT = ""

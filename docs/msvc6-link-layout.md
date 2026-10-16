@@ -1,26 +1,16 @@
-# MSVC 6.0 LINK / PE layout: what decides the bytes outside `.text`
+# MSVC 6.0 LINK and PE layout
 
-> Tooling update (October 2026): old split-link, copied-data and duplicate diagnostic
-> scripts cited in historical entries have been retired. Use current `rebrew`
-> commands; see [the tooling audit](tooling-upstream.md) for replacements and the
-> project-specific tools that remain. Preserve these entries as evidence, not as
-> instructions to recreate obsolete helpers.
+Native storage, alignment, imports and relocation findings. Ordinary
+`build/server.dll` must equal the entire untouched reference; the server uses
+plain SP5 and stock libraries. See [the objective](../goal.md) and
+[current work](TODO.md).
 
-`rebrew test` and `docs/msvc6-c-shapes.md` cover function code generation.
-This companion records native storage, alignment, imports, and PE layout.
-New findings name their compiler/linker profile and saved evidence; distinguish
-the observed bytes from explanations still under investigation.
-
-**Current objective:** ordinary toolchain output must match the entire reference
-file. The canonical artifact is `build/server.dll`, built with plain MSVC 6.0
-SP5 and unchanged stock libraries, without postlink rewriting or manual padding.
-Sections 1–8 describe the earlier postlink pipeline and its historical numbers;
-their padding recipes and permissions do not apply to the current objective.
-Sections 9 onward record native-build findings. The reference remains
-`original/Server/server.dll`. Section 18 records that this configured copy
-has altered headers relative to matching local distribution copies; their
-four section contents are identical. Do not infer compiler provenance from
-the configured copy's missing Rich header.
+Sections 1–8 describe the retired postlink pipeline; their padding/overwrite
+recipes are historical. Section 18 also examined an earlier altered-header copy;
+current reference provenance is in [README.md](../README.md). Sections 9 onward
+record native-build experiments. Keep section numbers, target/compiler inputs,
+observations and receipt paths stable. Replacements for old scripts are in
+[tooling](tooling-upstream.md); full original notes are [archived](goal-history.md#full-notebooks).
 
 ## 1. Section geometry: three rules, and the arithmetic that follows
 

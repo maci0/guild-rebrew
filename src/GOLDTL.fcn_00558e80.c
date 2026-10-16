@@ -50,7 +50,7 @@ int __cdecl fcn_00558b70(char* e);
 
 void __cdecl fcn_0051af00(char*, char*, ...);
 
-void __cdecl fcn_00558e80(char* e)
+void __cdecl EvtSensenmann(char* e)
 {
 	int n;
 	char buf[0x200];

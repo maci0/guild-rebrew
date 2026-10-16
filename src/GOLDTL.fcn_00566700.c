@@ -25,7 +25,7 @@ void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl fcn_004c54c0(int, int, int, int);
 char* __cdecl fcn_005049a0(char*);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 void __cdecl fcn_00546190(char*);
 
@@ -64,7 +64,7 @@ void __cdecl fcn_00566700(char* u)
 		fcn_0051af00(text, 0x1bac, *(unsigned short*) h, *(char**) (h + 0x16c));
 		if (q != 0) {
 			h = *(char**) (h + 0x16c);
-			fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].owner, -1, text, 0, 0x5f2, *(int*) (h + 1), *(int*) (q + 2), 0,
+			he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].owner, -1, text, 0, 0x5f2, *(int*) (h + 1), *(int*) (q + 2), 0,
 			    "_NACHRICHTEN_HS_01");
 		} else {
 			fcn_00545d40(((struct house*)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)].owner, -1, text, 0, 0x5f2, "_NACHRICHTEN_HS_01");

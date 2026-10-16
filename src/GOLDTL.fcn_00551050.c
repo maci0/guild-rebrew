@@ -18,7 +18,7 @@ unsigned char* __cdecl gm_AddObjekt(void);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_0050ff70(unsigned char*, int);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00546190(char*);
 
 void __cdecl fcn_00551050(char* u)
@@ -45,7 +45,7 @@ void __cdecl fcn_00551050(char* u)
 			}
 			if (((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].type == 6) {
 				fcn_0051af00(text, 0x10b8, e);
-				fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, text, 0,
+				he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, text, 0,
 				    0x5ec, *(int*) (e + 1), -1, 0, 0);
 			}
 		}

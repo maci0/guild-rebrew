@@ -45,7 +45,7 @@ void __cdecl fcn_0045bfb0(Tex*);
 
 /* ADDRESS: GOLDTL 0x00442a30 */
 
-char __cdecl fcn_00442a30(Ent* e, Obj* o, unsigned char lod, char refresh)
+char __cdecl SelectTextureSet(Ent* e, Obj* o, unsigned char lod, char refresh)
 {
 	char ok;
 	int v14;

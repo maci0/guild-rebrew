@@ -20,7 +20,7 @@ int __cdecl fcn_004c4e70(char*);
 void __cdecl fcn_005356e0(void);
 void __cdecl fcn_00535960(void);
 
-int __cdecl fcn_005259f0(char* path)
+int __cdecl ls_SendGame(char* path)
 {
 	int n;
 	void* h;

@@ -37,7 +37,7 @@ char* __cdecl fcn_00508e40(int id);
 int __cdecl fcn_004c5620(int a1, char* e);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-void __cdecl fcn_00546ef0(int, char*, int, int);
+void __cdecl he_RegisterApEvent(int, char*, int, int);
 
 /* ADDRESS: GOLDTL 0x005516e0 */
 void __cdecl fcn_005516e0(char* t)
@@ -94,7 +94,7 @@ void __cdecl fcn_005516e0(char* t)
 		t[0xb8]++;
 		*(short*) (t + 0x56) += 0x18;
 		fcn_004c5620((unsigned char) t[0xb8] >= 3, t);
-		fcn_00546ef0(*(unsigned short*) p, buf, 0, -*(int*) (t + 0xb4));
+		he_RegisterApEvent(*(unsigned short*) p, buf, 0, -*(int*) (t + 0xb4));
 		return;
 	}
 }

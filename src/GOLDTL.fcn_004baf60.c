@@ -17,7 +17,7 @@ int __cdecl fcn_005c6270(void*, int);
 int __cdecl fcn_004bac00(void*, int*, float);
 void* __cdecl fcn_00503fe0(int, int, int);
 void __cdecl fcn_0051af00(void*, int, int, void*);
-void __cdecl fcn_00545e80(int, int, void*, int, int, int, int, int, void*);
+void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, void*);
 
 /* ADDRESS: GOLDTL 0x004baf60 */
 /* ADDRESS: GOLD 0x004bab90 */
@@ -49,7 +49,7 @@ int __cdecl fcn_004baf60(void* a1)
 				r = (int) (t * g_662cf8);
 				fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r, e);
 				len = strlen(buf);
-				fcn_00545e80(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4),
+				he_MessageBoxQuickjump(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4),
 				    buf, 0x100 < len, 0x603, *(int*) ((char*) e + 1), -1, 0, 0);
 				return 0;
 			}

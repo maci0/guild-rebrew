@@ -17,12 +17,14 @@ struct Node {
 
 /* ADDRESS: GOLD 0x00458a10 */
 
-void __cdecl fcn_00458a10(Node* n, float* in, float* out)
+void __cdecl fcn_00458a10(char* object, float* in, float* out)
 {
+	Node* n;
 	float x;
 	float y;
 	float z;
 
+	n = (Node*) object;
 	out[0] = n->pos[0] + in[0];
 	out[1] = n->pos[1] + in[1];
 	out[2] = n->pos[2] + in[2];

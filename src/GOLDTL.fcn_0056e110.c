@@ -13,7 +13,7 @@ char* __cdecl fcn_00508e40(int);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_00546190(char*);
 
-void __cdecl fcn_0056e110(char* e)
+void __cdecl he_AllocDiePlayer(char* e)
 {
 	char* p;
 

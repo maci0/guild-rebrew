@@ -16,10 +16,10 @@ int __cdecl fcn_00401500(int f, int count, void** out)
 	if (n != count) {
 		fcn_00430a80(f, n * size, 1);
 		*out = 0;
-		fcn_0041d9e0("array count mismatch");
+		fcn_0041d9e0("bio_rd_array_quick: Tried to load invalid array-sizes...");
 		return 0;
 	}
-	*out = m_alloc(size * count, "array");
+	*out = m_alloc(size * count, "bio:bio_rd_array_quick");
 	fcn_004306b0(*out, count, size, f);
 	return size;
 }

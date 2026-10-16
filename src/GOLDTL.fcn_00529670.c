@@ -3,7 +3,7 @@
 
 char* __cdecl fcn_00445600(char*, int, int, char*);
 void __cdecl fcn_00455350(char*, char*, float*);
-int __cdecl fcn_00451840(char*, float*, float);
+#include "client_scene_transform.h"
 
 int __cdecl fcn_00529670(char* a, char* b)
 {
@@ -22,7 +22,7 @@ int __cdecl fcn_00529670(char* a, char* b)
 		} else {
 			fcn_00455350(*(char**) (b + 0x61), *(char**) (b + 0x61) + 0x4c, pos);
 		}
-		if (fcn_00451840(*(char**) (d + 0x34) + 0x4c, pos, 750.0f) != 0 &&
+		if (fcn_00451840((float*) (*(char**) (d + 0x34) + 0x4c), pos, 750.0f) != 0 &&
 		    *(int*) (d + 0x128) == 0) {
 			return 1;
 		}

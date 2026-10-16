@@ -26,7 +26,7 @@ void __cdecl fcn_004c5360(void);
 char* __cdecl fcn_0050dc90(unsigned char*);
 char* __cdecl fcn_005049a0(unsigned char*);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00546190(char*);
 
 /* ADDRESS: GOLDTL 0x0055fd10 */
@@ -102,9 +102,9 @@ void __cdecl fcn_0055fd10(char* u)
 		w = fcn_005049a0(p);
 		fcn_0051af00(text, 0x1bba, p);
 		if (w != 0) {
-			fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), *(int*) (w + 2), 0, 0);
+			he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), *(int*) (w + 2), 0, 0);
 		} else {
-			fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), -1, 0, 0);
+			he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), -1, 0, 0);
 		}
 		fcn_00546190(u);
 		break;

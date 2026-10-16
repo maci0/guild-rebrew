@@ -6,7 +6,7 @@
 
 char* __cdecl fcn_0040b730(char*, char*);
 void __cdecl fcn_00425bf0(char*, unsigned int, const char*);
-int __cdecl fcn_00429ed0(const char*, void*, int, int, ...);
+int __cdecl evt_ImportCommand(const char*, void*, int, int, ...);
 
 /* ADDRESS: GOLDTL 0x0040cae0 */
 /* ADDRESS: GOLD 0x0040bbc0 */
@@ -78,47 +78,47 @@ int __cdecl fcn_0040dac0(char** character)
 /* ADDRESS: GOLD 0x0040d270 */
 void __cdecl ch_RegisterScriptCommands(void)
 {
-    fcn_00429ed0("CreateCharacter", (void*) fcn_0040c930, 1, 4, 6, 7, 7, 7);
-    fcn_00429ed0("CreateCharacterAtDummy", (void*) CreateCharacterAtDummy, 1, 3, 6, 1, 6);
-    fcn_00429ed0("KillCharacter", (void*) fcn_0040cad0, 5, 1, 1);
-    fcn_00429ed0("WalkToDummy", (void*) WalkToDummy, 5, 2, 1, 1);
-    fcn_00429ed0("WalkToDummyRotate", (void*) fcn_0040cba0, 5, 2, 1, 1);
-    fcn_00429ed0("WalkToDummyVerified", (void*) fcn_0040cd20, 5, 3, 1, 1, 1);
-    fcn_00429ed0("WalkToDummyRotateVerified", (void*) fcn_0040cc60, 5, 3, 1, 1, 1);
-    fcn_00429ed0("PlayAnimation", (void*) fcn_0040cde0, 5, 3, 1, 6, 1);
-    fcn_00429ed0("PlayAnimationSound", (void*) PlayCharacterAniSound, 5, 5, 1, 6, 1, 1, 6);
-    fcn_00429ed0("PlayAnimationScript", (void*) PlayCharacterAniScript, 5, 5, 1, 6, 1, 1, 6);
-    fcn_00429ed0("PlayAnimationScriptInt", (void*) PlayCharacterAniScriptInt, 5, 6, 1, 6, 1, 1, 6, 1);
-    fcn_00429ed0("GetCharacterHandle", (void*) fcn_0040d250, 1, 1, 6);
-    fcn_00429ed0("TakeObject", (void*) fcn_0040d2b0, 1, 4, 1, 6, 1, 1);
-    fcn_00429ed0("TakeObjectLeft", (void*) fcn_0040d360, 1, 4, 1, 6, 1, 1);
-    fcn_00429ed0("TakeObjectScript", (void*) TakeObjectScript, 1, 6, 1, 6, 1, 1, 1, 6);
-    fcn_00429ed0("GiveObject", (void*) fcn_0040d550, 1, 2, 1, 6);
-    fcn_00429ed0("DropObject", (void*) fcn_0040d580, 1, 4, 1, 6, 1, 1);
-    fcn_00429ed0("DropObjectLeft", (void*) fcn_0040d640, 1, 4, 1, 6, 1, 1);
-    fcn_00429ed0("SitDown", (void*) fcn_0040d700, 1, 2, 1, 6);
-    fcn_00429ed0("SitDownAtOnce", (void*) fcn_0040d790, 1, 2, 1, 6);
-    fcn_00429ed0("GetUp", (void*) fcn_0040d830, 1, 2, 1, 6);
-    fcn_00429ed0("SetCharacterCamera", (void*) SetCharacterCamera, 5, 2, 1, 6);
-    fcn_00429ed0("MoveCharacterCamera", (void*) MoveCharacterCamera, 5, 3, 1, 6, 1);
-    fcn_00429ed0("PreloadAnimation", (void*) fcn_0040da60, 5, 5, 1, 6, 6, 6, 6);
-    fcn_00429ed0("PreloadSitMesh", (void*) fcn_0040dac0, 5, 1, 1);
-    fcn_00429ed0("CharacterIdle", (void*) fcn_0040dad0, 1, 1, 1);
-    fcn_00429ed0("StopCharacter", (void*) fcn_0040db10, 5, 1, 1);
-    fcn_00429ed0("KillCharacterAnimations", (void*) fcn_0040db50, 5, 1, 1);
-    fcn_00429ed0("DummyBlocked", (void*) fcn_0040dbb0, 1, 2, 1, 1);
-    fcn_00429ed0("CharacterCount", (void*) fcn_0040cd70, 1, 0);
-    fcn_00429ed0("LookAtCharacter", (void*) fcn_0040dcd0, 5, 2, 1, 1);
-    fcn_00429ed0("LookAtObject", (void*) fcn_0040ddc0, 5, 2, 1, 1);
-    fcn_00429ed0("SetCharacterToDummy", (void*) fcn_0040de40, 5, 2, 1, 1);
-    fcn_00429ed0("CharacterSitting", (void*) CharacterSitting, 5, 1, 1);
-    fcn_00429ed0("GetCharacterSubObjectHandle", (void*) fcn_0040df40, 5, 2, 1, 6);
-    fcn_00429ed0("SetCharacterStepSample", (void*) fcn_0040df90, 5, 1, 6);
-    fcn_00429ed0("SetLowPoly", (void*) fcn_0040dfb0, 5, 2, 1, 1);
-    fcn_00429ed0("AttachObject", (void*) fcn_0040e000, 5, 3, 1, 6, 6);
-    fcn_00429ed0("SetCharacterTransperancy", (void*) fcn_0040e080, 5, 2, 1, 1);
-    fcn_00429ed0("CharacterSitsDown", (void*) CharacterSitsDown, 5, 1, 1);
-    fcn_00429ed0("FindInCharacterName", (void*) fcn_0040e150, 1, 2, 1, 6);
+    evt_ImportCommand("CreateCharacter", (void*) fcn_0040c930, 1, 4, 6, 7, 7, 7);
+    evt_ImportCommand("CreateCharacterAtDummy", (void*) CreateCharacterAtDummy, 1, 3, 6, 1, 6);
+    evt_ImportCommand("KillCharacter", (void*) fcn_0040cad0, 5, 1, 1);
+    evt_ImportCommand("WalkToDummy", (void*) WalkToDummy, 5, 2, 1, 1);
+    evt_ImportCommand("WalkToDummyRotate", (void*) fcn_0040cba0, 5, 2, 1, 1);
+    evt_ImportCommand("WalkToDummyVerified", (void*) fcn_0040cd20, 5, 3, 1, 1, 1);
+    evt_ImportCommand("WalkToDummyRotateVerified", (void*) fcn_0040cc60, 5, 3, 1, 1, 1);
+    evt_ImportCommand("PlayAnimation", (void*) fcn_0040cde0, 5, 3, 1, 6, 1);
+    evt_ImportCommand("PlayAnimationSound", (void*) PlayCharacterAniSound, 5, 5, 1, 6, 1, 1, 6);
+    evt_ImportCommand("PlayAnimationScript", (void*) PlayCharacterAniScript, 5, 5, 1, 6, 1, 1, 6);
+    evt_ImportCommand("PlayAnimationScriptInt", (void*) PlayCharacterAniScriptInt, 5, 6, 1, 6, 1, 1, 6, 1);
+    evt_ImportCommand("GetCharacterHandle", (void*) fcn_0040d250, 1, 1, 6);
+    evt_ImportCommand("TakeObject", (void*) fcn_0040d2b0, 1, 4, 1, 6, 1, 1);
+    evt_ImportCommand("TakeObjectLeft", (void*) fcn_0040d360, 1, 4, 1, 6, 1, 1);
+    evt_ImportCommand("TakeObjectScript", (void*) TakeObjectScript, 1, 6, 1, 6, 1, 1, 1, 6);
+    evt_ImportCommand("GiveObject", (void*) fcn_0040d550, 1, 2, 1, 6);
+    evt_ImportCommand("DropObject", (void*) fcn_0040d580, 1, 4, 1, 6, 1, 1);
+    evt_ImportCommand("DropObjectLeft", (void*) fcn_0040d640, 1, 4, 1, 6, 1, 1);
+    evt_ImportCommand("SitDown", (void*) fcn_0040d700, 1, 2, 1, 6);
+    evt_ImportCommand("SitDownAtOnce", (void*) fcn_0040d790, 1, 2, 1, 6);
+    evt_ImportCommand("GetUp", (void*) fcn_0040d830, 1, 2, 1, 6);
+    evt_ImportCommand("SetCharacterCamera", (void*) SetCharacterCamera, 5, 2, 1, 6);
+    evt_ImportCommand("MoveCharacterCamera", (void*) MoveCharacterCamera, 5, 3, 1, 6, 1);
+    evt_ImportCommand("PreloadAnimation", (void*) fcn_0040da60, 5, 5, 1, 6, 6, 6, 6);
+    evt_ImportCommand("PreloadSitMesh", (void*) fcn_0040dac0, 5, 1, 1);
+    evt_ImportCommand("CharacterIdle", (void*) fcn_0040dad0, 1, 1, 1);
+    evt_ImportCommand("StopCharacter", (void*) fcn_0040db10, 5, 1, 1);
+    evt_ImportCommand("KillCharacterAnimations", (void*) fcn_0040db50, 5, 1, 1);
+    evt_ImportCommand("DummyBlocked", (void*) fcn_0040dbb0, 1, 2, 1, 1);
+    evt_ImportCommand("CharacterCount", (void*) fcn_0040cd70, 1, 0);
+    evt_ImportCommand("LookAtCharacter", (void*) fcn_0040dcd0, 5, 2, 1, 1);
+    evt_ImportCommand("LookAtObject", (void*) fcn_0040ddc0, 5, 2, 1, 1);
+    evt_ImportCommand("SetCharacterToDummy", (void*) fcn_0040de40, 5, 2, 1, 1);
+    evt_ImportCommand("CharacterSitting", (void*) CharacterSitting, 5, 1, 1);
+    evt_ImportCommand("GetCharacterSubObjectHandle", (void*) fcn_0040df40, 5, 2, 1, 6);
+    evt_ImportCommand("SetCharacterStepSample", (void*) fcn_0040df90, 5, 1, 6);
+    evt_ImportCommand("SetLowPoly", (void*) fcn_0040dfb0, 5, 2, 1, 1);
+    evt_ImportCommand("AttachObject", (void*) fcn_0040e000, 5, 3, 1, 6, 6);
+    evt_ImportCommand("SetCharacterTransperancy", (void*) fcn_0040e080, 5, 2, 1, 1);
+    evt_ImportCommand("CharacterSitsDown", (void*) CharacterSitsDown, 5, 1, 1);
+    evt_ImportCommand("FindInCharacterName", (void*) fcn_0040e150, 1, 2, 1, 6);
 }
 
 #endif

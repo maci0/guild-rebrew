@@ -14,7 +14,7 @@ extern int g_7e35c0[];
 
 void __cdecl fcn_0059a340(void);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_00451840(float*, float*, float);
+#include "client_scene_transform.h"
 void __cdecl fcn_00412cf0(char*, float*, float*, int, int);
 
 void __cdecl fcn_0059a2a0(void)

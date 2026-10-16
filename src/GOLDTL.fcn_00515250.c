@@ -29,7 +29,7 @@ void __cdecl fcn_005016f0(int);
 void __cdecl fcn_00515010(void);
 void __cdecl fcn_00510100(void);
 
-void __cdecl fcn_00515250(void)
+void __cdecl init_LocalData(void)
 {
 	Entity** p;
 	int i;

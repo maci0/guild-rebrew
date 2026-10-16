@@ -49,7 +49,7 @@ void __cdecl fcn_005b39c0(void);
 void __cdecl fcn_005b3b60(void);
 void __cdecl fcn_005b4500(void);
 void __cdecl fcn_005b4c80(void);
-void __cdecl fcn_00472960(int, int, unsigned char, unsigned char, unsigned char);
+void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl fcn_005b4f70(void)
@@ -137,10 +137,10 @@ void __cdecl fcn_005b4f70(void)
 							k = v;
 						}
 						if (type != 13) {
-							fcn_00472960(x, y, k, 0, 0);
+							d2_Plot(x, y, k, 0, 0);
 						}
 						else {
-							fcn_00472960(x, y, k, 0, 0xff);
+							d2_Plot(x, y, k, 0, 0xff);
 						}
 					}
 					else if (type == 11 || type == 12) {
@@ -152,14 +152,14 @@ void __cdecl fcn_005b4f70(void)
 							k = v;
 						}
 						if (type == 12) {
-							fcn_00472960(x, y, 0, k, 0);
+							d2_Plot(x, y, 0, k, 0);
 						}
 						else {
-							fcn_00472960(x, y, 0x60, k, 0);
+							d2_Plot(x, y, 0x60, k, 0);
 						}
 					}
 					else {
-						fcn_00472960(x, y, pal[c].r, pal[c].g, pal[c].b);
+						d2_Plot(x, y, pal[c].r, pal[c].g, pal[c].b);
 					}
 				}
 			}

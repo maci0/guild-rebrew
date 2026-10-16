@@ -88,7 +88,7 @@ void __cdecl fcn_0042b700(void);
 void __cdecl fcn_005d5fe0(void);
 void __cdecl fcn_0052fbb0(void);
 
-int __cdecl fcn_005321c0(void)
+int __cdecl main_OpenEngine(void)
 {
 	char ini[0x104];
 	char path[0x104];

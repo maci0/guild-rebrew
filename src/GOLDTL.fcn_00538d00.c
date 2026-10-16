@@ -63,7 +63,7 @@ void __cdecl fcn_00418bc0(int);
 void __cdecl fcn_00419480(int);
 void __cdecl fcn_004226b0(char*);
 int __cdecl fcn_00422dc0(char*, int);
-void __cdecl fcn_0053f7b0(char*);
+void __cdecl main_PreloadSound(char*);
 void __cdecl fcn_0041fad0(int, int, int);
 void __cdecl fcn_005e2590(void);
 void __cdecl fcn_00525eb0(void);
@@ -141,7 +141,7 @@ int __cdecl fcn_00538d00(void)
 		fcn_004226b0(path);
 		(*(int*)&g_7747b8) = fcn_00422dc0("system.sbf", 0);
 		sprintf(ini, "%s\\include_sfx.ini", g_7e2080);
-		fcn_0053f7b0(ini);
+		main_PreloadSound(ini);
 	}
 	if (g_774930 != 0) {
 		fcn_0041fad0(2, 0x10, 44100);

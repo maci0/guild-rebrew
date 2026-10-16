@@ -40,7 +40,7 @@ extern void* g_6b5de0;
 extern void* g_6b5df4;
 #include "Develop/Units/Error/error_message.h"
 
-void __cdecl fcn_0041b700(void)
+void __cdecl dd_EndLines(void)
 {
 	if (g_6777ac == -1) {
 		fcn_0041d9e0("dd_EndLines called w/o dd_BeginLines!");

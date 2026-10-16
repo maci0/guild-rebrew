@@ -30,7 +30,7 @@ int __cdecl fcn_004c51f0(int a, int b, int c, int d, char e, int f);
 void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 void __cdecl fcn_0051af00(void* out, int id, ...);
 char* __cdecl fcn_0050dc90(unsigned char* e);
-void __cdecl fcn_00545e80(int a, int b, char* text, int c, int d, int e, int f, int g, char* h);
+void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, char* h);
 void __cdecl fcn_00500bb0(pos14_7f4c00* t, int a, int b, int c);
 int __cdecl fcn_004c5790(int kind, Req* r);
 void __cdecl fcn_00546190(char* o);
@@ -67,7 +67,7 @@ void __cdecl fcn_00563f60(char* o)
 						kind = 0x60b;
 					}
 				}
-				fcn_00545e80(((Ent*)g_7f4ca0)[*(unsigned short*) (o + 8)].handle, ((Ent*)g_7f4ca0)[*(unsigned short*) (o + 8)].handle, buf, 0, kind, *(int*) (e + 1), *(int*) (p + 2), 0, g_6a6248);
+				he_MessageBoxQuickjump(((Ent*)g_7f4ca0)[*(unsigned short*) (o + 8)].handle, ((Ent*)g_7f4ca0)[*(unsigned short*) (o + 8)].handle, buf, 0, kind, *(int*) (e + 1), *(int*) (p + 2), 0, g_6a6248);
 			}
 			if (gm_CheckEntityType(e)) {
 				Req m;

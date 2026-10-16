@@ -11,7 +11,7 @@ void __cdecl fcn_00439c90(char*);
 #ifdef REBREW_GOLD
 int __cdecl fcn_0043c7a0(int);
 #else
-void __cdecl fcn_004398d0(char*);
+void __cdecl d3_DisposeObject(char*);
 #endif
 
 /* Inferred name and placement; this removes a list node, not its hierarchy. */
@@ -90,7 +90,7 @@ char __cdecl d3_DestroyObject(D3_OBJECT* object)
 #ifdef REBREW_GOLD
 		fcn_0043c7a0((int) object);
 #else
-		fcn_004398d0((char*) object);
+		d3_DisposeObject((char*) object);
 #endif
 		return 1;
 	}

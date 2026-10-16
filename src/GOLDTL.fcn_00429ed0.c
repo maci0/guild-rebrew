@@ -19,7 +19,7 @@ int __cdecl fcn_00429e60(const char*);
 /* ADDRESS: GOLDTL 0x00429ed0 */
 
 /* evt_ImportCommand: registers a script command with its argument types. */
-int __cdecl fcn_00429ed0(const char* name, void* fn, int flags, int nargs, ...)
+int __cdecl evt_ImportCommand(const char* name, void* fn, int flags, int nargs, ...)
 {
 	int i;
 	int k;

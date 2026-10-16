@@ -4,7 +4,7 @@ int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl fcn_00505340(unsigned char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00455350(int, int, void*);
-int __cdecl fcn_00451840(void*, void*, float);
+#include "client_scene_transform.h"
 
 struct vec_4bc090 {
 	float x;
@@ -45,7 +45,7 @@ void __cdecl fcn_004bc090(char* a1)
 			break;
 		b = ents[i];
 		fcn_00455350(*(int*) (b + 0x61), *(int*) (b + 0x61) + 0x4c, &pb);
-		if (b != chosen && fcn_00451840(&pa, &pb, 6000.0f) != 0) {
+		if (b != chosen && fcn_00451840((float*) &pa, (float*) &pb, 6000.0f) != 0) {
 			pts[cnt++].x = pb.x;
 			pts[cnt++].y = pb.y;
 			pts[cnt++].z = pb.z;

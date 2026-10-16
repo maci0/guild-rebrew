@@ -20,7 +20,7 @@ void __cdecl fcn_00427c40(char*, int);
 /* ADDRESS: GOLDTL 0x00428230 */
 
 /* Starts a loaded script at its main entry point and logs the start. */
-int __cdecl fcn_00428230(char* script)
+int __cdecl evt_RunScript(char* script)
 {
 	int entry;
 	char msg[0x200];

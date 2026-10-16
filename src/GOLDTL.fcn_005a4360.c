@@ -10,7 +10,7 @@ int __cdecl fcn_00526010(void*, int, char);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_004c5150(int, int, char, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_00546190(char*);
 
 void __cdecl fcn_005a4360(char* e, char* s)
@@ -40,7 +40,7 @@ void __cdecl fcn_005a4360(char* e, char* s)
 	}
 	if (slot[2] != 5) {
 		fcn_0051af00(txt, 0x18d8, *g, e, *(int*) (s + 0xb4));
-		fcn_00545e80(*(int*) (slot + 4), -1, txt, 0, 0x5ec, *(int*) (e + 1), -1, 0, 0);
+		he_MessageBoxQuickjump(*(int*) (slot + 4), -1, txt, 0, 0x5ec, *(int*) (e + 1), -1, 0, 0);
 	}
 	fcn_00546190(s);
 }

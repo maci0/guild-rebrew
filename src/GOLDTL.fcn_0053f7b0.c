@@ -10,7 +10,7 @@ extern int g_7e1d60[0x80];
 int __cdecl fcn_004c3100(char*, int);
 int __cdecl fcn_00422dc0(char*, int);
 
-int __cdecl fcn_0053f7b0(char* path)
+int __cdecl main_PreloadSound(char* path)
 {
 	char line[0x100];
 	FILE* f;

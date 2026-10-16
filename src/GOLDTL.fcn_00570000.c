@@ -19,7 +19,7 @@ extern char g_7f4ca0[];
 
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_0056fe60(char*);
+void __cdecl he_OpenHelpEvents(char*);
 
 void __cdecl fcn_00570000(char* o)
 {
@@ -27,15 +27,15 @@ void __cdecl fcn_00570000(char* o)
 
 	k = gm_MapEntityStatRange(((struct s_7f4ca0*)g_7f4ca0)[g_774970].b164);
 	if (k == 1 || k == 2 || k == 3) {
-		fcn_0056fe60("help_events_hw");
+		he_OpenHelpEvents("help_events_hw");
 	} else if (k == 5 || k == 6) {
-		fcn_0056fe60("help_events_alpa");
+		he_OpenHelpEvents("help_events_alpa");
 	} else if (k == 7) {
-		fcn_0056fe60("help_events_kirche");
+		he_OpenHelpEvents("help_events_kirche");
 	} else if (k == 4) {
-		fcn_0056fe60("help_events_wirt");
+		he_OpenHelpEvents("help_events_wirt");
 	} else if (k == 11) {
-		fcn_0056fe60("help_events_dieb");
+		he_OpenHelpEvents("help_events_dieb");
 	}
 	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
 	*(int*) (o + 0x52) = (*(int*)g_77e0a0);

@@ -23,7 +23,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004379a0(int, char*, int, void*, char*);
 char __cdecl fcn_0052d970(char*, char*);
 int __cdecl fcn_00413190(int);
-void __cdecl fcn_00442a30(char*, int, int, int);
+void __cdecl SelectTextureSet(char*, int, int, int);
 
 void __cdecl fcn_0052da70(int idx)
 {
@@ -48,7 +48,7 @@ void __cdecl fcn_0052da70(int idx)
 			if (r != 0 && r->res != 0 && (r->kind == 5 || r->kind == 6 || r->kind == 7)) {
 				n = r->res - 0x599;
 				if (n != 0) {
-					fcn_00442a30(**(char***) (d + 0x124),
+					SelectTextureSet(**(char***) (d + 0x124),
 					             *(int*) (**(char***) (d + 0x124) + 0x1cc), n, 1);
 				}
 			}

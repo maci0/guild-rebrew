@@ -6,7 +6,7 @@ void __cdecl fcn_00425bf0(char*, int, const char*);
 /* ADDRESS: GOLDTL 0x00410230 */
 
 /* SetEmitterVelocity: sets a particle emitter's velocity in hundredths. */
-int __cdecl fcn_00410230(char** obj, int* x, int* y, int* z)
+int __cdecl SetEmitterVelocity(char** obj, int* x, int* y, int* z)
 {
 	char* o;
 	float vx;

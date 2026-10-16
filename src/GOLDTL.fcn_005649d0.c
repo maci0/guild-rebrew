@@ -27,7 +27,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00508e40(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 
 void __cdecl fcn_005649d0(char* e)
@@ -61,6 +61,6 @@ void __cdecl fcn_005649d0(char* e)
 		v = *(int*) (r + 0xe);
 	}
 	fcn_0051af00(buf, 0x18d7, *(unsigned short*) o, q, *(int*) (e + 0xb4), *(int*) (e + 0xc0), *(int*) (e + 0xb8), 0x5d, v);
-	fcn_00545e80(h->handle, -1, buf, 0, 0x5ec, *(int*) (q + 1), -1, 0, 0);
+	he_MessageBoxQuickjump(h->handle, -1, buf, 0, 0x5ec, *(int*) (q + 1), -1, 0, 0);
 	fcn_004f4f60(0xe, *(int*) (e + 0xc0), h->handle, *(int*) (e + 0xb0), *(int*) (q + 1));
 }

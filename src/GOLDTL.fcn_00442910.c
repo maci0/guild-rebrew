@@ -33,7 +33,7 @@ void __cdecl fcn_0045ce90(int* t);
 void __cdecl fcn_00438b40(Obj0442910* o, int a);
 void __cdecl fcn_00438cb0(Obj0442910* o, int a);
 void __cdecl fcn_00439aa0(Obj0442910* o);
-void __cdecl fcn_004398d0(Obj0442910* o);
+void __cdecl d3_DisposeObject(Obj0442910* o);
 
 Obj0442910* __cdecl fcn_00442910(Obj0442910* parent, int a, int b, int id)
 {
@@ -76,6 +76,6 @@ Obj0442910* __cdecl fcn_00442910(Obj0442910* parent, int a, int b, int id)
 		}
 		return o;
 	}
-	fcn_004398d0(o);
+	d3_DisposeObject(o);
 	return 0;
 }

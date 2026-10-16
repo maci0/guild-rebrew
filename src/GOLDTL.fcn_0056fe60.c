@@ -19,7 +19,7 @@ extern char g_6a3550[];
 int __cdecl fcn_0042dc90(char*);
 int __cdecl fcn_0064eeec(const char*);
 
-void __cdecl fcn_0056fe60(char* name)
+void __cdecl he_OpenHelpEvents(char* name)
 {
 	char delim[2] = ":";
 	char line[0x100];

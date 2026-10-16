@@ -563,8 +563,31 @@
   },
   {
     "va": 4222384,
-    "size": 304,
-    "name": "fcn.00406db0"
+    "size": 192,
+    "name": "fcn.00406db0",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 192,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.924539+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4222576,
+    "size": 103,
+    "name": "fcn.00406e70",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 103,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.928975+00:00"
+      }
+    ]
   },
   {
     "va": 4222688,
@@ -573,8 +596,31 @@
   },
   {
     "va": 4223792,
-    "size": 736,
-    "name": "fcn.00407330"
+    "size": 96,
+    "name": "fcn.00407330",
+    "extent_history": [
+      {
+        "old_size": 736,
+        "new_size": 96,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.287500+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4223888,
+    "size": 632,
+    "name": "fcn.00407390",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 632,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.290366+00:00"
+      }
+    ]
   },
   {
     "va": 4224528,
@@ -602,6 +648,20 @@
         "reason": "Goal55 native-4079d0.json: return at 0x4079ed; two NOPs then a separate prologue at 0x4079f0. Old 960-byte discovery extent swallowed subsequent bodies. Retain their bytes as unassigned code, not function padding.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-15T18:51:51.414421+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4225520,
+    "size": 915,
+    "name": "fcn.004079f0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 915,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.293605+00:00"
       }
     ]
   },
@@ -890,8 +950,31 @@
   },
   {
     "va": 4247264,
-    "size": 272,
-    "name": "fcn.0040cee0"
+    "size": 208,
+    "name": "fcn.0040cee0",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 208,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.928998+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4247472,
+    "size": 51,
+    "name": "fcn.0040cfb0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 51,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.933032+00:00"
+      }
+    ]
   },
   {
     "va": 4247536,
@@ -1186,8 +1269,38 @@
   },
   {
     "va": 4254912,
-    "size": 128,
-    "name": "fcn.0040ecc0"
+    "size": 64,
+    "name": "fcn.0040ecc0",
+    "extent_history": [
+      {
+        "old_size": 128,
+        "new_size": 64,
+        "reason": "Independent native ecmd_LoadScene adapter at0x40ed00:55code bytes+9NOP after the separate64byte matched0x40ecc0 body. Exact diagnostic, external callback xref and complete native instructions; existing64byte verification hash remains unchanged. Preserve128=64+64; evidence .scratch/goal71/scene-loader/boundary-review.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:29:49.626570+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4254976,
+    "size": 55,
+    "name": "fcn.0040ed00",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 64,
+        "reason": "Independent native ecmd_LoadScene adapter at0x40ed00:55code bytes+9NOP after the separate64byte matched0x40ecc0 body. Exact diagnostic, external callback xref and complete native instructions; existing64byte verification hash remains unchanged. Preserve128=64+64; evidence .scratch/goal71/scene-loader/boundary-review.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:29:49.629308+00:00"
+      },
+      {
+        "old_size": 64,
+        "new_size": 55,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:37:00.384320+00:00"
+      }
+    ]
   },
   {
     "va": 4255040,
@@ -1216,8 +1329,31 @@
   },
   {
     "va": 4256768,
-    "size": 336,
-    "name": "fcn.0040f400"
+    "size": 112,
+    "name": "fcn.0040f400",
+    "extent_history": [
+      {
+        "old_size": 336,
+        "new_size": 112,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.293630+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4256880,
+    "size": 64,
+    "name": "fcn.0040f470",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.297312+00:00"
+      }
+    ]
   },
   {
     "va": 4257104,
@@ -1876,8 +2012,31 @@
   },
   {
     "va": 4295600,
-    "size": 176,
-    "name": "fcn.00418bb0"
+    "size": 16,
+    "name": "fcn.00418bb0",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.297361+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4295616,
+    "size": 154,
+    "name": "fcn.00418bc0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 154,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.299894+00:00"
+      }
+    ]
   },
   {
     "va": 4295776,
@@ -3755,8 +3914,31 @@
   },
   {
     "va": 4384384,
-    "size": 192,
-    "name": "fcn.0042e680"
+    "size": 16,
+    "name": "fcn.0042e680",
+    "extent_history": [
+      {
+        "old_size": 192,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.299913+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4384400,
+    "size": 161,
+    "name": "fcn.0042e690",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 161,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.303432+00:00"
+      }
+    ]
   },
   {
     "va": 4384576,
@@ -3945,8 +4127,31 @@
   },
   {
     "va": 4400144,
-    "size": 4976,
-    "name": "fcn.00432410"
+    "size": 111,
+    "name": "fcn.00432410",
+    "extent_history": [
+      {
+        "old_size": 4976,
+        "new_size": 111,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:47:56.235092+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4400256,
+    "size": 4850,
+    "name": "fcn.00432480",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 4850,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:47:56.237950+00:00"
+      }
+    ]
   },
   {
     "va": 4405120,
@@ -4783,8 +4988,31 @@
   },
   {
     "va": 4478464,
-    "size": 224,
-    "name": "fcn.00445600"
+    "size": 128,
+    "name": "fcn.00445600",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 128,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.303456+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4478592,
+    "size": 81,
+    "name": "fcn.00445680",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 81,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.306753+00:00"
+      }
+    ]
   },
   {
     "va": 4478688,
@@ -4888,13 +5116,31 @@
   },
   {
     "va": 4485392,
-    "size": 3360,
-    "name": "fcn.00447110"
+    "size": 3348,
+    "name": "fcn.00447110",
+    "extent_history": [
+      {
+        "old_size": 3360,
+        "new_size": 3348,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:47:56.238001+00:00"
+      }
+    ]
   },
   {
     "va": 4488752,
-    "size": 1328,
-    "name": "fcn.00447e30"
+    "size": 1319,
+    "name": "fcn.00447e30",
+    "extent_history": [
+      {
+        "old_size": 1328,
+        "new_size": 1319,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:47:56.238007+00:00"
+      }
+    ]
   },
   {
     "va": 4490080,
@@ -5727,8 +5973,31 @@
   },
   {
     "va": 4549872,
-    "size": 256,
-    "name": "fcn.00456cf0"
+    "size": 96,
+    "name": "fcn.00456cf0",
+    "extent_history": [
+      {
+        "old_size": 256,
+        "new_size": 96,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.933053+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4549968,
+    "size": 154,
+    "name": "fcn.00456d50",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 154,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.937893+00:00"
+      }
+    ]
   },
   {
     "va": 4550128,
@@ -6797,8 +7066,31 @@
   },
   {
     "va": 4617696,
-    "size": 507,
-    "name": "fcn.004675e0"
+    "size": 16,
+    "name": "fcn.004675e0",
+    "extent_history": [
+      {
+        "old_size": 507,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.306804+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4617712,
+    "size": 491,
+    "name": "fcn.004675f0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 491,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.309337+00:00"
+      }
+    ]
   },
   {
     "va": 4618208,
@@ -6952,8 +7244,31 @@
   },
   {
     "va": 4631600,
-    "size": 192,
-    "name": "fcn.0046ac30"
+    "size": 16,
+    "name": "fcn.0046ac30",
+    "extent_history": [
+      {
+        "old_size": 192,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.309345+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4631616,
+    "size": 167,
+    "name": "fcn.0046ac40",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 167,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.313273+00:00"
+      }
+    ]
   },
   {
     "va": 4631792,
@@ -8112,8 +8427,31 @@
   },
   {
     "va": 4705776,
-    "size": 94,
-    "name": "fcn.0047cdf0"
+    "size": 16,
+    "name": "fcn.0047cdf0",
+    "extent_history": [
+      {
+        "old_size": 94,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.313282+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4705792,
+    "size": 78,
+    "name": "fcn.0047ce00",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 78,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.316039+00:00"
+      }
+    ]
   },
   {
     "va": 4705872,
@@ -8122,8 +8460,31 @@
   },
   {
     "va": 4705904,
-    "size": 192,
-    "name": "fcn.0047ce70"
+    "size": 32,
+    "name": "fcn.0047ce70",
+    "extent_history": [
+      {
+        "old_size": 192,
+        "new_size": 32,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.316045+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4705936,
+    "size": 158,
+    "name": "fcn.0047ce90",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 158,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.319012+00:00"
+      }
+    ]
   },
   {
     "va": 4706096,
@@ -8462,8 +8823,31 @@
   },
   {
     "va": 4777136,
-    "size": 720,
-    "name": "fcn.0048e4b0"
+    "size": 256,
+    "name": "fcn.0048e4b0",
+    "extent_history": [
+      {
+        "old_size": 720,
+        "new_size": 256,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.319019+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4777392,
+    "size": 456,
+    "name": "fcn.0048e5b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 456,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.322680+00:00"
+      }
+    ]
   },
   {
     "va": 4777856,
@@ -8772,8 +9156,31 @@
   },
   {
     "va": 4798656,
-    "size": 368,
-    "name": "fcn.004938c0"
+    "size": 96,
+    "name": "fcn.004938c0",
+    "extent_history": [
+      {
+        "old_size": 368,
+        "new_size": 96,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.322685+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4798752,
+    "size": 264,
+    "name": "fcn.00493920",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 264,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.325208+00:00"
+      }
+    ]
   },
   {
     "va": 4799024,
@@ -8832,8 +9239,31 @@
   },
   {
     "va": 4802288,
-    "size": 304,
-    "name": "fcn.004946f0"
+    "size": 80,
+    "name": "fcn.004946f0",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 80,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.325213+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4802368,
+    "size": 213,
+    "name": "fcn.00494740",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 213,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.328932+00:00"
+      }
+    ]
   },
   {
     "va": 4802592,
@@ -8967,8 +9397,31 @@
   },
   {
     "va": 4814560,
-    "size": 688,
-    "name": "fcn.004976e0"
+    "size": 496,
+    "name": "fcn.004976e0",
+    "extent_history": [
+      {
+        "old_size": 688,
+        "new_size": 496,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.328939+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4815056,
+    "size": 180,
+    "name": "fcn.004978d0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 180,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.331823+00:00"
+      }
+    ]
   },
   {
     "va": 4815248,
@@ -9027,8 +9480,31 @@
   },
   {
     "va": 4822208,
-    "size": 384,
-    "name": "fcn.004994c0"
+    "size": 240,
+    "name": "fcn.004994c0",
+    "extent_history": [
+      {
+        "old_size": 384,
+        "new_size": 240,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.331833+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4822448,
+    "size": 131,
+    "name": "fcn.004995b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 131,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.334408+00:00"
+      }
+    ]
   },
   {
     "va": 4822592,
@@ -9132,8 +9608,31 @@
   },
   {
     "va": 4832192,
-    "size": 560,
-    "name": "fcn.0049bbc0"
+    "size": 400,
+    "name": "fcn.0049bbc0",
+    "extent_history": [
+      {
+        "old_size": 560,
+        "new_size": 400,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.334413+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4832592,
+    "size": 145,
+    "name": "fcn.0049bd50",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 145,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.337762+00:00"
+      }
+    ]
   },
   {
     "va": 4832752,
@@ -9142,8 +9641,31 @@
   },
   {
     "va": 4832784,
-    "size": 800,
-    "name": "fcn.0049be10"
+    "size": 400,
+    "name": "fcn.0049be10",
+    "extent_history": [
+      {
+        "old_size": 800,
+        "new_size": 400,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.337778+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4833184,
+    "size": 389,
+    "name": "fcn.0049bfa0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 389,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.340481+00:00"
+      }
+    ]
   },
   {
     "va": 4833584,
@@ -9172,8 +9694,31 @@
   },
   {
     "va": 4835296,
-    "size": 160,
-    "name": "fcn.0049c7e0"
+    "size": 32,
+    "name": "fcn.0049c7e0",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 32,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.340489+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4835328,
+    "size": 120,
+    "name": "fcn.0049c800",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 120,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.343137+00:00"
+      }
+    ]
   },
   {
     "va": 4835456,
@@ -9232,8 +9777,31 @@
   },
   {
     "va": 4837888,
-    "size": 256,
-    "name": "fcn.0049d200"
+    "size": 32,
+    "name": "fcn.0049d200",
+    "extent_history": [
+      {
+        "old_size": 256,
+        "new_size": 32,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.343155+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4837920,
+    "size": 213,
+    "name": "fcn.0049d220",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 213,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.347041+00:00"
+      }
+    ]
   },
   {
     "va": 4838144,
@@ -9397,8 +9965,31 @@
   },
   {
     "va": 4853280,
-    "size": 784,
-    "name": "fcn.004a0e20"
+    "size": 608,
+    "name": "fcn.004a0e20",
+    "extent_history": [
+      {
+        "old_size": 784,
+        "new_size": 608,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.347052+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4853888,
+    "size": 176,
+    "name": "fcn.004a1080",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 176,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.349639+00:00"
+      }
+    ]
   },
   {
     "va": 4854064,
@@ -9872,8 +10463,31 @@
   },
   {
     "va": 4897040,
-    "size": 720,
-    "name": "fcn.004ab910"
+    "size": 512,
+    "name": "fcn.004ab910",
+    "extent_history": [
+      {
+        "old_size": 720,
+        "new_size": 512,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.349650+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4897552,
+    "size": 194,
+    "name": "fcn.004abb10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 194,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.352740+00:00"
+      }
+    ]
   },
   {
     "va": 4897760,
@@ -10637,8 +11251,31 @@
   },
   {
     "va": 4940912,
-    "size": 272,
-    "name": "fcn.004b6470"
+    "size": 64,
+    "name": "fcn.004b6470",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.352752+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4940976,
+    "size": 204,
+    "name": "fcn.004b64b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 204,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.356498+00:00"
+      }
+    ]
   },
   {
     "va": 4941184,
@@ -11032,8 +11669,31 @@
   },
   {
     "va": 4968112,
-    "size": 672,
-    "name": "fcn.004bceb0"
+    "size": 112,
+    "name": "fcn.004bceb0",
+    "extent_history": [
+      {
+        "old_size": 672,
+        "new_size": 112,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.356506+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4968224,
+    "size": 546,
+    "name": "fcn.004bcf20",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 546,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.358992+00:00"
+      }
+    ]
   },
   {
     "va": 4968784,
@@ -11142,8 +11802,31 @@
   },
   {
     "va": 4973856,
-    "size": 49,
-    "name": "fcn.004be520"
+    "size": 16,
+    "name": "fcn.004be520",
+    "extent_history": [
+      {
+        "old_size": 49,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.358995+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4973872,
+    "size": 33,
+    "name": "fcn.004be530",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 33,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.362625+00:00"
+      }
+    ]
   },
   {
     "va": 4973920,
@@ -12804,8 +13487,31 @@
   },
   {
     "va": 5049456,
-    "size": 642,
-    "name": "fcn.004d0c70"
+    "size": 592,
+    "name": "fcn.004d0c70",
+    "extent_history": [
+      {
+        "old_size": 642,
+        "new_size": 592,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.362632+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5050048,
+    "size": 50,
+    "name": "fcn.004d0ec0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 50,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.365547+00:00"
+      }
+    ]
   },
   {
     "va": 5050112,
@@ -12859,8 +13565,31 @@
   },
   {
     "va": 5053056,
-    "size": 624,
-    "name": "fcn.004d1a80"
+    "size": 80,
+    "name": "fcn.004d1a80",
+    "extent_history": [
+      {
+        "old_size": 624,
+        "new_size": 80,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.365553+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5053136,
+    "size": 539,
+    "name": "fcn.004d1ad0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 539,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.368135+00:00"
+      }
+    ]
   },
   {
     "va": 5053680,
@@ -12984,13 +13713,59 @@
   },
   {
     "va": 5064256,
-    "size": 336,
-    "name": "fcn.004d4640"
+    "size": 192,
+    "name": "fcn.004d4640",
+    "extent_history": [
+      {
+        "old_size": 336,
+        "new_size": 192,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.368141+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5064448,
+    "size": 139,
+    "name": "fcn.004d4700",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 139,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.372150+00:00"
+      }
+    ]
   },
   {
     "va": 5064592,
-    "size": 1696,
-    "name": "fcn.004d4790"
+    "size": 448,
+    "name": "fcn.004d4790",
+    "extent_history": [
+      {
+        "old_size": 1696,
+        "new_size": 448,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.372157+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5065040,
+    "size": 1070,
+    "name": "fcn.004d4950",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1070,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.374778+00:00"
+      }
+    ]
   },
   {
     "va": 5066288,
@@ -13044,8 +13819,17 @@
   },
   {
     "va": 5071216,
-    "size": 4928,
-    "name": "fcn.004d6170"
+    "size": 4923,
+    "name": "fcn.004d6170",
+    "extent_history": [
+      {
+        "old_size": 4928,
+        "new_size": 4923,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:47:56.238013+00:00"
+      }
+    ]
   },
   {
     "va": 5076144,
@@ -13114,8 +13898,17 @@
   },
   {
     "va": 5082368,
-    "size": 4640,
-    "name": "fcn.004d8d00"
+    "size": 4632,
+    "name": "fcn.004d8d00",
+    "extent_history": [
+      {
+        "old_size": 4640,
+        "new_size": 4632,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:47:56.238020+00:00"
+      }
+    ]
   },
   {
     "va": 5087008,
@@ -13193,6 +13986,20 @@
         "reason": "Goal57 complete callback ends after RET at4dcf33 and seven native switch entries4dcf34..4dcf4f. Next prologue is4dcf50. Shared ordinary C matches1920 bytes; preserve subsequent court code as unassigned, not alignment or progress.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-15T20:41:04.067960+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5099344,
+    "size": 8798,
+    "name": "fcn.004dcf50",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 8798,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.942042+00:00"
       }
     ]
   },
@@ -13287,8 +14094,31 @@
   },
   {
     "va": 5118304,
-    "size": 1344,
-    "name": "fcn.004e1960"
+    "size": 416,
+    "name": "fcn.004e1960",
+    "extent_history": [
+      {
+        "old_size": 1344,
+        "new_size": 416,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.942072+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5118720,
+    "size": 920,
+    "name": "fcn.004e1b00",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 920,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.946212+00:00"
+      }
+    ]
   },
   {
     "va": 5119648,
@@ -13317,8 +14147,31 @@
   },
   {
     "va": 5122880,
-    "size": 2144,
-    "name": "fcn.004e2b40"
+    "size": 1920,
+    "name": "fcn.004e2b40",
+    "extent_history": [
+      {
+        "old_size": 2144,
+        "new_size": 1920,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.374784+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5124800,
+    "size": 218,
+    "name": "fcn.004e32c0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 218,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.378116+00:00"
+      }
+    ]
   },
   {
     "va": 5125024,
@@ -14118,8 +14971,31 @@
   },
   {
     "va": 5163344,
-    "size": 80,
-    "name": "fcn.004ec950"
+    "size": 16,
+    "name": "fcn.004ec950",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.378122+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5163360,
+    "size": 59,
+    "name": "fcn.004ec960",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 59,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.381348+00:00"
+      }
+    ]
   },
   {
     "va": 5163424,
@@ -14158,8 +15034,31 @@
   },
   {
     "va": 5164320,
-    "size": 272,
-    "name": "fcn.004ecd20"
+    "size": 48,
+    "name": "fcn.004ecd20",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 48,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.381353+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5164368,
+    "size": 221,
+    "name": "fcn.004ecd50",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 221,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.383857+00:00"
+      }
+    ]
   },
   {
     "va": 5164592,
@@ -15847,8 +16746,17 @@
   },
   {
     "va": 5259232,
-    "size": 288,
-    "name": "fcn.00503fe0"
+    "size": 284,
+    "name": "fcn.00503fe0",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 284,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:47:56.238024+00:00"
+      }
+    ]
   },
   {
     "va": 5259520,
@@ -16637,8 +17545,31 @@
   },
   {
     "va": 5308656,
-    "size": 113,
-    "name": "fcn.005100f0"
+    "size": 16,
+    "name": "fcn.005100f0",
+    "extent_history": [
+      {
+        "old_size": 113,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.383863+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5308672,
+    "size": 97,
+    "name": "fcn.00510100",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 97,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.387763+00:00"
+      }
+    ]
   },
   {
     "va": 5308784,
@@ -16817,8 +17748,31 @@
   },
   {
     "va": 5328128,
-    "size": 128,
-    "name": "fcn.00514d00"
+    "size": 48,
+    "name": "fcn.00514d00",
+    "extent_history": [
+      {
+        "old_size": 128,
+        "new_size": 48,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.387769+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5328176,
+    "size": 67,
+    "name": "fcn.00514d30",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 67,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.390599+00:00"
+      }
+    ]
   },
   {
     "va": 5328256,
@@ -17025,8 +17979,17 @@
   },
   {
     "va": 5353216,
-    "size": 6464,
-    "name": "fcn.0051af00"
+    "size": 6455,
+    "name": "fcn.0051af00",
+    "extent_history": [
+      {
+        "old_size": 6464,
+        "new_size": 6455,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:47:56.238028+00:00"
+      }
+    ]
   },
   {
     "va": 5359680,
@@ -17530,8 +18493,31 @@
   },
   {
     "va": 5429280,
-    "size": 336,
-    "name": "fcn.0052d820"
+    "size": 64,
+    "name": "fcn.0052d820",
+    "extent_history": [
+      {
+        "old_size": 336,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.390609+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5429344,
+    "size": 263,
+    "name": "fcn.0052d860",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 263,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.393183+00:00"
+      }
+    ]
   },
   {
     "va": 5429616,
@@ -18025,8 +19011,31 @@
   },
   {
     "va": 5474192,
-    "size": 182,
-    "name": "fcn.00538790"
+    "size": 48,
+    "name": "fcn.00538790",
+    "extent_history": [
+      {
+        "old_size": 182,
+        "new_size": 48,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.393188+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5474240,
+    "size": 134,
+    "name": "fcn.005387c0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 134,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.396845+00:00"
+      }
+    ]
   },
   {
     "va": 5474384,
@@ -18225,8 +19234,31 @@
   },
   {
     "va": 5503264,
-    "size": 861,
-    "name": "fcn.0053f920"
+    "size": 352,
+    "name": "fcn.0053f920",
+    "extent_history": [
+      {
+        "old_size": 861,
+        "new_size": 352,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.396854+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5503616,
+    "size": 509,
+    "name": "fcn.0053fa80",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 509,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.399544+00:00"
+      }
+    ]
   },
   {
     "va": 5504128,
@@ -18410,8 +19442,31 @@
   },
   {
     "va": 5530528,
-    "size": 486,
-    "name": "fcn.005463a0"
+    "size": 224,
+    "name": "fcn.005463a0",
+    "extent_history": [
+      {
+        "old_size": 486,
+        "new_size": 224,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.946235+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5530752,
+    "size": 262,
+    "name": "fcn.00546480",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 262,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.950023+00:00"
+      }
+    ]
   },
   {
     "va": 5531024,
@@ -18625,8 +19680,31 @@
   },
   {
     "va": 5544832,
-    "size": 198,
-    "name": "fcn.00549b80"
+    "size": 16,
+    "name": "fcn.00549b80",
+    "extent_history": [
+      {
+        "old_size": 198,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.399555+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5544848,
+    "size": 182,
+    "name": "fcn.00549b90",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 182,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.402579+00:00"
+      }
+    ]
   },
   {
     "va": 5545040,
@@ -18655,8 +19733,31 @@
   },
   {
     "va": 5550384,
-    "size": 371,
-    "name": "fcn.0054b130"
+    "size": 32,
+    "name": "fcn.0054b130",
+    "extent_history": [
+      {
+        "old_size": 371,
+        "new_size": 32,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.402593+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5550416,
+    "size": 339,
+    "name": "fcn.0054b150",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 339,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.406378+00:00"
+      }
+    ]
   },
   {
     "va": 5550768,
@@ -18675,8 +19776,31 @@
   },
   {
     "va": 5552128,
-    "size": 320,
-    "name": "fcn.0054b800"
+    "size": 32,
+    "name": "fcn.0054b800",
+    "extent_history": [
+      {
+        "old_size": 320,
+        "new_size": 32,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.406392+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5552160,
+    "size": 288,
+    "name": "fcn.0054b820",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 288,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.408995+00:00"
+      }
+    ]
   },
   {
     "va": 5552448,
@@ -18700,8 +19824,31 @@
   },
   {
     "va": 5556000,
-    "size": 752,
-    "name": "fcn.0054c720"
+    "size": 224,
+    "name": "fcn.0054c720",
+    "extent_history": [
+      {
+        "old_size": 752,
+        "new_size": 224,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.950044+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5556224,
+    "size": 516,
+    "name": "fcn.0054c800",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 516,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.962012+00:00"
+      }
+    ]
   },
   {
     "va": 5556752,
@@ -18720,8 +19867,31 @@
   },
   {
     "va": 5560384,
-    "size": 2704,
-    "name": "fcn.0054d840"
+    "size": 464,
+    "name": "fcn.0054d840",
+    "extent_history": [
+      {
+        "old_size": 2704,
+        "new_size": 464,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.409002+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5560848,
+    "size": 2230,
+    "name": "fcn.0054da10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2230,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.412518+00:00"
+      }
+    ]
   },
   {
     "va": 5563088,
@@ -18825,8 +19995,31 @@
   },
   {
     "va": 5573536,
-    "size": 512,
-    "name": "fcn.00550ba0"
+    "size": 64,
+    "name": "fcn.00550ba0",
+    "extent_history": [
+      {
+        "old_size": 512,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.412525+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5573600,
+    "size": 436,
+    "name": "fcn.00550be0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 436,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.415663+00:00"
+      }
+    ]
   },
   {
     "va": 5574048,
@@ -18835,8 +20028,31 @@
   },
   {
     "va": 5574112,
-    "size": 624,
-    "name": "fcn.00550de0"
+    "size": 560,
+    "name": "fcn.00550de0",
+    "extent_history": [
+      {
+        "old_size": 624,
+        "new_size": 560,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.415680+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5574672,
+    "size": 61,
+    "name": "fcn.00551010",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 61,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.418263+00:00"
+      }
+    ]
   },
   {
     "va": 5574736,
@@ -18845,18 +20061,115 @@
   },
   {
     "va": 5575008,
-    "size": 176,
-    "name": "fcn.00551160"
+    "size": 64,
+    "name": "fcn.00551160",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.418268+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5575072,
+    "size": 109,
+    "name": "fcn.005511a0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 109,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.421111+00:00"
+      }
+    ]
   },
   {
     "va": 5575184,
-    "size": 432,
-    "name": "fcn.00551210"
+    "size": 64,
+    "name": "fcn.00551210",
+    "extent_history": [
+      {
+        "old_size": 432,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.421124+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5575248,
+    "size": 159,
+    "name": "fcn.00551250",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 159,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.424132+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5575472,
+    "size": 137,
+    "name": "fcn.00551330",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 137,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.426581+00:00"
+      }
+    ]
   },
   {
     "va": 5575616,
-    "size": 800,
-    "name": "fcn.005513c0"
+    "size": 16,
+    "name": "fcn.005513c0",
+    "extent_history": [
+      {
+        "old_size": 800,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.426599+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5575632,
+    "size": 639,
+    "name": "fcn.005513d0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 639,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.429934+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5576272,
+    "size": 135,
+    "name": "fcn.00551650",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 135,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.432874+00:00"
+      }
+    ]
   },
   {
     "va": 5576416,
@@ -18870,8 +20183,31 @@
   },
   {
     "va": 5577248,
-    "size": 816,
-    "name": "fcn.00551a20"
+    "size": 512,
+    "name": "fcn.00551a20",
+    "extent_history": [
+      {
+        "old_size": 816,
+        "new_size": 512,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.962038+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5577760,
+    "size": 304,
+    "name": "fcn.00551c20",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 304,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.968420+00:00"
+      }
+    ]
   },
   {
     "va": 5578064,
@@ -18915,8 +20251,31 @@
   },
   {
     "va": 5586016,
-    "size": 1136,
-    "name": "fcn.00553c60"
+    "size": 112,
+    "name": "fcn.00553c60",
+    "extent_history": [
+      {
+        "old_size": 1136,
+        "new_size": 112,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.432891+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5586128,
+    "size": 1017,
+    "name": "fcn.00553cd0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1017,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.435364+00:00"
+      }
+    ]
   },
   {
     "va": 5587152,
@@ -18955,8 +20314,31 @@
   },
   {
     "va": 5590736,
-    "size": 1392,
-    "name": "fcn.00554ed0"
+    "size": 48,
+    "name": "fcn.00554ed0",
+    "extent_history": [
+      {
+        "old_size": 1392,
+        "new_size": 48,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.968449+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5590784,
+    "size": 1335,
+    "name": "fcn.00554f00",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1335,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.972845+00:00"
+      }
+    ]
   },
   {
     "va": 5592128,
@@ -19095,8 +20477,31 @@
   },
   {
     "va": 5607872,
-    "size": 1056,
-    "name": "fcn.005591c0"
+    "size": 64,
+    "name": "fcn.005591c0",
+    "extent_history": [
+      {
+        "old_size": 1056,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.435371+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5607936,
+    "size": 978,
+    "name": "fcn.00559200",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 978,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.439530+00:00"
+      }
+    ]
   },
   {
     "va": 5608928,
@@ -19130,8 +20535,31 @@
   },
   {
     "va": 5611552,
-    "size": 138,
-    "name": "fcn.0055a020"
+    "size": 32,
+    "name": "fcn.0055a020",
+    "extent_history": [
+      {
+        "old_size": 138,
+        "new_size": 32,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.439549+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5611584,
+    "size": 106,
+    "name": "fcn.0055a040",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 106,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.442550+00:00"
+      }
+    ]
   },
   {
     "va": 5611696,
@@ -19155,8 +20583,31 @@
   },
   {
     "va": 5612976,
-    "size": 688,
-    "name": "fcn.0055a5b0"
+    "size": 624,
+    "name": "fcn.0055a5b0",
+    "extent_history": [
+      {
+        "old_size": 688,
+        "new_size": 624,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.442573+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5613600,
+    "size": 60,
+    "name": "fcn.0055a820",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 60,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.445097+00:00"
+      }
+    ]
   },
   {
     "va": 5613664,
@@ -19180,13 +20631,59 @@
   },
   {
     "va": 5614496,
-    "size": 256,
-    "name": "fcn.0055aba0"
+    "size": 96,
+    "name": "fcn.0055aba0",
+    "extent_history": [
+      {
+        "old_size": 256,
+        "new_size": 96,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.445111+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5614592,
+    "size": 146,
+    "name": "fcn.0055ac00",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 146,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.448816+00:00"
+      }
+    ]
   },
   {
     "va": 5614752,
-    "size": 672,
-    "name": "fcn.0055aca0"
+    "size": 624,
+    "name": "fcn.0055aca0",
+    "extent_history": [
+      {
+        "old_size": 672,
+        "new_size": 624,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.448851+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5615376,
+    "size": 38,
+    "name": "fcn.0055af10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 38,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.451610+00:00"
+      }
+    ]
   },
   {
     "va": 5615424,
@@ -19315,8 +20812,31 @@
   },
   {
     "va": 5632496,
-    "size": 2784,
-    "name": "fcn.0055f1f0"
+    "size": 272,
+    "name": "fcn.0055f1f0",
+    "extent_history": [
+      {
+        "old_size": 2784,
+        "new_size": 272,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.972865+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5632768,
+    "size": 2504,
+    "name": "fcn.0055f300",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2504,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.976380+00:00"
+      }
+    ]
   },
   {
     "va": 5635280,
@@ -19350,8 +20870,31 @@
   },
   {
     "va": 5638464,
-    "size": 1008,
-    "name": "fcn.00560940"
+    "size": 128,
+    "name": "fcn.00560940",
+    "extent_history": [
+      {
+        "old_size": 1008,
+        "new_size": 128,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.976387+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5638592,
+    "size": 872,
+    "name": "fcn.005609c0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 872,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.980320+00:00"
+      }
+    ]
   },
   {
     "va": 5639472,
@@ -19375,8 +20918,31 @@
   },
   {
     "va": 5640928,
-    "size": 3760,
-    "name": "fcn.005612e0"
+    "size": 160,
+    "name": "fcn.005612e0",
+    "extent_history": [
+      {
+        "old_size": 3760,
+        "new_size": 160,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.980330+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5641088,
+    "size": 3588,
+    "name": "fcn.00561380",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3588,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.983898+00:00"
+      }
+    ]
   },
   {
     "va": 5644688,
@@ -19410,8 +20976,31 @@
   },
   {
     "va": 5650512,
-    "size": 832,
-    "name": "fcn.00563850"
+    "size": 336,
+    "name": "fcn.00563850",
+    "extent_history": [
+      {
+        "old_size": 832,
+        "new_size": 336,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.451620+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5650848,
+    "size": 484,
+    "name": "fcn.005639a0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 484,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.454890+00:00"
+      }
+    ]
   },
   {
     "va": 5651376,
@@ -19420,13 +21009,59 @@
   },
   {
     "va": 5652320,
-    "size": 688,
-    "name": "fcn.00563f60"
+    "size": 592,
+    "name": "fcn.00563f60",
+    "extent_history": [
+      {
+        "old_size": 688,
+        "new_size": 592,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.983903+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5652912,
+    "size": 92,
+    "name": "fcn.005641b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 92,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.987434+00:00"
+      }
+    ]
   },
   {
     "va": 5653008,
-    "size": 592,
-    "name": "fcn.00564210"
+    "size": 464,
+    "name": "fcn.00564210",
+    "extent_history": [
+      {
+        "old_size": 592,
+        "new_size": 464,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.987439+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5653472,
+    "size": 118,
+    "name": "fcn.005643e0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 118,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.991065+00:00"
+      }
+    ]
   },
   {
     "va": 5653600,
@@ -19480,8 +21115,31 @@
   },
   {
     "va": 5658752,
-    "size": 560,
-    "name": "fcn.00565880"
+    "size": 256,
+    "name": "fcn.00565880",
+    "extent_history": [
+      {
+        "old_size": 560,
+        "new_size": 256,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.991073+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5659008,
+    "size": 299,
+    "name": "fcn.00565980",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 299,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.996382+00:00"
+      }
+    ]
   },
   {
     "va": 5659312,
@@ -19490,8 +21148,31 @@
   },
   {
     "va": 5660880,
-    "size": 464,
-    "name": "fcn.005660d0"
+    "size": 64,
+    "name": "fcn.005660d0",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.454914+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5660944,
+    "size": 392,
+    "name": "fcn.00566110",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 392,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.458644+00:00"
+      }
+    ]
   },
   {
     "va": 5661344,
@@ -19520,13 +21201,59 @@
   },
   {
     "va": 5663552,
-    "size": 368,
-    "name": "fcn.00566b40"
+    "size": 64,
+    "name": "fcn.00566b40",
+    "extent_history": [
+      {
+        "old_size": 368,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.458663+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5663616,
+    "size": 301,
+    "name": "fcn.00566b80",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 301,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.461188+00:00"
+      }
+    ]
   },
   {
     "va": 5663920,
-    "size": 896,
-    "name": "fcn.00566cb0"
+    "size": 80,
+    "name": "fcn.00566cb0",
+    "extent_history": [
+      {
+        "old_size": 896,
+        "new_size": 80,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.996451+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5664000,
+    "size": 672,
+    "name": "fcn.00566d00",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 672,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.999863+00:00"
+      }
+    ]
   },
   {
     "va": 5664816,
@@ -19580,8 +21307,31 @@
   },
   {
     "va": 5675584,
-    "size": 1456,
-    "name": "fcn.00569a40"
+    "size": 80,
+    "name": "fcn.00569a40",
+    "extent_history": [
+      {
+        "old_size": 1456,
+        "new_size": 80,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:42.999907+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5675664,
+    "size": 1248,
+    "name": "fcn.00569a90",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1248,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.003407+00:00"
+      }
+    ]
   },
   {
     "va": 5677040,
@@ -19590,8 +21340,31 @@
   },
   {
     "va": 5680816,
-    "size": 2000,
-    "name": "fcn.0056aeb0"
+    "size": 64,
+    "name": "fcn.0056aeb0",
+    "extent_history": [
+      {
+        "old_size": 2000,
+        "new_size": 64,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.003441+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5680880,
+    "size": 1932,
+    "name": "fcn.0056aef0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1932,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.008127+00:00"
+      }
+    ]
   },
   {
     "va": 5682816,
@@ -19605,8 +21378,31 @@
   },
   {
     "va": 5685136,
-    "size": 2400,
-    "name": "fcn.0056bf90"
+    "size": 64,
+    "name": "fcn.0056bf90",
+    "extent_history": [
+      {
+        "old_size": 2400,
+        "new_size": 64,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.008164+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5685200,
+    "size": 2324,
+    "name": "fcn.0056bfd0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2324,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.011849+00:00"
+      }
+    ]
   },
   {
     "va": 5687536,
@@ -19670,8 +21466,31 @@
   },
   {
     "va": 5694240,
-    "size": 1632,
-    "name": "fcn.0056e320"
+    "size": 160,
+    "name": "fcn.0056e320",
+    "extent_history": [
+      {
+        "old_size": 1632,
+        "new_size": 160,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.011879+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5694400,
+    "size": 1312,
+    "name": "fcn.0056e3c0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1312,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.014589+00:00"
+      }
+    ]
   },
   {
     "va": 5695872,
@@ -19680,13 +21499,59 @@
   },
   {
     "va": 5697088,
-    "size": 3632,
-    "name": "fcn.0056ee40"
+    "size": 64,
+    "name": "fcn.0056ee40",
+    "extent_history": [
+      {
+        "old_size": 3632,
+        "new_size": 64,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.014604+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5697152,
+    "size": 3556,
+    "name": "fcn.0056ee80",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3556,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.018267+00:00"
+      }
+    ]
   },
   {
     "va": 5700720,
-    "size": 496,
-    "name": "fcn.0056fc70"
+    "size": 64,
+    "name": "fcn.0056fc70",
+    "extent_history": [
+      {
+        "old_size": 496,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.461198+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5700784,
+    "size": 425,
+    "name": "fcn.0056fcb0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 425,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.464759+00:00"
+      }
+    ]
   },
   {
     "va": 5701216,
@@ -19735,8 +21600,31 @@
   },
   {
     "va": 5705984,
-    "size": 320,
-    "name": "fcn.00571100"
+    "size": 64,
+    "name": "fcn.00571100",
+    "extent_history": [
+      {
+        "old_size": 320,
+        "new_size": 64,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.018291+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5706048,
+    "size": 243,
+    "name": "fcn.00571140",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 243,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.022644+00:00"
+      }
+    ]
   },
   {
     "va": 5706304,
@@ -19775,8 +21663,31 @@
   },
   {
     "va": 5713312,
-    "size": 592,
-    "name": "fcn.00572da0"
+    "size": 160,
+    "name": "fcn.00572da0",
+    "extent_history": [
+      {
+        "old_size": 592,
+        "new_size": 160,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.022664+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5713472,
+    "size": 423,
+    "name": "fcn.00572e40",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 423,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.026032+00:00"
+      }
+    ]
   },
   {
     "va": 5713904,
@@ -19920,8 +21831,31 @@
   },
   {
     "va": 5732128,
-    "size": 100,
-    "name": "fcn.00577720"
+    "size": 16,
+    "name": "fcn.00577720",
+    "extent_history": [
+      {
+        "old_size": 100,
+        "new_size": 16,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.464781+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5732144,
+    "size": 84,
+    "name": "fcn.00577730",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 84,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.468137+00:00"
+      }
+    ]
   },
   {
     "va": 5732240,
@@ -20005,8 +21939,31 @@
   },
   {
     "va": 5736544,
-    "size": 1456,
-    "name": "fcn.00578860"
+    "size": 432,
+    "name": "fcn.00578860",
+    "extent_history": [
+      {
+        "old_size": 1456,
+        "new_size": 432,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.026066+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5736976,
+    "size": 1012,
+    "name": "fcn.00578a10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1012,
+        "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:23:43.028776+00:00"
+      }
+    ]
   },
   {
     "va": 5738000,
@@ -20105,8 +22062,31 @@
   },
   {
     "va": 5747040,
-    "size": 464,
-    "name": "fcn.0057b160"
+    "size": 144,
+    "name": "fcn.0057b160",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 144,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.468149+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5747184,
+    "size": 308,
+    "name": "fcn.0057b1f0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 308,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.470719+00:00"
+      }
+    ]
   },
   {
     "va": 5747504,
@@ -20130,8 +22110,31 @@
   },
   {
     "va": 5749296,
-    "size": 112,
-    "name": "fcn.0057ba30"
+    "size": 32,
+    "name": "fcn.0057ba30",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 32,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.470728+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5749328,
+    "size": 68,
+    "name": "fcn.0057ba50",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 68,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.474601+00:00"
+      }
+    ]
   },
   {
     "va": 5749408,
@@ -20750,8 +22753,31 @@
   },
   {
     "va": 5794432,
-    "size": 400,
-    "name": "fcn.00586a80"
+    "size": 336,
+    "name": "fcn.00586a80",
+    "extent_history": [
+      {
+        "old_size": 400,
+        "new_size": 336,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.474632+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5794768,
+    "size": 61,
+    "name": "fcn.00586bd0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 61,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.477349+00:00"
+      }
+    ]
   },
   {
     "va": 5794832,
@@ -20835,8 +22861,31 @@
   },
   {
     "va": 5811376,
-    "size": 591,
-    "name": "fcn.0058acb0"
+    "size": 432,
+    "name": "fcn.0058acb0",
+    "extent_history": [
+      {
+        "old_size": 591,
+        "new_size": 432,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.477368+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5811808,
+    "size": 159,
+    "name": "fcn.0058ae60",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 159,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.479903+00:00"
+      }
+    ]
   },
   {
     "va": 5811968,
@@ -21005,8 +23054,31 @@
   },
   {
     "va": 5831584,
-    "size": 861,
-    "name": "fcn.0058fba0"
+    "size": 544,
+    "name": "fcn.0058fba0",
+    "extent_history": [
+      {
+        "old_size": 861,
+        "new_size": 544,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.479919+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5832128,
+    "size": 317,
+    "name": "fcn.0058fdc0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 317,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.483903+00:00"
+      }
+    ]
   },
   {
     "va": 5832448,
@@ -21295,8 +23367,31 @@
   },
   {
     "va": 5866768,
-    "size": 224,
-    "name": "fcn.00598510"
+    "size": 62,
+    "name": "fcn.00598510",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 62,
+        "reason": "Split the 224-byte inventory span at the existing RELOC 62-byte fcn_00598510 ret. The following function is the 148-byte placement-search callback, then 12 alignment NOPs before 0x5985f0.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T05:20:02.305213+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5866832,
+    "size": 148,
+    "name": "fcn.00598550",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 148,
+        "reason": "Split the 224-byte inventory span at the existing RELOC 62-byte fcn_00598510 ret. The following function is the 148-byte placement-search callback, then 12 alignment NOPs before 0x5985f0.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T05:20:02.307670+00:00"
+      }
+    ]
   },
   {
     "va": 5866992,
@@ -21435,18 +23530,87 @@
   },
   {
     "va": 5885984,
-    "size": 752,
-    "name": "fcn.0059d020"
+    "size": 64,
+    "name": "fcn.0059d020",
+    "extent_history": [
+      {
+        "old_size": 752,
+        "new_size": 64,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.483924+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5886048,
+    "size": 676,
+    "name": "fcn.0059d060",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 676,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.486655+00:00"
+      }
+    ]
   },
   {
     "va": 5886736,
-    "size": 800,
-    "name": "fcn.0059d310"
+    "size": 112,
+    "name": "fcn.0059d310",
+    "extent_history": [
+      {
+        "old_size": 800,
+        "new_size": 112,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.486679+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5886848,
+    "size": 685,
+    "name": "fcn.0059d380",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 685,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.489824+00:00"
+      }
+    ]
   },
   {
     "va": 5887536,
-    "size": 896,
-    "name": "fcn.0059d630"
+    "size": 128,
+    "name": "fcn.0059d630",
+    "extent_history": [
+      {
+        "old_size": 896,
+        "new_size": 128,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.489838+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5887664,
+    "size": 759,
+    "name": "fcn.0059d6b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 759,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.493675+00:00"
+      }
+    ]
   },
   {
     "va": 5888432,
@@ -21555,8 +23719,31 @@
   },
   {
     "va": 5899824,
-    "size": 389,
-    "name": "fcn.005a0630"
+    "size": 112,
+    "name": "fcn.005a0630",
+    "extent_history": [
+      {
+        "old_size": 389,
+        "new_size": 112,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.493706+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5899936,
+    "size": 277,
+    "name": "fcn.005a06a0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 277,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.496333+00:00"
+      }
+    ]
   },
   {
     "va": 5900224,
@@ -21600,8 +23787,31 @@
   },
   {
     "va": 5907712,
-    "size": 1135,
-    "name": "fcn.005a2500"
+    "size": 128,
+    "name": "fcn.005a2500",
+    "extent_history": [
+      {
+        "old_size": 1135,
+        "new_size": 128,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.496355+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5907840,
+    "size": 1007,
+    "name": "fcn.005a2580",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1007,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.500186+00:00"
+      }
+    ]
   },
   {
     "va": 5908848,
@@ -21610,8 +23820,31 @@
   },
   {
     "va": 5909856,
-    "size": 520,
-    "name": "fcn.005a2d60"
+    "size": 80,
+    "name": "fcn.005a2d60",
+    "extent_history": [
+      {
+        "old_size": 520,
+        "new_size": 80,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.500205+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5909936,
+    "size": 440,
+    "name": "fcn.005a2db0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 440,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.503246+00:00"
+      }
+    ]
   },
   {
     "va": 5910384,
@@ -21635,8 +23868,31 @@
   },
   {
     "va": 5912192,
-    "size": 946,
-    "name": "fcn.005a3680"
+    "size": 416,
+    "name": "fcn.005a3680",
+    "extent_history": [
+      {
+        "old_size": 946,
+        "new_size": 416,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.503260+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5912608,
+    "size": 530,
+    "name": "fcn.005a3820",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 530,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.505828+00:00"
+      }
+    ]
   },
   {
     "va": 5913152,
@@ -21710,8 +23966,31 @@
   },
   {
     "va": 5927312,
-    "size": 397,
-    "name": "fcn.005a7190"
+    "size": 112,
+    "name": "fcn.005a7190",
+    "extent_history": [
+      {
+        "old_size": 397,
+        "new_size": 112,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.505845+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5927424,
+    "size": 285,
+    "name": "fcn.005a7200",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 285,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.510087+00:00"
+      }
+    ]
   },
   {
     "va": 5927712,
@@ -21940,8 +24219,31 @@
   },
   {
     "va": 5955488,
-    "size": 518,
-    "name": "fcn.005adfa0"
+    "size": 96,
+    "name": "fcn.005adfa0",
+    "extent_history": [
+      {
+        "old_size": 518,
+        "new_size": 96,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.510095+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5955584,
+    "size": 422,
+    "name": "fcn.005ae000",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 422,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.512806+00:00"
+      }
+    ]
   },
   {
     "va": 5956016,
@@ -21965,8 +24267,31 @@
   },
   {
     "va": 5957120,
-    "size": 864,
-    "name": "fcn.005ae600"
+    "size": 160,
+    "name": "fcn.005ae600",
+    "extent_history": [
+      {
+        "old_size": 864,
+        "new_size": 160,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.512814+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5957280,
+    "size": 698,
+    "name": "fcn.005ae6a0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 698,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.515715+00:00"
+      }
+    ]
   },
   {
     "va": 5957984,
@@ -21990,8 +24315,31 @@
   },
   {
     "va": 5960928,
-    "size": 656,
-    "name": "fcn.005af4e0"
+    "size": 112,
+    "name": "fcn.005af4e0",
+    "extent_history": [
+      {
+        "old_size": 656,
+        "new_size": 112,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.515735+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5961040,
+    "size": 533,
+    "name": "fcn.005af550",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 533,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.519773+00:00"
+      }
+    ]
   },
   {
     "va": 5961584,
@@ -22460,8 +24808,38 @@
   },
   {
     "va": 5998768,
-    "size": 5120,
-    "name": "fcn.005b88b0"
+    "size": 4304,
+    "name": "fcn.005b88b0",
+    "extent_history": [
+      {
+        "old_size": 5120,
+        "new_size": 4304,
+        "reason": "Reviewed complete native spans: restored-stack terminal jumps or RET, independent caller/callback xrefs and fresh frames; all direct branches remain within each body except documented shared tail at 0x532ef0. Preserve 5228=896+1104+2768+460 and 5120=4304+816 bytes including explicit NOP padding; no source or status claims lie in these spans. Evidence .scratch/goal70/no-source-large/boundary-manifest.json and boundaries.py.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:14:50.767370+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6003072,
+    "size": 809,
+    "name": "fcn.005b9980",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 816,
+        "reason": "Reviewed complete native spans: restored-stack terminal jumps or RET, independent caller/callback xrefs and fresh frames; all direct branches remain within each body except documented shared tail at 0x532ef0. Preserve 5228=896+1104+2768+460 and 5120=4304+816 bytes including explicit NOP padding; no source or status claims lie in these spans. Evidence .scratch/goal70/no-source-large/boundary-manifest.json and boundaries.py.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:14:50.769710+00:00"
+      },
+      {
+        "old_size": 816,
+        "new_size": 809,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:37:00.384340+00:00"
+      }
+    ]
   },
   {
     "va": 6003888,
@@ -22590,8 +24968,31 @@
   },
   {
     "va": 6030960,
-    "size": 960,
-    "name": "fcn.005c0670"
+    "size": 112,
+    "name": "fcn.005c0670",
+    "extent_history": [
+      {
+        "old_size": 960,
+        "new_size": 112,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.519808+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6031072,
+    "size": 844,
+    "name": "fcn.005c06e0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 844,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.522314+00:00"
+      }
+    ]
   },
   {
     "va": 6031920,
@@ -22615,8 +25016,80 @@
   },
   {
     "va": 6033680,
-    "size": 5228,
-    "name": "fcn.005c1110"
+    "size": 890,
+    "name": "fcn.005c1110",
+    "extent_history": [
+      {
+        "old_size": 5228,
+        "new_size": 896,
+        "reason": "Reviewed complete native spans: restored-stack terminal jumps or RET, independent caller/callback xrefs and fresh frames; all direct branches remain within each body except documented shared tail at 0x532ef0. Preserve 5228=896+1104+2768+460 and 5120=4304+816 bytes including explicit NOP padding; no source or status claims lie in these spans. Evidence .scratch/goal70/no-source-large/boundary-manifest.json and boundaries.py.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:14:50.769715+00:00"
+      },
+      {
+        "old_size": 896,
+        "new_size": 890,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:37:00.384344+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6034576,
+    "size": 1103,
+    "name": "fcn.005c1490",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1104,
+        "reason": "Reviewed complete native spans: restored-stack terminal jumps or RET, independent caller/callback xrefs and fresh frames; all direct branches remain within each body except documented shared tail at 0x532ef0. Preserve 5228=896+1104+2768+460 and 5120=4304+816 bytes including explicit NOP padding; no source or status claims lie in these spans. Evidence .scratch/goal70/no-source-large/boundary-manifest.json and boundaries.py.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:14:50.772043+00:00"
+      },
+      {
+        "old_size": 1104,
+        "new_size": 1103,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:37:00.384347+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6035680,
+    "size": 2753,
+    "name": "fcn.005c18e0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2768,
+        "reason": "Reviewed complete native spans: restored-stack terminal jumps or RET, independent caller/callback xrefs and fresh frames; all direct branches remain within each body except documented shared tail at 0x532ef0. Preserve 5228=896+1104+2768+460 and 5120=4304+816 bytes including explicit NOP padding; no source or status claims lie in these spans. Evidence .scratch/goal70/no-source-large/boundary-manifest.json and boundaries.py.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:14:50.774397+00:00"
+      },
+      {
+        "old_size": 2768,
+        "new_size": 2753,
+        "reason": "Refine reviewed sourceless native extents to executable RET/tail-JMP boundaries, excluding only explicitly verified trailing90NOP bytes. Previous complete spans remain in extent_history; reference bytes unchanged and gaps are alignment, not game code. Complete body hashes and instructions: .scratch/goal71/boundary-ui/manifest.json and .scratch/goal71/scene-loader/boundary-review.json. No existing source verdicts altered.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:37:00.384350+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6038448,
+    "size": 460,
+    "name": "fcn.005c23b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 460,
+        "reason": "Reviewed complete native spans: restored-stack terminal jumps or RET, independent caller/callback xrefs and fresh frames; all direct branches remain within each body except documented shared tail at 0x532ef0. Preserve 5228=896+1104+2768+460 and 5120=4304+816 bytes including explicit NOP padding; no source or status claims lie in these spans. Evidence .scratch/goal70/no-source-large/boundary-manifest.json and boundaries.py.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:14:50.776724+00:00"
+      }
+    ]
   },
   {
     "va": 6038912,
@@ -22670,8 +25143,17 @@
   },
   {
     "va": 6049472,
-    "size": 1104,
-    "name": "fcn.005c4ec0"
+    "size": 1095,
+    "name": "fcn.005c4ec0",
+    "extent_history": [
+      {
+        "old_size": 1104,
+        "new_size": 1095,
+        "reason": "Goal72 complete native bodies/tables, bounded direct branches, separate callback frames and independently verified terminal NOPs; see .scratch/goal72/{large,scene-deps,credit-deps} manifests and native proof replays. Preserve original spans in extent history; no source/status/provider claim.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T04:47:56.238035+00:00"
+      }
+    ]
   },
   {
     "va": 6050576,
@@ -23000,13 +25482,59 @@
   },
   {
     "va": 6086192,
-    "size": 700,
-    "name": "fcn.005cde30"
+    "size": 32,
+    "name": "fcn.005cde30",
+    "extent_history": [
+      {
+        "old_size": 700,
+        "new_size": 32,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.522338+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6086224,
+    "size": 668,
+    "name": "fcn.005cde50",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 668,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.525970+00:00"
+      }
+    ]
   },
   {
     "va": 6086896,
-    "size": 878,
-    "name": "fcn.005ce0f0"
+    "size": 32,
+    "name": "fcn.005ce0f0",
+    "extent_history": [
+      {
+        "old_size": 878,
+        "new_size": 32,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.526001+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6086928,
+    "size": 846,
+    "name": "fcn.005ce110",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 846,
+        "reason": "Fresh discovery plus external direct call/address references, entry frame setup and complete bounded reachable control flow; split merged inventory spans without changing source comparison SIZE. Evidence: .scratch/text-accounting-20261016/reviewed-code.json",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T06:14:22.529515+00:00"
+      }
+    ]
   },
   {
     "va": 6087776,

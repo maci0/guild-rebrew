@@ -3,7 +3,7 @@ extern char* g_6b7e98;
 
 
 char* __cdecl fcn_00426fd0(int);
-void __cdecl fcn_00428230(char*);
+void __cdecl evt_RunScript(char*);
 
 char* __cdecl fcn_0040c460(int* a1)
 {
@@ -16,6 +16,6 @@ char* __cdecl fcn_0040c460(int* a1)
 	*(int*) (p + 0x104) = *(int*) (g_6b7e98 + 0x104);
 	*(int*) (p + 0xc8c) = *(int*) (g_6b7e98 + 0xc8c);
 	*(int*) (p + 0xc90) = *(int*) (g_6b7e98 + 0xc90);
-	fcn_00428230(p);
+	evt_RunScript(p);
 	return p;
 }

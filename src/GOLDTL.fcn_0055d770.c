@@ -39,13 +39,13 @@ void __cdecl fcn_0055d6e0(char* e, char* r);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_004c5290(int, int, int);
-int __cdecl fcn_00451840(char*, char*, float);
+#include "client_scene_transform.h"
 int __cdecl fcn_00505340(char*);
 void __cdecl fcn_004c5d20(int, int);
 int __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 char* __cdecl fcn_005049a0(char*);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_005ba910(void*, int);
@@ -83,7 +83,7 @@ void __cdecl fcn_0055d770(char* e)
 	} else {
 		o = *(char**) (r + 0x3b);
 		if (o != 0 && *(int*) (o + 0x128) == 0 &&
-		    ((*(int*) (o + 0x88) == 0x10432c0 && fcn_00451840(*(char**) (o + 0x34) + 0x4c, e + 0xd8, 100.0f)) ||
+		    ((*(int*) (o + 0x88) == 0x10432c0 && fcn_00451840((float*) (*(char**) (o + 0x34) + 0x4c), (float*) (e + 0xd8), 100.0f)) ||
 		     *(int*) (e + 0xd4) > 6)) {
 			if (!fcn_00505340(c)) {
 				*(int*) (e + 0xec) = fcn_004c5290(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
@@ -115,10 +115,10 @@ void __cdecl fcn_0055d770(char* e)
 				if (!(r[0x20] & 1) && e[0xf2] == 0) {
 					h = fcn_005049a0(c);
 					if (h != 0) {
-						fcn_00545e80(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), buf, 0, 0x608,
+						he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), buf, 0, 0x608,
 						             *(int*) (c + 1), *(int*) (h + 2), 0, 0);
 					} else {
-						fcn_00545e80(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), buf, 0, 0x608,
+						he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), buf, 0, 0x608,
 						             *(int*) (c + 1), -1, 0, 0);
 					}
 				}

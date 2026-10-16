@@ -21,7 +21,7 @@ extern char* g_1042320;
 extern char g_1052a40[];
 
 void __cdecl fcn_004432d0(int a, int b);
-void __cdecl fcn_004398d0(char* p);
+void __cdecl d3_DisposeObject(char* p);
 void __cdecl fcn_00452420(char* p);
 void __cdecl fcn_0043bcf0(int a);
 void __cdecl fcn_00459b40(int a);
@@ -45,7 +45,7 @@ void __cdecl fcn_004392c0(void)
 		if (i != saved && g_1043340[i].used != 0) {
 			fcn_004432d0(i, 1);
 			while (g_1043254 != g_1042340) {
-				fcn_004398d0(g_1043254);
+				d3_DisposeObject(g_1043254);
 			}
 			g_6b8484 = 0;
 			while (g_1040c74 != g_1040640) {
@@ -69,7 +69,7 @@ void __cdecl fcn_004392c0(void)
 		fcn_004432d0(saved, 1);
 	}
 	while (g_1043254 != g_1042340) {
-		fcn_004398d0(g_1043254);
+		d3_DisposeObject(g_1043254);
 	}
 	if (g_6b8300 != 0) {
 		fcn_0043bcf0(g_6b8300);

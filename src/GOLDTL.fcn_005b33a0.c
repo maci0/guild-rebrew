@@ -4,7 +4,7 @@ extern char g_6ab558[];
 
 
 void __cdecl fcn_0051af00(void*, int, void*, void*, int);
-void __cdecl fcn_00545e80(int, int, void*, int, int, int, int, int, void*);
+void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, void*);
 
 void __cdecl fcn_005b33a0(void* a1, void* a2, void* a3, int a4)
 {
@@ -14,7 +14,7 @@ void __cdecl fcn_005b33a0(void* a1, void* a2, void* a3, int a4)
 	if (t == 6 || t == 7) {
 		fcn_0051af00(g_774a80, 0x407f, (char*) a2 + 0x30, (char*) a2 + 0x40,
 		    2 * a4 + 0x9a8);
-		fcn_00545e80(*(int*) ((char*) a1 + 4), -1, g_774a80, 1, 0x5ec,
+		he_MessageBoxQuickjump(*(int*) ((char*) a1 + 4), -1, g_774a80, 1, 0x5ec,
 		    *(int*) ((char*) a3 + 1), -1, 0, g_6ab558);
 	}
 }

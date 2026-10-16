@@ -21,7 +21,7 @@ void __cdecl fcn_00418f90(int a);
 /* ADDRESS: GOLDTL 0x004398d0 */
 
 /* Disposes a scene object and its children, switching to its universe first. */
-void __cdecl fcn_004398d0(char* obj)
+void __cdecl d3_DisposeObject(char* obj)
 {
 	char* u;
 	char* p;
@@ -74,10 +74,10 @@ void __cdecl fcn_004398d0(char* obj)
 		*(void**) (obj + 0x1e8) = 0;
 	}
 	if (*(char**) (obj + 0x200) != 0) {
-		fcn_004398d0(*(char**) (obj + 0x200));
+		d3_DisposeObject(*(char**) (obj + 0x200));
 	}
 	if (*(char**) (obj + 0x1f4) != 0 && !(*(unsigned char*) (*(char**) (obj + 0x1f4) + 0x214) & 1)) {
-		fcn_004398d0(*(char**) (obj + 0x1f4));
+		d3_DisposeObject(*(char**) (obj + 0x1f4));
 	}
 	fcn_00418f90(*(int*) (obj + 0x210));
 	d3_CleanupObjectDrawData((D3_OBJECT*) (obj));

@@ -26,7 +26,7 @@ struct msg {
 #include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_004c5580(struct msg*, int, char*);
 
-int __cdecl fcn_00545e80(int id, int arg, char* text1, unsigned char flags, int value, int x, int y, char* name, char* text2)
+int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags, int value, int x, int y, char* name, char* text2)
 {
 	struct msg m;
 	char text[0x1fa0];

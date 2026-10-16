@@ -46,7 +46,7 @@ int __cdecl vfs_ReadData(char *, int, int, void *);
 int __cdecl fcn_00426ac0(char *, char *, int *);
 void __cdecl m_FreeTracked(void *);
 
-Script *__cdecl fcn_00426d50(char *name)
+Script *__cdecl evt_LoadScript(char *name)
 {
 	void *f;
 	char *out;

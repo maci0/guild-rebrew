@@ -33,7 +33,7 @@ int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_00546190(char*);
 
@@ -67,7 +67,7 @@ void __cdecl fcn_005727f0(char* e)
 		    * (*(int*) (e + 0x18) + *(int*) (e + 0x14));
 		fcn_004c51f0(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, g_773d75, 0);
 		fcn_0051af00(buf, 0x1bb8, *(unsigned short*) (e + 0xac) * 2 + 0x9a8, x, amt);
-		fcn_00545e80(((struct house*)g_7f4ca0)[*(unsigned short*) (r + 0x27)].handle, -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
+		he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (r + 0x27)].handle, -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
 		    "_NACHRICHTEN_HS_08");
 		for (i = 0; i < 768; i++) {
 			if (((struct house*)g_7f4ca0)[i].who == e) {

@@ -1,13 +1,13 @@
-# Codegen walls: where C cannot reach the reference encoding
+# Codegen walls
 
-Places where the C language has no expression that reaches the reference's
-encoding, established by exhausting the spellings rather than by giving up.
+Measured failed levers under their recorded compiler, source and constraints.
+An exhausted probe family is not a universal impossibility proof. Reopen it with
+new native/compiler/context evidence, and preserve original section numbers.
 
-Companion reading: `msvc6-c-shapes.md` (front-end shapes that do work),
-`msvc6-allocator.md` (register allocation and slot maps), `measure-traps.md`
-(method traps that fake codegen signal), `TODO.md` (round-by-round history).
-
----
+Working shapes: [C shapes](msvc6-c-shapes.md). Register/slot findings:
+[allocator](msvc6-allocator.md). Ruler limits: [measurement](measure-traps.md).
+Historical counts and retired commands are not current instructions; use
+[tooling](tooling-upstream.md), [TODO](TODO.md) and the [archive](goal-history.md#full-notebooks).
 
 ## 1. Register allocation and scheduling are not steerable from C
 

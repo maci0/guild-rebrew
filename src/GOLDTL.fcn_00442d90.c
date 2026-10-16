@@ -1,7 +1,7 @@
 #include "Develop/Units/d3/d3_object.h"
 
 
-void __cdecl fcn_004398d0(char*);
+void __cdecl d3_DisposeObject(char*);
 char* __cdecl fcn_00437890(char*);
 
 void __cdecl fcn_0044c200(int, int);
@@ -17,13 +17,13 @@ char __cdecl fcn_00442d90(char* o, int a2)
 		return 0;
 	}
 	if (*(char**) (o + 0x200) != 0) {
-		fcn_004398d0(*(char**) (o + 0x200));
+		d3_DisposeObject(*(char**) (o + 0x200));
 		*(char**) (o + 0x200) = 0;
 	}
 	p = *(char**) (o + 0x1f4);
 	if (p != 0 && (p[0x214] & 1) == 0) {
 		n = fcn_00437890(o);
-		fcn_004398d0(p);
+		d3_DisposeObject(p);
 		*(char**) (o + 0x1f4) = n;
 	}
 	d3_CleanupObjectDrawData((D3_OBJECT*) (o));

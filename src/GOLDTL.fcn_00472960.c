@@ -22,7 +22,7 @@ void __cdecl fcn_00475fd0(void*);
 int __cdecl fcn_00476b10(int x, int y, unsigned char r, unsigned char g, unsigned char b, void* s);
 void __cdecl fcn_00476060(void*);
 
-void __cdecl fcn_00472960(int x, int y, unsigned char r, unsigned char g, unsigned char b)
+void __cdecl d2_Plot(int x, int y, unsigned char r, unsigned char g, unsigned char b)
 {
 	Win472960* w;
 

@@ -37,7 +37,7 @@ char* __cdecl fcn_0050dc90(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, char*, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_00546190(char*);
 
@@ -93,7 +93,7 @@ void __cdecl fcn_0057a3d0(char* e)
 			}
 			if (s != 0) {
 				fcn_0051af00(buf, 0x1bc8, *(unsigned short*) who, q);
-				fcn_00545e80(g_7f4ca0[*(unsigned short*) (e + 8)].handle, *(int*) (e + 0x10), buf, 0, 0x5f2,
+				he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].handle, *(int*) (e + 0x10), buf, 0, 0x5f2,
 				    *(int*) (q + 1), *(int*) (s + 2), g_6b5c60, "_NACHRICHTEN_HS_81");
 			}
 		}

@@ -24,7 +24,7 @@ void __cdecl fcn_004c4ef0(char*);
 /* ADDRESS: GOLD 0x004e4b50 */
 /* ADDRESS: GOLDTL 0x004e64e0 */
 
-int __cdecl fcn_004e64e0(int* c)
+int __cdecl cut_CutsceneReady(int* c)
 {
 	Msg m;
 	char* o;

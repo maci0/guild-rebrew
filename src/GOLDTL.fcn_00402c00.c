@@ -2,9 +2,9 @@ extern void* g_14d0020[];
 extern char g_10432c0[];
 
 
-int __cdecl fcn_00451840(void*, int, int);
+#include "client_scene_transform.h"
 
-int __cdecl fcn_00402c00(int a1, int a2, int a3, int a4)
+int __cdecl fcn_00402c00(int a1, int a2, float* a3, float a4)
 {
 	int count;
 	void** p;
@@ -19,7 +19,7 @@ int __cdecl fcn_00402c00(int a1, int a2, int a3, int a4)
 			    *(int*) ((char*) e + 0x88) == (int) (g_10432c0 + a1 * 0x3dc)) {
 				if (a2 != 0 ||
 				    *(int*) (*(int*) ((char*) e + 0x34) + 0x218) != 1) {
-					if (fcn_00451840((char*) *(int*) ((char*) e + 0x34) + 0x4c,
+					if (fcn_00451840((float*) (*(char**) ((char*) e + 0x34) + 0x4c),
 					                 a3, a4) != 0) {
 						count++;
 					}

@@ -11,7 +11,7 @@ char* __cdecl gm_AddObjekt(void);
 int __cdecl gm_CheckEntityType(char*);
 int __cdecl fcn_00505340(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_00451840(char*, char*, float);
+#include "client_scene_transform.h"
 
 void __cdecl fcn_0056d8c0(char* u)
 {
@@ -41,7 +41,7 @@ void __cdecl fcn_0056d8c0(char* u)
 			break;
 		}
 		e = list[i];
-		if (e != p && fcn_00451840(*(char**) (e + 0x61) + 0x4c, *(char**) (p + 0x61) + 0x4c, (float) *(int*) (u + 0xf0)) != 0) {
+		if (e != p && fcn_00451840((float*) (*(char**) (e + 0x61) + 0x4c), (float*) (*(char**) (p + 0x61) + 0x4c), (float) *(int*) (u + 0xf0)) != 0) {
 			*(int*) (u + 0xac + k++ * 4) = *(int*) (e + 1);
 		}
 	}

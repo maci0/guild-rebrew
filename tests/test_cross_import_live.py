@@ -1,6 +1,6 @@
 """Drive shipped cross-import on one function that already lives in both clients.
 
-The fixture is a real source file with one body and one marker per client.
+The fixture is a real source file with one body and one metadata binding per client.
 The test does not reimplement matching: it loads both binaries through
 rebrew, builds the signatures cross-import uses, and asks cross_match
 whether the destination bytes are that source function. A dry-run of
@@ -11,7 +11,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from rebrew.annotation import parse_c_file_multi
 from rebrew.cli import require_config
 from rebrew.config import load_config
 from rebrew.cross_import import (
@@ -20,35 +19,30 @@ from rebrew.cross_import import (
     signature_for,
     target_bytes_by_va,
 )
+from rebrew.metadata.bindings import SourceBinding, read_source_bindings
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "src" / "GOLD.fcn_0040abd0.c"
 
 
-def _marker_present(text: str, module: str, va: int) -> bool:
-    return (
-        f"FUNCTION: {module} 0x{va:x}" in text
-        or f"FUNCTION: {module} 0x{va:08x}" in text
-    )
-
-
-def _annotations(target: str) -> list:
+def _bindings(target: str) -> list[SourceBinding]:
     cfg = load_config(root=ROOT, target=target)
-    return parse_c_file_multi(
+    return read_source_bindings(
         SOURCE,
-        target_name=cfg.marker,
+        target_name=cfg.module,
         base_dir=cfg.reversed_dir,
         metadata_dir=cfg.metadata_dir,
+        project_root=cfg.root,
     )
 
 
-def test_shared_marker_function_is_the_transferred_body() -> None:
-    text = SOURCE.read_text(encoding="utf-8")
-    gold = _annotations("Europa1400Gold.exe")
-    goldtl = _annotations("Europa1400Gold_TL.exe")
+def test_shared_bound_function_is_the_transferred_body() -> None:
+    gold = _bindings("Europa1400Gold.exe")
+    goldtl = _bindings("Europa1400Gold_TL.exe")
     assert len(gold) == 1 and len(goldtl) == 1
-    assert _marker_present(text, "GOLD", gold[0].va)
-    assert _marker_present(text, "GOLDTL", goldtl[0].va)
+    assert gold[0].module == "GOLD"
+    assert goldtl[0].module == "GOLDTL"
+    assert gold[0].name == goldtl[0].name == "fcn_0040abd0"
     assert gold[0].va != goldtl[0].va
     assert gold[0].size and gold[0].size == goldtl[0].size
 

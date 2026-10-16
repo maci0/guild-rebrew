@@ -22,7 +22,7 @@ char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 
 /* Steps a change-room event: puts the character's exit object into the new
  * room and queues the walk-in events. */
-void __cdecl fcn_004066d0(char* ev)
+void __cdecl UsingGate(char* ev)
 {
 	char* obj;
 	char* map;

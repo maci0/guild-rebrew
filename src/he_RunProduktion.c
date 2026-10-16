@@ -35,7 +35,7 @@ void __cdecl fcn_00546190(struct unit* objekt);
 void __cdecl fcn_005467e0(int* objekt);
 int __cdecl fcn_004c51f0(int a, int b, short ware, int menge, char besitzer, int modus);
 int __cdecl fcn_004c5250(int objekt, unsigned short ware, int menge);
-int __cdecl fcn_00545e80(int id, int arg, char* text, unsigned char flags,
+int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text, unsigned char flags,
     int typ, int x, int y, char* name, char* bild);
 void __cdecl fcn_004c6300(int id);
 void __cdecl fcn_00529160(char* objekt, int a, int besitzer, char* ereignis);
@@ -141,7 +141,7 @@ void __cdecl he_RunProduktion(char* e)
                     nachricht_typ = 0x5f1;
                     haus = fcn_0050dc90((int) gebaeude);
                     if (haus != 0 && (haus[0x1b4] & 1)) nachricht_typ = 0x60d;
-                    fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                    he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
                         *(int*) (e + 4), text, 0, nachricht_typ,
                         *(int*) (gebaeude + 1), *(int*) (haushalt + 2), 0, bild[0] ? bild : 0);
                 }
@@ -284,7 +284,7 @@ mangel:
             nachricht_typ = 0x5f1;
             haus = fcn_0050dc90((int) gebaeude);
             if (haus != 0 && (haus[0x1b4] & 1)) nachricht_typ = 0x60d;
-            fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+            he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
                 *(int*) (e + 4), text, 0, nachricht_typ,
                 *(int*) (gebaeude + 1), haushalt != 0 ? *(int*) (haushalt + 2) : -1, 0, bild);
         }

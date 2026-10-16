@@ -11,7 +11,7 @@ int __cdecl fcn_00545580(int, handler, handler);
 void __cdecl fcn_00530ab0(int, char*, int, int, int);
 void __cdecl fcn_00571140(char*);
 void __cdecl fcn_00571240(char*);
-void __cdecl fcn_00571720(char*);
+void __cdecl he_AllocProduktion(char*);
 void __cdecl he_RunProduktion(char*);
 void __cdecl fcn_00572760(char*);
 void __cdecl fcn_00572770(char*);
@@ -25,7 +25,7 @@ void __cdecl fcn_00572e40(char*);
 void __cdecl fcn_00572ff0(char*);
 void __cdecl fcn_00573a10(char*);
 void __cdecl fcn_00573a80(char*);
-void __cdecl fcn_00573c00(char*);
+void __cdecl he_AllocGebaeudeBauen(char*);
 void __cdecl fcn_005744c0(char*);
 void __cdecl fcn_00575450(char*);
 void __cdecl fcn_00575460(char*);
@@ -40,7 +40,7 @@ int __cdecl fcn_00575710(void)
 		return 1;
 	}
 	fcn_00530ab0(3, g_6a7e04, 1, 0x501, 0xac);
-	if (fcn_00545580(4, fcn_00571720, he_RunProduktion) != 0) {
+	if (fcn_00545580(4, he_AllocProduktion, he_RunProduktion) != 0) {
 		return 1;
 	}
 	fcn_00530ab0(4, g_6a7df8, 1, 0x4ff, 0xac);
@@ -64,7 +64,7 @@ int __cdecl fcn_00575710(void)
 	if (fcn_00545580(0xc, fcn_00573a10, fcn_00573a80) != 0) {
 		return 1;
 	}
-	if (fcn_00545580(0xd, fcn_00573c00, fcn_005744c0) != 0) {
+	if (fcn_00545580(0xd, he_AllocGebaeudeBauen, fcn_005744c0) != 0) {
 		return 1;
 	}
 	if (fcn_00545580(0xe, fcn_00575450, fcn_00575460) != 0) {

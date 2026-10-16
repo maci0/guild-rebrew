@@ -17,7 +17,7 @@ void __cdecl fcn_004b2020(int n);
 
 /* ADDRESS: GOLD 0x004b2380 */
 /* ADDRESS: GOLDTL 0x004b24c0 */
-Slot* __cdecl fcn_004b24c0(int id)
+Slot* __cdecl hst_ParseCommandline_1st_Pass(int id)
 {
 	char buf[0x17d0];
 	char msg[0x100];

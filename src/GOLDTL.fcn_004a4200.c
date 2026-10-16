@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int __cdecl fcn_004a4200(char* name)
+int __cdecl amt_GetDesireByName(char* name)
 {
 	char buf[0x80];
 

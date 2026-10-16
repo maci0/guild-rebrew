@@ -31,7 +31,7 @@ extern void* g_14d0020[];
 #include <math.h>
 
 char* __cdecl fcn_00402610(char*);
-int __cdecl fcn_00451840(float*, float*, float);
+#include "client_scene_transform.h"
 float __cdecl fcn_00444700(char*, float*);
 void __cdecl fcn_00438cb0(char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
@@ -46,7 +46,7 @@ extern int g_675310;
 extern char g_10432c0[];
 
 char __cdecl fcn_00442c00(char*, char);
-int __cdecl fcn_00451840(float*, float*, float);
+
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl fcn_00438cb0(char*, float*);
 void __cdecl fcn_0042e540(char*);

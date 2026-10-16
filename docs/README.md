@@ -1,49 +1,49 @@
-# docs/
+# Documentation
 
-Every file here is empirical: a claim cites the address, round, or command
-that produced it. Live numbers (verify count, `.text` residue, `.data`
-divergence) are the `scripts/gate.sh` defaults; a figure written anywhere in
-these files is the value at the time it was written.
+Start with [the objective](../goal.md), then [current work](TODO.md).
+[Goal history](goal-history.md) is a milestone index and full-log archive;
+[AGENTS.md](../AGENTS.md) owns project rules.
 
-## Which file to open
+## Reference map
 
-| When you are | Open | Keyed by |
-|---|---|---|
-| Reshaping C that compiles but does not match | `msvc6-c-shapes.md` (start at its "Index by symptom") | section number |
-| Chasing a register choice (`eax`/`ecx`/`edx`, callee-saved homes, slot map) | `msvc6-allocator.md` (its "Index"), then `codegen-walls.md` §1 | Finding number, function |
-| About to try a spelling that may already be exhausted | `codegen-walls.md` | section number |
-| Reading a score, a residue number, or a tool's verdict | `measure-traps.md` (§1: only the linked residue decides) | section number |
-| Touching link order, `.data`/`.rdata`, imports, or postlink | `msvc6-link-layout.md` | section number |
-| Deciding whether a client-only function belongs in the server build | `client-only-sweep.md` (appendix to `msvc6-link-layout.md` 5f) | TL VA |
-| Running agents, parallel sessions, or the build tooling | `workflow-traps.md` | section number |
-| Needing a fact about the original build, toolchain, or targets | `general-knowledge.md` | topic |
-| Naming a function, global, or source file | `naming_conventions.md` | prefix, source file |
-| Changing vendored zlib or minizip code | `vendoring.md` | patch number |
-| Checking whether a residue function has a known semantic bug | `behavioral-verdicts.md` | function |
-| Looking up game, binary, or community facts | `game-compendium.md` | topic |
-| Picking up open work or reading round history | `TODO.md` (latest `**Round-N:**` note under Continuation notes) | round |
+| Question | Read |
+| --- | --- |
+| Which C shape changes the emitted bytes? | [C shapes](msvc6-c-shapes.md), indexed by symptom |
+| Why these registers or stack slots? | [Allocator findings](msvc6-allocator.md) |
+| Has this matching lever already failed? | [Codegen walls](codegen-walls.md) |
+| What does this score or verdict establish? | [Measurement traps](measure-traps.md) |
+| What controls sections, imports and relocation layout? | [Link layout](msvc6-link-layout.md) |
+| Does this client function have server storage? | [Client-only sweep](client-only-sweep.md) |
+| Who owns this global or interior view? | [Data ownership](data-ownership.md) |
+| Where does this source/type belong? | [Source layout](source-layout.md) |
+| What name is attested or inferred? | [Naming conventions](naming_conventions.md) |
+| Which tool replaces an old script? | [Tooling](tooling-upstream.md) |
+| How are vendor patches reproduced? | [Vendoring](vendoring.md) |
+| What process mistakes should I avoid? | [Workflow traps](workflow-traps.md) |
+| What principles guide project work? | [Project principles](project-principles.md); generated tool rules remain in [PRINCIPLES.md](../PRINCIPLES.md) |
+| What is known about a residue function's behavior? | [Behavioral reviews](behavioral-verdicts.md), historical |
+| What is known about the original build? | [Build facts](general-knowledge.md) |
+| What are the game, network and asset conventions? | [Game compendium](game-compendium.md) |
 
-## Before probing an address
-
-Look it up first; the entries are keyed by address, and a keyword grep only
-finds what you already know the words for:
+## Evidence lookup
 
 ```sh
-rebrew source findings 0x<VA> --json             # every doc entry citing this VA
-rebrew source findings 0x<VA> --window 64 --json # widen the band
+uv run --frozen rebrew source findings 0x<VA> --json
+uv run --frozen rebrew source findings 0x<VA> --window 64 --json
 ```
 
-`rebrew source findings` searches the Markdown documents under `docs/`, including `msvc6-c-shapes.md`, `msvc6-allocator.md`,
-`codegen-walls.md`, `measure-traps.md`, `workflow-traps.md`, and `TODO.md`.
+These search live Markdown under `docs/`. For retired session logs, use the
+[archive search commands](goal-history.md#full-notebooks). Historical figures are
+measurements at their stated checkpoint. Query current metadata and run the gate
+before reporting current status; old postlink success does not prove a raw link.
 
-## Conventions
+## Keep it short
 
-- `msvc6-c-shapes.md` is levers that work, `codegen-walls.md` is levers
-  measured not to exist, `measure-traps.md` is instruments that lie. A new
-  finding goes in exactly one of them; cross-link instead of copying.
-- Section numbers are cited across files, by `rebrew source findings` output, and in
-  source headers. Append new sections with the next free number; never
-  renumber or reuse one.
-- Server addresses are `0x100xxxxx`; client addresses (`0x4xxxxx` to
-  `0x6xxxxx`) name the target (GOLDTL or GOLD) beside them, since the two
-  clients place the same function at different VAs.
+- One home per fact: objective in `goal.md`, current work in `TODO.md`, milestones
+  in `goal-history.md`, technical evidence in its reference. Link instead of copying.
+- Findings retain target/VA, result, limits and receipt/replay. Omit running-job
+  transcripts and repeated whole-project status reports.
+- Keep existing section numbers and anchors: source comments cite them. Append
+  new numbered findings without renumbering or reusing old numbers.
+- Qualify client VAs with TL or Gold; server VAs start `0x100…`.
+- Leave generated coverage, vendor documents and managed metadata to their owners.

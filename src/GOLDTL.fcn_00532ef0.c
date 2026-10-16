@@ -22,7 +22,7 @@ extern int g_77465c;
 extern char* g_7746a8;
 extern int g_7e2a9c;
 
-int __cdecl fcn_00451840(float* a, float* b, float eps);
+#include "client_scene_transform.h"
 void __cdecl fcn_00433780(View* v);
 void __cdecl fcn_00438b40(View* v, float* p);
 void __cdecl fcn_00438cb0(View* v, float* r);
