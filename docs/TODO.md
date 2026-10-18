@@ -115,6 +115,14 @@ passing: indexed table references are explicit candidates rather than inferred
 effective addresses, and reference-binding rename previews carry guarded input
 digests. Its full suite passed 12,837 tests (48 skipped). These repairs are also
 outside the pinned 5.2.0 release.
+[Rebrew #40](https://github.com/maci0/rebrew/pull/40) merged with all six CI jobs
+passing: conservative unshare CL caching, target-isolated verification results
+and comparison baselines (including #41), corrected nested-header lookup, and
+the preserved startup optimization. The final full suite passed 13,007 tests
+(36 skipped); seven real compiler dispatches preserve complete cold/hot control
+objects and diagnostics. Rejected cache candidates are validated privately
+before atomic publication. These changes are not in the installed 5.2.0 release.
+See [performance limits](verify-performance.md#runner-and-caches).
 
 ## GoldTL data audit, 2026-10-19
 

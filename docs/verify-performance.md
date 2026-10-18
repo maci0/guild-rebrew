@@ -72,6 +72,13 @@ but still needs extraction/comparison; a valid result hit avoids both.
 `.obj`. Backend identity separates Docker and unshare compile entries. Existing
 CMake objects are not evidence that current compile inputs match.
 
+Rebrew 5.2.0 also shares one function-result cache and comparison baseline
+between targets. Alternating Gold and TL runs rejects the foreign results,
+making the next target cold and losing its `--compare` baseline.
+[Upstream #41](https://github.com/maci0/rebrew/pull/41) isolates these files per
+target while preserving identity-checked legacy reads and existing freshness
+guards. It is not in the installed release.
+
 In Rebrew 5.2.0, the CMake CL driver does not use the test/verify object cache.
 Unix Make makes every target object depend on its shared `flags.make`; adding
 per-source flag entries can therefore rebuild unrelated files. This build
@@ -79,6 +86,20 @@ invalidation is separate from data verification. Test objects cannot safely
 substitute: flags, defines and compiler-visible paths can differ. Do not retime
 generated files to suppress the rebuild. The October 19 audit is in
 `.scratch/cmake-driver-cache-audit/`.
+
+[Upstream #40](https://github.com/maci0/rebrew/pull/40) adds a conservative
+unshare CL-driver cache for unchanged single-source commands. Real plain-SP5
+`/MT` and Processor Pack `/ML` controls preserve complete objects, diagnostics
+and frozen timestamps; hot controls dispatch no compiler. Complex preprocessing,
+nested includes, debug outputs and unsupported modes bypass it. This is not a
+whole-build benchmark, and the change is not in the installed 5.2.0 release.
+
+Ninja may avoid Make's target-wide flag invalidation, but VC6 header dependency
+tracking is unproved. The plain-SP5 probe ignores `/showIncludes` with D4002
+and emits no include paths, despite compiling the nested header correctly.
+Processor Pack was not probed. Keep the current generator until direct and
+transitive header invalidation, a no-op rebuild and complete raw-server identity
+are verified. Receipt: `.scratch/vc6-showincludes-probe/`.
 
 `rebrew test --linked` is a separate padded-shell link. Rebrew 5.2.0 stops that
 command when `execution_backend` is `unshare`, with
