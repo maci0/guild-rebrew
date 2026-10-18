@@ -35,13 +35,15 @@ address-keyed. Query `rebrew source findings` and inspect the source header.
 
 ## Methodology
 
-Use `uv run --frozen rebrew source findings 0x<VA> --json`, then native assembly,
-`diff` and `test`. Keep isolated probes in `.scratch/` and compile with the
-project `unshare` backend on the pinned image. The current server is plain
-SP5; clients use Processor Pack. Earlier SP6 and Docker runs keep that
-compiler context. Measure the complete linked image for layout claims;
-[tooling](tooling-upstream.md) replaces retired probe wrappers. Full original
-notes are [archived](goal-history.md#full-notebooks).
+Use `uv run rebrew source findings 0x<VA> --json`, then native assembly,
+`diff` and `test --no-promote`. Keep isolated probes in `.scratch/` and
+compile with the project `unshare` backend on the pinned image. Use the
+normal project `uv` environment; `--frozen` and a sibling checkout are not
+required. The current server is plain SP5; clients use Processor Pack and
+their builds are comparison scaffolds, not identical or playable images.
+Earlier SP6 and Docker runs keep that compiler context. Measure the complete
+raw image for layout claims; [tooling](tooling-upstream.md) replaces retired
+probe wrappers. Full original notes are [archived](goal-history.md#full-notebooks).
 
 ## Register set & baseline (from rebrew docs)
 
@@ -948,11 +950,13 @@ than using a signature miss alone to establish provenance.
 `.scratch/goal20/helper-assembly-evidence.json` records instruction contexts,
 reference and archive hashes; `check_helper_assembly.py` asserts the sites,
 lengths and archive exclusions from the saved CLI disassembly/probe receipts.
-The helpers' own evidence belongs in the managed `rebrew-source.toml`, keyed
-by file, C symbol and GOLDTL target with a definition hash. No helper VA or
-byte verdict is invented, and a caller's blocker is not inherited by its
-helper. Current body/target evidence must be reviewed again after changes;
-the historical caller matches are not fresh measurements.
+The helpers' evidence now lives in format-3 `rebrew-functions.toml` under
+`[source.definitions]`, keyed by file, C symbol and target, with
+`[source.files]` for support purposes. The separate source store is retired.
+Data rows stay format-2 `rebrew-data.toml`. No helper VA or byte verdict is
+invented, and a caller's blocker is not inherited by its helper. Current
+body/target evidence must be reviewed again after changes; the historical
+caller matches are not fresh measurements.
 
 Fresh `rebrew test --no-promote` measurements with the provenance-support
 checkout reproduce all three callers as RELOC: 297/297, 528/528 and 378/378
@@ -2067,19 +2071,22 @@ ops on the same value.
 
 ## Finding 15: COMDAT placement: functions in a file must be VA-contiguous
 
-Each ``.c`` file compiles to one object whose functions the linker places as a
-contiguous run (each function padded to 0x10 alignment) starting at the file's
-first ``// FUNCTION:`` VA.  Consequences:
+Historical split-link placement. Each ``.c`` file compiled to one object whose
+functions the linker placed as a contiguous run (each function padded to 0x10
+alignment) starting at the file's first ``// FUNCTION:`` VA. Current identity
+is managed metadata plus optional ``/* ADDRESS: MODULE 0xVA */`` comments.
+Consequences measured in that layout:
 
-- **A contiguous VA run cannot be split across files.**  Moving one function
-  (e.g. lb_HandleEntitySync 0x10014bf0) into its own ``.c`` reorders the
-  object layout: the remaining functions shift onto the vacated VAs and the
-  whole .text after that point drifts.  Keep functions that are VA-adjacent
-  (gap == padded size of the predecessor) in the same file.
-- **Uncovered holes must be occupied.**  The original may have functions the
-  project has not reversed (e.g. 0x10014ee0 between lb_ExLobbyServerCommand
-  and plant.c's find_zone_record).  A naked ``_emit`` placeholder for the hole
-  must stay in the file (in VA order) or every later function shifts.
+- **A contiguous VA run could not be split across files in that layout.**
+  Moving one function (e.g. lb_HandleEntitySync 0x10014bf0) into its own
+  ``.c`` reordered the object: the remaining functions shifted onto the
+  vacated VAs and the whole ``.text`` after that point drifted. VA-adjacent
+  functions (gap equal to the predecessor's padded size) stayed in one file.
+- **Uncovered holes were filled in that layout.**  The original may have had
+  functions the project had not reversed (e.g. 0x10014ee0 between
+  lb_ExLobbyServerCommand and plant.c's find_zone_record).  A naked ``_emit``
+  placeholder was how that link held the hole. It is not a current remedy and
+  not an assembly exception.
 - Duplicate VA coverage across files (e.g. defining 0x10014f80 in two files)
   breaks the layout silently: check dedicated metadata bindings before adding.
 
@@ -3204,15 +3211,19 @@ it is relocated table data. (`0x09` fill on this function, where others use
 
 ## Finding 57: reporting note: a per-function residue number is only comparable within one composition
 
-Throughout this campaign "linked" means the composed image's per-function
-residue: the only measurement that decides.  `postlink_residual` attributes
-differing bytes by reference VA, so a symbol not exactly at its reference VA
-drags its whole window; 73 of 319 symbols are not exact.  A candidate rejected
-in one composition has therefore been a win in another and vice versa.  Only the
-total from a full rebuild (`cmake --build`, then `scripts/split_link.sh`, then
-`postlink_residual.py --write`) is comparable across rounds, and
-`scripts/linktest.sh` recompiles only the files it is named, so a run is
-attribution only when no other source has changed since the last full build.
+Retired residue ruler. In this campaign "linked" meant the postlink
+composition's per-function count. It is not current acceptance: the server
+raw file matches the reference, and `scripts/gate.sh` is the whole-file check.
+`split_link.sh`, `postlink_residual.py` and `linktest.sh` are retired.
+
+Inside that composition, `postlink_residual` attributed differing bytes by
+reference VA, so a symbol not exactly at its reference VA dragged its whole
+window; 73 of 319 symbols were not exact. A candidate rejected in one
+composition was sometimes a win in another. Only the total from a full
+rebuild (`cmake --build`, then `scripts/split_link.sh`, then
+`postlink_residual.py --write`) was comparable across those rounds, and
+`scripts/linktest.sh` recompiled only the files it was named, so a run was
+attribution only when no other source had changed since the last full build.
 
 ## Finding 58: inter-object size: the constraint is `have <= padded(want)`, and every real body *below* the reference span is free
 

@@ -8,17 +8,22 @@ Historical checkpoints are in [goal history](goal-history.md).
 
 | Area | Result | Receipt |
 | --- | --- | --- |
-| Server raw image | All 286,720 bytes equal the untouched reference. Function checks 316/316; data checks 652/652. The gate still fails lint. | `.scratch/goal110-full-runs/server-gate-retry.log` |
+| Server raw image | All 286,720 bytes equal the untouched reference. Function checks 316/316; data checks 652/652. That gate log records 41 lint errors, all E023, so the gate still fails. | `.scratch/goal110-full-runs/server-gate-retry.log`, `.scratch/gate-lint.json` |
 | Client builds | Both complete build passes exited 0 and produced PEs/maps under `build/`. They contain explicit scaffolds and differ from their references. | `.scratch/goal110-full-runs/{gold-build,goldtl-build}.log` |
 | Gold getter | `0x4364f0` is C, RELOC25/25, with its DIR32 validated. Gold subsequently relinked. The new pointer slot is comparison storage, not a recovered owner. | `.scratch/goal110-full-runs/getter-official.json`, `gold-rebuild.log` |
 | Experimental runner | Verification and CMake CL/LINK/LIB use configured unshare. Wine-prefix initialization, private font cache and extracted mtimes are repaired upstream. Complete Gold/TL probe objects equal Docker controls. | `.scratch/goal110-full-runs/compile-equivalence.json`, `seed-isolation.json` |
 | Upstream tests | 12,586 passed, 36 skipped; mypy checked 392 files. These are the upstream suite, not raw-image or client proof, and not a verdict on later edits. | `.scratch/goal110-full-runs/upstream-suite-final.log`, `upstream-mypy-final.log` |
 
 The first client passes emitted 457 compiler-warning lines across 128 files.
-Repairs are underway; those logs are not warning-free builds. The first warning
-batch preserves complete non-CodeView sections and relocations in 18 contexts.
-Later worker edits require independent review, official comparison and relinking.
-See `.scratch/goal110-full-runs/compiler-warnings.json` and `warning-batch/`.
+Those logs are not warning-free builds. The first warning batch preserves
+complete non-CodeView sections and relocations in 18 contexts. Later edits need
+independent review, official comparison and relinking. See
+`.scratch/goal110-full-runs/compiler-warnings.json` and `warning-batch/`.
+
+Assembly lint stayed open after that gate.
+`.scratch/publication/guild-final51-lint.json` (2026-10-18 16:23) reports 39
+E023 errors and 0 warnings in each target summary. The gate's 41 errors are the
+earlier log. Run `rebrew lint` again after further edits.
 
 ## Next actions
 
@@ -26,10 +31,11 @@ See `.scratch/goal110-full-runs/compiler-warnings.json` and `warning-batch/`.
    pointer/callee contracts, packing and return paths against native evidence.
    Preserve every selected target context. Do not suppress diagnostics, add
    arbitrary initializers or replace recovered behavior with stubs.
-2. **Recover unsupported assembly as C.** The Goal110 getter reduced the original
-   57-body Gold audit to 40 outstanding entries at that checkpoint. Query the
-   live list; old EXACT/RELOC assembly verdicts are not C-recovery credit.
-   Fourteen TL comparison stubs also need native ABI/provider recovery.
+2. **Recover unsupported assembly as C.** The Goal110 getter left 40 outstanding
+   Gold-audit entries at that checkpoint. That denominator is the audit list,
+   not the later 39 E023 lint receipt. Query the live list. Old EXACT/RELOC
+   assembly verdicts are not C-recovery credit. Fourteen TL comparison stubs
+   also need native ABI/provider recovery.
    [Assembly policy and receipts](assembly-audit.md) define the allowed exceptions.
 3. **Close client providers and storage.** Resolve duplicate native identities,
    comparison placeholders, omitted TUs and unproven global owners. Keep stock
@@ -54,13 +60,14 @@ uv run rebrew verify --data --target Europa1400Gold_TL.exe --json
 uv run scripts/gate.sh
 ```
 
-`verify --data` is image-only unless function checking is requested. Bare
-`verify` checks functions. `--no-cache` skips saved verification results;
-a matching compiler-object cache entry can still supply the object. Check
-current CLI help before reusing an old command. Client build recipes and
-scaffold limits are in
-[stubs/README.md](../stubs/README.md); runner/cache details are in
-[verification performance](verify-performance.md).
+`todo --json` uses the default target, GoldTL. `verify --data` can record data
+verdicts for the configured raw link, and compiles functions only when asked.
+Bare `verify` checks functions. `--no-cache` skips saved verification results;
+a matching compiler-object cache entry can still supply the object. A RELOC
+`todo` row may print `rebrew test --linked`, which unshare refuses
+([runner limits](verify-performance.md#runner-and-caches)). Check current CLI
+help before reusing an old command. Client build recipes and scaffold limits
+are in [stubs/README.md](../stubs/README.md).
 
 ## CURRENT STATE
 

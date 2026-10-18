@@ -3,7 +3,8 @@
 Measured C spellings, keyed by original section number and native address.
 Server uses plain SP5; clients use SP5 Processor Pack. Compile with the
 project `unshare` backend on the pinned toolchain image. A note that names
-Docker or Wine records that measurement's runtime.
+Docker or Wine records that measurement's runtime. Client builds are
+comparison scaffolds, not playable programs and not identical images.
 
 Scores, residue totals, PROVEN labels and old recipes are checkpoints.
 Current proof and status stay in managed metadata. When a later section
@@ -50,17 +51,18 @@ Numbers reflect discovery order, with gaps and addenda; do not renumber.
 ## How to probe a hypothesis
 
 ```sh
-uv run --frozen rebrew source findings 0x<VA> --json
-uv run --frozen rebrew binary asm show 0x<VA> --size N --json
-uv run --frozen rebrew diff FILE --json
-uv run --frozen rebrew test FILE --json
+uv run rebrew source findings 0x<VA> --json
+uv run rebrew binary asm show 0x<VA> --size N --json
+uv run rebrew diff FILE --json
+uv run rebrew test FILE --no-promote --json
 ```
 
 Read source notes too. Use current CLI help for preview/write behavior and keep
-mechanism probes in `.scratch/`. Compile with the project `unshare` backend
-on the pinned image. Compare complete bodies, operands and literals; rebuild
-affected target images for link/layout claims. Record inputs, observed output,
-limits and receipt once.
+mechanism probes in `.scratch/`. Run the project's normal `uv` environment;
+do not pass `--frozen` and do not require a sibling checkout. Compile with
+the project `unshare` backend on the pinned image. Compare complete bodies,
+operands and literals; rebuild affected target images for link/layout claims.
+Record inputs, observed output, limits and receipt once.
 
 ## 1. Global array element type sets the addressing scale
 
@@ -1507,10 +1509,12 @@ Two confirmed instances:
 
 **Before trusting a RELOC, resolve every `~~` operand.** Our object is
 unlinked, so its slot holds only the addend while the original's holds
-`symbol_va + addend`; subtracting gives the symbol VA, which
-`src/Develop/rebrew_globals.h`, `db/coverage-server.dll.toml`, and
-`src/rebrew-data.toml` can name. For string literals, read the bytes at the
-original's address straight out of the binary and compare.
+`symbol_va + addend`; subtracting gives the symbol VA. Name it from managed
+`rebrew-data.toml` (format 2, repository root) or `rebrew data list`. That
+round also consulted `src/Develop/rebrew_globals.h` and
+`db/coverage-server.dll.toml`; neither is a second metadata store. For string
+literals, read the bytes at the original's address straight out of the binary
+and compare.
 
 An audit of 19 recently converted functions resolved all 211 masked
 instructions and found the single `gm_Open` defect; the other 18 were clean.
@@ -2714,6 +2718,11 @@ re-try without a plan for the tail recoloring.
 
 ## 73. `base + idx*0x40 + idx` always folds to one `[reg+reg]` operand
 
+Section 200 corrects the absolute reading. A `volatile` load emits the
+materialised `mov` / `add` / `mov` form on `gm_AllocGebaeude`. The nineteen
+non-volatile spellings below still all folded. "Not reachable from C" means
+those spellings.
+
 `gm_AllocGebaeude` (0x100174d0): nineteen spellings -- pointer cast, array subscript,
 two-step pointer, `idx << 6`, `(unsigned)` cast, `int*`-scaled, `&arr[..]`, named
 intermediates, split across two statements -- **all** emit `mov cl,[eax+ebx]`.  The
@@ -2726,8 +2735,13 @@ scheduling barrier, which section 69 rules out.)
 
 ## 74. msvc6 folds byte-identical early-return epilogues unconditionally; the reference folds none
 
+Section 200 corrects the absolute reading. A `return` inside the loop makes
+msvc6 merge the exits; without that return, `gm_FindNextFilteredEntity` keeps
+separate inline epilogues. The merges below are the forms tested before that
+spelling. They are not a ban on the section 200 shape.
+
 The wall behind every "the reference keeps N epilogues and we keep one" note in this
-project, now measured rather than assumed.
+project, measured on the spellings below rather than assumed for every later form.
 
 On `gm_FindNextFilteredEntity` (0x10016f80) the reference has **five `ret` sites and merges
 none of them**: three short ones (`xor eax,eax; pop esi; ret`, at `+0x17`, `+0x27`, `+0x75`,
@@ -2747,10 +2761,11 @@ xor cl,cl; lea esi,[eax+0xa900]; mov eax,[g_entity_type_table]; test eax,eax`, a
 folds all three early exits into one far block.  `/O1`, `/O2 /Os`, `/O2 /Og-` and
 `/O2 /Ot /Oy-` all give two `ret` sites as well.
 
-Consequence: **eight return spellings have now been compiled across two passes and all are
-inert**, which is what the wall predicts.  Do not spend probes trying to make an exit unique.
-Recorded so the "two epilogues against the reference's three/five" note that recurs in this
-project's file headers is recognised as this wall and not as an unsolved shape.
+Consequence: **eight return spellings were compiled across two passes and all were
+inert** on those inputs. That round stopped there. Section 200 later reached the
+separate exits with a loop-return spelling. The "two epilogues against the
+reference's three/five" note is this measured class until that spelling is tried,
+not proof that no C form can separate the exits.
 
 `src/Develop/DieGildeAddOn/game/spiel_dumpD.c`
 
@@ -4674,10 +4689,12 @@ Both variants lose **371 matched bytes and grow the object by 5**, because hoist
 `memset` call forces the scaled index to be rematerialised across it: the call clobbers the
 register the reference is carefully keeping live.
 
-**So this is a scheduler decision downstream of register pressure, not a statement order.**
-msvc6 is sinking the 16-bit store past the block fill on its own, and C has no way to request
-that: the fill is a `memset` call, and any source order that puts the store after it also puts
-the call *before* it, which costs the register. This is the same class as section 99's
+**So this is a scheduler decision downstream of register pressure, not a statement order
+among the orders in the table.**
+msvc6 sank the 16-bit store past the block fill on its own. None of those source
+orders requested the sink: the fill is a `memset` call, and any source order that
+puts the store after it also puts the call *before* it, which costs the register.
+This failed search is not proof that no later spelling can. This is the same class as section 99's
 `vfs_ReadCompressed` finding (a scheduler-sunk `add esp,0x14`) and section 86b's store
 ordering, and it is consistent with section 106: no compiler flag moves this row either.
 
@@ -5551,6 +5568,9 @@ defect, it is a measurement. The target difference is exactly the byte drift acc
 the jump and its target, so every aligned pair yields a window `[jump, target)` with a signed
 byte count: for free, without disassembling the window's contents.
 
+Those two scripts are retired. The current localizer is
+`uv run rebrew diagnose drift FILE --json`. Round 231 ran:
+
 ```
 python3 scripts/probe_function.py --va <va> --file <src>     # builds the object
 python3 scripts/drift_windows.py <va> <size> build/objtest/probe_*.obj
@@ -6005,12 +6025,12 @@ Two more spellings were measured against it, both aimed at the addressing rather
 Both canonicalise. **That makes six distinct spellings measured on this one row** (four in
 sections 129 and 131, two here), five byte-identical and one a 117-byte loss.
 
-The conclusion is sharper than "not source-reachable": msvc6 chose to materialise the array base
-into the pointer, and **no way of writing the C changes that decision**: `extern char[]` indexed
-by a variable, an explicit absolute-address cast, and a base-plus-index cast all emit the same
-bytes. The choice is made by the code generator from the *whole loop's* pressure, and the only
-remaining lever would be changing what else the loop keeps live, which is the loop body's real
-work and cannot be removed.
+The conclusion is sharper than a single miss: on these six spellings msvc6 materialised
+the array base into the pointer. `extern char[]` indexed by a variable, an explicit
+absolute-address cast, and a base-plus-index cast all emitted the same bytes. That
+does not prove every later spelling fails. The choice tracked the whole loop's
+pressure in this measurement, and changing what else the loop keeps live changes
+the loop body's real work.
 
 **This row is now closed with a complete mechanism** rather than an open lead: worth more than
 leaving it on the list, because the next reader would otherwise re-derive the same six probes.
@@ -8044,28 +8064,25 @@ Measured while sharing `fcn_004ec660` (GOLDTL 0x4ec660) with its GOLD twin
 string (0x68deb8/0x60f188), and the **call targets do not matter**: an `e8`
 target is a relocation slot, masked in the RELOC comparison, so the shared file
 may keep calling the GOLDTL names and the GOLD object still scores 174/174.
-The absolute data address does matter (no fixup), so it gets a marker pair:
+The absolute data address does matter (no fixup). The round bound it with a
+`// GLOBAL:` pair. Current readers reject that inline form. Stack one C89
+address comment per target above the shared declaration. Identity stays in
+format-3 `rebrew-functions.toml` and format-2 `rebrew-data.toml` at the
+repository root. Do not hand-edit either store.
 
 ```c
-// GLOBAL: GOLDTL 0x68deb8
-extern char g_68deb8[];
-// GLOBAL: GOLD 0x60f188
+/* ADDRESS: GOLDTL 0x68deb8 */
+/* ADDRESS: GOLD 0x60f188 */
 extern char g_68deb8[];
 ```
 
-Three practical rules, all hit this round:
-
-* each marker must be **immediately** followed by a declaration of the symbol it
-  names, otherwise the reloc scanner warns "has no declaration on the following
-  line" (a marker stacked on another marker does not count);
-* if the symbol is already annotated for that target in an owning file, do not
-  repeat its marker: declare a bare `extern` there and keep only the *other*
-  target's marker in the shared file (`g_774a80` is owned by
-  `GOLDTL.fcn_005b2a00.c`; repeating `// GLOBAL: GOLDTL 0x774a80` raises the
-  "also annotated in" warning);
-* new GLOBAL markers need their SECTION metadata or they add W016 warnings;
-  `rebrew lint --fix --all-targets` backfills it into the read-only
-  `src/rebrew-data.toml` (never hand-edit that file, it is mode 444).
+Comments may sit between the address lines and the declaration. Code and
+directives may not. A symbol already owned for one target keeps a bare
+`extern` in the other file. Missing SECTION metadata is W016;
+`rebrew lint --fix --dry-run` previews the backfill into `rebrew-data.toml`.
+The old scanner's "no declaration on the following line" and "also annotated
+in" warnings (`g_774a80` in `GOLDTL.fcn_005b2a00.c`) describe that round's
+`// GLOBAL:` markers, not a second store at `src/rebrew-data.toml`.
 
 ## 184. A bound spelled `base + constant` still encodes as one immediate
 
@@ -8203,11 +8220,12 @@ call may modify. The original was written against symbols. Consequences on this 
 - `g_entity_type_table` in place of `*(unsigned char**) 0x100a8c30` moved the link
   12,060 -> 11,917 by itself.
 
-A symbol only works where the build defines it: a name listed in `rebrew-data.toml` still
-needs a definition in `src/link_stubs.c` (postlink replaces the data and rewrites the
-operand addresses), or the link fails with `LNK2001`.
-Before adding `volatile` to force a reload anywhere in this tree, check whether the address
-has a symbol and try that first.
+A symbol only works where the build defines it. In that link, a name listed in the
+data store still needed a definition in `src/link_stubs.c` (postlink replaced the data
+and rewrote the operand addresses), or the link failed with `LNK2001`. Both
+`src/link_stubs.c` and that postlink rewrite are retired. A managed row is not a
+definition; the owning translation unit or selected library member is. Before adding
+`volatile` to force a reload, check whether the address has a symbol and try that first.
 
 ## 188. Read a parameter load net of the pushes still on the stack
 
@@ -8327,8 +8345,9 @@ byte-exact in the linked build; each was measured alone.
    == 0) { ... }` compiles its tail to `je top; jmp exit`, the reference's; `do {} while`
    and `for (;;)` with a `break` all give `jne exit; jmp top` (codegen-walls section 19).
 
-The definitions for the new names live in `src/link_stubs.c`; postlink moves every operand to the
-reference address, so only the name has to resolve.
+In that link the new names were defined in `src/link_stubs.c`, and postlink moved every
+operand to the reference address, so only the name had to resolve. That file and that
+rewrite are retired; give a real symbol one owning definition.
 
 ## 197. A fill loop is not a `memset`: the destination keeps its own register
 
@@ -8500,10 +8519,11 @@ each measured with `scripts/linktest.sh`:
 - **A relocation to the wrong symbol is an object mismatch the link hides.** cm_ExSellObjekt
   (0x1000d930) sat at NEAR_MATCHING with 8 differing bytes, the `push imm32` operands at
   0x1000dd46 and 0x1000dec7: the source passed `g_error_msg_sell_no_source` / `_no_dest` where the
-  reference pushes 0x1002cd48 (`g_error_msg_sell_failed`) / 0x1002cd14 (`_no_source`). The postlink
-  data fixer rewrites `.data` operands, so the linked residue was already 0 and only `rebrew test`
-  saw it. Resolve each differing `push` operand in the reference (`rizin -c 'pr 60 @ <addr>'`) and
-  match the symbol in `src/rebrew-data.toml`: the fix changes the logged message to the original's.
+  reference pushes 0x1002cd48 (`g_error_msg_sell_failed`) / 0x1002cd14 (`_no_source`). On that
+  postlink pipeline the data fixer rewrote `.data` operands, so the linked residue was already 0
+  and only `rebrew test` saw the object mismatch. That pipeline is retired. Resolve each differing
+  `push` from the reference bytes and match the symbol in managed `rebrew-data.toml`: the fix
+  changes the logged message to the original's.
 
 - **A dead may-alias store keeps a single-use local a colouring candidate** (ahm_ExAllocAlchemist,
   closed to RELOC, -10 linked). `kind = cmd[0x10]; slot[0xa] = 0; slot[0xa] = kind;`: c2 does not

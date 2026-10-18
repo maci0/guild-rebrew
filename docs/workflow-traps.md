@@ -176,7 +176,9 @@ that exercises multiple iterations, not just parser/lint success.
 Read-only managed TOML is intentional: locked atomic writers replace it and
 restore mode `0444`. CLI writes are not a permission bug. Use Rebrew's managed
 writers exclusively; the historical chmod-and-hand-edit recovery advice is
-superseded by current project rules.
+superseded by current project rules. Function identity is format 3
+`rebrew-functions.toml`, including `[source.definitions]` and `[source.files]`.
+Data rows stay format 2 `rebrew-data.toml`. The separate source store is retired.
 
 ## 24. Some source experiments need a full object rebuild to recover from, and `linktest.sh` cannot tell you (round 1064)
 

@@ -31,6 +31,6 @@ in metadata and current work in [TODO.md](TODO.md).
 | (outside functions) | 0x100092bc | 7 | OpenVfsStream +1-shifted jump table (net effect). | 287 |
 
 
-All nineteen regions were reviewed or documented. Two `gm_AllocSpieler`
-differences remained recorded with revisit conditions; one CrashDump gate bug
-was fixed. Residue and byte-count figures above are historical measurements.
+Two `gm_AllocSpieler` differences stayed on the record, with revisit
+conditions. One CrashDump gate bug was fixed. Residue sizes and byte counts
+in the table are that review's measurements.

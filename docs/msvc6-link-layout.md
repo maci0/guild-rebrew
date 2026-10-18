@@ -126,10 +126,11 @@ the measured 32-byte boundaries naturally. `__declspec(align(32))` fails with
 C1600 in this compiler and is not a substitute.
 
 The tracked `layout/server.dll/common-data-order.txt` reproduces the proven
-game ordering. It does not solve the remaining 3296-byte `.data` extent gap.
-Explicit-zero controls for smaller globals moved CRT storage but worsened the
-raw comparison; they were not promoted. Recover the actual owner before
-changing storage or inserting a definition merely to fill a gap.
+game ordering. At this checkpoint it left a 3296-byte `.data` extent gap.
+That gap is not an open budget: the current server raw file matches the
+reference. Explicit-zero controls for smaller globals moved CRT storage but
+worsened the raw comparison; they were not promoted. Recover the actual owner
+before changing storage or inserting a definition merely to fill a gap.
 
 Evidence: `.scratch/native-bss-shapes.c` and `.json`, `.scratch/common-order/`,
 and the native COMMON ordering controls recorded in `docs/HANDOFF.md`.

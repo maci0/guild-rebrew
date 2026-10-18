@@ -22,9 +22,9 @@ directly. Manifests pin inputs, checksums, outputs and patch order.
 ## Mechanism
 
 ```sh
-uv run --frozen rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml
+uv run rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml
 # After editing a patch and its manifest:
-uv run --frozen rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml --apply
+uv run rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml --apply
 ```
 
 Check is the default and does not take `--apply`. It verifies every pristine

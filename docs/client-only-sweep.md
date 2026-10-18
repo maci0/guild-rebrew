@@ -1,6 +1,6 @@
 # Client-only functions of the shared TUs: round-19 sweep
 
-Historical appendix to [link layout](msvc6-link-layout.md) §5f. The table records
+Historical appendix to [link layout §5f](msvc6-link-layout.md#5f-reconstructed-client-code-in-the-shared-files-status-2026-10-08). The table records
 TL bodies in shared TU spans and whether the measured server build could retain
 them. That pass required every callee and absolute data operand to already have
 a server provider or allocation. It is not a current work queue, and it is not
@@ -35,11 +35,14 @@ What that measurement recorded:
   Names in the ported column are the inferred identifiers recorded then; the
   [Names](#names) section separates the unattested ones.
 
-Recheck a VA with the current CLI: `rebrew binary asm show`,
-`rebrew binary xrefs`, `rebrew binary strings --xref --filter`,
-`rebrew source units --json`, `rebrew data list --json` and
-`rebrew library match`. The project compiler uses the unshare backend and the
-immutable pinned toolchain image. Live status stays in source metadata and
+Recheck a VA with the current CLI. The default target is
+`Europa1400Gold_TL.exe`; pass `--target` for Gold or `server.dll`.
+`rebrew binary asm show`, `rebrew binary xrefs`,
+`rebrew binary strings --xref --filter`, `rebrew source units --json`,
+`rebrew data list --json` and `rebrew library match` are read-only.
+This checkout runs the compiler through `[compiler] execution_backend = "unshare"`
+on the pinned toolchain image. Docker still prepares that image; it is not the
+compile runner. Live status stays in source metadata and
 [TODO.md](TODO.md). Repeated blocked reasons are grouped under each TU; every
 TL VA, size and DIR32 from the original table remains.
 

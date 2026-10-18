@@ -98,7 +98,9 @@ There is no automatic two-way writer. An explicitly requested
 local changes until interrupted; it does not pull edits back, and it rejects
 `--json`. Keep normal collaboration on the reviewed, one-shot workflow above.
 
-Rebrew's function-store FORMAT3 and BinSync's transport schema are independent;
-the function/source-store consolidation does not require resetting BinSync state.
-Command shapes above were checked against the Rebrew 5 CLI help. No state
-repository was changed or synchronization started while writing this guide.
+Format 3 `rebrew-functions.toml` holds function rows plus `source.definitions`
+and `source.files`. `rebrew-data.toml` remains format 2. The separate source
+store is retired. BinSync keeps its own transport schema, so the existing state
+repository stays valid. Command shapes above match Rebrew 5.1.0 help. No state
+repository was changed and no synchronization was started while writing this
+guide.

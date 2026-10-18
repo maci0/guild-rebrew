@@ -19,20 +19,21 @@ the getter C replacement; later source edits require fresh builds. See
 [current work](../docs/TODO.md) for logs and pending checks.
 
 Complete the root [setup steps](../README.md#get-started), then run from the
-project root. Supply both client references as
+project root. Use this checkout's `.venv` (`uv sync`). No sibling Rebrew
+checkout is required. Supply both client references as
 `original/Europa1400Gold.exe` and `original/Europa1400Gold_TL.exe`, and download
 the pinned [Miles archive](../references/mss-6.1c/README.md) to
 `references/mss-6.1c/mss32.lib`; check its documented SHA-256. These inputs are
-ignored by Git. Also build the Processor Pack image using the toolchain
-checkout and environment variables from the root setup:
+ignored by Git. Client profiles are `msvc-6.0-sp5-pp`. Build that image from
+the public toolchain checkout and environment variables in the root setup.
 
 ```sh
 uv run rebrew toolchain build msvc-6.0-sp5-pp
 ```
 
-The configured `unshare` backend also applies to CMake's
-CL/LINK/LIB commands. Toolchain filenames retain the `-docker.cmake` suffix;
-their driver uses the configured backend.
+Docker prepares the image; the configured `unshare` backend executes CMake's
+CL/LINK/LIB commands inside its filesystem. No host Wine is used. Generated
+toolchain files retain the historical `-docker.cmake` suffix.
 
 ```sh
 uv run cmake -S . -B build/clients \

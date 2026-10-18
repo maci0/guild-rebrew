@@ -47,10 +47,12 @@ uv run rebrew source findings 0x<VA> --json
 uv run rebrew source findings 0x<VA> --window 64 --json
 ```
 
-These search live Markdown under `docs/`; use [archive search commands](goal-history.md#full-notebooks)
-for retired logs. Historical figures apply only to their checkpoint. Query current
-metadata and run the gate before reporting status; postlink success does not prove
-a raw link.
+These search live Markdown under `docs/`. Retired logs are in the
+[archives](goal-history.md#full-notebooks). A figure belongs to its checkpoint.
+Report status from current metadata and the gate. Historical postlink agreement
+is an old pipeline result. Bare commands use the default target, GoldTL; name
+`server.dll` for the server. Store layout is in the
+[project principles](project-principles.md).
 
 ## Keep it short
 

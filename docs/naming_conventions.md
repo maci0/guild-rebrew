@@ -14,6 +14,8 @@ original identifier. Implementation and debt statements describe each entry's
 checkpoint; query metadata and [current work](TODO.md) before continuing it.
 [Source layout](source-layout.md) owns placement guidance.
 
+## Recent findings
+
 ### Scene loading declarations (Goal80, 2026-10-17)
 
 `ecmd_LoadScene` remains attested by the complete original diagnostic. Its
@@ -473,10 +475,17 @@ functions appear in both) but is built from `DieGildeAddOnVc\` instead of
 ### Attested original source paths (round 937)
 
 The `__FILE__` strings the compiler embedded give the original tree directly:
-**14 paths**. Current inventory is `rebrew source units --json` on
-`server.dll` and each client. Confirm a referencing instruction with
-`rebrew binary asm show`. The old ad hoc scan of `original/Server/server.dll`
-is retired.
+**14 paths**. Current inventory is `rebrew source units --json`. The default
+target is `Europa1400Gold_TL.exe`, so name the binary:
+
+```sh
+uv run rebrew source units --target server.dll --json
+uv run rebrew source units --target Europa1400Gold_TL.exe --json
+uv run rebrew source units --target Europa1400Gold.exe --json
+```
+
+Confirm a referencing instruction with `rebrew binary asm show` on that same
+target. The old ad hoc scan of `original/Server/server.dll` is retired.
 
 ```
 Units\net\broadcast.c              Units\Error\Error.c
@@ -493,10 +502,13 @@ DieGildeAddOn\loadsave\loadsave.c
 reconstructed header, helper name or proposed file boundary. The table below
 records the measured mapping; inferred placements remain labeled.
 
-**The `_c` directory suffixes are not attested.** No `__FILE__` string contains `_c\`; the decompiler-era
-split of one translation unit into one file per function is gone for the server. The server tree now has
-one file per original translation unit, in the order the linker lays them out (verified: every one of the
-260 server game functions links at its reference VA):
+**The `_c` directory suffixes are not attested.** No `__FILE__` string contains `_c\`.
+The server per-function split is retired. The table is the recorded server TU
+map, 260 functions in these runs. It is not a fresh census. Whole-file server
+identity is a separate fact: the current raw server file equals the reference.
+Remaining `*_c` directories hold client `GOLDTL` files (`command_c`,
+`friedhof_logic_c`, `spiel_c`, `loadsave_c`, `vfs_c`, `Error_c`), not that
+retired server split.
 
 | Reference VA run | File | Functions |
 |---|---|---|
@@ -545,26 +557,34 @@ compiled directly into it or loaded from a separate DLL not captured here.
 
 ### File Naming Patterns
 
-- A shared domain type spelled identically in two TUs leaves the `.c` files
-  (rebrew_types.h holds globals support types, game_structs.h domain types).
-  Lifts on record:
-  - `LinkedNode` (0x43, packed, round 1103): `spiel_c/gm_RemoveLinkedNodeById.c`
-    and `spiel_c/gm_RemoveObjectByType.c`. Both local copies invented names;
-    the CALLERS fix the evidence: +0x00 word = `type` (16-bit object types
-    passed to `gm_RemoveObjectByType` by cm_ExClearLagerslot / cm_ExProdObjekt /
-    ahm_ExAllocAlchemist), +0x02 int = `entity_id` (`*(int*)(entity + 2)` at
-    `gm_RemoveObjectWrapper`); removal clears the type word.
+- A shared domain type spelled identically in two TUs leaves the `.c` files.
+  `src/Develop/rebrew_types.h` holds support types.
+  `src/Develop/game_structs.h` holds domain types. The round 1103-1106 paths
+  below are the files those lifts came from. Those paths are gone.
+  - `LinkedNode` (0x43, packed, round 1103) was spelled in
+    `spiel_c/gm_RemoveLinkedNodeById.c` and `spiel_c/gm_RemoveObjectByType.c`.
+    Both local copies invented names. Callers fix the evidence: +0x00 word =
+    `type` (16-bit object types passed to `gm_RemoveObjectByType` by
+    cm_ExClearLagerslot / cm_ExProdObjekt / ahm_ExAllocAlchemist), +0x02 int =
+    `entity_id` (`*(int*)(entity + 2)` at `gm_RemoveObjectWrapper`); removal
+    clears the type word. The canonical typedef is `src/Develop/game_structs.h`.
+    `src/GOLDTL.fcn_00502e30.c` and `src/GOLDTL.fcn_00502f00.c` still carry a
+    local typedef with the same field list. Those copies do not allocate storage.
   - `gm_CurrentHumanFamilyCount` (round 1107): attested by the confirmed-push
     overflow log in gm_AllocSpieler; renamed from `g_dynasty_generation_counter`.
-  - `OFFICE_SLOT` (0x18, round 1103): `game/aemter.c` (`a/b/c/type/d`) and
-    `game/aemter_c/amt_fio_LoadAemter.c` (read-order names). The latter's
-    names kept. Neither list is attested by a string; both descriptive.
-  - `gz_stream` (0x64, round 1104): `Units/vfs/vfs_c/check_header.c` and
-    `Units/vfs/vfs_c/gzread.c` byte-identical zlib-gzio copies -> header
-    `Units/vfs/gz_stream.h` next to its users.
-  - round 1105-1106 collapsed the last two 0x43-byte node spellings
+  - `OFFICE_SLOT` (0x18, round 1103) was spelled in `game/aemter.c`
+    (`a/b/c/type/d`) and `game/aemter_c/amt_fio_LoadAemter.c` (read-order names).
+    The read-order names were kept. Neither list is attested by a string.
+    `aemter_c/` is gone. The typedef is `src/Develop/game_structs.h`.
+    `src/Develop/DieGildeAddOn/game/office_slot.h` defines a separate
+    `OfficeSlot` with different field names. It is not this spelling.
+  - `gz_stream` (0x64, round 1104) was copied from
+    `Units/vfs/vfs_c/check_header.c` and `Units/vfs/vfs_c/gzread.c` into
+    `Units/vfs/gz_stream.h`. That header is gone. The struct lives in vendored
+    `references/zlib/gzio.c`. See [vendoring](vendoring.md).
+  - Rounds 1105-1106 collapsed the last two 0x43-byte node spellings
     (`EntitySlot` in `gm_FreeObjectListRecursive.c`, anonymous `Record` in
-    `spiel.c`) onto the lifted `LinkedNode`; one layout, one name.
+    `spiel.c`) onto `LinkedNode`.
 - German nouns for gameplay concepts: `spiel` (game), `aemter` (offices),
   `friedhof` (graveyard)
 - English for technical/infrastructure: `server`, `lobbycommands`, `loadsave`
@@ -685,7 +705,9 @@ Each command type has up to two handler functions:
 | `cm_Chk*`     | Validate    | `0` = OK, `1` = invalid (reject)    |
 | `cm_Ex*`      | Execute     | `0` = OK, `1` = failed              |
 
-Both share the signature `int __cdecl func(void* cmd, void* result)`.
+A common reconstructed shape is `int __cdecl func(void* cmd, void* result)`.
+Recover the actual signature and consumer for each handler. The 0/1 results
+are the usual pattern, not a proof that every body uses them.
 
 Additional patterns seen in the binary:
 
@@ -1136,7 +1158,7 @@ and caller proofs: .scratch/goal23/pool-unification/. Original semantic evidence
 
 | Image | VA | Current name | Standing |
 |-------|----|--------------|----------|
-| server.dll | `0x1001a0d0` | `gm_RandomMod` | Existing reconstructed server name retained; body moved from spiel622.c to game/spiel_c/gm_RandomMod.c. |
+| server.dll | `0x1001a0d0` | `gm_RandomMod` | Existing reconstructed server name retained. The round's path `game/spiel_c/gm_RandomMod.c` is gone. The definition is `DieGildeAddOn/game/zufall.c`. See the 2026-10-11 reconciliation. |
 | Europa1400Gold_TL.exe | `0x0042e410` | `gm_RandomMod` | Numeric caller alias fcn_0042e410 renamed; newly recovered32-byte identity shares the server body. |
 | Europa1400Gold.exe | `0x0042ec00` | `gm_RandomMod` | Renamed from fcn_0042ec00; duplicate body retired for the shared definition. |
 
@@ -1258,10 +1280,14 @@ classification is [client-only sweep](client-only-sweep.md).
   alchemistry_logic.c) and finds no row for `gm_RandomRange` and `gm_RandomFloat01Squared`, so the set keeps
   its names until the client symbols are separated: `gm_RandomMod`, `gm_RandomRange`, `gm_RandomFloat01`,
   `gm_RandomQuadratic`, `gm_RandomFloat01Squared`, `srv_SeedRandomWithTime`, `srv_SeedRandom`, all inferred.
-- **Stand-ins:** `g_gap_10035410` is a 28-byte layout span with no proven owner; `gm_GetSlotBase` reads its
-  first dword (a float scale) and `sim_NextServiceBuilding` its dword at +0x18 (a scan cursor). The two
-  objects keep the span's name until their allocation and extent are known (Global ownership in AGENTS.md).
-  `g_gap_10034684` (5f) is referenced only by docs.
+- **Layout rows:** `g_gap_10035410` (28 bytes) and `g_gap_10034684` (3460 bytes)
+  are generated definitions in `src/bss_layout/bss_head2.c`. The names are
+  inventory, not attested identifiers. That definition supplies reconstructed
+  bytes and does not prove an original owner. `gm_GetSlotBase` reads the first
+  dword of `g_gap_10035410` as a float scale. `sim_NextServiceBuilding` reads
+  the dword at +0x18. Client copies of `g_gap_10035410` in the comparison
+  scaffolds are placeholders, not a second owner. The round-19 note that
+  `g_gap_10034684` appeared only in docs is superseded.
 
 Every other name the rounds added is inferred: module prefix of the TU it sits in plus `VerbNoun`, or the
 unit's own style (`m_` snake case in m_alloc.c, `nt_` globals in net.c, unprefixed in Error.c and
@@ -2235,7 +2261,17 @@ The full FLIRT scan loaded 7102296 signatures and reported 1967 candidates (4679
 
 BMP native details matter for future source: TL `401d10` writes indexed/grayscale BGR0 palette data and bottom-up rows without row padding. TL `401ed0` / Gold `401b90` carry the `!bmp:SaveBMP24(temp_row)` label; TL writes a 44-byte info block and pixel offset `0x3a`. `SaveBMP24` is a label-derived inferred function name. Goal69 registers the independently reviewed Gold pair as native-only; this creates no source or matched-byte claim. TL `404dc0` / Gold `4044a0` attest `ch_AttachAni`; the empty-name native branch consumes an uninitialized stack slot. Do not silently initialize it while claiming source fidelity.
 
-Receipts and replay inputs are under `.scratch/goal63`: `main-map-plan.json`, `reviewed-map-rows.json`, `mapping-preservation.json`, per-VA native/Kuna dossiers, diagnostic strings with xrefs, and `map-no-source/report.md` plus `mapping-report.json`. Replay through `rebrew binary function VA`, `binary asm show VA --size INVENTORY_SPAN`, `decompile VA --decompiler kuna`, `binary strings --filter REGEX --xref`, and `library match --stock-lib LIBCMT.LIB --va VA --resolve-callees`, selecting the target explicitly. Managed name/size/note rows were written through `record_function_rows`; no source files, type/data stores or inventory extents changed.
+Receipts and replay inputs are under `.scratch/goal63`: `main-map-plan.json`, `reviewed-map-rows.json`, `mapping-preservation.json`, per-VA native/Kuna dossiers, diagnostic strings with xrefs, and `map-no-source/report.md` plus `mapping-report.json`. Replay with the target named explicitly. The default target is `Europa1400Gold_TL.exe`:
+
+```sh
+uv run rebrew binary function 0x<VA> --target Europa1400Gold_TL.exe --json
+uv run rebrew binary asm show 0x<VA> --size <inventory-span> --target Europa1400Gold_TL.exe --json
+uv run rebrew decompile 0x<VA> --decompiler kuna --target Europa1400Gold_TL.exe --json
+uv run rebrew binary strings --filter '<regex>' --xref --target Europa1400Gold_TL.exe --json
+uv run rebrew library match --stock-lib LIBCMT.LIB --va 0x<VA> --resolve-callees --target Europa1400Gold_TL.exe --json
+```
+
+A miss from that library match does not prove the body is game code. Managed name, size and note rows at this checkpoint were written through the internal `record_function_rows` helper, not a shell command. No source files, type or data stores, or inventory extents changed.
 
 ### Goal64 — shared supermap sampling
 

@@ -44,7 +44,9 @@ profile. Stock library objects have independent compiler provenance.
 Historical postlink builds copied non-text bytes from the reference; their green
 section checks did not establish raw-file identity. That pipeline is retired.
 Current acceptance compares ordinary `build/server.dll` against the complete
-reference; [goal.md](../goal.md) defines completion.
+reference; [goal.md](../goal.md) defines completion. A raw match does not clear
+lint. Existing E023 findings are whole-function assembly still awaiting C
+recovery; they are not a new exception. Live status is [current work](TODO.md).
 
 ## Game domain
 
@@ -101,14 +103,16 @@ byte comparison does not establish source ownership or virtual storage extent.
 ## Finding code we already reversed in another target: `rebrew source import-related`
 
 ```sh
-uv run --frozen rebrew source import-related --from server.dll --target Europa1400Gold_TL.exe --dry-run --candidates-only --json
+uv run rebrew source import-related --from server.dll --target Europa1400Gold_TL.exe --shared --dry-run --candidates-only --json
 ```
 
 Structural scores propose counterparts; destination compilation and complete
-operand/literal checks decide adoption. Use shared-definition imports in this
-unified tree, preserving co-resident bodies. The server/client generator
-boundary and genuine source differences can defeat a score-100 candidate.
-Current CLI help owns options and write behavior.
+operand/literal checks decide adoption. `--shared` records the destination
+row on the existing file. Omitting it copies a second body into the
+destination tree. The server/client generator boundary and genuine source
+differences can defeat a score-100 candidate. Current CLI help owns options
+and write behavior. The project environment is the normal `uv` venv of the
+released packages; no sibling checkout and no `--frozen` run are required.
 
 ## The three binaries: one compiler version, two code generators (round 1379, definitive)
 
@@ -142,11 +146,50 @@ Nine of twelve tested server bodies were generator-insensitive. PP broke
 none was PP-only. The old partial-score PP pins were removed. This supports one
 plain server generator, without proving a specific service pack from those bodies.
 
+Same-source control, 2026-10-18. One isolated export was built twice with the
+project unshare backend. Both runs used source
+`5bc60b00e89348314348906d6aefd168c39f7a4b`, the same per-file flags, the same
+37 compiler recipes, stock LIBCMT, and the native Microsoft-runtime link
+overlay. The profile was the only change: plain `msvc-6.0-sp5` versus
+`msvc-6.0-sp5-pp`. CL.EXE is the same image file. Plain `C2.DLL` is SHA-256
+`d50100ac2380d58f3f6f756961fb1319d35f5248e5fa6cafb866ca657e5dda4a`; Processor
+Pack `c2.dll` is SHA-256
+`6c8e3988a5ccd69a9f9829b5c7512848d71c018b8d24be3928d7b00b5f79f231`. This
+compares those two current backends. It does not identify the exact original
+compiler installation.
+
+| Profile | Raw bytes | SHA-256 | Raw file | Data checks |
+| --- | ---: | --- | --- | --- |
+| Plain VC6 SP5 | 286,720 | `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1` | Identical to the reference | 652/652 |
+| SP5 Processor Pack | 282,624 | `196a4526a6598b5f39306fb9bfb6c58aac3586bdb30c28564bf429003eb7d02e` | Different | 402/652 differ |
+
+Processor Pack output is 4,096 bytes shorter. The shared extent differs in
+174,798 bytes. That count includes displacement from earlier layout changes,
+so it is not a count of independent semantic errors. `cm_ExModifyStat`
+(`0x100100a0`) is 159 bytes in the native body and in both objects. Five
+non-relocation bytes differ, in the x87 compares and their branches:
+`test ah,1` / `je` / `jne` become `test ah,5` / `jp` / `jnp`. Plain SP5
+matches that native body. The plain server profile stays in force. Receipts:
+`.scratch/server-pp-experiment/REPORT.md`.
+
+The same-day client controls support retaining Processor Pack. Fresh scans
+count 834 PP compare sites in Gold and 832 in TL, with no plain sites in
+either. Compiling the same ordinary C function at Gold `0x453b30` and TL
+`0x4514d0` produces 38-byte bodies under both profiles. Plain SP5 changes
+`test ah,5` / `jp` to `test ah,1` / `je`, differing from both native bodies
+at two non-relocation bytes. PP reproduces all 38 TL bytes with all three
+operands resolved. Gold's helper name remains unresolved, so its control
+establishes non-relocation agreement rather than complete body identity.
+Receipts: `.scratch/server-pp-experiment/client-controls.md`.
+
 ## Using the two clients as a reference for the remaining server work (round 1380)
 
 Measure reference bodies and destination calls before treating names as twins.
 Six investigated pairs differed beyond code-generator effects. Matched client
 source can help recover logic, but cannot supply a server byte/provider claim.
+Built client images are comparison scaffolds: they are not playable
+reconstructions and they are not identical to their references. See
+[the client recipe](../stubs/README.md) and [current work](TODO.md).
 The old residue counts and retired probe commands remain in the archive.
 
 ## Native findings

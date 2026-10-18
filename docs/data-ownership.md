@@ -64,15 +64,22 @@ in the [archive](goal-history.md#full-notebooks).
 
 ## Check changes
 
+Function rows and `[source.definitions]` / `[source.files]` live in format-3
+`rebrew-functions.toml`. Data rows stay format 2 in `rebrew-data.toml`. The
+separate source store is retired. Use the locked writers. The default target
+is `Europa1400Gold_TL.exe`; `data bss` takes one target per invocation.
+
 ```sh
-uv run --frozen rebrew data list --json
-uv run --frozen rebrew data bss --json
-uv run --frozen rebrew lint --json
+uv run rebrew data list --all-targets --json
+uv run rebrew data bss --target server.dll --json
+uv run rebrew lint --all-targets --json
 ```
 
-Use CLI/locked metadata writers, then verify against the current raw image.
-Coverage reads canonical inputs; spans, declarations and accounting coverage do
-not establish reconstructed or verified bytes. Current queue: [TODO.md](TODO.md).
+Repeat `data bss` with `--target Europa1400Gold.exe` or
+`--target Europa1400Gold_TL.exe` when that image is the one under review.
+Then compare against the current raw image. Coverage reads canonical inputs.
+Spans, declarations and accounting coverage do not establish reconstructed or
+verified bytes. Current queue: [TODO.md](TODO.md).
 
 
 ## VFS stream and directory entry are distinct (Goal81, 2026-10-17)
@@ -128,7 +135,7 @@ beside an existing `Row502450[]` declaration in its game user. Both now include
 Three complete objects/five definitions preserve their bytes and fixups.
 Compiler-checked cell/row strides are `0x80` / `0x2a90` in both clients;
 native index arithmetic independently confirms them. This declaration repair
-restores the prior conflict counts0/3/1; it does not allocate the table or
+restores the prior conflict counts 0/3/1; it does not allocate the table or
 establish its complete extent/owner.
 
 Three final TL identities bind `g_85ab80`, `g_14a5320` and the complete 24-byte

@@ -39,9 +39,12 @@ networkfix. Their behavior is separate from the original game being reconstructe
 
 | Reference | Role |
 | --- | --- |
-| `original/Server/server.dll` | Dedicated server; 286,720 bytes |
-| `original/Europa1400Gold_TL.exe` | Primary client reconstruction |
-| `original/Europa1400Gold.exe` | Shared-source validation and unique client logic |
+| `original/Server/server.dll` | Dedicated-server reference; 286,720 bytes. The current raw server file equals this reference. |
+| `original/Europa1400Gold_TL.exe` | Primary client reference (hardware T&L) |
+| `original/Europa1400Gold.exe` | Non-TL client reference: shared-source check and unique client logic |
+
+The client images under `build/` are comparison scaffolds, not playable or
+byte-identical games. See [stubs/README.md](../stubs/README.md).
 
 The server has image base `0x10000000`, four sections, 100 imports across
 KERNEL32/USER32/WS2_32/WINMM, `.text` VirtualSize `0x22846`, `Init` at

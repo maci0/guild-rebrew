@@ -126,11 +126,13 @@ comparing **branch targets**, not instructions.
 `xor r,r; mov r16,[mem]` (`msvc6-c-shapes.md` §52). **The direction is easy to get backwards**:
 one pass was briefed with it inverted and spent 14 probes refuting the brief, not the mechanism.
 
-Where the reference's form is the *masked* one, the lever is to remove the qualifier, and that
-can be impossible, because the qualifier is often what holds the loop's register allocation.
-On `gm_AllocSpieler` dropping it at the sympathy-loop reads produces exactly the reference's
-local form and costs **362 matched bytes** (736 -> 374). Sweeping the qualifier *in* is worse
-still: 736 -> 488/408/365 at 1/8/17 sites, and the full sets exceed the composition band.
+Where the reference's form is the *masked* one, the lever tried here was to remove the qualifier.
+On `gm_AllocSpieler` dropping it at the sympathy-loop reads produced exactly the reference's
+local form and cost **362 matched bytes** (736 -> 374). That cost is this checkpoint. Later,
+removing register-pinning `volatile` reads paid on other carriers
+([c-shapes section 200](msvc6-c-shapes.md#200-carrier-wave-round-1145-the-documented-walls-that-were-source-shapes)). A failed removal is not proof the qualifier
+is permanent. Sweeping the qualifier *in* was worse still: 736 -> 488/408/365 at 1/8/17 sites,
+and the full sets exceeded the composition band.
 
 Corollary that invalidated an earlier inventory: `and r,0xffff` site counts are **not** a length
 signal. On that function both sides' real code is already exactly 3689 bytes, the gap curve
@@ -288,8 +290,11 @@ The original tables are in the [October18 archive](goal-history.md#full-notebook
 
 ### 11. The residue's shape, quantified: and why the small carriers are not a shortcut (round 939)
 
-The natural instinct when the big carriers are walled is to work the tail. Measured, that is a dead end,
-and the population makes it obvious:
+This ranking describes the retired postlink residue. It is not the current work
+queue; see [TODO](TODO.md). The counts stay round 939's measurement.
+
+The natural instinct when the big carriers are walled is to work the tail. Measured, that is a dead end
+for that population:
 
 | band | carriers | bytes | share |
 |---|---|---|---|
@@ -308,16 +313,21 @@ mechanism and a probe history**: checked individually this round:
   · `vfs_ReadCompressed` (23) · `cm_ExProdObjekt` (21) · `cm_ProcessCommandQueue` (15): each header
   states its residual cluster and the variants rejected.
 
-**So the tail is not unexplored; it is explored and closed, one file at a time, by rounds that wrote
-the result down.** Re-walking it costs a round per carrier to re-derive a known answer, and the whole
-band is worth 327 bytes. The only carriers worth a round are the top five, and each of those has a
-measured wall: §81/§1 for `CrashDump` and `gm_AllocSpieler`, allocator Finding 63 for `cm_ExSellObjekt`,
-shapes §122 for `ls_LoadBuildingEntityState`.
+**So the tail was not unexplored; it was explored and closed, one file at a time, by rounds that wrote
+the result down.** Re-walking it cost a round per carrier to re-derive a known answer, and the whole
+band was worth 327 bytes of that residue. In that ranking the carriers worth a round were the top five,
+each with a measured wall: §81/§1 for `CrashDump` and `gm_AllocSpieler`, allocator Finding 63 for
+`cm_ExSellObjekt`, shapes §122 for `ls_LoadBuildingEntityState`. Later source shapes closed several
+of those carriers; see [c-shapes section 200](msvc6-c-shapes.md#200-carrier-wave-round-1145-the-documented-walls-that-were-source-shapes).
 
 ### 12. Only one residue carrier has room to grow (round 950)
 
-Section 11 mapped the residue by function; `object_span_check.py` maps it by *budget*. Cross-referencing
-the two gives the constraint that decides which edits are even admissible:
+The span budget below belonged to the retired composition. It is not a current
+probe rule and not a reason to pad short objects. The table explains why some
+flag edits moved later symbols in that link.
+
+Section 11 mapped the residue by function; `object_span_check.py` mapped it by *budget*. Cross-referencing
+the two gave the constraint that decided which edits were admissible in that composition:
 
 | object | span | text | slack | residue it carries |
 |---|---|---|---|---|
@@ -335,15 +345,15 @@ every later symbol and fails the composition check. That is not a hypothesis: it
 `gm_AllocGebaeude` costs **+485** and on `vfs_OpenStream` collapses outright, while the same flag on
 `gv_ExAllocGraveyardWorker` (at span, but net-shrinking) pays −5.
 
-**Two consequences for targeting.**
+**Two consequences inside that composition.**
 
-1. **A carrier at its span can only be improved by a change that is size-neutral or size-reducing.** This
-   is a hard filter that has been rediscovered by measurement several times (`gm_AllocGebaeude` +485,
-   `vfs_OpenStream` collapse); apply it *before* probing, not after.
-2. **`vfs_OpenStream` is the one carrier where a size-increasing change is affordable** -- and its
-   header already records that every such variant was tried and is worse (the 701-byte size-correct form
-   scores 277 against the shipped 450, and "`/G3`..`/G4` with `/Gd /Oy /Op` … so there is no CFLAGS
-   lever"). So the headroom exists and is deliberately unused.
+1. **A carrier at its span could only be improved by a size-neutral or size-reducing change.** The
+   measurements rediscovered that filter (`gm_AllocGebaeude` +485, `vfs_OpenStream` collapse). It is
+   not a rule to apply before a current probe.
+2. **`vfs_OpenStream` was the one carrier where a size-increasing change was affordable** in that
+   budget, and its header already records that every such variant was tried and was worse (the
+   701-byte size-correct form scores 277 against the shipped 450, and "`/G3`..`/G4` with `/Gd /Oy /Op`
+   … so there is no CFLAGS lever"). The headroom was unused on purpose.
 
 ### 12b. Every one of the 19 carriers' divergence sites is already documented (round 978)
 
@@ -395,9 +405,11 @@ agent that trusts the tool will re-run a probe already measured at 109 against a
 **The check, before treating a carrier as unworked:**
 
 ```bash
-python3 scripts/whathas.py 0x<va> --window 48     # searches docs/ only
-sed -n '1,120p' <the carrier's .c>                # the per-file header is the other half
+uv run rebrew source findings 0x<va> --window 48 --json
 ```
+
+Then read the function's own source notes. Round 978 used `scripts/whathas.py`, which searched
+`docs/` only and missed those notes. A search miss is an index miss, not proof the code is unworked.
 
 Small carriers resist this best: their whole history fits in a header comment, so it never needed a
 `docs/` entry. Round 976 lost budget to exactly this: it probed `srv_LoadBuf` (`+0x50`) and
@@ -1399,6 +1411,10 @@ is that the `strcpy` half is now precisely located and characterised, rather tha
 
 ### 29. The reference's inlined `strcpy` carries a `cld` our msvc6 never emits: positive evidence for the asm clause
 
+The heading overstates a failed search. The three spellings below omit `cld`. That
+does not prove this compiler never emits it, and it does not authorize assembly.
+See [the assembly audit](assembly-audit.md#what-qualifies).
+
 §28 located the divergence at `m_AllocTracked`'s `0x100066a0`. This probes its **first cause**: the reference
 begins the expansion with `cld; repne scasb`, and ours begins at `repne scasb`.
 
@@ -1430,7 +1446,7 @@ places it **before** that move (`... 8b c1 c1 e9 02 8b f7`). So the expansion's 
 answer the `cld` question (all three agree on its absence) but they must not be used to reason about the
 `shr` ordering, which §28 measured in situ.
 
-**Judgement, and this is the first entry in this doc that supports the asm clause.** The objective permits
+**Judgement recorded then as support for the asm clause.** It does not grant an exception. The objective permits
 assembly only with positive evidence of likely original assembly. The native
 `cld` before `repne scasb` is a structural observation: an optional prefix byte with no semantic effect under the ABI, absent from every C spelling tested,
 present in the reference. These three failed C controls do not by themselves

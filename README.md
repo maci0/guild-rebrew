@@ -89,11 +89,12 @@ unshare --user --map-root-user true
 
 The configured compiler runner uses `unshare`: it requires unprivileged user
 namespaces, rootless overlayfs, and kernel support for `openat2`, `pidfd_open`
-and `close_range`. The namespace check above is only the first check; Rebrew
+and `close_range`. The namespace check above is only the first check. Rebrew
 checks the remaining requirements when starting the runner. See the
 [runner requirements](https://github.com/maci0/rebrew/blob/main/docs/TOOLCHAIN.md#experimental-unshare-backend)
 if your host rejects it. Ubuntu's AppArmor policy can permit `unshare(1)` while
-denying Rebrew's helper; the command above alone does not establish compatibility.
+denying Rebrew's helper. The server build below exercises the actual runner;
+the namespace check alone does not establish compatibility.
 
 ### 2. Clone and create the Python environment
 
@@ -106,9 +107,10 @@ uv sync
 uv run rebrew --version
 ```
 
-`uv sync` installs the pinned Rebrew release and project dependencies into
-`.venv`. Run the remaining commands from this repository root; `uv run` uses
-that environment without activating it.
+`uv sync` installs pinned Rebrew 5.1.0 and the project dependencies into
+`.venv` from the public release wheels. This walkthrough was verified with
+Python 3.13.16. Run the remaining commands from this repository root; `uv run`
+uses that environment without activating it.
 
 ### 3. Supply the original server DLL
 
@@ -209,10 +211,10 @@ their references.
 
 ## Optional coverage dashboard
 
-[Recoverage](https://github.com/maci0/recoverage) explores this checkout's live
-coverage records, source and reference binaries. After creating the project
-environment, install the optional dashboard into the same `.venv` and start it
-from the repository root:
+[Recoverage](https://github.com/maci0/recoverage) 8.2.0 explores this
+checkout's live coverage records, source and reference binaries. After creating
+the project environment, install that optional dashboard into the same `.venv`
+and start it from the repository root:
 
 ```sh
 uv sync --extra dashboard
@@ -247,7 +249,7 @@ stored coverage records; they do not establish whole-image completion.</sub>
 | `references/` | Vendor sources, patches and dependency provenance |
 | `db/inventory-*.json` | Tracked native function inventories |
 | `layout/server.dll/` | Server link ordering, retention inputs and layout metadata |
-| `rebrew-*.toml` | Managed reconstruction identities, evidence and configuration |
+| `rebrew-*.toml` | Managed identities, source evidence, types and project configuration |
 | `docs/` | Current work, technical references and archived experiments |
 
 Use [existing tooling](docs/tooling-upstream.md) before adding scripts, and

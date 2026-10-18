@@ -5,6 +5,10 @@ original source very likely used it. A byte match, failed C search, blocker or
 `REBREW_ALLOW_NAKED` define grants no exception. [AGENTS.md](../AGENTS.md) owns
 that rule; metadata owns each definition/target receipt and current byte verdict.
 Whole-function assembly verdicts do not count as C recovery.
+Reviewed evidence is format-3 `[source.definitions]` / `[source.files]` in
+`rebrew-functions.toml`. The separate source store is retired
+(`rebrew-source.toml` is absent). Write receipts with
+`rebrew source document-assembly`. Do not hand-edit the store.
 
 ## Recovery checkpoint
 
@@ -12,7 +16,10 @@ The initial audit found 57 active Gold whole-function naked reconstructions,
 all present in that checkpoint's map. They were not padding or native discards.
 At Goal110, 16 had become game C, one was corrected to an existing zlib provider,
 and 40 remained unsupported. Later recovery work must update metadata, not this
-historical denominator. Query the live list:
+historical denominator. The two live queries are different lists.
+`todo --category naked-reconstruction` selects metadata `source = "naked"`.
+Lint code E023 is a whole-function `__declspec(naked)` body. An older
+goal-history lint total is that checkpoint only.
 
 ```sh
 uv run rebrew todo --category naked-reconstruction --target Europa1400Gold.exe --json

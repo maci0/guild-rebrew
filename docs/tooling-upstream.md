@@ -38,9 +38,14 @@ for duplicate allocations or inferred CRT ownership.
 
 Split-link, copied CRT data, absolute-symbol and replacement-import emitters are
 retired. Their historical receipts do not authorize recreating that pipeline.
-Masked template hits do not establish native operand identity or a selected
-provider. For composition outside the CLI, reuse public compile/COFF/relocation
-and locked metadata APIs; keep target-specific controls in `.scratch/`.
+The separate source store is retired as well. Format 3 `rebrew-functions.toml`
+holds `source.definitions` and `source.files`, and `rebrew-data.toml` remains
+format 2. Masked template hits do not establish native operand identity or a
+selected provider. For composition outside the CLI, reuse public compile, COFF,
+relocation and locked metadata APIs; keep target-specific controls in
+`.scratch/`. `rebrew test --linked` still expects a Docker linked shell, and
+the configured unshare backend refuses it. See
+[runner limits](verify-performance.md#runner-and-caches).
 
 Regenerate server game anchors with:
 

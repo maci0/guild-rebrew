@@ -20,7 +20,7 @@ placement. Root address-named files remain a consolidation backlog.
 Review all-target providers, original TU context, storage instances and native
 order with `rebrew source organize review` before merging or splitting. Preserve
 raw baselines, includes, compiler flags and declaration order; compare complete
-COFF bodies/operands and rebuilt images with `source organize check` afterward.
+COFF bodies/operands and rebuilt images with `rebrew source organize check` afterward.
 Move managed identities through Rebrew's writers. Headers declare objects; source definitions or selected library members allocate storage.
 
 The October 11 placement pass used these witnesses:
@@ -153,8 +153,10 @@ unmerged. That split is still not an attested single spelling and is not
 permission to synthesize one body. Receipt: `.scratch/goal21/allocator-client-repair/`.
 
 Upstream `42e0a8c0` repaired merge/rehome's loss of existing managed rows in
-legacy-marker files, including rollback and bound-definition guards. Historical
-receipts keep their original paths; current state belongs in [TODO.md](TODO.md).
+legacy-marker files, including rollback and bound-definition guards. That fix
+is historical. Current readers reject legacy markers; format-3 function
+metadata has no separate source store. Historical receipts keep their original
+paths. Current state belongs in [TODO.md](TODO.md).
 
 ## Client placement views (Goal75, 2026-10-17)
 
