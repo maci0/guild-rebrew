@@ -381,13 +381,16 @@ definition_hash = "bdfef60b195f91b25859c084baa94424225fb08a9940655fed18641eb656a
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x005eb928"]
 file = "src/GOLDTL.fcn_004b6f00.c"
-name = "g_6629c8"
+name = "dbl_2_0"
 kind = "GLOBAL"
 type = "double"
-section = ".text"
-status = "UNCHECKED"
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
+section = ".rdata"
+updated_by = "data"
+updated_at = "2026-10-18T17:30:08+00:00"
+storage_kind = "literal"
+link_symbol = "__real@4000000000000000"
+size = 8
+note = "Compiler double literal 2.0, not a named C global. Complete COFF literal and native operand at Gold0x4b6d30+73 agree on all 8 bytes; this image differs from TL1.0. Map pooling, placement and original TU ownership remain separate."
 
 ["GOLD.0x005eb928".verification]
 status = "UNCHECKED"
@@ -451,9 +454,9 @@ size = 4
 section = ".rdata"
 storage_kind = "literal"
 note = "Compiler literal content label, not a source identifier or separate C global. Exact native bytes and complete used literal extent agree with the emitted COFF constant; no data verdict or independent storage owner claimed. Source uses the string/0.3f literal; final link pooling/provider remains unverified."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DRIFT"
+updated_by = "data"
+updated_at = "2026-10-18T17:30:08+00:00"
+link_symbol = "__real@3e99999a"
 
 ["GOLD.0x005ebb30".verification]
 status = "DRIFT"
@@ -4845,13 +4848,16 @@ definition_hash = "405da8d663473a306118d64d6b138687c616b28a79f9cb1e4f98b3cfd3e7b
 measured_at = "2026-10-17T12:27:42+00:00"
 ["GOLDTL.0x006629c8"]
 file = "src/GOLDTL.fcn_004b6f00.c"
-name = "g_6629c8"
+name = "dbl_1_0"
 kind = "GLOBAL"
 type = "double"
 section = ".rdata"
-status = "DRIFT"
-updated_by = "verify"
-updated_at = "2026-10-17T12:27:42+00:00"
+updated_by = "data"
+updated_at = "2026-10-18T17:29:55+00:00"
+storage_kind = "literal"
+link_symbol = "__real@3ff0000000000000"
+size = 8
+note = "Compiler double literal 1.0, not a named C global. Complete COFF literal and native operand at TL0x4b6f00+73 agree on all 8 bytes; map pooling and native placement remain separate. Storage owner and original TU not established."
 
 ["GOLDTL.0x006629c8".verification]
 status = "DRIFT"
@@ -5023,9 +5029,9 @@ size = 4
 section = ".rdata"
 storage_kind = "literal"
 note = "Compiler literal content label, not a source identifier or separate C global. Exact native bytes and complete used literal extent agree with the emitted COFF constant; no data verdict or independent storage owner claimed. Source uses the string/0.3f literal; final link pooling/provider remains unverified."
-updated_by = "verify"
-updated_at = "2026-10-17T12:27:42+00:00"
-status = "DRIFT"
+updated_by = "data"
+updated_at = "2026-10-18T17:29:55+00:00"
+link_symbol = "__real@3e99999a"
 
 ["GOLDTL.0x0066414c".verification]
 status = "DRIFT"

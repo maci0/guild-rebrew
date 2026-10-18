@@ -2,3 +2,14 @@
 # Keep the historical unresolved log intact; emit no obsolete placeholder.
 [specials.fcn_004c2480]
 impl = ""
+
+# Native initial values only; storage owners and full allocations remain unknown.
+
+[specials.g_6752a4]
+impl = "unsigned char g_6752a4 = 1;"
+
+[specials.ch_MorphFrameValue]
+impl = "int ch_MorphFrameValue = -1;"
+
+[specials.SonnenstrahlenStartZeit]
+impl = "int SonnenstrahlenStartZeit = -1;"

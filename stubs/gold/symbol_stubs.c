@@ -22,8 +22,6 @@ int LightingUpdateCount = 0;
 int LightingUpdatePending = 0;
 int SonnenstrahlenAktiv = 0;
 int SonnenstrahlenPhase = 0;
-int SonnenstrahlenStartZeit = 0;
-int ch_MorphFrameValue = 0;
 int d2_BildArgument2 = 0;
 int d3d_Device = 0;
 int d3d_LastResult = 0;
@@ -631,7 +629,6 @@ float g_6660fc = 0;
 float g_666100 = 0;
 char g_6750e8[1] = {0};
 int g_675170 = 0;
-unsigned char g_6752a4 = 0;
 char g_6752a8[1] = {0};
 float g_675308 = 0;
 int g_67530c = 0;
@@ -1147,7 +1144,7 @@ int g_6b6f74 = 0;
 int g_6b6f78 = 0;
 int g_6b6f7c = 0;
 void* g_6b6f80 = 0;
-void* g_6b6f84 = 0;
+int g_6b6f84 = 0;
 int g_6b6f88 = 0;
 char g_6b6f90[1] = {0};
 char g_6b7090[1] = {0};
@@ -1957,6 +1954,20 @@ unsigned char IID_IDirect3D3[16] = {0};
 unsigned char IID_IDirectDraw4[16] = {0};
 
 
+int SonnenstrahlenStartZeit = -1;
+
+int ch_MorphFrameValue = -1;
+
+
+
+
+
+
+
+
+
+unsigned char g_6752a4 = 1;
+
 /* Function stubs */
 int __stdcall fcn_0041cbc0(int a)
 {
@@ -2448,12 +2459,6 @@ int __cdecl fcn_0041e680(char* a, int b, int c, int d, int e, int f, int g, int 
 	return 0;
 }
 
-
-
-
-
-
-
 int __cdecl fcn_0041fb80(void)
 {
 	return 0;
@@ -2834,7 +2839,7 @@ int __cdecl fcn_00430580(void* f)
 	return 0;
 }
 
-int __cdecl fcn_004306b0(void* a, int b, int c, int d)
+int __cdecl fcn_004306b0(char* buf, int size, int count, char* stream)
 {
 	return 0;
 }
@@ -2844,7 +2849,7 @@ int __cdecl fcn_00430910(int* a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_00430e30(void* a, int b, int c, int d)
+int __cdecl fcn_00430e30(void* buf, int size, int count, char* stream)
 {
 	return 0;
 }
@@ -3019,7 +3024,7 @@ int __cdecl fcn_0044c0e0(char* key, char* val)
 	return 0;
 }
 
-int __cdecl fcn_0044c310(char* a, char* b)
+int __cdecl fcn_0044c310(char* key, char* val)
 {
 	return 0;
 }
@@ -3289,7 +3294,7 @@ int __cdecl fcn_0046c9e0(void)
 	return 0;
 }
 
-int __cdecl fcn_0046cd90(int x, int y, int slot)
+int __cdecl fcn_0046cd90(int x, int y, int element)
 {
 	return 0;
 }
@@ -4243,8 +4248,6 @@ int __cdecl fcn_004c0a80(int* a, int b)
 {
 	return 0;
 }
-
-
 
 int __cdecl fcn_004c2de0(int a, int b, int c, int d)
 {
@@ -6719,8 +6722,8 @@ int __cdecl sub_00576750(char* a, char* b, char* c, int d)
  * into a client that compiles this translation unit.
  */
 
-
 /* Generated source-closure placeholders; see source-closure.json. */
+void* d3d_VertexBuffer = 0;
 float g_678154 = 0;
 float g_678158 = 0;
 unsigned int g_67815c = 0;
@@ -6728,6 +6731,3 @@ int g_6b7190 = 0;
 
 /* Comparison-only capacity for six writes; native extent and owner remain unknown. */
 int g_10405e0[6] = {0};
-
-/* Generated getter comparison slot; see source-closure.json. */
-void* d3d_VertexBuffer = 0;

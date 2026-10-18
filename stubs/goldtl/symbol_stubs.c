@@ -24,8 +24,6 @@
 int DisplayCounters = 0;
 int SonnenstrahlenAktiv = 0;
 int SonnenstrahlenPhase = 0;
-int SonnenstrahlenStartZeit = 0;
-int ch_MorphFrameValue = 0;
 int d2_BildArgument2 = 0;
 int fcn_004e0620 = 0;
 int fcn_004e1920 = 0;
@@ -805,7 +803,6 @@ char g_6750e8[1] = {0};
 char g_67515c[1] = {0};
 int g_675170 = 0;
 unsigned int g_67529c = 0;
-unsigned char g_6752a4 = 0;
 char g_6752a8[1] = {0};
 float g_675308 = 0;
 int g_67530c = 0;
@@ -1646,7 +1643,7 @@ int g_6b6f74 = 0;
 int g_6b6f78 = 0;
 int g_6b6f7c = 0;
 void* g_6b6f80 = 0;
-void* g_6b6f84 = 0;
+int g_6b6f84 = 0;
 int g_6b6f88 = 0;
 char g_6b6f90[1] = {0};
 char g_6b7090[1] = {0};
@@ -2681,6 +2678,15 @@ char s_WSAEWOULDBLOCK[1] = "";
 char s_WSANOTINITIALISED[1] = "";
 char s_ls_tmp_1002d4fc[1] = "";
 
+/* Special forwarding stubs */
+int SonnenstrahlenStartZeit = -1;
+
+int ch_MorphFrameValue = -1;
+
+
+
+unsigned char g_6752a4 = 1;
+
 /* Function stubs */
 int __stdcall fcn_0041cbc0(int a)
 {
@@ -2967,7 +2973,7 @@ int __cdecl fcn_00430580(void* f)
 	return 0;
 }
 
-int __cdecl fcn_004306b0(void* a, int b, int c, int d)
+int __cdecl fcn_004306b0(char* buf, int size, int count, char* stream)
 {
 	return 0;
 }
@@ -2977,7 +2983,7 @@ int __cdecl fcn_00430910(int* a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_00430bd0(void* a, int b, int c, int d)
+int __cdecl fcn_00430bd0(void* buf, int size, int count, void* stream)
 {
 	return 0;
 }
@@ -3386,8 +3392,6 @@ int __cdecl fcn_004bfbc0(void* a)
 {
 	return 0;
 }
-
-
 
 int __cdecl fcn_004c3ed0(void)
 {

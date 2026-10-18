@@ -62,15 +62,23 @@ The logging tables/newline/default name and both Sonnenstrahlen strings have
 correct file bytes at their mapped addresses. In contrast, the scaffold's
 `ch_MorphFrameValue` and `SonnenstrahlenStartZeit` contain zero where the
 reference initializes them to -1; `g_6752a4` also has a zero placeholder for
-native value 1. Resolve storage and initializer provenance before replacing
-these placeholders. The critical-section slots already have import metadata
-and KERNEL32 providers; their placement differs. Anonymous constants need
-COFF/native-operand bindings, not new globals inferred from an absent map name.
+native value 1. Both clients' stub-generator overrides now preserve those values.
+Both regenerated stub objects compile without warnings and contain the expected
+bytes. Original owners remain unresolved; complete raw-link checks are pending.
+The critical-section slots already have import metadata and KERNEL32 providers;
+their placement differs.
+
+Complete COFF/native literal audits identify TL's `dbl_1_0`, Gold's distinct
+`dbl_2_0`, and each image's `flt_0_3`. Their metadata now names the emitted
+compiler symbols; no new C storage was added. On the existing TL map this
+reduces absent symbols from 24 to 22 (332 displaced). These are content and
+symbol-binding checks, not native placement or original TU ownership proof.
 
 Receipts: `.scratch/dsh-wave1/review/data-diagnosis-tl.json` and
-`data-linked-location-samples.json`. The user-run verdicts are retained; only
-22 GoldTL comparison records changed, with no identity/type/storage changes.
+`data-linked-location-samples.json`. The original audit changed only 22 GoldTL
+comparison records. The four later literal bindings above are separate changes.
 Rerun after the current complete build; these are not results for that image.
+Literal and initializer receipts: `.scratch/data-initializers/`.
 
 ## Verified checkpoint
 

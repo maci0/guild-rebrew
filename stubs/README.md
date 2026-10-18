@@ -105,6 +105,9 @@ uv run rebrew build symbol-stubs --source-dir src \
 ```
 
 The generator uses declarations where available and fallback types otherwise.
+Both targets preserve three native initial values in `specials.toml`:
+`SonnenstrahlenStartZeit` and `ch_MorphFrameValue` are `-1`; `g_6752a4` is `1`.
+These remain comparison placeholders with unresolved original storage owners.
 For example, `g_slot_table` is a two-byte placeholder, not a recovered client
 slot allocation. Named configured library/import providers are excluded;
 unbound numeric aliases of library functions can still be placeholders.

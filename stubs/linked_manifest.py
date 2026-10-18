@@ -4,9 +4,9 @@ The map is the link result. A symbol is scaffold storage when its object
 is ``symbol_stubs.c.obj``. ``WinMain`` and a renamed function that the map
 attributes to another object are real definitions, not scaffold.
 
-    uv run --frozen python stubs/linked_manifest.py \
+    uv run python stubs/linked_manifest.py \
         build/Europa1400Gold.map stubs/gold/symbols.json
-    uv run --frozen python stubs/linked_manifest.py \
+    uv run python stubs/linked_manifest.py \
         build/Europa1400Gold_TL.map stubs/goldtl/symbols.json
 """
 

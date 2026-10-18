@@ -36,3 +36,14 @@ impl = """
 /* Comparison-only capacity for six writes; native extent and owner remain unknown. */
 int g_10405e0[6] = {0};
 """
+
+# Native initial values only; storage owners and full allocations remain unknown.
+
+[specials.g_6752a4]
+impl = "unsigned char g_6752a4 = 1;"
+
+[specials.ch_MorphFrameValue]
+impl = "int ch_MorphFrameValue = -1;"
+
+[specials.SonnenstrahlenStartZeit]
+impl = "int SonnenstrahlenStartZeit = -1;"
