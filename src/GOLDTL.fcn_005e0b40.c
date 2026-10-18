@@ -14,7 +14,7 @@ extern int g_7725d0;
 
 int __cdecl fcn_00467240(int, int, int, int, int);
 void __cdecl fcn_00472900(int, int);
-void __cdecl fcn_00472380(int, char*);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00474cf0(int);
 void __cdecl fcn_00472770(int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -29,7 +29,7 @@ int __cdecl fcn_005e0b40(int a, int b, char* text)
 	result = 0;
 	h = fcn_00467240(a, b, 0, g_1015ea4, 1);
 	fcn_00472900(h, 0x53);
-	fcn_00472380(h, text);
+	d2_SetElementValue(h, text);
 	fcn_00474cf0(h);
 	*(int*) (g_102d150 + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x80;
 	*(int*) (g_102d29c + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x110;

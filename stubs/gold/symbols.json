@@ -1,7 +1,7 @@
 {
   "map": "build/Europa1400Gold.map",
   "stub_object": "symbol_stubs.c.obj",
-  "stub_symbol_count": 2891,
+  "stub_symbol_count": 2890,
   "checked_symbols": {
     "_WinMain@16": "GOLD.main.c.obj",
     "_crc32": "crc32.c.obj",
@@ -342,7 +342,6 @@
     "_fcn_00473660",
     "_fcn_00474cf0",
     "_fcn_00475220",
-    "_fcn_00475be0",
     "_fcn_00475f80",
     "_fcn_004763e0",
     "_fcn_00476970",

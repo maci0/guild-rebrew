@@ -24,7 +24,7 @@ extern int g_68b7a8;
 extern unsigned short* g_772f24;
 extern int g_774654;
 
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0052ae80(void);
 void __cdecl fcn_004d0a20(void);
 void __cdecl fcn_004d06d0(void);
@@ -41,7 +41,7 @@ void __cdecl fcn_004d7d70(char* rec)
 {
 	ent2c l;
 
-	fcn_00472380(g_68b7a4, 0, g_68bfbc, g_772f34 - g_772f30 + 1);
+	d2_SetElementValue(g_68b7a4, 0, g_68bfbc, g_772f34 - g_772f30 + 1);
 	fcn_0052ae80();
 	fcn_004d0a20();
 	fcn_004d06d0();

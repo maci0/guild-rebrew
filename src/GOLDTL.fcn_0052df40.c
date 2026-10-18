@@ -38,7 +38,7 @@ extern char g_6a2f24[];
 extern char g_6a2f18[];
 extern int g_772514;
 extern Win_1015f40 g_1015f40[0x60];
-extern Ctl_52df40* g_1015ea0;
+
 extern House_52df40 g_7f4ca0[];
 extern Dyn_52df40 g_868060[];
 extern char* g_773da8;
@@ -55,7 +55,7 @@ void __cdecl fcn_005186c0(int id, int a, int b, char* out);
 void __cdecl fcn_00519190(char* fmt, ...);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int h, int a, int b, int c);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
 int __cdecl fcn_0052dee0(int x, int y, int z);
@@ -87,15 +87,15 @@ void __cdecl fcn_0052df40(unsigned char* s)
 	}
 	fcn_004727a0(g_6a25b8, 0);
 	g_6a25bc = fcn_0046f740((((Slot_52df40*) g_1015f40)[g_772514].width - 0x30) >> 1, 0x48, *s + 0x427, g_772514);
-	g_1015ea0[g_6a25bc].shown = 1;
+	((Ctl_52df40*)g_1015ea0)[g_6a25bc].shown = 1;
 	if (*(unsigned short*) (s + 0x27) != 0xffff && *(unsigned short*) (s + 0x27) != *(unsigned short*) g_773da8) {
-		g_1015ea0[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (s + 0x27)];
+		((Ctl_52df40*)g_1015ea0)[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (s + 0x27)];
 	}
 	if (*s == 0x47 || *s == 0x1d || *s == 0x57) {
 		g_6a25c0 = -1;
 	} else {
 		g_6a25c0 = fcn_004677e0(0x15, 0x7b, 0x38, 0, 0x64, 0x75, 0x442, g_772514);
-		fcn_00472380(g_6a25c0, 0, 0x64, pct);
+		d2_SetElementValue(g_6a25c0, 0, 0x64, pct);
 	}
 	if ((s[0x5a] & 1) != 0 || *s == 0x47 || *s == 0x1d || *s == 0x57) {
 		g_6a25ec = -1;

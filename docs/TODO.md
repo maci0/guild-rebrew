@@ -7,6 +7,27 @@ Both clients remain comparison scaffolds. Historical checkpoints are in
 
 ## Current integration
 
+- The inferred `d2_SetElementValue` now shares the TL `0x472380` and Gold
+  `0x475ca0` setters with a variadic contract: widget kind and flags select
+  string, integer or unused payloads. All selected callers use the canonical
+  header. Three timer conversions and the file selector's pointer payloads
+  retain their native calling behavior. Gold now uses the existing shared
+  step helper at `0x475be0`, replacing its obsolete zero-return scaffold.
+  Both setters officially measure RELOC (389/389 and 390/390); pool and helper
+  operands validate, while `_itoa` remains unresolved in catalog evidence.
+  All 75 rebuilt object contexts preserve nondebug sections and operands apart
+  from the reviewed names. Complete mapped setter/helper bytes agree, with
+  18 rejecting controls across the setters. Both placements remain displaced.
+  Imports are unchanged, and all 106 changed data-pointer slots per client
+  retain their mapped symbol or bounded CRT offset. Gold loses the 16-byte
+  helper stub; TL's section sizes stay unchanged. No storage owner or original
+  TU boundary was inferred. The external file-selector form is unavailable,
+  so its string-widget subtype remains an explicit input precondition.
+  Fresh checks retain three existing size mismatches and correctly demote
+  Gold `0x5bcb10` to NEAR_MATCHING: two pre-existing text-creator calls resolve
+  to unrelated Gold `0x46fac0` instead of `0x473640`. No false RELOC was restored.
+  Receipts: `.scratch/gui-setter-integration/` and
+  `.scratch/gui-text-creator-provider-review/`.
 - Three more client bodies now share C definitions: the six-record GUI cleanup
   (TL `0x4d0ec0`, Gold `0x4cfe70`, 50 bytes), recipe-key lookup
   (TL `0x4ec960`, Gold `0x4eabe0`, 59 bytes), and 14-byte calendar-copy callback
@@ -54,7 +75,7 @@ Both clients remain comparison scaffolds. Historical checkpoints are in
 - Gold `0x423a50` is C: official RELOC 59/59, five validated operands and two
   IAT-policy slots. Independent application validates all seven operands and
   13 rejecting controls. Its rebuilt raw contribution agrees with the compiled
-  object at the displaced address `0x424720`; this is not linked EXACT.
+  object at that checkpoint's displaced address `0x424720`; this is not linked EXACT.
   The old assembly marker/blocker are removed. No storage was added.
   Receipts: `.scratch/gold-msx-lock/`.
 - Gold `0x4790d0` is C: official object checks are RELOC 53/53, with its two
@@ -95,7 +116,7 @@ The updated [community review](community-research.md#exe-branch-follow-up-2026-1
 records original-name and algorithm leads. It establishes no new original TU
 or local byte verdict. The upstream fixture-isolation fix passed 12,715 tests
 (48 skipped) and merged in [Rebrew #35](https://github.com/maci0/rebrew/pull/35).
-Latest lint is `.scratch/client-small-bodies-integration/lint-final.json`:
+Latest lint is `.scratch/gui-setter-integration/lint-final.json`:
 36 E023 errors and zero warnings per target. The official blocker backfill
 documented 1,848 Gold and 1,284 TL unmatched rows without changing their verdicts;
 this clears missing-explanation warnings, not the recovery work. Rebrew 5.2.0
@@ -123,6 +144,14 @@ the preserved startup optimization. The final full suite passed 13,007 tests
 objects and diagnostics. Rejected cache candidates are validated privately
 before atomic publication. These changes are not in the installed 5.2.0 release.
 See [performance limits](verify-performance.md#runner-and-caches).
+[Rebrew #42](https://github.com/maci0/rebrew/pull/42) fixes guarded binding of
+valid typed `va_arg` expressions without weakening malformed-source rejection.
+[Rebrew #43](https://github.com/maci0/rebrew/pull/43) removes discarded row
+copies from metadata writer validation. Both fixes passed their full local
+suites and all six CI jobs, and are merged outside installed 5.2.0.
+Parser and writer receipts are in `.scratch/upstream-va-arg-evidence/` and
+`.scratch/upstream-writer-evidence/`; the profile's limits are in
+[verification performance](verify-performance.md#causes-and-fixes).
 
 ## GoldTL data audit, 2026-10-19
 
@@ -138,7 +167,7 @@ Gold has 158 non-comparable symbols; TL has 172. These include zero-fill tails
 and addresses outside file-backed data. Byte equality at a reference address
 does not establish the displaced symbol's identity there. Both whole-file
 checks fail as expected for comparison scaffolds. Latest receipts and hashes:
-`.scratch/client-small-bodies-integration/{gold,tl}-final-image-verification.json`.
+`.scratch/gui-setter-integration/image-{gold,tl}.json`.
 The two unsized GUI-table identities add one non-comparable row per target;
 they do not increase compared bytes or establish storage ownership.
 The earlier TL snapshot below had 330 displaced symbols and 24 absent.
@@ -173,8 +202,8 @@ for the latest images.
 
 | Area | Result | Receipt |
 | --- | --- | --- |
-| Server raw image | All 286,720 bytes equal the untouched reference. Fresh function checks 316/316; data checks 652/652. Whole-image checks, Wine loading and toolchain alignment pass. The gate fails only on the 36 E023 findings. | `.scratch/client-small-bodies-integration/server-gate.log`, `.scratch/gate-verify.json` |
-| Client builds | Both full passes and final corrected-source rebuilds exited 0, producing PEs/maps under `build/`. The full builds emitted 142 Gold and 168 TL compiler-warning lines, with no compiler errors or linker diagnostics. Both images remain scaffolds and differ from their references. | `.scratch/client-small-bodies-integration/clients-build.log`, `clients-final-rebuild.log`, `full-build-diagnostics.json` |
+| Server raw image | All 286,720 bytes equal the untouched reference. Fresh function checks 316/316; data checks 652/652. Whole-image checks, Wine loading and toolchain alignment pass. The gate fails only on the 36 E023 findings. | `.scratch/gui-setter-integration/server-gate.log`, `gate-verify.json` |
+| Client builds | The 9,305-entry two-job rebuild exited 0, producing both PEs/maps under `build/`. It emitted 310 compiler-warning lines, with no compiler errors or linker diagnostics. Both images remain scaffolds and differ from their references. | `.scratch/gui-setter-integration/clients-build.log`, `build-diagnostics.json`, `post-build-proof.json` |
 | Gold getter | `0x4364f0` is C, RELOC25/25, with its DIR32 validated. Gold subsequently relinked. The new pointer slot is comparison storage, not a recovered owner. | `.scratch/goal110-full-runs/getter-official.json`, `gold-rebuild.log` |
 | Experimental runner | Verification and CMake CL/LINK/LIB use configured unshare. Wine-prefix initialization, private font cache and extracted mtimes are repaired upstream. Complete Gold/TL probe objects equal Docker controls. | `.scratch/goal110-full-runs/compile-equivalence.json`, `seed-isolation.json` |
 | Upstream tests | 12,586 passed, 36 skipped; mypy checked 392 files. These are the upstream suite, not raw-image or client proof, and not a verdict on later edits. | `.scratch/goal110-full-runs/upstream-suite-final.log`, `upstream-mypy-final.log` |
@@ -205,7 +234,10 @@ earlier log. Run `rebrew lint` again after further edits.
 3. **Close client providers and storage.** Resolve duplicate native identities,
    comparison placeholders, omitted TUs and unproven global owners. Keep stock
    libraries linked and distinguish import slots from game storage. Do not add
-   the server BSS owners to a client to satisfy names.
+   the server BSS owners to a client to satisfy names. The reviewed GUI text
+   creator is a concrete next unit: eleven Gold calls across six TUs target
+   `0x473640`; preserve the separate Gold `0x46fac0` function. The provider and
+   target-specific layouts need recovery, not an unchanged TL-body copy.
 4. **Continue scene, terrain and savegame contracts.** Prioritize the building/
    placement family, opaque stream callers, resource constructors and renderer
    dependencies. Native counterpart mappings and bounded behavior checks do not

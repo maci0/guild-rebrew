@@ -16,7 +16,7 @@ extern int g_67d370;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00472380(int, char*);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
@@ -39,7 +39,7 @@ int __cdecl fcn_005397c0(void)
 	fcn_00519190(0x1cae);
 	fcn_004727a0(h, 0);
 	e = fcn_00472250(h, 0, 0);
-	fcn_00472380(e, buf);
+	d2_SetElementValue(e, buf);
 	fcn_004727a0(h, 1);
 	ok = fcn_00472250(h, 1, fcn_00519190(0x1cb0));
 	while (fcn_005373e0(fcn_005397c0, 0x24087) != 0) {

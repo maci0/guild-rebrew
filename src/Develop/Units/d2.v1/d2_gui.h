@@ -50,5 +50,8 @@ void* __cdecl fcn_00466190(int bild);
 void __cdecl fcn_00469960(int bild);
 void __cdecl fcn_00469900(int bild);
 void __cdecl d2_SetElementImage(int element, int bild);
+/* Inferred name and contract; widget kind/flags select the payload. */
+void __cdecl d2_SetElementValue(int element, ...);
+int __cdecl fcn_004722c0(char* sub);
 
 #endif

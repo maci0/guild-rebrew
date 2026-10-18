@@ -36,7 +36,7 @@ void __cdecl fcn_00519190(char* fmt, int a, int b);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f, int g, int h);
-void __cdecl fcn_00472380(int h, int a, int b, int c);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl fcn_0052e450(unsigned short* e)
 {
@@ -58,7 +58,7 @@ void __cdecl fcn_0052e450(unsigned short* e)
 				g_6a25e8 = fcn_0052dee0(x, 0xac, g_14b5e84);
 			}
 			g_6a25c0 = fcn_004677e0(0x18, 0x66, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
-			fcn_00472380(g_6a25c0, 0, 0x64, *((unsigned char*) e + 0x12));
+			d2_SetElementValue(g_6a25c0, 0, 0x64, *((unsigned char*) e + 0x12));
 			fcn_004727a0(g_6a25b8, 2);
 			g_6a25d4 = g_772514;
 			g_6b5c48 = *(int*) ((char*) e + 0x3b);

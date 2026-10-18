@@ -38,7 +38,7 @@ int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl fcn_005ced80(int dlg, Entry* list, int* bars, int* icons)
 {
@@ -60,7 +60,7 @@ void __cdecl fcn_005ced80(int dlg, Entry* list, int* bars, int* icons)
 			((Ctl*)g_1015ea0)[h].x38 = list[i].b5 == 0;
 			icons[i] = h;
 			bars[i] = fcn_004677e0(0x64, i * 0x30 + 0xc, 0xc8, 0, 0x64, 0x7b, 0x802, g_772514);
-			fcn_00472380(bars[i], 0, 0x64, list[i].b4);
+			d2_SetElementValue(bars[i], 0, 0x64, list[i].b4);
 			fcn_00472640(bars[i], list[i].b5 == 0);
 		} else {
 			bars[i] = -1;

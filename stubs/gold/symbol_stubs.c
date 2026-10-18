@@ -1970,6 +1970,8 @@ int ch_MorphFrameValue = -1;
 
 
 
+
+
 unsigned char g_6752a4 = 1;
 
 /* Function stubs */
@@ -3454,11 +3456,6 @@ int __cdecl fcn_00474cf0(int a)
 }
 
 int __cdecl fcn_00475220(char* a)
-{
-	return 0;
-}
-
-int __cdecl fcn_00475be0(char* sub)
 {
 	return 0;
 }

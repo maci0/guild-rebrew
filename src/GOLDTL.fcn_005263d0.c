@@ -45,7 +45,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_005373e0(void *, int);
 void __cdecl fcn_00469630(int);
 void __cdecl fcn_004707d0(int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
 
@@ -113,7 +113,7 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 			g_774654 = 1;
 		}
 		if (f80 && id != -1) {
-			fcn_00472380(id, 0, 500, (*(unsigned int*)&g_6b7fac) - start);
+			d2_SetElementValue(id, 0, 500, (int) ((*(unsigned int*)&g_6b7fac) - start));
 		}
 		if ((flags & 4) && (*(unsigned int*)&g_6b7fac) > start + 500) {
 			g_774654 = 1;

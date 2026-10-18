@@ -22,7 +22,7 @@ int __cdecl fcn_00470820(int, int, char*);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl gm_AccumulateTyped2(Player*);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00471b60(int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_00526120(int, int);
@@ -48,7 +48,7 @@ int __cdecl fcn_005b5750(void)
 	if (v >= 0x12c0) {
 		v = 0x12c0;
 	}
-	fcn_00472380(ctl, 0xa, v / 32, 0xa);
+	d2_SetElementValue(ctl, 0xa, v / 32, 0xa);
 	fcn_00471b60(dlg);
 	if (fcn_005373e0((void*) fcn_005b5750, timer) != 0) {
 		do {

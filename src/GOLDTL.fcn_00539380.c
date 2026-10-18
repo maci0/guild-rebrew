@@ -10,7 +10,7 @@ extern char g_6a2300[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00473a90(int, int);
 void __cdecl fcn_004727a0(int, int);
 void __cdecl fcn_00519190(int, ...);
@@ -35,7 +35,7 @@ int __cdecl fcn_00539380(void)
 	if (mode >= 2) {
 		*(unsigned char*) &(*(int*)&g_6a375c) = mode;
 	}
-	fcn_00472380(d, 2, 8, (unsigned char) (*(int*)&g_6a375c));
+	d2_SetElementValue(d, 2, 8, (unsigned char) (*(int*)&g_6a375c));
 	fcn_00473a90(0, 0);
 	fcn_004727a0(h, 1);
 	fcn_00519190(0x1ab5);

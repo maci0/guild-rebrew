@@ -47,7 +47,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
-void __cdecl fcn_00472380(int, ...);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00468df0(int, int, int, int, int);
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_00519190(int, ...);
@@ -87,7 +87,7 @@ void __cdecl fcn_00536810(void)
 			ids[n] = fcn_0046f740(n * 0x30 + 0x64, 4, ((House*) g_7f4ca0)[i].f54, g_772514);
 			((Ctl*) g_1015ea0)[ids[n]].f58 = 1;
 			((Ctl*) g_1015ea0)[ids[n]].house = &((House*) g_7f4ca0)[i];
-			fcn_00472380(ids[n], g_6a2c14[n]);
+			d2_SetElementValue(ids[n], g_6a2c14[n]);
 			n++;
 		}
 	}
@@ -113,7 +113,7 @@ void __cdecl fcn_00536810(void)
 			sprintf(chat.text, "$%iFF ", ((House*) g_7f4ca0)[g_774970].f54 - 0x59a);
 			strcat(chat.text, fcn_00471f80(edit));
 			strcat(chat.text, "$A");
-			fcn_00472380(edit, g_6b5c60);
+			d2_SetElementValue(edit, g_6b5c60);
 			fcn_004c6560(&chat);
 			g_774654 = 1;
 		}

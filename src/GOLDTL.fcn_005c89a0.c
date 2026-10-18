@@ -45,7 +45,7 @@ int __cdecl fcn_0046fac0(int x, int y, char* text, int win);
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win);
 int __cdecl fcn_0050b710(int, unsigned char);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00471f80(int);
 void __cdecl fcn_00471e30(int);
 
@@ -93,7 +93,7 @@ int __cdecl fcn_005c89a0(void)
 				fcn_0051af00(buf, g_68be7c, *(int*) (m + 0x1b8));
 				g_777d00[n].value_text = fcn_0046fac0(0x180, n * 0x3e + 0x14, buf, g_772514);
 				g_777d00[n].bar = fcn_00467480(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, g_772514);
-				fcn_00472380(g_777d00[n].bar, 0x3e8, 0x2328, fcn_0050b710(*(int*) (e + 0x39), g_773d75));
+				d2_SetElementValue(g_777d00[n].bar, 0x3e8, 0x2328, fcn_0050b710(*(int*) (e + 0x39), g_773d75));
 				g_777d00[n].value = fcn_00471f80(g_777d00[n].bar);
 				g_777d00[n].e = e;
 				n++;

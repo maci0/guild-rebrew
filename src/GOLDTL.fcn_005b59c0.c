@@ -41,7 +41,7 @@ int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, i
 void __cdecl fcn_0051af00(char*, char*, ...);
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
 int __cdecl fcn_0050f950(int a1, int a2);
-void __cdecl fcn_00472380(int, int, int, ...);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x005b59c0 */
 void __cdecl fcn_005b59c0(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
@@ -82,5 +82,5 @@ void __cdecl fcn_005b59c0(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 		fcn_00534160(g->x, g->y + 0x74, e[0x82], 0x4df);
 	}
 	if (g->bar != -1)
-		fcn_00472380(g->bar, 0, 0x64, (int) ((float) ((fcn_0050f950(g_774970, *(unsigned short*) g->obj) + 128.0) * 100.0) / 255.0));
+		d2_SetElementValue(g->bar, 0, 0x64, (int) ((float) ((fcn_0050f950(g_774970, *(unsigned short*) g->obj) + 128.0) * 100.0) / 255.0));
 }

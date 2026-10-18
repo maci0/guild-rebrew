@@ -12,7 +12,7 @@ typedef struct Spin {
 } Spin;
 // SIZE 0x130
 
-int __cdecl fcn_004722c0(Spin* p);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLD 0x00477490 */
 /* ADDRESS: GOLDTL 0x00473f50 */
@@ -20,7 +20,7 @@ void __cdecl fcn_00473f50(Spin* p, int v, int a3, int a4)
 {
 	int step;
 
-	step = fcn_004722c0(p);
+	step = fcn_004722c0((char*) p);
 	p->value = v - step * ((a4 - a3) / 4);
 	if (p->value > p->max) {
 		p->value = p->max;

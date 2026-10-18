@@ -48,7 +48,7 @@ extern unsigned short g_774970;
 
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
-void __cdecl fcn_00472380(int, int, int, ...);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00472640(int i, int flag);
 float __cdecl fcn_0050f980(int a, int b, int c);
 
@@ -73,9 +73,9 @@ int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* s)
 			b = fcn_004677e0(cx - 0x23, ((fcn_005caaa0_Def*)g_772500)[1498].h + y + 2, 0x40, 0, 0x64, 0x75, 0x442, g_772514);
 			s->bar = b;
 			if (s->e[2] == 7)
-				fcn_00472380(b, 0, 0x64, 0, 1);
+				d2_SetElementValue(b, 0, 0x64, 0, 1);
 			else
-				fcn_00472380(s->bar, 0, 0x64, (int) fcn_0050f980(g_774970, *(unsigned short*) s->e, 1));
+				d2_SetElementValue(s->bar, 0, 0x64, (int) fcn_0050f980(g_774970, *(unsigned short*) s->e, 1));
 			fcn_00472640(s->bar, 0);
 		}
 		if (*(int*) (s->e + 0x210) == ((fcn_005caaa0_Ent*)g_7f4ca0)[g_774970].id)

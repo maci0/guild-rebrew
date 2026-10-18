@@ -7,7 +7,7 @@ extern float g_665f10;
 
 void __cdecl fcn_00580560(void);
 void __cdecl fcn_005805e0(void);
-void __cdecl fcn_00472380(int, int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 #define ELAPSED(t) ((*(volatile unsigned int*)&g_6b7fac) - (t) ? (*(volatile unsigned int*)&g_6b7fac) - (t) : 0)
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -23,7 +23,7 @@ void __cdecl fcn_00580610(void)
 		}
 		el = MIN(ELAPSED(g_665f08[3]), *(unsigned int*) (g_665f08[6] + 0x44));
 		dur = *(unsigned int*) (g_665f08[6] + 0x44);
-		fcn_00472380(g_665f08[27], 0, 0x190, (int) ((float) (int) (dur - el) / dur * g_665f10), 1);
+		d2_SetElementValue(g_665f08[27], 0, 0x190, (int) ((float) (int) (dur - el) / dur * g_665f10), 1);
 	}
 	else {
 		fcn_005805e0();

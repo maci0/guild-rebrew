@@ -10,7 +10,7 @@ typedef struct {
 } Match;
 
 float __cdecl fcn_0050f980(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl fcn_005ccc00(unsigned short* self, unsigned int n, Match* arr)
 {
@@ -23,10 +23,10 @@ void __cdecl fcn_005ccc00(unsigned short* self, unsigned int n, Match* arr)
 			if (p != 0 && *p != 0xffff && arr->h != -1) {
 				if ((((char*) self)[2] == 6 || ((char*) self)[2] == 7) &&
 				    (((char*) p)[2] == 6 || ((char*) p)[2] == 7)) {
-					fcn_00472380(arr->h, 0, 100, 0);
+					d2_SetElementValue(arr->h, 0, 100, 0);
 				}
 				else {
-					fcn_00472380(arr->h, 0, 100, (int) fcn_0050f980(*self, *p, 1));
+					d2_SetElementValue(arr->h, 0, 100, (int) fcn_0050f980(*self, *p, 1));
 				}
 			}
 		}

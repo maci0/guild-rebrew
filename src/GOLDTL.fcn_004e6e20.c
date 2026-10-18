@@ -8,7 +8,7 @@ extern unsigned int g_772f70;
 extern int g_68bfcc;
 
 void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_004e6e20(int h, int total, int reset)
 {
@@ -24,6 +24,6 @@ int __cdecl fcn_004e6e20(int h, int total, int reset)
 		v = (int) ((1.0f - (float) ((*(unsigned int*)&g_6b7fac) - g_772f70) / g_68bfcc) * 100.0f);
 		pct = MAX(v, 0);
 	}
-	fcn_00472380(h, 0, 100, pct);
+	d2_SetElementValue(h, 0, 100, pct);
 	return pct;
 }

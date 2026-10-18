@@ -33,7 +33,7 @@ typedef struct {
 extern char s_6acf98[];
 extern char s_6acf90[];
 extern int g_772514;
-extern int g_14ac654;
+extern char* g_14ac654;
 extern char* g_1015ea0;
 extern char* g_77255c;
 extern int g_100f1dc;
@@ -51,7 +51,7 @@ int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl fcn_005dfa40(int, int, Rec*);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00472380(int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_0046fac0(int, int, char*, int);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_00472900(int, int);
@@ -93,7 +93,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 		ok = fcn_00472250(dlg, 3, fcn_00519190(0x1ccc));
 		fcn_004727a0(dlg, 0);
 		list = fcn_00472250(dlg, 0, 0);
-		fcn_00472380(list, g_14ac654);
+		d2_SetElementValue(list, g_14ac654);
 	}
 	fcn_004727a0(dlg, 1);
 	for (i = 0; i < n; i++) {
@@ -118,7 +118,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 						g_774654 = 1;
 						result = 1;
 					} else {
-						fcn_00472380(list, (int) recs[i].name);
+						d2_SetElementValue(list, recs[i].name);
 					}
 					break;
 				}

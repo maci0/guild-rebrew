@@ -36,6 +36,14 @@ Receipts: `.scratch/gold-cleanup-c/integration/final-image-timings.json`.
 
 Other repaired costs:
 
+- **Discarded metadata copies.** [Upstream #43](https://github.com/maci0/rebrew/pull/43)
+  removes two whole-store row copies from writer validation while retaining
+  both schema checks and detached ordinary-reader results. One instrumented
+  already-current binding preview fell from 71.43s to 29.16s; validation fell
+  from 43.79s to 0.57s. That preview is refused after loading, so it does not
+  measure an accepted binding or apply. Roundtrip TOML parsing remains the
+  main cost. This fix is merged, outside installed 5.2.0.
+  Receipt: `.scratch/source-binding-profile/`.
 - **Known bindings disabled warm results.** Cached verdicts now require matching
   binary/compile inputs and unchanged resolution of every recorded operand.
   Missing evidence, changed addresses and gained/lost bindings force a miss;

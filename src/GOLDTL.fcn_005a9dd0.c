@@ -34,7 +34,7 @@ int __cdecl fcn_00519190();
 void __cdecl fcn_005c9030(int, int, int, int*);
 int __cdecl fcn_0050b710(int a, unsigned char b);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00471f80(int slot);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 int __cdecl fcn_00526010(House5a9d*, int, unsigned char);
@@ -88,7 +88,7 @@ void __cdecl fcn_005a9dd0(unsigned char* p)
 
 		b = fcn_00519190(0x1a1b, *(unsigned short*) (((char(*)[0x2f4])g_868060)[g_773d75] + 0x54) * 2 + 0x9a8);
 		fcn_005c9030(0x640, acc, 0x20, &col);
-		fcn_00472380(fcn_00472250(d, 1, b), fcn_0050b710(0x640, g_773d75), fcn_0050b710(col, g_773d75), fcn_0050b710(0x640, g_773d75));
+		d2_SetElementValue(fcn_00472250(d, 1, b), fcn_0050b710(0x640, g_773d75), fcn_0050b710(col, g_773d75), fcn_0050b710(0x640, g_773d75));
 		h1 = fcn_00472250(d, 1, b + 1);
 		h2 = fcn_00472250(d, 1, b + 2);
 	}

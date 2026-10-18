@@ -27,7 +27,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_0050b710(int, char);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00473a90(int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_0050b750(int, char);
@@ -57,7 +57,7 @@ void __cdecl fcn_005a3e10(void)
 	sl = fcn_00472250(dlg, 2, fcn_00519190(0x1a4d, g_773d75));
 	max = fcn_0050b710(stock, g_773d75) + fcn_0050b710(have, g_773d75) > fcn_0050b710(stock, g_773d75) ?
 	      fcn_0050b710(stock, g_773d75) + fcn_0050b710(have, g_773d75) : fcn_0050b710(stock, g_773d75);
-	fcn_00472380(sl, 0, max, fcn_0050b710(stock, g_773d75));
+	d2_SetElementValue(sl, 0, max, fcn_0050b710(stock, g_773d75));
 	fcn_00473a90(0, 0);
 	if (fcn_005373e0((void*) fcn_005a3e10, 0x677c7) != 0) {
 		do {

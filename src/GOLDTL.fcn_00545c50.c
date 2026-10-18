@@ -14,7 +14,7 @@ extern unsigned char** g_7749e4;
 
 
 
-void __cdecl fcn_00472380(int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_004707d0(int);
 
@@ -27,7 +27,7 @@ void __cdecl fcn_00545c50(struct ev_545c50* ne)
 	}
 	if ((*(struct ev_545c50**)&g_7749e4) != 0) {
 		if ((*(struct ev_545c50**)&g_7749e4)->s != -1) {
-			fcn_00472380((*(struct ev_545c50**)&g_7749e4)->s, 0);
+			d2_SetElementValue((*(struct ev_545c50**)&g_7749e4)->s, 0);
 		}
 		fcn_00471af0((*(struct ev_545c50**)&g_7749e4)->h, 0);
 		e = (*(struct ev_545c50**)&g_7749e4)->e;
@@ -39,7 +39,7 @@ void __cdecl fcn_00545c50(struct ev_545c50* ne)
 	}
 	if (ne != 0 && ne->h != -1) {
 		if (ne->s != -1) {
-			fcn_00472380(ne->s, 1);
+			d2_SetElementValue(ne->s, 1);
 		}
 		fcn_00471af0(ne->h, 1);
 		fcn_004707d0(ne->h);

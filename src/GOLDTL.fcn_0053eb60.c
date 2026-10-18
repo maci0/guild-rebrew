@@ -25,7 +25,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468b80(int, char*);
 void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
@@ -56,7 +56,7 @@ void __cdecl fcn_0053eb60(int n)
 	for (i = 0; i < n; i++) {
 		sprintf(buf, "%s %c", g_14b5e38, i + 0x41);
 		ids[i] = fcn_004677e0(0x80, x + i * w, 0xc8, 0, 0x64, 0x7b, 0x802, g_772514);
-		fcn_00472380(ids[i], 0, 4, g_7e1fa0[i]);
+		d2_SetElementValue(ids[i], 0, 4, g_7e1fa0[i]);
 		fcn_00468cd0(ids[i], 0x82);
 		fcn_00468b80(ids[i], buf);
 		fcn_00468bb0(ids[i], 5, g_14b5e3c, g_14b5e40, g_14b5e44, g_14b5e48, g_14b5e4c);

@@ -15,7 +15,7 @@ void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_004727a0(int, int);
 char* __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00472250(int, int, char*);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004e6e20(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -68,7 +68,7 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 	t = fcn_00519190(0x1aa6, g_773d75);
 	fcn_00519190(0x1aa7);
 	w = fcn_00472250(dlg, 0, t);
-	fcn_00472380(w, lo, hi, lo);
+	d2_SetElementValue(w, lo, hi, lo);
 	bar = fcn_004677e0((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, g_772514);
 	fcn_004e6e20(bar, 0x5dc, 1);
 	g_100f1dc = -1;

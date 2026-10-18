@@ -52,7 +52,7 @@ int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_005c9090(char*, int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -106,7 +106,7 @@ void __cdecl fcn_005d46d0(void)
 		v = MIN(MAX(((House*)g_7f4ca0)[list[i].id].f54 - 0x59a, 0), 7);
 		h = fcn_004677e0(0x5a, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 7, 0x12c, 0, 0x64,
 			cols[v], 0x42, g_772514);
-		fcn_00472380(h, 0, 0x64, fl);
+		d2_SetElementValue(h, 0, 0x64, fl);
 		sprintf(text, s_67d444, list[i].f20);
 		fcn_005c9090(text, 0x1f4, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2), 0xc8, 0x55);
 	}

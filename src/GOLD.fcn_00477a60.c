@@ -25,7 +25,7 @@ extern int g_006ed9c4; /* 0x006ed9c4 */
 extern int g_006ed9e8; /* 0x006ed9e8 */
 extern int g_006ed9ec; /* 0x006ed9ec */
 
-int __cdecl fcn_00475be0(Spin00477a60* p);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00477490(Spin00477a60* p, int v, int a3, int a4);
 
 void __cdecl fcn_00477a60(void)
@@ -43,7 +43,7 @@ void __cdecl fcn_00477a60(void)
 		return;
 	}
 	if (g_006ed9f4 == 0) {
-		step = fcn_00475be0(g_006ed9dc);
+		step = fcn_004722c0((char*) g_006ed9dc);
 		g_006ed9f4 = 1;
 		g_00f8a66c = g_006310b4;
 		g_00f8a664 = g_005f323c;

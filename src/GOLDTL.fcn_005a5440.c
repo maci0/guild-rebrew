@@ -52,7 +52,7 @@ void __cdecl fcn_00472900(int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00508640(int a, int b);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_0046b2b0(int);
@@ -122,7 +122,7 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 		q = (char*) fcn_00502cd0(list, 1, 0, r->key);
 		if (q != 0 && fcn_00508640(*(int*) (q + 0xe), r->key) != 0) {
 			v = fcn_00508640(*(int*) (q + 0xe), r->key);
-			fcn_00472380(r->icon, 0, v, ent);
+			d2_SetElementValue(r->icon, 0, v, ent);
 			fcn_0051af00(buf, (int) g_6aac70, v, g_14a79c0[r->key * 2]);
 			fcn_0046f940(r->label, buf);
 			((Ent*)g_1015ea0)[r->label].f18 = 0xbe;

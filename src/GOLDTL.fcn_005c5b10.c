@@ -65,7 +65,7 @@ int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl gm_AccumulateTyped2(Player*);
 int __cdecl fcn_0050b710(int, char);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl fcn_004c4eb0(char*);
@@ -99,7 +99,7 @@ void __cdecl fcn_005c5b10(char* a)
 	sl = fcn_00472250(dlg, 2, s);
 	btn2 = fcn_00472250(dlg, 2, s + 1);
 	v = fcn_0050b710(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75) > 1000 ? 1000 : fcn_0050b710(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75);
-	fcn_00472380(sl, 0x64, v, 0x64);
+	d2_SetElementValue(sl, 0x64, v, 0x64);
 	if (fcn_005373e0((void*) fcn_005c5b10, 0x677c7) != 0) {
 		do {
 			if (g_100f1dc == 2) {

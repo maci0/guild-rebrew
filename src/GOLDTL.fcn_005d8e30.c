@@ -14,7 +14,7 @@ void __cdecl fcn_00471b60(int);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00525f60(char*, int);
 void __cdecl fcn_0051af00(void*, int, ...);
@@ -52,7 +52,7 @@ int __cdecl fcn_005d8e30(char* e, char* o)
 		ok = fcn_00472250(dlg, 1, id + 1);
 		cancel = fcn_00472250(dlg, 1, id + 2);
 		sl = fcn_00472250(dlg, 1, id);
-		fcn_00472380(sl, 1, 9, 1);
+		d2_SetElementValue(sl, 1, 9, 1);
 		g_100f1dc = -1;
 		do {
 			if (g_100f1dc != -1) {

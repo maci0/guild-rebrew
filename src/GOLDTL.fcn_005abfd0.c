@@ -27,7 +27,7 @@ void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00473a90(int, int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00525f60(Player*, int);
 void __cdecl fcn_005100f0(int, int);
@@ -66,7 +66,7 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 	fcn_00519190(0x197f);
 	if (amt != 0) {
 		btnB = fcn_00472250(dlg, 1, fcn_00519190(0x1981, amt));
-		fcn_00472380(btnB, 2, 6, 2);
+		d2_SetElementValue(btnB, 2, 6, 2);
 		btnA = fcn_00472250(dlg, 1, fcn_00519190(0x1982));
 		btnC = fcn_00472250(dlg, 1, fcn_00519190(0x1983));
 		flag = 1;

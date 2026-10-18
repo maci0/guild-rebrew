@@ -34,7 +34,7 @@ int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_0046f9b0(int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -75,7 +75,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 	clear = ids[1];
 	flip = ids[2];
 	fcn_0046f9b0(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
-	fcn_00472380(list, 0, 4, *(unsigned char*) (p + 0x31));
+	d2_SetElementValue(list, 0, 4, *(unsigned char*) (p + 0x31));
 	fcn_00468cd0(list, 0x82);
 	fcn_00468bb0(list, 5, g_14b5eb4, g_14b5eb8, g_14b5ebc, g_14b5ec0, g_14b5ec4);
 	while (fcn_005373e0(fcn_004bf8e0, 0x657c7) != 0) {

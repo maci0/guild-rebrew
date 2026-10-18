@@ -30,7 +30,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl fcn_00519190();
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_0050b710(int, unsigned char);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl fcn_00526010(struct house*, int, unsigned char);
@@ -68,7 +68,7 @@ int __cdecl fcn_00586800(char* e)
 	fcn_005340f0(g_772514);
 	fcn_004727a0(h, 1);
 	line = fcn_00472250(h, 1, fcn_00519190(0x403a, 0x182, g_773d75));
-	fcn_00472380(line, fcn_0050b710(tenth, g_773d75), fcn_0050b710(n, g_773d75), fcn_0050b710(tenth, g_773d75));
+	d2_SetElementValue(line, fcn_0050b710(tenth, g_773d75), fcn_0050b710(n, g_773d75), fcn_0050b710(tenth, g_773d75));
 	fcn_004727a0(h, 2);
 	s = fcn_00519190(0x403b);
 	ok = fcn_00472250(h, 2, s);

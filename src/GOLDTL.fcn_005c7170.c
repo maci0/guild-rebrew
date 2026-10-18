@@ -16,7 +16,7 @@ void __cdecl fcn_00473a90(int, int);
 void __cdecl fcn_005c6a10(int, int);
 
 int __cdecl fcn_00471f80(int);
-void __cdecl fcn_00472380(int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -39,7 +39,7 @@ void __cdecl fcn_005c7170(int a1)
 			} else {
 				for (i = 0; i < 32; i++) {
 					if (g_7774a0[i].btn != -1 && fcn_00471f80(g_7774a0[i].btn) != 0) {
-						fcn_00472380(g_7774a0[i].btn, 0);
+						d2_SetElementValue(g_7774a0[i].btn, 0);
 					}
 				}
 				ResetDisplayCounters();
@@ -48,7 +48,7 @@ void __cdecl fcn_005c7170(int a1)
 		if (g_100f1dc != -1 && g_100f1dc == 0x113) {
 			for (i = 0; i < 32; i++) {
 				if (g_7774a0[i].btn != -1 && fcn_00471f80(g_7774a0[i].btn) != 0) {
-					fcn_00472380(g_7774a0[i].btn, 0);
+					d2_SetElementValue(g_7774a0[i].btn, 0);
 				}
 			}
 			ResetDisplayCounters();

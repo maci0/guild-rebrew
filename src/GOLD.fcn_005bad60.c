@@ -33,7 +33,7 @@ void __cdecl fcn_005c5e70(void);
 int __cdecl fcn_005c61e0(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005c6540(char*);
-void __cdecl fcn_00472380(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_00471f80(int);
@@ -70,7 +70,7 @@ void __cdecl fcn_005bad60(void)
 						if (fcn_005c61e0(*(unsigned short*) g_776c60[i].item) != 0) {
 							fcn_00471af0(dlg, 0);
 							fcn_005c6540(g_776c60[i].item);
-							fcn_00472380(g_776c60[i].btn, 0, 0x3e7, 0);
+							d2_SetElementValue(g_776c60[i].btn, 0, 0x3e7, 0);
 							ResetDisplayCounters();
 							fcn_00471af0(dlg, 1);
 						}
@@ -84,7 +84,7 @@ void __cdecl fcn_005bad60(void)
 				if (CountDisplayCounters() != 0) {
 					for (i = 0; i < 6; i++) {
 						if (g_776c60[i].item != 0 && fcn_00471f80(g_776c60[i].btn) != 0) {
-							fcn_00472380(g_776c60[i].btn, 0, 0x3e7, 0);
+							d2_SetElementValue(g_776c60[i].btn, 0, 0x3e7, 0);
 						}
 					}
 					ResetDisplayCounters();
