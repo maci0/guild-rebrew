@@ -1,91 +1,106 @@
-# Python
+# Python environments and tool caches
 __pycache__/
-*.pyc
-*.pyo
-.venv/
+*.py[cod]
 .venv*/
 .python-version
-
-# IDE / tool caches
 .pytest_cache/
 .ruff_cache/
-.claude
+.mypy_cache/
+.hypothesis/
+.coverage*
+htmlcov/
 .cache/
-.agents/
 .benchmarks/
-
-# Generated output (ephemeral)
-output/
-run_out/
-build/
-*.log
-
-# Extracted target bytes (the per-target bin_dir; regenerable)
-bin/
-
-# Cognee
+.agents/
+.claude
+.sisyphus/
 .cognee-data/
-.env.cognee
 
-# OS
+# Local credentials; keep documented templates trackable
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 .DS_Store
 Thumbs.db
 
-# original binaries
-original/
-
-# Temp / scratch files from RE workflow
-.scratch/
-__mc_tmp.c
-*.cod
-diff_*.txt
-ga_*.txt
-fix_*.py
-score_*.txt
-flag_sweep_output.txt
-cand.c
-cand_swap.c
+# Builds and compiler output; native layout inputs under layout/ stay tracked
+/build/
+/build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+/Makefile
+/Testing/
 *.obj
-*.c.bak
-*.c.tmp
-
-# Others
-.sisyphus/
-
-reccmp-build.yml
-reccmp-user.yml
-reccmp-progress.svg
-reccmp-report.html
-reccmp-summary.json
-reccmp-*-orig.txt
-reccmp-*-recomp.txt
-catalog.json
-.env.temp
-db/
+*.o
+*.pdb
+*.ilk
+*.idb
+*.pch
+*.exp
+*.sbr
+*.bsc
+*.map
+/*.exe
+/*.dll
+*.log
+*.cod
 compile_commands.json
-.rebrew
-diff.json
 
-# Vendored tool binaries (re-downloadable)
-tools/ghidra-cli
-rebrew-functions.toml.lock
-rebrew-data.toml.lock
-rebrew-source.toml.lock
-rebrew-types.toml.lock
-
-# Variant build trees. The one build directory is build/; this only keeps a
-# stray -B build-something from being committed by accident.
-build-*/
-
-# BinSync state dir: regenerable from the metadata (rebrew sync --push --state-dir binsync)
+# Local references, extracted bytes, experiments and source backups
+/original/
+/bin/
+/output/
+/run_out/
+/.scratch/
+/source-backups/
 /binsync/
-
-# FLIRT signature packs (vendored, re-downloadable via rebrew flirt --fetch)
+/.rebrew/
+/rebrew-rsp-*/
 /flirt_sigs/
-references/dxsdk8/
+*.bak
+*.tmp
+*.orig
+*.rej
+/__mc_tmp.c
+/diff_*.txt
+/ga_*.txt
+/fix_*.py
+/score_*.txt
+/flag_sweep_output.txt
+/cand.c
+/cand_swap.c
+
+# Keep native inventories, ignore generated coverage/database files
+/db/*
+!/db/inventory-*.json
+/catalog.json
+/diff.json
+/reccmp-build.yml
+/reccmp-user.yml
+/reccmp-progress.svg
+/reccmp-report.html
+/reccmp-summary.json
+/reccmp-*-orig.txt
+/reccmp-*-recomp.txt
+
+# Downloaded SDK/tool inputs; source manifests and provenance remain tracked
+/tools/ghidra-cli
+/references/dxsdk8/
 /references/mss-6.0/*.lib
 /references/mss-6.1c/*.lib
 
-# rebrew link response files and config lock (ephemeral)
-rebrew-rsp-*/
-rebrew-project.toml.lock
+# Managed-store locks are local; the TOML stores themselves are tracked
+/rebrew-functions.toml.lock
+/rebrew-data.toml.lock
+/rebrew-source.toml.lock
+/rebrew-types.toml.lock
+/rebrew-project.toml.lock
