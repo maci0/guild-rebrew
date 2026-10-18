@@ -79,6 +79,14 @@ compile_commands.json
 /cand.c
 /cand_swap.c
 
+# Local decompiler databases can contain original binaries
+*.gpr
+*.rep/
+*.gzf
+*.gar
+*.bndb
+*.i64
+
 # Keep native inventories, ignore generated coverage/database files
 /db/*
 !/db/inventory-*.json

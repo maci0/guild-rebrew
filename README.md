@@ -1,77 +1,241 @@
 # Guild Rebrew
 
-**Status: work in progress.** The server has a byte-identical raw build;
-**Gold and GoldTL are comparison scaffolds, not playable games.** Source
-recovery, unsupported assembly and provider/storage work remain.
+**Three binaries. One faithful source tree.**
 
-A faithful C89 reconstruction of **Europa 1400: The Guild**, targeting the
-original MSVC6 toolchains. The [objective](goal.md) is one shared source tree
-that produces all three binaries byte for byte.
+Reconstructing **Europa 1400: The Guild** in C89 with the original MSVC6
+toolchains. The [objective](goal.md): reproduce every byte of the server,
+Gold and GoldTL from shared source.
 
-[Current work](docs/TODO.md) · [Build and compare](stubs/README.md) ·
-[Documentation](docs/README.md) · [Reconstruction rules](AGENTS.md)
+> [!IMPORTANT]
+> **Work in progress.** The server has a byte-identical raw build.
+> **Gold and GoldTL are comparison scaffolds, not playable or byte-identical.**
+> Source recovery, unsupported assembly and provider/storage work remain.
+> The [last full server checkpoint](docs/TODO.md#verified-checkpoint) passed byte
+> comparison but failed assembly lint; later edits require fresh checks.
+
+**[Start here](#get-started)** &nbsp; · &nbsp;
+**[Build & compare](#build-and-compare)** &nbsp; · &nbsp;
+**[Dashboard](#optional-coverage-dashboard)** &nbsp; · &nbsp;
+**[Current work](docs/TODO.md)** &nbsp; · &nbsp;
+**[Documentation](docs/README.md)**
+
+---
+
+## Reconstruction status
 
 <!-- progress:start -->
 <p align="center">
   <img src="docs/progress.svg" width="715" alt="Reconstruction status: stored C function matches, assembly matches and raw-image agreement for all three targets.">
 </p>
+<details>
+  <summary><strong>Explore the function map</strong> — one block per function, in address order</summary>
+  <p align="center">
+    <img src="docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
+  </p>
+</details>
 <!-- progress:end -->
 
-The chart is a dated snapshot of stored verdicts, not a fresh verification run.
-Function matches do not imply whole-image completion. The
-[last full server checkpoint](docs/TODO.md#verified-checkpoint) passed byte
-comparison but failed assembly lint; later edits require fresh checks.
+<sub>Dated snapshots of stored verdicts, not fresh verification runs. Function
+matches do not establish whole-image completion.</sub>
+
+| Target | Compiler / runtime | State |
+| --- | --- | --- |
+| **Server** | Plain VC6 SP5 · `/MT` / LIBCMT | Raw file matches; source-fidelity work remains |
+| **GoldTL** | VC6 SP5 Processor Pack · `/MT` / LIBCMT | Comparison scaffold; differs from reference |
+| **Gold** | VC6 SP5 Processor Pack · `/ML` / LIBC | Comparison scaffold; differs from reference |
 
 ## Get started
 
-Requires Python 3.13+, `uv` and a local [Rebrew checkout](https://github.com/maci0/rebrew)
-at `../relumea/repos/rebrew`, relative to this project root. `uv sync` installs
-that checkout as an editable dependency; create it before running the commands.
+This example starts from a clean checkout and builds **server.dll only** on
+Linux x86_64. You need your own original DLL; the client binaries and Miles
+archive are not needed for this example.
 
-Supply your own game reference binaries under ignored `original/` at the paths
-below. The clone does not include the pinned MSVC toolchain images or Miles archive.
-See [toolchain setup](https://github.com/maci0/rebrew/blob/main/docs/TOOLCHAIN.md),
-[runner requirements](docs/verify-performance.md#runner-and-caches) and the
-[Miles input and checksum](references/mss-6.1c/README.md).
+### 1. Install and check build dependencies
+
+On Debian/Ubuntu, install Git, CMake 3.19+, Make, a C compiler, json-c headers,
+and Docker:
 
 ```sh
-uv sync
-uv run --frozen rebrew todo --json
-uv run --frozen rebrew status --all-targets --json
+sudo apt-get update
+sudo apt-get install -y git curl ca-certificates cmake make build-essential \
+  pkg-config libjson-c-dev docker.io util-linux
+sudo systemctl enable --now docker
+sudo usermod -aG docker "$USER"
 ```
 
-Check libraries before implementing a function, then use `rebrew skeleton`,
-`test` and `diff`. [AGENTS.md](AGENTS.md) and the shipped skills cover the full
-workflow. Commands run through the project's pinned environment.
+Log out and back in so the Docker group membership takes effect.
 
-| Target | Reference path | Build status |
-| --- | --- | --- |
-| Server | `original/Server/server.dll` | Raw file matches; source-fidelity work remains |
-| GoldTL | `original/Europa1400Gold_TL.exe` | Links with placeholders; differs from reference |
-| Gold | `original/Europa1400Gold.exe` | Links with placeholders; differs from reference |
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) to manage
+Python and this project's environment:
+
+```sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+. "$HOME/.local/bin/env"
+```
+
+Check the tools before cloning. `docker info` must work as your normal user;
+finish Docker's [Linux post-install setup](https://docs.docker.com/engine/install/linux-postinstall/)
+if it reports a permission error.
+
+```sh
+git --version
+cmake --version
+make --version
+cc --version
+pkg-config --modversion json-c
+docker info
+unshare --user --map-root-user true
+```
+
+The configured compiler runner uses `unshare`: it requires unprivileged user
+namespaces, rootless overlayfs, and kernel support for `openat2`, `pidfd_open`
+and `close_range`. The namespace check above is only the first check; Rebrew
+checks the remaining requirements when starting the runner. See the
+[runner requirements](https://github.com/maci0/rebrew/blob/main/docs/TOOLCHAIN.md#experimental-unshare-backend)
+if your host rejects it. Ubuntu's AppArmor policy can permit `unshare(1)` while
+denying Rebrew's helper; the command above alone does not establish compatibility.
+
+### 2. Clone and create the Python environment
+
+```sh
+git clone https://github.com/maci0/guild-rebrew.git
+cd guild-rebrew
+uv python install 3.13
+uv venv --python 3.13
+uv sync
+uv run rebrew --version
+```
+
+`uv sync` installs the pinned Rebrew release and project dependencies into
+`.venv`. Run the remaining commands from this repository root; `uv run` uses
+that environment without activating it.
+
+### 3. Supply the original server DLL
+
+Copy `Server/server.dll` from your installation of The Guild Gold. Replace the
+example source path below with your own:
+
+```sh
+mkdir -p original/Server
+cp "/path/to/The Guild Gold/Server/server.dll" original/Server/server.dll
+sha256sum original/Server/server.dll
+```
+
+The expected reference is 286,720 bytes with SHA-256:
+
+```text
+3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1
+```
+
+`original/` is ignored by Git. Check [reference provenance](#reference-provenance)
+if your DLL has a different hash; a different game version is a different
+comparison target.
+
+### 4. Build the compiler images
+
+The server compiles with plain VC6 SP5 and links with the native Microsoft CRT
+variant. Both images are needed. Build them from the public
+[toolchain recipes](https://github.com/maci0/recompile-toolchains); the commands
+also build their shared base image and download checksum-verified inputs.
+
+```sh
+git clone https://github.com/maci0/recompile-toolchains.git ../recompile-toolchains
+export REBREW_TOOLCHAINS_DIR="$PWD/../recompile-toolchains"
+export REBREW_TOOLCHAIN_OVERLAY_DIR="$PWD/cmake/toolchain-overlays"
+uv run rebrew toolchain build msvc-6.0-sp5
+uv run rebrew toolchain build msvc-6.0-sp5-crt
+docker image inspect rebrew/msvc:6.0-sp5-win32 rebrew/msvc:6.0-sp5-crt-win32
+```
+
+Docker prepares the images; compilation uses their cached filesystems through
+the configured `unshare` runner. Wine and MSVC run inside those filesystems.
+No host Wine installation is required.
 
 ## Build and compare
 
-Follow the [client build recipe](stubs/README.md#build) to produce both PEs and
-maps under `build/`. These builds support reconstruction and comparison only.
-The [server gate](docs/project-principles.md) checks the raw server build,
-source consistency and binary agreement.
+### 5. Compile server.dll with CMake
 
-CL/LINK/LIB use the configured **unshare** runner with pinned image filesystems:
-`rebrew/msvc:6.0-sp5-win32` for server and
-`rebrew/msvc:6.0-sp5-pp-win32` for clients. Gold uses `/ML`/LIBC;
-server and TL use `/MT`/LIBCMT. Effective settings live in `rebrew-project.toml`;
-[runner and cache behavior](docs/verify-performance.md) explains execution.
-
-Once built, compare client data without recompiling functions:
+Use a fresh build directory. The toolchain filename retains its `-docker`
+suffix; its driver honors the configured `unshare` backend.
 
 ```sh
-uv run --frozen rebrew verify --data --target Europa1400Gold_TL.exe
-uv run --frozen rebrew verify --data --target Europa1400Gold.exe
+uv run cmake -S . -B build/server-example \
+  -DCMAKE_TOOLCHAIN_FILE="$PWD/cmake/toolchain-msvc-6.0-sp5-docker.cmake" \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DREBREW_BUILD_SERVER=ON \
+  -DREBREW_BUILD_GOLD=OFF -DREBREW_BUILD_GOLDTL=OFF \
+  -DREBREW_DEBUG_INFO=OFF
+uv run cmake --build build/server-example --parallel 2
 ```
 
-Client comparisons currently report differences. A successful link is not a
-passing reconstruction verdict.
+This produces `build/server-example/server.dll` and `server.map`. It builds the
+current reconstruction, including remaining assembly bodies. A successful build
+does not establish C recovery or a warning-free checkpoint.
+
+### 6. Compare the result with the original
+
+First compare the complete files and show their hashes:
+
+```sh
+cmp original/Server/server.dll build/server-example/server.dll
+sha256sum original/Server/server.dll build/server-example/server.dll
+```
+
+`cmp` prints nothing and exits 0 when every byte agrees. Both hashes should
+match the reference above. This recipe was checked on 2026-10-18 in a separate
+clean checkout containing only the server reference: the rebuilt DLL matched
+every byte. If your hashes differ, your build has not reproduced the reference.
+
+Then ask Rebrew to compare data, PE sections, imports, exports, resources,
+headers and layout against the same reference:
+
+```sh
+uv run rebrew verify --target server.dll \
+  --built build/server-example/server.dll \
+  --data --whole-binary --raw-link --dry-run --json
+```
+
+This checks the existing image without recompiling functions or recording new
+verdicts. Exit 1 means differences; inspect the JSON report. Always select
+`--target server.dll` here: the project default is the GoldTL client.
+
+For source work, start with `uv run rebrew todo --target server.dll --json` and
+the [reconstruction rules](AGENTS.md). The [server gate](scripts/gate.sh)
+performs broader checks using the conventional `build/` tree; the
+[current checkpoint](docs/TODO.md#verified-checkpoint) documents its remaining
+lint failures. For Gold and GoldTL, use the separate
+[client build recipe](stubs/README.md#build). Those scaffolds still differ from
+their references.
+
+## Optional coverage dashboard
+
+[Recoverage](https://github.com/maci0/recoverage) explores this checkout's live
+coverage records, source and reference binaries. After creating the project
+environment, install the optional dashboard into the same `.venv` and start it
+from the repository root:
+
+```sh
+uv sync --extra dashboard
+uv run --extra dashboard recoverage serve
+```
+
+Open [127.0.0.1:8001](http://127.0.0.1:8001/) and stop the server with `Ctrl+C`.
+Select a target and section, then click a map block to inspect its source,
+disassembly and bytes or its data declarations and values. With only the server
+reference supplied, inspect `server.dll`; client views need their own reference
+executables.
+
+[![GoldTL function coverage map with a selected C function and disassembly panel.](docs/screenshots/dashboard-functions.png)](docs/screenshots/dashboard-functions.png)
+
+<details>
+<summary><strong>Inspect data and storage relationships</strong></summary>
+
+[![Server data coverage map with a selected layout span, declaration, value inspector and original bytes.](docs/screenshots/dashboard-data.png)](docs/screenshots/dashboard-data.png)
+
+</details>
+
+<sub>Actual Recoverage views captured on 2026-10-18. Map percentages describe
+stored coverage records; they do not establish whole-image completion.</sub>
 
 ## Project map
 
@@ -90,9 +254,16 @@ Use [existing tooling](docs/tooling-upstream.md) before adding scripts, and
 [vendoring rules](docs/vendoring.md) before editing libraries. Rebrew and
 Recoverage read canonical project inputs; exported coverage is a snapshot.
 
-<details>
-<summary><strong>Server reference provenance</strong></summary>
+## Work together
 
+Use a work branch and pull request for C and metadata changes. The
+[collaboration guide](docs/collaboration.md) covers shared ownership and optional
+BinSync exchange with decompilers. [Reviewed community research](docs/community-research.md)
+separates attested native findings from naming guesses and testing ideas.
+
+<a id="reference-provenance"></a>
+<details>
+<summary><strong>Reference provenance & checksum</strong></summary>
 
 The authoritative server reference is the untouched GOG Gold DLL, read-only
 (`0444`), 286,720 bytes. On 2026-10-02 it was compared directly with
@@ -110,12 +281,13 @@ HASH
 </details>
 
 <details>
-<summary><strong>Refresh the status graphic</strong></summary>
+<summary><strong>Refresh the status graphics</strong></summary>
 
 The renderer consumes the canonical CLI report; it keeps no separate coverage database.
 
 ```sh
-uv run --frozen rebrew status --all-targets --json | python3 scripts/progress_svg.py > docs/progress.svg
+uv run rebrew status --all-targets --json | uv run python scripts/progress_svg.py > docs/progress.svg
+uv run rebrew status --all-targets --json | uv run python scripts/progress_svg.py --map > docs/function-map.svg
 ```
 
 </details>

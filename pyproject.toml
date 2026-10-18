@@ -1,35 +1,29 @@
 [project]
 name = "guild-rebrew"
-version = "1.2.0"
+version = "1.3.0"
 description = "Europa 1400 (The Guild) decompilation project: byte-identical C89 source reconstruction"
 requires-python = ">=3.13"
 dependencies = [
-    "angr>=9.2.204",
-    "pyunicorn>=0.9.0",
-    "rebrew",
+    "rebrew[prove]==5.1.0",
 ]
 
 [project.optional-dependencies]
+dashboard = ["recoverage==8.2.0"]
+binsync = ["rebrew[binsync]==5.1.0"]
 dev = [
-    "mypy>=1.8",
-    "ruff>=0.3",
-    "black>=24.0",
-    "isort>=5.13",
-    "pytest>=8.0",
+    "mypy>=2.4.0",
+    "ruff>=0.17.1",
+    "black>=26.10.1",
+    "isort>=9.0.2",
+    "pytest>=9.1.1",
 ]
 
 [tool.uv]
 package = false
-# The 1.11 abi3 wheel contains a CPython 3.10-only compressor extension.
-# Build the locked source for our interpreter so angr's loader can import it.
-no-binary-package = ["uefi-firmware"]
-# angr (<=9.3.1) pins capstone==5.0.6, which conflicts with rebrew's
-# capstone>=5.0.8 (PYSEC-2026-3544 advisory fix).  capstone 5.0.9 is
-# backward-compatible with angr's usage, so force the newer version.
-override-dependencies = ["capstone>=5.0.8"]
 
 [tool.uv.sources]
-rebrew = { path = "../relumea/repos/rebrew", editable = true }
+rebrew = { url = "https://github.com/maci0/rebrew/releases/download/v5.1.0/rebrew-5.1.0-py3-none-any.whl" }
+recoverage = { url = "https://github.com/maci0/recoverage/releases/download/v8.2.0/recoverage-8.2.0-py3-none-any.whl" }
 
 [tool.ruff]
 target-version = "py313"
@@ -40,14 +34,9 @@ select = ["E", "F", "W", "I", "UP", "B", "SIM"]
 ignore = ["E501"]
 
 [tool.black]
-target-version = ["py312"]
+target-version = ["py313"]
 line-length = 100
 
 [tool.isort]
 profile = "black"
 line_length = 100
-
-[dependency-groups]
-dev = [
-    "angr>=9.2.204",
-]

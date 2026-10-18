@@ -4,6 +4,7 @@ Assembly is allowed only for evidenced padding or positive evidence that the
 original source very likely used it. A byte match, failed C search, blocker or
 `REBREW_ALLOW_NAKED` define grants no exception. [AGENTS.md](../AGENTS.md) owns
 that rule; metadata owns each definition/target receipt and current byte verdict.
+Whole-function assembly verdicts do not count as C recovery.
 
 ## Recovery checkpoint
 
@@ -14,8 +15,8 @@ and 40 remained unsupported. Later recovery work must update metadata, not this
 historical denominator. Query the live list:
 
 ```sh
-uv run --frozen rebrew todo --category naked-reconstruction --target Europa1400Gold.exe --json
-uv run --frozen rebrew lint --all-targets --json
+uv run rebrew todo --category naked-reconstruction --target Europa1400Gold.exe --json
+uv run rebrew lint --all-targets --json
 ```
 
 | Checkpoint | Recovered entries / correction | Receipt |

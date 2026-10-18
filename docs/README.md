@@ -1,8 +1,7 @@
 # Documentation
 
-Start with [the objective](../goal.md), then [current work](TODO.md).
-[Goal history](goal-history.md) is a milestone index and full-log archive;
-[AGENTS.md](../AGENTS.md) owns project rules.
+[AGENTS.md](../AGENTS.md) owns project rules. [Goal history](goal-history.md)
+indexes milestones and archived notebooks.
 
 ## Reading order
 
@@ -31,6 +30,8 @@ original text remains in the [archives](goal-history.md#full-notebooks).
 | Who owns this global or interior view? | [Data ownership](data-ownership.md) |
 | Where does this source/type belong? | [Source layout](source-layout.md) |
 | What name is attested or inferred? | [Naming conventions](naming_conventions.md) |
+| What useful community findings have been reviewed? | [Community research](community-research.md), build boundaries and native naming evidence |
+| How do contributors share source and analysis? | [Collaboration](collaboration.md), Git/PRs and optional BinSync |
 | Which tool replaces an old script? | [Tooling](tooling-upstream.md) |
 | How are vendor patches reproduced? | [Vendoring](vendoring.md) |
 | What process mistakes should I avoid? | [Workflow traps](workflow-traps.md) |
@@ -42,14 +43,14 @@ original text remains in the [archives](goal-history.md#full-notebooks).
 ## Evidence lookup
 
 ```sh
-uv run --frozen rebrew source findings 0x<VA> --json
-uv run --frozen rebrew source findings 0x<VA> --window 64 --json
+uv run rebrew source findings 0x<VA> --json
+uv run rebrew source findings 0x<VA> --window 64 --json
 ```
 
-These search live Markdown under `docs/`. For retired session logs, use the
-[archive search commands](goal-history.md#full-notebooks). Historical figures are
-measurements at their stated checkpoint. Query current metadata and run the gate
-before reporting current status; old postlink success does not prove a raw link.
+These search live Markdown under `docs/`; use [archive search commands](goal-history.md#full-notebooks)
+for retired logs. Historical figures apply only to their checkpoint. Query current
+metadata and run the gate before reporting status; postlink success does not prove
+a raw link.
 
 ## Keep it short
 

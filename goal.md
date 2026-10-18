@@ -21,14 +21,14 @@ original paths, names, types and storage; label inferences explicitly.
 
 - All three raw toolchain outputs reproduce their entire reference files,
   including headers, sections, imports, exports, resources and relocations.
-- Every reconstructed game function is object EXACT or verified linked EXACT.
-  Data bytes, placements, operands and storage owners are verified. Libraries
-  and their selected providers are accounted separately from game progress.
-- The server passes `uv run --frozen scripts/gate.sh`, including raw-file,
+- Every reconstructed game function is faithful C, apart from evidenced original
+  assembly, and object EXACT or verified linked EXACT. Data bytes, placements,
+  operands and storage owners are verified. Libraries and their selected
+  providers are accounted separately from game progress.
+- The server passes `uv run scripts/gate.sh`, including raw-file,
   function, data, import, layout and Wine load/export-resolution checks for
-  `Init`/`Exit`. Its `.text`
-  VirtualSize is `0x22846`; all 100 imports agree. Both clients pass equivalent
-  checks against their own references.
+  `Init`/`Exit`. Its `.text` VirtualSize is `0x22846`; all 100 imports agree.
+  Both clients pass equivalent checks against their own references.
 - Shared definitions, types and declarations agree across targets; all-target
   lint has zero errors/warnings. No fabricated logs, placeholder calls, invented
   padding, postlink fixups or drifting duplicate bodies remain.

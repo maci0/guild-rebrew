@@ -24,11 +24,9 @@ defines = ["REBREW_SERVER", "REBREW_LEGACY_SERVER_LAYOUT"]
 # SP6 adds 93 bytes to that library function.
 compiler = { profile = "msvc-6.0-sp5" }
 ghidra_program_path = "/server.dll"
-# Shared BinSync state dir: `functions/*.toml`, `global_vars.toml`,
-# `structs/*.toml`, writable 0644 for the BinSync client.  Configured here so `rebrew sync` and
-# `rebrew doctor` find it without `--state-dir` on every invocation.  The
-# directory itself stays gitignored -- it is regenerable with
-# `rebrew sync push` -- while this pointer is versioned.
+# Separate, ignored BinSync Git repository for this exact binary.
+# Rebrew exports can be regenerated; preserve collaborators' branches and history.
+# See docs/collaboration.md before importing, publishing or changing this path.
 binsync_state_dir = "binsync"
 binary = "original/Server/server.dll"
 # Whole-file status scores the raw toolchain output.

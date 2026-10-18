@@ -16,7 +16,7 @@
 #if 0
 // MSVC CRT library symbols for SERVER (matchable by PDB name)
 // These functions come from LIBCMT.lib (static CRT, /MT)
-// Not compiled - annotation-only markers for reccmp matching
+/* Identification notes only; bindings live in managed function metadata. */
 
 
 // _fclose

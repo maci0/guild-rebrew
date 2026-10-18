@@ -26,7 +26,7 @@ option(REBREW_BUILD_SERVER "Build server.dll reconstruction" ON)
 option(REBREW_BUILD_GOLD "Build Europa1400Gold.exe reconstruction" OFF)
 option(REBREW_BUILD_GOLDTL "Build Europa1400Gold_TL.exe reconstruction" OFF)
 option(REBREW_ALLOW_NAKED "Allow __declspec(naked)+__asm for byte-identical verification build (fenced #ifdef)" ON)
-option(REBREW_DEBUG_INFO "Emit /Z7 + /debug (PDB for reccmp). OFF = byte-identity build: original DLL has no debug directory" OFF)
+option(REBREW_DEBUG_INFO "Emit /Z7 + /debug and PDB files. OFF = byte-identity build: original DLL has no debug directory" OFF)
 
 if(REBREW_BUILD_GOLD OR REBREW_BUILD_GOLDTL)
   set(MSS32_ARCHIVE "${PROJECT_SOURCE_DIR}/references/mss-6.1c/mss32.lib")
@@ -200,8 +200,8 @@ if(REBREW_BUILD_SERVER)
   set(MINIZIP_SOURCES "${PROJECT_SOURCE_DIR}/references/minizip/unzip.c")
 
 
-  # Order objects by original function VA (fixes reccmp "0 aligned"; drops
-  # zlib files absent from the original). The --first-va table supplies the
+  # Order objects by original function VA and omit zlib files absent from
+  # the original. The --first-va table supplies the
   # vendored files' first-function VAs (pristine vendor C remains unchanged); the
   # --exclude list drops files absent from the original server.dll.
   execute_process(

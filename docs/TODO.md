@@ -46,12 +46,12 @@ See `.scratch/goal110-full-runs/compiler-warnings.json` and `warning-batch/`.
 ## Commands
 
 ```sh
-uv run --frozen rebrew todo --json
-uv run --frozen rebrew status --all-targets --json
-uv run --frozen rebrew lint --all-targets --json
-uv run --frozen rebrew verify --data --target Europa1400Gold.exe --json
-uv run --frozen rebrew verify --data --target Europa1400Gold_TL.exe --json
-uv run --frozen scripts/gate.sh
+uv run rebrew todo --json
+uv run rebrew status --all-targets --json
+uv run rebrew lint --all-targets --json
+uv run rebrew verify --data --target Europa1400Gold.exe --json
+uv run rebrew verify --data --target Europa1400Gold_TL.exe --json
+uv run scripts/gate.sh
 ```
 
 `verify --data` is image-only unless function checking is requested. Bare

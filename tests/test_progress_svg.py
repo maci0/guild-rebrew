@@ -7,6 +7,9 @@ from xml.etree import ElementTree
 import pytest
 
 render = runpy.run_path(Path(__file__).resolve().parents[1] / "scripts/progress_svg.py")["render"]
+render_map = runpy.run_path(Path(__file__).resolve().parents[1] / "scripts/progress_svg.py")[
+    "render_map"
+]
 
 
 def test_progress_separates_assembly_and_semantic_verdicts() -> None:
@@ -29,3 +32,28 @@ def test_progress_separates_assembly_and_semantic_verdicts() -> None:
     target["naked_matched"] = 8
     with pytest.raises(ValueError, match="Inconsistent function counts"):
         render(report, "2026-10-18")
+
+
+def test_function_map_uses_address_order_and_distinct_verdicts() -> None:
+    root = ElementTree.fromstring(
+        render_map(
+            {
+                "game<&>.exe": [
+                    (0x403000, "LIBRARY"),
+                    (0x401000, "EXACT"),
+                    (0x405000, "PROVEN"),
+                    (0x402000, "ASSEMBLY"),
+                    (0x404000, "PENDING"),
+                ]
+            },
+            "2026-10-18",
+        )
+    )
+    paths = root.findall(".//{http://www.w3.org/2000/svg}path")
+    assert sum(p.attrib["d"].count("M") for p in paths) == 5
+    assert len({p.attrib["fill"] for p in paths}) == 5
+    assert paths[0].attrib["d"].startswith("M24 ")
+    assert paths[1].attrib["d"].startswith("M29 ")
+    text = " ".join(root.itertext())
+    assert "game<&>.exe" in text
+    assert "5 blocks, including libraries" in text

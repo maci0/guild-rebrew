@@ -1,10 +1,11 @@
 # Project tooling and upstream Rebrew
 
-Use the pinned `rebrew <command>` CLI and public APIs before adding a helper.
-Reusable bugs/features belong in
-`/home/maci/Desktop/Projects/relumea/repos/rebrew`, with regression tests or an
-entry in its `docs/IDEAS-GUILD.md`. Native addresses and acceptance criteria stay
-here. Project rules are in [AGENTS.md](../AGENTS.md).
+Run the project CLI through `uv run rebrew <command>`; use its commands and
+public APIs before adding a helper. For tooling development, fix reusable bugs
+with regression tests in a [Rebrew checkout](https://github.com/maci0/rebrew) and
+record feature gaps in its `docs/IDEAS-GUILD.md`. A tooling checkout is not required
+to use the installed package. Native evidence stays here; [AGENTS.md](../AGENTS.md)
+owns project rules.
 
 ## Retained scripts
 
@@ -44,7 +45,7 @@ and locked metadata APIs; keep target-specific controls in `.scratch/`.
 Regenerate server game anchors with:
 
 ```sh
-uv run --frozen rebrew build anchors --target server.dll \
+uv run rebrew build anchors --target server.dll \
   --data-source src/Develop/DieGildeAddOn/game/game_float_constants.c \
   --data-prefix _ --symbol _mark --output layout/server.dll/game-includes.rsp
 ```
@@ -52,10 +53,9 @@ uv run --frozen rebrew build anchors --target server.dll \
 The October consolidation reproduced the previous 251 function/34 data anchors.
 CMake reads reference timestamps through Rebrew; the gate consumes structured
 lint/verification results. Its independent objective verifier remains separate.
-Project-level `compiler.execution_backend` also selects the CMake driver runtime;
-[runner/cache guidance](verify-performance.md)
-owns that behavior. `verify --no-cache` skips saved verification results and
-still uses the compiler-object cache. Old `--full` transcripts are historical.
+Project-level `compiler.execution_backend` also selects the CMake driver runtime.
+See [runner/cache guidance](verify-performance.md) for runtime and cache behavior.
+Old `--full` transcripts are historical.
 
 ## Upstream receipts
 

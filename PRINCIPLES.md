@@ -71,7 +71,8 @@ block top; verify emitted code after changing control flow or declarations.
 ## 14. Continuous Linting and Validation
 
 Lint source/store edits and compare changed compile inputs. ADDRESS anchors bind
-the next declaration; identity and state belong in format-2 managed metadata.
+the next declaration; identity and state belong in managed metadata, separate
+from source comments.
 
 ## 15. Full-Binary Scope (Beyond `.text`)
 

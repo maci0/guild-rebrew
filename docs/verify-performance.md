@@ -57,11 +57,9 @@ backend; target-scoped CMake backend selection remains an upstream capability ga
 The image/helper cache, compiler-object cache, verification-result cache and
 CMake object trees serve different purposes. A warm object avoids compilation
 but still needs extraction/comparison; a valid result hit avoids both.
-`verify --no-cache` does not load the verification-result cache, so every
-selected function is rechecked. The compiler-object cache still supplies a
-matching `.obj`. Backend identity separates Docker and
-unshare compile entries. Existing CMake objects are not evidence that current
-compile inputs match.
+`verify --no-cache` rechecks every selected function but can reuse a matching
+`.obj`. Backend identity separates Docker and unshare compile entries. Existing
+CMake objects are not evidence that current compile inputs match.
 
 Goal110 compared complete Gold `/ML` and TL `/MT` COFF objects using identical
 argv and pinned time: Docker and unshare outputs were equal. The native probes

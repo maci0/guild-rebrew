@@ -158,11 +158,14 @@ void __cdecl function_name(void)
 
 Stack one address per target above a shared declaration. Comments and blank lines
 may intervene; code and directives may not. New generators include these anchors.
-All state and identity live in format-2 metadata: `rebrew-functions.toml`,
-`rebrew-data.toml`, and `rebrew-source.toml`. The identity field is `kind`.
+All state and identity live in `rebrew-functions.toml` (format 3, including
+addressless assembly evidence and support purposes in `[source]`) and
+`rebrew-data.toml` (format 2). The identity field is `kind`.
 `source = "naked"`, STRUCT/CALLERS information and support file purposes are
 metadata-only. Old inline blocks and earlier metadata formats are rejected;
-there is no compatibility parser or migration reader.
+ordinary readers have no compatibility parser or legacy fallback. Use
+`rebrew source consolidate --dry-run --json`, review the digest, then apply with
+`--expected-digest` to migrate format-2 functions and the retired source store.
 
 Use `rebrew source register --dry-run` to preview declaration-bound identities,
 then register them without `--dry-run`. Registration preserves existing state.
@@ -350,9 +353,9 @@ results are rechecked against current bindings under this policy.
 
 `status --all-targets` selects each target's configured raw link or
 `build/<target>`; an unrelated sole build artifact is not a target's image.
-Use editable project dependencies pointing to the canonical Rebrew/Recoverage
-checkouts. Run tooling through the project's pinned environment, and remove
-legacy interpreter probes, stand-in dependencies and obsolete host tool links.
+Use released Rebrew/Recoverage packages in the project's pinned environment.
+Editable checkouts are an explicit tooling-development opt-in. Remove legacy
+interpreter probes, stand-in dependencies and obsolete host tool links.
 Keep local rules in the preserved project-rules section before refreshing
 generated instructions (see the init skill).
 

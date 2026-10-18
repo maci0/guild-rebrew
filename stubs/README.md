@@ -1,36 +1,48 @@
 # Client comparison builds
 
-Gold and GoldTL now link as raw PE32 executables, with MSVC maps, at:
+Gold and GoldTL link as raw PE32 executables with MSVC maps:
 
 - `build/Europa1400Gold.exe` and `build/Europa1400Gold.map`
 - `build/Europa1400Gold_TL.exe` and `build/Europa1400Gold_TL.map`
 
-These builds contain recovered sources plus explicit placeholder functions and
-storage. They are for comparison, not gameplay. Placeholder sizes and types
-do not establish native allocations, layouts, or ownership. The build uses no
-postlink reference-byte copying or forced unresolved/duplicate-symbol link.
+These are comparison scaffolds, **not playable or byte-identical games**. They
+combine recovered sources with explicit placeholder functions and storage.
+Placeholder sizes and types do not establish native allocations, layouts or
+ownership. The build uses no postlink reference-byte copying or forced
+unresolved/duplicate-symbol link.
 
 ## Build
 
-Current checkpoint: both complete Goal110 client builds linked under unshare;
-Gold then relinked after the getter C replacement. Later warning/source edits
-need fresh builds. Logs and pending checks are in [current work](../docs/TODO.md).
+The [last full checkpoint](../docs/TODO.md#verified-checkpoint) linked both
+clients under unshare and reported compiler warnings. Gold then relinked after
+the getter C replacement; later source edits require fresh builds. See
+[current work](../docs/TODO.md) for logs and pending checks.
 
-From the project root, using the pinned toolchain images with native unshare:
-
-Project-level `compiler.execution_backend = "unshare"` also applies to CMake's CL/LINK/LIB
-commands. The generated filenames still end in `-docker.cmake`; they invoke
-the backend-aware driver and need no regeneration for this runtime change.
+Complete the root [setup steps](../README.md#get-started), then run from the
+project root. Supply both client references as
+`original/Europa1400Gold.exe` and `original/Europa1400Gold_TL.exe`, and download
+the pinned [Miles archive](../references/mss-6.1c/README.md) to
+`references/mss-6.1c/mss32.lib`; check its documented SHA-256. These inputs are
+ignored by Git. Also build the Processor Pack image using the toolchain
+checkout and environment variables from the root setup:
 
 ```sh
-uv run --frozen cmake -S . -B build/clients \
+uv run rebrew toolchain build msvc-6.0-sp5-pp
+```
+
+The configured `unshare` backend also applies to CMake's
+CL/LINK/LIB commands. Toolchain filenames retain the `-docker.cmake` suffix;
+their driver uses the configured backend.
+
+```sh
+uv run cmake -S . -B build/clients \
   -DCMAKE_TOOLCHAIN_FILE="$PWD/cmake/toolchain-msvc-6.0-sp5-docker.cmake" \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_RUNTIME_OUTPUT_DIRECTORY="$PWD/build" \
   -DREBREW_BUILD_SERVER=OFF \
   -DREBREW_BUILD_GOLD=ON -DREBREW_BUILD_GOLDTL=ON \
   -DREBREW_DEBUG_INFO=OFF
-uv run --frozen cmake --build build/clients --parallel 2
+uv run cmake --build build/clients --parallel 2
 ```
 
 Gold uses Processor Pack `/ML` and `LIBC`; GoldTL uses Processor Pack `/MT`
@@ -38,19 +50,19 @@ and `LIBCMT`. The server configuration remains separate. Client `/OPT:NOREF`
 retains code and data while the entrypoints are stubs. Remove that temporary
 retention setting when the real entrypoint references are recovered.
 
-Existing incremental object trees are under
+Older incremental object trees remain under
 `.scratch/goal83-gold-build-baseline/build` and
 `.scratch/goal83-tl-build-baseline/build`. They have been reconfigured since
-Goal83; their names do not make them frozen baselines. The command above creates
-a separate ordinary build tree.
+Goal83 and are not frozen baselines. The commands above create a separate
+build tree.
 
 ## Compare
 
 The default target is GoldTL. Name Gold explicitly:
 
 ```sh
-uv run --frozen rebrew verify --data
-uv run --frozen rebrew verify --data --target Europa1400Gold.exe
+uv run rebrew verify --data
+uv run rebrew verify --data --target Europa1400Gold.exe
 ```
 
 `verify --data` checks the existing image without a function compile batch.
@@ -58,35 +70,34 @@ Add `--functions` for combined source verification, or pass a particular source
 file to verify that file alongside the data. Image-only comparisons:
 
 ```sh
-uv run --frozen rebrew verify \
+uv run rebrew verify \
   --target Europa1400Gold.exe --data --whole-binary --raw-link --dry-run --json
-uv run --frozen rebrew verify \
+uv run rebrew verify \
   --target Europa1400Gold_TL.exe --data --whole-binary --raw-link --dry-run --json
 ```
 
 Exit 1 reports the scaffolds' expected differences; it is not a passing verdict.
 The game `WinMain` definitions remain stubs rather than the native 1,856-byte
 bodies; the CRT still supplies the PE startup code.
-Use the current sibling maps and images for placement; old Goal84 comparisons
-do not certify a later link.
+Use maps from the same build as each image when checking placement.
 Data-only verification preserves the function result cache and comparison
-baseline. The compiler backend is now explicitly `unshare`, using the pinned
-image filesystem; image-only checks do not initialize that runner.
+baseline; image-only checks do not initialize the compiler runner.
 
 ## Regenerate placeholders
 
 Each target has its own `unresolved.txt` input and generated `symbol_stubs.c`.
 Gold removes three obsolete video-list placeholders, preserves comparison-only
 capacity for six color writes, and includes a generated vertex-buffer pointer
-slot. Refresh manifests from current maps before quoting counts. These symbols are linked only into their client and remain outside recovered `src/`
-and its metadata accounting.
+slot. Refresh manifests from current maps before quoting counts. Placeholders
+link only into their client and remain outside recovered `src/` and its metadata
+accounting.
 
 ```sh
-uv run --frozen rebrew build symbol-stubs --source-dir src \
+uv run rebrew build symbol-stubs --source-dir src \
   --log stubs/gold/unresolved.txt --footer stubs/SCAFFOLD.txt \
   --specials stubs/gold/specials.toml \
   --output stubs/gold/symbol_stubs.c
-uv run --frozen rebrew build symbol-stubs --source-dir src \
+uv run rebrew build symbol-stubs --source-dir src \
   --log stubs/goldtl/unresolved.txt --footer stubs/SCAFFOLD.txt \
   --specials stubs/goldtl/specials.toml \
   --output stubs/goldtl/symbol_stubs.c
@@ -112,7 +123,7 @@ marker split that keeps only the prefix drops the six-int capacity. Keep every
 non-empty special implementation that the new fragment does not already contain.
 
 ```sh
-uv run --frozen python - <<'PY'
+uv run python - <<'PY'
 import json, tomllib
 from pathlib import Path
 from rebrew.gen_stubs import collect_extern_info, generate_stubs
@@ -136,8 +147,8 @@ stub.write_text(head + '\n\n' + tail)
 PY
 ```
 
-`gold/symbols.json` is a map snapshot; it can lag the current link. Refresh it
-with `linked_manifest.py` after a successful link.
+`gold/symbols.json` is a map snapshot; refresh it with
+[`linked_manifest.py`](linked_manifest.py) after a successful link.
 Both `specials.toml` files omit an obsolete sound-control function placeholder.
 Gold's also omits the three shared video-list functions and preserves the
 comparison-only color-array capacity. Empty implementations emit no replacement
@@ -149,8 +160,6 @@ names: 26 Gold and 5 TL choices. These comparison choices do not prove that
 the independent native bodies are equivalent. Their permanent name/provider
 repairs remain open. The zlib sample program `minigzip` is also omitted.
 
-The Goal110 server checkpoint reproduced the reference:
-SHA-256 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
-That checkpoint passed 316 functions, 652 data comparisons and whole-file
-equality; later edits require a fresh gate. Client scaffold builds add no
-recovered-byte or ownership credit.
+Client scaffold builds add no recovered-byte or ownership credit. The separate
+[server checkpoint](../docs/TODO.md#verified-checkpoint) passed byte comparison
+but failed assembly lint; later edits require a fresh gate.
