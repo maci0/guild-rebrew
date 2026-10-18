@@ -1,12 +1,18 @@
 # Current work
 
 The [three-binary objective](../goal.md) is incomplete. This checkpoint records
-completed Goal110 checks on **2026-10-18**. The source changes below are newer
-than those images and need fresh builds. Historical checkpoints are in
+Goal110 checks on **2026-10-18** and fresh client builds on **2026-10-19**.
+Both clients remain comparison scaffolds. Historical checkpoints are in
 [goal history](goal-history.md).
 
 ## Current integration
 
+- Gold `0x423a50` is C: official RELOC 59/59, five validated operands and two
+  IAT-policy slots. Independent application validates all seven operands and
+  13 rejecting controls. Its rebuilt raw contribution agrees with the compiled
+  object at the displaced address `0x424720`; this is not linked EXACT.
+  The old assembly marker/blocker are removed. No storage was added.
+  Receipts: `.scratch/gold-msx-lock/`.
 - Gold `0x4790d0` is C: official object checks are RELOC 53/53, with its two
   callers at 49/49 and 91/91. Current source hashes match those receipts. This
   replaces already-accounted assembly; it adds no accounted text.
@@ -35,10 +41,11 @@ than those images and need fresh builds. Historical checkpoints are in
 All 20 reconstruction and organization reports are in `.scratch/dsh-wave1/results/`.
 Parent review and fresh official comparisons are in `.scratch/dsh-wave1/review/`;
 naming/move preservation checks are in `.scratch/dsh-wave1/naming-review/`.
-Compilation now works through the pinned unshare runner. Both client source
-lists were regenerated. The broad two-job rebuild is logged in
-`.scratch/dsh-wave1/naming-review/clients-build.log`; until it completes and
-the raw images are checked, object results do not establish linked placement.
+Compilation works through the pinned unshare runner. Both client source lists
+were regenerated, and the broad two-job rebuild completed successfully:
+`.scratch/dsh-wave1/naming-review/clients-build.log`. Gold then relinked after
+the audio-wrapper replacement. Both raw-image comparisons still fail; object
+results do not establish native placement.
 
 The updated [community review](community-research.md#exe-branch-follow-up-2026-10-19)
 records original-name and algorithm leads. It establishes no new original TU
@@ -59,12 +66,13 @@ comparable: 93 byte-equal, 51 different and 42 missing. Byte equality at a
 reference address does not establish the displaced symbol's identity there.
 
 The logging tables/newline/default name and both Sonnenstrahlen strings have
-correct file bytes at their mapped addresses. In contrast, the scaffold's
+correct file bytes at their mapped addresses. Before this rebuild, the scaffold's
 `ch_MorphFrameValue` and `SonnenstrahlenStartZeit` contain zero where the
 reference initializes them to -1; `g_6752a4` also has a zero placeholder for
 native value 1. Both clients' stub-generator overrides now preserve those values.
-Both regenerated stub objects compile without warnings and contain the expected
-bytes. Original owners remain unresolved; complete raw-link checks are pending.
+Both regenerated stub objects compile without warnings. Both new raw images
+contain the three expected values at their mapped addresses. Original owners
+and native placement remain unresolved.
 The critical-section slots already have import metadata and KERNEL32 providers;
 their placement differs.
 
@@ -77,8 +85,12 @@ symbol-binding checks, not native placement or original TU ownership proof.
 Receipts: `.scratch/dsh-wave1/review/data-diagnosis-tl.json` and
 `data-linked-location-samples.json`. The original audit changed only 22 GoldTL
 comparison records. The four later literal bindings above are separate changes.
-Rerun after the current complete build; these are not results for that image.
-Literal and initializer receipts: `.scratch/data-initializers/`.
+The new TL image still has 0 exact placements, 332 displaced symbols and 22
+absent from the map. Reference-address comparison remains 93 equal, 51 different
+and 42 missing; correcting displaced initializers does not fix native placement.
+Literal/initializer receipts and the fresh TL comparison are in
+`.scratch/data-initializers/`; the final Gold comparison is
+`.scratch/gold-msx-lock/gold-rebuilt-image.json`. Image hashes are in those receipts.
 
 ## Verified checkpoint
 
