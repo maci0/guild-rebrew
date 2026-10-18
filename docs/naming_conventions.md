@@ -105,11 +105,11 @@ assembly. Replay: `.scratch/goal77-assembly/collector-proof.py`.
 
 ### Object-transform animation wrapper (2026-10-15)
 
-`StartObjectTransformAnimation` is inferred for TL0x00412d30. No original spelling,
+`StartObjectTransformAnimation` is inferred for TL 0x00412d30. No original spelling,
 prefix, source unit or Gold counterpart is established. Its private source unit
 and `D3_OBJ_ANIM_FLAGS`/`D3_OBJ_ANIM_FRAME` names are inferred. Native allocation
 labels attest the called service's `d3_int:CreateObjAnim` and frame-data purpose.
-The frame stride is88 bytes; options occupy12 bytes by value. Unknown fields and
+The frame stride is 88 bytes; options occupy12 bytes by value. Unknown fields and
 bits retain `unbekannt_*`/bit-position names and are not given invented meanings.
 The numeric global spellings predate this reconstruction and are retained as
 declaration views. Their storage owners remain unknown. The helper is a near
@@ -126,7 +126,7 @@ is retired. No client raw-link provider is claimed by this identification.
 
 ### Shared scene lighting refresh (2026-10-15)
 
-`UpdateSceneLighting` is an inferred name for TL0x450a00 and Gold0x453890.
+`UpdateSceneLighting` is an inferred name for TL 0x450a00 and Gold 0x453890.
 Neither its original spelling nor a function prefix or enclosing source unit is
 attested. The shared definition retains both clients' counter/terrain work;
 Gold alone has the native byte-flag branches that clear node caches or rebuild
@@ -145,7 +145,7 @@ These results do not establish client raw-link providers or image identity.
 
 ### Shared solar-effect stop (2026-10-14)
 
-The inferred `StopSonnenstrahlen` covers TL0x4186d0 and Gold0x417150,
+The inferred `StopSonnenstrahlen` covers TL 0x4186d0 and Gold 0x417150,
 31 bytes each. It belongs beside the existing creation/reset bodies in the
 shared solar-effect unit. The weather caller supplies an object pointer and
 phase1; the native helper ignores the first argument and stores the second,
@@ -153,16 +153,16 @@ sets active state to-1 and resets the clock. The Gold one-argument stub is
 retired. No original spelling or filename is attested. Fresh CLI discovery
 supplies the missing TL inventory entry; all prior inventory rows are preserved.
 The shared header declares the two-argument interface. Both weather callers
-retain their complete 380-byte COFF bodies and35 typed operands after binding
-and declaration repairs. All six solar-effect bodies and32 rejecting symbol
+retain their complete 380-byte COFF bodies and 35 typed operands after binding
+and declaration repairs. All six solar-effect bodies and 32 rejecting symbol
 controls are verified in `.scratch/goal22/reconstruction/solar-stop-native-proofs.json`.
 No storage, flags or assembly are added; client raw links remain unverified.
 
 ### Shared Sonnenstrahlen creation and reset (2026-10-14)
 
-The newly inferred `CreateSonnenstrahlen` covers TL0x418710 and GOLD0x417190,
+The newly inferred `CreateSonnenstrahlen` covers TL 0x418710 and GOLD 0x417190,
 211 native bytes each. `StartSonnenstrahlen` replaces TLfcn_004186f0 and
-GOLDfcn_00417170 at0x4186f0/0x417170,31 bytes each. Both live once in the
+GOLDfcn_00417170 at 0x4186f0/0x417170,31 bytes each. Both live once in the
 inferred `Develop/DieGildeAddOn/game/sonnenstrahlen.c` unit. No original
 function spelling or unit path is attested: resource literals `pLicht` and
 `sonnenstrahlen`, the shared scene creation calls and the existing weather
@@ -183,7 +183,7 @@ in both clients by `caller-preservation.json` in that directory.
 
 ### Shared tracked allocator and attested spelling (2026-10-11)
 
-SERVER0x10006580 (658 bytes), GOLDTL0x41db70 and GOLD0x4223c0
+SERVER 0x10006580 (658 bytes), GOLDTL 0x41db70 and GOLD 0x4223c0
 (544 bytes each) share the canonical memory-allocation implementation in
 `Develop/Units/m_alloc/m_alloc.c`. The unit path is attested by SERVER's
 `__FILE__` strings; common native grouping, tracking and literal bytes support
@@ -196,29 +196,29 @@ the original allocator spelling. The previous reconstruction name
 `m_AllocTracked` is retired: the definition, three target rows,84 source/header
 files and server link anchor now use `m_alloc`. Existing
 `GroupNode`, field labels and numeric global spellings remain inferred or
-unresolved. Both complete client bodies, literals and all25 operands match;
-all185 checked caller operands independently retain their native destination.
-The private40-byte group and16-byte allocation-record layouts are unchanged.
+unresolved. Both complete client bodies, literals and all 25 operands match;
+all 185 checked caller operands independently retain their native destination.
+The private40-byte group and 16-byte allocation-record layouts are unchanged.
 Receipts: `.scratch/goal21/shared-tracked-alloc`.
 
 ### Shared allocator shutdown (2026-10-12)
 
-The inferred `m_ShutdownAllocator` name now covers SERVER0x10006c00,
-TL0x41e0c0 and GOLD0x422910 in the shared m_alloc unit. Its original spelling
+The inferred `m_ShutdownAllocator` name now covers SERVER 0x10006c00,
+TL 0x41e0c0 and GOLD 0x422910 in the shared m_alloc unit. Its original spelling
 remains unproven. The clients retain the same leak-reporting literals, tracking
 slot cleanup and linked-list traversal; SERVER alone logs the formatted pointer
 leak. The native bodies are 283/262/262 bytes. Client aliases describe existing
 storage without allocating it or establishing an owner; the numeric global and
-callback names remain unresolved. The group next pointer remains at offset36,
-and tracked records remain16 bytes. Complete native operands and literal bytes
+callback names remain unresolved. The group next pointer remains at offset 36,
+and tracked records remain 16 bytes. Complete native operands and literal bytes
 agree with the old client implementation and existing allocator/report bindings.
 The TL shutdown caller retains its native call destination. Evidence:
 `.scratch/goal21/shared-allocator-shutdown`.
 
 ## Shared tracker reporting and group layout (2026-10-11)
 
-The existing inferred `m_ReportGroupInfo` name now covers SERVER0x10006990,
-TL0x41df00 and GOLD0x422750 in the shared m_alloc unit. The SERVER source
+The existing inferred `m_ReportGroupInfo` name now covers SERVER 0x10006990,
+TL 0x41df00 and GOLD 0x422750 in the shared m_alloc unit. The SERVER source
 path is attested by its native logging calls; client placement follows the
 identical group traversal, formatting literals and shutdown callers. SERVER
 logs the formatted output; the clients retain the formatting but omit those
@@ -227,21 +227,21 @@ six calls. Its original spelling remains unproven.
 `GroupNode` is the single40-byte allocation-group layout for all targets;
 `MemPool` was another name for the same layout. Canonical `size_total`,
 `count_total`, `size_max`, `count_max`, `count` correspond to the former
-`used`, `used_blocks`, `max`, `max_blocks`, `calls` at offsets16/20/24/28/32.
-The names are reconstructed. Name storage is16 bytes and next is at36;
-tracked `MemBlock` records remain16 bytes with group/tag/pointer/size at0/4/8/12.
+`used`, `used_blocks`, `max`, `max_blocks`, `calls` at offsets 16/20/24/28/32.
+The names are reconstructed. Name storage is 16 bytes and next is at 36;
+tracked `MemBlock` records remain 16 bytes with group/tag/pointer/size at 0/4/8/12.
 Compiler assertions and native bodies establish layout, not original spelling
 or storage ownership. Client stat/global spellings are private scoped aliases
 without allocations. Evidence: `.scratch/goal21/shared-pool-report`.
 
 ### Shared pool deallocation (2026-10-11)
 
-`m_pool_free` is attested by the SERVER fatal diagnostic at0x10006e30.
-The corresponding TL0x41e2e0/GOLD0x422b30 names and unit placement remain
-inferred from the same16-byte pool-block layout, slot/bounds/unlink logic and
+`m_pool_free` is attested by the SERVER fatal diagnostic at 0x10006e30.
+The corresponding TL 0x41e2e0/GOLD 0x422b30 names and unit placement remain
+inferred from the same 16-byte pool-block layout, slot/bounds/unlink logic and
 calls to the shared tracking deallocator. One canonical definition now serves
-all three targets; only SERVER reports invalid entries. The complete112-byte
-client bodies retain both native call operands, while the137-byte server body
+all three targets; only SERVER reports invalid entries. The complete 112-byte
+client bodies retain both native call operands, while the 137-byte server body
 and every caller remain unchanged. The duplicate client `Chunk` definition is
 retired with its source. Existing `M_POOL_BLOCK` field names and global owners
 remain provisional. Evidence: `.scratch/goal21/shared-pool-free`.
@@ -253,7 +253,7 @@ Thirteen channel functions share the same native critical section; their placeme
 under `Develop/Units/Msx` is inferred from this subsystem affinity. Their original
 function spellings and the other functions' exact original units remain unknown.
 Both TL420840 and GOLD4244b0 also attest `hTrack->bAmbient`. The canonical 296-byte
-`Chan_14cc460` view now uses the attested `bAmbient` spelling at offset0x106.
+`Chan_14cc460` view now uses the attested `bAmbient` spelling at offset 0x106.
 Its type name and the other field spellings remain provisional. Eleven verified MSX bodies now share
 `msx.c`; helper placement is inferred from their channel calls and state. Their
 address-based function names and the complete allocation owners remain unresolved.
@@ -297,7 +297,7 @@ view at TL+88/GOLD+78; inherited legacy GuiEnt field names remain unresolved. Th
 ten global aliases reuse existing C spellings as declaration-only accessed views:
 original names, allocation identity, complete backing extents and owners remain
 unproven. `d2_gui.h` is a reconstructed declaration home. No storage is allocated.
-The TL routing caller is independent70-byte4bfbc0, outside the matched dialog body.
+The TL routing caller is independent70-byte 4bfbc0, outside the matched dialog body.
 Evidence: `.scratch/goal20/ui-resource-bind/scope-final.json`.
 
 ### Shared floor-water region fill (2026-10-11)
@@ -306,7 +306,7 @@ Evidence: `.scratch/goal20/ui-resource-bind/scope-final.json`.
 renderer prefix and the caller's `d3_fl:Water` allocation labels support its
 module/role; original spelling and `d3_floor.c` unit placement remain unproven.
 The unrelated client `cm_ExAllocRaum` binding is removed; that attested SERVER
-handler stays unchanged. The268-byte helper operates on square byte grids and
+handler stays unchanged. The 268-byte helper operates on square byte grids and
 retains all six full-width arguments, interpreting region values by low byte.
 The original valid-coordinate/distinct-color preconditions remain unchanged.
 Evidence: `.scratch/goal20/grid-flood-fill/scope-final.json`.
@@ -329,8 +329,8 @@ Evidence: `.scratch/goal20/character-motion-clear/scope-final.json`.
 character module prefix and native model-name/motion loop. Its original spelling
 and compilation-unit path remain unproven. The former `cm_ExAllocSpieler` binding
 was unrelated; that attested SERVER handler remains unchanged. The existing
-motion-loader file owns the reconstructed283-byte helper and12-byte options
-view. Its two absolute0x34 reads are native, with no direct callers or absolute
+motion-loader file owns the reconstructed283-byte helper and 12-byte options
+view. Its two absolute 0x34 reads are native, with no direct callers or absolute
 function-pointer references found. No storage owner or GOLD counterpart inferred.
 Evidence: `.scratch/goal20/alloc-spieler-client/scope-final.json`.
 
@@ -342,7 +342,7 @@ unmatched. `fcn_004050c0`, `fcn_00405540` and `fcn_00418c80` remain unnamed
 pending original-module and naming evidence. This recovery restores their
 exact previously verified source versions, including the constructor's
 existing SOUND_SOURCE view; it establishes no new names or storage owners.
-The TL constructor again matches150 bytes with all6 operands independently
+The TL constructor again matches 150 bytes with all 6 operands independently
 bound. Its stock CRT call is strncpy64d530. GOLD's constructor field offset
 difference remains unbound; do not import the TL constructor unchanged.
 Evidence: `.scratch/goal20/missing-character-bindings/scope-final.json`.
@@ -351,11 +351,11 @@ Evidence: `.scratch/goal20/missing-character-bindings/scope-final.json`.
 
 `gm_ResolveParentEntity` (SERVER10019ae0/TL50d490/GOLD50a050) and
 `gm_GetEntityType` (SERVER10019b40/TL50d530/GOLD50a0b0) retain inherited
-inferred names. Complete client extents are82 and62 bytes, excluding14
-and2 external NOPs. The resolver uses the id at input+0x0a, returns its
+inferred names. Complete client extents are82 and 62 bytes, excluding 14
+and 2 external NOPs. The resolver uses the id at input+0x0a, returns its
 static record if present, otherwise follows dynamic+0x27 into g_slot_table;
-missing records or link0xffff return null. The getter returns the static
-record's first word, otherwise dynamic+0x27, otherwise0xffff. A domain
+missing records or link 0xffff return null. The getter returns the static
+record's first word, otherwise dynamic+0x27, otherwise 0xffff. A domain
 claim of type/class is unproven; canonical entity_index naming does not
 establish this helper's original name. No new storage was introduced.
 Evidence: `.scratch/goal20/parent-type-extents/scope-final.json`.
@@ -369,11 +369,11 @@ SERVER10018200/TL507b00/GOLD504ad0; SERVER100184e0/TL509570/GOLD506430.
 The first returns the occupation code when its group equals the requested
 stat id, otherwise a byte at table-entry+0x74+id, or zero for no entry. It does
 not test a threshold. The mapper groups codes0..94; code82 and out-of-range
-codes return zero. Its complete291 bytes include both compiler tables; the
+codes return zero. Its complete 291 bytes include both compiler tables; the
 retired client clone's304-byte extent also included13 external NOPs.
-The table-entry helper selects a172-byte record for kinds5/6/7 with flag0x8000
+The table-entry helper selects a172-byte record for kinds5/6/7 with flag 0x8000
 and low-four-bit index0..15. Both client implementations remain near matches
-with11 register/scheduling differences. Canonical prototypes and caller casts
+with 11 register/scheduling differences. Canonical prototypes and caller casts
 preserve the existing reconstructed views; original domain types remain open.
 Client `g_entity_type_bytes` is a declaration-only view at `g_slot_table+0x164`.
 Client `g_entity_base` describes the accessed2752-byte table view. These inherit
@@ -385,14 +385,14 @@ Evidence: `.scratch/goal20/stat-level-extent/scope-final.json`.
 ### Filtered iterator identity correction (2026-10-11)
 
 `gm_FindNextFilteredEntity` is the existing inferred shared name for the
-iterator at SERVER10016f80, GOLDTL503e80 and GOLD501030. The client body is341
-bytes plus11 layout NOPs; all20 relocation sites and all other bytes match
+iterator at SERVER10016f80, GOLDTL503e80 and GOLD501030. The client body is 341
+bytes plus 11 layout NOPs; all 20 relocation sites and all other bytes match
 the existing spiel.c definition in both clients. GOLDTL503e80's former
 `gm_AddObjekt` binding named a different shared function and is disproven.
 The true server `gm_AddObjekt` name remains attested and unchanged. Evidence:
 `.scratch/goal20/stat-shared-iterator-audit.json`. Upstream0fbab4fb fixes the
 shared importer, and the verified replay corrects both client names, symbols,
-flags and341-byte reference hashes through the managed writer. Evidence:
+flags and 341-byte reference hashes through the managed writer. Evidence:
 `.scratch/goal20/stat-iterator-replay.json`.
 
 ### Entity-class embedded switch extents (2026-10-11)
@@ -400,9 +400,9 @@ flags and341-byte reference hashes through the managed writer. Evidence:
 The existing shared `gm_EntityClassCheck` retains its name and C definition.
 GOLDTL506e20 and GOLD503f50 have70-byte complete extents:34 bytes of reachable
 code,2 internal alignment bytes, an8-byte branch table, and a26-byte case map.
-The following10 NOPs are external alignment. Compiler-generated table labels
+The following 10 NOPs are external alignment. Compiler-generated table labels
 are private views inside the owning function; the extent repair creates no
-named global or storage owner. All26 cases/default and8 local DIR32 targets
+named global or storage owner. All 26 cases/default and 8 local DIR32 targets
 are validated through upstream strict operand proof. Evidence:
 `.scratch/goal20/entity-class-extent/scope-final.json`.
 
@@ -410,10 +410,10 @@ are validated through upstream strict operand proof. Evidence:
 
 `gm_ClearObjektResources` is inferred, not attested. The existing spiel.c now
 owns SERVER10016670 (one-byte empty body), GOLDTL502ec0 and GOLD500080
-(client54-byte body). The clients inspect the object prototype category0x1d,
+(client54-byte body). The clients inspect the object prototype category 0x1d,
 release the pointer chain at node+0x29 via fcn_004be280, and clear that field.
 The recursive list helper at SERVER10016710, GOLDTL502f80 and GOLD500140 calls
-the correct edition body. Clients have66-byte recursion plus14 alignment NOPs.
+the correct edition body. Clients have66-byte recursion plus 14 alignment NOPs.
 The existing g_99ec10 declaration and client resource-chain callee remain
 aliases/users; this consolidation creates no data allocation or owner claim.
 The helper's original unit/name and domain types remain unproven. The canonical
@@ -1167,7 +1167,7 @@ separate Gold copies retire. Stable client.display_counter bindings verify
 and caller proofs: .scratch/goal23/pool-unification/. Original semantic evidence:
 .scratch/goal-display-counters/table-operands.json.
 
-- Inferred shared type `VECTOR3` replaces address-derived `Vec3_67bbdc`: three floats,12-byte view with offsets0/4/8, reused by seven client sources. TL67bbdc/Gold5fcc78 includes ambient RGB use; TL6b86c4 semantics remain unresolved. No original-name or source-path attestation. Evidence `.scratch/goal-material-colors/field-alias-bindings.json`; original allocation ownership remains unresolved.
+- Inferred shared type `VECTOR3` replaces address-derived `Vec3_67bbdc`: three floats,12-byte view with offsets 0/4/8, reused by seven client sources. TL67bbdc/Gold5fcc78 includes ambient RGB use; TL6b86c4 semantics remain unresolved. No original-name or source-path attestation. Evidence `.scratch/goal-material-colors/field-alias-bindings.json`; original allocation ownership remains unresolved.
 
 ### Shared random helper consolidation (2026-10-04)
 
@@ -1177,7 +1177,7 @@ and caller proofs: .scratch/goal23/pool-unification/. Original semantic evidence
 | Europa1400Gold_TL.exe | `0x0042e410` | `gm_RandomMod` | Numeric caller alias fcn_0042e410 renamed; newly recovered32-byte identity shares the server body. |
 | Europa1400Gold.exe | `0x0042ec00` | `gm_RandomMod` | Renamed from fcn_0042ec00; duplicate body retired for the shared definition. |
 
-This is a semantic shared-name choice anchored in the existing server reconstruction, not an original-symbol or log-string attestation. The existing `int __cdecl gm_RandomMod(unsigned short n)` C form produces all32 native bytes in each image, including a typed call to that image's stock `rand`. It does not prove unique original signedness or parameter spelling. Caller prototype narrowing remains unresolved; the rename preserves caller declaration types. Evidence: .scratch/goal-random-helper/consolidation/native-shared-body-audit.json and consolidation-scope-check.json. Full-tree verification63165 is accepted: all existing matches retained and the TL helper added. Five prior mismatches have stricter deltas under the newly bound call catalog; before/after compiled bytes are identical.
+This is a semantic shared-name choice anchored in the existing server reconstruction, not an original-symbol or log-string attestation. The existing `int __cdecl gm_RandomMod(unsigned short n)` C form produces all 32 native bytes in each image, including a typed call to that image's stock `rand`. It does not prove unique original signedness or parameter spelling. Caller prototype narrowing remains unresolved; the rename preserves caller declaration types. Evidence: .scratch/goal-random-helper/consolidation/native-shared-body-audit.json and consolidation-scope-check.json. Full-tree verification63165 is accepted: all existing matches retained and the TL helper added. Five prior mismatches have stricter deltas under the newly bound call catalog; before/after compiled bytes are identical.
 
 
 ### Shared scene-object destruction (2026-10-15)
@@ -1191,7 +1191,7 @@ call casts it to the canonical object type without changing its byte accesses.
 The name and placement in `d3_object.c` remain inferred.
 
 Both complete unlink bodies are unmasked EXACT for154 bytes. Opposite object
-layouts reject, and both32-byte destruction wrappers retain their complete
+layouts reject, and both 32-byte destruction wrappers retain their complete
 native bodies and call destinations. The unlink provider is now source-owned
 for both targets, including the previously unsourced Gold leaf. Inner disposal
 still differs and remains separate. Evidence:
@@ -1208,10 +1208,10 @@ One C89 definition returns a byte and takes `D3_OBJECT*`, with a single header
 declaration reused by every reconstructed caller. Native TL calls `43a0a0` /
 `4398d0`; Gold calls `43d0e0` / `43c7a0`. Unlink now has a shared typed provider;
 the disposal providers remain separate:
-TL disposal is450 bytes and Gold disposal637. The caller byte proof does not
+TL disposal is 450 bytes and Gold disposal637. The caller byte proof does not
 establish their provider implementations or original parameter spelling.
 
-Both complete32-byte wrappers and their call operands agree; four shifted-call
+Both complete 32-byte wrappers and their call operands agree; four shifted-call
 controls reject. Across31 target/source contexts, the other115 comparisons
 preserve their byte results and existing binding proofs; nine Gold call sites
 gain a native address proof. All six D3 layouts retain their evidenced sizes,
@@ -1641,7 +1641,7 @@ unit or authorize a server allocation. Evidence:
 
 Statistic delimiter reconciliation (2026-10-11): the existing inferred names
 `srv_FormatStatDumpBegin` (TL4e73c0) and `srv_FormatStatDumpEnd` (TL4e77e0)
-now identify the shared34-byte server.c bodies. Their original names/source
+now identify the shared 34-byte server.c bodies. Their original names/source
 placement remain inferred; no Gold counterpart is established. The complete
 formats atTL68d870/68d968 use compiler-literal content labels
 `str_begin_statistic_dump_round`/`str_end_statistic_dump_round`, not source
@@ -1671,8 +1671,8 @@ the reconstructed client-only server_stats.c/server_stats.h. The old numeric
 single-body unit is retired after both target verifications. Existing class
 and runtime-name declaration labels remain analysis names with unresolved
 allocation owners/extents. `str_stat_identity_columns` is a content label
-for the37-byte compiler literal, not a source identifier. The existing C
-spelling `g_current_year` binds Gold's native scalar view at770ae0; the
+for the 37-byte compiler literal, not a source identifier. The existing C
+spelling `g_current_year` binds Gold's native scalar view at 770ae0; the
 broader `g_7f4c00` inventory is unchanged. No SERVER counterpart is claimed.
 Evidence: `.scratch/goal20/stat-identity-shared-probe/receipt.json` and
 `stat-identity-retirement.json`.
@@ -1744,8 +1744,8 @@ identical and use the existing TL C body in `src/FindTableEntryIndex.c`.
 The original function/unit names, table domain and unused original parameters
 remain unproven; the two used arguments are the target value and a caller-supplied
 row table. The loop advances12 bytes per row, examines at most64 rows, stops at
-0x28, and returns0x27 when missing. It checks equality before the terminator,
-so a target value0x28 can return that row's index. No storage owner or array
+0x28, and returns 0x27 when missing. It checks equality before the terminator,
+so a target value 0x28 can return that row's index. No storage owner or array
 allocation is inferred. The malformed GOLD placeholder's absolute-address
 assumption and discarded first argument were false. Managed identity, the
 verified shared import and both complete objects establish EXACT bytes.
@@ -1757,7 +1757,7 @@ Evidence: `.scratch/goal20/table-search-repair/scope-final.json`.
 GOLD4eaad0 share the unchanged `DieGildeAddOn/game/alchemistry_logic.c`
 definition; the misleading TL `ahm_ResetEntityState.c` clone is retired.
 The real reset helpers remain distinct. Both native client bodies are70 bytes
-plus10 alignment NOPs. Clone/owner bytes and the typed table operand agree
+plus 10 alignment NOPs. Clone/owner bytes and the typed table operand agree
 in both client contexts, but11 native scheduling differences remain; this
 consolidation does not establish client byte matching. Existing pointer/data
 rows remain aliases/declarations with unresolved client backing storage;
@@ -1831,8 +1831,8 @@ are compared with only the seven symbol spellings normalized.
 Stable IDs `d3.object`, `d3.object_draw_data`, `d3.draw_part` live in managed
 `rebrew-types.toml`; C type and header names follow the attested d3 subsystem
 but their original spellings are unproven. Native allocation sizes are 0x228
-for the scene object in both clients, TL0x1640/GOLD0x970 for draw data.
-Four draw slots have TL0x4a4/GOLD0x198 stride. `teile`, `teile_anzahl`,
+for the scene object in both clients, TL 0x1640/GOLD 0x970 for draw data.
+Four draw slots have TL 0x4a4/GOLD 0x198 stride. `teile`, `teile_anzahl`,
 `zeichendaten`, `kontext`, `eltern`, `kinder`, `naechstes`, and `voriges`
 are inferred German field spellings; unknown regions retain `unbekannt_*` names.
 The `name` pointer is an accessed string prefix of a resource context, not a
@@ -1879,13 +1879,13 @@ character table stays a declaration without a new storage-owner claim. Receipts:
 
 `ch_UpdateAttachedModelPosition` is inferred from TL403e20/Gold403620, not
 attested by a string. One shared 801-byte body in `game/character.c` updates the
-model referenced through character offset0x124, its orientation and terrain
+model referenced through character offset 0x124, its orientation and terrain
 height, then caches the main model position. Its second argument is read as an
 unsigned byte. The native x87 comparison accepts unordered height differences;
 the C condition preserves that behavior. The zero-initialized float is an
 existing global read, not a new constant or storage definition. The complete
-bodies, all17 typed operands,14 rejecting binding controls and all24 literal
-bytes agree in each client. The10 previous surrounding bodies remain unchanged.
+bodies, all 17 typed operands,14 rejecting binding controls and all 24 literal
+bytes agree in each client. The 10 previous surrounding bodies remain unchanged.
 Declarations are canonical in `ch_motion.h`; native callee spellings, field
 names and storage ownership remain unresolved. Receipts:
 `.scratch/goal21/character-pending-positions/attachment/`.
@@ -1895,7 +1895,7 @@ names and storage ownership remain unresolved. Receipts:
 The native TL diagnostic attests the exact spelling `ch_Updatelowpoly()` at
 TL4033e0. Its partial C reconstruction now lives in shared `game/character.c`,
 and four callers use the canonical declaration in `ch_motion.h`. The native
-body is1156 bytes; the inventory's1168-byte span includes12 alignment bytes.
+body is 1156 bytes; the inventory's1168-byte span includes 12 alignment bytes.
 The current default-flags object emits1150 bytes and remains SIZE_MISMATCH.
 Detailed/low-polygon block ordering and pointer reuse still need matching; no
 complete byte-match, proof, Gold counterpart binding or new data verdict is
@@ -1905,23 +1905,23 @@ The two identical private animation-option definitions are replaced by one
 inferred `D3_ANIMATION_OPTIONS` in `Units/d3/d3_animation.h`. Both client
 compilers check sizeof12 and offsets mode0/layer1/pad2=2/pad8=9; native calls
 pass three DWORDs by value. All eight old animation bodies and typed operands,
-and all24 surrounding bodies across12 contexts, are unchanged. The type and
+and all 24 surrounding bodies across 12 contexts, are unchanged. The type and
 field spellings remain inferred; this argument layout allocates no global
 storage. Receipts: `.scratch/goal21/character-lowpoly/`.
 
 Broader checks also confirm that Gold40cba0/40cf10 already matched their full
 55/183-byte bodies: both catalog sizes included nine trailing alignment NOPs.
-All13 typed operands and rejecting bindings agree. Corrected size metadata
+All 13 typed operands and rejecting bindings agree. Corrected size metadata
 removes those pre-existing SIZE_MISMATCH verdicts without changing their C or
 introducing a new function identity.
 
 
 ### Person tooltip callback identity collision (2026-10-14)
 
-Gold0x00589390 now uses inferred `ShowPersonTooltip`, from its native
+Gold 0x00589390 now uses inferred `ShowPersonTooltip`, from its native
 `ToolTip\\ToolTip_Personen` key and person-statistic rendering. Neither the
 function spelling nor original source path is attested. The separate
-Gold0x00580d10/TL0x00589390 function retains its own definition. A shared
+Gold 0x00580d10/TL 0x00589390 function retains its own definition. A shared
 placeholder name had redirected the tooltip self callback to that function.
 The private `RandomMoneyTransfer` inline helper in GOLDTL.fcn_004b6f00.c is
 also inferred organization; its five native entries/coefficient variants are
@@ -1959,21 +1959,21 @@ selector prototype; it allocates no storage. The native diagnostic is
 `SetCameraToDummy(): Could not find Cameradummy '%s'!` in both clients.
 
 `d3_RemoveObjectFromList` is inferred for TL439b30 / Gold43cab0. Placement in
-d3_object.c is inferred. Both112-byte native bodies remove the object's list
-links, clear the selected camera for kind3 and clear flags0 bit1. This is a
+d3_object.c is inferred. Both 112-byte native bodies remove the object's list
+links, clear the selected camera for kind3 and clear flags 0 bit1. This is a
 different operation from the established hierarchy unlink helper.
 
 
 ### Master-evaluation eligibility (2026-10-15)
 
-`gm_CanEvaluateMaster` is inferred for TL0047dd60 / Gold0047e8a0. Its137-byte
+`gm_CanEvaluateMaster` is inferred for TL0047dd60 / Gold0047e8a0. Its 137-byte
 body checks entity kinds1/2, nonzero +164, a home pointer at+16c and its valid
 slot, excludes home kind7, then applies the evidenced global scheduling filter.
-TL0047de50 calls it at0047de7e before the native master-evaluation diagnostics
+TL0047de50 calls it at 0047de7e before the native master-evaluation diagnostics
 (`Evaluation von Meister %s in %s beginnt...`). The original identifier and
 translation-unit home are unproved; the existing standalone source file stays.
 
-This is distinct from the32-byte kind2/3/4/5 predicate at TL0047d220 /
+This is distinct from the 32-byte kind2/3/4/5 predicate at TL0047d220 /
 Gold0047dd60, which retains its provisional `fcn_0047dd60` spelling. The old
 shared spelling caused an ambiguous native binding; it did not establish that
 the two algorithms were one function. Rename and reference binding use the
@@ -1983,7 +1983,7 @@ records complete object/operand/literal checks.
 
 ### Character mesh constructor (2026-10-15)
 
-`ch_CreateMesh` at TL0x403880/Gold0x403070 is attested by the native
+`ch_CreateMesh` at TL 0x403880/Gold 0x403070 is attested by the native
 `ch_CreateMesh(): Could not load 3D-Character: %s` diagnostic. Complete ordinary-C
 bodies match 777/787 bytes. Its existing character.c placement and local names are
 inferred; char* model/resource and float* position are reconstructed access
@@ -2123,7 +2123,7 @@ layout or allocation owner. Native boundaries, dispatch/operand evidence and
 bounded execution inputs are retained in `.scratch/goal58`.
 
 
-### Goal59 — inferred participant-reset callback
+### Goal59: inferred participant-reset callback
 
 `fcn_004e4f10` is the existing provisional label for TL `4e4f10`, paired with
 Gold `4e36a0` by complete native bodies and direct callers. Its standalone file,
@@ -2138,7 +2138,7 @@ the full allocation extent. No inferred interior alias or new allocation is
 created to match the compiler's cursor choice. Receipts are in `.scratch/goal59`.
 
 
-### Goal60 — texture precaching and the first event phase
+### Goal60: texture precaching and the first event phase
 
 The name `d3d_PrecacheBuffer` is attested in Gold's native DrawPrimitive
 expression. Its declaration belongs in the reconstructed `d3_d3d.h`; the native
@@ -2164,7 +2164,7 @@ providers and original typedef names remain open. Canonical declarations live in
 `event_callbacks.h`; second and third phase slots retain their separate open
 contracts. Evidence and compiler-width assertions are in `.scratch/goal60`.
 
-### Goal61 — periodic timer and cutscene clock contracts
+### Goal61: periodic timer and cutscene clock contracts
 
 `client_timer.h`, `TIMER_CALLBACK` and `TIMER_CALLBACK_SLOT` are inferred names
 and organization. Native TL `42dcd0` / Gold `42e7b0` invoke a no-argument cdecl
@@ -2187,7 +2187,7 @@ Registration now passes the existing `void fcn_00525e90(void)` provider. Its
 23-byte function identity survives; the false `.rdata` row is retired through
 the locked data writer. Receipts and the old row are in `.scratch/goal61`.
 
-### Goal62 — packet-base byte-access contract
+### Goal62: packet-base byte-access contract
 
 `client_packet_builder.h` is an inferred declaration home, not an attested original
 header or storage owner. The existing provisional `fcn_004c4510` names TL `4c4510`
@@ -2242,7 +2242,7 @@ The large-body Gold pairings have complete native/Kuna role review and resource/
 | `0x004a4d90` | 544 | `amt_ExecGebaeudeBauen` | Executes a building-construction action using the building prototype/model group. | 0x004a5320 | 0x4a4f96 -> 0x67f074: amt_ExecGebaeudeBauen(): Keine Group f |
 | `0x004bdda0` | 272 | `rd_AllBauplatzToSupermap` | Projects the four building-site corners into supermap coordinates. | 0x004bd500 | 0x4bddbd -> 0x681674: rd_AllBauplatzToSupermap(): Unbekannter Bauplatz '%s' |
 | `0x004c9a10` | 544 | `cm_ExAddStraftat` | Allocates and fills a crime record, assigns its counter and reports the result. | 0x004c8e70 | 0x4c9a9b -> 0x68afc8: cm_ExAddStraftat(): Executed---- st_id = %i, taeter = %i, opfer = %i |
-| `0x004c9e20` | 190 | `cm_ExAllocCutscene` (inferred counterpart) | Goal66: original384-byte span split into three entries; diagnostic belongs to next111-byte entry. Dispatch index0x27 pairs with SERVER named handler; unique client identifier unresolved. | 0x004c9280 | Goal63 nearest-diagnostic association superseded; see Goal66 below. |
+| `0x004c9e20` | 190 | `cm_ExAllocCutscene` (inferred counterpart) | Goal66: original 384-byte span split into three entries; diagnostic belongs to next111-byte entry. Dispatch index 0x27 pairs with SERVER named handler; unique client identifier unresolved. | 0x004c9280 | Goal63 nearest-diagnostic association superseded; see Goal66 below. |
 | `0x004ca970` | 2784 | `cm_ExChrGotoBuilding` | Moves a character into a building/room/universe, with explicit invalid-room diagnostics. | 0x004c9dc0 | 0x4cb094 -> 0x68b108: cm_ExChrGotoBuilding(): Could not find universe...; 0x4cb044 -> 0x68b13c: cm_ExChrGotoBuilding(): invalid room-id (raum==NULL) |
 | `0x004cb7f0` | 1184 | `unresolved` | Building upgrade command. Both cm_ExGebUpgrade and cm_ExSetGebUpgrade occur in its diagnostics; exact original name unresolved. | unresolved | 0x4cba31 -> 0x68b240: cm_ExGebUpgrade(): Could not load 3D-Object-Group '%s'...; 0x4cb869 -> 0x68b2ac: cm_ExSetGebUpgrade(): already highest level |
 | `0x004cc820` | 848 | `cm_ExCreateGeb` | Creates a building instance and its 3D model group, replacing prior scene objects. | 0x004cbca0 | 0x4ccb14 -> 0x68b304: cm_ExCreateGeb(): could not lc_GetGebaeudeBauplatz()...; 0x4ccaee -> 0x68b33c: cm_ExCreateGeb(): killing objectname: %s |
@@ -2288,7 +2288,7 @@ uv run rebrew library match --stock-lib LIBCMT.LIB --va 0x<VA> --resolve-callees
 
 A miss from that library match does not prove the body is game code. Managed name, size and note rows at this checkpoint were written through the internal `record_function_rows` helper, not a shell command. No source files, type or data stores, or inventory extents changed.
 
-### Goal64 — shared supermap sampling
+### Goal64: shared supermap sampling
 
 `rd_FillSupermapQuad` at TL `0x004be000` / Gold `0x004bd760` is an
 **inferred** role name, following the adjacent attested
@@ -2311,11 +2311,11 @@ vector typedef, backing-map allocation extent or client linked provider is claim
 Native/compiled operand receipts and rejecting controls are in
 `.scratch/goal64/quad/production-proof.json` and `projection-proof.json`.
 
-### Goal65 — indexed BMP output
+### Goal65: indexed BMP output
 
 `SaveBMP8` at TL `0x00401d10` is an **inferred** sibling name to the label-derived
 `SaveBMP24`, not a recovered identifier. Its standalone source filename is also
-provisional. The complete441-byte writer is matched with all eight address
+provisional. The complete 441-byte writer is matched with all eight address
 operands and the `wbn` mode literal; seven following NOPs are alignment within
 its retained448-byte inventory span. It writes a14-byte BITMAPFILEHEADER,
 40-byte BITMAPINFOHEADER,256 BGR0 entries and bottom-up unpadded rows. A null
@@ -2339,9 +2339,9 @@ packed bytes. Real VFS execution and arbitrary-input safety are not established.
 ## Method registry and cutscene entries (Goal66, 2026-10-16)
 
 `am_RegisterMethod` is attested by its native diagnostic at TL495099 and Gold
-4956d9. One shared579-byte body covers TL494ed0 and Gold495510. Inferred
+4956d9. One shared 579-byte body covers TL494ed0 and Gold495510. Inferred
 `AM_EFFECT`/`AM_METHOD` names, fields and `client_method_registry.h` organization
-describe native8-byte effects and0x94-byte method strides, not allocation sizes.
+describe native 8-byte effects and 0x94-byte method strides, not allocation sizes.
 Callback slots retain opaque address views; their invocation contracts are open.
 The unsigned effect kind compared with full-width-1 is native behavior. Profile
 reads use the global filename; the second argument is only a profile-mode test.
@@ -2360,13 +2360,13 @@ three separately dispatched functions:
 
 The three native pointer sites are TL68aa7c/80/84 and Gold60be14/18/1c.
 SERVER1002c494 points at existing named cm_ExAllocCutscene1000f0a0; its
-next two entries point at cm_ChainNoop1000f3a0. The111-byte client body must
+next two entries point at cm_ChainNoop1000f3a0. The 111-byte client body must
 therefore not be merged into the SERVER definition based on reused diagnostic
 text. Its allocation helper returns a pointer consumed by both native client
-callers; the repaired shared helper preserves all46 bytes in both clients.
+callers; the repaired shared helper preserves all 46 bytes in both clients.
 
 `g_aed340` is an incomplete incoming bytebuffer view, separate from outgoing
-`g_aed32c`. Reassembly and248/276/860-byte consumers do not establish its
+`g_aed32c`. Reassembly and 248/276/860-byte consumers do not establish its
 complete allocation, owner or a backing relationship. Existing byte flag views
 likewise do not prove the complete wider flag allocation. All new data rows
 remain declarations.
@@ -2385,8 +2385,8 @@ placement with the other character script callbacks are inferred.
 
 Arguments are a character-pointer slot, animation-name-pointer slot and full
 integer kind pointer. The resumed path reads the object before any null-object
-check, then tests three nullable draw-data pointer cells at stride0x7c. Their
-first offsets are TL0x484 / Gold0x178; these measured byte views do not claim
+check, then tests three nullable draw-data pointer cells at stride 0x7c. Their
+first offsets are TL 0x484 / Gold 0x178; these measured byte views do not claim
 complete slot records, backing allocations or a universal context layout.
 A nonempty cell reschedules this callback; null draw or three empty cells return0.
 
@@ -2398,15 +2398,15 @@ and attachment uses object+0x1cc. A loader failure does not suppress attachment.
 Attachment failure invokes the original script diagnostic; no new logger is added.
 
 Existing `D3_ANIMATION_OPTIONS` remains twelve bytes passed by value. Native sets
-mode to low8(kind), layer to16 only when the FULL integer kind equals1, loop to1,
-reverse to0 and queue to1; all remaining bits/padding are zero. Canonical helper
+mode to low8(kind), layer to 16 only when the FULL integer kind equals1, loop to 1,
+reverse to 0 and queue to 1; all remaining bits/padding are zero. Canonical helper
 434970 / Gold435550 consumes context,name and those three DWORDs and returns a
 slot pointer. Its prototype is now in d3_animation.h, replacing three identical
 local declarations. That native ABI proof does not create a source/link provider.
 The existing stable type ID was rebound without changing its layout.
 
 Complete two-target native proofs cover fifteen operands, three literal uses and
-25 rejecting controls per target. Independent preservation checks cover all41 old
+25 rejecting controls per target. Independent preservation checks cover all 41 old
 contexts across fifteen existing files, including the weak TL ch_Updatelowpoly;
 all compiled code, fixups, literals and function-definition hashes stay unchanged.
 Receipts: `.scratch/goal67/attach-loop/{proof.json,effects.json}` and
@@ -2415,7 +2415,7 @@ compiler override or raw client-link identity is claimed.
 
 ## Object-universe mapping helper (Goal68, 2026-10-16)
 
-TL515540 / Gold511df0 is a separate151/146-byte helper, provisionally named
+TL515540 / Gold511df0 is a separate 151/146-byte helper, provisionally named
 `fcn_00515540`. Original identifier and source placement remain inferred. It maps
 an object's unsigned-short type through a signed-byte table, initializes a
 selected object or allocates a free universe index, then marks the row used and
@@ -2430,7 +2430,7 @@ that view nor the shared game_data.h prototype-table extern claims allocation
 or storage ownership. Stable type ID is d3.universe-view. Initializer510c90 /
 50d7f0 has no adopted C/raw-link provider.
 
-The old496-byte discovery spans at5153f0 /511ca0 split into336+160 through
+The old496-byte discovery spans at 5153f0 /511ca0 split into 336+160 through
 reviewed inventory repair. Existing331-byte source extents and historical
 reference hashes remain intact, with five NOPs before the admitted helper.
 Trailing9TL/14Gold NOPs stay separate from its executable source extent. Complete
@@ -2440,17 +2440,17 @@ proofs and bounded effects: .scratch/goal68/helper-proof.
 
 Original diagnostic `init_LoadObjektScene:Could not find a free universe...`
 attests the initializer at TL510c90 /Gold50d7f0. The native-only rows record that
-name and complete940/938-byte extents; they create no C source, linker provider,
+name and complete 940/938-byte extents; they create no C source, linker provider,
 comparison status or recovered original signature. All twelve known direct
 callers discard EAX; void(int) is a supported future contract, not uniquely
 recovered source spelling. Source-unit ownership remains unknown.
 
-Both bodies have32correspondingCFG blocks and80pairedaddress sites. Gold adds
+Both bodies have32correspondingCFG blocks and 80pairedaddress sites. Gold adds
 call46e980 and signed-short loading coordinates. Preserve allocation-1 continuing
 through the diagnostic, scene-load failure without universe restoration, live
-mapping/resource reloads and conditional timer restoration. The768slot objects
+mapping/resource reloads and conditional timer restoration. The 768slot objects
 are character/controller views, distinct from scene D3_OBJECT nodes. Hidden
-caller entries4e4230 /4e2910 are separate from existing165-byte matches.
+caller entries4e4230 /4e2910 are separate from existing 165-byte matches.
 
 Evidence:.scratch/goal68/init-scene/REPORT.md and native-dossier.json;
 registration:.scratch/goal69/native-initializer-registration.json. Library misses
@@ -2459,16 +2459,16 @@ application provenance. Native naming is separate from reconstructed game bytes.
 
 ### SaveBMP24 native mapping correction (Goal69)
 
-TL401ed0 /Gold401b90 have complete439-byte bodies plus9alignment NOPs in
+TL401ed0 /Gold401b90 have complete 439-byte bodies plus 9alignment NOPs in
 unchanged448-byte inventory spans. Both native-only rows now use the inferred
 name SaveBMP24, derived from !bmp:SaveBMP24(temp_row). Direct label PUSH sites
 401fbb /401c7b and the full BMP algorithm support the role; the allocation label
 does not independently attest the original function identifier. This supersedes
 earlier attested-name wording, including the sibling discussion above.
 
-The pair agrees at399fixed bytes and ten corresponding address operands. Gold's
-direct caller589f34 confirms its actual entry. Preserve the14-byte file header,
-44-byte info block,pixel offset0x3a,RGB-to-BGR temp-row conversion and bottom-up
+The pair agrees at 399fixed bytes and ten corresponding address operands. Gold's
+direct caller 589f34 confirms its actual entry. Preserve the 14-byte file header,
+44-byte info block,pixel offset 0x3a,RGB-to-BGR temp-row conversion and bottom-up
 writes. No C symbol, source, status, selected provider or extent changed.
 Evidence:.scratch/goal69/native-names/{manifest.json,review.md,registration.json}.
 

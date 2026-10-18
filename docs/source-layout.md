@@ -56,7 +56,7 @@ three groups. Direct path references supplied 37 stronger client witnesses.
 Receipts: `.scratch/goal20/source-organization/` and
 `native-unit-map/direct-path-evidence.json`.
 
-## MSX and D3 placement — October 11
+## MSX and D3 placement, October 11
 
 Native TL `0x420840` / Gold `0x4244b0` reference `Units/Msx/msx.c`.
 The reconstructed shared unit contains eleven functions; individual names and

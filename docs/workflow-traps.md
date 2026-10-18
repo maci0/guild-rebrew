@@ -6,6 +6,16 @@ the old `verify --full` spelling. Use [AGENTS.md](../AGENTS.md),
 [the tooling map](tooling-upstream.md) and current CLI help. Full experiments
 remain in the [archive](goal-history.md#full-notebooks).
 
+## Index
+
+| Question | Sections |
+| --- | --- |
+| Parallel work, scope, and looking up the existing finding first | 1, 2, 3, 9, 10 |
+| Declarations, operands, slack, and stale notes | 3b, 3c, 6, 11, 12, 14, 16, 17 |
+| A completion check has to reject a bad input | 4 |
+| Isolated sweeps, stale objects, and explicit targets | 7, 13, 15, 20, 23, 24, 25, 28 |
+| Same-target names and contract audits | the two 2026-10-16 notes |
+| Retired command named in the old heading | 5, 8, 19, 21, 22, 26, 27 |
 
 ## 1. Agent concurrency
 
@@ -195,7 +205,9 @@ The configured backend is unshare over the pinned toolchain image filesystem;
 CMake and `verify` both use it. Retired split-link exit codes and SP6 configure
 recipes are historical. Keep `REBREW_DEBUG_INFO=OFF` for link checks.
 
-## 26. `cmake --build build --target final` needed two passes after a clean configure, and reported a fake residue of 86,676 (round 1102)
+<a id="26-cmake---build-build---target-final-needed-two-passes-after-a-clean-configure-and-reported-a-fake-residue-of-86676-round-1102"></a>
+
+## 26. The retired `final` target hid a failed first build (round 1102)
 
 The retired nested `final` target swallowed an early parallel-build failure
 and linked an incomplete object set, fabricating an 86,676-byte residue. Require

@@ -13,6 +13,21 @@ Related: [C shapes](msvc6-c-shapes.md), [allocator](msvc6-allocator.md),
 [walls](codegen-walls.md), [current work](TODO.md). Original section numbers
 are retained; full prose and retired commands are [archived](goal-history.md#full-notebooks).
 
+## Index
+
+Section numbers stay put. Where a heading names the round's wrong conclusion, the first paragraph is the correction.
+
+| Question | Sections |
+| --- | --- |
+| Which artifact decides the claim | 1, 2 |
+| Why a score can hide the real difference | 3, 4, 7, 8, 13, 16, 44, 45, 58, and the pair-copy note |
+| Stale objects, flags, and side effects | 5, 6e through 6f-ter, 9, 11, 12, 15 |
+| A count over the wrong population | 6, 6b, 6c, 6d, 6g, 18, 19, 21, 51, 52, 54 |
+| Decode and compare control flow | 14, 16, 21 through 32, 34, 36, 38 through 42, 46 through 50 |
+| Include staging under `test` and `diff` | 57 |
+| Withdrawn acceptance rules | 17, 20, 53, 55, 56 |
+| Observations since 2026-10-14 | Recent findings, above the numbered traps |
+
 ## Recent findings
 
 ### Diagnostic compilers can change floating-point observations (2026-10-14)
@@ -25,19 +40,19 @@ notification strings; they
 do not mask floating-point fields or verify the external helpers themselves.
 
 Clang's x87 diagnostic build retained an intermediate across repeated
-replenishment, differing by one float ULP at offsets 0xb4/0xb8 in case31.
+replenishment, differing by one float ULP at offsets 0xb4/0xb8 in case 31.
 GCC with standard assignment precision fixed that observation, but its extended
-evaluation of `1.3f` differed in case92. The native TL instruction at0x5722ef
-multiplies by the four-byte pool value at0x66419c, bits0x3fa66666. Native
+evaluation of `1.3f` differed in case 92. The native TL instruction at 0x5722ef
+multiplies by the four-byte pool value at 0x66419c, bits 0x3fa66666. Native
 replenishment adds the unsigned recipe amount to the stored float, writes both
 progress fields, then reloads the stored float for the loop condition.
 
 The project C was not changed to satisfy those diagnostic compilers. A separate
 ignored test copy spells its float literals as their exact float32 values and
 uses standard assignment precision to model the observed literal/store widths.
-Its192 runs (96 fixtures per client) agree on event bytes and call traces,
-covering all66 native call sites. Controls that reinterpret the unsigned recipe
-as a float, discard the returned queue ID, or copy12 rather than14 time bytes
+Its 192 runs (96 fixtures per client) agree on event bytes and call traces,
+covering all 66 native call sites. Controls that reinterpret the unsigned recipe
+as a float, discard the returned queue ID, or copy 12 rather than 14 time bytes
 are rejected in both clients. These are bounded observations under the stated
 helper/precision model, not exhaustive semantic proof or MSVC byte agreement.
 Do not add volatile fields or change game flags solely to fix another compiler's
@@ -50,15 +65,15 @@ attempts remain recorded alongside the successful model.
 
 ### A literal-value change can retain function RELOC (2026-10-14)
 
-A rejecting source control changes Gold0x004b6b10's increment from1.0 to2.0.
-The current CLI still reports RELOC216/216: the COFF __real@ relocation remains
+A rejecting source control changes Gold 0x004b6b10's increment from 1.0 to 2.0.
+The current CLI still reports RELOC 216/216: the COFF __real@ relocation remains
 unresolved and masks the changed pool address. Independent literal-byte checking
-rejects object0000000000000040 against native000000000000f03f at0x005eb8a8.
+rejects object 0000000000000040 against native 000000000000f03f at 0x005eb8a8.
 Function-byte agreement does not establish the values of referenced data, even
 when the data is a compiler literal. Preserve this distinction in progress and
 source-sharing decisions. Inspect every differing native constant before grouping
 same-shaped bodies under one C definition. The repaired transfer variants have
-24 literal checks across11 complete bodies, not new raw-link data verdicts.
+24 literal checks across 11 complete bodies, not new raw-link data verdicts.
 
 The reusable content/trust capability is recorded in upstream IDEAS-GUILD.md.
 Replay evidence: `.scratch/goal26/production/wrong-transfer-literal-test.json`,
@@ -77,10 +92,10 @@ client and agree on event bytes, complete strings and ordered helper traces.
 
 The previous 192 fixtures missed two source errors. Letting the notification
 helper mutate the building owner exposed stale owner reads; reaching exactly zero
-production progress exposed `<0` where native x87 tests C0/C3 with mask0x41 and
+production progress exposed `<0` where native x87 tests C0/C3 with mask 0x41 and
 uses `<=0`. Each pair of new cases rejects the earlier MSVC object in both
 clients. The source now reloads the owner and preserves inclusive thresholds.
-The current full compile is still SIZE_MISMATCH, 4016 versus3816 bytes. Do not
+The current full compile is still SIZE_MISMATCH, 4016 versus 3816 bytes. Do not
 infer exhaustive equivalence from the expanded fixture count or describe its
 modeled helpers as verified original callees.
 
@@ -89,12 +104,12 @@ Receipts: `.scratch/goal26/production/paired-msvc-objects.json`,
 MSVC fixture result files under `.scratch/goal25/production/`.
 
 - A discovery region can include alignment beyond the actual function.
-  TL0x41e1d0/GOLD0x422a20 m_PoolAlloc is261 bytes,103 reachable instructions
-  and two returns, followed by11 NOPs. Complete CFG and fully bound operands
+  TL 0x41e1d0/GOLD 0x422a20 m_PoolAlloc is 261 bytes,103 reachable instructions
+  and two returns, followed by 11 NOPs. Complete CFG and fully bound operands
   prove the extent; a chosen prefix length or first return does not.
   `rebrew test --size 261` measures and persists the corrected extent through
-  the locked writer. Catalog rows retain the272-byte discovery region and
-  hash its code without padding; status counts261 body bytes plus11 padding
+  the locked writer. Catalog rows retain the 272-byte discovery region and
+  hash its code without padding; status counts261 body bytes plus 11 padding
   bytes. Keep those scopes distinct. Evidence:
   `.scratch/goal21/pool-alloc-upstream/native-proof.json` and `status.json`.
 
@@ -104,11 +119,13 @@ MSVC fixture result files under `.scratch/goal25/production/`.
   9a2f9bb0 fixes the shared probe/gap/qualifier selector and rejects absent
   explicit VAs before compilation or source edits. The corrected499a50 probe
   exposes the unrelated body (10/128); all three canonical dispatcher probes
-  remain130/130. Receipts `.scratch/goal20/probe-selection-*`.
+  remain 130/130. Receipts `.scratch/goal20/probe-selection-*`.
 
 ---
 
-## 1. Only the linked residue decides
+<a id="1-only-the-linked-residue-decides"></a>
+
+## 1. Use the artifact that decides the claim
 
 
 
@@ -1055,7 +1072,9 @@ at all, while `gm_AllocSpieler` (21) and `ServerMainThread` (14) hold most of th
 divergence. That partition is worth having before choosing a target: a carrier with many target-differing
 branches is a block-placement story, one with none is an instruction-form story.
 
-## 17. `cmake --build build` failing at postlink is the DESIGNED state, not a broken tree (round 976)
+<a id="17-cmake---build-build-failing-at-postlink-is-the-designed-state-not-a-broken-tree-round-976"></a>
+
+## 17. A postlink failure was not a healthy tree (round 976)
 
 
 
@@ -1091,11 +1110,10 @@ Decoding the raw hits directly settled it: `0x10035450` is a real `.bss` counter
 it 15 times (`mov eax,[0x10035450]` at `0x10014239` and `0x10015f2e`, `inc`/`dec` forms at `0x10015d82`
 and `0x10015d89`, among others). The toml address is correct and `rebrew data list --json` is not lying.
 
-**The check, before concluding a tool is wrong from an absence:** confirm the absence with a scan that
-shares no code with the first one.
+**The check, before concluding a tool is wrong from an absence:** confirm the absence with a second scan that shares no code with the first. Current disassembly is `rebrew binary asm show` at the function VA. The one-liner below is round 977's independent scan, not a project command.
 
 ```bash
-# raw dword scan: independent of any disassembler's operand formatting and of slicing bugs
+# round 977 probe, not a project command
 python3 -c "d=open('original/Server/server.dll','rb').read(); \
   print(sum(1 for i in range(len(d)) if d[i:i+4]==(0x10035450).to_bytes(4,'little')))"
 ```
@@ -1123,9 +1141,10 @@ supplies and no C source can affect. 84 of the 207 are `__imp_*` of this kind.
 `improve-match` is not flat: `gm_AllocSpieler` scores 39.1 and `ServerMainThread` 15.9, both real. The
 flatness is specific to `start-data`.
 
-**The check.** Histogram the ROI column before trusting the order:
+**The check.** Histogram a score column before trusting its order. The pipeline below is round 977's probe, not a current command, and that `start-data` queue is not the work list.
 
 ```bash
+# round 977 probe, not a project command
 rebrew todo -c start-data -n 300 --json | \
   python3 -c "import json,sys,collections; \
   print(collections.Counter(i['roi_score'] for i in json.load(sys.stdin)['items']))"
@@ -1135,7 +1154,9 @@ A single-valued histogram means the ranking is not a ranking. That round's resid
 scripts are not the current work queue. Judge a candidate on the complete raw image,
 not on the old 8k carrier table.
 
-## 20. Raw-link `.data` is a size-only filler and cannot reach zero: the ceiling is the right check (round 980)
+<a id="20-raw-link-data-is-a-size-only-filler-and-cannot-reach-zero-the-ceiling-is-the-right-check-round-980"></a>
+
+## 20. A copied-data ceiling is not acceptance (round 980)
 
 
 
@@ -1396,9 +1417,10 @@ does not hold.
 floor for reasons that do not depend on the slack figure. But the figure itself is the **sixth stale header
 quantity** found this session, and the first in a multi-function object, where it is easier to get wrong.
 
-**The check.** Read the COMDAT whose raw size matches the function's placement, not the first or last `.text`:
+**The check.** Read the COMDAT whose raw size matches the function's annotated extent, not the first or last `.text`. The parser below is round 1001's one-off probe, not a project command.
 
 ```bash
+# round 1001 probe, not a project command
 python3 -c "
 import struct,json
 fs=json.load(open('db/inventory-server.dll.json'))
@@ -2721,8 +2743,8 @@ includes the complete compiled tail; the shorter comparison slice is insufficien
 ### Explicit donor identity does not remove inventory-span noise (2026-10-04)
 
 Related-import signature scoring sees managed42-byte TL device donors versus
-Gold’s discovered48-byte spans (42-byte native body plus6 NOPs), giving85.935306.
-The complete42-byte native patterns, unique GUID/CreateDevice outputs, and strict
+Gold’s discovered48-byte spans (42-byte native body plus 6 NOPs), giving85.935306.
+The complete 42-byte native patterns, unique GUID/CreateDevice outputs, and strict
 wrong-global controls establish mouse/keyboard counterparts independently.
 Use --source-va with a documented known-counterpart score allowance85, retain
 normal verification, and let the verified-padding/merged-entry flow persist42.
@@ -2735,15 +2757,15 @@ map disagrees. A wrong CloseHandle catalog binding therefore remainsRELOC; that
 negative control does not prove an import-name match. The independent input audit
 compiles once, uses public typed COFF records and smart_reloc_compare with
 iat_region=None, requires every relocation symbol mapped, and supplies native
-CloseHandle slots TL6620ec/Gold5eb0cc. Both107-byte cleanup bodies pass and reject
-all8 wrong-binding controls each (including import); TL738-byte init passes with
-all32 wrong-binding controls rejected. This audit is separate from CLI RELOC
+CloseHandle slots TL6620ec/Gold5eb0cc. Both 107-byte cleanup bodies pass and reject
+all 8 wrong-binding controls each (including import); TL738-byte init passes with
+all 32 wrong-binding controls rejected. This audit is separate from CLI RELOC
 status and is not a linked-file/import-table identity claim. Receipt
 .scratch/goal-input-types/canonical-call-bindings.json and check-input-call-bindings.py.
 
 ### Indexed displacement can be a biased base in unrelated data (2026-10-04)
 
-TL41a950 bounds its index to20..31 then loads [index*4+662ba8]. The displacement
+TL41a950 bounds its index to 20..31 then loads [index*4+662ba8]. The displacement
 662ba8 is inside pixel-format label strings (e.g.G5B5), not the start of an int
 array. The accessed12-word span begins662bf8 (=662ba8+20*4) and contains
 24,32,32,16,16,16,16,8,0,16,16,32. A canonical C reference should express the
@@ -2764,11 +2786,11 @@ The earlier TL66080a/Gold5eaad6 strlwr/strupr candidate tie was a32-byte prefix 
 
 ### COFF zero-filled literal sections need semantic bytes
 
-The scratch literal audit initially called nine correct empty-string operands different: LIEF section.content returned the header byte4c for an uninitialized COFF.bss COMDAT whose raw size is1 and raw pointer is0. Read the actual section header and the UNINITIALIZED_DATA characteristic; that symbol contains one zero byte, not byte4c from file offset0. The corrected scratch reader independently matches all five complete native bodies and rejects wrong-address controls. This is a scratch-reader assumption correction, not a Rebrew compiler/source change. Evidence `.scratch/goal-small-client-helpers/empty-string-reader-correction.json` and `empty-string-binding-audit.json`; initial diagnostic preserved as `deferred-literal-differences-attempt1.json`.
+The scratch literal audit initially called nine correct empty-string operands different: LIEF section.content returned the header byte 4c for an uninitialized COFF.bss COMDAT whose raw size is 1 and raw pointer is 0. Read the actual section header and the UNINITIALIZED_DATA characteristic; that symbol contains one zero byte, not byte 4c from file offset 0. The corrected scratch reader independently matches all five complete native bodies and rejects wrong-address controls. This is a scratch-reader assumption correction, not a Rebrew compiler/source change. Evidence `.scratch/goal-small-client-helpers/empty-string-reader-correction.json` and `empty-string-binding-audit.json`; initial diagnostic preserved as `deferred-literal-differences-attempt1.json`.
 
 ### Resolving an unknown callee changes mismatch scores without changing code (2026-10-04)
 
-Adding the proven TL `gm_RandomMod` identity at42e410 makes REL32 validation bind calls previously treated as unresolved. Full comparison must review this catalog change even when source edits only rename identifiers. Five existing SIZE_MISMATCH rows acquired larger deltas:
+Adding the proven TL `gm_RandomMod` identity at 42e410 makes REL32 validation bind calls previously treated as unresolved. Full comparison must review this catalog change even when source edits only rename identifiers. Five existing SIZE_MISMATCH rows acquired larger deltas:
 
 | TL VA | Prior unbound delta | New bound delta |
 |-------|--------------------|-----------------|
@@ -2783,15 +2805,15 @@ The audit compiled the original backed-up source and current source with the sam
 
 ## A trailing NOP can hide a wrong cross-target call binding
 
-TL accessor `0x005b1eb0` compiled to31 bytes against a32-byte catalog extent,
+TL accessor `0x005b1eb0` compiled to 31 bytes against a32-byte catalog extent,
 with a100% common-prefix score. The excluded byte is a native trailing NOP,
 but the old source called the Gold-derived `fcn_005a8690` symbol. Complete
 REL32 decoding resolves the native TL callee to `0x005b1b10`. The existing
-TL lookup body independently matches all31 bytes with its list-head pointer
+TL lookup body independently matches all 31 bytes with its list-head pointer
 at `0x00774a78`; the accessor reads the native default1.0f at `0x006628a0`.
 
 Use the existing TL lookup declaration (`char*` return) and a pointer local.
-The corrected accessor passes complete31-byte typed relocation comparison,
+The corrected accessor passes complete 31-byte typed relocation comparison,
 with IAT wildcard disabled. Wrong+4 call and list-head controls reject, as
 does an explicit old Gold destination. Its whole body does not match stock
 LIBCMT. Only then record31 as the function extent through the locked metadata
@@ -2800,8 +2822,8 @@ writer; retain the NOP as layout, without deleting or emitting padding.
 Full all-target test20498 closed2 because other client failures remain.
 Every-row comparison accepts exactly this SIZE_MISMATCH-to-RELOC promotion,
 with no lost/added/removed rows or changed library providers. TL3558/3679;
-server316/316 includes56 compiled library checks; Gold2041/2518 unchanged.
-Fresh data89989 preserves all641 server verdicts, and raw serverff81a459
+server316/316 includes 56 compiled library checks; Gold2041/2518 unchanged.
+Fresh data89989 preserves all 641 server verdicts, and raw serverff81a459
 is unchanged. No whole-file byte gain is claimed. Evidence:
 `.scratch/goal-tl-accessor/`. Scratch API attempt used the wrong update shape
 and made no size change; the old-size batch46359 was explicitly terminated143,
@@ -2814,8 +2836,8 @@ Three remaining TL extent candidates used undefined external string labels.
 Restore five native compiler literals in their existing C sources: `buy dunkle
 ecke` in TL4ab3e0, the two Friedhof paths and `sp_%u` in TL58d3f0, and `%1N3`
 in TL5cc720. Compare each complete defined COFF literal, including NUL, with
-the native operand payload before accepting the body. The full275/501/363-byte
-bodies verify with64 typed relocations and rejected wrong+4 controls, with IAT
+the native operand payload before accepting the body. The full 275/501/363-byte
+bodies verify with 64 typed relocations and rejected wrong+4 controls, with IAT
 wildcard disabled. CFG and terminal checks exclude13/11/5 trailing NOP bytes;
 those remain layout facts, without padding removal or emission. All three
 complete game bodies miss the configured stock archive.
@@ -2828,11 +2850,11 @@ identifies actual destinations in deferred-gold-native-callees.json; presence
 of a passing destination C row alone does not establish shared-call identity.
 
 Locked metadata writer changes only the three TL sizes. Full85721 closed2
-because other client failures remain; exact every-row comparison against20498
+because other client failures remain; exact every-row comparison against 20498
 accepts only these three SIZE_MISMATCH->RELOC promotions, with no lost, added,
 removed or other changed rows and identical library provider inventories.
-TL3561/3679; server316/316 including56 compiled library checks and Gold2041/2518
-unchanged. Freshdata22119 preserves all641 server verdicts; lint74986 has
+TL3561/3679; server316/316 including 56 compiled library checks and Gold2041/2518
+unchanged. Freshdata22119 preserves all 641 server verdicts; lint74986 has
 zeroerrors and the exact prior warning set. Raw serverff81a459 is unchanged.
 
 Evidence `.scratch/goal-tl-training/`: literal-audit.json, gold-literal-audit.json,
@@ -2844,7 +2866,7 @@ restored that context. Production flags and headers are unchanged.
 
 ### Compiler-local label counters are not relocation identity (2026-10-04)
 
-The prospective slot declaration/type-view change leaves all276 bytes of TL504130 unchanged, but VC6 renumbers six switch-local labels (for example `$L589`→`$L594`). Comparing literal COFF label strings falsely rejects the unchanged body. Check relocation offset/kind and each referenced symbol's exact section bytes plus section offset; external symbol identities remain strict except the explicitly intended source rename. The six switch references agree under this check. Do not omit relocations or collapse all local labels into one wildcard. Evidence: `.scratch/goal-resolver-slot-types/{compiler-local-label-proof,all-user-attempt1}.json`; initial audit1381 CLOSED1 was retained, revised67654 is a separate measurement.
+The prospective slot declaration/type-view change leaves all 276 bytes of TL504130 unchanged, but VC6 renumbers six switch-local labels (for example `$L589`→`$L594`). Comparing literal COFF label strings falsely rejects the unchanged body. Check relocation offset/kind and each referenced symbol's exact section bytes plus section offset; external symbol identities remain strict except the explicitly intended source rename. The six switch references agree under this check. Do not omit relocations or collapse all local labels into one wildcard. Evidence: `.scratch/goal-resolver-slot-types/{compiler-local-label-proof,all-user-attempt1}.json`; initial audit1381 CLOSED1 was retained, revised67654 is a separate measurement.
 
 
 Resolver binding follow-up (2026-10-04): registering existing canonical globals/callee for TL makes five already SIZE_MISMATCH bodies lose4/2/11/3/4 formerly masked credits. Their Csource,headers,flags and generated bytes remain unchanged. The exact old/new name maps are reconstructed from the backed-up managed stores, and smart_reloc_compare independently reproduces both reported deltas with IATwildcards off. Do not report this as a code regression or a byte-match gain. Evidence: `.scratch/goal-resolver-consolidation/delta-effects.json`.
@@ -2905,15 +2927,15 @@ and rollback, then use explicit reference binding for a linker-only stale name;
 do not introduce a compatibility C alias. Upstream662d7132 now plans exact
 native references in target-scoped INCLUDE/ALTERNATENAME/EXPORT options, preserving
 public export names, decoration and paths. Five regressions failed first;
-196 focused checks, all18 hooks and the corrected full suite11526pass/50skip pass.
+196 focused checks, all 18 hooks and the corrected full suite11526pass/50skip pass.
 The CLI linker-only repair changes one response line with no C/store changes.
-The new gate passes all316 function checks,652 data comparisons and raw whole-file
+The new gate passes all 316 function checks,652 data comparisons and raw whole-file
 identity. Keep both the failed and passing receipts: `.scratch/goal20/plant-server-gate.log`,
 `plant-server-build-failed.log`, `plant-post-upstream-server-gate.log`.
 
 ## A shared import verdict can carry the wrong identity or inputs (2026-10-11)
 
-The filtered iterator at TL503e80/GOLD501030 has a complete341-byte body and
+The filtered iterator at TL503e80/GOLD501030 has a complete 341-byte body and
 11 following alignment NOPs. The original shared importer accepted the
 341-byte retry but recorded reference_size352 and the rejected padded span's
 hash. It also retained the former gm_AddObjekt name beside the correct
@@ -2931,9 +2953,9 @@ stores or modify the game body. Evidence: `.scratch/goal20/stat-iterator-tl-impo
 `stat-iterator-gold-import.json`, `stat-import-regressions-before-corrected.log`
 and `stat-import-additional-before.log`.
 
-The complete extent comes from bounded native branch traversal, all341 bytes,
-all20 resolved operand sites, and wrong-binding controls. The conservative
-linear extent reader stops at an internal jump after89 bytes; that result
+The complete extent comes from bounded native branch traversal, all 341 bytes,
+all 20 resolved operand sites, and wrong-binding controls. The conservative
+linear extent reader stops at an internal jump after 89 bytes; that result
 does not establish the iterator's complete body. No instruction or match
 threshold was changed to gain the client matches.
 
@@ -2962,12 +2984,12 @@ focused checks, all 18 hooks and frozen full suites (11,553/11,555 passes,
 
 TL4186c0 had a47-byte inventory span but its source correctly compared the
 complete five-byte tail jump. The next31-byte body was swallowed by the stale
-span. TL571720 similarly retained4160 bytes despite a complete335-byte source,
+span. TL571720 similarly retained4160 bytes despite a complete 335-byte source,
 covering the following production callback. Source verification alone does not
 repair the discovery inventory; CU clustering correctly refuses such overlaps.
 Use native control-flow/padding/next-entry evidence and the verified complete
 body before curating a selected row. Preserve every unrelated identity and name.
-A new7503-row discovery snapshot was not installed over the6337-row catalog.
+A new7503-row discovery snapshot was not installed over the 6337-row catalog.
 Both selected repairs use the existing emitter utility and retain native
 receipts under .scratch/goal37/. Neither early returns nor a near compiler
 match justify truncating a function, switch region or callback.
@@ -2975,11 +2997,11 @@ match justify truncating a function, switch region or callback.
 ### Immediate callback stores were missing from upstream xrefs (2026-10-15)
 
 `binary xrefs` returned zero for callbacks TL5107f0 and Gold50d350 despite
-native stores at5108f7/50d457. The shared instruction classifier handled
+native stores at 5108f7/50d457. The shared instruction classifier handled
 `mov reg, immediate` but omitted `mov [memory], immediate`, including absolute
 store destinations. Upstreamf2dbe476 fixes section, function and reachable-code
 scans to retain both operands when applicable. Native replay now finds both
-assignments; two regression cases failed before,112 focused tests and12032
+assignments; two regression cases failed before,112 focused tests and 12032
 full-suite tests pass afterward. Scalar values outside the image are excluded.
 An empty historical xref result at such a store is not absence evidence.
 
@@ -2994,7 +3016,7 @@ The auxiliary-record probe requested `aux.obj` and VC6 returned C1083 while
 opening its output. AUX is a reserved Windows device basename, including with
 an extension. Changing the experiment's output to `auxslots.obj` succeeds;
 no source, compiler flags or native extent changed. Earlier independent CLI
-attempts timed out at60 seconds under host load. The isolated public-API proof
+attempts timed out at 60 seconds under host load. The isolated public-API proof
 used a180-second execution budget and kept those failed receipts. Neither
 failure was a measured byte mismatch or a reason to alter STATUS.
 Receipts: .scratch/goal42/prove-reserved-name.log,candidate-*.json and
@@ -3004,8 +3026,8 @@ prove-candidate.log.
 
 TL438cb0 and Gold43b860 each contain184 executable bytes, followed by eight
 NOPs before the next function. The existing managed extents are184. An isolated
-probe without a managed identity used the192-byte discovery span and reported
-SIZE_MISMATCH despite matching all184 emitted bytes and all eight operands.
+probe without a managed identity used the 192-byte discovery span and reported
+SIZE_MISMATCH despite matching all 184 emitted bytes and all eight operands.
 That result does not justify adding C statements, changing the managed extent
 or inventing padding. The float-pointer candidates remain unadopted; production
 integration and their connected declaration repairs still require measurement.
