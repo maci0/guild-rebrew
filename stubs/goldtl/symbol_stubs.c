@@ -2286,7 +2286,6 @@ int g_9b0840 = 0;
 char* g_9b0dc0[1] = {0};
 char g_9b0e20[1] = {0};
 char* g_9b46c0[1] = {0};
-int g_9b4840[6] = {0};
 int g_9b4900[16] = {0};
 int g_9b4a40[32] = {0};
 int g_9b4bc0[32] = {0};
@@ -2686,6 +2685,8 @@ int ch_MorphFrameValue = -1;
 
 
 unsigned char g_6752a4 = 1;
+
+int g_9b4840[48] = {0};
 
 /* Function stubs */
 int __stdcall fcn_0041cbc0(int a)

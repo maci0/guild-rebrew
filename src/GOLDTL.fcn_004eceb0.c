@@ -3,7 +3,7 @@
 
 extern float g_6628a0;
 
-float* __cdecl fcn_004ec960(char*, int);
+#include "Develop/DieGildeAddOn/game/alchemistry_logic.h"
 int __cdecl ahm_CheckFlag(void*);
 float __cdecl fcn_004ec8a0(char*, int);
 
@@ -11,7 +11,7 @@ float __cdecl fcn_004eceb0(char* a1, int a2)
 {
 	float* e;
 
-	e = fcn_004ec960(a1, a2);
+	e = (float*) ahm_FindRecipeSlotImpl(a1, a2);
 	if (ahm_CheckFlag(a1) == 0) {
 		return g_6628a0;
 	}

@@ -88,10 +88,10 @@ baseline; image-only checks do not initialize the compiler runner.
 
 Each target has its own `unresolved.txt` input and generated `symbol_stubs.c`.
 Gold removes obsolete video-list and GUI-provider placeholders, preserves
-comparison-only capacity for six color writes, and includes a generated vertex-buffer pointer
-slot. Refresh manifests from current maps before quoting counts. Placeholders
-link only into their client and remain outside recovered `src/` and its metadata
-accounting.
+comparison-only capacity for six color writes and six GUI records, and includes
+a generated vertex-buffer pointer slot. Refresh manifests from current maps
+before quoting counts. Placeholders link only into their client and remain
+outside recovered `src/` and its metadata accounting.
 
 ```sh
 uv run rebrew build symbol-stubs --source-dir src \
@@ -115,9 +115,10 @@ unbound numeric aliases of library functions can still be placeholders.
 When a real provider becomes available, remove its placeholder and regenerate.
 Do not link the server's BSS ownership files into these client scaffolds.
 
-Gold also has five generated source-closure placeholders listed in
+Gold also has six generated source-closure placeholders listed in
 `gold/source-closure.json`. Four came from the selected MSX fade function; the
-vertex-buffer pointer slot came from the recovered getter. These are actual
+vertex-buffer pointer slot came from the recovered getter, and the GUI table
+reference came from the shared cleanup. These are actual
 COFF references absent from the saved unresolved-link log. They do not claim
 native storage ownership. After the base command above, append those closure
 symbols with the public generator. `g_10405e0[6]` is `specials.g_10405e0`, not
@@ -135,7 +136,8 @@ root = Path('stubs/gold')
 stub = root / 'symbol_stubs.c'
 closure = json.loads((root / 'source-closure.json').read_text())
 specials = tomllib.loads((root / 'specials.toml').read_text())
-generated = generate_stubs(closure['symbols'], collect_extern_info(Path('src')))
+generated = generate_stubs(closure['symbols'], collect_extern_info(Path('src')),
+                           specials=specials)
 fragment = generated.split('#include <time.h>\n\n', 1)[1].split('/* Function stubs */', 1)[0]
 marker = '/* Generated source-closure placeholders; see source-closure.json. */'
 head = stub.read_text().split(marker, 1)[0].rstrip()
@@ -156,6 +158,10 @@ PY
 Both `specials.toml` files omit an obsolete sound-control function placeholder.
 Gold's also omits the three shared video-list functions and the target-mismatched
 GUI destructor spelling, and preserves the comparison-only color-array capacity.
+Both clients reserve 192 placeholder bytes for the declared six-record GUI view;
+this is capacity for the scaffold, not a recovered native allocation or owner.
+The recipe lookup now uses its existing shared C provider, so Gold omits its old
+numeric placeholder.
 Empty implementations emit no replacement
 function. Keep historical unresolved logs intact and regenerate manifests from each
 successful link.

@@ -12005,8 +12005,31 @@
   },
   {
     "va": 5045264,
-    "size": 658,
-    "name": "fcn.004cfc10"
+    "size": 594,
+    "name": "fcn.004cfc10",
+    "extent_history": [
+      {
+        "old_size": 658,
+        "new_size": 594,
+        "reason": "Reviewed native boundaries: initializer 0x4cfc10 ends restored-register tail JMP at 0x4cfe5d, exclusive end0x4cfe62;14 NOPs before independently called cleanup0x4cfe70 whose RET is0x4cfea1. Prefix0x5524c0 all reachable branches end by RET0x55272d;2 NOPs before registered callback0x552730 whose RET is0x55276b. Complete cleanup50 and callback60 bytes match shared C with target-specific operands. Evidence .scratch/tl-gui-six-cleanup/gold-init-cfg.json, gold-calendar-prefix-cfg.json, proof.json and gold-calendar-registration-aligned.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-18T20:21:15.911471+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5045872,
+    "size": 50,
+    "name": "fcn.004cfe70",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 50,
+        "reason": "Reviewed native boundaries: initializer 0x4cfc10 ends restored-register tail JMP at 0x4cfe5d, exclusive end0x4cfe62;14 NOPs before independently called cleanup0x4cfe70 whose RET is0x4cfea1. Prefix0x5524c0 all reachable branches end by RET0x55272d;2 NOPs before registered callback0x552730 whose RET is0x55276b. Complete cleanup50 and callback60 bytes match shared C with target-specific operands. Evidence .scratch/tl-gui-six-cleanup/gold-init-cfg.json, gold-calendar-prefix-cfg.json, proof.json and gold-calendar-registration-aligned.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-18T20:21:15.913582+00:00"
+      }
+    ]
   },
   {
     "va": 5045936,
@@ -13240,8 +13263,31 @@
   },
   {
     "va": 5155792,
-    "size": 80,
-    "name": "fcn.004eabd0"
+    "size": 5,
+    "name": "fcn.004eabd0",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 5,
+        "reason": "Native wrapper at 0x4eabd0 is a five-byte JMP to 0x4eabe0; direct bonus caller also targets 0x4eabe0; complete 59-byte C body ends at RET 0x4eac1a with alignment before next entry 0x4eac20. Evidence .scratch/tl-six-key-lookup/proof.json and findings.md.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-18T20:18:08.538309+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5155808,
+    "size": 59,
+    "name": "fcn.004eabe0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 59,
+        "reason": "Native wrapper at 0x4eabd0 is a five-byte JMP to 0x4eabe0; direct bonus caller also targets 0x4eabe0; complete 59-byte C body ends at RET 0x4eac1a with alignment before next entry 0x4eac20. Evidence .scratch/tl-six-key-lookup/proof.json and findings.md.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-18T20:18:08.540224+00:00"
+      }
+    ]
   },
   {
     "va": 5155872,
@@ -17927,8 +17973,31 @@
   },
   {
     "va": 5579968,
-    "size": 688,
-    "name": "fcn.005524c0"
+    "size": 622,
+    "name": "fcn.005524c0",
+    "extent_history": [
+      {
+        "old_size": 688,
+        "new_size": 622,
+        "reason": "Reviewed native boundaries: initializer 0x4cfc10 ends restored-register tail JMP at 0x4cfe5d, exclusive end0x4cfe62;14 NOPs before independently called cleanup0x4cfe70 whose RET is0x4cfea1. Prefix0x5524c0 all reachable branches end by RET0x55272d;2 NOPs before registered callback0x552730 whose RET is0x55276b. Complete cleanup50 and callback60 bytes match shared C with target-specific operands. Evidence .scratch/tl-gui-six-cleanup/gold-init-cfg.json, gold-calendar-prefix-cfg.json, proof.json and gold-calendar-registration-aligned.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-18T20:21:15.913594+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5580592,
+    "size": 60,
+    "name": "fcn.00552730",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 60,
+        "reason": "Reviewed native boundaries: initializer 0x4cfc10 ends restored-register tail JMP at 0x4cfe5d, exclusive end0x4cfe62;14 NOPs before independently called cleanup0x4cfe70 whose RET is0x4cfea1. Prefix0x5524c0 all reachable branches end by RET0x55272d;2 NOPs before registered callback0x552730 whose RET is0x55276b. Complete cleanup50 and callback60 bytes match shared C with target-specific operands. Evidence .scratch/tl-gui-six-cleanup/gold-init-cfg.json, gold-calendar-prefix-cfg.json, proof.json and gold-calendar-registration-aligned.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-18T20:21:15.915480+00:00"
+      }
+    ]
   },
   {
     "va": 5580656,

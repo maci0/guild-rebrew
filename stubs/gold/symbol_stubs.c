@@ -1968,6 +1968,8 @@ int ch_MorphFrameValue = -1;
 
 
 
+
+
 unsigned char g_6752a4 = 1;
 
 /* Function stubs */
@@ -4641,11 +4643,6 @@ int __cdecl fcn_004eba60(int a, int* b)
 	return 0;
 }
 
-int __cdecl fcn_004ec960(char* a, int b)
-{
-	return 0;
-}
-
 int __cdecl fcn_004ecd50(char* a, char* b, int* c)
 {
 	return 0;
@@ -6725,6 +6722,9 @@ float g_678154 = 0;
 float g_678158 = 0;
 unsigned int g_67815c = 0;
 int g_6b7190 = 0;
+
+/* Special forwarding stubs */
+int g_9b4840[48] = {0};
 
 /* Comparison-only capacity for six writes; native extent and owner remain unknown. */
 int g_10405e0[6] = {0};

@@ -10,8 +10,8 @@ Gold and GoldTL from shared source.
 > **Work in progress.** The server has a byte-identical raw build.
 > **Gold and GoldTL are comparison scaffolds, not playable or byte-identical.**
 > Source recovery, unsupported assembly and provider/storage work remain.
-> The [last full server checkpoint](docs/TODO.md#verified-checkpoint) passed byte
-> comparison but failed assembly lint; later edits require fresh checks.
+> The [latest server gate](docs/TODO.md#verified-checkpoint) confirms complete
+> file equality; 36 unsupported assembly findings keep the gate red.
 
 **[Start here](#get-started)** &nbsp; · &nbsp;
 **[Build & compare](#build-and-compare)** &nbsp; · &nbsp;
@@ -35,7 +35,7 @@ Gold and GoldTL from shared source.
 </details>
 <!-- progress:end -->
 
-<sub>Dated snapshots of stored verdicts, not fresh verification runs. Function
+<sub>Snapshots dated in UTC show stored verdicts, not fresh verification runs. Function
 matches do not establish whole-image completion.</sub>
 
 | Target | Compiler / runtime | State |

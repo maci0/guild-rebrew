@@ -21,7 +21,7 @@ mkdir -p .scratch
 # `rebrew verify` counts game EXACT + RELOC as passed (library-attributed rows are
 # reported separately); PROVEN is not a byte match
 # and fails like any other difference.
-BASELINE=${BASELINE:-261}
+BASELINE=${BASELINE:-316}
 rc=0
 
 # Build-tree integrity.  build/ is gitignored, so no other check here can see it:
@@ -70,7 +70,7 @@ echo "== build raw server.dll"
 # Delete the output so this run must link it; check the build exit status too.
 rm -f build/server.dll
 build_rc=0
-cmake --build build -j8 > .scratch/gate-build.log 2>&1 || build_rc=$?
+cmake --build build --parallel 2 > .scratch/gate-build.log 2>&1 || build_rc=$?
 errs=$(grep -cE "error C[0-9]+|error LNK" .scratch/gate-build.log)
 echo "compile/link errors: $errs   cmake exit: $build_rc  (full log: .scratch/gate-build.log)"
 if [ "$errs" -ne 0 ]; then
@@ -97,7 +97,7 @@ echo "toolchain images present"
 echo "== rebrew function, data and whole-binary verification"
 # One upstream report supplies function/data verdicts and all structural checks.
 # Whole-file equality also checks the physical order of import slots and names.
-if ! rebrew verify --no-cache --text --raw-link --data --whole-binary \
+if ! rebrew verify --no-cache --functions --jobs 2 --text --raw-link --data --whole-binary \
         --built build/server.dll --json --target server.dll > .scratch/gate-verify.json; then
     echo "REGRESSION: upstream verification failed (see .scratch/gate-verify.json)"
     rc=1
@@ -118,7 +118,8 @@ print("missing %d, extra %d -- baseline 0/0" %
       (len(whole["relocations"]["missing"]), len(whole["relocations"]["added"])))
 if whole["file"]["match"] and whole["imports"]["match"]:
     print("raw link imports match the reference (whole-file bytes identical)")
-raise SystemExit(not (summary["passed"] >= int(sys.argv[2])
+raise SystemExit(not (report.get("functions_checked") is True
+                     and summary["passed"] >= int(sys.argv[2])
                      and summary["failed"] == 0
                      and not data["mismatched"] and not data["missing"]
                      and whole["match"] and whole["layout"]["match"]))

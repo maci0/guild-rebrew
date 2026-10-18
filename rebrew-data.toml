@@ -24402,3 +24402,34 @@ writer = "verify"
 input_hash = "6e3a2330d9ac9ef6c3b61b31cceaec3bc4e1c3cc6457b0bf2824160a2d157b4c"
 definition_hash = "cac5c4db79fa1204a9e7a3050fbab7460727dd9937d19b16716ee5ed6e249589"
 measured_at = "2026-10-18T19:41:31+00:00"
+
+["GOLDTL.0x009b4840"]
+name = "g_9b4840"
+section = ".data"
+kind = "GLOBAL"
+note = "Existing six-record GUI view; cleanup operands establish base+8 and base+0xc8. Declaration-only identity; complete allocation extent and owner unknown. Evidence .scratch/tl-gui-six-cleanup/proof.json."
+updated_by = "verify"
+updated_at = "2026-10-18T21:30:25+00:00"
+status = "DISPLACED"
+
+["GOLDTL.0x009b4840".verification]
+status = "DISPLACED"
+writer = "verify"
+input_hash = "d62338e5c70d4c499a844c5d3f9e992d8fc2a81acbe769a730f4a4c5b5824ecb"
+definition_hash = "bb1028dc84c0f3401a989a1cf74b73268bd9cc3ef7eba8f090efb56a632bf84f"
+measured_at = "2026-10-18T21:30:25+00:00"
+["GOLD.0x00930400"]
+name = "g_9b4840"
+section = ".data"
+kind = "GLOBAL"
+note = "Gold GUI view independently grounded by initializer and cleanup; operands base+8 and base+0xc8. Declaration-only identity; complete allocation extent and owner unknown. Evidence .scratch/tl-gui-six-cleanup/proof.json."
+updated_by = "verify"
+updated_at = "2026-10-18T21:30:23+00:00"
+status = "DISPLACED"
+
+["GOLD.0x00930400".verification]
+status = "DISPLACED"
+writer = "verify"
+input_hash = "5e4fefa817dd28ff06508ae0fd7ea6ea67e07db0f5fb3bd2471e5f0167c04b9a"
+definition_hash = "7278112074d107d9e951f16daf170bbeffb0cd3624a972430303512e13e249f9"
+measured_at = "2026-10-18T21:30:23+00:00"

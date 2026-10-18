@@ -1,6 +1,6 @@
 
 
-typedef struct Entry {
+typedef struct GUI_ENTRY {
 	int icon;
 	int frame;
 	int win;
@@ -9,7 +9,7 @@ typedef struct Entry {
 	int name;
 	int label;
 	char* unit;
-} Entry;
+} GUI_ENTRY;
 // SIZE 0x20
 
 typedef struct Slot {
@@ -38,7 +38,7 @@ typedef struct Game {
 	unsigned short id;
 } Game;
 
-extern Entry g_9b4840[6];
+extern GUI_ENTRY g_9b4840[6];
 extern char* g_7e4260[32];
 extern unsigned short* g_772f24;
 extern int g_772514;

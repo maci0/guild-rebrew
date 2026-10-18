@@ -7,6 +7,24 @@ Both clients remain comparison scaffolds. Historical checkpoints are in
 
 ## Current integration
 
+- Three more client bodies now share C definitions: the six-record GUI cleanup
+  (TL `0x4d0ec0`, Gold `0x4cfe70`, 50 bytes), recipe-key lookup
+  (TL `0x4ec960`, Gold `0x4eabe0`, 59 bytes), and 14-byte calendar-copy callback
+  (TL `0x55a820`, Gold `0x552730`, 60 bytes). All six official object checks
+  are RELOC with every operand VALIDATED. The five-byte lookup wrappers and
+  77-byte bonus callers remain RELOC; the latter retain three unresolved
+  global operands per target. Reviewed Gold inventory splits separate the
+  newly bound entries from their preceding functions and alignment bytes.
+  Two GUI-table rows identify addresses without claiming an extent or owner;
+  the scaffolds' 48-dword buffers are comparison capacity only.
+  All eight rebuilt contributions, including the forwarding wrappers, match
+  their complete native bodies after applying the reviewed operands and match
+  their mapped raw-link bytes. All eight placements are displaced; none earns
+  linked EXACT. Eleven saved-object comparisons preserve every other nondebug
+  section and operand target, including the GUI initializer. Import identities
+  are unchanged across all three images. The initializer remains RELOC 581/581,
+  with five unresolved operands. Existing alchemistry nonmatches remain open.
+  Receipts: `.scratch/client-small-bodies-integration/`.
 - Gold `0x418030` now reuses the existing TL `0x4195f0` C cleanup. Both
   official comparisons are RELOC 76/76 with all 11 operands VALIDATED.
   The duplicate Gold assembly body and its assembly marker are removed.
@@ -77,7 +95,7 @@ The updated [community review](community-research.md#exe-branch-follow-up-2026-1
 records original-name and algorithm leads. It establishes no new original TU
 or local byte verdict. The upstream fixture-isolation fix passed 12,715 tests
 (48 skipped) and merged in [Rebrew #35](https://github.com/maci0/rebrew/pull/35).
-Latest lint is `.scratch/gold-cleanup-c/integration/lint-final.json`:
+Latest lint is `.scratch/client-small-bodies-integration/lint-final.json`:
 36 E023 errors and zero warnings per target. The official blocker backfill
 documented 1,848 Gold and 1,284 TL unmatched rows without changing their verdicts;
 this clears missing-explanation warnings, not the recovery work. Rebrew 5.2.0
@@ -92,6 +110,11 @@ None of this checkpoint's backfilled rows took the short-body heuristic.
 [Rebrew #38](https://github.com/maci0/rebrew/pull/38) also merged: function tests
 skip a redundant SIZE transaction while retaining missing/changed size writes.
 Its local suite and all six CI jobs passed; it is not yet in the pinned release.
+[Rebrew #39](https://github.com/maci0/rebrew/pull/39) merged with all CI checks
+passing: indexed table references are explicit candidates rather than inferred
+effective addresses, and reference-binding rename previews carry guarded input
+digests. Its full suite passed 12,837 tests (48 skipped). These repairs are also
+outside the pinned 5.2.0 release.
 
 ## GoldTL data audit, 2026-10-19
 
@@ -100,14 +123,16 @@ checks report:
 
 | Target | Displaced / absent from map | Byte-equal / different / missing | Compared / total |
 | --- | --- | --- | --- |
-| Gold | 305 / 14 | 83 / 30 / 49 | 162 / 319 |
-| GoldTL | 335 / 22 | 93 / 51 / 42 | 186 / 357 |
+| Gold | 306 / 14 | 83 / 30 / 49 | 162 / 320 |
+| GoldTL | 336 / 22 | 93 / 51 / 42 | 186 / 358 |
 
-Gold has 157 non-comparable symbols; TL has 171. These include zero-fill tails
+Gold has 158 non-comparable symbols; TL has 172. These include zero-fill tails
 and addresses outside file-backed data. Byte equality at a reference address
 does not establish the displaced symbol's identity there. Both whole-file
 checks fail as expected for comparison scaffolds. Latest receipts and hashes:
-`.scratch/gold-cleanup-c/integration/{gold,tl}-final-image-verification.json`.
+`.scratch/client-small-bodies-integration/{gold,tl}-final-image-verification.json`.
+The two unsized GUI-table identities add one non-comparable row per target;
+they do not increase compared bytes or establish storage ownership.
 The earlier TL snapshot below had 330 displaced symbols and 24 absent.
 
 The logging tables/newline/default name and both Sonnenstrahlen strings have
@@ -140,8 +165,8 @@ for the latest images.
 
 | Area | Result | Receipt |
 | --- | --- | --- |
-| Server raw image | All 286,720 bytes equal the untouched reference. Function checks 316/316; data checks 652/652. That gate log records 41 lint errors, all E023, so the gate still fails. | `.scratch/goal110-full-runs/server-gate-retry.log`, `.scratch/gate-lint.json` |
-| Client builds | Both complete build passes exited 0 and produced PEs/maps under `build/`. They contain explicit scaffolds and differ from their references. | `.scratch/goal110-full-runs/{gold-build,goldtl-build}.log` |
+| Server raw image | All 286,720 bytes equal the untouched reference. Fresh function checks 316/316; data checks 652/652. Whole-image checks, Wine loading and toolchain alignment pass. The gate fails only on the 36 E023 findings. | `.scratch/client-small-bodies-integration/server-gate.log`, `.scratch/gate-verify.json` |
+| Client builds | Both full passes and final corrected-source rebuilds exited 0, producing PEs/maps under `build/`. The full builds emitted 142 Gold and 168 TL compiler-warning lines, with no compiler errors or linker diagnostics. Both images remain scaffolds and differ from their references. | `.scratch/client-small-bodies-integration/clients-build.log`, `clients-final-rebuild.log`, `full-build-diagnostics.json` |
 | Gold getter | `0x4364f0` is C, RELOC25/25, with its DIR32 validated. Gold subsequently relinked. The new pointer slot is comparison storage, not a recovered owner. | `.scratch/goal110-full-runs/getter-official.json`, `gold-rebuild.log` |
 | Experimental runner | Verification and CMake CL/LINK/LIB use configured unshare. Wine-prefix initialization, private font cache and extracted mtimes are repaired upstream. Complete Gold/TL probe objects equal Docker controls. | `.scratch/goal110-full-runs/compile-equivalence.json`, `seed-isolation.json` |
 | Upstream tests | 12,586 passed, 36 skipped; mypy checked 392 files. These are the upstream suite, not raw-image or client proof, and not a verdict on later edits. | `.scratch/goal110-full-runs/upstream-suite-final.log`, `upstream-mypy-final.log` |

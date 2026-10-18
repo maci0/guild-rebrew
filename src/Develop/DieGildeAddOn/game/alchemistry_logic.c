@@ -161,29 +161,29 @@ float __cdecl ahm_GetRecipeQuality(char* entity, int which)
 	return g_const_neg_1_0;
 }
 
-int* __cdecl ahm_FindRecipeSlotImpl(char* entity, int key);
-
 int* __cdecl ahm_FindRecipeSlot(char* entity, int key)
 {
 	return ahm_FindRecipeSlotImpl(entity, key);
 }
 
+/* ADDRESS: GOLD 0x004eabe0 */
+/* ADDRESS: GOLDTL 0x004ec960 */
 int* __cdecl ahm_FindRecipeSlotImpl(char* entity, int key)
 {
 	char* slots;
 	int i;
 
 	if (ahm_CheckFlag(entity)) {
+		i = 0;
 		slots = *(char**) (*(char**) (entity + 0x16c) + 0x65);
-		for (i = 0; i < 6; i++) {
+		for (; i < 6; i++) {
 			if (*(int*) (slots + 0xc + i * 8) == key) {
 				return (int*) (slots + 0xc + i * 8);
 			}
 		}
 	}
 	return 0;
-}
-
+} /* Preserve subsequent diagnostic line numbers. */
 int __cdecl ahm_HasFreeRecipeSeat(char* entity)
 {
 	int __cdecl amt_CountTownHallSeats(char* entity);

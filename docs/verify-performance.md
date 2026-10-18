@@ -72,6 +72,14 @@ but still needs extraction/comparison; a valid result hit avoids both.
 `.obj`. Backend identity separates Docker and unshare compile entries. Existing
 CMake objects are not evidence that current compile inputs match.
 
+In Rebrew 5.2.0, the CMake CL driver does not use the test/verify object cache.
+Unix Make makes every target object depend on its shared `flags.make`; adding
+per-source flag entries can therefore rebuild unrelated files. This build
+invalidation is separate from data verification. Test objects cannot safely
+substitute: flags, defines and compiler-visible paths can differ. Do not retime
+generated files to suppress the rebuild. The October 19 audit is in
+`.scratch/cmake-driver-cache-audit/`.
+
 `rebrew test --linked` is a separate padded-shell link. Rebrew 5.2.0 stops that
 command when `execution_backend` is `unshare`, with
 `execution_backend = unshare does not support linked comparison yet`.

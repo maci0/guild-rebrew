@@ -7,7 +7,8 @@
     "_g_678158",
     "_g_67815c",
     "_g_6b7190",
-    "_d3d_VertexBuffer"
+    "_d3d_VertexBuffer",
+    "_g_9b4840"
   ],
   "reason": "Actual fresh COFF references introduced by selecting the existing shared C provider. Comparison placeholders only; no native allocation or ownership claim.",
   "evidence": ".scratch/goal91-sound-wrapper/callee-proof.json",
@@ -25,6 +26,15 @@
       "evidence": ".scratch/goal110-full-runs/getter-measured.json",
       "previous_scaffold_sha256": "e9bea075060866eca8c02beb8d548a68a772d80bea65e11df9da92784754e61d",
       "new_scaffold_sha256": "d69491fd090b029d1dab1d0cc50e4605cc8d60a149f6a72cb3a689aa52e9b839"
+    },
+    {
+      "source": "src/GOLDTL.fcn_004d0ec0.c",
+      "symbols": [
+        "_g_9b4840"
+      ],
+      "reference_va": "0x930400",
+      "reason": "Shared six-record cleanup adds this Gold COFF reference. Explicit comparison capacity is 6*0x20 bytes; native complete allocation and storage owner remain unknown.",
+      "evidence": ".scratch/tl-gui-six-cleanup/proof.json"
     }
   ]
 }
