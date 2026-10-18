@@ -104,7 +104,7 @@ void __cdecl fcn_00404a00(char* obj, int n, ...)
 		if (fcn_00433ba0(ani) != 0) {
 			continue;
 		}
-		fcn_0044c620(path, ani, looped);
+		d3_LoadAnimStream(path, ani, looped);
 		memset(&opt, 0, sizeof(opt));
 		opt.queue = 1;
 		opt.reverse = 0;
@@ -140,7 +140,7 @@ void __cdecl ch_PreloadModelMotions(char* model, int n, ...)
         if (fcn_00433ba0(ani) != 0) {
             continue;
         }
-        fcn_0044c620(path, ani, 0);
+        d3_LoadAnimStream(path, ani, 0);
         memset(&opt, 0, sizeof(opt));
         opt.queue = 1;
         opt.reverse = 0;

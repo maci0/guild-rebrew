@@ -50,7 +50,7 @@ int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
     }
     if (path[0] != 0 && object != 0 && *(char**) (object + 0x1cc) != 0) {
         if (fcn_00433ba0(name) == 0) {
-            fcn_0044c620(path, name, 0);
+            d3_LoadAnimStream(path, name, 0);
         }
         memset(&options, 0, sizeof(options));
         *(int*) &options = 0;

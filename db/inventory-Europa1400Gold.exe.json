@@ -11290,8 +11290,31 @@
   },
   {
     "va": 5007952,
-    "size": 64,
-    "name": "fcn.004c6a50"
+    "size": 14,
+    "name": "fcn.004c6a50",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 14,
+        "reason": "Gold native disassembly: 0x4c6a50 ends at ret 0x4c6a5d, then two NOPs; a separate entry at 0x4c6a60 ends at ret 0x4c6a84, then eleven NOPs before 0x4c6a90. Both conditional branches stay inside their respective bodies. Worker 10 and parent native JSON reviewed; no source verdict implied.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-18T15:45:05.901666+00:00"
+      }
+    ]
+  },
+  {
+    "va": 5007968,
+    "size": 37,
+    "name": "fcn.004c6a60",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 37,
+        "reason": "Gold native disassembly: 0x4c6a50 ends at ret 0x4c6a5d, then two NOPs; a separate entry at 0x4c6a60 ends at ret 0x4c6a84, then eleven NOPs before 0x4c6a90. Both conditional branches stay inside their respective bodies. Worker 10 and parent native JSON reviewed; no source verdict implied.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-18T15:45:05.904303+00:00"
+      }
+    ]
   },
   {
     "va": 5008016,

@@ -1,30 +1,17 @@
-void __cdecl fcn_0041e740(int);
+void __cdecl fcn_0041e740(void*);
 
 /* ADDRESS: GOLD 0x004790d0 */
-int __declspec(naked) __cdecl fcn_004790d0(int p)
+int __cdecl fcn_004790d0(void* record)
 {
-	(void)p;
-	__asm {
-		push esi
-		mov esi, dword ptr [esp+8]
-		mov eax, dword ptr [esi+34h]
-		test eax, eax
-		jnz Lhave
-		xor eax, eax
-		pop esi
-		ret
-	Lhave:
-		mov eax, dword ptr [esi+20h]
-		test eax, eax
-		jz Lskip
-		push eax
-		call fcn_0041e740
-		add esp, 4
-		mov dword ptr [esi+1Ch], 0
-	Lskip:
-		mov dword ptr [esi+34h], 0
-		mov eax, 1
-		pop esi
-		ret
+	char* objekt;
+
+	objekt = (char*) record;
+	if (*(int*) (objekt + 0x34) == 0)
+		return 0;
+	if (*(void**) (objekt + 0x20) != 0) {
+		fcn_0041e740(*(void**) (objekt + 0x20));
+		*(int*) (objekt + 0x1c) = 0;
 	}
+	*(int*) (objekt + 0x34) = 0;
+	return 1;
 }

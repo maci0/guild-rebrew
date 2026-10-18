@@ -16,6 +16,21 @@ checkpoint; query metadata and [current work](TODO.md) before continuing it.
 
 ## Recent findings
 
+### Animation loader name and command filename (2026-10-19)
+
+`d3_LoadAnimStream` is attested by its own diagnostic at TL `0x44c688`
+(literal `0x67b04c`) and Gold `0x44e508` (literal `0x5fc278`). The shared
+definition is TL `0x44c620` / Gold `0x44e4a0`. Its declaration remains in
+`d3_animation.h`; `Develop/Units/d3/d3_LoadAnimStream.c` is an inferred source
+filename, not an attested original TU. All affected callers use the same name.
+
+The TL `0x4959f0` definition already named `cm_TestCommandResult` now has the
+matching filename. It is distinct from the 14-byte `cm_MarkAndReturn` in
+`command.c`. The two moves preserve all non-CodeView sections and relocation
+operands in 28 client compile contexts, allowing only the animation symbol
+rename. This is object preservation, not raw-link placement evidence.
+Receipts: `.scratch/dsh-wave1/naming-review/`.
+
 ### Scene loading declarations (Goal80, 2026-10-17)
 
 `ecmd_LoadScene` remains attested by the complete original diagnostic. Its

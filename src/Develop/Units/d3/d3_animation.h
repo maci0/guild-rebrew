@@ -17,7 +17,7 @@ typedef struct D3_ANIMATION_OPTIONS {
 /* Reconstructed animation byte views; no allocation ownership is implied. */
 char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS options);
 char* __cdecl fcn_00433ba0(const char* name);
-char* __cdecl fcn_0044c620(char* path, char* name, char loop);
+char* __cdecl d3_LoadAnimStream(char* path, char* name, char loop);
 char* __cdecl fcn_0044e1e0(char* path, char* name, char loop);
 void __cdecl fcn_00434760(char* animation, char force);
 

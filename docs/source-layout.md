@@ -23,6 +23,21 @@ raw baselines, includes, compiler flags and declaration order; compare complete
 COFF bodies/operands and rebuilt images with `rebrew source organize check` afterward.
 Move managed identities through Rebrew's writers. Headers declare objects; source definitions or selected library members allocate storage.
 
+The October 19 review moved the attested `d3_LoadAnimStream` definition into
+the existing D3 directory and corrected the stale `cm_TestCommandResult`
+filename. Neither move establishes an original TU boundary. The texture family
+has stronger unit evidence: Gold `0x45f6c0` references
+`D:\develop\Units\d3\ts_texture.c`; the TL counterparts share its allocation
+labels and call graph, but retain different record layouts and bodies.
+
+Further consolidation must preserve native definition order. In particular,
+the two TL savegame readers interleave four definitions currently emitted by
+`loadsave.c`. Moving them into separate files beside that unit would not
+reconstruct its TU order. Review a single client loadsave unit and target-scoped
+providers before merging; keep the distinct server bodies. Reports and current
+object-preservation checks are in `.scratch/dsh-wave1/results/17/`,
+`results/20/` and `.scratch/dsh-wave1/naming-review/`. Raw-link checks remain due.
+
 The October 11 placement pass used these witnesses:
 
 | Source | New directory | Placement evidence |
