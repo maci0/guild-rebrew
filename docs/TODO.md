@@ -89,6 +89,9 @@ The later [Rebrew #37](https://github.com/maci0/rebrew/pull/37) removes size-onl
 import-thunk claims from blocker backfill; its full suite passed 12,820 tests
 (37 skipped). That fix is on upstream `main`, outside the pinned 5.2.0 release.
 None of this checkpoint's backfilled rows took the short-body heuristic.
+[Rebrew #38](https://github.com/maci0/rebrew/pull/38) also merged: function tests
+skip a redundant SIZE transaction while retaining missing/changed size writes.
+Its local suite and all six CI jobs passed; it is not yet in the pinned release.
 
 ## GoldTL data audit, 2026-10-19
 

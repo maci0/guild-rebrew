@@ -40,6 +40,10 @@ Other repaired costs:
   binary/compile inputs and unchanged resolution of every recorded operand.
   Missing evidence, changed addresses and gained/lost bindings force a miss;
   unchanged conflicts remain failures.
+- **Redundant SIZE transactions.** [Upstream #38](https://github.com/maci0/rebrew/pull/38)
+  skips the locked SIZE transaction when a function binding already stores that
+  size, and writes accepted `--fix-sizes` corrections once. This fix is merged
+  but remains outside the installed 5.2.0 release; no end-to-end speedup is claimed.
 - **Relative path cache crossed projects.** Roots are made absolute before
   memoized symlink resolution, so changing cwd cannot reuse another project's
   metadata root.
