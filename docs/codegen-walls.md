@@ -13,6 +13,17 @@ Working shapes: [C shapes](msvc6-c-shapes.md). Register/slot findings:
 Historical counts and retired commands are not current instructions; use
 [tooling](tooling-upstream.md), [TODO](TODO.md) and the [archive](goal-history.md#full-notebooks).
 
+## Index
+
+| Question | Sections |
+| --- | --- |
+| Callee-saved homes and slot maps are not a C knob | 1 |
+| When early-return epilogues merge | 2. The unconditional claim is superseded by [c-shapes 200](msvc6-c-shapes.md#200-carrier-wave-round-1145-the-documented-walls-that-were-source-shapes) |
+| `volatile`, folding, flags, and the fill/copy family | 3, 4, 5, 6, 6b. Read the current note at the top of 6b before treating 6 as an assembly waiver |
+| Withdrawn plans and residue floors | 7, 8 |
+| Shape of the retired postlink residue | 9 through 49 |
+| Later client scheduling controls | 50 through 53, then the 2026-10-04 notes |
+
 ## 1. Register allocation and scheduling are not steerable from C
 
 These are negative controls for **homes** (callee-saved registers and equal-count
@@ -74,7 +85,9 @@ information (live ranges, use counts) that the source cannot address. Every meas
 either did nothing or moved a different decision instead. `msvc6-c-shapes.md` §§52-61 and
 `msvc6-allocator.md` Findings 52-61 catalogue the specific attempts.
 
-### 2. `msvc6` merges byte-identical early-return epilogues unconditionally
+<a id="2-msvc6-merges-byte-identical-early-return-epilogues-unconditionally"></a>
+
+### 2. Early-return epilogue merging follows a return inside a loop (round 1145)
 
 > **Superseded (round 1145):** the merge follows a `return` inside a loop; without one each guard keeps its own epilogue. See `msvc6-c-shapes.md` section 200.
 
@@ -200,7 +213,7 @@ spellings and historical build costs. The earlier waiver is history, not current
 permission: assembly must meet the per-definition, per-target rule in AGENTS.md.
 The likelihood inference rests on native register invariance and operand homing;
 library exclusions, byte matches and failed searches only corroborate it.
-Goal108 rechecks209 distinct target/core sites, including both60-core registries,
+Goal108 rechecks 209 distinct target/core sites, including both 60-core registries,
 and the literal-count spill/reload in both client building-table initializers.
 See [the current audit](assembly-audit.md#what-qualifies).
 
@@ -236,7 +249,7 @@ CRT expansion. Neither conclusion follows from those tests. The measured
 or permission to retain arbitrary assembly.
 
 **Historical decision (round984):** the then-current waiver kept six sites and
-the8,628 residue baseline. Its failed-search rationale is not the current source
+the 8,628 residue baseline. Its failed-search rationale is not the current source
 rule. Review the native structural evidence at each definition/target; do not
 extend that old decision to whole-function dumps or new sites.
 
@@ -269,7 +282,9 @@ extend that old decision to whole-function dumps or new sites.
 
 ---
 
-## 7. What would actually move the needle
+<a id="7-what-would-actually-move-the-needle"></a>
+
+## 7. Withdrawn: the source axis was not exhausted
 
 
 **Superseded planning checkpoint.** Its SP6 recommendation, three per-file PP
@@ -278,10 +293,12 @@ compiler and source-context evidence. Current policy is plain SP5 for server,
 Processor Pack for clients; see [build facts](general-knowledge.md). Use current
 native differences and the recorded probe population, not a universal no-C claim.
 
-## 8. The measured floor of this constraint set
+<a id="8-the-measured-floor-of-this-constraint-set"></a>
+
+## 8. Withdrawn: the measured residue was not a floor
 
 
-**Withdrawn floor claim.** The8,634-byte figure measured one composition, not
+**Withdrawn floor claim.** The 8,634-byte figure measured one composition, not
 an impossibility bound. Later fixes to definition order and stale compile flags
 reduced the residue, and the server eventually reached raw-file identity.
 Preserve compiler/flag/TU inputs with each negative result. Neither a bounded
@@ -993,7 +1010,7 @@ what reaches the other encoding.
 ### 20. The whole raw-link `.data` divergence is postlink-supplied: so no `.data` content is missing (round 1016)
 
 **Retired postlink interpretation.** The historical raw image differed in
-21,481 of57,344 initialized data bytes; the postlinked image differed in zero
+21,481 of 57,344 initialized data bytes; the postlinked image differed in zero
 because it copied reference data. That comparison did not establish reconstructed
 owners, correct native placement or raw identity. The present objective requires
 the complete raw toolchain output to agree, including data and operands.
@@ -1858,7 +1875,7 @@ and it is now a measured bad trade rather than an assumed one.
 ### 38. THE LEVER THAT WAS MISSING: the residue contains 109 instructions the reference has and we do not emit at all (round 1094)
 
 
-**Invalidated census; see §42.** The109 count included jump-table/padding
+**Invalidated census; see §42.** The 109 count included jump-table/padding
 bytes decoded as code. An instruction-multiset difference also cannot by itself
 prove missing source: compiler block duplication, merging and lowering change
 instruction sets. Establish reachable code, embedded tables and correspondence
@@ -1913,14 +1930,14 @@ and `/Og /Oi /Ot /Ob1` were all swept on it (file header, line 288), and it carr
 
 **Corrected by §42/§43.** The original whole-carrier exit count was inflated by
 decoding non-code. The corrected historical census found four extra native exit
-paths across19 carriers, not the earlier per-carrier explanation of the residue.
+paths across 19 carriers, not the earlier per-carrier explanation of the residue.
 Use reachable CFGs and complete bodies; an emitted epilogue count is not a direct
 count of missing C statements.
 
 ### 41. `cm_ExCopyEntityData`: the third epilogue is a *duplicated shared exit*, and two structural probes are both 905 vs 912 (round 1097)
 
 
-The two historical structural probes remained905 versus912 bytes. The broader
+The two historical structural probes remained905 versus 912 bytes. The broader
 missing-instruction claims were corrected in §42. This bounded failure does not
 establish that no C form can reproduce the native exit. Recheck the current
 source/compiler context before reopening the experiment.
@@ -2069,8 +2086,8 @@ narrower than the whole function.
 
 
 **Overgeneralization corrected by §46.** A few carriers suggested scheduling
-dominated; the complete historical classifier put scheduling at24.7%, register
-choices at23.0% and immediate differences at21.2%. Those are measurements of
+dominated; the complete historical classifier put scheduling at 24.7%, register
+choices at 23.0% and immediate differences at 21.2%. Those are measurements of
 that composition, not current residue or a universal backend distribution.
 
 ### 46. Per-difference attribution: the residue is split evenly across THREE mechanisms, and §45 overstated the scheduler (round 1104)
@@ -2238,8 +2255,8 @@ uses `xor edx,edx; mov dl,[eax+0x8c]; mov eax,edx` before that shift and mask.
 
 Bounded scratch probes at the first query: unsigned-char and unsigned-int
 bitfield views; signed/unsigned int, unsigned char, unsigned short and register
-byte temporaries; signed-byte source; mask-before-shift; boolean flag test —
-all 52 bytes, 40/56. Volatile byte load and negated signed one-bit field emit
+byte temporaries, signed-byte source, mask-before-shift, and a boolean flag test.
+All stayed 52 bytes, 40/56. Volatile byte load and negated signed one-bit field emit
 57 bytes, 40/57. Single exit emits 69 bytes, 5/69. `/O2 /Gd /G5` and non-PP
 MSVC6 SP5 remain 52/40; `/O1 /Gd` and `/O2 /Gd /Os` emit 51 bytes, 23/56;
 `/Og-` emits 84 bytes, 2/84. None accepted. Canonical names are attested, but
@@ -2304,22 +2321,22 @@ Shared sound resolution accepted2026-10-04: TL constructor150/150 and request132
 
 ## Bounded TL setup and return ordering controls, 2026-10-04
 
-TL57a3d0 remains801 bytes with only two integer-to-float temporary stack
+TL57a3d0 remains 801 bytes with only two integer-to-float temporary stack
 displacements different: native stores/loads esp+18 while C uses esp+10.
 Twenty-eight scratch forms (including the baseline, expression casts and
 assignments, real local-declaration reorderings, and six ordinary flag checks)
 produce no supported full match. Production body/flags remain unchanged.
 
-TL4c3a50 remains760 bytes. Its348-byte code prefix differs only at eight
+TL4c3a50 remains 760 bytes. Its 348-byte code prefix differs only at eight
 bytes: C emits LEA edx,[eax+15] then MOV esi,15, while native reverses the two.
 Every103-entry inline jump-table target agrees under actual COFF label values,
 addends and function base. Structured diff disassembles this pointer table as
-code and reports207 structural instructions, so that summary must not drive
+code and reports 207 structural instructions, so that summary must not drive
 case-value edits. Eight bounded source forms and five ordinary flag checks
 yield no accepted repair. An inline-table-aware diff proposal is recorded
 in sibling rebrew/docs/IDEAS-GUILD.md; no upstream implementation changed.
 
-TL420db0 remains667 bytes/eight differing bytes. The null-host branch targets
+TL420db0 remains 667 bytes/eight differing bytes. The null-host branch targets
 a different shared epilogue and OR eax,-1 moves across three register POPs.
 Twelve bounded return/structured-host forms, including baseline and duplicate
 controls, yield no repair. The scratch default-socket-return form also changes

@@ -1,4 +1,4 @@
-int __cdecl fcn_004790d0(int);
+int __cdecl fcn_004790d0(void*);
 void __cdecl m_FreeTracked(int);
 void __cdecl fcn_0041e720(int);
 
@@ -10,7 +10,7 @@ int __cdecl fcn_00478fb0(int p)
 	if (p == 0)
 		return 0;
 	if (*(int *)(p + 0x34) != 0)
-		fcn_004790d0(p);
+		fcn_004790d0((void*)p);
 	if (*(int *)(p + 0x38) == 0) {
 		a = *(int *)(p + 0x1c);
 		if (a != 0) {

@@ -24010,3 +24010,11 @@ kind = "GLOBAL"
 note = "Inferred pointer-slot name from the m_alloc(0x10000, d3d:VertexBuffer) store, getter and free/zero uses. Declaration only; complete allocation and defining source owner unknown. Native sites and rejecting controls: .scratch/goal92-getter/REPORT.md."
 updated_by = "data"
 updated_at = "2026-10-18T03:38:03+00:00"
+
+["GOLDTL.0x00774a1c"]
+name = "g_774a1c"
+section = ".data"
+kind = "GLOBAL"
+note = "Identity from the DIR32 store at GOLDTL 0x586bd0 + 0x33 and native cross-references. Extent and storage owner remain unknown; no storage definition added."
+updated_by = "data"
+updated_at = "2026-10-18T15:37:35+00:00"

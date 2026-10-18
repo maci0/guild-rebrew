@@ -15,6 +15,26 @@ In these experiments, "current", "now" and pending actions refer to the recorded
 checkpoint. Historical whole-file failures and clean lint results do not replace
 the current server identity or its remaining lint failures in [TODO.md](TODO.md).
 
+## Index
+
+Sections 2 through 8 are redirects to the archived postlink pipeline. Do not build from them. Later notes keep their original numbers.
+
+| Topic | Sections |
+| --- | --- |
+| Section geometry that the linker still follows | 1 |
+| Retired postlink recipes | 2 through 8 |
+| Zero-init, tentative definitions, float literals, selectany | 9, 10, 13, 23 |
+| Imports, IAT, thunks, and ordinals | 11, 44, 53, 58, 72, 73, 75 |
+| Relocations and the linker's reservation | 12, 52, 62, 63, 64, 76 |
+| COMMON, BSS, and alignment gaps | 14, 21, 35, 41, 42, 43, 49, 50, 55, 59, 60, 66, 67, 84, 85, 86, 87 |
+| Stock CRT data and library members | 15, 20, 22, 28, 31, 32, 34, 36, 37, 47, 54, 56, 57, 61, 65 |
+| Readonly pools and COMDAT order | 24, 25, 26, 27, 30, 33 |
+| Timestamps, Rich headers, and checksums | 17, 18, 29, 38, 39, 40, 69, 70, 71, 77, 78, 80 |
+| `/OPT:REF` with game-function anchors | 5a |
+| Debug records and CMake driver pins | 46, 47 |
+| Source grouping is not original TU ownership | 48, 81, 82, 83 |
+| Later corrections and dated audits | 5b through 5g, 88, 89, and the dated notes after 89 |
+
 ## 1. Section geometry: three rules, and the arithmetic that follows
 
 Both binaries: `SectionAlignment = FileAlignment = 0x1000`,
@@ -282,9 +302,9 @@ spellings do not reproduce `/ORDER`'s game-data order.
 | Game COMMON directives first, forward or reverse | Pass | 31918 | 0 |
 | All COMMON directives last, forward or reverse | Pass | 31893 | 0 |
 | All COMMON directives first, reverse | Pass | 70623 | 274 |
-| All COMMON directives first, forward | Duplicate CRT startup definitions; unresolved `_main` | — | — |
-| Forward directives with `/DLL` and `/ENTRY` moved first | Same failure | — | — |
-| Forward directives with DLL startup `/INCLUDE` added first | Same failure | — | — |
+| All COMMON directives first, forward | Duplicate CRT startup definitions; unresolved `_main` | n/a | n/a |
+| Forward directives with `/DLL` and `/ENTRY` moved first | Same failure | n/a | n/a |
+| Forward directives with DLL startup `/INCLUDE` added first | Same failure | n/a | n/a |
 | Forward directives with only `__acmdln` removed | Pass | 70679 | 274 |
 
 The archive inspection identifies the unsafe retention anchor: both
@@ -1941,8 +1961,8 @@ nlsdata1 ends at 0x10033eec. No four-byte gap declaration is added there.
 
 The four-byte VS increase is native alignment, not additional source
 storage. The remaining .data VS deficit is **3484**. .reloc stays 0xc870
-versus reference0x10374, still15108 short. The native file remains
-**270336 versus286720**, **16384 bytes short**. The overall reduction is
+versus reference 0x10374, still 15108 short. The native file remains
+**270336 versus 286720**, **16384 bytes short**. The overall reduction is
 671 differing bytes;166 are CODE,492 initialized data,12 relocation bytes,
 one header byte. No previously exact CODE operand loses its reference
 binding; the seven worsened CODE operands were already misplaced. Each
@@ -1952,15 +1972,15 @@ BSS ownership or the stock ordinary-BSS interleaving.
 Canonical native DLL SHA-256
 **27d2ff2ab733cdf24957b17719ba561c55d582b2923e14e28fa1bfc29c476c71**
 equals every COMMON-root diagnostic's entire file. Native checksum stored
-and computed are0x4c4a9; COFF/export stamps remain0x699004a9/0x3fdd84a0.
-All598 function bindings and3140 CODE HIGHLOW sites remain unchanged,
+and computed are 0x4c4a9; COFF/export stamps remain 0x699004a9/0x3fdd84a0.
+All 598 function bindings and 3140 CODE HIGHLOW sites remain unchanged,
 with zero unmasked raw-code differences. Both images have3499 live
-relocations. All100 imports, DLL order/hints remain;23 IAT slots still
+relocations. All 100 imports, DLL order/hints remain;23 IAT slots still
 displaced. No linker or duplicate-symbol warning is emitted.
 
 Canonical verify: **262/262**,22EXACT/240RELOC, zero failures or size
 divergences. Data **530 matched,68 mismatched,7missing,3unchecked**,
-608total605compared. Complete readonly9320B/54values, VFS85B, game
+608total605compared. Complete readonly 9320B/54values, VFS85B, game
 writable16872B, version12B, seven shared pool operands, conversion
 table24B/nine operands and the new complete stock prefix1140B all pass.
 All three targets lint4122passed/0errors/0warnings; build-check192objects
@@ -1968,7 +1988,7 @@ and zero drift. Whole-binary and independent strict objective checks
 correctly exit1; whole-file identity is incomplete. Coverage is regenerated
 after terminal verify. Zero-data verdicts still do not prove absolute VAs.
 
-Fresh storage audit retains192Cobjects and125 physical stock members,
+Fresh storage audit retains 192Cobjects and 125 physical stock members,
 3132 COFF-anchored CODE sites, and one gm_Open BSS conflict. The allocator
 block and remaining pool-word limits from section42 still apply. The next
 misplaced initialized contributions include day/calendar tables, winxfltr,
@@ -2004,7 +2024,7 @@ The short-object diagnostic is `unexpected import object encountered`.
 The full-COFF controls warn that all references to WS2_32.dll and several
 direct input paths were discarded by /OPT:REF. Their output has no WinSock
 import descriptor and loses all 16 WinSock imports, despite retaining the
-normal stock archives. Its .rdata VS shrinks from0x2e81 to0x2df1. A successful
+normal stock archives. Its .rdata VS shrinks from 0x2e81 to 0x2df1. A successful
 LINK exit and unchanged function positions in the reverse control cannot
 excuse a missing DLL. These controls are rejected, not promoted or repaired
 by suppressing warnings. The observations apply to these direct inputs;
@@ -2016,23 +2036,23 @@ VC5 WS2_32 `4f7725f9dbfc7bdcc5b087851948319ba9ab85c980a0b8a58068cee714e3e48f`.
 Every extracted complete member is compared with its original archive bytes;
 the ordinal/name-type distinction is checked before selecting records.
 
-Two other controls remove all16 WinSock retention pragmas, or only the seven
+Two other controls remove all 16 WinSock retention pragmas, or only the seven
 whose function roots already occur in native-archive-includes.rsp. Both
 produce the entire canonical DLL byte-for-byte. The present seeds therefore
 do not provide a WinSock slot-order control. Actual C object symbol-order
-recon finds seven direct function references in broadcast.c.obj and14 import
+recon finds seven direct function references in broadcast.c.obj and 14 import
 pointer references in server2.c.obj. Eliminated C address expressions cannot
 change their order (C-shapes229–230). No production seed/no-op edit is made.
 
 The canonical artifact remains SHA256
 `27d2ff2ab733cdf24957b17719ba561c55d582b2923e14e28fa1bfc29c476c71`,
-**5320 overlapping differences and16384 bytes short**. Fresh three-target
+**5320 overlapping differences and 16384 bytes short**. Fresh three-target
 lint has4122passed/0errors/0warnings each. The strict file objective remains
 incomplete. No new Rebrew defect is implied by native LINK rejecting these
 inputs or by its successful-but-incomplete import result.
 
-Correction to C-shapes228: winxfltr.obj has two CODE COMDATs of318/58 bytes,
-both flags0x60101020. Neither function name appears in the canonical or
+Correction to C-shapes228: winxfltr.obj has two CODE COMDATs of 318/58 bytes,
+both flags 0x60101020. Neither function name appears in the canonical or
 exception-table-control MAP; a full-contribution search, masking only their
 COFF relocation fields, finds neither body in either DLL or the reference.
 That data root reorders other live CODE; the earlier description that its
@@ -2062,7 +2082,7 @@ initmon, initnum, mbsdup, w_loc, w_str, winsig and xtoa.
 
 Nine of those contain **100 bytes of private ordinary BSS**: a_loc4,
 getqloc36, initctyp8, inithelp8, initmon4, initnum12, w_loc4, w_str4 and
-winsig20. Their sections all have flags0xc0300080. The other four have
+winsig20. Their sections all have flags 0xc0300080. The other four have
 no ordinary writable contribution. Loading is not proof of a retained
 section's absolute address; none of these nine sections has an established
 native/reference binding in this audit. Do not allocate replacement storage
@@ -2070,17 +2090,17 @@ or use zero-byte searches to invent their positions. In particular, these
 members are already selected, so forcing their CODE to obtain a supposedly
 missing library member is the wrong next action.
 
-The corrected audit inspects all138 loaded members and still accounts
-**3132 of3140 CODE HIGHLOW sites**,192 source objects, eight unanchored
+The corrected audit inspects all 138 loaded members and still accounts
+**3132 of 3140 CODE HIGHLOW sites**,192 source objects, eight unanchored
 thunk/unwind sites,21 absolute-zero __except_list fields, and one game
-section-binding conflict. The13 extra members add no anchored CODE sites.
+section-binding conflict. The 13 extra members add no anchored CODE sites.
 Only setlocal is reported as an additional member validated by complete
-initializer content; the13 trace-selected members are reported separately.
-Earlier references to125 physical members should be read as that prior
+initializer content; the 13 trace-selected members are reported separately.
+Earlier references to 125 physical members should be read as that prior
 inspected subset. No new native bytes are introduced by correcting the audit.
 
 The full trace also explicitly discards both winxfltr CODE COMDATs, supporting
-the correction in section44. It records all16 WinSock member selections;
+the correction in section44. It records all 16 WinSock member selections;
 their extraction sequence differs from the emitted IAT sequence. This rules
 out equating archive load order with IAT order, without asserting a particular
 hash or sorting algorithm. Further work must use the actual symbol and member
@@ -2103,7 +2123,7 @@ PATH change and a missing CL produces a clear configuration error. The lookup
 preserves the project's CMake3.15 minimum.
 
 Changing CMAKE_C_COMPILER in the live cache caused CMake to reset compiler
-state and remove CMakeFiles, including192 existing native objects, before
+state and remove CMakeFiles, including 192 existing native objects, before
 trying the compiler again. The retry then failed under restricted cache and
 Docker access. The DLL/MAP/EXP were preserved, but restoring CMakeCache did
 not recover the removed COFF files. Recovery used a separate forced-toolchain
@@ -2118,7 +2138,7 @@ before subprocess.run attempted to kill a nonexistent container and warned
 that it could still be running. Cleanup now surrounds only subprocess.run,
 excludes spawn OSErrors and finishes while the prefix lock is held. Existing
 timeout cleanup still passes; response, lock and spawn failure controls make
-no kill call. All44 focused CMake tests and Ruff checks pass.
+no kill call. All 44 focused CMake tests and Ruff checks pass.
 
 No rebuilt DLL is claimed. The saved DLL remains entire-file SHA256
 27d2ff2ab733cdf24957b17719ba561c55d582b2923e14e28fa1bfc29c476c71;
@@ -2246,16 +2266,16 @@ Native recovery completed after Docker access was rechecked successfully.
 The full 192-object CMake rebuild reproduces the saved baseline DLL exactly,
 SHA256 `27d2ff2ab733cdf24957b17719ba561c55d582b2923e14e28fa1bfc29c476c71`.
 The ordering regression is resolved in actual toolchain output, not by
-restoring a saved DLL. Fresh verification passes all262 functions, including
+restoring a saved DLL. Fresh verification passes all 262 functions, including
 two library checks, with zero size divergences; data has530 matched,
-68 mismatched, seven missing and three unchecked. Build-check checks192
+68 mismatched, seven missing and three unchecked. Build-check checks 192
 objects with zero drift; all three targets lint cleanly. Whole-file identity
-remains false:5320 overlapping differences and16384 missing bytes.
+remains false:5320 overlapping differences and 16384 missing bytes.
 Evidence: `.scratch/repaired-native-config/native-*`.
 
 ## 49. A shorter COMMON order lets ordinary CRT BSS precede unordered game storage
 
-The control keeps all75 readonly entries and the24 early game COMMON entries
+The control keeps all 75 readonly entries and the 24 early game COMMON entries
 through g_save_extra_field, removing later game and stock COMMON names from
 the scratch ORDER file. It links the unchanged192 real C objects, stock
 archives and native EXP. It changes no source, object or archive bytes.
@@ -2272,22 +2292,22 @@ derived from matched CODE or validated initializer operands:
 | gmtime.obj,36B | 0x100357a8 | 0x100349f0 | -3512 |
 | lconv.obj,1B | 0x10035864 | 0x10034ad8 | -3468 |
 
-The actual g_stream_pool/count move from the late game tail to0x100346b4/b8,
-against reference0x10034670/78. g_sequence_counter remains0x10034610 against
-reference0x10035408. These are actual new placements, not proofs of missing
+The actual g_stream_pool/count move from the late game tail to 0x100346b4/b8,
+against reference 0x10034670/78. g_sequence_counter remains 0x10034610 against
+reference 0x10035408. These are actual new placements, not proofs of missing
 owners in the intervening span. Default COMMON allocation scrambles the
-bulk game's reference order: g_current_year moves to0x117632e0 and
-g_slot_table to0x1166d360. All28 stock tail COMMONs nevertheless have the
+bulk game's reference order: g_current_year moves to 0x117632e0 and
+g_slot_table to 0x1166d360. All 28 stock tail COMMONs nevertheless have the
 same -3488 displacement in this control; __FPinit remains initialized data
 at its correct address.
 
-All598 function bindings,3140 CODE HIGHLOW sites and every non-fixup CODE
+All 598 function bindings,3140 CODE HIGHLOW sites and every non-fixup CODE
 byte are unchanged. All four complete readonly/game-writable/version/
 conversion-table guards pass.1197 CODE operands move, with zero lost or
-gained exact operands. The entire file worsens from5320 to6634 differing
-overlapping bytes, with the same16384-byte length gap. Raw differences:
-text3667/rdata1270/data1312/reloc106. Data VS0x173f7fc is3488 bytes short,
-four bytes worse than the canonical extent. Reloc VS remains0xc870.
+gained exact operands. The entire file worsens from 5320 to 6634 differing
+overlapping bytes, with the same 16384-byte length gap. Raw differences:
+text3667/rdata1270/data1312/reloc106. Data VS 0x173f7fc is 3488 bytes short,
+four bytes worse than the canonical extent. Reloc VS remains 0xc870.
 
 This control is not promoted. SHA256:
 `280ebf50d7dd7a3f2d3c0b8c43f0af9ec265b3410e13098e83fdb455d7376d9a`.
@@ -2295,12 +2315,12 @@ Evidence: `.scratch/native-partial-common-order/{probe.py,early-only.order,
 argv.json,audit.json,bindings.json,crt-ordinary-bss.json,
 changed-operands.json,gates.json}`. An initial diagnostic-script error
 treated two complete-content initializer records as CODE operands; corrected
-the analysis to select the3132 CODE records. It was not a native link error.
+the analysis to select the 3132 CODE records. It was not a native link error.
 
 ## 50. COMMON input ownership controls allocation without adding storage
 
 Eight scalar controls separate ordinary BSS from COMMON allocation. Every
-variant has exactly36 bytes of data VirtualSize: one4-byte explicit-zero
+variant has exactly 36 bytes of data VirtualSize: one4-byte explicit-zero
 anchor, then eight4-byte tentative globals. The names below have prefix g_;
 the anchor precedes them in every map.
 
@@ -2321,26 +2341,26 @@ COMMON definitions coalesce: every output still has36 bytes, with no linker
 warning. This demonstrates ownership/allocation behavior in these cases,
 not a reason to introduce duplicate definitions into production.
 
-A server diagnostic applies the same prefix control to39 existing late game
+A server diagnostic applies the same prefix control to 39 existing late game
 COMMONs. Their declarations come from the shared tree-sitter parser, using
 the actual defining source and compiler object's COMMON size. Every newly
 compiled C object is checked to contain exactly its existing symbol with
 the same size and no CODE or initialized-data contribution. The early99-entry
-ORDER file from49 leaves these globals unordered. Original game objects and
+ORDER file from 49 leaves these globals unordered. Original game objects and
 stock archives are unchanged; equal-size definitions coalesce.
 
-All39 late game COMMONs now follow their requested reference order after
+All 39 late game COMMONs now follow their requested reference order after
 ordinary CRT BSS. The first four clock globals have -3480 displacement;
-the other35 have -3488. Data VS remains0x173f7fc, exactly equal to the
+the other35 have -3488. Data VS remains 0x173f7fc, exactly equal to the
 early-only control: no storage extent is added by the duplicate declarations.
 Every100 import identity, IAT slot and named hint equals the canonical build.
-All598 functions,3140 CODE HIGHLOW sites, non-fixup CODE bytes and the four
+All 598 functions,3140 CODE HIGHLOW sites, non-fixup CODE bytes and the four
 complete data/value guards remain protected. There are1197 changed CODE
 operands versus canonical, with zero lost or gained exact operands.
 
-The diagnostic improves the early-only file from6634 to5648 differences,
-but remains worse than canonical5320. Raw differences are
-text2681/rdata1270/data1312/reloc106; file length remains16384 bytes short.
+The diagnostic improves the early-only file from 6634 to 5648 differences,
+but remains worse than canonical 5320. Raw differences are
+text2681/rdata1270/data1312/reloc106; file length remains 16384 bytes short.
 SHA256 `887275ee51a794d24776c7dcfd393714b662a426625668da97e926017dd34c2b`.
 It is not promoted. A production ownership repair would need to move the
 existing definitions and preserve sizes, then prove complete byte agreement;
@@ -2357,7 +2377,7 @@ patching, fake padding, enlarged array or CRT reconstruction was used.
 ## 51. Related binaries confirm the border-adjacent word, without proving its owner
 
 Searching the complete 19-entry zlib border sequence finds it at these
-addresses. Each first hit is followed by bytes00 00 ff ff and the inflate
+addresses. Each first hit is followed by bytes 00 00 ff ff and the inflate
 copyright string:
 
 | Binary | border VA | Next four bytes |
@@ -2366,14 +2386,14 @@ copyright string:
 | Europa1400Gold.exe | 0x005ec140 | 00 00 ff ff |
 | Europa1400Gold_TL.exe | 0x00663388 | 00 00 ff ff |
 
-The TL binary also has a second copy at0x0066b4b8, followed immediately by
+The TL binary also has a second copy at 0x0066b4b8, followed immediately by
 the string "invalid bit length repeat" rather than that word/copyright pair.
 These are byte-sequence observations; the second copy's library ownership
 is not established by this search.
 
 The Desktop IDA export guesses dword_10024650[32]. Its initializer absorbs
-the 19 genuine indices, the adjacent word, and all46 copyright bytes rounded
-to12 further DWORDs. That guessed extent is not source-table evidence.
+the 19 genuine indices, the adjacent word, and all 46 copyright bytes rounded
+to 12 further DWORDs. That guessed extent is not source-table evidence.
 The server's two live relocation targets into the 19-entry span both address
 its base; none addresses the adjacent word. The stock source indexes only
 entries0..18. These facts leave the original owner/meaning of the word
@@ -2382,19 +2402,19 @@ the source array merely to reproduce it.
 
 C-shapes232's 19-entry control emits a76-byte four-aligned border COMDAT.
 With the otherwise unchanged192-input native recipe, inflate_copyright moves
-from0x100246a0 to0x1002469c; 16 subsequent readonly owners also move -4,
+from 0x100246a0 to 0x1002469c; 16 subsequent readonly owners also move -4,
 through g_file_extension_names. The next eight-aligned contribution restores
 later geometry naturally. No replacement word or alignment object is added.
 
-All598 function positions,3140 CODE HIGHLOW sites and non-fixup CODE bytes
-remain unchanged.26 CODE operands change and all26 lose previously exact
-bindings. Relative to canonical, raw text/data/rdata differ by26/5/885 bytes;
+All 598 function positions,3140 CODE HIGHLOW sites and non-fixup CODE bytes
+remain unchanged.26 CODE operands change and all 26 lose previously exact
+bindings. Relative to canonical, raw text/data/rdata differ by 26/5/885 bytes;
 raw reloc is unchanged. Every section VirtualSize and file length stays the
 same. The full readonly guard fails while the three other value guards pass.
 The control has6236 overlapping differences and the unchanged16384-byte
 length gap, SHA256
 `97f8f203f888438d573f54477cab31086b5a5ade3d52a1dca38d26dc9cd25438`.
-It is not promoted. Production remains the5320-difference canonical build;
+It is not promoted. Production remains the 5320-difference canonical build;
 the inherited extra initializer remains an explicit provenance limitation.
 
 Evidence: `.scratch/native-infblock-tail/`, including related-tables.json,
@@ -2425,29 +2445,29 @@ These diagnostic warnings do not occur in the production build.
 
 A server control, before C-shapes233's placeholder cleanup, changes only
 /OPT:REF to /OPT:NOREF and adds /VERBOSE.
-It links the same192 C objects, native EXP and unchanged stock archives.
-The loaded CRT-member set remains exactly138: no addition or removal.
-Live HIGHLOW count rises3499 ->4246 and the directory grows7404 ->8924B,
-but **.reloc VirtualSize remains exactly0xc870 (51312B)**. No warning is
+It links the same 192 C objects, native EXP and unchanged stock archives.
+The loaded CRT-member set remains exactly 138: no addition or removal.
+Live HIGHLOW count rises3499 ->4246 and the directory grows 7404 ->8924B,
+but **.reloc VirtualSize remains exactly 0xc870 (51312B)**. No warning is
 emitted. This directly establishes that enabling these discarded contributions
 does not supply the missing15108-byte reservation under this recipe.
 
-The control has201 additional function MAP labels and109 imports instead
-of100. .text VS grows141382 ->158080, .rdata11905 ->13969,
+The control has201 additional function MAP labels and 109 imports instead
+of 100. .text VS grows 141382 ->158080, .rdata11905 ->13969,
 .data24377344 ->24380428. These relative section sizes do not indicate
 correct absolute placement: earlier section growth also changes later RVAs.
-The initialized .data extent grows0xd610 ->0xddd8 (+1992B), and its
-combined BSS span grows0x17321f0 ->0x1732634 (+1092B). New COMMONs include
+The initialized .data extent grows 0xd610 ->0xddd8 (+1992B), and its
+combined BSS span grows 0x17321f0 ->0x1732634 (+1092B). New COMMONs include
 the three unreferenced source placeholders from C-shapes233 and three4B
 stock fields: ___alternate_form, ___no_lead_zeros and ___sbh_initialized.
-Their declared sizes total1039B; the remaining53B span change is not
+Their declared sizes total 1039B; the remaining 53B span change is not
 attributed here. This is not proof of original missing BSS owners.
 
 The /OPT:NOREF control is rejected: it adds code and imports absent from the
 reference and does not fix relocation reservation. SHA256
 `4ef9ccdf1425ff1b910151f91f8af1e1d3b5e3135a78778681e2cf0d0c7984f2`.
-The read-only input census covers193 direct inputs (including EXP) plus138
-CRT members:4167 DIR32,513 DIR32NB and2453 REL32 records. It excludes
+The read-only input census covers 193 direct inputs (including EXP) plus 138
+CRT members:4167 DIR32,513 DIR32NB and 2453 REL32 records. It excludes
 synthetic short-import contributions and is not a general extent formula.
 Do not multiply counts into a purported missing source table.
 
@@ -2467,7 +2487,7 @@ ordinal slots. The actual stock WS2_32 short-import records establish:
 | 115 | 0x10024178 | WSAStartup | WSAGetLastError |
 | 116 | 0x1002417c | WSACleanup | WSAStartup |
 
-All236 audited direct import CODE operands bind to the same API identity
+All 236 audited direct import CODE operands bind to the same API identity
 in the reference and canonical DLL, including these slots. Source calls
 and retention seeds already use the correct names. The canonical layout
 package records the raw ordinals correctly, and current Rebrew gen-layout's
@@ -2477,8 +2497,8 @@ new resolver implementation bug or a reason to rename correct C calls.
 Correct only the three inline labels using Rebrew's locked project-TOML
 reader/writer. Exact text and parsed-document checks prove every other config
 field is unchanged. A native CMake rebuild regenerates EXP and relinks,
-preserving all192 C objects and the entire canonical DLL byte for byte.
-The23 displaced IAT slots remain a placement problem. No import identity,
+preserving all 192 C objects and the entire canonical DLL byte for byte.
+The 23 displaced IAT slots remain a placement problem. No import identity,
 ordinal, hint, source call or raw layout byte is changed by this repair.
 
 Evidence: `.scratch/native-import-identity-audit/{direct-code-bindings.json,
@@ -2496,8 +2516,8 @@ and explicit1024B extent. Every metadata write uses rebrew data set; the previou
 verdict is invalidated before fresh raw-link verification. The table contents
 and library implementation are unchanged.
 
-Independent owner checks require the MAP's actual _crc_table at0x100241a0,
-all1024 reference bytes, a readonly PE section, and absence of the three
+Independent owner checks require the MAP's actual _crc_table at 0x100241a0,
+all 1024 reference bytes, a readonly PE section, and absence of the three
 removed placeholder symbols. All pass on the native rebuilt artifact. An
 image-content verdict alone did not establish that the old zero-filled
 g_crc_table declaration supplied those readonly bytes; the owner check now
@@ -2505,11 +2525,11 @@ uses the correct symbol.
 
 The complete rebuilt DLL remains canonical SHA256
 `27d2ff2ab733cdf24957b17719ba561c55d582b2923e14e28fa1bfc29c476c71`,
-270336B,5320 differing overlapping bytes and16384B short. Fresh verification
-passes262/262,22EXACT/240RELOC, including two library checks, with zero
-size divergences. Data remains530 matched,68 mismatched, seven missing and
+270336B,5320 differing overlapping bytes and 16384B short. Fresh verification
+passes 262/262,22EXACT/240RELOC, including two library checks, with zero
+size divergences. Data remains 530 matched,68 mismatched, seven missing and
 three unchecked (608total). The renamed1024B CRC entry is VERIFIED with
-new definition/input evidence. Build-check checks192 objects with zero drift.
+new definition/input evidence. Build-check checks 192 objects with zero drift.
 All three targets lint4122passed with zero errors and warnings.
 Whole-file verification and the independent objective gate correctly exit1.
 
@@ -2522,20 +2542,20 @@ full-source control. The whole-file goal remains incomplete.
 
 ## 55. Empty aligned data inputs explain the timezone displacement
 
-The previous canonical link has timeset's complete148-byte initializer at
-reference0x10033f80, ending0x10034014. tzset's28-byte initializer requests
-eight-byte alignment, but starts at0x10034020 instead of0x10034018. Native
-C-only controls correctly align148 to152. The stock ulldiv/ullrem assembly
+The previous canonical link has timeset's complete 148-byte initializer at
+reference 0x10033f80, ending 0x10034014. tzset's28-byte initializer requests
+eight-byte alignment, but starts at 0x10034020 instead of 0x10034018. Native
+C-only controls correctly align148 to 152. The stock ulldiv/ullrem assembly
 members instead contain empty `.data` sections requesting16-byte alignment;
 C-shapes234 proves their placement effect with an untouched whole member.
 
 Move the existing `/INCLUDE:___dnames` root from after calloc to after
 `__aullrem`. It supplies the same code-free timeset member after these empty
-sections. This restores all28 tzset bytes and its actual operand binding
-at0x10034018, while preserving all9320 readonly bytes and the full1140-byte
+sections. This restores all 28 tzset bytes and its actual operand binding
+at 0x10034018, while preserving all 9320 readonly bytes and the full 1140-byte
 CRT initialized prefix. There is no new data definition, member or padding.
 
-Four native controls use the same192 C objects, native EXP and stock archives:
+Four native controls use the same 192 C objects, native EXP and stock archives:
 
 | Roots changed after moving timeset | File differences | Raw CODE/data/reloc differences | Displaced HIGHLOW sites outside CODE |
 |---|---:|---|---:|
@@ -2547,30 +2567,30 @@ Four native controls use the same192 C objects, native EXP and stock archives:
 All four retain598 function bindings,3140 CODE HIGHLOW sites, zero CODE
 differences outside those fields,100 import identities/DLL order/hints,
 23 displaced IAT slots, unchanged section extents and all five full-value
-guards. Raw readonly differences remain1270. All still have3499 live
+guards. Raw readonly differences remain 1270. All still have3499 live
 HIGHLOW entries and a16384-byte file-length gap. These counts are complete
 native-link measurements, not normalized-object comparisons.
 
 Promote **timeset plus lconv**. The added `/INCLUDE:___lconv_c` immediately
-after `___lc_time_c` loads the existing60-byte code-free lconv contribution
-before the existing700-byte constpow contribution. Every700 constpow byte
-now matches at reference0x10034350; its two CODE operands also become exact.
+after `___lc_time_c` loads the existing 60-byte code-free lconv contribution
+before the existing 700-byte constpow contribution. Every700 constpow byte
+now matches at reference 0x10034350; its two CODE operands also become exact.
 Across58 changed CODE operands,19 become exact and zero previously exact
-operands are lost. The lconv contribution itself remains at0x10034220,
-against reference0x10034310: its placement is still incomplete.
+operands are lost. The lconv contribution itself remains at 0x10034220,
+against reference 0x10034310: its placement is still incomplete.
 
-The days controls place its104 bytes correctly at0x10034034, but the combined
-control moves constpow to0x10034348, losing the complete power-table match.
+The days controls place its 104 bytes correctly at 0x10034034, but the combined
+control moves constpow to 0x10034348, losing the complete power-table match.
 It is not promoted despite fewer displaced relocation sites. Production
-days remains incorrectly placed at0x10034260; the exception table remains
-at0x100342c8 against0x100340a0. These bindings are explicit unresolved work.
+days remains incorrectly placed at 0x10034260; the exception table remains
+at 0x100342c8 against 0x100340a0. These bindings are explicit unresolved work.
 
 The actual CMake rebuild reproduces the accepted native control exactly,
 SHA256 `de01cc4e2bba67bd23e31719d3b797feb2fd9dfa13ead6c9eb338e93f8e93fbb`,
-270336B and4618 overlapping differences, down702 from5320. All192 compiler
-object hashes are unchanged. Data VirtualSize remains0x173f800 (3484 short),
-reloc VirtualSize0xc870 (15108 short), and the configured reference is
-unchanged. Stored/computed checksum is0x443ff; e_lfanew remains0xf0.
+270336B and 4618 overlapping differences, down702 from 5320. All 192 compiler
+object hashes are unchanged. Data VirtualSize remains 0x173f800 (3484 short),
+reloc VirtualSize 0xc870 (15108 short), and the configured reference is
+unchanged. Stored/computed checksum is 0x443ff; e_lfanew remains 0xf0.
 Whole-file equality remains false. No library, object or output byte is
 patched; this is native archive selection through two existing data owners.
 
@@ -2581,12 +2601,12 @@ objects-before.json and canonical-build.log.
 
 Final canonical checks:262/262 function checks pass (22EXACT/240RELOC,
 including two library checks), with zero failures/size divergences. Reversing
-progress remains260/339; the two library checks are excluded. Full data
-verification remains530 matched,68 mismatched, seven missing and three
-unchecked. Build-check checks192 objects with zero drift. Every target lints
+progress remains 260/339; the two library checks are excluded. Full data
+verification remains 530 matched,68 mismatched, seven missing and three
+unchecked. Build-check checks 192 objects with zero drift. Every target lints
 4122 passed with zero errors and warnings. Whole-binary verification and the
 independent objective gate correctly exit1. Coverage is regenerated after
-verification completes. Status reports92.6% file agreement and99.4% accounted
+verification completes. Status reports 92.6% file agreement and 99.4% accounted
 text; its reusable function-proof timestamps remain unchanged because the
 compiler inputs are unchanged. Evidence: canonical-* in the same directory.
 
@@ -2598,7 +2618,7 @@ byte outside relocation fields. Sparse full initializers are included:
 setlocal's267-byte cache with only three 'C' bytes must not be discarded
 by a high fixed-byte threshold. All qualifying currently selected
 contributions have a reference match. The selected-member set comes from
-the measured138-input native trace, not the124 MAP-visible owners.
+the measured 138-input native trace, not the 124 MAP-visible owners.
 
 The only unselected candidate is syserr.obj's180-byte pointer table:
 44 DIR32 fields and one nonzero fixed byte. Masking its pointers produces
@@ -2612,7 +2632,7 @@ This scan excludes all-zero blocks, short scalars, COMDAT data and BSS;
 it cannot establish the original discarded CODE, unknown BSS owners or
 the ten additional compiler-8047 C inputs suggested by Rich records.
 Only two of the archive's40 empty tcmap aliases target already-live code;
-their one/two-alias controls were already measured in20. Counts alone
+their one/two-alias controls were already measured in 20. Counts alone
 do not justify choosing additional inputs. Evidence:
 `.scratch/native-original-data-census/{scan.py,sections.json,summary.json,
 candidate-checks.json}`. No new Rebrew implementation defect is established
@@ -2620,27 +2640,27 @@ by these bounded scans; prior shared tooling repairs remain in place.
 
 ## 57. Removing an unsupported duplicate root restores CRT data and all relocation sites
 
-Starting from55's4618-difference native build, add __lpdays and __XcptActTab
+Starting from 55's4618-difference native build, add __lpdays and __XcptActTab
 immediately after ___tzset. All later initialized CRT tables regain their
 reference positions, but96 CODE labels move. C-shapes235 establishes the
 cause from complete stock bodies and native verbose folding messages:
 the retained private _strncnt copy changes from a_cmp to a_map, even though
 the total ICF savings stay86 bytes. The public strdup/mbsdup pair's survivor
-changes too. Both inputs are still selected; the member set remains138.
+changes too. Both inputs are still selected; the member set remains 138.
 
 Five public data roots for the same winxfltr member (XcptActTab, First_FPE_Indx,
 Num_FPE, XcptActTabCount and XcptActTabSize) all produce19955 file differences,
-96 moved functions and13304 unmasked CODE differences. Moving the lconv root
+96 moved functions and 13304 unmasked CODE differences. Moving the lconv root
 after strcmpi/allmul/crtCompareStringA/the final floating-point root, moving
 the exception root after gmtime/strtol, changing the single late tcmap alias
 and adding the other already-live alias do not repair it. Duplicating the
 crtCompareStringA root earlier moves67 functions and is also rejected.
-Swapping strdup/mbsdup roots has the same19955-difference regression.
+Swapping strdup/mbsdup roots has the same 19955-difference regression.
 No rejected root/alias ordering is part of production.
 
 The current source and actual selected-object fixups never reference
 __mbsdup. Only its explicit root selects mbsdup.obj; the verbose trace has
-no caller for that symbol. Its complete43-byte function and all three named
+no caller for that symbol. Its complete 43-byte function and all three named
 fixups equal strdup's. Remove that root while keeping the two real table
 roots. Native ICF now keeps the reference private helper and produces3900
 file differences. Baseline-without-mbsdup alone gives4620 differences and
@@ -2649,40 +2669,40 @@ unchanged CODE: the useful repair is the coupled table/duplicate-input change.
 The original fixed598-label audit fails on this accepted control because
 one unused alias disappears. The specific ownership check requires **only**
 __mbsdup to be absent, verifies its old VA equals retained __strdup at
-0x10023812, compares all43 actual bytes against the reference and checks all
-remaining597 bindings. It also scans every relocation section of192 C
-objects plus137 actually loaded CRT members for that alias: zero references.
+0x10023812, compares all 43 actual bytes against the reference and checks all
+remaining 597 bindings. It also scans every relocation section of 192 C
+objects plus 137 actually loaded CRT members for that alias: zero references.
 No executable function body is missing or moved. Never approve this outcome
 from a smaller function count alone.
 
 Complete native guards establish:
 
 - Same3140 CODE HIGHLOW sites and zero CODE differences outside those fields.
-- **All3499 live HIGHLOW sites equal**, with zero missing/extra anywhere.
-- All53248 emitted relocation-section raw bytes equal the reference prefix;
+- **All 3499 live HIGHLOW sites equal**, with zero missing/extra anywhere.
+- All 53248 emitted relocation-section raw bytes equal the reference prefix;
   its full live7404-byte directory matches. The larger reference extent still
   has16384 additional raw zero bytes; this does not prove an input owner.
 - All five readonly/game-writable/version/conversion/prefix guards pass.
 - Complete timezone28B,days104B,exception136B,conversion48B,mbctype248B and
-  power700B contributions match at reference34018/34034/340a0/34130/34160/34350.
-- The C-locale table and lconv contribution now bind to34260 and34310;
+  power700B contributions match at reference 34018/34034/340a0/34130/34160/34350.
+- The C-locale table and lconv contribution now bind to 34260 and 34310;
   lconv's pointers to its BSS null byte still differ.
-- All100 import identities,DLL order and named hints remain correct;
+- All 100 import identities,DLL order and named hints remain correct;
   23 IAT slots remain displaced.
 
 The actual CMake relink equals the accepted control exactly, SHA256
 `7bcdaa633a46c5506d70ad06abc6dda52568d14a51a96b2f17550e0c11679c95`,
-270336B,3900 overlapping differences and16384B short. This improves718 bytes
-over55. Every192 compiler-object hash stays unchanged. Raw text/rdata/data/
-reloc differences are2288/1270/62/0. **Every one of the62 differing data
-bytes lies in17 known HIGHLOW pointer fields**, all targeting BSS: the zutil
+270336B,3900 overlapping differences and 16384B short. This improves718 bytes
+over 55. Every192 compiler-object hash stays unchanged. Raw text/rdata/data/
+reloc differences are2288/1270/62/0. **Every one of the 62 differing data
+bytes lies in 17 known HIGHLOW pointer fields**, all targeting BSS: the zutil
 empty string, stdio buffer, four lock owners and lconv null byte. All other
 initialized-data bytes match. These BSS targets still need correct placement.
 
-Native section extents remain text0x22846,rdata0x2e81,data0x173f800 and
-reloc0xc870. Data is3484 virtual bytes short; relocation reservation is15108
-virtual bytes short. Stored/computed checksum is0x4ad54 and e_lfanew0xe0.
-The Rich compiler-8047 count becomes113; the reference's124 still does not
+Native section extents remain text 0x22846,rdata 0x2e81,data 0x173f800 and
+reloc 0xc870. Data is 3484 virtual bytes short; relocation reservation is 15108
+virtual bytes short. Stored/computed checksum is 0x4ad54 and e_lfanew 0xe0.
+The Rich compiler-8047 count becomes 113; the reference's124 still does not
 identify missing owners. The configured reference is unchanged and whole-file
 identity remains false. No padding, new storage, CRT implementation,
 object/archive editing or postlink operation is introduced.
@@ -2693,9 +2713,9 @@ failure. The probe stops there; ICF=10, VC5-import and runtime-library-position
 controls in its later list were **not executed** and are unnecessary for the
 accepted repair. Do not describe them as negative results.
 
-Fresh verification passes262/262 (22EXACT/240RELOC, including two library
-checks) with zero failures/size divergences. Data remains530 matched,
-68 mismatched, seven missing and three unchecked. Build-check checks192
+Fresh verification passes 262/262 (22EXACT/240RELOC, including two library
+checks) with zero failures/size divergences. Data remains 530 matched,
+68 mismatched, seven missing and three unchecked. Build-check checks 192
 objects with zero drift; all three targets lint4122 passed with zero errors
 and warnings. Whole-binary and independent objective checks correctly exit1.
 The storage audit is regenerated against the actual137-member trace; stale
@@ -2711,7 +2731,7 @@ ownership/order, IAT slots, reserved relocation extent and native headers.
 ## 58. IAT placement and the hint/name pool have separate orders
 
 The reference's first KERNEL32 IAT entry is GetLocalTime, but its first
-hint/name record at RVA0x2680c is WriteConsoleA. The existing gen-layout
+hint/name record at RVA 0x2680c is WriteConsoleA. The existing gen-layout
 retention source requests imports in IAT order. That restores many IAT
 slots while forcing a different physical hint/name pool. Neither order is
 an adequate substitute for the other. All controls below use native LINK
@@ -2722,7 +2742,7 @@ controls use forward/reverse IAT roots, forward/reverse function roots,
 and the two mixed root sequences. With sixteen IAT roots alone, emitted
 ordinals follow the requested reference sequence:
 `1,13,19,16,10,111,22,115,116,23,21,8,9,2,20,3`.
-Adding the81 KERNEL32 IAT roots still preserves that WinSock sequence.
+Adding the 81 KERNEL32 IAT roots still preserves that WinSock sequence.
 Adding the two USER32 and one WINMM roots changes the emitted WinSock
 sequence to `19,16,10,111,22,115,13,23,21,8,9,2,20,3,1,116`, despite
 unchanged WinSock requests and archive. Function-root order also changes
@@ -2730,7 +2750,7 @@ which seven thunks survive and their ordering. Archive lookup order alone
 therefore does not predict emitted IAT order. These controls do **not**
 establish LINK's internal sorting algorithm.
 
-Fourteen full-DLL controls start from57's canonical3900-difference build:
+Fourteen full-DLL controls start from 57's canonical 3900-difference build:
 
 | Control | Overlap differences | Displaced IAT entries | Moved function labels | Unmasked CODE differences |
 |---|---:|---:|---:|---:|
@@ -2749,16 +2769,16 @@ Fourteen full-DLL controls start from57's canonical3900-difference build:
 | Existing seeds, WINMM before CRT | 3900 | 23 | 0 | 0 |
 | Existing seeds, another unchanged KERNEL32 archive after CRT | 3906 | 25 | 0 | 0 |
 
-Every control keeps100 import identities, DLL descriptor order and all
+Every control keeps 100 import identities, DLL descriptor order and all
 named hints. Every control except the large ORDER regression keeps all
 3499 live relocation sites. Native ORDER accepts the thunk function names
-without warnings, but places them at0x10001130 instead of0x1001a160 and
+without warnings, but places them at 0x10001130 instead of 0x1001a160 and
 moves almost all code; acceptance is not a placement proof. The separate
-IAT-symbol ORDER failures in11 still apply.
+IAT-symbol ORDER failures in 11 still apply.
 
-Removing every seed is informative but unpromoted. It restores75 of84
-hint/name RVAs, versus27 currently, and changes readonly differences from
-1270 to308. Its remaining nine displaced name records are GetLastError,
+Removing every seed is informative but unpromoted. It restores75 of 84
+hint/name RVAs, versus 27 currently, and changes readonly differences from
+1270 to 308. Its remaining nine displaced name records are GetLastError,
 HeapReAlloc,GetCommandLineA,GetVersion,EnterCriticalSection,
 LeaveCriticalSection,GetStringTypeA,GetStringTypeW and GetCPInfo.
 The first six form one rotation; the last three form another. Native
@@ -2779,21 +2799,21 @@ The per-group readonly byte comparison is:
 
 The lower raw count hides operand regressions: no-seed gains five exact
 HIGHLOW operand values and loses115, increasing raw CODE differences from
-2288 to2404. Data remains62 and emitted relocation raw bytes remain exact.
+2288 to 2404. Data remains 62 and emitted relocation raw bytes remain exact.
 Removing only late kernel seeds loses one exact operand; moving an extra
-kernel search after CRT loses six with seeds, or105 without them. The
+kernel search after CRT loses six with seeds, or 105 without them. The
 coupled WinSock root/seed deletion trades one exact operand for another.
 None is a repair that preserves the established bindings.
 
 Rooting WS2_32's descriptor and moving WINMM before CRT with existing seeds
 each produce the entire canonical DLL unchanged. Rooting WINMM's descriptor
-changes27 bytes versus canonical, relocating the DLL string versus its name
-record without fixing a slot. Rooting all descriptors changes1635 bytes
+changes 27 bytes versus canonical, relocating the DLL string versus its name
+record without fixing a slot. Rooting all descriptors changes 1635 bytes
 versus canonical. Do not infer a no-op from an unchanged total diff count.
 
 No control is promoted. Canonical SHA256 remains
 `7bcdaa633a46c5506d70ad06abc6dda52568d14a51a96b2f17550e0c11679c95`;
-the3900-difference/16384B-short objective remains incomplete. No new shared
+the 3900-difference/16384B-short objective remains incomplete. No new shared
 Rebrew implementation defect is established. Evidence:
 `.scratch/native-import-selection/{probe.py,full.py,all-toy-audit.json,all-full-audit.json}`
 and each native argv/log/DLL/MAP. The controls' replacement C objects contain
@@ -2802,23 +2822,23 @@ contributions. All canonical compiler inputs and archives are untouched.
 
 ## 59. Place the actual callback without shifting the other COMMON owners
 
-The early reference callback pointer is0x10034610, while the previous native
-link places its explicitly initialized ordinary-BSS owner at0x1176641c.
+The early reference callback pointer is 0x10034610, while the previous native
+link places its explicitly initialized ordinary-BSS owner at 0x1176641c.
 Changing only this actual declaration to a tentative four-byte COMMON and
 inserting it before the existing sequence counter reaches the reference
 callback but shifts bulk allocations32 bytes. A selectany declaration yields
-the same complete control DLL. Both controls have4820 differences versus3900
+the same complete control DLL. Both controls have4820 differences versus 3900
 before, six gained exact operands and no lost exact operands. Neither is
 promoted. Removing the other18 ordinary placeholders' initializers still
-leaves4820 differences and loses32 bytes of allocated extent; also unpromoted.
+leaves 4820 differences and loses32 bytes of allocated extent; also unpromoted.
 
 The accepted change replaces the sequence counter's early ORDER entry with
 the callback, then places the counter immediately after the existing entity
-pointer. Its actual four-byte COMMON fits the existing28-byte alignment
+pointer. Its actual four-byte COMMON fits the existing 28-byte alignment
 interval before `g_relationship_matrix_secondary`. No replacement storage
 or array enlargement is introduced. Only two mapped symbols move: callback
-to0x10034610, sequence counter from0x10034610 to0x1014c6c4. The counter's
-reference is still0x10035408. All other symbols, including all597 function
+to 0x10034610, sequence counter from 0x10034610 to 0x1014c6c4. The counter's
+reference is still 0x10035408. All other symbols, including all 597 function
 labels, retain their addresses. All six callback operands become exact; all
 five counter operands bind to its actual new owner, and no formerly exact
 HIGHLOW operand is lost. Thirty-nine CODE bytes change only inside those
@@ -2829,28 +2849,28 @@ objects retain their hashes. Its native output equals the accepted scratch
 LINK output exactly: SHA256
 `77f7fec33f3ed91a525e9f1896d9df1da1f65c0505c8ef15c734dcc2ec3c7bfa`,
 270336B,3881 overlapping differences,16384B short. Raw section differences
-are2269/1270/62/0 for text/readonly/data/relocations. All3499 live HIGHLOW
-sites equal the reference globally, all53248 emitted relocation bytes equal
+are2269/1270/62/0 for text/readonly/data/relocations. All 3499 live HIGHLOW
+sites equal the reference globally, all 53248 emitted relocation bytes equal
 its prefix, and no CODE difference exists outside3140 HIGHLOW fields.
-Imports retain100 identities, hints and DLL order, with23 IAT displacements.
-The unchanged stock CRT archive supplies the same137 selected members and
-124 MAP-visible members. The fresh storage census uses all192 C objects and
+Imports retain100 identities, hints and DLL order, with 23 IAT displacements.
+The unchanged stock CRT archive supplies the same 137 selected members and
+124 MAP-visible members. The fresh storage census uses all 192 C objects and
 the actual77f verbose native trace;3132 CODE fields have COFF attribution,
 with eight synthetic import sites separately accounted for. Complete game
 readonly, mutable data, version, CRT pointer-table and locale-prefix guards
 all pass. No stock object/archive/reference or linked byte is edited.
 
-Section VirtualSizes remain text0x22846, readonly0x2e81, data0x173f800,
-relocations0xc870. Data is3484 virtual bytes short; relocations are15108
-virtual bytes short. Native `/RELEASE` checksum stored/computed is0x4edbb;
-e_lfanew remains0xe0. The configured reference remains unchanged. This is
+Section VirtualSizes remain text 0x22846, readonly 0x2e81, data 0x173f800,
+relocations 0xc870. Data is 3484 virtual bytes short; relocations are15108
+virtual bytes short. Native `/RELEASE` checksum stored/computed is 0x4edbb;
+e_lfanew remains 0xe0. The configured reference remains unchanged. This is
 native operand-placement progress, not full-file identity.
 
-Full forced verification at07:01:45 UTC reports262/262 byte matches
+Full forced verification at 07:01:45 UTC reports 262/262 byte matches
 (22EXACT/240RELOC, including two library checks), zero failures or size
 divergences. Reversing progress excludes those two checks:260/339.
-Data comparison reports530 matched,68 mismatched,7 missing,3 unchecked.
-Build-check reports192 objects/zero drift; all three targets lint4122
+Data comparison reports 530 matched,68 mismatched,7 missing,3 unchecked.
+Build-check reports 192 objects/zero drift; all three targets lint4122
 passed/zero errors/zero warnings. Whole-binary and independent file gates
 correctly fail the incomplete goal.
 
@@ -2875,9 +2895,9 @@ member audits, full verification, native build logs, value guards, tooling
 regression logs and wheel build/install evidence. Goal remains active.
 
 With the installed fix, the unfiltered full-scope07:20:23 UTC verification
-again reports262/262. Project `status` now reports07:21:04 UTC,stale=false,
-92.9% file agreement and99.4% accounted text. Coverage is regenerated for
-all three targets; fresh all-target lint and192-object build-check pass.
+again reports 262/262. Project `status` now reports 07:21:04 UTC,stale=false,
+92.9% file agreement and 99.4% accounted text. Coverage is regenerated for
+all three targets; fresh all-target lint and 192-object build-check pass.
 Wheel SHA256 is
 `9724e9b3ef9b11ae6cd2f49741e4228cdfafec76dea5bf9f1b045286d25259df`.
 Its only changed package file is verify_cache.py; RECORD and WHEEL generator
@@ -2891,23 +2911,23 @@ the project `.venv/bin/rebrew` and native build remain authoritative.
 
 Promote only three C89 tentative definitions and their actual native ORDER
 entries: `g_crash_callback`, `g_log_mode_flags`, `g_crash_dump_all_frames`.
-Their four/four/one-byte owners reach reference0x10034614/18/1c after the
+Their four/four/one-byte owners reach reference 0x10034614/18/1c after the
 already-exact panic pointer. Move the existing four-byte dynamic count and
 two family counters after the existing sequence counter in the entity-pointer
-alignment interval. That interval now retains12 bytes of native alignment.
+alignment interval. That interval now retains 12 bytes of native alignment.
 The three relocated game counters remain unmatched; no owner is enlarged,
 duplicated or replaced. No stock archive, object, reference or linked byte
-is edited, and the18 ordinary support placeholders stay unchanged.
+is edited, and the 18 ordinary support placeholders stay unchanged.
 
 An independent logging-only control reaches the same three reference
 bindings but moves the aligned32-byte save field and every large array32
 bytes. It yields4745 differences despite20 gained/zero lost exact operands;
-unpromoted. The coupled counter ORDER change restores all89 other previous
-COMMON bindings and every large-array address. All597 function labels and
+unpromoted. The coupled counter ORDER change restores all 89 other previous
+COMMON bindings and every large-array address. All 597 function labels and
 3499 live HIGHLOW sites retain their addresses. Every CODE byte outside the
-3140 HIGHLOW fields remains exact. All20 logging fields are exact, and every
+3140 HIGHLOW fields remains exact. All 20 logging fields are exact, and every
 previously exact field stays exact. Three COMMON counters move; three new
-logging COMMONs move out of ordinary BSS;67 ordinary symbols move12 or16
+logging COMMONs move out of ordinary BSS;67 ordinary symbols move12 or 16
 bytes earlier through native allocation/alignment. C-shapes237 records the
 measured alignment boundary and actual storage sizes.
 
@@ -2920,24 +2940,24 @@ flags and named fixups. Native CMake output equals the accepted scratch LINK
 output exactly: SHA256
 `dbcc3e33da342162a00608e0d2d1d9f25166848e780b7866c3c615d99cf03b92`,
 270336B,3816 overlapping differences (65 fewer),16384B short. Text differences
-fall2269->2203; readonly/data/relocation differences remain1270/62/0.
-Readonly and relocation raw bytes are unchanged. The16 changed initialized
+fall2269->2203; readonly/data/relocation differences remain 1270/62/0.
+Readonly and relocation raw bytes are unchanged. The 16 changed initialized
 data bytes lie wholly in existing HIGHLOW pointer fields; no fixed data
-value changes. The complete five value guards pass. All53248 emitted
+value changes. The complete five value guards pass. All 53248 emitted
 relocation bytes still equal the reference prefix.
 
-The same137 unchanged stock CRT members are selected,124 MAP-visible.
-Fresh dbcc COFF census uses192 C objects and that native member trace,
-attributing3132 of3140 CODE fixups with the eight synthetic import sites
+The same 137 unchanged stock CRT members are selected,124 MAP-visible.
+Fresh dbcc COFF census uses 192 C objects and that native member trace,
+attributing3132 of 3140 CODE fixups with the eight synthetic import sites
 separate. Callback/mode/byte have3/15/2 exact native/reference votes and
-single COMMON definitions of4/4/1 bytes. Imports retain100 identities,
-hints and descriptor order, with23 displaced IAT entries; the entire readonly
-section is unchanged. Native checksum stored/computed is0x428d0; e_lfanew0xe0.
-Text/readonly/reloc VirtualSizes remain0x22846/0x2e81/0xc870. Data VirtualSize
-becomes0x173f7f0,3500 short; reloc virtual reservation is still15108 short.
+single COMMON definitions of 4/4/1 bytes. Imports retain100 identities,
+hints and descriptor order, with 23 displaced IAT entries; the entire readonly
+section is unchanged. Native checksum stored/computed is 0x428d0; e_lfanew 0xe0.
+Text/readonly/reloc VirtualSizes remain 0x22846/0x2e81/0xc870. Data VirtualSize
+becomes 0x173f7f0,3500 short; reloc virtual reservation is still 15108 short.
 These missing extents and native headers/import placement remain real work.
 
-Fresh full-scope verification07:39:32 UTC reports262/262
+Fresh full-scope verification07:39:32 UTC reports 262/262
 (22EXACT/240RELOC including two library checks),zero failures/size divergences.
 Data530matched/68mismatched/7missing/3unchecked. Project status07:40:18 UTC
 is current (stale=false),92.9% file agreement,266520/286720B;
@@ -2948,7 +2968,7 @@ passed/zero errors/zero warnings; coverage regenerated for all three.
 Whole-binary and independent objective gates correctly fail full identity.
 
 Native trace control: `/VERBOSE:LIB` reports library searches but zero
-`Loaded LIBCMT.lib(...)` lines in this link. `/VERBOSE` reports all137, and
+`Loaded LIBCMT.lib(...)` lines in this link. `/VERBOSE` reports all 137, and
 both produce identical native bytes. Use the complete trace for ownership,
 not the restricted output. No shared Rebrew caller of either flag is found;
 this is a scratch-control repair, not a new Rebrew implementation defect.
@@ -2961,28 +2981,28 @@ Goal active/incomplete; keep the configured reference unchanged.
 
 ## 61. Bound omitted stock storage before adding library inputs
 
-A fresh read-only census parses all638 COFF objects in the unchanged SP5
+A fresh read-only census parses all 638 COFF objects in the unchanged SP5
 LIBCMT archive and uses the actual137-member dbcc selection. Seventy-five
-members have BSS or COMMON. The35 unselected storage owners have1720 bytes
-of ordinary BSS and48 bytes of COMMON, with no COMDAT BSS. Every unselected
+members have BSS or COMMON. The 35 unselected storage owners have1720 bytes
+of ordinary BSS and 48 bytes of COMMON, with no COMDAT BSS. Every unselected
 COMMON is four bytes. Their BSS section flags request a total maximum103
 bytes of individual alignment slack. Including at most three alignment
 bytes per four-byte COMMON gives1907 bytes of their own contributions.
-This is below both the3460-byte early unanchored span and3500-byte current
+This is below both the 3460-byte early unanchored span and 3500-byte current
 data VirtualSize deficit. Twelve already-selected CRT BSS sections lack
-reference anchors:152 bytes plus36 alignment slack. Adding those gives2095.
+reference anchors:152 bytes plus 36 alignment slack. Adding those gives2095.
 
 This bound concerns these storage contributions and their recorded section
 alignment. It excludes initialized-data inputs and layout shifts of storage
 already present; it is not a bound on every possible final linked extent.
 It does not establish which unselected members belonged to the original or
-permit selecting all35 solely to fill a gap. The known late4104-byte file
+permit selecting all 35 solely to fill a gap. The known late4104-byte file
 COMMON contribution already has actual owners/bindings; it is not missing
 storage to reuse in the early gap. Ordinary startup/thread/locale/cache
 definitions remain subject to their actual call/data references.
 
-The archive contains598 x86 objects plus40 unspecified-machine tcmap COFF
-weak-alias objects, and three archive metadata members. All40 alias objects
+The archive contains598 x86 objects plus 40 unspecified-machine tcmap COFF
+weak-alias objects, and three archive metadata members. All 40 alias objects
 are explicitly parsed: their section byte/fixup counts and COMMON storage
 are zero. They are not directive-only objects; they contain empty `.text`
 and class105 weak externals with fallback symbol indices. Their two fallback
@@ -2994,7 +3014,7 @@ but these aliases cannot supply the missing BSS owner. Evidence includes
 The unchanged distribution copy is rechecked against the configured
 reference: all four section contents/extents/RVAs/raw offsets remain exact.
 Only its headers provide the original Rich provenance. Stock counts include
-37 compiler8966 inputs versus192 native,124 compiler8047 versus113 native,
+37 compiler8966 inputs versus 192 native,124 compiler8047 versus 113 native,
 and six librarian7291 versusone native. The stripped configured header has
 no Rich entries. These counts still do not identify original storage owners
 or authorize changing the configured reference. The selected archive and
@@ -3006,16 +3026,16 @@ There are no duplicate providers or additional compiler objects, and all
 nine replacement objects preserve complete CODE/initialized data and named
 fixups. It uses only the early ORDER prefix through the actual save field.
 Native allocation reverses the provider's COFF table rather than following
-the requested reference order. All597 function positions,3499 live sites,
+the requested reference order. All 597 function positions,3499 live sites,
 fixed CODE bytes, all imports/readonly/relocation bytes and five complete
 value guards are protected; no exact operand is gained or lost.
 
 Control SHA256
 `d46cbe45a0a7246b8fe3ff129f9da8cd416741ffe449dfa3a3959795d6e66a3b`,
 270336B,5226 differences,16384B short. Text/readonly/data/relocation
-differences3643/1270/32/0. Data VS0x173f81c is44 bytes larger through
-alignment, despite identical declaration extents; still3456 short.
-The complete source move makes the earlier50 experiment reviewable as real
+differences3643/1270/32/0. Data VS 0x173f81c is 44 bytes larger through
+alignment, despite identical declaration extents; still 3456 short.
+The complete source move makes the earlier 50 experiment reviewable as real
 ownership, but this layout is rejected. Do not promote the control or claim
 its lower data-only count as progress toward the deliverable. C-shapes238
 records provider counts and the actual order.
@@ -3148,8 +3168,8 @@ All have three live HIGHLOW entries and a 24-byte directory.
 | 8192 | 8224 | 4 | 36 | 36 |
 | 32768 | 32800 | 10 | 36 | 36 |
 
-This is the independent page variation missing from63: a single-byte
-COMMON extent change crosses the page boundary, changes reservation by10,
+This is the independent page variation missing from 63: a single-byte
+COMMON extent change crosses the page boundary, changes reservation by 10,
 and leaves code, initialized data, potential fixups and live fixups fixed.
 Further pages do not grow reservation after the proposed `12*N` cap.
 The measured controls support `min(12*N, 2*N+10*P)` causally, within this
@@ -3166,7 +3186,7 @@ artifact sets and `audit.json`. The before/after canonical hash is equal.
 
 ## 65. Promote allocator ownership with actual fields in existing alignment intervals
 
-The earlier13-owner selectany controls in35 tested a different ownership
+The earlier 13-owner selectany controls in 35 tested a different ownership
 shape and were rejected. This control uses the eight current real allocator
 definitions in their existing owner translation unit, converting only
 explicit zeros to tentative COMMONs. Complete runtime COFF contributions
@@ -3197,22 +3217,22 @@ shows one changed source object,191 unchanged inputs including native EXP,
 and no input-set change. Code/readonly/data/reloc differences2042/1270/54/0,
 improving161 CODE bytes and eight data bytes. Fifty-five allocator operands
 and two zutil initializer fields become exact; no previous exact field is
-lost. All53248 relocation raw bytes remain the exact reference prefix.
+lost. All 53248 relocation raw bytes remain the exact reference prefix.
 
-Data VS0x173f7d0 is32 bytes smaller through actual BSS removal/allocation,
-now3532 short. Reloc VS0xc870 remains15108 short. Stored/computed checksum
-0x47cd2; e_lfanew0xe0. Readonly bytes and every import identity/hint/slot
+Data VS 0x173f7d0 is 32 bytes smaller through actual BSS removal/allocation,
+now3532 short. Reloc VS 0xc870 remains 15108 short. Stored/computed checksum
+0x47cd2; e_lfanew 0xe0. Readonly bytes and every import identity/hint/slot
 remain unchanged;23 IAT slots are still displaced. A fresh complete native
-verbose trace selects exactly the same137 stock CRT members and produces
-the same DLL. Current storage audit covers192 C objects and137 CRT members.
+verbose trace selects exactly the same 137 stock CRT members and produces
+the same DLL. Current storage audit covers 192 C objects and 137 CRT members.
 
 Fresh full verification2026-10-02 09:23:28 UTC:262/262 passed,
 22EXACT/240RELOC including two library checks,zero failures or size
 divergences. Data531matched/67mismatched/7missing/3unchecked. Status
 09:24:04 UTC is current (stale=false):93.0% file agreement,
 266689/286720 bytes,260/339 reversing progress,99.4% accounted text.
-Stored data remains498verified/12drift/3unchecked,27020/66664 verified
-bytes and36713 conflicting verified bytes; distinct from raw comparison.
+Stored data remains 498verified/12drift/3unchecked,27020/66664 verified
+bytes and 36713 conflicting verified bytes; distinct from raw comparison.
 All three targets lint4122passed/zero errors/zero warnings. Native build
 check192objects/zero drift; coverage regenerated for all three targets.
 Whole-binary and independent strict objective correctly fail full identity.
@@ -3230,37 +3250,37 @@ remain intact; no new shared implementation defect is found. Goal incomplete.
 The pool/count/counter owner control is rejected: four complete native
 objects preserve all runtime contributions and twelve total BSS bytes,
 but the three separate four-byte owners only rearrange displaced ordinary
-BSS. Whole-file differences remain3647; no exact operand gain/loss. The
+BSS. Whole-file differences remain 3647; no exact operand gain/loss. The
 original pool's guessed eight-byte IDA extent is not proved by its observed
 one-word root contract. C-shapes242 documents the full callee evidence.
 
 Promote only the actual server-stop flag's tentative definition in its
 existing `server.c` owner and its ORDER entry before the four clock fields.
-The flag binds at10034680; clock year/hour/mid/tail bind at34684/34688/3468c/
-34690, preserving the0/4/8/12 cross-field access geometry. The sixteen-byte
+The flag binds at 10034680; clock year/hour/mid/tail bind at 34684/34688/3468c/
+34690, preserving the 0/4/8/12 cross-field access geometry. The sixteen-byte
 clock run ends before the unchanged slot table346a0. Ninety-nine other
 COMMON bindings stay fixed. Seven flag fields become exact with no lost
-exact field;28 removed CODE byte differences versus26 added coincident
+exact field;28 removed CODE byte differences versus 26 added coincident
 clock-byte differences gives a two-byte whole-file improvement.
 
 Current native `build/server.dll` SHA256
 `9642a1dc31004e7effc7383de6ac9b471c83fe2c475f03916ef3db70e4fa3e8f`,
 270336 bytes,3645 overlapping differences,16384 bytes short. Raw text/rdata/
-data/reloc differences2040/1270/54/0. Data VS0x173f7c8 is3540 bytes short;
-reloc VS0xc870 is15108 short. Stored/computed checksum0x4c5a0. All597
+data/reloc differences2040/1270/54/0. Data VS 0x173f7c8 is 3540 bytes short;
+reloc VS 0xc870 is 15108 short. Stored/computed checksum 0x4c5a0. All 597
 function bindings,3499 live HIGHLOW sites and non-fixup CODE bytes stay
-fixed. Readonly and all53248 emitted relocation bytes are unchanged;
+fixed. Readonly and all 53248 emitted relocation bytes are unchanged;
 relocation bytes remain an exact reference prefix. All import identities,
 hints and slots are unchanged;23 slots remain displaced. All five complete
 data/value guards pass.
 
-Actual CMake output equals the validated native candidate. The193-input
+Actual CMake output equals the validated native candidate. The 193-input
 manifest has one changed C object,191 unchanged C objects and unchanged
 native EXP:192 other direct inputs. Earlier wording that said191 other
 direct inputs including EXP conflated the C-object and direct-input counts.
 No new object/provider/storage, enlarged array, padding, patched stock
 object/archive/reference or postlink operation. A fresh full native verbose
-link reproduces the canonical DLL and selects the same137 stock CRT
+link reproduces the canonical DLL and selects the same 137 stock CRT
 members, with no duplicate-symbol warnings. CRT remains stock-linked.
 
 Full verification before the tooling correction,2026-10-02 10:00:17 UTC:
@@ -3311,25 +3331,25 @@ fixed CODE, four live sites, and before/after canonical hashes. The initial
 unsupported timestamp option and raw-BSS-read assertion are corrected;
 the only final warnings are the expected attribute findings. No Rebrew
 implementation defect is established by those harness/native diagnostics.
-Evidence: `.scratch/native-bss-group-order/`. Current canonical9642/3645/
+Evidence: `.scratch/native-bss-group-order/`. Current canonical 9642/3645/
 16384B short is unchanged.
 
 ## 68. Sole game providers in native archives expose two separate ordering constraints
 
-The39 actual game definitions can be removed from their eight owners and
+The 39 actual game definitions can be removed from their eight owners and
 provided once by native C/LIB output without changing any complete runtime
 reader object. Unlike50's duplicate-provider diagnostic, these controls
-have no duplicate COMMONs. Their types and total24316040 logical bytes stay
+have no duplicate COMMONs. Their types and total 24316040 logical bytes stay
 fixed; neither stock archive nor any compiler object is edited.
 
 One explicit-zero ordinary-BSS provider has12 internal alignment bytes.
-Its complete native link preserves597 function positions,3499 live sites,
+Its complete native link preserves 597 function positions,3499 live sites,
 all non-fixup CODE bytes, every import identity/hint/slot, readonly and
 relocation bytes, and all five complete value guards. It selects the same
 137 stock CRT members and emits no linker warning. But game alignment and
-placement change: clock at10034ab0, slot table10034ac0. File differences
-worsen3645->4269, rawtext/rdata/data/reloc2688/1270/30/0. Data VS0x173f71c
-is3712 short,172 smaller than canonical. SHA256
+placement change: clock at 10034ab0, slot table10034ac0. File differences
+worsen3645->4269, rawtext/rdata/data/reloc2688/1270/30/0. Data VS 0x173f71c
+is 3712 short,172 smaller than canonical. SHA256
 `b17dc949d7146b6dd32349ba1920198095639d58c6fd91ec3fac56d236385c1b`.
 Do not promote it merely because data-only differences improve.
 
@@ -3348,9 +3368,9 @@ infer the linker's general internal selection algorithm.
 | Reference-order roots | 5865 | 0x173f7f0 | 4280 / 34 |
 | Reversed roots, archive after LIBCMT | 3911 | 0x173f808 | 2326 / 34 |
 
-The reversed-root archive case restores the39-field sequence but places
-stock `_bufin` at10034e60 rather than reference11766580. Its existing4096
-bytes precede the game block: the35 bulk fields move1536 bytes beyond their
+The reversed-root archive case restores the 39-field sequence but places
+stock `_bufin` at 10034e60 rather than reference 11766580. Its existing 4096
+bytes precede the game block: the 35 bulk fields move1536 bytes beyond their
 reference positions, while four clocks move1532. This existing real buffer
 cannot be treated as replacement storage for the unknown early span.
 
@@ -3366,19 +3386,19 @@ Five further native links reuse the already validated provider objects:
 
 The first, second and fourth are identical entire DLLs, SHA256
 `1665535e9cf458ebe7d78b2e57d9c3a541d7debdcfc8ed23fcbe1815cf746e14`.
-They keep the39-field game sequence and stock buffer after the game block,
-but the slot table10034b00 remains3488 bytes too early. The late archive
-equals the earlier3911 control. Late direct objects give different bytes
+They keep the 39-field game sequence and stock buffer after the game block,
+but the slot table10034b00 remains 3488 bytes too early. The late archive
+equals the earlier 3911 control. Late direct objects give different bytes
 despite identical final VS; clock/slot are34ab0/34ac0. These are bounded
 native input-position results, not interchangeable general rules.
 
-All five input-position links preserve597 function positions,3499 sites,
+All five input-position links preserve 597 function positions,3499 sites,
 fixed CODE/data bytes, all imports, readonly/relocation bytes and all five
-complete value guards; clock geometry holds. All select the same137 stock
+complete value guards; clock geometry holds. All select the same 137 stock
 members, without linker warnings. The unrooted archive has those checks
 too; its reversed-member counterpart has identical bytes. Reference roots
 are rejected specifically at the clock check before the five guards.
-Every control remains16384 bytes short. No control beats canonical3645;
+Every control remains 16384 bytes short. No control beats canonical 3645;
 none is promoted. The unexplained original storage and alignment remain
 unresolved, rather than authorizing extra arrays, providers or padding.
 
@@ -3503,7 +3523,7 @@ established; all four raw sections still agree with those copies.
 
 The ordinary PE build path at 0x445806 invokes the builder, adds its result
 to the stub length, and later writes the stub and Rich buffer and stores the
-new e_lfanew at file offset0x3c. The bypass is the ROM flag at context+0x147,
+new e_lfanew at file offset 0x3c. The bypass is the ROM flag at context+0x147,
 set by the `/ROM` option at 0x4493ce. The PE header callback at 0x45c180 also
 uses this flag to omit the DOS/PE prefix. Thus removing compiler tags or
 changing a stub does not turn this valid ordinary PE path into Rich-free PE
@@ -3540,14 +3560,14 @@ reference selection remains unchanged pending the earlier user clarification.
 
 ## 72. Natural import selection improves the complete file despite more IAT displacement
 
-Reassess58's no-seed control against the current3645-difference baseline.
+Reassess58's no-seed control against the current 3645-difference baseline.
 The objective is complete file equality. Preserving each already exact IAT
-operand at the cost of846 other differing bytes is not a requirement of
+operand at the cost of 846 other differing bytes is not a requirement of
 that objective. The measured natural-import control is therefore promoted,
 with the losses recorded explicitly.
 
 Delete the directive-only `crt_imports.c` and its CMake keep/prefix entries.
-All100 imports are retained by actual references and unchanged stock
+All 100 imports are retained by actual references and unchanged stock
 libraries. No runtime function body, source signature, data owner, library,
 link option, reference or executable is patched. The scratch native link
 and terminal CMake output must agree exactly; no postlink step is involved.
@@ -3566,21 +3586,21 @@ and terminal CMake output must agree exactly; no postlink step is involved.
 
 Every changed HIGHLOW value is checked against the old IAT identity and
 its new slot:155 fields retarget, all to the same imported API. Every
-other HIGHLOW value stays identical. Five fields become exact and115 lose
+other HIGHLOW value stays identical. Five fields become exact and 115 lose
 exact values. All non-import public bindings, including every game/CRT
 storage owner, stay fixed. All CODE differences are inside reference
 HIGHLOW fields; every readonly change lies in one of the five native
-`.idata` groups. The five complete data/value guards pass. All137 selected
+`.idata` groups. The five complete data/value guards pass. All 137 selected
 stock CRT members are unchanged, with no native linker warning.
 
 The comment-only intermediate DLL SHA256 is
 5c7a050b8bbbd0abbe357caafadaab6ba69da049fc857146f7110ce37101177a.
 Removing its empty input gives SHA256
 f3b3faa4176605cba1e47a99f67d7ce79d4701258d769c709d78f046b397e87c.
-Those two files differ only in65 header bytes, have the same2799 overlap
-differences and remain16384B short. The final native checksum is0x423f7.
-Data VS remains0x173f7c8 (3540B short), relocation VS0xc870 (15108B short),
-and e_lfanew0xe0. All53248 emitted relocation bytes remain the exact
+Those two files differ only in 65 header bytes, have the same 2799 overlap
+differences and remain 16384B short. The final native checksum is 0x423f7.
+Data VS remains 0x173f7c8 (3540B short), relocation VS 0xc870 (15108B short),
+and e_lfanew 0xe0. All 53248 emitted relocation bytes remain the exact
 reference prefix. The reference, stock archive and required format stay
 unchanged; whole-file equality remains false.
 
@@ -3598,10 +3618,10 @@ independent objective reports. Reproduce the semantic comparison with
 `audit.py` and `no-empty-object/audit.py`; they use the captured before DLL.
 
 Terminal validation: native CMake equals the no-empty-object candidate
-exactly. All191 retained C objects were recompiled; their hashes change,
+exactly. All 191 retained C objects were recompiled; their hashes change,
 and the native export object's hash remains unchanged. Build-check checks
-191 objects with zero drift. Fresh final verify at2026-10-02T12:17:11 UTC
-passes262/262 (22EXACT/240RELOC, including two library checks), with zero
+191 objects with zero drift. Fresh final verify at 2026-10-02T12:17:11 UTC
+passes 262/262 (22EXACT/240RELOC, including two library checks), with zero
 failures or size divergences. Raw data compares534 matched,64 mismatched,
 seven missing and three unchecked; the managed target summary remains
 499verified/11drift/3unchecked. All three targets lint4121 passed with zero
@@ -3615,12 +3635,12 @@ Every check uses the same configured reference and raw native DLL.
 Read-only tracing of the unchanged SP5 LINK.EXE establishes a concrete
 ordering step. Its SHA256 is
 9672e578fdfaa43bdb8e9c16071682988665cb90bba2904bf02f6a5576d8ffbc.
-The layout pass at0x442020 selects `.idata$4`/`.idata$5` groups and calls
-0x40f580 at0x4422a9. That helper gathers contribution pointers, then calls
-the imported `MSVCRT.dll!qsort` at0x40f5d6 with element size4 and comparator
+The layout pass at 0x442020 selects `.idata$4`/`.idata$5` groups and calls
+0x40f580 at 0x4422a9. That helper gathers contribution pointers, then calls
+the imported `MSVCRT.dll!qsort` at 0x40f5d6 with element size4 and comparator
 0x40f630. The comparator follows contribution+0x18 to the module, then
 module+4 to its filename. Equal strings return0: there is no symbol-name
-secondary comparison in this function. The following helper at0x40f680
+secondary comparison in this function. The following helper at 0x40f680
 regroups adjacent entries with equal module filenames.
 
 This supersedes section4's blanket hash-order claim. Equal-key ordering can
@@ -3639,11 +3659,11 @@ Six saved native `/INCLUDE` controls reuse the natural-import2799 baseline:
 | `__imp__WriteConsoleA@20` | 2799 | 69 | Entire DLL unchanged |
 | `__imp__GetLastError@0` | 3546 | 96 | Worse; complete semantic checks pass |
 | `__imp__GetCPInfo@8` | 4113 | 95 | Worse; complete semantic checks pass |
-| All16 WinSock IAT roots in reference order | 2808 | — | Six thunk function bindings move; rejected |
-| The same16 roots reversed | 2806 | 71 | Worse; complete semantic checks pass |
+| All 16 WinSock IAT roots in reference order | 2808 | n/a | Six thunk function bindings move; rejected |
+| The same 16 roots reversed | 2806 | 71 | Worse; complete semantic checks pass |
 
 These are concrete rejected recipes, not evidence that `/INCLUDE` can never
-influence ordering. All preserve the100 import identities, DLL order and hints
+influence ordering. All preserve the 100 import identities, DLL order and hints
 and issue no native linker warnings. None is promoted.
 
 Two isolated full-link controls instead install whole, unchanged Microsoft
@@ -3667,14 +3687,14 @@ DLL, SHA256 d337d847b8a75319ae4de07faf0e9a15127dcc3305ded312914032c7d119a4ea:
 | Raw emitted `.reloc` differences | 0 | 0 |
 | Displaced IAT slots | 69 | 59 |
 
-All597 function MAP bindings,3499 live HIGHLOW sites, storage bindings and
-nonfixup raw CODE bytes stay fixed. All162 changed fixup values still point to
+All 597 function MAP bindings,3499 live HIGHLOW sites, storage bindings and
+nonfixup raw CODE bytes stay fixed. All 162 changed fixup values still point to
 the same API identities. Thirty-four complete fixup fields become exact and
-five lose exact values. The same137 stock LIBCMT members are selected, with
-zero linker warnings; all five data/value guards pass. The53248-byte emitted
-relocation prefix remains reference-identical. The16384-byte missing tail,
-`.data` VS0x173f7c8 and `.reloc` VS0xc870 remain unchanged. The native checksum
-is0x51f9a. Complete file agreement is93.31787109375%; equality is false.
+five lose exact values. The same 137 stock LIBCMT members are selected, with
+zero linker warnings; all five data/value guards pass. The 53248-byte emitted
+relocation prefix remains reference-identical. The 16384-byte missing tail,
+`.data` VS 0x173f7c8 and `.reloc` VS 0xc870 remain unchanged. The native checksum
+is 0x51f9a. Complete file agreement is 93.31787109375%; equality is false.
 
 The new opt-in `msvc-6.0-sp5-crt` recipe pins
 [Microsoft's VC6 redistributable](https://download.microsoft.com/download/vc60pro/Update/2/W9XNT4/EN-US/VC6RedistSetup_deu.exe)
@@ -3690,15 +3710,15 @@ is necessary. Default CL/LINK and the canonical DLL remain unchanged.
 
 The later Docker restriction prevents the remaining image smoke compile and
 canonical CMake link. Do not report this scratch gain as a promoted build or
-claim fresh function verification. All159 offline Rebrew toolchain/CMake tests
-and16 catalog/generation tests pass. The project overlay resolves through the
+claim fresh function verification. All 159 offline Rebrew toolchain/CMake tests
+and 16 catalog/generation tests pass. The project overlay resolves through the
 installed pinned wheel. No canonical staging or fabricated smoke golden.
 
 Evidence: `.scratch/native-import-incremental/` six complete recipes/results;
 `.scratch/native-import-writer/` full comparator/layout traces, both runtime
 links, compiler controls, image build, runtime archive and extracted DLL;
 `native-redist/offline-audit.log` repeats the full saved-file semantic audit
-without invoking Docker. The canonical reference and all192 direct input
+without invoking Docker. The canonical reference and all 192 direct input
 hashes remain fixed during this restricted pass.
 
 
@@ -3754,10 +3774,10 @@ the actual missing-fixture invocation returns a controlled JSON result with
 exit2 before any Docker call. No smoke golden is fabricated.
 
 No source/body, stock library, reference, CMake linker recipe or canonical DLL
-changes. The production artifact remains f3b3faa4...e87c at2799 overlapping
-differences and16384B short. No fresh native verification is claimed. The saved
+changes. The production artifact remains f3b3faa4...e87c at 2799 overlapping
+differences and 16384B short. No fresh native verification is claimed. The saved
 Microsoft-runtime candidate remains unpromoted pending real image measurement
-and canonical linking. All-target lint still passes4121 checks without warnings.
+and canonical linking. All-target lint still passes 4121 checks without warnings.
 Evidence: `.scratch/native-import-writer/smoke-{fixture-before,fixture-after,
 all-tests,wheel-build}.log`, wheel audit, installed assertions/help,
 controlled-error JSON and installed lint report.
@@ -3782,7 +3802,7 @@ Promote the runtime for LINK only. CMake's existing `RULE_LAUNCH_LINK` supplies
 `REBREW_TOOLCHAIN_OVERLAY_DIR`, and the existing bridge consumes
 `/REBREW_TOOLCHAIN:msvc-6.0-sp5-crt`. CL stays on plain SP5. The canonical
 270336-byte DLL first reproduces section73's saved d337d847...a4ea output
-exactly, reducing overlapping differences2799->2775. All192 direct inputs
+exactly, reducing overlapping differences2799->2775. All 192 direct inputs
 (191 C objects plus the native EXP) retain their complete hashes; no source
 object recompiles. No new profile registry or default compiler change.
 
@@ -3794,22 +3814,22 @@ Repeat section73's six import-root controls under this changed tool runtime:
 | WriteConsoleA | 2775 | 59 | Entire DLL unchanged |
 | GetLastError | 3510 | 81 | Semantic checks pass; worse |
 | GetCPInfo | 4078 | 81 | Semantic checks pass; worse |
-| All16 WinSock IAT roots in reference order | 2815 | — | Function bindings move; rejected |
-| The same16 roots reversed | 2748 | 51 | Semantic checks pass; promoted |
+| All 16 WinSock IAT roots in reference order | 2815 | n/a | Function bindings move; rejected |
+| The same 16 roots reversed | 2748 | 51 | Semantic checks pass; promoted |
 
 The reversed WinSock roots precede the existing public thunk/CRT anchors in
 `native-archive-includes.rsp`. They are genuine existing import identities,
-not a new C translation unit or synthetic archive. All16 WinSock IAT slots
+not a new C translation unit or synthetic archive. All 16 WinSock IAT slots
 now equal the reference. Eleven complete HIGHLOW fields become exact and
 none loses an exact value. The response-file candidate equals the inline
 control; an actual CMake LINK-only build equals that complete candidate.
-All192 direct input hashes remain fixed. This result supersedes the old Wine
+All 192 direct input hashes remain fixed. This result supersedes the old Wine
 runtime's rejected reversed-root control; root order depends on runtime too.
 
-Four complete81-root KERNEL32 controls (reference IAT/name order and both
-reversals) move281 function bindings and worsen the file to41722–42350
+Four complete 81-root KERNEL32 controls (reference IAT/name order and both
+reversals) move281 function bindings and worsen the file to 41722–42350
 differences. Explicitly rooting `__imp__RtlUnwind@16` brings its real thunk
-from0x10023840 to0x1001a160, disturbing subsequent thunk/function alignment.
+from 0x10023840 to 0x1001a160, disturbing subsequent thunk/function alignment.
 Exclude that root while keeping the natural stock CRT reference: all four
 80-root controls then pass the complete semantic audit, but remain worse:
 
@@ -3821,32 +3841,32 @@ Exclude that root while keeping the natural stock CRT reference: all four
 | Reversed hint/name order | 4429 | 98 |
 
 Fewer displaced IAT slots alone is insufficient: the first control worsens
-readonly bytes286->1270. None of these KERNEL32 controls enters production.
+readonly bytes 286->1270. None of these KERNEL32 controls enters production.
 
 Current canonical SHA256:
 `715ae25d1882f26d7c994975c2018c613ecf1ce4e6fdf64c813eb0ed545d0158`.
 There are2748 overlapping differing bytes,16384 missing bytes, and
 267588/286720 identical file bytes (93.3272879464%). Raw
-`.text/.rdata/.data/.reloc` differences are2127/286/54/0. All597 function
+`.text/.rdata/.data/.reloc` differences are2127/286/54/0. All 597 function
 bindings,3499 HIGHLOW sites, non-import public/storage bindings, and every
-nonfixup raw CODE byte remain fixed. All100 imports/hints/DLL order remain
-correct;51 KERNEL32 IAT slots remain displaced. The same137 stock CRT members
-are selected, with no linker warnings. All five value guards pass. The53248
-emitted relocation bytes equal the reference prefix. Native checksum0x50bb2
-is valid; `.data` VS0x173f7c8 and `.reloc` VS0xc870 remain short3540/15108B.
+nonfixup raw CODE byte remain fixed. All 100 imports/hints/DLL order remain
+correct;51 KERNEL32 IAT slots remain displaced. The same 137 stock CRT members
+are selected, with no linker warnings. All five value guards pass. The 53248
+emitted relocation bytes equal the reference prefix. Native checksum 0x50bb2
+is valid; `.data` VS 0x173f7c8 and `.reloc` VS 0xc870 remain short3540/15108B.
 
 A residual operand census finds1262 differing non-IAT HIGHLOW fields, all
-targeting `.data`;917 have reference-minus-native target delta0x1200.
-For example the actual log buffer is11764f00 versus reference11766100.
+targeting `.data`;917 have reference-minus-native target delta 0x1200.
+For example the actual log buffer is 11764f00 versus reference 11766100.
 Its proven260-byte extent is unchanged. A shared displacement establishes
 placement error, not permission to enlarge an array or invent missing storage.
 
-Fresh verification at2026-10-02T14:38:05.904787+00:00 passes262/262 functions
+Fresh verification at 2026-10-02T14:38:05.904787+00:00 passes 262/262 functions
 (22 EXACT/240 RELOC, including two library checks), with no size divergences.
-Raw data comparison is550 matched/48 mismatched/seven missing/three not
-comparable. Stored target data accounting is499 verified/11 drift/three
-unchecked; these are different populations. All-target lint passes4121 checks
-per target without warnings/errors; build-check covers191 objects with zero
+Raw data comparison is 550 matched/48 mismatched/seven missing/three not
+comparable. Stored target data accounting is 499 verified/11 drift/three
+unchecked; these are different populations. All-target lint passes 4121 checks
+per target without warnings/errors; build-check covers 191 objects with zero
 flag drift. All three coverage documents are regenerated; status is not stale.
 Whole-binary and independent whole-file checks correctly fail. Neither these
 promotions nor Docker access resolves the established Rich-free-reference
@@ -3868,14 +3888,14 @@ Read the unchanged LINK.EXE with SHA2569672e578...ffbc. This adds primary
 instruction evidence to sections63–64's empirical model; no compiler/linker
 execution or production edit is needed for this analysis.
 
-The normal PE layout path at0x440ede reads context+0xd0, doubles it, and
+The normal PE layout path at 0x440ede reads context+0xd0, doubles it, and
 stores that initial reservation in the `.reloc` section record. Context+0xd0
 is the PE relocation directory's Size field: COFF Machine is at context+0x30
 and the optional header starts at+0x44. Before emission, this directory field
-temporarily holds the potential-fixup counter. At0x4391d4 it receives the
+temporarily holds the potential-fixup counter. At 0x4391d4 it receives the
 accumulated object counter as well as the existing synthetic counter.
 
-At0x440ee9–0x440f1a, the path computes page span from page-aligned BaseOfCode
+At 0x440ee9–0x440f1a, the path computes page span from page-aligned BaseOfCode
 (context+0x58) to the current `.reloc` start, clamps that page count to the
 potential counter, and adds ten bytes per clamped page. For this path:
 
@@ -3885,20 +3905,20 @@ reservation = 2*N + 10*min(N, ceil((reloc_start - floor(BaseOfCode/4096)*4096)/4
 
 This is a contiguous image-span bound, not a general sum of per-section
 pages. The earlier control set's page sums agree with that span. Other mode
-branches exist: context+0x13e can add section-dependent space, and0x440f40
+branches exist: context+0x13e can add section-dependent space, and 0x440f40
 checks additional globals before an incremental-space extension. Do not
 generalize this bounded path to arbitrary link modes or architectures.
 
-A fresh census of the current192 direct inputs and137 actually loaded stock
-CRT members finds4167 DIR32,512 DIR32NB and2450 REL32 records. The saved
+A fresh census of the current 192 direct inputs and 137 actually loaded stock
+CRT members finds4167 DIR32,512 DIR32NB and 2450 REL32 records. The saved
 validated native trace contains109 loaded import members. Thus the same
-independently counted potential total is4276. Its page span is5990, above
-that counter, giving exactly12*4276 =51312 reserved bytes. Correcting the
+independently counted potential total is 4276. Its page span is 5990, above
+that counter, giving exactly 12*4276 =51312 reserved bytes. Correcting the
 3540-byte BSS deficit can increase the span; it cannot increase this already
 capped reservation while these input fixups and mode remain unchanged.
 This rules out BSS padding as a relocation repair as well as forbidding it.
 
-Under the same normal path, the original66420-byte reservation requires5535
+Under the same normal path, the original 66420-byte reservation requires5535
 potential fixups,1259 more than the current input set. This does not name
 their owners or authorize discarded pointer tables. Genuine original input
 composition or evidence of a different link mode is still required.
@@ -3913,7 +3933,7 @@ This fresh input proof explains why the 3604-byte data-size deficit cannot
 be used to predict a reservation repair. Complete per-object census and
 unchanged-input/definition barrier: `native-current-input-evidence/`.
 
-At0x442f76–0x442f85 the emitter overwrites context+0xd0 with the actual bytes
+At 0x442f76–0x442f85 the emitter overwrites context+0xd0 with the actual bytes
 used: output cursor minus relocation start. Section VirtualSize remains the
 reservation. The untouched stock reference confirms this distinction:
 
@@ -3928,7 +3948,7 @@ but285 header-byte differences. Both native and untouched stock Rich records
 contain product4/build8447/count1, corroborating the same linker build. The
 configured file has also changed the relocation directory Size to include
 the unused reservation. This is an additional precise header discrepancy,
-not missing live relocation records: both references have the same3499 sites.
+not missing live relocation records: both references have the same 3499 sites.
 
 Section71 proves this stock build's normal PE path always constructs Rich;
 its bypass produces ROM/COFF rather than the required PE. Consequently the
@@ -3961,15 +3981,15 @@ Do not use that directory label as distribution evidence.
 This resolves the earlier Rich-free-reference conflict. The old modified
 reference is preserved at `.scratch/reference-before-stock/`; no comparison
 against it is the current objective. Its four raw sections agree with stock,
-but its285 changed header bytes included removal of Rich and replacement of
+but its 285 changed header bytes included removal of Rich and replacement of
 relocation directory Size7404 by section reservation66420.
 
 Reconfigure the existing native timestamp launcher against stock and remove
-`/RELEASE`: stock stores checksum0 and the default native linker emits0.
+`/RELEASE`: stock stores checksum 0 and the default native linker emits0.
 The resulting native build has SHA256
 `0f9429af4659fc7be4cd37361730acb7e45742753107b03cab91dbb40a6fd01a`,
 270336 bytes,2736 overlapping differences,16384 bytes short. Its timestamp is
-0x3fdd84a0,checksum0; raw section differences remain2127/286/54/0. All192 direct
+0x3fdd84a0,checksum 0; raw section differences remain 2127/286/54/0. All 192 direct
 input hashes stay fixed and no C recompiles in this rebaseline. Changing the
 reference is not counted as a code gain.
 
@@ -3977,7 +3997,7 @@ Refresh the extracted layout through existing public Rebrew APIs, without
 restoring generated C scaffolding: only `header.hex` and `layout.fingerprint`
 change. New fingerprint
 `91c52bf83e1a44d2d2fa17bb2c156b81d4c6fa94cefdf721938dc52296f2a199`
-is fresh. Combined verification passes262/262 functions, zero size divergences;
+is fresh. Combined verification passes 262/262 functions, zero size divergences;
 data550matched/48mismatched/7missing/3not_comparable. Whole-binary verification
 correctly exits1; all-target lint has zero warnings/errors. That rebaseline was
 not yet a raw-identical server (270336 bytes, 16384 short). It is not the
@@ -4002,7 +4022,7 @@ The full native link nevertheless fails the whole-file improvement gate.
 MSVC6 moves the four automatic string COMDATs after the explicit initialized
 globals in the combined unit. Eighteen public/literal bindings move; data
 mismatches rise54→916 and text mismatches2127→2209. Complete differences are
-3678 versus2736; size remains270336. All192 production inputs stay fixed for
+3678 versus 2736; size remains 270336. All 192 production inputs stay fixed for
 this control. Function-local matching alone is insufficient to promote it.
 
 The smaller contiguous cohort, `ErrorModule.c`, the SDK-correct initializer,
@@ -4010,27 +4030,27 @@ and `ErrorModule2.c`, preserves the preceding literal owners. Eight functions
 compile together without warnings. Its native DLL has SHA256
 `f5ea7643c440cbd3ca01355f58d5880113bf9646ccd6b618bde6b6ec77413fda`:
 2735 differences,16384 bytes short. Every runtime section equals the baseline,
-all597 function bindings and3499 live HIGHLOW sites stay fixed, all100 import
+all 597 function bindings and 3499 live HIGHLOW sites stay fixed, all 100 import
 identities/hints/slots and other public symbols retain their bindings, the
-same137 stock CRT members supply runtime code, and five data/value guards pass.
+same 137 stock CRT members supply runtime code, and five data/value guards pass.
 There are no linker warnings when the scratch DLL retains the `server.dll`
 basename. A differently named scratch output produced the expected LNK4070
 EXP `/OUT` mismatch; that control-path warning was removed by using the proper
 basename, without altering the native EXP.
 
-The C compiler Rich record changes191→189 for product10/build8966. This is an
+The C compiler Rich record changes 191→189 for product10/build8966. This is an
 actual reduction in native compiler inputs, not a synthetic Rich edit. The key
-changes0x2e67c711→0xee63f9ee; both PE offsets remain0xe0 under section71's
+changes 0x2e67c711→0xee63f9ee; both PE offsets remain 0xe0 under section71's
 key-derived reservation formula. Only one additional header byte agrees with
-stock. The original count37 and original key0xc3b8ddfa are still unmatched.
+stock. The original count37 and original key 0xc3b8ddfa are still unmatched.
 Do not infer completion from that small header gain.
 
 Source promotion concatenates the three fragments into `ErrorHandlers.c`,
-preserving all33 FUNCTION/DATA/GLOBAL markers across all targets and original
+preserving all 33 FUNCTION/DATA/GLOBAL markers across all targets and original
 function order. The dispatch int-formal/local-byte form is promoted separately.
 Canonical CMake recompilation and final verification are required before
 reporting this candidate as the production DLL. An initial complete rebuild
-stops around74% with Docker/containerd ENOSPC; no candidate DLL is copied over
+stops around 74% with Docker/containerd ENOSPC; no candidate DLL is copied over
 production and no equality assertion is weakened.
 
 Evidence: `.scratch/native-error-tu/` compile/native-link argv and logs,
@@ -4048,17 +4068,17 @@ function sizes/nonfixup bytes/typed relocation topology stay fixed.
 
 After ordinary native LINK, `.text`, `.rdata`, `.data` and `.reloc` are all
 byte-identical to the accepted2735-difference baseline. The full Error pool
-matches reference bytes; all597 function bindings,3499 live HIGHLOW sites,
+matches reference bytes; all 597 function bindings,3499 live HIGHLOW sites,
 100 import identities/hints/slots, surviving public bindings,137 selected
 stock CRT members and five value guards pass. Fourteen artificial data aliases
-are replaced by44 actual live-literal symbols, with no new or unused storage.
+are replaced by 44 actual live-literal symbols, with no new or unused storage.
 The original data byte extents remain real and unchanged. Native compile and
 link controls have zero warnings.
 
 The candidate SHA256 is
 `c805c9c5aec84c522f27931d98980bd236755e81b97f755dd58f6bda1187b1a9`,
-270336 bytes,2734 differences,16384 bytes short. C compiler Rich count is186
-rather than189 (and191 before any Error consolidation), key0x4662de1a. This
+270336 bytes,2734 differences,16384 bytes short. C compiler Rich count is 186
+rather than 189 (and 191 before any Error consolidation), key 0x4662de1a. This
 native source-input change saves one more header byte; it does not repair
 storage extents,51 displaced KERNEL32 slots or original compiler/library counts.
 
@@ -4077,8 +4097,8 @@ bytes are emitted or read normally; no binary patch or postlink action occurs.
 
 Section79 terminal acceptance: the ordinary production CMake build completes
 successfully and emits the exact measured c805c9c5...7b1a9 candidate. Final
-verification passes262/262 with no failures or size divergences; all three
-targets lint with zero warnings/errors; build-check covers186 objects with
+verification passes 262/262 with no failures or size divergences; all three
+targets lint with zero warnings/errors; build-check covers 186 objects with
 zero drift; all three coverage documents are regenerated. The earlier disk
 capacity failure is resolved. Whole-binary identity remains false. Full
 terminal reports are in `.scratch/native-error-tu/literal-cohort/final-*`
@@ -4086,25 +4106,25 @@ and `production-lint.json`.
 
 ## 80. An extra native producer record can improve header bytes and regress code
 
-The original compiler8047 count differs by eleven from the137 selected stock
+The original compiler8047 count differs by eleven from the 137 selected stock
 CRT members' native contribution. Testing zlib as a possible owner is a
 hypothesis, not an attribution. C-shapes251 compiles all twelve actual zlib
 inputs under unchanged native VC6 RTM; eleven runtime objects match SP5,
 while `inflate_blocks` reverses two independent load pairs (eight bytes).
 
-Keep all187 production inputs unchanged and link controls replacing only
+Keep all 187 production inputs unchanged and link controls replacing only
 these real compiler outputs. No empty input, object edit or metadata patch:
 
 | Native replacement | SHA256 | Overlapping differences | PE offset | C producer records |
 |---|---|---:|---:|---|
 | None, production | c805c9c5aec84c522f27931d98980bd236755e81b97f755dd58f6bda1187b1a9 | 2734 | e0 | 8966:186; 8047:113 |
-| All12 RTM zlib objects | edc4a6414c46bca5c25bff60f869899bb5bed6eff45485b6cc9c5c8134579362 | 2583 | e8 | 8966:174; 8168:12; 8047:113 |
+| All 12 RTM zlib objects | edc4a6414c46bca5c25bff60f869899bb5bed6eff45485b6cc9c5c8134579362 | 2583 | e8 | 8966:174; 8168:12; 8047:113 |
 | Eleven exact RTM objects | 1aad92adca1a8e88a5adab07cf05d08f5eab1f7fbdefa58b6979705acd1fc2e1 | 2776 | f8 | 8966:175; 8168:11; 8047:113 |
 
 Both links complete with no native warnings. The twelve-object control's
 lower difference count and correct PE offset do not outweigh eight newly
 incorrect instruction bytes and an extra producer record absent from stock.
-The eleven-object control preserves all runtime section bytes, all597
+The eleven-object control preserves all runtime section bytes, all 597
 function MAP bindings,3499 live sites,100 import identities/hints/slots,
 all surviving public/storage bindings,137 unchanged stock CRT members and
 five value guards, but worsens the header and adds the unsupported producer.
@@ -4113,44 +4133,44 @@ this experiment definitively supplies8168 and therefore rejects the proposed
 zlib producer explanation for this compiler profile. It does not prove which
 original discarded inputs supplied the additional8047 records.
 
-All three DLLs remain270336 bytes,16384 short. All relocation bytes and
+All three DLLs remain 270336 bytes,16384 short. All relocation bytes and
 section extents remain fixed. Evidence `.scratch/native-zlib-producer/`
 link_controls.py, before-inputs.json, controls-comparison.json and complete
 all-base/exact-eleven argv,logs,results; exact-eleven/audit.json and gates.json.
-The real production DLL and all187 input hashes are checked unchanged after
+The real production DLL and all 187 input hashes are checked unchanged after
 both links. No new Rebrew deficit is exposed by this bounded experiment.
 
 
 ## 81. Directory grouping is not original TU ownership or cross-target layout proof
 
-C-shapes252 measures two complete native command cohorts. The all69-directory
-control changes35 function bindings despite every function's object code being
+C-shapes252 measures two complete native command cohorts. The all 69-directory
+control changes 35 function bindings despite every function's object code being
 correct: `cm_RouteCommand` is actually from `lobbycommands.c`, as its live
-source-path literal shows. Its272-byte contribution moves before the intervening
+source-path literal shows. Its 272-byte contribution moves before the intervening
 34 functions. Candidate07245cb205b933db9bdbfe2f9c71b453df4cc6a6e00fe7240531867bc651fc94
 has24417 differing bytes; it is rejected.
 
 Excluding that handler produces the genuine68-function server command.c control,
 SHA2563cae84437bf1c5319bd89ab6f79f00424eca63581ce056361784b17d5526339f.
 All four runtime sections equal production exactly, including full relocation
-operands. All597 function bindings,3499 live sites,100 import identities/hints/
+operands. All 597 function bindings,3499 live sites,100 import identities/hints/
 slots,surviving public symbols,137 selected unchanged CRT members and five value
 guards pass; native compile and LINK have no warnings. Extents remain unchanged,
-270336 bytes and16384 bytes short. C producer count119 replaces186; keyb162ba9f
-and PEf0 produce2735 differences rather than2734. This is authentic input
+270336 bytes and 16384 bytes short. C producer count119 replaces186; keyb162ba9f
+and PEf0 produce2735 differences rather than 2734. This is authentic input
 consolidation evidence, not a claimed byte-match gain or whole-file recovery.
 
 The shared-source validation rejects production adoption: nine unique GOLDTL
 source-order warnings W030 arise under every target lint result. The source had
-been tentatively assembled with all114 annotations preserved, but is restored
+been tentatively assembled with all 114 annotations preserved, but is restored
 completely before acceptance. No native candidate is copied to production; the
-canonical DLL remains c805c9c5...7b1a9. Restored source hashes equal all68 captured
+canonical DLL remains c805c9c5...7b1a9. Restored source hashes equal all 68 captured
 snapshots, all-target lint is again zero-warning, and CMake is reconfigured back
-to186 C inputs plus native EXP. Do not silence a warning merely because the
+to 186 C inputs plus native EXP. Do not silence a warning merely because the
 server control matches. A source cohort shared by three targets must satisfy
 all their source-order checks, or remain split.
 
-A renewed native build initially fails at8% with real Docker Btrfs metadata
+A renewed native build initially fails at 8% with real Docker Btrfs metadata
 ENOSPC. The failed log is preserved; this is not a permission denial or compiler
 miscompile. A bounded empty-chunk release completes successfully and relocates
 zero chunks, so it is not credited with recovering capacity. Docker's container
@@ -4168,15 +4188,15 @@ from these command controls. No new Rebrew implementation deficit is established
 
 ## 82. Real compatible source grouping predicts and restores the native PE offset
 
-Use section81's measured68-function code while splitting at the nine shared
+Use section81's measured 68-function code while splitting at the nine shared
 order conflicts; the greedy contiguous grouping needs eight actual source
 parts, including one unchanged singleton. All eight native SP5 controls retain
-all68 complete function shapes and typed symbolic relocation bindings.
+all 68 complete function shapes and typed symbolic relocation bindings.
 C-shapes253 records the source and shared-target validation.
 
 The measured section71 formula predicts the header before LINK. Replace
-compiler product10/build8966 count186 by126 while retaining the other seven
-producer records. The rotated producer-sum key changes4662de1a→ae653e4f;
+compiler product10/build8966 count186 by 126 while retaining the other seven
+producer records. The rotated producer-sum key changes 4662de1a→ae653e4f;
 128+32+8*(8+((key>>5)%3)) gives PE offsete8, equal to stock. This prediction
 uses actual live source-input counts. It neither adds an artificial producer
 nor edits Rich/header bytes. Native LINK then independently confirms count126,
@@ -4191,13 +4211,13 @@ identities/hints/slots,surviving public/data bindings,137 unchanged selected
 CRT members and all five value guards pass. No complete fixup field gains or
 loses exactness. All native compiler/link controls have zero warnings.
 
-Source preparation preserves all114 original markers: seven restored cohorts
+Source preparation preserves all 114 original markers: seven restored cohorts
 carry110 and the retained singleton four. All-target lint4056/4056 is clean;
 CMake configures127 direct inputs (126 C plus native EXP) and build-check
 reports zero flag drift. Build-check validates recipes, not object presence:
 seven new production objects are still missing and must be compiled normally.
 The last262/262 production verification is correctly stale after this source
-change. Do not label the candidate as the production build or its171-byte gain
+change. Do not label the candidate as the production build or its 171-byte gain
 as a completed production promotion.
 
 The root capacity issue cleared, allowing the successful bounded scratch link.
@@ -4831,10 +4851,10 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   `0x1001f855`. Removing the unsupported attributes and skills entry logs
   yields exact 179/68-byte client bodies and preserves 77 surrounding body
   measurements, but the survivor stays `a_map`. Current `.text` VirtualSize
-  is141398 against141382; `.reloc` is66384 against66420. The latter is5532
-  DIR32 reservations against5535: the treasury format adds one literal
+  is 141398 against 141382; `.reloc` is 66384 against 66420. The latter is 5532
+  DIR32 reservations against 5535: the treasury format adds one literal
   reference and removing the two literal entry logs removes four. The raw
-  DLL still differs in16579 bytes. This is unresolved source/link input debt,
+  DLL still differs in 16579 bytes. This is unresolved source/link input debt,
   not permission to recreate guessed logging or add padding. Evidence:
   `.scratch/goal20/stat-pair-link-audit.json`, `stat-pair-final-objects/` and
   `stat-pair-final-native.json`. These pending measurements supersede the
@@ -4846,19 +4866,19 @@ no server function, so `/OPT:REF` discards it. None has a row in `rebrew-functio
   selected only by its two client identities. That source-unit choice is
   inferred; it does not prove the original placement or authorize a replacement
   array, target guard or library patch. Restoring the original server.c input
-  restores a successful raw link with the same16579 residual differences,
-  .text+16/.reloc-36; all316 functions,648/652 data,100 imports and Wine exports
+  restores a successful raw link with the same 16579 residual differences,
+  .text+16/.reloc-36; all 316 functions,648/652 data,100 imports and Wine exports
   pass. Evidence: `.scratch/goal20/stat-offices-server-gate.log`,
   `stat-offices-client-unit.json`, `stat-offices-client-unit-server-gate.log`
   and `stat-offices-scope-check.json`.
 - **Faithful delimiter recovery (2026-10-11).** Removing the four unsupported
-  begin/end log calls produces the complete34-byte native TL bodies and
-  preserves79 surrounding body/operand measurements. These two routines
+  begin/end log calls produces the complete 34-byte native TL bodies and
+  preserves 79 surrounding body/operand measurements. These two routines
   contain exactly one sprintf each; Gold supplies no established counterpart.
-  The new raw link retains the same a_map.obj `_strncnt` survivor and16579
-  differing bytes. Its.text VirtualSize stays141398 versus141382, while.reloc
-  is now66312 versus66420:5526 DIR32 reservations versus5535. The six removed
-  absolute log operands explain the72-byte reservation decrease; the live
+  The new raw link retains the same a_map.obj `_strncnt` survivor and 16579
+  differing bytes. Its.text VirtualSize stays141398 versus 141382, while.reloc
+  is now66312 versus 66420:5526 DIR32 reservations versus 5535. The six removed
+  absolute log operands explain the 72-byte reservation decrease; the live
   function checks(316/316), data result(648/652),100 imports and Wine exports
   remain unchanged. This supersedes the earlier.reloc-36 current-tree figure.
   Source/link arrangement and missing genuine discarded inputs remain open;
@@ -5174,23 +5194,23 @@ hint/name table (addressed through the data directories), the export names, and 
 ## 88. Faithful office-query guards remove discarded relocation reservations
 
 Three inferred guard logs in server.c have no calls in any established native
-counterpart. Their removal preserves source line counts and all89 surrounding
+counterpart. Their removal preserves source line counts and all 89 surrounding
 compiled bodies/typed operands. Slot/council bodies are121/124 bytes; affinity
-is193 bytes and reads a rank byte, rather than a DWORD mask. All5 complete
+is 193 bytes and reads a rank byte, rather than a DWORD mask. All 5 complete
 client bodies and native operands match; Gold's old208 span included15 NOPs.
 Removing the two fully superseded numeric source units preserves all other
 owners and prevents unowned client input from entering the build fallback.
 
 The raw server gate is still not byte-identical: 2 differing bytes,
-.text VirtualSize141382 versus141382
-(+0), .reloc66240 versus66420
+.text VirtualSize141382 versus 141382
+(+0), .reloc66240 versus 66420
 (-180). No compensating padding, fake logs, library edits or linker
 flag tuning is introduced. Client-table alias cataloging allocates no storage.
-The reference LIBCMT:a_cmp.obj survivor is restored and all652 data comparisons
+The reference LIBCMT:a_cmp.obj survivor is restored and all 652 data comparisons
 pass (409 exact placements). An independent whole-file audit proves that only
-header offsets0x260/0x261 differ: .reloc VirtualSize0x102c0 versus0x10374.
+header offsets 0x260/0x261 differ: .reloc VirtualSize 0x102c0 versus 0x10374.
 All section raw bytes and every other header byte are identical. This replaces
-the earlier a_map survivor, four data drifts and16579-difference evidence.
+the earlier a_map survivor, four data drifts and 16579-difference evidence.
 The earlier placeholder-assisted layout recipes remain historical; this
 checkpoint does not establish original discarded TU arrangement or client
 storage ownership. Evidence: `.scratch/goal20/office-query-server-gate.log`,
@@ -5201,19 +5221,19 @@ unchanged: SHA25641942164041aab05dce0818fdd34ee0d66732d6556b2e8e02f7f3f448fe7eb8
 The new shared client-only body has no SERVER identity or replacement storage.
 Its superseded single-body numeric unit is retired through the public verified
 importer after both client comparisons pass. Independent whole-file checking
-still finds only offsets0x260/0x261, the .reloc VirtualSize short180; every
+still finds only offsets 0x260/0x261, the .reloc VirtualSize short180; every
 section raw byte and every other header byte match. No extra relocation
 reservation, header patch or library modification is introduced. Evidence:
 `.scratch/goal20/stat-identity-raw-server-audit.json` and
 `stat-identity-retirement.json`.
 
-Pool helper source reconciliation (2026-10-11) supersedes the180-byte
+Pool helper source reconciliation (2026-10-11) supersedes the 180-byte
 reservation shortfall above. Removing three unsupported entry logs preserves
 all live section bytes but removes six discarded-input DIR32 records.
 Raw SHA256 fdda79d8280e7a4ad2a31c65c9d5df66a5655a7fd85fe829174277bd1840203d;
-only offsets0x260/0x261 differ, .reloc VirtualSize66168 versus66420 (short252).
-All316 function checks and652 data comparisons pass, with409 exact placements.
-The pre-change frozen verbose link measured5520 actual DIR32 inputs versus
+only offsets 0x260/0x261 differ, .reloc VirtualSize66168 versus 66420 (short252).
+All 316 function checks and 652 data comparisons pass, with 409 exact placements.
+The pre-change frozen verbose link measured 5520 actual DIR32 inputs versus
 5535 implied by the reference; this is not a fresh post-change census.
 143 unsupported placeholder calls remain. Recover original source inputs
 and translation-unit boundaries from evidence rather than filling the
@@ -5297,11 +5317,11 @@ inputs yields all 286720 reference bytes exactly: SHA256
 No production source, object, image, archive or layout was replaced.
 
 Complete object DIR32 counts localize the current 29-record shortfall:
-`m_alloc.c` 117 to103 (-14), `server.c`393 to378 (-15). Seven allocator
+`m_alloc.c` 117 to 103 (-14), `server.c`393 to 378 (-15). Seven allocator
 placeholder logs remove14 records; nine server placeholder logs remove16
 records, while the recovered treasury formatter adds one. The other changed
 objects have no net reservation difference in the independently reproduced
-current5506-record census. Thus restoring the old source recreates byte identity,
+current 5506-record census. Thus restoring the old source recreates byte identity,
 but also restores16 explicitly documented placeholder calls; that replay does
 not prove those calls belonged to the original developers' source. Native
 fidelity remains the unresolved requirement. No additional original source,
@@ -5340,12 +5360,12 @@ the second define in `rebrew-project.toml` and regenerate CMake to compile the
 reconstruction without that workaround. Client target defines are unchanged.
 
 The guards retain sixteen documented historical placeholder logs in
-`m_alloc.c` and `server.c`, plus the43 existing VFS placeholders isolated on
+`m_alloc.c` and `server.c`, plus the 43 existing VFS placeholders isolated on
 2026-10-12 (59 total), using their measured historical numeric arguments. VFS
 uses one conditional logging macro; its flag-off/client expansion evaluates no
 arguments and emits no call. The real gzip diagnostic remains an ordinary call.
-All37 default VFS bodies preserve complete bytes, typed bindings and literal
-contents. Flag-off/client changes are confined to the34 affected functions;
+All 37 default VFS bodies preserve complete bytes, typed bindings and literal
+contents. Flag-off/client changes are confined to the 34 affected functions;
 cleanup and write bodies independently match the original clients. These logs
 remain reconstruction debt and are not attested original diagnostics. The guards
 also retain the old DWORD-mask office-affinity expression and omit the recovered
@@ -5356,7 +5376,7 @@ expressions and formatter remain available when the flag is disabled.
 The initial m_alloc/server isolation checked every function's complete bytes,
 typed relocation bindings and compiler-literal contents: with the flag it
 preserved40 historical functions, while disabling it preserved41 current
-functions per target profile. The later VFS checks preserve all37 default
+functions per target profile. The later VFS checks preserve all 37 default
 functions while intentionally removing only its unproven diagnostics from the
 other configurations. Receipts: `.scratch/goal21/shared-vfs-freedirs`. The canonical raw link is
 286720 bytes and matches the reference SHA256
@@ -5406,16 +5426,16 @@ bodies stay. The name and this ownership inference remain unattested. In both
 clients the native handler sits with command dispatch, far before the alchemy
 run; server placement is the boundary between the two reconstructed objects.
 The current map attributes SERVER1000ca00 to command.c.obj and preserves the
-following gm_GetFieldByType at1000ca90; it is not an original linker map.
+following gm_GetFieldByType at 1000ca90; it is not an original linker map.
 
-All102 before/after comparisons across the two units and three targets retain
+All 102 before/after comparisons across the two units and three targets retain
 identical verdicts, sizes, match counts, mismatches and typed operand records,
-except compiler-local label numbering. All91 byte matches remain. Each complete
+except compiler-local label numbering. All 91 byte matches remain. Each complete
 130-byte chain body agrees after resolving its sole DIR32 operand at+33 to the
 native table: SERVER1002c5a0, TL68ab88, Gold60bf20. A table+4 control rejects in
 each target. This proves those operands, not the client table's source provider
-or full linked data. The full Docker server gate passes with316 game functions,
-652 data comparisons, imports/relocations/Wine checks and all286720 raw bytes
+or full linked data. The full Docker server gate passes with 316 game functions,
+652 data comparisons, imports/relocations/Wine checks and all 286720 raw bytes
 identical. All-target lint now has zero errors and zero warnings. No new object,
 link flag, library patch, padding or byte repair was introduced.
 

@@ -5,6 +5,17 @@ Technical evidence, not current progress. Query current metadata and use
 [naming ledger](naming_conventions.md); source/codegen/layout findings have
 separate references in the [documentation map](README.md).
 
+## Where to read
+
+| Question | Section |
+| --- | --- |
+| Original tree, compilers, runtimes, and retention | [Original project](#original-project), [Original build](#original-build) |
+| Which code generator each binary needs | [Two code generators](#the-three-binaries-one-compiler-version-two-code-generators-round-1379-definitive) |
+| How to borrow a recovered body from another target | [import-related](#finding-code-we-already-reversed-in-another-target-rebrew-source-import-related) |
+| Address-specific native facts | [Native findings](#native-findings) |
+
+Rounds 1039, 1043, 1054, 1078, and 1089 record retracted build claims. Each heading states the correction, and the old heading's anchor is kept so existing citations still resolve.
+
 ## Original project
 
 4HEAD Studios used `D:\Develop\`: `DieGildeAddOn` game logic,
@@ -64,19 +75,25 @@ shipped residue. The remaining 966 bytes belonged to known `cm_ExSellObjekt`
 separate 144-byte predecessor and that body. Check existing bindings and native
 boundaries before claiming missing work. Full VA/file census is archived.
 
-## The build is bit-reproducible from scratch, and the correct clean recipe is `--target final`
+<a id="the-build-is-bit-reproducible-from-scratch-and-the-correct-clean-recipe-is---target-final"></a>
+
+## Round 1039 reproduced a retired postlink image
 
 Historical round 1039 reproduced the then-postlinked image and its 8,628-byte
-text residue after a clean build. The heading names a retired split-link recipe;
-it is not a current build instruction. Use the current server gate.
+text residue after a clean build. Its old heading called `--target final` the
+clean recipe. That split-link target is retired. Use the current server gate.
 
-## Done-criteria status, verified independently (round 1043)
+<a id="done-criteria-status-verified-independently-round-1043"></a>
+
+## Round 1043's structural checks did not establish completion
 
 The historical structural/load checks passed while text residue and unmatched
 functions remained. Their success did not establish completion or raw identity.
 The full old table is archived; do not reuse its counts.
 
-## Faking the original `D:\` build path through wine is possible, and unnecessary (round 1054)
+<a id="faking-the-original-d-build-path-through-wine-is-possible-and-unnecessary-round-1054"></a>
+
+## Round 1054: a Wine drive map was unnecessary for these `__FILE__` literals
 
 The compiler command-line path controls `__FILE__` under Wine. The measured tree
 used explicit original-path diagnostic literals, so a new drive mapping was not
@@ -85,7 +102,9 @@ needed. Preserve literal bytes; changing a log path to `__FILE__` can introduce
 unshare and the pinned toolchain image filesystem; CMake and `verify` both
 honor that backend.
 
-## The data sections are complete, and `rebrew todo` was reporting 123 phantoms (round 1078)
+<a id="the-data-sections-are-complete-and-rebrew-todo-was-reporting-123-phantoms-round-1078"></a>
+
+## Round 1078's completed-data claim measured a postlinked image
 
 Historical postlinked measurements, not current data completion. Server has no
 `.idata`: IAT is at `.rdata` head (RVA `0x24000`, 416 bytes). The `.data` virtual
@@ -93,7 +112,9 @@ tail begins at `0x10035000` and ends `0x1176759c`; loader zero-fill has no refer
 file payload. A comparison denominator must distinguish file bytes, imports,
 zero-fill and unknown extents. See [data ownership](data-ownership.md).
 
-## Section-by-section parity: the shipped file is byte-identical outside `.text`, BY COPYING, NOT BY COMPILING (round 1089, corrected round 1092)
+<a id="section-by-section-parity-the-shipped-file-is-byte-identical-outside-text-by-copying-not-by-compiling-round-1089-corrected-round-1092"></a>
+
+## Round 1089's non-text parity came from copying and was retracted
 
 The historical completion claim was retracted: postlink supplied those equal bytes.
 Later raw server identity is independent evidence; it does not validate that pipeline.

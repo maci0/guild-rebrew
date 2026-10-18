@@ -40,7 +40,7 @@ char* __cdecl ch_AttachMotion(char* obj, int kind)
 		opt.layer = 0x18;
 		opt.mode = 0;
 		if (fcn_00433ba0(ani) == 0) {
-			fcn_0044c620(path, ani, 1);
+			d3_LoadAnimStream(path, ani, 1);
 		}
 		anim = fcn_00434970(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani, opt);
 		if (anim == 0) {

@@ -1,5 +1,47 @@
 # Community research leads
 
+## EXE branch follow-up, 2026-10-19
+
+Reviewed [`exe-decompilation` at `181935f64a2a754c468420503ef7b57bbe27f64b`](https://github.com/europa1400-community/europa1400-decompilation/tree/181935f64a2a754c468420503ef7b57bbe27f64b),
+228 commits after the review below. Their `GOLD` remains German TL; their
+`GOLD_EN` corresponds to our English TL. Their non-identical C and behavioral
+test results are research leads, not local byte verdicts.
+
+Twenty English native windows were inspected. Thirteen original names were
+confirmed, including `gs_AddBeweis`, `bio_rd_array_quick`, `ch_UseGate`,
+`ecmd_RotateObject`, `evt_EnterFunction`, `txt_ReloadTextFile`,
+`txt_loadTextFile`, and six historical-text parsers. Preserve their original
+spelling: the community source translates `gs_AddBeweis` to `gs_AddEvidence`
+despite its own diagnostic ledger. Generated labels need independent review.
+
+| Priority | Local TL work | Useful external evidence |
+| --- | --- | --- |
+| Original names | `0x4f5770`, `0x401500`, `0x406850`, `0x40eac0`, `0x427c40` | [Diagnostic ledger](https://github.com/europa1400-community/europa1400-decompilation/blob/181935f64a2a754c468420503ef7b57bbe27f64b/docs/anchors/GOLD.md), checked against our native operands. |
+| Historical text | Six placeholders at `0x4b20e0`, `0x4b2300`, `0x4b2670`, `0x4b2a10`, `0x4b2e20`, `0x4b3010` | [Two-pass parser](https://github.com/europa1400-community/europa1400-decompilation/blob/181935f64a2a754c468420503ef7b57bbe27f64b/src/game/game_g_historical_text.c): selectors, replacements and callback contracts. |
+| EVT | Tokenizer, preprocessing, parameter/frame entry and evaluation placeholders | [Interpreter design](https://github.com/europa1400-community/europa1400-decompilation/blob/181935f64a2a754c468420503ef7b57bbe27f64b/docs/modules/GOLD-evt.md); retain our repaired command-slot contracts. |
+| Quantization | `0x41bdc0`, `0x41bf90`, `0x41c290`, `0x41c470` | [Octree reconstruction](https://github.com/europa1400-community/europa1400-decompilation/blob/181935f64a2a754c468420503ef7b57bbe27f64b/src/game/game_g_quantize.c) and failure/tie fixtures; reuse our existing `octree.h`. |
+| TXT boundary | Loader `0x42d880`, possible separate writer `0x42dac0` | Our native loader returns at `0x42dabe`, before another prologue and `txt_SaveTextFile` diagnostics. Review the recorded 1,040-byte extent before implementation. |
+| Further algorithms | A*, BMP decoding, mouse state, scene morphing and AI | Corresponding [module notes](https://github.com/europa1400-community/europa1400-decompilation/tree/181935f64a2a754c468420503ef7b57bbe27f64b/docs/modules) and fixtures supply bounded behavior checklists. |
+
+Unique exported hashes locate 1,268 descriptive hypotheses after excluding
+address-generated labels, explicit guesses and tagged library ranges. Of these,
+233 have community C and no local stored verdict. These are triage counts,
+not missing-function counts or recovered bytes. Their newer harness covers
+return widths, immediate 80-bit ST0 capture, callback mutations and call order;
+its reported results were not reproduced here.
+
+Their `game_g_*.c` files are reconstruction packages, not original TU
+attestations. Proposed local homes remain inferred and require provider,
+type-layout and native-order review. No new original TU was established, and
+no community source, types, storage or verdicts were imported. No general
+repository source license was found; zlib's separate license does not cover
+the reconstruction. Use the factual leads for independent native recovery.
+
+Full review: `.scratch/community-exe-review/REPORT.md` (13 ranked groups,
+47 checked pinned links), with external candidate lists and native JSON receipts.
+
+## Earlier review, 2026-10-18
+
 Reviewed 2026-10-18: [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation/tree/eabb183f6fecc3607ce661ca3810e03da7e336bc), commit `eabb183f6fecc3607ce661ca3810e03da7e336bc` (2026-10-09). This records independently checked facts and bounded research leads; it imports no source, types, storage or verdicts.
 
 ## Match the build first

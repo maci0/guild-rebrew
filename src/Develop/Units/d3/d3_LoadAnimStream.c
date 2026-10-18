@@ -12,7 +12,7 @@ extern char g_1052a40[];
 
 /* ADDRESS: GOLDTL 0x0044c620 */
 /* ADDRESS: GOLD 0x0044e4a0 */
-char* __cdecl fcn_0044c620(char* name, char* a, char b)
+char* __cdecl d3_LoadAnimStream(char* name, char* a, char b)
 {
 	char buf[0x100];
 	char* o;

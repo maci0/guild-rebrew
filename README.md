@@ -28,7 +28,7 @@ Gold and GoldTL from shared source.
   <img src="docs/progress.svg" width="715" alt="Reconstruction status: stored C function matches, assembly matches and raw-image agreement for all three targets.">
 </p>
 <details>
-  <summary><strong>Explore the function map</strong> — one block per function, in address order</summary>
+  <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
   <p align="center">
     <img src="docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
   </p>

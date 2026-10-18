@@ -20,12 +20,12 @@ original text remains in the [archives](goal-history.md#full-notebooks).
 | Question | Read |
 | --- | --- |
 | Which C shape changes the emitted bytes? | [C shapes](msvc6-c-shapes.md), indexed by symptom |
-| Why these registers or stack slots? | [Allocator findings](msvc6-allocator.md) |
-| Has this matching lever already failed? | [Codegen walls](codegen-walls.md) |
+| Why these registers or stack slots? | [Allocator findings](msvc6-allocator.md), indexed by topic |
+| Has this matching lever already failed? | [Codegen walls](codegen-walls.md), indexed by wall |
 | Which runner/cache path does verification use? | [Verification performance](verify-performance.md) |
 | Which assembly has reviewed evidence? | [Assembly audit](assembly-audit.md) |
-| What does this score or verdict establish? | [Measurement traps](measure-traps.md) |
-| What controls sections, imports and relocation layout? | [Link layout](msvc6-link-layout.md) |
+| What does this score or verdict establish? | [Measurement traps](measure-traps.md), indexed by trap |
+| What controls sections, imports and relocation layout? | [Link layout](msvc6-link-layout.md), indexed by topic |
 | Does this client function have server storage? | [Client-only sweep](client-only-sweep.md) |
 | Who owns this global or interior view? | [Data ownership](data-ownership.md) |
 | Where does this source/type belong? | [Source layout](source-layout.md) |
@@ -34,10 +34,10 @@ original text remains in the [archives](goal-history.md#full-notebooks).
 | How do contributors share source and analysis? | [Collaboration](collaboration.md), Git/PRs and optional BinSync |
 | Which tool replaces an old script? | [Tooling](tooling-upstream.md) |
 | How are vendor patches reproduced? | [Vendoring](vendoring.md) |
-| What process mistakes should I avoid? | [Workflow traps](workflow-traps.md) |
+| What process mistakes should I avoid? | [Workflow traps](workflow-traps.md), indexed by trap |
 | What principles guide project work? | [Project principles](project-principles.md); generated tool rules remain in [PRINCIPLES.md](../PRINCIPLES.md) |
 | What is known about a residue function's behavior? | [Behavioral reviews](behavioral-verdicts.md), historical |
-| What is known about the original build? | [Build facts](general-knowledge.md) |
+| What is known about the original build? | [Build facts](general-knowledge.md); the index names the retracted rounds |
 | What are the game, network and asset conventions? | [Game compendium](game-compendium.md) |
 
 ## Evidence lookup

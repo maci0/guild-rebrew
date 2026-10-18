@@ -38,7 +38,7 @@ stock CRT relocation evidence. Assignment of an owner never promotes a verdict.
 An unsized identity-only GLOBAL row can record an address without asserting an object, interior alias or
 allocation owner; leave unsupported storage fields unset.
 
-## Historical storage investigation — October 4
+## Historical storage investigation, October 4
 
 The then-current native DLL had 54 differing CRT pointer bytes and a 3,604-byte
 virtual data shortfall. The 15 COFF fields belonged to stdio, lock and locale

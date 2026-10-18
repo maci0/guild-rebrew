@@ -6687,7 +6687,7 @@ what the tools already knew, and the answer was **nothing**: `rebrew data list -
 
 ```
 Section    Globals    Annotated     Bytes    % Coverage
-unknown        204            0    0B / —             —
+unknown        204            0    0B / -             -
 ```
 
 204 globals, **zero** annotated, every one in section `unknown`, against a tree carrying 310
@@ -10056,7 +10056,7 @@ therefore has no effect on these functions' compiled bodies; this does not
 prove that the extra word belongs to the original array.
 
 The unchanged native link recipe shifts 17 readonly owners by four bytes,
-starting with inflate_copyright at0x1002469c instead of0x100246a0.
+starting with inflate_copyright at 0x1002469c instead of 0x100246a0.
 Function positions and CODE fixup topology remain unchanged, but26
 previously exact CODE operands lose their bindings. Whole-file overlap
 differences worsen5320 ->6236. The readonly guard fails; other complete
@@ -10088,12 +10088,12 @@ COMMON at the reference's readonly CRC-table VA. Move the owner annotation
 to the existing initialized crc_table in references/zlib/crc32.c; the shared
 header now declares its actual const unsigned long[256] type. Managed
 name/type/size updates use rebrew data set, followed by fresh verification.
-The actual MAP symbol is0x100241a0 and all1024 readonly bytes match directly.
+The actual MAP symbol is 0x100241a0 and all 1024 readonly bytes match directly.
 This is a declaration/owner repair, not another copy of the library table.
 
 The annotated CRC source's complete native object contributions equal the
-saved pre-change compiler object. Its one CODE contribution is320B with
-nine named fixups; the readonly table is1024B. No code byte, relocation,
+saved pre-change compiler object. Its one CODE contribution is 320B with
+nine named fixups; the readonly table is 1024B. No code byte, relocation,
 section flag or constant changes. The canonical rebuild preserves the
 entire DLL. Linker-layout54 records the full verification and limits.
 
@@ -10105,18 +10105,18 @@ canonical-owner-audit.json and canonical-crc-object-audit.json.
 
 SP5 `/O2 /Gd /MT` compiles a 148-byte initialized byte array to ordinary
 `.data`, flags `0xc0300040`. A separate object containing two initialized
-doubles followed by three initialized ints has exactly28 data bytes,
-flags `0xc0400040`: the ints begin at offset16. With just these objects,
-native LINK places the second contribution at relative offset152, with
+doubles followed by three initialized ints has exactly 28 data bytes,
+flags `0xc0400040`: the ints begin at offset 16. With just these objects,
+native LINK places the second contribution at relative offset 152, with
 180 bytes of data VirtualSize. `/OPT:WIN98` and `/OPT:NOWIN98` leave those
 measurements unchanged.
 
 The unchanged stock ulldiv.obj has a **zero-byte** `.data` section with
 flags `0xc0500040`, requesting16-byte alignment. Insert that complete object
-between the two C objects and the second contribution moves to offset160;
-data VirtualSize becomes188. Place it first and the original152/180 results
-return. Place it last and the second contribution remains at152, while
-VirtualSize rounds up to192. All three stock-object toys retain its104-byte
+between the two C objects and the second contribution moves to offset 160;
+data VirtualSize becomes 188. Place it first and the original 152/180 results
+return. Place it last and the second contribution remains at 152, while
+VirtualSize rounds up to 192. All three stock-object toys retain its 104-byte
 ordinary CODE contribution. Their `.data` RVA consequently differs from
 the C-only toys; the reported offsets are relative to the prefix symbol.
 No object is edited and no alignment storage is declared in C.
@@ -10125,7 +10125,7 @@ Thus an initialized-data census that drops every zero-size input can miss
 real layout effects. This is not evidence for an invented owner or a general
 formula for the server's missing extent. In the actual server, the existing
 ulldiv/ullrem retention roots precede tzset; moving the code-free timeset
-root after them restores tzset's28 bytes at0x10034018. All192 production
+root after them restores tzset's28 bytes at 0x10034018. All 192 production
 compiler objects are unchanged. Linker-layout55 documents the coupled
 locale-table anchor, rejected alternatives and native output validation.
 
@@ -10141,25 +10141,25 @@ Four unchanged SP5 stock members contain two pairs of identical43-byte CODE
 COMDATs, flags `0x60101020`. The private _strncnt helpers in a_cmp.obj and
 a_map.obj have storage class3 and no fixups. Public __strdup and __mbsdup
 have storage class2, with identical complete bodies and three identical
-REL32 fixups at offsets11/18/31 to strlen/malloc/strcpy. These are complete
+REL32 fixups at offsets 11/18/31 to strlen/malloc/strcpy. These are complete
 object comparisons, including section size/flags and named fixup identities.
 No CRT function is reconstructed or modified.
 
 The previous canonical link forcibly selects mbsdup.obj despite zero
-__mbsdup input-fixup references. Both public labels fold to0x10023812.
-Its verbose trace reports86 bytes of ICF savings:43 for each pair.
+__mbsdup input-fixup references. Both public labels fold to 0x10023812.
+Its verbose trace reports 86 bytes of ICF savings:43 for each pair.
 Early selection of the actual days and exception tables changes both ICF
-survivors while savings remain86. The private helper moves from reference
-0x1002350a to0x1001f855, changing96 function bindings and13304 CODE bytes
+survivors while savings remain 86. The private helper moves from reference
+0x1002350a to 0x1001f855, changing96 function bindings and 13304 CODE bytes
 outside the relocation fields. Complete initialized-data improvements do
 not justify that executable-code regression.
 
 Remove only the unsupported /INCLUDE:__mbsdup root. With the two early table
-roots, native ICF again selects a_cmp's private helper at0x1002350a; savings
-are43. The actual _strdup body remains at0x10023812 with all43 reference
-bytes. Every remaining597 function label keeps its address; only the unused
-__mbsdup MAP alias disappears. All192 C objects and the stock archive are
-unchanged. The measured selected-member count becomes137 rather than138.
+roots, native ICF again selects a_cmp's private helper at 0x1002350a; savings
+are43. The actual _strdup body remains at 0x10023812 with all 43 reference
+bytes. Every remaining 597 function label keeps its address; only the unused
+__mbsdup MAP alias disappears. All 192 C objects and the stock archive are
+unchanged. The measured selected-member count becomes 137 rather than 138.
 
 This demonstrates that an extra identical input can affect a different
 folded pair's survivor. It does not establish a general ICF ordering rule
@@ -10187,22 +10187,22 @@ the later bulk arrays32 bytes and increases file differences3900->4820.
 Six exact operand gains alone do not justify that layout regression.
 
 The existing entity pointer occupies four bytes followed by a28-byte native
-alignment interval. All13 CODE references use its pointer value with addend0;
-`gm_Open` allocates and clears the pointed-to0xa900-byte region, not an enlarged
+alignment interval. All 13 CODE references use its pointer value with addend0;
+`gm_Open` allocates and clears the pointed-to 0xa900-byte region, not an enlarged
 pointer object. The actual sequence counter is another four-byte COMMON
 external with five addend0 references. Move its ORDER entry immediately after
 the entity pointer and use the tentative callback in its former early slot:
 the counter uses four bytes of the existing interval, leaving24 bytes before
 the next actual array. Every other mapped symbol keeps its prior address.
 No object extent, array bound, fake allocation or padding definition is added.
-The counter remains displaced from its reference0x10035408; its five operands
-still bind to its actual new owner0x1014c6c4. No formerly exact operand is lost.
+The counter remains displaced from its reference 0x10035408; its five operands
+still bind to its actual new owner 0x1014c6c4. No formerly exact operand is lost.
 
-Converting the18 other ordinary zero-initialized support placeholders to
+Converting the 18 other ordinary zero-initialized support placeholders to
 COMMON is an unpromoted control. They are not allocated by that control;
-data VirtualSize becomes0x173f7e0 instead of0x173f800, but the same4820 file
+data VirtualSize becomes 0x173f7e0 instead of 0x173f800, but the same 4820 file
 differences remain. This does not prove the original ownership of these
-placeholders or explain the missing3484-byte extent. Production leaves all18
+placeholders or explain the missing3484-byte extent. Production leaves all 18
 definitions unchanged. Only the real callback declaration and two ORDER
 positions are changed. Linker-layout59 records the accepted native build.
 
@@ -10223,21 +10223,21 @@ including every section size/flag, byte and named fixup. No function body,
 data type, object extent or stock member is reconstructed or patched.
 
 Native ORDER immediately after the already-correct panic pointer puts these
-owners at reference0x10034614/18/1c. Their20 complete DIR32 operand values
-then match (crash callback3, mode15, byte2), with zero lost exact operands.
-The nine bytes of real storage move the next COMMON from0x10034614 to
+owners at reference 0x10034614/18/1c. Their20 complete DIR32 operand values
+then match (crash callback3, mode15, byte 2), with zero lost exact operands.
+The nine bytes of real storage move the next COMMON from 0x10034614 to
 0x10034620: twelve bytes including native alignment. However the earlier
-32-byte `g_save_extra_field` array moves from0x10034660 to0x10034680, rather
-than0x1003466c. Its alignment consumes an additional20 bytes, moving every
+32-byte `g_save_extra_field` array moves from 0x10034660 to 0x10034680, rather
+than 0x1003466c. Its alignment consumes an additional20 bytes, moving every
 large array32 bytes. A gap between the clock's end and the first large array
 therefore does not prove capacity for a preceding insertion. This control
-has4745 file differences versus3881 before and is unpromoted.
+has4745 file differences versus 3881 before and is unpromoted.
 
 The actual dynamic-count and two family-count COMMONs are each four bytes.
 Move their three ORDER entries after the existing sequence counter in the
 entity-pointer interval. This removes exactly twelve allocated bytes before
 the save array and restores its old address. The existing pointer plus four
-real counters occupy20 of32 bytes before the next array, leaving12 bytes of
+real counters occupy20 of 32 bytes before the next array, leaving12 bytes of
 native alignment. No invented storage or padding declaration is added.
 The three moved game counters remain unmatched; their matched bodies and
 COFF fixups still bind to their actual owners. The other89 previous COMMON
@@ -10247,7 +10247,7 @@ Removing the three ordinary BSS definitions also changes tail alignment.
 Thirty-one other ordinary symbol addresses move twelve bytes earlier;
 thirty-six move sixteen bytes earlier after native alignment. All were
 already displaced, and no exact operand is lost. Data VirtualSize falls
-sixteen bytes to0x173f7f0; its deficit grows3484->3500. Raw file length stays
+sixteen bytes to 0x173f7f0; its deficit grows 3484->3500. Raw file length stays
 270336B. The resulting actual native file has3816 differences,65 fewer;
 whole-file identity remains incomplete. Linker-layout60 records promotion
 and complete verification. The unchanged18 support placeholders and unknown
@@ -10261,37 +10261,37 @@ rerun against the promoteddbcc build without deliberately updating it.
 
 ## 238. One real COMMON provider preserves storage sizes but changes physical order
 
-The earlier39-provider duplicate experiment in linker-layout50 did not
+The earlier 39-provider duplicate experiment in linker-layout50 did not
 move the original definitions. This control instead replaces every actual
 tentative definition with an extern in eight full C source files and moves
-the39 exact declarations into the existing first input, crt_imports.c.
+the 39 exact declarations into the existing first input, crt_imports.c.
 The shared tree-sitter parser identifies the declaration spans. Sizes/types
 are preserved, including the real GroupNode and DownloadState definitions.
 No duplicate provider, extra source object, enlarged array or padding
-declaration is introduced. The39 globals total24316040 bytes of COMMON.
+declaration is introduced. The 39 globals total 24316040 bytes of COMMON.
 
 Native SP5 compiles all nine full replacement objects. Each executable and
 initialized-data contribution is identical to its canonical counterpart,
 including complete section bytes/sizes/flags and named fixups. The provider
-has exactly39 COMMON symbols with their existing sizes; all eight previous
+has exactly 39 COMMON symbols with their existing sizes; all eight previous
 owners have none of those symbols left. Two same-file tentative declarations
 of the owner-window symbol are both replaced; they previously emitted one
 COMMON. A provider count checks the actual objects, not just source text.
 
 Use the shorter ORDER prefix through the actual save-extra field, leaving
-the late game COMMONs unordered. Native LINK allocates the39 globals in the
+the late game COMMONs unordered. Native LINK allocates the 39 globals in the
 reverse of the new provider's measured COFF symbol-table order. This is not
-their reference order: town records appear first at0x10034b00, while the
+their reference order: town records appear first at 0x10034b00, while the
 clock globals scatter into the late bulk region. A single provider therefore
 cannot reproduce the earlier separate-object prefix order merely by owning
-the same declarations. The control changes138 mapped symbols while keeping
-all597 function bindings,3499 live HIGHLOW sites and fixed CODE bytes.
-It gains no exact operand and loses none, including the26 corrected logging
-fields from59-60. All five complete value guards still pass.
+the same declarations. The control changes 138 mapped symbols while keeping
+all 597 function bindings,3499 live HIGHLOW sites and fixed CODE bytes.
+It gains no exact operand and loses none, including the 26 corrected logging
+fields from 59-60. All five complete value guards still pass.
 
-The file worsens3816->5226 differences and remains16384B short; unpromoted.
-Raw text differences2203->3643, readonly1270 unchanged, data62->32,
-relocations0 unchanged. Data VirtualSize grows44 to0x173f81c through native
+The file worsens3816->5226 differences and remains 16384B short; unpromoted.
+Raw text differences2203->3643, readonly 1270 unchanged, data62->32,
+relocations 0 unchanged. Data VirtualSize grows 44 to 0x173f81c through native
 allocation/alignment although no declaration byte is added. That is not
 proof of a missing owner. No production source/layout/tooling input changes.
 Linker-layout61 records the original-input census and evidence boundaries.
@@ -10362,8 +10362,8 @@ live HIGHLOW entries and a 24-byte relocation directory. The indexed read
 uses the real array; no diagnostic storage enters the server build.
 
 The one-byte COMMON begins eight bytes into `.data`. The measured larger
-arrays begin at offset32 through native alignment. Extent4064 gives data
-VS4096 and relocation VS26. Changing only that extent to4065 gives data
+arrays begin at offset 32 through native alignment. Extent4064 gives data
+VS4096 and relocation VS26. Changing only that extent to 4065 gives data
 VS4097 and relocation VS36. The still-larger controls retain VS36.
 This directly tests the page transition and cap proposed in linker-layout63,
 rather than inferring them from different import/function inputs.
@@ -10388,9 +10388,9 @@ initialized data compile, including every section byte/size/flag/named fixup.
 All other source objects stay unchanged.
 
 Native ORDER after the corrected crash-dump byte places zutil's existing
-one-byte empty-string BSS COMDAT at0x10034620 and the eight allocator fields
-at0x10034624..0x10034640. The literal requests four-byte section alignment;
-no new empty owner or gap declaration is supplied. All55 complete allocator
+one-byte empty-string BSS COMDAT at 0x10034620 and the eight allocator fields
+at 0x10034624..0x10034640. The literal requests four-byte section alignment;
+no new empty owner or gap declaration is supplied. All 55 complete allocator
 CODE operands and both zutil initializer pointers become exact. No formerly
 exact relocation field is lost.
 
@@ -10400,7 +10400,7 @@ again consumes more than the nominal36-byte insertion. Do not promote it.
 
 The accepted coupled control moves nine existing four-byte game fields
 from the early ORDER region into existing alignment intervals. Seven fill
-the28 bytes after the100-byte manufacturer table, ending exactly at the
+the 28 bytes after the 100-byte manufacturer table, ending exactly at the
 next dispatch table. Two use eight of the twelve bytes after the existing
 human-family counter, leaving four bytes before the next relationship
 array. These are actual unchanged definitions, not duplicate providers,
@@ -10410,11 +10410,11 @@ All bulk, clock, save-array, logging, and other protected COMMON bindings
 stay fixed. Seven remaining early fields move naturally as byte fields
 pack and DWORDs align; they were already displaced. Native ordinary BSS
 shrinks32 bytes because the allocator definitions leave it. Data VS becomes
-0x173f7d0,3532 short; the file remains16384 bytes short. Despite this extent
+0x173f7d0,3532 short; the file remains 16384 bytes short. Despite this extent
 deficit, actual operand/file agreement improves:57 gained/zero lost exact
 fields,161 fewer text differences and eight fewer data differences.
 Native CMake reproduces the validated candidate exactly, with one source
-object changed and191 other direct inputs unchanged, including EXP.
+object changed and 191 other direct inputs unchanged, including EXP.
 Linker-layout65 records the accepted build and complete verification.
 
 Evidence: `.scratch/native-allocator-common/{probe.py,validate.py,shapes.json,
@@ -10427,16 +10427,16 @@ an explicit current candidate path.
 
 The three definitions at the end of `gm_Open.c` occupy twelve ordinary
 BSS bytes: `g_stream_pool`, `g_stream_count`, `g_connection_counter`, each
-four bytes at object offsets0/4/8. Their reference addresses34670/34678/3467c
-give incompatible section-base votes34670 and34674. The desktop IDA
+four bytes at object offsets 0/4/8. Their reference addresses34670/34678/3467c
+give incompatible section-base votes34670 and 34674. The desktop IDA
 decompilation guesses `_DWORD dword_10034670[2]`; that guess alone does not
 establish an eight-byte pool definition.
 
-All three direct live HIGHLOW references to this pool point at34670,
+All three direct live HIGHLOW references to this pool point at 34670,
 at CODE addresses10008e20/100090ab/1000921c. None targets34674..34677.
 The complete `m_PoolAlloc` body (270 bytes, followed by two native NOP
-alignment bytes) and137-byte `m_pool_free` body dereference
-one pointer word through the supplied root. Their accesses at offsets4/8/12
+alignment bytes) and 137-byte `m_pool_free` body dereference
+one pointer word through the supplied root. Their accesses at offsets 4/8/12
 belong to the separately allocated `BlockNode`, not a second root word.
 This establishes the observed one-word access contract, without proving the
 complete original root extent or excluding other indirect users. Retain the
@@ -10449,7 +10449,7 @@ with externs. Four complete objects preserve executable and initialized
 data bytes, sizes, flags and named fixups. Total ordinary BSS stays twelve
 bytes, split into three four-byte contributions. Pool/count/handler move
 within displaced late BSS, but no full operand gains or loses exactness and
-whole-file differences remain3647. Caller location is insufficient evidence
+whole-file differences remain 3647. Caller location is insufficient evidence
 of original translation-unit ownership; do not promote this rearrangement.
 
 The separately measured server-stop flag is a useful native repair:
@@ -10458,10 +10458,10 @@ existing `server.c` owner. It emits an external four-byte COMMON (section0,
 storage class2,value4); all complete executable/initialized contributions
 are unchanged. One ORDER entry before the clock run binds it at reference
 10034680. The existing four clock fields move together by four bytes and
-retain relative offsets0/4/8/12. This matters because clock CODE uses
+retain relative offsets 0/4/8/12. This matters because clock CODE uses
 `g_current_year+4/+8/+12` across the neighboring declared scalars. Moving
 year alone would break that contract. The sixteen-byte run still fits before
-the unchanged slot table at100346a0.
+the unchanged slot table at 100346a0.
 
 Seven complete flag operands become exact; none previously exact is lost.
 Those fields remove28 differing CODE bytes. Clock operands add26 differing
@@ -10499,15 +10499,15 @@ output `.data`; the last row summarizes three separate controls.
 | Explicit `{0}` in default section | 2000 / 2004 / 2008 / 2048 | 76 |
 | Tentative under `.data$G`, `.data`, or `.data$0` | 3000 / 3004 / 2000 / 3008 | 64 + 12 |
 
-The COMMON array receives32-byte alignment and adds24 native padding
-bytes. All ordinary array variants emit exactly64 uninitialized bytes,
-flags0xc0300080. A suffixed `.bss` contribution follows default COMMONs;
+The COMMON array receives32-byte alignment and adds 24 native padding
+bytes. All ordinary array variants emit exactly 64 uninitialized bytes,
+flags 0xc0300080. A suffixed `.bss` contribution follows default COMMONs;
 an unsuffixed ordinary `.bss` contribution precedes the late COMMON.
 Thus a suffix can preserve game order while placing CRT COMMONs on the
 wrong side of the game block. Ordinary default BSS is a distinct route.
 
 The `.data`-named uninitialized controls emit LNK4078 for conflicting
-attributes. Native LINK creates two `.data` sections:64B at RVA2000 and12B
+attributes. Native LINK creates two `.data` sections:64B at RVA2000 and 12B
 at RVA3000, both with zero raw bytes. They do not match the reference's
 single data section. Report both extents rather than treating the first
 name lookup as the total. The extra virtual section page changes relocation
@@ -10532,13 +10532,13 @@ eight existing source owners to a scratch data provider. The old definitions
 become externs through the shared tree-sitter declaration parser. All eight
 complete native objects preserve executable/initialized-data bytes, sizes,
 flags and named fixups; other COMMONs keep their sizes. There is one provider
-per moved symbol, no duplicate definition, and24316040 logical bytes.
+per moved symbol, no duplicate definition, and 24316040 logical bytes.
 
 A single data-only C provider gives each scalar an explicit zero and each
 array/struct `{0}`. Native CL emits no CODE or initialized data, only a
-24316052-byte ordinary BSS contribution, flags0xc0400080. The extra12 bytes
-are native internal alignment. Clock offsets remain0/4/8/12, but the first
-large array starts at offset16 rather than the reference's32-byte separation.
+24316052-byte ordinary BSS contribution, flags 0xc0400080. The extra12 bytes
+are native internal alignment. Clock offsets remain 0/4/8/12, but the first
+large array starts at offset 16 rather than the reference's32-byte separation.
 The original COMMON array alignment is not preserved by this ownership
 change. Native LIB packs the complete object; LINK selects it after stock
 LIBCMT. All original stock libraries remain unchanged.
@@ -10554,7 +10554,7 @@ physical game allocation reverses the actual member load order.
 
 Reference-order roots reverse game allocation and break the clock's
 0/4/8/12 relationship; the full validator rejects that case before value
-guards. Reversed roots restore the39-field sequence, but archive position
+guards. Reversed roots restore the 39-field sequence, but archive position
 determines which side of the game block holds CRT COMMONs. Merely obtaining
 the game sequence is insufficient. Linker-layout68 records the complete
 negative controls and the unchanged canonical deliverable.
@@ -10611,7 +10611,7 @@ Do not keep the resulting empty source merely to retain a compiler input.
 Lint correctly reports E001 for that unannotated file. Remove the source
 and both CMake references instead. This leaves 191 C objects and the native
 export object. Removing the empty object changes the Rich compiler record
-`(id=10,build=8966)` from count192 to191, changes 65 header bytes including
+`(id=10,build=8966)` from count192 to 191, changes 65 header bytes including
 the native checksum, and preserves every byte after the 4096-byte header
 region. Both forms have `e_lfanew=0xe0`; neither resolves the established
 Rich-free-reference mismatch. No object timestamp or header is patched.
@@ -10642,10 +10642,10 @@ all runtime section sizes, flags, bytes and symbol-bound relocations:
 `spiel.c`, `spiel2.c`, `spiel622.c`, `server2.c`, `ProcessSendData.c`,
 `m_alloc.c`, `loadsave3.c`, `cm_ExChangeAttribute.c`, `rdata_restore.c` and
 zlib's `deflate.c`. Complete object hashes differ because the native object
-metadata differs. This is ten controls, not proof for all191 translation units.
+metadata differs. This is ten controls, not proof for all 191 translation units.
 Do not change the default compiler profile on that evidence alone.
 
-Two full native links reuse the same192 direct inputs and unchanged archives,
+Two full native links reuse the same 192 direct inputs and unchanged archives,
 changing only the tool runtime. Original Microsoft MSVCRT 6.0.8168.0 and the
 official VC6 redistributable's 6.0.8797.0 emit identical complete DLLs. They
 preserve every function binding and nonfixup CODE byte while changing import
@@ -10669,10 +10669,10 @@ results from the preceding work.
 
 The pending runtime smoke bootstrap now has a concrete root fix: link-layout74
 and `docs/rebrew-patches/smoke-profile-bootstrap.patch` record recipe-only
-`--fixture` selection, nonzero-exit/stale-output rejection and167 offline
+`--fixture` selection, nonzero-exit/stale-output rejection and 167 offline
 checks. These checks mock compilation and establish CLI/gating behavior;
 they are not new observations of CL's code generation. The installed pinned
-wheel is01e4e8bd...e49bc3; real image smoke and canonical native linking remain
+wheel is 01e4e8bd...e49bc3; real image smoke and canonical native linking remain
 pending, with the production compiler and target archive unchanged.
 
 ## 248. Link-only runtime selection preserves every existing compiler input
@@ -10685,7 +10685,7 @@ golden. This is a fixed smoke fixture, not a new all-source CL comparison.
 Keep production CL on plain SP5 and opt into Microsoft MSVCRT for LINK only
 through the existing bridge/overlay mechanism.
 
-Both canonical promotions in link-layout75 reuse all191 C objects and the
+Both canonical promotions in link-layout75 reuse all 191 C objects and the
 native EXP without recompilation or any complete-input hash change. Their
 51-byte file improvement therefore comes from native import layout, not a
 new C statement shape. Stock LIBCMT remains unchanged and supplies the CRT.
@@ -10693,16 +10693,16 @@ No reversed CRT bodies, empty directive-only C file, guessed golden, enlarged
 storage, object patch or postlink step is added.
 
 Reference-order and reversed real IAT roots are distinct controls. Under
-Microsoft's runtime the reversed16-root WinSock order repairs all16 IAT slots
+Microsoft's runtime the reversed16-root WinSock order repairs all 16 IAT slots
 and eleven complete operand fields; the same root order under Wine was worse.
 Rooting RtlUnwind early also retains its actual code thunk early, moving281
 function bindings. Removing that explicit root preserves its natural CRT
-reference and restores the semantic checks, but the remaining80-root orders
+reference and restores the semantic checks, but the remaining 80-root orders
 still worsen whole-file agreement. Preserve these negative controls rather
 than treating an import count or normalized match as exact emitted bytes.
 
 Evidence and final fresh262/262 function verification are in link-layout75.
-The unresolved917 data fields with shared0x1200 displacement are placement
+The unresolved917 data fields with shared 0x1200 displacement are placement
 evidence, not a compiler-shape diagnosis or a proven missing allocation.
 
 
@@ -10751,16 +10751,16 @@ the fail-closed relocation validator. Its caller now supplies the shared map,
 function VA and IAT region, and counts all four bytes in a valid slot for its
 historical relocation metric. The validator is unchanged. A wrong catalogued
 DIR32 target and a wrong REL32 callee remain rejected; failed catalogs return
-an infrastructure error. Root regressions are4failed/6passed before and10passed
+an infrastructure error. Root regressions are4failed/6passed before and 10passed
 after;135 focused tests, Ruff/check/format and targeted mypy pass.
 
 The direct sibling root fix is preserved in
 `docs/rebrew-patches/probe-relocation-context.patch` and applied to the pinned
 9123ca68 source. Installed noneditable wheel SHA256
 `17afd012e0bac10dbc156acee82be0c0ee168afe04808ddb879782ccbcbaa2e8`
-changes only `probe.py` and RECORD versus the previous01e4e8bd wheel. Actual
+changes only `probe.py` and RECORD versus the previous 01e4e8bd wheel. Actual
 Pinned-image probes now report290/290 for both valid forms,404/404 for the SDK
-initializer, and287/290 for a deliberate wrong-global control. A repeated
+initializer, and 287/290 for a deliberate wrong-global control. A repeated
 SDK probe leaves both managed metadata files unchanged. The first whole-run
 metadata guard observed a concurrent `verify` writer; that is not evidence
 that `probe` writes STATUS. One later ephemeral compile hit its existing
@@ -10775,9 +10775,9 @@ regressions, focused test/mypy logs, installed wheel audit and metadata hashes.
 C-shape249's full merge was rejected because fourteen explicit string/blob
 owners were emitted before the remaining automatic literal COMDATs. Their
 arrays were a fragment-level reconstruction of the original pool. Restore
-actual live literals instead: replace the28 crash-message blob offsets by
+actual live literals instead: replace the 28 crash-message blob offsets by
 their exact terminated strings, the four crash-tail strings by their contents,
-and the11 handler/message arrays and `wt` mode by the same live literal values.
+and the 11 handler/message arrays and `wt` mode by the same live literal values.
 The log-level table,96-byte file-name table,newline/default-name owners and
 all real mutable/BSS globals retain their definitions. No new storage, unused
 literal, pointer table or padding is introduced.
@@ -10788,10 +10788,10 @@ relocation offsets/kinds equal the previous complete control. The casts,
 initializer scheduling, joins and flag logic stay as measured; this restores
 pool representation rather than changing control flow.
 
-The full linked pool from0x10027078 through0x100274a8 matches the reference
+The full linked pool from 0x10027078 through 0x100274a8 matches the reference
 exactly. All four runtime sections equal the accepted baseline byte for byte,
 including every relocation operand and table byte. Fourteen explicit data
-aliases disappear and44 native live-literal COMDAT symbols replace them;
+aliases disappear and 44 native live-literal COMDAT symbols replace them;
 surviving bindings remain fixed. Do not describe these names as unchanged.
 Data metadata still describes the existing byte extents, which are verified
 at their actual reference VAs; no fake C array is retained solely for a name.
@@ -10800,7 +10800,7 @@ function marker across targets, and retain actual global markers.
 
 The scratch native DLL is c805c9c5aec84c522f27931d98980bd236755e81b97f755dd58f6bda1187b1a9,
 2734 overlapping differences,16384 bytes short. Rich's actual C-input count
-changes189→186 and its key becomes0x4662de1a; the PE offset remains0xe0 under
+changes 189→186 and its key becomes 0x4662de1a; the PE offset remains 0xe0 under
 the native formula. This is one more header-byte gain and an authentic source
 cohort, not complete-file recovery. Section79 of link-layout records the
 complete runtime/semantic guards and production validation.
@@ -10855,26 +10855,26 @@ match the existing objects; local numeric label renaming preserves destinations.
 
 The first full link nevertheless moves35 functions. `cm_RouteCommand`, placed
 in the command_c directory, records the real `lobbycommands.c` path in its live
-logging string and belongs later at0x10014ca0. Its272-byte span moves to
-0x10010530 and shifts the34 intervening functions by272 bytes. The linked
+logging string and belongs later at 0x10014ca0. Its 272-byte span moves to
+0x10010530 and shifts the 34 intervening functions by 272 bytes. The linked
 candidate07245cb2...651fc94 has24417 differences. Correct object code alone
 is insufficient proof of a whole-TU source grouping. Exclude this other-module
 handler rather than adding artificial code order or changing annotations.
 
-The68-handler cohort preserves all four complete runtime sections byte for
-byte after native LINK. All597 function MAP bindings,3499 HIGHLOW sites,100
+The 68-handler cohort preserves all four complete runtime sections byte for
+byte after native LINK. All 597 function MAP bindings,3499 HIGHLOW sites,100
 import identities/hints/slots,surviving public bindings,137 stock CRT members
 and five value guards pass. Native C count186→119, Rich keyb162ba9f and PE
 f0 yield candidate3cae8443...526339f,2735 differences: one more header byte
-than the2734-difference production baseline. Rich agreement is nonmonotonic
+than the 2734-difference production baseline. Rich agreement is nonmonotonic
 while input grouping changes; no new byte gain is claimed.
 
 All-target lint then exposes nine unique W030 warnings: these shared functions'
 GOLDTL VAs do not ascend in the server's source order. Do not remove accepted
 Gold identities, mute W030 or alter correct server bodies to hide this. The
-attempted promotion is rejected; all68 fragments are restored from exact
-snapshots and the new command.c removed. All114 original identity/global
-markers are preserved. Restored all-target lint returns4116 passed per target,
+attempted promotion is rejected; all 68 fragments are restored from exact
+snapshots and the new command.c removed. All 114 original identity/global
+markers are preserved. Restored all-target lint returns 4116 passed per target,
 zero errors and warnings. Both native controls remain scratch evidence only.
 Future compatible cohorts must satisfy every annotated target's source order
 before promotion. LINK-layout81 records the complete controls and restoration.
@@ -10882,8 +10882,8 @@ before promotion. LINK-layout81 records the complete controls and restoration.
 
 ## 253. Adjacent compatible command cohorts preserve code and shared annotation order
 
-Partition the68 measured command fragments at each annotated-module VA descent.
-The resulting contiguous groups contain13,1,7,2,15,6,3 and21 functions. Each
+Partition the 68 measured command fragments at each annotated-module VA descent.
+The resulting contiguous groups contain13,1,7,2,15,6,3 and 21 functions. Each
 part ascends for SERVER and every GOLD/GOLDTL identity it carries; no identity
 is deleted or rewritten. Keep the singleton `cm_ExAllocRaum.c` unchanged and
 restore the other67 fragments as seven genuine command source cohorts.
@@ -10900,13 +10900,13 @@ relocation offsets/kinds/targets. All native compile controls are warning-free.
 
 The final source files preserve the controlled compiler token streams after
 resolving includes and excluding comments; C89 comment conversion retains all
-annotation markers. Seven files preserve110 markers, plus four unchanged in
+annotation markers. Seven files preserve 110 markers, plus four unchanged in
 the singleton, for114 total. The typed callback forms and distinct row-view
-names from252 remain as measured. All three targets lint4056 passed with zero
+names from 252 remain as measured. All three targets lint4056 passed with zero
 errors and warnings, and an independent per-module order audit passes.
 
 Native LINK yields f12b99461f19ae44e29e44390865d2917ed7633241f1d206eb83e74fe446c6d7,
-2563 differences rather than2734, with every runtime section byte unchanged.
+2563 differences rather than 2734, with every runtime section byte unchanged.
 C producer count126 replaces186 and the native PE offset becomes the stock e8;
 LINK-layout82 records the header prediction and complete semantic gates.
 These are real source inputs, not empty objects, extra producers or padding.
@@ -11061,10 +11061,10 @@ three pool-address pushes, four count accesses and two connection-counter
 accesses. All nine are live `.text` HIGHLOW fields, and all current COFF
 addends are zero. None points into 0x10034674..0x10034677. Six root accesses in
 the two allocator contracts each touch one four-byte word at offset zero;
-node accesses at offsets4/8/12 refer to separately allocated blocks.
+node accesses at offsets 4/8/12 refer to separately allocated blocks.
 
 Source and metadata names/addresses/types therefore have no proved alias
-error. The existing 12-byte section places pool/count/counter at offsets0/4/8,
+error. The existing 12-byte section places pool/count/counter at offsets 0/4/8,
 while their original addresses are34670/34678/3467c. Original co-location and
 the intervening word's owner/extent remain unproved. IDA explicitly marks its
 two-DWORD pool type as guessed. An original allocation/type or symbol/COFF
@@ -11182,20 +11182,20 @@ measured linked-client gain. Source `src/GOLDTL.fcn_00405080.c`; scratch
 
 ## 261. Keep the sound scale temporary double until its final float store
 
-Positional sound constructor TL0x418c80 initially emits153 bytes (18/153).
+Positional sound constructor TL 0x418c80 initially emits153 bytes (18/153).
 Initializing the source result to null and nesting the work behind all three
-pointer guards recovers150 bytes and123/150; it also preserves the original
+pointer guards recovers150 bytes and 123/150; it also preserves the original
 non-null allocated-slot result when voice->entry is missing. Computing a float
 scaled local before object stores reaches142/150. A double local, cast to float
-only when writing range, emits the native late fstp and matches150/150.
-Applying that double-local shape to request TL0x4193f0 resolves its long-standing
-eight-byte rotation:132/132 instead of124/132. No compiler flags changed.
+only when writing range, emits the native late fstp and matches 150/150.
+Applying that double-local shape to request TL 0x4193f0 resolves its long-standing
+eight-byte rotation:132/132 instead of 124/132. No compiler flags changed.
 
 Symbolic extern const double g_662b40 replaces raw scale addresses and preserves
-both matches (constructor six relocations, request four). Native TL0x662b40 and
-GOLD0x5eba10 contain identical eight-byte5040038e78029a3f (1/39.37). Declaration
+both matches (constructor six relocations, request four). Native TL 0x662b40 and
+GOLD 0x5eba10 contain identical eight-byte 5040038e78029a3f (1/39.37). Declaration
 is a read-only view with unresolved storage owner, not a new allocation. Direct
-literal multiplication and division by39.37 instead schedule the float store
+literal multiplication and division by 39.37 instead schedule the float store
 early,109/132; neither literal variant is applied. The original source spelling
 of the scale is unestablished. These results are staged, not canonical claims.
 
@@ -11211,19 +11211,19 @@ Shared sound resolution accepted2026-10-04: TL constructor150/150 and request132
 
 ## 262. Separate float distance assignment from the positional sound scale
 
-TL4190d0 / GOLD417b10 body is466 bytes, ending at4192a1/417ce1,
+TL4190d0 / GOLD417b10 body is 466 bytes, ending at 4192a1/417ce1,
 followed14 NOPs. Earlier returns are internal paths; branches419231/419246
 remain in the function. A double distance local produces470 bytes/133
 positional agreement. A float local with combined sqrt-and-scale expression
 produces466/458; separating `distance = sqrt(z*z+y*y+x*x);` from
-`distance *= g_662b40;` matches466/466. The native cleanup of the three
+`distance *= g_662b40;` matches 466/466. The native cleanup of the three
 coordinate x87 values precedes the scale multiplication. No flags or asm.
 
 The formula preserves linear and curved volume terms, clamps only the
-linear integer term at zero, averages them with0.5f and uses threshold5.
+linear integer term at zero, averages them with 0.5f and uses threshold5.
 Existing/new-voice paths and the retention/replay controls follow native
-reload ordering. Shared SOUND_SOURCE layout remains84 bytes. Native slot
-checks reproduce all466 bytes in both clients with19 relocations and reject
+reload ordering. Shared SOUND_SOURCE layout remains 84 bytes. Native slot
+checks reproduce all 466 bytes in both clients with 19 relocations and reject
 11 wrong camera/scale/call bindings per client. Retain the original VA in
 the control catalog so DIR32 mismatch checking does not become an
 uncatalogued-address fallback; override both decorated and undecorated names.
@@ -11234,68 +11234,68 @@ CRT classification gate; full after-function gate is still required.
 ### 263. Typed DirectInput prefix calls preserve indexed-vtable code
 
 TL4117c0/4117f0: INPUT_DEVICE pointer plus typed stdcall Acquire/Unacquire
-members at0x1c/0x20 emits the same42-byte body as raw int-pointer vtable indices7/8.
+members at 0x1c/0x20 emits the same 42-byte body as raw int-pointer vtable indices7/8.
 Shared header canonical aliases preserve Gold410710/410740, also42 bytes.
-Separate INPUT_SYSTEM vtable (CreateDevice0xc) and INPUT_DEVICE vtable prefix
-(SetProperty0x18, SetDataFormat0x2c, Event0x30, Cooperative0x34) remove the old
+Separate INPUT_SYSTEM vtable (CreateDevice 0xc) and INPUT_DEVICE vtable prefix
+(SetProperty 0x18, SetDataFormat 0x2c, Event 0x30, Cooperative 0x34) remove the old
 misused Com/placeholder types without changing TL411820’s738-byte body.
 SDK DIPROPDWORD replaces the flat20-byte PropDword: four header DWORD fields
-under diph, dwData at16, SetProperty takes &dipdw.diph; const GUID/DIDATAFORMAT
-objects passed by address preserve all51 relocations. Typed Release ULONG
+under diph, dwData at 16, SetProperty takes &dipdw.diph; const GUID/DIDATAFORMAT
+objects passed by address preserve all 51 relocations. Typed Release ULONG
 callbacks preserve shared cleanup107 bytes, including its unusual keyboard-release
 then mouse-clear path. Prefix sizes describe recovered views, not complete SDK
 interface vtables or backing allocation sizes. Thirteen compile-time layout
-assertions pass both MSVC6 profiles. Canonical positive binding audits and52
+assertions pass both MSVC6 profiles. Canonical positive binding audits and 52
 wrong-slot/call controls pass. Receipts .scratch/goal-input-types/. Full all-target
-gate69842 accepted with exactly2 changed TL rows and2 new Gold rows; no losses.
+gate69842 accepted with exactly 2 changed TL rows and 2 new Gold rows; no losses.
 Header filename/types are reconstructed.
 
 ## Biased table displacement from a zero-based read view
 
-At TL41a950, `((const int*)0x662bf8)[i - 0x14]`, guarded to indices20..31, folds the 80-byte subtraction into the native indexed displacement: `mov eax,[eax*4+0x662ba8]`. The complete25-byte function remains EXACT under the configured MSVC6 profile. The older `((int*)0x662ba8)[i]` emits identical bytes but describes a base within unrelated strings. The new spelling describes only the actual accessed view, without defining storage or claiming a complete backing allocation. Scratch probe: .scratch/goal-getter-extents/pixel-view-test.json; native evidence: .scratch/goal-input-drain/table-helper-native.json.
+At TL41a950, `((const int*)0x662bf8)[i - 0x14]`, guarded to indices20..31, folds the 80-byte subtraction into the native indexed displacement: `mov eax,[eax*4+0x662ba8]`. The complete 25-byte function remains EXACT under the configured MSVC6 profile. The older `((int*)0x662ba8)[i]` emits identical bytes but describes a base within unrelated strings. The new spelling describes only the actual accessed view, without defining storage or claiming a complete backing allocation. Scratch probe: .scratch/goal-getter-extents/pixel-view-test.json; native evidence: .scratch/goal-input-drain/table-helper-native.json.
 
 ## Pointer-typed conditional CRT tail wrapper
 
-At TL42e520/Gold42ecf0, changing `int fcn_0042e520(int a)` plus `int fcn_0066080a(int)` to `char*` argument/return types for both leaves the complete19-byte native body unchanged: byte flag load/test, input pointer returned on true, otherwise a REL32 tail jump to the CRT helper. Native bodies have13 trailing NOPs outside the function. Scratch probes .scratch/goal-net-stats/next-wrapper-typed{,-gold}-test.json are RELOC19; typed COFF audits map native flag/callee and reject four wrong-address+4 controls across both builds (.scratch/goal-net-stats/next-wrapper-bindings.json). Canonical source not changed in this probe. No new CRT implementation.
+At TL42e520/Gold42ecf0, changing `int fcn_0042e520(int a)` plus `int fcn_0066080a(int)` to `char*` argument/return types for both leaves the complete 19-byte native body unchanged: byte flag load/test, input pointer returned on true, otherwise a REL32 tail jump to the CRT helper. Native bodies have13 trailing NOPs outside the function. Scratch probes .scratch/goal-net-stats/next-wrapper-typed{,-gold}-test.json are RELOC19; typed COFF audits map native flag/callee and reject four wrong-address+4 controls across both builds (.scratch/goal-net-stats/next-wrapper-bindings.json). Canonical source not changed in this probe. No new CRT implementation.
 
 ## Additional unused CRT prototypes can disturb a large server function
 
-Adding two legacy client-only char*-returning function prototypes to crt_globals.h makes server gm_AllocSpieler10018850 lose8 bytes within its3689-byte body (NEAR3681/3689); moving those prototypes from top to end leaves the same8-byte loss. Full308/158-byte stock attribution then establishes the real SDK function _strupr. Restoring the original header declarations and binding the two legacy names to _strupr via preprocessor aliases, using string.h, restores RELOC3689/3689 without changing gm_AllocSpieler source. Both client wrappers stillRELOC19; final all-target gate pending. Receipts server-order-repair.json,server-sdk-alias-repair.json,full-runtime-attribution.json in .scratch/goal-vfs-casefold. This is compiler context sensitivity, not a Rebrew defect.
+Adding two legacy client-only char*-returning function prototypes to crt_globals.h makes server gm_AllocSpieler10018850 lose8 bytes within its 3689-byte body (NEAR3681/3689); moving those prototypes from top to end leaves the same 8-byte loss. Full308/158-byte stock attribution then establishes the real SDK function _strupr. Restoring the original header declarations and binding the two legacy names to _strupr via preprocessor aliases, using string.h, restores RELOC3689/3689 without changing gm_AllocSpieler source. Both client wrappers stillRELOC19; final all-target gate pending. Receipts server-order-repair.json,server-sdk-alias-repair.json,full-runtime-attribution.json in .scratch/goal-vfs-casefold. This is compiler context sensitivity, not a Rebrew defect.
 
 ## Typed table view retains signed integer address iteration
 
-Count/reset probes for TL4737e0/4737c0 andGold476c80/476c60 replace raw start/end constants with `(int)g_1011980` and `(int)(g_1011980 + 6)`, retain an int address iterator, and use `sizeof(Pair0c_1011980)` plus typed key/val accesses. Configured Win32 MSVC6 still emits the native signed JL loop, stride12, end addend72. Complete count25/reset27 bodies are RELOC in bothclients, with two DIR32 relocations for base/end. Native binding checks reject four wrong-table+4 controls. This proves the observed table view without inventing a definition or backing owner; the legacy datatype name and unobserved third word remain unresolved. Evidence .scratch/goal-display-counters/{count,reset}-view-{tl,gold}.json andview-bindings.json. No canonical source changed in these probes.
+Count/reset probes for TL4737e0/4737c0 andGold476c80/476c60 replace raw start/end constants with `(int)g_1011980` and `(int)(g_1011980 + 6)`, retain an int address iterator, and use `sizeof(Pair0c_1011980)` plus typed key/val accesses. Configured Win32 MSVC6 still emits the native signed JL loop, stride 12, end addend72. Complete count25/reset27 bodies are RELOC in bothclients, with two DIR32 relocations for base/end. Native binding checks reject four wrong-table+4 controls. This proves the observed table view without inventing a definition or backing owner; the legacy datatype name and unobserved third word remain unresolved. Evidence .scratch/goal-display-counters/{count,reset}-view-{tl,gold}.json andview-bindings.json. No canonical source changed in these probes.
 
 
 ### Byte parameter suppresses integer extension at the call boundary
 
-Gold40dd90 native loads `mov cl,[eax]`, pushes ECX, calls453890, and returns1 (complete21 bytes). The callee453890 reads only byte[esp+4]. Existing caller declares the callee parameter int, so an unsigned-char expression requires extension and mismatches. A scratch prototype `int __cdecl fcn_00453890(unsigned char)` preserves the existing expression and emits all21 native bytes after resolving its sole REL32. Wrong callee+4 rejects with the correct-native sentinel retained; IAT wildcard disabled. This proves a byte-width parameter for this call, not original signedness or the callee return type. Scratch only; no canonical source/header/metadata edit. Evidence .scratch/goal-small-extents/next-gold-{40dd90-probe,40dd90-bindings,453890-native}.json.
+Gold40dd90 native loads `mov cl,[eax]`, pushes ECX, calls453890, and returns 1 (complete 21 bytes). The callee453890 reads only byte[esp+4]. Existing caller declares the callee parameter int, so an unsigned-char expression requires extension and mismatches. A scratch prototype `int __cdecl fcn_00453890(unsigned char)` preserves the existing expression and emits all 21 native bytes after resolving its sole REL32. Wrong callee+4 rejects with the correct-native sentinel retained; IAT wildcard disabled. This proves a byte-width parameter for this call, not original signedness or the callee return type. Scratch only; no canonical source/header/metadata edit. Evidence .scratch/goal-small-extents/next-gold-{40dd90-probe,40dd90-bindings,453890-native}.json.
 
-Canonical follow-up (2026-10-04): DISPLAY_COUNTER uses id/value plus four uninterpreted bytes, retains12-byte stride, and replaces duplicate local record views. All18 updater/renderer/initializer/caller objects reproduce their old bytes; typed relocations are identical except the explicit Rebrew CLI reset/count names. Reset/count remain complete27/25 native-byte RELOC matches with correct table base/end and four wrong-address controls rejected. Signed integer-address iteration remains deliberate. This is object/codegen evidence; full shared-header regression40361 remains pending. Receipts goal-display-counters/{canonical-bindings,users-object-audit}.json.
+Canonical follow-up (2026-10-04): DISPLAY_COUNTER uses id/value plus four uninterpreted bytes, retains 12-byte stride, and replaces duplicate local record views. All 18 updater/renderer/initializer/caller objects reproduce their old bytes; typed relocations are identical except the explicit Rebrew CLI reset/count names. Reset/count remain complete 27/25 native-byte RELOC matches with correct table base/end and four wrong-address controls rejected. Signed integer-address iteration remains deliberate. This is object/codegen evidence; full shared-header regression40361 remains pending. Receipts goal-display-counters/{canonical-bindings,users-object-audit}.json.
 
 
 ### Existing byte/constant callers can share a byte-width prototype
 
-TL450a00 ignores its incoming flag. Replacing its void(void) definition with void(unsigned char flag), adding (void)flag, and using one canonical prototype preserves all38 object/native bytes. TL40eca0 previouslydeclared int(char); its return value is unused and wrapper returns1, so the canonical void(unsigned char) declaration preserves its21 bytes. Constant0/1 callers previouslyusing void(int) keep their argument pushes. All11 affected build objects are byte-identical, with typed relocation records identical after normalizing only the corrected TL40ec60 callee identifier from453890 to450a00. Six independently resolved wrong-address controls reject. One callerTL43ace0 uses E9 tail transfer, not E8 CALL; the initial audit assuming onlyE8 failed and was corrected, without changing C. This establishes codegen/interface compatibility, not original signedness or return-type attestation. Evidence goal-client-call-api/{canonical-bindings,users-object-audit,users-object-audit-attempt1}.json; full67476 remains pending.
+TL450a00 ignores its incoming flag. Replacing its void(void) definition with void(unsigned char flag), adding (void)flag, and using one canonical prototype preserves all 38 object/native bytes. TL40eca0 previouslydeclared int(char); its return value is unused and wrapper returns 1, so the canonical void(unsigned char) declaration preserves its 21 bytes. Constant0/1 callers previouslyusing void(int) keep their argument pushes. All 11 affected build objects are byte-identical, with typed relocation records identical after normalizing only the corrected TL40ec60 callee identifier from 453890 to 450a00. Six independently resolved wrong-address controls reject. One callerTL43ace0 uses E9 tail transfer, not E8 CALL; the initial audit assuming onlyE8 failed and was corrected, without changing C. This establishes codegen/interface compatibility, not original signedness or return-type attestation. Evidence goal-client-call-api/{canonical-bindings,users-object-audit,users-object-audit-attempt1}.json; full 67476 remains pending.
 
 
 ### Random-helper return declarations affect copies before widening (2026-10-04)
 
-Scratch probes with the configured MSVC6 PP profile show that TL caller 0x4faa90 emits `mov di,ax` followed by an `and edi,0xffff` when its callee is declared `unsigned short(int)`. Declaring the same callee `int(int)` and explicitly casting the result to unsigned short emits `mov edi,eax` followed by the same mask instead: the body shrinks from85 to84 bytes. The explicit cast preserves the arithmetic value but does not reproduce the return-width hint. In the boolean caller0x4a9000, an explicit unsigned-short result cast does restore the original64 object bytes. The pointer-typed caller0x4ad1c0 also preserves all228 object bytes and typed relocations after using an integer return plus an explicit pointer cast at the use. These are object-to-object experiments, not new native caller promotions; the original callers have accepted RELOC baseline receipts.
+Scratch probes with the configured MSVC6 PP profile show that TL caller 0x4faa90 emits `mov di,ax` followed by an `and edi,0xffff` when its callee is declared `unsigned short(int)`. Declaring the same callee `int(int)` and explicitly casting the result to unsigned short emits `mov edi,eax` followed by the same mask instead: the body shrinks from 85 to 84 bytes. The explicit cast preserves the arithmetic value but does not reproduce the return-width hint. In the boolean caller 0x4a9000, an explicit unsigned-short result cast does restore the original 64 object bytes. The pointer-typed caller 0x4ad1c0 also preserves all 228 object bytes and typed relocations after using an integer return plus an explicit pointer cast at the use. These are object-to-object experiments, not new native caller promotions; the original callers have accepted RELOC baseline receipts.
 
-The helper itself does not establish its unique original prototype: an int parameter narrowed to an unsigned-short local range emits the same32 native bytes as the existing unsigned-short parameter form for server1001a0d0, TL42e410 and Gold42ec00. Each complete native comparison binds its stock rand operand, disables IAT wildcards, and rejects a wrong+4 binding while retaining the correct-address sentinel. Do not infer a canonical source signature from identical helper bodies alone or globally replace caller declarations. Evidence: `.scratch/goal-random-helper/{caller-type-probes.json,native-intarg-audit.json,caller-type-probe-checkpoint.json}`. No game C/header changes were made by these probes.
+The helper itself does not establish its unique original prototype: an int parameter narrowed to an unsigned-short local range emits the same 32 native bytes as the existing unsigned-short parameter form for server1001a0d0, TL42e410 and Gold42ec00. Each complete native comparison binds its stock rand operand, disables IAT wildcards, and rejects a wrong+4 binding while retaining the correct-address sentinel. Do not infer a canonical source signature from identical helper bodies alone or globally replace caller declarations. Evidence: `.scratch/goal-random-helper/{caller-type-probes.json,native-intarg-audit.json,caller-type-probe-checkpoint.json}`. No game C/header changes were made by these probes.
 
 ### Random-helper return width changes both epilogues (2026-10-04)
 
 Keeping the extracted `gm_RandomMod(unsigned short n)` body and changing only
 its return type from `int` to `unsigned short` makes both configured MSVC6
-profiles emit34 bytes instead of the native32. The remainder return changes
+profiles emit34 bytes instead of the native 32. The remainder return changes
 `mov eax,edx` to `mov ax,dx`, and the zero return changes `xor eax,eax` to
 `xor ax,ax`; each adds a66 operand-size prefix. An unsigned-short return with
 an int argument narrowed into an unsigned-short local also emits34 bytes.
-The int and unsigned-int return variants both match all32 bytes for server
+The int and unsigned-int return variants both match all 32 bytes for server
 1001a0d0, TL42e410 and Gold42ec00, with the stock-rand operand bound, IAT
-wildcards disabled, and all6 matched-variant wrong+4 controls rejected.
+wildcards disabled, and all 6 matched-variant wrong+4 controls rejected.
 These probes support retaining the existing int-return definition; they do
 not distinguish signed from unsigned32-bit returns or prove a unique
 original prototype. Caller narrowing remains a separate C-shape problem.
@@ -11304,14 +11304,14 @@ Evidence: `.scratch/goal-random-helper/{return-type-probes.json,return-type-inst
 
 ### Slot byte signedness changes equality promotion (2026-10-04)
 
-At TL 0x005ca560 and Gold 0x005be320, the comparison of the current slot byte at +9 with a char-pointer byte at +9 uses two byte loads and `cmp al,dl`. Changing only the slot declaration from char[] to unsigned char[] emits `xor eax,eax`, a byte load, `movsx edx,byte ptr [ecx+9]`, and `cmp eax,edx`; the complete object body grows from477 to480 bytes. An explicit `(char)` view of the slot byte restores all477 object bytes and typed relocation records in both clients. This equality compares promoted values: the unsigned view alone changes behavior for high-bit bytes as well as the code shape. Three other shared byte-use functions (TL57ff20/5aac20/5aadd0; Gold577950/5a1900/5a1ab0) retain their176/277/253 bytes after the declaration change because their reads narrow into char locals. Evidence: `.scratch/goal-resolver-slot-types/{results,signed-comparison-instructions}.json`. Scratch probes only; no source or verdict promotion.
+At TL 0x005ca560 and Gold 0x005be320, the comparison of the current slot byte at +9 with a char-pointer byte at +9 uses two byte loads and `cmp al,dl`. Changing only the slot declaration from char[] to unsigned char[] emits `xor eax,eax`, a byte load, `movsx edx,byte ptr [ecx+9]`, and `cmp eax,edx`; the complete object body grows from 477 to 480 bytes. An explicit `(char)` view of the slot byte restores all 477 object bytes and typed relocation records in both clients. This equality compares promoted values: the unsigned view alone changes behavior for high-bit bytes as well as the code shape. Three other shared byte-use functions (TL57ff20/5aac20/5aadd0; Gold577950/5a1900/5a1ab0) retain their176/277/253 bytes after the declaration change because their reads narrow into char locals. Evidence: `.scratch/goal-resolver-slot-types/{results,signed-comparison-instructions}.json`. Scratch probes only; no source or verdict promotion.
 
 
 ### Unused named variadic parameter does not establish a prototype (2026-10-04)
 
 The query helper uses &arg_count and advances an int pointer through the filter
 arguments; its named first_arg parameter is unused. Removing that third named
-parameter preserves all316 SERVER bytes and all300 bytes in each client under
+parameter preserves all 316 SERVER bytes and all 300 bytes in each client under
 the configured VC6 profiles. The logging statement is enabled only in the SERVER
 scratch build; literal bytes and every typed reference independently agree with
 the respective native body, and every wrong binding rejects. This demonstrates
@@ -11325,15 +11325,15 @@ shared-two-named-native-proof}.json`. Production source and flags are unchanged.
 TL CharacterClearSitting406560 has an 87-byte native body. Correcting its C to
 retain the seat pointer across a void helper and pass model/name in native order
 emits 98 bytes under the processor-pack /O2 /Gd profile, rather than the previous
-incorrect 90-byte body. The original retains EAX/ECX across402aa0, whose complete
+incorrect 90-byte body. The original retains EAX/ECX across 402aa0, whose complete
 body is one RET; the standalone caller conservatively preserves the seat/entity
 in EDI/EBX. Moving an ordinary empty definition before the caller removes its
 call and emits69 bytes, including with /Ob0 or pragma auto_inline(off). Moving
-it after the caller retains98. These bounded experiments do not establish the
+it after the caller retains 98. These bounded experiments do not establish the
 original declaration/TU/optimization context. No helper body, pragma, inline
 assembly or alternate flags were added to production. Behavior and byte identity
-remain separate: the corrected body passes16 branch cases and rejects reversed
-arguments/wrong-seat-offset controls, but retains SIZE_MISMATCH87 versus98.
+remain separate: the corrected body passes 16 branch cases and rejects reversed
+arguments/wrong-seat-offset controls, but retains SIZE_MISMATCH87 versus 98.
 Evidence: `.scratch/goal20/clear-sitting-{legal-variants,no-inline-variants,
 corrected-test,behavior}.json`. Initial legal-variants `size` is the compared
 slice length; full lengths are in its compiler messages and corrected-test
@@ -11341,15 +11341,15 @@ slice length; full lengths are in its compiler messages and corrected-test
 
 ### Mode-check ordering shares failure returns (2026-10-10)
 
-TL Buergerrecht starter499a50 is125 bytes. Testing mode1 first, then an
+TL Buergerrecht starter499a50 is 125 bytes. Testing mode1 first, then an
 `else if (mode != 0)`, produces145 bytes under default processor-pack /O2:
 failure returns are duplicated. Testing `mode != 1` first, rejecting nonzero
 modes inside it and validating the output state in the else branch, produces
-the native early shared return and complete125-byte body. No goto or flag
+the native early shared return and complete 125-byte body. No goto or flag
 override is needed. Explicit shared-failure gotos also produce125 but move
 the return to the end and change branch layout; /O1 variants produce119/121.
 Only the ordinary inverted /O2 spelling matches. Float literal payloads0.44f
-and16000.0f, all operands and negative controls independently match both TL
+and 16000.0f, all operands and negative controls independently match both TL
 and GOLD bodies. Evidence `.scratch/goal20/citizenship-{return-layout,
 starter-audit,gold-audit,starter-behavior}.json`;640 C89 cases pass.
 
@@ -11365,22 +11365,22 @@ using the existing blank line restores the bytes without a `#line` override.
 MSVC also renumbers `$L`/`$SG` internal symbol names after declaration changes.
 Compare their actual section/value bindings, not just generated spellings:
 12 actual target/flag groups preserve complete COFF code/data section payloads,
-typed relocation sites and98 function measurements with no missing symbol.
+typed relocation sites and 98 function measurements with no missing symbol.
 Evidence: `.scratch/goal20/plant-callers-byte-preservation.json` and the earlier
-failed section-difference receipt. The matching table and69-byte lookup body
+failed section-difference receipt. The matching table and 69-byte lookup body
 were independently audited against all three native binaries.
 
 ## Narrow helper formals control partial-register argument loads (2026-10-11)
 
 The stat formatter at TL4e7600/GOLD4e5af0 calls the slot accumulator with
 `gm_WalkEntityChain(*(unsigned short*)entity)`. Declaring that helper's formal
-as `unsigned short` emits `mov ax,[esi]; push eax` and matches all90 native
+as `unsigned short` emits `mov ax,[esi]; push eax` and matches all 90 native
 formatter bytes under `/O2 /Gd`. Changing only the formal declaration to
-`int` adds `xor eax,eax` before the word load and grows the body to92 bytes.
+`int` adds `xor eax,eax` before the word load and grows the body to 92 bytes.
 Every other instruction and typed relocation site is unchanged after that
 two-byte shift; resolving the wide variant's operands still fails the native
 comparison. The existing numeric helper's `int raw_idx` definition narrows
-inside its body and matches the124-byte callee, so a callee byte match alone
+inside its body and matches the 124-byte callee, so a callee byte match alone
 does not settle the shared declaration. The caller supplies the missing
 width evidence; the existing canonical spiel.c definition already takes an
 unsigned short. Evidence: `.scratch/goal20/stat-formatter-width-control.json`
@@ -11460,23 +11460,23 @@ when the loop already visited it.
 
 Explicit target guards retain the distinct draw-part destinations439c90/43cc90;
 the existing shared `m_FreeTracked` supplies41ddd0/422620. Full relocation
-application reproduces all137 bytes per target and all six operand sites.
-Four shifted-callee controls reject. Both154-byte unlink helpers and32-byte
+application reproduces all 137 bytes per target and all six operand sites.
+Four shifted-callee controls reject. Both 154-byte unlink helpers and 32-byte
 destruction wrappers retain their complete bodies and rejecting controls.
 No flags, assembly, padding or storage are added. Receipts:
 `.scratch/goal41/cleanup/{production-native-proof,object-native-proof}.json`.
 
 ## Auxiliary-record cleanup shares one typed 133-byte algorithm (2026-10-15)
 
-TL456b80 / Gold45ccc0 use four records at draw offsets0x1384/0x754 with
-strides0x9c/0x80. The full244/292-byte native draw constructors establish those
-bounds within allocations0x1640/0x970. These are array stride views, not separate
-allocations. Record+8 TL /+4 Gold holds the object compared by the154-byte
+TL456b80 / Gold45ccc0 use four records at draw offsets 0x1384/0x754 with
+strides 0x9c/0x80. The full 244/292-byte native draw constructors establish those
+bounds within allocations 0x1640/0x970. These are array stride views, not separate
+allocations. Record+8 TL /+4 Gold holds the object compared by the 154-byte
 cleanup callback; the following pointer is dereferenced by per-record cleanup.
 Other exposed words remain inferred access views with unknown semantic types.
 
 A common `zusatz_flag` occupies the bit immediately below `darstellungsflag`.
-TL replaces its one-bit rest; Gold reduces rest from3 to2, preserving eight
+TL replaces its one-bit rest; Gold reduces rest from 3 to 2, preserving eight
 bits and the existing flag. Native constructor stores and paired cleanup bodies
 confirm masks1/4. Both target compilers retain all six prior sizeof/extents and
 bound offsets; two new stride bindings assert each record's size and fields.
@@ -11484,9 +11484,9 @@ bound offsets; two new stride bindings assert each record's size and fields.
 Keep the four-element signed-int loop, nonzero first-word test, cleanup call,
 object-pointer clear and three word clears in that order. Reload draw data after
 the call. Explicit guards retain native per-record providers456b10/45cc80.
-Full relocation application reproduces all133 bytes per target; wrong-callee,
-opposite-layout and wrong-flag controls reject. The existing137-byte draw-data
-cleanup,154-byte unlink and32-byte destruction bodies remain complete.
+Full relocation application reproduces all 133 bytes per target; wrong-callee,
+opposite-layout and wrong-flag controls reject. The existing 137-byte draw-data
+cleanup,154-byte unlink and 32-byte destruction bodies remain complete.
 Receipts: .scratch/goal42/{production-native-proof,negative-controls,
 draw-cleanup-native-proof,object-native-proof}.json andtype-*.json.
 
@@ -11494,7 +11494,7 @@ draw-cleanup-native-proof,object-native-proof}.json andtype-*.json.
 ## Full spiel.c context and allocator byte-condition residue (2026-10-15)
 
 TL gm_AllocObjekt502fe0/Gold 0x500190 includes renderer work and embedded two-stage
-switch maps; its native extent is2,003, not the discovery extent2,016 that includes
+switch maps; its native extent is 2,003, not the discovery extent2,016 that includes
 thirteen trailing NOPs. Kuna misses the indirect switch arms. The server-only seed
 cannot reconstruct the client body.
 
@@ -11593,14 +11593,14 @@ controls, and no assembly, invented locals or padding is justified. The
 registration and walk bodies match in both production contexts, while the
 Gold three-byte stub operand remains an explicit comparison hypothesis.
 
-Unadopted TL `0x402d00` separation recon: native744 bytes, first C720,
+Unadopted TL `0x402d00` separation recon: native 744 bytes, first C720,
 reloaded/reused-counter C745. Native multiplies in z*z+y*y+x*x order, reads a
 word flag and repeats task45 tests, including an unreachable100-radius case.
 Kuna's order must not replace those instructions. Register/frame/flag-load
 shape and an unexplained16-byte stack allocation remain unresolved. Do not
 invent a float[4] view, padding, volatile access or assembly. A signature miss
-is inconclusive; Gold's fixed-prefix hit at57f3a0 does not prove a counterpart.
-Receipts/seeds live in `.scratch/goal56/separation*` and the native402d00 body.
+is inconclusive; Gold's fixed-prefix hit at 57f3a0 does not prove a counterpart.
+Receipts/seeds live in `.scratch/goal56/separation*` and the native 402d00 body.
 
 
 ### Six-participant event validator (2026-10-16)
@@ -11650,7 +11650,7 @@ TL `0x4df1b0` / Gold `0x4dd960` are complete native 2,536-/2,528-byte bodies,
 including seven-entry switch tables. Their physical case order is 0,1,2,3,6,4,5.
 Numeric source ordering initially emitted2,556 TL bytes and changed shared exits;
 following the actual native order removes that mismatch. Moving `i = 0` before
-the case-5 text-ID assignment closes six scheduling bytes at2121..2126. No
+the case-5 text-ID assignment closes six scheduling bytes at 2121..2126. No
 further scheduling experiment is warranted without new evidence.
 
 The five-byte-near scratch expression is INCORRECT: it evaluates the OTHER
@@ -11660,9 +11660,9 @@ C89 does not sequence the operands of addition. Reversing or parenthesizing the
 combined calls did not enforce ordering in the measured compiler. The native
 stateful control with IDs17/29 observes native trace17,29 versus candidate29,17
 and different final query state. Never adopt that candidate or report its
-2531/2536 TL and2523/2528 Gold byte scores as a faithful implementation.
+2531/2536 TL and 2523/2528 Gold byte scores as a faithful implementation.
 
-The adopted ordinary C explicitly sequences the queries before division by2000.
+The adopted ordinary C explicitly sequences the queries before division by 2000.
 Native saves the first result in EBP and adds the second directly into EBP;
 current correct C copies the second result to ECX and adds/multiplies there,
 adding two executable bytes. Alignment absorbs the size in TL; Gold grows four
@@ -11680,12 +11680,12 @@ button does not erase its saved handle. Complete native/C x86/VEX traces pass
 matching/nonmatching participants, five input selectors, timeout paths and all
 three case-5 buttons. This is bounded evidence, not universal equivalence or a
 byte verdict. The production compare remains STUB (TL2536) / SIZE_MISMATCH
-(Gold2532/native2528). Keep its explicit blocker and correctly ordered source.
+(Gold2532/native 2528). Keep its explicit blocker and correctly ordered source.
 
 Receipts/replays: `.scratch/goal58/{decision-boundaries,decision-traces,
 query-order-control,decision-production-*,decision-outer-comma-*}.json` and their
 scripts/logs. Complete literal checking on the rejected aligned candidate finds
-seven operand sites for two strings. Its relocated code differs at721/729/732/
+seven operand sites for two strings. Its relocated code differs at 721/729/732/
 740/747; that independent control is not proof of production raw-link providers.
 
 
@@ -11790,7 +11790,7 @@ are retained separately. `types bind` currently supports records, so callback
 pointer-width assertions do not create a managed type identity. The feature gap is
 recorded upstream in `docs/IDEAS-GUILD.md` (4d52a5b4), without a wrapper struct.
 
-### Goal61 — typed periodic callbacks without changing timer behavior
+### Goal61: typed periodic callbacks without changing timer behavior
 
 The five timer functions share a 32-slot table with a 12-byte stride. A slot
 contains a no-argument cdecl function pointer, an unsigned period and a pause
@@ -11837,7 +11837,7 @@ continue from actual native operands and providers. Packet-base, resource and
 lighting contracts remain open. Receipts/replays: `.scratch/goal61/timer-proof.py`,
 `timer-proof.json`, inventory plans, scoped verification and `runner-measure.py`.
 
-### Goal62 — resolver output locals can reuse a dead ID argument
+### Goal62: resolver output locals can reuse a dead ID argument
 
 TL `4c4510` / Gold `4c3ba0` initialize the 0x7c-byte packet view, reset its byte
 count, call `gm_ResolveEntityById` and store the original base argument only on
@@ -11882,7 +11882,7 @@ spelling is inferred; the explicit native call is established. Both production
 contexts pass complete resolved-byte/literal proofs and rejecting controls.
 
 The effect type is an unsigned byte. Native loads it into a cleared full-width
-register before comparing with-1; do not change its signedness, compare with0xff
+register before comparing with-1; do not change its signedness, compare with 0xff
 or remove the apparent defective test. Four prior callers now use the inferred
 shared AM_METHOD layout without changing their compiled bytes, fixups or literals.
 Both effect and method sizes are native strides, not allocation claims.
@@ -12042,7 +12042,7 @@ assembly, padding, forced register or new flag is needed. The obsolete
 was then dropped through the locked metadata API without changing effective
 flags or comparison evidence.
 
-`close-proof.py` resolves all 11 operands across296 bytes and rejects 10 wrong
+`close-proof.py` resolves all 11 operands across 296 bytes and rejects 10 wrong
 symbol bindings and 11 wrong operand sites. CLI comparison validates only the
 pool-free callee; the other 10 operand records remain unresolved there. The
 independent complete native proof supplies their values for this experiment;
@@ -12117,11 +12117,11 @@ The logger body remains a zero STUB. Replays and residuals are in
 
 ## Conditional COM release through an inline helper
 
-Gold0x460e40 has a repeated null comparison that direct C spellings remove.
+Gold 0x460e40 has a repeated null comparison that direct C spellings remove.
 A private static `__inline` helper for conditional Release and slot clear
 preserves the second comparison in the live com60 path under PP /ML /O2 /Gd.
-Its17-byte release block at0x460e9a matches the native bytes; the complete
-candidate is553 versus563 bytes and still does not match. Extending the helper
+Its 17-byte release block at 0x460e9a matches the native bytes; the complete
+candidate is 553 versus 563 bytes and still does not match. Extending the helper
 to the mode-off path or adding a mask/result helper does not close the body.
 The helper name and source organization are inferred. The same inline-query
 idea leaves the character sitting query's52/56-byte mismatch unchanged.

@@ -1,8 +1,54 @@
 # Current work
 
 The [three-binary objective](../goal.md) is incomplete. This checkpoint records
-completed Goal110 checks on **2026-10-18**; later source edits need fresh checks.
-Historical checkpoints are in [goal history](goal-history.md).
+completed Goal110 checks on **2026-10-18**. The source changes below are newer
+than those images and need fresh builds. Historical checkpoints are in
+[goal history](goal-history.md).
+
+## Current integration
+
+- Gold `0x4790d0` is C: official object checks are RELOC 53/53, with its two
+  callers at 49/49 and 91/91. Current source hashes match those receipts. This
+  replaces already-accounted assembly; it adds no accounted text.
+- Four TL callbacks (`0x40cfb0`, `0x551010`, `0x55af10`, `0x586bd0`) now have C
+  implementations with fresh RELOC verdicts at 51, 61, 38 and 61 bytes.
+  All eight operands are VALIDATED. Independent applied-byte comparisons and
+  wrong-target/site/window controls pass on the final sources. These are
+  object results; client raw-link validation remains due.
+- Gold `0x4c6a50` now binds the existing `cm_MarkAndReturn` in `command.c`,
+  whose selected Gold object matches all 14 native bytes. Its old 64-byte
+  inventory extent was split into the 14-byte function and a separate 37-byte
+  entry at `0x4c6a60`. The replacement binding now measures EXACT 14/14;
+  the new entry remains unreconstructed.
+- TL `g_774a1c` has an identity-only data row. Six native dword references and
+  both operands of the cached `0x586bd0` object agree. No extent, storage owner
+  or C allocation was inferred.
+- The attested `d3_LoadAnimStream` name now covers its shared client definition
+  in `Develop/Units/d3`; both targets remeasure RELOC 207/207, with seven
+  unresolved operands each. The corrected `cm_TestCommandResult` filename
+  remeasures EXACT 23/23. All 28 affected client compile contexts preserve
+  non-CodeView sections and operands apart from the animation symbol rename.
+  Both animation-options bindings have fresh sizeof/offsetof checks after the
+  declaration rename; the 12-byte type and offsets are unchanged.
+  Exact original filenames/TU boundaries and raw-link placement remain unproved.
+
+All 20 reconstruction and organization reports are in `.scratch/dsh-wave1/results/`.
+Parent review and fresh official comparisons are in `.scratch/dsh-wave1/review/`;
+naming/move preservation checks are in `.scratch/dsh-wave1/naming-review/`.
+Compilation now works through the pinned unshare runner. Both client source
+lists were regenerated. The broad two-job rebuild is logged in
+`.scratch/dsh-wave1/naming-review/clients-build.log`; until it completes and
+the raw images are checked, object results do not establish linked placement.
+
+The updated [community review](community-research.md#exe-branch-follow-up-2026-10-19)
+records original-name and algorithm leads. It establishes no new original TU
+or local byte verdict. The upstream fixture-isolation fix passed 12,715 tests
+(48 skipped) and merged in [Rebrew #35](https://github.com/maci0/rebrew/pull/35).
+Latest lint is `.scratch/dsh-wave1/review/lint-refreshed-types.json`: 38 E023
+errors and one W033 warning per target. W033 is the installed 5.1.0 template's
+obsolete metadata-format wording; the correction is upstream. No type-staleness
+warning remains. The temporary layout-probe failure under unshare was reproduced
+and repaired upstream; the native replay passes in both clients.
 
 ## Verified checkpoint
 

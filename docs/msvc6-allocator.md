@@ -288,7 +288,7 @@ bytes byte-identical: frame, `mov edi,cmd`, two deferred-cleanup
 dispatch register allocation:
 
 - Reference: `mov ebx,[edi+0x1c]`, the field/type value (`fld`) lives in
-  **ebx**, and the `cnt >= fld` dispatch emits `cmp edi,ebx; jae case4`
+  **ebx**, and the `cnt >= fld` dispatch emits `cmp edi,ebx; jae case 4`
   with a duplicated `test edi,edi; jbe default` guard pair (a comparison
   chain, *not* a jump table, so the original was not a `switch`).
 - Mine (current): `fld` also lands in **ebx** (fixed since this finding was
@@ -301,7 +301,7 @@ dispatch register allocation:
   chain/switch formulations tested; every `switch` form compiles to a jump
   table (`lea eax,[cnt-1]; cmp eax,3; ja; jmp [eax*4]`), and every if/else
   chain either inverts or removes the dead checks.  The exact reference
-  chain (jumped-to case4 + kept redundant guards) is not reproducible.
+  chain (jumped-to case 4 + kept redundant guards) is not reproducible.
 - The chained else-if form is used in the source because it preserves the
   reference behaviour for `level >= 4` (the separate-if form changes
   `level >= 5` to the default set).  Best-effort is 206/901 bytes (obj 898;
@@ -919,7 +919,7 @@ shape. Native register invariance across contexts and operand homing are the
 positive structural evidence; unsuccessful C searches and library exclusions
 only corroborate it. Goal108 rechecked209 distinct target/core sites from the
 current receipts and the stored/reloaded literal count in both client
-building-table initializers. It did not recount all725 historical sites or
+building-table initializers. It did not recount all 725 historical sites or
 reproduce their original source text. Current target-scoped receipts state the
 inference explicitly; see [the assembly audit](assembly-audit.md#what-qualifies).
 
@@ -3224,6 +3224,7 @@ rebuild (`cmake --build`, then `scripts/split_link.sh`, then
 `postlink_residual.py --write`) was comparable across those rounds, and
 `scripts/linktest.sh` recompiled only the files it was named, so a run was
 attribution only when no other source had changed since the last full build.
+That sequence is the historical comparator. It is not a recovery step.
 
 ## Finding 58: inter-object size: the constraint is `have <= padded(want)`, and every real body *below* the reference span is free
 
@@ -4061,9 +4062,10 @@ the shared toolchain lock; tracer scripts kept under `.scratch/c2trace-crashdump
 - **Best candidate** (per-case newlines in three cases plus four non-volatile locals) measured +28
   linked: it still pushes all four callee-saved registers at entry and keeps `fCanContinue`/`szLine`
   in the wrong order. Next step: make group A's arms start on one scratch register.
-- **Measurement trap:** a candidate that overflows the 2128 span collapses the composition and leaves
-  a bad `build/split_poc.map`, so every later linktest collapses too. Recover with
-  `rm -rf build/split_poc build/split_poc.map` and two `scripts/split_link.sh` runs.
+- **Measurement trap:** a candidate that overflowed the 2128 span collapsed that round's
+  composition and left a bad `build/split_poc.map`, so later `linktest` runs collapsed too.
+  `split_link.sh` and `linktest.sh` are retired. Do not run them to recover. Rebuild the
+  current target from tracked inputs and compare the raw image.
 
 **Round 1145 end state: 4 bytes, the frame-fill tie.** At 0x10002c5c `frameInfo[0]` and
 `frameInfo[1]` issue in reverse order. Both stores are ready in cycle 1 at priority 2, so the lower
@@ -4461,9 +4463,9 @@ Open cases, each traced to one decision:
 
 ## Unused shared function declarations can alter spill-slot assignment
 
-At TL0x482f20, adding six unused sound API prototypes to client_types.h
-exchanges two local stack slots (0x10 and0x18) at five instructions. Body715
-and all39 relocations stay fixed; native715/715 becomes710/715. Scratch
+At TL 0x482f20, adding six unused sound API prototypes to client_types.h
+exchanges two local stack slots (0x10 and 0x18) at five instructions. Body715
+and all 39 relocations stay fixed; native 715/715 becomes 710/715. Scratch
 isolation preserves the match with the shared record/global declarations
 alone and reproduces the loss with prototypes alone. Moving the header first,
 reversing/reordering prototypes, omitting parameter names, meaningful local
@@ -4472,7 +4474,7 @@ not establish a general optimizer mechanism or identify one offending prototype.
 
 The shared sound API now has its own inferred client_sound.h, included by
 nine sound users, with original declaration order preserved. client_types.h
-returns exactly to baseline and canonical0x482f20 is RELOC715/715 again;
+returns exactly to baseline and canonical 0x482f20 is RELOC715/715 again;
 constructor150/allocator63/request132 retain their complete matches. The full
 all-target repeat remains required to accept this header repair. Evidence:
 .scratch/goal-shared-sound/stack-slot-probes/{results,naming-results,header-results,
@@ -4517,26 +4519,26 @@ These results supersede older trial sizes for this exact source/configuration.
 
 ## AddFile operand lifetime controls (2026-10-12)
 
-The canonical client body still emits1477 bytes for TL0x42e740's complete1472
+The canonical client body still emits1477 bytes for TL 0x42e740's complete 1472
 native bytes. Eighteen bounded full-unit probes retain the existing attested
 copy instructions and vary C operand homes/scopes, assignment and declaration
 order, local spelling, initializer spelling and reuse of the dead loop counter.
-Several reach1472 bytes, but the best masked comparison still differs by243;
+Several reach1472 bytes, but the best masked comparison still differs by 243;
 none is adopted. Three declaration-order, four name and one initializer control
 produce identical function bytes and typed operands. Do not repeat those probes
 as a new hypothesis. The production C and compiler flags are unchanged.
 
-The two original26-byte copy sequences at0x42e8f7/0x42e949 are now recorded
+The two original 26-byte copy sequences at 0x42e8f7/0x42e949 are now recorded
 through document-assembly in target-scoped SOURCE evidence. Their provenance
 comes from the compiler controls and stock-library exclusions above, independently
 of a complete function match. The blocker retains the actual unresolved result.
-The full server gate still passes316/316 functions,652/652 data comparisons and
-all286720 raw bytes. Receipts: .scratch/goal21/shared-vfs-addfile/negative-controls.json.
+The full server gate still passes 316/316 functions,652/652 data comparisons and
+all 286720 raw bytes. Receipts: .scratch/goal21/shared-vfs-addfile/negative-controls.json.
 
 Upstream055127e8 corrects diff's candidate_size from the clipped comparison
-buffer to the actual emitted length. The real project JSON changes only1472
-to1477, preserving all instruction comparisons and blocker classifications.
-Two regressions fail before;41 focused and11725 full tests pass after(52 skips,
+buffer to the actual emitted length. The real project JSON changes only 1472
+to 1477, preserving all instruction comparisons and blocker classifications.
+Two regressions fail before;41 focused and 11725 full tests pass after(52 skips,
 88% coverage), with committed-head packaging/reproducibility/provenance checks.
 Its upstream push/CI integration is pending. A size-equal or clean-prefix diff
 alone cannot establish the complete native body or its operand bindings.
@@ -4556,15 +4558,15 @@ C2443; that failure was not evidence against narrow inputs. Original formal and
 counter spelling remain inferred.
 
 The existing SERVER-only aligned-fill assembly is retained, with only its named
-count operand changed. The complete prelude at10017611 is26bytes; older24-byte
+count operand changed. The complete prelude at 10017611 is 26bytes; older24-byte
 descriptions are imprecise. Positive original-macro evidence is the cross-site
 compiler/control analysis above and codegen-walls6b, independently of this match.
 A new target-scoped source evidence record documents that retained macro; no
 client assembly or factory provider is asserted.
 
-All1078 factory bytes,49operand destinations,6literal uses,44-byte jump table and
-74-byte index map agree. All127 old spiel.c contexts preserve complete code,
-fixup destinations and literals, including11weak bodies; all43private field
+All 1078 factory bytes,49operand destinations,6literal uses,44-byte jump table and
+74-byte index map agree. All 127 old spiel.c contexts preserve complete code,
+fixup destinations and literals, including 11weak bodies; all 43private field
 declarations are unchanged. Generated local-label names change but their actual
 function-relative destinations do not. Receipts: .scratch/goal68/factory-production
 and factory-review. A compatible contract is not a new client factory provider.

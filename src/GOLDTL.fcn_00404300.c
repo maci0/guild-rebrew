@@ -28,7 +28,7 @@ char* __cdecl fcn_00404300(char* obj, char* name, char slot)
 		looped = 1;
 	}
 	if (ani_obj == 0) {
-		*(char**) (obj + 0x80) = fcn_0044c620(path, ani, looped);
+		*(char**) (obj + 0x80) = d3_LoadAnimStream(path, ani, looped);
 	} else {
 		*(char**) (obj + 0x80) = ani_obj;
 	}
