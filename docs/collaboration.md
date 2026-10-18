@@ -19,6 +19,41 @@ contributor's evidence or verdicts.
 | Reviewed changes on a work branch and PR | Reviewed field export/import through a separate state repository |
 | Verdicts earned by `rebrew test` / `verify` | No imported STATUS, compiler flags or match claims |
 
+## Live Ghidra analysis
+
+[Ghidra MCP](https://github.com/bethington/ghidra-mcp) can provide live
+pseudocode, callers/callees, cross-references and data-flow queries while we
+reconstruct C. BinSync carries reviewed names and types into the analysis;
+Rebrew compilation and raw-image checks still establish byte agreement.
+
+Exporting a state directory alone does not update Ghidra. Use the Ghidra
+BinSync integration to consume it, or implement and test an explicit headless
+relay. Keep one state repository per exact reference binary. This project
+currently configures only the server state; the clients need their own program
+paths and state directories.
+
+Pin compatible Ghidra, plugin and bridge versions. Preserve the developers'
+names: pass `strict_mode = false` where the endpoint supports it, and verify
+the effective policy before allowing writes. The tested headless 6.0.0 server
+does not load the project's naming-policy file automatically. Rebrew 5.1.0's
+structural backends are ReVa and `ghidra-cli`; bethington's server is a separate
+analysis connection, not a drop-in replacement for either backend. Begin with
+read-only queries, review incoming fields through BinSync, and re-test affected
+C after accepting names or types. This guide does not register a client connection.
+
+A local 2026-10-19 trial used the stable MCP 6.0.0/Ghidra 12.1.2 pair and
+REA 6.7.0 against the exact TL reference. After supplying the reviewed entry,
+both returned the 216-byte body at `0x4b6f00`. Their pseudocode omitted its x87
+calculation; native instructions and existing operand proof remained necessary.
+REA creates a separate temporary database; reuse the persistent MCP project for
+repeated queries. Full results and version hashes are in ignored
+`.scratch/ghidra-mcp-trial/` and `.scratch/rea-trial/`.
+
+Keep Ghidra databases under a path such as `build/ghidra`: Ghidra rejects
+dot-prefixed project path elements. Preview BinSync types before importing; this
+trial exposed partial layouts and conflicting private type names, so it did not
+apply a bulk type import. The existing server state repository was preserved.
+
 ## State repository and users
 
 Use one separate BinSync Git repository for each **exact binary**. Server,
