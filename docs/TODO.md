@@ -7,6 +7,32 @@ Both clients remain comparison scaffolds. Historical checkpoints are in
 
 ## Current integration
 
+- Gold `0x418030` now reuses the existing TL `0x4195f0` C cleanup. Both
+  official comparisons are RELOC 76/76 with all 11 operands VALIDATED.
+  The duplicate Gold assembly body and its assembly marker are removed.
+  Six data identities bind the existing pointer slots without allocating storage
+  or claiming their owners. Complete applied-byte proof, rejecting controls
+  and 16 null/callee-mutation cases are in `.scratch/gold-cleanup-c/`.
+  Both fresh raw links contain the applied compiled body at displaced addresses;
+  neither earns linked EXACT. The TL object's non-CodeView sections are unchanged.
+- The shared GUI forwarding wrapper now passes its slot argument to the
+  correct target provider: Gold `0x46e700`, TL `0x46b2b0`. Both five-byte
+  wrappers remeasure RELOC with their callee operands VALIDATED. The Gold
+  caller remains RELOC 45/45 with unchanged non-CodeView sections. Both
+  destructors remain explicit, unrecovered `void(int)` stubs; observed calls
+  discard their result, which does not prove the original return declaration.
+  Another 19 Gold calls in four shared TUs now select the same Gold provider;
+  all eight official target contexts remain RELOC, with those calls VALIDATED.
+  Unrelated global operands remain unresolved.
+  All four TL objects and the complete TL image are unchanged by that correction.
+  The obsolete Gold scaffold provider is removed. Its 16-byte contribution shifts
+  later Gold code; all 106 changed data-pointer slots retain the same mapped
+  symbol or bounded CRT function offset. Imports are unchanged.
+  Receipts: `.scratch/gui-forwarding-contract/` and `.scratch/gui-provider-audit/`.
+- The sound-control declaration repair removes the conflicting zlib declaration
+  and uses the existing shared callee's pointer argument. Both official wrappers
+  remain RELOC 44/44, and both complete non-CodeView objects are unchanged.
+  Receipts: `.scratch/vfs-warning-triage/`.
 - Gold `0x423a50` is C: official RELOC 59/59, five validated operands and two
   IAT-policy slots. Independent application validates all seven operands and
   13 rejecting controls. Its rebuilt raw contribution agrees with the compiled
@@ -51,19 +77,35 @@ The updated [community review](community-research.md#exe-branch-follow-up-2026-1
 records original-name and algorithm leads. It establishes no new original TU
 or local byte verdict. The upstream fixture-isolation fix passed 12,715 tests
 (48 skipped) and merged in [Rebrew #35](https://github.com/maci0/rebrew/pull/35).
-Latest lint is `.scratch/dsh-wave1/review/lint-refreshed-types.json`: 38 E023
-errors and one W033 warning per target. W033 is the installed 5.1.0 template's
-obsolete metadata-format wording; the correction is upstream. No type-staleness
-warning remains. The temporary layout-probe failure under unshare was reproduced
+Latest lint is `.scratch/gold-cleanup-c/integration/lint-final.json`:
+36 E023 errors and zero warnings per target. The official blocker backfill
+documented 1,848 Gold and 1,284 TL unmatched rows without changing their verdicts;
+this clears missing-explanation warnings, not the recovery work. Rebrew 5.2.0
+also removes the obsolete-template W033 warning. No type-staleness warning
+remains. The temporary layout-probe failure under unshare was reproduced
 and repaired in [Rebrew #36](https://github.com/maci0/rebrew/pull/36);
 the native replay passes in both clients. Both upstream fixes are on `main`.
+The later [Rebrew #37](https://github.com/maci0/rebrew/pull/37) removes size-only
+import-thunk claims from blocker backfill; its full suite passed 12,820 tests
+(37 skipped). That fix is on upstream `main`, outside the pinned 5.2.0 release.
+None of this checkpoint's backfilled rows took the short-body heuristic.
 
 ## GoldTL data audit, 2026-10-19
 
-The existing scaffold has **0 exact placements, 330 displaced symbols and
-24 absent from the map**. At reference addresses, 186/354 symbols are
-comparable: 93 byte-equal, 51 different and 42 missing. Byte equality at a
-reference address does not establish the displaced symbol's identity there.
+Both rebuilt scaffolds have **0 exact data placements**. The final raw-image
+checks report:
+
+| Target | Displaced / absent from map | Byte-equal / different / missing | Compared / total |
+| --- | --- | --- | --- |
+| Gold | 305 / 14 | 83 / 30 / 49 | 162 / 319 |
+| GoldTL | 335 / 22 | 93 / 51 / 42 | 186 / 357 |
+
+Gold has 157 non-comparable symbols; TL has 171. These include zero-fill tails
+and addresses outside file-backed data. Byte equality at a reference address
+does not establish the displaced symbol's identity there. Both whole-file
+checks fail as expected for comparison scaffolds. Latest receipts and hashes:
+`.scratch/gold-cleanup-c/integration/{gold,tl}-final-image-verification.json`.
+The earlier TL snapshot below had 330 displaced symbols and 24 absent.
 
 The logging tables/newline/default name and both Sonnenstrahlen strings have
 correct file bytes at their mapped addresses. Before this rebuild, the scaffold's
@@ -78,19 +120,18 @@ their placement differs.
 
 Complete COFF/native literal audits identify TL's `dbl_1_0`, Gold's distinct
 `dbl_2_0`, and each image's `flt_0_3`. Their metadata now names the emitted
-compiler symbols; no new C storage was added. On the existing TL map this
-reduces absent symbols from 24 to 22 (332 displaced). These are content and
+compiler symbols; no new C storage was added. On that checkpoint's TL map this
+reduced absent symbols from 24 to 22 (332 displaced). These are content and
 symbol-binding checks, not native placement or original TU ownership proof.
 
 Receipts: `.scratch/dsh-wave1/review/data-diagnosis-tl.json` and
 `data-linked-location-samples.json`. The original audit changed only 22 GoldTL
 comparison records. The four later literal bindings above are separate changes.
-The new TL image still has 0 exact placements, 332 displaced symbols and 22
-absent from the map. Reference-address comparison remains 93 equal, 51 different
-and 42 missing; correcting displaced initializers does not fix native placement.
-Literal/initializer receipts and the fresh TL comparison are in
-`.scratch/data-initializers/`; the final Gold comparison is
-`.scratch/gold-msx-lock/gold-rebuilt-image.json`. Image hashes are in those receipts.
+Correcting displaced initializers does not fix native placement.
+Literal/initializer receipts and that TL comparison are in
+`.scratch/data-initializers/`; the earlier Gold comparison is
+`.scratch/gold-msx-lock/gold-rebuilt-image.json`. Use the final receipts above
+for the latest images.
 
 ## Verified checkpoint
 
@@ -151,8 +192,8 @@ uv run scripts/gate.sh
 `todo --json` uses the default target, GoldTL. `verify --data` can record data
 verdicts for the configured raw link, and compiles functions only when asked.
 Bare `verify` checks functions. `--no-cache` skips saved verification results;
-a matching compiler-object cache entry can still supply the object. A RELOC
-`todo` row may print `rebrew test --linked`, which unshare refuses
+a matching compiler-object cache entry can still supply the object. Under
+unshare, Rebrew 5.2 directs RELOC `todo` rows to raw-image verification
 ([runner limits](verify-performance.md#runner-and-caches)). Check current CLI
 help before reusing an old command. Client build recipes and scaffold limits
 are in [stubs/README.md](../stubs/README.md).

@@ -27,6 +27,13 @@ On October 17, data dry-runs took 0.674s for Gold and 0.667s for TL; normal writ
 took 1.764s/2.011s. Server data took 2.066s, with 652/652 matches.
 Receipts: `.scratch/goal85-asm-audit/`.
 
+On October 19, normal `--data --whole-binary --raw-link` runs with metadata
+writers idle took 2.66s for Gold and 3.09s for TL. Both reported
+`functions_checked: false` and the expected scaffold differences. Runs during
+concurrent function-result writes took 42s/58s, including waits for the shared
+metadata transaction lock; that wait is separate from compiler execution.
+Receipts: `.scratch/gold-cleanup-c/integration/final-image-timings.json`.
+
 Other repaired costs:
 
 - **Known bindings disabled warm results.** Cached verdicts now require matching

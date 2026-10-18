@@ -1,6 +1,9 @@
 
 
 
+#ifdef REBREW_GOLD
+#define fcn_0046b2b0 fcn_0046e700
+#endif
 void __cdecl fcn_0046b2b0(int);
 
 void __cdecl fcn_005b5c70(int* o)

@@ -29,6 +29,10 @@ impl = ""
 [specials.fcn_0041f9d0]
 impl = ""
 
+# Reviewed Gold GUI callers select fcn_0046e700; the TL spelling is not a Gold provider.
+[specials.fcn_0046b2b0]
+impl = ""
+
 
 # Capacity for Gold color initialization; this is not a native owner claim.
 [specials.g_10405e0]

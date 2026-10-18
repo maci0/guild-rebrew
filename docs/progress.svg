@@ -17,19 +17,19 @@
 <rect x="24" y="236" width="667" height="144" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="263" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold_TL.exe</text>
 <text x="675" y="272" font-size="25" fill="#55dbac" text-anchor="end">72.0%</text>
-<text x="40" y="285" font-size="13" fill="#aebdca" text-anchor="start">3,598 / 4,996 functions matched by C source</text>
+<text x="40" y="285" font-size="13" fill="#aebdca" text-anchor="start">3,602 / 4,996 functions matched by C source</text>
 <rect x="40" y="301" width="635" height="12" fill="#394a59"/>
-<rect x="40.00" y="301" width="457.31" height="12" fill="#55dbac"/>
-<text x="40" y="337" font-size="13" fill="#aebdca" text-anchor="start">0 assembly matches · 1,398 functions still to match</text>
+<rect x="40.00" y="301" width="457.82" height="12" fill="#55dbac"/>
+<text x="40" y="337" font-size="13" fill="#aebdca" text-anchor="start">0 assembly matches · 1,394 functions still to match</text>
 <text x="40" y="360" font-size="12" fill="#ffc68b" text-anchor="start">Raw file differs · comparison scaffold</text>
 <rect x="24" y="392" width="667" height="144" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="419" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold.exe</text>
-<text x="675" y="428" font-size="25" fill="#55dbac" text-anchor="end">53.6%</text>
-<text x="40" y="441" font-size="13" fill="#aebdca" text-anchor="start">2,461 / 4,588 functions matched by C source</text>
+<text x="675" y="428" font-size="25" fill="#55dbac" text-anchor="end">53.7%</text>
+<text x="40" y="441" font-size="13" fill="#aebdca" text-anchor="start">2,465 / 4,589 functions matched by C source</text>
 <rect x="40" y="457" width="635" height="12" fill="#394a59"/>
-<rect x="40.00" y="457" width="340.61" height="12" fill="#55dbac"/>
-<rect x="380.61" y="457" width="4.98" height="12" fill="#c3a7ff"/>
-<text x="40" y="493" font-size="13" fill="#aebdca" text-anchor="start">36 assembly matches · 2,091 functions still to match</text>
+<rect x="40.00" y="457" width="341.09" height="12" fill="#55dbac"/>
+<rect x="381.09" y="457" width="4.70" height="12" fill="#c3a7ff"/>
+<text x="40" y="493" font-size="13" fill="#aebdca" text-anchor="start">34 assembly matches · 2,090 functions still to match</text>
 <text x="40" y="516" font-size="12" fill="#ffc68b" text-anchor="start">Raw file differs · comparison scaffold</text>
 <rect x="24" y="548" width="10" height="10" rx="2" fill="#55dbac"/>
 <text x="42" y="558" font-size="12" fill="#aebdca" text-anchor="start">C source match</text>

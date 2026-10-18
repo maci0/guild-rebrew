@@ -1,8 +1,5 @@
 /* ADDRESS: GOLDTL 0x0046b2b0 */
-int __cdecl fcn_0046b2b0(void)
+void __cdecl fcn_0046b2b0(int slot)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.0046b2b0 */
-    return 0;
+    /* Unrecovered body; native cdecl takes one slot index, observed callers discard the result. */
 }

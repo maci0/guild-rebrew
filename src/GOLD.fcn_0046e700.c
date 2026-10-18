@@ -1,8 +1,5 @@
 /* ADDRESS: GOLD 0x0046e700 */
-int __cdecl fcn_0046e700(void)
+void __cdecl fcn_0046e700(int slot)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.0046e700 */
-    return 0;
+    /* Unrecovered body; native cdecl takes one slot index, observed callers discard the result. */
 }

@@ -13,10 +13,10 @@ unresolved/duplicate-symbol link.
 
 ## Build
 
-The [last full checkpoint](../docs/TODO.md#verified-checkpoint) linked both
-clients under unshare and reported compiler warnings. Gold then relinked after
-the getter C replacement; later source edits require fresh builds. See
-[current work](../docs/TODO.md) for logs and pending checks.
+The latest full build linked both clients under unshare, followed by incremental
+links for the reviewed GUI-provider corrections. The links have no linker
+warnings; compiler warnings and assembly lint remain open. See
+[current work](../docs/TODO.md) for receipts and remaining differences.
 
 Complete the root [setup steps](../README.md#get-started), then run from the
 project root. Use this checkout's `.venv` (`uv sync`). No sibling Rebrew
@@ -87,8 +87,8 @@ baseline; image-only checks do not initialize the compiler runner.
 ## Regenerate placeholders
 
 Each target has its own `unresolved.txt` input and generated `symbol_stubs.c`.
-Gold removes three obsolete video-list placeholders, preserves comparison-only
-capacity for six color writes, and includes a generated vertex-buffer pointer
+Gold removes obsolete video-list and GUI-provider placeholders, preserves
+comparison-only capacity for six color writes, and includes a generated vertex-buffer pointer
 slot. Refresh manifests from current maps before quoting counts. Placeholders
 link only into their client and remain outside recovered `src/` and its metadata
 accounting.
@@ -154,8 +154,9 @@ PY
 `gold/symbols.json` is a map snapshot; refresh it with
 [`linked_manifest.py`](linked_manifest.py) after a successful link.
 Both `specials.toml` files omit an obsolete sound-control function placeholder.
-Gold's also omits the three shared video-list functions and preserves the
-comparison-only color-array capacity. Empty implementations emit no replacement
+Gold's also omits the three shared video-list functions and the target-mismatched
+GUI destructor spelling, and preserves the comparison-only color-array capacity.
+Empty implementations emit no replacement
 function. Keep historical unresolved logs intact and regenerate manifests from each
 successful link.
 

@@ -1,9 +1,9 @@
 {
   "map": "build/Europa1400Gold_TL.map",
   "stub_object": "symbol_stubs.c.obj",
-  "stub_symbol_count": 2961,
+  "stub_symbol_count": 2960,
   "checked_symbols": {
-    "_cm_TestCommandResult": "GOLDTL.cm_MarkAndReturn.c.obj",
+    "_cm_TestCommandResult": "GOLDTL.cm_TestCommandResult.c.obj",
     "_WinMain@16": "GOLDTL.main.c.obj",
     "_crc32": "crc32.c.obj",
     "_inflate": "inflate.c.obj",
@@ -169,7 +169,6 @@
     "_fcn_004bb6c0",
     "_fcn_004bdda0",
     "_fcn_004bfbc0",
-    "_fcn_004c2480",
     "_fcn_004c3ed0",
     "_fcn_004c4b00",
     "_fcn_004c6230",

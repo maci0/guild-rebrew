@@ -16,6 +16,9 @@ extern int g_6a25a0;
 extern int g_6a25a4;
 
 void __cdecl fcn_00471af0(int h, int v);
+#ifdef REBREW_GOLD
+#define fcn_0046b2b0 fcn_0046e700
+#endif
 void __cdecl fcn_0046b2b0(int h);
 void __cdecl fcn_00472170(int h, int v);
 
