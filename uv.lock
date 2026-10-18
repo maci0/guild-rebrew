@@ -6,6 +6,9 @@ resolution-markers = [
     "python_full_version < '3.15'",
 ]
 
+[manifest]
+excludes = [{ package = { name = "recoverage", version = "8.2.0" }, dependencies = ["rebrew"] }]
+
 [[package]]
 name = "angr"
 version = "10.0.4.post1"
@@ -581,8 +584,8 @@ requires-dist = [
     { name = "isort", marker = "extra == 'dev'", specifier = ">=9.0.2" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=2.4.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.1.1" },
-    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v5.1.0/rebrew-5.1.0-py3-none-any.whl" },
-    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v5.1.0/rebrew-5.1.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v5.2.0/rebrew-5.2.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v5.2.0/rebrew-5.2.0-py3-none-any.whl" },
     { name = "recoverage", marker = "extra == 'dashboard'", url = "https://github.com/maci0/recoverage/releases/download/v8.2.0/recoverage-8.2.0-py3-none-any.whl" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.17.1" },
 ]
@@ -1440,8 +1443,8 @@ wheels = [
 
 [[package]]
 name = "rebrew"
-version = "5.1.0"
-source = { url = "https://github.com/maci0/rebrew/releases/download/v5.1.0/rebrew-5.1.0-py3-none-any.whl" }
+version = "5.2.0"
+source = { url = "https://github.com/maci0/rebrew/releases/download/v5.2.0/rebrew-5.2.0-py3-none-any.whl" }
 dependencies = [
     { name = "capstone" },
     { name = "click" },
@@ -1459,7 +1462,7 @@ dependencies = [
     { name = "zstandard" },
 ]
 wheels = [
-    { url = "https://github.com/maci0/rebrew/releases/download/v5.1.0/rebrew-5.1.0-py3-none-any.whl", hash = "sha256:8356029da54de881326f931170d87db42f43562cf7ad481b8a33dea384574e50" },
+    { url = "https://github.com/maci0/rebrew/releases/download/v5.2.0/rebrew-5.2.0-py3-none-any.whl", hash = "sha256:bf232f4844e8f3694291b3ca660e0ef79dbd8544a868567deb7d745a59c0f3f3" },
 ]
 
 [package.optional-dependencies]
@@ -1502,7 +1505,6 @@ dependencies = [
     { name = "brotli" },
     { name = "click" },
     { name = "rcssmin" },
-    { name = "rebrew" },
     { name = "rich" },
     { name = "typer" },
     { name = "zstandard" },

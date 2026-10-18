@@ -161,6 +161,13 @@ may intervene; code and directives may not. New generators include these anchors
 All state and identity live in `rebrew-functions.toml` (format 3, including
 addressless assembly evidence and support purposes in `[source]`) and
 `rebrew-data.toml` (format 2). The identity field is `kind`.
+Each store also reads direct `*.toml` fragments from its sibling `rebrew-<store>.d/` directory; this applies
+to types and library settings too. Duplicate records are errors. Locked owner
+APIs update the owning fragment and put new records in the main TOML.
+TOML is the default backend. Experimental project-wide SQLite is selected with
+`rebrew metadata migrate sqlite` (preview with `--dry-run`); switch back with
+`rebrew metadata migrate toml`. All managed reads and writes use the storage API;
+project configuration stays in `rebrew-project.toml`.
 `source = "naked"`, STRUCT/CALLERS information and support file purposes are
 metadata-only. Old inline blocks and earlier metadata formats are rejected;
 ordinary readers have no compatibility parser or legacy fallback. Use

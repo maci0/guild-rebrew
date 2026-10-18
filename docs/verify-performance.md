@@ -61,10 +61,11 @@ but still needs extraction/comparison; a valid result hit avoids both.
 `.obj`. Backend identity separates Docker and unshare compile entries. Existing
 CMake objects are not evidence that current compile inputs match.
 
-`rebrew test --linked` is a separate padded-shell link. Rebrew 5.1.0 stops that
+`rebrew test --linked` is a separate padded-shell link. Rebrew 5.2.0 stops that
 command when `execution_backend` is `unshare`, with
 `execution_backend = unshare does not support linked comparison yet`.
-`rebrew todo` can still print `rebrew test 0x<VA> --linked` for a RELOC row.
+Under unshare, `rebrew todo` now directs RELOC rows to the configured raw-image
+comparison, or asks for a raw link when none exists.
 Ordinary object comparison, `verify --text --raw-link` on an existing image,
 and CMake CL/LINK/LIB stay on the configured unshare runner.
 
