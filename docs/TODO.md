@@ -152,6 +152,10 @@ suites and all six CI jobs, and are merged outside installed 5.2.0.
 Parser and writer receipts are in `.scratch/upstream-va-arg-evidence/` and
 `.scratch/upstream-writer-evidence/`; the profile's limits are in
 [verification performance](verify-performance.md#causes-and-fixes).
+[Rebrew #44](https://github.com/maci0/rebrew/pull/44) also passed its full local
+suite and all six CI jobs before merging: read-only developer preflights now
+honor `UV_PROJECT_ENVIRONMENT` without creating a local `.venv`. Evidence is in
+`.scratch/upstream-preflight-evidence/`; installed 5.2.0 remains unchanged.
 
 ## GoldTL data audit, 2026-10-19
 
