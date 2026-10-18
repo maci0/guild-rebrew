@@ -48,7 +48,29 @@ Latest lint is `.scratch/dsh-wave1/review/lint-refreshed-types.json`: 38 E023
 errors and one W033 warning per target. W033 is the installed 5.1.0 template's
 obsolete metadata-format wording; the correction is upstream. No type-staleness
 warning remains. The temporary layout-probe failure under unshare was reproduced
-and repaired upstream; the native replay passes in both clients.
+and repaired in [Rebrew #36](https://github.com/maci0/rebrew/pull/36);
+the native replay passes in both clients. Both upstream fixes are on `main`.
+
+## GoldTL data audit, 2026-10-19
+
+The existing scaffold has **0 exact placements, 330 displaced symbols and
+24 absent from the map**. At reference addresses, 186/354 symbols are
+comparable: 93 byte-equal, 51 different and 42 missing. Byte equality at a
+reference address does not establish the displaced symbol's identity there.
+
+The logging tables/newline/default name and both Sonnenstrahlen strings have
+correct file bytes at their mapped addresses. In contrast, the scaffold's
+`ch_MorphFrameValue` and `SonnenstrahlenStartZeit` contain zero where the
+reference initializes them to -1; `g_6752a4` also has a zero placeholder for
+native value 1. Resolve storage and initializer provenance before replacing
+these placeholders. The critical-section slots already have import metadata
+and KERNEL32 providers; their placement differs. Anonymous constants need
+COFF/native-operand bindings, not new globals inferred from an absent map name.
+
+Receipts: `.scratch/dsh-wave1/review/data-diagnosis-tl.json` and
+`data-linked-location-samples.json`. The user-run verdicts are retained; only
+22 GoldTL comparison records changed, with no identity/type/storage changes.
+Rerun after the current complete build; these are not results for that image.
 
 ## Verified checkpoint
 
