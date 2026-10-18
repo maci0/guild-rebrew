@@ -7,7 +7,7 @@ struct log_425bf0 {
 	char text[0x80];
 };
 
-extern char* g_6b7e98;
+#include "client_script_runtime.h"
 extern int g_6b7eb0;
 extern void* g_14cb8f0;
 

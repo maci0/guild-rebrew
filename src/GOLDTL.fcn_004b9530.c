@@ -84,7 +84,7 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 		return 0x400;
 	}
 	f = ((gm_RandomMod(2) & 0xffff) + 1.0f) * 0.01f;
-	amount = gm_WalkEntityChain(e->id) * f;
+	amount = (int)(gm_WalkEntityChain(e->id) * f);
 	fcn_004c51a0(-1, cmd->handle, g_773d75, amount);
 	k = gm_RandomMod(n) & 0xffff;
 	o = objs[k];

@@ -4,10 +4,10 @@
 #include <string.h>
 
 extern char g_6b5b20[];
-int __cdecl fcn_004308a0(char* buf, int size, int f);
+char* __cdecl fcn_004308a0(char* buf, int size, void* f);
 void __cdecl fcn_0066080a(char* s);
 
-char* __cdecl fcn_004010b0(int f)
+char* __cdecl fcn_004010b0(void* f)
 {
 	int i;
 	char* p;

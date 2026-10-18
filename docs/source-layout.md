@@ -21,7 +21,7 @@ Review all-target providers, original TU context, storage instances and native
 order with `rebrew source organize review` before merging or splitting. Preserve
 raw baselines, includes, compiler flags and declaration order; compare complete
 COFF bodies/operands and rebuilt images with `source organize check` afterward.
-Move managed identities through Rebrew's writers. Headers declare storage.
+Move managed identities through Rebrew's writers. Headers declare objects; source definitions or selected library members allocate storage.
 
 The October 11 placement pass used these witnesses:
 
@@ -147,10 +147,51 @@ unknown fields stay byte regions. Receipt: `.scratch/goal20/type-identity-layout
 The tracking check at `Units/m_alloc/GOLDTL.fcn_0041dd90.c` supplies both clients
 (Gold 60 code bytes + four NOPs). `GOLDTL.fcn_0041e410.c` supplies the 43-byte
 free-all body, retaining its null-head guard. Four managed scalar/pointer cells
-are declaration views, without storage/data claims. At this checkpoint the
-117-byte client tracked-free provider still needed reconciliation with the
-188-byte server body. Receipt: `.scratch/goal21/allocator-client-repair/`.
+are declaration views, without storage/data claims. This 2026-10-11 checkpoint
+left the 117-byte client tracked-free body and the 188-byte server body
+unmerged. That split is still not an attested single spelling and is not
+permission to synthesize one body. Receipt: `.scratch/goal21/allocator-client-repair/`.
 
 Upstream `42e0a8c0` repaired merge/rehome's loss of existing managed rows in
 legacy-marker files, including rollback and bound-definition guards. Historical
 receipts keep their original paths; current state belongs in [TODO.md](TODO.md).
+
+## Client placement views (Goal75, 2026-10-17)
+
+Inferred declaration home `src/client_placement.h` owns `LC_GEBAEUDE_BAUPLATZ`
+(84 bytes, stable ID `lc.gebaeude-bauplatz-result`) and `LC_OBJECT_LIST`
+(132 bytes, stable ID `d3.object-selection-list32`). Both clients have compiler
+size/offset checks. Native stack clears establish 21 and 33 DWORDs at
+TL `0x4cc9da`/`0x4cca7c` and Gold `0x4cbe5a`/`0x4cbefc`. These are stack views,
+not heap/global allocations. Result fields remain name+0, position+0x40,
+unknown+0x4c, node+0x50; the list has 32 pointers and count+0x80.
+
+The lookup provider, placement provider/callback, both collector providers and
+existing consumers reuse the header. Fourteen client contexts retain 3,224
+complete compiled bytes, all COFF operands and literals. The eight placement
+contexts additionally pass complete native byte/operand proofs at TL
+`0x5982d0`, `0x598330`, `0x598550`, `0x5985f0` and Gold `0x58fa00`, `0x58fa60`,
+`0x58fc80`, `0x58fd20`. The numeric `0x442d50`/Gold `0x447300` argument contract
+is preserved. Both iterator providers stay separate; client raw-link layout,
+global owners and the larger universe contract remain open. Receipts and replays:
+`.scratch/goal75-placement/{REPORT.md,preserve.py,preserve-extra.py,native-proof.py}`.
+
+
+## Scene command declaration boundary (Goal80, 2026-10-17)
+
+The two 55-byte `ecmd_LoadScene` commands remain in their existing target files.
+`source organize review` reports unavailable client raw baselines and
+`safe_to_reorganize=false`; no source move or merge was applied. Shared behavior
+and matching objects do not establish original TU placement or complete PE agreement.
+
+The inferred `client_scene_loader.h` supplies native byte-return/three-argument
+loader declarations, the three-int callback and embedded-scene pointer bridge.
+`client_script_runtime.h` shares the existing script-error provider's declaration
+and reuses the current `ch_motion.h` global view. These headers allocate no storage.
+Ten pre-existing client contexts preserve complete code, fixups and data sections.
+At this Goal80 checkpoint the loaders were placeholders. Later scene-loader C
+recovery does not establish a native byte match or original handle type; use
+current metadata for implementation/verdict state. The recorded integer stream
+transport at TL `0x525b40` was cutover debt. No SERVER-bound input changed. Evidence:
+`.scratch/goal80-scene/{verification-scope.json,proof.json,stream-boundary.json}`
+and `.scratch/goal80-organize-review.json`.

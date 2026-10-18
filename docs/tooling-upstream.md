@@ -12,7 +12,7 @@ here. Project rules are in [AGENTS.md](../AGENTS.md).
 | --- | --- |
 | `gate.sh` | Server build, function/data/image and load acceptance |
 | `verify_objective.py` | Independent complete raw-file equality check |
-| `wine_load_check.sh` | Server `Init`/`Exit` load and export checks |
+| `wine_load_check.sh` | Load server DLL and resolve `Init`/`Exit`; does not call them |
 | `gen_bss_layout.py` | Measured server allocation/layout recipe |
 | `gen_import_includes.py` | Measured native import-retention/order recipe |
 | `update_state_table.py` | Gate-generated `TODO.md` state block |
@@ -52,6 +52,10 @@ uv run --frozen rebrew build anchors --target server.dll \
 The October consolidation reproduced the previous 251 function/34 data anchors.
 CMake reads reference timestamps through Rebrew; the gate consumes structured
 lint/verification results. Its independent objective verifier remains separate.
+Project-level `compiler.execution_backend` also selects the CMake driver runtime;
+[runner/cache guidance](verify-performance.md)
+owns that behavior. `verify --no-cache` skips saved verification results and
+still uses the compiler-object cache. Old `--full` transcripts are historical.
 
 ## Upstream receipts
 

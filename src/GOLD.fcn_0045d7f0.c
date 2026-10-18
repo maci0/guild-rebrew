@@ -3,7 +3,7 @@
 /* GOLD twin of GOLDTL fcn_004597f0: the list head is owner+0xac0 (GOLDTL 0x24)
  * and the next link n+0x28 (GOLDTL 0x20). */
 
-void __cdecl fcn_0045fbb0(int);
+#include "client_scene_resources.h"
 void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_0045d7f0(char* owner, char* n)
@@ -24,6 +24,6 @@ void __cdecl fcn_0045d7f0(char* owner, char* n)
 			*(char**) (p + 0x28) = *(char**) (n + 0x28);
 		}
 	}
-	fcn_0045fbb0(*(int*) (n + 0x1c));
+	fcn_0045fbb0(*(SCENE_RESOURCE**) (n + 0x1c));
 	m_FreeTracked(n);
 }

@@ -728,7 +728,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	}
 	fcn_004ae080(a4, buf, &n, (int*) &p);
 	n = fcn_0064eeec(a4 + n);
-	fcn_0051af00(a5, buf,
+	fcn_0051af00((void*) a5, (int) buf,
 	    fcn_0050b710((int) (((float) n * g_662910) * (float) r),
 	    g_773d75),
 	    g_773d75);

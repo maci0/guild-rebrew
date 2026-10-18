@@ -26,7 +26,6 @@ void __cdecl fcn_0046f540(int win)
 {
 	fcn_0046f540_Win* w;
 	fcn_0046f540_Ent* tmp[0x181];
-	fcn_0046f540_Ent* p;
 	int i;
 	int first;
 	int last;

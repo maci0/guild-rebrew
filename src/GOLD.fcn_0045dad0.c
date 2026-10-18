@@ -1,51 +1,12 @@
+extern int g_10405e0[];
+
 /* ADDRESS: GOLD 0x0045dad0 */
-void __declspec(naked) __cdecl fcn_0045dad0(void)
+void __cdecl fcn_0045dad0(void)
 {
-	__asm {
-		mov ecx, 0e08080h
-		mov eax, 0e0e0e0h
-		_emit 0xc7
-		_emit 0x05
-		_emit 0xc0
-		_emit 0x91
-		_emit 0xfb
-		_emit 0x00
-		_emit 0x40
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x89
-		_emit 0x0d
-		_emit 0xc4
-		_emit 0x91
-		_emit 0xfb
-		_emit 0x00
-		_emit 0xa3
-		_emit 0xc8
-		_emit 0x91
-		_emit 0xfb
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x05
-		_emit 0xcc
-		_emit 0x91
-		_emit 0xfb
-		_emit 0x00
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0x00
-		_emit 0xa3
-		_emit 0xd0
-		_emit 0x91
-		_emit 0xfb
-		_emit 0x00
-		_emit 0x89
-		_emit 0x0d
-		_emit 0xd4
-		_emit 0x91
-		_emit 0xfb
-		_emit 0x00
-		ret
-	}
+	g_10405e0[0] = 0x00000040;
+	g_10405e0[1] = 0x00e08080;
+	g_10405e0[2] = 0x00e0e0e0;
+	g_10405e0[3] = 0x00ffffff;
+	g_10405e0[4] = 0x00e0e0e0;
+	g_10405e0[5] = 0x00e08080;
 }

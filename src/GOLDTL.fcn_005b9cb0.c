@@ -33,7 +33,7 @@ void __cdecl fcn_005b9cb0(int n, char** items)
 	}
 	total = 0;
 	for (i = 0; i < n; i++) {
-		total += fcn_0050b980(*(unsigned short*) items[i], items[i][0x12]);
+		total = (int)(total + (fcn_0050b980(*(unsigned short*) items[i], items[i][0x12])));
 	}
 	price = (int) (total * g_662b20);
 	switch (fcn_0051e070()) {

@@ -9,7 +9,7 @@ struct Node {
 	Node* prev;
 };
 
-extern Node* g_6b6f84;
+#include "client_video_list.h"
 void __cdecl free(void* p);
 
 void __cdecl fcn_0041f940(Node* n)

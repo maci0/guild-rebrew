@@ -1,22 +1,11 @@
-void __cdecl fcn_004241a0(int);
+#include "client_sound.h"
+
+void __cdecl fcn_00420530(float volume, int duration);
 
 /* ADDRESS: GOLD 0x004c24c0 */
-/* MSVC6 /O2 folds `mov eax, dword ptr [imm]` to `b8`. The image is `a1`. */
-int __declspec(naked) __cdecl fcn_004c24c0(int a)
+void __cdecl fcn_004c24c0(float volume, int duration)
 {
-	(void) a;
-	__asm {
-		_emit 0xa1
-		_emit 0x6c
-		_emit 0x0b
-		_emit 0x6f
-		_emit 0x00
-		test eax, eax
-		jz done
-		mov ecx, dword ptr [esp+4]
-		mov dword ptr [esp+4], ecx
-		jmp fcn_004241a0
-	done:
-		ret
-	}
+    if (g_772d1c != 0) {
+        fcn_00420530(volume, duration);
+    }
 }

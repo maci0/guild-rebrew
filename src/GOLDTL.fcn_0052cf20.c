@@ -103,8 +103,8 @@ void __cdecl fcn_0052cf20(Ent* e)
 	d.y = q.y - p.y;
 	fcn_004133e0(obj, &lo, &hi);
 	r = off.y / ((hi - lo) * 0.5f + d.y);
-	q.x = q.x - (r * off.x - off.x * 1.8);
-	q.z = q.z - (r * off.z - off.z * 1.8);
+	q.x = (float)(q.x - (r * off.x - off.x * 1.8));
+	q.z = (float)(q.z - (r * off.z - off.z * 1.8));
 	*(int*) &rot.x = *(int*) &((View*)g_6b8014)->rot.x;
 	*(int*) &rot.y = *(int*) &((View*)g_6b8014)->rot.y;
 	*(int*) &rot.z = *(int*) &((View*)g_6b8014)->rot.z;

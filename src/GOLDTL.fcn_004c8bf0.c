@@ -31,7 +31,7 @@ int __cdecl fcn_004c8bf0(char* x, char* out)
 		q++;
 		((tri12*) (e + 0x90))[k].a += *(float*) q;
 		q += 4;
-		((tri12*) (e + 0x90))[k].a = MIN(MAX(((tri12*) (e + 0x90))[k].a, 0.0), 1000.0);
+		((tri12*) (e + 0x90))[k].a = (float)(MIN(MAX(((tri12*) (e + 0x90))[k].a, 0.0), 1000.0));
 	}
 	if (out != 0)
 		*out = 1;

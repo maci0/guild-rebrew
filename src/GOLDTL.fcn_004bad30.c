@@ -19,7 +19,7 @@ int __cdecl fcn_004bad30(int* a1)
 	unsigned short* e;
 	char* s;
 
-	f = (gm_RandomMod(0xd) + 13.0) * 0.01;
+	f = (float)((gm_RandomMod(0xd) + 13.0) * 0.01);
 	e = fcn_00508e40(a1[0]);
 	if (e == 0)
 		return 1;

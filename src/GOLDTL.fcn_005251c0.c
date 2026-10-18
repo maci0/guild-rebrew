@@ -21,7 +21,7 @@ extern int g_67fcb4;
 extern char g_1007ba0[];
 extern char g_1007bc0[];
 
-int __cdecl ls_ReadVfsDataChecked(void* p, int size, int n, void* file);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 void __cdecl fcn_004b1e60(void);
 
 int __cdecl fcn_005251c0(void* file)

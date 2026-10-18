@@ -54,8 +54,6 @@ void __cdecl fcn_005413d0(int idx)
 	int found;
 	struct house* h;
 	unit_77e980* u;
-	struct building* b;
-	unsigned char k;
 
 	kill[0] = 0x5d;
 	kill[1] = 0x11;

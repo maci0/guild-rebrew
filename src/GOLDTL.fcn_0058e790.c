@@ -102,8 +102,6 @@ void __cdecl fcn_0058e790(char* e, char* res)
 		fcn_00519190(0x40f1, 0x40cc, amt);
 	}
 	else {
-		char ev[0xf8];
-
 		fcn_004c30a0(t, 0, g_6a9814, gm_RandomMod(8), 0xfa);
 		fcn_00519190(0x40d3, 0x40cc);
 	}

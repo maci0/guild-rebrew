@@ -1,15 +1,33 @@
-# TL Miles dependency: 6.1c; original import archive unresolved
+# Miles 6.1c build dependency
 
-**Gold TL linking is blocked until the original SDK import archive is verified.**
-The configured path is `references/mss-6.1c/mss32.lib`, currently absent.
-Putting an arbitrary file there does not remove the CMake block. Do not use
-OpenMiles, another SDK release, or a generated import library as the original.
+Both clients select the pristine SDK archive at
+`references/mss-6.1c/mss32.lib`. Its SHA-256 is
+`34882ed6295c6d7937a505ccab6f32b50a47433856431565ef49860d6bd45f9d`
+(253,742 bytes). The ignored binary is a reproducible build input; it does not
+uniquely establish the archive originally selected by the game's linker.
 
-The reference EXE imports 51 named APIs from `MSS32.DLL`. All 51 PE import hints
-match the sorted export-name indexes of the original Miles 6.1c runtime found at
-`../openmiles/Guild/mss_backup/MSS32.DLL`. Its version resource identifies RAD Game
-Tools and 6.1c. The active DLL in `../openmiles/Guild/` is an OpenMiles replacement;
-the backup is the relevant runtime evidence.
+The source is [ProjectDreamland/area51, pinned commit
+dfaa140222e8918c47b844af15dd10150b05a9a9](https://github.com/ProjectDreamland/area51/blob/dfaa140222e8918c47b844af15dd10150b05a9a9/xCore/3rdParty/Miles6/lib/win/Mss32.lib).
+[Download the unchanged archive](https://raw.githubusercontent.com/ProjectDreamland/area51/dfaa140222e8918c47b844af15dd10150b05a9a9/xCore/3rdParty/Miles6/lib/win/Mss32.lib) from that revision's
+`xCore/3rdParty/Miles6/lib/win/Mss32.lib`, then check the SHA-256 above.
+The Git blob ID is `79105dce07956c70a0e6bc4156236f3e91a36bea`.
+The same snapshot's header identifies 6.1c, dated 15-Oct-01; its runtime is
+byte-identical to the Guild backup listed below.
+
+All 351 archive import names and hints agree with that runtime's exports.
+Actual isolated LINK probes emit exactly the reference's 51 TL and 31 Gold
+MSS32 imports, including every hint. These probes are separate from complete
+game builds; neither client has a verified complete raw image yet.
+
+`cmake/verify-mss32.cmake` checks the fixed hash during configuration and
+immediately before each client link. The archive and verifier are link
+dependencies, and configuration checks that this path is selected in the
+target's library list. Missing or changed bytes fail. Do not substitute
+OpenMiles, another release, or a generated import library.
+
+The runtime witness is `../openmiles/Guild/mss_backup/MSS32.DLL`, identified
+as RAD Game Tools 6.1c. The active DLL in `../openmiles/Guild/` is an OpenMiles
+replacement; use the backup for original runtime evidence.
 
 | Input | SHA-256 |
 | --- | --- |
@@ -33,11 +51,10 @@ The historical re3 archive was downloaded unchanged from
 [this pinned revision](https://git.shihaam.dev/archivemirrors/re3/src/commit/fce2e02444a056cc420be6b32844de039fbfafac/milessdk/lib/mss32.lib).
 [RAD's release history](https://www.radgametools.com/msshist.htm) documents 6.1c.
 
-Before unblocking, establish SDK provenance and check the archive's emitted
-imports against every reference name and hint. Pin the accepted archive's SHA-256
-in the build and check it both during configuration and immediately before the
-link, so replacement after configuration is rejected. An interface match alone
-must not be reported as proof of the original archive's complete byte identity.
+Current provenance, complete archive comparison, raw LINK probes and checksum
+rejecting controls are in `.scratch/goal83-miles-candidates/`:
+`source-pin.json`, `downloads.json`, `comparison.json`, `link-probe.json`, and
+`checksum-controls-production.json`. No archive bytes were patched.
 
 Audit inputs/results are in `.scratch/text-accounting-20261016/`:
 `miles-runtime-versions.json`, `all-miles-library-fingerprints.json`,

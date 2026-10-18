@@ -15,7 +15,7 @@ void __cdecl gm_ResetAllEntities(void);
 void __cdecl fcn_005012f0(void);
 void __cdecl fcn_00510930(void);
 int __cdecl fcn_0051e070(void);
-void __cdecl fcn_00448360(char*, int, int);
+#include "client_scene_loader.h"
 
 void __cdecl fcn_005392a0(char* name, int net)
 {

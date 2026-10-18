@@ -1,3 +1,5 @@
+#include "client_scene_loader.h"
+
 extern int g_7749c8;
 
 

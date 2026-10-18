@@ -92,7 +92,7 @@ int __cdecl fcn_004d5490(int x, int y, int mode)
 			((Slot*)g_1015ea0)[lbl].centered = 1;
 			fcn_0051af00(text, "%T", (int) fcn_0050bb50(e->id, g_773d75) * e->count);
 			fcn_0046f940(lbl, text);
-			total = fcn_0050bb50(e->id, g_773d75) * e->count + total;
+			total = (int)(fcn_0050bb50(e->id, g_773d75) * e->count + total);
 			n++;
 		}
 	}

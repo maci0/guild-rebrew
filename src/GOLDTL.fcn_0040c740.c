@@ -15,6 +15,6 @@ int __cdecl fcn_0040c740(int** pp, int** pp2)
 		fcn_00425bf0(g, *(int*) ((char*) g + 0x118), g_675bbc);
 		return 0;
 	}
-	((int (__cdecl*) (int)) * pp)(*pp2);
+	((int (__cdecl*) (int*)) * pp)(*pp2);
 	return 1;
 }

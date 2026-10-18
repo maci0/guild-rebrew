@@ -1,19 +1,20 @@
 
 
 
-#pragma pack(1)
+#include "client_types.h"
+
+#pragma pack(push, 1)
 typedef struct node99 {
 	char f0;
 	char pad[0x90];
 	struct node99* prev;
 	struct node99* next;
 } node99;
-// SIZE 0x99
+#pragma pack(pop)
+/* SIZE 0x99 */
 
-#include "client_types.h"
 typedef cell10_fb5760 cell10;
-// SIZE 0xa
-#pragma pack()
+/* SIZE 0xa */
 
 extern int g_68a9dc;
 extern char g_9bade0[];

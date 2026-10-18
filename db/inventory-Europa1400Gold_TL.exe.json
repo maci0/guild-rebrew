@@ -2519,8 +2519,17 @@
   },
   {
     "va": 4322800,
-    "size": 64,
-    "name": "fcn.0041f5f0"
+    "size": 46,
+    "name": "fcn.0041f5f0",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 46,
+        "reason": "Reviewed native entry 0x41f5f0: conditional branch at 0x41f602 reaches 0x41f61a; both paths return by 0x41f61d. Complete code is 46 bytes. Bytes 0x41f61e-0x41f61f are NOPs; 0x41f620 is a separate lone RET with no inferred identity; 0x41f621-0x41f62f are NOPs before next inventoried entry 0x41f630. No padding or missing function is fabricated. Worker complete 46-byte object and all three REL32 operands match native. Evidence: .scratch/goal95-ui-release-review/.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-17T17:10:19.291572+00:00"
+      }
+    ]
   },
   {
     "va": 4322864,
@@ -2549,13 +2558,31 @@
   },
   {
     "va": 4323760,
-    "size": 32,
-    "name": "fcn.0041f9b0"
+    "size": 31,
+    "name": "fcn.0041f9b0",
+    "extent_history": [
+      {
+        "old_size": 32,
+        "new_size": 31,
+        "reason": "Reviewed complete native video-list searches: ID lookup31 bytes ends RET0x41f9ce plus1 NOP; HWND lookup34 bytes ends RET0x41f9f1 plus14 NOPs before0x41fa00. All branches stay within each body. Evidence .scratch/goal100-video-lookups/extent-proof.json and .scratch/goal100-worker-handoff/lookups-native.json. Native extent repair, not a source verdict.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-17T18:19:37.221575+00:00"
+      }
+    ]
   },
   {
     "va": 4323792,
-    "size": 48,
-    "name": "fcn.0041f9d0"
+    "size": 34,
+    "name": "fcn.0041f9d0",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 34,
+        "reason": "Reviewed complete native video-list searches: ID lookup31 bytes ends RET0x41f9ce plus1 NOP; HWND lookup34 bytes ends RET0x41f9f1 plus14 NOPs before0x41fa00. All branches stay within each body. Evidence .scratch/goal100-video-lookups/extent-proof.json and .scratch/goal100-worker-handoff/lookups-native.json. Native extent repair, not a source verdict.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-17T18:19:37.221602+00:00"
+      }
+    ]
   },
   {
     "va": 4323840,
@@ -5144,8 +5171,17 @@
   },
   {
     "va": 4490080,
-    "size": 1408,
-    "name": "fcn.00448360"
+    "size": 1406,
+    "name": "fcn.00448360",
+    "extent_history": [
+      {
+        "old_size": 1408,
+        "new_size": 1406,
+        "reason": "Reviewed complete native410-instruction body ends with ret at0x4488dd; two alignment NOPs at0x4488de-0x4488df precede next function. Native body not padded to match current short C object. .scratch/goal83-tl-scene/REPORT.md",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T22:51:22.722962+00:00"
+      }
+    ]
   },
   {
     "va": 4491488,
@@ -13357,8 +13393,17 @@
   },
   {
     "va": 5041152,
-    "size": 240,
-    "name": "fcn.004cec00"
+    "size": 225,
+    "name": "fcn.004cec00",
+    "extent_history": [
+      {
+        "old_size": 240,
+        "new_size": 225,
+        "reason": "Reviewed complete native control flow from 0x4cec00 through final RET at 0x4cece0: all non-call branches stay inside225 code bytes, both success and failure exits return, and fifteen following NOPs precede 0x4cecf0. Existing inventory240 includes alignment; function metadata41 truncates an instruction at 0x4cec28. This repairs native extent independently of the current223-byte unmatched C object. No assembly or padding source added. Evidence: .scratch/goal94-4cec00/root-native.json and root-extent-proof.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-17T17:29:47.565490+00:00"
+      }
+    ]
   },
   {
     "va": 5041392,
@@ -18048,8 +18093,17 @@
   },
   {
     "va": 5373184,
-    "size": 48,
-    "name": "fcn.0051fd00"
+    "size": 39,
+    "name": "fcn.0051fd00",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 39,
+        "reason": "Goal102 native body has two C3 returns ending at0x51fd26. Conditional null branch targets0x51fd23 inside39bytes; nine90bytes at0x51fd27-0x51fd2f precede next0x51fd30. Alignment excluded independently of C match. Native listing .scratch/goal100-worker-handoff/native-51fd00.json.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-17T18:47:42.704814+00:00"
+      }
+    ]
   },
   {
     "va": 5373232,
@@ -18138,8 +18192,17 @@
   },
   {
     "va": 5383440,
-    "size": 1456,
-    "name": "fcn.00522510"
+    "size": 1455,
+    "name": "fcn.00522510",
+    "extent_history": [
+      {
+        "old_size": 1456,
+        "new_size": 1455,
+        "reason": "Executable body ends with ret at 0x522abe; 0x522abf is a separate alignment NOP before ls_LoadDynamicEntities at 0x522ac0; full 1455-byte COFF operand proof in .scratch/goal82-grok-buildings/prove.txt",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T20:24:01.063133+00:00"
+      }
+    ]
   },
   {
     "va": 5384896,
@@ -18163,8 +18226,17 @@
   },
   {
     "va": 5390400,
-    "size": 1488,
-    "name": "fcn.00524040"
+    "size": 1478,
+    "name": "fcn.00524040",
+    "extent_history": [
+      {
+        "old_size": 1488,
+        "new_size": 1478,
+        "reason": "Town loader executable body ends in ret at 0x524605; ten alignment NOPs at 0x524606..0x52460f precede function0x524610. Full1478-byte object has one in-range SIB mismatch; no byte match claimed.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-16T21:01:38.362861+00:00"
+      }
+    ]
   },
   {
     "va": 5391888,

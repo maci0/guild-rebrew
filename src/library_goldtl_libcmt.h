@@ -1259,7 +1259,7 @@
 // __mbschr
 
 
-// __strlwr
+// __strupr
 
 
 // __mkdir

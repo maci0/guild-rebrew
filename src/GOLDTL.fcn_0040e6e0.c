@@ -23,7 +23,7 @@ int __cdecl fcn_0040e6e0(int* a, char** name)
 	if (*a == 0) {
 		return 0;
 	}
-	if (!m_is_tracked(*a)) {
+	if (!m_is_tracked((void*) *a)) {
 		return 0;
 	}
 	memset(&q, 0, sizeof(q));

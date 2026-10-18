@@ -17,7 +17,6 @@ int __cdecl ch_DroppingObject();
 int __cdecl fcn_00406db0();
 int __cdecl fcn_00406e70();
 int __cdecl fcn_00407390();
-int __cdecl fcn_004079d0();
 int __cdecl fcn_004079f0();
 int __cdecl fcn_0040a600();
 int __cdecl fcn_0040aa00();

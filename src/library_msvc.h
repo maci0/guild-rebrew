@@ -3,6 +3,16 @@
  * Managed sizes are45 and26. Complete native code/operand checks and the
  * raw server.map identify LIBCMT:crt0dat.obj; see docs/TODO.md. */
 
+/* Gold LIBC classifications. Comments only; no declarations and no storage.
+ * 0x5dedd8 _fsopen / __fsopen, fopen.obj, 32 bytes.
+ * 0x5dedf8 fopen / _fopen, fopen.obj, 19 bytes.
+ * 0x5defef ctime / _ctime, ctime.obj, 25 bytes.
+ * 0x5e5157 _getstream / __getstream, stream.obj, 120 bytes.
+ * 0x5e4fe7 _openfile / __openfile, _open.obj, 368 bytes.
+ * 0x5e5269 asctime / _asctime, asctime.obj, 174 bytes.
+ * 0x5e533f localtime / _localtime, localtim.obj, 352 bytes.
+ * Not a raw-link provider. */
+
 #if 0
 // MSVC CRT library symbols for SERVER (matchable by PDB name)
 // These functions come from LIBCMT.lib (static CRT, /MT)

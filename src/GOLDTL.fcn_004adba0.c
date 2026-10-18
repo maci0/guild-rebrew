@@ -7,7 +7,7 @@ extern int g_7728c8;
 extern int g_7728cc;
 extern int g_7728d0;
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 int __cdecl fcn_004adba0(void* stream)
 {

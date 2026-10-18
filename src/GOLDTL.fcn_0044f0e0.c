@@ -1,13 +1,13 @@
 
 
-extern int g_6b7fdc;
+extern struct VFS_DIR* g_6b7fdc;
 extern char g_6750e8[];
 
-void* __cdecl fcn_0042ff50(char*, char*, int);
-int __cdecl vfs_ReadData(void*, int, int, void*);
-void __cdecl fcn_00401180(void*, char*);
-void __cdecl fcn_004011f0(void*, void*);
-int __cdecl CloseVfsStream(void* stream);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
+int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
+int __cdecl fcn_00401180(void* stream, void* dst);
+int __cdecl fcn_004011f0(void* stream, void* dst);
+#include "Develop/Units/vfs/vfs.h"
 
 char __cdecl fcn_0044f0e0(char* name)
 {
@@ -20,7 +20,7 @@ char __cdecl fcn_0044f0e0(char* name)
 	ok = 1;
 	h = fcn_0042ff50(name, g_6750e8, g_6b7fdc);
 	if (h != 0) {
-		vfs_ReadData(&magic, 4, 1, h);
+		vfs_ReadData((char*) &magic, 4, 1, h);
 		fcn_00401180(h, &c);
 		fcn_004011f0(h, &v);
 		fcn_00401180(h, &c);

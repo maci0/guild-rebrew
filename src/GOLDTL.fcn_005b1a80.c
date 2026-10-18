@@ -1,10 +1,15 @@
+#include "g_774a78.h"
+
+extern Node* g_774a78;
+
+/* ADDRESS: GOLD 0x005a8600 */
 /* ADDRESS: GOLDTL 0x005b1a80 */
 
 char* __cdecl fcn_005b1a80(int key)
 {
 	char* p;
 
-	p = *(char**) 0x774a78;
+	p = (char*) g_774a78;
 	while (p != 0) {
 		if (*(int*) p == key) {
 			return p;
@@ -16,6 +21,7 @@ char* __cdecl fcn_005b1a80(int key)
 
 void __cdecl fcn_005b1980(int a, char* o);
 
+/* ADDRESS: GOLD 0x005a89a0 */
 /* ADDRESS: GOLDTL 0x005b1e20 */
 
 void __cdecl fcn_005b1e20(char* p)

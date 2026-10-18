@@ -1451,7 +1451,7 @@ float __cdecl gm_GetObjektPrice(int season, int id)
  * pointer or NULL. */
 
 
-
+#if defined(REBREW_SERVER)
 char* __cdecl gm_FindSlotById(int arg1, int arg2)
 {
 	int i;
@@ -1463,7 +1463,7 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 	}
 	return 0;
 }
-
+#endif
 /* Client-only: map distance between two tile positions (discarded). */
 double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
 {
@@ -1481,7 +1481,7 @@ double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
 	}
 	return sqrt(dx * dx + dy * dy) * 2.90816330909729;
 }
-
+#if defined(REBREW_SERVER)
 void* __cdecl gm_NextEntityQueryMatch(void)
 {
     unsigned short* current;
@@ -1596,7 +1596,7 @@ lab_43e:
     }
     return (void*)matched_ent;
 }
-
+#endif
 /* Client-only: the item-list variant of gm_NextEntityQueryMatch.  It walks
  * the query's 0x43-byte item records (g_query_flag1) or their +0x3f links,
  * keeping the link stack in g_dispatch_table_a/b, and applies the id, owner,
@@ -1824,7 +1824,7 @@ query_tail:
 	g_query_cursor = (unsigned short*) container_id;
 	return gm_NextEntityQueryMatch();
 }
-
+#if defined(REBREW_SERVER)
 char* __cdecl gm_AllocateObjectSlot(void)
 {
 	char* node;
@@ -1844,7 +1844,7 @@ char* __cdecl gm_AllocateObjectSlot(void)
 	}
 	return result;
 }
-
+#endif
 /* Removes the first node whose type id equals b from the list headed by *a.
  * Returns 0 on success, -1 if the list is empty, -2 if the id is not found.
  * Also decrements the global query limit counter. */
@@ -2520,8 +2520,8 @@ void* __cdecl gm_FindNextFilteredEntity(void)
 	}
 	return list_head;
 }
-
 #pragma intrinsic(memcpy, memset, strcpy)
+#if !defined(REBREW_GOLD)
 /* Initializes the filter state from a list of (type, value) vararg pairs.
  * Type 0 = extra5 (byte), 1 = extra1 (int), 2 = dynasty string copy,
  * 3 = extra2 (short), 4 = extra3 (short), 5 = extra4 (byte), 6 = field_48.
@@ -2590,7 +2590,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 	g_query_filter_base = g_entity_ptr;
 	return (unsigned short*) gm_FindNextFilteredEntity();
 }
-
+#endif
 char* __cdecl gm_SearchStruct(void)
 {
 	EntityQueryRecord* entity_cursor;
@@ -2742,7 +2742,7 @@ void __cdecl gm_SetBuildingWorkerLimits(unsigned char* building)
 		}
 	}
 }
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 #pragma optimize("y", off)
 char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 {
@@ -2991,7 +2991,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	return geb;
 }
 #pragma optimize("", on)
-
+#endif
 /* Client-only: the building's market store, else its first store item
  * (discarded). */
 void* __cdecl gm_FindBuildingStore(unsigned char* building)
@@ -3594,7 +3594,7 @@ STAT_REC __cdecl gm_GetStatRecord(int stat)
 	}
 	return ((STAT_REC*) g_stat_table)[stat];
 }
-
+#if defined(REBREW_SERVER)
 int __cdecl gm_IsInRange(int x)
 {
 	int stat_range;
@@ -3604,7 +3604,7 @@ int __cdecl gm_IsInRange(int x)
 	}
 	return 2;
 }
-
+#endif
 /* Checks if an entity type is of a specific class. Returns
  * non-zero if the type matches the expected entity class. */
 
@@ -4427,7 +4427,7 @@ char __cdecl gm_RandomStatModifier(char stat_value)
 /* Looks up an entity record by its integer ID. Searches
  * the global entity table and returns a pointer to the
  * matching entity, or 0 if not found. */
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl gm_LookupEntityRecordById(int search_id)
 {
 	char* base_cursor;
@@ -4445,7 +4445,7 @@ int __cdecl gm_LookupEntityRecordById(int search_id)
 	}
 	return 0;
 }
-
+#endif
 /* Client-only age, rank and family helpers (discarded). */
 
 float __cdecl gm_GetEntityAge(int slot)
@@ -4676,7 +4676,7 @@ int __cdecl gm_CountChildren(char* entity, int* count_out)
 	}
 	return adult;
 }
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 {
 	int counter;
@@ -4813,7 +4813,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 
 	return chain;
 }
-
+#endif
 /* 0x10035430 */
 
 #pragma intrinsic(memcpy, memset, strlen, strcpy)
@@ -6610,7 +6610,7 @@ int __cdecl compute_size(char* pkt)
 	}
 	return *(int*) (pkt + 0xe) * 0x14;
 }
-
+#if defined(REBREW_SERVER)
 int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 {
 	char* pkt;
@@ -6706,7 +6706,7 @@ int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 limited:
 	return size < requested ? size : requested;
 }
-
+#endif
 /* Client-only: room left in a store for `item`, capped at `limit`
  * (discarded). */
 int __cdecl gm_GetStoreRoom(char* store, int item, int limit)

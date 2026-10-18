@@ -28,7 +28,7 @@ void __cdecl fcn_004ac410(unsigned char* a1, int a2, int a3)
 		return;
 	if (p[0] == 0 && *(unsigned short*) (p + 1) <= 4) {
 		c = gm_RandomMod(8) + 8;
-		c = c < 252.0f - a1[*(unsigned short*) (p + 1) + 0x80] ? c : 252.0f - a1[*(unsigned short*) (p + 1) + 0x80];
+		c = (char)(c < 252.0f - a1[*(unsigned short*) (p + 1) + 0x80] ? c : 252.0f - a1[*(unsigned short*) (p + 1) + 0x80]);
 		fcn_004c4510((char*) a1, *(int*) (a1 + 4));
 		fcn_004c4670(1, 1, *(unsigned short*) (p + 1) + 0x80, &c);
 		fcn_004c5360();

@@ -95,9 +95,9 @@ void __cdecl fcn_00474040(void)
 		range = max - min;
 		if ((flags & 0x48) == 0 && mx > s->x + bar->w && mx < s->w - bar->w + s->x) {
 			if ((flags & 2) != 0) {
-				pos = (mx - g->w - s->x) * ((float) range / page) + min + 0.5f;
+				pos = (int)((mx - g->w - s->x) * ((float) range / page) + min + 0.5f);
 			} else if ((flags & 1) != 0) {
-				pos = (s->h - g->h + s->y - my) * ((float) range / page) + min + 0.5f;
+				pos = (int)((s->h - g->h + s->y - my) * ((float) range / page) + min + 0.5f);
 			}
 			if (pos < min) {
 				pos = min;

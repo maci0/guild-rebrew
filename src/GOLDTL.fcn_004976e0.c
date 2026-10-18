@@ -35,7 +35,7 @@ int __cdecl fcn_004976e0(int unused, char* e, int unused2, char* out, char* out2
 		if (best != 0) {
 			f = fcn_0050d320(e, g_773d75) * 0.95f;
 			kind = minv < 50 ? 50 : 30;
-			amt = fcn_004a48a0(best, kind);
+			amt = (float)(fcn_004a48a0(best, kind));
 			if (amt != 0.0f && !(amt > f)) {
 				out[0] = 4;
 				*(int*) (out + 4) = *(int*) (best + 1);
@@ -56,7 +56,7 @@ int __cdecl fcn_004976e0(int unused, char* e, int unused2, char* out, char* out2
 				if (p[0x5a] & 5) {
 					return 0;
 				}
-				amt = fcn_004a48a0(p, *(int*) (out + 0x10));
+				amt = (float)(fcn_004a48a0(p, *(int*) (out + 0x10)));
 				if (amt != 0.0f && !(amt > *(unsigned int*) (out2 + 8))) {
 					*(float*) (out + 0x14) = amt;
 					return 0xf;

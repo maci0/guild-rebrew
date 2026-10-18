@@ -2067,8 +2067,17 @@
   },
   {
     "va": 4310048,
-    "size": 64,
-    "name": "fcn.0041c420"
+    "size": 55,
+    "name": "fcn.0041c420",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 55,
+        "reason": "Terminal ret is the single-byte c3 at 0x41c456. The executable body is 0x41c420 through 0x41c456 inclusive (55 bytes). Internal branches are jne 0x41c42f, jne 0x41c43a, and jne 0x41c445; each target is inside that 55-byte span and none enters the bytes after the ret. The nine bytes at 0x41c457..0x41c45f are alignment NOPs (90 90 90 90 90 90 90 90 90). The next inventory function is fcn.0041c460 at va 4310112 (0x41c460). 0x41c420+55 is 0x41c457, which does not overlap 0x41c460. Current inventory size 64 includes those nine NOPs and stops at the next function start.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T06:25:07.068380+00:00"
+      }
+    ]
   },
   {
     "va": 4310112,
@@ -2087,8 +2096,17 @@
   },
   {
     "va": 4311088,
-    "size": 1840,
-    "name": "fcn.0041c830"
+    "size": 1830,
+    "name": "fcn.0041c830",
+    "extent_history": [
+      {
+        "old_size": 1840,
+        "new_size": 1830,
+        "reason": "Dialog executable body ends in ret at 0x41cf55; ten alignment NOPs at 0x41cf56..0x41cf5f precede callback launcher0x41cf60. Full1830-byte object has18 in-range byte differences; no byte match claimed.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T21:01:40.066085+00:00"
+      }
+    ]
   },
   {
     "va": 4312928,
@@ -2446,8 +2464,31 @@
   },
   {
     "va": 4337040,
-    "size": 1536,
-    "name": "fcn.00422d90"
+    "size": 44,
+    "name": "fcn.00422d90",
+    "extent_history": [
+      {
+        "old_size": 1536,
+        "new_size": 44,
+        "reason": "Split merged1536-byte span: cleanup422d90 has38 loop bytes plus6-byte CoUninitialize tail JMP, then4 NOPs; independent prologue422dc0 ends atRET423388,1481 bytes plus7 NOPs. Complete native .scratch/goal76-assembly/{cleanup-native,video-open-native}.json. Preserve existing interior CoUninitialize LIBRARY identity and source verdict histories; library/source/raw-provider attribution remains separate.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T17:51:01.488838+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4337088,
+    "size": 1481,
+    "name": "fcn.00422dc0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1481,
+        "reason": "Split merged1536-byte span: cleanup422d90 has38 loop bytes plus6-byte CoUninitialize tail JMP, then4 NOPs; independent prologue422dc0 ends atRET423388,1481 bytes plus7 NOPs. Complete native .scratch/goal76-assembly/{cleanup-native,video-open-native}.json. Preserve existing interior CoUninitialize LIBRARY identity and source verdict histories; library/source/raw-provider attribution remains separate.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T17:51:01.494879+00:00"
+      }
+    ]
   },
   {
     "va": 4338576,
@@ -2461,8 +2502,17 @@
   },
   {
     "va": 4338992,
-    "size": 48,
-    "name": "fcn.00423530"
+    "size": 46,
+    "name": "fcn.00423530",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 46,
+        "reason": "Reviewed complete C/native video-list helpers: release46 bytes ends RET0x42355d plus2 NOPs; ID lookup31 bytes ends RET0x42373e plus1 NOP; HWND lookup34 bytes ends RET0x423761 plus14 NOPs. All non-call branches stay within each code body. Evidence .scratch/goal100-video-lookups/extent-proof.json and saved full listings. Native boundaries independent of source match verdict.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T18:19:36.279461+00:00"
+      }
+    ]
   },
   {
     "va": 4339040,
@@ -2481,13 +2531,31 @@
   },
   {
     "va": 4339488,
-    "size": 32,
-    "name": "fcn.00423720"
+    "size": 31,
+    "name": "fcn.00423720",
+    "extent_history": [
+      {
+        "old_size": 32,
+        "new_size": 31,
+        "reason": "Reviewed complete C/native video-list helpers: release46 bytes ends RET0x42355d plus2 NOPs; ID lookup31 bytes ends RET0x42373e plus1 NOP; HWND lookup34 bytes ends RET0x423761 plus14 NOPs. All non-call branches stay within each code body. Evidence .scratch/goal100-video-lookups/extent-proof.json and saved full listings. Native boundaries independent of source match verdict.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T18:19:36.279477+00:00"
+      }
+    ]
   },
   {
     "va": 4339520,
-    "size": 48,
-    "name": "fcn.00423740"
+    "size": 34,
+    "name": "fcn.00423740",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 34,
+        "reason": "Reviewed complete C/native video-list helpers: release46 bytes ends RET0x42355d plus2 NOPs; ID lookup31 bytes ends RET0x42373e plus1 NOP; HWND lookup34 bytes ends RET0x423761 plus14 NOPs. All non-call branches stay within each code body. Evidence .scratch/goal100-video-lookups/extent-proof.json and saved full listings. Native boundaries independent of source match verdict.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T18:19:36.279481+00:00"
+      }
+    ]
   },
   {
     "va": 4339568,
@@ -2546,8 +2614,17 @@
   },
   {
     "va": 4342176,
-    "size": 176,
-    "name": "fcn.004241a0"
+    "size": 175,
+    "name": "fcn.004241a0",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 175,
+        "reason": "Ret C3 at 0x42424e ends the shared fade function; 0x42424f is one alignment NOP before 0x424250. Complete 175-byte C and operand proof: .scratch/goal91-sound-wrapper/callee-proof.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T16:07:40.656580+00:00"
+      }
+    ]
   },
   {
     "va": 4342352,
@@ -3961,8 +4038,17 @@
   },
   {
     "va": 4442656,
-    "size": 144,
-    "name": "fcn.0043ca20"
+    "size": 136,
+    "name": "fcn.0043ca20",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 136,
+        "reason": "Gold clone-list helper ret at0x43caa7 ends136 native code bytes; eight NOPs0x43caa8-0x43caaf align the next function at0x43cab0. Native control-flow extent separately matches the complete object candidate; .scratch/goal83-gold-scene/helper-followup/",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T23:43:16.860295+00:00"
+      }
+    ]
   },
   {
     "va": 4442800,
@@ -4614,8 +4700,17 @@
   },
   {
     "va": 4505184,
-    "size": 1424,
-    "name": "fcn.0044be60"
+    "size": 1417,
+    "name": "fcn.0044be60",
+    "extent_history": [
+      {
+        "old_size": 1424,
+        "new_size": 1417,
+        "reason": "Native ret at0x44c3e8 ends the1417-byte Gold scene loader. Seven following NOPs0x44c3e9-0x44c3ef are alignment before the next function. Object size is not used to choose extent; .scratch/goal83-gold-scene/REPORT.md",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T23:15:02.455056+00:00"
+      }
+    ]
   },
   {
     "va": 4506608,
@@ -5733,8 +5828,17 @@
   },
   {
     "va": 4591744,
-    "size": 176,
-    "name": "fcn.00461080"
+    "size": 166,
+    "name": "fcn.00461080",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 166,
+        "reason": "Native ret at 0x461125 ends 166-byte body; following 0x461126-0x46112f are ten alignment NOPs before 0x461130. .scratch/goal83-gold-finalizers/finalizer.asm",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T22:34:08.947289+00:00"
+      }
+    ]
   },
   {
     "va": 4591920,
@@ -6338,8 +6442,17 @@
   },
   {
     "va": 4637120,
-    "size": 144,
-    "name": "fcn.0046c1c0"
+    "size": 137,
+    "name": "fcn.0046c1c0",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 137,
+        "reason": "Reviewed full centering helper: reachable RET at 0x46c248, all conditional branches internal; seven following 90 bytes precede the independent called setter at 0x46c250. Native-only repair, not a C match claim. Evidence .scratch/goal99-gui-center/extent-proof.json and native.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T17:53:20.188830+00:00"
+      }
+    ]
   },
   {
     "va": 4637264,
@@ -6413,8 +6526,31 @@
   },
   {
     "va": 4640112,
-    "size": 592,
-    "name": "fcn.0046cd70"
+    "size": 21,
+    "name": "fcn.0046cd70",
+    "extent_history": [
+      {
+        "old_size": 592,
+        "new_size": 21,
+        "reason": "Separate independently called 0x46cd90 entry from coalesced 592-byte 0x46cd70 wrapper inventory. Wrapper is21 executable bytes ending in tail JMP0x46cb10 plus11 NOPs; next body has557 executable bytes ending RET0x46cfbc plus3 NOPs before0x46cfc0. All non-call branch targets stay in the new body. Evidence .scratch/goal99-gui-center/move-extent-proof.json and move-native-full.json. Native inventory only, no source provider or verdict.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T17:55:59.346983+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4640144,
+    "size": 557,
+    "name": "fcn.0046cd90",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 557,
+        "reason": "Separate independently called 0x46cd90 entry from coalesced 592-byte 0x46cd70 wrapper inventory. Wrapper is21 executable bytes ending in tail JMP0x46cb10 plus11 NOPs; next body has557 executable bytes ending RET0x46cfbc plus3 NOPs before0x46cfc0. All non-call branch targets stay in the new body. Evidence .scratch/goal99-gui-center/move-extent-proof.json and move-native-full.json. Native inventory only, no source provider or verdict.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T17:55:59.351910+00:00"
+      }
+    ]
   },
   {
     "va": 4640704,
@@ -10221,8 +10357,31 @@
   },
   {
     "va": 4971664,
-    "size": 49,
-    "name": "fcn.004bdc90"
+    "size": 15,
+    "name": "fcn.004bdc90",
+    "extent_history": [
+      {
+        "old_size": 49,
+        "new_size": 15,
+        "reason": "Reviewed coalesced native entries: helper 0x4bdc90 has 15 code bytes and a tail JMP at 0x4bdc9a; 0x4bdc9f is one NOP. Independent direct-call target 0x4bdca0 (called at 0x4bf948) has 33 code bytes through RET 0x4bdcc0, followed by fifteen NOPs before 0x4bdcd0. The old 49-byte inventory entry incorrectly joined both bodies. Helper metadata already describes its 15-byte C body. Full shared cleanup C comparison on Gold and six rejecting controls pass. No padding emission or storage owner invented. Evidence: .scratch/goal95-slot-sharing/ and .scratch/goal94-slot-cleanup/gold-caller.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T17:12:14.707201+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4971680,
+    "size": 33,
+    "name": "fcn.004bdca0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 33,
+        "reason": "Reviewed coalesced native entries: helper 0x4bdc90 has 15 code bytes and a tail JMP at 0x4bdc9a; 0x4bdc9f is one NOP. Independent direct-call target 0x4bdca0 (called at 0x4bf948) has 33 code bytes through RET 0x4bdcc0, followed by fifteen NOPs before 0x4bdcd0. The old 49-byte inventory entry incorrectly joined both bodies. Helper metadata already describes its 15-byte C body. Full shared cleanup C comparison on Gold and six rejecting controls pass. No padding emission or storage owner invented. Evidence: .scratch/goal95-slot-sharing/ and .scratch/goal94-slot-cleanup/gold-caller.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T17:12:14.711554+00:00"
+      }
+    ]
   },
   {
     "va": 4971728,
@@ -15470,8 +15629,17 @@
   },
   {
     "va": 5297872,
-    "size": 96,
-    "name": "fcn.0050d6d0"
+    "size": 86,
+    "name": "fcn.0050d6d0",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 86,
+        "reason": "Goal80 complete native body86 ends at50d725 RET, followed by ten90 NOPs through50d72f before independent50d730 callback. Current C emits86 and all86 bytes match after its3relocations; source SIZE96 is reviewed separately. Evidence .scratch/goal80-scene/gold-city-boundary.json and gold-city-native.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-16T19:22:38.663425+00:00"
+      }
+    ]
   },
   {
     "va": 5297968,
@@ -18831,8 +18999,17 @@
   },
   {
     "va": 5724416,
-    "size": 208,
-    "name": "fcn.00575900"
+    "size": 196,
+    "name": "fcn.00575900",
+    "extent_history": [
+      {
+        "old_size": 208,
+        "new_size": 196,
+        "reason": "Complete nine-case switch: executable cases end at ret 0x57599e, internal alignment byte 0x57599f and nine absolute case targets occupy 0x5759a0 through 0x5759c3. Twelve following NOPs precede next inventory function 0x5759d0. The stored 48-byte assembly body is incomplete; native evidence in .scratch/goal87-switch-review/native.json.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-17T14:12:15.584945+00:00"
+      }
+    ]
   },
   {
     "va": 5724624,

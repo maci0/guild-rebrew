@@ -38,10 +38,10 @@ void __cdecl fcn_00501fe0(void)
 			copy = *row;
 			if (gm_RandomMod(1) != 0) {
 				copy.price = copy.base * 1.5;
-				copy.value = fcn_0050b980(row->id, 100) * 1.5;
+				copy.value = (float)(fcn_0050b980(row->id, 100) * 1.5);
 			} else {
 				copy.price = copy.base * 0.5;
-				copy.value = fcn_0050b980(row->id, 100) * 0.5;
+				copy.value = (float)(fcn_0050b980(row->id, 100) * 0.5);
 			}
 			fcn_004c61d0(&copy, g_773d75);
 		}

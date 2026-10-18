@@ -1,7 +1,9 @@
 # Europa 1400: The Guild
 
-Game and binary context. Native observations are distinguished from community
-claims; this is not a live store, version or project-status directory. Detailed
+Game and binary context. Native observations are separate from community
+claims. External pages, press copy and community tools below are background:
+they are not native evidence and do not authorize a name, a type or storage.
+This is not a live store, version or project-status directory. Detailed
 historical surveys and source links remain in the
 [archive](goal-history.md#full-notebooks).
 

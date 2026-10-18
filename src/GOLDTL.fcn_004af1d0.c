@@ -74,6 +74,6 @@ int __cdecl fcn_004af1d0(int a1, int a2, int a3, char* a4, int a5)
 		rep stosb
 	}
 	fcn_004ae080(a4, buf, &a2, &a3);
-	fcn_0051af00(a5, buf, v);
+	fcn_0051af00((void*) a5, (int) buf, v);
 	return 1;
 }

@@ -82,6 +82,7 @@ reversed_dir = "src"
 inventory_file = "db/inventory-Europa1400Gold_TL.exe.json"
 bin_dir = "bin/Europa1400Gold_TL.exe"
 module = "GOLDTL"
+raw_link = "build/Europa1400Gold_TL.exe"
 # Provisional link list — measured import/static names for the identified
 # external modules; adjust when the TL link lands (REBREW_EXTERNAL_LIBS).
 [targets."Europa1400Gold_TL.exe".external_libs]
@@ -96,6 +97,7 @@ MSVCRT = ""
 D3DX8 = "references/dxsdk8/lib/d3dx8.lib"
 LIBCMT = "LIBCMT.lib"
 WINMM = "WINMM.lib"
+WS2_32 = "WS2_32.lib"
 
 [targets."Europa1400Gold.exe"]
 check_known_bindings = true
@@ -105,6 +107,7 @@ defines = ["REBREW_GOLD"]
 # d3_, nt_, ob_, gs_, am_) are out of scope for server symbols but in scope
 # here. Marker GOLD distinguishes its annotations from SERVER/GOLDTL.
 module = "GOLD"
+raw_link = "build/Europa1400Gold.exe"
 # Same code generator as TL; native CRT entry points and gzip errno access
 # identify the single-thread runtime. Keep this override local to Gold.
 compiler = { profile = "msvc-6.0-sp5-pp", base_cflags = '/nologo /c /ML /D "_WIN32_WINNT=0x0400" /Ireferences/zlib-1.1.3' }
@@ -123,17 +126,18 @@ DDRAW = "DDRAW.lib"
 DINPUT = "DINPUT.lib"
 OLE32 = "OLE32.lib"
 CTLFWR32 = "CTLFWR32.lib"
-MSS32 = "MSS32.lib"
+MSS32 = "references/mss-6.1c/mss32.lib"
 MSVCRT = ""
 LIBC = "LIBC.lib"
 WINMM = "WINMM.lib"
+WS2_32 = "WS2_32.lib"
 [compiler]
 profile = "msvc-6.0-sp5"
-# Docker-only toolchain: CL.EXE runs inside rebrew/msvc:6.0-sp5-win32 (the
-# standard rebrew runner); no host toolchain tree, so these legacy fields
-# are empty.
+# The namespace runner uses the pinned toolchain image filesystem and Wine;
+# these legacy host toolchain fields remain empty.
 command = ""
 includes = "src/Develop"
 libs = ""
 cflags = "/O2 /Gd"
 base_cflags = "/nologo /c /MT /D \"_WIN32_WINNT=0x0400\" /Ireferences/zlib-1.1.3"
+execution_backend = "unshare"

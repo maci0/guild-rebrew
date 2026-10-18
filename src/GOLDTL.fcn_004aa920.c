@@ -23,7 +23,7 @@ int __cdecl fcn_004aa920(short* a1, int a2, char* a3)
 	if (*(int*) ((char*) a1 + 0x194) < 3)
 		return 0;
 	ids[0] = *a1;
-	if (fcn_004a54a0(a1, 0xf00500, 4, ids, 0.0f, gm_RandomMod(0x10) + 33.0, &src) == 0)
+	if (fcn_004a54a0(a1, 0xf00500, 4, ids, 0.0f, (float)(gm_RandomMod(0x10) + 33.0), &src) == 0)
 		return 0;
 	ids[1] = src;
 	if (fcn_004a54a0(a1, 0xf00500, 4, ids, 50.0f, 100.0f, &dst) == 0)

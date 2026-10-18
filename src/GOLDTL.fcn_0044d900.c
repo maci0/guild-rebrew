@@ -1,4 +1,4 @@
-void __cdecl fcn_004011a0(void* a, char* buf);
+char* __cdecl fcn_004011a0(void* a, char* buf);
 char* __cdecl fcn_0064d1a0(char* s, int c);
 
 /* ADDRESS: GOLD 0x0044efd0 */

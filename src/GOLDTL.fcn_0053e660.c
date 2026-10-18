@@ -42,8 +42,8 @@ char* __cdecl fcn_0053e660(float tx, float tz)
 		v.x = *(float*) (p + 0x4c);
 		v.y = *(float*) (p + 0x50);
 		pz = *(float*) (p + 0x54);
-		v.x += tx * (1.0f / 700.0f) * dx;
-		v.z = tz * (1.0f / 750.0f) * dz + pz;
+		v.x = (float)(v.x + tx * (1.0f / 700.0f) * dx);
+		v.z = (float)(tz * (1.0f / 750.0f) * dz + pz);
 	}
 	r = fcn_00442910(0, &v, p + 0x84, "sp_STADTTURM");
 	r[0x215] |= 1;

@@ -1,8 +1,9 @@
 # Vendored libraries
 
 The build compiles zlib 1.1.3 and minizip from pinned pristine sources plus
-ordered patches. CMake refuses configuration if generated sources differ.
-Never edit a generated tree or stock archive by hand.
+ordered patches. CMake refuses configuration when the generated sources differ.
+Do not edit a generated tree or a stock archive by hand. Miles is a pinned
+import library, not one of these trees: [Miles 6.1c](#miles-61c).
 
 ## Layout
 
@@ -26,11 +27,37 @@ uv run --frozen rebrew library vendor references/vendor/zlib/vendor.toml referen
 uv run --frozen rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml --apply
 ```
 
-Check is the default. Rebrew verifies every pristine checksum, stages all
-manifests, applies GNU `patch -p1 --fuzz=0`, then compares the exact output file
-set/bytes. Paths cannot escape the root, use symlinks or overlap inputs/outputs.
-All inputs/outputs are CMake configure dependencies. Upstream `test_vendor.py`
-owns reproduction/failure tests; rebuild after regeneration.
+Check is the default and does not take `--apply`. It verifies every pristine
+checksum, copies each manifest's listed files into a temporary stage, applies
+GNU `patch -p1 --fuzz=0`, and compares that stage with the output tree. A
+mismatch leaves the output unwritten. Paths cannot escape the root, use
+symlinks, or overlap inputs and outputs.
+
+On 2026-10-18 the default check with `--json` exited 0: zlib 25 files and 4
+patches, minizip 2 files and 3 patches, both `mode` `check`. The pristine,
+vendor, and generated trees were byte-for-byte unchanged.
+
+CMake always runs that check at configure, without `--apply`. It uses
+`.venv/bin/rebrew` when that file exists, otherwise `find_program(rebrew)`.
+The command is both manifests plus `--root` set to the project source
+directory. A nonzero status is `FATAL_ERROR`. Configure depends on
+`references/vendor/*`, `references/zlib-1.1.3/*`, `references/zlib/*`, and
+`references/minizip/*`. Upstream `tests/test_vendor.py` covers check, drift,
+and `--apply`. Regenerate, then reconfigure, after a patch change.
+
+## Miles 6.1c
+
+Miles is not an input to `rebrew library vendor`. Pins, the hash check,
+rejected candidates, and receipts are in
+[references/mss-6.1c/README.md](../references/mss-6.1c/README.md). That note
+also records the limit: the pin does not by itself identify the archive the
+original linker selected.
+
+`REBREW_BUILD_GOLD` and `REBREW_BUILD_GOLDTL` default off. When either is on,
+configure includes `cmake/verify-mss32.cmake`, which fails if
+`references/mss-6.1c/mss32.lib` is missing or its hash differs. For each
+client target that exists, the link library list must contain that archive or
+configure fails. The same script runs again as `PRE_LINK`.
 
 ## zlib 1.1.3
 
@@ -56,10 +83,10 @@ Canonical `references/zlib/gzio.c` replaces copied client bodies:
 
 Complete native code, typed operands, reachable control flow, literal checks
 and wrong-binding controls support these identities. Library attribution is
-separate from a selected raw-link provider and game progress. Gold uses `/ML` /
-LIBC; server/TL use `/MT` / LIBCMT. The malloc wrapper alone is inconclusive;
-`free`, `fread`, `fwrite`, `fseek`, `rewind` and direct errno access distinguish
-Gold. Check callees using the destination client's object.
+separate from a selected raw-link provider and from game progress. Gold uses
+`/ML` / LIBC; server and TL use `/MT` / LIBCMT. The malloc wrapper alone is
+inconclusive. `free`, `fread`, `fwrite`, `fseek`, `rewind`, and direct errno
+access distinguish Gold. Check callees with that client's objects.
 
 Additional canonical groups and receipts under `.scratch/goal21/`:
 
@@ -83,7 +110,9 @@ inventory for `gzgets`/`gzerror`; older preservation receipts used direct COFF
 extraction. TL `minigzip`'s CFG must model native `_exit` at `0x64e66a` as
 noreturn; three unreachable compiler pops still belong to the byte extent.
 
-The exact original fork remains unidentified. Current patches:
+Authorship of the non-stand-in patches is unresolved. The
+[version audit](#version-and-patch-audit-2026-10-11) records the comparisons.
+Current patches:
 
 | Patch | Kind | Change |
 |---|---|---|
@@ -92,12 +121,13 @@ The exact original fork remains unidentified. Current patches:
 | 0003-selectany-readonly-tables | link-layout stand-in | 17 readonly tables and both copyright strings become `__declspec(selectany)` |
 | 0004-inflatesync-mark-selectany | link-layout stand-in | `inflateSync`'s block-scope `mark[4]` becomes a file-scope selectany object |
 
-The checked 1.1.2/1.1.3/1.1.4 sources and Vollant's `zlib113dll.zip` call calloc;
-1.2.0 uses malloc but is a different base. Stock version literals already pool
-under `/O2` (`/Gf`); patch 0002 compensates for order, not code generation.
-Stock `compress.c` places the literal at `0x1002706c` but changes compiler-object
-and CRT composition. `/ORDER` places COMDATs before ordinary readonly data;
-MSVC6 has no general data-COMDAT flag (`/Gy` is functions), motivating 0003/0004.
+The checked 1.1.2, 1.1.3, and 1.1.4 sources, and Vollant's `zlib113dll.zip`,
+call `calloc`. zlib 1.2.0 uses `malloc` but is a different base. Stock version
+literals already pool under `/O2` (`/Gf`); patch 0002 compensates for order,
+not code generation. Stock `compress.c` places the literal at `0x1002706c`
+but changes compiler-object and CRT composition. `/ORDER` places COMDATs
+before ordinary readonly data. MSVC6 has no general data-COMDAT flag (`/Gy`
+is functions), which is why 0003 and 0004 exist.
 
 ## minizip (unzip.c)
 
@@ -113,28 +143,29 @@ Canonical source is `references/minizip/unzip.c`.
 | 0002-unz-copyright-selectany | link-layout stand-in | `unz_copyright` becomes selectany so `/ORDER` places it (stock moves 5370 bytes) |
 | 0003-game-file-position | native extensions; authorship unresolved | `unzGetFilePos`/`unzGoToFilePos` appended (TL 0x465750, 0x465790) |
 
-The appended helpers access private `unz_s` and its static reader; native TL
-places them in the same unit. Checked Vollant 0.15–0.18 releases lack them.
-Minizip 1.00 later uses the same names with a different API; those names are
-borrowed, and authorship of the game's extensions remains unresolved.
+The appended helpers access private `unz_s` and its static reader. Native TL
+places them in the same unit. Checked Vollant 0.15 through 0.18 releases lack
+them. Minizip 1.00 later uses the same names with a different API. Those names
+are borrowed. Authorship of the game's extensions remains unresolved.
 
 ## Version and patch audit (2026-10-11)
 
-Four patches are reconstruction stand-ins: zlib 0002/0003/0004 and minizip 0002.
-The other three preserve native allocator, version-literal and file-position
-extensions, without proving author or original distribution.
+Four patches are reconstruction stand-ins: zlib 0002, 0003, and 0004, and
+minizip 0002. The other three preserve a native allocator change, a version
+literal, and file-position extensions. They do not prove an author or an
+original distribution.
 
-Checked fossils 1.1.1–1.2.3, Vollant DLL/build archives and an exact-literal GitHub
-search did not locate this `unzip 0.15a` fork. Vollant's
+Checked fossils 1.1.1 through 1.2.3, Vollant DLL and build archives, and an
+exact-literal search did not locate this `unzip 0.15a` fork. Vollant's
 [1.1.3a build](https://www.winimage.com/zLibDll/buildzlib113adll.zip), SHA-256
 `cfa8689ed5b97c916f5ec2c1107750ea17a0bdc909e430e59dec17454172526f`, labels
-zip 0.15a but directs copying ordinary unzip 0.15 unchanged. Search misses do
-not establish that no other fork exists. Receipt:
+zip 0.15a but directs copying ordinary unzip 0.15 unchanged. A miss does not
+establish that no other fork exists. Receipt:
 `.scratch/goal21/vendor-version-audit/`.
 
 ## Workaround removal probes (2026-10-11)
 
-Isolated counterfactual links; production inputs/image were preserved:
+Isolated counterfactual links. Production inputs and the image were preserved:
 
 | Candidate | Differing bytes | Finding |
 |---|---:|---|

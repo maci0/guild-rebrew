@@ -5,9 +5,9 @@ extern char g_90e0a0[0x300][0x300];
 
 
 
-int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
-int __cdecl fcn_00524610(int x)
+int __cdecl fcn_00524610(void* x)
 {
 	int n;
 	int i;

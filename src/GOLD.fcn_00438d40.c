@@ -1,9 +1,9 @@
+#include "Develop/Units/d3/d3_object.h"
+
 extern char* g_5fb5b0;
 extern int g_fc52f0;
-extern int g_fc28f4;
 extern int g_fb98f4;
 extern int g_fb9598;
-extern char g_fc2700[];
 
 char __cdecl fcn_004378c0(int, unsigned int);
 
@@ -45,7 +45,7 @@ char __cdecl fcn_00438d40(char* scene, char* node, unsigned int flags, char (__c
 	} else {
 		if (scene == g_5fb5b0) {
 			*(int*) (scene + 0x80) = g_fc52f0;
-			*(int*) (scene + 0x84) = g_fc28f4;
+			*(char**) (scene + 0x84) = g_fc28f4;
 			*(int*) (scene + 0xa4) = g_fb98f4;
 			*(int*) (scene + 0xa8) = g_fb9598;
 		}

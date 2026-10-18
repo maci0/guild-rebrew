@@ -1,5 +1,7 @@
 #include "client_packet_queue.h"
-#pragma pack(1)
+#include "client_types.h"
+
+#pragma pack(push, 1)
 typedef struct pkt99 {
 	unsigned char type;
 	unsigned short crc;
@@ -12,12 +14,11 @@ typedef struct pkt99 {
 	struct pkt99* prev;
 	struct pkt99* next;
 } pkt99;
-// SIZE 0x99
+#pragma pack(pop)
+/* SIZE 0x99 */
 
-#include "client_types.h"
 typedef cell10_fb5760 cell10;
-// SIZE 0xa
-#pragma pack()
+/* SIZE 0xa */
 
 extern int g_14cbcb0;
 extern int g_1005768;

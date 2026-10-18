@@ -1,15 +1,13 @@
 
 
-// Client twin of GOLD's fcn_004012b0 (0x4012b0, 45 B): the client calls
-// fcn_004011d0 four times over four consecutive 4-byte fields instead of
-// fcn_00401320 over a three-element array.
+/* Inferred name: four-dword reader shared by TL 0x4012b0 and Gold 0x401270. */
 
-void __cdecl fcn_004011d0(int, char*);
+int __cdecl fcn_004011d0(void* stream, void* dst);
 
-void __cdecl fcn_004012b0(int a1, char* a2)
+void __cdecl ReadVfsFourDwords(void* a1, void* a2)
 {
 	fcn_004011d0(a1, a2);
-	fcn_004011d0(a1, a2 + 4);
-	fcn_004011d0(a1, a2 + 8);
-	fcn_004011d0(a1, a2 + 0xc);
+	fcn_004011d0(a1, (char*) a2 + 4);
+	fcn_004011d0(a1, (char*) a2 + 8);
+	fcn_004011d0(a1, (char*) a2 + 0xc);
 }

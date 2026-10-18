@@ -28,6 +28,11 @@ option(REBREW_BUILD_GOLDTL "Build Europa1400Gold_TL.exe reconstruction" OFF)
 option(REBREW_ALLOW_NAKED "Allow __declspec(naked)+__asm for byte-identical verification build (fenced #ifdef)" ON)
 option(REBREW_DEBUG_INFO "Emit /Z7 + /debug (PDB for reccmp). OFF = byte-identity build: original DLL has no debug directory" OFF)
 
+if(REBREW_BUILD_GOLD OR REBREW_BUILD_GOLDTL)
+  set(MSS32_ARCHIVE "${PROJECT_SOURCE_DIR}/references/mss-6.1c/mss32.lib")
+  include("${PROJECT_SOURCE_DIR}/cmake/verify-mss32.cmake")
+endif()
+
 # ---------------------------------------------------------------------------
 # Architecture detection
 # ---------------------------------------------------------------------------
@@ -298,12 +303,9 @@ if(REBREW_BUILD_SERVER)
 
   # Plain VC6 SP5 preserves all game matches and supplies the matching stock CRT.
   # The server's x87 comparisons exclude the Processor Pack code generator.
-
-  if(MSVC)
-    foreach(_zsrc IN LISTS ZLIB_SOURCES)
-      set_source_files_properties("${_zsrc}" PROPERTIES COMPILE_FLAGS "/O2")
-    endforeach()
-  endif()
+  # zlib optimization comes from the scoped metadata table. A source-wide
+  # COMPILE_FLAGS "/O2" is appended for every target once that table uses
+  # APPEND_STRING, so the files would compile as "/O2 /O2 /Gd".
 
   if (MSVC)
     target_compile_options(server_dll PRIVATE /W3)
@@ -324,7 +326,73 @@ if(REBREW_BUILD_SERVER)
 endif()
 
 # ---------------------------------------------------------------------------
-# Europa1400Gold.exe target (future)
+# Client comparison link helpers
+# ---------------------------------------------------------------------------
+# Vendored zlib members that game TUs call but that carry no target binding
+# are the same references/zlib sources server.dll already compiles. The zlib
+# sample program minigzip is omitted from these comparison scaffolds.
+
+function(rebrew_append_client_zlib source_var)
+  set(_sources ${${source_var}})
+  set(_zlib_names
+    adler32.c
+    compress.c
+    crc32.c
+    deflate.c
+    gzio.c
+    infblock.c
+    infcodes.c
+    inffast.c
+    inflate.c
+    inftrees.c
+    infutil.c
+    trees.c
+    uncompr.c
+    zutil.c
+  )
+  foreach(_name IN LISTS _zlib_names)
+    set(_path "${PROJECT_SOURCE_DIR}/references/zlib/${_name}")
+    if(NOT _path IN_LIST _sources)
+      list(APPEND _sources "${_path}")
+    endif()
+  endforeach()
+  set(_unzip "${PROJECT_SOURCE_DIR}/references/minizip/unzip.c")
+  if(NOT _unzip IN_LIST _sources)
+    list(APPEND _sources "${_unzip}")
+  endif()
+  list(FILTER _sources EXCLUDE REGEX "/minigzip\\.c$")
+  set(${source_var} ${_sources} PARENT_SCOPE)
+endfunction()
+
+# Scaffold selection for a measured LNK2005 pair. The omit list is a
+# comparison-build choice: each dropped TU's external definitions are
+# provided by another TU that stays on the link. It does not change
+# metadata and it does not drop a TU that still has a unique symbol.
+function(rebrew_apply_scaffold_omits source_var omit_file)
+  set(_sources ${${source_var}})
+  set(REBREW_SCAFFOLD_OMITS "")
+  if(EXISTS "${omit_file}")
+    include("${omit_file}")
+  endif()
+  foreach(_omit IN LISTS REBREW_SCAFFOLD_OMITS)
+    if(NOT IS_ABSOLUTE "${_omit}")
+      set(_omit "${PROJECT_SOURCE_DIR}/${_omit}")
+    endif()
+    list(REMOVE_ITEM _sources "${_omit}")
+  endforeach()
+  set(${source_var} ${_sources} PARENT_SCOPE)
+endfunction()
+
+function(rebrew_append_scaffold source_var scaffold_path)
+  set(_sources ${${source_var}})
+  if(EXISTS "${scaffold_path}")
+    list(APPEND _sources "${scaffold_path}")
+  endif()
+  set(${source_var} ${_sources} PARENT_SCOPE)
+endfunction()
+
+# ---------------------------------------------------------------------------
+# Europa1400Gold.exe comparison target
 # ---------------------------------------------------------------------------
 
 if(REBREW_BUILD_GOLD)
@@ -345,6 +413,11 @@ if(REBREW_BUILD_GOLD)
   endif()
   include(${CMAKE_BINARY_DIR}/rebrew-sources-gold.cmake)
   set(GOLD_SOURCES ${REBREW_SOURCES})
+  rebrew_append_client_zlib(GOLD_SOURCES)
+  rebrew_apply_scaffold_omits(GOLD_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/gold/omitted-sources.cmake")
+  rebrew_append_scaffold(GOLD_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs.c")
 
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})
@@ -364,16 +437,10 @@ if(REBREW_BUILD_GOLD)
 endif()
 
 # ---------------------------------------------------------------------------
-# Europa1400Gold_TL.exe target (future)
+# Europa1400Gold_TL.exe comparison target
 # ---------------------------------------------------------------------------
 
 if(REBREW_BUILD_GOLDTL)
-  # No recovered SDK archive matches the reference's Miles 6.1c import hints.
-  message(FATAL_ERROR
-    "Gold TL linking is blocked: the original Miles 6.1c mss32.lib has not "
-    "been verified. Do not substitute the 6.0 archive, OpenMiles, or the "
-    "mislabeled 7.2g SDK. See references/mss-6.1c/README.md.")
-
   # Same rule as server.dll: marker-selected, never globbed.
   if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
     set(_REBREW_GOLDTL_BIN "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
@@ -390,6 +457,11 @@ if(REBREW_BUILD_GOLDTL)
   endif()
   include(${CMAKE_BINARY_DIR}/rebrew-sources-goldtl.cmake)
   set(GOLDTL_SOURCES ${REBREW_SOURCES})
+  rebrew_append_client_zlib(GOLDTL_SOURCES)
+  rebrew_apply_scaffold_omits(GOLDTL_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/goldtl/omitted-sources.cmake")
+  rebrew_append_scaffold(GOLDTL_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/goldtl/symbol_stubs.c")
 
   if(GOLDTL_SOURCES)
     add_executable(europa1400gold_tl WIN32 ${GOLDTL_SOURCES})
@@ -466,22 +538,46 @@ if (MSVC_FOR_DECOMP)
   endif()
 endif()
 
-# Client links use the same header roots and explicit runtime as verification.
-if(MSVC_FOR_DECOMP)
-  foreach(_client europa1400gold europa1400gold_tl)
-    if(TARGET ${_client})
+# The pinned SDK must be the selected input at configure time and at each link.
+foreach(_client europa1400gold europa1400gold_tl)
+  if(TARGET ${_client})
+    get_target_property(_client_libs ${_client} LINK_LIBRARIES)
+    list(FIND _client_libs "${MSS32_ARCHIVE}" _mss32_lib_index)
+    if(_mss32_lib_index EQUAL -1)
+      message(FATAL_ERROR "${_client} must select the pinned Miles archive in rebrew-project.toml")
+    endif()
+    set_property(TARGET ${_client} APPEND PROPERTY LINK_DEPENDS
+      "${MSS32_ARCHIVE}" "${PROJECT_SOURCE_DIR}/cmake/verify-mss32.cmake")
+    add_custom_command(TARGET ${_client} PRE_LINK
+      COMMAND "${CMAKE_COMMAND}" "-DMSS32_ARCHIVE=${MSS32_ARCHIVE}"
+              -P "${PROJECT_SOURCE_DIR}/cmake/verify-mss32.cmake"
+      VERBATIM)
+
+    # Client compilation uses each target's measured profile and runtime.
+    if(MSVC_FOR_DECOMP)
       target_include_directories(${_client} PRIVATE
         "${PROJECT_SOURCE_DIR}/src/Develop"
         "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3")
-      set_property(TARGET ${_client} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded")
+      target_compile_options(${_client} PRIVATE
+        "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
+      target_link_options(${_client} PRIVATE
+        "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp"
+        # shortcut: retain the game graph while WinMain is a stub; remove when its real references are restored.
+        "/OPT:NOREF")
+      if(_client STREQUAL "europa1400gold")
+        set_property(TARGET ${_client} PROPERTY MSVC_RUNTIME_LIBRARY "")
+        target_compile_options(${_client} PRIVATE "/ML")
+      else()
+        set_property(TARGET ${_client} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded")
+      endif()
       if(REBREW_ALLOW_NAKED)
         target_compile_definitions(${_client} PRIVATE REBREW_ALLOW_NAKED=1)
       endif()
       target_link_options(${_client} PRIVATE
-        "/MAP:${CMAKE_CURRENT_BINARY_DIR}/$<TARGET_FILE_BASE_NAME:${_client}>.map")
+        "/MAP:$<TARGET_FILE_DIR:${_client}>/$<TARGET_FILE_BASE_NAME:${_client}>.map")
     endif()
-  endforeach()
-endif()
+  endif()
+endforeach()
 
 # ---------------------------------------------------------------------------
 # Per-file CFLAGS come from rebrew-functions.toml, not from the sources
@@ -498,7 +594,7 @@ endif()
 # use and writes the table; this file only consumes it.  The metadata is a
 # configure dependency, so editing it reconfigures the build instead of
 # silently reusing baked COMPILE_FLAGS.
-function(rebrew_apply_cflags target_name source_list suffix)
+function(rebrew_apply_cflags target_name cmake_target source_list suffix)
   if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
     set(REBREW_BIN "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
   else()
@@ -521,6 +617,7 @@ function(rebrew_apply_cflags target_name source_list suffix)
   execute_process(
     COMMAND "${REBREW_BIN}" build cmake-flags
             --target "${target_name}"
+            --cmake-target "${cmake_target}"
             --sources-file "${_rebrew_sources_txt}"
             --output "${_rebrew_cflags_cmake}"
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
@@ -537,13 +634,13 @@ endfunction()
 
 if(MSVC_FOR_DECOMP)
   if(TARGET server_dll)
-    rebrew_apply_cflags("server.dll" SERVER_SOURCES "")
+    rebrew_apply_cflags("server.dll" server_dll SERVER_SOURCES "")
   endif()
   if(TARGET europa1400gold)
-    rebrew_apply_cflags("Europa1400Gold.exe" GOLD_SOURCES "-gold")
+    rebrew_apply_cflags("Europa1400Gold.exe" europa1400gold GOLD_SOURCES "-gold")
   endif()
   if(TARGET europa1400gold_tl)
-    rebrew_apply_cflags("Europa1400Gold_TL.exe" GOLDTL_SOURCES "-goldtl")
+    rebrew_apply_cflags("Europa1400Gold_TL.exe" europa1400gold_tl GOLDTL_SOURCES "-goldtl")
   endif()
 endif()
 

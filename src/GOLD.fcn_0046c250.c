@@ -1,29 +1,14 @@
-int __cdecl fcn_0046c1c0(int);
+#include "Develop/Units/d2.v1/d2_gui.h"
+#include <stddef.h>
+
+typedef char GUI_GROESSE_PRUEFUNG[sizeof(GuiEnt) == 0x2ec ? 1 : -1];
+typedef char GUI_BREITE_PRUEFUNG[offsetof(GuiEnt, w) == 0x14 ? 1 : -1];
+
+void __cdecl fcn_0046c1c0(int element);
 
 /* ADDRESS: GOLD 0x0046c250 */
-void __declspec(naked) __cdecl fcn_0046c250(int a, short b)
+void __cdecl fcn_0046c250(int element, int breite)
 {
-	(void)a; (void)b;
-	__asm {
-		mov ecx, dword ptr [esp+4]
-		push esi
-		mov eax, ecx
-		_emit 0x8b
-		_emit 0x35
-		_emit 0x80
-		_emit 0xf0
-		_emit 0xf8
-		_emit 0x00
-		shl eax, 5
-		sub eax, ecx
-		push ecx
-		lea eax, [eax+eax*2]
-		lea edx, [ecx+eax*2]
-		mov ax, word ptr [esp+10h]
-		mov word ptr [esi+edx*4+14h], ax
-		call fcn_0046c1c0
-		add esp, 4
-		pop esi
-		ret
-	}
+    g_00f8f080[element].w = (short)breite;
+    fcn_0046c1c0(element);
 }

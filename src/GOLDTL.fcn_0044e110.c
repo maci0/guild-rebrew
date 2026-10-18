@@ -7,12 +7,12 @@ typedef struct Bone {
 	float b[3];
 } Bone;
 
-void __cdecl fcn_004011f0(int, void*);
-void __cdecl fcn_00401180(int, void*);
-int __cdecl fcn_004011a0(int, void*);
-void __cdecl fcn_00401280(int, void*);
+int __cdecl fcn_004011f0(void* stream, void* dst);
+int __cdecl fcn_00401180(void* stream, void* dst);
+char* __cdecl fcn_004011a0(void* stream, char* text);
+void __cdecl fcn_00401280(void* stream, void* dst);
 
-void __cdecl fcn_0044e110(int r, char* o)
+void __cdecl fcn_0044e110(void* r, char* o)
 {
 	int n;
 	char c;

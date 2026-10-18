@@ -5,7 +5,7 @@
 
 extern char g_office_slots[0x3f0];
 extern unsigned short g_current_hour;
-extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
+#include "../loadsave/loadsave.h"
 extern void __cdecl srv_InitBuildingTypeTable(void);
 extern void __cdecl LogMessageInternal(const char* module, int line, const char* text, int type);
 extern int __cdecl sprintf(char* buffer, const char* format, ...);
@@ -69,6 +69,7 @@ OFFICE_ROLE_TEMPLATE g_office_role_templates[40] = {
 	{ 0x27, 8, 0xc, 0xc350, 0, 0x40a00000 },
 };
 
+#ifdef REBREW_SERVER
 int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 {
 	unsigned char* rec;
@@ -113,7 +114,7 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 	}
 	return 1;
 }
-
+#endif
 /* Validates preconditions and assigns an office to an entity.  Performs
  * eligibility checks, then updates the office holder table and entity
  * links. */
@@ -1513,7 +1514,7 @@ int __cdecl amt_fio_SaveAemter(void* file)
  * multiply emits `not` first while keeping the mask in esi/edx, so the two are
  * separable after all. */
 
-int __cdecl amt_fio_LoadAemter(int streamCtx, int version)
+int __cdecl amt_fio_LoadAemter(void* streamCtx, int version)
 {
 	int value;
 	char msg[0x100];
@@ -1575,7 +1576,6 @@ int __cdecl amt_fio_LoadAemter(int streamCtx, int version)
 }
 
 /* Client-only town-hall helpers (discarded; see the blocks above). */
-
 void* __cdecl amt_GetTownHallHolder(unsigned char* building)
 {
 	extern char* g_entity_type_table;

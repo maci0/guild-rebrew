@@ -1,3 +1,5 @@
+#include "client_scene_resources.h"
+
 typedef struct Inner5cc80 {
 	int f0;
 	int f4;
@@ -6,12 +8,11 @@ typedef struct Inner5cc80 {
 } Inner5cc80;
 
 typedef struct Holder5cc80 {
-	int p;
+	SCENE_RESOURCE* p;
 	int pad;
 	Inner5cc80* n;
 } Holder5cc80;
 
-void __cdecl fcn_0045fbb0(int);
 
 /* ADDRESS: GOLD 0x0045cc80 */
 void __cdecl fcn_0045cc80(Holder5cc80* h)

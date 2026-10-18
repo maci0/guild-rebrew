@@ -1,16 +1,31 @@
 # Guild Rebrew
 
+**Status: unfinished.** The server was raw byte-identical at the recorded
+[Goal110 checkpoint](docs/TODO.md#verified-checkpoint); later edits need fresh
+checks. Both clients are comparison scaffolds, not playable or byte-identical.
+Source recovery, unsupported assembly and provider/storage work remain.
+
 Reconstruct Europa 1400: The Guild as one faithful C89 source tree producing
 three byte-identical binaries. See [the objective](goal.md) and
-[current work](docs/TODO.md); client whole-image verification remains open.
+[current work](docs/TODO.md).
 
 <!-- progress:start -->
 <p align="center">
-  <img src="docs/progress.svg" width="715" alt="Decompilation progress. One block per discovered function, in address order. server.dll 509 of 543 functions (exact 232, reloc 274, proven 3, near 2, stub 1, size 3, no size 8, unattempted 20). Europa1400Gold_TL.exe 823 of 5012 game functions (exact 226, reloc 597, near 5, stub 26, size 21, library 1323, unattempted 4137). Europa1400Gold.exe 350 of 4638 functions (exact 96, reloc 254, near 22, stub 78, size 1, error 3, unattempted 4184).">
+  <img src="docs/progress.svg" width="715" alt="Historical function-status snapshot; query rebrew status for current progress.">
 </p>
 <!-- progress:end -->
 
 ## Start
+
+Requires Python 3.13+, `uv` and a local [Rebrew checkout](https://github.com/maci0/rebrew)
+at `../relumea/repos/rebrew`, relative to this project root. `uv sync` installs
+that checkout as an editable dependency; create it before running the commands.
+
+Supply the game reference binaries under ignored `original/` at the paths below.
+The clone does not include the pinned MSVC toolchain images or Miles archive.
+See [toolchain setup](https://github.com/maci0/rebrew/blob/main/docs/TOOLCHAIN.md),
+[runner requirements](docs/verify-performance.md#runner-and-caches) and the
+[Miles input and checksum](references/mss-6.1c/README.md).
 
 ```sh
 uv sync
@@ -28,10 +43,15 @@ workflow. Commands run through the project's pinned environment.
 | `Europa1400Gold_TL.exe` | `original/Europa1400Gold_TL.exe` | Primary client reconstruction |
 | `Europa1400Gold.exe` | `original/Europa1400Gold.exe` | Shared-source validation and unique code |
 
-CL/LINK/LIB run in Docker: `rebrew/msvc:6.0-sp5-win32` for server and
+CL/LINK/LIB use the configured **unshare** runner with pinned image filesystems:
+`rebrew/msvc:6.0-sp5-win32` for server and
 `rebrew/msvc:6.0-sp5-pp-win32` for clients. Gold uses `/ML`/LIBC;
-server and TL use `/MT`/LIBCMT. Effective per-target settings live in
-`rebrew-project.toml`.
+server and TL use `/MT`/LIBCMT. Effective settings live in `rebrew-project.toml`;
+[runner and cache behavior](docs/verify-performance.md) explains execution.
+
+Both client PEs/maps exist for comparison; they contain scaffolds and are not
+playable or byte-identical. See [build and compare](stubs/README.md).
+The graphic above is a historical snapshot, not live coverage.
 
 ## Reference provenance
 

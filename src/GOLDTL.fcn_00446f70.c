@@ -24,7 +24,7 @@ typedef struct {
 	int x3c8;
 } Cfg;
 
-extern int g_6b7fdc;
+extern struct VFS_DIR* g_6b7fdc;
 extern int g_6b8484;
 extern VECTOR3 g_67bbdc;
 extern VECTOR3 g_6b86c4;
@@ -37,7 +37,7 @@ extern char* g_1043254;
 extern char g_1042340[];
 extern int g_6b8300;
 
-void* __cdecl fcn_0042ff50(const char*, const char*, int);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl fcn_00401360(void*, int);
 void __cdecl fcn_00401230(void*, int);
 void __cdecl fcn_00401260(void*, float);
@@ -47,7 +47,7 @@ void* __cdecl fcn_00437890(void*);
 void __cdecl fcn_00446540(void*, void*);
 void __cdecl fcn_004469e0(void*, int);
 void __cdecl fcn_0043b740(void*, int);
-void __cdecl CloseVfsStream(void*);
+#include "Develop/Units/vfs/vfs.h"
 
 /* ADDRESS: GOLDTL 0x00446f70 */
 

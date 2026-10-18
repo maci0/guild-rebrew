@@ -18,7 +18,7 @@ void __cdecl fcn_005b2ee0(void* a1, void* a2, void* a3)
 		break;
 	case 1:
 		fcn_0051af00(g_774a80, 0x409b, gm_RandomMod(3) + 0x409c,
-		    *(unsigned short*) a1, *(unsigned short*) a1, a3);
+		    *(unsigned short*) a1, (void*) *(unsigned short*) a1, (int) a3);
 		break;
 	}
 	fcn_00545d40(*(int*) ((char*) a2 + 4), -1, g_774a80, 1, 0x5fb, g_6ab4b8);

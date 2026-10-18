@@ -45,7 +45,6 @@ typedef struct {
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 Task* __cdecl fcn_0040c0a0(char* e);
-void __cdecl fcn_004079d0(Task* t);
 
 Task* __cdecl fcn_0040c230(char* e, void (__cdecl* done)(Task* t), unsigned char level, int kind, ...)
 {

@@ -1,0 +1,7 @@
+if(NOT DEFINED MSS32_ARCHIVE OR NOT EXISTS "${MSS32_ARCHIVE}")
+  message(FATAL_ERROR "Verified Miles 6.1c archive missing: ${MSS32_ARCHIVE}. See references/mss-6.1c/README.md.")
+endif()
+file(SHA256 "${MSS32_ARCHIVE}" _mss32_actual_sha256)
+if(NOT _mss32_actual_sha256 STREQUAL "34882ed6295c6d7937a505ccab6f32b50a47433856431565ef49860d6bd45f9d")
+  message(FATAL_ERROR "Miles 6.1c archive hash mismatch: ${MSS32_ARCHIVE}")
+endif()

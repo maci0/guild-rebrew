@@ -13,18 +13,18 @@ extern char g_dynasty_initial_trait_offset[];
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 #include "../../download_state.h"
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+#include "loadsave.h"
 extern int g_file_version; 
-int ls_LoadExistingEntities(int);
-int ls_LoadEntities(int);
+
+
 extern unsigned int ls_ID2Ptr(void);
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 #include "../../Units/vfs/vfs.h"
 #include "../game/entity.h"
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-int ls_LoadEntities(int);
+
+
 
 extern int g_citizen_count;
 
@@ -37,7 +37,7 @@ extern int g_query_limit;
 extern int g_entity_id_counter;
 extern int g_sequence_counter;
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+
 
 int g_file_version = 0x1005a;
 
@@ -70,14 +70,14 @@ extern int g_save_extra_field;
 extern int g_aux_entity_count; /* 0x101de454 */
 
 extern int g_save_info[2];
-extern int vfs_OpenStream(char*, char*, int);
-int ls_LoadSavegameHeader(int, char*);
-int ls_LoadExistingEntities(int);
-unsigned int ls_LoadBuildingEntityState(unsigned int);
-int ls_LoadDynamicEntities(void*);
-int ls_LoadEntities(int);
-int ls_LoadTownData(int);
-extern int amt_fio_LoadAemter(int, int);
+
+
+
+
+
+
+
+int __cdecl amt_fio_LoadAemter(void* stream, int version);
 extern unsigned int ls_ID2Ptr(void);
 
 /* Loads graveyard-specific data from a save file. Reads
@@ -92,7 +92,7 @@ extern int g_recv_game_buffer;
 #include <string.h>
 
 int __cdecl gv_AllocGraveyardField(unsigned char* field);
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+
 extern int g_field_worker_count[4];
 extern int g_field_entry_count[4];
 
@@ -268,7 +268,7 @@ int __cdecl gv_fio_SaveGraveyardData(void* stream_ctx, unsigned char* field)
  * g_field_entry_count (x2) and g_field_worker_count (x2), all confirmed against
  * db/server.dll_functions.csv and the target disassembly. */
 
-int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, int d)
+int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field)
 {
 	GraveyardSlot* slot;
 	char* entry;
@@ -1249,14 +1249,14 @@ int __cdecl ls_SaveRelationships(void* file)
 	return 1;
 }
 
-int __cdecl vfs_ReadData(void*, int, int, void*);
-
+int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
+#if defined(REBREW_SERVER)
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx)
 {
 	/* vfs_ReadData wrapper: nonzero on success (unsigned > 0 carry idiom). */
 	return (unsigned int) vfs_ReadData(outBuffer, elementSize, elementCount, streamCtx) > 0;
 }
-
+#endif
 
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
@@ -1265,80 +1265,80 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 
 #include <stdlib.h>
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+
 extern int g_file_version; /* 0x1002d4ec */
 
 #include "save_header_tail.h"
 extern char g_save_header_tail[]; /* 0x1002d4f0 */
-
-int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 {
 	void* buf;
 	int i;
 
 	buf = m_alloc(0xe100, "ls:tmp");
-	if (!ls_ReadVfsDataChecked(dest, 4, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest, 4, 1, stream)) {
 		return 0;
 	}
 	g_file_version = *(int*) dest;
-	if (!ls_ReadVfsDataChecked(dest + 4, 1, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest + 4, 1, 1, stream)) {
 		return 0;
 	}
-	if (!ls_ReadVfsDataChecked(dest + 5, 0x20, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest + 5, 0x20, 1, stream)) {
 		return 0;
 	}
-	if (!ls_ReadVfsDataChecked(dest + 0x28, 8, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest + 0x28, 8, 1, stream)) {
 		return 0;
 	}
-	if (!ls_ReadVfsDataChecked(dest + 0x30, 1, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest + 0x30, 1, 1, stream)) {
 		return 0;
 	}
 	if (g_file_version >= 0x10033) {
-		if (!ls_ReadVfsDataChecked(dest + 0x31, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x31, 1, 1, stream)) {
 			return 0;
 		}
 	}
 	if (g_file_version >= 0x10028) {
-		if (!ls_ReadVfsDataChecked(dest + 0x32, 0xe, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x32, 0xe, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x40, 0x10, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x40, 0x10, 1, stream)) {
 			return 0;
 		}
 		if (g_file_version >= 0x10054) {
-			if (!ls_ReadVfsDataChecked(dest + 0x50, 0x10, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x50, 0x10, 1, stream)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(dest + 0x63, 1, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x63, 1, 1, stream)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(dest + 0x64, 4, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x64, 4, 1, stream)) {
 				return 0;
 			}
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x60, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x60, 1, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x61, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x61, 1, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x62, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x62, 1, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x68, 4, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x68, 4, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x6c, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x6c, 1, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x6d, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x6d, 1, 1, stream)) {
 			return 0;
 		}
 		if (g_file_version >= 0x1002b) {
-			if (!ls_ReadVfsDataChecked(dest + 0x70, 4, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x70, 4, 1, stream)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(dest + 0x74, 4, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x74, 4, 1, stream)) {
 				return 0;
 			}
 		}
@@ -1348,12 +1348,12 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 		}
 		if (g_file_version >= 0x10034) {
 			for (i = 0; i < 8; i++) {
-				if (!ls_ReadVfsDataChecked(dest + 0x78 + i * 4, 4, 1, (void*) stream)) {
+				if (!ls_ReadVfsDataChecked(dest + 0x78 + i * 4, 4, 1, stream)) {
 					return 0;
 				}
 			}
 		}
-		if (!ls_ReadVfsDataChecked(buf, 0xe100, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(buf, 0xe100, 1, stream)) {
 			return 0;
 		}
 	}
@@ -1364,7 +1364,7 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 		return 0;
 	}
 	if (g_file_version >= 0x10038) {
-		if (!ls_ReadVfsDataChecked(dest + 0x98, 4, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x98, 4, 1, stream)) {
 			return 0;
 		}
 	}
@@ -1373,7 +1373,7 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 	}
 	if (g_file_version >= 0x10039) {
 		dest += 0x9c;
-		if (!ls_ReadVfsDataChecked(dest, 0x60, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest, 0x60, 1, stream)) {
 			return 0;
 		}
 	}
@@ -1382,53 +1382,53 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 	}
 	return 1;
 }
-
+#endif
 
 void __cdecl gm_CleanupObjectEntities(void);
 extern int g_query_limit; /* 0x10035450 */
-
-int __cdecl ls_LoadExistingEntities(int arg1)
+#if defined(REBREW_SERVER)
+int __cdecl ls_LoadExistingEntities(void* arg1)
 {
 	int count;
 	int i;
 	unsigned char* record_cursor;
 
 	gm_CleanupObjectEntities();
-	if (!ls_ReadVfsDataChecked(&count, 4, 1, (void*) arg1)) {
+	if (!ls_ReadVfsDataChecked(&count, 4, 1, arg1)) {
 		return 0;
 	}
 	for (i = 0; i < count; i++) {
 		record_cursor = (unsigned char*) g_query_base + i * 0x43;
-		if (!ls_ReadVfsDataChecked(record_cursor, 2, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor, 2, 1, arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(record_cursor + 2, 4, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 2, 4, 1, arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(record_cursor + 6, 4, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 6, 4, 1, arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(record_cursor + 0xa, 4, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 0xa, 4, 1, arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(record_cursor + 0xe, 4, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 0xe, 4, 1, arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(record_cursor + 0x12, 1, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 0x12, 1, 1, arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(record_cursor + 0x13, 1, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 0x13, 1, 1, arg1)) {
 			return 0;
 		}
 		record_cursor += 0x1c;
-		if (!ls_ReadVfsDataChecked(record_cursor, 0x1f, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor, 0x1f, 1, arg1)) {
 			return 0;
 		}
 	}
 	g_query_limit = count;
 	return 1;
 }
-
+#endif
 /* Loads building entity state from a save file. Reads
  * building type, owner, upgrade level, and production
  * state for each building entity. */
@@ -1451,13 +1451,13 @@ extern int g_citizen_count;
 #include "rebrew_globals.h"
 
 int __cdecl gv_AllocGraveyardField(int);
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
-int __cdecl ahm_AllocAhmInfo(int building, int slot);
+
+
+int __cdecl ahm_AllocAhmInfo(void* stream, int slot);
 extern int g_file_version; /* 0x1002d4ec */
 extern int g_aux_entity_count; /* 0x101de454 */
 extern int g_aux_entity_buffer; /* 0x101de55c */
-unsigned int ls_LoadBuildingEntityState(unsigned int);
+
 
 /* Loads graveyard-specific data from a save file. Reads
  * production slots, worker assignments, and field states
@@ -1484,7 +1484,7 @@ unsigned int ls_LoadBuildingEntityState(unsigned int);
  *   `add esp,8` before `mov [ebx],eax` (the stores stop aliasing), 5 bytes. */
 
 
-unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
+unsigned int __cdecl ls_LoadBuildingEntityState(void* stream_ctx)
 {
 	int entity_count;
 	int current_index;
@@ -1496,7 +1496,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 
 	gm_ResetAllEntities();
 
-	if (!ls_ReadVfsDataChecked(&entity_count, 4, 1, (void*) stream_ctx)) {
+	if (!ls_ReadVfsDataChecked(&entity_count, 4, 1, stream_ctx)) {
 		return 0;
 	}
 
@@ -1506,97 +1506,97 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 		while (current_index < entity_count) {
 			esi = (char*) (g_entity_ptr + current_index * 0xa9);
 
-			if (!ls_ReadVfsDataChecked(esi, 1, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi, 1, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x01, 4, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x01, 4, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x05, 0x20, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x05, 0x20, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x25, 2, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x25, 2, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x27, 2, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x27, 2, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x29, 2, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x29, 2, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x2b, 4, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x2b, 4, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x2f, 1, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x2f, 1, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x34, 1, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x34, 1, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x35, 4, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x35, 4, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x39, 4, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x39, 4, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x3d, 4, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x3d, 4, 1, stream_ctx)) {
 				return 0;
 			}
 
 			ebx = (int*) (esi + 0x41);
-			if (!ls_ReadVfsDataChecked(ebx, 4, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(ebx, 4, 1, stream_ctx)) {
 				return 0;
 			}
 			if (*ebx > 4) {
 				*ebx = 2;
 			}
 
-			if (!ls_ReadVfsDataChecked(esi + 0x45, 4, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x45, 4, 1, stream_ctx)) {
 				return 0;
 			}
 
 			if (g_file_version >= 0x10028) {
-				if (!ls_ReadVfsDataChecked(esi + 0x49, 4, 1, (void*) stream_ctx)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x49, 4, 1, stream_ctx)) {
 					return 0;
 				}
 			}
 
 			if (g_file_version < 0x10032) {
-				if (!ls_ReadVfsDataChecked(&dummy, 4, 1, (void*) stream_ctx)) {
+				if (!ls_ReadVfsDataChecked(&dummy, 4, 1, stream_ctx)) {
 					return 0;
 				}
 			}
 
 			if (g_file_version >= 0x10057) {
-				if (!ls_ReadVfsDataChecked(esi + 0x4d, 4, 1, (void*) stream_ctx)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x4d, 4, 1, stream_ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(esi + 0x51, 4, 1, (void*) stream_ctx)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x51, 4, 1, stream_ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(esi + 0x55, 4, 1, (void*) stream_ctx)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x55, 4, 1, stream_ctx)) {
 					return 0;
 				}
 			}
 
-			if (!ls_ReadVfsDataChecked(esi + 0x5a, 2, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x5a, 2, 1, stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x5c, 1, 1, (void*) stream_ctx)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x5c, 1, 1, stream_ctx)) {
 				return 0;
 			}
 
 			if (esi[0] == 0x1e) {
 				*(int*) (esi + 0x71) = (int) m_alloc(0x600, "f3g:PlantMap");
 				for (load_result = 0; load_result < 0x40; load_result++) {
-					if (!ls_ReadVfsDataChecked((void*) (*(int*) (esi + 0x71) + load_result * 0x18), 4, 1, (void*) stream_ctx)) {
+					if (!ls_ReadVfsDataChecked((void*) (*(int*) (esi + 0x71) + load_result * 0x18), 4, 1, stream_ctx)) {
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
 							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 4),
 							4,
 							1,
-							(void*) stream_ctx
+							stream_ctx
 						)) {
 						return 0;
 					}
@@ -1604,7 +1604,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 8),
 							1,
 							1,
-							(void*) stream_ctx
+							stream_ctx
 						)) {
 						return 0;
 					}
@@ -1612,7 +1612,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 9),
 							1,
 							1,
-							(void*) stream_ctx
+							stream_ctx
 						)) {
 						return 0;
 					}
@@ -1620,7 +1620,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 0xa),
 							2,
 							1,
-							(void*) stream_ctx
+							stream_ctx
 						)) {
 						return 0;
 					}
@@ -1628,7 +1628,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 0x10),
 							4,
 							1,
-							(void*) stream_ctx
+							stream_ctx
 						)) {
 						return 0;
 					}
@@ -1636,7 +1636,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 0xc),
 							1,
 							1,
-							(void*) stream_ctx
+							stream_ctx
 						)) {
 						return 0;
 					}
@@ -1644,7 +1644,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 							(void*) (*(int*) (esi + 0x71) + load_result * 0x18 + 0xd),
 							1,
 							1,
-							(void*) stream_ctx
+							stream_ctx
 						)) {
 						return 0;
 					}
@@ -1653,10 +1653,10 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 			}
 			else if (esi[0] == 0x48 || esi[0] == 0x49 || esi[0] == 0x4a) {
 				if (g_file_version >= 0x10047) {
-					load_result = ls_LoadGraveyardData(stream_ctx, (int) esi);
+					load_result = ls_LoadGraveyardData(stream_ctx, (unsigned char*) esi);
 				}
 				else {
-					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) stream_ctx)) {
+					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, stream_ctx)) {
 						return 0;
 					}
 					*(int*) (esi + 0x65) = gv_AllocGraveyardField((int) esi);
@@ -1672,7 +1672,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 				}
 				else {
 					int* ahm_info;
-					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) stream_ctx)) {
+					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, stream_ctx)) {
 						return 0;
 					}
 					ahm_info = (int*) m_alloc(0x3c, "AHM_INFO");
@@ -1685,14 +1685,14 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 				}
 			}
 			else {
-				if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) stream_ctx)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, stream_ctx)) {
 					return 0;
 				}
 			}
 
 		label_10012d72:
 			if (g_file_version >= 0x10043) {
-				if (!ls_ReadVfsDataChecked(esi + 0x99, 0x10, 1, (void*) stream_ctx)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x99, 0x10, 1, stream_ctx)) {
 					return 0;
 				}
 			}
@@ -1708,19 +1708,19 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 		}
 	}
 
-	if (!ls_ReadVfsDataChecked(&g_aux_entity_count, 4, 1, (void*) stream_ctx)) {
+	if (!ls_ReadVfsDataChecked(&g_aux_entity_count, 4, 1, stream_ctx)) {
 		return 0;
 	}
 
 	g_aux_entity_buffer = (int) realloc((void*) g_aux_entity_buffer, g_aux_entity_count * 0x60);
 	for (load_result = 0; load_result < g_aux_entity_count; load_result++) {
-		if (!ls_ReadVfsDataChecked((void*) (g_aux_entity_buffer + load_result * 0x60), 0x40, 1, (void*) stream_ctx)) {
+		if (!ls_ReadVfsDataChecked((void*) (g_aux_entity_buffer + load_result * 0x60), 0x40, 1, stream_ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked((void*) (g_aux_entity_buffer + load_result * 0x60 + 0x40), 0x10, 1, (void*) stream_ctx)) {
+		if (!ls_ReadVfsDataChecked((void*) (g_aux_entity_buffer + load_result * 0x60 + 0x40), 0x10, 1, stream_ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked((void*) (g_aux_entity_buffer + load_result * 0x60 + 0x50), 0x10, 1, (void*) stream_ctx)) {
+		if (!ls_ReadVfsDataChecked((void*) (g_aux_entity_buffer + load_result * 0x60 + 0x50), 0x10, 1, stream_ctx)) {
 			return 0;
 		}
 	}
@@ -1738,11 +1738,11 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+
 extern int g_file_version; /* 0x1002d4ec */
 /* 0x1009aca2: two bytes into the 0xac-byte entity records at g_entity_base. */
 #define g_dynamic_entities ((char*) g_entity_base + 2)
-int ls_LoadDynamicEntities(void*);
+
 
 /* Loads graveyard-specific data from a save file. Reads
  * production slots, worker assignments, and field states
@@ -1866,7 +1866,7 @@ int __cdecl ls_LoadDynamicEntities(void* file)
 }
 
 
-int __cdecl ls_LoadEntities(int ctx)
+int __cdecl ls_LoadEntities(void* ctx)
 {
 	int id;
 	int header_field;
@@ -1874,24 +1874,24 @@ int __cdecl ls_LoadEntities(int ctx)
 	int* slot_ext_ptr;
 	int i;
 
-	if (ls_ReadVfsDataChecked(&id, 2, 1, (void*) ctx) == 0) {
+	if (ls_ReadVfsDataChecked(&id, 2, 1, ctx) == 0) {
 		return 0;
 	}
-	if (ls_ReadVfsDataChecked(&header_field, 4, 1, (void*) ctx) == 0) {
+	if (ls_ReadVfsDataChecked(&header_field, 4, 1, ctx) == 0) {
 		return 0;
 	}
 	g_citizen_count = header_field;
-	if (ls_ReadVfsDataChecked(&g_save_header_aux, 4, 1, (void*) ctx) == 0) {
+	if (ls_ReadVfsDataChecked(&g_save_header_aux, 4, 1, ctx) == 0) {
 		return 0;
 	}
-	if (ls_ReadVfsDataChecked(&g_save_header_aux_b, 4, 1, (void*) ctx) == 0) {
+	if (ls_ReadVfsDataChecked(&g_save_header_aux_b, 4, 1, ctx) == 0) {
 		return 0;
 	}
 
 	if (g_file_version >= 0x10017) {
 		int* p = &g_save_extra_field;
 		while ((int) p < (int) &g_save_extra_field + 0x20) {
-			if (ls_ReadVfsDataChecked(p, 4, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(p, 4, 1, ctx) == 0) {
 				return 0;
 			}
 			p = p + 1;
@@ -1899,14 +1899,14 @@ int __cdecl ls_LoadEntities(int ctx)
 	}
 
 	for (i = 0; i < header_field; i = i + 1) {
-		if (ls_ReadVfsDataChecked(&id, 2, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(&id, 2, 1, ctx) == 0) {
 			return 0;
 		}
 		slot = (char*) ((int) g_slot_table + ((int) (unsigned short) id) * 0x21c);
 		*(short*) slot = id;
 
 		if (g_file_version >= 0x1003e) {
-			if (ls_ReadVfsDataChecked(slot + 0x20c, 4, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x20c, 4, 1, ctx) == 0) {
 				return 0;
 			}
 		}
@@ -1914,184 +1914,184 @@ int __cdecl ls_LoadEntities(int ctx)
 			*(int*) (slot + 0x20c) = -1;
 		}
 
-		if (ls_ReadVfsDataChecked(slot + 2, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 2, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 4, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 4, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 8, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 8, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 9, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 9, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0xa, 2, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0xa, 2, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0xc, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0xc, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0xd, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0xd, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x10, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x10, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x14, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x14, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x18, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x18, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1c, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1c, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x20, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x20, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x24, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x24, 4, 1, ctx) == 0) {
 			return 0;
 		}
 
 		if (g_file_version >= 0x1003b) {
-			if (ls_ReadVfsDataChecked(slot + 0x28, 2, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x28, 2, 1, ctx) == 0) {
 				return 0;
 			}
-			if (ls_ReadVfsDataChecked(slot + 0x2c, 4, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x2c, 4, 1, ctx) == 0) {
 				return 0;
 			}
 		}
 
-		if (ls_ReadVfsDataChecked(slot + 0x30, 0x10, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x30, 0x10, 1, ctx) == 0) {
 			return 0;
 		}
 
 		if (g_file_version >= 0x10031) {
-			if (ls_ReadVfsDataChecked(slot + 0x40, 0x10, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x40, 0x10, 1, ctx) == 0) {
 				return 0;
 			}
 		}
 
-		if (ls_ReadVfsDataChecked(slot + 0x50, 2, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x50, 2, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x54, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x54, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x58, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x58, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x5c, 0x20, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x5c, 0x20, 1, ctx) == 0) {
 			return 0;
 		}
 
 		if (g_file_version >= 0x10024) {
-			if (ls_ReadVfsDataChecked(slot + 0x7c, 4, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x7c, 4, 1, ctx) == 0) {
 				return 0;
 			}
 		}
 
-		if (ls_ReadVfsDataChecked(slot + 0x80, 5, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x80, 5, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x88, 0xa8, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x88, 0xa8, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x164, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x164, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x165, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x165, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x166, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x166, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x167, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x167, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x168, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x168, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x169, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x169, 1, 1, ctx) == 0) {
 			return 0;
 		}
 
 		*(int*) (slot + 0x16c) = 0;
-		if (ls_ReadVfsDataChecked(slot + 0x16c, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x16c, 4, 1, ctx) == 0) {
 			return 0;
 		}
 		*(int*) (slot + 0x170) = 0;
-		if (ls_ReadVfsDataChecked(slot + 0x170, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x170, 4, 1, ctx) == 0) {
 			return 0;
 		}
 
 		if (g_file_version >= 0x10020) {
-			if (ls_ReadVfsDataChecked(slot + 0x174, 4, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x174, 4, 1, ctx) == 0) {
 				return 0;
 			}
 		}
 		else {
-			if (ls_ReadVfsDataChecked(slot + 0x174, 2, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x174, 2, 1, ctx) == 0) {
 				return 0;
 			}
 		}
 
 		*(int*) (slot + 0x17c) = 0;
-		if (ls_ReadVfsDataChecked(slot + 0x17c, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x17c, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x180, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x180, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x18c, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x18c, 4, 1, ctx) == 0) {
 			return 0;
 		}
 
 		slot_ext_ptr = (int*) (slot + 0x190);
-		if (ls_ReadVfsDataChecked(slot_ext_ptr, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot_ext_ptr, 4, 1, ctx) == 0) {
 			return 0;
 		}
 		if (g_file_version < 0x1003e) {
 			*slot_ext_ptr = 4;
 		}
 
-		if (ls_ReadVfsDataChecked(slot + 0x194, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x194, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x198, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x198, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x19c, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x19c, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1a0, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1a0, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1a4, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1a4, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1a8, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1a8, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1ac, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1ac, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1b0, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1b0, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1b1, 1, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1b1, 1, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1b4, 0x10, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1b4, 0x10, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1c8, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1c8, 4, 1, ctx) == 0) {
 			return 0;
 		}
 
 		if (g_file_version >= 0x10049) {
-			if (ls_ReadVfsDataChecked(slot + 0x1cc, 4, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x1cc, 4, 1, ctx) == 0) {
 				return 0;
 			}
 		}
@@ -2099,65 +2099,65 @@ int __cdecl ls_LoadEntities(int ctx)
 			*(int*) (slot + 0x1cc) = 0;
 		}
 
-		if (ls_ReadVfsDataChecked(slot + 0x1d0, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1d0, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1d4, 0x10, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1d4, 0x10, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1e4, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1e4, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1e8, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1e8, 4, 1, ctx) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(slot + 0x1ec, 4, 1, (void*) ctx) == 0) {
+		if (ls_ReadVfsDataChecked(slot + 0x1ec, 4, 1, ctx) == 0) {
 			return 0;
 		}
 
 		if (g_file_version >= 0x1002a) {
-			if (ls_ReadVfsDataChecked(slot + 0x1f0, 4, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x1f0, 4, 1, ctx) == 0) {
 				return 0;
 			}
 		}
 
 		if (g_file_version >= 0x10021) {
-			if (ls_ReadVfsDataChecked(slot + 0x1c5, 1, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x1c5, 1, 1, ctx) == 0) {
 				return 0;
 			}
 		}
 
 		{
 			int probe;
-			if (ls_ReadVfsDataChecked(&probe, 4, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(&probe, 4, 1, ctx) == 0) {
 				return 0;
 			}
 			*(int*) (slot + 0x184) = probe;
 		}
 
 		if (g_file_version >= 0x10021) {
-			if (ls_ReadVfsDataChecked(slot + 0x1f4, 0x18, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x1f4, 0x18, 1, ctx) == 0) {
 				return 0;
 			}
 		}
 
 		if (g_file_version >= 0x10036) {
-			if (ls_ReadVfsDataChecked(slot + 0x210, 4, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x210, 4, 1, ctx) == 0) {
 				return 0;
 			}
-			if (ls_ReadVfsDataChecked(slot + 0x214, 1, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x214, 1, 1, ctx) == 0) {
 				return 0;
 			}
-			if (ls_ReadVfsDataChecked(slot + 0x215, 1, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x215, 1, 1, ctx) == 0) {
 				return 0;
 			}
-			if (ls_ReadVfsDataChecked(slot + 0x216, 1, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x216, 1, 1, ctx) == 0) {
 				return 0;
 			}
-			if (ls_ReadVfsDataChecked(slot + 0x217, 1, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x217, 1, 1, ctx) == 0) {
 				return 0;
 			}
-			if (ls_ReadVfsDataChecked(slot + 0x218, 1, 1, (void*) ctx) == 0) {
+			if (ls_ReadVfsDataChecked(slot + 0x218, 1, 1, ctx) == 0) {
 				return 0;
 			}
 		}
@@ -2176,9 +2176,9 @@ int __cdecl ls_LoadEntities(int ctx)
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+
 extern int g_file_version; /* 0x1002d4ec */
-int ls_LoadTownData(int);
+
 
 /* ls_LoadTownData — two-phase save load.  Phase 1 walks the per-player
  * building-slot table (0x1009b768, stride 0x2a90): 4 header dwords, then
@@ -2232,7 +2232,7 @@ int ls_LoadTownData(int);
  * (ls_ReadVfsDataChecked, db/server.dll_functions.csv) and the only global
  * is 0x1002d4ec (g_file_version, rebrew_globals.h:18). */
 
-int __cdecl ls_LoadTownData(int file)
+int __cdecl ls_LoadTownData(void* file)
 {
 	int count; extern unsigned char g_city_records[];
 	int ptr;
@@ -2465,7 +2465,7 @@ int __cdecl ls_LoadTownData(int file)
  * (256 or 512 rows in older versions).  No server function calls it, so
  * /OPT:REF discards it; its absolute fixups still count toward LINK's .reloc
  * reservation. */
-int __cdecl ls_LoadRelationships(int stream_ctx)
+int __cdecl ls_LoadRelationships(void* stream_ctx)
 {
 	extern int g_file_version;
 	extern char g_relationship_matrix_primary[];
@@ -2482,7 +2482,7 @@ int __cdecl ls_LoadRelationships(int stream_ctx)
 	}
 	for (j = 0; j < n; j++) {
 		for (i = 0; i < n; i++) {
-			if (ls_ReadVfsDataChecked(&g_relationship_matrix_primary[j * 0x300 + i], 1, 1, (void*) stream_ctx) == 0) {
+			if (ls_ReadVfsDataChecked(&g_relationship_matrix_primary[j * 0x300 + i], 1, 1, stream_ctx) == 0) {
 				return 0;
 			}
 		}
@@ -2490,7 +2490,7 @@ int __cdecl ls_LoadRelationships(int stream_ctx)
 	if (g_file_version >= 0x10036) {
 		for (j = 0; j < n; j++) {
 			for (i = 0; i < n; i++) {
-				if (ls_ReadVfsDataChecked(&g_relationship_matrix_secondary[j * 0x300 + i], 1, 1, (void*) stream_ctx) == 0) {
+				if (ls_ReadVfsDataChecked(&g_relationship_matrix_secondary[j * 0x300 + i], 1, 1, stream_ctx) == 0) {
 					return 0;
 				}
 			}
@@ -2622,11 +2622,11 @@ extern int g_query_filter_owner;
 
 int srv_RecvGame(void)
 {
-	int file_handle;
+	void* file_handle;
 	int load_status;
 	char* entity_state_ptr;
 
-	file_handle = vfs_OpenStream((char*) g_download_buffer, (char*) g_download_total_size, (int) (const char*) &s_gzip_mode_rb);
+	file_handle = vfs_OpenStream((unsigned char*) g_download_buffer, g_download_total_size, s_gzip_mode_rb); /* shortcut: integer buffer view; type after download-state ownership review. */
 	if (file_handle == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
@@ -2652,14 +2652,14 @@ int srv_RecvGame(void)
 		return 0;
 	}
 	*(int*) &g_entity_table_end = 0;
-	if (ls_ReadVfsDataChecked((void*) &g_next_object_id, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) &g_chain_id_start, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) &g_current_year, 0xe, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) &g_current_season, 1, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) &g_entity_table_end, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) &g_next_family_index, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) &gm_CurrentHumanFamilyCount, 4, 1, (void*) file_handle) == 0
-		|| ls_ReadVfsDataChecked((void*) &g_citizen_count, 4, 1, (void*) file_handle) == 0) {
+	if (ls_ReadVfsDataChecked((void*) &g_next_object_id, 4, 1, file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_chain_id_start, 4, 1, file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_current_year, 0xe, 1, file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_current_season, 1, 1, file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_entity_table_end, 4, 1, file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_next_family_index, 4, 1, file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &gm_CurrentHumanFamilyCount, 4, 1, file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) &g_citizen_count, 4, 1, file_handle) == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
 			0x121e,
@@ -2671,13 +2671,13 @@ int srv_RecvGame(void)
 		g_recv_game_buffer = 0;
 		return 0;
 	}
-	ls_ReadVfsDataChecked((void*) &g_saved_dynasty_field, 4, 1, (void*) file_handle);
-	ls_ReadVfsDataChecked((void*) &g_save_session_state, 0x18, 1, (void*) file_handle);
+	ls_ReadVfsDataChecked((void*) &g_saved_dynasty_field, 4, 1, file_handle);
+	ls_ReadVfsDataChecked((void*) &g_save_session_state, 0x18, 1, file_handle);
 	if (g_file_version >= 0x10030) {
-		ls_ReadVfsDataChecked((void*) &g_entity_id_counter, 4, 1, (void*) file_handle);
+		ls_ReadVfsDataChecked((void*) &g_entity_id_counter, 4, 1, file_handle);
 	}
 	if (g_file_version >= 0x1003d) {
-		ls_ReadVfsDataChecked((void*) &g_sequence_counter, 4, 1, (void*) file_handle);
+		ls_ReadVfsDataChecked((void*) &g_sequence_counter, 4, 1, file_handle);
 	} else {
 		g_sequence_counter = 1000000;
 	}
@@ -2707,7 +2707,7 @@ int srv_RecvGame(void)
 		g_recv_game_buffer = 0;
 		return 0;
 	}
-	load_status = ls_LoadDynamicEntities((void*) file_handle);
+	load_status = ls_LoadDynamicEntities(file_handle);
 	if (load_status == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",

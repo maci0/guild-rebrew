@@ -11,11 +11,11 @@ typedef struct Vert {
 
 extern char g_662d18[];
 
-char* __cdecl fcn_004010b0(int);
+char* __cdecl fcn_004010b0(void*);
 char* __cdecl fcn_0064f026(char*, char*);
 double __cdecl fcn_0064d62e(char*);
 
-void __cdecl fcn_0044d640(int r, char* o)
+void __cdecl fcn_0044d640(void* r, char* o)
 {
 	int i;
 	char* line;

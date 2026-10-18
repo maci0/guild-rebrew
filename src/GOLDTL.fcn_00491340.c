@@ -2,10 +2,6 @@
 
 
 #include <stdlib.h>
-
-#define max(a, b) ((a) > (b) ? (a) : (b))
-#define min(a, b) ((a) < (b) ? (a) : (b))
-
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern unsigned char g_773d75;

@@ -1416,6 +1416,7 @@ int __cdecl cm_ChkElectionOrTrade(int cmd)
  * verifies the player is actually in a slot. */
 
 
+#ifdef REBREW_SERVER
 int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 {
 	int action;
@@ -1471,12 +1472,14 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 cler_query:
 	return gm_ff_Objekt(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d) == 0;
 }
+#endif
 
 /* Validation handler: checks if up to 16 entities referenced
  * by IDs in the command payload are all in cutscene-ready state
  * (entity type 0x06 or 0x07). Returns 0 when all are ready,
  * 1 if any entity is missing or not ready. */
 
+#ifdef REBREW_SERVER
 int __cdecl cm_ChkCutsceneReady(char* obj)
 {
 	int entity_ptr;
@@ -1498,6 +1501,7 @@ int __cdecl cm_ChkCutsceneReady(char* obj)
 	}
 	return 0;
 }
+#endif
 
 /* Validation handler: checks that the first byte of the command
  * is a valid command type (0x00, 0x05, 0x06, or 0x07). Logs
@@ -3308,6 +3312,7 @@ int __cdecl cm_ExSysMessage(int cmd, char* result)
 /* Execution handler: removes/kills a player entity (Spieler).
  * Deallocates the player and cleans up associated resources. */
 
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl cm_ExKillSpieler(int cmd)
 {
 	ushort* entity;
@@ -3325,11 +3330,13 @@ int __cdecl cm_ExKillSpieler(int cmd)
 	);
 	return 0;
 }
+#endif
 
 /* Assigns the next sequential ID counter value to the command packet
  * at offset 0x10, then increments the global counter. */
 
 
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl cm_ExAddStraftat(int cmd, char* result)
 {
 	(void) result;
@@ -3338,11 +3345,13 @@ int __cdecl cm_ExAddStraftat(int cmd, char* result)
 	g_sequence_counter = g_sequence_counter + 1;
 	return 0;
 }
+#endif
 
 /* Assigns the next sequential entity ID to the command packet at
  * offset 0x10, records a timestamp at 0x14, then increments the
  * global ID counter. Used when creating new game entities. */
 
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl cm_ExAllocCutscene(int cmd, char* result)
 {
 	DWORD timestamp;
@@ -3355,6 +3364,7 @@ int __cdecl cm_ExAllocCutscene(int cmd, char* result)
 	g_entity_id_counter = g_entity_id_counter + 1;
 	return 0;
 }
+#endif
 
 int __cdecl cm_ExRemoveLinkedObject(int cmd, char *status_ptr)
 {
@@ -4030,6 +4040,7 @@ int __cdecl cm_ExKillTransporter(int cmd, char* result)
 	return 0;
 }
 
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl cm_ExCreateGeb(int cmd, char* result)
 {
 	unsigned short* owner_record;
@@ -4062,6 +4073,7 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 
 	return 0;
 }
+#endif
 
 /*
  * Ghidra decompilation reference:
@@ -4672,6 +4684,7 @@ int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 	}
 }
 
+#ifdef REBREW_SERVER
 int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 {
 	int upgrade_data;
@@ -4717,3 +4730,4 @@ int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 	}
 	return stat_count;
 }
+#endif

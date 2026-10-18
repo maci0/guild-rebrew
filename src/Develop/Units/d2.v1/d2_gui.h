@@ -41,6 +41,11 @@ extern int g_1040494;
 extern char* g_772500;
 extern int g_772568;
 
+/* Inferred argument-slot view; complete backing allocation and owner unknown. */
+/* ADDRESS: GOLD 0x00fa6038 */
+/* ADDRESS: GOLDTL 0x0102d158 */
+extern char d2_BildArgument2[];
+
 void* __cdecl fcn_00466190(int bild);
 void __cdecl fcn_00469960(int bild);
 void __cdecl fcn_00469900(int bild);

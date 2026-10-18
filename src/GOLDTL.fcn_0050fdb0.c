@@ -25,7 +25,7 @@ float __cdecl fcn_0050fdb0(int k, int n, int* ids)
 		}
 	}
 	if (cnt != 0) {
-		return sum * 0.01 / cnt;
+		return (float)(sum * 0.01 / cnt);
 	}
 	return g_6628cc;
 }

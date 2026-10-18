@@ -56,3 +56,29 @@ def test_lint_warnings_are_fatal(tmp_path: Path, warnings: int) -> None:
     path = tmp_path / "lint.json"
     path.write_text(json.dumps({"passed": 3, "errors": 0, "warnings": warnings}))
     assert _adapter(0, path) == warnings
+
+
+@pytest.mark.parametrize("wrong_server_pin", [None, "flags.make", "build.make", "link.txt"])
+def test_toolchain_pins_are_scoped_to_the_generated_server(
+    tmp_path: Path, wrong_server_pin: str | None
+) -> None:
+    (tmp_path / "CMakeLists.txt").write_text("/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp\n")
+    rules = tmp_path / "build/CMakeFiles/server_dll.dir"
+    rules.mkdir(parents=True)
+    for name in ("flags.make", "build.make", "link.txt"):
+        profile = "msvc-6.0-sp5-pp" if name == wrong_server_pin else "msvc-6.0-sp5"
+        (rules / name).write_text(f"/REBREW_TOOLCHAIN:{profile}\n")
+    block = GATE.read_text().split('echo "== per-file toolchain pins"\n', 1)[1]
+    block = block.split('echo "== deliverable vs reference, byte for byte"', 1)[0]
+    result = subprocess.run(
+        [
+            "bash",
+            "-c",
+            'rc=0\nrebrew() { echo \'{"codegen":"plain"}\'; }\n' + block + '\nexit "$rc"',
+        ],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == (0 if wrong_server_pin is None else 1), result.stdout

@@ -42,10 +42,10 @@ extern char g_6b5c60[];
 
 void __cdecl fcn_00535850(int, char*);
 void __cdecl fcn_005e3fa0(char*);
-int __cdecl fcn_0042ff50(char*, char*, int);
-void __cdecl fcn_0051e490(int, int);
-int __cdecl CloseVfsStream(int);
-int __cdecl ls_LoadSavegameHeader(int, char*);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
+int __cdecl fcn_0051e490(void* stream, int flags);
+#include "Develop/Units/vfs/vfs.h"
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 unsigned int __cdecl fcn_00401000(unsigned char*, unsigned int);
 int __cdecl fcn_004c5790(int, void*);
 void __cdecl fcn_00535960(void);
@@ -59,7 +59,7 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 	char path[0x104];
 	char hdr[0xfc];
 	int i;
-	int f;
+	void* f;
 	int n;
 
 	crc = 0;
@@ -79,12 +79,12 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 		g_773de8 = g_774980;
 		fcn_005e3fa0("Gamedata/cities/standard.scr");
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
-		f = fcn_0042ff50(path, "wb", (int) g_6b7fdc);
+		f = fcn_0042ff50(path, "wb", g_6b7fdc);
 		if (f != 0) {
 			fcn_0051e490(f, 5);
 			CloseVfsStream(f);
 		}
-		f = fcn_0042ff50(path, "rb", (int) g_6b7fdc);
+		f = fcn_0042ff50(path, "rb", g_6b7fdc);
 		if (f != 0) {
 			ls_LoadSavegameHeader(f, hdr);
 			crc = fcn_00401000((unsigned char*) hdr, 0x78);

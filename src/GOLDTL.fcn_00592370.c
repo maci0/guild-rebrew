@@ -7,9 +7,9 @@ typedef Slot_779d00 Slot;
 
 extern Slot_779d00 g_779d00[];
 
-int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
-int __cdecl fcn_00592370(int fh)
+int __cdecl fcn_00592370(void* fh)
 {
 	int n;
 	int i;

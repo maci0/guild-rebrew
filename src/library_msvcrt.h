@@ -2,6 +2,12 @@
  * (45/26 bytes). The loop is private to that member; no public declaration
  * is needed. Actual client raw-link provider selection remains unverified. */
 
+/* Gold crt0dat.obj classifications. Comments only; no new declarations.
+ * 0x5dea38 exit / _exit, 17 bytes.
+ * 0x5dea49 _exit / __exit, 17 bytes.
+ * 0x5dea5a static _doexit, 153 bytes. No extern.
+ * Not a raw-link provider. */
+
 
 // _strrchr
 

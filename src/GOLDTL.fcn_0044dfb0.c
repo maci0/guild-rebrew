@@ -1,4 +1,4 @@
-void __cdecl fcn_004011f0(void* a, int* b);
+int __cdecl fcn_004011f0(void* a, void* b);
 void* __cdecl m_alloc(int size, char* tag);
 
 /* ADDRESS: GOLDTL 0x0044dfb0 */

@@ -3,7 +3,7 @@
  * field+0x65 instead of allocating it, and passes each worker's entry index
  * computed from its entry pointer instead of reading an index into a pointer. */
 
-int __cdecl fcn_00430e30(void* buf, int elementSize, int elementCount, void* streamCtx);
+unsigned int __cdecl fcn_00430e30(void* buf, int elementSize, int elementCount, char* streamCtx);
 extern int g_field_worker_count[4];
 extern int g_field_entry_count[4];
 

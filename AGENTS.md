@@ -8,7 +8,8 @@
 - **Compiler**: msvc-6.0-sp5-pp (`docker image rebrew/msvc:6.0-sp5-pp-win32`)
 - **Language**: C89 — follow compiler constraints below
 - **Config**: `rebrew-project.toml` (all tools read from here)
-- **Function inventory**: `src/<target>/function_structure.json` (`[{va, size, name}]`
+- **Function inventory**: the target's configured `inventory_file`, defaulting to
+  `<reversed_dir>/function_structure.json` (`[{va, size, name}]`
   written by discoverer plugins — packaged: rizin, capstone, NE/MZ; third-party
   plugins join via the `rebrew.discoverers` entry-point group, no host edits)
 - **Layout source of truth**: `layout/<target>/rebrew-layout.toml` (+ hex blobs)
@@ -63,11 +64,32 @@ Invoke all tools through the single `rebrew <command>` CLI. Names such as
 `rebrew build objdiff-driver <target> <base-object>`. Place compiler flags after `--`
 so Rebrew passes them through unchanged. Regenerate old CMake/objdiff configs
 when updating Rebrew; no separate `rebrew-*` executables are installed.
-Use `--json` for structured output (preferred for agents). Run `rebrew -h` or
-`rebrew <domain> <operation> -h` to discover commands. Project options select
-the root/target, Output options control JSON/previews/files, and Global options
-control verbosity/version. Read each operation's help for its write behavior;
-`--dry-run` is offered only where supported.
+Use `--json` (`Output results as JSON`) for structured output. `--dry-run`
+(`Preview changes without writing`) is offered only where the command writes.
+Watch loops reject `--json`. Run `rebrew -h` or `rebrew <domain> <operation> -h`
+to discover commands. Project options select the root/target, Output options
+control JSON/previews/files, and Global options control verbosity/version.
+Read `rebrew <command> --help` before combining flags. Selection rules are
+also in the `rebrew-workflow` skill.
+
+`--all` is every eligible item in the selected target. It does not select
+other targets. `--all-targets` repeats the command for every configured target
+and does not change item selection. It excludes `--target`. `--source-targets`
+repeats the command for targets bound to one source file. It excludes
+`--target` and `--all-targets`. `rebrew verify` covers every function in the
+selected target and reuses cached results. `--no-cache` rechecks those
+functions without saved verdicts; compiled objects may still come from cache. There is no verify `--full`. `rebrew source rename --all-modules`
+renames module rows. It is not `--all`. `rebrew test --dir`, `--module`, and
+`--jobs` require `--all`. `rebrew test --all` rejects `--cflags`,
+`--toolchain`, `--size`, `--va`, `--symbol`, and `--target-bin` (help says
+`Excludes --all.`). `rebrew skeleton --batch` rejects a function VA, `--name`,
+`--output`, and `--append` (help says `Excludes --batch.`). Destructive
+commands (`rebrew cache clear`, `rebrew cfg target remove`,
+`rebrew cfg module remove`, `rebrew coverage catalog --fix-sizes`,
+`rebrew source merge`, `rebrew source split`) refuse a non-terminal stdin.
+`--json` on those writes
+also requires `--force`. Pass `--force` to skip the prompt. A piped answer
+does not approve.
 
 | Command | Use |
 |---------|-----|
@@ -80,13 +102,13 @@ control verbosity/version. Read each operation's help for its write behavior;
 | `rebrew todo --json` | Prioritized action items (compile errors, near misses, new functions) |
 | `rebrew skeleton 0x<VA>` | Generate C skeleton from address |
 | `rebrew test <file> --json` | Compile and byte-compare against target |
-| `rebrew test --all --json` | Batch test all reversed functions |
+| `rebrew test --all --json` | Every reversed .c file in the selected target |
 | `rebrew diff <file> --json` | Structured byte diff vs target |
 | `rebrew match run <file> --json` | Run GA matching engine on one function |
 | `rebrew match batch --json` | Batch GA on all STUB functions |
 | `rebrew match batch --near-miss --threshold 5` | Batch GA on NEAR_MATCHING functions with small deltas (Δ ≤ threshold) |
 | `rebrew source rename <old> <new>` | Rename a function, global (`--data`), type (`--type`) or member (`--field`) everywhere; `MODULE.0xVA` picks one identity, `--shared-definition` acknowledges only rows for the selected definition; `--all-modules` also selects independent definitions |
-| `rebrew verify --json` | Bulk verify all reversed files |
+| `rebrew verify --json` | Every function in the selected target, reusing cached results unless `--no-cache` |
 | `rebrew lint --json` | Validate source bindings and the stores: invalid source tags (E024), stale addresses (W028), redundant cflags (W029), function/data store shapes the writers reject (W031), data rows whose size disagrees with the owning definition (W037) or overlaps another row (W038) |
 | `rebrew data list --json` | Inventory globals in .data/.rdata/.bss |
 | `rebrew data move 0xOLD 0xNEW` | Re-address a data row; drops its verdict, keeps verification history |
@@ -220,7 +242,7 @@ for prerequisites, cleanup and isolation limits.
 - **Comments in code**: use `/* */` (C89). Do not add a `// FUNCTION:` line; identity is a `MODULE.0xVA` row
 - **Symbol decoration**: `_func` for `__cdecl`, `_func@N` for `__stdcall`
 - **No `/GS`** (buffer security), no `__declspec(noinline)`
-- **Execution**: all CL.EXE/LINK.EXE calls run inside the toolchain's docker image (wine lives in the image; there is no host wine/wibo fallback)
+- **Execution**: CL.EXE/LINK.EXE use the pinned toolchain image via the configured docker, podman or experimental unshare backend; no host wine/wibo fallback
 
 ## Linking
 
@@ -361,6 +383,20 @@ PE artifacts with `rebrew source organize check`. A common source order or match
 objects does not verify linked placement/data; these checks never earn STATUS.
 
 <!-- rebrew: project rules below, kept by --refresh-agents -->
+
+## Assembly and linker gaps
+
+Allow assembly only for evidenced padding or positive evidence that the original
+source very likely used assembly. A byte match, failed C matching search, blocker,
+or `REBREW_ALLOW_NAKED` switch does not establish that evidence. Record reviewed
+original assembly per definition and target with `source document-assembly`.
+Unsupported whole-function reconstructions remain `source = "naked"` work items;
+their byte verdicts do not mean C recovery. Do not disguise them as padding.
+
+Compilation and linker retention are separate facts. Check object contributions,
+selected link inputs, archive extraction and `/OPT:REF` before explaining a gap.
+A compiled TU can lose contributions in one target; a gap alone establishes
+neither a missing source function nor permission to insert bytes.
 
 ## Upstream Rebrew feature gaps and bugs
 

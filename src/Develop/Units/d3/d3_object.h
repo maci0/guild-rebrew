@@ -89,4 +89,14 @@ char __cdecl d3_DestroyObject(D3_OBJECT* object);
 void __cdecl d3_CleanupObjectDrawData(D3_OBJECT* object);
 void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object);
 
+#ifdef REBREW_GOLD
+/* Declaration views of the list sentinel and its pointer field at +0x1f4.
+ * The sentinel's complete extent and storage owner remain unknown. */
+/* ADDRESS: GOLD 0x00fc2700 */
+extern char g_fc2700[];
+/* ADDRESS: GOLD 0x00fc28f4 */
+extern char* g_fc28f4;
+void __cdecl fcn_0043ca20(char* object);
+#endif
+
 #endif

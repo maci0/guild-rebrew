@@ -1,0 +1,30 @@
+{
+  "target": "Europa1400Gold.exe",
+  "source": "src/Develop/Units/Msx/GOLDTL.fcn_00420530.c",
+  "symbol": "_fcn_00420530",
+  "symbols": [
+    "_g_678154",
+    "_g_678158",
+    "_g_67815c",
+    "_g_6b7190",
+    "_d3d_VertexBuffer"
+  ],
+  "reason": "Actual fresh COFF references introduced by selecting the existing shared C provider. Comparison placeholders only; no native allocation or ownership claim.",
+  "evidence": ".scratch/goal91-sound-wrapper/callee-proof.json",
+  "coff_sha256": "3cac80e7baa150b337800242f71658e5c2fbeba8be84511ea2442513c7b68a43",
+  "previous_scaffold_sha256": "89abf17bab32987716b8d0dbbcfb4227d41c39fa442ff3ff6a5cfce342af73f4",
+  "new_scaffold_sha256": "4725188575b485c4111a7cef5d1362b7b6c0573ccc5b60a7b6e9cbd1a5468b3e",
+  "additional_sources": [
+    {
+      "source": "src/GOLD.fcn_004364f0.c",
+      "symbols": [
+        "_d3d_VertexBuffer"
+      ],
+      "reference_va": "0x633410",
+      "reason": "Comparison-only pointer slot, generated from the declaration. Native storage owner remains unknown.",
+      "evidence": ".scratch/goal110-full-runs/getter-measured.json",
+      "previous_scaffold_sha256": "e9bea075060866eca8c02beb8d548a68a772d80bea65e11df9da92784754e61d",
+      "new_scaffold_sha256": "d69491fd090b029d1dab1d0cc50e4605cc8d60a149f6a72cb3a689aa52e9b839"
+    }
+  ]
+}

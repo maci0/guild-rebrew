@@ -33,38 +33,39 @@ extern char g_7f4ca0[];
 
 void __cdecl fcn_005356e0(void);
 void __cdecl fcn_00535960(void);
-int __cdecl vfs_OpenStream(char*, unsigned int, char*);
+#include "Develop/Units/vfs/vfs.h"
 void __cdecl m_FreeTracked(char*);
-int __cdecl CloseVfsStream(int);
-int __cdecl ls_LoadSavegameHeader(int, int*);
-int __cdecl ls_ReadVfsDataChecked(void* out, int size, int count, int f);
-int __cdecl ls_LoadExistingEntities(int);
-int __cdecl fcn_00522510(int);
-int __cdecl ls_LoadDynamicEntities(int);
-int __cdecl fcn_00522e30(int);
-int __cdecl fcn_00524040(int);
-int __cdecl fcn_004ec520(int, int);
-int __cdecl fcn_005222a0(int);
+
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
+
+
+int __cdecl fcn_00522510(void* stream);
+
+
+int __cdecl fcn_00524040(void* stream);
+int __cdecl fcn_004ec520(void* stream, int version);
+#include "client_scene_loader.h"
 int __cdecl fcn_00525670(void);
 
 int __cdecl fcn_00525b40(void)
 {
 	int hdr[0x3f];
-	int f;
+
+	void* f;
 	int i;
 
 	while (g_fb5740 == 0 || g_1005820 < g_aed328) {
 		fcn_005356e0();
 		fcn_00535960();
 	}
-	f = vfs_OpenStream(g_fb5740, g_aed328, "rb");
+	f = vfs_OpenStream((unsigned char*) g_fb5740, g_aed328, "rb");
 	if (f == 0) {
 		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;
 		return 0;
 	}
 	g_773da8 = 0;
-	ls_LoadSavegameHeader(f, hdr);
+	ls_LoadSavegameHeader(f, (char*) hdr);
 	if (!(hdr[1] & 2) || hdr[0] > 0x1005a) {
 		CloseVfsStream(f);
 		m_FreeTracked(g_fb5740);
@@ -113,7 +114,7 @@ int __cdecl fcn_00525b40(void)
 		g_fb5740 = 0;
 		return 0;
 	}
-	if (fcn_00522e30(f) == 0) {
+	if (ls_LoadEntities(f) == 0) {
 		CloseVfsStream(f);
 		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;

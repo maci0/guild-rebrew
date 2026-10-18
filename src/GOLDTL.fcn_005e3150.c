@@ -120,8 +120,8 @@ void __cdecl fcn_005e3150(void)
 		}
 		if (g_14ce8d0 != 0 && (g_67d370 == s0 || g_67d370 == s1 || g_67d370 == s2 || g_67d370 == s3)) {
 			master = fcn_00471f80(s0) * 0.01f;
-			music = fcn_00471f80(s1);
-			sfx = fcn_00471f80(s2);
+			music = (float)(fcn_00471f80(s1));
+			sfx = (float)(fcn_00471f80(s2));
 			fcn_004238d0((int) (music * master));
 			fcn_0041fc80((int) (sfx * master));
 			if (g_67d370 == s1 && playing == 0) {

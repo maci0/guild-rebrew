@@ -1,9 +1,9 @@
 
 
 
-int __cdecl fcn_004306b0(void*, int, int, int);
+int __cdecl fcn_004306b0(char* buf, int size, int count, char* stream);
 
-int __cdecl fcn_00430870(int a1)
+int __cdecl fcn_00430870(void* a1)
 {
 	char c;
 

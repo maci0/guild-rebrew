@@ -1,8 +1,8 @@
 
 
-void __cdecl fcn_004011f0(int, void*);
+int __cdecl fcn_004011f0(void* stream, void* dst);
 
-void __cdecl fcn_0044e0f0(int a1)
+void __cdecl fcn_0044e0f0(void* a1)
 {
 	int x;
 

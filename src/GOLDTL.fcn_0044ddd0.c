@@ -8,9 +8,9 @@ typedef struct Face {
 	int rest[5];
 } Face;
 
-void __cdecl fcn_004011d0(int, void*);
+int __cdecl fcn_004011d0(void* stream, void* dst);
 
-void __cdecl fcn_0044ddd0(int r, char* o)
+void __cdecl fcn_0044ddd0(void* r, char* o)
 {
 	float t;
 	int i;

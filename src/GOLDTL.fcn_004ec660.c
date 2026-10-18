@@ -29,7 +29,7 @@ void __cdecl fcn_004ec660(void* a1)
 	fcn_0051af00(buf, 0x13ac);
 	if (n > 0) {
 		for (i = 0; i < n; i++) {
-			fcn_0051af00(buf + strlen(buf), g_68deb8,
+			fcn_0051af00(buf + strlen(buf), (int) g_68deb8,
 			    *(int*) (items + i * 0xc) + 0x253);
 		}
 	}

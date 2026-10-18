@@ -17,8 +17,8 @@ int __cdecl fcn_0040e8b0(char** name, char** a)
 	}
 	fcn_00455350(*a, *a + 0x4c, pos);
 	h = fcn_004488e0(*name, 0, 0);
-	fcn_00438b40(h, pos);
+	fcn_00438b40((char*)h, pos);
 	fcn_00455240(*a, rot);
-	fcn_00438cb0(h, rot);
+	fcn_00438cb0((char*)h, rot);
 	return h;
 }

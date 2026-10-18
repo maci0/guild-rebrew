@@ -51,11 +51,11 @@ int __cdecl fcn_00493640(Plan* p)
 	v = a->base + a->bonus;
 	r = a->mood - 2.0f;
 	if (r > 0.66f) {
-		t = n * 190;
+		t = (float)(n * 190);
 	} else if (r > 0.33f) {
-		t = n * 90;
+		t = (float)(n * 90);
 	} else {
-		t = n * 70;
+		t = (float)(n * 70);
 	}
 	if (t > v) {
 		return 1;

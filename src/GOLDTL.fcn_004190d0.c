@@ -26,8 +26,8 @@ void __cdecl fcn_004190d0(SOUND_SOURCE* source)
     x = position[0] - *(float*)((char*)g_6b8014 + 0x4c);
     y = position[1] - *(float*)((char*)g_6b8014 + 0x50);
     z = position[2] - *(float*)((char*)g_6b8014 + 0x54);
-    distance = sqrt(z * z + y * y + x * x);
-    distance *= g_662b40;
+    distance = (float)sqrt(z * z + y * y + x * x);
+    distance = (float)(distance * g_662b40);
     remaining = source->range - distance;
     if (remaining > 0.0f) {
         linearVolume = (int)(remaining / source->range * source->volume);

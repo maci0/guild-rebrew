@@ -85,7 +85,6 @@ void __cdecl fcn_004c5530(Msg0488c00* m);
 void __cdecl fcn_00488c00(Unit0488c00* u)
 {
 	Msg0488c00 m;
-	Ent0488c00* e;
 	char* res;
 	int cnt;
 	int i;

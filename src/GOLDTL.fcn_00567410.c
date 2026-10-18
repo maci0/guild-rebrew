@@ -40,7 +40,7 @@ int __cdecl fcn_00567410(char* h, int n, char** list, int* out1, int* out2)
 	for (i = 0; i < n; i++) {
 		inv = 1.0f / hi;
 		r = fcn_0050c710(list[i], 9, 1);
-		dist[i] = r * 0.0125 + (1.0f - inv * dist[i]);
+		dist[i] = (float)(r * 0.0125 + (1.0f - inv * dist[i]));
 		if (best < dist[i]) {
 			best = dist[i];
 			bi = i;

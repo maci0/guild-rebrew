@@ -10,6 +10,8 @@ typedef struct CH_QUEUE_SLOT {
 } CH_QUEUE_SLOT;
 
 CH_QUEUE_SLOT* __cdecl ch_GetFreeQueueEntry(void);
+struct Task;
+void __cdecl fcn_004079d0(struct Task* task);
 int __cdecl fcn_004050c0(char* task);
 void __cdecl fcn_00405180(void* object, void* task);
 char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...);

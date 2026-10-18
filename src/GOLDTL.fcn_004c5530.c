@@ -2,6 +2,7 @@
 
 
 void __cdecl fcn_004c4df0(int, int);
+int __cdecl fcn_004c4330(void*);
 
 void __cdecl fcn_004c5530(int a1)
 {

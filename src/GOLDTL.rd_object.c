@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
-void __cdecl fcn_00401180(void* stream, void* dst);
-void __cdecl fcn_004011a0(void* stream, char* dst);
-void __cdecl fcn_004011d0(void* stream, void* dst);
-void __cdecl fcn_004011f0(void* stream, void* dst);
+int __cdecl fcn_00401180(void* stream, void* dst);
+char* __cdecl fcn_004011a0(void* stream, char* dst);
+int __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl fcn_00401280(void* stream, void* dst);
 void __cdecl fcn_0041d9e0(const char* msg);
 void __cdecl fcn_00438b40(char* object, void* vector);

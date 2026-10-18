@@ -12,7 +12,7 @@ extern unsigned char g_773d75;
 /* Callees of this translation unit; see src/GOLDTL.fcn_004af2f0.c, the
  * sibling in the same address family. */
 void* __cdecl fcn_0050e4a0(int);
-void* __cdecl fcn_00502cd0(void*, int, ...);
+void* __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl fcn_00502850(void);
 void __cdecl fcn_004ae080(char*, char*, int*, char**);
 int __cdecl fcn_0064eeec(char*);
@@ -85,7 +85,7 @@ int __cdecl fcn_004af400(int a1, int a2, int a3, char* a4, int a5)
 
 		fcn_004ae080(a4, buf, &n, &p);
 		n = fcn_0064eeec(a4 + n);
-		fcn_0051af00(a5, buf,
+		fcn_0051af00((void*) a5, (int) buf,
 		    fcn_0050b710((int) (((float) n * g_662910) * (float) v),
 		    g_773d75),
 		    g_773d75);

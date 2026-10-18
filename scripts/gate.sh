@@ -3,7 +3,7 @@
 #
 #   rebrew lint           annotation and corpus consistency
 #   cmake --build         builds the raw server.dll with stock libraries
-#   rebrew verify --full  byte comparison plus linked EXACT from the raw DLL
+#   rebrew verify --no-cache  byte comparison plus linked EXACT from the raw DLL
 #   rebrew verify --data  data bytes and symbol placement in the raw link
 #   file identity         the raw DLL equals the reference without postlink
 #
@@ -97,7 +97,7 @@ echo "toolchain images present"
 echo "== rebrew function, data and whole-binary verification"
 # One upstream report supplies function/data verdicts and all structural checks.
 # Whole-file equality also checks the physical order of import slots and names.
-if ! rebrew verify --full --text --raw-link --data --whole-binary \
+if ! rebrew verify --no-cache --text --raw-link --data --whole-binary \
         --built build/server.dll --json --target server.dll > .scratch/gate-verify.json; then
     echo "REGRESSION: upstream verification failed (see .scratch/gate-verify.json)"
     rc=1
@@ -220,7 +220,9 @@ done
 # three such pins).  Pins of the same family (e.g. sp5 on an sp6 target) are
 # fine: their output is byte-identical here.
 echo "== per-file toolchain pins"
-pins=$(grep -oE '/REBREW_TOOLCHAIN:[A-Za-z0-9._-]+' CMakeLists.txt | sort -u || true)
+pin_dir=build/CMakeFiles/server_dll.dir
+pins=$(grep -h -oE '/REBREW_TOOLCHAIN:[A-Za-z0-9._-]+' \
+    "$pin_dir/flags.make" "$pin_dir/build.make" "$pin_dir/link.txt" | sort -u || true)
 if [ -z "$pins" ]; then
     echo "no per-file toolchain pins"
 else

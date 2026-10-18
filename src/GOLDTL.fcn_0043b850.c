@@ -4,12 +4,12 @@ typedef int (__cdecl* fcn_0043b850_f)(char*, int, char*);
 
 extern int g_67a590;
 extern int g_67a370;
-void __cdecl fcn_004011f0(int, void*);
-int __cdecl fcn_004011a0(int, void*);
+int __cdecl fcn_004011f0(void* stream, void* dst);
+char* __cdecl fcn_004011a0(void* stream, char* text);
 int __cdecl fcn_0043b500(char*);
 char __cdecl fcn_0043b660(char*, int, int, char*);
 
-void __cdecl fcn_0043b850(int r)
+void __cdecl fcn_0043b850(void* r)
 {
 	int n;
 	char val[0x100];

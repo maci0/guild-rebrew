@@ -6,14 +6,14 @@ typedef struct
 } fcn_0044b200_Tile;
 // SIZE 0x40
 
-extern int g_6b7fdc;
+extern struct VFS_DIR* g_6b7fdc;
 
 char* __cdecl fcn_00449ac0(char* s, char* sub);
 char* __cdecl fcn_0064d1a0(char* s, int c);
-void* __cdecl fcn_0042ff50(char* name, char* mode, int flags);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl fcn_00401360(void* s, int v);
 void __cdecl fcn_00401230(void* s, fcn_0044b200_Tile* t);
-void __cdecl CloseVfsStream(void* s);
+#include "Develop/Units/vfs/vfs.h"
 
 /* ADDRESS: GOLDTL 0x0044b200 */
 void __cdecl fcn_0044b200(char* o)

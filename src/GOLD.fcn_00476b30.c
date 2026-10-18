@@ -1,15 +1,13 @@
-
-// fcn_00476b30 — clear node table 0xf8f0a0..0xf8f120.
-
-int __cdecl fcn_00476850(int);
+#include "client_sprites.h"
 
 void __cdecl fcn_00476b30(void)
 {
-	int p;
-	for (p = 0xf8f0a0; p < 0xf8f120; p += 4) {
-		if (*(int*) p != 0) {
-			fcn_00476850(*(int*) p);
-			*(int*) p = 0;
-		}
-	}
+    char** p;
+    /* Native comparison treats the cursor addresses as signed 32-bit values. */
+    for (p = g_1015ec0; (int)p < (int)(g_1015ec0 + 32); p++) {
+        if (*p != 0) {
+            fcn_00476850(*p);
+            *p = 0;
+        }
+    }
 }

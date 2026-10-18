@@ -1,0 +1,4 @@
+# All selected callers now name the real shared fcn_004c2d50 provider.
+# Keep the historical unresolved log intact; emit no obsolete placeholder.
+[specials.fcn_004c2480]
+impl = ""

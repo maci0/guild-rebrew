@@ -11,9 +11,9 @@ extern float g_7764cc[];
 extern float g_77652c[];
 extern float g_77658c;
 
-int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
-int __cdecl fcn_005e8d00(int fh)
+int __cdecl fcn_005e8d00(void* fh)
 {
 	if (ls_ReadVfsDataChecked(&g_7763a0, 4, 1, fh) == 0) {
 		return 0;

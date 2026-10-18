@@ -15,13 +15,13 @@ struct unk_436ff0 {
 };
 
 extern unsigned long g_14ce728;
-extern int g_6b7fdc;
+extern struct VFS_DIR* g_6b7fdc;
 extern unsigned char g_6b7ff8;
 extern void* g_6b5de0;
 
 char* __cdecl m_alloc(int size, const char* tag);
-void* __cdecl fcn_0042ff50(char*, char*, int);
-int __cdecl fcn_004306b0(void*, int, int, void*);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
+int __cdecl fcn_004306b0(char* buf, int size, int count, char* stream);
 void __cdecl fcn_00430580(void*);
 #include "Develop/Units/Error/error_message.h"
 long __stdcall fcn_006129e7(void*, void*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, int, int,

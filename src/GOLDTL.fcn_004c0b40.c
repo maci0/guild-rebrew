@@ -14,7 +14,7 @@ struct snd_4c0b40 {
 extern char* g_772d34;
 
 char* __cdecl fcn_0064d470(char*, char*);
-void __cdecl fcn_004c2d90(float, int);
+void __cdecl fcn_004c24c0(float, int);
 int __cdecl fcn_00423670(char**, int, int);
 int __cdecl fcn_00423460(char**);
 void __cdecl fcn_00426170(char**, int);
@@ -41,7 +41,7 @@ void __cdecl fcn_004c0b40(void)
 			if (cur->voice != 0 && cur->voice[1] != 0) {
 				one = 1;
 				if (fcn_0064d470(cur->voice[1] + 4, "Fanfare") != 0 && g_772d2c == 0) {
-					fcn_004c2d90(0.0f, 0x7d0);
+					fcn_004c24c0(0.0f, 0x7d0);
 					g_772d2c = one;
 				}
 				fcn_00423670((*(struct snd_4c0b40**)&g_772d34)->voice, 0, 0);
@@ -69,7 +69,7 @@ void __cdecl fcn_004c0b40(void)
 		fcn_00426170((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
 		m_FreeTracked((*(struct snd_4c0b40**)&g_772d34));
 		(*(struct snd_4c0b40**)&g_772d34) = next;
-		fcn_004c2d90(1.0f, 0x7d0);
+		fcn_004c24c0(1.0f, 0x7d0);
 		g_772d2c = 0;
 	}
 }

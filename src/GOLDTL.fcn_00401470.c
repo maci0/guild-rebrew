@@ -1,12 +1,12 @@
 
 
-void __cdecl fcn_004011f0(int f, void* x);
-void __cdecl fcn_00430a80(int f, int off, int whence);
+int __cdecl fcn_004011f0(void* f, void* x);
+int __cdecl fcn_00430a80(char* f, int off, int whence);
 #include "Develop/Units/Error/error_message.h"
 void* __cdecl m_alloc(int size, const char* tag);
-void __cdecl fcn_004306b0(void* buf, int size, int count, int f);
+int __cdecl fcn_004306b0(char* buf, int size, int count, char* f);
 
-int __cdecl fcn_00401470(int f, int count, void** out, const char* tag)
+int __cdecl fcn_00401470(void* f, int count, void** out, const char* tag)
 {
 	int size;
 	int n;

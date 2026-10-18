@@ -26,9 +26,9 @@ void __cdecl fcn_00456c60(void);
 void __cdecl fcn_00456c10(void);
 void __cdecl fcn_00456c80(void);
 void __cdecl fcn_0043bbf0(unsigned char);
-void __cdecl fcn_0045cfa0(int);
+#include "client_scene_loader.h"
 
-void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned int a4, int a5)
+void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned int a4, SCENE_PROGRESS a5)
 {
 	int save;
 	unsigned int i;
@@ -37,7 +37,7 @@ void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned i
 	save = g_6b8010;
 	fcn_00456c60();
 	for (i = 0; i < 64; i++) {
-		if (i != save && ((Player*)g_1043340)[i].active != 0) {
+		if (i != (unsigned int)save && ((Player*)g_1043340)[i].active != 0) {
 			fcn_004432d0(i, 1);
 			fcn_00456c60();
 		}

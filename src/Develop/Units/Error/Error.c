@@ -15,7 +15,7 @@ void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 extern unsigned int g_log_mode_flags;
 extern int g_owner_window;
 extern char g_log_message_buffer[];
-
+#if defined(REBREW_SERVER)
 int g_log_level_table[3] = {
     0x01, 0x02, 0x08,
 };
@@ -36,7 +36,7 @@ char g_log_newline[2] = { 0x0a, 0x00, };
 char g_log_default_name[13] = {
     0x5f, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2e, 0x6c, 0x6f, 0x67, 0x00,
 };
-
+#endif
 
 
 extern void (*g_panic_callback)(void);
@@ -89,7 +89,7 @@ void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 /* The log module's own literal pool copies (this TU's .data), used because
  * the same text occurs earlier in .rdata/.data and content-scan binding
  * would resolve to those copies instead of the ones this code targets. */
-
+#if defined(REBREW_SERVER)
 void __cdecl DispatchLogOutput(const char* msg, int flags, int level)
 {
 	char buf[260];
@@ -138,7 +138,7 @@ void __cdecl DispatchLogOutput(const char* msg, int flags, int level)
 		WriteConsoleA((HANDLE) g_log_file_handle, g_log_newline, 1, &written, 0);
 	}
 }
-
+#endif
 /* Unhandled exception filter for crash dumps. Creates a
  * minidump file with module info and stack trace when the
  * process crashes. */
@@ -685,7 +685,7 @@ char __cdecl AnalyzeInstruction(int arg1, int arg2, int arg3, int* arg4)
 extern void (*g_panic_callback)(void);
 extern unsigned int g_log_mode_flags; /* 0x10034618 */
 extern int g_owner_window;
-
+#if defined(REBREW_SERVER)
 void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned int d)
 {
 	int now;
@@ -732,7 +732,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 		string_cursor += 4;
 	} while ((int) string_cursor < (int) ((char*) &g_log_level_table + 0xc));
 }
-
+#endif
 void __cdecl ShutdownLogAndErrorHandler(void)
 {
 	int i;

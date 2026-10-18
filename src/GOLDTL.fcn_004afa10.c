@@ -94,6 +94,6 @@ int __cdecl fcn_004afa10(int a1, int a2, int a3, char* a4, int a5)
 	if (a1 == 0) {
 		*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) e + 4);
 	}
-	fcn_0051af00(a5, buf, *(unsigned short*) e);
+	fcn_0051af00((void*) a5, (int) buf, *(unsigned short*) e);
 	return 1;
 }

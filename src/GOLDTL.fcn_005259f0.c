@@ -8,12 +8,12 @@ typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;
 extern int g_1005760;
 
-void* __cdecl fcn_0042ff50(char*, char*, int);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl fcn_00430a80(void*, int, int);
 int __cdecl fcn_00430c50(void*);
 char* __cdecl m_alloc(int, char*);
-void __cdecl CloseVfsStream(void*);
-int __cdecl vfs_ReadData(char*, int, int, void*);
+#include "Develop/Units/vfs/vfs.h"
+int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 void __cdecl m_FreeTracked(char*);
 void __cdecl fcn_004c4e40(int);
 int __cdecl fcn_004c4e70(char*);
@@ -31,7 +31,7 @@ int __cdecl ls_SendGame(char* path)
 	int sent;
 
 	n = 0;
-	h = fcn_0042ff50(path, g_6a24d0, (int) g_6b7fdc);
+	h = fcn_0042ff50(path, g_6a24d0, g_6b7fdc);
 	if (h == 0) {
 		return 0;
 	}

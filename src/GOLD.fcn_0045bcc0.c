@@ -103,7 +103,7 @@ float __cdecl fcn_0045bcc0(Obj045bcc0* o, Ctx045bcc0* ctx)
 		m = g_5ebaa4;
 		for (i = 0; i < 8; i++) {
 			if (!(m < b[i].y)) {
-				m = b[i].y;
+				m = (float)b[i].y;
 			}
 		}
 		res = m + o->ov->height;

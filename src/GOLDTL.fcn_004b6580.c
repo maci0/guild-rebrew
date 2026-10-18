@@ -16,7 +16,7 @@ typedef struct {
 extern signed char g_6a3440;
 extern char g_10069a0[];
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 int __cdecl fcn_004b6580(void* stream)
 {

@@ -19,12 +19,12 @@ typedef struct Table {
 	Rec* second;
 } Table;
 
-extern int g_6b7fdc;
+extern struct VFS_DIR* g_6b7fdc;
 extern char g_67fbe8[];
 
-int __cdecl fcn_0042ff50(const char* name, const char* mode, int ctx);
-unsigned int __cdecl vfs_ReadData(void* buf, int size, int count, int stream);
-int __cdecl CloseVfsStream(int stream);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
+unsigned int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
+#include "Develop/Units/vfs/vfs.h"
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
@@ -35,7 +35,7 @@ void __cdecl m_FreeTracked(void* p);
 int __cdecl fcn_004acc00(Table* t)
 {
 	int magic;
-	int f;
+	void* f;
 	int i;
 
 	magic = HISTORICAL_MAGIC;
@@ -43,13 +43,13 @@ int __cdecl fcn_004acc00(Table* t)
 	if (f == 0) {
 		goto fail;
 	}
-	if (vfs_ReadData(&magic, 4, 1, f) <= 0 || magic != HISTORICAL_MAGIC) {
+	if (vfs_ReadData((char*) &magic, 4, 1, f) <= 0 || magic != HISTORICAL_MAGIC) {
 		goto fail_close;
 	}
-	if (vfs_ReadData(&t->n_first, 4, 1, f) <= 0) {
+	if (vfs_ReadData((char*) &t->n_first, 4, 1, f) <= 0) {
 		goto fail_close;
 	}
-	if (vfs_ReadData(&t->n_second, 4, 1, f) <= 0) {
+	if (vfs_ReadData((char*) &t->n_second, 4, 1, f) <= 0) {
 		goto fail_close;
 	}
 	if (t->n_first <= 0 || t->n_second <= 0) {
@@ -74,18 +74,18 @@ int __cdecl fcn_004acc00(Table* t)
 	memset(t->second, 0, t->n_second * sizeof(Rec));
 	memset(t->first, 0, t->n_first * sizeof(Rec));
 	for (i = 0; i < t->n_first; i++) {
-		if (vfs_ReadData(&t->first[i].id, 4, 1, f) <= 0
-			|| vfs_ReadData(&t->first[i].x4, 4, 1, f) <= 0
-			|| vfs_ReadData(&t->first[i].x8, 4, 1, f) <= 0
+		if (vfs_ReadData((char*) &t->first[i].id, 4, 1, f) <= 0
+			|| vfs_ReadData((char*) &t->first[i].x4, 4, 1, f) <= 0
+			|| vfs_ReadData((char*) &t->first[i].x8, 4, 1, f) <= 0
 			|| vfs_ReadData(t->first[i].name, 0x10, 1, f) <= 0
 			|| vfs_ReadData(t->first[i].text, 0x10, 1, f) <= 0) {
 			goto fail_close;
 		}
 	}
 	for (i = 0; i < t->n_second; i++) {
-		if (vfs_ReadData(&t->second[i].id, 4, 1, f) <= 0
-			|| vfs_ReadData(&t->second[i].x4, 4, 1, f) <= 0
-			|| vfs_ReadData(&t->second[i].x8, 4, 1, f) <= 0
+		if (vfs_ReadData((char*) &t->second[i].id, 4, 1, f) <= 0
+			|| vfs_ReadData((char*) &t->second[i].x4, 4, 1, f) <= 0
+			|| vfs_ReadData((char*) &t->second[i].x8, 4, 1, f) <= 0
 			|| vfs_ReadData(t->second[i].name, 0x10, 1, f) <= 0
 			|| vfs_ReadData(t->second[i].text, 0x10, 1, f) <= 0) {
 			goto fail_close;

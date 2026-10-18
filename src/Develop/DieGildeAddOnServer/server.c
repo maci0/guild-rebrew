@@ -240,11 +240,13 @@ int __stdcall DllMain(int a, int b, int c)
  * and stores its handle in g_thread_handle. */
 
 
+#if defined(REBREW_SERVER)
 int __cdecl Init(LPVOID param)
 {
 	g_thread_handle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE) ServerMainThread, param, 0, (LPDWORD) &param);
 	return g_thread_handle != 0;
 }
+#endif
 
 /* Server shutdown: signals the main thread to stop,
  * terminates it, and closes the handle. */
@@ -267,6 +269,7 @@ void __cdecl Exit(void)
  * initializes systems, accepts connections, processes
  * commands, advances simulation, and handles I/O. */
 
+#if defined(REBREW_SERVER)
 int __stdcall ServerMainThread(void* lpThreadParameter)
 {
 	char* module_path;
@@ -768,8 +771,10 @@ cleanup_and_exit:
 	srv_CleanupSockets();
 	return 0;
 }
+#endif
 
 
+#if defined(REBREW_SERVER)
 int __cdecl srv_Init(void)
 {
 	char path[0x104];
@@ -798,6 +803,7 @@ int __cdecl srv_Init(void)
 srv_done:
 	;
 }
+#endif
 
 
 /* WSAStartup = 0x10024178, WSACleanup = 0x1002417c */
@@ -807,6 +813,7 @@ srv_done:
 
 
 // SIZE 0x10 — struct sockaddr_in (Winsock system struct)
+#if defined(REBREW_SERVER)
 int __cdecl srv_CreateListenSocket(int port)
 {
 	char wsadata[0x190];
@@ -888,6 +895,7 @@ cleanup_wsa:
 	WSACleanup();
 	return -1;
 }
+#endif
 
 /* Cleans up all network sockets. Closes client connections,
  * the listen socket, and calls WSACleanup. */
@@ -949,6 +957,7 @@ void __cdecl srv_CleanupSockets(void)
 
 extern int __cdecl sprintf(char*, const char*, ...);
 
+#if defined(REBREW_SERVER)
 int __cdecl srv_AcceptConnections(void)
 {
 	int optval;
@@ -1046,6 +1055,7 @@ do_accept:
 ret_neg1:
 	return -1;
 }
+#endif
 
 /* Closes a specific player's network connection. Shuts down
  * the socket, clears the player slot, and broadcasts the

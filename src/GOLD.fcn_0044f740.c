@@ -1,7 +1,7 @@
 
 // fcn_0044f740 — fcn_004011a0(arg, buf).
 
-int __cdecl fcn_004011a0(void*, void*);
+char* __cdecl fcn_004011a0(void* stream, char* text);
 
 void __cdecl fcn_0044f740(void* a)
 {

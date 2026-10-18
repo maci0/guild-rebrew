@@ -1,9 +1,9 @@
 /* ls_ReadVfsDataChecked — wrapper around vfs_ReadData, nonzero on success. */
+#include "../loadsave.h"
 
 
 
-
-int __cdecl vfs_ReadData(void*, int, int, void*);
+int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx)
 {

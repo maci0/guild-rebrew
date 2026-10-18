@@ -13,12 +13,12 @@ void __cdecl fcn_00451900(float* a, float* m)
 	float czsy;
 	float t[2];
 
-	sx = sin(a[0]);
-	sy = sin(a[1]);
-	sz = sin(a[2]);
-	cx = cos(a[0]);
-	t[0] = cos(a[1]);
-	cz = cos(a[2]);
+	sx = (float)(sin(a[0]));
+	sy = (float)(sin(a[1]));
+	sz = (float)(sin(a[2]));
+	cx = (float)(cos(a[0]));
+	t[0] = (float)(cos(a[1]));
+	cz = (float)(cos(a[2]));
 	m[11] = 0.0f;
 	m[7] = 0.0f;
 	m[3] = 0.0f;

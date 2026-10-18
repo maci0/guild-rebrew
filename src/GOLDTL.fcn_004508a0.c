@@ -54,7 +54,7 @@ void __cdecl fcn_004508a0(Obj04508a0* o)
 			}
 			p += 14;
 		}
-		s = o->base * a->scale / m;
+		s = (float)(o->base * a->scale / m);
 		if (a->start == 0) {
 			f = rand() * g_662a18 * s;
 			o->prev = f + f - s + 1.0f;

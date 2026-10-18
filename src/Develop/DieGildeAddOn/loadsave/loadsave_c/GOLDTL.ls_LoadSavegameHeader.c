@@ -30,7 +30,7 @@
 
 #include <stdlib.h>
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+#include "../loadsave.h"
 extern int g_file_version; /* 0x1002d4ec */
 extern char s_ls_tmp_1002d4fc; /* 0x1002d4fc */
 
@@ -46,74 +46,74 @@ struct SaveHeaderTail {
 #pragma pack()
 extern char g_save_header_tail[]; /* 0x1002d4f0 */
 
-int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
+int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 {
 	void* buf;
 	int i;
 
 	buf = m_alloc(0xe100, &s_ls_tmp_1002d4fc);
-	if (!ls_ReadVfsDataChecked(dest, 4, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest, 4, 1, stream)) {
 		return 0;
 	}
 	g_file_version = *(int*) dest;
-	if (!ls_ReadVfsDataChecked(dest + 4, 1, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest + 4, 1, 1, stream)) {
 		return 0;
 	}
-	if (!ls_ReadVfsDataChecked(dest + 5, 0x20, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest + 5, 0x20, 1, stream)) {
 		return 0;
 	}
-	if (!ls_ReadVfsDataChecked(dest + 0x28, 8, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest + 0x28, 8, 1, stream)) {
 		return 0;
 	}
-	if (!ls_ReadVfsDataChecked(dest + 0x30, 1, 1, (void*) stream)) {
+	if (!ls_ReadVfsDataChecked(dest + 0x30, 1, 1, stream)) {
 		return 0;
 	}
 	if (g_file_version >= 0x10033) {
-		if (!ls_ReadVfsDataChecked(dest + 0x31, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x31, 1, 1, stream)) {
 			return 0;
 		}
 	}
 	if (g_file_version >= 0x10028) {
-		if (!ls_ReadVfsDataChecked(dest + 0x32, 0xe, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x32, 0xe, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x40, 0x10, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x40, 0x10, 1, stream)) {
 			return 0;
 		}
 		if (g_file_version >= 0x10054) {
-			if (!ls_ReadVfsDataChecked(dest + 0x50, 0x10, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x50, 0x10, 1, stream)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(dest + 0x63, 1, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x63, 1, 1, stream)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(dest + 0x64, 4, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x64, 4, 1, stream)) {
 				return 0;
 			}
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x60, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x60, 1, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x61, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x61, 1, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x62, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x62, 1, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x68, 4, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x68, 4, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x6c, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x6c, 1, 1, stream)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(dest + 0x6d, 1, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x6d, 1, 1, stream)) {
 			return 0;
 		}
 		if (g_file_version >= 0x1002b) {
-			if (!ls_ReadVfsDataChecked(dest + 0x70, 4, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x70, 4, 1, stream)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(dest + 0x74, 4, 1, (void*) stream)) {
+			if (!ls_ReadVfsDataChecked(dest + 0x74, 4, 1, stream)) {
 				return 0;
 			}
 		}
@@ -123,12 +123,12 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 		}
 		if (g_file_version >= 0x10034) {
 			for (i = 0; i < 8; i++) {
-				if (!ls_ReadVfsDataChecked(dest + 0x78 + i * 4, 4, 1, (void*) stream)) {
+				if (!ls_ReadVfsDataChecked(dest + 0x78 + i * 4, 4, 1, stream)) {
 					return 0;
 				}
 			}
 		}
-		if (!ls_ReadVfsDataChecked(buf, 0xe100, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(buf, 0xe100, 1, stream)) {
 			return 0;
 		}
 	}
@@ -139,7 +139,7 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 		return 0;
 	}
 	if (g_file_version >= 0x10038) {
-		if (!ls_ReadVfsDataChecked(dest + 0x98, 4, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest + 0x98, 4, 1, stream)) {
 			return 0;
 		}
 	}
@@ -148,7 +148,7 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 	}
 	if (g_file_version >= 0x10039) {
 		dest += 0x9c;
-		if (!ls_ReadVfsDataChecked(dest, 0x60, 1, (void*) stream)) {
+		if (!ls_ReadVfsDataChecked(dest, 0x60, 1, stream)) {
 			return 0;
 		}
 	}

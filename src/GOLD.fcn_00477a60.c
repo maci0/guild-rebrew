@@ -20,8 +20,7 @@ extern int g_006310b4; /* 0x006310b4 */
 extern int g_005f323c; /* 0x005f323c */
 extern int g_00f8a66c; /* 0x00f8a66c */
 extern int g_00f8a664; /* 0x00f8a664 */
-extern short g_01467380; /* 0x01467380 */
-extern short g_01467382; /* 0x01467382 */
+#include "client_cursor.h"
 extern int g_006ed9c4; /* 0x006ed9c4 */
 extern int g_006ed9e8; /* 0x006ed9e8 */
 extern int g_006ed9ec; /* 0x006ed9ec */

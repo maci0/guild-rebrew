@@ -78,7 +78,7 @@ void __cdecl fcn_004d27a0(void);
 void __cdecl fcn_004758e0(int);
 unsigned char* __cdecl fcn_004767c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_005309d0(int, int);
-void __cdecl fcn_00476850(unsigned char*);
+#include "client_sprites.h"
 void __cdecl fcn_0042b050(void);
 void __cdecl fcn_0040b8a0(void);
 void __cdecl fcn_0040f960(void);

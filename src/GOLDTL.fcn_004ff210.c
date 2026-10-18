@@ -59,7 +59,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 		return -1.0f;
 	if (e->kind != 0x14) {
 		res = (e->age <= e->span ? (e->hi - e->lo) / e->span * e->age + e->lo : e->hi) + ((float) e->bonus + delta);
-		res = res > 0.0 ? res : 0.0;
+		res = (float)(res > 0.0 ? res : 0.0);
 		if (res <= 0.0) {
 			dead = 0;
 			fcn_004c4510((char*) e, e->h);

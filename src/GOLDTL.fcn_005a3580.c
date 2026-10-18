@@ -16,7 +16,7 @@ typedef struct
 
 extern float g_662d70[4];
 
-char* __cdecl _strlwr(char*);
+char* __cdecl _strupr(char*);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
@@ -41,7 +41,7 @@ Obj* __cdecl fcn_005a3580(char* name)
 	d = low;
 	while ((*d++ = *s++) != 0) {
 	}
-	_strlwr(low);
+	_strupr(low);
 	sprintf(buf, "dummy_%s", low);
 	e = fcn_00445600(0, 0x140, 0, buf);
 	if (e == 0) {

@@ -1,31 +1,15 @@
-int __cdecl fcn_00438d40(int, int, int, int, int);
+extern int g_67a370;
+
+char __cdecl fcn_00438d40(char *scene, char *node, unsigned int flags, int cb, void *ctx);
 
 /* ADDRESS: GOLD 0x004d0ca0 */
-void __declspec(naked) __cdecl fcn_004d0ca0(void)
+/* Caller 0x4d1510 pushes nothing and does not read the return.
+ * 0x6f0d58 and 0x4d0a80 have no declaration, so they stay raw views. */
+void __cdecl fcn_004d0ca0(void)
 {
-	__asm {
-		_emit 0xa1
-		_emit 0xb0
-		_emit 0xb5
-		_emit 0x5f
-		_emit 0x00
-		push 0
-		push 4d0a80h
-		push 100h
-		push 0
-		push eax
-		_emit 0xc7
-		_emit 0x05
-		_emit 0x58
-		_emit 0x0d
-		_emit 0x6f
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		call fcn_00438d40
-		add esp, 14h
-		ret
-	}
+	char *scene;
+
+	scene = (char *)g_67a370;
+	*(int *)0x6f0d58 = 0;
+	fcn_00438d40(scene, 0, 0x100, 0x4d0a80, 0);
 }

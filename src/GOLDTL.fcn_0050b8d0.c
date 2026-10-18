@@ -18,7 +18,7 @@ float __cdecl fcn_0050b8d0(unsigned char* p, int k, int a, int b)
 		r = (float) (t[0x233 + b] * 896);
 	}
 	if (p[2] == 6 || p[2] == 7) {
-		r *= 1.0 - (2 - g_7747b4) * 0.25;
+		r = (float)(r * (1.0 - (2 - g_7747b4) * 0.25));
 	}
 	return r;
 }

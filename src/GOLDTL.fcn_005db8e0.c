@@ -93,7 +93,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 	char c;
 	int i;
 
-	n = gm_WalkEntityChain(e->id) * 0.015f;
+	n = (int)(gm_WalkEntityChain(e->id) * 0.015f);
 	dlg = fcn_00470820(0, 0, "privillegien\\CHOOSEPROFESSION2");
 	fcn_00471b60(dlg);
 	fcn_004727a0(dlg, 0);

@@ -9,7 +9,7 @@ extern Entry68e020 g_68e020[32];
 extern char g_68fedc[];
 extern char g_68fea0[];
 
-int __cdecl ls_ReadVfsDataChecked(void* p, int size, int n, void* file);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 int __cdecl fcn_004ef0d0(void* file)
 {

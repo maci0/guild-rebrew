@@ -1,6 +1,6 @@
 # minizip unzip.c: zlib 1.1.3's contrib/minizip (Gilles Vollant's unzip 0.15,
 # the 1998-06-15 revision), pinned by the zlib tarball's checksums, plus local
-# patches. rebrew library vendor --sync rebuilds `output`; CMake runs its check at configure.
+# patches. rebrew library vendor --apply rebuilds `output`; CMake runs its check at configure.
 # Provenance and patch reasons: docs/vendoring.md.
 name = "minizip"
 version = "0.15 (zlib 1.1.3 contrib/minizip)"

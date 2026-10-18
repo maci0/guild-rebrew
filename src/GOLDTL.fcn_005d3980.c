@@ -37,13 +37,13 @@ void __cdecl fcn_005d3980(Cur cur, int w, int h)
 	base = (float) (h - 0x16);
 	x = 0x2d;
 	for (i = 1; i < 16; i++) {
-		v0 = CLAMP0(g_99ec20[i - 1].a);
-		v1 = CLAMP0(g_99ec20[i].a);
+		v0 = (float)(CLAMP0(g_99ec20[i - 1].a));
+		v1 = (float)(CLAMP0(g_99ec20[i].a));
 		nx = x + step;
 		fcn_00472c30(x, (int) (base - v0 * scale), nx, (int) (base - v1 * scale), 0xee, 0xee, 0x10);
 		x = nx;
 	}
-	v0 = CLAMP0(g_99ec20[15].a);
-	v1 = CLAMP0(cur.a);
+	v0 = (float)(CLAMP0(g_99ec20[15].a));
+	v1 = (float)(CLAMP0(cur.a));
 	fcn_00472c30(step * 15 + 0x2d, (int) (base - v0 * scale), step * 16 + 0x2d, (int) (base - v1 * scale), 0xee, 0xee, 0x10);
 }

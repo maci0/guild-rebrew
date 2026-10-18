@@ -42,20 +42,48 @@ only. Full receipts remain in the archive and referenced `.scratch/goal*/` folde
 | Goal72 | Three parallel native mapping packages recorded 15 new identities: large combat/day bodies, separate lookup/callback entries, object/terrain readers and credit dependencies. `rd_object` is attested; shared `io_Text` diagnostics retain placeholder names. Complete tables retained, terminal NOPs separated, all 6,067 strong rows preserved. Zero new matched bytes; lint/data conflicts clean. Receipts `.scratch/goal72/`. |
 | Goal73 | Placement-search callback matched, 148 bytes in each client, after splitting it from the surrounding 62-byte function. Transform providers take `char*` and stay EXACT 254. Gold bounds verification and the current-tree server gate pass. Receipts `.scratch/goal73/`. |
 
+| Goal75 | Canonical 84-byte placement result and 132-byte list preserve 14 client contexts/3,224 code bytes; compiler layouts checked in both clients. Two Gold list searches restored to C, EXACT31/34. Later server gate preserves file identity but exposes unsupported client assembly. Receipts `.scratch/goal75-placement/`. |
+| Goal76 | Gold video cleanup restored to complete44-byte C, including omitted CoUninitialize tail; merged inventory split without losing reference bytes. GUI copy restored to47-byte C. CRT rand stock proof prepared. Receipts `.scratch/goal76-assembly/`. |
+| Goal77 | Copied Gold rand retired to a LIBRARY identity, sole30-byte caller preserved; scene collector restored to47-byte C. Native dialog contract corrected to five arguments, with assembly still open. Server gate's316 function/652 data comparisons and raw-file/Wine checks pass, but lint keeps the overall gate failing. Client raw files/providers remain unverified. Receipts `.scratch/goal77-assembly/`. |
+| Goal78 | Gold cursor setter66 and dialog wrapper77 restored to C using canonical extern views; complete operands/literal and32 rejecting controls pass. Callback SDK ABI refined without reconstructing its1840-byte body; existing293-byte GUI reader preserved. Ten25-byte non-owning access views add no storage/data verdicts. Lint falls36→34 errors; server raw file remains identical. Receipts `.scratch/goal78-assembly/`. |
+| Goal79 | Gold GUI setters57/47 restored to C; TL counterparts54/47 independently checked. Canonical image-argument alias replaces TL's numeric operand without changing resolved bytes. Three prior header contexts413 bytes preserved; all six affected contexts verify RELOC with current inputs. Lint falls34→32 errors. No added storage, data verdicts or accounted text; server raw file remains identical. Receipts `.scratch/goal79-gui/`. |
+| Goal80 | Both55-byte ecmd_LoadScene commands restored to C; canonical byte-return/three-argument loader boundary and typed callback preserve ten existing contexts. Gold city caller's96-byte extent repaired to86+10 NOPs, RELOC86 without a body change. Twelve published contexts match; two real loader bodies remain STUBs. VFS/savegame int-stream boundary remains explicit. Lint32→31; server raw file identical. Receipts `.scratch/goal80-scene/`. |
+| Goal81 | TL closer repaired from STUB to RELOC296: correct pool, named counter access, all 11 operands/21 rejecting controls. Receiver 824 preserves code while binding its entity-reader call. Fixed upstream disabled-definition binding guard;12,454 upstream tests pass. VFS directory-entry/stream type confusion corrected; pointer closure remains open. Server raw file identical; lint31 errors. Receipts `.scratch/goal81-vfs/`. |
+| Goal82 | Opaque stream contracts preserve87 complete compiler contexts/140 definitions. TL building/town readers reach RELOC1455/1478 with full native body/operand proofs, adding2933 matched C bytes. Gold dialog has complete1830-byte C with18 byte differences; bounded search finds no closer body. Identity-only globals, canonical town records and logger contracts add no storage. Upstream parser/output bugs fixed;12,476 tests pass. Server raw file and all non-lint gate checks pass; lint remains31 errors, clients lack verified raw images/owners. Receipts `.scratch/goal82-vfs/`. |
+| Goal83 build checkpoint, October17 | Server remains fully raw-identical (316 functions/652 data); known lint failures persist. Pristine Miles6.1c archive pinned and guarded, Gold PP/ML and TL PP/MT generated contexts checked. All4,482 Gold and4,840 TL sources compile, but raw links fail:47/46 duplicate-definition diagnostics and2,944/3,006 unresolved symbols. No client target image or placement/organization baseline earned. Upstream CMake/context repairs pass12,509 tests/36 skips. Goal remains active; receipts `.scratch/goal83-client-link-baselines/` and `.scratch/goal83-multitarget-cmake/`. |
+| Goal84 comparison builds, October17 | User-authorized scaffolds produce both raw client executables and maps under `build/`: Gold819200 bytes, TL1372160. Data and whole-image comparisons execute and report drift; neither client has native data placement or gameplay validation. Shared guards preserve eight server objects; rebuilt server still passes316 functions/652 data and whole-file identity. Stub generator fixes pass12524 upstream tests/36 skips. No added native ownership or recovered-byte credit. Recipes in `stubs/README.md`; receipts `.scratch/goal84-client-build/`. |
+
+## Recent milestones
+
+| Checkpoint | Outcome / receipt |
+| --- | --- |
+| Goal85 | Data-only verification no longer runs the function pipeline; known-binding cache, batch argv and imported-slot placement repairs. `.scratch/goal85-asm-audit/`. |
+| Goals86–105 | Shared client C recovery, library corrections and contract/extent review. [Assembly audit](assembly-audit.md) indexes recovery; technical references retain native findings. |
+| Goal106 | Shared-provider client trees configured; historical comparison PEs/maps preserved before rebuild. `.scratch/goal106-client-cutover/`. |
+| Goal107 | Text-placement checks use the supplied image's sibling map and reject missing expected functions. `.scratch/goal107-text-placement/`. |
+| Goal108 | Assembly receipts reworded around positive structural inference, with target-scoped native checks. `.scratch/goal108-assembly-provenance/`. |
+| Goal109 | CMake CL/LINK/LIB honors the configured native unshare backend; same-input Docker/native objects agree. `.scratch/goal109-unshare-runtime/`. |
+| Goal110 | Full client passes link; server raw identity holds while lint remains red. Wine seeding/mtimes/private font cache repaired upstream. Getter `0x4364f0` becomes C and Gold relinks. `.scratch/goal110-full-runs/`. |
+| Goal111 documentation cleanup | Current queue replaces accumulated checkpoints; retired recipes and invalidated conclusions move out of the live guidance. Pre-cleanup text is archived below. |
+
 ## Full notebooks
 
-[2026-10-16-notebooks.tar.xz](archive/2026-10-16-notebooks.tar.xz) preserves the
-24 complete pre-cleanup project documents, including `goal.md`, the session
-notebooks and technical references. Existing uncommitted entries are included.
-The archive is evidence; its commands, active-job reports and environment
-restrictions may be obsolete.
+| Archive | Contents |
+| --- | --- |
+| [October16 notebooks](archive/2026-10-16-notebooks.tar.xz) | 24 complete documents from the first cleanup, including uncommitted entries. |
+| [October18 documentation](archive/2026-10-18-documentation.tar.xz) | 28 root, docs and scaffold documents immediately before Goal111 cleanup. Includes the full 886-line work queue and superseded technical prose. |
+| [Module READMEs](archive/2026-10-18-module-readmes.tar.xz) | Three source/Miles guides before their Goal111 review. |
+
+Archives preserve evidence, not current instructions. Commands, running-job
+reports, access restrictions and counts may be obsolete. Never extract over the
+working tree to restore an old procedure.
 
 Read or search without extracting over the working tree:
 
 ```sh
 tar -tf docs/archive/2026-10-16-notebooks.tar.xz
 tar -xOf docs/archive/2026-10-16-notebooks.tar.xz docs/TODO.md | less
-tar -xOf docs/archive/2026-10-16-notebooks.tar.xz docs/TODO.md | rg -n 'Round-978|Goal69|451840'
+tar -xOf docs/archive/2026-10-18-documentation.tar.xz docs/TODO.md | rg -n 'Goal82|Goal108|451840'
 ```
 
 Current address lookup searches the live Markdown references, not the compressed

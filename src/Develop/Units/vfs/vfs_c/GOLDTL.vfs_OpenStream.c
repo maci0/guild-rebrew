@@ -1,3 +1,4 @@
+#include "../vfs.h"
 
 #include "../../Error/error.h"
 #include "../../m_alloc/m_alloc.h"
@@ -192,12 +193,12 @@ extern void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 extern void __cdecl m_pool_free(void* pool, void* item);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 
-int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
+void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
 	char* stream;
 	char* path_cursor;
 	char current_char;
-	int result;
+	void* result;
 	int mode14;
 	unsigned char mode13;
 	unsigned char mode18;
@@ -308,7 +309,7 @@ finalize:
 		*(unsigned char*) (stream + 0x13c) = (unsigned char) (((*(unsigned char*) (stream + 0x13c) & 0xf6) ^ (*(unsigned char*) &mode14 & 1)) | ((mode18 & 1) << 3));
 		sprintf(stream, (char*) 0x100294a4, buf, size, mode18, mode18);
 	}
-	result = (int) stream;
+	result = stream;
 done:
 	return result;
 cleanup:

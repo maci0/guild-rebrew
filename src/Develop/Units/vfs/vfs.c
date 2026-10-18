@@ -1,3 +1,4 @@
+#include "vfs.h"
 extern char g_zlib_version[];
 #include "../Error/error.h"
 #include "../m_alloc/m_alloc.h"
@@ -78,9 +79,9 @@ typedef struct {
  * and displace everything after them.  Callers already push/cmp the raw
  * addresses (gm_Open, vfs_OpenStream, vfs_ReadData); nothing names these
  * symbols, but they must occupy this exact span. */
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 char s_gzip_mode_rb[4] = { 'r', 'b', 0, 0 };
-
+#endif
 unsigned int g_gzip_magic_1f = 0x1f;
 
 unsigned int g_gzip_magic_8b = 0x8b;
@@ -1077,7 +1078,7 @@ char __cdecl vfs_RemoveFile(char* path, VFS_DIR* root)
 /* Opens path below root (TL client 0x42ff50; its messages name it vfs:Open and vfs_Tfopen). mode letters:
  * R or W read or write, B or T binary or text, Z or N gzip or plain. A file inside a zip archive opens as
  * the archive member; a loose or new file through gzopen or fopen. */
-char* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
+void* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
 {
 	extern int __cdecl unzGoToFilePos(char* file, unsigned long pos, unsigned long num);
 	extern int __cdecl unzOpenCurrentFile(char* file);
@@ -1259,6 +1260,7 @@ done:
 	return stream;
 }
 
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl CloseVfsStream(void* stream)
 {
 	int result;
@@ -1317,7 +1319,9 @@ int __cdecl CloseVfsStream(void* stream)
 	}
 	return result;
 }
-
+#endif
+int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 {
 	char name[0x100];
@@ -1433,7 +1437,7 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 done:
 	return result;
 }
-
+#endif
 /* Client-only stream helpers (TL client 0x430870..0x430c50, between vfs_ReadData and vfs_OpenStream;
  * discarded). */
 
@@ -1670,12 +1674,12 @@ long __cdecl vfs_ftell(char* a)
 	}
 	return r;
 }
-
-int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
 	char* stream;
 	char* path_cursor;
-	int result;
+	void* result;
 	int mode14;
 	unsigned char mode13;
 	unsigned char mode18;
@@ -1775,14 +1779,14 @@ finalize:
 		((vfs_mode_bits*) (stream + 0x13c))->compressed = mode18;
 		sprintf(stream, "0x%08X -> length: %u, read: %u compressed: %u", buf, size, (unsigned char) mode14, mode18);
 	}
-	result = (int) stream;
+	result = stream;
 done:
 	return result;
 cleanup:
 	m_pool_free((void*) &g_stream_pool, stream);
 	return 0;
 }
-
+#endif
 /* Client-only (TL client 0x430f70, discarded): calls cb for every file of dir and its subdirectories
  * (and dir's later siblings when siblings is set), optionally only for one extension; stops when cb
  * returns 0. dir 0 is the root. */

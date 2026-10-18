@@ -104,7 +104,7 @@ float __cdecl fcn_00457140(Obj0457140* o, Ctx0457140* ctx)
 				m = b[i].y;
 			}
 		}
-		res = m + o->ov->height;
+		res = (float)(m + o->ov->height);
 	}
 done:
 	return res;

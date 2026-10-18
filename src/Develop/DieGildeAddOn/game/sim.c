@@ -476,10 +476,11 @@ void __cdecl sim_AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4
  * engine. Stores target, type, and field values for later use
  * by the query dispatcher. */
 
-
+#if defined(REBREW_SERVER)
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10)
 {
 	*(unsigned int*) (target + 10) = field_10 & 0xff;
 	*(unsigned short*) (target + 4) = (unsigned short) type_id;
 	*(unsigned int*) (target + 6) = field_6 & 0xff;
 }
+#endif

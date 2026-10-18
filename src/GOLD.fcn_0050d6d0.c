@@ -1,5 +1,5 @@
 int __cdecl fcn_005de7a2(char *buf, char *fmt, int arg);
-char __cdecl fcn_0044be60(char *buf, int a, int b);
+#include "client_scene_loader.h"
 void __cdecl fcn_00438e60(int obj, int a, int b, int cb);
 
 /* ADDRESS: GOLD 0x0050d6d0 */

@@ -699,7 +699,7 @@ int __cdecl ahm_FireEntityAndCleanup(int cmd, int* entity_id_ptr, int parent_rec
 	return 0;
 }
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
+#include "../loadsave/loadsave.h"
 void* __cdecl m_alloc(unsigned int allocSize, const char* groupTag);
 
 /* Allocates and initializes the alchemy info structure for
@@ -766,27 +766,27 @@ int __cdecl ahm_fio_SaveAhmInfo(void* file, char* obj)
 	return 1;
 }
 
-int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
+int __cdecl ahm_AllocAhmInfo(void* stream, int arg2)
 {
 	char buf[0x3c];
 	int i;
 
-	if (!ls_ReadVfsDataChecked(buf, 4, 1, cmd_payload))
+	if (!ls_ReadVfsDataChecked(buf, 4, 1, stream))
 		return 0;
-	if (!ls_ReadVfsDataChecked(buf + 4, 4, 1, cmd_payload))
+	if (!ls_ReadVfsDataChecked(buf + 4, 4, 1, stream))
 		return 0;
-	if (!ls_ReadVfsDataChecked(buf + 8, 1, 1, cmd_payload))
+	if (!ls_ReadVfsDataChecked(buf + 8, 1, 1, stream))
 		return 0;
-	if (!ls_ReadVfsDataChecked(buf + 9, 1, 1, cmd_payload))
+	if (!ls_ReadVfsDataChecked(buf + 9, 1, 1, stream))
 		return 0;
-	if (!ls_ReadVfsDataChecked(buf + 0xa, 1, 1, cmd_payload))
+	if (!ls_ReadVfsDataChecked(buf + 0xa, 1, 1, stream))
 		return 0;
-	if (!ls_ReadVfsDataChecked(buf + 0xb, 1, 1, cmd_payload))
+	if (!ls_ReadVfsDataChecked(buf + 0xb, 1, 1, stream))
 		return 0;
 	for (i = 0; i < 6; i++) {
-		if (!ls_ReadVfsDataChecked(buf + 0xc + i * 8, 4, 1, cmd_payload))
+		if (!ls_ReadVfsDataChecked(buf + 0xc + i * 8, 4, 1, stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(buf + 0x10 + i * 8, 4, 1, cmd_payload))
+		if (!ls_ReadVfsDataChecked(buf + 0x10 + i * 8, 4, 1, stream))
 			return 0;
 	}
 	if (*(int*) (arg2 + 0x65) == 0)
@@ -886,7 +886,7 @@ int __cdecl ahm_fio_SaveAvatars(void* file)
 	return 1;
 }
 
-int __cdecl ahm_fio_LoadAvatars(int file)
+int __cdecl ahm_fio_LoadAvatars(void* file)
 {
 	int __cdecl sprintf(char* buffer, const char* format, ...);
 	unsigned char state;

@@ -2,6 +2,10 @@
 
 What a check actually measures, and how it can mislead. Historical scores,
 counts and postlink successes are checkpoint evidence, not current state.
+The reconstructed server raw image is identical to its reference. Old 8k residue
+totals, readonly-access limits, padding steps and composition budgets are
+not current acceptance. Acceptance is the complete unmodified raw image:
+no copied data, postlink fixups or fabricated fillers.
 Use complete native bodies, resolved operands/literals, current input hashes
 and the full raw-file gate for the corresponding claims.
 
@@ -104,18 +108,20 @@ MSVC fixture result files under `.scratch/goal25/production/`.
 
 ## 1. Only the linked residue decides
 
-Object metrics are proxies and have pointed the wrong way repeatedly: at least six
-recorded instances, including one where the *positional* metric (`aligned`) picked the
-losing candidate by 3 linked bytes, and one where `matched` rose by 6 while the link fell
-by 1. But they are not useless: on `CrashDump`'s V2 the object metric was much worse *and
-so was the link* (+131), because the mechanism (a 59-byte shortfall displacing the
-function's own jump tables) was understood. **The rule that survives: neither accept nor
-reject on a metric alone.**
+
+
+Use the check that decides the claim. Complete object/operand comparisons
+establish object agreement; raw-link placement and full-file comparison establish
+image agreement. Neither a positional score nor the old postlink residue
+certifies source fidelity, storage ownership or the other artifact.
 
 ## 2. One candidate, one full rebuild, one number
 
-A batch attributes nothing. Two rounds of "wins" were later found to be layout shifts from
-*other* objects (a committed "−58" re-measured at +56).
+
+
+Change one candidate at a time when attributing a linked delta. Preserve input
+hashes and a reproducible baseline; rebuild every affected target. Object checks
+can reject a candidate cheaply, but layout claims require the resulting link.
 
 ## 3. Relocation accounting makes the object metrics lie about what is left
 
@@ -159,7 +165,7 @@ agent budgets were spent at a cliff that was not there.
 
 **The run-length histogram is the cheap discriminator (round 839, whole tree).** Count the
 contiguous differing runs between built and reference `.text` and look at their lengths.
-Measured on the current tree: **610 runs over 8,634 bytes, median 5, mean 14.2, longest
+That checkpoint, not the current raw-identical server, measured **610 runs over 8,634 bytes, median 5, mean 14.2, longest
 189, and 254 of them exactly one byte.** That shape rules *out* a single early length
 cascade (a cascade produces one long run from its start to the next realignment, not 254
 scattered singletons) and rules *out* "one frame value per function", because a frame
@@ -443,21 +449,14 @@ the 8,634 as one cascade.
 
 ## 6b. `function_structure.json` sizes are 16-byte-padded; the toml's are real (round 866)
 
-Comparing a function's recorded size across the two inventories looks like it finds defects and
-does not. Across all 351 tracked entries, **163 disagree, always with the discovered size larger,
-and 160 of those discovered sizes are an exact multiple of 16** while 157 of the toml sizes are
-not. The discoverer rounds each extent up to a 16-byte boundary; `rebrew-functions.toml` records
-the real function length.
 
-Consequence: any by-size arithmetic over the discovered inventory silently over-runs into the
-next function, which is what produced round 861's "54 unattributed residue bytes" and round 27's
-"196-function gap" reading. Use the toml size for a function's real extent, and the discovered
-inventory only for *finding* functions the toml does not list.
 
-This is why `rebrew test --symbol <name>` can report a size the metadata never had:
-`gm_CalculateProductionValue` came back as `ref 81` there while both inventories and
-`rebrew verify` say 396/400. When a size looks wrong, check it against **the next tracked VA**
-(`0x10019720 + 400 == 0x100198b0`): that is the ground truth, not either inventory.
+The historical census found163 inventory/metadata disagreements, mostly
+alignment-rounded spans. Neither store is automatically the true code extent:
+follow native branches/returns, retain embedded tables, and separate following
+alignment or independent entries. A next VA is a boundary check, not proof that
+every preceding byte is executable. Repair reviewed inventory extents separately
+from the source compare; never truncate a function to obtain a matching prefix.
 
 ## 6c. Object size can move toward the target while the link moves away (round 868)
 
@@ -489,8 +488,8 @@ the AGENTS.md warning that the two object rulers disagree with each other and wi
 > corrected test. The historical text is kept because the *mechanism* it describes is real; only the
 > count and the inference are wrong.
 
-`scripts/split_link.sh`'s pad step prints one line per object it cannot fit. On the current tree it
-prints **28 `LONG` lines**:
+The retired `scripts/split_link.sh` pad step printed one line per object it could not fit.
+That checkpoint printed **28 `LONG` lines**:
 
 ```
 spiel_dumpD.c.obj: 1040 > 1024 (+16 over the padded span; want 1015) -- not padded
@@ -498,56 +497,18 @@ ErrorModule2.c.obj: 528 > 496 (+32 over the padded span; want 494) -- not padded
 trees.c.obj: 6464 > 1088 (+5376 over the padded span; want 1083) -- not padded
 ```
 
-**But the total is 816 bytes, not 6,671: three of the 28 lines are a reporting artifact
-(round 871).** `want` is summed from the metadata's per-function sizes, and **zlib's sources carry
-no `// FUNCTION:` markers at all** (0 markers in all 18 files under `references/zlib-1.1.3/`), so
-for `trees.c`, `infblock.c` and `infcodes.c` the padding target collapses to whatever little the
-metadata happens to know. `trees.c` reports `+5376 over` while its object is **exactly the span
-between its own VAs** (`0x10008800 - 0x10006ec0 = 6464`), i.e. it is not over at all. The script's
-own docstring warns about this at the `want` computation ("`want` is only as complete as the
-metadata ... and then `want` understates the reference span").
-
-Split correctly: **25 game files, 816 bytes of genuine overage**, against **3 zlib files, 5,680
-bytes of phantom overage**. Read the game lines; ignore the zlib ones.
-
-**Only SHORT objects can be padded**: `pad_short_functions.py`'s own docstring says a longer one
-"cannot be cut without losing code". So for these 28 files the composition has *no slack*: any
-edit that grows the object, and on a file already over budget even an edit that keeps its size,
-moves the symbols after it.
-
-That is the mechanism behind three rounds of failures. Round 869's `gm_FindNextFilteredEntity`
-change took `spiel_dumpD.c.obj` from 1015 to 1024 bytes and the link reported "COMPOSITION
-COLLAPSED: only 0 symbols landed at their reference VA", because that file was **already 16 bytes
-over**, so the composition had nothing left to absorb. The same applies to `LONG` file-mates in
-`ErrorModule2.c`, `vfs.c`, `vfs2.c`, `infblock.c` and 23 others.
-
-**Practical consequence, and the check to run first:** before reshaping any function, look up its
-file in the pad report (`grep '<file>.obj' .scratch/gate-link.log`). A `LONG` line means that file
-cannot absorb a size change at all and the only adoptable edits are ones that *shrink* it by at
-least the stated overage. A file with no line either is within budget or was padded.
-
-> **This inference is superseded by the round-916 correction above.** A `LONG` line does *not* mean
-> the file is over budget: 23 of the 25 checkable `LONG` objects are exactly at their reference span
-> and two are under it. The reliable test is the span comparison, which is what the round-916 section
-> describes. Rounds 909-915 excluded files on the `LONG` label; that exclusion was unjustified, and
-> **the real reason those lifts failed was a different check entirely** (a header declaration that
-> disagreed with a definition, and a TU whose *object* grew past its span once an include was added).
-
-**Applied to the 19 carriers (round 872): 16 are in files WITHIN budget and only 3 are blocked.**
-
-```
-blocked (LONG file)                 within budget
-vfs_OpenStream        by  32        gm_AllocSpieler, CrashDump, cm_ExSellObjekt,
-spiel_dumpD           by  16        ls_LoadBuildingEntityState, gv_ExAllocGraveyardWorker,
-spiel622              by 112        cm_ExCopyEntityData, ServerMainThread, gm_AllocGebaeude,
-                                    ahm_ExAllocAlchemist, m_AllocTracked, srv_LoadBuf,
-                                    gm_ObjectsAvailble, vfs_ReadCompressed, cm_ExProdObjekt,
-                                    cm_ProcessCommandQueue          (15 total)
-```
-
-Rounds 868-870 were spent on `gm_FindNextFilteredEntity`, which is in `spiel_dumpD`, one of the
-**three blocked** files. The right move was to work an unblocked carrier, and the check that would
-have shown that costs one command. **Run it before choosing a function, not after a failed probe.**
+`want` summed metadata sizes. Zlib sources had no `// FUNCTION:` markers, so
+`trees.c` printed `+5376 over` while its object was exactly
+`0x10008800 - 0x10006ec0 = 6464`. Round 916 then found none of the 25
+checkable `LONG` objects over their real spans. The "816 bytes of genuine
+overage", "only SHORT objects can be padded", and "a `LONG` file may only
+shrink" readings are withdrawn. Do not pad objects or choose work from that
+report. Round 869's `spiel_dumpD.c.obj` growth (1015 to 1024) did collapse
+that old composition to 0 symbols at reference VAs; that was a placement
+failure of the retired pipeline, not a current budget. Rounds 909–915
+excluded files on the `LONG` label without justification. The lifts failed
+for a header/definition mismatch and for an object that grew past its span
+after an include was added.
 
 ## 6e. `cflags` in the metadata can crash the compiler on a CMake-flag-pinned file (round 877)
 
@@ -810,12 +771,13 @@ looked like the same bug 20 more times was mostly `link_stubs.c` placeholders. S
 
 ## 7. The size rule has two branches, and mixing them discards good work
 
-`cl` pads each COMDAT to 16 bytes, so for an object with **no** relocated data after its code
-any real body at or below `16*ceil(size/16)` is composition-neutral, with **no lower bound**.
-If the object *does* carry a jump table or case map after its code, the **real** length binds
-and padding cannot protect it (`vfs_OpenStream`'s 8-byte shortfall was worth −36 linked). An
-earlier rule ("the real body must equal the reference's") was strictly stronger than the
-composition requires and had been silently discarding admissible candidates.
+
+
+A shorter symbol can leave the same padded COMDAT footprint, while a changed
+body can move embedded tables or downstream contributions. This is a layout
+observation, not permission to accept missing code. Verify the complete native
+body and any local tables, then compare the raw link. Equal padded sizes alone
+establish neither behavior nor byte identity.
 
 ## 8. probe-span vs test-real: two rulers, one truth
 
@@ -828,111 +790,42 @@ before comparing two figures.
 
 ## 9. Build and verify side effects that burn
 
-- **A no-op `cmake --build` prints no linker warnings, so the build log is not a warning census
-  (round 910).** `gate.sh` writes `.scratch/gate-build.log` on every run, and when nothing needs
-  rebuilding that file contains one line: `[100%] Built target server_dll`. The shipped tree actually
-  emits **six `LNK4006` warnings over three symbols** (`_putc`, `__amsg_exit`, `___app_type`, all
-  `LIBCMT.lib(...)` against a local object), and they appear only after
-  `cmake --build build --clean-first`. Grepping an incremental log for warnings therefore returns
-  "zero" on a tree that has six, and that log is exactly what the gate's compile check reads.
-  **Rule: to count warnings, force a clean rebuild first; otherwise you are reading a cache.**
-  Same family as the transient `C1083` below: a build log mistaken for a measurement.
-- **A lone `C1083: Cannot open compiler intermediate file '<garbage>.tmp'` with no source location
-  is the build harness, not the source (round 894).** It appeared in a `gate.sh` run immediately
-  after a header change and read exactly like a compile-error regression introduced by that change.
-  It is a **transient parallel-build temp-file collision**: re-running the build produced **0**
-  errors and the gate then passed with all baselines held. The tell is the filename: `a00032gl`,
-  not a path, and not a `.c` file, and the absence of any line/column. Before treating a C1083 as
-  a finding, check whether any `error C####` line names a *source* file; if none does, rebuild
-  before touching the code. Setting `TMPDIR` or dropping to `-j4` avoids it.
-- **`cmake --build build` fails by design at the post-link layout step** with no
-  `error C####`/`LNK####`, and `make` then **deletes `build/server.dll`**. The deliverable must
-  be regenerated with `scripts/split_link.sh` + `postlink_residual.py --write`. Leaving the tree
-  after a bare build means the artifact is simply gone.
-- **`rebrew verify --full` rewrites `src/rebrew-functions.toml`** (it demotes `SIZE_MISMATCH` to
-  `STUB`) and the file is mode 444, so restoring it needs `chmod u+w` first.
-- **`scripts/linktest.sh` measures `.text` only, and a data-type change can be `.text`-neutral
-  while costing `.data`.** Round 521 replaced five overlapping array definitions in
-  `loadsave3.c` with correctly-typed scalars: `linktest.sh` reported `8634 -> 8634 (+0)`, and the
-  gate's `.data` ceiling caught **21,836 -> 22,072 (+236)** in the same change. `linktest.sh`
-  reads `.text`; only `gate.sh` reads the raw-link `.data`, and it is the only ruler that saw it.
-  Measure a data edit with `gate.sh`, not `linktest.sh`.
-- **The `.scratch/residue_base.log` that `linktest.sh` diffs against is not regenerated
-  automatically and can be many rounds stale.** A `+1` in that table is meaningless until the
-  baseline is refreshed; `bash scripts/linktest.sh --new-base <file.c>` rewrites it (and prints no
-  delta). Cross-check by reverting the edit and confirming the baseline reproduces.
-- **`cmake --build build -j8` on its own leaves the tree in a state that reports garbage residue.**
-  The post-link layout step fails by design and `make` then **deletes `build/server.dll`**, while
-  `build/split_poc/` keeps the object set from the previous run. Residue read from that state is
-  meaningless: round 889 measured **58,614** and then **116,814** from two such states, when the
-  true value was 8,634. Worse, it is *sticky*: `git checkout` of the sources restores `verify`
-  (281/283) but not the residue, so the tree looks reverted and still reports a false number. The
-  recovery is to delete the split state and take a full gate pass:
-  `rm -rf build/split_poc build/server.dll && bash scripts/gate.sh`.
-  **The tell is `split_link.sh` printing `exactly at their reference VA: 0`**: the same
-  composition-collapse signal `linktest.sh` refuses to measure through
-  (`msvc6-c-shapes.md` §124). Treat any residue number taken without a fresh `postlink_residual.py`
-  run after a source change as unmeasured, not as a regression.
-- **A `cmake --build` also deletes the deliverable**, so a round that builds to test something and
-  then compares residue is comparing a missing or stale artifact. Always rebuild the split state
-  before reading residue; never carry a number across a bare build.
-- **`rebrew verify --data` prints a `UserWarning` per `DATA` marker whose VA has no `name` in
-  `src/rebrew-data.toml`, and the marker is then dropped from the inventory as `unknown`.** The
-  warning text ("has no declaration on the following line and no name in the data metadata")
-  reads like a *source* defect, but the marker can sit over a perfectly good definition; the
-  missing field is the metadata. Round 882: `vfs4.c` `0x1002944c` (`s_rb_1002944c` and four
-  siblings) and `vfs_OpenStream.c` `0x100294a4` (`s_0x_08X_length_100294a4`) both warned while
-  the definitions were present and relocating correctly. A previous `lint --fix` had written
-  **`section` only** into those two entries (TODO round 559, W016), and `scan_globals` needs
-  `name`, not `section`, to attribute the marker. Writing `name`/`type`/`size` through
-  `rebrew.data_metadata.set_data_field` (the same API `--fix` uses; run it from
-  `~/.local/share/uv/tools/rebrew/bin/python`, the repo venv lacks `zstandard`) cleared both
-  warnings and raised `verify --data` matched **83 -> 85**. A warning count here is not a
-  `.text` or `.data` measure: the gate held 8,634 / 21,836 unchanged across the edit.
-- **`rebrew verify --data` warnings go to stderr and are invisible to `--json` consumers that
-  pipe stdout only.** `2>/dev/null` drops them; the `matched` count is the only surviving signal,
-  and a silent drop lowers it rather than printing anything. Grep stderr when the count moves.
-- **`verify --data` compares only symbols that carry a name *and* a resolvable size, and it drops
-  the rest without saying so.** `data_verify.section_symbol_bytes` skips an entry with no `name`;
-  with no `size` it falls back to `estimate_type_size(type)`, and skips again if that fails. So
-  `matched` is a count of *attributable* symbols, not of `.data` symbols, and the number is not
-  comparable between rounds where naming changed. Round 883: 20 `.data` entries had `section`
-  only, were skipped unconditionally, and all 20 turned out to be byte-identical: `matched` went
-  **85 → 105** with no output change whatsoever. Read `matched` as coverage, never as correctness;
-  a `mismatched`/`missing` list is the only verdict here.
-- **`rebrew todo`'s `start-data` lane and `verify --data` are not the same set, and the lane can
-  never empty for link-produced data.** `start-data` is every metadata entry with a blank or
-  `UNCHECKED` status (`todo.py` `_collect_start_data`). The 18 `__imp__*` IAT slots qualify and
-  always will: they are linker output, not source definitions, so no source symbol can "verify"
-  them. Their bytes were confirmed identical to the reference at `0x10024000..0x10024044` in round
-  883. Treat a `start-data` item whose VA is in `.idata` as permanently unactionable rather than
-  as pending work.
-- **Most of this binary's "`.data`" is really BSS, so a `matched` tick on those symbols proves
-  nothing.** `.data` carries `rawsize 0xe000` over a `vsize 0x174059c`, so only
-  `0x10027000..0x10035000` has file bytes; every `.data` symbol above that is zero-fill.
-  `rebrew verify --data` compares via `pefile`-style section reads, and on a zero-fill VA it
-  compares zero against zero: a guaranteed match. Round 884 sized 57 `.data` symbols and
-  `matched` rose 105 → 108, but **54 of the 57 are above `0x10035000`**: the rise is accounting,
-  not verification. Before treating a data `matched` increase as evidence, check the symbol's VA
-  against the section's raw extent. `.bss` and `.idata` entries are in the same category.
-- **The built binary's `.text` / `.rdata` / `.reloc` VirtualSize already equal the reference's**
-  (`0x22846` / `0x2e81` / `0x10374`). A size-mismatch hunt on this target is a dead end; the
-  deliverable's remaining gap is *content* (8,634 residue bytes inside `.text`), so measure with
-  residue, not with section sizes.
 
----
+
+- An incremental no-op is not a warning census: it may emit no compiler or
+  linker diagnostics. Use a complete build when claiming the whole build is clean.
+- `verify` normally writes measured statuses; use its preview option for
+  experiments. `--no-cache` bypasses saved verdicts; compiler objects may still
+  come from cache. Managed stores must be restored
+  through their owners, never chmod/hand-edited as an experiment rollback.
+- A temporary-file collision or runner failure needs a reproducible harness
+  diagnosis; do not change source solely because a retry happens to pass.
+- Data/type changes can preserve `.text` while moving data or imports. Check
+  the complete PE, not a text-only delta.
+- Restore production inputs and objects after a probe. A stale baseline or
+  half-restored link composition cannot establish a regression or improvement.
+
+The former split-link/postlink recovery recipes are retired and archived.
+A failing current raw build is a failure to investigate, not an expected pass.
 
 ## 10. How to check any claim in this document
 
-- Residue and per-function numbers: `bash scripts/linktest.sh <one source>` against
-  `.scratch/residue_base.log`, or regenerate with `scripts/split_link.sh` +
-  `scripts/postlink_residual.py --write build/server.dll`.
-- Frames, slot maps, prologues: disassemble `original/Server/server.dll` at the VA and compare
-  with the built image (`instr_diff.py <va> --built build/server.dll`).
-- Gap curves: `scripts/gaptrace.py <va> <source> _<symbol>`: **no size argument**.
-- Slot maps: the sentinel-initial probe (`msvc6-allocator.md` Finding 60).
-- Gate: `bash scripts/gate.sh` (lint + compile errors only + `verify --full` against a 281
-  baseline). Expect the build's post-link step to fail; only `error C####`/`LNK####` count.
+
+
+Start with current CLI help and [the tool map](tooling-upstream.md).
+
+```sh
+uv run --frozen rebrew source findings 0x<VA> --json
+uv run --frozen rebrew binary asm show 0x<VA> --size N --json
+uv run --frozen rebrew test FILE --no-promote --json
+uv run --frozen rebrew verify --whole-binary --built build/<target> --json
+uv run --frozen scripts/gate.sh
+```
+
+Select the target explicitly in multi-target work. Compare complete bodies,
+operand identities and literal payloads; use current raw images for placement
+and whole-file claims. Retired helper names below identify historical experiments,
+not a second supported workflow.
 
 ## 6h. An "undefined symbol" in this tree usually is not one: check `link_stubs.c` first (round 924)
 
@@ -1158,42 +1051,14 @@ branches is a block-placement story, one with none is an instruction-form story.
 
 ## 17. `cmake --build build` failing at postlink is the DESIGNED state, not a broken tree (round 976)
 
-A clean `rm -rf build` + configure + `cmake --build build` fails:
 
-```
-error: postlink failed: built .text is not position-aligned with the reference: only
-4847/7463 layout-map entries validate (64.9%, minimum 90%). .text VirtualSize built
-0x221f6 vs reference 0x22846.
-```
 
-`.text` 0x221f6 is **0x650 short of the reference**, and every symptom reads like a real regression: the
-linker deletes `server.dll`, `build/server.dll` does not exist, and the coverage gate refuses. Round 976
-spent its opening on this and nearly bisected the source tree looking for the commit that broke it.
-
-**Nothing is broken.** `CMakeLists.txt:442-468` attaches `rebrew build postlink --layout` as a POST_BUILD step of
-the `server_dll` target, and that step is expected to fail until the tree is position-aligned: the
-coverage gate exists precisely so a wrong-offset patch cannot be written silently. The plain CMake link
-lays `.text` out in compile order, which is not the reference's order, so it can never pass.
-
-**The deliverable is the `final` target, not `server_dll`:**
-
-```
-cmake --build build --target final
-```
-
-`final` (`CMakeLists.txt:566-578`) links `split_link.sh`'s per-reference-offset composition and then runs
-`postlink_residual.py --write build/server.dll`. Only that path produces `build/server.dll`.
-
-Two tells that the failure is the designed one, not a real break:
-
-- The error names **position alignment**, not a compile or link error. No `error C####` / `error LNK####`
-  appears anywhere in the build log.
-- `git diff --stat` against `HEAD` is empty. A tree that compiles every object can still fail this step.
-
-**Bisecting on this symptom is pure waste**: because the last source-touching commit is many rounds back
-(round 958 at the time), a `git bisect` on "build fails" would report that commit and send the next round
-hunting a source change that never happened. Confirm the *designed* failure first by checking for a compile
-error and by diffing the tree, then build `--target final` and read the residue table.
+**Retired workflow.** The old `final` target composed per-offset fragments and
+postlink rewrote the output. Its expected POST_BUILD failure is not current
+behavior. Build the ordinary configured targets and treat compiler, linker or
+validation failures as failures. Use [the server gate](../scripts/gate.sh) and
+[client build recipe](../stubs/README.md); do not restore `split_link.sh` or
+copy reference bytes to make a check pass.
 
 ## 18. A raw dword scan and a disassembler op_str scan disagree: neither alone is proof of absence (round 977)
 
@@ -1260,63 +1125,20 @@ rebrew todo -c start-data -n 300 --json | \
   print(collections.Counter(i['roi_score'] for i in json.load(sys.stdin)['items']))"
 ```
 
-A single-valued histogram means the ranking is not a ranking. Rank by measured residue instead
-(`scripts/linktest.sh` / `scripts/first_divergence.py`), which is what the objective's own "judge candidates
-at the link, not with object scores" rule already says.
+A single-valued histogram means the ranking is not a ranking. That round's residue
+scripts are not the current work queue. Judge a candidate on the complete raw image,
+not on the old 8k carrier table.
 
 ## 20. Raw-link `.data` is a size-only filler and cannot reach zero: the ceiling is the right check (round 980)
 
-Round 977 reported "all 8628 differing bytes are in `.text`" and concluded the `.data` axis was closed. That
-is true of the **shipped** file but was stated without the mechanism, and the mechanism matters because it
-says the *raw-link* number is not a target at all.
 
-`scripts/split_link.sh:196-221` generates `data_restore_split.c`: a blob whose bytes are copied from the
-reference's `.data` **tail**, and appends it to the link:
 
-```
-# The pad is a LENGTH-only filler (its bytes are the reference .data tail and
-# postlink overwrites .data wholesale), but inserting it FIRST displaced every
-# game .data symbol by +0x74a0 ...
-GAP=0x74a0
-```
-
-So `data_restore_split.obj` exists to make the raw `.data` **size** land on the reference's `0xe000`, not to
-reproduce its bytes. Attributing the raw-link `.data` diff by owning object makes that explicit:
-
-| object | differing bytes | what it is |
-|---|---|---|
-| `data_restore_split.obj` | 6,207 | the length-only filler above |
-| `fold_literals.obj` | 833 | `gen_fold_literals.py` shim |
-| `deflate.c.obj` (stock zlib) | - | `ZLIB_VERSION "1.1.3"` COMDAT |
-
-The 21,481 the gate enforces as `DATA_BASELINE` is therefore **mostly the filler's own bytes plus game
-`.data` that the link places by COMDAT hash order** (`CMakeLists.txt:443-448`). It cannot be driven to zero
-while a filler is present, and the filler is present because the raw size must be `0xe000`.
-
-**The gate already models this correctly**: `scripts/gate.sh:160` fails on `-gt` and passes on `-le`, i.e. a
-*ceiling*, not an equality. Reading it as a progress target is the error.
-
-**One in-scope defect found and correctly left alone.** The first `.data` divergence is at `0x1002706c`, and
-it is a genuine byte-level difference, not a filler artifact:
-
-```
-REF  0x10027058  "Sending Broadcast\0\0\0" "1.1.3\0\0\0" <ptr->0x1002706c> 01 00 00 00 02 ...
-BLD  0x10027058  "Sending Broadcast\0\0\0" <ptr->0x10027070> "1.1.3\0\0\0" 01 00 00 00 02 ...
-```
-
-The string and its own pointer are **swapped**. Our `broadcast.c` span is correct (`s_Sending_Broadcast`
-ends at `0x1002706c`, matching the reference); the swap is inside the `??_C@_05NLJN@1?41?43?$AA@` COMDAT and
-the `zlib_version` pointer emitted by **`references/zlib-1.1.3/deflate.c`** (`zlib.h:40`
-`#define ZLIB_VERSION "1.1.3"`). That is stock zlib, which the objective forbids reversing and which links
-as a stock library. **In scope it is not**, and it is the one place in the section that could have been
-mistaken for game-source work.
-
-**Method point.** Sections 148-158 of `msvc6-c-shapes.md` are a full `.data` pass: eleven rounds that fixed
-three `rebrew` tool defects, produced `int g_log_level_table[3]` (a 36-byte surplus costing 231), the
-`g_log_format_table[96]` fix, and took raw-link `.data` from 27,953 downward. Round 977 declared the `.data`
-vein "mined out" after reading only the shipped file's byte deltas and never reading that pass. **Check for
-an existing section series on the round's assigned topic before declaring it exhausted**: the brief's
-".data / types / structs" direction had a dedicated eleven-round history the round-977 work did not consult.
+**Withdrawn as a current acceptance rule.** This conclusion depended on a
+copied-data filler and postlink replacement, both retired. The server now
+reproduces all raw bytes, including data. Every target must reproduce initialized
+payloads, pointers, placement and full lengths without reference-copy repair.
+An old nonzero ceiling is not permission to retain data drift. See
+[data ownership](data-ownership.md) and [the objective](../goal.md).
 
 ## 21. Disassembling `.text` from its start gives wrong instruction boundaries: every statistic built on it is junk (round 988)
 
@@ -1418,8 +1240,8 @@ REF insns 1056 (bytes 3689)   BLD insns 1014 (bytes 3577)
 ```
 
 which reads as "our object is 112 bytes *shorter*, with 119 bytes of padding", and that is wrong. Both
-numbers describe the **shipped** `build/server.dll`, which postlink has already rewritten; they are not the
-object the linker lays out.
+numbers describe that round's `build/server.dll`, which postlink had rewritten. The current server image
+is the unmodified raw link, so this distinction is historical to that pipeline.
 
 **The object, read directly from the COFF:**
 
@@ -1445,10 +1267,10 @@ Net difference: **2 instructions**, which agrees with §141's "15 net instructio
 rows" in spirit, while §141's per-row `1054 vs 1056` figures came from the same shipped-image decode and
 carry the same caveat.
 
-**Two lessons.** (1) `build/server.dll` is postlink output; never count instructions in it and call the
-number the object's. Read `build/CMakeFiles/server_dll.dir/<...>.c.obj` instead. (2) A disassembly window
-that "ends early" is a signal that the stream desynchronised, not evidence about how much code exists:
-§21 is the same failure one level up.
+**Two lessons, for that pipeline.** (1) A postlinked image is not the object. Count the COFF
+`.text` when the question is object size. (2) A disassembly window that ends early means the
+stream desynchronised (§21), not that code is missing. Do not treat the 16-byte "no headroom"
+conclusion as a padding or composition budget.
 
 **Outcome for the round's actual goal:** the 16 bytes cannot be found by shrinking, because the object is
 already exactly at its span and its code fills it. Any editing fix must be **size-neutral**, not merely
@@ -1898,23 +1720,14 @@ bld: 000000000000a0400e0000000400000005000000c4090000000000000000a0400f000000...
 identical: True
 ```
 
-and over the whole section, **shipped `.data` differs by 0 of 57,344 bytes.** The `.data` fixer copies the
-section from the layout package, so raw-link divergence says nothing about whether content is missing.
+and over that pipeline's shipped section, **`.data` differed by 0 of 57,344 bytes** because the
+fixer copied the reference section. That zero is not evidence the raw link was correct, and it is
+not a ceiling to keep.
 
-**The rule.** Attributing a raw-link `.data` difference to a game object does **not** make it a content defect.
-The check that separates the two is one command: compare the **shipped** file at the same address:
-
-```bash
-cmp <(dd if=build/server.dll bs=1 skip=$((0x27000+OFF)) count=N) \
-    <(dd if=original/Server/server.dll bs=1 skip=$((0x27000+OFF)) count=N)
-```
-
-If identical, the divergence is placement. Only a difference in the *shipped* file is a content finding, and
-`scripts/verify_objective.py` already reports that as a single number (currently 0 non-`.text` bytes).
-
-**This is the third time this section has been re-derived** (rounds 977, 980, 1015), each from a slightly
-different angle. The stable answer: shipped `.data` is exact; raw-link `.data` is a placement metric that the
-gate correctly enforces as a *ceiling*, not a target.
+**Withdrawn rule.** Do not compare a postlinked or copied image to decide that a raw-link
+content difference is only placement. Current acceptance compares the unmodified raw image.
+The hex above is a real content disagreement in that raw link: reference records versus the
+build's error strings. A game object owning the bytes does not by itself name the storage owner.
 
 ## 34. Both decoders reaching the span end proves there is no hidden slack (round 1017)
 
@@ -2010,29 +1823,21 @@ operand or a call target is restored to the reference's value regardless of what
 | `build/split_poc.dll` | split-set composition (LIBCMT placed as stock objects at reference offsets) | **14,347** |
 | `build/server.dll` | after `postlink_residual.py --write` | **8,628** |
 
-The gate's `RESIDUE_BASELINE` is the third number, and that is **correct**: the objective's shipped
-artefact is the postlinked one. The trap is using it to answer a different question.
+Those three numbers describe the retired postlink pipeline. The 8,628 figure was that
+pipeline's graded residue, not the current server: the raw image is now identical to the
+reference, and postlink rewriting is not acceptance. The trap remains: a rewritten image
+can show zero where the objects were wrong.
 
 **The concrete failure (round 1021).** Twelve `command_c` discovery symbols are blocks of contiguous
 functions (see general-knowledge). Measuring those spans on `build/server.dll` gave **0 differing bytes**,
 which I read as "our build emits these bytes correctly". It does not. Postlink had rewritten them. The raw
 link differs in **694** of those bytes.
 
-**The rule.** Any per-region `.text` claim of the form "our build emits this correctly" must be measured on
-`build/split_poc.dll` or `.scratch/server.dll.prelayout`, never on `build/server.dll`. The shipped file is
-the *deliverable* ruler; the split composition is the *capability* ruler. They answer different questions
-and differ by 5,719 bytes.
-
-This is the third distinct self-certification in this project, after `.data` (round 199) and the
-`--built`-points-at-a-postlinked-image guard (round 450).
-
-Verify with:
-
-```
-.venv/bin/python scripts/postlink_residual.py --write build/server.dll
-# the "raw link vs reference" block is the capability number; the
-# ".text differing" line at the top is the deliverable number
-```
+**The rule for that pipeline.** A zero on the postlinked image did not mean the objects
+emitted the bytes. The plain link and the split composition differed from the rewritten
+image by thousands of `.text` bytes (50,285 and 14,347 against 8,628). Do not restore
+`postlink_residual.py --write` or `build/split_poc.dll` to score the current server.
+Compare the unmodified raw image.
 
 ## 36. A carrier's VA is not guessable from its neighbours: resolve it from the annotation (round 1025)
 
@@ -2077,9 +1882,9 @@ reproducible is what earns the trust the next round will place in the class map 
 
 ## 37. The graded residue and the raw-link residue form a clean partition: 8628 + 5081, zero overlap (round 1026)
 
-Measure-traps §35 established that the shipped `.text` and the raw link answer different questions
-(8,628 vs 14,347 differing). Round 1026 decomposed the two byte-for-byte over `.text`'s 0x22846 bytes,
-comparing each offset across three artifacts:
+Historical partition of the retired postlink pipeline (§35). It is not the current
+server residue, and postlink supplying a reference byte is not a repair to keep.
+Round 1026 decomposed that pipeline's `.text` (VirtualSize `0x22846`):
 
 | class | count | meaning |
 |---|---|---|
@@ -2089,14 +1894,10 @@ comparing each offset across three artifacts:
 
 Two facts worth having:
 
-- **The partition is exact and exhaustive.** `8628 + 5081 = 13,709`, which is the raw link's total
-  divergence, and the shipped-only class is **empty**. So postlink is a pure repair step: it never
-  corrupts a byte the build got right, and the graded residue is precisely the subset of the production
-  gap it could not repair.
-- **The 8,628 is a subset of the 13,709.** Every byte in the graded residue is also wrong in the raw
-  link, which is why the two rulers agree on *which* carriers are failing even though they disagree on
-  magnitude. A round may therefore use the raw link to study a carrier's divergence and the shipped file
-  to score it, and the two will not contradict each other.
+- On that pipeline the classes summed exactly: `8628 + 5081 = 13,709`, and postlink did not
+  change a byte the raw link already matched. That does not make the rewrite acceptable.
+- Every graded-residue byte was also wrong in the raw link. Studying the raw image was the
+  useful half. Scoring the rewritten file hid 5,081 bytes.
 
 **Worked example: the 5,081 class, at `0x10015f80` (inside `gm_ObjectsAvailble`).** `gm_FindNextFilteredEntity` (annotation VA
 `0x10016f80`; the real entry is `0x10015f80`, see below) opens:
@@ -2478,10 +2279,9 @@ difference it was meant to find.
 
 ## 46. The residue is 100.00% instruction-aligned: every differing byte lies inside a reference instruction (round 1072)
 
-A property the project has never stated or checked: **is every residue byte covered by a reference
-instruction?** If any differing byte sat in *padding* or in the gap between functions, the residue would
-include something that is not a codegen difference at all, and the whole per-carrier analysis would be
-incomplete.
+Checkpoint of the retired 19-carrier postlink residue (8,628 bytes), not the current
+raw-identical server. The question was whether any of those differing bytes sat in
+padding or between functions.
 
 **Measured over all 19 carriers**, decoding the reference from each entry and building the set of byte
 offsets covered by its instructions, then intersecting with the residue:
@@ -2514,9 +2314,8 @@ difference *within* an instruction the reference actually emits: consistent with
 (0x21b4 of 0x21b4 inside the 19 carriers) and now confirmed at instruction granularity rather than function
 granularity.
 
-**Why this closes a class of doubt.** If even a few bytes had landed off-instruction, the reading would be
-"some residue is not codegen": a different problem with a different fix. It is not. The residue is 8,628
-bytes of *instruction content*, which is exactly what the per-carrier sections describe.
+On that checkpoint, off-instruction residue was zero: the 8,628 bytes sat inside reference
+instructions. That does not make 8,628 the current gap, and it does not authorize padding.
 
 **A method error caught while measuring, recorded because it nearly produced a false result.** The first run
 used a hand-written size window per carrier (480 bytes for `gv_ExAllocGraveyardWorker`) instead of the real
@@ -2528,8 +2327,8 @@ any per-carrier ratio.**
 
 ## 47. The residue table silently hid every carrier under 9 bytes: 18 rows summing to 8623 against a 8628 total (round 1073)
 
-`scripts/postlink_residual.py` is the per-carrier ruler this project quotes in every round. Its default table
-filtered rows:
+`scripts/postlink_residual.py` was the per-carrier ruler those rounds quoted. It is not
+the current raw-image check. Its default table filtered rows:
 
 ```python
 if args.verbose or count > 8 or name.startswith("<"):
@@ -2583,8 +2382,8 @@ the possibility of others.
 |---|---|---|---|
 | `postlink_residual.py` table | 18 rows / 8623 vs summary 8628 | sum vs reported total | **failed**: fixed round 1073 (`total` row + hidden-count line) |
 | `rebrew verify --json` summary | `exact` 31, `reloc` 233, `proven` 17, `passed` 281, `total` 283, `byte_matched` 264 | 31+233 = 264 = `byte_matched`; 264+17 = 281 = `passed`; 281+2 = 283 = `total` | **exact** |
-| `rebrew verify --full` warning | "13 function(s) have annotation SIZE differing" | `size_divergences` list length | **13 = 13** |
-| `gate.sh` residue line | `residue 8628, baseline 8628 held` | `RESIDUE_BASELINE` | **held** |
+| `rebrew verify --full` (that round; current fresh checks use `--no-cache`) | "13 function(s) have annotation SIZE differing" | `size_divergences` list length | **13 = 13** |
+| `gate.sh` residue line | `residue 8628, baseline 8628 held` | old `RESIDUE_BASELINE` | historical hold, not current acceptance |
 | `gate.sh` byte-match line | `byte-matched 264 (EXACT+RELOC), baseline 264 held` | `BYTE_BASELINE`, and 31+233 | **held** |
 | `gate.sh` raw-link `.data` | `21481, baseline 21481 held` | `DATA_BASELINE` | **held** |
 | `gate.sh` imports | `(100)` | reference import count | **matches** |
@@ -2638,23 +2437,21 @@ audit's result as "N sections need eyeballing", not "N sections lack evidence".
 
 ## 50. The per-carrier table is stable across a full object rebuild, and the deliverable is bit-identical (round 1076)
 
-Round 1039 verified that a clean rebuild reproduces the shipped `server.dll` byte-for-byte. What it did *not*
-check is the stronger property every round actually depends on: **are the per-carrier numbers themselves
-stable?** If a carrier's residue drifted between builds, the "floor" would not be a floor and every per-round
-comparison would be against a moving target.
+Checkpoint of the retired postlink deliverable, not the current raw-identical server.
+Round 1039's clean rebuild reproduced that postlinked `server.dll`. The open question
+was whether the 19 per-carrier residue numbers were stable across rebuilds.
 
 **Measured, three builds:**
 
 | build | deliverable | per-carrier table |
 |---|---|---|
 | baseline | `md5 3febd2c4ca080a3749c12d4bf7452fbe` | reference table |
-| full relink (`rm -rf build/split_poc` + `split_link.sh` + postlink) | - | **identical** (`diff` clean) |
-| full **object** rebuild (`cmake --build build`) + relink + postlink | `md5 3febd2c4ca080a3749c12d4bf7452fbe` | **identical** (`diff` clean) |
+| full relink (old `split_poc` composition, then postlink) | - | **identical** (`diff` clean) |
+| full object rebuild, then that same relink and postlink | `md5 3febd2c4ca080a3749c12d4bf7452fbe` | **identical** (`diff` clean) |
 
-So the 19 per-carrier figures (2823, 1583, 966, 671, 462, 451, 367, 327, 238, 215, 198, 97, 92, 49, 25, 23,
-21, 15, 5) are **reproducible**, not a snapshot of one build's state. That is what makes
-`RESIDUE_BASELINE` a meaningful floor: any per-round delta measured by `linktest.sh` is attributable to the
-source edit, not to build noise.
+Those 19 figures (2823, 1583, 966, 671, 462, 451, 367, 327, 238, 215, 198, 97, 92, 49, 25, 23,
+21, 15, 5) were reproducible for that postlinked image. They are not a current residue floor,
+and the commands are not the current build.
 
 **Why this is worth recording rather than assumed.** Round 1055 was a case where a source revert left a stale
 object in the tree, and every downstream number described a build no clean checkout would produce. The
@@ -2662,10 +2459,8 @@ verification there was ad hoc. This is the systematic version: **compare the per
 file hash**: the table is what the rounds quote, and it is a strictly stronger check than the hash because it
 localises any difference to a carrier.
 
-**Method.** `postlink_residual.py`'s table after each of the three builds, diffed with `diff` (not summed,
-the sum check is §47's job, and these two checks catch different failures).
-
-**This closes the reproducibility question at the granularity the project measures at.**
+The comparison was that script's per-carrier table, not only the file hash. It closes
+reproducibility for that pipeline only.
 
 ## 51. A "0 mismatched" data verdict measured 37% of the metadata, and said nothing about it (round 1078)
 
@@ -2788,35 +2583,13 @@ The reference pushes the format string first and loads the third argument after;
 
 ## 53. The raw link is the wrong artifact for a `.data`-addressed operand comparison (round 1086)
 
-The alignment technique of §34/§35 and the two rounds after it disassembles `build/split_poc.dll`: the raw
-link, before postlink. That is correct **for `.text`**, which is what those rounds compare, because postlink
-does not rewrite code. It is wrong the moment the comparison touches an operand that resolves into `.data`.
 
-Measured, `cm_ExSellObjekt` (`0x1000d930`): the `LogMessageInternal` call site pushes the message pointer. In
-the raw link and the reference that pointer is **the same immediate**, because it is an absolute VA baked into
-the instruction, but the *string it points at* is at a different place:
 
-| file | bytes at `0x1002cdac` | bytes at `0x10029e24` |
-|---|---|---|
-| reference | `"cm_ExSellObjekt() Lager voll"` | unrelated data |
-| **deliverable** (`build/server.dll`) | `"cm_ExSellObjekt() Lager voll"` | unrelated data |
-| raw link (`build/split_poc.dll`) | **zeros** | `"cm_ExSellObjekt() Lager voll"` |
-
-The deliverable matches the reference **at both addresses**. Only the raw link has them swapped -- COMDAT
-string material lands elsewhere before `rebrew build postlink` rewrites the `.data` operands (4398/4398 of them,
-verified in an earlier round).
-
-**Why this nearly became a false finding.** Reading the raw link's disassembly alongside the reference's, the
-two call sites appear to pass *different string literals*: the reference pushes `0x1002cdac`, ours pushes
-`0x10029e24`, which reads as a wrong literal in the source and sent this round to the source line. The source
-was already correct (`cm_ExSellObjekt.c:396`), and so is the build.
-
-**The rule.** `.text` residue must be measured on the raw link, because that is the only artifact where the
-code has not had operands rewritten. Anything that dereferences a pointer into `.data` (string addresses,
-table bases, global pointers) must be measured on the **deliverable**, after postlink. The two artifacts
-answer different questions and this round asked the wrong one of the wrong file. Cross-check before reporting:
-`docs/measure-traps.md` §20 already establishes that the whole raw-link `.data` divergence is
-postlink-supplied, so a `.data`-addressed difference in the raw link is expected and carries no information.
+**Retired postlink distinction.** The old pipeline copied data and rewrote
+operands, so its raw and postlinked images answered different questions. Current
+acceptance uses the unmodified raw toolchain image for code, data and pointers.
+Check the operand target and the complete payload it addresses; disagreement in
+either is a real mismatch, even when a historical postlink output agreed.
 
 ## 54. A whole-section idiom census cannot use the raw link's `.text`, and cannot compare rates at all (round 1088)
 
@@ -2856,57 +2629,30 @@ denominator).
 
 ## 55. `postlink_residual.py` measures the raw link, so a stale composition reports a fake residue of 81,229 (round 1101)
 
-`scripts/postlink_residual.py` defaults to `--built build/split_poc.dll` (the **raw link**, not the deliverable)
-because that is the artifact where `.text` is unrewritten. That is correct for its purpose and it is also a
-trap: `build/split_poc.dll` is regenerated only by `scripts/split_link.sh`, so after any object rebuild the file
-on disk is whatever the last composition produced.
+Historical trap in the retired split composition. After a probe left experimental code in one
+object, placement failed: 0 of 319 symbols at reference VAs, `.text` VirtualSize `0x22b08`
+against `0x22846`. The old residual script then reported **81,229**, with `0x9401` differing
+bytes outside the 19 carriers it expected.
 
-Measured this round: a `--clean-first` rebuild plus a probe left one object holding experimental code. The
-composition then failed to place (0 of 319 symbols at reference VA, `.text` `0x22b08` against `0x22846`), and
-`postlink_residual.py` reported **total 81,229** with `0x9401` differing bytes *outside* the 19 known carriers.
-
-**Two independent checks said the tree was fine**, and both were right:
-
-| check | reading |
-|---|---|
-| `build/server.dll` `.data` vs reference | **0 differing** → the deliverable *is* correctly postlinked |
-| `.text` VirtualSize, imports, file size | `0x22846`, 100, 286,720: all correct |
-| `rebrew build check` | clean |
-
-So the 81,229 was entirely about a collapsed intermediate, not about the deliverable.
-
-**The tell.** A residue total that is *an order of magnitude* above the baseline (81,229 against 8,628), and a
-"differing bytes outside the 19 carriers" count that is large (`0x9401` against a baseline of `0x0`). The
-baseline invariant is that **100% of residue lies inside the 19 carriers**; when that ratio breaks, the
-intermediate is stale, not the code.
-
-**Recovery, in order:** `rm -rf build/split_poc && bash scripts/split_link.sh`, which prints
-`exactly at their reference VA: 246`. That count is the composition's own health check: **246/319 means good,
-0/319 means collapsed**, and it appears before the residue number, so read it first.
-
-**The distinct failure that caused it.** `linktest.sh`'s and the gate's stale-object guard both fired, and every
-`rm -f <obj>` plus `cmake --build` is what eventually recovered it. This is the fourth round in this session
-where a stale object cost time (workflow-traps §24, rounds 1082-1084). The reliable recipe is: after any probe,
-`rm -f` the object explicitly, rebuild, then `rm -rf build/split_poc` and relink before reading **any** residue
-number.
+The postlinked `build/server.dll` still showed 0 `.data` differences, VirtualSize `0x22846`,
+100 imports and file size 286,720, because postlink had copied reference bytes. Those greens
+did not mean the raw link was healthy. Do not restore `split_link.sh` or treat a copied
+`.data` zero as acceptance. A stale object still has to be rebuilt before any comparison;
+that is the part of the incident that remains.
 
 ## 56. `verify --data --built <raw link>` rewrites VERIFIED statuses to DRIFT in the tool-owned toml (round 1102)
 
-Pointing `--built` at `build/split_poc.dll` to get a non-tautological `.data` check is tempting, but the
-comparison is the §20/§53 displacement artifact, and the tool **writes back**: every displaced symbol's
-`status` in `src/rebrew-data.toml` moves `VERIFIED` → `DRIFT` (measured: `g_next_object_id`,
-`g_producer_id_table`, `g_file_version`, the filter group, 30 in total against the round-698 steady state of
-23). `git status -- src/rebrew-data.toml` went dirty from a read-shaped command.
+`rebrew verify --data` writes statuses. Pointing `--built` at the old `build/split_poc.dll`
+moved 30 rows from `VERIFIED` to `DRIFT` (`g_next_object_id`, `g_producer_id_table`,
+`g_file_version`, the filter group, and others). A read-shaped command dirtied
+`src/rebrew-data.toml`.
 
-**The rule.** `verify --data` is only meaningful on the deliverable (`build/server.dll`, postlinked). The
-raw-link `.data` divergence is postlink-supplied by §20's own proof; running the check against the raw link
-produces statuses that are wrong and persistent. Recovery: `git checkout src/rebrew-data.toml`, or re-run
-`rebrew verify --data` (deliverable) which writes `VERIFIED` back to all displaceable symbols.
-
-**All 30 mismatches were triaged to the displacement class**: spot-checked `g_file_version`'s bytes
-(`5a 00 01 00 53 61 76 65 67 61 6d 65`): reference holds them at `0x2d4f0`, raw link holds them identical at
-`0x2db30`; same content, different VA. `g_dispatch_table` is zeros in the raw link because `data_restore`/
-postlink supplies it. Nothing was content-drift.
+That was not a content finding. `g_file_version` bytes
+`5a 00 01 00 53 61 76 65 67 61 6d 65` sat at reference `0x2d4f0` and at raw-link
+`0x2db30`. `g_dispatch_table` was zeros because `data_restore` and postlink supplied it.
+Do not treat the postlinked image as the meaningful data check, and do not hand-restore
+the managed store. Current data acceptance is the unmodified raw image. Preview before
+a verify that writes.
 
 ## 57. A relative include deeper than the tool's staging depth compiles unpacked, silently (round 1103)
 
@@ -3308,3 +3054,49 @@ this body into the SERVER37-byte ID/timestamp handler without native evidence.
 Both targets' instruction assertions are in
 `.scratch/goal67/first-command-null-path.json`. This establishes the native path,
 not arbitrary-runtime memory safety or a compiled source/provider identity.
+
+## A matching loop prefix omitted COM shutdown (Goal76, 2026-10-17)
+
+Gold `0x422d90` had a 38-byte naked assembly copy claiming RELOC. Those bytes
+cover the list cleanup loop, but the native zero/finished-list branch reaches
+`0x422db6`: `jmp [0x5eb36c]`, the PE import slot for `ole32!CoUninitialize`.
+Returning after the loop changes behavior. Ordinary C with the native head
+reloads and `__declspec(dllimport) void __stdcall CoUninitialize(void)` emits
+the complete 44 bytes, including all three native operands. Wrong-symbol and
+wrong-site controls reject. There is no original-assembly evidence here.
+
+The old inventory merged 1,536 bytes: 44-byte cleanup, four native NOPs, an
+independent 1,481-byte function at `0x422dc0`, then seven native NOPs. The
+reviewed extent repair preserves all those bytes and admits that independent
+entry without claiming recovered source. The pre-existing LIBRARY identity for
+the import thunk at `0x422db6` remains intact. Its overlap with the compiled
+tail does not establish a unique raw-link provider or justify emitting a second
+copy. No source-owned padding or storage was added. Receipts/replay:
+`.scratch/goal76-assembly/{cleanup-proof.py,cleanup-proof.json,cleanup-extents-apply.json}`.
+
+Gold `0x46bc60` also had a copied assembly body and a comment alleging a
+compiler global-load problem. Ordinary C using the existing D2 GUI pool pointer
+declaration emits the correct load from `0xf8f080`, native 748-byte indexing and
+all 47 bytes after binding `strncpy` at `0x5de8c0`. Such a comment alone is not
+evidence of a compiler wall or original assembly. The replacement adds no new
+storage, layout, terminator or compiler flag. Complete proof and four rejecting
+operand controls: `.scratch/goal76-assembly/gui-name-proof.json`.
+
+## Copied assembly hid a fifth dialog argument (Goal77, 2026-10-17)
+
+Gold `0x41cf60` declared four C formals, but reads entry stack slots 1, 3, 4
+(low byte) and 5 after the stdcall `LoadLibraryA` returns. Both direct native
+callers, `0x41d0d8` and `0x435f13`, push five DWORDs and clean 20 bytes. Slot 2
+is unused. Goal77 corrected the declaration to five formals while preserving the
+77 copied assembly bytes. That checkpoint repaired the C contract, without
+establishing original assembly provenance or promoting a comparison verdict.
+
+The wrapper loads `d3_resource.dll`, stores its three context values even when
+loading fails, and on success uses resource 101 with callback `0x41c830`, then
+frees the library. The initial raw-address C draft emitted 77 bytes but scheduled
+its condition test differently. Goal78's canonical extern declarations resolve
+that scheduling difference: ordinary C now reproduces the full wrapper, all
+operands and the literal. See [the C shape finding](msvc6-c-shapes.md#declared-globals-preserve-cursordialog-scheduling-goal78-2026-10-17).
+The SDK callback ABI is now explicit, but its native body remains unreconstructed.
+The original ABI receipts remain:
+`.scratch/goal77-assembly/{dialog-abi-proof.json,dialog-native.json,dialog-caller1.json,dialog-caller2.json}`.

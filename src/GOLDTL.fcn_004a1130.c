@@ -9,7 +9,11 @@ int __cdecl fcn_00495990(void);
 int __cdecl fcn_004959b0(void);
 int __cdecl fcn_004959c0(void);
 int __cdecl fcn_004959e0(void);
-int __cdecl fcn_004959f0(void);
+#ifdef REBREW_GOLD
+int __cdecl fcn_00496020(int cmd, int dummy, int result);
+#else
+int __cdecl cm_TestCommandResult(int cmd, int dummy, char* result);
+#endif
 int __cdecl fcn_00495a10(void);
 int __cdecl fcn_00495a20(void);
 int __cdecl fcn_00495a40(void);
@@ -173,7 +177,11 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x1;
 	strcpy(d.name, "DummyUnversehrtheit");
 	d.score = fcn_004a4410;
-	d.start = fcn_004959f0;
+#ifdef REBREW_GOLD
+	d.start = fcn_00496020;
+#else
+	d.start = cm_TestCommandResult;
+#endif
 	d.run = fcn_00495a10;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {

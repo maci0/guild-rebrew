@@ -1,36 +1,20 @@
+extern int* g_6b7ed0[16];
+extern int* g_6b7f50[16];
 /* ADDRESS: GOLD 0x0042c2c0 */
-int __declspec(naked) __cdecl fcn_0042c2c0(int key)
+
+int __cdecl fcn_0042c2c0(int key)
 {
-	(void)key;
-	__asm {
-		push esi
-		push edi
-		mov edi, dword ptr [esp+0Ch]
-		xor esi, esi
-	go:
-		mov ecx, dword ptr [esi+6332F0h]
-		test ecx, ecx
-		jz next
-		mov edx, dword ptr [ecx+18h]
-		xor eax, eax
-		test edx, edx
-		jle next
-		mov ecx, dword ptr [esi+633370h]
-	inner:
-		cmp dword ptr [ecx], edi
-		jz found
-		inc eax
-		add ecx, 4
-		cmp eax, edx
-		jl inner
-	next:
-		add esi, 4
-		cmp esi, 40h
-		jl go
-		or eax, 0FFFFFFFFh
-	found:
-		pop edi
-		pop esi
-		ret
+	int i;
+	int j;
+
+	for (i = 0; i < 0x10; i++) {
+		if (g_6b7ed0[i] != 0) {
+			for (j = 0; j < g_6b7ed0[i][6]; j++) {
+				if (g_6b7f50[i][j] == key) {
+					return j;
+				}
+			}
+		}
 	}
+	return -1;
 }

@@ -1,14 +1,15 @@
 #include <string.h>
+#include "client_scene_resources.h"
+#include "Develop/Units/d3/d3_object.h"
 
-void __cdecl fcn_00401180(void* stream, void* dst);
-void __cdecl fcn_004011a0(void* stream, char* dst);
-void __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl fcn_00401180(void* stream, void* dst);
+char* __cdecl fcn_004011a0(void* stream, char* dst);
+int __cdecl fcn_004011d0(void* stream, void* dst);
 void __cdecl fcn_00401240(void* stream, void* dst);
 void __cdecl fcn_0041d9e0(const char* msg);
 void __cdecl fcn_00438b40(char* object, void* vector);
 void __cdecl fcn_00438cb0(char* object, void* vector);
 char* __cdecl fcn_0043c570(int kind, char* name);
-void __cdecl fcn_0043ca20(char* object);
 void __cdecl fcn_0043cb20(char* object, char* sibling);
 void __cdecl fcn_0043cb80(char* object, char* child);
 void __cdecl fcn_0043cfb0(char* object);
@@ -17,7 +18,6 @@ char __cdecl fcn_00442c00(char* object, char on);
 int __cdecl fcn_00446ca0(unsigned int version);
 void __cdecl fcn_0044cbb0(char* object, void* part, char* name);
 int __cdecl fcn_0044c200(char* a, char* b);
-void __cdecl fcn_00460e40(void* resource, int selector);
 int __cdecl fcn_005de7a2(char* dst, const char* fmt, const char* a, const char* b);
 void __cdecl m_FreeTracked(void* ptr);
 
@@ -438,7 +438,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 						i = 0;
 						while (i < count) {
 							if (*(char**) (lights + i * 4) != 0) {
-								fcn_00460e40(*(char**) (lights + i * 4), 0);
+								fcn_00460e40(*(SCENE_RESOURCE**) (lights + i * 4), 0);
 							}
 							i++;
 						}

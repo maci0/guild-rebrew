@@ -61,14 +61,14 @@ Quad* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int x, int 
 		return 0;
 	}
 	if (x < g_7725f8) {
-		du = g_7725f8 - x;
+		du = (float)(g_7725f8 - x);
 		x = g_7725f8;
-		cw = w - du;
+		cw = (int)(w - du);
 	}
 	if (y < g_7725fc) {
-		dv = g_7725fc - y;
+		dv = (float)(g_7725fc - y);
 		y = g_7725fc;
-		ch = h - dv;
+		ch = (int)(h - dv);
 	}
 	if (cw + x > g_67d964) {
 		cw = g_67d964 - x;

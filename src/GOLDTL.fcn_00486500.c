@@ -52,7 +52,7 @@ void __cdecl fcn_00486500(Node* n)
 				s = &g_100b0c0[n->links[i]];
 				if (!(s->price > -10000000000.0)) {
 					if (s->next != -1) {
-						s->price = fcn_0050bb50(s->id, g_773d75) * 0.9;
+						s->price = (float)(fcn_0050bb50(s->id, g_773d75) * 0.9);
 					} else {
 						s->price = fcn_0050bb50(s->id, g_773d75);
 					}

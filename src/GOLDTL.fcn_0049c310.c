@@ -30,8 +30,8 @@ int __cdecl fcn_0049c310(int unused, char* e, int busy, char* out, char* kind)
 	char* t;
 	float f1;
 
-	if (busy == 0 && (*(unsigned int*) (e + 4) & 3) == (*(int*)&g_7f4c00) % 4 &&
-	    (*(unsigned int*) (e + 4) & 7) == ((*(int*)&g_7f4c04) & 0xffff) % 8) {
+	if (busy == 0 && (*(unsigned int*) (e + 4) & 3) == (unsigned int)((*(int*)&g_7f4c00) % 4) &&
+	    (*(unsigned int*) (e + 4) & 7) == (unsigned int)(((*(int*)&g_7f4c04) & 0xffff) % 8)) {
 		v1 = fcn_004f5dd0(*(int*) (e + 4));
 		v2 = fcn_004f5da0(*(int*) (e + 4));
 		if (gm_RandomMod(8) + 8 <= v1) {

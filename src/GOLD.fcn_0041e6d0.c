@@ -1,62 +1,24 @@
+/* Unresolved byte views: 0x1463579, 0x14650e4, 0x1463578, 0x1463581,
+   0x1464fbc, 0x1464fc4. No allocation or owner is declared here. */
 /* ADDRESS: GOLD 0x0041e6d0 */
-void __declspec(naked) __cdecl fcn_0041e6d0(int a, int o1, int o2, int o3)
+void __cdecl fcn_0041e6d0(int wert, unsigned char *ziel_0, unsigned char *ziel_1,
+                          unsigned char *ziel_2)
 {
-	(void)a;
-	(void)o1;
-	(void)o2;
-	(void)o3;
-	__asm {
-		mov eax, dword ptr [esp+4]
-		_emit 0x8a
-		_emit 0x0d
-		_emit 0x79
-		_emit 0x35
-		_emit 0x46
-		_emit 0x01
-		mov edx, eax
-		shr edx, cl
-		_emit 0x8a
-		_emit 0x0d
-		_emit 0xe4
-		_emit 0x50
-		_emit 0x46
-		_emit 0x01
-		shl dl, cl
-		mov ecx, dword ptr [esp+8]
-		mov byte ptr [ecx], dl
-		_emit 0x8a
-		_emit 0x0d
-		_emit 0x78
-		_emit 0x35
-		_emit 0x46
-		_emit 0x01
-		mov edx, eax
-		shr edx, cl
-		_emit 0x8a
-		_emit 0x0d
-		_emit 0x81
-		_emit 0x35
-		_emit 0x46
-		_emit 0x01
-		shl dl, cl
-		mov ecx, dword ptr [esp+0Ch]
-		mov byte ptr [ecx], dl
-		_emit 0x8a
-		_emit 0x0d
-		_emit 0xbc
-		_emit 0x4f
-		_emit 0x46
-		_emit 0x01
-		mov edx, dword ptr [esp+10h]
-		shr eax, cl
-		_emit 0x8a
-		_emit 0x0d
-		_emit 0xc4
-		_emit 0x4f
-		_emit 0x46
-		_emit 0x01
-		shl al, cl
-		mov byte ptr [edx], al
-		ret
-	}
+    unsigned int logisch;
+    unsigned char n;
+    unsigned char out;
+
+    logisch = (unsigned int)wert;
+    n = *(unsigned char *)0x1463579;
+    out = (unsigned char)(logisch >> n);
+    n = *(unsigned char *)0x14650e4;
+    *ziel_0 = (unsigned char)(out << n);
+    n = *(unsigned char *)0x1463578;
+    out = (unsigned char)(logisch >> n);
+    n = *(unsigned char *)0x1463581;
+    *ziel_1 = (unsigned char)(out << n);
+    n = *(unsigned char *)0x1464fbc;
+    out = (unsigned char)(logisch >> n);
+    n = *(unsigned char *)0x1464fc4;
+    *ziel_2 = (unsigned char)(out << n);
 }

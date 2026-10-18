@@ -9,7 +9,7 @@ unsigned short __cdecl gm_RandomMod(int);
 
 int __cdecl fcn_004a8d40(int a, char* e)
 {
-	if (*(unsigned int*) (e + 4) % 4 == (*(int*)&g_7f4c00) % 4 && *(unsigned int*) (e + 4) % 8 == (unsigned short) (*(int*)&g_7f4c04) % 8)
+	if (*(unsigned int*) (e + 4) % 4 == (unsigned int)((*(int*)&g_7f4c00) % 4) && *(unsigned int*) (e + 4) % 8 == (unsigned int)((unsigned short) (*(int*)&g_7f4c04) % 8))
 		return gm_RandomMod(4) == 0;
 	return 0;
 }

@@ -17,21 +17,20 @@ extern int g_67a370;
 
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_004437a0(int);
-void __cdecl fcn_00448360(int, int, void*);
-void __cdecl fcn_0053f6a0(void);
+#include "client_scene_loader.h"
 int __cdecl fcn_0045b700(struct s_6b8300*, int, int);
 void __cdecl fcn_00437ac0(int, int, int, void*);
 void __cdecl fcn_005224b0(void);
 void __cdecl fcn_005224f0(void);
 
-int __cdecl fcn_005222a0(int a)
+int __cdecl fcn_005222a0(void* stream)
 {
 	int save;
 
 	fcn_004432d0(1, 0);
 	fcn_004437a0(0);
 	fcn_004432d0(0, 0);
-	fcn_00448360(0, a, (void*) fcn_0053f6a0);
+	fcn_00448360(0, stream, fcn_0053f6a0);
 	fcn_004432d0(1, 0);
 	fcn_004432d0(0, 0);
 	if (((struct s_6b8300*)g_6b8300)->kind == 0x80) {

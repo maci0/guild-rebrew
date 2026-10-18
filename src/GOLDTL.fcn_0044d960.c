@@ -1,10 +1,10 @@
 
 
 
-int __cdecl fcn_004011a0(int, void*);
+char* __cdecl fcn_004011a0(void* stream, char* text);
 char* __cdecl fcn_0064d1a0(char*, int);
 
-void __cdecl fcn_0044d960(int r, int* o)
+void __cdecl fcn_0044d960(void* r, int* o)
 {
 	char buf[0x100];
 	char* p;

@@ -1,31 +1,19 @@
-void __cdecl fcn_004481e0(int);
-void __cdecl m_FreeTracked(int);
+#include "client_sprites.h"
+#include "client_scene_resources.h"
+#include "Develop/Units/m_alloc/m_alloc.h"
 
 /* ADDRESS: GOLD 0x00476850 */
-void __declspec(naked) __cdecl fcn_00476850(int p)
+void __cdecl fcn_00476850(void* node)
 {
-	(void)p;
-	__asm {
-		push esi
-		mov esi, dword ptr [esp+8]
-		xor eax, eax
-	Lgo:
-		cmp dword ptr [eax*4+0F8F0A0h], esi
-		jz Lfound
-		inc eax
-		cmp eax, 20h
-		jl Lgo
-		pop esi
-		ret
-	Lfound:
-		mov dword ptr [eax*4+0F8F0A0h], 0
-		mov eax, dword ptr [esi+60h]
-		push eax
-		call fcn_004481e0
-		push esi
-		call m_FreeTracked
-		add esp, 8
-		pop esi
-		ret
-	}
+    int i;
+    char* p;
+    p = (char*) node;
+    for (i = 0; i < 32; i++) {
+        if (g_1015ec0[i] == p) {
+            g_1015ec0[i] = 0;
+            fcn_004481e0(*(SCENE_RESOURCE**) (p + 0x60));
+            m_FreeTracked(p);
+            return;
+        }
+    }
 }

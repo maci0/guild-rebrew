@@ -7,12 +7,12 @@ extern struct Node* g_774a78;
 extern char s_6ab408[];
 
 void __cdecl fcn_005b1ef0(void);
-int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 char* __cdecl m_alloc(int, char*);
 
 /* The record zero-fill is the original's hand-written block-fill prelude;
  * no msvc6 C memset spelling emits it (docs/codegen-walls.md section 6b). */
-int __cdecl fcn_005b1ff0(int fh)
+int __cdecl fcn_005b1ff0(void* fh)
 {
 	int count;
 	int i;

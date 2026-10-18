@@ -16,20 +16,20 @@ typedef struct {
 	Pal pal[6];
 } Slot;
 
-extern int g_6b7fdc;
+extern struct VFS_DIR* g_6b7fdc;
 extern VECTOR3 g_67bbdc;
 extern VECTOR3 g_6b86c4;
 extern char g_1041d80[];
 
-void* __cdecl fcn_0042ff50(const char*, const char*, int);
-void __cdecl fcn_004011f0(void*, int*);
-void __cdecl fcn_004011d0(void*, float*);
-void __cdecl fcn_00401280(void*, Vec3*);
-void __cdecl fcn_00401180(void*, char*);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
+int __cdecl fcn_004011f0(void* stream, void* dst);
+int __cdecl fcn_004011d0(void* stream, void* dst);
+void __cdecl fcn_00401280(void* stream, void* dst);
+int __cdecl fcn_00401180(void* stream, void* dst);
 int __cdecl fcn_00446ca0(int);
 void __cdecl fcn_00438920(float, float, int);
 void __cdecl fcn_00447110(void*, int, int, int);
-void __cdecl CloseVfsStream(void*);
+#include "Develop/Units/vfs/vfs.h"
 
 /* ADDRESS: GOLDTL 0x00446df0 */
 

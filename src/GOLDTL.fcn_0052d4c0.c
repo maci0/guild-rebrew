@@ -59,8 +59,8 @@ void __cdecl fcn_0052d4c0(char* e)
 	dir[1] = w[1] - p[1];
 	fcn_004133e0(e, &lo, &hi);
 	n = r[1] / ((hi - lo) * 0.5f + dir[1]);
-	w[0] = w[0] - (n * r[0] - r[0] * 1.8);
-	w[2] = w[2] - (n * r[2] - r[2] * 1.8);
+	w[0] = (float)(w[0] - (n * r[0] - r[0] * 1.8));
+	w[2] = (float)(w[2] - (n * r[2] - r[2] * 1.8));
 	cam = (char*) g_6b8014;
 	t[0] = *(float*) (cam + 0x84);
 	t[1] = *(float*) (cam + 0x88);

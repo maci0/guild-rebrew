@@ -1,7 +1,8 @@
 # Workflow traps
 
 Process findings, keyed by their original section numbers. Historical command
-names and counts are evidence, not current instructions. Use [AGENTS.md](../AGENTS.md),
+names and counts are evidence, not current instructions; `--no-cache` replaces
+the old `verify --full` spelling. Use [AGENTS.md](../AGENTS.md),
 [the tooling map](tooling-upstream.md) and current CLI help. Full experiments
 remain in the [archive](goal-history.md#full-notebooks).
 
@@ -89,10 +90,10 @@ at `+0x454` (different encoding width for the `0x101deac0` load).
 
 ## 10. Four wasted rounds share one cause: no opening step forced the lookup (round 981)
 
-Make the lookup the first step. Read address findings and the source header,
-then compare current decoded instructions before probing. Rounds 976–981
-repeated documented assignment, guard, packet-order and `/Os` failures.
-New evidence or changed inputs are required to reopen an exhausted axis.
+Read address findings and the source header, then compare the current
+instructions, before probing. Rounds 976–981 repeated documented assignment,
+guard, packet-order, and `/Os` failures. Reopen an exhausted axis only with new
+evidence or changed inputs.
 
 ## 11. A stale in-source note can describe a state the source no longer has (round 982)
 
@@ -144,10 +145,10 @@ functions; only known `cm_ExSellObjekt` had residue. See the corrected census in
 
 ## 19. `rebrew todo`'s 20 items are 2 real carriers and 18 false positives: verified again (rounds 955, 1038)
 
-Historical round-1038 todo included eighteen IAT slots at
-`0x10024000..0x10024044` already equal in the postlinked image. That queue and its
-counts are obsolete. Distinguish linker-owned imports, postlink-supplied bytes
-and native reconstruction; inspect current structured todo/accounting results.
+Round 1038's todo listed eighteen IAT slots at `0x10024000..0x10024044` that
+were already equal in the postlinked image. That queue and its counts are
+obsolete. Linker-owned imports, postlink-supplied bytes, and native
+reconstruction are different facts. Current accounting is [TODO.md](TODO.md).
 
 ## 20. `build/` is gitignored, so a hand-edited `build.make` is invisible to every check (round 1051)
 
@@ -187,9 +188,10 @@ inputs and rebuild affected objects before treating subsequent numbers as a base
 ## 25. `rebrew source rename` leaves the CMake tree stale, and both guards miss it (round 1080)
 
 Renaming source does not update a cached object graph by itself. Reconfigure
-CMake from tracked inputs, then rebuild/verify all affected targets. Retired
-split-link exit codes and SP6 configure recipes are historical; use the configured
-current toolchain and `REBREW_DEBUG_INFO=OFF`.
+CMake from tracked inputs, then rebuild and verify every affected target.
+The configured backend is unshare over the pinned toolchain image filesystem;
+CMake and `verify` both use it. Retired split-link exit codes and SP6 configure
+recipes are historical. Keep `REBREW_DEBUG_INFO=OFF` for link checks.
 
 ## 26. `cmake --build build --target final` needed two passes after a clean configure, and reported a fake residue of 86,676 (round 1102)
 
@@ -200,7 +202,9 @@ A second pass succeeding does not excuse a broken first-build dependency graph.
 
 ## 27. The GOLDTL client statically links D3DX8: run `lib-match` against `d3dx8.lib`, not just LIBCMT (round 1143)
 
-Check every plausible static library, not only LIBCMT. The historical D3DX8
+Check every plausible static library, not only LIBCMT. Use
+`rebrew library match` ([tooling map](tooling-upstream.md)); the heading's
+`lib-match` name is historical. The historical D3DX8
 scan found the TL band `0x5e0000..0x64ffff` plus stubs at `0x45fa70` and
 `0x460a40`. Whole-body and short-prefix/template evidence are different strengths;
 resolve native operands/callees before assigning identity, and selected providers
@@ -219,8 +223,8 @@ an ordinary reconfigure.
 
 The project default target is independent. With TL selected, the server's old
 `cmake-flags` call resolved client rows and rejected mixed flags; the server gate
-and `final` target also implicitly selected TL for a server DLL. These calls now
-select `server.dll` explicitly. Changing the interactive default must not change
+and `final` target also implicitly selected TL for a server DLL. The recorded
+fix selects `server.dll` explicitly. Changing the interactive default must not change
 server build inputs or select a different reference for its verification.
 
 ### Same-target names need reviewed reference ownership (2026-10-16)
@@ -237,10 +241,10 @@ recovering TL 0x5392a0 only after its actual 0x5012b0 callee is unambiguous.
 
 ### Run contract audits after metadata writes finish (2026-10-16)
 
-Goal54's contract audit correctly refuses when concurrent verification changes
-its managed-store inputs. Keep that failed receipt; finish verification and the
-server gate, then rerun the audit against stable inputs. Check every recorded
-input hash before using the result. Five focused final audits have zero findings
-but retain SDK/include unknowns (server122, TL904, Gold616); that is not complete
-project contract verification. The existing upstream SDK-context feature gap
-remains open; do not weaken the exact-input guard to bypass it.
+Goal54's contract audit refuses when concurrent verification changes its
+managed-store inputs. Keep that failed receipt. Finish verification, then rerun
+against stable inputs and check every recorded input hash. At that checkpoint,
+five focused audits had zero findings and still listed SDK/include unknowns
+(server 122, TL 904, Gold 616). Those counts are not current project status, and
+they are not complete contract verification. The checkpoint recorded an open
+upstream SDK-context gap. Do not weaken the exact-input guard to skip it.

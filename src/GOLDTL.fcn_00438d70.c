@@ -9,5 +9,5 @@ void __cdecl fcn_00438d70(int a1, int a2, int a3, int a4)
 	buf[0] = a2;
 	buf[1] = a3;
 	buf[2] = a4;
-	fcn_00438cb0(a1, buf);
+	fcn_00438cb0((char*) a1, buf);
 }

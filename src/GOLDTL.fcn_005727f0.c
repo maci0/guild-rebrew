@@ -44,7 +44,6 @@ void __cdecl fcn_005727f0(char* e)
 	struct rec* p;
 	int amt;
 	int i;
-	int x; /* never assigned: the original passes an uninitialised stack slot */
 
 	switch (*(int*) (e + 0x70)) {
 	case 0:
@@ -66,7 +65,7 @@ void __cdecl fcn_005727f0(char* e)
 		amt = (gm_RandomMod((unsigned short) (p->level * 40)) + p->level * 40)
 		    * (*(int*) (e + 0x18) + *(int*) (e + 0x14));
 		fcn_004c51f0(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, g_773d75, 0);
-		fcn_0051af00(buf, 0x1bb8, *(unsigned short*) (e + 0xac) * 2 + 0x9a8, x, amt);
+		fcn_0051af00(buf, 0x1bb8, *(unsigned short*) (e + 0xac) * 2 + 0x9a8, r, amt);
 		he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (r + 0x27)].handle, -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
 		    "_NACHRICHTEN_HS_08");
 		for (i = 0; i < 768; i++) {

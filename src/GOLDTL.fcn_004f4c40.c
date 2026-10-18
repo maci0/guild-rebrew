@@ -38,7 +38,7 @@ extern int g_6a23ac;
 extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 /* ADDRESS: GOLDTL 0x004f4c40 */
 int __cdecl fcn_004f4c40(void* f)
@@ -68,7 +68,7 @@ int __cdecl fcn_004f4c40(void* f)
 		if (ls_ReadVfsDataChecked(&n2, 4, 1, f) == 0)
 			return 0;
 	}
-	for (i = 0; i < n1; i++) {
+	for (i = 0; (unsigned int)i < n1; i++) {
 		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Rec*)g_9a3800)[i].id, 4, 1, f) == 0)
 			return 0;
 		if (ls_ReadVfsDataChecked(((fcn_004f4c40_Rec*)g_9a3800)[i].name, 0xe, 1, f) == 0)
@@ -96,7 +96,7 @@ int __cdecl fcn_004f4c40(void* f)
 		((fcn_004f4c40_Rec*)g_9a3800)[i].g = 0;
 	}
 	memset(((fcn_004f4c40_Pair*)g_99f800), 0xff, 0x800 * sizeof(fcn_004f4c40_Pair));
-	for (i = 0; i < n2; i++) {
+	for (i = 0; (unsigned int)i < n2; i++) {
 		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Pair*)g_99f800)[i].a, 4, 1, f) == 0)
 			return 0;
 		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Pair*)g_99f800)[i].b, 4, 1, f) == 0)

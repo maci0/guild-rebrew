@@ -1,4 +1,4 @@
-int __cdecl fcn_004c24c0(int, int);
+void __cdecl fcn_004c24c0(float, int);
 
 /* ADDRESS: GOLD 0x004c2480 */
 void __declspec(naked) __cdecl fcn_004c2480(void)

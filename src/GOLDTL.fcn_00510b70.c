@@ -2,7 +2,7 @@ extern int g_67a370;
 
 
 int __cdecl sprintf(char*, const char*, ...);
-char __cdecl fcn_00448360(char*, int, int);
+#include "client_scene_loader.h"
 void __cdecl fcn_00437ac0(int, int, int, void (__cdecl*)(void));
 void __cdecl fcn_00510bd0(void);
 

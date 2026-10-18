@@ -11,6 +11,7 @@ int __cdecl gm_EntityAccumulate(void*);
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
+int __cdecl gm_eval_SlotVoll(char*, int, int);
 
 extern int g_14cbca0;
 extern int g_699364;

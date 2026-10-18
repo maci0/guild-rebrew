@@ -24,7 +24,7 @@ typedef struct {
 
 extern int g_6a23ac;
 
-int __cdecl ls_ReadVfsDataChecked(void*, int, int, void*);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 Figure* __cdecl fcn_00403270(int);
 
 Figure* __cdecl fcn_00523710(void* f)

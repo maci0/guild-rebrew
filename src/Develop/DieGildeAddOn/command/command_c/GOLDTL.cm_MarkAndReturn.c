@@ -17,12 +17,10 @@
  * }
  */
 
-/* TL build differs from the server twin (SERVER 0x1000d330, 14B): the client
- * passes an extra arg and the body tests both — `if (a) return 0;
- * return b == 0`. Shared name, per-build body: this file carries the GOLDTL
- * marker only. */
+/* Inferred name: the independent TL method-start callback at 0x4959f0.
+ * command.c owns the separate cm_MarkAndReturn dispatch handler. */
 
-int __cdecl cm_MarkAndReturn(int cmd, int dummy, char* result)
+int __cdecl cm_TestCommandResult(int cmd, int dummy, char* result)
 {
 	if (cmd != 0) {
 		return 0;

@@ -20,7 +20,7 @@ typedef void(__cdecl* hook_4e4730)(char*, int, char*, int);
 int __cdecl fcn_00413160(void);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_00448360(char*, int, int);
+#include "client_scene_loader.h"
 void __cdecl fcn_004428d0(char*, int, int);
 void __cdecl fcn_00476970(int);
 int __cdecl fcn_00500e20(int*);

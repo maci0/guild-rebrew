@@ -38,7 +38,7 @@ float __cdecl fcn_004fef80(Obj28* p)
 		v = p->f1c;
 	}
 	v += p->x24;
-	return v > g_662950 ? v : g_662950;
+	return (float)(v > g_662950 ? v : g_662950);
 }
 
 
@@ -111,7 +111,7 @@ float __cdecl fcn_004ff080(unsigned short id)
 		return g_6628a8;
 	}
 	v = fcn_004feff0(p);
-	a = fcn_004fef80((Obj28*) p) / v * 0.8;
-	b = v * 0.001f * 0.2;
+	a = (float)(fcn_004fef80((Obj28*) p) / v * 0.8);
+	b = (float)(v * 0.001f * 0.2);
 	return a + b;
 }

@@ -11,7 +11,7 @@ extern int g_772f88;
 extern int g_772f8c;
 extern Slot772f90 g_772f90[3];
 
-int __cdecl ls_ReadVfsDataChecked(void* p, int size, int n, void* file);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 void __cdecl fcn_004ecaa0(int v);
 
 int __cdecl fcn_004edec0(void* file)

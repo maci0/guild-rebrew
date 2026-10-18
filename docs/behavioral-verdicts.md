@@ -4,7 +4,9 @@ Rounds 288–297 reviewed the nineteen then-residue regions against native
 instructions: constants, offsets, arguments, gates, bounds and stores. “Clean”
 means no behavioral divergence found in that reviewed region; it is not a byte
 match or exhaustive proof. PROVEN has its own modeled-input/call/bound limits.
-Current verdicts belong in metadata, current work in [TODO.md](TODO.md).
+The server later reached full raw-file identity; the defects/residue in this
+table describe those reviewed inputs, not current source. Current verdicts belong
+in metadata and current work in [TODO.md](TODO.md).
 
 | Function | VA | Residue | Verdict | Round |
 |---|---|---|---|---|

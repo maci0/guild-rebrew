@@ -10,7 +10,81 @@ Rules: [prefixes](#module-prefix-system), [functions](#function-naming),
 [variables](#variable-naming), [types](#struct-naming),
 [constants](#enum--constant-naming). The ledger below preserves native addresses,
 attestation limits and receipts; a descriptive role is not automatically an
-original identifier. [Source layout](source-layout.md) owns placement guidance.
+original identifier. Implementation and debt statements describe each entry's
+checkpoint; query metadata and [current work](TODO.md) before continuing it.
+[Source layout](source-layout.md) owns placement guidance.
+
+### Scene loading declarations (Goal80, 2026-10-17)
+
+`ecmd_LoadScene` remains attested by the complete original diagnostic. Its
+`char** filename` parameter is an inferred first-pointer-slot access view, not
+a recovered full command record. `client_scene_loader.h`, `SCENE_PROGRESS` and
+`client_script_runtime.h` are inferred declaration names/homes. Loader names
+remain `fcn_00448360` / `fcn_0044be60`; no original identifier is established.
+The one-byte Boolean result, stream pointer and three full-width callback inputs
+follow native evidence, without claiming original char signedness or typedef text.
+
+The script error function retains `fcn_00425bf0`, with its existing provider's
+`char*`, unsigned position and constant message contract. Reuse `g_6b7e98`
+from its current canonical declaration in `ch_motion.h`; neither including it
+nor the new script header establishes allocation or original module ownership.
+No globals or storage were added. At Goal80 the T&L embedded-scene bridge accepted
+`void* stream`, while its receiver still carried a legacy integer stream.
+Goal82's opaque-pointer cutover superseded that debt statement; see
+[stream contracts](data-ownership.md#stream-contracts-do-not-create-storage-owners-goal82-2026-10-17).
+Receipts: `.scratch/goal80-scene/{proof.json,stream-boundary.json}`.
+
+### D2 image argument slot (Goal79, 2026-10-17)
+
+`d2_BildArgument2` is inferred, using the attested `d2_` prefix. It names the
+second argument stored by Gold `0x475f30` / T&L `0x472770`, indexed through the
+GUI image-offset field with stride 0x160. It does not assign an unproven meaning
+to the stored value. The function names remain address-based. Their non-owning
+views start at Gold `0xfa6038` / T&L `0x102d158`; four bytes describe only the
+first accessed slot, not complete array bounds, a backing object or an owner.
+Both addresses are in the actual PE `.data` zero-filled virtual tail. Existing
+`d2_gui.h` supplies the canonical extern, with no storage or new original-unit
+claim. Gold `0x475e30` / T&L `0x472640` are paired by complete native behavior;
+the two Boolean-cell meanings beyond existing field views remain unproven.
+Receipts: `.scratch/goal79-gui/{proof.json,data-commands.json}`.
+
+### Cursor and dialog access views (Goal78, 2026-10-17)
+
+`client_cursor.h` and `client_d3_dialog.h` are inferred declaration homes,
+not attested original source units. The functions retain their address names.
+`CursorOsBypass` names the observed nonzero predicate that skips `SetCursorPos`;
+`CursorX1`/`CursorY1` and `CursorX2`/`CursorY2` number pairs by native write order,
+without assigning unproven UI roles. Existing `g_01467380`/`g_01467382` names
+are retained, not a pattern for new globals. `DialogArgument1`, `DialogArgument4`
+and `DialogArgument5` describe the wrapper's observed argument slots only.
+
+All ten names identify non-owning scalar access views. Their original spellings,
+module prefixes, backing extents and storage owners remain unknown. Nine are in
+Gold's zero-filled `.data` tail; the four-byte cursor bypass view has native
+initial value one. Section placement and initialization do not establish owners.
+Complete cursor/dialog C and operand evidence:
+`.scratch/goal78-assembly/{proof.py,proof.json}`.
+
+### Native CRT rand and scene-name collector (Goal77, 2026-10-17)
+
+Gold `0x5de784` is the stock `_rand` identity, not a game routine named
+`fcn_005de784`. Pristine Processor Pack `LIBC` reproduces all 30 bytes with
+both seed operands bound to `0x62e108`. The copied assembly is retired through
+binding history; `library_msvcrt.h` records the library identity, and the sole
+30-byte caller uses SDK `rand` without changing its native code or destination.
+The resolver's strict native review still rejects unresolved private `_holdrand`.
+No public seed declaration, complete backing allocation or selected raw-link
+archive provider is claimed. Receipts: `.scratch/goal76-assembly/rand-proof.json`
+and `.scratch/goal77-assembly/{rand-caller-proof.json,rand-native-review.json}`.
+
+Gold `0x4d2650` retains its address name: `sp_CONQUER` identifies the scene-name
+prefix it collects, not an original function spelling or module prefix. Its C
+callback takes `char*` and an unused `void*` context, matching the actual Gold
+iterator at `0x438d40`. All 47 code bytes, both operands and the full 11-byte
+literal match with rejecting controls. The count cell at `0x6f0d60` and pointer
+table at `0x930380` remain access views without invented names, allocations or
+owners. No additional accounted text is credited for replacing already-counted
+assembly. Replay: `.scratch/goal77-assembly/collector-proof.py`.
 
 ### Object-transform animation wrapper (2026-10-15)
 
@@ -398,20 +472,11 @@ functions appear in both) but is built from `DieGildeAddOnVc\` instead of
 
 ### Attested original source paths (round 937)
 
-The `__FILE__` strings the compiler embedded give the original tree directly: **14 paths**, extracted
-with:
-
-```sh
-python3 - <<'PY'
-import re, collections
-d = open('original/Server/server.dll','rb').read()
-c = collections.Counter()
-for m in re.finditer(rb'D:\\Develop\\[ -~]{4,90}', d):
-    c[m.group(0).decode('latin1')] += 1
-for k, v in c.most_common():
-    print(v, k)
-PY
-```
+The `__FILE__` strings the compiler embedded give the original tree directly:
+**14 paths**. Current inventory is `rebrew source units --json` on
+`server.dll` and each client. Confirm a referencing instruction with
+`rebrew binary asm show`. The old ad hoc scan of `original/Server/server.dll`
+is retired.
 
 ```
 Units\net\broadcast.c              Units\Error\Error.c
@@ -424,9 +489,9 @@ DieGildeAddOn\game\sim.c           DieGildeAddOn\game\spiel.c
 DieGildeAddOn\loadsave\loadsave.c
 ```
 
-(all under the `D:\Develop\` root the binary spells out). Every entry of the merged tree below is
-attested by one of these. **This list is the authority**; the tree is not speculation where it agrees
-with it.
+(all under the `D:\Develop\` root). These paths attest those units, not every
+reconstructed header, helper name or proposed file boundary. The table below
+records the measured mapping; inferred placements remain labeled.
 
 **The `_c` directory suffixes are not attested.** No `__FILE__` string contains `_c\`; the decompiler-era
 split of one translation unit into one file per function is gone for the server. The server tree now has
@@ -459,64 +524,17 @@ no direct `__FILE__` reference. `ahm_ProcessEntityChain` remains an inferred nam
 Complete comparisons and the unchanged raw server validate the move without
 establishing original spelling or proving all client unit boundaries.
 
-The `__LINE__` values the code passes to `LogMessageInternal` rise with the VA inside each file, so the
-linked order is the source order. The client targets still keep divergent twins as `GOLDTL.<name>.c`
-beside these files.
+In the measured units, `LogMessageInternal` line values rise with native VA,
+supporting the recorded definition order. This does not locate unlogged helpers
+or prove every original TU boundary. Divergent client twins may remain separate
+`GOLDTL.<name>.c` definitions until organization is verified across targets.
 
 ### Merged Source Tree (speculative)
 
-Combining all three binaries into a single view of the original development
-tree. Entries marked with which binary references them.
-
-```
-D:\Develop\
-  DieGildeAddOn\                         -- game logic (server-side build)
-    auxillary\
-      plant.c                            [server.dll]
-    command\
-      command.c                          [server.dll]
-      lobbycommands.c                    [server.dll]
-    game\
-      aemter.c                           [server.dll]
-      alchemistry_logic.c               [server.dll]
-      friedhof_logic.c                   [server.dll]
-      sim.c                              [server.dll]
-      spiel.c                            [server.dll]
-    loadsave\
-      loadsave.c                         [server.dll]
-  DieGildeAddOnServer\                   -- dedicated server entry point
-    server.c                             [server.dll]
-  DieGildeAddOnVc\                       -- game logic (client-side build, T&L)
-    Release\
-      Europa1400Exp_TL.pdb               [TL.exe] PDB symbols
-  Units\                                 -- shared engine / infrastructure
-    d2.v1\
-      GFX.C                              [Gold.exe] 2D graphics
-    d2_test\
-      textures\                          [TL.exe] test textures
-    d3\
-      d3_d3d.c                           [Gold.exe] Direct3D renderer
-      d3_engine.c                        [Gold.exe] 3D engine core
-      d3_interface.c                     [Gold.exe] 3D interface layer
-      d3_sky.c                           [Gold.exe] sky rendering
-      ts_texture.c                       [Gold.exe] texture system
-    d3_tools\
-      d3_tools.c                         [Gold.exe] 3D tool utilities
-    dd_vesa\
-      Dd_vesa.c                          [Gold.exe] DirectDraw / VESA fallback
-    Error\
-      Error.c                            [server.dll] error handling
-    m_alloc\
-      m_alloc.c                          [server.dll] memory allocator
-    Msx\
-      msx.c                              [Gold.exe, TL.exe] music/sound
-    net\
-      broadcast.c                        [server.dll] network broadcast
-      net.c                              [Gold.exe, TL.exe] network layer
-      net.h                              [Gold.exe, TL.exe] reconstructed statistics header (speculative; multi-TU native evidence)
-    vfs\
-      vfs.c                              [server.dll] virtual file system
-```
+Server paths are the attested list above. Client-only paths are the Gold
+and TL trees above this section. One further entry is speculative:
+`Units/net/net.h` is a reconstructed statistics header from multi-TU client
+evidence, not an attested `__FILE__` path.
 
 `DieGildeAddOn\` and `DieGildeAddOnVc\` likely contain the same game logic
 source files, compiled with different project settings. The server build
@@ -631,12 +649,10 @@ onto C symbols.
 
 ### Standard Library Functions
 
-Standard CRT functions (`fopen`, `fread`, `putc`, `srand`, `rand`, etc.)
-are used directly with proper `#include` headers: no `extern` declarations
-needed.
-
-The compiler intrinsic `__ftol` (float-to-long) is statically linked and
-requires a forward declaration where used.
+Prefer the toolchain CRT headers for `fopen`, `fread`, `putc`, `srand` and
+`rand`. Add a local declaration only when that header does not provide the
+symbol. The statically linked `__ftol` intrinsic still needs a declaration
+where it is used.
 
 Small static helpers within a module may omit the prefix (they were `static`
 in the original source and not visible across translation units).
@@ -749,11 +765,10 @@ if (((int (__cdecl*) (void*, void*)) filter)(filter_arg, cursor)) { ... }
 so the callback contract is `filter(arg, entry)`, non-zero meaning *accept*. Three functions pass an address
 there (`gv_SpawnEntities.c:41`, `gv_HireProductionWorker.c:55`, `gv_MoveSlotEntry.c:121`).
 
-**This is a naming trap worth knowing.** `grep` for `call` finds none of them, the catalogue carries no name
-for them (`fcn.10010700`), and a header comment can end up asserting "It has no caller": which is what
-happened here and stood for many rounds. Before concluding a tiny unnamed function is dead code, grep for its
-**address** in the tree, not just for a call. Give it the `_eval_` predicate name and record the callee's
-callback signature in the header.
+A direct-call search misses these: the catalogue name was `fcn.10010700`, and
+a header comment asserted "It has no caller" for many rounds. Before treating
+a small unnamed function as dead, use `rebrew binary xrefs 0x<VA>`. Give a
+proven predicate the `_eval_` name and record the callee's callback signature.
 
 ### German Noun Vocabulary
 
@@ -837,8 +852,8 @@ unsigned short *building_entity;
 | Win32 API   | `__stdcall`  | `__declspec(dllimport)` |
 | CRT         | `__cdecl`    | Standard library        |
 
-Symbol mangling: `__cdecl` functions get a leading underscore in the object
-file. Annotation `// SYMBOL: _cm_ExFree` reflects this.
+`__cdecl` object symbols have a leading underscore. The managed row's
+`symbol` field records it. A `// SYMBOL:` comment is retired; do not add one.
 
 ## Error Logging Convention
 
@@ -858,26 +873,14 @@ The message string almost always starts with the function name:
 
 ## Attested Names from Embedded Strings
 
-The shipped binaries embed the full string corpus. RevEng.AI's
-`GET /v2/analyses/{id}/functions/strings` returns every string with the
-function VA that references it. A string shaped `"<name>(): ..."` or
-`"<name>: ..."` names the owning function.
+A string shaped `"<name>(): ..."` or `"<name>: ..."` names a function only
+when that function pushes the literal. List candidates with
+`rebrew binary strings --xref --filter` and confirm the push with
+`rebrew binary asm show`. An external string catalog is not authority: one
+wrongly attached `_main_:` to `0x100068e0`.
 
-Every name below was then **verified against the code**: the function at the
-stated VA is disassembled and confirmed to push the literal address of that
-string. RevEng's attribution alone is not trusted (it wrongly attached
-`_main_:` to `0x100068e0`).
-
-Reproduce:
-
-```bash
-# list every string a function references; "(): " prefixes name the owner
-curl -s -H "Authorization: Bearer $REVENG_API_KEY" \
-  "https://api.reveng.ai/v2/analyses/1468081/functions/strings?page_size=2000" \
-  | jq -r '.data.strings[] | select(.value|test("^[A-Za-z_]+\\(\\):")) | "\(.functions[0].function_vaddr)\t\(.value)"'
-# then confirm the owner pushes the literal
-rebrew binary asm show 0x<VA> --size <size>| grep 'push 0x100[23]'
-```
+Every name below was checked that way: the function at the stated VA pushes
+the literal.
 
 ### server.dll
 
@@ -946,7 +949,7 @@ parent's log prefix.
 
 | TL VA | Gold VA | Attested name | Standing |
 | --- | --- | --- | --- |
-| `0x00571870` | `0x005694b0` | `he_RunProduktion` | Shared C89 candidate in `src/he_RunProduktion.c`; MSVC byte verification pending |
+| `0x00571870` | `0x005694b0` | `he_RunProduktion` | Shared C89 candidate in `src/he_RunProduktion.c`; byte verification was not established by this naming receipt |
 
 Both bodies push `"he_RunProduktion(): geb:%G"`: TL instruction
 `0x005718b1` references literal `0x006a7c78`, and Gold instruction
@@ -971,10 +974,10 @@ not establish original prototypes or a byte-match verdict. Current receipts:
 The `Units/m_alloc` unit does not use the `m_VerbNoun` CamelCase of the game
 modules. Its recovered names are lower snake case:
 
-- `m_alloc`: the tracked allocator, called from every unit. In the original
-  this is a macro: the tracked implementation receives an extra
-  `__FILE__ ":" __LINE__` argument, so our `m_AllocTracked` stays as the
-  implementation name and only the macro was `m_alloc`.
+- `m_alloc`: attested by `m_alloc() called without prior call to m_init()`.
+  The earlier reconstruction name `m_AllocTracked` is retired. The definition
+  in `Develop/Units/m_alloc/m_alloc.c` is `m_alloc`. The tracked call still
+  receives a `__FILE__`/`__LINE__` tag; that does not restore the retired name.
 - `m_init`: sets the slot count and allocates the slot table;
   `m_alloc` refuses to run before it.
 - `m_pool_free`: pool release.
@@ -998,10 +1001,10 @@ Recovered names reproduce the original source exactly, including errors:
 
 ### Client binaries
 
-`Europa1400Gold_TL.exe` and `Europa1400Gold.exe` expose the same corpus via
-the same endpoint (5128 and 4956 strings). Their function-name log prefixes
-are listed under Client-Only Modules above. Neither binary is decompiled
-here; the strings only constrain shared-code names and the prefix vocabulary.
+Both clients are reconstruction targets. Their log prefixes are under
+Client-Only Modules above. Counts from an old external catalog (5128 and
+4956 strings) are not a live inventory; use `rebrew binary strings` on each
+image. A string constrains a name only when the function pushes it.
 
 ## Struct Naming
 
@@ -1013,9 +1016,10 @@ typedef struct SRC { ... } SRC;
 typedef struct TGT { ... } TGT;
 ```
 
-Field naming appears to use lowercase with occasional camelCase. Struct
-definitions are local per translation unit (no shared headers for game
-structs in the decompiled code).
+Field naming appears to use lowercase with occasional camelCase. Where no
+original shared header is attested, treat the struct as TU-local.
+Reconstructed headers such as `d3_object.h` are current declaration homes,
+not attested original headers.
 
 ## Enum / Constant Naming
 
@@ -1225,10 +1229,12 @@ binding-actions}.json`; allocation and physical-view evidence:
 
 ### Names added in rounds 16-19 (2026-10-08)
 
-The reconstructed client code of rounds 16-19 (msvc6-link-layout 5f) added the names below. Checked against
-every `ident():` / `ident:` string in `Europa1400Gold_TL.exe`, `Europa1400Gold.exe` and `server.dll`
-(`.scratch/measure/attest.py --corpus`), a verbatim search of each name in the three images, and the strings
-each ported TL function addresses (`attest.py docs/client-only-sweep.md original/Europa1400Gold_TL.exe`).
+The reconstructed client code of rounds 16-19 (msvc6-link-layout 5f) added the names below.
+The check was every `ident():` / `ident:` string in the three images, a verbatim
+search of each name, and the strings each ported TL function addresses.
+`.scratch/measure/attest.py` is retired. Repeat a search with
+`rebrew binary strings --xref --filter` on each target. The historical
+classification is [client-only sweep](client-only-sweep.md).
 
 - **Attested, already correct:** `vfs_Tfopen`, `vfs_init` (their own `sprintf` messages), `vfs_fseek`
   (`Unsupported vfs_fseek(inzip,SEEK_CUR)`), `nt_Recv`, `rd_GetBKSize`, `amt_fio_SaveAemter` (client log
@@ -2495,3 +2501,67 @@ prefixes do not establish unique identities or selected library providers.
 Evidence: `.scratch/goal72/{large,credit-deps,scene-deps}/REPORT.md`, native
 manifests, caller matrices and replay proofs. All admissions are native-only;
 no source, symbol, match verdict or provider is earned by mapping.
+
+
+## VFS closer declarations and entity call binding (Goal81, 2026-10-17)
+
+TL `CloseVfsStream` (`0x430580`) reuses existing inferred address names
+`g_6b7fe4` and `g_6b7fec`, with private logical macros `g_stream_pool` and
+`g_stream_count`. No original spelling or storage owner is newly asserted.
+The receiver's `fcn_00522e30` references are bound to the existing managed
+`GOLDTL.0x00522e30` / `ls_LoadEntities` identity, not a newly invented function.
+The disabled copied definition in `GOLDTL.loadsave2.c` remains physical source;
+it is not a second compiled provider. The upstream reference-binding guard now
+excludes proven literal-zero branches and still rejects unknown/live alternatives.
+The destination identity, source and verdict do not change. Receipts:
+`.scratch/goal81-vfs/{entity-name-apply.json,receiver-after.json,close-proof.json}`.
+
+## Opaque stream formals (Goal82, 2026-10-17)
+
+`stream` and `stream_ctx` describe inferred opaque VFS parameters; they are not
+attested source spellings or a newly established struct. The former
+`ahm_AllocAhmInfo` formal `cmd_payload` was a savegame stream. Existing loader,
+allocator and storage identities retain their names. The recovered TL building
+reader still uses its existing `fcn_00522510` identity pending a reviewed
+canonical name binding; its completed body does not attest an original name.
+
+The Gold dialog's `dd_` prefix is attested by diagnostics from
+`D:\develop\Units\dd_vesa\Dd_vesa.c`, including `dd_Guid` and `dd_BitPlanes`.
+The new declaration spellings such as `dd_DriverCombo` and `dd_DeviceCount`
+are inferred and recorded as such; operand agreement does not attest those
+exact names. TL version and auxiliary slots retain their existing legacy
+declaration names pending a canonical naming review. Literal inventory labels
+`str_f3g_PlantMap` / `str_AHM_INFO` are inferred labels for compiler pools,
+not invented C identifiers or storage owners.
+`str_STADTAUSWAHL_s_INFO_0` likewise labels the complete format literal;
+the existing inferred global names `g_85ab80` / `g_14a5320` identify native
+bases without asserting original names, allocation bounds or owners.
+
+## Scene callbacks and resource views (Goal83, 2026-10-17)
+
+`SCENE_PROGRESS`, `SCENE_PROGRESS_CONTEXT` and `SCENE_RESOURCE` are inferred
+access contracts in the client scene headers. Native progress calls pass three
+full integers and discard EAX. Gold resource selectors remain full integers even
+where code tests their low byte. The TL callback context has a 20-byte stride;
+the Gold resource record has a 128-byte stride. Gold offsets must not be applied
+to the TL resource record, whose stride is 112 bytes.
+
+The Gold declaration spellings `g_104049c`, `g_10404a0` and `g_6b8af0` reuse
+existing inferred TL correspondence names at separate native addresses. They
+describe pointer/count/clear slots, without new storage or ownership. The TL
+scene scalar and indexed-base identities retain their existing provisional
+address names. `str_rb`, `str_boden` and `str_Scene_too_old_Sorry` are literal
+inventory labels, not original C identifiers or defining translation units.
+
+The Gold clone-list helper retains `fcn_0043ca20`; its native contract consumes
+one object pointer and no return value. Combined caller cleanup includes an
+earlier clone-constructor argument and does not attest a second parameter.
+Evidence and unresolved pointer views are in
+`.scratch/goal83-gold-scene/contracts-followup/` and `contracts-root/`.
+
+Gold `g_fc2700` and `g_fc28f4` retain unattested address names. The latter is
+the former's list-head pointer at offset `0x1f4`, matching `voriges` in the
+existing D3 layout. This relationship names an accessed view; it establishes
+neither the sentinel's full static extent nor its storage owner.
+
+`ReadVfsFourDwords` is an inferred descriptive name for the shared TL `0x4012b0` / Gold `0x401270` reader. It separates that definition from Gold `0x4012b0`, which writes three dwords. The placeholder collision did not establish common behavior or a shared provider.

@@ -15,7 +15,7 @@ typedef struct
 } fcn_0044dba0_Ctx;
 // SIZE 0x14
 
-void __cdecl fcn_00401180(void* stream, void* dst);
+int __cdecl fcn_00401180(void* stream, void* dst);
 
 /* ADDRESS: GOLD 0x0044f270 */
 /* ADDRESS: GOLDTL 0x0044dba0 */

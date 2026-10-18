@@ -1,3 +1,5 @@
+#include "Develop/Units/d3/d3_object.h"
+
 extern char* g_6338c4;
 extern char* g_6338b8;
 extern char* g_6338bc;
@@ -11,7 +13,6 @@ extern char s_5fbe70[];
 char* __cdecl fcn_0043c570(int kind, char* name);
 void __cdecl fcn_0043b7f0(char* o, float x, float y, float z);
 void __cdecl fcn_0043b920(char* o, float x, float y, float z);
-void __cdecl fcn_0043ca20(char* o);
 
 /* ADDRESS: GOLD 0x00448910 */
 void __cdecl fcn_00448910(void)

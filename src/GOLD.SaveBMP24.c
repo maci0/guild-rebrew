@@ -2,9 +2,9 @@
 
 typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;
-char* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root);
+#include "Develop/Units/vfs/vfs.h"
 unsigned int __cdecl vfs_fwrite(void* data, int size, int count, char* stream);
-int __cdecl CloseVfsStream(void* stream);
+
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void* ptr);
 

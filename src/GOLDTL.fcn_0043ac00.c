@@ -1,32 +1,23 @@
 
 
-// SIZE 0x14
-typedef struct Ctx {
-	int a;
-	int b;
-	int c;
-	int d;
-	char on;
-} Ctx;
+#include "client_scene_loader.h"
 
 extern int g_67a370;
 
 void __cdecl fcn_004379a0(int, int, int, void*, void*);
-void __cdecl fcn_0043aad0(void);
-void __cdecl fcn_0045cfa0(int);
 #include "client_lighting.h"
 
-void __cdecl fcn_0043ac00(int mask, int b, int a)
+void __cdecl fcn_0043ac00(int mask, int b, SCENE_PROGRESS a)
 {
-	Ctx s;
+	SCENE_PROGRESS_CONTEXT s;
 
-	s.on = 1;
-	s.d = 0;
-	s.c = 0;
-	s.a = a;
-	s.b = b;
+	s.skip = 1;
+	s.count = 0;
+	s.total = 0;
+	s.fn = a;
+	s.id = b;
 	fcn_004379a0(g_67a370, 0, mask, fcn_0043aad0, &s);
-	s.on = 0;
+	s.skip = 0;
 	fcn_004379a0(g_67a370, 0, mask, fcn_0043aad0, &s);
 	fcn_0045cfa0(a);
 	UpdateSceneLighting(1);

@@ -1,14 +1,6 @@
 #include <string.h>
 
-typedef struct
-{
-	void (__cdecl* fn)(int a, int n, int total);
-	int id;
-	int total;
-	int count;
-	char skip;
-} fcn_0043aad0_Cb;
-// SIZE 0x14
+#include "client_scene_loader.h"
 
 extern char s_67a464[];
 
@@ -19,7 +11,7 @@ void __cdecl fcn_00449f90(char* o, int a, char* name);
 void __cdecl fcn_00438ac0(char* o, int a);
 
 /* ADDRESS: GOLDTL 0x0043aad0 */
-char __cdecl fcn_0043aad0(char* o, fcn_0043aad0_Cb* cb)
+char __cdecl fcn_0043aad0(char* o, SCENE_PROGRESS_CONTEXT* cb)
 {
 	char* ext;
 	int len;

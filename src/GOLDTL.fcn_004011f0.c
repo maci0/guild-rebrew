@@ -3,9 +3,9 @@
 // the second arg is 4, not 1.  GOLD is `(&x, 1, 1, a)` — per-target divergence,
 // so a thin GOLDTL file rather than a shared body.
 
-int __cdecl fcn_004306b0(void*, int, int, int);
+int __cdecl fcn_004306b0(char* buf, int size, int count, char* stream);
 
-void __cdecl fcn_004011f0(int a, void* x)
+int __cdecl fcn_004011f0(void* a, void* x)
 {
-	fcn_004306b0(x, 4, 1, a);
+	return fcn_004306b0((char*) x, 4, 1, (char*) a);
 }

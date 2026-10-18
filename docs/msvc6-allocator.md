@@ -3,7 +3,13 @@
 Empirical findings from complete native/object comparisons. Early Findings 1–8e
 are `gm_ff_Objekt` lab notes, not a general guarantee that C controls register
 homes. Read [walls §1](codegen-walls.md) and Findings 52–65 before reopening
-callee-saved or slot-map probes. Status belongs in managed metadata.
+callee-saved or slot-map probes.
+
+Scores and "SOLVED" or "FENCED" headings are checkpoints. Current proof and
+status stay in managed metadata. A fenced naked body or a failed search here
+is historical, not assembly permission; see
+[the assembly audit](assembly-audit.md#what-qualifies). "Not reproducible"
+means the spellings listed in that note.
 
 ## Index
 
@@ -30,18 +36,21 @@ address-keyed. Query `rebrew source findings` and inspect the source header.
 ## Methodology
 
 Use `uv run --frozen rebrew source findings 0x<VA> --json`, then native assembly,
-`diff` and `test`. Keep isolated probes in `.scratch/` and use the selected
-Docker compiler. The current server is plain SP5; clients use Processor Pack.
-Earlier SP6 experiments retain their original compiler context. Measure the
-complete linked image for layout claims; [tooling](tooling-upstream.md) replaces
-retired probe wrappers. Full original notes are [archived](goal-history.md#full-notebooks).
+`diff` and `test`. Keep isolated probes in `.scratch/` and compile with the
+project `unshare` backend on the pinned image. The current server is plain
+SP5; clients use Processor Pack. Earlier SP6 and Docker runs keep that
+compiler context. Measure the complete linked image for layout claims;
+[tooling](tooling-upstream.md) replaces retired probe wrappers. Full original
+notes are [archived](goal-history.md#full-notebooks).
 
 ## Register set & baseline (from rebrew docs)
 
 - Volatile: `eax ecx edx` (caller-saved); callee-saved: `ebx esi edi`.
-- VC 6.0 does **no constant caching**: loop-invariant constants stay as
-  immediate stores (`c7 05 ...`) rather than being hoisted into a
-  callee-saved register (4.x/5.0 hoist them; 6.0 does not).
+- In this baseline, loop-invariant constants stay as immediate stores
+  (`c7 05 ...`) rather than being hoisted into a callee-saved register; the
+  earlier 4.x/5.0 comparison reported hoisting. This is not a general absence
+  of constant caching: Finding 72 traces a multi-use constant as a register
+  colouring candidate in VC6.
 - The zero-comparison era marker (5.0–7.1): `a == 0` = load + `test`/
   `cmp` + branch against a materialized zero register.
 - The target function is fully register-resident: `flag1`→`dl`, `flag2`→`bl`,
@@ -589,9 +598,7 @@ do-while, zero-var) could not trigger the split. The clock struct is
 the caller is `sim_AdvanceGameClock((int*)0x10035880, 0, 1, 0)`.
 
 ## ReceivePacketHeader (0x1000a340): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Semantically complete C preserved in server2.c (best 104/336; the remaining
@@ -702,9 +709,7 @@ local) forces slot re-reads and drops the score to 33/139; the earlier note
 that the Ghidra `&param_1` shape was required was wrong.
 
 ## AnalyzeInstruction (0x10003260): SOLVED (EXACT)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Opcode-length checker (183B); semantically correct C preserved in
@@ -808,9 +813,7 @@ Converted to C, RELOC 257/257. Findings:
   y-first/cl form. The naive source order (y then x) swaps the pairing.
 
 ## ProcessSendData (0x1000a860): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Connection loop iterating 8 slots (`0x101deb00` + `0x264264` stride to
@@ -835,8 +838,9 @@ the dest lea in-loop.
 
 Both functions otherwise convert cleanly (m_PoolAlloc 234/270 with msvc6
 `/O2 /Gd /Oy-`; srv_InitBuildingTypeTable 261/372 with explicit-store C) but share
-a block-fill prelude that msvc6 never emits (shown below to be hand-written
-asm, see "The prelude is hand-written asm" further down). The reference runs
+a block-fill prelude the spellings tried here did not emit. The later heading
+records a likelihood inference, not a proof that C cannot emit it and not
+assembly permission. The reference runs
 this **alignment prelude** before the dword stores:
 
     xor eax,eax
@@ -907,6 +911,15 @@ at ReadVfsData 0x10008f0c: every one in a function that has never
 byte-matched (SIZE_MISMATCH or only PROVEN).
 
 ### The prelude is hand-written asm, not a compiler expansion (2026-09-04)
+
+The title records a likelihood inference, not a proof that C cannot emit the
+shape. Native register invariance across contexts and operand homing are the
+positive structural evidence; unsuccessful C searches and library exclusions
+only corroborate it. Goal108 rechecked209 distinct target/core sites from the
+current receipts and the stored/reloaded literal count in both client
+building-table initializers. It did not recount all725 historical sites or
+reproduce their original source text. Current target-scoped receipts state the
+inference explicitly; see [the assembly audit](assembly-audit.md#what-qualifies).
 
 #### Reviewed GOLDTL inline helpers (2026-10-09)
 
@@ -1138,9 +1151,7 @@ Converted to C, RELOC 209/209. Findings:
   here constant-folds to `test cl,0`, a no-op).
 
 ## amt_SwapOfficeHolders (0x1000b880): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Semantically correct C preserved in aemter2.c (best 10/263 with msvc6
@@ -1210,9 +1221,7 @@ NEAR_MATCHING first: run `rebrew test <file> --cflags "/O2 /Gd"` (no naked
 define) to compile the #else path and set it, then `rebrew prove`.
 
 ## srv_Init (0x10009d30): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Server init; C fenced in server2.c's #else, PROVEN via `rebrew prove`.
@@ -1238,9 +1247,7 @@ but re-introduces a stack local that shifts the buffers). Other findings:
   when written as plain `strcpy`/`strcat` on the char buffers.
 
 ## cm_ExChangeBits (0x1000eaa0): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Bitmask edit handler; C preserved as a comment in cm_ExChangeBits.c (best
@@ -1271,27 +1278,10 @@ resolve/replace of ids at -4/0, and the outer loop's linked-list attaches
 
 ## cm_ExAllocThemaPredigt (0x1000f2f0): SOLVED (RELOC 172/172)
 
-**Status corrected in round 859: this entry read "FENCED + PROVEN (76/172)" and was stale.**
-The function is `RELOC 172/172` in `src/rebrew-functions.toml` and its residue is zero: the
-fence was lifted and the work landed, but the note was never updated. The stale text is kept
-below because the mechanism it describes is still instructive, not because the function is open.
-
-The `obj[0x22] = 0` store the paragraph below diagnoses as at-risk **is present and matching**:
-the reference at `0x1000f379` is `c6462200` (`mov byte [esi+0x22],0`) and ours is byte-identical
-there. Note also that `esi` holds `obj` in a register across the whole body, which contradicts
-the paragraph's stated condition: see the pointer-residence correction above, which the real
-site does not actually obey.
-
-Sermon-theme allocator; C fenced in cm_ExAllocThemaPredigt.c's #else,
-PROVEN via `rebrew prove`. Blocked on pointer materialization: the
-reference computes `payload = cmd + 0x18` and `dst = obj + 0x1c` into
-registers (`add edi,0x18` / `lea ecx,[esi+0x1c]`) while MSVC6 folds the
-arithmetic into the addressing modes (~6 orderings/pointer forms did not
-move it). Finding: the reference's redundant `*(char*)(obj+0x22) =
-payload[6]` then `*(char*)(obj+0x22) = 0` survives dead-store elimination
-only when written via DISTINCT pointer expressions (`dst+6` vs `obj+0x22`).
-The `type * 0x264264` table index reproduces via the reference's exact
-lea chain (`shl`-based ×0x11011, `lea [eax+eax*8]` ×9, ModRM ×4 scale).
+Checkpoint: the old "FENCED + PROVEN (76/172)" heading was already wrong by round 859.
+The `obj[0x22] = 0` store at `0x1000f379` is `c6462200` on both sides, and `esi` holds `obj`.
+The distinct-expression explanation below is the one that failed; the residence table is the correction.
+The `type * 0x264264` index still matches the reference lea chain (`shl` ×0x11011, `lea [eax+eax*8]`, ModRM ×4).
 
 **The condition is the base pointer's *residence*, not the expressions' distinctness (round 859,
 isolated).** Swept the spellings with `payload[6]` then `= 0`:
@@ -1315,9 +1305,7 @@ global/parameter each time, or take the address in more than one expression); to
 eliminated, hold the base in a named local.
 
 ## cm_ExClearLagerslot (0x1000e690): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Storage-slot clear; C preserved as a comment in cm_ExClearLagerslot.c (best
@@ -1335,9 +1323,7 @@ current symbolic engine; the fence+PROVEN pattern only works for
 resolve-free functions.
 
 ## m_pool_free (0x10006e30): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Block return to the pool free list; C preserved as a comment in m_alloc2.c
@@ -1380,9 +1366,7 @@ char-sign EAX difference (4294967040 vs 0) → no fence; remains plain naked.
 The Ghidra reference (in the file) matches the decode exactly.
 
 ## CloseVfsStream (0x10008d10): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 VFS stream close; C preserved in /tmp/cvs.c (best ~62/301 with /O2; the
@@ -1421,9 +1405,7 @@ lea chain (×3 → shl 4 → +type → ×3 → ModRM ×4). `rebrew prove` reject
 STUB-class ratio → no fence.
 
 ## amt_UpdateEntityLinks (0x1000ba30): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Office-entity link fixup; C preserved as a comment in aemter2.c (best
@@ -1444,9 +1426,7 @@ return at the end. The owner/type checks and the `i * 0x21c` lea-chain
 return decode cleanly.
 
 ## cm_ExChangeDesire (0x1000e9c0): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Desire-stat update; C preserved as a comment in cm_ExChangeDesire.c (best
@@ -1457,9 +1437,7 @@ _g_stat_min_d : _g_stat_max_d;`: the reference's redundant middle
 slot-vs-min check is the compiler's ternary expansion.
 
 ## cm_ExSetAttribute (0x1000e8d0): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Attribute-set handler; C preserved in cm_ExSetAttribute.c
@@ -1470,9 +1448,7 @@ size/count bytes + 16-bit offset, three size-dispatched copy loops
 (1/2/4 bytes) with the `movsx`+`jbe`/dec-jne pattern.
 
 ## cm_ExRemoveLinkedObject (0x1000f0d0): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Linked-node removal; C preserved in cm_ExRemoveLinkedObject.c
@@ -1484,9 +1460,7 @@ three removal paths (cmd+0x5d direct, q+0x14 query, local0+0x178,
 result+0x14) with the -2/-1/0/eax return conventions.
 
 ## cm_ExChangeAttribute (0x1000e7d0): SOLVED (RELOC, delta 0)
-**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
-`src/rebrew-functions.toml`. The heading said "blocked" and was stale: the mechanism
-below is kept because it is instructive, not because the function is open.**
+Checkpoint: the heading's old status is not current. Verdicts stay in metadata. The mechanism below is that pass's observation.
 
 
 Attribute accumulator (the `*dst += src` sibling of cm_ExSetAttribute); C
@@ -1676,7 +1650,7 @@ byte value stays live after the load**:
 | byte from pointer-deref, value DEAD after | `xor reg,reg; mov reg_low,[mem]` | the "clean" zero-extend |
 | byte from pointer-deref, value LIVE after (used later) | `mov reg_low,[mem]; mov reg2,reg; and reg2,0xff` | byte kept in a byte register, masked copy for the consuming op |
 
-Probes (docker msvc6 12.00.8168, /O2):
+Probes (MSVC 12.00.8168, /O2; that run used Docker, current runs use project `unshare` on the pinned image):
 - `uc_add(unsigned char a, unsigned char b) { return a+b; }` →
   `mov eax,[esp+4]; mov ecx,[esp+8]; and eax,0xff; and ecx,0xff; add eax,ecx`
   (the docs' claim: param values).
@@ -2145,9 +2119,9 @@ blocked on two codegen patterns the optimizer will not reproduce:
    0x1002d878 and loads ``[ecx+0x46]``; the compiler instead folds the first
    stride into the pointer (``mov ecx,0x1002d8be``) and loads ``[ecx]``.
 
-Kept as the fenced-naked placeholder (byte-identical, EXACT 69/69): see the
-"tiny asm" allowance.  The same two patterns are worth checking in other
-table-search helpers before attempting C.
+Historical fence, EXACT 69/69 at that checkpoint; not current assembly permission
+([assembly audit](assembly-audit.md#what-qualifies)). The two load patterns above
+are the observation to retest.
 
 ## Finding 16: three new blocker patterns (cm_* family)
 
@@ -2160,7 +2134,7 @@ table-search helpers before attempting C.
   (`mov eax,[esp+4]`) before the frame setup and materialize `cmd+0x10` into a
   second callee-saved register.  The flag sweep cannot help: `rebrew match run
   --flag-sweep-only` crashes on the Capstone CS_ERR_DETAIL bug (same as
-  `rebrew diff -r`).  Kept fenced-naked.
+  `rebrew diff -r`).  Historical fence only; not current permission.
 
 - **cm_ExModifyStat (0x100100a0): FPU re-compare.**  The reference clamps a
   float with a convoluted FPU sequence that *re-compares* `_g_stat_max` at the
@@ -2169,8 +2143,7 @@ table-search helpers before attempting C.
   (simple clamps, nested ifs, empty else, `else if (x >= max)`) make MSVC6
   reuse the first compare's flags instead of re-comparing.  The FPU flag
   decode (`test ah,1` = C0 = ST0<op; `test ah,0x41` = C0|C3 = ST0<=op) is
-  standard, but the block layout is not reproducible from C.  Kept
-  fenced-naked.
+  standard, but those five shapes did not reproduce the re-compare.  Historical fence only; not current permission.
 
 - **cm_GetBuildingStatCount (0x100104a0): arg-register + zero-extend order.**
   The reference's prologue is `mov edx,[esp+4]; xor ecx,ecx; push ebx; push
@@ -2181,7 +2154,7 @@ table-search helpers before attempting C.
   result chains compile to branchless `dec/neg/sbb/and/add` selects instead
   of the reference's explicit `mov eax,imm; cmp; jne` branches.  The
   zero-extend-timing and select-vs-branch choices are both allocator
-  liveness decisions (see Finding 12's mechanism).  Kept fenced-naked.
+  liveness decisions (see Finding 12's mechanism).  Historical fence only; not current permission.
 
 - **gm_FindEntityByOwner (0x10019c60): callee-saved pair order.**  The
   reference keeps `owner` in edi and the loop counter in esi (`push edi;
@@ -2190,7 +2163,7 @@ table-search helpers before attempting C.
   result-variable init, signed/unsigned casts) puts `owner` in esi and the
   counter in a volatile register, one callee-saved fewer, and the
   `owner==0` return becomes a jump-to-tail instead of the reference's inline
-  fall-through.  Kept fenced-naked.
+  fall-through.  Historical fence only; not current permission.
 
 - **cm_ExClearLagerslot (0x1000e690): address-taken param value-copy.**
   The reference passes `&cmd` (the param slot) to gm_ResolveEntityById yet
@@ -2200,7 +2173,7 @@ table-search helpers before attempting C.
   esi copy, and reloads the slot after the resolve.  Passing a *different*
   param's address (&result) keeps the simple prologue but the arg order then
   mismatches the reference (the resolve genuinely targets the cmd slot).
-  Kept fenced-naked.
+  Historical fence only; not current permission.
 
 ## Finding 17: signed `-1` byte compares materialize 0xff via `or reg,0xff`
 
@@ -2244,7 +2217,7 @@ MSVC6 emit the simpler `rep stosd; rep stosb` form without the alignment
 pass, keep the size in a register, and skip the frame.  The alignment pass
 is the compiler's response to an *opaque* destination+size pair with a
 potentially large size; the register-reuse that forces the spill is an
-allocator scheduling choice.  Kept fenced-naked.
+allocator scheduling choice.  Historical fence only; not current permission.
 
 Correction (2026-09-09): "every C shape ... keeps the size in a register" is
 too strong for the destination half.  Reading the stored global back through a
@@ -2346,11 +2319,11 @@ rotated with a duplicated compare; the combined `while (i < count &&
 p[i].block != b)` condition reproduces the reference's straight
 `cmp/jl` back-edge) and the global-load hoisting (reading g_count1 into a
 temp before the count/pool loads, then storing g_count1-1 last, matches
-the reference's three-hoisted-loads order).  Kept fenced-naked.
+the reference's three-hoisted-loads order).  Historical fence only; not current permission.
 
 ## Finding 21: the `?:` flag chain splits only in sibling-specific register contexts
 
-`amt_UpdateEntityLinks (0x1000ba30): best C 170/179, kept fenced-naked`.  The
+`amt_UpdateEntityLinks (0x1000ba30): best C 170/179, historical fence only; not current permission`.  The
 match branch stores `b[0] = -1; b[4] = -1; b[3]byte = (gword > 0xb) ? 4 : 3;
 b[2] = 0; result |= 1`.  The reference emits the flag chain *split* around the
 first store: `seta cl; mov [eax-0x10],-1; add ecx,3; mov [eax],-1;
@@ -2371,7 +2344,7 @@ form (`cmp dl,[ebp+0x168]`), but the reference loads it into cl
 needs a scheduler behavior 8168 exhibits in neither mode.  All other 170
 bytes match (arg1-based semantics: `mov ebp,[esp+0x10]` after `push esi` is
 *a reload of arg1*, not arg2; the `b+4 < bound` / `b+1 < bound` loop-bound
-idiom from Finding 20 applies).  Kept fenced-naked.
+idiom from Finding 20 applies).  Historical fence only; not current permission.
 
 ## Finding 22: amt_SwapOfficeHolders (0x1000b880): register-name residue (264/263)
 
@@ -2400,8 +2373,7 @@ Key discoveries along the way (all required for 264):
   flags /G3–/G6 /GB /O1 /Og /Ox do not change the ebx/ebp assignment.
 
 The remaining 8-byte residue is a pure allocator register-preference quirk
-(ebp for the entry parameter vs ebx) with no C-shape lever found.  Kept
-fenced-naked.
+(ebp for the entry parameter vs ebx) in the spellings above.  Historical fence only; not current permission.
 
 ## Finding 23: amt_ValidateOfficeCandidate (0x1000b1c0): fail-block sinking + loop rotation
 
@@ -2425,7 +2397,7 @@ Additional notes: the `i >= 30` check after each found-exit is provably
 dead (the loop bound 0x101de870 = base + 30*0x18) but kept; the slot base is
 folded into the memory operands (`[eax + 0x101de5a4]` etc.): writing the
 slot as `(char*)0x101de5a0 + i*24 + off` reproduces the `lea i*3; shl 3`
-index form.  Kept fenced-naked.
+index form.  Historical fence only; not current permission.
 
 ## Finding 24: ahm_ClampFloatValue (0x1000c3c0): three FPU return blocks
 
@@ -2456,7 +2428,7 @@ branch polarity and block order (`jne` max at 0x42, `je` min at 0x31), and
 it still stores via `mov`. In-tree best remains the original 64/83.
 
 The three-way split with the early `mov eax,1` is a scheduler+block-layout
-choice 8168 makes in neither mode.  Kept fenced-naked.
+choice 8168 makes in neither mode.  Historical fence only; not current permission.
 
 ## Finding 25: m_pool_free (0x10006e30): block param register + fatal placement
 
@@ -2472,7 +2444,7 @@ ifs, combined `||` with the p-load hoisted (which does sink the fatal but
 speculatively loads `*(hdr)` before the hdr==0 test), assignment-in-
 condition (correct load order but inline fatal), named lo/hi temps, a blk
 local, /G6, all normalize to the same 133B.  The fatal-sink and the
-load-order are mutually exclusive in this compiler.  Kept fenced-naked.
+load-order are mutually exclusive in this compiler.  Historical fence only; not current permission.
 
 ## Finding 26: sim_PriorityUpdate (0x10015400): frame vs arg-slot reuse
 
@@ -2486,7 +2458,7 @@ prep without allocating the frame; /O1 switches to a frame pointer.  The
 rest of the function (byte arg zero-extend into ecx for `table_lookup`,
 unsigned word compare with `jae`, byte `>0` guard + decrement of the old
 entity, `ctx->0x170` reassignment, `entity[0x65]++`) matches byte-for-byte.
-Kept fenced-naked.
+Historical fence only; not current permission.
 
 ## Finding 27: sim_StartEntityQueryByType (0x10015460): callee-saved roles
 
@@ -2499,7 +2471,7 @@ chain the same way but into eax, and emits `push 0` for the first branch's
 arg3.  Type/base temps, /G6, and the natural forms all normalize to the
 same 130B.  The type*589 index chain (lea 3t; shl 4; +t; lea *3; lea
 [base+*4]) and the four `gm_ff_Objekt(v,1,0,code)` dispatch calls
-match.  Kept fenced-naked.
+match.  Historical fence only; not current permission.
 
 ## Finding 28: sim_AdvanceGameClock (0x100155c0): arg4 preserve vs reload
 
@@ -2510,7 +2482,7 @@ pushes ebx/esi/edi (three pushes, 18 bytes larger).  The signed /60 magic
 (0x88888889 imul + sar 5), the unsigned /24 magic (0xaaaaaaab mul + shr 4),
 the `h - days*24` strength-reduced modulo, and both day-rollover loops
 match; /G6 reorders the prologue without changing the register count.
-Kept fenced-naked.
+Historical fence only; not current permission.
 
 ## Finding 29: gm_CleanupObjectEntities (0x10015cf0): SIB base/index roles
 
@@ -2524,7 +2496,7 @@ Operand-order swaps in the C (`array+i` vs `i+array`), /G6, and a named
 moffs form) do not change the SIB roles.  Everything else (the loop
 structure, the gm_ResolveEntityById out-param chain (c→+0x5d, b→+0x14,
 a→+0x178), the free path, and the final rep stosd memset) matches.
-Kept fenced-naked.
+Historical fence only; not current permission.
 
 ## Finding 30: gm_CheckEntityType (0x10017ab0): lea vs folded table load
 
@@ -2535,7 +2507,7 @@ into the load's SIB (`mov al,[edx+eax*4]`), 2 bytes shorter.  Pointer
 variables, split `base + type + type*588` expressions, idx temps, and /G6
 do not prevent the fold.  The 7-way `== 0xb/0xd/0xc/0x10/0x1c/0x1d/0x1f`
 compare chain, the type*589 lea chain, and the null-arg return (which
-naturally returns eax=0 without an xor) match.  Kept fenced-naked.
+naturally returns eax=0 without an xor) match.  Historical fence only; not current permission.
 
 ## Finding 31: ahm_ProcessEntityChain (0x1000ca00): do-while inversion
 
@@ -2548,8 +2520,7 @@ post-loop-ok-test structures all trigger the inversion.  The handler
 dispatch (`call [eax*4+0x1002c5a0]` with the byte index zero-extended via
 `and eax,0xff`), the two walk-and-set paths (set-2 sets every node, set-1
 only the final type-6 node), and the byte-compare `cmp al,6` (avoid a
-`t` temp: it forces a pre-zero + full-register compare) match.  Kept
-fenced-naked.
+`t` temp: it forces a pre-zero + full-register compare) match.  Historical fence only; not current permission.
 
 ## Finding 32: cm_GetBuildingStatCount (0x100104a0): branchless if-conversion + lea fold
 
@@ -2562,7 +2533,7 @@ Best C is 133 bytes vs 135 target.  Two residue patterns:
    (`mov al,[esi+eax*4+0x247]`) where the reference materializes it
    (`lea eax,[esi+eax*4]; mov al,[eax+0x247]`): the Finding 30 fold.
    Statement order matters: the index chain must precede the obj
-   (`cmd+0x65`) load to match the reference's scheduling.  Kept fenced-naked.
+   (`cmd+0x65`) load to match the reference's scheduling.  Historical fence only; not current permission.
 
 ## Finding 33: cm_ChkMoveCredits (0x1000cb20): arg3-lea hoist (3 bytes)
 
@@ -2572,8 +2543,7 @@ address lea above the `*(arg1+0x14)=r` store (computed at an earlier esp,
 arg4 push regardless of C structure (pc/pa/pb temps, declaration order,
 statement order).  The unsigned-char `gm_QueryEntitySum` 2nd param (byte
 passed raw in cl: declaring it `unsigned char` stops the zero-extension)
-and the `sum - limit < 0` form (sub + jns back-edge) match.  Kept
-fenced-naked.
+and the `sum - limit < 0` form (sub + jns back-edge) match.  Historical fence only; not current permission.
 
 ## Finding 34: cm_ExChangeFloat (0x1000eb70): offset-register role
 
@@ -2583,7 +2553,7 @@ MSVC6 8168 puts it in ecx, emitting `[eax+ecx*1]` (SIB), a
 register-role difference, plus the Finding 33 arg3-lea hoist residue.
 The GetFieldByType/ResolveEntityById chain, the c?a:b selection, the
 `+=` float add with `fld; fadd; add; fstp`, and the result-byte store
-otherwise match.  Kept fenced-naked.
+otherwise match.  Historical fence only; not current permission.
 
 ## Finding 35: cm_ExModifyStat (0x100100a0): FPU re-compare fold
 
@@ -2594,7 +2564,7 @@ emitting the tighter if-converted clamp (13 bytes shorter).  The
 `mov [esp+0x10],edx; fild [esp+0x10]` int→double spill, the byte stat
 read/`+`/store, and the `__ftol` conversion otherwise match.  The
 `if (f < a4) { if (f <= cc) f = cc; } else { f = a4; }` form is the
-closest; per-branch stores over-shoot (180B).  Kept fenced-naked.
+closest; per-branch stores over-shoot (180B).  Historical fence only; not current permission.
 
 ## Finding 36: cm_ExAllocThemaPredigt (0x1000f2f0): add-edi fold + dead-store elimination
 
@@ -2607,14 +2577,14 @@ destination, overwritten).  MSVC6 8168 folds the add back into
 base+offset addressing on each access (saving the 3-byte `add` + the
 separate `lea ecx,[esi+0x1c]` dst pointer is also folded) and eliminates
 the dead store entirely.  Both differences are optimizer strength
-reductions that no C shape prevents: any `base += 0x18` formulation
+reductions that the `base += 0x18` formulations above did not prevent: any such formulation
 flips esi/edi register roles (the two pointer temps spill), and the
 dead store is only preserved by pointer-alias hiding which the GRA
 resolves.  The prologue offsets 0-63, the
 gm_GetFieldByType/gm_AllocObjekt calls, the interleaved
 LogMessageInternal arg pushes, the `type*2507364` table store
 (`lea edx,[eax+eax*8]; mov [edx*4+0x10442d08],eax2`), the `ent+0x12=0x40`
-and the result-byte stores all match.  Kept fenced-naked
+and the result-byte stores all match.  Historical fence only; not current permission
 (`REBREW_ALLOW_NAKED`).
 
 ## Finding 37: cm_ExMoveObjekt (0x1000e530): node-spill fixed point + store1 address form
@@ -2648,7 +2618,7 @@ Everything else matches byte-for-byte: the prologue offsets, all three
 GetFieldByType/ResolveEntityById call sequences (including the call-1
 lea round-robin (ecx,edx,eax) and call-2 (eax,ecx,edx)), both entity
 selections (src/dst via 0x5d/0x14/0x178), the `cmp [ecx+8]` scan, the
-unlink, and the attach stores.  Kept fenced-naked (`REBREW_ALLOW_NAKED`).
+unlink, and the attach stores.  Historical fence only; not current permission (then under `REBREW_ALLOW_NAKED`).
 
 ## Finding 38: cm_ExChangeAttribute (0x1000e7d0): loop register-pairing swap
 
@@ -2675,7 +2645,7 @@ offset walk with the zero-extend scheduled between the increments; the
 `unsigned n` + `while (n > 0)` form (emits `test; jbe`); and all three
 add-to-memory inner loops (only reachable when the entity/dst2 split
 keeps the entity in edi and the loop has no free scratch register).
-Kept fenced-naked (`REBREW_ALLOW_NAKED`).
+Historical fence only; not current permission (then under `REBREW_ALLOW_NAKED`).
 
 ## Finding 39: cm_ExChangeBits (0x1000eaa0): pre-resolve field store materialization
 
@@ -2702,7 +2672,7 @@ What matches byte-for-byte modulo the head: the folded resolve leas
 (switch on size {1,2,4}), the size1 byte-temp form
 (`bVar4 = *puVar3 & ~*(char*)(base+0x20)` with byte not/and/or), the
 size2 in-place `and word ptr [eax],cx` + reload, the size4 dword
-pattern, and the result-byte store.  Kept fenced-naked
+pattern, and the result-byte store.  Historical fence only; not current permission
 (`REBREW_ALLOW_NAKED`).
 
 ## Finding 40: cm_ExChangeDesire (0x1000e9c0): family store materialization + FPU clamp
@@ -2723,7 +2693,7 @@ the loop's `lea ecx,[eax+eax*2+0x24]; shl ecx,2` stat-index chain
 (`entity + (idx*3+0x24)*4`), the `fld [edx]; fadd [ecx+eax]; fstp`
 in-place add, the entity reload from the cmd slot each iteration, the
 unsigned count guard (jbe), the ebx counter with per-iteration count
-reload, and the result-byte store.  Kept fenced-naked
+reload, and the result-byte store.  Historical fence only; not current permission
 (`REBREW_ALLOW_NAKED`).
 
 ## Finding 41: cm_ExRemoveLinkedObject (0x1000f0d0): prologue scheduling
@@ -2746,7 +2716,7 @@ marks, and the node-id reads at `cmd+0x14` / `cmd+0x18` must use a
 resolved entity (never 0 in the p1/p2 branches, so using it would fold
 `*(0+0x18)` into an absolute load).  The -2 (query empty), -1 (no
 entity), 0 (success) and q (remove result) return paths all match.
-Kept fenced-naked (`REBREW_ALLOW_NAKED`).
+Historical fence only; not current permission (then under `REBREW_ALLOW_NAKED`).
 
 ## Finding 42: cm_ExClearLagerslot (0x1000e690): family store materialization (short* base)
 
@@ -2763,7 +2733,7 @@ the `*cmd == 0x2a || *cmd == 0x116` word compare, the
 call with the `xor edx,edx; mov dx,[esi+0x14]` zero-extend, the
 `*(int*)(puVar3+7) != 1` count check, the
 `gm_RemoveObjectByType((char**)(cmd+10), ...)` call, and the shared
-log-return-1 tail.  Kept fenced-naked (`REBREW_ALLOW_NAKED`).
+log-return-1 tail.  Historical fence only; not current permission (then under `REBREW_ALLOW_NAKED`).
 
 ## Finding 43: cm_ExSetAttribute (0x1000e8d0): loop-head offset-read scheduling
 
@@ -2783,7 +2753,7 @@ ebp, `mov [ebp+0x10],eax` folded store BEFORE the resolve), the resolve
 lea round-robin, the deferred ebx/edi pushes, the selection into edi,
 the count guard (jbe), the dec-chain dispatch, and all three inner
 STORE loops (`mov [ecx],edx`: set, not accumulate; the twin of
-cm_ExChangeAttribute's add loops).  Kept fenced-naked
+cm_ExChangeAttribute's add loops).  Historical fence only; not current permission
 (`REBREW_ALLOW_NAKED`).
 
 ## Finding 44: gv_UpdateProductionProgress (0x10011790): arg-order + sum-register fixed points
@@ -2809,7 +2779,7 @@ remain:
    first into ecx, copied to edx, the dword into ecx, and the sum in
    ecx; every C lands the dword load first and the sum in edx.
 
-Kept fenced-naked (`REBREW_ALLOW_NAKED`); the 203/242 C is preserved
+Historical fence only; not current permission (then under `REBREW_ALLOW_NAKED`); the 203/242 C is preserved
 in the #else fallback.
 
 ## Finding 45: gv_ActivateGraveyardSection (0x10011660): error-block placement
@@ -2830,8 +2800,8 @@ local respectively).  Two layout fixed-points remain:
    compiled (`pop edi; mov [esi+0x1a],cl; ...`) vs after in the
    reference.
 
-The -2 (type-check) return inlines correctly in both.  Kept
-fenced-naked (`REBREW_ALLOW_NAKED`); the 275/306 C is preserved in the
+The -2 (type-check) return inlines correctly in both.  Historical fence only; not current permission
+(then under `REBREW_ALLOW_NAKED`). The 275/306 C is preserved in the
 #else fallback.
 
 ## Finding 46: gv_GetSlotEntry (0x100105b0): shared return-0 epilogue
@@ -2848,7 +2818,7 @@ inverted conditions).  The size must be re-read from `*(a+4)` at each
 site (a `size` local forces a second callee-saved push).  The
 per-path c-limits (b=0: 8/0xc/0x10, b=1: 4/6/8, b=2: size1 invalid +
 2/4, b=3: size1/2 invalid + 2) and the `c*20` index chain otherwise
-decode cleanly.  Kept fenced-naked (`REBREW_ALLOW_NAKED`); the C is
+decode cleanly.  Historical fence only; not current permission (then under `REBREW_ALLOW_NAKED`); the C is
 preserved in the #else fallback.
 
 ## Finding 47: FindSlotEntryFiltered (0x10010710): walk in the parameter, not a local
@@ -2912,7 +2882,7 @@ Conclusion: the reference build emitted function-level saves (both
 epilogues pop all four), our toolchain emits region-local saves; this
 divergence is a compiler-build behavior, same class as the
 gm_NextEntityQueryMatch blocker (declared unreproducible across all
-available compilers).  Kept fenced-naked; C preserved in #else.
+available compilers).  Historical fence only; not current permission; C preserved in #else.
 
 Best C is 291/370 positional (5+ formulations).  The entire body decodes
 and matches: the `dword_100a8c30 + (uchar)*a * 589` type check (field
@@ -2931,7 +2901,7 @@ success gate) is required: the early-`return 0` form degrades to inline
 `xor eax,eax; ret` per guard (56/370) and `goto fail` inlines the ret too.
 The `(float)gm_RandomMod(8) & 0xffff` float-chain (`fild; fmul 21.0; fadd
 42.0; __ftol`) and the `do { j++; store[j+0x23]; } while (j < 5)` rotation
-both byte-match.  Kept fenced-naked; C preserved in #else.
+both byte-match.  Historical fence only; not current permission; C preserved in #else.
 
 **Amended (2026 campaign): deferred saves also decide the frame size.**
 `CrashDumpUnhandledExceptionFilter` (0x10002770) is the same mechanism measured
@@ -2978,7 +2948,7 @@ fill, and the `gm_AddObjekt` call.  The blocker is the nested
 reference keeps the counter in esi and the base-offset in edi and reloads
 the running slot pointer `p` from the reused arg-3 stack slot each outer
 iteration.  A named `zero` variable and a `q = p - base` offset both fail
-to stop the elimination.  Kept fenced-naked; C preserved in #else.
+to stop the elimination.  Historical fence only; not current permission; C preserved in #else.
 
 ## Finding 50: gv_AllocGraveyardField (0x100109d0): alloc/field-init loop allocation
 
@@ -3485,8 +3455,9 @@ On `gm_ObjectsAvailble` (0x10015f70) the (row, base, inner) triple homes as
 bytes and `base` shared in edx on both sides: only the three outer homes
 rotate. Declaration order, local removal, pressure pads, and volatile-homing
 each member are all inert or worse (volatile row/inner collapse the function).
-The IL is isomorphic; the colorer assigns homes the source cannot name. When
-a triple rotates with an identical kernel, stop: no C spelling reaches it.
+The IL is isomorphic. Declaration order, local removal, pressure pads, and
+volatile-homing were inert or worse on this triple. That is the measured set,
+not a proof that no later spelling can move it.
 
 ## Finding 63: slot homes are canonicalized; live-set cardinality does not move them (round 361)
 
@@ -3729,11 +3700,10 @@ identical every time.**
 | use multipliers in the tail (`1,2,3` / `3,2,1` / `2,3,1`) | identical |
 | a call placed before the initialisers instead of only inside the loop | identical |
 
-So the assignment is not steered by declaration order, first use, use weight, or
-initialiser position: it is a **deterministic function of the value count and the call
-pressure**, which is a stronger statement than "unsteerable" and is the one to quote: for
-three call-crossing accumulators in this shape, MSVC6 SP6 *always* homes them `ebp, ebx,
-edi` in that order.
+In this SP6 testbed, declaration order, first use, use weight, and initialiser
+position did not move the homes. For three call-crossing accumulators in the
+listed shape, every permutation homed them `ebp`, `ebx`, `edi` in that order.
+That is the testbed result, not a rule to quote for every function.
 
 **Cardinality is the variable that does move it.** With four accumulators the zeroing
 becomes `xor edi,edi` / `xor ebp,ebp` / `xor ebx,ebx`: a different order, and `esi` takes a
@@ -3742,9 +3712,9 @@ rule evaluated at a different live-set size, not noise and not a colourer whim.
 
 **Consequence for the walled rows, and why this does not close them.** If the reference
 homes a triple `(ebx, edi, esi)` where we home `(esi, ebx, edi)` at the *same* cardinality,
-the difference is upstream of the homes: cardinality, call pressure, or the kernel, and
-the sweep above says no source-level naming reaches it. This is the mechanical form of
-Finding 62's "stop: no C spelling reaches it". Recorded so the invariant is not re-swept.
+the difference is upstream of the homes: cardinality, call pressure, or the kernel.
+The sweep above says the listed namings did not reach it. Recorded so that
+testbed is not re-swept as if it were unmeasured.
 
 Probe recipe: `.scratch/epi/b2.sh` (one `cl` call through the msvc6 image) plus
 `objdump -d | grep 'xor +%e'`. Three accumulators around a `sink(i)` call reproduce the
@@ -3795,8 +3765,8 @@ the reference's `(ebx, edi, esi)`. Disassembled its prologue: `esi` there holds 
 of a local array** (`mov dword ptr [esp+0x18],0x92` … `call gm_StartFilteredEntitySearch`),
 not a walking pointer and not a loop counter. So the competition this finding describes is
 not the one operating in that function. Do not cite this finding as the cause of the
-`gm_ObjectsAvailble` rotation; the mechanism there is still unidentified, and Finding 62's
-"stop: no C spelling reaches it" continues to stand on its own measurement.
+`gm_ObjectsAvailble` rotation. That mechanism was still unidentified in round 847.
+Finding 62 records the probes that were inert there, not a permanent stop.
 
 **Negative result worth keeping:** the number of `push` instructions is **5 for every n from
 1 to 6**: the compiler always saves the same set and never grows it. Counting pushes is
@@ -4059,7 +4029,7 @@ A future round reading the older paragraph would chase a frame mismatch that no 
 ## Finding 71: CrashDump's register roles hinge on one priority comparison; stack slots follow references per byte (round 1145, traced in c2)
 
 Traced under `winedbg --gdb` with a private wineprefix (a compile takes about 2 s instead of 28 s on
-the shared docker lock; tracer scripts kept under `.scratch/c2trace-crashdump/`, gitignored).
+the shared toolchain lock; tracer scripts kept under `.scratch/c2trace-crashdump/`, gitignored).
 
 - **Register roles.** In the current source the `WriteFile` import node has priority 102 and `nInstr`
   148. Once `WriteFile` ranks higher, c2 reproduces 10 of the 11 tracked reference roles (CreateFileA

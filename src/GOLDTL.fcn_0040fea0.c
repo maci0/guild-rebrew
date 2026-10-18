@@ -39,8 +39,14 @@ void __cdecl fcn_00454460(int a, float* b, int c, int d, int tag, float e, Buf40
 /* The 24-byte fill is the hand-written alignment prelude (lea ecx,[edi+edi*2]
  * / and 3 / sub ebx,ecx / jle / rep stosb / rep stosd / rep stosb). A plain
  * memset emits only two reps. Same block as m_init. */
+union word4 {
+	int* p;
+	unsigned char b[4];
+	int bits;
+};
+
 #pragma optimize("y", off)
-void __cdecl fcn_0040fea0(union { int* p; unsigned char b[4]; int bits; } u, int* a1, int* a2, int* a3, int* a4, unsigned char* a5, unsigned char* a6)
+void __cdecl fcn_0040fea0(union word4 u, int* a1, int* a2, int* a3, int* a4, unsigned char* a5, unsigned char* a6)
 {
 	int len;
 

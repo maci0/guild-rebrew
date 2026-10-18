@@ -29,7 +29,7 @@ typedef struct {
 // SIZE 0xc98
 
 extern char* g_6b7e94;
-extern int g_6b7fdc;
+extern struct VFS_DIR* g_6b7fdc;
 extern int g_14cb430;
 extern int g_14c93a0[0x800];
 extern int g_6b8010;
@@ -37,12 +37,12 @@ extern int g_6791c8;
 extern int g_6791cc;
 extern char g_6790c8[];
 
-void *__cdecl fcn_0042ff50(char *, char *, int);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 #include "Develop/Units/Error/error_message.h"
-int __cdecl CloseVfsStream(void *);
+#include "Develop/Units/vfs/vfs.h"
 char *__cdecl m_alloc(int, char *);
-int __cdecl vfs_ReadData(char *, int, int, void *);
+int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 int __cdecl fcn_00426ac0(char *, char *, int *);
 void __cdecl m_FreeTracked(void *);
 

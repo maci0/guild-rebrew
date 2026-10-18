@@ -1,7 +1,7 @@
-int __cdecl fcn_00401180(int, int);
+int __cdecl fcn_00401180(void* stream, void* dst);
 
 /* ADDRESS: GOLD 0x004011a0 */
-int __declspec(naked) __cdecl fcn_004011a0(int stream, int text)
+__declspec(naked) char* __cdecl fcn_004011a0(void* stream, char* text)
 {
 	(void)stream; (void)text;
 	__asm {

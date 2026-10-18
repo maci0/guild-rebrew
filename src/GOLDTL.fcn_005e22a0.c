@@ -55,8 +55,7 @@ extern unsigned char g_6b8304;
 
 void __cdecl fcn_00516de0(int, int);
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_0043ac00(int, int, int);
-void __cdecl fcn_00439690(unsigned char, int, unsigned char, int, int);
+#include "client_scene_loader.h"
 void __cdecl fcn_00403330(unsigned char);
 void __cdecl fcn_0052ac60(int);
 void __cdecl fcn_0043bbf0(unsigned char);

@@ -28,6 +28,6 @@ int __cdecl fcn_0040de40(char** a, char** b)
 	v[2] = 0.0f;
 	fcn_00455140(*b, g_662d40, c);
 	v[1] = fcn_00451380(g_662d40, c);
-	fcn_00438cb0(*(int*) (*a + 0x34), v);
+	fcn_00438cb0(*(char**) (*a + 0x34), v);
 	return 0;
 }

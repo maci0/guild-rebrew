@@ -46,7 +46,7 @@ int __cdecl gv_CheckSlotActive(void* slot, int type)
 
 
 extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 {
 	if (*(int*) ((char*) worker + 4) < 1 || *(int*) ((char*) worker + 4) > 3)
@@ -95,7 +95,7 @@ void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 	}
 	return 0;
 }
-
+#endif
 /* Client-only slot helpers (the Gold T&L client's friedhof order).  No server
  * function calls them, so /OPT:REF discards them; their absolute fixups still
  * count toward LINK's .reloc reservation. */
@@ -212,7 +212,7 @@ extern int __cdecl cm_GetBuildingStatCount(unsigned char* entity);
  * The slot list is selected by type (0..3) or derived from the building
  * stats for type 0xff.  Returns the first slot for which the filter
  * returns non-zero, or NULL. */
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor, void* filter, int type)
 {
 	unsigned char* entry;
@@ -278,7 +278,8 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
 	}
 	return 0;
 }
-
+#endif
+void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor, void* filter, int type);
 /* Client-only: the first slot of the building holding worker `entity`
  * (discarded, like the helpers above). */
 void* __cdecl gv_FindWorkerSlot(void* building, int* entity)
@@ -536,7 +537,7 @@ void __cdecl gv_Free3Fields(int* slot);
  *     `* 0x14`, which fixes both the SIB base/index roles and the order of the
  *     preheader's two initializations.
  */
-
+#if defined(REBREW_SERVER)
 int __cdecl gv_UpgradeField(unsigned char* field)
 {
 	unsigned char* entry;
@@ -691,13 +692,13 @@ int __cdecl gv_UpgradeField(unsigned char* field)
 fail:
 	return 0;
 }
-
+#endif
 
 extern void __cdecl m_FreeTracked(void* ptr);
 
 /* Frees a 3-field slot: releases the two tracked pointers at
  * +0x1c and +0x20 (if set), then the slot itself. */
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 void __cdecl gv_Free3Fields(int* slot)
 {
 	if (slot == 0)
@@ -712,7 +713,7 @@ void __cdecl gv_Free3Fields(int* slot)
 	}
 	m_FreeTracked((void*) slot);
 }
-
+#endif
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
@@ -891,7 +892,7 @@ extern int __cdecl gm_AddObjekt(int a, int b, int c);
 /* Extends a production slot's remaining time: resolves the building's
  * entity, verifies the grave slot, then adds the building's production
  * time to the slot and accumulates the produced goods. */
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl gv_ExtendProductionTime(void* building)
 {
 	void* entity;
@@ -946,7 +947,7 @@ int __cdecl gv_ExtendProductionTime(void* building)
 	}
 	return -1;
 }
-
+#endif
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
@@ -954,7 +955,7 @@ extern unsigned short* g_entity_table_end; /* 0x1003546c */
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
-
+#if defined(REBREW_SERVER)
 int __cdecl gv_ReplaceProductionWorker(void* a)
 {
 	void* rec;
@@ -998,7 +999,7 @@ int __cdecl gv_ReplaceProductionWorker(void* a)
 	*(int*) ((char*) slot + 4) = owner_id;
 	return 0;
 }
-
+#endif
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
@@ -1008,7 +1009,7 @@ extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** 
 /* Validates and activates a graveyard section: resolves the section's
  * entity, checks the grave slot is a free graveyard field, then enables
  * the production slots of the worker array for the section's field type. */
-
+#if defined(REBREW_SERVER)
 int __cdecl gv_ActivateSection(void* cmd)
 {
 	void* entity;
@@ -1069,7 +1070,7 @@ int __cdecl gv_ActivateSection(void* cmd)
 	}
 	return -1;
 }
-
+#endif
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
@@ -1077,7 +1078,7 @@ extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl gv_UpdateProductionProgress(void* building)
 {
 	void* entity;
@@ -1125,14 +1126,14 @@ int __cdecl gv_UpdateProductionProgress(void* building)
 	}
 	return -1;
 }
-
+#endif
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_SpawnEntities(void* building, int count);
-
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl gv_ValidateEntityAction(void* cmd)
 {
 	void* entity;
@@ -1157,7 +1158,7 @@ int __cdecl gv_ValidateEntityAction(void* cmd)
 	}
 	return -1;
 }
-
+#endif
 
 extern unsigned short* g_entity_table_end;
 extern int g_next_object_id;
@@ -1593,7 +1594,6 @@ float __cdecl gv_GetUpgradeBonus(char* graveyard)
 	}
 	return sum * 0.0125f;
 }
-
 /* Client-only: whether a graveyard (kind 0x1d) has room for another
  * gravedigger; *count gets the current number (discarded). */
 int __cdecl gv_HasGravediggerRoom(unsigned char* building, int* count)

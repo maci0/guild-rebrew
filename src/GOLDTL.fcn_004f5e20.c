@@ -43,7 +43,6 @@ int __cdecl fcn_004f5e20(int target, int max)
 	char* p;
 	int flag[8];
 	char* who[8];
-	char* q;
 	int m;
 	int j;
 	int k;

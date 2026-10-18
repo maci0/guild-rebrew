@@ -44,7 +44,6 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 Task* __cdecl fcn_0040c0a0(char* e);
-void __cdecl fcn_004079d0(Task* t);
 
 
 

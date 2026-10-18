@@ -7,23 +7,23 @@ extern VFS_DIR* g_6b7fdc;
 extern char g_6750e8[];
 extern char g_6a23b0[];
 
-int __cdecl fcn_0042ff50(char*, char*, int);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned char* __cdecl m_alloc(int, char*);
-int __cdecl ls_ReadVfsDataChecked(void*, int, int, int);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 unsigned short __cdecl fcn_0041bac0(unsigned char, unsigned char, unsigned char);
 void __cdecl m_FreeTracked(void*);
-void __cdecl CloseVfsStream(int);
+#include "Develop/Units/vfs/vfs.h"
 
 void __cdecl fcn_005e3fa0(char* name)
 {
-	int fh;
+	void* fh;
 	unsigned char* buf;
 	int n;
 	int x;
 	int y;
 
 	n = 0;
-	fh = fcn_0042ff50(name, g_6750e8, (int) g_6b7fdc);
+	fh = fcn_0042ff50(name, g_6750e8, g_6b7fdc);
 	if (fh != 0) {
 		buf = m_alloc(0xe100, g_6a23b0);
 		ls_ReadVfsDataChecked(buf, 0xe100, 1, fh);

@@ -9,9 +9,9 @@ typedef struct Vert {
 	float rest[3];
 } Vert;
 
-void __cdecl fcn_004011d0(int, void*);
+int __cdecl fcn_004011d0(void* stream, void* dst);
 
-void __cdecl fcn_0044e000(int r, char* o)
+void __cdecl fcn_0044e000(void* r, char* o)
 {
 	int i;
 

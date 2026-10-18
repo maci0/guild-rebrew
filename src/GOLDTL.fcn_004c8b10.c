@@ -32,21 +32,21 @@ int __cdecl fcn_004c8b10(char* x, char* out)
 		q += 2;
 		switch (type) {
 		case 1:
-			for (j = 0; j < n; j++) {
+			for (j = 0; j < (unsigned int)n; j++) {
 				*d = *q;
 				d++;
 				q++;
 			}
 			break;
 		case 2:
-			for (j = 0; j < n; j++) {
+			for (j = 0; j < (unsigned int)n; j++) {
 				*(short*) d = *(short*) q;
 				d += 2;
 				q += 2;
 			}
 			break;
 		case 4:
-			for (j = 0; j < n; j++) {
+			for (j = 0; j < (unsigned int)n; j++) {
 				*(int*) d = *(int*) q;
 				d += 4;
 				q += 4;

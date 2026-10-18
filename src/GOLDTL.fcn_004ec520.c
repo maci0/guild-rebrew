@@ -18,7 +18,7 @@ extern Rec18_68da68 g_9a9220[42];
 extern char g_68de84[];
 
 void __cdecl srv_LogWinsockError(void);
-int __cdecl ls_ReadVfsDataChecked(void* p, int size, int n, void* file);
+#include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 int __cdecl fcn_004ec520(void* file, int version)
 {
@@ -35,7 +35,7 @@ int __cdecl fcn_004ec520(void* file, int version)
 	if (!ls_ReadVfsDataChecked(&cnt, 4, 1, file)) {
 		return 0;
 	}
-	if (cnt != n) {
+	if ((unsigned int)cnt != n) {
 		sprintf(buf, g_68de84, cnt, 0x2a);
 		return 0;
 	}

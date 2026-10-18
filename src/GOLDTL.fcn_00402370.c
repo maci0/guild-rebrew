@@ -34,7 +34,7 @@ __declspec(dllimport) int __stdcall closesocket(int);
 
 /* Listens on the UDP port for server announcements until the timeout
  * expires or max hosts are listed; returns the host count. */
-int __cdecl fcn_00402370(unsigned short port, unsigned long timeout, Host* out, int max)
+int __cdecl fcn_00402370(unsigned short port, unsigned long timeout, Host* hosts, int max)
 {
 	char wsa[0x190];
 	char buf[0x100];
@@ -60,7 +60,7 @@ int __cdecl fcn_00402370(unsigned short port, unsigned long timeout, Host* out, 
 		len = max << 7;
 		/* Block-fill prelude no msvc6 C spelling emits (docs/codegen-walls.md 6b). */
 		__asm {
-			mov edi, out
+			mov edi, hosts
 			mov ebx, len
 			xor eax, eax
 			lea ecx, [edi+edi*2]
@@ -98,7 +98,7 @@ int __cdecl fcn_00402370(unsigned short port, unsigned long timeout, Host* out, 
 		WSACleanup();
 		return -1;
 	}
-	h = out;
+	h = hosts;
 	while (timeGetTime() - start < timeout && count < max) {
 		fromlen = 0x10;
 		if ((unsigned int) recvfrom(s, buf, 0x100, 0, &from, &fromlen) < 6) {
@@ -114,7 +114,7 @@ int __cdecl fcn_00402370(unsigned short port, unsigned long timeout, Host* out, 
 			continue;
 		}
 		for (i = 0; i < count; i++) {
-			if (strcmp(out[i].name, inet_ntoa(from.addr)) == 0) {
+			if (strcmp(hosts[i].name, inet_ntoa(from.addr)) == 0) {
 				goto next;
 			}
 		}

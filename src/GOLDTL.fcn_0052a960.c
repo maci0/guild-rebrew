@@ -105,7 +105,7 @@ void __cdecl fcn_0052a960(Stamp* now)
 	g_7e2a60 = g_6b8010;
 	g_7e4380 = v;
 	g_7e42e0 = 1.0f;
-	x = v * 0.01;
+	x = (float)(v * 0.01);
 	v = (int) x;
 	idx = v % 7;
 	if (g_6a2bd8 != idx && ((Slot_52a960*)g_1043340)[g_6b8010].f2c != 0) {

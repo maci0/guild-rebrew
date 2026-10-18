@@ -1,8 +1,12 @@
 # Codegen walls
 
-Measured failed levers under their recorded compiler, source and constraints.
-An exhausted probe family is not a universal impossibility proof. Reopen it with
-new native/compiler/context evidence, and preserve original section numbers.
+Bounded negative results, not impossibility proofs. Early server residue and
+composition advice is historical: the server later reached raw-file identity.
+Read corrections before reusing an older conclusion; failed searches do not
+authorize assembly. Current compiler policy is in [build facts](general-knowledge.md).
+
+Reopen a failed probe family with new native/compiler/context evidence. Preserve
+the recorded inputs and original section numbers.
 
 Working shapes: [C shapes](msvc6-c-shapes.md). Register/slot findings:
 [allocator](msvc6-allocator.md). Ruler limits: [measurement](measure-traps.md).
@@ -11,13 +15,13 @@ Historical counts and retired commands are not current instructions; use
 
 ## 1. Register allocation and scheduling are not steerable from C
 
-This is the default for **homes** (which callee-saved register, equal-count
-slot transpositions). Statement and definition *order* can still move which
+These are negative controls for **homes** (callee-saved registers and equal-count
+slot transpositions), not a guarantee that C can never affect them. Statement and definition *order* can still move which
 value is computed where (`msvc6-c-shapes.md` §84). Do not read this section
 as "order never matters."
 
-The single largest class. `msvc6` picks which local lives in which slot and which
-callee-saved register by its own colouring, and the source has almost no influence.
+MSVC6 allocation choices resisted the specific probes below. Later source/TU
+changes can alter allocation; do not turn this checkpoint into a universal rule.
 
 - **Declaration order is inert.** Ten declaration/type permutations on
   `CrashDumpUnhandledExceptionFilter` are byte-identical (`int`/`unsigned` for `i`, `excCode`,
@@ -61,7 +65,9 @@ callee-saved register by its own colouring, and the source has almost no influen
   because `i` also bounds the loop and therefore stays live. Three sites, one variable:
   no index (`gm_SearchStruct`) +0; index used and still bounding the loop (`gm_ResetAllEntities`)
   +0; index rendered dead (`gm_SearchTable67`) −24 bytes of code. **A type change is a codegen
-  edit: measure every site with `linktest.sh`, never batch them.**
+  edit: measure every affected site.** `scripts/linktest.sh` was that round's
+  wrapper and is retired. Compare with `rebrew test` and `rebrew diff`; see
+  [tooling](tooling-upstream.md).
 
 **Why this is a wall and not a puzzle:** these are choices made after the C front end, over
 information (live ranges, use counts) that the source cannot address. Every measured attempt
@@ -72,6 +78,7 @@ either did nothing or moved a different decision instead. `msvc6-c-shapes.md` §
 
 > **Superseded (round 1145):** the merge follows a `return` inside a loop; without one each guard keeps its own epilogue. See `msvc6-c-shapes.md` section 200.
 
+The record below is the pre-1145 measurement. It is not a rule that MSVC6 always merges these epilogues.
 
 The reference **does not merge**. On `gm_FindNextFilteredEntity` (0x10016f80) it keeps **five
 `ret` sites**: three byte-identical short epilogues (`xor eax,eax; pop esi; ret` at `+0x17`,
@@ -85,9 +92,9 @@ problem: a 352-byte standalone TU carrying the target's exact guard/loop structu
 the reference's *prologue byte-for-byte* and still folds all three exits. `/O1`, `/O2 /Os`,
 `/O2 /Og-` and `/O2 /Ot /Oy-` all fold too.
 
-**Eight return spellings have been compiled across two passes and all are inert.** This is the
-wall behind the recurring "the reference keeps N epilogues and we keep one" note in this
-project's file headers (`msvc6-c-shapes.md` §74).
+Eight return spellings compiled in those two passes were inert. That round
+treated the result as the wall behind the "the reference keeps N epilogues and we
+keep one" notes (`msvc6-c-shapes.md` §74). Section 200 is the later correction.
 
 **A third instance, and the cleanest one, from round 970.** `gv_ExAllocGraveyardWorker`'s entry-search
 loop is **instruction-for-instruction identical** between the two images across indices 99-118 --
@@ -102,7 +109,7 @@ except that **three branches target different addresses for the same code**:
 Both targets are the **byte-identical epilogue**
 `pop edi; pop esi; pop ebp; mov eax,0xffff; pop ebx; add esp,0x10; ret` -- the reference keeps **two
 copies** of it (`0x10011cdb` and `0x10011d77`, 0x9c apart) and routes the loop's three exits to the later
-one; we emit **one** and fold all three into it. The folding is this section's mechanism, and it is
+one; we emit **one** and fold all three into it. That round attributed the folding to this section's mechanism, and it is
 invisible to every positional ruler because **the instruction stream matches at every index** -- only the
 `rel8` operands differ.
 
@@ -134,6 +141,7 @@ oscillates ±48 and returns to 0, and all four reference `xor`s are present: the
 
 > **Superseded (round 1145):** a `volatile` load defeats the `[reg+reg]` fold, and counted index loops reproduce the reference's strength reduction. See `msvc6-c-shapes.md` section 200.
 
+The bullets are those earlier spellings. "Always" here means the nineteen non-volatile forms, not every later C spelling.
 
 - **`base + idx` always folds to one `[reg+reg]` operand.** Nineteen spellings on
   `gm_AllocGebaeude`: pointer cast, array subscript, two-step pointer, `idx << 6`, `(unsigned)`
@@ -152,7 +160,7 @@ oscillates ±48 and returns to 0, and all four reference `xor`s are present: the
 - **A constant-0 register CSE** on `CrashDump`: the reference emits `push 0` 49 times (2 bytes);
   we emit `xor edi,edi` once plus 31 extra `push edi` (1 byte), −26 bytes of push encoding.
   Spelling the zero as `(LPOVERLAPPED)0`, `NULL`, `(void*)0`, `(DWORD)0` is byte-identical: a
-  register-allocator value choice, not reachable from C.
+  register-allocator value choice among the four casts listed.
 
 ### 5. Flags are not a general lever
 
@@ -173,25 +181,36 @@ no win (`/G6` crashes to 135 at object 1056).
 On `gm_AllocGebaeude`, `__asm { nop nop nop }` used as a scheduling barrier measured
 **matched 683 -> 830** and `matched-reloc` 823 -> 970 at an unchanged object size, because it
 moved a global load across two instructions, flipping a forward branch rel8 -> rel32 and
-realigning a 129-byte loop. The objective allows C only (except hand-written assembly the
-*original* contained), so it was reverted. Measured cost of honouring the constraint: removing
-just the barrier gives matched **377** (worse than HEAD) and a COMDAT of **1072** instead of
-1088, which moves the jump table and breaks the composition. **The entire +147 rested on the
-barrier** (shapes §69). The same class of lever is unavailable everywhere.
+realigning a 129-byte loop. That round reverted the barrier: it was not evidenced original assembly.
+Removing only the barrier gave matched **377** (worse than that HEAD's 683) and a
+COMDAT of **1072** instead of 1088, which moved the jump table. **The entire +147
+rested on the barrier** (shapes §69). Section 200 later reached the separated
+address with a `volatile` load. Assembly permission stays in
+[the assembly audit](assembly-audit.md#what-qualifies).
 
 ---
 
 ## 6b. The inline-asm zero-fill/memcpy prelude: measured cost of the constraint
 
+**Current interpretation (Goal108, 2026-10-18):** the measurements below do not
+prove that no C spelling can produce the native core. They describe tested
+spellings and historical build costs. The earlier waiver is history, not current
+permission: assembly must meet the per-definition, per-target rule in AGENTS.md.
+The likelihood inference rests on native register invariance and operand homing;
+library exclusions, byte matches and failed searches only corroborate it.
+Goal108 rechecks209 distinct target/core sites, including both60-core registries,
+and the literal-count spill/reload in both client building-table initializers.
+See [the current audit](assembly-audit.md#what-qualifies).
+
 Six sites in the tree (`server4.c`, `gm_AllocGebaeude.c`, `m_AllocTracked.c`, `m_alloc.c`,
-`m_alloc2.c`, `vfs_ReadData.c`) carry the same hand-written align-up block-fill:
+`m_alloc2.c`, `vfs_ReadData.c`) carry the same native align-up block-fill family:
 
 ```
 lea ecx,[edi+edi*2] ; and ecx,3 ; sub ebx,ecx ; jle L
 rep stosb ; mov ecx,ebx ; and ebx,3 ; shr ecx,2 ; rep stosd ; L: add ecx,ebx ; rep stosb
 ```
 
-**The shape is confirmed unreachable from C, re-derived 2026-09-17 rather than cited.** Compiling
+**The tested C spellings emit a different shape (2026-09-17).** Compiling
 the exact call shape under `/O2`, `/Oi`, `/O2 /Oi`, `/Ox`, `/O2 /Ow`, `/O2 /Oa` and `/O1` gives
 `shr ecx,2; rep stosd; and ecx,3; rep stosb` in every case: never the align-up prelude. The
 reference at `0x1000b040` contains the prelude verbatim.
@@ -208,23 +227,18 @@ reference at `0x1000b040` contains the prelude verbatim.
 **108,180 bytes is 12.5x the entire remaining residue.** Three functions go SIZE_MISMATCH (short):
 `srv_InitBuildingTypeTable` 372 to 358, `m_init` 162 to 143, `m_PoolAlloc` 270 to 248.
 
-**Judgement, marked as judgement.** The objective's asm clause permits asm "only when certain the
-original game source used raw asm at the same site," with "a code shape no MSVC6 C output can
-produce" as the example of positive evidence. That condition is satisfied here: measured, not
-assumed. But the *writer* was almost certainly the compiler vendor, not the game: the same 24-byte
-idiom at six independent call sites is a CRT `memset` expansion, and the enclosing function is not
-library code (`rebrew library match --stock-lib LIBCMT.LIB --va 0x1000b040` reports "Safe to reverse").
-So the strict reading of the clause and the byte objective pull apart, and the cost of choosing the
-strict reading is 108,180 bytes.
+**Historical interpretation, corrected.** Earlier reasoning treated an unsuccessful
+C search as proof of impossibility and attributed the core to a compiler-vendor
+CRT expansion. Neither conclusion follows from those tests. The measured
+108,180-byte residue increase is a build observation, not evidence of authorship
+or permission to retain arbitrary assembly.
 
-**DECIDED (round 984, by the user): keep the asm.** The clause's "a code shape no MSVC6 C output can
-produce" is treated as sufficient positive evidence on its own, without requiring that the *original
-author* hand-wrote it. Recorded so this is not re-litigated: the six sites stay, the residue baseline
-stays at 8,628, and no round should re-open the question of removing them to satisfy a strict reading
-of "the game wrote asm".
+**Historical decision (round984):** the then-current waiver kept six sites and
+the8,628 residue baseline. Its failed-search rationale is not the current source
+rule. Review the native structural evidence at each definition/target; do not
+extend that old decision to whole-function dumps or new sites.
 
-> **Correction (round 984).** The sentence above says "the same 24-byte idiom at six independent call
-> sites is a CRT `memset` expansion". **That is wrong on the mechanism, and the conclusion survives it.**
+> **Correction (round 984).** The earlier CRT-expansion attribution was unsupported.
 > The VC6 CRT source is in the local cache and readable:
 > `rebrew/.cache/gh-org/msvc600_sp3/VC98/crt/src/platform/memset.asm`. Its align-up code is
 > `neg ecx` / `and ecx,3` / a **byte loop** (`adjust_loop: mov [edi],al / inc edi / dec ecx / jnz`),
@@ -245,122 +259,32 @@ of "the game wrote asm".
 > `#pragma optimize("y", off)`, and with runtime `dest`/`size`, all emit `shr ecx,2; rep stosd;
 > and ecx,3; rep stosb`).
 >
-> It is still unreachable from C, re-confirmed: spelling the alignment as `(-(int) d) & 3` emits
+> The tested C spellings still differ: spelling the alignment as `(-(int) d) & 3` emits
 > `neg ecx; and ecx,3`, and spelling it as `(unsigned) d * 3u & 3u` is **canonicalised back to `neg`**
-> by msvc6. So the prelude's `lea`-based form has no C source, and the 108,180-byte cost of removing
-> the asm stands. §6b's *decision* is unaffected; its *evidence* was wrong, and the distinction
-> matters because "a CRT expansion" would imply the game never wrote asm while "an unreachable
-> strength-reduction" does not.
+> by msvc6. These controls do not exclude every possible C source. The historical
+> removal cost remains a measured result; neither that cost nor the CRT exclusion
+> establishes original assembly by itself.
 
 ---
 
 ## 7. What would actually move the needle
 
-Ordered by what the evidence says is most likely to pay.
 
-1. **A way to steer the allocator.** This is the dominant obstacle (§1). Nothing in C has been
-   found that controls which slot or callee-saved register a live range receives, yet a
-   majority of the remaining bytes are exactly that choice. If a technique exists (a
-   compiler extension, a source idiom, or a post-pass), it would close many functions at once.
-   **The "source idiom" half is now measured empty**: see §8.
-2. **The original build's exact compiler or flag set.** ~~suggests our `/O2 /Gd` is not
-   precisely what produced the reference. `msvc6` SP6 is what is installed; the reference may
-   have been built with a different service pack or a different `/O` combination per file.~~
-   **CLOSED (rounds 458/163/503/842).** SP6 is confirmed (`rebrew toolchain detect`: profile
-   `msvc-6.0-sp6`, aligned true, and its "pre-6.0 constant-hoist" signal is a documented false
-   positive: 4 of the 5 sites reproduce under our own SP6 build and 3 are in zlib). The flag
-   axis is flat on 12 axes / ~120 compilations. The SP5/SP5++ per-file axis was swept over all
-   18 carrier rows with the population enumerated: **3 pins landed, 16 of 16 unpinned rows
-   worse**. No fourth pin. Do not re-open.
-3. **`CrashDumpUnhandledExceptionFilter`'s frame plus exact tables *together*.** ~~No candidate
-   achieved both...~~ **Re-measured (rounds 835/840): the register homes are a *consequence* of
-   the frame, not a lever on it.** The frame is the first divergence (byte 2), and the file
-   header records 8 declaration permutations, 11 flag combinations and two named lanes already
-   exhausted. Only 10 of its 595 mismatching instructions differ solely by `[esp+N]`; the other
-   585 are scheduling. Do not reopen as a register problem.
-4. **`gm_AllocSpieler`'s two live leads** (2,824 bytes, 33%). ~~the `add R,R` versus
-   `lea R,[R+R]` sites need a change in the *uses* of the value, and the 0xc slot-map
-   assignment itself.~~ **Both probed and closed.** The FPU-spill loop (the longest single
-   residue run, 189 bytes at `0x10018be0`) collapses under either `volatile` form:
-   `match` 1004 -> 570 and -> 553 (round 841). Its frame is confirmed correct
-   (`sub esp,0x41c`, prologue byte-identical for 48 bytes), so it is not a frame problem;
-   do not re-open it as one.
+**Superseded planning checkpoint.** Its SP6 recommendation, three per-file PP
+pins and claims that the source axis was exhausted were invalidated by later
+compiler and source-context evidence. Current policy is plain SP5 for server,
+Processor Pack for clients; see [build facts](general-knowledge.md). Use current
+native differences and the recorded probe population, not a universal no-C claim.
 
 ## 8. The measured floor of this constraint set
 
-> **Correction (2026-09-25): 8,634 was not a floor.** The linked residue fell from 11,735 to
-> 5,404 without touching a single codegen wall. Three causes, none a C-spelling issue: seven files
-> defined functions out of VA order after the `src/Develop` reshuffle, and the linker places a
-> translation unit's functions in source order (-2,945, plus -137 for m_alloc2.c's
-> `#pragma optimize` pair); stale per-function flag pins (`gm_AllocSpieler` compiled `/Oa /Ow` while
-> tuned at `/O2 /Gd`, -2,804; `m_AllocTracked` `/G6 /Oy-`, -69); and a CMake `COMPILE_OPTIONS`
-> pin whose path the reshuffle broke, so `gv_ExAllocGraveyardWorker` silently lost its `/Ow` (-5).
-> Every remaining byte is inside a carrier's own body. The section below is kept as the record of
-> what rounds 833-843 measured; read its conclusions as "under the composition of that time".
 
-Established 2026-09-17 after rounds 833-843, by exhaustion with the population stated at each
-step rather than by assertion. **Under C89, MSVC6 SP6, `/O2 /Gd`, no asm, no naked, no `_emit`:
-the whole-tree `.text` residue floor for this binary is 8,634 bytes**, all inside 18 functions.
-(Round 924 lowered the *actual* residue to **8,633** and the raw-link `.data` differing count
-from 21,836 to **21,481**. See §10. The 8,634 floor above remains the figure rounds 833-843
-measured and is what those rounds' evidence supports; it is not re-derived here.)
-
-The shape of that floor (round 840, whole tree): **610 contiguous differing runs, median 5,
-mean 14.2, longest 189, 254 of them exactly one byte**, with the nine largest carriers holding
-7,880 (91%) and the top two 4,407 (51%). Fragmented in position, concentrated in cause.
-
-Every axis that could move it has been measured shut:
-
-| axis | verdict | evidence |
-|---|---|---|
-| source spelling (operand form, declaration type, loop shape, guard form) | inert | shapes §84 and throughout; lands once, as a *statement order* change |
-| statement/definition ORDER | the only lever that has ever landed | TODO rounds 254-431; round 841 |
-| flags | flat, now enumerated per-file | 12 axes, ~120 compilations, 1 distinct score (round 458); **per-file audit round 943**: `/Ow` pays on 3 of 12 carriers (best -5 linked, worst **+485**), `/Oy` inert on the one second carrier tested, and the remaining axes have a ~96-combination sweep with zero hits |
-| `#pragma optimize` per function | inert | 7 forms byte-identical on the largest carrier, with a working control (round 843) |
-| service pack (sp5-pp per file) | closed | 18 rows enumerated, 3 pins, 16/16 unpinned worse (rounds 503/842) |
-| compiler build | SP6, by elimination within the MSVC6 family | `rebrew toolchain detect` gives a **hedged** answer (its own `version_hint` reads "may be MSVC 4.x/5.0" and it reports 5 pre-6.0 constant-hoist sites), so the citation is weaker than "confirmed" implies. What actually settles it is round 502: `msvc-6.0`, `-sp1`..`-sp5` and `-win9x` produce **byte-identical objects** on a shared row (1149/2057 obj 2056), i.e. **the nine images are three generators**, and the project sits on the one that matches. Round 837's zlib cross-check is the corroboration. The residual risk is that the original was MSVC 4.x/5.0, which no image here provides |
-| size gaps | net-negative to close | shapes §89 (5 bytes recovered, ~178 lost); §69 (4 bytes worth 327 matched) |
-| `.text` content post-pass | contradicts the objective | link-layout §6: postlink's `.text` content "is largely ours"; copying it makes the bytes copied, not compiled |
-
-The two mechanisms that *would* move it are both excluded by the constraints, not by effort:
-a **scheduling barrier** (`__asm`, shapes §69, measured at +147 matched and off-limits by the
-C-only rule) and a **backend cross-jump / instruction-selection control** (the
-`cm_ExCopyEntityData` epilogue finding: 2 epilogues against the reference's 3, six probe
-passes and ~20 spellings all leaving it at 2).
-
-**Rounds 916-921 closed the four axes that remained open on the *method* side**, each by counting
-rather than by impression, so none needs re-probing:
-
-| axis | verdict | evidence |
-|---|---|---|
-| composition budget | **no object is over its span** | rounds 916: all 25 `LONG` objects re-measured; 23 exactly at span, 2 under, 0 over. The `LONG` label compares against the wrong baseline |
-| per-file flags | **carrier-specific, nearly closed** | rounds 919-920: `/Ow` +511 on `gm_AllocSpieler`, +3 on `cm_ExSellObjekt`, **0** on `CrashDump` and on `ls_LoadBuildingEntityState` (the largest flag-free carrier, tested through CMake because `--cflags` drops the toolchain pin) |
-| duplicated declarations | **15 symbols lifted, 0 bytes moved** | rounds 909-918; population measured at ~7 remaining, and lifting is provably inert |
-| `volatile` zero-extend excess | **3 sites, located, both tested ones closed** | round 921: image-wide census `and r,0xffff` 16 vs 19 and `xor r,r` 556 vs 550; the sites are `0x10011f26`, `0x100190fb`, `0x1001934a` |
-
-**The census trick generalises and is worth reusing:** counting an idiom image-wide on both sides
-converts "the residue is 6% of `.text`" into "three instructions differ in form", which is a claim
-that can be closed. `and`/`xor` was the first try; the same treatment is available for any idiom pair
-the shapes doc names.
-
-**Counted, round 922**: six pairs, three closed outright and one newly explained:
-
-| idiom | REF | BLD | verdict |
-|---|---|---|---|
-| `lea r,[r+r]` | 7 | 7 | exact |
-| `fsubr qword` | 26 | 26 | exact |
-| `and r,0xffff` | 16 | 19 | 3 extra, all located (round 921) |
-| `xor r,r` | 556 | 550 | the same 3, from the other side |
-| `fmulp st(1)` | 4 | 7 | 3 extra, **placement not spelling** |
-| `add r,r` | 583 | 593 | 10 extra; the idiom is too common in library code for a count to attribute |
-
-The `fmulp` three are the instructive case. All four of the reference's sites appear at the same VAs
-in my object; `gm_AllocSpieler` adds three at `0x10018f1f`, `0x10018f5d`, `0x10018f65`. Disassembling
-both images shows why: at `0x10018f1b` both sides emit `fild [esp+0x10]`, then the **reference jumps**
-while mine inserts `fmulp st(1)`: the reference performs the multiply later, as
-`fmul dword ptr [0x100256b0]` at `0x10018f5e`. **A folded multiply, not a different form.** Shapes
-§8a's documented `volatile`-alias remedy scores **606/3689** here and does not reach it. Recorded as
-placement; do not re-spell it.
+**Withdrawn floor claim.** The8,634-byte figure measured one composition, not
+an impossibility bound. Later fixes to definition order and stale compile flags
+reduced the residue, and the server eventually reached raw-file identity.
+Preserve compiler/flag/TU inputs with each negative result. Neither a bounded
+failed search nor a historical residue establishes a permanent compiler limit.
+The original tables are in the [October18 archive](goal-history.md#full-notebooks).
 
 ### 11. The residue's shape, quantified: and why the small carriers are not a shortcut (round 939)
 
@@ -559,19 +483,16 @@ placement story) but it must not be used to order *work*: for a carrier with one
 branches, read the actual first divergence: it may be a statement-order or instruction-form difference
 that the branch census cannot see.
 
-**Every class is walled, and each has a named mechanism rather than an exhaustion argument:** block
-placement is the backend layout pass (§17 of the shapes doc; and `cm_ProcessCommandQueue` is closed by
-proof: the target's join test is provably-true dead code); epilogue merge is §2; register rotation is
-allocator Findings 62-65, whose sweep showed no source-level naming reaches the choice.
+Round 973 named a mechanism for each class from the carriers measured then:
+block placement (shapes §17; `cm_ProcessCommandQueue`'s join test was dead in
+that object), epilogue merge (§2, later corrected by shapes §200), and register
+rotation (allocator Findings 62-65, where the listed namings did not reach the
+choice). Those sweeps are not impossibility proofs.
 
-**Consequence.** A future round should not re-derive the map. The open question is not *which* carrier or
-*what kind*, but whether any lever exists for a class whose every member has been measured, and for three
-independent classes the answer so far is no.
-
-**Read this as a limit of the toolchain-plus-constraints, not of the source.** Every function
-compiles, links at the reference's exact VA, and the deliverable is byte-identical outside
-`.text` (8,634 of 8,634 differing bytes are inside `.text`; `.data`, `.rdata`, `.reloc`,
-headers all `differing 0x0`). Reaching zero needs a lever this constraint set forbids.
+The 8,634-byte figure is that checkpoint: 8,634 of 8,634 differing bytes were
+inside `.text`, and the other sections compared at `differing 0x0` on the image
+that round scored. The server later matched the complete raw file. Do not read
+this census as the current residue or as a ban on a later lever.
 
 ### 9. The residue is not a code-shape deficit anywhere (round 923)
 
@@ -616,15 +537,16 @@ so "this function is missing its tail" is retired as a lead. The file-local clai
 `gm_AllocSpieler.c`'s header ("no region is missing: the call sequences agree 55/55") is
 correct after all; shapes §104's table stands.
 
-**Reuse:** this script is the cheap whole-image audit. Run it after any change that could
-alter codegen globally, and treat any function appearing in its final table as the only place
-a code-shape story can still be true.
+`scripts/opcode_census.py` is retired. The counts above are round 923's, not a
+command to rerun. A later whole-image mnemonic census uses the current CLI in
+[tooling](tooling-upstream.md). A function absent from that old table is not
+proof that its shape is finished.
 
 ### 9b. "Byte-identical outside `.text`" is true of the *shipped file*, not of what the build produces (round 936)
 
 The headline result reads "`.data`, `.rdata`, `.reloc` and headers all `differing 0x0`". That sentence
 is correct about `build/server.dll` and **misleading about the build**, and the difference decides how
-to read the whole objective. Measured on the current tree, the same command reports both numbers:
+to read the whole objective. Measured on the round-936 tree, the same command reported both numbers:
 
 | section | shipped file | **raw link, pre-fixer** |
 |---|---|---|
@@ -634,17 +556,15 @@ to read the whole objective. Measured on the current tree, the same command repo
 | `headers` | differing `0x0` | differing **267** (`0x10b`) |
 | `.text` | differing `0x21b9` | differing `0x3810` |
 
-**`rebrew build postlink` writes those four sections from the layout package.** They are copied, not
-compiled; the raw link produces 30,123 bytes the fixers overwrite. So the objective's "every data byte
-matching" is satisfied **by construction**, and no measurement of the data sections can ever be
-evidence about codegen. This is not a defect and it is not hidden (`measure-traps` §6h and the
-`rebrew verify --data` warning both say it), but it belongs in this section too, because "the
-deliverable is byte-identical outside `.text`" is the claim a reader arrives with.
+In that build, `rebrew build postlink` copied those four sections from the layout
+package. The raw link produced 30,123 bytes the fixers overwrote, so a
+postlinked data match was not codegen evidence. It was not a rule that data
+bytes can never show a reconstruction error.
 
-**What it means for the objective's other clauses.** "Residue at zero" is a `.text` claim and is
-unaffected. "Every data byte matching" is trivially met and should not be quoted as progress. The
-honest single-number summary of this project is: **the deliverable matches the reference except for
-8,633 bytes, all of them inside `.text`, and `.text` is the only section the build has to get right.**
+That round's postlink copy made the non-`.text` comparison look done. It is not
+the current raw-file result: §20 retires the postlink reading, and the server
+later matched the complete raw file, data included. The 8,633-byte `.text`
+figure stays a round-936 measurement.
 
 ### 10. A function-argument that was an undefined stub, found by reading the emitted operand (round 924)
 
@@ -661,8 +581,9 @@ LogMessageInternal("D:\\...\\command.c", 0x2e45, g_error_msg_sell_failed, 8);
 ```
 
 and **`g_error_msg_sell_failed` is declared `extern char[]` at the top of the file but never
-defined and never present in `src/rebrew-data.toml`.** An undeclared-in-practice array decays to
-an address the compiler cannot relocate, so the push became an immediate. The other 11
+defined and never present in `src/rebrew-data.toml`.** The wrong final address was observed in the historical linked image. An extern
+array can still produce a normal COFF relocation; the declaration alone does
+not explain how that linked value was chosen. The other 11
 `LogMessageInternal` sites in the same file pass **string literals**, which is what produces the
 reference's relocated `push`.
 
@@ -679,10 +600,11 @@ leaving a hole.
 
 **Two lessons, both general:**
 
-- **An `extern` declaration that has no definition is a silent operand bug.** `lint` passes (the
+- **An extern needs an established provider and checked operand.** `lint` passes (the
   header is well-formed), the compile passes (a warning at most), the object size is unchanged
   (`0x810` both ways), and only the *operand bytes* are wrong. **Grep every `extern char[]` in a
-  file and check each one is either defined in the tree or in `rebrew-data.toml`.** This file
+  file and check its actual source/library provider and native operand. A data row
+  supplies an identity, not a storage definition.** This file
   alone carries 9 such declarations for strings at `0x1002cdxx`-`0x1002cexx`; the one that was
   *used* was the broken one, which is why it went unnoticed.
 - **`.data` residue is invisible to a `.text`-only objective check.** The gate could not see this
@@ -691,41 +613,11 @@ leaving a hole.
 
 ### 14. The `.data` axis is closed: the shipped file's non-`.text` bytes already match exactly (round 977)
 
-The round brief routes work to `.data`/`.rdata`/`.bss`, types and structs. Measured this round, that vein
-is **already empty in the deliverable**, and the round-977 numbers say so independently of `rebrew`:
-
-```
-$ cmp -l original/Server/server.dll build/server.dll | wc -l
-8628
-```
-
-All 8,628 differing bytes are inside `.text`. Every non-`.text` byte already matches: confirmed three ways
-that share no code:
-
-| check | result |
-|---|---|
-| `postlink_residual.py`, shipped file | `.data` differing `0x0`, `.rdata` `0x0`, `.reloc` `0x0`, headers `0x0` |
-| `cmp` over the whole file (above) | 8,628, i.e. exactly the `.text` residue 0x21b4 |
-| `cmp` over `.data`+`.bss` alone (from `0x22846` to `0x174059c`) | **0** differing bytes |
-
-**Why the round brief's `.data` framing is now a dead end.** `rebrew build postlink`'s data fixer *copies* the
-reference's `.data` wholesale: the baseline log records `0x7806` non-`.text` bytes overwritten per link.
-So the raw-link `.data` figure the gate enforces as a ceiling (`21,481`) measures the **build's**
-placement, not the deliverable's content. The objective's "every data byte matching" clause is satisfied
-in the shipped file today; the raw-link number can only be driven to 0 by reconstructing the original's
-`.data` COMDAT order, which is linker-hash-driven (documented at `CMakeLists.txt:443-448`) and not
-reachable from C.
-
-**Consequence for the remaining work.** The objective's only unmet clause is `residue at zero`, and the
-residue is 100% `.text` inside 19 functions across the three walled classes in §13. `.data`, types and
-structs cannot move it. A round that spends its budget on `rebrew todo`'s `start-data` list is spending it
-on a vein that is already mined out.
-
-**The `start-data` list itself.** `rebrew todo -c start-data -n 300` returns 207 items: 84 are `__imp_*`
-IAT slots at the head of `.rdata` (`0x10024000`+), which are linker-supplied and not reversible; the other
-123 are `extern`-only declarations whose addresses are already correct in `src/rebrew-data.toml`. Both
-kinds show `status: "UNCHECKED"` and ROI 10.0 regardless of difficulty, so the list's ordering carries no
-signal. See measure-traps §19.
+**Withdrawn completion claim.** Postlink copied the equal non-text bytes;
+that did not close data reconstruction or the whole-file objective. Later server
+raw-file identity is separate evidence. Imported slots, virtual zero-fill and
+unknown extents still require distinct treatment; a flat historical ROI ranking
+was not proof that the work was complete. See [measurement §20](measure-traps.md#20-raw-link-data-is-a-size-only-filler-and-cannot-reach-zero-the-ceiling-is-the-right-check-round-980).
 
 ### 12c. The fault-versus-symptom split, and the tool that makes it mechanical (round 979)
 
@@ -879,44 +771,16 @@ carriers.
 
 ### 15. The asm clause has no applicant among the 19 carriers (round 999)
 
-The user clarified the asm carve-out: raw asm is permitted where C cannot reach the shape: padding, single
-instructions, the six memset preludes, never whole-function asm. That is a **narrower** permission than
-"write the function in asm", and it is worth testing what it actually closes.
+**Superseded permission wording.** Assembly eligibility depends on evidenced
+padding or positive evidence that the original very likely used assembly at the
+reviewed definition/target. Failure to find matching C is insufficient. No
+whole-function dump receives an exception from an old residue classification.
+See [the assembly audit](assembly-audit.md#what-qualifies).
 
-**It closes nothing among the residue.** The six existing asm sites are inside `srv_InitBuildingTypeTable`,
-`gm_AllocGebaeude`, `m_AllocTracked`, `m_alloc`, `m_alloc2` and `vfs_ReadData`, and the functions that
-*contain* those sites are already byte-exact. The 8,628 residual bytes live in 19 different functions, and
-none of them is an instruction-shape problem:
-
-| carrier class | count | is a single instruction unreachable from C? |
-|---|---|---|
-| register-role rotation | 8 | no: the instructions are all C-producible; the *register* differs |
-| block placement / branch target | 10 | no: same instructions, different addresses |
-| epilogue merge | 1 | no: same epilogue bytes, one copy folded away |
-| **total with an asm-eligible shape** | **0** | |
-
-The test for eligibility is not "is the byte wrong" but "**could a C compiler emit this instruction at this
-site at all, in any spelling**". Every differing instruction in the 19 carriers is emitted by msvc6
-*somewhere* in the same function: that is what the register-role and epilogue classes mean. An asm block
-would be a whole-function escape, which the carve-out excludes.
-
-**Screened by hunk count rather than file size, which is the efficient order.** The two closest to a
-single-instruction fix are `cm_ExProdObjekt` (`0x1000e140`, 348/354 aligned, 3 hunks, `ref-only 0 /
-built-only 0`) and `ls_LoadBuildingEntityState` (`0x100128f0`, 438/499, 33 hunks but only **1
-different-kind**). Both probed this round, both **+0**:
-
-- `cm_ExProdObjekt`: the three-instruction ordering hunk. Header records a *complete* enumeration: "all 112
-  topological orderings of the seven statements … none beats 976". Genuine closure.
-- `ls_LoadBuildingEntityState`: the `lea esi,[edx+ecx]` vs `[ecx+edx]` operand swaps are **`msvc6-c-shapes.md`
-  §70**'s inert class ("operand order in a commutative address expression is inert"; the section number lives
-  in the shapes doc, not here; codegen-walls has no §70, so a bare "§70" in this file reads as a dangling
-  reference), and naming the `esi + 0x34` argument pointer to match the reference's `mov ecx,ebx; add ecx,edx`
-  form is **byte-identical**: shapes §70's "this site was already at its optimum" reproduces. Re-confirmed
-  round 1077: the swap sits at `0x10012944`, paired with the `jle 0x10012dea` / `0x10012de8` branch-target
-  divergence at `0x1001292a` already carried in §33. Both are accounted for; the function yields no new lever.
-
-**Conclusion.** The asm permission is a constraint clarification, not a lever. No carrier among the 19 has a
-site where asm would be both permitted and useful.
+Historical bounded probes on `cm_ExProdObjekt` (`0x1000e140`) and
+`ls_LoadBuildingEntityState` (`0x100128f0`) did not improve the recorded objects.
+Their failed schedules/address-order spellings are evidence of those tests,
+not impossibility proofs or current assembly permission.
 
 ### 16. The residue quantified by lever availability: 67.5% register-role, 32.5% placement (round 1003)
 
@@ -1068,29 +932,9 @@ branch level, and it is why the successor-set canonical form separates them desp
 > correspondence has to be established first (by ordinal or by canonical role), and only then compared. The
 > neighbourhood table below is real data but was over-read.
 
-**The original neighbourhood-profile reading (superseded, kept for the record):**
-
-| neighbourhood (kind, successor kinds, predecessor kinds) | ref | ours |
-|---|---|---|
-| `(b2, (b2,b2), (b2,))` | 37 | 36 |
-| `(b2, (b2,b2), (b2,b2,b2))` | 11 | 12 |
-| `(b2, (b2,b2), (b2,b2,jmp))` | 2 | 1 |
-| `(b2, (b2,b2), (jmp,))` | 2 | 3 |
-
-So the difference is a **merge point**: one block has one predecessor where the reference gives it three, and
-another has three where the reference gives it one. Nodes and edges are conserved; their *wiring* is not. That
-is a real structural difference in the `place` class and the only carrier of its kind in the tree.
-
-**Practical consequence.** "Non-isomorphic CFG" is not one phenomenon: twelve carriers differ by a branch's
-arity (candidate: statement order, §84) and one by a merge point's fan-in. Before probing any of them, read the
-out-degree histogram; it separates the two classes in one command:
-
-```python
-Counter(sum(1 for k in ('taken','fall') if edges[a].get(k) in blocks) for a in blocks)
-```
-
-Identical histograms but non-isomorphic means the carrier is in the merge class; a differing histogram means a
-branch's shape is wrong.
+The rejected neighbourhood-profile table and its merge-point conclusion are
+archived. Address-level graph differences require an established block
+correspondence before they can support a topology claim.
 
 ### 19. Loop-condition polarity follows the loop FORM, not the condition's spelling (solved)
 
@@ -1136,41 +980,12 @@ what reaches the other encoding.
 
 ### 20. The whole raw-link `.data` divergence is postlink-supplied: so no `.data` content is missing (round 1016)
 
-Rounds 977, 980 and 1015 each re-derived part of this section from a different angle. This round settles it with
-the two numbers side by side, which none of the earlier passes printed together:
-
-| file | `.data` differing vs reference |
-|---|---|
-| `build/split_poc.dll` (the raw link) | **21,481 of 57,344** (37.5%) |
-| `build/server.dll` (the shipped file) | **0 of 57,344** |
-
-So **every byte** of the raw-link `.data` divergence is rewritten by postlink's data fixer, and the deliverable's
-`.data` is exact. The objective's "every data byte matching" clause is satisfied, and the gate's
-`DATA_BASELINE` ceiling of 21,481 is a *build-placement* metric, not a measure of missing content.
-
-**Why earlier passes kept re-opening it.** The divergence is not concentrated in the generated shims: attributing
-it by owning object puts 643 bytes in `cm_ExSellObjekt.c.obj` and more in `cm_ExAllocSpieler.c.obj`, and the bytes
-themselves differ in *kind*, not just position:
-
-```
-0x10029d00  reference:  a structured record table  {f64 2048.0, 14, 4, 5, 2500}, stride 0x18
-            build:      a run of error strings   "gm_AllocSpieler() failed", "cm_ExChangePlayerIdentity() failed"
-```
-
-A game TU emitting strings where the reference has a record table reads as a content defect. It is not: the
-shipped file is byte-identical at that address, because postlink copies `.data` wholesale from the layout
-package.
-
-**The record table is real and unmodelled.** At `0x10029cf0`, stride `0x18`, the reference holds
-`{int, int, int, float}` records reading `5 / 2500`, `6 / 3000`, `4 / 2000`: a production cost table. It has no
-source reference and no `rebrew-data.toml` entry; the layout package supplies it. Modelling it would be a
-*source-fidelity* improvement (the C would name the table) but would not change a single shipped byte, because
-postlink overwrites the section either way.
-
-**Practical consequence for the objective.** The `.data` axis cannot move the residue: the shipped bytes are
-already exact and the raw-link number is a ceiling the gate enforces correctly. The only route to changing
-raw-link `.data` would be reproducing the original's `.data` COMDAT order, which is linker-hash-driven
-(`CMakeLists.txt:443-448`) and unreachable from C.
+**Retired postlink interpretation.** The historical raw image differed in
+21,481 of57,344 initialized data bytes; the postlinked image differed in zero
+because it copied reference data. That comparison did not establish reconstructed
+owners, correct native placement or raw identity. The present objective requires
+the complete raw toolchain output to agree, including data and operands.
+See [data ownership](data-ownership.md) and [current work](TODO.md).
 
 ### 21. `gm_FindNextFilteredEntity`'s entry order moves the fault instruction but scores +6 (round 1027)
 
@@ -1476,16 +1291,19 @@ removing it regresses all three carriers at once.
 **Why this is worth recording despite moving nothing.** It is the first measurement in 26 rounds that
 *changes the residue* rather than confirming a wall, and it does so in the informative direction: it
 demonstrates that the toolchain axis is **closed by measurement, not by assumption**, for the only three
-files where the axis is expressible. The global toolchain is fixed by
-`cmake/toolchain-msvc-6.0-sp6-docker.cmake`, so a per-file pin is the only route, and it is already taken.
+files where the axis was expressible in that tree. The sweep's global file was
+`cmake/toolchain-msvc-6.0-sp6-docker.cmake`, which is no longer in this
+checkout. Current selection is the project `unshare` backend and the per-target
+profiles in [build facts](general-knowledge.md), not a single SP6 Docker pin.
 
-**Method note.** `scripts/linktest.sh` compiles with the exact `build.make` line, so it honours
-`/REBREW_TOOLCHAIN`: the pins are live in both the build and in every delta this session has measured. The
-sweep was run by substituting the token in `build.make` (backed up and restored; `build.make` is generated,
-not tracked).
+**Method note.** `scripts/linktest.sh` compiled with the `build.make` line, so
+it honoured `/REBREW_TOOLCHAIN`. The script is retired. The sweep substituted
+the token in generated `build.make`, then restored it.
 
-**Judgement:** no unexplored toolchain lever remains on this tree. The three pinned files are optimal, the
-other 16 carriers have no expressible toolchain axis, and the five non-pp images are mutually identical.
+**Judgement, round 1051 only:** on that tree the three pinned files were the
+best of the nine images, the other 16 carriers had no expressible toolchain
+axis, and the five non-pp images matched each other. That does not close the
+toolchain axis for a later profile.
 
 ### 27. The residue does not correlate with x87 density, branch count, or call count (round 1063)
 
@@ -1613,10 +1431,10 @@ answer the `cld` question (all three agree on its absence) but they must not be 
 `shr` ordering, which §28 measured in situ.
 
 **Judgement, and this is the first entry in this doc that supports the asm clause.** The objective permits
-raw asm only on *"positive evidence (for example a code shape no MSVC6 C output can produce, or a
-corroborating string/symbol), not a hunch from a hard match"*. **`cld` before `repne scasb` is exactly that
-shape**: an optional prefix byte with no semantic effect under the ABI, absent from every C spelling tested,
-present in the reference. It is **one byte**, on a carrier whose 92 residue bytes span 12 clusters, and the
+assembly only with positive evidence of likely original assembly. The native
+`cld` before `repne scasb` is a structural observation: an optional prefix byte with no semantic effect under the ABI, absent from every C spelling tested,
+present in the reference. These three failed C controls do not by themselves
+establish authorship or grant an exception. It is **one byte**, on a carrier whose 92 residue bytes span 12 clusters, and the
 surrounding schedule difference (`shr` placement) is a separate, context-dependent cause that no pragma
 reaches. So it is not a lever worth spending: closing it would need `__asm { cld }` at that site *and* would
 still leave the other eleven clusters.
@@ -1965,7 +1783,13 @@ entry with zero runs for a carrier with 671 residue bytes; the real size was 146
 
 ### 37. A register-rename post-pass has a measured ceiling of ~16% of the residue, and the other 84% is structural (round 1090)
 
-The standing question this project has carried is whether to authorise a **non-C post-pass** over the residue
+**Withdrawn global bound.** The table measures only same-address sites in ten
+carriers. Its 1,360 operand-only bytes do not bound unaligned or unmeasured
+sites, and sharing a mnemonic does not prove a register rename can repair a
+difference. The ~16% ceiling/~84% remainder and planning conclusions below are
+the historical interpretation, not an established bound or current proposal.
+
+The question at that checkpoint was whether to authorise a **non-C post-pass** over the residue
 carriers: rewriting operands after compilation. That departs from the C-only constraint, so it cannot be
 self-authorised, but its **value can be bounded without authorising it**, and this round bounded it.
 
@@ -2017,56 +1841,12 @@ and it is now a measured bad trade rather than an assumed one.
 
 ### 38. THE LEVER THAT WAS MISSING: the residue contains 109 instructions the reference has and we do not emit at all (round 1094)
 
-Rounds 1082-1090 classified the residue by **byte counts** and by whether differing sites shared a mnemonic.
-Both are order-sensitive measures taken at aligned *positions*, and neither answers the question that decides
-what kind of problem this is:
 
-> **Does the reference contain instructions that our build does not emit anywhere in the function?**
-
-If the answer is yes, the difference is not a compiler decision: a compiler choosing differently still emits
-*some* instruction at every point. An instruction present on one side and absent from the other means the two
-programs are not the same program, and the gap is **missing or surplus SOURCE**.
-
-**Measured (order-insensitive instruction multiset, reference vs raw link, per carrier):**
-
-| carrier | shared (mnemonic) | ref-only | our-only | verdict |
-|---|---|---|---|---|
-| `gm_AllocSpieler` | 1,032 | **24** | 22 | different set |
-| `CrashDumpUnhandledExceptionFilter` | 632 | **41** | 24 | different set |
-| `cm_ExSellObjekt` | 663 | 4 | 4 | different set |
-| `ls_LoadBuildingEntityState` | 492 | 7 | 5 | different set |
-| `gm_FindNextFilteredEntity` | 97 | **13** | 6 | different set |
-| `gv_ExAllocGraveyardWorker` | 175 | 0 | 1 | different set |
-| **10 carriers total** | n/a | **109** | **79** | |
-
-**What the missing instructions look like, and why each is a missing statement, not a codegen choice:**
-
-| carrier | reference-only instructions | reading |
-|---|---|---|
-| `gm_FindNextFilteredEntity` | `pop` ×3, **`ret` ×3**, `xor` ×3 | **three epilogues where our C has one** |
-| `cm_ExCopyEntityData` | `pop` ×4, `mov`, `add`, `jmp`, `jge` | same: extra exits folded away in our source |
-| `CrashDump` | **`adc` ×10**, `push` ×8, `pop` ×6, `sub` ×6, `test` ×4 | a whole carry-chain block we never wrote |
-| `gm_AllocSpieler` | `mov` ×9, `lea` ×7, `xor` ×4 | statements absent from our reconstruction |
-| `cm_ExSellObjekt` | `mov` ×2, `add`, `jne` | one missing statement and its branch |
-
-**`ret` ×3 is decisive.** A function whose reference has three return paths and whose C has one is not
-experiencing a scheduling disagreement: our source is missing the branches that reach the other two.
-
-**Nothing about this contradicts the toolchain.** 264 of 283 functions are byte-perfect under this exact
-msvc6, which is proof the compiler reproduces this binary when the C is right. A compiler wall would produce
-the same instruction *set* in a different order; it cannot produce a set that is missing three `ret`s. So the
-residue is **source-recovery work**, and source recovery is the one thing the constraints fully permit.
-
-**Why rounds 1082-1090 read it otherwise.** §16's 67.5% "register-role" figure, §36's run distribution and
-§37's 16% post-pass bound all measure *aligned positions* and *byte counts*. Both are blind to an instruction
-that exists on only one side: an `adc` chain is counted as "bytes that differ", never as "an instruction we do
-not have". The correct first question for any carrier is the multiset question above, and it should have been
-asked before the position-based analyses, not after them.
-
-**The lever, stated plainly.** For each carrier: list the reference-only instructions, read the region they sit
-in, and recover the source that produces them. Start with the epilogue carriers: `gm_FindNextFilteredEntity`
-(3 `ret`s) and `cm_ExCopyEntityData` (4 `pop`s), because a missing early-return is a structural gap that is
-identifiable from the disassembly alone, with no search.
+**Invalidated census; see §42.** The109 count included jump-table/padding
+bytes decoded as code. An instruction-multiset difference also cannot by itself
+prove missing source: compiler block duplication, merging and lowering change
+instruction sets. Establish reachable code, embedded tables and correspondence
+before attributing a difference. The full rejected table is archived.
 
 ### 39. `gm_FindNextFilteredEntity`: the three epilogues are NOT merged in the reference, and the merge is what shifts every later byte (round 1095)
 
@@ -2114,96 +1894,20 @@ and `/Og /Oi /Ot /Ob1` were all swept on it (file header, line 288), and it carr
 
 ### 40. The epilogue-merge class: three carriers, one mechanism, and it is the SAME mechanism in all three (round 1096)
 
-Round 1094 found reference-only `ret`s and `pop`s. Rounds 1095-1096 established the mechanism is one thing,
-present in three carriers, and it is worth stating once:
 
-**The reference keeps early returns INLINE; our build merges them into one shared exit.**
-
-| carrier | reference epilogue clusters | ours | missing exits |
-|---|---|---|---|
-| `gm_FindNextFilteredEntity` | 3: `0x10016f99`, `0x10016fa9`, `0x10016ff7` | 1: shared `0x100170d6` | 2 |
-| `cm_ExCopyEntityData` | 3: `0x1000eda8`, `0x1000ee3c`, `0x1000ef7b` | 2: `0x1000ee46`, `0x1000ef7f` | 1 |
-| `gv_ExAllocGraveyardWorker` | (same class, 451 bytes) | n/a | n/a |
-
-**The mechanism, from `cm_ExCopyEntityData`.** Its source has three `return 1;` sites in a row
-(`cm_ExCopyEntityData.c:449`, `452`, `455`). msvc6 folds all three into one epilogue block. The reference does
-not: it emits `pop edi; pop esi; pop ebp; mov eax,1; pop ebx; add esp,0xc; ret` **inline at `0x1000eda8`**,
-reached by falling out of the scan loop at line 448.
-
-The cost is positional. In `gm_FindNextFilteredEntity` the reference's three inline epilogues occupy 6 more
-bytes than our single shared one, ahead of the second half's `push ebx`/`push ebp`/`push edi`, so **every byte
-after the first guard is shifted by 4**. That is the file header's "no byte after offset 3 can match, which
-holds the score at 99/346 **despite obj size being exactly right at 346**": the statement count is correct and
-the internal layout is not.
-
-**Probed (rounds 1095-1096), all reverted:**
-
-| probe | result |
-|---|---|
-| reorder so `end` is computed before the guard | **+6** |
-| duplicate the second guard verbatim | **+0**: msvc6 folds two identical guards into one |
-| `volatile` double-load of the guard global | **+0**: already recorded inert here (probes z1-z4, w2/w3/w6, v1-v5) |
-| give one return a distinct value (`temp = 1; return temp;`) | object **905** vs target 912: **7 bytes short** |
-| value-preserving expression (`return (int)(dst_slot == 0x300) \| 1;`) | object **956**: **44 bytes long** |
-
-**What the probes establish.** Respelling the *value* changes codegen but never lands: the two attempts bracket
-the target (905 and 956 around 912) without hitting it, and the duplicate-guard case proves two *identical*
-returns collapse. So the merge is not breakable by how the value is written. Matching the reference requires the
-three returns to differ **structurally** (a different statement between them, or a control-flow shape msvc6
-treats as a barrier), which is a source-recovery question about what the original `cm_ExCopyEntityData` and
-`gm_FindNextFilteredEntity` actually contained at those sites.
-
-**This is the most tractable remaining lever**, because the gap is identifiable from the disassembly alone: for
-each carrier, count the reference's `pop`/`ret` clusters, compare with ours, and the difference names the
-number of missing exits. No search space is involved.
+**Corrected by §42/§43.** The original whole-carrier exit count was inflated by
+decoding non-code. The corrected historical census found four extra native exit
+paths across19 carriers, not the earlier per-carrier explanation of the residue.
+Use reachable CFGs and complete bodies; an emitted epilogue count is not a direct
+count of missing C statements.
 
 ### 41. `cm_ExCopyEntityData`: the third epilogue is a *duplicated shared exit*, and two structural probes are both 905 vs 912 (round 1097)
 
-Round 1096 counted the epilogues and left the mechanism as "msvc6 folds three returns into one; the reference
-keeps them inline". Reading the branch targets shows that is **not quite right**, and the correction matters.
 
-**The reference's exits are shared too: it just materialises one of them three times.** In the reference:
-
-| site | instruction | target |
-|---|---|---|
-| `0x1000eda0` | `cmp edx, 0x1009aca4` / `jb 0x1000ed95` | loop back |
-| `0x1000eda6` | falls through | `pop edi` at `0x1000eda8`: epilogue **#1** |
-| `0x1000edbb` | `jae 0x1000eda8` | **jumps back to #1** |
-| `0x1000ee3a` | `jb` loop back, then falls through to `pop edi` at `0x1000ee3c` | epilogue **#2** |
-| `0x1000ef7b` | n/a | epilogue **#3** |
-
-Our build has **two** epilogue blocks (`0x1000ee46`, `0x1000ef7f`) where the reference has three, and our first
-loop exit emits `jae 0x1000ee46` (jumping *forward* to the shared exit), where the reference *falls through*
-into its own copy. So the difference is not "merged vs inline": it is **how many copies of the same epilogue the
-backend chose to materialise**, and which branch reaches which copy.
-
-**Two structural probes, both reverted, both `905` against a target of `912`:**
-
-| probe | result |
-|---|---|
-| route the loop-fallthrough exit to its own label (`goto scan_failed; … scan_failed: return 1;`) | obj **905** |
-| give that return a distinct value (`temp = 1; return temp;`), round 1095 | obj **905** |
-| value-preserving expression (`return (int)(dst_slot == 0x300) \| 1;`), round 1095 | obj **956** |
-
-Two different structural spellings landing on the **same** 905 says the shortfall is not the shape of that one
-statement: both remove the same 7 bytes, i.e. both collapse the same code. The target needs those 7 bytes spent
-elsewhere, which is the layout question above: a third epilogue copy.
-
-**What this means for the lever.** The epilogue count is fixed by the backend's block-placement pass over the
-whole function, not by any local spelling at the return site. Reaching three copies means changing what the
-backend sees *around* the returns (the surrounding block order), which is the same "statement/definition order
-is the only lever that lands" conclusion this project reached for other carriers, applied at the function's
-tail rather than its head.
-
-**The tractable residue in this function is now separated from the intractable part.** The 5 stride sites and
-the two epilogue clusters match instruction-for-instruction; the divergence is which of the two-or-three
-epilogue copies each branch reaches. That is a countable difference (2 vs 3), and it is not a source edit
-available at the return site.
-
-**Build note.** `rebrew test` reports `SIZE_MISMATCH` (obj 905 vs target 912) for this file **at HEAD as well**,
-with no source change present: the reported object size does not track what `cmake --build` produces for it. The
-gate, which measures the real composition, is unaffected. Recorded so the tool's number is not read as a
-regression.
+The two historical structural probes remained905 versus912 bytes. The broader
+missing-instruction claims were corrected in §42. This bounded failure does not
+establish that no C form can reproduce the native exit. Recheck the current
+source/compiler context before reopening the experiment.
 
 ### 42. Correcting §38/§40/§41: the missing-instruction counts were inflated by jump-table decoding, and the real exit-path gap is 4 (round 1098)
 
@@ -2244,9 +1948,9 @@ programs differ in instruction *set*, not merely in ordering, which is what make
 rather than a compiler wall. What §38 got wrong was the magnitude, because it measured over spans containing
 tables and padding.
 
-**The method rule this adds to §52 and §53:** before counting anything per function, establish the extent from
-`function_structure.json`'s *next entry*, not from a guessed size or from the first padding run: a span can
-contain both padding **and** jump tables, and the first padding run does not mark the end.
+**The method rule this adds to §52 and §53:** before counting instructions, establish reachable native code and embedded tables.
+The next inventoried entry bounds an investigation; it does not make intervening
+padding/table bytes executable. A first padding run is not a function end either.
 
 ### 43. The missing early exits resist three further spellings; the mechanism is backend block placement (round 1099)
 
@@ -2347,63 +2051,11 @@ narrower than the whole function.
 
 ### 45. Most of the residual difference is PAIRS OF SWAPPED INSTRUCTIONS, not different code (round 1103, fresh-eyes survey)
 
-Going carrier-by-carrier produced a misleading picture: each one looked like a different problem. Comparing all
-nineteen **by address on the deliverable** shows one shape repeated everywhere: the same instructions in the
-opposite order.
 
-**`cm_ExProdObjekt` is the cleanest example: 2 differing instructions out of 349 shared addresses, 21 residue
-bytes, and the entire difference is one schedule swap.**
-
-```
-reference                              ours
-0x1000e20c mov edx,[g_item_def_table]  0x1000e20c mov ebx,[ebp+0x16]
-0x1000e212 xor eax,eax                 0x1000e20f xor eax,eax
-0x1000e214 mov ax,[ebp+0x14]           0x1000e211 mov ax,[ebp+0x14]
-0x1000e218 mov ebx,[ebp+0x16]          0x1000e215 mov [esp+0x18],ebx
-0x1000e21b mov ecx,eax                 0x1000e219 mov edx,[0x100367bc]
-0x1000e21d mov [esp+0x18],ebx          0x1000e21f mov ecx,eax
-```
-
-The reference hoists the **table-pointer load to the top**; ours issues it fourth. Nothing is missing, nothing
-is different in kind: one load is scheduled earlier.
-
-**The same shape in the other carriers examined this session:**
-
-| carrier | the swap |
-|---|---|
-| `cm_ExProdObjekt` | `mov edx,[global]` first vs fourth (2 of 349 differ) |
-| `vfs_ReadCompressed` | `mov edi,eax; test edi,edi` vs `test eax,eax; mov edi,eax` |
-| `srv_LoadBuf` | `push eax` at idx 26 vs idx 29 (its whole 49-byte residue) |
-| `gm_AllocSpieler` | `rep stosd` before vs after the slot stores (round 212) |
-| `CrashDump` | `push ebp` / `mov [ebp],ecx` order |
-| `gm_ObjectsAvailble` | `ebx`/`edi` roles swapped across two pointers |
-
-**Two consequences that change the plan.**
-
-1. **The address-indexed `mnemonic differs` count of 567 (§44) overstates the semantic gap.** When two
-   adjacent instructions swap, both addresses report a *different mnemonic*, so a one-instruction schedule
-   change is counted twice and looks like two pieces of different code. The real count of genuinely different
-   instruction *kinds* is smaller than 567.
-2. **`cm_ExProdObjekt`'s operand `0x100367bc` is not a symbol**: it is absent from `rebrew-data.toml`, while the
-   reference's `0x101de450` is `g_item_def_table`. That is not a wrong global in the source: `postlink`
-   rewrites `.data` operands **by `.text`-relative offset**, so when a preceding instruction changes length the
-   rewrite lands on the neighbouring instruction. **Fix the swap and the operand corrects itself.** Reading it
-   as a wrong-global bug would send the search into the data declarations, which are already exact (0 differing).
-
-**Probed this round, all reverted, all negative:**
-
-| carrier | probe | result |
-|---|---|---|
-| `cm_ExProdObjekt` | hoist `g_item_def_table` into a block local before both msg loads, so the source reads it first | **+0**, and the instruction order was **unchanged**: the scheduler rescheduled it back |
-| `vfs_ReadCompressed` | volatile use-site on the `i == 0` test, the file's own technique | object grew past the 512 span, composition collapsed |
-| `CrashDump` | typed `(OVERLAPPED*) 0` at one `WriteFile` | (probe abandoned, reverted) |
-
-**The conclusion this supports, stated as judgement:** the residual is dominated by msvc6's **scheduler**, not
-by source content. The instructions are all present and semantically equivalent (17 of the 19 carriers are
-PROVEN); what differs is the order the backend emits them in, and the order is set after the front end by
-register pressure and the instruction scheduler. Five carriers, three rounds, and roughly a dozen spellings now
-show the same thing: no C-level respelling moves a pinned schedule, because the schedule is not derived from
-the spelling.
+**Overgeneralization corrected by §46.** A few carriers suggested scheduling
+dominated; the complete historical classifier put scheduling at24.7%, register
+choices at23.0% and immediate differences at21.2%. Those are measurements of
+that composition, not current residue or a universal backend distribution.
 
 ### 46. Per-difference attribution: the residue is split evenly across THREE mechanisms, and §45 overstated the scheduler (round 1104)
 

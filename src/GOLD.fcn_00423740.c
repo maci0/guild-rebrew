@@ -1,27 +1,18 @@
 /* ADDRESS: GOLD 0x00423740 */
-int __declspec(naked) __cdecl fcn_00423740(int a)
+int __cdecl fcn_00423740(int a)
 {
-	(void) a;
-	__asm {
-		_emit 0xa1
-		_emit 0xa4
-		_emit 0x23
-		_emit 0x63
-		_emit 0x00
-		xor ecx, ecx
-		test eax, eax
-		jz empty
-		mov ecx, dword ptr [esp+4]
-	walk:
-		cmp dword ptr [eax+114h], ecx
-		jz found
-		mov eax, dword ptr [eax+4]
-		test eax, eax
-		jnz walk
-		ret
-	empty:
-		mov eax, ecx
-	found:
-		ret
-	}
+    char* p;
+    int result;
+
+    p = *(char**) 0x6323a4;
+    result = 0;
+    if (p != 0) {
+        do {
+            if (*(int*) (p + 0x114) == a)
+                break;
+            p = *(char**) (p + 4);
+        } while (p != 0);
+        result = (int) p;
+    }
+    return result;
 }

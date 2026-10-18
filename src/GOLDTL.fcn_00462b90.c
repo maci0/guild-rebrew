@@ -34,7 +34,7 @@
 
 #define DIST_CODE_LEN 512
 
-#include "trees.h"
+#include "../references/zlib/trees.h"
 
 void __cdecl fcn_00464350(deflate_state* s);
 

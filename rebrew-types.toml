@@ -6,9 +6,9 @@ symbol = "D3_OBJECT"
 size = 552
 native_size = 552
 extent = "allocation"
-evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLDTL.0x00439750 allocates 0x228; GOLDTL.0x00439fa0 stores draw allocation at +0x1ec and initializes 4 slots; GOLDTL.0x00439e10 initializes each slot; GOLDTL.0x00439c00 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json)."
+evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLDTL.0x00439750 allocates 0x228; GOLDTL.0x00439fa0 stores draw allocation at +0x1ec and initializes 4 slots; GOLDTL.0x00439e10 initializes each slot; GOLDTL.0x00439c00 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json). Goal83: only Gold list declarations were added below the unchanged record definitions. Existing native allocation/stride/member evidence reviewed and retained; Gold136-byte list helper independently uses next+0x1f0/previous+0x1f4. Static sentinel is an unsized byte view, not a new552-byte allocation claim. .scratch/goal83-gold-list-integration/"
 cflags = "/O2 /Gd"
-source_hash = "02f0b19ebfbd8a2af1c9fa203a2ad2eb617ae345a61d0a6ac992e37a751d0a50"
+source_hash = "c68ddf64ac8d3168e5cd4017a57fa8dd26d446ced5a72e1354bfe85cf9224bbd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
@@ -28,9 +28,9 @@ symbol = "D3_OBJECT"
 size = 552
 native_size = 552
 extent = "allocation"
-evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLD.0x0043c570 allocates 0x228; GOLD.0x0043cfb0 stores draw allocation at +0x1ec and initializes 4 slots; GOLD.0x0043ce10 initializes each slot; GOLD.0x0043cb80 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json)."
+evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLD.0x0043c570 allocates 0x228; GOLD.0x0043cfb0 stores draw allocation at +0x1ec and initializes 4 slots; GOLD.0x0043ce10 initializes each slot; GOLD.0x0043cb80 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json). Goal83: only Gold list declarations were added below the unchanged record definitions. Existing native allocation/stride/member evidence reviewed and retained; Gold136-byte list helper independently uses next+0x1f0/previous+0x1f4. Static sentinel is an unsized byte view, not a new552-byte allocation claim. .scratch/goal83-gold-list-integration/"
 cflags = "/O2 /Gd"
-source_hash = "02f0b19ebfbd8a2af1c9fa203a2ad2eb617ae345a61d0a6ac992e37a751d0a50"
+source_hash = "c68ddf64ac8d3168e5cd4017a57fa8dd26d446ced5a72e1354bfe85cf9224bbd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
@@ -43,15 +43,17 @@ eltern = 504
 kinder = 508
 art = 536
 unbekannt_224 = 548
+naechstes = 496
+voriges = 500
 [types."d3.object_draw_data".GOLDTL]
 file = "src/Develop/Units/d3/d3_object.h"
 symbol = "D3_OBJECT_DRAW_DATA"
 size = 5696
 native_size = 5696
 extent = "allocation"
-evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLDTL.0x00439750 allocates 0x228; GOLDTL.0x00439fa0 stores draw allocation at +0x1ec and initializes 4 slots; GOLDTL.0x00439e10 initializes each slot; GOLDTL.0x00439c00 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json)."
+evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLDTL.0x00439750 allocates 0x228; GOLDTL.0x00439fa0 stores draw allocation at +0x1ec and initializes 4 slots; GOLDTL.0x00439e10 initializes each slot; GOLDTL.0x00439c00 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json). Goal83: only Gold list declarations were added below the unchanged record definitions. Existing native allocation/stride/member evidence reviewed and retained; Gold136-byte list helper independently uses next+0x1f0/previous+0x1f4. Static sentinel is an unsized byte view, not a new552-byte allocation claim. .scratch/goal83-gold-list-integration/"
 cflags = "/O2 /Gd"
-source_hash = "02f0b19ebfbd8a2af1c9fa203a2ad2eb617ae345a61d0a6ac992e37a751d0a50"
+source_hash = "c68ddf64ac8d3168e5cd4017a57fa8dd26d446ced5a72e1354bfe85cf9224bbd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
@@ -68,9 +70,9 @@ symbol = "D3_OBJECT_DRAW_DATA"
 size = 2416
 native_size = 2416
 extent = "allocation"
-evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLD.0x0043c570 allocates 0x228; GOLD.0x0043cfb0 stores draw allocation at +0x1ec and initializes 4 slots; GOLD.0x0043ce10 initializes each slot; GOLD.0x0043cb80 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json)."
+evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLD.0x0043c570 allocates 0x228; GOLD.0x0043cfb0 stores draw allocation at +0x1ec and initializes 4 slots; GOLD.0x0043ce10 initializes each slot; GOLD.0x0043cb80 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json). Goal83: only Gold list declarations were added below the unchanged record definitions. Existing native allocation/stride/member evidence reviewed and retained; Gold136-byte list helper independently uses next+0x1f0/previous+0x1f4. Static sentinel is an unsized byte view, not a new552-byte allocation claim. .scratch/goal83-gold-list-integration/"
 cflags = "/O2 /Gd"
-source_hash = "02f0b19ebfbd8a2af1c9fa203a2ad2eb617ae345a61d0a6ac992e37a751d0a50"
+source_hash = "c68ddf64ac8d3168e5cd4017a57fa8dd26d446ced5a72e1354bfe85cf9224bbd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
@@ -86,9 +88,9 @@ symbol = "D3_DRAW_PART"
 size = 1188
 native_size = 1188
 extent = "stride"
-evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLDTL.0x00439750 allocates 0x228; GOLDTL.0x00439fa0 stores draw allocation at +0x1ec and initializes 4 slots; GOLDTL.0x00439e10 initializes each slot; GOLDTL.0x00439c00 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json)."
+evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLDTL.0x00439750 allocates 0x228; GOLDTL.0x00439fa0 stores draw allocation at +0x1ec and initializes 4 slots; GOLDTL.0x00439e10 initializes each slot; GOLDTL.0x00439c00 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json). Goal83: only Gold list declarations were added below the unchanged record definitions. Existing native allocation/stride/member evidence reviewed and retained; Gold136-byte list helper independently uses next+0x1f0/previous+0x1f4. Static sentinel is an unsized byte view, not a new552-byte allocation claim. .scratch/goal83-gold-list-integration/"
 cflags = "/O2 /Gd"
-source_hash = "02f0b19ebfbd8a2af1c9fa203a2ad2eb617ae345a61d0a6ac992e37a751d0a50"
+source_hash = "c68ddf64ac8d3168e5cd4017a57fa8dd26d446ced5a72e1354bfe85cf9224bbd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
@@ -102,9 +104,9 @@ symbol = "D3_DRAW_PART"
 size = 408
 native_size = 408
 extent = "stride"
-evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLD.0x0043c570 allocates 0x228; GOLD.0x0043cfb0 stores draw allocation at +0x1ec and initializes 4 slots; GOLD.0x0043ce10 initializes each slot; GOLD.0x0043cb80 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json)."
+evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layouts/native-layout-recon.json; GOLD.0x0043c570 allocates 0x228; GOLD.0x0043cfb0 stores draw allocation at +0x1ec and initializes 4 slots; GOLD.0x0043ce10 initializes each slot; GOLD.0x0043cb80 establishes tree parent/child. Native allocator forwards requested size and returns its pointer unchanged. Names are inferred; unknown fields stay byte regions. Character instances reference scene object at +0x34; TakeObjectScript dummy is a scene object, draw slot zero supplies a resource name prefix. Native constructors TL439fa0 (244 bytes) / Gold43cfb0 (292 bytes) allocate1640/970 and initialize four auxiliary strides9c/80 at1384/754. Cleanup TL456b80/Gold45ccc0 uses the same strides and typed fields; paired constructor flag stores439814/43c62a and cleanup bodies establish masks1/4 below unchanged darstellungsflag. Unknown members are inferred access views. Existing complete extents and bound offsets remain unchanged. Receipts .scratch/goal42/*-asm.json and candidate-native-proof.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json). Goal83: only Gold list declarations were added below the unchanged record definitions. Existing native allocation/stride/member evidence reviewed and retained; Gold136-byte list helper independently uses next+0x1f0/previous+0x1f4. Static sentinel is an unsized byte view, not a new552-byte allocation claim. .scratch/goal83-gold-list-integration/"
 cflags = "/O2 /Gd"
-source_hash = "02f0b19ebfbd8a2af1c9fa203a2ad2eb617ae345a61d0a6ac992e37a751d0a50"
+source_hash = "c68ddf64ac8d3168e5cd4017a57fa8dd26d446ced5a72e1354bfe85cf9224bbd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
@@ -226,9 +228,9 @@ symbol = "D3_OBJECT_AUX_SLOT"
 size = 156
 native_size = 156
 extent = "stride"
-evidence = "Inferred auxiliary record access view, not an independent allocation. Native draw constructors TL439fa0/Gold43cfb0 initialize4 records with9c/80-byte strides inside1640/970-byte allocations at1384/754; cleanup133-byte bodies and callback154-byte bodies confirm offsets. First word and zeroed scalar views remain semantically unresolved. Object field is compared with disposal object context. Native112/63-byte per-record cleanup dereferences the following pointer. Receipts .scratch/goal42/*-asm.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json)."
+evidence = "Inferred auxiliary record access view, not an independent allocation. Native draw constructors TL439fa0/Gold43cfb0 initialize4 records with9c/80-byte strides inside1640/970-byte allocations at1384/754; cleanup133-byte bodies and callback154-byte bodies confirm offsets. First word and zeroed scalar views remain semantically unresolved. Object field is compared with disposal object context. Native112/63-byte per-record cleanup dereferences the following pointer. Receipts .scratch/goal42/*-asm.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json). Goal83: only Gold list declarations were added below the unchanged record definitions. Existing native allocation/stride/member evidence reviewed and retained; Gold136-byte list helper independently uses next+0x1f0/previous+0x1f4. Static sentinel is an unsized byte view, not a new552-byte allocation claim. .scratch/goal83-gold-list-integration/"
 cflags = "/O2 /Gd"
-source_hash = "02f0b19ebfbd8a2af1c9fa203a2ad2eb617ae345a61d0a6ac992e37a751d0a50"
+source_hash = "c68ddf64ac8d3168e5cd4017a57fa8dd26d446ced5a72e1354bfe85cf9224bbd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
@@ -247,9 +249,9 @@ symbol = "D3_OBJECT_AUX_SLOT"
 size = 128
 native_size = 128
 extent = "stride"
-evidence = "Inferred auxiliary record access view, not an independent allocation. Native draw constructors TL439fa0/Gold43cfb0 initialize4 records with9c/80-byte strides inside1640/970-byte allocations at1384/754; cleanup133-byte bodies and callback154-byte bodies confirm offsets. First word and zeroed scalar views remain semantically unresolved. Object field is compared with disposal object context. Native112/63-byte per-record cleanup dereferences the following pointer. Receipts .scratch/goal42/*-asm.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json)."
+evidence = "Inferred auxiliary record access view, not an independent allocation. Native draw constructors TL439fa0/Gold43cfb0 initialize4 records with9c/80-byte strides inside1640/970-byte allocations at1384/754; cleanup133-byte bodies and callback154-byte bodies confirm offsets. First word and zeroed scalar views remain semantically unresolved. Object field is compared with disposal object context. Native112/63-byte per-record cleanup dereferences the following pointer. Receipts .scratch/goal42/*-asm.json. Header adds only the list-removal prototype; all previously reviewed native layout evidence, sizes, extents and offsets remain unchanged. Camera pointer declaration is in a separate inferred header. Both full112 list bodies agree in production (.scratch/goal43/list-production-native-proof.json). Goal83: only Gold list declarations were added below the unchanged record definitions. Existing native allocation/stride/member evidence reviewed and retained; Gold136-byte list helper independently uses next+0x1f0/previous+0x1f4. Static sentinel is an unsized byte view, not a new552-byte allocation claim. .scratch/goal83-gold-list-integration/"
 cflags = "/O2 /Gd"
-source_hash = "02f0b19ebfbd8a2af1c9fa203a2ad2eb617ae345a61d0a6ac992e37a751d0a50"
+source_hash = "c68ddf64ac8d3168e5cd4017a57fa8dd26d446ced5a72e1354bfe85cf9224bbd"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
@@ -261,7 +263,6 @@ unbekannt_nach_objekt = 8
 unbekannt_a = 24
 unbekannt_b = 28
 unbekannt_c = 32
-
 [types."amt.office_slot".SERVER]
 file = "src/Develop/game_structs.h"
 symbol = "OFFICE_SLOT"
@@ -331,9 +332,9 @@ symbol = "CH_QUEUE_SLOT"
 size = 404
 native_size = 404
 extent = "stride"
-evidence = "Native free-slot helpers TL405080/Gold404760 scan 2000 records with stride 0x194; paired startup allocates 0xc5440 = 2000 x 0x194. This is an inferred occupancy-word plus opaque payload access view, not the original full action typedef."
+evidence = "Goal83 header-only callback declaration review leaves the existing occupancy view unchanged: native free-slot helpers TL405080/Gold404760 scan2000 records at0x194 stride; startup allocation0xc5440 equals2000*0x194. Occupancy dword0, opaque payload+4; no complete original task typedef or storage owner claimed. .scratch/goal83-tl-small/"
 cflags = "/O2 /Gd"
-source_hash = "2a5bb3e885b5405690fb573f5c1c0d4c04b94bcaf775c0ac34140cf66bd3ab19"
+source_hash = "41a7a6a837e0429e9b2cc27c6b120f48e57704fca7d8c60517d1ed2fa387fc0b"
 headers_hash = "c3d9a54c4220d4ba228afdb7ed615f55c52c07635de1c4203e18f1e76dd1709c"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
@@ -348,9 +349,9 @@ symbol = "CH_QUEUE_SLOT"
 size = 404
 native_size = 404
 extent = "stride"
-evidence = "Native free-slot helpers TL405080/Gold404760 scan 2000 records with stride 0x194; paired startup allocates 0xc5440 = 2000 x 0x194. This is an inferred occupancy-word plus opaque payload access view, not the original full action typedef."
+evidence = "Goal83 header-only callback declaration review leaves the existing occupancy view unchanged: native free-slot helpers TL405080/Gold404760 scan2000 records at0x194 stride; startup allocation0xc5440 equals2000*0x194. Occupancy dword0, opaque payload+4; no complete original task typedef or storage owner claimed. .scratch/goal83-tl-small/"
 cflags = "/O2 /Gd"
-source_hash = "2a5bb3e885b5405690fb573f5c1c0d4c04b94bcaf775c0ac34140cf66bd3ab19"
+source_hash = "41a7a6a837e0429e9b2cc27c6b120f48e57704fca7d8c60517d1ed2fa387fc0b"
 headers_hash = "c3d9a54c4220d4ba228afdb7ed615f55c52c07635de1c4203e18f1e76dd1709c"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
@@ -358,7 +359,6 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 [types."ch.action_queue_slot".GOLD.offsets]
 belegt = 0
 unbekannt_004 = 4
-
 [types."ch.action_dispatch_entry".GOLDTL]
 file = "src/client_types.h"
 symbol = "Entry_14d0c40"
@@ -437,10 +437,10 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "stride"
-evidence = "Inferred validator-field view at registry+16 with20-byte stride; native consumer/result contract unchanged. Goal60 reviewed first-slot EVENT_RUN declaration and registry setter; validator offsets0/4 and size20 remain unchanged. No new layout or allocation owner."
+evidence = "Goal83 re-review: inferred validator field view at registry+16, entry stride20. Native TL4e6650/Gold4e4cc0 scale the unsigned event type as index*5*4 and read/call the fourth entry slot. fn at0 and16 opaque bytes unchanged; EVENT_CHECK is cdecl int(char*) with full EAX tested. Existing source call casts changed since Goal60 without altering this layout. Complete backing allocation and owner remain unknown. .scratch/goal83-event-type/"
 cflags = "/O2 /Gd"
-source_hash = "51163a856bbdf8c72b62f59effd3f40fb23a9a02654473b59df1132ca743ef0d"
-headers_hash = "e898eab6290031dfe93fa86f9fab315e8fd573050b77c737042532652cfed262"
+source_hash = "023b99c651390b7c7f8af389bdce2a94738cdf31128b5cfa9dce6cddf96dba19"
+headers_hash = "d7395943cdb37f6aa47322624e0932613751c8ca48ac8f299a486659328c3f0c"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -454,17 +454,16 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "stride"
-evidence = "Inferred validator-field view at registry+16 with20-byte stride; native consumer/result contract unchanged. Goal60 reviewed first-slot EVENT_RUN declaration and registry setter; validator offsets0/4 and size20 remain unchanged. No new layout or allocation owner."
+evidence = "Goal83 re-review: inferred validator field view at registry+16, entry stride20. Native TL4e6650/Gold4e4cc0 scale the unsigned event type as index*5*4 and read/call the fourth entry slot. fn at0 and16 opaque bytes unchanged; EVENT_CHECK is cdecl int(char*) with full EAX tested. Existing source call casts changed since Goal60 without altering this layout. Complete backing allocation and owner remain unknown. .scratch/goal83-event-type/"
 cflags = "/O2 /Gd"
-source_hash = "51163a856bbdf8c72b62f59effd3f40fb23a9a02654473b59df1132ca743ef0d"
-headers_hash = "e898eab6290031dfe93fa86f9fab315e8fd573050b77c737042532652cfed262"
+source_hash = "023b99c651390b7c7f8af389bdce2a94738cdf31128b5cfa9dce6cddf96dba19"
+headers_hash = "d7395943cdb37f6aa47322624e0932613751c8ca48ac8f299a486659328c3f0c"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."event.validator_view".GOLD.offsets]
 fn = 0
 pad4 = 4
-
 [types."client.timer_callback_slot".GOLDTL]
 file = "src/client_timer.h"
 symbol = "TIMER_CALLBACK_SLOT"
@@ -688,3 +687,162 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 [types."d3.object-selection-list32".GOLD.offsets]
 objects = 0
 count = 128
+
+[types."dd.device_record".GOLD]
+file = "src/GOLD.fcn_0041c830.c"
+symbol = "DD_DEVICE"
+size = 824
+native_size = 824
+extent = "stride"
+evidence = "Gold dialog 0x41c830 indexes device records at 0x14635e0 with native stride 0x338 and fields 0,0x10,0x110,0x30d; writer 0x41c460. Array allocation extent and owner unknown. .scratch/goal82-grok-dialog/REPORT.md and proof.json."
+cflags = "/O2 /Gd"
+source_hash = "629eb70e6ccb1642ea85043bdad0d3922fab2ed91c7738482c9264967f8c5b30"
+headers_hash = "b6c545c889f8e7c7a0d075a0b15061cbde562287329ab0acd2eb239835cc61fd"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."dd.device_record".GOLD.offsets]
+guid = 0
+description = 16
+name = 272
+flag = 781
+
+[types."dd.driver_record".GOLD]
+file = "src/GOLD.fcn_0041c830.c"
+symbol = "DD_DRIVER"
+size = 532
+native_size = 532
+extent = "stride"
+evidence = "Gold dialog 0x41c830 indexes driver records at 0x1465100 with native stride 0x214 and fields 0,0x14,0x114. Array allocation extent and owner unknown. .scratch/goal82-grok-dialog/REPORT.md and proof.json."
+cflags = "/O2 /Gd"
+source_hash = "629eb70e6ccb1642ea85043bdad0d3922fab2ed91c7738482c9264967f8c5b30"
+headers_hash = "b6c545c889f8e7c7a0d075a0b15061cbde562287329ab0acd2eb239835cc61fd"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."dd.driver_record".GOLD.offsets]
+guid = 0
+description = 20
+name = 276
+
+[types."town.cell_record".GOLDTL]
+file = "src/client_town.h"
+symbol = "Cell502450"
+size = 128
+native_size = 128
+extent = "stride"
+evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json."
+cflags = "/O2 /Gd"
+source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."town.cell_record".GOLDTL.offsets]
+x0 = 0
+w = 16
+f = 24
+f30 = 48
+f34 = 52
+ent = 80
+
+[types."town.cell_record".GOLD]
+file = "src/client_town.h"
+symbol = "Cell502450"
+size = 128
+native_size = 128
+extent = "stride"
+evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json."
+cflags = "/O2 /Gd"
+source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."town.cell_record".GOLD.offsets]
+x0 = 0
+w = 16
+f = 24
+f30 = 48
+f34 = 52
+ent = 80
+[types."town.row_record".GOLDTL]
+file = "src/client_town.h"
+symbol = "Row502450"
+size = 10896
+native_size = 10896
+extent = "stride"
+evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json."
+cflags = "/O2 /Gd"
+source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."town.row_record".GOLDTL.offsets]
+c = 0
+tail = 10880
+
+[types."town.row_record".GOLD]
+file = "src/client_town.h"
+symbol = "Row502450"
+size = 10896
+native_size = 10896
+extent = "stride"
+evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json."
+cflags = "/O2 /Gd"
+source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."town.row_record".GOLD.offsets]
+c = 0
+tail = 10880
+
+[types."scene.resource_record".GOLD]
+file = "src/client_scene_resources.h"
+symbol = "SCENE_RESOURCE"
+size = 128
+native_size = 128
+extent = "stride"
+evidence = "Gold native 0x461080 advances array [0xfb9074] by 0x80; worker 0x460e40 and release helper 0x461130 access these offsets. Inferred names; stride only, allocation bounds and storage owner unknown. .scratch/goal83-gold-finalizers/{finalizer,worker}.asm"
+cflags = "/O2 /Gd"
+source_hash = "5da68c8200522a4a1e406c039dc992a9a764294acbf12ea09a342a32f2d616d9"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
+
+[types."scene.resource_record".GOLD.offsets]
+level = 64
+tracked = 68
+alias = 76
+id = 80
+com60 = 96
+com64 = 100
+flags = 104
+byte70 = 112
+byte71 = 113
+shifted = 116
+value = 120
+result = 124
+extra = 125
+[types."scene.progress_context".GOLDTL]
+file = "src/client_scene_loader.h"
+symbol = "SCENE_PROGRESS_CONTEXT"
+size = 20
+native_size = 20
+extent = "allocation"
+evidence = "T&L 0x43ac00 builds a 20-byte stack callback context; 0x43aad0 consumes cdecl callback at +0, integer fields +4/+8/+0xc and skip byte +0x10. Full 123 and 292-byte objects preserved by .scratch/goal83-scene-contracts/normalized-preservation.json; inferred names, not persistent storage."
+cflags = "/O2 /Gd"
+source_hash = "05d67307fe3991eb4af0d776d953b1bd7609ea19c5e6b904bace70722e6dd888"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."scene.progress_context".GOLDTL.offsets]
+fn = 0
+id = 4
+total = 8
+count = 12
+skip = 16

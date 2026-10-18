@@ -101,8 +101,8 @@ void __cdecl fcn_004d0c70(void)
 			((Slot*)g_1015ea0)[g_9b4840[k].text].color = 0x54;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].h = 0x80;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].centered = 1;
-			v = fcn_00507e30((char*) u, 3);
-			fcn_00534160(0x24, 0x41, v, 0x4df);
+			v = (float)(fcn_00507e30((char*) u, 3));
+			fcn_00534160(0x24, 0x41, (int)v, 0x4df);
 			k++;
 		}
 	}

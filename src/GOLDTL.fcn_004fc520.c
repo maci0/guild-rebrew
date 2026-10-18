@@ -15,7 +15,7 @@ float __cdecl fcn_004fc520(void)
 	for (k = 9; k <= 0xf; k++) {
 		fcn_004f4830(k, info);
 		lo = (float) info[1];
-		t = (1.0 - (info[6] - lo) / (info[2] - lo)) * w[k - 9];
+		t = (float)((1.0 - (info[6] - lo) / (info[2] - lo)) * w[k - 9]);
 		sum += t;
 	}
 	return t + sum;

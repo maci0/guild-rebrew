@@ -1,10 +1,19 @@
 # MSVC 6.0: C shapes
 
 Measured C spellings, keyed by original section number and native address.
-Server uses plain SP5; clients use SP5 Processor Pack. Historical scores and
-retired split-link probes do not establish current status or raw-file identity.
-Keep successful shapes here, register allocation in [allocator](msvc6-allocator.md),
-failed levers in [walls](codegen-walls.md), and ruler caveats in
+Server uses plain SP5; clients use SP5 Processor Pack. Compile with the
+project `unshare` backend on the pinned toolchain image. A note that names
+Docker or Wine records that measurement's runtime.
+
+Scores, residue totals, PROVEN labels and old recipes are checkpoints.
+Current proof and status stay in managed metadata. When a later section
+corrects an earlier claim, the later result wins. "Unreachable" means the
+variants named in that section. Assembly permission is
+[the assembly audit](assembly-audit.md#what-qualifies), not a failed C search
+or a fenced naked body.
+
+Keep register allocation in [allocator](msvc6-allocator.md), failed levers in
+[walls](codegen-walls.md), and ruler caveats in
 [measurement](measure-traps.md). Full original prose is [archived](goal-history.md#full-notebooks).
 
 ## Index by symptom
@@ -48,9 +57,10 @@ uv run --frozen rebrew test FILE --json
 ```
 
 Read source notes too. Use current CLI help for preview/write behavior and keep
-mechanism probes in `.scratch/`, compiled by the pinned Docker toolchain.
-Compare complete bodies, operands and literals; rebuild affected target images
-for link/layout claims. Record inputs, observed output, limits and receipt once.
+mechanism probes in `.scratch/`. Compile with the project `unshare` backend
+on the pinned image. Compare complete bodies, operands and literals; rebuild
+affected target images for link/layout claims. Record inputs, observed output,
+limits and receipt once.
 
 ## 1. Global array element type sets the addressing scale
 
@@ -100,10 +110,11 @@ result = (int) gm_GetEntityTableEntry((char*) &g_slot_table + idx);
 `src/Develop/DieGildeAddOn/game/spiel622.c:378`
 
 Fixed `gm_CheckStatLevel` (0x100181a0) and `gm_ResolveParentEntity`
-(0x10019ae0). Note `g_slot_table` is declared inconsistently across the tree
-(pointer in the `spiel*` files, `char[]` in `command_internal.h`); fix at the
-use site rather than unifying the declaration, which would disturb functions
-that already match.
+(0x10019ae0) in that checkpoint. `g_slot_table` then had inconsistent declarations
+(pointer in the `spiel*` files, `char[]` in `command_internal.h`). The address-taking
+fix preserved those measured contexts; it does not justify retaining contradictory
+contracts. Reconcile canonical declarations through a reviewed all-target contract
+change and reverify every affected definition and caller.
 
 ## 3. Uninitialized locals from decompilation
 
@@ -1065,10 +1076,10 @@ derived from a shared `-1`, and moving the two `0xff` stores adjacent all
 compile to output byte-identical to the literal form: msvc6 re-materializes a
 constant at each store site and picks its own register for the parked zero.
 
-Constant sharing is decided after the source-level temps are folded away, so
-there is no C spelling for it. Treat a diff whose only differences are
-`mov [addr],imm` against `mov [addr],reg` in a store block the same way as
-section 25's register naming: check for real structure elsewhere first.
+Constant sharing in this block survived every spelling listed above. That
+does not prove no other C form exists. Treat a diff whose only differences are
+`mov [addr],imm` against `mov [addr],reg` in a straight store block the same
+way as section 25: check for real structure elsewhere first.
 
 ## 29. Hoist a common addend out of a select, and let the select assign the result
 
@@ -1794,9 +1805,9 @@ unaffected (the other five functions in `sim.c` held their status). `"w"`
 scores the same here, `"g"`, `"p"` and `"t"` are inert, and `"s"` and
 `-"t"` collapse the body to 142 bytes.
 
-Reach for this when the diff is a pure transposition of a load and a store to
-the same object and no statement order reproduces it: the obstacle is the
-aliasing assumption, which no C spelling can express.
+On this site, statement order did not reproduce the transposition.
+`#pragma optimize("a", on)` did, with no other source change. That is a C
+spelling, not evidence that aliasing is inexpressible.
 
 `src/Develop/DieGildeAddOn/game/sim.c:251`
 
@@ -2423,9 +2434,9 @@ value live.
 The reference does hold it: `mov ebp,0xffff` once at 0x1000edc0, then
 `cmp word ptr [eax+0x100358a0],bp` (7 B), but `ebp` is free there only because
 the instruction that clobbers it (`mov ebp,[eax+0x10035ab0]`, the type-3 arm's
-owner_id load) sits on the other side of a branch.  That is a CSE plus
-callee-saved allocation decision with no C spelling: the value's live range is
-what it is, and a source-level name does not extend it.  A wall, not a lever.
+owner_id load) sits on the other side of a branch.  The named local above
+did not extend that live range.  That one spelling failed; it is not a proof
+that no C form can.
 
 Contrast section 22 (`4 + load_result`), where the *spelling of the load*
 selected the cached form.  The distinction: there the spelling changed the
@@ -2595,24 +2606,22 @@ loop's forward `je` from rel8 to rel32 and realigned a 129-byte loop body onto t
 reference's offsets.  With three further equivalent changes it measured `matched` 683 -> 830
 and `matched-reloc` 823 -> 970 at an unchanged COMDAT of 1088.
 
-**It is not usable here.**  The objective for this recompilation is C only, with a single
-exception: hand-written assembly that the *original* code itself contained.  A `nop`
-barrier is neither -- it is a directive to our compiler to reproduce a schedule no C
-spelling produces, so it manufactures bytes the source does not explain.  The pre-existing
-`__asm` block-fill in this same file is admissible because the original has a 24-byte
-hand-written fill prelude there (Finding 19); the barrier is not.
+**It is not usable here.** A `nop` barrier asks the compiler for a schedule. It is
+not evidenced original assembly. Section 200 later reached the separated address
+form with a `volatile` load; that supersedes any "asm only" reading of this
+site. Whether a fill block is original assembly is decided by
+[the assembly audit](assembly-audit.md#what-qualifies), not by this round.
 
-Measured cost of honouring the constraint: removing only the barrier from that candidate
-gives `matched` 377 (worse than HEAD's 683) and drops the COMDAT to **1072**, which moves the
-jump table and breaks the composition.  So **the entire +147 rested on the barrier**, and
-`gm_AllocGebaeude` was reverted to HEAD rather than shipped.  Recorded so the lever is not
-re-derived as "free": it is real, it is large, and it is off-limits.
+Removing only the barrier from that candidate gave `matched` 377 (worse than
+that HEAD's 683) and dropped the COMDAT to **1072**, which moved the jump
+table. The +147 rested on the barrier, so that candidate was reverted. The
+same numbers are in [walls §6](codegen-walls.md). Do not reread either note
+as a current ban: section 200 reached the separated address with `volatile`.
 
-**What remains legitimate:** when a schedule is unreachable from C, look for a *source*
-mechanism with the same effect -- an extra local that extends a live range, a
-`volatile` qualification that pins a value to memory (section 60), or a statement order
-that changes which block is created first (section 59).  Those are C, and their effect on
-the scheduler is explainable.
+**What remains legitimate:** when the C spellings tested for a schedule do not
+reach it, look for another source mechanism: an extra local that extends a live
+range, a `volatile` qualification that pins a value to memory (section 60), or a
+statement order that changes which block is created first (section 59).
 
 **The "extra local extends a live range" mechanism measured inert on the barrier's exact
 site (round 839).** A named `char* item_base` holding the table address before the
@@ -3109,17 +3118,15 @@ Two properties make a verification trustworthy, and this pipeline had neither:
 - **every stage's exit status is checked**: `;` between a producer and its
   measurer hides the producer's failure, and `grep`-ing only the interesting
   line hides the error text as well;
-- **the measurer validates its own inputs**: `postlink_residual.py` now
-  refuses a build older than any `src/**/*.c` and names the offending files,
-  so a binary that predates the edit under test can never be scored.
+- **the measurer validates its own inputs**: that round's
+  `postlink_residual.py` was changed to refuse a build older than any
+  `src/**/*.c`. The script is retired.
 
-`scripts/gate.sh` now performs the link and the residue measurement itself and
-fails on either, which makes the per-round residue an assertion rather than a
-recollection. Regenerable inputs that live in ignored directories should also
-be re-derivable by a documented command: these were recovered with
-`docker create`/`docker cp` from the toolchain images.
-
-`scripts/postlink_residual.py`, `scripts/gate.sh`
+`scripts/gate.sh` still runs the server acceptance check. Residue after a
+historical postlink step is `rebrew build residue`; do not recreate
+`postlink_residual.py`. The recovery that refilled ignored inputs used
+`docker create`/`docker cp`. Current compiles use project `unshare` on the
+pinned image. See [tooling](tooling-upstream.md).
 
 ## 84. Sink a value's definition into the guard that uses it, and let the other region keep its own register
 
@@ -3163,8 +3170,9 @@ look for a value defined before that region and used only after it.
 
 Section 84's lever (sink a definition into the guard that reads it) paid
 -173 on `cm_ExSellObjekt` and -23 on `gm_AllocSpieler`. Applying the same
-block-order mapping to two more functions found the shape present in both and
-unreachable in both, which fixes the rule's scope.
+block-order mapping to two more functions found the shape present in both, and
+the lever did not move either of them. That bounds the rule to a movable
+definition, not a constant.
 
 **`cm_ExCopyEntityData` (0x1000ec00): the pinned value is a constant, so
 source scoping cannot move it.** The reference materialises `mov ebp,0xffff`
@@ -3738,27 +3746,21 @@ because a neighbour diverges in length. Quote which count is meant.
 
 ### `ahm_ExAllocAlchemist`: `faddp` is unreachable from any C expression
 
-A 66-byte float-tail run reduces to **one byte**: ours `d8c1 fadd st(1)` against the
-reference's `dec1 faddp st(1)` at 0x1000c034. The trailing `ddd8 fstp st(0)` is not an
-independent fault: it is the cleanup msvc6 must add because non-popping `fadd` leaves the
-operand on the x87 stack. Fix the byte and the run closes with it, so section 88 slack is
-irrelevant: the correct form is two bytes *shorter*.
-
-msvc6 collapses six spellings into **three** objects, and those are the only outcomes:
+At `0x1000c034` the reference has `dec1 faddp st(1)` and this round had `d8c1 fadd st(1)`,
+with a trailing `fstp st(0)` because the non-popping add leaves the operand live.
+Six spellings collapsed to three objects:
 
 | shape | result |
 |---|---|
-| integer in a `float`/`double` local | correct `fild` first, but the local is live at the add, so msvc6 must use non-popping `fadd` |
-| integer *not* in a local | it stays memory-resident and the add fuses into `fiadd [esp+0x14]`, which pops and does delete the `fstp st(0)`, wrong instruction, and it costs the whole preceding schedule (699 -> 377) |
-| reassociated sub-first | `fsubr st(2)` + `fadd st(1)`, leaving two dead registers and emitting `fstp st(0)` **twice** |
+| integer in a `float`/`double` local | `fild` first, then non-popping `fadd` while the local stays live |
+| integer not in a local | `fiadd [esp+0x14]`, which pops, and the preceding schedule collapses (699 to 377) |
+| reassociated sub-first | `fsubr st(2)` + `fadd st(1)`, then `fstp st(0)` twice |
 
-`faddp st(1)` needs the conversion to be *both* a distinct `fild` (which requires a local)
-*and* dead at the add (which requires no local). In msvc6's x87 model those are the same
-property, so **no C expression can satisfy both**, closed by construction, not merely
-inert. Two header claims died with it: that a `p1` local pinned `fld [esi+0x1c]; fmul`
-(it pins the pair's *position*, never its operand roles: our baseline loads the constant
-first) and that deleting `p1` reached 286 instructions at -15 (two different probes fused;
-the -15 body is 287, the 286 body scores 398).
+Those are the only variants this round tested. The claim that no C expression can emit
+`faddp` does not extend past that set. Section 200 later got `faddp`/`fsubp` without a
+trailing `fstp st(0)` from `v += a; v -= b` on one local. A `p1` local here pinned load
+*position*, not operand roles, and the "286 instructions at -15" header mixed two probes
+(287 instructions, and a 286-instruction body scoring 398).
 
 ## 93. PROVEN is not a byte match, and the headline number hid that
 
@@ -3958,21 +3960,22 @@ the wrong one.
 
 ## 97. Spec audit: every live `__asm` block is inside the "original used asm" carve-out
 
-The governing objective allows **no naked asm unless the original code was using it to**.
-Round 198 audited that directly for the first time. Result: **six live `__asm` blocks, all six
-compliant, zero naked functions.**
+Round 198 reported six alignment-prefixed fills, called all of them compliant,
+and treated that inventory as permission for assembly. That conclusion is
+stale. It is not a whole-function exception, and a failed C search or
+`REBREW_ALLOW_NAKED` does not grant one.
 
-| file | function | VA | status | reference contains it |
-|---|---|---|---|---|
-| `server4.c:448` | `srv_InitBuildingTypeTable` | 0x1000b040 | RELOC | yes, at 0x1000b057 |
-| `gm_AllocGebaeude.c:241` | `gm_AllocGebaeude` | 0x100174d0 | PROVEN | yes, at 0x10017611 |
-| `m_AllocTracked.c:451` | `m_AllocTracked` | 0x10006580 | PROVEN | yes, at 0x10006730 |
-| `m_alloc.c:220` | `m_init` | 0x100068e0 | RELOC | yes, at 0x10006929 |
-| `m_alloc2.c:232` | `m_PoolAlloc` | 0x10006d20 | RELOC | yes, at 0x10006e0d |
-| `vfs_ReadData.c:414` | `vfs_ReadData` | 0x10008e40 | RELOC | yes, at 0x10008f0c |
+Current rule: assembly needs evidenced padding, or positive evidence that the
+original source very likely used assembly at that site. Whole-function naked
+bodies stay unsupported. Scoped fill/copy and INT3 receipts, their limits, and
+the remaining unsupported bodies are in
+[the assembly audit](assembly-audit.md#what-qualifies).
 
-All six are the same alignment-prefixed block-fill skeleton, byte-identical in the reference
-at every site:
+The round still records a native 24-byte skeleton at server `m_init`
+`0x100068e0`, `m_PoolAlloc` `0x10006d20`, `vfs_ReadData` `0x10008e40`
+(`rep movs`, no `xor eax,eax`, checked at `0x10008f0c`), and
+`srv_InitBuildingTypeTable` `0x1000b040`, plus the copies then in
+`gm_AllocGebaeude` `0x100174d0` and `m_AllocTracked` `0x10006580`:
 
 ```
 8d0c7f lea ecx,[edi+edi*2]   83e103 and ecx,3   2bd9 sub ebx,ecx   7e0c jle
@@ -3980,55 +3983,14 @@ f3aa rep stosb   8bcb mov ecx,ebx   83e303 and ebx,3   c1e902 shr ecx,2
 f3ab rep stosd   03cb add ecx,ebx   f3aa rep stosb
 ```
 
-`vfs_ReadData` is the **copy** variant of the same skeleton: `f3a4 rep movsb` / `f3a5 rep
-movsd`, and correctly *no* `xor eax,eax` since there is no fill value (verified at
-0x10008f0c). Its C block spells movsb/movsd accordingly.
-
-**Why these are asm in the original, not our shortcut.** Three independent signals:
-the three-`rep` alignment pass (a plain `memset`/`memcpy` expansion emits two); the operand
-homing, which matches the C block's named operands at all six sites; and the use of
-callee-saved `ebx` as scratch, which no msvc6 `memset` expansion does. The template is also
-absent from LIBCMT and LIBC, so it is not an out-of-line CRT routine the linker inlined.
-
-**Independently re-measured rather than assumed.** On the cheapest block (`m_init`) all three
-C alternatives collapse to the plain two-`rep` form and fall 15-19 code bytes short:
-
-| shape | result | code length |
-|---|---|---|
-| `__asm` (shipped) | RELOC 162/162 | 162 |
-| `memset` | SIZE_MISMATCH 97/162 | 143 |
-| `char*` loop | SIZE_MISMATCH 98/162 | 147 |
-| dword `for` loop | SIZE_MISMATCH 98/162 | 146 |
-
-**The stronger prohibition is not violated either:** no `__declspec(naked)` and no
-`#pragma naked` anywhere in the tree. All six are `__asm` statements inside ordinary C
-functions, with `push ebp; mov ebp,esp` present on both sides. Every `naked` grep hit is
-historical prose; the naked-`_emit` era was converted at `93ecf29`.
-
-Cleanup done in the same round: `/DREBREW_ALLOW_NAKED` sat in the cflags of 0x100174d0 and
-0x10008e40 while appearing **zero** times in either source. Measured byte-identical with and
-without it (753/1078 and 472/472 unchanged), so it was dropped via `rebrew test --cflags`:
-it was reading like a live naked-asm escape hatch that does not exist.
-
-**Re-verified 2026-09-17 (round 890) when the carve-out was challenged.** The user asked for all
-six blocks to be removed to plain C. Before acting, every load-bearing claim in this section was
-re-tested independently rather than re-cited:
-
-- **The template is not a library routine: confirmed by exhaustive scan.** Searched all **1,707**
-  `.lib` files under both toolchain caches for the exact 24-byte prelude
-  (`8d0c7f 83e103 2bd9 7e0c f3aa 8bcb 83e303 c1e902 f3ab 03cb f3aa`): **0 hits.** It is not
-  LIBCMT, not LIBC, and not any other shipped library.
-- **Not library code at the function level either.** `rebrew library match --stock-lib LIBCMT.LIB`
-  on `0x100068e0` (`m_init`) reports "not in the given libraries. Safe to reverse."
-- **Every one of the six is byte-exact *because of* its block.** Whole-file `rebrew test` on all
-  six carriers: `m_init` **162/162**, `m_PoolAlloc` **270/270**, `vfs_ReadData` **472/472**,
-  `srv_InitBuildingTypeTable` **372/372**, `m_FreeTracked` 188/188, `m_ShutdownAllocator` 283/283,
-  `m_pool_free` 137/137: all `RELOC`, all at full object size. Round 889 measured what removing
-  them costs: **residue 8,634 → 116,814 (+108,180)**.
-
-The carve-out therefore stands on three independently reproduced legs, and the spec reading is
-settled: these sites satisfy "a code shape no MSVC6 C output can produce." Recorded here so the
-question is not re-litigated a fourth time.
+On `m_init`, `memset`, a `char*` loop and a dword `for` each emitted two `rep`s
+and scored 97/162, 98/162 and 98/162 against the asm object's 162/162. A scan
+of 1,707 toolchain `.lib` files missed that 24-byte prelude, and
+`library match --stock-lib LIBCMT.LIB` on `0x100068e0` missed too. Those are
+corroboration, not authorship. `/DREBREW_ALLOW_NAKED` on `0x100174d0` and
+`0x10008e40` was byte-inert in that round (753/1078 and 472/472) and is not an
+escape hatch. Round 890's residue jump after removing the blocks
+(8,634 to 116,814) is a checkpoint, not a current exception.
 
 ## 98. "Byte-identical outside `.text`" means *copied* outside `.text`
 
@@ -4751,7 +4713,8 @@ optimised out.
 Combined with the seventeen-variant sweep (every one moved the first fault *earlier*), the
 +0xaa fault is closed to source-level work on both of its tells: the store sink and the `lea`
 split. Section 109's narrowed claim stands: C can request the sink alone, but not while keeping
-the `0xffff` store alive, and the `lea` split is unreachable in either configuration.
+the `0xffff` store alive, and the `lea` split was not reached in either
+configuration tested here.
 
 Housekeeping from the same round: the metadata note claiming "SIZE 3209/3689 (480B short)" was
 stale from the naked-asm era: the object is now **exactly 3689 bytes**, the target size, and
@@ -4760,11 +4723,13 @@ an inert `/DREBREW_ALLOW_NAKED` was removed from its cflags (verified byte-ident
 
 ## 110. A deliberate semantic bug is shipped in `gm_AllocSpieler`: state it plainly
 
-This one is not a codegen fact; it is a standing decision that deserves to be visible outside
-a file header, because it trades **correctness for byte score**.
+**Historical defect and rejected rationale.** This section records rounds 213–215
+and 887, not current source. The present `gm_AllocSpieler` in `spiel.c` stores
+`(char) arg8` in the else branch. A better score never justified differing from
+the reference's behavior; the historical controls below remain useful evidence.
 
-`gm_AllocSpieler` contains a real bug. In the `arg8 != 2` branch we store a value that is
-always zero:
+The then-tested `gm_AllocSpieler` contained a real bug. In the `arg8 != 2`
+branch it stored a value that was always zero:
 
 ```c
 if (arg8 == 2) {
@@ -4801,17 +4766,12 @@ Both correct spellings land **identically**, so the 10-byte deficit is structura
 code is simply shorter, not a spelling that can be tuned. An earlier attempt also measured
 **+393 linked** through tail desynchronisation.
 
-**Why this is worth a numbered section.** Sections 19, 41 and 94 established that only the link
-decides, and that rule has correctly rejected many byte-losing edits. This is the one case
-where the rule is being applied to a *correctness* regression rather than a stylistic one, and
-that is a different kind of decision: the objective is a byte-identical recompilation, so the
-shipped source is allowed to diverge from correct behaviour only because the reference binary
-is the specification. Anyone using this tree as a *source* release rather than a byte-matching
-exercise must fix this line first.
-
-The blocking condition is precise and worth restating: a correct spelling that is **10 bytes
-longer**, or a resynchronised tail that absorbs the shortfall. Until then the bug stays, and it
-should stay *documented here*, not only in a comment 450 lines above the defect.
+**Why the old decision was wrong.** The reference binary is the specification,
+and its store differs from this candidate. A linked score cannot excuse that
+behavioral mismatch. The then-proposed unblock was a correct spelling **10 bytes
+longer**, or a resynchronised tail absorbing the shortfall; rounds 214–215 below
+refined that hypothesis. Neither a size deficit nor a score regression permits
+retaining a known semantic defect.
 
 **Round 887 closed the one hypothesis that section left open.** The file header also banks a
 second 11-byte-short fix: reading `*(int*) 0x1003542c` once instead of twice profits four verbatim
@@ -5209,18 +5169,19 @@ practice, and a toolchain is per-file too.
   `gm_CalculateProductionValue` 391/396 → **236/396**, `m_AllocTracked` 566/658 → **266/658**
   (and obj 658 → 634), `vfs_ReadCompressed` 468/492 → 461/492. The nine MSVC6 images are three
   distinct generators (section 92); sp5-pp is its own, and it disagrees with sp6 broadly.
-- **A per-function toolchain pin never reaches the link.** `rebrew build cmake-flags` says so
+- **The then-configured CMake link did not honor a per-function toolchain pin.** `rebrew build cmake-flags` said so
   explicitly: *"resolves toolchain 'msvc-6.0-sp6', but the CMake build's compiler is fixed by the
   toolchain file: the pin affects `rebrew test`/`verify` only, never the linked bytes."* The
-  build selects one compiler through `cmake/toolchain-msvc-6.0-sp6-docker.cmake`, for every
-  translation unit.
+  build then selected one compiler through `cmake/toolchain-msvc-6.0-sp6-docker.cmake`, for every
+  translation unit. Current execution is project `unshare` on the pinned image;
+  that filename is the historical selector, not a Docker-only requirement.
 
 So this is the measure-vs-ship divergence of section 99 in a new place: a metadata pin can move
 `rebrew test` by +9 matched bytes and a perfect object size while the shipped binary does not
 change by one byte. **Recording the figure without that caveat would be recording a phantom
 win.**
 
-What it would take to bank it: per-file compiler selection in the CMake build: a second
+The proposed change at that checkpoint was per-file compiler selection in the CMake build: a second
 toolchain file plus a `set_source_files_properties`-style override, or splitting the file into
 its own target. That is a build-system change, not a source change, and it is worth exactly the
 4 bytes of size plus 9 matched bytes on one function, so it is recorded rather than pursued.
@@ -5421,36 +5382,14 @@ Section 118 ended on a rule: when the object rulers disagree, link and find out.
 only actionable if linking a candidate is cheap, and every probe lane this session ran
 object-only because a link measurement looked like a manual rebuild-relink-measure cycle.
 
-**It is not. `scripts/linktest.sh` has done this all along**, and it is better than the manual
-cycle because it recompiles with the exact command `build.make` records (so the flags cannot
-drift) then relinks, applies postlink, and prints a per-function delta:
-
-```
-$ bash scripts/linktest.sh src/Develop/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c
-function                                  before   after   delta
-gm_AllocSpieler                             2824    2866     +42  <-- worse
-.text total 8652 -> 8694  (+42)
-revert candidates: gm_AllocSpieler (+42)
-```
-
-Verified both directions this round: **+0 on an unmodified file**, and **+42 attributed to the
-right function** when section 118's known-bad hoist is re-applied as a control.
-
-Two reasons it went unused, both now fixed:
-
-- **It was absent from `AGENTS.md`**, the file every agent reads first, and mentioned only in
-  passing several thousand lines into `docs/TODO.md`. It is now documented in the Linking
-  section next to `gate.sh`, with the worked example above and the reason it matters.
-- **Its baseline snapshot was stale**: `.scratch/residue_base.log` contained a 183-byte
-  *error message* from a previous run ("split_poc.dll is older than 1 source file") rather than
-  a residue table, so the delta report had nothing to compare against. Re-snapshotted with
-  `.venv/bin/python scripts/postlink_residual.py --write build/server.dll > .scratch/residue_base.log`.
-
-The general lesson is worth more than the tool: **a capability nobody knows about is
-indistinguishable from a missing one**. Three rounds of this session built or hand-rolled
-measurement that already existed: the call inventory in section 112 was a genuine gap, but this
-was not. Before building a measurement, grep `scripts/` and read the header comments; they carry
-the rationale for why each one exists.
+`scripts/linktest.sh` and `scripts/postlink_residual.py` did that job in round
+233 and are retired. Do not look for them in `AGENTS.md` or `scripts/`. The
+round's control still stands: an unmodified file scored +0, and section 118's
+known-bad hoist scored +42 on `gm_AllocSpieler` (`.text` 8652 to 8694). Current
+comparisons are `rebrew test`, `rebrew diff`, and `rebrew build residue`; see
+[tooling](tooling-upstream.md). The stale `.scratch/residue_base.log` that
+round held an error string ("split_poc.dll is older than 1 source file")
+instead of a residue table.
 
 ## 120. Two dead ends on `gm_AllocSpieler`, and a caution about shared-worktree probing
 
@@ -5949,8 +5888,9 @@ from a different direction.
 ## 130. The register-pressure cascade is one row's fact, not the tree's
 
 Sections 109, 120, 128 and 129 each closed a lead by attributing it to allocation state, and the
-phrase that recurs is that we commit more callee-saved registers than the reference, so its
-instruction forms are unreachable. Round 238 tested that directly, by comparing prologues rather
+phrase that recurs is that we commit more callee-saved registers than the reference, so those
+instruction forms were not reached from the spellings then in hand. Round 238 tested that
+directly, by comparing prologues rather
 than reasoning from downstream symptoms.
 
 | function | reference prologue | ours | claim |
@@ -6365,10 +6305,10 @@ The three size-exact rows matter because sections 136 and 137 reason from them: 
 object whose windows are all negative *must* hide a compensating surplus, and that inference is
 only valid if the size really is exact. It is.
 
-**The asm constraint holds.** Six live `__asm` blocks across six files, zero `__declspec(naked)`
-anywhere: unchanged from section 97's audit, which established each block reproduces an
-alignment-prefixed block-fill the reference itself contains. Three further files mention `__asm`
-only in comments.
+**Assembly.** Section 97's round-198 claim that every live block was inside a
+carve-out is historical. Current permission is
+[the assembly audit](assembly-audit.md#what-qualifies). The residue figures in
+this section are a checkpoint, not current status.
 
 Nothing here is new work; it is confirmation that the session's later reasoning rests on measured
 ground. **The one thing worth carrying forward: 8,652 is a `.text`-only residue on a
@@ -6709,7 +6649,8 @@ Two practical notes for whoever runs another:
 
 - **The sweep needs a background job.** It took roughly 15 minutes against a 12-minute deadline
   and will be killed by any shorter foreground timeout; `--timeout-min` bounds the GA but the
-  sweep still has to compile 20 objects through docker and wine.
+  sweep still has to compile 20 objects. That run used Docker and Wine; current
+  compiles use project `unshare` on the pinned image.
 - **`distinct scores: 1` is the number to read**, not `best_flags`. The sweep always reports some
   combination as "best"; with a flat landscape that is an arbitrary pick among equals, and reading
   it as a recommendation would be a mistake: `/G3 /Gd /Oy /Op` here is not better than the
@@ -7589,10 +7530,12 @@ section 61a.
 
 ## 163. msvc6 canonicalises independent operations: the ORDER of two independent statements is inert (round 1105)
 
-This project's standing rule is "statement order is the only lever that has ever landed". Measuring directly
-against the compiler puts a boundary on it: **for two independent operations, source order is inert, and the
-emitted order is canonical.** Statement order lands only when it changes the *dependency graph or a barrier*,
-not when it permutes independent work.
+The earlier "statement order is the only lever that has ever landed" shorthand
+was too broad. For the three spellings below, independent loads emit in the same
+order. That result limits this probe; it does not establish that source order
+is inert for every independent operation. Later scheduler traces in
+[allocator Finding 73](msvc6-allocator.md#finding-73-crashdumps-frame-fill-tie-0x10002c5c-against-the-cross-jump-picker-and-dag-rules-traced-in-c2)
+show sequence order breaking equal-priority ties.
 
 **Experiment** (`scripts/msvc6_probe.py`, `/O2 /Gd`, the project's own compiler):
 
@@ -8680,6 +8623,13 @@ Finding 74.
   the x87 stack is laid out and leave the exchange pair. Casting both terms to `float` leaves one
   `fxch`; `double` locals or a single expression leave none. The function must sit in the
   `fcn_004fef80` file (callees earlier in the unit keep edx/ecx live across the calls).
+- **Gold 0x5a89a0 / TL 0x5b1e20: lookup before wrapper preserves EDX.** The existing
+  27-byte lookup followed by the C wrapper produces the native 31-byte wrapper on
+  both clients. Standalone and callee-last controls produce 33 bytes and home the
+  pointer in ESI. The shared 111-byte following function also remains identical
+  after applying its operands. This is translation-unit context, without an
+  assembly requirement; the original filename remains unknown. Evidence:
+  `.scratch/goal89-tu-wrapper/shared-proof.json`.
 - **0x5b4f70: a 0/0xff call argument is two calls.** `f(..., type == 13 ? 0xff : 0)` gives `setne;
   dec; and`; `if (type != 13) f(..., 0); else f(..., 0xff);` gives the reference's `push 0; jmp` /
   `push 0xff` arms into one shared call. The clamp before it needs a separate variable in both arms
@@ -9664,7 +9614,8 @@ relationship to the current native allocation problem.
 
 ## 222. Native build clocks change CL's builtins and COFF stamp, preserving this full code shape
 
-Plain SP5, Docker Wine 8.0, `/O2 /Gd /Gy`, native `rebrew-cmake-cl`
+Plain SP5, `/O2 /Gd /Gy`, native `rebrew-cmake-cl` (that run: Docker Wine 8.0;
+current execution is project `unshare` on the pinned image)
 with the production clock helper. The same unchanged C89 source is compiled
 at decimal epochs 1071482016 and 1771046057:
 
@@ -10397,8 +10348,9 @@ VS4097 and relocation VS36. The still-larger controls retain VS36.
 This directly tests the page transition and cap proposed in linker-layout63,
 rather than inferring them from different import/function inputs.
 
-Docker access is verified in this continuation (daemon29.8.1); all seven
-compiler/linker calls use the pinned project wrappers and stock SP5 image.
+That continuation's seven compiler/linker calls used the pinned project
+wrappers and stock SP5 image (Docker daemon 29.8.1). Current execution is
+project `unshare` on the same pinned image.
 Canonical input/output is protected by a before/after hash. The independent
 toy probe does not require a particular unrelated server hash to rerun.
 Evidence: `.scratch/native-reloc-pages/{probe.py,audit.json}` and seven
@@ -10705,7 +10657,8 @@ pending, with the production compiler and target archive unchanged.
 
 ## 248. Link-only runtime selection preserves every existing compiler input
 
-The Docker clarification supersedes section247's pending native checks.
+The runtime check here supersedes section 247's pending native checks.
+Current execution is project `unshare` on the pinned image.
 Two actual compilations of the registered fixture through the new runtime
 image produce stable masked object hash547b88f8...e546, equal to plain SP5's
 golden. This is a fixed smoke fixture, not a new all-source CL comparison.
@@ -10786,7 +10739,7 @@ The direct sibling root fix is preserved in
 9123ca68 source. Installed noneditable wheel SHA256
 `17afd012e0bac10dbc156acee82be0c0ee168afe04808ddb879782ccbcbaa2e8`
 changes only `probe.py` and RECORD versus the previous01e4e8bd wheel. Actual
-Docker probes now report290/290 for both valid forms,404/404 for the SDK
+Pinned-image probes now report290/290 for both valid forms,404/404 for the SDK
 initializer, and287/290 for a deliberate wrong-global control. A repeated
 SDK probe leaves both managed metadata files unchanged. The first whole-run
 metadata guard observed a concurrent `verify` writer; that is not evidence
@@ -10866,7 +10819,7 @@ and both full native argv/log/result sets; production objects and DLL stay fixed
 
 ## 252. A shared-source cohort can preserve server code and conflict with Gold ordering
 
-All69 inputs in `command_c/` resolve to `/O2 /Gd`. A direct concatenation
+All 69 inputs in `command_c/` resolve to `/O2 /Gd`. A direct concatenation
 exposes genuine reconstruction conflicts: unsigned-int versus unsigned-short
 returns for `gm_AllocSpieler`, void versus pointer results for `gm_AddObjekt`,
 char versus short pointers for parent resolution, two incompatible views named
@@ -10876,7 +10829,7 @@ where already required by matched code, separate names for the two equal-size
 row views, explicit pointer/integer casts, one missing kill prototype and removal
 of one unused local. Resolve relative includes that actually exist; leave shared
 include-search names such as `rebrew_types.h` to the original include paths.
-The normalized native SP5 compile has zero warnings. All69 complete function
+The normalized native SP5 compile has zero warnings. All 69 complete function
 sizes, nonfixup instruction bytes, flags and typed symbolic relocation topology
 match the existing objects; local numeric label renaming preserves destinations.
 
@@ -10939,8 +10892,9 @@ LINK-layout82 records the header prediction and complete semantic gates.
 These are real source inputs, not empty objects, extra producers or padding.
 The source is prepared and CMake recipes resolve correctly; final normal
 production recompilation/verification remains required because this session's
-managed permissions now deny access to the Docker socket. The successful
-native control predates that access change; the production DLL remains c805c9c5.
+that session could not start a container. The successful native control
+predates that access change; the production DLL remains c805c9c5. Current
+execution is project `unshare` on the pinned image.
 
 Evidence `.scratch/native-command-tu/compatible/`: eight compiler argv/logs,
 objects/functions reports, native LINK/audit/gates, source-promotion.json,
@@ -11949,3 +11903,219 @@ places its updates differently. The otherwise unused resolved-name buffer and
 copy are native and must remain. All bounded shapes/results are retained under
 `.scratch/goal67/attach-loop`; both production targets pass complete operand and
 literal proofs. Wider callback/context/storage contracts remain separate.
+
+## List-search result after the loop (Goal75, 2026-10-17)
+
+Gold `0x423720` and `0x423740` reproduce all 31/34 native bytes with ordinary
+C89 and default Processor Pack flags. Initialize an integer result to zero,
+guard the nonempty head, break the do-loop on a key hit, then assign the final
+node to the result inside that guard. Both searches follow next+4; keys are at
++8 and +0x114. This shape emits the native initial `xor ecx,ecx`, separate
+empty-list return and direct loop return. An early hit return or an assignment
+only inside the hit branch emits different code. No flags or assembly are needed.
+
+The production C replaces unsupported whole-function assembly copies; their old
+EXACT labels do not constitute original-assembly evidence. Complete object bytes
+equal the references with no relocations or literals, and comparing the other
+field's search rejects. Names and the head-cell owner at `0x6323a4` remain
+unresolved. Receipts: `.scratch/goal75-placement/list-search/production-proof.json`;
+the bounded preceding shapes are kept beside it.
+
+## Declared globals preserve cursor/dialog scheduling (Goal78, 2026-10-17)
+
+Gold `0x4113f0` and `0x41cf60` now reproduce their complete 66/77 native bytes
+with ordinary C89 and default Processor Pack flags. Equivalent raw-address
+casts changed register selection and condition-test scheduling. Using canonical
+`extern` access declarations restores the native code without assembly, volatile
+or extra flags. These spellings are inferred, not recovered original text.
+
+The cursor setter samples its bypass flag before writing three coordinate pairs,
+narrows each coordinate to a short and calls `SetCursorPos` only when the sampled
+flag is zero. The dialog wrapper takes five arguments, ignores the second,
+loads `d3_resource.dll`, stores argument slots 4/5/1 even on load failure, and
+only on success runs resource 101 and frees the library. Preserve that order.
+The dialog's named callback uses the SDK's four-argument Win32 signature; its
+1,840-byte native body remains unreconstructed. Refining its declaration preserves
+only the existing five-byte placeholder, not the callback's native behavior.
+
+Both production objects pass complete resolved-byte proofs, including all eight
+operands each and the dialog's 16-byte literal. All 32 wrong-symbol/wrong-site
+controls reject. The existing 293-byte GUI reader's complete code section and
+fixups are unchanged after reusing the cursor header. Ten scalar access views
+describe 25 bytes, not complete allocations or verified storage owners. They add
+no storage definitions or data verdicts. Replay and receipts:
+`.scratch/goal78-assembly/{proof.py,proof.json}`.
+
+## GUI pool loads need declarations, not assembly (Goal79, 2026-10-17)
+
+Gold `0x475e30` and `0x475f30` reproduce all 57/47 native bytes with the existing
+D2 GUI pool declaration and ordinary C under default Processor Pack flags. The
+old second function alleged that MSVC6 folded a memory load into an immediate;
+its canonical `extern GuiEnt*` emits the correct load without assembly, volatile
+or extra flags. Keep the two `0x475e30` stores as separate pool accesses: native
+code reloads the pool pointer between them. Only index -1 skips the writes;
+there is no general bounds check. Each store writes `flag == 0` as a full integer.
+
+The native T&L counterparts are `0x472640` (54 bytes) and `0x472770` (47).
+Gold's GUI stride is 748, with Boolean cells at +0x3c/+0x50 and image index
+at +0x78; T&L uses 756, +0x4c/+0x60 and +0x88. Both second functions select a
+four-byte slot through that image index with stride 0x160. The canonical
+`d2_BildArgument2` declaration gives T&L's formerly numeric output address a real
+relocation; all complete native bytes still agree after resolving both operands.
+Its name is inferred and its complete backing allocation/owner remains unknown.
+
+The four complete production bodies and all eight operand sites pass independent
+resolved-byte comparisons with fourteen rejecting controls. Adding the declaration
+preserves complete code, fixups and data sections in all three prior header
+contexts (190/176-byte image setters and the 47-byte Gold text copy). No struct
+layout, flags, storage definitions or padding changed. Source units remain
+separate pending complete client organization baselines. Replay:
+`.scratch/goal79-gui/{proof.py,proof.json,preserve.py}`.
+
+## Scene command tests AL and always returns one (Goal80, 2026-10-17)
+
+TL `0x40ed00` / Gold `0x40ddf0` each match 55 complete native bytes as ordinary
+C. The loader takes filename, optional stream pointer and three-int progress
+callback, and defines only AL as a Boolean result. A `char` return declaration
+preserves the native `test al,al`; an integer return would assert unsupported
+upper bits. Original signedness/typedef spelling remains unknown. The command
+reads its filename through the first pointer slot of its argument, calls the
+loader with null stream/callback, reports failure through the current script's
+position at +0x118, then returns full-width one on both paths. Do not return the
+loader's result or add null guards absent from native code.
+
+All four operands and the complete 48-byte diagnostic match in each client,
+with sixteen rejecting controls. The canonical scene/script declarations preserve
+all ten prior target contexts' complete code, fixups and data sections. The
+embedded-scene bridge now accepts a pointer and passes the actual three-int
+callback without casting its address through `void*`. Its savegame receiver still
+uses legacy `int f` stream transport; that VFS/loadsave boundary remains open.
+The two loader bodies are still placeholders, measured as STUB without promotion.
+Command agreement does not recover their 1,406/1,417 executable bytes.
+
+The Gold city-loader caller `0x50d6d0` emits 86 bytes, not the recorded 96.
+All 86 native bytes agree after its three relocations; RET at `0x50d725` is
+followed by ten NOPs before callback `0x50d730`. Native inventory and source SIZE
+are repaired separately through their respective CLI owners. Its C body is
+unchanged by this extent repair. Existing raw format/universe/callback operands
+and integer pointer transports remain source-fidelity debt; a byte match does
+not settle their types, storage or providers. The full format is 21 bytes,
+including NUL. Replays: `.scratch/goal80-scene/{proof.py,city-proof.py,preserve.py}`.
+
+
+## VFS closer needs the named counter object (Goal81, 2026-10-17)
+
+TL `CloseVfsStream` at `0x430580` is RELOC296 as ordinary C with inherited
+`/O2 /Gd`. Its previous body freed through the server pool literal `0x10034670`;
+the TL instruction at `0x43068f` pushes `0x6b7fe4`. It now uses the existing
+TL declaration names `g_6b7fe4` and `g_6b7fec`, as the client VFS shutdown code
+already does. They are inferred address names, not attested identifiers or
+proof of selected storage owners. No storage is defined by this repair.
+
+Changing only the pool operand leaves the code weak. Replacing the raw counter
+lvalue macro with its external object declaration reproduces the early EDI save
+and EDI counter use at the tail; the raw-lvalue version saves EDI only inside
+the compression branch and uses EDX for the counter. This is a measured result
+for this compiler context, not a universal register-allocation rule. No volatile,
+assembly, padding, forced register or new flag is needed. The obsolete
+`REBREW_ALLOW_NAKED` override is removed; the redundant default flag override
+was then dropped through the locked metadata API without changing effective
+flags or comparison evidence.
+
+`close-proof.py` resolves all 11 operands across296 bytes and rejects 10 wrong
+symbol bindings and 11 wrong operand sites. CLI comparison validates only the
+pool-free callee; the other 10 operand records remain unresolved there. The
+independent complete native proof supplies their values for this experiment;
+it does not install canonical bindings, choose library providers or prove a
+client raw link. The old STUB blocker is cleared by the fresh comparison.
+
+The TL receiver `0x525b40` now calls the managed `ls_LoadEntities` identity at
+`0x522e30`. Only the one relocation symbol changes; its complete sections,
+fixup sites and 824-byte body remain unchanged. Native REL32 and two rejecting
+controls verify the selected call. The destination's weak source verdict is
+unchanged. Replays: `.scratch/goal81-vfs/{close-proof.py,receiver-preserve.py,
+inputs-current.py}`. The receiver's integer stream transport remains open.
+
+## Opaque stream boundary preserves target objects (Goal82, 2026-10-17)
+
+The memory constructor and filename opener transport pointers through the VFS
+and loadsave callers. `vfs_OpenStream` now returns `void*`; the receiver and
+selected readers use the same opaque stream contract. `VFS_FILE` remains the
+24-byte directory entry. The stream allocation is 0x140 bytes, with flags at
+0x13c; this change does not define a stream struct.
+
+The canonical loadsave header checks reader definitions and callers. The
+previous four-formal `ls_LoadGraveyardData` declaration had two unused extra
+formals; its native callers push only stream and field. The definition now has
+those two formals. `ahm_AllocAhmInfo` also receives a stream, although its old
+formal was named `cmd_payload` and typed `int`. Its first formal and both caller
+declarations now use `void*`; its legacy entity argument is a separate type debt.
+
+`.scratch/goal82-vfs/preserve.py after` compares complete code/data/rdata/bss
+sections, external fixup names, sites/types and internal section/offset targets
+against the saved pre-change objects: 87 compiler contexts / 140 definitions.
+MSVC renumbers local labels when declarations change. LABEL-class locals and
+STATIC `$L` code labels are compared by their definitions; external names remain
+exact. Wrong local offsets and external symbols are rejecting controls.
+
+TL building reader `0x522510` has a 1,455-byte executable body ending in `ret`
+at `0x522abe`. The next byte is a NOP before `ls_LoadDynamicEntities` at
+`0x522ac0`. The reviewed native-inventory repair removes that NOP from the
+function extent. Root header integration preserves the complete recovered body
+and all 63 relocations. After native data identities are recorded, the CLI
+records RELOC1455 (62 validated, one unresolved `_realloc`, zero conflicts).
+Independent image-address proof validates all 63
+and reproduces the full body; wrong version data and reader callee reject.
+Neither comparison establishes client data ownership or a raw-link provider.
+
+The TL town reader has 1,478 executable bytes through `ret` at `0x524605`.
+Ten following NOPs precede `0x524610`; their inventory repair is separate from
+the source comparison. Native town/city loops and the TL-only localized-name
+tail remain in this provider. Replacing both hand-written string-copy loops
+with `strcpy` and including the canonical loadsave header initially preserves
+every byte and all 58 relocation records. That body has one SIB difference at
+`+0x591` (`0x02` versus native `0x10`). A bounded search then finds a complete
+match under inherited `/O2 /Gd`: materialize the success-path destination before
+fetching the source, subtract the source address, and copy through that delta,
+including the NUL. The fallback remains `strcpy`. Production comparison records
+RELOC1478. The independent proof matches every byte and all 58 operands, with 67
+rejecting controls. After identity-only town data binding,56 catalog slots
+validate and only `_sprintf` / `__strlwr` remain unresolved. The existing town
+record declaration is now shared with its game user; all three complete objects
+and five definitions preserve their bytes/fixups during that declaration repair.
+
+Gold's complete dialog C body is 1,830 bytes through `ret` at `0x41cf55`;
+ten following alignment NOPs precede `0x41cf60`. Eighteen body bytes differ:
+17 stack-slot displacements and one string-copy SIB byte. All 108 operands
+validate, including literal addends and the non-dllimport DirectDrawCreate
+thunk call. No stack padding, assembly or forced volatile objects are added.
+The logger definition and its other caller now include the existing canonical
+three-argument header; both complete objects retain their bytes and fixups.
+The logger body remains a zero STUB. Replays and residuals are in
+`.scratch/goal82-vfs/` and the referenced native proof receipts.
+
+
+## Conditional COM release through an inline helper
+
+Gold0x460e40 has a repeated null comparison that direct C spellings remove.
+A private static `__inline` helper for conditional Release and slot clear
+preserves the second comparison in the live com60 path under PP /ML /O2 /Gd.
+Its17-byte release block at0x460e9a matches the native bytes; the complete
+candidate is553 versus563 bytes and still does not match. Extending the helper
+to the mode-off path or adding a mask/result helper does not close the body.
+The helper name and source organization are inferred. The same inline-query
+idea leaves the character sitting query's52/56-byte mismatch unchanged.
+Evidence: `.scratch/goal83-gold-finalizers/inline-followup/REPORT.md`.
+
+## Tail wrapper contracts before instruction-scheduling searches
+
+Gold `0x4c24c0` is a 23-byte guard and tail jump into the existing sound fade
+function. The old naked declaration was `int(int)` and described its load as
+a C code-generation obstacle. Native callers actually pass a float and an
+integer duration. With `void(float, int)`, the canonical pointer guard and the
+same callee contract, ordinary PP `/ML /O2 /Gd` emits the complete native body,
+including the stack load/store before the tail jump. Both operands validate;
+wrong binding/site/window controls reject. Gold's callee also matches the
+existing TL C provider, 175 bytes on each image. Fixing the evidenced contract
+closed this body without padding, volatile objects or assembly. Evidence:
+`.scratch/goal91-sound-wrapper/`.

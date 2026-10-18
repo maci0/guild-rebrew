@@ -1,0 +1,12 @@
+/* Comparison scaffold only. Placeholder storage and functions so one
+ * client link can resolve symbols that no configured provider defines.
+ * An array extent is the first file-scope declaration the generator
+ * found under src/. A name with no declaration is int = 0 (4 bytes),
+ * or char name[1] when the C name starts with s_. This is not a
+ * recovered allocation and not an image owner.
+ * Import slots, the stock CRT, Miles, D3DX (TL), and references/zlib
+ * definitions are omitted from this file. Do not link server BSS
+ * owner files (src/bss_layout/bss_head.c, bss_head2.c, bss_late.c,
+ * src/Develop/DieGildeAddOn/game/spiel_data.c, game_float_constants.c)
+ * into a client that compiles this translation unit.
+ */

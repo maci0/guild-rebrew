@@ -51,7 +51,7 @@ int __cdecl fcn_00591190(int id)
 	if (rec[0x40] != 0) {
 		fcn_00519190(0x21, (unsigned char) rec[0x40]);
 	} else {
-		f = g_7747b4 * 0.25 + 0.5;
+		f = (float)(g_7747b4 * 0.25 + 0.5);
 		fcn_00519190(0x23, (int) (fcn_0050b980(id, 100) * f));
 	}
 	fcn_00519190(0x20, *(int*) (rec + 0x22));

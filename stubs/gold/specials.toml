@@ -1,0 +1,38 @@
+# GUID placeholders for `extern const GUID` in src/GOLD.fcn_0041c830.c.
+# 16 bytes is the GUID type size. Stock DXGUID.LIB in the PP image defines
+# IID_IDirectDraw2 and IID_IDirect3D2, not these two. Not a recovered allocation.
+
+[specials.IID_IDirect3D3]
+impl = """
+/* Placeholder for extern const GUID IID_IDirect3D3. 16-byte GUID type, not an image owner. */
+unsigned char IID_IDirect3D3[16] = {0};
+"""
+
+[specials.IID_IDirectDraw4]
+impl = """
+/* Placeholder for extern const GUID IID_IDirectDraw4. 16-byte GUID type, not an image owner. */
+unsigned char IID_IDirectDraw4[16] = {0};
+"""
+
+# All selected callers now name the real shared fcn_004c24c0 provider.
+# Keep the historical unresolved log intact; emit no obsolete placeholder.
+[specials.fcn_004c2d90]
+impl = ""
+
+# Shared C video-list providers replace these comparison functions.
+[specials.fcn_0041f5f0]
+impl = ""
+
+[specials.fcn_0041f9b0]
+impl = ""
+
+[specials.fcn_0041f9d0]
+impl = ""
+
+
+# Capacity for Gold color initialization; this is not a native owner claim.
+[specials.g_10405e0]
+impl = """
+/* Comparison-only capacity for six writes; native extent and owner remain unknown. */
+int g_10405e0[6] = {0};
+"""

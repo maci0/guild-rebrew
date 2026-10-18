@@ -12,8 +12,7 @@ typedef struct Sprite {
 } Sprite;
 // SIZE 0x64
 
-/* ADDRESS: GOLD 0x00f8f0a0 */
-extern char* g_1015ec0[];
+#include "client_sprites.h"
 /* ADDRESS: GOLD 0x006333d8 */
 extern int g_6b7fb8;
 /* ADDRESS: GOLD 0x005feb8c */

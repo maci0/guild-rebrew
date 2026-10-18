@@ -1,22 +1,22 @@
 
 
 extern unsigned short g_7ea3c0[];
-extern int g_6b7fdc;
+extern struct VFS_DIR* g_6b7fdc;
 extern char g_6790b0[];
 extern char g_6a23b0[];
 
 void __cdecl fcn_00469e30(int);
 void __cdecl fcn_005e3d20(void);
-int __cdecl fcn_0042ff50(char*, char*, int);
+void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned char* __cdecl m_alloc(int, char*);
 void __cdecl fcn_0041bb70(int, unsigned char*, unsigned char*, unsigned char*);
-int __cdecl fcn_00430910(void*, int, int, int);
+int __cdecl fcn_00430910(void*, int, int, void*);
 void __cdecl m_FreeTracked(void*);
-void __cdecl CloseVfsStream(int);
+#include "Develop/Units/vfs/vfs.h"
 
 void __cdecl fcn_005e3ed0(int a1, char* name)
 {
-	int fh;
+	void* fh;
 	unsigned char* buf;
 	int n;
 	int x;

@@ -1,7 +1,7 @@
 
 
 
-void __cdecl fcn_004c5790(void*, int);
+void __cdecl fcn_004c5790(char, char*);
 
 void __cdecl fcn_004ad4d0(int a1)
 {

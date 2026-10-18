@@ -21,7 +21,7 @@ void __cdecl fcn_00402b00(char* obj, char* src)
 		v[2] = 0.0f;
 		fcn_00455140(src, g_662d40, b);
 		v[1] = fcn_00451380(g_662d40, b);
-		fcn_00438cb0(*(int*) (obj + 0x34), v);
+		fcn_00438cb0(*(char**) (obj + 0x34), v);
 		ch_SetPosition(obj, a, 1);
 	}
 }

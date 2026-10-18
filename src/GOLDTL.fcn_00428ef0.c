@@ -48,7 +48,6 @@ int __cdecl fcn_00428ef0(Cmd* c)
 	char* s;
 	int v;
 	int i;
-	int k;
 	char ch;
 
 	((Vm*) g_6b7e98)->line++;
