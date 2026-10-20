@@ -1,4 +1,4 @@
-"""Render the README graphic from `rebrew status --all-targets --json` on stdin."""
+"""Render README graphics from `rebrew status --all-targets --json` on stdin."""
 
 import argparse
 import json
@@ -108,18 +108,27 @@ def render_map(rows: dict, date: str) -> str:
     return "\n".join(parts) + "\n"
 
 
-def render(report: dict, date: str) -> str:
+def render(report: dict, date: str, *, data: bool = False) -> str:
     targets = report["targets"]
     height = 140 + 216 * len(targets)
+    title = "Guild data verification" if data else "Guild reconstruction status"
+    description = (
+        "Three bars per target: verified initialized .data and .rdata bytes, verified "
+        "catalogued data symbols including BSS, and EXACT symbols at their reference VA. "
+        "Displacement, drift and unchecked or untracked data remain separate. "
+        "Stored content verdicts do not establish storage ownership."
+        if data
+        else "Three bars per target: accounted virtual .text bytes "
+        "including libraries and padding, C function matches excluding whole-function "
+        "assembly and PROVEN verdicts, and existing raw-file bytes equal at original "
+        "offsets. These are separate measures, not overall completion."
+    )
     parts = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="715" '
         f'height="{height}" viewBox="0 0 715 {height}" role="img" '
         'aria-labelledby="title description">',
-        '<title id="title">Guild reconstruction status</title>',
-        '<desc id="description">Three bars per target: accounted virtual .text bytes '
-        "including libraries and padding, C function matches excluding whole-function "
-        "assembly and PROVEN verdicts, and existing raw-file bytes equal at original "
-        "offsets. These are separate measures, not overall completion.</desc>",
+        f'<title id="title">{title}</title>',
+        f'<desc id="description">{description}</desc>',
         f'<rect width="715" height="{height}" rx="16" fill="#101820"/>',
         '<g font-family="DejaVu Sans, sans-serif">',
     ]
@@ -145,10 +154,83 @@ def render(report: dict, date: str) -> str:
                 f'height="10" fill="{color}"/>'
             )
 
-    text(24, 33, "RECONSTRUCTION METRICS", 19, "#f1f6fa")
+    text(24, 33, "DATA VERIFICATION" if data else "RECONSTRUCTION METRICS", 19, "#f1f6fa")
     text(691, 32, date, 12, anchor="end")
-    text(24, 57, "Code bytes, function counts and raw-file agreement · separate measures")
+    text(
+        24,
+        57,
+        "Initialized bytes, data symbols and EXACT placement · separate measures"
+        if data
+        else "Code bytes, function counts and raw-file agreement · separate measures",
+    )
     for index, (name, target) in enumerate(targets.items()):
+        y = 80 + 216 * index
+        parts.append(
+            f'<rect x="24" y="{y}" width="667" height="204" '
+            'rx="10" fill="#18242f" stroke="#2a3b49"/>'
+        )
+        text(40, y + 27, name, 16, "#f1f6fa")
+        if data:
+            metrics = target.get("data", {})
+            total = metrics.get("total", 0)
+            verified = metrics.get("verified", 0)
+            exact = metrics.get("exact", 0)
+            drift = metrics.get("drift", 0)
+            displaced = metrics.get("displaced", 0)
+            unchecked = metrics.get("unchecked", 0)
+            byte_total = metrics.get("total_bytes", 0)
+            byte_verified = metrics.get("verified_bytes", 0)
+            buckets = metrics.get("bytes", {})
+            if (
+                not 0 <= exact <= verified <= total
+                or not 0 <= displaced <= drift
+                or unchecked < 0
+                or verified + drift + unchecked != total
+                or any(
+                    buckets.get(k, 0) < 0 for k in ("verified", "drift", "unchecked", "untracked")
+                )
+                or sum(buckets.get(k, 0) for k in ("verified", "drift", "unchecked", "untracked"))
+                != byte_total
+                or buckets.get("verified", 0) != byte_verified
+            ):
+                raise ValueError(f"Inconsistent data accounting for {name}")
+            bar(
+                y + 51,
+                "Initialized data bytes verified",
+                f"{byte_verified:,} / {byte_total:,} bytes",
+                byte_verified,
+                byte_total,
+                "#55dbac",
+            )
+            bar(
+                y + 94,
+                "Verified symbols (incl. BSS)",
+                f"{verified:,} / {total:,} symbols",
+                verified,
+                total,
+                "#39bdf8",
+            )
+            bar(
+                y + 137,
+                "EXACT symbols at reference VA",
+                f"{exact:,} / {total:,} symbols",
+                exact,
+                total,
+                "#c3a7ff",
+            )
+            text(
+                40,
+                y + 176,
+                f"{displaced:,} displaced · {drift - displaced:,} other drift · {unchecked:,} unchecked symbols",
+                11,
+            )
+            text(
+                40,
+                y + 192,
+                f"Bytes: {buckets.get('drift', 0):,} drift · {buckets.get('unchecked', 0):,} unchecked · {buckets.get('untracked', 0):,} untracked",
+                11,
+            )
+            continue
         total = target["functions"]["total"]
         statuses = target["status"]
         assembly = target["naked_matched"]
@@ -156,12 +238,6 @@ def render(report: dict, date: str) -> str:
         recovered = matched - assembly
         if not 0 <= assembly <= matched <= total:
             raise ValueError(f"Inconsistent function counts for {name}")
-        y = 80 + 216 * index
-        parts.append(
-            f'<rect x="24" y="{y}" width="667" height="204" '
-            'rx="10" fill="#18242f" stroke="#2a3b49"/>'
-        )
-        text(40, y + 27, name, 16, "#f1f6fa")
         accounted = target["accounted_text_bytes"]
         text_total = target["total_text_bytes"]
         bar(
@@ -209,13 +285,17 @@ def render(report: dict, date: str) -> str:
     text(
         24,
         y + 10,
-        "Code accounting includes libraries and padding; C counts exclude whole-function assembly.",
+        "Byte bar covers initialized .data + .rdata; excludes BSS and copied imports."
+        if data
+        else "Code accounting includes libraries and padding; C counts exclude whole-function assembly.",
         11,
     )
     text(
         24,
         y + 30,
-        "Stored verdicts and existing images; not fresh verification. PROVEN is not a byte match.",
+        "Stored verdicts; symbols include BSS/views. Content checks do not establish storage ownership."
+        if data
+        else "Stored verdicts and existing images; not fresh verification. PROVEN is not a byte match.",
         11,
     )
     parts.extend(["</g>", "</svg>"])
@@ -224,10 +304,13 @@ def render(report: dict, date: str) -> str:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--map", action="store_true", help="Render the address-ordered function map"
-    )
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--map", action="store_true", help="Render the address-ordered function map")
+    mode.add_argument("--data", action="store_true", help="Render data verification and placement")
     args = parser.parse_args()
     report = json.load(sys.stdin)
     date = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
-    print(render_map(collect_map(report), date) if args.map else render(report, date), end="")
+    print(
+        render_map(collect_map(report), date) if args.map else render(report, date, data=args.data),
+        end="",
+    )

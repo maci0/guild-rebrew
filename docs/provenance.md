@@ -385,3 +385,31 @@ how the result was verified. Reversals are new entries.
   report; README values reconcile to that report. No source, inventory,
   metadata or raw binary changed in this refresh. No native build or fresh
   verification ran; the snapshot includes current stored working-tree verdicts.
+
+### Separate README data-verification charts (2026-10-21)
+
+- Change: added `docs/data-progress.svg` and a README data table. Each target
+  has separate bars for verified initialized data bytes, verified catalogued
+  symbols including BSS/views, and the subset marked EXACT at the reference VA.
+  Captions show displaced/other-drift/unchecked symbol counts and unverified
+  byte buckets. Extended the existing renderer with `--data`, exclusive with
+  `--map`; updated the refresh recipe and retained-helper documentation.
+- Why: user requested a separate data chart set. Function matches and code
+  accounting do not verify data; BSS symbol verdicts must not inflate the
+  initialized-byte bar, and displacement must remain visible.
+- Evidence: all three charts and README tables use
+  `.scratch/readme-data-charts-2026-10-21/status.json`, timestamp
+  2026-10-20 18:18 UTC, SHA-256
+  `8a29bc5d607811015a8274c549ae7f0a7d00782a80a3f764993dde8be09340c2`.
+  Server: 66,664/66,664 initialized bytes, 547/547 verified symbols, 409 EXACT,
+  zero displaced. GoldTL: 0/335,380 initialized bytes, 1/361 verified symbols,
+  zero EXACT, 332 displaced. Gold: 0/280,072 bytes, 1/319 symbols, zero EXACT,
+  304 displaced. These are stored verdicts, not new measurements or owners.
+- Decision owner: user requested the data charts; retain the existing code and
+  function-map views and publish images through immutable commit URLs.
+- Verification: 32 selected tests and 3 subtests pass, including separate byte,
+  symbol and EXACT populations, missing data and invalid accounting controls.
+  Ruff, XML parsing, real-report reconciliation and the data CLI smoke pass.
+  Rendered the data SVG to PNG and checked the complete layout. Native builds,
+  fresh data verification and the full gate were not run; concurrent source,
+  inventory and managed-metadata edits are outside this change.

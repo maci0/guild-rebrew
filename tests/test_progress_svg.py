@@ -100,3 +100,76 @@ def test_function_map_uses_address_order_and_distinct_verdicts() -> None:
     text = " ".join(root.itertext())
     assert "game<&>.exe" in text
     assert "5 blocks, including libraries" in text
+
+
+def test_data_chart_separates_bytes_symbols_and_exact_placement() -> None:
+    data = {
+        "total": 10,
+        "verified": 4,
+        "exact": 2,
+        "drift": 4,
+        "displaced": 3,
+        "unchecked": 2,
+        "total_bytes": 100,
+        "verified_bytes": 10,
+        "bytes": {"verified": 10, "drift": 60, "unchecked": 20, "untracked": 10},
+    }
+    root = ElementTree.fromstring(
+        render({"targets": {"game<&>": {"data": data}}}, "today", data=True)
+    )
+    text = " ".join(root.itertext())
+    assert "game<&>" in text
+    assert "Initialized data bytes verified · 10 / 100 bytes" in text
+    assert "Verified symbols (incl. BSS) · 4 / 10 symbols" in text
+    assert "EXACT symbols at reference VA · 2 / 10 symbols" in text
+    assert "3 displaced · 1 other drift · 2 unchecked symbols" in text
+    assert "Bytes: 60 drift · 20 unchecked · 10 untracked" in text
+    rects = root.findall(".//{http://www.w3.org/2000/svg}rect")
+    assert [r.attrib["width"] for r in rects if r.attrib.get("height") == "10"] == [
+        "635",
+        "63.50",
+        "635",
+        "254.00",
+        "635",
+        "127.00",
+    ]
+    # A verified BSS/view record does not imply initialized byte coverage.
+    data["verified_bytes"] = data["bytes"]["verified"] = 0
+    data["bytes"]["untracked"] = 20
+    chart = render({"targets": {"game": {"data": data}}}, "today", data=True)
+    assert "Initialized data bytes verified · 0 / 100 bytes" in chart
+    assert "Verified symbols (incl. BSS) · 4 / 10 symbols" in chart
+
+
+def test_data_chart_without_data_reports_unavailable_percentages() -> None:
+    chart = render({"targets": {"game": {}}}, "today", data=True)
+    assert chart.count("N/A") == 3
+    assert "100.0%" not in chart
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"exact": 3},
+        {"displaced": 2},
+        {"unchecked": 1},
+        {"verified_bytes": 9},
+        {"bytes": {"verified": 10, "drift": 1, "unchecked": 0, "untracked": 0}},
+        {"bytes": {"verified": 10, "drift": -1, "unchecked": 0, "untracked": 1}},
+    ],
+)
+def test_data_chart_rejects_inconsistent_accounting(change: dict) -> None:
+    data = {
+        "total": 3,
+        "verified": 2,
+        "exact": 1,
+        "drift": 1,
+        "displaced": 1,
+        "unchecked": 0,
+        "total_bytes": 10,
+        "verified_bytes": 10,
+        "bytes": {"verified": 10, "drift": 0, "unchecked": 0, "untracked": 0},
+        **change,
+    }
+    with pytest.raises(ValueError, match="Inconsistent data accounting"):
+        render({"targets": {"game": {"data": data}}}, "today", data=True)

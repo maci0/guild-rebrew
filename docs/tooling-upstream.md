@@ -16,7 +16,7 @@ owns project rules.
 | `wine_load_check.sh` | Load server DLL and resolve `Init`/`Exit`; does not call them |
 | `gen_bss_layout.py` | Measured server allocation/layout recipe |
 | `gen_import_includes.py` | Measured native import-retention/order recipe |
-| `progress_svg.py` | README progress bars and function map from `rebrew status --json` |
+| `progress_svg.py` | README code/data bars and function map from `rebrew status --json` |
 | [`stubs/linked_manifest.py`](../stubs/linked_manifest.py) | Client scaffold attribution from successful link maps |
 
 The BSS recipe's overlapping views are reconstruction assumptions, not permission

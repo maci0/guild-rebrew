@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="715" height="788" viewBox="0 0 715 788" role="img" aria-labelledby="title description">
+<title id="title">Guild data verification</title>
+<desc id="description">Three bars per target: verified initialized .data and .rdata bytes, verified catalogued data symbols including BSS, and EXACT symbols at their reference VA. Displacement, drift and unchecked or untracked data remain separate. Stored content verdicts do not establish storage ownership.</desc>
+<rect width="715" height="788" rx="16" fill="#101820"/>
+<g font-family="DejaVu Sans, sans-serif">
+<text x="24" y="33" font-size="19" fill="#f1f6fa" text-anchor="start">DATA VERIFICATION</text>
+<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-10-20 18:18 UTC</text>
+<text x="24" y="57" font-size="13" fill="#aebdca" text-anchor="start">Initialized bytes, data symbols and EXACT placement · separate measures</text>
+<rect x="24" y="80" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
+<text x="40" y="107" font-size="16" fill="#f1f6fa" text-anchor="start">server.dll</text>
+<text x="40" y="131" font-size="12" fill="#aebdca" text-anchor="start">Initialized data bytes verified · 66,664 / 66,664 bytes</text>
+<text x="675" y="131" font-size="17" fill="#55dbac" text-anchor="end">100.0%</text>
+<rect x="40" y="140" width="635" height="10" fill="#394a59"/>
+<rect x="40" y="140" width="635.00" height="10" fill="#55dbac"/>
+<text x="40" y="174" font-size="12" fill="#aebdca" text-anchor="start">Verified symbols (incl. BSS) · 547 / 547 symbols</text>
+<text x="675" y="174" font-size="17" fill="#39bdf8" text-anchor="end">100.0%</text>
+<rect x="40" y="183" width="635" height="10" fill="#394a59"/>
+<rect x="40" y="183" width="635.00" height="10" fill="#39bdf8"/>
+<text x="40" y="217" font-size="12" fill="#aebdca" text-anchor="start">EXACT symbols at reference VA · 409 / 547 symbols</text>
+<text x="675" y="217" font-size="17" fill="#c3a7ff" text-anchor="end">74.7%</text>
+<rect x="40" y="226" width="635" height="10" fill="#394a59"/>
+<rect x="40" y="226" width="474.80" height="10" fill="#c3a7ff"/>
+<text x="40" y="256" font-size="11" fill="#aebdca" text-anchor="start">0 displaced · 0 other drift · 0 unchecked symbols</text>
+<text x="40" y="272" font-size="11" fill="#aebdca" text-anchor="start">Bytes: 0 drift · 0 unchecked · 0 untracked</text>
+<rect x="24" y="296" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
+<text x="40" y="323" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold_TL.exe</text>
+<text x="40" y="347" font-size="12" fill="#aebdca" text-anchor="start">Initialized data bytes verified · 0 / 335,380 bytes</text>
+<text x="675" y="347" font-size="17" fill="#55dbac" text-anchor="end">0.0%</text>
+<rect x="40" y="356" width="635" height="10" fill="#394a59"/>
+<text x="40" y="390" font-size="12" fill="#aebdca" text-anchor="start">Verified symbols (incl. BSS) · 1 / 361 symbols</text>
+<text x="675" y="390" font-size="17" fill="#39bdf8" text-anchor="end">0.2%</text>
+<rect x="40" y="399" width="635" height="10" fill="#394a59"/>
+<rect x="40" y="399" width="1.76" height="10" fill="#39bdf8"/>
+<text x="40" y="433" font-size="12" fill="#aebdca" text-anchor="start">EXACT symbols at reference VA · 0 / 361 symbols</text>
+<text x="675" y="433" font-size="17" fill="#c3a7ff" text-anchor="end">0.0%</text>
+<rect x="40" y="442" width="635" height="10" fill="#394a59"/>
+<text x="40" y="472" font-size="11" fill="#aebdca" text-anchor="start">332 displaced · 9 other drift · 19 unchecked symbols</text>
+<text x="40" y="488" font-size="11" fill="#aebdca" text-anchor="start">Bytes: 6,807 drift · 0 unchecked · 328,573 untracked</text>
+<rect x="24" y="512" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
+<text x="40" y="539" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold.exe</text>
+<text x="40" y="563" font-size="12" fill="#aebdca" text-anchor="start">Initialized data bytes verified · 0 / 280,072 bytes</text>
+<text x="675" y="563" font-size="17" fill="#55dbac" text-anchor="end">0.0%</text>
+<rect x="40" y="572" width="635" height="10" fill="#394a59"/>
+<text x="40" y="606" font-size="12" fill="#aebdca" text-anchor="start">Verified symbols (incl. BSS) · 1 / 319 symbols</text>
+<text x="675" y="606" font-size="17" fill="#39bdf8" text-anchor="end">0.3%</text>
+<rect x="40" y="615" width="635" height="10" fill="#394a59"/>
+<rect x="40" y="615" width="1.99" height="10" fill="#39bdf8"/>
+<text x="40" y="649" font-size="12" fill="#aebdca" text-anchor="start">EXACT symbols at reference VA · 0 / 319 symbols</text>
+<text x="675" y="649" font-size="17" fill="#c3a7ff" text-anchor="end">0.0%</text>
+<rect x="40" y="658" width="635" height="10" fill="#394a59"/>
+<text x="40" y="688" font-size="11" fill="#aebdca" text-anchor="start">304 displaced · 10 other drift · 4 unchecked symbols</text>
+<text x="40" y="704" font-size="11" fill="#aebdca" text-anchor="start">Bytes: 6,318 drift · 0 unchecked · 273,754 untracked</text>
+<text x="24" y="738" font-size="11" fill="#aebdca" text-anchor="start">Byte bar covers initialized .data + .rdata; excludes BSS and copied imports.</text>
+<text x="24" y="758" font-size="11" fill="#aebdca" text-anchor="start">Stored verdicts; symbols include BSS/views. Content checks do not establish storage ownership.</text>
+</g>
+</svg>
