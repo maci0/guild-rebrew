@@ -259,3 +259,19 @@ how the result was verified. Reversals are new entries.
 - Verification: renderer tests, SVG XML and image-URL hash checks, visual preview
   and whitespace checks; remote content checked after publication. Project
   reconstruction changes are outside this documentation refresh.
+
+### Immutable README image references (2026-10-20)
+
+- Change: pinned both README SVG image URLs to graphics commit `9a72da61`.
+  Local SVGs remain in `docs/`; subsequent refreshes must update the image ref.
+- Why: immediately after publication, raw GitHub `main` URLs returned older
+  bytes even with content-version query parameters. Commit-addressed URLs
+  returned the exact new files, so immutable refs supersede the query-only fix.
+- Evidence: SHA-256 comparisons of local, branch-addressed and commit-addressed
+  README/SVG responses; GitHub's rendered README already used the new query
+  URLs while those raw image responses remained older. Response cache lifetime
+  was 300 seconds. This establishes an observed stale branch response, without
+  identifying whether an intermediary or origin maintained that cached copy.
+- Decision owner: user reported old graphs; preserve the requested current view.
+- Verification: both commit-addressed image responses equal the local SVGs;
+  README asset URLs resolve and staged whitespace checks pass. No build ran.
