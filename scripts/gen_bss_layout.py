@@ -16,12 +16,15 @@ or a variable the reference rows do not name. The pads are named `g_gap_<va>`: m
 Reference rows can overlap (a named field inside a larger named object). Each row becomes its own symbol
 that ends where the next row starts, so the bytes of a large object are covered by the symbols and pads
 that follow it. Code addresses these names as separate symbols, as before.
-Re-run after rebrew-data.toml changes.
+Reads the managed data store, including fragments. Re-run only after reviewing
+changes to these measured allocations.
 """
 
 import re
-import tomllib
 from pathlib import Path
+
+from rebrew.config import load_config
+from rebrew.metadata.data import load_data_metadata
 
 # zlib's zutil.obj emits the empty string "" as a 1-byte .bss COMDAT, and the reference
 # has it at 0x10034620, between the Error and m_alloc variables. The head is two objects
@@ -58,11 +61,12 @@ def project_root() -> Path:
 
 
 def load_items(root: Path) -> list[dict]:
-    rows = tomllib.loads((root / "rebrew-data.toml").read_text())
+    cfg = load_config(root, target="server.dll")
+    rows = load_data_metadata(cfg)
     items = [
-        {"va": int(k[-8:], 16), "name": r["name"], "size": r.get("size", 0), "type": r.get("type", "")}
-        for k, r in rows.items()
-        if k.startswith("SERVER.0x") and isinstance(r, dict) and r.get("size", 0) and not PLACEHOLDER.match(r["name"])
+        {"va": va, "name": r["name"], "size": r.get("size", 0), "type": r.get("type", "")}
+        for (module, va), r in rows.items()
+        if module == cfg.module and r.get("size", 0) and not PLACEHOLDER.match(r["name"])
     ]
     items.sort(key=lambda i: (i["va"], -i["size"]))
     return items
@@ -73,7 +77,7 @@ def split(items: list[dict], lo: int, hi: int) -> list[dict]:
     rows = [i for i in items if lo <= i["va"] < hi]
     for whole in [i for i in rows if i["name"] in WHOLE]:
         rows = [i for i in rows if not whole["va"] < i["va"] < whole["va"] + whole["size"]]
-    for here, nxt in zip(rows, rows[1:] + [{"va": hi}]):
+    for here, nxt in zip(rows, rows[1:] + [{"va": hi}], strict=False):
         here["size"] = min(here["size"] or 1, nxt["va"] - here["va"])
         if here["name"] in ALIASES:
             here["name"] = ALIASES[here["name"]]
@@ -115,7 +119,7 @@ def emit(
             out += gap
         return out, cur
 
-    for i, a in enumerate(allocs):
+    for a in allocs:
         if a["va"] % alignment(a):
             raise SystemExit(f"{a['name']} at {a['va']:#x} is not {alignment(a)}-aligned")
         gap, cur = pad(cur, a["va"])

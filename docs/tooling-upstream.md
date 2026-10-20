@@ -16,10 +16,12 @@ owns project rules.
 | `wine_load_check.sh` | Load server DLL and resolve `Init`/`Exit`; does not call them |
 | `gen_bss_layout.py` | Measured server allocation/layout recipe |
 | `gen_import_includes.py` | Measured native import-retention/order recipe |
-| `update_state_table.py` | Gate-generated `TODO.md` state block |
+| `progress_svg.py` | README progress bars and function map from `rebrew status --json` |
+| [`stubs/linked_manifest.py`](../stubs/linked_manifest.py) | Client scaffold attribution from successful link maps |
 
 The BSS recipe's overlapping views are reconstruction assumptions, not permission
-for duplicate allocations or inferred CRT ownership.
+for duplicate allocations or inferred CRT ownership. It reads the managed data
+store through Rebrew; the scaffold manifest uses Rebrew's MSVC map parser.
 
 ## Replacements for retired helpers
 
@@ -35,6 +37,8 @@ for duplicate allocations or inferred CRT ownership.
 | Library/template scans | `rebrew library inspect`, `match`, `scan-signatures` |
 | Reference header/export timestamps | `rebrew binary pe --target server.dll --json` |
 | Function probes and comparisons | `rebrew test`, `diff`, `diagnose probe`, `build round-trip` |
+| Gate text scraping (`update_state_table.py`) | Gate JSON reports and `rebrew status`; the old TODO table is a historical checkpoint |
+| Duplicate scaffold recipe (`stubs/recipe.txt`) | [Client build and regeneration instructions](../stubs/README.md) |
 
 Split-link, copied CRT data, absolute-symbol and replacement-import emitters are
 retired. Their historical receipts do not authorize recreating that pipeline.
@@ -90,5 +94,5 @@ response file. The read-only replay and original migration patch remain in
 `.scratch/rebrew-import-hint-name-rva-migration/` as local evidence.
 All six release CI jobs passed, and the exact package artifact passed local
 manifest verification and clean-venv smoke installation. BSS layout, independent
-objective checks, Wine load acceptance and state-table presentation retain
+objective checks, Wine load acceptance and README graphics retain
 their project-specific scope; no native build was rerun for this migration.

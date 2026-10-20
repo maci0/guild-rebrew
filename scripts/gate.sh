@@ -282,13 +282,5 @@ else
     rc=1
 fi
 
-# Regenerate docs/TODO.md's CURRENT STATE table from this run.  That table has gone
-# stale twice in one session (rounds 209 and 238) while claiming to hold the gate's
-# live numbers; correcting it by hand fixes an instance, generating it fixes the
-# class.  Best-effort: a documentation write must never decide the gate's verdict.
-if [ -n "${GATE_LOG:-}" ] && [ -f "$GATE_LOG" ]; then
-    python3 scripts/update_state_table.py < "$GATE_LOG" 2>/dev/null || true
-fi
-
 [ "$rc" -eq 0 ] && echo "GATE: pass" || echo "GATE: FAIL"
 exit "$rc"

@@ -335,3 +335,29 @@ how the result was verified. Reversals are new entries.
   when an overlapping release process removed their temporary worktree;
   they are not claimed as passing. Final release acceptance uses the complete
   successful CI run for the published commit and exact artifact checks.
+
+### Retire obsolete helpers and reuse canonical readers (2026-10-20)
+
+- Change: removed `scripts/update_state_table.py` and its best-effort gate hook;
+  removed duplicate `stubs/recipe.txt` in favor of `stubs/README.md`. The TODO
+  table retains every measured value and is explicitly a historical checkpoint.
+  Updated the retained-helper inventory, including the README graphics renderer.
+- Why: user requested cleanup after the upstream script migration. Scraping old
+  gate terminal phrases into the tracker could replace measurements with unknown
+  values; the gate already saves structured reports. The duplicate recipe still
+  carried obsolete invocation flags.
+- Change: retained the measured BSS and scaffold recipes, replacing their local
+  TOML/map parsing with Rebrew's `load_data_metadata` and `parse_link_map` APIs.
+  BSS input now includes managed fragments and respects the configured metadata
+  backend; target filtering and allocation/order policy remain local.
+- Decision owner: user requested removal of old ad hoc scripts. Keep live native
+  build/acceptance recipes and historical scratch evidence.
+- Evidence: read-only before/after replays in
+  `.scratch/script-cleanup-2026-10-20/`, including `parity.json`. All three BSS
+  recipe outputs agree, as do complete Gold and GoldTL manifest JSON documents
+  from the existing link maps (2,890 and 2,960 scaffold symbols respectively).
+- Verification: 24 selected tests and 3 subtests pass; new regressions cover
+  fragmented metadata and both project-object and archive-member map origins.
+  Ruff, shell syntax and scoped whitespace checks pass. No BSS source,
+  scaffold manifest, managed metadata or native binary was regenerated. No
+  native build or full gate ran; unrelated reconstruction edits remain separate.

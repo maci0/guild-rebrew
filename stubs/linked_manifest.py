@@ -16,20 +16,16 @@ import json
 import sys
 from pathlib import Path
 
+from rebrew.data_ownership import parse_link_map
+
 
 def publics(text: str) -> list[tuple[str, str]]:
     """``(symbol, object)`` from the map's public-symbol lines."""
-    rows: list[tuple[str, str]] = []
-    for line in text.splitlines():
-        if ".obj" not in line and ".lib" not in line:
-            continue
-        parts = line.split()
-        if len(parts) < 4 or not parts[0][:1].isdigit():
-            continue
-        obj = parts[-1]
-        if ".obj" not in obj:
-            continue
-        rows.append((parts[1], obj))
+    rows = []
+    for row in parse_link_map(text):
+        origin = row.object or f"{row.library}:{row.member}"
+        if ".obj" in origin:
+            rows.append((row.name, origin))
     return rows
 
 
