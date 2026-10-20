@@ -138,7 +138,7 @@ uv sync
 uv run rebrew --version
 ```
 
-`uv sync` installs pinned Rebrew 5.2.0 and the project dependencies into
+`uv sync` installs pinned Rebrew 5.4.0 and the project dependencies into
 `.venv` from the public release wheels. This walkthrough was verified with
 Python 3.13.16. Run the remaining commands from this repository root; `uv run`
 uses that environment without activating it.

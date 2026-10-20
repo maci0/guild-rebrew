@@ -62,10 +62,13 @@ directory. Their syntax was checked, but their final raw-image checks have
 not run. Then obtain fresh lint and server-gate results before committing.
 Do not reuse earlier scaffold images as evidence for the new source.
 
-Guild remains on released Rebrew 5.2.0. Guarded integration commands used an
-explicit development checkout at `.scratch/publication/release-validation/rebrew`;
-the venv was not upgraded. That checkout also has an unpushed docs-only commit
-`bb2ea476` on `docs/guild-conditional-coordinate-audit`, recording the conditional
-typedef audit gap. Its pre-commit checks passed; the full upstream suite and
-publication were not run for that commit. Publishing or tooling changes remain
-outside this paused handoff.
+The creator checkpoint used Rebrew 5.2.0 plus an explicit development checkout
+for guarded integration commands. The conditional-typedef audit note was later
+merged upstream; that documents the gap rather than resolving the audit.
+
+On October 20, Guild upgraded to released Rebrew 5.4.0 and applied the import-API
+recipe migration. The venv changed only Rebrew; dependency checks, optional
+imports, 22 selected project tests and exact import-response parity pass.
+All six upstream release CI jobs passed. Native rebuilds and final raw-image
+validation remain separate work. Release evidence is in
+`.scratch/rebrew-release-5.4.0-logs/`; see [tooling notes](tooling-upstream.md#import-table-api-extraction-2026-10-20).

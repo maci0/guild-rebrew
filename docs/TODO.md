@@ -7,6 +7,12 @@ reconstruction waves on **2026-10-19**.
 Both clients remain comparison scaffolds. Historical checkpoints are in
 [goal history](goal-history.md).
 
+Guild now pins released **Rebrew 5.4.0**. The installed release includes the
+upstream fixes discussed below; references to installed 5.2.0 describe the
+earlier measurement checkpoint. The import recipe now uses Rebrew's API and
+preserves its complete response file. This tooling upgrade adds no native
+verification or recovered-byte credit. See [tooling notes](tooling-upstream.md#import-table-api-extraction-2026-10-20).
+
 ## Delegated reconstruction waves, 2026-10-19
 
 Work resumed on the goal. Waves of ten subagents, ten isolated per-function

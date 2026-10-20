@@ -42,7 +42,7 @@ Other repaired costs:
   already-current binding preview fell from 71.43s to 29.16s; validation fell
   from 43.79s to 0.57s. That preview is refused after loading, so it does not
   measure an accepted binding or apply. Roundtrip TOML parsing remains the
-  main cost. This fix is merged, outside installed 5.2.0.
+  main cost. This fix is included in installed 5.4.0.
   Receipt: `.scratch/source-binding-profile/`.
 - **Known bindings disabled warm results.** Cached verdicts now require matching
   binary/compile inputs and unchanged resolution of every recorded operand.
@@ -51,7 +51,7 @@ Other repaired costs:
 - **Redundant SIZE transactions.** [Upstream #38](https://github.com/maci0/rebrew/pull/38)
   skips the locked SIZE transaction when a function binding already stores that
   size, and writes accepted `--fix-sizes` corrections once. This fix is merged
-  but remains outside the installed 5.2.0 release; no end-to-end speedup is claimed.
+  and included in installed 5.4.0; no end-to-end speedup is claimed.
 - **Relative path cache crossed projects.** Roots are made absolute before
   memoized symlink resolution, so changing cwd cannot reuse another project's
   metadata root.
@@ -80,12 +80,12 @@ but still needs extraction/comparison; a valid result hit avoids both.
 `.obj`. Backend identity separates Docker and unshare compile entries. Existing
 CMake objects are not evidence that current compile inputs match.
 
-Rebrew 5.2.0 also shares one function-result cache and comparison baseline
+Rebrew 5.2.0 shared one function-result cache and comparison baseline
 between targets. Alternating Gold and TL runs rejects the foreign results,
 making the next target cold and losing its `--compare` baseline.
 [Upstream #41](https://github.com/maci0/rebrew/pull/41) isolates these files per
 target while preserving identity-checked legacy reads and existing freshness
-guards. It is not in the installed release.
+guards. This fix is included in installed 5.4.0.
 
 In Rebrew 5.2.0, the CMake CL driver does not use the test/verify object cache.
 Unix Make makes every target object depend on its shared `flags.make`; adding
@@ -100,7 +100,8 @@ unshare CL-driver cache for unchanged single-source commands. Real plain-SP5
 `/MT` and Processor Pack `/ML` controls preserve complete objects, diagnostics
 and frozen timestamps; hot controls dispatch no compiler. Complex preprocessing,
 nested includes, debug outputs and unsupported modes bypass it. This is not a
-whole-build benchmark, and the change is not in the installed 5.2.0 release.
+whole-build benchmark. The change is included in installed 5.4.0; the upgrade
+invalidates older derived compiler-cache entries, so the first run may be cold.
 
 Ninja may avoid Make's target-wide flag invalidation, but VC6 header dependency
 tracking is unproved. The plain-SP5 probe ignores `/showIncludes` with D4002

@@ -302,3 +302,36 @@ how the result was verified. Reversals are new entries.
   mypy (401 modules), cycles/layering and commit hooks pass. Patch apply-check
   and read-only parity replay pass. Full upstream suite and native builds were
   not run; no metadata writes, package upgrades or publication occurred.
+
+### Rebrew 5.4.0 publication and Guild import-API migration (2026-10-20)
+
+- Change: published the verified distribution assets for Rebrew 5.4.0 at
+  upstream tag commit `79896b0d`, containing import API commit `dea5295c`.
+  Guild's manifest/lock and installed venv now use that public wheel for prove
+  and optional BinSync, retaining Recoverage's scoped dependency exclusion.
+  Applied the prepared import-recipe migration and refreshed current tooling
+  instructions, README installation version, handoff and queue guidance.
+- Why: user explicitly authorized publication and a release; remove Guild's
+  duplicate import-table traversal only once the public dependency supports it.
+- Evidence: https://github.com/maci0/rebrew/releases/tag/v5.4.0 and all six green
+  CI jobs at https://github.com/maci0/rebrew/actions/runs/39406501806.
+  Exact CI package artifacts, verification logs, before/after package lists and
+  read-only recipe replays are under `.scratch/rebrew-release-5.4.0-logs/` and
+  `.scratch/release-asset-verification-79896b0d/`.
+- Decision owner: user authorized the release, migration and publishing.
+- Verification: CI wheel/sdist manifest validation and clean-venv smoke pass;
+  uploaded assets are the verified CI files plus SHA256SUMS. Guild `uv lock
+  --check`, `uv pip check`, prove/BinSync/Recoverage imports and 22 selected
+  project tests pass. Only installed Rebrew changed, from 5.2.0 to 5.4.0.
+  The migrated response is still all 39 lines / 1,205 bytes with SHA-256
+  `994f6ee54779552cb809b13b70051f2e87f84a73d1527cd36f6e6a0ff8f00b5f`.
+- Test-fixture correction: the project gate already requires explicit
+  `functions_checked: true`; its old positive fixture omitted the field.
+  Updated that fixture and added missing/false controls without weakening the
+  production gate. No game source, managed metadata, layout bytes or raw
+  binaries were changed by this migration, and no native rebuild ran.
+- Validation limits: an initial parallel local push-hook run had one native
+  fixture failure that passed alone. Later local full runs were invalidated
+  when an overlapping release process removed their temporary worktree;
+  they are not claimed as passing. Final release acceptance uses the complete
+  successful CI run for the published commit and exact artifact checks.

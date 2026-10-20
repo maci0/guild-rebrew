@@ -21,9 +21,12 @@ def _adapter(index: int, path: Path, *args: str) -> int:
     ).returncode
 
 
-@pytest.mark.parametrize("failure", [None, "function", "baseline", "data", "file", "layout"])
+@pytest.mark.parametrize(
+    "failure", [None, "function", "baseline", "data", "file", "layout", "unchecked", "missing-check"]
+)
 def test_verification_rejects_drift(tmp_path: Path, failure: str | None) -> None:
     report = {
+        "functions_checked": True,
         "summary": {"passed": 3, "total": 3, "failed": 0},
         "data": {"matched": 1, "compared": 1, "mismatched": [], "missing": []},
         "whole_binary": {
@@ -46,6 +49,10 @@ def test_verification_rejects_drift(tmp_path: Path, failure: str | None) -> None
         report["whole_binary"]["match"] = False
     elif failure == "layout":
         report["whole_binary"]["layout"]["match"] = False
+    elif failure == "unchecked":
+        report["functions_checked"] = False
+    elif failure == "missing-check":
+        del report["functions_checked"]
     path = tmp_path / "report.json"
     path.write_text(json.dumps(report))
     assert _adapter(1, path, "2") == (0 if failure is None else 1)
