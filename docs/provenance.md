@@ -275,3 +275,30 @@ how the result was verified. Reversals are new entries.
 - Decision owner: user reported old graphs; preserve the requested current view.
 - Verification: both commit-addressed image responses equal the local SVGs;
   README asset URLs resolve and staged whitespace checks pass. No build ran.
+
+### Import-table API extraction and prepared caller migration (2026-10-20)
+
+- Change: implemented nullable PE `hint_name_rva` in the existing upstream
+  import-table API and JSON output, with parser/consumer regressions and CLI
+  documentation; recorded the gap in upstream `docs/IDEAS-GUILD.md`. Added the
+  release prerequisite and audit disposition to `docs/tooling-upstream.md`.
+- Why: Guild's import recipe needs physical hint/name positions, but the public
+  API discarded them and forced duplicate LIEF traversal. Its measured server
+  ordering rules remain local; no generic linker policy was inferred.
+- Evidence: upstream local commit `dea5295c`, branch
+  `feature/import-hint-name-rva`, isolated at
+  `.scratch/rebrew-import-hint-name-rva`. Prepared caller patch and read-only
+  parity replay live in `.scratch/rebrew-import-hint-name-rva-migration`.
+  Original and migrated recipes both reproduce all 39 lines / 1,205 bytes of
+  `layout/server.dll/import-includes.rsp`, SHA-256
+  `994f6ee54779552cb809b13b70051f2e87f84a73d1527cd36f6e6a0ff8f00b5f`.
+- Decision owner: user requested the script audit, delegated implementation and
+  upstream migration. Preserve the supported pinned package environment: the
+  caller patch remains unapplied until a release containing the field is
+  installed. The working script, dependency pins and native inputs are unchanged.
+- Verification: 515 distinct upstream focused/consumer/CLI/package tests pass;
+  both PE widths preserve physical hint/name positions independently of IAT
+  order, and ordinal/ELF/NE imports carry null. Ruff, touched-file formatting,
+  mypy (401 modules), cycles/layering and commit hooks pass. Patch apply-check
+  and read-only parity replay pass. Full upstream suite and native builds were
+  not run; no metadata writes, package upgrades or publication occurred.

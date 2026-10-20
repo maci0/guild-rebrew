@@ -74,3 +74,21 @@ Old `--full` transcripts are historical.
 
 The [historical archive](goal-history.md#full-notebooks) holds the full retired
 script inventory and migration audit. Its intermediate script counts are obsolete.
+
+## Import-table API extraction (2026-10-20)
+
+The remaining script audit found one reusable omission: the import API discarded
+PE hint/name RVAs, so `gen_import_includes.py` repeated LIEF's import traversal.
+Upstream commit `dea5295c` on local branch `feature/import-hint-name-rva` exposes
+nullable `hint_name_rva` through `formats.import_table.parse_imports` and
+`binary imports list --json`. Physical name-table position does not establish
+linker load order; the server recipe and ordinal spellings remain project policy.
+
+The caller migration is prepared in ignored scratch at
+`.scratch/rebrew-import-hint-name-rva-migration/guild-import-hint-name-rva.patch`,
+with a read-only `check_parity.py` replay beside it. Both implementations produce
+the tracked 39-line, 1,205-byte response file exactly. The patch is **unapplied**:
+Guild pins released Rebrew 5.2, which lacks the field. Apply it only after a
+release containing the upstream change is installed; this audit changes no
+package pins or environment. BSS layout, independent objective checks, Wine load
+acceptance and state-table presentation retain their project-specific scope.
