@@ -229,5 +229,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     report = json.load(sys.stdin)
-    date = datetime.now(UTC).date().isoformat()
+    date = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     print(render_map(collect_map(report), date) if args.map else render(report, date), end="")

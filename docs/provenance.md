@@ -242,3 +242,20 @@ how the result was verified. Reversals are new entries.
   honest C body and reduced verdict were kept (see DECISIONS).
 - Verified: full `rebrew lint` errors 0; converted rows re-measured
   (group-194 kept 6/6 RELOC; group-195 kept 4 RELOC + 1 EXACT).
+
+### README graphic freshness and cache versions (2026-10-20)
+
+- Change: regenerated both README SVGs from a fresh status snapshot, added
+  visible minute-level UTC timestamps to the existing renderer and content-hash
+  versions to both image URLs, and refreshed Gold's unfinished-work counts.
+- Why: readers reported old graphics. Published raw README/SVG hashes matched
+  the local committed files, so a server-side content mismatch was not observed;
+  changing image URLs avoids reusing the previous browser image-cache key.
+- Evidence: raw GitHub responses and `.scratch/readme-refresh/status.json`;
+  headline percentages are unchanged. No stale-browser cache was directly
+  reproduced, and no new build or source-verification result is claimed.
+- Decision owner: user reported stale GitHub README graphics; publishing the
+  refresh follows the user's existing commit/push instruction.
+- Verification: renderer tests, SVG XML and image-URL hash checks, visual preview
+  and whitespace checks; remote content checked after publication. Project
+  reconstruction changes are outside this documentation refresh.

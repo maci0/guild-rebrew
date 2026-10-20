@@ -42,17 +42,17 @@ displaced code still differs there. None of these alone establishes completion.
 
 <!-- progress:start -->
 <p align="center">
-  <img src="docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
+  <img src="docs/progress.svg?v=f3cec19df2d0" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
   <p align="center">
-    <img src="docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
+    <img src="docs/function-map.svg?v=88cbf48fdf47" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
   </p>
 </details>
 <!-- progress:end -->
 
-<sub>Snapshot refreshed 2026-10-20 UTC from
+<sub>Snapshot refreshed 2026-10-20 09:48 UTC from
 <code>rebrew status --all-targets --json</code>.
 These are stored verdicts, not fresh compilation or raw-link verification.
 Libraries, semantic PROVEN verdicts and whole-function assembly matches are
@@ -67,7 +67,7 @@ Remaining work in the same snapshot:
 | Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | EXTRACT_ERROR | Without source |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | **GoldTL** | 312 | 870 | 67 | 1 | 40 |
-| **Gold** | 1,864 | 218 | 12 | 0 | 3 |
+| **Gold** | 1,864 | 217 | 13 | 0 | 3 |
 
 A partial body or repaired inventory boundary can change these categories
 without earning a match. Function percentages measure catalog entries, not

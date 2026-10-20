@@ -4,7 +4,7 @@
 <rect width="715" height="788" rx="16" fill="#101820"/>
 <g font-family="DejaVu Sans, sans-serif">
 <text x="24" y="33" font-size="19" fill="#f1f6fa" text-anchor="start">RECONSTRUCTION METRICS</text>
-<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-10-20</text>
+<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-10-20 09:48 UTC</text>
 <text x="24" y="57" font-size="13" fill="#aebdca" text-anchor="start">Code bytes, function counts and raw-file agreement · separate measures</text>
 <rect x="24" y="80" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="107" font-size="16" fill="#f1f6fa" text-anchor="start">server.dll</text>
