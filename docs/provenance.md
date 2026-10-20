@@ -1,0 +1,189 @@
+# Provenance ledger
+
+Append-only record of changes to the reconstruction deliverables. Each entry
+names the date, the change, the reason, the evidence, who asked or decided, and
+how the result was verified. Reversals are new entries.
+
+## 2026-10-20
+
+### Reconstructed function bodies (GOLDTL)
+
+- Change: hundreds of `src/GOLDTL*.c` bodies rebuilt or corrected through the
+  staffed reconstruction workflow; status transitions written only by
+  `rebrew test`/`rebrew verify`.
+- Why: reach byte-identical coverage of `Europa1400Gold_TL.exe` (session goal).
+- Evidence: per-function `rebrew test --json` verdicts, `.scratch/recycle2/results/`,
+  `.scratch/wave*/results/`, `.scratch/round5/results/` reports; promoted rows
+  listed in the session log.
+- Decided by: user goal; each body reviewed against `rebrew diff` and asm.
+- Verified: `rebrew test` match counts; RELOC promotions re-measured after every
+  extent repair; no STATUS hand-written.
+
+### Reviewed extent repairs (inventory only)
+
+- Change: `rebrew binary repair-extents` batches applying reviewed native body
+  boundaries and merged-row splits (trailing NOP removal, added entries).
+- Why: stored SIZE padded to next entry blocked RELOC for complete bodies.
+- Evidence: `.scratch/wave2/extent-specs.tsv` (each spec lists its ret/NOP/pad
+  evidence), `--dry-run` digests, advisory notices from agents.
+- Decided by: session Lead after agent evidence review.
+- Verified: digest-guarded apply; rows re-measured with `rebrew test --va --size`;
+  refused cases (`overlaps next inventory start`) recorded in
+  `.scratch/wave2/EXTENT-QUEUE.md`.
+
+### Compiler-behaviour decisions
+
+- Change: `.scratch/wave2/DECISIONS.md` updated with proven codegen rules and
+  walls (framed tail jmps, PP shrink-wrapped saves, frame sizing, `extern`
+  literal forms, duplicated-call merge, allocate probes).
+- Why: stop agents repeating dead ends and make levers reusable.
+- Evidence: probe sources under `.scratch/recycle2/agents/*/`, compiled with the
+  locked `msvc-6.0-sp5-pp` profile; per-rule replay commands in the file.
+- Decided by: session Lead.
+- Verified: probes recompile and reproduce source-target byte shapes.
+
+### Tooling gaps recorded for upstream
+
+- Change: IDEAS entries drafted in `.scratch/wave2/DECISIONS.md` because the
+  upstream checkout is mounted read-only in this session: extent-retire
+  capability, `build driver` profile handling, `source binding` ambiguity with
+  stacked anchors.
+- Why: these gaps block reviewed work (interior-row retirement, PP probes).
+- Evidence: concrete rows and commands named in each entry.
+- Decided by: session Lead.
+- Verified: every gap reproduced with the named commands.
+
+### Row-level body corrections (recycle2 refine waves, 2026-10-20)
+
+- Change: targeted C-shape corrections closing remaining byte deltas on partial
+  bodies, e.g. `0x4d3c60` (ratio arm polarity plus `cnt` band block; 477 -> 516
+  of 560, now NEAR_MATCHING), `0x4f1ad0` (reload instead of cached pointer; 161
+  -> 225 of 592), `0x4fcc20` (live handle deref, scaled `0x24d` base; 59 -> 342
+  of 376), `0x500a40`, `0x550be0`, `0x4cfca0`, `0x5bdfc0` (the last three now
+  RELOC).
+- Why: close near-miss rows to RELOC and raise partial coverage.
+- Evidence: per-row `rebrew test --json` before/after counts in
+  `.scratch/recycle2/results/`; decisions and levers in
+  `.scratch/wave2/DECISIONS.md`.
+- Decided by: session Lead (agents propose, Lead reviews promotions).
+- Verified: every change re-measured with `rebrew test`; promotions recorded only
+  by the comparison tools, never hand-written.
+
+### 0x572a50 promoted to RELOC (820/820)
+
+- Change: `gm_RandomMod` callee declared `unsigned short` instead of `int`, so
+  the call site emits native `mov cx,ax`; reviewed extent repair
+  `0x572a50`=820 (switch table inside, 12 NOP pad removed).
+- Why: byte-identical body was blocked only by the callee return-width codegen.
+- Evidence: `rebrew test --va 0x572a50 --size 820 --json` returned
+  `status RELOC, match_count 820, total 820, mismatches 0`.
+- Decided by: recycle2 group-105 finding, Lead applied the extent repair.
+- Verified: full-body test with the repaired extent, 23 reloc bindings validated.
+
+### ADDRESS-comment binding repairs (2026-10-20)
+
+- Change: removed a duplicated GOLD anchor above `extern int g_6b7fac` in
+  `src/GOLDTL.fcn_0040bd80.c`; moved 14 misplaced ADDRESS comments that sat above
+  `extern` declarations onto their function definitions; created reviewed data
+  rows `g_6b7fd0`/`g_6b7fd4`/`g_6b7fd8` (0x6b7fd0 family) and `g_6b8014`;
+  renamed the GOLD row at 0x6b7fac to `g_6b7fac_gold` so the TL name is unique.
+- Why: resolver built name-to-VA across targets, so duplicated or misplaced
+  anchors produced AMBIGUOUS_VA and no RELOC was possible for affected operands.
+- Evidence: PE sections confirm 0x6b7fd0/0x6b8014 live in .data
+  (base 0x400000, .data RVA 0x275000); native relocation values equal those VAs;
+  audit found exactly 14 misplaced anchors via a script over src/**/*.c.
+- Decided by: session Lead after group-104/111/115 findings.
+- Verified: `0x415d70` RELOC 739/739, `0x4133e0` RELOC 158/158, `0x42e0e0`
+  RELOC 59/59 at its 59-byte extent, `0x42e120` RELOC 86/86.
+
+### Interior inventory row retirement (2026-10-20)
+
+- Change: removed seven reviewed interior inventory rows that an earlier
+  discovery split out of multi-entry bodies: 0x4b023b; 0x55b5a2, 0x55b866,
+  0x55b8b4, 0x55b8e4, 0x55b914; 0x51f0ce. Each is a `je` target strictly inside
+  a single body, has no metadata row, and blocked the parent extent repair.
+  Applied with `.scratch/wave2/retire_inventory_rows.py`, then resized the
+  parents through `rebrew binary repair-extents` with a reviewed digest.
+- Why: `repair-extents` cannot retire interior rows, so byte-exact bodies
+  (0x4b0220 at 438, 0x55b3e0 at 2115, 0x51ecf0 at 1145) could not be measured.
+- Evidence: inventory entries and metadata absence checked per row; parent
+  boundary evidence in `.scratch/recycle2/results/group-128.md`; script refuses
+  children that have metadata rows. Backup kept at
+  `db/inventory-Europa1400Gold_TL.exe.json.pre-retire`.
+- Decided by: session Lead, after group-128 reported the tooling gap.
+- Verified: parents resized with digest-guarded repair; verdicts re-measured with
+  `rebrew test --va --size`.
+
+### Retirement promotions (2026-10-20)
+
+- Change: `0x4b0220` RELOC 438/438, `0x55b3e0` RELOC 2115/2115 after the
+  interior-row retirement and parent resizes above.
+- Why: both bodies were byte-exact but unmeasurable at their merged extents.
+- Evidence: `rebrew test --va ... --size ... --json` reports the two verdicts
+  with full match counts and 15 / many VALIDATED relocations.
+- Decided by: session Lead.
+- Verified: digest-guarded repair then per-row comparison; store verdicts written
+  only by `rebrew test --force-status`.
+
+### Rewrite wave and extent repairs (2026-10-20, later)
+
+- Change: rebuilt wrong-body SIZE_MISMATCH functions from native disassembly in
+  rotating groups (151-173); promoted `0x532bd0` RELOC 791/791, `0x5da820` RELOC
+  770/770, `0x555d30` RELOC 984/984; promoted `0x64d1df` EXACT 56/56 and
+  `0x4eb260`/`0x4eb320` RELOC 188/188; applied reviewed extent repairs and
+  interior-row retirements described above.
+- Why: close byte coverage; bodies proven wrong by earlier waves needed
+  reconstruction, not gap fixes.
+- Evidence: per-group reports under `.scratch/recycle2/results/`, native
+  disassembly dumps under `.scratch/recycle2/agents/group-*/`, and the extent
+  specs in `.scratch/wave2/extent-specs.tsv`.
+- Decided by: session Lead; agents propose bodies, Lead applies metadata changes.
+- Verified: every promotion re-measured by `rebrew test --force-status`; statuses
+  written only by the comparison tools.
+
+### Restored clobbered source file (2026-10-20)
+
+- Change: `src/GOLDTL.fcn_004055a0.c` was restored from HEAD after another
+  writer replaced its body with `fcn_004cf000`, which duplicated the 0x4cf000
+  ADDRESS anchor and broke the project-wide scan.
+- Why: every `rebrew test` failed with an address-anchor conflict.
+- Evidence: `git show HEAD:src/GOLDTL.fcn_004055a0.c`; clobbered copy at
+  `.scratch/wave2/004055a0.clobbered.c`; row re-measured RELOC 248/248 after
+  restore with `rebrew test --no-promote`.
+- Decided by: session Lead (unblock).
+- Verified: comparison tool scan succeeds project-wide again.
+
+### README statistics and graphics refresh (2026-10-20)
+
+- Change: refreshed `README.md`, `docs/progress.svg` and
+  `docs/function-map.svg`. C matches are 251/251 server, 3,752/5,042 GoldTL
+  and 2,469/4,592 Gold; 26 Gold whole-function assembly matches stay separate.
+  Added the remaining verdict categories and source gaps, and distinguished
+  the existing server file's equality from current-source verification.
+- Why: replace the earlier snapshot with current stored results without
+  treating partial implementations or inventory changes as match gains.
+- Evidence: `rebrew status --all-targets --json`, saved locally as
+  `.scratch/readme-2026-10-20/latest/status.json`; graphics rendered by the
+  existing `scripts/progress_svg.py`, including its map/count reconciliation.
+- Decision owner: user requested the latest README data and statistics.
+- Verification: README totals reconcile with the saved status report; both
+  SVGs parse as XML; local README links, fragments and fences pass, and
+  `git diff --check` passes for the changed deliverables. No compilation,
+  metadata writes, fresh function verification or full gate was run.
+
+### README progress metrics distinguished (2026-10-20)
+
+- Change: made virtual `.text` accounting the README's primary percentage,
+  alongside C function counts and same-offset raw-file agreement. Renamed the
+  function graphic's heading and subtitle in `scripts/progress_svg.py` so its
+  percentages cannot be read as byte coverage; regenerated `docs/progress.svg`.
+- Why: 74.4% of GoldTL functions matched does not mean 74.4% of its code bytes
+  are accounted for. The same snapshot reports 47.3% code accounting and 1.2%
+  raw-file agreement; Gold reports 22.9%, 53.7% and 1.1% respectively.
+- Evidence: `.scratch/readme-2026-10-20/latest/status.json`, confirmed by a
+  subsequent read-only GoldTL status query. No new verification was claimed.
+- Decision owner: user requested correction of the confusing percentages and
+  a Git commit.
+- Verification: README figures reconcile with the saved JSON, both SVGs parse,
+  local links/fences and staged whitespace checks pass. Rendering changes are
+  labels only; no compiler, metadata or raw-link changes are included.

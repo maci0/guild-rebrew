@@ -132,9 +132,9 @@ def render(report: dict, date: str) -> str:
             f'text-anchor="{anchor}">{escape(value)}</text>'
         )
 
-    text(24, 33, "RECONSTRUCTION STATUS", 19, "#f1f6fa")
+    text(24, 33, "C FUNCTION MATCHES", 19, "#f1f6fa")
     text(691, 32, date, 12, anchor="end")
-    text(24, 57, "Stored function verdicts · not whole-image completion")
+    text(24, 57, "Function counts · not byte coverage or whole-image completion")
     for index, (name, target) in enumerate(targets.items()):
         total = target["functions"]["total"]
         statuses = target["status"]

@@ -3,9 +3,9 @@
 <desc id="description">Stored EXACT and RELOC function verdicts, with whole-function assembly matches separated from C source matches. Library functions and semantic PROVEN verdicts do not count as C matches. Client builds remain comparison scaffolds.</desc>
 <rect width="715" height="594" rx="16" fill="#101820"/>
 <g font-family="DejaVu Sans, sans-serif">
-<text x="24" y="33" font-size="19" fill="#f1f6fa" text-anchor="start">RECONSTRUCTION STATUS</text>
-<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-10-18</text>
-<text x="24" y="57" font-size="13" fill="#aebdca" text-anchor="start">Stored function verdicts · not whole-image completion</text>
+<text x="24" y="33" font-size="19" fill="#f1f6fa" text-anchor="start">C FUNCTION MATCHES</text>
+<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-10-20</text>
+<text x="24" y="57" font-size="13" fill="#aebdca" text-anchor="start">Function counts · not byte coverage or whole-image completion</text>
 <rect x="24" y="80" width="667" height="144" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="107" font-size="16" fill="#f1f6fa" text-anchor="start">server.dll</text>
 <text x="675" y="116" font-size="25" fill="#55dbac" text-anchor="end">100.0%</text>
@@ -16,20 +16,20 @@
 <text x="40" y="204" font-size="12" fill="#55dbac" text-anchor="start">Raw file equals reference</text>
 <rect x="24" y="236" width="667" height="144" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="263" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold_TL.exe</text>
-<text x="675" y="272" font-size="25" fill="#55dbac" text-anchor="end">72.1%</text>
-<text x="40" y="285" font-size="13" fill="#aebdca" text-anchor="start">3,605 / 4,996 functions matched by C source</text>
+<text x="675" y="272" font-size="25" fill="#55dbac" text-anchor="end">74.4%</text>
+<text x="40" y="285" font-size="13" fill="#aebdca" text-anchor="start">3,752 / 5,042 functions matched by C source</text>
 <rect x="40" y="301" width="635" height="12" fill="#394a59"/>
-<rect x="40.00" y="301" width="458.20" height="12" fill="#55dbac"/>
-<text x="40" y="337" font-size="13" fill="#aebdca" text-anchor="start">0 assembly matches · 1,391 functions still to match</text>
+<rect x="40.00" y="301" width="472.53" height="12" fill="#55dbac"/>
+<text x="40" y="337" font-size="13" fill="#aebdca" text-anchor="start">0 assembly matches · 1,290 functions still to match</text>
 <text x="40" y="360" font-size="12" fill="#ffc68b" text-anchor="start">Raw file differs · comparison scaffold</text>
 <rect x="24" y="392" width="667" height="144" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="419" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold.exe</text>
 <text x="675" y="428" font-size="25" fill="#55dbac" text-anchor="end">53.7%</text>
-<text x="40" y="441" font-size="13" fill="#aebdca" text-anchor="start">2,467 / 4,592 functions matched by C source</text>
+<text x="40" y="441" font-size="13" fill="#aebdca" text-anchor="start">2,469 / 4,592 functions matched by C source</text>
 <rect x="40" y="457" width="635" height="12" fill="#394a59"/>
-<rect x="40.00" y="457" width="341.15" height="12" fill="#55dbac"/>
-<rect x="381.15" y="457" width="4.70" height="12" fill="#c3a7ff"/>
-<text x="40" y="493" font-size="13" fill="#aebdca" text-anchor="start">34 assembly matches · 2,091 functions still to match</text>
+<rect x="40.00" y="457" width="341.42" height="12" fill="#55dbac"/>
+<rect x="381.42" y="457" width="3.60" height="12" fill="#c3a7ff"/>
+<text x="40" y="493" font-size="13" fill="#aebdca" text-anchor="start">26 assembly matches · 2,097 functions still to match</text>
 <text x="40" y="516" font-size="12" fill="#ffc68b" text-anchor="start">Raw file differs · comparison scaffold</text>
 <rect x="24" y="548" width="10" height="10" rx="2" fill="#55dbac"/>
 <text x="42" y="558" font-size="12" fill="#aebdca" text-anchor="start">C source match</text>

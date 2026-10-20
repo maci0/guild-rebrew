@@ -10,8 +10,13 @@ Gold and GoldTL from shared source.
 > **Work in progress.** The server has a byte-identical raw build.
 > **Gold and GoldTL are comparison scaffolds, not playable or byte-identical.**
 > Source recovery, unsupported assembly and provider/storage work remain.
-> The [latest server gate](docs/TODO.md#verified-checkpoint) confirms complete
-> file equality; 36 unsupported assembly findings keep the gate red.
+> The [last completed server gate](docs/TODO.md#verified-checkpoint) confirmed
+> complete file equality; its 36 unsupported assembly findings kept the gate red.
+
+The [latest recorded work](docs/TODO.md)
+covers resumed client reconstruction waves. Their object results are included
+below; a completed rebuild and raw-link validation of the current sources remain
+pending. See the [handoff](docs/HANDOFF.md).
 
 **[Start here](#get-started)** &nbsp; · &nbsp;
 **[Build & compare](#build-and-compare)** &nbsp; · &nbsp;
@@ -23,9 +28,21 @@ Gold and GoldTL from shared source.
 
 ## Reconstruction status
 
+| Target | Code accounted for | C functions matched | Raw file at original offsets |
+| --- | ---: | ---: | ---: |
+| **Server** | **100.0%** | 251 / 251 · 100.0% | 100.0% |
+| **GoldTL** | **47.3%** | 3,752 / 5,042 · 74.4% | 1.2% |
+| **Gold** | **22.9%** | 2,469 / 4,592 · 53.7% | 1.1% |
+
+**Code accounting** is Rebrew's byte-based measure of virtual `.text`: matched
+functions, identified libraries and alignment padding. **Function matches**
+give every function equal weight, regardless of size. **Raw-file agreement**
+compares the existing built file with the reference at original offsets;
+displaced code still differs there. None of these alone establishes completion.
+
 <!-- progress:start -->
 <p align="center">
-  <img src="docs/progress.svg" width="715" alt="Reconstruction status: stored C function matches, assembly matches and raw-image agreement for all three targets.">
+  <img src="docs/progress.svg" width="715" alt="C function counts, not byte coverage: stored C and assembly matches, with existing raw-image agreement shown separately.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
@@ -35,14 +52,28 @@ Gold and GoldTL from shared source.
 </details>
 <!-- progress:end -->
 
-<sub>Snapshots dated in UTC show stored verdicts, not fresh verification runs. Function
-matches do not establish whole-image completion.</sub>
+<sub>Snapshot refreshed 2026-10-20 UTC from
+<code>rebrew status --all-targets --json</code>.
+These are stored verdicts, not fresh compilation or raw-link verification.
+Libraries, semantic PROVEN verdicts and whole-function assembly matches are
+excluded from the C totals. Inline assembly may remain.</sub>
 
-| Target | Compiler / runtime | State |
-| --- | --- | --- |
-| **Server** | Plain VC6 SP5 · `/MT` / LIBCMT | Raw file matches; source-fidelity work remains |
-| **GoldTL** | VC6 SP5 Processor Pack · `/MT` / LIBCMT | Comparison scaffold; differs from reference |
-| **Gold** | VC6 SP5 Processor Pack · `/ML` / LIBC | Comparison scaffold; differs from reference |
+The server uses plain VC6 SP5 with `/MT` / LIBCMT. Both clients use the
+Processor Pack: GoldTL with `/MT` / LIBCMT, Gold with `/ML` / LIBC.
+
+Gold has another **26 whole-function assembly matches**, counted separately.
+Remaining work in the same snapshot:
+
+| Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | EXTRACT_ERROR | Without source |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| **GoldTL** | 312 | 870 | 67 | 1 | 40 |
+| **Gold** | 1,864 | 218 | 12 | 0 | 3 |
+
+A partial body or repaired inventory boundary can change these categories
+without earning a match. Function percentages measure catalog entries, not
+matched code bytes or gameplay completeness. The existing server file matches
+its reference, but its saved function-verification run predates the current
+working tree; the full gate has not been rerun for this snapshot.
 
 ## Get started
 
