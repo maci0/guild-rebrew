@@ -31,7 +31,7 @@ pending. See the [handoff](docs/HANDOFF.md).
 | Target | Code accounted for | C functions matched | Raw file at original offsets |
 | --- | ---: | ---: | ---: |
 | **Server** | **100.0%** | 251 / 251 · 100.0% | 100.0% |
-| **GoldTL** | **47.3%** | 3,752 / 5,042 · 74.4% | 1.2% |
+| **GoldTL** | **47.8%** | 3,771 / 5,053 · 74.6% | 1.2% |
 | **Gold** | **22.9%** | 2,469 / 4,592 · 53.7% | 1.1% |
 
 **Code accounting** is Rebrew's byte-based measure of virtual `.text`: matched
@@ -42,17 +42,17 @@ displaced code still differs there. None of these alone establishes completion.
 
 <!-- progress:start -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/9a72da61e217c82c88929fc0b950a788e22939e5/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/03ac1776dcd4f5c4cc0a22e10044cd2f4f4db99e/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
   <p align="center">
-    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/9a72da61e217c82c88929fc0b950a788e22939e5/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
+    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/03ac1776dcd4f5c4cc0a22e10044cd2f4f4db99e/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
   </p>
 </details>
 <!-- progress:end -->
 
-<sub>Snapshot refreshed 2026-10-20 09:48 UTC from
+<sub>Snapshot refreshed 2026-10-20 17:51 UTC from
 <code>rebrew status --all-targets --json</code>.
 These are stored verdicts, not fresh compilation or raw-link verification.
 Libraries, semantic PROVEN verdicts and whole-function assembly matches are
@@ -66,7 +66,7 @@ Remaining work in the same snapshot:
 
 | Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | EXTRACT_ERROR | Without source |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| **GoldTL** | 312 | 870 | 67 | 1 | 40 |
+| **GoldTL** | 273 | 883 | 74 | 1 | 51 |
 | **Gold** | 1,864 | 217 | 13 | 0 | 3 |
 
 A partial body or repaired inventory boundary can change these categories
@@ -319,9 +319,16 @@ HASH
 The renderer consumes the canonical CLI report; it keeps no separate coverage database.
 
 ```sh
-uv run rebrew status --all-targets --json | uv run python scripts/progress_svg.py > docs/progress.svg
-uv run rebrew status --all-targets --json | uv run python scripts/progress_svg.py --map > docs/function-map.svg
+status_report=$(mktemp)
+uv run rebrew status --all-targets --json > "$status_report"
+uv run python scripts/progress_svg.py < "$status_report" > docs/progress.svg
+uv run python scripts/progress_svg.py --map < "$status_report" > docs/function-map.svg
+rm "$status_report"
 ```
+
+Update the tables and snapshot time from that same report. When publishing,
+commit the graphics first, then pin both image URLs above to that commit SHA
+so GitHub displays the new assets without stale branch-cache responses.
 
 </details>
 
