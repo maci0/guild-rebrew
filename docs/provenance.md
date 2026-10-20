@@ -361,3 +361,27 @@ how the result was verified. Reversals are new entries.
   Ruff, shell syntax and scoped whitespace checks pass. No BSS source,
   scaffold manifest, managed metadata or native binary was regenerated. No
   native build or full gate ran; unrelated reconstruction edits remain separate.
+
+### README and chart snapshot refresh (2026-10-21)
+
+- Change: refreshed the README metric and remaining-work tables, progress bars
+  and address-ordered function map from one `rebrew status --all-targets --json`
+  snapshot. Updated the refresh recipe to reuse one report, with commit-pinned
+  published image URLs to avoid stale branch-cache responses.
+- Why: user requested the latest README data and charts. Keep code-byte
+  accounting, C function counts and raw-file agreement separate; exclude
+  whole-function assembly and PROVEN from matched C totals.
+- Evidence: `.scratch/readme-refresh-2026-10-21/status.json`, captured at
+  2026-10-20 17:51 UTC (2026-10-21 Singapore time), SHA-256
+  `48bc6d4fb96c4bb9aab96e9f044726ed9b448d2c346ffd4da13feeeb1a8bd921`.
+  GoldTL: 3,771/5,053 C matches (74.6%), 1,192,240/2,491,370 accounted code
+  bytes (47.8%); Gold: 2,469/4,592 C matches (53.7%), 22.9% code accounting;
+  server: 251/251 C matches and 100.0% code accounting. Existing raw-file
+  agreement remains 100.0% server, 1.2% GoldTL and 1.1% Gold.
+- Decision owner: user requested the refresh and previously authorized pushing
+  README and graphic updates. Preserve concurrent reconstruction edits.
+- Verification: six graphic tests pass; both SVGs parse as XML and use the same
+  timestamp. Function-map game/library/assembly/C totals agree with the status
+  report; README values reconcile to that report. No source, inventory,
+  metadata or raw binary changed in this refresh. No native build or fresh
+  verification ran; the snapshot includes current stored working-tree verdicts.
