@@ -42,17 +42,17 @@ displaced code still differs there. None of these alone establishes completion.
 
 <!-- progress:start -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/03ac1776dcd4f5c4cc0a22e10044cd2f4f4db99e/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/cd579ebbb667093391d5621327280668e55bb597/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
   <p align="center">
-    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/03ac1776dcd4f5c4cc0a22e10044cd2f4f4db99e/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
+    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/cd579ebbb667093391d5621327280668e55bb597/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
   </p>
 </details>
 <!-- progress:end -->
 
-<sub>Snapshot refreshed 2026-10-20 17:51 UTC from
+<sub>Snapshot refreshed 2026-10-20 18:18 UTC from
 <code>rebrew status --all-targets --json</code>.
 These are stored verdicts, not fresh compilation or raw-link verification.
 Libraries, semantic PROVEN verdicts and whole-function assembly matches are
@@ -66,7 +66,7 @@ Remaining work in the same snapshot:
 
 | Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | EXTRACT_ERROR | Without source |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| **GoldTL** | 273 | 883 | 74 | 1 | 51 |
+| **GoldTL** | 278 | 876 | 76 | 1 | 51 |
 | **Gold** | 1,864 | 217 | 13 | 0 | 3 |
 
 A partial body or repaired inventory boundary can change these categories
@@ -74,6 +74,25 @@ without earning a match. Function percentages measure catalog entries, not
 matched code bytes or gameplay completeness. The existing server file matches
 its reference, but its saved function-verification run predates the current
 working tree; the full gate has not been rerun for this snapshot.
+
+## Data verification
+
+| Target | Initialized data bytes verified | Verified symbols (incl. BSS) | EXACT at reference VA | Displaced symbols |
+| --- | ---: | ---: | ---: | ---: |
+| **Server** | 66,664 / 66,664 · 100.0% | 547 / 547 | 409 | 0 |
+| **GoldTL** | 0 / 335,380 · 0.0% | 1 / 361 | 0 | 332 |
+| **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 304 |
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/cd579ebbb667093391d5621327280668e55bb597/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
+</p>
+
+Byte coverage counts each initialized `.data`/`.rdata` byte once; it excludes
+BSS and copied imports. Symbol totals include BSS and views, so a verified
+symbol need not contribute initialized bytes. `EXACT` is a subset of verified
+records with byte agreement at the reference address; displaced records count
+as drift. These are stored verdicts from the same snapshot as the code charts,
+not fresh verification or evidence of storage ownership.
 
 ## Get started
 
@@ -323,11 +342,12 @@ status_report=$(mktemp)
 uv run rebrew status --all-targets --json > "$status_report"
 uv run python scripts/progress_svg.py < "$status_report" > docs/progress.svg
 uv run python scripts/progress_svg.py --map < "$status_report" > docs/function-map.svg
+uv run python scripts/progress_svg.py --data < "$status_report" > docs/data-progress.svg
 rm "$status_report"
 ```
 
 Update the tables and snapshot time from that same report. When publishing,
-commit the graphics first, then pin both image URLs above to that commit SHA
+commit the graphics first, then pin all three image URLs above to that commit SHA
 so GitHub displays the new assets without stale branch-cache responses.
 
 </details>
