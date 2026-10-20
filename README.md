@@ -42,7 +42,7 @@ displaced code still differs there. None of these alone establishes completion.
 
 <!-- progress:start -->
 <p align="center">
-  <img src="docs/progress.svg" width="715" alt="C function counts, not byte coverage: stored C and assembly matches, with existing raw-image agreement shown separately.">
+  <img src="docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>

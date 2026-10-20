@@ -187,3 +187,20 @@ how the result was verified. Reversals are new entries.
 - Verification: README figures reconcile with the saved JSON, both SVGs parse,
   local links/fences and staged whitespace checks pass. Rendering changes are
   labels only; no compiler, metadata or raw-link changes are included.
+
+### Three progress bars per target (2026-10-20)
+
+- Change: updated the README graphic and renderer to show separate bars for
+  virtual `.text` accounting, C function matches and raw-file agreement at
+  original offsets. Updated README alternative text and renderer tests; the
+  address-ordered function map remains unchanged.
+- Why: make the three denominators visible and prevent the function-count
+  percentage from being mistaken for byte coverage or whole-file completion.
+- Evidence: the same `.scratch/readme-2026-10-20/latest/status.json` snapshot
+  used by the README table; rendered preview `latest/three-metrics.png` beside
+  it. No new source-recovery or verification result is claimed.
+- Decision owner: user requested the graphics update and Git push.
+- Verification: six focused renderer tests pass, including independent bar
+  widths, assembly/PROVEN exclusion, absent-image N/A and invalid counts.
+  Ruff formatting/lint, SVG XML parsing, rendered visual inspection and
+  staged whitespace checks pass. No compiler or full reconstruction gate ran.

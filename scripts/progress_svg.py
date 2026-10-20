@@ -110,16 +110,16 @@ def render_map(rows: dict, date: str) -> str:
 
 def render(report: dict, date: str) -> str:
     targets = report["targets"]
-    height = 126 + 156 * len(targets)
+    height = 140 + 216 * len(targets)
     parts = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="715" '
         f'height="{height}" viewBox="0 0 715 {height}" role="img" '
         'aria-labelledby="title description">',
         '<title id="title">Guild reconstruction status</title>',
-        '<desc id="description">Stored EXACT and RELOC function verdicts, with '
-        "whole-function assembly matches separated from C source matches. "
-        "Library functions and semantic PROVEN verdicts do not count as C matches. "
-        "Client builds remain comparison scaffolds.</desc>",
+        '<desc id="description">Three bars per target: accounted virtual .text bytes '
+        "including libraries and padding, C function matches excluding whole-function "
+        "assembly and PROVEN verdicts, and existing raw-file bytes equal at original "
+        "offsets. These are separate measures, not overall completion.</desc>",
         f'<rect width="715" height="{height}" rx="16" fill="#101820"/>',
         '<g font-family="DejaVu Sans, sans-serif">',
     ]
@@ -132,9 +132,22 @@ def render(report: dict, date: str) -> str:
             f'text-anchor="{anchor}">{escape(value)}</text>'
         )
 
-    text(24, 33, "C FUNCTION MATCHES", 19, "#f1f6fa")
+    def bar(y: int, label: str, detail: str, count: int, total: int, color: str) -> None:
+        if not 0 <= count <= total:
+            raise ValueError(f"Inconsistent metric counts for {label}")
+        percent = (1000 * count // total) / 10 if total else None
+        text(40, y, f"{label} · {detail}", 12)
+        text(675, y, f"{percent:.1f}%" if percent is not None else "N/A", 17, color, "end")
+        parts.append(f'<rect x="40" y="{y + 9}" width="635" height="10" fill="#394a59"/>')
+        if total and count:
+            parts.append(
+                f'<rect x="40" y="{y + 9}" width="{635 * count / total:.2f}" '
+                f'height="10" fill="{color}"/>'
+            )
+
+    text(24, 33, "RECONSTRUCTION METRICS", 19, "#f1f6fa")
     text(691, 32, date, 12, anchor="end")
-    text(24, 57, "Function counts · not byte coverage or whole-image completion")
+    text(24, 57, "Code bytes, function counts and raw-file agreement · separate measures")
     for index, (name, target) in enumerate(targets.items()):
         total = target["functions"]["total"]
         statuses = target["status"]
@@ -143,31 +156,41 @@ def render(report: dict, date: str) -> str:
         recovered = matched - assembly
         if not 0 <= assembly <= matched <= total:
             raise ValueError(f"Inconsistent function counts for {name}")
-        percent = (1000 * recovered // total) / 10 if total else 0
-        y = 80 + 156 * index
+        y = 80 + 216 * index
         parts.append(
-            f'<rect x="24" y="{y}" width="667" height="144" '
+            f'<rect x="24" y="{y}" width="667" height="204" '
             'rx="10" fill="#18242f" stroke="#2a3b49"/>'
         )
         text(40, y + 27, name, 16, "#f1f6fa")
-        text(675, y + 36, f"{percent:.1f}%", 25, "#55dbac", "end")
-        text(40, y + 49, f"{recovered:,} / {total:,} functions matched by C source")
-        parts.append(f'<rect x="40" y="{y + 65}" width="635" height="12" fill="#394a59"/>')
-        start = 40.0
-        for count, color in ((recovered, "#55dbac"), (assembly, "#c3a7ff")):
-            width = 635 * count / total if total else 0
-            if width:
-                parts.append(
-                    f'<rect x="{start:.2f}" y="{y + 65}" '
-                    f'width="{width:.2f}" height="12" fill="{color}"/>'
-                )
-            start += width
-        text(
-            40,
-            y + 101,
-            f"{assembly:,} assembly matches · {total - matched:,} functions still to match",
+        accounted = target["accounted_text_bytes"]
+        text_total = target["total_text_bytes"]
+        bar(
+            y + 51,
+            "Code accounting",
+            f"{accounted:,} / {text_total:,} bytes",
+            accounted,
+            text_total,
+            "#55dbac",
+        )
+        bar(
+            y + 94,
+            "C function matches",
+            f"{recovered:,} / {total:,} functions",
+            recovered,
+            total,
+            "#39bdf8",
         )
         image = target.get("file", {})
+        file_total = image.get("total_bytes", 0)
+        file_matched = image.get("matched_bytes", 0)
+        detail = f"{file_matched:,} / {file_total:,} bytes" if file_total else "no image compared"
+        bar(y + 137, "Raw file, original offsets", detail, file_matched, file_total, "#ffc68b")
+        text(
+            40,
+            y + 176,
+            f"{assembly:,} assembly matches · {total - matched:,} functions still to match",
+            11,
+        )
         equal = bool(image.get("total_bytes")) and (
             image.get("matched_bytes") == image["total_bytes"]
         )
@@ -180,20 +203,19 @@ def render(report: dict, date: str) -> str:
                 else "No built image compared"
             )
         )
-        text(40, y + 124, label, 12, "#55dbac" if equal else "#ffc68b")
+        text(40, y + 192, label, 11, "#55dbac" if equal else "#ffc68b")
 
-    y = 80 + 156 * len(targets)
-    for x, color, label in (
-        (24, "#55dbac", "C source match"),
-        (247, "#c3a7ff", "Assembly match"),
-        (470, "#394a59", "Still to match"),
-    ):
-        parts.append(f'<rect x="{x}" y="{y}" width="10" height="10" rx="2" fill="{color}"/>')
-        text(x + 18, y + 10, label, 12)
+    y = 80 + 216 * len(targets)
     text(
         24,
-        y + 32,
-        "EXACT + RELOC only; libraries and PROVEN excluded. Inline assembly may remain.",
+        y + 10,
+        "Code accounting includes libraries and padding; C counts exclude whole-function assembly.",
+        11,
+    )
+    text(
+        24,
+        y + 30,
+        "Stored verdicts and existing images; not fresh verification. PROVEN is not a byte match.",
         11,
     )
     parts.extend(["</g>", "</svg>"])
