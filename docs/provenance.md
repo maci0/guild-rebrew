@@ -413,3 +413,59 @@ how the result was verified. Reversals are new entries.
   Rendered the data SVG to PNG and checked the complete layout. Native builds,
   fresh data verification and the full gate were not run; concurrent source,
   inventory and managed-metadata edits are outside this change.
+
+### Integrate reviewed work and release 1.4.0 (2026-10-21)
+
+- Change: advanced the project and lockfile to 1.4.0 after reviewing the 27
+  accepted commits since 1.3.0. Restored the server variants of
+  `cm_ExAllocGraveyardWorker`, `cm_ExAllocAlchemist`, `cm_ExSimSpecialAction`,
+  `lb_ExPlayerRecordBroadcast`, `gv_MoveSlotEntry`, `ahm_CheckFlag` and
+  `gm_AllocRaum`. The client bodies remain selected outside `REBREW_SERVER`.
+  Line controls preserve the existing client diagnostic constants. Comparison
+  commands refresh the affected managed function records; no store was edited
+  by hand and no native boundary or storage allocation was invented.
+- Reason: the integration review reproduced nine unresolved server symbols in
+  the accepted checkpoint. Commit `a16e99dc` had replaced shared server bodies
+  with client implementations, and had removed the server market-stall log
+  branch. The restored server C comes from its parent revision. Keeping target
+  variants repairs the server without discarding the accepted client work.
+- Evidence: `.scratch/integration-20261021/checks/server-regression/`
+  contains the initial link failure, saved pre-change sources, the client
+  preprocessing comparison and scoped verification reports. Ten comparisons
+  of source token streams, with includes held out, cover both client macro
+  contexts for all five files. The separate compiler and binary checks remain
+  the native evidence, rather than treating preprocessing as a byte verdict.
+- Preservation: `.scratch/integration-20261021/drafts.bundle` preserves the
+  initial shared-checkout snapshot, 14 detached-worktree draft commits and the
+  old documentation/data-owner stash. SHA-256:
+  `7da8ab027c4665308225bd83416d5526a2506ff7e342444465a0f5ef327faf73`.
+  `latest-drafts.bundle` adds the 155-entry shared-checkout snapshot at
+  `4bbf3c1ece68e7fffb569e076ef7127572d3bcaa`; its base is in the first bundle.
+  Both bundles pass verification and a separate repository passes full fsck.
+  Local reports, experiments and caches from the 20 inactive detached worktrees
+  survive in `worktree-evidence/`. Those worktrees and the preserved stash were
+  removed. Shared checkouts with attached agents remain; none were agentless.
+- Decision owner: the user authorized integration, durable draft preservation,
+  cleanup, a minor release and publication to the existing owned remote.
+  Concurrent reconstruction writes in the original checkout remain outside
+  this accepted release. No upstream repository, binary input, linked stock
+  archive, deployment destination or local tool setting was changed.
+- Verification: all 33 project tests and three subtests pass; the lockfile check
+  passes. Fresh raw server output equals all 286,720 reference bytes, SHA-256
+  `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+  The gate verifies 316/316 functions (including 65 library functions), all
+  652 data comparisons, the entire PE, imports, relocations and layout. Wine
+  loads the DLL and resolves Init/Exit; all three target compiler selections align and
+  the DirectX library audit reports no new findings. Scoped checks cover the
+  affected source files in their bound targets; client mismatches remain
+  reconstruction work, rather than a whole-client byte claim.
+- Limits: the full gate remains FAIL on its 24 lint warnings (zero lint errors).
+  Broad Ruff checking retains 21 findings in unchanged files; focused graphic
+  and input tests lint clean. Client raw executables were not rebuilt and gameplay was not
+  tested. This is a source checkpoint; no production deployment
+  workflow or hosted service is configured for this repository.
+- Final scoped accounting: 172/172 server checks, 44/51 GoldTL checks and
+  34/43 Gold checks pass. All five sources compile in their bound targets;
+  no compile or missing-file errors and no previously byte-matched client
+  rows were lost. The 16 client mismatches remain unfinished. The final
+  explicit raw-link refresh records all 316 server rows as EXACT again.
