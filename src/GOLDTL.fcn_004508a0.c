@@ -26,8 +26,6 @@ typedef struct Obj04508a0 {
 	Anim04508a0* anim;
 } Obj04508a0;
 
-extern int g_6b7fac;
-extern float g_662a18;
 
 void __cdecl fcn_004508a0(Obj04508a0* o)
 {
@@ -41,7 +39,7 @@ void __cdecl fcn_004508a0(Obj04508a0* o)
 	int now;
 	int i;
 
-	now = g_6b7fac;
+	now = *(int*) 0x6b7fac;
 	a = o->anim;
 	period = a->period;
 	t = now - a->start;
@@ -56,12 +54,12 @@ void __cdecl fcn_004508a0(Obj04508a0* o)
 		}
 		s = (float)(o->base * a->scale / m);
 		if (a->start == 0) {
-			f = rand() * g_662a18 * s;
+			f = rand() * *(float*) 0x662a18 * s;
 			o->prev = f + f - s + 1.0f;
 		} else {
 			o->prev = o->next;
 		}
-		f = rand() * g_662a18 * s;
+		f = rand() * *(float*) 0x662a18 * s;
 		o->next = f + f - s + 1.0f;
 		o->anim->start = now;
 		t = 0;

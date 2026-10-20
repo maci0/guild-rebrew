@@ -36,7 +36,7 @@ extern char* g_1015ea0;
 extern char* g_14abc28;
 
 int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl fcn_0046fac0(int, int, int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl fcn_005b58a0(int x, int y, Gauge* s)
 {
@@ -44,10 +44,10 @@ void __cdecl fcn_005b58a0(int x, int y, Gauge* s)
 
 	s->icon = fcn_0046f740(x, y, 0x5db, g_772514);
 	((Ctl*)g_1015ea0)[s->icon].x5c = 1;
-	s->label = fcn_0046fac0(x - 0x36, y - 0x11, (*(int*)&g_14abc28), g_772514);
+	s->label = d2_ShowTxt(x - 0x36, y - 0x11, g_14abc28, g_772514);
 	((Ctl*)g_1015ea0)[s->label].x18 = 0xa0;
 	((Ctl*)g_1015ea0)[s->label].x6c = 1;
-	s->value = fcn_0046fac0(x - 0x36, y + 0x44, (int) "", g_772514);
+	s->value = d2_ShowTxt(x - 0x36, y + 0x44, "", g_772514);
 	((Ctl*)g_1015ea0)[s->value].x18 = 0xa0;
 	((Ctl*)g_1015ea0)[s->value].x6c = 1;
 	s->x1c = -1;

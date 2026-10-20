@@ -53,7 +53,7 @@ int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
 char** __cdecl fcn_004ce610(char* x);
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 void __cdecl fcn_00472680(int id, int a2);
-int __cdecl fcn_0046fac0(int x, int y, char* text, int win);
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
 void __cdecl fcn_004d0a20(void);
@@ -87,7 +87,7 @@ void __cdecl fcn_004d0c70(void)
 			if (name != 0 && *name != 0) {
 				g_9b4840[k].name = fcn_0046f740(0x54, 0xf, (int) (*name + 0xdf), g_772514);
 				fcn_00472680(g_9b4840[k].name, -2);
-				g_9b4840[k].label = fcn_0046fac0(0x54, 0x26, &(*(char*)g_6b5c60), g_772514);
+				g_9b4840[k].label = d2_ShowTxt(0x54, 0x26, &(*(char*)g_6b5c60), g_772514);
 				((Slot*)g_1015ea0)[g_9b4840[k].label].color = 0x54;
 				((Slot*)g_1015ea0)[g_9b4840[k].label].h = 0x18;
 				((Slot*)g_1015ea0)[g_9b4840[k].label].centered = 1;
@@ -97,7 +97,7 @@ void __cdecl fcn_004d0c70(void)
 			((Win*)g_1015f40)[g_9b4840[k].win].color = 0x54;
 			g_9b4840[k].icon = fcn_0046f740(0x28, 0x11, *(int*) (u + 0x18c), g_772514);
 			((Slot*)g_1015ea0)[g_9b4840[k].icon].shadow = 1;
-			g_9b4840[k].text = fcn_0046fac0(0, 0, &(*(char*)g_6b5c60), g_772514);
+			g_9b4840[k].text = d2_ShowTxt(0, 0, &(*(char*)g_6b5c60), g_772514);
 			((Slot*)g_1015ea0)[g_9b4840[k].text].color = 0x54;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].h = 0x80;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].centered = 1;

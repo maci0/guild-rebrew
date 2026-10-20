@@ -43,7 +43,7 @@ extern unsigned char g_773d75;
 
 Group* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
-int __cdecl fcn_0046fac0(int x, int y, char* text, int win);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0046f940(int, char*);
 float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl fcn_0051af00(char*, char*, ...);
@@ -79,14 +79,14 @@ int __cdecl fcn_004d5490(int x, int y, int mode)
 			fcn_0046f740(px, py, 0x525, g_772514);
 			fcn_0046f740(px, py, e->id + 0xdf, g_772514);
 			tx = px - 0x10;
-			lbl = fcn_0046fac0(tx, py - 0xf, &(*(char*)g_6b5c60), g_772514);
+			lbl = d2_ShowTxt(tx, py - 0xf, &(*(char*)g_6b5c60), g_772514);
 			((Slot*)g_1015ea0)[lbl].color = 0x56;
 			((Slot*)g_1015ea0)[lbl].h = 0x50;
 			((Slot*)g_1015ea0)[lbl].centered = 1;
 			sprintf(text, "%i ", e->count);
 			strcat(text, g_14b52c0);
 			fcn_0046f940(lbl, text);
-			lbl = fcn_0046fac0(tx, py + 0x34, &(*(char*)g_6b5c60), g_772514);
+			lbl = d2_ShowTxt(tx, py + 0x34, &(*(char*)g_6b5c60), g_772514);
 			((Slot*)g_1015ea0)[lbl].color = 0x56;
 			((Slot*)g_1015ea0)[lbl].h = 0x50;
 			((Slot*)g_1015ea0)[lbl].centered = 1;

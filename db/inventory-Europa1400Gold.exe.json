@@ -6809,8 +6809,17 @@
   },
   {
     "va": 4666944,
-    "size": 528,
-    "name": "fcn.00473640"
+    "size": 525,
+    "name": "fcn.00473640",
+    "extent_history": [
+      {
+        "old_size": 528,
+        "new_size": 525,
+        "reason": "Complete creator code ends at ret 0x47384c; three following NOPs at47384d-47384f precede473850 and have no internal branch targets. Native525-byte code matches31 applied COFF operands; no C padding. See .scratch/gold-gui-text-creator/proof.json and .scratch/gui-text-creator-integration/.",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-19T00:02:13.682586+00:00"
+      }
+    ]
   },
   {
     "va": 4667472,
@@ -9687,8 +9696,17 @@
   },
   {
     "va": 4930720,
-    "size": 176,
-    "name": "fcn.004b3ca0"
+    "size": 165,
+    "name": "fcn.004b3ca0",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 165,
+        "reason": "GOLD row native body 165 (11 NOP after)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-10-20T09:31:10.509697+00:00"
+      }
+    ]
   },
   {
     "va": 4930896,

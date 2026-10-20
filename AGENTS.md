@@ -394,6 +394,13 @@ objects does not verify linked placement/data; these checks never earn STATUS.
 
 <!-- rebrew: project rules below, kept by --refresh-agents -->
 
+## Provenance ledger
+
+Every change to a deliverable gets an append-only entry in
+[docs/provenance.md](docs/provenance.md): date, change, reason, evidence,
+decision owner, verification. Reversals are new entries.
+
+
 ## Assembly and linker gaps
 
 Allow assembly only for evidenced padding or positive evidence that the original

@@ -9,8 +9,8 @@ extern int g_772f20;
 
 void __cdecl fcn_0046f2c0(int, int);
 void __cdecl fcn_0051af00(void*, int, ...);
-void* __cdecl fcn_0046fac0(int, int, char*, int);
-void __cdecl fcn_00472900(void*, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
+void __cdecl fcn_00472900(int, int);
 void __cdecl fcn_0046f740(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004da510 */
@@ -25,18 +25,18 @@ void __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_004da510(int a1, int a2, int a3)
 {
 	char buf[0x40];
-	void* h;
+	int h;
 
 	if (a2 != 0) {
 		fcn_0046f2c0(g_772514, 1);
 		fcn_0051af00(buf, 0x12d3);
-		h = fcn_0046fac0(0, 0x20, buf, g_772514);
+		h = d2_ShowTxt(0, 0x20, buf, g_772514);
 		fcn_00472900(h, 0x54);
 		fcn_0051af00(buf, 0x12d4);
-		h = fcn_0046fac0(0, 0x3e, buf, g_772514);
+		h = d2_ShowTxt(0, 0x3e, buf, g_772514);
 		fcn_00472900(h, 0x54);
 		fcn_0051af00(buf, 0x12d5);
-		h = fcn_0046fac0(0, 0x2f, buf, g_772514);
+		h = d2_ShowTxt(0, 0x2f, buf, g_772514);
 		fcn_00472900(h, 0x54);
 		g_772f1c = 0;
 		g_772f18 = 0;

@@ -62,7 +62,7 @@ extern short g_776658;
 extern int g_664454;
 
 char* __cdecl fcn_00519190(int, ...);
-int __cdecl fcn_0046fac0(int, int, char*, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_0046f740(int x, int y, int gfx, int win);
 
@@ -88,7 +88,7 @@ void __cdecl fcn_005e7b70(int row, int count, int* list)
 	x = (w - 0xc4) / 2;
 	info = g_7765a0[row].info;
 	sprintf(buf, "%s %s %s", g_14a5320[(info[9] ? 0x11e : 0x114) + info[0xd]], info + 0x30, info + 0x40);
-	c = fcn_0046fac0(0, 5, buf, g_6ad584[row].win);
+	c = d2_ShowTxt(0, 5, buf, g_6ad584[row].win);
 	((Ctl_5e7b70*)g_1015ea0)[c].w = w;
 	((Ctl_5e7b70*)g_1015ea0)[c].x6c = 1;
 	fcn_00472900(c, 0x54);

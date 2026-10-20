@@ -1,7 +1,88 @@
+extern void *__cdecl m_alloc(unsigned int size, const char *tag);
+
 /* ADDRESS: GOLDTL 0x00429920 */
 int __cdecl fcn_00429920(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00429920 */
-    return 0;
+	unsigned long *p;
+	int i;
+	int n;
+
+	*(void **)0x6b7e9c = m_alloc(0x4c00, (const char *)0x6797d0);
+	*(void **)0x6b7ea0 = m_alloc(0x20, (const char *)0x6797c0);
+	*(void **)0x6b7ea4 = m_alloc(0x400, (const char *)0x6797b4);
+	*(void **)0x14cb8f0 = m_alloc(0x1080, (const char *)0x6797a4);
+	*(void **)0x6b7e94 = m_alloc(0x64c00, (const char *)0x679798);
+	p = *(unsigned long **)0x6b7e94;
+	n = 0x19300;
+	memset(p, 0, n * 4);
+	p = (unsigned long *) *(void **)0x6b7e94;
+	for (i = 0; i < 0x64c00; i = i + 0xc98)
+		*(unsigned long *)(i + 0x100 + (long)p) = 0xffffffff;
+	*(unsigned long *)*(void **)0x6b7e9c = 0;
+    *(unsigned short *)0x14cb8c2 = *(unsigned short *)0x677c94;
+    *(unsigned short *)0x14cb8d1 = *(unsigned short *)0x6790c4;
+    *(unsigned short *)0x14cb85e = *(unsigned short *)0x679794;
+    *(unsigned short *)0x14cb854 = *(unsigned short *)0x679790;
+    *(unsigned short *)0x14cb859 = *(unsigned short *)0x67978c;
+    *(unsigned char *)0x14cb85b = *(unsigned char *)0x67978e;
+    *(unsigned short *)0x14cb84f = *(unsigned short *)0x679788;
+    *(unsigned char *)0x14cb851 = *(unsigned char *)0x67978a;
+    *(unsigned short *)0x14cb84a = *(unsigned short *)0x679784;
+    *(unsigned short *)0x14cb845 = *(unsigned short *)0x679780;
+    *(unsigned char *)0x14cb847 = *(unsigned char *)0x679782;
+    *(unsigned short *)0x14cb863 = *(unsigned short *)0x67977c;
+    *(unsigned char *)0x14cb865 = *(unsigned char *)0x67977e;
+    *(unsigned short *)0x14cb868 = *(unsigned short *)0x679288;
+    *(unsigned short *)0x14cb86d = *(unsigned short *)0x679284;
+    *(unsigned short *)0x14cb8c7 = *(unsigned short *)0x679778;
+    *(unsigned short *)0x14cb8cc = *(unsigned short *)0x679774;
+    *(unsigned short *)0x14cb87c = *(unsigned short *)0x679770;
+    *(unsigned short *)0x14cb881 = *(unsigned short *)0x67976c;
+    *(unsigned short *)0x14cb886 = *(unsigned short *)0x679768;
+    *(unsigned short *)0x14cb872 = *(unsigned short *)0x679764;
+    *(unsigned short *)0x14cb877 = *(unsigned short *)0x679760;
+    *(unsigned short *)0x14cb88b = *(unsigned short *)0x67975c;
+    *(unsigned char *)0x14cb88d = *(unsigned char *)0x67975e;
+    *(unsigned short *)0x14cb895 = *(unsigned short *)0x679758;
+    *(unsigned short *)0x14cb8b8 = *(unsigned short *)0x679754;
+    *(unsigned short *)0x14cb8bd = *(unsigned short *)0x679750;
+    *(unsigned short *)0x14cb8ae = *(unsigned short *)0x67974c;
+    *(unsigned char *)0x14cb8b0 = *(unsigned char *)0x67974e;
+    *(unsigned short *)0x14cb8b3 = *(unsigned short *)0x679680;
+    *(unsigned char *)0x14cb8b5 = *(unsigned char *)0x679682;
+    *(unsigned short *)0x14cb890 = *(unsigned short *)0x679748;
+    *(unsigned char *)0x14cb892 = *(unsigned char *)0x67974a;
+    *(unsigned short *)0x14cb89f = *(unsigned short *)0x679744;
+    *(unsigned short *)0x14cb89a = *(unsigned short *)0x679740;
+    *(unsigned char *)0x14cb89c = *(unsigned char *)0x679742;
+    *(unsigned short *)0x14cb8a4 = *(unsigned short *)0x67973c;
+    *(unsigned short *)0x14cb8a9 = *(unsigned short *)0x679738;
+    *(unsigned long *)0x14cb3b0 = *(unsigned long *)0x679730;
+    *(unsigned char *)0x14cb3a2 = *(unsigned char *)0x67972e;
+    *(unsigned long *)0x14cb3d0 = *(unsigned long *)0x679724;
+    *(unsigned short *)0x14cb3b4 = *(unsigned short *)0x679734;
+    *(unsigned short *)0x14cb3a0 = *(unsigned short *)0x67972c;
+    *(unsigned long *)0x14cb3e0 = *(unsigned long *)0x67971c;
+    *(unsigned short *)0x14cb3c0 = *(unsigned short *)0x679718;
+    *(unsigned char *)0x14cb3c2 = *(unsigned char *)0x67971a;
+    *(unsigned long *)0x14cb3f4 = *(unsigned long *)0x679710;
+    *(unsigned short *)0x14cb3d4 = *(unsigned short *)0x679728;
+    *(unsigned char *)0x14cb3d6 = *(unsigned char *)0x67972a;
+    *(unsigned long *)0x14cb404 = *(unsigned long *)0x679704;
+    *(unsigned char *)0x14cb3e4 = *(unsigned char *)0x679720;
+    *(unsigned long *)0x14cb3f0 = *(unsigned long *)0x67970c;
+    *(unsigned long *)0x14cb414 = *(unsigned long *)0x6796f8;
+    *(unsigned char *)0x14cb3f8 = *(unsigned char *)0x679714;
+    *(unsigned long *)0x14cb400 = *(unsigned long *)0x679700;
+    *(unsigned long *)0x14cb424 = *(unsigned long *)0x6796ec;
+    *(unsigned long *)0x14cb408 = *(unsigned long *)0x679708;
+    *(unsigned long *)0x14cb410 = *(unsigned long *)0x6796f4;
+    *(unsigned long *)0x14cb8e0 = 0;
+    *(unsigned long *)0x14cb418 = *(unsigned long *)0x6796fc;
+    *(unsigned long *)0x14cb420 = *(unsigned long *)0x6796e8;
+    *(unsigned long *)0x14cb8e4 = 0;
+    *(unsigned long *)0x14cb8e8 = 0;
+    *(unsigned short *)0x14cb428 = *(unsigned short *)0x6796f0;
+    *(unsigned char *)0x14cb42a = *(unsigned char *)0x6796f2;
+	return 1;
 }

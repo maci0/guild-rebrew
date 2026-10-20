@@ -1,8 +1,188 @@
+#include <string.h>
+
+#pragma optimize("y", off)
+
+extern char* g_104049c;
+extern unsigned int g_10404a0;
+extern int g_10405c4;
+
+/* SIZE 0x70 */
+typedef struct Tex {
+	char name[0x40];          /* 0x00 */
+	int refs;                 /* 0x40 */
+	int idx44;                /* 0x44 */
+	int color48;              /* 0x48 */
+	int pad4c;                /* 0x4c */
+	int field50;              /* 0x50 */
+	unsigned char b0 : 1;     /* 0x54 */
+	unsigned char b1 : 1;
+	unsigned char dxt : 1;
+	unsigned char b3 : 1;
+	unsigned char b4 : 1;
+	unsigned char b5 : 1;
+	unsigned char b67 : 2;
+	unsigned char field55 : 5; /* 0x55 */
+	unsigned char x55 : 3;
+	unsigned char field56 : 5; /* 0x56 */
+	unsigned char x56 : 3;
+	char pad57;               /* 0x57 */
+	unsigned int id;          /* 0x58 */
+	unsigned char field5c;    /* 0x5c */
+	unsigned char pad5d;      /* 0x5d */
+	unsigned char field5e : 4; /* 0x5e */
+	unsigned char x5e : 4;
+	char pad5f;               /* 0x5f */
+	unsigned int format60;    /* 0x60 */
+	int field64;              /* 0x64 */
+	int field68;              /* 0x68 */
+	unsigned int pattern6c;   /* 0x6c */
+} Tex;
+
+typedef struct Col {
+	unsigned char a;
+	unsigned char b;
+	unsigned char c0 : 1;
+	unsigned char c1 : 1;
+	unsigned char c2 : 6;
+	unsigned char d;
+} Col;
+
+char* __cdecl fcn_0045bde0(const char*);
+int __cdecl fcn_0045be40(char*);
+int __cdecl fcn_0045c290(unsigned int, int*);
+void __cdecl fcn_0045c310(Tex*, char);
+void __cdecl fcn_0045c380(Tex*, unsigned int, unsigned int, unsigned int);
+int __cdecl fcn_00401590(int, unsigned int*, int*, unsigned int*);
+
 /* ADDRESS: GOLDTL 0x0045c5b0 */
-int __cdecl fcn_0045c5b0(void)
+Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int flags2)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.0045c5b0 */
-    return 0;
+	unsigned char c26;
+	unsigned char c25;
+	unsigned char c24;
+	unsigned char c23;
+	unsigned char c22;
+	unsigned char c21;
+	unsigned int width;
+	int height;
+	Tex* found;
+	int fmt;
+	unsigned int index;
+	int avail;
+	Tex* p;
+	Tex* t;
+	char buf1[0x40];
+	char buf2[0x40];
+
+	c24 = (unsigned char) flags2 & 0xf;
+	c25 = (unsigned char) flags2 >> 4;
+	if ((flags & 0x40) != 0 && (c.a < 0xff || c.c0)) {
+		c26 = 1;
+	} else {
+		c26 = 0;
+	}
+	c21 = (unsigned char) (flags >> 2) & 0xf;
+	c23 = (unsigned char) (flags >> 1) & 1;
+	c22 = (unsigned char) flags & 1;
+	found = (Tex*) fcn_0045bde0(name);
+	if (found != 0) {
+		index = found - (Tex*) g_104049c;
+		p = found;
+		if (index < g_10404a0) {
+			do {
+				if (p->refs > 0) {
+					if (strcmp(name, p->name) == 0
+					    && *(unsigned int*) &p->id == *(unsigned int*) &c
+					    && p->b0 == c22
+					    && p->b4 == c26
+					    && p->field56 == c24
+					    && p->field55 == c25
+					    && p->b3 == c23
+					    && p->field5e == c21) {
+						fcn_0045c310(p, 1);
+						return p;
+					}
+				}
+				index++;
+				p++;
+			} while (index < g_10404a0);
+			if (found != p) {
+				t = (Tex*) fcn_0045c290(*(unsigned int*) &c, 0);
+				avail = 0x70;
+				memset(t, 0, 0x70);
+				strncpy(t->name, name, 0x3f);
+				t->field64 = found->field64;
+				t->field68 = found->field68;
+				t->field50 = found->field50;
+				if (found->b1) {
+					t->idx44 = found->idx44;
+				} else {
+					t->idx44 = (int) (found - (Tex*) g_104049c);
+				}
+				*(unsigned int*) &t->id = *(unsigned int*) &c;
+				t->pattern6c = ((unsigned int) (c.b) << 8 | c.b) << 8 | c.b;
+				t->b0 = c22;
+				t->b4 = c26;
+				t->field56 = c24;
+				t->field55 = c25;
+				t->b3 = c23;
+				t->b1 = 1;
+				t->dxt = found->dxt;
+				t->b5 = found->b5;
+				t->format60 = found->format60;
+				t->field5c = 0;
+				t->field5e = c21;
+				t->refs = 1;
+				t->color48 = -1;
+				g_10405c4++;
+				fcn_0045c380(t, *(unsigned int*) &c, flags, flags2);
+				return t;
+			}
+		}
+		fcn_0045c310(found, 1);
+		return found;
+	}
+	avail = fcn_0045be40(name);
+	if (avail != 0) {
+		avail = fcn_00401590(avail, &width, &height, (unsigned int*) &fmt) & 0xff;
+	} else {
+		avail = 1;
+		width = 0;
+		height = 0;
+		fmt = 0;
+	}
+	t = (Tex*) fcn_0045c290(*(unsigned int*) &c, 0);
+	strcpy(buf1, name);
+	strcpy(buf2, name);
+	strupr(buf1);
+	if (avail == 0 || t == 0 || width != (unsigned int) height) {
+		return 0;
+	}
+	memset(t, 0, 0x70);
+	strncpy(t->name, name, 0x3f);
+	t->field64 = (int) width;
+	t->field68 = (int) width;
+	t->idx44 = (int) (width * width - 1) | (int) (width - 1);
+	*(unsigned int*) &t->id = *(unsigned int*) &c;
+	t->pattern6c = ((unsigned int) (c.b) << 8 | c.b) << 8 | c.b;
+	t->b4 = c26;
+	t->b0 = c22;
+	t->field55 = c25;
+	t->field56 = c24;
+	t->b3 = c23;
+	t->b1 = 0;
+	t->dxt = (strstr(buf1, "_NM") != 0);
+	t->format60 = ((unsigned int) (*(unsigned char*) ((char*) t + 0x54) >> 2 & 1)) << 0x19 | 0x31545844;
+	if (c.c1) {
+		t->b5 = 1;
+	} else {
+		t->b5 = (strstr(buf1, "_NS") != 0);
+	}
+	t->field5c = 0;
+	t->field5e = c21;
+	t->refs = 1;
+	t->color48 = -1;
+	g_10405c4++;
+	fcn_0045c380(t, *(unsigned int*) &c, flags, flags2);
+	return t;
 }

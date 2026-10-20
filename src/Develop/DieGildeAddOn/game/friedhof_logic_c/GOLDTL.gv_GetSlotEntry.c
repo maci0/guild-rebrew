@@ -7,53 +7,55 @@ extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
 
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 {
-	if (*(int*) ((char*) worker + 4) < 1 || *(int*) ((char*) worker + 4) > 3)
+	int kind;
+
+	kind = *(int*) ((char*) worker + 4);
+	if (kind < 1 || kind > 3)
 		return 0;
 	if (worktype == 0) {
 		if (!gv_CheckSlotActive(worker, 0))
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 1 && job >= 8)
+		if (kind == 1 && job >= 8)
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 2 && job >= 0xc)
+		if (kind == 2 && job >= 0xc)
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 3 && job >= 0x10)
+		if (kind == 3 && job >= 0x10)
 			return 0;
 		return (char*) *(void**) ((char*) worker + 8) + (unsigned int) job * 20;
 	}
 	if (worktype == 1) {
 		if (!gv_CheckSlotActive(worker, 1))
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 1 && job >= 4)
+		if (kind == 1 && job >= 4)
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 2 && job >= 6)
+		if (kind == 2 && job >= 6)
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 3 && job >= 8)
+		if (kind == 3 && job >= 8)
 			return 0;
 		return (char*) *(void**) ((char*) worker + 0xc) + (unsigned int) job * 20;
 	}
 	if (worktype == 2) {
 		if (!gv_CheckSlotActive(worker, 2))
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 1)
+		if (kind == 1)
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 2 && job >= 2)
+		if (kind == 2 && job >= 2)
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 3 && job >= 4)
+		if (kind == 3 && job >= 4)
 			return 0;
 		return (char*) *(void**) ((char*) worker + 0x10) + (unsigned int) job * 20;
 	}
 	if (worktype == 3) {
 		if (!gv_CheckSlotActive(worker, 3))
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 1 || *(int*) ((char*) worker + 4) == 2)
+		if (kind == 1 || kind == 2)
 			return 0;
-		if (*(int*) ((char*) worker + 4) == 3 && job >= 2)
+		if (kind == 3 && job >= 2)
 			return 0;
 		return (char*) *(void**) ((char*) worker + 0x14) + (unsigned int) job * 20;
 	}
 	return 0;
 }
-
 /* gv_eval_SlotFrei -- 14 bytes at 0x10010700, between this function and
  * FindSlotEntryFiltered, in the same translation unit in the reference.  The 7
  * bytes of `nop` that separate the two are msvc6's 16-byte intra-section

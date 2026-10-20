@@ -1,7 +1,5 @@
 /* ADDRESS: GOLDTL 0x006b7fac */
 extern int g_6b7fac;
-/* ADDRESS: GOLD 0x006333cc */
-extern int g_6b7fac;
 
 
 

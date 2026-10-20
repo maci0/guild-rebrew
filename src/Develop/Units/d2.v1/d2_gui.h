@@ -54,4 +54,12 @@ void __cdecl d2_SetElementImage(int element, int bild);
 void __cdecl d2_SetElementValue(int element, ...);
 int __cdecl fcn_004722c0(char* sub);
 
+
+/* Inferred from d2:ShowTxt; coordinates are words in Gold and dwords in TL. */
+#ifdef REBREW_GOLD
+int __cdecl d2_ShowTxt(short x, short y, char* text, int win);
+#else
+int __cdecl d2_ShowTxt(int x, int y, char* text, int win);
+#endif
+
 #endif

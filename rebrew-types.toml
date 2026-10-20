@@ -846,3 +846,57 @@ id = 4
 total = 8
 count = 12
 skip = 16
+
+[types."d2.text-window.tl".GOLDTL]
+file = "src/Develop/Units/d2.v1/d2_ShowTxt.c"
+symbol = "D2_TEXT_WINDOW"
+size = 972
+native_size = 972
+extent = "stride"
+evidence = "Private access view, not storage ownership. Native TL46fac0 indexes windows at0x1015f40 by0x3cc; nine fields verified in complete518-byte creator and original field-offset array spelling. Gold has distinct0x3c4 canonical GuiWin. .scratch/gui-text-creator-integration/."
+cflags = "/O2 /Gd"
+source_hash = "b0c5c08533b98ee9f5d5a57019d64ffec5d0a6bfd06efb5d6ac7bd8e6f14e704"
+headers_hash = "19763b381cd64a04dcfa119c6d0a182940031fb762f28af2b29d89ede95bf75e"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."d2.text-window.tl".GOLDTL.offsets]
+x = 4
+y = 8
+list = 40
+count = 44
+max_height = 596
+scroll = 600
+id = 636
+font = 652
+active = 656
+
+[types."d2.text-entry.tl".GOLDTL]
+file = "src/Develop/Units/d2.v1/d2_ShowTxt.c"
+symbol = "D2_TEXT_ENTRY"
+size = 756
+native_size = 756
+extent = "stride"
+evidence = "Private accessed-field view only; no allocation or owner claim. Native TL46fac0 indexes pool at[0x1015ea0] by0x2f4; fields verified in complete518-byte creator and former int-array spelling. Gold uses0x2ec GuiEnt. .scratch/gui-text-creator-integration/."
+cflags = "/O2 /Gd"
+source_hash = "b0c5c08533b98ee9f5d5a57019d64ffec5d0a6bfd06efb5d6ac7bd8e6f14e704"
+headers_hash = "19763b381cd64a04dcfa119c6d0a182940031fb762f28af2b29d89ede95bf75e"
+context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
+
+[types."d2.text-entry.tl".GOLDTL.offsets]
+data = 12
+x = 16
+y = 20
+w = 24
+f16 = 28
+kind = 32
+f1c = 36
+f1e = 40
+f20 = 44
+f22 = 48
+f24 = 52
+parent = 64
+f40 = 80
+font = 132
+bild_offset = 136

@@ -1,8 +1,44 @@
+#include <string.h>
+
+/*
+ * Personnel book window builder.
+ *
+ * Creates the book window and fills the three header text slots: the two
+ * counts of the open person record and the name of the selected entry.
+ *
+ * Reconstructed range 0x5b88b0..0x5b89a8: the window creation, the two count
+ * labels and the name label. The native body continues at 0x5b89a8 with the
+ * entry list construction through 0x5b9979; that part is not reconstructed
+ * here. The native frame is 0x1368 bytes (__chkstk prologue), so the partial
+ * body does not reproduce the frame.
+ */
+
+extern int g_868050;			/* 0x00868050 */
+extern int g_14abc28;			/* 0x014abc28 char* */
+
+int __cdecl fcn_00534c40(int, char*, int, char*, char*, char*, char*);
+int __cdecl fcn_005350d0(int);
+int __cdecl fcn_00517c00(unsigned short, int, int, char*);
+char* __cdecl fcn_0050dc90(char*);
+
 /* ADDRESS: GOLDTL 0x005b88b0 */
-int __cdecl fcn_005b88b0(void)
+void __cdecl fcn_005b88b0(char* a0, int a1)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.005b88b0 */
-    return 0;
+	char b1[0x70];
+	char b2[0x70];
+	char b3[0x100];
+	char* p;
+	int win;
+
+	win = fcn_00534c40(a1, (char*) 0x6a42c8, 4, (char*) 0x6ac340, (char*) 0x6ac300, (char*) 0x6ac314, (char*) 0x6ac328);
+	fcn_005350d0(win);
+	fcn_00517c00(*(unsigned short*) (a0 + 0x27), 1, 2, b1);
+	fcn_00517c00(*(unsigned short*) (a0 + 0x25), 1, 2, b2);
+	p = fcn_0050dc90(a0);
+	if (!p) {
+		strcpy(b3, *(char**) 0x14abc28);
+	}
+	else {
+		fcn_00517c00(*(unsigned short*) p, 1, 1, b3);
+	}
 }

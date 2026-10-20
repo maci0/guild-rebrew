@@ -1,7 +1,16 @@
+#include <math.h>
+
 /* ADDRESS: GOLDTL 0x004cefb0 */
-int __cdecl fcn_004cefb0(void)
+
+/* Flat distance between a2's position and the position reached from a1. */
+float __cdecl fcn_004cefb0(char* a1, char* a2)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004cefb0 */
-    return 0;
+	char* p;
+	float dx;
+	float dy;
+
+	p = *(char**) (*(char**) (a1 + 0x184) + 0x34);
+	dx = *(float*) (a2 + 0x4c) - *(float*) (p + 0x4c);
+	dy = *(float*) (a2 + 0x54) - *(float*) (p + 0x54);
+	return (float) sqrt(dx * dx + dy * dy);
 }

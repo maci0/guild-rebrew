@@ -1,7 +1,32 @@
+#include <string.h>
+
+int __cdecl fcn_004be340(char *p);
+int __cdecl fcn_004c4df0(unsigned short n, void *src);
+int __cdecl fcn_004c4330(void *buf);
+
 /* ADDRESS: GOLDTL 0x004c6e20 */
-int __cdecl fcn_004c6e20(void)
+void __cdecl fcn_004c6e20(char *a0, char *a1)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004c6e20 */
-    return 0;
+    char buf[0x9c];
+    char items[0x200];
+    int count;
+    int i;
+    char *p;
+    char *dst;
+
+    p = a1;
+    count = fcn_004be340(p);
+    buf[0] = 0x68;
+    *(int *)(buf + 0x10) = *(int *)(a0 + 2);
+    *(int *)(buf + 0x14) = count;
+    if (count > 0) {
+        dst = items;
+        for (i = count; i > 0; i--) {
+            memcpy(dst, p, 0x40);
+            dst += 0x40;
+            p = *(char **)(p + 0x3c);
+        }
+    }
+    fcn_004c4df0((unsigned short)(count << 6), items);
+    fcn_004c4330(buf);
 }

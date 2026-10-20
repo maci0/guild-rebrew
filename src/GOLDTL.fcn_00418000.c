@@ -1,7 +1,72 @@
+#include <stdlib.h>
+#include <string.h>
+
+/* SIZE 0x4 */
+typedef struct {
+    unsigned char a;
+    unsigned char b;
+    unsigned char c;
+    unsigned char d;
+} Bytes4;
+
+int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, int b, void (__cdecl* cb)(void));
+void __cdecl fcn_004526d0(int* s, float* pos);
+void __cdecl fcn_00417f00(void);
+extern int g_6b7fac;
+
 /* ADDRESS: GOLDTL 0x00418000 */
-int __cdecl fcn_00418000(void)
+int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, float f6,
+    int v2, float f8, float* p, int v3, int v4, Bytes4 color)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00418000 */
-    return 0;
+    Bytes4 f;
+    int* s;
+    int k;
+    float spread;
+    float v[4];
+    unsigned char* rec;
+    int sum;
+    int i;
+
+    memset(&f, 0, sizeof(f));
+    f.c |= 2;
+    f.a = 0x7f;
+    s = fcn_004524e0(n, "Rauch", f, a4, a1, fcn_00417f00);
+    if (s != 0) {
+        k = g_6b7fac;
+        fcn_004526d0(s, pos);
+        s[0] = v2;
+        s[1] = v0;
+        s[4] = *(int*) &p[0];
+        s[5] = *(int*) &p[1];
+        s[6] = *(int*) &p[2];
+        s[8] = v3;
+        spread = f8 * *(float*) 0x6628cc;
+        sum = 0;
+        rec = (unsigned char*) s[10];
+        for (i = 0; i < s[0x36]; i++) {
+            *(float*) (rec + 0x10) = p[0];
+            *(float*) (rec + 0x14) = p[1];
+            v[2] = p[2];
+            *(float*) (rec + 0x14) = f6;
+            *(float*) (rec + 0x18) = v[2];
+            v[0] = (float) rand() * *(float*) 0x662a18;
+            v[1] = (float) rand() * *(float*) 0x662a18;
+            v[2] = (float) rand() * *(float*) 0x662a18;
+            *(float*) (rec + 0x10) = v[0] * f8 - spread + *(float*) (rec + 0x10);
+            *(float*) (rec + 0x14) = v[1] * f8 - spread + *(float*) (rec + 0x14);
+            *(float*) (rec + 0x18) = v[2] * f8 - spread + *(float*) (rec + 0x18);
+            *(unsigned char*) (rec + 0x4f) = 0;
+            v[3] = (*(float*) (rec + 0x14) - *(float*) (s + 1)) / *(float*) (rec + 0x14);
+            *(float*) (rec + 0x1c) = v[3];
+            *(float*) rec = *(float*) 0x6628a0 / v[3];
+            *(float*) (rec + 4) = *(float*) 0x6628a0 / (*(float*) 0x6628a0 - v[3]);
+            *(unsigned char*) (rec + 0x4e) = (unsigned char) ((rand() & color.d) + color.c);
+            *(unsigned char*) (rec + 0x4d) = (unsigned char) ((rand() & color.d) + color.b);
+            *(unsigned char*) (rec + 0x4c) = (unsigned char) ((rand() & color.d) + color.a);
+            *(int*) (rec + 0x30) = (rand() & 7) + sum + k;
+            sum += v4;
+            rec += 0x54;
+        }
+    }
+    return s;
 }

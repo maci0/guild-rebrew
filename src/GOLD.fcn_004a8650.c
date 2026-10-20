@@ -1,38 +1,23 @@
-int __cdecl fcn_004c51a0(int, int, int, int);
+#include "client_actions.h"
+
+typedef struct {
+	char pad0[0x4];
+	int* f4;
+	char pad8[0x98];
+	int fa0;
+	char pada4[0x8];
+	int fac;
+} fcn_004a8650_game;
+/* SIZE 0xb0 */
+
+extern char* g_f83654;
+
+int __cdecl fcn_004c51a0(int, int, char, int);
 
 /* ADDRESS: GOLD 0x004a8650 */
-void __declspec(naked) __cdecl fcn_004a8650(void)
+void __cdecl fcn_004a8650(void)
 {
-	__asm {
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x54
-		_emit 0x36
-		_emit 0xf8
-		_emit 0x00
-		mov eax, dword ptr [ecx+0ACh]
-		lea eax, [eax+eax*2]
-		mov dword ptr [ecx+0A0h], eax
-		_emit 0xa1
-		_emit 0x54
-		_emit 0x36
-		_emit 0xf8
-		_emit 0x00
-		_emit 0x8a
-		_emit 0x15
-		_emit 0xc5
-		_emit 0x1b
-		_emit 0x6f
-		_emit 0x00
-		mov ecx, dword ptr [eax+0ACh]
-		mov eax, dword ptr [eax+4]
-		push ecx
-		push edx
-		mov ecx, dword ptr [eax+4]
-		push ecx
-		push 0FFFFFFFFh
-		call fcn_004c51a0
-		add esp, 10h
-		ret
-	}
+	((fcn_004a8650_game*)g_f83654)->fa0 = ((fcn_004a8650_game*)g_f83654)->fac * 3;
+	fcn_004c51a0(-1, ((fcn_004a8650_game*)g_f83654)->f4[1], g_773d75,
+		((fcn_004a8650_game*)g_f83654)->fac);
 }

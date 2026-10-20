@@ -236,46 +236,55 @@ int __cdecl lb_BroadcastStateChange(unsigned int* a, unsigned int* b, unsigned c
 }
 
 
+extern char g_679060[];
+void __cdecl fcn_0051af00(void*, int, int);
+int __cdecl fcn_005d78e0(char*, char*);
+
+/* arg1 = packet (byte +2 kind, +0x166, +0x1c8 flags), arg2 = player record
+ * (state +0, payload +0x14, entity +0x21c). */
 int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 {
-	int result;
-	unsigned char* conn;
-	unsigned char* rec;
+	int state;
+	int ent;
 
-	if ((*player & 0x6000) != 0) {
-		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x31d, "invalid client state", 1);
-		*msg = 2;
-		result = srv_PutConnSCommand(player, msg);
-		return (result + 1 == 0) ? -1 : 0;
-	}
-	rec = msg + 0x14;
-	if (*(int*) (player + 1) != *(int*) rec) {
-		*msg = 2;
-		result = srv_PutConnSCommand(player, msg);
-		return (result + 1 == 0) ? -1 : 0;
-	}
-	for (conn = (unsigned char*) g_connections; (int) conn < (int) g_connections + 0x1321320;
-	     conn += 0x264264) {
-		if ((*(unsigned int*) conn & 1) == 0) continue;
-		if ((*(unsigned int*) conn & 0x200) == 0) continue;
-		if (conn == (unsigned char*) player) continue;
-		if (*(int*) (conn + 0x264218) == *(int*) (rec + 0xc)) {
-			*(int*) (rec + 0xc) = *(int*) ((char*) player + 0x264218);
-			break;
+	state = *(int*) msg;
+	if (state == 3 || state == 1) {
+		if (*((char*) player + 2) == 6) {
+			fcn_0051af00((char*) msg + 0x14, (int) g_679060, 0x1dce);
 		}
+		if (*((char*) player + 0x166) != 0x18) {
+			return 1;
+		}
+		if (*(int*) ((char*) player + 0x1c8) & 0x200) {
+			return 9;
+		}
+		if (*(int*) msg == 3) {
+			fcn_005d78e0((char*) player, (char*) msg);
+		}
+		return 2;
 	}
-	*(int*) (rec + 4) = *(int*) ((char*) player + 0x264210);
-	memcpy((char*) player + 0x26420c, rec, 0x57);
-	for (conn = (unsigned char*) g_connections; (int) conn < (int) g_connections + 0x1321320;
-	     conn += 0x264264) {
-		if ((*(unsigned int*) conn & 1) == 0) continue;
-		if ((*(unsigned int*) conn & 0x200) == 0) continue;
-		result = srv_PutConnSCommand((unsigned int*) conn, msg);
-		if (result == -1) return -1;
+	if (state == 4 || state == 2) {
+		ent = 0;
+		if (*(int*) ((char*) player + 0x1c8) & 0x100) {
+			ent = *(int*) ((char*) msg + 0x21c);
+			if (ent != 0) {
+				if (*(unsigned char*) (ent + 0x166) != 0x18) {
+					return 1;
+				}
+				if (state == 4) {
+					fcn_005d78e0((char*) player, (char*) msg);
+					return 0xa;
+				}
+				if (*((char*) player + 2) == 6) {
+					fcn_0051af00((char*) msg + 0x14, (int) g_679060, 0x1dce);
+				}
+				return 0xa;
+			}
+		}
+		return 1;
 	}
-	return 0;
+	return 1;
 }
-
 
 #include <string.h>
 

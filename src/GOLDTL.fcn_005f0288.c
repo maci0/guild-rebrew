@@ -1,12 +1,15 @@
 /* ADDRESS: GOLDTL 0x005f0288 */
-/* Comparison stub only. No native body is recovered, so this earns no
- * match credit. return 0 replaces the empty REBREW_ALLOW_NAKED body,
- * which compiled to zero .text bytes, fell through, and warned C4716.
- * The self parameter is not a calling-convention claim. The inventory
- * extent matched no unique D3DX8 or LIBCMT member. ABI and
- * implementation remain blocked.
- */
-int fcn_005f0288(void *self, int a1, int a2)
+/* Native ABI is __thiscall (self in ecx, two stack arguments, ret 8).
+ * MSVC 6 C rejects __thiscall (C4234), so __fastcall carries self in ecx;
+ * its unused edx slot is the dummy parameter. */
+void __fastcall fcn_005f0288(void* self, int d1, char* a1, int a2)
 {
-    return 0;
+	int idx;
+
+	if ((*((unsigned char*) self + 1) & 0x10) != 0) {
+		idx = *(int*) ((char*) self + 0x38);
+		if (idx != 0) {
+			*(int*) (a1 + idx * 4 + 8) = a2;
+		}
+	}
 }

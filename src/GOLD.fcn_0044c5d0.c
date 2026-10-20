@@ -1,41 +1,19 @@
-int __cdecl strnicmp(int, int, int);
+int __cdecl strnicmp(const char *, const char *, unsigned int);
 
 /* ADDRESS: GOLD 0x0044c5d0 */
-int __declspec(naked) __cdecl fcn_0044c5d0(int s)
+char *__cdecl fcn_0044c5d0(const char *name)
 {
-	(void)s;
-	__asm {
-		push esi
-		_emit 0x8b
-		_emit 0x35
-		_emit 0xfc
-		_emit 0x2f
-		_emit 0xfc
-		_emit 0x00
-		cmp esi, 0FC4A40h
-		push edi
-		jz Lmiss
-		mov edi, dword ptr [esp+0Ch]
-	Lgo:
-		push 3Fh
-		push esi
-		push edi
-		call strnicmp
-		add esp, 0Ch
-		test eax, eax
-		jz Lfound
-		mov esi, dword ptr [esi+1FCh]
-		cmp esi, 0FC4A40h
-		jnz Lgo
-	Lmiss:
-		pop edi
-		xor eax, eax
-		pop esi
-		ret
-	Lfound:
-		mov eax, esi
-		pop edi
-		pop esi
-		ret
+	char *p;
+
+	p = *(char **)0xfc2ffc;
+	if (p == (char *)0xfc4a40) {
+		return 0;
 	}
+	do {
+		if (strnicmp(name, p, 0x3f) == 0) {
+			return p;
+		}
+		p = *(char **)(p + 0x1fc);
+	} while (p != (char *)0xfc4a40);
+	return 0;
 }

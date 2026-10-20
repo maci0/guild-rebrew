@@ -1,8 +1,67 @@
+#include <math.h>
+
+extern char* g_6b8014;
+extern float g_6628a0;
+extern float g_6628a8;
+extern float g_1042a10;
+
 /* ADDRESS: GOLDTL 0x004382e0 */
-int __cdecl fcn_004382e0(void)
+int __cdecl fcn_004382e0(char* a0)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.004382e0 */
-    return 0;
+	char* ext;
+	char* entry;
+	int n;
+	int idx;
+	int max_idx;
+	float dx;
+	float dy;
+	float dz;
+	float dist;
+
+	ext = *(char**) (a0 + 0x1ec);
+	if (ext == 0) {
+		return 0;
+	}
+	n = *(unsigned char*) (ext + 0x163c);
+	if (n == 0) {
+		return 0;
+	}
+	if (n == 1) {
+		entry = ext + 0xf4;
+	}
+	else if ((*(unsigned char*) (a0 + 0x217) & 0xc) != 0 || g_6b8014 == 0) {
+		max_idx = (((*(unsigned char*) (a0 + 0x217)) >> 2) & 3) - 1;
+		idx = n - 1;
+		if (idx > max_idx) {
+			idx = max_idx;
+		}
+		if (idx < 0) {
+			idx = 0;
+		}
+		entry = ext + 0xf4 + idx * 0x4a4;
+	}
+	else {
+		dx = *(float*) (a0 + 0x4c) - *(float*) (g_6b8014 + 0x4c);
+		dy = *(float*) (a0 + 0x50) - *(float*) (g_6b8014 + 0x50);
+		dz = *(float*) (a0 + 0x54) - *(float*) (g_6b8014 + 0x54);
+		dist = sqrt(dx * dx + dy * dy + dz * dz);
+		dist = dist * n * g_1042a10;
+		idx = (int) dist;
+		if (idx >= n) {
+			dist = (float) n - g_6628a0;
+		}
+		else if (dist < g_6628a8) {
+			dist = g_6628a8;
+		}
+		idx = (int) dist;
+		entry = ext + 0xf4 + idx * 0x4a4;
+	}
+	if (*(int*) (entry + 0x310) == 0 || *(int*) (entry + 0x314) == 0) {
+		return 0;
+	}
+	if (entry == *(char**) (a0 + 0x1cc)) {
+		return (int) entry;
+	}
+	*(unsigned char*) (a0 + 0x214) |= 0x10;
+	return (int) entry;
 }

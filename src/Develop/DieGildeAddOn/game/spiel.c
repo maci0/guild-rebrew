@@ -3453,9 +3453,6 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 					gm_AllocObjekt(*(int*) (sub + 2), *(unsigned short*) prod, 1);
 					alloc_count++;
 				}
-				else {
-					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x16a6, "gm_AllocRaum(): Too many objects in 'Marktstand'...", 1);
-				}
 			}
 			prod += 0x80;
 			slot += 0x80;

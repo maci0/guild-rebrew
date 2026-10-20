@@ -1,12 +1,27 @@
+#pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0060d860 */
-/* Comparison stub only. No native body is recovered, so this earns no
- * match credit. return 0 replaces the empty REBREW_ALLOW_NAKED body,
- * which compiled to zero .text bytes, fell through, and warned C4716.
- * The self parameter is not a calling-convention claim. The inventory
- * extent matched no unique D3DX8 or LIBCMT member. ABI and
- * implementation remain blocked.
- */
-int fcn_0060d860(void *self, int a1, int a2, int a3)
+void __fastcall fcn_0060d860(void* self, int d1, int a1, int a2, unsigned short a3)
 {
-    return 0;
+	int* arr;
+	int i;
+	int v;
+	if (a2 == -1) {
+		return;
+	}
+	arr = *(int**) ((char*) self + 0xc4);
+	i = a1;
+	v = arr[i];
+	while (v != a2) {
+		if (v == a1) {
+			goto out;
+		}
+		i = v;
+		v = arr[i];
+	}
+	arr[i] = arr[v];
+	arr[v] = v;
+out:
+	*(unsigned char*) (*(char**) ((char*) self + 0x138) + a2) = 1;
+	(*(int*) (*(char**) ((char*) self + 0x128) + a3 * 0x14 + 0x10))--;
+	(*(int*) ((char*) self + 0xe0))--;
 }

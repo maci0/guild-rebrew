@@ -1,7 +1,7 @@
+void __cdecl fcn_00652be6(int code);
+
 /* ADDRESS: GOLDTL 0x00659fbf */
-int __cdecl fcn_00659fbf(void)
+void __cdecl fcn_00659fbf(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00659fbf */
-    return 0;
+	fcn_00652be6(9);
 }

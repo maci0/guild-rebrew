@@ -46,7 +46,7 @@ extern char* g_f8f080;
 extern char g_631090[];
 
 int __cdecl fcn_004731c0(int x, int y, int kind, int owner);
-int __cdecl fcn_00473640(int x, int y, char* name, int owner);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_0052e890(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3)
 {
@@ -63,7 +63,7 @@ int __cdecl fcn_0052e890(int x, int y, int owner, int other, int arg5, int* id2,
 	((Ent*)g_f8f080)[*id2].f1c0 = 3;
 	((Ent*)g_f8f080)[*id2].f1e0 = other;
 	((Ent*)g_f8f080)[*id1].f1e0 = other;
-	*id3 = fcn_00473640(x - 0x13, y + 0x19, g_631090, owner);
+	*id3 = d2_ShowTxt(x - 0x13, y + 0x19, g_631090, owner);
 	((Slot*)g_f8f110)[owner].h2 = *id3;
 	((Ent*)g_f8f080)[*id3].f74 = 0x54;
 	((Ent*)g_f8f080)[*id3].f5c = 1;

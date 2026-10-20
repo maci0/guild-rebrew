@@ -2563,6 +2563,9 @@ section = ".data"
 
 ["GOLD.0x006b7fac"]
 section = ".data"
+name = "g_6b7fac_gold"
+updated_by = "data"
+updated_at = "2026-10-20T05:19:11+00:00"
 
 ["GOLD.0x006b8014"]
 section = ".data"
@@ -7179,11 +7182,11 @@ measured_at = "2026-10-17T12:27:42+00:00"
 file = "src/GOLD.fcn_00401090.c"
 name = "g_6b7fdc"
 kind = "GLOBAL"
-type = "int"
+type = "void*"
 section = ".data"
-status = "DISPLACED"
-updated_by = "verify"
-updated_at = "2026-10-17T12:27:42+00:00"
+updated_by = "data"
+updated_at = "2026-10-20T05:42:50+00:00"
+size = 4
 
 ["GOLDTL.0x006b7fdc".verification]
 status = "DISPLACED"
@@ -7229,9 +7232,9 @@ name = "g_6b8014"
 kind = "GLOBAL"
 type = "char*"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-17T12:27:42+00:00"
-status = "DISPLACED"
+updated_by = "data"
+updated_at = "2026-10-20T05:23:33+00:00"
+size = 4
 
 ["GOLDTL.0x006b8014".verification]
 status = "DISPLACED"
@@ -24433,3 +24436,48 @@ writer = "verify"
 input_hash = "5e4fefa817dd28ff06508ae0fd7ea6ea67e07db0f5fb3bd2471e5f0167c04b9a"
 definition_hash = "7278112074d107d9e951f16daf170bbeffb0cd3624a972430303512e13e249f9"
 measured_at = "2026-10-18T21:30:23+00:00"
+
+["GOLDTL.0x006b7fd0"]
+type = "char*"
+name = "g_6b7fd0"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-10-20T04:24:43+00:00"
+
+["GOLDTL.0x006b7fd4"]
+type = "char*"
+name = "g_6b7fd4"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-10-20T04:24:43+00:00"
+
+["GOLDTL.0x006b7fd8"]
+type = "char*"
+name = "g_6b7fd8"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-10-20T04:24:43+00:00"
+
+["GOLDTL.0x0099ef84"]
+type = "char[1536]"
+name = "g_99ef84"
+size = 1536
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-10-20T07:51:27+00:00"
+
+["GOLDTL.0x007e6060"]
+type = "char[17152]"
+name = "g_7e6060"
+size = 17152
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-10-20T07:51:27+00:00"

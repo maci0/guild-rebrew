@@ -1,67 +1,29 @@
-int __cdecl fcn_004acae0(int);
+typedef struct {
+	int key;
+	char pad4[0x28];
+} Entry2c;
+
+extern Entry2c* g_600f48;
+extern Entry2c* g_600f4c;
+extern int g_6f0714;
+extern int g_6f071c;
+
+int __cdecl fcn_004acae0(int a);
 
 /* ADDRESS: GOLD 0x004aca90 */
-int __declspec(naked) __cdecl fcn_004aca90(void)
+int __cdecl fcn_004aca90(void)
 {
-	__asm {
-		or eax, 0FFFFFFFFh
-		push 600F40h
-		_emit 0xa3
-		_emit 0x10
-		_emit 0x07
-		_emit 0x6f
-		_emit 0x00
-		_emit 0xa3
-		_emit 0x18
-		_emit 0x07
-		_emit 0x6f
-		_emit 0x00
-		_emit 0xa3
-		_emit 0x14
-		_emit 0x07
-		_emit 0x6f
-		_emit 0x00
-		_emit 0xa3
-		_emit 0x1c
-		_emit 0x07
-		_emit 0x6f
-		_emit 0x00
-		_emit 0xa3
-		_emit 0x20
-		_emit 0x07
-		_emit 0x6f
-		_emit 0x00
-		call fcn_004acae0
-		add esp, 4
-		test eax, eax
-		jnz Lret
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x48
-		_emit 0x0f
-		_emit 0x60
-		_emit 0x00
-		mov edx, dword ptr [ecx]
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x4c
-		_emit 0x0f
-		_emit 0x60
-		_emit 0x00
-		_emit 0x89
-		_emit 0x15
-		_emit 0x14
-		_emit 0x07
-		_emit 0x6f
-		_emit 0x00
-		mov edx, dword ptr [ecx]
-		_emit 0x89
-		_emit 0x15
-		_emit 0x1c
-		_emit 0x07
-		_emit 0x6f
-		_emit 0x00
-	Lret:
-		ret
+	int r;
+
+	*(int*)0x6f0710 = -1;
+	*(int*)0x6f0718 = -1;
+	*(int*)0x6f0714 = -1;
+	*(int*)0x6f071c = -1;
+	*(int*)0x6f0720 = -1;
+	r = fcn_004acae0(0x600f40);
+	if (r == 0) {
+		g_6f0714 = g_600f48->key;
+		g_6f071c = g_600f4c->key;
 	}
+	return r;
 }

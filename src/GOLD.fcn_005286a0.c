@@ -1,31 +1,11 @@
-int __cdecl strstr(int, int);
+#include <string.h>
 
 /* ADDRESS: GOLD 0x005286a0 */
-char __declspec(naked) __cdecl fcn_005286a0(int s, int *arr)
+char __cdecl fcn_005286a0(char* name, int* list)
 {
-	(void)s; (void)arr;
-	__asm {
-		push esi
-		mov esi, dword ptr [esp+8]
-		push 624180h
-		push esi
-		call strstr
-		add esp, 8
-		test eax, eax
-		mov eax, dword ptr [esp+0Ch]
-		jz skip
-		mov ecx, dword ptr [eax]
-		mov dword ptr [eax+ecx*4+4], esi
-		mov ecx, dword ptr [eax]
-		inc ecx
-		mov dword ptr [eax], ecx
-	skip:
-		mov ecx, dword ptr [eax]
-		xor edx, edx
-		cmp ecx, 20h
-		pop esi
-		setl dl
-		mov al, dl
-		ret
+	if (strstr(name, "sp_WIMPEL")) {
+		list[list[0] + 1] = (int) name;
+		list[0]++;
 	}
+	return list[0] < 0x20;
 }

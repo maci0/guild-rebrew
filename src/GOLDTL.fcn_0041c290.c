@@ -1,8 +1,37 @@
+#include "octree.h"
+
+extern OctNode* g_6b6f20[6];
+extern OctRef* g_6b6f40;
+extern unsigned int g_6b6f38;
+
+void __cdecl fcn_0041c190();
+
 /* ADDRESS: GOLDTL 0x0041c290 */
-int __cdecl fcn_0041c290(void)
+void __cdecl fcn_0041c290(unsigned int limit)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.0041c290 */
-    return 0;
+	unsigned char lvl;
+	unsigned char lvl1;
+	unsigned int idx;
+
+	if (g_6b6f38 <= limit) {
+		return;
+	}
+	do {
+		lvl = g_6b6f40[1].lvl;
+		lvl1 = (unsigned char)(lvl - 1);
+		idx = g_6b6f40[1].idx;
+		if (g_6b6f20[lvl1][idx >> 3].count != 0) {
+			g_6b6f40[1] = g_6b6f40[g_6b6f38];
+			g_6b6f38--;
+		} else {
+			g_6b6f40[1].lvl = lvl1;
+			g_6b6f40[1].idx = (unsigned short)(idx >> 3);
+		}
+		g_6b6f20[lvl1][idx >> 3].count += g_6b6f20[lvl][idx].count;
+		g_6b6f20[lvl1][idx >> 3].r += g_6b6f20[lvl][idx].r;
+		g_6b6f20[lvl1][idx >> 3].g += g_6b6f20[lvl][idx].g;
+		g_6b6f20[lvl1][idx >> 3].b += g_6b6f20[lvl][idx].b;
+		g_6b6f20[lvl1][idx >> 3].mask &= ~(1 << (idx & 7));
+		fcn_0041c190(1);
+	} while (g_6b6f38 > limit);
 }

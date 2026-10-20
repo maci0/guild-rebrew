@@ -1,7 +1,97 @@
+/* Quad/frustum clipping test: build four planes from the basis matrix at a2,
+ * evaluate them and the five stored planes at 0x10425a0 against the segment
+ * that starts at a1, and return the nearest positive crossing. */
+
+/* The native body multiplies by the pool literal 1.0f at 0x6628a0 as a memory
+ * operand, so it is read through its address; a source-level 1.0f multiply is
+ * folded away by this compiler. The 0.0f, 1e-7f and 1e10 constants are plain
+ * literals. */
+
+#include <math.h>
+
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
 /* ADDRESS: GOLDTL 0x004424c0 */
-int __cdecl fcn_004424c0(void)
+float __cdecl fcn_004424c0(float* a0, float* a1, float* a2)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004424c0 */
-    return 0;
+	float* tp;
+	float u0;
+	float u1;
+	float u2;
+	float t0;
+	float t1;
+	float t2;
+	float c0;
+	float c1;
+	float c2;
+	float v0;
+	float v1;
+	float v2;
+	float k;
+	float d;
+	float t;
+	float mn;
+	float best;
+	float plane[4][4];
+	int i;
+	int j;
+
+	u0 = a0[20] - a1[0];
+	u1 = a0[21] - a1[1];
+	u2 = a0[22] - a1[2];
+	t0 = u0*a2[0] + u2*a2[8] + u1*a2[4];
+	t1 = u0*a2[1] + u2*a2[9] + u1*a2[5];
+	t2 = u2*a2[10] + u1*a2[6] + u0*a2[2];
+	c0 = a2[4]*0.0f;
+	plane[0][0] = (a2[0]*0.0f - a2[8]**(float*) 0x6628a0) + c0;
+	c1 = a2[5]*0.0f;
+	plane[0][1] = (a2[1]*0.0f - a2[9]**(float*) 0x6628a0) + c1;
+	c2 = a2[6]*0.0f;
+	plane[0][2] = (a2[2]*0.0f - a2[10]**(float*) 0x6628a0) + c2;
+	plane[0][3] = plane[0][2]*t2 + plane[0][1]*t1 + plane[0][0]*t0;
+	v0 = a2[8]**(float*) 0x6628a0 + c0;
+	plane[1][0] = v0 + a2[0];
+	v1 = a2[9]**(float*) 0x6628a0 + c1;
+	plane[1][1] = v1 + a2[1];
+	v2 = a2[10]**(float*) 0x6628a0 + c2;
+	plane[1][2] = v2 + a2[2];
+	plane[1][3] = plane[1][2]*t2 + plane[1][1]*t1 + plane[1][0]*t0;
+	k = (float) (*(int*) a0 - 4);
+	u0 = (a0[20] + k*a0[24] + k*a0[28]) - a1[0];
+	u1 = (a0[21] + k*a0[25] + k*a0[29]) - a1[1];
+	u2 = (a0[22] + k*a0[26] + k*a0[30]) - a1[2];
+	t0 = u0*a2[0] + u2*a2[8] + u1*a2[4];
+	t1 = u0*a2[1] + u2*a2[9] + u1*a2[5];
+	t2 = u2*a2[10] + u1*a2[6] + u0*a2[2];
+	plane[2][0] = v0 - a2[0]**(float*) 0x6628a0;
+	plane[2][1] = v1 - a2[1]**(float*) 0x6628a0;
+	plane[2][2] = v2 - a2[2]**(float*) 0x6628a0;
+	plane[2][3] = plane[2][2]*t2 + plane[2][1]*t1 + plane[2][0]*t0;
+	plane[3][0] = a2[0]*0.0f + c0 + a2[8];
+	plane[3][1] = a2[1]*0.0f + c1 + a2[9];
+	plane[3][2] = a2[2]*0.0f + c2 + a2[10];
+	plane[3][3] = plane[3][2]*t2 + plane[3][1]*t1 + plane[3][0]*t0;
+	mn = MIN(plane[0][3], MIN(plane[1][3], MIN(plane[2][3], plane[3][3])));
+	best = 1e10;
+	tp = (float*) 0x10425a0;
+	for (j = 0; j < 5; j++) {
+		for (i = 0; i < 4; i++) {
+			d = plane[i][0]*tp[0] + plane[i][2]*tp[2] + tp[1]*plane[i][1];
+			if (d < -1e-7f || d > 1e-7f) {
+				t = plane[i][3] / d;
+				if (t > 0.0f) {
+					if (t < mn) {
+						if (t < best) {
+							best = t;
+						}
+					}
+				}
+			}
+		}
+		tp += 4;
+	}
+	if (best == 1e10) {
+		return fabs(mn);
+	}
+	return best;
 }

@@ -6,7 +6,7 @@ extern char* g_f8f080;
 int __cdecl fcn_0046f740(int, int, int, int);
 float __cdecl fcn_0050bb50(int, int);
 void __cdecl fcn_0050bc10(int, int, char*);
-int __cdecl fcn_0046fac0(int, int, char*, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_00599ee0(int x, int y, int layer, int a4, int a5)
 {
@@ -21,7 +21,7 @@ int __cdecl fcn_00599ee0(int x, int y, int layer, int a4, int a5)
 	*(int*) (g_f8f080 + r * 748 + 0x4c) = 1;
 	f = fcn_0050bb50(a4, a5);
 	fcn_0050bc10((int) f, a5, text);
-	w = fcn_0046fac0(x + 7, y + 0x3a, text, g_772514);
+	w = d2_ShowTxt(x + 7, y + 0x3a, text, g_772514);
 	*(short*) (g_f8f080 + w * 748 + 0x14) = 0x24;
 	*(short*) (g_f8f080 + w * 748 + 0x74) = 0x54;
 	*(int*) (g_f8f080 + w * 748 + 0x60) = 1;

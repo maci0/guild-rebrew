@@ -66,7 +66,7 @@ void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_0051af00(char*, char*, ...);
-void __cdecl fcn_0046fac0(int, int, char*, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00473a90(int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -95,13 +95,13 @@ int __cdecl fcn_005dbb60(int unused, unsigned short* p)
 		((Slot*)g_1015ea0)[ids[i]].shown = 1;
 		((Slot*)g_1015ea0)[ids[i]].style = 3;
 		fcn_0051af00(text, s_679060, ((Player*)g_868060)[i + 1].name);
-		fcn_0046fac0(0xbe, i * 0x5a + 10, text, g_772514);
+		d2_ShowTxt(0xbe, i * 0x5a + 10, text, g_772514);
 		fcn_0051af00(text, s_679060, shares[i].kind + 0x16b7);
-		fcn_0046fac0(0xbe, i * 0x5a + 10 + 0x14, text, g_772514);
+		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x14, text, g_772514);
 		fcn_0051af00(text, s_679060, shares[i].goal + 0x16b7);
-		fcn_0046fac0(0xbe, i * 0x5a + 10 + 0x28, text, g_772514);
+		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x28, text, g_772514);
 		fcn_0051af00(text, s_68be7c, shares[i].amount);
-		fcn_0046fac0(0xbe, i * 0x5a + 10 + 0x3c, text, g_772514);
+		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x3c, text, g_772514);
 	}
 	fcn_004727a0(dlg, 3);
 	ids[3] = fcn_00472250(dlg, 3, fcn_00519190(0x1ba8));

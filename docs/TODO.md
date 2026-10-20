@@ -1,12 +1,147 @@
 # Current work
 
 The [three-binary objective](../goal.md) is incomplete. This checkpoint records
-Goal110 checks on **2026-10-18** and fresh client builds on **2026-10-19**.
+Goal110 checks on **2026-10-18**, completed client builds on **2026-10-19**,
+the later, interrupted GUI text-creator integration, and the resumed delegated
+reconstruction waves on **2026-10-19**.
 Both clients remain comparison scaffolds. Historical checkpoints are in
 [goal history](goal-history.md).
 
+## Delegated reconstruction waves, 2026-10-19
+
+Work resumed on the goal. Waves of ten subagents, ten isolated per-function
+STUB files each, ran against the default target `Europa1400Gold_TL.exe`.
+Local receipts are under `.scratch/wave2/` and `.scratch/wave3/`.
+
+Wave 2 attempted 100 targets and the lead reproduced every non-STUB verdict
+with a fresh official `rebrew test` (`.scratch/wave2/verify-changed.json`):
+**14 RELOC**, 2 NEAR_MATCHING, 10 SIZE_MISMATCH, 3 EXTRACT_ERROR, 71 still
+STUB. Twelve of the RELOC bodies are game code; they are byte-identical after
+relocation masking with their operands validated. This is object progress, not
+linked EXACT: the raw link has not been rebuilt.
+
+The wave-2 selector did not read the target's `external_ranges`, so 53 of 100
+assigned files were statically linked D3DX8 bodies (`0x5e0000..0x64ffff`,
+declared external in `rebrew-project.toml`). Those are not game source and
+their `__thiscall`/C++ ABIs cannot be emitted by C89. The same batch measured
+many inventory over-merges (one stored extent covering two to six adjacent
+functions or alignment padding), which C cannot close; they need reviewed
+`rebrew binary repair-extents` work.
+
+Wave 3 ran on the validated-extent game queue with the library band excluded.
+The lead reproduced the 29 promoted verdicts with a fresh official `rebrew
+test` (`.scratch/wave3/verify-changed.json`): **23 RELOC** (all
+byte-identical after relocation masking, operand bindings validated where
+recorded) and **6 NEAR_MATCHING**. The other attempted rows keep faithful
+partial bodies whose measured SIZE_MISMATCH is not promoted to STATUS by the
+default policy; their reports record extent-repair specs and unresolved
+operand/data-row gaps. Inline `__asm { int 3 }` for evidenced debug-break
+traps is an accepted lead decision (`.scratch/wave2/DECISIONS.md`).
+
+Wave 4 ran on the remaining validated game extents (larger bodies, 135-625
+bytes). The lead reproduced its promoted verdicts
+(`.scratch/wave4/verify-changed.json`): **1 RELOC** and **3 NEAR_MATCHING**;
+the rest are faithful bodies recorded as forced SIZE_MISMATCH (61 rows), which
+now persists through `--force-status`. Larger bodies mostly stop at
+register/scheduling or x87-choreography walls, and several need operand rows
+that do not exist yet (`.scratch/wave2/DATA-GAPS.md`).
+
+A reviewed extent-repair batch then ran: 36 game rows passed the byte-level
+spec verifier and were applied with `rebrew binary repair-extents` under its
+input digest, then re-measured with the corrected stored SIZE. That converted
+`0x0042f4d0` (356/356) and `0x004e8c00` (173/173) to RELOC and five more rows
+to NEAR_MATCHING. Three further rows now measure exactly against the repaired
+size but remain STUB-classified because their bytes still differ. The separate
+merge case `0x45a3a0`+`0x45a7f9`, two code+table rows, and two missing-entry
+additions are still open. Do not use `rebrew coverage catalog --fix-sizes`; it
+grew 22 already-verified rows from the stale inventory and had to be undone
+(details in `.scratch/wave2/DECISIONS.md`).
+
+Wave 5 ran on 100 remaining validated extents (354-889 bytes) plus a second
+repair batch of three verified rows (`0x4aa240`->748, `0x524fc0`->498,
+`0x5252d0`->735). Five promoted rows were lead-verified as RELOC (425, 480,
+489, 478, 559 bytes) and three more as NEAR_MATCHING; `0x524fc0` became
+NEAR_MATCHING 454/498 after its repair. Six wave-5 agents did not deliver a
+report; the written sources remain, all their promoted rows are verified, and
+the rest are recorded partial SIZE_MISMATCH bodies. Larger bodies are now the
+pool, so most new output is faithful partial C rather than RELOC.
+
+Wave 6 ran on 43 shared-TU STUB rows (each in a distinct file) plus the 57
+smallest remaining validated extents. Shared-row agents edit only their own
+function and measure with `--va` so resident EXACT/RELOC rows are not
+re-promoted. The lead reproduced its promoted verdicts
+(`.scratch/wave6/verify-changed.json`): **3 RELOC** (`0x4d1ad0` 539/539,
+`0x512b40` 478/478 after extent repair, `0x546720` 181/181) and **2
+NEAR_MATCHING**. The rest are faithful partial bodies (28 forced
+SIZE_MISMATCH) or untouched large rows. The wave also found a third invalid
+metadata row (`0x5294c4`, a switch-case arm inside the enclosing function) and
+confirmed the `rebrew_globals.h` gap: it is server-only, so GOLDTL bodies keep
+local externs and operand validation stays blocked on missing data rows.
+
+A systematic trailing-pad audit then ran: 514 game extents have padding after
+their last real terminator; 73 single-function SIZE_MISMATCH/NEAR bodies were
+repaired in the inventory with one digest-guarded batch. Feeding the corrected
+SIZE back through `rebrew test --va --size --force-status` is converting some
+of them to RELOC (first batch: `0x445760` 309/309; a mid-wave scan error left
+six rows to retry). The remaining repair classes (code+table, merges, invalid
+rows) are queued in `.scratch/wave2/EXTENT-QUEUE.md`.
+
+Wave 7 currently runs on the next 100 validated game extents (637-1817 bytes),
+with wave-8 groups precomputed for replacement agents so ten subagents stay
+running. A closure pipeline is prepared at
+`.scratch/closure/run_closure.py`: resume the paused client build, then data,
+whole-image, lint and server-gate checks; it must not run while wave agents are
+compiling.
+
+Classification of the remaining TL STUB rows (`.scratch/wave2/classify.py`):
+204 declared library band, 14 CRT/runtime tail, 604 game rows whose extent the
+fresh discovery pass validates (296 left after waves 3-5), 409 game rows with
+merged or padded extents, 43 rows in shared TUs. The reviewed extent-repair
+queue (splits, merges, padding) is `.scratch/wave2/EXTENT-QUEUE.md`. Findings,
+classify output and next-wave plan are in `.scratch/wave2/FINDINGS.md` and
+`.scratch/wave2/PLAN-next.md`.
+
+## Paused checkpoint, 2026-10-19
+
+This checkpoint records the pause that preceded the resumed waves above. At that
+pause all delegated tasks had finished and no
+owned compiler or emulation process remained. The current creator source,
+inventory and metadata changes are **uncommitted and unpushed**.
+
+Scoped verification finished: **98 of 102 contexts pass**, with four existing
+size mismatches and no compile failures. The subsequent full client rebuild
+stopped at **59%**, exit **143** after the requested SIGTERM; its log contains
+zero compiler-error lines through that point. Neither client was relinked.
+The existing PEs/maps, server gate, data results and README graphics describe
+earlier checkpoints, not validation of the current working tree. Final raw-link
+checks, fresh lint and the server gate remain pending.
+
+See [handoff](HANDOFF.md) for prepared work and resume steps. Stop evidence is
+`.scratch/gui-text-creator-integration/STOPPED.json`; detailed receipts are in
+that directory. No further build or reconstruction starts without a resume request.
+
 ## Current integration
 
+- The inferred `d2_ShowTxt` now shares Gold `0x473640` and TL `0x46fac0`
+  in `Develop/Units/d2.v1/`. Gold uses signed word coordinates; TL uses
+  dwords. The canonical header preserves that difference. Gold's complete
+  525-byte C body passes all 31 applied operands and 65 rejecting controls;
+  TL retains its 518-byte object. The three NOPs following Gold's return are
+  a separately reviewed inventory-boundary correction, not C padding.
+  All 28 caller TUs use the shared contract. Gold's eleven misrouted creator
+  calls and four misrouted receiver calls select their evidenced providers;
+  the unrelated Gold `0x46fac0` stays separate. Creator results and receiver
+  IDs are integers. Twenty-seven caller objects preserve nondebug sections
+  and reviewed operands. TL `0x4d6170` changes four register-color bytes in
+  an existing nonmatching body; its size and relocations stay unchanged.
+  Fresh verification passes 98 of 102 selected contexts, with four existing
+  size mismatches and no compile failures. Gold `0x5bcb10` now earns RELOC
+  after the provider repair. Two private TL views pass their sizeof and all
+  24 offsetof assertions; neither view claims storage ownership.
+  The source-contract audit still reports conditional-coordinate typedef
+  uncertainty; actual target compiles resolve it, but it is not a clean audit.
+  The full rebuild stopped at 59%; final raw-link checks remain pending. Receipts:
+  `.scratch/gui-text-creator-integration/`.
 - The inferred `d2_SetElementValue` now shares the TL `0x472380` and Gold
   `0x475ca0` setters with a variadic contract: widget kind and flags select
   string, integer or unused payloads. All selected callers use the canonical
@@ -23,9 +158,9 @@ Both clients remain comparison scaffolds. Historical checkpoints are in
   helper stub; TL's section sizes stay unchanged. No storage owner or original
   TU boundary was inferred. The external file-selector form is unavailable,
   so its string-widget subtype remains an explicit input precondition.
-  Fresh checks retain three existing size mismatches and correctly demote
-  Gold `0x5bcb10` to NEAR_MATCHING: two pre-existing text-creator calls resolve
-  to unrelated Gold `0x46fac0` instead of `0x473640`. No false RELOC was restored.
+  That checkpoint exposed two wrong text-creator bindings in Gold `0x5bcb10`
+  and demoted it to NEAR_MATCHING. The later creator integration above repairs
+  those providers and records the fresh verdict.
   Receipts: `.scratch/gui-setter-integration/` and
   `.scratch/gui-text-creator-provider-review/`.
 - Three more client bodies now share C definitions: the six-record GUI cleanup
@@ -116,12 +251,13 @@ The updated [community review](community-research.md#exe-branch-follow-up-2026-1
 records original-name and algorithm leads. It establishes no new original TU
 or local byte verdict. The upstream fixture-isolation fix passed 12,715 tests
 (48 skipped) and merged in [Rebrew #35](https://github.com/maci0/rebrew/pull/35).
-Latest lint is `.scratch/gui-setter-integration/lint-final.json`:
+The last completed lint is `.scratch/gui-setter-integration/lint-final.json`:
 36 E023 errors and zero warnings per target. The official blocker backfill
 documented 1,848 Gold and 1,284 TL unmatched rows without changing their verdicts;
 this clears missing-explanation warnings, not the recovery work. Rebrew 5.2.0
 also removes the obsolete-template W033 warning. No type-staleness warning
-remains. The temporary layout-probe failure under unshare was reproduced
+remains in that receipt. Lint was not rerun after the creator integration.
+The temporary layout-probe failure under unshare was reproduced
 and repaired in [Rebrew #36](https://github.com/maci0/rebrew/pull/36);
 the native replay passes in both clients. Both upstream fixes are on `main`.
 The later [Rebrew #37](https://github.com/maci0/rebrew/pull/37) removes size-only
@@ -159,8 +295,8 @@ honor `UV_PROJECT_ENVIRONMENT` without creating a local `.venv`. Evidence is in
 
 ## GoldTL data audit, 2026-10-19
 
-Both rebuilt scaffolds have **0 exact data placements**. The final raw-image
-checks report:
+At the last completed setter-integration checkpoint, both rebuilt scaffolds
+have **0 exact data placements**. Those raw-image checks report:
 
 | Target | Displaced / absent from map | Byte-equal / different / missing | Compared / total |
 | --- | --- | --- | --- |
@@ -170,7 +306,7 @@ checks report:
 Gold has 158 non-comparable symbols; TL has 172. These include zero-fill tails
 and addresses outside file-backed data. Byte equality at a reference address
 does not establish the displaced symbol's identity there. Both whole-file
-checks fail as expected for comparison scaffolds. Latest receipts and hashes:
+checks fail as expected for comparison scaffolds. Last completed receipts and hashes:
 `.scratch/gui-setter-integration/image-{gold,tl}.json`.
 The two unsized GUI-table identities add one non-comparable row per target;
 they do not increase compared bytes or establish storage ownership.
@@ -200,9 +336,13 @@ Correcting displaced initializers does not fix native placement.
 Literal/initializer receipts and that TL comparison are in
 `.scratch/data-initializers/`; the earlier Gold comparison is
 `.scratch/gold-msx-lock/gold-rebuilt-image.json`. Use the final receipts above
-for the latest images.
+for the last completed images; no creator-integration image check has run.
 
 ## Verified checkpoint
+
+These completed checks precede the paused creator integration. The server gate
+has not been rerun for the current working tree; the interrupted build is
+recorded in the paused checkpoint above.
 
 | Area | Result | Receipt |
 | --- | --- | --- |
@@ -225,28 +365,41 @@ earlier log. Run `rebrew lint` again after further edits.
 
 ## Next actions
 
-1. **Finish warning repairs and rerun both clients.** Review numeric conversions,
+Work resumed on 2026-10-19; the delegated waves above run on the game STUB
+queue while closure stays pending. First finish the interrupted build and its
+prepared raw-link checks, then obtain fresh lint and server-gate results before
+committing the current integration.
+
+1. **Continue the validated-extent game queue.** Wave 3 covers the first 100 of
+   the 604 rows whose stored extent the fresh discovery pass validates; keep
+   the `external_ranges` band and CRT/runtime tail out of reconstruction.
+   Review each wave's extent-defect and ABI reports.
+2. **Repair reviewed inventory extents.** Apply a reviewed
+   `rebrew binary repair-extents` batch for the 409 merged/padded game rows
+   plus the sibling entries fresh discovery found, then reconstruct them.
+3. **Finish warning repairs and rerun both clients.** Review numeric conversions,
    pointer/callee contracts, packing and return paths against native evidence.
    Preserve every selected target context. Do not suppress diagnostics, add
    arbitrary initializers or replace recovered behavior with stubs.
-2. **Recover unsupported assembly as C.** The Goal110 getter left 40 outstanding
+4. **Recover unsupported assembly as C.** The Goal110 getter left 40 outstanding
    Gold-audit entries at that checkpoint. That denominator is the audit list,
    not the later 39 E023 lint receipt. Query the live list. Old EXACT/RELOC
    assembly verdicts are not C-recovery credit. Fourteen TL comparison stubs
    also need native ABI/provider recovery.
    [Assembly policy and receipts](assembly-audit.md) define the allowed exceptions.
-3. **Close client providers and storage.** Resolve duplicate native identities,
+5. **Close client providers and storage.** Resolve duplicate native identities,
    comparison placeholders, omitted TUs and unproven global owners. Keep stock
    libraries linked and distinguish import slots from game storage. Do not add
-   the server BSS owners to a client to satisfy names. The reviewed GUI text
-   creator is a concrete next unit: eleven Gold calls across six TUs target
-   `0x473640`; preserve the separate Gold `0x46fac0` function. The provider and
-   target-specific layouts need recovery, not an unchanged TL-body copy.
-4. **Continue scene, terrain and savegame contracts.** Prioritize the building/
+   the server BSS owners to a client to satisfy names. The shared GUI text
+   creator still depends on scaffolded index allocation and text measurement,
+   plus Gold's scaffolded list insertion. Recover those providers and their
+   caller contracts; TL's recovered insertion body can guide a shared version.
+   A complete creator body does not establish the helper implementations.
+6. **Continue scene, terrain and savegame contracts.** Prioritize the building/
    placement family, opaque stream callers, resource constructors and renderer
    dependencies. Native counterpart mappings and bounded behavior checks do not
    establish compiled bodies or original source ownership.
-5. **Verify final inputs and raw images.** Rebuild after the last source/header
+7. **Verify final inputs and raw images.** Rebuild after the last source/header
    edit, compare placement/imports/data/whole files, and rerun the server gate.
    Preserve server raw identity while closing lint and source-fidelity debt.
 
@@ -272,7 +425,8 @@ are in [stubs/README.md](../stubs/README.md).
 
 ## CURRENT STATE
 
-Server-only table generated from the last gate log. A zero raw-image gap does
+Server-only table generated from the last completed gate, before the current
+creator integration. A zero raw-image gap does
 not imply a passing gate, recovered client code or verified source ownership.
 
 <!-- CURRENT-STATE:BEGIN -->
@@ -294,6 +448,8 @@ not imply a passing gate, recovered client code or verified source ownership.
 
 ## Evidence and handoff
 
+- Paused creator integration and stop record: `.scratch/gui-text-creator-integration/`.
+- Prepared helper candidates and native-only checks: [handoff](HANDOFF.md#prepared-helper-work).
 - Goal110 build, runner and warning receipts: `.scratch/goal110-full-runs/`.
 - Earlier client source/provider cutover: `.scratch/goal106-client-cutover/`.
 - Text-placement repair: `.scratch/goal107-text-placement/`.

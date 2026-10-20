@@ -204,3 +204,41 @@ how the result was verified. Reversals are new entries.
   widths, assembly/PROVEN exclusion, absent-image N/A and invalid counts.
   Ruff formatting/lint, SVG XML parsing, rendered visual inspection and
   staged whitespace checks pass. No compiler or full reconstruction gate ran.
+
+### Full reconstruction working-tree checkpoint (2026-10-20)
+
+- Change: committed the accumulated client C implementations, shared GUI text
+  creator and caller repairs, declarations, inventory and managed metadata
+  updates, project rules, trackers and handoff notes. Existing partial and
+  nonmatching bodies remain explicitly unfinished. Removed trailing whitespace
+  from one blank line in `src/GOLDTL.fcn_00441400.c` without changing line count.
+- Why: preserve all current project work in Git at the user's request; this
+  checkpoint is not a successful build or whole-image verification claim.
+- Evidence: prior per-function receipts indexed in this ledger and
+  `docs/TODO.md`; commit-time reports under
+  `.scratch/commit-everything-2026-10-20/`. Four empty root artifacts and a
+  compiler-generated `t5.asm` listing were preserved there rather than tracked.
+- Decision owner: user explicitly requested committing everything and pushing.
+- Verification: whitespace check passes. Full read-only lint returned one E013
+  duplicate-VA error and 24 warnings per target during ongoing source edits;
+  the duplicate's focused recheck subsequently had zero errors and two
+  warnings per target. The complete lint was not repeated, and no full
+  build, function re-verification or raw-link gate ran for this checkpoint.
+
+### GOLD naked-asm conversion and lint repair (2026-10-20, evening)
+
+- Change: converted all 36 GOLD rows that claimed RELOC/EXACT from whole-function
+  `__declspec(naked)` + `__asm` into plain C89 (groups 190-195), using an
+  instruction-shape twin search over the GOLDTL inventory and translating the
+  twin's source. Registered the retired mis-bound
+  `spiel_c/GOLDTL.gm_ChangePlayerIdentityImpl.c` as a support file, and removed
+  the duplicate `0x62b5d0` ADDRESS anchor (prototype moved to a header).
+- Why: project rules allow asm only for 1-2 padding bytes; lint E023 failed the
+  gate for 36 GOLD rows. The E001/E013 errors blocked the same gate.
+- Evidence: `.scratch/recycle2/results/group-190..195.md`; `.scratch/wave2/lint4.json`
+  reports `total 7252, errors 0, warnings 23`; per-row verdicts written by
+  `rebrew test --force-status`.
+- Decided by: session Lead. Where conversion lost bytes to a documented wall, the
+  honest C body and reduced verdict were kept (see DECISIONS).
+- Verified: full `rebrew lint` errors 0; converted rows re-measured
+  (group-194 kept 6/6 RELOC; group-195 kept 4 RELOC + 1 EXACT).

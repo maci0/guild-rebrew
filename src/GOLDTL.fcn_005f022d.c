@@ -1,12 +1,21 @@
+typedef struct Pos5f022d {
+	float x;
+	float y;
+	float z;
+} Pos5f022d;
+
+typedef struct Obj5f022d {
+	char pad0[8];
+	char* base;
+} Obj5f022d;
+
 /* ADDRESS: GOLDTL 0x005f022d */
-/* Comparison stub only. No native body is recovered, so this earns no
- * match credit. return 0 replaces the empty REBREW_ALLOW_NAKED body,
- * which compiled to zero .text bytes, fell through, and warned C4716.
- * The self parameter is not a calling-convention claim. The inventory
- * extent matched no unique D3DX8 or LIBCMT member. ABI and
- * implementation remain blocked.
- */
-int fcn_005f022d(void *self, int a1, int a2)
+/* Native ABI is __thiscall (self in ecx, two stack arguments, ret 8).
+ * MSVC 6 C rejects __thiscall (C4234), so __fastcall carries self in ecx;
+ * its unused edx slot is the dummy parameter. */
+void __fastcall fcn_005f022d(Obj5f022d* self, int d1, int a1, Pos5f022d* a2)
 {
-    return 0;
+	if (self->base != 0) {
+		*(Pos5f022d*) (self->base + a1) = *a2;
+	}
 }

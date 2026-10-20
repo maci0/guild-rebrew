@@ -1,8 +1,51 @@
+/*
+ * Family tree window builder.
+ *
+ * Opens the tree view window and prepares the root entity: the window handle,
+ * the tree mode, the title string and the graphics state are set up before the
+ * walk over the family records starts.
+ *
+ * Reconstructed range 0x5d0660..0x5d07a0. The native body continues with the
+ * record walk from 0x5d07a0 through 0x5d1785; that part (including the
+ * memset(-1) tables the walk clears) is not reconstructed here.
+ */
+
+extern int g_772500;			/* 0x00772500 char* */
+extern int g_772514;			/* 0x00772514 */
+extern int g_100f1dc;			/* 0x0100f1dc */
+
+int __cdecl fcn_0057ec20(int);
+void __cdecl fcn_0057e880(int, int, int, int);
+int __cdecl fcn_00508e40(unsigned int);
+int __cdecl fcn_00470820(int, int, char*);
+int __cdecl fcn_00473a90(int, int);
+int __cdecl fcn_00471b60(int);
+int __cdecl fcn_004727a0(int, int);
+int __cdecl fcn_00519190(int);
+
 /* ADDRESS: GOLDTL 0x005d0660 */
-int __cdecl fcn_005d0660(void)
+void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned int a3)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.005d0660 */
-    return 0;
+	int win;
+	int count;
+	int rows;
+	char* ent;
+
+	if (!fcn_0057ec20(1)) {
+		return;
+	}
+	fcn_0057e880(6, 0, 0, 0);
+	ent = (char*) fcn_00508e40(a0);
+	if (!ent) {
+		return;
+	}
+	win = fcn_00470820(0, 0, (char*) 0x6acab0);
+	fcn_00473a90(0, 0);
+	fcn_00471b60(win);
+	fcn_004727a0(win, 2);
+	fcn_00519190(a2 ? a2 : 0x9f);
+	fcn_004727a0(win, 1);
+	count = 1;
+	g_100f1dc = -1;
+	rows = *(int*) (0x1015f4c + g_772514 * 0x3cc);
 }

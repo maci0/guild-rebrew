@@ -1,30 +1,13 @@
+extern char g_774a80[];
+
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_0051af00();
-void __cdecl fcn_00545d40();
+void __cdecl fcn_0051af00(void*, int, int);
+void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 /* ADDRESS: GOLD 0x005a9b30 */
-void __declspec(naked) __cdecl fcn_005a9b30(int a)
+void __cdecl fcn_005a9b30(void* a1)
 {
-	(void)a;
-	__asm {
-		push 3
-		call gm_RandomMod
-		and eax, 0FFFFh
-		add eax, 40A9h
-		push eax
-		push 40ACh
-		push 6F26C8h
-		call fcn_0051af00
-		mov eax, dword ptr [esp+14h]
-		push 62C380h
-		push 5FBh
-		push 1
-		mov ecx, dword ptr [eax+4]
-		push 6F26C8h
-		push 0FFFFFFFFh
-		push ecx
-		call fcn_00545d40
-		add esp, 28h
-		ret
-	}
+	fcn_0051af00(g_774a80, 0x40ac, (gm_RandomMod(3) & 0xffff) + 0x40a9);
+	fcn_00545d40(*(int*) ((char*) a1 + 4), -1, g_774a80, 1, 0x5fb,
+	    "_NACHRICHTEN_FRIEDHOF_13");
 }

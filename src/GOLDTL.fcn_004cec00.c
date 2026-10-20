@@ -8,7 +8,7 @@ int __cdecl fcn_004ceba0(int x, int y);
 int __cdecl fcn_004cec00(int x, int y, int *out_x, int *out_y)
 {
 	int radius;
-	int n;
+	char* m;
 	int y_cur;
 	int limit;
 	int row_hi;
@@ -17,10 +17,10 @@ int __cdecl fcn_004cec00(int x, int y, int *out_x, int *out_y)
 	int col_hi;
 	int col;
 
+	m = *(char **) (((char *) g_67a370) + 0xb0);
 	radius = 0;
-	n = *(int *) (*(char **) (((char *) g_67a370) + 0xb0) + 0x20);
 	y_cur = y;
-	limit = n - 1;
+	limit = *(int *) (m + 0x20) - 1;
 	for (; radius < 0x40; radius++, y_cur--) {
 		row_hi = (limit < y + radius) ? limit : y + radius;
 		for (row = (y_cur < 0) ? 0 : y_cur; row <= row_hi; row++) {

@@ -1,8 +1,10 @@
+/* Forwarding thunk: the three incoming arguments are copied back into
+ * their own stack homes and the body tail-jumps into fcn_00479e00. */
+
+int __cdecl fcn_00479e00(int a, int b, int c);
+
 /* ADDRESS: GOLDTL 0x0046bd00 */
-int __cdecl fcn_0046bd00(void)
+int __cdecl fcn_0046bd00(int a, int b, int c)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.0046bd00 */
-    return 0;
+	return fcn_00479e00(a, b, c);
 }

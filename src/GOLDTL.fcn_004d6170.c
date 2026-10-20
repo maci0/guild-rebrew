@@ -55,7 +55,7 @@ int __cdecl fcn_0050b750(int, int);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4700(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_0046fac0(int, int, char*, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00507910(int);
 int __cdecl fcn_005074e0(int, int);
 int __cdecl gm_RandomMod(int);
@@ -406,7 +406,7 @@ int __cdecl fcn_004d6170(char* ctx)
 				}
 				fcn_0051af00(s.small, (int) "%T", bonus);
 				if (bonus != 0) {
-					fcn_0046fac0(col, line + 0x50, s.small, g_772514);
+					d2_ShowTxt(col, line + 0x50, s.small, g_772514);
 				}
 				sum += bonus;
 			}

@@ -34,7 +34,7 @@ void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl fcn_0046fac0(int, int, char*, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl fcn_00593550(void)
 {
@@ -55,7 +55,7 @@ void __cdecl fcn_00593550(void)
 			if (*(int*) (p + 4) != 0) {
 				strcat(buf, g_14b5d54);
 			}
-			fcn_0046fac0(((Ctl*)g_1015ea0)[h].x18 + 10, y, buf, g_772514);
+			d2_ShowTxt(((Ctl*)g_1015ea0)[h].x18 + 10, y, buf, g_772514);
 			y = y + ((Ctl*)g_1015ea0)[h].x1c + 5;
 			g_779cc0[i] = h;
 			if (p == g_779cb8) {

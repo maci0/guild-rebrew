@@ -1,7 +1,45 @@
+typedef struct Handler {
+	void(__cdecl* fn)(void);
+	int arg;
+} Handler;
+/* SIZE 8 */
+
+extern Handler g_7e35c0[];
+extern int g_774650;
+extern volatile int g_6b7fac;
+extern unsigned int g_6a2c1c;
+extern int g_6a2c20;
+extern char g_6811b0[];
+extern char g_7e3a60[];
+
+void __cdecl fcn_00536810(void);
+int __cdecl fcn_00470820(int, int, char*);
+void __cdecl fcn_00471d80(int, int);
+void __cdecl fcn_00471e30(int);
+void __cdecl fcn_004727a0(int, int);
+int __cdecl fcn_00519190(int, ...);
+
 /* ADDRESS: GOLDTL 0x00536b10 */
-int __cdecl fcn_00536b10(void)
+void __cdecl fcn_00536b10(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00536b10 */
-    return 0;
+	if (g_7e35c0[g_774650].fn != fcn_00536810 &&
+	    g_6a2c1c > g_6b7fac - 0x23a &&
+	    g_6a2c1c != -1) {
+		if (g_6a2c20 == -1) {
+			g_6a2c20 = fcn_00470820(0, 0, "misc\\quickchat");
+			fcn_00471d80(g_6a2c20, 3);
+			if (g_6a2c20 == -1) {
+				return;
+			}
+		}
+		fcn_004727a0(g_6a2c20, 0);
+		fcn_00519190((int) g_6811b0);
+		fcn_00519190((int) g_7e3a60);
+	} else {
+		if (g_6a2c20 == -1) {
+			return;
+		}
+		fcn_00471e30(g_6a2c20);
+		g_6a2c20 = -1;
+	}
 }

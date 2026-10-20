@@ -62,12 +62,11 @@ typedef struct PairRun {
 
 int __cdecl fcn_00407760(char* flags, PairRun* src, char* dst, char* scale)
 {
-	int step;
-	int i;
-	int n;
 	int hi;
+	int n;
+	int i;
 	unsigned char* bytes;
-
+	int step;
 	n = 0;
 	i = 1;
 	if (flags != 0 && (flags[4] & 0x10) != 0) {

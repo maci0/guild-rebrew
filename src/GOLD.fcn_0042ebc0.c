@@ -1,59 +1,19 @@
 void __cdecl m_FreeTracked(int);
 
 /* ADDRESS: GOLD 0x0042ebc0 */
-void __declspec(naked) __cdecl fcn_0042ebc0(void)
+void __cdecl fcn_0042ebc0(void)
 {
-	__asm {
-		_emit 0xa1
-		_emit 0xf8
-		_emit 0x33
-		_emit 0x63
-		_emit 0x00
-		test eax, eax
-		jz Lbad
-		_emit 0x3b
-		_emit 0x05
-		_emit 0xf0
-		_emit 0x33
-		_emit 0x63
-		_emit 0x00
-		jc Lbad
-		push eax
-		call m_FreeTracked
-		add esp, 4
-		_emit 0xc7
-		_emit 0x05
-		_emit 0xf0
-		_emit 0x33
-		_emit 0x63
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x05
-		_emit 0xf4
-		_emit 0x33
-		_emit 0x63
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x05
-		_emit 0xf8
-		_emit 0x33
-		_emit 0x63
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		ret
-	Lbad:
-		_emit 0xcc
-		ret
+	int p;
+
+	p = *(int *)0x6333f8;
+	if (p == 0 || (unsigned int)p < *(unsigned int *)0x6333f0) {
+		__asm {
+			int 3
+		}
+		return;
 	}
+	m_FreeTracked(p);
+	*(int *)0x6333f0 = 0;
+	*(int *)0x6333f4 = 0;
+	*(int *)0x6333f8 = 0;
 }

@@ -1,7 +1,42 @@
+void __cdecl fcn_0051af00(void* buffer, int format, ...);
+void __cdecl fcn_005d8e30(void* rec, void* ctx);
+
 /* ADDRESS: GOLDTL 0x004f98e0 */
-int __cdecl fcn_004f98e0(void)
+int __cdecl fcn_004f98e0(char* rec, int* ctx)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004f98e0 */
-    return 0;
+	int action;
+
+	action = *ctx;
+	if (action == 3 || action == 1) {
+		if (*(char*) (rec + 2) == 6) {
+			fcn_0051af00(&ctx[5], 0x679060, 0x1de9);
+		}
+		if (*(char*) (rec + 0x166) != 0x18) {
+			return 1;
+		}
+		if (*(unsigned int*) (rec + 0x1c8) & 0x200) {
+			return 9;
+		}
+		if (*ctx == 3) {
+			fcn_005d8e30(rec, ctx);
+		}
+		return 2;
+	}
+	if (action == 4 || action == 2) {
+		if (!(*(unsigned int*) (rec + 0x1c8) & 0x100) || !ctx[0x87]) {
+			return 1;
+		}
+		if (*(char*) (*(int*) (ctx + 0x87) + 0x166) != 0x18) {
+			return 1;
+		}
+		if (action == 4) {
+			fcn_005d8e30(rec, ctx);
+			return 10;
+		}
+		if (*(char*) (rec + 2) == 6) {
+			fcn_0051af00(&ctx[5], 0x679060, 0x1de9);
+		}
+		return 10;
+	}
+	return 1;
 }

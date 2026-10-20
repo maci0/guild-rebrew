@@ -21,7 +21,7 @@ char* __cdecl fcn_00508e40(int);
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl fcn_005462a0(void);
 void __cdecl fcn_0051af00(char*, char*, ...);
-void __cdecl fcn_0046fac0(int, short, char*, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00534210(int, int, char*, int, int);
 void __cdecl fcn_0057e880(int, char*, int, int);
 
@@ -134,7 +134,7 @@ int __cdecl fcn_00588f30(char* w)
 	fcn_004727a0(0, 3);
 	for (i = 0; i < 5; i++) {
 		fcn_0051af00(buf, "%s:", i + 0x16b7);
-		fcn_0046fac0(0, i * 15, buf, g_772514);
+		d2_ShowTxt(0, i * 15, buf, g_772514);
 		fcn_00534210(0x64, i * 15 + 2, w, i, 0x4df);
 	}
 	fcn_0057e880(7, w, 0, 0);

@@ -110,8 +110,8 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
     case 2:
         if (*(int*) (participant + 0x10) != action[5]) return;
         fcn_00508cf0(7, order);
-        value = gm_WalkEntityChain(*(unsigned short*) own);
-        value = (value + gm_WalkEntityChain(*(unsigned short*) other)) / 2000;
+        value = (gm_WalkEntityChain(*(unsigned short*) own)
+            + gm_WalkEntityChain(*(unsigned short*) other)) / 2000;
         dialog = fcn_00470820(0, 0, "cutscenes\\folterwahl");
         fcn_00471d80(dialog, 3);
         fcn_004727a0(dialog, 0);

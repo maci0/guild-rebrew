@@ -4600,20 +4600,35 @@ int __cdecl cm_DispatchMoveSlot(void* cmd, char* result_buf)
 /* Execution handler: allocates a graveyard worker entity by
  * delegating to gv_ExAllocGraveyardWorker. */
 
+extern int g_14cbca0;
+extern int g_699364;
+
 int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 {
-	int val;
-	uint alloc_id;
+	int id;
 
-	(void) result;
-
-	*(int*) (cmd + 0x14) = g_next_object_id;
-	val = rand();
-	*(int*) (cmd + 0x10) = val;
-	srv_SeedRandom(val);
-	alloc_id = gv_ExAllocGraveyardWorker((void*) (cmd + 0x10));
-	alloc_id = alloc_id - 0xffff;
-	return (alloc_id != 0) - 1;
+	if (result != 0) {
+		result[0] = 2;
+		result[1] = 0;
+		*(int*) (result + 6) = 0;
+	}
+	if (g_14cbca0 != -1) {
+		g_699364 = *(int*) (cmd + 0x14);
+	}
+	else {
+		*(int*) (cmd + 0x10) = rand();
+	}
+	srv_SeedRandom(*(int*) (cmd + 0x10));
+	id = gv_ExAllocGraveyardWorker((void*) (cmd + 0x10));
+	if (id == 0xffff) {
+		return -1;
+	}
+	if (result != 0) {
+		result[0] = 1;
+		result[1] = 1;
+		*(int*) (result + 6) = 0x7f4ca0 + id * 0x21c;
+	}
+	return 0;
 }
 
 /* Execution handler: allocates an alchemist entity by delegating
@@ -4621,18 +4636,30 @@ int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 
 int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
 {
-	uint alloc_id;
-	int val;
+	int id;
 
-	(void) result;
-
-	*(int*) (cmd + 0x14) = g_next_object_id;
-	val = rand();
-	*(int*) (cmd + 0x10) = val;
-	srv_SeedRandom(val);
-	alloc_id = ahm_ExAllocAlchemist((void*) (cmd + 0x10));
-	alloc_id = alloc_id - 0xffff;
-	return (alloc_id != 0) - 1;
+	if (result != 0) {
+		result[0] = 2;
+		result[1] = 0;
+		*(int*) (result + 6) = 0;
+	}
+	if (g_14cbca0 != -1) {
+		g_699364 = *(int*) (cmd + 0x14);
+	}
+	else {
+		*(int*) (cmd + 0x10) = rand();
+	}
+	srv_SeedRandom(*(int*) (cmd + 0x10));
+	id = ahm_ExAllocAlchemist((void*) (cmd + 0x10));
+	if (id == 0xffff) {
+		return -1;
+	}
+	if (result != 0) {
+		result[0] = 1;
+		result[1] = 1;
+		*(int*) (result + 6) = 0x7f4ca0 + id * 0x21c;
+	}
+	return 0;
 }
 
 /* returns 1 on slot found, 0 otherwise (alchemistry_logic2.c:81) */
@@ -4649,7 +4676,11 @@ int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 	char* src;
 	int flag_ok;
 
-	(void) result;
+	if (result != 0) {
+		result[0] = 2;
+		result[1] = 0;
+		*(int*) (result + 6) = 0;
+	}
 	record = (char*) gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
 	if (record == (char*) 0) {
 		return -1;

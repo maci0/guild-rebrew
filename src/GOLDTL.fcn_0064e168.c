@@ -1,7 +1,7 @@
+int __cdecl _unlock(int locknum);
+
 /* ADDRESS: GOLDTL 0x0064e168 */
-int __cdecl fcn_0064e168(void)
+void __cdecl fcn_0064e168(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.0064e168 */
-    return 0;
+	_unlock(9);
 }

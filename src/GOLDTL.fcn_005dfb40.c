@@ -52,7 +52,7 @@ void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl fcn_005dfa40(int, int, Rec*);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_0046fac0(int, int, char*, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_00471f80(int);
@@ -97,7 +97,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	}
 	fcn_004727a0(dlg, 1);
 	for (i = 0; i < n; i++) {
-		recs[i].id = fcn_0046fac0(0, (short) (i * 24), recs[i].name, g_772514);
+		recs[i].id = d2_ShowTxt(0, (short) (i * 24), recs[i].name, g_772514);
 		((Slot*)g_1015ea0)[recs[i].id].f5c = 1;
 		((Slot*)g_1015ea0)[recs[i].id].f6c = 1;
 		((Slot*)g_1015ea0)[recs[i].id].f18 = ((Win*)g_77255c)->fc;

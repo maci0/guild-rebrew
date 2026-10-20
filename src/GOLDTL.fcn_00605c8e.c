@@ -1,12 +1,33 @@
+typedef struct {
+	int idx;
+	int val;
+} SLOT;
+
+typedef struct {
+	char pad0[0xfc];
+	SLOT* slots;
+	char* flags;
+	unsigned end;
+	unsigned start;
+} LIST;
+
+/* Native ABI is thiscall: self in ecx, one stack argument, ret 4. MSVC 6
+ * rejects __thiscall in C mode, so the second declared parameter absorbs
+ * edx and the real argument arrives on the stack. */
 /* ADDRESS: GOLDTL 0x00605c8e */
-/* Comparison stub only. No native body is recovered, so this earns no
- * match credit. return 0 replaces the empty REBREW_ALLOW_NAKED body,
- * which compiled to zero .text bytes, fell through, and warned C4716.
- * The self parameter is not a calling-convention claim. The inventory
- * extent matched no unique D3DX8 or LIBCMT member. ABI and
- * implementation remain blocked.
- */
-int fcn_00605c8e(void *self, int a1)
+int __fastcall fcn_00605c8e(LIST* self, int unused, int* table)
 {
-    return 0;
+	unsigned i;
+	SLOT* s;
+
+	i = self->start + 1;
+	if (self->end <= i)
+		return 0;
+	do {
+		s = &self->slots[i];
+		if (self->flags[i] == 0)
+			s->idx = table[s->idx];
+		i++;
+	} while (i < self->end);
+	return 0;
 }

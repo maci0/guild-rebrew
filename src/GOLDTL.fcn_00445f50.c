@@ -1,7 +1,77 @@
+/* Morphs the colour/position tables between animation slots a0 and a0+1 by
+ * factor t, scales the first vector by a3, and blends the destination item
+ * block into the 0x1041d20 scratch area. */
+
+void __cdecl fcn_004379a0(int a, int b, int c, void* cb, void* q);
+void __cdecl fcn_00450a00(int a);
+
 /* ADDRESS: GOLDTL 0x00445f50 */
-int __cdecl fcn_00445f50(void)
+int __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00445f50 */
-    return 0;
+	int scratch[4];
+	unsigned char* cur;
+	unsigned char* next;
+	unsigned char* dst;
+	unsigned char* rows;
+	float inv;
+	float c0;
+	float c1;
+	float c2;
+	float c3;
+	float c4;
+	float c5;
+	int n;
+	int i;
+
+	if (a0 >= 7)
+		return 0;
+	if (t < *(float*) 0x6628a8)
+		return 0;
+	if (!(t <= *(float*) 0x6628a0))
+		return 0;
+	((float*) scratch)[3] = (float) a0 + t;
+	fcn_004379a0(*(int*) 0x67a370, 0, 0x1e, (void*) 0x445d20, scratch);
+	if (scale != *(float*) 0x6628a0)
+		fcn_004379a0(*(int*) 0x67a370, 0, 8, (void*) 0x445d00, &scale);
+	n = (a0 + 1) % 7;
+	cur = (unsigned char*) (0x1041d80 + a0 * 0x60);
+	next = (unsigned char*) (0x1041d80 + n * 0x60);
+	c0 = *((float*) (next + 0x00)) - *((float*) (cur + 0x00));
+	c1 = *((float*) (next + 0x04)) - *((float*) (cur + 0x04));
+	c2 = *((float*) (next + 0x08)) - *((float*) (cur + 0x08));
+	*((float*) 0x67bbdc) = (c0 * t + *((float*) (cur + 0x00))) * scale;
+	*((float*) 0x67bbe0) = (c1 * t + *((float*) (cur + 0x04))) * scale;
+	*((float*) 0x67bbe4) = (c2 * t + *((float*) (cur + 0x08))) * scale;
+	c3 = *((float*) (next + 0x0c)) - *((float*) (cur + 0x0c));
+	c4 = *((float*) (next + 0x10)) - *((float*) (cur + 0x10));
+	c5 = *((float*) (next + 0x14)) - *((float*) (cur + 0x14));
+	*((float*) 0x6b86c4) = c3 * t + *((float*) (cur + 0x0c));
+	*((float*) 0x6b86c8) = c4 * t + *((float*) (cur + 0x10));
+	*((float*) 0x6b86cc) = c5 * t + *((float*) (cur + 0x14));
+	inv = *(float*) 0x6628a0 - t;
+	cur += 0x18;
+	next += 0x18;
+	dst = (unsigned char*) 0x1041d20;
+	for (i = 0; i < 8; i++) {
+		dst[2] = (unsigned char) (int) (*((unsigned char*) (cur + 2)) * inv + *((unsigned char*) (next + 2)) * t);
+		dst[1] = (unsigned char) (int) (*((unsigned char*) (cur + 1)) * inv + *((unsigned char*) (next + 1)) * t);
+		dst[0] = (unsigned char) (int) (*((unsigned char*) cur) * inv + *((unsigned char*) next) * t);
+		*((float*) (dst + 4)) = *((float*) (cur + 4)) * inv + *((float*) (next + 4)) * t;
+		*((float*) (dst + 8)) = *((float*) (cur + 8)) * inv + *((float*) (next + 8)) * t;
+		dst += 0x0c;
+		cur += 0x0c;
+		next += 0x0c;
+	}
+	fcn_00450a00(a3);
+	*(int*) 0x67a95c = a0;
+	if (*(int*) 0x6b89c0 != 0) {
+		rows = (unsigned char*) 0x10405e0;
+		*((unsigned char*) (*(int*) 0x6b89c0 + 0x0a)) =
+			(unsigned char) (int) (rows[a0 * 4 + 2] * inv + rows[n * 4 + 2] * t);
+		*((unsigned char*) (*(int*) 0x6b89c0 + 0x09)) =
+			(unsigned char) (int) (rows[a0 * 4 + 1] * inv + rows[n * 4 + 1] * t);
+		*((unsigned char*) (*(int*) 0x6b89c0 + 0x08)) =
+			(unsigned char) (int) (rows[a0 * 4 + 0] * inv + rows[n * 4 + 0] * t);
+	}
+	return 1;
 }

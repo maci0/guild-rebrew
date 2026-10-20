@@ -1,8 +1,36 @@
+void __cdecl fcn_00469c40(int, int, int);
+
 /* ADDRESS: GOLDTL 0x00471c80 */
-int __cdecl fcn_00471c80(void)
+void __cdecl fcn_00471c80(int idx, unsigned char flags, float limit)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.00471c80 */
-    return 0;
+	int* p;
+	int half;
+	float value;
+	float bound;
+	int t;
+
+	p = (int*) (0x1015f40 + idx * 0x3cc);
+	if (flags & 1) {
+		half = p[3] / 2;
+		value = (float) (p[1] + half)
+			- (float) *(int*) 0x1015eac / *(float*) 0x67d368
+			+ (float) *(int*) 0x1015eac - (float) half;
+	} else {
+		value = (float) p[1];
+	}
+	if (flags & 2) {
+		half = p[4] / 2;
+		bound = (float) (p[2] + half) * *(float*) 0x67d368 - (float) half;
+	} else {
+		bound = (float) p[2];
+	}
+	t = *(int*) 0x1040494 - p[3];
+	if ((float) t < value) {
+		value = (float) t;
+	}
+	t = *(int*) 0x1040490 - p[4];
+	if ((float) t < bound) {
+		bound = (float) t;
+	}
+	fcn_00469c40((int) value, (int) bound, *(int*) ((char*) p + 0x27c));
 }

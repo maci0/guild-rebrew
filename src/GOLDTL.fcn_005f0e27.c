@@ -1,12 +1,9 @@
 /* ADDRESS: GOLDTL 0x005f0e27 */
-/* Comparison stub only. No native body is recovered, so this earns no
- * match credit. return 0 replaces the empty REBREW_ALLOW_NAKED body,
- * which compiled to zero .text bytes, fell through, and warned C4716.
- * The self parameter is not a calling-convention claim. The inventory
- * extent matched no unique D3DX8 or LIBCMT member. ABI and
- * implementation remain blocked.
- */
-int fcn_005f0e27(void *self, int a1, int a2)
+void __cdecl fcn_005f0e27(void *self, unsigned int a1, unsigned int a2)
 {
-    return 0;
+    void *obj;
+
+    obj = *(void **)((char *)self + 0x28);
+    (*(void (__stdcall **)(void *, int, int, unsigned int, unsigned int))
+      ((char *)(*(void **)obj) + 0x2c))(obj, 0, 0, a1, a2 | 0x800);
 }

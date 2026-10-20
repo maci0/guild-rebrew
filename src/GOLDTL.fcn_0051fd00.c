@@ -1,13 +1,14 @@
-extern char* g_6b5c20;
+extern unsigned int g_6b5c20;
 
 /* ADDRESS: GOLDTL 0x0051fd00 */
-int __cdecl fcn_0051fd00(void* action)
+unsigned int __cdecl fcn_0051fd00(unsigned int action)
 {
-    unsigned int offset;
+	unsigned int idx;
 
-    if (action != 0) {
-        offset = (unsigned int)action - (unsigned int)g_6b5c20;
-        return offset / 0x194u;
-    }
-    return -1;
+	if (action != 0) {
+		idx = (action - g_6b5c20) / 0x194u;
+	} else {
+		idx = 0xffffffffu;
+	}
+	return idx;
 }

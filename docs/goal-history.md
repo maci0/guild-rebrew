@@ -64,6 +64,7 @@ only. Full receipts remain in the archive and referenced `.scratch/goal*/` folde
 | Goal109 | CMake CL/LINK/LIB honors the configured native unshare backend; same-input Docker/native objects agree. `.scratch/goal109-unshare-runtime/`. |
 | Goal110 | Full client passes link; server raw identity holds while lint remains red. Wine seeding/mtimes/private font cache repaired upstream. Getter `0x4364f0` becomes C and Gold relinks. `.scratch/goal110-full-runs/`. |
 | Goal111 documentation cleanup | Current queue replaces accumulated checkpoints; retired recipes and invalidated conclusions move out of the live guidance. Pre-cleanup text is archived below. |
+| GUI text-creator pause, October 19 | Shared Gold/TL creators measure RELOC 525/518; scoped verification passes 98/102 contexts with four existing size mismatches. Full client rebuild stopped at 59% at the user's request; no new raw-link validation. Prepared helper candidates remain uncompiled, and native-only fixtures earn no C verdicts. All delegated tasks finished; reconstruction paused with uncommitted changes. Receipts `.scratch/gui-text-creator-integration/`; [handoff](HANDOFF.md). |
 
 ## Full notebooks
 

@@ -1,7 +1,157 @@
+extern char* g_6b8014;
+extern float g_6628a0;
+extern int g_14ce860;
+extern int g_14ce864;
+extern float g_1042584;
+extern float g_10432a4;
+extern float g_1052bc0;
+extern float g_1052bc8;
+extern char g_1052be0[];
+extern float g_1052c00[];
+
+extern void* __cdecl m_alloc(unsigned int size, const char* tag);
+extern void __cdecl m_FreeTracked(void* ptr);
+extern void __cdecl fcn_00438100(int scene, char* data, int flag);
+extern void __cdecl fcn_00435910(int device, unsigned int* flags, void* bbox, int mode);
+extern void __cdecl fcn_005eb225(float* dst, unsigned int* src, void* ctx);
+extern void __cdecl fcn_005eb2e4(float* dst, unsigned int* src, char* a, float* b,
+	float* c, void* ctx);
+
 /* ADDRESS: GOLDTL 0x00444ff0 */
-int __cdecl fcn_00444ff0(void)
+unsigned int __cdecl fcn_00444ff0(int a0, int* a1)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00444ff0 */
-    return 0;
+	char* holder;
+	char* model;
+	float* verts;
+	float* bbox;
+	unsigned int* flags;
+	unsigned int src[3];
+	float one;
+	float* f;
+	int count;
+	int total;
+	int index;
+	int i;
+	int m;
+	int j;
+	int px;
+	int py;
+	int zero;
+
+	if (*(int*) (a0 + 0x1ec) == 0)
+		return 1;
+	holder = *(char**) (a0 + 0x1cc);
+	if (holder == 0)
+		return 1;
+	model = *(char**) (holder + 0x318);
+	if (model == 0)
+		return 1;
+	count = *(int*) (model + 0x1e4);
+	index = 0;
+	if (count > 0) {
+		int* ids;
+		ids = *(int**) (model + 0x284);
+		do {
+			if (*ids == *a1)
+				break;
+			index++;
+			ids++;
+		} while (index < count);
+	}
+	if (index >= count)
+		return 1;
+	zero = 0;
+	one = 1.0f;
+	fcn_00438100(a0, g_6b8014, 0);
+	total = *(int*) (model + 0x44);
+	verts = (float*) m_alloc(total * 0x18, "!d3:TransformedPoints");
+	if (*(char*) (*(int*) (a0 + 0x1cc) + 0x4a0) != 0
+		&& (*(unsigned char*) (model + 0x2a1) & 2) != 0) {
+		bbox = (float*) m_alloc(total << 5, "!d3int:GetTextureBBoxVertices");
+		flags = (unsigned int*) m_alloc(total << 2, "!d3int:GetTextureBBoxRepeat");
+		for (i = 0; i < total; i++)
+			flags[i] = 1;
+		fcn_00435910(*(unsigned int*) (a0 + 0x1cc), flags, bbox, 0);
+		m_FreeTracked(flags);
+		if (total > 0) {
+			for (i = 0; i < total; i++) {
+				src[0] = *(unsigned int*) ((char*) bbox + i * 0x20);
+				src[1] = *(unsigned int*) ((char*) bbox + i * 0x20 + 4);
+				src[2] = *(unsigned int*) ((char*) bbox + i * 0x20 + 8);
+				f = verts + i * 6;
+				fcn_005eb225(f + 3, src, (void*) (*(int*) (a0 + 0x1ec) + 0x48));
+				f[0] = g_10432a4 * (g_6628a0 / f[5]) * f[3] + g_1052bc0;
+				f[1] = g_1042584 * f[4] * (g_6628a0 / f[5]) + g_1052bc8;
+			}
+		}
+		m_FreeTracked(bbox);
+	} else {
+		if (total > 0) {
+			for (i = 0; i < total; i++) {
+				src[0] = *(unsigned int*) (*(int*) (model + 0x27c) + i * 0xc);
+				src[1] = *(unsigned int*) (*(int*) (model + 0x27c) + i * 0xc + 4);
+				src[2] = *(unsigned int*) (*(int*) (model + 0x27c) + i * 0xc + 8);
+				f = verts + i * 6;
+				fcn_005eb2e4(f, src, g_1052be0, g_1052c00, &one,
+					(void*) (*(int*) (a0 + 0x1ec) + 0x48));
+				fcn_005eb225(f + 3, (unsigned int*) &zero,
+					(void*) (*(int*) (a0 + 0x1ec) + 0x48));
+			}
+		}
+	}
+	total = *(int*) (model + 0x4c);
+	for (i = 0; i < total; i++) {
+		if (*(int*) (*(int*) (model + 0x288) + i * 4) != index)
+			continue;
+		*(char*) (a1 + 0x21) = 1;
+		for (j = 0; j < 3; j++) {
+			int idx;
+			idx = *(unsigned short*) (*(int*) (model + 0x280) + (i * 3 + j) * 2);
+			f = verts + idx * 6;
+			px = (int) f[0];
+			py = (int) f[1];
+			m = i * 3 + j;
+			if (py + px < a1[0x1a] + a1[0x19]) {
+				a1[0x19] = px;
+				a1[0x1a] = py;
+				a1[0x11] = *(int*) (*(int*) (model + 0x28c) + m * 8);
+				a1[0x12] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
+				a1[1] = *(int*) (f + 3);
+				a1[2] = *(int*) (f + 4);
+				a1[3] = *(int*) (f + 5);
+			}
+			if ((unsigned int) ((g_14ce860 - px) - 1 + py)
+				< (unsigned int) ((a1[0x1c] - a1[0x1b]) - 1 + g_14ce860)) {
+				a1[0x1b] = px;
+				a1[0x1c] = py;
+				a1[0x13] = *(int*) (*(int*) (model + 0x28c) + m * 8);
+				a1[0x14] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
+				a1[5] = *(int*) (f + 3);
+				a1[6] = *(int*) (f + 4);
+				a1[7] = *(int*) (f + 5);
+			}
+			if ((unsigned int) ((g_14ce864 - py) - 1 + px)
+				< (unsigned int) ((a1[0x1d] - a1[0x1e]) - 1 + g_14ce864)) {
+				a1[0x1d] = px;
+				a1[0x1e] = py;
+				a1[0x15] = *(int*) (*(int*) (model + 0x28c) + m * 8);
+				a1[0x16] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
+				a1[9] = *(int*) (f + 3);
+				a1[10] = *(int*) (f + 4);
+				a1[0x0b] = *(int*) (f + 5);
+			}
+			if ((unsigned int) (((g_14ce864 - py) - px) - 2 + g_14ce860)
+				< (unsigned int) (((g_14ce864 - a1[0x20]) - a1[0x1f]) - 2 + g_14ce860)) {
+				a1[0x1f] = px;
+				a1[0x20] = py;
+				a1[0x17] = *(int*) (*(int*) (model + 0x28c) + m * 8);
+				a1[0x18] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
+				a1[0x0d] = *(int*) (f + 3);
+				a1[0x0e] = *(int*) (f + 4);
+				a1[0x0f] = *(int*) (f + 5);
+			}
+		}
+	}
+	m_FreeTracked(verts);
+	return 1;
 }

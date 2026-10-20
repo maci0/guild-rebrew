@@ -1,8 +1,18 @@
+extern int __cdecl fcn_0061324e(void);
+
 /* ADDRESS: GOLDTL 0x006214c2 */
-int __cdecl fcn_006214c2(void)
+
+void __cdecl fcn_006214c2(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.006214c2 */
-    return 0;
+	void* p;
+
+	if (fcn_0061324e() != 0) {
+		p = (void*)0x62131c;
+		*(void**)0x6af208 = p;
+	} else {
+		*(void**)0x6af208 = (void*)0x6210dd;
+		p = (void*)0x621234;
+	}
+	*(void**)0x6af20c = p;
+	((void (__cdecl*)(void))p)();
 }

@@ -41,7 +41,7 @@ unsigned char* __cdecl gm_AddObjekt(void);
 char* __cdecl fcn_0050dc90(unsigned char*);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
 void __cdecl fcn_0051af00(char*, char*, ...);
-int __cdecl fcn_0046fac0(int x, int y, char* text, int win);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00472900(int, int);
 int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win);
 int __cdecl fcn_0050b710(int, unsigned char);
@@ -87,11 +87,11 @@ int __cdecl fcn_005c89a0(void)
 				fcn_004727a0(h, 2);
 				g_777d00[n].btn = fcn_0046f740(0, n * 0x3e, *e + 0x427, g_772514);
 				fcn_0051af00(buf, g_6ac870, *e * 14 + 0x48e, e + 5);
-				g_777d00[n].name_text = fcn_0046fac0(0x40, n * 0x3e + 8, buf, g_772514);
+				g_777d00[n].name_text = d2_ShowTxt(0x40, n * 0x3e + 8, buf, g_772514);
 				((Font5c89*)g_1015ea0)[g_777d00[n].name_text].w = 0xa0;
 				fcn_00472900(g_777d00[n].name_text, 0x54);
 				fcn_0051af00(buf, g_68be7c, *(int*) (m + 0x1b8));
-				g_777d00[n].value_text = fcn_0046fac0(0x180, n * 0x3e + 0x14, buf, g_772514);
+				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, g_772514);
 				g_777d00[n].bar = fcn_00467480(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, g_772514);
 				d2_SetElementValue(g_777d00[n].bar, 0x3e8, 0x2328, fcn_0050b710(*(int*) (e + 0x39), g_773d75));
 				g_777d00[n].value = fcn_00471f80(g_777d00[n].bar);
