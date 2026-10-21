@@ -1228,3 +1228,13 @@ compile across their selected targets; they retain mismatch verdicts and earn
 no recovery credit. Integration-worktree lint has zero errors, with 2 server,
 27 GoldTL and 23 Gold warnings; stale context/guidance and two unsupported
 assembly helpers remain. Client links and the full gate were not rerun.
+
+
+## 2026-10-21 — pin refreshed README graphics
+
+Change: pin all three README graphics to commit `dfc4a39a2eb6aa4e62b130ca814e367fdb8ba78c`.
+Reason and decision: publish the integrated code, function and data snapshots
+without reusing GitHub's cached older images. Requested by the maintainer.
+Verification: the SVGs parse, local documentation link targets exist, and the
+README points to the commit containing the refreshed assets. No source or
+metadata change.

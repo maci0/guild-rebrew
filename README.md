@@ -45,12 +45,12 @@ displaced code still differs there. None of these alone establishes completion.
 
 <!-- progress:start -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/ad7565511984c04cf2884097c3e52128286427f4/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/dfc4a39a2eb6aa4e62b130ca814e367fdb8ba78c/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
   <p align="center">
-    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/ad7565511984c04cf2884097c3e52128286427f4/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
+    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/dfc4a39a2eb6aa4e62b130ca814e367fdb8ba78c/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
   </p>
 </details>
 <!-- progress:end -->
@@ -89,7 +89,7 @@ client data bars retain stored verification results.
 | **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 304 |
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/ad7565511984c04cf2884097c3e52128286427f4/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/dfc4a39a2eb6aa4e62b130ca814e367fdb8ba78c/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
 </p>
 
 Byte coverage counts each initialized `.data`/`.rdata` byte once; it excludes
