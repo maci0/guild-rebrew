@@ -52,7 +52,8 @@ void __cdecl fcn_004ad2e0(void)
 	}
 	rec = (char*) 0x7f4ca0;
 	do {
-		if (!(v5 & *(int*) (rec + 0x1cc)) && (v3 & *(int*) (rec + 0x1cc)) && *(unsigned char*) (rec + 0xd) >= 7 && (*(unsigned char*) (rec + 2) == 2 || *(unsigned char*) (rec + 2) == 3 || *(unsigned char*) (rec + 2) == 4 || *(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 6 || *(unsigned char*) (rec + 2) == 7)) {
+		if (!(v5 & *(int*) (rec + 0x1cc)) && (v3 & *(int*) (rec + 0x1cc)) && *(unsigned char*) (rec + 0xd) >= 7 && (*(unsigned char*) (rec + 2) == 2 || *(unsigned char*) (rec + 2) == 3 ||
+		    *(unsigned char*) (rec + 2) == 4 || *(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 6 || *(unsigned char*) (rec + 2) == 7)) {
 			f = fcn_004ad500((unsigned char*) rec, (unsigned short*) obj, v4, 0);
 			for (i = 3; i >= 0; i--) {
 				if (f <= hits[i].f) {

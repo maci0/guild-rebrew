@@ -74,7 +74,8 @@ void __cdecl fcn_0052fde0(void)
 	}
 	g_6a2bf0 = *(short*) 0x14ce8c0;
 	g_6a2bf4 = *(short*) 0x14ce8c2;
-	if (g_6a2bf0 <= g_6a3764 || g_6a376c <= g_6a2bf0 || g_6a2bf4 <= g_6a3768 || (g_6a3770 <= g_6a2bf4 || g_100f894 != -1) || g_67d8d4 != -1 || ((g_7746a4 = fcn_00443bf0((float) g_6a2bf0, (float) g_6a2bf4, 0x20, 1)) == 0 && (g_7746a4 = fcn_00443bf0((float) g_6a2bf0, (float) g_6a2bf4, 0x40, 1)) == 0)) {
+	if (g_6a2bf0 <= g_6a3764 || g_6a376c <= g_6a2bf0 || g_6a2bf4 <= g_6a3768 || (g_6a3770 <= g_6a2bf4 || g_100f894 != -1) || g_67d8d4 != -1 || ((g_7746a4 = fcn_00443bf0((float) g_6a2bf0,
+	    (float) g_6a2bf4, 0x20, 1)) == 0 && (g_7746a4 = fcn_00443bf0((float) g_6a2bf0, (float) g_6a2bf4, 0x40, 1)) == 0)) {
 		if (g_67d370 == -1 || !(*(unsigned char*) (g_1015ea0 + g_67d370 * 0x2f4 + 0x1d0) & 0x40)) {
 			g_100f8c0[0] = 0;
 		}
@@ -165,7 +166,8 @@ void __cdecl fcn_0052fde0(void)
 	} else if (c == 3) {
 		g_7746b4 = *(char**) (cur + 0x204);
 		g_7746dc = fcn_00506380((int) g_774970, 0, (unsigned short*) g_7746b4, 0);
-		if (g_7746b4 && (fcn_00517c00(*(unsigned short*) g_7746b4, 1, 4, g_100f8c0), *(char*) ((int) g_7746b4 + 0x165) == 0x1c) && ((*(unsigned char*) (g_7746b4 + 0x1b4) & 1) && ((g_7746dc & 0x800) && g_6b8010))) {
+		if (g_7746b4 && (fcn_00517c00(*(unsigned short*) g_7746b4, 1, 4, g_100f8c0), *(char*) ((int) g_7746b4 + 0x165) == 0x1c) && ((*(unsigned char*) (g_7746b4 + 0x1b4) & 1) && ((g_7746dc & 0x800) &&
+		    g_6b8010))) {
 			fcn_0051af00(g_100f8c0, 0x414c, *(unsigned short*) g_7746b4);
 			g_7725c4 = 0x2e;
 		}

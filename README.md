@@ -7,8 +7,8 @@ toolchains. The [objective](goal.md): reproduce every byte of the server,
 Gold and GoldTL from shared source.
 
 > [!IMPORTANT]
-> **Work in progress.** The current server raw build differs by **8 bytes**.
-> Earlier server builds matched every byte.
+> **The fresh server build is byte-identical:** all **286,720 bytes** match.
+> Server verification passes 316 functions and all 652 compared data symbols.
 > **Gold and GoldTL are comparison scaffolds, not playable or byte-identical.**
 > Both current client executables are absent after failed relinks.
 > Source recovery, unsupported assembly and provider/storage work remain.
@@ -16,9 +16,9 @@ Gold and GoldTL from shared source.
 > complete file equality; its 36 unsupported assembly findings kept the gate red.
 
 The [latest recorded work](docs/TODO.md)
-covers resumed reconstruction waves and the remaining server regression.
-Stored object results are included below; client relinks and full validation of
-the current sources remain pending. See the [handoff](docs/HANDOFF.md).
+includes the merged reconstruction work and a fresh server comparison.
+Client results below are stored object verdicts; their relinks and complete
+validation remain pending. See the [handoff](docs/HANDOFF.md).
 
 **[Start here](#get-started)** &nbsp; · &nbsp;
 **[Build & compare](#build-and-compare)** &nbsp; · &nbsp;
@@ -32,8 +32,8 @@ the current sources remain pending. See the [handoff](docs/HANDOFF.md).
 
 | Target | Code accounted for | C functions matched | Raw file at original offsets |
 | --- | ---: | ---: | ---: |
-| **Server** | **99.9%** | 250 / 251 · 99.6% | 99.9% |
-| **GoldTL** | **48.4%** | 3,805 / 5,123 · 74.2% | N/A |
+| **Server** | **100.0%** | 251 / 251 · 100.0% | 100.0% |
+| **GoldTL** | **48.4%** | 3,804 / 5,122 · 74.2% | N/A |
 | **Gold** | **22.8%** | 2,466 / 4,592 · 53.7% | N/A |
 
 **Code accounting** is Rebrew's byte-based measure of virtual `.text`: matched
@@ -55,11 +55,12 @@ displaced code still differs there. None of these alone establishes completion.
 </details>
 <!-- progress:end -->
 
-<sub>Snapshot refreshed 2026-10-21 12:02 UTC from
-<code>rebrew status --all-targets --json</code>.
-These are stored verdicts, not fresh compilation or raw-link verification.
-Libraries, semantic PROVEN verdicts and whole-function assembly matches are
-excluded from the C totals. Inline assembly may remain.</sub>
+<sub>Snapshot refreshed 2026-10-21 14:13 UTC from
+<code>rebrew status --all-targets --json</code> on the integrated tree.
+The server was freshly compiled and verified against the complete raw image;
+client results remain stored verdicts. Libraries, semantic PROVEN verdicts and
+whole-function assembly matches are excluded from the C totals. Inline assembly
+may remain.</sub>
 
 The server uses plain VC6 SP5 with `/MT` / LIBCMT. Both clients use the
 Processor Pack: GoldTL with `/MT` / LIBCMT, Gold with `/ML` / LIBC.
@@ -69,15 +70,15 @@ Remaining work in the same snapshot:
 
 | Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | EXTRACT_ERROR | Without source |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| **GoldTL** | 318 | 888 | 80 | 1 | 31 |
+| **GoldTL** | 297 | 904 | 81 | 5 | 31 |
 | **Gold** | 1,853 | 218 | 26 | 0 | 3 |
 
 A partial body or repaired inventory boundary can change these categories
 without earning a match. Function percentages measure catalog entries, not
-matched code bytes or gameplay completeness. The current server file agrees in
-286,712 of 286,720 bytes; the remaining eight bytes are in `.text`. Client
-raw-file comparison is unavailable until their links succeed. The full gate has
-not been rerun for this snapshot; data bars retain stored verification results.
+matched code bytes or gameplay completeness. All 286,720 server bytes match,
+including imports, relocations, headers and layout. Client raw-file comparison
+is unavailable until their links succeed. The full gate has not been rerun;
+client data bars retain stored verification results.
 
 ## Data verification
 
@@ -96,7 +97,8 @@ BSS and copied imports. Symbol totals include BSS and views, so a verified
 symbol need not contribute initialized bytes. `EXACT` is a subset of verified
 records with byte agreement at the reference address; displaced records count
 as drift. These are stored verdicts from the same snapshot as the code charts,
-not fresh verification or evidence of storage ownership.
+not evidence of storage ownership. The server has a fresh 652/652 data check;
+client data verdicts have not been refreshed against a new link.
 
 ## Get started
 

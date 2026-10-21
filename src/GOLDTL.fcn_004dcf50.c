@@ -1,4 +1,3 @@
-/* ADDRESS: GOLDTL 0x004dcf50 */
 extern int g_772f3c;
 extern int g_68bfc0;
 extern int g_6b8010;
@@ -67,6 +66,7 @@ typedef struct CMsg {
 	int pad[9];     /* +0x2c */
 } CMsg;
 
+/* ADDRESS: GOLDTL 0x004dcf50 */
 int __cdecl fcn_004dcf50(int a0)
 {
 	int rec[9];

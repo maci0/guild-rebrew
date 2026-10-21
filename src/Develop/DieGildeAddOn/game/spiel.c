@@ -3592,6 +3592,8 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 	return obj;
 }
 #endif
+/* Preserve subsequent client diagnostic line numbers. */
+#line 3464
 
 int __cdecl gm_RemoveObjectWrapper(int entity_record, unsigned int obj_type)
 {
@@ -4763,15 +4765,15 @@ int __cdecl gm_CanMarry(char* a, char* b)
 short* __cdecl gm_GetEntityTableEntry(char* param)
 {
 	char type;
-	unsigned short word;
 	int table_index;
 
 	type = param[2];
 	if (type == 6 || type == 7 || type == 5) {
-		word = *(unsigned short*) (param + 0x50);
-		if (word & 0x8000) {
-			table_index = word & 0xf;
-			if (table_index < 0x10 && table_index >= 0) {
+		if ((*(unsigned short*) (param + 0x50) & 0x8000) != 0) {
+			table_index = *(unsigned short*) (param + 0x50) & 0xf;
+			if (table_index >= 0 && table_index < 0x10) {
+			}
+			if (table_index >= 0 && table_index < 0x10) {
 				return (short*) (&g_entity_base[table_index * 0xac]);
 			}
 		}

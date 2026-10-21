@@ -1,33 +1,43 @@
 # Current work
 
-## Status snapshot (2026-10-21 12:02 UTC)
+<a id="status-snapshot-2026-10-21-1202-utc"></a>
 
-The [README and charts](../README.md#reconstruction-status) now use one
-`rebrew status --all-targets --json` report from the current working tree.
+## Status snapshot (2026-10-21 14:13 UTC)
 
-- Server: 250/251 C matches, 99.9% code accounting, and **8 differing raw-file
-  bytes** out of 286,720. Earlier whole-file identity is a historical checkpoint.
-- GoldTL: 3,805/5,123 C matches (74.2%), 48.4% code accounting.
-  Gold: 2,466/4,592 C matches (53.7%), 22.8% code accounting.
+The [README and charts](../README.md#reconstruction-status) use one
+`rebrew status --all-targets --json` report from the integrated tree.
+
+- **Server:** 251/251 C matches, 100.0% code accounting and all 286,720 raw
+  bytes identical. Fresh verification passes 316/316 functions, 652/652 compared
+  data symbols, function placement and the complete PE comparison.
+- **GoldTL:** 3,804/5,122 C matches (74.2%), 48.4% code accounting.
+  **Gold:** 2,466/4,592 C matches (53.7%), 22.8% code accounting; another 26
+  whole-function assembly matches remain separate from C recovery.
 - Both configured client executables are absent after failed relinks. Their
   raw-file metric is N/A; older scaffold scores are not reused.
-- Stored initialized-data verification remains 100.0% for server and 0.0% for
-  each client. GoldTL has 338 displaced symbols; Gold has 304.
-  [Data metrics](../README.md#data-verification) separate bytes, symbols and EXACT
-  reference-address verdicts.
+- Stored initialized-data verification is 100.0% for server and 0.0% for each
+  client. GoldTL has 338 displaced symbols; Gold has 304. [Data metrics](../README.md#data-verification)
+  separate bytes, symbols and EXACT reference-address verdicts.
+- All 33 project tests and 3 subtests pass. The complete gate and client
+  rebuilds have not been rerun. Integration-worktree lint has zero errors;
+  warnings remain (server 2, GoldTL 27, Gold 23), mainly stale type context,
+  generated guidance and two unsupported inline-assembly helpers.
 
-This documentation refresh performs no compilation or new data verification.
-The source/inventory/metadata reconstruction changes remain separate; rebuild,
-compare and run the gate before claiming current whole-file identity.
+The merged source includes the accepted server variants and reviewed client
+reconstructions. Local backup branches preserve generated padding/byte-copy
+experiments and unproven storage definitions; those are excluded from the
+published integration. Four line-wrap edits that changed boolean operators were
+repaired with identical original tokens. Failed C searches were not accepted as
+new original-assembly evidence. Receipt directory:
+`.scratch/integrate-all-20261021/`.
 
-The [three-binary objective](../goal.md) is incomplete. This checkpoint records
-Goal110 checks on **2026-10-18**, completed client builds on **2026-10-19**,
-the later, interrupted GUI text-creator integration, and the resumed delegated
-reconstruction waves on **2026-10-19**.
-Both clients remain comparison scaffolds. Historical checkpoints are in
-[goal history](goal-history.md).
+The [three-binary objective](../goal.md) remains incomplete. The dated notes
+below record earlier checkpoints; their eight-byte server gap and pending-commit
+statements are superseded by this integration.
 
 ## Live state (2026-10-21, round 34)
+
+Historical round record; use the snapshot above for current results.
 
 - GOLDTL `rebrew status`: RELOC 3513, EXACT 285, NEAR 74, SIZE_MISMATCH 898,
   STUB 254, EXTRACT_ERROR 1; matched 75.0%, coverage 99.3% (5025/5059),

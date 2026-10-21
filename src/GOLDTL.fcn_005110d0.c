@@ -89,7 +89,8 @@ void __cdecl fcn_005110d0(int a0)
 				v = *(int*) i;
 				if (v != 0 && *(int*) (v + 0x88) == obj * 0x3dc + 0x10432c0) {
 					if (fcn_00451840((float*) (v + 0x38), (float*) 0x662d70, 0.5f)) {
-						if ((*(int*) (v + 0x124) != 0 && (obj = (int) fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER")) != 0) || (obj = (int) fcn_00407330()) != 0 || ((obj = (int) fcn_00445600(0, 0x100, 0, "dummy_EINGANG")) != 0 || (obj = (int) fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER_ENTRY")) != 0)) {
+						if ((*(int*) (v + 0x124) != 0 && (obj = (int) fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER")) != 0) || (obj = (int) fcn_00407330()) != 0 || ((obj = (int) fcn_00445600(0, 0x100,
+						    0, "dummy_EINGANG")) != 0 || (obj = (int) fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER_ENTRY")) != 0)) {
 							fcn_00455350((char*) obj, (char*) (obj + 0x4c), (float*) pos);
 							ch_SetPosition(v, pos, 1);
 						}

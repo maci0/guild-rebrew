@@ -414,6 +414,110 @@ how the result was verified. Reversals are new entries.
   fresh data verification and the full gate were not run; concurrent source,
   inventory and managed-metadata edits are outside this change.
 
+### Integrate reviewed work and release 1.4.0 (2026-10-21)
+
+- Change: advanced the project and lockfile to 1.4.0 after reviewing the 27
+  accepted commits since 1.3.0. Restored the server variants of
+  `cm_ExAllocGraveyardWorker`, `cm_ExAllocAlchemist`, `cm_ExSimSpecialAction`,
+  `lb_ExPlayerRecordBroadcast`, `gv_MoveSlotEntry`, `ahm_CheckFlag` and
+  `gm_AllocRaum`. The client bodies remain selected outside `REBREW_SERVER`.
+  Line controls preserve the existing client diagnostic constants. Comparison
+  commands refresh the affected managed function records; no store was edited
+  by hand and no native boundary or storage allocation was invented.
+- Reason: the integration review reproduced nine unresolved server symbols in
+  the accepted checkpoint. Commit `a16e99dc` had replaced shared server bodies
+  with client implementations, and had removed the server market-stall log
+  branch. The restored server C comes from its parent revision. Keeping target
+  variants repairs the server without discarding the accepted client work.
+- Evidence: `.scratch/integration-20261021/checks/server-regression/`
+  contains the initial link failure, saved pre-change sources, the client
+  preprocessing comparison and scoped verification reports. Ten comparisons
+  of source token streams, with includes held out, cover both client macro
+  contexts for all five files. The separate compiler and binary checks remain
+  the native evidence, rather than treating preprocessing as a byte verdict.
+- Preservation: `.scratch/integration-20261021/drafts.bundle` preserves the
+  initial shared-checkout snapshot, 14 detached-worktree draft commits and the
+  old documentation/data-owner stash. SHA-256:
+  `7da8ab027c4665308225bd83416d5526a2506ff7e342444465a0f5ef327faf73`.
+  `latest-drafts.bundle` adds the 155-entry shared-checkout snapshot at
+  `4bbf3c1ece68e7fffb569e076ef7127572d3bcaa`; its base is in the first bundle.
+  Both bundles pass verification and a separate repository passes full fsck.
+  Local reports, experiments and caches from the 20 inactive detached worktrees
+  survive in `worktree-evidence/`. Those worktrees and the preserved stash were
+  removed. Shared checkouts with attached agents remain; none were agentless.
+- Decision owner: the user authorized integration, durable draft preservation,
+  cleanup, a minor release and publication to the existing owned remote.
+  Concurrent reconstruction writes in the original checkout remain outside
+  this accepted release. No upstream repository, binary input, linked stock
+  archive, deployment destination or local tool setting was changed.
+- Verification: all 33 project tests and three subtests pass; the lockfile check
+  passes. Fresh raw server output equals all 286,720 reference bytes, SHA-256
+  `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+  The gate verifies 316/316 functions (including 65 library functions), all
+  652 data comparisons, the entire PE, imports, relocations and layout. Wine
+  loads the DLL and resolves Init/Exit; all three target compiler selections align and
+  the DirectX library audit reports no new findings. Scoped checks cover the
+  affected source files in their bound targets; client mismatches remain
+  reconstruction work, rather than a whole-client byte claim.
+- Limits: the full gate remains FAIL on its 24 lint warnings (zero lint errors).
+  Broad Ruff checking retains 21 findings in unchanged files; focused graphic
+  and input tests lint clean. Client raw executables were not rebuilt and gameplay was not
+  tested. This is a source checkpoint; no production deployment
+  workflow or hosted service is configured for this repository.
+- Final scoped accounting: 172/172 server checks, 44/51 GoldTL checks and
+  34/43 Gold checks pass. All five sources compile in their bound targets;
+  no compile or missing-file errors and no previously byte-matched client
+  rows were lost. The 16 client mismatches remain unfinished. The final
+  explicit raw-link refresh records all 316 server rows as EXACT again.
+
+
+### Refresh docs and charts after reconstruction/relink changes (2026-10-21)
+
+- Change: updated README code/data tables and all three graphics from one fresh
+  status report, plus a current tracker snapshot, handoff and client build notes.
+  Replaced the obsolete current byte-identical-server claim with the measured
+  eight-byte regression; unavailable client raw images now display N/A.
+  The chart's differing-file caption is target-neutral rather than calling
+  every differing binary a comparison scaffold. Fixed the singular work-item
+  caption now visible for the server's one remaining function mismatch.
+- Why: user requested updated docs/graphs, commits and a push. Later rebuilds
+  changed the existing images and inventory; historical build scores cannot
+  describe missing or changed current artifacts.
+- Evidence: `.scratch/readme-refresh-2026-10-21-latest/status.json`, timestamp
+  2026-10-21 12:02 UTC, SHA-256
+  `7e95d2852534d9a03bb7f3b835707e723e896ab5d0170dd0bf869cc132d597c5`.
+  Server: 250/251 C matches, 141,316/141,382 accounted code bytes, and
+  286,712/286,720 raw-file bytes equal. GoldTL: 3,805/5,123 C matches (74.2%),
+  48.4% code accounting. Gold: 2,466/4,592 C matches (53.7%), 22.8% code
+  accounting. Both configured client executables were absent. Stored
+  initialized-data byte verification remains server 100.0%, clients 0.0%.
+- Decision owner: user authorized this refresh, commit and push. Preserve
+  concurrent source, inventory, metadata and unrelated documentation changes;
+  only the new tracker snapshot and this ledger entry are staged from the two
+  already-modified documents.
+- Verification: 32 selected tests and 3 subtests pass, including missing-image
+  handling and the revised differing-file label. Ruff, XML parsing, report/map/
+  table reconciliation and scoped whitespace checks pass. Rendered the updated
+  code and data charts to PNG and checked the layout. No native rebuild, fresh
+  data verification or full gate ran; stored verdicts remain distinct from the
+  raw-file comparison of the existing server image.
+
+
+### Merge the documentation refresh with accepted 1.4.0 (2026-10-21)
+
+- Change: merged remote commit `447bc4d7` with this documentation/graphic
+  refresh in an isolated checkout, preserving both append-only ledger entries.
+  The README explicitly separates the latest uncommitted working-tree snapshot
+  from the accepted 1.4.0 checkpoint's byte-identical server build.
+- Why: the remote advanced before the docs push. Preserve the release's server
+  variants and version bump without resetting the ongoing shared-tree edits.
+- Decision owner: user requested the update, commit and push.
+- Verification: the only merge conflict was the ledger append; both complete
+  entries remain. No native source or metadata was edited to resolve the merge.
+  The release's existing native evidence is retained, not rerun by this refresh.
+  The merged tree passes 32 selected tests and three subtests; scoped
+  whitespace checks pass.
+
 ## 2026-10-21 round 8: NEAR conversions, big-body reconstructions, extent repairs
 
 Change: promoted 3526 RELOC and 283 EXACT GOLDTL rows (matched
@@ -810,38 +914,6 @@ and a batch of 220-320 byte client rows produced no byte matches:
 Verified: `rebrew status` RELOC 3520, EXACT 285, NEAR 80, SIZE_MISMATCH 888,
 STUB 318, 5123 rows / 5092 covered; server.dll still differs in 8 bytes.
 
-
-### Refresh docs and charts after reconstruction/relink changes (2026-10-21)
-
-- Change: updated README code/data tables and all three graphics from one fresh
-  status report, plus a current tracker snapshot, handoff and client build notes.
-  Replaced the obsolete current byte-identical-server claim with the measured
-  eight-byte regression; unavailable client raw images now display N/A.
-  The chart's differing-file caption is target-neutral rather than calling
-  every differing binary a comparison scaffold. Fixed the singular work-item
-  caption now visible for the server's one remaining function mismatch.
-- Why: user requested updated docs/graphs, commits and a push. Later rebuilds
-  changed the existing images and inventory; historical build scores cannot
-  describe missing or changed current artifacts.
-- Evidence: `.scratch/readme-refresh-2026-10-21-latest/status.json`, timestamp
-  2026-10-21 12:02 UTC, SHA-256
-  `7e95d2852534d9a03bb7f3b835707e723e896ab5d0170dd0bf869cc132d597c5`.
-  Server: 250/251 C matches, 141,316/141,382 accounted code bytes, and
-  286,712/286,720 raw-file bytes equal. GoldTL: 3,805/5,123 C matches (74.2%),
-  48.4% code accounting. Gold: 2,466/4,592 C matches (53.7%), 22.8% code
-  accounting. Both configured client executables were absent. Stored
-  initialized-data byte verification remains server 100.0%, clients 0.0%.
-- Decision owner: user authorized this refresh, commit and push. Preserve
-  concurrent source, inventory, metadata and unrelated documentation changes;
-  only the new tracker snapshot and this ledger entry are staged from the two
-  already-modified documents.
-- Verification: 32 selected tests and 3 subtests pass, including missing-image
-  handling and the revised differing-file label. Ruff, XML parsing, report/map/
-  table reconciliation and scoped whitespace checks pass. Rendered the updated
-  code and data charts to PNG and checked the layout. No native rebuild, fresh
-  data verification or full gate ran; stored verdicts remain distinct from the
-  raw-file comparison of the existing server image.
-
 ## 2026-10-21 round 25: automated matching attempts, layout gap identified
 
 Change: no STATUS change. Evaluated the automated matching engine as an
@@ -1060,3 +1132,99 @@ translation-unit context.
 Verified: agents' measurements under .scratch/mercury14/ and .scratch/tu/; no
 src or metadata writes; server.dll unchanged at 8 differing bytes; GOLDTL
 matched count unchanged at 3804.
+
+## 2026-10-21 round 35: lint brought to zero errors
+
+Change: cleaned lint from 1 error / 111 warnings to 0 errors / 50 warnings, and
+tried two more source forms for the last server function.
+- BLOCKER text set on 59 STUB files through `rebrew blocker set`, all describing
+  the same honest class: partial reconstruction parked on MSVC 6 codegen deltas,
+  with the delegated wave reports as evidence. W005 count is now 0.
+- Fixed two misplaced ADDRESS anchors that produced duplicate/conflicting
+  bindings: src/GOLDTL.fcn_004dcf50.c had its anchor above the extern block
+  (lint E013 duplicate VA), src/fcn_0058f6a0.c likewise (fixed in round 28);
+  removed the stray src/fcn_0045c554.c fragment file and its MISSING_SIZE row
+  with `rebrew orphans drop`.
+- Last-8-byte attempts: bounds checked on the expression with assignment only in
+  the return (32/69) and assignment inside the condition (55/66); neither hits
+  the reference 66/66.
+Reason: the goal requires zero lint errors/warnings and correct metadata.
+Verified: `rebrew lint --json` returns errors 0, warnings 50 (26 W029, 13 W027,
+7 W016, 3 W031, 2 W020, 1 W021). `rebrew status`: RELOC 3519, EXACT 285,
+NEAR 81, SIZE_MISMATCH 904, STUB 297, 5122 rows / 5091 covered; server.dll still
+8 differing bytes.
+
+## 2026-10-21 round 36: lint down to 16 warnings
+
+Change: cleaned lint from 50 warnings to 16 with tooling-backed writes only.
+- `rebrew lint --fix` removed 26 redundant per-function CFLAGS (W029) from
+  GOLDTL and SERVER rows whose flag string equalled the inherited `/O2 /Gd`.
+- `rebrew data set --section` backfilled six data rows missing SECTION metadata
+  in GOLDTL.fcn_00415510.c: 0x0067756c = .data; 0x006628bc, 0x006628cc,
+  0x00662a2c, 0x00662a40, 0x00662a44 = .rdata (from the reference section
+  table).
+- `rebrew source document-assembly` recorded the reviewed evidence for the two
+  inline-asm helpers fill0 and copy0 in src/GOLDTL.fcn_004b3010.c, citing the
+  probe results and the RELOC sibling (src/GOLDTL.fcn_004b24c0.c lines 40/65)
+  plus the decision in .scratch/wave2/DECISIONS.md.
+Reason: the goal requires zero lint errors and warnings; the remaining W027
+long lines cannot be safely wrapped because several files use `__LINE__`, which
+would change codegen.
+Verified: `rebrew lint --json` errors 0, warnings 16 (13 W027, 3 W031).
+`rebrew status` unchanged (RELOC 3519, EXACT 285, NEAR 81, SIZE_MISMATCH 904,
+STUB 297, matched 74.2 percent); server.dll still 8 differing bytes.
+
+## 2026-10-21 round 37: lint clean on all three targets
+
+Change: finished the lint cleanup. `rebrew lint --all-targets` now reports
+0 errors, 0 warnings, 7341/7341 files passing for server.dll,
+Europa1400Gold_TL.exe and Europa1400Gold.exe.
+- Rebound the three stale GOLDTL types (d3.object-animation-frame,
+  d3.object-animation-flags, event.validator_view) and the three stale GOLD
+  types (event.validator_view, dd.device_record, dd.driver_record) through
+  `rebrew types bind` with unchanged sizes, native sizes and modeled offsets,
+  and evidence text recording that only source/header hashes changed.
+- Wrapped the 13 over-long lines at `&&`/`||`/`,` boundaries. Only files without
+  `__LINE__` were touched, so codegen cannot shift; each touched file was
+  re-tested and kept its previous status.
+Reason: the objective requires zero lint errors and warnings on the delivered
+tree.
+Verified: `rebrew lint --all-targets --json` -> server.dll 0/0, GOLDTL 0/0,
+GOLD 0/0 (7341/7341 each). `rebrew status` unchanged (RELOC 3519, EXACT 285,
+NEAR 81, SIZE_MISMATCH 904, STUB 297, matched 74.2 percent); server.dll still
+differs from the reference in 8 bytes.
+
+
+## 2026-10-21 — integrate reviewed reconstruction work on main
+
+Change: merge the preserved reconstruction draft with the accepted 1.4.0 server
+variants and the latest published documentation. Refresh README, tracker,
+handoff and the code, function-map and data charts from one integrated status
+report. Preserve the accepted server code-generator contexts and function
+bodies rather than the draft's eight-byte regression.
+
+Reason and decision: the maintainer requested all reviewed work on main and a
+push. Backups preserve the complete original draft and late edits. Generated
+client layout byte dumps, 281 new `_dpad_` declarations, and late extern-to-storage
+conversions without an established owner are excluded from published history.
+No copied data is used to earn a match. Local backup refs and detailed exclusion
+lists are in `.scratch/integrate-all-20261021/`.
+
+Review corrections: four purported line-wrap edits changed boolean operators to
+bitwise operators. Their merged replacements preserve the original tokens.
+Remove the stray 0x45c554 fragment and its managed row; carry reviewed blocker,
+section and type updates through the metadata owners. The round-36 claim that a
+failed C search establishes original assembly is not accepted: its two new
+waivers are excluded. Earlier round-37 lint-clean and eight-byte-gap statements
+are checkpoint records, superseded by this integration's measurements.
+
+Verification: fresh unshare server compile and raw-link verification pass
+316/316 functions, 652/652 compared data symbols, all 251 function placements,
+and complete file, section, export, import, relocation, resource, header and
+layout checks. The 286720-byte DLL has SHA-256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+Project tests: 33 passed and 3 subtests passed. Nine formatted caller bodies
+compile across their selected targets; they retain mismatch verdicts and earn
+no recovery credit. Integration-worktree lint has zero errors, with 2 server,
+27 GoldTL and 23 Gold warnings; stale context/guidance and two unsupported
+assembly helpers remain. Client links and the full gate were not rerun.

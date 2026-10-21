@@ -130,13 +130,21 @@ int __cdecl ahm_CheckFlag(void* a)
 	if (*(int*) ((char*) a + 0x1cc) & 4) {
 		rec = *(char**) ((char*) a + 0x16c);
 		if (rec != 0) {
+#if defined(REBREW_SERVER)
+			if (*(unsigned char*) (g_entity_type_table +
+			    *(unsigned char*) rec + *(unsigned char*) rec * 0x24c) == 0x1e)
+				return *(int*) (rec + 0x65) != 0;
+#else
 			return (*(unsigned char*) (g_entity_type_table +
 			    *(unsigned char*) rec + *(unsigned char*) rec * 0x24c) == 0x1e) ?
 			    (*(int*) (rec + 0x65) != 0) : 0;
+#endif
 		}
 	}
 	return 0;
 }
+/* Preserve subsequent client diagnostic line numbers. */
+#line 140
 
 /* Client-only recipe helpers (the Gold T&L client's alchemistry order).  No
  * server function calls them, so /OPT:REF discards them; their absolute fixups

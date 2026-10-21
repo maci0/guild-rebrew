@@ -5,23 +5,29 @@ Read [current work](TODO.md), [the objective](../goal.md), then the
 counts. The project default target is GoldTL; name `server.dll` for the server.
 Historical commands and measurements are in [goal history](goal-history.md).
 
-## Current status snapshot (2026-10-21 12:02 UTC)
+## Current status snapshot (2026-10-21 14:13 UTC)
 
-The current server raw build differs by **8 bytes**; both configured client
-executables are absent after failed relinks. Earlier byte-identical server and
-successful client builds below are historical checkpoints, not current images.
+The integrated server is freshly built and byte-identical: SHA-256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+Verification passes 316/316 functions and all 652 compared data symbols, with
+complete PE, import, relocation, layout and function-placement agreement.
+All 33 project tests and 3 subtests pass.
+
 The [README charts](../README.md#reconstruction-status) and
-[tracker snapshot](TODO.md#status-snapshot-2026-10-21-1202-utc) report the current
-stored verdicts. Repair the links and run fresh image checks and the gate before
-claiming whole-file identity. This refresh itself performs no compilation.
+[tracker snapshot](TODO.md#status-snapshot-2026-10-21-1202-utc) use the integrated
+metadata. Client links and the complete gate remain pending; no older scaffold
+image is reused for current raw-file scores. The earlier pause and resume notes
+below are historical. Reviewed work is merged; unsafe generated padding and
+copied-data experiments remain in local backups. Receipt directory:
+`.scratch/integrate-all-20261021/`.
 
 ## Paused state before the 2026-10-19 resume
 
 The user requested that delegated work finish and reconstruction stop. All
 owned tasks are terminal; no owned compiler or emulation process remains.
-Source, inventory and managed metadata changes for the shared `d2_ShowTxt`
-integration remain uncommitted and unpushed. Documentation housekeeping does
-not resume the objective.
+At that checkpoint, source, inventory and managed metadata changes for the
+shared `d2_ShowTxt` integration were uncommitted. The integration above
+supersedes that Git state.
 
 The Gold/TL creators measure RELOC at 525/518 bytes. Scoped verification passes
 98 of 102 contexts; the other four retain existing size mismatches, with no

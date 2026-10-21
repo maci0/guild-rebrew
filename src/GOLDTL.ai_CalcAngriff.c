@@ -178,7 +178,8 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 				if ((int) rec >= 0x85a205) {
 					break;
 				}
-				if (*(short*) (rec - 0x165) != -1 && *(int*) (rec + 7) == *(int*) (a1 + 0x16c) && *(unsigned char*) rec != 0 && *(int*) (rec + 0x17) == 0 && *(int*) (rec + 0x1f) != 0 && *(int*) (*(int*) (rec + 0x1f) + 0x2c) == *(int*) (*(int*) (rec + 7) + 1)) {
+				if (*(short*) (rec - 0x165) != -1 && *(int*) (rec + 7) == *(int*) (a1 + 0x16c) && *(unsigned char*) rec != 0 && *(int*) (rec + 0x17) == 0 && *(int*) (rec + 0x1f) != 0 &&
+				    *(int*) (*(int*) (rec + 0x1f) + 0x2c) == *(int*) (*(int*) (rec + 7) + 1)) {
 					*(int*) (msg + 0x38 + i * 4) = *(int*) (rec - 0x161);
 					i++;
 				}
@@ -235,7 +236,8 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 			if ((int) rec >= 0x85a205) {
 				break;
 			}
-			if (*(short*) (rec - 0x165) != -1 && *(int*) (rec + 7) == *(int*) (a1 + 0x16c) && *(unsigned char*) rec != 0 && *(int*) (rec + 0x17) == 0 && *(int*) (rec + 0x1f) != 0 && *(int*) (*(int*) (rec + 0x1f) + 0x2c) == *(int*) (*(int*) (rec + 7) + 1)) {
+			if (*(short*) (rec - 0x165) != -1 && *(int*) (rec + 7) == *(int*) (a1 + 0x16c) && *(unsigned char*) rec != 0 && *(int*) (rec + 0x17) == 0 && *(int*) (rec + 0x1f) != 0 &&
+			    *(int*) (*(int*) (rec + 0x1f) + 0x2c) == *(int*) (*(int*) (rec + 7) + 1)) {
 				*(int*) (msg + 0x38 + i * 4) = *(int*) (rec - 0x161);
 				i++;
 			}

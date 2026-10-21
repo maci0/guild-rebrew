@@ -1185,52 +1185,68 @@ int __cdecl fcn_005037c0(int a, unsigned short b, int c);
 /* ADDRESS: SERVER 0x10011940 */
 int __cdecl gv_MoveSlotEntry(void* a)
 {
-	void* entity;
+	void* cmd;
 	void* rec2;
 	void* slot;
-	void* found;
 	void* found2;
+	void* found;
 	int* src_entry;
 	int* dst_entry;
 	int* dst_end;
 	int* src_end;
 	int src_count;
+	int clear;
+	int count;
+	int i;
 
-	gm_ResolveEntityById(0, 0, &entity, *(int*) a);
-	if (entity == 0)
+	cmd = a;
+	gm_ResolveEntityById(0, 0, &a, *(int*) a);
+	if (a == 0)
 		return -6;
-	gm_ResolveEntityById(&rec2, 0, 0, *(int*) ((char*) a + 4));
+	gm_ResolveEntityById(&rec2, 0, 0, *(int*) ((char*) cmd + 4));
+	/* The three -1 exits share one epilogue in the target (0x10011bd8),
+	 * reached by a far jump from each guard. */
 	if (rec2 == 0 || *(unsigned short*) ((char*) rec2 + 0x27) == 0xffff ||
-	    (char*) g_slot_table + (*(unsigned short*) ((char*) rec2 + 0x27)) * 540 ==
-	        (char*) g_entity_table_end)
+	    (unsigned int) g_slot_table + (*(unsigned short*) ((char*) rec2 + 0x27) & 0xffff) * 540 ==
+	        g_entity_table_end)
 		return -1;
-	if (g_entity_type_table[*(unsigned char*) rec2 + *(unsigned char*) rec2 * 588] != 0x1d)
+	if (*(unsigned char*) (g_entity_type_table + *(unsigned char*) rec2 +
+	    *(unsigned char*) rec2 * 588) != 0x1d)
 		return -2;
 	slot = *(void**) ((char*) rec2 + 0x65);
 	if (slot == 0)
 		return -3;
-	if (!gv_CheckSlotActive(slot, *(int*) ((char*) a + 8)))
+	if (!gv_CheckSlotActive(slot, *(int*) ((char*) cmd + 8)))
 		return -4;
-	found = gv_GetSlotEntry(slot, *(int*) ((char*) a + 8),
-	                     *(unsigned char*) ((char*) a + 0xc));
+	found = gv_GetSlotEntry(slot, *(int*) ((char*) cmd + 8),
+	                     *(unsigned char*) ((char*) cmd + 0xc));
+	/* One -7 epilogue in the target at 0x10011a7b, shared by all three
+	 * guards. */
 	if (found == 0)
 		goto fail7;
-	if (*(unsigned short*) ((char*) found + 8) != *(unsigned short*) ((char*) entity + 0x50))
+	if (*(unsigned short*) ((char*) found + 8) != *(unsigned short*) ((char*) a + 0x50))
 		goto fail7;
 
 	src_entry = *(int**) ((char*) found + 0x10);
-	src_count = g_worker_entry_count[*(int*) ((char*) a + 8)];
-	found2 = FindSlotEntryFiltered(entity, rec2, 0, (void*) gv_eval_SlotFrei,
-	                               *(int*) ((char*) a + 0xd));
+	/* The source bound is computed before the call (0x10011a4d) and spilled
+	 * to [esp+0x10]. */
+	src_count = g_worker_entry_count[*(int*) ((char*) cmd + 8)];
+	found2 = FindSlotEntryFiltered(a, rec2, 0, (void*) gv_eval_SlotFrei,
+	                               *(int*) ((char*) cmd + 0xd));
 	if (found2 == 0)
 		goto fail7;
 	dst_entry = *(int**) ((char*) found2 + 0x10);
-	dst_end = dst_entry + g_worker_entry_count[*(int*) ((char*) a + 0xd)] * 17;
+	dst_end = dst_entry + g_worker_entry_count[*(int*) ((char*) cmd + 0xd)] * 17;
 	src_end = src_entry + src_count * 17;
 
 	if (dst_entry < dst_end) {
 		for (;;) {
 			if (*dst_entry == -1) {
+				/* Skip occupied source entries by walking src, not dst;
+				 * both bounds are the ends, not each other (0x10011ac0).
+				 * The copy lives INSIDE the skip loop, exited by `break`:
+				 * that is what emits the target's bare `jmp 0x10011ac4`
+				 * back edge instead of a duplicated `cmp [ebx],-1`/`je`. */
 				while (src_entry < src_end) {
 					if (*src_entry != -1) {
 						memcpy(dst_entry, src_entry, 0x44);
@@ -1251,28 +1267,43 @@ int __cdecl gv_MoveSlotEntry(void* a)
 	}
 done:
 
+	/* The move clears the source entry (found) and fills the destination
+	 * (found2): 0x10011b0d-0x10011b3e. */
 	*(int*) ((char*) found2 + 4) = *(int*) ((char*) found + 4);
 	*(int*) ((char*) found + 4) = -1;
 	*(unsigned short*) ((char*) found2 + 8) = *(unsigned short*) ((char*) found + 8);
 	*(unsigned short*) ((char*) found + 8) = 0xffff;
+	/* 0xff is materialized once in a 32-bit register (0x10011b32) and reused
+	 * by both the byte and the word store. */
+	clear = 0xff;
 	*(unsigned short*) ((char*) found2 + 0xa) = (unsigned short) (g_current_year + 0xa);
-	*(unsigned char*) ((char*) found2 + 0xc) = 0xff;
-	*(unsigned short*) ((char*) found + 0xa) = 0xff;
-	*(int*) ((char*) a + 0x15) = g_next_object_id;
+	*(unsigned char*) ((char*) found2 + 0xc) = (unsigned char) clear;
+	*(unsigned short*) ((char*) found + 0xa) = (unsigned short) clear;
+	*(int*) ((char*) cmd + 0x15) = g_next_object_id;
 
-	if (*(int*) ((char*) a + 0x11) > 0) {
-		gm_SubObjectNoKill(*(int*) ((char*) entity + 4),
-		             (unsigned short) g_entity_slot_table[g_current_season * 189],
-		             *(int*) ((char*) a + 0x11));
-		gm_AddObjekt((&g_entity_id_field)[*(unsigned short*) ((char*) rec2 + 0x27) * 135],
-		             (unsigned short) g_entity_slot_table[g_current_season * 189],
-		             (int) ((float) *(int*) ((char*) a + 0x11) *
-		                    g_output_share[*(int*) ((char*) a + 0xd)]));
+	count = *(int*) ((char*) cmd + 0x11);
+	if (count > 0) {
+		gm_SubObjectNoKill(*(int*) ((char*) a + 4),
+		                   (unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
+		                                                       g_current_season * 756),
+		                   count);
+		/* fild re-reads the field (0x10011b7c) instead of the register, and
+		 * the conversion is an implicit cast, not a pushed double. */
+		i = (int) ((float) *(int*) ((char*) cmd + 0x11) *
+		           g_output_share[*(int*) ((char*) cmd + 0xd)]);
+		gm_AddObjekt(*(int*) ((int) g_slot_table + 4 +
+		                                 (unsigned short) *(unsigned short*) ((char*) rec2 + 0x27) * 540),
+		                         (unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
+		                                                             g_current_season * 756),
+		                         i);
 	}
 	return 0;
 
 fail7:
 	return -7;
+
+fail1:
+	return -1;
 }
 #else
 int __cdecl gv_MoveSlotEntry(void* a)
@@ -1374,6 +1405,8 @@ fail7:
 	return -7;
 }
 #endif
+/* Preserve client __LINE__ diagnostics after the server-only body. */
+#line 1282
 
 
 #include "rebrew_types.h"

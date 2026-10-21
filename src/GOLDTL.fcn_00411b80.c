@@ -151,7 +151,9 @@ label_411e58:
 		}
 		*(int*) 0x6b5ca0 = 0;
 	}
-	if ((*(int*) 0x14ce92c != *(int*) 0x14cf90c || *(int*) 0x14ce930 != *(int*) 0x14cf910 || *(int*) 0x14ce934 != *(int*) 0x14cf914 || *(int*) 0x14ce93c != *(int*) 0x14cf91c || armed != *(int*) 0x14cf920 || *(int*) 0x14ce944 != *(int*) 0x14cf924 || pressed != *(int*) 0x14cf928 || *(int*) 0x14cf930 || *(int*) 0x14ce954 != *(int*) 0x14cf934 || timedout != *(int*) 0x14cf938 || *(int*) 0x14ce964 != *(int*) 0x14cf944 || *(int*) 0x14ce960 != *(int*) 0x14cf940) && !*(int*) 0x14cf2fc) {
+	if ((*(int*) 0x14ce92c != *(int*) 0x14cf90c || *(int*) 0x14ce930 != *(int*) 0x14cf910 || *(int*) 0x14ce934 != *(int*) 0x14cf914 || *(int*) 0x14ce93c != *(int*) 0x14cf91c ||
+	    armed != *(int*) 0x14cf920 || *(int*) 0x14ce944 != *(int*) 0x14cf924 || pressed != *(int*) 0x14cf928 || *(int*) 0x14cf930 || *(int*) 0x14ce954 != *(int*) 0x14cf934 ||
+	    timedout != *(int*) 0x14cf938 || *(int*) 0x14ce964 != *(int*) 0x14cf944 || *(int*) 0x14ce960 != *(int*) 0x14cf940) && !*(int*) 0x14cf2fc) {
 		probe = (int*) 0x14cf2fc;
 		armed = 0x1f;
 		do {

@@ -251,7 +251,8 @@ attack:
 			}
 			*(int*) (msg + 0x6c) = *(int*) (query + 2);
 			for (p = g_7f4ca0 + 0x165; (int) p < 0x85a205; p += 0x21c) {
-				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (e + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 && *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
+				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (e + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 &&
+				    *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
 					*(int*) (msg + 0x58) = *(int*) (p - 0x161);
 					cnt++;
 				}
@@ -298,7 +299,8 @@ send48:
 				if ((int) p >= 0x85a205) {
 					break;
 				}
-				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (e + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 && *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
+				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (e + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 &&
+				    *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
 					*(int*) (msg + 0x38 + found * 4) = *(int*) (p - 0x161);
 					found++;
 					scanned++;

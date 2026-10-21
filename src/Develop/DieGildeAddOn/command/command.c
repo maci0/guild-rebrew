@@ -4913,21 +4913,21 @@ int __cdecl cm_DispatchMoveSlot(void* cmd, char* result_buf)
 extern int g_14cbca0;
 extern int g_699364;
 
-#ifdef REBREW_SERVER
+#if defined(REBREW_SERVER)
 int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 {
-	int id;
-	int rnd;
+	int val;
+	uint alloc_id;
+
+	(void) result;
 
 	*(int*) (cmd + 0x14) = g_next_object_id;
-	rnd = rand();
-	*(int*) (cmd + 0x10) = rnd;
-	srv_SeedRandom(rnd);
-	id = gv_ExAllocGraveyardWorker((void*) (cmd + 0x10));
-	if (id == 0xffff) {
-		return -1;
-	}
-	return 0;
+	val = rand();
+	*(int*) (cmd + 0x10) = val;
+	srv_SeedRandom(val);
+	alloc_id = gv_ExAllocGraveyardWorker((void*) (cmd + 0x10));
+	alloc_id = alloc_id - 0xffff;
+	return (alloc_id != 0) - 1;
 }
 #else
 int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
@@ -4962,21 +4962,21 @@ int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 /* Execution handler: allocates an alchemist entity by delegating
  * to ahm_ExAllocAlchemist. */
 
-#ifdef REBREW_SERVER
+#if defined(REBREW_SERVER)
 int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
 {
-	int id;
-	int rnd;
+	uint alloc_id;
+	int val;
+
+	(void) result;
 
 	*(int*) (cmd + 0x14) = g_next_object_id;
-	rnd = rand();
-	*(int*) (cmd + 0x10) = rnd;
-	srv_SeedRandom(rnd);
-	id = ahm_ExAllocAlchemist((void*) (cmd + 0x10));
-	if (id == 0xffff) {
-		return -1;
-	}
-	return 0;
+	val = rand();
+	*(int*) (cmd + 0x10) = val;
+	srv_SeedRandom(val);
+	alloc_id = ahm_ExAllocAlchemist((void*) (cmd + 0x10));
+	alloc_id = alloc_id - 0xffff;
+	return (alloc_id != 0) - 1;
 }
 #else
 int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
@@ -5062,11 +5062,15 @@ int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 	char* src;
 	int flag_ok;
 
+#if defined(REBREW_SERVER)
+	(void) result;
+#else
 	if (result != 0) {
 		result[0] = 2;
 		result[1] = 0;
 		*(int*) (result + 6) = 0;
 	}
+#endif
 	record = (char*) gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
 	if (record == (char*) 0) {
 		return -1;

@@ -138,7 +138,8 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 							d += 1;
 						} while (*(d - 1) != 0);
 					}
-					v6 = (char*)fcn_0045c5b0((void*)(*(int*)(v26 + 0x200) + v10), v27, (((((unsigned int)v31 << 4) | (unsigned int)v33) << 1) | (unsigned int)v32) << 1 | 1, ((unsigned int)v23 << 4) | (unsigned int)v24[0]);
+					v6 = (char*)fcn_0045c5b0((void*)(*(int*)(v26 + 0x200) + v10), v27, (((((unsigned int)v31 << 4) | (unsigned int)v33) << 1) | (unsigned int)v32) << 1 | 1,
+					    ((unsigned int)v23 << 4) | (unsigned int)v24[0]);
 				} else if (v16[0] != 0) {
 					if (!v3) {
 						s = v16;
@@ -149,7 +150,8 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 							d += 1;
 						} while (*(d - 1) != 0);
 					}
-					v6 = (char*)fcn_0045c5b0((void*)(*(int*)(v26 + 0x200) + v10), v27, (((((unsigned int)v31 << 4) | (unsigned int)v33) << 1) | (unsigned int)v32) << 1, ((unsigned int)v23 << 4) | (unsigned int)v24[0]);
+					v6 = (char*)fcn_0045c5b0((void*)(*(int*)(v26 + 0x200) + v10), v27, (((((unsigned int)v31 << 4) | (unsigned int)v33) << 1) | (unsigned int)v32) << 1,
+					    ((unsigned int)v23 << 4) | (unsigned int)v24[0]);
 				} else if ((v18[0] != 0) && (!v3)) {
 					s = v18;
 					d = (char*)(*(int*)(v26 + 0x200) + v10);

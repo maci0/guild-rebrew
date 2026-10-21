@@ -242,13 +242,12 @@ int __cdecl fcn_005d78e0(char*, char*);
 
 /* arg1 = packet (byte +2 kind, +0x166, +0x1c8 flags), arg2 = player record
  * (state +0, payload +0x14, entity +0x21c). */
-#ifdef REBREW_SERVER
-/* ADDRESS: SERVER 0x10014af0 */
+#if defined(REBREW_SERVER)
 int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 {
 	int result;
-	char* dst;
-	unsigned int* conn;
+	unsigned char* conn;
+	unsigned char* rec;
 
 	if ((*player & 0x6000) != 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x31d, "invalid client state", 1);
@@ -256,27 +255,29 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 		result = srv_PutConnSCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
-	if (*(int*) ((char*) player + 4) != *(int*) (msg + 0x14)) {
+	rec = msg + 0x14;
+	if (*(int*) (player + 1) != *(int*) rec) {
 		*msg = 2;
 		result = srv_PutConnSCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
-	dst = (char*) msg + 0x14;
-	for (conn = (unsigned int*) g_connections; (int) conn < (int) g_connections + 0x1321320; conn = (unsigned int*) ((char*) conn + 0x264264)) {
-		if ((*conn & 1) == 0) continue;
-		if ((*conn & 0x200) == 0) continue;
-		if (conn == player) continue;
-		if (conn[0x264218 / 4] == *(int*) (dst + 0xc)) {
-			*(int*) (dst + 0xc) = player[0x264218 / 4];
+	for (conn = (unsigned char*) g_connections; (int) conn < (int) g_connections + 0x1321320;
+	     conn += 0x264264) {
+		if ((*(unsigned int*) conn & 1) == 0) continue;
+		if ((*(unsigned int*) conn & 0x200) == 0) continue;
+		if (conn == (unsigned char*) player) continue;
+		if (*(int*) (conn + 0x264218) == *(int*) (rec + 0xc)) {
+			*(int*) (rec + 0xc) = *(int*) ((char*) player + 0x264218);
 			break;
 		}
 	}
-	*(int*) (dst + 4) = player[0x264210 / 4];
-	memcpy((char*) player + 0x26420c, dst, 0x57);
-	for (conn = (unsigned int*) g_connections; (int) conn < (int) g_connections + 0x1321320; conn = (unsigned int*) ((char*) conn + 0x264264)) {
-		if ((*conn & 1) == 0) continue;
-		if ((*conn & 0x200) == 0) continue;
-		result = srv_PutConnSCommand(conn, msg);
+	*(int*) (rec + 4) = *(int*) ((char*) player + 0x264210);
+	memcpy((char*) player + 0x26420c, rec, 0x57);
+	for (conn = (unsigned char*) g_connections; (int) conn < (int) g_connections + 0x1321320;
+	     conn += 0x264264) {
+		if ((*(unsigned int*) conn & 1) == 0) continue;
+		if ((*(unsigned int*) conn & 0x200) == 0) continue;
+		result = srv_PutConnSCommand((unsigned int*) conn, msg);
 		if (result == -1) return -1;
 	}
 	return 0;
