@@ -1,7 +1,7 @@
 """Write the linked scaffold manifest from an MSVC map.
 
 The map is the link result. A symbol is scaffold storage when its object
-is ``symbol_stubs.c.obj``. ``WinMain`` and a renamed function that the map
+is ``symbol_stubs.c.obj`` or ``abi_stubs.c.obj``. ``WinMain`` and a renamed function that the map
 attributes to another object are real definitions, not scaffold.
 
     uv run python stubs/linked_manifest.py \
@@ -34,7 +34,8 @@ def main() -> None:
         raise SystemExit("usage: linked_manifest.py MAP OUT.json")
     map_path = Path(sys.argv[1])
     rows = publics(map_path.read_text(encoding="utf-8", errors="replace"))
-    stub = sorted(sym for sym, obj in rows if obj == "symbol_stubs.c.obj")
+    stub_objects = {"symbol_stubs.c.obj", "abi_stubs.c.obj"}
+    stub = sorted(sym for sym, obj in rows if obj in stub_objects)
     real = {
         sym: obj
         for sym, obj in rows
@@ -45,6 +46,7 @@ def main() -> None:
     doc = {
         "map": str(map_path),
         "stub_object": "symbol_stubs.c.obj",
+        "stub_objects": sorted({obj for _, obj in rows if obj in stub_objects}),
         "stub_symbol_count": len(stub),
         "checked_symbols": real,
         "stub_symbols": stub,

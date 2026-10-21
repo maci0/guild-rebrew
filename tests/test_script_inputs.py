@@ -1,5 +1,6 @@
 """Retained recipes use canonical readers without changing allocation policy."""
 
+import json
 import runpy
 from pathlib import Path
 
@@ -47,3 +48,21 @@ def test_manifest_keeps_project_and_archive_origins() -> None:
         ("_WinMain@16", "GOLD.main.c.obj"),
         ("_IID_IDirect3D8", "d3dx8:init.obj"),
     ]
+
+
+def test_manifest_counts_separate_abi_placeholders(tmp_path: Path, monkeypatch) -> None:
+    map_path = tmp_path / "client.map"
+    map_path.write_text(
+        " Address         Publics by Value              Rva+Base Lib:Object\n"
+        " 0001:00000000 _stub 00401000 f symbol_stubs.c.obj\n"
+        " 0001:00000010 @variant@8 00401010 f abi_stubs.c.obj\n"
+        " 0001:00000020 _WinMain@16 00401020 f GOLD.main.c.obj\n"
+    )
+    output = tmp_path / "symbols.json"
+    monkeypatch.setattr("sys.argv", ["linked_manifest.py", str(map_path), str(output)])
+    runpy.run_path(ROOT / "stubs/linked_manifest.py", run_name="__main__")
+    document = json.loads(output.read_text())
+    assert document["stub_symbol_count"] == 2
+    assert document["stub_symbols"] == ["@variant@8", "_stub"]
+    assert document["stub_objects"] == ["abi_stubs.c.obj", "symbol_stubs.c.obj"]
+    assert document["checked_symbols"]["_WinMain@16"] == "GOLD.main.c.obj"

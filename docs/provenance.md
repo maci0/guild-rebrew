@@ -1261,3 +1261,155 @@ three targets; server has zero warnings, GoldTL and Gold have three each. The
 client warnings are stale type evidence and two unsupported inline-assembly
 helpers. Compiler warnings remain. Full client builds and the full gate were
 not rerun. Receipts: `.scratch/integrate-all-20261021/main-*`.
+
+## 2026-10-21 round 38: server.dll byte-identical, gate passes
+
+Change: no source change in this round; the diagnosis and verification below.
+- Deleted build/server.dll and rebuilt with
+  `cmake --build build --target server_dll --parallel 2`: the result is
+  byte-identical to original/Server/server.dll
+  (sha256 3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1).
+- `scripts/gate.sh` exits 0 with GATE: pass: 316/316 functions, 652/652 data
+  rows, whole-binary file/sections/exports/imports/relocations/rsrc/headers/
+  layout all true, residue 0, raw-link .data 0, wine load and exports OK,
+  code-generator alignment OK for server (plain) and both clients
+  (processor-pack), and lint 7341 passed / 0 errors / 0 warnings.
+- Root cause of the earlier 8-byte difference: the committed SERVER variant of
+  gm_GetEntityTableEntry (src/Develop/DieGildeAddOn/game/spiel.c, VA 0x100184e0)
+  contains a redundant empty bounds guard before the real check. It compiles to
+  RELOC 66/66 and is semantically identical, so the reference bytes are
+  reproduced; the empty guard is not evidenced as the original source shape.
+  That open question is recorded in docs/TODO.md.
+- A `data layout own` run for the clients was reverted completely: it replaced
+  extern declarations with wrongly typed definitions (C2040 in server_stats.c,
+  C2371 in GOLDTL.fcn_0043b550.c) and appended 1.5 MB of unsafe pads. 68 files
+  with only those edits were restored from HEAD, and the four files that also
+  carry later source work had only the inserted definitions removed.
+Verified: sha256 equality, gate8.log, and `rebrew status` for the clients
+(RELOC 3519, EXACT 285, NEAR 81, SIZE_MISMATCH 904, STUB 297, matched 74.2
+percent). Server deliverable is complete; clients remain.
+
+## 2026-10-21 round 39: client verification refresh
+
+Change: no source change; refreshed the client verdicts and ran one more
+delegated wave.
+- `rebrew verify --target Europa1400Gold_TL.exe`: 5122 rows, 3835 byte-matched
+  (3549 RELOC + 286 EXACT; the headline includes 31 library rows), NEAR 81,
+  STUB 278, SIZE_MISMATCH 923, compile errors 0.
+- `rebrew verify --target Europa1400Gold.exe`: 4604 rows, 2507 byte-matched
+  (2313 RELOC + 194 EXACT), NEAR 26, STUB 1852, SIZE_MISMATCH 219, compile
+  errors 0. `status --all-targets`: server.dll 100 percent, GOLDTL 74.2,
+  GOLD 54.2.
+- Mercury wave 17: the two small GOLDTL candidates assigned to the first agent
+  (0x0041a8c3, 0x00423670) are interior fragments of enclosing routines and
+  cannot be self-contained C bodies; parked with no edits. The second agent's
+  pair was still running at round close.
+Reason: keep the client numbers current after the server milestone and test
+small near-miss rows before more structural work.
+Verified: verify JSON receipts in .scratch/lead/verify-{r31,gold-r31}.json,
+status in .scratch/lead/status-r39.json, agent reports in .scratch/mercury15/.
+Server deliverable untouched (byte-identical; gate pass recorded in round 38).
+
+## 2026-10-21 round 40: fragment claims checked, dropped rows restored
+
+Change: no net source change; a row-drop attempt was reverted after native
+evidence contradicted the delegated reports.
+- Mercury wave 18 assigned six small GOLD STUB rows to three agents; all six were
+  parked as interior fragments. Six rows were dropped with `rebrew orphans drop`
+  for GOLD.
+- `rebrew binary xrefs` then showed five of the six are real call targets:
+  0x4076b0 (1 call), 0x47ce20 (7), 0x4cd5e0 (7), 0x403ab0 (3), 0x41e050 (3
+  refs). Only 0x44f760 had no references. The drops were wrong for five rows.
+- Restored all six rows with `rebrew source register`, re-applied inventory sizes
+  with `rebrew test --target Europa1400Gold.exe --size`, recorded STUB verdicts,
+  and set BLOCKER text on each.
+- Lint: all three targets 0 errors / 0 warnings after re-documenting fill0/copy0
+  assembly evidence (stale after the round 38 source revert) and rebinding four
+  stale GOLD types with unchanged sizes and offsets.
+Reason: never drop an inventory row on a fragment claim without native xref
+evidence; a dropped row changes coverage and cannot be restored from metadata
+alone.
+Verified: xrefs JSON above; `rebrew status --target Europa1400Gold.exe` back to
+2507 matched / 54.2 percent / 1853 STUB / coverage 99.9; `rebrew lint
+--all-targets` 0/0 on server.dll, GOLDTL and GOLD.
+
+## 2026-10-22 round 41: fragment scan, rows restored, lint clean
+
+Change: no net verdict change. Scanned the GOLD STUB rows for interior
+fragments and reverted an unsafe row-drop batch.
+- A capstone scan of original/Europa1400Gold.exe (script
+  .scratch/lead/fragment_scan.py) flagged 32 of 1847 STUB rows whose first byte
+  is reached by fall-through or starts mid-instruction. Spot checks at
+  0x0046df7e, 0x005de88a and 0x0046d7c0 confirmed mid-body or misaligned starts.
+- Six of those rows were dropped, but dropping inventory rows on a fragment
+  heuristic is not safe: `binary xrefs` shows callers at five of the addresses.
+  All 32 candidates were restored from their existing files with
+  `rebrew source register`, sized with `rebrew test --size`, recorded as STUB,
+  and given BLOCKER text explaining the fragment dispute. GOLD row count, STUB
+  count (1853) and coverage are back to their prior values.
+- Lint returned to 0 errors / 0 warnings on all three targets after
+  re-documenting fill0/copy0 assembly evidence (the recorded source hash had
+  drifted again).
+Reason: know whether row cleanup can move the client numbers; it cannot, the
+remaining GOLD work is long-tail function reconstruction.
+Verified: rebrew lint --all-targets 0/0 for server.dll, Europa1400Gold_TL.exe,
+Europa1400Gold.exe; status snapshot server 100 percent, GOLDTL 74.2 percent,
+GOLD 54.2 percent; receipts .scratch/lead/gold-frag-candidates.json,
+restore-sizes.json, frag-dropped.txt.
+
+
+## 2026-10-22 — restore linkable Gold and GoldTL comparison builds
+
+Change: include the pending reviewed metadata/type updates on main, regenerate
+both client placeholder TUs from fresh link diagnostics without stub objects,
+and retain recovered providers instead of stale placeholder duplicates. Add the
+separate TL ABI-variant TU and omit the separate fcn_005a6570 stub whose handler
+is already defined by the selected dialog TU. Refresh linked manifests, README,
+tracker, handoff, build guide and all three progress graphics.
+
+Reason and decision: the maintainer requested both EXEs link even with incomplete
+functions/storage so data can be compared. Placeholders stay under stubs/, outside
+recovery accounting, and make no original allocation, ABI or ownership claim.
+No archive was patched, no unresolved/duplicate-symbol link was forced and no
+reference-byte padding or postlink data copy was introduced.
+
+A background fragment-cleanup loop deleted selected source files during the
+build. Its draft was preserved in backup/client-cleanup-20261021, the loop was
+stopped, and providers/identities were restored through the metadata owner APIs.
+The restore payload needed separate identity and fields sections; the corrected
+write was checked against every affected source binding. Honest implementation
+blockers remain. Two attempted assembly waivers based only on unsuccessful C
+searches were cleared; the unsupported helpers remain warnings, not exceptions.
+
+Tooling: fix MSVC fastcall and stale-declaration handling upstream, including a
+clean refusal when conflicting fastcall decorations need separate TUs. Record
+all seven additional TL calling-convention variants in abi_stubs.c. The repair
+is published on Rebrew main at 8bd102e6. Its full suite passes 13074 tests, with
+37 skipped; mypy passes 402 source files and all commit/push hooks pass. A
+host-dependent gzip byte-count assertion exposed by that suite was corrected to
+enforce the actual wire budget; the old measurements remain labeled checkpoints.
+The released project pin still builds the checked-in generated C; regeneration
+requires the upstream generator repair.
+
+Native validation: 9402 current CMake compile recipes run in 63 batches using
+unchanged per-file options and absolute source paths, at most two native tools.
+All 2248 controls match their previous non-CodeView sections and relocations.
+CMake then links both normal targets successfully, without LNK2005, LNK4006,
+LNK4217 or unresolved-symbol errors. The maps record 2871 Gold and 4138 TL
+placeholder symbols, including seven from the additional ABI TU.
+
+Data validation: Gold compares 162 of 321 raw data records: 83 matching,
+30 differing and 49 missing; 159 have no comparable file bytes. TL compares
+191 of 363: 100 matching, 51 differing and 40 missing; 172 are not comparable.
+Both image/data commands exit 1 for the expected scaffold differences. Most
+symbols are displaced and neither client earns an EXACT data placement. These
+raw diagnostics include records omitted from initialized-byte coverage; they
+are not storage-owner or recovered-source evidence.
+
+Server preservation: the raw 286720-byte DLL remains SHA-256
+3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1;
+its data/image check passes all 652 compared symbols and complete PE checks.
+Project tests: 34 passed plus 3 subtests, including ABI-placeholder manifest
+counting. Lint: zero errors for all targets, zero server/Gold warnings, two TL
+inline-assembly warnings. Compiler warnings remain. The full gate and game
+execution were not rerun. Receipts: .scratch/linkable-clients-20261021/.

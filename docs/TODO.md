@@ -2,42 +2,120 @@
 
 <a id="status-snapshot-2026-10-21-1202-utc"></a>
 
-## Status snapshot (2026-10-21 14:13 UTC)
+## Status snapshot (2026-10-21 16:24 UTC)
 
 The [README and charts](../README.md#reconstruction-status) use one
-`rebrew status --all-targets --json` report from the integrated tree.
+`rebrew status --all-targets --json` report from this linked checkpoint.
 
 - **Server:** 251/251 C matches, 100.0% code accounting and all 286,720 raw
-  bytes identical. Fresh verification passes 316/316 functions, 652/652 compared
-  data symbols, function placement and the complete PE comparison.
-- **GoldTL:** 3,804/5,122 C matches (74.2%), 48.4% code accounting.
-  **Gold:** 2,466/4,592 C matches (53.7%), 22.8% code accounting; another 26
-  whole-function assembly matches remain separate from C recovery.
-- Both configured client executables are absent after failed relinks. Their
-  raw-file metric is N/A; older scaffold scores are not reused.
-- Stored initialized-data verification is 100.0% for server and 0.0% for each
-  client. GoldTL has 338 displaced symbols; Gold has 304. [Data metrics](../README.md#data-verification)
-  separate bytes, symbols and EXACT reference-address verdicts.
-- All 33 project tests and 3 subtests pass. The complete gate and client
-  rebuilds have not been rerun. Main-checkout lint has zero errors and
-  zero server warnings. GoldTL and Gold have three warnings each: stale type
-  evidence and, on GoldTL, two unsupported inline-assembly helpers.
+  bytes identical. Its fresh image/data check again passes all 652 compared
+  symbols and the complete PE comparison.
+- **GoldTL:** 3,804/5,122 C matches (74.2%), 48.4% code accounting, 2.0% raw-file
+  agreement. **Gold:** 2,466/4,592 C matches (53.7%), 22.8% accounting, 1.1%
+  raw-file agreement; another 26 whole-function assembly matches stay separate.
+- Both clients now link through CMake with no forced unresolved or duplicate
+  symbols. Raw EXEs and same-build maps are in `build/`. Their placeholders
+  remain outside recovered source: 2871 Gold and 4138 GoldTL symbols. Seven
+  additional calling-convention signatures are in a separate TL stub TU.
+- Fresh data diagnostics: Gold 83 matching / 30 differing / 49 missing, with
+  159 records not file-comparable; TL 100 / 51 / 40, with 172 not comparable.
+  None of the client data placements is EXACT. Stored displacement counts are
+  304 Gold and 339 TL. The [data charts](../README.md#data-verification) distinguish
+  content checks, verified bytes, BSS/views and placement.
+- All 34 project tests and 3 subtests pass. Lint has zero errors for all targets,
+  zero server/Gold warnings and two TL warnings for unsupported inline assembly.
+  Compiler warnings remain; the full gate was not rerun.
+- Rebrew's generic fastcall placeholder bug is fixed on upstream main at
+  [8bd102e6](https://github.com/maci0/rebrew/commit/8bd102e6).
+  Its full suite passes 13074 tests (37 skipped); mypy passes 402 source files.
+  Generated C is checked in; ordinary builds still use the pinned release.
 
-The merged source includes the accepted server variants and reviewed client
-reconstructions. Local backup branches preserve generated padding/byte-copy
-experiments and unproven storage definitions; those are excluded from the
-published integration. Four line-wrap edits that changed boolean operators were
-repaired with identical original tokens. Failed C searches were not accepted as
-new original-assembly evidence. Receipt directory:
-`.scratch/integrate-all-20261021/`.
+A background fragment-cleanup loop deleted selected sources during compilation.
+Its draft was backed up, the loop stopped, and the stub providers and source
+identities restored through metadata owners. Native xrefs and complete extents
+must be reviewed before retiring these entries; no new recovered-body credit
+was awarded. The copied padding/storage experiments remain excluded. Receipt
+folder: `.scratch/linkable-clients-20261021/`.
 
-The [three-binary objective](../goal.md) remains incomplete. The dated notes
-below record earlier checkpoints; their eight-byte server gap and pending-commit
-statements are superseded by this integration.
+The [three-binary objective](../goal.md) remains incomplete. Older notes below
+are dated checkpoints; missing-client-image and pending-commit statements are
+superseded by this linked comparison checkpoint.
 
-## Live state (2026-10-21, round 34)
+## Live state (2026-10-22, round 41)
 
 Historical round record; use the snapshot above for current results.
+
+- Round 41: measured how many GOLD STUB rows are interior fragments. A
+  capstone scan of the reference .text flagged 32 of 1847 stub rows whose first
+  byte is entered by fall-through or mid-instruction (evidence: scan script
+  .scratch/lead/fragment_scan.py). Probe drops showed the fragment handling needs
+  care: six rows were dropped, then restored with `rebrew source register` +
+  `rebrew test --size` and given BLOCKER text; all 32 candidates are back as
+  STUB rows with their inventory sizes and blockers. GOLD STUB count and
+  coverage are unchanged.
+- Conclusion: fragment noise is small (32 candidates), so the 1853 GOLD STUB
+  rows are mostly genuine standalone functions that need real bodies. The path
+  to GOLD byte identity is long-tail implementation, not row cleanup.
+- Lint is back to 0 errors / 0 warnings on all three targets after re-documenting
+  fill0/copy0 assembly evidence (the source hash drifted again) and setting the
+  32 restored BLOCKER texts.
+- Snapshot: server.dll 100 percent EXACT; GOLDTL 74.2 percent (RELOC 3519,
+  EXACT 285, STUB 297); GOLD 54.2 percent (RELOC 2298, EXACT 194, STUB 1853).
+
+- Round 40: tested whether small GOLD STUB rows are interior fragments. Three
+  delegated agents parked all six assigned rows as fragments, so six GOLD rows
+  were dropped, then `rebrew binary xrefs` showed five of the six are real call
+  targets in the reference (0x4076b0, 0x47ce20, 0x4cd5e0, 0x403ab0, 0x41e050),
+  not fragments. All six rows were restored with `rebrew source register`, the
+  inventory sizes re-applied with `rebrew test --size` (STUB verdicts), and
+  BLOCKER text set. 0x44f760 has no xrefs and remains the only candidate that
+  might not be a function entry.
+- Lesson recorded: a parked "interior fragment" claim must be checked against
+  native xrefs before any row is dropped; dropping inventory rows changes the
+  coverage denominator and is not reversible through metadata alone.
+- Lint refreshed back to 0 errors / 0 warnings on all three targets after
+  re-documenting the fill0/copy0 assembly evidence (their source hash changed in
+  the round 38 revert) and rebinding four stale GOLD type entries.
+- GOLD state unchanged: 2507 matched (54.2 percent), 1853 STUB, coverage 99.9.
+
+- Round 39: re-verified both clients. GOLDTL: 5122 rows, 3835 byte-matched
+  (3549 RELOC + 286 EXACT; 31 library rows included in the 3835 headline),
+  NEAR 81, STUB 278, SIZE_MISMATCH 923, compile errors 0. GOLD: 4604 rows,
+  2507 byte-matched (2313 RELOC + 194 EXACT), NEAR 26, STUB 1852,
+  SIZE_MISMATCH 219, compile errors 0. `rebrew status --all-targets`:
+  server.dll 100 percent matched; GOLDTL 74.2; GOLD 54.2 (coverage 99.9).
+- Mercury wave 17 on four small GOLDTL near/stub candidates: both of agent 1's
+  targets (0x0041a8c3, 0x00423670) are interior fragments of enclosing
+  routines, not self-contained functions; parked with no C edits. Agent 2's
+  pair was still running when the round closed.
+- The dominant remaining GOLD gap is structural: 1852 STUB rows and a source
+  list about 487 files shorter than GOLDTL's, because shared TUs only carry
+  GOLDTL module rows. Client byte identity needs that cross-target row mapping
+  plus per-target BSS sources, not more per-function waves.
+
+- Round 38: **server.dll is byte-identical to the reference and the gate
+  passes.** Deleted build/server.dll, rebuilt with
+  `cmake --build build --target server_dll`, and the SHA-256 matches
+  original/Server/server.dll (3cc2ce90...). `scripts/gate.sh` reports GATE:
+  pass: 316/316 functions, 652/652 data rows, whole-binary
+  sections/exports/imports/relocations/rsrc/headers/layout all true, residue 0,
+  raw-link .data 0, wine load OK, toolchain alignment OK for all three targets,
+  lint 7341 passed / 0 errors / 0 warnings.
+- The last 8 bytes were already fixed in the committed SERVER variant of
+  gm_GetEntityTableEntry: it carries a redundant empty bounds guard
+  (`if (table_index >= 0 && table_index < 0x10) { }`) before the real check.
+  The form reproduces the reference register allocation and test order
+  (RELOC 66/66, semantically identical) but is not evidenced as the original
+  source shape; a plausible single-check derivation remains an open question.
+- A `data layout own` experiment for the clients was fully reverted: it
+  replaced extern declarations with wrongly typed definitions (C2040, C2371)
+  and appended about 1.5 MB of unsafe pads. 68 files carrying only those edits
+  were restored from HEAD; the four files with later source work had only the
+  inserted definitions removed.
+- Client state: RELOC 3519, EXACT 285, NEAR 81, SIZE_MISMATCH 904, STUB 297,
+  EXTRACT_ERROR 5; matched 74.2 percent. GOLD links only as a stub scaffold;
+  GOLDTL link still fails. Client byte identity and the per-target BSS/data
+  ownership remain the work.
 
 - GOLDTL `rebrew status`: RELOC 3513, EXACT 285, NEAR 74, SIZE_MISMATCH 898,
   STUB 254, EXTRACT_ERROR 1; matched 75.0%, coverage 99.3% (5025/5059),

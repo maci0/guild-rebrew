@@ -26,6 +26,7 @@ int d2_BildArgument2 = 0;
 int d3d_Device = 0;
 int d3d_LastResult = 0;
 int d3d_PrecacheBuffer = 0;
+void* d3d_VertexBuffer = 0;
 int dd_ComResult = 0;
 int dd_DeviceCombo = 0;
 int dd_DeviceCount = 0;
@@ -166,7 +167,7 @@ int g_1040480 = 0;
 int g_1040484 = 0;
 int g_1040488 = 0;
 int g_104048c = 0;
-char* g_104049c = 0;
+int g_104049c = 0;
 unsigned int g_10404a0 = 0;
 float g_10404c4[15] = {0};
 float g_1040504[15] = {0};
@@ -192,7 +193,7 @@ float g_1043288 = 0;
 float g_104328c = 0;
 float g_10432a4 = 0;
 char g_10432c0[1] = {0};
-char g_1043370[1] = {0};
+char* g_1043370[1] = {0};
 float g_10529c4 = 0;
 float g_10529c8 = 0;
 float g_10529d0 = 0;
@@ -224,14 +225,14 @@ char* g_14a5558 = 0;
 char* g_14a555c = 0;
 char* g_14a558c = 0;
 char* g_14a5590 = 0;
-int g_14a5770 = 0;
-int g_14a57e0 = 0;
+char* g_14a5770[1] = {0};
+int g_14a57e0[1] = {0};
 int g_14a5b54 = 0;
 int g_14a5c6c = 0;
 char* g_14a5dbc[1] = {0};
 char* g_14a60d0[1] = {0};
-int g_14a6538 = 0;
-int g_14a6544 = 0;
+int g_14a6538[1] = {0};
+char* g_14a6544[1] = {0};
 char* g_14a6554 = 0;
 int g_14a7860 = 0;
 int g_14a79c0[1] = {0};
@@ -409,7 +410,6 @@ char* g_14b5bc8 = 0;
 int g_14b5be4 = 0;
 int g_14b5bfc = 0;
 int g_14b5e70 = 0;
-char* g_14c9320[32] = {0};
 char g_14cb3b0[1] = {0};
 char g_14cb440[1] = {0};
 void* g_14cb8e0 = 0;
@@ -448,7 +448,7 @@ int g_14ce8e0 = 0;
 void* g_14ce90c = 0;
 int g_14ce920[1] = {0};
 unsigned short g_14cf300[1] = {0};
-char g_14cf72a[1] = {0};
+char g_14cf72a = 0;
 char g_14cf732 = 0;
 char g_14cf7c8 = 0;
 char g_14cf7cb = 0;
@@ -525,7 +525,7 @@ float g_6628a0 = 0;
 float g_6628a8 = 0;
 float g_6628ac = 0;
 float g_6628bc = 0;
-char g_6628c8[1] = {0};
+float g_6628c8 = 0;
 float g_6628cc = 0;
 float g_6628d8 = 0;
 float g_6628dc = 0;
@@ -535,7 +535,7 @@ float g_6628fc = 0;
 double g_662908 = 0;
 float g_662910 = 0;
 float g_662914 = 0;
-double g_662950 = 0;
+float g_662950 = 0;
 float g_662960 = 0;
 float g_662964 = 0;
 float g_6629c0 = 0;
@@ -549,7 +549,7 @@ float g_662a6c = 0;
 float g_662a94 = 0;
 float g_662ac8 = 0;
 double g_662ad8 = 0;
-double g_662b20 = 0;
+float g_662b20 = 0;
 int g_662b40 = 0;
 float g_662cf8 = 0;
 char g_662d18[1] = {0};
@@ -559,7 +559,7 @@ float g_662d40[3] = {0};
 int g_662d60 = 0;
 int g_662d64 = 0;
 int g_662d68 = 0;
-float g_662d70[4] = {0};
+float g_662d70 = 0;
 float g_662da8 = 0;
 char g_662dc8[135] = {0};
 const float g_662e70[15] = {0};
@@ -573,7 +573,7 @@ float g_664090 = 0;
 char g_6640c0[1] = {0};
 float g_6640cc = 0;
 double g_6640e8 = 0;
-const double g_6640f8 = 0;
+double g_6640f8 = 0;
 float g_66413c = 0;
 float g_66414c = 0;
 float g_664154 = 0;
@@ -593,7 +593,6 @@ double g_664e60 = 0;
 double g_664e78 = 0;
 float g_664e80 = 0;
 float g_664e88 = 0;
-double g_664ef8 = 0;
 double g_664f08 = 0;
 double g_664f10 = 0;
 double g_664f18 = 0;
@@ -618,7 +617,7 @@ int g_665d58[1] = {0};
 double g_665de0 = 0;
 double g_665e30 = 0;
 double g_665f00 = 0;
-void* g_665f08 = 0;
+int * g_665f08 = 0;
 float g_665f10 = 0;
 int g_665f78[1] = {0};
 int g_666018 = 0;
@@ -669,6 +668,9 @@ char g_677ca0[1] = {0};
 char g_677ca8[1] = {0};
 char g_677cc8[1] = {0};
 float g_678150 = 0;
+float g_678154 = 0;
+float g_678158 = 0;
+unsigned int g_67815c = 0;
 int g_678160 = 0;
 int g_678c08 = 0;
 int g_678c0c = 0;
@@ -719,8 +721,6 @@ char g_67eb20[1] = {0};
 char g_67eb2c[1] = {0};
 char g_67eb38[1] = {0};
 char g_67eb48[1] = {0};
-char g_67eb54[1] = {0};
-char g_67eb6c[1] = {0};
 char g_67eb84[1] = {0};
 char g_67ec2c[1] = {0};
 int g_67fba8 = 0;
@@ -747,7 +747,7 @@ char g_6813f4[1] = {0};
 char g_681400[1] = {0};
 char g_68140c[1] = {0};
 char g_681414[1] = {0};
-char g_68149c[1] = {0};
+int g_68149c = 0;
 char g_6816ac[1] = {0};
 int g_6816d8 = 0;
 char g_6816dc[1] = {0};
@@ -792,7 +792,6 @@ int g_68bf38 = 0;
 int g_68bfb8 = 0;
 int g_68bfbc = 0;
 int g_68bfc4 = 0;
-int g_68bfcc = 0;
 char g_68cfc0[1] = {0};
 char g_68cfec[1] = {0};
 char g_68d00c[1] = {0};
@@ -801,7 +800,7 @@ char g_68d6d0[1] = {0};
 char g_68d6dc[1] = {0};
 int g_68d780 = 0;
 char g_68d960[1] = {0};
-int g_68da68[1] = {0};
+char g_68da68[1] = {0};
 int g_68da6c[1] = {0};
 char g_68de60[1] = {0};
 char g_68de84[1] = {0};
@@ -827,8 +826,8 @@ char g_696488[1] = {0};
 char g_69649c[1] = {0};
 char g_6964b4[1] = {0};
 char g_696528[1] = {0};
-float g_696540[1] = {0};
-float g_696550[1] = {0};
+float g_696540[4] = {0};
+float g_696550[4] = {0};
 int g_696560[1] = {0};
 int g_699058[37] = {0};
 int g_699364 = 0;
@@ -928,9 +927,6 @@ char g_6a7e90[1] = {0};
 int g_6a81dc[5] = {0};
 int g_6a81f0[5] = {0};
 char g_6a8354[1] = {0};
-char g_6a83f8[1] = {0};
-char g_6a840c[1] = {0};
-char g_6a8428[1] = {0};
 char g_6a8438[1] = {0};
 char g_6a8448[1] = {0};
 char g_6a8460[1] = {0};
@@ -1102,7 +1098,7 @@ int g_6ad62c = 0;
 float g_6ad630 = 0;
 float g_6ad634 = 0;
 char g_6b5b20[1] = {0};
-char* g_6b5c20 = 0;
+unsigned int g_6b5c20 = 0;
 int g_6b5c24 = 0;
 char g_6b5c28 = 0;
 int g_6b5c2c = 0;
@@ -1127,7 +1123,7 @@ unsigned char g_6b6008[768] = {0};
 char g_6b6108[1] = {0};
 char g_6b6208[1] = {0};
 int g_6b6308 = 0;
-unsigned int* g_6b6d18 = 0;
+int* g_6b6d18 = 0;
 void* g_6b6f20[6] = {0};
 unsigned int g_6b6f38 = 0;
 int g_6b6f3c = 0;
@@ -1148,6 +1144,7 @@ int g_6b6f84 = 0;
 int g_6b6f88 = 0;
 char g_6b6f90[1] = {0};
 char g_6b7090[1] = {0};
+int g_6b7190 = 0;
 int g_6b7194 = 0;
 int g_6b719c = 0;
 int g_6b71a0 = 0;
@@ -1155,10 +1152,10 @@ int g_6b71a4 = 0;
 int g_6b71a8 = 0;
 int g_6b71b0 = 0;
 int g_6b7d40 = 0;
-int g_6b7d54 = 0;
-int g_6b7d58 = 0;
-int g_6b7d5c = 0;
-int g_6b7d60 = 0;
+unsigned int g_6b7d54 = 0;
+unsigned int g_6b7d58 = 0;
+unsigned int g_6b7d5c = 0;
+unsigned int g_6b7d60 = 0;
 int g_6b7d64 = 0;
 int g_6b7d70 = 0;
 int g_6b7d74 = 0;
@@ -1178,7 +1175,6 @@ char* g_6b7eb8 = 0;
 char* g_6b7ebc = 0;
 int g_6b7ec0 = 0;
 int g_6b7ec4 = 0;
-int g_6b7ec8 = 0;
 int* g_6b7ed0[16] = {0};
 int* g_6b7f10[16] = {0};
 int* g_6b7f50[16] = {0};
@@ -1205,7 +1201,7 @@ char g_6b7fe8 = 0;
 int g_6b7fec = 0;
 int g_6b8008 = 0;
 int g_6b8010 = 0;
-int g_6b8014 = 0;
+char* g_6b8014 = 0;
 int g_6b8058 = 0;
 char g_6b8060 = 0;
 char* g_6b8300 = 0;
@@ -1270,7 +1266,7 @@ int g_7725f8 = 0;
 char* g_77261c = 0;
 int g_772620 = 0;
 int g_772624 = 0;
-unsigned char g_772628[1] = {0};
+char g_772628[1] = {0};
 unsigned int g_7728bc = 0;
 int g_7728c0 = 0;
 int g_7728c4 = 0;
@@ -1283,7 +1279,7 @@ int g_7728e0 = 0;
 int g_7728e4 = 0;
 void* g_7728e8 = 0;
 int g_7728f8 = 0;
-int g_772d10 = 0;
+char g_772d10 = 0;
 int g_772d14 = 0;
 int g_772d18 = 0;
 int g_772d1c = 0;
@@ -1307,7 +1303,7 @@ int g_772eac = 0;
 char* g_772eb4 = 0;
 int g_772efc = 0;
 int g_772f10 = 0;
-unsigned short* g_772f24 = 0;
+char* g_772f24 = 0;
 int g_772f2c = 0;
 int g_772f30 = 0;
 int g_772f34 = 0;
@@ -1318,7 +1314,6 @@ int g_772f4c = 0;
 int g_772f54 = 0;
 int g_772f64 = 0;
 int g_772f68 = 0;
-unsigned int g_772f70 = 0;
 int g_772f78 = 0;
 int g_772f7c = 0;
 int g_772f80 = 0;
@@ -1355,7 +1350,7 @@ char* g_773da8 = 0;
 char* g_773dac = 0;
 char* g_773db0 = 0;
 char* g_773db4[1] = {0};
-char g_773dd4 = 0;
+unsigned char g_773dd4 = 0;
 int g_773dd8 = 0;
 int g_773de4 = 0;
 char g_773de8 = 0;
@@ -1367,7 +1362,6 @@ int g_774688 = 0;
 int g_77468c = 0;
 float g_774690 = 0;
 float g_774694 = 0;
-int g_774698 = 0;
 int g_7746a0 = 0;
 char* g_7746a4 = 0;
 char* g_7746a8 = 0;
@@ -1376,7 +1370,7 @@ int g_7746b8 = 0;
 char* g_7746c0 = 0;
 char* g_7746c4 = 0;
 unsigned char* g_7746c8 = 0;
-char* g_7746cc = 0;
+char * g_7746cc = 0;
 int g_7746d4 = 0;
 int g_7746d8 = 0;
 int g_7746f0 = 0;
@@ -1408,9 +1402,9 @@ int g_774954 = 0;
 int g_774958 = 0;
 char g_774964 = 0;
 char g_774965 = 0;
-unsigned short g_774970 = 0;
+short g_774970 = 0;
 int g_774978 = 0;
-char g_774980 = 0;
+int g_774980 = 0;
 int g_7749c8 = 0;
 int g_7749cc = 0;
 int g_7749d0 = 0;
@@ -1428,7 +1422,7 @@ char* g_774a10 = 0;
 int g_774a14 = 0;
 int g_774a18 = 0;
 int g_774a1c = 0;
-int* g_774a34 = 0;
+char* g_774a34 = 0;
 int g_774a40 = 0;
 int g_774a4c = 0;
 int g_774a58 = 0;
@@ -1449,8 +1443,8 @@ float g_7764cc[1] = {0};
 float g_7764e4 = 0;
 float g_77652c[1] = {0};
 float g_77658c = 0;
-int g_776664 = 0;
-unsigned char g_7766a0[4] = {0};
+unsigned char g_776664 = 0;
+int g_7766a0 = 0;
 unsigned char g_7766a4[4] = {0};
 int g_7766a8 = 0;
 int g_7766ac = 0;
@@ -1521,9 +1515,9 @@ char g_7e2480[1] = {0};
 short g_7e2510 = 0;
 int g_7e2520 = 0;
 int g_7e2700 = 0;
-unsigned char* g_7e2704 = 0;
-int g_7e2708 = 0;
-int g_7e2a9c = 0;
+char* g_7e2704 = 0;
+char* g_7e2708 = 0;
+int* g_7e2a9c = 0;
 char* g_7e2aa0 = 0;
 int g_7e2ac0[48] = {0};
 int g_7e35c0[1] = {0};
@@ -1541,14 +1535,14 @@ int g_7e4304 = 0;
 int g_7e4308 = 0;
 int g_7e430c = 0;
 int g_7e4310 = 0;
-unsigned short* g_7e431c = 0;
-int g_7e43a4[1] = {0};
+int g_7e431c = 0;
+int g_7e43a4 = 0;
 int g_7e43a8 = 0;
 int g_7e4408[1] = {0};
 int g_7e4468 = 0;
 int g_7e446c = 0;
 int g_7e4530 = 0;
-int g_7e4538 = 0;
+int* g_7e4538 = 0;
 int g_7e453c = 0;
 int g_7e46ac = 0;
 int g_7e46c0[32] = {0};
@@ -1562,22 +1556,22 @@ int g_7f3e20[1] = {0};
 unsigned short g_7f3ee4 = 0;
 int g_7f3f00[1] = {0};
 int g_7f4c00 = 0;
-unsigned short g_7f4c04 = 0;
+int g_7f4c04 = 0;
 int g_7f4c06 = 0;
 int g_7f4c08 = 0;
 int g_7f4c0a = 0;
-short g_7f4c0c = 0;
+unsigned short g_7f4c0c = 0;
 char g_7f4ca0[1] = {0};
-int g_7f4ca2[768] = {0};
+char g_7f4ca2[1] = {0};
 char g_7f4ca4[1] = {0};
 char g_7f4caa[1] = {0};
 char g_7f4cc0[1] = {0};
 int g_85a0a0[16] = {0};
 int g_85ab60 = 0;
-int g_85ab80 = 0;
+char* g_85ab80 = 0;
 char g_85ab90[1] = {0};
 unsigned char* g_868050 = 0;
-unsigned short * g_868054 = 0;
+unsigned short* g_868054 = 0;
 int g_868058 = 0;
 char g_868060[1] = {0};
 char g_8680b4[1] = {0};
@@ -1603,12 +1597,12 @@ int g_99f7ac = 0;
 int g_99f7f0 = 0;
 int g_99f800[2048] = {0};
 int g_99f804[1] = {0};
-int g_9a3800[512] = {0};
+char g_9a3800[1] = {0};
 int g_9a3804[1] = {0};
 char g_9a3816[1] = {0};
 char g_9a3825[1] = {0};
 int g_9a9200[8] = {0};
-int g_9a9220[42] = {0};
+char g_9a9220[1] = {0};
 int g_9a9224[42] = {0};
 int g_9a9228[1] = {0};
 int g_9a9620[10] = {0};
@@ -1653,7 +1647,7 @@ char* g_aed324 = 0;
 unsigned int g_aed328 = 0;
 int g_aed32c = 0;
 int g_aed330 = 0;
-int g_aed340 = 0;
+unsigned char g_aed340[1] = {0};
 int g_aed740[32768] = {0};
 int g_alloc_root_count = 0;
 int g_alloc_root_count_max = 0;
@@ -1700,7 +1694,6 @@ int g_dispatch_table_b[1] = {0};
 int g_download_state = 0;
 int g_dynamic_count = 0;
 char g_dynasty_initial_trait_offset[1] = {0};
-int g_dynasty_name = 0;
 char g_dynasty_name_ready = 0;
 int g_dynasty_scan_count = 0;
 char g_dynasty_scan_flag = 0;
@@ -1767,7 +1760,6 @@ int g_next_object_id = 0;
 float g_office_float_table[49] = {0};
 int g_office_role_templates[40] = {0};
 char g_office_slots[1008] = {0};
-float g_output_share[1] = {0};
 int g_owner_window = 0;
 unsigned int g_player_record_dst = 0;
 unsigned int g_player_record_src = 0;
@@ -1845,7 +1837,6 @@ char s_67ead8[1] = "";
 char s_67fb2c[1] = "";
 char s_67fb40[1] = "";
 char s_67fb50[1] = "";
-char s_67fb68[1] = "";
 char s_681140[1] = "";
 char s_6811b0[1] = "";
 char s_68be7c[1] = "";
@@ -1958,21 +1949,13 @@ int SonnenstrahlenStartZeit = -1;
 
 int ch_MorphFrameValue = -1;
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* Comparison-only capacity for six writes; native extent and owner remain unknown. */
+int g_10405e0[6] = {0};
 
 
 unsigned char g_6752a4 = 1;
+
+int g_9b4840[48] = {0};
 
 /* Function stubs */
 int __stdcall fcn_0041cbc0(int a)
@@ -1990,7 +1973,7 @@ int __cdecl CharacterSitting(void)
 	return 0;
 }
 
-int __cdecl SelectTextureSet(void* a, void* b, unsigned char c, char d)
+char __cdecl SelectTextureSet(void* e, void* o, unsigned char lod, char refresh)
 {
 	return 0;
 }
@@ -2060,11 +2043,6 @@ int __stdcall f_5eb120(int a)
 	return 0;
 }
 
-int __cdecl fcn_00401260(int a, int b)
-{
-	return 0;
-}
-
 int __cdecl fcn_00401360(int a, int b)
 {
 	return 0;
@@ -2080,9 +2058,8 @@ int __cdecl fcn_004028a0(int a)
 	return 0;
 }
 
-int __cdecl fcn_00402a00(char* a, int b)
+void __cdecl fcn_00402a00(void* a, int b)
 {
-	return 0;
 }
 
 int __cdecl fcn_00402aa0(void* a)
@@ -2100,7 +2077,7 @@ int __cdecl fcn_00403870(char* e)
 	return 0;
 }
 
-int __cdecl fcn_00403ce0(char* a, void* b)
+int __cdecl fcn_00403ce0(void* a, void* b)
 {
 	return 0;
 }
@@ -2160,9 +2137,8 @@ int __cdecl fcn_00407390(void)
 	return 0;
 }
 
-int __cdecl fcn_00407800(char* a, int b, char* c)
+void __cdecl fcn_00407800(void* a, int b, void* c)
 {
-	return 0;
 }
 
 int __cdecl fcn_004079d0(void)
@@ -2175,7 +2151,7 @@ int __cdecl fcn_004079f0(void)
 	return 0;
 }
 
-int __cdecl fcn_00407e30(char* a, float* b, float* c, int d, int e, int* f, int* g, int h, int i)
+int __cdecl fcn_00407e30(void)
 {
 	return 0;
 }
@@ -2225,9 +2201,9 @@ int __cdecl fcn_0040bdc0(void)
 	return 0;
 }
 
-int __cdecl fcn_0040c120(char* e, int kind, int a, int b, int c)
+char* __cdecl fcn_0040c120(char* a, int b, ...)
 {
-	return 0;
+	return (void*) 0;
 }
 
 int __cdecl fcn_0040cba0(void)
@@ -2315,9 +2291,8 @@ int __cdecl fcn_0040f3d0(void)
 	return 0;
 }
 
-int __cdecl fcn_004116c0(int a)
+void __cdecl fcn_004116c0(int a)
 {
-	return 0;
 }
 
 int __cdecl fcn_004116d0(void)
@@ -2335,12 +2310,11 @@ int __cdecl fcn_00412e80(void)
 	return 0;
 }
 
-int __cdecl fcn_00412f10(int h, char* name, int k)
+void __cdecl fcn_00412f10(int a0, char* a1)
 {
-	return 0;
 }
 
-int __cdecl fcn_00413120(char* a)
+int __cdecl fcn_00413120(void)
 {
 	return 0;
 }
@@ -2350,14 +2324,13 @@ int __cdecl fcn_00413160(void)
 	return 0;
 }
 
-int __cdecl fcn_00413190(int a)
+int __cdecl fcn_00413190(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_00413d10(void* p)
+void __cdecl fcn_00413d10(void)
 {
-	return 0;
 }
 
 int __cdecl fcn_004143b0(char* a, int b, int c)
@@ -2525,12 +2498,12 @@ int __cdecl fcn_00422ad0(char* bank, char* sample)
 	return 0;
 }
 
-int __cdecl fcn_00422dc0(int a, int b)
+int __cdecl fcn_00422dc0(char* name, int init)
 {
 	return 0;
 }
 
-int __cdecl fcn_004230e0(int a)
+int __cdecl fcn_004230e0(char* p)
 {
 	return 0;
 }
@@ -2540,9 +2513,8 @@ int __cdecl fcn_004232f0(void)
 	return 0;
 }
 
-int __cdecl fcn_00423670(int o, int a, int b)
+void __cdecl fcn_00423670(void* a0, int a1, int a2)
 {
-	return 0;
 }
 
 int __cdecl fcn_00423830(int a, int b, int c)
@@ -2565,9 +2537,8 @@ int __cdecl fcn_00425ec0(char* g, int arg, int kind, char* name)
 	return 0;
 }
 
-int __cdecl fcn_00426680(int lex, void* t)
+void __cdecl fcn_00426680(int stream, void* out)
 {
-	return 0;
 }
 
 int __cdecl fcn_00426fa0(char* a, const char* b, int c, int d, int e, int f, int g)
@@ -2575,9 +2546,9 @@ int __cdecl fcn_00426fa0(char* a, const char* b, int c, int d, int e, int f, int
 	return 0;
 }
 
-int __cdecl fcn_00426fd0(int a)
+void* __cdecl fcn_00426fd0(char* name)
 {
-	return 0;
+	return (void*) 0;
 }
 
 int __cdecl fcn_00427280(void)
@@ -2625,9 +2596,8 @@ int __cdecl fcn_00427f00(char* s)
 	return 0;
 }
 
-int __cdecl fcn_00428340(char* o, int n, ...)
+void __cdecl fcn_00428340(void* handle, int a, int b)
 {
-	return 0;
 }
 
 int __cdecl fcn_004284d0(char* a, int b)
@@ -2636,11 +2606,6 @@ int __cdecl fcn_004284d0(char* a, int b)
 }
 
 int __cdecl fcn_00428800(int a)
-{
-	return 0;
-}
-
-int __cdecl fcn_00429490(char* a)
 {
 	return 0;
 }
@@ -2670,14 +2635,12 @@ int __cdecl fcn_0042a850(int a)
 	return 0;
 }
 
-int __cdecl fcn_0042a880(int a)
+void __cdecl fcn_0042a880(int a0)
 {
-	return 0;
 }
 
-int __cdecl fcn_0042a920(int h, int v)
+void __cdecl fcn_0042a920(int a0, int a1)
 {
-	return 0;
 }
 
 int __cdecl fcn_0042a9a0(int h, int v)
@@ -2815,11 +2778,6 @@ int __cdecl fcn_0042ea10(int a, int b)
 	return 0;
 }
 
-int __cdecl fcn_0042ee30(const void* a, const void* b)
-{
-	return 0;
-}
-
 int __cdecl fcn_0042f010(char* a, void* b)
 {
 	return 0;
@@ -2830,17 +2788,17 @@ int __cdecl fcn_0042f240(int a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_0042f6d0(char* a, int b)
+void* __cdecl fcn_0042f6d0(char* a, void* b)
+{
+	return (void*) 0;
+}
+
+int __cdecl fcn_0042ff50(const char* a, const char* b, void* c)
 {
 	return 0;
 }
 
-int __cdecl fcn_0042ff50(const char* name, const char* mode, void* root)
-{
-	return 0;
-}
-
-int __cdecl fcn_00430580(void* f)
+int __cdecl fcn_00430580(void* a)
 {
 	return 0;
 }
@@ -2865,12 +2823,12 @@ int __cdecl fcn_00433be0(char* a, char* b, char* c, int d, int e, char* f, char*
 	return 0;
 }
 
-int __cdecl fcn_00434970(void)
+int __cdecl fcn_00434970(char* a, char* b, int c)
 {
 	return 0;
 }
 
-int __cdecl fcn_00435500(char* a, char* b)
+int __cdecl fcn_00435500(void)
 {
 	return 0;
 }
@@ -2890,27 +2848,25 @@ int __cdecl fcn_00436a00(int h, void* a, int n)
 	return 0;
 }
 
-int __cdecl fcn_004379a0(char* a, int b, int c, void* d, void* e)
+void __cdecl fcn_004379a0(int a, int b, int c, void* d, void* e)
+{
+}
+
+void __cdecl fcn_00437ac0(int a, int b, int c, int d)
+{
+}
+
+unsigned char __cdecl fcn_00437ee0(void* a, char* b, char* c)
 {
 	return 0;
 }
 
-int __cdecl fcn_00437ac0(int list, char* p, int mask, void* d)
+int __cdecl fcn_00438100(void* a, char* b, char c)
 {
 	return 0;
 }
 
-int __cdecl fcn_00437ee0(int a, char* b, char* c)
-{
-	return 0;
-}
-
-int __cdecl fcn_00438100(char* e, char* cam, int f)
-{
-	return 0;
-}
-
-int __cdecl fcn_00438920(float a, float b, int c)
+int __cdecl fcn_00438920(int a, int b, int c)
 {
 	return 0;
 }
@@ -2960,9 +2916,9 @@ int __cdecl fcn_00441720(char* a, float* b, int c, int* d, int* e, float* f)
 	return 0;
 }
 
-void* __cdecl fcn_00442910(void* a, float* b, float* c, char* d)
+int __cdecl fcn_00442910(int a0, int a1, int a2, int a3)
 {
-	return (void*) 0;
+	return 0;
 }
 
 int __cdecl fcn_00442d90(char* e, int v)
@@ -2975,14 +2931,13 @@ int __cdecl fcn_00442e30(void)
 	return 0;
 }
 
-int __cdecl fcn_00443230(void)
+int __cdecl fcn_00443230(int a)
 {
 	return 0;
 }
 
-int __cdecl fcn_004432d0(int a, int b)
+void __cdecl fcn_004432d0(int a, int b)
 {
-	return 0;
 }
 
 int __cdecl fcn_00443b00(char* a, char* b)
@@ -2990,14 +2945,14 @@ int __cdecl fcn_00443b00(char* a, char* b)
 	return 0;
 }
 
-int __cdecl fcn_00444700(char* a, float* b)
+float __cdecl fcn_00444700(int a, float * b)
 {
-	return 0;
+	return 0.0f;
 }
 
-int __cdecl fcn_00445600(int a, int b, int c, int d)
+char* __cdecl fcn_00445600(int a, int b, int c, char* d)
 {
-	return 0;
+	return (void*) 0;
 }
 
 int __cdecl fcn_00445760(int a, int b, int c, void* d, void* e)
@@ -3085,9 +3040,8 @@ int __cdecl fcn_00455140(char* a, float* b, float* c)
 	return 0;
 }
 
-int __cdecl fcn_00455350(char* a, char* b, float* c)
+void __cdecl fcn_00455350(void)
 {
-	return 0;
 }
 
 int __cdecl fcn_00455910(char* e, int h, char* p)
@@ -3130,7 +3084,7 @@ int __cdecl fcn_0045b700(int a, int b, int c)
 	return 0;
 }
 
-int __cdecl fcn_0045b990(char* a, float* b, int* c, int* d, float* e)
+char __cdecl fcn_0045b990(void)
 {
 	return 0;
 }
@@ -3220,7 +3174,7 @@ int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win)
 	return 0;
 }
 
-int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f, int g, int h)
+int __cdecl fcn_004677e0(int x, int y, int w, int a, int b, int c, int d, int ctx)
 {
 	return 0;
 }
@@ -3245,7 +3199,7 @@ int __cdecl fcn_004690a0(int a)
 	return 0;
 }
 
-int __cdecl fcn_004693b0(int a)
+int __cdecl fcn_004693b0(int a, int b, int c, int d)
 {
 	return 0;
 }
@@ -3255,9 +3209,8 @@ int __cdecl fcn_00469470(int a, int b)
 	return 0;
 }
 
-int __cdecl fcn_00469630(int a)
+void __cdecl fcn_00469630(int obj)
 {
-	return 0;
 }
 
 int __cdecl fcn_00469e30(int a)
@@ -3315,7 +3268,7 @@ int __cdecl fcn_0046f100(int a, int b, int c, int d, int e, int f)
 	return 0;
 }
 
-int __cdecl fcn_0046f280(int a)
+int __cdecl fcn_0046f280(int a1)
 {
 	return 0;
 }
@@ -3345,29 +3298,25 @@ int __cdecl fcn_004707d0(int a)
 	return 0;
 }
 
-int __cdecl fcn_00470820(int a, int b, char* c)
+void * __cdecl fcn_00470820(int a, int b, const char* name)
 {
-	return 0;
+	return (void*) 0;
 }
 
-int __cdecl fcn_00471490(int k)
+void __cdecl fcn_00471490(int a0)
 {
-	return 0;
 }
 
-int __cdecl fcn_00471a30(int a, int b)
+void __cdecl fcn_00471a30(int a0, int a1)
 {
-	return 0;
 }
 
-int __cdecl fcn_00471af0(int a, int b)
+void __cdecl fcn_00471af0(int obj, int a)
 {
-	return 0;
 }
 
-int __cdecl fcn_00471b60(int a)
+void __cdecl fcn_00471b60(void* obj)
 {
-	return 0;
 }
 
 int __cdecl fcn_00471c80(int a, int b)
@@ -3385,9 +3334,8 @@ int __cdecl fcn_00471db0(int a, int b)
 	return 0;
 }
 
-int __cdecl fcn_00471e30(int a)
+void __cdecl fcn_00471e30(void* obj)
 {
-	return 0;
 }
 
 int __cdecl fcn_00471f80(int a)
@@ -3395,17 +3343,17 @@ int __cdecl fcn_00471f80(int a)
 	return 0;
 }
 
-int __cdecl fcn_00472170(int a, int b)
+int __cdecl fcn_00472170(int slot, int flag)
 {
 	return 0;
 }
 
-int __cdecl fcn_00472250(int a, int b, int c)
+int __cdecl fcn_00472250(void* obj, int a, int b)
 {
 	return 0;
 }
 
-int __cdecl fcn_00472640(int a, int b)
+int __cdecl fcn_00472640(int element, int a)
 {
 	return 0;
 }
@@ -3415,17 +3363,11 @@ int __cdecl fcn_00472770(int a, int b)
 	return 0;
 }
 
-int __cdecl fcn_004727a0(int a, int b)
+void __cdecl fcn_004727a0(void* obj, int a)
 {
-	return 0;
 }
 
 int __cdecl fcn_00472830(int a, int b)
-{
-	return 0;
-}
-
-int __cdecl fcn_00472900(int a, int b)
 {
 	return 0;
 }
@@ -3455,12 +3397,11 @@ int __cdecl fcn_00474cf0(int a)
 	return 0;
 }
 
-int __cdecl fcn_00475220(char* a)
+void __cdecl fcn_00475220(void* p)
 {
-	return 0;
 }
 
-int __cdecl fcn_00475f80(void* s)
+int __cdecl fcn_00475f80(void* o)
 {
 	return 0;
 }
@@ -3505,7 +3446,7 @@ int __cdecl fcn_00479330(char* a)
 	return 0;
 }
 
-int __cdecl fcn_0047a200(short x, short y, void* img, int a4)
+int __cdecl fcn_0047a200(int a, int b, int c, int d)
 {
 	return 0;
 }
@@ -3950,7 +3891,7 @@ int __cdecl fcn_0049e1e0(void)
 	return 0;
 }
 
-int __cdecl fcn_0049e900(void)
+int __cdecl fcn_0049e900(int a, char* b, int c, int* d, int* e)
 {
 	return 0;
 }
@@ -4000,9 +3941,8 @@ int __cdecl fcn_004a1080(void)
 	return 0;
 }
 
-int __cdecl fcn_004a4680(float* o1, float* o2, int a3, char* e, void* st)
+void __cdecl fcn_004a4680(unsigned int* a0, unsigned int* a1)
 {
-	return 0;
 }
 
 int __cdecl fcn_004a48e0(char* e, int k)
@@ -4015,7 +3955,7 @@ int __cdecl fcn_004a4d90(char* a1, char* a2, char* a3)
 	return 0;
 }
 
-int __cdecl fcn_004a4fb0(int* x, int* y, void* home, int a4)
+int __cdecl fcn_004a4fb0(void* a0, void* a1, char* a2, int a3)
 {
 	return 0;
 }
@@ -4025,12 +3965,12 @@ int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out)
 	return 0;
 }
 
-int __cdecl fcn_004a55c0(void* a, int b, int* c, float d, float e, unsigned short* f)
+int __cdecl fcn_004a55c0(char* obj, int flag, float* value, int extra)
 {
 	return 0;
 }
 
-int __cdecl fcn_004a57a0(void* a, int b, int c, unsigned short* d, int e, float f, int* g)
+int __cdecl fcn_004a57a0(char* a, int b, int c, char* d, int e, int f, unsigned int* g)
 {
 	return 0;
 }
@@ -4040,7 +3980,7 @@ int __cdecl fcn_004a5960(char* e, int a2, int kind, float lo, float hi, unsigned
 	return 0;
 }
 
-int __cdecl fcn_004a5e60(char* p, int kind, int f, int c, float r, int* out)
+int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, int a4, float a5, int* a6)
 {
 	return 0;
 }
@@ -4225,7 +4165,7 @@ int __cdecl fcn_004bcda0(void* a, unsigned int b, unsigned int c, unsigned int d
 	return 0;
 }
 
-int __cdecl fcn_004bcf20(void* a, void* b)
+int __cdecl fcn_004bcf20(void* slot, void* info)
 {
 	return 0;
 }
@@ -4255,9 +4195,8 @@ int __cdecl fcn_004c3480(void)
 	return 0;
 }
 
-int __cdecl fcn_004c35f0(void)
+void __cdecl fcn_004c35f0(void)
 {
-	return 0;
 }
 
 int __cdecl fcn_004c39c0(void * a)
@@ -4340,7 +4279,7 @@ int __cdecl fcn_004cef30(int a)
 	return 0;
 }
 
-int __cdecl fcn_004cefb0(char* a, int b)
+int __cdecl fcn_004cefb0(char* a, char* b)
 {
 	return 0;
 }
@@ -4525,12 +4464,12 @@ int __cdecl fcn_004e4230(void* a, int b)
 	return 0;
 }
 
-int __cdecl fcn_004e4470(char* a)
+int __cdecl fcn_004e4470(const char* name)
 {
 	return 0;
 }
 
-int __cdecl fcn_004e4730(char* a)
+int __cdecl fcn_004e4730(char* name)
 {
 	return 0;
 }
@@ -4540,7 +4479,7 @@ int __cdecl fcn_004e48b0(void)
 	return 0;
 }
 
-int __cdecl fcn_004e4ae0(char* a, int b)
+int __cdecl fcn_004e4ae0(char* name, int a2)
 {
 	return 0;
 }
@@ -4550,7 +4489,7 @@ int __cdecl fcn_004e4b00(int a)
 	return 0;
 }
 
-int __cdecl fcn_004e4b40(int a, int b, char* c, int d, int e)
+int __cdecl fcn_004e4b40(int a1, int a2, char* s, int a4, int a5)
 {
 	return 0;
 }
@@ -4565,7 +4504,7 @@ int __cdecl fcn_004e50a0(int a)
 	return 0;
 }
 
-int __cdecl fcn_004e5a00(void)
+int __cdecl fcn_004e5a00(void* a)
 {
 	return 0;
 }
@@ -4595,9 +4534,8 @@ int __cdecl fcn_004e7d40(int a, int b)
 	return 0;
 }
 
-int __cdecl fcn_004e8940(unsigned short* a)
+void __cdecl fcn_004e8940(void* entity)
 {
-	return 0;
 }
 
 int __cdecl fcn_004e89e0(unsigned char* a, int b)
@@ -4720,7 +4658,7 @@ int __cdecl fcn_004f27d0(void* a)
 	return 0;
 }
 
-int __cdecl fcn_004f4440(int a, int b, int c, int d, int* e)
+int __cdecl fcn_004f4440(int slot, int byte, int item, int zero, int* out)
 {
 	return 0;
 }
@@ -4805,7 +4743,7 @@ int __cdecl fcn_004fdfe0(unsigned short* a)
 	return 0;
 }
 
-int __cdecl fcn_004fe2e0(char* o, int h, int x, int y, int view, char* name)
+int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 {
 	return 0;
 }
@@ -4820,7 +4758,7 @@ int __cdecl fcn_004fe980(int a)
 	return 0;
 }
 
-int __cdecl fcn_004ff210(short a, int b)
+int __cdecl fcn_004ff210(int a, int b)
 {
 	return 0;
 }
@@ -4840,9 +4778,8 @@ int __cdecl fcn_00500a40(void)
 	return 0;
 }
 
-int __cdecl fcn_00500bb0(void* a, int b, int c, int d)
+void __cdecl fcn_00500bb0(void* a, int b)
 {
-	return 0;
 }
 
 int __cdecl fcn_00501030(void)
@@ -4875,7 +4812,7 @@ int __cdecl fcn_005017a0(int a)
 	return 0;
 }
 
-int __cdecl fcn_00501d20(int season)
+int __cdecl fcn_00501d20(int a)
 {
 	return 0;
 }
@@ -4905,9 +4842,9 @@ int __cdecl fcn_00503e80(void)
 	return 0;
 }
 
-int __cdecl fcn_00503fe0(int a, int b, int c)
+char* __cdecl fcn_00503fe0(int a, int b, int c)
 {
-	return 0;
+	return (void*) 0;
 }
 
 int __cdecl fcn_005043d0(unsigned char a, int b)
@@ -4950,14 +4887,13 @@ int __cdecl fcn_00505d00(char* obj, void* out)
 	return 0;
 }
 
-int __cdecl fcn_00506380(int a, unsigned char* b, int c, int d)
+int __cdecl fcn_00506380(int a, void* table, void* record, int mode)
 {
 	return 0;
 }
 
-int __cdecl fcn_00506ab0(int a, int b)
+void __cdecl fcn_00506ab0(int slot, int value)
 {
-	return 0;
 }
 
 int __cdecl fcn_00507540(int a, int* b)
@@ -4965,12 +4901,12 @@ int __cdecl fcn_00507540(int a, int* b)
 	return 0;
 }
 
-int __cdecl fcn_00507d10(int job)
+int __cdecl fcn_00507d10(int value)
 {
 	return 0;
 }
 
-int __cdecl fcn_00508280(char* a, int* b, int* c)
+int __cdecl fcn_00508280(char* a, int* b, float* c)
 {
 	return 0;
 }
@@ -5015,12 +4951,12 @@ int __cdecl fcn_0050b750(int a, unsigned char k)
 	return 0;
 }
 
-int __cdecl fcn_0050b7c0(int a, char b)
+int __cdecl fcn_0050b7c0(int a, int b)
 {
 	return 0;
 }
 
-int __cdecl fcn_0050b810(int a, char b)
+int __cdecl fcn_0050b810(int a0, unsigned char a1)
 {
 	return 0;
 }
@@ -5030,9 +4966,9 @@ int __cdecl fcn_0050b840(int id)
 	return 0;
 }
 
-int __cdecl fcn_0050b980(int id, int pct)
+float __cdecl fcn_0050b980(int a, int b)
 {
-	return 0;
+	return 0.0f;
 }
 
 int __cdecl fcn_0050bc10(int a, int b, char* c)
@@ -5046,11 +4982,6 @@ int __cdecl fcn_0050bfe0(unsigned char* e)
 }
 
 int __cdecl fcn_0050c1b0(void* a, int b, int* c)
-{
-	return 0;
-}
-
-int __cdecl fcn_0050c4e0(unsigned char* e)
 {
 	return 0;
 }
@@ -5080,29 +5011,27 @@ int __cdecl fcn_0050d460(void)
 	return 0;
 }
 
-int __cdecl fcn_0050d570(char* p)
+void* __cdecl fcn_0050d570(void* record)
+{
+	return (void*) 0;
+}
+
+int __cdecl fcn_0050df70(char* a, char* b)
 {
 	return 0;
 }
 
-int __cdecl fcn_0050df70(void* a, int b)
+int __cdecl fcn_0050f980(int a, int b)
 {
 	return 0;
 }
 
-int __cdecl fcn_0050f980(int a, int b, int c)
+void __cdecl fcn_00510100(void)
 {
-	return 0;
 }
 
-int __cdecl fcn_00510100(void)
+void __cdecl fcn_00510820(void* a, void* b, int c)
 {
-	return 0;
-}
-
-int __cdecl fcn_00510820(char* a, unsigned char* b, int c)
-{
-	return 0;
 }
 
 int __cdecl fcn_005109f0(void)
@@ -5175,12 +5104,12 @@ int __cdecl fcn_00516040(void)
 	return 0;
 }
 
-int __cdecl fcn_005167c0(unsigned char* a, int b)
+int __cdecl fcn_005167c0(void* ent, int v)
 {
 	return 0;
 }
 
-int __cdecl fcn_00516de0(int a, char b)
+int __cdecl fcn_00516de0(int a, int b)
 {
 	return 0;
 }
@@ -5195,7 +5124,7 @@ int __cdecl fcn_00517700(void* a, int b, ...)
 	return 0;
 }
 
-int __cdecl fcn_00517c00(int id, int a, int b, char* out)
+int __cdecl fcn_00517c00(unsigned int a, int b, int c, char* d)
 {
 	return 0;
 }
@@ -5225,24 +5154,23 @@ int __cdecl fcn_00525ef0(void)
 	return 0;
 }
 
-int __cdecl fcn_00526120(int a, int b)
+int __cdecl fcn_00526120(char* a, int b)
 {
 	return 0;
 }
 
-int __cdecl fcn_005263d0(int a, int b, int c)
+int __cdecl fcn_005263d0(void * a, char * b, int c)
 {
 	return 0;
 }
 
-int __cdecl fcn_00526920(char* a, int b, char* c)
+int __cdecl fcn_00526920(int a, int b, int c)
 {
 	return 0;
 }
 
-int __cdecl fcn_00529160(char* o, int a, int id, int b)
+void __cdecl fcn_00529160(int a, int b, int c, char* d)
 {
-	return 0;
 }
 
 int __cdecl fcn_0052a0c0(char* a, int b)
@@ -5275,7 +5203,7 @@ int __cdecl fcn_0052d820(void)
 	return 0;
 }
 
-int __cdecl fcn_0052d9d0(void* a)
+int __cdecl fcn_0052d9d0(void* p)
 {
 	return 0;
 }
@@ -5305,9 +5233,8 @@ int __cdecl fcn_0052fb80(int a)
 	return 0;
 }
 
-int __cdecl fcn_00530510(void)
+void __cdecl fcn_00530510(void)
 {
-	return 0;
 }
 
 int __cdecl fcn_005305a0(void)
@@ -5320,14 +5247,12 @@ int __cdecl fcn_00533880(void)
 	return 0;
 }
 
-int __cdecl fcn_005338a0(void)
+void __cdecl fcn_005338a0(void)
 {
-	return 0;
 }
 
-int __cdecl fcn_00533a40(char* a)
+void __cdecl fcn_00533a40(void)
 {
-	return 0;
 }
 
 int __cdecl fcn_00533a60(int a, int b, int* c, int d, ...)
@@ -5360,14 +5285,12 @@ int __cdecl fcn_00535560(void)
 	return 0;
 }
 
-int __cdecl fcn_005356e0(void)
+void __cdecl fcn_005356e0(void)
 {
-	return 0;
 }
 
-int __cdecl fcn_00535960(void)
+void __cdecl fcn_00535960(void)
 {
-	return 0;
 }
 
 int __cdecl fcn_00536bb0(void)
@@ -5380,9 +5303,8 @@ int __cdecl fcn_00537320(int a)
 	return 0;
 }
 
-int __cdecl fcn_005373e0(void* a, int b)
+void __cdecl fcn_005373e0(int a, int b)
 {
-	return 0;
 }
 
 int __cdecl fcn_00537ed0(char* a)
@@ -5390,9 +5312,8 @@ int __cdecl fcn_00537ed0(char* a)
 	return 0;
 }
 
-int __cdecl fcn_00538220(void)
+void __cdecl fcn_00538220(void)
 {
-	return 0;
 }
 
 int __cdecl fcn_00538700(void)
@@ -5445,9 +5366,8 @@ int __cdecl fcn_0053ee40(int a)
 	return 0;
 }
 
-int __cdecl fcn_005438c0(void)
+void __cdecl fcn_005438c0(int v)
 {
-	return 0;
 }
 
 int __cdecl fcn_00545390(void)
@@ -5475,9 +5395,8 @@ int __cdecl fcn_00545670(char* a, int b, int c, char* d, int e)
 	return 0;
 }
 
-int __cdecl fcn_00545780(int a)
+void __cdecl fcn_00545780(char* a)
 {
-	return 0;
 }
 
 int __cdecl fcn_005458b0(void)
@@ -5485,12 +5404,12 @@ int __cdecl fcn_005458b0(void)
 	return 0;
 }
 
-int __cdecl fcn_005462a0(void)
+char* __cdecl fcn_005462a0(void)
 {
-	return 0;
+	return (void*) 0;
 }
 
-int __cdecl fcn_00546480(char* a)
+int __cdecl fcn_00546480(char* entity)
 {
 	return 0;
 }
@@ -5580,7 +5499,7 @@ int __cdecl fcn_00572ff0(char* a)
 	return 0;
 }
 
-int __cdecl fcn_00573de0(int v, int* list)
+int __cdecl fcn_00573de0(void)
 {
 	return 0;
 }
@@ -5960,7 +5879,7 @@ int __cdecl fcn_005944d0(char* a)
 	return 0;
 }
 
-int __cdecl fcn_00598150(char* a, char** b)
+int __cdecl fcn_00598150(char* a, int* b)
 {
 	return 0;
 }
@@ -6076,11 +5995,6 @@ int __cdecl fcn_005a3580(char* a)
 }
 
 int __cdecl fcn_005a6e90(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_005a8500(void* a, int b)
 {
 	return 0;
 }
@@ -6230,7 +6144,7 @@ int __cdecl fcn_005ba900(int a)
 	return 0;
 }
 
-void* __cdecl fcn_005bdc30(int a, void* b, int c, int d, int e)
+char* __cdecl fcn_005bdc30(int a, int* b, char* c, int d, int e)
 {
 	return (void*) 0;
 }
@@ -6350,7 +6264,7 @@ int __cdecl fcn_005c80c0(void)
 	return 0;
 }
 
-int __cdecl fcn_005c9090(int a, int b, int c, int d, int e)
+int __cdecl fcn_005c9090(char* text, int x, int y, int color, int flags)
 {
 	return 0;
 }
@@ -6385,7 +6299,7 @@ int __cdecl fcn_005ccca0(void* a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_005cd440(void* a, char* b, int c, void* d)
+int __cdecl fcn_005cd440(void* a, char* b, int c, int d)
 {
 	return 0;
 }
@@ -6425,7 +6339,7 @@ int __cdecl fcn_005ceef0(unsigned char* a, void* b)
 	return 0;
 }
 
-int __cdecl fcn_005cf720(unsigned short a, unsigned short b, void* q, int c)
+int __cdecl fcn_005cf720(unsigned short a, unsigned short b, void* c, int d)
 {
 	return 0;
 }
@@ -6565,9 +6479,9 @@ int __cdecl fcn_005eab80(const char* a, const char* b)
 	return 0;
 }
 
-int __cdecl fcn_0064d1a0(char* s, int c)
+char* __cdecl fcn_0064d1a0(char* s, int c)
 {
-	return 0;
+	return (void*) 0;
 }
 
 int __cdecl fcn_0064d3eb(unsigned int seed)
@@ -6580,17 +6494,17 @@ int __cdecl fcn_0064d3f8(void)
 	return 0;
 }
 
-int __cdecl fcn_0064d41a(char* a, char* b, ...)
+int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...)
 {
 	return 0;
 }
 
-int __cdecl fcn_0064d470(char* a, int b)
+int __cdecl fcn_0064d470(char* a, char* b)
 {
 	return 0;
 }
 
-int __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n)
+int __cdecl fcn_0064d530(char* a, char* b, int c)
 {
 	return 0;
 }
@@ -6620,12 +6534,12 @@ int __cdecl fcn_0064e561(long* t)
 	return 0;
 }
 
-int __cdecl fcn_0064eeec(int a)
+int __cdecl fcn_0064eeec(char* s)
 {
 	return 0;
 }
 
-int __cdecl fcn_0064f026(char* a, char* b)
+int __cdecl fcn_0064f026(char* s, char* delim)
 {
 	return 0;
 }
@@ -6640,7 +6554,7 @@ int __cdecl fcn_0064fcaf(char* a)
 	return 0;
 }
 
-int __cdecl fcn_0065f220(const char* a, const char* b)
+int __cdecl fcn_0065f220(char* a, char* b)
 {
 	return 0;
 }
@@ -6650,9 +6564,8 @@ int __cdecl fcn_0065f2f0(int a, int b, int c)
 	return 0;
 }
 
-int __cdecl fcn_0066080a(char* s)
+void __cdecl fcn_0066080a(char* a)
 {
-	return 0;
 }
 
 int __cdecl fcn_0066096a(char* a, int b)
@@ -6676,6 +6589,11 @@ int __cdecl g_662360(void)
 }
 
 int __cdecl g_662374(void)
+{
+	return 0;
+}
+
+int __cdecl g_output_share(void)
 {
 	return 0;
 }
@@ -6713,15 +6631,3 @@ int __cdecl sub_00576750(char* a, char* b, char* c, int d)
  * into a client that compiles this translation unit.
  */
 
-/* Generated source-closure placeholders; see source-closure.json. */
-void* d3d_VertexBuffer = 0;
-float g_678154 = 0;
-float g_678158 = 0;
-unsigned int g_67815c = 0;
-int g_6b7190 = 0;
-
-/* Special forwarding stubs */
-int g_9b4840[48] = {0};
-
-/* Comparison-only capacity for six writes; native extent and owner remain unknown. */
-int g_10405e0[6] = {0};

@@ -13,12 +13,13 @@ unresolved/duplicate-symbol link.
 
 ## Build
 
-The current client executables are absent after later relinks failed. Repair
-the unresolved links before running fresh image comparisons; the README now
-reports raw-file agreement as N/A. Earlier successful unshare builds and their
-GUI-provider corrections are historical checkpoints. Compiler warnings and
-assembly lint remain open. See the [status snapshot](../README.md#reconstruction-status)
-and [current work](../docs/TODO.md) for results and remaining work.
+Both clients link successfully as of 2026-10-22. The current raw executables
+and same-build maps support data and image comparisons. They remain broken
+comparison scaffolds: Gold has 2871 placeholder symbols and GoldTL has 4138
+(including seven additional calling-convention variants). No unresolved symbols
+or duplicate-provider warnings are forced through the linker. Compiler warnings
+and unsupported assembly remain open. See the [status snapshot](../README.md#reconstruction-status)
+and [current work](../docs/TODO.md).
 
 Complete the root [setup steps](../README.md#get-started), then run from the
 project root. Use this checkout's `.venv` (`uv sync`). No sibling Rebrew
@@ -88,12 +89,20 @@ baseline; image-only checks do not initialize the compiler runner.
 
 ## Regenerate placeholders
 
-Each target has its own `unresolved.txt` input and generated `symbol_stubs.c`.
-Gold removes obsolete video-list and GUI-provider placeholders, preserves
-comparison-only capacity for six color writes and six GUI records, and includes
-a generated vertex-buffer pointer slot. Refresh manifests from current maps
-before quoting counts. Placeholders link only into their client and remain
-outside recovered `src/` and its metadata accounting.
+Each target has its own `unresolved.txt` and generated `symbol_stubs.c`.
+The normalized logs contain one actual diagnostic per unresolved symbol from
+a link without placeholder objects. Stock library/import providers remain on
+that diagnostic link, so their symbols do not become placeholders. When new
+providers are recovered, regenerate from a fresh diagnostic link rather than
+appending the new misses to an old stub list.
+
+The generated C files are checked in; ordinary builds work with the project’s
+pinned Rebrew. **Regeneration requires the fastcall generator fix on Rebrew
+[main fix](https://github.com/maci0/rebrew/commit/8bd102e6).** Rebrew 5.4.0 can emit the wrong calling convention for `@Name@N`.
+Conflicting decorations for one C name cannot share a C translation unit:
+GoldTL keeps the additional seven signatures in `abi_stubs.c`, generated from
+`abi-variants.txt`. These placeholders satisfy link contracts, not native ABI
+or implementation evidence.
 
 ```sh
 uv run rebrew build symbol-stubs --source-dir src \
@@ -104,6 +113,9 @@ uv run rebrew build symbol-stubs --source-dir src \
   --log stubs/goldtl/unresolved.txt --footer stubs/SCAFFOLD.txt \
   --specials stubs/goldtl/specials.toml \
   --output stubs/goldtl/symbol_stubs.c
+uv run rebrew build symbol-stubs --source-dir src \
+  --log stubs/goldtl/abi-variants.txt \
+  --output stubs/goldtl/abi_stubs.c
 ```
 
 The generator uses declarations where available and fallback types otherwise.
@@ -117,43 +129,11 @@ unbound numeric aliases of library functions can still be placeholders.
 When a real provider becomes available, remove its placeholder and regenerate.
 Do not link the server's BSS ownership files into these client scaffolds.
 
-Gold also has six generated source-closure placeholders listed in
-`gold/source-closure.json`. Four came from the selected MSX fade function; the
-vertex-buffer pointer slot came from the recovered getter, and the GUI table
-reference came from the shared cleanup. These are actual
-COFF references absent from the saved unresolved-link log. They do not claim
-native storage ownership. After the base command above, append those closure
-symbols with the public generator. `g_10405e0[6]` is `specials.g_10405e0`, not
-a closure symbol, and the current file places it after the closure marker.
-`generate_stubs` emits a special only when that name is also unresolved, so a
-marker split that keeps only the prefix drops the six-int capacity. Keep every
-non-empty special implementation that the new fragment does not already contain.
-
-```sh
-uv run python - <<'PY'
-import json, tomllib
-from pathlib import Path
-from rebrew.gen_stubs import collect_extern_info, generate_stubs
-root = Path('stubs/gold')
-stub = root / 'symbol_stubs.c'
-closure = json.loads((root / 'source-closure.json').read_text())
-specials = tomllib.loads((root / 'specials.toml').read_text())
-generated = generate_stubs(closure['symbols'], collect_extern_info(Path('src')),
-                           specials=specials)
-fragment = generated.split('#include <time.h>\n\n', 1)[1].split('/* Function stubs */', 1)[0]
-marker = '/* Generated source-closure placeholders; see source-closure.json. */'
-head = stub.read_text().split(marker, 1)[0].rstrip()
-kept = []
-for name, spec in specials.get('specials', {}).items():
-    impl = (spec.get('impl') or '').strip()
-    if impl and impl not in head and impl not in fragment:
-        kept.append(impl)
-tail = marker + '\n' + fragment.strip() + '\n'
-if kept:
-    tail += '\n' + '\n\n'.join(kept) + '\n'
-stub.write_text(head + '\n\n' + tail)
-PY
-```
+The fresh logs include the previously separate Gold source-closure symbols,
+so regeneration no longer needs the old fragment-append recipe. The
+`source-closure.json` file remains historical evidence. Specials preserve the
+comparison-only six-color and six-record GUI capacities without claiming native
+storage ownership.
 
 `gold/symbols.json` is a map snapshot; refresh it with
 [`linked_manifest.py`](linked_manifest.py) after a successful link.
@@ -169,7 +149,7 @@ function. Keep historical unresolved logs intact and regenerate manifests from e
 successful link.
 
 `omitted-sources.cmake` separately lists single-function TUs with colliding C
-names: 26 Gold and 5 TL choices. These comparison choices do not prove that
+names: 26 Gold and 6 TL choices. These comparison choices do not prove that
 the independent native bodies are equivalent. Their permanent name/provider
 repairs remain open. The zlib sample program `minigzip` is also omitted.
 

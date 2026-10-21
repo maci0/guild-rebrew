@@ -10,15 +10,15 @@ Gold and GoldTL from shared source.
 > **The fresh server build is byte-identical:** all **286,720 bytes** match.
 > Server verification passes 316 functions and all 652 compared data symbols.
 > **Gold and GoldTL are comparison scaffolds, not playable or byte-identical.**
-> Both current client executables are absent after failed relinks.
+> Both clients now link as raw comparison executables with same-build maps.
 > Source recovery, unsupported assembly and provider/storage work remain.
 > The [last completed server gate](docs/TODO.md#verified-checkpoint) confirmed
-> complete file equality; its 36 unsupported assembly findings kept the gate red.
+> complete file equality and passed; current client assembly warnings remain separate.
 
 The [latest recorded work](docs/TODO.md)
 includes the merged reconstruction work and a fresh server comparison.
-Client results below are stored object verdicts; their relinks and complete
-validation remain pending. See the [handoff](docs/HANDOFF.md).
+Client function results below are stored object verdicts; fresh raw images now
+support data comparisons, with substantial stubs and layout differences. See the [handoff](docs/HANDOFF.md).
 
 **[Start here](#get-started)** &nbsp; · &nbsp;
 **[Build & compare](#build-and-compare)** &nbsp; · &nbsp;
@@ -33,8 +33,8 @@ validation remain pending. See the [handoff](docs/HANDOFF.md).
 | Target | Code accounted for | C functions matched | Raw file at original offsets |
 | --- | ---: | ---: | ---: |
 | **Server** | **100.0%** | 251 / 251 · 100.0% | 100.0% |
-| **GoldTL** | **48.4%** | 3,804 / 5,122 · 74.2% | N/A |
-| **Gold** | **22.8%** | 2,466 / 4,592 · 53.7% | N/A |
+| **GoldTL** | **48.4%** | 3,804 / 5,122 · 74.2% | 2.0% |
+| **Gold** | **22.8%** | 2,466 / 4,592 · 53.7% | 1.1% |
 
 **Code accounting** is Rebrew's byte-based measure of virtual `.text`: matched
 functions, identified libraries and alignment padding. **Function matches**
@@ -55,12 +55,12 @@ displaced code still differs there. None of these alone establishes completion.
 </details>
 <!-- progress:end -->
 
-<sub>Snapshot refreshed 2026-10-21 14:13 UTC from
-<code>rebrew status --all-targets --json</code> on the integrated tree.
-The server was freshly compiled and verified against the complete raw image;
-client results remain stored verdicts. Libraries, semantic PROVEN verdicts and
-whole-function assembly matches are excluded from the C totals. Inline assembly
-may remain.</sub>
+<sub>Snapshot refreshed 2026-10-21 16:24 UTC from
+<code>rebrew status --all-targets --json</code>. All three raw images are present;
+both client links and data comparisons are fresh. Client function matches remain
+stored verdicts, not a new per-function verification batch. Libraries, semantic
+PROVEN verdicts and whole-function assembly matches are excluded from C totals.
+Inline assembly may remain.</sub>
 
 The server uses plain VC6 SP5 with `/MT` / LIBCMT. Both clients use the
 Processor Pack: GoldTL with `/MT` / LIBCMT, Gold with `/ML` / LIBC.
@@ -76,16 +76,18 @@ Remaining work in the same snapshot:
 A partial body or repaired inventory boundary can change these categories
 without earning a match. Function percentages measure catalog entries, not
 matched code bytes or gameplay completeness. All 286,720 server bytes match,
-including imports, relocations, headers and layout. Client raw-file comparison
-is unavailable until their links succeed. The full gate has not been rerun;
-client data bars retain stored verification results.
+including imports, relocations, headers and layout. Both clients link with
+explicit placeholders: 2,871 symbols in Gold and 4,138 in GoldTL. They are
+comparison builds, not playable games. The full gate was not rerun for this
+checkpoint. The server raw image still matches; both client data comparisons
+ran and reported the expected scaffold differences.
 
 ## Data verification
 
 | Target | Initialized data bytes verified | Verified symbols (incl. BSS) | EXACT at reference VA | Displaced symbols |
 | --- | ---: | ---: | ---: | ---: |
 | **Server** | 66,664 / 66,664 · 100.0% | 547 / 547 | 409 | 0 |
-| **GoldTL** | 0 / 335,380 · 0.0% | 2 / 361 | 0 | 338 |
+| **GoldTL** | 0 / 335,380 · 0.0% | 1 / 361 | 0 | 339 |
 | **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 304 |
 
 <p align="center">
@@ -98,7 +100,22 @@ symbol need not contribute initialized bytes. `EXACT` is a subset of verified
 records with byte agreement at the reference address; displaced records count
 as drift. These are stored verdicts from the same snapshot as the code charts,
 not evidence of storage ownership. The server has a fresh 652/652 data check;
-client data verdicts have not been refreshed against a new link.
+both client data verdicts were refreshed against their current raw links.
+Content matches alone do not establish correct placement or storage ownership.
+
+Both executables and maps are in `build/`. Compare data without recompiling
+functions (exit 1 reports the expected scaffold differences):
+
+```sh
+uv run rebrew verify --data --target Europa1400Gold.exe
+uv run rebrew verify --data --target Europa1400Gold_TL.exe
+```
+
+Fresh diagnostics report 83 matching / 30 differing / 49 missing symbols for
+Gold, and 100 / 51 / 40 for GoldTL. Another 159 Gold and 172 TL records have no
+comparable file bytes. Most symbols are displaced; the stricter charts above
+therefore retain zero client EXACT data placements. See the
+[comparison-build guide](stubs/README.md) for placeholders and build commands.
 
 ## Get started
 

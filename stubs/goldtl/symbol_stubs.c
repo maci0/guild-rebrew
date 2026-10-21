@@ -24,11 +24,31 @@
 int DisplayCounters = 0;
 int SonnenstrahlenAktiv = 0;
 int SonnenstrahlenPhase = 0;
+unsigned char byte_7f4e28[1] = {0};
 int d2_BildArgument2 = 0;
+double dbl_1_0 = 0;
+double dbl_662908 = 0;
+double dbl_6629c8 = 0;
+double dbl_6640e8 = 0;
+int dword_100f1dc = 0;
+int dword_14b556c = 0;
+int dword_14ce8e0 = 0;
+int dword_67d370 = 0;
+int dword_772514 = 0;
+int dword_774654 = 0;
+unsigned int dword_7e46ac = 0;
+int dword_7f4c00 = 0;
+int dword_7f4c04 = 0;
+int dword_7f4c08 = 0;
 int fcn_004e0620 = 0;
 int fcn_004e1920 = 0;
 int fcn_004e2b70 = 0;
 int fcn_004e3020 = 0;
+float flt_1 = 0;
+float flt_6628cc = 0;
+float flt_6629d0 = 0;
+float flt_6629e8 = 0;
+float flt_665ecc = 0;
 int g_005f3234 = 0;
 int g_0063319c = 0;
 int g_006333cc = 0;
@@ -42,9 +62,28 @@ int g_1005768 = 0;
 char g_1005780 = 0;
 unsigned int g_100581c = 0;
 unsigned int g_1005820 = 0;
+int g_1005840 = 0;
+int g_1005844 = 0;
+int g_1005848 = 0;
+short g_100584c = 0;
+int* g_1005854 = 0;
+int* g_100585c = 0;
+int* g_1005864 = 0;
+int* g_100586c = 0;
+int* g_1005874 = 0;
+int* g_100587c = 0;
+int* g_1005884 = 0;
 int g_10058a0[8] = {0};
 int g_10058e0 = 0;
 void* g_10058e4 = 0;
+int* g_1005900 = 0;
+char* g_1005904 = 0;
+int g_1005908 = 0;
+int g_100590c = 0;
+unsigned char g_1005910[1] = {0};
+int g_1006110 = 0;
+unsigned char g_1006114[1] = {0};
+int g_1006914 = 0;
 char* g_1006920[1] = {0};
 char g_10069a0[1] = {0};
 int g_10069a4 = 0;
@@ -79,6 +118,12 @@ float g_100991c = 0;
 float g_100993c = 0;
 float g_10099d0[8] = {0};
 float g_1009a64[8] = {0};
+float g_1009b6c = 0;
+float g_1009b74 = 0;
+float g_1009b7c = 0;
+float g_1009b8c = 0;
+float g_1009b94 = 0;
+float g_1009b9c = 0;
 float g_100a0a0 = 0;
 float g_100a0c0[1] = {0};
 float g_100af14 = 0;
@@ -95,15 +140,32 @@ int g_100d10c = 0;
 char * g_100dbc0[16] = {0};
 int g_100dc00 = 0;
 int g_100dc04 = 0;
-float g_100dc14 = 0;
+int g_100dc14 = 0;
 int g_100dc20 = 0;
+int g_100dc24 = 0;
 void* g_100dc28 = 0;
 void* g_100dc2c = 0;
 int g_100dc30 = 0;
-int g_100e720[1] = {0};
+int g_100dc34 = 0;
+int g_100dc38 = 0;
+int g_100dc3c = 0;
+char g_100dc40[1] = {0};
+char g_100dc60[1] = {0};
+char g_100ddc0[1] = {0};
+char g_100df20[1] = {0};
+int g_100e720 = 0;
+int g_100e724 = 0;
+int g_100e728 = 0;
+int g_100e72c = 0;
+int g_100e730 = 0;
 void* g_100e748 = 0;
 int g_100e74c = 0;
-int g_100e760[1] = {0};
+int g_100e760 = 0;
+int g_100e764 = 0;
+int g_100e768 = 0;
+int g_100e76c = 0;
+int g_100e770 = 0;
+int g_100e774 = 0;
 int g_100e7a0[48] = {0};
 char g_100eb80[1] = {0};
 int g_100ef80 = 0;
@@ -114,24 +176,35 @@ int g_100f1bc = 0;
 int g_100f1c0 = 0;
 int g_100f1c4 = 0;
 int g_100f1c8 = 0;
+int g_100f1cc = 0;
+int g_100f1d0 = 0;
+int g_100f1d4 = 0;
 int g_100f1d8 = 0;
 int g_100f1dc = 0;
 int g_100f1e0 = 0;
+int g_100f1e4 = 0;
 int g_100f1e8 = 0;
 int g_100f1ec = 0;
 int g_100f200[1] = {0};
+int g_100f800 = 0;
 int g_100f804 = 0;
 int g_100f840 = 0;
+int g_100f84c = 0;
 int g_100f860[3] = {0};
 int g_100f884 = 0;
 int g_100f888 = 0;
 int g_100f890 = 0;
 int g_100f894 = 0;
+int g_100f898 = 0;
+int g_100f89c = 0;
 void* g_100f8a0 = 0;
 char g_100f8c0[1] = {0};
+int g_100f940 = 0;
 int g_100f944 = 0;
+int g_100f950 = 0;
+int g_1015ce0 = 0;
 char g_1015da0[1] = {0};
-char* g_1015ea0 = 0;
+int g_1015ea0 = 0;
 int g_1015ea4 = 0;
 int g_1015ea8 = 0;
 int g_1015eac = 0;
@@ -141,12 +214,16 @@ int g_1015f4c[1] = {0};
 int g_1015f50[1] = {0};
 int g_1015f78[1] = {0};
 char g_1016198[1] = {0};
+char g_10161b4[1] = {0};
 char g_10161bc[1] = {0};
 int g_10161cc[1] = {0};
-char g_10161d0[1] = {0};
+int g_10161d0[1] = {0};
 char g_102cbc0[1] = {0};
 int g_102cbc4[8] = {0};
 int g_102cbc8[1] = {0};
+int g_102cbcc[1] = {0};
+int g_102d020 = 0;
+int g_102d024 = 0;
 int g_102d028 = 0;
 int g_102d02c = 0;
 char g_102d040[1] = {0};
@@ -159,13 +236,14 @@ int g_1038140[1] = {0};
 int g_1038144[1] = {0};
 int g_1038150[1] = {0};
 int g_10382e0[1] = {0};
+int g_1038580 = 0;
 int g_1040480 = 0;
 int g_1040484 = 0;
 int g_1040488 = 0;
 int g_104048c = 0;
 int g_1040490 = 0;
 int g_1040494 = 0;
-char* g_104049c = 0;
+int g_104049c = 0;
 unsigned int g_10404a0 = 0;
 int g_10404c0[32] = {0};
 float g_10404c4[15] = {0};
@@ -182,6 +260,8 @@ unsigned int g_10405fc = 0;
 char g_1040600 = 0;
 void** g_1040610[1] = {0};
 unsigned int g_104061c = 0;
+int g_1040620 = 0;
+int g_1040624 = 0;
 char g_1040640[1] = {0};
 int g_1040954 = 0;
 char* g_1040958 = 0;
@@ -195,9 +275,22 @@ float g_1040d00[1024] = {0};
 char* g_1041d00 = 0;
 void* g_1041d04 = 0;
 int g_1041d08 = 0;
+int g_1041d0c = 0;
 int g_1041d20[6] = {0};
 char g_1041d6c = 0;
 char g_1041d80[1] = {0};
+float g_1042150 = 0;
+float g_1042154 = 0;
+float g_1042158 = 0;
+float g_1042160 = 0;
+float g_1042164 = 0;
+float g_1042168 = 0;
+float g_1042180 = 0;
+float g_1042184 = 0;
+float g_1042188 = 0;
+float g_1042190 = 0;
+float g_1042194 = 0;
+float g_1042198 = 0;
 float g_10421a0 = 0;
 char g_10421c0[1] = {0};
 char* g_1042320 = 0;
@@ -209,18 +302,23 @@ int g_1042570 = 0;
 int g_1042574 = 0;
 int g_1042578 = 0;
 int g_104257c = 0;
+int g_1042580 = 0;
 float g_1042584 = 0;
 float g_1042588 = 0;
-float g_10425a0[20] = {0};
+float g_10425a0[19] = {0};
 float g_10425b0[1] = {0};
 float g_10425c0[1] = {0};
 float g_10425d0[1] = {0};
+int g_10425f0[1] = {0};
 float g_10425fc = 0;
 int g_1042a04 = 0;
 int g_1042a08 = 0;
+int g_1042a0c = 0;
 float g_1042a10 = 0;
 float g_1042a14 = 0;
 float g_1042a18 = 0;
+int g_1042a1c = 0;
+int g_1042a20 = 0;
 float g_1042a24 = 0;
 float g_1042a28 = 0;
 int g_1042a2c = 0;
@@ -244,17 +342,23 @@ char* g_1043254 = 0;
 unsigned char g_1043277 = 0;
 float g_1043288 = 0;
 float g_104328c = 0;
+int g_1043290 = 0;
+float g_1043294 = 0;
 int g_1043298 = 0;
 float g_104329c = 0;
+float g_10432a0 = 0;
 float g_10432a4 = 0;
 int g_10432a8 = 0;
 char g_10432c0[1] = {0};
 int g_1043340[64] = {0};
-int g_104336c = 0;
-char g_1043370[1] = {0};
+int* g_104336c = 0;
+char* g_1043370[1] = {0};
+char g_1043690[1] = {0};
 char g_1043695[1] = {0};
+int g_1043698 = 0;
 float g_10529c4 = 0;
 float g_10529c8 = 0;
+int g_10529cc = 0;
 float g_10529d0 = 0;
 float g_10529d4 = 0;
 float g_10529d8 = 0;
@@ -269,24 +373,40 @@ float g_1052bbc = 0;
 float g_1052bc0 = 0;
 float g_1052bc4 = 0;
 float g_1052bc8 = 0;
-int g_1052bd0 = 0;
+char g_1052bd0[1] = {0};
 float g_1052bd8 = 0;
 int g_1052bdc = 0;
 char g_1052be0[1] = {0};
+int g_1052be4 = 0;
+int g_1052bec = 0;
 float g_1052c00[16] = {0};
 char g_1052c40 = 0;
 unsigned int g_1052c48[2] = {0};
 unsigned int g_1052c50 = 0;
 int g_1052c60 = 0;
 int g_1052de0 = 0;
+char g_1052e00[1] = {0};
+char g_1052f00[1] = {0};
 char g_1053000[1] = {0};
 int g_11bb000[1] = {0};
 char g_11cd000[1474480] = {0};
+char g_1335000[1] = {0};
+char g_1335120[1] = {0};
 char g_149d120[1] = {0};
 int g_149d188[1] = {0};
+unsigned char g_14a0b20[1] = {0};
 char* g_14a5320[1] = {0};
+char* g_14a5398 = 0;
+char* g_14a5400[1] = {0};
+char* g_14a540c[1] = {0};
+char* g_14a5418[1] = {0};
+char* g_14a5450[1] = {0};
+int g_14a54d0 = 0;
+int g_14a54d4 = 0;
 int g_14a5508 = 0;
+int g_14a5524 = 0;
 int g_14a5538 = 0;
+int g_14a5544 = 0;
 int g_14a5548 = 0;
 int g_14a554c = 0;
 int g_14a5550 = 0;
@@ -297,10 +417,11 @@ char* g_14a558c = 0;
 char* g_14a5590 = 0;
 int g_14a566c = 0;
 char* g_14a567c = 0;
-int g_14a5770 = 0;
-char* g_14a5774 = 0;
-char* g_14a579c = 0;
-int g_14a57e0 = 0;
+char* g_14a5770[1] = {0};
+int g_14a5774 = 0;
+int g_14a579c = 0;
+int g_14a57e0[1] = {0};
+int g_14a595c[1] = {0};
 char* g_14a5ad8[1] = {0};
 char* g_14a5adc[15] = {0};
 int g_14a5b54 = 0;
@@ -308,12 +429,15 @@ int g_14a5c6c = 0;
 char* g_14a5dbc[1] = {0};
 char* g_14a60d0[1] = {0};
 char* g_14a62d8[1] = {0};
-int g_14a6538 = 0;
-int g_14a6544 = 0;
+int g_14a6538[1] = {0};
+char* g_14a6544[1] = {0};
 char* g_14a6554 = 0;
+char* g_14a6558 = 0;
 int g_14a7860 = 0;
+char* g_14a7898[1] = {0};
 int g_14a79c0[1] = {0};
 int g_14a7b50 = 0;
+char* g_14a7bb0[1] = {0};
 int g_14a7c98 = 0;
 int g_14a7d28 = 0;
 int g_14a7e50 = 0;
@@ -327,8 +451,15 @@ int g_14a80b0 = 0;
 int g_14a80b8 = 0;
 int g_14a80d8 = 0;
 int g_14a9098 = 0;
+int g_14a90a0 = 0;
 int g_14a92bc = 0;
 char* g_14a97d4 = 0;
+int g_14a9a04 = 0;
+int g_14a9a08 = 0;
+int g_14a9a0c = 0;
+char* g_14a9a10 = 0;
+char* g_14a9a1c = 0;
+char* g_14a9a20 = 0;
 char* g_14a9a28 = 0;
 char* g_14a9a44 = 0;
 char* g_14a9a54 = 0;
@@ -370,8 +501,18 @@ int g_14ab07c = 0;
 int g_14ab080 = 0;
 int g_14ab098 = 0;
 int g_14ab0b8 = 0;
+char* g_14ab248 = 0;
 int g_14ab314 = 0;
+char* g_14ab4ec = 0;
+char* g_14ab54c = 0;
+char* g_14ab5cc = 0;
+int g_14ab658 = 0;
+int g_14ab65c = 0;
 int g_14ab670 = 0;
+int g_14ab694 = 0;
+int g_14ab6fc = 0;
+int g_14ab710 = 0;
+int g_14ab718 = 0;
 int g_14ab750 = 0;
 int g_14ab89c = 0;
 int g_14ab8c8 = 0;
@@ -382,6 +523,12 @@ int g_14ab934 = 0;
 int g_14ab954 = 0;
 int g_14ab9d0 = 0;
 int g_14aba0c = 0;
+int g_14aba40 = 0;
+int g_14aba48 = 0;
+int g_14aba94 = 0;
+int g_14aba98 = 0;
+int g_14aba9c = 0;
+int g_14abaa0 = 0;
 int g_14abaa4 = 0;
 int g_14abaac = 0;
 int g_14abab4 = 0;
@@ -395,13 +542,18 @@ int g_14abb44 = 0;
 int g_14abb48 = 0;
 int g_14abb54 = 0;
 int g_14abb58 = 0;
+int g_14abb60 = 0;
 int g_14abb84 = 0;
 char* g_14abbb0 = 0;
 int g_14abbf4 = 0;
+int g_14abc14 = 0;
 char* g_14abc28 = 0;
 int g_14abc2c = 0;
 int g_14abc30 = 0;
 int g_14abc44 = 0;
+int g_14abc88 = 0;
+int g_14abc90 = 0;
+int g_14abc94 = 0;
 int g_14abc98 = 0;
 int g_14abcbc = 0;
 int g_14abcc0 = 0;
@@ -415,6 +567,10 @@ int g_14abd04 = 0;
 int g_14abd28 = 0;
 int g_14abd48 = 0;
 int g_14abd70 = 0;
+int g_14abe74 = 0;
+int g_14abe78 = 0;
+int g_14abe80 = 0;
+int g_14abe84 = 0;
 int g_14abee0[1] = {0};
 int g_14ac498 = 0;
 int g_14ac49c = 0;
@@ -431,13 +587,23 @@ int g_14ac570 = 0;
 int g_14ac574 = 0;
 int g_14ac5a8 = 0;
 int g_14ac5ac = 0;
+char* g_14ac5cc = 0;
+char* g_14ac5d0 = 0;
+int g_14ac5d4 = 0;
+int g_14ac5e4 = 0;
+int g_14ac5e8 = 0;
+int g_14ac5ec = 0;
 char* g_14ac5f0 = 0;
 char* g_14ac5fc = 0;
 char* g_14ac600 = 0;
 char* g_14ac604 = 0;
 int g_14ac608 = 0;
 char* g_14ac60c = 0;
+int g_14ac614 = 0;
+int g_14ac618 = 0;
+int g_14ac61c = 0;
 int g_14ac628 = 0;
+char* g_14ac630 = 0;
 int g_14ac644 = 0;
 char* g_14ac648 = 0;
 char* g_14ac64c = 0;
@@ -448,6 +614,7 @@ int g_14acb40 = 0;
 char* g_14acb58 = 0;
 int g_14acb78 = 0;
 int g_14acb94 = 0;
+int g_14ad084 = 0;
 int g_14ad0c8 = 0;
 int g_14ad0cc = 0;
 int g_14ad0d0 = 0;
@@ -494,11 +661,15 @@ int g_14ad2f0 = 0;
 int g_14ad318 = 0;
 char* g_14ad474 = 0;
 char* g_14ad590[1] = {0};
+char* g_14ad660 = 0;
 char* g_14b4fa8 = 0;
 char* g_14b4fac = 0;
+int g_14b5280 = 0;
 int g_14b5290 = 0;
 char* g_14b52c0 = 0;
+char* g_14b52c4 = 0;
 int g_14b52fc = 0;
+char* g_14b5304 = 0;
 int g_14b5308 = 0;
 int g_14b534c = 0;
 int g_14b538c = 0;
@@ -506,12 +677,18 @@ int g_14b53c8 = 0;
 int g_14b53fc = 0;
 int g_14b5400 = 0;
 int g_14b5458 = 0;
+int g_14b546c = 0;
+int g_14b5470 = 0;
+char* g_14b5494 = 0;
 int g_14b556c = 0;
 int g_14b5570 = 0;
+int g_14b5574 = 0;
+int g_14b5588 = 0;
 int g_14b55a0 = 0;
 int g_14b55f0 = 0;
 int g_14b5650 = 0;
 int g_14b5654 = 0;
+int g_14b5674 = 0;
 int g_14b56f0 = 0;
 int g_14b5730 = 0;
 int g_14b5734 = 0;
@@ -524,7 +701,16 @@ int g_14b57bc = 0;
 int g_14b57e0 = 0;
 int g_14b57e4 = 0;
 int g_14b57fc = 0;
+int g_14b5874 = 0;
+char* g_14b58e8 = 0;
+char* g_14b58ec = 0;
+char* g_14b58f0 = 0;
+char* g_14b58f4 = 0;
 int g_14b59d0[1] = {0};
+int g_14b59e0 = 0;
+char* g_14b5a08 = 0;
+char* g_14b5a14 = 0;
+char* g_14b5a18 = 0;
 int g_14b5a20 = 0;
 int g_14b5ab4 = 0;
 int g_14b5ac0 = 0;
@@ -537,6 +723,8 @@ int g_14b5bc0 = 0;
 char* g_14b5bc8 = 0;
 int g_14b5be4 = 0;
 int g_14b5bfc = 0;
+int g_14b5d40 = 0;
+int g_14b5d44 = 0;
 int g_14b5d48 = 0;
 int g_14b5d4c = 0;
 int g_14b5d50 = 0;
@@ -548,9 +736,14 @@ int g_14b5e40 = 0;
 int g_14b5e44 = 0;
 int g_14b5e48 = 0;
 int g_14b5e4c = 0;
+int g_14b5e50 = 0;
+int g_14b5e54 = 0;
 int g_14b5e70 = 0;
 int g_14b5e84 = 0;
+char* g_14b5e88 = 0;
+char* g_14b5e8c = 0;
 int g_14b5e9c = 0;
+int g_14b5ea4 = 0;
 int g_14b5eac = 0;
 int g_14b5eb4 = 0;
 int g_14b5eb8 = 0;
@@ -558,12 +751,15 @@ int g_14b5ebc = 0;
 int g_14b5ec0 = 0;
 int g_14b5ec4 = 0;
 int g_14b5ed8[1] = {0};
+char* g_14b5f04 = 0;
 int g_14b5f10 = 0;
 char* g_14b5f14 = 0;
+int g_14b731c[1] = {0};
 int g_14b7320[1] = {0};
 char* g_14c9320[32] = {0};
 int g_14c93a0[2048] = {0};
 char g_14cb3b0[1] = {0};
+char g_14cb3c0[1] = {0};
 int g_14cb430 = 0;
 char g_14cb440[1] = {0};
 void* g_14cb8e0 = 0;
@@ -588,6 +784,7 @@ float g_14cbc78 = 0;
 unsigned short g_14cbc7c = 0;
 unsigned short g_14cbc7e = 0;
 float g_14cbc80 = 0;
+int g_14cbc84 = 0;
 int g_14cbca0 = 0;
 char* g_14cbca4 = 0;
 unsigned char* g_14cbca8 = 0;
@@ -606,6 +803,10 @@ int g_14ce600 = 0;
 char g_14ce620[1] = {0};
 unsigned long g_14ce728 = 0;
 int g_14ce764 = 0;
+int g_14ce77c = 0;
+unsigned int g_14ce798 = 0;
+unsigned int g_14ce79c = 0;
+int g_14ce7ac = 0;
 unsigned int g_14ce7cc = 0;
 unsigned int g_14ce7e0 = 0;
 char g_14ce820[1] = {0};
@@ -624,7 +825,9 @@ int g_14ce8d4 = 0;
 int g_14ce8d8 = 0;
 int g_14ce8dc = 0;
 int g_14ce8e0 = 0;
+int g_14ce8e4 = 0;
 int g_14ce8e8 = 0;
+int g_14ce8ec = 0;
 int g_14ce900 = 0;
 int g_14ce904 = 0;
 void* g_14ce90c = 0;
@@ -633,14 +836,18 @@ short g_14ce922 = 0;
 short g_14ce924 = 0;
 unsigned short g_14cf300[1] = {0};
 char g_14cf70f = 0;
-char g_14cf72a[1] = {0};
+char g_14cf718 = 0;
+char g_14cf71d = 0;
+char g_14cf72a = 0;
 char g_14cf732 = 0;
-char g_14cf736 = 0;
+unsigned char g_14cf736 = 0;
+char g_14cf738 = 0;
 char g_14cf7c8 = 0;
 char g_14cf7cb = 0;
 char g_14cf7cd = 0;
 char g_14cf7d0 = 0;
 int g_14cf900[1] = {0};
+short g_14cf902 = 0;
 int g_14cf94c = 0;
 char g_14cf950 = 0;
 void* g_14cf954 = 0;
@@ -653,6 +860,8 @@ int g_1551f40[48] = {0};
 int g_1552000 = 0;
 int g_1552010 = 0;
 int g_1552020[1024] = {0};
+char g_538060[1] = {0};
+char g_5438c0[1] = {0};
 char g_5c0d90[1] = {0};
 int g_662008 = 0;
 int g_662318 = 0;
@@ -671,11 +880,14 @@ int g_662450 = 0;
 int g_662454 = 0;
 unsigned int g_6624a0[1] = {0};
 float g_6628a0 = 0;
+float g_6628a4 = 0;
 float g_6628a8 = 0;
 float g_6628ac = 0;
+float g_6628b0 = 0;
 float g_6628bc = 0;
-char g_6628c8[1] = {0};
+float g_6628c8 = 0;
 float g_6628cc = 0;
+double g_6628d0 = 0;
 float g_6628d8 = 0;
 float g_6628dc = 0;
 double g_6628f0 = 0;
@@ -684,39 +896,103 @@ float g_6628fc = 0;
 double g_662908 = 0;
 float g_662910 = 0;
 float g_662914 = 0;
+float g_662918 = 0;
+float g_66291c = 0;
+float g_662920 = 0;
+float g_662924 = 0;
 float g_66292c = 0;
-double g_662950 = 0;
+float g_662930 = 0;
+float g_662938 = 0;
+float g_662948 = 0;
+float g_662950 = 0;
+double g_662958 = 0;
 float g_662960 = 0;
 float g_662964 = 0;
+double g_6629a0 = 0;
+float g_6629b0 = 0;
+float g_6629b4 = 0;
+float g_6629b8 = 0;
+float g_6629bc = 0;
 float g_6629c0 = 0;
+double g_6629c8 = 0;
 float g_6629d0 = 0;
 float g_6629e8 = 0;
 double g_6629f8 = 0;
+double g_662a08 = 0;
 float g_662a18 = 0;
 double g_662a20 = 0;
+float g_662a2c = 0;
+float g_662a34 = 0;
 float g_662a3c = 0;
+float g_662a40 = 0;
+float g_662a44 = 0;
 double g_662a48 = 0;
+double g_662a50 = 0;
+double g_662a58 = 0;
+double g_662a60 = 0;
+float g_662a68 = 0;
 float g_662a6c = 0;
+float g_662a70 = 0;
+float g_662a74 = 0;
+float g_662a7c = 0;
+float g_662a84 = 0;
+float g_662a88 = 0;
+float g_662a8c = 0;
+float g_662a90 = 0;
 float g_662a94 = 0;
+float g_662a98 = 0;
+float g_662aa0 = 0;
+float g_662aac = 0;
+float g_662ab0 = 0;
+float g_662ab4 = 0;
+float g_662ab8 = 0;
+float g_662ac0 = 0;
 float g_662ac8 = 0;
+float g_662acc = 0;
+float g_662ad0 = 0;
 double g_662ad8 = 0;
-double g_662b20 = 0;
+float g_662b08 = 0;
+float g_662b0c = 0;
+float g_662b10 = 0;
+float g_662b20 = 0;
+float g_662b28 = 0;
 int g_662b40 = 0;
 int g_662b68[1] = {0};
+float g_662c30 = 0;
+double g_662c38 = 0;
+float g_662c6c = 0;
+double g_662c70 = 0;
+int g_662c7c[1] = {0};
 float g_662c94 = 0;
+float g_662c98 = 0;
+double g_662ca0 = 0;
+float g_662ca8 = 0;
+double g_662cb0 = 0;
+double g_662cb8 = 0;
+double g_662cc0 = 0;
+double g_662cc8 = 0;
+double g_662cd0 = 0;
+double g_662cd8 = 0;
+float g_662ce8 = 0;
 float g_662cf8 = 0;
 char g_662d18[1] = {0};
 char g_662d1c[1] = {0};
+float g_662d30 = 0;
 float g_662d34 = 0;
+double g_662d38 = 0;
 float g_662d40[3] = {0};
 int g_662d60 = 0;
 int g_662d64 = 0;
 int g_662d68 = 0;
-float g_662d70[4] = {0};
+float g_662d70 = 0;
+float g_662d74 = 0;
+float g_662d78 = 0;
 float g_662da8 = 0;
 char g_662dc8[135] = {0};
+float g_662e64 = 0;
+double g_662e68 = 0;
 const float g_662e70[15] = {0};
-unsigned int g_662ea8[1] = {0};
+int g_662ea8[1] = {0};
 int g_663310[10] = {0};
 int g_6633d4[4] = {0};
 const int g_6635f8[1] = {0};
@@ -724,34 +1000,69 @@ const int g_663670[1] = {0};
 int g_663734[1] = {0};
 const int g_663f40[1] = {0};
 const int g_663fb8[1] = {0};
+float g_664080 = 0;
+double g_664088 = 0;
 float g_664090 = 0;
+float g_6640b4 = 0;
 char g_6640c0[1] = {0};
 float g_6640cc = 0;
 double g_6640e8 = 0;
-const double g_6640f8 = 0;
+double g_6640f0 = 0;
+double g_6640f8 = 0;
+double g_664108 = 0;
+float g_664124 = 0;
+double g_664128 = 0;
 float g_66413c = 0;
+float g_664144 = 0;
 float g_66414c = 0;
+float g_664150 = 0;
 float g_664154 = 0;
+float g_664158 = 0;
+float g_664160 = 0;
 float g_664164 = 0;
 float g_664168 = 0;
 float g_66416c = 0;
+float g_664174 = 0;
+float g_664178 = 0;
+float g_66417c = 0;
+double g_664180 = 0;
+float g_664188 = 0;
 float g_66418c = 0;
+float g_664198 = 0;
 int g_6641a0[1] = {0};
 char g_6641a4[1] = {0};
 int g_664260[7] = {0};
+float g_664320 = 0;
+float g_664330 = 0;
+float g_66433c = 0;
+double g_664360 = 0;
+float g_664368 = 0;
+float g_66436c = 0;
 float g_664388 = 0;
 int g_664398[1] = {0};
 int g_6643d8[1] = {0};
+int g_664418[1] = {0};
+int g_664440[1] = {0};
 void* g_664448 = 0;
+float g_66444c = 0;
+float g_664450 = 0;
 int g_664454 = 0;
 float g_664458 = 0;
+double g_664468 = 0;
 int g_664e0c[1] = {0};
+int g_664e10[1] = {0};
 int g_664e1c[3] = {0};
 int g_664e28[3] = {0};
+int g_664e34[1] = {0};
 double g_664e60 = 0;
 double g_664e78 = 0;
 float g_664e80 = 0;
 float g_664e88 = 0;
+float g_664ea4 = 0;
+float g_664ec0 = 0;
+float g_664ed0 = 0;
+float g_664ed4 = 0;
+double g_664ee8 = 0;
 double g_664ef8 = 0;
 double g_664f08 = 0;
 double g_664f10 = 0;
@@ -761,37 +1072,76 @@ float g_665280 = 0;
 float g_665284 = 0;
 float g_6652c4 = 0;
 float g_6652c8 = 0;
+float g_6652cc = 0;
 float g_6652d0 = 0;
 float g_6652d4 = 0;
 float g_6652d8[1] = {0};
+float g_6652e8[1] = {0};
 int g_6652f8[1] = {0};
 float g_665368 = 0;
 float g_665370 = 0;
 int g_6653bc = 0;
 double g_6653f0 = 0;
+double g_6653f8 = 0;
 double g_665b78 = 0;
 double g_665b80 = 0;
 char g_665b88[1] = {0};
+double g_665bd8 = 0;
+float g_665be0 = 0;
+float g_665be4 = 0;
 float g_665bf0 = 0;
 float g_665bf4 = 0;
+float g_665bf8 = 0;
+float g_665bfc = 0;
+float g_665c00 = 0;
 char g_665c18[320] = {0};
 int g_665d58[1] = {0};
+double g_665dd0 = 0;
 double g_665de0 = 0;
 double g_665e30 = 0;
 float g_665e40 = 0;
+float g_665e44 = 0;
 float g_665e64 = 0;
+float g_665e88 = 0;
+float g_665e9c = 0;
 float g_665ea0 = 0;
+double g_665ea8 = 0;
+float g_665ec0 = 0;
+float g_665ec4 = 0;
+float g_665ec8 = 0;
+double g_665ed0 = 0;
+float g_665ee8 = 0;
+float g_665ef8 = 0;
 double g_665f00 = 0;
-void* g_665f08 = 0;
+int * g_665f08 = 0;
 float g_665f10 = 0;
+float g_665f14 = 0;
+float g_665f18 = 0;
+float g_665f48 = 0;
+float g_665f4c = 0;
+float g_665f50 = 0;
 int g_665f58[4] = {0};
+int g_665f68[4] = {0};
 int g_665f78[1] = {0};
 int g_665f84[4] = {0};
 double g_665fb0 = 0;
+double g_665fc0 = 0;
 int g_666018 = 0;
 int g_66601c = 0;
+int g_666028 = 0;
+int g_66602c = 0;
 int g_666044[1] = {0};
+double g_666090 = 0;
+double g_666098 = 0;
+double g_6660a0 = 0;
+double g_6660a8 = 0;
+double g_6660b0 = 0;
+double g_6660b8 = 0;
+double g_6660c0 = 0;
+double g_6660c8 = 0;
 float g_6660d4 = 0;
+double g_6660d8 = 0;
+float g_6660f4 = 0;
 float g_6660fc = 0;
 float g_666100 = 0;
 char g_66cc40[1] = {0};
@@ -807,6 +1157,7 @@ char g_6752a8[1] = {0};
 float g_675308 = 0;
 int g_67530c = 0;
 int g_675310 = 0;
+int g_675314 = 0;
 int g_675318 = 0;
 int g_67531c = 0;
 int g_675320 = 0;
@@ -816,9 +1167,14 @@ char g_67534c[1] = {0};
 char g_67536c[1] = {0};
 char g_6753fc[1] = {0};
 char g_67540c[1] = {0};
+char g_675504[1] = {0};
 char g_67553c[1] = {0};
+char g_675548[1] = {0};
+char g_675584[1] = {0};
+char g_675598[1] = {0};
 char g_67567c[1] = {0};
 char g_6756a0[1] = {0};
+char g_6756b8[1] = {0};
 char g_675908[1] = {0};
 char g_675bbc[1] = {0};
 char g_675be8[1] = {0};
@@ -840,6 +1196,7 @@ int g_677198 = 0;
 int g_67719c = 0;
 int g_6771a0 = 0;
 int g_6771a4 = 0;
+char g_67728c[1] = {0};
 char g_6772b4[1] = {0};
 int g_6772bc = 0;
 int g_6772c0 = 0;
@@ -858,9 +1215,13 @@ char g_67741c[1] = {0};
 char g_67743c[1] = {0};
 char g_67745c[1] = {0};
 char g_67747c[1] = {0};
+int g_677508 = 0;
+char g_67756c[1] = {0};
+char g_677580[1] = {0};
 char g_6775f4[1] = {0};
 char g_677604[1] = {0};
 char g_677618[1] = {0};
+char g_677640[1] = {0};
 int g_677680 = 0;
 char g_67779c[1] = {0};
 int g_6777ac = 0;
@@ -886,16 +1247,23 @@ short g_678c20[8] = {0};
 float g_678c50[1] = {0};
 float g_678db8[1] = {0};
 float g_678dd0[1] = {0};
+int g_678de8 = 0;
 int g_678dec = 0;
 char g_678df0[1] = {0};
 char g_678e2c[1] = {0};
+char g_678f28[1] = {0};
+char g_678f70[1] = {0};
 char g_678fd0[1] = {0};
+char g_679010[1] = {0};
+char g_679018[1] = {0};
 char g_679060[1] = {0};
 char g_6790b0[1] = {0};
 char g_6790c8[1] = {0};
 int g_6791c8 = 0;
 int g_6791cc = 0;
 int g_6791d0 = 0;
+char g_6792a8[1] = {0};
+char g_679478[1] = {0};
 char g_679540[1] = {0};
 char g_679554[1] = {0};
 char g_679564[1] = {0};
@@ -903,6 +1271,7 @@ char g_679584[1] = {0};
 char g_6795a8[1] = {0};
 char g_6795b4[1] = {0};
 char g_679888[1] = {0};
+int g_6798d4 = 0;
 char g_679964[1] = {0};
 char g_67998c[1] = {0};
 char g_679e00[1] = {0};
@@ -935,6 +1304,8 @@ char g_67a5bc[1] = {0};
 char g_67a930[1] = {0};
 int g_67a960 = 0;
 float g_67a964 = 0;
+char g_67ab48 = 0;
+char g_67ab49 = 0;
 int g_67ac90 = 0;
 char g_67ac98[1] = {0};
 char g_67b04c[1] = {0};
@@ -955,6 +1326,7 @@ float g_67bc10 = 0;
 float g_67bc14 = 0;
 float g_67bc1c = 0;
 float g_67bc20 = 0;
+char g_67bc24 = 0;
 char g_67bc28[1] = {0};
 char g_67bc38[1] = {0};
 int g_67bc4c = 0;
@@ -976,19 +1348,34 @@ int g_67d380 = 0;
 int g_67d384 = 0;
 int g_67d388 = 0;
 int g_67d38c = 0;
+int g_67d390 = 0;
 int g_67d394 = 0;
 int g_67d398 = 0;
+int g_67d39c = 0;
+int g_67d3a0 = 0;
+int g_67d3a4 = 0;
+int g_67d3a8 = 0;
 int g_67d3ac = 0;
+int g_67d3b0 = 0;
+int g_67d3b4 = 0;
+float g_67d3c0[1] = {0};
 int g_67d3cc = 0;
+char g_67d444[1] = {0};
 char g_67d4e0[1] = {0};
 char g_67d5bc[1] = {0};
 char g_67d67c[1] = {0};
+int g_67d8c8 = 0;
 int g_67d8cc = 0;
+int g_67d8d0 = 0;
 int g_67d8d4 = 0;
 int g_67d8dc = 0;
 int g_67d8e0 = 0;
 int g_67d8e4 = 0;
 int g_67d8e8 = 0;
+int g_67d8ec = 0;
+char g_67d908[1] = {0};
+signed char g_67d91c = 0;
+signed char g_67d91d = 0;
 int g_67d920 = 0;
 char g_67d934[1] = {0};
 char g_67d940[1] = {0};
@@ -1004,7 +1391,9 @@ char g_67dad4[1] = {0};
 char g_67dae0[1] = {0};
 float g_67db50 = 0;
 float g_67db54 = 0;
+char g_67e330[1] = {0};
 char g_67e33c[1] = {0};
+char g_67e348[1] = {0};
 int g_67e964 = 0;
 char g_67e968[1] = {0};
 char g_67eab0[1] = {0};
@@ -1018,6 +1407,7 @@ char g_67eb6c[1] = {0};
 char g_67eb84[1] = {0};
 char g_67ec2c[1] = {0};
 char g_67ed14[1] = {0};
+char g_67f0ac[1] = {0};
 int g_67fba8 = 0;
 int g_67fbac = 0;
 void* g_67fbb0 = 0;
@@ -1029,8 +1419,13 @@ int g_67fca8 = 0;
 int g_67fcac = 0;
 int g_67fcb0 = 0;
 int g_67fcb4 = 0;
+int g_680748 = 0;
+int g_68074d = 0;
 char g_680890[1] = {0};
 char g_6808a4[1] = {0};
+char g_6808b0[1] = {0};
+char g_6808f0[1] = {0};
+char g_680ae0[1] = {0};
 int g_680bd0[48] = {0};
 char g_680bd4[1] = {0};
 char g_681110[1] = {0};
@@ -1051,7 +1446,7 @@ char g_68140c[1] = {0};
 char g_681414[1] = {0};
 char g_681420[1] = {0};
 char g_681430[1] = {0};
-char g_68149c[1] = {0};
+int g_68149c = 0;
 char g_6816ac[1] = {0};
 int g_6816d8 = 0;
 char g_6816dc[1] = {0};
@@ -1059,6 +1454,18 @@ float g_681750 = 0;
 float g_6819b0 = 0;
 int g_6819b8[1] = {0};
 int g_688118[1] = {0};
+int g_689d20 = 0;
+char g_68a47c[1] = {0};
+char g_68a498[1] = {0};
+char g_68a4c4[1] = {0};
+char g_68a4cc[1] = {0};
+char g_68a4d0[1] = {0};
+char g_68a4d4[1] = {0};
+char g_68a4d8[1] = {0};
+char g_68a4dc[1] = {0};
+char g_68a4e0[1] = {0};
+char g_68a4e4[1] = {0};
+char g_68a4ec[1] = {0};
 char g_68a4f4[1] = {0};
 char g_68a500[1] = {0};
 char g_68a930[1] = {0};
@@ -1073,6 +1480,14 @@ char g_68ae64[1] = {0};
 char g_68ae9c[1] = {0};
 char g_68aec4[1] = {0};
 char g_68b0d8[1] = {0};
+int g_68b0f4 = 0;
+char g_68b108[1] = {0};
+char g_68b13c[1] = {0};
+char g_68b174[1] = {0};
+char g_68b1ac[1] = {0};
+char g_68b1e0[1] = {0};
+char g_68b1f8[1] = {0};
+char g_68b214[1] = {0};
 char g_68b2d8[1] = {0};
 char g_68b300[1] = {0};
 char g_68b3f8[1] = {0};
@@ -1083,6 +1498,7 @@ int g_68b7a8 = 0;
 char g_68b7ac[1] = {0};
 char g_68b7b4[1] = {0};
 char g_68b82c[1] = {0};
+char g_68b844[1] = {0};
 char g_68bcec[1] = {0};
 char g_68bd14[1] = {0};
 char g_68bd2c[1] = {0};
@@ -1093,6 +1509,7 @@ char g_68bd78[1] = {0};
 char g_68bda0[1] = {0};
 char g_68bda8[1] = {0};
 char g_68bdc4[1] = {0};
+char g_68bdd4[1] = {0};
 char g_68be7c[1] = {0};
 int g_68bef4 = 0;
 int g_68bf38 = 0;
@@ -1114,10 +1531,12 @@ char g_68d538[1] = {0};
 char g_68d6bc[1] = {0};
 char g_68d6d0[1] = {0};
 char g_68d6dc[1] = {0};
+char g_68d714[1] = {0};
 int g_68d780 = 0;
 char g_68d960[1] = {0};
-int g_68da68[1] = {0};
+char g_68da68[1] = {0};
 int g_68da6c[1] = {0};
+char g_68de2c[1] = {0};
 char g_68de60[1] = {0};
 char g_68de84[1] = {0};
 char g_68deb8[1] = {0};
@@ -1139,14 +1558,17 @@ int g_690f98[1] = {0};
 int g_6918e8[1] = {0};
 int g_693228[1] = {0};
 char g_696178[1] = {0};
+unsigned short g_696180 = 0;
+float g_696444[1] = {0};
 char g_69645c[1] = {0};
 char g_696470[1] = {0};
 char g_696488[1] = {0};
 char g_69649c[1] = {0};
 char g_6964b4[1] = {0};
+char g_6964f0[1] = {0};
 char g_696528[1] = {0};
-float g_696540[1] = {0};
-float g_696550[1] = {0};
+float g_696540[4] = {0};
+float g_696550[4] = {0};
 int g_696560[1] = {0};
 unsigned int g_6965d8[2720] = {0};
 int g_699058[37] = {0};
@@ -1161,6 +1583,7 @@ int g_6995bc[1] = {0};
 int g_6995d8[1] = {0};
 char g_6997e8[1] = {0};
 char g_699874[1] = {0};
+char g_699a68[1] = {0};
 char g_699a9c[1] = {0};
 char g_699aa4[1] = {0};
 char g_699adc[1] = {0};
@@ -1173,14 +1596,28 @@ char g_6a1e8c[1] = {0};
 char g_6a1ea4[1] = {0};
 char g_6a22d8[1] = {0};
 char g_6a2300[1] = {0};
+char g_6a2308[1] = {0};
+char g_6a2310[1] = {0};
+char g_6a2318[1] = {0};
+char g_6a2348[1] = {0};
+char g_6a2354[1] = {0};
+char g_6a235c[1] = {0};
+int g_6a2390 = 0;
+int g_6a2394 = 0;
+int g_6a2398 = 0;
+char g_6a239c[1] = {0};
 int g_6a23a8 = 0;
 int g_6a23ac = 0;
 char g_6a23b0[1] = {0};
+int g_6a23b8 = 0;
+int g_6a23bc = 0;
+char g_6a23c0 = 0;
 char g_6a24d0[1] = {0};
 int g_6a24d8[1] = {0};
 float g_6a24e4 = 0;
 int g_6a24e8 = 0;
 int g_6a251c = 0;
+unsigned int g_6a2520 = 0;
 int g_6a2524 = 0;
 int g_6a2528[1] = {0};
 int g_6a2540[1] = {0};
@@ -1218,6 +1655,15 @@ int g_6a25e8 = 0;
 int g_6a25ec = 0;
 int g_6a25f0 = 0;
 int g_6a25fc = 0;
+float g_6a2640 = 0;
+float g_6a2644 = 0;
+float g_6a2648 = 0;
+float g_6a268c = 0;
+float g_6a2690 = 0;
+float g_6a2694 = 0;
+float g_6a28f0 = 0;
+float g_6a28f4 = 0;
+float g_6a28f8 = 0;
 int g_6a2900[5] = {0};
 int g_6a2902 = 0;
 int g_6a290c = 0;
@@ -1230,17 +1676,25 @@ float g_6a2b68[28] = {0};
 int g_6a2bd8 = 0;
 int g_6a2bdc = 0;
 int g_6a2be0 = 0;
+int g_6a2be4 = 0;
 float g_6a2bec = 0;
+int g_6a2bf0 = 0;
+int g_6a2bf4 = 0;
 int g_6a2bf8 = 0;
 int g_6a2bfc = 0;
 int g_6a2c00 = 0;
+int g_6a2c04 = 0;
+int g_6a2c08 = 0;
+int g_6a2c0c = 0;
 unsigned char g_6a2c14[8] = {0};
 int g_6a2c1c = 0;
+int g_6a2c20 = 0;
 int g_6a2c24 = 0;
 char g_6a2e68[1] = {0};
 char g_6a2e8c[1] = {0};
 char g_6a2e94[1] = {0};
 char g_6a2ea8[1] = {0};
+char g_6a2edc[1] = {0};
 char g_6a2f18[1] = {0};
 char g_6a2f24[1] = {0};
 char g_6a2f30[1] = {0};
@@ -1252,12 +1706,20 @@ char g_6a2f80[1] = {0};
 char g_6a2f9c[1] = {0};
 char g_6a2fac[1] = {0};
 char g_6a2fc8[1] = {0};
+char g_6a2fe4[1] = {0};
+char g_6a2fec[1] = {0};
 char g_6a30d4[1] = {0};
 char g_6a30e4[1] = {0};
 char g_6a3110[1] = {0};
 char g_6a3194[1] = {0};
 char g_6a33a4[1] = {0};
 char g_6a33b4[1] = {0};
+char g_6a33c8[1] = {0};
+char g_6a33dc[1] = {0};
+char g_6a33e8[1] = {0};
+char g_6a33f4[1] = {0};
+int g_6a3424 = 0;
+int g_6a342c = 0;
 int g_6a3430 = 0;
 int g_6a3434 = 0;
 int g_6a3438 = 0;
@@ -1274,9 +1736,11 @@ int g_6a3770 = 0;
 int g_6a3774 = 0;
 char g_6a3778[1] = {0};
 char g_6a3a04[1] = {0};
+char g_6a3a1c[1] = {0};
 char g_6a3a28[1] = {0};
 char g_6a3a34[1] = {0};
 char g_6a3a80[1] = {0};
+char g_6a3bb4[1] = {0};
 char g_6a3db4[1] = {0};
 char g_6a3f8c[1] = {0};
 char g_6a4078[1] = {0};
@@ -1288,6 +1752,16 @@ char g_6a4120[1] = {0};
 char g_6a4144[1] = {0};
 char g_6a41c0[1] = {0};
 char g_6a41d4[1] = {0};
+char g_6a438c[1] = {0};
+char g_6a43d0[1] = {0};
+char g_6a4420[1] = {0};
+char g_6a4470[1] = {0};
+char g_6a448c[1] = {0};
+char g_6a4498[1] = {0};
+char g_6a44a8[1] = {0};
+char g_6a44c8[1] = {0};
+char g_6a44e8[1] = {0};
+char g_6a44f4[1] = {0};
 unsigned char g_6a4758 = 0;
 int g_6a475c = 0;
 unsigned short g_6a4760 = 0;
@@ -1309,14 +1783,48 @@ char g_6a585c[1] = {0};
 char g_6a5894[1] = {0};
 char g_6a58ac[1] = {0};
 char g_6a58c0[1] = {0};
+char g_6a58ec[1] = {0};
+char g_6a5998[1] = {0};
 char g_6a59fc[1] = {0};
 char g_6a5a10[1] = {0};
+char g_6a5a48[1] = {0};
 char g_6a5ae0[1] = {0};
 char g_6a5af4[1] = {0};
+char g_6a5ccc[1] = {0};
+char g_6a5ce8[1] = {0};
+char g_6a5d04[1] = {0};
+char g_6a5d20[1] = {0};
+char g_6a5d3c[1] = {0};
+char g_6a5da8[1] = {0};
+char g_6a5dcc[1] = {0};
+char g_6a5de0[1] = {0};
+char g_6a5e00[1] = {0};
+char g_6a5e10[1] = {0};
+char g_6a5e24[1] = {0};
+char g_6a5e40[1] = {0};
+char g_6a5e60[1] = {0};
+char g_6a5e78[1] = {0};
+char g_6a5e88[1] = {0};
 char g_6a6248[1] = {0};
+char g_6a63dc[1] = {0};
+char g_6a63ec[1] = {0};
+char g_6a6538[1] = {0};
+char g_6a654c[1] = {0};
+char g_6a6560[1] = {0};
 char g_6a656c[1] = {0};
 char g_6a65a4[1] = {0};
+char g_6a6ad0[1] = {0};
+char g_6a6ae0[1] = {0};
+char g_6a6af4[1] = {0};
+char g_6a6afc[1] = {0};
+char g_6a6b0c[1] = {0};
+char g_6a6b28[1] = {0};
+char g_6a6b38[1] = {0};
+char g_6a6b48[1] = {0};
 char g_6a6b70[1] = {0};
+char g_6a6d78[1] = {0};
+char g_6a6dcc[1] = {0};
+char g_6a6ddc[1] = {0};
 int g_6a6ee8[1] = {0};
 char g_6a7df0[1] = {0};
 char g_6a7df8[1] = {0};
@@ -1466,7 +1974,10 @@ char g_6a9308[1] = {0};
 char g_6a9324[1] = {0};
 char g_6a9340[1] = {0};
 char g_6a935c[1] = {0};
+char g_6a93c0[1] = {0};
 char g_6a93e0[1] = {0};
+char g_6a956c[1] = {0};
+char g_6a9580[1] = {0};
 char g_6a95e8[1] = {0};
 char g_6a9604[1] = {0};
 char g_6a9624[1] = {0};
@@ -1482,7 +1993,9 @@ char g_6a97f8[1] = {0};
 char g_6a9814[1] = {0};
 char g_6a9828[1] = {0};
 char g_6a9834[1] = {0};
+char g_6a9914[1] = {0};
 char g_6a9924[1] = {0};
+char g_6a9934[1] = {0};
 char g_6a998c[1] = {0};
 char g_6a99a8[1] = {0};
 int g_6a99e8 = 0;
@@ -1495,6 +2008,7 @@ int g_6a9b94 = 0;
 char g_6a9b98[1] = {0};
 int g_6a9b9c = 0;
 int g_6a9bf8[15] = {0};
+int g_6aa0a8 = 0;
 int g_6aa0b0[1] = {0};
 char g_6aa34c[1] = {0};
 char g_6aa35c[1] = {0};
@@ -1504,6 +2018,7 @@ char g_6aa38c[1] = {0};
 char g_6aa39c[1] = {0};
 char g_6aa3b0[1] = {0};
 char g_6aa450[1] = {0};
+char* g_6aa4d8 = 0;
 char g_6aa514[1] = {0};
 char g_6aa5e8[1] = {0};
 char g_6aa5f0[1] = {0};
@@ -1519,6 +2034,9 @@ char g_6aa78c[1] = {0};
 char g_6aa8d0[1] = {0};
 char g_6aaba0[1] = {0};
 char g_6aac70[1] = {0};
+char g_6aac7c[1] = {0};
+char g_6aac84[1] = {0};
+char g_6aacac[1] = {0};
 char g_6aacdc[1] = {0};
 char g_6aae08[1] = {0};
 char g_6aae28[1] = {0};
@@ -1533,6 +2051,8 @@ char g_6ab12c[1] = {0};
 char g_6ab158[1] = {0};
 char g_6ab1e4[1] = {0};
 char g_6ab2a0[1] = {0};
+char g_6ab2e0[1] = {0};
+int g_6ab3dc = 0;
 float g_6ab3e0 = 0;
 char g_6ab41c[1] = {0};
 char g_6ab430[1] = {0};
@@ -1554,6 +2074,7 @@ char g_6aba94[1] = {0};
 char g_6abaa8[1] = {0};
 char g_6ababc[1] = {0};
 char g_6abad8[1] = {0};
+char g_6abaec[1] = {0};
 int g_6abb00 = 0;
 int g_6abb08[1] = {0};
 int g_6ac240 = 0;
@@ -1562,12 +2083,15 @@ char g_6ac3e4[1] = {0};
 char g_6ac3f4[1] = {0};
 char g_6ac494[1] = {0};
 char g_6ac4c8[1] = {0};
+char g_6ac618[1] = {0};
+char g_6ac628[1] = {0};
 char g_6ac690[1] = {0};
 char g_6ac76c[1] = {0};
 char g_6ac80c[1] = {0};
 char g_6ac820[1] = {0};
 char g_6ac870[1] = {0};
 char g_6ac878[1] = {0};
+int g_6ac8a8[1] = {0};
 char g_6ac9a4[1] = {0};
 char g_6ac9b4[1] = {0};
 char g_6aca14[1] = {0};
@@ -1587,8 +2111,10 @@ float g_6ad628 = 0;
 int g_6ad62c = 0;
 float g_6ad630 = 0;
 float g_6ad634 = 0;
+int g_6b23a4 = 0;
+int g_6b25b0 = 0;
 char g_6b5b20[1] = {0};
-char* g_6b5c20 = 0;
+unsigned int g_6b5c20 = 0;
 int g_6b5c24 = 0;
 char g_6b5c28 = 0;
 int g_6b5c2c = 0;
@@ -1604,17 +2130,22 @@ char g_6b5c60[1] = {0};
 int g_6b5c80 = 0;
 int g_6b5c84 = 0;
 int g_6b5c88 = 0;
+int g_6b5c8c = 0;
 int g_6b5c94 = 0;
 void* g_6b5cb4 = 0;
+void* g_6b5cb8 = 0;
 int g_6b5cbc = 0;
 int g_6b5cc0 = 0;
 int g_6b5cc4 = 0;
 char* g_6b5cf8 = 0;
+int g_6b5cfc = 0;
 char* g_6b5d08 = 0;
 float* g_6b5d0c = 0;
 char* g_6b5d10 = 0;
 char* g_6b5d14 = 0;
 unsigned short g_6b5d18 = 0;
+int g_6b5d54 = 0;
+int g_6b5da8 = 0;
 void* g_6b5dd0 = 0;
 void* g_6b5ddc = 0;
 void* g_6b5de0 = 0;
@@ -1622,11 +2153,15 @@ void* g_6b5de4 = 0;
 unsigned int g_6b5de8 = 0;
 char g_6b5df0[1] = {0};
 void* g_6b5df4 = 0;
+unsigned short g_6b5e08[256] = {0};
 unsigned char g_6b6008[768] = {0};
 char g_6b6108[1] = {0};
 char g_6b6208[1] = {0};
 int g_6b6308 = 0;
-unsigned int* g_6b6d18 = 0;
+int g_6b6714[1] = {0};
+unsigned short g_6b6b18[256] = {0};
+int* g_6b6d18 = 0;
+unsigned short g_6b6d20[256] = {0};
 void* g_6b6f20[6] = {0};
 unsigned int g_6b6f38 = 0;
 int g_6b6f3c = 0;
@@ -1655,10 +2190,10 @@ int g_6b71a4 = 0;
 int g_6b71a8 = 0;
 int g_6b71b0 = 0;
 int g_6b7d40 = 0;
-int g_6b7d54 = 0;
-int g_6b7d58 = 0;
-int g_6b7d5c = 0;
-int g_6b7d60 = 0;
+unsigned int g_6b7d54 = 0;
+unsigned int g_6b7d58 = 0;
+unsigned int g_6b7d5c = 0;
+unsigned int g_6b7d60 = 0;
 int g_6b7d64 = 0;
 char* g_6b7d68 = 0;
 int g_6b7d6c = 0;
@@ -1690,6 +2225,9 @@ int* g_6b7f50[16] = {0};
 int g_6b7f90 = 0;
 int g_6b7f94 = 0;
 int g_6b7f98 = 0;
+int g_6b7f9c = 0;
+void* g_6b7fa0 = 0;
+int g_6b7fa4 = 0;
 int g_6b7fa8 = 0;
 int g_6b7fac = 0;
 volatile int g_6b7fb0 = 0;
@@ -1710,18 +2248,20 @@ char g_6b7fe8 = 0;
 int g_6b7fec = 0;
 unsigned char g_6b7ff8 = 0;
 char g_6b7ff9 = 0;
-char g_6b7ffa = 0;
+unsigned char g_6b7ffa = 0;
 unsigned char g_6b7ffb = 0;
 unsigned char g_6b7ffc = 0;
 unsigned char g_6b7ffd = 0;
 unsigned char g_6b7ffe = 0;
 unsigned char g_6b7fff = 0;
 char g_6b8000 = 0;
+unsigned char g_6b8001 = 0;
 char g_6b8004 = 0;
 int g_6b8008 = 0;
 int g_6b8010 = 0;
-int g_6b8014 = 0;
+char* g_6b8014 = 0;
 char g_6b8018 = 0;
+int g_6b8050 = 0;
 int g_6b8058 = 0;
 int g_6b805c = 0;
 char g_6b8060 = 0;
@@ -1738,8 +2278,13 @@ int g_6b8484 = 0;
 char g_6b859b = 0;
 char g_6b85a0 = 0;
 unsigned char g_6b85a4 = 0;
+int g_6b85a8 = 0;
+int g_6b85ac = 0;
 char g_6b85c0[1] = {0};
-int g_6b86c4 = 0;
+int g_6b86c0 = 0;
+float g_6b86c4 = 0;
+float g_6b86c8 = 0;
+float g_6b86cc = 0;
 int g_6b86d4 = 0;
 int g_6b86d8 = 0;
 int g_6b86dc = 0;
@@ -1766,7 +2311,7 @@ unsigned int g_6b89ac = 0;
 int g_6b89b0 = 0;
 void* g_6b89b4 = 0;
 int g_6b89b8 = 0;
-char g_6b89bc = 0;
+unsigned char g_6b89bc = 0;
 char g_6b89bd = 0;
 int g_6b89c0 = 0;
 int g_6b89c4[8] = {0};
@@ -1780,30 +2325,41 @@ int g_772508 = 0;
 int g_77250c = 0;
 signed char g_772510 = 0;
 int g_772514 = 0;
-char* g_772524 = 0;
+int g_77251c = 0;
+int g_772524 = 0;
 int g_772528 = 0;
+int g_772530 = 0;
 int g_772534 = 0;
-char* g_77253c = 0;
-void** g_772540 = 0;
+int g_77253c = 0;
+int g_772540 = 0;
 int g_772544 = 0;
 int g_772548 = 0;
 int g_77254c = 0;
 int g_772550 = 0;
+int g_772554 = 0;
 int g_772558 = 0;
 char* g_77255c = 0;
+int g_772560 = 0;
 void* g_772564 = 0;
 int g_772568 = 0;
-void* g_77256c = 0;
+int g_77256c = 0;
 int g_772570 = 0;
 int g_772574 = 0;
-void* g_77257c[2] = {0};
-void* g_772588 = 0;
+int g_772578 = 0;
+int g_77257c = 0;
+int g_772580 = 0;
+int g_772584 = 0;
+int g_772588 = 0;
 int g_77258c[2] = {0};
 int g_77259c = 0;
+int g_7725a0 = 0;
+int g_7725a4 = 0;
 void* g_7725a8 = 0;
 char* g_7725ac = 0;
 int g_7725b0 = 0;
+int g_7725b4 = 0;
 int g_7725b8 = 0;
+int g_7725bc = 0;
 char* g_7725c0 = 0;
 short g_7725c4 = 0;
 int g_7725c8 = 0;
@@ -1811,11 +2367,14 @@ int g_7725d0 = 0;
 int g_7725d8 = 0;
 int g_7725dc = 0;
 int g_7725e0 = 0;
+int g_7725e4 = 0;
 int g_7725e8 = 0;
+int g_7725ec = 0;
 short g_7725f0 = 0;
 short g_7725f2 = 0;
 int g_7725f8 = 0;
 int g_7725fc = 0;
+int g_772600 = 0;
 int g_772604 = 0;
 int g_772608 = 0;
 int g_77260c = 0;
@@ -1825,7 +2384,27 @@ int g_772618 = 0;
 char* g_77261c = 0;
 int g_772620 = 0;
 int g_772624 = 0;
-unsigned char g_772628[1] = {0};
+char g_772628[1] = {0};
+int g_772848 = 0;
+int g_77284c = 0;
+float g_772850 = 0;
+float g_772854 = 0;
+float g_772858 = 0;
+float g_772860 = 0;
+float g_772864 = 0;
+float g_772868 = 0;
+float g_772870 = 0;
+float g_772874 = 0;
+float g_772878 = 0;
+float g_772880 = 0;
+float g_772884 = 0;
+float g_772888 = 0;
+int g_772890 = 0;
+int g_772894 = 0;
+int g_772898 = 0;
+int g_77289c = 0;
+int g_7728b4 = 0;
+int g_7728b8 = 0;
 unsigned int g_7728bc = 0;
 int g_7728c0 = 0;
 int g_7728c4 = 0;
@@ -1837,13 +2416,17 @@ int g_7728d8 = 0;
 int g_7728e0 = 0;
 int g_7728e4 = 0;
 void* g_7728e8 = 0;
+int g_7728ec = 0;
+unsigned int g_7728f0 = 0;
 int g_7728f4 = 0;
 int g_7728f8 = 0;
 int g_772900 = 0;
 char* g_772904 = 0;
-void* g_772908 = 0;
+int g_772908 = 0;
+char g_772a10[1] = {0};
+char g_772b10 = 0;
 char g_772c10[1] = {0};
-int g_772d10 = 0;
+char g_772d10 = 0;
 int g_772d14 = 0;
 int g_772d18 = 0;
 int g_772d1c = 0;
@@ -1854,11 +2437,24 @@ int g_772d2c = 0;
 int g_772d30 = 0;
 char* g_772d34 = 0;
 unsigned int g_772d38 = 0;
+int g_772d3c = 0;
+int g_772d40 = 0;
+char * g_772d44 = 0;
+char * g_772d48 = 0;
+int g_772d4c = 0;
+char * g_772d50 = 0;
+char g_772d58[1] = {0};
+char* g_772e58 = 0;
+char* g_772e5c = 0;
+int g_772e60 = 0;
+int g_772e64 = 0;
+int g_772e68 = 0;
 int g_772e6c = 0;
 int g_772e70 = 0;
 int g_772e74 = 0;
 int g_772e7c = 0;
 int g_772e80 = 0;
+int g_772e84 = 0;
 int g_772e88 = 0;
 int g_772e8c = 0;
 int g_772e94 = 0;
@@ -1868,14 +2464,21 @@ int g_772ea4 = 0;
 int g_772ea8 = 0;
 int g_772eac = 0;
 char* g_772eb4 = 0;
+char* g_772ec4 = 0;
 int g_772ed4 = 0;
 int g_772ed8 = 0;
+int g_772edc = 0;
+int g_772ee0 = 0;
+int g_772ee4 = 0;
+int g_772ee8 = 0;
 int g_772efc = 0;
+int g_772f08 = 0;
 int g_772f10 = 0;
 int g_772f18 = 0;
 int g_772f1c = 0;
 int g_772f20 = 0;
-unsigned short* g_772f24 = 0;
+char* g_772f24 = 0;
+int g_772f28 = 0;
 int g_772f2c = 0;
 int g_772f30 = 0;
 int g_772f34 = 0;
@@ -1886,12 +2489,15 @@ int g_772f44 = 0;
 int g_772f4c = 0;
 unsigned char* g_772f50 = 0;
 int g_772f54 = 0;
-char g_772f5a = 0;
-char g_772f5b = 0;
-char g_772f5c = 0;
-char g_772f5d = 0;
+unsigned char g_772f58 = 0;
+unsigned char g_772f59 = 0;
+unsigned char g_772f5a = 0;
+unsigned char g_772f5b = 0;
+unsigned char g_772f5c = 0;
+unsigned char g_772f5d = 0;
 int g_772f64 = 0;
 int g_772f68 = 0;
+int g_772f6c = 0;
 unsigned int g_772f70 = 0;
 char g_772f74 = 0;
 int g_772f78 = 0;
@@ -1935,17 +2541,20 @@ char* g_773da8 = 0;
 char* g_773dac = 0;
 char* g_773db0 = 0;
 char* g_773db4[1] = {0};
-char g_773dd4 = 0;
+unsigned char g_773dd4 = 0;
 int g_773dd8 = 0;
+int g_773ddc = 0;
 int g_773de0 = 0;
 int g_773de4 = 0;
 char g_773de8 = 0;
+char* g_773dfc = 0;
 unsigned short g_773e40[1] = {0};
 int g_774650 = 0;
 int g_774654 = 0;
 int g_774658 = 0;
 int g_77465c = 0;
 char g_774660 = 0;
+int g_774664 = 0;
 int g_774668 = 0;
 int g_774670 = 0;
 int g_774674 = 0;
@@ -1961,28 +2570,45 @@ int g_774698 = 0;
 int g_7746a0 = 0;
 char* g_7746a4 = 0;
 char* g_7746a8 = 0;
+char* g_7746ac = 0;
+char* g_7746b0 = 0;
 char* g_7746b4 = 0;
 int g_7746b8 = 0;
+unsigned short* g_7746bc = 0;
 char* g_7746c0 = 0;
 char* g_7746c4 = 0;
 unsigned char* g_7746c8 = 0;
-char* g_7746cc = 0;
+char * g_7746cc = 0;
 int g_7746d4 = 0;
 int g_7746d8 = 0;
+int g_7746dc = 0;
+int g_7746e0 = 0;
+int g_7746e4 = 0;
+int g_7746e8 = 0;
 int g_7746f0 = 0;
 char g_7746f4 = 0;
 int g_7746f8 = 0;
 char g_7746fc = 0;
+int g_774708 = 0;
 char g_77470c = 0;
 char g_77470d = 0;
+char g_77470e = 0;
 int g_774710 = 0;
 int g_774714 = 0;
+char* g_774718 = 0;
+char* g_77471c = 0;
 char g_774724 = 0;
 int g_774728 = 0;
 int g_77472c = 0;
 float g_774730 = 0;
+int g_774734 = 0;
+int g_774798 = 0;
+char* g_77479c = 0;
+char* g_7747a0 = 0;
+char* g_7747a4 = 0;
 int g_7747a8 = 0;
 int g_7747ac = 0;
+char g_7747ad = 0;
 unsigned char g_7747b0 = 0;
 int g_7747b4 = 0;
 char* g_7747b8 = 0;
@@ -1992,18 +2618,26 @@ int g_7747c4 = 0;
 int g_7747c8 = 0;
 int g_7747cc = 0;
 int g_7747d4 = 0;
+int g_7747e0 = 0;
 int g_7747e8 = 0;
 int g_7747f0 = 0;
 int g_7747f8 = 0;
+int g_7747fc = 0;
 int g_774800 = 0;
+int g_774804 = 0;
 int g_774808 = 0;
+int g_77480c = 0;
 int g_774818 = 0;
+char* g_77481c = 0;
 int g_774820 = 0;
 int g_774824 = 0;
 int g_774930 = 0;
 int g_774934 = 0;
+int g_774938 = 0;
+int g_77493c = 0;
 int g_774940 = 0;
 char g_774944 = 0;
+unsigned int g_774948 = 0;
 int g_77494c = 0;
 int g_774950 = 0;
 int g_774954 = 0;
@@ -2011,10 +2645,13 @@ int g_774958 = 0;
 int g_774960 = 0;
 char g_774964 = 0;
 char g_774965 = 0;
+char g_774966 = 0;
 int g_77496c = 0;
-unsigned short g_774970 = 0;
+short g_774970 = 0;
 int g_774978 = 0;
-char g_774980 = 0;
+int g_77497c = 0;
+int g_774980 = 0;
+char g_774988[1] = {0};
 int g_7749c8 = 0;
 int g_7749cc = 0;
 int g_7749d0 = 0;
@@ -2023,6 +2660,7 @@ int g_7749d8 = 0;
 char g_7749dc = 0;
 int g_7749e0 = 0;
 unsigned char** g_7749e4 = 0;
+char g_7749e8 = 0;
 int g_7749ec = 0;
 int g_7749f4 = 0;
 int g_7749f8[1] = {0};
@@ -2035,21 +2673,50 @@ int g_774a14 = 0;
 int g_774a18 = 0;
 int g_774a1c = 0;
 int g_774a2c = 0;
-int* g_774a34 = 0;
+char* g_774a34 = 0;
 int g_774a38 = 0;
 int g_774a3c = 0;
 int g_774a40 = 0;
+int g_774a44 = 0;
+int g_774a48 = 0;
 int g_774a4c = 0;
+int g_774a50 = 0;
+int g_774a54 = 0;
 int g_774a58 = 0;
+int g_774a5c = 0;
+int g_774a60 = 0;
 int g_774a64 = 0;
+char* g_774a68 = 0;
+int g_774a6c = 0;
+int g_774a70 = 0;
+int g_774a74 = 0;
 void* g_774a78 = 0;
 char g_774a80[1] = {0};
 char g_774e80[1] = {0};
 int g_775280 = 0;
 char* g_775318 = 0;
 char g_77531c = 0;
+int g_775320 = 0;
+int g_775324 = 0;
+int g_775328 = 0;
+int g_77532c = 0;
+int g_775330 = 0;
+int g_775334 = 0;
+int g_775338 = 0;
+unsigned short g_775340 = 0;
+unsigned int g_775344 = 0;
+int g_775348 = 0;
 unsigned char g_77534c = 0;
 char g_77534d = 0;
+void * g_775f60 = 0;
+int g_776258 = 0;
+int g_77625c = 0;
+int g_776260 = 0;
+int g_776264 = 0;
+char* g_776268 = 0;
+char* g_77626c = 0;
+int g_776270 = 0;
+int g_776274 = 0;
 int g_7763a0 = 0;
 int g_7763a4 = 0;
 int g_7763a8 = 0;
@@ -2067,7 +2734,7 @@ int g_7765a0[1] = {0};
 int g_776644 = 0;
 int g_776648 = 0;
 short g_776658 = 0;
-int g_776664 = 0;
+unsigned char g_776664 = 0;
 unsigned char g_776665 = 0;
 unsigned char g_776666 = 0;
 unsigned char g_776667 = 0;
@@ -2082,7 +2749,7 @@ float g_776680[3] = {0};
 float g_77668c = 0;
 float g_776690[3] = {0};
 float g_77669c = 0;
-unsigned char g_7766a0[4] = {0};
+int g_7766a0 = 0;
 unsigned char g_7766a4[4] = {0};
 int g_7766a8 = 0;
 int g_7766ac = 0;
@@ -2094,6 +2761,7 @@ char g_776708 = 0;
 char g_776709 = 0;
 unsigned char g_77670a = 0;
 char g_77670b = 0;
+unsigned char g_77670c = 0;
 int g_776aa0[16] = {0};
 int g_776c60[6] = {0};
 int g_776c90 = 0;
@@ -2115,9 +2783,16 @@ int g_7796e0[16] = {0};
 int g_7798a0 = 0;
 int g_7798c0[16] = {0};
 int g_779c40 = 0;
+unsigned char g_779c6b = 0;
+int g_779c6c = 0;
+unsigned char g_779c70 = 0;
+unsigned char g_779c71 = 0;
+char g_779c72[1] = {0};
+char g_779c82[1] = {0};
 char* g_779cb8 = 0;
 int g_779cc0[1] = {0};
 int g_779ce0 = 0;
+int* g_779ce4 = 0;
 int g_779d00[1] = {0};
 char g_77dda0[1] = {0};
 char g_77df20[1] = {0};
@@ -2137,6 +2812,8 @@ int g_7dc424 = 0;
 char g_7dc440[1] = {0};
 int g_7dc6e0[64] = {0};
 int g_7dcae0[256] = {0};
+char g_7e1ae0[1] = {0};
+char g_7e1be0[1] = {0};
 char g_7e1d00[1] = {0};
 int g_7e1d40 = 0;
 int g_7e1d60[128] = {0};
@@ -2163,16 +2840,19 @@ int g_7e2430 = 0;
 int g_7e2468 = 0;
 int g_7e2470 = 0;
 char g_7e2480[1] = {0};
+int g_7e2500 = 0;
 short g_7e2510 = 0;
 int g_7e2520 = 0;
+char g_7e254a[1] = {0};
 char g_7e25a0[1] = {0};
 int g_7e2700 = 0;
-unsigned char* g_7e2704 = 0;
-int g_7e2708 = 0;
+char* g_7e2704 = 0;
+char* g_7e2708 = 0;
+char g_7e2714[1] = {0};
 char g_7e2760[1] = {0};
 int g_7e2a60 = 0;
 char g_7e2a80[1] = {0};
-int g_7e2a9c = 0;
+int* g_7e2a9c = 0;
 char* g_7e2aa0 = 0;
 int g_7e2ac0[48] = {0};
 int g_7e30c0[32] = {0};
@@ -2191,16 +2871,22 @@ int g_7e4304 = 0;
 int g_7e4308 = 0;
 int g_7e430c = 0;
 int g_7e4310 = 0;
-unsigned short* g_7e431c = 0;
+int g_7e4314 = 0;
+int g_7e4318 = 0;
+int g_7e431c = 0;
+char* g_7e4320 = 0;
 int g_7e4380 = 0;
-int g_7e43a4[1] = {0};
+int g_7e43a0 = 0;
+int g_7e43a4 = 0;
 int g_7e43a8 = 0;
 int g_7e4408[1] = {0};
 int g_7e4468 = 0;
 int g_7e446c = 0;
 int g_7e4530 = 0;
-int g_7e4538 = 0;
+int g_7e4534 = 0;
+int* g_7e4538 = 0;
 int g_7e453c = 0;
+int g_7e4540[6] = {0};
 unsigned char* g_7e4548 = 0;
 int g_7e46ac = 0;
 int g_7e46c0[32] = {0};
@@ -2210,51 +2896,87 @@ char g_7e6068[1] = {0};
 int g_7ea360 = 0;
 int g_7ea380[15] = {0};
 unsigned short g_7ea3c0[1] = {0};
+char g_7f39c0[1] = {0};
+int g_7f3a30 = 0;
+int g_7f3a34 = 0;
+char g_7f3a5c[1] = {0};
 int g_7f3ac0[8] = {0};
+char g_7f3ac4[1] = {0};
 signed char g_7f3b00[1] = {0};
+char* g_7f3b24 = 0;
 char g_7f3b40[1] = {0};
 int g_7f3e20[1] = {0};
 char* g_7f3e60[1] = {0};
+char* g_7f3ee0 = 0;
 unsigned short g_7f3ee4 = 0;
 int g_7f3ee8 = 0;
 int g_7f3f00[1] = {0};
+char g_7f3f24[1] = {0};
 int g_7f4c00 = 0;
-unsigned short g_7f4c04 = 0;
+int g_7f4c04 = 0;
 int g_7f4c06 = 0;
 int g_7f4c08 = 0;
 int g_7f4c0a = 0;
-short g_7f4c0c = 0;
+unsigned short g_7f4c0c = 0;
 int g_7f4c10 = 0;
+unsigned short g_7f4c20[1] = {0};
 char g_7f4ca0[1] = {0};
-int g_7f4ca2[768] = {0};
+char g_7f4ca2[1] = {0};
 char g_7f4ca4[1] = {0};
+char g_7f4ca9[1] = {0};
 char g_7f4caa[1] = {0};
 char g_7f4cc0[1] = {0};
 char g_7f4cd0[1] = {0};
+int g_7f4e0c[1] = {0};
+char g_7f4e51[1] = {0};
 int g_7f4e68[1] = {0};
 int g_85a0a0[16] = {0};
 int g_85ab60 = 0;
-int g_85ab80 = 0;
+char* g_85ab80 = 0;
 unsigned int g_85ab84 = 0;
 char g_85ab90[1] = {0};
 unsigned char* g_868050 = 0;
-unsigned short * g_868054 = 0;
+unsigned short* g_868054 = 0;
 int g_868058 = 0;
+int g_86805c = 0;
 char g_868060[1] = {0};
-int g_868080[1] = {0};
+char g_868080[1] = {0};
 char g_8680b4[1] = {0};
+char* g_8680c0 = 0;
 unsigned int g_868118 = 0;
 char g_868354[1] = {0};
+int g_868c40[1] = {0};
 char g_869480[589824] = {0};
 int g_90d520[1] = {0};
+int g_90e090 = 0;
 unsigned char* g_90e094 = 0;
 char g_90e0a0[589824] = {0};
+int g_99e0a0[1] = {0};
 char* g_99ec10 = 0;
 float g_99ec14 = 0;
 int g_99ec20[16] = {0};
 int g_99ec2c[16] = {0};
+float g_99ed10 = 0;
+float g_99ed14 = 0;
+float g_99ed18 = 0;
+float g_99ed1c = 0;
+float g_99ed24 = 0;
+float g_99ed28 = 0;
+float g_99ed2c = 0;
+float g_99ed30 = 0;
+float g_99ed38 = 0;
+float g_99ed3c = 0;
+float g_99ed40 = 0;
+float g_99ed44 = 0;
+float g_99ed4c = 0;
+float g_99ed50 = 0;
+float g_99ed54 = 0;
+float g_99ed58 = 0;
 int g_99ef80[72] = {0};
-int g_99f590 = 0;
+int g_99ef84[64] = {0};
+float g_99ef90[1] = {0};
+float g_99ef94[1] = {0};
+float g_99f590[1] = {0};
 int g_99f5a0 = 0;
 char g_99f5e0[1] = {0};
 int g_99f5e4 = 0;
@@ -2262,6 +2984,10 @@ int g_99f5e8 = 0;
 int g_99f5ec = 0;
 int g_99f604 = 0;
 char g_99f620[1] = {0};
+int g_99f624[9] = {0};
+float g_99f644 = 0;
+float g_99f648[8] = {0};
+float g_99f668[8] = {0};
 char g_99f6a0[1] = {0};
 int g_99f6e0 = 0;
 int g_99f724 = 0;
@@ -2270,27 +2996,31 @@ int g_99f7ac = 0;
 int g_99f7f0 = 0;
 int g_99f800[2048] = {0};
 int g_99f804[1] = {0};
-int g_9a3800[512] = {0};
+char g_9a3800[1] = {0};
 int g_9a3804[1] = {0};
 char g_9a3816[1] = {0};
 char g_9a3825[1] = {0};
 int g_9a9200[8] = {0};
-int g_9a9220[42] = {0};
+char g_9a9220[1] = {0};
 int g_9a9224[42] = {0};
 int g_9a9228[1] = {0};
 int g_9a9620[10] = {0};
 char g_9a9660[1] = {0};
-char* g_9afde4 = 0;
+int g_9afde0 = 0;
+int g_9afde4 = 0;
 unsigned int g_9b0820 = 0;
 int g_9b0840 = 0;
 char* g_9b0dc0[1] = {0};
 char g_9b0e20[1] = {0};
+int g_9b43e0[1] = {0};
 char* g_9b46c0[1] = {0};
 int g_9b4900[16] = {0};
 int g_9b4a40[32] = {0};
 int g_9b4bc0[32] = {0};
+char* g_9b9e40[1] = {0};
 int g_9b9ec0[32] = {0};
 char g_9ba1c0[1] = {0};
+int g_9ba2e0[32] = {0};
 int g_9ba3a0[15] = {0};
 int g_9ba9f4 = 0;
 int g_9baa00 = 0;
@@ -2302,6 +3032,12 @@ int g_9baa70 = 0;
 unsigned char g_9baa96 = 0;
 int g_9baadc = 0;
 char g_9baae0[1] = {0};
+char g_9bada0[1] = {0};
+char g_9badb0[1] = {0};
+int g_9badc0 = 0;
+int g_9badc4 = 0;
+int g_9badc8 = 0;
+int g_9badcc = 0;
 int g_9badd0 = 0;
 int g_9badd4 = 0;
 char g_9bade0[1] = {0};
@@ -2324,7 +3060,7 @@ char* g_aed324 = 0;
 unsigned int g_aed328 = 0;
 int g_aed32c = 0;
 int g_aed330 = 0;
-int g_aed340 = 0;
+unsigned char g_aed340[1] = {0};
 char g_aed438[1] = {0};
 int g_aed740[32768] = {0};
 int g_alloc_root_count = 0;
@@ -2342,10 +3078,7 @@ int g_building_defaults = 0;
 int g_chain_id_start = 0;
 int g_citizen_count = 0;
 unsigned char g_city_records[1] = {0};
-int g_clock_copy_mid = 0;
-short g_clock_copy_tail = 0;
 float g_color_scale = 0;
-int g_connection_counter = 0;
 unsigned char g_connections[2507364] = {0};
 const float g_const_0_0 = 0;
 double g_const_0_001 = 0;
@@ -2368,14 +3101,20 @@ double g_const_half = 0;
 float g_const_neg_1_0 = 0;
 void* g_crash_callback = 0;
 char g_crash_dump_all_frames = 0;
-unsigned short g_current_hour = 0;
 unsigned char g_current_season = 0;
 int g_current_year = 0;
+double g_dbl_6628f0 = 0;
+double g_dbl_662908 = 0;
+double g_dbl_662950 = 0;
+double g_dbl_664e60 = 0;
+double g_dbl_6653d8 = 0;
+double g_dbl_6653e0 = 0;
+double g_dbl_6653e8 = 0;
+double g_dbl_665fb8 = 0;
 int g_dispatch_table_a[1] = {0};
 int g_dispatch_table_b[1] = {0};
 int g_download_state = 0;
 int g_dynamic_count = 0;
-char g_dynamic_entities[1] = {0};
 char g_dynasty_initial_trait_offset[1] = {0};
 int g_dynasty_name = 0;
 char g_dynasty_name_ready = 0;
@@ -2394,20 +3133,16 @@ unsigned short* g_entity_table_end = 0;
 unsigned char g_entity_type_bytes[1] = {0};
 char* g_entity_type_table = 0;
 char* g_fb5740 = 0;
+int g_fb5744 = 0;
 int g_fb5760[32768] = {0};
 int g_fb5761[32768] = {0};
 int g_field_entry_count[4] = {0};
 int g_field_worker_count[4] = {0};
-int g_field_worker_count_wt0[4] = {0};
-int g_field_worker_count_wt1[4] = {0};
-int g_field_worker_count_wt2[4] = {0};
-int g_field_worker_count_wt3[4] = {0};
 const char g_file_extension_names[1] = {0};
 unsigned char g_filter_extra5 = 0;
 int g_game_speed_table[5] = {0};
 char g_gap_10035410[28] = {0};
 int g_handler_started = 0;
-unsigned char g_host_flags = 0;
 char* g_item_def_table = 0;
 int g_list_head = 0;
 char g_log_buffer[256] = {0};
@@ -2417,20 +3152,18 @@ unsigned int g_log_mode_flags = 0;
 int g_manufacturer_types = 0;
 int g_max_players = 0;
 char g_minimum_manufacturer[1] = {0};
-char g_module_path[260] = {0};
 int g_net_socket = 0;
 int g_next_family_index = 0;
 int g_next_object_id = 0;
-unsigned int g_next_tick_time = 0;
+float g_office_float_table[49] = {0};
+int g_office_role_templates[40] = {0};
 char g_office_slots[1008] = {0};
-float g_output_share[1] = {0};
 int g_owner_window = 0;
 unsigned int g_player_record_dst = 0;
 unsigned int g_player_record_src = 0;
 unsigned int g_player_slot_field = 0;
 int g_player_slot_overflow = 0;
 int g_player_trait_ranges = 0;
-int g_players_synced = 0;
 int g_producer_id_table = 0;
 char g_query_active = 0;
 int g_query_base = 0;
@@ -2472,19 +3205,33 @@ unsigned char g_stat_table[780] = {0};
 int g_stream_count = 0;
 char g_stream_pool[1] = {0};
 void* g_thread_handle = 0;
-int g_tick_rate = 0;
 char g_vfs_case_sensitive = 0;
 char g_vfs_item_pool[1] = {0};
 void* g_vfs_root = 0;
 int g_worker_entry_count = 0;
 int gm_CurrentHumanFamilyCount = 0;
+unsigned short word_774970 = 0;
+unsigned short word_7f4c0c = 0;
 
 /* String literal globals */
 char s_662d18[1] = "";
 char s_662d1c[1] = "";
 char s_6750e8[1] = "";
+char s_6752a8[1] = "";
+char s_675504[1] = "";
+char s_675908[1] = "";
+char s_675ae8[1] = "";
+char s_675af4[1] = "";
+char s_675afc[1] = "";
+char s_675b04[1] = "";
+char s_675b0c[1] = "";
 char s_679060[1] = "";
+char s_679070[1] = "";
 char s_6790b0[1] = "";
+char s_67a1ec[1] = "";
+char s_67a218[1] = "";
+char s_67a238[1] = "";
+char s_67a260[1] = "";
 char s_67a384[1] = "";
 char s_67a3a0[1] = "";
 char s_67a464[1] = "";
@@ -2493,6 +3240,7 @@ char s_67a9b4[1] = "";
 char s_67a9bc[1] = "";
 char s_67a9c4[1] = "";
 char s_67ade8[1] = "";
+char s_67d268[1] = "";
 char s_67d3d4[1] = "";
 char s_67d410[1] = "";
 char s_67d420[1] = "";
@@ -2503,8 +3251,32 @@ char s_67d47c[1] = "";
 char s_67d4b0[1] = "";
 char s_67d54c[1] = "";
 char s_67d59c[1] = "";
+char s_67d5c8[1] = "";
+char s_67d5dc[1] = "";
 char s_67d5ec[1] = "";
+char s_67d5fc[1] = "";
+char s_67d604[1] = "";
+char s_67d618[1] = "";
+char s_67d624[1] = "";
+char s_67d638[1] = "";
+char s_67d648[1] = "";
+char s_67d654[1] = "";
 char s_67d67c[1] = "";
+char s_67d684[1] = "";
+char s_67d690[1] = "";
+char s_67d6ac[1] = "";
+char s_67d6d4[1] = "";
+char s_67d6f4[1] = "";
+char s_67d700[1] = "";
+char s_67d718[1] = "";
+char s_67d72c[1] = "";
+char s_67d740[1] = "";
+char s_67d754[1] = "";
+char s_67d760[1] = "";
+char s_67d768[1] = "";
+char s_67d774[1] = "";
+char s_67d798[1] = "";
+char s_67d7a0[1] = "";
 char s_67d7d0[1] = "";
 char s_67d818[1] = "";
 char s_67d844[1] = "";
@@ -2512,32 +3284,154 @@ char s_67d868[1] = "";
 char s_67d890[1] = "";
 char s_67d8b0[1] = "";
 char s_67d8bc[1] = "";
+char s_67da58[1] = "";
 char s_67da68[1] = "";
 char s_67daa0[1] = "";
 char s_67ead8[1] = "";
+char s_67ed14[1] = "";
 char s_67fb2c[1] = "";
 char s_67fb40[1] = "";
 char s_67fb50[1] = "";
 char s_67fb68[1] = "";
 char s_681140[1] = "";
 char s_6811b0[1] = "";
+char s_68149c[1] = "";
+char s_6815c0[1] = "";
+char s_6815c8[1] = "";
+char s_681608[1] = "";
+char s_68162c[1] = "";
+char s_681658[1] = "";
+char s_681664[1] = "";
+char s_68170c[1] = "";
+char s_681718[1] = "";
 char s_681730[1] = "";
+char s_689d24[1] = "";
+char s_689dc0[1] = "";
+char s_689ddc[1] = "";
+char s_689dfc[1] = "";
+char s_689e18[1] = "";
+char s_689e68[1] = "";
+char s_689ebc[1] = "";
+char s_689ec8[1] = "";
+char s_689ed4[1] = "";
+char s_689ee0[1] = "";
+char s_689ee8[1] = "";
+char s_689f48[1] = "";
+char s_689fac[1] = "";
+char s_689ff0[1] = "";
+char s_68a03c[1] = "";
+char s_68a070[1] = "";
+char s_68a09c[1] = "";
+char s_68a0c4[1] = "";
+char s_68a0d0[1] = "";
+char s_68a124[1] = "";
 char s_68a130[1] = "";
 char s_68a14c[1] = "";
+char s_68b0d8[1] = "";
+char s_68b0f4[1] = "";
+char s_68b1e0[1] = "";
+char s_68b3f8[1] = "";
+char s_68b7ac[1] = "";
 char s_68be7c[1] = "";
+char s_68be9c[1] = "";
+char s_68d580[1] = "";
 char s_68d704[1] = "";
 char s_68d714[1] = "";
 char s_68d730[1] = "";
 char s_68d74c[1] = "";
 char s_68d760[1] = "";
+char s_68dee0[1] = "";
+char s_68dee8[1] = "";
+char s_68deec[1] = "";
+char s_68def0[1] = "";
+char s_68def8[1] = "";
+char s_68df14[1] = "";
+char s_68df28[1] = "";
+char s_68df44[1] = "";
+char s_68df4c[1] = "";
+char s_68df54[1] = "";
+char s_68df5c[1] = "";
+char s_68df60[1] = "";
+char s_68df68[1] = "";
+char s_68df70[1] = "";
+char s_68df78[1] = "";
+char s_68df80[1] = "";
+char s_68df84[1] = "";
+char s_68df8c[1] = "";
+char s_68dfa8[1] = "";
+char s_68dfbc[1] = "";
+char s_68dfd8[1] = "";
+char s_6903e8[1] = "";
+char s_699760[1] = "";
+char s_699770[1] = "";
+char s_699784[1] = "";
+char s_699820[1] = "";
+char s_69982c[1] = "";
+char s_69983c[1] = "";
+char s_699858[1] = "";
+char s_6999a8[1] = "";
+char s_6a1c1c[1] = "";
+char s_6a1c30[1] = "";
+char s_6a1e3c[1] = "";
+char s_6a1e4c[1] = "";
+char s_6a1e54[1] = "";
+char s_6a1fdc[1] = "";
+char s_6a2308[1] = "";
+char s_6a23e0[1] = "";
+char s_6a2430[1] = "";
+char s_6a2490[1] = "";
+char s_6a2498[1] = "";
+char s_6a24a8[1] = "";
+char s_6a2e24[1] = "";
+char s_6a2e38[1] = "";
+char s_6a2e68[1] = "";
+char s_6a2e70[1] = "";
+char s_6a2e78[1] = "";
 char s_6a2f5c[1] = "";
+char s_6a2ff8[1] = "";
+char s_6a3004[1] = "";
+char s_6a300c[1] = "";
+char s_6a301c[1] = "";
+char s_6a3a4c[1] = "";
 char s_6a3a54[1] = "";
+char s_6a3a6c[1] = "";
+char s_6a3bc4[1] = "";
+char s_6a3bcc[1] = "";
+char s_6a3bd4[1] = "";
 char s_6a3f8c[1] = "";
+char s_6a3fe0[1] = "";
+char s_6a3ff4[1] = "";
+char s_6a3ffc[1] = "";
+char s_6a4008[1] = "";
+char s_6a4010[1] = "";
+char s_6a401c[1] = "";
 char s_6a41a4[1] = "";
 char s_6a4304[1] = "";
 char s_6a4310[1] = "";
 char s_6a4320[1] = "";
+char s_6a5930[1] = "";
+char s_6a594c[1] = "";
+char s_6a5960[1] = "";
+char s_6a5968[1] = "";
+char s_6a597c[1] = "";
 char s_6a59fc[1] = "";
+char s_6a5b54[1] = "";
+char s_6a5b74[1] = "";
+char s_6a5b84[1] = "";
+char s_6a5b8c[1] = "";
+char s_6a625c[1] = "";
+char s_6a6310[1] = "";
+char s_6a6318[1] = "";
+char s_6a632c[1] = "";
+char s_6a6340[1] = "";
+char s_6a6354[1] = "";
+char s_6a6368[1] = "";
+char s_6a6510[1] = "";
+char s_6a6a40[1] = "";
+char s_6a6a60[1] = "";
+char s_6a6dc4[1] = "";
+char s_6a6ed0[1] = "";
+char s_6a6ed8[1] = "";
 char s_6a956c[1] = "";
 char s_6a9580[1] = "";
 char s_6a9680[1] = "";
@@ -2547,15 +3441,23 @@ char s_6a9748[1] = "";
 char s_6a9924[1] = "";
 char s_6a99c4[1] = "";
 char s_6a99f4[1] = "";
+char s_6a9a28[1] = "";
+char s_6a9a30[1] = "";
+char s_6a9a38[1] = "";
+char s_6a9a5c[1] = "";
 char s_6a9b30[1] = "";
 char s_6a9b3c[1] = "";
+char s_6aa194[1] = "";
 char s_6aa1b4[1] = "";
+char s_6aa328[1] = "";
+char s_6aa330[1] = "";
 char s_6aa34c[1] = "";
 char s_6aa3b0[1] = "";
 char s_6aa3c0[1] = "";
 char s_6aa3d0[1] = "";
 char s_6aa464[1] = "";
 char s_6aa490[1] = "";
+char s_6aa4b8[1] = "";
 char s_6aa4e8[1] = "";
 char s_6aa508[1] = "";
 char s_6aa514[1] = "";
@@ -2623,9 +3525,14 @@ char s_6ac730[1] = "";
 char s_6ac738[1] = "";
 char s_6ac77c[1] = "";
 char s_6ac79c[1] = "";
+char s_6ac7b0[1] = "";
+char s_6ac7dc[1] = "";
+char s_6ac7ec[1] = "";
+char s_6ac7fc[1] = "";
 char s_6ac848[1] = "";
 char s_6ac850[1] = "";
 char s_6ac948[1] = "";
+char s_6ac994[1] = "";
 char s_6aca6c[1] = "";
 char s_6acc08[1] = "";
 char s_6acc18[1] = "";
@@ -2656,8 +3563,7 @@ char s_6ad3f0[1] = "";
 char s_6ad414[1] = "";
 char s_6ad434[1] = "";
 char s_6b5c60[1] = "";
-char s_Cant_set_SO_RCVBUF[1] = "";
-char s_Cant_set_SO_SNDBUF[1] = "";
+char s_7e1ae0[1] = "";
 char s_Unknown_winsock_error_u[1] = "";
 char s_WSAECONNABORTED[1] = "";
 char s_WSAECONNRESET[1] = "";
@@ -2682,14 +3588,22 @@ int SonnenstrahlenStartZeit = -1;
 
 int ch_MorphFrameValue = -1;
 
-
-
 unsigned char g_6752a4 = 1;
 
 int g_9b4840[48] = {0};
 
 /* Function stubs */
-int __stdcall fcn_0041cbc0(int a)
+int __stdcall fcn_005eb225(int a, int b, int c)
+{
+	return 0;
+}
+
+int __stdcall fcn_005eb250(int a, int b, int c)
+{
+	return 0;
+}
+
+int __stdcall fcn_005eb2e4(int a, int b, int c, int d, int e, int f)
 {
 	return 0;
 }
@@ -2699,7 +3613,12 @@ int __stdcall fcn_005ef8cf(int a, int b, int c, int d, int e, int f, int g)
 	return 0;
 }
 
-int __stdcall fcn_00601a9b(int a, int b, int c, int d, int e, int f)
+int __stdcall fcn_0060d860(int a, int b, int c)
+{
+	return 0;
+}
+
+int __stdcall fcn_0060f24d(int a, int b, int c)
 {
 	return 0;
 }
@@ -2710,11 +3629,6 @@ int __stdcall fcn_0060fa6b(int a, int b, int c, int d, int e)
 }
 
 int __stdcall fcn_00610011(int a, int b, int c, int d, int e, int f, int g, int h)
-{
-	return 0;
-}
-
-int __stdcall fcn_006114ff(int a, int b, int c, int d, int e, int f, int g, int h)
 {
 	return 0;
 }
@@ -2734,7 +3648,187 @@ int __stdcall fcn_0064e66a(int a)
 	return 0;
 }
 
+int __fastcall fcn_005f0ed9(int a, int b, int c, int d)
+{
+	return 0;
+}
+
+int __fastcall fcn_005f2483(int a, int b, int c, int d, int e, int f)
+{
+	return 0;
+}
+
+int __fastcall fcn_005f934b(int a)
+{
+	return 0;
+}
+
+int __fastcall fcn_005fad9e(int a, int b, int c, int d, int e)
+{
+	return 0;
+}
+
+int __fastcall fcn_0060743b(int a, int b, int c, int d, int e, int f, int g, int h, int i)
+{
+	return 0;
+}
+
+int __fastcall fcn_0060db4e(int a, int b, int c)
+{
+	return 0;
+}
+
+int __fastcall fcn_00615e99(int a, int b, int c)
+{
+	return 0;
+}
+
+int __fastcall fcn_006165dd(int a)
+{
+	return 0;
+}
+
+int __fastcall fcn_006165ef(int a, int b, int c)
+{
+	return 0;
+}
+
+int __fastcall fcn_0061680a(int a)
+{
+	return 0;
+}
+
+int __fastcall fcn_00616815(int a)
+{
+	return 0;
+}
+
+int __fastcall fcn_006168be(int a)
+{
+	return 0;
+}
+
+int __fastcall fcn_00618c83(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j)
+{
+	return 0;
+}
+
+int __fastcall fcn_006194de(int a)
+{
+	return 0;
+}
+
+int __fastcall fcn_0062ad3f(int a, int b, int c)
+{
+	return 0;
+}
+
+int __fastcall fcn_0062af70(int a)
+{
+	return 0;
+}
+
+int __fastcall fcn_0062b663(int a, int b, int c)
+{
+	return 0;
+}
+
+long __stdcall DirectDrawCreateEx(void* a, void** b, void* c, void* d)
+{
+	return 0;
+}
+
 int __stdcall DirectInput8Create(int hinst, unsigned int version, const void* iid, void** out, void* outer)
+{
+	return 0;
+}
+
+int __cdecl GetPrimaryLen(char* s)
+{
+	return 0;
+}
+
+int __stdcall LangCountryEnumProc(char* s)
+{
+	return 0;
+}
+
+int __cdecl WritePrivateProfileStringA(char* a, char* b, char* c, char* d)
+{
+	return 0;
+}
+
+int __cdecl __isctype(int a, int b)
+{
+	return 0;
+}
+
+int __cdecl __itoa(int a, char* b, int c)
+{
+	return 0;
+}
+
+int __cdecl __strupr(char* a)
+{
+	return 0;
+}
+
+int __cdecl __unlock(int a)
+{
+	return 0;
+}
+
+int __cdecl amt_ClearEntityLinks(short* a)
+{
+	return 0;
+}
+
+int __cdecl amt_CountTownHallSeats(void)
+{
+	return 0;
+}
+
+int __cdecl amt_ExecuteOfficeAssignment(char* a)
+{
+	return 0;
+}
+
+int __cdecl amt_FindEntity26(int entity_id)
+{
+	return 0;
+}
+
+int __cdecl amt_FindEntity27(int entity_id)
+{
+	return 0;
+}
+
+int __cdecl amt_GetRoleTemplate(void)
+{
+	return 0;
+}
+
+int __cdecl amt_SwapOfficeHolders(int* a)
+{
+	return 0;
+}
+
+int __cdecl amt_UpdateEntityLinks(int a, int b)
+{
+	return 0;
+}
+
+unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* a)
+{
+	return 0;
+}
+
+int __cdecl amt_ValidateCommand(char* a)
+{
+	return 0;
+}
+
+int __cdecl amt_fio_LoadAemter(void* stream, int version)
 {
 	return 0;
 }
@@ -2744,7 +3838,7 @@ int __cdecl crt_toupper(int current_char)
 	return 0;
 }
 
-int __cdecl fcn_004011a0(void* stream, char* dst)
+int __cdecl fcn_004012b0(char* a, void* b)
 {
 	return 0;
 }
@@ -2864,12 +3958,26 @@ int __cdecl fcn_00411340(int a)
 	return 0;
 }
 
-int __cdecl fcn_004116c0(int a)
+void __cdecl fcn_004116c0(int a)
+{
+}
+
+int __cdecl fcn_00411740(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_00416d50(void)
+int __cdecl fcn_00412630(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_004127a0(int flag)
+{
+	return 0;
+}
+
+int __cdecl fcn_00415300(void)
 {
 	return 0;
 }
@@ -2879,7 +3987,7 @@ int __cdecl fcn_00418210(void)
 	return 0;
 }
 
-int __cdecl fcn_0041b870(void)
+int __stdcall fcn_0041adc0(int a, int b, int c, int d)
 {
 	return 0;
 }
@@ -2939,6 +4047,11 @@ int __cdecl fcn_0042a850(int a)
 	return 0;
 }
 
+int __cdecl fcn_0042b2f0(char* a, int b, int c)
+{
+	return 0;
+}
+
 int __cdecl fcn_0042b780(int a, int b)
 {
 	return 0;
@@ -2969,7 +4082,7 @@ int __cdecl fcn_0042ee30(const void* a, const void* b)
 	return 0;
 }
 
-int __cdecl fcn_00430580(void* f)
+int __cdecl fcn_00430580(void* a)
 {
 	return 0;
 }
@@ -2984,12 +4097,17 @@ int __cdecl fcn_00430910(int* a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_00430bd0(void* buf, int size, int count, void* stream)
+int __cdecl fcn_00436fc0(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_00436fc0(void)
+int __cdecl fcn_00437840(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_0043ad10(int mode)
 {
 	return 0;
 }
@@ -3014,6 +4132,11 @@ int __cdecl fcn_0043f9d0(int a)
 	return 0;
 }
 
+int __cdecl fcn_004442be0(char* o)
+{
+	return 0;
+}
+
 int __cdecl fcn_00447110(void* a, int b, int c, int d)
 {
 	return 0;
@@ -3029,12 +4152,36 @@ int __cdecl fcn_0044e1e0(void)
 	return 0;
 }
 
+int __cdecl fcn_004507b00(int a)
+{
+	return 0;
+}
+
+int __cdecl fcn_00456b60(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_0045a9d0(void)
+{
+	return 0;
+}
+
+void __cdecl fcn_0045b790(int a)
+{
+}
+
 int __cdecl fcn_0045d3f0(int adler, void* buf, int len)
 {
 	return 0;
 }
 
 int __cdecl fcn_0045d770(int a, int b, int c, int d, int e, int f, int g, int h)
+{
+	return 0;
+}
+
+int __cdecl fcn_0045de70(void* s, int b)
 {
 	return 0;
 }
@@ -3104,14 +4251,8 @@ int __cdecl fcn_00465350(void* z, void* buf, int len)
 	return 0;
 }
 
-int __cdecl fcn_00469890(void)
+void __cdecl fcn_00469c40(int a, int b, int c)
 {
-	return 0;
-}
-
-int __cdecl fcn_00469c40(int x, int y, int slot)
-{
-	return 0;
 }
 
 int __cdecl fcn_00469e70(void)
@@ -3124,12 +4265,22 @@ int __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int f
 	return 0;
 }
 
+int __cdecl fcn_0046e790(int index)
+{
+	return 0;
+}
+
+int __cdecl fcn_0046fac0(int a, int b, int c, int d)
+{
+	return 0;
+}
+
 int __cdecl fcn_00471db0(int a, int b)
 {
 	return 0;
 }
 
-int __cdecl fcn_00472cd0(int a)
+int __cdecl fcn_00472380(int a, int b, int c, int d)
 {
 	return 0;
 }
@@ -3140,6 +4291,11 @@ int __cdecl fcn_00473660(void)
 }
 
 int __cdecl fcn_00476850(int a)
+{
+	return 0;
+}
+
+int __cdecl fcn_00477550(void)
 {
 	return 0;
 }
@@ -3174,7 +4330,17 @@ int __cdecl fcn_004813b0(void* a)
 	return 0;
 }
 
-int __cdecl fcn_00489250(char * a)
+int __cdecl fcn_00484740(char* a)
+{
+	return 0;
+}
+
+int __cdecl fcn_00489250(void* a)
+{
+	return 0;
+}
+
+int __cdecl fcn_00489a70(void* a, int b)
 {
 	return 0;
 }
@@ -3234,22 +4400,12 @@ int __cdecl fcn_00495fe0(void)
 	return 0;
 }
 
-int __cdecl fcn_00496480(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_004974c0(void)
 {
 	return 0;
 }
 
 int __cdecl fcn_004974d0(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_00497e60(void)
 {
 	return 0;
 }
@@ -3334,11 +4490,6 @@ int __cdecl fcn_004a4d90(char* a1, char* a2, char* a3)
 	return 0;
 }
 
-int __cdecl fcn_004ab7d0(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_004abf80(void)
 {
 	return 0;
@@ -3349,7 +4500,17 @@ int __cdecl fcn_004ac260(void)
 	return 0;
 }
 
+int __cdecl fcn_004ad2b0(void)
+{
+	return 0;
+}
+
 int __cdecl fcn_004b3b40(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_004b3b60(void)
 {
 	return 0;
 }
@@ -3399,6 +4560,11 @@ int __cdecl fcn_004c3ed0(void)
 	return 0;
 }
 
+int __cdecl fcn_004c48f0(void)
+{
+	return 0;
+}
+
 int __cdecl fcn_004c4b00(void)
 {
 	return 0;
@@ -3419,17 +4585,12 @@ int __cdecl fcn_004cef30(int a)
 	return 0;
 }
 
-int __cdecl fcn_004d7f70(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_004da170(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_004dff20(int a)
+int __cdecl fcn_004dff20(int v)
 {
 	return 0;
 }
@@ -3444,7 +4605,7 @@ int __cdecl fcn_004e4230(void* a, int b)
 	return 0;
 }
 
-int __cdecl fcn_004e4470(char* a)
+int __cdecl fcn_004e4470(const char* name)
 {
 	return 0;
 }
@@ -3454,17 +4615,16 @@ int __cdecl fcn_004e4eb0(void)
 	return 0;
 }
 
-int __cdecl fcn_004e8940(unsigned short* a)
+int __cdecl fcn_004e8ad0(unsigned char a)
 {
 	return 0;
 }
 
-int __cdecl fcn_004eb180(int k)
+void __cdecl fcn_004eab40(int a)
 {
-	return 0;
 }
 
-int __cdecl fcn_004edae0(void)
+int __cdecl fcn_004f08d0(void* a)
 {
 	return 0;
 }
@@ -3475,6 +4635,11 @@ int __cdecl fcn_004f0ed0(void* a)
 }
 
 int __cdecl fcn_004f1320(unsigned char* e)
+{
+	return 0;
+}
+
+int __cdecl fcn_004f1650(int a, int b, int c)
 {
 	return 0;
 }
@@ -3504,6 +4669,21 @@ int __cdecl fcn_004f5da0(int a)
 	return 0;
 }
 
+int __cdecl fcn_004fb390(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_004fbd20(int a)
+{
+	return 0;
+}
+
+int __cdecl fcn_00500c50(void* a, int b, int c, int d)
+{
+	return 0;
+}
+
 int __cdecl fcn_00501190(int a, int b, int c)
 {
 	return 0;
@@ -3529,14 +4709,19 @@ int __cdecl fcn_00502850(void)
 	return 0;
 }
 
+int __cdecl fcn_00503e0(char* a)
+{
+	return 0;
+}
+
 int __cdecl fcn_00503e80(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_00503fe0(int a, int b, int c)
+char* __cdecl fcn_00503fe0(int a, int b, int c)
 {
-	return 0;
+	return (void*) 0;
 }
 
 int __cdecl fcn_005043d0(unsigned char a, int b)
@@ -3564,17 +4749,17 @@ int __cdecl fcn_00505840(void)
 	return 0;
 }
 
-int __cdecl fcn_005074e0(int a, int b)
+int __cdecl fcn_005074e0(unsigned int slot, int kind)
 {
 	return 0;
 }
 
-int __cdecl fcn_00507b00(int a)
+int __cdecl fcn_00507b00(int age)
 {
 	return 0;
 }
 
-int __cdecl fcn_00507d10(int job)
+int __cdecl fcn_00507d10(int value)
 {
 	return 0;
 }
@@ -3584,9 +4769,9 @@ int __cdecl fcn_00508e80(unsigned short a)
 	return 0;
 }
 
-int __cdecl fcn_00509570(char* a)
+void* __cdecl fcn_00509570(void* entity)
 {
-	return 0;
+	return (void*) 0;
 }
 
 int __cdecl fcn_0050b010(int a)
@@ -3599,7 +4784,12 @@ int __cdecl fcn_0050b750(int a, unsigned char k)
 	return 0;
 }
 
-int __cdecl fcn_0050b7c0(int a, char b)
+int __cdecl fcn_0050b780(int a, int b)
+{
+	return 0;
+}
+
+int __cdecl fcn_0050b7c0(int a, int b)
 {
 	return 0;
 }
@@ -3609,7 +4799,7 @@ int __cdecl fcn_0050bfe0(unsigned char* e)
 	return 0;
 }
 
-int __cdecl fcn_0050c1b0(void* a, int b, int* c)
+int __cdecl fcn_0050d0c0(char* a, int b)
 {
 	return 0;
 }
@@ -3619,7 +4809,7 @@ int __cdecl fcn_0050d270(int a)
 	return 0;
 }
 
-int __cdecl fcn_0050d2a0(char* a)
+int __cdecl fcn_0050d2a0(void* a)
 {
 	return 0;
 }
@@ -3629,17 +4819,17 @@ int __cdecl fcn_0050d490(char* a)
 	return 0;
 }
 
-int __cdecl fcn_0050d570(char* p)
+void* __cdecl fcn_0050d570(void* record)
+{
+	return (void*) 0;
+}
+
+int __cdecl fcn_0050df70(char* a, char* b)
 {
 	return 0;
 }
 
-int __cdecl fcn_0050df70(void* a, int b)
-{
-	return 0;
-}
-
-int __cdecl fcn_00510b40(void)
+int __cdecl fcn_0050e000(int a, int b, int c)
 {
 	return 0;
 }
@@ -3659,22 +4849,17 @@ int __cdecl fcn_00512b40(void* a)
 	return 0;
 }
 
-int __cdecl fcn_00513d40(char* a)
-{
-	return 0;
-}
-
 int __cdecl fcn_00514f90(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_00515e10(void)
+int __cdecl fcn_00515340(unsigned char a)
 {
 	return 0;
 }
 
-int __cdecl fcn_00516de0(int a, char b)
+int __cdecl fcn_00516de0(int a, int b)
 {
 	return 0;
 }
@@ -3684,7 +4869,32 @@ int __cdecl fcn_0051e070(void)
 	return 0;
 }
 
+int __cdecl fcn_00520d90(void* stream)
+{
+	return 0;
+}
+
+int __cdecl fcn_005218f0(void* dst, int size, int count, int handle)
+{
+	return 0;
+}
+
+int __cdecl fcn_00521eb0(int a, char* b)
+{
+	return 0;
+}
+
+int __cdecl fcn_00522390(void* stream)
+{
+	return 0;
+}
+
 int __cdecl fcn_005224f0(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_0052a310(int* a)
 {
 	return 0;
 }
@@ -3709,9 +4919,8 @@ int __cdecl fcn_005309d0(void* a, int b)
 	return 0;
 }
 
-int __cdecl fcn_00538220(void)
+void __cdecl fcn_00538220(void)
 {
-	return 0;
 }
 
 int CALLBACK fcn_00538250(int a, int b, int c, int d)
@@ -3734,6 +4943,16 @@ int __cdecl fcn_0053f4b0(void)
 	return 0;
 }
 
+int __cdecl fcn_0053fc80(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_005448e0(void)
+{
+	return 0;
+}
+
 int __cdecl fcn_00545410(void)
 {
 	return 0;
@@ -3750,6 +4969,11 @@ int __cdecl fcn_00546720(unsigned char* p, char* fmt, int v)
 }
 
 int __cdecl fcn_00546ed0(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_005490d0(void)
 {
 	return 0;
 }
@@ -3819,22 +5043,12 @@ int __cdecl fcn_00579690(void)
 	return 0;
 }
 
-int __cdecl fcn_0057a260(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_0057b000(void)
 {
 	return 0;
 }
 
 int __cdecl fcn_0057b770(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_0057cbc0(void)
 {
 	return 0;
 }
@@ -3874,7 +5088,7 @@ int __cdecl fcn_005805e0(void)
 	return 0;
 }
 
-int __cdecl fcn_00589d00(int a)
+int __cdecl fcn_005886f0(char* a, int b)
 {
 	return 0;
 }
@@ -3884,22 +5098,22 @@ int __cdecl fcn_0058a6b0(int a)
 	return 0;
 }
 
-int __cdecl fcn_0058f6a0(int a)
-{
-	return 0;
-}
-
-int __cdecl fcn_0058fa20(int a)
-{
-	return 0;
-}
-
-int __cdecl fcn_0058fa40(int a)
-{
-	return 0;
-}
-
 int __cdecl fcn_0058fbd0(int a)
+{
+	return 0;
+}
+
+int __cdecl fcn_00591990(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_00597fd0(int a0)
+{
+	return 0;
+}
+
+int __cdecl fcn_005a1430(char* e)
 {
 	return 0;
 }
@@ -3914,17 +5128,7 @@ int __cdecl fcn_005a51c0(int a)
 	return 0;
 }
 
-int __cdecl fcn_005a6e90(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_005a8690(int a)
-{
-	return 0;
-}
-
-int __cdecl fcn_005ab810(char* a, int b)
 {
 	return 0;
 }
@@ -3959,12 +5163,32 @@ int __cdecl fcn_005c61c0(void)
 	return 0;
 }
 
+int __cdecl fcn_005c7270(int a, int b)
+{
+	return 0;
+}
+
 int __cdecl fcn_005c80c0(void)
 {
 	return 0;
 }
 
+int __cdecl fcn_005cff10(char* s, int a2, int a3, int a4)
+{
+	return 0;
+}
+
 int __cdecl fcn_005d6ea0(unsigned short* a)
+{
+	return 0;
+}
+
+int __cdecl fcn_005e6360(int a)
+{
+	return 0;
+}
+
+int __cdecl fcn_005e6840(void* a)
 {
 	return 0;
 }
@@ -3979,19 +5203,14 @@ int __cdecl fcn_005eaae0(void)
 	return 0;
 }
 
-int __stdcall fcn_005eb2e4(void* a, void* b, char* c, void* d, void* e, void* f)
+float* __stdcall fcn_005eb970(float* a, const float* b, const float* c)
 {
-	return 0;
+	return (void*) 0;
 }
 
-int __stdcall fcn_005eb970(float* a, const float* b, const float* c)
+float* __stdcall fcn_005ebbb9(float* a, const float* b)
 {
-	return 0;
-}
-
-int __stdcall fcn_005ebbb9(float* out, const float* in)
-{
-	return 0;
+	return (void*) 0;
 }
 
 void* __stdcall fcn_005ebea2(void* out, float* det, void* in)
@@ -4019,9 +5238,140 @@ int __stdcall fcn_005ee04a(void* a, void* b, void* c)
 	return 0;
 }
 
-int __cdecl fcn_0064d1a0(char* s, int c)
+void __fastcall fcn_005ef238(void* self, int d1, int flag)
+{
+}
+
+int __stdcall fcn_005ef863(void* device, void* out)
 {
 	return 0;
+}
+
+void __cdecl fcn_005f0144(void* self, int a)
+{
+}
+
+void __fastcall fcn_005f243f(void* p, int ignored, int flag)
+{
+}
+
+int __cdecl fcn_005f587f(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_005f63e5(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_005fc008(void* self, int flags)
+{
+	return 0;
+}
+
+void * __cdecl fcn_005fc0c8(void* self)
+{
+	return (void*) 0;
+}
+
+void * __cdecl fcn_005fc10c(void* self)
+{
+	return (void*) 0;
+}
+
+void* __fastcall fcn_006008f0(void* self)
+{
+	return (void*) 0;
+}
+
+int __cdecl fcn_00601a9b(int nfaces, int nverts, int opts, int fvf, void* dev, void* out)
+{
+	return 0;
+}
+
+int __cdecl fcn_0060223c(void* self, int a1, int a2, int a3, int a4)
+{
+	return 0;
+}
+
+int __cdecl fcn_006022c0(void* self, int a1, int a2, int a3, int a4)
+{
+	return 0;
+}
+
+void __fastcall fcn_0060f49e(void* self, int ignored, int a1, int a2, int a3, int a4, void* e, int a6, int a7, int a8)
+{
+}
+
+int __cdecl fcn_0060f6ae(void* a)
+{
+	return 0;
+}
+
+int __cdecl fcn_006114ff(int a, int b, int* c, int d, int e, int* f, int g, int h)
+{
+	return 0;
+}
+
+int __cdecl fcn_006131cd(int a, void* b, int* c, int d)
+{
+	return 0;
+}
+
+int __cdecl fcn_00613229(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_006195e3(int a)
+{
+	return 0;
+}
+
+int __cdecl fcn_006299c0(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_0062a200(void* p)
+{
+	return 0;
+}
+
+int __cdecl fcn_0062a310(void* p)
+{
+	return 0;
+}
+
+int __cdecl fcn_0062a4f5(void* p)
+{
+	return 0;
+}
+
+int __cdecl fcn_0062abbc(void* p)
+{
+	return 0;
+}
+
+int __fastcall fcn_0062abf8(void* self)
+{
+	return 0;
+}
+
+int __fastcall fcn_0062ae93(void* self)
+{
+	return 0;
+}
+
+int __cdecl fcn_00633144(void* out, void* src)
+{
+	return 0;
+}
+
+char* __cdecl fcn_0064d1a0(char* s, int c)
+{
+	return (void*) 0;
 }
 
 int __cdecl fcn_0064d3eb(unsigned int seed)
@@ -4034,17 +5384,17 @@ int __cdecl fcn_0064d3f8(void)
 	return 0;
 }
 
-int __cdecl fcn_0064d41a(char* a, char* b, ...)
+int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...)
 {
 	return 0;
 }
 
-int __cdecl fcn_0064d470(char* a, int b)
+int __cdecl fcn_0064d470(char* a, char* b)
 {
 	return 0;
 }
 
-int __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n)
+int __cdecl fcn_0064d530(char* a, char* b, int c)
 {
 	return 0;
 }
@@ -4074,9 +5424,9 @@ int __cdecl fcn_0064e1fd(void* a)
 	return 0;
 }
 
-int __cdecl fcn_0064e2f9(const char* a, const char* b)
+void* __cdecl fcn_0064e2f9(const char* a, const char* b)
 {
-	return 0;
+	return (void*) 0;
 }
 
 int __cdecl fcn_0064e30c(void* h)
@@ -4104,12 +5454,12 @@ int __cdecl fcn_0064ed28(const void* a, int b, int c, void* d)
 	return 0;
 }
 
-int __cdecl fcn_0064eeec(int a)
+int __cdecl fcn_0064eeec(char* s)
 {
 	return 0;
 }
 
-int __cdecl fcn_0064f026(char* a, char* b)
+int __cdecl fcn_0064f026(char* s, char* delim)
 {
 	return 0;
 }
@@ -4134,7 +5484,21 @@ int __cdecl fcn_0064fde9(void* p, int size)
 	return 0;
 }
 
-int __cdecl fcn_0065f220(const char* a, const char* b)
+void __cdecl fcn_0065756f(void)
+{
+}
+
+int __cdecl fcn_00657a73(char* s, int len, int base)
+{
+	return 0;
+}
+
+int __cdecl fcn_00659eda(void* p)
+{
+	return 0;
+}
+
+int __cdecl fcn_0065f220(char* a, char* b)
 {
 	return 0;
 }
@@ -4144,9 +5508,8 @@ int __cdecl fcn_0065f2f0(int a, int b, int c)
 	return 0;
 }
 
-int __cdecl fcn_0066080a(char* s)
+void __cdecl fcn_0066080a(char* a)
 {
-	return 0;
 }
 
 int __cdecl fcn_0066096a(char* a, int b)
@@ -4155,6 +5518,419 @@ int __cdecl fcn_0066096a(char* a, int b)
 }
 
 int __cdecl fcn_10016ea0(int a, int b, int c)
+{
+	return 0;
+}
+
+void __cdecl fcn_402ff0(void)
+{
+}
+
+void __cdecl fcn_403040(void)
+{
+}
+
+void __cdecl fcn_405e20(void)
+{
+}
+
+void __cdecl fcn_4116d0(void)
+{
+}
+
+void __cdecl fcn_411fe0(void)
+{
+}
+
+void __cdecl fcn_412630(void)
+{
+}
+
+void __cdecl fcn_413380(void)
+{
+}
+
+void __cdecl fcn_415d70(void)
+{
+}
+
+void __cdecl fcn_418e00(void)
+{
+}
+
+void __cdecl fcn_419990(void)
+{
+}
+
+void __cdecl fcn_41bcb0(void)
+{
+}
+
+void __cdecl fcn_41d9e0(void)
+{
+}
+
+void __cdecl fcn_41fc80(void)
+{
+}
+
+void __cdecl fcn_422150(void)
+{
+}
+
+void __cdecl fcn_4238d0(void)
+{
+}
+
+void __cdecl fcn_4297c0(void)
+{
+}
+
+void __cdecl fcn_42df30(void)
+{
+}
+
+void __cdecl fcn_444190(void)
+{
+}
+
+void __cdecl fcn_454f80(void)
+{
+}
+
+void __cdecl fcn_465fe0(void)
+{
+}
+
+void __cdecl fcn_46a110(void)
+{
+}
+
+void __cdecl fcn_473320(void)
+{
+}
+
+void __cdecl fcn_473a90(void)
+{
+}
+
+void __cdecl fcn_474e80(void)
+{
+}
+
+void __cdecl fcn_475220(void)
+{
+}
+
+void __cdecl fcn_47c560(void)
+{
+}
+
+void __cdecl fcn_47cdf0(void)
+{
+}
+
+void __cdecl fcn_4b6470(void)
+{
+}
+
+void __cdecl fcn_4c0b40(void)
+{
+}
+
+void __cdecl fcn_4c0cd0(void)
+{
+}
+
+void __cdecl fcn_4c16c0(void)
+{
+}
+
+void __cdecl fcn_4c2860(void)
+{
+}
+
+void __cdecl fcn_4c3ff0(void)
+{
+}
+
+void __cdecl fcn_4c4940(void)
+{
+}
+
+void __cdecl fcn_4c4b00(void)
+{
+}
+
+int __cdecl fcn_4c51a0(int a, int b, int c, int d)
+{
+	return 0;
+}
+
+int __cdecl fcn_4c5620(int a, int b)
+{
+	return 0;
+}
+
+void __cdecl fcn_4c5700(void)
+{
+}
+
+void __cdecl fcn_4d03e0(void)
+{
+}
+
+void __cdecl fcn_4da1b0(void)
+{
+}
+
+int __cdecl fcn_4e6650(void)
+{
+	return 0;
+}
+
+int __cdecl fcn_4e6a30(void)
+{
+	return 0;
+}
+
+void __cdecl fcn_4efde0(void)
+{
+}
+
+int __cdecl fcn_503fe0(int a, int b, int c)
+{
+	return 0;
+}
+
+int __cdecl fcn_508e40(int a)
+{
+	return 0;
+}
+
+int __cdecl fcn_50d2a0(int a)
+{
+	return 0;
+}
+
+int __cdecl fcn_51af00(char* a, int b, ...)
+{
+	return 0;
+}
+
+void __cdecl fcn_526660(void)
+{
+}
+
+void __cdecl fcn_526b70(void)
+{
+}
+
+void __cdecl fcn_527f60(void)
+{
+}
+
+void __cdecl fcn_529890(void)
+{
+}
+
+void __cdecl fcn_52a960(void)
+{
+}
+
+void __cdecl fcn_52fde0(void)
+{
+}
+
+void __cdecl fcn_5305d0(void)
+{
+}
+
+void __cdecl fcn_530a00(void)
+{
+}
+
+void __cdecl fcn_530c60(void)
+{
+}
+
+void __cdecl fcn_531620(void)
+{
+}
+
+void __cdecl fcn_531d20(void)
+{
+}
+
+void __cdecl fcn_532650(void)
+{
+}
+
+void __cdecl fcn_532900(void)
+{
+}
+
+void __cdecl fcn_5329a0(void)
+{
+}
+
+void __cdecl fcn_532bd0(void)
+{
+}
+
+void __cdecl fcn_533090(void)
+{
+}
+
+void __cdecl fcn_5337a0(void)
+{
+}
+
+void __cdecl fcn_5337f0(void)
+{
+}
+
+void __cdecl fcn_533a40(void)
+{
+}
+
+void __cdecl fcn_5345b0(void)
+{
+}
+
+void __cdecl fcn_5348a0(void)
+{
+}
+
+void __cdecl fcn_534b90(void)
+{
+}
+
+void __cdecl fcn_5356b0(void)
+{
+}
+
+void __cdecl fcn_5356e0(void)
+{
+}
+
+void __cdecl fcn_535850(void)
+{
+}
+
+void __cdecl fcn_536810(void)
+{
+}
+
+void __cdecl fcn_536b10(void)
+{
+}
+
+void __cdecl fcn_536bb0(void)
+{
+}
+
+void __cdecl fcn_537080(void)
+{
+}
+
+void __cdecl fcn_537210(void)
+{
+}
+
+void __cdecl fcn_537320(void)
+{
+}
+
+void __cdecl fcn_545aa0(void)
+{
+}
+
+int __cdecl fcn_545d40(int a, int b, char* c, int d, int e, char* f)
+{
+	return 0;
+}
+
+int __cdecl fcn_546190(int a)
+{
+	return 0;
+}
+
+void __cdecl fcn_546d90(void)
+{
+}
+
+void __cdecl fcn_590670(void)
+{
+}
+
+void __cdecl fcn_592470(void)
+{
+}
+
+void __cdecl fcn_5924d0(void)
+{
+}
+
+int __cdecl fcn_5c4ec0(int a, int b, int c, char* d)
+{
+	return 0;
+}
+
+void __cdecl fcn_5c67d0(void)
+{
+}
+
+void __cdecl fcn_5c8c40(void)
+{
+}
+
+void __cdecl fcn_5d0660(void)
+{
+}
+
+void __cdecl fcn_5d42e0(void)
+{
+}
+
+void __cdecl fcn_5d46d0(void)
+{
+}
+
+void __cdecl fcn_5d4a20(void)
+{
+}
+
+void __cdecl fcn_5e41b0(void)
+{
+}
+
+void __cdecl fcn_5e43f0(void)
+{
+}
+
+void __cdecl fcn_5e4c50(void)
+{
+}
+
+void __cdecl fcn_5e4cd0(void)
+{
+}
+
+void __cdecl fcn_5e8b10(void)
+{
+}
+
+int __cdecl fcn_64d228(void)
+{
+	return 0;
+}
+
+void __cdecl fcn_64d41a(void)
+{
+}
+
+int __cdecl g_662068(void)
 {
 	return 0;
 }
@@ -4179,7 +5955,27 @@ int __cdecl g_662360(void)
 	return 0;
 }
 
+int __cdecl g_662364(void)
+{
+	return 0;
+}
+
 int __cdecl g_662374(void)
+{
+	return 0;
+}
+
+int __cdecl g_662384(void)
+{
+	return 0;
+}
+
+int __cdecl g_6623a8(void)
+{
+	return 0;
+}
+
+int __cdecl g_output_share(void)
 {
 	return 0;
 }
@@ -4187,6 +5983,16 @@ int __cdecl g_662374(void)
 int __cdecl g_panic_callback(void)
 {
 	return 0;
+}
+
+long __cdecl gp_64d228(double a)
+{
+	return 0;
+}
+
+double __cdecl gp_64dc80(double a, double b)
+{
+	return 0.0;
 }
 
 int __cdecl plt_TableLookup(unsigned int a, unsigned short* b)
@@ -4197,6 +6003,319 @@ int __cdecl plt_TableLookup(unsigned int a, unsigned short* b)
 int __cdecl sub_00576750(char* a, char* b, char* c, int d)
 {
 	return 0;
+}
+
+int __cdecl sub_402ab0(void * a, char * b, int c)
+{
+	return 0;
+}
+
+void __cdecl sub_4030e0(void * a)
+{
+}
+
+int __cdecl sub_407e30(void * a, void * b, void * c, void * d, void * e, void * f, void * g)
+{
+	return 0;
+}
+
+int __cdecl sub_41db70(int a, int b)
+{
+	return 0;
+}
+
+void __cdecl sub_41ddd0(unsigned long a)
+{
+}
+
+void * __cdecl sub_42ff50(unsigned long a, unsigned long b, unsigned long c)
+{
+	return (void*) 0;
+}
+
+void __cdecl sub_430580(void * a)
+{
+}
+
+int __cdecl sub_430910(void * a, int b, int c, void * d)
+{
+	return 0;
+}
+
+void __cdecl sub_438cb0(void * a, char * b)
+{
+}
+
+void * __cdecl sub_445600(char * a, int b, int c, int d)
+{
+	return (void*) 0;
+}
+
+int __cdecl sub_451380(char * a, unsigned long b)
+{
+	return 0;
+}
+
+int __cdecl sub_4518a0(float * a)
+{
+	return 0;
+}
+
+int __cdecl sub_455140(void * a, unsigned long b, char * c)
+{
+	return 0;
+}
+
+int __cdecl sub_455350(void * a, void * b, char * c)
+{
+	return 0;
+}
+
+int __cdecl sub_45b920(void * a, void * b, void * c, char * d)
+{
+	return 0;
+}
+
+char __cdecl sub_45b990(void * a, char * b, char * c, char * d, char * e)
+{
+	return 0;
+}
+
+int __cdecl sub_470820(void)
+{
+	return 0;
+}
+
+int __cdecl sub_471b60(void)
+{
+	return 0;
+}
+
+int __cdecl sub_471e30(void)
+{
+	return 0;
+}
+
+int __cdecl sub_471f80(void * a)
+{
+	return 0;
+}
+
+int __cdecl sub_472250(void)
+{
+	return 0;
+}
+
+int __cdecl sub_472380(void * a, int b, int c, int d)
+{
+	return 0;
+}
+
+int __cdecl sub_4727a0(void)
+{
+	return 0;
+}
+
+int __cdecl sub_473a90(void)
+{
+	return 0;
+}
+
+int __cdecl sub_4a5e60(void)
+{
+	return 0;
+}
+
+int __cdecl sub_4bfe00(void * a)
+{
+	return 0;
+}
+
+int __cdecl sub_4c4450(void)
+{
+	return 0;
+}
+
+int __cdecl sub_4c5530(void)
+{
+	return 0;
+}
+
+int __cdecl sub_4c5790(int a, void * b)
+{
+	return 0;
+}
+
+void __cdecl sub_4c5c00(void * a, int b, int c, unsigned long d)
+{
+}
+
+void * __cdecl sub_4ce610(void * a)
+{
+	return (void*) 0;
+}
+
+void * __cdecl sub_4cef30(int a)
+{
+	return (void*) 0;
+}
+
+void * __cdecl sub_4fe2e0(void * a, void * b, int c, int d, int e, unsigned long f)
+{
+	return (void*) 0;
+}
+
+int __cdecl sub_4ff210(int a, int b)
+{
+	return 0;
+}
+
+int __cdecl sub_502cd0(int a, int b, int c, int d, int e)
+{
+	return 0;
+}
+
+void * __cdecl sub_508e40(int a)
+{
+	return (void*) 0;
+}
+
+int __cdecl sub_50d2a0(void * a)
+{
+	return 0;
+}
+
+int __cdecl sub_519190(void)
+{
+	return 0;
+}
+
+int __cdecl sub_51af00(void)
+{
+	return 0;
+}
+
+int __cdecl sub_5218f0(void * a, int b, int c, void * d)
+{
+	return 0;
+}
+
+int __cdecl sub_525f60(void)
+{
+	return 0;
+}
+
+int __cdecl sub_526010(void * a, int b, unsigned char c)
+{
+	return 0;
+}
+
+int __cdecl sub_526120(void)
+{
+	return 0;
+}
+
+int __cdecl sub_52a0c0(void)
+{
+	return 0;
+}
+
+int __cdecl sub_52a2d0(void)
+{
+	return 0;
+}
+
+int __cdecl sub_5305a0(void)
+{
+	return 0;
+}
+
+int __cdecl sub_532ef0(void)
+{
+	return 0;
+}
+
+void __cdecl sub_5338a0(void)
+{
+}
+
+void * __cdecl sub_5338d0(unsigned long a, long b, int c)
+{
+	return (void*) 0;
+}
+
+int __cdecl sub_533a40(void * a)
+{
+	return 0;
+}
+
+int __cdecl sub_5340f0(void)
+{
+	return 0;
+}
+
+int __cdecl sub_5373e0(void)
+{
+	return 0;
+}
+
+int __cdecl sub_545510(void)
+{
+	return 0;
+}
+
+void __cdecl sub_5ae960(long a)
+{
+}
+
+void __cdecl sub_5aeab0(long a)
+{
+}
+
+void __cdecl sub_5aee90(long a)
+{
+}
+
+int __cdecl sub_5b54b0(void * a)
+{
+	return 0;
+}
+
+int __cdecl sub_5cd440(void)
+{
+	return 0;
+}
+
+int __cdecl sub_64d228(float a)
+{
+	return 0;
+}
+
+int __cdecl sub_64d3f8(void)
+{
+	return 0;
+}
+
+int __cdecl sub_64d41a(void * a, unsigned long b, unsigned long c, unsigned long d, void * e)
+{
+	return 0;
+}
+
+void __cdecl sub_64e1fd(void * a)
+{
+}
+
+void * __cdecl sub_64e2f9(void * a, unsigned long b)
+{
+	return (void*) 0;
+}
+
+void __cdecl sub_64e48f(void * a, int b, int c)
+{
+}
+
+void __cdecl sub_64ed28(void * a, int b, int c, void * d)
+{
 }
 
 int __cdecl vfs_FlushAndClose(int a)
@@ -4216,3 +6335,4 @@ int __cdecl vfs_FlushAndClose(int a)
  * src/Develop/DieGildeAddOn/game/spiel_data.c, game_float_constants.c)
  * into a client that compiles this translation unit.
  */
+

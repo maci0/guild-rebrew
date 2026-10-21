@@ -8774,9 +8774,9 @@ updated_at = "2026-10-17T12:27:42+00:00"
 ["GOLDTL.0x00aed328".verification]
 status = "DISPLACED"
 writer = "verify"
-input_hash = "5d20a3a3a65439b6dbead34d8861888a1e85e0a95228164ea488ae5c21373c73"
+input_hash = "b076bf865f43b57f1bf9d65d6c19113a5442ecaac7d9a49ef742ee636d2123c2"
 definition_hash = "c377e96d75603aeaefd5ce0aed137b5dabd0ed39fd8d1e203710b9fb377779c3"
-measured_at = "2026-10-17T12:27:42+00:00"
+measured_at = "2026-10-21T16:09:40+00:00"
 ["GOLDTL.0x00aed32c"]
 file = "src/client_packet_builder.h"
 name = "g_aed32c"
@@ -8790,9 +8790,9 @@ status = "DISPLACED"
 ["GOLDTL.0x00aed32c".verification]
 status = "DISPLACED"
 writer = "verify"
-input_hash = "1652c11de3e53adaa6d8c88a8179f03fa1711703b00da973988ced0fba50b56f"
+input_hash = "8ffa10218d45934265e26b0512cfade3269febe9470ca73051663c747d82470a"
 definition_hash = "96e83563a324efbbdcc78484f238af0cf294edfaf145efcf3decbcf199fd90cd"
-measured_at = "2026-10-17T12:27:42+00:00"
+measured_at = "2026-10-21T16:09:40+00:00"
 ["GOLDTL.0x00f8a668"]
 section = ".data"
 
@@ -24501,15 +24501,15 @@ size = 1536
 section = ".data"
 kind = "GLOBAL"
 updated_by = "verify"
-updated_at = "2026-10-21T03:42:51+00:00"
-status = "VERIFIED"
+updated_at = "2026-10-21T16:09:40+00:00"
+status = "DISPLACED"
 
 ["GOLDTL.0x0099ef84".verification]
-status = "VERIFIED"
+status = "DISPLACED"
 writer = "verify"
 input_hash = "6f0df5587eb16ed8b13cccd7192a75a121e7c3516a17a98b3d7addeb4a9b3d6c"
 definition_hash = "230081bd83fc297e6e75293aa9e7c6b08e5b8a51ede56af9e1f087ed5f306a7f"
-measured_at = "2026-10-21T03:42:51+00:00"
+measured_at = "2026-10-21T16:09:40+00:00"
 ["GOLDTL.0x007e6060"]
 type = "char[17152]"
 name = "g_7e6060"

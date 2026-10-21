@@ -5,22 +5,31 @@ Read [current work](TODO.md), [the objective](../goal.md), then the
 counts. The project default target is GoldTL; name `server.dll` for the server.
 Historical commands and measurements are in [goal history](goal-history.md).
 
-## Current status snapshot (2026-10-21 14:13 UTC)
+## Current status snapshot (2026-10-21 16:24 UTC)
 
-The integrated server is freshly built and byte-identical: SHA-256
+All three build images exist. The server remains byte-identical:
 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
-Verification passes 316/316 functions and all 652 compared data symbols, with
-complete PE, import, relocation, layout and function-placement agreement.
-All 33 project tests and 3 subtests pass. Main-checkout lint has zero errors,
-zero server warnings and three warnings per client.
+Its fresh data/image verification again passes all 652 compared symbols and the
+complete PE check. Both client CMake targets link successfully with same-build
+maps and comparison-only placeholders (2871 Gold, 4138 TL). They are not
+playable or byte-identical games.
+
+Data comparisons now run directly with `uv run rebrew verify --data` (TL) or
+`--target Europa1400Gold.exe`. Gold reports 83 matching / 30 differing / 49
+missing symbols; TL reports 100 / 51 / 40. Respect the non-comparable BSS/file
+limits and displaced placements; no client EXACT data placement was earned.
+
+Project tests: 34 passed plus 3 subtests. Lint: zero errors; server and Gold
+have no warnings, TL has two unsupported-inline-assembly warnings. Compiler
+warnings and the incomplete source/ABI/storage contracts remain. The full gate
+was not rerun. Rebrew's generator fix is on upstream main at
+[8bd102e6](https://github.com/maci0/rebrew/commit/8bd102e6), with 13074 tests passing.
+The [build guide](../stubs/README.md) covers regeneration's version requirement.
 
 The [README charts](../README.md#reconstruction-status) and
-[tracker snapshot](TODO.md#status-snapshot-2026-10-21-1202-utc) use the integrated
-metadata. Client links and the complete gate remain pending; no older scaffold
-image is reused for current raw-file scores. The earlier pause and resume notes
-below are historical. Reviewed work is merged; unsafe generated padding and
-copied-data experiments remain in local backups. Receipt directory:
-`.scratch/integrate-all-20261021/`.
+[tracker](TODO.md#status-snapshot-2026-10-21-1202-utc) show this checkpoint. Earlier
+pause/resume notes below are historical. Receipts:
+`.scratch/linkable-clients-20261021/`.
 
 ## Paused state before the 2026-10-19 resume
 

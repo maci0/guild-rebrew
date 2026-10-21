@@ -1,0 +1,7 @@
+GOLDTL.fcn_00435410.c.obj : error LNK2001: unresolved external symbol _fcn_00601a9b@24
+GOLDTL.fcn_0047b640.c.obj : error LNK2001: unresolved external symbol _fcn_006114ff@32
+GOLDTL.fcn_005ef2e0.c.obj : error LNK2001: unresolved external symbol @fcn_006165dd@8
+GOLDTL.fcn_005ef2e0.c.obj : error LNK2001: unresolved external symbol @fcn_006165ef@16
+GOLDTL.fcn_005ef2e0.c.obj : error LNK2001: unresolved external symbol @fcn_0061680a@8
+GOLDTL.fcn_005ef2e0.c.obj : error LNK2001: unresolved external symbol @fcn_00616815@8
+GOLDTL.fcn_005ef2e0.c.obj : error LNK2001: unresolved external symbol @fcn_006168be@8

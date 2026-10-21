@@ -462,6 +462,9 @@ if(REBREW_BUILD_GOLDTL)
     "${PROJECT_SOURCE_DIR}/stubs/goldtl/omitted-sources.cmake")
   rebrew_append_scaffold(GOLDTL_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/goldtl/symbol_stubs.c")
+  # Conflicting fastcall signatures need distinct C translation units.
+  rebrew_append_scaffold(GOLDTL_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/goldtl/abi_stubs.c")
 
   if(GOLDTL_SOURCES)
     add_executable(europa1400gold_tl WIN32 ${GOLDTL_SOURCES})
