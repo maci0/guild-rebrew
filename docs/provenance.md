@@ -1443,3 +1443,10 @@ Verification: all six build/map hashes are unchanged, no functions compiled,
 fences in the refreshed Markdown pass. Data verdicts are unchanged. Source work
 since the links was not rebuilt; function statistics are stored verdicts.
 The full gate and gameplay were not rerun.
+
+## 2026-10-22 — publish refreshed graphic URLs
+
+Change and decision: pin the three README images to `8a58e3fcd3285012c18e72132ee84b501e2a96df`,
+the commit containing this fresh data snapshot. This gives GitHub immutable
+updated assets. Verification: all three SVGs parse and their metric values
+come from the same status report. No build or metadata changes.
