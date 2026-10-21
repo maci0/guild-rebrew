@@ -55,9 +55,10 @@ displaced code still differs there. None of these alone establishes completion.
 </details>
 <!-- progress:end -->
 
-<sub>Snapshot refreshed 2026-10-21 16:24 UTC from
+<sub>Snapshot refreshed 2026-10-21 16:36 UTC from
 <code>rebrew status --all-targets --json</code>. All three raw images are present;
-both client links and data comparisons are fresh. Client function matches remain
+data was freshly verified against those images and their same-build maps.
+Source work since the links has not been rebuilt. Function matches remain
 stored verdicts, not a new per-function verification batch. Libraries, semantic
 PROVEN verdicts and whole-function assembly matches are excluded from C totals.
 Inline assembly may remain.</sub>
@@ -71,7 +72,7 @@ Remaining work in the same snapshot:
 | Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | EXTRACT_ERROR | Without source |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | **GoldTL** | 297 | 904 | 81 | 5 | 31 |
-| **Gold** | 1,853 | 218 | 26 | 0 | 3 |
+| **Gold** | 1,852 | 218 | 26 | 0 | 4 |
 
 A partial body or repaired inventory boundary can change these categories
 without earning a match. Function percentages measure catalog entries, not
@@ -111,10 +112,18 @@ uv run rebrew verify --data --target Europa1400Gold.exe
 uv run rebrew verify --data --target Europa1400Gold_TL.exe
 ```
 
-Fresh diagnostics report 83 matching / 30 differing / 49 missing symbols for
-Gold, and 100 / 51 / 40 for GoldTL. Another 159 Gold and 172 TL records have no
-comparable file bytes. Most symbols are displaced; the stricter charts above
-therefore retain zero client EXACT data placements. See the
+Fresh raw-image diagnostics (2026-10-21 16:35 UTC):
+
+| Target | Content matches | Differs | Missing | No comparable file bytes |
+| --- | ---: | ---: | ---: | ---: |
+| **Server** | 652 | 0 | 0 | 0 |
+| **GoldTL** | 100 | 51 | 40 | 172 |
+| **Gold** | 83 | 30 | 49 | 159 |
+
+These diagnostics include imports and records excluded from coverage totals;
+they are not the same denominator as the charts. BSS or unavailable file bytes
+are not counted as matching zeros. Most client symbols are displaced, so the
+stricter charts retain zero client EXACT data placements. See the
 [comparison-build guide](stubs/README.md) for placeholders and build commands.
 
 ## Get started

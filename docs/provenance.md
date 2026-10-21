@@ -1422,3 +1422,24 @@ Reason and decision: the maintainer requested current progress graphics; use
 the immutable commit containing the linked-client data snapshot so cached
 older images are not reused. Verification: SVG XML, local Markdown targets
 and both linked images/maps checked; no source or metadata change.
+
+## 2026-10-22 — refresh raw data checks and README graphics
+
+Change: verify data for all three existing raw builds with their matching maps,
+refresh all three README graphics from one status report, and update the README,
+tracker and handoff. Decision owner: maintainer request to verify data and refresh
+the published status. No source edits or new storage claims.
+
+Evidence: `.scratch/data-readme-refresh-20261022/`. Server data passes 652/652;
+the complete 286720-byte file still matches the original, SHA-256
+3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+Gold has 83 content matches, 30 differences, 49 missing records and 159 without
+comparable file bytes. GoldTL has 100, 51, 40 and 172 respectively. Client
+commands exit 1 for those differences; neither client earns an EXACT data
+placement. Raw-record counts and strict coverage totals remain distinct.
+
+Verification: all six build/map hashes are unchanged, no functions compiled,
+34 project tests and 3 subtests pass, all three SVGs parse, and local links and
+fences in the refreshed Markdown pass. Data verdicts are unchanged. Source work
+since the links was not rebuilt; function statistics are stored verdicts.
+The full gate and gameplay were not rerun.

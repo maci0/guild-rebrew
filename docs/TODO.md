@@ -2,10 +2,12 @@
 
 <a id="status-snapshot-2026-10-21-1202-utc"></a>
 
-## Status snapshot (2026-10-21 16:24 UTC)
+## Status snapshot (2026-10-21 16:36 UTC)
 
 The [README and charts](../README.md#reconstruction-status) use one
-`rebrew status --all-targets --json` report from this linked checkpoint.
+`rebrew status --all-targets --json` report after fresh data verification of
+all three existing raw builds and their maps. Source edits since those links
+were not rebuilt; function results remain stored verdicts.
 
 - **Server:** 251/251 C matches, 100.0% code accounting and all 286,720 raw
   bytes identical. Its fresh image/data check again passes all 652 compared
@@ -22,6 +24,9 @@ The [README and charts](../README.md#reconstruction-status) use one
   None of the client data placements is EXACT. Stored displacement counts are
   304 Gold and 339 TL. The [data charts](../README.md#data-verification) distinguish
   content checks, verified bytes, BSS/views and placement.
+- The raw images and maps are unchanged through this data-only check. It
+  compiled no functions. Gold currently has 1,852 STUB and four without-source
+  entries; a source-binding change alone does not earn a byte match.
 - All 34 project tests and 3 subtests pass. Lint has zero errors for all targets,
   zero server/Gold warnings and two TL warnings for unsupported inline assembly.
   Compiler warnings remain; the full gate was not rerun.
@@ -35,7 +40,8 @@ Its draft was backed up, the loop stopped, and the stub providers and source
 identities restored through metadata owners. Native xrefs and complete extents
 must be reviewed before retiring these entries; no new recovered-body credit
 was awarded. The copied padding/storage experiments remain excluded. Receipt
-folder: `.scratch/linkable-clients-20261021/`.
+folder: `.scratch/linkable-clients-20261021/`. Latest data-only receipts:
+`.scratch/data-readme-refresh-20261022/`.
 
 The [three-binary objective](../goal.md) remains incomplete. Older notes below
 are dated checkpoints; missing-client-image and pending-commit statements are

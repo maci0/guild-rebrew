@@ -5,7 +5,7 @@ Read [current work](TODO.md), [the objective](../goal.md), then the
 counts. The project default target is GoldTL; name `server.dll` for the server.
 Historical commands and measurements are in [goal history](goal-history.md).
 
-## Current status snapshot (2026-10-21 16:24 UTC)
+## Current status snapshot (2026-10-21 16:36 UTC)
 
 All three build images exist. The server remains byte-identical:
 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
@@ -13,6 +13,10 @@ Its fresh data/image verification again passes all 652 compared symbols and the
 complete PE check. Both client CMake targets link successfully with same-build
 maps and comparison-only placeholders (2871 Gold, 4138 TL). They are not
 playable or byte-identical games.
+
+Data was rechecked against those existing images and their same-build maps;
+all six files retained their hashes. Source work since the links has not been
+rebuilt, and this check compiled no functions.
 
 Data comparisons now run directly with `uv run rebrew verify --data` (TL) or
 `--target Europa1400Gold.exe`. Gold reports 83 matching / 30 differing / 49
@@ -29,7 +33,8 @@ The [build guide](../stubs/README.md) covers regeneration's version requirement.
 The [README charts](../README.md#reconstruction-status) and
 [tracker](TODO.md#status-snapshot-2026-10-21-1202-utc) show this checkpoint. Earlier
 pause/resume notes below are historical. Receipts:
-`.scratch/linkable-clients-20261021/`.
+`.scratch/linkable-clients-20261021/` and the fresh data-only check in
+`.scratch/data-readme-refresh-20261022/`.
 
 ## Paused state before the 2026-10-19 resume
 
