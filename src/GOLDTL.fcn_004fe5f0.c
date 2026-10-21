@@ -25,7 +25,7 @@ void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_0050c710(int, int, int);
 void __cdecl fcn_004ff490(char*);
 
@@ -169,7 +169,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 	}
 	if ((*(unsigned char*) (a0 + 0x1cc) & 2) != 0) {
 		v10 = *(float*) (a0 + 0x1c) -
-		      (float) (int) ((fcn_0042e410(0x10) & 0xffff) + 0x11);
+		      (float) (int) ((gm_RandomMod(0x10) & 0xffff) + 0x11);
 		fcn_004c4510(a0, *(int*) (a0 + 4));
 		fcn_004c4570(4, 1, 0x1c, &v10);
 		fcn_004c5360();

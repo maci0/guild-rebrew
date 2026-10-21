@@ -42,58 +42,51 @@ int __cdecl fcn_0049a880(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	int who;
 
 	who = kind != 0 ? kind : 0x1e;
-	if (busy != 0) {
-		goto fail;
-	}
-	memset(slots, 0, sizeof slots);
-	slots[0].id = 0x168;
-	slots[1].id = 0x16c;
-	slots[2].id = 0x297;
-	slots[3].id = 0x2b7;
-	fcn_004a51d0(e, 4, slots, &cnt);
-	if (cnt.total == 6 && cnt.free == 0) {
-		goto fail;
-	}
-	if (cnt.blocked == 4) {
-		goto fail;
-	}
-	if (cnt.total >= 6 || cnt.free != 0) {
-		if (cnt.free == 0) {
-			goto fail;
+	if (busy == 0) {
+		memset(slots, 0, sizeof slots);
+		slots[0].id = 0x168;
+		slots[1].id = 0x16c;
+		slots[2].id = 0x297;
+		slots[3].id = 0x2b7;
+		fcn_004a51d0(e, 4, slots, &cnt);
+		if (!(cnt.total == 6 && cnt.free == 0) && cnt.blocked != 4) {
+			if (cnt.total >= 6 || cnt.free != 0) {
+				if (cnt.free != 0) {
+					idx = gm_RandomMod(4) & 0xffff;
+					while (slots[idx].a < 1) {
+						idx = (idx + 1) % 4;
+					}
+					m1.type = 1;
+					m1.b = 1;
+					m1.a = slots[idx].b;
+					*out1 = m1;
+					m2.type = 0;
+					m2.a = -1;
+					m2.b = -1;
+					m2.d = 0x1e;
+					*out2 = m2;
+					return 0x1e;
+				}
+			} else {
+				idx = gm_RandomMod(4) & 0xffff;
+				while (slots[idx].a != 0) {
+					idx = (idx + 1) % 4;
+				}
+				m1.type = 2;
+				m1.b = 1;
+				m1.a = slots[idx].id;
+				m1.f = 0.05f;
+				m2.type = 7;
+				m2.a = *(int*) (e + 4);
+				m2.b = 1;
+				r = fcn_00495400(who, *(unsigned short*) e, 2, &m1, &m2);
+				if (r != 0) {
+					*out1 = m1;
+					*out2 = m2;
+					return r;
+				}
+			}
 		}
-		idx = gm_RandomMod(4) & 0xffff;
-		while (slots[idx].a < 1) {
-			idx = (idx + 1) % 4;
-		}
-		m1.type = 1;
-		m1.b = 1;
-		m1.a = slots[idx].b;
-		*out1 = m1;
-		m2.type = 0;
-		m2.a = -1;
-		m2.b = -1;
-		m2.d = 0x1e;
-		*out2 = m2;
-		return 0x1e;
 	}
-	idx = gm_RandomMod(4) & 0xffff;
-	while (slots[idx].a != 0) {
-		idx = (idx + 1) % 4;
-	}
-	m1.type = 2;
-	m1.b = 1;
-	m1.a = slots[idx].id;
-	m1.f = 0.05f;
-	m2.type = 7;
-	m2.a = *(int*) (e + 4);
-	m2.b = 1;
-	r = fcn_00495400(who, *(unsigned short*) e, 2, &m1, &m2);
-	if (r == 0) {
-		goto fail;
-	}
-	*out1 = m1;
-	*out2 = m2;
-	return r;
-fail:
 	return 0;
 }

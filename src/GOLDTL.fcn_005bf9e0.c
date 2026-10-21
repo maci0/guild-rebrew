@@ -38,11 +38,11 @@ int __cdecl fcn_005bf9e0(unsigned short* a0)
 	int p;
 	int r;
 
+	idx = -1;
+	res = 0;
 	for (i = 0; i < 136; i++) {
 		data[i] = 0;
 	}
-	idx = -1;
-	res = 0;
 	data[0] = 1;
 	r = gm_WalkEntityChain(*(unsigned short*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0));
 	timeout = (int) ((float) r * 0.0085f);

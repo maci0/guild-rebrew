@@ -35,11 +35,11 @@ void __cdecl fcn_00536b10(void)
 		fcn_004727a0(g_6a2c20, 0);
 		fcn_00519190((int) g_6811b0);
 		fcn_00519190((int) g_7e3a60);
-	} else {
-		if (g_6a2c20 == -1) {
-			return;
-		}
-		fcn_00471e30(g_6a2c20);
-		g_6a2c20 = -1;
+		return;
 	}
+	if (g_6a2c20 == -1) {
+		return;
+	}
+	fcn_00471e30(g_6a2c20);
+	g_6a2c20 = -1;
 }

@@ -2,7 +2,7 @@
 
 int __cdecl fcn_00423a50(unsigned int a0);
 int __cdecl fcn_004239e0(void);
-char* __cdecl fcn_0041db70(unsigned int size, char* file);
+char* __cdecl m_alloc(unsigned int size, char* file);
 int __cdecl fcn_00423920(unsigned int a0);
 char* __cdecl strncpy(char* dst, const char* src, unsigned int n);
 
@@ -21,7 +21,7 @@ unsigned int __cdecl fcn_00424420(unsigned int a0)
 		return 0xffffffff;
 	}
 	v2 = (char*) fcn_004239e0();
-	v3 = fcn_0041db70(0x108, (char*) 0x679000);
+	v3 = m_alloc(0x108, (char*) 0x679000);
 	v4 = a0;
 	if (v2 != 0) {
 		*(char**) (v2 + 0x104) = v3;

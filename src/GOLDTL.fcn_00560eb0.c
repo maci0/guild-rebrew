@@ -98,7 +98,7 @@ void __cdecl fcn_00560eb0(char* e)
 			goto tail;
 		}
 		row = (struct race*) g_868050 + (unsigned char) *q;
-		type = row->kind;
+		type = *(volatile unsigned char*) row;
 		s = 0;
 		if (type == 4) {
 			s = fcn_00502cd0(*(int*) (q + 0x5d), 1, 0, 0x60);

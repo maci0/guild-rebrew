@@ -2564,9 +2564,16 @@ section = ".data"
 ["GOLD.0x006b7fac"]
 section = ".data"
 name = "g_6b7fac_gold"
-updated_by = "data"
-updated_at = "2026-10-20T05:19:11+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T13:11:11+00:00"
+status = "UNCHECKED"
 
+["GOLD.0x006b7fac".verification]
+status = "UNCHECKED"
+writer = "verify"
+input_hash = "ce2a944747789986e677888083fa087f57448f7b806352cd6f81b961e8df1251"
+definition_hash = "33dd94dd6449290609abdb5cb2c6f450154f620ab94e6709deaa400689a057e8"
+measured_at = "2026-10-21T13:11:11+00:00"
 ["GOLD.0x006b8014"]
 section = ".data"
 
@@ -7184,16 +7191,17 @@ name = "g_6b7fdc"
 kind = "GLOBAL"
 type = "void*"
 section = ".data"
-updated_by = "data"
-updated_at = "2026-10-20T05:42:50+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T03:42:51+00:00"
 size = 4
+status = "DISPLACED"
 
 ["GOLDTL.0x006b7fdc".verification]
 status = "DISPLACED"
 writer = "verify"
-input_hash = "96d093a4e35aefa975bedd5efcb1b7e4f402a0b179e44c89544caa53d13e68c1"
-definition_hash = "02da11d273b3c823bb5ee82a7048e04d73c7af8668ccdc2394e229ba0d8a7b4c"
-measured_at = "2026-10-17T12:27:42+00:00"
+input_hash = "5c02763fae18b0ddf2da520dac255a4c59489964201d81a3381e90a949c01ea4"
+definition_hash = "9ee73903242f9d03041c6a2d0051bda16dbb3114710aa308fb0eb9c712b7ad58"
+measured_at = "2026-10-21T03:42:51+00:00"
 ["GOLDTL.0x006b7fe8"]
 file = "src/Develop/Units/vfs/vfs.h"
 name = "g_6b7fe8"
@@ -7232,16 +7240,17 @@ name = "g_6b8014"
 kind = "GLOBAL"
 type = "char*"
 section = ".data"
-updated_by = "data"
-updated_at = "2026-10-20T05:23:33+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T03:42:51+00:00"
 size = 4
+status = "DISPLACED"
 
 ["GOLDTL.0x006b8014".verification]
 status = "DISPLACED"
 writer = "verify"
-input_hash = "2a809c552788373a8700e0c0697d0e3c583c3796ab145412724e84870e6e4bf8"
-definition_hash = "8084f680cb7ce1a7716e711fa42802adbfdb476a8b274a57bb27bf79529856e9"
-measured_at = "2026-10-17T12:27:42+00:00"
+input_hash = "283f4d775a32fda01258567232a209fccc7d14bc3e503cb289cd2bc9c7087098"
+definition_hash = "e6ab6edcd405ec645b74686571de98a6dffbc99a8ae7276c2d70d3f207225b45"
+measured_at = "2026-10-21T03:42:51+00:00"
 ["GOLDTL.0x006b8300"]
 file = "src/client_lighting.h"
 name = "g_6b8300"
@@ -12801,7 +12810,7 @@ size = 1288
 section = ".rdata"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-14T12:33:31+00:00"
+updated_at = "2026-10-21T08:13:36+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10025fc0".verification]
@@ -12809,7 +12818,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "ac47833826ac2798e54b01bdfc44e51e71adbd30792fd1719f596559a8bb076d"
 definition_hash = "d0628f5f89cb4d06dc2e1dafcd3a8757ff5335ec3026b61e7675f226fff79df9"
-measured_at = "2026-10-14T12:33:31+00:00"
+measured_at = "2026-10-21T08:13:36+00:00"
 
 ["SERVER.0x100264c8"]
 file = "src/Develop/crt_globals.h"
@@ -12840,7 +12849,7 @@ size = 312
 section = ".rdata"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-14T12:33:31+00:00"
+updated_at = "2026-10-21T08:13:36+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100264d0".verification]
@@ -12848,7 +12857,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "c90c63741cd49fc84da43e938353d01c670980936f00011c154220b2ae5d771e"
 definition_hash = "7ca2e6398f9a2323210cba190c289f6ac4bd1c24a8c5024a47091a9ebcee971b"
-measured_at = "2026-10-14T12:33:31+00:00"
+measured_at = "2026-10-21T08:13:36+00:00"
 
 ["SERVER.0x10026608"]
 file = "src/crt_region/section_spans.c"
@@ -12879,14 +12888,14 @@ section = ".data"
 status = "VERIFIED"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-14T12:33:31+00:00"
+updated_at = "2026-10-21T08:13:36+00:00"
 
 ["SERVER.0x10027000".verification]
 status = "VERIFIED"
 writer = "verify"
 input_hash = "9455ddc475129ce979f01e842dff9404fdf5110ee1b3fdffe6d4e66b0b0d4484"
 definition_hash = "b7944d519e9866332fad685d507c4132a71040d6c212417c08390e0a42f47788"
-measured_at = "2026-10-14T12:33:31+00:00"
+measured_at = "2026-10-21T08:13:36+00:00"
 
 ["SERVER.0x10027030"]
 file = "src/Develop/Units/net/broadcast.c"
@@ -14863,7 +14872,7 @@ size = 154
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100294d2".verification]
@@ -14871,7 +14880,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "5cc7f9729976c40bc6debafd75e8e181350004ae05d4833421a738df8c8fcac5"
 definition_hash = "9a3ad9a71703ac6af79cad5f48ca7e6f9c2d10f015cfb70796df1566dcf49c69"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1002956c"]
 file = "src/Develop/DieGildeAddOnServer/server.c"
@@ -17191,7 +17200,7 @@ size = 1668
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-07T10:40:28+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_0GF@IFF@gm_InitObjektHersteller?$CI?$CJ?3?5Initi@"
 
@@ -17200,7 +17209,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "77acbe6991b70dd536ae275f01773809326b968ab471596e56f5971550b11cd3"
 definition_hash = "6b8452f8b112bc9be58ed2557e50ad1bd399825c4befba0e042537e25809517e"
-measured_at = "2026-10-07T10:40:28+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031570"]
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
@@ -17211,7 +17220,7 @@ size = 34
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-07T10:40:28+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "??_C@_0CC@EGHA@?9?9?9?9?9?$DOPlayerID?$DN?5?$CFi?5PlayerName?$DN?5?$CF@"
 storage_kind = "literal"
 
@@ -17220,7 +17229,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "f487db182336cde489e43430d8cd29cb907c54eb08e64f48526f15f3a1ee9f02"
 definition_hash = "0cea013c636c422d8e98f3cabb64eec5593cc473b31b45048707d289a6f14e05"
-measured_at = "2026-10-07T10:40:28+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031592"]
 file = "src/crt_region/section_spans.c"
@@ -17231,7 +17240,7 @@ size = 2
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10031592".verification]
@@ -17239,7 +17248,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "b9353e7a27d7e25797a5e72ce03675a066dc7a674ea3a051a4281ac8f116b767"
 definition_hash = "681dc9f2ca0771a0a852cf3f5f7a32ccc47e54722876b4ea1e209f9971eb1d2a"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031594"]
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
@@ -17250,7 +17259,7 @@ size = 21
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-07T10:40:28+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "??_C@_0BF@MNPB@gm_AllocSpieler?3?5bug?$AA@"
 storage_kind = "literal"
 
@@ -17259,7 +17268,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "9cb21e199f97b293261c4d978f2c9efad0b44901e1c4e8d8318d166cfd5b40b4"
 definition_hash = "b222fad4d743437525970b2c87c3ba1f7a6b5bde7567dbcb3dd33a3fb099d6ff"
-measured_at = "2026-10-07T10:40:28+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100315a9"]
 file = "src/crt_region/section_spans.c"
@@ -17270,7 +17279,7 @@ size = 3
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100315a9".verification]
@@ -17278,7 +17287,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "6cdd8f8e5806811b4c951edb1057169b501b4aa60ba109de4e241445e1426a70"
 definition_hash = "67febbb4ffb84610a5de1788d1e8e148d26a7c94eeb33e7ef2c365b9ba4befdf"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100315ac"]
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
@@ -17289,7 +17298,7 @@ size = 55
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-07T10:40:28+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "??_C@_0DH@EONK@gm_AllocSpieler?$CI?$CJ?3?5gm_CurrentHum@"
 storage_kind = "literal"
 
@@ -17298,7 +17307,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "a993803e1761f72d7542e20ed0f11324d258dd2f6b091ecd96a2c1b7697b634f"
 definition_hash = "c73d1c5df4d4d4b931480dcbf487aa19d215d1e7c71434a089c6531591fb962b"
-measured_at = "2026-10-07T10:40:28+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100315e3"]
 file = "src/crt_region/section_spans.c"
@@ -17309,7 +17318,7 @@ size = 1
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:13:36+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100315e3".verification]
@@ -17317,7 +17326,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "956741a63a72b51043128a1a3c214190bbb277d947167b6f43c7b7fa1fdd9ee2"
 definition_hash = "f5db261c8572442a38d7561006a72519894a3387707d3412545730e6f6680085"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:13:36+00:00"
 
 ["SERVER.0x100315e4"]
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
@@ -17328,7 +17337,7 @@ size = 30
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-07T10:40:28+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "??_C@_0BO@MOBC@?9?9?9?9?9?$DOSpID?$DN?5?$CFi?5playermode?$DN?5?$CFi?$AA@"
 storage_kind = "literal"
 
@@ -17337,7 +17346,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "b50e9cde3ad51d5c85b8f3240cc2ffd0606dab25d022ac72f7ac2e005c8689b1"
 definition_hash = "922024db1c8e1a683d08878a8204064612db87c4223e640c117883eb682679c9"
-measured_at = "2026-10-07T10:40:28+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031602"]
 file = "src/crt_region/section_spans.c"
@@ -17348,7 +17357,7 @@ size = 2
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:13:36+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10031602".verification]
@@ -17356,7 +17365,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "90836d501d081a88f4463511992d7de905d273f882d5da2f2287ed16d267a29c"
 definition_hash = "b9317cc59d9a88ed992674d6bc09eb0b68f5e3ffdf8d3a6414499dc38c65f865"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:13:36+00:00"
 
 ["SERVER.0x10031604"]
 file = "src/Develop/DieGildeAddOn/game/spiel.c"
@@ -17367,7 +17376,7 @@ size = 35
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-07T10:40:28+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "??_C@_0CD@JKGN@gm_AllocSpieler?3?5array?5overflow?4@"
 storage_kind = "literal"
 
@@ -17376,7 +17385,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "e57549a5c0b80812f07b1d292667daaa9813c4d79173b7258db7e7fadb708c89"
 definition_hash = "03306e4799dbe62744c76b51c781247f3fc75228434a15575eda8e05cff96756"
-measured_at = "2026-10-07T10:40:28+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031627"]
 file = "src/crt_region/section_spans.c"
@@ -17387,7 +17396,7 @@ size = 433
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10031627".verification]
@@ -17395,7 +17404,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "79e86c85f24fcd14815d994c3b718c0198278090d20f66cf1749cdedb60caaeb"
 definition_hash = "16034ac5954a05978fa09e7a98177159a4003080f37c6bd08c7712a6d0e8f7ce"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100317d8"]
 file = "src/crt_region/data_globals.c"
@@ -17407,14 +17416,14 @@ section = ".data"
 status = "EXACT"
 note = "first init fnptr"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100317d8".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "5de8f17cc8c930b2d99cf8ed33f0b5355fe226a6d515695c418e976568cb374a"
 definition_hash = "3ff80c01c6eb55cf4887a64b766871b8204e761ac8bf156f0e83745be986dcef"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100317dc"]
 file = "src/crt_region/section_spans.c"
@@ -17425,7 +17434,7 @@ size = 20
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100317dc".verification]
@@ -17433,7 +17442,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "f0286569138b89eab5bf7b09b05b3aa34d0085f7e26ba6a18023c06e015b1183"
 definition_hash = "2f6582be67de7a3e021d0f3fdd44fd85e62156f3bbec559d48e0dc134083a9fa"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100317f0"]
 file = "src/crt_region/data_globals.c"
@@ -17445,7 +17454,7 @@ section = ".data"
 status = "EXACT"
 note = "_exit hook fnptr"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "__aexit_rtn"
 
@@ -17454,7 +17463,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "0cc052d7a2a282cb8fea653220f92786f6383422f5ff7acdd152bbb700eef005"
 definition_hash = "96851fbed6e3ad25a4066e895a93a27294e2b404e6ed7027b3a68ac57b01b59c"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100317f4"]
 file = "src/crt_region/section_spans.c"
@@ -17464,8 +17473,8 @@ type = "unsigned char[0x4]"
 size = 4
 section = ".data"
 status = "VERIFIED"
-updated_by = "data"
-updated_at = "2026-10-03T08:25:08+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:13:36+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100317f4".verification]
@@ -17473,7 +17482,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "06e0d579790c4b1992853f8a2ef17978e2d85722a642ebea46c3c9c656deb760"
 definition_hash = "8b0d67f234ba95063a32cf8c8fab9f0056cef2b936474b4df43fd058b8a3a1a7"
-measured_at = "2026-10-01T12:33:40+00:00"
+measured_at = "2026-10-21T08:13:36+00:00"
 
 ["SERVER.0x100317f8"]
 file = "src/crt_region/data_globals.c"
@@ -17485,7 +17494,7 @@ section = ".data"
 status = "EXACT"
 note = "Complete stock LIBCMT:_file.obj FILE[20] allocation; two DIR32 initializers target _bufin. Legacy g_lock_stream_table declaration is an unused one-byte view, not another allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "object"
 link_symbol = "__iob"
 
@@ -17494,7 +17503,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "7180d3753364007dcf98aaf05d8e454223a94c4a2e1810369969ad3111eb8d47"
 definition_hash = "7aa528641f6f44dbfebe940e691e105a0e71959132b68ea391efa7c901b48222"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031a78"]
 file = "src/layout_spans.h"
@@ -17507,14 +17516,14 @@ status = "VERIFIED"
 storage_kind = "span"
 note = "Nonallocating gap after complete 640-byte CRT _iob, before locktable."
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031a78".verification]
 status = "VERIFIED"
 writer = "verify"
 input_hash = "8a92019b15dd8f2aa2508007362dae962a6010d4e792b0be7147cf94cd524ec6"
 definition_hash = "22bc3af85878aacc4ad5e2e7bbf6044f9341bf6e8c74cb5970efd85c9313c358"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031aac"]
 file = "src/crt_region/data_globals.c"
@@ -17526,7 +17535,7 @@ section = ".data"
 status = "EXACT"
 note = "per-lock CRITICAL_SECTION ptr table (0x30 = 48 entries, 0x10031aac..0x10031b6c)"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "__locktable"
 
@@ -17535,7 +17544,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "6a04210e6e67387aed322a3bf5adc8be89728a844b71ce20a1a21f3874cb3a8a"
 definition_hash = "1571af7f1ec7eace44bdc0e7c86bf9af79d2de711bb558a2f41cc035bb3ffeea"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031b6c"]
 file = "src/crt_region/data_globals.c"
@@ -17547,14 +17556,14 @@ section = ".data"
 status = "EXACT"
 note = "TLS index (__tlsindex)"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031b6c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "497fd6fdfd5a1c6515d3b69c33924e7b3effd1333282801e1160116389394969"
 definition_hash = "8ab38057c33ca4d533804038e7269fef96066f75c33bc373f286c52e5f3a956d"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031b70"]
 file = "src/crt_region/section_spans.c"
@@ -17565,7 +17574,7 @@ size = 8
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10031b70".verification]
@@ -17573,7 +17582,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "94137e5906e322f5a756b9e379eed7fdfcdf2f34147412f43c35501fb31d4766"
 definition_hash = "354e22d3ba174bde14e704cd6aece3e26947e5f428f4945f8d8e2a3e7dedc419"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031b78"]
 file = "src/crt_region/data_globals.c"
@@ -17585,7 +17594,7 @@ section = ".data"
 status = "EXACT"
 note = "block allocator region-list head node"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "___old_small_block_heap"
 
@@ -17594,7 +17603,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "6c35eb135dedf20a6b619ebcd03f0973f18866b4f5ce0193e7632ffecd38d114"
 definition_hash = "fa4b0068ce76de170230bbb8b89564d66515df334355319065c143d1635fc8e8"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10031b79"]
 file = "src/crt_region/section_spans.c"
@@ -17605,7 +17614,7 @@ size = 8223
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10031b79".verification]
@@ -17613,7 +17622,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "448bfe2f6abdb7763661b97ef261452195419dbc0fc93d48a21ce355793134fb"
 definition_hash = "700481940a3b2f18101370f8b5439d68a36dcba0de457b8d829ac3633e5e88c7"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10033b98"]
 file = "src/Develop/crt_globals.h"
@@ -17625,7 +17634,7 @@ section = ".data"
 status = "VERIFIED"
 note = "__old_sbh_p_starting_region (V5 sbh rover)"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "___old_sbh_p_starting_region"
 
@@ -17634,7 +17643,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "87c961b687c989e0ca3c611ccae55c302f3a24699a966e4a7d604e1a186fcfb8"
 definition_hash = "8e329d228c397fb5dd7fbde5ac92803bcb748e0889b4e08888beb700e3d733ab"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10033b9c"]
 file = "src/crt_region/data_globals.c"
@@ -17646,7 +17655,7 @@ section = ".data"
 status = "EXACT"
 note = "block alloc threshold (allocator mode 2)"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "___old_sbh_threshold"
 
@@ -17655,7 +17664,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "f1c49d8301d4dd7892519e90bdaf0ea93d4637b7d6b707d4e61fa08ba4156680"
 definition_hash = "1ec4ae22f6e393d78592f95663b43b414fef75a6a23561ebcb38f697ff21ea5f"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10033ba0"]
 file = "src/crt_region/section_spans.c"
@@ -17666,7 +17675,7 @@ size = 848
 section = ".data"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-14T12:33:31+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10033ba0".verification]
@@ -17674,7 +17683,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "650b1a245b004ae9f45890e5138555333070f83f5ca2f1f13396fb5bf22370d2"
 definition_hash = "512ce2bc88df350d5abeb7b27d675b061e5376e41ef6a705a79f0f7f7276c960"
-measured_at = "2026-10-14T12:33:31+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10033ef0"]
 file = "src/crt_region/data_globals.c"
@@ -17686,7 +17695,7 @@ section = ".data"
 status = "VERIFIED"
 note = "_NMSG_WRITE runtime-error table (0x1001fe31)"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "_rterrs"
 
@@ -17695,7 +17704,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "26e9f552e5c776978abe359f933e3dc8023dd3e295cb9a238a3c8edaad5ebe9a"
 definition_hash = "ddfada08a20782506149587703fa2ae2f7693112bf7217a29ec4b38f9bfcbeb0"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10033f80"]
 file = "src/layout_spans.h"
@@ -17708,14 +17717,14 @@ status = "VERIFIED"
 storage_kind = "span"
 note = "Nonallocating inventory gap; complete CRT runtime-error and locale-time tables excluded."
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10033f80".verification]
 status = "VERIFIED"
 writer = "verify"
 input_hash = "e60f6cabf629eaea84a042c34d12ba352c10926193a86f655f62530e5133acff"
 definition_hash = "44cd9399b558eb4ca5d5a7a28b8121a10211328063686394e65312fdac7dd4d4"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034260"]
 file = "src/Develop/crt_globals.h"
@@ -17726,7 +17735,7 @@ size = 172
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "object"
 
 ["SERVER.0x10034260".verification]
@@ -17734,7 +17743,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "b32ea45d468b8d28f8b153d1de74d22caef1cfb2daacf55f1e9dea102081fad5"
 definition_hash = "3bfbfc1729f24aa7c109fb626e47f0b279214f9ec1fb330da541187bc84bc130"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003430c"]
 file = "src/layout_spans.h"
@@ -17747,14 +17756,14 @@ status = "VERIFIED"
 storage_kind = "span"
 note = "Nonallocating prefix before complete stock CRT lconv; contains decimal literal and alignment."
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003430c".verification]
 status = "VERIFIED"
 writer = "verify"
 input_hash = "fdbc297f3cc66e5c86640498b3d9e8161a90408511ecf7629131e4d5fca4ef82"
 definition_hash = "50747ef2489f251f189f5ea41d748c2cefa35519b7eceeb44f018135148afc32"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034318"]
 file = "src/Develop/crt_globals.h"
@@ -17768,14 +17777,14 @@ storage_kind = "object"
 link_symbol = "___lconv_c"
 note = "Complete stock LIBCMT:lconv.obj struct lconv, SDK ABI 48 bytes. Nine null-pointer initializers differ by native BSS binding; retained __lconv initializer corroborates base."
 updated_by = "verify"
-updated_at = "2026-10-07T10:40:28+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034318".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "1a89b81560c3bf655a25cc9647d8d9ab2eab0ea6c3cd0c4a9358b8142a9d62b7"
 definition_hash = "907af1c554b89fac19a718e21e7c13497121443973b4bd87402f7b9eeb6f46fe"
-measured_at = "2026-10-07T10:40:28+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034348"]
 file = "src/layout_spans.h"
@@ -17788,14 +17797,14 @@ status = "VERIFIED"
 storage_kind = "span"
 note = "Nonallocating span containing CRT __lconv pointer, constpow.obj constants and alignment. No invented array allocation extents."
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034348".verification]
 status = "VERIFIED"
 writer = "verify"
 input_hash = "cfc710f516e3d0cf0d78bd3590038402812f2fa4cd519979da424b2488d4db5e"
 definition_hash = "3ba6632a5201618f8cb925e1a4e5a62594092cc520519fbf5b96543ec2e2a697"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034610"]
 file = "src/bss_layout/bss_head.c"
@@ -17805,15 +17814,15 @@ type = "void(*)(void)"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034610".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "a3674bfbb9d90531453caa55b0ee0db4b7eea7c8cbee1c1aae9fa07cc7b78843"
 definition_hash = "47f0d451179ce06172af1d063091d1d5e8a55d714ddffbeabb91eb1ed66c5fb8"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034614"]
 file = "src/bss_layout/bss_head.c"
@@ -17823,15 +17832,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034614".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "cb493d6f25f5894db21a5f4d7b7f262fc750ff8c57e86e13f76d002d15a3aaa0"
 definition_hash = "8dbed9c6da76ecd2575d4096dcf674bc2a3ed1a6cb2521b3c749cbe77a434075"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034618"]
 file = "src/bss_layout/bss_head.c"
@@ -17841,15 +17850,15 @@ type = "unsigned int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034618".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "ce462695efe4f9b39c99e733308a49d4bb8c9d632be2b9d259e1699dc34d570a"
 definition_hash = "d3b9c935bf58c5f6e19c05014a93f2ebb11c7642cdd001bbc1efe175a0d7bce6"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003461c"]
 file = "src/bss_layout/bss_head.c"
@@ -17859,15 +17868,15 @@ type = "char"
 size = 1
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003461c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "654d1ac87b73fda4494a43521564c53ba227e17774ff48613f46e04632f2d307"
 definition_hash = "fc4bad721e43954bc8371663f3bc2c47a2d725b5621c3cd23fba7681900cb59a"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003461d"]
 file = "src/bss_layout/bss_head.c"
@@ -17878,7 +17887,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_1003461d"
 
@@ -17887,7 +17896,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "03782e2db1a25a00a3013d66c3a0368b30a503d9fd5a44c858907f9fd3f4daf5"
 definition_hash = "1d1773e7458bbae1606ec4fb39220de2f3ce50c978aac74f5c7d462dd49b7e29"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003461e"]
 file = "src/bss_layout/bss_head.c"
@@ -17898,7 +17907,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_1003461e"
 
@@ -17907,7 +17916,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "933e3eefabccea5fd649082f9011778927c424147cd9756d5206d6e03d267e25"
 definition_hash = "182abe5bf5d343e486c695363a958e9f78e5b5e66254f2fe91e6aea1f7ff0ad0"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003461f"]
 file = "src/bss_layout/bss_head.c"
@@ -17918,7 +17927,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_1003461f"
 
@@ -17927,7 +17936,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "b6ce1a90e7e1bd4fb10aac00c58da185e5e81922a0c85c7b427d2feda4af70c3"
 definition_hash = "8ae95bca43df639ecff98a0261d72c09c6e241129747f3aeed1af45a83940d1f"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034620"]
 file = "references/zlib/gzio.c"
@@ -17937,7 +17946,7 @@ size = 1
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T04:49:20+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "literal"
 link_symbol = "??_C@_00A@?$AA@"
 
@@ -17946,7 +17955,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "1a099223c94c37f61f95c7a9c85b7f49a67a99b0bcfdd0d32ad54752ec13a8b3"
 definition_hash = "d60b3f43f9fb000a7f45d011764f9d6afc9def6222b1ddf192f72cf6a0ee84aa"
-measured_at = "2026-10-08T04:49:20+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034621"]
 file = "src/crt_region/section_spans.c"
@@ -17975,15 +17984,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034624".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "557777dfa03d35f936344d2b2a66e9022330a4ab2e534dfe961a2a723739c853"
 definition_hash = "594c87091ae42f4869674c8df84073433a7602197a3157d15bd23c2d62657b8f"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034628"]
 file = "src/bss_layout/bss_head2.c"
@@ -17993,15 +18002,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034628".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "231f65e7b24b38a3c476e5c02deda941e589499395eef27bd0105b706993051d"
 definition_hash = "253e80583736c9c7ef75084f8d5668fe0aefa8f86e29b3533c1c7b555edd2d34"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003462c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18011,15 +18020,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003462c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "68141ebf0d54a903205a2dfaafbc2f03a679df4e44f862efd8d6a5a75674962a"
 definition_hash = "2e88eb581e7387a728263331b703a49ac535a68d20f72a694ec95c1e68965cfd"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034630"]
 file = "src/bss_layout/bss_head2.c"
@@ -18029,15 +18038,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034630".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "631f34d59385eac26ff78e16233fbb9d5367c473eb8ad7bb5a6583858e201f78"
 definition_hash = "3b3ef8250f122af661944b64bddf3ebebb8e01ba5990dbb7383fd6694b09bbad"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034634"]
 file = "src/bss_layout/bss_head2.c"
@@ -18047,15 +18056,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034634".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "7694c97dc52c3627478dd0a8a424afb1c923e094ec9bb355c7d8bc8a02944dfd"
 definition_hash = "8ca90dc69b4e2fbcf6501e8930d0b611fdc902a1ac5a71582faf95ae2be9c407"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034638"]
 file = "src/bss_layout/bss_head2.c"
@@ -18065,15 +18074,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034638".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "a4827fce7a667229991b3998a089a4d04475476cd1bf9841f86a8e7b07659c77"
 definition_hash = "6ec0e9dd2e88157ee6dd86167fee1e238405a06574f35e94e3aec923184f17a8"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003463c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18083,15 +18092,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003463c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "02718751f37340abea3600ea7283d8550dd4feb0a193f2911a3acee6b7e3160f"
 definition_hash = "0cb2af9d3ef9188f57a62c11f7b792e983199fb4fb57730e373b064ef0667c1a"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034640"]
 file = "src/bss_layout/bss_head2.c"
@@ -18101,15 +18110,15 @@ type = "void*"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034640".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "15e32cfae8d2c1d041dbe483d33c66700156c59424cb3172684102dde98e6856"
 definition_hash = "efe7336841c8d1741cc5647a7d9ad307629950af3a33c8cd89e15fee071f9908"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034644"]
 file = "src/bss_layout/bss_head2.c"
@@ -18120,7 +18129,7 @@ size = 36
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T04:43:15+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10034644"
 
@@ -18129,7 +18138,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d7c0314463a8fca442cb89fd1b0e532b4ff5078a6c5f43b7928e939e27b16887"
 definition_hash = "743f2a9f1cd0a9cfbd2cca9a14c1b02b2162f17a0357b90fd2b71500c3466f76"
-measured_at = "2026-10-08T04:43:15+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034668"]
 file = "src/bss_layout/bss_head2.c"
@@ -18140,7 +18149,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T04:43:15+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "object"
 link_symbol = "_g_vfs_root"
 
@@ -18149,7 +18158,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "0afd3a406a5f678881912606fab5bd92b9ed97d7093065717dcdcf07915a33a9"
 definition_hash = "2f2223c06f2e7307ef12556651d1a3dca33c042beac9b3aff807cdef52388ae8"
-measured_at = "2026-10-08T04:43:15+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003466c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18160,7 +18169,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T04:43:15+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "object"
 link_symbol = "_g_vfs_item_pool"
 
@@ -18169,7 +18178,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "c996e0a32e4c00d7a8e2c2a5379428970783a2c18474f1a93b6900b26c927058"
 definition_hash = "de7d2e0af25ff33480822cc0a6e0880b49387e714c887ebe91d85d1445a9cd64"
-measured_at = "2026-10-08T04:43:15+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034670"]
 file = "src/bss_layout/bss_head2.c"
@@ -18179,15 +18188,15 @@ type = "void*"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034670".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "be0e1b665bcdbc57540ed48292f6a5e90ef6ecc65a950c5200a9d3fb96ddd030"
 definition_hash = "f6a7c2028ede60c5d684ded831acf43ea466e580a276965576eff318f204c347"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034674"]
 file = "src/bss_layout/bss_head2.c"
@@ -18198,7 +18207,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-07T14:56:23+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "object"
 link_symbol = "_g_vfs_case_sensitive"
 
@@ -18207,7 +18216,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "17a7b8ffe79f9301ac451ba3e8fa683caccb079f5a8366c4c8c5366c9e48d882"
 definition_hash = "3206491cc2d9346f65017703fbe3f83a0a75b98c9580bed2a741e4655139fe95"
-measured_at = "2026-10-07T14:56:23+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034675"]
 file = "src/bss_layout/bss_head2.c"
@@ -18218,7 +18227,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10034675"
 
@@ -18227,7 +18236,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "84cc849e3411e7afc1dedf3b75bf570740b62410181907f8e65cedad87e5fda3"
 definition_hash = "50cdc947fe065038a22e6a8dbfdf83f09712ac2bd2ebd0cf2256ddcfa91b42e4"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034676"]
 file = "src/bss_layout/bss_head2.c"
@@ -18238,7 +18247,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10034676"
 
@@ -18247,7 +18256,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "9ead6424aa09fa4ffd1a41691bc3dd1b9c69c7726a326f782dc949e71bf10897"
 definition_hash = "0d9e29dac84b683954e64e07624b162ddcd772655867c46afc9f19b5c6c652a5"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034677"]
 file = "src/bss_layout/bss_head2.c"
@@ -18258,7 +18267,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10034677"
 
@@ -18267,7 +18276,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "57f3808a0e0c4c49eebdd097811cbb2e5ad0f30d0d716590d4c719abc73cfa48"
 definition_hash = "4f08dd9c3ebc47c953626ea10c26b57036bc7b0b08f3466e0d41691191d01943"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034678"]
 file = "src/bss_layout/bss_head2.c"
@@ -18277,15 +18286,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034678".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "781427afe48b748d41cf96cb0581fa45d6816fb7ef3f08dc26281a0a1591f49d"
 definition_hash = "1328bf8b48f95e2c18f540f1160d11ca066770cd17b3ad92b112f37c9f2fc5c8"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003467c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18296,15 +18305,15 @@ size = 4
 section = ".data"
 status = "EXACT"
 note = "connection counter"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003467c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "e85c1229329322e2c30bb45ac044da05a8f0116c8b6669eb3f33c6b014b5b5b5"
 definition_hash = "5708308a9979ce9410550078dc45fae774bc9a8702ce709a980ee0f3e4d333a8"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034680"]
 file = "src/bss_layout/bss_head2.c"
@@ -18314,15 +18323,15 @@ type = "int"
 size = 4
 section = ".data"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034680".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "d5d3f90552cb3c2450a960144031418caec62501a85df2d2ccbe445e4ae7c32f"
 definition_hash = "d5388caaa21338f3202287845a6ba0ce03b6fba67afbe5401a17afe712b4182b"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10034684"]
 file = "src/bss_layout/bss_head2.c"
@@ -18333,7 +18342,7 @@ size = 3460
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10034684"
 
@@ -18342,7 +18351,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "f6ad430f9da47f92bd9cbe2d991ec1777a649fa1cc946add055be473924a45c3"
 definition_hash = "6263dafe9e8ec8f29ca86667e867c0d889bd7132d089e597ac44aad0089bc283"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035408"]
 file = "src/bss_layout/bss_head2.c"
@@ -18352,15 +18361,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035408".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "2a0d473099f4189b0e9af6e20ebd2fecf9c4a3e116c01552338a2dc6fcf7120f"
 definition_hash = "9bfd61173933fe346ec51f2c40062731532512430f23c3c98b2743f8d03dfaba"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003540c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18370,15 +18379,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003540c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "55abf0a78775c9ff58c1762aba5be6d980cc26915159cfdbc07fc6ede8ac3dec"
 definition_hash = "f8b190cf92db81734f7f4e7925a60211d22d94be74b327fc27b4eb1b64343f47"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035410"]
 file = "src/bss_layout/bss_head2.c"
@@ -18390,7 +18399,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_10035410"
 
 ["SERVER.0x10035410".verification]
@@ -18398,7 +18407,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "67210260fbeb22c8b08eb54b0e0788e35834aad789b11bab44f816126f10de6c"
 definition_hash = "539bceb45090232b6d64e93e2436cf7e8cf83f97a7f9f94a3716851dc8d06f93"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003542c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18408,15 +18417,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003542c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "1e77b238cab965d0c1348151866d17a8b3208eba733e01d6bd8dea4101106a4b"
 definition_hash = "93d0602c0b8e35e68978384bf4c458a71e0bc7f68e7cb0a6dc8a363c70a2287a"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035430"]
 file = "src/bss_layout/bss_head2.c"
@@ -18426,15 +18435,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035430".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "071dfbb703a8f9af54563f17e17eb697ebf71ba4ce78c0e0ec5143c6fc1d260d"
 definition_hash = "bc9dcd096ea7b8a7ed12116be9415f1a6a2811d34b8045edbb502d567b9a2d90"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035434"]
 file = "src/bss_layout/bss_head2.c"
@@ -18444,15 +18453,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035434".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "3b1f08d57792f1e1a2f31bb240adc39b90f176248a575d4a7db6dd529e566fbd"
 definition_hash = "59b23d59275dbe0f922fbd22ee59cd4ea84aff4db2aa2bf768e845160f0fd7be"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035438"]
 file = "src/bss_layout/bss_head2.c"
@@ -18464,7 +18473,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_10035438"
 
 ["SERVER.0x10035438".verification]
@@ -18472,7 +18481,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "89e8c9d7b35da720b6b214cd16067056966c614a2bd2d7e0d487bb996c94d8da"
 definition_hash = "4a2e71d7c6bfdfd6fc7a6daff54f97885b3d16dcd0581c348fbdcd27e2f7fc87"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035439"]
 file = "src/bss_layout/bss_head2.c"
@@ -18482,15 +18491,15 @@ type = "unsigned char"
 size = 1
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035439".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "5eb4660632b46b0d7f537eb0777409f6ea914699b80b55dd75aac83ae5961221"
 definition_hash = "e184274554a99f77dfe85d707b76e9eaa751a68615c438a4c0180d6efe415c4a"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003543a"]
 file = "src/bss_layout/bss_head2.c"
@@ -18502,7 +18511,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_1003543a"
 
 ["SERVER.0x1003543a".verification]
@@ -18510,7 +18519,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "9fcaa4399d73c439157d5b876dd861d209744cf26264267cb5761d767a2d7bd3"
 definition_hash = "7d44bcfd6f543ba250a6bfe08cbe1d531115cf7461620e095244a6d61c44da07"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003543b"]
 file = "src/bss_layout/bss_head2.c"
@@ -18521,7 +18530,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_1003543b"
 
@@ -18530,7 +18539,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d7349c2c3756670906d93de2687343d6588f093d152c8bff165104003302c377"
 definition_hash = "2732b3b3754c79d6c1bbbca43b995b799bd2ae523523b60abb52198708f765ed"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003543c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18540,15 +18549,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003543c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "7ff61f39ca3888780436c2828b03e24d058307eab64073144b840b27cd9ac201"
 definition_hash = "ed0050d9ae710ae9adf820724c49e8afa9f349c7dab997af0ff3cf71c803b2ef"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035440"]
 file = "src/bss_layout/bss_head2.c"
@@ -18558,15 +18567,15 @@ type = "unsigned int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035440".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "45ffdc4b65f134803f98e9f4cf3af3b4b64b88feb36d746abd39400e505d753d"
 definition_hash = "3e4394c5a0043fe73c3cf8cd7e30e4e341a03783557d441ba345587a127fe24b"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035444"]
 file = "src/bss_layout/bss_head2.c"
@@ -18576,15 +18585,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035444".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "31cb139771d50e031d8cf9d5e5902404e0121aae1ff4d4b2f7ddfe5dfcfbe200"
 definition_hash = "8c5b0ac1533090584a9730e76978920414f948ec85e000186231533c81d3c2f7"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035448"]
 file = "src/bss_layout/bss_head2.c"
@@ -18595,15 +18604,15 @@ size = 1
 section = ".bss"
 status = "EXACT"
 note = "byte, not int: reference reads/writes it with mov dl,[0x10035448] and mov [0x10035448],dl (0x1001700f/0x10017130)"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035448".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "e80d6ea1c6b1997d2fe8d73564b33f6e73eb84f98da2682e640e314d84e1bab6"
 definition_hash = "63465600db3035965fe6716e7022466ce5382385699a86838562b8dfcc1eba37"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035449"]
 file = "src/bss_layout/bss_head2.c"
@@ -18613,15 +18622,15 @@ type = "char"
 size = 1
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035449".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "b471ece64a6d6f931e48033bfd78ee10b33fca7046d46dda891cc410647ef21a"
 definition_hash = "293fabe41388aff87453ac2d7b0c6e72f8f0481df5440831e980f19d46def551"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003544a"]
 file = "src/bss_layout/bss_head2.c"
@@ -18633,7 +18642,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_1003544a"
 
 ["SERVER.0x1003544a".verification]
@@ -18641,7 +18650,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "a7adfcaf9c9777c82c0b123ebf331e74abb948c96cd119fc6735e692fb7ea6ad"
 definition_hash = "8b0eafa2b98482d38912e01731594e1e67f47934d6d654054101469576729a4a"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003544b"]
 file = "src/bss_layout/bss_head2.c"
@@ -18652,7 +18661,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_1003544b"
 
@@ -18661,7 +18670,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "456be778e9206a8a02cd25d4203c2fae48625168572cb3039ddd627fffd30d35"
 definition_hash = "0e79b3a5c14072aec371adf16bfe593434d4d12b31aa2f976e622b608bb7348c"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003544c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18671,15 +18680,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003544c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "8f52216e4e39782738e144086c9e1acaf805ecfd7da54bf0b4a765028e72cb10"
 definition_hash = "8922f59dee148cba463ad4c1d774ce6811949e924acc91395046fb2c17683f0b"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035450"]
 file = "src/bss_layout/bss_head2.c"
@@ -18689,15 +18698,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035450".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "037e7d1ce6786bca2cb98bf235addad251319c652a43e9627ec514670ce200f7"
 definition_hash = "957531a7738a9362e5275f96318346388356729b86fac58de99bcb31e0c7c8a9"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035454"]
 file = "src/bss_layout/bss_head2.c"
@@ -18707,15 +18716,15 @@ type = "char"
 size = 1
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035454".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "faf97179ea7aadbf56b81eec4ed4cb0bfa3dc95689a71823e9bdaa43276784e9"
 definition_hash = "c4ab876e2820bc201893f9c459cf27125eae40edb3a0a2465a59de05fdac1409"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035455"]
 file = "src/bss_layout/bss_head2.c"
@@ -18727,7 +18736,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_10035455"
 
 ["SERVER.0x10035455".verification]
@@ -18735,7 +18744,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "67a8a0c0158a0d54847e4994b5c739597934ea0d4183bd5ae68e4599799fdba3"
 definition_hash = "d5eb65c65ddf416a7e9641411fa8dd4672910f2de15cf0cddf05bbcaf29b3a0c"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035456"]
 file = "src/bss_layout/bss_head2.c"
@@ -18746,7 +18755,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10035456"
 
@@ -18755,7 +18764,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "711ef74a13c7261b8dcc2b07a135c487375aac6b7b548d608c0b68cd65ef8858"
 definition_hash = "c2f053a6780cf0df613d6e2e143119981f42d044f58059ea3b2a064356af9156"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035457"]
 file = "src/bss_layout/bss_head2.c"
@@ -18766,7 +18775,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10035457"
 
@@ -18775,7 +18784,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "aeeb7e9732c413c8c64f33f3c3048a5877e6effb8bb5a27a9e14c6037770adf2"
 definition_hash = "b9e8ffeb92a9ab434cc877b1ebbbdaac01d4ddfd7134df6bea6a6945a28677af"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035458"]
 file = "src/bss_layout/bss_head2.c"
@@ -18785,15 +18794,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035458".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "7f71b135e9497ccb966703827e7cb1bdfc1b6487179d65521cbc652dd23ef847"
 definition_hash = "cae7cc07179e2bb73d8316ab7a5cd4a8c7735ad82563140acab83cc64f8707dd"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003545c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18803,15 +18812,15 @@ type = "char"
 size = 1
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003545c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "f6f32fc3a286f2121da19b0d3c240d964cab043a875a586ddb9eb556c487cf8f"
 definition_hash = "53cc28860bb522fd9a5546d2be5bfc0d758fa927a31a0b9e96257cf52520975b"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003545d"]
 file = "src/bss_layout/bss_head2.c"
@@ -18821,15 +18830,15 @@ type = "char"
 size = 1
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003545d".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "4a2e4903101994c2094ce5ae56f136f281784ddc711e454ffa5f3ab4c23c0e38"
 definition_hash = "fbad8b3a602e34ebc674bec938371e582817c8b3e2cd513e029e803e9adf44e7"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003545e"]
 file = "src/bss_layout/bss_head2.c"
@@ -18839,15 +18848,15 @@ type = "char"
 size = 1
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003545e".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "d9edebf132c0460a8e28b0105d7cca784ad94dc0e00fa0d9cfc1fbe8ac8f7968"
 definition_hash = "1c57d4c2b7a67bcd4846b0f645fa03c162f5e68c7b8fe0a0e13f7a52d6a18b44"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003545f"]
 file = "src/bss_layout/bss_head2.c"
@@ -18859,7 +18868,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_1003545f"
 
 ["SERVER.0x1003545f".verification]
@@ -18867,7 +18876,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "61815a4167ff68994d4f86002d4d9517e890f279c91fae43306e1247bc8ab0f8"
 definition_hash = "54b6d58b78a5a57d0e25235f8d18e1c1ab4ef585672b8dc822670bd9fbcbda59"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035460"]
 file = "src/bss_layout/bss_head2.c"
@@ -18878,7 +18887,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10035460"
 
@@ -18887,7 +18896,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "2b6cdd5fcb859682647a0a9950988dad9690e5015376f6e23859f235c4d7a3ce"
 definition_hash = "a51cf815218c8d4e8db70fa53cb6ffee4f7c6846738903799a447fa3c8642a1e"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035464"]
 file = "src/bss_layout/bss_head2.c"
@@ -18897,15 +18906,15 @@ type = "unsigned char*"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035464".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "99120212f3daed0d4ad4919434cf3ebecb1a2ef7a0ab3e6ab49fb060a6364606"
 definition_hash = "78d598b082235b85542d2606817fb4f0c47112c03a3bc1cea5662f78fd665660"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035468"]
 file = "src/bss_layout/bss_head2.c"
@@ -18915,15 +18924,15 @@ type = "unsigned short*"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035468".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "ecccc15bc5cf98406df0dc4878f79ba9b550e34c9881e1ca163f9632eb4be374"
 definition_hash = "4d8171f898274129601770d1e5b6d6b292504dd306576820747316d46b9281bd"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003546c"]
 file = "src/bss_layout/bss_head2.c"
@@ -18933,15 +18942,15 @@ type = "unsigned short*"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003546c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "317772628f181889c8927c60b8eb3db75b877b65aee9f7083c29c0043cef72ed"
 definition_hash = "dd6b7fab63fc8eede58150568d5b0d63aa7c30f05f3b719c5ea6a2939a4464f9"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035470"]
 file = "src/bss_layout/bss_head2.c"
@@ -18951,15 +18960,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035470".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "68c2691b06ed098f6b38080f5655a1a28810cd2b10473351183a48758eac5aa5"
 definition_hash = "252d98345ee47babc6ece261ad0adc8a331b4d68710ef3f32fb70f58b0c23287"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035474"]
 file = "src/bss_layout/bss_head2.c"
@@ -18969,15 +18978,15 @@ type = "int"
 size = 4
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035474".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "c8b74e0b244836e2ef2cc6934107c3ab355b3762e422922346dc0c6adc5b5fd6"
 definition_hash = "8c75919d87d131ffcbe493abed2752049f5c2ca9f11802096662c0cf68885a70"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035478"]
 file = "src/bss_layout/bss_head2.c"
@@ -18987,15 +18996,15 @@ type = "int[8]"
 size = 32
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035478".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "06edf72977685599a06616f3774603cde8738b6413f4b6a5c67172b2899df52d"
 definition_hash = "be273509ac9dadc6fa0ab018d994affff7a6cf232827d5d6bc51038cb30edadd"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035498"]
 file = "src/crt_region/section_spans.c"
@@ -19026,14 +19035,14 @@ section = ".bss"
 status = "EXACT"
 note = "OS version dword (GetVersion)"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354b4".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "d62eab9ced0f4ee31220d23ccc9403b43b534098a2ca0632bc155b1334be7fe0"
 definition_hash = "dc3850599b101570ff88b91c884b1a2568e4e3f9c02678e466ba55eba2bcafb2"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354b8"]
 file = "src/crt_region/data_globals.c"
@@ -19045,14 +19054,14 @@ section = ".bss"
 status = "EXACT"
 note = "(major << 8) | minor"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354b8".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "0ef5fc6043b81ed6ee9eebb878da19ac55ee23de3fe05e2b0c1680348b35af6b"
 definition_hash = "bafc1ebc85f71f57bf93cb6d8684bbc68562dc176931e5d4e69cff6c1f495337"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354bc"]
 file = "src/crt_region/data_globals.c"
@@ -19064,14 +19073,14 @@ section = ".bss"
 status = "EXACT"
 note = "OS major"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354bc".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "bcda88aa9188f0454cc88562976205414fc6bc3c0c96517bdfbf23dbd16403b0"
 definition_hash = "68a9bdcc89b8ab1974dc9e36962899b8a0ee4787b8aaa7aa2631f0cfebe7f1ac"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354c0"]
 file = "src/crt_region/data_globals.c"
@@ -19083,14 +19092,14 @@ section = ".bss"
 status = "EXACT"
 note = "OS minor"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354c0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "861384acc6231c1828123c00a74c8f5846752fe6af020cd914d180cb0594c76b"
 definition_hash = "c7f5c5bb03fd4b6f31f76678e81220f37534b41ccc6c9ab26d2dc50e1ffeb6d0"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354c4"]
 file = "src/crt_region/data_globals.c"
@@ -19102,14 +19111,14 @@ section = ".bss"
 status = "EXACT"
 note = "__argc"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354c4".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "1a009d6e1b00621fdcb488ddd3102863897cef70814fe9aa5f8b66d4d3ab56f0"
 definition_hash = "e3984893c179b60d81768ea1588fa0046be0f996aba780e4273585102f842104"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354c8"]
 file = "src/crt_region/data_globals.c"
@@ -19121,14 +19130,14 @@ section = ".bss"
 status = "EXACT"
 note = "__argv"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354c8".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "199d91f1b1e55bb480bb24e0004f6dfe4bb839cfc6e18946d81fe70b866cf1e4"
 definition_hash = "d8b78763b1f5d4fb7ca4f11552d615d6bc529c02e0b2b5da1ba33301a7078603"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354cc"]
 file = "src/crt_region/section_spans.c"
@@ -19161,14 +19170,14 @@ note = "__envp"
 storage_kind = "alias"
 link_symbol = "__environ"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354d0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "37334f00b2a8882119493f6979dfaeb531afe623e2c54d04fa32f89f5d02550a"
 definition_hash = "4cc55a671aecff16047e6e6805b479a0d5fa0b91f024a9ab45b2419b9428b542"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354d4"]
 file = "src/crt_region/section_spans.c"
@@ -19199,14 +19208,14 @@ section = ".bss"
 status = "EXACT"
 note = "_pgmptr"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354e0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "efd01eacc40239cc97869a8e003fc6df671c84e81b163e8f5f140929d4ad713a"
 definition_hash = "420c9eb51847de90de73f1c8ea60f6aea5491566b9bd04cea9332404234c2a1a"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354e4"]
 file = "src/crt_region/section_spans.c"
@@ -19239,14 +19248,14 @@ note = "0x1001bb4c tail flag"
 storage_kind = "alias"
 link_symbol = "__exitflag"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354e8".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "32beb6372d313be1f478fede04f03108f48824065994ab2c317b5cc1d38c21ee"
 definition_hash = "31da63c313b92b3a7acc4744ca5708166f96d519dab83a0d16c322c49665c5fe"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354e9"]
 file = "src/crt_region/section_spans.c"
@@ -19277,14 +19286,14 @@ section = ".bss"
 status = "EXACT"
 note = "_cexit-already-ran flag"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354ec".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "502c274d6b12a0d54ea4a8cf9675f3568c84c7a89c1d8fc1809e036af2d6e5a8"
 definition_hash = "e36c327d669c5857989aadd3ea82ccd775eb8c0385c88d72607e6be7b9476c1e"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100354f0"]
 file = "src/crt_region/section_spans.c"
@@ -19336,14 +19345,14 @@ section = ".bss"
 status = "EXACT"
 note = "environment strings ptr"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035500".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "7d6b9a0ad05af1ab7649a6e2c80a77e5dbc0c69cb79be5ced037cb172e0ccd79"
 definition_hash = "b38819ab992f06fc073dcebc465085ae7a5b9ea512df226a73a2acd265383ce1"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035504"]
 file = "src/crt_region/section_spans.c"
@@ -19374,14 +19383,14 @@ section = ".bss"
 status = "EXACT"
 note = "__amsg_exit report-mode flag"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035508".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "05d444ca9d5ad01e75024f4c893042384ef95ef81a4d9885c2fd33cc14069c68"
 definition_hash = "9e08b1d7bfd7d0ac9909abdd81b4a3fc540d4eb7fdf3e9bcd080cc81325b3175"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003550c"]
 file = "src/crt_region/data_globals.c"
@@ -19393,14 +19402,14 @@ section = ".bss"
 status = "EXACT"
 note = "__amsg_exit report-mode flag 2"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003550c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "916a42f125011724a6e325137ba70feb1e1ef9d2b50218ef725b0ff14620180c"
 definition_hash = "a1c072fcc7bd461ac5e75dd74ded8d357b2e8b38dbd0bb12c4e391105dc9cba5"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035510"]
 file = "src/crt_region/section_spans.c"
@@ -19433,14 +19442,14 @@ note = "new-handler retry flag (_callnewh)"
 storage_kind = "alias"
 link_symbol = "__newmode"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003559c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "baf80017ef265980a0c9fbcd44fbf03156580f6f862a1e4cdbb1e756f467128b"
 definition_hash = "d0d7a7a5ace5bd8a23b5765f04118c4303c0d10c2a0b937e3557df4b324b00f5"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100355a0"]
 file = "src/crt_region/data_globals.c"
@@ -19454,14 +19463,14 @@ note = "_pnhheap new-handler fnptr (0x1001d238)"
 storage_kind = "alias"
 link_symbol = "?_pnhHeap@@3P6AHI@ZA"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100355a0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "0b298988fe2bbfc925d25ed5d0a08a40c27aec0b2ecb8763b7deebd0a6beea7b"
 definition_hash = "4de134301a876bb7ad49243326b8630e071c6933f43466253f0aaa46e9ac3dd0"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100355a4"]
 file = "src/crt_region/data_globals.c"
@@ -19557,14 +19566,14 @@ note = "_crt_runtime_error user hook (0x1001fdf8)"
 storage_kind = "alias"
 link_symbol = "__adbgmsg"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100356e0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "dafedef89145f8eeb3de598d594b5af9f7e677cc4bcee55679d976b9d35f7464"
 definition_hash = "023f60daaa163344a9dcb41b398d5b862765598fc971c4537a60c1722aaf4e9f"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100356e4"]
 file = "src/crt_region/section_spans.c"
@@ -19676,7 +19685,7 @@ size = 8
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10035878"
 
@@ -19685,7 +19694,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d906f5ee9e0abadea2517ce2a3753c79b2f978ce9971fce95ba9f6f50b8a7913"
 definition_hash = "3acb485ac5a79274041c603c61121837329dd752b24c64990cdefa6b2e78ad1e"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035880"]
 file = "src/bss_layout/bss_late.c"
@@ -19696,14 +19705,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035880".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "1279b0ae79b203d85b540b958d94a4ecfbea3d7df273941e1ac3120ad5816a7d"
 definition_hash = "f131ac4028fd79a8b4c64c697d38e1c9103beaf58b5ed27dedac7f629986a0e1"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035884"]
 file = "src/bss_layout/bss_late.c"
@@ -19714,14 +19723,14 @@ size = 2
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035884".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "09b89962e242423b8d0dbe64faeb94a755c463e72677b4d08ef231b2c0b27a42"
 definition_hash = "ef834618ad090edc2ff39344efdf8cf6edcae1f10a01ca3190db0efe80468579"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035886"]
 file = "src/bss_layout/bss_late.c"
@@ -19733,7 +19742,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_10035886"
 
 ["SERVER.0x10035886".verification]
@@ -19741,7 +19750,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d2e282decd5f32b80c21d2fa761c8846fa43579692d62fb69a2c4440e96904f9"
 definition_hash = "2c326e11386b8c549588d1b3cd36a76918d273c751260b1884f13bd8840d0564"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035887"]
 file = "src/bss_layout/bss_late.c"
@@ -19752,7 +19761,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10035887"
 
@@ -19761,7 +19770,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "99affc1d82d849acfdf9565d0739f24a52f2d8f15542c075ebfee4061500c63f"
 definition_hash = "cc386e3772990c03b00ca691a7852f813c4b950938842810b8a26e5622126736"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035888"]
 file = "src/bss_layout/bss_late.c"
@@ -19772,14 +19781,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035888".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "0f316c6da3ac026e68d659f5476c0622b6a4b5c9c0c2872082db86055699876d"
 definition_hash = "dde82e952f64a79c26154246d59cbf0b031854b94ef78163365a2bff71bd5701"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003588c"]
 file = "src/bss_layout/bss_late.c"
@@ -19790,14 +19799,14 @@ size = 2
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003588c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "293f2cfbedce7c6acce58a3e386a3e6824cee1f4f4b536f88844ec8bce5b9faf"
 definition_hash = "ae9c71cb0e78a9fbb0fbd31673c44432e98f8ad43d1423c06318660231f14125"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003588e"]
 file = "src/bss_layout/bss_late.c"
@@ -19809,7 +19818,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_1003588e"
 
 ["SERVER.0x1003588e".verification]
@@ -19817,7 +19826,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "c1a36611a3384923465b2147137b6cc751edf538ea8c4ec25fc6bacc46cab75b"
 definition_hash = "c318224f5a24b4fd4119a4670d7726957199b7b6c04620f9fbf2f2da4a117fee"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1003588f"]
 file = "src/bss_layout/bss_late.c"
@@ -19828,7 +19837,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_1003588f"
 
@@ -19837,7 +19846,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "6bbdfc47552d7e1bc16091a315bcabe863d461e2b08f87f9817836f9567f6e41"
 definition_hash = "39fb08f6a2b66f5adb53ef4a86759de1477dfaf436e8c4e992954bea96966fb7"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035890"]
 file = "src/bss_layout/bss_late.c"
@@ -19848,7 +19857,7 @@ size = 16
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10035890"
 
@@ -19857,7 +19866,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "e4df10b1f7def9a00524b9e20cb44dfef5dbc85a603b3b9ffed44f2f41279aa0"
 definition_hash = "8ebbb91c39ed695222fca83ce137f1e48db71372835a6af6e37938c92c77411c"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100358a0"]
 file = "src/bss_layout/bss_late.c"
@@ -19868,14 +19877,14 @@ size = 414720
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100358a0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "4b1a320eca6cd9d36b256657acd82c6e307cb156d6affbbe9c4971549bc2d0b5"
 definition_hash = "2ce0ded8bf89f2bd9c64743fd6dc650e6587999e662736c2cab0b2af0eab7e04"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100358a2"]
 file = "src/bss_layout/bss_late.c"
@@ -19887,7 +19896,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; field view of g_slot_table + 2, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 
@@ -19896,7 +19905,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "a28dc79363985700120e6d1e3c5003435a86c275519ca09e339679764476e671"
 definition_hash = "6ec5510a22ebb1439ec15b2af18910607ce5c0fd3b22f78ff9706470c477b877"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100358a4"]
 file = "src/bss_layout/bss_late.c"
@@ -19908,7 +19917,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; field view of g_slot_table + 4, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 
@@ -19917,7 +19926,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "894510197c6a9720cf4c3fe6b25a0ab063e35dd7c990bd7cf31bc74dd6b345af"
 definition_hash = "7aa8f9040a9009e2bd2f89513968bbf9e1716828709624751a862583fce9883a"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100358a8"]
 file = "src/bss_layout/bss_late.c"
@@ -19928,7 +19937,7 @@ size = 84
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 link_symbol = "_g_gap_100358a8"
@@ -19938,7 +19947,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "192a40ac20e7194caef8e60fc04e93a4015c12f49545a1687b31d5afaaccfe1f"
 definition_hash = "dbb891b6485fbf5ea6e9ae5759000b42012f01fec0d8e1c8dfa3fb0784cca604"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100358fc"]
 file = "src/bss_layout/bss_late.c"
@@ -19950,7 +19959,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; field view of g_slot_table + 0x5c, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 
@@ -19959,7 +19968,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "7b5093b7a44c403a54edcf4dec0ea05a7529e1c222e400dba33e83a9af4360a9"
 definition_hash = "3a6a530875584ab9cdc4cf1a3596b13cd082853da754db48a172c4f12d80eb9b"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035900"]
 file = "src/bss_layout/bss_late.c"
@@ -19970,7 +19979,7 @@ size = 260
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 link_symbol = "_g_gap_10035900"
@@ -19980,7 +19989,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d24f4c1785cc7e6102b802eb939c0c876e366716815b64d57d7e281d23768d76"
 definition_hash = "0728d3c4c3fd736447b029a59eb1d2166390be971befa5d917ee2b41953165d6"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035a04"]
 file = "src/bss_layout/bss_late.c"
@@ -19992,7 +20001,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; byte view of g_slot_table + 0x164, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 
@@ -20001,7 +20010,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "bca8a0051102ac995c49573035a92ac5bcbbc48490f28c7abb6c281030c938e1"
 definition_hash = "5a90fa751ec4cba451c180e2595ef29ef0f640e316571d169ead70b94740adee"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035a05"]
 file = "src/bss_layout/bss_late.c"
@@ -20012,7 +20021,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 link_symbol = "_g_gap_10035a05"
@@ -20022,7 +20031,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "665554bf2385687fe24c4c48b5d66241c163eb9cb971b2578c160b07146f7d6f"
 definition_hash = "e077dd8c5f9eb408323ce50185b3d749201d6fcd1c5fef2cbe3fb1409ac054d9"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035a06"]
 file = "src/bss_layout/bss_late.c"
@@ -20033,7 +20042,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 link_symbol = "_g_gap_10035a06"
@@ -20043,7 +20052,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "e0f9e08693ea6bbe13443c05c46b787ae7281e598e45e1ed1ba63ee9ef823f3c"
 definition_hash = "1fe7e63c3ed06876c360ffabd7042dbb8204f1c6b28f5cd4d20446b8fcac2ba1"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035a07"]
 file = "src/bss_layout/bss_late.c"
@@ -20054,7 +20063,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 link_symbol = "_g_gap_10035a07"
@@ -20064,7 +20073,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "277e12506a71ece90eb6fee176e9068acab28c61cfa83a8805a5fd807a08929d"
 definition_hash = "40388009ab0287ebfca69e362a47cb66855d7ed521352b886faac5070a1f0930"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035a08"]
 file = "src/bss_layout/bss_late.c"
@@ -20075,7 +20084,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 link_symbol = "_g_gap_10035a08"
@@ -20085,7 +20094,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "9412c13c4b588d437c15a0185cc191629f2ca54e2e6e9a068248b74b99314e77"
 definition_hash = "8418b12594a2426de5967fb6f24951377ffb1519bb2ee6b80145a82159a94117"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035a0c"]
 file = "src/bss_layout/bss_late.c"
@@ -20097,7 +20106,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; view of g_slot_table + 0x16c, one building pointer per 0x21c-byte record, not a contiguous 768-element array."
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 
@@ -20106,7 +20115,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "a0b86d113ea785a81a09f704353c7b793e99f052649e81ffef7ef42b7cabc6f6"
 definition_hash = "8c5da2f12722ee6908097829f5bea50d7923811da0d4cf386358fd7b0976a27f"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10035a10"]
 file = "src/bss_layout/bss_late.c"
@@ -20117,7 +20126,7 @@ size = 414352
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_slot_table"
 link_symbol = "_g_gap_10035a10"
@@ -20127,7 +20136,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "f2d2109cdd4b6087f20462b3071abd6977addef401212944290a8195deaeee2e"
 definition_hash = "98e5adfd3df1e4a1c0b8e9f34bbba61190d879a3c73c1949182c00025309be4f"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009aca0"]
 file = "src/bss_layout/bss_late.c"
@@ -20138,14 +20147,14 @@ size = 2752
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009aca0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "86de4c80006c358cc64a04d52d31355b6490226fe3061748b5daf079ea00204a"
 definition_hash = "eca3c35f570c6a483dd03aeb33dcf8630ec6fe0f5c1c04a1988dd577d306d50f"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009aca2"]
 file = "src/bss_layout/bss_late.c"
@@ -20158,14 +20167,14 @@ status = "EXACT"
 storage_kind = "alias"
 backing = "g_entity_base"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009aca2".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "6edde83e982a3747f95b9ffde64daa02847780799ca108c3f058e3c27b30c206"
 definition_hash = "9551d376a53494e80e98ff1dfc52e92df843f9f2614d2a81f6b3a8fa8be9ca47"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009aca3"]
 file = "src/bss_layout/bss_late.c"
@@ -20176,7 +20185,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_entity_base"
 link_symbol = "_g_gap_1009aca3"
@@ -20186,7 +20195,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "b394ba5f28a34e80317400bcdf8a15cd18f8a08560f1b0ce59529bb65a4c3c7e"
 definition_hash = "8038f199bd19e1307fa5cbcbc5b8927c33dcfec36441c0c2a963a61edfe31296"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009aca4"]
 file = "src/bss_layout/bss_late.c"
@@ -20197,7 +20206,7 @@ size = 88
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_entity_base"
 link_symbol = "_g_gap_1009aca4"
@@ -20207,7 +20216,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "4c3d102a2035716432d586b1f2b24485ff8bb7d777a8da0caa6694860f5cdecb"
 definition_hash = "e14887cb6679c7f6b7efd7736d5be423d4f262a0072be834a50af63e7ee54bd7"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009acfc"]
 file = "src/bss_layout/bss_late.c"
@@ -20219,7 +20228,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; field view of g_entity_base + 0x5c, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_entity_base"
 
@@ -20228,7 +20237,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d8aee2823f7fefd8fd64a5adc1744273154b0296956ca3de5c486d7306543d19"
 definition_hash = "acf3cd6d8090b621d59ef9a727d629dc0ab6aa4ae17b9e90b971ea1484e652e2"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009ad00"]
 file = "src/bss_layout/bss_late.c"
@@ -20239,7 +20248,7 @@ size = 2656
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_entity_base"
 link_symbol = "_g_gap_1009ad00"
@@ -20249,7 +20258,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "938852f6b252f6722d201edcfd51ee3acc1f984630e5a85a0f339b921dfb71f0"
 definition_hash = "fbf9dcca873f39b754157c28cecd660ed9869aedbf434c3250060b75edc8658d"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009b760"]
 file = "src/bss_layout/bss_late.c"
@@ -20260,7 +20269,7 @@ size = 54480
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_entity_end"
 
 ["SERVER.0x1009b760".verification]
@@ -20268,7 +20277,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d1cc44d803ea83091ee4d68f7b5428b297b7cb4914aac0343a5a8dc346a05a07"
 definition_hash = "0657d462ccd4170bc87e433db6831695b578175295cc7e345bb1154876bd3464"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009b764"]
 file = "src/bss_layout/bss_late.c"
@@ -20280,7 +20289,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; field view of g_town_records + 4, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_town_records"
 
@@ -20289,7 +20298,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "ae59a8fd896e408ccd941a080e85dfbcc88594f5c42b580c82d3b53437b5c54c"
 definition_hash = "a9e534331ec0c93ef75d256bb36ac6dc1b433a7ca7e97e68044360dbf0743c44"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009b768"]
 file = "src/bss_layout/bss_late.c"
@@ -20300,7 +20309,7 @@ size = 8
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_town_records"
 link_symbol = "_g_gap_1009b768"
@@ -20310,7 +20319,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "52efba4d393106b8572b4a7098fc1b52bd62fbeae2d25e9e6246c1057d301bb7"
 definition_hash = "a743eb72837079c6fc157a0b9deeba7b348ba99b296a3049f481267e58dc4b0a"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009b770"]
 file = "src/bss_layout/bss_late.c"
@@ -20322,7 +20331,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; view of the first seasonal slot at g_town_records + 0x10, no separate pointer allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_town_records"
 
@@ -20331,7 +20340,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "aef6c556c38d3bf27317dde784a53819523be0d19c424049087ac00d36014745"
 definition_hash = "192ed5886d3a442acd1f40b7e0eb508d7962ab2698b94bb62a014b84d160d717"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1009b774"]
 file = "src/bss_layout/bss_late.c"
@@ -20342,7 +20351,7 @@ size = 54460
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_town_records"
 link_symbol = "_g_gap_1009b774"
@@ -20352,7 +20361,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "a36c84083b125bad4e5c346eae517beb7a28b37fa5437e78e31031b7d2cb267f"
 definition_hash = "eaddf3e3f39493793a57b42909ab4f740f86041db9966fe98062c8995e9820aa"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c30"]
 file = "src/bss_layout/bss_late.c"
@@ -20363,14 +20372,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c30".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "a4638206020cbc083ec2844b6f0e65f005f95b1ea1f3fe4917b136b0e982807e"
 definition_hash = "fbd191cd984923c61255b601fa45f860d958825379bbcaef2b9f781fcf78fa8b"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c34"]
 file = "src/bss_layout/bss_late.c"
@@ -20381,14 +20390,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c34".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "d0fcbd9cd67de67ff46a6c4b63ec200e4851ef5667d4ec285e326b088a73a600"
 definition_hash = "7bd47135c85f161584bada668ccbe0297a9c307a08265706fea86661740b11d3"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c38"]
 file = "src/bss_layout/bss_late.c"
@@ -20399,14 +20408,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c38".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "ad961e5400b361b7b8da52aa8948b3787e4999b666b104440d8b0178954eb5d5"
 definition_hash = "27b000ab6945283c991f8c9bb01fca83299db7eb34b41a7c9f76de122cbf4b9e"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c3c"]
 file = "src/bss_layout/bss_late.c"
@@ -20418,7 +20427,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_100a8c3c"
 
 ["SERVER.0x100a8c3c".verification]
@@ -20426,7 +20435,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "1571874812326a330730efabab11d0931be6e45cb65daa249512321a75908837"
 definition_hash = "85de9e2dcecf0558324a0d1d9df23e9e706eecfda0d41b4c53a37e59630e83d5"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c40"]
 file = "src/bss_layout/bss_late.c"
@@ -20437,14 +20446,14 @@ size = 3024
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c40".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "ac0e63980b421703f74c2a62779dbd847a2b69c18fd9c34b4bad98f933e1753e"
 definition_hash = "5d26d3cffa3960f3bbf54776a184bbe5ae68bd809024f9ec89c24b20f9a23336"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c94"]
 file = "src/bss_layout/bss_late.c"
@@ -20456,7 +20465,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; field view of g_city_records + 0x54, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_city_records"
 
@@ -20465,7 +20474,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "770f4cdebc0cbaf25dd38d3ace8c2adea649d6ae2e811a4c5271b13d7c830901"
 definition_hash = "aaf3b900ecb9eb8fab6fb8fcea343d202f8f1e3472679b916266782bc167a543"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8c98"]
 file = "src/bss_layout/bss_late.c"
@@ -20476,7 +20485,7 @@ size = 96
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_city_records"
 link_symbol = "_g_gap_100a8c98"
@@ -20486,7 +20495,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "ac0361df481f92d099d12a3f3b6cc706dafa1736496f4aaa07aadefdef30dcbb"
 definition_hash = "6a590fef78d4a351c912e307ac1da417c55b91023c1e34197a26cc311b5e8739"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8cf8"]
 file = "src/bss_layout/bss_late.c"
@@ -20498,7 +20507,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern retained for VC6 symbol order; field view of g_city_records + 0xb8, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_city_records"
 
@@ -20507,7 +20516,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "78316e4bf67329aebaf05523c0ec252324ad86cda646d47e0bc644bca4691c77"
 definition_hash = "51ed27a50807dafe33ac7aea3eab62310c47590cda245a00687598909a9181cb"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a8cfc"]
 file = "src/bss_layout/bss_late.c"
@@ -20518,7 +20527,7 @@ size = 2836
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_city_records"
 link_symbol = "_g_gap_100a8cfc"
@@ -20528,7 +20537,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "5cba154bb2829ee707743d88a09821d09c2d88aaa015fe4cd76c3f9cf53c907f"
 definition_hash = "a622dc2fdda61a43248e06677c74c8592b8c53e0c3fd490077b419985fe26628"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a9810"]
 file = "src/bss_layout/bss_late.c"
@@ -20539,7 +20548,7 @@ size = 16
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_100a9810"
 
@@ -20548,7 +20557,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "dcf39decf4b396942cb1bb50f6aa03d122c8b22c85487713e7e234e8e235fdb6"
 definition_hash = "5aa797ee75dbd73d45d7ce8409231aa5190aec38d42312305bc881bef52ec5da"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a9820"]
 file = "src/bss_layout/bss_late.c"
@@ -20559,14 +20568,14 @@ size = 589824
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x100a9820".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "f2c237da935c9b20d438b62e4c6281d89a7d7e6e8eaeb8b6a3c92ec304cb30d3"
 definition_hash = "bb0bc8242122aac6b6972a1f01df2ec448f218f22d427f6b93f3faccace2fe6c"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10139820"]
 file = "src/bss_layout/bss_late.c"
@@ -20577,14 +20586,14 @@ size = 100
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10139820".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "31f9b214f936262ea484c265963929ba5a84b406dd46ea98fbc65c78a69b43a7"
 definition_hash = "05dd9ada668a92a4ce72813db9dc3b43e7b3f12abe81c3f6f51bcc9a0da589b5"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x10139884"]
 file = "src/bss_layout/bss_late.c"
@@ -20595,7 +20604,7 @@ size = 24
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_10139884"
 
@@ -20604,7 +20613,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "78ca9219aec7a84d5286e702e8416484637fd5171f14b311070311aad7159aa4"
 definition_hash = "b224b108106b89aff81028c125038879c2557dad1aa6adbeeb8ef3290782c39d"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1013989c"]
 file = "src/bss_layout/bss_late.c"
@@ -20616,7 +20625,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern; view of the dword preceding g_dispatch_table_b, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x1013989c".verification]
@@ -20624,7 +20633,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "5ef6e1faa3097160e06b1bea83aacb1d573b4b3145678892cc10c46c0a594e20"
 definition_hash = "0dbfde6333bbbacdc23fba589d6ffe53dc4e9dd1025a49d87932eb937cc5c3cc"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101398a0"]
 file = "src/bss_layout/bss_late.c"
@@ -20635,14 +20644,14 @@ size = 81952
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101398a0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "99c954bca95438dbe2ccc23d7d913e629d3f7592b210b692eb38cb29b47894b8"
 definition_hash = "12943957b01a50770628af46e8e953d7f0f41525a6cd00ef1a20741e9acf380f"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1014d8c0"]
 file = "src/bss_layout/bss_late.c"
@@ -20653,14 +20662,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1014d8c0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "495d81e957e558d6da7e6e3c385757dda6b8f7d574ca88b7fac5617d3bd28f5c"
 definition_hash = "4c0fc2edc8c10103d1fd3b446937ac8057ad9616b18c2946d1963cc2bc23e3f5"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1014d8c4"]
 file = "src/bss_layout/bss_late.c"
@@ -20673,7 +20682,7 @@ status = "EXACT"
 storage_kind = "span"
 note = "Virtual zero-fill alignment interval after g_entity_ptr and before the 32-byte-aligned relationship matrix; declaration only, no allocation"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_1014d8c4"
 
 ["SERVER.0x1014d8c4".verification]
@@ -20681,7 +20690,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "f984886d37be36f3f918d70ab2f2197e3727390bf2190336c57d4c38042dcdc9"
 definition_hash = "7e0f340c4640a25c1040b24e55db873ced49e46d576bdbad7d584638b20f4758"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1014d8e0"]
 file = "src/bss_layout/bss_late.c"
@@ -20692,14 +20701,14 @@ size = 589824
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1014d8e0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "e684491d4ff9c71dd508516a894152765eafc1a8ad336d4836fe8d11e794f7bc"
 definition_hash = "835002570cb4755b105dd1cca2a878c7912b2ead49b39466bbfa563a12e9d31f"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101dd8e0"]
 file = "src/bss_layout/bss_late.c"
@@ -20710,14 +20719,14 @@ size = 2928
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101dd8e0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "b471d3878ddba539e61e4a4bcfdfe3e3d573d71142e52a7481a79aa076334036"
 definition_hash = "dbe8bb7ec60555217c629592ec29dcc23b8fcf7a05c6a60b9a3ae96534c3a873"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de450"]
 file = "src/bss_layout/bss_late.c"
@@ -20728,14 +20737,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de450".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "3e0eed6c317d88d6d105a770818e2587d929ae888cd24bf54e8e290f2ea57304"
 definition_hash = "188f3913c8b13ab4f4d91eee865af229237670137d168d0c9338a43e03465b93"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de454"]
 file = "src/bss_layout/bss_late.c"
@@ -20747,14 +20756,14 @@ section = ".bss"
 status = "EXACT"
 note = "auxiliary entity count (loadsave)"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de454".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "19782606781237a95c0d4aeb5557c8542d87742c632d4bd8582789ac52bbf1bc"
 definition_hash = "bb9eff7c649ef689e9655edbd8c258d8025cdbed45066660dc6e708149de346a"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de458"]
 file = "src/bss_layout/bss_late.c"
@@ -20766,7 +20775,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_101de458"
 
 ["SERVER.0x101de458".verification]
@@ -20774,7 +20783,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "694d36db1c419f7de4188675d80915417abbcd5fcf5993ec6ad2762e6e3576f0"
 definition_hash = "44948cd6b7c31d21895500e6ee7cef1a81f729e71d177be752484994dc1570e2"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de460"]
 file = "src/bss_layout/bss_late.c"
@@ -20785,14 +20794,14 @@ size = 252
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de460".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "276e59cbf3898f3894addc830e9286a6db3fbf70cdb2965748495c61a17aac5a"
 definition_hash = "5d19a31a82fefc6fc19408b5df98fc39bfb480078493f1517ec339f256463817"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de464"]
 file = "src/bss_layout/bss_late.c"
@@ -20804,7 +20813,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern; byte view of g_save_info + 4, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_save_info"
 
@@ -20813,7 +20822,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d9ad3ba2e35f25663ba8184548623c0b0e816a7e5607e4f7e5ab80ff94b8fe79"
 definition_hash = "311b3bcf18f6901a0b04c1086cb57642d1dc55a48e2c35d4646309b35ada6322"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de465"]
 file = "src/bss_layout/bss_late.c"
@@ -20824,7 +20833,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_save_info"
 link_symbol = "_g_gap_101de465"
@@ -20834,7 +20843,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "03f155cfed4c58fbe018aafa1cc3611cecdc96d298bb44099a239b61b9677ac4"
 definition_hash = "010b37875fa3d01059c532460e5b59ef3246175a01ad937ec41e50910d31b425"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de466"]
 file = "src/bss_layout/bss_late.c"
@@ -20845,7 +20854,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_save_info"
 link_symbol = "_g_gap_101de466"
@@ -20855,7 +20864,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "28009bbb677e429feb7d731be6dfffe593abe41e9353a4b51d3ff3a17c738b6c"
 definition_hash = "8a48e4c5432dc43982b082451a8c7fc36024243fc4597b46d23f8b73b188699b"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de467"]
 file = "src/bss_layout/bss_late.c"
@@ -20866,7 +20875,7 @@ size = 1
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_save_info"
 link_symbol = "_g_gap_101de467"
@@ -20876,7 +20885,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "88cbf1b2ced3d1a937d474dcec662fc63f72d1c8702690cfc33653db148332c3"
 definition_hash = "1d1520de37a17dec76476b6ceacde65676977a376d46589357d8092d75f0ed32"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de468"]
 file = "src/bss_layout/bss_late.c"
@@ -20887,7 +20896,7 @@ size = 244
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_save_info"
 link_symbol = "_g_gap_101de468"
@@ -20897,7 +20906,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "f9e63cfca241445077af62870e38a8f1c8ca0de9a903db472f733b5f1dd1752d"
 definition_hash = "cb6967294ef266ca5b22b9efd313ec8207463efdd24e12bb3fed24c15eb11744"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de55c"]
 file = "src/bss_layout/bss_late.c"
@@ -20909,14 +20918,14 @@ section = ".bss"
 status = "EXACT"
 note = "auxiliary entity buffer (realloc'd)"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de55c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "27c38f372f711c61ff7432a432515ed06ef1240cdb06f8fa1e1dd8361d34e8ee"
 definition_hash = "9c288ead4046b8edbfe26dc9691ba0721544b63005c9eea3e2b9f95c3e516f86"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de560"]
 file = "src/bss_layout/bss_late.c"
@@ -20927,14 +20936,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de560".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "90aee6250dec0c473e9cd99420ee4165ff842cc9723d3cda1878eb3b975dc2f4"
 definition_hash = "d56bbf8da4cd79cacb9774e3dd2d65a08df8d25940ecebb175a1e1ca702c34c2"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de564"]
 file = "src/bss_layout/bss_late.c"
@@ -20946,7 +20955,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_101de564"
 
 ["SERVER.0x101de564".verification]
@@ -20954,7 +20963,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "594c313ea97264c165572623b4505a34fa49f68215a4827e73785c7a76b45380"
 definition_hash = "ccafcf2d021da66e2fc82c92bf22c6ef2f2690f4bc11306ad245a91e623c15b7"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de580"]
 file = "src/bss_layout/bss_late.c"
@@ -20965,14 +20974,14 @@ size = 24
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de580".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "9570bee4c27b6ef74d4d617133e3027e8b0fe07f9ffb412771e35eec4e92dc7a"
 definition_hash = "9400472e46bd0294d4954ea9cdb184f4d98286e55457409e72faa75312588639"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de598"]
 file = "src/bss_layout/bss_late.c"
@@ -20983,7 +20992,7 @@ size = 8
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_101de598"
 
@@ -20992,7 +21001,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "cbfcd600ed987b70bd576e4be4e78334cfe8455189d483937b6a9c5e77b53250"
 definition_hash = "a5b40728f40e14119ef1f4837c6807d3b666373c19d542a59057d31f4c8b5c87"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de5a0"]
 file = "src/bss_layout/bss_late.c"
@@ -21003,14 +21012,14 @@ size = 1008
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de5a0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "99e36c3e6b9ef83b50b92d188e585eb39f132e95929640a51ce4d345c0485392"
 definition_hash = "b5316d8855ec202b6d12be971e3f0e277f93b289fdc023b5b4a061444e4f8bde"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de990"]
 file = "src/bss_layout/bss_late.c"
@@ -21022,7 +21031,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_101de990"
 
 ["SERVER.0x101de990".verification]
@@ -21030,7 +21039,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "bef2978a54d12936e11e864ac11f2ef8e7d08b81428609faa2fadc5ec5097eeb"
 definition_hash = "a806cd09ff9f6081344c7e793b5294e25ab974e1a59800e700512a87a67d01e6"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de9a0"]
 file = "src/bss_layout/bss_late.c"
@@ -21041,14 +21050,14 @@ size = 260
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101de9a0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "ed085ec9c537078e16285a79fe849da12a6740e470ac36e356dd18b65e37792d"
 definition_hash = "68af15c836b76a2d0858289143b6aa7faea0052757756d59f5f73004d577969d"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deaa4"]
 file = "src/bss_layout/bss_late.c"
@@ -21060,7 +21069,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_101deaa4"
 
 ["SERVER.0x101deaa4".verification]
@@ -21068,7 +21077,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "4bdd6d63eb9a93b52086ac858bac1d43f54094d11c607b758a9e72f3c2b38f35"
 definition_hash = "be41f1f581b34486fa5d48e911f70e15e4b0884368cb6ce626a4f62024b0cb01"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deac0"]
 file = "src/bss_layout/bss_late.c"
@@ -21078,8 +21087,8 @@ type = "struct DownloadState"
 size = 44
 section = ".bss"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T08:30:58+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "object"
 backing = ""
 link_symbol = "_g_download_state"
@@ -21089,7 +21098,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "5069115f54db7cf8b02a366df9481b93fb068985162bc157a69e339f88311573"
 definition_hash = "c4c7918ed3136792a674db138be18de38f449c9b9777c757a077edd36c615c01"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deac4"]
 file = "src/bss_layout/bss_late.c"
@@ -21161,14 +21170,14 @@ section = ".bss"
 status = "EXACT"
 note = "listen socket"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deaec".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "8ed1f401571e23035d56b29845a1c167ec3f34993ca4795af319e33f415b911b"
 definition_hash = "17b5f0a29b3234d89106305c0deca0ecb9f9f34deb30761034045a1ac0f86b38"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deaf0"]
 file = "src/bss_layout/bss_late.c"
@@ -21179,14 +21188,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deaf0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "99a00422cfbf9997280f0cb7d4c329dbf852dcdf3c7957b500442c992d49e427"
 definition_hash = "88137106fc28cb5698cf6a5aec71e017d29a9dc35ba3f1ebeb318a522950471b"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deaf4"]
 file = "src/bss_layout/bss_late.c"
@@ -21198,7 +21207,7 @@ section = ".bss"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "_g_gap_101deaf4"
 
 ["SERVER.0x101deaf4".verification]
@@ -21206,7 +21215,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "ba6b526e5c36483ee1e66cb2aa40cafd50307122d572e3dce6e518c1e6708235"
 definition_hash = "4734c8c4a6ccc42dc7cdda7520ae67cc8b962b6a7551fd3a015c16448bbc9aae"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deb00"]
 file = "src/bss_layout/bss_late.c"
@@ -21218,14 +21227,14 @@ section = ".bss"
 status = "EXACT"
 note = "first player slot (stride 0x264264 bytes)"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deb00".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "d388888caa58ac5809ed39ac464ab86572fd490e552efd9242eb06c71f03c3db"
 definition_hash = "d9a35f0a13d969899929d54ab36a18ce68bf2304dfd1b0adc302112441a1d3bd"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deb14"]
 file = "src/bss_layout/bss_late.c"
@@ -21237,7 +21246,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern; field view of g_connections + 0x14, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_connections"
 
@@ -21246,7 +21255,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "4f6b2b6d4fa2fde9f07999a4610ff495e21282a5cd69cd199dc711c8ad66f177"
 definition_hash = "5046aa57be20924e398dc79b0dfa4a3331ca871cde863a2c0242c3512264df73"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x101deb18"]
 file = "src/bss_layout/bss_late.c"
@@ -21257,7 +21266,7 @@ size = 20058888
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_connections"
 link_symbol = "_g_gap_101deb18"
@@ -21267,7 +21276,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "0b90457e022e5d3f87fcfd5ff6facb76c4b8cc27340ab05b96f6606374ecc4e5"
 definition_hash = "ce3d32744f34c09974cf6ef27ed0978319ef1aa88efb3b6b7d126233ddbf123c"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x114ffe20"]
 file = "src/bss_layout/bss_late.c"
@@ -21279,7 +21288,7 @@ section = ".bss"
 status = "EXACT"
 note = "Legacy extern; view of admin connection record at g_connections + 8 * 0x264264, no separate allocation."
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_connections"
 
@@ -21288,7 +21297,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "3c00d1426a22a530b8e6298cb2f922ee3d3ac7614a738c246365fd428b9e0eb6"
 definition_hash = "affa600f1075dca7aac1a943219fce7fbc828ec14d4241e891c99bdb3cb69de5"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x114ffe24"]
 file = "src/bss_layout/bss_late.c"
@@ -21299,7 +21308,7 @@ size = 2507360
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_connections"
 link_symbol = "_g_gap_114ffe24"
@@ -21309,7 +21318,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "bbf803c74c6f1765c6d2539da6bd66f4a6674b5332a2cd1fc3746f93581da14d"
 definition_hash = "5cc27fff4f1893246f834f566f476dfac3d61bcbbf3b4d1ce67c9ed1b9949491"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11764084"]
 file = "src/bss_layout/bss_late.c"
@@ -21320,14 +21329,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11764084".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "2fc155e45ee9ced3c0d4558549659c986bafcee614762d5abbeb83efee58d5ab"
 definition_hash = "083fb89c54722867f7bef9c580b2cb40e38ffc435d25175750a5174edb814a84"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11764088"]
 file = "src/bss_layout/bss_late.c"
@@ -21338,14 +21347,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11764088".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "e69b6aadeae309b1ae640c7e56c528c3b7c00f443c7a88373fccfca95d83a62b"
 definition_hash = "a96ea942f4d469a142710919a7630829bc0b5c97ae4b7753e7e81d8ad0e45559"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1176408c"]
 file = "src/bss_layout/bss_late.c"
@@ -21356,14 +21365,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1176408c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "56080341c09316af4a6b95e510309ea61e63511118c57a49c2d9b42afe099405"
 definition_hash = "d0182f38f2bbdcd5d41fb91547fc8807b7bbdda4d0a85f7f059008351a8e584a"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11764090"]
 file = "src/bss_layout/bss_late.c"
@@ -21374,14 +21383,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11764090".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "c3203980e15c78429b7875f6455e7689f7e939300c845dc94eed2e276511ac9b"
 definition_hash = "d144776195c6b9da3340fb238d79304acc14e6a54ec293f6d803c6b352b7364f"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11764094"]
 file = "src/bss_layout/bss_late.c"
@@ -21392,14 +21401,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11764094".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "10fff5cf8f9688d1d2a37711b47f1365990a8fb94231b3c5a4f928c4e5df26d8"
 definition_hash = "cb90a0e806ee292e1f7abc7c9a2e069956747adf62ad427f2db1a39759e1bc13"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11764098"]
 file = "src/bss_layout/bss_late.c"
@@ -21410,7 +21419,7 @@ size = 8
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_11764098"
 
@@ -21419,7 +21428,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "2fa6c16a37f31c2f27ef57d797a9cd9884802263f58b3a34fa34edbea863839b"
 definition_hash = "3ac60cf3c81b24cfea13fd16562180ec96b7780b83e750afe627cda06e031674"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640a0"]
 file = "src/bss_layout/bss_late.c"
@@ -21430,7 +21439,7 @@ size = 40
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "object"
 backing = ""
 link_symbol = "_g_alloc_root_name"
@@ -21440,7 +21449,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "b435bc86251adb68eae77c5e15376d4da8e2d70b9908e9c1585f1c36332a5d9d"
 definition_hash = "a42ed13e2707e82b4d5df37bca8b952272f0870b46033393be36e575bcf538aa"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640a4"]
 file = "src/bss_layout/bss_late.c"
@@ -21451,7 +21460,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_alloc_root"
 
@@ -21460,7 +21469,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "359d39ebc0e30271ba0a8eb7ce842cc45957fcebd61e5aaa0493f75f91cf13da"
 definition_hash = "968d5d3555113ae1f580e452f177f7a1e4aab4cd84f13753ee380e988a62dc0a"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640a8"]
 file = "src/bss_layout/bss_late.c"
@@ -21471,7 +21480,7 @@ size = 8
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_alloc_root"
 link_symbol = "_g_gap_117640a8"
@@ -21481,7 +21490,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "ab961b7be539b7a7e775ca775c3558019b14be2b9dd3fbac1034c488d275c960"
 definition_hash = "dc49b808bcc5e18f44f4a1a7e42143cd6cc352dfb89b1c4c69128b7836ffc7f9"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640b0"]
 file = "src/bss_layout/bss_late.c"
@@ -21492,7 +21501,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_alloc_root"
 
@@ -21501,7 +21510,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "a8dc36c9dac0fe59aebd6029e6ee40357c95d8c7765400dc349e0786a2cffce9"
 definition_hash = "9476a615be49a3c622921fed9793c429e72e5d8891446094524b913312a73d77"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640b4"]
 file = "src/bss_layout/bss_late.c"
@@ -21512,7 +21521,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_alloc_root"
 
@@ -21521,7 +21530,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "36bd77fabcecaab36e3f8d209a036253c05725823008ef8ccf33ed9ff5c82a22"
 definition_hash = "8a6ae5681b4925d984a8d0434efbe32472745ee934997f3cf2c98c71b7da6a9a"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640b8"]
 file = "src/bss_layout/bss_late.c"
@@ -21532,7 +21541,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_alloc_root"
 
@@ -21541,7 +21550,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "199d9b9d6703ca7da0ee29d1065e879fc03fc100797a1836a708f1e657db5e1f"
 definition_hash = "af3a51007f8448307a72054336433a3f1d966f199ae50bce8c26a2f7722ea5bc"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640bc"]
 file = "src/bss_layout/bss_late.c"
@@ -21552,7 +21561,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_alloc_root"
 
@@ -21561,7 +21570,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "64d994345f46c86cf79f8a3a594b3c6e4f8dda8fdfddbf33bc6fe41ac425eb26"
 definition_hash = "e0fa8e760c29e099ef5e1e7bd508aaf33a76f35a4f41493c20e1c267e631003e"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640c0"]
 file = "src/bss_layout/bss_late.c"
@@ -21572,7 +21581,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_alloc_root"
 
@@ -21581,7 +21590,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d32e20e259be81c05176a2a931ab2885eca912053db35f669cfaa164c48d4d4d"
 definition_hash = "a73a288f2826721cf81d439464de4a12e772e37da1c64eea3c1bad3173efcbe0"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640c4"]
 file = "src/bss_layout/bss_late.c"
@@ -21592,7 +21601,7 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 backing = "g_alloc_root"
 
@@ -21601,7 +21610,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "dbc03eadd6247d04a97d12b41e58140cda34f2adc8c65f55d98e8aec7a6ca066"
 definition_hash = "42f1218d59f6c60294435c41bb84c4ac09550fa5b1ccb581bbdb7dee73ef2cb2"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640c8"]
 file = "src/bss_layout/bss_late.c"
@@ -21612,7 +21621,7 @@ size = 24
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_117640c8"
 
@@ -21621,7 +21630,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "9b6b593eaffb743646cb7d8e85b0c64ad8981146cbb7c66fe23f7b7b5863bdab"
 definition_hash = "b04c2e1eda7e625e6231010fab330f66d8e0b0d84f90b7fd56846eb618909cfc"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640e0"]
 file = "src/bss_layout/bss_late.c"
@@ -21632,14 +21641,14 @@ size = 8192
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117640e0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "cbe628007588499ac23d8847982cb574bc0b3e0c213c028bfe53277587422644"
 definition_hash = "32df1d21d439ed13e43653abba03e80067f82b5cb4fcabab912fedcb8b6d1324"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117660e0"]
 file = "src/bss_layout/bss_late.c"
@@ -21650,14 +21659,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:37+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117660e0".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "559f179a3ffdb962e527ad93b26d1442a6010375a9948efa6d9d94064b7695f9"
 definition_hash = "71416cad27510e62d1d7be9f63756cabfe81746dafdcf031cc4262669292c20a"
-measured_at = "2026-10-06T02:28:37+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x117660e4"]
 file = "src/bss_layout/bss_late.c"
@@ -21668,7 +21677,7 @@ size = 28
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T05:44:21+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 link_symbol = "_g_gap_117660e4"
 
@@ -21677,7 +21686,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "5c2ecb4258264282a983f2747b32db1bb24e3150236ee870c46bbb3bd017031d"
 definition_hash = "f325ac10a70a49850c87c31a998da7e105a95e249962e094e1b0e7c433343371"
-measured_at = "2026-10-06T05:44:21+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766100"]
 file = "src/bss_layout/bss_late.c"
@@ -21688,14 +21697,14 @@ size = 260
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766100".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "03ba9f8fad0f78d2f941c5e18f6bc04ca45ee070417a5e3671211314204fc8f5"
 definition_hash = "7cde384bfe3ca3fde84ada973b244e7a430a1c6ac40343fc26b4a0c6184f645f"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766204"]
 file = "src/bss_layout/bss_late.c"
@@ -21706,14 +21715,14 @@ size = 4
 section = ".bss"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-06T02:28:36+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766204".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "800563b240c55ddccb0fb423e3fadfe47ed8397c3b13f0da3c7da3861932677a"
 definition_hash = "53c4f10563b0c785310741f8868a6e6989d6765764968a74fa2ebbb5cb416a1a"
-measured_at = "2026-10-06T02:28:36+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766208"]
 file = "src/crt_region/section_spans.c"
@@ -21744,14 +21753,14 @@ section = ".bss"
 status = "EXACT"
 note = "__sbh_sizeHeaderList - allocated header-list size"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766430".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "6eb796a2ffb92ec51509485533f0ad0ea0d971ea6d37a621f3074e7a3f28efeb"
 definition_hash = "7ef6745aaf8df8b94e5b9690abd9d5c7d7e7b1179e8a578d05709fcb928dacca"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766434"]
 file = "src/Develop/crt_globals.h"
@@ -21763,14 +21772,14 @@ section = ".bss"
 status = "EXACT"
 note = "__sbh_indGroupDefer - deferred group index"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766434".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "a70d78082ba7a92a85a76d872489f0ffc54d9824efdcd9ab64c96d8b750b1777"
 definition_hash = "fb77641934381f08e4519fbd5b7b20ae2f4a50783ed47df3d29a05fdcd242e50"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766438"]
 file = "src/crt_region/data_globals.c"
@@ -21782,14 +21791,14 @@ section = ".bss"
 status = "EXACT"
 note = "pool: region scan cursor (ptr into array)"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766438".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "4755d0e2520850d59bc2c74fdbd683a571494930424bb6d1b7456e3a0a546cb9"
 definition_hash = "db940b85bf9e038a40e375e4279d34bd7e82a4ab60a3743a4e170aa3039d787a"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1176643c"]
 file = "src/crt_region/section_spans.c"
@@ -21801,14 +21810,14 @@ section = ".bss"
 status = "EXACT"
 note = "__sbh_pHeaderDefer - deferred group header"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1176643c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "e333bd47e945860030a21a75d3ef0d6208d750342ee6f825f9db7b19e389fcf9"
 definition_hash = "13622d3fdde5fc87fbd641b143d902334253bbb7ee01d70ad13d09e4039429b4"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766440"]
 file = "src/crt_region/data_globals.c"
@@ -21820,14 +21829,14 @@ section = ".bss"
 status = "EXACT"
 note = "pool: region count"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766440".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "2bae4ef0a822982156cca47ce919767e4296d824b426b59cf84a0487e6c67ce8"
 definition_hash = "5004bdabcc2c764e46f229cf97c220f087397c85a9606320ef294aaea7d2e64c"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766444"]
 file = "src/crt_region/data_globals.c"
@@ -21839,14 +21848,14 @@ section = ".bss"
 status = "EXACT"
 note = "pool: region descriptor array"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766444".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "a7076d1af762f387647916ad4d56f6bdb785d40a0d67e14cb455bcacf15f5820"
 definition_hash = "143dc9382695c32efbcca2fdbeb32109f6e8802ff23e67fc1147582f4a6f19da"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766448"]
 file = "src/crt_region/data_globals.c"
@@ -21858,7 +21867,7 @@ section = ".bss"
 status = "EXACT"
 note = "max pool allocation size (allocator mode 3)"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "___sbh_threshold"
 
@@ -21867,7 +21876,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "b6bec834779fccffef317665fd36ff35748239ea3ba8cd1389a27e936831928d"
 definition_hash = "99c2ac68f7f415dfad83ef68e9d6ee4e4b19b13f2d722d744ad290bb11c22139"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1176644c"]
 file = "src/crt_region/data_globals.c"
@@ -21879,14 +21888,14 @@ section = ".bss"
 status = "EXACT"
 note = "process heap handle"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1176644c".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "ea5fdcf8f3f1cb1a6d49a2cb45bc4261467e448b52e6f9f9d3d2c495a4af7e7a"
 definition_hash = "2bde84302a2e0415761f3ef2434cb92c9be2f5b984c1e87aad45516f128a6a3d"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766450"]
 file = "src/crt_region/data_globals.c"
@@ -21898,14 +21907,14 @@ section = ".bss"
 status = "EXACT"
 note = "allocator mode: 3=pool, 2=block"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766450".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "54eb610d8fd986ee95724d47b89ca63532acb9ef682388a0d7327bce9c76f394"
 definition_hash = "72e45ba4b36b1c0840aec75b1f49720863376164e39962bd2a62c2afdd695095"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766454"]
 file = "src/crt_region/section_spans.c"
@@ -21936,7 +21945,7 @@ section = ".bss"
 status = "EXACT"
 note = "stream group ptr table (0x11766460..0x1176655c, 0x40 entries)"
 updated_by = "verify"
-updated_at = "2026-10-08T05:27:35+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "object"
 link_symbol = "___pioinfo"
 
@@ -21945,7 +21954,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "9c33cbd7c271b909689fa3aeeca5fc80122c66a993388f22bf19f8fff54b71a9"
 definition_hash = "084ebea498f7243634df9821564191172a2832430e46d3e385bc7a7d5a95475d"
-measured_at = "2026-10-08T05:27:35+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766560"]
 file = "src/crt_region/data_globals.c"
@@ -21957,7 +21966,7 @@ section = ".bss"
 status = "EXACT"
 note = "current stream count"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "__nhandle"
 
@@ -21966,7 +21975,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "255214f500dc890994f2404fc7662efd1f3030e13f5722eb88dddc6264bfdce3"
 definition_hash = "a7a43c4da74cd1384fce8dc640340e8a4ee8da87016608303f49972433843aa4"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766564"]
 file = "src/crt_region/data_globals.c"
@@ -21978,7 +21987,7 @@ section = ".bss"
 status = "EXACT"
 note = "tracked-block (stream) table ptr - __flsall/_fcloseall walk this"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 link_symbol = "___piob"
 
 ["SERVER.0x11766564".verification]
@@ -21986,7 +21995,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "fb9250cad8126cbc239b7c47b6e5bc9f56d07bb6d40411c895a648a8600e91cc"
 definition_hash = "d0b648d6e4502d4590dcac51046885e135035a54527af59a118128b35513e6d5"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11766568"]
 file = "src/crt_region/section_spans.c"
@@ -21997,7 +22006,7 @@ size = 4120
 section = ".bss"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-05T01:31:17+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x11766568".verification]
@@ -22005,7 +22014,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "2661bf663e26b515a904c6c0a7ff2f016849825f3153893718b4aedf4138a53b"
 definition_hash = "4e1795035a14b5144f080c201ca256463fdd610af1723a6fbdde3e75c37a6b40"
-measured_at = "2026-10-05T01:31:17+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11767580"]
 file = "src/crt_region/data_globals.c"
@@ -22017,14 +22026,14 @@ section = ".bss"
 status = "EXACT"
 note = "tracked-block table count"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11767580".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "c1f58a3e1078201c4d41fcdd199cdbeea48490e0207f5e0ef3ff84f844c341b2"
 definition_hash = "70ab78dd937aa5303248f7753ea3f5a5f250d33d26566f068b1665fd5c673c8e"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11767584"]
 file = "src/crt_region/data_globals.c"
@@ -22036,14 +22045,14 @@ section = ".bss"
 status = "EXACT"
 note = "GetCommandLineA result"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11767584".verification]
 status = "EXACT"
 writer = "verify"
 input_hash = "9d321f4ac7735f143d6fff385061d7c54add5fa469bca32000020bfe94c386f7"
 definition_hash = "51738ffe521eff3532c518b674057189d20d919709760e79835660339a2d133d"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11767588"]
 file = "src/crt_region/data_globals.c"
@@ -22055,7 +22064,7 @@ section = ".bss"
 status = "EXACT"
 note = "DllMain user handler fnptr"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "__pRawDllMain"
 
@@ -22064,7 +22073,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "0fc4bea9f468b62e68aa1316cb54ca0d05e8dea031c380c499534701e5e2719d"
 definition_hash = "a46da3ed91bad977566edfb5cd094eb42e57ceeebeb70d4034826fb113aa66ed"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x1176758c"]
 file = "src/crt_region/data_globals.c"
@@ -22076,7 +22085,7 @@ section = ".bss"
 status = "EXACT"
 note = "__envp built flag"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "___env_initialized"
 
@@ -22085,7 +22094,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "d93b3d50bc4bf1310410528c2e6bd4b408214e48b9e5b1e76c9dd398372c4263"
 definition_hash = "63f90ceeeb39554252719ce8368267bfc64d99ee3d344df1b20ed2275c2c9558"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11767590"]
 file = "src/crt_region/data_globals.c"
@@ -22097,7 +22106,7 @@ section = ".bss"
 status = "EXACT"
 note = "cmdline/env parsed flag"
 updated_by = "verify"
-updated_at = "2026-10-06T01:18:03+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "alias"
 link_symbol = "___mbctype_initialized"
 
@@ -22106,7 +22115,7 @@ status = "EXACT"
 writer = "verify"
 input_hash = "16f190bfb69a9a15db554987009bd085ca39f8fb2f12af18db1550cc4660193d"
 definition_hash = "7d2895e9caf463edb0bc774d49e3de1475c3bac24e4228531a16ff4803a8141b"
-measured_at = "2026-10-06T01:18:03+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["SERVER.0x11767594"]
 file = "src/crt_region/section_spans.c"
@@ -22117,7 +22126,7 @@ size = 8
 section = ".bss"
 status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-05T01:32:06+00:00"
+updated_at = "2026-10-21T08:18:16+00:00"
 storage_kind = "span"
 
 ["SERVER.0x11767594".verification]
@@ -22125,7 +22134,7 @@ status = "VERIFIED"
 writer = "verify"
 input_hash = "8be22ef656aac6ce61ece995dce01176f1a69bf23268918fc580953f758d4768"
 definition_hash = "f5d740b0d2e24e9e58347c6926d456fc472bceeb2d9f1b93b0f2df9f4575583c"
-measured_at = "2026-10-05T01:32:06+00:00"
+measured_at = "2026-10-21T08:18:16+00:00"
 
 ["GOLD.0x00633b04"]
 file = "src/client_lighting.h"
@@ -24443,41 +24452,77 @@ name = "g_6b7fd0"
 size = 4
 section = ".data"
 kind = "GLOBAL"
-updated_by = "data"
-updated_at = "2026-10-20T04:24:43+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T03:42:51+00:00"
+status = "DISPLACED"
 
+["GOLDTL.0x006b7fd0".verification]
+status = "DISPLACED"
+writer = "verify"
+input_hash = "ad054053e4ff8981e3035e8f95b7ee15c239015c65a653638eda1ac5ad8ffa7b"
+definition_hash = "3a4281ea7e420e76208a3f0a156ca17bbe3e09f96b95a0fc6230715f98769f2a"
+measured_at = "2026-10-21T03:42:51+00:00"
 ["GOLDTL.0x006b7fd4"]
 type = "char*"
 name = "g_6b7fd4"
 size = 4
 section = ".data"
 kind = "GLOBAL"
-updated_by = "data"
-updated_at = "2026-10-20T04:24:43+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T03:42:51+00:00"
+status = "DISPLACED"
 
+["GOLDTL.0x006b7fd4".verification]
+status = "DISPLACED"
+writer = "verify"
+input_hash = "b7cf0f49e6ddf331a21747f46fae7e7d4d315f959b3f98d55314e8a735d38c0c"
+definition_hash = "572c3ea7245c71e68b47255edecfc40605a9fdf34b2bf579dc421a9d09398552"
+measured_at = "2026-10-21T03:42:51+00:00"
 ["GOLDTL.0x006b7fd8"]
 type = "char*"
 name = "g_6b7fd8"
 size = 4
 section = ".data"
 kind = "GLOBAL"
-updated_by = "data"
-updated_at = "2026-10-20T04:24:43+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T03:42:51+00:00"
+status = "DISPLACED"
 
+["GOLDTL.0x006b7fd8".verification]
+status = "DISPLACED"
+writer = "verify"
+input_hash = "aa2827e80bb3ff2d3e2a82436084717ce6a7f251026794117ff8674e51190606"
+definition_hash = "285a7be4008c982d5e43a612002f3079464d606013ab1d41ec357f8648eae2ff"
+measured_at = "2026-10-21T03:42:51+00:00"
 ["GOLDTL.0x0099ef84"]
 type = "char[1536]"
 name = "g_99ef84"
 size = 1536
 section = ".data"
 kind = "GLOBAL"
-updated_by = "data"
-updated_at = "2026-10-20T07:51:27+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T03:42:51+00:00"
+status = "VERIFIED"
 
+["GOLDTL.0x0099ef84".verification]
+status = "VERIFIED"
+writer = "verify"
+input_hash = "6f0df5587eb16ed8b13cccd7192a75a121e7c3516a17a98b3d7addeb4a9b3d6c"
+definition_hash = "230081bd83fc297e6e75293aa9e7c6b08e5b8a51ede56af9e1f087ed5f306a7f"
+measured_at = "2026-10-21T03:42:51+00:00"
 ["GOLDTL.0x007e6060"]
 type = "char[17152]"
 name = "g_7e6060"
 size = 17152
 section = ".data"
 kind = "GLOBAL"
-updated_by = "data"
-updated_at = "2026-10-20T07:51:27+00:00"
+updated_by = "verify"
+updated_at = "2026-10-21T03:42:51+00:00"
+status = "DISPLACED"
+
+["GOLDTL.0x007e6060".verification]
+status = "DISPLACED"
+writer = "verify"
+input_hash = "8cd9297bbc9864bca1e6b31ab6756dacdd28b5072fada4f98875581f045f0167"
+definition_hash = "f0ad22029c86e636373e3649f40888e78a7fdefd19990aa34b7f715eb7062b56"
+measured_at = "2026-10-21T03:42:51+00:00"

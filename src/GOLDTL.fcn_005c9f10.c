@@ -6,7 +6,7 @@ int __cdecl fcn_0050f980();
 int __cdecl fcn_0051af00();
 int __cdecl fcn_005c9090();
 int __cdecl fcn_005cf720();
-int __cdecl fcn_0064d228();
+int __cdecl _ftol();
 
 /* ADDRESS: GOLDTL 0x005c9f10 */
 int __cdecl fcn_005c9f10(int a0, int a1, int a2, int a3, int a4, unsigned short* a5)
@@ -125,7 +125,7 @@ label_5ca044:
 				v15[-4] = v5;
 				if (*(char*) &((unsigned short*) v15[-6])[1] != 7) {
 					fcn_0050f980(*v3, *(unsigned short*) v15[-6], 1);
-					v5 = fcn_0064d228();
+					v5 = _ftol();
 					fcn_00472380(v15[-4], 0, 100, v5);
 				} else {
 					fcn_00472380(v5, 0, 100, 0);

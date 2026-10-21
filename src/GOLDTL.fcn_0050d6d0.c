@@ -4,13 +4,13 @@
 extern unsigned char g_773d75;
 
 int __cdecl fcn_0050b7c0(int, int);
-int __cdecl fcn_0050dac0(int);
+int __cdecl gm_WalkEntityChain(int);
 int __cdecl fcn_0050d640(int, int, int, char*);
 int __cdecl fcn_0050f980(int, int, int);
 int __cdecl fcn_004fa5b0(int, unsigned short*, unsigned int*);
 void __cdecl fcn_004c5150(int, int, int, int);
-int __cdecl fcn_0042e410(int);
-int __cdecl fcn_0064d228(void);
+int __cdecl gm_RandomMod(int);
+int __cdecl _ftol(void);
 void __cdecl memset(void*, int, unsigned int);
 
 /* ADDRESS: GOLDTL 0x0050d6d0 */
@@ -43,9 +43,9 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 				v2 = *(char*) ((unsigned int) v6 * 0x21c + 0x7f4ca2);
 				if (v2 != 6 && v2 != 7 &&
 				    (float) v21 <
-				        (float) fcn_0050dac0(*a1) * *(float*) 0x6628f0) {
-					v21 = fcn_0064d228();
-					v8 = fcn_0064d228();
+				        (float) gm_WalkEntityChain(*a1) * *(float*) 0x6628f0) {
+					v21 = _ftol();
+					v8 = _ftol();
 					fcn_004c5150(*(int*) (a0 + 1), 0xffffffff,
 					             g_773d75, v8);
 				}
@@ -83,30 +83,30 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 		v3 = *(unsigned short*) (a0 + 0x27);
 		if (fcn_0050d640((int) v3, 0, 0xffff, v15) <= 8) {
 			memset(a3, 0, v5 * 12);
-			fcn_0050dac0(*a1);
+			gm_WalkEntityChain(*a1);
 			memset(v16, 0, 0x220);
 			v16[0] = 1;
 			if (!(fcn_004fa5b0(0xf, a1, v16) & 2)) {
 				fcn_004fa5b0(0xb, a1, v16);
 			}
-			fcn_0064d228();
+			_ftol();
 			v11 = 0;
 			if (a2) {
 				do {
-					fcn_0042e410(0x1e);
-					v17 = fcn_0064d228();
+					gm_RandomMod(0x1e);
+					v17 = _ftol();
 					if (v11 == 0 || v11 == 1) {
-						v17 = fcn_0064d228();
+						v17 = _ftol();
 					}
-					v6 = fcn_0042e410(6);
-					v18 = fcn_0064d228();
+					v6 = gm_RandomMod(6);
+					v18 = _ftol();
 					v2 = *(char*) ((unsigned int) *(unsigned short*) (a0 + 0x27) *
 					                   0x21c +
 					               0x7f4ca2);
 					if (v2 != 6 && v2 != 7 &&
 					    ((char) a1[1] == 6 || (char) a1[1] == 7)) {
 						fcn_0050f980(*a1, a0, 1);
-						v18 = fcn_0064d228();
+						v18 = _ftol();
 					}
 					v20 = v11 + 1;
 					v12 = &a3[v11 * 3];

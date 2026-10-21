@@ -5,9 +5,9 @@ extern double g_662908;
 
 int __cdecl fcn_004f4830(int idx, void* dst);
 char* __cdecl fcn_00508e40(int a1);
-int __cdecl fcn_005015e0(char** out, int a2, int a3, int a4);
+int __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int a4);
 float __cdecl fcn_004f4ed0(unsigned short* key);
-float __cdecl fcn_0042e450(void);
+float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_005c6270(char* a1, int a2);
 int __cdecl fcn_004c5820(void* a1);
 
@@ -40,7 +40,7 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 	}
 	h1 = fcn_00508e40(a3);
 	h2 = fcn_00508e40(a4);
-	fcn_005015e0(&hit, 0, 0, a5);
+	gm_ResolveEntityById(&hit, 0, 0, a5);
 	switch ((unsigned char) *(int*) (rec + 0x14)) {
 	case 1:
 		if (*(int*) (rec + 0x18) != id) {
@@ -81,11 +81,11 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 		goto fail;
 	}
 	f = fcn_004f4ed0((unsigned short*) h1);
-	if (fcn_0042e450() < f) {
+	if (gm_RandomFloat01() < f) {
 		goto fail;
 	}
 	if (fcn_005c6270(h1, 0x22a) != 0) {
-		if (fcn_0042e450() > g_662908) {
+		if (gm_RandomFloat01() > g_662908) {
 			goto fail;
 		}
 	}

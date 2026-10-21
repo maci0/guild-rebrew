@@ -15,14 +15,14 @@ int __cdecl fcn_00409020(char* obj)
 	int limit;
 	int stride;
 	int cell;
-	volatile int result;
+	int result;
 
 	result = 1;
 	task = *(char**) (obj + 0x128);
 	map = fcn_00402610(obj);
 	count = *(int*) (task + 0xf0);
 	if (count < 2) {
-		goto done;
+		return result;
 	}
 	start = *(int*) (task + 0xf8);
 	limit = count - 2;

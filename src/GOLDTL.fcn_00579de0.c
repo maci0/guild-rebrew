@@ -40,11 +40,11 @@ void __cdecl fcn_00529160(int a, int b, int id, int d);
 void* __cdecl fcn_00503fe0(int a, int b, int c);
 char* __cdecl fcn_004f1650(int a, int b, int c);
 int __cdecl fcn_00500d20(Pos14* a, Pos14* b);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 int __cdecl fcn_004f2d30(char* p, int a, int b, int c);
 char* __cdecl fcn_0050dc90(char* p);
 void __cdecl fcn_0051af00(char* buf, int a, int b, int c, char* p);
-void __cdecl fcn_00545e80(int a, int b, char* text, int c, int d, int e,
+void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e,
 	int f, int g, char* fmt);
 void __cdecl fcn_00546190(char* a0);
 
@@ -109,7 +109,7 @@ void __cdecl fcn_00579de0(char* a0)
 		if (v <= 0) {
 			p->status = -1;
 		}
-		if ((int) (*(unsigned char*) (q + 0xc)) + fcn_0064d228() >= 0xff) {
+		if ((int) (*(unsigned char*) (q + 0xc)) + _ftol() >= 0xff) {
 			p->status = -1;
 		}
 	}
@@ -119,7 +119,7 @@ void __cdecl fcn_00579de0(char* a0)
 	if (p->status >= 0) {
 		return;
 	}
-	v = fcn_0064d228();
+	v = _ftol();
 	if (q != 0 && v >= 1) {
 		fcn_004f2d30(rec, p->xb0, p->xb4, v);
 		if (!s) {
@@ -131,7 +131,7 @@ void __cdecl fcn_00579de0(char* a0)
 		row = (int) (*(unsigned short*) (a0 + 8)) * 0x21c;
 		if ((g_7f4ca0[row + 2] == 6 || g_7f4ca0[row + 2] == 7)
 			&& (!fig || !(*(unsigned char*) (fig + 0x1b4) & 1))) {
-			fcn_00545e80(*(int*) (g_7f4ca0 + row + 4), -1, text, 0, 0x5ec,
+			he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + row + 4), -1, text, 0, 0x5ec,
 				*(int*) (rec + 1), -1, 0, (char*) 0x6a7f70);
 		}
 	}

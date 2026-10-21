@@ -75,10 +75,9 @@ void __cdecl fcn_0040ba30(Fade* f)
 		f->start = (float) (g_6b5c24 - 1);
 		*(unsigned short*) (e + 0x8c) = (*(unsigned short*) (e + 0x8c) & 0xbfff) | 0x40;
 	}
-	alpha = (g_6b5c24 - f->start) * 0.02f;
-	if (f->fade_in == 0) {
-		alpha = 1.0f - alpha;
-	}
+	alpha = f->fade_in == 0
+	    ? 1.0f - (g_6b5c24 - f->start) * 0.02f
+	    : (g_6b5c24 - f->start) * 0.02f;
 	if (!(alpha > 0.0f)) {
 		alpha = 0.0f;
 	} else if (!(alpha < 1.0f)) {
@@ -105,7 +104,7 @@ void __cdecl fcn_0040ba30(Fade* f)
 		}
 	}
 	if (alpha == 0.0f || alpha == 255.0f) {
-		e[0x8c] &= 0xbf;
+		*(unsigned short*) (e + 0x8c) &= 0xffbf;
 		col.c &= 0xfe;
 		col.a = 0xff;
 		fcn_0043a3f0(*(char**) (e + 0x34), *(int*) (*(char**) (e + 0x34) + 0x1cc), col);

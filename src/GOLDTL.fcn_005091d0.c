@@ -13,7 +13,7 @@ struct StatRow {
 };
 
 int __cdecl fcn_004e8b40(unsigned char, int*);
-int __cdecl fcn_0050dac0(unsigned short);
+int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl fcn_0050f980(int, int, int);
 int __cdecl sprintf(char*, const char*, ...);
 
@@ -84,9 +84,9 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 			}
 		}
 		r->v14 = fsum * 0.01f / (float) cnt;
-		v = fcn_0050dac0(r->id);
+		v = gm_WalkEntityChain(r->id);
 		if (v > 1) {
-			v = fcn_0050dac0(r->id);
+			v = gm_WalkEntityChain(r->id);
 		} else {
 			v = 1;
 		}

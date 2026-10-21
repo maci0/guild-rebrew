@@ -10,7 +10,8 @@ typedef struct {
 } fcn_004a8650_game;
 /* SIZE 0xb0 */
 
-extern char* g_f83654;
+/* Zero-initialized module pointer in the GOLD .data tail (VA 0x00f83654). */
+char* g_f83654;
 
 int __cdecl fcn_004c51a0(int, int, char, int);
 

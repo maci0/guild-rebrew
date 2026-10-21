@@ -21,7 +21,7 @@ unsigned int __cdecl fcn_004e6cb0(unsigned int n);
 void __cdecl fcn_004cfc40(int a1, int a2, int a3);
 int __cdecl fcn_004d4790(char* e);
 int __cdecl fcn_00406340(char* e, const char* name, int param);
-void __cdecl fcn_00442be0(int p);
+void __cdecl d3_DestroyObject(int p);
 int __cdecl fcn_0043c2c0(int m);
 int __cdecl fcn_0043ef20(int m);
 
@@ -98,7 +98,7 @@ int __cdecl fcn_004cf6b0(void)
 						}
 					}
 				}
-				fcn_00442be0(p[-3]);
+				d3_DestroyObject(p[-3]);
 				p[-3] = 0;
 			}
 		}

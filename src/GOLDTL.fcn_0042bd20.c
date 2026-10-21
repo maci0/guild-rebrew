@@ -11,7 +11,7 @@ char* __cdecl fcn_0064d470(char*, char*);
 char* __cdecl fcn_0064e790(char*, int);
 char* __cdecl fcn_0064e2f9(char*, char*);
 int __cdecl fcn_0064e1fd(char*);
-char* __cdecl fcn_0064f10b(char*, int, char*);
+char* __cdecl fgets(char*, int, char*);
 void __cdecl fcn_0064d710(void);
 void __cdecl m_FreeTracked(void*);
 int __cdecl fcn_0042d880(char*);
@@ -49,7 +49,7 @@ int __cdecl fcn_0042bd20(char* path)
 	}
 	do {
 		memset(line, 0, 0xc8);
-		fcn_0064f10b(line, 0xc8, f);
+		fgets(line, 0xc8, f);
 		if (!fcn_0064d470(line, "<")) {
 			if (fcn_0064d470(line, "#include")) {
 				p = fcn_0064e790(line, '"');

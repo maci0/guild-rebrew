@@ -5,7 +5,7 @@ extern float g_662a3c;
 extern float g_6628a0;
 
 float __cdecl fcn_00507e70(char* a, char* b, int c);
-float __cdecl fcn_0042e450(void);
+float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004fa5b0(int a1, char* a2, int a3);
 
 /* ADDRESS: GOLDTL 0x00494740 */
@@ -16,7 +16,7 @@ int __cdecl fcn_00494740(int a0, int entity, int* level_out, int unused)
 	int level;
 
 	v = fcn_00507e70((char*) a0, (char*) entity, 3);
-	w = fcn_0042e450() + v;
+	w = gm_RandomFloat01() + v;
 	{
 		float f = 0.0f;
 		int buf[0x88];

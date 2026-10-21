@@ -17,10 +17,10 @@ char* __cdecl fcn_00503fe0(int, int, int);
 char* __cdecl fcn_00508e40(int);
 char* __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl fcn_00502850(void);
-char* __cdecl fcn_00504b30(char*);
+char* __cdecl gm_SetupEntityQuery(char*);
 char* __cdecl fcn_004e6a30(int);
 int __cdecl fcn_0050c710(char*, int, int);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004d5450(char*);
 int __cdecl fcn_004d5110(char*, char*, char*, char*);
 int __cdecl fcn_004c4450(int);
@@ -32,7 +32,7 @@ int __cdecl fcn_004c5980(void*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, char*, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 void __cdecl fcn_00529160(char*, char*, unsigned int, char*);
 void __cdecl fcn_00546190(char*);
 
@@ -191,7 +191,7 @@ label_54e6a1:
 			if (g_774800) {
 				f = 5.0f;
 			}
-			if (f * g_662cf8 + (float) (fcn_0042e410(0x4b) & 0xffff)
+			if (f * g_662cf8 + (float) (gm_RandomMod(0x4b) & 0xffff)
 			    <= (float) ((double) v * g_6640e8 + g_6629c8) * g_665e88) {
 				other = fcn_00503fe0(1, 1, *(int*) (e + 0xb0));
 				m = fcn_004d5450(other) + 0x1125;
@@ -200,7 +200,7 @@ label_54e6a1:
 				k = *(unsigned char*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c - 2);
 				if (k == 6 || k == 7) {
 					fcn_0051af00(text, 0x1c56, own);
-					fcn_00545e80(*(int*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c), -1, text, 0,
+					he_MessageBoxQuickjump(*(int*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c), -1, text, 0,
 					             0x5f0, *(int*) (own + 1), -1, 0, 0);
 				}
 				*(int*) (e + 0x70) = -1;
@@ -266,7 +266,7 @@ label_54e6a1:
 			k = *(unsigned char*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c - 2);
 			if (k == 6 || k == 7) {
 				fcn_0051af00(text, 0x1c54, own, m);
-				fcn_00545e80(*(int*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c), -1, text, 0,
+				he_MessageBoxQuickjump(*(int*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c), -1, text, 0,
 				             0x5f0, *(int*) (own + 1), -1, 0, 0);
 			}
 			k = *(unsigned char*) (g_7f4ca4 + *(unsigned short*) (e + 8) * 0x21c - 2);
@@ -318,7 +318,7 @@ label_54e6a1:
 				break;
 			}
 			own = fcn_00503fe0(1, 1, *(int*) (e + 0xb0));
-			slot = fcn_00504b30(own);
+			slot = gm_SetupEntityQuery(own);
 			p = e + 0x8c;
 			i = 8;
 			do {

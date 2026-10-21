@@ -1,9 +1,9 @@
 int __cdecl fcn_004c4dc0(char*, int);
-int __cdecl fcn_005015e0(int*, char**, int*, int);
+int __cdecl gm_ResolveEntityById(int*, char**, int*, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_0050e000(char*, int, int);
 char* __cdecl fcn_0050d490(char*);
-int __cdecl fcn_0050e1f0(int, int, int);
+int __cdecl gm_CheckInventoryCapacity(int, int, int);
 int __cdecl fcn_0050b7c0(int, char);
 
 /* ADDRESS: GOLDTL 0x004c6f70 */
@@ -21,7 +21,7 @@ int __cdecl fcn_004c6f70(char* a0)
 	if (*(int*) (a0 + 0x14) != -1) {
 		id = fcn_004c4dc0(a0, *(int*) (a0 + 0x14));
 		*(int*) (a0 + 0x14) = id;
-		if (fcn_005015e0(&v13, &a0, &v12, id) == 0) {
+		if (gm_ResolveEntityById(&v13, &a0, &v12, id) == 0) {
 			return 1;
 		}
 		if (v13 != 0) {
@@ -42,7 +42,7 @@ int __cdecl fcn_004c6f70(char* a0)
 	if (*(int*) (a0 + 0x10) != -1) {
 		id = fcn_004c4dc0(a0, *(int*) (a0 + 0x10));
 		*(int*) (a0 + 0x10) = id;
-		if (fcn_005015e0(&v14, &a0, &v12, id) == 0) {
+		if (gm_ResolveEntityById(&v14, &a0, &v12, id) == 0) {
 			return 1;
 		}
 		if (v14 != 0) {
@@ -60,7 +60,7 @@ int __cdecl fcn_004c6f70(char* a0)
 			}
 			v12 = (int) fcn_0050d490(a0);
 		} else {
-			if (fcn_0050e1f0(v12, *(unsigned short*) (a0 + 0x18), *(int*) (a0 + 0x1f)) <
+			if (gm_CheckInventoryCapacity(v12, *(unsigned short*) (a0 + 0x18), *(int*) (a0 + 0x1f)) <
 			    *(int*) (a0 + 0x1f)) {
 				return 1;
 			}

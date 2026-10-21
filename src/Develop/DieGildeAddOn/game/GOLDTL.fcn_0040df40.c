@@ -13,7 +13,10 @@ int __cdecl CharacterSitting(char** object)
             (char*) 0x6762d4);
         return 0;
     }
-    return (p[0x8c] >> 4) & 1;
+    if ((p[0x8c] >> 4) & 1) {
+        return 1;
+    }
+    return 0;
 }
 
 

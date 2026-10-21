@@ -52,11 +52,11 @@ void __cdecl fcn_0055dab0(char* e)
 	char* c;
 	char* r;
 	Level* lv;
-	unsigned char k;
 	int saved;
 	int code;
 	char text[0x104];
 	char msg[0x400];
+	unsigned char k;
 
 	s44 = gm_StartFilteredEntitySearch(1, 0, 0x44);
 	gm_StartFilteredEntitySearch(1, 0, 0x45);
@@ -83,7 +83,7 @@ void __cdecl fcn_0055dab0(char* e)
 			fcn_004432d0(saved, 1);
 			return;
 		}
-		*(int*) (e + 0xec) = fcn_004c5290(*(int*) (c + 1), *(int*) (b + 1), *(int*) (r + 2));
+		*(int*) (e + 0xec) = fcn_004c5290(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
 		k = *(unsigned char*) c;
 		if (k == 0x47) {
 			fcn_0051af00(msg, 0x1c3b, 1, 0x1c39, g_868060 + *(int*) (c + 0x65) * 0x2f4);

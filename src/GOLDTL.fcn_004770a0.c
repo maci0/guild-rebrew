@@ -1,14 +1,15 @@
 #include <string.h>
 
-extern char g_14ce86c;
+extern int g_14ce86c;
 extern char g_67d91c;
 extern char g_67d91d;
 extern void* g_6b5de0;
 
-void* __cdecl fcn_0041db70(int size, char* tag);
-void __cdecl fcn_0041ddd0(void* p);
+void* __cdecl m_alloc(int size, char* tag);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_004760c0(void* o, void* desc);
-int __cdecl fcn_00610011(void* device, int width, int height, int kind, int arg, int format);
+int __stdcall fcn_00610011(void* device, int width, int height, int kind, int state,
+    int format, int bypass, int** target);
 
 /* Texture wrapper: copies the source descriptor, derives the surface format,
  * rounds the size up to the power of two the device needs and allocates.
@@ -19,6 +20,8 @@ int __cdecl fcn_004770a0(int* src, int flags)
 	typedef struct TexDesc {
 		int format;
 		char pad[0xc];
+		int pitch;
+		char pad2[4];
 		int width;
 		int height;
 	} TexDesc;
@@ -28,16 +31,14 @@ int __cdecl fcn_004770a0(int* src, int flags)
 	int width;
 	int height;
 	int format;
-	int state;
-	int rw;
 	int rh;
+	int rw;
 	int n;
 	int* cb;
 	int* target;
-	int ext;
 	TexDesc desc;
 
-	tex = (int*) fcn_0041db70(0x5c, (char*) 0x67d944);
+	tex = (int*) m_alloc(0x5c, (char*) 0x67d944);
 	if (tex == 0) {
 		return 0;
 	}
@@ -49,8 +50,8 @@ int __cdecl fcn_004770a0(int* src, int flags)
 	}
 	format = tex[10];
 	if (flags & 1) {
-		*(char*) &tex[5] = 0;
 		format = g_14ce86c;
+		*(char*) &tex[5] = 0;
 	} else {
 		if (*(char*) &tex[5] == 0x10) {
 			format = 0x17;
@@ -105,7 +106,7 @@ int __cdecl fcn_004770a0(int* src, int flags)
 	if (tex[0x10] != 0) {
 		cb = (int*) tex[9];
 		if (cb != 0) {
-			(*(int (__cdecl**) (void*, TexDesc*)) (*cb + 0x20))(cb, &desc);
+			(*(int (__stdcall**) (void*, TexDesc*)) (*cb + 0x20))(cb, &desc);
 			tex[2] = desc.height;
 			tex[1] = desc.width;
 			if (desc.format == 0x16) {
@@ -120,32 +121,30 @@ int __cdecl fcn_004770a0(int* src, int flags)
 			goto done;
 		}
 	}
-	state = 0;
+	target = 0;
 	if (flags & 0x10) {
-		state = 1;
-		target = 0;
+		fcn_00610011(g_6b5de0, rw, rh, 1, 1, format, 0, &target);
 	} else if (flags & 0x20) {
 		device = g_6b5de0;
-		(*(void (__cdecl**) (void*, int, int, int, int*)) (*(int*) device + 0x6c))(device, rw, rh,
+		(*(void (__stdcall**) (void*, int, int, int, int*)) (*(int*) device + 0x6c))(device, rw, rh,
 			format, &tex[9]);
 		goto created;
 	} else {
-		state = 0;
-		target = (int*) 1;
+		fcn_00610011(g_6b5de0, rw, rh, 1, 0, format, 1, &target);
 	}
-	ext = state;
-	fcn_00610011(g_6b5de0, rw, rh, 1, (int) &target, ext);
 created:
 	if (target != 0) {
 		tex[8] = (int) target;
-		if ((*(int (__cdecl**) (void*, int, int*)) (*target + 0x3c))(target, 0, &tex[9]) != 0) {
-			fcn_0041ddd0(tex);
+		if ((*(int (__stdcall**) (void*, int, int*)) (*target + 0x3c))(target, 0, &tex[9]) != 0) {
+			m_FreeTracked(tex);
 			return 0;
 		}
 	}
-	ext = format;
-	fcn_004760c0(tex, &ext);
-	tex[0x13] = ext + 0x5c;
+	tex[10] = format;
+	tex[0x15] = rw;
+	tex[0x16] = rh;
+	fcn_004760c0(tex, &desc);
+	tex[0x13] = desc.pitch + 0x5c;
 done:
 	tex[4] = 0;
 	tex[0xb] = 0;

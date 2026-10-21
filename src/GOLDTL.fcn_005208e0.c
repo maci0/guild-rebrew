@@ -5,6 +5,8 @@ int __cdecl fcn_005208e0(char* fp)
 {
 	char* p;
 	char* q;
+	char* e;
+	char* s;
 	int i;
 
 	if (vfs_fwrite((void*) 0x99f5e0, 4, 1, fp) <= 0) {
@@ -102,8 +104,9 @@ int __cdecl fcn_005208e0(char* fp)
 		if (vfs_fwrite(p + 0xc, 4, 1, fp) <= 0) {
 			return 0;
 		}
-		p += 0x14;
-	} while (p < (char*) 0x99ed64);
+		e = p + 0x14;
+		p = e;
+	} while ((int) e < 0x99ed64);
 	if (vfs_fwrite((void*) 0x99f6a0, 0x44, 1, fp) <= 0) {
 		return 0;
 	}
@@ -137,9 +140,11 @@ int __cdecl fcn_005208e0(char* fp)
 				return 0;
 			}
 			i++;
-			q += 0x18;
+			s = q + 0x18;
+			q = s;
 		} while (i < 8);
-		p += 0xc0;
-	} while (p < (char*) 0x99f582);
+		e = p + 0xc0;
+		p = e;
+	} while ((int) e < 0x99f582);
 	return 1;
 }

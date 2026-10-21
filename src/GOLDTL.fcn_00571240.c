@@ -17,17 +17,17 @@ typedef struct S571240Counts {
 	int b;
 } S571240Counts;
 
-void __cdecl fcn_005015e0(void*, int, int, int);
+void __cdecl gm_ResolveEntityById(void*, int, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_0050c710(int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 double __cdecl fcn_0050fdb0(int, int, int);
 int __cdecl fcn_0050c830(char*, char*, int);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_0051af00(char*, int, int, int);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00500cb0(char*, char*);
 void __cdecl fcn_00500bb0(char*, int, int, int);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
@@ -51,7 +51,7 @@ void __cdecl fcn_00571240(char* self)
 	float total;
 	float prev;
 
-	fcn_005015e0(&node, 0, 0, *(int*) (self + 0xb8));
+	gm_ResolveEntityById(&node, 0, 0, *(int*) (self + 0xb8));
 	if (node == 0) {
 		entry = (char*) 0x7f4ca0;
 		while (entry < (char*) 0x85a0a0) {
@@ -91,7 +91,7 @@ void __cdecl fcn_00571240(char* self)
 			*(int*) (self + 0x70) = 2;
 			return;
 		}
-		fcn_005015e0(&other, 0, 0, *(int*) (self + 0xb8));
+		gm_ResolveEntityById(&other, 0, 0, *(int*) (self + 0xb8));
 		n = fcn_0050c710((int) other, 1, 1);
 		t = (float) n * *(double*) 0x6640e8 + *(double*) 0x6629c8;
 		if (*(unsigned char*) (self + 0xc8) >= 0x3c) {
@@ -120,17 +120,17 @@ void __cdecl fcn_00571240(char* self)
 			n = fcn_0050c830(self + 0x60, self + 0x52, 0);
 			limit = n * (*(int*) (self + 0x18) + *(int*) (self + 0x14) * 2);
 			t = total - t * (float) limit;
-			r = fcn_0064d228();
+			r = _ftol();
 			*(int*) (self + 0xb0) = r;
 			if (r > 0) {
 				break;
 			}
-			fcn_005015e0(&other, 0, 0, *(int*) (self + 0xbc));
+			gm_ResolveEntityById(&other, 0, 0, *(int*) (self + 0xbc));
 			node = fcn_00502cd0(*(int*) (other + 0x14), 1, 0, *(unsigned short*) (self + 0xac));
-			fcn_005015e0(&other, 0, 0, *(int*) (self + 0xc0));
+			gm_ResolveEntityById(&other, 0, 0, *(int*) (self + 0xc0));
 			if (node == 0) {
 				fcn_0051af00(buf, 0x1bb7, (*(unsigned short*) (self + 0xac)) * 2 + 0x9a8, (int) other);
-				fcn_00545e80(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, buf, 0, 0x5f1, *(int*) (other + 1), -1, 0, (char*) 0x6a7a78);
+				he_MessageBoxQuickjump(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, buf, 0, 0x5f1, *(int*) (other + 1), -1, 0, (char*) 0x6a7a78);
 				entry = (char*) 0x7f4ca0;
 				while (entry < (char*) 0x85a0a0) {
 					if (*(int*) (entry + 0x17c) == (int) self) {
@@ -172,7 +172,7 @@ void __cdecl fcn_00571240(char* self)
 			*(int*) (self + 0x70) = 1;
 			return;
 		}
-		fcn_005015e0(&node, 0, 0, *(int*) (self + 0xb8));
+		gm_ResolveEntityById(&node, 0, 0, *(int*) (self + 0xb8));
 		if (node == 0) {
 			*(int*) (self + 0x70) = -1;
 			return;

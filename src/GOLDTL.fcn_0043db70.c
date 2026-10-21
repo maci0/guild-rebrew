@@ -14,7 +14,7 @@
 
 #pragma optimize("y", off)
 
-int __cdecl fcn_0041db70(int, char*);
+int __cdecl m_alloc(int, char*);
 
 /* ADDRESS: GOLDTL 0x0043db70 */
 void __cdecl fcn_0043db70(char* e)
@@ -45,6 +45,6 @@ void __cdecl fcn_0043db70(char* e)
 	if (*(unsigned char*) (e + 0x8034) >= 0xff) {
 		return;
 	}
-	n = fcn_0041db70(*(int*) e * *(int*) e, (char*) 0x67a778);
+	n = m_alloc(*(int*) e * *(int*) e, (char*) 0x67a778);
 	i = *(int*) e - 4;
 }

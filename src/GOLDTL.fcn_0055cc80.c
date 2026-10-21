@@ -23,10 +23,10 @@ typedef struct S55cc80Packet {
 int __cdecl fcn_00500cb0(char*, char*);
 char* __cdecl fcn_00503fe0(int, int, int);
 void __cdecl fcn_005101e0(char*, int, int, int);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 int __cdecl fcn_0050d2a0(char*);
 void __cdecl fcn_0051af00(char*, int, char*);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_004c6090(char*, int, int, int);
 int __cdecl fcn_004c4450(int);
@@ -35,7 +35,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_004c51a0(int, int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_004c5c00(int, int, int, char*);
-int __cdecl fcn_0042e410(int, int);
+int __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(char*, int, int);
 
 /* ADDRESS: GOLDTL 0x0055cc80 */
@@ -73,11 +73,11 @@ void __cdecl fcn_0055cc80(char* self)
 		}
 		slot = packet->slot;
 		fcn_005101e0((char*) 0x7f4ca0 + slot * 0x21c, packet->idx0, *(int*) &packet->handle, -1);
-		t = fcn_0064d228();
+		t = _ftol();
 		src = fcn_0050d2a0((char*) 0x7f4ca0 + slot * 0x21c);
 		if (t > src) {
 			fcn_0051af00(buf, 0x1a41, (char*) packet);
-			fcn_00545e80(*(int*) (0x7f4ca4 + slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, *(int*) &packet->handle, *(int*) (self + 0xb4), 0, 0);
+			he_MessageBoxQuickjump(*(int*) (0x7f4ca4 + slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, *(int*) &packet->handle, *(int*) (self + 0xb4), 0, 0);
 			fcn_00546190(self);
 			return;
 		}
@@ -128,11 +128,11 @@ void __cdecl fcn_0055cc80(char* self)
 				goto move;
 			}
 			fcn_005101e0((char*) 0x7f4ca0 + packet->slot * 0x21c, packet->idx0, *(int*) &packet->handle, -1);
-			t = fcn_0064d228();
+			t = _ftol();
 			*(int*) (self + 0xb0) = *(int*) (self + 0xb0) - 1;
 			if (*(unsigned char*) (0x7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) (0x7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
 				fcn_0051af00(buf, 0x1bb1, (char*) packet);
-				fcn_00545e80(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(int*) &packet->handle, buf, 0, 0x5f2, *(int*) &packet->handle, *(int*) (self + 0xb4), 0, 0x6a6278);
+				he_MessageBoxQuickjump(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(int*) &packet->handle, buf, 0, 0x5f2, *(int*) &packet->handle, *(int*) (self + 0xb4), 0, 0x6a6278);
 			}
 			fcn_004c51a0(*(int*) (0x7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(int*) (answer + 2), t, *(unsigned char*) 0x773d75);
 		}
@@ -156,7 +156,7 @@ void __cdecl fcn_0055cc80(char* self)
 			fcn_00546190(self);
 			return;
 		}
-		t = fcn_0042e410(0, 10) & 0xffff;
+		t = gm_RandomMod(10) & 0xffff;
 		fcn_00500bb0(self + 0x52, 0, t + 10);
 		*(int*) (self + 0x70) = 1;
 		return;

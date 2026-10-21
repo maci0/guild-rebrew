@@ -8,7 +8,7 @@ extern char g_6b5c60[];
 int __cdecl fcn_005171a0(char*, int*, int);
 int __cdecl fcn_00501490(char*);
 int __cdecl fcn_00504eb0(const char*);
-int __cdecl fcn_0064efb1(int, int);
+int __cdecl _isctype(int, int);
 
 /* ADDRESS: GOLDTL 0x00517250 */
 int __cdecl fcn_00517250(char* name, int idx)
@@ -99,7 +99,7 @@ int __cdecl fcn_00517250(char* name, int idx)
 			if (k >= 0xa) {
 				break;
 			}
-			while (*(int*) 0x6b25b0 > 1 ? fcn_0064efb1(*tok, 8)
+			while (*(int*) 0x6b25b0 > 1 ? _isctype(*tok, 8)
 			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
 				tok++;
 			}
@@ -138,7 +138,7 @@ int __cdecl fcn_00517250(char* name, int idx)
 			if (k >= 0x10) {
 				break;
 			}
-			while (*(int*) 0x6b25b0 > 1 ? fcn_0064efb1(*tok, 8)
+			while (*(int*) 0x6b25b0 > 1 ? _isctype(*tok, 8)
 			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
 				tok++;
 			}
@@ -159,7 +159,7 @@ int __cdecl fcn_00517250(char* name, int idx)
 			if (k >= 0x10) {
 				break;
 			}
-			while (*(int*) 0x6b25b0 > 1 ? fcn_0064efb1(*tok, 8)
+			while (*(int*) 0x6b25b0 > 1 ? _isctype(*tok, 8)
 			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
 				tok++;
 			}

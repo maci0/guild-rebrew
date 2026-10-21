@@ -44,7 +44,7 @@ int __cdecl fcn_00426ac0(char* src, char* dst, int* lines)
 		}
 	}
 	for (i = 0; i < strlen(dst); i++) {
-		if (dst[i] == ' ' && dst[i + 1] == ' ') {
+		if (dst[i] == ' ') {
 			run = 1;
 			while (dst[i + run] == ' ') {
 				run++;
@@ -55,10 +55,10 @@ int __cdecl fcn_00426ac0(char* src, char* dst, int* lines)
 					k = lines[j];
 					if (k >= i) {
 						k = k - run + 1;
-						if (k < i) {
-							k = i;
-						}
 						lines[j] = k;
+						if (lines[j] < i) {
+							lines[j] = i;
+						}
 						if (lines[j] < 0) {
 							lines[j] = 0;
 						}

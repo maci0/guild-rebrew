@@ -10,16 +10,16 @@ char* __cdecl fcn_00508e40(int);
 char* __cdecl fcn_00503fe0(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
-int __cdecl fcn_0042e410(int, ...);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_00500bb0(char*, int, int, int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-void __cdecl fcn_004c5ed0(int, char*);
+void __cdecl fcn_004c5ed0(int, char*, int);
 void __cdecl fcn_00529160(int, int, int, char*);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl fcn_00500d20(char*, char*);
 int __cdecl sprintf(char*, const char*, ...);
@@ -41,7 +41,6 @@ void __cdecl fcn_0054da10(char* a)
 	int damage;
 	int base;
 	int kind;
-	int pick;
 	int dmg;
 
 	if (*(int*) (a + 0x70) == -1) {
@@ -109,9 +108,9 @@ void __cdecl fcn_0054da10(char* a)
 							fcn_004c5c80(*(int*) p);
 							fcn_004c5da0(*(int*) p, *(int*) (ent + 1),
 							    -1, 0, 1, (char*) 0x6a5ad0);
-							kind = fcn_0042e410(2) & 0xffff;
-							pick = fcn_0042e410(3, kind + 1) & 0xffff;
-							fcn_004c5ed0(*(int*) p, gest[pick]);
+							fcn_004c5ed0(*(int*) p,
+							    gest[gm_RandomMod(3) & 0xffff],
+							    (gm_RandomMod(2) & 0xffff) + 1);
 						} else {
 							*(int*) p = -1;
 						}
@@ -223,9 +222,9 @@ void __cdecl fcn_0054da10(char* a)
 			if (e != 0 && *(int*) (e + 0x184) != 0) {
 				base = (int) ((float) *(unsigned char*) (e + 0x82) * g_664168
 				    + 1.0f);
-				kind = (fcn_0042e410(4) & 0xffff) + 3;
+				kind = (gm_RandomMod(4) & 0xffff) + 3;
 				while (kind != 0) {
-					damage += (fcn_0042e410((base + 1) * base)
+					damage += (gm_RandomMod((base + 1) * base)
 					    & 0xffff) + base * 2;
 					kind--;
 				}
@@ -247,7 +246,7 @@ void __cdecl fcn_0054da10(char* a)
 	if (hits != 0) {
 		dmg = fcn_0050b750(damage, g_773d75);
 		fcn_0051af00(buf, 0x1a6a, dmg);
-		fcn_00545e80(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (a + 8) * 0x21c),
+		he_MessageBoxQuickjump(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (a + 8) * 0x21c),
 		    -1, buf, 0, 0x5ec, *(int*) (ent + 1), -1, 0, 0);
 		fcn_004c5150(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (a + 8) * 0x21c),
 		    -1, g_773d75, dmg);

@@ -7,8 +7,8 @@ extern char* g_7746cc;
 extern char* g_item_def_table;
 extern char* g_entity_type_table;
 extern char g_7f4ca4[];
-extern int g_6a2520;
-extern int g_6b7fac;
+extern unsigned int g_6a2520;
+extern unsigned int g_6b7fac;
 extern int g_67a370;
 extern float g_696540[];
 extern float g_696550[];
@@ -59,7 +59,7 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 		itemdef = g_item_def_table + *(unsigned short*) g_7746cc * 0x41;
 	}
 	type_row = g_entity_type_table + (unsigned char) *a0 * 0x24d;
-	if (g_6a2520 + 500 < g_6b7fac) {
+	if (g_6b7fac > g_6a2520 + 500) {
 		if (g_67a370 != 0) {
 			info = *(char**) (g_67a370 + 0x3c8);
 			if (info != 0 && *(int*) (info + 0x318) != 0) {

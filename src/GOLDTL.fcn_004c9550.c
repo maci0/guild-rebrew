@@ -5,9 +5,9 @@
 #pragma pack(2)
 typedef struct {
 	int day;
-	unsigned short hour;
 	int minute;
 	int second;
+	unsigned short hour;
 } Stamp;
 #pragma pack()
 
@@ -31,12 +31,8 @@ void __cdecl fcn_005e2510(void);
 /* ADDRESS: GOLDTL 0x004c9550 */
 int __cdecl fcn_004c9550(char* pkt, char* out)
 {
-	char buf[0x99];
 	int status;
-	int t0;
-	int t1;
-	int t2;
-	short t3;
+	char buf[0x99];
 	unsigned int cmd;
 	int v;
 	int i;
@@ -44,19 +40,23 @@ int __cdecl fcn_004c9550(char* pkt, char* out)
 	unsigned short* r;
 	unsigned char* e;
 
-	status = 1;
 	memcpy(buf, pkt, sizeof buf);
 	cmd = *(unsigned int*) (buf + 0x10);
+	status = 1;
 	switch (cmd & 0xff) {
 	case 0:
-		t0 = 0;
-		t1 = 0;
-		t2 = 0;
-		t3 = 0;
-		t0 = *(int*) (buf + 0x11);
+	{
+		Stamp t;
+
+		t.day = 0;
+		t.minute = 0;
+		t.second = 0;
+		t.hour = 0;
+		t.day = *(int*) (buf + 0x11);
 		srv_SeedRandom(*(int*) (buf + 0x15));
-		fcn_0052a3a0(&t0, 1);
+		fcn_0052a3a0(&t, 1);
 		break;
+	}
 	case 2:
 		*(int*) 0xfb5744 = 1;
 		if (*(int*) (buf + 0x11) != 0)
@@ -91,11 +91,11 @@ int __cdecl fcn_004c9550(char* pkt, char* out)
 		srv_SeedRandom(*(int*) (buf + 0x11));
 		*(int*) 0x1007cd0 = 0;
 		break;
-	case 6:
-		*(char*) 0x6a375c = (char) (cmd >> 8);
-		break;
 	case 7:
 		*(int*) 0x14cbcb4 = *(int*) (buf + 0x11);
+		break;
+	case 6:
+		*(char*) 0x6a375c = (char) (cmd >> 8);
 		break;
 	case 8:
 		if (*(int*) 0x6a3760 != -1)

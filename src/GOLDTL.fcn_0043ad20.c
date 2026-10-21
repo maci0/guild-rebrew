@@ -1,4 +1,4 @@
-int __cdecl fcn_0041e440();
+int __cdecl m_pool_clear();
 int __cdecl fcn_00437270();
 int __cdecl fcn_004372d0();
 int __cdecl fcn_00437840();
@@ -112,7 +112,7 @@ void __cdecl fcn_0043ad20(int a0, int a1)
 		if (*(int*) 0x6b8300) {
 			fcn_00440f70(*(int*) 0x6b8300, v4);
 		}
-		fcn_0041e440(0x6b8064);
+		m_pool_clear(0x6b8064);
 		*(int*) 0x6b8068 = 0;
 		fcn_00452bc0();
 		fcn_00437270();

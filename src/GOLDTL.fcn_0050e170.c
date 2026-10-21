@@ -24,10 +24,11 @@ int __cdecl fcn_0050e170(ENT_50e170* a0, int a1, int a2)
     p = fcn_00502cd0(a0->id, 1, 0, a1);
     if (p != 0) {
         n = *(int*) ((char*) p + 0xe);
-        if (total - n > a2) {
+        n = total - n;
+        if (n > a2) {
             return a2;
         }
-        return total - n;
+        return n;
     }
     i = 0;
     if (fcn_00502cd0(a0->id, 1, 5) != 0) {

@@ -81,13 +81,15 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 						if (rec[0] == 2 && !(q[0x5a] & 0x41)) {
 							t = rec[0x247];
 							if (t < 2 || t == 3) {
+								int bid;
+
 								cmd.kind = 5;
-								id = *q;
+								bid = *q;
 								j = 0;
-								if (id != 7) {
+								if (bid != 7) {
 									do {
 										j += 1;
-									} while (chain[j] != id);
+									} while (chain[j] != bid);
 								}
 								cmd.f1 = chain[j - 1];
 								cmd.f2 = 1;

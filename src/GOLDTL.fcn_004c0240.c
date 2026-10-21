@@ -1,90 +1,93 @@
-extern char* g_868050;
+typedef struct Slots {
+	int v[0x2d];
+	char* obj;
+} Slots;
+// SIZE 0xb8
+
+extern unsigned char* g_868050;
 extern unsigned char g_773d75;
 extern float g_664174;
 
-char* __cdecl fcn_004be320(char*, int);
+int* __cdecl fcn_004be320(int, int);
 char* __cdecl fcn_00504e70(int);
-int __cdecl fcn_0050cce0(char*, unsigned short*, int);
+int __cdecl fcn_0050cce0(char*, Slots*, int);
 char* __cdecl fcn_0050d490(char*);
-int __cdecl fcn_0050de80(char*, void*);
+int __cdecl fcn_0050de80(char*, Slots*);
 char* __cdecl fcn_00503d10(int);
-void* __cdecl fcn_00502cd0(int, int, int, int, ...);
+char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_0050df70(char*, char*);
 int __cdecl fcn_0050e000(char*, int, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_0064d228(void);
-int __cdecl fcn_0050d320(char*, char);
-int __cdecl fcn_004c51f0(int, int, short, int, char, int);
+int __cdecl fcn_0050d320(char*, int);
+int __cdecl fcn_004c51f0(int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004c0240 */
 void __cdecl fcn_004c0240(char* a0, int a1)
 {
 	char* rec;
-	char* pkt;
-	char* q;
+	char* t;
 	char* v4;
-	char* v5;
+	char* pkt;
+	char* src;
 	char* v6;
 	int n;
-	int cnt;
-	int v7;
 	int c;
-	char buf[180];
-	char stats[180];
+	int cnt;
+	int val;
+	Slots buf;
+	Slots stats;
 
 	if (*(int*) (a0 + 0x29) == 0) {
 		return;
 	}
-	rec = fcn_004be320(*(char**) (a0 + 0x29), *(int*) (a0 + 0x2d));
+	rec = (char*) fcn_004be320(*(int*) (a0 + 0x29), *(int*) (a0 + 0x2d));
 	pkt = fcn_00504e70(*(int*) (rec + 4));
 	if (pkt == 0) {
 		return;
 	}
-	q = g_868050 + (*(unsigned char*) pkt) * 0x24d;
-	if ((*q != 0xa && *q != 0x1c) && fcn_0050cce0(pkt, (unsigned short*) buf, 0) == 0) {
+	t = (char*) g_868050 + (*(unsigned char*) pkt) * 0x24d;
+	if ((*t != 0xa && *t != 0x1c) && fcn_0050cce0(pkt, &buf, 0) == 0) {
 		return;
 	}
 	v4 = fcn_0050d490(a0);
-	if (fcn_0050de80(a0, stats) == 0) {
+	if (fcn_0050de80(a0, &stats) == 0) {
 		return;
 	}
 	rec += 0x20;
-	cnt = 3;
-	do {
+	for (cnt = 3; cnt != 0; cnt--) {
 		if (*(int*) rec != 0) {
-			if (*q == 0xa) {
-				v5 = fcn_00503d10(*(int*) rec);
-			} else if (*q == 0x1c) {
-				v5 = fcn_00502cd0(*(int*) (pkt + 0x5d), 2, 0, 0x1db, 6);
+			if (*t == 0xa) {
+				src = fcn_00503d10(*(int*) rec);
+			} else if (*t == 0x1c) {
+				src = fcn_00502cd0(*(int*) (pkt + 0x5d), 2, 0, 0x1db, 6);
 			} else {
-				/* Native reads an unwritten local slot on this path. */
-				v5 = 0;
+				src = buf.obj;
 			}
-			v6 = fcn_00502cd0(*(int*) (buf + 0x10), 1, 0, *(int*) rec);
+			v6 = fcn_00502cd0(*(int*) (stats.obj + 0x14), 1, 0, *(int*) rec);
 			if (v6 != 0) {
 				n = *(int*) (rec + 4);
-				if (!(n < fcn_0050df70(buf, v6))) {
-					n = fcn_0050df70(buf, v6);
+				if (!(n < fcn_0050df70(stats.obj, v6))) {
+					n = fcn_0050df70(stats.obj, v6);
 				}
-				c = fcn_0050e000(v5, *(int*) rec, n);
+				c = fcn_0050e000(src, *(int*) rec, n);
 				if (c > 0) {
-					v7 = 0;
+					val = 0;
 					if (*(unsigned short*) (pkt + 0x27) != *(unsigned short*) v4) {
-						if (*q == 0xa) {
-							fcn_0050bb50(*(unsigned short*) v6, g_773d75);
+						if (*t == 0xa) {
+							val = (int) (fcn_0050bb50(*(unsigned short*) v6, g_773d75) *
+								     g_664174);
 						} else {
-							fcn_0050bb50(*(unsigned short*) v6, g_773d75);
+							val = (int) (fcn_0050bb50(*(unsigned short*) v6, g_773d75) *
+								     *(float*) (pkt + 0x49));
 						}
-						v7 = fcn_0064d228();
 					}
-					if (v7 * c <= fcn_0050d320((char*) v4, (char) a1)) {
-						fcn_004c51f0(*(int*) (v5 + 2), *(int*) (buf + 2),
-							*(int*) rec, c, (char) a1, v7);
+					if (fcn_0050d320(v4, a1) >= val * c) {
+						fcn_004c51f0(*(int*) (src + 2), *(int*) (stats.obj + 2),
+							     *(int*) rec, c, a1, val);
 					}
 				}
 			}
 		}
 		rec += 8;
-		cnt--;
-	} while (cnt != 0);
+	}
 }

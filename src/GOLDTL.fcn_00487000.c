@@ -38,7 +38,10 @@ void __cdecl fcn_00487000(char* e)
 {
 	char m[0xf8];
 	char* ent;
-	char* p;
+	int p;
+	char* rec;
+	char* sp;
+	int q;
 	char* slot;
 	int n;
 	int tick;
@@ -59,20 +62,21 @@ void __cdecl fcn_00487000(char* e)
 		return;
 	}
 	ent = g_entity_type_table + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d;
-	for (p = (char*) 0x7f4e05; p < (char*) 0x85a205; p += 0x21c) {
-		if (*(short*) (p - 0x165) == -1) {
+	for (p = 0x7f4e05; p < 0x85a205; p += 0x21c) {
+		rec = (char*) (p - 0x165);
+		if (*(short*) rec == -1) {
 			continue;
 		}
-		if (*(char**) (p + 7) != *(char**) (e + 0x16c)) {
+		if (*(char**) (rec + 0x16c) != *(char**) (e + 0x16c)) {
 			continue;
 		}
-		if (*(unsigned char*) p == 0) {
+		if (*(char*) (rec + 0x165) == 0) {
 			continue;
 		}
-		if (*(unsigned char*) p != *(unsigned char*) (ent + 0x230)) {
+		if (*(char*) (rec + 0x165) != *(char*) (ent + 0x230)) {
 			continue;
 		}
-		if (*(int*) (p + 0xf) < 4) {
+		if (*(int*) (rec + 0x174) < 4) {
 			continue;
 		}
 		memset(m, 0, sizeof(m));
@@ -85,27 +89,27 @@ void __cdecl fcn_00487000(char* e)
 		*(int*) (m + 0x30) = g_7f4c08;
 		*(short*) (m + 0x34) = g_7f4c0c;
 		m[0x36] = 2;
-		*(int*) (m + 0x58) = *(int*) (p - 0x161);
+		*(int*) (m + 0x58) = *(int*) (rec + 4);
 		fcn_004c5530(m);
 	}
 	n = 0;
-	for (p = (char*) 0x7f4e0c; p < (char*) 0x85a20c; p += 0x21c) {
-		if (*(short*) (p - 0x16c) == -1) {
+	for (q = 0x7f4e0c; q < 0x85a20c; q += 0x21c) {
+		if (*(short*) (q - 0x16c) == -1) {
 			continue;
 		}
-		if (*(char**) p != *(char**) (e + 0x16c)) {
+		if (*(char**) q != *(char**) (e + 0x16c)) {
 			continue;
 		}
-		if (*(unsigned char*) (p - 7) == 0) {
+		if (*(unsigned char*) (q - 7) == 0) {
 			continue;
 		}
 		n++;
 	}
 	slot = fcn_005463a0(2, 0, 6, 3, *(int*) (*(char**) (e + 0x16c) + 1));
 	if (slot != 0) {
-		p = slot + 0xb0;
+		sp = slot + 0xb0;
 		for (i = 0; i < 0xc; i++) {
-			if (*(int*) (p + i * 4) != 0) {
+			if (*(int*) (sp + i * 4) != 0) {
 				n++;
 			}
 		}

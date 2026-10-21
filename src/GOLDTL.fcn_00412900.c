@@ -18,6 +18,7 @@ typedef struct {
 
 #include "Develop/Units/d3/d3_camera.h"
 
+extern char* g_6b8014;
 extern int g_6b5cbc;
 extern int g_6b5cc0;
 
@@ -35,33 +36,33 @@ int* __cdecl fcn_00412900(char* obj, float* pos, int id)
 	frames[0].unbekannt_000 = id;
 	frames[1].unbekannt_000 = id;
 	flags.unbekannt_000 = 2;
-	frames[1].position[0] = *(float*) 0x67750c - *(float*) (obj + 0x4c);
-	frames[1].position[1] = *(float*) 0x677510 - *(float*) (obj + 0x50);
-	frames[1].position[2] = *(float*) 0x677514 - *(float*) (obj + 0x54);
-	frames[1].drehung[0] = pos[0] - *(float*) (obj + 0x84);
-	frames[1].drehung[1] = pos[1] - *(float*) (obj + 0x88);
-	frames[1].drehung[2] = pos[2] - *(float*) (obj + 0x8c);
+	frames[1].position[0] = *(float*) 0x67750c - *(float*) (g_6b8014 + 0x4c);
+	frames[1].position[1] = *(float*) 0x677510 - *(float*) (g_6b8014 + 0x50);
+	frames[1].position[2] = *(float*) 0x677514 - *(float*) (g_6b8014 + 0x54);
+	frames[1].drehung[0] = pos[0] - *(float*) (g_6b8014 + 0x84);
+	frames[1].drehung[1] = pos[1] - *(float*) (g_6b8014 + 0x88);
+	frames[1].drehung[2] = pos[2] - *(float*) (g_6b8014 + 0x8c);
 	frames[2].unbekannt_000 = id;
-	frames[2].position[0] = *(float*) 0x67751c - *(float*) (obj + 0x4c);
-	frames[2].position[1] = *(float*) 0x677520 - *(float*) (obj + 0x50);
-	frames[2].position[2] = *(float*) 0x677524 - *(float*) (obj + 0x54);
-	frames[2].drehung[0] = pos[0] - *(float*) (obj + 0x84);
-	frames[2].drehung[1] = pos[1] - *(float*) (obj + 0x88);
-	frames[2].drehung[2] = pos[2] - *(float*) (obj + 0x8c);
+	frames[2].position[0] = *(float*) 0x67751c - *(float*) (g_6b8014 + 0x4c);
+	frames[2].position[1] = *(float*) 0x677520 - *(float*) (g_6b8014 + 0x50);
+	frames[2].position[2] = *(float*) 0x677524 - *(float*) (g_6b8014 + 0x54);
+	frames[2].drehung[0] = pos[0] - *(float*) (g_6b8014 + 0x84);
+	frames[2].drehung[1] = pos[1] - *(float*) (g_6b8014 + 0x88);
+	frames[2].drehung[2] = pos[2] - *(float*) (g_6b8014 + 0x8c);
 	frames[3].unbekannt_000 = id;
-	frames[3].position[0] = *(float*) 0x67752c - *(float*) (obj + 0x4c);
-	frames[3].position[1] = *(float*) 0x677530 - *(float*) (obj + 0x50);
-	frames[3].position[2] = *(float*) 0x677534 - *(float*) (obj + 0x54);
-	frames[3].drehung[0] = pos[0] - *(float*) (obj + 0x84);
-	frames[3].drehung[1] = pos[1] - *(float*) (obj + 0x88);
-	frames[3].drehung[2] = pos[2] - *(float*) (obj + 0x8c);
+	frames[3].position[0] = *(float*) 0x67752c - *(float*) (g_6b8014 + 0x4c);
+	frames[3].position[1] = *(float*) 0x677530 - *(float*) (g_6b8014 + 0x50);
+	frames[3].position[2] = *(float*) 0x677534 - *(float*) (g_6b8014 + 0x54);
+	frames[3].drehung[0] = pos[0] - *(float*) (g_6b8014 + 0x84);
+	frames[3].drehung[1] = pos[1] - *(float*) (g_6b8014 + 0x88);
+	frames[3].drehung[2] = pos[2] - *(float*) (g_6b8014 + 0x8c);
 	frames[4].unbekannt_000 = id;
-	frames[4].position[0] = *(float*) 0x67753c - *(float*) (obj + 0x4c);
-	frames[4].position[1] = *(float*) 0x677540 - *(float*) (obj + 0x50);
-	frames[4].position[2] = *(float*) 0x677544 - *(float*) (obj + 0x54);
-	frames[4].drehung[0] = pos[0] - *(float*) (obj + 0x84);
-	frames[4].drehung[1] = pos[1] - *(float*) (obj + 0x88);
-	frames[4].drehung[2] = pos[2] - *(float*) (obj + 0x8c);
+	frames[4].position[0] = *(float*) 0x67753c - *(float*) (g_6b8014 + 0x4c);
+	frames[4].position[1] = *(float*) 0x677540 - *(float*) (g_6b8014 + 0x50);
+	frames[4].position[2] = *(float*) 0x677544 - *(float*) (g_6b8014 + 0x54);
+	frames[4].drehung[0] = pos[0] - *(float*) (g_6b8014 + 0x84);
+	frames[4].drehung[1] = pos[1] - *(float*) (g_6b8014 + 0x88);
+	frames[4].drehung[2] = pos[2] - *(float*) (g_6b8014 + 0x8c);
 	g_6b5cbc = 1;
 	g_6b5cc0 = (int) fcn_004339e0(obj, flags, 5, frames);
 	*((unsigned char*) g_6b5cc0 + 0x2d) |= 8;

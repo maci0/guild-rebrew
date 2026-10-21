@@ -1,4 +1,4 @@
-extern void __cdecl fcn_005015e0(char**, int, int, int);
+extern void __cdecl gm_ResolveEntityById(char**, int, int, int);
 extern char* __cdecl fcn_00502cd0(int, ...);
 extern void __cdecl fcn_00546190(char*);
 extern char* __cdecl fcn_005463a0(int, int, int, ...);
@@ -43,7 +43,7 @@ void __cdecl fcn_0054bc90(char* a0)
 	if (*(int*) (a0 + 0x70) == -1 || *(int*) (a0 + 0x70) == -2)
 		goto close;
 	if (*(int*) (a0 + 0xbc) == 0) {
-		fcn_005015e0(&v10, 0, 0, *(unsigned int*) (a0 + 0x10));
+		gm_ResolveEntityById(&v10, 0, 0, *(unsigned int*) (a0 + 0x10));
 		if (v10 == 0)
 			goto close;
 		v13 = fcn_00502cd0(*(unsigned int*) (v10 + 0x5d), 1, 0, 0x17);

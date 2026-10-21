@@ -1,7 +1,7 @@
 extern unsigned char* g_868050;
 extern char* g_99ec10;
 
-int __cdecl fcn_00504bd0(int);
+int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_00505370(unsigned char*);
 int __cdecl fcn_00502cd0(int, int, int, int);
 
@@ -17,7 +17,7 @@ int __cdecl fcn_005049a0(unsigned char* building)
 	int i;
 
 	found = 0;
-	category = fcn_00504bd0(building[0]);
+	category = gm_GetBuildingTypeCategory(building[0]);
 	type = g_868050 + building[0] * 0x24d;
 	if (category == 1 || category == 7 || category == 8) {
 		if (type[0] == 0x1d) {

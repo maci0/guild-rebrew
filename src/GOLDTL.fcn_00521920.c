@@ -54,7 +54,7 @@ unsigned int __cdecl fcn_00525670(void);
 int __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_00514f10(void);
 void __cdecl fcn_00514fc0(void);
-int __cdecl fcn_005238c0(void* stream);
+int __cdecl ls_LoadCharacter(void* stream);
 char* __cdecl fcn_00508e40(int handle);
 int __cdecl fcn_004b6580(void* stream);
 int __cdecl fcn_00592370(void* stream);
@@ -200,7 +200,7 @@ int __cdecl fcn_00521920(char* cpath)
 	fcn_004432d0(0, 1);
 	fcn_00514f10();
 	fcn_00514fc0();
-	if (fcn_005238c0(stream) == 0) {
+	if (ls_LoadCharacter(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(g_fb5740);
 		g_fb5740 = 0;

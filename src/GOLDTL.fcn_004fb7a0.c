@@ -8,7 +8,7 @@ typedef struct Time14 {
 } Time14;
 
 unsigned short __cdecl gm_RandomMod(int);
-float __cdecl fcn_0042e450(void);
+float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_005463a0(int, int, int);
 void __cdecl fcn_00500bb0(Time14* t, int value, int delay, int arg);
 void __cdecl fcn_004c5530(void* msg);
@@ -34,7 +34,7 @@ void __cdecl fcn_004fb7a0(void)
 	}
 	memcpy(st, (void*) 0x99f5a0, sizeof(st));
 	if (*(int*) 0x99f5bc <= 0) {
-		f = (float) fcn_0042e450() * *(float*) (st + 4) + *(float*) (st + 3) + *(float*) (st + 5);
+		f = (float) gm_RandomFloat01() * *(float*) (st + 4) + *(float*) (st + 3) + *(float*) (st + 5);
 		*(float*) (st + 5) = f;
 		if (f <= *(float*) (st + 6)) {
 			goto label_4fbc2b;

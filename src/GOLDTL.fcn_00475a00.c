@@ -28,8 +28,8 @@ void* __cdecl fcn_0064e2f9(const char*, const char*);
 int __cdecl fcn_0064e48f(void*, int, int);
 int __cdecl fcn_0064ebe4(void*, int, int, void*);
 int __cdecl fcn_0064e1fd(void*);
-void* __cdecl fcn_0041db70(int, int);
-void __cdecl fcn_0041ddd0(void*);
+void* __cdecl m_alloc(int, int);
+void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x00475a00 */
 int __cdecl fcn_00475a00(char* name, Surface* s)
@@ -64,7 +64,7 @@ int __cdecl fcn_00475a00(char* name, Surface* s)
 	h = bi.height;
 	rev = h >= 0;
 	bi.height = abs(h);
-	buf = (unsigned char*) fcn_0041db70(abs(h) * bi.width * 3,
+	buf = (unsigned char*) m_alloc(abs(h) * bi.width * 3,
 	    (char*) 0x67d940);
 	align = (bi.width * 3) & 3;
 	for (i = 0; i < bi.height; i++) {
@@ -99,6 +99,6 @@ int __cdecl fcn_00475a00(char* name, Surface* s)
 			}
 		}
 	}
-	fcn_0041ddd0(buf);
+	m_FreeTracked(buf);
 	return 1;
 }

@@ -9,7 +9,7 @@ int __cdecl gm_GetBuildingTypeCategory(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_0051af00(void*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004ba9f0 */
 int __cdecl fcn_004ba9f0(int* a1)
@@ -80,7 +80,7 @@ int __cdecl fcn_004ba9f0(int* a1)
 	    *(unsigned char*) 0x773d75, 0);
 	fcn_0051af00(buf, *(unsigned short*) (a1 + 1) + 0x12e7,
 	    *(unsigned short*) found);
-	fcn_00545e80(*(int*) (e + 2), *(int*) (e + 2), buf,
+	he_MessageBoxQuickjump(*(int*) (e + 2), *(int*) (e + 2), buf,
 	    strlen(buf) > 0x100, 0x603, *(int*) (chosen + 1), -1, 0, 0);
 	return 0;
 }

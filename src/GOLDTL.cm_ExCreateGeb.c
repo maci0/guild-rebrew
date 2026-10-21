@@ -16,7 +16,7 @@ void __cdecl fcn_004379a0(int a, int b, int c, int d, void* out);
 void __cdecl fcn_005982d0(void);
 void __cdecl fcn_0041d9e0(char* msg);
 void __cdecl fcn_004550b0(int a, int b);
-void __cdecl fcn_00442be0(int a);
+void __cdecl d3_DestroyObject(int a);
 void __cdecl fcn_0052d9d0(void* p);
 void __cdecl fcn_004bd4e0(int a, int b);
 
@@ -94,7 +94,7 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 			        list.items[i]);
 			sprintf(msg, "cm_ExCreateGeb(): killing objectptr: %s",
 			        list.items[i]);
-			fcn_00442be0(list.items[i]);
+			d3_DestroyObject(list.items[i]);
 		}
 	} else {
 		fcn_0041d9e0("cm_ExCreateGeb(): could not lc_GetGebaeudeBauplatz()...");

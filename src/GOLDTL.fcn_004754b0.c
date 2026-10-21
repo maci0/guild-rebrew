@@ -4,8 +4,8 @@ int __cdecl fcn_0064e2f9(void*, int);
 int __cdecl fcn_0064e48f(void*, int, int);
 int __cdecl fcn_0064ebe4(void*, int, int, void*);
 int __cdecl fcn_0064e1fd(void*);
-void* __cdecl fcn_0041db70(int, int);
-void __cdecl fcn_0041ddd0(void*);
+void* __cdecl m_alloc(int, int);
+void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x004754b0 */
 int __cdecl fcn_004754b0(void* a0, void* a1, int a2, int a3)
@@ -98,7 +98,7 @@ int __cdecl fcn_004754b0(void* a0, void* a1, int a2, int a3)
 	}
 	fcn_0064e1fd(f);
 	if ((a3 & 0xff) && v17 >= 1) {
-		q = fcn_0041db70(v16, 0x67d924);
+		q = m_alloc(v16, 0x67d924);
 		n = v17 / 2;
 		last = v17 - 1;
 		i = 0;
@@ -109,7 +109,7 @@ int __cdecl fcn_004754b0(void* a0, void* a1, int a2, int a3)
 			i++;
 			last--;
 		}
-		fcn_0041ddd0(q);
+		m_FreeTracked(q);
 	}
 	return 1;
 }

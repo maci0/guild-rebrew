@@ -5,8 +5,8 @@
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_0064d228(void);
-int __cdecl fcn_0042e410(int);
+int __cdecl _ftol(void);
+int __cdecl gm_RandomMod(int);
 void __cdecl fcn_00546190(char*);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
@@ -45,8 +45,8 @@ void __cdecl fcn_0055a920(char* rec)
 	} else {
 		d = (double) r;
 	}
-	want = fcn_0064d228();
-	si = (unsigned short) fcn_0042e410(0x300);
+	want = _ftol();
+	si = (unsigned short) gm_RandomMod(0x300);
 	left = 0x300;
 	do {
 		if (cnt >= want) {

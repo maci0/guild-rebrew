@@ -22,12 +22,12 @@ void __cdecl fcn_004c6940(void* a0, int a1, void* a2)
 		if (p != 0) {
 			q = *(char**) (p + 0x34);
 			*(int*) (buf + 0x15) = *(int*) (q + 0x4c);
+			*(int*) (buf + 0x31) = *(int*) ((char*) a0 + 0x24);
 			*(int*) (buf + 0x19) = *(int*) (q + 0x50);
 			*(int*) (buf + 0x1d) = *(int*) (q + 0x54);
 			*(int*) (buf + 0x25) = *(int*) (q + 0x84);
 			*(int*) (buf + 0x29) = *(int*) (q + 0x88);
 			*(int*) (buf + 0x2d) = *(int*) (q + 0x8c);
-			*(int*) (buf + 0x31) = *(int*) ((char*) a0 + 0x24);
 			if (a1 == 2) {
 				r = gm_LookupEntityRecordById(*(int*) (buf + 0x45));
 				if (r != 0) {

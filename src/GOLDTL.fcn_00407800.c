@@ -2,7 +2,7 @@ extern int g_6b8010;
 
 int __cdecl fcn_00413190(int);
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_00442be0(int);
+void __cdecl d3_DestroyObject(int);
 int* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl fcn_0043a720(int*, char*);
 
@@ -34,7 +34,7 @@ void __cdecl fcn_00407800(char* e, int mode, char* name)
 		saved_mode = g_6b8010;
 		fcn_004432d0(fcn_00413190(*(int*) (e + 0x88)), 1);
 		if (*slot != 0) {
-			fcn_00442be0(*slot);
+			d3_DestroyObject(*slot);
 			*slot = 0;
 		}
 		scene = fcn_00442910(*(int*) (e + 0x34), position, rotation, name);
@@ -64,7 +64,7 @@ void __cdecl fcn_00407800(char* e, int mode, char* name)
 	} else {
 		fcn_004432d0(fcn_00413190(*(int*) (e + 0x88)), 1);
 		if (*slot != 0) {
-			fcn_00442be0(*slot);
+			d3_DestroyObject(*slot);
 			*slot = 0;
 		}
 		fcn_004432d0(g_6b8010, 1);

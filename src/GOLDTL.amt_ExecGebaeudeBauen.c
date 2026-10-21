@@ -2,7 +2,7 @@
 #include <string.h>
 
 extern int g_6798d4;
-extern char g_868050[];
+extern char* g_868050;
 extern int g_6b7fdc;
 extern int g_7f4c00;
 extern int g_7f4c04;

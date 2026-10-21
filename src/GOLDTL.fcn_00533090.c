@@ -46,7 +46,7 @@ void __cdecl fcn_00438b40(char*, float*);
 void __cdecl fcn_00438cb0(char*, float*);
 int __cdecl fcn_00451840(float*, float*, float);
 void __cdecl fcn_004bbd70(void);
-int* __cdecl fcn_00504b30(char*);
+int* __cdecl gm_SetupEntityQuery(char*);
 int __cdecl fcn_00506380(int, void*, void*, int);
 void __cdecl fcn_0052ae80(void);
 void __cdecl fcn_0052d820(void);
@@ -187,13 +187,13 @@ void __cdecl fcn_00533090(unsigned int a0)
 						    *(unsigned short*) g_7746cc);
 						if (i == 1 && g_7f4e51[g_774970 * 0x21c] == 0
 						    && *(unsigned short*) g_7746cc == 0xf2) {
-							v5 = (char*) fcn_00504b30(g_7746c4);
+							v5 = (char*) gm_SetupEntityQuery(g_7746c4);
 						}
 					} else if (g_7746c8 != 0) {
 						i = fcn_0057eba0(0x1c, (int) g_7746c8, 0, 0);
 						if (i == 1 && g_7f4e51[g_774970 * 0x21c] == 0
 						    && *(unsigned short*) g_7746cc == 0xf2) {
-							v5 = (char*) fcn_00504b30(g_7746c8);
+							v5 = (char*) gm_SetupEntityQuery(g_7746c8);
 						}
 					}
 					if (g_7746c4 != 0 && v5 != 0 && v5 != g_7746cc) {

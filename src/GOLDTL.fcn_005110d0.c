@@ -27,7 +27,7 @@ void __cdecl fcn_0045b290(int, int);
 char __cdecl fcn_00437ac0(char* scene, char* node, unsigned int flags, void (__cdecl* cb)(char*));
 int __cdecl fcn_00451840(float* a, float* b, float eps);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
-void __cdecl fcn_00402ab0(int, void*, int);
+void __cdecl ch_SetPosition(int, void*, int);
 char* __cdecl fcn_00407330(void);
 int __cdecl fcn_00413160(void);
 void __cdecl fcn_0041d9e0(const char* msg);
@@ -91,10 +91,10 @@ void __cdecl fcn_005110d0(int a0)
 					if (fcn_00451840((float*) (v + 0x38), (float*) 0x662d70, 0.5f)) {
 						if ((*(int*) (v + 0x124) != 0 && (obj = (int) fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER")) != 0) || (obj = (int) fcn_00407330()) != 0 || ((obj = (int) fcn_00445600(0, 0x100, 0, "dummy_EINGANG")) != 0 || (obj = (int) fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER_ENTRY")) != 0)) {
 							fcn_00455350((char*) obj, (char*) (obj + 0x4c), (float*) pos);
-							fcn_00402ab0(v, pos, 1);
+							ch_SetPosition(v, pos, 1);
 						}
 					} else {
-						fcn_00402ab0(v, (void*) (v + 0x38), 1);
+						ch_SetPosition(v, (void*) (v + 0x38), 1);
 					}
 				}
 			}

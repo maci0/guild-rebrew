@@ -44,7 +44,7 @@ void __cdecl fcn_0052cf20(int a0);
 void __cdecl fcn_004c39b0(void);
 void __cdecl fcn_0042df30(int a1, int a2);
 int __cdecl fcn_005373e0(int a1, int a2);
-void __cdecl fcn_0059a8f0(void);
+void __cdecl lc_PlayerInJail(void);
 void __cdecl fcn_0052c9b0(void);
 void* __cdecl fcn_00426cc0(int a1);
 int __cdecl fcn_00428720(int a1);
@@ -148,7 +148,7 @@ void __cdecl fcn_0059a340(void)
 		}
 		g_774658 = g_774650;
 		if (*(unsigned char*) (g_774970 * 0x21c + 0x7f4e51) > 0)
-			fcn_0059a8f0();
+			lc_PlayerInJail();
 		fcn_0052c9b0();
 		fx = g_7f4c04 & 0xffff;
 		if (v8 == 0) {

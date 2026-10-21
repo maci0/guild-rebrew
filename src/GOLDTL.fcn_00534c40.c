@@ -3,8 +3,8 @@
 
 extern int g_6b7ff9;
 extern int g_7747c4;
-extern void *__cdecl fcn_0041db70(unsigned int size, const char *tag);
-extern void __cdecl fcn_0041ddd0(void *p);
+extern void *__cdecl m_alloc(unsigned int size, const char *tag);
+extern void __cdecl m_FreeTracked(void *p);
 extern int __cdecl fcn_00412eb0(int a0, int a1);
 extern void __cdecl fcn_00442c00(int a0, int a1);
 extern int __cdecl fcn_00442910(int a0, int a1, int a2, int a3);
@@ -36,14 +36,14 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
     int arr;
     unsigned int ent;
 
-    v3 = (int *)fcn_0041db70(0x274, (char *)0x6a3180);
+    v3 = (int *)m_alloc(0x274, (char *)0x6a3180);
     if (v3 == 0)
         return 0;
     v4 = fcn_00412eb0(a0, 1);
     *v3 = v4;
     if (v4 == 0)
     {
-        fcn_0041ddd0(v3);
+        m_FreeTracked(v3);
         return 0;
     }
     if (a1 != 0)
@@ -117,7 +117,7 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
             goto finish;
         v12 = v4;
     }
-    fcn_0041ddd0(v3);
+    m_FreeTracked(v3);
     return 0;
 finish:
     if (g_6b7ff9 != 0)

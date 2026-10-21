@@ -13,7 +13,7 @@ char* __cdecl fcn_00503e80(void);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_00555490(short*, int*, int*);
 double __cdecl fcn_0050bb50(int, int);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_0050d2a0(int);
 void __cdecl fcn_004c4eb0(unsigned int);
 void __cdecl fcn_004c4ef0(unsigned int);
@@ -81,7 +81,7 @@ void __cdecl fcn_00555510(char* a0)
 			if (fcn_00555490(rec, ent, &idx) != 0) {
 				x1 = (int) (fcn_0050bb50(0x179, g_773d75) * g_662a08);
 				y1 = (int) (fcn_0050bb50(0x17a, g_773d75) * g_662a08);
-				v = fcn_0042e410(4) + 3;
+				v = gm_RandomMod(4) + 3;
 				w = fcn_0050d2a0((int) rec);
 				mx = x1;
 				if (x1 <= y1) {
@@ -90,7 +90,7 @@ void __cdecl fcn_00555510(char* a0)
 				t0 = (unsigned char*) *(int*) (ent + idx * 3);
 				if ((double) w > (double) mx * g_665e9c) {
 					if (ent[idx * 3 + 1] != 0 && ent[idx * 3 + 2] != 0) {
-						if (fcn_0042e410(2) != 0) {
+						if (gm_RandomMod(2) != 0) {
 							goto draw179;
 						}
 						goto draw17a;

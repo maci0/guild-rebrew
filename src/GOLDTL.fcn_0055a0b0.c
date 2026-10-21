@@ -10,7 +10,7 @@ struct EvRec {
 int __cdecl fcn_004e8b40(unsigned char, int*);
 int __cdecl fcn_004e8b80(int, int, EvRec*);
 unsigned char* __cdecl fcn_00508e40(int);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004e8240(unsigned char, unsigned char*, unsigned char*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
@@ -59,7 +59,7 @@ void __cdecl fcn_0055a0b0(char* a0)
 					if (v3 != 0 && fcn_004e8b40(*(unsigned char*) (r + 8), tmp)) {
 						if (*(int*) (a0 + 0xac) == 1
 						    && ((unsigned char) *(tmp + 2) == 9 || ((*(2 + tmp)) & 0xFF) == 6)) {
-							if ((short) fcn_0042e410(3) != 0) {
+							if ((short) gm_RandomMod(3) != 0) {
 								fcn_004e8240(*(unsigned char*) r, 0, 0, 4, 0xff);
 							}
 						}
@@ -73,7 +73,7 @@ void __cdecl fcn_0055a0b0(char* a0)
 									++n;
 									b = (tmp[2] & 0xff) * 3;
 									fcn_004c54c0(*(int*) (v3 + 4), *(int*) p,
-									             -((unsigned short) fcn_0042e410(b) + (tmp[2] & 0xff) * 3), 1);
+									             -((unsigned short) gm_RandomMod(b) + (tmp[2] & 0xff) * 3), 1);
 								}
 								p += 0x21c;
 							} while ((int) p < 0x85a0a4);

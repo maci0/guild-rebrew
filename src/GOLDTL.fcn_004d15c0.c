@@ -21,7 +21,7 @@ typedef struct {
 /* SIZE 0x2c */
 
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
-int __cdecl fcn_004cf0f0(char*, int);
+int __cdecl fcn_004ce270(char*, int);
 int __cdecl fcn_004d1250(char*, char*, char*);
 int __cdecl fcn_004d1320(char*, char*, char*);
 int __cdecl fcn_004d13d0(char*, char*, char*);
@@ -61,7 +61,7 @@ int __cdecl fcn_004d15c0(char* a0, char* a1)
 				}
 			} else {
 				obj = *(int*) ((char*) g_7746a0 + 0x204);
-				if (fcn_004cf0f0(a1, obj) != 0 || g_14cf736 != 0) {
+				if (fcn_004ce270(a1, obj) != 0 || g_14cf736 != 0) {
 					if (fcn_004d1020(a0, a1, (char*) obj, 0, 0) != -1) {
 						r = 1;
 						return r;

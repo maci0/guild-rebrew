@@ -9,7 +9,7 @@ extern char g_7f4ca0[];
 extern char g_7f4ca2[];
 extern unsigned char g_773d75;
 
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_0050bfe0(unsigned char* e);
 int __cdecl fcn_0050cf50(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, ...);
@@ -62,7 +62,7 @@ void __cdecl fcn_00487470(char* a0)
 	if (!(*(int*) (a0 + 0x1b4) & 8)) {
 		return;
 	}
-	if (fcn_0050bfe0((unsigned char*) p) < (fcn_0042e410(0x14) & 0xffff) + 0x4b) {
+	if (fcn_0050bfe0((unsigned char*) p) < (gm_RandomMod(0x14) & 0xffff) + 0x4b) {
 		amountf = (float) fcn_0050cf50((int) p, 100) * *(float*) 0x664138 * *(float*) 0x664138;
 		if (amountf < *(float*) 0x662a7c) {
 			amountf = 128.0f;

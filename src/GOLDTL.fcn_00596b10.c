@@ -3,7 +3,7 @@ extern char* g_1015ea0; /* 0x1015ea0, GUI pool, stride 0x2f4 */
 int __cdecl fcn_004727a0(int k, int i);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
 void __cdecl d2_SetElementImage(int element, int bild);
-void __cdecl fcn_00469c30(int x, int y, int element);
+int __cdecl fcn_00469c40(int x, int y, int a3);
 void __cdecl fcn_00596d70(int a0, int a1, int* rect, int w, int n,
                           unsigned int a5);
 void __cdecl ResetDisplayCounters(void);
@@ -13,106 +13,100 @@ void __cdecl fcn_00473750(int a1, int a2);
 /* ADDRESS: GOLDTL 0x00596b10 */
 void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
 {
+    int* r;
     int v1;
-    int v2;
-    int v3;
-    int v4;
-    int v5;
-    int v6;
+    int* p;
+    int n;
+    int i;
+    int col;
     int v9;
-    int v10;
-    int* v7;
-    unsigned int* v8;
 
-    v4 = a1;
-    v10 = a0;
-    v6 = *(int*) ((a1 + a0 * 0xaf) * 4 + 0x1038144) * 0x3cc;
-    v1 = *(int*) ((char*) 0x1015f40 + v6 + 0x0c);
+    r = (int*) (*(int*) ((a1 + a0 * 0xaf) * 4 + 0x1038144) * 0x3cc + 0x1015f40);
+    v1 = r[3];
     fcn_004727a0(a0, a1);
 
-    v7 = (int*) 0x778d50;
+    p = (int*) 0x778d50;
     do {
-        if (*v7 == -1) {
-            v3 = fcn_0046f740(0, 0, 0x743, *(int*) 0x772514);
-            *v7 = v3;
+        if (*p == -1) {
+            *p = fcn_0046f740(0, 0, 0x743, *(int*) 0x772514);
         }
-        v7 += 5;
-    } while ((int) v7 < 0x778da0);
+        p += 5;
+    } while ((int) p < 0x778da0);
 
-    v9 = 0;
-    v7 = (int*) 0x778d4c;
-    v3 = *(int*) 0x772500;
+    i = 0;
+    p = (int*) 0x778d50;
+    n = *(int*) 0x772500;
+    /* col carries the 0x778d4c lane address; it is the loop's induction base */
+    col = (int) (p - 1);
     do {
-        if (v7[-1] != *v7) {
-            d2_SetElementImage(v7[1], *v7 + 0x741);
-            v3 = *(int*) 0x772500;
+        if (p[-2] != p[-1]) {
+            d2_SetElementImage(p[0], p[-1] + 0x741);
+            n = *(int*) 0x772500;
         }
-        v2 = *v7;
-        v7[-1] = v2;
-        if (v2 >= 2) {
-            v7[-3] = (v1 - *(short*) (v3 + 0x261a4 + v2 * 0x54)) >> 1;
-            v7[-2] = (*(short*) (v3 + 0x2624e) + 0x1c) * v9;
+        v9 = p[-1];
+        p[-2] = v9;
+        if (v9 >= 2) {
+            p[-4] = (v1 - *(short*) (n + 0x261a4 + v9 * 0x54)) >> 1;
+            p[-3] = (*(short*) (n + 0x2624e) + 0x1c) * i;
         }
-        v7 += 5;
-        v9 += 1;
-    } while ((int) v7 < 0x778d9c);
+        p += 5;
+        i += 1;
+        col += 0x14;
+    } while (col < 0x778d9c);
 
-    fcn_004727a0(v10, v4);
+    fcn_004727a0(a0, a1);
 
-    v7 = (int*) 0x778d50;
+    p = (int*) 0x778d50;
     do {
-        if (v7[-2] >= 2) {
-            *(unsigned int*) (g_1015ea0 + 0x48 + *v7 * 0x2f4) = 0;
-            fcn_00469c30(*(int*) ((char*) 0x1015f40 + v6 + 4),
-                         *(int*) ((char*) 0x1015f40 + v6 + 8) + v7[-3],
-                         *v7);
+        if (p[-2] >= 2) {
+            *(unsigned int*) (g_1015ea0 + p[0] * 0x2f4 + 0x48) = 0;
+            fcn_00469c40(r[1] + p[-4], r[2] + p[-3], *p);
         } else {
-            *(unsigned int*) (g_1015ea0 + 0x48 + *v7 * 0x2f4) = 1;
+            *(unsigned int*) (g_1015ea0 + p[0] * 0x2f4 + 0x48) = 1;
         }
-        v7 += 5;
-    } while ((int) v7 < 0x778da0);
+        p += 5;
+    } while ((int) p < 0x778da0);
 
-    v6 = 0;
-    v10 = 0;
-    v8 = (unsigned int*) 0x778dac;
+    col = 0;
+    i = 0;
+    p = (int*) 0x778da0;
+    /* n carries the 0x778dac lane address, the second loop's induction base */
+    n = (int) (p + 3);
     do {
-        v6 += 1;
-        v4 = v10 * 0x14 + 0x778d48;
-        if (*(int*) (v10 * 0x14 + 0x778d48) < v6) {
-            v6 = 1;
+        col += 1;
+        if (col > *(int*) (i * 0x14 + 0x778d48)) {
+            col = 1;
             do {
-                v7 = (int*) (v4 + 0x14);
-                v4 += 0x14;
-                v10 += 1;
-            } while (*v7 < 1);
+                i += 1;
+            } while (*(int*) (i * 0x14 + 0x778d48) < 1);
         }
-        v5 = *(unsigned int*) (v10 * 0x14 + 0x778d44);
-        v8[-1] = *(int*) (v10 * 0x14 + 0x778d40) - 0x44 + v6 * 0x44;
-        *v8 = v5;
-        fcn_00596d70(a0, a1, (int*) &v8[-3], v1, 3, a3);
-        v8 += 0xe;
-    } while ((int) v8 < 0x77912c);
+        p[2] = *(int*) (i * 0x14 + 0x778d40) - 0x44 + col * 0x44;
+        p[3] = *(int*) (i * 0x14 + 0x778d44);
+        fcn_00596d70(a0, a1, p, a2, 3, a3);
+        p += 0xe;
+        n += 0x38;
+    } while (n < 0x77912c);
 
-    if (!v1) {
+    if (!a2) {
         return;
     }
     ResetDisplayCounters();
 
-    v7 = (int*) 0x778db0;
+    p = (int*) 0x778db0;
     do {
-        if (*v7 != -1) {
-            v5 = fcn_00471f80(*v7);
-            fcn_00473750(v7[-4] + 0xdf, v5);
+        if (*p != -1) {
+            v9 = fcn_00471f80(*p);
+            fcn_00473750(p[-4] + 0xdf, v9);
         }
-        v7 += 0xe;
-    } while ((int) v7 < 0x779130);
+        p += 0xe;
+    } while ((int) p < 0x779130);
 
-    v7 = (int*) 0x7796f0;
+    p = (int*) 0x7796f0;
     do {
-        if (*v7 != -1) {
-            v5 = fcn_00471f80(*v7);
-            fcn_00473750(v7[-4] + 0xdf, v5);
+        if (*p != -1) {
+            v9 = fcn_00471f80(*p);
+            fcn_00473750(p[-4] + 0xdf, v9);
         }
-        v7 += 0xe;
-    } while ((int) v7 < 0x7798b0);
+        p += 0xe;
+    } while ((int) p < 0x7798b0);
 }

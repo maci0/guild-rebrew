@@ -4,7 +4,7 @@
 int __cdecl fcn_005074e0(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00510400(char*);
-int __cdecl fcn_0042e410(unsigned short);
+int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004a5340(int*, int, int*, int, float, unsigned short*);
 int __cdecl fcn_004a5c40(int*, int, int, float, float, int, unsigned short*);
 int __cdecl fcn_004e99c0(unsigned char);
@@ -58,7 +58,7 @@ unsigned int __cdecl fcn_004ab500(unsigned int a0, unsigned short* a1, int a2,
 		if (v12 != 0 && v6 != 0) {
 			unsigned int* v4 = (unsigned int*) 0xf00500;
 
-			a2 = (int) fcn_0042e410(0x20) & 0xffff;
+			a2 = (int) gm_RandomMod(0x20) & 0xffff;
 			if (fcn_004a5340((int*) a1, 1, (int*) &v4, 0,
 			                 (float) a2 + *(float*) 0x662da8,
 			                 (unsigned short*) &v8) != 0) {

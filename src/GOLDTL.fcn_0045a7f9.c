@@ -1,12 +1,15 @@
-/* Interior entry: 0x0045a7f9 is inside the body of the function that starts
- * at 0x0045a3a0 (`push ebp; mov ebp,esp; sub esp,0xa4`). The fragment reads
- * the enclosing frame ([ebp-0x58], [ebp-0x18], [ebp-0x1c], [ebp-0x24],
- * [ebp-0x2c8]) and reuses the caller's live esi/edi/ecx, so it is not a
- * standalone function and no C body can reproduce it. Non-C class (interior
- * entry inside 0x0045a3a0). */
+/* Interior entry: 0x0045a7f9 is a fall-through continuation of the body that
+ * starts at 0x0045a3a0, not a function. 0x0045a3a0's last instruction
+ * (`mov eax, 0xcccccccd` at 0x0045a7f4) ends exactly at 0x0045a7f9 and the
+ * next byte is `mul edx`, the second half of a divide-by-10. The 275-byte
+ * extent ends on the enclosing epilogue (`pop edi; pop esi; pop ebx;
+ * mov esp,ebp; pop ebp; ret`) at 0x0045a905. The stored split is a
+ * merge/split artifact: extent spec is 0x0045a3a0=1388 with the 0x0045a7f9
+ * entry dropped. Non-C class (interior continuation, shared frame and
+ * registers). */
 /* ADDRESS: GOLDTL 0x0045a7f9 */
-int __fastcall fcn_0045a7f9(void *self)
+int __cdecl fcn_0045a7f9(void)
 {
-    /* Interior fragment of 0x0045a3a0, not a function. */
+    /* Interior continuation of 0x0045a3a0, not a function. */
     return 0;
 }

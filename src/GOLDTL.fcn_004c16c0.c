@@ -21,7 +21,7 @@ extern void fcn_004193c0();
 extern void fcn_00535960();
 extern void fcn_0064d41a();
 extern int fcn_0064d3f8();
-extern int fcn_0064d228();
+extern int _ftol();
 
 extern char *g_6b8300;
 extern unsigned char g_772d10;

@@ -14,9 +14,9 @@ void __cdecl fcn_005ce0f0(void);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005ce110 */
-void __cdecl fcn_005ce110(int a0)
+void __cdecl fcn_005ce110(int a0, int a1, int level)
 {
-	char rec[0x88];
+	char rec[0x90];
 	char* s;
 	char* v5;
 	char* v6;
@@ -43,7 +43,7 @@ void __cdecl fcn_005ce110(int a0)
 	fcn_004727a0(v8, 5);
 	fcn_0046e830(0xffffffff, 0xffffffff, g_772514, g_772514, 0x767);
 	fcn_004727a0(v8, 1);
-	fcn_00519190((int) (g_7f4ca0 + 0x13a3));
+	fcn_00519190(a0 + 0x13a3);
 	fcn_004727a0(v8, 2);
 	fcn_00519190(0x139e);
 	found = 0;
@@ -66,7 +66,7 @@ void __cdecl fcn_005ce110(int a0)
 		fcn_00519190(0x139d);
 	}
 	fcn_004727a0(v8, 3);
-	if (a0 >= 8) {
+	if (level >= 8) {
 		k = fcn_004ad2b0();
 		v9 = 0;
 		pick[0] = 0;

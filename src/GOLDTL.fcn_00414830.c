@@ -21,7 +21,6 @@ void __cdecl fcn_00414830(float* lo, float* hi, char* entity)
 	P414830* p;
 	Vtbl414830* vt;
 	char* child;
-	float v;
 	int i;
 
 	if (*(char**) (entity + 0x1cc) == 0) {
@@ -34,48 +33,12 @@ void __cdecl fcn_00414830(float* lo, float* hi, char* entity)
 	p = vt->get(entity, *(char**) (entity + 0x1cc), *(char**) (entity + 0x1ec) + 8);
 	if (p != 0) {
 		for (i = 0; i < 8; i++) {
-			if (*lo < p[i].x) {
-				v = *lo;
-			}
-			else {
-				v = p[i].x;
-			}
-			*lo = v;
-			if (lo[1] < p[i].y) {
-				v = lo[1];
-			}
-			else {
-				v = p[i].y;
-			}
-			lo[1] = v;
-			if (lo[2] < p[i].z) {
-				v = lo[2];
-			}
-			else {
-				v = p[i].z;
-			}
-			lo[2] = v;
-			if (*hi > p[i].x) {
-				v = *hi;
-			}
-			else {
-				v = p[i].x;
-			}
-			*hi = v;
-			if (hi[1] > p[i].y) {
-				v = hi[1];
-			}
-			else {
-				v = p[i].y;
-			}
-			hi[1] = v;
-			if (hi[2] > p[i].z) {
-				v = hi[2];
-			}
-			else {
-				v = p[i].z;
-			}
-			hi[2] = v;
+			*lo = (*lo < p[i].x) ? *lo : p[i].x;
+			lo[1] = (lo[1] < p[i].y) ? lo[1] : p[i].y;
+			lo[2] = (lo[2] < p[i].z) ? lo[2] : p[i].z;
+			*hi = (*hi > p[i].x) ? *hi : p[i].x;
+			hi[1] = (hi[1] > p[i].y) ? hi[1] : p[i].y;
+			hi[2] = (hi[2] > p[i].z) ? hi[2] : p[i].z;
 		}
 	}
 	for (child = *(char**) (entity + 0x200); child != 0; child = *(char**) (child + 0x1f4)) {

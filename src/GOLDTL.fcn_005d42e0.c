@@ -51,22 +51,19 @@ void __cdecl fcn_00471e30(char* dlg);
 void __cdecl fcn_005d42e0(void)
 {
 	unsigned char colors[15];
-	char buf[256];
-	Gfx gfx;
-	int items[5];
-	char* dlg;
 	char* cp;
+	char* dlg;
 	int r;
 	int g;
 	int b;
+	Gfx gfx;
+	int items[5];
+	char buf[256];
 	int row;
 	int i;
 	int n;
 	int j;
 	int mask;
-	int flags;
-	float t;
-	unsigned short sel;
 
 	colors[0] = 0x33;
 	colors[1] = 0x33;
@@ -108,11 +105,7 @@ void __cdecl fcn_005d42e0(void)
 		n = 4;
 	}
 	fcn_00519190(0x1f1b, n + 0x1f1c);
-	t = gfx.f[1] * g_662cf8;
-	if (!(t > g_662950)) {
-		t = (float) g_662950;
-	}
-	fcn_00519190(0x1f21, (int) t);
+	fcn_00519190(0x1f21, (int) (gfx.f[1] * g_662cf8 > g_662950 ? gfx.f[1] * g_662cf8 : g_662950));
 	n = (int) ((gfx.f[3] > g_662950 ? gfx.f[3] : g_662950) * g_662c38);
 	fcn_00519190(0x1f22, n);
 	fcn_004727a0(dlg, 3);
@@ -121,19 +114,18 @@ void __cdecl fcn_005d42e0(void)
 	cp = (char*) &colors[1];
 	row = 0;
 	for (i = 4; i < 0x9a; i += 0x1e) {
-		sel = g_775340;
-		mask = (1 << row) & sel;
+		mask = (1 << row) & g_775340;
 		mask = mask != 0;
 		n = fcn_0046f740(5, i + 1, 2, g_772514);
 		items[row] = n;
 		fcn_0051af00(buf, row + 0x1f25);
 		fcn_0046fac0(0x19, i, buf, g_772514);
-		((Ent*) g_1015ea0)[n].x58 = 1;
 		((Ent*) g_1015ea0)[n].x5c = 1;
+		((Ent*) g_1015ea0)[n].x58 = 1;
 		fcn_00472380(n, mask);
-		r = cp[-1];
-		g = cp[0];
-		b = cp[1];
+		*(char*) &r = cp[-1];
+		*(char*) &g = cp[0];
+		*(char*) &b = cp[1];
 		for (j = i + 5; j < i + 15; j++) {
 			fcn_00472c30(*(int*) (g_1015f40 + g_772514 * 0x3cc + 0xc) - 1, j,
 				*(int*) (g_1015f40 + g_772514 * 0x3cc + 0xc) - 0xb, j, r, g, b);
@@ -143,12 +135,10 @@ void __cdecl fcn_005d42e0(void)
 	}
 	for (;;) {
 		if (g_100f1dc != -1) {
-			sel = 0;
+			g_775340 = 0;
 			for (i = 0; i < 5; i++) {
-				flags = fcn_00471f80(items[i]) ? (1 << i) : 0;
-				sel |= flags;
+				g_775340 |= fcn_00471f80(items[i]) ? (1 << i) : 0;
 			}
-			g_775340 = sel;
 			fcn_004727a0(dlg, 3);
 			fcn_005d3d90(g_775340, gfx, g_772514);
 		}

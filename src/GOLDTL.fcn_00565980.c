@@ -35,8 +35,8 @@ void __cdecl fcn_00565980(char* obj)
 						*(char*) (t + 8),
 						*(char*) (t + 9),
 						*(unsigned short*) (t + 0xa), 1, v);
-					*(int*) (obj + 0xb4) = -1;
 					*(unsigned short*) (obj + 0xbc) = *(unsigned short*) (t + 0xa);
+					*(int*) (obj + 0xb4) = -1;
 					return;
 				}
 			}

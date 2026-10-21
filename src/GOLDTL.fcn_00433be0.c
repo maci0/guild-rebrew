@@ -2,9 +2,9 @@
 
 #pragma intrinsic(memcpy, strcpy, strcmp)
 
-char* __cdecl fcn_0041db70(unsigned int size, char* file);
-void __cdecl fcn_0041ddd0(void* p);
-int __cdecl fcn_0064d228(void);
+char* __cdecl m_alloc(unsigned int size, char* file);
+void __cdecl m_FreeTracked(void* p);
+int __cdecl _ftol(void);
 
 extern char* g_1052ba4;
 extern char g_1052a40[];
@@ -54,7 +54,7 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 	if (a7 <= 1) {
 		return 0;
 	}
-	p = fcn_0041db70(0x16c, (char*) 0x67a1d4);
+	p = m_alloc(0x16c, (char*) 0x67a1d4);
 	*(int*) (p + 0x140) = *(int*) (a0 + 0x44);
 	*(int*) (p + 0x148) = 2;
 	for (k = 0; ; k++) {
@@ -64,7 +64,7 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 			break;
 		}
 	}
-	*(char**) (p + 0x15c) = fcn_0041db70(*(int*) (p + 0x148) * 0xc0, (char*) 0x67a1b4);
+	*(char**) (p + 0x15c) = m_alloc(*(int*) (p + 0x148) * 0xc0, (char*) 0x67a1b4);
 	**(int**) (p + 0x15c) = 0;
 	*(int*) (*(int*) (p + 0x15c) + 4) = a7 * 3;
 	*(int*) (*(int*) (p + 0x15c) + 0x20) = *(int*) (a2 + 0x20);
@@ -75,15 +75,15 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 	*(int*) (*(int*) (p + 0x15c) + 0x34) = *(int*) (a2 + 0x34);
 	if (*(int*) (a2 + 0xbc) != 0) {
 		*(char**) (*(int*) (p + 0x15c) + 0xbc) =
-		    fcn_0041db70(*(int*) (p + 0x140) * 0xc, (char*) 0x67a194);
+		    m_alloc(*(int*) (p + 0x140) * 0xc, (char*) 0x67a194);
 		memcpy(*(char**) (*(int*) (p + 0x15c) + 0xbc), *(char**) (a2 + 0xbc),
 		    *(int*) (p + 0x140) * 0xc);
 		*(char**) (*(int*) (p + 0x15c) + 0x17c) =
-		    fcn_0041db70(*(int*) (p + 0x140) * 0xc, (char*) 0x67a174);
+		    m_alloc(*(int*) (p + 0x140) * 0xc, (char*) 0x67a174);
 	}
 	if (*(int*) (a2 + 0xb4) != 0) {
 		*(char**) (*(int*) (p + 0x15c) + 0xb4) =
-		    fcn_0041db70(*(int*) (p + 0x140) * 3, (char*) 0x67a154);
+		    m_alloc(*(int*) (p + 0x140) * 3, (char*) 0x67a154);
 		memcpy(*(char**) (*(int*) (p + 0x15c) + 0xb4), *(char**) (a2 + 0xb4),
 		    *(int*) (p + 0x140) * 3);
 		*(int*) (*(int*) (p + 0x15c) + 8) = *(int*) (a2 + 8);
@@ -93,7 +93,7 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 		*(int*) (*(int*) (p + 0x15c) + 0x18) = *(int*) (a2 + 0x18);
 		*(int*) (*(int*) (p + 0x15c) + 0x1c) = *(int*) (a2 + 0x1c);
 		*(char**) (*(int*) (p + 0x15c) + 0x174) =
-		    fcn_0041db70(*(int*) (p + 0x140) * 3, (char*) 0x67a134);
+		    m_alloc(*(int*) (p + 0x140) * 3, (char*) 0x67a134);
 	}
 	*(int*) (*(int*) (p + 0x15c) + 0xc0) = a7;
 	*(int*) (*(int*) (p + 0x15c) + 0xc4) = a7 * 3;
@@ -159,7 +159,7 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 			}
 		}
 		if (*(int*) (a2 + 0xb4) != 0) {
-			r = fcn_0041db70(*(int*) (p + 0x140) << 4, (char*) 0x67a110);
+			r = m_alloc(*(int*) (p + 0x140) << 4, (char*) 0x67a110);
 			minx = 1e10f;
 			miny = 1e10f;
 			minz = 1e10f;
@@ -218,7 +218,7 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 				    (unsigned char) ((*(float*) (r + i * 0x10 + 8) - minz) *
 					*(float*) 0x6628a4 * invz);
 			}
-			fcn_0041ddd0(r);
+			m_FreeTracked(r);
 		}
 	}
 	else {

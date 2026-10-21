@@ -17,7 +17,7 @@ extern int __cdecl fcn_00472250(int a0, int a1, int a2);
 extern void __cdecl fcn_00533dc0(int a0, int a1, int a2);
 extern int __cdecl fcn_004693b0(int a0, int a1, int a2, int a3);
 extern int __cdecl fcn_004695a0(int a0, int a1);
-extern int __cdecl fcn_0064d228(void);
+extern int __cdecl _ftol(void);
 extern int __cdecl fcn_005373e0(void *a0, int a1);
 extern void __cdecl fcn_00471e30(int a0);
 extern int __cdecl fcn_00469510(int a0);
@@ -83,7 +83,7 @@ void __cdecl fcn_005b9980(int a0)
             if (g_67d370 == v5)
             {
                 fcn_0050b980(v17 + 0x134, 100);
-                v7 = fcn_0064d228();
+                v7 = _ftol();
                 if (fcn_00526010((char *)(g_774970 * 0x21c + 0x7f4ca0), v7,
                         (v7 & 0xffffff00) | g_773d75))
                 {
@@ -113,7 +113,7 @@ void __cdecl fcn_005b9980(int a0)
         if (*(int *)(0x102cbc8 + v16 * 4) != -1)
         {
             fcn_0050b980(v17 + 0x134, 100);
-            fcn_0051af00(v13, (char *)0xda, v17 * 2 + 0xc10, fcn_0064d228());
+            fcn_0051af00(v13, (char *)0xda, v17 * 2 + 0xc10, _ftol());
             fcn_0046f9b0(v5, v13);
             fcn_00469090(v5);
         }

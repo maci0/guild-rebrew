@@ -61,7 +61,7 @@ typedef int (__cdecl* Fn_5305d0)(char*, int, char*, int);
  * Auswahl wird auf die Objektliste abgebildet und neu gezeichnet. */
 void __cdecl sv_HandleObjects(void)
 {
-	char buf[0x6c];
+	char buf[0x80];
 	char* v5;
 	char* v7;
 	char* p;
@@ -71,18 +71,18 @@ void __cdecl sv_HandleObjects(void)
 	int r;
 	int i;
 
-	created = 0;
 	match = 0;
-	v5 = 0;
-	list = 0;
-	if (g_7ea360 != 0 && *(char*) (g_7ea360 + 0x188) == 0) {
-		g_7ea360 = 0;
-	}
+	p = 0;
 	g_7e4318 = 0;
 	g_7e431c = 0;
 	g_7746a0 = 0;
 	g_7e4320 = 0;
 	g_7746b8 = 0;
+	created = 0;
+	list = 0;
+	if (g_7ea360 != 0 && *(char*) (g_7ea360 + 0x188) == 0) {
+		g_7ea360 = 0;
+	}
 	v5 = g_7746a4;
 	if (g_7e2700 == 0) {
 		goto L744;

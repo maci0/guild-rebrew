@@ -39,8 +39,8 @@ void __cdecl fcn_00545510(void);
 void __cdecl fcn_00545930(void);
 void __cdecl fcn_00545550(void);
 void __cdecl fcn_00527420(void);
-void __cdecl fcn_00506cd0(void);
-void __cdecl fcn_005012b0(void);
+void __cdecl gm_KillAllSpieler(void);
+void __cdecl gm_ResetAllEntities(void);
 void __cdecl fcn_005012f0(void);
 void __cdecl fcn_004030e0(int p);
 void __cdecl fcn_004162c0(int p);
@@ -95,8 +95,8 @@ void __cdecl fcn_0053fa80(void)
 	fcn_00545930();
 	fcn_00545550();
 	fcn_00527420();
-	fcn_00506cd0();
-	fcn_005012b0();
+	gm_KillAllSpieler();
+	gm_ResetAllEntities();
 	fcn_005012f0();
 	for (entry = (int*) 0x14d0020; (int) entry < 0x14d0c20; entry++) {
 		if (*entry != 0) {

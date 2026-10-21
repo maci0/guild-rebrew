@@ -48,7 +48,6 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	unsigned int v3;
 	unsigned int v4;
 	unsigned int v11;
-	unsigned int dialog[4];
 	int pair[2];
 	int v21;
 	int v22;
@@ -63,7 +62,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	char text[512];
 	char buf[64];
 	char title[512];
-	char cmd[512];
+	char cmd[0x40];
 
 	v7 = a2;
 	v6 = a1;
@@ -81,10 +80,10 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	fcn_004727a0(v8, 2);
 	v22 = 0x19;
 	v21 = (*(int*) (g_77255c + 0xc) - (int) *(short*) (g_772500 + 0x1ebd8)) / 2;
-	dialog[0] = (unsigned int) v6;
-	dialog[3] = 0;
-	fcn_005ca560(dialog);
-	fcn_005ca740(v21, v22, g_772514, 0x54, dialog, 1);
+	*(unsigned int*) cmd = (unsigned int) v6;
+	*(unsigned int*) (cmd + 0x30) = 0;
+	fcn_005ca560(cmd);
+	fcn_005ca740(v21, v22, g_772514, 0x54, cmd, 1);
 	g_100f1dc = -1;
 	for (;;) {
 		if (fcn_00508e40(v3) && fcn_005463a0(1, 1, v4)) {

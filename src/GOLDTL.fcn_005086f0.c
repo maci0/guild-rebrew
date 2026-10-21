@@ -6,7 +6,7 @@ void __cdecl fcn_004c4510(unsigned short*, int);
 void __cdecl fcn_004c4570(int, int, int, void*);
 float __cdecl fcn_004c5360(void);
 void __cdecl fcn_004ff210(unsigned short, int);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 
 /* ADDRESS: GOLDTL 0x005086f0 */
 /* Picks the first free animation slot from a random start, updates the four

@@ -14,7 +14,7 @@ int __cdecl fcn_00423ce0(char*);
 int __cdecl fcn_004246c0(void);
 int __cdecl fcn_004246e0(void);
 int __cdecl fcn_00424700(char*);
-char* __cdecl fcn_0041db70(char*, char*);
+char* __cdecl m_alloc(char*, char*);
 int __cdecl fcn_00425980(char*);
 
 /* ADDRESS: GOLDTL 0x004248a0 */
@@ -53,7 +53,7 @@ int __cdecl fcn_004248a0(char* name)
 		return -1;
 	}
 	text = fcn_00423960();
-	root = (int) fcn_0041db70(text, g_679018);
+	root = (int) m_alloc(text, g_679018);
 	if (root == 0) {
 		result = 0;
 		return result;

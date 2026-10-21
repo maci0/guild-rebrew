@@ -27,16 +27,16 @@ extern void __cdecl fcn_004432d0(int, int);
 extern char* __cdecl fcn_00445600(int, int, int, char*);
 extern void __cdecl fcn_00455350(char*, char*, float*);
 extern int __cdecl fcn_00451840(float*, float*, float);
-extern void __cdecl fcn_00549360(char*, int);
+extern void __cdecl he_CharacterBehavior(char*, int);
 extern char* __cdecl fcn_005463a0(int, int, int);
 extern char* __cdecl fcn_005462a0(void);
 extern char* __cdecl fcn_00501510(int);
 extern int __cdecl fcn_0050de80(char*, Stats*);
-extern int __cdecl fcn_0064d228(float);
+extern int __cdecl _ftol(float);
 extern char* __cdecl fcn_00502cd0(int, ...);
 extern char* __cdecl fcn_00503fe0(int, int, int);
 extern void* __cdecl fcn_004e69e0(int, int);
-extern int __cdecl fcn_0042e410(int);
+extern int __cdecl gm_RandomMod(int);
 extern int __cdecl fcn_0064d470(char*, char*);
 extern void __cdecl fcn_004d1d40(char*, unsigned char);
 extern int __cdecl fcn_004c5980(void*);
@@ -173,7 +173,7 @@ label_56b858:
 				break;
 			}
 		}
-		fcn_00549360(obj, (int) pos);
+		he_CharacterBehavior(obj, (int) pos);
 		list[3] = fcn_005463a0(1, 0, 0x51);
 		ent = fcn_005463a0(1, 0, 0xf);
 		if (nearby) {
@@ -190,7 +190,7 @@ label_56b858:
 					code = stats.xb0;
 					if (code <= 0)
 						goto next;
-					v11 = fcn_0064d228((float) ((double) *(unsigned int*) (obj + 0xe4) * *(float*) 0x664168));
+					v11 = _ftol((float) ((double) *(unsigned int*) (obj + 0xe4) * *(float*) 0x664168));
 					if (v11 == 0) {
 						if (code <= 100 || code >= 500) {
 							if (!r)
@@ -247,7 +247,7 @@ label_56b858:
 			limit = 0;
 		fcn_004432d0(saved, 1);
 		if (count != 0 && fcn_004e69e0(3, -1) == 0 &&
-		    limit < (int) (fcn_0042e410(100) & 0xffff)) {
+		    limit < (int) (gm_RandomMod(100) & 0xffff)) {
 			slot = fcn_00503fe0(1, 1, *(int*) (obj + 0x10));
 			if (slot != 0) {
 				memset(msg, 0, sizeof(msg));
@@ -299,6 +299,6 @@ label_56b858:
 		return;
 	}
 	*(pos14_7f4c00*) (obj + 0x52) = *(pos14_7f4c00*) 0x7f4c00;
-	limit = (fcn_0042e410(5) & 0xffff) + 10;
+	limit = (gm_RandomMod(5) & 0xffff) + 10;
 	fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, limit, 0);
 }

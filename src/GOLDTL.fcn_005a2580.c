@@ -28,9 +28,9 @@ typedef struct Rec {
 	char pad37[0x25];
 	int x5c;             /* 0x5c */
 	int x60;             /* 0x60 */
-	char pad64[0x94];
+	char pad64[0x9c];
 } Rec;
-// SIZE 0xf8
+// SIZE 0x100
 
 extern int g_772514;
 extern char* g_772500;

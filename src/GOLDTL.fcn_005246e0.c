@@ -63,7 +63,7 @@ unsigned int __cdecl fcn_005246e0(unsigned int stream)
 	if (!ls_ReadVfsDataChecked((void*) 0x99f5c0, 4, 1, (void*) stream))
 		return 0;
 	p = (char*) 0x99ec24;
-	do {
+	while ((int) p < 0x99ed64) {
 		if (!ls_ReadVfsDataChecked(p - 4, 4, 1, (void*) stream))
 			return 0;
 		if (!ls_ReadVfsDataChecked(p, 4, 1, (void*) stream))
@@ -75,7 +75,7 @@ unsigned int __cdecl fcn_005246e0(unsigned int stream)
 		if (!ls_ReadVfsDataChecked(p + 0x0c, 4, 1, (void*) stream))
 			return 0;
 		p += 0x14;
-	} while (p < (char*) 0x99ed64);
+	}
 	if (!ls_ReadVfsDataChecked((void*) 0x99f6a0, 0x44, 1, (void*) stream))
 		return 0;
 	if (!ls_ReadVfsDataChecked((void*) 0x99f6e4, 0x44, 1, (void*) stream))
@@ -87,7 +87,7 @@ unsigned int __cdecl fcn_005246e0(unsigned int stream)
 	if (!ls_ReadVfsDataChecked((void*) 0x99f7b0, 0x44, 1, (void*) stream))
 		return 0;
 	p = (char*) 0x99ef82;
-	while (1) {
+	while ((int) p < 0x99f582) {
 		q = p;
 		for (j = 0; j < 8; j++) {
 			if (!ls_ReadVfsDataChecked(q - 2, 2, 1, (void*) stream))
@@ -101,8 +101,6 @@ unsigned int __cdecl fcn_005246e0(unsigned int stream)
 			q += 0x18;
 		}
 		p += 0xc0;
-		if ((char*) 0x99f582 <= p)
-			return 1;
 	}
-	return 0;
+	return 1;
 }

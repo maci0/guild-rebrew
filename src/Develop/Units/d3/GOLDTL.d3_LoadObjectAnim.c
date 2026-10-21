@@ -2,7 +2,7 @@ void __cdecl fcn_00433780(void*);
 char* __cdecl fcn_00449ac0(char*, char*);
 void* __cdecl fcn_0042ff50(const char*, const char*, void*);
 int __cdecl fcn_004011f0(void*, void*);
-char* __cdecl fcn_0041db70(int, char*);
+char* __cdecl m_alloc(int, char*);
 int __cdecl fcn_00401500(void*, int, void**);
 void __cdecl fcn_0041d9e0(const char*);
 void __cdecl fcn_00430580(void*);
@@ -36,7 +36,7 @@ void* __cdecl d3_LoadObjectAnim(int a0, char* obj, char* a1, char a3)
 		hdr = a0;
 		fcn_004011f0(h, &hdr);
 		if (hdr == 0x3a610001) {
-			r = fcn_0041db70(0x44, (char*) 0x67b034);
+			r = m_alloc(0x44, (char*) 0x67b034);
 			fcn_004011f0(h, r);
 			fcn_004011f0(h, r + 0x2c);
 			((unsigned char*) r)[0x2d] &= 0xdf;

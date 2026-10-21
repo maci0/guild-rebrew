@@ -24,7 +24,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id, int c, int d);
 int __cdecl fcn_00503e80(void);
 float __cdecl fcn_0050f980(int a, int b, int c);
 void __cdecl fcn_0051af00(char* buf, int id, ...);
-void __cdecl fcn_00545e80(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
+void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
 void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 void __cdecl fcn_004c51a0(int a, int b, unsigned char k, int n);
 void __cdecl fcn_004c5f60(int a, int b, int c);
@@ -106,7 +106,7 @@ void __cdecl fcn_00564460(char* e)
 		if ((double) n * (g_662a08 - (double) fcn_0050f980(*q, *(unsigned short*) (p + 0x25), 1) * g_662910)
 			* (double) f < (double) *(int*) (e + 0xb0)) {
 			fcn_0051af00(buf, 0x17e9, *(unsigned short*) (p + 0x27), p);
-			fcn_00545e80(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
+			he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
 			fcn_004c51a0(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
 				*(int*) (q + 2), g_773d75, *(int*) (e + 0xb0));
@@ -125,7 +125,7 @@ void __cdecl fcn_00564460(char* e)
 			return;
 		}
 		fcn_0051af00(buf, 0x17ea, *(unsigned short*) (p + 0x27), p);
-		fcn_00545e80(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
+		he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 		fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
 		fcn_00545780(e);
 		fcn_00546190(e);
@@ -142,7 +142,7 @@ void __cdecl fcn_00564460(char* e)
 		p = (unsigned char*) fcn_00504e70(*(int*) (e + 0xac));
 		if (g_100f1dc == 2) {
 			fcn_0051af00(buf, 0x17e9, *(unsigned short*) (p + 0x27), p);
-			fcn_00545e80(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
+			he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
 			fcn_004c51a0(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
 				*(int*) (q + 2), g_773d75, *(int*) (e + 0xb0));
@@ -165,7 +165,7 @@ void __cdecl fcn_00564460(char* e)
 			return;
 		}
 		fcn_0051af00(buf, 0x17ea, *(unsigned short*) (p + 0x27), p);
-		fcn_00545e80(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
+		he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 		fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
 		break;
 	case -2:

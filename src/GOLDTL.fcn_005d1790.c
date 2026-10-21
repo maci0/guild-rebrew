@@ -35,7 +35,7 @@ float __cdecl fcn_00508e80(unsigned short);
 void __cdecl fcn_00509050(char *, char *);
 int __cdecl fcn_00509120(char *, char *);
 int __cdecl fcn_0050d2a0(char *);
-int __cdecl fcn_0050dac0(unsigned short);
+int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_00519190();
 void __cdecl fcn_0051af00();
 int __cdecl fcn_00526120(char *, int);
@@ -47,7 +47,7 @@ char *__cdecl fcn_005462a0(void);
 int __cdecl fcn_005d2470(void *, void *);
 int __cdecl fcn_005db8e0(void *, void *);
 int __cdecl fcn_005dbb60(void *, void *);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 int __cdecl d2_ShowTxt(int, int, char *, int);
 
 /* ADDRESS: GOLDTL 0x005d1790 */
@@ -98,7 +98,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		ok = 1;
 	} else {
 		fcn_00508e80(*a0);
-		fcn_00519190("$5<$R%s$0<$3>$L%i$A$0>", 0x1f54, fcn_0064d228());
+		fcn_00519190("$5<$R%s$0<$3>$L%i$A$0>", 0x1f54, _ftol());
 	}
 	if (*((char *)a0 + 0x164) != 0) {
 		fcn_00519190("$5<$R%s$0<$3>$L%s$A$0>", 0x1f55,
@@ -126,9 +126,9 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		    *((unsigned char *)a0 + 0x169) + t);
 	}
 	if (ok != 0) {
-		fcn_00519190("$5<$R%s$0<$3>$L%s$A$0>", 0x1f58, fcn_0050dac0(*a0));
+		fcn_00519190("$5<$R%s$0<$3>$L%s$A$0>", 0x1f58, gm_WalkEntityChain(*a0));
 	} else {
-		fcn_00519190("$5<$R%s$0<$3>$L%T$A$0>", 0x1f58, fcn_0050dac0(*a0));
+		fcn_00519190("$5<$R%s$0<$3>$L%T$A$0>", 0x1f58, gm_WalkEntityChain(*a0));
 	}
 	p = fcn_00508e40(*(int *)((char *)a0 + 0x5c));
 	if (ok != 0) {

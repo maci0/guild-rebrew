@@ -47,6 +47,14 @@ typedef struct {
 } Snow;
 
 extern char g_677604[];
+extern float g_662a2c;
+extern float g_662a18;
+extern float g_6628cc;
+extern float g_662a88;
+extern float g_662a6c;
+extern float g_662a84;
+extern float g_662a74;
+extern float g_662a8c;
 
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -59,7 +67,6 @@ void __cdecl fcn_00416300(Snow* r, int n, ...)
 	int* p;
 	int i;
 	int k;
-	int rnd;
 	float v;
 
 	i = 0;
@@ -84,22 +91,16 @@ void __cdecl fcn_00416300(Snow* r, int n, ...)
 				m_FreeTracked(r->flakes);
 				r->flakes = buf;
 				r->cap = k;
+				d = (Flake*) ((char*) buf + r->count * sizeof(Flake));
 				if (r->count < k) {
-					d = (Flake*) ((char*) buf + r->count * sizeof(Flake));
 					k -= r->count;
 					do {
-						rnd = rand();
-						d->x = ((float) rnd * (*(float*)0x662a18) - (*(float*)0x6628cc)) * 2.0f;
-						rnd = rand();
-						d->y = ((float) rnd * (*(float*)0x662a18) - (*(float*)0x6628cc)) * 2.0f;
-						rnd = rand();
-						d->z = ((float) rnd * (*(float*)0x662a18) - (*(float*)0x6628cc)) * 2.0f;
-						rnd = rand();
-						d->speed = (float) rnd * (*(float*)0x662a88) + (*(float*)0x662a6c);
-						rnd = rand();
-						d->drift_a = (float) rnd * (*(float*)0x662a84) + (*(float*)0x662a74);
-						rnd = rand();
-						d->drift_b = (float) rnd * (*(float*)0x662a84) + (*(float*)0x662a74);
+						d->x = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
+						d->y = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
+						d->z = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
+						d->speed = (float) rand() * g_662a88 + g_662a6c;
+						d->drift_a = (float) rand() * g_662a84 + g_662a74;
+						d->drift_b = (float) rand() * g_662a84 + g_662a74;
 						d++;
 					} while (--k);
 				}
@@ -116,13 +117,13 @@ void __cdecl fcn_00416300(Snow* r, int n, ...)
 		case 2:
 			r->f40 = r->f48;
 			r->f3c = r->f44;
-			r->size4c = (float) *++p * (*(float*)0x662a2c);
-			r->size50 = (float) *++p * (*(float*)0x662a2c);
+			r->size4c = (float) *++p * g_662a2c;
+			r->size50 = (float) *++p * g_662a2c;
 			r->f68 = r->f5c;
 			r->f6c = *++p + r->f5c;
 			break;
 		case 3:
-			v = (float) *++p * (*(float*)0x662a8c);
+			v = (float) *++p * g_662a8c;
 			r->limit54 = MAX(r->limit54, v);
 			break;
 		}

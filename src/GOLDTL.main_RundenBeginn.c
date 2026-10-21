@@ -5,7 +5,7 @@ int __cdecl fcn_0047dca0(void* slot);
 int __cdecl fcn_00509570(void* slot);
 int __cdecl fcn_005074e0(int id, int index);
 int __cdecl fcn_00507d10(int kind);
-int __cdecl fcn_00546ef0(int id, char* text, int kind, int arg);
+int __cdecl he_RegisterApEvent(int id, char* text, int kind, int arg);
 int __cdecl fcn_005c6270(void* slot, int key);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
 void __cdecl fcn_0050e380(int id, char* out);
@@ -63,7 +63,7 @@ void __cdecl main_RundenBeginn(void)
 				i = fcn_005074e0(*(unsigned short*) slot, n);
 				if (fcn_00507d10(i) == 6) {
 					fcn_0051af00(bufF, 0x15c5, *(unsigned char*) (n + 0x74 + v5) + 0x130);
-					p = (char*) fcn_00546ef0(*(unsigned short*) slot, bufF, 1, 0);
+					p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufF, 1, 0);
 					if (p)
 						*p -= 1;
 				}
@@ -72,13 +72,13 @@ void __cdecl main_RundenBeginn(void)
 		}
 		if (fcn_005c6270(slot, 0x2c1) != 0) {
 			fcn_0051af00(bufE, 0x2052, 0xf2a);
-			p = (char*) fcn_00546ef0(*(unsigned short*) slot, bufE, 6, 0);
+			p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufE, 6, 0);
 			if (p)
 				*p -= 1;
 		}
 		if (fcn_005c6270(slot, 0x15b) != 0) {
 			fcn_0051af00(bufD, 0x2052, 0xc5e);
-			p = (char*) fcn_00546ef0(*(unsigned short*) slot, bufD, 1, 0);
+			p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufD, 1, 0);
 			if (p)
 				*p -= 1;
 		}
@@ -86,7 +86,7 @@ void __cdecl main_RundenBeginn(void)
 		if (*(int*) (slot + 0x1cc) & 0x100000) {
 			if (v5 == 0) {
 				fcn_0051af00(bufC, 0x2054, 0xf18);
-				p = (char*) fcn_00546ef0(*(unsigned short*) slot, bufC, -3, 0);
+				p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufC, -3, 0);
 				if (p)
 					*p -= 1;
 			}
@@ -95,7 +95,7 @@ void __cdecl main_RundenBeginn(void)
 		if (*(int*) (slot + 0x1cc) & 0x200000) {
 			if (v5 == 0) {
 				fcn_0051af00(bufB, 0x2054, 0xf2c);
-				p = (char*) fcn_00546ef0(*(unsigned short*) slot, bufB, -8, 0);
+				p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufB, -8, 0);
 				if (p)
 					*p -= 1;
 			}
@@ -106,7 +106,7 @@ void __cdecl main_RundenBeginn(void)
 			v5 = fcn_0050c710(*(int*) (slot + 0x170), 3, 1);
 			if (v5 != 0) {
 				fcn_0051af00(bufH, 0x2053, *(int*) (slot + 0x170));
-				p = (char*) fcn_00546ef0(*(unsigned short*) slot, bufH, v5, 0);
+				p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufH, v5, 0);
 				if (p)
 					*p -= 1;
 			}
@@ -116,7 +116,7 @@ void __cdecl main_RundenBeginn(void)
 			v18 = fcn_0050c710((int) p, 3, 1);
 			if (v18 != 0) {
 				fcn_0051af00(bufG, 0x3fd7, p);
-				n = (int) fcn_00546ef0(*(unsigned short*) slot, bufG, v18, 0);
+				n = (int) he_RegisterApEvent(*(unsigned short*) slot, bufG, v18, 0);
 				if (n != 0)
 					*(char*) n -= 1;
 			}

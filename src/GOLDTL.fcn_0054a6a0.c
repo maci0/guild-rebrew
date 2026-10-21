@@ -5,11 +5,11 @@ extern unsigned char g_773d75;
 
 void __cdecl fcn_00546190(int);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_005015e0(int*, int, int, int);
+void __cdecl gm_ResolveEntityById(int*, int, int, int);
 int __cdecl fcn_004c5620(int, int);
 void __cdecl fcn_00500bb0(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0042e410(int, int, int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508e40(int);
 void __cdecl fcn_005b23e0(int, int, int);
 void __cdecl fcn_004c4510(int, int);
@@ -51,7 +51,7 @@ void __cdecl fcn_0054a6a0(int a0)
 		return;
 	}
 	*(int*) (v2 + 0x84) = 0xffffffff;
-	fcn_005015e0(&v7, 0, 0, *(int*) (v2 + 0x10));
+	gm_ResolveEntityById(&v7, 0, 0, *(int*) (v2 + 0x10));
 	if (!v7) {
 		fcn_004c5620(0xffffffff, v2);
 		return;
@@ -67,7 +67,7 @@ void __cdecl fcn_0054a6a0(int a0)
 	if (v4) {
 		if (v4 == 1) {
 			fcn_00500bb0(v2 + 0x52,
-			              (int) ((fcn_0042e410(2, 0, 0) & 0xffff) + 1), 0, 0);
+			              (int) ((gm_RandomMod(2) & 0xffff) + 1), 0, 0);
 			*(int*) (v2 + 0x84) = fcn_004c5620(2, v2);
 			return;
 		}

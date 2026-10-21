@@ -143,7 +143,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				}
 				v41 += 1;
 				if (2 <= g_6b25b0) {
-					v12 = (unsigned int) fcn_0064efb1(*(char*) (v6 + v41), 4);
+					v12 = (unsigned int) _isctype(*(char*) (v6 + v41), 4);
 				} else {
 					v12 = *(unsigned char*) (g_6b23a4 + *(char*) (v6 + v41) * 2) & 4;
 				}

@@ -32,7 +32,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 	Slot57ceb0 slots[4];
 	Counts57ceb0 counts;
 	int handles[4];
-	short* p;
+	unsigned short* p;
 	char* v3;
 	char* item;
 	int id;
@@ -51,7 +51,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 	}
 	memset(slots, 0, sizeof(slots));
 	n = 0;
-	p = (short*) (entity + 0xc8);
+	p = (unsigned short*) (entity + 0xc8);
 	for (i = 0; i < 4; i++) {
 		if (*p != 0) {
 			slots[n].id = *p;
@@ -65,7 +65,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 	else {
 		fcn_004a51d0(v3, n, slots, &counts);
 		queued = 0;
-		p = (short*) (entity + 0xc8);
+		p = (unsigned short*) (entity + 0xc8);
 		for (i = 0; i < n; i++) {
 			if (*p != 0) {
 				id = *p;

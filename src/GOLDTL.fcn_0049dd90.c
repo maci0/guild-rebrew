@@ -9,7 +9,7 @@ extern int __cdecl fcn_00507ab0(int a0);
 extern int __cdecl fcn_004a5e60(unsigned short *a0, int a1, int a2, int a3, int a4, float a5, int *a6);
 extern int __cdecl gm_ResolveEntityById(void **a0, void **a1, void **a2, int a3);
 extern int __cdecl fcn_0050b810(int a0, unsigned char a1);
-extern int __cdecl fcn_0042e410(int a0);
+extern int __cdecl gm_RandomMod(int a0);
 extern int __cdecl fcn_00495400(int a0, int a1, int a2, void *a3, void *a4);
 extern int __cdecl fcn_004a4fb0(void *a0, void *a1, char *a2, int a3);
 extern void __cdecl fcn_004fc460(void *a0);
@@ -53,7 +53,7 @@ int __cdecl fcn_0049dd90(int a0, unsigned short *a1, int a2, char *a3, int *a4)
     if ((v10[0x5a] & 4) == 0)
     {
         v1 = v10 + 0x5c;
-        v8 = fcn_0042e410(0x40);
+        v8 = gm_RandomMod(0x40);
         if ((int)*v1 < (int)((v8 & 0xffff) + 0x25))
         {
             v12[0] = 4;
@@ -106,14 +106,14 @@ label_49df97:
             if (*v10 != 0x12)
                 return 0;
             v19 = 0x13;
-            a1 = (unsigned short)(fcn_0042e410(0x400) & 0xffff);
+            a1 = (unsigned short)(gm_RandomMod(0x400) & 0xffff);
             if ((float)(int)a1 + *v24 < g_664368)
                 return 0;
         }
         else
         {
             v19 = 0x12;
-            a1 = (unsigned short)(fcn_0042e410(0x200) & 0xffff);
+            a1 = (unsigned short)(gm_RandomMod(0x200) & 0xffff);
             if ((float)(int)a1 + *v24 < g_66436c)
                 return 0;
         }

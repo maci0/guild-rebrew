@@ -1,7 +1,177 @@
+#include <string.h>
+
+#include "client_sound.h"
+#include "client_types.h"
+#include "g_688118.h"
+
+extern int g_6b7fac;
+extern char g_774964;
+extern float g_6819b0;
+extern float g_6628a8;
+extern float g_6628a0;
+extern float g_664ea4;
+extern int g_772e64;
+extern int g_772e68;
+extern int g_772e60;
+extern char* g_772e5c;
+extern char* g_772e58;
+extern int g_689d20;
+extern char g_772a10[];
+extern char g_772d58[];
+extern char* g_7746c4;
+extern char* g_7746c8;
+extern char* g_7746cc;
+extern unsigned char* g_868050;
+
+int __cdecl fcn_004c27f0(void);
+int __cdecl fcn_004c2820(int);
+int __cdecl fcn_00500e20(int*);
+void __cdecl fcn_004c2100(void);
+void __cdecl fcn_004c2430(void);
+int __cdecl fcn_0064d41a(char*, char*, ...);
+int __cdecl fcn_00420120(int, int);
+unsigned short __cdecl gm_RandomMod(int);
+
 /* ADDRESS: GOLDTL 0x004c2860 */
-int __cdecl fcn_004c2860(void)
+
+/* Season/outdoor-track pump: retires the playing track when the season or the
+ * running channel changed, otherwise decides at random whether to interrupt
+ * the current track and pick a new one. */
+void __cdecl fcn_004c2860(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004c2860 */
-    return 0;
+	int now;
+	unsigned short roll;
+	int slot;
+	int idx;
+	int j;
+	int kind;
+	int e;
+	int thr;
+	char* cc;
+	Chan_14cc460* p;
+
+	now = (*(volatile int*) &g_6b7fac + *(volatile int*) &g_6b7fac * 2) * 4 + *(volatile int*) &g_6b7fac;
+	if (g_774964 == 0) {
+		return;
+	}
+	if (!(g_6819b0 > g_6628a8)) {
+		return;
+	}
+	if (g_772e64 != fcn_00500e20((int*) 0x7f4c00)) {
+		if (g_772e64 != 0) {
+			slot = fcn_004c2820(0x2694);
+			g_772e64 = fcn_00500e20((int*) 0x7f4c00);
+			if (slot < 0) {
+				return;
+			}
+			idx = slot * 0x114;
+			if (*(char*) (0x68822a + idx) != 0) {
+				fcn_0064d41a(g_772a10, (char*) 0x68a448, (char*) (0x688128 + idx));
+				p = g_772d1c;
+				*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) - 0x1e);
+				*(char*) (0x68822a + idx) = 0;
+				if (p != 0) {
+					fcn_00420120((int) p, 1);
+					strcpy(g_772d58, (char*) g_772d1c);
+					p = 0;
+					g_689d20 = 1;
+					g_772d1c = p;
+				}
+			} else {
+				p = g_772d1c;
+			}
+			*(char*) (0x688128 + idx) = 0;
+			if (p != 0) {
+				fcn_0064d41a(g_772a10, (char*) 0x68a418, (char*) p);
+			}
+			return;
+		}
+		g_772e64 = fcn_00500e20((int*) 0x7f4c00);
+		return;
+	}
+	if (g_772d1c != 0) {
+		if (g_772d1c->active != 0 || g_772d1c->b105 != 0) {
+			goto check;
+		}
+		slot = fcn_004c27f0();
+		if (slot >= 0) {
+			idx = slot * 0x114;
+			*(char*) (0x68822a + idx) = 0;
+			if (g_772d1c->f108 - g_772d1c->f10c < 0x4e20) {
+				*(char*) (0x688128 + idx) = 0;
+			}
+			fcn_0064d41a(g_772a10, (char*) 0x68a3f8, (char*) (0x688128 + idx));
+		}
+		strcpy(g_772d58, (char*) g_772d1c);
+		g_772d1c = 0;
+		g_689d20 = now;
+		g_772e60 = (int) ((g_6628a0 - g_6819b0) * g_664ea4);
+		fcn_0064d41a(g_772a10, (char*) 0x68a3cc, now, g_772e60);
+		return;
+	}
+	goto noptr;
+check:
+	cc = g_7746cc;
+	if ((unsigned int) (now - g_772e68) > 0x9c40 && g_772d1c != g_772d24) {
+		if ((g_7746c4 != 0 && g_772e58 != g_7746c4) ||
+		    (g_7746c8 != 0 && g_772e58 != g_7746c8) ||
+		    (g_7746c4 == 0 && g_7746c8 == 0 && g_772e58 != 0)) {
+			goto restart;
+		}
+	}
+	if (g_772e5c == cc) {
+		return;
+	}
+	if (g_772e58 == 0) {
+		return;
+	}
+	if (g_868050[(unsigned char) *g_772e58 * 0x24d] != 2) {
+		return;
+	}
+restart:
+	slot = fcn_004c27f0();
+	g_772e58 = g_7746c4 != 0 ? g_7746c4 : g_7746c8;
+	g_772e5c = cc;
+	idx = slot * 0x114;
+	thr = *(short*) (0x688228 + idx);
+	roll = gm_RandomMod(0x80);
+	if ((int) roll < thr) {
+		kind = g_772e58 != 0 ? g_868050[(unsigned char) *g_772e58 * 0x24d] : 0x2694;
+		j = 0;
+		e = *(int*) (0x688118 + idx);
+		while (e != 0) {
+			if (e == kind) {
+				break;
+			}
+			j++;
+			e = *(int*) (0x688118 + idx + j * 4);
+		}
+		if (*(int*) (0x688118 + idx + j * 4) == 0) {
+			fcn_0064d41a(g_772a10, (char*) 0x68a388, (char*) (0x688128 + idx), thr);
+			g_772e68 = now;
+		}
+		if (g_772e58 != 0) {
+			fcn_004c2100();
+		} else {
+			fcn_004c2430();
+		}
+	} else {
+		g_772e68 = now - 0x3a98;
+		return;
+	}
+	return;
+noptr:
+	if (g_689d20 != 0) {
+		if ((unsigned int) (g_772e60 + g_689d20) >= (unsigned int) now) {
+			return;
+		}
+	}
+	g_689d20 = 0;
+	g_772e58 = g_7746c4 != 0 ? g_7746c4 : g_7746c8;
+	g_772e68 = now;
+	if (g_772e58 != 0) {
+		fcn_004c2100();
+	} else {
+		fcn_004c2430();
+	}
 }

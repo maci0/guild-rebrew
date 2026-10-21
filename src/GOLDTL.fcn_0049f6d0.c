@@ -19,7 +19,7 @@ extern unsigned char g_90e094[];
 int __cdecl fcn_004eb220(char*);
 int __cdecl fcn_00507910(int);
 int __cdecl fcn_004a40c0(Calc*);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 
 #pragma optimize("y", off)
 
@@ -133,7 +133,7 @@ check_target:
 	goto set_result;
 random_tie:
 	if (tie == 0)
-		tie = (fcn_0042e410(4) & 0xffff) - 1;
+		tie = (gm_RandomMod(4) & 0xffff) - 1;
 	if (tie != -1 && tie != 1)
 		return 0;
 set_result:

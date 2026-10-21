@@ -1,6 +1,6 @@
 extern void __cdecl fcn_00473fe0(void);
 extern void __cdecl fcn_0046b2b0(int a);
-extern int __cdecl fcn_004737e0(void);
+extern int __cdecl CountDisplayCounters(void);
 extern void __cdecl fcn_00469c40(int a, int b, int c);
 extern int __cdecl fcn_00469c30(short a, short b, int c);
 extern void __cdecl fcn_00474300(void);
@@ -72,7 +72,7 @@ int __cdecl fcn_004748b0(void)
 				p = v1;
 				*(unsigned int **) 0x7725d0 = v1;
 				if ((*(unsigned char *) ((char *) v1 + 0x28) & 0x40) && !v1[6]
-				    && !v1[7] && !fcn_004737e0() && !v1[0x4b]) {
+				    && !v1[7] && !CountDisplayCounters() && !v1[0x4b]) {
 					v1[0x4b] = 0xffffffff;
 					p = *(unsigned int **) 0x7725d0;
 				}
@@ -114,7 +114,7 @@ label_474b14:
 			p[0x4b] += v7;
 			p = *(unsigned int **) 0x7725d0;
 		}
-		if (!p[6] && !p[7] && !fcn_004737e0() && !p[0x4b]
+		if (!p[6] && !p[7] && !CountDisplayCounters() && !p[0x4b]
 		    && (*(unsigned char *) ((char *) p + 0x28) & 0x40)) {
 			p[0x4b] = 0xffffffff;
 			p = *(unsigned int **) 0x7725d0;

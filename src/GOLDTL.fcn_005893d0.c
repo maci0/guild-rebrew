@@ -5,7 +5,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* text);
 void __cdecl fcn_00471d80(int k, int flags);
 void __cdecl fcn_00471af0(int k, int flag);
 int __cdecl fcn_004727a0(int k, int i);
-int __cdecl fcn_00472380();
+void __cdecl fcn_00472380(int k, int a1, int a2, int a3, ...);
 void __cdecl fcn_00468b80(int id, int value);
 void __cdecl fcn_00468bb0(int slot, int n, ...);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
@@ -38,7 +38,7 @@ void __cdecl fcn_005893d0(int w, int a1)
 	*(int*) (w + 0xd4) = fcn_00469c30(0, 0, id);
 	*(int*) (w + 0xd8) = fcn_00469c30(0,
 	    *(int*) 0x1040490
-	    - (int) *(short*) (*(int*) 0x772500 + 0x52 + id2 * 0x54), id2);
+	    - (int) *(short*) (*(int*) 0x772500 + id2 * 0x54 + 0x52), id2);
 	*(int*) (w + 0xa4) = fcn_00470820(0, 0, (char*) 0x6a94e8);
 	fcn_00471d80(*(int*) (w + 0xa4), 1);
 	fcn_004727a0(*(int*) (w + 0xa4), 0);

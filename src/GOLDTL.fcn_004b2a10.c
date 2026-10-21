@@ -10,7 +10,7 @@ extern int g_67fca0;
 extern char g_680ae0[]; /* hst_ParseText_Fake_2nd_Pass() failed: Syntax Error in Label %i < %s > */
 
 int __cdecl sprintf(char*, const char*, ...);
-int __cdecl fcn_0064efb1(int c, int mask);
+int __cdecl _isctype(int c, int mask);
 Slot* __cdecl hst_ParseCommandline_1st_Pass(int id);
 int __cdecl fcn_004b2300(char* label, char* out, Slot* slot);
 
@@ -76,7 +76,7 @@ int __cdecl fcn_004b2a10(char* out, int id)
 				continue;
 			}
 			if (*(int*) 0x6b25b0 > 1) {
-				n = fcn_0064efb1(c, 4);
+				n = _isctype(c, 4);
 			} else {
 				n = *(unsigned char*) (*(unsigned char**) 0x6b23a4 + c * 2) & 4;
 			}
@@ -84,7 +84,7 @@ int __cdecl fcn_004b2a10(char* out, int id)
 				sprintf(msg, g_680ae0, id - g_67fca0 - 1, label);
 				return 0;
 			}
-			while ((*(int*) 0x6b25b0 > 1 ? fcn_0064efb1(*s, 4)
+			while ((*(int*) 0x6b25b0 > 1 ? _isctype(*s, 4)
 			    : *(unsigned char*) (*(unsigned char**) 0x6b23a4 + *s * 2) & 4) != 0
 			    && *s != 0) {
 				*p++ = *s++;

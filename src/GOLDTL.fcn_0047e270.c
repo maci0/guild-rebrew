@@ -59,7 +59,7 @@ void __cdecl fcn_004868d0(Bld*, BldRec*);
 int __cdecl fcn_005b1e40(int);
 int __cdecl fcn_00503d10(int);
 int __cdecl fcn_0050e000(int, int, int);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0047e220(int);
 void __cdecl fcn_0047e0e0(Bld*, int);
@@ -184,7 +184,7 @@ pick:
 	for (i = 0; i < 0x20; i++)
 		order[i] = i;
 	for (i = 0; i < 0x20; i++) {
-		r = fcn_0042e410(0x20) & 0xffff;
+		r = gm_RandomMod(0x20) & 0xffff;
 		val = order[r];
 		order[i] = order[r];
 		order[r] = order[i + 1];

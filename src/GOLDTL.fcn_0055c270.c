@@ -41,7 +41,7 @@ extern void __cdecl fcn_00546190(char*);
 extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 extern void __cdecl fcn_004c5790(int, Req55c270*);
 extern void __cdecl fcn_0051af00(char*, int, ...);
-extern void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, char*, char*);
+extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 
 /* Handles the follow-up action state of an entity: it looks the action record
  * up, reports it to the action handler and advances the entity's queue. */
@@ -121,7 +121,7 @@ void __cdecl fcn_0055c270(char* o)
 				_strupr(tmp);
 				sprintf(name, (char*) 0x68b7ac, tmp);
 				fcn_0051af00(buf, 0x1c2b, e, *(unsigned short*) (o + 0xac) * 2 + 0x9a8);
-				fcn_00545e80(*(int*) (0x7f4ca0 +
+				he_MessageBoxQuickjump(*(int*) (0x7f4ca0 +
 						*(unsigned short*) (e + 0x27) * 0x21c + 4),
 					*(int*) (o + 0x10), buf, 0, kind, *(int*) (e + 1),
 					*(int*) (o + 0xb0), name, (char*) 0x6a6248);
@@ -134,7 +134,7 @@ void __cdecl fcn_0055c270(char* o)
 						kind = 0x60b;
 				}
 				fcn_0051af00(buf, 0x1c2d, e, *(unsigned short*) (o + 0xac) * 2 + 0x9a8);
-				fcn_00545e80(*(int*) (0x7f4ca0 +
+				he_MessageBoxQuickjump(*(int*) (0x7f4ca0 +
 						*(unsigned short*) (e + 0x27) * 0x21c + 4),
 					*(int*) (o + 0x10), buf, 0, kind, *(int*) (e + 1),
 					-1, 0, (char*) 0x6a6234);

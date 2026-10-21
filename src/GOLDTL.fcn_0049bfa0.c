@@ -8,8 +8,8 @@ extern unsigned char g_773d75;
 int __cdecl gm_RandomMod(int a0);
 int __cdecl fcn_0050d320(unsigned short* a0, int a1);
 int __cdecl fcn_004a5340(unsigned short* a0, int a1, int* a2, int a3, float a4, int* a5);
-int __cdecl fcn_0050dac0(int a0);
-int __cdecl fcn_0064d228(void);
+int __cdecl gm_WalkEntityChain(int a0);
+int __cdecl _ftol(void);
 int __cdecl fcn_005463a0(int a0, int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x0049bfa0 */
@@ -36,10 +36,10 @@ unsigned int __cdecl fcn_0049bfa0(unsigned int a0, unsigned short* a1, int a2, c
 		return 0;
 	}
 	p = (char*) (0x7f4ca0 + (out & 0xffff) * 0x21c);
-	f = (float) fcn_0050dac0(*a1) * g_664138;
-	f = (float) fcn_0050dac0(*(unsigned short*) p) * g_664138 + f;
-	f = ((float) v9 * g_664188 + g_6628a0) * (float) fcn_0064d228();
-	v5 = fcn_0064d228();
+	f = (float) gm_WalkEntityChain(*a1) * g_664138;
+	f = (float) gm_WalkEntityChain(*(unsigned short*) p) * g_664138 + f;
+	f = ((float) v9 * g_664188 + g_6628a0) * (float) _ftol();
+	v5 = _ftol();
 	if (!((float) v5 > (float) v10 * g_664160)) {
 		return 0;
 	}

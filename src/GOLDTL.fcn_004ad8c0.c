@@ -20,7 +20,7 @@ extern int g_6653bc;
 extern unsigned char g_773d75;
 
 void __cdecl fcn_00508d80(int, int *);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507400(int, int);
 int __cdecl gm_IsInRange(int);

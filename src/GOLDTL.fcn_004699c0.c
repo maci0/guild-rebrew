@@ -8,6 +8,7 @@ int __cdecl fcn_0047b620(int, int);
 int __cdecl fcn_004699c0(unsigned int a0, int a1, int a2)
 {
 	int v4;
+	int n;
 	int idx;
 	int off;
 	char* v1;
@@ -25,9 +26,9 @@ int __cdecl fcn_004699c0(unsigned int a0, int a1, int a2)
 	if (idx >= 0x400) {
 		return -1;
 	}
-	fcn_00466260(a2, &v4, &a2);
+	fcn_00466260(a2, &v4, &n);
 	*(int*) (v1 + 0xc) = v4;
-	*(int*) (v1 + 8) = a2;
+	*(int*) (v1 + 8) = n;
 	*(int*) (v1 + 0x20) = *(int*) (*(int*) 0x772500 + 0x3c + a2 * 0x54);
 	*(int*) (v1 + 0x10) = a0;
 	*(int*) (v1 + 0x14) = a1;

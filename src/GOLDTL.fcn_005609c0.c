@@ -4,16 +4,16 @@ void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_00500bb0(unsigned int*, int, int);
 int __cdecl fcn_00500cb0(int, int);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_00503fe0(int, int, int);
+int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_005049a0(int);
 int __cdecl fcn_0050dc90(int);
 void __cdecl fcn_0050c710(int, int, int);
 int __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
 int __cdecl fcn_0051af00(char*, int, int, int);
-int __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
+int __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_00546190(int);
 int __cdecl strcat(char*, char*);
@@ -77,7 +77,7 @@ void __cdecl fcn_005609c0(char* a0)
 	if (fcn_00500cb0((int) (a0 + 0x52), 0x7f4c00) >= 0) {
 		return;
 	}
-	rec = fcn_00503fe0(1, 1, *(int*) (a0 + 0x10));
+	rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0x10));
 	if (rec == 0) {
 		*(int*) (a0 + 0x70) = -1;
 		return;
@@ -91,7 +91,7 @@ void __cdecl fcn_005609c0(char* a0)
 		tmp = fcn_0050dc90(rec);
 		fcn_0050c710(rec, 0xb, 1);
 		gm_RandomMod(5);
-		len = fcn_0064d228();
+		len = _ftol();
 		fcn_004c51f0(*(int*) (ent + 2), -1, *(unsigned short*) (a0 + 0xae),
 			len, *(unsigned char*) 0x773d75, 0);
 		fcn_0051af00(text, 0x1809, 0x1805, 0);
@@ -104,12 +104,12 @@ void __cdecl fcn_005609c0(char* a0)
 				|| *(unsigned char*) (rec + 0x7f4ca2) == 7)
 			&& (tmp == 0 || (*(unsigned char*) (tmp + 0x1b4) & 1) == 0)) {
 			if (v19 != 0) {
-				fcn_00545e80(*(int*) (rec + 0x7f4ca4), -1, text, 0, 0x5ec,
+				he_MessageBoxQuickjump(*(int*) (rec + 0x7f4ca4), -1, text, 0, 0x5ec,
 					*(int*) (rec + 1), -1, 0, 0);
 				*(int*) (a0 + 0x70) = -1;
 				return;
 			}
-			fcn_00545e80(*(int*) (rec + 0x7f4ca4), -1, text, 0, 0x5ec,
+			he_MessageBoxQuickjump(*(int*) (rec + 0x7f4ca4), -1, text, 0, 0x5ec,
 				*(int*) (rec + 1), 0, 0, 0);
 		}
 	}

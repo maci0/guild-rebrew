@@ -7,7 +7,7 @@ extern char g_6b5c60[];
 
 unsigned char* __cdecl fcn_00503fe0(int, ...);
 unsigned char* __cdecl fcn_00503e80(void);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 void __cdecl fcn_0041d9e0(char*);
 
 /* ADDRESS: GOLDTL 0x00515010 */
@@ -65,7 +65,7 @@ void __cdecl fcn_00515010(void)
 				}
 			}
 			if (cnt != 0) {
-				q = tbl + (fcn_0042e410((unsigned char) cnt) & 0xffff) * 0x40;
+				q = tbl + (gm_RandomMod((unsigned char) cnt) & 0xffff) * 0x40;
 				if (strlen(q) >= 0x20) {
 					sprintf(tmp, (char*) 0x69983c, q);
 					fcn_0041d9e0(tmp);

@@ -1,4 +1,4 @@
-void __cdecl fcn_0064dfda(void* p);
+void __cdecl free(void* p);
 
 /* ADDRESS: GOLDTL 0x00429490 */
 int __cdecl fcn_00429490(char* a0)
@@ -45,7 +45,7 @@ done:
 		*(int*) 0x6b7ebc = 0;
 		for (i = 0; i < *(int*) (v1 + 0x20); i++) {
 			if (*(int*) (v1 + 0x24 + i * 4) == 6) {
-				fcn_0064dfda(*(void**) (a0 + 0xc64 + i * 4));
+				free(*(void**) (a0 + 0xc64 + i * 4));
 			}
 			*(int*) (a0 + 0xc64 + i * 4) = 0;
 		}

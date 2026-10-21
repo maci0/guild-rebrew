@@ -1,8 +1,7 @@
+int __cdecl fcn_004ef040(int);
+
 /* ADDRESS: GOLDTL 0x00520d80 */
-int __cdecl fcn_00520d80(void)
+int __cdecl fcn_00520d80(int a1)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* tail-call thunk — implement as a naked asm tail-jump */
-    /* Ghidra name: fcn.00520d80 */
-    return 0;
+	return fcn_004ef040(a1);
 }

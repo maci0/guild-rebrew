@@ -22,7 +22,7 @@ int __cdecl fcn_005cb670(char* a0, int n, char* a2, int a3)
 			if (h != a0 && *(unsigned short*) h != 0xffff
 			    && *(unsigned char*) (h + 2) >= 2 && *(unsigned char*) (h + 2) <= 7) {
 				d = fcn_0050f980(*(unsigned short*) a0, *(unsigned short*) h, 1);
-				if (g_66291c <= d && *(int*) (h + 0x210) != *(int*) (a0 + 4)) {
+				if (d >= g_66291c && *(int*) (h + 0x210) != *(int*) (a0 + 4)) {
 					count++;
 				}
 			}
@@ -36,18 +36,18 @@ int __cdecl fcn_005cb670(char* a0, int n, char* a2, int a3)
 		if (h != a0 && *(unsigned short*) h != 0xffff
 		    && *(unsigned char*) (h + 2) >= 2 && *(unsigned char*) (h + 2) <= 7) {
 			d = fcn_0050f980(*(unsigned short*) a0, *(unsigned short*) h, 1);
-			if (g_66291c <= d && *(int*) (h + 0x210) != *(int*) (a0 + 4)) {
-				if (*(int*) (a2 + n * 0x38 - 0xc) < (int) d) {
+			if (d >= g_66291c && *(int*) (h + 0x210) != *(int*) (a0 + 4)) {
+				if ((float) *(int*) (a2 + n * 0x38 - 0xc) < d) {
 					*(int*) (a2 + n * 0x38 - 0x38) = (int) h;
 					*(int*) (a2 + n * 0x38 - 0xc) = (int) d;
 					count++;
 					for (i = n - 1; i > 0; i--) {
 						if (*(int*) (a2 + (i - 1) * 0x38 + 0x2c) < *(int*) (a2 + i * 0x38 + 0x2c)) {
+							d = (float) *(int*) (a2 + (i - 1) * 0x38 + 0x2c);
 							t = *(int*) (a2 + (i - 1) * 0x38);
 							*(int*) (a2 + (i - 1) * 0x38) = *(int*) (a2 + i * 0x38);
-							*(int*) (a2 + i * 0x38) = t;
-							d = (float) *(int*) (a2 + (i - 1) * 0x38 + 0x2c);
 							*(int*) (a2 + (i - 1) * 0x38 + 0x2c) = *(int*) (a2 + i * 0x38 + 0x2c);
+							*(int*) (a2 + i * 0x38) = t;
 							*(int*) (a2 + i * 0x38 + 0x2c) = (int) d;
 						}
 					}

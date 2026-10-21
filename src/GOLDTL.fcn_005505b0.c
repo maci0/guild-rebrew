@@ -15,7 +15,7 @@ int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
 void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-int __cdecl fcn_0050dac0(unsigned short);
+int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x005505b0 */
@@ -48,7 +48,7 @@ void __cdecl fcn_005505b0(int a)
 				fcn_00545d40(*(int*) (p + 2), -1, buf, 0x20, 0x601, 0);
 			}
 			if (id != 0) {
-				n = (int) ((double) fcn_0050dac0(*(unsigned short*) (p - 2)) * g_662910);
+				n = (int) ((double) gm_WalkEntityChain(*(unsigned short*) (p - 2)) * g_662910);
 				n *= (gm_RandomMod(4) & 0xffff) + 2;
 				fcn_004c51a0(*(int*) (p + 2), -1, (unsigned char) g_773d75, n);
 				if (*(char*) p == 6 || *(char*) p == 7) {

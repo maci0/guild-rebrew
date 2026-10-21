@@ -17,14 +17,14 @@ void __cdecl fcn_004e4f10(int* event)
 
     id = event + 13;
     for (n = 0; n < 16; n++) {
-        slot = (int*) (g_9b0e20 + 8 + n * 0x35c);
+        slot = (int*) (g_9b0e20 + 0xc + n * 0x35c);
         i = 0;
-        slot[-2] = 1;
-        *slot = 0;
+        slot[-3] = 1;
         slot[-1] = 0;
-        slot[1] = 1;
+        slot[-2] = 0;
+        slot[0] = 1;
         if (event != 0) {
-            slot[2] = *id;
+            slot[1] = *id;
             if (*(unsigned char*) (event + 2) == 3) {
                 for (; i < *(unsigned char*) ((char*) event + 0x30); i++) {
                     participant = (int*) (g_9b0e20 + 0x10 + i * 0x35c);
@@ -39,9 +39,9 @@ void __cdecl fcn_004e4f10(int* event)
                 }
             }
         } else {
-            slot[2] = -1;
+            slot[1] = -1;
         }
-        *(unsigned char*) (slot + 3) = 0;
+        *(unsigned char*) (slot + 2) = 0;
         id++;
     }
 }

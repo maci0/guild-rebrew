@@ -25,8 +25,8 @@ int __cdecl sprintf(char*, const char*, ...);
 void __cdecl fcn_00551d50(char* a0)
 {
 	char buf[0x800];
-	char msg[0x30];
 	char packet[0xf8];
+	char msg[0x30];
 	char* table;
 	char* row;
 	int index;
@@ -41,8 +41,8 @@ void __cdecl fcn_00551d50(char* a0)
 	if (*(int*) (a0 + 0x70) != 0) {
 		return;
 	}
-	byte = *(unsigned char*) (a0 + 0xae);
 	index = *(unsigned short*) (a0 + 8);
+	byte = *(unsigned char*) (a0 + 0xae);
 	delay = *(unsigned char*) (a0 + 0xac) - (gm_RandomMod(*(unsigned char*) (a0 + 0xad)) & 0xffff);
 	row = (char*) (0x7f4ca0 + index * 0x21c);
 	id = *(unsigned char*) (row + 0x80 + byte);

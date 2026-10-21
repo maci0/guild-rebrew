@@ -5,7 +5,7 @@
  */
 extern void *g_775f60;
 
-void *__cdecl fcn_006508ff(int size);
+void *__cdecl iswupper(int size);
 void *__fastcall fcn_0062abf8(void *self);
 int __fastcall fcn_0062af7c(void *self, int ignored, int arg);
 void __fastcall fcn_0062ad3f(void *self, int ignored, int arg);
@@ -26,7 +26,7 @@ int __cdecl fcn_0062b5d0(int id, void **out)
         }
         p = (void **)p[0x2b];
     }
-    mem = fcn_006508ff(0xb0);
+    mem = iswupper(0xb0);
     obj = (void *)0;
     if (mem != 0)
         obj = fcn_0062abf8(mem);

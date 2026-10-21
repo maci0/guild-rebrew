@@ -1,5 +1,5 @@
 extern char* g_99ec10;
-extern unsigned char* g_868050;
+extern char* g_entity_type_table;
 extern unsigned char g_773d75;
 extern float g_6628a8;
 
@@ -56,7 +56,7 @@ unsigned char __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		if (ent == 0) {
 			goto fail;
 		}
-		tbl = g_868050 + (unsigned int) *ent * 0x24d;
+		tbl = (unsigned char*) g_entity_type_table + (unsigned int) *ent * 0x24d;
 		cnt = *(unsigned char*) (tbl + 0x22);
 		i = 0;
 		if (cnt > 0) {
@@ -101,7 +101,7 @@ unsigned char __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		if (fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, *(unsigned int*) (a3 + 4)) != 0) {
 			goto fail;
 		}
-		tbl = g_868050 + (unsigned int) *ent * 0x24d;
+		tbl = (unsigned char*) g_entity_type_table + (unsigned int) *ent * 0x24d;
 		cnt = *(unsigned char*) (tbl + 0x22);
 		i = 0;
 		if (cnt > 0) {

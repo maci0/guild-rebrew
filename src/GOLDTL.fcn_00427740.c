@@ -4,7 +4,7 @@
 
 extern char g_679478[];
 
-char* __cdecl fcn_0041db70(int size, char* tag);
+char* __cdecl m_alloc(int size, char* tag);
 
 /* ADDRESS: GOLDTL 0x00427740 */
 int __cdecl fcn_00427740(char* obj, int type, int count)
@@ -30,7 +30,7 @@ int __cdecl fcn_00427740(char* obj, int type, int count)
 	*rec = (*rec ^ type) & 0xf ^ *rec;
 	size = size * count;
 	*(int*) (*(int*) (obj + 0x114) * 0x30 + 0x2c + *(int*) (obj + 0x108)) =
-		(int) fcn_0041db70(size, g_679478);
+		(int) m_alloc(size, g_679478);
 	memset((void*) *(int*) (*(int*) (obj + 0x114) * 0x30 + 0x2c
 		+ *(int*) (obj + 0x108)), 0, size);
 	*(int*) (*(int*) (obj + 0x114) * 0x30 + 0x24 + *(int*) (obj + 0x108)) = count;

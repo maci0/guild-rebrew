@@ -7,7 +7,7 @@ extern int g_772528;
 extern Fld_102d140* g_7725d0;
 extern Fld_102d140 g_102d140[];
 
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00475f80(void* surf);
 void __cdecl fcn_0047a2b0(int h);
 int __cdecl fcn_0046f390(int win);
@@ -36,7 +36,7 @@ void __cdecl fcn_0046b2b0(int id)
 	switch (state) {
 	case 0x43:
 		if (*(int*) (e + 0x88) != 0) {
-			fcn_0041ddd0((void*) *(int*) (e + 0x88));
+			m_FreeTracked((void*) *(int*) (e + 0x88));
 		}
 		break;
 	case 4:

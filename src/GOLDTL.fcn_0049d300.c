@@ -38,12 +38,12 @@ int __cdecl fcn_0049d300(int a0, unsigned short* a1, int a2,
 	fcn_00502cd0(*(int*) (r + 0x5d), 2, 6, 0, 0x115);
 	a0 = fcn_0050b810(*(int*) (r + 0x14), *(unsigned char*) 0x773d75);
 	fcn_004fc460((char*) ptrs);
-	e = (unsigned char*) 0x90e094;
+	e = *(unsigned char**) 0x90e094;
 	a2 = 0x100;
 	do {
 		kind = *e;
 		if (kind != 0 && *(unsigned char*) (kind * 0x24d + 0x868050) == 1) {
-			flags = *(unsigned short*) (e + 0x5a * 2);
+			flags = *(unsigned short*) (e + 0x5a);
 			if ((flags & 0x45) == 0) {
 				if (*(char*) (e + 0x5c) <= 0x4f
 					&& (best == 0 || *(char*) (e + 0x5c) < *(char*) (best + 0x5c))) {

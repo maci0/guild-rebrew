@@ -34,8 +34,8 @@ int __cdecl fcn_004011d0(char*, float*);
 int __cdecl fcn_004012b0(char*, void*);
 int __cdecl fcn_00401280(char*, void*);
 int __cdecl fcn_00401500(char*, int, int*);
-void* __cdecl fcn_0041db70(int, char*);
-void __cdecl fcn_0041ddd0(void*);
+void* __cdecl m_alloc(int, char*);
+void __cdecl m_FreeTracked(void*);
 int __cdecl fcn_0045c5b0(char*, int, int, int);
 int __cdecl fcn_0045ce90(int);
 char* __cdecl fcn_0043fa10(char*);
@@ -100,7 +100,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 				if (version >= 0x3a6c00ad) {
 					fcn_00401500(stream, listA, &listD);
 				}
-				recs = (S447e30Rec*) fcn_0041db70(count * 0x158, (char*) 0x67ac08);
+				recs = (S447e30Rec*) m_alloc(count * 0x158, (char*) 0x67ac08);
 				saved = 0;
 				rec = recs;
 				while (saved < count) {
@@ -189,23 +189,23 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 		}
 	}
 	if (recs != 0) {
-		fcn_0041ddd0(recs);
+		m_FreeTracked(recs);
 		recs = 0;
 	}
 	if (listD != 0) {
-		fcn_0041ddd0((void*) listD);
+		m_FreeTracked((void*) listD);
 		listD = 0;
 	}
 	if (listB != 0) {
-		fcn_0041ddd0((void*) listB);
+		m_FreeTracked((void*) listB);
 		listB = 0;
 	}
 	if (listC != 0) {
-		fcn_0041ddd0((void*) listC);
+		m_FreeTracked((void*) listC);
 		listC = 0;
 	}
 	if (listE != 0) {
-		fcn_0041ddd0((void*) listE);
+		m_FreeTracked((void*) listE);
 		listE = 0;
 	}
 	return (int) obj;

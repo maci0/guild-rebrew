@@ -20,10 +20,10 @@ unsigned int __cdecl fcn_004a4fb0(unsigned int* a0, unsigned int* a1, unsigned c
 	int idx;
 
 	container = *(int*) (a2 + 0x5d);
-	rec = g_entity_type_table + *a2 * 0x24d;
+	rec = (unsigned char*) (g_entity_type_table + *a2 * 0x24d);
 	v11 = 0;
 	idx = 0;
-	if (rec[0x22] == 0) {
+	if ((unsigned char) rec[0x22] <= 0) {
 		return 0;
 	}
 	v12 = (unsigned short*) (rec + 0xa5);
@@ -67,7 +67,10 @@ label:
 				}
 				if (v7 < (int) (unsigned char) rec[0x21] && !v4) {
 					v5 = fcn_00502cd0(*(int*) (a2 + 0x5d), 1, 4, 6);
-					while (v5 != 0) {
+					do {
+						if (!v5) {
+							break;
+						}
 						if (*v5 == (*v10 & 0x7fff)) {
 							container = *(int*) ((char*) v5 + 0x14);
 							v4 = 1;
@@ -75,7 +78,7 @@ label:
 							break;
 						}
 						v5 = fcn_00502850();
-					}
+					} while (1);
 					if (v7 < (int) (unsigned char) rec[0x21] && !v4) {
 						goto label;
 					}

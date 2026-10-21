@@ -16,7 +16,7 @@ extern void __cdecl fcn_00442d50(char* record, int mode);
 extern int __cdecl fcn_00413680(char* record, char* scene, char* out, int* value);
 extern void* __cdecl fcn_00426fd0(char* name);
 extern void __cdecl fcn_00428340(void* handle, int a, int b);
-extern void __cdecl fcn_00442a30(char* record, int target, char mode, int flag);
+extern void __cdecl SelectTextureSet(char* record, int target, char mode, int flag);
 
 /* ADDRESS: GOLDTL 0x005156a0 */
 void __cdecl fcn_005156a0(char* record)
@@ -205,11 +205,11 @@ tail:
 			&& strncmp(record, (char*) 0x68d6f8, 3) == 0)
 			return;
 		if (*(int*) (record + 0x1cc) == 0) {
-			fcn_00442a30(record, *(int*) (record + 0x1ec) + 0xf4,
+			SelectTextureSet(record, *(int*) (record + 0x1ec) + 0xf4,
 				(char) g_773dd4, 1);
 			return;
 		}
-		fcn_00442a30(record, *(int*) (record + 0x1cc), (char) g_773dd4, 1);
+		SelectTextureSet(record, *(int*) (record + 0x1cc), (char) g_773dd4, 1);
 		return;
 	}
 	idx = fcn_00501490(record + 6);

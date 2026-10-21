@@ -7,7 +7,7 @@ extern char g_7f4ca4[];
 extern float g_662910;
 
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0050dac0(unsigned short);
+int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_0050d2a0(char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00473a90(int, int);
@@ -66,11 +66,11 @@ void __cdecl fcn_005aaf60(char* a0)
 	if (h == 0) {
 		return;
 	}
-	m = fcn_0050dac0(g_774970);
+	m = gm_WalkEntityChain(g_774970);
 	if (m <= 1) {
 		m = 1;
 	}
-	n = fcn_0050dac0(*(unsigned short*) (a0 + 0x27));
+	n = gm_WalkEntityChain(*(unsigned short*) (a0 + 0x27));
 	if (n <= 1) {
 		n = 1;
 	}

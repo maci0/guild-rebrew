@@ -25,14 +25,14 @@ void __cdecl fcn_004463f0(int, int, float);
 /* ADDRESS: GOLDTL 0x004e1b00 */
 void __cdecl fcn_004e1b00(int a0)
 {
+	volatile int mode;
+	unsigned short* p;
 	int ranges[5];
 	char buf[256];
-	unsigned short* p;
 	unsigned short* q;
 	unsigned short* r;
 	unsigned short* s;
 	char* scene;
-	int mode;
 	int id;
 	int len;
 

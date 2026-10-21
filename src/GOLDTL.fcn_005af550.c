@@ -1,7 +1,7 @@
 typedef struct {
 	char b[14];
 } Name14;
-// SIZE 0xe
+/* SIZE 0xe */
 
 typedef struct {
 	int x0;
@@ -19,7 +19,7 @@ typedef struct {
 	int x60;
 	char pad64[0x94];
 } Packet;
-// SIZE 0xf8
+/* SIZE 0xf8 */
 
 typedef struct {
 	char pad0[4];
@@ -28,7 +28,10 @@ typedef struct {
 	unsigned char x188;
 	char pad189[0x93];
 } Player;
-// SIZE 0x21c
+/* SIZE 0x21c */
+
+void* __cdecl memset(void*, int, unsigned int);
+#pragma intrinsic(memset)
 
 extern char g_7f4ca0[];
 extern unsigned short g_774970;
@@ -59,27 +62,23 @@ int __cdecl fcn_005af550(int unused, char* param)
 	Packet pkt;
 	char buf[0x400];
 	int flag;
-	int btn;
-	int btn1;
+	int count;
 	int btn2;
+	int btn1;
 	int dlg;
+	int btn;
 	int i;
 	int n;
-	int count;
-	char* p;
 
 	flag = 0;
-	if (param == 0)
+	if (param == 0) {
 		return 0;
-	i = 0;
-	p = g_7f4ca0 + 0x188;
-	while (p < (char*) 0x85a228) {
-		if (*p != 0)
-			break;
-		p += 0x21c;
-		i++;
 	}
-	if (p >= (char*) 0x85a228 || i >= 0x300) {
+	for (i = 0; i < 768; i++) {
+		if (((Player*) g_7f4ca0)[i].x188 != 0)
+			break;
+	}
+	if (i >= 768) {
 		fcn_00526120(g_14abc98, 0);
 		return 0;
 	}
@@ -92,49 +91,48 @@ int __cdecl fcn_005af550(int unused, char* param)
 	btn2 = fcn_00472250(dlg, 1, btn + 1);
 	g_100f1dc = -1;
 	do {
-		if (g_14ce8e0)
+		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
+		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 != btn1) {
-				if (g_67d370 == btn2)
-					g_774654 = 1;
-			} else {
-				for (i = 0; i < 8; i++)
-					pkt.ids[i] = -1;
+			if (g_67d370 == btn1) {
 				n = 0;
-				for (p = g_7f4ca0 + 4; p < (char*) 0x85a0a4; p += 0x21c) {
-					if (n >= 6)
+				memset(pkt.ids, 0xff, sizeof(pkt.ids));
+				for (i = 0; i < 768; i++) {
+					if (n >= 6) {
 						break;
-					if (*(unsigned char*) (p + 0x184)) {
-						pkt.ids[n] = *(int*) p;
+					}
+					if (((Player*) g_7f4ca0)[i].x188 != 0) {
+						pkt.ids[n] = ((Player*) g_7f4ca0)[i].x4;
 						n++;
 					}
 				}
 				if (n != 0) {
+					count = 0;
 					pkt.type = 0x44;
 					pkt.x8 = ((Player*) g_7f4ca0)[g_774970].x4;
 					pkt.x36 = 2;
 					pkt.x58 = *(int*) (param + 1);
-					pkt.x60 = *(int*) (g_7746c4 + 1);
+					pkt.x5c = *(int*) (g_7746c4 + 1);
 					fcn_004c5530(&pkt);
 					cm_ExProdObjekt();
 					flag = 1;
-					count = 0;
-					for (p = g_7f4ca0 + 0x188; p < (char*) 0x85a228; p += 0x21c) {
-						if (*p)
+					for (i = 0; i < 768; i++) {
+						if (((Player*) g_7f4ca0)[i].x188 != 0)
 							count++;
 					}
-					if (count >= 7) {
+					if (count > 6) {
 						fcn_0051af00(buf, 0x19ef, 6);
 						fcn_00526120(buf, 0);
 					}
 				}
 				g_774654 = 2;
 			}
+			else if (g_67d370 == btn2) {
+				g_774654 = 1;
+			}
 		}
-		if (!fcn_005373e0((void*) fcn_005af550, 0x677c7)) {
-			fcn_00471e30(dlg);
-			return flag;
-		}
-	} while (1);
+	} while (fcn_005373e0((void*) fcn_005af550, 0x677c7) != 0);
+	fcn_00471e30(dlg);
+	return flag;
 }

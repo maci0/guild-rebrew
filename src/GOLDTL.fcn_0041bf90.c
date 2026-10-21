@@ -12,7 +12,6 @@ void __cdecl fcn_0041c190(unsigned int idx);
 /* ADDRESS: GOLDTL 0x0041bf90 */
 int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 {
-	unsigned char* p;
 	unsigned int left;
 	unsigned int key;
 	unsigned int c;
@@ -25,12 +24,9 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 	if (!g_6b6f40) {
 		return 0;
 	}
-	p = pixels;
 	for (left = count; left > 0; left--) {
-		key = g_6b6b18[p[2]];
-		key += g_6b5e08[p[1]];
-		key += g_6b6d20[p[0]];
-		p += 3;
+		key = g_6b6b18[pixels[2]] + g_6b5e08[pixels[1]] + g_6b6d20[pixels[0]];
+		pixels += 3;
 		g_6b6f20[5][key].count++;
 	}
 	g_6b6f38 = 0;

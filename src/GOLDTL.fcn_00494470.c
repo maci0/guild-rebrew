@@ -28,7 +28,7 @@ extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(unsigned short range);
 int __cdecl fcn_00508eb0(unsigned short id, int a2);
-int __cdecl fcn_0050dac0(unsigned short id);
+int __cdecl gm_WalkEntityChain(unsigned short id);
 void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
 void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 
@@ -99,7 +99,7 @@ int __cdecl fcn_00494470(Party494470* p, int flag)
 			fcn_004c54c0(p->ent->id, p->members[i].ent->id, x, 1);
 		}
 	}
-	q = fcn_0050dac0(p->ent->slot);
+	q = gm_WalkEntityChain(p->ent->slot);
 	p->text = (int) ((float) (10 - p->b - p->a) * q * p->count * 0.001f);
 	if (flag) {
 		fcn_004c5150(-1, p->ent->id, *(char*) &g_773d75, p->text);

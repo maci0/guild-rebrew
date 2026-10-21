@@ -8,7 +8,7 @@
  * ECX (__thiscall).  MSVC 6 C rejects __thiscall (C4234), so this C89
  * reconstruction keeps the algorithm and the argument order but cannot
  * reproduce the register-passed object. */
-extern void *__cdecl fcn_006508ff(unsigned size);
+extern void *__cdecl iswupper(unsigned size);
 extern void *__cdecl fcn_005fc0c8(void *self);
 extern void *__cdecl fcn_005fc10c(void *self);
 extern int __cdecl fcn_005fc008(void *self, int flags);
@@ -25,7 +25,7 @@ int __cdecl fcn_006069d6(int a1, int a2, int a3, int mode, int a4, int a5,
     void *obj;
     int hr;
 
-    obj = fcn_006508ff(0x54);
+    obj = iswupper(0x54);
     if ((mode & 1) != 0) {
         if (obj != 0) {
             obj = fcn_005fc0c8(obj);

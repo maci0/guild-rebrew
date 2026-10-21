@@ -13,7 +13,7 @@ int __cdecl fcn_0051eb20(void* stream);
 int __cdecl fcn_0051ebc0(void* stream);
 int __cdecl fcn_0051ecf0(void* stream);
 int __cdecl fcn_0051f170(void* stream);
-int __cdecl fcn_0051f480(void* stream);
+int __cdecl ls_SaveEntities(void* stream);
 int __cdecl fcn_0051ffc0(void* stream);
 int __cdecl fcn_00520310(void* stream);
 int __cdecl fcn_00520860(void* stream);
@@ -75,7 +75,7 @@ int __cdecl fcn_0051e080(char* name, char* slot, int flags)
 		fcn_0051ea70();
 		return 0;
 	}
-	if (fcn_0051f480(stream) == 0) {
+	if (ls_SaveEntities(stream) == 0) {
 		CloseVfsStream(stream);
 		fcn_0051ea70();
 		return 0;

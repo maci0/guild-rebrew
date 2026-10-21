@@ -2,7 +2,7 @@
 
 extern int g_77261c;
 
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 float __cdecl fcn_0050f980(unsigned short, unsigned short, int);
 
@@ -22,7 +22,7 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 
 	idx = 0;
 	flag = 0;
-	step = *(unsigned int*) ((fcn_0042e410(0x10) & 0xffff) * 4 + 0x664398);
+	step = *(unsigned int*) ((gm_RandomMod(0x10) & 0xffff) * 4 + 0x664398);
 	memset(v12, 0, 0x50);
 	memset((char*) v12 + 0x1c, 0xff, 0x20);
 	*(int*) ((char*) v12 + 0x14) = 2;
@@ -48,7 +48,7 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 		}
 		tries = 0x300;
 		hit = 0;
-		pos = fcn_0042e410(0x300) & 0xffff;
+		pos = gm_RandomMod(0x300) & 0xffff;
 		do {
 			if (tries == 0) {
 				if (hit == 0) {

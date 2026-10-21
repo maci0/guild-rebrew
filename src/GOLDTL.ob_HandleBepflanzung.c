@@ -29,20 +29,20 @@ int __cdecl fcn_004693b0(int a);
 int __cdecl fcn_00441ab0(char* a, int b, int c, int d, float* out);
 int __cdecl fcn_005ebbb9(float* a, float* b);
 void __cdecl fcn_00438b40(int h, float* p);
-int __cdecl fcn_004bccf0(int a, int b, int c, char d);
+int __cdecl plt_CheckZoneAvailability(int a, int b, int c, char d);
 void __cdecl fcn_00414c90(int a, int b, int c, int d);
 int __cdecl fcn_004c5aa0(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_004c4450(int a);
 int __cdecl fcn_005373e0(void* fn, int msg);
 int __cdecl fcn_004c4480(int a);
 void __cdecl fcn_0050b980(int a, int b);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 void __cdecl fcn_004c5150(int a, int b, unsigned char c, int d);
 int __cdecl fcn_004bcf20(int a, int b);
 void __cdecl fcn_00412cf0(int a, float* p, int b, int c, int d);
 void __cdecl fcn_004695a0(int a, int b);
-int __cdecl fcn_004bcb80(int a);
-void __cdecl fcn_00442be0(int a);
+int __cdecl plt_FindPlantInfo(int a);
+void __cdecl d3_DestroyObject(int a);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 int __cdecl fcn_004488e0(char* a, int b, int c);
 void __cdecl fcn_0043a5a0(int a, float* p);
@@ -192,7 +192,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 			fcn_00438b40(v6, &v11);
 			if (*(unsigned char*) (*g_6b8300 * v16
 					+ (int) g_6b8300[5] + v19) != v36
-				|| (v16 = fcn_004bccf0(v40, v19, v16,
+				|| (v16 = plt_CheckZoneAvailability(v40, v19, v16,
 						*(char*) &v26[0x21])) == 0) {
 				v1 = 0;
 				v16 = v25;
@@ -233,8 +233,8 @@ void __cdecl ob_HandleBepflanzung(int a0)
 			v17 = fcn_004c4480(v20);
 			if (v17) {
 				fcn_0050b980(*v4, 100);
-				v39 = fcn_0064d228();
-				v3 = fcn_0064d228();
+				v39 = _ftol();
+				v3 = _ftol();
 				if (v3 <= 0x400) {
 					v3 = 0x400;
 				}
@@ -286,10 +286,10 @@ void __cdecl ob_HandleBepflanzung(int a0)
 		}
 		v23 = *(int*) (v35 * 4 + 0x102cbc8);
 		if (v23 != v33) {
-			v4 = (unsigned short*) fcn_004bcb80(v7[v23 + 1]);
+			v4 = (unsigned short*) plt_FindPlantInfo(v7[v23 + 1]);
 			v26 = v4;
 			if (v6) {
-				fcn_00442be0(v6);
+				d3_DestroyObject(v6);
 			}
 			fcn_0064d41a(v14, (char*) 0x6ac704, (char*) 0x7e1ae0,
 				&v4[1]);
@@ -311,7 +311,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 		}
 		if (!fcn_005373e0((void*) ob_HandleBepflanzung, 0x677cf)) {
 			if (v6) {
-				fcn_00442be0(v6);
+				d3_DestroyObject(v6);
 			}
 			fcn_00469510(v24);
 			if (g_6a25b8 != -1) {

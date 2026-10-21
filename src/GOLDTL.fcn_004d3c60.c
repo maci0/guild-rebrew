@@ -66,16 +66,16 @@ int __cdecl fcn_004d3c60(int id)
 	}
 	cnt = 0;
 	for (i = 0; i < g_772f08; i++) {
-		if (fcn_0064d470((char*) g_9b9e40[i], "sp_CONQUER")) {
-			ent = g_9b9e40[i];
+		if (fcn_0064d470((char*) *(int*) ((char*) g_9b9e40 + i * 4), "sp_CONQUER")) {
+			ent = *(int*) ((char*) g_9b9e40 + i * 4);
 			fcn_00455350((char*) ent, (char*) (ent + 0x4c), pos);
-			ent = *(int*) (g_9b9e40[i] + 0x204);
+			ent = *(int*) (*(int*) ((char*) g_9b9e40 + i * 4) + 0x204);
 			if (ent != 0 && *(int*) (ent + 0x16c) == g_772e9c) {
 				cnt++;
 			}
 		}
 	}
-	if (g_772e9c == id) {
+	if (id == g_772e9c) {
 		ratio = sum_hi / sum_lo;
 	} else {
 		ratio = sum_lo / sum_hi;
@@ -91,7 +91,7 @@ int __cdecl fcn_004d3c60(int id)
 	} else {
 		band = 0;
 	}
-	if (g_772e98 == id) {
+	if (id == g_772e98) {
 		if (cnt == 1) {
 			band = cnt;
 		} else {

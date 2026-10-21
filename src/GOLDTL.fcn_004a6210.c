@@ -29,7 +29,7 @@ float __cdecl fcn_004f1290(char*);
 int __cdecl fcn_005e8de0(int, int, void*);
 int __cdecl fcn_005e8e50(int, float, void*, void*);
 int __cdecl fcn_005ea4d0(void*, void*, void*, void*, void*, void*, void*, void*, void*);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 float __cdecl fcn_004f0eb0(int, int, int);
 int __cdecl fcn_004f0ff0(int, int, int, int, void*, void*);
 int __cdecl fcn_0050b810(int, int);
@@ -38,7 +38,7 @@ int __cdecl gm_RandomMod(int);
 /* ADDRESS: GOLDTL 0x004a6210 */
 int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 {
-	char buf0[16];
+	char buf0[0x40];
 	char buf1[16];
 	int entry[8];
 	float pos[16];
@@ -79,7 +79,7 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 			&pos[10], &pos[11], &pos[12]) != 0) {
 		return 0;
 	}
-	state = fcn_0064d228();
+	state = _ftol();
 	spread = fcn_004f0eb0(col, state, row + 1);
 	if (*(float*) (p + 2 + row) < spread) {
 		return 0;
@@ -88,7 +88,7 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 		return 0;
 	}
 	pos[15] = (float) fcn_0050b810(*(int*) (a0 + 0x178), g_773d75);
-	if ((int) fcn_0064d228() < (int) pos[14]) {
+	if ((int) _ftol() < (int) pos[14]) {
 		return 0;
 	}
 	g_772850 = pos[0];

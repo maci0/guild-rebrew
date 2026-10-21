@@ -10,12 +10,12 @@ int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 void __cdecl fcn_004c5c80(int);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
-void __cdecl fcn_004c5ed0(int, char*);
+void __cdecl fcn_004c5ed0(int, char*, int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl fcn_0057ceb0(char* entity);
 int __cdecl fcn_0057d7e0(char* e);
 void __cdecl fcn_0057d830(char* u, int count);
-int __cdecl gm_RandomMod(int, ...);
+int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0057d0d0 */
 void __cdecl fcn_0057d0d0(char* entity)
@@ -107,8 +107,9 @@ void __cdecl fcn_0057d0d0(char* entity)
 				if (*(int*) (o + 0x184) != 0) {
 					k = 8;
 					do {
-						v = gm_RandomMod(10, (gm_RandomMod(2) & 0xffff) + 1);
-						fcn_004c5ed0(*(int*) (o + 4), anim[v & 0xffff]);
+						fcn_004c5ed0(*(int*) (o + 4),
+						    anim[gm_RandomMod(10) & 0xffff],
+						    (gm_RandomMod(2) & 0xffff) + 1);
 						k--;
 					} while (k != 0);
 				}

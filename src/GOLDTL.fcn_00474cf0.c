@@ -1,4 +1,4 @@
-int __cdecl fcn_004737e0(void);
+int __cdecl CountDisplayCounters(void);
 int __cdecl fcn_0046b520(char*, int);
 void __cdecl fcn_0046b2b0(int);
 int __cdecl fcn_00469c30(int, int, char*);
@@ -67,7 +67,7 @@ void __cdecl fcn_00474cf0(int slot)
 	if (((*(Item0474cf0**) 0x7725d0)->flags & 0x40) &&
 	    (*(Item0474cf0**) 0x7725d0)->x18 == 0 &&
 	    (*(Item0474cf0**) 0x7725d0)->x1c == 0 &&
-	    fcn_004737e0() == 0 &&
+	    CountDisplayCounters() == 0 &&
 	    (*(Item0474cf0**) 0x7725d0)->x12c == 0) {
 		(*(Item0474cf0**) 0x7725d0)->x12c = -1;
 	}

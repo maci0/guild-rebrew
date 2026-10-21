@@ -82,7 +82,7 @@ extern char g_7e2000[];			/* 0x007e2000 */
 extern char g_6a33dc[];			/* 0x006a33dc */
 extern char g_7f4c00[];			/* 0x007f4c00 */
 
-void __cdecl fcn_004e7810(void);
+void __cdecl srv_InitBuildingTypeTable(void);
 void __cdecl fcn_004b20d0(int);
 int __cdecl fcn_005435d0(void);
 void __cdecl fcn_0051af00(void*, int);
@@ -108,7 +108,7 @@ void __cdecl fcn_0053f720(void);
 void __cdecl fcn_00538220(void);
 void __cdecl fcn_00512500(void);
 void __cdecl fcn_00514b50(unsigned char);
-void __cdecl fcn_00515250(void);
+void __cdecl init_LocalData(void);
 void __cdecl fcn_00515340(unsigned char);
 void __cdecl fcn_005153f0(void);
 int __cdecl fcn_00521920(void*, int);
@@ -201,7 +201,7 @@ void __cdecl fcn_005438c0(int a0)
 	void* proc;
 
 	if ((g_7747b0 & 1) && (a0 == 0)) {
-		fcn_004e7810();
+		srv_InitBuildingTypeTable();
 	}
 	g_7e2500 = 0;
 	if (g_7747b0 & 4) {
@@ -333,7 +333,7 @@ void __cdecl fcn_005438c0(int a0)
 			}
 			fcn_005435e0();
 			fcn_00514b50(g_773d75);
-			fcn_00515250();
+			init_LocalData();
 			fcn_00515340(g_773d75);
 			fcn_0053f630(0, 100);
 			fcn_0053f630(0, 100);

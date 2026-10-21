@@ -7,13 +7,13 @@ extern float g_664154;
 extern int g_77261c;
 
 int __cdecl fcn_0050d320(char*, char);
-int __cdecl fcn_0050dac0(unsigned short);
+int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_004fa5b0(int, char*, int*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00495400(int, unsigned short, int, void*, void*);
 int __cdecl fcn_004f4830(int, void*);
-int __cdecl fcn_0042e410(int);
-float __cdecl fcn_0042e450(void);
+int __cdecl gm_RandomMod(int);
+float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004a5340(char*, int, int*, int, float, unsigned short*);
 float __cdecl fcn_00507e70(char*, char*, int);
 int __cdecl fcn_0055c0f0(char*, char*);
@@ -50,7 +50,7 @@ int __cdecl fcn_00499640(int unused0, char* e, int a2, Msg499640* out1, Msg49964
 	}
 	memset(buf, 0, sizeof(buf));
 	buf[0] = 1;
-	vb = (int) ((float) fcn_0050dac0(*(unsigned short*) e) * g_66433c);
+	vb = (int) ((float) gm_WalkEntityChain(*(unsigned short*) e) * g_66433c);
 	if ((fcn_004fa5b0(0x1b, e, buf) & 2) != 0) {
 		vb /= 2;
 	}
@@ -97,7 +97,7 @@ fail:
 main:
 	fcn_004f4830(0x15, rec);
 	if (*(int*) (rec + 0x18) != 0) {
-		if (fcn_0042e410(3) == 0 && g_77261c == 0) {
+		if (gm_RandomMod(3) == 0 && g_77261c == 0) {
 			goto fail;
 		}
 	}
@@ -106,7 +106,7 @@ main:
 	}
 	mask = 0xf00500;
 	if (fcn_004a5340(e, 1, &mask, 0,
-			(float) (fcn_0042e410(0x20) & 0xffff) + g_664154,
+			(float) (gm_RandomMod(0x20) & 0xffff) + g_664154,
 			(unsigned short*) &idx) == 0) {
 		goto fail;
 	}
@@ -115,7 +115,7 @@ main:
 		goto fail;
 	}
 	v = fcn_00507e70(e, entry, 3);
-	if (fcn_0042e450() + v < 1.0f) {
+	if (gm_RandomFloat01() + v < 1.0f) {
 		msg0.type = 0x0e;
 		msg0.a = 3;
 		msg0.b = 1;

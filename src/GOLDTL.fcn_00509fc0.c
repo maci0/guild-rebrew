@@ -78,7 +78,7 @@ void __cdecl fcn_004c5480(int, int, float);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl fcn_004c5a60(int, int, int);
 void __cdecl fcn_004c5f60(int, int, int);
-float __cdecl fcn_0042e470(void);
+float __cdecl gm_RandomQuadratic(void);
 
 /* ADDRESS: GOLDTL 0x00509fc0 */
 void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
@@ -217,7 +217,7 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (0x28 - g_aed32c)), (char*) &ui.f24);
 		fcn_004c5360();
 		fcn_004c5480(*(int*) (a0 + 2), 0x7c, -*(float*) (a0 + 0x3e));
-		h = fcn_0042e470();
+		h = gm_RandomQuadratic();
 		fcn_004c5480(*(int*) (a0 + 2), 0x14, (float) h * 7.0f + 30.0f - *(float*) (a0 + 10));
 		fcn_004c5480(*(int*) (a0 + 2), 0x1c, 1000.0f - *(float*) (a0 + 0xe));
 		fcn_004c5480(*(int*) (a0 + 2), 0x18, 1000.0f - *(float*) (a0 + 0xc));

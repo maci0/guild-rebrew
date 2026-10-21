@@ -16,12 +16,12 @@ extern int g_774804;
 extern unsigned short g_774970;
 
 void __cdecl fcn_00406340(char*, char*, int);
-void __cdecl fcn_00406510(char*, char*);
+void __cdecl CreateAnimationEvent(char*, char*);
 int __cdecl fcn_00406670(char*, char*);
 void __cdecl fcn_00407800(char*, int, char*);
-void __cdecl fcn_0041ddd0(void*);
-int __cdecl fcn_0042e410(int);
-void __cdecl fcn_00442be0(int);
+void __cdecl m_FreeTracked(void*);
+int __cdecl gm_RandomMod(int);
+void __cdecl d3_DestroyObject(int);
 void __cdecl fcn_004b3b30(void);
 void __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c5790(int, void*);
@@ -68,13 +68,13 @@ void __cdecl fcn_00535ec0(void)
 		if (m != 0) {
 			m[0x8d] |= 0x10;
 			fcn_00407800(m, 2, "ub_BIERKRUG");
-			fcn_00406510(*(char**) (p + 0x184), "sitzend/hinsetzen");
+			CreateAnimationEvent(*(char**) (p + 0x184), "sitzend/hinsetzen");
 			fcn_00406340(*(char**) (p + 0x184), "sitzend/sitz_schreiben", 4);
 		}
 		return;
 	case 0x16:
 		i = g_774664;
-		*(int*) (i * 0x2f4 + 0x7f4cc4) += fcn_0042e410(0x80) & 0xffff;
+		*(int*) (i * 0x2f4 + 0x7f4cc4) += gm_RandomMod(0x80) & 0xffff;
 		return;
 	case 0x17:
 		fcn_004b3b30();
@@ -94,7 +94,7 @@ void __cdecl fcn_00535ec0(void)
 			fcn_00406670(m, "sitzend/aufstehen");
 			return;
 		}
-		fcn_00406510(m, "sitzend/hinsetzen");
+		CreateAnimationEvent(m, "sitzend/hinsetzen");
 		fcn_00406340(*(char**) (g_7ea360 + 0x184), "sitzend/sitz_schreiben", 6);
 		return;
 	case 0x1f: {
@@ -147,7 +147,7 @@ void __cdecl fcn_00535ec0(void)
 		if (g_7ea360 == 0) {
 			return;
 		}
-		fcn_0041ddd0(*(void**) (g_7ea360 + 0x184));
+		m_FreeTracked(*(void**) (g_7ea360 + 0x184));
 		*(int*) (g_7ea360 + 0x184) = 0;
 		return;
 	case 0x23:
@@ -206,7 +206,7 @@ void __cdecl fcn_00535ec0(void)
 		if (g_7e2aa0 == 0) {
 			return;
 		}
-		fcn_00442be0(*(int*) (g_7e2aa0 + 0x61));
+		d3_DestroyObject(*(int*) (g_7e2aa0 + 0x61));
 		return;
 	case 0x2e: {
 		char buf[0x114];

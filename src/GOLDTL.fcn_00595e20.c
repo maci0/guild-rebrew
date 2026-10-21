@@ -12,7 +12,7 @@ int __cdecl fcn_004c4510(int, int);
 int __cdecl fcn_004c4700(int, int, int, int*);
 void __cdecl fcn_004c53a0(void);
 int __cdecl fcn_00471f80(int);
-int __cdecl fcn_004737e0(void);
+int __cdecl CountDisplayCounters(void);
 
 /* ADDRESS: GOLDTL 0x00595e20 */
 int __cdecl fcn_00595e20(char* a0, char* a1)
@@ -189,7 +189,7 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 		}
 	}
 
-	if ((*(int*) 0x7746d8 & 0x200) != 0 && *(int*) 0x14ce8d8 != 0 && !fcn_004737e0()) {
+	if ((*(int*) 0x7746d8 & 0x200) != 0 && *(int*) 0x14ce8d8 != 0 && !CountDisplayCounters()) {
 		for (p = (unsigned int*) 0x778dc0; (int) p < 0x779140; p += 0xe) {
 			if (*p == (unsigned int) -1 || *p != *(unsigned int*) 0x67d370)
 				continue;

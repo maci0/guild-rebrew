@@ -7,9 +7,9 @@ extern int __cdecl fcn_00475f80(void* o);
 void __cdecl fcn_00471e30(int a0)
 {
 	char* base;
-	int* items;
-	int* p;
 	int i;
+	int* p;
+	int* items;
 
 	if (a0 > 0x30) {
 		if (a0 < 1) {

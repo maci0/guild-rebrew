@@ -32,12 +32,19 @@ typedef struct {
 	int f3c;
 } Rain;
 
+/* ADDRESS: GOLDTL 0x0067756c */
 extern char g_67756c[];
+/* ADDRESS: GOLDTL 0x00662a18 */
 extern float g_662a18;
+/* ADDRESS: GOLDTL 0x006628bc */
 extern float g_6628bc;
+/* ADDRESS: GOLDTL 0x006628cc */
 extern float g_6628cc;
+/* ADDRESS: GOLDTL 0x00662a2c */
 extern float g_662a2c;
+/* ADDRESS: GOLDTL 0x00662a40 */
 extern float g_662a40;
+/* ADDRESS: GOLDTL 0x00662a44 */
 extern float g_662a44;
 
 void* __cdecl m_alloc(int size, char* tag);
@@ -50,9 +57,7 @@ void __cdecl fcn_00415510(Rain* r, int n, ...)
 	Drop* buf;
 	int* p;
 	int i;
-	int t;
 	int k;
-	int rnd;
 
 	i = 0;
 	if (n <= 0) {
@@ -60,6 +65,8 @@ void __cdecl fcn_00415510(Rain* r, int n, ...)
 	}
 	p = &n;
 	do {
+		int t;
+
 		t = *++p;
 		if (t >= 0) {
 			if (t > 1) {
@@ -71,7 +78,8 @@ void __cdecl fcn_00415510(Rain* r, int n, ...)
 					r->f38 = r->f2c;
 					r->f3c = *++p + r->f2c;
 				}
-			} else {
+			}
+			else {
 				if (*++p >= r->cap) {
 					k = *p + 100;
 					buf = (Drop*) m_alloc(k * sizeof(Drop), g_67756c);
@@ -82,29 +90,24 @@ void __cdecl fcn_00415510(Rain* r, int n, ...)
 					m_FreeTracked(r->drops);
 					r->drops = buf;
 					r->cap = k;
+					d = (Drop*) ((char*) r->drops + r->count * sizeof(Drop));
 					if (r->count < k) {
-						d = (Drop*) ((char*) r->drops + r->count * sizeof(Drop));
 						k -= r->count;
 						do {
-							rnd = rand();
-							d->x = ((float) rnd * g_662a18 - g_6628cc) * 2.0f;
-							rnd = rand();
-							d->y = ((float) rnd * g_662a18 - g_6628cc) * 2.0f;
-							rnd = rand();
-							d->z = ((float) rnd * g_662a18 - g_6628cc) * 2.0f;
-							rnd = rand();
-							d->size = (float) rnd * g_662a44 + g_6628bc;
-							rnd = rand();
-							d->drift_a = (float) rnd * g_662a40 + g_6628bc;
-							rnd = rand();
-							d->drift_b = (float) rnd * g_662a40 + g_6628bc;
+							d->x = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
+							d->y = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
+							d->z = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
+							d->size = (float) rand() * g_662a44 + g_6628bc;
+							d->drift_a = (float) rand() * g_662a40 + g_6628bc;
+							d->drift_b = (float) rand() * g_662a40 + g_6628bc;
 							d++;
 						} while (--k);
 					}
 				}
 				if (t == 0) {
 					r->count = *p;
-				} else {
+				}
+				else {
 					r->f08 = r->count;
 					r->f0c = *p;
 					r->f30 = r->f2c;

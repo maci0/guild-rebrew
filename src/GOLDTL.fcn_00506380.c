@@ -1,5 +1,5 @@
 int __cdecl fcn_00507910(unsigned char typ);
-void __cdecl fcn_005074e0(int a0, int typ);
+int __cdecl fcn_005074e0(int a0, int typ);
 int __cdecl fcn_005903d0(void* geb, void* a1, void* a2);
 int __cdecl fcn_00507b00(int typ);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
@@ -10,6 +10,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 	unsigned char* rec;
 	unsigned char* geb;
 	int result;
+	int found;
 	int typ;
 	int i;
 	unsigned char ch;
@@ -20,7 +21,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 	if (a1 != 0) {
 		rec = (unsigned char*) (*(int*) 0x868050 +
 		                       (unsigned int) *a1 * 0x24d);
-		fcn_005074e0(a0, fcn_00507910(*rec));
+		found = fcn_005074e0(a0, fcn_00507910(*rec));
 		typ = *rec;
 		if (typ == 0x1d)
 			return fcn_005903d0((void*) (0x7f4ca0 + a0 * 0x21c), a1, a2);
@@ -44,6 +45,11 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 				break;
 			case 2:
 			case 30:
+				if (*(unsigned short*) (a1 + 0x25) == a0)
+					result = 0x3c;
+				if (*(unsigned short*) (a1 + 0x27) == a0)
+					result |= 0x5661;
+				break;
 			case 33:
 				if (*(unsigned short*) (a1 + 0x25) == a0)
 					result = 0x3c;
@@ -51,6 +57,21 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 					result |= 0x620;
 				break;
 			case 4:
+				if (*(unsigned short*) (a1 + 0x25) == a0)
+					result = 0x50bd;
+				if (*(unsigned short*) (a1 + 0x27) != a0)
+					break;
+				result |= 0x44e1;
+				for (i = 0; i < 6; i++) {
+					ch = rec[0x223 + i];
+					if (ch == 0)
+						break;
+					if (ch == found) {
+						result |= 0x2200;
+						break;
+					}
+				}
+				break;
 			case 19:
 				if (*(unsigned short*) (a1 + 0x25) == a0)
 					result = 0x50bd;
@@ -61,7 +82,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 					ch = rec[0x223 + i];
 					if (ch == 0)
 						break;
-					if (ch == *rec) {
+					if (ch == found) {
 						result |= 0x2200;
 						break;
 					}
@@ -85,7 +106,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 					ch = rec[0x223 + i];
 					if (ch == 0)
 						break;
-					if (ch == *rec) {
+					if (ch == found) {
 						result |= 0x2200;
 						break;
 					}
@@ -113,7 +134,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 						ch = rec[0x223 + i];
 						if (ch == 0)
 							break;
-						if (ch == *rec) {
+						if (ch == found) {
 							result |= 0x2200;
 							break;
 						}
@@ -136,7 +157,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 					ch = rec[0x223 + i];
 					if (ch == 0)
 						break;
-					if (ch == *rec) {
+					if (ch == found) {
 						result |= 0x2200;
 						break;
 					}
@@ -168,7 +189,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 						ch = rec[0x223 + i];
 						if (ch == 0)
 							break;
-						if (ch == *rec) {
+						if (ch == found) {
 							result = 0x76e1;
 							break;
 						}

@@ -6,14 +6,14 @@ void __cdecl fcn_00442d50(int, int);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_004550b0(int, int);
-void __cdecl fcn_00442be0(int);
+void __cdecl d3_DestroyObject(int);
 int __cdecl fcn_00504e70(int);
 void __cdecl fcn_00573de0(void);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 char* __cdecl fcn_0064d1a0(char*, int);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
 int __cdecl fcn_0064eeec(char*);
-int __cdecl fcn_0064efb1(int, int);
+int __cdecl _isctype(int, int);
 
 typedef struct ObjList {
 	int handle;
@@ -110,7 +110,7 @@ next_mark:
 				fcn_0064d530((char*) digits, p + 1, 2);
 				leader = 0;
 				if (*(int*) 0x6b25b0 > 1)
-					flag = fcn_0064efb1((signed char) digits[0], 4);
+					flag = _isctype((signed char) digits[0], 4);
 				else
 					flag = *(unsigned char*)
 					    (*(unsigned char**) 0x6b23a4
@@ -140,7 +140,7 @@ release:
 	if (obj != 0) {
 		if (*(int*) 0x773dd8 != 0)
 			fcn_004550b0(obj, *(int*) 0x773dd8);
-		fcn_00442be0(obj);
+		d3_DestroyObject(obj);
 	}
 done:
 	fcn_004432d0(saved, 1);

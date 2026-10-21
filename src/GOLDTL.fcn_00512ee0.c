@@ -63,7 +63,7 @@ extern unsigned char g_773d75;
 extern int g_6a3424;
 extern unsigned char g_6a3440;
 
-int __cdecl fcn_0042e410(int, int);
+int __cdecl gm_RandomMod(int);
 void __cdecl fcn_00455350(char *, char *, char *);
 void __cdecl fcn_004c3ff0(void);
 int __cdecl fcn_004c4450(int);
@@ -470,12 +470,10 @@ handles_done:
 					if (!(*f == 6 || *f == 7 || *f == 5 || *f == 3 || *f == 4
 								|| *f == 2))
 						continue;
-					kind = fcn_0042e410(0x40, 0);
 					fcn_004c54c0(*(int *)(e + 2), *(int *)(f + 2),
-							(int)(kind & 0xffff) - 0x20, 0);
-					kind = fcn_0042e410(0x40, 0);
+							(int)(gm_RandomMod(0x40) & 0xffff) - 0x20, 0);
 					res = fcn_004c54c0(*(int *)(f + 2), *(int *)(e + 2),
-							(int)(kind & 0xffff) - 0x20, 0);
+							(int)(gm_RandomMod(0x40) & 0xffff) - 0x20, 0);
 					total += 2;
 					if (res != -1 && total % 10 == 0) {
 						while (fcn_004c4450(res) == 0) {

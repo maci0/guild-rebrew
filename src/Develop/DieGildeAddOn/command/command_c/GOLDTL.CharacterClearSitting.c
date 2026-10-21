@@ -5,7 +5,7 @@
  * releases the seat object held at +0x74. The name is inferred; no string
  * names this function. */
 
-void __cdecl fcn_00402aa0(void*);
+void* __cdecl fcn_00402aa0(void*);
 void __cdecl fcn_00435500(char*, char*);
 
 void __cdecl CharacterClearSitting(unsigned char* ch)
@@ -19,7 +19,7 @@ void __cdecl CharacterClearSitting(unsigned char* ch)
 		if (p != 0) {
 			ent = *(int**) (ch + 0x34);
 			if (ent[0x73] == 0)
-				fcn_00402aa0(ch);
+				p = fcn_00402aa0(ch);
 			q = *(char**) (p + 0x68);
 			if (q != 0)
 				fcn_00435500((char*) ent[0x7b] + 0xf4, q);

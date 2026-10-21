@@ -42,7 +42,11 @@ void __cdecl fcn_00593360(void)
 	fcn_004727a0(g_6a9b9c, 3);
 	fcn_00519190((int) g_6811b0);
 	i = *(int*) (g_1015ea0 + fcn_0046f740(5, 10, g_779c6c + 0x59a, g_772514) * 0x2f4 + 0x18) + 0xf;
-	v = g_779c70 ? g_14a579c : g_14a5774;
+	if (!g_779c70) {
+		v = g_14a5774;
+	} else {
+		v = g_14a579c;
+	}
 	fcn_0064d41a(buf, "%s %s %s", v, g_779c72, g_779c82);
 	y = *(int*) (g_1015ea0 + fcn_0046fac0(i, 10, buf, g_772514) * 0x2f4 + 0x1c) + 2;
 	z = y + 0xa;

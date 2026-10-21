@@ -24,7 +24,7 @@ void __cdecl fcn_004ea560(void*, unsigned int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00508e40(int);
-int __cdecl fcn_0050dac0(unsigned short);
+int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_00597ff0(int, char*);
 int __cdecl fcn_00598150(char*, int*);
 void __cdecl fcn_00598740(int*, void*);
@@ -190,11 +190,11 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				value = 0;
 				if (types[1] != -1 &&
 				    (existing = fcn_00508e40(types[1])) != 0) {
-					value = fcn_0050dac0(*(unsigned short*) existing);
+					value = gm_WalkEntityChain(*(unsigned short*) existing);
 				}
 				best = 0;
 				for (i = 0; i < count; i++) {
-					n = fcn_0050dac0(*(unsigned short*) &cand[i]);
+					n = gm_WalkEntityChain(*(unsigned short*) &cand[i]);
 					if (value < n) {
 						value = n;
 						best = (char*) &cand[i];

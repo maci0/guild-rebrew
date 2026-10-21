@@ -1,9 +1,9 @@
 extern char g_7f4ca0[];
-extern char g_868050[];
+extern char* g_entity_type_table;
 
 extern int __cdecl fcn_00508e40(int);
-extern int __cdecl fcn_00503fe0(int, int, int);
-extern int __cdecl fcn_005015e0(int*, int, int, int);
+extern int __cdecl gm_StartFilteredEntitySearch(int, int, int);
+extern int __cdecl gm_ResolveEntityById(int*, int, int, int);
 extern int __cdecl fcn_00501510(int);
 extern int __cdecl fcn_005463a0(int, int, int);
 extern int __cdecl fcn_00504e70(int);
@@ -37,7 +37,7 @@ unsigned int __cdecl fcn_00525670(void)
 	*(int*) 0x773da8 = fcn_00508e40(*(int*) 0x773da8);
 	if (!*(int*) 0x773da8)
 		return 0;
-	*(int*) 0x773d78 = fcn_00503fe0(1, 5, 10);
+	*(int*) 0x773d78 = gm_StartFilteredEntitySearch(1, 5, 10);
 	if (*(unsigned int*) 0x6a23ac > 0x10016) {
 		for (p = (char*) 0x773db4; (int) p < 0x773dd4; p += 4)
 			*(int*) p = fcn_00508e40(*(int*) p);
@@ -45,11 +45,11 @@ unsigned int __cdecl fcn_00525670(void)
 	for (p = g_7f4ca0; (int) p < 0x85a0a0; p += 0x21c) {
 		if (*(short*) p != -1) {
 			if (*(int*) (p + 0x16c) != -1)
-				fcn_005015e0((int*) (p + 0x16c), 0, 0, *(int*) (p + 0x16c));
+				gm_ResolveEntityById((int*) (p + 0x16c), 0, 0, *(int*) (p + 0x16c));
 			else
 				*(int*) (p + 0x16c) = 0;
 			if (*(int*) (p + 0x170) != -1)
-				fcn_005015e0((int*) (p + 0x170), 0, 0, *(int*) (p + 0x170));
+				gm_ResolveEntityById((int*) (p + 0x170), 0, 0, *(int*) (p + 0x170));
 			else
 				*(int*) (p + 0x170) = 0;
 			v9 = *(int*) (p + 0x17c);
@@ -66,7 +66,7 @@ unsigned int __cdecl fcn_00525670(void)
 		               (unsigned int) *(unsigned short*) (v9 * 0x43 + 0x868054) * 0x41) == 0x1d)
 			*(unsigned int*) (obj + 0x24) = 0;
 		v5 = *(int*) (obj + 6);
-		if (v5 != -1 && fcn_005015e0(&v8, &v7, &v6, v5)) {
+		if (v5 != -1 && gm_ResolveEntityById(&v8, &v7, &v6, v5)) {
 			if (v8) {
 				v5 = *(int*) (v8 + 0x5d);
 				if (v5) {
@@ -119,7 +119,7 @@ unsigned int __cdecl fcn_00525670(void)
 		if (kind == 0xc)
 			continue;
 		if (kind == 0xd) {
-			fcn_005015e0(&v6, 0, 0, *(int*) (p + 0xb8));
+			gm_ResolveEntityById(&v6, 0, 0, *(int*) (p + 0xb8));
 			if (v6)
 				fcn_00573e10(p);
 			continue;

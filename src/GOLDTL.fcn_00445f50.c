@@ -3,7 +3,7 @@
  * block into the 0x1041d20 scratch area. */
 
 void __cdecl fcn_004379a0(int a, int b, int c, void* cb, void* q);
-void __cdecl fcn_00450a00(int a);
+void __cdecl UpdateSceneLighting(int a);
 
 /* ADDRESS: GOLDTL 0x00445f50 */
 int __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
@@ -62,7 +62,7 @@ int __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 		cur += 0x0c;
 		next += 0x0c;
 	}
-	fcn_00450a00(a3);
+	UpdateSceneLighting(a3);
 	*(int*) 0x67a95c = a0;
 	if (*(int*) 0x6b89c0 != 0) {
 		rows = (unsigned char*) 0x10405e0;

@@ -31,12 +31,10 @@ int __cdecl fcn_00427600(char* g, int arg)
 			*(int*) (e + 0x28 + e[0x24] * 4) = t.u.num;
 			fcn_00426680(*(int*) (g_6b7e98 + 0x118), &t);
 			if (t.type != 0) {
-				if (t.type == 2) {
+				if (t.type == 2)
 					fcn_00425bf0(g, *(int*) (g + 0x118), (char*) 0x679460);
-				}
-				else {
+				else
 					fcn_00425bf0(g, *(int*) (g + 0x118), (char*) 0x67944c);
-				}
 				fcn_00428720(g);
 				return 0;
 			}

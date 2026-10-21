@@ -5,7 +5,7 @@ int __cdecl fcn_0046f740(int x, int y, int id, int win);
 int __cdecl fcn_00469c40(int x, int y, int slot);
 int __cdecl fcn_00471f80(int element);
 void __cdecl fcn_00473750(int id, int value);
-void __cdecl fcn_004737c0(void);
+void __cdecl ResetDisplayCounters(void);
 void __cdecl fcn_00596d70(int a0, int a1, int* rect, int w, int n,
                           unsigned int a5);
 
@@ -134,7 +134,7 @@ void __cdecl fcn_005963f0(int a0, int a1, int a2, unsigned int a3)
 	} while ((int) v < 0x7798ac);
 
 	if (a2) {
-		fcn_004737c0();
+		ResetDisplayCounters();
 		for (v = (int*) 0x778db0; (int) v < 0x779130; v += 0xe) {
 			if (*v != -1) {
 				fcn_00473750(v[-4] + 0xdf, fcn_00471f80(*v));

@@ -1,10 +1,7 @@
-/* Forwarding thunk: the three incoming arguments are copied back into
- * their own stack homes and the body tail-jumps into fcn_00479e00. */
-
-int __cdecl fcn_00479e00(int a, int b, int c);
+void __cdecl fcn_00479e00(unsigned char r, unsigned char g, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0046bd00 */
-int __cdecl fcn_0046bd00(int a, int b, int c)
+void __cdecl fcn_0046bd00(unsigned char r, unsigned char g, unsigned char b)
 {
-	return fcn_00479e00(a, b, c);
+	fcn_00479e00(r, g, b);
 }

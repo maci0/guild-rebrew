@@ -6,15 +6,30 @@
 #pragma function(memcpy)
 
 typedef struct VFS_DIR VFS_DIR;
-typedef struct AM_EFFECTS AM_EFFECTS;
 
-struct AM_EFFECTS {
+/* Native method record: type, 0x20-byte name, three callback pointers and
+   three 4-entry effect blocks; stride 0x94. */
+typedef struct AM_EFFECTS {
 	AM_EFFECT e[4];
-};
+} AM_EFFECTS;
+
+typedef struct AM_METHOD_DATA {
+	unsigned char type;
+	char name[0x20];
+	void* score;
+	void* start;
+	void* run;
+	AM_EFFECTS effects;
+	AM_EFFECTS saved;
+	AM_EFFECTS other;
+	int flags;
+} AM_METHOD_DATA;
 
 extern VFS_DIR* g_6b7fdc;
 extern char g_1008420[];
-extern AM_METHOD g_1008540[];
+extern AM_METHOD_DATA g_1008540[];
+extern char* g_77481c;
+extern int g_7e1f80;
 
 void* __cdecl fcn_0042ff50(const char* name, const char* mode, VFS_DIR* root);
 unsigned int __cdecl vfs_fwrite(void* data, int size, int count, char* f);
@@ -24,55 +39,46 @@ int __cdecl fcn_004a1130(char* ini);
 int __cdecl fcn_004901d0(char* ini);
 int __cdecl fcn_0048f110(char* ini);
 int __cdecl fcn_004abff0(char* ini);
-void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x00494820 */
 int __cdecl fcn_00494820(void)
 {
+	AM_METHOD_DATA tmp;
+	unsigned int nmeth;
+	int sig;
+	unsigned int count;
 	char* f;
-	char* p;
-	char* ini;
-	int max;
-	int i;
-	unsigned int sig;
-	unsigned char idx;
-	char name[0x20];
-	AM_EFFECTS eff;
-	AM_EFFECTS sav;
-	AM_EFFECTS oef;
+	unsigned int i;
+	unsigned int n;
 
-	memset(g_1008540, 0, sizeof(AM_METHOD) * 0x49);
+	count = 0x49;
+	memset(g_1008540, 0, sizeof(AM_METHOD_DATA) * 0x49);
 	sig = 0x6144466e;
-	max = 0x49;
-	ini = *(char**) 0x77481c;
-	if (ini != 0) {
-		int cnt;
-
-		cnt = 0x49;
-		GetModuleFileNameA(*(HMODULE*) 0x7e1f80, g_1008420, 0x104);
-		p = strrchr(g_1008420, '\\');
-		p[1] = 0;
+	if (g_77481c != 0) {
+		GetModuleFileNameA((HMODULE) *(int*) 0x7e1f80, g_1008420, 0x104);
+		nmeth = 0x49;
+		strrchr(g_1008420, '\\')[1] = 0;
 		strcat(g_1008420, "ai_method_addon.ini");
-		if (!fcn_004a1130(ini)) {
-			return 0;
+		if (fcn_004a1130(g_77481c) == 0) {
+			goto bad;
 		}
-		if (!fcn_004901d0(ini)) {
-			return 0;
+		if (fcn_004901d0(g_77481c) == 0) {
+			goto bad;
 		}
-		if (!fcn_0048f110(ini)) {
-			return 0;
+		if (fcn_0048f110(g_77481c) == 0) {
+			goto bad;
 		}
-		if (!fcn_004abff0(ini)) {
-			return 0;
+		if (fcn_004abff0(g_77481c) == 0) {
+			goto bad;
 		}
 		f = fcn_0042ff50("/gamedata/ai/ai_data_2.dfn", "wb", g_6b7fdc);
 		if (f == 0) {
-			return 0;
+			goto bad;
 		}
 		if (vfs_fwrite(&sig, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&cnt, 4, 1, f) <= 0) {
+		if (vfs_fwrite(&nmeth, 4, 1, f) <= 0) {
 			goto fail;
 		}
 		for (i = 0; i < 0x49; i++) {
@@ -82,52 +88,52 @@ int __cdecl fcn_00494820(void)
 			if (vfs_fwrite(g_1008540[i].name, 0x20, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects[0].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].effects.e[0].type, 1, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects[0].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].effects.e[0].value, 4, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects[1].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].effects.e[1].type, 1, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects[1].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].effects.e[1].value, 4, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects[2].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].effects.e[2].type, 1, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects[2].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].effects.e[2].value, 4, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects[3].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].effects.e[3].type, 1, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects[3].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].effects.e[3].value, 4, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].other_effects[0].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].other.e[0].type, 1, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].other_effects[0].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].other.e[0].value, 4, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].other_effects[1].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].other.e[1].type, 1, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].other_effects[1].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].other.e[1].value, 4, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].other_effects[2].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].other.e[2].type, 1, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].other_effects[2].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].other.e[2].value, 4, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].other_effects[3].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].other.e[3].type, 1, 1, f) <= 0) {
 				goto fail;
 			}
-			if (vfs_fwrite(&g_1008540[i].other_effects[3].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&g_1008540[i].other.e[3].value, 4, 1, f) <= 0) {
 				goto fail;
 			}
 		}
@@ -136,96 +142,97 @@ int __cdecl fcn_00494820(void)
 	}
 	f = fcn_0042ff50("/gamedata/ai/ai_data_2.dfn", "rb", g_6b7fdc);
 	if (f == 0) {
-		return 0;
+		goto bad;
 	}
-	if (!fcn_004a1130(ini)) {
+	if (fcn_004a1130(g_77481c) == 0) {
 		goto fail;
 	}
-	if (!fcn_004901d0(ini)) {
+	if (fcn_004901d0(g_77481c) == 0) {
 		goto fail;
 	}
-	if (!fcn_0048f110(ini)) {
+	if (fcn_0048f110(g_77481c) == 0) {
 		goto fail;
 	}
-	if (!fcn_004abff0(ini)) {
+	if (fcn_004abff0(g_77481c) == 0) {
 		goto fail;
 	}
 	if (vfs_ReadData((char*) &sig, 4, 1, f) <= 0) {
 		goto fail;
 	}
 	if (sig != 0x6144466e) {
-		return 0;
+		goto bad;
 	}
-	if (vfs_ReadData((char*) &max, 4, 1, f) <= 0) {
+	if (vfs_ReadData((char*) &count, 4, 1, f) <= 0) {
 		goto fail;
 	}
-	for (i = 0; i < max; i++) {
-		if (vfs_ReadData((char*) &idx, 1, 1, f) <= 0) {
+	for (n = 0; n < count; n++) {
+		if (vfs_ReadData((char*) &tmp.type, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData(name, 0x20, 1, f) <= 0) {
+		if (vfs_ReadData(tmp.name, 0x20, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &eff.e[0].type, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.effects.e[0].type, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &eff.e[0].value, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.effects.e[0].value, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &eff.e[1].type, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.effects.e[1].type, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &eff.e[1].value, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.effects.e[1].value, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &eff.e[2].type, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.effects.e[2].type, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &eff.e[2].value, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.effects.e[2].value, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &eff.e[3].type, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.effects.e[3].type, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &eff.e[3].value, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.effects.e[3].value, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &oef.e[0].type, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.other.e[0].type, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &oef.e[0].value, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.other.e[0].value, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &oef.e[1].type, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.other.e[1].type, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &oef.e[1].value, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.other.e[1].value, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &oef.e[2].type, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.other.e[2].type, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &oef.e[2].value, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.other.e[2].value, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &oef.e[3].type, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.other.e[3].type, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) &oef.e[3].value, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) &tmp.other.e[3].value, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		memcpy(&sav, &eff, 0x20);
-		if (idx < 0x49) {
-			g_1008540[idx].type = idx;
-			strcpy(g_1008540[idx].name, name);
-			*(AM_EFFECTS*) g_1008540[idx].effects = eff;
-			*(AM_EFFECTS*) g_1008540[idx].other_effects = oef;
-			*(AM_EFFECTS*) g_1008540[idx].saved_effects = sav;
+		memcpy(&tmp.saved, &tmp.effects, 0x20);
+		if (tmp.type < 0x49) {
+			g_1008540[tmp.type].type = tmp.type;
+			strcpy(g_1008540[tmp.type].name, tmp.name);
+			g_1008540[tmp.type].effects = tmp.effects;
+			g_1008540[tmp.type].other = tmp.other;
+			g_1008540[tmp.type].saved = tmp.saved;
 		}
 	}
 	CloseVfsStream(f);
 	return 1;
 fail:
 	CloseVfsStream(f);
+bad:
 	return 0;
 }

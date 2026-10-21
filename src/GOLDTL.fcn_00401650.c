@@ -27,6 +27,8 @@ void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 int __cdecl fcn_0041bcd0(void* dst, void* src, int w, int h, int mode, int pitch, void* fmt);
 
+#pragma optimize("y", off)
+
 /* ADDRESS: GOLDTL 0x00401650 */
 int __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
 {

@@ -30,9 +30,9 @@ extern int g_774654;
 #include "client_types.h"
 
 char* __cdecl fcn_00508e40(int a);
-int __cdecl fcn_0050dac0(unsigned short id);
+int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl fcn_0050d2a0(char* a);
-int __cdecl fcn_0042e410(int a);
+unsigned short __cdecl gm_RandomMod(int a);
 int __cdecl fcn_0050f950(int a, int i);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 void __cdecl fcn_004c5150(int a, int b, char c, int n);
@@ -69,8 +69,16 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	int ret;
 	int r1;
 	int r2;
+	int sum;
 
 	if (*(unsigned char*) (a0 + 2) != 6) {
+		int bv;
+		int bw1;
+		int bw2;
+		int bd1;
+		int bd2;
+		int bsum;
+
 		if (*(int*) (a0 + 0x194) < 4) {
 			return 0x20;
 		}
@@ -82,17 +90,19 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 		if (e2 == 0) {
 			return 0x20;
 		}
-		v = (int) ((fcn_0050dac0(e2->id) + fcn_0050dac0(e1->id)) * g_6628ac);
-		if (fcn_0050d2a0(a0) < v) {
+		bsum = gm_WalkEntityChain(e2->id);
+		bsum = bsum + gm_WalkEntityChain(e1->id);
+		bv = (int) (bsum * g_6628ac);
+		if (fcn_0050d2a0(a0) < bv) {
 			return 0x20;
 		}
-		w1 = (fcn_0042e410(0x1e) & 0xffff) + 3;
-		w2 = (fcn_0042e410(0x1e) & 0xffff) + 3;
-		d1 = fcn_0050f950(e1->id, e2->id);
-		d2 = fcn_0050f950(e2->id, e1->id);
-		fcn_004c54c0(e1->handle, e2->handle, w1 - d1 - 0x7f, 1);
-		fcn_004c54c0(e2->handle, e1->handle, w2 - d2 - 0x7f, 1);
-		fcn_004c5150(-1, *(int*) (a0 + 4), *(char*) &g_773d75, v);
+		bw1 = gm_RandomMod(0x1e) + 3;
+		bw2 = gm_RandomMod(0x1e) + 3;
+		bd1 = fcn_0050f950(e1->id, e2->id);
+		bd2 = fcn_0050f950(e2->id, e1->id);
+		fcn_004c54c0(e1->handle, e2->handle, bw1 - bd1 - 0x7f, 1);
+		fcn_004c54c0(e2->handle, e1->handle, bw2 - bd2 - 0x7f, 1);
+		fcn_004c5150(-1, *(int*) (a0 + 4), *(char*) &g_773d75, bv);
 		fcn_004c6ae0(*(int*) (a0 + 4), -4);
 		if (e1->type == 6 || e1->type == 7) {
 			fcn_0051af00(buf, 0x1dd3, e2->id, e2->id);
@@ -119,7 +129,9 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	if (e2 == 0) {
 		return 0;
 	}
-	v = (int) ((fcn_0050dac0(e2->id) + fcn_0050dac0(e1->id)) * g_6628ac);
+	sum = gm_WalkEntityChain(e2->id);
+	sum = sum + gm_WalkEntityChain(e1->id);
+	v = (int) (sum * g_6628ac);
 	h = fcn_00470820(0, 0, (char*) 0x6acd58);
 	fcn_00473a90(0, 0);
 	fcn_00471b60(h);
@@ -133,8 +145,8 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 			if (g_67d370 == r1) {
 				if (fcn_00525f60(a0, 4) != 0 &&
 				    fcn_00526010(a0, v, *(char*) &g_773d75) != 0) {
-					w1 = (fcn_0042e410(0x1e) & 0xffff) + 3;
-					w2 = (fcn_0042e410(0x1e) & 0xffff) + 3;
+					w1 = gm_RandomMod(0x1e) + 3;
+					w2 = gm_RandomMod(0x1e) + 3;
 					d1 = fcn_0050f950(e1->id, e2->id);
 					d2 = fcn_0050f950(e2->id, e1->id);
 					fcn_004c54c0(e1->handle, e2->handle,

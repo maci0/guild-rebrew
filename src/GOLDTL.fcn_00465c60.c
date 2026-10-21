@@ -33,7 +33,7 @@ void __cdecl fcn_004732f0(void);
 void __cdecl fcn_0046f280(int a1);
 void __cdecl fcn_0046b2b0(int id);
 void __cdecl fcn_0047b5d0(void* p);
-void __cdecl fcn_0041ddd0(void* p);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00475f80(void* o);
 void __cdecl fcn_00477550(void);
 void __cdecl fcn_0047ce50(int a1);
@@ -76,7 +76,7 @@ void __cdecl fcn_00465c60(void)
 			if (entry->kind < 0x10) {
 				fcn_0047b5d0(entry->data);
 			} else {
-				fcn_0041ddd0(entry->data);
+				m_FreeTracked(entry->data);
 				entry->data = 0;
 			}
 			g_772508 -= entry->size;
@@ -107,35 +107,35 @@ void __cdecl fcn_00465c60(void)
 	g_772524 = 0;
 	g_772564 = 0;
 	if (g_772540 != 0) {
-		fcn_0041ddd0((void*) g_772540);
+		m_FreeTracked((void*) g_772540);
 		g_772540 = 0;
 	}
 	if (g_1015ea0 != 0) {
-		fcn_0041ddd0((void*) g_1015ea0);
+		m_FreeTracked((void*) g_1015ea0);
 		g_1015ea0 = 0;
 	}
 	if (g_772500 != 0) {
-		fcn_0041ddd0(g_772500);
+		m_FreeTracked(g_772500);
 		g_772500 = 0;
 	}
 	if (g_77257c != 0) {
-		fcn_0041ddd0((void*) g_77257c);
+		m_FreeTracked((void*) g_77257c);
 		g_77257c = 0;
 	}
 	if (g_772580 != 0) {
-		fcn_0041ddd0((void*) g_772580);
+		m_FreeTracked((void*) g_772580);
 		g_772580 = 0;
 	}
 	if (g_772584 != 0) {
-		fcn_0041ddd0((void*) g_772584);
+		m_FreeTracked((void*) g_772584);
 		g_772584 = 0;
 	}
 	if (g_772588 != 0) {
-		fcn_0041ddd0((void*) g_772588);
+		m_FreeTracked((void*) g_772588);
 		g_772588 = 0;
 	}
 	if (g_7725ac != 0) {
-		fcn_0041ddd0((void*) g_7725ac);
+		m_FreeTracked((void*) g_7725ac);
 		g_7725ac = 0;
 	}
 	fcn_0047c4b0();

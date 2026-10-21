@@ -5,7 +5,7 @@ int __cdecl fcn_0050d200(char* e, int k);
 int __cdecl fcn_0050b810(int a, char b);
 int __cdecl fcn_004a4bb0(int action, char* e, int a, char* b, char* c, int d);
 int __cdecl fcn_0049e900(int a, char* e, int b, char* out1, char* out2);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 
 typedef struct Rec6 {
 	int v[6];

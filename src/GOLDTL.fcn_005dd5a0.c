@@ -5,7 +5,7 @@ char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_005cd440(int*, char*, int, int);
 int __cdecl fcn_005c6270(void*, int);
-unsigned int __cdecl fcn_0042e410(int, ...);
+unsigned int __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_005c6220(int, char*);
@@ -52,7 +52,7 @@ unsigned int __cdecl fcn_005dd5a0(unsigned short* a0, unsigned int* a1)
 		return 0;
 	}
 	v6 = fcn_005c6270((void*) a0, 0x2c5);
-	v5 = fcn_0042e410(0x300) & 0xffff;
+	v5 = gm_RandomMod(0x300) & 0xffff;
 	v14 = 0x300;
 	do {
 		if (v5 != *(unsigned short*) v4 && v5 != *a0) {
@@ -67,7 +67,7 @@ unsigned int __cdecl fcn_005dd5a0(unsigned short* a0, unsigned int* a1)
 		v14 -= 1;
 		v5 = (v5 + 1) % 0x300;
 	} while (v14);
-	v5 = fcn_0042e410(0x300) & 0xffff;
+	v5 = gm_RandomMod(0x300) & 0xffff;
 	v14 = 0x300;
 	do {
 		if (v5 != *(unsigned short*) v4 && v5 != *a0 && v5 != *v12[0]) {
@@ -82,7 +82,7 @@ unsigned int __cdecl fcn_005dd5a0(unsigned short* a0, unsigned int* a1)
 		v5 = (v5 + 7) % 0x300;
 		v14 -= 1;
 	} while (v14);
-	v5 = fcn_0042e410(0x300) & 0xffff;
+	v5 = gm_RandomMod(0x300) & 0xffff;
 	v14 = 0x300;
 	while (v5 == *(unsigned short*) v4 || v5 == *a0 ||
 	       v5 == *v12[0] || v5 == *v12[1] ||

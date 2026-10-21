@@ -6,7 +6,7 @@ char* __cdecl fcn_00445600(char*, int, char*, char*);
 char* __cdecl fcn_004cef30(int);
 void __cdecl fcn_0051af00(char*, int, int);
 void __cdecl fcn_00533a40(char*);
-void __cdecl fcn_00442be0(int);
+void __cdecl d3_DestroyObject(int);
 void __cdecl fcn_00455350(char*, float*, float*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl fcn_00412f10(char*, char*, int);
@@ -38,7 +38,7 @@ void __cdecl fcn_004d87f0(int* a0)
 	}
 	if (*(char**) (info + 0x204) != ent) {
 		if (*(int*) (info + 0x208) != 0) {
-			fcn_00442be0(*(int*) (info + 0x208));
+			d3_DestroyObject(*(int*) (info + 0x208));
 			*(int*) (info + 0x208) = 0;
 		}
 		if (ent != 0) {

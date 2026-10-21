@@ -1,4 +1,4 @@
-extern char g_868050[];
+extern char* g_868050;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_0050c710(unsigned char* p, int a, int b);
@@ -11,24 +11,24 @@ float __cdecl fcn_0050fdb0(int k, int n, int* ids);
 float __cdecl fcn_00510260(unsigned char* a0, int a1, int a2)
 {
 	float a;
+	float f;
+	float sum;
+	float avg;
+	float bonus;
+	int count;
+	int i;
 	char* v4;
 	char* e;
 	char* ent;
 	int* arr;
-	int i;
-	int count;
-	float sum;
-	float avg;
-	float bonus;
-	float f;
 
 	arr = (int*) a2;
-	v4 = (char*) *(int*) 0x868050 + (int) *a0 * 0x24c;
 	i = 0;
 	avg = 0.0f;
 	count = 0;
 	sum = 0.0f;
 	bonus = 0.0f;
+	v4 = g_868050 + (int) *a0 * 0x24d;
 	a = (float) (fcn_0050c710(a0, 1, 1) * 0.01 + 1.0);
 	e = fcn_0050dc90((int) a0);
 	if (e == 0) {

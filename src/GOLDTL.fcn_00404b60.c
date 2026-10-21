@@ -12,12 +12,12 @@ void __cdecl fcn_00404b60(char* obj, int n, ...)
 	D3_ANIMATION_OPTIONS opt;
 	int i;
 	va_list ap;
-	char* name;
 	char low[0x100];
 	char path[0x100];
 
 	va_start(ap, n);
 	for (i = n; i > 0; i--) {
+		char* name;
 		name = va_arg(ap, char*);
 		if (*name == 0) {
 			continue;

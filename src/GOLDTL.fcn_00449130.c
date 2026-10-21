@@ -34,7 +34,7 @@ char __cdecl fcn_00448cc0(int obj, float* a1, float* a2, int g, char* a5,
 	char* a6);
 void __cdecl fcn_00438b40(int h, char* p);
 void __cdecl fcn_00438cb0(int h, char* p);
-void __cdecl fcn_00450a00(int a);
+void __cdecl UpdateSceneLighting(int a);
 int __cdecl fcn_00448b10(void);
 
 /* ADDRESS: GOLDTL 0x00449130 */
@@ -189,11 +189,11 @@ int __cdecl fcn_00449130(void)
 	}
 label_4495a3:
 	if (g_14ce8cc != 0) {
-		fcn_00450a00(0);
+		UpdateSceneLighting(0);
 		v14 = 1;
 	}
 	if (g_14ce8e0 != 0) {
-		fcn_00450a00(0);
+		UpdateSceneLighting(0);
 		v14 = 1;
 	}
 	if (fcn_00448b10() == 0 && v14 == 0 && v15 == 0)

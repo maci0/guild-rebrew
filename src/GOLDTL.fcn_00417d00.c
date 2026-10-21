@@ -5,7 +5,7 @@
 #include <string.h>
 #include <math.h>
 
-// SIZE 0x4
+/* SIZE 0x4 */
 typedef struct {
 	unsigned char a;
 	unsigned char b;
@@ -13,7 +13,7 @@ typedef struct {
 	unsigned char d;
 } Bytes4;
 
-// SIZE 0xdc
+/* SIZE 0xdc */
 typedef struct {
 	float x;
 	float y;
@@ -46,15 +46,11 @@ int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float
 	Bytes4 f;
 	Explosion417d00* s;
 	float* v4;
-	float f0;
-	float f1;
-	float f2;
+	float v[4];
 	float h;
 	float inv;
 	float rr;
-	float v8;
-	float v9;
-	float v10;
+	float c;
 	int count;
 	int n6;
 	int i;
@@ -77,35 +73,25 @@ int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float
 	for (i = 0; i < s->count; i++) {
 		v4 = (float*) (s->particles + 0x14 + i * 0x54);
 		*(unsigned char*) ((char*) v4 + 0x3d) |= 1;
-		f0 = rand() * g_662a18;
-		f1 = rand() * g_662a18;
-		f2 = rand() * g_662a18;
-		v8 = s->y * g_662a3c;
-		f0 = f0 * v8;
-		f1 = f1 * v8;
-		v8 = v8 * f2;
-		v9 = s->y * g_662b10;
-		v10 = s->y * g_662a74;
-		f0 = f0 - v9;
-		f1 = f1 - v10;
-		f2 = v8 - v9;
+		v[1] = rand() * g_662a18;
+		v[2] = rand() * g_662a18;
+		v[3] = rand() * g_662a18;
+		v[1] = v[1] * (s->y * g_662a3c) - (s->y * g_662b10);
+		v[2] = v[2] * (s->y * g_662a3c) - (s->y * g_662a74);
+		v[3] = (s->y * g_662a3c) * v[3] - (s->y * g_662b10);
 		rr = rand() * g_662b0c;
 		h = (float) sin((float) i * inv * g_662b08) * s->y;
 		*v4 = h;
 		h = (float) sqrt(s->x * s->x - h * h);
-		{
-			float c;
-
-			c = (float) sin(rr) * h + f0;
-			v4[-1] = c;
-			f1 = f1 + *v4;
-			*v4 = f1;
-			v4[1] = (float) cos(rr) * h + f2;
-			if (i % n6 == 0) {
-				v4[-1] = c * g_6628d8;
-				*v4 = f1 * g_6629d0;
-				v4[1] = v4[1] * g_6628d8;
-			}
+		c = (float) sin(rr) * h + v[1];
+		v4[-1] = c;
+		v[2] = v[2] + *v4;
+		*v4 = v[2];
+		v4[1] = (float) cos(rr) * h + v[3];
+		if (i % n6 == 0) {
+			v4[-1] = c * g_6628d8;
+			*v4 = v[2] * g_6629d0;
+			v4[1] = v4[1] * g_6628d8;
 		}
 	}
 	return (int*) s;

@@ -7,7 +7,7 @@ extern char s_6815c0[];
 extern char s_6815c8[];
 extern char s_7e1ae0[];
 
-extern void* __cdecl fcn_004bcb80(int);
+extern void* __cdecl plt_FindPlantInfo(int);
 extern void* __cdecl fcn_004488e0(char*, int, int);
 extern void __cdecl fcn_0041d9e0(char*);
 extern void __cdecl fcn_00438b40(void*, float*);
@@ -20,15 +20,14 @@ void __cdecl fcn_004bcf20(char* a0, int a1)
 {
 	char b1[256];
 	char b2[256];
-	float ax;
-	float ay;
-	float az;
-	char* obj;
+	float pos[4];
 	char* info;
+	char* obj;
 	char* mat;
+	int iv;
 	int n;
 
-	info = (char*) fcn_004bcb80(*(unsigned short*) (a0 + 0xa));
+	info = (char*) plt_FindPlantInfo(*(unsigned short*) (a0 + 0xa));
 	if (a1 == 0) {
 		n = *(signed char*) (a0 + 0xd) / (unsigned char) info[0x43];
 		if (n < 1)
@@ -53,17 +52,25 @@ void __cdecl fcn_004bcf20(char* a0, int a1)
 	mat = (char*) *(int*) 0x6b8300;
 	if (mat == NULL)
 		return;
-	ax = (float) (unsigned char) a0[8] * *(float*) (mat + 0x60) + *(float*) (mat + 0x50);
-	ay = (float) (unsigned char) a0[8] * *(float*) (mat + 0x64) + *(float*) (mat + 0x54);
-	az = (float) (unsigned char) a0[8] * *(float*) (mat + 0x68) + *(float*) (mat + 0x58);
-	ax += (float) (unsigned char) a0[9] * *(float*) (mat + 0x70);
-	ay += (float) (unsigned char) a0[9] * *(float*) (mat + 0x74);
-	az += (float) (unsigned char) a0[9] * *(float*) (mat + 0x78);
-	ax += (float) *(unsigned char*) (*(int*) mat * (unsigned char) a0[9]
-		+ *(int*) (mat + 0x10) + (unsigned char) a0[8]) * *(float*) (mat + 0x80);
-	ay += (float) *(unsigned char*) (*(int*) mat * (unsigned char) a0[9]
-		+ *(int*) (mat + 0x10) + (unsigned char) a0[8]) * *(float*) (mat + 0x84);
-	az += (float) *(unsigned char*) (*(int*) mat * (unsigned char) a0[9]
-		+ *(int*) (mat + 0x10) + (unsigned char) a0[8]) * *(float*) (mat + 0x88);
-	fcn_00438b40(obj, &ax);
+	pos[0] = *(float*) (mat + 0x50);
+	pos[1] = *(float*) (mat + 0x54);
+	pos[2] = *(float*) (mat + 0x58);
+	iv = (unsigned char) a0[8];
+	pos[0] += (float) iv * *(float*) (mat + 0x60);
+	pos[1] += (float) iv * *(float*) (mat + 0x64);
+	pos[2] += (float) iv * *(float*) (mat + 0x68);
+	iv = (unsigned char) a0[9];
+	pos[0] += (float) iv * *(float*) (mat + 0x70);
+	pos[1] += (float) iv * *(float*) (mat + 0x74);
+	pos[2] += (float) iv * *(float*) (mat + 0x78);
+	pos[0] += (float) *(unsigned char*) (*(int*) mat * (unsigned char) a0[9] +
+					     *(int*) (mat + 0x10) + (unsigned char) a0[8]) *
+		  *(float*) (mat + 0x80);
+	pos[1] += (float) *(unsigned char*) (*(int*) mat * (unsigned char) a0[9] +
+					     *(int*) (mat + 0x10) + (unsigned char) a0[8]) *
+		  *(float*) (mat + 0x84);
+	pos[2] += (float) *(unsigned char*) (*(int*) mat * (unsigned char) a0[9] +
+					     *(int*) (mat + 0x10) + (unsigned char) a0[8]) *
+		  *(float*) (mat + 0x88);
+	fcn_00438b40(obj, pos);
 }

@@ -32,10 +32,11 @@ int __cdecl cm_ExAllocCutscene(int* obj, char* result)
             result[1] = 9;
             *(char**) (result + 6) = entry;
         }
-    }
-    else
+    } else {
         ret = 1;
-    if (*(char*) (entry + 8) == 5 && *(int*) (g_7f4ca4 + (unsigned short) g_774970 * 0x21c) != *(int*) (entry + 0x34) &&
+    }
+    if (*(unsigned char*) (entry + 8) == 5 &&
+        *(int*) (g_7f4ca4 + (unsigned short) g_774970 * 0x21c) != *(int*) (entry + 0x34) &&
         !(g_7747b0 & 4))
         *(unsigned char*) (entry + 0x26) &= 0x7f;
     g_699368++;

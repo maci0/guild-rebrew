@@ -9,7 +9,7 @@ void __cdecl fcn_00475fd0(int);
 void __cdecl fcn_00476060(int);
 int __cdecl fcn_00475c10(char*);
 char* __cdecl fcn_00475000(char*);
-int __cdecl fcn_00504bd0(int);
+int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl fcn_00502850(void);
 int __cdecl fcn_00475c10(char*);
@@ -71,7 +71,7 @@ void __cdecl fcn_00527540(void)
 	*(int*) 0x774680 = fcn_00475c10(buf);
 	if (*(int*) 0x774680)
 		goto have_image;
-	v3 = fcn_00504bd0(*v8);
+	v3 = gm_GetBuildingTypeCategory(*v8);
 	if (v3 == 1) {
 		if (*q == 0x16)
 			p = "%sbmp\\groundplans\\riss_wirtshaus.bmp";

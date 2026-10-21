@@ -11,8 +11,8 @@ int __cdecl fcn_0045b990(float*, float*, int*, int*, float*);
 int __cdecl fcn_0045b7e0(int, int, int, int*, int*);
 char __cdecl fcn_00407e30(char*, float*, float*, int, int, int*, int*, int, int);
 unsigned short __cdecl fcn_00421350(struct path_421350*, char*, int, int, int, int, int);
-void __cdecl fcn_0041ddd0(int);
-int __cdecl fcn_0041db70(int, char*);
+void __cdecl m_FreeTracked(int);
+int __cdecl m_alloc(int, char*);
 int __cdecl fcn_00407760(char*, void*, char*, void*);
 
 /* ADDRESS: GOLDTL 0x004090d0 */
@@ -34,13 +34,14 @@ unsigned int __cdecl fcn_004090d0(int a0)
 	v2 = a0;
 	v1 = *(int*) (a0 + 0x14);
 	v4 = fcn_00402610(v1);
-	v6 = *(int*) (*(int*) (a0 + 0x14) + 0x34);
-	if (!fcn_0045b990((float*) v4, (float*) (v6 + 0x4c), &a0, &v10, (float*) v9)) {
+	if (!fcn_0045b990((float*) v4,
+	                  (float*) (*(int*) (*(int*) (a0 + 0x14) + 0x34) + 0x4c),
+	                  &a0, &v10, (float*) v9)) {
 		return 0;
 	}
-	v6 = *(int*) (*(int*) (a0 + 0x110) + 0x34);
-	if (!fcn_0045b990((float*) v4, (float*) (v6 + 0x4c), (int*) &v12, &v11,
-	                 (float*) v9)) {
+	if (!fcn_0045b990((float*) v4,
+	                  (float*) (*(int*) (*(int*) (a0 + 0x110) + 0x34) + 0x4c),
+	                  (int*) &v12, &v11, (float*) v9)) {
 		return 0;
 	}
 	if (a0 < 1) {
@@ -74,10 +75,10 @@ unsigned int __cdecl fcn_004090d0(int a0)
 		return 0;
 	}
 	if (*(int*) (v2 + 0xf4)) {
-		fcn_0041ddd0(*(int*) (v2 + 0xf4));
+		m_FreeTracked(*(int*) (v2 + 0xf4));
 		*(int*) (v2 + 0xf4) = 0;
 	}
-	v6 = fcn_0041db70(*(int*) 0x14d0c20 * 2, (char*) 0x675ad8);
+	v6 = m_alloc(*(int*) 0x14d0c20 * 2, (char*) 0x675ad8);
 	*(int*) (v2 + 0xf4) = v6;
 	if (v6 == 0) {
 		__asm { int 3 }

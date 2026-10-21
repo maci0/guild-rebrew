@@ -1,24 +1,19 @@
-/* FindSlotEntryFiltered - scans a worker slot list for the first entry the
- * filter callback accepts. */
-
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern int __cdecl cm_GetBuildingStatCount(unsigned char* entity);
 
-/* The slot list is selected by type (0..3) or derived from the building
- * stats for type 0xff.  Returns the first slot for which the filter
- * returns non-zero, or NULL. */
-
 /* ADDRESS: GOLDTL 0x004f18d0 */
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor, void* filter, int type)
 {
+	unsigned char* e;
 	unsigned char* entry;
 	unsigned char* limit;
 	void* workers;
 
-	workers = *(void**) ((char*) entity + 0x65);
-	entry = (unsigned char*) ((g_entity_type_table + *(unsigned char*) entity) + *(unsigned char*) entity * 588);
+	e = (unsigned char*) entity;
+	entry = (unsigned char*) ((g_entity_type_table + *(unsigned char*) e) + *(unsigned char*) e * 588);
+	workers = *(void**) ((char*) e + 0x65);
 	if (type != 0xff && !gv_CheckSlotActive(workers, type)) {
 		return 0;
 	}
@@ -31,7 +26,7 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
 	} else if (type == 3) {
 		limit = (unsigned char*) *(int*) ((char*) workers + 0x14) + *(int*) (0x665358 + *(unsigned char*) (entry + 0x247) * 4) * 20;
 	} else if (type == 0xff) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0x1c) + cm_GetBuildingStatCount((unsigned char*) entity) * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0x1c) + cm_GetBuildingStatCount(e) * 20;
 	} else {
 		return 0;
 	}

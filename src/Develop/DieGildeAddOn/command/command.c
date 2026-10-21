@@ -1928,8 +1928,10 @@ int __cdecl cm_ExTransferCurrencyNoKill(int cmd, char* result)
  * load and store (the weight check relies on msvc6 evaluating the
  * compute_size operand first, as the reference does). */
 
+/* ADDRESS: GOLDTL 0x004c7c50 */
 uint cm_ExSellObjekt(char* cmd, uchar* result)
 {
+#ifdef REBREW_SERVER
 	int amount;
 	int resolve_result;
 	char* capacity_check;
@@ -2249,6 +2251,314 @@ LAB_1000e0e7:
 		}
 	}
 	return 0;
+#else
+	extern unsigned char g_773d75;
+	extern short g_774970;
+	extern char g_68a9d8[];
+	extern int __cdecl fcn_0051af00();
+	extern void __cdecl fcn_00533a40();
+	extern int __cdecl fcn_004234e0();
+
+	short* source_dynamic_entity;
+	short* source_owner_entity;
+	short* resolved_dynamic;
+	short* dest_dynamic_entity;
+	char* dest_existing_entity;
+	short* source_static_entity;
+	void* source_existing_entity;
+	char** source_container_ptr;
+	ushort* dest_game_object;
+	short* dest_owner_entity;
+	char* dest_container;
+	char* capacity_check;
+	ushort* source_object;
+	short entity_type;
+	int resolve_result;
+	int amount;
+	char obj_category;
+	char log_buffer[512];
+
+	source_object = (ushort*)0;
+	dest_owner_entity = (short*)0;
+	source_owner_entity = (short*)0;
+	resolved_dynamic = (short*)0;
+	dest_game_object = (ushort*)0;
+	source_dynamic_entity = (short*)0;
+	dest_dynamic_entity = (short*)0;
+	source_container_ptr = (char**)0;
+	source_existing_entity = (void*)0;
+	dest_existing_entity = (char*)0;
+	source_static_entity = (short*)0;
+	if (*(int*)0x14cbca0 != -1) {
+		*(int*)0x699364 = *(int*)(cmd + 0x1a);
+	}
+	if (*(int*)(cmd + 0x14) != -1) {
+		resolve_result = gm_GetFieldByType(cmd, *(int*)(cmd + 0x14));
+		*(int*)(cmd + 0x14) = resolve_result;
+		if (gm_ResolveEntityById((void**)&source_existing_entity, (void**)&resolved_dynamic,
+				(void**)&source_static_entity, resolve_result) == 0) {
+			return 1;
+		}
+		if (source_existing_entity != (void*)0) {
+			source_container_ptr = (char**)((int)source_existing_entity + 0x5d);
+			if (*(ushort*)((int)source_existing_entity + 0x27) != 0xffff) {
+				source_owner_entity = (short*)(g_slot_table +
+					(uint)*(ushort*)((int)source_existing_entity + 0x27) * 0x21c);
+			} else {
+				source_owner_entity = (short*)0;
+			}
+		} else if (resolved_dynamic != (short*)0) {
+			entity_type = *resolved_dynamic;
+			if (entity_type == 0x2a || entity_type == 0x1db ||
+				entity_type == 0x1dc || entity_type == 0x116 ||
+				entity_type == 0x1dd) {
+				source_dynamic_entity = resolved_dynamic;
+			}
+			source_container_ptr = (char**)(resolved_dynamic + 10);
+			source_owner_entity = gm_ResolveParentEntity(resolved_dynamic);
+			if (source_owner_entity == (short*)0) {
+				return 1;
+			}
+		} else {
+			source_owner_entity = source_static_entity;
+			source_container_ptr = (char**)(source_static_entity + 0xbc);
+		}
+		source_object = (ushort*)gm_ff_Objekt((int)*source_container_ptr, 1, 0,
+			(uint)*(ushort*)(cmd + 0x18));
+		if (source_object == (ushort*)0) {
+			((int (__cdecl*)(char*, char*, unsigned short, int, int))sprintf)(log_buffer,
+				"cm_ExSellObjekt(): Object not found: ObjProt:%i Menge:%i CmdCnt:",
+				*(ushort*)(cmd + 0x18), *(int*)(cmd + 0x1f), *(int*)(cmd + 8));
+			return 1;
+		}
+		if (source_dynamic_entity != (short*)0) {
+			if (gm_GetMsgField((int)source_dynamic_entity, (int)source_object) <
+				*(int*)(cmd + 0x1f)) {
+				sprintf(log_buffer,
+					"cm_ExSellObjekt() Not enough Objekts at source: ObjProt:%i Menge:%i CmdCnt:%i",
+					(uint)*(ushort*)(cmd + 0x18), *(int*)(cmd + 0x1f), *(int*)(cmd + 8));
+				return 1;
+			}
+		}
+		if (*(int*)(source_object + 7) < *(int*)(cmd + 0x1f)) {
+			sprintf(log_buffer,
+				"cm_ExSellObjekt() Not enough Objekts at source: ObjProt:%i Menge:%i CmdCnt:%i",
+				(uint)*(ushort*)(cmd + 0x18), *(int*)(cmd + 0x1f), *(int*)(cmd + 8));
+			return 1;
+		}
+		if (*(int*)(cmd + 0x23) != 0 && source_owner_entity != (short*)0) {
+			((int (__cdecl*)(int, unsigned char))gm_QueryEntitySum)(
+				*(int*)(source_owner_entity + 0xbc), cmd[0x1e]);
+		}
+	}
+	if (*(int*)(cmd + 0x10) != -1) {
+		resolve_result = gm_GetFieldByType(cmd, *(int*)(cmd + 0x10));
+		*(int*)(cmd + 0x10) = resolve_result;
+		if (gm_ResolveEntityById((void**)&dest_existing_entity, (void**)&resolved_dynamic,
+				(void**)&source_static_entity, resolve_result) == 0) {
+			return 1;
+		}
+		if (dest_existing_entity != (char*)0) {
+			dest_container = (char*)(dest_existing_entity + 0x5d);
+			if (*(ushort*)(dest_existing_entity + 0x27) != 0xffff) {
+				dest_owner_entity = (short*)(g_slot_table +
+					(uint)*(ushort*)(dest_existing_entity + 0x27) * 0x21c);
+			} else {
+				dest_owner_entity = (short*)0;
+			}
+		} else if (resolved_dynamic != (short*)0) {
+			entity_type = *resolved_dynamic;
+			if (entity_type == 0x2a || entity_type == 0x1db ||
+				entity_type == 0x1dc || entity_type == 0x116) {
+				dest_dynamic_entity = resolved_dynamic;
+			}
+			if (dest_dynamic_entity != (short*)0 || entity_type == 0x1dd) {
+				if ((int)gm_eval_SlotVoll((char*)resolved_dynamic,
+						(uint)*(ushort*)(cmd + 0x18), *(int*)(cmd + 0x1f)) <
+					*(int*)(cmd + 0x1f)) {
+					return 1;
+				}
+			}
+			dest_container = (char*)(resolved_dynamic + 10);
+			dest_owner_entity = gm_ResolveParentEntity(resolved_dynamic);
+		} else {
+			dest_container = (char*)(source_static_entity + 0xbc);
+			dest_owner_entity = source_static_entity;
+		}
+		if (*(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41) == '\x1d') {
+			dest_game_object = (ushort*)0;
+		} else {
+			dest_game_object = (ushort*)gm_ff_Objekt(*(int*)dest_container, 1, 0,
+				(uint)*(ushort*)(cmd + 0x18));
+		}
+		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
+			if (((int (__cdecl*)(int, unsigned char))gm_QueryEntitySum)(
+					*(int*)(dest_owner_entity + 0xbc), cmd[0x1e]) <
+				*(int*)(cmd + 0x1f) * *(int*)(cmd + 0x23)) {
+				return 1;
+			}
+		}
+	}
+	if (source_dynamic_entity != (short*)0) {
+		if (dest_owner_entity != (short*)0) {
+			if (gm_ResolveParentEntity((short*)source_object) != dest_owner_entity &&
+				*(int*)(source_object + 0xe) != 0) {
+				if ((uint)gm_GetMsgField((int)source_dynamic_entity, (int)source_object) -
+					((uint)(compute_size((char*)source_dynamic_entity, (int)*(ushort*)source_object) * *(int*)(source_object + 0xe)) >> 2) <
+					(uint)*(int*)(cmd + 0x1f)) {
+					return 1;
+				}
+			}
+			goto finalize_transfer;
+		}
+	} else {
+	finalize_transfer:
+		if (dest_owner_entity != (short*)0 &&
+			dest_existing_entity == (char*)0 &&
+			dest_dynamic_entity == (short*)0 &&
+			resolved_dynamic == (short*)0) {
+			resolve_result = gm_CheckInventoryCapacity(
+				(char*)dest_owner_entity,
+				(uint)*(ushort*)(cmd + 0x18),
+				*(int*)(cmd + 0x1f)
+			);
+			*(int*)(cmd + 0x1f) = resolve_result;
+			if (resolve_result == 0) {
+				return 1;
+			}
+		}
+	}
+	if (*(int*)(cmd + 0x23) != 0) {
+		if (dest_dynamic_entity == (short*)0 && resolved_dynamic != (short*)0 &&
+			*resolved_dynamic == 0x1dd) {
+			capacity_check = gm_FindSlotById((uint)g_773d75, (uint)*(ushort*)(cmd + 0x18));
+			if (capacity_check != (char*)0) {
+				*(int*)(capacity_check + 0x18) = *(int*)(capacity_check + 0x18) + *(int*)(cmd + 0x1f);
+			}
+		}
+		if (source_dynamic_entity != (short*)0 && *source_dynamic_entity == 0x1dd) {
+			capacity_check = gm_FindSlotById((uint)g_773d75, (uint)*(ushort*)(cmd + 0x18));
+			if (capacity_check != (char*)0) {
+				*(int*)(capacity_check + 0x1c) = *(int*)(capacity_check + 0x1c) + *(int*)(cmd + 0x1f);
+			}
+		}
+	}
+	if (*(int*)(cmd + 0x14) != -1) {
+		*(int*)(source_object + 7) = *(int*)(source_object + 7) - *(int*)(cmd + 0x1f);
+		amount = *(int*)(source_object + 7);
+		if (amount <= 0) {
+			obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
+			if (obj_category == '\x02' || obj_category == '\x06') {
+				if (source_existing_entity != (void*)0) {
+					gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(cmd + 0x18));
+				} else {
+					return 1;
+				}
+			} else {
+				gm_RemoveObjectByType(source_container_ptr, (uint)*(ushort*)(cmd + 0x18));
+			}
+		}
+		if (*(int*)(cmd + 0x23) != 0) {
+			gm_AddObjekt(
+				*(int*)(source_owner_entity + 2),
+				(uint) (unsigned short) g_entity_slot_table[(unsigned char) cmd[0x1e] * 189],
+				*(int*)(cmd + 0x1f) * *(int*)(cmd + 0x23)
+			);
+			if (source_dynamic_entity != (short*)0) {
+				if (*source_dynamic_entity == 0x1db) {
+					*(int*)(source_owner_entity + 0xd2) =
+						*(int*)(source_owner_entity + 0xd2) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
+				} else if (*source_dynamic_entity == 0x1dc) {
+					*(int*)(source_owner_entity + 0xd0) =
+						*(int*)(source_owner_entity + 0xd0) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
+				} else {
+					goto LAB_1000def2;
+				}
+			} else {
+			LAB_1000def2:
+				*(int*)(source_owner_entity + 0xce) =
+					*(int*)(source_owner_entity + 0xce) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
+			}
+		}
+	}
+	if (*(int*)(cmd + 0x10) != -1) {
+		if (dest_game_object != (ushort*)0) {
+			*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + *(int*)(cmd + 0x1f);
+		} else {
+			obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
+			if (obj_category == '\x02' || obj_category == '\x06') {
+				if (dest_existing_entity == (char*)0) {
+					goto alloc_failed;
+				}
+				dest_game_object = (ushort*)gm_AllocRaum(dest_existing_entity, (uint)*(ushort*)(cmd + 0x18));
+				if (dest_game_object == (ushort*)0) {
+					return 1;
+				}
+			} else {
+				dest_game_object = (ushort*)gm_AllocObjekt(*(int*)(cmd + 0x10), (uint)*(ushort*)(cmd + 0x18), *(int*)(cmd + 0x1f));
+				if (dest_game_object == (ushort*)0) {
+				alloc_failed:
+					return 1;
+				}
+				if (dest_dynamic_entity != (short*)0) {
+					capacity_check = g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41;
+					*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + 1;
+					if ((*capacity_check == '\x17' || *capacity_check == '%') &&
+						(*dest_dynamic_entity == 0x2a || *dest_dynamic_entity == 0x116) &&
+						dest_owner_entity != (short*)0 &&
+						((char)dest_owner_entity[1] == '\x06' || (char)dest_owner_entity[1] == '\a')) {
+						*(int*)(dest_game_object + 0xe) = 4;
+					}
+				}
+			}
+		}
+		*(int*)g_68a9d8 = *(int*)(dest_game_object + 1);
+		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
+			gm_SubObjekt(
+				*(void**)(dest_owner_entity + 2),
+				(uint) (unsigned short) g_entity_slot_table[(unsigned char) cmd[0x1e] * 189],
+				*(int*)(cmd + 0x1f) * *(int*)(cmd + 0x23)
+			);
+			if (dest_dynamic_entity != (short*)0) {
+				if (*dest_dynamic_entity == 0x1db) {
+					*(int*)(dest_owner_entity + 0xd0) =
+						*(int*)(dest_owner_entity + 0xd0) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
+					goto LAB_1000e0e7;
+				}
+				if (*dest_dynamic_entity == 0x1dc) {
+					*(int*)(dest_owner_entity + 0xd2) =
+						*(int*)(dest_owner_entity + 0xd2) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
+					goto LAB_1000e0e7;
+				}
+			}
+			*(int*)(dest_owner_entity + 0xcc) =
+				*(int*)(dest_owner_entity + 0xcc) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
+		}
+	}
+LAB_1000e0e7:
+	if (source_dynamic_entity != (short*)0 &&
+		(*source_dynamic_entity == 0x2a || *source_dynamic_entity == 0x116) &&
+		source_owner_entity != (short*)0 &&
+		*(int*)(cmd + 0x23) != 0 &&
+		*source_owner_entity == g_774970) {
+		source_existing_entity = gm_SearchTable67(*(int*)(source_dynamic_entity + 3));
+		if (source_existing_entity != (void*)0) {
+			fcn_0051af00(log_buffer, 0x7c,
+				14 * (int)*(unsigned char*)source_existing_entity + 0x48e,
+				*(int*)(cmd + 0x23));
+			fcn_00533a40(log_buffer);
+			fcn_004234e0(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
+		}
+	}
+	if (result != (uchar*)0) {
+		*result = 1;
+		if (*(int*)(cmd + 0x10) != -1) {
+			result[1] = 3;
+			*(ushort**)(result + 6) = dest_game_object;
+		}
+	}
+	return 0;
+#endif
 }
 
 
@@ -4603,6 +4913,23 @@ int __cdecl cm_DispatchMoveSlot(void* cmd, char* result_buf)
 extern int g_14cbca0;
 extern int g_699364;
 
+#ifdef REBREW_SERVER
+int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
+{
+	int id;
+	int rnd;
+
+	*(int*) (cmd + 0x14) = g_next_object_id;
+	rnd = rand();
+	*(int*) (cmd + 0x10) = rnd;
+	srv_SeedRandom(rnd);
+	id = gv_ExAllocGraveyardWorker((void*) (cmd + 0x10));
+	if (id == 0xffff) {
+		return -1;
+	}
+	return 0;
+}
+#else
 int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 {
 	int id;
@@ -4630,10 +4957,28 @@ int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 	}
 	return 0;
 }
+#endif
 
 /* Execution handler: allocates an alchemist entity by delegating
  * to ahm_ExAllocAlchemist. */
 
+#ifdef REBREW_SERVER
+int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
+{
+	int id;
+	int rnd;
+
+	*(int*) (cmd + 0x14) = g_next_object_id;
+	rnd = rand();
+	*(int*) (cmd + 0x10) = rnd;
+	srv_SeedRandom(rnd);
+	id = ahm_ExAllocAlchemist((void*) (cmd + 0x10));
+	if (id == 0xffff) {
+		return -1;
+	}
+	return 0;
+}
+#else
 int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
 {
 	int id;
@@ -4661,6 +5006,7 @@ int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
 	}
 	return 0;
 }
+#endif
 
 /* returns 1 on slot found, 0 otherwise (alchemistry_logic2.c:81) */
 
@@ -4669,6 +5015,46 @@ int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
  * (aSRc), alchemy clamp (aSmS), fire entity (FirE), and
  * other alchemist-related operations. */
 
+#ifdef REBREW_SERVER
+int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
+{
+	char* record;
+	uint action_type;
+	char* src;
+
+	record = (char*) gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
+	if (record == (char*) 0) {
+		return -1;
+	}
+	if (ahm_CheckFlag(record) == 0) {
+		return -2;
+	}
+	action_type = *(uint*) (cmd + 0x10);
+	src = (char*) (cmd + 0x10);
+	switch (action_type) {
+	case 0x61535263:
+		ahm_SearchAndSet(src, *(char**) (*(int*) (record + 0x16c) + 0x65));
+		return 0;
+	case 0x61536d53:
+		ahm_ClampFloatValue(src, *(char**) (*(int*) (record + 0x16c) + 0x65));
+		return 0;
+	case 0x46697245:
+		ahm_FireEntityAndCleanup(src, *(char**) (*(int*) (record + 0x16c) + 0x65), *(char**) (record + 0x16c));
+		return 0;
+	case 0x61437353:
+		ahm_ApplyColorComponent(src, *(char**) (*(int*) (record + 0x16c) + 0x65));
+		return 0;
+	case 0x61616452:
+		ahm_AllocateEntitySlot(src, *(char**) (*(int*) (record + 0x16c) + 0x65), *(char**) (record + 0x16c));
+		return 0;
+	case 0x61736452:
+		ahm_SlotClearMatch(src, *(char**) (*(int*) (record + 0x16c) + 0x65), *(char**) (record + 0x16c));
+		return 0;
+	default:
+		return -3;
+	}
+}
+#else
 int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 {
 	char* record;
@@ -4714,6 +5100,7 @@ int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 		return -3;
 	}
 }
+#endif
 
 #ifdef REBREW_SERVER
 int __cdecl cm_GetBuildingStatCount(uchar* cmd)

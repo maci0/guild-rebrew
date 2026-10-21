@@ -22,9 +22,9 @@ int __cdecl fcn_00495400(int, int, int, void*, void*);
 int __cdecl fcn_004efd30(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004f08d0(void*);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
-void __cdecl fcn_005015e0(void**, int, int, int);
+void __cdecl gm_ResolveEntityById(void**, int, int, int);
 int __cdecl fcn_004a6210(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x0048e5b0 */
@@ -70,13 +70,13 @@ int __cdecl fcn_0048e5b0(int a0, char* a1, int a2, char* a3, char* a4)
 		fcn_004f08d0(e);
 		return 0;
 	}
-	a0 = (fcn_0042e410(0x20) & 0xffff) + 0x20;
+	a0 = (gm_RandomMod(0x20) & 0xffff) + 0x20;
 	f.mask = 0xe07c43b4;
 	f.b = 1;
 	if (fcn_004a5e60(p, 6, f, 0, (float) a0, &out) == 0) {
 		return 0;
 	}
-	fcn_005015e0((void**) &a1, 0, 0, out);
+	gm_ResolveEntityById((void**) &a1, 0, 0, out);
 	if (a1 == 0) {
 		return 0;
 	}

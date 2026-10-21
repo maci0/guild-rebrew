@@ -27,7 +27,7 @@ typedef struct fcn_004172e0_Particle {
     float f14;
     float f18;
     float f1c;
-    float f20;
+    int f20;
     float f24;
     float f28;
     float f2c;
@@ -50,7 +50,7 @@ typedef struct fcn_004172e0_Emitter {
     float f04;
     float f08;
     char pad0c[0x14];
-    float f20;
+    int f20;
     char pad24[4];
     fcn_004172e0_Particle* particles;
     char pad2c[0xac];
@@ -65,9 +65,9 @@ int __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, float t)
     float cur;
     float dt;
 
-    if (e->f20 != 0.0f) {
+    if (e->f20 != 0) {
         p = e->particles;
-        e->f20 = 0.0f;
+        e->f20 = 0;
         for (i = 0; i < e->count; i++, p++) {
             if (!(p->flags & 1)) {
                 p->f38 = (float) rand() * g_662a18 * g_662ad0 - g_662918;

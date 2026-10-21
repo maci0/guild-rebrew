@@ -35,7 +35,7 @@ float __cdecl fcn_00507e70(void *, void *, int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_005c6270(void *, int);
 void __cdecl fcn_0051af00(char *, int, ...);
-void __cdecl fcn_00545e80(int, int, char *, int, int, int, int, int, char *);
+void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, char *);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_00545d40(int, int, char *, int, int, char *);
@@ -161,13 +161,13 @@ void __cdecl fcn_00561380(void *a0)
 			goto label_561a7a;
 		{
 			fcn_0051af00(text, 0x1735, *(unsigned short *)recA, r);
-			fcn_00545e80(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
+			he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 			if (*(unsigned short *)(r + 0x27) != 0xffff) {
 				if (*(unsigned char *)(recA + 2) != 6 && *(unsigned char *)(recA + 2) != 7)
 					fcn_004c54c0(*(int *)(recB + 4), *(int *)(recA + 4), -0x19, 1);
 				else {
 					fcn_0051af00(text, 0x1736, r);
-					fcn_00545e80(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, g_6a654c);
+					he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, g_6a654c);
 				}
 				fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(r + 1));
 			}
@@ -177,7 +177,7 @@ void __cdecl fcn_00561380(void *a0)
 					&& *(int *)v22 != *(int *)(recA + 4)
 					&& *(int *)v22 != *(int *)(recB + 4)) {
 					fcn_0051af00(text, 0x1737, *(unsigned short *)recA, r);
-					fcn_00545e80(*(int *)v22, -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
+					he_MessageBoxQuickjump(*(int *)v22, -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 				}
 				v22 = v22 + 0x87 * 4;
 			} while ((int)v22 < 0x85a0a4);
@@ -208,10 +208,10 @@ label_561aa2:
 			return;
 		}
 		fcn_0051af00(text, 0x1738, *(unsigned short *)(r + 0x27), r);
-		fcn_00545e80(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
+		he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 		if (*(unsigned short *)(r + 0x27) != 0xffff) {
 			fcn_0051af00(text, 0x1739, r);
-			fcn_00545e80(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
+			he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 			fcn_004f4f60(0x18, 1, *(int *)(recB + 4), *(int *)(recA + 4), *(int *)(r + 1));
 			*(int *)(p + 0x70) = -1;
 			return;

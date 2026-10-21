@@ -3,7 +3,7 @@
 extern char* g_6b5c60;
 extern int g_6b7fdc;
 
-char* __cdecl fcn_0041db70(int, char*);
+char* __cdecl m_alloc(int, char*);
 void __cdecl fcn_0042f420(int, int, char*);
 unsigned char __cdecl fcn_00401590(char*, int*, int*, int);
 char __cdecl fcn_00401650(char*, unsigned char*, unsigned char*, int);
@@ -38,7 +38,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 	char* slot;
 	int* cell;
 
-	v6 = (int*) fcn_0041db70(0x8038, (char*) 0x67a950);
+	v6 = (int*) m_alloc(0x8038, (char*) 0x67a950);
 	raw = (char*) v6;
 	strcpy(raw + 0x7da4, a0);
 	strcpy(raw + 0x7de4, a0 + 0x48);
@@ -46,7 +46,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 	if (*(int*) (a0 + 0x40) && *(int*) (a0 + 0x9c) >= 1) {
 		n = *(int*) (a0 + 0x9c);
 		*v6 = n;
-		dst = fcn_0041db70(n * n, (char*) 0x67a940);
+		dst = m_alloc(n * n, (char*) 0x67a940);
 		v6[4] = (int) dst;
 		memcpy(dst, *(void**) (a0 + 0x40), n * n);
 	} else {
@@ -57,7 +57,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 		strcat(path, ".bmp");
 		if (fcn_00401590(path, &width, &height, 0) && width == height) {
 			*v6 = width;
-			dst = fcn_0041db70(width * width, (char*) 0x67a940);
+			dst = m_alloc(width * width, (char*) 0x67a940);
 			v6[4] = (int) dst;
 			fcn_00401650(path, (unsigned char*) dst, 0, 5);
 		} else {
@@ -69,7 +69,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 	v6[3] = n - 1;
 	if (*(int*) (a0 + 0x98) >= 1 && *(int*) (a0 + 0xa0)) {
 		if (*(int*) (a0 + 0x44) && *(int*) (a0 + 0x9c) >= 1) {
-			dst = fcn_0041db70(n * n, (char*) 0x67a764);
+			dst = m_alloc(n * n, (char*) 0x67a764);
 			v6[6] = (int) dst;
 			memcpy(dst, *(void**) (a0 + 0x44), n * n);
 		} else {
@@ -77,7 +77,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 			strcat(path, a0);
 			strcat(path, "_w.bmp");
 			if (fcn_00401590(path, &width, &height, 0) && width == height && width == *v6) {
-				dst = fcn_0041db70(n * n, (char*) 0x67a764);
+				dst = m_alloc(n * n, (char*) 0x67a764);
 				v6[6] = (int) dst;
 				fcn_00401650(path, (unsigned char*) dst, 0, 5);
 			} else {
@@ -85,12 +85,12 @@ int* __cdecl fcn_0043fa10(char* a0)
 			}
 		}
 		*(unsigned char*) (raw + 0x8035) = *(unsigned char*) (a0 + 0x98);
-		dst = fcn_0041db70((unsigned int) *(unsigned char*) (raw + 0x8035) * 0x158, (char*) 0x67a88c);
+		dst = m_alloc((unsigned int) *(unsigned char*) (raw + 0x8035) * 0x158, (char*) 0x67a88c);
 		v6[0x1f68] = (int) dst;
 		memcpy(dst, *(void**) (a0 + 0xa0), (unsigned int) *(unsigned char*) (raw + 0x8035) * 0x158);
 	}
 	if (*(int*) (a0 + 0x88) && *(int*) (a0 + 0x9c) >= 1) {
-		dst = fcn_0041db70(*v6 * *v6, (char*) 0x67a87c);
+		dst = m_alloc(*v6 * *v6, (char*) 0x67a87c);
 		v6[5] = (int) dst;
 		memcpy(dst, *(void**) (a0 + 0x88), *v6 * *v6);
 	} else {
@@ -98,7 +98,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 		strcat(path, a0 + 0x48);
 		strcat(path, ".bmp");
 		if (fcn_00401590(path, &width, &height, 0) && width == height && width == *v6) {
-			dst = fcn_0041db70(*v6 * *v6, (char*) 0x67a87c);
+			dst = m_alloc(*v6 * *v6, (char*) 0x67a87c);
 			v6[5] = (int) dst;
 			fcn_00401650(path, (unsigned char*) dst, 0, 5);
 		} else {

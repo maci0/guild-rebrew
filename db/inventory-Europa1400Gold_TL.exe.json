@@ -260,8 +260,17 @@
   },
   {
     "va": 4207584,
-    "size": 1168,
-    "name": "fcn.004033e0"
+    "size": 1156,
+    "name": "fcn.004033e0",
+    "extent_history": [
+      {
+        "old_size": 1168,
+        "new_size": 1156,
+        "reason": "recycle2-228 trailing NOPs",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:45:08.526691+00:00"
+      }
+    ]
   },
   {
     "va": 4208768,
@@ -717,8 +726,17 @@
   },
   {
     "va": 4226608,
-    "size": 1008,
-    "name": "fcn.00407e30"
+    "size": 1006,
+    "name": "fcn.00407e30",
+    "extent_history": [
+      {
+        "old_size": 1008,
+        "new_size": 1006,
+        "reason": "recycle2-224 native terminators",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T12:59:11.952367+00:00"
+      }
+    ]
   },
   {
     "va": 4227616,
@@ -789,7 +807,7 @@
   },
   {
     "va": 4232384,
-    "size": 694,
+    "size": 1056,
     "name": "fcn.004094c0",
     "extent_history": [
       {
@@ -798,20 +816,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.488979+00:00"
-      }
-    ]
-  },
-  {
-    "va": 4233078,
-    "size": 350,
-    "name": "fcn.00409776",
-    "extent_history": [
+      },
       {
-        "old_size": null,
-        "new_size": 350,
-        "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
+        "old_size": 694,
+        "new_size": 1056,
+        "reason": "recycle2-225 interior row retired; native body 1056",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-19T06:01:01.491602+00:00"
+        "changed_at": "2026-10-20T13:02:04.423577+00:00"
       }
     ]
   },
@@ -827,8 +838,17 @@
   },
   {
     "va": 4234384,
-    "size": 1392,
-    "name": "fcn.00409c90"
+    "size": 1383,
+    "name": "fcn.00409c90",
+    "extent_history": [
+      {
+        "old_size": 1392,
+        "new_size": 1383,
+        "reason": "recycle2-337 trailing NOPs after ret",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T00:02:56.557324+00:00"
+      }
+    ]
   },
   {
     "va": 4235776,
@@ -1548,8 +1568,31 @@
   },
   {
     "va": 4258256,
-    "size": 768,
-    "name": "fcn.0040f9d0"
+    "size": 430,
+    "name": "fcn.0040f9d0",
+    "extent_history": [
+      {
+        "old_size": 768,
+        "new_size": 430,
+        "reason": "recycle2-212 merged extent split and pad",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T11:47:12.994960+00:00"
+      }
+    ]
+  },
+  {
+    "va": 4258688,
+    "size": 328,
+    "name": "fcn.0040fb80",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 328,
+        "reason": "recycle2-212 merged extent split and pad",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T11:47:12.997764+00:00"
+      }
+    ]
   },
   {
     "va": 4259024,
@@ -1822,7 +1865,7 @@
   },
   {
     "va": 4268000,
-    "size": 913,
+    "size": 960,
     "name": "fcn.00411fe0",
     "extent_history": [
       {
@@ -1831,6 +1874,13 @@
         "reason": "upper-02 merged extents and upper-04 byte-exact body boundary",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T21:33:55.905611+00:00"
+      },
+      {
+        "old_size": 913,
+        "new_size": 960,
+        "reason": "recycle2-324 padding and merged split",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T22:20:46.926914+00:00"
       }
     ]
   },
@@ -2063,8 +2113,17 @@
   },
   {
     "va": 4277168,
-    "size": 1152,
-    "name": "fcn.004143b0"
+    "size": 1141,
+    "name": "fcn.004143b0",
+    "extent_history": [
+      {
+        "old_size": 1152,
+        "new_size": 1141,
+        "reason": "recycle2-228 trailing NOPs",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:45:08.526707+00:00"
+      }
+    ]
   },
   {
     "va": 4278320,
@@ -3885,13 +3944,31 @@
   },
   {
     "va": 4343968,
-    "size": 1344,
-    "name": "fcn.004248a0"
+    "size": 1342,
+    "name": "fcn.004248a0",
+    "extent_history": [
+      {
+        "old_size": 1344,
+        "new_size": 1342,
+        "reason": "recycle2-334 code ends before tables/NOP pads",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T23:22:32.546377+00:00"
+      }
+    ]
   },
   {
     "va": 4345312,
-    "size": 1328,
-    "name": "fcn.00424de0"
+    "size": 1317,
+    "name": "fcn.00424de0",
+    "extent_history": [
+      {
+        "old_size": 1328,
+        "new_size": 1317,
+        "reason": "recycle2-334 code ends before tables/NOP pads",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T23:22:32.546390+00:00"
+      }
+    ]
   },
   {
     "va": 4346640,
@@ -4084,8 +4161,17 @@
   },
   {
     "va": 4352704,
-    "size": 512,
-    "name": "fcn.00426ac0"
+    "size": 507,
+    "name": "fcn.00426ac0",
+    "extent_history": [
+      {
+        "old_size": 512,
+        "new_size": 507,
+        "reason": "recycle2-198 native extents",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T10:15:33.438549+00:00"
+      }
+    ]
   },
   {
     "va": 4353216,
@@ -4123,20 +4209,6 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.546908+00:00"
-      }
-    ]
-  },
-  {
-    "va": 4355163,
-    "size": 36,
-    "name": "fcn.0042745b",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 36,
-        "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-19T06:01:01.549512+00:00"
       }
     ]
   },
@@ -4239,8 +4311,17 @@
   },
   {
     "va": 4359376,
-    "size": 592,
-    "name": "fcn.004284d0"
+    "size": 557,
+    "name": "fcn.004284d0",
+    "extent_history": [
+      {
+        "old_size": 592,
+        "new_size": 557,
+        "reason": "recycle2-304 body ends before table/next code",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T21:29:06.466754+00:00"
+      }
+    ]
   },
   {
     "va": 4359968,
@@ -6218,8 +6299,17 @@
   },
   {
     "va": 4473280,
-    "size": 1344,
-    "name": "fcn.004441c0"
+    "size": 1304,
+    "name": "fcn.004441c0",
+    "extent_history": [
+      {
+        "old_size": 1344,
+        "new_size": 1304,
+        "reason": "recycle2-334 code ends before tables/NOP pads",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T23:22:32.546393+00:00"
+      }
+    ]
   },
   {
     "va": 4474624,
@@ -7006,8 +7096,17 @@
   },
   {
     "va": 4521072,
-    "size": 3120,
-    "name": "fcn.0044fc70"
+    "size": 3117,
+    "name": "fcn.0044fc70",
+    "extent_history": [
+      {
+        "old_size": 3120,
+        "new_size": 3117,
+        "reason": "recycle2-244 native extents after interior retirement",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T16:04:23.559969+00:00"
+      }
+    ]
   },
   {
     "va": 4524192,
@@ -7565,7 +7664,7 @@
   },
   {
     "va": 4558336,
-    "size": 85,
+    "size": 580,
     "name": "fcn.00458e00",
     "extent_history": [
       {
@@ -7574,20 +7673,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.567909+00:00"
-      }
-    ]
-  },
-  {
-    "va": 4558421,
-    "size": 495,
-    "name": "fcn.00458e55",
-    "extent_history": [
+      },
       {
-        "old_size": null,
-        "new_size": 495,
-        "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
+        "old_size": 85,
+        "new_size": 580,
+        "reason": "recycle2-206 branch-target interiors retired; native ends",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-19T06:01:01.570548+00:00"
+        "changed_at": "2026-10-20T10:56:01.506309+00:00"
       }
     ]
   },
@@ -9063,7 +9155,7 @@
   },
   {
     "va": 4633264,
-    "size": 572,
+    "size": 476,
     "name": "fcn.0046b2b0",
     "extent_history": [
       {
@@ -9072,6 +9164,13 @@
         "reason": "recycle2-128 reviewed boundaries after interior retirement",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-20T06:06:15.284979+00:00"
+      },
+      {
+        "old_size": 572,
+        "new_size": 476,
+        "reason": "recycle2-304 body ends before table/next code",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T21:29:06.466773+00:00"
       }
     ]
   },
@@ -9908,20 +10007,6 @@
     ]
   },
   {
-    "va": 4678075,
-    "size": 549,
-    "name": "fcn.004761bb",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 549,
-        "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-19T06:01:01.591491+00:00"
-      }
-    ]
-  },
-  {
     "va": 4678624,
     "size": 570,
     "name": "fcn.004763e0",
@@ -10697,8 +10782,17 @@
   },
   {
     "va": 4716208,
-    "size": 3200,
-    "name": "fcn.0047f6b0"
+    "size": 3193,
+    "name": "fcn.0047f6b0",
+    "extent_history": [
+      {
+        "old_size": 3200,
+        "new_size": 3193,
+        "reason": "recycle2-245 native extents",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T16:26:54.299261+00:00"
+      }
+    ]
   },
   {
     "va": 4719408,
@@ -12206,8 +12300,17 @@
   },
   {
     "va": 4828592,
-    "size": 880,
-    "name": "fcn.0049adb0"
+    "size": 867,
+    "name": "fcn.0049adb0",
+    "extent_history": [
+      {
+        "old_size": 880,
+        "new_size": 867,
+        "reason": "recycle2-235 native extents",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T14:46:51.301696+00:00"
+      }
+    ]
   },
   {
     "va": 4829472,
@@ -12596,8 +12699,17 @@
   },
   {
     "va": 4843776,
-    "size": 1200,
-    "name": "fcn.0049e900"
+    "size": 1191,
+    "name": "fcn.0049e900",
+    "extent_history": [
+      {
+        "old_size": 1200,
+        "new_size": 1191,
+        "reason": "recycle2-317 trailing NOPs / merged extent",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T21:53:58.393167+00:00"
+      }
+    ]
   },
   {
     "va": 4844976,
@@ -12953,8 +13065,17 @@
   },
   {
     "va": 4875600,
-    "size": 1632,
-    "name": "fcn.004a6550"
+    "size": 1629,
+    "name": "fcn.004a6550",
+    "extent_history": [
+      {
+        "old_size": 1632,
+        "new_size": 1629,
+        "reason": "recycle2-346 code extents and table tails",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T01:11:48.430917+00:00"
+      }
+    ]
   },
   {
     "va": 4877232,
@@ -13953,7 +14074,7 @@
   },
   {
     "va": 4927008,
-    "size": 413,
+    "size": 496,
     "name": "fcn.004b2e20",
     "extent_history": [
       {
@@ -13962,20 +14083,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.628340+00:00"
-      }
-    ]
-  },
-  {
-    "va": 4927421,
-    "size": 77,
-    "name": "fcn.004b2fbd",
-    "extent_history": [
+      },
       {
-        "old_size": null,
-        "new_size": 77,
-        "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
+        "old_size": 413,
+        "new_size": 496,
+        "reason": "recycle2-196 extent pollution after interior retirement",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-19T06:01:01.630925+00:00"
+        "changed_at": "2026-10-20T09:51:49.237148+00:00"
       }
     ]
   },
@@ -18926,8 +19040,17 @@
   },
   {
     "va": 5155648,
-    "size": 1184,
-    "name": "fcn.004eab40"
+    "size": 1173,
+    "name": "fcn.004eab40",
+    "extent_history": [
+      {
+        "old_size": 1184,
+        "new_size": 1173,
+        "reason": "recycle2-316 trailing NOPs and 3-function merge",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T21:50:41.287490+00:00"
+      }
+    ]
   },
   {
     "va": 5156832,
@@ -19194,8 +19317,17 @@
   },
   {
     "va": 5165632,
-    "size": 1472,
-    "name": "fcn.004ed240"
+    "size": 1467,
+    "name": "fcn.004ed240",
+    "extent_history": [
+      {
+        "old_size": 1472,
+        "new_size": 1467,
+        "reason": "recycle2-342 trailing NOPs after native ret",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T00:41:15.346086+00:00"
+      }
+    ]
   },
   {
     "va": 5167104,
@@ -19426,8 +19558,17 @@
   },
   {
     "va": 5173984,
-    "size": 1168,
-    "name": "fcn.004ef2e0"
+    "size": 1157,
+    "name": "fcn.004ef2e0",
+    "extent_history": [
+      {
+        "old_size": 1168,
+        "new_size": 1157,
+        "reason": "recycle2-228 trailing NOPs",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:45:08.526711+00:00"
+      }
+    ]
   },
   {
     "va": 5175152,
@@ -20139,8 +20280,17 @@
   },
   {
     "va": 5204048,
-    "size": 1168,
-    "name": "fcn.004f6850"
+    "size": 1125,
+    "name": "fcn.004f6850",
+    "extent_history": [
+      {
+        "old_size": 1168,
+        "new_size": 1125,
+        "reason": "recycle2-238 tail thunk and table",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T15:01:03.319632+00:00"
+      }
+    ]
   },
   {
     "va": 5205216,
@@ -21277,7 +21427,7 @@
   },
   {
     "va": 5253664,
-    "size": 22,
+    "size": 688,
     "name": "fcn.00502a20",
     "extent_history": [
       {
@@ -21286,20 +21436,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.700513+00:00"
-      }
-    ]
-  },
-  {
-    "va": 5253686,
-    "size": 666,
-    "name": "fcn.00502a36",
-    "extent_history": [
+      },
       {
-        "old_size": null,
-        "new_size": 666,
-        "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
+        "old_size": 22,
+        "new_size": 688,
+        "reason": "recycle2-209 bogus interior split retired; true extent 688",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-19T06:01:01.703104+00:00"
+        "changed_at": "2026-10-20T11:08:47.999866+00:00"
       }
     ]
   },
@@ -22083,7 +22226,7 @@
   },
   {
     "va": 5292016,
-    "size": 448,
+    "size": 436,
     "name": "fcn.0050bff0",
     "extent_history": [
       {
@@ -22092,6 +22235,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.705683+00:00"
+      },
+      {
+        "old_size": 448,
+        "new_size": 436,
+        "reason": "recycle2-317 trailing NOPs / merged extent",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T21:53:58.393179+00:00"
       }
     ]
   },
@@ -22413,8 +22563,17 @@
   },
   {
     "va": 5302320,
-    "size": 1616,
-    "name": "fcn.0050e830"
+    "size": 1609,
+    "name": "fcn.0050e830",
+    "extent_history": [
+      {
+        "old_size": 1616,
+        "new_size": 1609,
+        "reason": "recycle2-346 code extents and table tails",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T01:11:48.430929+00:00"
+      }
+    ]
   },
   {
     "va": 5303936,
@@ -22862,8 +23021,17 @@
   },
   {
     "va": 5330592,
-    "size": 1440,
-    "name": "fcn.005156a0"
+    "size": 1432,
+    "name": "fcn.005156a0",
+    "extent_history": [
+      {
+        "old_size": 1440,
+        "new_size": 1432,
+        "reason": "recycle2-342 trailing NOPs after native ret",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T00:41:15.346095+00:00"
+      }
+    ]
   },
   {
     "va": 5332032,
@@ -23045,13 +23213,43 @@
   },
   {
     "va": 5359680,
-    "size": 6048,
-    "name": "fcn.0051c840"
+    "size": 5861,
+    "name": "fcn.0051c840",
+    "extent_history": [
+      {
+        "old_size": 6048,
+        "new_size": 1765,
+        "reason": "recycle2-286 code extent plus unlisted getter",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T20:21:27.144846+00:00"
+      },
+      {
+        "old_size": 1765,
+        "new_size": 5861,
+        "reason": "recycle2-290 correct code extent 0x16e5 (1765 was wrong)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T20:37:28.161749+00:00"
+      }
+    ]
   },
   {
     "va": 5365728,
     "size": 144,
     "name": "fcn.0051dfe0"
+  },
+  {
+    "va": 5365872,
+    "size": 6,
+    "name": "fcn.0051e070",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "recycle2-286 code extent plus unlisted getter",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T20:21:27.147484+00:00"
+      }
+    ]
   },
   {
     "va": 5365888,
@@ -23195,8 +23393,17 @@
   },
   {
     "va": 5374736,
-    "size": 1360,
-    "name": "fcn.00520310"
+    "size": 1346,
+    "name": "fcn.00520310",
+    "extent_history": [
+      {
+        "old_size": 1360,
+        "new_size": 1346,
+        "reason": "recycle2-337 trailing NOPs after ret",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T00:02:56.557342+00:00"
+      }
+    ]
   },
   {
     "va": 5376096,
@@ -23488,7 +23695,7 @@
   },
   {
     "va": 5393216,
-    "size": 16,
+    "size": 5,
     "name": "fcn.00524b40",
     "extent_history": [
       {
@@ -23497,6 +23704,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.739101+00:00"
+      },
+      {
+        "old_size": 16,
+        "new_size": 5,
+        "reason": "recycle2-238 tail thunk and table",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T15:01:03.319652+00:00"
       }
     ]
   },
@@ -23677,20 +23891,6 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.744266+00:00"
-      }
-    ]
-  },
-  {
-    "va": 5401238,
-    "size": 161,
-    "name": "fcn.00526a96",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 161,
-        "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-19T06:01:01.746864+00:00"
       }
     ]
   },
@@ -23912,7 +24112,7 @@
   },
   {
     "va": 5423200,
-    "size": 32,
+    "size": 2376,
     "name": "fcn.0052c060",
     "extent_history": [
       {
@@ -23921,20 +24121,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.749456+00:00"
-      }
-    ]
-  },
-  {
-    "va": 5423232,
-    "size": 2344,
-    "name": "fcn.0052c080",
-    "extent_history": [
+      },
       {
-        "old_size": null,
-        "new_size": 2344,
-        "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
+        "old_size": 32,
+        "new_size": 2376,
+        "reason": "recycle2-242 merged extents split",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-19T06:01:01.752056+00:00"
+        "changed_at": "2026-10-20T15:44:40.134579+00:00"
       }
     ]
   },
@@ -24606,7 +24799,7 @@
   },
   {
     "va": 5469152,
-    "size": 3072,
+    "size": 3071,
     "name": "fcn.005373e0",
     "extent_history": [
       {
@@ -24615,6 +24808,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.759847+00:00"
+      },
+      {
+        "old_size": 3072,
+        "new_size": 3071,
+        "reason": "recycle2-244 native extents after interior retirement",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T16:04:23.559991+00:00"
       }
     ]
   },
@@ -24717,8 +24917,17 @@
   },
   {
     "va": 5474384,
-    "size": 1200,
-    "name": "fcn.00538850"
+    "size": 1190,
+    "name": "fcn.00538850",
+    "extent_history": [
+      {
+        "old_size": 1200,
+        "new_size": 1190,
+        "reason": "recycle2-317 trailing NOPs / merged extent",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T21:53:58.393182+00:00"
+      }
+    ]
   },
   {
     "va": 5475584,
@@ -24855,8 +25064,17 @@
   },
   {
     "va": 5496864,
-    "size": 1024,
-    "name": "fcn.0053e020"
+    "size": 1009,
+    "name": "fcn.0053e020",
+    "extent_history": [
+      {
+        "old_size": 1024,
+        "new_size": 1009,
+        "reason": "recycle2-224 native terminators",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T12:59:11.952395+00:00"
+      }
+    ]
   },
   {
     "va": 5497888,
@@ -26166,20 +26384,6 @@
     ]
   },
   {
-    "va": 5577739,
-    "size": 19,
-    "name": "fcn.00551c0b",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 19,
-        "reason": "recycle2-87/88 reviewed merges and pads",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-20T03:42:03.947120+00:00"
-      }
-    ]
-  },
-  {
     "va": 5577760,
     "size": 304,
     "name": "fcn.00551c20",
@@ -26389,8 +26593,17 @@
   },
   {
     "va": 5592336,
-    "size": 1328,
-    "name": "fcn.00555510"
+    "size": 1317,
+    "name": "fcn.00555510",
+    "extent_history": [
+      {
+        "old_size": 1328,
+        "new_size": 1317,
+        "reason": "recycle2-334 code ends before tables/NOP pads",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T23:22:32.546395+00:00"
+      }
+    ]
   },
   {
     "va": 5593664,
@@ -26616,8 +26829,17 @@
   },
   {
     "va": 5610144,
-    "size": 1008,
-    "name": "fcn.00559aa0"
+    "size": 1001,
+    "name": "fcn.00559aa0",
+    "extent_history": [
+      {
+        "old_size": 1008,
+        "new_size": 1001,
+        "reason": "recycle2-224 native terminators",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T12:59:11.952398+00:00"
+      }
+    ]
   },
   {
     "va": 5611152,
@@ -27310,8 +27532,17 @@
   },
   {
     "va": 5657424,
-    "size": 1200,
-    "name": "fcn.00565350"
+    "size": 1173,
+    "name": "fcn.00565350",
+    "extent_history": [
+      {
+        "old_size": 1200,
+        "new_size": 1173,
+        "reason": "recycle2-317 trailing NOPs / merged extent",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T21:53:58.393184+00:00"
+      }
+    ]
   },
   {
     "va": 5658624,
@@ -27348,8 +27579,17 @@
   },
   {
     "va": 5659312,
-    "size": 1568,
-    "name": "fcn.00565ab0"
+    "size": 1560,
+    "name": "fcn.00565ab0",
+    "extent_history": [
+      {
+        "old_size": 1568,
+        "new_size": 1560,
+        "reason": "recycle2-346 code extents and table tails",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T01:11:48.430931+00:00"
+      }
+    ]
   },
   {
     "va": 5660880,
@@ -27515,7 +27755,7 @@
   },
   {
     "va": 5672656,
-    "size": 2096,
+    "size": 2068,
     "name": "fcn.00568ed0",
     "extent_history": [
       {
@@ -27531,6 +27771,13 @@
         "reason": "recycle2-50 corrected extents",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-20T00:31:26.137955+00:00"
+      },
+      {
+        "old_size": 2096,
+        "new_size": 2068,
+        "reason": "recycle2-247 native code extents",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T17:17:39.729222+00:00"
       }
     ]
   },
@@ -27602,7 +27849,7 @@
   },
   {
     "va": 5680880,
-    "size": 1932,
+    "size": 1910,
     "name": "fcn.0056aef0",
     "extent_history": [
       {
@@ -27611,6 +27858,13 @@
         "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-16T06:23:43.008127+00:00"
+      },
+      {
+        "old_size": 1932,
+        "new_size": 1910,
+        "reason": "recycle2-247 native code extents",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T17:17:39.729243+00:00"
       }
     ]
   },
@@ -27673,7 +27927,7 @@
   },
   {
     "va": 5688048,
-    "size": 882,
+    "size": 892,
     "name": "fcn.0056caf0",
     "extent_history": [
       {
@@ -27682,6 +27936,27 @@
         "reason": "recycle2-25 reviewed pads",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T23:33:55.416059+00:00"
+      },
+      {
+        "old_size": 882,
+        "new_size": 892,
+        "reason": "recycle2-235 native extents",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T14:46:51.301707+00:00"
+      },
+      {
+        "old_size": 892,
+        "new_size": 882,
+        "reason": "recycle2-263 native code bodies",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T19:25:33.013157+00:00"
+      },
+      {
+        "old_size": 882,
+        "new_size": 892,
+        "reason": "recycle2-351 code extents incl switch table",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T01:53:16.278606+00:00"
       }
     ]
   },
@@ -27783,8 +28058,17 @@
   },
   {
     "va": 5695872,
-    "size": 1216,
-    "name": "fcn.0056e980"
+    "size": 1186,
+    "name": "fcn.0056e980",
+    "extent_history": [
+      {
+        "old_size": 1216,
+        "new_size": 1186,
+        "reason": "recycle2-324 padding and merged split",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T22:20:46.926933+00:00"
+      }
+    ]
   },
   {
     "va": 5697088,
@@ -28438,7 +28722,7 @@
   },
   {
     "va": 5736976,
-    "size": 1012,
+    "size": 990,
     "name": "fcn.00578a10",
     "extent_history": [
       {
@@ -28447,6 +28731,13 @@
         "reason": "Reviewed callback/direct-call entries and complete bounded control flow, including validated switch bounds, case targets and non-overlapping compiler tables. Native boundaries split; source comparison SIZE untouched. Evidence: .scratch/text-accounting-20261016/reviewed-{callback,switch}-code.json",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-16T06:23:43.028776+00:00"
+      },
+      {
+        "old_size": 1012,
+        "new_size": 990,
+        "reason": "recycle2-236 native extents",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T14:18:46.545897+00:00"
       }
     ]
   },
@@ -28466,8 +28757,17 @@
   },
   {
     "va": 5738192,
-    "size": 1216,
-    "name": "fcn.00578ed0"
+    "size": 1208,
+    "name": "fcn.00578ed0",
+    "extent_history": [
+      {
+        "old_size": 1216,
+        "new_size": 1208,
+        "reason": "recycle2-324 padding and merged split",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T22:20:46.926937+00:00"
+      }
+    ]
   },
   {
     "va": 5739408,
@@ -28491,8 +28791,17 @@
   },
   {
     "va": 5740448,
-    "size": 1360,
-    "name": "fcn.005797a0"
+    "size": 1351,
+    "name": "fcn.005797a0",
+    "extent_history": [
+      {
+        "old_size": 1360,
+        "new_size": 1351,
+        "reason": "recycle2-337 trailing NOPs after ret",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T00:02:56.557346+00:00"
+      }
+    ]
   },
   {
     "va": 5741808,
@@ -29785,7 +30094,7 @@
   },
   {
     "va": 5829392,
-    "size": 912,
+    "size": 902,
     "name": "fcn.0058f310",
     "extent_history": [
       {
@@ -29794,6 +30103,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.828770+00:00"
+      },
+      {
+        "old_size": 912,
+        "new_size": 902,
+        "reason": "recycle2-242 merged extents split",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T15:44:40.134618+00:00"
       }
     ]
   },
@@ -30141,7 +30457,7 @@
   },
   {
     "va": 5863744,
-    "size": 624,
+    "size": 622,
     "name": "fcn.00597940",
     "extent_history": [
       {
@@ -30150,6 +30466,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.836455+00:00"
+      },
+      {
+        "old_size": 624,
+        "new_size": 622,
+        "reason": "recycle2-207 reviewed extents",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T11:42:20.578353+00:00"
       }
     ]
   },
@@ -30262,7 +30585,7 @@
   },
   {
     "va": 5867696,
-    "size": 2690,
+    "size": 2718,
     "name": "fcn.005988b0",
     "extent_history": [
       {
@@ -30271,20 +30594,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.839013+00:00"
-      }
-    ]
-  },
-  {
-    "va": 5870386,
-    "size": 28,
-    "name": "fcn.00599332",
-    "extent_history": [
+      },
       {
-        "old_size": null,
-        "new_size": 28,
-        "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
+        "old_size": 2690,
+        "new_size": 2718,
+        "reason": "recycle2-244 native extents after interior retirement",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-19T06:01:01.841548+00:00"
+        "changed_at": "2026-10-20T16:04:23.559996+00:00"
       }
     ]
   },
@@ -30325,8 +30641,17 @@
   },
   {
     "va": 5876240,
-    "size": 1600,
-    "name": "fcn.0059aa10"
+    "size": 1593,
+    "name": "fcn.0059aa10",
+    "extent_history": [
+      {
+        "old_size": 1600,
+        "new_size": 1593,
+        "reason": "recycle2-346 code extents and table tails",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T01:11:48.430933+00:00"
+      }
+    ]
   },
   {
     "va": 5877840,
@@ -30855,7 +31180,7 @@
   },
   {
     "va": 5915792,
-    "size": 1232,
+    "size": 1225,
     "name": "fcn.005a4490",
     "extent_history": [
       {
@@ -30864,6 +31189,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.849165+00:00"
+      },
+      {
+        "old_size": 1232,
+        "new_size": 1225,
+        "reason": "recycle2-324 padding and merged split",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T22:20:46.926940+00:00"
       }
     ]
   },
@@ -31414,7 +31746,7 @@
   },
   {
     "va": 5959312,
-    "size": 688,
+    "size": 686,
     "name": "fcn.005aee90",
     "extent_history": [
       {
@@ -31423,6 +31755,13 @@
         "reason": "reviewed merged extent split: fresh discovery entries inside stored span, each part terminates or is followed by the next entry",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-19T06:01:01.864547+00:00"
+      },
+      {
+        "old_size": 688,
+        "new_size": 686,
+        "reason": "recycle2-237 true extent",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T14:18:24.358953+00:00"
       }
     ]
   },
@@ -32206,8 +32545,17 @@
   },
   {
     "va": 6026624,
-    "size": 1120,
-    "name": "fcn.005bf580"
+    "size": 1110,
+    "name": "fcn.005bf580",
+    "extent_history": [
+      {
+        "old_size": 1120,
+        "new_size": 1110,
+        "reason": "recycle2-237 native extents after interior retirement",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T14:28:50.469921+00:00"
+      }
+    ]
   },
   {
     "va": 6027744,
@@ -33269,8 +33617,17 @@
   },
   {
     "va": 6125792,
-    "size": 1440,
-    "name": "fcn.005d78e0"
+    "size": 1425,
+    "name": "fcn.005d78e0",
+    "extent_history": [
+      {
+        "old_size": 1440,
+        "new_size": 1425,
+        "reason": "recycle2-342 trailing NOPs after native ret",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-21T00:41:15.346099+00:00"
+      }
+    ]
   },
   {
     "va": 6127232,
@@ -40994,8 +41351,31 @@
   },
   {
     "va": 6639089,
-    "size": 111,
-    "name": "fcn.00654df1"
+    "size": 52,
+    "name": "fcn.00654df1",
+    "extent_history": [
+      {
+        "old_size": 111,
+        "new_size": 52,
+        "reason": "recycle2-230 thunk/CRT splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:06:59.013163+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639141,
+    "size": 50,
+    "name": "fcn.00654e25",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 50,
+        "reason": "recycle2-230 thunk/CRT splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:06:59.017379+00:00"
+      }
+    ]
   },
   {
     "va": 6639200,
@@ -41529,8 +41909,17 @@
   },
   {
     "va": 6660618,
-    "size": 29,
-    "name": "fcn.0065a20a"
+    "size": 5,
+    "name": "fcn.0065a20a",
+    "extent_history": [
+      {
+        "old_size": 29,
+        "new_size": 5,
+        "reason": "recycle2-230 thunk/CRT splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:06:59.017407+00:00"
+      }
+    ]
   },
   {
     "va": 6660647,
@@ -41939,8 +42328,129 @@
   },
   {
     "va": 6675777,
-    "size": 151,
-    "name": "fcn.0065dd41"
+    "size": 3,
+    "name": "fcn.0065dd41",
+    "extent_history": [
+      {
+        "old_size": 151,
+        "new_size": 3,
+        "reason": "recycle2-231 thunk splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:17:41.923100+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6675780,
+    "size": 17,
+    "name": "fcn.0065dd44",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "recycle2-231 thunk splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:17:41.925733+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6675797,
+    "size": 17,
+    "name": "fcn.0065dd55",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "recycle2-231 thunk splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:17:41.928382+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6675814,
+    "size": 17,
+    "name": "fcn.0065dd66",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "recycle2-231 thunk splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:17:41.931014+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6675831,
+    "size": 20,
+    "name": "fcn.0065dd77",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "recycle2-231 thunk splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:17:41.933588+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6675851,
+    "size": 20,
+    "name": "fcn.0065dd8b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "recycle2-231 thunk splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:17:41.936082+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6675871,
+    "size": 20,
+    "name": "fcn.0065dd9f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "recycle2-231 thunk splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:17:41.938555+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6675891,
+    "size": 20,
+    "name": "fcn.0065ddb3",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "recycle2-231 thunk splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:17:41.941027+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6675911,
+    "size": 17,
+    "name": "fcn.0065ddc7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "recycle2-231 thunk splits",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-20T13:17:41.943527+00:00"
+      }
+    ]
   },
   {
     "va": 6675928,

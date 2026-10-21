@@ -1181,6 +1181,100 @@ int __cdecl fcn_005037c0(int a, unsigned short b, int c);
  * inactive slot, find the free destination entry, migrate the source entry
  * (0x44 bytes, 17 dwords), clear the source, then account the produced goods
  * for the current season. */
+#if defined(REBREW_SERVER)
+/* ADDRESS: SERVER 0x10011940 */
+int __cdecl gv_MoveSlotEntry(void* a)
+{
+	void* entity;
+	void* rec2;
+	void* slot;
+	void* found;
+	void* found2;
+	int* src_entry;
+	int* dst_entry;
+	int* dst_end;
+	int* src_end;
+	int src_count;
+
+	gm_ResolveEntityById(0, 0, &entity, *(int*) a);
+	if (entity == 0)
+		return -6;
+	gm_ResolveEntityById(&rec2, 0, 0, *(int*) ((char*) a + 4));
+	if (rec2 == 0 || *(unsigned short*) ((char*) rec2 + 0x27) == 0xffff ||
+	    (char*) g_slot_table + (*(unsigned short*) ((char*) rec2 + 0x27)) * 540 ==
+	        (char*) g_entity_table_end)
+		return -1;
+	if (g_entity_type_table[*(unsigned char*) rec2 + *(unsigned char*) rec2 * 588] != 0x1d)
+		return -2;
+	slot = *(void**) ((char*) rec2 + 0x65);
+	if (slot == 0)
+		return -3;
+	if (!gv_CheckSlotActive(slot, *(int*) ((char*) a + 8)))
+		return -4;
+	found = gv_GetSlotEntry(slot, *(int*) ((char*) a + 8),
+	                     *(unsigned char*) ((char*) a + 0xc));
+	if (found == 0)
+		goto fail7;
+	if (*(unsigned short*) ((char*) found + 8) != *(unsigned short*) ((char*) entity + 0x50))
+		goto fail7;
+
+	src_entry = *(int**) ((char*) found + 0x10);
+	src_count = g_worker_entry_count[*(int*) ((char*) a + 8)];
+	found2 = FindSlotEntryFiltered(entity, rec2, 0, (void*) gv_eval_SlotFrei,
+	                               *(int*) ((char*) a + 0xd));
+	if (found2 == 0)
+		goto fail7;
+	dst_entry = *(int**) ((char*) found2 + 0x10);
+	dst_end = dst_entry + g_worker_entry_count[*(int*) ((char*) a + 0xd)] * 17;
+	src_end = src_entry + src_count * 17;
+
+	if (dst_entry < dst_end) {
+		for (;;) {
+			if (*dst_entry == -1) {
+				while (src_entry < src_end) {
+					if (*src_entry != -1) {
+						memcpy(dst_entry, src_entry, 0x44);
+						memset(src_entry, 0, 0x44);
+						*src_entry = -1;
+						break;
+					}
+					src_entry += 0x11;
+				}
+				if (src_entry >= src_end)
+					goto done;
+			}
+			dst_entry += 0x11;
+			if (dst_entry < dst_end)
+				continue;
+			break;
+		}
+	}
+done:
+
+	*(int*) ((char*) found2 + 4) = *(int*) ((char*) found + 4);
+	*(int*) ((char*) found + 4) = -1;
+	*(unsigned short*) ((char*) found2 + 8) = *(unsigned short*) ((char*) found + 8);
+	*(unsigned short*) ((char*) found + 8) = 0xffff;
+	*(unsigned short*) ((char*) found2 + 0xa) = (unsigned short) (g_current_year + 0xa);
+	*(unsigned char*) ((char*) found2 + 0xc) = 0xff;
+	*(unsigned short*) ((char*) found + 0xa) = 0xff;
+	*(int*) ((char*) a + 0x15) = g_next_object_id;
+
+	if (*(int*) ((char*) a + 0x11) > 0) {
+		gm_SubObjectNoKill(*(int*) ((char*) entity + 4),
+		             (unsigned short) g_entity_slot_table[g_current_season * 189],
+		             *(int*) ((char*) a + 0x11));
+		gm_AddObjekt((&g_entity_id_field)[*(unsigned short*) ((char*) rec2 + 0x27) * 135],
+		             (unsigned short) g_entity_slot_table[g_current_season * 189],
+		             (int) ((float) *(int*) ((char*) a + 0x11) *
+		                    g_output_share[*(int*) ((char*) a + 0xd)]));
+	}
+	return 0;
+
+fail7:
+	return -7;
+}
+#else
 int __cdecl gv_MoveSlotEntry(void* a)
 {
 	void* cmd;
@@ -1279,6 +1373,7 @@ done:
 fail7:
 	return -7;
 }
+#endif
 
 
 #include "rebrew_types.h"

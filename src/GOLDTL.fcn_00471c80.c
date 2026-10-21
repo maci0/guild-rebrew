@@ -4,23 +4,20 @@ void __cdecl fcn_00469c40(int, int, int);
 void __cdecl fcn_00471c80(int idx, unsigned char flags, float limit)
 {
 	int* p;
-	int half;
 	float value;
 	float bound;
 	int t;
 
 	p = (int*) (0x1015f40 + idx * 0x3cc);
 	if (flags & 1) {
-		half = p[3] / 2;
-		value = (float) (p[1] + half)
+		value = (float) (p[1] + p[3] / 2)
 			- (float) *(int*) 0x1015eac / *(float*) 0x67d368
-			+ (float) *(int*) 0x1015eac - (float) half;
+			+ (float) *(int*) 0x1015eac - (float) (p[3] / 2);
 	} else {
 		value = (float) p[1];
 	}
 	if (flags & 2) {
-		half = p[4] / 2;
-		bound = (float) (p[2] + half) * *(float*) 0x67d368 - (float) half;
+		bound = (float) (p[2] + p[4] / 2) * *(float*) 0x67d368 - (float) (p[4] / 2);
 	} else {
 		bound = (float) p[2];
 	}

@@ -18,12 +18,12 @@ int __cdecl fcn_00529670(int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_0050c710(unsigned char*, int, int);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_0050e000(char*, int, int);
 char* __cdecl fcn_0050dc90(unsigned char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00546190(char*);
 
 /* One step of the building placement state machine: validate the current
@@ -195,7 +195,7 @@ void __cdecl fcn_00560290(char* a0)
 			} else {
 				scale = (double) fcn_0050c710(v9, 0x1e, 1) * *(double*) 0x665eb0 + *(double*) 0x6629c8;
 			}
-			t = fcn_0042e410(6) & 0xffff;
+			t = gm_RandomMod(6) & 0xffff;
 			t = (int) ((double) (t + 9) * (double) (unsigned char) *(a0 + 0xac) * scale);
 			if (win == 3 && !(*(v9 + 0x5b) & 0x20)) {
 				t = (int) ((double) t * *(double*) 0x662908);
@@ -214,7 +214,7 @@ void __cdecl fcn_00560290(char* a0)
 				fcn_0051af00(text, 0x1804, 0x17fd, v9);
 			}
 			if ((*(char*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca2) == 6 || *(char*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca2) == 7) && (!id || !(*(unsigned char*) ((int) id + 0x1b4) & 1))) {
-				fcn_00545e80(*(int*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca4), -1, text, 0, 0x5ec, *(int*) (v9 + 1), *(int*) (a0 + 0xb0), 0, 0);
+				he_MessageBoxQuickjump(*(int*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca4), -1, text, 0, 0x5ec, *(int*) (v9 + 1), *(int*) (a0 + 0xb0), 0, 0);
 				fcn_00546190(a0);
 				return;
 			}

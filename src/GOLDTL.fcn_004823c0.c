@@ -44,7 +44,7 @@ void __cdecl fcn_00487c00(char*, char*, int);
 void __cdecl fcn_00487470(char*);
 void __cdecl fcn_004888a0(char*);
 void __cdecl fcn_00488c00(char*);
-void __cdecl fcn_00480c60(char*, int);
+void __cdecl ai_CalcAngriff(char*, int);
 
 /* ADDRESS: GOLDTL 0x004823c0 */
 void __cdecl fcn_004823c0(char* e)
@@ -161,7 +161,7 @@ void __cdecl fcn_004823c0(char* e)
 		}
 		if (action == 3) {
 attack:
-			fcn_00480c60(e, freehits);
+			ai_CalcAngriff(e, freehits);
 			goto send48;
 		}
 		if (action == 0) {

@@ -100,13 +100,13 @@ void __cdecl fcn_0057e880(int a, int b, int c, int d)
 		if (c == 0) {
 			if (g_665f08->cfg->key == a) {
 				g_665f08->want = 5;
-				g_665f08->since = g_6b7fac;
 				if (b != 0) {
 					g_665f08->arg = b;
-					g_665f08->state = g_665f08->want;
-					g_665f08->ticks++;
-					return;
 				}
+				g_665f08->since = g_6b7fac;
+				g_665f08->state = g_665f08->want;
+				g_665f08->ticks++;
+				return;
 			}
 		} else if (c == 1 && g_665f08->cfg->key == a) {
 			g_665f08->want = 4;

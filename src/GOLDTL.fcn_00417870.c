@@ -1,4 +1,4 @@
-extern int __cdecl fcn_0064d228(void);
+extern int __cdecl _ftol(void);
 extern int __cdecl fcn_0064d3f8(void);
 
 /* ADDRESS: GOLDTL 0x00417870 */
@@ -14,7 +14,7 @@ char __cdecl fcn_00417870(char* a0, int a1)
 	int i;
 	int half;
 	int count;
-	__int64 t;
+	unsigned int t;
 	float v;
 	float f;
 
@@ -25,7 +25,7 @@ char __cdecl fcn_00417870(char* a0, int a1)
 		for (i = 0; i < *(int*) (a0 + 0xd8); i++) {
 			rec = base + i * 0x54;
 			if (*(unsigned char*) (rec + 0x51) & 1) {
-				t = (__int64) (unsigned int) (a1 - *(int*) (rec + 0x30));
+				t = (unsigned int) (a1 - *(int*) (rec + 0x30));
 				v = (float) t * *(float*) 0x662a2c;
 				*(float*) (rec + 0x38) = *(float*) (rec + 0x10) + *(float*) rec;
 				*(float*) (rec + 0x3c) = *(float*) (rec + 0x14) + *(float*) (rec + 4);

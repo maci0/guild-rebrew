@@ -7,7 +7,7 @@ extern char g_678f28[]; /* Finished unloading Samplebank %s ... MemUsed after un
 
 char* __cdecl fcn_00422760(int, int*);
 void __cdecl fcn_004237f0(char*, int);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004230e0 */
@@ -67,7 +67,7 @@ int __cdecl fcn_004230e0(char* a0)
 				} else {
 					g_6b7d74 += -12 - *(int*) (*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) + 8);
 				}
-				fcn_0041ddd0(*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38));
+				m_FreeTracked(*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38));
 				*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) = 0;
 				*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) = 0;
 			}
@@ -76,6 +76,6 @@ int __cdecl fcn_004230e0(char* a0)
 	}
 	g_6b7d74 += -0x144 - *(int*) (bank + 0x134) * 0x40;
 	fcn_0064d41a(g_14cbae0, g_678f28, name, g_6b7d74);
-	fcn_0041ddd0(bank);
+	m_FreeTracked(bank);
 	return r;
 }

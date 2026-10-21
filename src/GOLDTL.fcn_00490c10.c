@@ -15,12 +15,11 @@ int __cdecl fcn_00490c10(ENT_490c10* a0, int unused, int* out)
     v = (int) ((a0->fac - *(float*) 0x662918) * *(float*) 0x662a98);
     if (v < 4) {
         t = v;
-        if (t < 1) {
-            t = 1;
-        }
     } else {
         t = 4;
     }
+    if (t < 1)
+        t = 1;
     fcn_004f4830(7, &buf);
     if (t != buf.idx) {
         *out = t;

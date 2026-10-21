@@ -26,7 +26,7 @@ int __cdecl fcn_004c5fd0();
 int __cdecl fcn_00500bb0();
 int __cdecl fcn_00500cb0();
 int __cdecl fcn_00500e20();
-int __cdecl fcn_005015e0();
+int __cdecl gm_ResolveEntityById();
 int __cdecl fcn_00508e40();
 int __cdecl fcn_00509570();
 int __cdecl fcn_0050cad0();
@@ -96,7 +96,7 @@ void __cdecl fcn_005744c0(int a0)
 	switch (v8) {
 	case 0:
 	case 1:
-		fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+		gm_ResolveEntityById(&v15, 0, 0, *(int*) (v5 + 0xb8));
 		fcn_004432d0(0, 1);
 		if (*(int*) (v5 + 0xbc) != -1) {
 			v8 = fcn_00426cc0(*(int*) (v5 + 0xbc));
@@ -192,7 +192,7 @@ label_57469a:
 
 	case 6:
 		*(int*) (v5 + 0x84) = -1;
-		fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+		gm_ResolveEntityById(&v15, 0, 0, *(int*) (v5 + 0xb8));
 		if (!v15) {
 			*(int*) (v5 + 0x70) = -1;
 			return;
@@ -220,7 +220,7 @@ label_57469a:
 	case 7:
 		*(int*) (v5 + 0x84) = -1;
 		fcn_004432d0(0, 1);
-		fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+		gm_ResolveEntityById(&v15, 0, 0, *(int*) (v5 + 0xb8));
 		if (v15 && fcn_005985f0(v16, v15)) {
 			v8 = 0;
 			v21 = 1e+35f;
@@ -294,7 +294,7 @@ label_574753:
 		fcn_00500bb0((void*) (v5 + 0x52), 0, 0x14, 0);
 		if (!*(char*) (v5 + 0xd0)) {
 			fcn_004432d0(0, 1);
-			fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+			gm_ResolveEntityById(&v15, 0, 0, *(int*) (v5 + 0xb8));
 			v8 = fcn_005985f0(v16, v15);
 			if (!v8) {
 				*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
@@ -341,7 +341,7 @@ label_574753:
 		*(int*) (v5 + 0x68) = *(int*) (v5 + 0x5a);
 		*(unsigned short*) (v5 + 0x6c) = *(unsigned short*) (v5 + 0x5e);
 		if (!v15) {
-			fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+			gm_ResolveEntityById(&v15, 0, 0, *(int*) (v5 + 0xb8));
 		}
 		if (*(int*) (v5 + 0xbc) == -1 && 2 <= *(int*) (v5 + 200)) {
 			fcn_004432d0(0, 1);

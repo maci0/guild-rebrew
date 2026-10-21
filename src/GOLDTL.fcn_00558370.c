@@ -3,7 +3,7 @@ extern float g_665ea0;
 extern float g_662d40[3];
 extern int g_6b7fac;
 
-extern int __cdecl fcn_005015e0(void **a0, int a1, int a2, int a3);
+extern int __cdecl gm_ResolveEntityById(void **a0, int a1, int a2, int a3);
 extern void __cdecl fcn_004432d0(int a0, int a1);
 extern void __cdecl fcn_00455350(int a0, int a1, float *a2);
 extern float __cdecl fcn_004514d0(float *a0, float *a1);
@@ -35,7 +35,7 @@ int __cdecl fcn_00558370(int a0)
     v2 = g_6b8010;
     fcn_004432d0(0, 1);
     v3 = a0;
-    fcn_005015e0(&out, 0, 0, *(int *)(v3 + 0xb0));
+    gm_ResolveEntityById(&out, 0, 0, *(int *)(v3 + 0xb0));
     v5 = (int)out;
     if (v5 == 0)
         goto fail;
@@ -49,7 +49,7 @@ int __cdecl fcn_00558370(int a0)
         goto fail;
     {
         v6 = v5;
-        fcn_005015e0(&out, 0, 0, *(int *)(v3 + 0xb4));
+        gm_ResolveEntityById(&out, 0, 0, *(int *)(v3 + 0xb4));
         v5 = (int)out;
         if (v5 == 0)
             goto fail;

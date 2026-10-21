@@ -41,11 +41,11 @@ int __cdecl StartObjectTransformAnimation(char* objekt, float x, float y, float 
     if (g_6b5cbc != 0 && objekt == g_6b8014) {
         return 0;
     }
+    flags.bit_1_4 = 1;
+    flags.bit_1_2 = 1;
+    flags.bit_8_1 = 1;
     flags.bit_1_3 = 0;
     flags.bit_1_0 = 0;
-    flags.bit_1_2 = 1;
-    flags.bit_1_4 = 1;
-    flags.bit_8_1 = 1;
     frames[0].unbekannt_000 = parameter;
     frames[1].drehung[0] = rx;
     frames[1].drehung[1] = ry;

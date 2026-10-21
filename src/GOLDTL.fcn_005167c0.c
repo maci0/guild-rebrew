@@ -40,7 +40,7 @@ int __cdecl fcn_004053a0(char*, int);
 void __cdecl fcn_004fdcf0(char*);
 void __cdecl fcn_004fdfe0(char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_00403e20(char*, int);
+void __cdecl ch_UpdateAttachedModelPosition(char*, int);
 void __cdecl fcn_00516550(void);
 void __cdecl fcn_005165b0(void);
 void __cdecl fcn_005156a0(void);
@@ -155,7 +155,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 			if (*(int*) (obj + 0x2c) == *(int*) (a0 + 1)) {
 				fcn_00402a00((char*) obj, 1);
 				fcn_004053a0((char*) obj, 0);
-				fcn_00403e20((char*) obj, 1);
+				ch_UpdateAttachedModelPosition((char*) obj, 1);
 			} else if (*(int*) (obj + 0x88) == g_67a370) {
 				fcn_00402a00((char*) obj, 0);
 			}

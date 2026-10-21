@@ -5,7 +5,7 @@
 extern char g_7f4ca0[];
 extern pos14_7f4c00 g_7f4c00;
 extern unsigned short g_7f4c04;
-extern unsigned char* g_868050;
+extern char* g_entity_type_table;
 extern float g_696540[];
 extern float g_696550[];
 extern char s_6a2e68[];
@@ -82,7 +82,7 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 	}
 	owner = slot->owner;
 	if (a2 != 0) {
-		rec = (Rec_529160*) (g_868050 + (unsigned int) *a1 * 0x24d);
+		rec = (Rec_529160*) ((unsigned char*) g_entity_type_table + (unsigned int) *a1 * 0x24d);
 		if (*(short*) a2 != 0xfd) {
 			v7 = fcn_00515540(a2);
 		} else {

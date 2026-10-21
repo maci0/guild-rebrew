@@ -41,7 +41,6 @@ void __cdecl fcn_00471e30(int);
 /* ADDRESS: GOLDTL 0x00591ea0 */
 void __cdecl fcn_00591ea0(void)
 {
-	char buf[0x100];
 	int clicks[2];
 	int v3;
 	int win;
@@ -59,6 +58,7 @@ void __cdecl fcn_00591ea0(void)
 	int b1;
 	int b2;
 	int b3;
+	char buf[0x100];
 
 	sel = -1;
 	old_sel = -1;

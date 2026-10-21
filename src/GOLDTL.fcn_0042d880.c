@@ -23,6 +23,7 @@ unsigned int __cdecl fcn_0042d880(char* name)
 	int b;
 	void* table;
 	int* pcount;
+	int* pc;
 	char path[0x104];
 	char msg[0x100];
 	char* rec;
@@ -51,9 +52,10 @@ unsigned int __cdecl fcn_0042d880(char* name)
 	}
 	vfs_fseek(stream, 0, 0);
 	rec = (char*) (0x149d120 + count * 0x74);
+	pc = (int*) (rec + 0x60);
 	strcpy(rec, name);
 	vfs_ReadData((char*) &a, 4, 1, stream);
-	vfs_ReadData(rec + 0x60, 4, 1, stream);
+	vfs_ReadData((char*) pc, 4, 1, stream);
 	pcount = (int*) (rec + 0x64);
 	vfs_ReadData((char*) pcount, 4, 1, stream);
 	table = m_alloc(a * 4, "txt_txt:txt_loadTextFile:PointerTable");
@@ -68,7 +70,7 @@ unsigned int __cdecl fcn_0042d880(char* name)
 	*(int*) (rec + 0x68) = (int) m_alloc(b, "txt_txt:txt_loadTextFile:Pointer");
 	vfs_ReadData((char*) *(int*) (rec + 0x68), b, 1, stream);
 	for (i = 0; i < a; i++)
-		*(int*) (*(int*) (rec + 0x60) * 4 + 0x14a5320 + i * 4) =
+		*(int*) ((*pc) * 4 + 0x14a5320 + i * 4) =
 		    *(int*) ((char*) table + i * 4) + *(int*) (rec + 0x68);
 	if (g_6b7f98 + 1 < *pcount)
 		g_6b7f98 = *pcount + 1;

@@ -25,12 +25,12 @@ int __cdecl fcn_004094c0(char*, int);
 void __cdecl fcn_004098e0(char*, int);
 int __cdecl fcn_00409ae0(char*, int);
 int __cdecl fcn_00409c90(char*, int);
-void __cdecl fcn_00404410(char*);
+void __cdecl ch_FinishAni(char*);
 void __cdecl fcn_00435500(char*, char*);
 void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00438b40(char*, int*);
 int __cdecl fcn_004053a0(char*, int);
-void __cdecl fcn_0041ddd0(void*);
+void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_0042e540(char*);
 void __cdecl ch_WalkOnPathRotation(char*);
 
@@ -71,7 +71,7 @@ cleanup:
 			*(char*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
 		}
 		if (*(int*) (obj + 0xf4) != 0) {
-			fcn_0041ddd0(*(void**) (obj + 0xf4));
+			m_FreeTracked(*(void**) (obj + 0xf4));
 			*(int*) (obj + 0xf4) = 0;
 		}
 		fcn_004050c0(obj);
@@ -143,7 +143,7 @@ cleanup:
 	    (*(unsigned int*) (obj + 0x160) & 0x10) != 0) {
 		anim = *(char**) (inst + 0x70);
 		if (anim != 0 && (anim[0x74] & 8) != 0) {
-			fcn_00404410(inst);
+			ch_FinishAni(inst);
 			if (g_6b5c28 != 0) {
 				*(unsigned short*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
 			}

@@ -1,7 +1,7 @@
+extern int g_772d18;
+
 /* ADDRESS: GOLDTL 0x004c0b30 */
-int __cdecl fcn_004c0b30(void)
+void __cdecl fcn_004c0b30(int value)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004c0b30 */
-    return 0;
+	g_772d18 = value;
 }

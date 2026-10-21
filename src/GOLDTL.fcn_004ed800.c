@@ -10,8 +10,8 @@ extern Rec772fe4* g_772fe4;
 
 void* __cdecl fcn_0042ff50(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned int __cdecl fcn_004306b0(char* buf, unsigned int size, unsigned int count, void* f);
-char* __cdecl fcn_0041db70(unsigned int size, char* label);
-void __cdecl fcn_0041ddd0(void* p);
+char* __cdecl m_alloc(unsigned int size, char* label);
+void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00430580(void* f);
 
 /* Loads the alchemy card deck tables. The file starts with a magic dword,
@@ -42,10 +42,10 @@ int __cdecl fcn_004ed800(void)
 		goto fail;
 	}
 	if (g_772fdc != 0) {
-		fcn_0041ddd0(g_772fdc);
+		m_FreeTracked(g_772fdc);
 		g_772fdc = 0;
 	}
-	g_772fdc = (Draw772*) fcn_0041db70(g_772fd8 * 12, "ahm_AllocPlayerPrototypes");
+	g_772fdc = (Draw772*) m_alloc(g_772fd8 * 12, "ahm_AllocPlayerPrototypes");
 	if (g_772fdc == 0) {
 		goto fail;
 	}
@@ -77,10 +77,10 @@ int __cdecl fcn_004ed800(void)
 		goto fail;
 	}
 	if (g_772fe4 != 0) {
-		fcn_0041ddd0(g_772fe4);
+		m_FreeTracked(g_772fe4);
 		g_772fe4 = 0;
 	}
-	g_772fe4 = (Rec772fe4*) fcn_0041db70(g_772fe0 * 12, "ahm_AllocRecipePrototypes");
+	g_772fe4 = (Rec772fe4*) m_alloc(g_772fe0 * 12, "ahm_AllocRecipePrototypes");
 	if (g_772fe4 == 0) {
 		goto fail;
 	}
@@ -103,11 +103,11 @@ fail:
 	fcn_00430580(f);
 done:
 	if (g_772fdc != 0) {
-		fcn_0041ddd0(g_772fdc);
+		m_FreeTracked(g_772fdc);
 		g_772fdc = 0;
 	}
 	if (g_772fe4 != 0) {
-		fcn_0041ddd0(g_772fe4);
+		m_FreeTracked(g_772fe4);
 		g_772fe4 = 0;
 	}
 	g_772fe0 = 0;

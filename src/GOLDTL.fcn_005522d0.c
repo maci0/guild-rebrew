@@ -8,8 +8,8 @@ extern char* g_90e094;
 extern unsigned char g_slot_table[];
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
-int __cdecl fcn_0042e410(int n);
-float __cdecl fcn_0042e4a0(void);
+int __cdecl gm_RandomMod(int n);
+float __cdecl gm_RandomFloat01Squared(void);
 int __cdecl fcn_004c4450(unsigned int id);
 void* __cdecl fcn_004c4480(unsigned int id);
 unsigned int __cdecl fcn_004c5620(int state, void* ev);
@@ -19,7 +19,7 @@ void __cdecl fcn_004c5da0(unsigned int h, unsigned int id, int a3, int a4, int a
 void __cdecl fcn_00500bb0(void* q, int a2, int a3, int a4);
 float __cdecl fcn_00508490(char* entity);
 void* __cdecl fcn_00508e40(unsigned int slot_id);
-void __cdecl fcn_005015e0(char** out, int a2, int a3, int id);
+void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int id);
 void __cdecl fcn_0051af00(char* buf, char* fmt, ...);
 int __cdecl fcn_00529670(char* a, char* b);
 void __cdecl fcn_00546190(void* ev);
@@ -139,7 +139,7 @@ void __cdecl fcn_005522d0(char* ev)
 		return;
 	case 2:
 		rec = 0;
-		fcn_005015e0((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xcc));
+		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xcc));
 		fcn_00500bb0(ev + 0x52, 0, 5, 0);
 		if (!rec) {
 			break;
@@ -186,7 +186,7 @@ void __cdecl fcn_005522d0(char* ev)
 			if (nent == 0) {
 				goto after_scan;
 			}
-			f = fcn_0042e4a0();
+			f = gm_RandomFloat01Squared();
 			if (f > g_662948) {
 				f = g_6628a0;
 			}
@@ -202,11 +202,11 @@ void __cdecl fcn_005522d0(char* ev)
 				}
 			}
 			p = found;
-			if (found && !fcn_0042e410(8)) {
+			if (found && !gm_RandomMod(8)) {
 				best = fcn_00508490((char*) found);
 				left = 1;
 			}
-			if (!fcn_0042e410(0x100)) {
+			if (!gm_RandomMod(0x100)) {
 				fcn_00508490(slot);
 			}
 			if (left) {
@@ -230,7 +230,7 @@ after_scan:
 			return;
 		}
 		rec = 0;
-		fcn_005015e0((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xd0));
+		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xd0));
 		if (!rec) {
 			break;
 		}
@@ -250,7 +250,7 @@ after_scan:
 	case 3:
 		fcn_00500bb0(ev + 0x52, 0, 5, 0);
 		rec = 0;
-		fcn_005015e0((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xd0));
+		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xd0));
 		if (!rec) {
 			break;
 		}

@@ -10,7 +10,7 @@ int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(int);
 void __cdecl fcn_00529160(int, int, unsigned short, int);
 void __cdecl fcn_0051af00(int*, unsigned int, ...);
-void __cdecl fcn_00545e80(unsigned int, int, char*, int, int, int, int, char*, char*);
+void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, char*, char*);
 void __cdecl fcn_00406120(int);
 char* __cdecl fcn_0040c120(int, int, int);
 char* __cdecl fcn_004934c0(char*);
@@ -78,7 +78,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 				if (c == 6 || c == 7) {
 					fcn_0051af00((int*) (buf + 0x114), 0x42f4, *(unsigned short*) s, (int) p);
 					v = *(int*) (p + 1);
-					fcn_00545e80(*(unsigned int*) (g_7f4ca0 + 4 + idx * 0x21c), v, buf + 0x120, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
+					he_MessageBoxQuickjump(*(unsigned int*) (g_7f4ca0 + 4 + idx * 0x21c), v, buf + 0x120, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
 				}
 			}
 		}

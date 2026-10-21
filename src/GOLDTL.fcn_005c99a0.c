@@ -20,7 +20,7 @@ int __cdecl fcn_005c9090();
 int __cdecl fcn_004677e0();
 int __cdecl fcn_00472380();
 int __cdecl fcn_0050f980();
-int __cdecl fcn_0064d228();
+int __cdecl _ftol();
 int __cdecl fcn_00472640();
 int __cdecl fcn_005cf720();
 
@@ -156,7 +156,7 @@ int __cdecl fcn_005c99a0(int a0, int a1, int a2, int a3, int a4, int a5)
 				items->win2 = fcn_004677e0(x - 0x23, (int) *(short*) (*(int*) 0x772500 + 0x1ebda) + 5 + y, 0x40, 0, 100, 0x75, 0x442, *(int*) 0x772514);
 				if (*(char*) ((int) items->obj + 2) != 7) {
 					fcn_0050f980(*(unsigned short*) a5, *(unsigned short*) items->obj, 1);
-					v = fcn_0064d228();
+					v = _ftol();
 					fcn_00472380(items->win2, 0, 100, v);
 				} else {
 					fcn_00472380(items->win2, 0, 100, 0);

@@ -19,7 +19,7 @@ float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl fcn_0050d2a0(char*);
 int __cdecl fcn_0050d320(char*, int);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00546190(void*);
 int __cdecl fcn_004c4450(int);
@@ -31,7 +31,7 @@ char* __cdecl fcn_005049a0(char*);
 int __cdecl fcn_00508e40(int);
 char* __cdecl fcn_0050dc90(char*);
 char* __cdecl fcn_00509570(char*);
-int __cdecl fcn_0042e410(int, int);
+int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0055c740 */
 void __cdecl fcn_0055c740(char* ctx)
@@ -66,7 +66,7 @@ void __cdecl fcn_0055c740(char* ctx)
 		    *rec, -1, 1);
 		if (fcn_0050d2a0(g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c) < ver) {
 			fcn_0051af00(text, 0x1a40, rec);
-			fcn_00545e80(*(int*) (g_7f4ca0 + bank * 0x21c + 4),
+			he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + bank * 0x21c + 4),
 			    *(int*) (ctx + 0x10), text, 0, 0x5f2, *(int*) (rec + 1),
 			    *(int*) (ctx + 0xe0), 0, 0);
 			fcn_00546190(ctx);
@@ -146,7 +146,7 @@ void __cdecl fcn_0055c740(char* ctx)
 				} else {
 					pri = 0x5f2;
 				}
-				fcn_00545e80(*(int*) (g_7f4ca0 + bank * 0x21c + 4),
+				he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + bank * 0x21c + 4),
 				    *(int*) (rec + 1), text, 0, pri, *(int*) (rec + 1),
 				    *(int*) (ctx + 0xe0), 0, s_6a5b54);
 			}
@@ -171,7 +171,7 @@ void __cdecl fcn_0055c740(char* ctx)
 		*(int*) (ctx + 0x56) = g_7f4c00.b;
 		*(int*) (ctx + 0x5a) = g_7f4c00.c;
 		*(unsigned short*) (ctx + 0x5e) = g_7f4c00.d;
-		fcn_00500bb0(ctx + 0x52, 0, (fcn_0042e410(10, 0) & 0xffff) + 0x1e, 1);
+		fcn_00500bb0(ctx + 0x52, 0, (gm_RandomMod(10) & 0xffff) + 0x1e, 0);
 		*(int*) (ctx + 0x70) = 1;
 		return;
 	case -2:

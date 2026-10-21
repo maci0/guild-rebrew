@@ -83,7 +83,7 @@ extern int g_67d3a0;
 int __cdecl fcn_004770a0(int* p, int kind);
 void __cdecl fcn_00476970(int h);
 int __cdecl fcn_00469890(void);
-int __cdecl fcn_0041db70(int size, char* tag);
+int __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_0046f740(int x, int y, int id, int layer);
 
 /* ADDRESS: GOLDTL 0x0046e940 */
@@ -194,7 +194,7 @@ int __cdecl fcn_0046e940(unsigned int a0, unsigned int a1, unsigned int a2, int 
 	rec->x3bc = -1;
 	rec->x3b8 = -1;
 	rec->x3c0 = -1;
-	rec->x28 = fcn_0041db70(0x600, "d2:win_obj");
+	rec->x28 = m_alloc(0x600, "d2:win_obj");
 	rec->x3a8 = 0;
 	rec->x3ac = 0;
 	rec->x3b0 = 0;
@@ -207,7 +207,7 @@ int __cdecl fcn_0046e940(unsigned int a0, unsigned int a1, unsigned int a2, int 
 		fcn_0046f740((short) (rec->xc - 0xc), (short) (rec->x10 - 10), g_67d390 + 2, i);
 	}
 	if (a4 & 0x10) {
-		rec->x3c = fcn_0041db70(0x17d0, "d2_t:w->txt");
+		rec->x3c = m_alloc(0x17d0, "d2_t:w->txt");
 	}
 	g_772514 = i;
 	g_77255c = (char*) rec;

@@ -15,7 +15,11 @@ typedef struct Msg4ad6a0 {
 	char pad5[3];
 	int id;               /* +0x08 */
 	int unk_c;            /* +0x0c */
-	char pad10[0x18];     /* +0x10 */
+	double unk_10;        /* +0x10 */
+	int unk_18;           /* +0x18 */
+	int unk_1c;           /* +0x1c */
+	int unk_20;           /* +0x20 */
+	int unk_24;           /* +0x24 */
 	int year;             /* +0x28 */
 	int month;            /* +0x2c */
 	int day;              /* +0x30 */
@@ -85,55 +89,51 @@ void __cdecl fcn_004ad6a0(void)
 	} while ((int) rec < 0x85a0a0);
 	obj = fcn_004e9110(id);
 	if (obj == 0) {
-		if (count > 0) {
-			i = 0;
-			while (hits[i].p != 0) {
-				fcn_004c5420(*(int*) (hits[i].p + 4), 0x1cc, 4, 0, mask);
-				i++;
-				if (i >= count) {
-					fcn_004ad4d0(-1);
-					return;
-				}
-			}
-		}
-	} else {
-		best = 0;
-		bv = -1.0f;
 		for (i = 0; i < count; i++) {
-			hits[i].f = fcn_004ad500((unsigned char*) hits[i].p,
-			    (unsigned short*) obj, id, 1);
-		}
-		for (i = 0; i < count; i++) {
-			if (hits[i].f > bv) {
-				bv = hits[i].f;
-				best = hits[i].p;
+			if (hits[i].p == 0) {
+				goto end;
 			}
+			fcn_004c5420(*(int*) (hits[i].p + 4), 0x1cc, 4, 0, mask);
 		}
-		if (best != 0) {
-			fcn_004e8240((unsigned char) info[0], best, 0, 1, 0xff);
-			if (best[2] == 6 || best[2] == 7 || best[2] == 5) {
-				v = *(int*) (best + 4);
-				msg.type = 0xa5;
-				msg.id = v;
-				msg.unk_c = -1;
-				msg.year = g_7f4c00;
-				msg.month = g_7f4c04;
-				msg.day = g_7f4c08;
-				msg.hour = g_7f4c0c;
-				msg.flag = 1;
-				msg.unk_68 = v;
-				msg.unk_6c = id;
-				fcn_004c5530((char*) &msg);
-				for (rec = g_7f4ca0; (int) rec < 0x85a0a0; rec += 0x21c) {
-					if (*(unsigned short*) rec != 0xffff && rec != best &&
-					    (rec[2] == 6 || rec[2] == 7)) {
-						v = *(int*) (rec + 4);
-						msg.unk_68 = v;
-						fcn_004c5530((char*) &msg);
-					}
+		fcn_004ad4d0(-1);
+		return;
+	}
+	best = 0;
+	bv = -1.0;
+	for (i = 0; i < count; i++) {
+		hits[i].f = fcn_004ad500((unsigned char*) hits[i].p,
+		    (unsigned short*) obj, id, 1);
+	}
+	for (i = 0; i < count; i++) {
+		if (hits[i].f > bv) {
+			bv = hits[i].f;
+			best = hits[i].p;
+		}
+	}
+	if (best != 0) {
+		fcn_004e8240((unsigned char) info[0], best, 0, 1, 0xff);
+		if (best[2] == 6 || best[2] == 7 || best[2] == 5) {
+			v = *(int*) (best + 4);
+			msg.type = 0xa5;
+			msg.id = v;
+			msg.unk_c = -1;
+			msg.year = g_7f4c00;
+			msg.month = g_7f4c04;
+			msg.day = g_7f4c08;
+			msg.hour = g_7f4c0c;
+			msg.flag = 1;
+			msg.unk_68 = v;
+			msg.unk_6c = id;
+			fcn_004c5530((char*) &msg);
+			for (rec = g_7f4ca0; (int) rec < 0x85a0a0; rec += 0x21c) {
+				if (*(unsigned short*) rec != 0xffff && rec != best &&
+				    (rec[2] == 6 || rec[2] == 7)) {
+					msg.id = *(int*) (rec + 4);
+					fcn_004c5530((char*) &msg);
 				}
 			}
 		}
 	}
+end:
 	fcn_004ad4d0(-1);
 }

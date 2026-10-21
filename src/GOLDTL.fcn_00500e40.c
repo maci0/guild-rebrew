@@ -7,7 +7,7 @@ typedef struct Rec500e {
 	unsigned char x21;
 	char pad22[0x41 - 0x22];
 } Rec500e;
-// SIZE 0x41
+/* SIZE 0x41 */
 
 typedef struct Bld500e {
 	unsigned char kind;
@@ -15,7 +15,7 @@ typedef struct Bld500e {
 	unsigned char n;
 	unsigned short items[0x100];
 } Bld500e;
-// SIZE 0x24d
+/* SIZE 0x24d */
 #pragma pack(pop)
 
 extern unsigned char* g_868050;
@@ -24,21 +24,21 @@ extern char* g_99ec10;
 /* ADDRESS: GOLDTL 0x00500e40 */
 void __cdecl fcn_00500e40(void)
 {
-	int run;
-	int count;
-	unsigned char* bld;
-	int prev;
-	int k;
-	int i;
 	int kind;
-	int n;
-	int j;
-	int tgt;
-	int cnt;
+	int i;
+	int k;
+	int prev;
+	unsigned char* bld;
+	int count;
+	int run;
 	int type;
-	int id;
+	int j;
 	unsigned char* r;
 	unsigned char* t;
+	int id;
+	int tgt;
+	int cnt;
+	int n;
 
 	memset((void*) 0x8f9480, 0, 0x64);
 	for (n = 0; n < 0x2dc; n++) {
@@ -115,12 +115,12 @@ void __cdecl fcn_00500e40(void)
 		i++;
 	} while (i < 0x58);
 	r = (unsigned char*) 0x99e0a0;
-	k = 0;
+	t = (unsigned char*) g_99ec10 + 0x21;
 	do {
 		if (*(int*) r == 0x58) {
-			*(int*) r = ((int*) 0x8f9480)[g_99ec10[k * 0x41 + 0x21]];
+			*(int*) r = ((int*) 0x8f9480)[*t];
 		}
 		r += 4;
-		k++;
-	} while ((int) r < 0x99ec10);
+		t += 0x41;
+	} while (r < (unsigned char*) 0x99ec10);
 }

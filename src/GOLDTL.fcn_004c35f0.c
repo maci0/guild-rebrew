@@ -2,11 +2,11 @@ extern float g_662b20;
 extern int g_772e6c;
 extern unsigned short g_774970;
 
-float __cdecl fcn_0042e450(void);
+float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004c3100(char*, int);
 int __cdecl fcn_004c3030(int, int, char*, int);
 float __cdecl fcn_0050f980(int, int, int);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 
 /* ADDRESS: GOLDTL 0x004c35f0 */
 void __cdecl fcn_004c35f0(void)
@@ -26,7 +26,7 @@ void __cdecl fcn_004c35f0(void)
 	zeroId = 0xffff;
 	noneId = 0xffff;
 
-	if (fcn_0042e450() > g_662b20) {
+	if (gm_RandomFloat01() > g_662b20) {
 		return;
 	}
 	if (g_772e6c == 0) {
@@ -49,7 +49,7 @@ void __cdecl fcn_004c35f0(void)
 			noneId = *(unsigned short*) *p;
 			fcn_0050f980(g_774970, noneId, 1);
 		}
-		lastRand = fcn_0064d228();
+		lastRand = _ftol();
 	}
 
 	total = zeroCount + noneCount;

@@ -1,7 +1,7 @@
 /* Release the client path/mode tables and reset the scene clock state. */
 
 void __cdecl fcn_004e48b0(void);
-void __cdecl fcn_00442be0(int);
+void __cdecl d3_DestroyObject(int);
 void __cdecl fcn_004230e0(int);
 void __cdecl fcn_0044c440(int);
 char* __cdecl fcn_00508e40(int);
@@ -21,7 +21,7 @@ void __cdecl fcn_004d2a60(int a0)
 
 	fcn_004e48b0();
 	if (*(int*) 0x772ea0) {
-		fcn_00442be0(*(int*) 0x772ea0);
+		d3_DestroyObject(*(int*) 0x772ea0);
 		*(int*) 0x772ea0 = 0;
 	}
 	fcn_004230e0(*(int*) 0x772ebc);
@@ -43,10 +43,11 @@ void __cdecl fcn_004d2a60(int a0)
 		fcn_004230e0(*(int*) 0x772ef8);
 	}
 	for (i = 0; i < *(int*) 0x772f08; i++) {
-		fcn_00442be0(*(int*) (0x9b9e40 + i * 4));
+		d3_DestroyObject(*(int*) (0x9b9e40 + i * 4));
 	}
-	if (*(int*) 0x772f0c) {
-		fcn_0044c440(*(int*) 0x772f0c);
+	v = *(int*) 0x772f0c;
+	if (v) {
+		fcn_0044c440(v);
 		*(int*) 0x772f0c = 0;
 	}
 	q = (int*) 0x9b4bc4;

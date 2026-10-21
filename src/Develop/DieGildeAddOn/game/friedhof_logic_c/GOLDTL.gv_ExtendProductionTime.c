@@ -8,7 +8,7 @@
 #define g_entity_table_end ((unsigned short*) 0x773da8)
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 #define g_entity_slot_table ((unsigned int*) 0x8680b4)
-#define g_entity_type_table ((unsigned char*) 0x868050)
+extern unsigned char* g_868050;
 #define g_output_share ((float*) 0x6652d8)
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
@@ -40,7 +40,7 @@ int __cdecl gv_ExtendProductionTime(void* building)
 		if (grave_id != 0xffff) {
 			if ((char*) 0x7f4ca0 + grave_id * 0x21c != (char*) *(unsigned int*) 0x773da8) {
 				field_id = *(unsigned char*) entity;
-				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
+				if (g_868050[field_id + field_id * 588] != 0x1d) {
 					return -2;
 				}
 				workers = *(void**) ((char*) entity + 0x65);

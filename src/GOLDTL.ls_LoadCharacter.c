@@ -20,7 +20,7 @@ extern char s_699784[];
 extern char* __cdecl fcn_00523710(void*);
 extern char* __cdecl fcn_00508e40(int);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
-extern int __cdecl fcn_0051fd30(int);
+extern int __cdecl fcn_0051ad90(int);
 extern int __cdecl fcn_004fda30(int);
 extern int __cdecl fcn_0042f690(char*, void*, void*, char*);
 extern void __cdecl fcn_0066080a(char*);
@@ -267,9 +267,9 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		if (v == 0) {
 			goto clear_record;
 		}
-		v = fcn_0051fd30((int) u[9]);
+		v = fcn_0051ad90((int) u[9]);
 		u[9] = v;
-		u[10] = fcn_0051fd30((int) u[10]);
+		u[10] = fcn_0051ad90((int) u[10]);
 		u[3] = 0;
 		*u = *(unsigned int*) ((char*) 0x14d0c40 + (unsigned int) type * 0x4c);
 		if (v == 0) {

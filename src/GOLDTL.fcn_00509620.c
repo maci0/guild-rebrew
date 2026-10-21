@@ -8,9 +8,9 @@ extern unsigned char* g_entity_ptr;
 
 extern void* __cdecl fcn_00508e40(int id);
 extern void* __cdecl fcn_004b3c00(void* entity);
-extern int __cdecl fcn_00504bd0(int type);
+extern int __cdecl gm_GetBuildingTypeCategory(int type);
 extern int __cdecl fcn_005059b0(void* record, int a, int b);
-extern int __cdecl fcn_0050dac0(unsigned int slot);
+extern int __cdecl gm_WalkEntityChain(unsigned int slot);
 extern void __cdecl fcn_00546ce0(void* entity);
 extern void __cdecl fcn_0055bc40(void* entity);
 extern void __cdecl fcn_004e8940(void* entity);
@@ -54,14 +54,14 @@ int __cdecl fcn_00509620(int a0, int a1)
 	for (off = 0, n = 0x100; n != 0; n--, off += 0xa9) {
 		ep = g_entity_ptr + off;
 		if (ep[0] != 0) {
-			kind = fcn_00504bd0(ep[0]);
+			kind = gm_GetBuildingTypeCategory(ep[0]);
 			if (kind == 2 && *(unsigned short*) (ep + 0x27) == p->entity_index)
 				kind = fcn_005059b0(ep,
 					*(unsigned short*) g_773da8, *(unsigned short*) g_773da8);
 		}
 	}
 	p_slot = p->entity_index;
-	value = fcn_0050dac0(p_slot);
+	value = gm_WalkEntityChain(p_slot);
 	q = (EntityStruct*) fcn_00508e40(a1);
 	if (q == 0)
 		return -2;

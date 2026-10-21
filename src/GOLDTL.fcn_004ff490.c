@@ -10,10 +10,10 @@ extern unsigned short g_7f4c0c;
 extern float g_696444[];
 
 char* __cdecl fcn_00508e40(int);
-float __cdecl fcn_0042e450(void);
+float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c5480(int, int, float);
 void __cdecl fcn_00500bb0(void*, int, int, int);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
@@ -58,7 +58,7 @@ void __cdecl fcn_004ff490(char* a0)
 
 	ent = fcn_00508e40(*(unsigned int*) (a0 + 0x5c));
 	if (g_6628a0 < *(float*) (a0 + 0x7c)) {
-		f = fcn_0042e450() * g_664158 - *(float*) (a0 + 0x7c);
+		f = gm_RandomFloat01() * g_664158 - *(float*) (a0 + 0x7c);
 		fcn_004c5480(*(unsigned int*) (a0 + 4), 0x7c, f);
 		g_773d48++;
 		if (ent == 0) {
@@ -72,7 +72,7 @@ void __cdecl fcn_004ff490(char* a0)
 		extra = 2;
 		fcn_00500bb0(hdr, 8, 0, 0);
 
-		other = (char*) fcn_0042e410(4);
+		other = (char*) gm_RandomMod(4);
 		other = other + 8;
 		handle = *(int*) (a0 + 0x170);
 		if (handle != 0) {
@@ -189,7 +189,7 @@ void __cdecl fcn_004ff490(char* a0)
 				return;
 			}
 		}
-		f = (fcn_0042e450() + g_6628a0) * g_696444[count];
+		f = (gm_RandomFloat01() + g_6628a0) * g_696444[count];
 		fcn_004c5480(*(unsigned int*) (a0 + 4), 0x7c, f);
 		g_773d48++;
 		return;

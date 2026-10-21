@@ -37,10 +37,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
                                   float a5, int a6, int a7)
 {
 	int* p;
-	float v11;
-	int count;
-	float prod;
-	float scale;
+
 	int query;
 	char* type;
 	int n;
@@ -59,6 +56,12 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 		}
 	}
 	fcn_004c44a0();
+	{
+		int count;
+		float v11;
+		float countf;
+		float prod;
+		float scale;
 	p = (int*)0x7796e0;
 	do {
 		if (p[4] != -1 && fcn_00471f80(p[4])) {
@@ -83,12 +86,13 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 				} else {
 					v11 = 0.0f;
 				}
-				prod = (float)count * v11;
+				countf = (float)count;
+				prod = countf * v11;
 				scale = flt_1 / a5;
 				if (fcn_00526010(g_slot_table + g_774970 * 0x21c,
-				                 (int)(scale * v11), a6) && p[0xc] >= 0) {
+				                 (int)(scale * prod), a6) && p[0xc] >= 0) {
 					n = fcn_0050b750(1, a6);
-					if (abs((int)(scale * (float)count * v11 - prod)) < n) {
+					if (abs((int)(scale * countf * v11 - prod)) < n) {
 						a5 = 1.0f;
 					}
 					if (a7 & 8) {
@@ -136,9 +140,7 @@ next:
 		if (p[4] != -1 && fcn_00471f80(p[4])) {
 			count = fcn_00471f80(p[4]);
 			if (!a4) {
-				if (query) {
-					count = fcn_0050e170(query, *p, count);
-				}
+				count = fcn_0050e170(query, *p, count);
 			} else {
 				count = gm_CheckInventoryCapacity((char*)a4, *p, count);
 			}
@@ -148,12 +150,13 @@ next:
 				} else {
 					v11 = 0.0f;
 				}
-				prod = (float)count * v11;
+				countf = (float)count;
+				prod = countf * v11;
 				scale = flt_1 / a5;
 				if (fcn_00526010(g_slot_table + g_774970 * 0x21c,
-				                 (int)(scale * v11), a6) && p[0xc] >= 0) {
+				                 (int)(scale * prod), a6) && p[0xc] >= 0) {
 					n = fcn_0050b750(1, a6);
-					if (abs((int)(scale * (float)count * v11 - prod)) < n) {
+					if (abs((int)(scale * countf * v11 - prod)) < n) {
 						a5 = 1.0f;
 					}
 					if (a7 & 8) {
@@ -196,6 +199,7 @@ next:
 next2:
 		p += 0xe;
 	} while ((int)p < 0x779120);
+	}
 	fcn_004c44b0();
 	while (!fcn_004c44c0()) {
 		fcn_00535960();

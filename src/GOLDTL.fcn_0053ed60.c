@@ -62,7 +62,7 @@ void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_0053e9a0(void);
 int __cdecl fcn_0053dc20(void);
 int __cdecl fcn_004130b0(char*, char*);
-void __cdecl fcn_00442be0(char*);
+void __cdecl d3_DestroyObject(char*);
 void __cdecl fcn_00412cf0(char*, float*, float*, int, int);
 
 /* Local frame layout; the 0x8984-byte frame is mostly the city name table. */
@@ -257,11 +257,11 @@ accepted:
 	}
 	if (obj != 0) {
 		fcn_004130b0(obj, (char*) 0x6a415c);
-		fcn_00442be0(obj);
+		d3_DestroyObject(obj);
 	}
 	for (i = 0; i < count; i++) {
 		if (cities[i] != 0) {
-			fcn_00442be0(cities[i]);
+			d3_DestroyObject(cities[i]);
 		}
 	}
 	return result;

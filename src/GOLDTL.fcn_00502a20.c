@@ -1,4 +1,4 @@
-int __cdecl fcn_0050d530(void*);
+int __cdecl gm_GetEntityType(void*);
 
 /* ADDRESS: GOLDTL 0x00502a20 */
 int* __cdecl fcn_00502a20(void)
@@ -110,7 +110,7 @@ match:
 			hit = 1;
 		}
 		if (*(unsigned short*) 0x699394 != 0xffff) {
-			v = fcn_0050d530(p);
+			v = gm_GetEntityType(p);
 			limit = *(int*) 0x773d8c;
 			save = *(int*) 0x868058;
 			b = *(char*) 0x773d99;

@@ -33,7 +33,7 @@ char* __cdecl fcn_00502850(void);
 int __cdecl fcn_0050cf50(char* e, int n);
 void __cdecl fcn_004c51a0(int a, int b, int c, int d);
 void __cdecl fcn_00545d40(int a, int b, char* text, int c, int d, char* tag);
-void __cdecl fcn_00545e80(int a, int b, char* text, int c, int d, int e, int f, int g,
+void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g,
 	char* tag);
 void __cdecl fcn_0051af00(char* buf, int id, ...);
 
@@ -56,11 +56,12 @@ void __cdecl fcn_00553cd0(char* v3)
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (v3 + 0xb0));
 	v5 = (unsigned short*) fcn_00508e40(*(int*) (v3 + 0xac));
 	state = *(int*) (v3 + 0x70);
-	if (state == -2 || v5 == 0 || e == 0 || *(short*) (e + 0x27) == -1) {
+	if (state == -2 || v5 == 0 || e == 0 || *(unsigned short*) (e + 0x27) == 0xffff) {
 		fcn_00546190(v3);
 		return;
 	}
-	if (state == 0) {
+	switch (state) {
+	case 0:
 		fcn_00529160(e, 0, *v5, v3);
 		fcn_004c5c80(*(int*) (v5 + 2));
 		fcn_004c5da0(*(int*) (v5 + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
@@ -71,8 +72,7 @@ void __cdecl fcn_00553cd0(char* v3)
 		fcn_00500bb0((int*) (v3 + 0x52), 0, 10, 0);
 		*(int*) (v3 + 0x70) = 1;
 		return;
-	}
-	if (state == 1) {
+	case 1:
 		*(int*) (v3 + 0x52) = g_7f4c00;
 		*(int*) (v3 + 0x56) = g_7f4c04;
 		*(int*) (v3 + 0x5a) = g_7f4c08;
@@ -86,7 +86,7 @@ void __cdecl fcn_00553cd0(char* v3)
 		f = (g_662cf8 - (float) fcn_0050bfe0(e)) * g_662910;
 		found = 0;
 		for (q = fcn_00502cd0(0, 2, 7, 4, 0x1d); q != 0; q = fcn_00502850()) {
-			if (*(int*) (q + 0x1c) == *(int*) (v3 + 1)
+			if (*(int*) (q + 0x1c) == *(int*) (e + 1)
 				&& *(unsigned char*) (q + 0x12) < 0x50) {
 				found = 1;
 				break;
@@ -98,7 +98,7 @@ void __cdecl fcn_00553cd0(char* v3)
 			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_88");
 			fcn_0051af00(buf, 0x1a78, *(unsigned short*) (v3 + 8), e);
 			b = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner;
-			fcn_00545e80(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
+			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");
 			*(int*) (v3 + 0x70) = 2;
 			return;
@@ -116,13 +116,12 @@ void __cdecl fcn_00553cd0(char* v3)
 		if (type == 6 || type == 7) {
 			fcn_0051af00(buf, 0x1a77, *(unsigned short*) (v3 + 8), e, x);
 			b = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner;
-			fcn_00545e80(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
+			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");
 		}
 		*(int*) (v3 + 0x70) = 2;
 		return;
-	}
-	if (state == 2) {
+	case 2:
 		fcn_00529160(e, 0, *v5, 0);
 		fcn_004c5c80(*(int*) (v5 + 2));
 		fcn_004c5da0(*(int*) (v5 + 2), *(int*) (v3 + 0xb4), *(int*) (v3 + 0xb8), 0,

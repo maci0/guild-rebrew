@@ -18,7 +18,7 @@ extern unsigned char* g_90e094;
 extern void* __cdecl fcn_00508e40(int id);
 extern int __cdecl gm_RandomMod(int range);
 extern float __cdecl gm_RandomFloat01(void);
-extern void __cdecl fcn_005015e0(void** out, int a, int b, int item);
+extern void __cdecl gm_ResolveEntityById(void** out, int a, int b, int item);
 extern int __cdecl fcn_00529670(void* entity, void* record);
 extern int __cdecl fcn_004c5420(unsigned int handle, int a, int b, int c, int d);
 extern void __cdecl fcn_004c6650(unsigned int handle);
@@ -63,7 +63,7 @@ void __cdecl fcn_00559aa0(struct job* job)
 		job->pada[2] = (char) 0xff;
 		return;
 	}
-	fcn_005015e0((void**) &record, 0, 0, job->item);
+	gm_ResolveEntityById((void**) &record, 0, 0, job->item);
 	found = 0;
 	if (record != 0) {
 		divisor = (gm_RandomMod(6) & 0xffff) + 2 + (g_7e453c != 0)

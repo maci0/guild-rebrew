@@ -3,7 +3,7 @@
 
 extern int g_14cbca0;
 extern int g_699364;
-extern char g_868050[];
+extern char* g_868050;
 extern char g_7f4ca9[];
 extern int g_6798d4;
 extern int g_6b7fdc;

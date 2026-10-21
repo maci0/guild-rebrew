@@ -8,7 +8,7 @@ void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_004f0ff0(char*, int, int, int, int*, int*);
 float __cdecl fcn_005e8860(int);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 void __cdecl fcn_005886f0(char*, int);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
@@ -23,7 +23,6 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	int level;
 	int percent;
 	int max;
-	int slot;
 	int rec;
 	int show;
 	unsigned int v1;
@@ -42,7 +41,6 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	fcn_00472380(*(int*) (a1 + 0xb0), 0, max, level);
 	fcn_00472640(*(int*) (a1 + 0xcc), 1 <= *(int*) (a1 + 0xdc));
 	fcn_00472640(*(int*) (a1 + 0xd0), 2 <= *(int*) (a1 + 0xdc));
-	slot = *(int*) (a1 + 0xa0);
 	*(int*) (*(int*) 0x1015ea0 + 0x3c + *(int*) (a1 + 0xc8) * 0x2f4) =
 	    *(int*) (a1 + 0xa0) == 0;
 	*(int*) (*(int*) 0x1015ea0 + 0x3c + *(int*) (a1 + 0xcc) * 0x2f4) =
@@ -55,19 +53,19 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	    *(int*) (a1 + 0xa0) == 1;
 	*(int*) (*(int*) 0x1015ea0 + 0x38 + *(int*) (a1 + 0xd0) * 0x2f4) =
 	    *(int*) (a1 + 0xa0) == 2;
-	rec = fcn_004f0ff0((char*) (*(int*) 0x774970 * 0x21c + 0x7f4ca0), level,
-	                   percent, slot + 1, (int*) &v1, (int*) &v2);
-	show = !(*(float*) (a1 + 0x20) > *(float*) 0x662910 || rec == 0 ||
-	         *(float*) (a2 + 8 + slot * 4) < f ||
-	         (*(unsigned char*) (a2 + 4) & 2) != 0);
+	rec = fcn_004f0ff0((char*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0), level,
+	                   percent, *(int*) (a1 + 0xa0) + 1, (int*) &v1, (int*) &v2);
+	show = *(float*) (a1 + 0x20) <= *(float*) 0x662910 && rec != 0 &&
+	       *(float*) (a2 + 8 + *(int*) (a1 + 0xa0) * 4) >= f &&
+	       (*(unsigned char*) (a2 + 4) & 2) == 0;
 	fcn_00472640(*(int*) (a1 + 0xb8), show);
 	fcn_00472640(*(int*) (a1 + 0xbc),
 	             (~*(unsigned int*) (a2 + 4) >> 1) & 1);
 	fcn_005e8860(1);
-	fcn_00472380(*(int*) (a1 + 0xa8), 0, 100, fcn_0064d228());
+	fcn_00472380(*(int*) (a1 + 0xa8), 0, 100, _ftol());
 	fcn_005886f0(a1, 1);
-	fcn_00472380(*(int*) (a1 + 0xac), 0, 100, fcn_0064d228());
-	fcn_00472380(*(int*) (a1 + 0xc4), 0, 100, fcn_0064d228());
+	fcn_00472380(*(int*) (a1 + 0xac), 0, 100, _ftol());
+	fcn_00472380(*(int*) (a1 + 0xc4), 0, 100, _ftol());
 	fcn_004727a0(*(int*) (a1 + 0xc0), 2);
 	fcn_00519190(0x6811b0);
 	rec = fcn_0046fac0(0, 0xf, (char*) 0x14b54c0, *(int*) 0x772514);
@@ -88,7 +86,7 @@ void __cdecl fcn_00588200(char* a0, char* a1, char* a2)
 	    *(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f4c) / 2;
 	fcn_00472900(rec, 0x54);
 	fcn_0051af00(text, (char*) 0x6a9480,
-	             fcn_0050d320((char*) (*(int*) 0x774970 * 0x21c + 0x7f4ca0),
+	             fcn_0050d320((char*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca0),
 	                          *(unsigned char*) 0x773d75));
 	rec = fcn_0046fac0(*(int*) (*(int*) 0x772514 * 0x3cc + 0x1015f4c) / 2,
 	                   0x23, text, *(int*) 0x772514);

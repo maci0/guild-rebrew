@@ -77,7 +77,9 @@ Quad* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int x, int 
 		ch = g_67d968 - y;
 	}
 	q = &g_1552020[g_772604];
-	if (fcn_0047b8b0(x, y, cw, ch, q) == 0) {
+	/* The volatile read keeps cw in its stack slot; without it c2 caches
+	   g_7725f8 across the clip guard and the body is 5 bytes short. */
+	if (fcn_0047b8b0(x, y, *(volatile int*)&cw, ch, q) == 0) {
 		return 0;
 	}
 	du = du / w;

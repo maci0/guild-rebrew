@@ -42,7 +42,7 @@ void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_005e9870(Sefde0Entry*);
 int __cdecl fcn_005e9da0(Sefde0Entry*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
-void __cdecl fcn_00442be0(void*);
+void __cdecl d3_DestroyObject(void*);
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl fcn_004efd70(int);
 void __cdecl fcn_004f01c0(int, int, int, int*);
@@ -123,7 +123,7 @@ void __cdecl fcn_004efde0(void)
 						if (entry->state == 3) {
 							obj = *(char**) (0x773314 + (idx + i) * 4);
 							if (obj != 0) {
-								fcn_00442be0(obj);
+								d3_DestroyObject(obj);
 								*(char**) (0x773314 + (idx + i) * 4) = 0;
 							}
 							if (slot->data != 0) {
@@ -139,7 +139,7 @@ void __cdecl fcn_004efde0(void)
 							count++;
 							obj = *(char**) (0x773314 + (idx + i) * 4);
 							if (obj != 0) {
-								fcn_00442be0(obj);
+								d3_DestroyObject(obj);
 								*(char**) (0x773314 + (idx + i) * 4) = 0;
 							}
 							fcn_004f01c0(slot->flags & 1, slot->id, (int) entry, slot->data);

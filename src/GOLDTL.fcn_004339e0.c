@@ -1,7 +1,7 @@
 #include <string.h>
 
 void __cdecl fcn_00433780(char* a0);
-char* __cdecl fcn_0041db70(unsigned int size, char* file);
+char* __cdecl m_alloc(unsigned int size, char* file);
 int __cdecl fcn_004321a0(int a1, int a2, int a3, int a4, int a5, int a6, int a7);
 void __cdecl fcn_004337c0(void* a0);
 
@@ -20,7 +20,7 @@ int* __cdecl fcn_004339e0(char* a0, int a1, int a2, void* a3, int a4, void* a5)
 		fcn_00433780(a0);
 	}
 	if (*(int*) (a0 + 0x218) == 4 || *(int*) (a0 + 0x218) == 3) {
-		v12 = (int*) fcn_0041db70(0x44, (char*) 0x67a0f8);
+		v12 = (int*) m_alloc(0x44, (char*) 0x67a0f8);
 		v12[0] = a4;
 		v12[0xb] = a1;
 		v12[4] = 100;
@@ -30,7 +30,7 @@ int* __cdecl fcn_004339e0(char* a0, int a1, int a2, void* a3, int a4, void* a5)
 		v12[0xd] = (int) a3;
 		*(unsigned char*) ((char*) v12 + 0x2d) = *(unsigned char*) ((char*) v12 + 0x2d) & 0xdf;
 		*(unsigned char*) ((char*) v12 + 0x34) = *(unsigned char*) ((char*) v12 + 0x34) & 0xdf | 0x10;
-		v3 = (int*) fcn_0041db70(a4 * 0x58, (char*) 0x67a0dc);
+		v3 = (int*) m_alloc(a4 * 0x58, (char*) 0x67a0dc);
 		v12[0x10] = (int) v3;
 		memcpy(v3, a5, *v12 * 0x58);
 		*(int*) (v12[0x10] - 0x58 + *v12 * 0x58) = *(int*) (v12[0x10] + *v12 * 0x58 - 0xb0);

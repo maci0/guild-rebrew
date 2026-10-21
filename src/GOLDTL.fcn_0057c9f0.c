@@ -3,7 +3,7 @@ extern float g_662c98;
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_005015e0(char**, int, int, int);
+int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_00510500(int);
 int __cdecl gm_RandomMod(int);
@@ -28,7 +28,7 @@ void __cdecl fcn_0057c9f0(char* a0)
 	char* p;
 
 	found = 0;
-	fcn_005015e0(&handle, 0, 0, *(int*) (a0 + 0x10));
+	gm_ResolveEntityById(&handle, 0, 0, *(int*) (a0 + 0x10));
 	if (handle == 0) {
 		return;
 	}

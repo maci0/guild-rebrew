@@ -25,7 +25,7 @@ int __cdecl fcn_004e6910();
 int __cdecl fcn_004e7700();
 int __cdecl fcn_004eafe0();
 int __cdecl fcn_004f5830();
-int __cdecl fcn_004f7100();
+int __cdecl fcn_004f4d10();
 int __cdecl fcn_004facb0();
 int __cdecl fcn_004fb390();
 int __cdecl fcn_004fb630();
@@ -59,7 +59,7 @@ int __cdecl fcn_005490d0();
 int __cdecl fcn_0051af00();
 int __cdecl fcn_00535570();
 int __cdecl fcn_00535960();
-int __cdecl fcn_0042e410();
+int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x00543080 */
 void __cdecl fcn_00543080(void)
@@ -93,7 +93,7 @@ void __cdecl fcn_00543080(void)
 	} while ((int) v8 < 0x85a268);
 	*(short*) 0x774970 = (short) v5;
 	fcn_00546de0();
-	if (!(*(int*) 0x7747b0 & 4) && 7 <= (unsigned short) fcn_0042e410(10)) {
+	if (!(*(int*) 0x7747b0 & 4) && 7 <= (unsigned short) gm_RandomMod(10)) {
 		v11 = fcn_005435d0();
 		while (v11 != 1) {
 			*(int*) 0x7725c8 = 0;
@@ -190,7 +190,7 @@ void __cdecl fcn_00543080(void)
 		fcn_005490d0();
 		fcn_00535960();
 		Sleep(100);
-		fcn_004f7100();
+		fcn_004f4d10();
 		fcn_00535960();
 		Sleep(100);
 		fcn_00495890();

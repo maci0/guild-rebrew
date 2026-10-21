@@ -6,7 +6,7 @@
 #include "client_types.h"
 
 extern char g_7f4ca0[];
-extern char g_868050[];
+extern char* g_868050;
 extern char g_90e094[];
 extern unsigned char g_773d75;
 extern pos14_7f4c00 g_7f4c00;
@@ -18,7 +18,7 @@ float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl fcn_0050d2a0(char*);
 int __cdecl fcn_0050d320(char*, int);
 void __cdecl fcn_0051af00(char*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00546190(void*);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
@@ -29,7 +29,7 @@ void __cdecl fcn_004c57e0(int, int);
 void __cdecl fcn_004c5c80(unsigned int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
-void __cdecl fcn_005015e0(void**, int, int, int);
+void __cdecl gm_ResolveEntityById(void**, int, int, int);
 int __cdecl fcn_00500cb0(void*, void*);
 int __cdecl fcn_00529670(void*, void*);
 char* __cdecl fcn_00509570(char*);
@@ -146,7 +146,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
 		return;
 	case 2:
-		fcn_005015e0((void**) &hit, 0, 0, *(int*) (ctx + 0xb4));
+		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xb4));
 		fcn_00500bb0(ctx + 0x52, 0, 5, 0);
 		if (hit == 0) {
 			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
@@ -162,7 +162,7 @@ void __cdecl fcn_005624a0(char* ctx)
 			*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
 			return;
 		}
-		fcn_005015e0((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
+		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
 		if (hit != 0 && *(short*) (hit + 0x27) != -1) {
 			if (fcn_00500cb0(ctx + 0xc8, &g_7f4c00) == -1) {
 				fcn_004c5c80(*(int*) (ent + 4));
@@ -177,7 +177,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		break;
 	case 3:
 		fcn_00500bb0(ctx + 0x52, 0, 5, 0);
-		fcn_005015e0((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
+		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
 		if (hit != 0 && *(short*) (hit + 0x27) != -1) {
 			ent = fcn_00508e40(*(int*) (ctx + 0xd8));
 			if (ent != 0 && fcn_00529670(ent, hit) == 0) {

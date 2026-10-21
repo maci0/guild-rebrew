@@ -1,7 +1,7 @@
-void __cdecl fcn_00652be6(int code);
+void __cdecl _unlock(int code);
 
 /* ADDRESS: GOLDTL 0x00659fbf */
 void __cdecl fcn_00659fbf(void)
 {
-	fcn_00652be6(9);
+	_unlock(9);
 }

@@ -1,6 +1,6 @@
 extern float __cdecl fcn_00507f10(char* e, int stat);
-extern int __cdecl fcn_0042e410(int);
-extern float __cdecl fcn_0042e450(void);
+extern int __cdecl gm_RandomMod(int);
+extern float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004929e0 */
 int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
@@ -39,18 +39,18 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 		ix = 4;
 	}
 	if (a2 != 0) {
-		md = (unsigned char) (fcn_0042e410(3) & 0xffff);
+		md = (unsigned char) (gm_RandomMod(3) & 0xffff);
 		*c = 3;
 		if (f > *(float*) 0x6642f8) {
-			tier = 3 - (((unsigned short) fcn_0042e410(0x10)) != 0);
+			tier = 3 - (((unsigned short) gm_RandomMod(0x10)) != 0);
 		} else if (f > *(float*) 0x6642f4) {
-			tier = 2 - (((unsigned short) fcn_0042e410(0x10)) != 0);
+			tier = 2 - (((unsigned short) gm_RandomMod(0x10)) != 0);
 		} else {
-			tier = 1 - (((unsigned short) fcn_0042e410(f > *(float*) 0x6642f0 ? 4 : 8)) != 0);
+			tier = 1 - (((unsigned short) gm_RandomMod(f > *(float*) 0x6642f0 ? 4 : 8)) != 0);
 		}
 		tab = (unsigned char*) 0x6641e8 + ix * 0x18;
 		n0 = ix;
-		r = fcn_0042e450();
+		r = gm_RandomFloat01();
 		for (i = 0; i < 6; i++) {
 			if (r <= *(float*) (tab + i * 4)) {
 				n0 = i + 1;
@@ -58,7 +58,7 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 			}
 		}
 		n1 = *(int*) &r;
-		r = fcn_0042e450();
+		r = gm_RandomFloat01();
 		for (i = 0; i < 6; i++) {
 			if (r <= *(float*) (tab + i * 4)) {
 				n1 = i + 1;
@@ -66,7 +66,7 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 			}
 		}
 		n2 = *(int*) &r;
-		r = fcn_0042e450();
+		r = gm_RandomFloat01();
 		for (i = 0; i < 6; i++) {
 			if (r <= *(float*) (tab + i * 4)) {
 				n2 = i + 1;
@@ -108,7 +108,7 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 			}
 			p[n] = (unsigned char) v;
 		} else {
-			n = fcn_0042e410(3) & 0xffff;
+			n = gm_RandomMod(3) & 0xffff;
 			v = p[n] + tier;
 			if (v > 6) {
 				v = 6;
@@ -117,7 +117,7 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 		}
 	} else {
 		f = fcn_00507f10(a1, 0);
-		r = fcn_0042e450();
+		r = gm_RandomFloat01();
 		sum = 0;
 		n = *c;
 		for (i = 0; i < n; i++) {
@@ -136,7 +136,7 @@ int __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 		if (sum > lim) {
 			off = -1;
 		} else if (sum >= thr) {
-			off = (fcn_0042e410(3) & 0xffff) - 1;
+			off = (gm_RandomMod(3) & 0xffff) - 1;
 		} else {
 			off = 1;
 		}

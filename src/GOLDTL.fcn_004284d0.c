@@ -3,7 +3,7 @@
 int __cdecl evt_RunScript(char* script);
 void __cdecl fcn_00428340(char* o, int n, ...);
 char* __cdecl fcn_0064f026(char* s, char* delim);
-int __cdecl fcn_0064efb1(int c, int mask);
+int __cdecl _isctype(int c, int mask);
 int __cdecl fcn_0064eeec(char* s);
 
 /* ADDRESS: GOLDTL 0x004284d0 */
@@ -20,6 +20,7 @@ void __cdecl fcn_004284d0(char* o, char* line)
 	char* q;
 	char* d;
 	char* s;
+	char c;
 	int count;
 	int i;
 	int num;
@@ -35,15 +36,17 @@ void __cdecl fcn_004284d0(char* o, char* line)
 			count++;
 			s = p;
 			q += 0x40;
-			while ((*d++ = *s++) != 0) {
-			}
+			do {
+				c = *s++;
+				*d++ = c;
+			} while (c != 0);
 			p = fcn_0064f026(0, delim);
 		} while (p != 0);
 	}
 	for (i = 0; i < count; i++) {
 		p = tokens + i * 0x40;
 		if (*(int*) 0x6b25b0 > 1) {
-			num = fcn_0064efb1(*p, 4);
+			num = _isctype(*p, 4);
 		} else {
 			num = *(unsigned char*) (*(unsigned char**) 0x6b23a4 + *p * 2) & 4;
 		}

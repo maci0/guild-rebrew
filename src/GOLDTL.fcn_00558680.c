@@ -12,7 +12,7 @@ extern float g_662a3c;
 
 int __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00455350(char*, char*, float*);
-int __cdecl fcn_005015e0(char**, int, int, int);
+int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
 void __cdecl fcn_004518a0(float*);
 void __cdecl fcn_00438b40(char*, float*);
@@ -41,7 +41,7 @@ int __cdecl fcn_00558680(char* a0)
 	if (block != 0) {
 		rec = *(int*) (block + 0x1cc);
 		if (rec != 0 && *(int*) (rec + 0x318) != 0) {
-			fcn_005015e0(&handle, 0, 0, *(int*) (a0 + 0xb4));
+			gm_ResolveEntityById(&handle, 0, 0, *(int*) (a0 + 0xb4));
 			if (handle != 0) {
 				rec = *(int*) (handle + 0x61);
 				if (rec != 0) {

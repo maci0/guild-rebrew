@@ -25,7 +25,7 @@ void __cdecl fcn_004d5740(char*, int, int);
 int __cdecl fcn_004e6eb0(char*, unsigned int);
 int __cdecl fcn_004d52a0(int, int, char*, char*, float);
 void __cdecl fcn_00472170(int, int);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 void __cdecl fcn_0051af00(void*, int, ...);
 void __cdecl fcn_00471e30(int);
 
@@ -255,7 +255,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 label_4d5f52:
 						count = v;
 					}
-					if ((fcn_0042e410(0x5a) & 0xffff) + 10 <= v) {
+					if ((gm_RandomMod(0x5a) & 0xffff) + 10 <= v) {
 						rec = (int) fcn_00503fe0(1, 1, *(unsigned int*) (a0 + 0x10c));
 						fcn_0051af00(text, 0x1142);
 						fcn_004e6eb0(text, 0);
@@ -289,12 +289,12 @@ label_4d601e:
 		q++;
 		i--;
 	} while (i);
-	if (sel && (int) (fcn_0042e410(5) & 0xffff) <= *(int*) (a0 + 0x110)) {
+	if (sel && (int) (gm_RandomMod(5) & 0xffff) <= *(int*) (a0 + 0x110)) {
 		goto label_4d6146;
 	}
 	t = 0;
 	count = 0;
-	v = fcn_0042e410(4) & 0xffff;
+	v = gm_RandomMod(4) & 0xffff;
 	if (v) {
 		if (v == 1) {
 			t = 0x5a;
@@ -309,7 +309,7 @@ label_4d601e:
 label_4d60c3:
 		count = t;
 	}
-	if ((fcn_0042e410(0x5a) & 0xffff) + 10 <= t) {
+	if ((gm_RandomMod(0x5a) & 0xffff) + 10 <= t) {
 		rec = (int) fcn_00503fe0(1, 1, *(unsigned int*) (a0 + 0x10c));
 		answer = 0;
 		g_772ea8 = 1;

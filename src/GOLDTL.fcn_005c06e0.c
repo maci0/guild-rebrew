@@ -43,7 +43,7 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 	int r;
 	int t;
 	int ids[6];
-	char text[0x200];
+	char text[0x400];
 	char ev[0xf8];
 	float f;
 

@@ -52,7 +52,7 @@ int __cdecl fcn_00428720(char*);
 int __cdecl fcn_00445600(char*, int, char*, char*);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 void __cdecl fcn_00473690(int, int);
-void __cdecl fcn_004737c0(void);
+void __cdecl ResetDisplayCounters(void);
 void __cdecl fcn_004c35b0(void);
 void __cdecl fcn_004c5b50(int, int, int, int);
 void __cdecl fcn_004c5c80(int);
@@ -267,7 +267,7 @@ La50:
 
 La5d:
 	g_7746f0 = 0;
-	fcn_004737c0();
+	ResetDisplayCounters();
 	c = 0;
 	for (idx = 0, q = (char*) 0x7f4e24; q < (char*) 0x85a224; q += 0x21c, idx++) {
 		e = *(char**) q;

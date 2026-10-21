@@ -9,7 +9,7 @@ int __cdecl fcn_0050e4a0(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int, char);
 int __cdecl fcn_004ec710(void);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x00490e20 */
 int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
@@ -58,14 +58,14 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
 	p = fcn_00502cd0(*(int*) ((char*) fcn_0050e4a0(1) + 0x5d), 2, 6, 0, 0x115);
 	cur = fcn_0050b810(*(int*) ((char*) p + 0x14), g_773d75);
 	if (cur < fcn_004ec710() * 3) {
-		r = r + 1 + (fcn_0042e410(3) & 0xffff);
+		r = r + 1 + (gm_RandomMod(3) & 0xffff);
 	}
 	v = v5[6];
 	if (v - 3 <= r) {
 		if (v + 3 >= r) {
 			return 0;
 		}
-		cur = (fcn_0042e410(2) & 0xffff) + v + 1;
+		cur = (gm_RandomMod(2) & 0xffff) + v + 1;
 		if (v5[2] >= cur) {
 			*a2 = cur;
 			return 1;
@@ -73,7 +73,7 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
 		*a2 = v5[2];
 		return 1;
 	}
-	cur = (v - (fcn_0042e410(2) & 0xffff)) - 1;
+	cur = (v - (gm_RandomMod(2) & 0xffff)) - 1;
 	*a2 = cur;
 	if (v5[1] > cur) {
 		*a2 = v5[1];

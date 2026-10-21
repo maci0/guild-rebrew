@@ -23,7 +23,6 @@ int __cdecl fcn_004cb450(char* a0, char* a1)
 	char* o;
 	char* s;
 	char* d;
-	char* r;
 	char* v4;
 	int id;
 	int k;
@@ -39,12 +38,12 @@ int __cdecl fcn_004cb450(char* a0, char* a1)
 		v4 = fcn_00502cd0(*(int*) (s + 0x5d), 1, 1, id);
 	else
 		v4 = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xfd);
-	if (*(unsigned short*) d != 0xfd) {
-		k = fcn_00515540(d);
-		fcn_0064d41a(gate, g_68b214, strupr(g_99ec10 + *(unsigned short*) d * 0x41 + 1));
-	} else {
+	if (*(unsigned short*) d == 0xfd) {
 		k = fcn_005155e0(s);
 		fcn_0064d41a(gate, g_68b1f8);
+	} else {
+		k = fcn_00515540(d);
+		fcn_0064d41a(gate, g_68b214, strupr(g_99ec10 + *(unsigned short*) d * 0x41 + 1));
 	}
 	fcn_0064d41a(gate2, g_68b214, strupr(g_99ec10 + *(unsigned short*) v4 * 0x41 + 1));
 	if (k >= 0)

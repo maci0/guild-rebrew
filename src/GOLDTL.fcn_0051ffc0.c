@@ -8,8 +8,8 @@ extern char* g_99ec10;
 
 int __cdecl fcn_0051fd50(int a, int b, unsigned int handle);
 int __cdecl fcn_0051fd00(int a);
-int __cdecl fcn_0051fd30(int a);
-int __cdecl fcn_0041dd90(void* object);
+int __cdecl fcn_0051ad90(int a);
+int __cdecl m_is_tracked(void* object);
 int __cdecl fcn_00430910(void* buf, int size, int count, unsigned int handle);
 
 /* ADDRESS: GOLDTL 0x0051ffc0 */
@@ -80,7 +80,7 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 		idx = *(int*) (src + 0x14);
 		if (idx >= 0 && idx < 0x300) {
 			object = *(char**) (0x14d0020 + idx * 4);
-			if (!fcn_0041dd90(object)) {
+			if (!m_is_tracked(object)) {
 				__asm { int 3 }
 			}
 			if (object != 0 && *(int*) (*(char**) (object + 0x34) + 0x204) != 0) {
@@ -125,8 +125,8 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 		src = g_6b5c20 + i;
 		if (*(char*) (src + 9) != 0) {
 			*(int*) (src + 0x14) = *(int*) (0x14d0020 + *(int*) (src + 0x14) * 4);
-			*(int*) (src + 0x24) = fcn_0051fd30(*(int*) (src + 0x24));
-			*(int*) (src + 0x28) = fcn_0051fd30(*(int*) (src + 0x28));
+			*(int*) (src + 0x24) = fcn_0051ad90(*(int*) (src + 0x24));
+			*(int*) (src + 0x28) = fcn_0051ad90(*(int*) (src + 0x28));
 		}
 		i += 0x194;
 	} while (i < 0xc5440);

@@ -1,4 +1,4 @@
-int __cdecl fcn_005015e0();
+int __cdecl gm_ResolveEntityById();
 int __cdecl fcn_00500d20(void*, void*);
 void __cdecl fcn_0050fef0(int, int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
@@ -6,7 +6,7 @@ void* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00504e70(int);
 int __cdecl fcn_005049a0(unsigned char*);
 void __cdecl fcn_0051af00(void*, int, ...);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
@@ -32,7 +32,7 @@ void __cdecl fcn_0055f300(char* e)
 	case 0:
 		break;
 	case 1:
-		fcn_005015e0(0, &item, 0, *(int*) (e + 0xac));
+		gm_ResolveEntityById(0, &item, 0, *(int*) (e + 0xac));
 		if (*(int*) (e + 0xd8) != 0) {
 			fcn_0051af00(buf, 0x1c49, (*(unsigned short*) item) * 2 + 0x9a8);
 			owner = *(int*) (e + 0x10);
@@ -43,7 +43,7 @@ void __cdecl fcn_0055f300(char* e)
 			} else {
 				value = -1;
 			}
-			fcn_00545e80(house, -1, buf, 0, 0x5ec, owner, value, 0, "_NACHRICHTEN_HS_55");
+			he_MessageBoxQuickjump(house, -1, buf, 0, 0x5ec, owner, value, 0, "_NACHRICHTEN_HS_55");
 		}
 		fcn_004c5420(*(int*) ((char*) item + 2), 0x13, 1, 0, 0x20);
 		ch = *(char*) (e + 0xb4);
@@ -54,7 +54,7 @@ void __cdecl fcn_0055f300(char* e)
 		return;
 	case -2:
 	case -1:
-		fcn_005015e0(0, &item, 0, *(int*) (e + 0xac));
+		gm_ResolveEntityById(0, &item, 0, *(int*) (e + 0xac));
 		if (item != 0) {
 			fcn_004c5420(*(int*) ((char*) item + 2), 0x13, 1, 0, 0x20);
 		}

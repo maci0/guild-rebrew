@@ -5,7 +5,7 @@ char* __cdecl fcn_00508e40(int);
 int __cdecl fcn_00503fe0(int, int, int);
 int __cdecl fcn_00503e80(void);
 int __cdecl fcn_00500bb0(void*, int, int, int);
-int __cdecl fcn_00504b30(int);
+int __cdecl gm_SetupEntityQuery(int);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_00529160(int, int, int, int);
@@ -83,7 +83,7 @@ void __cdecl fcn_00552a60(int a0)
 			v4 = fcn_00503fe0(1, 1, *(int*) (a0 + 0x10));
 			v14 = 0;
 			if (v4 != 0 && v5 != 0) {
-				v5 = fcn_00504b30(v4);
+				v5 = gm_SetupEntityQuery(v4);
 				v16 = (int*) (a0 + 0x8c);
 				v17 = 6;
 				do {

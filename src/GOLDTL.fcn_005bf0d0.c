@@ -5,7 +5,7 @@ extern int g_67d370;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 
-int __cdecl fcn_0050dac0(unsigned short id);
+int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl fcn_0050cf50(void* obj, int n);
 int __cdecl fcn_00526010(void* slot, int value, unsigned char flag);
 int __cdecl fcn_004fa5b0(int cmd, void* slot, unsigned int* list);
@@ -39,6 +39,7 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 	char text2[0x80];
 	char text[0x400];
 	unsigned int slots[0x88];
+	unsigned int idx;
 	int value;
 	int evid;
 	int flag;
@@ -50,8 +51,9 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 		return 0;
 	}
 	memset(slots, 0, sizeof(slots));
+	idx = *(unsigned short*) 0x774970;
 	slots[0] = 1;
-	value = (int) ((float) fcn_0050dac0(*(unsigned short*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) * *(float*) 0x6628ac
+	value = (int) ((float) gm_WalkEntityChain(*(unsigned short*) (0x7f4ca0 + idx * 0x21c)) * *(float*) 0x6628ac
 		+ (float) fcn_0050cf50(a1, 100) * *(float*) 0x662b10);
 	if (fcn_004fa5b0(0x1b, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), slots) & 2) {
 		value = value / 2;
@@ -99,11 +101,11 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 	/* entries 0..5 are cleared; entry 6 is the 0x1705 message area */
 	memset(ids, 0xff, 6 * sizeof(unsigned int));
 	ids[0] = dlg;
-	ids[2] = 2;
-	ids[3] = 3;
-	ids[4] = 4;
-	ids[5] = 2;
-	ids[6] = 0x18;
+	ids[1] = 2;
+	ids[2] = 3;
+	ids[3] = 4;
+	ids[4] = 2;
+	ids[5] = 0x18;
 	fcn_005c9220(ids);
 	while (fcn_005373e0((void*) fcn_005bf0d0, 0x677c7) != 0) {
 		flag = g_100f1dc;
@@ -111,12 +113,12 @@ int __cdecl fcn_005bf0d0(unsigned short* a0, unsigned char* a1)
 			*(int*) 0x774654 = 1;
 		}
 		if (flag == 2 && evid != -1 && g_67d370 == evid) {
+			*(int*) (ev + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c);
 			ev[0] = 0x19;
-			*(int*) (ev + 4) = *(int*) (0x7f4ca4 + *(unsigned short*) 0x774970 * 0x21c);
-			*(int*) (ev + 8) = *(int*) (*(int*) 0x7746c4 + 1);
+			*(int*) (ev + 0xc) = *(int*) (*(int*) 0x7746c4 + 1);
 			ev[0x36] = 1;
-			*(int*) (ev + 0x78) = value;
-			*(int*) (ev + 0x54) = *(int*) (a1 + 1);
+			*(int*) (ev + 0x7c) = value;
+			*(int*) (ev + 0x58) = *(int*) (a1 + 1);
 			fcn_004c4eb0((char*) 0x67eac4);
 			fcn_004c5530(ev);
 			fcn_004c4ef0((char*) 0x67eac4);

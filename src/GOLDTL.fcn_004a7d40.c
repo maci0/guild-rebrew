@@ -2,7 +2,7 @@ extern char* g_1007cd4;
 
 void __cdecl fcn_004a7f90(int* h, int* rank_n, int* rank, int* suit_n, int* suit);
 int __cdecl fcn_004a7770(int* h, int a2, int skip, int* out);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x004a7d40 */
 void __cdecl fcn_004a7d40(void)
@@ -41,7 +41,7 @@ void __cdecl fcn_004a7d40(void)
 						if (rank_n >= 3) {
 							goto set_g;
 						}
-					} else if (rank_n >= 2 || fcn_0042e410(4) == 1) {
+					} else if (rank_n >= 2 || gm_RandomMod(4) == 1) {
 						goto set_g;
 					}
 					break;
@@ -63,7 +63,7 @@ void __cdecl fcn_004a7d40(void)
 					if (*(int*) (p + 0x24) == 0
 					    && (n = fcn_004a7770((int*) (p + 0xc), 0, 7, (int*) suit_n), *(unsigned char*) (g_1007cd4 + 0xb5) <= 4)
 					    && n == 3
-					    && fcn_0042e410(4) == 1) {
+					    && gm_RandomMod(4) == 1) {
 						goto set_g;
 					}
 					break;
@@ -71,7 +71,7 @@ void __cdecl fcn_004a7d40(void)
 					if (*(int*) (p + 0x24) == 0
 					    && (n = fcn_004a7770((int*) (p + 0xc), 0, 7, (int*) suit_n), *(unsigned char*) (g_1007cd4 + 0xb5) <= 4)
 					    && n == 3
-					    && fcn_0042e410(5) == 1) {
+					    && gm_RandomMod(5) == 1) {
 						goto set_g;
 					}
 					break;

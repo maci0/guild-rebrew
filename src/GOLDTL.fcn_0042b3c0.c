@@ -27,7 +27,7 @@ void __cdecl fcn_0042b3c0(void)
 		path[i] = c;
 		i++;
 	} while (c != 0);
-	strcpy(path + strlen(path), "f3_textindex.h");
+	strcat(path, "f3_textindex.h");
 	out = fopen(path, "wt");
 	i = 0;
 	do {
@@ -35,13 +35,13 @@ void __cdecl fcn_0042b3c0(void)
 		path[i] = c;
 		i++;
 	} while (c != 0);
-	strcpy(path + strlen(path), "a_obj.h");
+	strcat(path, "a_obj.h");
 	in = fopen(path, "rt");
 	if (in == 0)
 		return;
 	while (!feof(in)) {
-		memset(name, 0, sizeof(name));
 		memset(line, 0, sizeof(line));
+		memset(name, 0, sizeof(name));
 		fgets(line, 127, in);
 		line[strlen(line) - 1] = 0;
 		p = strstr(line, "ob_");
@@ -52,7 +52,7 @@ void __cdecl fcn_0042b3c0(void)
 			len = q - p;
 			memcpy(name, p + 2, len - 2);
 			name[len] = 0;
-			if (memcmp(name, "_NULL", 6) == 0)
+			if (strcmp(name, "_NULL") == 0)
 				strcpy(name, "_OB_NULL");
 			value = fcn_0042b370(name);
 			if (value == -1)
@@ -68,13 +68,13 @@ void __cdecl fcn_0042b3c0(void)
 		path[i] = c;
 		i++;
 	} while (c != 0);
-	strcpy(path + strlen(path), "a_geb.h");
+	strcat(path, "a_geb.h");
 	in = fopen(path, "rt");
 	if (in == 0)
 		return;
 	while (!feof(in)) {
-		memset(name, 0, sizeof(name));
 		memset(line, 0, sizeof(line));
+		memset(name, 0, sizeof(name));
 		fgets(line, 127, in);
 		line[strlen(line) - 1] = 0;
 		p = strstr(line, "gb_");
@@ -85,7 +85,7 @@ void __cdecl fcn_0042b3c0(void)
 			len = q - p;
 			memcpy(name, p + 2, len - 2);
 			name[len] = 0;
-			if (memcmp(name, "_NULL", 6) == 0)
+			if (strcmp(name, "_NULL") == 0)
 				strcpy(name, "_GB_NULL");
 			value = fcn_0042b370(name);
 			if (value == -1)

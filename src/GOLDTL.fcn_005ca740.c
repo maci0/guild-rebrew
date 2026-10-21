@@ -6,7 +6,7 @@ extern int __cdecl fcn_004677e0(int x, int y, int w, int a, int b, int c, int d,
 extern int __cdecl fcn_0050f980(int a, int b);
 extern int __cdecl fcn_00472380(int element, int a, int b, int value);
 extern int __cdecl fcn_00472640(int element, int a);
-extern int __cdecl fcn_0064d228(void);
+extern int __cdecl _ftol(void);
 
 /* Draw the trade-good detail window: create the frame and the four value
  * labels, format the two lines of text into the message buffer, draw the
@@ -59,7 +59,7 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 			if (*(unsigned char*) (a4[0] + 2) != 7) {
 				fcn_0050f980(*(unsigned short*) 0x774970,
 				             *(unsigned short*) a4[0]);
-				fcn_00472380(a4[2], 0, 100, fcn_0064d228());
+				fcn_00472380(a4[2], 0, 100, _ftol());
 			} else {
 				fcn_00472380(v6, 0, 100, 0);
 			}

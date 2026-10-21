@@ -1,8 +1,9 @@
 extern char* g_entity_type_table;
+extern int g_773d70;
 
 void __cdecl fcn_00506a70(void*);
 void __cdecl fcn_005b2a00(void*, void*);
-void __cdecl fcn_00502f80(int);
+void __cdecl gm_FreeObjectListRecursive(int);
 void __cdecl fcn_004030e0(int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
@@ -30,8 +31,8 @@ void __cdecl fcn_00506ab0(int a0, int a1)
 		*(unsigned short*) (ent + 0x28) = *(unsigned short*) 0x7f4c00;
 		ent[8] = 0;
 		fcn_00506a70(ent);
-		v9 = 0;
 		ent[2] = 0x0f;
+		v9 = 0;
 		e = 0;
 		v15 = 0;
 		p = (char*) 0x7f4ca2;
@@ -69,22 +70,22 @@ void __cdecl fcn_00506ab0(int a0, int a1)
 			fcn_005b2a00(e, ent);
 		}
 	}
-	fcn_00502f80((int) (ent + 0x178));
+	gm_FreeObjectListRecursive((int) (ent + 0x178));
 	if (*(int*) (ent + 0x184) != 0) {
-		fcn_004030e0((int*) (ent + 0x184));
+		fcn_004030e0(*(int**) (ent + 0x184));
 		*(int*) (ent + 0x184) = 0;
 	}
 	e2 = *(char**) (ent + 0x170);
 	if (e2 != 0) {
-		if (g_entity_type_table[*(unsigned char*) e2 * 0x24d] == 1 && e2[0x65] != 0) {
+		if (g_entity_type_table[*(unsigned char*) e2 * 0x24d] == 1 && *(unsigned char*) (e2 + 0x65) > 0) {
 			e2[0x65] -= 1;
 		}
 		*(int*) (ent + 0x170) = 0;
 	}
 	*(int*) (ent + 0x16c) = 0;
 	if (a1 != 0) {
-		if (*(short*) ent != -1) {
-			*(int*) 0x773d70 -= 1;
+		if (*(unsigned short*) ent != 0xffff) {
+			g_773d70 -= 1;
 		}
 		v10 = (int*) 0x7f4cfc;
 		do {
@@ -103,10 +104,10 @@ void __cdecl fcn_00506ab0(int a0, int a1)
 		for (v9 = 0; v9 < 0x87; v9++) {
 			v10[v9] = 0;
 		}
-		*(short*) ent = -1;
-		*(int*) (0x7f4ca4 + v12) = -1;
 		v9 = 8;
 		v14 = (unsigned int*) (0x7f4cfc + v12);
+		*(unsigned short*) ent = 0xffff;
+		*(int*) (0x7f4ca4 + v12) = -1;
 		do {
 			*v14 = 0xffffffff;
 			v14 += 1;

@@ -11,7 +11,7 @@ void __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_00503fe0(int, int, int);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, int, char*, int, int);
-void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
+void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c4670(int, int, int, void*);
@@ -65,7 +65,7 @@ void __cdecl fcn_00569a90(char* a)
 				fcn_0051af00(buf, 0x19d4, *(unsigned short*) v3,
 				    *(int*) (a + 0xb4), *(unsigned short*) v3);
 				fcn_00545d40(*(int*) ((char*) v4 + 4), *(int*) ((char*) v4 + 4),
-				    0, buf, 0x5fa, 0);
+				    buf, 0, 0x5fa, 0);
 				if (pkt != 0) {
 					fcn_004c4510((char*) pkt, *(int*) (pkt + 1));
 					fcn_004c4570(4, 1,
@@ -99,7 +99,7 @@ void __cdecl fcn_00569a90(char* a)
 					break;
 				fcn_0051af00(buf, 0x19d5, *(unsigned short*) v3);
 				entity = *(int*) ((char*) v4 + 4);
-				fcn_00545e80(entity, entity, buf, 0, 0x5f0, *(int*) (pkt + 1),
+				he_MessageBoxQuickjump(entity, entity, buf, 0, 0x5f0, *(int*) (pkt + 1),
 				    -1, 0, 0);
 			}
 			*(int*) (a + 0x70) = -1;
@@ -113,7 +113,7 @@ void __cdecl fcn_00569a90(char* a)
 				fcn_0051af00(buf, 0x19d4, *(unsigned short*) v3,
 				    *(int*) (a + 0xb4), *(unsigned short*) v3);
 				fcn_00545d40(*(int*) ((char*) v4 + 4), *(int*) (a + 0x10),
-				    0, buf, 0x5fa, 0);
+				    buf, 0, 0x5fa, 0);
 				fcn_004c4510((char*) pkt, *(int*) (pkt + 1));
 				fcn_004c4570(4, 1, (pkt - g_aed32c) + 0x65, (void*) &v[1]);
 				fcn_004c5360();
@@ -137,20 +137,18 @@ void __cdecl fcn_00569a90(char* a)
 			}
 			fcn_0051af00(buf, 0x19d5, *(unsigned short*) v3);
 			entity = *(int*) ((char*) v4 + 4);
-			fcn_00545d40(entity, entity, 0, buf, 0x5fb, 0);
+			fcn_00545d40(entity, entity, buf, 0, 0x5fb, 0);
 			fcn_00546190(a);
 			return;
 		case 3:
 			pkt = fcn_005463a0(1, 0, 0x3d);
 			if (pkt != 0) {
-				for (;;) {
-					if (*(int*) (pkt + 0xac) == *(int*) (a + 0xac))
-						break;
+				while (*(int*) (pkt + 0xac) != *(int*) (a + 0xac)) {
 					pkt = fcn_005462a0();
-					if (pkt == 0) {
-						fcn_00546190(a);
-						return;
-					}
+					if (pkt != 0)
+						continue;
+					fcn_00546190(a);
+					return;
 				}
 				*(int*) (a + 0x84) = fcn_004c5620(-1, a);
 			}

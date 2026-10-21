@@ -43,8 +43,8 @@ void __cdecl he_AllocTransport(char* a0)
 	char nbuf[240];
 	float f;
 	float fbest;
-	float pnew[3];
-	float pold[3];
+	float pnew[4];
+	float pold[4];
 	int found_first;
 	char* first;
 	int found_second;

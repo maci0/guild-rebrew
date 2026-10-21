@@ -14,7 +14,7 @@ typedef struct Loc {
 extern char* g_868050;
 extern int g_774800;
 
-int __cdecl fcn_00504bd0(int id);
+int __cdecl gm_GetBuildingTypeCategory(int id);
 int __cdecl fcn_00507910(unsigned char kind);
 int __cdecl fcn_005074e0(int id, int kind);
 int __cdecl fcn_00504ef0(unsigned char kind, int* out);
@@ -32,7 +32,7 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 	int i;
 	unsigned char c;
 
-	type = fcn_00504bd0(a0);
+	type = gm_GetBuildingTypeCategory(a0);
 	rec = (Loc*) (g_868050 + a0 * 0x24d);
 	loc = fcn_005074e0(a1, fcn_00507910(rec->kind));
 	if (a1 == 0xffff) {

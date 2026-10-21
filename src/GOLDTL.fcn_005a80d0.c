@@ -13,7 +13,7 @@ int __cdecl fcn_004432d0(int a0, int a1);
 void __cdecl fcn_0043aa30(int a0);
 void __cdecl fcn_005167c0(unsigned char* a0, int a1);
 void __cdecl fcn_00516c50(int a0, unsigned char* a1);
-int __cdecl fcn_00504bd0(int a0);
+int __cdecl gm_GetBuildingTypeCategory(int a0);
 void __cdecl fcn_00438b40(char* p, int* v);
 void __cdecl fcn_00438cb0(int a0, int a1);
 int __cdecl fcn_00451840(float* a, float* b, float eps);
@@ -118,7 +118,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 			v11 = *(int*) 0x6b8014;
 			fcn_00438cb0(v11, v10);
 		} else {
-			v10 = fcn_00504bd0(*v7);
+			v10 = gm_GetBuildingTypeCategory(*v7);
 			c = *v7;
 			rec = *(int*) 0x868050 + c + c * 0x24c;
 			if (v10 != 2) {

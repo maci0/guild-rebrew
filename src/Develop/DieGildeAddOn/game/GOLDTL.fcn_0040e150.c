@@ -13,7 +13,10 @@ int __cdecl CharacterSitsDown(char** object)
             (char*) 0x67635c);
         return 0;
     }
-    return (p[0x8c] >> 4) & 1;
+    if ((p[0x8c] >> 4) & 1) {
+        return 1;
+    }
+    return 0;
 }
 
 

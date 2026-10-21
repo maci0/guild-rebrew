@@ -4,7 +4,7 @@ extern char* __cdecl fcn_00503fe0(int, int, int);
 extern void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 extern int __cdecl fcn_004a57a0(char*, int, int, char*, int, int, unsigned int*);
 extern int __cdecl fcn_004f45b0(char*);
-extern int __cdecl fcn_0050dac0(int);
+extern int __cdecl gm_WalkEntityChain(int);
 extern int __cdecl fcn_0050b710(int, int);
 extern int __cdecl gm_RandomMod(int);
 extern void __cdecl fcn_00579390(char*, char*);
@@ -108,7 +108,7 @@ void __cdecl fcn_00578ed0(char* a0)
 			return;
 		}
 		ref = fcn_004f45b0((char*) ((found & 0xffff) * 0x21c + 0x7f4ca0));
-		k = fcn_0050b710(fcn_0050dac0(found), *(unsigned char*) 0x773d75);
+		k = fcn_0050b710(gm_WalkEntityChain(found), *(unsigned char*) 0x773d75);
 		*(unsigned short*) (a0 + 0xc8 + *(int*) (a0 + 0xb0) * 2) = (unsigned short) found;
 		if (k > ref &&
 		    (*(unsigned char*) ((found & 0xffff) * 0x21c + 0x7f4e6c) & 1) == 0) {

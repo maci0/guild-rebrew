@@ -8,7 +8,7 @@ typedef struct
 } SAVE_REC;
 
 extern int __cdecl fcn_004fa5b0(int cmd, int obj, void *rec);
-extern int __cdecl fcn_0042e410(int limit);
+extern int __cdecl gm_RandomMod(int limit);
 extern void *__cdecl fcn_005463a0(int a, int b, int c);
 extern void *__cdecl fcn_005462a0(void);
 extern void *__cdecl fcn_00508e40(int a);
@@ -67,10 +67,10 @@ unsigned int __cdecl fcn_004aa240(int a0, int a1, int a2, char *a3, int a4)
                     ids2[cc++] = *src;
             }
         }
-        if (n != 0 && (cc == 0 || (r = (unsigned short)fcn_0042e410(2)) == 0))
+        if (n != 0 && (cc == 0 || (r = (unsigned short)gm_RandomMod(2)) == 0))
         {
             rec.type = 1;
-            r = (unsigned short)fcn_0042e410(n);
+            r = (unsigned short)gm_RandomMod(n);
             id = (unsigned int)ids1[r];
             n = 3;
             ok = fcn_004fa5b0((int)id, a1, &rec) & 2;
@@ -78,7 +78,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int a1, int a2, char *a3, int a4)
         else if (cc != 0)
         {
             rec.type = 2;
-            r = (unsigned short)fcn_0042e410(cc);
+            r = (unsigned short)gm_RandomMod(cc);
             id = (unsigned int)ids2[r];
             n = 4;
             ok = fcn_004fa5b0((int)id, a1, &rec) & 2;

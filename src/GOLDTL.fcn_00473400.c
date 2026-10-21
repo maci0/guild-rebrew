@@ -9,9 +9,12 @@ typedef struct VfsEntry {
 	int size;
 	int kind;
 	int refs;
-	int flags;
+	unsigned char flags;
+	char pad45[3];
 	int stamp;
-	char pad[8];
+	int parent;
+	short w50;
+	short w52;
 } VfsEntry;
 // SIZE 0x54
 
@@ -28,10 +31,10 @@ int __cdecl fcn_004659c0(int idx, char* path);
 /* ADDRESS: GOLDTL 0x00473400 */
 int __cdecl fcn_00473400(char* path, char* name)
 {
+	int size;
 	FILE* f;
 	char* buf;
 	char* p;
-	int size;
 	int kind;
 	int index;
 	int save;
@@ -48,13 +51,13 @@ int __cdecl fcn_00473400(char* path, char* name)
 	kind = ((VfsEntry*) g_772500)[index].kind;
 	if (kind == 1 || kind == 5 || kind == 4 || kind == 8) {
 		p = (char*) fcn_0047b620(buf, 0);
-		*(short*) ((char*) &((VfsEntry*) g_772500)[index] + 0x50) = *(short*) (p + 2);
-		*(short*) ((char*) &((VfsEntry*) g_772500)[index] + 0x52) = *(short*) (p + 6);
-		*(int*) ((char*) &((VfsEntry*) g_772500)[index] + 0x4c) = index;
+		((VfsEntry*) g_772500)[index].w50 = *(short*) (p + 2);
+		((VfsEntry*) g_772500)[index].w52 = *(short*) (p + 6);
+		((VfsEntry*) g_772500)[index].parent = index;
 	}
 	if (kind == 0x11) {
-		*(short*) ((char*) &((VfsEntry*) g_772500)[index] + 0x50) = *(short*) (buf + 0xc);
-		*(short*) ((char*) &((VfsEntry*) g_772500)[index] + 0x52) = *(short*) (buf + 0xe);
+		((VfsEntry*) g_772500)[index].w50 = *(short*) (buf + 0xc);
+		((VfsEntry*) g_772500)[index].w52 = *(short*) (buf + 0xe);
 	}
 	((VfsEntry*) g_772500)[index].size = size;
 	strcpy(((VfsEntry*) g_772500)[index].name, name);
@@ -67,14 +70,14 @@ int __cdecl fcn_00473400(char* path, char* name)
 			((VfsEntry*) g_772500)[index].offset = 0;
 			*(int*) ((VfsEntry*) g_772500)[index].name = g_67d8c8;
 			p = (char*) fcn_0047b620(buf, i);
-			*(short*) ((char*) &((VfsEntry*) g_772500)[index] + 0x50) = *(short*) (p + 2);
-			*(short*) ((char*) &((VfsEntry*) g_772500)[index] + 0x52) = *(short*) (p + 6);
+			((VfsEntry*) g_772500)[index].w50 = *(short*) (p + 2);
+			((VfsEntry*) g_772500)[index].w52 = *(short*) (p + 6);
 			((VfsEntry*) g_772500)[index].kind = ((VfsEntry*) g_772500)[save].kind;
-			*(int*) ((char*) &((VfsEntry*) g_772500)[index] + 0x4c) = save;
+			((VfsEntry*) g_772500)[index].parent = save;
 		}
 	}
 	free(buf);
 	fclose(f);
 	g_772504 = index;
-	return fcn_004659c0(save, name);
+	return fcn_004659c0(save, path);
 }

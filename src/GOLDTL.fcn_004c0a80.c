@@ -4,7 +4,7 @@
 
 extern char s_689d24[];
 
-void* __cdecl fcn_0041db70(int, char*);
+void* __cdecl m_alloc(int, char*);
 void __cdecl fcn_004225e0(char*, int);
 void* __cdecl fcn_004c0a60(void);
 
@@ -19,7 +19,7 @@ int __cdecl fcn_004c0a80(char* a0, int a1)
 	if (a0 == 0) {
 		return 0;
 	}
-	p = fcn_0041db70(0x10, s_689d24);
+	p = m_alloc(0x10, s_689d24);
 	if (p == 0) {
 		return 0;
 	}

@@ -6,14 +6,14 @@ extern unsigned char g_773d75;
 int __cdecl fcn_00503fe0(int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int, int);
-int __cdecl fcn_0042e410(int);
+int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00495400(int, int, int, int*, int*);
 int __cdecl fcn_004a48a0(int, int);
 int __cdecl fcn_004a4fb0(int*, int*, int*);
 int __cdecl fcn_0050d170(int);
 int __cdecl fcn_0050d320(int, int);
 int __cdecl fcn_0050bb50(int, int);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 
 /* ADDRESS: GOLDTL 0x004a04b0 */
 int __cdecl fcn_004a04b0(int a0, unsigned short* a1, int a2, int* a3, int* a4)
@@ -55,7 +55,7 @@ int __cdecl fcn_004a04b0(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 	v5 = fcn_00502cd0(*(int*) (v4 + 0x5d), 2, 6, 0, 0x142);
 	v6 = fcn_0050b810(*(int*) (v5 + 0x14), g_773d75);
 	c = v4[0x5c];
-	if ((signed char) c < (int) ((fcn_0042e410(0x10) & 0xffff) + 0x32) &&
+	if ((signed char) c < (int) ((gm_RandomMod(0x10) & 0xffff) + 0x32) &&
 	    !(v4[0x5a] & 4)) {
 		out1[1] = *(int*) (v4 + 1);
 		out1[0] = 4;
@@ -96,7 +96,7 @@ int __cdecl fcn_004a04b0(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 		}
 		v12 = *v4 + 1;
 		fcn_0050d170(v12);
-		v7 = fcn_0064d228();
+		v7 = _ftol();
 		if (v7 < v6) {
 			*(char*) a3 = 4;
 			a3[1] = v12;
@@ -112,7 +112,7 @@ int __cdecl fcn_004a04b0(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 			return 0;
 		}
 		a1 = (unsigned short*) (v6 - 80000);
-		if (fcn_0064d228() < v7 + 0x20) {
+		if (_ftol() < v7 + 0x20) {
 			return 0;
 		}
 		*(char*) a3 = 1;
@@ -138,7 +138,7 @@ int __cdecl fcn_004a04b0(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 	out4[2] = 1;
 	out4[4] = 0;
 	fcn_0050bb50(a2, g_773d75);
-	v9 = fcn_0064d228();
+	v9 = _ftol();
 	if (v9 < v6) {
 		goto label_4a0628;
 	}
@@ -157,7 +157,7 @@ label_4a0628:
 		return 0;
 	}
 	a1 = (unsigned short*) (v6 - 80000);
-	if (fcn_0064d228() < v12 + 0x20) {
+	if (_ftol() < v12 + 0x20) {
 		return 0;
 	}
 	*(char*) a3 = 1;

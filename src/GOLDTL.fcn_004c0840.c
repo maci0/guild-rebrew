@@ -12,8 +12,8 @@ typedef struct Rec64 {
 // SIZE 0x40
 
 int __cdecl fcn_005218f0(void* dst, int size, int count, int handle);
-void* __cdecl fcn_0041db70(int size, char* file);
-void __cdecl fcn_0041ddd0(void* p);
+void* __cdecl m_alloc(int size, char* file);
+void __cdecl m_FreeTracked(void* p);
 int __cdecl fcn_00501510(int id);
 char* __cdecl fcn_004be1f0(int head);
 
@@ -32,7 +32,7 @@ int __cdecl fcn_004c0840(int handle)
 	n = handle;
 	if (fcn_005218f0(&n, 4, 1, handle) == 0)
 		return 0;
-	buf = (char*) fcn_0041db70(n * 0x40, (char*) 0x681748);
+	buf = (char*) m_alloc(n * 0x40, (char*) 0x681748);
 	for (i = 0; i < n; i++) {
 		rec = (Rec64*) (buf + i * 0x40);
 		if (fcn_005218f0(&rec->id, 4, 1, handle) == 0)
@@ -60,6 +60,6 @@ int __cdecl fcn_004c0840(int handle)
 			rec = (Rec64*) ((char*) rec + 0x40);
 		} while (i < n && rec != 0 && *(int*) (x + 2) == rec->id);
 	}
-	fcn_0041ddd0(buf);
+	m_FreeTracked(buf);
 	return 1;
 }

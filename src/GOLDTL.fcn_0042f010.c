@@ -15,8 +15,8 @@ char* __cdecl fcn_0042f010(char* name, NODE042F010* node)
 {
 	char buf[0x100];
 	char path[0x100];
-	char* p;
 	NODE042F010* n;
+	char* p;
 	char c;
 
 	n = node;

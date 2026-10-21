@@ -9,7 +9,7 @@ extern double g_6640f0;
 extern float g_6628a0;
 
 void __cdecl fcn_004fd400(short*, int*);
-int __cdecl fcn_0050dac0(int);
+int __cdecl gm_WalkEntityChain(int);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
@@ -52,7 +52,7 @@ void __cdecl fcn_004fd0a0(void)
 		if (*(unsigned char*) (e + 8) == 0) {
 			continue;
 		}
-		r = fcn_0050dac0(*(short*) e);
+		r = gm_WalkEntityChain(*(short*) e);
 		total = 0;
 		count = 0;
 		fcn_004c4510(e, *(int*) (e + 4));

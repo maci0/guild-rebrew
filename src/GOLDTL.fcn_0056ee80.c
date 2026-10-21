@@ -40,16 +40,16 @@ void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl fcn_0051af00(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_00545e80(unsigned int, int, char*, int, int, int, int, int, char*);
+void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 float __cdecl fcn_004ff210(int, int);
-char* __cdecl fcn_00504b30(char*);
+char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_00507e30(char*, int);
 void __cdecl fcn_0050c5d0(char*, int*);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0055c050(char*);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 int* __cdecl fcn_00502cd0(int, ...);
 int* __cdecl fcn_00502850(void);
 char* __cdecl fcn_00509570(char*);
@@ -235,7 +235,7 @@ label_1bc:
 		if (rec1 == 0) {
 			goto tail;
 		}
-		q = (int) fcn_00504b30((char*) rec1);
+		q = (int) gm_SetupEntityQuery((char*) rec1);
 		for (i = 0; i < 8; i++) {
 			if (*(int*) (a0 + 0x8c + i * 4) != -1) {
 				fcn_004c5c80(*(int*) (a0 + 0x8c + i * 4));
@@ -254,7 +254,7 @@ label_1bc:
 		row = (int) ((unsigned short) *(unsigned short*) (rec1 + 0x27) * 0x21c + (int) g_7f4ca0);
 		h = (int) fcn_00503fe0(1, 1, *(int*) (a0 + 0xb0));
 		if (h != 0) {
-			q = (int) fcn_00504b30((char*) h);
+			q = (int) gm_SetupEntityQuery((char*) h);
 			i = (int) fcn_00502cd0(*(int*) (h + 0x5d), 2, 6, 0, 0x116);
 			cnt = 8;
 			do {
@@ -320,11 +320,11 @@ label_1bc:
 		if (*(char*) (ent + 2) == 6 || *(char*) (ent + 2) == 7) {
 			fcn_0051af00(buf, 0x1a85, *(unsigned short*) row, rec1);
 			strcpy(msg, buf);
-			fcn_00545e80(*(int*) (ent + 4), *(int*) (ent + 4), msg, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
+			he_MessageBoxQuickjump(*(int*) (ent + 4), *(int*) (ent + 4), msg, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
 		}
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
 			fcn_0051af00(buf, 0x1a86, rec1, val);
-			fcn_00545e80(*(int*) (row + 4), *(int*) (row + 4), buf, 0, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
+			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 0, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
 			fcn_00546190(a0);
 			return;
 		}
@@ -335,11 +335,11 @@ label_fa92:
 		}
 		if (*(char*) (ent + 2) == 6 || *(char*) (ent + 2) == 7) {
 			fcn_0051af00(buf, 0x19e7, *(unsigned short*) row, rec1, 0x19c1);
-			fcn_00545e80(*(int*) (ent + 4), *(int*) (ent + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
+			he_MessageBoxQuickjump(*(int*) (ent + 4), *(int*) (ent + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
 		}
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
 			fcn_0051af00(buf, 0x19e9, rec1);
-			fcn_00545e80(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, 0);
+			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, 0);
 			fcn_00546190(a0);
 			return;
 		}
@@ -348,7 +348,7 @@ label_fa92:
 	case -1:
 		h = (int) fcn_00503fe0(1, 1, *(int*) (a0 + 0xb0));
 		if (h != 0) {
-			q = (int) fcn_00504b30((char*) h);
+			q = (int) gm_SetupEntityQuery((char*) h);
 		}
 		for (i = 0; i < 8; i++) {
 			if (*(int*) (a0 + 0x8c + i * 4) != -1) {

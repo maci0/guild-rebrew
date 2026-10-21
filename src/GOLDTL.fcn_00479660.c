@@ -2,8 +2,8 @@
 
 extern char s_67da58[];
 
-extern void* __cdecl fcn_0041db70(int, char*);
-extern void __cdecl fcn_0041ddd0(void*);
+extern void* __cdecl m_alloc(int, char*);
+extern void __cdecl m_FreeTracked(void*);
 extern void* __cdecl fcn_00479620(char*, int);
 extern void __cdecl fcn_004798c0(void*, void*);
 
@@ -32,7 +32,7 @@ void* __cdecl fcn_00479660(char* a0, int a1, int a2)
 		} while (--total);
 	}
 	if (*(unsigned char*) (a0 + 0x34) == 2 && a1 == 1) {
-		n = (char*) fcn_0041db70(size - sum, s_67da58);
+		n = (char*) m_alloc(size - sum, s_67da58);
 		memcpy(n, a0, 0x845);
 		*(int*) (n + 0x30) = 0;
 		*(unsigned char*) (n + 0x34) = 1;
@@ -44,7 +44,7 @@ void* __cdecl fcn_00479660(char* a0, int a1, int a2)
 				p = (char*) fcn_00479620(a0 + *tbl, 1);
 				fcn_004798c0(p, n);
 				if (p)
-					fcn_0041ddd0(p);
+					m_FreeTracked(p);
 				total++;
 				tbl++;
 			} while (total < *(unsigned short*) (a0 + 0x2a));
@@ -55,12 +55,12 @@ void* __cdecl fcn_00479660(char* a0, int a1, int a2)
 				*(unsigned short*) (a0 + 0x43) * 8);
 		}
 		if (a2 == 0)
-			fcn_0041ddd0(a0);
+			m_FreeTracked(a0);
 		return n;
 	}
 	if (*(unsigned char*) (a0 + 0x34) != 0 || a1 != 1)
 		return a0;
-	n = (char*) fcn_0041db70(size + sum, s_67da58);
+	n = (char*) m_alloc(size + sum, s_67da58);
 	memcpy(n, a0, 0x845);
 	*(int*) (n + 0x30) = 0;
 	*(unsigned char*) (n + 0x34) = 1;
@@ -72,7 +72,7 @@ void* __cdecl fcn_00479660(char* a0, int a1, int a2)
 			p = (char*) fcn_00479620(a0 + *tbl, 1);
 			fcn_004798c0(p, n);
 			if (p)
-				fcn_0041ddd0(p);
+				m_FreeTracked(p);
 			total++;
 			tbl++;
 		} while (total < *(unsigned short*) (a0 + 0x2a));
@@ -83,6 +83,6 @@ void* __cdecl fcn_00479660(char* a0, int a1, int a2)
 			*(unsigned short*) (a0 + 0x43) * 8);
 	}
 	if (a2 == 0)
-		fcn_0041ddd0(a0);
+		m_FreeTracked(a0);
 	return n;
 }

@@ -28,7 +28,7 @@ int* __cdecl fcn_004234e0(char* bank, char* name, int loop, int pan, int vol,
     int a, int b);
 int __cdecl fcn_00423890(int* voice, int vol);
 void __cdecl fcn_004237f0(int* voice, int a2);
-int __cdecl fcn_0064d228(void);
+int __cdecl _ftol(void);
 int __cdecl fcn_0064d3f8(void);
 
 #define dbl_2600 (*(float*) 0x664e9c)

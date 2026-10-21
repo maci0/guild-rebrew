@@ -8,7 +8,7 @@ extern int __cdecl fcn_00413120();
 extern int __cdecl fcn_00413190();
 extern int __cdecl fcn_004050c0();
 extern int __cdecl fcn_004032b0();
-extern int __cdecl fcn_0045b990();
+extern char __cdecl fcn_0045b990();
 extern void __cdecl m_FreeTracked(void* ptr);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern int __cdecl fcn_00407e30();
@@ -32,7 +32,6 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	int obj;
 	int n;
 	int r;
-	void* ptr;
 	void (__cdecl* fn)(int);
 
 	rec = a0;
@@ -49,7 +48,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	*(int*) (obj + 0x7c) = 0;
 	*(int*) (obj + 0x70) = 0;
 	*(float*) (obj + 0x1a4) = 1.0f;
-	*(unsigned char*) (*(int*) (rec + 0x14) + 0x8c) &= 0xf7;
+	*(unsigned short*) (*(int*) (rec + 0x14) + 0x8c) &= 0xfff7;
 	*(int*) (rec + 0xf4) = 0;
 	*(int*) (rec + 0x104) = 0;
 	*(int*) (rec + 0x154) = -1;
@@ -75,30 +74,31 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 		fcn_004050c0(rec);
 		return 0;
 	}
-	if (v15 >= 1) {
+	if (v15 < 1) {
+		v15 = 1;
+	}
+	else {
 		n = *(int*) (a1 + 0x20) - 2;
 		if (n < v15)
 			v15 = n;
 	}
-	else {
-		v15 = 1;
+	if (v14 < 1) {
+		v14 = 1;
 	}
-	if (v14 >= 1) {
+	else {
 		n = *(int*) (a1 + 0x20) - 2;
 		if (n < v14)
 			v14 = n;
 	}
-	else {
-		v14 = 1;
-	}
 	if (*(unsigned char*) (obj + 4) & 4)
 		*(unsigned int*) (rec + 0x160) &= 0xffffffef;
 	if (*(unsigned int*) (rec + 0x160) & 0x10)
-		n = rec + 0x144;
+		fcn_00407e30(a1, *(int*) (obj + 0x34) + 0x4c, rec + 0x144, v16, v17,
+		    &v17, &v16, 8, *(unsigned int*) (rec + 0x160));
 	else
-		n = *(int*) (obj + 0x34) + 0x4c;
-	fcn_00407e30(a1, *(int*) (obj + 0x34) + 0x4c, n, v16, v17,
-	    &v17, &v16, 8, *(unsigned int*) (rec + 0x160));
+		fcn_00407e30(a1, *(int*) (obj + 0x34) + 0x4c,
+		    *(int*) (obj + 0x34) + 0x4c, v16, v17,
+		    &v17, &v16, 8, *(unsigned int*) (rec + 0x160));
 	*(unsigned int*) 0x14d0c28 = 0x14cfc20;
 	*(unsigned int*) 0x14d0c24 = 0x200;
 	r = fcn_00421350((void*) 0x14d0c20, a1, v15, v14, v17, v16,
@@ -117,12 +117,14 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 		fcn_004050c0(rec);
 		return 0;
 	}
-	ptr = m_alloc(*(unsigned int*) 0x14d0c20 * 2, (char*) 0x675ad8);
-	*(int*) (rec + 0xf4) = (int) ptr;
-	*(int*) (rec + 0xf0) = fcn_00407760(a0, 0x14d0c20, ptr, a1);
+	*(int*) (rec + 0xf4) = (int) m_alloc(*(unsigned int*) 0x14d0c20 * 2,
+	    (char*) 0x675ad8);
+	*(int*) (rec + 0xf0) = fcn_00407760(obj, (void*) 0x14d0c20,
+	    (void*) *(int*) (rec + 0xf4), a1);
 	*(int*) (rec + 0xf8) = 0;
 	*(int*) (rec + 0xfc) = -1;
-	fcn_0045b920(a1, *(char*) ptr, ((char*) ptr)[1], (float*) (rec + 0x124));
+	fcn_0045b920(a1, *(unsigned char*) *(int*) (rec + 0xf4),
+	    ((unsigned char*) *(int*) (rec + 0xf4))[1], (float*) (rec + 0x124));
 	*(float*) (rec + 0x124) = *(float*) 0x6b5c38 + *(float*) (rec + 0x124);
 	*(float*) (rec + 0x128) = *(float*) 0x6b5c3c + *(float*) (rec + 0x128);
 	*(float*) (rec + 0x12c) = *(float*) 0x6b5c40 + *(float*) (rec + 0x12c);

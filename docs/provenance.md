@@ -414,6 +414,402 @@ how the result was verified. Reversals are new entries.
   fresh data verification and the full gate were not run; concurrent source,
   inventory and managed-metadata edits are outside this change.
 
+## 2026-10-21 round 8: NEAR conversions, big-body reconstructions, extent repairs
+
+Change: promoted 3526 RELOC and 283 EXACT GOLDTL rows (matched
+3809); documented wall classes and one evidence ruling.
+Notable promotions this round: 0x413fb0 (bbox structs, reversed loop), 0x4e4f10
+(induction pointer -4), 0x41c290 (live i8 SIB flip), 0x412d30 (bitfield order),
+0x503fe0 (init store order), 0x4f2880 (g_868050 pointer form).
+Reason: delegated reconstruction waves under the three-binary objective.
+Evidence: per-row reports in .scratch/recycle2/results/group-*.md, decision log
+.scratch/wave2/DECISIONS.md, extent specs .scratch/wave2/extent-specs.tsv.
+Verified: rebrew test --force-status per row; rebrew lint 0 errors.
+Also this round: reviewed extent repairs and interior-row retirements applied via
+rebrew binary repair-extents (records in the same log and EXTENT-QUEUE.md); the
+0x4b3010 unevidenced aggregate was removed per the no-invented-slots rule, frame
+then 0x17f4.
+
+## 2026-10-21 callee prototype corrections
+
+Change: fixed wrong callee arities found by auditing reference call sites.
+- fcn_0042e410 (0x0042e410) is ONE argument: body reads only [esp+8]; 1017 direct
+  sites, 593 with a lone `add esp,4`. Corrected declarations in fcn_00512ee0.c,
+  fcn_0054a6a0.c, fcn_0054da10.c, fcn_00519190.c, fcn_0055cc80.c and restored the
+  surplus values into the enclosing call argument lists (they were evaluated
+  early, proved by the outer cleanups).
+- fcn_004c5ed0 is THREE arguments (12 bytes): body reads [esp+0xa0]/[esp+0xa4]/
+  [esp+0xa8]; 15 direct sites all push 12 bytes; the "six" at 0x559a18 was two
+  adjacent three-arg calls retired by one `add esp,0x18`. Fixed the declaration
+  and call in src/GOLDTL.fcn_0057d0d0.c.
+Reason: surplus pushes shift every later byte in a row.
+Evidence: .scratch/recycle2/results/group-336.md, group-339.md, group-341.md.
+Verified: rebrew test --force-status per touched row; 0x57d0d0 307->341 matched;
+0x5599c0 and 0x55be70 remain RELOC; rebrew lint 0 errors.
+
+## 2026-10-21 round 9: three-agent function wave
+
+Change: worked 38 GOLDTL rows with three disjoint per-function subagent queues.
+Lead-verified promotions: RELOC for 0x004c0b30 (setter, g_772d18), 0x0040df00
+(_CharacterSitting, two-return nibble test, SIZE 64->56), 0x0040e110
+(CharacterSitsDown, same source form), 0x0046bd00 (three unsigned char
+parameters), 0x004ac2c0 (unsigned short local plus volatile parameter, SIZE
+64->63). NEAR_MATCHING improvements for 0x00490c10 (STUB->NEAR 113/118),
+0x0050c4e0 (104/110, switch jump-table shape, SIZE 112->110), 0x004050c0
+(98/110, inlined memset order), 0x004ce210 (68/74, store/lea schedule).
+Reason: delegated reconstruction of remaining SIZE_MISMATCH/STUB/NEAR rows.
+Evidence: per-row reports .scratch/agent-a/report.md, .scratch/agent-b/report.md,
+.scratch/agent-c/report.md; official re-run results
+.scratch/lead/verify-round.json; SIZE changes rest on disassembly of the
+terminating `ret` and trailing alignment nops before the next function.
+Verified: fresh `rebrew test <file> --va <VA>` for every claimed row; `rebrew
+status` moved RELOC 3499->3504 and NEAR 71->73. No store hand edits, no commits,
+no builds or links started.
+Blocked rows and extent specs are recorded in the agent reports; notable:
+same-TU callee analysis needed for 0x406560/0x406120/0x50e170, interior
+fragments 0x0041a8c3 and 0x0042b2e0 (import thunk plus missing 0x42b2f0 row).
+Also recorded: the goal text's "inception mercury" request could not be run;
+plain subagent execution inherits the session model and INCEPTION_API_KEY is
+unset in this environment.
+
+## 2026-10-21 round 10: fresh-row wave, Mercury wave on uncovered functions
+
+Change: two delegated waves plus lead work on the GOLDTL target.
+- Deepseek-flash subagents (fresh rows): 0x00510b40 EXACT 47/47; NEAR
+  improvements for 0x004f2ee0 138/161, 0x00509120 124/161, 0x00471e30 148/169,
+  0x004c6940 156/186, 0x00436a00 117/159, 0x0050b840 115/136; SIZE corrected
+  0x004c5580 160->156 and 0x004c7a60 160->150 from disassembly.
+- Mercury-3 agents (workflow provider/model override) on uncovered inventory
+  functions: verified RELOC for 0x00496480 92/92, 0x004cb5d0 117/117,
+  0x004cdb10 127/127, 0x004f8730 208/208, 0x004f8800 208/208, 0x004cdb90
+  281/281; NEAR for 0x004f88d0 196/224; SIZE corrected 0x004cb5d0 128->117 and
+  0x005b8760 336->324.
+- Lead: cleared six previously uncovered inventory functions with new source
+  and tests: 0x005435d0 EXACT 6/6, 0x00465e60 EXACT 68/68, 0x00510b40 EXACT
+  47/47, 0x004d7f70 RELOC 34/34, 0x0055c700 RELOC 54/54, 0x0041a8d0 RELOC
+  127/127. The 0x465e60 body needed the inlined memset form for the five dword
+  clears; 0x41a8d0 needed an unsigned callee result type for the two unsigned
+  comparisons; 0x510b40 needed its true extent 47, not the inventory 32.
+- Applied three reviewed extent sizes from round 9 evidence: 0x0041b820=78,
+  0x0047d240=86, 0x00506e70=103.
+Reason: delegated reconstruction of the remaining SIZE_MISMATCH, STUB and
+uncovered rows.
+Evidence: .scratch/agent-a2/report.md, agent-b2/report.md, agent-c2/report.md,
+.scratch/mercury/agent-1.md, agent-2.md, agent-3.md; per-row official re-runs in
+.scratch/lead/verify-round2.json and verify-wave3.json.
+Verified: fresh `rebrew test <file> --va <VA>` for every claimed row; `rebrew
+status` RELOC 3513, EXACT 285, NEAR 74, matched 75.0%, coverage 99.3%. Lint:
+7274/7275 files pass, one pre-existing duplicate-VA error in
+GOLDTL.fcn_004dcf50.c, 26 line-length/redundant-cflags warnings.
+Known regression: 0x004f0f60 moved from SIZE_MISMATCH to STUB when a parked
+experiment left a different body; its size was corrected to 137.
+Mercury-3 note: workflow agents accept provider "inception" and model
+"mercury-3"; the plain subagent tool cannot select a model.
+
+## 2026-10-21 round 11: uncovered-row coverage, one NEAR conversion, extent trims
+
+Change: Mercury-3 wave over the 12 remaining standalone uncovered inventory rows
+(0x41b870, 0x42dac0, 0x4d2c80, 0x4edae0, 0x5af140, 0x54c240, 0x597bb0,
+0x5a4960, 0x5a4bb0, 0x416d50, 0x524b50, 0x535bd0): skeletons plus honest partial
+bodies, all recorded STUB; no byte matches, blockers documented. Second wave on
+15 near-match rows converted 0x004284d0 to RELOC 592/592 (do-while
+`while ((*d++ = *s++) != 0)` form); the other rows are register-allocation,
+saving or emission-order ties.
+Reason: continue the delegated reconstruction of the remaining rows.
+Evidence: .scratch/mercury2/agent-{1,2,3}.md, .scratch/mercury3/agent-{1,2,3}.md.
+Verified: fresh `rebrew test src/GOLDTL.fcn_004284d0.c` gives RELOC 592/592.
+Also this round: restored 0x004f0f60 to its pre-experiment body and size 133
+(ret at 0x4f0fdd plus the out-of-line 0x4f0fde..0x4f0f{e4} block), back to
+SIZE_MISMATCH 39/133 from the STUB state a parked edit left behind.
+In flight: reviewed extent trims for 237 rows whose stored SIZE includes
+inter-function alignment nops. Per-row evidence is stored extent == next
+inventory start, trailing 0x90 run >= 2, and capstone showing the last real
+instruction ends exactly at the trimmed end and is ret or jmp. Sizes are
+persisted through `rebrew test --size`, so STATUS stays CLI-recorded. Results
+so far: 25 measured, no promotions, 1 SIZE_MISMATCH to NEAR_MATCHING.
+
+## 2026-10-21 round 12: guaranteed trim wins, SIZE_MISMATCH agent wave
+
+Change: two SIZE_MISMATCH rows whose bodies were already byte-identical were
+converted by trimming the stored extent at the last real instruction:
+- 0x004a5340: SIZE 352 -> 350 (two trailing 0x90), RELOC 350/350, 7 relocs.
+- 0x0045fd70: SIZE 3152 -> 3140 (twelve trailing 0x90), RELOC 3140/3140,
+  47 relocs. This is the largest single byte gain of the delegated waves.
+Reason: a SIZE_MISMATCH row reported at 100 percent match means only the stored
+extent disagrees with the compiled body; the extra bytes are inter-function
+alignment padding.
+Evidence: `rebrew test` showed `mismatches: []` with obj_size 350/3140 before
+the trim; capstone confirmed the last instruction ends at the trimmed boundary
+and the next inventory function starts at the stored end.
+Verified: fresh `rebrew test --va --size` for both rows; `rebrew status` RELOC
+3516, NEAR 77, matched 75.1 percent, byte coverage 48.3 percent.
+Also this round: Mercury-3 wave on 15 SIZE_MISMATCH rows of 176-320 bytes
+(.scratch/mercury4/agent-{1,2,3}.md). All bodies were completed against the
+disassembly but remained parked on register-allocation, x87 ordering, frame
+size or emission-order deltas; no promotions. No store hand-edits, no commits.
+In flight: reviewed extent-trim batch over the remaining candidate rows; it
+persists sizes through `rebrew test --size` and is idempotent on rerun.
+
+## 2026-10-21 round 13: closure pipeline run and link blockers
+
+Change: ran `.scratch/closure/run_closure.py` (client build, data verify,
+whole-binary verify, lint, gate) after pausing function agents. Build results:
+- Client build compiled the full source lists (4890 files per client) and failed
+  at link: GOLDTL 1258 unresolved externals (520 `fcn_*` game functions with no
+  body, 54 `sub_*` placeholder names from partial-body waves, 1154 undefined
+  data symbols), GOLD similarly, exit 2 after 1304 s.
+- Server target: `cmake --build build --target server_dll` compiles and fails at
+  link with exactly 9 unresolved externals, all called from shared TUs:
+  `fcn_005037c0`, `fcn_00503930` and `g_773da8` (friedhof_logic.c),
+  `fcn_0051af00` and `g_679060` (lobbycommands.c), `fcn_0051af00`,
+  `g_14cbca0`, `g_699364`, `g_773d75` (command.c). Those TUs are bound to both
+  client and SERVER modules, and the current bodies use client addresses.
+- Lint: 7286/7287 files pass, one pre-existing duplicate-VA error in
+  GOLDTL.fcn_004dcf50.c, 24 warnings. Gate: FAIL, server.dll and client exes
+  missing after the failed rebuild.
+Reason: reach the file-level checks after the delegated function waves.
+Evidence: `.scratch/closure/closure-summary.json`, `01-client-build.stdout`,
+`server-rebuild.log`, `04-lint.stdout`, `05-gate.stdout`.
+Verified: build logs above; no data/whole-binary/gate step could run because the
+links failed.
+Known loss: the previous `build/Europa1400Gold.exe`, `build/Europa1400Gold_TL.exe`
+and `build/server.dll` artifacts no longer exist and cannot be regenerated until
+the unresolved symbols are fixed. Old green builds were explicitly not accepted
+as completion evidence, but the loss is recorded here.
+
+## 2026-10-21 round 14: server target verified and linked again
+
+Change: re-measured the server target with current sources and repaired its link.
+- `rebrew verify --target server.dll`: 313/316 byte-matched (41 EXACT, 272
+  RELOC), 1 NEAR, 2 SIZE_MISMATCH. Before this round the tree carried 316
+  "matched" claims that had not been re-measured after the client-side edits.
+- Three Mercury-3 agents added `#ifdef REBREW_SERVER` variants in shared TUs,
+  leaving the client bodies untouched: cm_ExAllocGraveyardWorker 52/52,
+  cm_ExAllocAlchemist 52/52, cm_ExSimSpecialAction 262/262 (command.c) and
+  lb_ExPlayerRecordBroadcast 247/247 (lobbycommands.c), all RELOC on the server
+  target. gv_MoveSlotEntry (server 674) and gm_AllocRaum (server 742) got
+  server bodies but remain SIZE_MISMATCH.
+- `cmake --build build --target server_dll` now exits 0 and rebuilds
+  `build/server.dll` (286720 bytes, same as reference). The nine unresolved
+  externals recorded in round 13 are gone.
+Reason: restore the server deliverable and let the gate measure something real.
+Evidence: .scratch/lead/server-verify.json, .scratch/mercury5/agent-{1,2,3}.md,
+.scratch/closure/server-rebuild3.log, .scratch/closure/gate2.log.
+Verified: build exit 0; gate runs and reports 52309 differing bytes (47907 in
+.text), .text VirtualSize 0x22836 vs 0x22846, imports 100/100, exports Exit and
+Init names/VAs identical, size equal. Client rows for the touched functions
+re-tested unchanged (0x4f9300 RELOC 236/236, 0x4cda90 RELOC, 0x509570 NEAR).
+
+## 2026-10-21 round 15: server rows fixed, raw-link residue cut by 83 percent
+
+Change: Mercury-3 agents reconstructed the two remaining server bodies that were
+not just NEAR:
+- gv_MoveSlotEntry server 674/674 RELOC (friedhof_logic.c, #ifdef REBREW_SERVER
+  branch rebuilt from the server disassembly; the client version stays inside
+  #else).
+- gm_AllocRaum server 742/742 RELOC (spiel.c, new REBREW_SERVER branch).
+Reason: the 32-byte short gm_AllocRaum body shifted 35 downstream server
+functions by -0x20 in the raw link.
+Evidence: .scratch/mercury6/agent-1.md, agent-2.md.
+Verified: `rebrew verify --target server.dll` 315/316 byte-matched (274 RELOC,
+41 EXACT); `rebrew verify --text --raw-link` 251/251 correct placement; gate
+reports 9033 differing bytes vs 52309 before, .text VirtualSize exactly
+0x22846, .rdata VirtualSize and imports/exports pass. Remaining failures:
+.data VirtualSize 0x174051c vs 0x174057c, .reloc 0x102cc vs 0x1035c, 2449
+differing bytes inside .text and 6584 outside it, one server row
+gm_GetEntityTableEntry NEAR 55/66, server data 29 DRIFT rows and 7 missing
+globals, 89 missing / 75 extra relocation sites.
+
+## 2026-10-21 round 16: server data drift root-caused and cleared
+
+Change: added the two missing log-string literals to the server gm_AllocRaum
+variant in spiel.c ("gm_AllocRaum(): Too many objects in 'Marktstand'..." and
+"gm_AllocRaum(): ob_LAGERFLAECHE_ALLGEMEIN is missing in ob_MARKTSTAND!").
+The previous body used raw address casts `(char*) 0x10031484` / `0x100314b8`,
+so the literals were never emitted and .data after them shifted by 0x80 bytes,
+which showed up as 29 DRIFT rows and two VirtualSize mismatches.
+Reason: .data byte identity for the server.
+Evidence: reference .data strings extracted at 0x10031484 (52 bytes) and
+0x100314b8 (71 bytes); built image lacked both (search returned no match).
+Verified: `rebrew test spiel.c --target server.dll --va 0x10017c40` stays RELOC
+742/742; rebuilt server.dll differs in 4119 bytes (was 9033); server data verify
+652 rows, 0 mismatched, 0 missing; .rdata and .data byte-identical;
+`rebrew verify --text --raw-link` placement still 251/251; gate: .text/.rdata/
+.data VirtualSize PASS, imports and export names/VAs PASS, Exit and Init bodies
+byte-identical, remaining 11 .text bytes (gm_GetEntityTableEntry NEAR) and
+.reloc VirtualSize 0x102e4 vs 0x10374.
+
+## 2026-10-21 round 17: server relocations matched, residue down to 8 bytes
+
+Change: the two server bodies reconstructed in shared TUs referenced data
+through raw numeric addresses, so the compiled code had the right bytes but no
+base relocations. Round 17 replaced them with the named globals from entity.h/
+game_data.h/rebrew_globals.h: g_slot_table, g_entity_table_end,
+g_worker_entry_count, g_next_object_id, g_current_season,
+g_entity_slot_table, g_output_share, g_entity_id_field, plus the real __FILE__
+literal for the LogMessageInternal file argument in gm_AllocRaum. Also applied
+the best form of gm_GetEntityTableEntry (reversed bounds operands keeps the
+index in EAX).
+Reason: reconcile the 12 missing relocation sites and shrink the residual.
+Evidence: relocs report listed 12 missing sites (11 in gv_MoveSlotEntry, one in
+gm_AllocRaum) all targeting named data rows; the bodies held literal addresses.
+Verified: server bodies stay RELOC (gv_MoveSlotEntry 674/674, gm_AllocRaum
+742/742, gm_GetEntityTableEntry NEAR 58/66, client 0x509570 NEAR 54/65);
+rebuilt server.dll now differs in 8 bytes (was 4119); gate passes size,
+.text/.rdata/.data/.reloc VirtualSize, imports 100/100, export names/VAs, Exit
+and Init bodies and entry point; only whole-file identity fails, at 8 bytes in
+0x100184ff..0x10018506 (bounds-test order inside gm_GetEntityTableEntry).
+Search effort: ~30 hand variants, rebrew match climb, and a 400-generation
+register-focused GA all failed to produce both the EAX allocation and the
+reference test order; the GA never exceeded the NEAR score.
+
+## 2026-10-21 round 18: Mercury attempts on the last 8 bytes and client rows
+
+Change: tried to remove the final 8 differing server bytes and ran a client
+reconstruction wave; no STATUS changed this round.
+- A Mercury-3 agent spent ~40 minutes on gm_GetEntityTableEntry server
+  (0x100184e0) with scripted variant sweeps and a GA; the best remains the
+  reversed-bounds form (58/66, index in EAX, test order swapped). It left the
+  file in that best form.
+- Ten client SIZE_MISMATCH rows were completed against their disassembly
+  (0x00402d00, 0x00407390, 0x00408320, 0x0040ed40, 0x0040f9d0, 0x00412b10,
+  0x00412f10, 0x00413480, 0x00413e00, 0x00415510); all remain SIZE_MISMATCH
+  with allocator/scheduling deltas, six missing data rows (0x415510) and one
+  inventory over-merge (0x40f9d0 with 0x40fb80).
+- Repair: a variant sweep had reverted the gm_AllocRaum __FILE__ literal back to
+  the raw 0x10031004 cast, which silently dropped one base relocation and made
+  server.dll differ in 1984 bytes. Restoring the literal returns the image to
+  8 differing bytes.
+Verified: server rebuild exit 0; cmp reports 8 differing bytes; gate reports 8
+residual bytes and only whole-file identity failing. Client rows re-verified
+unchanged.
+
+## 2026-10-21 round 19: further attempts on the last 8 server bytes
+
+Change: no STATUS change. Tried early-out/goto forms, long and unsigned
+comparison types, pointer-to-word forms, modulo-based index expressions, and
+LLM-seeded GA on the single-function probe. None produced both the EAX
+allocation and the reference bounds-test order. Cross-check: the GOLDTL and GOLD
+targets of the same function show the same target pattern (test/jl first, index
+in EAX) against the same source form that compiles with a mov ecx,eax copy, so
+the original C shape is shared across all three and remains unfound.
+Evidence: .scratch/lead/ged/variants*.json, mercury7 variant logs; GA reports in
+output/ga_runs. rebrew match run --seed-llm reports no configured LLM endpoint.
+Verified: server.dll rebuilt from the 58/66 form and still differs in 8 bytes;
+no other files touched.
+Also started `rebrew verify --target Europa1400Gold.exe` in the background as
+the first full re-measure of the GOLD target after the recent waves.
+
+## 2026-10-21 round 20: GOLD baseline, merged-extent repairs
+
+Change: measured the GOLD target for the first time since the delegated waves
+and started a reviewed merged-extent repair batch.
+- `rebrew verify --target Europa1400Gold.exe`: 4604 rows, 2507 byte-matched
+  (194 EXACT, 2313 RELOC), 1852 STUB, 219 SIZE_MISMATCH, 26 NEAR_MATCHING.
+- Merged-extent repair: 53 metadata rows whose stored SIZE spans one or more
+  later inventory function starts were re-sized to the inventory extent after a
+  capstone check (the inventory size lands exactly on a ret/jmp end). Inner
+  inventory functions missing metadata rows receive skeletons. 14 rows applied
+  before the round closed; the batch is idempotent and still running in the
+  background.
+- One case completed manually: 0x40f9d0 768 -> 430 (ret at 0x40fb7d plus two
+  alignment nops before 0x40fb80) and skeleton for 0x40fb80 (328 bytes).
+Reason: stored-size over-merges make byte matches unreachable and hide
+inventory functions from the work queue.
+Evidence: .scratch/lead/merge-repair-results.json,
+.scratch/lead/merge-repair-skeletons.json, .scratch/lead/gold-verify.json.
+Verified: GOLDTL `rebrew status` after the first repairs reports 5075 inventory
+functions (from 5059), 5038 covered, RELOC 3516, EXACT 285, NEAR 78,
+SIZE_MISMATCH 890, STUB 268. Matched percentage moved 75.1 -> 74.8 only because
+the denominator grew by the newly admitted rows.
+A Mercury wave on six large client rows (0x4033e0, 0x4045c0, 0x4079f0,
+0x4094c0, 0x40a200, 0x411b80) parked all six on frame/scheduling deltas; no
+STATUS changed. Server stays at 8 differing bytes.
+
+## 2026-10-21 round 21: merged-extent batch reviewed, two false shrinks reverted
+
+Change: finished the reviewed merged-extent batch (39 rows) and corrected two
+wrong repairs, then admitted inner inventory functions as work items.
+- 0x00570960 had been shrunk 1926 -> 375 from the inventory split, but its
+  compiled body matches all 1926 bytes (mismatches []) and was RELOC before the
+  repair. Restored SIZE 1926: RELOC 1926/1926.
+- 0x0045c380 had been shrunk 560 -> 468; its body fills 560 bytes. Restored:
+  RELOC 560/560.
+- The repair script now auto-reverts a resize when the compiled object equals
+  the old extent, since that means the inventory entry is an over-split, not the
+  metadata row an over-merge.
+- Inner-function skeletons admitted about ten rows; the bogus metadata block at
+  0x45c554 (inside the 0x45c380 body) was dropped with `rebrew orphans drop`.
+Reason: an over-merged stored size blocks byte matching, while a wrongly shrunk
+row loses an earned RELOC.
+Evidence: .scratch/lead/merge-repair-results.json (39 records),
+.scratch/lead/merge-repair-skeletons.json, status before/after.
+Verified: 0x570960 and 0x45c380 re-tested to RELOC; `rebrew status` RELOC 3517,
+EXACT 285, NEAR 79, SIZE_MISMATCH 888, STUB 313, 5123 rows / 5083 covered.
+Server still differs in 8 bytes; GOLDTL matched 74.2 percent with the larger
+denominator.
+
+## 2026-10-21 round 22: CFLAGS metadata cleanup after flag experiments
+
+Change: removed the last inventory over-split artifacts and normalized
+per-function CFLAGS that had accumulated from flag experiments.
+- Dropped metadata rows and skeleton files for 0x570ad7, 0x570def, 0x570e5b,
+  0x570e8b, 0x570ebb, 0x570eeb, 0x570f75 and 0x571020, all inside the real
+  1926-byte body of 0x570960 (RELOC 1926/1926 after the round-21 revert).
+- 22 SERVER spiel.c rows carried flag strings other than `/O2 /Gd`
+  (`/DREBREW_ALLOW_NAKED /O2 /Gd`, `/O2 /Gd /DREBREW_ALLOW_NAKED`,
+  `/O2 /Gd /Ob1`) because `rebrew test --cflags` persists overrides into
+  metadata. `rebrew build cmake-flags` refuses a TU whose functions resolve to
+  different flags, so cmake configure failed. Normalized those rows to
+  `/O2 /Gd`; every one kept its RELOC or EXACT verdict.
+Reason: restore a configurable build and remove false inventory functions.
+Evidence: .scratch/lead/spiel-cflags-fix.json and -results.json,
+.scratch/lead/merge-repair-results.json.
+Verified: `cmake -S . -B build` exits 0, `cmake --build build --target
+server_dll` exits 0, server.dll still differs in 8 bytes; `rebrew status` RELOC
+3517, EXACT 285, NEAR 79, SIZE_MISMATCH 888, STUB 330, 5123 rows / 5100 covered.
+Flag sweeps with /Ow /Op /Oa /Ot /Ob1 on the last server function all leave it
+at 55 or 58 of 66 bytes, so the 8-byte gap is not a flag choice.
+
+## 2026-10-21 round 23: newly admitted inventory functions implemented
+
+Change: Mercury wave on the inventory functions admitted by the merged-extent
+repairs. Verified promotions and cleanups:
+- 0x0058fa20 RELOC 30/30 (tail-call wrapper; stored extent 32 -> 30, two
+  trailing alignment nops).
+- 0x0044f010 RELOC 205/205.
+- 0x004eb180 RELOC 148/148 (stored extent 160 -> 148, twelve trailing nops).
+- 0x00536b8e NEAR_MATCHING 29/30; the residual byte needs the preceding
+  function in the same TU to reproduce the shared-ret tail merge.
+- Interior fragments confirmed and dropped with `rebrew orphans drop` and
+  source deletion: 0x004c38eb (inside 0x004c3800), 0x004c4268, 0x004d16da,
+  0x0052668b. 0x004c3800 keeps a real prologue and stays a STUB work item.
+Reason: turn the newly admitted inventory rows into matched functions and remove
+false identities created by an over-splitting discovery pass.
+Evidence: .scratch/mercury10/agent-{1,2,3}.md.
+Verified: fresh `rebrew test` for each promoted row; `rebrew status` RELOC 3520,
+EXACT 285, NEAR 80, STUB 322, 5123 rows / 5096 covered; `rebrew lint` one
+pre-existing duplicate-VA error and 59 warnings. Server.dll still differs in 8
+bytes; last-8-byte source-form search continued without a hit.
+
+## 2026-10-21 round 24: fragment cleanup, no new matches
+
+Change: no STATUS gains. Mercury wave on the remaining admitted skeleton rows
+and a batch of 220-320 byte client rows produced no byte matches:
+- 0x00474e5d, 0x00526b37, 0x004c70fa and 0x005b104c are interior fragments of
+  neighbouring functions; their metadata rows were dropped with
+  `rebrew orphans drop` and their skeleton sources deleted.
+- 0x004c3800, 0x005a6e90 and 0x0058f6a0 are real function starts but remain
+  STUB skeletons (the assigned agent returned no report or edits).
+- Client rows 0x0043a720, 0x004488e0, 0x0044b340, 0x00454460 and 0x00455d30
+  reconstruct logically but diverge only in /O2 codegen; parked in
+  .scratch/mercury11/agent-3.md.
+- The reviewed extent-trim batch was resumed and stopped after ten further rows
+  with zero promotions; stored-size trimming appears exhausted as a conversion
+  source.
+Verified: `rebrew status` RELOC 3520, EXACT 285, NEAR 80, SIZE_MISMATCH 888,
+STUB 318, 5123 rows / 5092 covered; server.dll still differs in 8 bytes.
+
 
 ### Refresh docs and charts after reconstruction/relink changes (2026-10-21)
 
@@ -445,3 +841,222 @@ how the result was verified. Reversals are new entries.
   code and data charts to PNG and checked the layout. No native rebuild, fresh
   data verification or full gate ran; stored verdicts remain distinct from the
   raw-file comparison of the existing server image.
+
+## 2026-10-21 round 25: automated matching attempts, layout gap identified
+
+Change: no STATUS change. Evaluated the automated matching engine as an
+alternative to manual body reconstruction:
+- `rebrew match batch --near-miss --threshold 4` selected zero rows (the NEAR
+  rows are further than four bytes from target).
+- `rebrew match batch --improve` over 12 NEAR rows ran 25 minutes and produced
+  no improvement; stopped.
+- Per-row `rebrew match run --mutation-focus register --generations 300` on the
+  closest NEAR rows: 0x004b64b0 (one byte of a 204-byte function) finished with
+  best_score 1400 and exact=false; the loop was stopped after the first row for
+  time.
+Also identified why data generation is blocked: `rebrew test --data`/`layout
+fill` needs a layout package and `layout/Europa1400Gold_TL.exe/rebrew-layout.toml`
+does not exist (`rebrew build layout` has not been run for this target). That
+package is the prerequisite for generating missing data definitions behind the
+client link's unresolved externals.
+Verified: `rebrew status` unchanged (RELOC 3520, EXACT 285, NEAR 80,
+SIZE_MISMATCH 888, STUB 318, 5123 rows / 5092 covered). Server.dll still 8 bytes
+from identity.
+
+## 2026-10-21 round 26: GOLDTL layout package generated, data audit baseline
+
+Change: ran `rebrew build layout` for Europa1400Gold_TL.exe, which wrote the
+previously missing layout package:
+- layout/Europa1400Gold_TL.exe/{header.hex, iat.hex, prefix.hex,
+  bookkeeping.hex, data.hex, reloc.hex, operands.txt, calls.txt,
+  layout.fingerprint, rebrew-layout.toml} and src/Europa1400Gold_TL.exe.def.
+- These files are untracked generated scaffolding; review them before wiring the
+  layout into a build. No source or metadata behaviour changed.
+Reason: `rebrew data layout audit/fill` refused to run without a layout package,
+and that tooling is the path to data-definition recovery on the client side.
+Evidence: .scratch/lead/layout-audit.json; fill dry run reported 48
+initialized-data pads and 201 BSS pads.
+Verified: `rebrew data layout audit` now runs: 626 unowned data rows, 0
+duplicate owners, 1 violation. Server.dll still differs in 8 bytes; GOLDTL
+status unchanged.
+
+## 2026-10-21 round 27: link-symbol identity analysis, no STATUS change
+
+Change: no STATUS change. Analysed the client link failures for actionable
+symbol-identity work and ran one more skeleton wave.
+- From .scratch/closure/01-client-build.stdout: 1231 unresolved symbols, 243 of
+  them `fcn_<VA>` placeholders; 188 placeholders resolve to an existing metadata
+  identity at the same VA under a real attested name (examples:
+  fcn_004012b0 -> _ReadVfsFourDwords, fcn_0041db70 -> _m_alloc,
+  fcn_00426d50 -> _evt_LoadScript).
+- Attempted `rebrew source rename fcn_004012b0 GOLDTL.0x004012b0 --dry-run`:
+  refused with "binding source must be an unbound placeholder". The placeholder
+  must first be registered through the source-registration path; a 188-row bulk
+  binding needs that path reviewed first.
+- Mercury wave: 0x004c3800 (21/371), 0x005a6e90 (28/805) and 0x0058f6a0
+  (226/896) have bodies reconstructed from disassembly but remain
+  SIZE_MISMATCH; 0x0045c554 reconfirmed as an interior fragment.
+Verified: `rebrew status` unchanged (RELOC 3520, EXACT 285, NEAR 80,
+SIZE_MISMATCH 888, STUB 318, 5123 rows / 5092 covered). Server.dll still 8 bytes
+from identity.
+
+## 2026-10-21 round 28: placeholder-to-identity binding started
+
+Change: started binding unresolved `fcn_<VA>` placeholder calls to the existing
+attested identities at the same VA.
+- From the client build log, 243 unresolved `fcn_` symbols; 180 of them have a
+  metadata identity at the same VA under a different (attested) name and are not
+  bound in any module.
+- `rebrew source rename fcn_00402ab0 GOLDTL.0x00402ab0 --dry-run` previews the
+  reference edits and returns an input digest; applying with --expected-digest
+  rewrites only the call sites. Batch run: 36 attempted, 29 applied, 7 refused
+  (ambiguous or already-bound names); remaining list in
+  .scratch/lead/free-placeholders-remaining.json.
+- Fixed a lint regression from the wave-14 file src/fcn_0058f6a0.c: the ADDRESS
+  anchor was above the extern block instead of the definition, which lint
+  reported as a duplicate VA; moved it directly above the function.
+Reason: canonical symbol identities are a prerequisite for a working client
+link, and the placeholder names currently break ~180 external references per
+client build.
+Evidence: .scratch/lead/free-placeholders.json,
+.scratch/lead/bind-placeholders-results.json.
+Verified: rebrew lint back to 1 pre-existing error (E013 in
+GOLDTL.fcn_004dcf50.c) and 60 warnings; `rebrew status` unchanged (RELOC 3520,
+EXACT 285, NEAR 80, SIZE_MISMATCH 888, STUB 318, 5123 rows / 5092 covered);
+server.dll still 8 bytes from identity.
+
+## 2026-10-21 round 29: GOLD client links again
+
+Change: the GOLD client now links and produces build/Europa1400Gold.exe.
+- The sole link failure was `_g_f83654`, an extern-only declaration in
+  src/GOLD.fcn_004a8650.c. The reference stores a zero-initialized module pointer
+  at VA 0x00f83654 (RVA 0xb83654, inside the zero-filled virtual tail of .data),
+  so the declaration is now the definition in its use-site TU.
+- Continued the placeholder binding batch: 53 attempted, 35 applied; 116
+  remaining candidates.
+Reason: restore the GOLD deliverable so the gate and data verification can run
+against a real image.
+Evidence: .scratch/closure/client-rebuild.log, gold-rebuild.log,
+.scratch/lead/gold-data.json.
+Verified: `cmake --build build/clients --target europa1400gold` exits 0 and
+writes build/Europa1400Gold.exe (819,200 bytes). Reference is 2,301,952 bytes, so
+the client is missing the large virtual .data/BSS layout; GOLD data verification
+against the built image reports 321 rows, 0 exact, 32 drift and 50 missing.
+GOLDTL link still reports 1236 unresolved externals. Server.dll still 8 bytes
+from identity; GOLDTL status unchanged.
+
+## 2026-10-21 round 30: client BSS path identified, shared-file write hazard
+
+Change: generated the GOLD layout package and evaluated generated BSS padding for
+the clients.
+- `rebrew build layout --target Europa1400Gold.exe` wrote
+  layout/Europa1400Gold.exe/ and src/Europa1400Gold.exe.def (untracked
+  scaffolding).
+- `rebrew data layout fill --target Europa1400Gold.exe` reports 19 init pads and
+  264 BSS pads, but it writes them into src/bss_layout/bss_late.c, the static
+  library the SERVER links after the CRT. That file is generated for server.dll
+  by scripts/gen_bss_layout.py, so the fill was reverted with
+  `git checkout -- src/bss_layout/bss_late.c` and the server rebuilt; server.dll
+  still differs in exactly 8 bytes.
+- The client size gap is now explicit: reference GOLD is 2,301,952 bytes and the
+  built client 819,200; the missing ~1.48 MB is the zero-filled .data/BSS tail
+  that the server reproduces with bss_head/bss_late objects. Clients have no
+  equivalent generated BSS sources, and rebrew's fill writes into the server's
+  file, so per-target BSS sources are needed first.
+- Upstream gap note: the append to
+  /home/maci/Desktop/Projects/relumea/repos/rebrew/docs/IDEAS-GUILD.md was
+  blocked by the read-only sandbox, so the gap is recorded in docs/TODO.md and
+  here instead.
+Verified: server rebuild exit 0 with 8 differing bytes; tracked bss_layout files
+clean again; GOLDTL/GOLD status unchanged.
+
+## 2026-10-21 round 31: GOLD client source-subset root cause
+
+Change: measured why the GOLD client is far from the reference after linking.
+- Built build/Europa1400Gold.exe: .text virtual 0xb54b6 (742,582) vs reference
+  0x1e9e04 (2,006,532); .data raw 0xe000 vs 0x40000; file 819,200 vs 2,301,952.
+- Source lists: build/clients/rebrew-sources-gold.txt has 4458 entries,
+  goldtl 4945. The GOLD target only receives files that carry GOLD module rows,
+  so about 487 shared implementation files (bound only to GOLDTL rows) are
+  absent from the GOLD link. That missing code plus the raw .data gap explains
+  the file-size difference.
+- Cross-target completion is blocked: `rebrew source import-related --from
+  Europa1400Gold_TL.exe --target Europa1400Gold.exe --candidates-only --dry-run`
+  fails with "cannot extract a conditional definition from a multi-function
+  file". Either the shared multi-function TUs need splitting or the destination
+  module anchors have to be added another way.
+Verified: section tables read with LIEF from build/Europa1400Gold.exe and the
+reference; server.dll unchanged at 8 differing bytes; GOLDTL/GOLD status
+unchanged.
+
+## 2026-10-21 round 32: client links are generated-stub scaffolds
+
+Change: identified why the GOLD client image is so far from its reference even
+after it links.
+- CMakeLists.txt:420/464 add stubs/gold/symbol_stubs.c and
+  stubs/goldtl/symbol_stubs.c to the client links. These are AUTO-GENERATED by
+  `rebrew build symbol-stubs` and explicitly not part of the matching pipeline.
+  GOLD's stub file has 6727 lines: 944 stub functions and 947 stub globals; the
+  GOLD link map attributes 2890 of 6640 function symbols to symbol_stubs.c.obj,
+  which explains the 742,582-byte built .text.
+- 686 of the GOLD stub functions carry a metadata identity by name, but callers
+  in shared sources use GOLDTL-module placeholder symbols (`fcn_<GOLDTL VA>`)
+  that are not defined in the GOLD link. There is no automatic bridge: every
+  GOLDTL row with a `_fcn_<VA>` symbol also has a placeholder name, so the
+  shared-attested-name mapping does not exist yet.
+- `rebrew source import-related --from Europa1400Gold_TL.exe --target
+  Europa1400Gold.exe` reports no unmatched functions in GOLD (so it cannot
+  import), and the bulk `--candidates-only` run is blocked by
+  "cannot extract a conditional definition from a multi-function file".
+Verified: stub file line/definition counts, GOLD link map composition
+(symbol_stubs.c.obj 2890 symbols), server.dll unchanged at 8 differing bytes,
+GOLDTL/GOLD status unchanged.
+
+## 2026-10-21 round 33: fresh verify baseline, stub mapping analysis
+
+Change: re-verified the whole GOLDTL target after the rename/repair rounds and
+analysed the client stub symbols.
+- `rebrew verify --target Europa1400Gold_TL.exe`: 5123 rows, 3804 game rows
+  byte-matched (3519 RELOC + 285 EXACT; the 3835 headline includes 31 library
+  rows), NEAR 81, SIZE_MISMATCH 904, STUB 297, EXTRACT_ERROR 5 (all
+  pre-existing: one decorated `@fcn_0045a7f9@4` row plus four D3DX8 external
+  band rows), MISSING_SIZE 1.
+- Fixed the only compile error in the run: src/GOLDTL.fcn_00519190.c declared
+  `int __cdecl strncat(char*, char*, unsigned)` alongside <string.h>, producing
+  C2040; the redundant declaration was deleted. The row now compiles.
+- Stub mapping (analysis only, .scratch/mercury13/agent-{1,2}.md): GOLD stub
+  file has 938 function stubs - 4 attested twins, 687 placeholder-only (a
+  GOLDTL row exists at the same VA but both names are placeholders), 50
+  "VA-twin" placeholders whose GOLDTL row at that VA carries an attested name,
+  197 without any row. GOLDTL stub file has 303 function stubs - 0 attested, 31
+  placeholder-only, 6 VA-attested, 266 no-row. GOLDTL.fcn_004a1130.c is the top
+  GOLD stub consumer (102 references).
+Reason: know exactly which symbols the client scaffolds hide and which carry a
+usable canonical name.
+Verified: status/verify figures above; server.dll unchanged at 8 differing
+bytes; no metadata hand-edits.
+
+## 2026-10-21 round 34: TU-context hypothesis refuted
+
+Change: no STATUS change. Two agents tested whether MSVC 6 /O2 global
+optimization makes gm_GetEntityTableEntry's register allocation depend on the
+translation-unit context.
+- Method: isolated single-function TUs and copies of the whole spiel.c, dummy
+  prototypes before/after the function, first/last position, measured with the
+  server target's real plain msvc-6.0-sp5 profile; probes under .scratch/ only,
+  no src edits, measurements with --no-promote where applicable.
+- Result: the hypothesis is refuted. Isolated and whole-file compilations are
+  byte-identical, so the TU context does not change codegen. msvc-6.0-sp5-pp
+  gives 25/66, confirming the reference was not built with the processor-pack
+  profile. The reference shape (test order >=0 then <16 with the index kept in
+  EAX) is unreachable from the tried forms; the 58/66 reversed-bounds form
+  remains the best.
+- Also quantified the cross-target naming gap: 920 GOLD stub placeholders, 743
+  mapping to a GOLDTL row at the same VA, but only 19 of those VAs exist in the
+  GOLD module; 56 placeholders have a GOLDTL attested name at their VA.
+- Lint: 1 pre-existing E013 error, 111 warnings (59 W005 missing stub blockers,
+  26 W029 redundant cflags that no CLI can clear, 13 W027, plus W016/W020/W021/
+  W031). `--cflags ""` does not clearing an override.
+Verified: agents' measurements under .scratch/mercury14/ and .scratch/tu/; no
+src or metadata writes; server.dll unchanged at 8 differing bytes; GOLDTL
+matched count unchanged at 3804.

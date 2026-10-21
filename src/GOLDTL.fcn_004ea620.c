@@ -6,7 +6,7 @@ extern char* g_773da8;
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00508e40(int);
-int __cdecl fcn_0050dac0(unsigned short);
+int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
 void __cdecl fcn_004ea4b0(void*, unsigned int);
 void __cdecl fcn_004ea560(void*, unsigned int);
@@ -117,11 +117,11 @@ void __cdecl fcn_004ea620(void)
 	if (b[1] != -1 || a[1] != -1) {
 		existing = fcn_00508e40(b[1] != -1 ? b[1] : a[1]);
 		if (existing != 0) {
-			value = fcn_0050dac0(*(unsigned short*) existing);
+			value = gm_WalkEntityChain(*(unsigned short*) existing);
 		}
 	}
 	for (i = 0; i < count; i++) {
-		n = fcn_0050dac0(*(unsigned short*) cand[i]);
+		n = gm_WalkEntityChain(*(unsigned short*) cand[i]);
 		if (value < n) {
 			value = n;
 			best = (char*) cand[i];

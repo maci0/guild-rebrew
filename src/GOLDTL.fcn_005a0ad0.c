@@ -9,15 +9,14 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 /* ADDRESS: GOLDTL 0x005a0ad0 */
 void __cdecl fcn_005a0ad0(int a, unsigned char* p)
 {
-	int i;
-	int y;
-	int x;
+	int i, y, x;
 
 	fcn_0046f2c0(g_772514, 1);
 	fcn_00519190(g_6a9694, a);
-	i = 0;
 	y = 0x1d;
 	x = 0x1c;
+	i = 0;
+
 	if (*(char*) (*(int*) p + 2) == 6) {
 		while (i < p[4]) {
 			fcn_0046f740(x, y, p[0xc + i] + 0x75a, g_772514);
