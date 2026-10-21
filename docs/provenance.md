@@ -1413,3 +1413,12 @@ Project tests: 34 passed plus 3 subtests, including ABI-placeholder manifest
 counting. Lint: zero errors for all targets, zero server/Gold warnings, two TL
 inline-assembly warnings. Compiler warnings remain. The full gate and game
 execution were not rerun. Receipts: .scratch/linkable-clients-20261021/.
+
+
+## 2026-10-22 — pin the linked-checkpoint graphics
+
+Change: pin the three README graphics to `33b4d029b04b3c9a71268f2c455bbb8c014f4e93`.
+Reason and decision: the maintainer requested current progress graphics; use
+the immutable commit containing the linked-client data snapshot so cached
+older images are not reused. Verification: SVG XML, local Markdown targets
+and both linked images/maps checked; no source or metadata change.
