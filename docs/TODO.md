@@ -19,9 +19,9 @@ The [README and charts](../README.md#reconstruction-status) use one
   client. GoldTL has 338 displaced symbols; Gold has 304. [Data metrics](../README.md#data-verification)
   separate bytes, symbols and EXACT reference-address verdicts.
 - All 33 project tests and 3 subtests pass. The complete gate and client
-  rebuilds have not been rerun. Integration-worktree lint has zero errors;
-  warnings remain (server 2, GoldTL 27, Gold 23), mainly stale type context,
-  generated guidance and two unsupported inline-assembly helpers.
+  rebuilds have not been rerun. Main-checkout lint has zero errors and
+  zero server warnings. GoldTL and Gold have three warnings each: stale type
+  evidence and, on GoldTL, two unsupported inline-assembly helpers.
 
 The merged source includes the accepted server variants and reviewed client
 reconstructions. Local backup branches preserve generated padding/byte-copy

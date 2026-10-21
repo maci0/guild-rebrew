@@ -1238,3 +1238,26 @@ without reusing GitHub's cached older images. Requested by the maintainer.
 Verification: the SVGs parse, local documentation link targets exist, and the
 README points to the commit containing the refreshed assets. No source or
 metadata change.
+
+
+## 2026-10-21 — verify the integrated main checkout
+
+Change: fast-forward the primary main checkout to the reviewed integration and
+refresh its managed server verification records. Preserve the previous complete
+draft in local backup refs and a stash; do not restore its quarantined layout
+and storage experiments over the integrated tree. Update tracker and handoff
+with validation from the primary checkout rather than worktree-path warnings.
+
+Reason and decision: complete the maintainer's merge-and-push request with a
+reproducible build in the normal project directory.
+
+Verification: configure and native server build exit 0 using unshare, at most two
+compiler processes. The raw DLL again equals the original SHA-256
+`3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
+Fresh `verify --functions --data --text --raw-link --whole-binary` passes all
+316 functions, 652 compared data symbols and the complete PE comparison.
+Project tests: 33 passed plus 3 subtests. Main-checkout lint: zero errors for all
+three targets; server has zero warnings, GoldTL and Gold have three each. The
+client warnings are stale type evidence and two unsupported inline-assembly
+helpers. Compiler warnings remain. Full client builds and the full gate were
+not rerun. Receipts: `.scratch/integrate-all-20261021/main-*`.

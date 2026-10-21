@@ -11,7 +11,8 @@ The integrated server is freshly built and byte-identical: SHA-256
 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
 Verification passes 316/316 functions and all 652 compared data symbols, with
 complete PE, import, relocation, layout and function-placement agreement.
-All 33 project tests and 3 subtests pass.
+All 33 project tests and 3 subtests pass. Main-checkout lint has zero errors,
+zero server warnings and three warnings per client.
 
 The [README charts](../README.md#reconstruction-status) and
 [tracker snapshot](TODO.md#status-snapshot-2026-10-21-1202-utc) use the integrated
