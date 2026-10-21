@@ -7,16 +7,18 @@ toolchains. The [objective](goal.md): reproduce every byte of the server,
 Gold and GoldTL from shared source.
 
 > [!IMPORTANT]
-> **Work in progress.** The server has a byte-identical raw build.
+> **Work in progress.** The current server raw build differs by **8 bytes**.
+> Earlier server builds matched every byte.
 > **Gold and GoldTL are comparison scaffolds, not playable or byte-identical.**
+> Both current client executables are absent after failed relinks.
 > Source recovery, unsupported assembly and provider/storage work remain.
 > The [last completed server gate](docs/TODO.md#verified-checkpoint) confirmed
 > complete file equality; its 36 unsupported assembly findings kept the gate red.
 
 The [latest recorded work](docs/TODO.md)
-covers resumed client reconstruction waves. Their object results are included
-below; a completed rebuild and raw-link validation of the current sources remain
-pending. See the [handoff](docs/HANDOFF.md).
+covers resumed reconstruction waves and the remaining server regression.
+Stored object results are included below; client relinks and full validation of
+the current sources remain pending. See the [handoff](docs/HANDOFF.md).
 
 **[Start here](#get-started)** &nbsp; · &nbsp;
 **[Build & compare](#build-and-compare)** &nbsp; · &nbsp;
@@ -30,29 +32,30 @@ pending. See the [handoff](docs/HANDOFF.md).
 
 | Target | Code accounted for | C functions matched | Raw file at original offsets |
 | --- | ---: | ---: | ---: |
-| **Server** | **100.0%** | 251 / 251 · 100.0% | 100.0% |
-| **GoldTL** | **47.8%** | 3,771 / 5,053 · 74.6% | 1.2% |
-| **Gold** | **22.9%** | 2,469 / 4,592 · 53.7% | 1.1% |
+| **Server** | **99.9%** | 250 / 251 · 99.6% | 99.9% |
+| **GoldTL** | **48.4%** | 3,805 / 5,123 · 74.2% | N/A |
+| **Gold** | **22.8%** | 2,466 / 4,592 · 53.7% | N/A |
 
 **Code accounting** is Rebrew's byte-based measure of virtual `.text`: matched
 functions, identified libraries and alignment padding. **Function matches**
 give every function equal weight, regardless of size. **Raw-file agreement**
 compares the existing built file with the reference at original offsets;
 displaced code still differs there. None of these alone establishes completion.
+**N/A** means the configured built image is missing; an older score is not reused.
 
 <!-- progress:start -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/cd579ebbb667093391d5621327280668e55bb597/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/ad7565511984c04cf2884097c3e52128286427f4/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
   <p align="center">
-    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/cd579ebbb667093391d5621327280668e55bb597/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
+    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/ad7565511984c04cf2884097c3e52128286427f4/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
   </p>
 </details>
 <!-- progress:end -->
 
-<sub>Snapshot refreshed 2026-10-20 18:18 UTC from
+<sub>Snapshot refreshed 2026-10-21 12:02 UTC from
 <code>rebrew status --all-targets --json</code>.
 These are stored verdicts, not fresh compilation or raw-link verification.
 Libraries, semantic PROVEN verdicts and whole-function assembly matches are
@@ -66,25 +69,26 @@ Remaining work in the same snapshot:
 
 | Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | EXTRACT_ERROR | Without source |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| **GoldTL** | 278 | 876 | 76 | 1 | 51 |
-| **Gold** | 1,864 | 217 | 13 | 0 | 3 |
+| **GoldTL** | 318 | 888 | 80 | 1 | 31 |
+| **Gold** | 1,853 | 218 | 26 | 0 | 3 |
 
 A partial body or repaired inventory boundary can change these categories
 without earning a match. Function percentages measure catalog entries, not
-matched code bytes or gameplay completeness. The existing server file matches
-its reference, but its saved function-verification run predates the current
-working tree; the full gate has not been rerun for this snapshot.
+matched code bytes or gameplay completeness. The current server file agrees in
+286,712 of 286,720 bytes; the remaining eight bytes are in `.text`. Client
+raw-file comparison is unavailable until their links succeed. The full gate has
+not been rerun for this snapshot; data bars retain stored verification results.
 
 ## Data verification
 
 | Target | Initialized data bytes verified | Verified symbols (incl. BSS) | EXACT at reference VA | Displaced symbols |
 | --- | ---: | ---: | ---: | ---: |
 | **Server** | 66,664 / 66,664 · 100.0% | 547 / 547 | 409 | 0 |
-| **GoldTL** | 0 / 335,380 · 0.0% | 1 / 361 | 0 | 332 |
+| **GoldTL** | 0 / 335,380 · 0.0% | 2 / 361 | 0 | 338 |
 | **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 304 |
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/cd579ebbb667093391d5621327280668e55bb597/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/ad7565511984c04cf2884097c3e52128286427f4/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
 </p>
 
 Byte coverage counts each initialized `.data`/`.rdata` byte once; it excludes
@@ -233,10 +237,12 @@ cmp original/Server/server.dll build/server-example/server.dll
 sha256sum original/Server/server.dll build/server-example/server.dll
 ```
 
-`cmp` prints nothing and exits 0 when every byte agrees. Both hashes should
-match the reference above. This recipe was checked on 2026-10-18 in a separate
+`cmp` prints nothing and exits 0 when every byte agrees. Matching hashes establish
+file identity. This recipe was checked on 2026-10-18 in a separate
 clean checkout containing only the server reference: the rebuilt DLL matched
-every byte. If your hashes differ, your build has not reproduced the reference.
+every byte. That is a historical checkpoint: the latest working-tree server
+build differs by eight bytes. If your hashes differ, your build has not
+reproduced the reference.
 
 Then ask Rebrew to compare data, PE sections, imports, exports, resources,
 headers and layout against the same reference:
@@ -256,8 +262,8 @@ the [reconstruction rules](AGENTS.md). The [server gate](scripts/gate.sh)
 performs broader checks using the conventional `build/` tree; the
 [current checkpoint](docs/TODO.md#verified-checkpoint) documents its remaining
 lint failures. For Gold and GoldTL, use the separate
-[client build recipe](stubs/README.md#build). Those scaffolds still differ from
-their references.
+[client build recipe](stubs/README.md#build). Their unresolved links must be
+repaired before fresh binary comparisons can run.
 
 ## Optional coverage dashboard
 
