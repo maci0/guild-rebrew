@@ -7,8 +7,8 @@ toolchains. The [objective](goal.md): reproduce every byte of the server,
 Gold and GoldTL from shared source.
 
 > [!IMPORTANT]
-> **Work in progress.** The current server raw build differs by **8 bytes**.
-> Earlier server builds matched every byte.
+> **Work in progress.** The latest working-tree server build differs by **8 bytes**.
+> The accepted 1.4.0 checkpoint has a byte-identical server build.
 > **Gold and GoldTL are comparison scaffolds, not playable or byte-identical.**
 > Both current client executables are absent after failed relinks.
 > Source recovery, unsupported assembly and provider/storage work remain.
@@ -57,6 +57,8 @@ displaced code still differs there. None of these alone establishes completion.
 
 <sub>Snapshot refreshed 2026-10-21 12:02 UTC from
 <code>rebrew status --all-targets --json</code>.
+This snapshot includes uncommitted reconstruction work, beyond the accepted
+[1.4.0 checkpoint](https://github.com/maci0/guild-rebrew/commit/447bc4d77784bbb37de770947cda8001a1af3c6d).
 These are stored verdicts, not fresh compilation or raw-link verification.
 Libraries, semantic PROVEN verdicts and whole-function assembly matches are
 excluded from the C totals. Inline assembly may remain.</sub>
