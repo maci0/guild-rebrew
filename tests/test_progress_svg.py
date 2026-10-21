@@ -41,9 +41,12 @@ def test_progress_separates_assembly_and_semantic_verdicts() -> None:
         "628.65",
     ]
     assert "2 assembly matches · 3 functions still to match" in text
-    assert "Raw file differs · comparison scaffold" in text
+    assert "Raw file differs from reference" in text
+    assert "comparison scaffold" not in text
     target["file"]["matched_bytes"] = 100
     assert "Raw file equals reference" in render(report, "2026-10-18")
+    target["functions"]["total"] = 8
+    assert "1 function still to match" in render(report, "2026-10-18")
     target["naked_matched"] = 8
     with pytest.raises(ValueError, match="Inconsistent function counts"):
         render(report, "2026-10-18")

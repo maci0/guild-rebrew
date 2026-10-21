@@ -264,7 +264,8 @@ def render(report: dict, date: str, *, data: bool = False) -> str:
         text(
             40,
             y + 176,
-            f"{assembly:,} assembly matches · {total - matched:,} functions still to match",
+            f"{assembly:,} assembly matches · {total - matched:,} "
+            f"function{'s' if total - matched != 1 else ''} still to match",
             11,
         )
         equal = bool(image.get("total_bytes")) and (
@@ -274,7 +275,7 @@ def render(report: dict, date: str, *, data: bool = False) -> str:
             "Raw file equals reference"
             if equal
             else (
-                "Raw file differs · comparison scaffold"
+                "Raw file differs from reference"
                 if image.get("built")
                 else "No built image compared"
             )

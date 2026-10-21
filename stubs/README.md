@@ -1,6 +1,6 @@
 # Client comparison builds
 
-Gold and GoldTL link as raw PE32 executables with MSVC maps:
+Gold and GoldTL build recipes produce raw PE32 executables with MSVC maps:
 
 - `build/Europa1400Gold.exe` and `build/Europa1400Gold.map`
 - `build/Europa1400Gold_TL.exe` and `build/Europa1400Gold_TL.map`
@@ -13,10 +13,12 @@ unresolved/duplicate-symbol link.
 
 ## Build
 
-The latest full build linked both clients under unshare, followed by incremental
-links for the reviewed GUI-provider corrections. The links have no linker
-warnings; compiler warnings and assembly lint remain open. See
-[current work](../docs/TODO.md) for receipts and remaining differences.
+The current client executables are absent after later relinks failed. Repair
+the unresolved links before running fresh image comparisons; the README now
+reports raw-file agreement as N/A. Earlier successful unshare builds and their
+GUI-provider corrections are historical checkpoints. Compiler warnings and
+assembly lint remain open. See the [status snapshot](../README.md#reconstruction-status)
+and [current work](../docs/TODO.md) for results and remaining work.
 
 Complete the root [setup steps](../README.md#get-started), then run from the
 project root. Use this checkout's `.venv` (`uv sync`). No sibling Rebrew

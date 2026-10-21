@@ -413,3 +413,35 @@ how the result was verified. Reversals are new entries.
   Rendered the data SVG to PNG and checked the complete layout. Native builds,
   fresh data verification and the full gate were not run; concurrent source,
   inventory and managed-metadata edits are outside this change.
+
+
+### Refresh docs and charts after reconstruction/relink changes (2026-10-21)
+
+- Change: updated README code/data tables and all three graphics from one fresh
+  status report, plus a current tracker snapshot, handoff and client build notes.
+  Replaced the obsolete current byte-identical-server claim with the measured
+  eight-byte regression; unavailable client raw images now display N/A.
+  The chart's differing-file caption is target-neutral rather than calling
+  every differing binary a comparison scaffold. Fixed the singular work-item
+  caption now visible for the server's one remaining function mismatch.
+- Why: user requested updated docs/graphs, commits and a push. Later rebuilds
+  changed the existing images and inventory; historical build scores cannot
+  describe missing or changed current artifacts.
+- Evidence: `.scratch/readme-refresh-2026-10-21-latest/status.json`, timestamp
+  2026-10-21 12:02 UTC, SHA-256
+  `7e95d2852534d9a03bb7f3b835707e723e896ab5d0170dd0bf869cc132d597c5`.
+  Server: 250/251 C matches, 141,316/141,382 accounted code bytes, and
+  286,712/286,720 raw-file bytes equal. GoldTL: 3,805/5,123 C matches (74.2%),
+  48.4% code accounting. Gold: 2,466/4,592 C matches (53.7%), 22.8% code
+  accounting. Both configured client executables were absent. Stored
+  initialized-data byte verification remains server 100.0%, clients 0.0%.
+- Decision owner: user authorized this refresh, commit and push. Preserve
+  concurrent source, inventory, metadata and unrelated documentation changes;
+  only the new tracker snapshot and this ledger entry are staged from the two
+  already-modified documents.
+- Verification: 32 selected tests and 3 subtests pass, including missing-image
+  handling and the revised differing-file label. Ruff, XML parsing, report/map/
+  table reconciliation and scoped whitespace checks pass. Rendered the updated
+  code and data charts to PNG and checked the layout. No native rebuild, fresh
+  data verification or full gate ran; stored verdicts remain distinct from the
+  raw-file comparison of the existing server image.

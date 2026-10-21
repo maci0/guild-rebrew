@@ -1,5 +1,25 @@
 # Current work
 
+## Status snapshot (2026-10-21 12:02 UTC)
+
+The [README and charts](../README.md#reconstruction-status) now use one
+`rebrew status --all-targets --json` report from the current working tree.
+
+- Server: 250/251 C matches, 99.9% code accounting, and **8 differing raw-file
+  bytes** out of 286,720. Earlier whole-file identity is a historical checkpoint.
+- GoldTL: 3,805/5,123 C matches (74.2%), 48.4% code accounting.
+  Gold: 2,466/4,592 C matches (53.7%), 22.8% code accounting.
+- Both configured client executables are absent after failed relinks. Their
+  raw-file metric is N/A; older scaffold scores are not reused.
+- Stored initialized-data verification remains 100.0% for server and 0.0% for
+  each client. GoldTL has 338 displaced symbols; Gold has 304.
+  [Data metrics](../README.md#data-verification) separate bytes, symbols and EXACT
+  reference-address verdicts.
+
+This documentation refresh performs no compilation or new data verification.
+The source/inventory/metadata reconstruction changes remain separate; rebuild,
+compare and run the gate before claiming current whole-file identity.
+
 The [three-binary objective](../goal.md) is incomplete. This checkpoint records
 Goal110 checks on **2026-10-18**, completed client builds on **2026-10-19**,
 the later, interrupted GUI text-creator integration, and the resumed delegated

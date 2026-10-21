@@ -5,6 +5,16 @@ Read [current work](TODO.md), [the objective](../goal.md), then the
 counts. The project default target is GoldTL; name `server.dll` for the server.
 Historical commands and measurements are in [goal history](goal-history.md).
 
+## Current status snapshot (2026-10-21 12:02 UTC)
+
+The current server raw build differs by **8 bytes**; both configured client
+executables are absent after failed relinks. Earlier byte-identical server and
+successful client builds below are historical checkpoints, not current images.
+The [README charts](../README.md#reconstruction-status) and
+[tracker snapshot](TODO.md#status-snapshot-2026-10-21-1202-utc) report the current
+stored verdicts. Repair the links and run fresh image checks and the gate before
+claiming whole-file identity. This refresh itself performs no compilation.
+
 ## Paused state before the 2026-10-19 resume
 
 The user requested that delegated work finish and reconstruction stop. All
