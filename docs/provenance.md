@@ -1512,3 +1512,53 @@ gate. Receipts: `.scratch/data-readme-refresh-20261025/`.
 Decision: point the README to immutable SVGs at `fc06532df21c8f0dc7a3441d92389a82261cec29`
 for the requested data/status refresh. All charts share the same status report;
 XML and Markdown checks pass. No source, build or metadata changes.
+
+## 2026-10-25 — resolve the server's remaining data placement records
+
+Decision owner: maintainer request to fix the 138 VERIFIED-only server records
+and put the reusable tool repair upstream. Rebrew commit
+7ed82ba28a48448bb0529c673f36f1144fe4921d, release 6.1.1, adds checked private
+COFF placement, bounded backing-offset alias placement, and complete
+section-relative span placement. Ambiguous map names, unsupported fixups,
+changed fixed bytes, conflicting bases, unbounded aliases and incomplete spans
+do not supply placement evidence. Receipts record method and linked VA.
+
+Project identity repair: the complete cm_ExChangeDesire object/literal audit
+checks both native references to 0x10025690 and all eight bytes of the double.
+Bind the existing analysis row to compiler literal
+__real@8@4008fa00000000000000 and its actual emitting TU, command.c, through a
+digest-guarded data-set operation. No C definition, padding or linker symbol
+was created. CRT storage stays in stock LIBCMT. Layout spans remain intervals,
+not storage owners.
+
+The 138 chart records now have placement evidence: 123 section intervals, four
+bounded aliases, ten private data symbols and the one reviewed compiler
+literal. Clean-wheel verification passes 652/652 raw records with zero
+unplaced, and status reports 547/547 EXACT after its normal exclusions. All
+66664 initialized data bytes are verified. The complete 286720-byte server
+DLL remains SHA-256 3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+
+Upstream validation: 13146 tests pass, 40 skip; mypy passes 286 source files;
+ruff, import-cycle/layering checks and commit/push hooks pass. The exact CI
+wheel passes provenance and clean-install smoke checks. Guild tests: 36 plus
+3 subtests pass. Focused lint has zero errors and two pre-existing warnings
+(redundant client flags and generated guidance drift). Update the data chart
+and explain its record/interval denominator. Source and code-chart snapshots
+remain separate; no client rebuild, gameplay or full server gate is claimed.
+Receipts: `.scratch/server-data-placement-20261025/`.
+
+Release validation: all six CI jobs pass at
+https://github.com/maci0/rebrew/actions/runs/40124336632. Publish the exact
+CI artifacts as https://github.com/maci0/rebrew/releases/tag/v6.1.1 and pin
+Guild's direct prove/BinSync dependencies to that wheel. Keep the existing
+Recoverage 8.4.2 pin and exclude only its obsolete embedded engine URL; Guild
+supplies the engine. Lock/sync resolves 90 packages and changes only installed
+Rebrew 6.0.4 to 6.1.1. Lock check, installed dependency check and prove/BinSync/
+Recoverage imports pass. Normal installed-CLI verification again yields all
+652 records EXACT and the same complete raw DLL. No development-path override
+is required.
+
+The global `rebrew` tool is also upgraded to 6.1.1, preserving its prove/BinSync
+extras and interpreter. Its ordinary `rebrew verify --data` invocation repeats
+652 EXACT records with zero unplaced. Other active compiler environments were
+not modified.

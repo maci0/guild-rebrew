@@ -89,9 +89,12 @@ or full gate ran for this data-only refresh.
 
 ## Data verification
 
-| Target | Initialized data bytes verified | Verified symbols (incl. BSS) | EXACT at reference VA | Displaced symbols |
+Data placement refreshed 2026-10-24 19:24 UTC with the upstream Rebrew 6.1.1 fix.
+The server now reaches **100% on all three data bars**.
+
+| Target | Initialized data bytes verified | Verified records (incl. BSS/views) | EXACT at reference VA | Displaced records |
 | --- | ---: | ---: | ---: | ---: |
-| **Server** | 66,664 / 66,664 · 100.0% | 547 / 547 | 409 | 0 |
+| **Server** | 66,664 / 66,664 · 100.0% | 547 / 547 | 547 | 0 |
 | **GoldTL** | 0 / 335,380 · 0.0% | 2 / 361 | 0 | 339 |
 | **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 304 |
 
@@ -100,16 +103,20 @@ or full gate ran for this data-only refresh.
 </p>
 
 Byte coverage counts each initialized `.data`/`.rdata` byte once; it excludes
-BSS and copied imports. Symbol totals include BSS and views, so a verified
-symbol need not contribute initialized bytes. `EXACT` is a subset of verified
-records with byte agreement at the reference address; displaced records count
-as drift. These are stored verdicts from the same snapshot as the code charts,
-not evidence of storage ownership. The server has a fresh 652/652 data check;
-Gold data was also rechecked. GoldTL entries retain the 2026-10-24 15:27 UTC
-check while its audit EXE is unavailable; they are not a new check of a missing
-image. The most recent recorded TL link failed with 20 unresolved symbols; a
-rebuild is underway.
-Content matches alone do not establish correct placement or storage ownership.
+BSS and copied imports. Record totals include BSS and views, so a verified
+record need not contribute initialized bytes. EXACT requires matching bytes at
+a checked reference address. Placement comes from link-map symbols, private
+symbols recovered from matching COFF sections, bounded backing-object offsets,
+or section-relative layout intervals. A layout span is an interval, not a new
+allocation. These checks do not establish source or storage ownership.
+
+The previous 138-record server gap is resolved: 123 layout intervals, four
+backing-offset aliases, ten private symbols and one reviewed compiler literal.
+No storage or linker symbols were added, and no binary bytes changed. The fresh
+server check passes all 652 raw records; the chart excludes imports and other
+records outside its 547-record denominator. Client data results remain from
+their last stated checks below. GoldTL's audit image is still unavailable during
+its rebuild, so it has no fresh data result here.
 
 Gold uses `build/Europa1400Gold.exe`; GoldTL is configured to use
 `build-goldtl-audit/Europa1400Gold_TL.exe`. Each needs its matching `.map`.
@@ -123,15 +130,16 @@ uv run rebrew verify --data --target Europa1400Gold_TL.exe
 
 Raw-image diagnostics, with each measurement time:
 
-| Target | Content matches | Differs | Missing | No comparable file bytes | Checked (UTC) |
+| Target | Content matches | Differs | Missing | Not comparable | Checked (UTC) |
 | --- | ---: | ---: | ---: | ---: | --- |
-| **Server** | 652 | 0 | 0 | 0 | 2026-10-24 18:37 |
+| **Server** | 652 | 0 | 0 | 0 | 2026-10-24 19:24 |
 | **GoldTL** | 125 | 51 | 15 | 172 | 2026-10-24 15:27 (previous build) |
 | **Gold** | 83 | 30 | 49 | 159 | 2026-10-24 18:37 |
 
-These diagnostics include imports and records excluded from coverage totals;
-they are not the same denominator as the charts. BSS or unavailable file bytes
-are not counted as matching zeros. Most client symbols are displaced, so the
+These diagnostics include imports and bounded virtual-tail checks excluded
+from initialized-byte coverage. BSS verification contributes no file bytes;
+unknown or out-of-image extents stay uncomparable. Most client records are
+displaced, so the
 stricter charts retain zero client EXACT data placements. See the
 [comparison-build guide](stubs/README.md) for placeholders and build commands.
 
@@ -192,15 +200,15 @@ the namespace check alone does not establish compatibility.
 ```sh
 git clone https://github.com/maci0/guild-rebrew.git
 cd guild-rebrew
-uv python install 3.13
-uv venv --python 3.13
+uv python install 3.14
+uv venv --python 3.14
 uv sync
 uv run rebrew --version
 ```
 
-`uv sync` installs pinned Rebrew 5.4.0 and the project dependencies into
+`uv sync` installs pinned Rebrew 6.1.1 and the project dependencies into
 `.venv` from the public release wheels. This walkthrough was verified with
-Python 3.13.16. Run the remaining commands from this repository root; `uv run`
+Python 3.14.9. Run the remaining commands from this repository root; `uv run`
 uses that environment without activating it.
 
 ### 3. Supply the original server DLL
@@ -304,7 +312,7 @@ repaired before fresh binary comparisons can run.
 
 ## Optional coverage dashboard
 
-[Recoverage](https://github.com/maci0/recoverage) 8.2.0 explores this
+[Recoverage](https://github.com/maci0/recoverage) 8.4.2 explores this
 checkout's live coverage records, source and reference binaries. After creating
 the project environment, install that optional dashboard into the same `.venv`
 and start it from the repository root:

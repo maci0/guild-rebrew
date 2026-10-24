@@ -2,17 +2,21 @@
 name = "guild-rebrew"
 version = "1.4.0"
 description = "Europa 1400 (The Guild) decompilation project: byte-identical C89 source reconstruction"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
-    "rebrew[prove]==5.4.0",
+    "rebrew[prove]==6.1.1",
 ]
 
 [project.optional-dependencies]
-dashboard = ["recoverage==8.2.0"]
-binsync = ["rebrew[binsync]==5.4.0"]
+dashboard = [
+    "recoverage==8.4.2",
+]
+binsync = [
+    "rebrew[binsync]==6.1.1",
+]
 dev = [
     "mypy>=2.4.0",
-    "ruff>=0.17.1",
+    "ruff>=0.17.2",
     "black>=26.10.1",
     "isort>=9.0.2",
     "pytest>=9.1.1",
@@ -20,17 +24,16 @@ dev = [
 
 [tool.uv]
 package = false
-# The project supplies Rebrew 5.4; ignore only Recoverage 8.2's embedded 5.1 URL.
+# Guild supplies the engine; exclude only Recoverage's older embedded wheel URL.
 exclude-dependencies = [
-    { package = { name = "recoverage", version = "8.2.0" }, dependencies = ["rebrew"] },
+    { package = { name = "recoverage", version = "8.4.2" }, dependencies = ["rebrew"] },
 ]
-
 [tool.uv.sources]
-rebrew = { url = "https://github.com/maci0/rebrew/releases/download/v5.4.0/rebrew-5.4.0-py3-none-any.whl" }
-recoverage = { url = "https://github.com/maci0/recoverage/releases/download/v8.2.0/recoverage-8.2.0-py3-none-any.whl" }
+rebrew = { url = "https://github.com/maci0/rebrew/releases/download/v6.1.1/rebrew-6.1.1-py3-none-any.whl" }
+recoverage = { url = "https://github.com/maci0/recoverage/releases/download/v8.4.2/recoverage-8.4.2-py3-none-any.whl" }
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py314"
 line-length = 100
 
 [tool.ruff.lint]
@@ -38,7 +41,7 @@ select = ["E", "F", "W", "I", "UP", "B", "SIM"]
 ignore = ["E501"]
 
 [tool.black]
-target-version = ["py313"]
+target-version = ["py314"]
 line-length = 100
 
 [tool.isort]

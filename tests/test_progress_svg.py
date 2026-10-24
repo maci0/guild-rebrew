@@ -125,9 +125,10 @@ def test_data_chart_separates_bytes_symbols_and_exact_placement() -> None:
     text = " ".join(root.itertext())
     assert "game<&>" in text
     assert "Initialized data bytes verified · 10 / 100 bytes" in text
-    assert "Verified symbols (incl. BSS) · 4 / 10 symbols" in text
-    assert "EXACT symbols at reference VA · 2 / 10 symbols" in text
-    assert "3 displaced · 1 other drift · 2 unchecked symbols" in text
+    assert "Verified records (incl. BSS/views) · 4 / 10 records" in text
+    assert "EXACT records at reference VA · 2 / 10 records" in text
+    assert "Placement: map/COFF symbols, bounded aliases and section-relative layout spans." in text
+    assert "3 displaced · 1 other drift · 2 unchecked records" in text
     assert "Bytes: 60 drift · 20 unchecked · 10 untracked" in text
     rects = root.findall(".//{http://www.w3.org/2000/svg}rect")
     assert [r.attrib["width"] for r in rects if r.attrib.get("height") == "10"] == [
@@ -143,7 +144,7 @@ def test_data_chart_separates_bytes_symbols_and_exact_placement() -> None:
     data["bytes"]["untracked"] = 20
     chart = render({"targets": {"game": {"data": data}}}, "today", data=True)
     assert "Initialized data bytes verified · 0 / 100 bytes" in chart
-    assert "Verified symbols (incl. BSS) · 4 / 10 symbols" in chart
+    assert "Verified records (incl. BSS/views) · 4 / 10 records" in chart
 
 
 def test_data_chart_without_data_reports_unavailable_percentages() -> None:

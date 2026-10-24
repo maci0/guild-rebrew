@@ -1,5 +1,16 @@
 # Current work
 
+## Server data placement fixed (2026-10-24 19:24 UTC)
+
+The upstream Rebrew 6.1.1 fix resolves the 138 previously VERIFIED-only server
+records without adding storage: 123 layout intervals use section coordinates,
+four aliases use bounded backing offsets, ten private symbols use selected
+COFF references, and one float literal has a reviewed native-symbol binding.
+Server data is 547/547 EXACT in status and all 652 raw records pass; the complete
+raw DLL remains byte-identical. The [data chart](../README.md#data-verification)
+now shows 100% in all three server bars. No client rebuild or new client verdict
+is claimed. Evidence: `.scratch/server-data-placement-20261025/`.
+
 ## Data/chart check (2026-10-24 18:38 UTC)
 
 Fresh checks: server 652/652 data symbols and whole-file identical; Gold

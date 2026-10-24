@@ -5,6 +5,16 @@ Read [current work](TODO.md), [the objective](../goal.md), then the
 counts. The project default target is GoldTL; name `server.dll` for the server.
 Historical commands and measurements are in [goal history](goal-history.md).
 
+## Server data placement fix (2026-10-24 19:24 UTC)
+
+Rebrew 6.1.1 resolves private data through checked map-selected COFF sections,
+interior aliases through bounded backing offsets, and layout intervals through
+section coordinates. The server now has 547/547 EXACT data records in status
+and 652/652 passing raw checks, with the complete DLL unchanged. One float-pool
+identity was bound after a full native literal audit. No storage or symbols
+were synthesized. Receipts: `.scratch/server-data-placement-20261025/`.
+Client measurements and source counts below remain the earlier checkpoint.
+
 ## Current data/status snapshot (2026-10-24 18:38 UTC)
 
 The existing server remains byte-identical, SHA-256

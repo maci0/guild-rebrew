@@ -114,7 +114,7 @@ def render(report: dict, date: str, *, data: bool = False) -> str:
     title = "Guild data verification" if data else "Guild reconstruction status"
     description = (
         "Three bars per target: verified initialized .data and .rdata bytes, verified "
-        "catalogued data symbols including BSS, and EXACT symbols at their reference VA. "
+        "catalogued data records including BSS/views, and EXACT records at their reference VA. "
         "Displacement, drift and unchecked or untracked data remain separate. "
         "Stored content verdicts do not establish storage ownership."
         if data
@@ -159,7 +159,7 @@ def render(report: dict, date: str, *, data: bool = False) -> str:
     text(
         24,
         57,
-        "Initialized bytes, data symbols and EXACT placement · separate measures"
+        "Initialized bytes, data records and EXACT placement · separate measures"
         if data
         else "Code bytes, function counts and raw-file agreement · separate measures",
     )
@@ -204,16 +204,16 @@ def render(report: dict, date: str, *, data: bool = False) -> str:
             )
             bar(
                 y + 94,
-                "Verified symbols (incl. BSS)",
-                f"{verified:,} / {total:,} symbols",
+                "Verified records (incl. BSS/views)",
+                f"{verified:,} / {total:,} records",
                 verified,
                 total,
                 "#39bdf8",
             )
             bar(
                 y + 137,
-                "EXACT symbols at reference VA",
-                f"{exact:,} / {total:,} symbols",
+                "EXACT records at reference VA",
+                f"{exact:,} / {total:,} records",
                 exact,
                 total,
                 "#c3a7ff",
@@ -221,7 +221,7 @@ def render(report: dict, date: str, *, data: bool = False) -> str:
             text(
                 40,
                 y + 176,
-                f"{displaced:,} displaced · {drift - displaced:,} other drift · {unchecked:,} unchecked symbols",
+                f"{displaced:,} displaced · {drift - displaced:,} other drift · {unchecked:,} unchecked records",
                 11,
             )
             text(
@@ -294,11 +294,18 @@ def render(report: dict, date: str, *, data: bool = False) -> str:
     text(
         24,
         y + 30,
-        "Stored verdicts; symbols include BSS/views. Content checks do not establish storage ownership."
+        "Stored verdicts; records include BSS/views. Content checks do not establish storage ownership."
         if data
         else "Stored verdicts and existing images; not fresh verification. PROVEN is not a byte match.",
         11,
     )
+    if data:
+        text(
+            24,
+            y + 49,
+            "Placement: map/COFF symbols, bounded aliases and section-relative layout spans.",
+            11,
+        )
     parts.extend(["</g>", "</svg>"])
     return "\n".join(parts) + "\n"
 
