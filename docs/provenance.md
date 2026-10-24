@@ -1477,3 +1477,10 @@ Fix the chart's handling of an explicitly null `file` report to display N/A,
 with regression cases for missing, null and empty image records. Verification:
 36 project tests plus 3 subtests pass; all three SVGs parse and refreshed
 Markdown links/fences pass. The full gate and gameplay were not run.
+
+## 2026-10-24 — pin refreshed README graphics
+
+Decision: publish the maintainer-requested snapshot with immutable image URLs
+at `a142e4d639b6fef92e305596590e8d16feb9a25d` so GitHub serves the new graphics.
+Verification: local SVG XML checks and the same-report chart reconciliation
+pass. No additional data, source or build changes.
