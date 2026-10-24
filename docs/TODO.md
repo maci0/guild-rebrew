@@ -1,14 +1,15 @@
 # Current work
 
-## Data/chart check (2026-10-24 15:29 UTC)
+## Data/chart check (2026-10-24 18:38 UTC)
 
-Fresh raw-data checks: server 652/652 and whole-file identical; Gold 83 match,
-30 differ, 49 missing; GoldTL audit build 125 match, 51 differ, 15 missing.
-GoldTL's audit EXE was removed by concurrent build work after its check, so the
-later [README/charts](../README.md#data-verification) report raw-file N/A and
-retain the hash-qualified data measurement. No rebuild or full gate ran.
-Function counts describe current stored claims during ongoing reorganization.
-Receipts: `.scratch/data-readme-refresh-20261024/`. Source work continues below.
+Fresh checks: server 652/652 data symbols and whole-file identical; Gold
+83 matches, 30 differences, 49 missing. GoldTL's audit EXE is unavailable and
+its map empty during a concurrent rebuild. The latest recorded link failed
+with 20 unresolved symbols; no fresh TL data result was recorded. Its previous
+125/51/15 measurement remains dated explicitly in the [README](../README.md#data-verification).
+Stored TL C matches are 3,835/4,946 (77.5%); one STUB remains. No functions were
+compiled for this refresh and no full gate ran. Receipts:
+`.scratch/data-readme-refresh-20261025/`. Source work continues below.
 
 <a id="status-snapshot-2026-10-21-1202-utc"></a>
 

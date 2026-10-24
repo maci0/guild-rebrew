@@ -4,7 +4,7 @@
 <rect width="715" height="788" rx="16" fill="#101820"/>
 <g font-family="DejaVu Sans, sans-serif">
 <text x="24" y="33" font-size="19" fill="#f1f6fa" text-anchor="start">RECONSTRUCTION METRICS</text>
-<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-10-24 15:29 UTC</text>
+<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-10-24 18:38 UTC</text>
 <text x="24" y="57" font-size="13" fill="#aebdca" text-anchor="start">Code bytes, function counts and raw-file agreement · separate measures</text>
 <rect x="24" y="80" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="107" font-size="16" fill="#f1f6fa" text-anchor="start">server.dll</text>
@@ -24,18 +24,18 @@
 <text x="40" y="272" font-size="11" fill="#55dbac" text-anchor="start">Raw file equals reference</text>
 <rect x="24" y="296" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="323" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold_TL.exe</text>
-<text x="40" y="347" font-size="12" fill="#aebdca" text-anchor="start">Code accounting · 1,280,369 / 2,491,370 bytes</text>
-<text x="675" y="347" font-size="17" fill="#55dbac" text-anchor="end">51.3%</text>
+<text x="40" y="347" font-size="12" fill="#aebdca" text-anchor="start">Code accounting · 1,281,192 / 2,491,370 bytes</text>
+<text x="675" y="347" font-size="17" fill="#55dbac" text-anchor="end">51.4%</text>
 <rect x="40" y="356" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="356" width="326.34" height="10" fill="#55dbac"/>
-<text x="40" y="390" font-size="12" fill="#aebdca" text-anchor="start">C function matches · 3,833 / 4,948 functions</text>
-<text x="675" y="390" font-size="17" fill="#39bdf8" text-anchor="end">77.4%</text>
+<rect x="40" y="356" width="326.55" height="10" fill="#55dbac"/>
+<text x="40" y="390" font-size="12" fill="#aebdca" text-anchor="start">C function matches · 3,835 / 4,946 functions</text>
+<text x="675" y="390" font-size="17" fill="#39bdf8" text-anchor="end">77.5%</text>
 <rect x="40" y="399" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="399" width="491.91" height="10" fill="#39bdf8"/>
+<rect x="40" y="399" width="492.36" height="10" fill="#39bdf8"/>
 <text x="40" y="433" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · no image compared</text>
 <text x="675" y="433" font-size="17" fill="#ffc68b" text-anchor="end">N/A</text>
 <rect x="40" y="442" width="635" height="10" fill="#394a59"/>
-<text x="40" y="472" font-size="11" fill="#aebdca" text-anchor="start">0 assembly matches · 1,115 functions still to match</text>
+<text x="40" y="472" font-size="11" fill="#aebdca" text-anchor="start">0 assembly matches · 1,111 functions still to match</text>
 <text x="40" y="488" font-size="11" fill="#ffc68b" text-anchor="start">No built image compared</text>
 <rect x="24" y="512" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="539" font-size="16" fill="#f1f6fa" text-anchor="start">Europa1400Gold.exe</text>

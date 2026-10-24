@@ -1484,3 +1484,25 @@ Decision: publish the maintainer-requested snapshot with immutable image URLs
 at `a142e4d639b6fef92e305596590e8d16feb9a25d` so GitHub serves the new graphics.
 Verification: local SVG XML checks and the same-report chart reconciliation
 pass. No additional data, source or build changes.
+
+## 2026-10-25 — refresh data checks and graphics during the TL rebuild
+
+Decision owner: maintainer request to repeat verification and refresh the README
+and charts. Server data passes 652/652 and its complete raw PE remains identical,
+SHA-256 3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+Gold reports 83 content matches, 30 differences, 49 missing records and 159
+without comparable file bytes. These results match the previous check.
+
+GoldTL cannot be freshly checked: the audit build was active, its map empty,
+and a partial output present at the initial probe was then removed. The latest
+recorded link failed with 20 unresolved symbols. The non-promoting verification
+attempt exits 2 for the missing image and writes no TL verdicts. Preserve the
+2026-10-24 15:27 UTC TL result (125/51/15) as explicitly historical, not fresh.
+
+Refresh all three charts from one status report, update the README, tracker
+and handoff, and keep ongoing source/config/metadata work out of the docs
+commit. Function counts remain stored working-tree claims, with TL 3,835/4,946
+C matches and one STUB. No source recovery, provider or storage claim is made.
+Verification: 36 project tests and 3 subtests pass, SVG XML and local Markdown
+links/fences checked. No function compilation, owned rebuild, gameplay or full
+gate. Receipts: `.scratch/data-readme-refresh-20261025/`.

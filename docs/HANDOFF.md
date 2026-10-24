@@ -5,36 +5,32 @@ Read [current work](TODO.md), [the objective](../goal.md), then the
 counts. The project default target is GoldTL; name `server.dll` for the server.
 Historical commands and measurements are in [goal history](goal-history.md).
 
-## Current data/status snapshot (2026-10-24 15:29 UTC)
+## Current data/status snapshot (2026-10-24 18:38 UTC)
 
-The existing server image remains byte-identical, SHA-256
+The existing server remains byte-identical, SHA-256
 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
-Fresh data verification passes 652/652 and the complete PE comparison.
-Current source claims are a separate checkpoint: 247/251 C matches and 97.9%
-code accounting, with four unverified claims during source reorganization.
+Fresh data verification passes 652/652 and the complete PE comparison. Gold
+again reports 83 content matches, 30 differences, 49 missing and 159 not
+file-comparable. Neither client has an EXACT data placement.
 
-Data checks at 15:27 UTC: Gold 83 matching / 30 differing / 49 missing,
-159 not file-comparable; GoldTL 125 / 51 / 15, 172 not file-comparable.
-Neither client earns an EXACT data placement. The stored data charts exclude
-BSS and imports from initialized bytes; content matches are not placement proof.
-
-Gold still uses `build/Europa1400Gold.exe`. GoldTL now selects
-`build-goldtl-audit/Europa1400Gold_TL.exe`, measured with SHA-256
+The configured GoldTL audit EXE is unavailable and its map is empty during an
+ongoing rebuild. The latest recorded link failed with 20 unresolved symbols.
+The fresh image-only attempt exits 2 without updating verdicts. TL's stored
+data result remains the 15:27 UTC check on 2026-10-24: 125 content matches,
+51 differences, 15 missing and 172 not file-comparable, image SHA-256
 `f43b0d5d76220fc99319cf657c3708a5364a507974fe496fcc73546b26cfb08b`.
-Concurrent build work removed that EXE after its data comparison. The later
-status/chart correctly reports no current image score; it does not fall back
-to the older file in `build/`. Rebuild before repeating the default TL check.
+No fallback image or partial link output is treated as a fresh TL data check.
 
-Stored C matches: GoldTL 3,833/4,948 (77.4%, 51.3% code accounting), Gold
-1,882/4,426 (42.5%, 20.8% accounting), plus one Gold whole-function assembly
-match. GoldTL has zero STUB, but 1,027 size mismatches, 83 near matches and five
-semantic-only PROVEN results. Ongoing uncommitted source/binding reorganization
-changes these counts; none is a fresh function-verification or gameplay result.
+The [README/charts](../README.md#reconstruction-status) share one status report:
+server 247/251 C matches, TL 3,835/4,946 (77.5%), Gold 1,882/4,426 (42.5%),
+plus one Gold whole-function assembly match. TL has one STUB, 1,024 size
+mismatches, 81 near matches and five semantic-only PROVEN results. Four server
+source claims remain unverified despite the identical existing image. These
+are stored working-tree verdicts during source reorganization, not a new
+function-verification batch. No rebuild or full gate was run by this refresh.
 
-The [README and charts](../README.md#reconstruction-status) use one status
-snapshot. This refresh rebuilds no binaries and runs no full gate. Current
-source work remains in [the tracker](TODO.md); earlier handoffs below are
-historical. Receipts: `.scratch/data-readme-refresh-20261024/`.
+Current source work continues in [the tracker](TODO.md); earlier handoffs below
+are historical. Receipts: `.scratch/data-readme-refresh-20261025/`.
 
 ## Paused state before the 2026-10-19 resume
 
