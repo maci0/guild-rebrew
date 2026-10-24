@@ -1562,3 +1562,10 @@ The global `rebrew` tool is also upgraded to 6.1.1, preserving its prove/BinSync
 extras and interpreter. Its ordinary `rebrew verify --data` invocation repeats
 652 EXACT records with zero unplaced. Other active compiler environments were
 not modified.
+
+## 2026-10-25 — pin the corrected server data chart
+
+Pin the README data graphic to `3e10ea578fabc0bd15e44246baa66dc3f55e0cb4`, which contains
+the 547/547 EXACT server placement snapshot and the explicit placement-method
+legend. XML, metric reconciliation and visual rendering pass. Code charts keep
+their separately dated snapshot. No binary or source changes.

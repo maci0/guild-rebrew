@@ -99,7 +99,7 @@ The server now reaches **100% on all three data bars**.
 | **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 304 |
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/fc06532df21c8f0dc7a3441d92389a82261cec29/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/3e10ea578fabc0bd15e44246baa66dc3f55e0cb4/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
 </p>
 
 Byte coverage counts each initialized `.data`/`.rdata` byte once; it excludes
