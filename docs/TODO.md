@@ -1,5 +1,15 @@
 # Current work
 
+## Data/chart check (2026-10-24 15:29 UTC)
+
+Fresh raw-data checks: server 652/652 and whole-file identical; Gold 83 match,
+30 differ, 49 missing; GoldTL audit build 125 match, 51 differ, 15 missing.
+GoldTL's audit EXE was removed by concurrent build work after its check, so the
+later [README/charts](../README.md#data-verification) report raw-file N/A and
+retain the hash-qualified data measurement. No rebuild or full gate ran.
+Function counts describe current stored claims during ongoing reorganization.
+Receipts: `.scratch/data-readme-refresh-20261024/`. Source work continues below.
+
 <a id="status-snapshot-2026-10-21-1202-utc"></a>
 
 ## Status snapshot (2026-10-21 16:36 UTC)

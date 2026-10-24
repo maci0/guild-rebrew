@@ -52,13 +52,15 @@ def test_progress_separates_assembly_and_semantic_verdicts() -> None:
         render(report, "2026-10-18")
 
 
-def test_progress_missing_image_is_uncompared_not_zero_agreement() -> None:
+@pytest.mark.parametrize("image", [{}, {"file": None}, {"file": {}}])
+def test_progress_missing_image_is_uncompared_not_zero_agreement(image: dict) -> None:
     target = {
         "functions": {"total": 1},
         "status": {"STUB": 1},
         "naked_matched": 0,
         "accounted_text_bytes": 0,
         "total_text_bytes": 100,
+        **image,
     }
     root = ElementTree.fromstring(render({"targets": {"game": target}}, "2026-10-20"))
     text = " ".join(root.itertext())

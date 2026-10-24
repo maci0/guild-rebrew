@@ -256,7 +256,7 @@ def render(report: dict, date: str, *, data: bool = False) -> str:
             total,
             "#39bdf8",
         )
-        image = target.get("file", {})
+        image = target.get("file") or {}
         file_total = image.get("total_bytes", 0)
         file_matched = image.get("matched_bytes", 0)
         detail = f"{file_matched:,} / {file_total:,} bytes" if file_total else "no image compared"

@@ -7,18 +7,19 @@ toolchains. The [objective](goal.md): reproduce every byte of the server,
 Gold and GoldTL from shared source.
 
 > [!IMPORTANT]
-> **The fresh server build is byte-identical:** all **286,720 bytes** match.
-> Server verification passes 316 functions and all 652 compared data symbols.
+> **The existing server build is byte-identical:** all **286,720 bytes** match.
+> The fresh image/data check passes all 652 compared data symbols.
 > **Gold and GoldTL are comparison scaffolds, not playable or byte-identical.**
-> Both clients now link as raw comparison executables with same-build maps.
+> Both clients have linked as raw comparison executables with same-build maps.
+> The configured GoldTL audit EXE is currently absent during ongoing build work.
 > Source recovery, unsupported assembly and provider/storage work remain.
 > The [last completed server gate](docs/TODO.md#verified-checkpoint) confirmed
-> complete file equality and passed; current client assembly warnings remain separate.
+> complete file equality and passed; it does not verify later source edits.
 
 The [latest recorded work](docs/TODO.md)
-includes the merged reconstruction work and a fresh server comparison.
-Client function results below are stored object verdicts; fresh raw images now
-support data comparisons, with substantial stubs and layout differences. See the [handoff](docs/HANDOFF.md).
+includes ongoing source reorganization and fresh data checks. Function counts
+below describe the current working tree; linked images are separate snapshots
+with substantial stubs and layout differences. See the [handoff](docs/HANDOFF.md).
 
 **[Start here](#get-started)** &nbsp; · &nbsp;
 **[Build & compare](#build-and-compare)** &nbsp; · &nbsp;
@@ -32,9 +33,9 @@ support data comparisons, with substantial stubs and layout differences. See the
 
 | Target | Code accounted for | C functions matched | Raw file at original offsets |
 | --- | ---: | ---: | ---: |
-| **Server** | **100.0%** | 251 / 251 · 100.0% | 100.0% |
-| **GoldTL** | **48.4%** | 3,804 / 5,122 · 74.2% | 2.0% |
-| **Gold** | **22.8%** | 2,466 / 4,592 · 53.7% | 1.1% |
+| **Server** | **97.9%** | 247 / 251 · 98.4% | 100.0% |
+| **GoldTL** | **51.3%** | 3,833 / 4,948 · 77.4% | N/A |
+| **Gold** | **20.8%** | 1,882 / 4,426 · 42.5% | 1.1% |
 
 **Code accounting** is Rebrew's byte-based measure of virtual `.text`: matched
 functions, identified libraries and alignment padding. **Function matches**
@@ -55,40 +56,42 @@ displaced code still differs there. None of these alone establishes completion.
 </details>
 <!-- progress:end -->
 
-<sub>Snapshot refreshed 2026-10-21 16:36 UTC from
-<code>rebrew status --all-targets --json</code>. All three raw images are present;
-data was freshly verified against those images and their same-build maps.
-Source work since the links has not been rebuilt. Function matches remain
-stored verdicts, not a new per-function verification batch. Libraries, semantic
-PROVEN verdicts and whole-function assembly matches are excluded from C totals.
-Inline assembly may remain.</sub>
+<sub>Snapshot refreshed 2026-10-24 15:29 UTC from
+<code>rebrew status --all-targets --json</code>. Function counts reflect stored
+verdicts and ongoing, uncommitted source/binding changes, not a fresh compilation.
+The server's existing raw image remains identical even though four current source
+claims are unverified. GoldTL data was checked at 15:27 UTC; the audit EXE was
+removed by concurrent build work before this status snapshot, so raw-file
+agreement is N/A. Libraries, semantic PROVEN verdicts and whole-function assembly
+matches are excluded from C totals. Inline assembly may remain.</sub>
 
 The server uses plain VC6 SP5 with `/MT` / LIBCMT. Both clients use the
 Processor Pack: GoldTL with `/MT` / LIBCMT, Gold with `/ML` / LIBC.
 
-Gold has another **26 whole-function assembly matches**, counted separately.
+Gold has another **one whole-function assembly match**, counted separately.
 Remaining work in the same snapshot:
 
-| Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | EXTRACT_ERROR | Without source |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| **GoldTL** | 297 | 904 | 81 | 5 | 31 |
-| **Gold** | 1,852 | 218 | 26 | 0 | 4 |
+| Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | PROVEN only | EXTRACT_ERROR | Without source |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| **Server** | 0 | 0 | 0 | 0 | 0 | 4 |
+| **GoldTL** | 0 | 1,027 | 83 | 5 | 0 | 0 |
+| **Gold** | 36 | 49 | 5 | 0 | 0 | 2,453 |
 
-A partial body or repaired inventory boundary can change these categories
-without earning a match. Function percentages measure catalog entries, not
-matched code bytes or gameplay completeness. All 286,720 server bytes match,
-including imports, relocations, headers and layout. Both clients link with
-explicit placeholders: 2,871 symbols in Gold and 4,138 in GoldTL. They are
-comparison builds, not playable games. The full gate was not rerun for this
-checkpoint. The server raw image still matches; both client data comparisons
-ran and reported the expected scaffold differences.
+These categories reflect the current source bindings. A moved or retired claim
+can change the counts without changing built bytes or earning a match. GoldTL's
+zero STUB count includes complete bodies that still differ; it does not mean
+byte identity. Function percentages measure entries, not code bytes or gameplay
+completeness. All 286,720 existing server bytes match, including imports,
+relocations, headers and layout. Client links use explicit comparison
+placeholders and remain unsuitable for gameplay. No rebuild, per-function batch
+or full gate ran for this data-only refresh.
 
 ## Data verification
 
 | Target | Initialized data bytes verified | Verified symbols (incl. BSS) | EXACT at reference VA | Displaced symbols |
 | --- | ---: | ---: | ---: | ---: |
 | **Server** | 66,664 / 66,664 · 100.0% | 547 / 547 | 409 | 0 |
-| **GoldTL** | 0 / 335,380 · 0.0% | 1 / 361 | 0 | 339 |
+| **GoldTL** | 0 / 335,380 · 0.0% | 2 / 361 | 0 | 339 |
 | **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 304 |
 
 <p align="center">
@@ -101,23 +104,27 @@ symbol need not contribute initialized bytes. `EXACT` is a subset of verified
 records with byte agreement at the reference address; displaced records count
 as drift. These are stored verdicts from the same snapshot as the code charts,
 not evidence of storage ownership. The server has a fresh 652/652 data check;
-both client data verdicts were refreshed against their current raw links.
+both client data verdicts were refreshed against the raw links present at the
+time of comparison. GoldTL entries retain that last check after removal of its
+audit EXE; they are not a new check of a missing image.
 Content matches alone do not establish correct placement or storage ownership.
 
-Both executables and maps are in `build/`. Compare data without recompiling
-functions (exit 1 reports the expected scaffold differences):
+Gold uses `build/Europa1400Gold.exe`; GoldTL is configured to use
+`build-goldtl-audit/Europa1400Gold_TL.exe`. Each needs its matching `.map`.
+Once the configured image exists, compare data without recompiling functions
+(exit 1 reports scaffold differences):
 
 ```sh
 uv run rebrew verify --data --target Europa1400Gold.exe
 uv run rebrew verify --data --target Europa1400Gold_TL.exe
 ```
 
-Fresh raw-image diagnostics (2026-10-21 16:35 UTC):
+Fresh raw-image diagnostics (2026-10-24 15:27 UTC):
 
 | Target | Content matches | Differs | Missing | No comparable file bytes |
 | --- | ---: | ---: | ---: | ---: |
 | **Server** | 652 | 0 | 0 | 0 |
-| **GoldTL** | 100 | 51 | 40 | 172 |
+| **GoldTL** | 125 | 51 | 15 | 172 |
 | **Gold** | 83 | 30 | 49 | 159 |
 
 These diagnostics include imports and records excluded from coverage totals;

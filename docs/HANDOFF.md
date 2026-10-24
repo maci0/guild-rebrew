@@ -5,36 +5,36 @@ Read [current work](TODO.md), [the objective](../goal.md), then the
 counts. The project default target is GoldTL; name `server.dll` for the server.
 Historical commands and measurements are in [goal history](goal-history.md).
 
-## Current status snapshot (2026-10-21 16:36 UTC)
+## Current data/status snapshot (2026-10-24 15:29 UTC)
 
-All three build images exist. The server remains byte-identical:
+The existing server image remains byte-identical, SHA-256
 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`.
-Its fresh data/image verification again passes all 652 compared symbols and the
-complete PE check. Both client CMake targets link successfully with same-build
-maps and comparison-only placeholders (2871 Gold, 4138 TL). They are not
-playable or byte-identical games.
+Fresh data verification passes 652/652 and the complete PE comparison.
+Current source claims are a separate checkpoint: 247/251 C matches and 97.9%
+code accounting, with four unverified claims during source reorganization.
 
-Data was rechecked against those existing images and their same-build maps;
-all six files retained their hashes. Source work since the links has not been
-rebuilt, and this check compiled no functions.
+Data checks at 15:27 UTC: Gold 83 matching / 30 differing / 49 missing,
+159 not file-comparable; GoldTL 125 / 51 / 15, 172 not file-comparable.
+Neither client earns an EXACT data placement. The stored data charts exclude
+BSS and imports from initialized bytes; content matches are not placement proof.
 
-Data comparisons now run directly with `uv run rebrew verify --data` (TL) or
-`--target Europa1400Gold.exe`. Gold reports 83 matching / 30 differing / 49
-missing symbols; TL reports 100 / 51 / 40. Respect the non-comparable BSS/file
-limits and displaced placements; no client EXACT data placement was earned.
+Gold still uses `build/Europa1400Gold.exe`. GoldTL now selects
+`build-goldtl-audit/Europa1400Gold_TL.exe`, measured with SHA-256
+`f43b0d5d76220fc99319cf657c3708a5364a507974fe496fcc73546b26cfb08b`.
+Concurrent build work removed that EXE after its data comparison. The later
+status/chart correctly reports no current image score; it does not fall back
+to the older file in `build/`. Rebuild before repeating the default TL check.
 
-Project tests: 34 passed plus 3 subtests. Lint: zero errors; server and Gold
-have no warnings, TL has two unsupported-inline-assembly warnings. Compiler
-warnings and the incomplete source/ABI/storage contracts remain. The full gate
-was not rerun. Rebrew's generator fix is on upstream main at
-[8bd102e6](https://github.com/maci0/rebrew/commit/8bd102e6), with 13074 tests passing.
-The [build guide](../stubs/README.md) covers regeneration's version requirement.
+Stored C matches: GoldTL 3,833/4,948 (77.4%, 51.3% code accounting), Gold
+1,882/4,426 (42.5%, 20.8% accounting), plus one Gold whole-function assembly
+match. GoldTL has zero STUB, but 1,027 size mismatches, 83 near matches and five
+semantic-only PROVEN results. Ongoing uncommitted source/binding reorganization
+changes these counts; none is a fresh function-verification or gameplay result.
 
-The [README charts](../README.md#reconstruction-status) and
-[tracker](TODO.md#status-snapshot-2026-10-21-1202-utc) show this checkpoint. Earlier
-pause/resume notes below are historical. Receipts:
-`.scratch/linkable-clients-20261021/` and the fresh data-only check in
-`.scratch/data-readme-refresh-20261022/`.
+The [README and charts](../README.md#reconstruction-status) use one status
+snapshot. This refresh rebuilds no binaries and runs no full gate. Current
+source work remains in [the tracker](TODO.md); earlier handoffs below are
+historical. Receipts: `.scratch/data-readme-refresh-20261024/`.
 
 ## Paused state before the 2026-10-19 resume
 

@@ -1450,3 +1450,30 @@ Change and decision: pin the three README images to `8a58e3fcd3285012c18e72132ee
 the commit containing this fresh data snapshot. This gives GitHub immutable
 updated assets. Verification: all three SVGs parse and their metric values
 come from the same status report. No build or metadata changes.
+
+## 2026-10-24 — repeat data verification and refresh public status
+
+Decision owner: maintainer request to repeat data verification and the README
+and chart refresh. Run image-only checks against each configured raw image
+and its matching map; render all three graphics from one current status report.
+No function compilation, source reorganization, ownership claim or new storage.
+
+Evidence: `.scratch/data-readme-refresh-20261024/`. Server passes 652/652
+data checks and the whole-file PE comparison, SHA-256
+3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1.
+Gold reports 83 content matches, 30 differences, 49 missing and 159 not
+file-comparable. GoldTL reports 125, 51, 15 and 172 respectively, using the
+audit image f43b0d5d76220fc99319cf657c3708a5364a507974fe496fcc73546b26cfb08b.
+Both client comparisons exit 1, and neither earns EXACT data placement.
+
+Concurrent build work removed the configured TL audit EXE after its successful
+data check. The later status snapshot reports no current image score; retain
+the earlier hash-qualified data receipt and show raw-file N/A. Current function
+counts include ongoing uncommitted source/binding changes and do not imply a
+new build. The existing raw server still matches despite four unverified
+source claims. Keep other worktree changes out of this documentation commit.
+
+Fix the chart's handling of an explicitly null `file` report to display N/A,
+with regression cases for missing, null and empty image records. Verification:
+36 project tests plus 3 subtests pass; all three SVGs parse and refreshed
+Markdown links/fences pass. The full gate and gameplay were not run.
