@@ -1506,3 +1506,9 @@ C matches and one STUB. No source recovery, provider or storage claim is made.
 Verification: 36 project tests and 3 subtests pass, SVG XML and local Markdown
 links/fences checked. No function compilation, owned rebuild, gameplay or full
 gate. Receipts: `.scratch/data-readme-refresh-20261025/`.
+
+## 2026-10-25 — pin the latest published charts
+
+Decision: point the README to immutable SVGs at `fc06532df21c8f0dc7a3441d92389a82261cec29`
+for the requested data/status refresh. All charts share the same status report;
+XML and Markdown checks pass. No source, build or metadata changes.

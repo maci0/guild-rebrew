@@ -46,12 +46,12 @@ displaced code still differs there. None of these alone establishes completion.
 
 <!-- progress:start -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/a142e4d639b6fef92e305596590e8d16feb9a25d/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/fc06532df21c8f0dc7a3441d92389a82261cec29/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
   <p align="center">
-    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/a142e4d639b6fef92e305596590e8d16feb9a25d/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
+    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/fc06532df21c8f0dc7a3441d92389a82261cec29/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
   </p>
 </details>
 <!-- progress:end -->
@@ -96,7 +96,7 @@ or full gate ran for this data-only refresh.
 | **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 304 |
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/a142e4d639b6fef92e305596590e8d16feb9a25d/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/fc06532df21c8f0dc7a3441d92389a82261cec29/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
 </p>
 
 Byte coverage counts each initialized `.data`/`.rdata` byte once; it excludes
