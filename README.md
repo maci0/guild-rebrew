@@ -206,7 +206,7 @@ uv sync
 uv run rebrew --version
 ```
 
-`uv sync` installs pinned Rebrew 6.1.1 and the project dependencies into
+`uv sync` installs pinned Rebrew 6.2.0 and the project dependencies into
 `.venv` from the public release wheels. This walkthrough was verified with
 Python 3.14.9. Run the remaining commands from this repository root; `uv run`
 uses that environment without activating it.
@@ -312,7 +312,7 @@ repaired before fresh binary comparisons can run.
 
 ## Optional coverage dashboard
 
-[Recoverage](https://github.com/maci0/recoverage) 8.4.2 explores this
+[Recoverage](https://github.com/maci0/recoverage) 8.5.0 explores this
 checkout's live coverage records, source and reference binaries. After creating
 the project environment, install that optional dashboard into the same `.venv`
 and start it from the repository root:

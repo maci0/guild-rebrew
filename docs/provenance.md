@@ -1569,3 +1569,12 @@ Pin the README data graphic to `3e10ea578fabc0bd15e44246baa66dc3f55e0cb4`, which
 the 547/547 EXACT server placement snapshot and the explicit placement-method
 legend. XML, metric reconciliation and visual rendering pass. Code charts keep
 their separately dated snapshot. No binary or source changes.
+
+
+## 2026-10-25: Python 3.14 tooling release
+
+Change: pin Python 3.14.9, Rebrew 6.2.0 and Recoverage 8.5.0; refresh the dependency lock and document the released tooling. This is a tooling-only 1.5.0 release based on the accepted source snapshot; concurrent native reconstruction and metadata work remain separate.
+Reason: upgrade all reconstruction consumers to the current Python and engine releases.
+Evidence: the engine release wheels and the checked-in uv.lock define the installed inputs.
+Decision owner: project maintainer (requested Python/dependency upgrades and minor releases).
+Verification: exact release-tree and current-project checks are recorded in the 1.5.0 release notes; byte-verification claims remain tied to their original snapshots.

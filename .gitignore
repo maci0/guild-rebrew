@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 .venv*/
-.python-version
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/

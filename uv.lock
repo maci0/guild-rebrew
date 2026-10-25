@@ -6,9 +6,6 @@ resolution-markers = [
     "python_full_version < '3.15'",
 ]
 
-[manifest]
-excludes = [{ package = { name = "recoverage", version = "8.4.2" }, dependencies = ["rebrew"] }]
-
 [[package]]
 name = "angr"
 version = "10.0.5"
@@ -529,7 +526,7 @@ wheels = [
 
 [[package]]
 name = "guild-rebrew"
-version = "1.4.0"
+version = "1.5.0"
 source = { virtual = "." }
 dependencies = [
     { name = "rebrew", extra = ["prove"] },
@@ -556,9 +553,9 @@ requires-dist = [
     { name = "isort", marker = "extra == 'dev'", specifier = ">=9.0.2" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=2.4.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.1.1" },
-    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.1.1/rebrew-6.1.1-py3-none-any.whl" },
-    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.1.1/rebrew-6.1.1-py3-none-any.whl" },
-    { name = "recoverage", marker = "extra == 'dashboard'", url = "https://github.com/maci0/recoverage/releases/download/v8.4.2/recoverage-8.4.2-py3-none-any.whl" },
+    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.2.0/rebrew-6.2.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.2.0/rebrew-6.2.0-py3-none-any.whl" },
+    { name = "recoverage", marker = "extra == 'dashboard'", url = "https://github.com/maci0/recoverage/releases/download/v8.5.0/recoverage-8.5.0-py3-none-any.whl" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.17.2" },
 ]
 provides-extras = ["dashboard", "binsync", "dev"]
@@ -1320,8 +1317,8 @@ wheels = [
 
 [[package]]
 name = "rebrew"
-version = "6.1.1"
-source = { url = "https://github.com/maci0/rebrew/releases/download/v6.1.1/rebrew-6.1.1-py3-none-any.whl" }
+version = "6.2.0"
+source = { url = "https://github.com/maci0/rebrew/releases/download/v6.2.0/rebrew-6.2.0-py3-none-any.whl" }
 dependencies = [
     { name = "capstone" },
     { name = "click" },
@@ -1339,7 +1336,7 @@ dependencies = [
     { name = "zstandard" },
 ]
 wheels = [
-    { url = "https://github.com/maci0/rebrew/releases/download/v6.1.1/rebrew-6.1.1-py3-none-any.whl", hash = "sha256:dc263954fd53aa593435c91c483f8904a05747b1d17571c7522c497deaf5edd0" },
+    { url = "https://github.com/maci0/rebrew/releases/download/v6.2.0/rebrew-6.2.0-py3-none-any.whl", hash = "sha256:7a1b6932d9731bbfa4ce43f05e1bc6a56720cfbbd579ccf55a6a8b35f51cd228" },
 ]
 
 [package.optional-dependencies]
@@ -1375,19 +1372,20 @@ provides-extras = ["prove", "binsync"]
 
 [[package]]
 name = "recoverage"
-version = "8.4.2"
-source = { url = "https://github.com/maci0/recoverage/releases/download/v8.4.2/recoverage-8.4.2-py3-none-any.whl" }
+version = "8.5.0"
+source = { url = "https://github.com/maci0/recoverage/releases/download/v8.5.0/recoverage-8.5.0-py3-none-any.whl" }
 dependencies = [
     { name = "bottle" },
     { name = "brotli" },
     { name = "click" },
     { name = "rcssmin" },
+    { name = "rebrew" },
     { name = "rich" },
     { name = "typer" },
     { name = "zstandard" },
 ]
 wheels = [
-    { url = "https://github.com/maci0/recoverage/releases/download/v8.4.2/recoverage-8.4.2-py3-none-any.whl", hash = "sha256:3d748cf768208d0113f6b847f73575f27ccdd554c43fe3e9feb50dd9805ee6d4" },
+    { url = "https://github.com/maci0/recoverage/releases/download/v8.5.0/recoverage-8.5.0-py3-none-any.whl", hash = "sha256:1b6e6d85aea7eabf16f39ab9a5c2b92a4e734815372c663488f6983785cf999f" },
 ]
 
 [package.metadata]
@@ -1402,7 +1400,7 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.1.1" },
     { name = "pytest-playwright", marker = "extra == 'playwright'", specifier = ">=0.9.0" },
     { name = "rcssmin", specifier = ">=1.1" },
-    { name = "rebrew", url = "https://github.com/maci0/rebrew/releases/download/v6.0.4/rebrew-6.0.4-py3-none-any.whl" },
+    { name = "rebrew", url = "https://github.com/maci0/rebrew/releases/download/v6.2.0/rebrew-6.2.0-py3-none-any.whl" },
     { name = "rich", specifier = ">=15.0.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.16.7" },
     { name = "typer", specifier = ">=0.27.2" },
