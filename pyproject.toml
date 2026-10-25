@@ -1,18 +1,18 @@
 [project]
 name = "guild-rebrew"
-version = "1.5.0"
+version = "1.6.0"
 description = "Europa 1400 (The Guild) decompilation project: byte-identical C89 source reconstruction"
-requires-python = ">=3.14"
+requires-python = ">=3.15"
 dependencies = [
-    "rebrew[prove]==6.2.0",
+    "rebrew[prove]==6.3.0",
 ]
 
 [project.optional-dependencies]
 dashboard = [
-    "recoverage==8.5.0",
+    "recoverage==8.6.0",
 ]
 binsync = [
-    "rebrew[binsync]==6.2.0",
+    "rebrew[binsync]==6.3.0",
 ]
 dev = [
     "mypy>=2.4.0",
@@ -24,12 +24,31 @@ dev = [
 
 [tool.uv]
 package = false
+# Qualified wheels are CPython 3.15 on four platform tuples. Other interpreters,
+# including PyPy 3.15, and other Python versions or platforms keep Rebrew's
+# source archive. Markers cannot see musl or free-threading, so those hosts
+# are not qualified and this is not a generic ABI guarantee. uv 0.13.5 cannot
+# express the wheel choice with tool.uv.sources: that table conflicts with
+# Rebrew's direct source URL.
+override-dependencies = [
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-manylinux_2_28_x86_64.whl#sha256=d5ba895cf144a69be1e93d7ff6edecd403660a9b544d1050c3e024569e9a055a ; implementation_name == 'cpython' and python_version == '3.15' and sys_platform == 'linux' and platform_machine == 'x86_64'",
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-manylinux_2_28_aarch64.whl#sha256=2030d1ebcf94e9fac4684821a7b14b65c06e5ded514eeeca42679299bba2a50c ; implementation_name == 'cpython' and python_version == '3.15' and sys_platform == 'linux' and platform_machine == 'aarch64'",
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-macosx_11_0_arm64.whl#sha256=3bd724959593d36d02d6aea5a69ed2158c6866cd46ecf59e7c1c14c4a8a4ec35 ; implementation_name == 'cpython' and python_version == '3.15' and sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1-cp315-cp315-win_amd64.whl#sha256=740d754bc1622e800e035d09b108eefeb7a953a064fae8251388fcfec4cafa3a ; implementation_name == 'cpython' and python_version == '3.15' and sys_platform == 'win32' and platform_machine == 'AMD64'",
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz#sha256=5ad7a93c992d33478d97b8ce874fa7d5b92a121a949cd2a7e8f589e1a48fff01 ; python_version != '3.15'",
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz#sha256=5ad7a93c992d33478d97b8ce874fa7d5b92a121a949cd2a7e8f589e1a48fff01 ; python_version == '3.15' and implementation_name != 'cpython'",
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz#sha256=5ad7a93c992d33478d97b8ce874fa7d5b92a121a949cd2a7e8f589e1a48fff01 ; implementation_name == 'cpython' and python_version == '3.15' and sys_platform == 'linux' and platform_machine != 'x86_64' and platform_machine != 'aarch64'",
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz#sha256=5ad7a93c992d33478d97b8ce874fa7d5b92a121a949cd2a7e8f589e1a48fff01 ; implementation_name == 'cpython' and python_version == '3.15' and sys_platform == 'darwin' and platform_machine != 'arm64'",
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz#sha256=5ad7a93c992d33478d97b8ce874fa7d5b92a121a949cd2a7e8f589e1a48fff01 ; implementation_name == 'cpython' and python_version == '3.15' and sys_platform == 'win32' and platform_machine != 'AMD64'",
+  "python-flirt @ https://github.com/maci0/lancelot/releases/download/python-flirt-v0.10.2-relumea.1/python_flirt-0.10.2%2Brelumea.1.tar.gz#sha256=5ad7a93c992d33478d97b8ce874fa7d5b92a121a949cd2a7e8f589e1a48fff01 ; implementation_name == 'cpython' and python_version == '3.15' and sys_platform != 'linux' and sys_platform != 'darwin' and sys_platform != 'win32'",
+]
+
 [tool.uv.sources]
-rebrew = { url = "https://github.com/maci0/rebrew/releases/download/v6.2.0/rebrew-6.2.0-py3-none-any.whl" }
-recoverage = { url = "https://github.com/maci0/recoverage/releases/download/v8.5.0/recoverage-8.5.0-py3-none-any.whl" }
+rebrew = { url = "https://github.com/maci0/rebrew/releases/download/v6.3.0/rebrew-6.3.0-py3-none-any.whl" }
+recoverage = { url = "https://github.com/maci0/recoverage/releases/download/v8.6.0/recoverage-8.6.0-py3-none-any.whl" }
 
 [tool.ruff]
-target-version = "py314"
+target-version = "py315"
 line-length = 100
 
 [tool.ruff.lint]
@@ -37,7 +56,7 @@ select = ["E", "F", "W", "I", "UP", "B", "SIM"]
 ignore = ["E501"]
 
 [tool.black]
-target-version = ["py314"]
+target-version = ["py315"]
 line-length = 100
 
 [tool.isort]

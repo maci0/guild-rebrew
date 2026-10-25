@@ -200,16 +200,30 @@ the namespace check alone does not establish compatibility.
 ```sh
 git clone https://github.com/maci0/guild-rebrew.git
 cd guild-rebrew
-uv python install 3.14
-uv venv --python 3.14
+uv python install 3.15.1
+uv venv --python 3.15.1
 uv sync
 uv run rebrew --version
 ```
 
-`uv sync` installs pinned Rebrew 6.2.0 and the project dependencies into
-`.venv` from the public release wheels. This walkthrough was verified with
-Python 3.14.9. Run the remaining commands from this repository root; `uv run`
-uses that environment without activating it.
+`uv sync` installs pinned Rebrew 6.3.0 and the project dependencies into
+`.venv`. On CPython 3.15 for Linux x86_64, Linux aarch64, macOS arm64, and Windows
+x64, the lock selects the published python-flirt wheels. PyPy and any other
+3.15 interpreter, other Python versions, and other platforms keep Rebrew's
+published source archive. The markers cannot see musl or free-threading, so
+those hosts are not qualified and the wheel list is not a generic ABI guarantee. Check `sysconfig.get_config_var("SOABI")`
+before the first sync and do not treat another build of
+`python-flirt==0.10.2+relumea.1` as the qualified module. Run the remaining
+commands from this repository root; `uv run` uses that environment without
+activating it.
+
+Optional BinSync installation (`uv sync --extra binsync`) builds JPype from its
+released source on Python 3.15. Put a JDK and [Apache Ant](https://ant.apache.org/bindownload.cgi)
+on `PATH` before running it; qualification used JDK 27 and Ant 1.10.18.
+
+Install the optional dashboard with `uv sync --extra dashboard`; it pins
+Recoverage 8.6.0 alongside Rebrew 6.3.0. Keep `--extra dashboard` on later
+syncs to retain it.
 
 ### 3. Supply the original server DLL
 
@@ -312,7 +326,7 @@ repaired before fresh binary comparisons can run.
 
 ## Optional coverage dashboard
 
-[Recoverage](https://github.com/maci0/recoverage) 8.5.0 explores this
+[Recoverage](https://github.com/maci0/recoverage) 8.6.0 explores this
 checkout's live coverage records, source and reference binaries. After creating
 the project environment, install that optional dashboard into the same `.venv`
 and start it from the repository root:
