@@ -1632,3 +1632,7 @@ the public release reproducible and its code/data totals consistent. Decision
 owner: project maintainer, through the requested release. Verification: fresh
 raw build, whole-image comparison, 316 function and 652 data checks, chart
 accounting checks, 39 tests plus 3 subtests. Client source WIP was not published.
+
+Published README chart URLs are pinned to `97e4252c0077a2d377b6d79f955532d3c0a778d6` so all three graphics
+resolve to the same reviewed release snapshot without branch-cache staleness.
+Verification: local SVG renders and table totals agree with the release status report.
