@@ -7,19 +7,12 @@ toolchains. The [objective](goal.md): reproduce every byte of the server,
 Gold and GoldTL from shared source.
 
 > [!IMPORTANT]
-> **The existing server build is byte-identical:** all **286,720 bytes** match.
-> The fresh image/data check passes all 652 compared data symbols.
+> **The server is byte-identical, freshly rebuilt for [v1.6.1](https://github.com/maci0/guild-rebrew/releases/tag/v1.6.1):**
+> all **286,720 bytes**, **316 function checks** and **652 data checks** pass.
+> All server code and data bars now reach **100%**.
 > **Gold and GoldTL are comparison scaffolds, not playable or byte-identical.**
-> Both clients have linked as raw comparison executables with same-build maps.
-> The configured GoldTL audit EXE is unavailable while its rebuild is in progress.
-> Source recovery, unsupported assembly and provider/storage work remain.
-> The [last completed server gate](docs/TODO.md#verified-checkpoint) confirmed
-> complete file equality and passed; it does not verify later source edits.
-
-The [latest recorded work](docs/TODO.md)
-includes ongoing source reorganization and fresh data checks. Function counts
-below describe the current working tree; linked images are separate snapshots
-with substantial stubs and layout differences. See the [handoff](docs/HANDOFF.md).
+> Their existing raw executables can be compared, but contain substantial stubs
+> and layout differences. They were not rebuilt for this release.
 
 **[Start here](#get-started)** &nbsp; · &nbsp;
 **[Build & compare](#build-and-compare)** &nbsp; · &nbsp;
@@ -33,115 +26,95 @@ with substantial stubs and layout differences. See the [handoff](docs/HANDOFF.md
 
 | Target | Code accounted for | C functions matched | Raw file at original offsets |
 | --- | ---: | ---: | ---: |
-| **Server** | **97.9%** | 247 / 251 · 98.4% | 100.0% |
-| **GoldTL** | **51.4%** | 3,835 / 4,946 · 77.5% | N/A |
-| **Gold** | **20.8%** | 1,882 / 4,426 · 42.5% | 1.1% |
+| **Server** | **100.0%** | 251 / 251 · 100.0% | 100.0% |
+| **GoldTL** | **47.8%** | 3,804 / 5,122 · 74.2% | 2.0% |
+| **Gold** | **22.6%** | 2,466 / 4,592 · 53.7% | 1.1% |
 
-**Code accounting** is Rebrew's byte-based measure of virtual `.text`: matched
-functions, identified libraries and alignment padding. **Function matches**
-give every function equal weight, regardless of size. **Raw-file agreement**
-compares the existing built file with the reference at original offsets;
-displaced code still differs there. None of these alone establishes completion.
-**N/A** means the configured built image is missing; an older score is not reused.
+**Code accounting** measures virtual `.text`: matched functions, identified
+libraries and alignment padding. **C matches** give every function equal weight;
+libraries, PROVEN verdicts and whole-function assembly do not count as C.
+**Raw-file agreement** compares built bytes at their original offsets. These are
+separate measures, not gameplay-completion scores.
 
 <!-- progress:start -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/fc06532df21c8f0dc7a3441d92389a82261cec29/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
+  <img src="docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and raw-file agreement at original offsets.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
   <p align="center">
-    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/fc06532df21c8f0dc7a3441d92389a82261cec29/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
+    <img src="docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
   </p>
 </details>
 <!-- progress:end -->
 
-<sub>Snapshot refreshed 2026-10-24 18:38 UTC from
-<code>rebrew status --all-targets --json</code>. Function counts reflect stored
-verdicts and ongoing, uncommitted source/binding changes, not a fresh compilation.
-The server's existing raw image remains identical even though four current source
-claims are unverified. Server and Gold data were rechecked; GoldTL has no current
-audit EXE and its map is empty during the rebuild. TL data below retains the last
-successful check, not a fresh result. Libraries, semantic PROVEN verdicts and
-whole-function assembly matches are excluded from C totals. Inline assembly may
-remain.</sub>
+<sub>Release snapshot: 2026-10-26 16:14 UTC, from one
+<code>rebrew status --all-targets --json</code> report. The server was rebuilt
+and verified with Rebrew 6.3.1. Client function figures are stored verdicts for
+the committed release sources; their existing images were rechecked for data.
+Uncommitted client reconstruction work is excluded from this release snapshot.
+Inline assembly may remain.</sub>
 
 The server uses plain VC6 SP5 with `/MT` / LIBCMT. Both clients use the
 Processor Pack: GoldTL with `/MT` / LIBCMT, Gold with `/ML` / LIBC.
+Gold also has **26 whole-function assembly matches**, counted separately.
 
-Gold has another **one whole-function assembly match**, counted separately.
-Remaining work in the same snapshot:
+| Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | EXTRACT_ERROR | Without source |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| **Server** | 0 | 0 | 0 | 0 | 0 |
+| **GoldTL** | 297 | 904 | 81 | 5 | 31 |
+| **Gold** | 1,853 | 218 | 26 | 0 | 3 |
 
-| Target | STUB | SIZE_MISMATCH | NEAR_MATCHING | PROVEN only | EXTRACT_ERROR | Without source |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| **Server** | 0 | 0 | 0 | 0 | 0 | 4 |
-| **GoldTL** | 1 | 1,024 | 81 | 5 | 0 | 0 |
-| **Gold** | 36 | 49 | 5 | 0 | 0 | 2,453 |
-
-These categories reflect the current source bindings. A moved or retired claim
-can change the counts without changing built bytes or earning a match. GoldTL
-still has 1,024 size mismatches despite its low STUB count; a complete body does
-not mean byte identity. Function percentages measure entries, not code bytes or
-gameplay completeness. All 286,720 existing server bytes match, including imports,
-relocations, headers and layout. Client links use explicit comparison
-placeholders and remain unsuitable for gameplay. No rebuild, per-function batch
-or full gate ran for this data-only refresh.
+The server inventory now ends each of 76 verified functions before its trailing
+NOP alignment: 712 bytes remain padding, not unverified function tails. No
+binary bytes were changed. Its 251 game functions and 65 source-built library
+functions pass the fresh check. The client counts are not new byte-match claims.
 
 ## Data verification
 
-Data placement refreshed 2026-10-24 19:24 UTC with the upstream Rebrew 6.1.1 fix.
-The server now reaches **100% on all three data bars**.
+Refreshed 2026-10-26 16:14 UTC against the existing images and their matching maps.
+The server has **100% initialized bytes, verified records and exact placement**.
 
 | Target | Initialized data bytes verified | Verified records (incl. BSS/views) | EXACT at reference VA | Displaced records |
 | --- | ---: | ---: | ---: | ---: |
 | **Server** | 66,664 / 66,664 · 100.0% | 547 / 547 | 547 | 0 |
-| **GoldTL** | 0 / 335,380 · 0.0% | 2 / 361 | 0 | 339 |
-| **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 304 |
+| **GoldTL** | 0 / 335,380 · 0.0% | 0 / 361 | 0 | 356 |
+| **Gold** | 0 / 280,072 · 0.0% | 0 / 319 | 0 | 309 |
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/3e10ea578fabc0bd15e44246baa66dc3f55e0cb4/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, catalogued symbols including BSS, and EXACT symbols at their reference addresses; displacement and unchecked data shown separately.">
+  <img src="docs/data-progress.svg" width="715" alt="Three data bars per target: initialized bytes, verified records including BSS and views, and exact placement. All server bars are 100 percent.">
 </p>
 
-Byte coverage counts each initialized `.data`/`.rdata` byte once; it excludes
-BSS and copied imports. Record totals include BSS and views, so a verified
-record need not contribute initialized bytes. EXACT requires matching bytes at
-a checked reference address. Placement comes from link-map symbols, private
-symbols recovered from matching COFF sections, bounded backing-object offsets,
-or section-relative layout intervals. A layout span is an interval, not a new
-allocation. These checks do not establish source or storage ownership.
+Initialized-byte coverage counts `.data`/`.rdata` once and excludes BSS and copied
+imports. Record totals include BSS and views. EXACT requires matching bytes at a
+checked reference address. Link-map symbols, checked private COFF symbols,
+bounded backing offsets and section-relative intervals can establish placement;
+a layout interval does not allocate storage or establish its owner.
 
-The previous 138-record server gap is resolved: 123 layout intervals, four
-backing-offset aliases, ten private symbols and one reviewed compiler literal.
-No storage or linker symbols were added, and no binary bytes changed. The fresh
-server check passes all 652 raw records; the chart excludes imports and other
-records outside its 547-record denominator. Client data results remain from
-their last stated checks below. GoldTL's audit image is still unavailable during
-its rebuild, so it has no fresh data result here.
-
-Gold uses `build/Europa1400Gold.exe`; GoldTL is configured to use
-`build-goldtl-audit/Europa1400Gold_TL.exe`. Each needs its matching `.map`.
-Once the configured image exists, compare data without recompiling functions
-(exit 1 reports scaffold differences):
+The server passes all 652 raw data checks; the charts exclude imports and other
+records outside their 547-record denominator. Client content may match at a
+displaced address without earning exact placement. Their strict verified-data
+bars therefore remain at zero.
 
 ```sh
+uv run rebrew verify --data --target server.dll
 uv run rebrew verify --data --target Europa1400Gold.exe
 uv run rebrew verify --data --target Europa1400Gold_TL.exe
 ```
 
-Raw-image diagnostics, with each measurement time:
+Each configured image needs its matching `.map`. The release uses
+`build/server.dll`, `build/Europa1400Gold.exe` and
+`build/Europa1400Gold_TL.exe`. Exit 1 reports comparison-scaffold differences.
 
-| Target | Content matches | Differs | Missing | Not comparable | Checked (UTC) |
-| --- | ---: | ---: | ---: | ---: | --- |
-| **Server** | 652 | 0 | 0 | 0 | 2026-10-24 19:24 |
-| **GoldTL** | 125 | 51 | 15 | 172 | 2026-10-24 15:27 (previous build) |
-| **Gold** | 83 | 30 | 49 | 159 | 2026-10-24 18:37 |
+| Target | Content matches | Differs | Missing | Not comparable |
+| --- | ---: | ---: | ---: | ---: |
+| **Server** | 652 | 0 | 0 | 0 |
+| **GoldTL** | 100 | 51 | 40 | 172 |
+| **Gold** | 83 | 30 | 49 | 159 |
 
-These diagnostics include imports and bounded virtual-tail checks excluded
-from initialized-byte coverage. BSS verification contributes no file bytes;
-unknown or out-of-image extents stay uncomparable. Most client records are
-displaced, so the
-stricter charts retain zero client EXACT data placements. See the
-[comparison-build guide](stubs/README.md) for placeholders and build commands.
+These diagnostics include imports and bounded virtual-tail checks. BSS adds no
+file bytes; unknown extents remain uncomparable. See the
+[comparison-build guide](stubs/README.md) for client placeholders.
 
 ## Get started
 
@@ -206,7 +179,7 @@ uv sync
 uv run rebrew --version
 ```
 
-`uv sync` installs pinned Rebrew 6.3.0 and the project dependencies into
+`uv sync` installs pinned Rebrew 6.3.1 and the project dependencies into
 `.venv`. On CPython 3.15 for Linux x86_64, Linux aarch64, macOS arm64, and Windows
 x64, the lock selects the published python-flirt wheels. PyPy and any other
 3.15 interpreter, other Python versions, and other platforms keep Rebrew's
@@ -222,7 +195,7 @@ released source on Python 3.15. Put a JDK and [Apache Ant](https://ant.apache.or
 on `PATH` before running it; qualification used JDK 27 and Ant 1.10.18.
 
 Install the optional dashboard with `uv sync --extra dashboard`; it pins
-Recoverage 8.6.0 alongside Rebrew 6.3.0. Keep `--extra dashboard` on later
+Recoverage 8.6.0 alongside Rebrew 6.3.1. Keep `--extra dashboard` on later
 syncs to retain it.
 
 ### 3. Supply the original server DLL

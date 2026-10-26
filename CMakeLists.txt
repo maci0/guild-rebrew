@@ -296,7 +296,7 @@ if(REBREW_BUILD_SERVER)
     set_source_files_properties("${_SERVER_EXP}" PROPERTIES GENERATED TRUE EXTERNAL_OBJECT TRUE)
     target_sources(server_dll PRIVATE "${_SERVER_EXP}")
     set_property(TARGET server_dll PROPERTY RULE_LAUNCH_LINK
-      "\"${CMAKE_COMMAND}\" -E env SOURCE_DATE_EPOCH=${_SERVER_LINK_EPOCH} \"REBREW_TOOLCHAIN_OVERLAY_DIR=${PROJECT_SOURCE_DIR}/cmake/toolchain-overlays\"")
+      "\"${CMAKE_COMMAND}\" -E env SOURCE_DATE_EPOCH=${_SERVER_LINK_EPOCH}")
   else()
     target_sources(server_dll PRIVATE "${PROJECT_SOURCE_DIR}/src/server.def")
   endif()

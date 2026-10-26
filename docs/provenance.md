@@ -1597,3 +1597,38 @@ Evidence: Rebrew source 5a061567252087a6c9c96dd5a86eb62513ce5d2a, wheel SHA256 9
 Verification: both frozen and canonical trees passed 39 tests and 3 subtests, all three rebrew status target checks, repeated `uv sync --frozen --extra dashboard --extra binsync --extra dev` and `uv pip check`. Installed Rebrew 318 and Recoverage 35 wheel members (excluding installer-managed RECORD) equal the public wheels, including the relocated man page. Frozen `recoverage --json stats` returned all three targets; frozen and canonical `recoverage --json config` passed. Whole live canonical stats refused concurrently changing Gold/GoldTL inputs with exit 2 after 490 seconds; no consistent live snapshot is claimed. Its exact error and receipt are retained in .scratch/python315-consumer-qualification. No worker was interrupted and no consistency guard was relaxed.
 Scope: normal-GIL CPython 3.15.1, SOABI cpython-315-x86_64-linux-gnu. Persistent python-flirt overrides retained module SHA256 4bca0775a106b1e7ff0ed162ddcbe69872f0261ca90d942b73cbe59093f1467c after repeated sync. PEP 508 cannot distinguish musl/free-threading; those builds need maintained source and separate qualification. No compiler or new native byte-identity rebuild is claimed.
 Canonical custody: pin fields changed in place; the complete provenance preimage 6d7b47186320fb00b631458570b025eb7d04cdb5dfa19e751fd0a7e0cd5caa02 remains a byte prefix. The index stayed byte-identical through our merge and qualification. Later concurrent stat-cache refresh changed index bytes, but before/after staged entries remain exactly equal. No HEAD/index operation, native-file replacement or WIP commit was performed by this lane. Canonical HEAD remains 8409e783fb13bb405ce0991c238929ad64a8ca0c with legitimate tooling/native WIP.
+
+## Release 1.6.1 — server verification and charts (2026-10-27)
+
+A fresh isolated build with published Rebrew 6.3.1 reproduces all 286,720 server
+bytes (SHA-256 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
+Verification passes 316/316 functions (251 game, 65 source-built library) and
+652/652 data records. Status reports 100% server code accounting, C matches,
+raw-file agreement and all three data bars (547/547 records, 66,664 bytes).
+
+Reviewed 76 server inventory extents end before 712 trailing NOPs. Those bytes
+remain linker/compiler alignment; no source or image bytes were inserted.
+Rebrew now supplies the native Microsoft-runtime toolchain profile, so the
+obsolete duplicate project overlay and its CMake environment override are removed.
+
+The README and all three graphics use one release-source status snapshot after
+fresh data checks. GoldTL: 3,804/5,122 C matches, 47.8% code accounting; Gold:
+2,466/4,592 C matches, 22.6%. Existing client raw images agree at 2.0% and 1.1%.
+Neither client was rebuilt or made playable. Ongoing uncommitted client recovery
+is preserved outside this release; its larger counts must not be mixed into the
+release charts. Canonical server bindings accidentally retired by the client
+library sweep were restored separately and their two TUs pass 80/80 checks.
+
+Release tests: 39 passed and 3 subtests; server lint is 7,341 passed with zero
+errors or warnings. Generated guidance is refreshed with project rules preserved;
+the unchanged office-slot type passes sizeof and all six offsetof checks. All
+dependency extras resolve, `uv lock --check` and `uv pip check` pass. Source-built library attribution and whole-file
+identity remain separate claims. No full project gate or new gameplay test is
+claimed. Local receipts: `.scratch/release-20261027/`.
+
+Change: release README, graphics, dependency pin, server inventory boundaries,
+comparison receipts and removal of the obsolete toolchain overlay. Reason: make
+the public release reproducible and its code/data totals consistent. Decision
+owner: project maintainer, through the requested release. Verification: fresh
+raw build, whole-image comparison, 316 function and 652 data checks, chart
+accounting checks, 39 tests plus 3 subtests. Client source WIP was not published.

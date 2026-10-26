@@ -111,8 +111,17 @@
   },
   {
     "va": 268445552,
-    "size": 2128,
-    "name": "fcn.10002770"
+    "size": 2115,
+    "name": "fcn.10002770",
+    "extent_history": [
+      {
+        "old_size": 2128,
+        "new_size": 2115,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136035+00:00"
+      }
+    ]
   },
   {
     "va": 268447680,
@@ -126,13 +135,31 @@
   },
   {
     "va": 268448064,
-    "size": 48,
-    "name": "fcn.10003140"
+    "size": 33,
+    "name": "fcn.10003140",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 33,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136044+00:00"
+      }
+    ]
   },
   {
     "va": 268448112,
-    "size": 240,
-    "name": "fcn.10003170"
+    "size": 235,
+    "name": "fcn.10003170",
+    "extent_history": [
+      {
+        "old_size": 240,
+        "new_size": 235,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136047+00:00"
+      }
+    ]
   },
   {
     "va": 268448352,
@@ -186,8 +213,17 @@
   },
   {
     "va": 268449344,
-    "size": 144,
-    "name": "fcn.10003640"
+    "size": 132,
+    "name": "fcn.10003640",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 132,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136050+00:00"
+      }
+    ]
   },
   {
     "va": 268449488,
@@ -331,8 +367,17 @@
   },
   {
     "va": 268461440,
-    "size": 672,
-    "name": "fcn.10006580"
+    "size": 658,
+    "name": "fcn.10006580",
+    "extent_history": [
+      {
+        "old_size": 672,
+        "new_size": 658,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136053+00:00"
+      }
+    ]
   },
   {
     "va": 268462112,
@@ -366,13 +411,31 @@
   },
   {
     "va": 268463392,
-    "size": 272,
-    "name": "fcn.10006d20"
+    "size": 270,
+    "name": "fcn.10006d20",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 270,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136055+00:00"
+      }
+    ]
   },
   {
     "va": 268463664,
-    "size": 144,
-    "name": "fcn.10006e30"
+    "size": 137,
+    "name": "fcn.10006e30",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 137,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136057+00:00"
+      }
+    ]
   },
   {
     "va": 268463808,
@@ -526,8 +589,17 @@
   },
   {
     "va": 268472352,
-    "size": 704,
-    "name": "fcn.10009020"
+    "size": 701,
+    "name": "fcn.10009020",
+    "extent_history": [
+      {
+        "old_size": 704,
+        "new_size": 701,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136059+00:00"
+      }
+    ]
   },
   {
     "va": 268473056,
@@ -586,8 +658,17 @@
   },
   {
     "va": 268476000,
-    "size": 432,
-    "name": "fcn.10009e60"
+    "size": 419,
+    "name": "fcn.10009e60",
+    "extent_history": [
+      {
+        "old_size": 432,
+        "new_size": 419,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136061+00:00"
+      }
+    ]
   },
   {
     "va": 268476432,
@@ -626,23 +707,59 @@
   },
   {
     "va": 268477808,
-    "size": 752,
-    "name": "fcn.1000a570"
+    "size": 750,
+    "name": "fcn.1000a570",
+    "extent_history": [
+      {
+        "old_size": 752,
+        "new_size": 750,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136063+00:00"
+      }
+    ]
   },
   {
     "va": 268478560,
-    "size": 144,
-    "name": "fcn.1000a860"
+    "size": 131,
+    "name": "fcn.1000a860",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 131,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136065+00:00"
+      }
+    ]
   },
   {
     "va": 268478704,
-    "size": 176,
-    "name": "fcn.1000a8f0"
+    "size": 170,
+    "name": "fcn.1000a8f0",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 170,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136067+00:00"
+      }
+    ]
   },
   {
     "va": 268478880,
-    "size": 176,
-    "name": "fcn.1000a9a0"
+    "size": 170,
+    "name": "fcn.1000a9a0",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 170,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136070+00:00"
+      }
+    ]
   },
   {
     "va": 268479056,
@@ -756,18 +873,45 @@
   },
   {
     "va": 268481600,
-    "size": 144,
-    "name": "fcn.1000b440"
+    "size": 133,
+    "name": "fcn.1000b440",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 133,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136072+00:00"
+      }
+    ]
   },
   {
     "va": 268481744,
-    "size": 848,
-    "name": "fcn.1000b4d0"
+    "size": 836,
+    "name": "fcn.1000b4d0",
+    "extent_history": [
+      {
+        "old_size": 848,
+        "new_size": 836,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136074+00:00"
+      }
+    ]
   },
   {
     "va": 268482592,
-    "size": 48,
-    "name": "fcn.1000b820"
+    "size": 42,
+    "name": "fcn.1000b820",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 42,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136076+00:00"
+      }
+    ]
   },
   {
     "va": 268482640,
@@ -776,8 +920,17 @@
   },
   {
     "va": 268482688,
-    "size": 272,
-    "name": "fcn.1000b880"
+    "size": 263,
+    "name": "fcn.1000b880",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 263,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136078+00:00"
+      }
+    ]
   },
   {
     "va": 268482960,
@@ -821,13 +974,31 @@
   },
   {
     "va": 268485088,
-    "size": 160,
-    "name": "fcn.1000c1e0"
+    "size": 148,
+    "name": "fcn.1000c1e0",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 148,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136081+00:00"
+      }
+    ]
   },
   {
     "va": 268485248,
-    "size": 144,
-    "name": "fcn.1000c280"
+    "size": 130,
+    "name": "fcn.1000c280",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 130,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136083+00:00"
+      }
+    ]
   },
   {
     "va": 268485392,
@@ -836,13 +1007,31 @@
   },
   {
     "va": 268485504,
-    "size": 64,
-    "name": "fcn.1000c380"
+    "size": 51,
+    "name": "fcn.1000c380",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 51,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136085+00:00"
+      }
+    ]
   },
   {
     "va": 268485568,
-    "size": 96,
-    "name": "fcn.1000c3c0"
+    "size": 83,
+    "name": "fcn.1000c3c0",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 83,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136087+00:00"
+      }
+    ]
   },
   {
     "va": 268485664,
@@ -856,13 +1045,31 @@
   },
   {
     "va": 268485840,
-    "size": 304,
-    "name": "fcn.1000c4d0"
+    "size": 295,
+    "name": "fcn.1000c4d0",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 295,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136089+00:00"
+      }
+    ]
   },
   {
     "va": 268486144,
-    "size": 112,
-    "name": "fcn.1000c600"
+    "size": 109,
+    "name": "fcn.1000c600",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 109,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136092+00:00"
+      }
+    ]
   },
   {
     "va": 268486256,
@@ -901,8 +1108,17 @@
   },
   {
     "va": 268487168,
-    "size": 144,
-    "name": "fcn.1000ca00"
+    "size": 130,
+    "name": "fcn.1000ca00",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 130,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136094+00:00"
+      }
+    ]
   },
   {
     "va": 268487312,
@@ -936,8 +1152,17 @@
   },
   {
     "va": 268488496,
-    "size": 176,
-    "name": "fcn.1000cf30"
+    "size": 162,
+    "name": "fcn.1000cf30",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 162,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136096+00:00"
+      }
+    ]
   },
   {
     "va": 268488672,
@@ -986,8 +1211,17 @@
   },
   {
     "va": 268489440,
-    "size": 80,
-    "name": "fcn.1000d2e0"
+    "size": 77,
+    "name": "fcn.1000d2e0",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 77,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136098+00:00"
+      }
+    ]
   },
   {
     "va": 268489520,
@@ -1056,8 +1290,17 @@
   },
   {
     "va": 268493120,
-    "size": 1008,
-    "name": "fcn.1000e140"
+    "size": 993,
+    "name": "fcn.1000e140",
+    "extent_history": [
+      {
+        "old_size": 1008,
+        "new_size": 993,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136100+00:00"
+      }
+    ]
   },
   {
     "va": 268494128,
@@ -1156,8 +1399,17 @@
   },
   {
     "va": 268497104,
-    "size": 208,
-    "name": "fcn.1000f0d0"
+    "size": 197,
+    "name": "fcn.1000f0d0",
+    "extent_history": [
+      {
+        "old_size": 208,
+        "new_size": 197,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136102+00:00"
+      }
+    ]
   },
   {
     "va": 268497312,
@@ -1171,8 +1423,17 @@
   },
   {
     "va": 268497648,
-    "size": 176,
-    "name": "fcn.1000f2f0"
+    "size": 172,
+    "name": "fcn.1000f2f0",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 172,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136104+00:00"
+      }
+    ]
   },
   {
     "va": 268497840,
@@ -1196,8 +1457,17 @@
   },
   {
     "va": 268498736,
-    "size": 528,
-    "name": "fcn.1000f730"
+    "size": 515,
+    "name": "fcn.1000f730",
+    "extent_history": [
+      {
+        "old_size": 528,
+        "new_size": 515,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136106+00:00"
+      }
+    ]
   },
   {
     "va": 268499264,
@@ -1236,8 +1506,17 @@
   },
   {
     "va": 268499760,
-    "size": 160,
-    "name": "fcn.1000fb30"
+    "size": 153,
+    "name": "fcn.1000fb30",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 153,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136108+00:00"
+      }
+    ]
   },
   {
     "va": 268499920,
@@ -1251,13 +1530,31 @@
   },
   {
     "va": 268499984,
-    "size": 320,
-    "name": "fcn.1000fc10"
+    "size": 308,
+    "name": "fcn.1000fc10",
+    "extent_history": [
+      {
+        "old_size": 320,
+        "new_size": 308,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136110+00:00"
+      }
+    ]
   },
   {
     "va": 268500304,
-    "size": 448,
-    "name": "fcn.1000fd50"
+    "size": 445,
+    "name": "fcn.1000fd50",
+    "extent_history": [
+      {
+        "old_size": 448,
+        "new_size": 445,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136113+00:00"
+      }
+    ]
   },
   {
     "va": 268500752,
@@ -1271,8 +1568,17 @@
   },
   {
     "va": 268500832,
-    "size": 96,
-    "name": "fcn.1000ff60"
+    "size": 82,
+    "name": "fcn.1000ff60",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 82,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136115+00:00"
+      }
+    ]
   },
   {
     "va": 268500928,
@@ -1346,13 +1652,31 @@
   },
   {
     "va": 268501904,
-    "size": 272,
-    "name": "fcn.10010390"
+    "size": 262,
+    "name": "fcn.10010390",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 262,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136117+00:00"
+      }
+    ]
   },
   {
     "va": 268502176,
-    "size": 144,
-    "name": "fcn.100104a0"
+    "size": 135,
+    "name": "fcn.100104a0",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 135,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136119+00:00"
+      }
+    ]
   },
   {
     "va": 268502320,
@@ -1361,8 +1685,17 @@
   },
   {
     "va": 268502448,
-    "size": 336,
-    "name": "fcn.100105b0"
+    "size": 329,
+    "name": "fcn.100105b0",
+    "extent_history": [
+      {
+        "old_size": 336,
+        "new_size": 329,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136122+00:00"
+      }
+    ]
   },
   {
     "va": 268502784,
@@ -1376,8 +1709,17 @@
   },
   {
     "va": 268503120,
-    "size": 384,
-    "name": "fcn.10010850"
+    "size": 370,
+    "name": "fcn.10010850",
+    "extent_history": [
+      {
+        "old_size": 384,
+        "new_size": 370,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136124+00:00"
+      }
+    ]
   },
   {
     "va": 268503504,
@@ -1396,18 +1738,45 @@
   },
   {
     "va": 268504992,
-    "size": 528,
-    "name": "fcn.10010fa0"
+    "size": 525,
+    "name": "fcn.10010fa0",
+    "extent_history": [
+      {
+        "old_size": 528,
+        "new_size": 525,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136126+00:00"
+      }
+    ]
   },
   {
     "va": 268505520,
-    "size": 512,
-    "name": "fcn.100111b0"
+    "size": 501,
+    "name": "fcn.100111b0",
+    "extent_history": [
+      {
+        "old_size": 512,
+        "new_size": 501,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136129+00:00"
+      }
+    ]
   },
   {
     "va": 268506032,
-    "size": 400,
-    "name": "fcn.100113b0"
+    "size": 390,
+    "name": "fcn.100113b0",
+    "extent_history": [
+      {
+        "old_size": 400,
+        "new_size": 390,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136130+00:00"
+      }
+    ]
   },
   {
     "va": 268506432,
@@ -1416,13 +1785,31 @@
   },
   {
     "va": 268506720,
-    "size": 304,
-    "name": "fcn.10011660"
+    "size": 297,
+    "name": "fcn.10011660",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 297,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136133+00:00"
+      }
+    ]
   },
   {
     "va": 268507024,
-    "size": 256,
-    "name": "fcn.10011790"
+    "size": 242,
+    "name": "fcn.10011790",
+    "extent_history": [
+      {
+        "old_size": 256,
+        "new_size": 242,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136135+00:00"
+      }
+    ]
   },
   {
     "va": 268507280,
@@ -1471,8 +1858,17 @@
   },
   {
     "va": 268510320,
-    "size": 864,
-    "name": "fcn.10012470"
+    "size": 857,
+    "name": "fcn.10012470",
+    "extent_history": [
+      {
+        "old_size": 864,
+        "new_size": 857,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136137+00:00"
+      }
+    ]
   },
   {
     "va": 268511184,
@@ -1501,8 +1897,17 @@
   },
   {
     "va": 268513840,
-    "size": 2272,
-    "name": "fcn.10013230"
+    "size": 2268,
+    "name": "fcn.10013230",
+    "extent_history": [
+      {
+        "old_size": 2272,
+        "new_size": 2268,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136139+00:00"
+      }
+    ]
   },
   {
     "va": 268516112,
@@ -1526,8 +1931,17 @@
   },
   {
     "va": 268518880,
-    "size": 224,
-    "name": "fcn.100145e0"
+    "size": 209,
+    "name": "fcn.100145e0",
+    "extent_history": [
+      {
+        "old_size": 224,
+        "new_size": 209,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136141+00:00"
+      }
+    ]
   },
   {
     "va": 268519104,
@@ -1541,8 +1955,17 @@
   },
   {
     "va": 268520016,
-    "size": 160,
-    "name": "fcn.10014a50"
+    "size": 157,
+    "name": "fcn.10014a50",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 157,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136143+00:00"
+      }
+    ]
   },
   {
     "va": 268520176,
@@ -1556,8 +1979,17 @@
   },
   {
     "va": 268520432,
-    "size": 176,
-    "name": "fcn.10014bf0"
+    "size": 163,
+    "name": "fcn.10014bf0",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 163,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136146+00:00"
+      }
+    ]
   },
   {
     "va": 268520608,
@@ -1566,33 +1998,87 @@
   },
   {
     "va": 268520880,
-    "size": 304,
-    "name": "fcn.10014db0"
+    "size": 296,
+    "name": "fcn.10014db0",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 296,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136148+00:00"
+      }
+    ]
   },
   {
     "va": 268521184,
-    "size": 80,
-    "name": "fcn.10014ee0"
+    "size": 69,
+    "name": "fcn.10014ee0",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 69,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136150+00:00"
+      }
+    ]
   },
   {
     "va": 268521264,
-    "size": 80,
-    "name": "fcn.10014f30"
+    "size": 74,
+    "name": "fcn.10014f30",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 74,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136152+00:00"
+      }
+    ]
   },
   {
     "va": 268521344,
-    "size": 112,
-    "name": "fcn.10014f80"
+    "size": 103,
+    "name": "fcn.10014f80",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 103,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136154+00:00"
+      }
+    ]
   },
   {
     "va": 268521456,
-    "size": 176,
-    "name": "fcn.10014ff0"
+    "size": 175,
+    "name": "fcn.10014ff0",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 175,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136157+00:00"
+      }
+    ]
   },
   {
     "va": 268521632,
-    "size": 272,
-    "name": "fcn.100150a0"
+    "size": 257,
+    "name": "fcn.100150a0",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 257,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136159+00:00"
+      }
+    ]
   },
   {
     "va": 268521904,
@@ -1616,8 +2102,17 @@
   },
   {
     "va": 268522592,
-    "size": 160,
-    "name": "fcn.10015460"
+    "size": 145,
+    "name": "fcn.10015460",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 145,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136161+00:00"
+      }
+    ]
   },
   {
     "va": 268522752,
@@ -1631,8 +2126,17 @@
   },
   {
     "va": 268522944,
-    "size": 208,
-    "name": "fcn.100155c0"
+    "size": 197,
+    "name": "fcn.100155c0",
+    "extent_history": [
+      {
+        "old_size": 208,
+        "new_size": 197,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136163+00:00"
+      }
+    ]
   },
   {
     "va": 268523152,
@@ -1651,8 +2155,17 @@
   },
   {
     "va": 268523856,
-    "size": 864,
-    "name": "fcn.10015950"
+    "size": 861,
+    "name": "fcn.10015950",
+    "extent_history": [
+      {
+        "old_size": 864,
+        "new_size": 861,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136165+00:00"
+      }
+    ]
   },
   {
     "va": 268524720,
@@ -1666,8 +2179,17 @@
   },
   {
     "va": 268524992,
-    "size": 64,
-    "name": "fcn.10015dc0"
+    "size": 55,
+    "name": "fcn.10015dc0",
+    "extent_history": [
+      {
+        "old_size": 64,
+        "new_size": 55,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136168+00:00"
+      }
+    ]
   },
   {
     "va": 268525056,
@@ -1691,8 +2213,17 @@
   },
   {
     "va": 268525424,
-    "size": 720,
-    "name": "fcn.10015f70"
+    "size": 714,
+    "name": "fcn.10015f70",
+    "extent_history": [
+      {
+        "old_size": 720,
+        "new_size": 714,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136170+00:00"
+      }
+    ]
   },
   {
     "va": 268526144,
@@ -1726,13 +2257,31 @@
   },
   {
     "va": 268527056,
-    "size": 160,
-    "name": "fcn.100165d0"
+    "size": 155,
+    "name": "fcn.100165d0",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 155,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136172+00:00"
+      }
+    ]
   },
   {
     "va": 268527232,
-    "size": 144,
-    "name": "fcn.10016680"
+    "size": 139,
+    "name": "fcn.10016680",
+    "extent_history": [
+      {
+        "old_size": 144,
+        "new_size": 139,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136174+00:00"
+      }
+    ]
   },
   {
     "va": 268527376,
@@ -1746,8 +2295,17 @@
   },
   {
     "va": 268527456,
-    "size": 1392,
-    "name": "fcn.10016760"
+    "size": 1379,
+    "name": "fcn.10016760",
+    "extent_history": [
+      {
+        "old_size": 1392,
+        "new_size": 1379,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136176+00:00"
+      }
+    ]
   },
   {
     "va": 268528848,
@@ -1776,18 +2334,45 @@
   },
   {
     "va": 268529888,
-    "size": 304,
-    "name": "fcn.100170e0"
+    "size": 296,
+    "name": "fcn.100170e0",
+    "extent_history": [
+      {
+        "old_size": 304,
+        "new_size": 296,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136178+00:00"
+      }
+    ]
   },
   {
     "va": 268530192,
-    "size": 48,
-    "name": "fcn.10017210"
+    "size": 39,
+    "name": "fcn.10017210",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 39,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136180+00:00"
+      }
+    ]
   },
   {
     "va": 268530240,
-    "size": 240,
-    "name": "fcn.10017240"
+    "size": 232,
+    "name": "fcn.10017240",
+    "extent_history": [
+      {
+        "old_size": 240,
+        "new_size": 232,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136182+00:00"
+      }
+    ]
   },
   {
     "va": 268530480,
@@ -1801,13 +2386,31 @@
   },
   {
     "va": 268530896,
-    "size": 1088,
-    "name": "fcn.100174d0"
+    "size": 1078,
+    "name": "fcn.100174d0",
+    "extent_history": [
+      {
+        "old_size": 1088,
+        "new_size": 1078,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136184+00:00"
+      }
+    ]
   },
   {
     "va": 268531984,
-    "size": 160,
-    "name": "fcn.10017910"
+    "size": 145,
+    "name": "fcn.10017910",
+    "extent_history": [
+      {
+        "old_size": 160,
+        "new_size": 145,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136186+00:00"
+      }
+    ]
   },
   {
     "va": 268532144,
@@ -1871,8 +2474,17 @@
   },
   {
     "va": 268533680,
-    "size": 288,
-    "name": "fcn.10017fb0"
+    "size": 278,
+    "name": "fcn.10017fb0",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 278,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136189+00:00"
+      }
+    ]
   },
   {
     "va": 268533968,
@@ -1916,13 +2528,31 @@
   },
   {
     "va": 268534576,
-    "size": 288,
-    "name": "fcn.10018330"
+    "size": 276,
+    "name": "fcn.10018330",
+    "extent_history": [
+      {
+        "old_size": 288,
+        "new_size": 276,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136191+00:00"
+      }
+    ]
   },
   {
     "va": 268534864,
-    "size": 80,
-    "name": "fcn.10018450"
+    "size": 78,
+    "name": "fcn.10018450",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 78,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136193+00:00"
+      }
+    ]
   },
   {
     "va": 268534944,
@@ -1936,8 +2566,17 @@
   },
   {
     "va": 268535008,
-    "size": 80,
-    "name": "fcn.100184e0"
+    "size": 66,
+    "name": "fcn.100184e0",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 66,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136196+00:00"
+      }
+    ]
   },
   {
     "va": 268535088,
@@ -1951,8 +2590,17 @@
   },
   {
     "va": 268539584,
-    "size": 96,
-    "name": "fcn.100196c0"
+    "size": 81,
+    "name": "fcn.100196c0",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 81,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136198+00:00"
+      }
+    ]
   },
   {
     "va": 268539680,
@@ -1981,8 +2629,17 @@
   },
   {
     "va": 268540640,
-    "size": 96,
-    "name": "fcn.10019ae0"
+    "size": 82,
+    "name": "fcn.10019ae0",
+    "extent_history": [
+      {
+        "old_size": 96,
+        "new_size": 82,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136200+00:00"
+      }
+    ]
   },
   {
     "va": 268540736,
@@ -2001,8 +2658,17 @@
   },
   {
     "va": 268541024,
-    "size": 112,
-    "name": "fcn.10019c60"
+    "size": 98,
+    "name": "fcn.10019c60",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 98,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136202+00:00"
+      }
+    ]
   },
   {
     "va": 268541136,
@@ -2011,8 +2677,17 @@
   },
   {
     "va": 268541184,
-    "size": 48,
-    "name": "fcn.10019d00"
+    "size": 39,
+    "name": "fcn.10019d00",
+    "extent_history": [
+      {
+        "old_size": 48,
+        "new_size": 39,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136204+00:00"
+      }
+    ]
   },
   {
     "va": 268541232,
@@ -2026,8 +2701,17 @@
   },
   {
     "va": 268541648,
-    "size": 400,
-    "name": "fcn.10019ed0"
+    "size": 395,
+    "name": "fcn.10019ed0",
+    "extent_history": [
+      {
+        "old_size": 400,
+        "new_size": 395,
+        "reason": "Reviewed 76 SERVER extents: the complete verified bodies are followed by exactly 712 bytes of 0x90 alignment. Keep function bytes and subsequent starts unchanged; exclude trailing NOPs from function extents.",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-10-26T16:07:34.136206+00:00"
+      }
+    ]
   },
   {
     "va": 268542048,

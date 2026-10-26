@@ -269,11 +269,11 @@ symbol = "OFFICE_SLOT"
 size = 24
 native_size = 24
 extent = "stride"
-evidence = "Existing inferred office-slot view. Native TL4e8b80/Gold4e6fc0 copy six DWORDs and advance 24 bytes; role byte is +8 and caller entity/state views are +4/+16. Server office handlers already use this layout. Native extent is a record stride, not table allocation ownership. Fields and original C spelling remain inferred. Complete native and compiler receipts: .scratch/goal48/."
+evidence = "Existing inferred office-slot view. Native TL4e8b80/Gold4e6fc0 copy six DWORDs and advance 24 bytes; role byte is +8 and caller entity/state views are +4/+16. Server office handlers already use this layout. Native extent is a record stride, not table allocation ownership. Fields and original C spelling remain inferred. Complete native and compiler receipts: .scratch/goal48/. Refreshed sizeof and all six offsetof checks under the published Rebrew 6.3.1 context; the declaration is unchanged."
 cflags = "/O2 /Gd"
 source_hash = "649cbe89f24548993167894b4a4d0c3fd4d25383483b2964af8cf583b1c7ac68"
-headers_hash = "0a282ff5832aa127c3906df01a2afbcd8e85afeb147ec38405884a2eb2eb0af2"
-context_hash = "d93bd7ef4e30678f3225f1cf68f4034845c04ba851dbabde4f21d07a84efcfd6"
+headers_hash = "1a186b99b7d6da68efb710e9e25e695a2e180374459432d22034411f15974914"
+context_hash = "e5b2c406e3b989f0f26e097f38bc0c2a8c1c9436bc972a897e99ebfeba5ec286"
 binary_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 
 [types."amt.office_slot".SERVER.offsets]
