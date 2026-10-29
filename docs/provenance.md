@@ -8196,3 +8196,24 @@ exempt them in that tree. Rebinding the provenance to the split definitions is a
 prerequisite for splitting any TU with inline asm.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: split sweep over eight asm-free multi-function TUs finds no further gain
+
+Ran the split-and-retune loop over the eight largest asm-free multi-function TUs:
+msx.c (11), alchemistry_logic.c (7), zufall.c (6), command.c (6), d3_object.c (5),
+GOLDTL.fcn_004fef80.c (4), loadsave.c (4), friedhof_logic.c (4).
+
+Every split built clean and scored 292,198 / 108,630 against the 292,234 /
+108,655 baseline, so all were reverted. command.c and friedhof_logic.c could not
+split at all: `source split --va` reports "Ambiguous C definition for VA" on
+0x4C4D30/0x4F2FE0, i.e. those files define more than one C function mapped to one
+row.
+
+Sweep bug found and repaired by hand: its revert step removed every `src/**/*_c`
+directory, which deleted the pre-existing `command/command_c/` tree during the
+command.c attempt. Restored from git and rebuilt.
+
+The sweep therefore confirms the character.c result was specific: splitting pays
+only when a TU's functions are interleaved with other objects. State: raw
+292,234 / informative 108,655, lint 0 errors / 0 warnings, data conflicts 0. No
+GA was run. Decision: Lead.
