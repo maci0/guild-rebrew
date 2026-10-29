@@ -8316,3 +8316,30 @@ the whole-binary section sizes are the ones to trust for size work.
 
 Restored the pad file and rebuilt to raw 292,234 / informative 108,655. Lint
 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: linked section addresses and file sizes against the reference
+
+Read both PE files directly (`.scratch/organize/pe_sections.py`):
+
+| section | reference RVA/raw | built RVA/raw |
+| --- | --- | --- |
+| .text | 0x1000 / 2,494,464 | 0x1000 / 2,543,616 |
+| .rdata | 0x262000 / 77,824 | 0x26e000 / 53,248 |
+| .data | 0x275000 / 266,240 | 0x27b000 / 671,744 |
+| .data1 | 0x117f000 | 0x2efc000 |
+| .rsrc | 0x1180000 | 0x2efd000 |
+
+The built `.data` begins 0x6000 late (text excess +49,152 minus rdata shortfall
+-24,576), so every relocated `.data` operand is off by that base shift. The
+`.data` file image is also 405,504 bytes longer than the reference: the 176,128
+byte initialized prefix pad plus reconstruction data occupy file bytes that the
+reference keeps in BSS. Converting that pad to BSS would move all following data
+earlier in VA by its size, which the earlier size probes show costs more than it
+gains, so the excess stays until `.text` shrinks.
+
+`.data1` and `.rsrc` sit 43 MB apart from the reference addresses for the same
+reason (built `.data` virtual span). Trimming file sizes to the reference is
+therefore gated on the `.text` excess, as before.
+
+Score unchanged: raw 292,234 / informative 108,655; lint 0 errors / 0 warnings;
+data conflicts 0. No GA was run. Decision: Lead.
