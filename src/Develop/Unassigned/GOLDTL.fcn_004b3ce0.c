@@ -5,29 +5,36 @@ int g_680bd0[1] = {
 /* ADDRESS: GOLDTL 0x004b3ce0 */
 int* __cdecl fcn_004b3ce0(int a0, int* a1)
 {
-	int p;
 	int i;
-	int* q;
+	int* p;
+	char* end;
 
 	if (a1 == 0) {
-		for (i = 0, p = (int) &g_680bd0[4]; p < (int) &g_680bd0[0x544]; p += 0x1c, i++) {
-			if (*(int*) p == a0) {
-				return (int*) ((int) &g_680bd0[i * 0x1c]);
+		i = 0;
+		p = (int*) 0x680bd4;
+		while ((int) p < (int) 0x681114) {
+			if (*p == a0) {
+				return (int*) (0x680bd0 + i * 0x1c);
 			}
+			p = (int*) ((char*) p + 0x1c);
+			i++;
 		}
 		return 0;
 	}
-	if (a1 < (int*) &g_680bd0[0x524]) {
-		q = a1 + 7;
-		if (q <= (int*) &g_680bd0[0x524]) {
-			do {
-				if (q[1] == a0) {
-					return q;
-				}
-				q += 7;
-			} while (q <= (int*) &g_680bd0[0x524]);
-		}
+	end = (char*) 0x6810f4;
+	if ((char*) a1 >= end) {
+		return 0;
 	}
+	p = (int*) ((char*) a1 + 0x1c);
+	if ((char*) p > end) {
+		return 0;
+	}
+	do {
+		if (*(int*) ((char*) p + 4) == a0) {
+			return p;
+		}
+		p = (int*) ((char*) p + 0x1c);
+	} while ((char*) p <= end);
 	return 0;
 }
 unsigned char _dpad_67fca0[3888] = {

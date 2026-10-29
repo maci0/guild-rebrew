@@ -7893,3 +7893,22 @@ image raw 275,324 / informative 93,706, down from 276,100 / 94,121; the gap is
 the discarded variants above plus their layout effect, not a new build fault.
 Lint 0 errors / 0 warnings, data conflicts 0, imports/layout/headers match.
 No GA was run. Decision: Lead.
+
+## 2026-11-04: 0x4FDC40 and 0x4B3CE0 recovered after the consolidation loss
+
+- 0x4FDC40 back to RELOC 168/168: the tables are declared `extern Rec44[]
+  g_6918e8; extern Rec44 g_693228[]` (were `int[1]` definitions), so the switch
+  indexes at stride 0x44 and the missing case blocks emit. Nothing else changed.
+- 0x4B3CE0 rewritten from the reference disassembly instead of the lost report
+  version: first scan walks byte pointers from 0x680BD4 to 0x681114 by 0x1C with
+  a signed compare, second path bounds the caller pointer at 0x6810F4 with
+  unsigned compares starting at +0x1C, and the hit returns 0x680BD0 + i*0x1C.
+  That reproduces instructions 0 through 17 exactly; the second path still
+  differs in constant form (`mov ecx,0x6810F4; cmp eax,ecx` versus two immediate
+  compares), so it is 93 bytes against 92 and SIZE_MISMATCH, not the 94 of the
+  old body.
+
+Rebuilt: raw 275,568 / informative 93,703 (up 244 from the consolidation low but
+still 532 under the pre-batch 276,100; the remainder is not reproduced by any row
+restored so far). Lint 0 errors / 0 warnings, data conflicts 0, imports/layout/
+headers match. No GA was run. Decision: Lead.

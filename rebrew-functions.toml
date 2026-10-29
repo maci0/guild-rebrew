@@ -180140,16 +180140,16 @@ measured_at = "2026-10-29T04:28:16+00:00"
 
 ["GOLDTL.0x004fdc40"]
 size = 168
-status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-10-29T15:34:18+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-10-29T15:52:34+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004fdc40.c"
 symbol = "_fcn_004fdc40"
 kind = "FUNCTION"
 name = "fcn_004fdc40"
 
 ["GOLDTL.0x004fdc40".verification]
-source_hash = "f6f9ba2cd44dff719ac8ef1b31719ed99170733bc55a76c89d18af28b84c262e"
+source_hash = "d204b4bd1d79fe6befbb552233f08bd178896c3ec73ede90e9d2cb906e4523aa"
 reference_hash = "878ba8a0a093c30a1190e356209bebf3461bb64a58d7c964dcc818753a1759fc"
 reference_size = "168"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -180160,10 +180160,10 @@ module = "GOLDTL"
 va = "0x4fdc40"
 context_hash = ""
 defines = "[]"
-input_hash = "eb9f227028649e442d64e56996efd2233f22d46f459583ea5b4aa2525b09419c"
-status = "SIZE_MISMATCH"
+input_hash = "edc13825c40134f35a7e5da5a0f82d59a5e3993d94aea7ba432a4ed4d2e0fa62"
+status = "RELOC"
 writer = "test"
-measured_at = "2026-10-29T15:48:51+00:00"
+measured_at = "2026-10-29T15:52:34+00:00"
 
 [["GOLDTL.0x004fdc40".status_history]]
 old_status = "RELOC"
@@ -180182,6 +180182,12 @@ old_status = "RELOC"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-29T15:34:18.393533+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x004fdc40".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "RELOC"
+changed_at = "2026-10-29T15:52:34.041659+00:00"
+updated_by = "test"
 ["GOLDTL.0x004fdec0"]
 size = 284
 status = "RELOC"
@@ -408052,7 +408058,7 @@ status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x004b3ce0".verification]
-source_hash = "6b184a46e9c10d3747ae088a22a7b68224a43948e2e06b90511f0721e672d5e3"
+source_hash = "3a277f13aeaa2fc21e294b877b5c79fd4d18e13c04febb2906220f6422a1041e"
 reference_hash = "691f786c970025d75f64d143ad84f66bb3de28e6df63f911f949dfd4fdabf4eb"
 reference_size = "92"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -408063,10 +408069,10 @@ module = "GOLDTL"
 va = "0x4b3ce0"
 context_hash = ""
 defines = "[]"
-input_hash = "52338fb08e23b6c48417fff57a5a21cce49add05377a6fd3291a88a7c71650c8"
+input_hash = "efb38bbe52faf63b1d7f01d0d11ae660d3b56171b28d34d9d0d0045478ebb5c6"
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-10-29T15:49:18+00:00"
+measured_at = "2026-10-29T15:52:01+00:00"
 
 [["GOLDTL.0x004b3ce0".status_history]]
 old_status = "STUB"

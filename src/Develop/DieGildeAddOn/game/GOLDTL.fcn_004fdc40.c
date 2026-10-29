@@ -8,12 +8,8 @@ typedef struct
 
 extern Rec44 g_690648[];
 extern Rec44 g_690f98[];
-int g_6918e8[1] = {
-    33,
-};
-int g_693228[1] = {
-    33,
-};
+extern Rec44 g_6918e8[];
+extern Rec44 g_693228[];
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
