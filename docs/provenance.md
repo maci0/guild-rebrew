@@ -8560,3 +8560,28 @@ not add score because their objects still link late.
 
 Lint 0 errors / 0 warnings on 5,453 files, data conflicts 0. No GA was run.
 Decision: Lead.
+
+## 2026-10-30: the 98.5% near match is a two-instruction scheduling wall
+
+Picked the highest-percentage failure that already sits at its reference VA:
+`fcn_0040fb80` (0x40FB80, 328 bytes, 98.5%). The diff has 74 exact, 18 masked
+relocations and 2 structural mismatches: the target emits
+
+```
+fsubr qword ptr [0x662a10]
+lea eax, [esi + ecx]
+fstp dword ptr [eax + 8]
+```
+
+while our build emits the `lea` before the `fsubr`. Tried three spellings of
+`s->items[i].x08 = (float)(-0.5 - x04)`:
+
+- keep the `v` temporary and store through a second `float t`: 328/328 bytes,
+  still `lea` before `fsubr`
+- inline `s->items[i].x04`: 329 bytes and ten structural mismatches, worse
+- cast the operand to double: 329 bytes, `lea` still first
+
+The order is the compiler's address-calculation schedule for the store, not the
+expression's operand order, so C spelling does not move it. Restored the original
+body. No score change: 292,292 / 108,702. Lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
