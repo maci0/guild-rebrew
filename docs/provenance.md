@@ -8180,3 +8180,19 @@ Reverted the split (git reset to 6e770cd0) rather than carry warnings. State:
 raw 292,234 / informative 108,655, lint 0 errors / 0 warnings on 5,453 files,
 data conflicts 0. Next attempt on m_alloc needs the assembly evidence rebound to
 the split definitions before the split lands. No GA was run. Decision: Lead.
+
+## 2026-10-30: msx split is neutral; assembly-provenance gate still blocks m_alloc
+
+Split all eleven `msx.c` rows into their own units. Build clean, raw 292,198 /
+informative 108,630 against 292,234 / 108,655: down 36 bytes. Two lead-pass runs
+changed no pads, so the retune could not recover it. Reverted the split and
+rebuilt to 292,234 / 108,655.
+
+Reviewed why W020 survived the m_alloc attempt: the rule exempts a definition
+only when a source-provenance record exists for the same relative file, module
+and definition hash. The split copies asm into definitions whose recorded
+provenance stayed on the old file/hash, and `source document-assembly` did not
+exempt them in that tree. Rebinding the provenance to the split definitions is a
+prerequisite for splitting any TU with inline asm.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
