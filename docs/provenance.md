@@ -8089,3 +8089,25 @@ generated directory, rebuilt to 275,568 / 93,703.
 Next attempt needs a lead pass that consumes the fresh map with split-aware
 expectations (first row per output TU), not the old per-source mapping. Lint
 0 errors / 0 warnings. No GA was run. Decision: Lead.
+
+## 2026-10-30: the lead pass misapplies the split layout and drops text matches by 50k
+
+Reproduced the round-228 split (269,897 / 88,946), then ran
+`scripts/gen_text_lead.py 0x2000` and inspected its edits before rebuilding. It
+modified four files only, adding pads of 16, 16, 88 and 200 bytes (total 0x140),
+each appended after the function body under `#pragma data_seg(".text")`.
+
+Rebuilt: raw 219,795 / informative 44,947, .text matches 79,934 against 129,441
+for the split build and 135,216 for the baseline; `build check-text-placement`
+dropped to 80 correct from the split layout's near-reference order. A 320-byte
+pad total cannot lose 50k by itself, so the pads are being inserted at positions
+where they shift the entire remaining object stream rather than closing the one
+deficit the script measured. The generator's expected-VA map is built from
+metadata rows per source file, which after the split no longer matches the
+object order it measures from the map.
+
+Reverted split, pads and generated directory; rebuilt to 275,568 / 93,703 with a
+clean tree. The split path now needs a lead pass that reads the fresh map, keys
+expectations by object (not source path) and verifies the applied pad against a
+rebuilt placement before adding more. Lint 0 errors / 0 warnings. No GA was run.
+Decision: Lead.
