@@ -8361,3 +8361,21 @@ anchor cleanup alone moved the score from 292,234 / 108,655 to 292,292 / 108,702
 (+58 / +47); a further lead pass changed no pads. Kept the 205-line anchor removal.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: d3dx8 effect classes are retained by anchors, and dropping them costs size
+
+Followed the absent-signature library list further. The C++ effect classes come
+back through `/INCLUDE` anchors for derived symbols not present in the link map
+(CD3DXValueDword, CD3DXValueFloat, CD3DXValueMatrix, CD3DXEffect and related),
+so the round-241 symbol filter missed them. Removed 47 more anchors naming those
+classes.
+
+Result: 143 cvalue symbols still linked (other anchors and real references pull
+the members), `.text` grew from 2,540,754 to 2,557,230, `.rdata` grew 52,558 to
+57,990, and the score fell to 281,704 / 106,265. The anchor set controls which
+archive members and in what order, not only retention; dropping class anchors
+changes member selection and moves bytes the wrong way.
+
+Reverted to the committed anchor list and rebuilt: raw 292,292 / informative
+108,702. The `.text` excess remains unexplained by archive-member absence. Lint
+0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
