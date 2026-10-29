@@ -8276,3 +8276,26 @@ therefore depends on closing the `.text` size excess first.
 
 Score unchanged: raw 292,234 / informative 108,655. Lint 0 errors / 0 warnings
 (5,453 files). No GA was run. Decision: Lead.
+
+## 2026-10-30: data placement check reads alternate build trees; text excess still gates .data
+
+`rebrew build check-data-placement` reported zero symbols for this project. Cause:
+`link_objects` only looked under `<root>/build`, while the audit builds into
+`build-goldtl-audit`. Fixed upstream (commit 9c01de21): new
+`link_objects_in(build_dir)` reads the rsp order from the CMake binary directory
+that holds the linked image, and the checker uses it when the image sits in such
+a tree. Test added in tests/test_data_layout.py; full upstream suite 13,399 passed,
+28 skipped; ruff, ruff format and mypy clean; CHANGELOG updated.
+
+With the fix the checker finds 2,085 data symbols and 58 of the managed rows:
+every one is late, worst 607,423 bytes. The image's `.data` starts at 0x67B000
+against the reference 0x675000, a +0x6000 shift that equals the text excess
+(+49,384) minus the `.rdata` shortfall (-24,164). Closing the `.text` excess is
+therefore the prerequisite for `.data` (and the relocations that point into it)
+to land at the reference addresses.
+
+The checker's absolute symbol VAs remain rough for this image because object
+`.data` and `.bss` contributions are summed together, so treat the deltas as a
+shift signal, not per-symbol placement. Text lead pass is converged (three runs
+changed no pads). Score: raw 292,234 / informative 108,655, lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
