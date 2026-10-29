@@ -34,7 +34,7 @@ int* __cdecl fcn_004b3ce0(int a0, int* a1)
 			return p;
 		}
 		p = (int*) ((char*) p + 0x1c);
-	} while ((char*) p <= end);
+	} while ((char*) p <= (char*) 0x6810f4);
 	return 0;
 }
 unsigned char _dpad_67fca0[3888] = {
