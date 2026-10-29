@@ -8161,3 +8161,22 @@ Kept pass 4: raw 292,234, informative 108,655, up 16,666 raw and 14,952
 informative from the round-229 baseline of 275,568 / 93,703. Lint now checks
 5,453 files (the seven new split units): 0 errors, 0 warnings. Data conflicts 0;
 imports, layout and headers match. No GA was run. Decision: Lead.
+
+## 2026-10-30: m_alloc split lifts 156 bytes but trips the assembly-provenance gate
+
+Split the fourteen m_alloc rows. Two link errors needed alias macros restored in
+the residual files: `#define g_alloc_counter g_6b6f78` before the remaining
+`m_alloc` body (the file's earlier define is followed by an undef) and
+`#define g_alloc_report_groups g_6b6f7c` in `m_ShutdownAllocator` with its later
+undef removed. Build clean, raw 292,390 / informative 108,655, up 156 bytes.
+
+Lint then reported six warnings: W020 for inline `__asm` in `m_alloc`, `m_init`
+and `m_PoolAlloc` with RELOC status, plus two stale-provenance W031 rows. The
+assembly blocks are the documented allocator fill prelude (docs/msvc6-allocator.md
+Finding 19). Recording `source document-assembly` evidence for those definitions
+did not clear W020, and the split introduced provenance rows the gate rejects.
+
+Reverted the split (git reset to 6e770cd0) rather than carry warnings. State:
+raw 292,234 / informative 108,655, lint 0 errors / 0 warnings on 5,453 files,
+data conflicts 0. Next attempt on m_alloc needs the assembly evidence rebound to
+the split definitions before the split lands. No GA was run. Decision: Lead.
