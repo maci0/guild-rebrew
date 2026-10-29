@@ -81897,7 +81897,7 @@
   },
   {
     "va": 5711712,
-    "size": 17,
+    "size": 5,
     "name": "fcn.00572760",
     "extent_history": [
       {
@@ -81927,6 +81927,13 @@
         "reason": "Restore the originally stored extents: the metadata rows still carry 17 bytes and the writer set has no shrink operation, so keeping the inventory at 5 would leave the row and inventory disagreeing",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T22:58:43.434309+00:00"
+      },
+      {
+        "old_size": 17,
+        "new_size": 5,
+        "reason": "Each stored extent covers a five-byte tail jump to 0x546190 followed by twelve 0x90 alignment bytes; reachable code ends at the jump and the bytes up to the next inventory entry (0x572780 and 0x575710) are fill, so the rows carry padding",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-29T23:04:26.711236+00:00"
       }
     ]
   },
@@ -82271,7 +82278,7 @@
   },
   {
     "va": 5723888,
-    "size": 17,
+    "size": 5,
     "name": "fcn.005756f0",
     "extent_history": [
       {
@@ -82301,6 +82308,13 @@
         "reason": "Restore the originally stored extents: the metadata rows still carry 17 bytes and the writer set has no shrink operation, so keeping the inventory at 5 would leave the row and inventory disagreeing",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T22:58:43.434329+00:00"
+      },
+      {
+        "old_size": 17,
+        "new_size": 5,
+        "reason": "Each stored extent covers a five-byte tail jump to 0x546190 followed by twelve 0x90 alignment bytes; reachable code ends at the jump and the bytes up to the next inventory entry (0x572780 and 0x575710) are fill, so the rows carry padding",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-29T23:04:26.711260+00:00"
       }
     ]
   },

@@ -199785,20 +199785,19 @@ new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-14T16:29:37.028033+00:00"
 updated_by = "test"
 ["GOLDTL.0x00572760"]
-size = 17
-status = "STUB"
-updated_by = "blocker"
-updated_at = "2026-10-29T11:29:20+00:00"
+size = 5
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-10-29T23:05:27+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00572760.c"
 symbol = "_fcn_00572760"
 kind = "FUNCTION"
 name = "fcn_00572760"
-blocker = "row was a 17-byte stub fragment after the linker-fill extent repair; body still needs reconstruction"
 
 ["GOLDTL.0x00572760".verification]
-source_hash = "34394d0840f4cb30a058a7ff7a7703d1549ad5ceb95efa8abe39da69e9fb7d69"
-reference_hash = "174a61b67b822e8d4ae0370971bf99da114277fa1ef7dae403cbac3481d364b4"
-reference_size = "17"
+source_hash = "07fa095fdebb1511b6653066208e612c4c7f787a78772608c492399ed7d3a86f"
+reference_hash = "b48ed813e5deb4bb392670ac73243e05188804d0330eb2bb5a4c25637f53e741"
+reference_size = "5"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 compiler_hash = "a3fa5532a3bfb6a4acd811e1570b2d99ed08a1882c9aebc26277bae2833508a5"
 toolchain = "(default)"
@@ -199807,16 +199806,22 @@ module = "GOLDTL"
 va = "0x572760"
 context_hash = ""
 defines = "[]"
-input_hash = "21d2fda7b69b414696dbe67007bde0e229b51421ba1882ca5bba51aa4394f7eb"
-status = "STUB"
+input_hash = "381aa10eb2c2f9ff5f15ad5060a906d758511ee417a7a6a6d43baf3b6716d3f3"
+status = "RELOC"
 writer = "test"
-measured_at = "2026-10-29T22:58:01+00:00"
+measured_at = "2026-10-29T23:05:27+00:00"
 
 [["GOLDTL.0x00572760".status_history]]
 old_status = "RELOC"
 new_status = "STUB"
 changed_at = "2026-10-29T11:21:26.392507+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x00572760".status_history]]
+old_status = "STUB"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:05:27.275914+00:00"
+updated_by = "test"
 ["GOLDTL.0x00572780"]
 size = 101
 status = "RELOC"
@@ -200142,38 +200147,43 @@ status = "RELOC"
 measured_at = "2026-10-29T21:57:54+00:00"
 
 ["GOLDTL.0x005756f0"]
-size = 17
-status = "STUB"
-updated_by = "blocker"
-updated_at = "2026-10-29T11:29:33+00:00"
+size = 5
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-10-29T23:05:57+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_005756f0.c"
 symbol = "_fcn_005756f0"
 kind = "FUNCTION"
 name = "fcn_005756f0"
-blocker = "row was a stub fragment after the linker-fill extent repair; body still needs reconstruction"
 
 ["GOLDTL.0x005756f0".verification]
-source_hash = "5e94bd2d579a20c3c435770bcda3b7b9ea7122b5b830e3349cc2b824189e9db7"
-reference_hash = "f092391185ad5247a84860512eef492a3ac1323bc3b2ae17c49f7bbfbb14c30f"
-reference_size = "17"
+source_hash = "26df7a1bf75a3803b097a681cf73dbbc81547c503683fce56f83aa697d4fadb1"
+reference_hash = "369773755614bae382fa32c5464128f189c0fa8a48476f08ad9bb4b177d70d45"
+reference_size = "5"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "dcc58cbb246edfa61b04cbca646adf69cf955ac781146e9f1e90d588036bd8d0"
+compiler_hash = "a3fa5532a3bfb6a4acd811e1570b2d99ed08a1882c9aebc26277bae2833508a5"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x5756f0"
 context_hash = ""
 defines = "[]"
-input_hash = "ad1e18332d8472dc5fd4b844aebfe479903af700c2ee8638964b93b670badfe7"
-writer = "verify"
-status = "STUB"
-measured_at = "2026-10-29T21:57:54+00:00"
+input_hash = "2059cf1cc8b83610ce5c6997af81c98057aef7f9242614002683fe97492243fe"
+status = "RELOC"
+writer = "test"
+measured_at = "2026-10-29T23:05:57+00:00"
 
 [["GOLDTL.0x005756f0".status_history]]
 old_status = "RELOC"
 new_status = "STUB"
 changed_at = "2026-10-29T11:21:26.394952+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x005756f0".status_history]]
+old_status = "STUB"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:05:57.588700+00:00"
+updated_by = "test"
 ["GOLDTL.0x00575710"]
 size = 450
 status = "RELOC"

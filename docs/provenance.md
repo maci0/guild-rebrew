@@ -8484,3 +8484,26 @@ extent into the row.
 Restored both inventory extents to 17 to keep row and inventory consistent, and
 reverted the source rewrite. Rebuilt to raw 292,292 / informative 108,702, lint
 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: repair-extents --sync-rows lands upstream; the two thunks now compare at five bytes
+
+Implemented the gap from round 247 upstream: `rebrew binary repair-extents
+--sync-rows` sets the matching function row's stored SIZE to the reviewed extent
+in either direction, through a new `set_function_extent` writer (the existing
+`grow_function_extent` only widens). Commit ad5abba6; CLI.md and CHANGELOG
+updated; test added in tests/test_inventory_repair.py covering the row staying at
+16 without the flag and moving to 8 with it; full upstream suite 13,400 passed,
+28 skipped; ruff, ruff format and mypy clean.
+
+Used it in this project with the editable upstream build: repaired
+GOLDTL.0x00572760 and GOLDTL.0x005756f0 from 17 to 5 bytes (five-byte `jmp
+0x546190`; the twelve 0x90 bytes after it are fill) and synced both rows, which
+now read size 5. Both C tail-call thunks test RELOC 5/5 instead of STUB 5/17.
+
+The byte score did not move: 292,292 / 108,702 before and after, and two lead
+passes changed no pads. The link map still places those objects at 0x578180 and
+0x57AE50, far from the reference 0x572760 and 0x5756F0, because the surrounding
+object order already carries a large offset that pads only add to. Row and
+inventory are now accurate even though the bytes do not score yet.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
