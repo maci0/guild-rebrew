@@ -8111,3 +8111,24 @@ clean tree. The split path now needs a lead pass that reads the fresh map, keys
 expectations by object (not source path) and verifies the applied pad against a
 rebuilt placement before adding more. Lint 0 errors / 0 warnings. No GA was run.
 Decision: Lead.
+
+## 2026-10-30: lead pass resized pads instead of skipping them; layout score up 10.3k bytes
+
+Root cause of the round-229 collapse: `scripts/gen_text_lead.py` treated an
+existing `_tlead_*` pad as done. When a boundary still needed a different size it
+did `shift += needed; continue`, so the old pad stayed at its old size while its
+effect was counted as if applied. The first pass after a layout change therefore
+shifted every later object by the difference between counted and real pads.
+
+Rewrote the pass to resize, shrink or remove the existing pad and to track
+`shift` by the actual delta. Iterated it against the current tree:
+
+- pass 1: 42 pads changed, shift 0x90 -> raw 277,181 / informative 98,629
+- pass 2: 19 pads changed, shift 0xF60 -> raw 285,947 / informative 102,989
+- pass 3: 10 pads changed, shift 0 -> raw 285,892 / informative 102,936
+- pass 4: 6 pads changed, shift 0 -> raw 285,869 / informative 102,937
+
+Plateau at 285,869 / 102,937 (best observed 285,947 before the last two jitter
+passes). `.text` matches rose 135,216 -> 145,569, correct placements 485 -> 541,
+sections `.rdata` 4,041 -> 3,989, `.data` 131,819 unchanged. Lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
