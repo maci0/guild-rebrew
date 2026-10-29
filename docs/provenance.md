@@ -8217,3 +8217,22 @@ The sweep therefore confirms the character.c result was specific: splitting pays
 only when a TU's functions are interleaved with other objects. State: raw
 292,234 / informative 108,655, lint 0 errors / 0 warnings, data conflicts 0. No
 GA was run. Decision: Lead.
+
+## 2026-10-30: split ambiguity traced to target-specific preprocessor branches
+
+`command.c` defines `cm_ExAllocGraveyardWorker` twice, once under
+`#if defined(REBREW_SERVER)` and once in the `#else` branch; `friedhof_logic.c`
+has the same shape at 0x4F2FE0. Only the branch active for the selected target
+compiles, but `source split --va` sees two definitions and reports "Ambiguous C
+definition for VA". Filed an upstream IDEAS entry: evaluate the conditionals
+against the target's defines, or accept an `--ifdef` override / `--occurrence`
+selector (upstream commit 1712344a).
+
+Also checked for hidden text bloat in command.c: it defines 228 functions but
+only 7 rows name it, and the same-name definitions in `command_c/` trigger
+LNK4006, so the linker discards the duplicates rather than emitting them. The
+text-size excess is therefore still in library and scaffold objects, not in
+duplicated C bodies.
+
+State unchanged: raw 292,234 / informative 108,655, lint 0 errors / 0 warnings.
+No GA was run. Decision: Lead.
