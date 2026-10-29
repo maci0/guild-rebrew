@@ -8379,3 +8379,32 @@ changes member selection and moves bytes the wrong way.
 Reverted to the committed anchor list and rebuilt: raw 292,292 / informative
 108,702. The `.text` excess remains unexplained by archive-member absence. Lint
 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: verbose link names the exact anchor that loads cvalue.obj
+
+Captured a `/VERBOSE` link by copying `CMakeFiles/europa1400gold_tl.dir/link.txt`,
+inserting `/VERBOSE` before `/out:`, running it in the build directory and keeping
+the log at `.scratch/organize/link-verbose.log`. The relevant trace:
+
+```
+Found "public: __thiscall CD3DXValueDword::CD3DXValueDword(void)" (??0CD3DXValueDword@@QAE@XZ)
+  Loaded d3dx8.lib(cvalue.obj)
+```
+
+So the pull is the derived-class anchor, not the base `CD3DXValue` constructor
+that the round-241 filter covered. Round 242 removed anchors matching
+`CD3DXValue` (which also matches the Dword/Float/Matrix/Vector names) and `.text`
+grew instead, so more than one anchor set has to change together and the
+extraction order matters.
+
+The verbose log also gives `Referenced in <object>` lines per pulled symbol,
+which is the tool to use for the next attempt: remove one class anchor group at
+a time and check which member the linker loads next.
+
+Also tried locating every linked object in the reference by 48-byte signature:
+851,047 of 2,538,188 text bytes find a home, the rest do not, and the deltas have
+no common bucket. That measures how far the bodies are from exact, not where
+extra bytes are, so it does not locate the excess.
+
+State unchanged: raw 292,292 / informative 108,702, lint 0 errors / 0 warnings,
+data conflicts 0. No GA was run. Decision: Lead.
