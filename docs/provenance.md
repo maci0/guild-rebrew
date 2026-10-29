@@ -7119,3 +7119,11 @@ README image URLs are pinned to `5c0b1859e829fafe5e926c6126d331b9ce0d2579` for a
 The committed snapshot passed 39 tests and 3 subtests; initial all-target lint
 reported zero errors and only generated guidance drift. Refresh preserved the
 project rules and init --check reports no drift. No native build was run.
+
+## 2026-10-29: stop tracking the local DirectX archive
+
+Removed references/dxsdk8/lib/d3dx8.lib from the Git index at the maintainer's
+request. The existing /references/dxsdk8/ ignore rule now covers the archive;
+no redundant rule was added. Its local bytes remain unchanged. Verification:
+SHA-256 before/after agrees, git check-ignore resolves the existing rule, and
+the archive is absent from the index. No native build was needed.
