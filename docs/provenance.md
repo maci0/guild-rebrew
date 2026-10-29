@@ -7996,3 +7996,20 @@ build: score back to 275,568 / 93,703, tree clean.
 The object order is not VA-driven for this file, so the fix has to come from the
 build's anchor ordering, not from splitting sources alone. Lint 0 errors /
 0 warnings. No GA was run. Decision: Lead.
+
+## 2026-10-30: order-sources probe for the character TU split
+
+Probed `rebrew build order-sources` with four real files: `character.c`,
+`GOLDTL.fcn_00402b00.c`, `GOLDTL.fcn_00402ff0.c`, `GOLDTL.fcn_004030e0.c`.
+The command ordered character.c first (its first bound function is 0x402A10),
+then the three fcn files by VA, which is the expected behaviour. So the round-224
+split should have slotted a file bound at 0x403040 between 0x402FF0 and 0x4030E0,
+yet the rebuilt map put it at 0x403F20. That means the configure-time source list
+or the metadata view used for ordering had not picked up the split file the way
+this probe does.
+
+No source change kept; score unchanged at 275,568 / 93,703. Next attempt should
+print the configured ordered list around 0x403040 during the split build (for
+example by dumping `GOLDTL_ORDERED` from the CMake configure log) instead of
+guessing from the final map. Lint 0 errors / 0 warnings. No GA was run.
+Decision: Lead.
