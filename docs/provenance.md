@@ -8585,3 +8585,24 @@ The order is the compiler's address-calculation schedule for the store, not the
 expression's operand order, so C spelling does not move it. Restored the original
 body. No score change: 292,292 / 108,702. Lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: swept the correct-place near matches; x87 and loop shape walls remain
+
+Diffed the six remaining high-percentage failures that already sit at their
+reference VA:
+
+- fcn_004131e0 (183 B, 4 structural): x87 stack-slot ordering. Swapping the two
+  product statements raised it to 8 structural; swapping the `neg`/`scale`
+  declarations changed nothing; a one-line expression and swapped multiplies both
+  raised it. Original form is the best of those.
+- fcn_0045bfb0 (337 B, 32 structural): loop shape. The target advances the record
+  pointer with `add ecx, 0x70` before the bound compare and reads at `[ecx+0xB4]`;
+  our `for` loop compares first and reads at `[ecx+0x44]`. The structure offsets
+  are already 0x70, so this is loop form, not layout.
+- SaveBMP24 (439 B, 11 structural): register assignment for the pixel loop
+  (eax/edx vs ecx/esi).
+- fcn_00450e90 (652 B, 19), fcn_0040f1c0 (371 B, 19), fcn_0040ed40 (398 B,
+  15): frame-register and spill-layout differences.
+
+No body kept. Score unchanged 292,292 / 108,702, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
