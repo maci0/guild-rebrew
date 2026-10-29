@@ -8035,3 +8035,29 @@ lint 0 errors / 0 warnings. Next attempt should split one function by hand with
 its exact externs and macros instead of brace-matching the legacy TU, verify the
 single split builds and moves to its VA, and only then repeat for the rest. No
 GA was run. Decision: Lead.
+
+## 2026-10-30: the character split now places correctly and still loses 5,700 bytes
+
+Completed the hand split of all eight character bodies after the round-226
+extraction failure. Each split TU needed its own externs and macros: ch_CreateMesh
+needs `extern char g_6b5c60[]`, ch_InsertAction needs `<stdarg.h>`, `ch_queue.h`
+and the `ch_UNIVERSE_STRIDE` define, and `ch_UpdatePendingPositions` had to move
+out of the ch_SetPosition TU where the extraction had parked it.
+
+With the split in place the map matched the reference order: fcn_00402b00 at
+exactly 0x402B00, ch_UpdatePendingPositions 0x403030, ch_Updatelowpoly 0x4033D0,
+ch_CreateMesh 0x403850, ch_MoveCharacter2Universe 0x403B90,
+ch_UpdateAttachedModelPosition 0x403DF0, ch_InsertAction 0x405140,
+TakeObjectScript 0x40D7D0. Remaining deltas were 0x10 to 0x3C0 instead of the old
+cluster of 0x540 to 0x9AC0.
+
+The score fell anyway: raw 269,421 first (with a stray pending body in the wrong
+TU), 269,897 after the correction, against 275,568 before the split, and
+informative 88,529 / 88,946 against 93,703. The text match dropped by about
+5,800 bytes. The layout pads were tuned around the clustered character object, so
+moving its bodies into their reference slots shifts every later object and loses
+more than the eight functions gain. Reverted every split file and rebind; rebuilt
+to 275,568 / 93,703 with a clean tree.
+
+Lesson for the next attempt: split and retune the lead pads in the same change,
+not in isolation. Lint 0 errors / 0 warnings. No GA was run. Decision: Lead.
