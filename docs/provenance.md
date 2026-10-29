@@ -8061,3 +8061,31 @@ to 275,568 / 93,703 with a clean tree.
 
 Lesson for the next attempt: split and retune the lead pads in the same change,
 not in isolation. Lint 0 errors / 0 warnings. No GA was run. Decision: Lead.
+
+## 2026-10-30: built-in source split works with three mechanical fixes; pad retune collapses the score
+
+Used `rebrew source split --va` instead of hand extraction. It handled the
+declarations and retargeted both the GOLDTL rows and the GOLD rows that share the
+TU. Seven of eight bodies split cleanly; ch_InsertAction (0x4051D0) still refuses
+with "inside a preprocessor conditional".
+
+Generated files needed three fixes before they compiled:
+- bare relative includes (`ch_queue.h`, `client_scene_transform.h`) became
+  `../` paths because the output lives in `character_c/`;
+- one merged line `...);#include <stdarg.h>` needed a newline.
+
+With that, the split built clean and placed the bodies near their reference VAs
+(fcn_00402B00 exactly 0x402B00, pending 0x403030, Updatelowpoly 0x4033D0,
+CreateMesh 0x403850). Score: raw 269,897 / informative 88,946 against 275,568 /
+93,703 for the unsplit tree.
+
+Then ran `scripts/gen_text_lead.py 0x2000` on the split layout. It reported
+"added 5 shift 0x140", but the rebuilt image scored 219,795 / 44,947, far worse
+than either the split or the baseline. The lead pass assumes one stable expected
+VA per TU; after the split its per-object deficits no longer match the object
+order, so the pads land wrong. Reverted the split, the pad edits and the
+generated directory, rebuilt to 275,568 / 93,703.
+
+Next attempt needs a lead pass that consumes the fresh map with split-aware
+expectations (first row per output TU), not the old per-source mapping. Lint
+0 errors / 0 warnings. No GA was run. Decision: Lead.
