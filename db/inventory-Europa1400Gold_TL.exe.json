@@ -81913,6 +81913,20 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:32.737430+00:00"
+      },
+      {
+        "old_size": 17,
+        "new_size": 5,
+        "reason": "Each row covers a five-byte tail jump to 0x546190 followed by twelve 0x90 alignment bytes; reachable code ends at the jump and the remaining bytes up to the next inventory entry (0x572780 and 0x575710) are NOP fill, so the stored 17-byte extents include alignment padding",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-29T22:57:38.015358+00:00"
+      },
+      {
+        "old_size": 5,
+        "new_size": 17,
+        "reason": "Restore the originally stored extents: the metadata rows still carry 17 bytes and the writer set has no shrink operation, so keeping the inventory at 5 would leave the row and inventory disagreeing",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-29T22:58:43.434309+00:00"
       }
     ]
   },
@@ -82273,6 +82287,20 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:32.737469+00:00"
+      },
+      {
+        "old_size": 17,
+        "new_size": 5,
+        "reason": "Each row covers a five-byte tail jump to 0x546190 followed by twelve 0x90 alignment bytes; reachable code ends at the jump and the remaining bytes up to the next inventory entry (0x572780 and 0x575710) are NOP fill, so the stored 17-byte extents include alignment padding",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-29T22:57:38.015376+00:00"
+      },
+      {
+        "old_size": 5,
+        "new_size": 17,
+        "reason": "Restore the originally stored extents: the metadata rows still carry 17 bytes and the writer set has no shrink operation, so keeping the inventory at 5 would leave the row and inventory disagreeing",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-10-29T22:58:43.434329+00:00"
       }
     ]
   },

@@ -8466,3 +8466,21 @@ Correct route for these two rows: repair the stored extent to the five-byte jump
 (the filler is linker fill, and the inventory already records such repairs) and
 let the plain tail-call body match at five bytes. Lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: repaired five-byte extents cannot reach the metadata rows
+
+Repaired the native inventory extents of `GOLDTL.0x00572760` and
+`GOLDTL.0x005756f0` from 17 to 5 bytes with `rebrew binary repair-extents`, since
+both bodies are a five-byte `jmp 0x546190` plus twelve `0x90` alignment bytes and
+the next inventory entries are at 0x572780 and 0x575710.
+
+The metadata rows kept `size = 17`. `rebrew test` therefore still reported STUB
+with a 5-byte object, and the only size writer `grow_function_extent` (used by
+`coverage catalog --fix-sizes`) refuses to shrink, so the repaired extent cannot
+reach the row. Filed the gap upstream in docs/IDEAS-GUILD.md (commit 04299754):
+the repair writer or a `--fix-sizes` shrink mode should push a reviewed smaller
+extent into the row.
+
+Restored both inventory extents to 17 to keep row and inventory consistent, and
+reverted the source rewrite. Rebuilt to raw 292,292 / informative 108,702, lint
+0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
