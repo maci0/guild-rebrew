@@ -8013,3 +8013,25 @@ print the configured ordered list around 0x403040 during the split build (for
 example by dumping `GOLDTL_ORDERED` from the CMake configure log) instead of
 guessing from the final map. Lint 0 errors / 0 warnings. No GA was run.
 Decision: Lead.
+
+## 2026-10-30: full character TU split reverted; extraction, not ordering, is the blocker
+
+Attempted splitting all seven remaining character.c bodies into per-function TUs,
+rebinding each row through the digest-guarded writer and rebuilding. Findings:
+
+- `rebrew build cmake-sources` does pick up a newly bound file (it appeared in the
+  generated list) and `build order-sources` then placed its object between the
+  0x402FF0 and 0x4030E0 objects, matching VA order.
+- The builds failed on the extracted bodies, not the ordering: the shared
+  declarations stripped by brace matching missed a `g_6b5c60` extern, a
+  `ch_UNIVERSE_STRIDE` macro defined inside `ch_InsertAction`'s body, and the
+  extraction duplicated bodies when a function contained string literals with
+  braces. Four generation attempts produced compile errors; the map never
+  refreshed, so placement could not be judged.
+
+Reverted every split file, the rebind, the shared header and the preamble-only
+`character.c`; rebuilt to the committed tree. Score back to 275,568 / 93,703,
+lint 0 errors / 0 warnings. Next attempt should split one function by hand with
+its exact externs and macros instead of brace-matching the legacy TU, verify the
+single split builds and moves to its VA, and only then repeat for the rest. No
+GA was run. Decision: Lead.
