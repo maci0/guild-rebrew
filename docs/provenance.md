@@ -8236,3 +8236,23 @@ duplicated C bodies.
 
 State unchanged: raw 292,234 / informative 108,655, lint 0 errors / 0 warnings.
 No GA was run. Decision: Lead.
+
+## 2026-10-30: upstream source split learns --occurrence for duplicate definitions
+
+Implemented the gap filed in round 235 against the upstream checkout: `rebrew
+source split --va VA --occurrence N` selects the Nth C definition (source order)
+when a VA has several, which is what mutually exclusive preprocessor branches
+produce. It requires `--va`, out-of-range values name the definition count in the
+error, and definitions inside a preprocessor conditional stay refused because
+extracting one leaves the conditional unbalanced.
+
+Tests: new case in tests/test_split.py covers the refusal without the flag, the
+range error, selection of the second definition and the requires-`--va` guard;
+66 split tests pass, full upstream suite 13,398 passed, 28 skipped; ruff check,
+ruff format and mypy clean. Commit 9f573ade (CHANGELOG and docs/CLI.md updated).
+
+Project impact is deferred: the project's pinned `.venv` Rebrew predates the
+flag, so `command.c`/`friedhof_logic.c` still cannot split there, and their
+definitions sit inside `#if`/`#else` anyway, which the extraction still refuses.
+Score unchanged: raw 292,234 / informative 108,655, lint 0 errors / 0 warnings.
+No GA was run. Decision: Lead.
