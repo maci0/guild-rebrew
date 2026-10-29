@@ -100101,7 +100101,7 @@ kind = "FUNCTION"
 ["GOLDTL.0x004011a0"]
 size = 34
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_004011a0.c"
 name = "fcn_004011a0"
 symbol = "_fcn_004011a0"
@@ -100121,11 +100121,11 @@ va = "0x4011a0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "f1b38a99080586b06986da4aef051393f653fdea6a6fce73592e9a2b83303a93"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "49d16fc4d95743077654f563ce52842d44b01299848e475865425159c323e754"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x004011a0".binding_history]]
 action = "retire"
@@ -100385,6 +100385,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.378843+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x004011a0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.282341+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x004011a0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.336857+00:00"
+updated_by = "verify"
 ["GOLDTL.0x004011d0"]
 size = 23
 updated_by = "rehome"
@@ -100560,7 +100572,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 43
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00401280.c"
 symbol = "_fcn_00401280"
 kind = "FUNCTION"
@@ -100579,11 +100591,11 @@ va = "0x401280"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "ff1aa263245e262c97d955b2ebb2a577320c4ca44d0b1c7d072f42d4f739f1b1"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "3b03d48a85e07ae62655468bc0a24bb1fe3411577ef5764d4bd828134661a2fe"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00401280".status_history]]
 old_status = "RELOC"
@@ -100770,11 +100782,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.381151+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x00401280".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.285785+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00401280".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.339304+00:00"
+updated_by = "verify"
 ["GOLDTL.0x004012b0"]
 size = 53
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_004012b0.c"
 symbol = "_ReadVfsFourDwords"
 kind = "FUNCTION"
@@ -100794,11 +100818,11 @@ va = "0x4012b0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "79a3f8f5a4c0ea5504d747bbf01765ac36df5c954fb02b76613a0fc1f31e9d1d"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "72928689c730d9b8db8cfe803409d454e4e60bda724fac5ab3a0a6480b4e8f2a"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x004012b0".status_history]]
 old_status = "RELOC"
@@ -100985,11 +101009,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.383344+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x004012b0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.288106+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x004012b0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.341812+00:00"
+updated_by = "verify"
 ["GOLDTL.0x004012f0"]
 size = 45
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_004012f0.c"
 symbol = "_fcn_004012f0"
 kind = "FUNCTION"
@@ -101008,11 +101044,11 @@ va = "0x4012f0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "6b33c0c38763dd67c5359fc08b6f8fdfef34b247cb779213a2855d10061bac69"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "3986a30a5833191960f3ab583377274b94bdf134b0e6be82fea473ba8614fbfe"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x004012f0".status_history]]
 old_status = "RELOC"
@@ -101199,11 +101235,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.385525+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x004012f0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.290404+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x004012f0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.344156+00:00"
+updated_by = "verify"
 ["GOLDTL.0x00401320"]
 size = 55
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00401320.c"
 symbol = "_fcn_00401320"
 kind = "FUNCTION"
@@ -101222,11 +101270,11 @@ va = "0x401320"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "c0aa56e1d68482563a521a4fb538898c79871fbb23a414b2a8a452a332fb96fc"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "f31bf6b879c7721b71105f3e3081b347ea7e78e39913533bdd618c28194e4c7b"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00401320".status_history]]
 old_status = "RELOC"
@@ -101412,6 +101460,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.387698+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00401320".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.292911+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00401320".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.346489+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00401360"]
 size = 23
@@ -102373,7 +102433,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 48
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00403b90.c"
 symbol = "_fcn_00403b90"
 kind = "FUNCTION"
@@ -102392,11 +102452,11 @@ va = "0x403b90"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "e34bc306d76dba99348fee006202606e82e51fe84d6c7b52bcf862e6e8f56394"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "25c3a24345035e17e7b8ebf19960507229b3cf7316f991727ea6940593911bfe"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00403b90".status_history]]
 old_status = "RELOC"
@@ -102414,6 +102474,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.389886+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00403b90".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.298129+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00403b90".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.349082+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00403bc0"]
 size = 284
@@ -104540,7 +104612,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 40
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0040c070.c"
 symbol = "_fcn_0040c070"
 kind = "FUNCTION"
@@ -104559,11 +104631,11 @@ va = "0x40c070"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "1ad81a011ca5ab9aa9366666f7abd590a9d787412a160ac6ebfed748a0b2fa00"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "c7e5836e2087bda91e71fb0cc0bad4e9d477b988d6120c2ad351af3c9bee5d18"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0040c070".status_history]]
 old_status = "RELOC"
@@ -104581,6 +104653,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.391123+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040c070".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.305103+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040c070".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.350631+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0040c0a0"]
 size = 127
@@ -104728,7 +104812,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 78
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0040c360.c"
 symbol = "_fcn_0040c360"
 kind = "FUNCTION"
@@ -104747,11 +104831,11 @@ va = "0x40c360"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "dde9ba753e4b8621274aa579dee1a53bf735844198e542be2e12eefbb7b8a82c"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "fab9df39e0f9b26f28032b8aac2174f2e27b96a1e7ed51b50b7306b06d5b1a39"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0040c360".status_history]]
 old_status = "RELOC"
@@ -104769,6 +104853,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.391686+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040c360".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.306111+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040c360".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.351357+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0040c3d0"]
 size = 25
@@ -105246,7 +105342,7 @@ updated_by = "test"
 size = 15
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0040cad0.c"
 symbol = "_fcn_0040cad0"
 kind = "FUNCTION"
@@ -105265,11 +105361,11 @@ va = "0x40cad0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "50ceb82e383e16fcf66511ff7f228b460724d5bbec0b476c2ea49101283b6602"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "77ff95b4460ad726b291ac6b735f7b5a0e4dd569781767304688230a5bdc5e43"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0040cad0".status_history]]
 old_status = "RELOC"
@@ -105287,6 +105383,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.392227+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040cad0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.307788+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040cad0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.352219+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0040cba0"]
 size = 185
@@ -106771,7 +106879,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 85
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0040e800.c"
 symbol = "_fcn_0040e800"
 kind = "FUNCTION"
@@ -106790,11 +106898,11 @@ va = "0x40e800"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "516375fc3bfcc68cd4c69df321247ab0164d7c7338f24cfaf87df80e4f8d5854"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "c6ad6ec19461ed4d0b419f74729984673109ecb050a2c8ae61e709d6dc26c7e1"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0040e800".status_history]]
 old_status = "RELOC"
@@ -106945,11 +107053,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.392771+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0040e800".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.311176+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040e800".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.353064+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0040e860"]
 size = 70
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0040e860.c"
 symbol = "_fcn_0040e860"
 kind = "FUNCTION"
@@ -106968,11 +107088,11 @@ va = "0x40e860"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "a76b939d2a38cd7268590dfcd0f2c1ec21b8c4b429b15c339eccfff032f518db"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "98bfbaf51838bcc1cbc6e8947ea6f929dabd6d60ad08c1206a29a5e6d3e3d621"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0040e860".status_history]]
 old_status = "RELOC"
@@ -107122,6 +107242,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.394647+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040e860".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.313334+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040e860".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.355080+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0040e8b0"]
 size = 99
@@ -107447,7 +107579,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 21
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0040eca0.c"
 symbol = "_fcn_0040eca0"
 kind = "FUNCTION"
@@ -107466,11 +107598,11 @@ va = "0x40eca0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "192441b7d4425605842f8609f1640b65bd28e2909f49d410d89aaa5013386c5a"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "efc370ca1cf2a31c7a35d7ed256882d49692ec6cdf05a4127f7824f76bd75cd2"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0040eca0".status_history]]
 old_status = "RELOC"
@@ -107620,6 +107752,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.396502+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040eca0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.315803+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040eca0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.357220+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0040ecc0"]
 size = 64
@@ -110212,7 +110356,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 57
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00414c30.c"
 symbol = "_fcn_00414c30"
 kind = "FUNCTION"
@@ -110231,11 +110375,11 @@ va = "0x414c30"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "24cdab6813f945e2bd214c0e89e6e6f1f5ed9fe279880fe3546a8fbb744dbd8a"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "7b8b052ac37a1d4a0c2c314f713d38c6b15c8c1b652a7be927780bd3cf320a49"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00414c30".status_history]]
 old_status = "RELOC"
@@ -110398,11 +110542,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.404201+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x00414c30".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.331143+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00414c30".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.366394+00:00"
+updated_by = "verify"
 ["GOLDTL.0x00414c70"]
 size = 31
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00414c70.c"
 symbol = "_fcn_00414c70"
 kind = "FUNCTION"
@@ -110421,11 +110577,11 @@ va = "0x414c70"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "7a48a77618acf5a8fa0939196c7ab165f9158d94657fafabb706a35d295fe133"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "961f8ac6edf4e641a0c11b847f8c6bd35c1bebcfd984dafd6c9b7c29e985a82a"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00414c70".status_history]]
 old_status = "RELOC"
@@ -110575,6 +110731,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.406178+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00414c70".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.333143+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00414c70".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.368688+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00414c90"]
 size = 131
@@ -111046,7 +111214,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 5
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_004186c0.c"
 symbol = "_fcn_004186c0"
 kind = "FUNCTION"
@@ -111065,11 +111233,11 @@ va = "0x4186c0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "63eeb5ea233a367315d93bf760d38f2d602b42166e88181c4a1b514b2674d0ae"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "5636a81ee43a10c738ba158e2feb5cfb6eb27f0b6d51903bc7bad2ff392dfd95"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x004186c0".status_history]]
 old_status = "RELOC"
@@ -111219,6 +111387,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.408041+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x004186c0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.337353+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x004186c0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.370910+00:00"
 updated_by = "verify"
 ["GOLDTL.0x004186d0"]
 size = 31
@@ -111764,7 +111944,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 44
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Units/vfs/GOLDTL.vfs2.c"
 symbol = "_SetSoundControlValue"
 kind = "FUNCTION"
@@ -111783,11 +111963,11 @@ va = "0x419390"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "4ee73da6d1dbe0f2c2372e33184f93de32bcb5f28090e5f30a21a3953142adb1"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "cd0439b166f5ba95a3de91b911149672e2aa129ce805c23fb6e1e5eb719be2b1"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00419390".status_history]]
 old_status = "RELOC"
@@ -111950,6 +112130,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.410067+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x00419390".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.340536+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00419390".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.372988+00:00"
+updated_by = "verify"
 ["GOLDTL.0x004193c0"]
 size = 12
 status = "EXACT"
@@ -112095,7 +112287,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 29
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0041a2a0.c"
 symbol = "_fcn_0041a2a0"
 kind = "FUNCTION"
@@ -112114,11 +112306,11 @@ va = "0x41a2a0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "818926a038e9cf0310d03ed8a9003536f3c6f394b0a22a96b303c78f223d6cef"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "6fbca5cbff8a63cd0355392b68ae0829334df5c0cc02cf7feb615520a16b7cdb"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0041a2a0".status_history]]
 old_status = "RELOC"
@@ -112268,6 +112460,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.412039+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0041a2a0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.343147+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0041a2a0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.375246+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0041a2c0"]
 size = 184
@@ -125205,7 +125409,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 161
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00442c00.c"
 symbol = "_fcn_00442c00"
 kind = "FUNCTION"
@@ -125224,11 +125428,11 @@ va = "0x442c00"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "5f45cb445b05a94edd21cc43a9dab360bbfe42acdda8959b77f39dbb2dce6a74"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "c4bd673c2678a8e52cb006ab50565302467ac4c43b65afe58464645957b6e51e"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00442c00".status_history]]
 old_status = "RELOC"
@@ -125379,11 +125583,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.413997+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x00442c00".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.382019+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00442c00".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.377585+00:00"
+updated_by = "verify"
 ["GOLDTL.0x00442cb0"]
 size = 147
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00442cb0.c"
 symbol = "_fcn_00442cb0"
 kind = "FUNCTION"
@@ -125402,11 +125618,11 @@ va = "0x442cb0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "40e46672d78c40ff40066a910be16d19b3b46316a332c1c775a24cff555f52c9"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "2bb1dca09f1ae822941de98da479edcfaf07d30f7224fae15663eb2f6fc7f49f"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00442cb0".status_history]]
 old_status = "RELOC"
@@ -125556,6 +125772,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.415846+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00442cb0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.384868+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00442cb0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.379661+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00442d50"]
 size = 51
@@ -126397,7 +126625,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 57
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Units/vfs/GOLDTL.fcn_00446c60.c"
 symbol = "_fcn_00446c60"
 kind = "FUNCTION"
@@ -126416,11 +126644,11 @@ va = "0x446c60"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "4c4c6e1b154d0bf1684ce0dadb5c92e9d36b03ed3c936bad9f88a9ef7ed10183"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "afe9a0f9724bfc44c3cabc8b535a077c979c5b85183fc788935d4016a882c4c8"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00446c60".status_history]]
 old_status = "RELOC"
@@ -126570,6 +126798,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.417678+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00446c60".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.389197+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00446c60".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.381846+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00446ca0"]
 size = 43
@@ -126908,7 +127148,7 @@ updated_by = "test"
 size = 244
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044a290.c"
 symbol = "_fcn_0044a290"
 kind = "FUNCTION"
@@ -126927,11 +127167,11 @@ va = "0x44a290"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "cd8010b9fff3934e83831bceb1df44d159fa5b0c7c332495f283a2fde3562876"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "c5a85158b011797ba1f80d500f550625c11a81dd5c46badd1e2deec5ae5a7d90"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044a290".status_history]]
 old_status = "RELOC"
@@ -127081,6 +127321,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.419525+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044a290".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.392447+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044a290".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.384000+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0044a770"]
 size = 639
@@ -128088,7 +128340,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 26
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044d750.c"
 symbol = "_fcn_0044d750"
 kind = "FUNCTION"
@@ -128107,11 +128359,11 @@ va = "0x44d750"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "b4d4f13026d89ae76b2e79955259ac1cf73cc73432374e4ff8077127333a149b"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "86c8f07355795684453e228c501b7959fa58f9246e9628fd649cda0d54289f34"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044d750".status_history]]
 old_status = "RELOC"
@@ -128262,6 +128514,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.421354+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044d750".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.397581+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044d750".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.386083+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044d770"]
 size = 52
 status = "RELOC"
@@ -128349,7 +128613,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 28
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044d8e0.c"
 symbol = "_fcn_0044d8e0"
 kind = "FUNCTION"
@@ -128368,11 +128632,11 @@ va = "0x44d8e0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "c6e4252f56c82fd3ae3cf4b9038c53afd168344bf71fd9d18fe3b8750a7f42fd"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "1c37c5de421d14ac9889ae82a045786f4a224c18d666776d6e6d443ecc32b598"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044d8e0".status_history]]
 old_status = "RELOC"
@@ -128523,6 +128787,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.423064+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044d8e0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.399947+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044d8e0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.388356+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044d900"]
 size = 93
 status = "RELOC"
@@ -128581,7 +128857,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 38
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044da30.c"
 symbol = "_fcn_0044da30"
 kind = "FUNCTION"
@@ -128600,11 +128876,11 @@ va = "0x44da30"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "ad56be59777bd9fc1a53c034ceb0fd86128c047da8452dc9e12c93d3da66cad4"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "a7c52bd9f19bbe46faf7cd7e1ceb124a40684ff07ca92107524feee0f2fef3af"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044da30".status_history]]
 old_status = "RELOC"
@@ -128755,11 +129031,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.424899+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044da30".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.402178+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044da30".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.390636+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044db40"]
 size = 89
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044db40.c"
 symbol = "_fcn_0044db40"
 kind = "FUNCTION"
@@ -128778,11 +129066,11 @@ va = "0x44db40"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "109a61eb8c4584152485d86e1aec0a18af08ae654ebf0079b9c86e90fb6c30eb"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "d9e83953809a05608fc67daf9cdade05900de5d2f88db384ca7a35b8c0479f7a"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044db40".status_history]]
 old_status = "RELOC"
@@ -128933,11 +129221,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.430944+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044db40".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.408611+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044db40".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.397700+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044dba0"]
 size = 38
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044dba0.c"
 symbol = "_fcn_0044dba0"
 kind = "FUNCTION"
@@ -128956,11 +129256,11 @@ va = "0x44dba0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "bca7d042a5468ece18c35d01340bc231341ba71751fc0a499b170ea20b4828d6"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "a22560534a8549b7dd5f99ea215bbb48e12b314505dc4a2edaac830ce3ebd508"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044dba0".status_history]]
 old_status = "RELOC"
@@ -129111,11 +129411,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.432753+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044dba0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.410528+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dba0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.399852+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044dd40"]
 size = 133
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044dd40.c"
 symbol = "_fcn_0044dd40"
 kind = "FUNCTION"
@@ -129134,11 +129446,11 @@ va = "0x44dd40"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "7e78325f1610ce7c7b1dd412f25c6bf17bd1a19c556fa399892504b12c19c174"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "df0aa5366117835e539667859be9f7db855acaccf861e16a9a21110317e20ffb"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044dd40".status_history]]
 old_status = "RELOC"
@@ -129289,11 +129601,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.445850+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044dd40".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.425238+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dd40".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.415115+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044ddd0"]
 size = 114
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044ddd0.c"
 symbol = "_fcn_0044ddd0"
 kind = "FUNCTION"
@@ -129312,11 +129636,11 @@ va = "0x44ddd0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "a6970d31a243823a52708514a5e4a5aa575561dfe4b70dea4ea8b6ffba3bd45d"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "88324ea151ee716f487707c439be36af1a08e061cdfa41d137ddfdaf02b7eac0"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044ddd0".status_history]]
 old_status = "RELOC"
@@ -129467,11 +129791,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.447557+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044ddd0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.427274+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044ddd0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.417543+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044de50"]
 size = 31
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044de50.c"
 symbol = "_fcn_0044de50"
 kind = "FUNCTION"
@@ -129490,11 +129826,11 @@ va = "0x44de50"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "e95ce55324d7698a0c527d3b416859f686123082717b1f2b46ae19465630e3f7"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "9ba00cecdee9d9d1645813299a511aeedc733198f6c730a9d3c6cd60e7d5aa00"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044de50".status_history]]
 old_status = "RELOC"
@@ -129645,6 +129981,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.449400+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044de50".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.429178+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044de50".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.419706+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044df20"]
 size = 37
 status = "EXACT"
@@ -129676,7 +130024,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 16
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044df50.c"
 symbol = "_fcn_0044df50"
 kind = "FUNCTION"
@@ -129695,11 +130043,11 @@ va = "0x44df50"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "037030b44bbae001c281210ecb3ab7b5e1fbdab4b3917b095101a365a27ab0c8"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "d2954709e40558df3690ae00b5740d425159bc7e79bb8e63f5005ddb0090c423"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044df50".status_history]]
 old_status = "RELOC"
@@ -129850,6 +130198,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.453097+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044df50".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.433281+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044df50".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.424482+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044dfb0"]
 size = 66
 status = "RELOC"
@@ -129881,7 +130241,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 101
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044e000.c"
 symbol = "_fcn_0044e000"
 kind = "FUNCTION"
@@ -129900,11 +130260,11 @@ va = "0x44e000"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "4a6904e37f82aceed35481b7b806a1af8e46cb6a7ceda5b1c86c2ae8a9da4366"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "bd6540534a267651f60ff4323cbb42589372ab3f4089929c43f6bd777ea990c1"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044e000".status_history]]
 old_status = "RELOC"
@@ -130055,11 +130415,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.454909+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044e000".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.435446+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044e000".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.426761+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044e070"]
 size = 28
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044e070.c"
 symbol = "_fcn_0044e070"
 kind = "FUNCTION"
@@ -130078,11 +130450,11 @@ va = "0x44e070"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "bf83dd235760041a228a42777a447e2f9b43bbaeaf4066820c83e3b8fc164dc6"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "b5f173ef2e7534cc50fe194a672057718d856b228366a298a0a02eef19f351e3"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044e070".status_history]]
 old_status = "RELOC"
@@ -130233,11 +130605,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.457152+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044e070".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.437485+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044e070".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.428839+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044e090"]
 size = 13
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044e090.c"
 symbol = "_fcn_0044e090"
 kind = "FUNCTION"
@@ -130256,11 +130640,11 @@ va = "0x44e090"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "7ce4d6e9532065e97147ffe67a19717615f9496ddf2f6447ae71d9be0b46168c"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "d38292d1ca144eb04164f751f94e3e5cd4fadd606695215c4a3293106c8056eb"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044e090".status_history]]
 old_status = "RELOC"
@@ -130411,6 +130795,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.458851+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044e090".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.439724+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044e090".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.431085+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044e0d0"]
 size = 23
 status = "RELOC"
@@ -130442,7 +130838,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 28
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044e0f0.c"
 symbol = "_fcn_0044e0f0"
 kind = "FUNCTION"
@@ -130461,11 +130857,11 @@ va = "0x44e0f0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "5a620fbbfa2baf6a8a85241fc290bf4858a1cfd12e8a370b569e30c8f084ec2a"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "41bdb43f6906049187ef3cc7240688751015b79f9da01765c9d4468fb0e34887"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044e0f0".status_history]]
 old_status = "RELOC"
@@ -130616,11 +131012,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.462859+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044e0f0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.444322+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044e0f0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.435775+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044e110"]
 size = 126
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044e110.c"
 symbol = "_fcn_0044e110"
 kind = "FUNCTION"
@@ -130639,11 +131047,11 @@ va = "0x44e110"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "8bb126878f36f082911f2c885ef98a9a2e10b544754804aefedc136c09f600f7"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "c04b86704a25c6f1c4b05941d5b3ffcbf9b472575d137aa96ff3d772510da0f9"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044e110".status_history]]
 old_status = "RELOC"
@@ -130794,6 +131202,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.464682+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044e110".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.446568+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044e110".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.438044+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044e190"]
 size = 70
 status = "RELOC"
@@ -130878,7 +131298,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 ["GOLDTL.0x0044f7e0"]
 size = 244
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0044f7e0.c"
 name = "fcn_0044f7e0"
 symbol = "_fcn_0044f7e0"
@@ -130898,11 +131318,11 @@ va = "0x44f7e0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "97668508d6cc7b8c1cb9ae238eaa64797a4ae5307bfd80050d00860a22614d0f"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "e19e0a81b538f7055a764a3543655e9981adbbea47b8869e30326373167eea92"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044f7e0".binding_history]]
 action = "rebind"
@@ -131125,6 +131545,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.467149+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044f7e0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.449723+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044f7e0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.441119+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0044f8e0"]
 size = 696
@@ -131681,7 +132113,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 121
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00451d70.c"
 symbol = "_fcn_00451d70"
 kind = "FUNCTION"
@@ -131700,11 +132132,11 @@ va = "0x451d70"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "eb5da8cd83317be12f9010a010d934a35df748cbf70dba1cd18106f321764fc5"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "ce8dfad1ff16590dd50c5be27f1d651d3ebc88de093312cc90d3ad27ccc6a235"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00451d70".status_history]]
 old_status = "RELOC"
@@ -131854,6 +132286,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.468990+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00451d70".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.453713+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00451d70".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.443173+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00451df0"]
 size = 385
@@ -132464,7 +132908,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 197
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00455280.c"
 symbol = "_fcn_00455280"
 kind = "FUNCTION"
@@ -132483,11 +132927,11 @@ va = "0x455280"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "5d8149b6947c7f206c843fe00113ed8198544dc6e5cc46cb35a34f6d861a00a0"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "3142a1ebc9f61bb5b7e3ad5c9e6bbc98a6cf6a09ec271966c8b9bb871ab89347"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00455280".status_history]]
 old_status = "RELOC"
@@ -132638,6 +133082,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.470835+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x00455280".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.457477+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00455280".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.445397+00:00"
+updated_by = "verify"
 ["GOLDTL.0x00455350"]
 size = 254
 status = "EXACT"
@@ -132669,7 +133125,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 size = 230
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00455450.c"
 symbol = "_fcn_00455450"
 kind = "FUNCTION"
@@ -132688,11 +133144,11 @@ va = "0x455450"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "3d8be674a3a04e7f75863823121e67b69aacc6ad2759b0c8526b50a596e95e7d"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "90a86f1e89a14299d7d7989b688ebc9645ad79dc6834c17836040642c7aac237"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00455450".status_history]]
 old_status = "RELOC"
@@ -132843,11 +133299,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.472828+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x00455450".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.459496+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00455450".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.447321+00:00"
+updated_by = "verify"
 ["GOLDTL.0x00455540"]
 size = 194
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00455540.c"
 symbol = "_fcn_00455540"
 kind = "FUNCTION"
@@ -132866,11 +133334,11 @@ va = "0x455540"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "f9006b9fdd456433e9ce16524961b309ee6b59852e97e416ac2f21d5129080db"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "c3efbd9d1a44c63075423fc9bdeaa60e6dc2f8acc9bf81535684c02d1f60c4df"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00455540".status_history]]
 old_status = "RELOC"
@@ -133021,11 +133489,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.474689+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x00455540".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.461486+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00455540".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.449551+00:00"
+updated_by = "verify"
 ["GOLDTL.0x00455610"]
 size = 230
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_00455610.c"
 symbol = "_fcn_00455610"
 kind = "FUNCTION"
@@ -133044,11 +133524,11 @@ va = "0x455610"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "45dd0e3cf1465024663e748d492f0a8acbd4d15b58e8ffad19b344be2ffa6fea"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "be9b117aff2ad28e0e4b1acdc4b51f8477170953196bd6935e487cf71378f08d"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x00455610".status_history]]
 old_status = "RELOC"
@@ -133198,6 +133678,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.476484+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00455610".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.463641+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x00455610".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.451726+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00455700"]
 size = 187
@@ -135057,7 +135549,7 @@ measured_at = "2026-10-29T21:57:54+00:00"
 size = 60
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045d3b0.c"
 symbol = "_fcn_0045d3b0"
 kind = "FUNCTION"
@@ -135076,11 +135568,11 @@ va = "0x45d3b0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "576f54a2697c29f9bb7109da09bdf8c4baaf9757df0b0571c0ffd605bddf7230"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "18ca721df76e1f4c8c52cb046e84cdef8a43edb79b197cffb9663b6c208232dd"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0045d3b0".status_history]]
 old_status = "RELOC"
@@ -135147,6 +135639,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.478300+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0045d3b0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.471358+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0045d3b0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.454222+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0045d520"]
 size = 169
 status = "RELOC"
@@ -135178,7 +135682,7 @@ measured_at = "2026-10-29T21:57:54+00:00"
 size = 31
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_0045d5d0.c"
 symbol = "_fcn_0045d5d0"
 kind = "FUNCTION"
@@ -135197,11 +135701,11 @@ va = "0x45d5d0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "2c61f6150566fbe0d48c0f6bb829750239ada19f1b949f8484735e378164d9fc"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "eac5e7d6c8447975466ff71dd95f64a381f8823805f76c3af01e04ad45224981"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0045d5d0".status_history]]
 old_status = "RELOC"
@@ -135267,6 +135771,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.479284+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0045d5d0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.473475+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0045d5d0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.455490+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0045d740"]
 size = 37
@@ -199799,17 +200315,17 @@ source_hash = "07fa095fdebb1511b6653066208e612c4c7f787a78772608c492399ed7d3a86f"
 reference_hash = "b48ed813e5deb4bb392670ac73243e05188804d0330eb2bb5a4c25637f53e741"
 reference_size = "5"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "a3fa5532a3bfb6a4acd811e1570b2d99ed08a1882c9aebc26277bae2833508a5"
+compiler_hash = "dcc58cbb246edfa61b04cbca646adf69cf955ac781146e9f1e90d588036bd8d0"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x572760"
 context_hash = ""
 defines = "[]"
-input_hash = "381aa10eb2c2f9ff5f15ad5060a906d758511ee417a7a6a6d43baf3b6716d3f3"
+input_hash = "8673ae0c9c8fefce999df6676eecd20cd63f6cc7966f7a612ff5cb5d48816504"
+writer = "verify"
 status = "RELOC"
-writer = "test"
-measured_at = "2026-10-29T23:05:27+00:00"
+measured_at = "2026-10-29T23:36:20+00:00"
 
 [["GOLDTL.0x00572760".status_history]]
 old_status = "RELOC"
@@ -200161,17 +200677,17 @@ source_hash = "26df7a1bf75a3803b097a681cf73dbbc81547c503683fce56f83aa697d4fadb1"
 reference_hash = "369773755614bae382fa32c5464128f189c0fa8a48476f08ad9bb4b177d70d45"
 reference_size = "5"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "a3fa5532a3bfb6a4acd811e1570b2d99ed08a1882c9aebc26277bae2833508a5"
+compiler_hash = "dcc58cbb246edfa61b04cbca646adf69cf955ac781146e9f1e90d588036bd8d0"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x5756f0"
 context_hash = ""
 defines = "[]"
-input_hash = "2059cf1cc8b83610ce5c6997af81c98057aef7f9242614002683fe97492243fe"
+input_hash = "39b0eae16db9be7996e4bd31a0a42a2e48c9f0d1c91e67c2f6667f4eb60bf915"
+writer = "verify"
 status = "RELOC"
-writer = "test"
-measured_at = "2026-10-29T23:05:57+00:00"
+measured_at = "2026-10-29T23:36:20+00:00"
 
 [["GOLDTL.0x005756f0".status_history]]
 old_status = "RELOC"
@@ -212077,7 +212593,7 @@ measured_at = "2026-10-29T21:57:55+00:00"
 size = 16
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/GOLDTL.fcn_005ba8e0.c"
 symbol = "_fcn_005ba8e0"
 kind = "FUNCTION"
@@ -212096,11 +212612,11 @@ va = "0x5ba8e0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "5eefdec8ffdee946bfb749b38cf68cf7b8469af376001beb8b17b62ae45af14f"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "5040d7d1c064f4f81f59db53c2d460df1c1efbdcae40fa8634b2209e9e8b4692"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x005ba8e0".status_history]]
 old_status = "RELOC"
@@ -212155,11 +212671,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.480397+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x005ba8e0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.725294+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x005ba8e0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.456791+00:00"
+updated_by = "verify"
 ["GOLDTL.0x005ba8f0"]
 size = 16
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005ba8f0.c"
 symbol = "_fcn_005ba8f0"
 kind = "FUNCTION"
@@ -212178,11 +212706,11 @@ va = "0x5ba8f0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "672283d47c046b1832de03b11005119d5100df41f4f1bedf6dbf77c1f8053bfa"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "8ca5aab6ffa635e4d9c73e99bc813131ad6cb043a6ec0a36842cb9d07d69d7f4"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x005ba8f0".status_history]]
 old_status = "RELOC"
@@ -212237,11 +212765,23 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.481253+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x005ba8f0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.726505+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x005ba8f0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.458147+00:00"
+updated_by = "verify"
 ["GOLDTL.0x005ba900"]
 size = 16
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005ba900.c"
 symbol = "_fcn_005ba900"
 kind = "FUNCTION"
@@ -212260,11 +212800,11 @@ va = "0x5ba900"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "63ab0fe711fd1fbcdfb1ffa5238c19877cab97a2008c19976ce045d5411686c2"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "3cb97eb438b97648c620684afad304150886109be6b529a8a27f459a4053274e"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x005ba900".status_history]]
 old_status = "RELOC"
@@ -212318,6 +212858,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.482117+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x005ba900".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.727479+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x005ba900".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.459391+00:00"
 updated_by = "verify"
 ["GOLDTL.0x005bd7c0"]
 size = 84
@@ -405076,7 +405628,7 @@ symbol = "_fcn_004079d0"
 name = "fcn_004079d0"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 note = "Complete TL default action callback RELOC30, all30 applied native bytes and2 call operands validated with rejecting controls. Native registry stores action-kind0 callback; dispatcher4054b0 passes one task pointer and ignores EAX. Existing ch_queue header owns void(struct Task*) declaration with incomplete tag only. Across45 compiler contexts/60 definitions,44 other complete objects preserve all sections/relocations; TL31 matches3weak andGold23matches3weak are current measurements. No Gold callback provider, task layout, storage owner or raw client proof inferred. .scratch/goal83-tl-small/production-proof.json"
 
@@ -405093,11 +405645,11 @@ va = "0x4079d0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "6fa317e812556c96fe41cbd41b43e01da3b4d6bcb953c9cfe2e29600e725720c"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "2b96e6291a1819d69bf285fa440ce30f1c7d9ac4ef59892f393b6239cea6c2c7"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x004079d0".status_history]]
 old_status = "RELOC"
@@ -405115,6 +405667,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.390440+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x004079d0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.302629+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x004079d0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.349943+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0041f9b0"]
 size = 31
@@ -589976,7 +590540,7 @@ symbol = "_fcn_0044dc00"
 name = "fcn_0044dc00"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 
 ["GOLDTL.0x0044dc00".verification]
@@ -589992,11 +590556,11 @@ va = "0x44dc00"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "a577dc0918a24a608043694bed060a6dfdc378508a5d01743828152beef9558a"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "e96c29a1df3045ba796fa16ce7b4e5f0955444e3460b1dc36b7d74d84ddd2bd9"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044dc00".status_history]]
 old_status = "RELOC"
@@ -590146,6 +590710,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.436659+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dc00".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.414881+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dc00".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.404576+00:00"
 updated_by = "verify"
 ["GOLDTL.0x004b62e0"]
 size = 394
@@ -590545,7 +591121,7 @@ symbol = "_fcn_0044da90"
 name = "fcn_0044da90"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 
 ["GOLDTL.0x0044da90".verification]
@@ -590561,11 +591137,11 @@ va = "0x44da90"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "d6d55db95a133e456f024b6beba7754d97692f0876908bccc966fc4e18aa411d"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "5b8588b39379fc0deac41f8950bc9bf083a6417633dce58d3dfb315b768c6ac0"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044da90".status_history]]
 old_status = "RELOC"
@@ -590715,6 +591291,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.428585+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044da90".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.406337+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044da90".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.395524+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0044df60"]
 size = 66
@@ -590939,7 +591527,7 @@ symbol = "_fcn_0044dc90"
 name = "fcn_0044dc90"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 
 ["GOLDTL.0x0044dc90".verification]
@@ -590955,11 +591543,11 @@ va = "0x44dc90"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "20ae37b8a97b8b12a5927457a81c5ff06be88558b972a7a73018b38626bdb7bc"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "cd78017baf059334700df740dd98a1a10fb52d5f48c9e697254ef875afb5c89b"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044dc90".status_history]]
 old_status = "RELOC"
@@ -591109,6 +591697,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.442204+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dc90".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.420934+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dc90".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.410825+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00579690"]
 size = 261
@@ -591303,7 +591903,7 @@ symbol = "_fcn_0044dc30"
 name = "fcn_0044dc30"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 
 ["GOLDTL.0x0044dc30".verification]
@@ -591319,11 +591919,11 @@ va = "0x44dc30"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "4c1c60581ef768912570859c4da428415c4d4ba4d3ba296ddaee64dbc521f2c6"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "e26888c0a4838bec0e170795eda1ad2d90dce5d06bd325828fefb06ddeb17c05"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044dc30".status_history]]
 old_status = "RELOC"
@@ -591474,6 +592074,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.438496+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044dc30".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.416897+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dc30".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.406607+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044dcc0"]
 size = 38
 file = "src/Develop/Unassigned/fcn_0044dcc0.c"
@@ -591481,7 +592093,7 @@ symbol = "_fcn_0044dcc0"
 name = "fcn_0044dcc0"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 
 ["GOLDTL.0x0044dcc0".verification]
@@ -591497,11 +592109,11 @@ va = "0x44dcc0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "54d2a415170d397c6cea099e57aa72b05b61c63d611bd7237964220fc5ae7f33"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "a164164bcfa76dd4476727db259fa75be18826692cb7bd9562fa979395063b8b"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044dcc0".status_history]]
 old_status = "RELOC"
@@ -591651,6 +592263,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.444021+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dcc0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.423354+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dcc0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.413105+00:00"
 updated_by = "verify"
 ["GOLDTL.0x0057f2e0"]
 file = "src/Develop/Unassigned/fcn_0057f2e0.c"
@@ -591890,7 +592514,7 @@ symbol = "_fcn_0044da60"
 name = "fcn_0044da60"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 
 ["GOLDTL.0x0044da60".verification]
@@ -591906,11 +592530,11 @@ va = "0x44da60"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "202197a3dd2a5ecaebe1c4fa60471feb2ce7c6fe629775458a2adf1646dcde52"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "6f0858b742779f277781ef212e413eacd09cf73f16c835b47465cdb4565c67e8"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044da60".status_history]]
 old_status = "RELOC"
@@ -592060,6 +592684,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.426757+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044da60".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.404316+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044da60".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.393091+00:00"
 updated_by = "verify"
 ["GOLDTL.0x00570550"]
 size = 69
@@ -592305,7 +592941,7 @@ symbol = "_fcn_0044de70"
 name = "fcn_0044de70"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 
 ["GOLDTL.0x0044de70".verification]
@@ -592321,11 +592957,11 @@ va = "0x44de70"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "1cc45ee968be1b4f8fe5c830bc344742566ef6ca6c7b70aac7b0a7a118860785"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "7125f287903122add0b360a7737b85bb80f4826f7253555909a92562ccd6c592"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044de70".status_history]]
 old_status = "SIZE_MISMATCH"
@@ -592481,6 +593117,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.451217+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044de70".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.431222+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044de70".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.421704+00:00"
 updated_by = "verify"
 ["GOLDTL.0x004258d0"]
 size = 108
@@ -593585,7 +594233,7 @@ measured_at = "2026-10-29T21:57:53+00:00"
 ["GOLDTL.0x0044dbd0"]
 size = 38
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/fcn_0044dbd0.c"
 kind = "FUNCTION"
 name = "fcn_0044dbd0"
@@ -593605,11 +594253,11 @@ va = "0x44dbd0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "36ccb9a12d28756d6076c0d5210d0c72a7553f843704e2c7cdf40aff2277f903"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "ca8b6bd6865a392faf99d3735cd6c323f857a6481264e447a3aa09c6c32f2e6b"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044dbd0".binding_history]]
 action = "rebind"
@@ -593793,6 +594441,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.434941+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044dbd0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.412930+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dbd0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.402435+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0054b810"]
 size = 5
 updated_by = "rehome"
@@ -593855,7 +594515,7 @@ symbol = "_fcn_0054b810"
 ["GOLDTL.0x0044e0a0"]
 size = 41
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 file = "src/Develop/Unassigned/fcn_0044e0a0.c"
 kind = "FUNCTION"
 name = "fcn_0044e0a0"
@@ -593875,11 +594535,11 @@ va = "0x44e0a0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "eab6874748976278ad8a06eff488d69ae96d0d8a51a3fbbcce85942a25974daf"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "33a9036107260e0d2891435865b550a0231552af352be4f37810e25d0da56a06"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0044e0a0".binding_history]]
 action = "rebind"
@@ -594062,6 +594722,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.461009+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044e0a0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.442192+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044e0a0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.433485+00:00"
 updated_by = "verify"
 ["GOLDTL.0x005729e0"]
 size = 104
@@ -594398,7 +595070,7 @@ file = "src/Develop/Unassigned/fcn_0040f910.c"
 name = "fcn_0040f910"
 symbol = "_fcn_0040f910"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 size = 143
 
@@ -594563,6 +595235,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.398366+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0040f910".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.318871+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040f910".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.359293+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0040f910".verification]
 source_hash = "2848d7c516d231672a46762dd66904c18e3bf6631bc8318fcd76091e987ea814"
 reference_hash = "1846d7a692af2f8aec694c36f6c17a9912bfc4a10d3f7ad567532b5589e2fafe"
@@ -594576,11 +595260,11 @@ va = "0x40f910"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "2c4a66eb71ca6a5c5e8cc2f8e46c9dcb6901f300a3e197c76130bb03de5f9063"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "3e20e0ef95d1faa887b61918b538e43f4b1f49addfb126f09abc6be726501a43"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 ["GOLDTL.0x00410310"]
 note = "Inferred address-only identity for an inventory start admitted by the coverage repair; the stub body is an unreconstructed work item, not a match."
 kind = "FUNCTION"
@@ -595004,7 +595688,7 @@ file = "src/Develop/Unassigned/fcn_0044dc60.c"
 name = "fcn_0044dc60"
 symbol = "_fcn_0044dc60"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 size = 38
 
@@ -595163,6 +595847,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.440325+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0044dc60".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.418958+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0044dc60".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.408746+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0044dc60".verification]
 source_hash = "472886f9c3d6549dfd2354e204bb92138986fa2dbc5a22993ed072a30fcede9f"
 reference_hash = "93f6b1ec8d2daf0fe0e578a658d5d84cf6fd6dd778ed92de01f5ccffd4c8d08e"
@@ -595176,11 +595872,11 @@ va = "0x44dc60"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "24c720d29284b735e815efaed73bb1222c63d257ded0ed1600080648eb333af3"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "3f867801a93cbb118aa1a145f0762fc11d84d65c2ca9cc3c7e295ee889c63c76"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 ["GOLDTL.0x00467870"]
 note = "Inferred address-only identity for an inventory start admitted by the coverage repair; the stub body is an unreconstructed work item, not a match."
 kind = "FUNCTION"
@@ -599451,7 +600147,7 @@ symbol = "_fcn_0040f9b0"
 name = "fcn_0040f9b0"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 
 ["GOLDTL.0x0040f9b0".verification]
@@ -599467,11 +600163,11 @@ va = "0x40f9b0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "07e66e58d9cf4b79e238ad689d25db5666dd9fadb39a371c7df52438d0a2ed64"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "d2df821c78f3a6085390f543ffe447b6213e3f6ce3c4c8fbe4598d8590d93248"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0040f9b0".status_history]]
 old_status = "RELOC"
@@ -599622,6 +600318,18 @@ old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.402002+00:00"
 updated_by = "verify"
+
+[["GOLDTL.0x0040f9b0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.323169+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040f9b0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.364163+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0040f9a0"]
 size = 15
 file = "src/Develop/Unassigned/fcn_0040f9a0.c"
@@ -599629,7 +600337,7 @@ symbol = "_fcn_0040f9a0"
 name = "fcn_0040f9a0"
 kind = "FUNCTION"
 updated_by = "verify"
-updated_at = "2026-10-29T22:42:03+00:00"
+updated_at = "2026-10-29T23:36:34+00:00"
 status = "EXACT"
 
 ["GOLDTL.0x0040f9a0".verification]
@@ -599645,11 +600353,11 @@ va = "0x40f9a0"
 context_hash = ""
 defines = "[]"
 linked_image = "build-goldtl-audit/Europa1400Gold_TL.exe"
-linked_image_hash = "1a6136e3e2273e30b49454b2f28ad410714509d171c5e6a4f17a0a62fc1569e7"
-input_hash = "9d0832946214c96346cbd9018ddfe065922e065f2b268befa9f1a4d94a9cd793"
+linked_image_hash = "257edce62fa89b5ef8d6409251f74b083aae113389d8411c4ed04cabd4f82d80"
+input_hash = "23ac361585558e5f417aa49a7192bce864b7bfab63c7cf2115da4c35dbb3d8f2"
 status = "EXACT"
 writer = "verify"
-measured_at = "2026-10-29T22:42:03+00:00"
+measured_at = "2026-10-29T23:36:34+00:00"
 
 [["GOLDTL.0x0040f9a0".status_history]]
 old_status = "RELOC"
@@ -599799,6 +600507,18 @@ updated_by = "verify"
 old_status = "RELOC"
 new_status = "EXACT"
 changed_at = "2026-10-29T22:42:03.400184+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040f9a0".status_history]]
+old_status = "EXACT"
+new_status = "RELOC"
+changed_at = "2026-10-29T23:36:20.321113+00:00"
+updated_by = "verify"
+
+[["GOLDTL.0x0040f9a0".status_history]]
+old_status = "RELOC"
+new_status = "EXACT"
+changed_at = "2026-10-29T23:36:34.361643+00:00"
 updated_by = "verify"
 ["GOLDTL.0x004cd590"]
 size = 136

@@ -8545,3 +8545,18 @@ So the pad method reaches the same local optimum from scratch; the transient
 tree to the committed pads and rebuilt to 292,292 / 108,702.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: uncached verification after the thunk repairs
+
+Ran `rebrew verify --no-cache --text` against the current image and saved the
+json to `.scratch/organize/verify251.json`: 5,228 rows checked, 4,152 passed
+(4,150 before the thunks), 484 EXACT, 3,668 RELOC, 969 SIZE_MISMATCH, 99
+NEAR_MATCHING, 8 STUB (10 before), no compile errors or missing files, libraries
+44/44; text placement 587 correct of 5,180; inventory 6,688 rows.
+
+Raw byte score 292,292 of 2,846,720 compared, informative 108,702. The two
+five-byte thunks account for the two extra passes and the two fewer stubs; they do
+not add score because their objects still link late.
+
+Lint 0 errors / 0 warnings on 5,453 files, data conflicts 0. No GA was run.
+Decision: Lead.
