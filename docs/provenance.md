@@ -7956,3 +7956,23 @@ mistake, not a tool defect.
 
 Attempted no source edits this round. Rebuilt image unchanged: raw 275,568 /
 informative 93,703. Lint 0 errors / 0 warnings. No GA was run. Decision: Lead.
+
+## 2026-10-30: padding .rdata to the reference size makes the score worse
+
+Whole-binary comparison puts built .text at 2,540,642 against the reference
+2,491,370 (+49,272) and built .rdata at 52,558 against 76,722 (-24,164); .data
+differs only in virtual size because of the generated BSS gaps, which do not
+occupy file bytes. Summing the measured bodies: 654 compile shorter and 316
+longer than their reference extents for a net -139,473 bytes, while the 90
+text-section scaffolding arrays add 30,636, so the text excess comes from the
+unmeasured objects, not the reversed bodies.
+
+Tested restoring the .rdata shortfall with a 24,164-byte zero tail pad in
+`.rdata`. The build stayed clean but the score dropped from 275,568 / 93,703 to
+269,320 / 92,308: the pad pushes .data content off its reference start, which
+costs more than the zero bytes gain. Reverted and rebuilt; the score is back to
+275,568 / 93,703.
+
+The .rdata shortfall is real missing content (constants and strings), so the next
+step is data reconstruction, not padding. Lint 0 errors / 0 warnings. No GA was
+run. Decision: Lead.
