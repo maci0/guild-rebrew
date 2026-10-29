@@ -15,7 +15,7 @@ typedef struct LC_OBJECT_LIST {
 } LC_OBJECT_LIST;
 
 int __cdecl fcn_00597ff0(int key, char* out);
-int __cdecl fcn_005985f0(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj);
+int __cdecl lc_GetGebaeudeBauplatz(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj);
 char __cdecl fcn_00598550(char* object, void* context);
 char __cdecl fcn_005982d0(char* object, void* context);
 char __cdecl fcn_0058fa00(char* object, void* context);

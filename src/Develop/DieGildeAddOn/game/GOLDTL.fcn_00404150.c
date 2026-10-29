@@ -16,10 +16,9 @@ extern int g_675318;
 void __cdecl fcn_0042e540(char*);
 int __cdecl fcn_00413190(int);
 
-/* ADDRESS: GOLD 0x00403950 */
-/* ADDRESS: GOLDTL 0x00404150 */
 
 /* Attaches the named motion of a character kind to an object. */
+/* ADDRESS: GOLDTL 0x00404150 */
 char* __cdecl ch_AttachMotion(char* obj, int kind)
 {
 	D3_ANIMATION_OPTIONS opt;

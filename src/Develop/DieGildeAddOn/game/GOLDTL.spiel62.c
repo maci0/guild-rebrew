@@ -20,8 +20,8 @@ extern int g_next_object_id; /* defined in spiel.c */
 int __cdecl gm_GetBuildingTypeCategory(int);
 extern int g_citizen_count;
 
-/* ADDRESS: GOLDTL 0x004cef30 */
 // gm_LookupEntityRecordById
+/* ADDRESS: GOLDTL 0x004cef30 */
 int __cdecl gm_LookupEntityRecordById(int search_id)
 {
 	char* base_cursor;

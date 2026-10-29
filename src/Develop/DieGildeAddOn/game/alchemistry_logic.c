@@ -174,7 +174,6 @@ int* __cdecl ahm_FindRecipeSlot(char* entity, int key)
 	return ahm_FindRecipeSlotImpl(entity, key);
 }
 
-/* ADDRESS: GOLD 0x004eabe0 */
 /* ADDRESS: GOLDTL 0x004ec960 */
 int* __cdecl ahm_FindRecipeSlotImpl(char* entity, int key)
 {
@@ -298,6 +297,8 @@ extern unsigned char g_slot_table[2];
 extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_alloc(unsigned int size, const char* source);
+void __cdecl fcn_004fe470(int, int, int, int, int);
+void __cdecl fcn_004fdfe0(unsigned short*);
 /* Defined in alchemistry_logic2.c; same literal, same VA. */
 
 /* Allocates a new alchemy entity: resolves the parent building record,
@@ -331,14 +332,20 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	building_id = *(int*) (cmd_payload + 8);
 	gm_ResolveEntityById(&dynamic, 0, 0, building_id);
 	if (dynamic == 0) {
+#if defined(REBREW_SERVER)
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", 0x449, "ahm_ExAllocAlchemist: cant find target geb...", 1);
+#endif
 		return 0xffff;
 	}
 
 	building_type = (unsigned char) *(char*) dynamic;
 	if (*((char*) (g_entity_type_table + building_type + building_type * 0x24c)) != 0x1e) {
+#if defined(REBREW_SERVER)
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", 0x451, "ahm_ExAllocAlchemist: wrong type of target geb...", 1);
 		goto ret_false;
+#else
+		return 0xffff;
+#endif
 	}
 
 	for (slot_index = 0; slot_index < 0x300; slot_index++) {
@@ -351,8 +358,10 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 				break;
 		}
 		if (slot_index == 0x300) {
+#if defined(REBREW_SERVER)
 			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", 0x45d, "ahm_ExAllocAlchemist: array overflow...", 1);
-			ret_false:
+ret_false:
+#endif
 			return 0xffff;
 		}
 	}
@@ -433,6 +442,27 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		*(char*) (slot + 0x80 + i) = (char) (gm_RandomMod(0x40) + 0x54);
 	*(char*) (slot + 9) = 0;
 
+	/* The two name strings are only in the client references: the server body
+	 * jumps straight from the +9 store to the +0x1c store, and its reference
+	 * is 80 bytes shorter.  Neither 4-byte pointer table has a data row yet;
+	 * 0x14b5908 holds the names, 0x14b596c the descriptions, both indexed by
+	 * the command's building ids. */
+#if !defined(REBREW_SERVER)
+	{
+		char* src;
+		char* dst;
+
+		src = *(char**) (0x14b5908 + *(int*) (cmd_payload + 0x18) * 4);
+		dst = slot + 0x30;
+		while ((*dst++ = *src++) != 0) {
+		}
+		src = *(char**) (0x14b596c + *(int*) (cmd_payload + 0x1c) * 4);
+		dst = slot + 0x40;
+		while ((*dst++ = *src++) != 0) {
+		}
+	}
+#endif
+
 	*(int*) (slot + 0x1c) = 0x447a0000;
 	{
 		/* The multiply is in the initializer and the slot+0x20 store follows
@@ -484,6 +514,16 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		    (char) (gm_RandomMod(0x40) - 0x20);
 		*(char*) (g_relationship_matrix_secondary + *(unsigned short*) slot * 0x300 + rand_value) = 0;
 	}
+
+#if !defined(REBREW_SERVER)
+	/* The client re-registers the slot with the building it belongs to and then
+	 * releases the query record; the server reference has neither the query nor
+	 * the two calls, and its body is 80 bytes shorter. */
+	query_result = (int*) gm_ff_Objekt(*(int*) ((char*) dynamic + 0x5d), 1, 0, 0x24b);
+	fcn_004fe470(*(int*) (slot + 4), *(int*) ((char*) dynamic + 1),
+	             query_result != 0 ? *(int*) ((char*) query_result + 2) : -1, 0, 0);
+	fcn_004fdfe0((unsigned short*) slot);
+#endif
 
 	if (*(int*) ((char*) dynamic + 0x65) == 0) {
 		*(int*) ((char*) dynamic + 0x65) = (int) m_alloc(0x3c, "ahm_AllocAhmInfo");
@@ -1411,3 +1451,4 @@ int ahm_GetCommandPayloadSize(unsigned char* cmd_payload)
 	}
 	return total_size;
 }
+unsigned char _dpad_1002a1cc[7812];

@@ -1,11 +1,11 @@
 void __cdecl fcn_00433780(void*);
 char* __cdecl fcn_00449ac0(char*, char*);
-void* __cdecl fcn_0042ff50(const char*, const char*, void*);
+void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl fcn_004011f0(void*, void*);
 char* __cdecl m_alloc(int, char*);
 int __cdecl fcn_00401500(void*, int, void**);
 void __cdecl fcn_0041d9e0(const char*);
-void __cdecl fcn_00430580(void*);
+void __cdecl CloseVfsStream(void*);
 
 typedef struct {
 	int a;
@@ -32,7 +32,7 @@ void* __cdecl d3_LoadObjectAnim(int a0, char* obj, char* a1, char a3)
 	}
 	p = fcn_00449ac0(a1, (char*) 0x67b044);
 	if ((p && *(int*) (obj + 0x218) == 4) || *(int*) (obj + 0x218) == 3) {
-		h = fcn_0042ff50(p, (char*) 0x6750e8, *(void**) 0x6b7fdc);
+		h = vfs_Tfopen(p, (char*) 0x6750e8, *(void**) 0x6b7fdc);
 		hdr = a0;
 		fcn_004011f0(h, &hdr);
 		if (hdr == 0x3a610001) {
@@ -76,7 +76,7 @@ void* __cdecl d3_LoadObjectAnim(int a0, char* obj, char* a1, char a3)
 				*(int*) (r + 0xc) = 0;
 			}
 		}
-		fcn_00430580(h);
+		CloseVfsStream(h);
 	}
 	*(char**) (obj + 0x1d0) = r;
 	*(int*) (obj + 0x40) = *(int*) 0x6b7fac;

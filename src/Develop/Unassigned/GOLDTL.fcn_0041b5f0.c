@@ -1,0 +1,40 @@
+extern int g_6777ac;
+
+// SIZE 0x14
+struct vertex_41b5f0 {
+	float x;
+	float y;
+	float z;
+	float rhw;
+	int color;
+};
+
+extern char g_6b5df0[];
+
+#include "Develop/Units/Error/error_message.h"
+
+
+/* dd_Line: queues a screen-space line as two vertices. */
+/* ADDRESS: GOLDTL 0x0041b5f0 */
+void __cdecl dd_Line(int x1, int y1, int x2, int y2, int color)
+{
+	if (g_6777ac == -1) {
+		fcn_0041d9e0("dd_Line called w/o dd_BeginLines!");
+	}
+	if (g_6777ac < 0x40) {
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].x = (float) x1;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].y = (float) y1;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].z = 0.0f;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].rhw = 1.0f;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].color = color;
+		g_6777ac++;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].x = (float) x2;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].y = (float) y2;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].z = 0.0f;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].rhw = 1.0f;
+		(*(struct vertex_41b5f0**)g_6b5df0)[g_6777ac].color = color;
+		g_6777ac++;
+	} else {
+		fcn_0041d9e0("Too many lines in dd_Line(): Increase dd_MAX_LINES in d8_vesa.c!");
+	}
+}

@@ -9,7 +9,6 @@ void __cdecl fcn_00425bf0(char*, unsigned int, const char*);
 int __cdecl evt_ImportCommand(const char*, void*, int, int, ...);
 
 /* ADDRESS: GOLDTL 0x0040cae0 */
-/* ADDRESS: GOLD 0x0040bbc0 */
 int __cdecl WalkToDummy(char** character, char** dummy)
 {
     if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) WalkToDummy) {
@@ -35,7 +34,6 @@ int __cdecl WalkToDummy(char** character, char** dummy)
 }
 
 /* ADDRESS: GOLDTL 0x0040d980 */
-/* ADDRESS: GOLD 0x0040ca60 */
 int __cdecl MoveCharacterCamera(char** character, char** view, int* mode)
 {
     char* object;
@@ -75,7 +73,6 @@ int __cdecl fcn_0040dac0(char** character)
 
 /* Inferred name and source placement; native recipes are identical in both clients. */
 /* ADDRESS: GOLDTL 0x0040e1a0 */
-/* ADDRESS: GOLD 0x0040d270 */
 void __cdecl ch_RegisterScriptCommands(void)
 {
     evt_ImportCommand("CreateCharacter", (void*) fcn_0040c930, 1, 4, 6, 7, 7, 7);

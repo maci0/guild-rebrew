@@ -13,11 +13,11 @@ int __cdecl fcn_00503f30(int a)
 	return 2;
 }
 
-/* ADDRESS: GOLDTL 0x00506df0 */
 // gm_IsInRange
 
 
 
+/* ADDRESS: GOLDTL 0x00506df0 */
 int __cdecl gm_IsInRange(int x)
 {
 	int stat_range;
@@ -28,7 +28,6 @@ int __cdecl gm_IsInRange(int x)
 	return 2;
 }
 
-/* ADDRESS: GOLDTL 0x00506e10 */
 int __cdecl fcn_00506e10(void)
 {
 	return 2;

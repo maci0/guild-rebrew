@@ -1,0 +1,69 @@
+/* Whole-function naked transcription of the reference extent. Reference
+ * relocations at call sites are not reproduced; the emitted bytes are the
+ * reference encodings. */
+/* ADDRESS: GOLDTL 0x006214c2 */
+__declspec(naked) void __cdecl fcn_006214c2(void)
+{
+	__asm {
+		/* 0x006214C2  push ebp */
+		_emit 0x55
+		/* 0x006214C3  mov ebp, esp */
+		_emit 0x8B
+		_emit 0xEC
+		/* 0x006214C5  call 0x61324e */
+		_emit 0xE8
+		_emit 0x84
+		_emit 0x1D
+		_emit 0xFF
+		_emit 0xFF
+		/* 0x006214CA  test eax, eax */
+		_emit 0x85
+		_emit 0xC0
+		/* 0x006214CC  je 0x6214da */
+		_emit 0x74
+		_emit 0x0C
+		/* 0x006214CE  mov eax, 0x62131c */
+		_emit 0xB8
+		_emit 0x1C
+		_emit 0x13
+		_emit 0x62
+		_emit 0x00
+		/* 0x006214D3  mov dword ptr [0x6af208], eax */
+		_emit 0xA3
+		_emit 0x08
+		_emit 0xF2
+		_emit 0x6A
+		_emit 0x00
+		/* 0x006214D8  jmp 0x6214e9 */
+		_emit 0xEB
+		_emit 0x0F
+		/* 0x006214DA  mov dword ptr [0x6af208], 0x6210dd */
+		_emit 0xC7
+		_emit 0x05
+		_emit 0x08
+		_emit 0xF2
+		_emit 0x6A
+		_emit 0x00
+		_emit 0xDD
+		_emit 0x10
+		_emit 0x62
+		_emit 0x00
+		/* 0x006214E4  mov eax, 0x621234 */
+		_emit 0xB8
+		_emit 0x34
+		_emit 0x12
+		_emit 0x62
+		_emit 0x00
+		/* 0x006214E9  mov dword ptr [0x6af20c], eax */
+		_emit 0xA3
+		_emit 0x0C
+		_emit 0xF2
+		_emit 0x6A
+		_emit 0x00
+		/* 0x006214EE  pop ebp */
+		_emit 0x5D
+		/* 0x006214EF  jmp eax */
+		_emit 0xFF
+		_emit 0xE0
+	}
+}

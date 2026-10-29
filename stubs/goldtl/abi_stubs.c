@@ -46,3 +46,5 @@ int __fastcall fcn_006168be(int a, int b)
 	return 0;
 }
 
+
+int __stdcall fcn_005ebbb9(int a0, int a1) { (void) a0; (void) a1; return 0; }

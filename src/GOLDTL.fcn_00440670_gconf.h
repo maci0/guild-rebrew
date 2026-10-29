@@ -1,0 +1,6 @@
+#ifndef GOLDTL_FCN_00440670_GCONF_H
+#define GOLDTL_FCN_00440670_GCONF_H
+
+extern int g_662ea8[];
+
+#endif /* GOLDTL_FCN_00440670_GCONF_H */

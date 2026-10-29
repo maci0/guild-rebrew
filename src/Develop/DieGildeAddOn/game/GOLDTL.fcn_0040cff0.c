@@ -9,11 +9,10 @@ void __cdecl fcn_0040cfb0();
 char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
-/* ADDRESS: GOLD 0x0040c0d0 */
-/* ADDRESS: GOLDTL 0x0040cff0 */
 
 /* PlayCharacterAniScript(): queues a character animation task that runs a
  * script; the calling script waits for it when it blocks. */
+/* ADDRESS: GOLDTL 0x0040cff0 */
 int __cdecl PlayCharacterAniScript(char** ch, char** script, int* kind, unsigned char* level, char** func)
 {
 	char* task;

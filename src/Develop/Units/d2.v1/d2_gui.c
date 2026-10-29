@@ -13,7 +13,7 @@ void __cdecl d2_SetElementImage(int element, int bild)
     eintrag = &((D2_GUI_ITEM*) g_1015ea0)[element];
 #endif
     if (eintrag->kind < 0x40) {
-        fcn_00469960(eintrag->f08);
+        d2_SubRefcount(eintrag->f08);
     }
     eintrag->data = fcn_00466190(bild);
     eintrag->bild_offset = g_772568;

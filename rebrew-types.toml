@@ -187,15 +187,15 @@ val = 4
 unknown_08 = 8
 
 [types."d3.object-animation-frame".GOLDTL]
-file = "src/StartObjectTransformAnimation.c"
+file = "src/Develop/Units/d3/StartObjectTransformAnimation.c"
 symbol = "D3_OBJ_ANIM_FRAME"
 size = 88
 native_size = 88
-extent = "stride"
+extent = "allocation"
 evidence = "Rebind after source/header edits in the reconstruction rounds; the native 88-byte stride evidence in TL 0x412d30 (two contiguous 88-byte records passed to 0x4339e0) is unchanged and no modeled offset changed."
 cflags = "/O2 /Gd"
-source_hash = "ae4faac6e210f7a5b18353cf492203bc5d22c1eba535fd6ce192350f2a1145dd"
-headers_hash = "1360d745098d912a4be70c8169ec14b32cc05befffaf9357a54191ccb8da1fc9"
+source_hash = "5bd2e1c1524c5afb5fe51bbf03fe0c0743541c28bab55a069ae30de15241380a"
+headers_hash = "584e859f9a64f276af02d6b70e76b4b4133aea1c72e9eb92da0bfdebba5ce354"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -206,15 +206,15 @@ unbekannt_010 = 16
 drehung = 20
 unbekannt_020 = 32
 [types."d3.object-animation-flags".GOLDTL]
-file = "src/StartObjectTransformAnimation.c"
+file = "src/Develop/Units/d3/StartObjectTransformAnimation.c"
 symbol = "D3_OBJ_ANIM_FLAGS"
 size = 12
 native_size = 12
 extent = "allocation"
 evidence = "Rebind after source/header edits in the reconstruction rounds; the 12-byte by-value options argument copied by TL 0x412d30 to 0x4339e0 is unchanged and no modeled offset changed."
 cflags = "/O2 /Gd"
-source_hash = "ae4faac6e210f7a5b18353cf492203bc5d22c1eba535fd6ce192350f2a1145dd"
-headers_hash = "1360d745098d912a4be70c8169ec14b32cc05befffaf9357a54191ccb8da1fc9"
+source_hash = "5bd2e1c1524c5afb5fe51bbf03fe0c0743541c28bab55a069ae30de15241380a"
+headers_hash = "584e859f9a64f276af02d6b70e76b4b4133aea1c72e9eb92da0bfdebba5ce354"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -272,7 +272,7 @@ extent = "stride"
 evidence = "Existing inferred office-slot view. Native TL4e8b80/Gold4e6fc0 copy six DWORDs and advance 24 bytes; role byte is +8 and caller entity/state views are +4/+16. Server office handlers already use this layout. Native extent is a record stride, not table allocation ownership. Fields and original C spelling remain inferred. Complete native and compiler receipts: .scratch/goal48/."
 cflags = "/O2 /Gd"
 source_hash = "649cbe89f24548993167894b4a4d0c3fd4d25383483b2964af8cf583b1c7ac68"
-headers_hash = "0a282ff5832aa127c3906df01a2afbcd8e85afeb147ec38405884a2eb2eb0af2"
+headers_hash = "1e7737bbd65ea7cc4e3ab6f46500a226897caa4bfb5bfe7812f72e47eca6c57d"
 context_hash = "d93bd7ef4e30678f3225f1cf68f4034845c04ba851dbabde4f21d07a84efcfd6"
 binary_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 
@@ -293,7 +293,7 @@ extent = "stride"
 evidence = "Existing inferred office-slot view. Native TL4e8b80/Gold4e6fc0 copy six DWORDs and advance 24 bytes; role byte is +8 and caller entity/state views are +4/+16. Server office handlers already use this layout. Native extent is a record stride, not table allocation ownership. Fields and original C spelling remain inferred. Complete native and compiler receipts: .scratch/goal48/."
 cflags = "/O2 /Gd"
 source_hash = "649cbe89f24548993167894b4a4d0c3fd4d25383483b2964af8cf583b1c7ac68"
-headers_hash = "0a282ff5832aa127c3906df01a2afbcd8e85afeb147ec38405884a2eb2eb0af2"
+headers_hash = "1e7737bbd65ea7cc4e3ab6f46500a226897caa4bfb5bfe7812f72e47eca6c57d"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -314,7 +314,7 @@ extent = "stride"
 evidence = "Existing inferred office-slot view. Native TL4e8b80/Gold4e6fc0 copy six DWORDs and advance 24 bytes; role byte is +8 and caller entity/state views are +4/+16. Server office handlers already use this layout. Native extent is a record stride, not table allocation ownership. Fields and original C spelling remain inferred. Complete native and compiler receipts: .scratch/goal48/."
 cflags = "/O2 /Gd"
 source_hash = "649cbe89f24548993167894b4a4d0c3fd4d25383483b2964af8cf583b1c7ac68"
-headers_hash = "0a282ff5832aa127c3906df01a2afbcd8e85afeb147ec38405884a2eb2eb0af2"
+headers_hash = "1e7737bbd65ea7cc4e3ab6f46500a226897caa4bfb5bfe7812f72e47eca6c57d"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -325,7 +325,6 @@ mamt = 8
 pcount = 12
 status = 16
 msetter = 20
-
 [types."ch.action_queue_slot".GOLDTL]
 file = "src/Develop/DieGildeAddOn/game/ch_queue.h"
 symbol = "CH_QUEUE_SLOT"
@@ -335,7 +334,7 @@ extent = "stride"
 evidence = "Goal83 header-only callback declaration review leaves the existing occupancy view unchanged: native free-slot helpers TL405080/Gold404760 scan2000 records at0x194 stride; startup allocation0xc5440 equals2000*0x194. Occupancy dword0, opaque payload+4; no complete original task typedef or storage owner claimed. .scratch/goal83-tl-small/"
 cflags = "/O2 /Gd"
 source_hash = "41a7a6a837e0429e9b2cc27c6b120f48e57704fca7d8c60517d1ed2fa387fc0b"
-headers_hash = "c3d9a54c4220d4ba228afdb7ed615f55c52c07635de1c4203e18f1e76dd1709c"
+headers_hash = "9b590c0d87afa8bb236a1aec6c92355a965e02acb159e5c76c2d165348039fbe"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -352,7 +351,7 @@ extent = "stride"
 evidence = "Goal83 header-only callback declaration review leaves the existing occupancy view unchanged: native free-slot helpers TL405080/Gold404760 scan2000 records at0x194 stride; startup allocation0xc5440 equals2000*0x194. Occupancy dword0, opaque payload+4; no complete original task typedef or storage owner claimed. .scratch/goal83-tl-small/"
 cflags = "/O2 /Gd"
 source_hash = "41a7a6a837e0429e9b2cc27c6b120f48e57704fca7d8c60517d1ed2fa387fc0b"
-headers_hash = "c3d9a54c4220d4ba228afdb7ed615f55c52c07635de1c4203e18f1e76dd1709c"
+headers_hash = "9b590c0d87afa8bb236a1aec6c92355a965e02acb159e5c76c2d165348039fbe"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -398,14 +397,14 @@ name = 5
 param = 72
 
 [types."ch.dummy_picks".GOLDTL]
-file = "src/GOLDTL.fcn_00407330.c"
+file = "src/Develop/Unassigned/GOLDTL.fcn_00407330.c"
 symbol = "CH_DUMMY_PICKS"
 size = 132
 native_size = 132
 extent = "allocation"
-evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation."
+evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation. Rebind after later source/header edits; native evidence unchanged."
 cflags = "/O2 /Gd"
-source_hash = "e7cc5d9978c44511bf8cecc66df776da46705004e67a9d643570b345a086af7b"
+source_hash = "6f992a34289bcba4ca08db1aa163e06d4c8111726d8df6edffc92983d69cb406"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
@@ -415,14 +414,14 @@ item = 0
 count = 128
 
 [types."ch.dummy_picks".GOLD]
-file = "src/GOLDTL.fcn_00407330.c"
+file = "src/Develop/Unassigned/GOLDTL.fcn_00407330.c"
 symbol = "CH_DUMMY_PICKS"
 size = 132
 native_size = 132
 extent = "allocation"
-evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation."
+evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation. GOLD rebind after later source/header edits; native evidence unchanged."
 cflags = "/O2 /Gd"
-source_hash = "e7cc5d9978c44511bf8cecc66df776da46705004e67a9d643570b345a086af7b"
+source_hash = "6f992a34289bcba4ca08db1aa163e06d4c8111726d8df6edffc92983d69cb406"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
@@ -430,34 +429,31 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 [types."ch.dummy_picks".GOLD.offsets]
 item = 0
 count = 128
-
 [types."event.validator_view".GOLDTL]
-file = "src/GOLDTL.fcn_004e6650.c"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004e6650.c"
 symbol = "Kind"
 size = 20
 native_size = 20
-extent = "stride"
-evidence = "GOLDTL rebind after source edits; native TL 0x4e6650 scales the event type as index*5*4 and calls the fourth slot, unchanged 20-byte stride."
+extent = "allocation"
+evidence = "Rebind after the round-17 source edits: native TL 0x4e6650 scales the event type as index*5*4 and calls the fourth slot, unchanged 20-byte stride."
 cflags = "/O2 /Gd"
-source_hash = "023b99c651390b7c7f8af389bdce2a94738cdf31128b5cfa9dce6cddf96dba19"
-headers_hash = "d7395943cdb37f6aa47322624e0932613751c8ca48ac8f299a486659328c3f0c"
+source_hash = "a93832c2c953015c371426be347fbb553ab17d65087135392459dea345e20af6"
+headers_hash = "c12b3f9d62407a5b88dd5e8dc2058484722cae267209ed294bd0919a0c02757e"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."event.validator_view".GOLDTL.offsets]
-fn = 0
-pad4 = 4
 
 [types."event.validator_view".GOLD]
-file = "src/GOLDTL.fcn_004e6650.c"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004e6650.c"
 symbol = "Kind"
 size = 20
 native_size = 20
-extent = "stride"
+extent = "allocation"
 evidence = "GOLD rebind after source edits; native GOLD 0x4e4cc0 scales the event type as index*5*4 and calls the fourth slot, unchanged 20-byte stride."
 cflags = "/O2 /Gd"
-source_hash = "023b99c651390b7c7f8af389bdce2a94738cdf31128b5cfa9dce6cddf96dba19"
-headers_hash = "d7395943cdb37f6aa47322624e0932613751c8ca48ac8f299a486659328c3f0c"
+source_hash = "a93832c2c953015c371426be347fbb553ab17d65087135392459dea345e20af6"
+headers_hash = "c12b3f9d62407a5b88dd5e8dc2058484722cae267209ed294bd0919a0c02757e"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -472,7 +468,7 @@ native_size = 12
 extent = "stride"
 evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride12/end+384: no-argument cdecl callback +0, unsigned divisor +4 and pause integer +8. German field names and header inferred; storage owner unresolved."
 cflags = "/O2 /Gd"
-source_hash = "ca46306599cfb28e5143f2e3560fc37debb487e4bc3db8f089107ebbb62ecfdb"
+source_hash = "dadfb0c546101a1d2d2ca710d2f5f0edd577b228f457488589efe80f3058f1b4"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
@@ -490,7 +486,7 @@ native_size = 12
 extent = "stride"
 evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride12/end+384: no-argument cdecl callback +0, unsigned divisor +4 and pause integer +8. German field names and header inferred; storage owner unresolved."
 cflags = "/O2 /Gd"
-source_hash = "ca46306599cfb28e5143f2e3560fc37debb487e4bc3db8f089107ebbb62ecfdb"
+source_hash = "dadfb0c546101a1d2d2ca710d2f5f0edd577b228f457488589efe80f3058f1b4"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
@@ -499,7 +495,6 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 funktion = 0
 periode = 4
 pausiert = 8
-
 [types."am.effect".GOLDTL]
 file = "src/client_method_registry.h"
 symbol = "AM_EFFECT"
@@ -582,33 +577,30 @@ other_effects = 112
 flags = 144
 
 [types."d3.universe-view".GOLDTL]
-file = "src/GOLDTL.fcn_00515540.c"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00515540.c"
 symbol = "D3_UNIVERSE_VIEW"
 size = 988
 native_size = 988
-extent = "stride"
-evidence = "Native helper515540TL/511df0Gold scales a free index by3dc/3e0, stores byte1 at row+3d5, copies prototype string to row base. Private inferred opaque byte view: no string capacity, original typedef, full table allocation or storage owner claimed. Complete native and rejecting proofs .scratch/goal67/load-character/helper-proof.json; production .scratch/goal68/helper-proof."
+extent = "allocation"
+evidence = "Rebind after the round-12 symbol unification touched headers: native helper 0x515540/0x511df0 scales a free index by 0x3dc/0x3e0, stores byte 1 at row+0x3d5 and copies the prototype string to the row base. Private inferred opaque byte view; no string capacity, original typedef, full table allocation or storage owner claimed. Proof: .scratch/goal67/load-character/helper-proof.json and .scratch/goal68/helper-proof."
 cflags = "/O2 /Gd"
-source_hash = "35a1fd5b04d8819e889a3c8d277dd8f66edb25231f97a51ada51028631b51a6d"
-headers_hash = "4bf62d49f24dadb12bd6c70e27557456026394cdf59b8607946208babf84e393"
+source_hash = "ce5678c822535d18e5de8d1559b2db3dd00e0a3f70493b702329fc1bf22a5152"
+headers_hash = "1a1c3936c528e04190807895adc06ed731db2d6b12656ead2f6ee4664127de9a"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.universe-view".GOLDTL.offsets]
-unbekannt_000 = 0
-verwendet = 981
-unbekannt_3d6 = 982
 
 [types."d3.universe-view".GOLD]
-file = "src/GOLDTL.fcn_00515540.c"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00515540.c"
 symbol = "D3_UNIVERSE_VIEW"
 size = 992
 native_size = 992
-extent = "stride"
-evidence = "Native helper515540TL/511df0Gold scales a free index by3dc/3e0, stores byte1 at row+3d5, copies prototype string to row base. Private inferred opaque byte view: no string capacity, original typedef, full table allocation or storage owner claimed. Complete native and rejecting proofs .scratch/goal67/load-character/helper-proof.json; production .scratch/goal68/helper-proof."
+extent = "allocation"
+evidence = "Native helper515540TL/511df0Gold scales a free index by3dc/3e0, stores byte1 at row+3d5, copies prototype string to row base. Private inferred opaque byte view: no string capacity, original typedef, full table allocation or storage owner claimed. Complete native and rejecting proofs .scratch/goal67/load-character/helper-proof.json; production .scratch/goal68/helper-proof. GOLD rebind after later source/header edits; native evidence unchanged."
 cflags = "/O2 /Gd"
-source_hash = "35a1fd5b04d8819e889a3c8d277dd8f66edb25231f97a51ada51028631b51a6d"
-headers_hash = "4bf62d49f24dadb12bd6c70e27557456026394cdf59b8607946208babf84e393"
+source_hash = "ce5678c822535d18e5de8d1559b2db3dd00e0a3f70493b702329fc1bf22a5152"
+headers_hash = "1a1c3936c528e04190807895adc06ed731db2d6b12656ead2f6ee4664127de9a"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -616,7 +608,6 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 unbekannt_000 = 0
 verwendet = 981
 unbekannt_3d6 = 982
-
 [types."lc.gebaeude-bauplatz-result".GOLDTL]
 file = "src/client_placement.h"
 symbol = "LC_GEBAEUDE_BAUPLATZ"
@@ -625,16 +616,12 @@ native_size = 84
 extent = "allocation"
 evidence = "Inferred stack result: TL4cc9da-4cc9e8 / Gold4cbe5a-4cbe68 clears 21 DWORDs; placement providers 5985f0/58fd20 and callbacks 598550/58fc80 access name+0, position+40, node+50. Complete native evidence .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim."
 cflags = "/O2 /Gd"
-source_hash = "cbb92d8b39281167e2c0dc676c5e05911dbaafa5f1fbab9f5131dd7e604ebb32"
+source_hash = "1bd255f030bcd4798d83bdd03f14207c8d1df5249b8e6011d6929ba3c3fd6216"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."lc.gebaeude-bauplatz-result".GOLDTL.offsets]
-name = 0
-position = 64
-unbekannt_4c = 76
-node = 80
 
 [types."lc.gebaeude-bauplatz-result".GOLD]
 file = "src/client_placement.h"
@@ -644,16 +631,12 @@ native_size = 84
 extent = "allocation"
 evidence = "Inferred stack result: TL4cc9da-4cc9e8 / Gold4cbe5a-4cbe68 clears 21 DWORDs; placement providers 5985f0/58fd20 and callbacks 598550/58fc80 access name+0, position+40, node+50. Complete native evidence .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim."
 cflags = "/O2 /Gd"
-source_hash = "cbb92d8b39281167e2c0dc676c5e05911dbaafa5f1fbab9f5131dd7e604ebb32"
+source_hash = "1bd255f030bcd4798d83bdd03f14207c8d1df5249b8e6011d6929ba3c3fd6216"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."lc.gebaeude-bauplatz-result".GOLD.offsets]
-name = 0
-position = 64
-unbekannt_4c = 76
-node = 80
 [types."d3.object-selection-list32".GOLDTL]
 file = "src/client_placement.h"
 symbol = "LC_OBJECT_LIST"
@@ -662,14 +645,12 @@ native_size = 132
 extent = "allocation"
 evidence = "Inferred stack list: cm_ExCreateGeb clears 33 DWORDs (TL4cca7c-4cca87 / Gold4cbefc-4cbf07); collectors 5982d0/58fa00 append 4-byte object pointers and use count+80; callers 598330/58fa60 clear 132 bytes. .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim."
 cflags = "/O2 /Gd"
-source_hash = "cbb92d8b39281167e2c0dc676c5e05911dbaafa5f1fbab9f5131dd7e604ebb32"
+source_hash = "1bd255f030bcd4798d83bdd03f14207c8d1df5249b8e6011d6929ba3c3fd6216"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object-selection-list32".GOLDTL.offsets]
-objects = 0
-count = 128
 
 [types."d3.object-selection-list32".GOLD]
 file = "src/client_placement.h"
@@ -679,25 +660,22 @@ native_size = 132
 extent = "allocation"
 evidence = "Inferred stack list: cm_ExCreateGeb clears 33 DWORDs (TL4cca7c-4cca87 / Gold4cbefc-4cbf07); collectors 5982d0/58fa00 append 4-byte object pointers and use count+80; callers 598330/58fa60 clear 132 bytes. .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim."
 cflags = "/O2 /Gd"
-source_hash = "cbb92d8b39281167e2c0dc676c5e05911dbaafa5f1fbab9f5131dd7e604ebb32"
+source_hash = "1bd255f030bcd4798d83bdd03f14207c8d1df5249b8e6011d6929ba3c3fd6216"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object-selection-list32".GOLD.offsets]
-objects = 0
-count = 128
-
 [types."dd.device_record".GOLD]
-file = "src/GOLD.fcn_0041c830.c"
+file = "src/Develop/Units/d3/GOLD.fcn_0041c830.c"
 symbol = "DD_DEVICE"
 size = 824
 native_size = 824
-extent = "stride"
+extent = "allocation"
 evidence = "GOLD rebind after source edits; enumeration writes description/name/flag at unchanged offsets in the 824-byte stride."
 cflags = "/O2 /Gd"
-source_hash = "629eb70e6ccb1642ea85043bdad0d3922fab2ed91c7738482c9264967f8c5b30"
-headers_hash = "b6c545c889f8e7c7a0d075a0b15061cbde562287329ab0acd2eb239835cc61fd"
+source_hash = "f7ecab77422d7c6a46bd4deef0d2982b4457f2a0476c99251ed867324cadb4bb"
+headers_hash = "35537eb33869c400fc1d95a39a600493af66465268d76de13d9af09138ce4a74"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -707,15 +685,15 @@ description = 16
 name = 272
 flag = 781
 [types."dd.driver_record".GOLD]
-file = "src/GOLD.fcn_0041c830.c"
+file = "src/Develop/Units/d3/GOLD.fcn_0041c830.c"
 symbol = "DD_DRIVER"
 size = 532
 native_size = 532
-extent = "stride"
+extent = "allocation"
 evidence = "GOLD rebind after source edits; enumeration writes guid/description/name at unchanged offsets in the 532-byte stride."
 cflags = "/O2 /Gd"
-source_hash = "629eb70e6ccb1642ea85043bdad0d3922fab2ed91c7738482c9264967f8c5b30"
-headers_hash = "b6c545c889f8e7c7a0d075a0b15061cbde562287329ab0acd2eb239835cc61fd"
+source_hash = "f7ecab77422d7c6a46bd4deef0d2982b4457f2a0476c99251ed867324cadb4bb"
+headers_hash = "35537eb33869c400fc1d95a39a600493af66465268d76de13d9af09138ce4a74"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -854,7 +832,7 @@ extent = "stride"
 evidence = "Private access view, not storage ownership. Native TL46fac0 indexes windows at0x1015f40 by0x3cc; nine fields verified in complete518-byte creator and original field-offset array spelling. Gold has distinct0x3c4 canonical GuiWin. .scratch/gui-text-creator-integration/."
 cflags = "/O2 /Gd"
 source_hash = "b0c5c08533b98ee9f5d5a57019d64ffec5d0a6bfd06efb5d6ac7bd8e6f14e704"
-headers_hash = "19763b381cd64a04dcfa119c6d0a182940031fb762f28af2b29d89ede95bf75e"
+headers_hash = "5a74a5d51535e9d076b9627dd74d3b2a340ab64f4bee8f71f6cdfd4fb595bf21"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -868,7 +846,6 @@ scroll = 600
 id = 636
 font = 652
 active = 656
-
 [types."d2.text-entry.tl".GOLDTL]
 file = "src/Develop/Units/d2.v1/d2_ShowTxt.c"
 symbol = "D2_TEXT_ENTRY"
@@ -878,7 +855,7 @@ extent = "stride"
 evidence = "Private accessed-field view only; no allocation or owner claim. Native TL46fac0 indexes pool at[0x1015ea0] by0x2f4; fields verified in complete518-byte creator and former int-array spelling. Gold uses0x2ec GuiEnt. .scratch/gui-text-creator-integration/."
 cflags = "/O2 /Gd"
 source_hash = "b0c5c08533b98ee9f5d5a57019d64ffec5d0a6bfd06efb5d6ac7bd8e6f14e704"
-headers_hash = "19763b381cd64a04dcfa119c6d0a182940031fb762f28af2b29d89ede95bf75e"
+headers_hash = "5a74a5d51535e9d076b9627dd74d3b2a340ab64f4bee8f71f6cdfd4fb595bf21"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 

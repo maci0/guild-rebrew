@@ -5,7 +5,7 @@
  *
  * Decoded from disasm: validates arg0 via fcn_00508e40, indexes 0x7f4ca0 by
  * (arg2 & 0xffff) ×540, scans rows [0x99f804, 0x9a3804) step 8, counts rows
- * whose key ([row-1] == [base+1]) and [0x9a3816 + fcn_004f5810([row])*0x2d]
+ * whose key ([row-1] == [base+1]) and [0x9a3816 + fcn_004f36e0([row])*0x2d]
  * == arg0, capped when count > 0x20.  Guard-first order (validation precedes
  * the 0x7f4ca0 lea chain) matches the target's sequential layout.
  */
@@ -14,7 +14,7 @@
 #include "../../../Units/Error/error.h"
 
 int __cdecl fcn_00508e40(int);
-int __cdecl fcn_004f5810(int);
+int __cdecl fcn_004f36e0(int);
 extern char g_7f4ca0[];
 extern int g_99f804[];
 extern int g_9a3804[];
@@ -42,7 +42,7 @@ int __cdecl cm_ChkCutsceneReady(int arg0, int arg2)
 	row = g_99f804;
 	do {
 		if (*(int*) (row - 1) == key) {
-			r = fcn_004f5810(*row);
+			r = fcn_004f36e0(*row);
 			if (r != -1 && *(int*) (g_9a3816 + r * 0x2d) == arg0) {
 				count++;
 				if (count > 0x20) {

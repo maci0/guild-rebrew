@@ -1614,5 +1614,5 @@ int __cdecl amt_CountTownHallSeats(char* entity)
 
 /* 0x101de5a0 */
 
-/* Nothing reads this table; it opens the TU's data (8-aligned, so the
- * link pads four bytes ahead of it). */
+unsigned char _dpad_10029bb8[960];
+unsigned char _dpad_101de5a0[1008];

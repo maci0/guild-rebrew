@@ -41,3 +41,4 @@ void __cdecl fcn_00438780(void)
             "d3d_Device->lpVtbl->EndScene(d3d_Device)");
     }
 }
+unsigned char _dpad_fc28f4[151852];

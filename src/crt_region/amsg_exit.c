@@ -318,3 +318,4 @@ int __cdecl _crtMessageBoxA(const char* text, const char* caption, unsigned int 
 {
     return fcn_10022107(text, caption, type);
 }
+unsigned char _dpad_100356e4[340];

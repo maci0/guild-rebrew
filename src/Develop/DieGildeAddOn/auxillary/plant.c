@@ -311,7 +311,7 @@ char __cdecl rd_AddBKBox(char* name)
 }
 
 /* Returns the cached box of a building site, or 0 (TL 0x4bdf40). */
-BK_BOX* __cdecl rd_GetBKSize(char* name)
+BK_BOX* __cdecl plt_LookupBauplatzBox(char* name)
 {
 	extern int __cdecl strcmpi(const char* a, const char* b);
 	extern int __cdecl sprintf(char* buf, const char* fmt, ...);
@@ -331,3 +331,6 @@ BK_BOX* __cdecl rd_GetBKSize(char* name)
 	return 0;
 }
 
+unsigned char _dpad_1002d4f9[895];
+unsigned char _dpad_1002d878[280];
+unsigned char _dpad_101de468[244];

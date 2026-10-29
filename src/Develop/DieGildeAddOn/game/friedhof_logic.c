@@ -1174,7 +1174,7 @@ int __cdecl gv_eval_SlotFrei(void* unused, int* p);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
 int __cdecl fcn_00503930(int a, unsigned short b, int c);
-int __cdecl fcn_005037c0(int a, unsigned short b, int c);
+int __cdecl gm_AddObjekt(int a, unsigned short b, int c);
 
 /* Moves a graveyard worker's slot entry into the field it currently works in:
  * resolve the command's entity and the worker entity, reject the empty or
@@ -1393,7 +1393,7 @@ done:
 		fcn_00503930(*(int*) ((char*) entity + 4),
 		             *(unsigned short*) ((unsigned char) g_773d75 * 756 + 0x8680b4),
 		             count);
-		fcn_005037c0(*(int*) ((char*) g_slot_table + 4 +
+		gm_AddObjekt(*(int*) ((char*) g_slot_table + 4 +
 		                     *(unsigned short*) ((char*) rec2 + 0x27) * 540),
 		             *(unsigned short*) ((unsigned char) g_773d75 * 756 + 0x8680b4),
 		             (int) ((float) count *

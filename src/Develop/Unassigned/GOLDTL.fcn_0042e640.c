@@ -1,0 +1,7 @@
+#include <string.h>
+
+/* ADDRESS: GOLDTL 0x0042e640 */
+int __cdecl fcn_0042e640(const char* a, const char** b)
+{
+	return strcmp(a, *b);
+}

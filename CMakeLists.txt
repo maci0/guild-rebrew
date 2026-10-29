@@ -307,6 +307,10 @@ if(REBREW_BUILD_SERVER)
   # COMPILE_FLAGS "/O2" is appended for every target once that table uses
   # APPEND_STRING, so the files would compile as "/O2 /O2 /Gd".
 
+  # Unified sources carry client-only branches guarded by target macros; the
+  # server reference does not have the client's savegame compensation code.
+  target_compile_definitions(server_dll PRIVATE REBREW_SERVER=1)
+
   if (MSVC)
     target_compile_options(server_dll PRIVATE /W3)
 
@@ -457,6 +461,8 @@ if(REBREW_BUILD_GOLDTL)
   endif()
   include(${CMAKE_BINARY_DIR}/rebrew-sources-goldtl.cmake)
   set(GOLDTL_SOURCES ${REBREW_SOURCES})
+  # zlib is compiled here and the archive's zlib members stay out of
+  # d3dx8-includes.rsp; minizip's unzip.c comes from this helper too.
   rebrew_append_client_zlib(GOLDTL_SOURCES)
   rebrew_apply_scaffold_omits(GOLDTL_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/goldtl/omitted-sources.cmake")
@@ -465,15 +471,158 @@ if(REBREW_BUILD_GOLDTL)
   # Conflicting fastcall signatures need distinct C translation units.
   rebrew_append_scaffold(GOLDTL_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/goldtl/abi_stubs.c")
+  # Zero-valued definitions for data symbols with a row but no owning TU yet.
+  rebrew_append_scaffold(GOLDTL_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/goldtl/data_scaffold.c")
+  # Fastcall band placeholders that complete the comparison link.
+  rebrew_append_scaffold(GOLDTL_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/goldtl/link_scaffold.c")
+  # Two shim definitions call GOLD-side symbols; the callee bodies belong to
+  # the other client and are not part of this image, so the symbols come from
+  # link_scaffold.c instead of dragging that target's closures in.
+
+
+  # The reference carries zlib's minigzip functions at 0x462500-0x462930
+  # (error, gz_uncompress, file_compress, file_uncompress, main), so the TL
+  # scaffold compiles minigzip.c even though the helper omits it for the
+  # other targets.
+  list(APPEND GOLDTL_SOURCES "${PROJECT_SOURCE_DIR}/references/zlib/minigzip.c")
+
+  # Order objects by their original function VA so the linked image places every
+  # body at the reference address. The vendored files are outside src/, so their
+  # first-function VAs come from the metadata rows that name them.
+  execute_process(
+    COMMAND "${_REBREW_GOLDTL_BIN}" build order-sources ${GOLDTL_SOURCES}
+      --target "Europa1400Gold_TL.exe" --module GOLDTL
+      --first-va adler32.c=0x45d3f0
+      --first-va crc32.c=0x45d600
+      --first-va deflate.c=0x45da70
+      --first-va gzio.c=0x45ee00
+      --first-va infblock.c=0x45fc50
+      --first-va infcodes.c=0x460a50
+      --first-va inffast.c=0x4611b0
+      --first-va inflate.c=0x461560
+      --first-va inftrees.c=0x462200
+      --first-va trees.c=0x462da0
+      --first-va unzip.c=0x464a30
+      --first-va minigzip.c=0x462500
+    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+    OUTPUT_VARIABLE GOLDTL_ORDERED
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    RESULT_VARIABLE GOLDTL_ORDER_RC)
+  if(NOT GOLDTL_ORDER_RC EQUAL 0)
+    message(FATAL_ERROR "rebrew build order-sources failed for Europa1400Gold_TL.exe")
+  endif()
+  string(REPLACE "\n" ";" GOLDTL_SOURCES "${GOLDTL_ORDERED}")
+  file(GLOB GOLDTL_DX8_SUPP "${PROJECT_SOURCE_DIR}/references/dxsdk8/supp/*.obj")
+  list(APPEND GOLDTL_SOURCES ${GOLDTL_DX8_SUPP})
 
   if(GOLDTL_SOURCES)
     add_executable(europa1400gold_tl WIN32 ${GOLDTL_SOURCES})
 
-    target_link_libraries(europa1400gold_tl PRIVATE ${REBREW_EXTERNAL_LIBS})
+    # Move CTLFWR32 to the end: it sits before LIBCMT in the configured list and
+    # its Util.Obj satisfies common CRT symbols for the C++ archive members,
+    # which drags 14 imports the reference does not have.
+    set(_GOLDTL_EXTERNAL_LIBS)
+    set(_GOLDTL_CTL_LIBS)
+    foreach(_lib IN LISTS REBREW_EXTERNAL_LIBS)
+      if(_lib MATCHES "CTLFWR32")
+        list(APPEND _GOLDTL_CTL_LIBS "${_lib}")
+      else()
+        list(APPEND _GOLDTL_EXTERNAL_LIBS "${_lib}")
+      endif()
+    endforeach()
+    list(APPEND _GOLDTL_EXTERNAL_LIBS ${_GOLDTL_CTL_LIBS})
+    target_link_libraries(europa1400gold_tl PRIVATE ${_GOLDTL_EXTERNAL_LIBS})
+    # DirectX 8 import libraries the reference imports but the project does
+    # not otherwise reference; vendored from the XP SP1 SDK (see
+    # references/dxsdk8/VENDOR.md). Their import descriptors add DDRAW,
+    # DINPUT8 and d3d8 entries to the import table when included.
+    target_link_libraries(europa1400gold_tl PRIVATE
+      "${PROJECT_SOURCE_DIR}/references/dxsdk8/lib/ddraw.lib"
+      "${PROJECT_SOURCE_DIR}/references/dxsdk8/lib/dinput8.lib"
+      "${PROJECT_SOURCE_DIR}/references/dxsdk8/lib/d3d8.lib")
+    # Force the reference's import members; see layout/.../import-includes.rsp.
+    target_link_options(europa1400gold_tl PRIVATE
+      "@${PROJECT_SOURCE_DIR}/layout/Europa1400Gold_TL.exe/import-includes.rsp")
+    # Pull the D3DX8 archive members the reference links. The list excludes the
+    # members that cannot come in (amdmath.lib directive, unresolved D3DX
+    # resource helpers, archive zlib colliding with the project zlib) and the
+    # members whose imports the reference does not have.
+    # The forced d3dx8 member list was removed on 2026-10-30: 13 of its members
+    # do not appear in the reference image at all (btri, cassignment,
+    # cd3dxstateblock, ceffect, cleanmesh, cparameter, cpass, createmesh,
+    # ctechnique, cvalue, intersect, jdmaster, shapes), and forcing them added
+    # ~190 KB of code the reference does not carry. Only loadutil.obj and
+    # loadx.obj are present in the reference; they stay unlinked until their
+    # CTLFWR32 globals resolve. The unused list is kept in
+    # layout/Europa1400Gold_TL.exe/d3dx8-includes.rsp as evidence.
+    # The SDK archive and the extracted JPEG/PNG objects compile the same libpng
+    # routines from one source, so their names collide. Measured and expected;
+    # keep the first definition (the SDK's) and force the duplicate names.
+    target_link_options(europa1400gold_tl PRIVATE /FORCE:MULTIPLE)
 
     target_include_directories(europa1400gold_tl PRIVATE
       "${PROJECT_SOURCE_DIR}/src"
     )
+
+    # Data-only stubs cannot go through order-sources, and the CTL globals need
+    # C++ mangled names, so compile that TU directly and link it with the
+    # reference-present d3dx8 members after the archives. The member list lives in
+    # stubs/goldtl/readd-members.cmake so the subset is reviewable in one place.
+    set(_GOLDTL_CTL_STUB "${CMAKE_CURRENT_BINARY_DIR}/ctl_locale_stubs.obj")
+    add_custom_command(
+      OUTPUT "${_GOLDTL_CTL_STUB}"
+      COMMAND "${_REBREW_GOLDTL_BIN}" build driver cl --
+        /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp /c /TP
+        "/Fo${_GOLDTL_CTL_STUB}"
+        "${PROJECT_SOURCE_DIR}/stubs/goldtl/ctl_locale_stubs.cpp"
+      DEPENDS "${PROJECT_SOURCE_DIR}/stubs/goldtl/ctl_locale_stubs.cpp"
+      COMMENT "Compile the C++ CTL locale-global displacement (TL only)"
+      VERBATIM)
+    add_custom_target(goldtl_ctl_locale DEPENDS "${_GOLDTL_CTL_STUB}")
+    add_dependencies(europa1400gold_tl goldtl_ctl_locale)
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+      "${PROJECT_SOURCE_DIR}/stubs/goldtl/readd-members.cmake")
+    include("${PROJECT_SOURCE_DIR}/stubs/goldtl/readd-members.cmake")
+    set(_GOLDTL_READD_OBJS "${_GOLDTL_CTL_STUB}")
+    foreach(_member IN LISTS GOLDTL_READD_MEMBERS)
+      list(APPEND _GOLDTL_READD_OBJS
+        "${PROJECT_SOURCE_DIR}/.scratch/libs/d3dx8/${_member}")
+    endforeach()
+    target_link_libraries(europa1400gold_tl PRIVATE ${_GOLDTL_READD_OBJS})
+    target_link_options(europa1400gold_tl PRIVATE
+      "@${PROJECT_SOURCE_DIR}/stubs/goldtl/readd-symbols.rsp")
+
+
+    # Resource section, TL only. The reference .rsrc holds RT_ICON ids 1 and 2
+    # (32x32 and 16x16, 4bpp) under RT_GROUP_ICON id 101 in language 0x407.
+    # Both images were extracted from original/Europa1400Gold_TL.exe; rc from
+    # the msvc-6.0-sp5-pp image compiles them into a .res, and LINK builds the
+    # .rsrc section from it.
+    find_program(REBREW_DOCKER_BIN NAMES docker REQUIRED)
+    set(_GOLDTL_RES_DIR "${CMAKE_CURRENT_BINARY_DIR}/goldtl-res")
+    set(_GOLDTL_RES "${_GOLDTL_RES_DIR}/goldtl_app.res")
+    add_custom_command(
+      OUTPUT "${_GOLDTL_RES}"
+      COMMAND "${CMAKE_COMMAND}" -E make_directory "${_GOLDTL_RES_DIR}"
+      COMMAND "${CMAKE_COMMAND}" -E copy_if_different
+        "${PROJECT_SOURCE_DIR}/stubs/goldtl/res/goldtl_app.ico"
+        "${PROJECT_SOURCE_DIR}/stubs/goldtl/res/goldtl_app.rc"
+        "${_GOLDTL_RES_DIR}"
+      COMMAND "${REBREW_DOCKER_BIN}" run --rm
+        -v "${_GOLDTL_RES_DIR}:/work" -w /work
+        --entrypoint wine "rebrew/msvc:6.0-sp5-pp-win32"
+        /opt/msvc6.0-sp5-pp/Common/MSDev98/Bin/RC.EXE
+        /fo goldtl_app.res goldtl_app.rc
+      DEPENDS
+        "${PROJECT_SOURCE_DIR}/stubs/goldtl/res/goldtl_app.ico"
+        "${PROJECT_SOURCE_DIR}/stubs/goldtl/res/goldtl_app.rc"
+      COMMENT "Compile Europa1400Gold_TL resources with rc (MSVC 6)"
+      VERBATIM)
+    add_custom_target(goldtl_resource DEPENDS "${_GOLDTL_RES}")
+    add_dependencies(europa1400gold_tl goldtl_resource)
+    target_link_libraries(europa1400gold_tl PRIVATE "${_GOLDTL_RES}")
 
     set_property(TARGET europa1400gold_tl PROPERTY OUTPUT_NAME "Europa1400Gold_TL")
     set_property(TARGET europa1400gold_tl PROPERTY SUFFIX ".exe")

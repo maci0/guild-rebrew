@@ -1,0 +1,6 @@
+#ifndef GOLDTL_FCN_004868D0_GCONF_H
+#define GOLDTL_FCN_004868D0_GCONF_H
+
+extern Client4868d0 g_868c40[];
+
+#endif /* GOLDTL_FCN_004868D0_GCONF_H */

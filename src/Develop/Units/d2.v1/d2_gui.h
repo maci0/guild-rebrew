@@ -47,7 +47,7 @@ extern int g_772568;
 extern char d2_BildArgument2[];
 
 void* __cdecl fcn_00466190(int bild);
-void __cdecl fcn_00469960(int bild);
+void __cdecl d2_SubRefcount(int bild);
 void __cdecl fcn_00469900(int bild);
 void __cdecl d2_SetElementImage(int element, int bild);
 /* Inferred name and contract; widget kind/flags select the payload. */

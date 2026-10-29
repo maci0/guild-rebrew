@@ -1,0 +1,22 @@
+
+
+
+extern unsigned char* lpGebaeudePROT;
+extern char* g_7746cc;
+
+int __cdecl fcn_0057ed60(int* a)
+{
+	if (a[0] == 0x19 && a[1] != 0) {
+		if (((char*)lpGebaeudePROT)[*(unsigned char*) a[1] * 589] == 0xf && a[3] == 0x10e) {
+			return 1;
+		}
+		return 0;
+	}
+	if (a[0] == 0x1a && a[1] != 0) {
+		if (((char*)lpGebaeudePROT)[*(unsigned char*) a[1] * 589] == 0xf && *((short*)g_7746cc) == 0x10e) {
+			return 0;
+		}
+		return 1;
+	}
+	return a[0] != 0x1b;
+}

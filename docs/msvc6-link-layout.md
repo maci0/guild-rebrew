@@ -5444,3 +5444,107 @@ lint-chain-move.json, rehome-*.json and gate-chain-move.log. The unused alchemy
 table declaration and dispatch typedefs need a separately measured cleanup.
 Client cm_ExecCommand still lives separately; this move does not establish the
 complete client command unit or finish either raw client image.
+
+## 90. `.text` lead pads realign objects whose predecessors compiled short
+
+`build check-text-placement` reports 5,180 TL functions, of which 24 sat at their reference VA after the data work. The first drift starts at 0x401d10, 240 bytes early because `fcn_00401650` compiles 1,481 bytes against a 1,728-byte extent; every later object inherits the deficit until another body overshoots.
+
+MSVC 6 accepts `#pragma data_seg(".text")` in a normal C TU and emits that array as a second `.text` contribution after the code, which is the lever. `scripts/gen_text_lead.py` walks the link order, reads each object's first mapped symbol and its first metadata row VA, and appends a 0x90 filler to the previous TU for the measured deficit. Caps control what counts as a short body:
+
+- cap 0x800: 6 pads, 784 bytes, same-offset 161,511 -> 166,203
+- cap 0x2000: 85 pads, 31,664 bytes, 166,203 -> 237,311
+- cap 0x4000 and above: reverted, the score fell
+
+Final state: 91 pads covering 32,448 bytes, 588 functions at their reference VA (24 before), whole-file same-offset 237,311 (8.32%). The padded TUs are client-only (no overlap with the server source list), lint stays at 0 errors / 0 warnings. A deficit above the cap means object ordering, not a short body, so the pass stops instead of inserting a large filler.
+
+The `.rdata` zero pad that restored the old `.data` base was removed once the
+text lead pads grew `.text` to 0x26d000: `.rdata` content is 0xba36 and its raw
+size rounds to 0xc000, so `.data` lands at 0x279000 anyway and any pad only
+moved it further from the reference 0x275000. Removing the pad raised the
+same-offset match 237,311 -> 244,883 (8.59%).
+
+## 91. The client calendar is one 14-byte storage at 0x7f4c00
+
+The client references its packed calendar through the native symbol
+`_g_current_year`. The data store describes the same bytes twice: row
+`g_7f4c00` is an alias of `_g_current_year`, and the view rows at
+0x7f4c04/06/08/0a/0c are separate globals. `build symbol-stubs` emitted
+`int g_7f4c00 = 0;` and `int g_current_year = 0;` as two objects, so the link
+had two storages and nothing the reference's operands could bind to.
+
+Upstream gap recorded in `docs/IDEAS-GUILD.md` (commit `554a10fb`). The client
+tree now defines the storage once, in `stubs/goldtl/data_scaffold.c`:
+
+```c
+struct calendar_storage { int a; int b; int c; short d; };
+struct calendar_storage g_current_year = {0, 0, 0, 0};
+```
+
+and the duplicate line was dropped from `stubs/goldtl/symbol_stubs.c`. The
+symbol is resolved by that definition, so a stub regeneration (which reads
+unresolved link errors) will not re-add it.
+
+The text lead pads were regenerated after the data size changed: 250,178 ->
+250,282 same-offset (8.78%). The symbol still links at 0x72c59c against the
+reference 0x7f4c00, so data placement for that region is still open; this
+change fixes the storage count and the native symbol spelling, not the address.
+
+## 92. Forced archive members need a reference-presence test
+
+`layout/Europa1400Gold_TL.exe/d3dx8-includes.rsp` forced 68 d3dx8 members so the
+library block would look like the reference. That list was filtered against the
+import table, not against the reference's code: a strong byte test (a
+relocation-free 24-byte window with >=85% of the member's remaining bytes
+matching at the location) shows 13 of the 15 members that only the include list
+supplied are absent from the reference image (btri, cassignment,
+cd3dxstateblock, ceffect, cleanmesh, cparameter, cpass, createmesh, ctechnique,
+cvalue, intersect, jdmaster, shapes). Forcing them added about 190 KB of code the
+reference does not carry and pushed every later section off its reference offset.
+
+Removing the forced list raises the same-offset score 237,168 -> 250,880 and
+shrinks the file from 3,116,288 to 2,871,296 bytes; imports, section layout and
+headers still match the reference. Two members that only the list supplied are
+present in the reference, `loadutil.obj` (1886/1886 masked bytes at 0x62c591) and
+`loadx.obj` (311/311 at 0x61cc98); they stay unlinked because CTLFWR32's
+`?g_lcidLocale@@3KA` and `?g_fSatelliteLocalization@@3FB` have no provider in the
+vendored archives. Adding them back is pending that resolution.
+
+The same audit over the vendored zlib found `minigzip.c` missing from the build:
+the reference carries its five functions at 0x462500-0x462930 (`error`,
+`gz_uncompress`, `file_compress`, `file_uncompress`, `main`). The file is back in
+`references/vendor/zlib/vendor.toml` and the TL scaffold compiles it at 0x464900
+with the current drift. `example.c` does not belong in the link: its `test_*`
+functions are absent from the reference. The zlib block already starts 0xDC0
+bytes after its reference position; pulling it earlier by removing that much text
+pad costs more than it returns.
+
+## 93. The data-prefix pad
+
+The `.data` section starts where `.text` and `.rdata` end, so its content sits
+about 0x2C000 bytes before the reference's `.data`. Padding at the end of
+`.text` cannot fix that (simulated: any pad loses, because it replaces the tail
+content that already matches). Padding *inside* `.data`, before every data
+symbol, can: it moves the section's content later without touching `.text` or
+`.rdata`.
+
+`0x2B530` bytes of zero-initialized data is the measured optimum (0x1000, 0x400,
+0x100 and 0x10 sweeps). One byte carries `0x90` because `= {0}` compiles to
+BSS: the array grows the virtual size and leaves the raw size unchanged, which
+moves nothing. A single non-zero initializer keeps the array in `.data` and
+produces the raw zeros the layout needs. Same-offset score: 244,344 -> 259,891.
+The pad lives in `src/Develop/Unassigned/GOLDTL.fcn_00401000.c` as
+`_dpad_prefix_zeros` because that object contributes first; `rebrew data layout
+fill` does not manage it, so keep it out of pad regeneration runs.
+
+## 94. The .rdata prefix pad
+
+`.rdata` content also starts early (0x23F000 against 0x262000). A prefix pad
+inside `.rdata` moves that section's content later, and the same number of bytes
+can be taken from the `.data` prefix pad so the data content keeps its measured
+offset. `#pragma data_seg(".rdata")` with a `{0x90}` initializer emits the raw
+zeros in the right order when the array lives in the first linked object.
+
+Paired sweep (R + D = 0x2B530): R 0x3000 / D 0x28530 is best. Score
+259,891 -> 260,232. Both pads are unmanaged scaffolding in
+`src/Develop/Unassigned/GOLDTL.fcn_00401000.c`; keep them out of pad
+regeneration.

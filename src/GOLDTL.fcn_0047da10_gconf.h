@@ -1,0 +1,6 @@
+#ifndef GOLDTL_FCN_0047DA10_GCONF_H
+#define GOLDTL_FCN_0047DA10_GCONF_H
+
+extern float g_100dc14;
+
+#endif /* GOLDTL_FCN_0047DA10_GCONF_H */

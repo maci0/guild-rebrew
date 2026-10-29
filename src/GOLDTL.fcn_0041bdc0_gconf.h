@@ -1,0 +1,6 @@
+#ifndef GOLDTL_FCN_0041BDC0_GCONF_H
+#define GOLDTL_FCN_0041BDC0_GCONF_H
+
+extern int* g_6b6d18;
+
+#endif /* GOLDTL_FCN_0041BDC0_GCONF_H */

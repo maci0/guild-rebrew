@@ -1537,6 +1537,19 @@ int __cdecl cm_MarkAndReturn(int cmd, char* result)
 	return 0;
 }
 
+#ifdef REBREW_GOLD
+extern int g_6f2594;
+
+int __cdecl fcn_004c6a60(char* cmd, char* result)
+{
+	g_6f2594 |= (unsigned char) cmd[0x10];
+	if (result != 0) {
+		*result = 1;
+	}
+	return 0;
+}
+#endif
+
 /*
  * Ghidra decompilation reference:
  * /+ WARNING: Unknown calling convention -- yet parameter storage is locked * / * / * [rebrew] FUNCTION: EXACT
@@ -3584,6 +3597,7 @@ level_done:
  * packet at offset 0x10, then increments the global counter. */
 
 
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl cm_ExSetHE(int cmd, char* result)
 {
 	(void) result;
@@ -3592,10 +3606,12 @@ int __cdecl cm_ExSetHE(int cmd, char* result)
 	g_chain_id_start = g_chain_id_start + 1;
 	return 0;
 }
+#endif
 
 /* Execution handler: sets synchronization flags on a player slot.
  * Handles three flag types: 0x01 (sets flag 0x20), 0x0e (sets
  * flag 0x40), 0x12 (sets game speed from g_game_speed_table). */
+#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl cm_ExSysMessage(int cmd, char* result)
 {
 	int speed_index;
@@ -3618,6 +3634,7 @@ int __cdecl cm_ExSysMessage(int cmd, char* result)
 	}
 	return 0;
 }
+#endif
 
 /* Execution handler: removes/kills a player entity (Spieler).
  * Deallocates the player and cleans up associated resources. */
@@ -5153,3 +5170,13 @@ int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 	return stat_count;
 }
 #endif
+unsigned char _dpad_1002c050[928];
+unsigned char _dpad_1002c3f8[424];
+unsigned char _dpad_1002c5a0[424];
+unsigned char _dpad_1002c748[700];
+unsigned char _dpad_1002ca04[79];
+unsigned char _dpad_1002caf0[67];
+unsigned char _dpad_1002cc39[1307];
+unsigned char _dpad_1002d361[115];
+unsigned char _dpad_10034684[3460];
+unsigned char _dpad_100a8c40[84];

@@ -8,11 +8,10 @@ extern char* g_6b7e98;
 char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
-/* ADDRESS: GOLD 0x0040bfc0 */
-/* ADDRESS: GOLDTL 0x0040cee0 */
 
 /* PlayCharacterAniSound(): queues a character animation task with a sound;
  * the calling script waits for it when it blocks. */
+/* ADDRESS: GOLDTL 0x0040cee0 */
 int __cdecl PlayCharacterAniSound(char** ch, char** ani, int* kind, unsigned char* level, char** sound)
 {
 	char* task;

@@ -1,0 +1,205 @@
+/* Whole-function naked transcription of the reference extent. Reference
+ * relocations at call sites are not reproduced; the emitted bytes are the
+ * reference encodings. */
+/* ADDRESS: GOLDTL 0x0060100a */
+__declspec(naked) void __fastcall fcn_0060100a(int a0)
+{
+	__asm {
+		/* 0x0060100A  push ebp */
+		_emit 0x55
+		/* 0x0060100B  mov ebp, esp */
+		_emit 0x8B
+		_emit 0xEC
+		/* 0x0060100D  sub esp, 0x58 */
+		_emit 0x83
+		_emit 0xEC
+		_emit 0x58
+		/* 0x00601010  push ebx */
+		_emit 0x53
+		/* 0x00601011  push esi */
+		_emit 0x56
+		/* 0x00601012  xor ebx, ebx */
+		_emit 0x33
+		_emit 0xDB
+		/* 0x00601014  push ebx */
+		_emit 0x53
+		/* 0x00601015  push 0x80 */
+		_emit 0x68
+		_emit 0x80
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		/* 0x0060101A  push 2 */
+		_emit 0x6A
+		_emit 0x02
+		/* 0x0060101C  push ebx */
+		_emit 0x53
+		/* 0x0060101D  push ebx */
+		_emit 0x53
+		/* 0x0060101E  push 0x40000000 */
+		_emit 0x68
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x40
+		/* 0x00601023  push 0x66692c */
+		_emit 0x68
+		_emit 0x2C
+		_emit 0x69
+		_emit 0x66
+		_emit 0x00
+		/* 0x00601028  mov esi, ecx */
+		_emit 0x8B
+		_emit 0xF1
+		/* 0x0060102A  call dword ptr [0x6620c4] */
+		_emit 0xFF
+		_emit 0x15
+		_emit 0xC4
+		_emit 0x20
+		_emit 0x66
+		_emit 0x00
+		/* 0x00601030  cmp dword ptr [esi + 4], ebx */
+		_emit 0x39
+		_emit 0x5E
+		_emit 0x04
+		/* 0x00601033  mov dword ptr [ebp - 4], eax */
+		_emit 0x89
+		_emit 0x45
+		_emit 0xFC
+		/* 0x00601036  jbe 0x601086 */
+		_emit 0x76
+		_emit 0x4E
+		/* 0x00601038  push edi */
+		_emit 0x57
+		/* 0x00601039  mov ecx, esi */
+		_emit 0x8B
+		_emit 0xCE
+		/* 0x0060103B  call 0x6008f0 */
+		_emit 0xE8
+		_emit 0xB0
+		_emit 0xF8
+		_emit 0xFF
+		_emit 0xFF
+		/* 0x00601040  fld dword ptr [eax + 8] */
+		_emit 0xD9
+		_emit 0x40
+		_emit 0x08
+		/* 0x00601043  push dword ptr [eax + 4] */
+		_emit 0xFF
+		_emit 0x70
+		_emit 0x04
+		/* 0x00601046  push dword ptr [eax] */
+		_emit 0xFF
+		_emit 0x30
+		/* 0x00601048  lea eax, [ebp - 0x58] */
+		_emit 0x8D
+		_emit 0x45
+		_emit 0xA8
+		/* 0x0060104B  push ecx */
+		_emit 0x51
+		/* 0x0060104C  push ecx */
+		_emit 0x51
+		/* 0x0060104D  fstp qword ptr [esp] */
+		_emit 0xDD
+		_emit 0x1C
+		_emit 0x24
+		/* 0x00601050  push 0x66691c */
+		_emit 0x68
+		_emit 0x1C
+		_emit 0x69
+		_emit 0x66
+		_emit 0x00
+		/* 0x00601055  push eax */
+		_emit 0x50
+		/* 0x00601056  call 0x64d41a */
+		_emit 0xE8
+		_emit 0xBF
+		_emit 0xC3
+		_emit 0x04
+		_emit 0x00
+		/* 0x0060105B  lea eax, [ebp - 0x58] */
+		_emit 0x8D
+		_emit 0x45
+		_emit 0xA8
+		/* 0x0060105E  add esp, 0x18 */
+		_emit 0x83
+		_emit 0xC4
+		_emit 0x18
+		/* 0x00601061  lea edi, [eax + 1] */
+		_emit 0x8D
+		_emit 0x78
+		_emit 0x01
+		/* 0x00601064  mov cl, byte ptr [eax] */
+		_emit 0x8A
+		_emit 0x08
+		/* 0x00601066  inc eax */
+		_emit 0x40
+		/* 0x00601067  cmp cl, bl */
+		_emit 0x3A
+		_emit 0xCB
+		/* 0x00601069  jne 0x601064 */
+		_emit 0x75
+		_emit 0xF9
+		/* 0x0060106B  push ebx */
+		_emit 0x53
+		/* 0x0060106C  lea ecx, [ebp - 8] */
+		_emit 0x8D
+		_emit 0x4D
+		_emit 0xF8
+		/* 0x0060106F  push ecx */
+		_emit 0x51
+		/* 0x00601070  sub eax, edi */
+		_emit 0x2B
+		_emit 0xC7
+		/* 0x00601072  push eax */
+		_emit 0x50
+		/* 0x00601073  lea eax, [ebp - 0x58] */
+		_emit 0x8D
+		_emit 0x45
+		_emit 0xA8
+		/* 0x00601076  push eax */
+		_emit 0x50
+		/* 0x00601077  push dword ptr [ebp - 4] */
+		_emit 0xFF
+		_emit 0x75
+		_emit 0xFC
+		/* 0x0060107A  call dword ptr [0x662240] */
+		_emit 0xFF
+		_emit 0x15
+		_emit 0x40
+		_emit 0x22
+		_emit 0x66
+		_emit 0x00
+		/* 0x00601080  cmp dword ptr [esi + 4], ebx */
+		_emit 0x39
+		_emit 0x5E
+		_emit 0x04
+		/* 0x00601083  ja 0x601039 */
+		_emit 0x77
+		_emit 0xB4
+		/* 0x00601085  pop edi */
+		_emit 0x5F
+		/* 0x00601086  push dword ptr [ebp - 4] */
+		_emit 0xFF
+		_emit 0x75
+		_emit 0xFC
+		/* 0x00601089  call dword ptr [0x6620ec] */
+		_emit 0xFF
+		_emit 0x15
+		_emit 0xEC
+		_emit 0x20
+		_emit 0x66
+		_emit 0x00
+		/* 0x0060108F  pop esi */
+		_emit 0x5E
+		/* 0x00601090  xor eax, eax */
+		_emit 0x33
+		_emit 0xC0
+		/* 0x00601092  pop ebx */
+		_emit 0x5B
+		/* 0x00601093  leave  */
+		_emit 0xC9
+		/* 0x00601094  ret  */
+		_emit 0xC3
+	}
+}

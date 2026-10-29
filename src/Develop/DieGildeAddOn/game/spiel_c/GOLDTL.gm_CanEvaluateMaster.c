@@ -1,0 +1,42 @@
+typedef struct Ent {
+	unsigned short id;
+	unsigned char kind;
+	char pad3;
+	unsigned int seed;
+	char pad8[0x21c - 8];
+} Ent;
+// SIZE 0x21c
+
+extern char g_7f4ca0[];
+extern int g_14cbca0;
+extern unsigned int g_14cbcb4;
+extern unsigned char g_6a375c;
+
+/* ADDRESS: GOLDTL 0x0047dd60 */
+int __cdecl gm_CanEvaluateMaster(char* e)
+{
+	char* p;
+	unsigned short idx;
+
+	if (e[2] != 1 && e[2] != 2) {
+		return 0;
+	}
+	if (!e[0x164]) {
+		return 0;
+	}
+	p = *(char**) (e + 0x16c);
+	if (!p) {
+		return 0;
+	}
+	idx = *(unsigned short*) (p + 0x27);
+	if (idx == 0xffff) {
+		return 0;
+	}
+	if (((Ent*)g_7f4ca0)[idx].kind == 7) {
+		return 0;
+	}
+	if (g_14cbca0 != -1 && ((Ent*)g_7f4ca0)[idx].kind != 6 && ((Ent*)g_7f4ca0)[idx].seed % g_6a375c != g_14cbcb4) {
+		return 0;
+	}
+	return 1;
+}

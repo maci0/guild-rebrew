@@ -1,0 +1,6 @@
+#ifndef GOLDTL_FCN_005D9F70_GCONF_H
+#define GOLDTL_FCN_005D9F70_GCONF_H
+
+extern Kind5d9f g_14aa314[];
+
+#endif /* GOLDTL_FCN_005D9F70_GCONF_H */

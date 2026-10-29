@@ -751,244 +751,258 @@ int __cdecl ls_SaveDynamicEntities(void* f)
 int __cdecl ls_SaveEntities(void* file)
 {
 	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
+	char* s;
+	char* slot;
+	int* q;
 	int none;
 	int id;
 	int tmp;
 	int count;
-	char* slot;
-	int i;
 
+	s = (char*) file;
 	none = -1;
-	if (vfs_fwrite(&none, 2, 1, file) <= 0) {
+#if defined(REBREW_SERVER)
+	if (vfs_fwrite(&none, 2, 1, s) <= 0) {
+#else
+	if (vfs_fwrite((void*) 0x774970, 2, 1, s) <= 0) {
+#endif
 		return 0;
 	}
 	count = 0;
-	for (i = 0; i < 0x300; i++) {
-		if (*(unsigned short*) (g_slot_table + i * 0x21c) != 0xffff) {
+	for (slot = (char*) g_slot_table; slot < (char*) g_slot_table + 0x65400; slot += 0x21c) {
+		if (*(unsigned short*) slot != 0xffff) {
 			count++;
 		}
 	}
-	if (vfs_fwrite(&count, 4, 1, file) <= 0) {
+	if (vfs_fwrite(&count, 4, 1, s) <= 0) {
 		return 0;
 	}
-	if (vfs_fwrite(g_save_header_aux ? (char*) g_save_header_aux + 4 : (char*) &none, 4, 1, file) <= 0) {
+	if (vfs_fwrite(g_save_header_aux ? (char*) g_save_header_aux + 4 : (char*) &none, 4, 1, s) <= 0) {
 		return 0;
 	}
-	if (vfs_fwrite(g_save_header_aux_b ? (char*) g_save_header_aux_b + 4 : (char*) &none, 4, 1, file) <= 0) {
+	if (vfs_fwrite(g_save_header_aux_b ? (char*) g_save_header_aux_b + 4 : (char*) &none, 4, 1, s) <= 0) {
 		return 0;
 	}
-	for (i = 0; i < 8; i++) {
+	for (q = &g_save_extra_field; q < &g_save_extra_field + 8; q++) {
 		id = -1;
-		if (vfs_fwrite((&g_save_extra_field)[i] ? (char*) (&g_save_extra_field)[i] + 4 : (char*) &id, 4, 1, file) <=
-			0) {
+		if (vfs_fwrite(*q ? (char*) *q + 4 : (char*) &id, 4, 1, s) <= 0) {
 			return 0;
 		}
 	}
-	for (i = 0; i < 0x300; i++) {
-		slot = (char*) g_slot_table + i * 0x21c;
+	for (slot = (char*) g_slot_table; slot < (char*) g_slot_table + 0x65400; slot += 0x21c) {
 		if (*(unsigned short*) slot == 0xffff) {
 			continue;
 		}
-		if (vfs_fwrite(slot, 2, 1, file) <= 0) {
+		if (vfs_fwrite(slot, 2, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x20c, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x20c, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 2, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 2, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 4, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 4, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 8, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 8, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 9, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 9, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0xa, 2, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0xa, 2, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0xc, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0xc, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0xd, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0xd, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x10, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x10, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x14, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x14, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x18, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x18, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1c, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1c, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x20, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x20, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x24, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x24, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x28, 2, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x28, 2, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x2c, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x2c, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x30, 0x10, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x30, 0x10, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x40, 0x10, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x40, 0x10, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x50, 2, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x50, 2, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x54, 4, 1, file) <= 0) {
+#if defined(REBREW_SERVER)
+		if (vfs_fwrite(slot + 0x54, 4, 1, s) <= 0) {
+#else
+		tmp = *(int*) (slot + 0x54) - 0x59a;
+		if (vfs_fwrite(&tmp, 4, 1, s) <= 0) {
+#endif
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x58, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x58, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x5c, 0x20, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x5c, 0x20, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x7c, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x7c, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x80, 5, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x80, 5, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x88, 0xa8, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x88, 0xa8, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x164, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x164, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x165, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x165, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x166, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x166, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x167, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x167, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x168, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x168, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x169, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x169, 1, 1, s) <= 0) {
 			return 0;
 		}
-		tmp = -1;
-		if (vfs_fwrite(*(char**) (slot + 0x16c) ? *(char**) (slot + 0x16c) + 1 : (char*) &tmp, 4, 1, file) <= 0) {
+		none = -1;
+		if (vfs_fwrite(*(char**) (slot + 0x16c) ? *(char**) (slot + 0x16c) + 1 : (char*) &none, 4, 1, s) <= 0) {
 			return 0;
 		}
-		tmp = -1;
-		if (vfs_fwrite(*(char**) (slot + 0x170) ? *(char**) (slot + 0x170) + 1 : (char*) &tmp, 4, 1, file) <= 0) {
+		none = -1;
+		if (vfs_fwrite(*(char**) (slot + 0x170) ? *(char**) (slot + 0x170) + 1 : (char*) &none, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x174, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x174, 4, 1, s) <= 0) {
 			return 0;
 		}
-		tmp = -1;
-		if (vfs_fwrite(*(char**) (slot + 0x17c) ? *(char**) (slot + 0x17c) + 4 : (char*) &tmp, 4, 1, file) <= 0) {
+		none = -1;
+		if (vfs_fwrite(*(char**) (slot + 0x17c) ? *(char**) (slot + 0x17c) + 4 : (char*) &none, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x180, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x180, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x18c, 4, 1, file) <= 0) {
+#if defined(REBREW_SERVER)
+		if (vfs_fwrite(slot + 0x18c, 4, 1, s) <= 0) {
+#else
+		tmp = *(int*) (slot + 0x18c) - 0x639;
+		if (vfs_fwrite(&tmp, 4, 1, s) <= 0) {
+#endif
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x190, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x190, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x194, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x194, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x198, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x198, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x19c, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x19c, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1a0, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1a0, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1a4, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1a4, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1a8, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1a8, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1ac, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1ac, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1b0, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1b0, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1b1, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1b1, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1b4, 0x10, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1b4, 0x10, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1c8, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1c8, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1cc, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1cc, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1d0, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1d0, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1d4, 0x10, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1d4, 0x10, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1e4, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1e4, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1e8, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1e8, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1ec, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1ec, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1f0, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1f0, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1c5, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1c5, 1, 1, s) <= 0) {
 			return 0;
 		}
 		id = *(int**) (slot + 0x184) ? **(int**) (slot + 0x184) : -1;
-		if (vfs_fwrite(&id, 4, 1, file) <= 0) {
+		if (vfs_fwrite(&id, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x1f4, 0x18, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x1f4, 0x18, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x210, 4, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x210, 4, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x214, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x214, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x215, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x215, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x216, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x216, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x217, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x217, 1, 1, s) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(slot + 0x218, 1, 1, file) <= 0) {
+		if (vfs_fwrite(slot + 0x218, 1, 1, s) <= 0) {
 			return 0;
 		}
 	}
@@ -1866,6 +1880,10 @@ int __cdecl ls_LoadDynamicEntities(void* file)
 }
 
 
+#if !defined(REBREW_SERVER)
+extern unsigned short g_774970;
+#endif
+
 int __cdecl ls_LoadEntities(void* ctx)
 {
 	int id;
@@ -1874,7 +1892,11 @@ int __cdecl ls_LoadEntities(void* ctx)
 	int* slot_ext_ptr;
 	int i;
 
+#if defined(REBREW_SERVER)
 	if (ls_ReadVfsDataChecked(&id, 2, 1, ctx) == 0) {
+#else
+	if (ls_ReadVfsDataChecked(&g_774970, 2, 1, ctx) == 0) {
+#endif
 		return 0;
 	}
 	if (ls_ReadVfsDataChecked(&header_field, 4, 1, ctx) == 0) {
@@ -1979,6 +2001,9 @@ int __cdecl ls_LoadEntities(void* ctx)
 		if (ls_ReadVfsDataChecked(slot + 0x54, 4, 1, ctx) == 0) {
 			return 0;
 		}
+#if !defined(REBREW_SERVER)
+		*(int*) (slot + 0x54) += 0x59a;
+#endif
 		if (ls_ReadVfsDataChecked(slot + 0x58, 1, 1, ctx) == 0) {
 			return 0;
 		}
@@ -2047,6 +2072,9 @@ int __cdecl ls_LoadEntities(void* ctx)
 		if (ls_ReadVfsDataChecked(slot + 0x18c, 4, 1, ctx) == 0) {
 			return 0;
 		}
+#if !defined(REBREW_SERVER)
+		*(int*) (slot + 0x18c) += 0x639;
+#endif
 
 		slot_ext_ptr = (int*) (slot + 0x190);
 		if (ls_ReadVfsDataChecked(slot_ext_ptr, 4, 1, ctx) == 0) {
@@ -2783,3 +2811,5 @@ int srv_RecvGame(void)
 	CloseVfsStream(file_handle);
 	return 1;
 }
+unsigned char _dpad_1002d444[168];
+unsigned char _dpad_10035a10[414352];

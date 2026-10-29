@@ -101,3 +101,5 @@ int g_owner_window = 0;
 char g_gap_117660e4[28] = {0};
 char g_log_buffer[260] = {0};
 int g_log_file_handle = 0;
+unsigned char _dpad_1009aca4[88];
+unsigned char _dpad_100a8cfc[2836];

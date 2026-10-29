@@ -1,0 +1,126 @@
+/* Whole-function naked transcription of the reference extent. Reference
+ * relocations at call sites are not reproduced; the emitted bytes are the
+ * reference encodings. */
+/* ADDRESS: GOLDTL 0x0064e171 */
+__declspec(naked) void __cdecl fcn_0064e171(void)
+{
+	__asm {
+		/* 0x0064E171  cmp eax, 2 */
+		_emit 0x83
+		_emit 0xF8
+		_emit 0x02
+		/* 0x0064E174  jne 0x64e1d0 */
+		_emit 0x75
+		_emit 0x5A
+		/* 0x0064E176  mov eax, dword ptr [ebp + 8] */
+		_emit 0x8B
+		_emit 0x45
+		_emit 0x08
+		/* 0x0064E179  test eax, eax */
+		_emit 0x85
+		_emit 0xC0
+		/* 0x0064E17B  je 0x64e185 */
+		_emit 0x74
+		_emit 0x08
+		/* 0x0064E17D  lea esi, [eax + 0xf] */
+		_emit 0x8D
+		_emit 0x70
+		_emit 0x0F
+		/* 0x0064E180  and esi, 0xfffffff0 */
+		_emit 0x83
+		_emit 0xE6
+		_emit 0xF0
+		/* 0x0064E183  jmp 0x64e188 */
+		_emit 0xEB
+		_emit 0x03
+		/* 0x0064E185  push 0x10 */
+		_emit 0x6A
+		_emit 0x10
+		/* 0x0064E187  pop esi */
+		_emit 0x5E
+		/* 0x0064E188  mov dword ptr [ebp + 8], esi */
+		_emit 0x89
+		_emit 0x75
+		_emit 0x08
+		/* 0x0064E18B  cmp esi, dword ptr [0x6b4a94] */
+		_emit 0x3B
+		_emit 0x35
+		_emit 0x94
+		_emit 0x4A
+		_emit 0x6B
+		_emit 0x00
+		/* 0x0064E191  ja 0x64e1c1 */
+		_emit 0x77
+		_emit 0x2E
+		/* 0x0064E193  push 9 */
+		_emit 0x6A
+		_emit 0x09
+		/* 0x0064E195  call 0x652b85 */
+		_emit 0xE8
+		_emit 0xEB
+		_emit 0x49
+		_emit 0x00
+		_emit 0x00
+		/* 0x0064E19A  pop ecx */
+		_emit 0x59
+		/* 0x0064E19B  mov dword ptr [ebp - 4], 1 */
+		_emit 0xC7
+		_emit 0x45
+		_emit 0xFC
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		/* 0x0064E1A2  mov eax, esi */
+		_emit 0x8B
+		_emit 0xC6
+		/* 0x0064E1A4  shr eax, 4 */
+		_emit 0xC1
+		_emit 0xE8
+		_emit 0x04
+		/* 0x0064E1A7  push eax */
+		_emit 0x50
+		/* 0x0064E1A8  call 0x65682b */
+		_emit 0xE8
+		_emit 0x7E
+		_emit 0x86
+		_emit 0x00
+		_emit 0x00
+		/* 0x0064E1AD  pop ecx */
+		_emit 0x59
+		/* 0x0064E1AE  mov dword ptr [ebp - 0x1c], eax */
+		_emit 0x89
+		_emit 0x45
+		_emit 0xE4
+		/* 0x0064E1B1  or dword ptr [ebp - 4], 0xffffffff */
+		_emit 0x83
+		_emit 0x4D
+		_emit 0xFC
+		_emit 0xFF
+		/* 0x0064E1B5  call 0x64e1c7 */
+		_emit 0xE8
+		_emit 0x0D
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		/* 0x0064E1BA  mov eax, dword ptr [ebp - 0x1c] */
+		_emit 0x8B
+		_emit 0x45
+		_emit 0xE4
+		/* 0x0064E1BD  test eax, eax */
+		_emit 0x85
+		_emit 0xC0
+		/* 0x0064E1BF  jne 0x64e1ee */
+		_emit 0x75
+		_emit 0x2D
+		/* 0x0064E1C1  push esi */
+		_emit 0x56
+		/* 0x0064E1C2  jmp 0x64e1e0 */
+		_emit 0xEB
+		_emit 0x1C
+		/* 0x0064E1C4  mov esi, dword ptr [ebp + 8] */
+		_emit 0x8B
+		_emit 0x75
+		_emit 0x08
+	}
+}

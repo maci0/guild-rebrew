@@ -10,23 +10,22 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
 	unsigned char* entry;
 	unsigned char* limit;
 	void* workers;
-
 	e = (unsigned char*) entity;
-	entry = (unsigned char*) ((g_entity_type_table + *(unsigned char*) e) + *(unsigned char*) e * 588);
-	workers = *(void**) ((char*) e + 0x65);
+	entry = (unsigned char*) ((g_entity_type_table + (unsigned char) *e) + (unsigned char) *e * 588);
+	workers = *(void**) (e + 0x65);
 	if (type != 0xff && !gv_CheckSlotActive(workers, type)) {
 		return 0;
 	}
 	if (type == 0) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 8) + *(int*) (0x665328 + *(unsigned char*) (entry + 0x247) * 4) * 20;
+		limit = (unsigned char*) *(void**) ((char*) workers + 8) + ((int*) 0x665328)[entry[0x247]] * 20;
 	} else if (type == 1) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0xc) + *(int*) (0x665338 + *(unsigned char*) (entry + 0x247) * 4) * 20;
+		limit = (unsigned char*) *(void**) ((char*) workers + 0xc) + ((int*) 0x665338)[entry[0x247]] * 20;
 	} else if (type == 2) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0x10) + *(int*) (0x665348 + *(unsigned char*) (entry + 0x247) * 4) * 20;
+		limit = (unsigned char*) *(void**) ((char*) workers + 0x10) + ((int*) 0x665348)[entry[0x247]] * 20;
 	} else if (type == 3) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0x14) + *(int*) (0x665358 + *(unsigned char*) (entry + 0x247) * 4) * 20;
+		limit = (unsigned char*) *(void**) ((char*) workers + 0x14) + ((int*) 0x665358)[entry[0x247]] * 20;
 	} else if (type == 0xff) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0x1c) + cm_GetBuildingStatCount(e) * 20;
+		limit = (unsigned char*) *(void**) ((char*) workers + 0x1c) + cm_GetBuildingStatCount(e) * 20;
 	} else {
 		return 0;
 	}

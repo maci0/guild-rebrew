@@ -4,13 +4,12 @@ char* __cdecl fcn_00404300(char*, char*, char);
 void __cdecl fcn_00407800(char*, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl fcn_004042b0(char*);
-void __cdecl fcn_004045c0(char*);
+void __cdecl ch_CheckAniMorph(char*);
 
-/* ADDRESS: GOLD 0x00405fb0 */
-/* ADDRESS: GOLDTL 0x00406b50 */
 
 /* Steps a drop-object event: plays the drop motion and releases the object
  * at the motion's trigger frame. */
+/* ADDRESS: GOLDTL 0x00406b50 */
 void __cdecl ch_DroppingObject(char* ev)
 {
 	char* obj;
@@ -44,7 +43,7 @@ void __cdecl ch_DroppingObject(char* ev)
 			fcn_00407800(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
 			sprintf(msg, "ch_DroppingObject(): object not dropped yet (should be in frame:%i)!", *(int*) (ev + 0x30));
 		}
-		fcn_004045c0(obj);
+		ch_CheckAniMorph(obj);
 		fcn_004050c0(ev);
 	}
 }

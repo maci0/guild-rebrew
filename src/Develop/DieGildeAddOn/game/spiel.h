@@ -5,7 +5,7 @@ struct LinkedNode;
 int __cdecl gm_FreeObjectListRecursive(struct LinkedNode** head);
 void __cdecl gm_ClearObjektResources(struct LinkedNode* node);
 #ifndef REBREW_SERVER
-extern char* g_99ec10;
+extern char* lpObjektePROT;
 void __cdecl fcn_004be280(char* list);
 #endif
 

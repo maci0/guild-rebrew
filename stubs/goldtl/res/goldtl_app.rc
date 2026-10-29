@@ -1,0 +1,6 @@
+/* Europa1400Gold_TL.exe resources, reconstructed from the reference .rsrc.
+ * The icon holds the 32x32 and 16x16 4bpp images that the reference stores
+ * as RT_ICON ids 1 and 2 under RT_GROUP_ICON id 101, language 0x407. */
+LANGUAGE 7, 1
+
+101 ICON "goldtl_app.ico"

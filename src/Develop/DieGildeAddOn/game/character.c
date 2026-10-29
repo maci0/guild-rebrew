@@ -250,7 +250,6 @@ void __cdecl fcn_00404a00(char*, int, ...);
 void __cdecl fcn_00404b60(char*, int, ...);
 
 /* ADDRESS: GOLDTL 0x00403880 */
-/* ADDRESS: GOLD 0x00403070 */
 int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
 {
     float rotation[4];
@@ -473,7 +472,6 @@ cache_position:
 
 /* Original character.c placement is inferred from the ch_ subsystem. */
 /* ADDRESS: GOLDTL 0x004051d0 */
-/* ADDRESS: GOLD 0x004048b0 */
 char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
 {
     /* Native initializes this fallback value only for an unregistered kind. */

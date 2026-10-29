@@ -22,7 +22,7 @@ from rebrew.cross_import import (
 from rebrew.metadata.bindings import SourceBinding, read_source_bindings
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "src" / "GOLD.fcn_0040abd0.c"
+SOURCE = ROOT / "src" / "Develop" / "Unassigned" / "GOLD.fcn_0040abd0.c"
 
 
 def _bindings(target: str) -> list[SourceBinding]:

@@ -4,13 +4,12 @@ char* __cdecl fcn_00404300(char*, char*, char);
 void __cdecl fcn_00407800(char*, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl fcn_004042b0(char*);
-void __cdecl fcn_004045c0(char*);
+void __cdecl ch_CheckAniMorph(char*);
 
-/* ADDRESS: GOLD 0x00405d40 */
-/* ADDRESS: GOLDTL 0x004068e0 */
 
 /* Steps a play-motion event: loads the motion on the first step, fires the
  * follow-up command at its trigger frame and finishes once it has run out. */
+/* ADDRESS: GOLDTL 0x004068e0 */
 void __cdecl ch_TakingObject(char* ev)
 {
 	char* obj;
@@ -43,7 +42,7 @@ void __cdecl ch_TakingObject(char* ev)
 		if (*(int*) (obj + 0x80) != 0) {
 			sprintf(msg, "ch_TakingObject(): c->NextAnim still valid %s!\n", *(int*) (obj + 0x80));
 		}
-		fcn_004045c0(obj);
+		ch_CheckAniMorph(obj);
 		fcn_004050c0(ev);
 	}
 }

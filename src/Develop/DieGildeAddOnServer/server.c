@@ -252,6 +252,7 @@ int __cdecl Init(LPVOID param)
  * terminates it, and closes the handle. */
 
 
+#if defined(REBREW_SERVER)
 void __cdecl Exit(void)
 {
 	if (!g_thread_handle) {
@@ -264,6 +265,7 @@ void __cdecl Exit(void)
 	TerminateThread(g_thread_handle, 0);
 	CloseHandle(g_thread_handle);
 }
+#endif
 
 /* Main server thread entry point. Runs the game loop:
  * initializes systems, accepts connections, processes
@@ -2243,3 +2245,24 @@ int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out)
 	*out = g_office_float_table[((int (*)[6]) g_office_role_templates)[entity[0x166]][1]][((int (*)[6]) g_office_role_templates)[role][1]];
 	return 1;
 }
+unsigned char _dpad_10028b93[73];
+unsigned char _dpad_10028bf8[297];
+unsigned char _dpad_10028d24[121];
+unsigned char _dpad_10028da0[155];
+unsigned char _dpad_10028e3c[210];
+unsigned char _dpad_10028f10[91];
+unsigned char _dpad_10028f6c[91];
+unsigned char _dpad_10028fc8[158];
+unsigned char _dpad_10029068[249];
+unsigned char _dpad_10029194[133];
+unsigned char _dpad_1002921c[133];
+unsigned char _dpad_100292a4[74];
+unsigned char _dpad_1002931c[99];
+unsigned char _dpad_100294d2[154];
+unsigned char _dpad_10029594[260];
+unsigned char _dpad_10029698[260];
+unsigned char _dpad_100297a0[848];
+unsigned char _dpad_10029af0[196];
+unsigned char _dpad_101de9a0[260];
+unsigned char _dpad_101deb18[20058888];
+unsigned char _dpad_114ffe24[2507360];

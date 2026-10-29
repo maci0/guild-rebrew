@@ -114,3 +114,4 @@ int __cdecl plt_TableLookup(int index, int* out)
 	*(int*) ((char*) out + 4) = *(int*) ((int) g_plant_pair_table + 4 + index * 8);
 	return 1;
 }
+unsigned char _dpad_1002da30[704];

@@ -1,5 +1,32 @@
 # Handoff
 
+## Release 1.6.1 — server verification and charts (2026-10-27)
+
+A fresh isolated build with published Rebrew 6.3.1 reproduces all 286,720 server
+bytes (SHA-256 `3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1`).
+Verification passes 316/316 functions (251 game, 65 source-built library) and
+652/652 data records. Status reports 100% server code accounting, C matches,
+raw-file agreement and all three data bars (547/547 records, 66,664 bytes).
+
+Reviewed 76 server inventory extents end before 712 trailing NOPs. Those bytes
+remain linker/compiler alignment; no source or image bytes were inserted.
+Rebrew now supplies the native Microsoft-runtime toolchain profile, so the
+obsolete duplicate project overlay and its CMake environment override are removed.
+
+The README and all three graphics use one release-source status snapshot after
+fresh data checks. GoldTL: 3,804/5,122 C matches, 47.8% code accounting; Gold:
+2,466/4,592 C matches, 22.6%. Existing client raw images agree at 2.0% and 1.1%.
+Neither client was rebuilt or made playable. Ongoing uncommitted client recovery
+is preserved outside this release; its larger counts must not be mixed into the
+release charts. Canonical server bindings accidentally retired by the client
+library sweep were restored separately and their two TUs pass 80/80 checks.
+
+Release tests: 39 passed and 3 subtests; all dependency extras resolve, `uv lock
+--check` and `uv pip check` pass. Source-built library attribution and whole-file
+identity remain separate claims. No full project gate or new gameplay test is
+claimed. Local receipts: `.scratch/release-20261027/`.
+
+
 Read [current work](TODO.md), [the objective](../goal.md), then the
 [reference map](README.md#reference-map). Use metadata and fresh checks for live
 counts. The project default target is GoldTL; name `server.dll` for the server.

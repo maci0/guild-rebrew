@@ -7,7 +7,6 @@ void __cdecl plt_TableLookup(unsigned int a, unsigned short* b);
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes[1];
 
-/* ADDRESS: GOLD 0x0047cec0 */
 // fcn_0047cec0 — store 3 globals (masked).
 
 void __cdecl fcn_0047cec0(int u1, int u2, int u3, int c, int d, char e)
@@ -18,9 +17,9 @@ void __cdecl fcn_0047cec0(int u1, int u2, int u3, int c, int d, char e)
 	*(char*) 0xf8a648 = e;
 }
 
-/* ADDRESS: GOLDTL 0x00500c50 */
 // sim_SetSyncParams
 
+/* ADDRESS: GOLDTL 0x00500c50 */
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10)
 {
 	*(unsigned int*) (target + 10) = field_10 & 0xff;

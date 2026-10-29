@@ -17,7 +17,7 @@
 ## Quick Start
 
 ```
-1. rebrew todo --json                          # get highest ROI action items
+1. rebrew todo --json                          # get highest-impact action items
 2. rebrew library match --lib <runtime>.LIB --va 0x<VA>   # is it already in a library?
 3. rebrew skeleton 0x<VA>                      # only for an inventory VA without source
 4. rebrew test src/Europa1400Gold_TL.exe/<func>.c --json  # compile + compare

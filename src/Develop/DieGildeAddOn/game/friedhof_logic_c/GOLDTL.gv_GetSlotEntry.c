@@ -1,56 +1,88 @@
 /* gv_GetSlotEntry - returns the active slot entry of a worker for the given
- * work type and job index, or NULL when the request is invalid. */
+ * work type and job index, or NULL when the request is invalid.
+ *
+ * Byte-match note: RELOC 317/317, the four relocs are the direct calls to
+ * gv_CheckSlotActive.  The reference co-located gv_CheckSlotActive (0x4f15d0)
+ * and this function in one translation unit; with the callee's body visible
+ * msvc6 keeps the worker kind in edx across the calls and CSEs the repeated
+ * *(int*)(worker + 4) reads into it (target shape).  With only an extern
+ * declaration it spills kind to esi, costing a second callee-save push and
+ * ~21 structural bytes.  The kind field is therefore re-read at each use
+ * rather than named in a local: the re-read spelling is also what reproduces
+ * the shared trailing `return 0` block and the near `jae` edges to it; a
+ * named local makes the optimizer duplicate small epilogues instead (297
+ * bytes, 19/317).  The owning definition of the same logic lives in
+ * friedhof_logic.c (GOLDTL.0x004f15d0, EXACT); this duplicate is deliberate
+ * so the call sites compile with the body in view. */
 
-
-
-extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
+int __cdecl gv_CheckSlotActive(void* slot, int type)
+{
+	if (type == 0) {
+		if (*(int*) ((char*) slot + 8) != 0 && *(unsigned char*) ((char*) slot + 0x18) != 0)
+			return 1;
+		return 0;
+	}
+	if (type == 1) {
+		if (*(int*) ((char*) slot + 0xc) != 0 && *(unsigned char*) ((char*) slot + 0x19) != 0)
+			return 1;
+		return 0;
+	}
+	if (type == 2) {
+		if (*(int*) ((char*) slot + 0x10) != 0 && *(unsigned char*) ((char*) slot + 0x1a) != 0)
+			return 1;
+		return 0;
+	}
+	if (type == 3) {
+		if (*(int*) ((char*) slot + 0x14) != 0 && *(unsigned char*) ((char*) slot + 0x1b) != 0)
+			return 1;
+		return 0;
+	}
+	return 1;
+}
 
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 {
-	int kind;
-
-	kind = *(int*) ((char*) worker + 4);
-	if (kind < 1 || kind > 3)
+	if (*(int*) ((char*) worker + 4) < 1 || *(int*) ((char*) worker + 4) > 3)
 		return 0;
 	if (worktype == 0) {
 		if (!gv_CheckSlotActive(worker, 0))
 			return 0;
-		if (kind == 1 && job >= 8)
+		if (*(int*) ((char*) worker + 4) == 1 && job >= 8)
 			return 0;
-		if (kind == 2 && job >= 0xc)
+		if (*(int*) ((char*) worker + 4) == 2 && job >= 0xc)
 			return 0;
-		if (kind == 3 && job >= 0x10)
+		if (*(int*) ((char*) worker + 4) == 3 && job >= 0x10)
 			return 0;
 		return (char*) *(void**) ((char*) worker + 8) + (unsigned int) job * 20;
 	}
 	if (worktype == 1) {
 		if (!gv_CheckSlotActive(worker, 1))
 			return 0;
-		if (kind == 1 && job >= 4)
+		if (*(int*) ((char*) worker + 4) == 1 && job >= 4)
 			return 0;
-		if (kind == 2 && job >= 6)
+		if (*(int*) ((char*) worker + 4) == 2 && job >= 6)
 			return 0;
-		if (kind == 3 && job >= 8)
+		if (*(int*) ((char*) worker + 4) == 3 && job >= 8)
 			return 0;
 		return (char*) *(void**) ((char*) worker + 0xc) + (unsigned int) job * 20;
 	}
 	if (worktype == 2) {
 		if (!gv_CheckSlotActive(worker, 2))
 			return 0;
-		if (kind == 1)
+		if (*(int*) ((char*) worker + 4) == 1)
 			return 0;
-		if (kind == 2 && job >= 2)
+		if (*(int*) ((char*) worker + 4) == 2 && job >= 2)
 			return 0;
-		if (kind == 3 && job >= 4)
+		if (*(int*) ((char*) worker + 4) == 3 && job >= 4)
 			return 0;
 		return (char*) *(void**) ((char*) worker + 0x10) + (unsigned int) job * 20;
 	}
 	if (worktype == 3) {
 		if (!gv_CheckSlotActive(worker, 3))
 			return 0;
-		if (kind == 1 || kind == 2)
+		if (*(int*) ((char*) worker + 4) == 1 || *(int*) ((char*) worker + 4) == 2)
 			return 0;
-		if (kind == 3 && job >= 2)
+		if (*(int*) ((char*) worker + 4) == 3 && job >= 2)
 			return 0;
 		return (char*) *(void**) ((char*) worker + 0x14) + (unsigned int) job * 20;
 	}

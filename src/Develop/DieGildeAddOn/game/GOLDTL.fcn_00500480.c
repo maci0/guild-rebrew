@@ -1,0 +1,42 @@
+
+
+
+extern int g_773d64;
+extern unsigned char* lpGebaeudeINST;
+extern unsigned char* lpGebaeudePROT;
+
+char* __cdecl sim_StartEntityQueryByType(char* e);
+
+char* __cdecl fcn_00500480(char* obj, int* id, int* sub)
+{
+	char* q;
+	int k;
+	int n;
+	char* d;
+
+	n = 255;
+	if (*(char**) (obj + 0x170) != 0) {
+		q = sim_StartEntityQueryByType(*(char**) (obj + 0x170));
+		if (q != 0) {
+			*sub = *(int*) (q + 2);
+		} else {
+			*sub = -1;
+		}
+		*id = *(int*) (*(char**) (obj + 0x170) + 1);
+		return *(char**) (obj + 0x170);
+	}
+	k = g_773d64;
+	do {
+		if (((char*)lpGebaeudeINST)[k * 169] != 0) {
+			d = ((char*)lpGebaeudePROT) + (unsigned char) ((char*)lpGebaeudeINST)[k * 169] * 589;
+			if (*d == 3 || *d == 0x16 || *d == 0xf) {
+				g_773d64 = k + 1;
+				*sub = -1;
+				*id = *(int*) (((char*)lpGebaeudeINST) + k * 169 + 1);
+				return ((char*)lpGebaeudeINST) + k * 169;
+			}
+		}
+		k = (k + 1) % 256;
+	} while (--n != 0);
+	return 0;
+}

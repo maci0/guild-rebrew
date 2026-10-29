@@ -1,0 +1,107 @@
+/* Whole-function naked transcription of the reference extent. Reference
+ * relocations at call sites are not reproduced; the emitted bytes are the
+ * reference encodings. */
+/* ADDRESS: GOLDTL 0x005f40ed */
+__declspec(naked) void __cdecl fcn_005f40ed(void)
+{
+	__asm {
+		/* 0x005F40ED  push ebp */
+		_emit 0x55
+		/* 0x005F40EE  mov ebp, esp */
+		_emit 0x8B
+		_emit 0xEC
+		/* 0x005F40F0  sub esp, 0x40 */
+		_emit 0x83
+		_emit 0xEC
+		_emit 0x40
+		/* 0x005F40F3  push dword ptr [ebp + 8] */
+		_emit 0xFF
+		_emit 0x75
+		_emit 0x08
+		/* 0x005F40F6  lea ecx, [ebp - 0x40] */
+		_emit 0x8D
+		_emit 0x4D
+		_emit 0xC0
+		/* 0x005F40F9  call 0x5f0144 */
+		_emit 0xE8
+		_emit 0x46
+		_emit 0xC0
+		_emit 0xFF
+		_emit 0xFF
+		/* 0x005F40FE  mov eax, dword ptr [ebp - 0x3c] */
+		_emit 0x8B
+		_emit 0x45
+		_emit 0xC4
+		/* 0x005F4101  leave  */
+		_emit 0xC9
+		/* 0x005F4102  ret  */
+		_emit 0xC3
+		/* 0x005F4103  push esi */
+		_emit 0x56
+		/* 0x005F4104  mov esi, dword ptr [esp + 8] */
+		_emit 0x8B
+		_emit 0x74
+		_emit 0x24
+		_emit 0x08
+		/* 0x005F4108  push edi */
+		_emit 0x57
+		/* 0x005F4109  lea eax, [esi + 4] */
+		_emit 0x8D
+		_emit 0x46
+		_emit 0x04
+		/* 0x005F410C  push eax */
+		_emit 0x50
+		/* 0x005F410D  call dword ptr [0x662108] */
+		_emit 0xFF
+		_emit 0x15
+		_emit 0x08
+		_emit 0x21
+		_emit 0x66
+		_emit 0x00
+		/* 0x005F4113  mov edi, eax */
+		_emit 0x8B
+		_emit 0xF8
+		/* 0x005F4115  test edi, edi */
+		_emit 0x85
+		_emit 0xFF
+		/* 0x005F4117  jne 0x5f412b */
+		_emit 0x75
+		_emit 0x12
+		/* 0x005F4119  test esi, esi */
+		_emit 0x85
+		_emit 0xF6
+		/* 0x005F411B  je 0x5f412b */
+		_emit 0x74
+		_emit 0x0E
+		/* 0x005F411D  mov ecx, esi */
+		_emit 0x8B
+		_emit 0xCE
+		/* 0x005F411F  call 0x5f4132 */
+		_emit 0xE8
+		_emit 0x0E
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		/* 0x005F4124  push esi */
+		_emit 0x56
+		/* 0x005F4125  call 0x6508a3 */
+		_emit 0xE8
+		_emit 0x79
+		_emit 0xC7
+		_emit 0x05
+		_emit 0x00
+		/* 0x005F412A  pop ecx */
+		_emit 0x59
+		/* 0x005F412B  mov eax, edi */
+		_emit 0x8B
+		_emit 0xC7
+		/* 0x005F412D  pop edi */
+		_emit 0x5F
+		/* 0x005F412E  pop esi */
+		_emit 0x5E
+		/* 0x005F412F  ret 4 */
+		_emit 0xC2
+		_emit 0x04
+		_emit 0x00
+	}
+}

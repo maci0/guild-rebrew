@@ -1,0 +1,36 @@
+
+
+typedef int (__cdecl* fcn_0043b850_f)(char*, int, char*);
+
+extern int g_67a590;
+extern int g_67a370;
+#ifdef REBREW_GOLD
+int __cdecl fcn_004011d0(void* stream, void* dst);
+#else
+int __cdecl fcn_004011f0(void* stream, void* dst);
+#endif
+char* __cdecl fcn_004011a0(void* stream, char* text);
+int __cdecl fcn_0043b500(char*);
+char __cdecl fcn_0043b660(char*, int, int, char*);
+
+/* ADDRESS: GOLD 0x0043ea10 */
+void __cdecl fcn_0043b850(void* r)
+{
+	int n;
+	char val[0x100];
+	char name[0x100];
+	int i;
+	int id;
+
+#ifdef REBREW_GOLD
+	fcn_004011d0(r, &n);
+#else
+	fcn_004011f0(r, &n);
+#endif
+	for (i = 0; i < n; i++) {
+		fcn_004011a0(r, name);
+		id = fcn_0043b500(name);
+		fcn_004011a0(r, val);
+		fcn_0043b660(((char*)g_67a370), id, (*(fcn_0043b850_f*)&g_67a590)(((char*)g_67a370), id, val), val);
+	}
+}

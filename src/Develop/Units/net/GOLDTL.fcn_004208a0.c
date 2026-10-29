@@ -4,10 +4,10 @@
 
 void __cdecl fcn_0041da60(char* module, unsigned int line, char* msg, int severity);
 
-/* ADDRESS: GOLDTL 0x004208a0 */
 
 /* Logs a readable text for a winsock error code (twin of the server's
  * srv_LogWinsockError). */
+/* ADDRESS: GOLDTL 0x004208a0 */
 void __cdecl fcn_004208a0(int err_code)
 {
 	char buf[256];

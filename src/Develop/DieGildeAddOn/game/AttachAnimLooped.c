@@ -5,7 +5,6 @@ char* __cdecl fcn_00401040(char* path);
 void __cdecl fcn_00425bf0(char* script, unsigned int position, const char* message);
 
 /* ADDRESS: GOLDTL 0x0040eff0 */
-/* ADDRESS: GOLD 0x0040e0e0 */
 int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
 {
     D3_ANIMATION_OPTIONS options;

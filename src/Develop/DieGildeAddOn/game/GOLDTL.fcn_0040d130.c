@@ -10,11 +10,10 @@ char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 #include "Develop/Units/Error/error_message.h"
 
-/* ADDRESS: GOLD 0x0040c210 */
-/* ADDRESS: GOLDTL 0x0040d130 */
 
 /* PlayCharacterAniScriptInt(): like PlayCharacterAniScript() with an
  * integer parameter handed to the script. */
+/* ADDRESS: GOLDTL 0x0040d130 */
 int __cdecl PlayCharacterAniScriptInt(char** ch, char** script, int* kind, unsigned char* level, char** func, int* param)
 {
 	char* task;

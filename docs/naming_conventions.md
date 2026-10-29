@@ -16,6 +16,25 @@ checkpoint; query metadata and [current work](TODO.md) before continuing it.
 
 ## Recent findings
 
+### Five attested names settled against their counterparts (2026-10-27)
+
+`rd_GetBKSize`, `amt_fio_LoadAemter`, `cm_ExSetHE`, `cm_ExSysMessage` and
+`gm_AddObjekt` were refused earlier because a different definition already used
+the name. Each has a single attested owner now:
+
+| TL VA | Attested name | What changed |
+| --- | --- | --- |
+| `0x4bdf40` | `rd_GetBKSize` | The unclaimed duplicate in `plant.c:314` became `plt_LookupBauplatzBox` (inferred helper name); it has no row and never pushed the diagnostic. |
+| `0x4ec520` | `amt_fio_LoadAemter` | Renamed onto the TL row; `aemter.c` carries the server body and `src/Develop/DieGildeAddOn/game` is not part of the client build, so no duplicate symbol exists. |
+| `0x4c9340` | `cm_ExSetHE` | `command.c` keeps the server body behind `#if defined(REBREW_SERVER) \|\| defined(REBREW_GOLD)`; the client body is `0x4c9340`. |
+| `0x4c9550` | `cm_ExSysMessage` | Same split as `cm_ExSetHE`. |
+| `0x5037c0` | `gm_AddObjekt` | `spiel.c:2251` keeps the server body behind the same guard; the client body is `0x5037c0`. Server.dll attests the name too, so both builds legitimately carry it. |
+
+`--shared-definition` now accepts a name that another target's row owns in the
+same file (upstream `cf53a9dd`): one tree holds each target's guarded body, and
+the caller acknowledged the counterpart. Same-module rows are still refused.
+
+
 ### Animation loader name and command filename (2026-10-19)
 
 `d3_LoadAnimStream` is attested by its own diagnostic at TL `0x44c688`

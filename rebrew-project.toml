@@ -51,6 +51,7 @@ dll_exports = { 0x10009320 = "Init", 0x10009350 = "Exit" }
 KERNEL32 = "KERNEL32.lib"
 USER32 = "USER32.lib"
 WS2_32 = "WS2_32.lib"
+ADVAPI32 = "ADVAPI32.lib"
 LIBCMT = "LIBCMT.lib"
 WINMM = "WINMM.lib"
 MSVCRT = ""
@@ -72,7 +73,7 @@ compiler = { profile = "msvc-6.0-sp5-pp" }
 # linker-supplied D3DX8 bodies (~273 KB), not game source.  Declared so
 # "work left" tools (cross-import, todo) skip the band instead of treating it
 # as unreversed game code.  GOLD links DirectX by DLL import only.
-external_ranges = ["0x5e0000-0x64ffff"]
+external_ranges = ["0x5e0000-0x64ffff", "0x650000-0x66ffff"]
 binary = "original/Europa1400Gold_TL.exe"
 format = "pe"
 arch = "x86_32"
@@ -80,7 +81,7 @@ reversed_dir = "src"
 inventory_file = "db/inventory-Europa1400Gold_TL.exe.json"
 bin_dir = "bin/Europa1400Gold_TL.exe"
 module = "GOLDTL"
-raw_link = "build/Europa1400Gold_TL.exe"
+raw_link = "build-goldtl-audit/Europa1400Gold_TL.exe"
 # Provisional link list — measured import/static names for the identified
 # external modules; adjust when the TL link lands (REBREW_EXTERNAL_LIBS).
 [targets."Europa1400Gold_TL.exe".external_libs]
@@ -96,6 +97,7 @@ D3DX8 = "references/dxsdk8/lib/d3dx8.lib"
 LIBCMT = "LIBCMT.lib"
 WINMM = "WINMM.lib"
 WS2_32 = "WS2_32.lib"
+ADVAPI32 = "ADVAPI32.lib"
 
 [targets."Europa1400Gold.exe"]
 check_known_bindings = true
@@ -129,6 +131,7 @@ MSVCRT = ""
 LIBC = "LIBC.lib"
 WINMM = "WINMM.lib"
 WS2_32 = "WS2_32.lib"
+ADVAPI32 = "ADVAPI32.lib"
 [compiler]
 profile = "msvc-6.0-sp5"
 # The namespace runner uses the pinned toolchain image filesystem and Wine;

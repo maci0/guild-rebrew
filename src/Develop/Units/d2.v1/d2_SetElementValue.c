@@ -19,7 +19,6 @@
 #endif
 
 /* Inferred interface: widget kind and flags select the payload. */
-/* ADDRESS: GOLD 0x00475ca0 */
 /* ADDRESS: GOLDTL 0x00472380 */
 void __cdecl d2_SetElementValue(int id, ...)
 {

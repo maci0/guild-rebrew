@@ -13,7 +13,7 @@ void __cdecl fcn_004e1920(char* event);
 void __cdecl fcn_004da690(char* event);
 void __cdecl fcn_004dcf50(char* event);
 void __cdecl fcn_004d77e0(char* event);
-void __cdecl fcn_004e0620(char* event);
+void __cdecl cut_MainDuell(char* event);
 void __cdecl fcn_004e1b00(char* event);
 void __cdecl fcn_004e2090(char* event);
 void __cdecl fcn_004e2890(char* event);

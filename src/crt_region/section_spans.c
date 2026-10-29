@@ -272,3 +272,7 @@ extern unsigned char g_before_pioinfo[0xc];
 extern unsigned char g_before_nstream[0x1018];
 
 extern unsigned char g_bss_section_tail[0x8];
+unsigned char _dpad_10027110[488];
+unsigned char _dpad_10030eec[1668];
+unsigned char _dpad_10031b79[8223];
+unsigned char _dpad_11766208[552];

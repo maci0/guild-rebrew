@@ -1,0 +1,176 @@
+#include <string.h>
+
+/* Personnel/mercenary book controller. Native extent 0x005b6300..0x005b7880
+ * (5504 bytes, frame 0x1a4c, args a1=record, a2=context, a3=extra).
+ *
+ * Partial reconstruction: opening block through the 12-row selection reset
+ * (native 0x005b6300..0x005b66e4, 262 instructions). The remainder
+ * (0x005b66ea..0x005b787a) is not reconstructed. */
+
+typedef struct {
+	int type;
+	int v[22];
+} BookSel; /* 0x5c, native esp+0x154 */
+
+extern char* __cdecl fcn_00534c40(int, ...);
+extern int __cdecl fcn_005350d0(char*);
+extern int __cdecl fcn_0057e880(int, char*, int, int);
+extern int __cdecl fcn_00517c00(unsigned int, int, int, char*);
+extern char* __cdecl fcn_0050dc90(char*);
+extern int __cdecl d2_SetForm(int, int);
+extern int __cdecl fcn_00472250(int, int, int);
+extern int __cdecl fcn_00472380(int, int, int, int);
+extern int __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
+extern int __cdecl fcn_0046b2b0(int);
+extern int __cdecl fcn_00519190(int, ...);
+extern int __cdecl fcn_005b58a0(void*, int, int);
+extern int __cdecl d2_ShowTxt(int, int, int, int);
+
+#define g_entity_type_table ((char*) *(unsigned int*) 0x868050)
+#define G(p) (*(int*) (p))
+
+/* ADDRESS: GOLDTL 0x005b6300 */
+int __cdecl fcn_005b6300(char* a1, int a2, int a3)
+{
+	BookSel sel;       /* esp+0x154 */
+	char* row;         /* esp+0x24 entity-type record */
+	char* book;        /* esp+0x14 created book object */
+	char* rec;         /* esp+0x00 temp record pointer */
+	char text_a[0x60]; /* esp+0x74c */
+	char text_b[0x60]; /* esp+0x7ac */
+	char buf[0x60];    /* esp+0x204 */
+	char rows[0x450];  /* esp+0x264 12 rows of 0x5c */
+	int v10;           /* esp+0x10 */
+	int v18;           /* esp+0x18 */
+	int v1c;           /* esp+0x1c */
+	int v20;           /* esp+0x20 */
+	int v28;           /* esp+0x28 */
+	int v2c;           /* esp+0x2c */
+	int v30;           /* esp+0x30 */
+	int v34;           /* esp+0x34 */
+	int v38;           /* esp+0x38 */
+	int v40;           /* esp+0x40 */
+	int v44;           /* esp+0x44 */
+	int v48;           /* esp+0x48 */
+	int v4c;           /* esp+0x4c */
+	int v50;           /* esp+0x50 */
+	int v54;           /* esp+0x54 */
+	int v58;           /* esp+0x58 */
+	int v60;           /* esp+0x60 */
+	int v64;           /* esp+0x64 */
+	int v78;           /* esp+0x78 */
+	char* r;
+	int i;
+	int el;
+
+	sel.type = 0;
+	memset(sel.v, 0, sizeof(sel.v));
+	v38 = 0;
+	row = g_entity_type_table + (unsigned char) a1[0] * 0x24d;
+	v34 = -1;
+	v48 = -1;
+	v28 = -1;
+	v1c = -1;
+	v20 = -1;
+	v44 = -1;
+	v18 = -1;
+	v40 = -1;
+	v4c = -1;
+
+	/* Personnel template for entity classes 4/0x13/0x10, mercenary
+	 * template otherwise. */
+	if (row[0] == 4 || row[0] == 0x13 || row[0] == 0x10) {
+		book = fcn_00534c40(a2, 4, (char*) 0x6a42c8, (char*) 0x6ac2cc, (char*) 0x6ac300, (char*) 0x6ac314, (char*) 0x6ac328);
+	} else {
+		book = fcn_00534c40(a2, 4, (char*) 0x6a42c8, (char*) 0x6ac2ec, (char*) 0x6ac300, (char*) 0x6ac314, (char*) 0x6ac328);
+	}
+	fcn_005350d0(book);
+	fcn_0057e880(0x21, book, 0, 0);
+	fcn_00517c00(*(unsigned short*) (a1 + 0x27), 1, 2, text_b);
+	fcn_00517c00(*(unsigned short*) (a1 + 0x25), 1, 2, text_a);
+	r = fcn_0050dc90(a1);
+	if (r == 0) {
+		strcpy(buf, *(char**) 0x14abc28);
+	} else {
+		fcn_00517c00(*(unsigned short*) r, 1, 1, buf);
+	}
+
+	d2_SetForm(G(book + 0x228), 3);
+	el = fcn_00472250(G(book + 0x228), 3, 2);
+	v64 = el;
+	fcn_00472380(el, 0x32, 0x96, G(a1 + 0x3d));
+
+	if (!(row[0] == 4 || row[0] == 0x13 || row[0] == 0x10)) {
+		v60 = fcn_00472250(G(book + 0x228), 3, 3);
+		fcn_00472380(v60, 0, 4, G(a1 + 0x41));
+		fcn_00468bb0(v60, 5, G(0x14abbd8), G(0x14abbdc), G(0x14abbe0), G(0x14abbe4), G(0x14abbe8));
+	}
+	d2_SetForm(G(book + 0x228), 3);
+	fcn_00519190((int) 0x6ac2c8);
+	fcn_00519190((int) 0x6ac2c8);
+	v78 = fcn_00472250(G(book + 0x228), 3, fcn_00519190(0x1a20));
+
+	if (row[0] != 5 && row[0] != 9) {
+		d2_SetForm(G(book + 0x228), 3);
+		fcn_005b58a0(&sel, 0x20, G(G(0x77255c) + 0xc) / 2 - 0x18);
+		i = d2_ShowTxt(G(0x772514), G(0x14abbd4),
+			(short) (G((char*) &sel + 0xc) - 0x20),
+			(short) G((char*) &sel + 8) - 0x38);
+		G(G(0x1015ea0) + i * 756 + 0x6c) = 1;
+		G(G(0x1015ea0) + i * 756 + 0x18) = 0xa0;
+	}
+
+	for (i = 0; i < 4; i++) {
+		d2_SetForm(G(book + 0x228 + i * 4), 1);
+		fcn_00519190(0x1a1d);
+		if (i == 0) {
+			d2_SetForm(G(book + 0x228), 5);
+		} else {
+			d2_SetForm(G(book + 0x228 + i * 4), 4);
+		}
+		fcn_00519190(0x6a2310, 0x1a37, i);
+	}
+
+	if (row[0] == 4 || row[0] == 0x13 || row[0] == 0x10) {
+		el = fcn_00472250(G(book + 0x228), 3, 3);
+		v60 = fcn_00472250(G(book + 0x228), 3, 1);
+		fcn_0046b2b0(el);
+		fcn_0046b2b0(v60);
+		v44 = -1;
+	}
+	d2_SetForm(G(book + 0x230), 3);
+
+	rec = (char*) 0x1015f40 + G(0x772514) * 0x3cc;
+	v54 = G(rec + 0xc) / 2;
+	v2c = G(rec + 0x10) / 2;
+	for (i = 0; i < 0xc; i++) {
+		G(rows + i * 0x5c + 8) = 0;
+		G(rows + i * 0x5c + 0xc) = -1;
+	}
+	return 0;
+}
+/* Layout scaffolding: shifts the next source object to its reference
+ * VA. 0x90 filler, not reconstruction. Generated by the text lead pass. */
+#pragma data_seg(".text")
+
+/* Layout scaffolding: shifts the next source object to its reference
+ * VA. 0x90 filler, not reconstruction. Generated by the text lead pass. */
+#pragma data_seg(".text")
+unsigned char _tlead_GOLDTL_fcn_005b6300[16] = {
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90,
+    0x90
+};

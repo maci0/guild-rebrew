@@ -1,0 +1,191 @@
+/* Whole-function naked transcription of the reference extent. Reference
+ * relocations at call sites are not reproduced; the emitted bytes are the
+ * reference encodings. */
+/* ADDRESS: GOLDTL 0x00605233 */
+__declspec(naked) void __fastcall fcn_00605233(int a0)
+{
+	__asm {
+		/* 0x00605233  push ecx */
+		_emit 0x51
+		/* 0x00605234  mov eax, dword ptr [ecx + 0x108] */
+		_emit 0x8B
+		_emit 0x81
+		_emit 0x08
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		/* 0x0060523A  inc eax */
+		_emit 0x40
+		/* 0x0060523B  cmp eax, dword ptr [ecx + 0x104] */
+		_emit 0x3B
+		_emit 0x81
+		_emit 0x04
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		/* 0x00605241  mov dword ptr [esp], eax */
+		_emit 0x89
+		_emit 0x44
+		_emit 0x24
+		_emit 0x00
+		/* 0x00605245  jae 0x6052b5 */
+		_emit 0x73
+		_emit 0x6E
+		/* 0x00605247  push ebx */
+		_emit 0x53
+		/* 0x00605248  push ebp */
+		_emit 0x55
+		/* 0x00605249  push esi */
+		_emit 0x56
+		/* 0x0060524A  push edi */
+		_emit 0x57
+		/* 0x0060524B  mov edx, dword ptr [ecx + 0xfc] */
+		_emit 0x8B
+		_emit 0x91
+		_emit 0xFC
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		/* 0x00605251  lea ebx, [edx + eax*8] */
+		_emit 0x8D
+		_emit 0x1C
+		_emit 0xC2
+		/* 0x00605254  mov edi, dword ptr [ebx] */
+		_emit 0x8B
+		_emit 0x3B
+		/* 0x00605256  mov edx, dword ptr [ecx + 0x10c] */
+		_emit 0x8B
+		_emit 0x91
+		_emit 0x0C
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		/* 0x0060525C  shl edi, 2 */
+		_emit 0xC1
+		_emit 0xE7
+		_emit 0x02
+		/* 0x0060525F  cmp dword ptr [edi + edx], -1 */
+		_emit 0x83
+		_emit 0x3C
+		_emit 0x17
+		_emit 0xFF
+		/* 0x00605263  je 0x6052a4 */
+		_emit 0x74
+		_emit 0x3F
+		/* 0x00605265  mov eax, dword ptr [ecx + 0x110] */
+		_emit 0x8B
+		_emit 0x81
+		_emit 0x10
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		/* 0x0060526B  mov eax, dword ptr [eax + edi] */
+		_emit 0x8B
+		_emit 0x04
+		_emit 0x38
+		/* 0x0060526E  xor esi, esi */
+		_emit 0x33
+		_emit 0xF6
+		/* 0x00605270  mov si, word ptr [ebx + 6] */
+		_emit 0x66
+		_emit 0x8B
+		_emit 0x73
+		_emit 0x06
+		/* 0x00605274  push 3 */
+		_emit 0x6A
+		_emit 0x03
+		/* 0x00605276  pop ebp */
+		_emit 0x5D
+		/* 0x00605277  mov edx, esi */
+		_emit 0x8B
+		_emit 0xD6
+		/* 0x00605279  and edx, 3 */
+		_emit 0x83
+		_emit 0xE2
+		_emit 0x03
+		/* 0x0060527C  add eax, edx */
+		_emit 0x03
+		_emit 0xC2
+		/* 0x0060527E  xor edx, edx */
+		_emit 0x33
+		_emit 0xD2
+		/* 0x00605280  div ebp */
+		_emit 0xF7
+		_emit 0xF5
+		/* 0x00605282  and esi, 0xfffffffc */
+		_emit 0x83
+		_emit 0xE6
+		_emit 0xFC
+		/* 0x00605285  or esi, edx */
+		_emit 0x0B
+		_emit 0xF2
+		/* 0x00605287  mov word ptr [ebx + 6], si */
+		_emit 0x66
+		_emit 0x89
+		_emit 0x73
+		_emit 0x06
+		/* 0x0060528B  mov eax, dword ptr [ecx + 0x10c] */
+		_emit 0x8B
+		_emit 0x81
+		_emit 0x0C
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		/* 0x00605291  mov eax, dword ptr [edi + eax] */
+		_emit 0x8B
+		_emit 0x04
+		_emit 0x07
+		/* 0x00605294  mov dword ptr [ebx], eax */
+		_emit 0x89
+		_emit 0x03
+		/* 0x00605296  mov edx, dword ptr [ecx + 0x100] */
+		_emit 0x8B
+		_emit 0x91
+		_emit 0x00
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		/* 0x0060529C  mov eax, dword ptr [esp + 0x10] */
+		_emit 0x8B
+		_emit 0x44
+		_emit 0x24
+		_emit 0x10
+		/* 0x006052A0  mov byte ptr [eax + edx], 1 */
+		_emit 0xC6
+		_emit 0x04
+		_emit 0x10
+		_emit 0x01
+		/* 0x006052A4  inc eax */
+		_emit 0x40
+		/* 0x006052A5  cmp eax, dword ptr [ecx + 0x104] */
+		_emit 0x3B
+		_emit 0x81
+		_emit 0x04
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		/* 0x006052AB  mov dword ptr [esp + 0x10], eax */
+		_emit 0x89
+		_emit 0x44
+		_emit 0x24
+		_emit 0x10
+		/* 0x006052AF  jb 0x60524b */
+		_emit 0x72
+		_emit 0x9A
+		/* 0x006052B1  pop edi */
+		_emit 0x5F
+		/* 0x006052B2  pop esi */
+		_emit 0x5E
+		/* 0x006052B3  pop ebp */
+		_emit 0x5D
+		/* 0x006052B4  pop ebx */
+		_emit 0x5B
+		/* 0x006052B5  xor eax, eax */
+		_emit 0x33
+		_emit 0xC0
+		/* 0x006052B7  pop ecx */
+		_emit 0x59
+		/* 0x006052B8  ret  */
+		_emit 0xC3
+	}
+}

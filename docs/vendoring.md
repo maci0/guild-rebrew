@@ -13,7 +13,7 @@ import library, not one of these trees: [Miles 6.1c](#miles-61c).
 | `references/vendor/<name>/vendor.toml` | Upstream URL, version, tarball sha256, pristine directory, output tree, its file list, patch order |
 | `references/vendor/<name>/NNNN-*.patch` | One change each: a header with its kind, reason and evidence, then a `-p1` unified diff |
 | `references/vendor/zlib/pristine.sha256` | sha256 of every file in `references/zlib-1.1.3/` (`sha256sum -c` format, root-relative) |
-| `references/zlib/` | Generated: the 25 zlib files the build compiles or includes |
+| `references/zlib/` | Generated: the 26 zlib files the build compiles or includes |
 | `references/minizip/` | Generated: `unzip.c` and `unzip.h`, from `references/zlib-1.1.3/contrib/minizip/` |
 
 Generated trees are tracked because managed function bindings compile them

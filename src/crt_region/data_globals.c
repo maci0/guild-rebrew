@@ -79,4 +79,12 @@ void* _acmdln;          /* GetCommandLineA result */
 int (__stdcall* g_dllmain_user_handler)(void* hmod, unsigned int reason, void* reserved); /* DllMain user handler */
 
 int g_envp_built;            /* __envp built flag */
-int g_cmdline_parsed;            /* cmdline/env parsed flag */
+int g_cmdline_parsed;            
+unsigned char _dpad_10031627[433];
+unsigned char _dpad_10031aac[192];
+unsigned char _dpad_10033ba0[848];
+unsigned char _dpad_10033ef0[144];
+unsigned char _dpad_10035510[140];
+unsigned char _dpad_100355d8[260];
+unsigned char _dpad_11766460[256];
+unsigned char _dpad_11766568[4120];
