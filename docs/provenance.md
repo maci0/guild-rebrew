@@ -8447,3 +8447,22 @@ are not, because their bodies differ.
 
 State: raw 292,292 / informative 108,702, lint 0 errors / 0 warnings, data
 conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: 17-byte jump thunks are alignment filler plus jmp, and the pad retune eats the gain
+
+Two STUB rows are five-byte tail jumps followed by twelve 0x90 bytes:
+`fcn_00572760` and `fcn_005756f0` both `jmp 0x546190`. Writing the C tail call
+emits the five-byte `jmp` alone (the compiler does not add trailing NOPs), so the
+17-byte row size is the reference extent with alignment filler.
+
+Tried `void` thunk + twelve `nop` statements: 18 bytes (one instruction too many),
+then 17 bytes NEAR_MATCHING once one NOP was dropped, but the asm block stops the
+tail-call optimisation and the compiler emits `call` instead of `jmp`. Replaced the
+asm block with a `.text` pad array of twelve 0x90: the linker still placed the
+object at 0x578190 instead of 0x572760, and one lead-pass retune (one pad, shift
+-0x10) scored 292,243 / 108,637 against 292,292 / 108,702. Reverted.
+
+Correct route for these two rows: repair the stored extent to the five-byte jump
+(the filler is linker fill, and the inventory already records such repairs) and
+let the plain tail-call body match at five bytes. Lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
