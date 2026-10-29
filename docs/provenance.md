@@ -8343,3 +8343,21 @@ therefore gated on the `.text` excess, as before.
 
 Score unchanged: raw 292,234 / informative 108,655; lint 0 errors / 0 warnings;
 data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: dropping redundant d3dx8 anchors; text size did not move
+
+Cross-checked the linked image against the reference by searching each library
+symbol's first bytes in the reference. 128 library objects totalling 49,104 bytes
+have no sampled signature there, and `.text` excess was +49,152, so the members
+looked like the excess. Tested by removing the 205 `/INCLUDE` anchors in
+`stubs/goldtl/readd-symbols.rsp` that name symbols from those members (cvalue,
+shapes, cassignment, btri, ceffect, intersect, jidctflt, ctechnique, cpass,
+inittime, realloc, assert, heapinit, _ctype).
+
+The build stayed clean and all members remained linked: our own stubs reference
+them, so the anchors were redundant, not the pull. `.text` size stayed 2,540,754,
+which rules out the absent-signature list as the text excess explanation. The
+anchor cleanup alone moved the score from 292,234 / 108,655 to 292,292 / 108,702
+(+58 / +47); a further lead pass changed no pads. Kept the 205-line anchor removal.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
