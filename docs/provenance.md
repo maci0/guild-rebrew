@@ -7114,3 +7114,8 @@ its fixture to Develop/Unassigned/GOLD.fcn_0040abd0.c without changing the test
 assertions. The first run reproduced the missing-file failure; the full suite
 was rerun after the path correction. Generated guidance was refreshed with the
 project-rules section preserved.
+
+README image URLs are pinned to `5c0b1859e829fafe5e926c6126d331b9ce0d2579` for all three graphics.
+The committed snapshot passed 39 tests and 3 subtests; initial all-target lint
+reported zero errors and only generated guidance drift. Refresh preserved the
+project rules and init --check reports no drift. No native build was run.

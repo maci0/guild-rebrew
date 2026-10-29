@@ -1,5 +1,22 @@
 # Current work
 
+## Current committed snapshot (2026-10-29 02:40 UTC)
+
+README, code/data bars and defrag map now describe the accumulated committed
+source tree, using one CLI status report. Server code and stored data are 100%,
+but its current raw file agrees at 74.4%; the byte-identical v1.6.1 build is
+historical. GoldTL has 4,100/5,184 C matches (79.0%), 53.4% code accounting and
+8.3% raw-file agreement. Gold has 1,881/4,426 C matches (42.4%), 21.0% accounting
+and 1.1% raw-file agreement. No new native build or data verification ran.
+
+All accumulated source, metadata, layout and build changes were committed; the
+modified .lib archive was explicitly excluded. A stale cross-import fixture
+path was corrected after its source moved. Tests: 39 passed plus 3 subtests.
+All-target lint found zero errors; its only generated-guidance warning was
+cleared by refresh, with project rules preserved and init --check passing.
+Receipts: .scratch/readme-refresh-20261029/.
+
+
 ## Release 1.6.1 — server verification and charts (2026-10-27)
 
 A fresh isolated build with published Rebrew 6.3.1 reproduces all 286,720 server

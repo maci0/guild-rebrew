@@ -38,12 +38,12 @@ These are separate measures, not gameplay-completion scores.
 
 <!-- progress:start -->
 <p align="center">
-  <img src="docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and current raw-file agreement at original offsets.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/5c0b1859e829fafe5e926c6126d331b9ce0d2579/docs/progress.svg" width="715" alt="Three bars per target: accounted code bytes, C function matches and current raw-file agreement at original offsets.">
 </p>
 <details>
   <summary><strong>Explore the function map</strong>, one block per function, in address order</summary>
   <p align="center">
-    <img src="docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
+    <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/5c0b1859e829fafe5e926c6126d331b9ce0d2579/docs/function-map.svg" width="715" alt="Defrag-style function map for server, GoldTL and Gold, distinguishing C matches, assembly, libraries and unfinished functions.">
   </p>
 </details>
 <!-- progress:end -->
@@ -83,7 +83,7 @@ check. These results do not make the current complete server file byte-identical
 | **Gold** | 0 / 280,072 · 0.0% | 1 / 319 | 0 | 129 |
 
 <p align="center">
-  <img src="docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, verified records including BSS and views, and exact placement. Stored server data bars are 100 percent.">
+  <img src="https://raw.githubusercontent.com/maci0/guild-rebrew/5c0b1859e829fafe5e926c6126d331b9ce0d2579/docs/data-progress.svg" width="715" alt="Data verification per target: initialized bytes, verified records including BSS and views, and exact placement. Stored server data bars are 100 percent.">
 </p>
 
 Initialized-byte coverage counts `.data`/`.rdata` once and excludes BSS and copied
