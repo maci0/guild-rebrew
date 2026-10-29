@@ -8132,3 +8132,14 @@ Plateau at 285,869 / 102,937 (best observed 285,947 before the last two jitter
 passes). `.text` matches rose 135,216 -> 145,569, correct placements 485 -> 541,
 sections `.rdata` 4,041 -> 3,989, `.data` 131,819 unchanged. Lint 0 errors /
 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: larger lead-pad cap trades raw bytes for informative matches
+
+Retried the resized lead pass with a 0x40000 threshold instead of 0x2000. It
+changed 81 pads, total shift 0x7BEF1, and the rebuilt image scored raw 176,773 /
+informative 116,091. Raw same-offset bytes fell by 109,096 while informative
+rose by 13,154, so the larger pads move objects onto non-zero reference bytes at
+the wrong offsets. The objective metric is raw byte identity, so this was
+reverted; the committed layout at raw 285,869 / informative 102,937 stands.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
