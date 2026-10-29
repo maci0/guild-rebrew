@@ -8507,3 +8507,20 @@ object order already carries a large offset that pads only add to. Row and
 inventory are now accurate even though the bytes do not score yet.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: late objects track the cumulative text excess, so bodies in that band cannot score
+
+Checked the 121-byte STUB `fcn_0050e170` and its callees: the map puts them at
+0x51B950, 0x51B7B0 and 0x513220 against reference 0x50E170, 0x50DFD0 and
+0x502CD0, i.e. 0xD7E0 late. The two five-byte thunks show the same pattern
+(0x578180 and 0x57AE50 against 0x572760 and 0x5756F0).
+
+The lead pass only adds bytes to lift early objects; a late object cannot be
+pulled back without shrinking the accumulated surplus before it. That surplus is
+the +0x6000-scale text excess measured in round 240, so body work in this band
+adds no score until the global size gap closes. Kept the two thunks (accurate
+rows, RELOC 5/5) and left the remaining STUBs alone for now.
+
+No source change this round beyond the round-248 thunks. Score: raw 292,292 /
+informative 108,702, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
