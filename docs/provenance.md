@@ -7976,3 +7976,23 @@ costs more than the zero bytes gain. Reverted and rebuilt; the score is back to
 The .rdata shortfall is real missing content (constants and strings), so the next
 step is data reconstruction, not padding. Lint 0 errors / 0 warnings. No GA was
 run. Decision: Lead.
+
+## 2026-10-30: multi-function character TU drives the 0x402b00 placement drift; splitting one body did not fix order
+
+Read the link map against the inventory. Most early text is correctly placed
+(delta 0 through 0x402aa0), then `ch_UpdatePendingPositions` lands at 0x402B00
+instead of 0x403040 and every later fcn object shifts by up to 3,984 bytes. Cause:
+`character.c` holds eight functions whose reference addresses are interleaved
+with per-function objects, so the single TU clusters them early and pushes the
+per-function objects later. Pads cannot interleave objects from another TU.
+
+Pilot fix: split `ch_UpdatePendingPositions` into its own
+`GOLDTL.ch_UpdatePendingPositions.c`, rebind the 0x403040 row through
+`source binding rebind` (digest preview and apply), and rebuild. The link map put
+the new object at 0x403F20, still not the reference address, and the score moved
+275,568 -> 275,542 / 93,703 -> 93,670. Reverted the split, the rebind and the
+build: score back to 275,568 / 93,703, tree clean.
+
+The object order is not VA-driven for this file, so the fix has to come from the
+build's anchor ordering, not from splitting sources alone. Lint 0 errors /
+0 warnings. No GA was run. Decision: Lead.
