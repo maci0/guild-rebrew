@@ -8299,3 +8299,20 @@ The checker's absolute symbol VAs remain rough for this image because object
 shift signal, not per-symbol placement. Text lead pass is converged (three runs
 changed no pads). Score: raw 292,234 / informative 108,655, lint 0 errors /
 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: data prefix pad size is already tuned
+
+Tried retuning the `.data` prefix pad (`_dpad_prefix_zeros`) after the data
+placement check showed the built `.data` base 0x6000 late. Shrinking it by 0x6000
+(0x2B000 -> 0x25000) scored raw 275,495 / informative 107,655, with `.data` match
+falling 131,819 -> 112,175. Growing it by 0x6000 (0x31000) scored 289,437 /
+107,575. Both lose against 292,234 / 108,655, so the current size stands.
+
+Also noted that this pad's section is not the `.data` the whole-binary check
+reports: changing its size leaves the reported `.text` and `.data` sizes
+unchanged while the score's per-section match counts move, so the pad lands in a
+segment the whole-binary summary groups differently. Recorded as an open question;
+the whole-binary section sizes are the ones to trust for size work.
+
+Restored the pad file and rebuilt to raw 292,234 / informative 108,655. Lint
+0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
