@@ -8524,3 +8524,24 @@ rows, RELOC 5/5) and left the remaining STUBs alone for now.
 No source change this round beyond the round-248 thunks. Score: raw 292,292 /
 informative 108,702, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
 Decision: Lead.
+
+## 2026-10-30: removing every lead pad and reconverging lands on the same plateau
+
+Removed all 66 generated `.text` lead pads (21,056 bytes) and rebuilt: raw
+198,169 / informative 35,144, confirming the pads carry most of the placement.
+Then ran the resized lead pass ten times from scratch:
+
+- pass 1: 83 pads, shift +0x5240 -> 290,693 / 107,364
+- pass 2: 36 pads, shift 0 -> 292,200 / 108,675
+- pass 3: 19 pads, shift 0 -> 292,326 / 108,747 (best)
+- pass 4: 10 pads -> 292,270; pass 5: 6 -> 292,247; pass 6: 7 -> 292,169
+- pass 7: 6 -> 292,285; pass 8: 4 -> 292,256
+- pass 9: 2 -> 292,292 / 108,702; pass 10: 0 pads changed, same score
+
+The reconverged tree ends at the committed 292,292 / 108,702 with the same
+`.text` size 2,540,754, and only one pad size differs from the committed tree.
+So the pad method reaches the same local optimum from scratch; the transient
+292,326 at pass 3 is +/-34 of jitter, not a better layout. Reverted the working
+tree to the committed pads and rebuilt to 292,292 / 108,702.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
