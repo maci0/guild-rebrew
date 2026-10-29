@@ -50,6 +50,7 @@ cmake_install.cmake
 *.map
 /*.exe
 /*.dll
+/*.asm
 *.log
 *.cod
 compile_commands.json

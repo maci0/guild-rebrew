@@ -7127,3 +7127,21 @@ request. The existing /references/dxsdk8/ ignore rule now covers the archive;
 no redundant rule was added. Its local bytes remain unchanged. Verification:
 SHA-256 before/after agrees, git check-ignore resolves the existing rule, and
 the archive is absent from the index. No native build was needed.
+
+## 2026-10-29: retire disposable scratch runtimes and root experiments
+
+Removed nine duplicate experimental runner-image caches and eleven inactive Wine
+prefixes older than two days. Scratch allocation fell from about 37.69 GiB to
+17.66 GiB, removing approximately 20.03 GiB of disposable files. Preserved current
+experiments, reports, candidate sources, Git worktrees, integration backups,
+Ghidra/BinSync state, stock-library receipts, original binaries and SDK archives.
+The normal shared build cache was not cleared; deleted experimental runtime
+caches can be regenerated from the pinned toolchain images when needed.
+
+Deleted four unreferenced root disassembly/compiler dumps: probe.asm, s.asm,
+fcn_004102a0.asm and GOLDTL.fcn_004eafe0.asm. Added a root-only /*.asm ignore
+rule; vendored assembly remains tracked. Decision owner: project maintainer,
+through the cleanup request. Evidence: .scratch/scratch-cleanup-20261029/
+candidates.json, removed.json and summary.json. Verification: deletion manifest,
+protected-path assertions, worktree inventory and ignore-rule checks. No native
+source, metadata or build output was changed; no rebuild was needed.
