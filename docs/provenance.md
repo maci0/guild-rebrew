@@ -8143,3 +8143,21 @@ the wrong offsets. The objective metric is raw byte identity, so this was
 reverted; the committed layout at raw 285,869 / informative 102,937 stands.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: character split plus the fixed lead pass; raw score 292,234
+
+Split seven of the eight character bodies with `source split --va` on top of the
+retuned layout (ch_InsertAction still refuses as inside a preprocessor
+conditional). Fixed the generated files' relative includes and one merged
+`;#include` line, built clean, then ran the resized lead pass to convergence:
+
+- split build before retune: raw 279,083 / informative 97,319
+- pass 1 (14 pads, shift 0): 292,111 / 108,569
+- pass 2 (6 pads, shift 0): 292,227 / 108,674
+- pass 3 (4 pads, shift 0): 292,198 / 108,635
+- pass 4 (2 pads, shift 0): 292,234 / 108,655
+
+Kept pass 4: raw 292,234, informative 108,655, up 16,666 raw and 14,952
+informative from the round-229 baseline of 275,568 / 93,703. Lint now checks
+5,453 files (the seven new split units): 0 errors, 0 warnings. Data conflicts 0;
+imports, layout and headers match. No GA was run. Decision: Lead.
