@@ -8408,3 +8408,22 @@ extra bytes are, so it does not locate the excess.
 
 State unchanged: raw 292,292 / informative 108,702, lint 0 errors / 0 warnings,
 data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: removing only the effect anchors still grows text
+
+Refined the round-242 probe: removed 25 anchors that name only the derived value
+and effect classes (CD3DXValueDword/Float/Matrix/Vector, CD3DXEffect,
+CD3DXTechnique, CD3DXPass, CD3DXParameter, CD3DXBaseEffect, CD3DXEffectNode) and
+left resource/sampler/shape anchors in place. Link clean, but `.text` grew from
+2,540,754 to 2,557,230 again (+16,476) and `.rdata` from 52,558 to 57,958.
+
+So those anchors change which members the linker extracts, not merely how many
+bytes stay retained: without them other, larger members load. Reverted to the
+committed anchor list and rebuilt to raw 292,292 / informative 108,702.
+
+Refreshed `rebrew verify --text --raw-link` on that image: 5,228 rows, 4,150
+passed, 484 EXACT, 3,666 RELOC, 969 SIZE_MISMATCH, 99 NEAR_MATCHING, 10 STUB,
+libraries 44/44; text placement 587 correct, 4,593 misplaced. Same as the round-237
+measurement, so the anchor cleanup moved only the byte score.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
