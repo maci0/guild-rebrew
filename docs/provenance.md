@@ -8256,3 +8256,23 @@ flag, so `command.c`/`friedhof_logic.c` still cannot split there, and their
 definitions sit inside `#if`/`#else` anyway, which the extraction still refuses.
 Score unchanged: raw 292,234 / informative 108,655, lint 0 errors / 0 warnings.
 No GA was run. Decision: Lead.
+
+## 2026-10-30: raw-link verification at the tuned layout; data lead map parser fixed
+
+`rebrew verify --text --raw-link` against the current image: 5,228 rows, 4,150
+passed, 484 EXACT, 3,666 RELOC, 969 SIZE_MISMATCH, 99 NEAR_MATCHING, 10 STUB;
+libraries 44/44 passed with 300 prebuilt and 224 unresolved providers; inventory
+6,688 rows, 6 size divergences.
+
+While trying to align `.data`, found the data lead pass parsed the link map
+wrongly for this format: it read the section-summary rows
+(` 0003:<offset> <size>H <section> DATA`) as symbols, so the pass never saw a
+data address. Repaired the parser to take the symbol rows
+(` 0003:<offset> <name> <absVA> <object>`) and kept the fix; a run now parses
+6,148 data symbols but inserts no pads, because the 92 early rows need
+0x8C0000-scale moves (reference BSS reaches 0x9Fxxxx while the built image ends
+near 0x8D0000) and 268 rows are late, both beyond any usable pad. Data alignment
+therefore depends on closing the `.text` size excess first.
+
+Score unchanged: raw 292,234 / informative 108,655. Lint 0 errors / 0 warnings
+(5,453 files). No GA was run. Decision: Lead.

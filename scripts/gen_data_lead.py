@@ -29,10 +29,15 @@ BUILD = ROOT / 'build-goldtl-audit'
 mapfile = (BUILD / 'Europa1400Gold_TL.map').read_text(errors='replace')
 actual: dict[str, int] = {}
 obj_of: dict[str, str] = {}
-for m in re.finditer(r'^ 0003:[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s+\S*\s*(.*)$', mapfile, re.M):
+# The map lists data symbols as ` 0003:<offset> <name> <absVA> <object>`; the
+# ` 0003:<offset> <size>H <section> DATA` rows describe the sections themselves
+# and carry no absolute address, so they must not be parsed as symbols.
+for m in re.finditer(
+    r'^ 0003:[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s+(\S+)\s*$', mapfile, re.M
+):
     name = m.group(1).lstrip('_')
     actual[name] = int(m.group(2), 16)
-    obj_of[name] = m.group(3).strip()
+    obj_of[name] = m.group(3)
 
 store = tomllib.loads((ROOT / 'rebrew-data.toml').read_text())
 rows: dict[str, dict[str, object]] = {}
