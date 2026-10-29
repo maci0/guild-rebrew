@@ -7936,3 +7936,23 @@ Attempted two single-instruction NEAR walls and reverted both:
 
 Lint 0 errors / 0 warnings, imports/layout/headers match, working tree committed.
 No GA was run. Decision: Lead.
+
+## 2026-10-30: text placement dominates the remaining bytes; data verify numbers
+
+Measured the current image per section: .text 135,216 matched of 2,494,464,
+.rdata 4,041 of 77,824, .data 131,819 of 266,240, .data1 212, .rsrc 381. The
+text lead pads total 30,432 bytes across 89 arrays; built .text itself is about
+48 KB larger than the reference. `build check-text-placement` reports 485 correct
+of 5,180, with misplaced deltas ranging from a few bytes to -507,777, so no single
+pad shift realigns the section. Fixing bodies cannot move those misplaced bytes
+until function sizes match the reference, which is the objective itself.
+
+`verify --data --built` on the built image reports 430 rows: 155 matched, 421
+DISPLACED, 6 DRIFT, 3 VERIFIED. Displacement deltas are not constant (for example
+0x662318 lands at 0x8C6650), which is the .text size excess pushing .data later.
+An earlier attempt that passed `--link-map` explicitly returned zero rows; both
+`-t` and default invocation return the 430 rows, so the zero was an argument
+mistake, not a tool defect.
+
+Attempted no source edits this round. Rebuilt image unchanged: raw 275,568 /
+informative 93,703. Lint 0 errors / 0 warnings. No GA was run. Decision: Lead.
