@@ -10,9 +10,10 @@ void __cdecl fcn_00471c80(int idx, unsigned char flags, float limit)
 
 	p = (int*) (0x1015f40 + idx * 0x3cc);
 	if (flags & 1) {
-		value = (float) (p[1] + p[3] / 2)
+		t = p[3] / 2;
+		value = (float) (p[1] + t)
 			- (float) *(int*) 0x1015eac / *(float*) 0x67d368
-			+ (float) *(int*) 0x1015eac - (float) (p[3] / 2);
+			+ (float) *(int*) 0x1015eac - (float) t;
 	} else {
 		value = (float) p[1];
 	}

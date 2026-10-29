@@ -34,15 +34,28 @@ unsigned int __cdecl fcn_00401000(unsigned char* buf, unsigned int n)
 
 /* Layout scaffolding: zeros in front of .data shift its content to the
  * reference alignment. Not reconstruction. */
+
+/* Layout scaffolding: zeros in front of .rdata shift its content to the
+ * reference alignment. Not reconstruction. */
+#pragma data_seg(".rdata")
+#pragma data_seg()
+
+/* Layout scaffolding: zeros in front of .rdata shift its content to the
+ * reference alignment. Not reconstruction. */
+#pragma data_seg(".rdata")
+#pragma data_seg()
+
+/* Layout scaffolding: zeros in front of .rdata shift its content to the
+ * reference alignment. Not reconstruction. */
+#pragma data_seg(".rdata")
+#pragma data_seg()
+
+/* Layout scaffolding: zeros in front of .rdata shift its content to the
+ * reference alignment. Not reconstruction. */
+#pragma data_seg(".rdata")
+unsigned char _rdata_prefix_zeros[0x1000] = {0x90};
+#pragma data_seg()
+
+/* Layout scaffolding: zeros in front of .data shift its content to the
+ * reference alignment. Not reconstruction. */
 unsigned char _dpad_prefix_zeros[0x2b000] = {0x90};
-
-/* Layout scaffolding: zeros in front of .rdata shift its content to the
- * reference alignment. Not reconstruction. */
-#pragma data_seg(".rdata")
-#pragma data_seg()
-
-/* Layout scaffolding: zeros in front of .rdata shift its content to the
- * reference alignment. Not reconstruction. */
-#pragma data_seg(".rdata")
-unsigned char _rdata_prefix_zeros[0xc00] = {0x90};
-#pragma data_seg()

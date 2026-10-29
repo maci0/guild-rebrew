@@ -44,6 +44,7 @@ void __cdecl fcn_005498b0(char *a1, char *a2, char *a3, char *a4, int a5, float 
 {
 	int x0;
 	int x4;
+	float f;
 	Msg m;
 	char buf[0x800];
 
@@ -65,7 +66,8 @@ void __cdecl fcn_005498b0(char *a1, char *a2, char *a3, char *a4, int a5, float 
 		m.f58 = *(int *) (a2 + 4);
 		fcn_004c5530(&m);
 	} else {
-		if (fcn_004feff0(a2) * 0.5f > a6 && fcn_00567170(a2, &x0, &x4, 0) != 0 && *(char **) (a2 + 0x184) != 0) {
+		f = fcn_004feff0(a2) * 0.5f;
+		if (a6 < f && fcn_00567170(a2, &x0, &x4, 0) != 0 && *(char **) (a2 + 0x184) != 0) {
 			fcn_00529160(0, 0, *(unsigned short *) a2, 0);
 			if (*(int *) (*(char **) (a2 + 0x184) + 0x28) != -1) {
 				fcn_00428720(fcn_00426cc0(*(int *) (*(char **) (a2 + 0x184) + 0x28)));

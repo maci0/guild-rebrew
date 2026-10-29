@@ -6,7 +6,7 @@ extern double g_6640e8;
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_AccumulateTyped2(char* entity);
 int __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
-int __cdecl fcn_004c51f0(int a1, int a2, short a3, int a4, char a5, int a6);
+int __cdecl fcn_004c51f0(int a1, int a2, int a3, int a4, char a5, int a6);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 unsigned int __cdecl fcn_004e6cb0(unsigned int n);
 int __cdecl _ftol(void);
@@ -38,7 +38,7 @@ int __cdecl fcn_004d5110(char* a1, char* a2, char* a3, char* a4)
 			if (delay < 1) {
 				delay = 1;
 			}
-			fcn_004c51f0(*(int*) (p1 + 2), *(int*) (p2 + 2), *(short*) match, delay, g_773d75, 0);
+			fcn_004c51f0(*(int*) (p1 + 2), *(int*) (p2 + 2), (unsigned int) (unsigned short) *(short*) match, delay, g_773d75, 0);
 			v = (int) (fcn_0050bb50(*(unsigned short*) match, g_773d75) * delay + v);
 			match = gm_NextEntityQueryMatch();
 		}

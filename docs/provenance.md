@@ -7120,6 +7120,289 @@ The committed snapshot passed 39 tests and 3 subtests; initial all-target lint
 reported zero errors and only generated guidance drift. Refresh preserved the
 project rules and init --check reports no drift. No native build was run.
 
+## 2026-11-03: fcn_004131e0 row shapes decoded, no C form beats the baseline
+
+Disassembled the full target: the three matrix rows are X*neg + Y*scale + Z*scaled
+(the last term times a memory copy of scale at [esp+0x10]), results stored to
+locals and then added to the cached camera position. The baseline body (three
+immediate stores through the same accumulator and volatile hole reads) already
+reaches 13 structural diffs; single-expression rows with three locals gave 40,
+chained rows with the same frame gave 21, chained rows with a register scale gave
+47, and the previous four third-row variants also left 13. The residual is x87
+live-value depth plus the nine trailing alignment nops (192 vs 183), not a source
+statement difference.
+
+Source restored to the baseline; image unchanged at raw 275,538, informative
+94,132 (3.95%), lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
+
+## 2026-11-03: data DRIFT is content-offset, not wrong values
+
+`verify --data` reports 155 matched, 77 DRIFT, 39 missing, 421 displaced, 159 not
+comparable (271 compared). Dumped the reference bytes for the DRIFT rows: they are
+plain data (floats 1.0/0.5, plant/statistic string tables). `plt_PlantInfo` in
+`plant.c` declares exactly the reference bytes (entry 0 is b7 01 "TANNE", 3, 1, 4
+and so on), yet verify calls it DRIFT at first byte 0.
+
+Cause: the data section content offset differs from the reference placement, so
+the built bytes at the inventory VA are the prefix pad, not the symbol. That is
+the same content-offset trade recorded in rounds 148/149: the pads are tuned for
+same-offset matching, not for native data addresses. So the 77 DRIFTs are not
+source-value bugs and changing initializers would not move the score.
+
+Image unchanged at raw 275,538, informative 94,132; lint 0 errors / 0 warnings,
+data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: include set membership is not the d3dx8 surplus
+
+Forced vs organic extraction: without the include list the d3dx8 block is
+0x3AFAD (85 members); with it 0x69B40 (100 members) and the reference is 0x62557.
+The include list forces 15 members (the 13 plus loadutil and loadx as
+dependencies), createmesh alone contributing 129,781 bytes.
+
+Tried trimming the include list to reference-present symbols only: the naive
+trim failed to extract jdmaster (its jpeg helpers are static COMDATs and its own
+externals were already defined elsewhere), so createmesh's jpeg references went
+unresolved. Trimming only the 173 createmesh externals that are not reference
+hits produced a byte-identical image (raw 275,538, informative 94,132), so the
+member still contributes the same code: the surplus is not removable by token
+selection. A geometry-only subset (946 of 969 tokens) scored 275,352 / 94,081,
+slightly worse, so the effect members stay.
+
+Restored the 969-token set and relinked: imports/layout/headers match, lint 0
+errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: pad search exhausted at finer and coarser steps
+
+Next text-pad batch (+/-0x40) reverted all eight probes; coarse +/-0x400 probes
+on the four largest pads also reverted (0x5B88B0 93,963/94,095; 0x43DB70
+65,655/65,711; 0x44FC70 85,045/85,067), so the ensemble is a local optimum at
+informative 94,132 in both directions.
+
+Also tried control-flow variants for `fcn_0044d7e0` (combined break condition,
+swapped operand order): identical 228 bytes / 59 structural, source restored.
+Image raw 275,538, informative 94,132 (3.95%), lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: verify cache checked, one stale reading explained
+
+The earlier RELOC 100% reading for `fcn_00473610` looked like a cache that missed
+a source edit. Controlled check: break a known RELOC body (`fcn_004102a0`,
+0x662a2C -> 0x662a30) and run the default `verify`; it reports NEAR_MATCHING
+97.3% immediately, so the cache does invalidate on source changes. A
+`verify --no-cache` pass settles `fcn_00473610` at NEAR_MATCHING 63.6%; the old
+RELOC reading came from the GA run's own record, not from a broken cache.
+
+Source restored, image rebuilt: raw 275,538, informative 94,132 (3.95%), status
+RELOC 3,714, SIZE_MISMATCH 1,057, EXACT 421, NEAR 34, STUB 2. Imports/layout/
+headers match, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
+
+## 2026-11-03: back to the raw metric; 276,101 / 94,121
+
+The objective is byte identity, so the raw same-offset count (which credits
+matching zero bytes too) is the right primary number again; the informative
+count stays as the anti-padding check. Switched the section pads back to the
+raw-best pair R 0x1000 / D 0x2B000: raw 276,101, informative 94,121.
+
+A raw-objective pad pass over the six largest text pads (+/-0x40) reverted every
+probe (0x5B88B0 276,064/276,010, 0x43DB70 244,753/245,536, 0x44FC70
+265,921/266,012, 0x4582D0 275,673/275,645), so the pads are locally optimal for
+raw as well. Imports/layout/headers match, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: raw-versus-informative trade measured; informative-best kept
+
+Swept the data prefix pad at the raw objective with informative supervision:
+D 0x30000 raw 274,242 / informative 92,957; 0x38000 278,023 / 92,800,
+0x40000 291,782 / 92,532, 0x50000 291,702 / 92,452. At 0x40000 the extra raw
+comes from .data 141,613, .data1 2,870 and .rsrc 3,384 zero-on-zero matches
+while text informative falls to 91,762.
+
+goal.md requires no invented padding in the finished tree and faithful source,
+so the informative-best configuration stays: R 0x1000 / D 0x2B000, raw 276,101,
+informative 94,121 (3.95%). Imports/layout/headers match, lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: extent-only rows are placement-limited; linked EXACT refreshed to 471
+
+Found 17 SIZE_MISMATCH rows at 99.5% or better instruction match. Diffing four
+of them shows the only differences are trailing nops: 0x461560 80 vs 72 bytes
+with 8 nops, 0x45DA70 128 vs 115, 0x4E32C0 224 vs 218, 0x4B6A00 240 vs 239. The
+targets' extents include the compiler's 16-byte alignment padding.
+
+They are still unreachable: dumping the built image at those VAs shows unrelated
+code, because these functions are misplaced by the current layout, not merely
+short. Padding the bodies would not place them.
+
+`verify --text --raw-link` re-earned linked EXACT after the rebuild: EXACT 471,
+RELOC 3,664, SIZE_MISMATCH 1,057, NEAR 34, STUB 2. Lint 0 errors / 0 warnings,
+data conflicts 0. Image raw 276,101, informative 94,121. No GA was run.
+Decision: Lead.
+
+## 2026-11-03: stochastic pad search confirms a tight local optimum
+
+18 random pad probes (steps 0x100 to 0x2000 across all 89 pads) all rejected:
+even 0x20 -> 0x10 on a small pad drops informative to 42,755-74,898, because each
+pad shifts the functions after it. Best stays 276,101 / 94,121. Pad audit still
+reports missing 0 and the one intentional 005B88B0 mismatch (4128 -> 3936).
+
+A global pad re-optimisation (rather than per-pad moves) needs an object-level
+link simulator that can score candidate layouts without a Docker link per probe;
+that is now the main layout gap. Image rebuilt and confirmed at raw 276,101,
+informative 94,121. No GA was run. Decision: Lead.
+
+## 2026-11-03: archive alignment ceiling measured; not worth a shift
+
+Built a byte-level layout simulator (`.scratch/organize/sim_layout.py`) that
+replaces text-pad ranges in the built image and scores against the reference.
+Identity reproduces the image exactly (raw 276,101). A single-cut shift analysis
+for the 0x43ED the archive block sits late: for every 0x10-aligned cut point in
+.text, deleting 0x43ED there and comparing the shifted tail to the reference
+peaks at 266,415, which is 9,686 bytes *worse* than the current 276,101.
+
+So even a perfect archive alignment cannot pay for the application-text matches
+the shift destroys; the current offset is the global compromise, not a tuning
+miss. This closes the alignment line: further layout work would need reordering
+that keeps application functions on their offsets while moving libraries, which
+a single-order link cannot express.
+
+Image unchanged: raw 276,101, informative 94,121 (3.95%), lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: layout simulator only valid for small deltas
+
+Extended the simulator to a numpy scorer and ran coordinate descent over all 89
+text pads. It reported 297,357 (+21,256) from four changes, but the real build of
+that ensemble scored 273,798 (-2,303). The proxy is only trustworthy for small
+shifts: growing a pad by 0x400 moves every later byte, and the real link also
+recomputes relocations and relayouts .rdata/.data VAs, which the byte-shift model
+does not. So the optimizer's large-delta wins are artifacts.
+
+Pads were restored from `tlead-manifest.json` plus the two tuned exceptions
+(005B88B0 0xF60, 004582D0 0x890) and the R 0x1000 / D 0x2B000 section pads;
+rebuild confirmed raw 276,101, informative 94,121. Pad audit: missing 0, the one
+intentional mismatch. Imports/layout/headers match, lint 0 errors / 0 warnings,
+data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: scaled-value hypothesis for fcn_004131e0 tested and rejected
+
+Target keeps the scaled value both on the x87 stack and in a stack slot
+(`fst [esp+0x10]`, not `fstp`): row terms 1-2 multiply by stack copies of scale
+and neg, row term 3 multiplies the memory copy. Tried replacing the hole-based
+store with a dedicated `float scaled` local read through a volatile cast: the
+extra local grows the frame to 0x74 and the diff worsens to 39 structural (frame
+and every stack offset shift). The frame is already exactly 0x70 only when no
+extra slot exists, so the target source must reuse one of the existing slots for
+the scale copy; no C arrangement tried reuses it while keeping the stack copy.
+
+Source restored: SIZE_MISMATCH 192 vs 183 as before. Image raw 276,101,
+informative 94,121, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
+
+## 2026-11-03: fcn_004131e0 narrowed to the third row's evaluation order
+
+Full instruction listing shows rows 1 and 2 already match byte-for-byte
+(instructions 14-36 exact), including the `fst [esp+0x10]` scale copy, the
+stack-relative `fmul st(2)` pairs and the `faddp` chains. Only the third row
+differs: the target evaluates m[10]*neg first, then m[6]*scale, then
+m[2]*scaled; every C shape tried evaluates m[2] first or re-associates
+(parenthesised left-to-right, m2-first, nested m10-term, statement trio), all at
+183 bytes and 13 structural. Expression order is again not source-controllable.
+
+The row would still need the nine trailing alignment nops. Source restored:
+SIZE_MISMATCH 192 vs 183. Image raw 276,101, informative 94,121, lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: rdata pad sweep; the two metrics disagree by eleven bytes
+
+R sweep at D 0x2B000, with rdata and data informative broken out: R 0x0 raw
+271,027 / informative 92,887 (rdata 347, data 823); 0x800 275,161 / 94,079
+(358, 2,043); 0xC00 275,538 / 94,132 (378, 2,077); 0x1400 274,272 / 93,220
+(391, 1,091); 0x2000 272,399 / 92,971 (280, 1,168). R 0xC00 is the informative
+best, R 0x1000 the raw best by 563 bytes.
+
+Kept R 0x1000 because the goal is raw-file identity: 276,101 / 94,121.
+Imports/layout/headers match, lint 0 errors / 0 warnings, data conflicts 0. No GA
+was run. Decision: Lead.
+
+## 2026-11-03: server.dll is one 16-byte shift away from alignment
+
+Server is much closer than the TL client: sections are size- and address-exact
+(.text 143,360, .rdata 12,288, .data 57,344, .reloc 69,632 at the reference
+addresses), .rdata matches 12,270/12,288 and .data 57,331/57,344, imports/layout/
+headers all match. Text is 72,931/143,360; placement splits 151 correct and 100
+misplaced, and every misplaced function is exactly -16.
+
+The shift starts inside `friedhof_logic.c`: `gv_MoveSlotEntry` (SERVER
+0x10011940, reference size 674) compiles to 672 bytes here. With 674 the next
+function starts at 0x10011BF0 as in the reference; at 672 it starts at
+0x10011BE0, so 16-byte alignment drags all 100 later functions down by 16. The
+diff shows a missing 5-byte call and a 3-byte absolute-displacement form around
+the `gm_AddObjekt` tail, and some source lines reference `g_slot_table` where the
+target uses `g_entity_slot_table`/`g_entity_id_field`.
+
+Making that function 674 bytes would shift 100 EXACT/RELOC bodies onto their
+reference VAs. Next round: repair the tail (call plus global operands) at source.
+No GA was run. Decision: Lead.
+
+## 2026-11-03: server tail repair attempt; compiler normalises it away
+
+The target tail of `gv_MoveSlotEntry` zero-extends the slot-table word
+(`xor ecx,ecx; mov cx,[eax*4+g_entity_slot_table]`) then loads the object id from
+`[eax*4+g_entity_id_field]`. Forcing the slot word through an explicit
+`unsigned int slot_word` local and passing that to `gm_SubObjectNoKill` compiles
+to the same 672 bytes with the same 29 structural diffs; the compiler keeps its
+own register form. Source restored.
+
+The 16-byte alignment lead stands: if this function reaches the reference 674
+bytes, all 100 misplaced server functions land on their VAs. Lint 0 errors /
+0 warnings, data conflicts 0, TL image unchanged at raw 276,101 / informative
+94,121. No GA was run. Decision: Lead.
+
+## 2026-11-03: slot-word source forms do not reproduce the target's xor+mov
+
+Tried the remaining plausible forms for the slot-table word in
+`gv_MoveSlotEntry` (unsigned-short array indexing with the 378-word stride, and a
+temporary `unsigned short word`): both still compile to 672 bytes with 29
+structural diffs. The target's `xor ecx,ecx; mov cx,[eax*4+g_entity_slot_table]`
+zero-extension form does not appear from any source shape tried; the compiler
+reuses its already-zeroed ecx and skips the xor, which is where the two bytes go
+missing. Source restored.
+
+Server lead unchanged: 674 vs 672 keeps 100 functions -16 early. Lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: server shift would gain 69,584 text bytes but costs the section offset
+
+Simulated the +16 tail shift: keeping the image prefix and moving the post-boundary
+bytes up 16 matches 74,399 of the remaining 75,216 .text bytes (prefix 68,116 +
+tail 74,399 = 142,515 of 143,360) against the current 72,931. That is +69,584 in
+.text.
+
+It cannot be taken by padding: the image would grow 16 bytes, moving .rdata and
+.data content by 16 and losing the 69,601 bytes those sections currently match.
+The reference keeps total .text at 143,360, so the fix must be a real 674-byte
+`gv_MoveSlotEntry` (no extra total) rather than an inserted 16-byte gap.
+
+Rounding audit of the 251 server functions shows only two deviations from
+reference rounding: `gv_MoveSlotEntry` 672 vs 688 (−16) and
+`gm_ClearObjektResources` 144 vs 16 (+128, an extent that spans a non-function
+gap). Everything else rounds exactly. Lint 0 errors / 0 warnings, data conflicts
+0. No GA was run. Decision: Lead.
+
+## 2026-11-03: server verify state; library attribution is the remaining lead
+
+`verify -t server.dll`: 316 rows, 315 pass, one SIZE_MISMATCH
+(`gv_MoveSlotEntry`). Library providers: 65 compiled, 145 prebuilt, 115
+unresolved; inventory 646 entries. The 115 unresolved library rows are the
+remaining attribution work for the server, and the layout phase split needs the
+inventory-to-row mapping to explain the 16-byte rounding difference.
+
+Slot-word variants tried this round added nothing: a volatile short read gives
+680 bytes / 45 structural, the masked cast 672 / 29. Source restored. Lint 0
+errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
 ## 2026-10-29: stop tracking the local DirectX archive
 
 Removed references/dxsdk8/lib/d3dx8.lib from the Git index at the maintainer's
@@ -7127,6 +7410,46 @@ request. The existing /references/dxsdk8/ ignore rule now covers the archive;
 no redundant rule was added. Its local bytes remain unchanged. Verification:
 SHA-256 before/after agrees, git check-ignore resolves the existing rule, and
 the archive is absent from the index. No native build was needed.
+
+## 2026-11-03: server function size resists flags and promotion tricks
+
+Flag sweep on `gv_MoveSlotEntry` (per-VA test): only /O2 and /Ox give 672;
+/Ot and /Ow 817, /Os 757, /O1 555, /Og 643, /Ob1//Oy//Oa 817, plus /G5,/G6,/GX,
+/Gf,/GA,/GB,/GE,/Gi,/Gm,/Gr,/Gz,/GD all 672 or unchanged. No flag set produces the
+reference 674.
+
+Also tried an unprototyped redeclaration of `gm_SubObjectNoKill` and an
+unprototyped function-pointer call so the unsigned-short argument promotes
+without an explicit cast: both still 672 bytes / 29 structural. Source restored.
+
+Server remains one 2-byte codegen difference from a 69,584-byte text alignment
+win. Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: server tail shift would also align the import thunks, but the
+## section budget forbids it
+
+Zero-extended season local variant also compiles to 672/29. The +16 tail shift
+benefit is not limited to game code: the shifted tail match includes the linked
+library block and import thunks, whose symbols (_strdup, _RtlUnwind@16) sit at
+0x10023802 and 0x10023830 in our map. Aligning them would push text to
+0x10024010, past the reference .text raw end 0x10024000, so a padded shift is
+impossible without changing the section size; the 2-byte function remains the
+only route.
+
+Source restored. Lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
+
+## 2026-11-03: seven more slot-argument shapes, all 672 bytes
+
+Tried int cast, `+ 0`, `^ 0`, nested `unsigned short`, nested `int`, nested
+`unsigned int` with a shift, and an extra `(unsigned short)` cast for the slot
+word in `gv_MoveSlotEntry`. Every shape compiles to 672 bytes with the same 29
+structural diffs; the target's redundant `xor ecx,ecx` stays out of reach of
+source-level expression shaping. File restored from the saved original.
+
+Server lead remains: one 2-byte codegen difference blocks a 69,584-byte text
+alignment win. Lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
 
 ## 2026-10-29: retire disposable scratch runtimes and root experiments
 
@@ -7145,3 +7468,428 @@ through the cleanup request. Evidence: .scratch/scratch-cleanup-20261029/
 candidates.json, removed.json and summary.json. Verification: deletion manifest,
 protected-path assertions, worktree inventory and ignore-rule checks. No native
 source, metadata or build output was changed; no rebuild was needed.
+
+## 2026-11-03: declaration order does not move the server function off 672
+
+Twelve local-declaration permutations (including reversed and ten seeded
+shuffles) all compile `gv_MoveSlotEntry` to 672 bytes with the same 29 structural
+diffs; the locals sit on the stack, so register allocation and value tracking are
+unchanged. File restored.
+
+The 2-byte gap is codegen-local: the target zero-extends the slot word with a
+redundant `xor ecx,ecx` that our compiler omits because ecx already carries the
+zero-extended season. No source shape tried (expressions, casts, promotions,
+flags, declaration order) reintroduces it.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: guard, unused-local and punning probes all miss 674
+
+Guard restructuring (goto the shared -1 epilogue) leaves 672/29; splitting the
+guard condition gives 680/203. Unused locals of five types change nothing.
+Hoisting an `unsigned short*` alias to the slot table (top or late assignment)
+still folds to absolute addressing and stays 672. Type punning through a 32-bit
+zero then a word store gives 691/56, a union with `i = 0` 691/56, and a union with
+only the word store 683/47.
+
+Cross-target metadata also confirms the split: GOLDTL holds the same function at
+672 and SERVER at 674, so the server source genuinely differs by those two bytes,
+but no C shape tried reproduces the target's redundant zero-extension. Source
+restored. Lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
+
+## 2026-11-03: zero-init shapes and a block-scope table redeclaration
+
+Zero-init expressions (`v = 0; v |= word`, `v += word`, mask-then-and, shift by
+zero) all fold to 672/29. A block-scope `extern unsigned short
+g_entity_slot_table[]` redeclaration is rejected against the header type and
+fails the compile; the file was restored from the saved original.
+
+Added two capability entries to upstream `docs/IDEAS-GUILD.md` (rounding audit
+for padded extents, padding-only classification for extent mismatches) and
+committed as 68b80c1b after the hook suite passed. Lint 0 errors / 0 warnings,
+data conflicts 0, TL image unchanged at raw 276,101 / informative 94,121. No GA
+was run. Decision: Lead.
+
+## 2026-11-03: upstream rounding audit implemented (19bc1434)
+
+The IDEAS entry from round 201 is now a real option: `rebrew build
+check-text-placement --rounding` compares each correctly placed function's linked
+extent (distance to the next actual symbol) with its reference size rounded up to
+16 bytes, and reports the deviation plus the number of later functions whose own
+offset equals it. The last actual symbol is skipped because its extent is
+unknown; the audit is diagnostic and does not change the exit code.
+
+Evidence: `expected_text_function_extents` in `verify_hash.py` adds the
+annotation sizes; `audit_rounding` in `text_audit.py` computes the rows; the
+`--json` payload carries a `rounding` object. Tests cover a short extent with two
+following shifted functions, matching extents, and skipped misplaced rows (28
+passed in test_text_audit.py). Docs: CLI reference and CHANGELOG Unreleased.
+
+Project check on the server build returns exactly one deviation:
+`gv_MoveSlotEntry` 672B against padded 688B (-16), with 100 later functions
+sharing the offset, matching the round-192 manual analysis.
+
+No GA was run. Decision: Lead.
+
+## 2026-11-03: rounding audit limited to short extents (dfc32434)
+
+Ran the new audit on both client builds. The TL target reported 55 deviations,
+but all but one were positive: layout pads between annotated functions inflate
+the linked extent, so "longer than padded reference" is noise, not a codegen
+finding. Server reported the known single -16.
+
+Changed the audit to report only shorter extents, where a short body really does
+push every later function early. Docs, CLI help and CHANGELOG updated; a test
+covers a pad-inflated long extent staying unreported (29 passed). The upstream
+commit was amended to dfc32434.
+
+Fresh lead from the TL target: `fcn_00449630` (0x449630) has reference size 1131
+(padded 1136) and linked extent 1104, deviation -32, with no later function
+sharing the offset. Server still reports exactly one short deviation,
+`gv_MoveSlotEntry` -16 with 100 followers.
+
+No GA was run. Decision: Lead.
+
+## 2026-11-03: placed-mismatch rows ranked by residual structural count
+
+Diffed all 39 SIZE_MISMATCH rows that are already at their reference VA and
+sorted them by unmasked structural instructions (`.scratch/organize/placed-diffs.json`):
+0x4131E0 13, 0x40ED40 17, 0x401ED0 SaveBMP24 20, 0x450E90 23, 0x41BF90 30,
+0x40F1C0 32, 0x436A00 33, 0x41BDC0 44, 0x451380 44, 0x44D7E0 59, 0x436930 68,
+0x440670 75. The first four are already-documented codegen walls; 0x40ED40
+(400 vs 398 bytes, 85.9 percent matched) and 0x451380 (336 vs 322, 65.5) are the
+unattempted ones and are the next manual leads.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: fcn_0040ED40 tail decoded to an options-copy dance
+
+The 17 structural diffs sit in the `D3_ANIMATION_OPTIONS` block before the
+`fcn_00434970` call. The target builds the by-value argument from a stack copy:
+it keeps the original byte in `al`, sets and clears individual flag bits
+(`or dl,2`, `and al,0xfd`, `or al,1`), stores the copy at `[esp+0x14]`/`[esp+0x1c]`,
+then materialises the 12-byte argument on the stack before `push`ing it. The
+candidate reaches the same call with the fields written in source order and
+without the extra register copy dance, hence the different instruction order.
+
+The source currently writes `*(int*) &options = 0;` after `memset` and sets
+`mode`, then `layer`, `queue`, `mode` again, `loop`, `reverse`. The target's bit
+twiddling suggests it modified the struct through bitfields after a copy, which
+is a source-shape question for the next round. Lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: fcn_0040ED40 field-order and copy variants all worse or equal
+
+Option-block variants: dropping the extra `*(int*) &options = 0` and the second
+`mode = 0` gives 392B/39 structural; loop-first order 392/39; keeping `mode = 0`
+but moving `queue` last 396/34; dropping `mode` entirely 390/39. An explicit
+`D3_ANIMATION_OPTIONS copy = options; fcn(..., copy)` compiles to the same
+398B/17 as the baseline, so the compiler removes the copy. The baseline
+(398B, 94 exact, 17 structural) stays.
+
+Reading the target block again: `eax` becomes 1 for the flags dword while the
+byte-8 value is built in `dl` and the argument's dword 8 is written from `eax`,
+so the reference's queue/blend encoding does not match the current header's
+bitfield order. That header question is the next lead; it also affects every
+caller of `D3_ANIMATION_OPTIONS`. Source restored. Lint 0 errors / 0 warnings,
+data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: global tool refreshed; /Ob0 does not change the server function
+
+Reinstalled the global `rebrew` from upstream main (6.8.0 including dfc32434) so
+the project CLI carries the rounding audit. Verification: `rebrew build
+check-text-placement --built build/server.dll -t server.dll --rounding --json`
+reports the one known deviation (`gv_MoveSlotEntry` -16, 100 followers).
+
+`/O2 /Gd /Ob0` and `/O2 /Gd /G6 /Ob0` both compile the function to 672 bytes, so
+disabling inlining does not reintroduce the reference zero-extension either.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: more walls on the two open leads
+
+Server: a file-scope `unsigned short* volatile slot_table_words` alias for the
+slot table compiles the function to 678B with 145 structural diffs, so forcing a
+memory load is worse than the current 672/29. Source restored.
+
+Client: `fcn_00451380` (336 vs 322, 44 structural) differs in the cross-product
+block. Wrote the constant last, reversed the three terms, swapped the product
+operands, and parenthesised the tail sum; all compile to 322B/44 except the last
+(322B/48). The compiler normalises the expression back to the same form, so the
+target's constant placement is again not source-controllable. Source restored.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: TL section geometry compared; rdata is 28KB short
+
+Dumped both PE section tables. Reference: .text raw 2,494,464, .rdata 77,824,
+.data 266,240. Built: .text 2,543,616 (+49,152), .rdata 49,152 (-28,672), .data
+671,744 (+405,504), .data1/.rsrc equal. The score tool compares section content
+by section, not by file offset, which is why 127,247 .data bytes still match
+inside the 266,240-byte reference window.
+
+R 0 was probed to see whether the rdata content was merely shifted: .rdata same
+fell to 2,918 (informative 347) and the file score to 271,027 / 92,887, so the
+rdata content itself is not aligned at native offset either; the built section is
+28,672 bytes smaller than the reference. Byte identity needs the missing rdata
+content (library literals among it) plus a 405KB-smaller data section, which is
+the same library/layout wall seen in earlier rounds.
+
+Pads restored to R 0x1000 / D 0x2B000 and rebuilt: raw 276,101, informative
+94,121. Lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
+
+## 2026-11-03: data lead pass cannot help; the data section itself is oversized
+
+Try 1: run `scripts/gen_data_lead.py 0x4000` with the current pads. It adds no
+pads because every data symbol is *later* than its reference VA (the prefix pad
+plus earlier content), so there is nothing to lead.
+
+Try 2: drop the data prefix pad (R 0x1000, D 0), rebuild, then run the lead pass.
+Still zero pads: data symbols remain later than their reference VAs. Measurements
+without the pad: file raw 223,440, informative 93,698, .data same 74,106 with
+informative 1,455; .text 136,146 / 91,872.
+
+Section accounting: built `.data` raw is 495,616 bytes without the pad against
+266,240 in the reference, and nonzero density is 259,333 against 122,216. The
+extra content sits outside the 430 metadata rows: a scan for initialized globals
+whose reference bytes are all zero found none, so the excess is compiled data that
+the metadata does not enumerate. Matching the data section therefore needs the
+same unreversed-source work as the text block, not another pad.
+
+Baseline restored (R 0x1000 / D 0x2B000): raw 276,101, informative 94,121. Lint 0
+errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: data overhead is scaffolding, not unmapped game data
+
+Inventory of initialized layout pads in the TL source tree: 88 arrays, 846,463
+bytes total, led by `_dpad_prefix_zeros` 176,128, `_dlead_GOLDTL_fcn_004b41b0`
+63,138, `_dpad_143b3e4` 53,208, `_dpad_6abb08` 41,240, `g_data_restore_gap`
+39,424, `_dpad_fb91c0` 38,208, `_dpad_699368` 37,424, `_dpad_699388` 37,392.
+These carry reference bytes (or zeros) to shift globals to their VAs. The
+metadata-attributed initialized globals are only four arrays totalling 11,696
+bytes (alchemy random table, producer ids, stat table, log format table).
+
+So the 229,376-byte `.data` raw excess (495,616 against 266,240 at D 0) is
+scaffolding overhead, not extra game data: the pads are the only remaining source
+of that size. They cannot be removed without displacing the globals they align,
+which is the same single-order layout trade already measured for text. No game
+data deletion is warranted.
+
+Baseline image unchanged: raw 276,101, informative 94,121. Lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: ten parallel SIZE_MISMATCH batches; 4,156 linker-fill extents repaired
+
+Dispatched the 1,049 SIZE_MISMATCH rows as ten file-disjoint batches (~105 rows
+each, `.scratch/teams/batch-N.json`) to ten reused teammates (team member limit
+is 64, so `tl-w01..w10` were resumed rather than spawning new members). All ten
+returned reports; the shared Docker toolchain saturated at load 60-200, so most
+teammates measured 8-21 rows in the time available.
+
+Common finding in every report: the stored native SIZE of these rows includes
+the linker's NOP fill after the last `ret`, so an object can never reach SIZE and
+many rows were walled for a metadata reason, not a body reason. Two rows were
+promoted by teammates with `rebrew test --fix-sizes` (0x0045D3F0 adler32 EXACT,
+0x004EAFE0 RELOC); kept source improvements: 0x004BB980 RELOC (inlined strlen
+form), 0x00536B10 (volatile global, unsigned branch), 0x00471C80 (hoisted temp).
+
+Central repair: scanned the whole TL inventory with capstone for a reachable
+terminator followed only by 0x90/0xCC fill, found 4,156 rows carrying 34,230 fill
+bytes, and applied `rebrew binary repair-extents` in 100-row digest-guarded
+chunks. Then aligned the stored SIZE of every repaired row with the inventory
+through the locked batch metadata writer (4,147 aligned, 9 rows have no function
+row). Re-tests: 0x004B6A00 RELOC 239/239, 0x004611B0 RELOC 849/849, 0x004E32C0
+RELOC 218/218, 0x0049A880 NEAR 505/505, 0x004EA350 NEAR 259/259.
+`verify --text --raw-link` now records EXACT 458, RELOC 3,638, SIZE_MISMATCH
+1,029 (from 1,049), NEAR 94, STUB 9.
+
+Reverted one kept edit: `GOLDTL.fcn_00580e20.c` called `fcn_0057ecf0`, but that
+address is bound to the GOLD-only file `GOLD.fcn_00576750.c` in the TL metadata,
+so the link broke (LNK2001); restored the previous fcn_00576750 calls. Two newly
+classified STUB rows got blocker explanations (0x00572760, 0x005756F0). Rebuilt:
+raw 276,100, informative 94,121 (the -1 is the kept source edits changing bytes
+without a layout shift). Lint 0 errors / 0 warnings, data conflicts 0, imports/
+layout/headers match. No GA was run. Decision: Lead.
+
+## 2026-11-03: the residual 100-percent rows are merged code, not fill
+
+After the 4,156 extent repairs, 52 rows still report SIZE_MISMATCH with a
+100-percent instruction match. Diffed all 52 (`.scratch/organize/diff-100pct.json`):
+in every case the object is a prefix of the reference extent, and the structural
+count equals the number of extra bytes, so the tail is extra code, not a body
+defect.
+
+Inspected the nine rows whose delta is 8 bytes or less and read the reference
+tail bytes directly. Three are linker-shaped (`0x41F5F0`, `0x4772E0`,
+`0x5386E0`: `90 90 C3` or `C3`). The other six are a second function merged into
+the extent: `mov eax,N; ret` bodies in `0x4B99E0` (N=0x400), `0x4C75E0` (N=1),
+`0x4EDEC0` (N=3), `0x506DF0` (N=2), and a jump tail in `0x5EAAD0`. None has a
+following inventory row at the split point, so trimming them would orphan real
+code.
+
+Recorded the capability gap upstream: `repair-extents` needs a digest-guarded
+split that shortens the head to the first terminator and admits the remainder as
+a new inventory row (commit ed630d4d). All 52 rows are blocked on that tooling
+change, not on C.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: five merged extents split into two rows each, all promoted
+
+The round-213 gap entry claimed `repair-extents` cannot split an extent. That is
+true for a single call, but the composition works when ordered: shrink the head
+with one digest-guarded repair, `--add-missing` the tail row, then align the
+head's stored SIZE through the metadata writer. Did that for the constant-return
+and jump-thunk tails:
+
+- 0x4B99E0 486 -> 480, tail 0x4B9BC0=6 (`mov eax,0x400; ret`): RELOC 480/480.
+- 0x4C75E0 target 22 -> 14, tail 0x4C75F0=6 (`mov eax,1; ret`): EXACT 14/14.
+- 0x4EDEC0 406 -> 398, tail 0x4EE050=6 (`mov eax,3; ret`): RELOC 398/398.
+- 0x506DF0 38 -> 32, tail 0x506E10=6 (`mov eax,2; ret`): RELOC 32/32.
+- 0x5EAAD0 21 -> 16, tail 0x5EAAE0=5 (`jmp +0xb` thunk): RELOC 16/16.
+
+The three pure filler+ret tails (`0x41F5F0`, `0x4772E0`, `0x5386E0`) were left
+alone: the tail is `90 90 C3`/`C3`, which may be alignment plus a stray ret and
+does not establish a function boundary.
+
+Updated the upstream IDEAS entry to document the working composition and ask for
+an atomic `--split` (amended commit d598d5ec). Lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: merged leaf stubs split off twelve more extents, all promoted
+
+Extended the round-214 split recipe to every small-delta 100-percent row. For
+each, captured the candidate's last instruction and the reference tail
+(`.scratch/organize/small-delta-tails.json`). The tails are alignment NOP/INT3
+fill followed by one or two *leaf stubs*: `ret` (a void function returning
+nothing), `xor eax,eax; ret` (`return 0`), `mov eax,imm32; ret`,
+`jmp rel32`. That grammar is strong evidence the bytes are separate functions,
+not the head's missing body, and it is why the prologue-based extractor missed
+them.
+
+Split rows (head trimmed to the compiled body size, each stub admitted with
+`--add-missing`, head SIZE aligned):
+- `0x4B99E0`/`0x4C75E0`/`0x4EDEC0`/`0x506DF0`/`0x5EAAD0` (round 214, relisted)
+- `0x5386E0` 32 (+`ret` at 0x538700), `0x53F460` 73 (+`ret`), `0x5453D0` 60
+  (+two `ret`), `0x5490A0` 35, `0x549240` 140, `0x5639A0` 484 (+two `ret`),
+  `0x570960` 1926 (+`xor eax,eax; ret`), `0x5A7320` 203, `0x5C8090` 42,
+  `0x5DF8F0` 312 (+`xor eax,eax; ret`).
+- Left `0x572A50` alone: its candidate ends on `add [eax],al`, so the tail may be
+  data, not a boundary.
+
+Re-tests: 0x5386E0 RELOC 32/32, 0x53F460 RELOC 73/73, 0x5DF8F0 RELOC 312/312,
+0x5639A0 RELOC 484/484, 0x4C6EA0 RELOC 42/42, 0x4E46E0 RELOC 56/56. Inventory
+and metadata backed up beforehand (`.scratch/organize/inv-tl.bak.json`,
+`functions.bak.toml`); lint 0 errors / 0 warnings, data conflicts 0. No GA was
+run. Decision: Lead.
+
+## 2026-11-03: six larger merged extents split; three EXACT, three RELOC
+
+Extended the split to the six 100-percent rows with deltas over 30 bytes. Each
+tail was classified from the candidate's last instruction plus capstone coverage
+of the reference remainder (`.scratch/organize/large-split-plan.json`): two are
+fill plus a pair of `ret` stubs, four are one contiguous function-like block that
+decodes end to end with a terminator (coverage 1.0).
+
+- 0x43F640 head 66 (+`ret` at 0x43F690, +`ret` at 0x43F6A0): EXACT 66/66.
+- 0x45E860 head 367 (block 1067 at 0x45E9D0): EXACT 367/367.
+- 0x47A2E0 head 17 (+`ret` at 0x47A300, +`ret` at 0x47A310): EXACT 17/17.
+- 0x5E51F0 head 442 (block 1685 at 0x5E53B0): RELOC 442/442.
+- 0x5E6650 head 489 (block 152 at 0x5E6840): RELOC 489/489.
+- 0x64E1C7 head 9 (block 28059 at 0x64E1D0): RELOC 9/9. This is the 9-byte stub
+  that had been standing in for the 28 KB CRT allocator region.
+
+Inventory is now 6,682 rows (was 6,625): 57 new owners, all reviewed. Head SIZE
+aligned through the metadata writer. Lint 0 errors / 0 warnings, data conflicts
+0. No GA was run. Decision: Lead.
+
+## 2026-11-03: second SIZE_MISMATCH parallel pass; residual rows are body work
+
+Re-verified without cache after the split rounds: EXACT 424, RELOC 3,721 (passed
+4,145 of 5,228), SIZE_MISMATCH 979 (from 1,049), NEAR 95, STUB 9; inventory
+6,682. Regenerated ten file-disjoint batches from that list (98 rows each) and
+resumed tl-w01..w10 against the repaired extents.
+
+Reports received from six of ten before this round closed: tl-w01, w02, w04, w05,
+w07, w10. No row reached EXACT/RELOC and no C edit was kept. That is the useful
+result: with padding gone, the remaining SIZE_MISMATCH rows are real body
+differences (allocator walls, x87 scheduling, jump-table lowering, missing
+blocks), not extent artifacts. Sample: 0x427600 deferred stack adjust, 0x4EE160
+x87 sum kept in st(0), 0x502FE0 extra `test al,al` from a cast form, 0x5246E0
+induction base 0x99EC28 vs 0x99EC24, 0x4DC6E0 obj in edi vs esi.
+
+Two inventory actions from their reports:
+- 0x57DE80 208 -> 196: body plus 9-entry switch table end at 0x57DF44, the last 12
+  bytes are NOP fill.
+- 0x42E3B0 19 -> 10 with a 3-byte tail row at 0x42E3C0 (`mov al,1; ret`) after six
+  fill bytes.
+
+Deferred to the data-in-extent question: 0x4C3A50 (jump table at +0x15E),
+0x46B2B0 (byte-map table), 0x4F5CC0 (switch byte map), 0x572A50 (address table
+after the ret). Those extents hold real data, so a function split would orphan
+data; they need data ownership rows, not another trim.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-03: round-217 pass closed; one body fix, five inventory actions
+
+All ten teammates reported. With the repaired extents the residual SIZE_MISMATCH
+rows are body work: no row besides one moved, and every agent confirmed the
+padding-only class is gone.
+
+Kept body fix: 0x4B3CE0 (41/92 -> 58/93). Root cause was a byte-address scan
+base (0x680BD0, not a g_ int index scaled by 4), first scan from base+4 to
+base+0x544 with signed compare, second scan bounded by 0x6810F4 with unsigned
+compares, return base+i*0x1c. Residual is the compiler folding the loop bound to
+an immediate instead of loading 0x6810F4 into ECX once.
+
+Inventory actions from their fenced reports:
+- 0x57DE80 208 -> 196 (12 NOP fill after body plus switch table).
+- 0x42E3B0 19 -> 10 plus 3-byte tail 0x42E3C0 (`mov al,1; ret`).
+- 0x420BF0 435 -> 302 plus 131-byte block 0x420D20 that decodes end to end to a ret.
+- 0x5498B0 657 -> 627 plus two `ret` stubs at 0x549B30 and 0x549B40.
+- 0x493BE0 256 -> 249 (7 NOP fill).
+
+Still deferred as data-in-extent (function split would orphan data):
+0x4C3A50 (jump table at +0x15E), 0x46B2B0 (byte map), 0x4F5CC0 (switch byte
+map), 0x572A50 (address table after ret), 0x5498B0 neighbour data handled.
+
+Rebuilt with the kept body fix: raw 276,100, informative 94,122. Lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-11-04: twenty-agent SIZE_MISMATCH pass; extents repaired, score regressed and partly recovered
+
+Ran the 979-row SIZE_MISMATCH set through twenty file-disjoint batches (49 rows
+each) on reused teammates. Fifteen batches reported before the pass was stopped
+for consolidation; the rest were interrupted mid-batch.
+
+Wins kept (all persisted through `rebrew test`):
+- 0x4D5110 RELOC 393/393: third argument of `fcn_004c51f0` was declared `short`; the
+  reference zero-extends a 16-bit read, so the prototype takes `int` and the call
+  passes `(unsigned int)(unsigned short)*(short*)match`.
+- 0x5498B0 RELOC 627/627: float temp plus `a6 < f` compare order.
+- 0x4BB980 RELOC 158/158: `strlen` inlined into the call, `0x100 < strlen(buf)`.
+- 0x42E3B0 RELOC 10/10: body was already correct after the extent split.
+- 0x570550 17/69 (from 14): `q = p + 0x52` reordered ahead of the stores.
+- 0x536B10: `g_6b7fac` unsigned, correcting `jle` to `jbe`.
+- Inventory: 0x509570 head 65 plus 6-byte leaf stub at 0x5095C0; 0x572A50 head 820
+  plus 1-byte `ret` at 0x572D90; 0x57DE80 trimmed 208 -> 196.
+- Removed five redundant CFLAGS rows (lint W029): 0x478D50, 0x478EB0, 0x4C6F70,
+  0x4E7FF0, 0x50E170.
+
+Consolidation mistake, recorded: to clear interrupted experiments the Lead
+restored eight files to HEAD, which discarded earlier uncommitted improvements
+in those same files (0x4B3CE0's byte-address scan rewrite, 0x4FDC40's Rec44 table
+declarations, and 0x471C80/0x570550/0x536B10 variants). Six documented fixes were
+reapplied; the two table/scan rewrites were not reproducible from the reports and
+are open again. Refreshed verdicts: 0x4FDC40 SIZE_MISMATCH 168/152, 0x4B3CE0
+SIZE_MISMATCH 92/94.
+
+State after consolidation: verify --no-cache 4,147 passed of 5,228 (EXACT 424,
+RELOC 3,723, SIZE_MISMATCH 972, NEAR 99, STUB 10), inventory 6,688 rows. Rebuilt
+image raw 275,324 / informative 93,706, down from 276,100 / 94,121; the gap is
+the discarded variants above plus their layout effect, not a new build fault.
+Lint 0 errors / 0 warnings, data conflicts 0, imports/layout/headers match.
+No GA was run. Decision: Lead.

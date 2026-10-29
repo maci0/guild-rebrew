@@ -6,7 +6,7 @@ typedef struct Handler {
 
 extern Handler g_7e35c0[];
 extern int g_774650;
-extern volatile int g_6b7fac;
+extern volatile unsigned int g_6b7fac;
 int g_6a2c1c = 0xffffffff;
 extern int g_6a2c20;
 extern char g_6811b0[];
