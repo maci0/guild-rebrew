@@ -8427,3 +8427,23 @@ libraries 44/44; text placement 587 correct, 4,593 misplaced. Same as the round-
 measurement, so the anchor cleanup moved only the byte score.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the text gap splits into short bodies and extra unpaired code
+
+Paired every linked symbol with its reference size (map extent vs metadata
+`size`): 5,254 symbols, linked extents 1,888,608 bytes against 1,969,209
+reference bytes, so the reconstructed bodies are 80,601 bytes short in aggregate.
+The linked text is 2,540,754, which leaves 652,146 bytes in symbols without a
+paired reference size (library members, scaffolds, and unbound functions); the
+reference's equivalent remainder is 2,491,370 - 1,969,209 = 522,161. The unpaired
+side is therefore 129,985 bytes larger while the paired side is 80,601 smaller.
+
+Both halves need work before placement can line up: paired bodies need the
+missing bytes reconstructed, and the unpaired side needs 130 KB of code removed
+or identified as reference code the metadata does not cover yet. Also checked
+spiel.c: 26 of its symbols are byte-identical to the reference at a consistent
+-38,128 offset, which is the accumulated shift at that point in the link, and 120
+are not, because their bodies differ.
+
+State: raw 292,292 / informative 108,702, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
