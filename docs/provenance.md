@@ -7912,3 +7912,27 @@ Rebuilt: raw 275,568 / informative 93,703 (up 244 from the consolidation low but
 still 532 under the pre-batch 276,100; the remainder is not reproduced by any row
 restored so far). Lint 0 errors / 0 warnings, data conflicts 0, imports/layout/
 headers match. No GA was run. Decision: Lead.
+
+## 2026-10-30: the 532-byte gap is not the pad file; single-instruction NEAR walls
+
+Tested the two remaining hypotheses for the 275,568 versus 276,100 difference:
+
+- Pad file reverted to its HEAD form (`_rdata_prefix_zeros[0xc00]` with the older
+  declaration order): identical score, so the tuned 0x1000 pads neither cost nor
+  gain against the reference.
+- `0x4FDC40` reverted to `int[1]` tables and `0x4D5110` reverted to its 391-byte
+  body, separately: identical score each time. The variants are restored.
+
+The pre-batch 276,100 figure therefore looks like a stale measurement rather than
+a reproducible state of this tree; 275,568 / 93,703 is the current record.
+
+Attempted two single-instruction NEAR walls and reverted both:
+- `0x4B64B0` 204/204: the only difference is `jl` (reference) against `jb` for the
+  loop bound. Casting the bound to `int` changed codegen to 207 bytes; three forms
+  failed, so the unsigned compare stays.
+- `0x4A0BB0` 492/492: one SIB byte orders `[esi+eax+0x74]` against
+  `[eax+esi+0x74]`. Swapping the expression operands and the local declaration
+  order produced the same encoding.
+
+Lint 0 errors / 0 warnings, imports/layout/headers match, working tree committed.
+No GA was run. Decision: Lead.
