@@ -9008,3 +9008,23 @@ cleanly through `binary asm show`, so the caller census is incomplete.
 Not reconstructing the body on a guess. Baseline: raw 292,336 / informative
 108,675, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
 Decision: Lead.
+
+## 2026-10-30: every ch_AttachAni caller passes three arguments
+
+Decoded the remaining call sites: 0x406089 (push 0x67540C, push eax), 0x406480
+(push [edi+0x14]), 0x406616 (push 1, lea [edi+0xF0], push esi), 0x407B1F
+(push 0x675A90, push ecx), 0x409317 (push 0x675AA8/0x675A90, push 1, push esi),
+0x409B7D (push 0x675524/0x6753FC, push esi), 0x40AC71 (push 0x675524/0x6753FC,
+push ebp), 0x40C36D (push 1, push eax, push esi). Every site cleans `add esp,0xC`
+or is reached by a jump into a shared cleanup, so the call shape is three
+arguments everywhere.
+
+The body still reads `[esp+0x450]` after `add esp,0x2C`, which is the fourth
+argument slot. With three-argument call sites the only consistent explanation is a
+four-parameter definition whose callers were compiled from a no-prototype
+declaration, a shape C89 permits. Reproducing that would mean a prototype-less
+declaration in every caller, and the body rewrite is still 404 bytes over 128
+instructions. Deferred as the cost is high relative to the 404 bytes it can add.
+
+Baseline: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
