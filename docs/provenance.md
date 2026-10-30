@@ -9683,3 +9683,13 @@ png 0x62FCCE, pngread 0x62D059, pngtrans 0x630BFA and the rest at their derived 
 Current state: raw 292,559 / 2,850,888 (10.3%), informative 108,801. Updated the
 numbers in `docs/TODO.md`. Lint 0 errors / 0 warnings, data conflicts 0. No GA was
 run. Decision: Lead.
+
+## 2026-10-30: the five dropped supp members stay out at shifted positions too
+
+Tried bringing back each removed supp member at its derived VA +/-0x2000: pngerror
+292,452/292,536; jdapimin 292,524/292,523; jdapistd 292,538/292,520; jdmaster
+292,487/292,496; pngmem 292,522/292,539. All below the 292,559 baseline, so the
+omissions stand.
+
+Current state frozen: raw 292,559 / 2,850,888 (10.3%), informative 108,801. Lint 0
+errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
