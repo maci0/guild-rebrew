@@ -9122,3 +9122,18 @@ declared and used, not from the inner statement order.
 
 No body kept, sources restored. Baseline: raw 292,336 / informative 108,675, lint
 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: SaveBMP24 register home is not driven by pointer storage class or order
+
+Reference `SaveBMP24` reloads a pointer from a stack slot inside the pixel loop
+(`mov eax,[ebp+0xC]`), while our build keeps it in a register. Tested:
+
+- `unsigned char* volatile p` : 449 bytes, 97 exact / 57 structural, worse.
+- `unsigned char* volatile dst`: 457 bytes, 96 exact / 58 structural, worse.
+- two declaration orders of `src`/`dst`/`p`: no change at all (439 bytes, 140
+  exact / 11 structural).
+
+The spill/reload choice follows the whole function's register pressure and frame
+layout, not a local storage qualifier or declaration order. Restored the source;
+baseline raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
