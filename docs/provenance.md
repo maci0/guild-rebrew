@@ -8850,3 +8850,23 @@ D3DX8 build and must be reconstructed. Kept the full-anchor build at 292,336 raw
 108,675 informative, which remains the best raw score.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: single-file zlib ordering and the D3DX8 member probe
+
+Ordering only `compress.c` at 0x45D520 (no other zlib change) gives raw 288,630 /
+105,420, below the 292,336 baseline; reverted. Every zlib ordering attempt so far
+has cost raw bytes.
+
+Checked whether the btri member's code exists in the reference: the extracted
+object has one symbol, no unique 16-byte relocation-masked window is found, so
+that member's body is not the reference's. The membership question remains open
+for the larger members, where sampled signatures do match.
+
+Also listed metadata rows whose symbols never link: 99 rows, 38,963 bytes, all
+`src/library_d3dx8.h` and `src/library_dinput.h` identities (largest
+GOLDTL.0x00638a14 6,257 B, 0x0063a77c 4,436 B, 0x0064c120 4,224 B). These are the
+next candidate for a link-coverage fix, since the reference has real functions at
+those VAs.
+
+State: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
