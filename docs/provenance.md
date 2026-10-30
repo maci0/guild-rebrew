@@ -9605,3 +9605,14 @@ recorded in `docs/TODO.md` is reproducible from a clean checkout of the committe
 tree.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: data gates rechecked on the clean build
+
+`rebrew data list --conflicts` reports no conflicting globals. `verify --data`
+reports 157 matched and 75 drifted data rows, unchanged from round 282; the drift
+list is still led by literal labels and placement-shifted objects, and the reachable
+initializer fixes (the five spiel filter globals) are emitted in the BSS tail near
+0xB95808, about 5 MB past their reference VAs.
+
+Lint 0 errors / 0 warnings, byte score raw 292,528 / 2,850,888, informative 108,803.
+No GA was run. Decision: Lead.
