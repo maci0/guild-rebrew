@@ -9536,3 +9536,26 @@ library-band evidence, the 3,285 outstanding rows, the +0xC000 text shift and th
 
 Byte score unchanged: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors /
 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: whole-binary verification status
+
+`verify --whole-binary` on the current image (evidence
+`.scratch/organize/wholebinary307.json`):
+
+- exports, imports, relocations (blocks and directory), headers: match.
+- file bytes: mismatch at offset 60 (the section table).
+- sections: `.text` 2,540,738 vs 2,491,370 virtual, `.rdata` 52,582 vs 76,722,
+  `.data` 46,664,612 vs 15,766,564. The `.data` virtual size is dominated by the
+  BSS-tail scaffold arrays, and the raw sizes (671,744 vs 266,240) by the layout
+  pads.
+- resources: mismatch at offset 161.
+
+The `.text` difference is the +0xC000 recorded earlier; `.rdata` and `.data` then
+move with it. Nothing in the import/export/relocation tables regressed.
+
+Aside: the drifting filter globals (`g_filter_extra5`, `g_query_filter_extra1..4`)
+are emitted at 0xB95808 and up by `symbol_stubs.c.obj`, roughly 5 MB past their
+reference VAs, so correcting their initializers cannot score either.
+
+Byte score: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors / 0
+warnings, data conflicts 0. No GA was run. Decision: Lead.
