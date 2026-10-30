@@ -9489,3 +9489,21 @@ last two verify runs remain unreliable; the last clean full verification is roun
 
 Byte score unchanged: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors /
 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: docker-backed verification gives clean row totals
+
+The unshare backend keeps failing 60 rows with `mount target mkdir: Read-only file
+system` inside `verify`, while every one of those rows compiles alone. To get
+trustworthy totals for the same image, ran
+`verify --no-cache --text --raw-link` with the project compiler backend temporarily
+set to docker (`rebrew/msvc:6.0-sp5-pp-win32` is present); the script restored
+`rebrew-project.toml` afterwards and the worktree shows no config change.
+
+Result: 5,229 rows, **4,154 passing**, 0 compile errors, 484 EXACT, 3,670 RELOC,
+967 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB, text placement 587 of 5,180. That is
+the round-287 total plus the two round-294 body fixes (two SIZE_MISMATCH rows became
+RELOC). Evidence: `.scratch/organize/verify302-docker.json`.
+Updated the numbers in `docs/TODO.md`.
+
+Byte score: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors / 0
+warnings, data conflicts 0. No GA was run. Decision: Lead.

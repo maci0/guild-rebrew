@@ -3,8 +3,8 @@
 ## Current committed snapshot (2026-10-30 14:45 UTC)
 
 GoldTL builds clean from the committed tree with the SP5-PP profile. Raw file
-agreement is 292,389 of 2,850,888 compared bytes (10.3%), informative agreement
-108,709. `verify --no-cache --text --raw-link` reports 4,152 of 5,228 rows
+agreement is 292,528 of 2,850,888 compared bytes (10.3%), informative agreement
+108,803. `verify --no-cache --text --raw-link` reports 4,154 of 5,229 rows
 passing: 484 EXACT, 3,668 RELOC, 969 SIZE_MISMATCH, 99 NEAR_MATCHING, 8 STUB;
 libraries 44/44; text placement 587 of 5,180; inventory 6,688 rows. `.text` is
 2,540,754 bytes against the reference 2,491,370.
