@@ -9473,3 +9473,19 @@ round 287 (4,152 of 5,228 passing). A clean verify needs the host idle; the
 long-running pytest in the other relumea worktree is still occupying the machine.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the verify flake is runner-side, all sixty rows compile alone
+
+Retried all 60 COMPILE_ERROR rows from `.scratch/organize/verify300b.json`
+sequentially with `rebrew test --va ... --no-promote`: 31 EXACT, 29 RELOC, none
+failed. So the sources, flags and metadata are fine and the `mount target mkdir:
+Read-only file system` comes from the unshare runner inside the verify fan-out.
+
+Filed upstream in the rebrew checkout `docs/IDEAS-GUILD.md` (commit cad32799,
+"parallel verify reports identical COMPILE_ERROR rows under the unshare backend")
+with the repro and a proposed two-pass mount-target creation. Row totals from the
+last two verify runs remain unreliable; the last clean full verification is round
+287 (4,152 of 5,228).
+
+Byte score unchanged: raw 292,528 / 2,850,888, informative 108,803. Lint 0 errors /
+0 warnings, data conflicts 0. No GA was run. Decision: Lead.
