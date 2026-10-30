@@ -8753,3 +8753,25 @@ one matches reference bytes, the other occupies text that reference does not
 have. Removing the archive-side copy needs the members that reference it to be
 identified and resolved first. Lint 0 errors / 0 warnings, data conflicts 0,
 score 292,292 / 108,702. No GA was run. Decision: Lead.
+
+## 2026-10-30: reference holds one png/jpeg copy; both of ours are byte-identical to it
+
+Verbose link trace: `d3dx8.lib(cd3dximage.obj)` references the decorated png/jpeg
+routines, which is what pulls the archive members. The supplementary C-named
+objects are added separately by the CMake link list.
+
+Byte search in the reference for the first function of both copies:
+`?png_set_crc_action@D3DX@@...` (built 0x651CC5) and `_png_set_crc_action`
+(built 0x5E9733) both appear exactly once in the reference, at file offset
+0x22FD99 (VA 0x62FD99). The same holds for jdmarker (0x62D5DF). So the two copies
+are the same bytes, and the reference contains one of them; ours contains both.
+
+Neither copy currently sits at 0x62FD99, so removing one copy should not lose
+matches in theory, yet removing the supplementary objects cost 16,697 matched
+bytes (292,292 to 275,597). The likely reason is that the supplementary objects
+were linked at the end and another region of the reference shares their bytes; the
+next experiment is to move the supplementary objects into the ordered list with
+their reference first VAs instead of deleting them.
+
+State unchanged: raw 292,292 / informative 108,702, lint 0 errors / 0 warnings,
+data conflicts 0. No GA was run. Decision: Lead.
