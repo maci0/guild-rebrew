@@ -488,6 +488,11 @@ if(REBREW_BUILD_GOLDTL)
   # other targets.
   list(APPEND GOLDTL_SOURCES "${PROJECT_SOURCE_DIR}/references/zlib/minigzip.c")
 
+  # The DX8 supplementary png/jpeg objects are prebuilt and carry no metadata
+  # rows, so they need reference first VAs and must be ordered with the rest.
+  file(GLOB GOLDTL_DX8_SUPP "${PROJECT_SOURCE_DIR}/references/dxsdk8/supp/*.obj")
+  list(APPEND GOLDTL_SOURCES ${GOLDTL_DX8_SUPP})
+
   # Order objects by their original function VA so the linked image places every
   # body at the reference address. The vendored files are outside src/, so their
   # first-function VAs come from the metadata rows that name them.
@@ -506,6 +511,21 @@ if(REBREW_BUILD_GOLDTL)
       --first-va trees.c=0x462da0
       --first-va unzip.c=0x464a30
       --first-va minigzip.c=0x462500
+      --first-va jcomapi.obj=0x0063e84b
+      --first-va jdapimin.obj=0x0062cdcf
+      --first-va jdapistd.obj=0x0062d27d
+      --first-va jdmarker.obj=0x0062d5df
+      --first-va jdmaster.obj=0x0063e8c0
+      --first-va png.obj=0x00631cce
+      --first-va pngerror.obj=0x0062ee23
+      --first-va pngget.obj=0x0062f9df
+      --first-va pngmem.obj=0x0063f5e4
+      --first-va pngread.obj=0x0062f059
+      --first-va pngrtran.obj=0x0062fd99
+      --first-va pngrutil.obj=0x0063f638
+      --first-va pngset.obj=0x00631aa6
+      --first-va pngtrans.obj=0x0062fbfa
+      --first-va pngwrite.obj=0x0062f059
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
     OUTPUT_VARIABLE GOLDTL_ORDERED
     OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -514,8 +534,6 @@ if(REBREW_BUILD_GOLDTL)
     message(FATAL_ERROR "rebrew build order-sources failed for Europa1400Gold_TL.exe")
   endif()
   string(REPLACE "\n" ";" GOLDTL_SOURCES "${GOLDTL_ORDERED}")
-  file(GLOB GOLDTL_DX8_SUPP "${PROJECT_SOURCE_DIR}/references/dxsdk8/supp/*.obj")
-  list(APPEND GOLDTL_SOURCES ${GOLDTL_DX8_SUPP})
 
   if(GOLDTL_SOURCES)
     add_executable(europa1400gold_tl WIN32 ${GOLDTL_SOURCES})

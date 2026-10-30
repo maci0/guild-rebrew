@@ -8775,3 +8775,23 @@ their reference first VAs instead of deleting them.
 
 State unchanged: raw 292,292 / informative 108,702, lint 0 errors / 0 warnings,
 data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: ordering the prebuilt png/jpeg objects by reference VA gains 44 bytes
+
+Moved the 23 DX8 supplementary objects from the end of the link list into the
+ordered list and gave each its reference first VA. 15 of the 23 have a unique
+first-function match in the reference (jcomapi 0x63E84B, jdapimin 0x62CDCF,
+jdapistd 0x62D27D, jdmarker 0x62D5DF, jdmaster 0x63E8C0, png 0x631CCE,
+pngerror 0x62EE23, pngget 0x62F9DF, pngmem 0x63F5E4, pngread 0x62F059,
+pngrtran 0x62FD99, pngrutil 0x63F638, pngset 0x631AA6, pngtrans 0x62FBFA,
+pngwrite 0x62F059); jdtrans, pngrio, pngwio, pngwtran and pngwutil have no unique
+match and stay uninstructed. The entries live in
+`layout/Europa1400Gold_TL.exe/supp-first-va.txt` and are passed as `--first-va`
+flags because the project's pinned Rebrew predates `--first-va-file`; the upstream
+option remains available for later.
+
+Build clean; `.text` unchanged at 2,540,754 and `.rdata` 52,558 -> 52,590. Score
+292,292 -> 292,336 raw (+44), informative 108,702 -> 108,675 (-27); three lead
+passes changed no pads. Kept because raw byte identity is the objective metric.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
