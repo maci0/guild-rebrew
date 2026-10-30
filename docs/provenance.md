@@ -9438,3 +9438,12 @@ Attacking these bytes is therefore status cleanup, not raw-score work.
 
 Byte score unchanged: raw 292,528 / informative 108,803, lint 0 errors / 0 warnings,
 data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: the .data prefix pad is at its local optimum
+
+Tested `_dpad_prefix_zeros` at 0x2A000 and 0x2C000 (baseline 0x2B000):
+0x2A000 gives raw 288,308 / 107,838, 0x2C000 gives 290,477 / 107,961. Both lose to
+292,528 / 108,803, and earlier rounds measured 0x25000 and 0x31000 as worse too, so
+the pad size is locally optimal. Restored 0x2B000 and rebuilt the baseline.
+
+Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
