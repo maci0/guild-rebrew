@@ -9278,3 +9278,21 @@ Evidence: `.scratch/organize/verify287.json`. Updated the numbers in the
 `docs/TODO.md` snapshot.
 
 Lint 0 errors / 0 warnings, data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: saved the full ch_AttachAni disassembly for a clean rewrite
+
+The duplicate-function audit found no pair where the ignored copy is the better
+reconstruction: the winners are already the files the metadata binds
+(`friedhof_logic.c` EXACT for gv_CheckSlotActive, `vfs.c.obj` for vfs_Tfopen), so
+swapping sides would not gain bytes.
+
+Returned to `ch_AttachAni` (0x404DC0), the only STUB at its reference address. Saved
+the complete target disassembly to
+`.scratch/organize/ch_attachani.asm.json` (129 instructions, 0x404DC0 to 0x404F53)
+so a clean reconstruction can be written without re-querying, then verified against
+`rebrew diff` incrementally. The current body is an old GA output with 120
+structural mismatches out of 129 instructions, so the plan is a fresh body rather
+than edits.
+
+Baseline: raw 292,389 / informative 108,709, lint 0 errors / 0 warnings, data
+conflicts 0. No GA was run. Decision: Lead.
