@@ -8989,3 +8989,22 @@ prototypes against the compiler and grep the callers for their push counts.
 
 State unchanged: raw 292,336 / informative 108,675, lint 0 errors / 0 warnings,
 data conflicts 0. No GA was run. Decision: Lead.
+
+## 2026-10-30: ch_AttachAni callers push three arguments but the body reads a fourth
+
+Scanned the reference .text for `call 0x404DC0` rel32 sites: 11 callers
+(0x406068, 0x406089, 0x406460, 0x406480, 0x406616, 0x406E8A, 0x407B1F, 0x409317,
+0x409B7D, 0x40AC71, 0x40C36D). One decoded site, 0x406E8A, pushes `esi`,
+`lea eax,[edi+0xF0]`, `push 1`, then calls and cleans `add esp,0xC`: three
+arguments, signature `ch_AttachAni(obj, name, force)`.
+
+The body still reads `[esp+0x450]` after `add esp,0x2C`, which is E+0x10, the
+fourth argument slot. With three-argument callers this is either a fourth declared
+parameter that those callers omit (some original call sites would then pass fewer
+arguments than the prototype), or a frame offset that depends on a cleanup the
+current reading misses. Two decoded callers (0x406068, 0x406460) did not decode
+cleanly through `binary asm show`, so the caller census is incomplete.
+
+Not reconstructing the body on a guess. Baseline: raw 292,336 / informative
+108,675, lint 0 errors / 0 warnings, data conflicts 0. No GA was run.
+Decision: Lead.
